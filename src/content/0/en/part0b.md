@@ -46,7 +46,7 @@ Clicking the first event reveals more information on what's happening:
 
 ![Detailed view of a single event](../../images/0/3e.png)
 
-The upper part, <i>General</i>, shows that the browser requested the address <i>https://studies.cs.helsinki.fi/exampleapp</i> (though the address has changed slightly since this picture was taken) using the [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) method, and that the request was successful, because the server response had the [Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) 200.
+The upper part, <i>General</i>, shows that the browser requested the address <i><https://studies.cs.helsinki.fi/exampleapp></i> (though the address has changed slightly since this picture was taken) using the [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) method, and that the request was successful, because the server response had the [Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) 200.
 
 The request and the server response have several [headers](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields):
 
@@ -66,7 +66,7 @@ Because of the img tag, the browser does a second <i>HTTP request</i> to fetch t
 
 The request was made to the address <https://studies.cs.helsinki.fi/exampleapp/kuva.png> and its type is HTTP GET. The response headers tell us that the response size is 89350 bytes, and its [Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) is <i>image/png</i>, so it is a png image. The browser uses this information to render the image correctly to the screen.
 
-The chain of events caused by opening the page https://studies.cs.helsinki.fi/exampleapp on a browser from the following [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/):
+The chain of events caused by opening the page <https://studies.cs.helsinki.fi/exampleapp> on a browser form the following [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/):
 
 ![Sequence diagram of the flow covered above](../../images/0/7m.png)
 
@@ -403,14 +403,14 @@ Changes made on the console will not be permanent. If you want to make lasting c
 
 ### Loading a page containing JavaScript - review
 
-Let's review what happens when the page https://studies.cs.helsinki.fi/exampleapp/notes is opened on the browser.
+Let's review what happens when the page <https://studies.cs.helsinki.fi/exampleapp/notes> is opened on the browser.
 
 ![sequence diagram of browser/server interaction](../../images/0/19m.png)
 
 - The browser fetches the HTML code defining the content and the structure of the page from the server using an HTTP GET request.
 - Links in the HTML code cause the browser to also fetch the CSS style sheet <i>main.css</i>...
 - ...and a JavaScript code file <i>main.js</i>
-- The browser executes the JavaScript code. The code makes an HTTP GET request to the address https://studies.cs.helsinki.fi/exampleapp/data.json, which
+- The browser executes the JavaScript code. The code makes an HTTP GET request to the address <https://studies.cs.helsinki.fi/exampleapp/data.json>, which
   returns the notes as JSON data.
 - When the data has been fetched, the browser executes an <i>event handler</i>, which renders the notes to the page using the DOM-API.
 
@@ -613,7 +613,7 @@ You will suffer from JavaScript fatigue yourself during this course. Fortunately
 
 </div>
 
-<div class="tasks"> 
+<div class="tasks">
   <h3>Exercises 0.1.-0.6.</h3>
 
 The exercises are submitted via GitHub, and by marking the exercises as done in the "my submissions" tab of the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
@@ -622,7 +622,7 @@ You can submit all of the exercises into the same repository, or use multiple di
 
 One good way to name the directories in your submission repository is as follows:
 
-```
+```text
 part0
 part1
   courseinfo
@@ -662,8 +662,7 @@ In the section [Loading a page containing JavaScript - review](/en/part0/fundame
 
 The diagram was made as a GitHub Markdown-file using the [Mermaid](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams)-syntax, as follows:
 
-
-```
+```text
 sequenceDiagram
     participant browser
     participant server
@@ -688,9 +687,9 @@ sequenceDiagram
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
     activate server
     server-->>browser: [{ "content": "HTML is easy", "date": "2023-1-1" }, ... ]
-    deactivate server    
+    deactivate server
 
-    Note right of browser: The browser executes the callback function that renders the notes 
+    Note right of browser: The browser executes the callback function that renders the notes
 ```
 
 **Create a similar diagram** depicting the situation where the user creates a new note on the page <https://studies.cs.helsinki.fi/exampleapp/notes> by writing something into the text field and clicking the <i>submit</i> button.
