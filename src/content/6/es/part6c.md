@@ -152,7 +152,7 @@ noteService.getAll().then(notes =>
 // ...
 ```
 
-Enviar (dispatching) múltiples acciones parece un poco impráctico. Agreguemos un creador de acciones <em>setNotes</em> que se puede usar para reemplazar directamente el array de notas. Obtendremos el creador de acciones de la función <em>createSlice</em> implementando la acción <em>setNotes</em>:
+Enviar (dispatching) múltiples acciones no es práctico. Agreguemos un creador de acciones <em>setNotes</em> que se puede usar para reemplazar directamente el array de notas. Obtendremos el creador de acciones de la función <em>createSlice</em> implementando la acción <em>setNotes</em>:
 
 ```js
 // ...
