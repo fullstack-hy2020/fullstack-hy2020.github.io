@@ -641,7 +641,7 @@ If the subscription does not work, check that you have correct connection settin
 
 The backend code can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-7), branch <i>part8-7</i>.
 
-Implementin gsubscriptions involves a lot of configurations. You will be able to cope with the few exercises of this course without worrying much about the details. If you planning to use subsctiptions in an production use application, you should definitely read carefully Apollo's [documentation on subscriptions](https://www.apollographql.com/docs/apollo-server/data/subscriptions).
+Implementing subscriptions involves a lot of configurations. You will be able to cope with the few exercises of this course without worrying much about the details. If you planning to use subsctiptions in an production use application, you should definitely read carefully Apollo's [documentation on subscriptions](https://www.apollographql.com/docs/apollo-server/data/subscriptions).
 
 ### Subscriptions on the client
 
