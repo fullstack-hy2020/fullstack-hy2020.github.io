@@ -185,7 +185,7 @@ Use um [Validador Personalizado](https://mongoosejs.com/docs/validation.html#cus
 
 Se uma requisição HTTP POST tentar adicionar uma pessoa com um número de telefone inválido, o servidor deve responder com um código de status apropriado e uma mensagem de erro.
 
-#### 3.21 Implantação do back-end do banco de dados em produção
+#### 3.21 Implantação do back-end do banco de dados para produção
 
 Gere uma nova versão "full stack" da aplicação criando um novo build de produção do front-end, assim copiando-o ao repositório do back-end. Verifique se tudo funciona localmente acessando a aplicação inteira no endereço <http://localhost:3001/>.
 
