@@ -25,7 +25,7 @@ To finish this part we will look into another older and more complicated way to 
 
 ### Using the connect function to share the Redux store to components
 
-Let's modify the <i>Notes</i> component so that instead of using the hook API (the _useDispatch_ and  _useSelector_ functions ) it uses the _connect_ function. 
+Let's modify the <i>Notes</i> component so that instead of using the hook API (the *useDispatch* and  *useSelector* functions ) it uses the *connect* function.
 We have to modify the following parts of the component:
 
 ````js
@@ -63,7 +63,7 @@ const Notes = () => {
 export default Notes
 ````
 
-The _connect_ function can be used for transforming "regular" React components so that the state of the Redux store can be "mapped" into the component's props.
+The *connect* function can be used for transforming "regular" React components so that the state of the Redux store can be "mapped" into the component's props.
 
 Let's first use the connect function to transform our <i>Notes</i> component into a <i>connected component</i>:
 
@@ -81,10 +81,9 @@ export default ConnectedNotes           // highlight-line
 
 The module exports the <i>connected component</i> that works exactly like the previous regular component for now.
 
-The component needs the list of notes and the value of the filter from the Redux store. The _connect_ function accepts a so-called [mapStateToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapstatetoprops-state-ownprops--object) function as its first parameter. The function can be used for defining the props of the <i>connected component</i> that are based on the state of the Redux store.
+The component needs the list of notes and the value of the filter from the Redux store. The *connect* function accepts a so-called [mapStateToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapstatetoprops-state-ownprops--object) function as its first parameter. The function can be used for defining the props of the <i>connected component</i> that are based on the state of the Redux store.
 
 If we define:
-
 
 ```js
 const Notes = (props) => { // highlight-line
@@ -135,11 +134,10 @@ The situation that results from using <i>connect</i> with the <i>mapStateToProps
 
 ![diagram notelist and filter connected to redux store](../../images/6/24c.png)
 
-
 The <i>Notes</i> component has "direct access" via <i>props.notes</i> and <i>props.filter</i> for inspecting the state of the Redux store.
 
-The _NoteList_ component does not need the information about which filter is selected, so we can move the filtering logic elsewhere.
-We just have to give it correctly filtered notes in the _notes_ prop:
+The *NoteList* component does not need the information about which filter is selected, so we can move the filtering logic elsewhere.
+We just have to give it correctly filtered notes in the *notes* prop:
 
 ```js
 const Notes = (props) => {
@@ -183,7 +181,7 @@ export default ConnectedNotes
 
 ### mapDispatchToProps
 
-Now we have gotten rid of _useSelector_, but <i>Notes</i> still uses the _useDispatch_ hook and the _dispatch_ function returning it:
+Now we have gotten rid of *useSelector*, but <i>Notes</i> still uses the *useDispatch* hook and the *dispatch* function returning it:
 
 ```js
 const Notes = (props) => {
@@ -205,8 +203,7 @@ const Notes = (props) => {
 }
 ```
 
-The second parameter of the _connect_ function can be used for defining [mapDispatchToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapdispatchtoprops-object--dispatch-ownprops--object) which is a group of <i>action creator</i> functions passed to the connected component as props. Let's make the following changes to our existing connect operation:
-
+The second parameter of the *connect* function can be used for defining [mapDispatchToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapdispatchtoprops-object--dispatch-ownprops--object) which is a group of <i>action creator</i> functions passed to the connected component as props. Let's make the following changes to our existing connect operation:
 
 ```js
 const mapStateToProps = (state) => {
@@ -230,7 +227,7 @@ const ConnectedNotes = connect(
 export default ConnectedNotes
 ```
 
-Now the component can directly dispatch the action defined by the _toggleImportanceOf_ action creator by calling the function through its props:
+Now the component can directly dispatch the action defined by the *toggleImportanceOf* action creator by calling the function through its props:
 
 ```js
 const Notes = (props) => {
@@ -254,17 +251,17 @@ This means that instead of dispatching the action like this:
 dispatch(toggleImportanceOf(note.id))
 ```
 
-When using _connect_ we can simply do this:
+When using *connect* we can simply do this:
 
 ```js
 props.toggleImportanceOf(note.id)
 ```
 
-There is no need to call the _dispatch_ function separately since _connect_ has already modified the _toggleImportanceOf_ action creator into a form that contains the dispatch.
+There is no need to call the *dispatch* function separately since *connect* has already modified the *toggleImportanceOf* action creator into a form that contains the dispatch.
 
-It can take some time to wrap your head around how _mapDispatchToProps_ works, especially once we take a look at an [alternative way of using it](/en/part6/connect#alternative-way-of-using-map-dispatch-to-props).
+It can take some time to wrap your head around how *mapDispatchToProps* works, especially once we take a look at an [alternative way of using it](/en/part6/connect#alternative-way-of-using-map-dispatch-to-props).
 
-The resulting situation from using _connect_ can be visualized like this:
+The resulting situation from using *connect* can be visualized like this:
 
 ![diagram showing toggle connecting to state in redux and dispatch inside of redux](../../images/6/25b.png)
 
@@ -315,7 +312,7 @@ export default connect(
 )(Notes)
 ```
 
-Let's also use _connect_ to create new notes:
+Let's also use *connect* to create new notes:
 
 ```js
 import { connect } from 'react-redux' 
@@ -346,8 +343,7 @@ export default connect(
 // highlight-end
 ```
 
-Since the component does not need to access the store's state, we can simply pass <i>null</i> as the first parameter to _connect_. 
-
+Since the component does not need to access the store's state, we can simply pass <i>null</i> as the first parameter to *connect*.
 
 You can find the code for our current application in its entirety in the <i>part6-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5).
 
@@ -384,16 +380,17 @@ export default connect(
 
 Developers who are new to connect may find it puzzling that there are two versions of the <i>createNote</i> action creator in the component.
 
-The function must be referenced as <i>props.createNote</i> through the component's props, as this is the version that <i>contains the automatic dispatch</i> added by _connect_.
+The function must be referenced as <i>props.createNote</i> through the component's props, as this is the version that <i>contains the automatic dispatch</i> added by *connect*.
 
 Due to the way that the action creator is imported:
 
 ```js
 import { createNote } from './../reducers/noteReducer'
 ```
-The action creator can also be referenced directly by calling _createNote_. You should not do this, since this is the unmodified version of the action creator that does not contain the added automatic dispatch.
 
-If we print the functions to the console from the code (we have not yet looked at this useful debugging trick): 
+The action creator can also be referenced directly by calling *createNote*. You should not do this, since this is the unmodified version of the action creator that does not contain the added automatic dispatch.
+
+If we print the functions to the console from the code (we have not yet looked at this useful debugging trick):
 
 ```js
 const NewNote = (props) => {
@@ -434,12 +431,9 @@ export default connect(
 )(NewNote)
 ```
 
-
 The connect expression above enables the component to dispatch actions for creating new notes with the <code>props.createNote('a new note')</code> command.
 
-
 The functions passed in <i>mapDispatchToProps</i> must be <i>action creators</i>, that is, functions that return Redux actions.
-
 
 It is worth noting that the <i>mapDispatchToProps</i> parameter is a <i>JavaScript object</i>, as the definition:
 
@@ -459,7 +453,7 @@ Is just shorthand for defining the object literal:
 
 Which is an object that has a single <i>createNote</i> property with the <i>createNote</i> function as its value.
 
-Alternatively, we could pass the following <i>function</i> definition as the second parameter to _connect_:
+Alternatively, we could pass the following <i>function</i> definition as the second parameter to *connect*:
 
 ```js
 const NewNote = (props) => {
@@ -482,8 +476,7 @@ export default connect(
 )(NewNote)
 ```
 
-
-In this alternative definition, <i>mapDispatchToProps</i> is a function that _connect_ will invoke by passing to it the _dispatch_ function as its parameter. The return value of the function is an object that defines a group of functions that get passed to the connected component as props. Our example defines the function passed as the <i>createNote</i> prop:
+In this alternative definition, <i>mapDispatchToProps</i> is a function that *connect* will invoke by passing to it the *dispatch* function as its parameter. The return value of the function is an object that defines a group of functions that get passed to the connected component as props. Our example defines the function passed as the <i>createNote</i> prop:
 
 ```js
 value => {
@@ -515,7 +508,7 @@ const NewNote = (props) => {
 
 The concept is quite complex and describing it through text is challenging. In most cases, it is sufficient to use the simpler form of <i>mapDispatchToProps</i>. However, there are situations where a more complicated definition is necessary, like if the <i>dispatched actions</i> need to reference [the props of the component](https://github.com/gaearon/redux-devtools/issues/250#issuecomment-186429931).
 
-The creator of Redux Dan Abramov has created a wonderful tutorial called [Getting started with Redux](https://egghead.io/courses/getting-started-with-redux) that you can find on Egghead.io. I highly recommend the tutorial to everyone. The last four videos discuss the _connect_ method, particularly the more "complicated" way of using it.
+The creator of Redux Dan Abramov has created a wonderful tutorial called [Getting started with Redux](https://egghead.io/courses/getting-started-with-redux) that you can find on Egghead.io. I highly recommend the tutorial to everyone. The last four videos discuss the *connect* method, particularly the more "complicated" way of using it.
 
 ### Presentational/Container revisited
 
@@ -530,7 +523,7 @@ The refactored <i>Notes</i> component is almost entirely focused on rendering no
 - Rarely have their own state (when they do, it’s UI state rather than data).
 - Are written as functional components unless they need state, lifecycle hooks, or performance optimizations.
 
-The _connected component_ that is created with the _connect_ function:
+The *connected component* that is created with the *connect* function:
 
 ```js
 const mapStateToProps = (state) => {
@@ -579,28 +572,28 @@ Abramov mentions the term [higher-order component](https://reactjs.org/docs/high
 
 Higher-order components, or HOCs, are a way of defining generic functionality that can be applied to components. This is a concept from functional programming that very slightly resembles inheritance in object-oriented programming.
 
-HOCs are a generalization of the [Higher-Order Function](https://en.wikipedia.org/wiki/Higher-order_function) (HOF) concept. HOFs are functions that either accept functions as parameters or return functions. We have been using HOFs throughout the course, e.g. all of the methods used for dealing with arrays like _map, filter and find_ are HOFs. 
+HOCs are a generalization of the [Higher-Order Function](https://en.wikipedia.org/wiki/Higher-order_function) (HOF) concept. HOFs are functions that either accept functions as parameters or return functions. We have been using HOFs throughout the course, e.g. all of the methods used for dealing with arrays like *map, filter and find* are HOFs.
 
 <!-- Reactin hook-apin ilmestymisen jälkeen HOC:ien suosio on kääntynyt laskuun, ja melkein kaikki kirjastot, joiden käyttö on aiemmin perustunut HOC:eihin on saanut hook-perustaisen apin. Useimmiten , kuten myös reduxin kohdalla, hook-perustaiset apit ovat HOC-apeja huomattavasti yksinkertaisempia. -->
-After the React hook API was published, HOCs have become less and less popular. Almost all libraries which used to be based on HOCs have now been modified to use hooks. Most of the time hook-based APIs are a lot simpler than HOC-based ones, as is the case with Redux as well. 
+After the React hook API was published, HOCs have become less and less popular. Almost all libraries which used to be based on HOCs have now been modified to use hooks. Most of the time hook-based APIs are a lot simpler than HOC-based ones, as is the case with Redux as well.
 
 ### Redux and the component state
 
 We have come a long way in this course and, finally, we have come to the point at which we are using React "the right way", meaning React only focuses on generating the views, and the application state is wholly separated from the React components and passed on to Redux, its actions, and its reducers.
 
-What about the _useState_ hook, which provides components with their own state? Does it have any role if an application is using Redux or some other external state management solution? If the application has more complicated forms, it may be beneficial to implement their local state using the state provided by the _useState_ function. One can, of course, have Redux manage the state of the forms, however, if the state of the form is only relevant when filling the form (e.g. for validation) it may be wise to leave the management of state to the component responsible for the form.
+What about the *useState* hook, which provides components with their own state? Does it have any role if an application is using Redux or some other external state management solution? If the application has more complicated forms, it may be beneficial to implement their local state using the state provided by the *useState* function. One can, of course, have Redux manage the state of the forms, however, if the state of the form is only relevant when filling the form (e.g. for validation) it may be wise to leave the management of state to the component responsible for the form.
 
 Should we always use Redux? Probably not. Dan Abramov, the developer of Redux, discusses this in his article [You Might Not Need Redux](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367).
 
-Nowadays it is possible to implement Redux-like state management without Redux by using the React [context](https://reactjs.org/docs/context.html) api and the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) hook. 
-More about this [here](https://www.simplethread.com/cant-replace-redux-with-hooks/) and [here](https://hswolff.com/blog/how-to-usecontext-with-usereducer/). We will also practice this in 
+Nowadays it is possible to implement Redux-like state management without Redux by using the React [context](https://reactjs.org/docs/context.html) api and the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) hook.
+More about this [here](https://www.simplethread.com/cant-replace-redux-with-hooks/) and [here](https://hswolff.com/blog/how-to-usecontext-with-usereducer/). We will also practice this in
 [part 9](/en/part9).
 
 </div>
 
 <div class="tasks">
 
-### Exercises 6.19.-6.21.
+### Exercises 6.19.-6.21
 
 **NOTE**: this is the old ending section of the 6 part that has 30th January 2023 been replaced with material about [React Query, useReducer and context](/en/part6/react_query_use_reducer_and_the_contex). This section remains here for a couple of weeks.
 
@@ -610,18 +603,20 @@ If you have started with the exercises that use the Redux connect you may contin
 
 The <i>redux store</i> is currently being accessed by the components through the <em>useSelector</em> and <em>useDispatch</em> hooks.
 
-Modify the <i>Notification</i> component so that it uses the _connect_ function instead of the hooks. 
+Modify the <i>Notification</i> component so that it uses the *connect* function instead of the hooks.
+
 #### 6.20 anecdotes and connect, step2
 
 Do the same for the <i>Filter</i> and <i>AnecdoteForm</i> components.
+
 #### 6.21 anecdotes, the grand finale
 
-You (probably) have one nasty bug in your application. If the user clicks the vote button multiple times in a row, the notification is displayed funnily. For example, if a user votes twice in three seconds, 
-the last notification is only displayed for two seconds (assuming the notification is normally shown for 5 seconds). This happens because removing the first notification accidentally removes the second notification. 
+You (probably) have one nasty bug in your application. If the user clicks the vote button multiple times in a row, the notification is displayed funnily. For example, if a user votes twice in three seconds,
+the last notification is only displayed for two seconds (assuming the notification is normally shown for 5 seconds). This happens because removing the first notification accidentally removes the second notification.
 
 Fix the bug so that after multiple votes in a row, the notification for the last vote is displayed for five seconds.
 
-The fix can be done by canceling the previous notification when a new notification is displayed, whenever necessary. 
+The fix can be done by canceling the previous notification when a new notification is displayed, whenever necessary.
 The [documentation](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) for the setTimeout function might also be useful for this.
 
 This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your completed exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).

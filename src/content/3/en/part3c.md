@@ -13,7 +13,6 @@ Before we move into the main topic of persisting data in a database, we will tak
 
 Debugging Node applications is slightly more difficult than debugging JavaScript running in your browser. Printing to the console is a tried and true method, and it's always worth doing. Some people think that more sophisticated methods should be used instead, but I disagree. Even the world's elite open-source developers [use](https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html) this [method](https://swizec.com/blog/javascript-debugging-slightly-beyond-consolelog/).
 
-
 #### Visual Studio Code
 
 The Visual Studio Code debugger can be useful in some situations. You can launch the application in debugging mode like this:
@@ -72,7 +71,7 @@ The reason for using Mongo as the database is its lower complexity compared to a
 
 Document databases differ from relational databases in how they organize data as well as in the query languages they support. Document databases are usually categorized under the [NoSQL](https://en.wikipedia.org/wiki/NoSQL) umbrella term.
 
-You can read more about document databases and NoSQL from the course material for [week 7](https://tikape-s18.mooc.fi/part7/) of the Introduction to Databases course. Unfortunately, the material is currently only available in Finnish. 
+You can read more about document databases and NoSQL from the course material for [week 7](https://tikape-s18.mooc.fi/part7/) of the Introduction to Databases course. Unfortunately, the material is currently only available in Finnish.
 
 Read now the chapters on [collections](https://docs.mongodb.com/manual/core/databases-and-collections/) and [documents](https://docs.mongodb.com/manual/core/document/) from the MongoDB manual to get a basic idea of how a document database stores data.
 
@@ -244,7 +243,7 @@ The result of the save operation is in the _result_ parameter of the event handl
 
 Let's also save a few more notes by modifying the data in the code and by executing the program again.
 
-**NB:** Unfortunately the Mongoose documentation is not very consistent, with parts of it using callbacks in its examples and other parts, other styles, so it is not recommended to copy and paste code directly from there. Mixing promises with old-school callbacks in the same code is not recommended. 
+**NB:** Unfortunately the Mongoose documentation is not very consistent, with parts of it using callbacks in its examples and other parts, other styles, so it is not recommended to copy and paste code directly from there. Mixing promises with old-school callbacks in the same code is not recommended.
 
 ### Fetching objects from the database
 
@@ -283,11 +282,11 @@ Note.find({ important: true }).then(result => {
 
 #### 3.12: Command-line database
 
-Create a cloud-based MongoDB database for the phonebook application with MongoDB Atlas. 
+Create a cloud-based MongoDB database for the phonebook application with MongoDB Atlas.
 
 Create a <i>mongo.js</i> file in the project directory, that can be used for adding entries to the phonebook, and for listing all of the existing entries in the phonebook.
 
-**NB:** Do not include the password in the file that you commit and push to GitHub! 
+**NB:** Do not include the password in the file that you commit and push to GitHub!
 
 The application should work as follows. You use the program by passing three command-line arguments (the first is the password), e.g.:
 
@@ -397,9 +396,9 @@ The application works almost perfectly. The frontend assumes that every object h
 
 One way to format the objects returned by Mongoose is to [modify](https://stackoverflow.com/questions/7034848/mongodb-output-id-instead-of-id) the _toJSON_ method of the schema, which is used on all instances of the models produced with that schema.
   
-To modify the method we need to change the configurable options of the schema, options can be changed using the set method of the schema, see here for more info on this method: https://mongoosejs.com/docs/guide.html#options. See https://mongoosejs.com/docs/guide.html#toJSON and  https://mongoosejs.com/docs/api.html#document_Document-toObject for more info on the toJSON option.
+To modify the method we need to change the configurable options of the schema, options can be changed using the set method of the schema, see here for more info on this method: https://mongoosejs.com/docs/guide.html#options. See <https://mongoosejs.com/docs/guide.html#toJSON> and <https://mongoosejs.com/docs/api.html#document_Document-toObject> for more info on the toJSON option.
   
-see https://mongoosejs.com/docs/api.html#transform for more info on the transform function.
+see <https://mongoosejs.com/docs/api.html#transform> for more info on the transform function.
 
 ```js
 noteSchema.set('toJSON', {
@@ -545,7 +544,7 @@ app.listen(PORT, () => {
 
 It's important that <i>dotenv</i> gets imported before the <i>note</i> model is imported. This ensures that the environment variables from the <i>.env</i> file are available globally before the code from the other modules is imported.
 
-### Important note to Fly.io users 
+### Important note to Fly.io users
 
 Because GitHub is not used with Fly.io, also the file .env gets to the Fly.io servers when the app is deployed. Because of this also the env variables defined in the file will be available there.
 
@@ -557,7 +556,7 @@ However, a [better option](https://community.fly.io/t/clarification-on-environme
 
 and set the env value from the command line with the command:
 
-```
+```bash
 fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
 ```
 
@@ -565,7 +564,7 @@ Since also the PORT is defined in our .env it is actually essential to ignore th
 
 When using Render, the database url is given by defining the proper env in the dashboard:
 
-![](../../images/3/render-env.png)
+![browser showing render environment variables](../../images/3/render-env.png)
 
 ### Using database in route handlers
 
@@ -630,7 +629,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 ### Exercises 3.13.-3.14.
 
-The following exercises are pretty straightforward, but if your frontend stops working with the backend, then finding and fixing the bugs can be quite interesting. 
+The following exercises are pretty straightforward, but if your frontend stops working with the backend, then finding and fixing the bugs can be quite interesting.
 
 #### 3.13: Phonebook database, step1
 
@@ -694,7 +693,7 @@ Body:   {}
     ...
 </pre>
 
-Given a malformed id as an argument, the <em>findById</em> method will throw an error causing the returned promise to be rejected. This will cause the callback function defined in the <em>catch</em> block to be called. 
+Given a malformed id as an argument, the <em>findById</em> method will throw an error causing the returned promise to be rejected. This will cause the callback function defined in the <em>catch</em> block to be called.
 
 Let's make some small adjustments to the response in the <em>catch</em> block:
 
@@ -777,7 +776,7 @@ const errorHandler = (error, request, response, next) => {
 app.use(errorHandler)
 ```
 
-The error handler checks if the error is a <i>CastError</i> exception, in which case we know that the error was caused by an invalid object id for Mongo. In this situation, the error handler will send a response to the browser with the response object passed as a parameter. In all other error situations, the middleware passes the error forward to the default Express error handler. 
+The error handler checks if the error is a <i>CastError</i> exception, in which case we know that the error was caused by an invalid object id for Mongo. In this situation, the error handler will send a response to the browser with the response object passed as a parameter. In all other error situations, the middleware passes the error forward to the default Express error handler.
 
 Note that the error-handling middleware has to be the last loaded middleware!
 
@@ -890,7 +889,7 @@ Notice that the <em>findByIdAndUpdate</em> method receives a regular JavaScript 
 
 There is one important detail regarding the use of the <em>findByIdAndUpdate</em> method. By default, the <em>updatedNote</em> parameter of the event handler receives the original document [without the modifications](https://mongoosejs.com/docs/api/model.html#model_Model-findByIdAndUpdate). We added the optional <code>{ new: true }</code> parameter, which will cause our event handler to be called with the new modified document instead of the original.
 
-After testing the backend directly with Postman and the VS Code REST client, we can verify that it seems to work. The frontend also appears to work with the backend using the database. 
+After testing the backend directly with Postman and the VS Code REST client, we can verify that it seems to work. The frontend also appears to work with the backend using the database.
 
 You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5).
 
@@ -926,7 +925,7 @@ Verify that the frontend still works after making the changes.
 
 #### 3.16: Phonebook database, step4
 
-Move the error handling of the application to a new error handler middleware. 
+Move the error handling of the application to a new error handler middleware.
 
 #### 3.17*: Phonebook database, step5
 

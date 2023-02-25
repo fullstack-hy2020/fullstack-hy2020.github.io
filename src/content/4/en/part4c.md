@@ -27,7 +27,7 @@ If we need functionality similar to join queries, we will implement it in our ap
 
 ### References across collections
 
-If we were using a relational database the note would contain a <i>reference key</i> to the user who created it. In document databases, we can do the same thing. 
+If we were using a relational database the note would contain a <i>reference key</i> to the user who created it. In document databases, we can do the same thing.
 
 Let's assume that the <i>users</i> collection contains two users:
 
@@ -43,7 +43,6 @@ Let's assume that the <i>users</i> collection contains two users:
   },
 ]
 ```
-
 
 The <i>notes</i> collection contains three notes that all have a <i>user</i> field that references a user in the <i>users</i> collection:
 
@@ -314,7 +313,6 @@ module.exports = {
 }
 ```
 
-
 The <i>beforeEach</i> block adds a user with the username <i>root</i> to the database. We can write a new test that verifies that a new user with the same username can not be created:
 
 ```js
@@ -348,7 +346,7 @@ The test case obviously will not pass at this point. We are essentially practici
 
 Mongoose does not have a built-in validator for checking the uniqueness of a field. Fortunately there is a ready-made solution for this, the [mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator) library. Let us install the library:
 
-```
+```bash
 npm install mongoose-unique-validator
 ```
 
@@ -383,7 +381,6 @@ userSchema.plugin(uniqueValidator) // highlight-line
 
 We could also implement other validations into the user creation. We could check that the username is long enough, that the username only consists of permitted characters, or that the password is strong enough. Implementing these functionalities is left as an optional exercise.
 
-
 Before we move onward, let's add an initial implementation of a route handler that returns all of the users in the database:
 
 ```js
@@ -394,6 +391,7 @@ usersRouter.get('/', async (request, response) => {
 ```
 
 For making new users in a production or development environment, you may send a POST request to ```/api/users/``` via Postman or REST Client in the following format:
+
 ```js
 {
     "username": "root",
@@ -406,7 +404,6 @@ For making new users in a production or development environment, you may send a 
 The list looks like this:
 
 ![browser api/users shows JSON data with notes array](../../images/4/9.png)
-
 
 You can find the code for our current application in its entirety in the <i>part4-7</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-7).
 
@@ -459,7 +456,7 @@ The operation appears to work. Let's add one more note and then visit the route 
 
 ![api/users returns JSON with users and their array of notes](../../images/4/11e.png)
 
-We can see that the user has two notes. 
+We can see that the user has two notes.
 
 Likewise, the ids of the users who created the notes can be seen when we visit the route for fetching all notes:
 
@@ -471,7 +468,6 @@ We would like our API to work in such a way, that when an HTTP GET request is ma
 
 As previously mentioned, document databases do not properly support join queries between collections, but the Mongoose library can do some of these joins for us. Mongoose accomplishes the join by doing multiple queries, which is different from join queries in relational databases which are <i>transactional</i>, meaning that the state of the database does not change during the time that the query is made. With join queries in Mongoose, nothing can guarantee that the state between the collections being joined is consistent, meaning that if we make a query that joins the user and notes collections, the state of the collections may change during the query.
 
-
 The Mongoose join is done with the [populate](http://mongoosejs.com/docs/populate.html) method. Let's update the route that returns all users first:
 
 ```js
@@ -482,7 +478,6 @@ usersRouter.get('/', async (request, response) => {
   response.json(users)
 })
 ```
-
 
 The [populate](http://mongoosejs.com/docs/populate.html) method is chained after the <i>find</i> method making the initial query. The parameter given to the populate method defines that the <i>ids</i> referencing <i>note</i> objects in the <i>notes</i> field of the <i>user</i> document will be replaced by the referenced <i>note</i> documents.
 
