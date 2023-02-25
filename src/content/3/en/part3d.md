@@ -7,7 +7,6 @@ lang: en
 
 <div class="content">
 
-
 There are usually constraints that we want to apply to the data that is stored in our application's database. Our application shouldn't accept notes that have a missing or empty <i>content</i> property. The validity of the note is checked in the route handler:
 
 ```js
@@ -23,12 +22,9 @@ app.post('/api/notes', (request, response) => {
 })
 ```
 
-
 If the note does not have the <i>content</i> property, we respond to the request with the status code <i>400 bad request</i>.
 
-
 One smarter way of validating the format of the data before it is stored in the database is to use the [validation](https://mongoosejs.com/docs/validation.html) functionality available in Mongoose.
-
 
 We can define specific validation rules for each field in the schema:
 
@@ -67,7 +63,6 @@ app.post('/api/notes', (request, response, next) => { // highlight-line
     .catch(error => next(error)) // highlight-line
 })
 ```
-
 
 Let's expand the error handler to deal with these validation errors:
 
@@ -120,13 +115,13 @@ For production, we have to set the database URL in the service that is hosting o
 
 In Fly.io that is done _fly secrets set_:
 
-```
+```bash
 fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
 ```
 
 When the app is being developed, it is more than likely that something fails. Eg. when I deployed my app for the first time with the database, not a single note was seen:
 
-![](../../images/3/fly-problem1.png)
+![browser showing no notes appearing](../../images/3/fly-problem1.png)
 
 The network tab of the browser console revealed that fetching the notes did not succeed, the request just remained for a long time in the _pending_ state until it failed with statuscode 502.
 
@@ -134,17 +129,17 @@ The browser console has to be open <i>all the time!</i>
 
 It is also vital to follow continuously the server logs. The problem became obvious when the logs were opened with  _fly logs_:
 
-![](../../images/3/fly-problem3.png)
+![fly.io server log showing connecting to undefined](../../images/3/fly-problem3.png)
 
 The database url was _undefined_, so the command *fly secrets set MONGODB\_URI* was forgotten.
 
 When using Render, the database url is given by definig the proper env in the dashboard:
 
-![](../../images/3/render-env.png)
+![browser render showing the MONGODB_URI env variable](../../images/3/render-env.png)
 
 The Render Dashboard shows the server logs:
 
-![](../../images/3/r7.png)
+![render dashboard with arrow pointting to server running on port 10000](../../images/3/r7.png)
 
 You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-5).
 
@@ -180,11 +175,12 @@ You can display the default error message returned by Mongoose, even though they
 
 #### 3.20*: Phonebook database, step8
 
-Add validation to your phonebook application, which will make sure that phone numbers are of the correct form. A phone number must 
+Add validation to your phonebook application, which will make sure that phone numbers are of the correct form. A phone number must
+
 - has length of 8 or more
 - if formed of two parts that are separated by -, the first part has two or three numbers and the second part also consists of numbers
-  - eg. 09-1234556 and 040-22334455 are valid phone numbers
-  - eg. 1234556, 1-22334455 and 10-22-334455 are invalid
+    - eg. 09-1234556 and 040-22334455 are valid phone numbers
+    - eg. 1234556, 1-22334455 and 10-22-334455 are invalid
 
 Use a [Custom validator](https://mongoosejs.com/docs/validation.html#custom-validators) to implement the second part of the validation.
 
@@ -312,17 +308,13 @@ Let's not fix these issues just yet.
 
 A better alternative to executing the linter from the command line is to configure a <i>eslint-plugin</i> to the editor, that runs the linter continuously. By using the plugin you will see errors in your code immediately. You can find more information about the Visual Studio ESLint plugin [here](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
 
-
 The VS Code ESlint plugin will underline style violations with a red line:
 
 ![Screenshot of vscode ESlint plugin showing errors](../../images/3/54a.png)
 
-
 This makes errors easy to spot and fix right away.
 
-
 ESlint has a vast array of [rules](https://eslint.org/docs/rules/) that are easy to take into use by editing the <i>.eslintrc.js</i> file.
-
 
 Let's add the [eqeqeq](https://eslint.org/docs/rules/eqeqeq) rule that warns us, if equality is checked with anything but the triple equals operator. The rule is added under the <i>rules</i> field in the configuration file.
 
@@ -357,13 +349,11 @@ Let's prevent unnecessary [trailing spaces](https://eslint.org/docs/rules/no-tra
 }
 ```
 
-
 Our default configuration takes a bunch of predetermined rules into use from <i>eslint:recommended</i>:
 
 ```bash
 'extends': 'eslint:recommended',
 ```
-
 
 This includes a rule that warns about _console.log_ commands. [Disabling](https://eslint.org/docs/user-guide/configuring#configuring-rules) a rule can be accomplished by defining its "value" as 0 in the configuration file. Let's do this for the <i>no-console</i> rule in the meantime.
 
