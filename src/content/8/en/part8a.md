@@ -11,19 +11,27 @@ REST, familiar to us from the previous parts of the course, has long been the mo
 
 In recent years, [GraphQL](http://graphql.org/), developed by Facebook, has become popular for communication between web applications and servers.
 
-The GraphQL philosophy is very different from REST. REST is <i>resource-based</i>. Every resource, for example a <i>user</i>, has its own address which identifies it, for example <i>/users/10</i>. All operations done to the resource are done with HTTP requests to its URL. The action depends on the HTTP method used.
+The GraphQL philosophy is very different from REST.
+REST is <i>resource-based</i>.
+Every resource, for example a <i>user</i>, has its own address which identifies it, for example <i>/users/10</i>.
+All operations done to the resource are done with HTTP requests to its URL.
+The action depends on the HTTP method used.
 
-The resource-basedness of REST works well in most situations. However, it can be a bit awkward sometimes.
+The resource-basedness of REST works well in most situations.
+However, it can be a bit awkward sometimes.
 
 Let's consider the following example: our bloglist application contains some kind of social media functionality, and we would like to show a list of all the blogs that were added by users who have commented on any of the blogs we follow.
 
-If the server implemented a REST API, we would probably have to do multiple HTTP requests from the browser before we had all the data we wanted. The requests would also return a lot of unnecessary data, and the code on the browser would probably be quite complicated.
+If the server implemented a REST API, we would probably have to do multiple HTTP requests from the browser before we had all the data we wanted.
+The requests would also return a lot of unnecessary data, and the code on the browser would probably be quite complicated.
 
-If this was an often-used functionality, there could be a REST endpoint for it. If there were a lot of these kinds of scenarios however, it would become very laborious to implement REST endpoints for all of them.
+If this was an often-used functionality, there could be a REST endpoint for it.
+If there were a lot of these kinds of scenarios however, it would become very laborious to implement REST endpoints for all of them.
 
 A GraphQL server is well-suited for these kinds of situations.
 
-The main principle of GraphQL is that the code on the browser forms a <i>query</i> describing the data wanted, and sends it to the API with an HTTP POST request. Unlike REST, all GraphQL queries are sent to the same address, and their type is POST.
+The main principle of GraphQL is that the code on the browser forms a <i>query</i> describing the data wanted, and sends it to the API with an HTTP POST request.
+Unlike REST, all GraphQL queries are sent to the same address, and their type is POST.
 
 The data described in the above scenario could be fetched with (roughly) the following query:
 
@@ -90,7 +98,8 @@ The application logic stays simple, and the code on the browser gets exactly the
 
 We will get to know the basics of GraphQL by implementing a GraphQL version of the phonebook application from parts 2 and 3.
 
-In the heart of all GraphQL applications is a [schema](https://graphql.org/learn/schema/), which describes the data sent between the client and the server. The initial schema for our phonebook is as follows:
+In the heart of all GraphQL applications is a [schema](https://graphql.org/learn/schema/), which describes the data sent between the client and the server.
+The initial schema for our phonebook is as follows:
 
 ```js
 type Person {
@@ -108,14 +117,21 @@ type Query {
 }
 ```
 
-The schema describes two [types](https://graphql.org/learn/schema/#type-system). The first type, <i>Person</i>, determines that persons have five fields. Four of the fields are type  <i>String</i>, which is one of the [scalar types](https://graphql.org/learn/schema/#scalar-types) of GraphQL.
-All of the String fields, except <i>phone</i>, must be given a value. This is marked by the exclamation mark on the schema. The type of the field <i>id</i> is <i>ID</i>. <i>ID</i> fields are strings, but GraphQL ensures they are unique.  
+The schema describes two [types](https://graphql.org/learn/schema/#type-system).
+The first type, <i>Person</i>, determines that persons have five fields.
+Four of the fields are type  <i>String</i>, which is one of the [scalar types](https://graphql.org/learn/schema/#scalar-types) of GraphQL.
+All of the String fields, except <i>phone</i>, must be given a value.
+This is marked by the exclamation mark on the schema.
+The type of the field <i>id</i> is <i>ID</i>. <i>ID</i> fields are strings, but GraphQL ensures they are unique.  
 
-The second type is a [Query](https://graphql.org/learn/schema/#the-query-and-mutation-types). Practically every GraphQL schema describes a Query, which tells what kind of queries can be made to the API.
+The second type is a [Query](https://graphql.org/learn/schema/#the-query-and-mutation-types).
+Practically every GraphQL schema describes a Query, which tells what kind of queries can be made to the API.
 
 The phonebook describes three different queries. *personCount* returns an integer, *allPersons* returns a list of <i>Person</i> objects and <i>findPerson</i> is given a string parameter and it returns a <i>Person</i> object.
 
-Again, exclamation marks are used to mark which return values and parameters are <i>Non-Null</i>. *personCount* will, for sure, return an integer. The query *findPerson* must be given a string as a parameter. The query returns a <i>Person</i>-object or <i>null</i>. *allPersons* returns a list of <i>Person</i> objects, and the list does not contain any <i>null</i> values.
+Again, exclamation marks are used to mark which return values and parameters are <i>Non-Null</i>. *personCount* will, for sure, return an integer.
+The query *findPerson* must be given a string as a parameter.
+The query returns a <i>Person</i>-object or <i>null</i>. *allPersons* returns a list of <i>Person</i> objects, and the list does not contain any <i>null</i> values.
 
 So the schema describes what queries the client can send to the server, what kind of parameters the queries can have, and what kind of data the queries return.
 
@@ -137,7 +153,8 @@ Assuming our application has saved the information of three people, the response
 }
 ```
 
-The query fetching the information of all of the people, *allPersons*, is a bit more complicated. Because the query returns a list of <i>Person</i> objects, the query must describe
+The query fetching the information of all of the people, *allPersons*, is a bit more complicated.
+Because the query returns a list of <i>Person</i> objects, the query must describe
 <i>which [fields](https://graphql.org/learn/queries/#fields)</i> of the objects the query returns:
 
 ```js
@@ -172,7 +189,8 @@ The response could look like this:
 }
 ```
 
-A query can be made to return any field described in the schema. For example, the following would also be possible:
+A query can be made to return any field described in the schema.
+For example, the following would also be possible:
 
 ```js
 query {
@@ -234,12 +252,16 @@ the return value is <i>null</i>.
 }
 ```
 
-As you can see, there is a direct link between a GraphQL query and  the returned JSON object. One can think that the query describes what kind of data it wants as a response.
-The difference to REST queries is stark. With REST, the URL and the type of the request have nothing to do with the form of the returned data.
+As you can see, there is a direct link between a GraphQL query and  the returned JSON object.
+One can think that the query describes what kind of data it wants as a response.
+The difference to REST queries is stark.
+With REST, the URL and the type of the request have nothing to do with the form of the returned data.
 
-GraphQL query describes only the data moving between a server and the client. On the server, the data can be organized and saved any way we like.
+GraphQL query describes only the data moving between a server and the client.
+On the server, the data can be organized and saved any way we like.
 
-Despite its name, GraphQL does not actually have anything to do with databases. It does not care how the data is saved.
+Despite its name, GraphQL does not actually have anything to do with databases.
+It does not care how the data is saved.
 The data a GraphQL API uses can be saved into a relational database, document database, or to other servers which a GraphQL server can access with for example REST.
 
 ### Apollo Server
@@ -331,7 +353,8 @@ const server = new ApolloServer({
 
 The first parameter, *typeDefs*, contains the GraphQL schema.
 
-The second parameter is an object, which contains the [resolvers](https://www.apollographql.com/docs/apollo-server/data/resolvers/) of the server. These are the code, which defines <i>how</i> GraphQL queries are responded to.
+The second parameter is an object, which contains the [resolvers](https://www.apollographql.com/docs/apollo-server/data/resolvers/) of the server.
+These are the code, which defines <i>how</i> GraphQL queries are responded to.
 
 The code of the resolvers is the following:
 
@@ -426,7 +449,9 @@ The second parameter, *args*, contains the parameters of the query.
 The resolver then returns from the array *persons* the person whose name is the same as the value of <i>args.name</i>.
 The resolver does not need the first parameter *root*.
 
-In fact, all resolver functions are given [four parameters](https://www.graphql-tools.com/docs/resolvers#resolver-function-signature). With JavaScript, the parameters don't have to be defined if they are not needed. We will be using the first and the third parameter of a resolver later in this part.
+In fact, all resolver functions are given [four parameters](https://www.graphql-tools.com/docs/resolvers#resolver-function-signature).
+With JavaScript, the parameters don't have to be defined if they are not needed.
+We will be using the first and the third parameter of a resolver later in this part.
 
 ### The default resolver
 
@@ -442,7 +467,8 @@ query {
 }
 ```
 
-the server knows to send back exactly the fields required by the query. How does that happen?
+the server knows to send back exactly the fields required by the query.
+How does that happen?
 
 A GraphQL server must define resolvers for <i>each</i> field of each  type in the schema.
 We have so far only defined resolvers for fields of the type <i>Query</i>, so for each query of the application.
@@ -469,9 +495,11 @@ const resolvers = {
 }
 ```
 
-The default resolver returns the value of the corresponding field of the object. The object itself can be accessed through the first parameter of the resolver, *root*.
+The default resolver returns the value of the corresponding field of the object.
+The object itself can be accessed through the first parameter of the resolver, *root*.
 
-If the functionality of the default resolver is enough, you don't need to define your own. It is also possible to define resolvers for only some fields of a type, and let the default resolvers handle the rest.
+If the functionality of the default resolver is enough, you don't need to define your own.
+It is also possible to define resolvers for only some fields of a type, and let the default resolvers handle the rest.
 
 We could for example define that the address of all persons is
 <i>Manhattan New York</i> by hard-coding the following to the resolvers of the street and city fields of the type <i>Person</i>:
@@ -584,13 +612,16 @@ const resolvers = {
 }
 ```
 
-So every time a <i>Person</i> object is returned, the fields <i>name</i>, <i>phone</i> and <i>id</i> are returned using their default resolvers, but the field <i>address</i> is formed by using a self-defined resolver. The parameter *root* of the resolver function is the person-object, so the street and the city of the address can be taken from its fields.
+So every time a <i>Person</i> object is returned, the fields <i>name</i>, <i>phone</i> and <i>id</i> are returned using their default resolvers, but the field <i>address</i> is formed by using a self-defined resolver.
+The parameter *root* of the resolver function is the person-object, so the street and the city of the address can be taken from its fields.
 
 The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-1), branch <i>part8-1</i>.
 
 ### Mutations
 
-Let's add a functionality for adding new persons to the phonebook. In GraphQL, all operations which cause a change are done with [mutations](https://graphql.org/learn/queries/#mutations). Mutations are described in the schema as the keys of type <i>Mutation</i>.
+Let's add a functionality for adding new persons to the phonebook.
+In GraphQL, all operations which cause a change are done with [mutations](https://graphql.org/learn/queries/#mutations).
+Mutations are described in the schema as the keys of type <i>Mutation</i>.
 
 The schema for a mutation for adding a new person looks as follows:
 
@@ -605,7 +636,12 @@ type Mutation {
 }
 ```
 
-The Mutation is given the details of the person as parameters. The parameter <i>phone</i> is the only one which is nullable. The Mutation also has a return value. The return value is type <i>Person</i>, the idea being that the details of the added person are returned if the operation is successful and if not, null. Value for the field <i>id</i> is not given as a parameter. Generating an id is better left for the server.
+The Mutation is given the details of the person as parameters.
+The parameter <i>phone</i> is the only one which is nullable.
+The Mutation also has a return value.
+The return value is type <i>Person</i>, the idea being that the details of the added person are returned if the operation is successful and if not, null.
+Value for the field <i>id</i> is not given as a parameter.
+Generating an id is better left for the server.
 
 Mutations also require a resolver:
 
@@ -691,7 +727,9 @@ If we try to create a new person, but the parameters do not correspond with the 
 
 So some of the error handling can be automatically done with GraphQL [validation](https://graphql.org/learn/validation/).
 
-However, GraphQL cannot handle everything automatically. For example, stricter rules for data sent to a Mutation have to be added manually. An error could be handeled by throwing [GraphQLError](https://www.apollographql.com/docs/apollo-server/data/errors/#custom-errors) with a proper
+However, GraphQL cannot handle everything automatically.
+For example, stricter rules for data sent to a Mutation have to be added manually.
+An error could be handeled by throwing [GraphQLError](https://www.apollographql.com/docs/apollo-server/data/errors/#custom-errors) with a proper
 [error code](https://www.apollographql.com/docs/apollo-server/data/errors/#built-in-error-codes).
 
 Let's prevent adding the same name to the phonebook multiple times:
@@ -770,7 +808,8 @@ type Query {
 }
 ```
 
-The type <i>YesNo</i> is a GraphQL [enum](https://graphql.org/learn/schema/#enumeration-types), or an enumerable, with two possible values: <i>YES</i> or <i>NO</i>. In the query *allPersons*, the parameter *phone*  has the type <i>YesNo</i>, but is nullable.
+The type <i>YesNo</i> is a GraphQL [enum](https://graphql.org/learn/schema/#enumeration-types), or an enumerable, with two possible values: <i>YES</i> or <i>NO</i>.
+In the query *allPersons*, the parameter *phone*  has the type <i>YesNo</i>, but is nullable.
 
 The resolver changes like so:
 
@@ -796,7 +835,8 @@ Query: {
 
 ### Changing a phone number
 
-Let's add a mutation for changing the phone number of a person. The schema of this mutation looks as follows:
+Let's add a mutation for changing the phone number of a person.
+The schema of this mutation looks as follows:
 
 ```js
 type Mutation {
@@ -839,7 +879,8 @@ The current code of the application can be found on [Github](https://github.com/
 
 ### More on queries
 
-With GraphQL, it is possible to combine multiple fields of type <i>Query</i>, or "separate queries" into one query. For example, the following query returns both the amount of persons in the phonebook and their names:
+With GraphQL, it is possible to combine multiple fields of type <i>Query</i>, or "separate queries" into one query.
+For example, the following query returns both the amount of persons in the phonebook and their names:
 
 ```js
 query {
@@ -871,7 +912,8 @@ The response looks as follows:
 }
 ```
 
-Combined query can also use the same query multiple times. You must however give the queries alternative names like so:
+Combined query can also use the same query multiple times.
+You must however give the queries alternative names like so:
 
 ```js
 query {
@@ -906,7 +948,9 @@ The response looks like:
 }
 ```
 
-In some cases, it might be beneficial to name the queries. This is the case especially when the queries or mutations have [parameters](https://graphql.org/learn/queries/#variables). We will get into parameters soon.
+In some cases, it might be beneficial to name the queries.
+This is the case especially when the queries or mutations have [parameters](https://graphql.org/learn/queries/#variables).
+We will get into parameters soon.
 
 </div>
 
@@ -915,7 +959,8 @@ In some cases, it might be beneficial to name the queries. This is the case espe
 ### Exercises 8.1.-8.7
 
 Through the exercises, we will implement a GraphQL backend for a small library.
-Start with [this file](https://github.com/fullstack-hy2020/misc/blob/master/library-backend.js). Remember to *npm init* and to install dependencies!
+Start with [this file](https://github.com/fullstack-hy2020/misc/blob/master/library-backend.js).
+Remember to *npm init* and to install dependencies!
 
 #### 8.1: The number of books and authors
 
@@ -960,7 +1005,8 @@ query {
 
 #### 8.3: All authors
 
-Implement query *allAuthors*, which returns the details of all authors. The response should include a field *bookCount* containing the number of books the author has written.
+Implement query *allAuthors*, which returns the details of all authors.
+The response should include a field *bookCount* containing the number of books the author has written.
 
 For example the query
 
@@ -1006,7 +1052,8 @@ should return
 
 #### 8.4: Books of an author
 
-Modify the *allBooks* query so that a user can give an optional parameter <i>author</i>. The response should include only books written by that author.
+Modify the *allBooks* query so that a user can give an optional parameter <i>author</i>.
+The response should include only books written by that author.
 
 For example query
 
@@ -1037,7 +1084,8 @@ should return
 
 #### 8.5: Books by genre
 
-Modify the query *allBooks* so that a user can give an optional parameter <i>genre</i>. The response should include only books of that genre.
+Modify the query *allBooks* so that a user can give an optional parameter <i>genre</i>.
+The response should include only books of that genre.
 
 For example query
 
@@ -1122,7 +1170,8 @@ mutation {
 }
 ```
 
-If the author is not yet saved to the server, a new author is added to the system. The birth years of authors are not saved to the server yet, so the query
+If the author is not yet saved to the server, a new author is added to the system.
+The birth years of authors are not saved to the server yet, so the query
 
 ```js
 query {
@@ -1153,7 +1202,8 @@ returns
 
 #### 8.7: Updating the birth year of an author
 
-Implement mutation *editAuthor*, which can be used to set a birth year for an author. The mutation is used like so:
+Implement mutation *editAuthor*, which can be used to set a birth year for an author.
+The mutation is used like so:
 
 ```js
 mutation {

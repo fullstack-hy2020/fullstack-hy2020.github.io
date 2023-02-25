@@ -11,15 +11,20 @@ We will next implement a React app which uses the GraphQL server we created.
 
 The current code of the server can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3), branch <i>part8-3</i>.
 
-In theory, we could use GraphQL with HTTP POST requests. The following shows an example of this with Postman:
+In theory, we could use GraphQL with HTTP POST requests.
+The following shows an example of this with Postman:
 
 ![postman showing localhost:4000 graphql with allPersons query](../../images/8/8x.png)
 
-The communication works by sending HTTP POST requests to <http://localhost:4000/graphql>. The query itself is a string sent as the value of the key <i>query</i>.
+The communication works by sending HTTP POST requests to <http://localhost:4000/graphql>.
+The query itself is a string sent as the value of the key <i>query</i>.
 
-We could take care of the communication between the React app and GraphQL by using Axios. However, most of the time, it is not very sensible to do so. It is a better idea to use a higher-order library capable of abstracting the unnecessary details of the communication.
+We could take care of the communication between the React app and GraphQL by using Axios.
+However, most of the time, it is not very sensible to do so.
+It is a better idea to use a higher-order library capable of abstracting the unnecessary details of the communication.
 
-At the moment, there are two good options: [Relay](https://facebook.github.io/relay/) by Facebook and [Apollo Client](https://www.apollographql.com/docs/react/), which is the client side of the same library we used in the previous section. Apollo is absolutely the most popular of the two, and we will use it in this section as well.
+At the moment, there are two good options: [Relay](https://facebook.github.io/relay/) by Facebook and [Apollo Client](https://www.apollographql.com/docs/react/), which is the client side of the same library we used in the previous section.
+Apollo is absolutely the most popular of the two, and we will use it in this section as well.
 
 ### Apollo client
 
@@ -78,7 +83,8 @@ The server's response is printed to the console:
 
 ![devtools shows allPersons array with 3 people](../../images/8/9a.png)
 
-The application can communicate with a GraphQL server using the *client* object. The client can be made accessible for all components of the application by wrapping the <i>App</i> component with [ApolloProvider](https://www.apollographql.com/docs/react/get-started/#connect-your-client-to-react).
+The application can communicate with a GraphQL server using the *client* object.
+The client can be made accessible for all components of the application by wrapping the <i>App</i> component with [ApolloProvider](https://www.apollographql.com/docs/react/get-started/#connect-your-client-to-react).
 
 ```js
 import ReactDOM from 'react-dom/client'
@@ -195,7 +201,8 @@ const App = () => {
 
 ### Named queries and variables
 
-Let's implement functionality for viewing the address details of a person. The <i>findPerson</i> query is well-suited for this.
+Let's implement functionality for viewing the address details of a person.
+The <i>findPerson</i> query is well-suited for this.
 
 The queries we did in the last chapter had the parameter hardcoded into the query:
 
@@ -212,7 +219,8 @@ query {
 
 When we do queries programmatically, we must be able to give them parameters dynamically.
 
-GraphQL [variables](https://graphql.org/learn/queries/#variables) are well-suited for this. To be able to use variables, we must also name our queries.
+GraphQL [variables](https://graphql.org/learn/queries/#variables) are well-suited for this.
+To be able to use variables, we must also name our queries.
 
 A good format for the query is this:
 
@@ -231,7 +239,8 @@ query findPersonByName($nameToSearch: String!) {
 
 The name of the query is <i>findPersonByName</i>, and it is given a string <i>$nameToSearch</i> as a parameter.
 
-It is also possible to do queries with parameters with the Apollo Explorer. The parameters are given in <i>Variables</i>:
+It is also possible to do queries with parameters with the Apollo Explorer.
+The parameters are given in <i>Variables</i>:
 
 ![apollostudio findPersonByName highlighting nameToSEarch Arto Hellas](../../images/8/10x.png)
 
@@ -322,7 +331,8 @@ When the button <i>show address</i> of a person is pressed, the name of the pers
 </button>
 ```
 
-This causes the component to re-render itself. On render the query <i>FIND_PERSON</i> that fetches the detailed information of a user is executed <i>if the variable nameToSearch</i> has a value:
+This causes the component to re-render itself.
+On render the query <i>FIND_PERSON</i> that fetches the detailed information of a user is executed <i>if the variable nameToSearch</i> has a value:
 
 ```js
 const result = useQuery(FIND_PERSON, {
@@ -356,11 +366,13 @@ The current code of the application can be found on [GitHub](https://github.com/
 
 ### Cache
 
-When we do multiple queries, for example with the address details of Arto Hellas, we notice something interesting: the query to the backend is done only the first time around. After this, despite the same query being done again by the code, the query is not sent to the backend.
+When we do multiple queries, for example with the address details of Arto Hellas, we notice something interesting: the query to the backend is done only the first time around.
+After this, despite the same query being done again by the code, the query is not sent to the backend.
 
 ![browser showing dev tools response with network tab and graphql](../../images/8/12.png)
 
-Apollo client saves the responses of queries to [cache](https://www.apollographql.com/docs/react/caching/overview/). To optimize performance if the response to a query is already in the cache, the query is not sent to the server at all.
+Apollo client saves the responses of queries to [cache](https://www.apollographql.com/docs/react/caching/overview/).
+To optimize performance if the response to a query is already in the cache, the query is not sent to the server at all.
 
 ![apollo dev tools showing root_query allPersons](../../images/8/13x.png)
 
@@ -372,7 +384,8 @@ Cache shows the detailed info of Arto Hellas after the query <i>findPerson</i>:
 
 Let's implement functionality for adding new persons.
 
- In the previous chapter, we hardcoded the parameters for mutations. Now, we need a version of the addPerson mutation which uses [variables](https://graphql.org/learn/queries/#variables):
+ In the previous chapter, we hardcoded the parameters for mutations.
+Now, we need a version of the addPerson mutation which uses [variables](https://graphql.org/learn/queries/#variables):
 
 ```js
 const CREATE_PERSON = gql`
@@ -477,14 +490,18 @@ The query variables receive values when the query is made:
 createPerson({  variables: { name, phone, street, city } })
 ```
 
-New persons are added just fine, but the screen is not updated. This is because Apollo Client cannot automatically update the cache of an application, so it still contains the state from before the mutation.
-We could update the screen by reloading the page, as the cache is emptied when the page is reloaded. However, there must be a better way to do this.
+New persons are added just fine, but the screen is not updated.
+This is because Apollo Client cannot automatically update the cache of an application, so it still contains the state from before the mutation.
+We could update the screen by reloading the page, as the cache is emptied when the page is reloaded.
+However, there must be a better way to do this.
 
 ### Updating the cache
 
-There are a few different solutions for this. One way is to make the query for all persons [poll](https://www.apollographql.com/docs/react/data/queries/#polling) the server, or make the query repeatedly.
+There are a few different solutions for this.
+One way is to make the query for all persons [poll](https://www.apollographql.com/docs/react/data/queries/#polling) the server, or make the query repeatedly.
 
-The change is small. Let's set the query to poll every two seconds:
+The change is small.
+Let's set the query to poll every two seconds:
 
 ```js
 const App = () => {
@@ -532,9 +549,12 @@ const PersonForm = (props) => {
   })
 ```
 
-The pros and cons of this solution are almost opposite of the previous one's. There is no extra web traffic, because queries are not done just in case.  However, if one user now updates the state of the server, the changes do not show to other users immediately.
+The pros and cons of this solution are almost opposite of the previous one's.
+There is no extra web traffic, because queries are not done just in case.  However, if one user now updates the state of the server, the changes do not show to other users immediately.
 
-If you want to do multiple queries, you can pass multiple objects inside refetchQueries. This will allow you to update different parts of your app at the same time. Here is an example:
+If you want to do multiple queries, you can pass multiple objects inside refetchQueries.
+This will allow you to update different parts of your app at the same time.
+Here is an example:
 
 ```js
     const [ createPerson ] = useMutation(CREATE_PERSON, {
@@ -542,7 +562,8 @@ If you want to do multiple queries, you can pass multiple objects inside refetch
   })
 ```
 
-There are other ways to update the cache. More about those later in this part.
+There are other ways to update the cache.
+More about those later in this part.
 
 At the moment, queries and components are defined in the same place in our code.
 Let's separate the query definitions into their own file <i>queries.js</i>:
@@ -587,7 +608,8 @@ Trying to create a person with invalid data causes an error:
 
 ![devtools showing error: name must be unique](../../images/8/14x.png)
 
-We should handle the exception. We can register an error handler function to the mutation using the *useMutation* hook's *onError* [option](https://www.apollographql.com/docs/react/api/react/hooks/#params-2).
+We should handle the exception.
+We can register an error handler function to the mutation using the *useMutation* hook's *onError* [option](https://www.apollographql.com/docs/react/api/react/hooks/#params-2).
 
 Let's register the mutation with an error handler which uses the *setError*
 function it receives as a parameter to set an error message:
@@ -666,7 +688,8 @@ The current code of the application can be found on [GitHub](https://github.com/
 
 ### Updating a phone number
 
-Let's add the possibility to change the phone numbers of persons to our application. The solution is almost identical to the one we used for adding new persons.
+Let's add the possibility to change the phone numbers of persons to our application.
+The solution is almost identical to the one we used for adding new persons.
 
 Again, the mutation requires parameters.
 
@@ -686,7 +709,9 @@ export const EDIT_NUMBER = gql`
 `
 ```
 
-The <i>PhoneForm</i> component responsible for the change is straightforward. The form has fields for the person's name and new phone number, and calls the *changeNumber* function. The function is done using the *useMutation* hook.
+The <i>PhoneForm</i> component responsible for the change is straightforward.
+The form has fields for the person's name and new phone number, and calls the *changeNumber* function.
+The function is done using the *useMutation* hook.
 Interesting lines on the code have been highlighted.
 
 ```js
@@ -747,7 +772,8 @@ It looks bleak, but it works:
 Surprisingly, when a person's number is changed, the new number automatically appears on the list of persons rendered by the <i>Persons</i> component.
 This happens because each person has an identifying field of type <i>ID</i>, so the person's details saved to the cache update automatically when they are changed with the mutation.
 
-Our application still has one small flaw. If we try to change the phone number for a name which does not exist, nothing seems to happen.
+Our application still has one small flaw.
+If we try to change the phone number for a name which does not exist, nothing seems to happen.
 This happens because if a person with the given name cannot be found,
 the mutation response is <i>null</i>:
 
@@ -813,14 +839,17 @@ useEffect(() => {
 // highlight-end
 ```
 
-However, this solution does not work if the *notify* function is not wrapped to a [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback) function.  If it's not, this results in an endless loop. When the *App* component is rerendered after a notification is removed, a <i>new version</i> of *notify* gets created which causes the effect function to be executed, which causes a new notification, and so on, and so on...
+However, this solution does not work if the *notify* function is not wrapped to a [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback) function.  If it's not, this results in an endless loop.
+When the *App* component is rerendered after a notification is removed, a <i>new version</i> of *notify* gets created which causes the effect function to be executed, which causes a new notification, and so on, and so on...
 
 The current code of the application can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4) branch <i>part8-4</i>.
 
 ### Apollo Client and the applications state
 
-In our example, management of the applications state has mostly become the responsibility of Apollo Client. This is a quite typical solution for GraphQL applications.
-Our example uses the state of the React components only to manage the state of a form and to show error notifications. As a result, it could be that there are no justifiable reasons to use Redux to manage application state when using GraphQL.
+In our example, management of the applications state has mostly become the responsibility of Apollo Client.
+This is a quite typical solution for GraphQL applications.
+Our example uses the state of the React components only to manage the state of a form and to show error notifications.
+As a result, it could be that there are no justifiable reasons to use Redux to manage application state when using GraphQL.
 
 When necessary, Apollo enables saving the application's local state to [Apollo cache](https://www.apollographql.com/docs/react/local-state/local-state-management/).
 
@@ -850,7 +879,8 @@ Implement a Books view to show on a page all other details of all books except t
 
 #### 8.10: Adding a book
 
-Implement a possibility to add new books to your application. The functionality can look like this:
+Implement a possibility to add new books to your application.
+The functionality can look like this:
 
 ![browser showing the add book form with data fulfilled](../../images/8/18.png)
 
@@ -862,7 +892,8 @@ In case of problems when making queries or mutations, check from the developer c
 
 #### 8.11: Authors birth year
 
-Implement a possibility to set authors birth year. You can create a new view for setting the birth year, or place it on the Authors view:
+Implement a possibility to set authors birth year.
+You can create a new view for setting the birth year, or place it on the Authors view:
 
 ![browser showing born input text field year](../../images/8/20.png)
 
@@ -870,7 +901,8 @@ Make sure that the Authors view is kept up to date after setting a birth year.
 
 #### 8.12: Authors birth year advanced
 
-Change the birth year form so that a birth year can be set only for an existing author. Use [select tag](https://reactjs.org/docs/forms.html#the-select-tag), [react select](https://github.com/JedWatson/react-select), or some other mechanism.
+Change the birth year form so that a birth year can be set only for an existing author.
+Use [select tag](https://reactjs.org/docs/forms.html#the-select-tag), [react select](https://github.com/JedWatson/react-select), or some other mechanism.
 
 A solution using the react select library looks as follows:
 
