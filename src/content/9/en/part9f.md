@@ -448,7 +448,7 @@ interface BaseEntry {
 }
 ```
 
-As you might remember, _Array<Type>_ is just an alternative way to say *Type[]*. In cases like this, it is just much clearer to use the array convention since the other option would be to define the type by saying `Diagnosis['code'][]` which starts to look a bit strange.
+As you might remember, `Array<Type>` is just an alternative way to say *Type[]*. In cases like this, it is just much clearer to use the array convention since the other option would be to define the type by saying `Diagnosis['code'][]` which starts to look a bit strange.
 
 Now that we have the *BaseEntry* defined, we can start creating the extended entry types we will actually be using. Let's start by creating the *HealthCheckEntry* type.
 

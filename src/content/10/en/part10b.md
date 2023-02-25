@@ -41,14 +41,14 @@ const HelloWorld = props => {
 
 So we import the [Text](https://reactnative.dev/docs/text) component from React Native and replace the *div* element with a *Text* element. Many familiar DOM elements have their React Native "counterparts". Here are some examples picked from React Native's [Core Components documentation](https://reactnative.dev/docs/components-and-apis):
 
-- [Text](https://reactnative.dev/docs/text) component is <i>the only</i> React Native component that can have textual children. It is similar to for example the _&lt;strong&gt;_ and the _&lt;h1&gt;_ elements.
-- [View](https://reactnative.dev/docs/view) component is the basic user interface building block similar to the _&lt;div&gt;_ element.
-- [TextInput](https://reactnative.dev/docs/textinput) component is a text field component similar to the _&lt;input&gt;_ element.
-- [Pressable](https://reactnative.dev/docs/pressable) component is for capturing different press events. It is similar to for example the _&lt;button&gt;_ element.
+- [Text](https://reactnative.dev/docs/text) component is <i>the only</i> React Native component that can have textual children. It is similar to for example the `<strong>` and the `<h1>` elements.
+- [View](https://reactnative.dev/docs/view) component is the basic user interface building block similar to the `<div>` element.
+- [TextInput](https://reactnative.dev/docs/textinput) component is a text field component similar to the `<input>` element.
+- [Pressable](https://reactnative.dev/docs/pressable) component is for capturing different press events. It is similar to for example the `<button>` element.
 
 There are a few notable differences between core components and DOM elements. The first difference is that the <em>Text</em> component is <i>the only</i> React Native component that can have textual children. This means that you can't, for example, replace the <em>Text</em> component with the <em>View</em> component in the previous example.
 
-The second notable difference is related to the event handlers. While working with the DOM elements we are used to adding event handlers such as <em>onClick</em> to basically any element such as _&lt;div&gt;_ and _&lt;button&gt;_. In React Native we have to carefully read the [API documentation](https://reactnative.dev/docs/components-and-apis) to know what event handlers (as well as other props) a component accepts. For example, the [Pressable](https://reactnative.dev/docs/pressable) component provides props for listening to different kinds of press events. We can for example use the component's [onPress](https://reactnative.dev/docs/pressable) prop for listening to press events:
+The second notable difference is related to the event handlers. While working with the DOM elements we are used to adding event handlers such as <em>onClick</em> to basically any element such as `<div>` and `<button>`. In React Native we have to carefully read the [API documentation](https://reactnative.dev/docs/components-and-apis) to know what event handlers (as well as other props) a component accepts. For example, the [Pressable](https://reactnative.dev/docs/pressable) component provides props for listening to different kinds of press events. We can for example use the component's [onPress](https://reactnative.dev/docs/pressable) prop for listening to press events:
 
 ```javascript
 import { Text, Pressable, Alert } from 'react-native';

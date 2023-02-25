@@ -34,7 +34,7 @@ What's going on here? We can access the backend from a browser and from postman 
 
 ### Same origin policy and CORS
 
-The issue lies with a thing called _same origin policy_. A URL's origin is defined by the combination of protocol (AKA scheme), hostname, and port.
+The issue lies with a thing called *same origin policy*. A URL's origin is defined by the combination of protocol (AKA scheme), hostname, and port.
 
 ```text
 http://example.com:80/index.html
@@ -44,7 +44,7 @@ host: example.com
 port: 80
 ```
 
-When you visit a website (i.e <http://catwebsites.com>), the browser issues a request to the server on which the website (catwebsites.com) is hosted. The response sent by the server is an HTML file that may contain one or more references to external assets/resources hosted either on the same server that <i>catwebsites.com</i> is hosted on or a different website. When the browser sees reference(s) to a URL in the source HTML, it issues a request. If the request is issued using the URL that the source HTML was fetched from, then the browser processes the response without any issues. However, if the resource is fetched using a URL that doesn't share the same origin(scheme, host, port) as the source HTML, the browser will have to check the _Access-Control-Allow-origin_ response header. If it contains _*_ or the URL of the source HTML, the browser will process the response, otherwise the browser will refuse to process it and throw an error.
+When you visit a website (i.e <http://catwebsites.com>), the browser issues a request to the server on which the website (catwebsites.com) is hosted. The response sent by the server is an HTML file that may contain one or more references to external assets/resources hosted either on the same server that <i>catwebsites.com</i> is hosted on or a different website. When the browser sees reference(s) to a URL in the source HTML, it issues a request. If the request is issued using the URL that the source HTML was fetched from, then the browser processes the response without any issues. However, if the resource is fetched using a URL that doesn't share the same origin(scheme, host, port) as the source HTML, the browser will have to check the *Access-Control-Allow-origin* response header. If it contains *** or the URL of the source HTML, the browser will process the response, otherwise the browser will refuse to process it and throw an error.
   
 The <strong>same-origin policy</strong> is a security mechanism implemented by browsers in order to prevent session hijacking among other security vulnerabilities.
 

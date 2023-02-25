@@ -250,7 +250,7 @@ We call the [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 ### Update of the state is asynchronous
 
-Let's expand the application so that it keeps track of the total number of button presses in the state _total_, whose value is always updated when the buttons are pressed:
+Let's expand the application so that it keeps track of the total number of button presses in the state *total*, whose value is always updated when the buttons are pressed:
 
 ```js
 const App = () => {
@@ -311,7 +311,7 @@ The console reveals the problem
 
 ![devtools console showing left before 4 and left after 4](../../images/1/32.png)
 
-Even though a new value was set to _left_ by calling _setLeft(left + 1)_, the old value is still there despite the update! Because of this, the following attempt to count button presses produces a too small result:
+Even though a new value was set to *left* by calling *setLeft(left + 1)*, the old value is still there despite the update! Because of this, the following attempt to count button presses produces a too small result:
 
 ```js
 setTotal(left + right) 

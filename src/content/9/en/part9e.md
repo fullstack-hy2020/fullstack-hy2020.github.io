@@ -152,13 +152,13 @@ const AddPatientModal = ({ modalOpen, onClose, onSubmit, error }: Props) => {
 () => void
 ```
 
-The type of *onSubmit* is a bit more interesting, it has one parameter that has the type *PatientFormValues*. The return value of the function is _Promise&#60;void&#62;_. So again the function type is written with the arrow syntax:
+The type of *onSubmit* is a bit more interesting, it has one parameter that has the type *PatientFormValues*. The return value of the function is `Promise<void>`. So again the function type is written with the arrow syntax:
 
 ```js
 (values: PatientFormValues) => Promise<void>
 ```
 
-The return value of a *async* function is a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function#return_value) with the value that the function returns. Our function does not return anything so the proper return type is just _Promise&#60;void&#62;_.
+The return value of a *async* function is a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function#return_value) with the value that the function returns. Our function does not return anything so the proper return type is just `Promise<void>`.
 
 </div>
 
@@ -295,7 +295,7 @@ interface BaseEntry {
 }
 ```
 
-As was mentioned [earlier in this part](/en/part9/first_steps_with_type_script/#the-alternative-array-syntax), we could define an array with the syntax _Array&#60;Type&#62;_ instead of defining it *Type[]*. In this particular case writing `Diagnosis['code'][]` starts to look a bit strange so we will decide to use the alternative syntax (that is also recommended by the ESlint rule [array-simple](https://typescript-eslint.io/rules/array-type/#array-simple)):
+As was mentioned [earlier in this part](/en/part9/first_steps_with_type_script/#the-alternative-array-syntax), we could define an array with the syntax `Array<Type>` instead of defining it *Type[]*. In this particular case writing `Diagnosis['code'][]` starts to look a bit strange so we will decide to use the alternative syntax (that is also recommended by the ESlint rule [array-simple](https://typescript-eslint.io/rules/array-type/#array-simple)):
 
 ```js
 interface BaseEntry {

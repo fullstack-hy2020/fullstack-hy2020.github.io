@@ -172,7 +172,7 @@ the test fails
 
 Let's remove the failing code from the test.
 
-The variable _cy_ our tests use gives us a nasty Eslint error
+The variable *cy* our tests use gives us a nasty Eslint error
 
 ![vscode screenshot showing cy is not defined](../../images/5/58new.png)
 

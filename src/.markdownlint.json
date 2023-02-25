@@ -1,13 +1,13 @@
 {
     "default": true,
     "MD003": {
-      "style": "atx"
+        "style": "atx"
     },
     "MD004": {
-      "style": "dash"
+        "style": "dash"
     },
     "MD007": {
-      "indent": 4
+        "indent": 4
     },
     "MD013": false,
     "MD033": false,
@@ -15,5 +15,10 @@
         "style": "---"
     },
     "MD041": false,
-    "MD049": false
+    "MD049": {
+        "style": "asterisk"
+    },
+    "MD050": {
+        "style": "asterisk"
+    }
 }
