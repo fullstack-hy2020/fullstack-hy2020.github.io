@@ -604,17 +604,14 @@ const App = () => {
 
 El código actual de la aplicación se puede encontrar en [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-2) branch <i>part8-2</i>.
 
-#### Manejo de errores de mutación
+### Manejo de errores de mutación
 
-<!-- Jos yritämme luoda epävalidia henkilöä, seurauksena en poikkeus ja koko sovellus hajoaa -->
 Intentar crear una persona con datos no válidos provoca un error y toda la aplicación se rompe
 
-![](../../images/8/14ea.png)
+![error](../../images/8/14ea.png)
 
-<!-- Poikkeus on syytä käsitellä. _useMutation_-hookin [opción] (https://www.apollographql.com/docs/react/api/react/hooks/#params-2) _onError_ avulla en mahdollista rekisteröidä mutaatioille virheenkäsittelijäfunktio. -->
 Debemos manejar la excepción. Podemos registrar una función de manejo de errores en la mutación usando _onError_ del hook _useMutation_ [opción](https://www.apollographql.com/docs/react/api/react/hooks/#params-2).
 
-<!-- Rekisteröidään mutaatiolle virheidenkäsittelijä, joka asettaa virheestä kertovan viestin propsina saaman funktion _setError_ avulla: -->
 Registremos la mutación en un controlador de errores, que usa la función _setError_ que recibe como parámetro para establecer un mensaje de error:
 
 ```js
