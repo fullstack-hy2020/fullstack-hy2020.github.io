@@ -5,7 +5,7 @@ import ChallengePage from '../components/ChallengePage';
 const Challenge = () => {
   return (
     <ChallengePage
-      lang="pt"
+      lang="ptbr"
       title="Desafio Full stack | Full Stack Aberto"
       seoDescription="A Universidade de Helsinki e a Houston Inc. se uniram para desafiar tanto desenvolvedores individuais quanto empresas a aprender e a aprimorar suas habilidades em desenvolvimento de software do jeito Full Stack. O curso é construído por programadores para programadores, e oferece valor tanto para iniciantes quanto para veteranos da indústria."
       aboutContent={[

@@ -2,7 +2,7 @@
 mainImage: ../../../images/part-3.svg
 part: 3
 letter: c
-lang: pt
+lang: ptbr
 ---
 
 <div class="content">
@@ -67,7 +67,7 @@ Quando bugs acontecem, <i>a pior de todas as estratégias possíveis</i> é cont
 
 Para armazenar indefinidamente nossas notas que estão sendo salvas, precisamos de um banco de dados. A maioria dos cursos ministrados na Universidade de Helsinque utiliza bancos de dados relacionais. Usaremos na maior parte deste curso o [MongoDB](https://www.mongodb.com/), que é um tipo de [banco de dados de documentos](https://en.wikipedia.org/wiki/Document-oriented_database) (document database).
 
-A razão para usar o Mongo como banco de dados é devido a sua menor complexidade em comparação com um banco de dados relacional. A [Parte 13](/pt/part13) do curso mostra como construir back-ends em Node.js que usam um banco de dados relacional.
+A razão para usar o Mongo como banco de dados é devido a sua menor complexidade em comparação com um banco de dados relacional. A [Parte 13](/ptbr/part13) do curso mostra como construir back-ends em Node.js que usam um banco de dados relacional.
 
 Bancos de dados de documentos diferem de bancos de dados relacionais em como eles organizam dados, bem como nas linguagens de consulta (query languages) que suportam. Bancos de dados de documentos são geralmente categorizados sob o termo genérico [NoSQL](https://en.wikipedia.org/wiki/NoSQL) (Not Only SQL [Não Somente SQL]).
 
@@ -465,7 +465,7 @@ noteSchema.set('toJSON', {
 module.exports = mongoose.model('Note', noteSchema) // highlight-line
 ```
 
-A definição de [módulos](https://nodejs.org/docs/latest-v8.x/api/modules.html) do Node difere um pouco da maneira de definir [módulos ES6](/pt/part2/renderizacao_de_uma_colecao_e_modulos#refatorando-modulos) da Parte 2.
+A definição de [módulos](https://nodejs.org/docs/latest-v8.x/api/modules.html) do Node difere um pouco da maneira de definir [módulos ES6](/ptbr/part2/renderizacao_de_uma_colecao_e_modulos#refatorando-modulos) da Parte 2.
 
 A interface pública do módulo é estabelecida ao definir um valor para a variável _module.exports_. Vamos definir o valor como o modelo <i>Note</i>. As outras coisas definidas dentro do módulo, como as variáveis _mongoose_ e _url_, não serão acessíveis ou visíveis para os usuários do módulo.
 
@@ -617,7 +617,7 @@ Ao se expandir o back-end, sempre é uma boa ideia testá-lo primeiro **com o na
 
 Somente depois de verificar se tudo funciona no back-end, é uma boa ideia testar se o front-end funciona com o back-end. É extremamente ineficiente testar as funcionalidades exclusivamente pelo front-end.
 
-Sempre é uma boa ideia integrar tanto ao front-end quanto ao back-end uma funcionalidade de cada vez. Primeiro, poderíamos implementar a busca de todas as notas no banco de dados e testá-la por meio do <i>endpoint</i> (ou "ponto de terminação" — objetivamente, um <i>endpoint</i> ou ponto de terminação é qualquer dispositivo conectado a uma rede de computadores. Leia mais [aqui](https://www.cloudflare.com/pt-br/learning/security/glossary/what-is-endpoint/)) do back-end no navegador. Depois disso, verificaríamos se o front-end funciona com o novo back-end. Depois que tudo parecer estar funcionando, passaríamos para a próxima funcionalidade.
+Sempre é uma boa ideia integrar tanto ao front-end quanto ao back-end uma funcionalidade de cada vez. Primeiro, poderíamos implementar a busca de todas as notas no banco de dados e testá-la por meio do <i>endpoint</i> (ou "ponto de terminação" — objetivamente, um <i>endpoint</i> ou ponto de terminação é qualquer dispositivo conectado a uma rede de computadores. Leia mais [aqui](https://www.cloudflare.com/ptbr-br/learning/security/glossary/what-is-endpoint/)) do back-end no navegador. Depois disso, verificaríamos se o front-end funciona com o novo back-end. Depois que tudo parecer estar funcionando, passaríamos para a próxima funcionalidade.
 
 Uma vez que um banco de dados é introduzido nessa mistura, é sempre útil inspecionar o estado persistido no banco de dados através, por exemplo, do painel de controle do MongoDB Atlas. Muitas vezes, pequenos programas auxiliares do Node como o <i>mongo.js</i> que escrevemos anteriormente podem ser muito úteis durante o desenvolvimento.
 
@@ -637,7 +637,7 @@ Altere a funcionalidade que busca todas as entradas da lista telefônica para qu
 
 Verifique se o front-end funciona depois que as alterações forem feitas.
 
-Nos próximos exercícios, escreva todo o código específico do Mongoose em seu próprio módulo, assim como fizemos no capítulo ["A configuração do banco de dados em seu próprio módulo"](/pt/part3/salvando_dados_no_mongo_db#a-configuracao-do-banco-de-dados-em-seu-proprio-modulo).
+Nos próximos exercícios, escreva todo o código específico do Mongoose em seu próprio módulo, assim como fizemos no capítulo ["A configuração do banco de dados em seu próprio módulo"](/ptbr/part3/salvando_dados_no_mongo_db#a-configuracao-do-banco-de-dados-em-seu-proprio-modulo).
 
 #### 3.14: Phonebook database — 2º passo
 
@@ -908,7 +908,7 @@ Desenvolvimento Full Stack é algo <i>extremamente difícil</i>, e é por isso q
 - Eu vou progredir aos poucos, passo a passo;
 - Eu escreverei muitas instruções _console.log_ para ter certeza de que estou entendendo como o código se comporta e para me ajudar a identificar os erros;
 - Se meu código não funcionar, não escreverei mais nenhuma linha no código. Em vez disso, começarei a excluir o código até que funcione ou retornarei ao estado em que tudo ainda estava funcionando; e
-- Quando eu pedir ajuda no canal do Discord ou Telegram do curso ou em outro lugar, formularei minhas perguntas de forma adequada. Veja [aqui](/pt/part0/informacoes_gerais#como-pedir-ajuda-no-discord-telegam) como pedir ajuda.
+- Quando eu pedir ajuda no canal do Discord ou Telegram do curso ou em outro lugar, formularei minhas perguntas de forma adequada. Veja [aqui](/ptbr/part0/informacoes_gerais#como-pedir-ajuda-no-discord-telegam) como pedir ajuda.
 
 </div>
 

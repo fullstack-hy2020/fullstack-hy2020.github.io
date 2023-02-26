@@ -2,7 +2,7 @@
 mainImage: ../../../images/part-1.svg
 part: 1
 letter: c
-lang: pt
+lang: ptbr
 ---
 
 <div class="content">
@@ -369,7 +369,7 @@ O console do seu navegador estava aberto? Se não estava, prometa que essa foi a
 
 ### Gerenciamento de eventos (Event handling)
 
-Já mencionamos, na [Parte 0](/pt/part0), <i>gerenciadores de eventos</i> que são registrados para serem chamados quando eventos específicos ocorrem várias vezes. A interação de um usuário com os diferentes elementos de uma página web pode causar uma coleção de vários tipos de eventos a serem acionados.
+Já mencionamos, na [Parte 0](/ptbr/part0), <i>gerenciadores de eventos</i> que são registrados para serem chamados quando eventos específicos ocorrem várias vezes. A interação de um usuário com os diferentes elementos de uma página web pode causar uma coleção de vários tipos de eventos a serem acionados.
 
 Vamos mudar a aplicação para que o aumento do contador aconteça quando um usuário clicar em um botão, que é implementado com o elemento [botão](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) (button).
 
@@ -691,7 +691,7 @@ const Exibir = (props) => {
 ```
 
 O componente só usa o campo _contador_ de suas <i>props</i>.
-Isso significa que podemos simplificar o componente usando [desestruturação](/pt/part1/estado_do_componente_gerenciadores_de_eventos#desestruturacao-destructuring), desta forma:
+Isso significa que podemos simplificar o componente usando [desestruturação](/ptbr/part1/estado_do_componente_gerenciadores_de_eventos#desestruturacao-destructuring), desta forma:
 
 ```js
 const Exibir = ({ contador }) => {

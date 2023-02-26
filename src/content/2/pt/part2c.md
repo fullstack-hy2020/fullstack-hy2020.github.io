@@ -2,12 +2,12 @@
 mainImage: ../../../images/part-2.svg
 part: 2
 letter: c
-lang: pt
+lang: ptbr
 ---
 
 <div class="content">
 
-Já estamos trabalhando há um tempo apenas no "front-end", ou seja, com as funcionalidades do lado do cliente (navegador). Começaremos a trabalhar no "back-end", ou seja, com as funcionalidades do lado do servidor na [Parte 3](/pt/part3) deste curso. Contudo, agora daremos um passo nessa direção, assim familiarizando-nos com a comunicação do código executado no navegador com o back-end.
+Já estamos trabalhando há um tempo apenas no "front-end", ou seja, com as funcionalidades do lado do cliente (navegador). Começaremos a trabalhar no "back-end", ou seja, com as funcionalidades do lado do servidor na [Parte 3](/ptbr/part3) deste curso. Contudo, agora daremos um passo nessa direção, assim familiarizando-nos com a comunicação do código executado no navegador com o back-end.
 
 Vamos usar uma ferramenta destinada a ser usada durante a fase de desenvolvimento de software chamada [JSON Server](https://github.com/typicode/json-server), que atuará como nosso servidor.
 
@@ -59,13 +59,13 @@ A partir de agora, a ideia será salvar as notas no servidor, que, neste caso, s
 
 O json-server armazena todos os dados no arquivo <i>db.json</i>, que reside no servidor. No mundo real, os dados seriam armazenados em algum tipo de banco de dados. No entanto, o json-server é uma ferramenta muito útil que permite o uso da funcionalidade de um servidor na fase de desenvolvimento sem a necessidade de programar nenhum desses outros softwares.
 
-Nos familiarizaremos com os princípios de implementação das funcionalidades de um servidor com mais detalhes na [parte 3](/pt/part3) deste curso.
+Nos familiarizaremos com os princípios de implementação das funcionalidades de um servidor com mais detalhes na [parte 3](/ptbr/part3) deste curso.
 
 ### O navegador como ambiente de execução
 
 Nossa primeira tarefa é buscar as notas já existentes em nossa aplicação React a partir do endereço <http://localhost:3001/notes>.
 
-Na [projeto-exemplo](/pt/part0/fundamentos_de_aplicacoes_web#executando-a-logica-da-aplicacao-no-navegador) da Parte 0, já aprendemos uma maneira de buscar dados de um servidor usando JavaScript. O código no exemplo estava buscando os dados usando [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest), também conhecido como uma "requisição HTTP" feita usando um objeto XHR. Esta é uma técnica introduzida em 1999, no qual todos os navegadores têm oferecido suporte a ela já faz um bom tempo.
+Na [projeto-exemplo](/ptbr/part0/fundamentos_de_aplicacoes_web#executando-a-logica-da-aplicacao-no-navegador) da Parte 0, já aprendemos uma maneira de buscar dados de um servidor usando JavaScript. O código no exemplo estava buscando os dados usando [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest), também conhecido como uma "requisição HTTP" feita usando um objeto XHR. Esta é uma técnica introduzida em 1999, no qual todos os navegadores têm oferecido suporte a ela já faz um bom tempo.
 
 Já não é mais recomendado o uso do objeto XHR, e a maioria dos navegadores já suportam amplamente o método [fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch) ("ir buscar" ou "buscar"), que é baseado em chamadas conhecidas como [promessas](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) (promises), ao invés do modelo de gerenciamento de eventos utilizado pelo XHR.
 
@@ -235,7 +235,7 @@ Agora podemos, convenientemente e sem definições de parâmetros, iniciar o jso
 npm run server
 ```
 
-Vamos ficar mais familiarizados com a ferramenta _npm_ na [terceira parte do curso](/pt/part3).
+Vamos ficar mais familiarizados com a ferramenta _npm_ na [terceira parte do curso](/ptbr/part3).
 
 **N.B.:** O json-server que foi iniciado anteriormente deve ser encerrado antes de iniciar um novo; caso contrário, haverá problemas:
 

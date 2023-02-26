@@ -355,35 +355,35 @@
       ]
     }
   ],
-  "pt": [
+  "ptbr": [
     {
       "title": "Quanto custa este curso?",
       "text": [
-        "O curso é totalmente gratuito. Você pode obter um certificado e até mesmo créditos ECTS de graça da Universidade de Helsinque. Entre <a href='/pt/part0/informacoes_gerais#das-partes-e-conclusao'>aqui</a> para ver mais informações."
+        "O curso é totalmente gratuito. Você pode obter um certificado e até mesmo créditos ECTS de graça da Universidade de Helsinque. Entre <a href='/ptbr/part0/informacoes_gerais#das-partes-e-conclusao'>aqui</a> para ver mais informações."
       ]
     },
     {
       "title": "Como eu me inscrevo no curso?",
       "text": [
-        "Você não precisa se inscrever a não ser que queira fazer a prova do curso. Você pode encontrar mais informações <a href='/pt/part0/informacoes_gerais#das-partes-e-conclusao'>aqui</a>. <br><br> Não é necessário se inscrever para obter o certificado do curso."
+        "Você não precisa se inscrever a não ser que queira fazer a prova do curso. Você pode encontrar mais informações <a href='/ptbr/part0/informacoes_gerais#das-partes-e-conclusao'>aqui</a>. <br><br> Não é necessário se inscrever para obter o certificado do curso."
       ]
     },
     {
       "title": "Quantos créditos vale o curso?",
       "text": [
-        "O curso vale de 5 a 14 créditos ECTS <a href='/pt/part0/informacoes_gerais#das-partes-e-conclusao'>dependendo da quantidade de exercícios enviados</a>. Depois de concluir o curso, você pode continuar a aprofundar seus conhecimentos sobre o assunto fazendo o projeto Full Stack de 1-10 créditos ECTS <a href='/pt/part0/informacoes_gerais#projeto-full-stack'>aqui</a>."
+        "O curso vale de 5 a 14 créditos ECTS <a href='/ptbr/part0/informacoes_gerais#das-partes-e-conclusao'>dependendo da quantidade de exercícios enviados</a>. Depois de concluir o curso, você pode continuar a aprofundar seus conhecimentos sobre o assunto fazendo o projeto Full Stack de 1-10 créditos ECTS <a href='/ptbr/part0/informacoes_gerais#projeto-full-stack'>aqui</a>."
       ]
     },
     {
       "title": "Qual é o prazo para a entrega dos exercícios e a prova?",
       "text": [
-        "Você pode completar o curso no seu próprio ritmo, e não há prazos para nada. O curso tem uma pausa de manutenção em março, mas isso não afeta muita coisa. Entre <a href='/pt/part0/informacoes_gerais#continuando-o-curso-no-ano-de-2023'>aqui</a> para mais detalhes."
+        "Você pode completar o curso no seu próprio ritmo, e não há prazos para nada. O curso tem uma pausa de manutenção em março, mas isso não afeta muita coisa. Entre <a href='/ptbr/part0/informacoes_gerais#continuando-o-curso-no-ano-de-2023'>aqui</a> para mais detalhes."
       ]
     },
     {
       "title": "Como envio os exercícios?",
       "text": [
-        "Os exercícios são enviadas para o GitHub e marcados como concluídos no sistema de envio de exercícios. Você pode ler mais sobre a forma de envio <a href='/pt/part0/informacoes_gerais#enviando-exercicios'>aqui</a>."
+        "Os exercícios são enviadas para o GitHub e marcados como concluídos no sistema de envio de exercícios. Você pode ler mais sobre a forma de envio <a href='/ptbr/part0/informacoes_gerais#enviando-exercicios'>aqui</a>."
       ]
     },
     {
@@ -419,13 +419,13 @@
     {
       "title": "Eu comecei o curso no ano passado, como devo continuar?",
       "text": [
-        "Leia mais <a href='/pt/part0/informacoes_gerais#aproveitamento-de-um-curso-concluido-anteriormente'>aqui</a>"
+        "Leia mais <a href='/ptbr/part0/informacoes_gerais#aproveitamento-de-um-curso-concluido-anteriormente'>aqui</a>"
       ]
     },
     {
       "title": "Ouvi dizer que eu poderia conseguir uma entrevista de emprego ao completar o curso.",
       "text": [
-        "É verdade. Se você completar o curso com todos os créditos e completar o trabalho prático com 10 créditos, você consegue uma entrevista de emprego com nossos parceiros. Leia mais <a href='/pt/part0/informacoes_gerais#promessa-de-entrevista'>aqui</a>. Você precisa residir na Finlândia para participar dessas entrevistas."
+        "É verdade. Se você completar o curso com todos os créditos e completar o trabalho prático com 10 créditos, você consegue uma entrevista de emprego com nossos parceiros. Leia mais <a href='/ptbr/part0/informacoes_gerais#promessa-de-entrevista'>aqui</a>. Você precisa residir na Finlândia para participar dessas entrevistas."
       ]
     }
   ]

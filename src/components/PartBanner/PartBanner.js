@@ -69,7 +69,7 @@ const partNameTranslations = {
     'Conteneurs',
     'Utilisation de bases de donées relationnelles'
   ],
-  pt: [
+  ptbr: [
     'Fundamentos de aplicações web',
     'Introdução à biblioteca React',
     'Comunicação com o servidor',

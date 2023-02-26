@@ -2,7 +2,7 @@
 mainImage: ../../../images/part-1.svg
 part: 1
 letter: a
-lang: pt
+lang: ptbr
 ---
 
 <div class="content">
@@ -69,7 +69,7 @@ Por padrão, o arquivo <i>public/index.html</i> não contém nenhum marcador HTM
 
 ```html
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="ptbr">
   <head>
       conteúdo não mostrado ...
   </head>
@@ -209,7 +209,7 @@ const App = () => {
 }
 ```
 
-A compilação é gerenciada pelo [Babel](https://babeljs.io/repl/). Projetos criados com *create-react-app* são configurados para compilar automaticamente. Vamos aprender mais sobre esse tópico na [Parte 7](/pt/part7) deste curso.
+A compilação é gerenciada pelo [Babel](https://babeljs.io/repl/). Projetos criados com *create-react-app* são configurados para compilar automaticamente. Vamos aprender mais sobre esse tópico na [Parte 7](/ptbr/part7) deste curso.
 
 Também é possível escrever React como "JavaScript puro" sem usar JSX. Embora não seja recomendável.
 
@@ -271,7 +271,7 @@ const App = () => {
 
 Escrever componentes em React é fácil, e utilizando combinação de componentes mesmo uma aplicação mais complexa pode ser relativamente mantida. De fato, uma das filosofias fundamentais do React é criar aplicações a partir de muitos componentes que são especializados e reutilizáveis.
 
-Outra forte convenção é a ideia de um componente <i>root</i> chamado <i>App</i> no topo da árvore de componentes da aplicação. No entanto, como aprenderemos na [Parte 6](/pt/part6), há situações em que o componente <i>App</i> não é exatamente a raiz (root), mas é envolto em um componente utilitário apropriado.
+Outra forte convenção é a ideia de um componente <i>root</i> chamado <i>App</i> no topo da árvore de componentes da aplicação. No entanto, como aprenderemos na [Parte 6](/ptbr/part6), há situações em que o componente <i>App</i> não é exatamente a raiz (root), mas é envolto em um componente utilitário apropriado.
 
 ### props: passando dados para componentes
 
@@ -540,7 +540,7 @@ Os exercícios são enviados via GitHub, marcando os exercícios como concluído
 
 Os exercícios são enviados **uma parte de cada vez**. Quando você tiver enviado os exercícios para uma parte, não poderá mais enviar nenhum exercício não feito para essa parte.
 
-Note que nesta parte há [mais exercícios](/pt/part1/um_estado_mais_complexo_e_depuracao_de_aplicacoes_react#exercicios-1-6-a-1-14) além dos encontrados abaixo. <i>Não envie seus exercícios</i> até que você tenha concluído todos os exercícios desta parte.
+Note que nesta parte há [mais exercícios](/ptbr/part1/um_estado_mais_complexo_e_depuracao_de_aplicacoes_react#exercicios-1-6-a-1-14) além dos encontrados abaixo. <i>Não envie seus exercícios</i> até que você tenha concluído todos os exercícios desta parte.
 
 É possível colocar todos os exercícios em um mesmo repositório ou usar múltiplos repositórios diferentes. Se você enviar exercícios de diferentes partes para o mesmo repositório, dê nomes apropriados às suas pastas.
 
@@ -660,6 +660,6 @@ const Content = ... {
 }
 ```
 
-Nossa aplicação passa informações de uma maneira bastante primitiva no momento, já que está baseada em variáveis individuais. Vamos corrigir isso na [Parte 2](/pt/part2).
+Nossa aplicação passa informações de uma maneira bastante primitiva no momento, já que está baseada em variáveis individuais. Vamos corrigir isso na [Parte 2](/ptbr/part2).
 
 </div>

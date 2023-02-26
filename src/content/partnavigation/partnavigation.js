@@ -419,7 +419,7 @@ module.exports = {
       c: 'Migrations, relations plusieurs-à-plusieurs',
     },
   },
-  pt: {
+  ptbr: {
     '0': {
       a: 'Informações gerais',
       b: 'Fundamentos de aplicações web',

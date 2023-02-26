@@ -2,7 +2,7 @@
 mainImage: ../../../images/part-2.svg
 part: 2
 letter: d
-lang: pt
+lang: ptbr
 ---
 
 <div class="content">
@@ -13,7 +13,7 @@ Quando criamos notas em nossa aplicação, naturalmente queremos armazená-las e
 
 O json-server não corresponde exatamente à descrição fornecida pela [definição](https://en.wikipedia.org/wiki/Representational_state_transfer) do que é uma API REST, e nem mesmo a maioria das outras APIs que afirmam ser RESTful.
 
-Vamos nos aprofundar mais em REST na [próxima parte](/pt/part3) do curso. Porém, é importante já nos familiarizarmos com algumas das [convenções](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) usadas pelo json-server e APIs REST em geral. Em particular, vamos dar uma olhada no uso convencional de [rotas](https://github.com/typicode/json-server#routes) (routes) — também conhecidas como URLs —, e os tipos de requisição HTTP em REST.
+Vamos nos aprofundar mais em REST na [próxima parte](/ptbr/part3) do curso. Porém, é importante já nos familiarizarmos com algumas das [convenções](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) usadas pelo json-server e APIs REST em geral. Em particular, vamos dar uma olhada no uso convencional de [rotas](https://github.com/typicode/json-server#routes) (routes) — também conhecidas como URLs —, e os tipos de requisição HTTP em REST.
 
 ### REST
 
@@ -55,7 +55,7 @@ Quando tentamos criar uma nova nota, a seguinte saída aparece no console:
 
 O recurso de nota recém-criado é armazenado no valor da propriedade <i>data</i> do objeto _response_.
 
-Por vezes é útil inspecionar as requisições HTTP na guia <i>Rede</i> das Ferramentas do Desenvolvedor do Chrome (ou do navegador que esteja utilizando), recurso esse que foi amplamente usado no início da [Parte 0](/pt/part0/fundamentos_de_aplicacoes_web#http-get).
+Por vezes é útil inspecionar as requisições HTTP na guia <i>Rede</i> das Ferramentas do Desenvolvedor do Chrome (ou do navegador que esteja utilizando), recurso esse que foi amplamente usado no início da [Parte 0](/ptbr/part0/fundamentos_de_aplicacoes_web#http-get).
 
 Podemos usar o inspetor para verificar se os cabeçalhos enviados na requisição POST são os que esperávamos:
 
@@ -90,7 +90,7 @@ addNote = (event) => {
 }
 ```
 
-A nova nota retornada pelo servidor back-end é adicionada à lista de notas no estado da nossa aplicação seguindo a forma habitual do uso da função <em>setNotes</em> e, em seguida, reinicia o formulário de criação de notas. Um [detalhe importante](/pt/part1/um_estado_mais_complexo_e_depuracao_de_aplicacoes_react#gerenciando-arrays) a lembrar é que o método <em>concat</em> não muda o estado original do componente, mas cria uma nova cópia da lista.
+A nova nota retornada pelo servidor back-end é adicionada à lista de notas no estado da nossa aplicação seguindo a forma habitual do uso da função <em>setNotes</em> e, em seguida, reinicia o formulário de criação de notas. Um [detalhe importante](/ptbr/part1/um_estado_mais_complexo_e_depuracao_de_aplicacoes_react#gerenciando-arrays) a lembrar é que o método <em>concat</em> não muda o estado original do componente, mas cria uma nova cópia da lista.
 
 Assim que os dados retornados pelo servidor começam a ter efeito no comportamento das nossas aplicações web, somos imediatamente confrontados com um conjunto inteiro de novos desafios decorrentes como, por exemplo, a assincronicidade da comunicação. Isso necessita de novas estratégias de depuração, como o "console.log" e outros meios de depuração que se tornam cada vez mais importantes. Também devemos desenvolver uma compreensão suficiente dos princípios do ambiente de execução JavaScript e dos componentes React. Só ficar adivinhando não será suficiente.
 
@@ -258,7 +258,7 @@ Esse truque do método <em>map</em> pode parecer um pouco estranho agora no iní
 
 ### Separando a Comunicação com o Back-end em um Módulo Único
 
-O componente <i>App</i> ficou um pouco pesado após adicionar o código para se comunicar com o servidor back-end. No espírito do [princípio da responsabilidade única](https://en.wikipedia.org/wiki/Single_responsibility_principle) (single responsibility principle), achamos sensato extrair esta comunicação em seu próprio [módulo](/pt/part2/renderizacao_de_uma_colecao_e_modulos#refatorando-modulos).
+O componente <i>App</i> ficou um pouco pesado após adicionar o código para se comunicar com o servidor back-end. No espírito do [princípio da responsabilidade única](https://en.wikipedia.org/wiki/Single_responsibility_principle) (single responsibility principle), achamos sensato extrair esta comunicação em seu próprio [módulo](/ptbr/part2/renderizacao_de_uma_colecao_e_modulos#refatorando-modulos).
 
 Vamos criar um diretório <i>src/services</i> e adicionar lá um arquivo chamado <i>notes.js</i>:
 
@@ -603,7 +603,7 @@ Quando tentamos mudar a importância da nota, vemos a seguinte mensagem de erro 
 
 A aplicação deve ser capaz de lidar com estes tipos de erro de forma elegante. Os usuários não serão capazes de dizer que ocorreu um erro a menos que estejam com o console aberto. A única maneira de o erro ser visto na aplicação é a importância da nota não ser alternada quando se clica no botão.
 
-Mencionamos [anteriormente](/pt/part2/obtendo_dados_do_servidor#axios-e-promessas-promises) que uma promessa pode estar em um dos três estados diferentes. Quando uma requisição HTTP falha, a promessa associada é <i>rejeitada</i>. O nosso código atual não gerencia por nenhum meio essa rejeição.
+Mencionamos [anteriormente](/ptbr/part2/obtendo_dados_do_servidor#axios-e-promessas-promises) que uma promessa pode estar em um dos três estados diferentes. Quando uma requisição HTTP falha, a promessa associada é <i>rejeitada</i>. O nosso código atual não gerencia por nenhum meio essa rejeição.
 
 A rejeição de uma promessa é [gerenciada](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) fornecendo ao método <em>then</em> uma segunda função callback, que é chamada na situação em que a promessa é rejeitada.
 
@@ -701,7 +701,7 @@ Desenvolvimento Full Stack é algo <i>extremamente difícil</i>, e é por isso q
 - Eu vou progredir aos poucos, passo a passo;
 - Eu escreverei muitas instruções _console.log_ para ter certeza de que estou entendendo como o código se comporta e para me ajudar a identificar os erros;
 - Se meu código não funcionar, não escreverei mais nenhuma linha no código. Em vez disso, começarei a excluir o código até que funcione ou retornarei ao estado em que tudo ainda estava funcionando; e
-- Quando eu pedir ajuda no canal do Discord ou Telegram do curso ou em outro lugar, formularei minhas perguntas de forma adequada. Veja [aqui](/pt/part0/informacoes_gerais#como-pedir-ajuda-no-discord-telegam) como pedir ajuda.
+- Quando eu pedir ajuda no canal do Discord ou Telegram do curso ou em outro lugar, formularei minhas perguntas de forma adequada. Veja [aqui](/ptbr/part0/informacoes_gerais#como-pedir-ajuda-no-discord-telegam) como pedir ajuda.
 
 </div>
 
@@ -740,7 +740,7 @@ const delete = (id) => {
 
 <h4>2.15*: The Phonebook — 10º passo</h4>
 
-<i>Por que há um asterisco na atividade? Entre [aqui](/pt/part0/informacoes_gerais#fazendo-o-curso) para saber o motivo.</i>
+<i>Por que há um asterisco na atividade? Entre [aqui](/ptbr/part0/informacoes_gerais#fazendo-o-curso) para saber o motivo.</i>
 
 Altere a funcionalidade para que, caso um número seja adicionado a um usuário já existente, o novo número substitua o antigo. É recomendável usar o método HTTP PUT para atualizar o número de telefone.
 
