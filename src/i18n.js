@@ -5,7 +5,7 @@ import fi from './locales/fi';
 import zh from './locales/zh';
 import es from './locales/es';
 import fr from './locales/fr';
-import pt from './locales/pt';
+import ptbr from './locales/ptbr';
 
 const resources = {
   en,
@@ -13,7 +13,7 @@ const resources = {
   zh,
   es,
   fr,
-  pt,
+  ptbr,
 };
 
 i18n.init({

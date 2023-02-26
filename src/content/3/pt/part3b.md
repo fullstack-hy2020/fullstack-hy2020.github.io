@@ -2,12 +2,12 @@
 mainImage: ../../../images/part-3.svg
 part: 3
 letter: b
-lang: pt
+lang: ptbr
 ---
 
 <div class="content">
 
-Em seguida, vamos conectar o front-end que fizemos na [Parte 2](/pt/part2) ao nosso próprio back-end.
+Em seguida, vamos conectar o front-end que fizemos na [Parte 2](/ptbr/part2) ao nosso próprio back-end.
 
 Na parte anterior, o front-end permitia requisições da lista de notas do json-server que tínhamos como back-end, a partir do endereço http://localhost:3001/notes.
 A estrutura de URL do nosso back-end agora é um pouco diferente, pois as notas podem ser encontradas em http://localhost:3001/api/notes. Vamos alterar o atributo __baseUrl__ no <i>src/services/notes.js</i> assim:
@@ -253,7 +253,7 @@ Quando a aplicação é implantada (deployed), é necessário criar um [build de
 
 Um build de produção de aplicações gerado com <i>create-react-app</i> pode ser criado com o comando [npm run build](https://github.com/facebookincubator/create-react-app#npm-run-build-or-yarn-build).
 
-Vamos executar esse comando a partir do <i>diretório raiz do projeto front-end de notas</i> que desenvolvemos na [Parte 2](/pt/part2).
+Vamos executar esse comando a partir do <i>diretório raiz do projeto front-end de notas</i> que desenvolvemos na [Parte 2](/ptbr/part2).
 
 Isso cria um diretório chamado <i>build</i> (que contém o único arquivo HTML da nossa aplicação, <i>index.html</i>) que contém o diretório <i>static</i>. Uma versão [minificada](<https://en.wikipedia.org/wiki/Minification_(programming)>) do código JavaScript da nossa aplicação será gerada no diretório <i>static</i>. Embora o código da aplicação esteja em vários arquivos, todo o JavaScript será minificado em um arquivo. Todo o código de todas as dependências da aplicação também será minificado neste único arquivo.
 
@@ -311,7 +311,7 @@ A aplicação agora pode ser usada no endereço <http://localhost:3001> do <i>ba
 
 ![Captura de tela da aplicação Notes](../../images/3/28new.png)
 
-Nossa aplicação agora funciona exatamente como o exemplo de [Aplicação de Página Única](/pt/part0/fundamentos_de_aplicacoes_web#aplicacao-de-pagina-unica-spa-single-page-application) que estudamos na Parte 0. 
+Nossa aplicação agora funciona exatamente como o exemplo de [Aplicação de Página Única](/ptbr/part0/fundamentos_de_aplicacoes_web#aplicacao-de-pagina-unica-spa-single-page-application) que estudamos na Parte 0. 
 
 Quando usamos um navegador para acessar o endereço http://localhost:3001, o servidor retorna o arquivo <i>index.html</i> do repositório <i>build</i>. O conteúdo resumido do arquivo é o seguinte:
 
@@ -453,7 +453,7 @@ Após a reinicialização, o ambiente de desenvolvimento React funcionará como 
 
 Agora o front-end já funciona bem: conecta-se ao servidor tanto no modo de desenvolvimento quanto no de produção.
 
-Um aspecto negativo da nossa abordagem é o quão complicado é implantar o front-end. Implantar uma nova versão requer a geração de um novo build de produção do front-end e a cópia dele para o repositório do back-end. Isso torna a criação de um [pipeline de implantação](https://martinfowler.com/bliki/DeploymentPipeline.html) automatizado mais difícil. Pipeline de implantação refere-se a uma maneira automatizada e controlada de mover o código do computador do desenvolvedor por meio de diferentes testes e verificações de qualidade até o ambiente de produção. A criação de um pipeline de implantação é o tema da [Parte 11](/pt/part11) deste curso.
+Um aspecto negativo da nossa abordagem é o quão complicado é implantar o front-end. Implantar uma nova versão requer a geração de um novo build de produção do front-end e a cópia dele para o repositório do back-end. Isso torna a criação de um [pipeline de implantação](https://martinfowler.com/bliki/DeploymentPipeline.html) automatizado mais difícil. Pipeline de implantação refere-se a uma maneira automatizada e controlada de mover o código do computador do desenvolvedor por meio de diferentes testes e verificações de qualidade até o ambiente de produção. A criação de um pipeline de implantação é o tema da [Parte 11](/ptbr/part11) deste curso.
 
 Existem várias maneiras de conseguir fazer isso (por exemplo, colocando o código do back-end e do front-end [no mesmo repositório](https://github.com/mars/heroku-cra-node)), mas não entraremos nesses detalhes agora.
 

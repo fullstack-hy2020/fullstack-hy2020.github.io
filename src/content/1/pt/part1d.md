@@ -2,7 +2,7 @@
 mainImage: ../../../images/part-1.svg
 part: 1
 letter: d
-lang: pt
+lang: ptbr
 ---
 
 <div class="content">
@@ -383,7 +383,7 @@ E em todos os outros casos, o componente renderiza o histórico de cliques:
 
 O componente <i>Historico</i> renderiza elementos React completamente diferentes dependendo do estado da aplicação. Isso é chamado de <i>renderização condicional</i> (conditional rendering).
 
-React também oferece muitas outras formas de fazer [renderização condicional](https://reactjs.org/docs/conditional-rendering.html). Veremos isso na prática na [Parte 2](/pt/part2).
+React também oferece muitas outras formas de fazer [renderização condicional](https://reactjs.org/docs/conditional-rendering.html). Veremos isso na prática na [Parte 2](/ptbr/part2).
 
 Vamos fazer mais uma modificação a nossa aplicação, refatorando-a para usar o componente _Botao_ que definimos anteriormente:
 
@@ -1118,7 +1118,7 @@ Programar é difícil, e é por isso que eu usarei todos os meios possíveis par
 - Eu vou progredir aos poucos, passo a passo;
 - Eu escreverei muitas instruções _console.log_ para ter certeza de que estou entendendo como o código se comporta e para me ajudar a identificar os erros;
 - Se meu código não funcionar, não escreverei mais nenhuma linha no código. Em vez disso, começarei a excluir o código até que funcione ou retornarei ao estado em que tudo ainda estava funcionando; e
-- Quando eu pedir ajuda no canal do Discord ou Telegram do curso ou em outro lugar, formularei minhas perguntas de forma adequada. Veja [aqui](/pt/part0/informacoes_gerais#como-pedir-ajuda-no-discord-telegam) como pedir ajuda.
+- Quando eu pedir ajuda no canal do Discord ou Telegram do curso ou em outro lugar, formularei minhas perguntas de forma adequada. Veja [aqui](/ptbr/part0/informacoes_gerais#como-pedir-ajuda-no-discord-telegam) como pedir ajuda.
 
 </div>
 
@@ -1144,7 +1144,7 @@ Se e <i>quando</i> você encontrar uma mensagem de erro...
 
 > <i>Objetos não são válidos como elementos-filho React.</i>
 
-... lembre-se do que foi explicado [aqui](/pt/part1/introducao_a_biblioteca_react#nao-renderize-objetos).
+... lembre-se do que foi explicado [aqui](/ptbr/part1/introducao_a_biblioteca_react#nao-renderize-objetos).
 
 **N.B.:** o conteúdo dos exercícios foram deixados no idioma original da tradução (inglês) por questões de conveniência, visto a revisão que os mantenedores do curso devem fazer no código enviado ao sistema de avaliação da Universidade de Helsinque. Desta forma, escreva suas aplicações utilizando os mesmos termos usados nas variáveis, componentes, etc que estão em inglês.
 

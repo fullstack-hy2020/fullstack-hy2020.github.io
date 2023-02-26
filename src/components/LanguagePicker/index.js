@@ -19,9 +19,19 @@ const LanguagePicker = ({
 
   const className = cn(classNameProp, styles.select);
 
+  const fontSizeStyle = {
+    fontSize: '1em'
+  };
+
+  if (value === 'ptbr') {
+    fontSizeStyle.fontSize = '0.65em'
+  };
+
   return (
     /*eslint jsx-a11y/no-onchange: "off" */
     <>
+    {console.log(value)}
+    {console.log(fontSizeStyle)}
       <SrOnly>
         <label htmlFor="language-select">
           {t('navigation:LanguagePickerSrLabel')}
@@ -32,6 +42,7 @@ const LanguagePicker = ({
         value={value}
         onChange={selectOnChange}
         className={className}
+        style={fontSizeStyle }
       >
         {TRANSLATION_LANGUAGE_OPTIONS.map(({ value: optionValue, label }) => (
           <option value={optionValue} key={optionValue}>

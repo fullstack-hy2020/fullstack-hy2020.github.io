@@ -2,7 +2,7 @@
 mainImage: ../../../images/part-0.svg
 part: 0
 letter: b
-lang: pt
+lang: ptbr
 ---
 
 <div class="content">
@@ -11,7 +11,7 @@ Antes de começarmos a programar, passaremos por alguns princípios de desenvolv
 
 A aplicação serve apenas para demonstrar alguns conceitos básicos do curso e, de maneira alguma, é um exemplo de <i>como</i> uma aplicação web moderna deve ser feita. Pelo contrário, ela demonstra algumas técnicas antigas de desenvolvimento web, que até poderiam ser consideradas como <i>práticas ruins</i> hoje em dia.
 
-O código seguirá as melhores práticas contemporâneas a partir da [parte 1](/pt/part1) em diante.
+O código seguirá as melhores práticas contemporâneas a partir da [parte 1](/ptbr/part1) em diante.
 
 Abra a [aplicação de exemplo](https://studies.cs.helsinki.fi/exampleapp) em seu navegador. Às vezes demora um pouco.
 
@@ -162,7 +162,7 @@ xhttp.open('GET', '/data.json', true)
 xhttp.send()
 ```
 
-Os detalhes do código não são importantes agora, mas algum código foi incluído para dar vida às imagens e ao texto. Começaremos a programar de verdade na [parte 1](/pt/part1). O código-exemplo nesta parte, na realidade, não tem relação alguma com as técnicas de programação deste curso.
+Os detalhes do código não são importantes agora, mas algum código foi incluído para dar vida às imagens e ao texto. Começaremos a programar de verdade na [parte 1](/ptbr/part1). O código-exemplo nesta parte, na realidade, não tem relação alguma com as técnicas de programação deste curso.
 
 > Alguns podem se perguntar o porquê do objeto "xhttp" ser usado aqui em vez do moderno "fetch" (ir buscar). Isso se deve ao fato de não querermos entrar no assunto das "Promises" (promessas) ainda, e o código ter um papel secundário nesta parte. Voltaremos às formas modernas de fazer requisições ao servidor na Parte 2.
 
@@ -481,11 +481,11 @@ A página "Notes", da nossa aplicação, segue um estilo de desenvolvimento web 
 
 [AJAX](<https://en.wikipedia.org/wiki/Ajax_(programming)>) (Asynchronous JavaScript and XML [JavaScript Assíncrono e XML]) é um termo que foi introduzido em fevereiro de 2005 com base em avanços na tecnologia do navegador para descrever uma nova abordagem revolucionária que permitia o carregamento de conteúdo em páginas web usando JavaScript embutido dentro do HTML, sem a necessidade de re-renderizar a página.
 
-Antes da Era AJAX, todas as páginas web funcionavam como a [aplicação web tradicional](/pt/part0/fundamentos_de_aplicacoes_web#aplicacoes-web-tradicionais) que vimos anteriormente neste capítulo. Todos os dados mostrados na página eram buscados com o código HTML gerado pelo servidor.
+Antes da Era AJAX, todas as páginas web funcionavam como a [aplicação web tradicional](/ptbr/part0/fundamentos_de_aplicacoes_web#aplicacoes-web-tradicionais) que vimos anteriormente neste capítulo. Todos os dados mostrados na página eram buscados com o código HTML gerado pelo servidor.
 
 A página "Notes" usa AJAX para buscar os dados das notas. O envio do formulário ainda usa o mecanismo tradicional de envio de formulários web.
 
-As URLs da aplicação refletem os tempos antigos e despreocupados. Os dados JSON são buscados na URL <https://studies.cs.helsinki.fi/exampleapp/data.json> e novas notas são enviadas para a URL <https://studies.cs.helsinki.fi/exampleapp/new_note>. Hoje em dia, URLs como essas não seriam consideradas aceitáveis, pois não seguem as convenções geralmente reconhecidas de [APIs RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) (Representational State Transfer (REST) [Transferência de Estado Representacional]), que veremos com mais detalhes na [parte 3](/pt/part3).
+As URLs da aplicação refletem os tempos antigos e despreocupados. Os dados JSON são buscados na URL <https://studies.cs.helsinki.fi/exampleapp/data.json> e novas notas são enviadas para a URL <https://studies.cs.helsinki.fi/exampleapp/new_note>. Hoje em dia, URLs como essas não seriam consideradas aceitáveis, pois não seguem as convenções geralmente reconhecidas de [APIs RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) (Representational State Transfer (REST) [Transferência de Estado Representacional]), que veremos com mais detalhes na [parte 3](/ptbr/part3).
 
 O termo AJAX agora é tão reconhecível que quase todo mundo conhece. Porém, o termo desapareceu e a nova geração nem sequer ouviu falar dele.
 
@@ -493,7 +493,7 @@ O termo AJAX agora é tão reconhecível que quase todo mundo conhece. Porém, o
 
 Em nossa aplicação de exemplo, a página inicial funciona como uma página web tradicional: toda a lógica está no servidor e o navegador só renderiza o HTML conforme instruído.
 
-A página "Notes" transfere algumas dessas responsabilidades para o navegador, gerando o código HTML para notas que já existem. O navegador realiza essa tarefa executando o código JavaScript que ele baixou do servidor. O código baixa as notas do servidor como dados JSON e adiciona elementos HTML para exibir as notas na página usando a [API DOM](/pt/part0/fundamentos_de_aplicacoes_web#modelo-de-documento-por-objetos-dom-document-object-model).
+A página "Notes" transfere algumas dessas responsabilidades para o navegador, gerando o código HTML para notas que já existem. O navegador realiza essa tarefa executando o código JavaScript que ele baixou do servidor. O código baixa as notas do servidor como dados JSON e adiciona elementos HTML para exibir as notas na página usando a [API DOM](/ptbr/part0/fundamentos_de_aplicacoes_web#modelo-de-documento-por-objetos-dom-document-object-model).
 
 Nos últimos anos, o estilo [SPA](https://en.wikipedia.org/wiki/Single-page_application) (Aplicação de Página Única) de criação de aplicações web surgiu. Os sites de estilo SPA não baixam todas as suas páginas separadamente do servidor como o nosso exemplo de aplicação faz, mas incluem apenas uma página HTML baixada do servidor, cujo conteúdo é manipulado com o código JavaScript que é executado no navegador.
 
@@ -655,7 +655,7 @@ Aprenda sobre os conceitos básicos de formulários HTML lendo o tutorial do Moz
 
   <h4>0.4: Novo diagrama das notas</h4>
 
-Na seção [Carregando uma página contendo JavaScript — revisão](/pt/part0/fundamentos_de_aplicacoes_web#carregando-uma-pagina-contendo-java-script-revisao), a cadeia de eventos causada pela abertura da página <https://studies.cs.helsinki.fi/exampleapp/notes> é retratada como um [diagrama de sequência](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/).
+Na seção [Carregando uma página contendo JavaScript — revisão](/ptbr/part0/fundamentos_de_aplicacoes_web#carregando-uma-pagina-contendo-java-script-revisao), a cadeia de eventos causada pela abertura da página <https://studies.cs.helsinki.fi/exampleapp/notes> é retratada como um [diagrama de sequência](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/).
 
 O diagrama foi feito como um arquivo GitHub Markdown usando a sintaxe [Mermaid](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams), como o exemplo a seguir:
 
@@ -695,7 +695,7 @@ Se necessário, mostre operações no navegador ou no servidor como comentários
 
 O diagrama não precisa ser um diagrama de sequência. Qualquer maneira sensata de representar os eventos já estará de bom tamanho.
 
-Todas as informações necessárias para fazer este e os próximos dois exercícios podem ser encontradas no texto [desta parte](/pt/part0/fundamentos_de_aplicacoes_web#formularios-forms-e-http-post).
+Todas as informações necessárias para fazer este e os próximos dois exercícios podem ser encontradas no texto [desta parte](/ptbr/part0/fundamentos_de_aplicacoes_web#formularios-forms-e-http-post).
 A ideia desses exercícios é fazer você reler o texto e pensar no que está acontecendo. Não é necessário ler o [código](https://github.com/mluukkai/example_app) da aplicação, mas não deixa de ser algo possível.
 
 Você pode fazer os diagramas com qualquer programa, mas talvez a maneira mais fácil e melhor de se fazer diagramas seja utilizando a sintaxe [Mermaid](https://github.com/mermaid-js/mermaid#sequence-diagram-docs---live-editor), agora implementada em páginas Markdown do [GitHub](https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/)!

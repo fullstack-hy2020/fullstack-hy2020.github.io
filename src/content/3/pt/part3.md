@@ -1,7 +1,7 @@
 ---
 mainImage: ../../../images/part-3.svg
 part: 3
-lang: pt
+lang: ptbr
 ---
 
 <div class="intro">

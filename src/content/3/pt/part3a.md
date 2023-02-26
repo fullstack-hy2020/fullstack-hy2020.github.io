@@ -2,7 +2,7 @@
 mainImage: ../../../images/part-3.svg
 part: 3
 letter: a
-lang: pt
+lang: ptbr
 ---
 
 <div class="content">
@@ -13,13 +13,13 @@ Estaremos construindo nosso back-end utilizando [NodeJS](https://nodejs.org/en/)
 
 O conteúdo desta parte do curso foi escrita com base na versão <i>v18.13.0</i> do Node.js. Certifique-se de que a versão do seu Node é pelo menos tão nova quanto a versão utilizada aqui (você pode verificar a versão executando _node -v_ na linha de comando).
 
-Como mencionado na [Parte 1](/pt/part1/java_script), os navegadores ainda não suportam as novas funcionalidades de JavaScript, e é por isso que o código em execução no navegador deve ser <i>transpilado</i> com o [babel](https://babeljs.io/), por exemplo. Mas a situação é diferente com JavaScript em execução no back-end. A versão mais recente do Node suporta a maioria das últimas funcionalidades de JavaScript, então podemos usar as últimas funcionalidades sem ter que transpilar nosso código.
+Como mencionado na [Parte 1](/ptbr/part1/java_script), os navegadores ainda não suportam as novas funcionalidades de JavaScript, e é por isso que o código em execução no navegador deve ser <i>transpilado</i> com o [babel](https://babeljs.io/), por exemplo. Mas a situação é diferente com JavaScript em execução no back-end. A versão mais recente do Node suporta a maioria das últimas funcionalidades de JavaScript, então podemos usar as últimas funcionalidades sem ter que transpilar nosso código.
 
-Nosso objetivo é implementar um back-end que funcione com a aplicação de notas da [Parte 2](/pt/part2/). No entanto, vamos começar com o básico implementando um clássico programa "Olá, mundo!".
+Nosso objetivo é implementar um back-end que funcione com a aplicação de notas da [Parte 2](/ptbr/part2/). No entanto, vamos começar com o básico implementando um clássico programa "Olá, mundo!".
 
 **Note** que nem todas as aplicações e exercícios nesta parte são aplicações React, e não usaremos o utilitário <i>create-react-app</i> para inicializar o projeto para esta aplicação.
 
-Já tínhamos mencionado o [npm](/pt/part2/obtendo_dados_do_servidor#npm) na Parte 2, que é uma ferramenta usada para gerenciar pacotes JavaScript. Na verdade, o npm é originário do ecossistema Node.
+Já tínhamos mencionado o [npm](/ptbr/part2/obtendo_dados_do_servidor#npm) na Parte 2, que é uma ferramenta usada para gerenciar pacotes JavaScript. Na verdade, o npm é originário do ecossistema Node.
 
 Vamos navegar até um diretório apropriado e criar um novo modelo para nossa aplicação com o comando _npm init_. Vamos responder as perguntas apresentadas pelo utilitário, e o resultado será um arquivo <i>package.json</i> gerado automaticamente na raiz do projeto que contém as informações do projeto.
 
@@ -218,7 +218,7 @@ Vamos reiniciar o servidor (você pode encerrá-lo pressionando _Ctrl + C_ no co
 
 O valor <i>application/json</i> no cabeçalho <i>Content-Type</i> informa o receptor de que os dados estão no formato JSON. O array _notes_ é transformado em JSON com o método <em>JSON.stringify(notes)</em>.
 
-Quando abrimos o navegador, o formato de exibição das notas é o mesmo que vimos na [Parte 2](/pt/part2/obtendo_dados_do_servidor) quando usamos o [json-server](https://github.com/typicode/json-server) para servir a lista de notas:
+Quando abrimos o navegador, o formato de exibição das notas é o mesmo que vimos na [Parte 2](/ptbr/part2/obtendo_dados_do_servidor) quando usamos o [json-server](https://github.com/typicode/json-server) para servir a lista de notas:
 
 ![dados das notas JSON formatados](../../images/3/2new.png)
 
@@ -430,7 +430,7 @@ Vamos expandir nossa aplicação para que ela forneça a mesma API HTTP RESTful 
 
 Não vamos aprofundar a definição de REST de Fielding ou gastar tempo ponderando sobre o que é ou não RESTful. Em vez disso, adotamos uma visão mais [restrita](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services), preocupando-nos apenas com a típica compreensão de APIs RESTful em aplicações web. A definição original de REST não se limita somente à aplicações web.
 
-Mencionamos na [parte anterior](/pt/part2/alterando_dados_no_servidor#rest) que coisas singulares, como as notas no caso da nossa aplicação, são chamadas de <i>recursos</i> no modo RESTful de pensar. Cada recurso tem uma URL associada que é o endereço exclusivo do recurso.
+Mencionamos na [parte anterior](/ptbr/part2/alterando_dados_no_servidor#rest) que coisas singulares, como as notas no caso da nossa aplicação, são chamadas de <i>recursos</i> no modo RESTful de pensar. Cada recurso tem uma URL associada que é o endereço exclusivo do recurso.
 
 Uma convenção para criar endereços exclusivos é combinar o nome do tipo de recurso com o identificador exclusivo do recurso.
 

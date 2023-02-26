@@ -2,7 +2,7 @@
 mainImage: ../../../images/part-2.svg
 part: 2
 letter: a
-lang: pt
+lang: ptbr
 ---
 
 <div class="content">
@@ -36,7 +36,7 @@ valor de props é [object Object]
 ```
 
 Pelo contrário, quando você passa objetos como argumentos distintos separados por vírgulas para o _console.log_, como no nosso segundo exemplo acima, o conteúdo do objeto é impresso no console do desenvolvedor como strings que são informativas.
-Se necessário, leia mais sobre [depuração de aplicações React](/pt/part1/um_estado_mais_complexo_e_depuracao_de_aplicacoes_react#depuracao-de-aplicacoes-react).
+Se necessário, leia mais sobre [depuração de aplicações React](/ptbr/part1/um_estado_mais_complexo_e_depuracao_de_aplicacoes_react#depuracao-de-aplicacoes-react).
 
 ### Dica: Atalhos (Snippets) do Visual Studio Code
 
@@ -75,15 +75,15 @@ Se operar arrays com operadores funcionais parecer estranho para você, vale a p
 
 Baseado no curso do ano passado, o gerenciamento de eventos provou ser algo difícil. 
 
-Vale a pena ler o capítulo de revisão no final da parte anterior — [Revisão sobre Gerência de Eventos](/pt/part1/um_estado_mais_complexo_e_depuracao_de_aplicacoes_react#revisao-sobre-gerencia-de-eventos) — caso ainda ache que precise estudar mais sobre o assunto.
+Vale a pena ler o capítulo de revisão no final da parte anterior — [Revisão sobre Gerência de Eventos](/ptbr/part1/um_estado_mais_complexo_e_depuracao_de_aplicacoes_react#revisao-sobre-gerencia-de-eventos) — caso ainda ache que precise estudar mais sobre o assunto.
 
-A passagem de gerenciadores de eventos para os componentes-filho do componente <i>App</i> levantou algumas questões. Uma pequena revisão sobre o tópico pode ser encontrada [aqui](/pt/part1/um_estado_mais_complexo_e_depuracao_de_aplicacoes_react#passando-gerenciadores-de-evento-para-componentes-filho).
+A passagem de gerenciadores de eventos para os componentes-filho do componente <i>App</i> levantou algumas questões. Uma pequena revisão sobre o tópico pode ser encontrada [aqui](/ptbr/part1/um_estado_mais_complexo_e_depuracao_de_aplicacoes_react#passando-gerenciadores-de-evento-para-componentes-filho).
 
 ### Renderização de Coleções
 
 **N.B.:** A partir deste momento, os códigos utilizados como exemplo permanecerão no idioma original (inglês), visto que é disponibilizado ao final de cada sessão o repositório onde o código-exemplo pode ser encontrado na íntegra. É muito provável que o estudante se confunda caso os nomes de variáveis, funções, componentes, etc estejam em português, dado que estaria diferente do código disponibilizado no repositório do GitHub, que está em inglês. (nota do tradutor)
 
-Faremos neste momento a lógica da aplicação do lado do cliente (navegador), ou o "front-end", em React, para uma aplicação semelhante à aplicação de exemplo da [Parte 0](/pt/part0).
+Faremos neste momento a lógica da aplicação do lado do cliente (navegador), ou o "front-end", em React, para uma aplicação semelhante à aplicação de exemplo da [Parte 0](/ptbr/part0).
 
 Comecemos com o seguinte (arquivo <i>App.js</i>):
 
@@ -378,7 +378,7 @@ const App = ({ notes }) => {//highlight-line
 }
 ```
 
-Se você esqueceu o que significa desestruturação e como essa ferramenta funciona, por favor, revise a [seção sobre desestruturação](/pt/part1/estado_de_componente_e_gerenciadores_de_eventos#desestruturacao-destructuring).
+Se você esqueceu o que significa desestruturação e como essa ferramenta funciona, por favor, revise a [seção sobre desestruturação](/ptbr/part1/estado_de_componente_e_gerenciadores_de_eventos#desestruturacao-destructuring).
 
 Vamos separar a exibição de uma única nota em seu próprio componente <i>Note</i>: 
 
@@ -574,7 +574,7 @@ Programar é difícil, e é por isso que eu usarei todos os meios possíveis par
 - Eu vou progredir aos poucos, passo a passo;
 - Eu escreverei muitas instruções _console.log_ para ter certeza de que estou entendendo como o código se comporta e para me ajudar a identificar os erros;
 - Se meu código não funcionar, não escreverei mais nenhuma linha no código. Em vez disso, começarei a excluir o código até que funcione ou retornarei ao estado em que tudo ainda estava funcionando; e
-- Quando eu pedir ajuda no canal do Discord ou Telegram do curso ou em outro lugar, formularei minhas perguntas de forma adequada. Veja [aqui](/pt/part0/informacoes_gerais#como-pedir-ajuda-no-discord-telegam) como pedir ajuda.
+- Quando eu pedir ajuda no canal do Discord ou Telegram do curso ou em outro lugar, formularei minhas perguntas de forma adequada. Veja [aqui](/ptbr/part0/informacoes_gerais#como-pedir-ajuda-no-discord-telegam) como pedir ajuda.
 
 </div>
 
