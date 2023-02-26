@@ -345,7 +345,7 @@ En otras palabras, si registra este middleware en el archivo <i>app.js</i> antes
 app.use(middleware.tokenExtractor)
 ```
 
-routes can access the token with _request.token_:
+Las rutas pueden acceder al token con _request.token_:
 ```js
 blogsRouter.post('/', async (request, response) => {
   // ..
@@ -354,7 +354,7 @@ blogsRouter.post('/', async (request, response) => {
 })
 ```
 
-Recuerde que un [middleware] normal (/es/part3/node_js_y_express#middleware) es una función con tres parámetros, que al final llama al último parámetro <i>next</i> para mover el control al siguiente middleware:
+Recuerde que una [función middleware](/es/part3/node_js_y_express#middleware) es una función con tres parámetros, que al final llama al último parámetro <i>next</i> para mover el control al siguiente middleware:
 
 ```js
 const tokenExtractor = (request, response, next) => {
