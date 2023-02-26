@@ -7,7 +7,7 @@ lang: ptbr
 
 <div class="content">
 
-Este curso é uma introdução ao desenvolvimento web moderno com JavaScript. O foco principal é em <i>Single-Page Aplications </i>(SPA), ou seja, aplicações de página única, implementadas em React e com suporte a Serviços Web RESTful e GraphQL implementados em Node.js. O curso também aborda e determinadas aprtes o TypeScript, o React Native e a Integração Contínua.
+Este curso é uma introdução ao desenvolvimento web moderno com JavaScript. O foco principal é em <i>Single-Page Aplications </i>(SPA), ou seja, aplicações de página única, implementadas em React e com suporte a Serviços Web RESTful e GraphQL implementados em Node.js. O curso também aborda TypeScript, React Native e Integração Contínua.
 
 Outros tópicos incluem depuração de aplicações, tecnologia de contêineres (<i>containers</i>), configuração, gerenciamento de ambientes de tempo de execução e banco de dados.
 
@@ -272,7 +272,7 @@ Quando clicado duas vezes, você deve ver o seguinte texto:
 
 **Note** que para obter créditos universitários, você precisa de um registro de cada parte concluída. Consulte [mais informações sobre o registro](/ptbr/part0/informacoes_gerais#das-partes-e-conclusao).
 
-Você já poderá ver sua nota no Sisu da Universidade de Helsinque e no [Opintopolku](https://opintopolku.fi/oma-opintopolku/) aproximadamente quatro semanas após nos notificar.
+Você já poderá ver sua nota no SISU da Universidade de Helsinque e no [Opintopolku](https://opintopolku.fi/oma-opintopolku/) aproximadamente quatro semanas após nos notificar.
 
 Quando o registro é feito, o seguinte texto aparece no sistema de envio de exercícios:
 
@@ -286,10 +286,10 @@ Note que <strong>você não precisa se matricular</strong> na Universidade Abert
 
 Você consegue saber do seu número de identificação de aluno através de uma das opções abaixo:
 
-#### A) Sisu
+#### A) SISU
 
-Se você tiver uma conta de usuário da Universidade de Helsinque, poderá encontrar seu número de identificação de aluno em seu perfil no sistema de informações de estudo da Universidade de Helsinque Sisu:
-  - Faça login no Sisu com seu nome de usuário e senha da Universidade de Helsinque;
+Se você tiver uma conta de usuário da Universidade de Helsinque, poderá encontrar seu número de identificação de aluno em seu perfil no sistema de informações de estudo da Universidade de Helsinque SISU:
+  - Faça login no SISU com seu nome de usuário e senha da Universidade de Helsinque;
   - Selecione: Meu perfil; e
   - Selecione: Informações pessoais.
 
