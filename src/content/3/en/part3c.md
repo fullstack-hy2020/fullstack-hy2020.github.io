@@ -97,6 +97,9 @@ Next, we have to define the IP addresses that are allowed access to the database
 
 ![mongodb network access/add ip access list](../../images/3/mongo4.png)
 
+Note: In case the modal menu is different for you, according to MongoDB documentation, adding 0.0.0.0 as an IP allows access from anywhere as well.
+  
+  
 Finally, we are ready to connect to our database. Start by clicking <i>connect</i>:
 
 ![mongodb database deployment connect](../../images/3/mongo5.png)
