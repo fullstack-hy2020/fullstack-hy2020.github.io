@@ -36,13 +36,13 @@
     "emailLabel": "Endereço de e-mail",
     "whereDidYouHearLabel": "De onde você ouviu falar do desafio",
     "submitButton": "Enviar",
-    "submitSuccessMessage": "Obrigado! Entraremos em contato em breve!",
+    "submitSuccessMessage": "Obrigado! Entraremos em contato em breve.",
     "participantsTitle": "Essas empresas se juntaram ao desafio Full Stack",
     "coOperationTitle": "Em cooperação com",
     "infoButton": "Mais sobre o desafio"
   },
   "companiesPage": {
-    "storiesTitle": "Histórias dos desenvolvedores de nossos parceiros"
+    "storiesTitle": "História dos desenvolvedores de nossos parceiros"
   },
   "faqPage": {
     "faqTitle": "Perguntas frequentes"

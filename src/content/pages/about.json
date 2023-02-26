@@ -212,12 +212,12 @@
     "intro": [
       "<em>Têm dúvidas sobre o curso? Leia cuidadosamente a <a href='/pt/part0/informacoes_gerais'>Parte 0</a>, pois lá é possível encontrar a resposta para a maioria delas...</em>",
       "Este curso serve como uma introdução ao desenvolvimento de aplicações <em>web</em> modernas com JavaScript. O objetivo principal é construir aplicações SPA (Aplicações de Página Única) com ReactJS que utilizam APIs REST construídas em Node.js. O curso também contém uma seção sobre GraphQL, uma alternativa moderna às APIs REST.",
-      "O curso abrange testes, gerenciamento de configuração e ambiente, uso de bancos de dados para armazenar os dados da aplicação, entre outras coisas.",
+      "O curso abrange testes, gerenciamento de configuração e ambiente, uso de bancos de dados para armazenamento dos dados da aplicação, entre outras coisas.",
       "O curso vale de 5 a 14 créditos e o conteúdo é o mesmo do curso <a href='https://fullstack-hy2020.github.io/'>Full stack</a> realizado no <a href='https://www.helsinki.fi/en/computer-science'>Departamento de Ciência da Computação</a> na Universidade de Helsinki na primavera de 2022. Este também é um <a href='/osa0/yleista#full-stack-harjoitustyo'>projeto</a> associado que vale de 1 a 10 créditos.",
       "Incluem-se como parceiros e afiliados do curso: <a href='https://www.houston-inc.com/'>Houston Inc</a>, <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>, <a href='https://elisa.fi/'>Elisa</a>, <a href='https://www.instagram.com/unitytechnologies/?hl=en'>Unity Technologies</a> e <a href='https://careers.konecranes.com/Konecranes/'>Konecranes</a>. Entre <a href='https://www.youtube.com/watch?v=BZexOyQZMMc&list=PLumQiZ25uijis31zaRL7rhzLalSwLqUtm'>aqui</a> para ver palestras ministradas por vários especialistas de nossos parceiros e afiliados sobre tópicos relacionados ao curso.",
       "É esperado que os participantes tenham boas habilidades de programação, conhecimento básico de programação web e banco de dados e saibam os conceitos básicos práticos do sistema de controle de versão Git. Também é esperado que você tenha perseverança e habilidade para resolução de problemas e busca de informações de forma independente.",
-      "A <a href='/pt-BR/part0/general_info'>Parte 0</a> do material do curso explica o conteúdo e a conduta do curso com mais detalhes. Certifique-se de ler o material e as instruções com atenção.",
-      "Você também pode discutir o curso e tópicos relacionados em nosso grupo dedicado no Discord <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> e no Telegram: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. Vem conversar com a gente!"
+      "A <a href='/pt/part0/informacoes_gerais'>Parte 0</a> do material do curso explica o conteúdo e a conduta do curso com mais detalhes. Certifique-se de ler o material e as instruções com atenção.",
+      "Você também pode discutir sobre o curso e tópicos relacionados em nosso grupo dedicado no Discord <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> e no Telegram: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. Vem conversar com a gente!"
     ],
     "info": [
       {
@@ -233,7 +233,7 @@
           "O curso consiste em oito partes. A primeira começa como 'Parte 0 (zero)' por razões históricas.",
           "No material, da parte <em>n</em> para <em>n + 1</em>, o avanço não é significativo até que se tenha alcançado conhecimento suficiente de alguns dos Ns.",
           "Assume-se que você esteja fazendo pelo menos algumas das tarefas que não foram marcadas com um asterisco (*). As tarefas marcadas com um asterisco também afetarão a revisão, mas não fazê-las também não criará maiores dificuldades para que se consiga fazer a próxima seção (não marcada).",
-          "A velocidade para o término do curso é livre. Os exércicios podem ser devolvidos com as soluções até 10.12020 até as 23:59.",
+          "A velocidade para o término do curso é livre.",
           "As estatísticas do tempo gasto para o envio das soluções dos exercícios já feitos em diferentes partes deste curso podem ser encontradas na página de envio de exercícios."
         ]
       },

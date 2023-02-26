@@ -359,35 +359,35 @@
     {
       "title": "Quanto custa este curso?",
       "text": [
-        "O curso é totalmente gratuito. Você pode obter um certificado e até mesmo créditos ECTS de graça da Universidade de Helsinque. Entre <a href='/pt/part0/general_info#parts-and-completion'>aqui</a> para ver mais informações."
+        "O curso é totalmente gratuito. Você pode obter um certificado e até mesmo créditos ECTS de graça da Universidade de Helsinque. Entre <a href='/pt/part0/informacoes_gerais#das-partes-e-conclusao'>aqui</a> para ver mais informações."
       ]
     },
     {
       "title": "Como eu me inscrevo no curso?",
       "text": [
-        "Você não precisa se inscrever a não ser que queira fazer a prova do curso. Você pode encontrar mais informações <a href='/pt/part0/general_info#parts-and-completion'>aqui</a>. <br><br> Para o certificado do curso, não é necessário se inscrever."
+        "Você não precisa se inscrever a não ser que queira fazer a prova do curso. Você pode encontrar mais informações <a href='/pt/part0/informacoes_gerais#das-partes-e-conclusao'>aqui</a>. <br><br> Não é necessário se inscrever para obter o certificado do curso."
       ]
     },
     {
       "title": "Quantos créditos vale o curso?",
       "text": [
-        "O curso vale de 5-14 créditos ECTS <a href='/pt/part0/general_info#parts-and-completion'>dependendo da quantidade de exercícios enviados</a>. Depois de concluir o curso, você pode continuar a aprofundar seus conhecimentos sobre o assunto fazendo o projeto Full Stack de 1-10 créditos ECTS <a href='/pt/part0/general_info#full-stack-project'>aqui</a>."
+        "O curso vale de 5 a 14 créditos ECTS <a href='/pt/part0/informacoes_gerais#das-partes-e-conclusao'>dependendo da quantidade de exercícios enviados</a>. Depois de concluir o curso, você pode continuar a aprofundar seus conhecimentos sobre o assunto fazendo o projeto Full Stack de 1-10 créditos ECTS <a href='/pt/part0/informacoes_gerais#projeto-full-stack'>aqui</a>."
       ]
     },
     {
       "title": "Qual é o prazo para a entrega dos exercícios e a prova?",
       "text": [
-        "Você pode completar o curso no seu próprio ritmo e não há prazos para nada. O curso tem uma pausa de manutenção em março, mas isso não afeta muito. Entre <a href='/pt/part0/general_info#continuing-the-course-at-year-2023'>aqui</a> para mais detalhes."
+        "Você pode completar o curso no seu próprio ritmo, e não há prazos para nada. O curso tem uma pausa de manutenção em março, mas isso não afeta muita coisa. Entre <a href='/pt/part0/informacoes_gerais#continuando-o-curso-no-ano-de-2023'>aqui</a> para mais detalhes."
       ]
     },
     {
-      "title": "Como eu envio os exercícios?",
+      "title": "Como envio os exercícios?",
       "text": [
-        "Os exercícios são enviadas para o GitHub e marcados como concluídos no sistema de envio de exercícios. Você pode ler mais sobre a forma de envio <a href='/pt/part0/general_info#submitting-exercises'>aqui</a>."
+        "Os exercícios são enviadas para o GitHub e marcados como concluídos no sistema de envio de exercícios. Você pode ler mais sobre a forma de envio <a href='/pt/part0/informacoes_gerais#enviando-exercicios'>aqui</a>."
       ]
     },
     {
-      "title": "Eu preciso enviar cada parte para um repositório separado?",
+      "title": "Preciso enviar cada parte para um repositório separado?",
       "text": [
         "Não. Você pode usar um ou mais repositórios, contudo, o mais importante é nomear tudo de forma clara em um único repositório."
       ]
@@ -401,13 +401,13 @@
     {
       "title": "Quando e como posso obter meus créditos?",
       "text": [
-        "Você pode obter seus créditos depois de enviar exercícios suficientes para passar no curso, passar na prova do curso e nos informar através do sistema de envio de exercícios que você está pronto com o curso.<br><br>Não é necessário se inscrever ou fazer a prova para obter o certificado do curso."
+        "Você pode obter seus créditos depois de enviar exercícios suficientes para passar no curso, passar na prova do curso e nos informar através do sistema de envio de exercícios que você já terminou o curso.<br><br>Não é necessário se inscrever ou fazer a prova para obter o certificado do curso."
       ]
     },
     {
       "title": "Eu recebo um certificado ao concluir o curso?",
       "text": [
-        "Sim! Você pode baixar o certificado após concluir o curso a partir do sistema de envio de exercícios. Para pegar o certificado do curso, não é necessário se inscrever na Universidade Aberta e nem fazer a prova."
+        "Sim! Você pode baixar o certificado após concluir o curso a partir do sistema de envio de exercícios. Não é necessário se inscrever na Universidade Aberta e nem fazer a prova para pegar o certificado do curso."
       ]
     },
     {
@@ -419,13 +419,13 @@
     {
       "title": "Eu comecei o curso no ano passado, como devo continuar?",
       "text": [
-        "Leia mais <a href='/pt/part0/general_info#expanding-on-a-previously-completed-course'>aqui</a>"
+        "Leia mais <a href='/pt/part0/informacoes_gerais#aproveitamento-de-um-curso-concluido-anteriormente'>aqui</a>"
       ]
     },
     {
       "title": "Ouvi dizer que eu poderia conseguir uma entrevista de emprego ao completar o curso.",
       "text": [
-        "É verdade. Se você completar o curso com todos os créditos e completar o trabalho prático com 10 créditos, você consegue uma entrevista de emprego com nossos parceiros. Leia mais <a href='/pt/part0/general_info#interview-promise'>aqui</a>. Você precisa residir na Finlândia para participar dessas entrevistas."
+        "É verdade. Se você completar o curso com todos os créditos e completar o trabalho prático com 10 créditos, você consegue uma entrevista de emprego com nossos parceiros. Leia mais <a href='/pt/part0/informacoes_gerais#promessa-de-entrevista'>aqui</a>. Você precisa residir na Finlândia para participar dessas entrevistas."
       ]
     }
   ]
