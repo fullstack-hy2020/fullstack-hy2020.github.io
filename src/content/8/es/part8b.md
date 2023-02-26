@@ -15,18 +15,14 @@ En teoría, podríamos usar GraphQL con solicitudes HTTP POST. A continuación s
 
 ![](../../images/8/8x.png)
 
-La comunicación funciona enviando solicitudes HTTP POST a http://localhost:4000/graphql. La consulta en sí es una cadena enviada como el valor de la clave <i>query</i>.
+La comunicación funciona enviando solicitudes HTTP POST a <http://localhost:4000/graphql>. La consulta en sí es una cadena enviada como el valor de la clave <i>query</i>.
 
 Podríamos encargarnos de la comunicación entre la aplicación React y GraphQl usando Axios. Sin embargo, la mayoría de las veces no es muy sensato hacerlo. Es una mejor idea utilizar una librería de orden superior capaz de abstraer los detalles innecesarios de la comunicación.
 
 Por el momento hay dos buenas opciones: [Relay](https://facebook.github.io/relay/) por Facebook y [Apollo Client](https://www.apollographql.com/docs/react/). De estos dos, Apollo es absolutamente más popular, y también lo usaremos.
 
-### cliente Apollo
+### Cliente Apollo
 
-
-Cree una nueva aplicación React e instale las dependencias requeridas por [Apollo client](https://www.apollographql.com/docs/react/get-started/#installation).
-
-<!-- Luodaan uusi React-sovellus ja asennetaan siihen [Apollo clientin] (https://www.apollographql.com/docs/react/get-started/#installation) vaatimat riippuvuudet. -->
 Crearemos una nueva aplicación React e instalaremos las dependencias requeridas por [Apollo client](https://www.apollographql.com/docs/react/get-started/#installation).
 
 ```bash
@@ -109,6 +105,7 @@ ReactDOM.render(
   document.getElementById('root')
 )
 ```
+
 ### Realización de consultas
 
 Estamos listos para implementar la vista principal de la aplicación, que muestra una lista de números de teléfono.
@@ -420,7 +417,7 @@ mutation createPerson($name: String!, $street: String!, $city: String!, $phone: 
 <!-- Mutaatioiden tekemiseen sopivan toiminnallisuuden tarjoaa hook-funktio [useMutation] (https://www.apollographql.com/docs/react/api/ react / hooks / # usemutation). -->
 La función hook [useMutation](https://www.apollographql.com/docs/react/api/react/hooks/#usemutation) proporciona la funcionalidad para realizar mutaciones.
 
-<!-- Tehdään sovellukseen uusi komponentti uuden henkilön lisämiseen: --> 
+<!-- Tehdään sovellukseen uusi komponentti uuden henkilön lisämiseen: -->
 Creemos un nuevo componente para agregar una nueva persona al directorio:
 
 ```js
@@ -558,13 +555,21 @@ const PersonForm = (props) => {
 
 Los pros y los contras de esta solución son casi opuestos a los anteriores. No hay tráfico web extra, porque las consultas no se hacen por si acaso. Sin embargo, si un usuario actualiza ahora el estado del servidor, los cambios no se muestran a otros usuarios inmediatamente.
 
+Si deseas realizar varias consultas, puedes pasar varios objetos dentro de refetchQueries. Esto le permitirá actualizar diferentes partes de su aplicación al mismo tiempo. Aquí hay un ejemplo:
+
+```js
+    const [ createPerson ] = useMutation(CREATE_PERSON, {
+    refetchQueries: [ { query: ALL_PERSONS }, { query: OTHER_QUERY }, { query: ... } ] // pass as many queries as you need
+  })
+```
+
 Hay otras formas de actualizar la caché. Más sobre estos más adelante en esta parte.
 
 <!-- Sovellukseen en tällä hetkellä määritelty kyselyjä komponenttien koodin sekaan. Eriytetään kyselyjen määrittely omaan tiedostoonsa <i> queries.js </i>: -->
 Por el momento, en nuestro código, las consultas y el componente están definidos en el mismo lugar.
 Separemos las definiciones de consulta en su propio archivo <i>queries.js</i>:
 
-```js 
+```js
 import { gql  } from '@apollo/client'
 
 export const ALL_PERSONS = gql`
@@ -588,7 +593,7 @@ export const CREATE_PERSON = gql`
 <!-- Jokainen komponentti importtaa tarvitsemansa kyselyt: -->
 Luego, cada componente importa las consultas que necesita:
 
-```js 
+```js
 import { ALL_PERSONS } from './queries'
 
 const App = () => {
@@ -779,7 +784,7 @@ Para GraphQL esto no es un error, por lo que registrar un controlador de errores
 <!-- Voimme generoida virheilmoituksen _useMutation_-hookin toisena parametrina palauttaman mutacion tuloksen kertovan olion _result_ avulla. -->
 Podemos usar el campo _result_ devuelto por el hook _useMutation_ como su segundo parámetro para generar un mensaje de error.
 
-```js 
+```js
 const PhoneForm = ({ setError }) => {
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
@@ -854,7 +859,7 @@ Cuando sea necesario, Apollo permite guardar el estado local de las aplicaciones
 
 <div class="tasks">
 
-### Ejercicios 8.8.-8.12.
+### Ejercicios 8.8.-8.12
 
 A través de estos ejercicios, implementaremos una interfaz para la librería GraphQL.
 
