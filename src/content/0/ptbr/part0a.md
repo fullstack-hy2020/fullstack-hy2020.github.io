@@ -307,11 +307,18 @@ Você pode solicitar uma transcrição verificada <i>depois que seus créditos u
 
 A transcrição será entregue a você via e-mail, eletronicamente. Apresente este documento em sua instituição para ter os créditos incluídos em seu diploma. A decisão de incluir os créditos será tomada pela sua instituição de origem.
 
-### Continuando o curso no ano de 2023
+### Não há mais versões anuais
 
-O curso tem um "intervalo" de manutenção de duas semanas a partir de 1º de março de 2023. Durante o intervalo, o material fica online e podem ser enviados os exercícios. Durante o intervalo, o conteúdo do curso pode mudar um pouco — nada muito drástico foi planejado até o momento.
+Não há mais "versões anuais" — o curso está aberto o tempo todo. Cada parte é atualizada uma ou duas vezes por ano. As atualizações são em princípio pequenas: as versões da biblioteca são atualizadas e a clareza do texto é melhorada. No entanto, também pode haver algumas mudanças maiores.
 
-Todos os exercícios apresentados permanecem válidos após o intervalo de manutenção. O curso pode ser continuado sem que seja necessário se preocupar com o intervalo. Além disso, a política para obtenção de certificados, créditos universitários etc. permanecerá a mesma. Então, na prática, *nada muda*. Você pode continuar fazendo o curso sem se preocupar com essas mudanças.
+Apesar das mudanças, <i>todos os exercícios enviados permanecem válidos</i>, e o curso pode ser continuado sem se preocupar com as atualizações. A política para obter certificados, créditos universitários etc. também permanecerá a mesma, não importa o que aconteça.
+
+Principais mudanças recentes:
+
+- Parte 2 (18 de janeiro de 2023): A ordem dos exercícios foi alterada: os exercícios 2.11 a 2.13 foram movidos para o final da parte;
+- Parte 6 (30 de janeiro de 2023): A seção sobre Redux connect foi substituída por uma nova seção sobre React Query, useReducer e React context;
+- Parte 8 (5 de fevereiro de 2023): O back-end atualizado para usar o Apollo Server 4.0; e
+- Parte 9 (12 de fevereiro de 2023): Conteúdo elucidado: a estrutura da aplicação de exemplo do Patientor foi refatorada em um formato muito mais simples.
 
 ### Aproveitamento de um curso concluído anteriormente
 
