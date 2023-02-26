@@ -4,7 +4,7 @@ import FaqPage from '../components/FaqPage';
 
 const FAQ = () => (
   <FaqPage
-    lang="pt"
+    lang="ptbr"
     title="FAQ | Full Stack Aberto"
     seoDescription="Perguntas Frequentes"
   />

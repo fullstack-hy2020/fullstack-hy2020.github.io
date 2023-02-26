@@ -44,7 +44,7 @@ const plugins = [
   createSearchConfig('finnish', 'fi'),
   createSearchConfig('english', 'en'),
   createSearchConfig('chinese', 'zh'),
-  createSearchConfig('portuguese', 'pt'),
+  createSearchConfig('portuguese', 'ptbr'),
   {
     resolve: `gatsby-plugin-sitemap`,
   },

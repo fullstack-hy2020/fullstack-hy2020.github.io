@@ -2,12 +2,12 @@
 mainImage: ../../../images/part-2.svg
 part: 2
 letter: e
-lang: pt
+lang: ptbr
 ---
 
 <div class="content">
 
-Está bastante modesta a aparência atual da nossa aplicação. No [exercício 0.2](/pt/part0/fundamentos_de_aplicacoes_web#exercicios-0-1-a-0-6), o objetivo era passar pelo tutorial [CSS da Mozilla](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics).
+Está bastante modesta a aparência atual da nossa aplicação. No [exercício 0.2](/ptbr/part0/fundamentos_de_aplicacoes_web#exercicios-0-1-a-0-6), o objetivo era passar pelo tutorial [CSS da Mozilla](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics).
 
 Vamos dar uma olhada em como podemos adicionar estilos a uma aplicação React. Existem várias maneiras diferentes de fazer isso e veremos os outros métodos mais tarde. Primeiro, adicionaremos o CSS à nossa aplicação da maneira antiga; em um único arquivo sem usar um [pré-processador CSS](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor) (embora isso não seja inteiramente verdade, como aprenderemos mais tarde).
 
@@ -288,7 +288,7 @@ O código da versão final da nossa aplicação pode ser encontrado na branch <i
 
 <h4>2.16: The Phonebook — 11º passo</h4>
 
-Use como guia o exemplo da [mensagem de erro aprimorada](/pt/part2/adicionando_estilos_a_aplicacao_react#uma-mensagem-de-erro-aprimorada) da Parte 2 para exibir uma notificação que dure alguns segundos depois que uma operação bem-sucedida for executada (uma pessoa é adicionada ou um número é alterado):
+Use como guia o exemplo da [mensagem de erro aprimorada](/ptbr/part2/adicionando_estilos_a_aplicacao_react#uma-mensagem-de-erro-aprimorada) da Parte 2 para exibir uma notificação que dure alguns segundos depois que uma operação bem-sucedida for executada (uma pessoa é adicionada ou um número é alterado):
 
 ![captura de tela: 'adicionado com sucesso' em verde](../../images/2/27e.png)
 
@@ -298,7 +298,7 @@ Abra sua aplicação em dois navegadores. **Se você excluir uma pessoa no naveg
 
 ![mensagem de erro "404 not found" quando se altera a aplicação em múltiplos navegadores](../../images/2/29b.png)
 
-Corrija o problema de acordo com o exemplo mostrado em [promessas e erros](/pt/part2/alterando_dados_no_servidor#promessas-e-erros) na Parte 2. Modifique o exemplo para que uma mensagem seja mostrada ao usuário quando a operação for mal-sucedida. As mensagens exibidas para eventos bem e mal sucedidos devem ser diferentes:
+Corrija o problema de acordo com o exemplo mostrado em [promessas e erros](/ptbr/part2/alterando_dados_no_servidor#promessas-e-erros) na Parte 2. Modifique o exemplo para que uma mensagem seja mostrada ao usuário quando a operação for mal-sucedida. As mensagens exibidas para eventos bem e mal sucedidos devem ser diferentes:
 
 ![mensagem de erro exibida na tela em vez do console - recurso complementar](../../images/2/28e.png)
 

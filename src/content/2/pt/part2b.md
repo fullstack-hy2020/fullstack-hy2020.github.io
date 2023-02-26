@@ -2,7 +2,7 @@
 mainImage: ../../../images/part-2.svg
 part: 2
 letter: b
-lang: pt
+lang: ptbr
 ---
 
 <div class="content">
@@ -253,7 +253,7 @@ const addNote = (event) => {
 
 Primeiramente, criamos um novo objeto para a nota (variável que cria as notas com suas propriedades) chamada <em>noteObject</em> (ou "objetoNota") que receberá seu conteúdo do estado <em>newNote</em> do componente. O identificador único <i>id</i> é gerado com base no número total de notas. Este método funciona para a nossa aplicação, já que as nossas notas nunca são excluídas. Com a ajuda da função <em>Math.random()</em>, a nossa nota tem 50% de chance de ser marcada como importante.
 
-A nova nota é adicionada à lista de notas usando o método de array [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) (concatenar), apresentado na [Parte 1](/pt/part1/java_script#arrays):
+A nova nota é adicionada à lista de notas usando o método de array [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) (concatenar), apresentado na [Parte 1](/ptbr/part1/java_script#arrays):
 
 ```js
 setNotes(notes.concat(noteObject))
@@ -459,7 +459,7 @@ Pode ser útil às vezes renderizar o estado e outras variáveis, como texto, pa
 <div>debug: {newName}</div>
 ```
 
-Também é importante colocar em prática o que aprendemos no capítulo sobre [depuração de aplicações React](/pt/part1/um_estado_mais_complexo_e_depuracao_de_aplicacoes_react) da primeira parte. A extensão [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) é <i>incrivelmente</i> útil para rastrear as alterações que ocorrem no estado da aplicação.
+Também é importante colocar em prática o que aprendemos no capítulo sobre [depuração de aplicações React](/ptbr/part1/um_estado_mais_complexo_e_depuracao_de_aplicacoes_react) da primeira parte. A extensão [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) é <i>incrivelmente</i> útil para rastrear as alterações que ocorrem no estado da aplicação.
 
 Depois de concluir este exercício, sua aplicação deve ficar mais ou menos parecida com isto:
 
@@ -575,6 +575,6 @@ const App = () => {
 }
 ```
 
-**N.B.**: Você pode ter problemas neste exercício se definir seus componentes "no lugar errado". Agora, é definitivamente uma boa ideia revisar o capítulo da seção anterior: [Não defina Componentes dentro de Componentes](/pt/part1/um_estado_mais_complexo_e_depuracao_de_aplicacoes_react#nao-defina-componentes-dentro-de-componentes).
+**N.B.**: Você pode ter problemas neste exercício se definir seus componentes "no lugar errado". Agora, é definitivamente uma boa ideia revisar o capítulo da seção anterior: [Não defina Componentes dentro de Componentes](/ptbr/part1/um_estado_mais_complexo_e_depuracao_de_aplicacoes_react#nao-defina-componentes-dentro-de-componentes).
 
 </div>

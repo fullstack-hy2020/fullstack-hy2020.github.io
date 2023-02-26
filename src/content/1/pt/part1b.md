@@ -2,7 +2,7 @@
 mainImage: ../../../images/part-1.svg
 part: 1
 letter: b
-lang: pt
+lang: ptbr
 ---
 
 <div class="content">
@@ -13,7 +13,7 @@ JavaScript evoluiu rapidamente nos últimos anos e, neste curso, usamos as funci
 
 Os navegadores ainda não suportam todos as funcionalidades mais recentes de JavaScript. Devido a esse fato, muito código executado em navegadores é <i>transpilado</i> de uma versão mais recente de JavaScript para uma versão mais antiga e compatível.
 
-Hoje em dia, a maneira mais popular de fazer a transpilação é usando o transcompilador [Babel](https://babeljs.io/). A transpilação é configurada automaticamente em aplicações React criadas com create-react-app. Vamos olhar mais de perto a configuração de transpilação na [Parte 7](/pt/part7) deste curso.
+Hoje em dia, a maneira mais popular de fazer a transpilação é usando o transcompilador [Babel](https://babeljs.io/). A transpilação é configurada automaticamente em aplicações React criadas com create-react-app. Vamos olhar mais de perto a configuração de transpilação na [Parte 7](/ptbr/part7) deste curso.
 
 [Node.js](https://nodejs.org/en/) é um ambiente de tempo de execução JavaScript baseado no motor JavaScript [Chrome V8](https://developers.google.com/v8/) da Google e funciona praticamente em qualquer lugar, desde servidores até telefones celulares. Vamos praticar a escrita de código JavaScript usando Node. As versões mais recentes do Node são compatíveis com as versões mais recentes de JavaScript, então o código não precisa ser transpilado.
 
@@ -108,7 +108,7 @@ console.log(m2)
 // [ '<li>1</li>', '<li>2</li>', '<li>3</li>' ] é impresso
 ```
 
-Aqui, um array preenchido com valores inteiros é transformado em um array contendo strings de HTML usando o método map. Na [parte 2](/pt/part2) deste curso, veremos que o map é usado com frequência em React.
+Aqui, um array preenchido com valores inteiros é transformado em um array contendo strings de HTML usando o método map. Na [parte 2](/ptbr/part2) deste curso, veremos que o map é usado com frequência em React.
 
 Itens individuais de um array são fáceis de atribuir a variáveis com a ajuda da [atribuição via desestruturação](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) (destructuring assignment).
 
@@ -262,7 +262,7 @@ Se e <i>quando</i> você encontrar a mensagem de erro:
 
 > <i>Objetos não são válidos como elementos-filho React.</i>
 
-... tenha em mente o explicado [aqui](/pt/part1/introducao_a_biblioteca_react#nao-renderize-objetos).
+... tenha em mente o explicado [aqui](/ptbr/part1/introducao_a_biblioteca_react#nao-renderize-objetos).
 
 **N.B. (Nota Bene):** o conteúdo dos exercícios foram deixados no idioma original da tradução (inglês) por questões de conveniência, visto a revisão que os mantenedores do curso devem fazer no código enviado ao sistema de avaliação da Universidade de Helsinque. Desta forma, escreva suas aplicações utilizando os mesmos termos usados nas variáveis, componentes, etc que estão em inglês.
 

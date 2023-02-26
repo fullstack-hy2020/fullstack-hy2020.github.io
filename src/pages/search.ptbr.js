@@ -8,7 +8,7 @@ const Search = ({ data }) => (
     localSearch={data.localSearchPortuguese}
     title="Pesquise no material"
     inputPlaceholder="Pesquisar"
-    lang="pt"
+    lang="ptbr"
   />
 );
 
