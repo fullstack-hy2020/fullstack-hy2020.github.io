@@ -12,6 +12,8 @@ const Search = ({ data }) => (
   />
 );
 
+export default Search;
+
 export const pageQuery = graphql`
   query {
     localSearchPortuguese {
@@ -20,5 +22,3 @@ export const pageQuery = graphql`
     }
   }
 `;
-
-export default Search;

@@ -161,17 +161,21 @@ Vamos adicionar um pedaço de estado à nossa aplicação contendo o array _todo
 const App = () => {
   const [esquerda, defEsquerda] = useState(0)
   const [direita, defDireita] = useState(0)
-  const [todosOsCliques, defTodos] = useState([])
+  const [todosOsCliques, defTodos] = useState([]) // highlight-line
 
+// highlight-start
   const gerCliqueEsquerda = () => {
     defTodos(todosOsCliques.concat('E'))
     defEsquerda(esquerda + 1)
   } 
+// highlight-end
 
+// highlight-start
   const gerCliqueDireita = () => {
     defTodos(todosOsCliques.concat('D'))
     defDireita(direita + 1)
   }
+// highlight-end
 
   return (
     <div>
@@ -179,7 +183,7 @@ const App = () => {
       <button onClick={gerCliqueEsquerda}>Esquerda</button>
       <button onClick={gerCliqueDireita}>Direita</button>
       {direita}
-      <p>{todosOsCliques.join(' ')}</p>
+      <p>{todosOsCliques.join(' ')}</p> // highlight-line
     </div>
   )
 }
@@ -226,19 +230,111 @@ const App = () => {
       <button onClick={gerCliqueEsquerda}>Esquerda</button>
       <button onClick={gerCliqueDireita}>Direita</button>
       {direita}
-      <p>{todosOsCliques.join(' ')}</p>
+      <p>{todosOsCliques.join(' ')}</p> // highlight-line
     </div>
   )
 }
 ```
 
-Chamamos o método [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) (juntar, conectar) no array _todosOsCliques_ que une todos os itens em uma única string, separados pela string passada como parâmetro da função, que em nosso caso é um espaço vazio.
+Chamamos o método [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) (juntar, conectar) no array _todosOsCliques_ que une todos os itens em uma única string, separados pela string passada como parâmetro da função, que no caso é um espaço vazio.
+
+### A atualização do estado é assíncrona
+
+Vamos expandir a aplicação para que ela mantenha o controle do número total de cliques nos botões no estado _total_, cujo valor é sempre atualizado quando os botões são pressionados:
+
+```js
+const App = () => {
+  const [esquerda, defEsquerda] = useState(0)
+  const [direita, defDireita] = useState(0)
+  const [todosOsCliques, defTodos] = useState([])
+  const [total, defTotal] = useState(0) // highlight-line
+
+  const gerCliqueEsquerda = () => {
+    defTodos(todosOsCliques.concat('E'))
+    defEsquerda(esquerda + 1)
+    defTotal(esquerda + direita)  // highlight-line
+  }
+
+  const gerCliqueDireita = () => {
+    defTodos(todosOsCliques.concat('D'))
+    defDireita(direita + 1)
+    defTotal(esquerda + direita)  // highlight-line
+  }
+
+  return (
+    <div>
+      {esquerda}
+      <button onClick={gerCliqueEsquerda}>Esquerda</button>
+      <button onClick={gerCliqueDireita}>Direita</button>
+      {direita}
+      <p>{todosOsCliques.join(' ')}</p>
+      <p>Total {total}</p>  // highlight-line
+    </div>
+  )
+}
+```
+
+A solução não funciona corretamente:
+
+![o navegador mostrando 2 left|right 1, RLL total 2](../../images/1/33.png)
+
+Por alguma razão, o total de cliques nos botões está sempre um clique atrás do valor real.
+
+Vamos adicionar alguns comandos console.log ao gerenciador de eventos:
+
+```js
+const App = () => {
+  // ...
+
+  const gerCliqueEsquerda = () => {
+    defTodos(todosOsCliques.concat('E'))
+    console.log('clique esquerdo anterior', esquerda)  // highlight-line
+    defEsquerda(esquerda + 1)
+    console.log('clique esquerdo posterior', esquerda)  // highlight-line
+    defTotal(esquerda + direita)
+  }
+
+  // ...
+}
+```
+
+O console revela o problema:
+
+![o console das ferramentas do desenvolvedor exibe left before 4 and left after 4](../../images/1/32.png)
+
+Embora um novo valor tenha sido definido para _esquerda_ chamando _defEsquerda(esquerda + 1)_, o valor antigo ainda está lá, apesar da atualização! Por causa disso, a tentativa de contar o número de cliques nos botões produz um resultado menor do que o correto:
+
+```js
+defTotal(esquerda + direita) 
+```
+
+O motivo para isso é que uma atualização de estado no React acontece [assincronicamente](https://reactjs.org/docs/state-and-lifecycle.html#state-updates-may-be-asynchronous) (asynchronously), ou seja, não imediatamente, mas "em algum momento" antes que o componente seja renderizado novamente.
+
+Podemos consertar a aplicação da seguinte forma:
+
+```js
+const App = () => {
+  // ...
+
+  const gerCliqueEsquerda = () => {
+    defTodos(todosOsCliques.concat('E'))
+    const atualizaEsquerda = esquerda + 1
+    defEsquerda(atualizaEsquerda)
+    defTotal(atualizaEsquerda + direita)
+  }
+
+  // ...
+}
+```
+
+Assim, o número de cliques nos botões é agora, de forma definitiva, baseado no número correto de cliques no botão esquerdo.
 
 ### Renderização Condicional
 
 Vamos modificar nossa aplicação para que a renderização do histórico de cliques seja gerenciada por um novo componente chamado <i>Historico</i> (*Histórico):
 
 ```js
+// highlight-start
 const Historico = (props) => {
   if (props.todosOsCliques.length === 0) {
     return (
@@ -254,6 +350,7 @@ const Historico = (props) => {
     </div>
   )
 }
+// highlight-end
 
 const App = () => {
   // ...
@@ -264,7 +361,7 @@ const App = () => {
       <button onClick={gerCliqueEsquerda}>Esquerda</button>
       <button onClick={gerCliqueDireita}>Direita</button>
       {direita}
-      <Historico todosOsCliques={todosOsCliques} />
+      <Historico todosOsCliques={todosOsCliques} /> // highlight-line
     </div>
   )
 }
@@ -307,11 +404,13 @@ const Historico = (props) => {
   )
 }
 
+// highlight-start
 const Botao = ({ gerClique, texto }) => (
   <button onClick={gerClique}>
     {texto}
   </button>
 )
+// highlight-end
 
 const App = () => {
   const [esquerda, defEsquerda] = useState(0)
@@ -331,8 +430,10 @@ const App = () => {
   return (
     <div>
       {esquerda}
+      // highlight-start
       <Botao gerClique={gerCliqueEsquerda} texto='Esquerda' />
       <Botao gerClique={gerCliqueDireita} texto='Direita' />
+      // highlight-end
       {direita}
       <Historico todosOsCliques={todosOsCliques} />
     </div>
@@ -384,7 +485,7 @@ const Botao = ({ gerClique, texto }) => (
 
 ```js
 const Botao = (props) => { 
-  console.log(props)
+  console.log(props) // highlight-line
   const { gerClique, texto } = props
   return (
     <button onClick={gerClique}>
@@ -591,7 +692,7 @@ Definir gerenciadores de eventos diretamente no atributo do botão nem sempre é
 Você verá frequentemente gerenciadores de eventos definidos em um lugar separado. Na versão seguinte de nossa aplicação, definimos uma função que então é atribuída à variável _gerClique_ no corpo da função do componente:
 
 ```js
-const Aplic = () => {
+const App = () => {
   const [valor, defValor] = useState(10)
 
   const gerClique = () =>
@@ -615,13 +716,15 @@ Agora, a variável _gerClique_ está atribuída a uma referência à função. A
 Naturalmente, nossa função gerenciadora de eventos pode ser composta por múltiplos comandos. Nestes casos, usamos a sintaxe de chaves mais longa para funções de seta:
 
 ```js
-const Aplicacao = () => {
+const App = () => {
   const [valor, defValor] = useState(10)
 
+// highlight-start
   const gerClique = () => {
     console.log('clicou no botão')
     defValor(0)
   }
+// highlight-end
 
   return (
     <div>
@@ -789,7 +892,7 @@ const ola = (quem) => {
 Por conta de nossa função _ola_ ser composta por um único comando de retorno, podemos omitir as chaves e usar a sintaxe mais compacta para funções de seta:
 
 ```js
-const hello = (quem) =>
+const ola = (quem) =>
   () => {
     console.log('Olá', quem)
   }

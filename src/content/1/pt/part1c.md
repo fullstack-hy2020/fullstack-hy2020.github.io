@@ -42,17 +42,19 @@ Vamos expandir nosso componente <i>Hello</i> para que ele adivinhe o ano de nasc
 
 ```js
 const Hello = (props) => {
+  // highlight-start
   const anoDeNascimento = () => {
     const anoDeHoje = new Date().getFullYear()
     return anoDeHoje - props.idade
   }
+  // highlight-end
 
   return (
     <div>
       <p>
         Olá {props.nome}, você tem {props.idade} anos.
       </p>
-      <p>Então, você nasceu provavelmente em {anoDeNascimento()}.</p>
+      <p>Então, você nasceu provavelmente em {anoDeNascimento()}.</p> // highlight-line
     </div>
   )
 }
@@ -83,14 +85,16 @@ props = {
 
 ```js
 const Hello = (props) => {
+  // highlight-start
   const nome = props.nome
   const idade = props.idade
+  // highlight-end
 
   const anoDeNascimento = () => new Date().getFullYear() - idade
 
   return (
     <div>
-      <p>Olá {nome}, você tem {idade} anos</p>
+      <p>Olá {nome}, você tem {idade} anos</p> // highlight-line
       <p>Então, você nasceu provavelmente em {anoDeNascimento()}.</p>
     </div>
   )
@@ -113,7 +117,7 @@ A desestruturação torna a atribuição de variáveis ainda mais fácil, já qu
 
 ```js
 const Hello = (props) => {
-  const { nome, idade } = props
+  const { nome, idade } = props // highlight-line
   const anoDeNascimento = () => new Date().getFullYear() - idade
 
   return (
@@ -139,7 +143,7 @@ props = {
 Podemos levar a desestruturação um passo adiante:
 
 ```js
-const Hello = ({ nome, idade }) => {
+const Hello = ({ nome, idade }) => { // highlight-line
   const anoDeNascimento = () => new Date().getFullYear() - idade
 
   return (
@@ -259,17 +263,19 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ... e <i>App.js</i> muda para o seguinte:
 
 ```js
-import { useState } from 'react'
+import { useState } from 'react' // highlight-line
 
 const App = () => {
-  const [ contador, defContador ] = useState(0)
+  const [ contador, defContador ] = useState(0) // highlight-line
   // "setCounter" pode ser traduzido como "definirContador", que fica
   // como "defContador" em sua forma reduzida.
 
+// highlight-start
   setTimeout(
     () => defContador(contador + 1),
     1000
   )
+// highlight-end
 
   return (
     <div>{contador}</div>
@@ -347,7 +353,7 @@ const App = () => {
     1000
   )
 
-  console.log('renderizando...', contador)
+  console.log('renderizando...', contador) // highlight-line
 
   return (
     <div>{contador}</div>
@@ -369,24 +375,28 @@ Vamos mudar a aplicação para que o aumento do contador aconteça quando um usu
 
 Os elementos de botão suportam os chamados [Eventos de Mouse](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent) (MouseEvent), dos quais [clique](https://developer.mozilla.org/en-US/docs/Web/Events/click) (click) é o evento mais comum. O evento de clique em um botão também pode ser acionado com o teclado ou com uma tela touch screen, apesar de ser "<i>eventos de mouse</i>".
 
-Em React, se [registra uma função gerenciadora de eventos](https://reactjs.org/docs/handling-events.html) (event handler function) para o evento <i>click</i> desta forma:
+Em React, registra-se uma [função gerenciadora de eventos](https://reactjs.org/docs/handling-events.html) (event handler function) para o evento <i>click</i> desta forma:
 
 ```js
 const App = () => {
   const [ contador, defContador ] = useState(0)
-
+  
+  // highlight-start
   const gerClique = () => {
     // "handleClick" pode ser traduzido, grosso modo, como "gerenciarClique";
     // Versão reduzida: "gerClique".
     console.log('clicado')
   }
+  // highlight-end
 
   return (
     <div>
       <div>{contador}</div>
+      // highlight-start
       <button onClick={gerClique}>
         mais+
       </button>
+      // highlight-end
     </div>
   )
 }
@@ -403,7 +413,7 @@ const App = () => {
   return (
     <div>
       <div>{contador}</div>
-      <button onClick={() => console.log('clicado')}>
+      <button onClick={() => console.log('clicado')}> // highlight-line
         mais+
       </button>
     </div>
@@ -432,9 +442,11 @@ const App = () => {
       <button onClick={() => defContador(contador + 1)}>
         mais+
       </button>
+      // highlight-start
       <button onClick={() => defContador(0)}> 
         zerar
       </button>
+      // highlight-end
     </div>
   )
 }
@@ -493,17 +505,19 @@ De qualquer jeito, vamos separar os gerenciadores de eventos em funções separa
 const App = () => {
   const [ contador, defContador ] = useState(0)
 
+// highlight-start
   const aumentarEmUm = () => defContador(contador + 1)
   
   const zerarContador = () => defContador(0)
+// highlight-end
 
   return (
     <div>
       <div>{contador}</div>
-      <button onClick={aumentarEmUm}>
+      <button onClick={aumentarEmUm}> // highlight-line
         mais+
       </button>
-      <button onClick={zerarContador}>
+      <button onClick={zerarContador}> // highlight-line
         zerar
       </button>
     </div>
@@ -549,7 +563,7 @@ const App = () => {
 
   return (
     <div>
-      <Exibir contador={contador}/>
+      <Exibir contador={contador}/> // highlight-line
       <button onClick={aumentarEmUm}>
         mais+
       </button>
@@ -582,12 +596,13 @@ const App = () => {
   const [ contador, defContador ] = useState(0)
 
   const aumentarEmUm = () => defContador(contador + 1)
-  const diminuirEmUm = () => defContador(contador - 1)
+  const diminuirEmUm = () => defContador(contador - 1) // highlight-line
   const zerarContador = () => defContador(0)
 
   return (
     <div>
       <Exibir contador={contador}/>
+      // highlight-start
       <Botao
         onClick={aumentarEmUm}
         texto='mais+'
@@ -599,7 +614,8 @@ const App = () => {
       <Botao
         onClick={diminuirEmUm}
         texto='menos-'
-      />           
+      />
+      // highlight-end           
     </div>
   )
 }
@@ -628,20 +644,20 @@ Para ter certeza de que você entendeu como o programa funciona, vamos adicionar
 ```js
 const App = () => {
   const [ contador, defContador ] = useState(0)
-  console.log('renderizando com o valor do contador em', contador)
+  console.log('renderizando com o valor do contador em', contador) // highlight-line
 
   const aumentarEmUm = () => {
-    console.log('aumentando, valor anterior', contador)
+    console.log('aumentando, valor anterior', contador) // highlight-line
     defContador(contador + 1)
   }
 
   const diminuirEmUm = () => { 
-    console.log('diminuindo, valor anterior', contador)
+    console.log('diminuindo, valor anterior', contador) // highlight-line
     defContador(contador - 1)
   }
 
   const zerarContador = () => {
-    console.log('zerando, valor anterior', contador)
+    console.log('zerando, valor anterior', contador) // highlight-line
     defContador(0)
   }
 
