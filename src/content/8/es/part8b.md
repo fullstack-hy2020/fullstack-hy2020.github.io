@@ -655,9 +655,9 @@ const App = () => {
 
   return (
     <div>
-      <Notify errorMessage={errorMessage} />
+      <Notify errorMessage={errorMessage} /> // highlight-line
       <Persons persons = {result.data.allPersons} />
-      <PersonForm setError={notify} />
+      <PersonForm setError={notify} /> // highlight-line
     </div>
   )
 }
