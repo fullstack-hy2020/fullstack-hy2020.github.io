@@ -631,6 +631,8 @@ const PersonForm = ({ setError }) => {
 }
 ```
 
+Tenemos que buscar bastante en el objeto de error hasta encontrar el mensaje de error correcto...
+
 <!-- Renderöidään mahdollinen virheilmoitus näytölle -->
 Entonces podemos mostrar el mensaje de error en la pantalla según sea necesario
 
