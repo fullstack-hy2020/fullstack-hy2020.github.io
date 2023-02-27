@@ -21,13 +21,13 @@ O conteúdo do curso é feito utilizando o navegador Chrome.
 
 Lembre-se de <i>sempre</i> manter o console do desenvolvedor aberto ao desenvolver aplicações web.
 
-O console se parece com isso:
+O console do desenvolvedor é mais ou menos assim:
 
 ![Captura de tela das ferramentas do desenvolvedor aberta em um browser](../../images/0/1e.png)
 
-Certifique-se de que a guia <i>Rede</i> esteja aberta e marque a opção <i>Desativar cache</i> conforme mostrado. <i>Preservar registro</i> também pode ser útil: ele salva os logs impressos pela aplicação quando a página é recarregada.
+Certifique-se de que a guia <i>Rede (Network)</i> do navegador esteja aberta e marque a opção <i>Desativar cache (Disable cache)</i> conforme mostrado. <i>Preservar registro (Preserve log)</i> também pode ser útil: ele salva os logs impressos pela aplicação quando a página é recarregada.
 
-**N.B. (<i>Nota Bene</i>):** A guia mais importante é a <i>Console</i>. No entanto, nesta introdução, usaremos mais a guia <i>Rede</i>.
+**Obs.:** A guia mais importante é a <i>Console</i>. No entanto, nesta introdução, usaremos mais a guia <i>Rede (Network)</i>.
 
 ### HTTP GET
 
@@ -40,21 +40,21 @@ Quando você recarrega a página (pressione a tecla F5 ou o símbolo &#8635; em 
 
 ![Captura de tela do console do desenvolvedor mostrando esses dois eventos](../../images/0/2e.png)
 
-Se estiver utilizando um monitor pequena, terá que ampliar a janela do console para conseguir ver claramente.
+Se estiver utilizando um monitor pequeno, terá que ampliar a janela do console para conseguir ver claramente.
 
 Ao clicar no primeiro evento, mais informações sobre o que está acontecendo são reveladas:
 
 ![Visão detalhada de um único evento](../../images/0/3e.png)
 
-Na parte superior, <i>Geral</i>, mostra que o navegador requisitou o endereço <i>https://studies.cs.helsinki.fi/exampleapp</i> (embora o endereço tenha mudado ligeiramente desde que esta imagem foi feita) usando o método [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) e que a requisição foi bem-sucedida, pois o servidor respondeu com o código de status [200](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes).
+Na parte superior, <i>Geral (General)</i>, mostra que o navegador requisitou o endereço <i>https://studies.cs.helsinki.fi/exampleapp</i>  usando o método [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) (embora o endereço tenha mudado ligeiramente desde que esta imagem foi feita) e que a requisição foi bem-sucedida, pois o servidor respondeu com o código de status [200](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes).
 
-A requisição e a resposta do servidor possuem vários [cabeçalhos](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields):
+A requisição e a resposta do servidor possuem vários [cabeçalhos (headers)](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields):
 
 ![Captura de tela dos cabeçalhos de resposta](../../images/0/4e.png)
 
 Os cabeçalhos de resposta no topo nos dizem, por exemplo, o tamanho da resposta em bytes e o momento exato da resposta. Um cabeçalho importante, [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type), nos diz que a resposta é um arquivo de texto no formato [utf-8](https://en.wikipedia.org/wiki/UTF-8) e que os conteúdos foram formatados em HTML. Dessa forma, o navegador sabe que a resposta é uma página HTML comum e a renderiza para o navegador "como uma página web".
 
-A guia <i>Resposta</i> mostra os dados de resposta, uma página HTML comum. A seção <i>body</i> determina a estrutura da página renderizada na tela:
+A guia <i>Resposta (Response)</i> mostra os dados de resposta, uma página HTML comum. A seção <i>body</i> determina a estrutura da página renderizada na tela:
 
 ![Captura de tela da guia Resposta](../../images/0/5e.png)
 
@@ -64,11 +64,11 @@ Devido à tag "img", o navegador faz uma segunda requisição <i>HTTP</i> para b
 
 ![Imagem detalhada do segundo evento](../../images/0/6e.png)
 
-A requisição foi feita para o endereço <https://studies.cs.helsinki.fi/exampleapp/kuva.png> e o seu tipo é HTTP GET. Os cabeçalhos de resposta nos dizem que o tamanho da resposta é 89350 bytes e seu [Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) é <i>image/png</i>, então é uma imagem png. O navegador usa essa informação para renderizar a imagem corretamente na tela.
+A requisição foi feita para o endereço <https://studies.cs.helsinki.fi/exampleapp/kuva.png> e o seu tipo é HTTP GET. Os cabeçalhos de resposta (response headers) nos dizem que o tamanho da resposta é 89350 bytes e seu [Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) é <i>image/png</i>, então é uma imagem png. O navegador usa essa informação para renderizar a imagem corretamente na tela.
 
 O encadeamento de eventos causado pela abertura da página https://studies.cs.helsinki.fi/exampleapp no navegador forma o seguinte [diagrama de sequência](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/):
 
-![Diagrama de sequência do fluxo descrito acima](../../images/0/7m.png)
+![Diagrama de sequência do fluxo descrito acima](../../images/0/7m_ptbr.png)
 
 O diagrama de sequência demonstra como o navegador e o servidor estão se comunicando ao longo do tempo. O tempo flui no diagrama de cima para baixo, então se inicia com a primeira requisição que o navegador envia ao servidor, seguido pela resposta.
 
@@ -114,7 +114,7 @@ Você não precisa entender o código agora.
 
 O conteúdo da página HTML foi salvo como uma string-modelo ou uma string que permite avaliar, por exemplo, variáveis dentro dela. A parte da página inicial que muda dinamicamente, o número de notas salvas (no código <em>noteCount</em>), é substituída pelo número atual de notas (no código <em>notes.length</em>) na string de modelo.
 
-Escrever HTML no meio do código não é algo inteligente de se fazer, obviamente, mas para os programadores PHP antigos, isso era uma prática normal.
+Escrever HTML no meio do código não é algo interessante de se fazer, mas para os programadores PHP antigos, isso era uma prática normal.
 
 Em aplicações web tradicionais, o navegador é "burro". Ele só busca dados HTML do servidor e toda a lógica da aplicação está no servidor. Um servidor pode ser criado usando [Java Spring](https://spring.io/projects/spring-framework), [Python Flask](https://flask.palletsprojects.com/en/2.2.x/) ou [Ruby on Rails](http://rubyonrails.org/), para citar apenas alguns exemplos.
 
@@ -164,7 +164,7 @@ xhttp.send()
 
 Os detalhes do código não são importantes agora, mas algum código foi incluído para dar vida às imagens e ao texto. Começaremos a programar de verdade na [parte 1](/ptbr/part1). O código-exemplo nesta parte, na realidade, não tem relação alguma com as técnicas de programação deste curso.
 
-> Alguns podem se perguntar o porquê do objeto "xhttp" ser usado aqui em vez do moderno "fetch" (ir buscar). Isso se deve ao fato de não querermos entrar no assunto das "Promises" (promessas) ainda, e o código ter um papel secundário nesta parte. Voltaremos às formas modernas de fazer requisições ao servidor na Parte 2.
+> Alguns podem se perguntar o porquê do objeto "xhttp" ser usado aqui em vez do moderno "fetch". Isso se deve ao fato de não querermos entrar no assunto das "Promises" (promessas) ainda, e o código ter um papel secundário nesta parte. Voltaremos às formas modernas de fazer requisições ao servidor na Parte 2.
 
 Imediatamente após baixar a tag <i>script</i>, o navegador começa a executar o código.
 
@@ -185,7 +185,7 @@ Lá encontramos as notas em formato de "dados brutos" [JSON](https://en.wikipedi
 
 ![Saída JSON formatada](../../images/0/11e.png)
 
-Então, o código JavaScript da página de notas ilustrada acima baixa os dados JSON contendo as notas e forma uma lista de itens de notas a partir do conteúdo das notas:
+Então, o código JavaScript da página de notas ilustrada acima baixa os dados JSON contendo as notas e forma uma lista de itens de notas a partir do seu conteúdo:
 
 Isso é feito pelo seguinte código:
 
@@ -304,7 +304,7 @@ A mesma estrutura de árvore pode ser vista na guia <i>Elementos</i> do console.
 
 O funcionamento do navegador baseia-se na ideia de representar os elementos HTML como uma árvore.
 
-O Modelo de Documento por Objetos, ou [DOM](https://en.wikipedia.org/wiki/Document_Object_Model), é uma Interface de Programação de Aplicação (API [Application Programming Interface]) que possibilita a modificação programática das <i>árvores de elementos</i> correspondentes às páginas web.
+O Modelo de Documento por Objetos, ou [DOM](https://en.wikipedia.org/wiki/Document_Object_Model), é uma API (<i>Application Programming Interface</i>), isto ém uma Interface de Programação de Aplicação, que possibilita a modificação programática das <i>árvores de elementos</i> correspondentes às páginas web.
 
 O código JavaScript introduzido no capítulo anterior usou a API DOM para adicionar uma lista de notas na página.
 
@@ -345,7 +345,7 @@ Em seguida, criamos um novo elemento "li" e adicionamos algum conteúdo de texto
 
 ```js
 newElement = document.createElement('li')
-newElement.textContent = 'É bem fácil fazer gerência de páginas pelo console'
+newElement.textContent = 'Page manipulation from console is easy'
 ```
 
 E adicionamos o novo elemento "li" à lista:
@@ -362,9 +362,9 @@ Mesmo que a página seja atualizada no seu navegador, as mudanças não são per
 
 O elemento <i>head</i> (cabeçalho) do código HTML da página Notes contém uma tag [link](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link), que determina que o navegador deve buscar uma folha de estilo [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) a partir do endereço [main.css](https://studies.cs.helsinki.fi/exampleapp/main.css).
 
-Folhas de Estilo em Cascata (CSS [Cascading Style Sheets]), é uma linguagem de estilo usada para determinar a aparência de páginas web.
+CSS (<i>Cascading Style Sheets</i> - folhas de estilo em cascata), é uma linguagem de estilo usada para determinar a aparência de páginas web.
 
-O arquivo CSS baixado se parece com o seguinte:
+O arquivo CSS baixado é o seguinte:
 
 ```css
 .container {
@@ -383,7 +383,7 @@ Uma definição de seletor de classe sempre começa com um ponto e contém o nom
 
 As classes são [atributos](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class), que podem ser adicionados à elementos HTML.
 
-Atributos CSS podem ser examinados na guia <i>Elementos</i>:
+Atributos CSS podem ser examinados na guia <i>Elementos (Elements)</i>:
 
 ![Captura de tela da guia Elementos](../../images/0/17e.png)
 
@@ -395,7 +395,7 @@ A segunda regra CSS define a cor do texto das notas como azul.
 
 Os elementos HTML também podem ter outros atributos além de classes. O elemento <i>div</i>, que contém as notas, tem um atributo [id](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id) (identificador[exclusivo]). O código JavaScript usa o "id" para encontrar o elemento.
 
-A guia <i>Elementos</i> do console pode ser usada para alterar os estilos dos elementos.
+A guia <i>Elementos (Elements)</i> do console pode ser usada para alterar os estilos dos elementos.
 
 ![Guia Elementos das Ferramentas do Desenvolvedor](../../images/0/18e.png)
 
@@ -405,7 +405,7 @@ As alterações feitas no console não serão permanentes. Se deseja fazer alter
 
 Vamos revisar o que acontece quando a página https://studies.cs.helsinki.fi/exampleapp/notes é aberta no navegador.
 
-![Diagrama de sequência da interação navegador/servidor](../../images/0/19m.png)
+![Diagrama de sequência da interação navegador/servidor](../../images/0/19m_ptbr.png)
 
 - O navegador busca o código HTML que define o conteúdo e a estrutura da página do servidor usando uma requisição HTTP GET;
 - Os links no código HTML fazem com que o navegador também busque a folha de estilo CSS <i>main.css</i>...
@@ -422,7 +422,7 @@ A página de notas contém um [elemento formulário](https://developer.mozilla.o
 
 ![Elemento de formulário destacado tanto na página web quanto nas Ferramentas do Desenvolvedor](../../images/0/20e.png)
 
-Quando o botão no formulário é clicado, o navegador envia a entrada (input) do usuário para o servidor. Vamos abrir a guia <i>Rede</i> e ver como se envia o formulário:
+Quando o botão no formulário é clicado, o navegador envia a entrada (input) do usuário para o servidor. Vamos abrir a guia <i>Rede (Network)</i> e ver como se envia o formulário:
 
 ![Captura de tela da guia de Rede onde os eventos para enviar o formulário são mostrados](../../images/0/21e.png)
 
@@ -431,13 +431,13 @@ A primeira é o evento de envio do formulário. Vamos focar nessa parte:
 
 ![Visualização detalhada da primeira requisição](../../images/0/22e.png)
 
-Trata-se de uma requisição [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) para o endereço do servidor <i>new_note</i>. O servidor responde com o código de status HTTP 302. Isso é um [redirecionamento de URL](https://en.wikipedia.org/wiki/URL_redirection), no qual o servidor pede ao navegador para fazer uma nova requisição HTTP GET para o endereço definido no cabeçalho <i>Localização</i> — o endereço <i>notes</i>.
+Trata-se de uma requisição [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) para o endereço do servidor <i>new_note</i>. O servidor responde com o código de status HTTP 302. Isso é um [redirecionamento de URL](https://en.wikipedia.org/wiki/URL_redirection), no qual o servidor pede ao navegador para fazer uma nova requisição HTTP GET para o endereço definido no cabeçalho <i>Localização (Location)</i> — o endereço <i>notes</i>.
 
 Então, o navegador recarrega a página de Notas (Notes). O recarregamento faz mais três requisições HTTP: busca o arquivo CSS (main.css), o arquivo de JavaScript (main.js) e os dados das notas (data.json).
 
 A guia de Rede também mostra os dados enviados com o formulário:
 
-N.B.: Na versão mais recente do Chrome, o menu drop-down (lista suspensa) "Form Data" está dentro da nova guia "Payload", localizada à direita da guia "Cabeçalhos".
+Obs.: Na versão mais recente do Chrome, o menu drop-down (lista suspensa) "Form Data" está dentro da nova guia "Payload", localizada à direita da guia "Cabeçalhos".
 
 ![Menu drop-down do Form Data das Ferramentas do Desenvolvedor](../../images/0/23e.png)
 
@@ -445,7 +445,7 @@ A tag Form tem os atributos <i>action</i> e <i>method</i>, que definem que o env
 
 ![Destaque dos atributos action e method](../../images/0/24e.png)
 
-O código no servidor responsável pela requisição POST é bastante simples (N.B.: este código está no servidor, e não no código JavaScript baixado pelo navegador):
+O código no servidor responsável pela requisição POST é bastante simples (Obs.: este código está no servidor, e não no código JavaScript baixado pelo navegador):
 
 ```js
 app.post('/new_note', (req, res) => {
@@ -479,7 +479,7 @@ O servidor não salva as novas notas em um banco de dados, então elas desaparec
 
 A página "Notes", da nossa aplicação, segue um estilo de desenvolvimento web dos anos 90 e usa "Ajax". Como tal, ela está na crista da onda da tecnologia web dos anos 2000.
 
-[AJAX](<https://en.wikipedia.org/wiki/Ajax_(programming)>) (Asynchronous JavaScript and XML [JavaScript Assíncrono e XML]) é um termo que foi introduzido em fevereiro de 2005 com base em avanços na tecnologia do navegador para descrever uma nova abordagem revolucionária que permitia o carregamento de conteúdo em páginas web usando JavaScript embutido dentro do HTML, sem a necessidade de re-renderizar a página.
+[AJAX](<https://en.wikipedia.org/wiki/Ajax_(programming)>) (Asynchronous JavaScript and XML, ou seja, JavaScript Assíncrono e XML) é um termo que foi introduzido em fevereiro de 2005 com base em avanços na tecnologia do navegador para descrever uma nova abordagem revolucionária que permitia o carregamento de conteúdo em páginas web usando JavaScript embutido dentro do HTML, sem a necessidade de re-renderizar a página.
 
 Antes da Era AJAX, todas as páginas web funcionavam como a [aplicação web tradicional](/ptbr/part0/fundamentos_de_aplicacoes_web#aplicacoes-web-tradicionais) que vimos anteriormente neste capítulo. Todos os dados mostrados na página eram buscados com o código HTML gerado pelo servidor.
 
@@ -487,15 +487,15 @@ A página "Notes" usa AJAX para buscar os dados das notas. O envio do formulári
 
 As URLs da aplicação refletem os tempos antigos e despreocupados. Os dados JSON são buscados na URL <https://studies.cs.helsinki.fi/exampleapp/data.json> e novas notas são enviadas para a URL <https://studies.cs.helsinki.fi/exampleapp/new_note>. Hoje em dia, URLs como essas não seriam consideradas aceitáveis, pois não seguem as convenções geralmente reconhecidas de [APIs RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) (Representational State Transfer (REST) [Transferência de Estado Representacional]), que veremos com mais detalhes na [parte 3](/ptbr/part3).
 
-O termo AJAX agora é tão reconhecível que quase todo mundo conhece. Porém, o termo desapareceu e a nova geração nem sequer ouviu falar dele.
+O conceito por detrás do termo AJAX agora é tão cotidiano e básico que não se verifica nele nenhuma novidade para os dias atuais. O termo caiu no esquecimento e a nova geração nem sequer ouviu falar dele.
 
-### Aplicação de Página Única (SPA [Single Page Application])
+### Single Page Application (SPA)
 
 Em nossa aplicação de exemplo, a página inicial funciona como uma página web tradicional: toda a lógica está no servidor e o navegador só renderiza o HTML conforme instruído.
 
 A página "Notes" transfere algumas dessas responsabilidades para o navegador, gerando o código HTML para notas que já existem. O navegador realiza essa tarefa executando o código JavaScript que ele baixou do servidor. O código baixa as notas do servidor como dados JSON e adiciona elementos HTML para exibir as notas na página usando a [API DOM](/ptbr/part0/fundamentos_de_aplicacoes_web#modelo-de-documento-por-objetos-dom-document-object-model).
 
-Nos últimos anos, o estilo [SPA](https://en.wikipedia.org/wiki/Single-page_application) (Aplicação de Página Única) de criação de aplicações web surgiu. Os sites de estilo SPA não baixam todas as suas páginas separadamente do servidor como o nosso exemplo de aplicação faz, mas incluem apenas uma página HTML baixada do servidor, cujo conteúdo é manipulado com o código JavaScript que é executado no navegador.
+Nos últimos anos, o estilo [SPA](https://en.wikipedia.org/wiki/Single-page_application) (<i>Single Page Aplication</i>) de criação de aplicações web surgiu. Os sites de estilo SPA não baixam todas as suas páginas separadamente do servidor como o nosso exemplo de aplicação faz, mas incluem apenas uma página HTML baixada do servidor, cujo conteúdo é manipulado com o código JavaScript que é executado no navegador.
 
 A página "Notes" da nossa aplicação tem alguma semelhança com as aplicações de estilo SPA, mas ainda não está bem lá. Mesmo que a lógica para renderizar as notas seja executada no navegador, a página ainda usa o mecanismo tradicional de adição de novas notas. Os dados são enviados para o servidor através do envio do formulário e o servidor instrui o navegador a recarregar a página "Notes" com um <i>redirect</i>.
 
@@ -507,7 +507,7 @@ O código HTML é quase idêntico, mas o arquivo JavaScript é diferente (<i>spa
 
 O formulário não possui atributos <i>action</i> ou <i>method</i> para definir como e onde enviar os dados de entrada.
 
-Abra a guia <i>Rede</i> e esvazie-a. Quando você criar uma nova nota, verá que o navegador envia apenas uma requisição para o servidor.
+Abra a guia <i>Rede (Network)</i> e esvazie-a. Quando você criar uma nova nota, verá que o navegador envia apenas uma requisição para o servidor.
 
 ![Guia Rede nas Ferramentas do Desenvolvedor](../../images/0/26e.png)
 
@@ -571,15 +571,15 @@ Vale ressaltar que a aplicação serve apenas para demonstrar os conceitos do cu
 
 ### Bibliotecas JavaScript
 
-A aplicação de exemplo é feita com o chamado JavaScript "vanilla" (ou JavaScript "puro") (https://www.freecodecamp.org/news/is-vanilla-javascript-worth-learning-absolutely-c2c67140ac34/), usando somente a API DOM e JavaScript para manipular a estrutura das páginas.
+A aplicação de exemplo é feita com o chamado [JavaScript "vanilla" (ou JavaScript "puro")](https://www.freecodecamp.org/news/is-vanilla-javascript-worth-learning-absolutely-c2c67140ac34/), usando somente a API DOM e JavaScript para manipular a estrutura das páginas.
 
-Em vez de usar somente JavaScript e a API DOM, é comum usar diferentes bibliotecas que contêm ferramentas mais fáceis de trabalhar em comparação com a API DOM para manipular páginas. Uma dessas bibliotecas é a popular jQuery (https://jquery.com/).
+Em vez de usar somente JavaScript e a API DOM, é comum usar diferentes bibliotecas que contêm ferramentas mais fáceis de trabalhar em comparação com a API DOM para manipular páginas. Uma dessas bibliotecas é a popular [jQuery](https://jquery.com/).
 
-A biblioteca jQuery foi desenvolvida quando as aplicações web seguiam principalmente o estilo tradicional do servidor gerando páginas HTML, cuja funcionalidade era aprimorada no lado do navegador usando JavaScript escrito com jQuery. Uma das razões para o sucesso de jQuery foi a sua compatibilidade cross-browser (compatibilidade entre navegadores). A biblioteca funcionava independentemente do navegador ou da empresa que a fez, então não havia necessidade de soluções específicas para cada navegador. Hoje em dia, usar jQuery não é tão justificável dada a evolução de JavaScript, e os navegadores mais populares, de modo geral, dão um bom suporte às funcionalidades básicas.
+A biblioteca jQuery foi desenvolvida quando as aplicações web seguiam principalmente o estilo tradicional do servidor gerando páginas HTML, cuja funcionalidade era aprimorada no lado do navegador usando JavaScript escrito com jQuery. Uma das razões para o sucesso de jQuery foi a sua compatibilidade cross-browser (compatibilidade entre navegadores). A biblioteca funcionava independentemente do navegador ou da empresa que a fez, então não havia necessidade de soluções específicas para cada navegador. Hoje em dia, usar jQuery não é tão justificável dada a evolução do JavaScript e dos navegadores mais populares, que de modo geral dão um bom suporte às funcionalidades básicas.
 
-A ascensão das SPA trouxe várias formas mais "modernas" de desenvolvimento web do que jQuery. A favorita da primeira onda de desenvolvedores foi BackboneJS (http://backbonejs.org/). Após o seu lançamento (https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13) em 2012, AngularJS (https://angularjs.org/) rapidamente se tornou quase o padrão de desenvolvimento web moderno da Google.
+A ascensão das SPA trouxe várias formas mais "modernas" de desenvolvimento web do que jQuery. A favorita da primeira onda de desenvolvedores foi [BackboneJS](http://backbonejs.org/). Após o seu [lançamento](https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13) em 2012, [AngularJS](https://angularjs.org/) rapidamente se tornou quase o padrão de desenvolvimento web moderno da Google.
 
-No entanto, a popularidade do Angular caiu em outubro de 2014 após a equipe do Angular anunciar que o suporte à versão 1 encerraria-se (https://web.archive.org/web/20151208002550/https://jaxenter.com/angular-2-0-announcement-backfires-112127.html), e o Angular 2 não seria compatível com a primeira versão. Angular 2 e as versões mais recentes não foram muito bem recebidas.
+No entanto, a popularidade do Angular caiu em outubro de 2014 após a equipe do Angular anunciar que o [suporte à versão 1 encerraria-se](https://web.archive.org/web/20151208002550/https://jaxenter.com/angular-2-0-announcement-backfires-112127.html), e o Angular 2 não seria compatível com a primeira versão. Angular 2 e as versões mais recentes não foram muito bem recebidas.
 
 Atualmente, a ferramenta mais popular para implementar a lógica do lado do cliente (navegador) de aplicações web é a biblioteca [React](https://reactjs.org/) do Facebook.
 Durante este curso, vamos nos familiarizar com o React e com a biblioteca [Redux](https://github.com/reactjs/redux), que são frequentemente usadas juntas.
@@ -590,23 +590,23 @@ O status do React parece forte, mas o mundo de JavaScript está sempre mudando. 
 
 O que significa o nome do curso, <i>Desenvolvimento Web Full Stack</i>? A palavra "Full Stack" é um jargão de que todo mundo fala, mas ninguém sabe o que significa. Ou pelo menos, não há uma definição padrão para o termo.
 
-Praticamente, todas as aplicações web têm, pelo menos, duas "camadas" (layers): o navegador, sendo mais próximo do usuário final (cliente), é a camada superior; enquanto que o servidor é a camada inferior. Há também, no geral, uma camada de banco de dados abaixo da do servidor. Podemos, portanto, pensar na <i>arquitetura</i> de uma aplicação web como uma espécie de <i>pilha</i> (stack) de camadas.
+Praticamente, todas as aplicações web têm, pelo menos, duas "camadas" (<i>layers</i>): o navegador, sendo mais próximo do usuário final (cliente), é a camada superior; enquanto que o servidor é a camada inferior. Há também, no geral, uma camada de banco de dados abaixo da do servidor. Podemos, portanto, pensar na <i>arquitetura</i> de uma aplicação web como uma espécie de <i>pilha</i> (stack) de camadas.
 
 No geral, também falamos sobre o [front-end e o back-end](https://en.wikipedia.org/wiki/Front_and_back_ends). O navegador é o front-end, e o JavaScript que roda no navegador é o código front-end. O servidor, por outro lado, é o back-end.
 
 No contexto deste curso, desenvolvimento web full stack significa que nos concentramos em todas as partes da aplicação: front-end, back-end e banco de dados. Às vezes, o software no servidor e o sistema operacional dele são vistos como partes da pilha, mas não entraremos nesses detalhes.
 
-Programaremos o back-end em JavaScript, usando o ambiente de execução [Node.js](https://nodejs.org/en/). Usar a mesma linguagem de programação em múltiplas camadas da pilha dá ao desenvolvimento web full stack uma nova dimensão. No entanto, não é uma exigência do desenvolvimento web full stack usar a mesma linguagem de programação (JavaScript) para todas as camadas da pilha.
+Programaremos o back-end em JavaScript, usando o ambiente de execução [Node.js](https://nodejs.org/en/). Usar a mesma linguagem de programação em múltiplas camadas da pilha dá ao desenvolvimento web Full Stack uma nova dimensão. No entanto, não é uma exigência do desenvolvimento web Full Stack usar a mesma linguagem de programação (JavaScript) para todas as camadas da pilha.
 
 Era mais comum que os desenvolvedores se especializassem em uma dessas camadas, por exemplo, no back-end. As tecnologias no back-end e no front-end eram bastante diferentes. Com a tendência Full Stack, tornou-se comum que os desenvolvedores tenham a habilidade de programar em todas as camadas da aplicação e no banco de dados. Muitas vezes, os desenvolvedores full stack também precisam ter habilidades suficientes de configuração e administração para operar suas aplicações, como na nuvem, por exemplo.
 
 ### Fadiga JavaScript
 
-O desenvolvimento de aplicações web full stack é de muitas maneiras desafiador. Várias coisas estão acontecendo em vários lugares ao mesmo tempo, e a depuração (debug) é um pouco mais difícil se comparada com a depuração de [softwares de desktop comuns](https://en.wikipedia.org/wiki/Application_software). JavaScript nem sempre funciona da maneira que você espera que funcione (em comparação com muitas outras linguagens), e a forma assíncrona que seus ambientes de tempo de execução (runtime environments) funcionam cria todos os tipos de desafios. Comunicação na web exige conhecimento do protocolo HTTP. Também é preciso lidar com bancos de dados e administração e configuração de servidores. Também seria bom saber o suficiente de CSS para tornar as aplicações pelo menos um pouco apresentáveis.
+O desenvolvimento de aplicações web Full Stack é de muitas maneiras desafiador. Várias coisas estão acontecendo em vários lugares ao mesmo tempo, e a depuração (debug) é um pouco mais difícil se comparada com a depuração de [softwares de desktop comuns](https://en.wikipedia.org/wiki/Application_software). JavaScript nem sempre funciona da maneira que você espera que funcione (em comparação com muitas outras linguagens), e a forma assíncrona que seus ambientes de tempo de execução (<i>runtime environments</i>) funcionam cria todos os tipos de desafios. Comunicação na web exige conhecimento do protocolo HTTP. Também é preciso lidar com bancos de dados e administração e configuração de servidores. Também seria bom saber o suficiente de CSS para tornar as aplicações pelo menos apresentáveis.
 
 O mundo JavaScript se desenvolve rápido, o que traz seus próprios desafios. Ferramentas, bibliotecas e a própria linguagem estão em constante desenvolvimento. Algumas pessoas começam a ficar cansadas das constantes mudanças e deram um nome para isso: <em> fadiga JavaScript</em>. Veja [Como gerenciar a fadiga JavaScript no auth0](https://auth0.com/blog/how-to-manage-javascript-fatigue/) ou [Fadiga JavaScript no site Medium](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4).
 
-Você sofrerá de fadiga JavaScript durante este curso. Felizmente para nós, existem algumas maneiras de suavizar a curva de aprendizado para que possamos começar com programação em vez de configuração. Não podemos evitar completamente a configuração, mas podemos avançar animadamente nas próximas semanas evitando os piores infernos da configuração.
+Você sofrerá de fadiga JavaScript durante este curso. Felizmente para nós, existem algumas maneiras de suavizar a curva de aprendizado para que possamos começar com programação em vez de configuração. Não podemos evitar completamente a configuração, mas podemos avançar animadamente nas próximas semanas evitando as piores dores de cabeça da configuração.
 
 </div>
 
