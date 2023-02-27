@@ -281,7 +281,7 @@ let persons = [
   },
 ]
 
-const typeDefs = `
+const typeDefs = gql`
   type Person {
     name: String!
     phone: String
