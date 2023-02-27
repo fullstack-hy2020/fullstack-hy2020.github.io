@@ -844,7 +844,6 @@ useEffect(() => {
 // highlight-end
 ```
 
-<!-- Tämä ratkaisu ei kuitenkaan toimi, ellei _notify_-funktiota ole määritelty [useCallback] (https://reactjs.org/docs/hooks-reference.html#usecallback) -funktioon käärittynä. Jos näin ei tehdä, seurauksena en ikuinen luuppi, sillä aina kun komponentti _App_ renderöidään uudelleen notifikaation poistamisen jälkeen, syntyy <i> uusi versio </i> funktiosta _notify_ ja se taas aiheunkastionaituauden ... -->
 Sin embargo, esta solución no funciona si la función _notify_ no está envuelta en una función [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback). Si no es así, el resultado es un bucle sin fin. Cuando el componente _App_ se rerenderiza después de haber retirado una notificación, un <i>nueva versión</ i> de _notify_ se crea lo que hace que la función de efectos que se ejecute lo que provoca una nueva notificación y así sucesivamente una así sucesivamente...
 
 El código actual de la aplicación se puede encontrar en [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-5) branch <i>part8-5</i>.
