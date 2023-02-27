@@ -311,7 +311,7 @@ notes.map(note =>
   <li key={note.id}>
     {note.content}
   </li>
-)s
+)
 ```
 
 which generates a <i>li</i> tag containing the contents of the note from each note object.
