@@ -80,7 +80,7 @@ La respuesta del servidor se imprime en la consola:
 
 ![](../../images/8/9a.png)
 
-La aplicación puede comunicarse con un servidor GraphQL usando el objeto _client_. Se puede hacer que el cliente sea accesible para todos los componentes de la aplicación empaquetando el componente <i>App</i> con [ApolloProvider](https://www.apollographql.com/docs/react/get-started/#connect-your-client-to-react).
+La aplicación puede comunicarse con un servidor GraphQL usando el objeto *client*. Se puede hacer que el cliente sea accesible para todos los componentes de la aplicación empaquetando el componente <i>App</i> con [ApolloProvider](https://www.apollographql.com/docs/react/get-started/#connect-your-client-to-react).
 
 ```js
 import React from 'react'
@@ -148,9 +148,7 @@ const App = () => {
 export default App
 ```
 
-<!-- Hook-funktion _useQuery_ kutsuminen suorittaa parametrina annetun kyselyn. Hookin kutsuminen palauttaa olion, joka -->
-<!-- jolla en [useita kenttiä] (https://www.apollographql.com/docs/react/api/react/hooks/#result). Kenttä <i> cargando </i> en arvoltaan tosi, jos kyselyyn ei ole saatu vielä vastausta. Tässä tilanteessa renderöitävä koodi on -->
-Cuando se llama, _useQuery_ realiza la consulta que recibe como parámetro.
+Cuando se llama, *useQuery* realiza la consulta que recibe como parámetro.
 Devuelve un objeto con varios [campos](https://www.apollographql.com/docs/react/api/react/hooks/#result).
 El campo <i>loading</i> es verdadero si la consulta aún no ha recibido una respuesta.
 Luego se renderiza el siguiente código:
@@ -188,8 +186,7 @@ const Persons = ({ persons }) => {
 }
 ```
 
-<!-- Komponentti _App_ siis hoitaa edelleen kyselyn ja välittää tuloksen uuden komponentin renderöitäväksi: -->
-El componente _App_ aún realiza la consulta y pasa el resultado al nuevo componente que se va a representar:
+El componente *App* aún realiza la consulta y pasa el resultado al nuevo componente que se va a representar:
 
 ```js
 const App = () => {
@@ -248,8 +245,7 @@ También es posible realizar consultas con parámetros con GraphQL Playground. L
 
 ![](../../images/8/10x.png)
 
-<!-- Pregunte käyttämämme _useQuery_ toimii hyvin tilanteissa, joissa kysely sobre tarkoitus suorittaa heti komponentin renderöinnin yhteydessä. Nyt kuitenkin haluamme tehdä kyselyn vasta siinä vaiheessa kun käyttäjä haluaa nähdä jonkin henkilön tiedot, eli kysely tehdään vasta [sitä tarvittaessa] (https://www.apollographql.com/docs.0-queries/#v3ta ejecutar consultas manualmente). -->
-El hook _useQuery_ es adecuado para situaciones en las que la consulta se realiza cuando se procesa el componente.
+El hook *useQuery* es adecuado para situaciones en las que la consulta se realiza cuando se procesa el componente.
 Sin embargo, ahora queremos realizar la consulta solo cuando un usuario desea ver los detalles de una persona específica, por lo que la consulta se realiza solo [según sea necesario](https://www.apollographql.com/docs/react/data/queries/#executing-queries-manually).
 
 <!-- Tähän tilanteeseen sopii hook-funktio [useLazyQuery] (https://www.apollographql.com/docs/react/api/react/hooks/#uselazyquery). Komponentti <i> Personas </i> muuttuu seuraavasti: -->
@@ -326,12 +322,10 @@ const Persons = ({ persons }) => {
 export default Persons
 ```
 
-<!-- Koodi en kasvanut paljon, ja kaikki lisäykset eivät ole täysin ilmeisiä. -->
 El código ha cambiado bastante y todos los cambios no son completamente evidentes.
 
-<!-- Jos henkilön yhteydessä olevaa nappia painetaan, suoritetaan klikkauksenkäsittelijä _showPerson_, joka tekee GraphQL-kyselyn henkilön tiedoista: -->
 Cuando se hace clic en el botón "show address" de una persona, se hace clic en el controlador de eventos
-_showPerson_, y realiza una consulta GraphQL para obtener los detalles de las personas:
+*showPerson*, y realiza una consulta GraphQL para obtener los detalles de las personas:
 
 ```js
 const [getPerson, result] = useLazyQuery(FIND_PERSON) 
@@ -343,11 +337,9 @@ const showPerson = (name) => {
 }
 ```
 
-<!-- Kyselyn muuttujalle _nameToSearch_ määritellään arvo kutsuttaessa. -->
-La variable _nameToSearch_ de la consulta recibe un valor cuando se ejecuta la consulta.
+La variable *nameToSearch* de la consulta recibe un valor cuando se ejecuta la consulta.
 
-<!-- Kyselyn vastaus tulee muuttujaan _result_, ja ​​sen arvo sijoitetaan komponentin tilan muutujaan _person_. Sijoitus tehdään _useEffect_-hookissa: -->
-La respuesta de la consulta se guarda en la variable _result_, y su valor se guarda en el estado del componente _person_ en el hook _useEffect_.
+La respuesta de la consulta se guarda en la variable *result*, y su valor se guarda en el estado del componente *person* en el hook *useEffect*.
 
 ```js
 useEffect(() => {
@@ -357,16 +349,14 @@ useEffect(() => {
 }, [result])
 ```
 
-<!-- Hookin toisena parametrina en _result.data_, tämä saa aikaan sen, että hookin ensimmäisenä parametrina oleva funktio suoritetaan <i> aina kun kyselyssä haetaan uuden henkilön tiedot </i>. Jos päivitystä ei hoidettaisi kontrolloidusti hookissa, seuraisi ongelmia sen jälkeen kun yksittäisen henkilön näkymästä palataan kaikkien henkilöiden näkymään. -->
-El segundo parámetro del hook es _result_, por lo que la función dada al hook como su segundo parámetro se ejecuta <i>cada vez que la consulta obtiene los detalles de una persona diferente</i>.
+El segundo parámetro del hook es *result*, por lo que la función dada al hook como su segundo parámetro se ejecuta <i>cada vez que la consulta obtiene los detalles de una persona diferente</i>.
 ¿No manejaríamos la actualización de una manera controlada en un hook, volver de la vista de una sola persona a una lista de todas las personas causaría problemas?
 
-Si el estado _person_ tiene un valor, en lugar de mostrar una lista de todas las personas, solo se muestran los detalles de una persona.
+Si el estado *person* tiene un valor, en lugar de mostrar una lista de todas las personas, solo se muestran los detalles de una persona.
 
 ![](../../images/8/11.png)
 
-<!-- Yksittäisen henkilön näkymästä palataan kaikkien henkilöiden näkymään sijoittamalla tilan muuttujan _person_ arvoksi _null_. -->
-Cuando un usuario quiere volver a la lista de personas, el estado _person_ se establece en _null_.
+Cuando un usuario quiere volver a la lista de personas, el estado *person* se establece en *null*.
 
 La solución no es la más ordenada posible, pero es lo suficientemente buena para nosotros.
 
@@ -414,10 +404,8 @@ mutation createPerson($name: String!, $street: String!, $city: String!, $phone: 
 `
 ```
 
-<!-- Mutaatioiden tekemiseen sopivan toiminnallisuuden tarjoaa hook-funktio [useMutation] (https://www.apollographql.com/docs/react/api/ react / hooks / # usemutation). -->
 La función hook [useMutation](https://www.apollographql.com/docs/react/api/react/hooks/#usemutation) proporciona la funcionalidad para realizar mutaciones.
 
-<!-- Tehdään sovellukseen uusi komponentti uuden henkilön lisämiseen: -->
 Creemos un nuevo componente para agregar una nueva persona al directorio:
 
 ```js
@@ -482,16 +470,14 @@ const PersonForm = () => {
 export default PersonForm
 ```
 
-<!-- Lomakkeen koodi en suoraviivainen, mielenkiintoiset rivit en korostettu. Mutación suorittava funktio saadaan luotua _useMutation_-hookin avulla. Hook palauttaa kyselyfunktion <i> taulukon </i> ensimmäisenä alkiona: -->
 El código del formulario es sencillo y las líneas interesantes se han resaltado.
-Podemos definir la función de mutación usando el hook-_useMutation_.
+Podemos definir la función de mutación usando el hook-*useMutation*.
 El hook devuelve una <i>matriz</i>, cuyo primer elemento contiene el resultado de la mutación.
 
 ```js
 const [ createPerson ] = useMutation(CREATE_PERSON)
 ```
 
-<!-- Kyselyä tehtäessä määritellään kyselyn muuttujille arvot: -->
 Las variables de consulta reciben valores cuando se realiza la consulta:
 
 ```js
@@ -532,7 +518,7 @@ La solución es simple, y cada vez que un usuario agrega una nueva persona, apar
 
 El lado malo de la solución es todo el tráfico web inútil.
 
-Otra manera fácil de mantener la caché sincronizada es usar el hook de _useMutation_, el parámetro [refetchQueries](https://www.apollographql.com/docs/react/api/react/hooks/#params-2) para definir que la consulta que busca a todas las personas se realice nuevamente cada vez que se cree una nueva persona.
+Otra manera fácil de mantener la caché sincronizada es usar el hook de *useMutation*, el parámetro [refetchQueries](https://www.apollographql.com/docs/react/api/react/hooks/#params-2) para definir que la consulta que busca a todas las personas se realice nuevamente cada vez que se cree una nueva persona.
 
 ```js
 const ALL_PERSONS = gql`
@@ -565,7 +551,6 @@ Si deseas realizar varias consultas, puedes pasar varios objetos dentro de refet
 
 Hay otras formas de actualizar la caché. Más sobre estos más adelante en esta parte.
 
-<!-- Sovellukseen en tällä hetkellä määritelty kyselyjä komponenttien koodin sekaan. Eriytetään kyselyjen määrittely omaan tiedostoonsa <i> queries.js </i>: -->
 Por el momento, en nuestro código, las consultas y el componente están definidos en el mismo lugar.
 Separemos las definiciones de consulta en su propio archivo <i>queries.js</i>:
 
@@ -590,7 +575,6 @@ export const CREATE_PERSON = gql`
 `
 ```
 
-<!-- Jokainen komponentti importtaa tarvitsemansa kyselyt: -->
 Luego, cada componente importa las consultas que necesita:
 
 ```js
@@ -610,9 +594,9 @@ Intentar crear una persona con datos no válidos provoca un error y toda la apli
 
 ![devtools showing error: name must be unique](../../images/8/14x.png)
 
-Debemos manejar la excepción. Podemos registrar una función de manejo de errores en la mutación usando _onError_ [option](https://www.apollographql.com/docs/react/api/react/hooks/#params-2) del hook _useMutation_.
+Debemos manejar la excepción. Podemos registrar una función de manejo de errores en la mutación usando *onError* [option](https://www.apollographql.com/docs/react/api/react/hooks/#params-2) del hook *useMutation*.
 
-Registremos la mutación en un controlador de errores, que usa la función _setError_ que recibe como parámetro para establecer un mensaje de error:
+Registremos la mutación en un controlador de errores, que usa la función *setError* que recibe como parámetro para establecer un mensaje de error:
 
 ```js
 const PersonForm = ({ setError }) => {
@@ -635,7 +619,6 @@ const PersonForm = ({ setError }) => {
 
 Tenemos que buscar bastante en el objeto de error hasta encontrar el mensaje de error correcto...
 
-<!-- Renderöidään mahdollinen virheilmoitus näytölle -->
 Entonces podemos mostrar el mensaje de error en la pantalla según sea necesario
 
 ```js
@@ -709,7 +692,7 @@ export const EDIT_NUMBER = gql`
 `
 ```
 
-El componente <i>PhoneForm</i> responsable del cambio es sencillo. El formulario tiene campos para el nombre de la persona y el nuevo número de teléfono, y llama a la función _changeNumber_. La función se realiza mediante el hook _useMutation_.
+El componente <i>PhoneForm</i> responsable del cambio es sencillo. El formulario tiene campos para el nombre de la persona y el nuevo número de teléfono, y llama a la función *changeNumber*. La función se realiza mediante el hook *useMutation*.
 Se han resaltado líneas interesantes en el código.
 
 ```js
@@ -773,17 +756,14 @@ Esto sucede porque cada persona tiene un campo de identificación de tipo <i>ID<
 
 El código actual de la aplicación se puede encontrar en [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4) branch <i>part8-4</i>.
 
-<!-- Sovelluksessa sobre vielä pieni ongelma. Jos yritämme vaihtaa olemattomaan nimeen liittyvän puhelinnumeron, ei mitään näytä tapahtuvan. Syynä tälle on se, että jos nimeä vastaavaa henkilöä ei löydy, vastataan kyselyyn <i> null </i>: -->
 Nuestra aplicación todavía tiene un pequeño defecto. Si intentamos cambiar el número de teléfono por un nombre que no existe, parece que no pasa nada.
 Esto sucede porque si no se puede encontrar una persona con el nombre de pila, la respuesta de mutación es <i>nula</i>:
 
 ![](../../images/8/23ea.png)
 
-<!-- Koska kyseessä ei ole GraphQL: n kannalta virhetilanne, ei _onError_-virheenkäsittelijän rekisteröimisestä tässä tilanteessa hyötyä. -->
-Para GraphQL esto no es un error, por lo que registrar un controlador de errores _onError_ no es útil.
+Para GraphQL esto no es un error, por lo que registrar un controlador de errores *onError* no es útil.
 
-<!-- Voimme generoida virheilmoituksen _useMutation_-hookin toisena parametrina palauttaman mutacion tuloksen kertovan olion _result_ avulla. -->
-Podemos usar el campo _result_ devuelto por el hook _useMutation_ como su segundo parámetro para generar un mensaje de error.
+Podemos usar el campo *result* devuelto por el hook *useMutation* como su segundo parámetro para generar un mensaje de error.
 
 ```js
 const PhoneForm = ({ setError }) => {
@@ -809,9 +789,8 @@ const PhoneForm = ({ setError }) => {
 }
 ```
 
-<!-- Jos henkilöä ei löytynt, eli kyselyn tulos _result.data.editNumber_ on _null_, asettaa komponentti propseina saamansa callback -funktion avulla sopivan virheilmoituksen. Virheilmoituksen asettamista kontrolloidaan jälleen useEffect-hookin avulla, eli virheviesti halutaan asetaa ainoastaan ​​jos mutaation tulos _result.data_ muuttuu. -->
-Si no se puede encontrar a una persona, o el _result.data.editNumber_ es _null_, el componente usa la función de devolución de llamada que recibió como props para establecer un mensaje de error adecuado.
-Queremos configurar el mensaje de error solo cuando el resultado de la mutación _result.data_ cambie, por lo que usamos el hook useEffect para controlar la configuración del mensaje de error.
+Si no se puede encontrar a una persona, o el *result.data.editNumber* es *null*, el componente usa la función de devolución de llamada que recibió como props para establecer un mensaje de error adecuado.
+Queremos configurar el mensaje de error solo cuando el resultado de la mutación *result.data* cambie, por lo que usamos el hook useEffect para controlar la configuración del mensaje de error.
 
 <!-- useEffect aiheuttaa ESLint-virheilmoituksen: -->
 El uso de useEffect provoca una advertencia de ESLint:
@@ -831,8 +810,7 @@ useEffect(() => {
 // highlight-end
 ```
 
-<!-- Voisimme yrittää päästä varoituksesta eroon lisäämällä función _notify_ useEffectin toisena parametrina olevaan taulukkoon: -->
-Podríamos intentar deshacernos de la advertencia agregando la función _setError_ al segundo arreglo de parámetros de useEffect:
+Podríamos intentar deshacernos de la advertencia agregando la función *setError* al segundo arreglo de parámetros de useEffect:
 
 ```js
 useEffect(() => {
@@ -844,7 +822,7 @@ useEffect(() => {
 // highlight-end
 ```
 
-Sin embargo, esta solución no funciona si la función _notify_ no está envuelta en una función [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback). Si no es así, el resultado es un bucle sin fin. Cuando el componente _App_ se rerenderiza después de haber retirado una notificación, un <i>nueva versión</ i> de _notify_ se crea lo que hace que la función de efectos que se ejecute lo que provoca una nueva notificación y así sucesivamente una así sucesivamente...
+Sin embargo, esta solución no funciona si la función &*notify* no está envuelta en una función [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback). Si no es así, el resultado es un bucle sin fin. Cuando el componente *App* se rerenderiza después de que se haya ocultado una notificación, una <i>nueva versión</i> de *notify* se crea lo que hace que la función de *useEffect* que se ejecute lo que provoca una nueva notificación y así sucesivamente una así sucesivamente...
 
 El código actual de la aplicación se puede encontrar en [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-5) branch <i>part8-5</i>.
 
