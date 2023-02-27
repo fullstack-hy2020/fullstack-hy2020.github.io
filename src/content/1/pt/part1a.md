@@ -11,6 +11,8 @@ Agora, começaremos a nos familiarizar com provavelmente o tópico mais importan
 
 A maneira mais simples de começar é usando uma ferramenta chamada [create-react-app](https://github.com/facebook/create-react-app). É possível (mas não necessário) instalar o <i>create-react-app</i> em sua máquina se a ferramenta <i>npm</i> instalada junto com o Node estiver na versão <i>5.3</i>, pelo menos.
 
+<i>Durante o curo, você também pode utilizar a nova ferramenta frontend chamada [Vite](https://vitejs.dev/), se desejar. O create-react-app ainda é a ferramenta recomendada pelo time do React e é por isso que continua sendo a ferramenta padrão para configurar um projeto React neste curso. Leia [aqui](https://github.com/reactjs/reactjs.org/pull/5487#issuecomment-1409720741) como o time React enxerga o futuro das ferramentas React.</i>
+
 Vamos criar uma aplicação chamada <i>part1</i> e navegar até o seu diretório.
 
 ```bash
@@ -74,7 +76,7 @@ Por padrão, o arquivo <i>public/index.html</i> não contém nenhum marcador HTM
       conteúdo não mostrado ...
   </head>
   <body>
-    <noscript>Você precisa habilitar o JavaScript para executar esta aplicação.</noscript>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
   </body>
 </html>
@@ -143,7 +145,7 @@ export default App
 
 E observe o que acontece no console do navegador:
 
-![](../../images/1/30.png)
+![browser console showing console log with arrow to "Hello from component"](../../images/1/30.png)
 
 A primeira regra do desenvolvimento web front-end:
 
@@ -181,7 +183,7 @@ Note que você não deve remover a linha no final do componente:
 export default App
 ```
 
-A exportação não é mostrada em a maioria dos exemplos do material do curso. Sem a exportação, o componente e a aplicação inteira desmoronam.
+A exportação não é mostrada na maioria dos exemplos do material do curso. Sem a exportação, o componente e a aplicação inteira desmoronam.
 
 Você se lembrou da sua promessa de deixar o console aberto? O que foi impresso?
 
@@ -229,7 +231,7 @@ Mas ao escrever em JSX, a tag precisa ser fechada:
 
 ### Múltiplos componentes
 
-Vamos modificar o arquivo <i>App.js</i> da seguinte forma (N.B.(Nota Bene): a exportação na parte inferior é omitida nestes <i>exemplos</i>, tanto agora quanto no futuro. Ela ainda é necessária para que o código funcione):
+Vamos modificar o arquivo <i>App.js</i> da seguinte forma (obs.: a exportação na parte inferior é omitida nestes <i>exemplos</i>, tanto agora quanto no futuro. Ela ainda é necessária para que o código funcione):
 
 ```js
 // highlight-start
@@ -269,7 +271,7 @@ const App = () => {
 }
 ```
 
-Escrever componentes em React é fácil, e utilizando combinação de componentes mesmo uma aplicação mais complexa pode ser relativamente mantida. De fato, uma das filosofias fundamentais do React é criar aplicações a partir de muitos componentes que são especializados e reutilizáveis.
+Escrever componentes em React é fácil, e utilizando combinação de componentes mesmo uma aplicação mais complexa pode ser mantida de forma organizada. De fato, uma das filosofias fundamentais do React é criar aplicações a partir de muitos componentes que são especializados e reutilizáveis.
 
 Outra forte convenção é a ideia de um componente <i>root</i> chamado <i>App</i> no topo da árvore de componentes da aplicação. No entanto, como aprenderemos na [Parte 6](/ptbr/part6), há situações em que o componente <i>App</i> não é exatamente a raiz (root), mas é envolto em um componente utilitário apropriado.
 
@@ -353,9 +355,9 @@ O React foi configurado para gerar mensagens de erro bastante claras. Mesmo assi
 
 ![captura de tela de um erro prop indefinido](../../images/1/2a.png)
 
-Como já mencionamos, é possível e vantajoso escrever comandos <em>console.log()</em> (que imprimem no console) ao programar em React.
+Como já mencionamos, é possível e recompensador escrever comandos <em>console.log()</em> (que imprimem no console) ao programar em React.
 
-Além disso, tenha em mente que **os nomes de componentes React devem ser maiusculizados**. Se você tentar definir um componente da seguinte forma:
+Além disso, tenha em mente que **os nomes de componentes React devem estar com a primeira letra em maiúsculo**. Se você tentar definir um componente da seguinte forma:
 
 ```js
 const footer = () => {
@@ -413,7 +415,7 @@ const App = () => {
 
 Porém, definir o componente raiz da aplicação não é algo particularmente sábio a se fazer, e deixa o código com uma aparência um pouco feia.
 
-Por conta do elemento raiz ser "estipulado", temos elementos div "extras" na árvore DOM. Isso pode ser evitado usando [fragmentos](https://reactjs.org/docs/fragments.html#short-syntax), ou seja, envolvendo os elementos a serem retornados pelo componente com um elemento vazio:
+Por conta do elemento raiz ser compulsório, temos elementos div "extras" na árvore DOM. Isso pode ser evitado usando [fragmentos](https://reactjs.org/docs/fragments.html#short-syntax), ou seja, envolvendo os elementos a serem retornados pelo componente com um elemento vazio:
 
 ```js
 const App = () => {
@@ -546,7 +548,7 @@ Note que nesta parte há [mais exercícios](/ptbr/part1/um_estado_mais_complexo_
 
 Uma boa maneira de nomear as pastas no seu repositório de envio é a seguinte:
 
-```
+```text
 part0
 part1
   courseinfo
@@ -563,7 +565,7 @@ Para cada parte do curso, há um diretório, que se ramifica em diretórios cont
 
 Para cada aplicação web em uma série de exercícios, é recomendado que você envie todos os arquivos relacionados a essa aplicação, exceto o diretório <i>node_modules</i>.
 
-**N.B.:** o conteúdo dos exercícios foram deixados no idioma original da tradução (inglês) por questões de conveniência, visto a revisão que os mantenedores do curso devem fazer no código enviado ao sistema de avaliação da Universidade de Helsinque. Desta forma, escreva suas aplicações utilizando os mesmos termos usados nas variáveis, componentes, etc que estão em inglês.
+<i>**Obs.:** o conteúdo dos exercícios foram deixados no idioma original da tradução (inglês) por questões de conveniência, visto a revisão que os mantenedores do curso devem fazer no código enviado ao sistema de avaliação da Universidade de Helsinque. Desta forma, escreva suas aplicações utilizando os mesmos termos usados nas variáveis, componentes, etc que estão em inglês.</i>
 
   <h4>1.1: course information — 1º passo</h4>
 
@@ -646,7 +648,7 @@ Ou seja, de acordo com Martin, o progresso cuidadoso, passo a passo, é, ainda, 
 
 <h4>1.2: course information — 2º passo</h4>
 
-Refatore o componente <i>Content</i> de tal forma que ele não renderize os nomes das partes ou seus números de exercícios <i>per se</i>. Em vez disso, somente renderiza três componentes <i>Part</i>, cada um dos quais renderiza o nome e o número de exercícios de uma parte.
+Refatore o componente <i>Content</i> de tal forma que ele não renderize os nomes das partes ou seus números de exercícios por si mesmo. Em vez disso, somente renderiza três componentes <i>Part</i>, cada um dos quais renderiza o nome e o número de exercícios de uma parte.
 
 ```js
 const Content = ... {
@@ -660,6 +662,6 @@ const Content = ... {
 }
 ```
 
-Nossa aplicação passa informações de uma maneira bastante primitiva no momento, já que está baseada em variáveis individuais. Vamos corrigir isso na [Parte 2](/ptbr/part2).
+No momento, nossa aplicação passa informações de uma maneira bastante primitiva, já que está baseada em variáveis individuais. Vamos corrigir isso na [Parte 2](/ptbr/part2).
 
 </div>
