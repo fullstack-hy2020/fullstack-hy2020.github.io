@@ -610,7 +610,7 @@ Intentar crear una persona con datos no válidos provoca un error y toda la apli
 
 ![error](../../images/8/14ea.png)
 
-Debemos manejar la excepción. Podemos registrar una función de manejo de errores en la mutación usando _onError_ del hook _useMutation_ [opción](https://www.apollographql.com/docs/react/api/react/hooks/#params-2).
+Debemos manejar la excepción. Podemos registrar una función de manejo de errores en la mutación usando _onError_ [option](https://www.apollographql.com/docs/react/api/react/hooks/#params-2) del hook _useMutation_.
 
 Registremos la mutación en un controlador de errores, que usa la función _setError_ que recibe como parámetro para establecer un mensaje de error:
 
@@ -622,7 +622,9 @@ const PersonForm = ({ setError }) => {
     refetchQueries: [  {query: ALL_PERSONS } ],
     // highlight-start
     onError: (error) => {
-      setError(error.graphQLErrors[0].message)
+      const errors = error.graphQLErrors[0].extensions.error.errors
+      const messages = Object.values(errors).map(e => e.message).join('\n')
+      setError(messages)
     }
     // highlight-end
   })
