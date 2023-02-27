@@ -92,7 +92,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 <!--We can now retrieve the notes in the <i>App</i> component. The code expands as follows:-->
 
-我们现在就可以从  <i>App</i> 组件中检索笔记了。相关代码如下：
+我们现在就可以从  <i>App</i> 组件中获取笔记了。相关代码如下：
 
 ```js
 import { useQuery } from 'react-query'  // highlight-line
@@ -126,9 +126,9 @@ const App = () => {
 
 <!--Retrieving data from the server is still done in the familiar way with the Axios <i>get</i> method. However, the Axios method call is now wrapped in a [query](https://react-query-v3.tanstack.com/guides/queries) formed with the [useQuery](https://react-query-v3.tanstack.com/reference/useQuery) function. The first parameter of the function call is a string <i>notes</i> which acts as a [key](https://react-query-v3.tanstack.com/guides/query-keys)  to the query defined, i.e. the list of notes.-->
 
-从服务器中检索数据的方式和 Axios 的 *get* 方法类似。然而，Axios 的调用方法现在被包装在一个用 [useQuery](https://react-query-v3.tanstack.com/reference/useQuery) 函数形成的 [query](https://react-query-v3.tanstack.com/guides/queries) 查询中。在这个函数调用中，第一个参数——一个字符串 <i>notes</i>——是已经定义的查询的 [key](https://react-query-v3.tanstack.com/guides/query-keys)，即笔记列表。
+从服务器中获取数据的方式和 Axios 的 *get* 方法类似。然而，Axios 的调用方法现在被包装在一个用 [useQuery](https://react-query-v3.tanstack.com/reference/useQuery) 函数形成的 [query](https://react-query-v3.tanstack.com/guides/queries) 查询中。在这个函数调用中，第一个参数——一个字符串 <i>notes</i>——是已经定义的查询的 [key](https://react-query-v3.tanstack.com/guides/query-keys)，即笔记列表。
 
-The return value of the <i>useQuery</i> function is an object that indicates the status of the query. The output to the console illustrates the situation: 
+<!--The return value of the <i>useQuery</i> function is an object that indicates the status of the query. The output to the console illustrates the situation:--> 
 
 *useQuery* 函数的返回值是一个包含查询状态的对象。控制台中的输出展现了这个情境：
 
@@ -148,7 +148,7 @@ The return value of the <i>useQuery</i> function is an object that indicates the
 
 <!--So the application retrieves data from the server and renders it on the screen without using the React hooks <i>useState</i> and <i>useEffect</i> used in chapters 2-5 at all. The data on the server is now entirely under the administration of the React Query library, and the application does not need the state defined with React's <i>useState</i> hook at all!-->
 
-因此，这个应用可以从服务器中检索数据并将其渲染到屏幕上，而完全不使用我们在第 2 章至第 5 章谈及的 React 钩子—— *useState* 和 *useEffect*。服务器中的数据现在完全在 React Query 库的管理下，应用程序完全不需要用 React 的 useState 钩子定义状态。
+因此，这个应用可以从服务器中获取数据并将其渲染到屏幕上，而完全不使用我们在第 2 章至第 5 章谈及的 React 钩子—— *useState* 和 *useEffect*。服务器中的数据现在完全在 React Query 库的管理下，应用程序完全不需要用 React 的 useState 钩子定义状态。
 
 <!--Let's move the function making the actual HTTP request to its own file <i>requests.js</i>-->
 
@@ -300,7 +300,7 @@ export const updateNote = updatedNote =>
   axios.put(`${baseUrl}/${updatedNote.id}`, updatedNote).then(res => res.data)
 ```
 
-Updating the note is also done by mutation. The <i>App</i> component expands as follows:
+<!--Updating the note is also done by mutation. The <i>App</i> component expands as follows:-->
 
 更新笔记同样通过突变来完成。*App* 组件扩展为如下：
 
@@ -325,17 +325,21 @@ const App = () => {
 }
 ```
 
-So again, a mutation was created that invalidated the query <i>notes</i> so that the updated note is rendered correctly. Using mutation is easy, the method <i>mutate</i> receives a note as a parameter, the importance of which has been changed to the negation of the old value.
+<!--So again, a mutation was created that invalidated the query <i>notes</i> so that the updated note is rendered correctly. Using mutation is easy, the method <i>mutate</i> receives a note as a parameter, the importance of which has been changed to the negation of the old value.-->
 
 一个能够无效化查询的突变被再次创建，更新后的笔记也可以正常渲染。使用突变是轻松的，*mutate* 方法接收一个笔记作为参数，这个笔记的重要性已变为旧值的反义。
 
 The current code for the application is in [GitHub](https://github.com/fullstack-hy2020/query-notes/tree/part6-2) in the branch <i>part6-2</i>.
 
-当前应用的代码可以在 [GitHub](https://github.com/fullstack-hy2020/query-notes/tree/part6-2) 上 *part6-2*的分支中找到。
+当前应用的代码可以在 [GitHub](https://github.com/fullstack-hy2020/query-notes/tree/part6-2) 上 *part6-2* 的分支中找到。
 
-### Optimizing the performance
+### <!--Optimizing the performance-->
 
-The application works well, and the code is relatively simple. The ease of making changes to the list of notes is particularly surprising. For example, when we change the importance of a note, invalidating the query <i>notes</i> is enough for the application data to be updated:
+### 优化性能
+
+<!--The application works well, and the code is relatively simple. The ease of making changes to the list of notes is particularly surprising. For example, when we change the importance of a note, invalidating the query <i>notes</i> is enough for the application data to be updated:-->
+
+应用目前运转良好，代码也相对简单。对笔记列表的更改意外地轻松。例如，当我们改变了笔记的重要性，使 key 为 *notes* 的查询无效即可更新应用中的数据。
 
 ```js
   const updateNoteMutation = useMutation(updateNote, {
@@ -345,15 +349,22 @@ The application works well, and the code is relatively simple. The ease of makin
   })
 ```
 
-The consequence of this, of course, is that after the PUT request that causes the note change, the application makes a new GET request to retrieve the query data from the server:
+<!--The consequence of this, of course, is that after the PUT request that causes the note change, the application makes a new GET request to retrieve the query data from the server:-->
+
+这样的结果，就是在一个导致笔记更新的 PUT 请求后，应用会创建一个 GET 请求在服务器上获取数据。
 
 ![](../../images/6/61new.png)
 
-If the amount of data retrieved by the application is not large, it doesn't really matter. After all, from a browser-side functionality point of view, making an extra HTTP GET request doesn't really matter, but in some situations it might put a strain on the server.
+<!--If the amount of data retrieved by the application is not large, it doesn't really matter. After all, from a browser-side functionality point of view, making an extra HTTP GET request doesn't really matter, but in some situations it might put a strain on the server.-->
 
-If necessary, it is also possible to optimize performance [by manually updating](https://react-query-v3.tanstack.com/guides/updates-from-mutation-responses) the query state maintained by React Query.
+如果应用从服务器中获取的数据量不大，这样的更新流程无关紧要。毕竟，从浏览器功能的角度来看，多做一个 HTTP 请求并不重要，但在某些情况下，这可能会给服务器带来压力。
 
-The change for the mutation adding a new note is as follows:
+<!--If necessary, it is also possible to optimize performance [by manually updating](https://react-query-v3.tanstack.com/guides/updates-from-mutation-responses) the query state maintained by React Query.-->
+必要情况下，也可以通过 [手动更新](https://react-query-v3.tanstack.com/guides/updates-from-mutation-responses) React Query 所维护的查询状态，以实现性能优化。
+
+<!--The change for the mutation adding a new note is as follows:-->
+
+对新增笔记的突变，做出如下更改：
 
 ```js
 const App = () => {
@@ -369,20 +380,28 @@ const App = () => {
 }
 ```
 
-That is, in the <i>onSuccess</i> callback, the <i>queryClient</i> object first reads the existing <i>notes</i> state of the query and updates it by adding a new note, which is obtained as a parameter of the callback function. The value of the parameter is the value returned by the function <i>createNote</i>, defined in the file <i>requests.js</i> as follows:
+<!--That is, in the <i>onSuccess</i> callback, the <i>queryClient</i> object first reads the existing <i>notes</i> state of the query and updates it by adding a new note, which is obtained as a parameter of the callback function. The value of the parameter is the value returned by the function <i>createNote</i>, defined in the file <i>requests.js</i> as follows:-->
+
+在 *onSuccess* 的回调函数中，*queryClient* 对象首先读取已经存在的笔记状态，并加入在回调函数参数中获取到的新增笔记以实现更新。回调函数参数的值，即为在 <i>requests.js</i> 中定义的 *createNote* 函数所返回的值：
 
 ```js
 export const createNote = newNote =>
   axios.post(baseUrl, newNote).then(res => res.data)
 ```
 
-It would be relatively easy to make a similar change to a mutation that changes the importance of the note, but we leave it as an optional exercise.
+<!--It would be relatively easy to make a similar change to a mutation that changes the importance of the note, but we leave it as an optional exercise.-->
 
-If we closely follow the browser's network tab, we notice that React Query retrieves all notes as soon as we move the cursor to the input field:
+用类似的方法去更新笔记的重要性也相对简单，但我们把这留作一个可选练习。
+
+<!--If we closely follow the browser's network tab, we notice that React Query retrieves all notes as soon as we move the cursor to the input field:-->
+
+如果我们仔细观察浏览器的网络面板，我们会注意到：当我们将光标移动至输入框时，React Query 立即去获取全部的笔记。
 
 ![](../../images/6/62new.png)
 
-What is going on? By reading the [documentation](https://react-query-v3.tanstack.com/reference/useQuery), we notice that the default functionality of React Query's queries is that the queries (whose status is <i>stale</i>) are updated when <i>window focus</i>, i.e. the active element of the application's user interface, changes. If we want, we can turn off the functionality by creating a query as follows:
+<!--What is going on? By reading the [documentation](https://react-query-v3.tanstack.com/reference/useQuery), we notice that the default functionality of React Query's queries is that the queries (whose status is <i>stale</i>) are updated when <i>window focus</i>, i.e. the active element of the application's user interface, changes. If we want, we can turn off the functionality by creating a query as follows:-->
+
+发生了什么？通过阅读 [文档](https://react-query-v3.tanstack.com/reference/useQuery) ，我们注意到 React Query 查询的默认功能是：当窗口焦点，即应用中用户界面的活动元素，发生变化时，查询（其状态为 *stale*）会被更新。如果我们希望，我们可以按以下方式创建查询，以关闭这个功能：
 
 ```js
 const App = () => {
@@ -395,38 +414,61 @@ const App = () => {
 }
 ```
 
-If you put a console.log statement to the code, you can see from browser console how often React Query causes the application to be re-rendered. The rule of thumb is that rerendering happens at least whenever there is a need for it, i.e. when the state of the query changes. You can read more about it e.g. [here](https://tkdodo.eu/blog/react-query-render-optimizations).
+<!--If you put a console.log statement to the code, you can see from browser console how often React Query causes the application to be re-rendered. The rule of thumb is that rerendering happens at least whenever there is a need for it, i.e. when the state of the query changes. You can read more about it e.g. [here](https://tkdodo.eu/blog/react-query-render-optimizations).-->
 
-The code for the application is in [GitHub](https://github.com/fullstack-hy2020/query-notes/tree/part6-3) in the branch <i>part6-3</i>.
+如果你在代码中放入 console.log，你会在浏览器的控制台中发现 React Query 多么频繁地导致应用的重复渲染。经验法则是，至少应在有需要的时候，即在查询状态发生变化时，进行重新渲染。你可以在 [这里](https://tkdodo.eu/blog/react-query-render-optimizations) 了解更多。
 
-React Query is a versatile library that, based on what we have already seen, simplifies the application. Does React Query make more complex state management solutions such as Redux unnecessary? No. React Query can partially replace the state of the application in some cases, but as the [documentation](https://react-query-v3.tanstack.com/guides/does-this-replace-client-state) states
+<!--The code for the application is in [GitHub](https://github.com/fullstack-hy2020/query-notes/tree/part6-3) in the branch <i>part6-3</i>.-->
 
-- React Query is a <i>server-state library</i>, responsible for managing asynchronous operations between your server and client
-- Redux, etc. are <i>client-state libraries</i> that can be used to store asynchronous data, albeit inefficiently when compared to a tool like React Query
+当前应用的代码可以在 [GitHub](https://github.com/fullstack-hy2020/query-notes/tree/part6-3) 上 *part6-3* 的分支中找到。
 
-So React Query is a library that maintains the <i>server state</i> in the frontend, i.e. acts as a cache for what is stored on the server. React Query simplifies the processing of data on the server, and can in some cases eliminate the need for data on the server to be saved in the frontend state.
+<!--React Query is a versatile library that, based on what we have already seen, simplifies the application. Does React Query make more complex state management solutions such as Redux unnecessary? No. React Query can partially replace the state of the application in some cases, but as the [documentation](https://react-query-v3.tanstack.com/guides/does-this-replace-client-state) states-->
 
-Most React applications need not only a way to temporarily store the served data, but also some solution for how the rest of the frontend state (e.g. the state of forms or notifications) is handled. 
+React Query 一个多功能的库，根据我们已看到的情况，它简化了应用。那么，React Query 是否让更复杂的状态管理解决方案，如 Redux，变得无足轻重了呢？并非如此，在某些情况下，React Query 可以部分替代应用程序的状态，但是正如 [文档](https://react-query-v3.tanstack.com/guides/does-this-replace-client-state) 所说：
+
+- <!--React Query is a <i>server-state library</i>, responsible for managing asynchronous operations between your server and client-->
+- React Query 是 *服务器状态的库*，负责管理服务器和客户端之间的异步操作。
+- <!--Redux, etc. are <i>client-state libraries</i> that can be used to store asynchronous data, albeit inefficiently when compared to a tool like React Query-->
+- Redux 等则是*客户端状态的库*，可以用来存储异步数据，尽管效率不如 React Query 这样的工具。
+
+<!--So React Query is a library that maintains the <i>server state</i> in the frontend, i.e. acts as a cache for what is stored on the server. React Query simplifies the processing of data on the server, and can in some cases eliminate the need for data on the server to be saved in the frontend state.-->
+
+因此，React Query 是一个在前端维护服务器状态的库，即作为服务器存储内容的缓存。React Query 简化了对服务器数据的处理，在某些情况下，可以消除将服务器数据保存在前端的需求。
+
+<!--Most React applications need not only a way to temporarily store the served data, but also some solution for how the rest of the frontend state (e.g. the state of forms or notifications) is handled.--> 
+
+大多数 React 应用不仅需要一种临时存储服务器数据的方法，还需要一些处理其他前端状态（例如表单和通知的状态）的解决方案。
 
 </div>
 
 <div class="tasks">
-
 ### Exercises 6.19.-6.21.
 
-Now let's make a new version of the anecdote application that uses the React Query library. Take [this project](https://github.com/fullstack-hy2020/query-anecdotes) as your starting point. The project has a ready-installed JSON Server, the operation of which has been slightly modified. Start the server with <i>npm run server</i>.
+
+
+<!--Now let's make a new version of the anecdote application that uses the React Query library. Take [this project](https://github.com/fullstack-hy2020/query-anecdotes) as your starting point. The project has a ready-installed JSON Server, the operation of which has been slightly modified. Start the server with <i>npm run server</i>.-->
+
+现在，让我们用 React Query 打造一个新版的箴言应用。用 [这个项目](https://github.com/fullstack-hy2020/query-anecdotes) 作为你的起点。初始项目已经安装了 JSON 服务器，其操作方式被稍加修改。使用 *npm run server* 启动应用。
 
 #### Exercise 6.19
 
-Implement retrieving anecdotes from the server using React Query.
+<!--Implement retrieving anecdotes from the server using React Query.-->
 
-The application should work in such a way that if there are problems communicating with the server, only an error page will be displayed:
+使用 React Query，实现从服务器上获取箴言。
+
+<!--The application should work in such a way that if there are problems communicating with the server, only an error page will be displayed:-->
+
+当和服务器通信出现问题时，将只展示一个错误页面。
 
 ![](../../images/6/65new.png)
 
-You can find [here](https://react-query-v3.tanstack.com/guides/queries) info how to detect the possible errors.
+<!--You can find [here](https://react-query-v3.tanstack.com/guides/queries) info how to detect the possible errors.-->
 
-You can simulate a problem with the server by e.g. turning off the JSON Server. Please note that in a problem situation, the query is first in the state <i>isLoading</i> for a while, because if a request fails, React Query tries the request a few times before it states that the request is not successful. You can optionally specify that no retries are made:
+你可以在 [这里](https://react-query-v3.tanstack.com/guides/queries) 找到如何检测可能错误的信息。
+
+<!--You can simulate a problem with the server by e.g. turning off the JSON Server. Please note that in a problem situation, the query is first in the state <i>isLoading</i> for a while, because if a request fails, React Query tries the request a few times before it states that the request is not successful. You can optionally specify that no retries are made:-->
+
+你可以在通过关闭 JSON 服务器来模拟服务器故障。请注意在一个故障情况下，查询会在 *isLoading* 状态中停留一会儿，这是因为在一次请求失败后，React Query 会在多尝试几次后，才反馈请求失败。你可以选择不进行额外尝试：
 
 
 ```js
@@ -438,7 +480,9 @@ const result = useQuery(
 )
 ```
 
-or that the request is retried e.g. only once:
+<!--or that the request is retried e.g. only once:-->
+
+你也可以指定仅尝试一次：
 
 ```js
 const result = useQuery(
@@ -453,9 +497,13 @@ const result = useQuery(
 
 Implement adding new anecdotes to the server using React Query. The application should render a new anecdote by default. Note that the content of the anecdote must be at least 5 characters long, otherwise the server will reject the POST request. You don't have to worry about error handling now.
 
+使用 React Query 向服务器添加新的箴言。这个应用默认应渲染出全部箴言。注意，箴言的内容应不少于 5 个字符，否则，服务器将拒绝 POST 请求。你目前还不用考虑异常处理。
+
 #### Exercise 6.21
 
-Implement voting for anecdotes using again the React Query. The application should automatically render the increased number of votes for the voted anecdote
+<!--Implement voting for anecdotes using again the React Query. The application should automatically render the increased number of votes for the voted anecdote-->
+
+使用 React Query 再次实现以投票功能。应用应该可以自动渲染被投票箴言的最新票数。
 
 </div>
 
