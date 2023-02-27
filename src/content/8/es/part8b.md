@@ -608,7 +608,7 @@ El código actual de la aplicación se puede encontrar en [Github](https://githu
 
 Intentar crear una persona con datos no válidos provoca un error y toda la aplicación se rompe
 
-![error](../../images/8/14ea.png)
+![devtools showing error: name must be unique](../../images/8/14x.png)
 
 Debemos manejar la excepción. Podemos registrar una función de manejo de errores en la mutación usando _onError_ [option](https://www.apollographql.com/docs/react/api/react/hooks/#params-2) del hook _useMutation_.
 
