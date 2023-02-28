@@ -11,7 +11,7 @@ lang: ptbr
 
 Em nosso exemplo anterior, o estado da aplicação era simples, pois consistia em apenas um número inteiro. E se a nossa aplicação precisar de um estado mais complexo?
 
-Na maioria dos casos, a maneira mais fácil e melhor de fazer isso é usando a função _useState_ múltiplas vezes para criar "pedaços" (pieces) separados de estado.
+Na maioria dos casos, a maneira mais fácil e melhor de fazer isso é usando a função _useState_ múltiplas vezes para criar "pedaços" separados de estado.
 
 No código a seguir, criamos dois pedaços de estado para a aplicação, chamados _esquerda_ e _direita_, ambos com o valor inicial 0:
 
