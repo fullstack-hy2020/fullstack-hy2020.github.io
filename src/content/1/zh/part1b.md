@@ -289,7 +289,7 @@ const result = average(2, 5)
 <!--   <h3>Exercises 1.3.-1.5.</h3>-->
  <h3>练习1.3.-1.5.</h3> </h3
 
-<!--  <i>We continue building the application that we started working on in the previous exercises. You can write the code into the same project, since we are only interested in the final state of the submitted application.</i>-->
+
 <i>我们将继续构建我们在之前练习中开始编写的应用程序。您可以将代码编写到同一个项目中，因为我们只对提交的应用程序的最终状态感兴趣。<i>
 
 <!-- **Pro-tip:** you may run into issues when it comes to the structure of the <i>props</i> that components receive. A good way to make things more clear is by printing the props to the console, e.g. as follows:-->
