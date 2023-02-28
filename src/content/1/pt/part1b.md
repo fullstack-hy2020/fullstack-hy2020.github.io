@@ -11,7 +11,7 @@ Teremos, durante o curso, o objetivo e a necessidade de aprender certa quantidad
 
 JavaScript evoluiu rapidamente nos últimos anos e, neste curso, usamos as funcionalidades das versões mais recentes. O nome oficial do padrão de JavaScript é [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). Atualmente, a versão mais recente é a lançada em junho de 2022 com o nome de [ECMAScript®2022](https://www.ecma-international.org/ecma-262/), também conhecido como ES13.
 
-Os navegadores ainda não suportam todos as funcionalidades mais recentes de JavaScript. Devido a esse fato, muito código executado em navegadores é <i>transpilado</i> de uma versão mais recente de JavaScript para uma versão mais antiga e compatível.
+Os navegadores ainda não suportam todas as funcionalidades mais recentes de JavaScript e devido a esse fato, muito código executado em navegadores é <i>transpilado</i> de uma versão mais recente de JavaScript para uma versão mais antiga e compatível.
 
 Hoje em dia, a maneira mais popular de fazer a transpilação é usando o transcompilador [Babel](https://babeljs.io/). A transpilação é configurada automaticamente em aplicações React criadas com create-react-app. Vamos olhar mais de perto a configuração de transpilação na [Parte 7](/ptbr/part7) deste curso.
 
@@ -21,9 +21,9 @@ O código é escrito em arquivos com extensão <i>.js</i> que são executados ao
 
 Também é possível escrever código JavaScript na console do Node.js, que pode ser aberta digitando "node" na linha de comando, bem como na aba Console nas Ferramentas do Desenvolvedor do navegador. [As revisões mais recentes do Chrome lidam bem com as novas funcionalidades de JavaScript](http://kangax.github.io/compat-table/es2016plus/) sem precisar transpilar o código. Alternativamente, você pode usar uma ferramenta como [JS Bin](https://jsbin.com/?js,console).
 
-JavaScript é meio reminiscente, tanto no nome quanto na sintaxe, com o Java. Porém, quando se trata do mecanismo central da linguagem, eles não poderiam ser mais diferentes. Da perspectiva de alguém que vem de um background em Java, a forma como JavaScript se comporta pode parecer um pouco estranho, principalmente se se não fizer esforço para entender seus funcionalidades internos.
+JavaScript lembra mais ou menos o Java, tanto no nome quanto na sintaxe. Porém, quando se trata do mecanismo central da linguagem, eles não poderiam ser mais diferentes. Da perspectiva de alguém que vem de um background em Java, a forma como JavaScript se comporta pode parecer um pouco estranho, principalmente se não for feito algum esforço para entender suas características.
 
-Em determinados círculos, tem se popularizado tentar "simular" funcionalidades e padrões de design de Java em JavaScript. Não recomendamos fazer isso, já que as linguagens e seus respectivos ecossistemas são, no final das contas, muito diferentes.
+Em determinados círculos, tem se popularizado tentar "simular" funcionalidades e padrões de _design_ de Java em JavaScript. Não recomendamos fazer isso, já que as linguagens e seus respectivos ecossistemas são, no final das contas, muito diferentes.
 
 ### Variáveis
 
@@ -37,7 +37,7 @@ console.log(x, y)   // 1, 5 são impressos
 y += 10
 console.log(x, y)   // 1, 15 são impressos
 y = 'algum texto'
-console.log(x, y)   // 1, algumtexto são impressos
+console.log(x, y)   // 1, algum texto são impressos
 x = 4               // causará um erro
 ```
 
@@ -45,7 +45,8 @@ x = 4               // causará um erro
 
 No exemplo acima, também vemos que o tipo de dados da variável pode mudar durante a execução. No início, _y_ armazena um inteiro; no final, armazena uma string.
 
-Também é possível definir variáveis em JavaScript usando a palavra-chave [var](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var). var foi, por muito tempo, a única maneira de definir variáveis. const e let foram adicionadas recentemente na versão ES6. Em situações específicas, var funciona de maneira diferente em comparação com as definições de variáveis em a maioria das linguagens. Visite [JavaScript Variables - Should You Use let, var or const? on Medium](https://medium.com/craft-academy/javascript-variables-should-you-use-let-var-or-const-394f7645c88f) ou [Keyword: var vs. let on JS Tips](http://www.jstips.co/en/javascript/keyword-var-vs-let/) para mais informações.
+Também é possível definir variáveis em JavaScript usando a palavra-chave [var](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var), que foi, por muito tempo, a única maneira de definir variáveis. const e let foram adicionadas recentemente na versão ES6. Em situações específicas, var funciona de maneira diferente em comparação com as definições de variáveis na maioria das linguagens. Visite [JavaScript Variables - Should You Use let, var or const? on Medium](https://medium.com/craft-academy/javascript-variables-should-you-use-let-var-or-const-394f7645c88f) ou [Keyword: var vs. let on JS Tips](http://www.jstips.co/en/javascript/keyword-var-vs-let/) para mais informações. Durante este curso, o uso de var não é recomendado, devendo-se privilegiar const e let!
+Você pode ver mais sobre este assunto no YouTube, por exemplo, [var, let and const - ES6 JavaScript Features](https://youtu.be/sjyJBL5fkp8)
 
 ### Arrays
 
@@ -110,7 +111,7 @@ console.log(m2)
 
 Aqui, um array preenchido com valores inteiros é transformado em um array contendo strings de HTML usando o método map. Na [parte 2](/ptbr/part2) deste curso, veremos que o map é usado com frequência em React.
 
-Itens individuais de um array são fáceis de atribuir a variáveis com a ajuda da [atribuição via desestruturação](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) (destructuring assignment).
+Itens individuais de um array são fáceis de atribuir a variáveis com a ajuda da [atribuição via desestruturação](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) (_destructuring assignment_).
 
 ```js
 const t = [1, 2, 3, 4, 5]
@@ -125,7 +126,7 @@ Graças à atribuição, as variáveis _primeiro_ e _segundo_ receberão os dois
 
 ### Objetos
 
-Existem algumas formas diferentes de se definir objetos em JavaScript. Um método muito comum é usar [objetos literais](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#Object_literals) (object literals), que ocorre listando suas propriedades dentro de chaves:
+Existem algumas formas diferentes de se definir objetos em JavaScript. Um método muito comum é usar [objetos literais](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#Object_literals) (_object literals_), que ocorre listando suas propriedades dentro de chaves:
 
 ```js
 const objeto1 = {
@@ -175,7 +176,7 @@ Objetos também podem ser definidos usando funções construtoras, o que resulta
 
 ### Funções
 
-Já nos familiarizamos com a definição de funções de seta. O processo completo, sem atalhos, para definir uma função de seta é o seguinte:
+Já nos familiarizamos com a definição de _arrow functions_ (funções de seta). O processo completo, sem atalhos, para definir uma _arrow function_ é o seguinte:
 
 ```js
 const soma = (p1, p2) => {
@@ -215,9 +216,9 @@ const tAoQuadrado = t.map(p => p * p)
 // tAoQuadrado agora é [1, 4, 9]
 ```
 
-A funcionalidade da função de seta foi adicionada ao JavaScript há apenas alguns anos, com a versão [ES6](http://es6-features.org/). Antes disso, a única maneira de definir funções era usando a palavra-chave _function_.
+A funcionalidade da _arrow function_ foi adicionada ao JavaScript há apenas alguns anos, com a versão [ES6](http://es6-features.org/). Antes disso, a única maneira de definir funções era usando a palavra-chave _function_.
 
-Existem duas maneiras de se referenciar uma função; uma é atribuir um nome em uma [declaração de função](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function) (function declaration).
+Existem duas maneiras de se referenciar uma função; uma é atribuir um nome em uma [declaração de função](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function) (_function declaration_).
 
 ```js
 function produto(a, b) {
@@ -228,7 +229,7 @@ const resultado = produto(2, 6)
 // resultado agora é 12
 ```
 
-Outra maneira de definir uma função é usando uma [expressão de função](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function) (function expression). Neste caso, não é necessário atribuir um nome à função, e a definição pode residir dentro do restante do código:
+Outra maneira de definir uma função é usando uma [expressão de função](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function) (_function expression_). Neste caso, não é necessário atribuir um nome à função, e a definição pode residir dentro do restante do código:
 
 ```js
 const media = function(a, b) { // *média
@@ -264,7 +265,7 @@ Se e <i>quando</i> você encontrar a mensagem de erro:
 
 ... tenha em mente o explicado [aqui](/ptbr/part1/introducao_a_biblioteca_react#nao-renderize-objetos).
 
-**N.B. (Nota Bene):** o conteúdo dos exercícios foram deixados no idioma original da tradução (inglês) por questões de conveniência, visto a revisão que os mantenedores do curso devem fazer no código enviado ao sistema de avaliação da Universidade de Helsinque. Desta forma, escreva suas aplicações utilizando os mesmos termos usados nas variáveis, componentes, etc que estão em inglês.
+**Obs.:** o conteúdo dos exercícios foram deixados no idioma original da tradução (inglês) por questões de conveniência, visto a revisão que os mantenedores do curso devem fazer no código enviado ao sistema de avaliação da Universidade de Helsinque. Desta forma, escreva suas aplicações utilizando os mesmos termos usados nas variáveis, componentes, etc que estão em inglês.
 
   <h4>1.3: course information — 3º passo</h4>
 
@@ -325,7 +326,7 @@ const App = () => {
 }
 ```
 
-**N.B.:** Neste ponto, <i>presume-se que há sempre três itens</i>, então não é necessário percorrer os arrays usando loops. Voltaremos ao tema de renderização de componentes com base em itens de arrays em uma abordagem minuciosa na [próxima parte do curso](../part2).
+**Obs.:** Neste ponto, <i>presume-se que há sempre três itens</i>, então não é necessário percorrer os arrays usando _loops_. Voltaremos ao tema de renderização de componentes com base em itens de arrays em uma abordagem minuciosa na [próxima parte do curso](../part2).
 
 De qualquer forma, não passe objetos diferentes como propriedades separadas do componente <i>App</i> para os componentes <i>Content</i> e <i>Total</i>. Em vez disso, passe-os diretamente como um array:
 
@@ -383,7 +384,7 @@ const App = () => {
 
 Como este curso usa uma versão de React que contém React Hooks, não é necessário definir objetos com métodos. **O conteúdo deste capítulo não é relevante para o curso**, mas certamente é bom conhecer. Em particular, ao usar versões antigas de React, é necessário compreender os tópicos deste capítulo.
 
-Funções de seta e funções definidas usando a palavra-chave _function_ variam substancialmente em relação ao comportamento da palavra-chave [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this), que se refere ao próprio objeto.
+_Arrow functions_ e funções definidas usando a palavra-chave _function_ variam substancialmente em relação ao comportamento da palavra-chave [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this), que se refere ao próprio objeto.
 
 Podemos atribuir métodos a um objeto definindo propriedades que são funções:
 
@@ -459,7 +460,7 @@ const referenciaParaCumprimentar = arto.cumprimentar
 referenciaParCumprimentar() // "olá, meu nome é undefined" é impresso
 ```
 
-Ao chamar o método através de uma referência, o método perde o conhecimento do que era o _this_ original. Ao contrário de outras linguagens, em JavaScript, o valor de [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) é definido com base <i>em como o método é chamado</i>. Ao chamar o método através de uma referência, o valor de _this_ se torna o chamado [objeto global](https://developer.mozilla.org/en-US/docs/Glossary/Global_object) (global object) e o resultado final sai geralmente diferente do que o desenvolvedor originalmente pretendeu.
+Ao chamar o método através de uma referência, o método perde o conhecimento do que era o _this_ original. Ao contrário de outras linguagens, em JavaScript, o valor de [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) é definido com base <i>em como o método é chamado</i>. Ao chamar o método através de uma referência, o valor de _this_ se torna o chamado [objeto global](https://developer.mozilla.org/en-US/docs/Glossary/Global_object) (_global object_) e o resultado final sai geralmente diferente do que o desenvolvedor originalmente pretendeu.
 
 Perder o rastro do _this_ ao escrever código JavaScript traz alguns problemas eventuais. Algumas situações frequentemente surgem onde React ou o Node (ou mais especificamente o motor JavaScript do navegador) precisa chamar algum método em um objeto que o desenvolvedor tenha definido. No entanto, neste curso, evitamos esses problemas usando o JavaScript "sem this".
 
@@ -478,7 +479,7 @@ setTimeout(arto.cumprimentar, 1000)  // highlight-line
 
 Como mencionado, o valor de _this_ em JavaScript é definido com base na forma como o método é chamado. Quando o <em>setTimeout</em> está chamando o método, é o motor JavaScript que realmente chama o método e, nesse ponto, _this_ se refere ao objeto global.
 
-Existem vários mecanismos pelos quais o _this_ original pode ser preservado. Um desses é usando um método chamado [bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind) (amarrar, atar):
+Existem vários mecanismos pelos quais o _this_ original pode ser preservado. Um desses é usando um método chamado [bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind) (significa amarrar ou atar):
 
 ```js
 setTimeout(arto.cumprimentar.bind(arto), 1000)
@@ -486,9 +487,9 @@ setTimeout(arto.cumprimentar.bind(arto), 1000)
 
 Chamar <em>arto.cumprimentar.bind(arto)</em> cria uma nova função onde _this_ é obrigado a apontar para Arto, independentemente de onde e como o método está sendo chamado.
 
-Usando [funções de seta](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) é possível resolver alguns dos problemas relacionados ao _this_. No entanto, eles não devem ser usados como métodos para objetos, pois o _this_ não funciona de forma alguma. Mais tarde, voltaremos a discutir o comportamento da palavra-chave _this_ em relação às funções de seta.
+Usando [Arrow functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) é possível resolver alguns dos problemas relacionados ao _this_. No entanto, eles não devem ser usados como métodos para objetos, pois o _this_ não funciona de forma alguma. Mais tarde, voltaremos a discutir o comportamento da palavra-chave _this_ em relação às _arrow functions_.
 
-Se deseja compreender de fato como _this_ funciona em JavaScript, a Internet está cheia de material sobre o assunto como, por exemplo, a série screencast [Understand JavaScript's this Keyword in Depth](https://egghead.io/courses/understand-javascript-s-this-keyword-in-depth) por [egghead.io](https://egghead.io), que é extremamente recomendada!
+Se deseja compreender de fato como _this_ funciona em JavaScript, a Internet está cheia de material sobre o assunto como, por exemplo, a série _screencast_ [Understand JavaScript's this Keyword in Depth](https://egghead.io/courses/understand-javascript-s-this-keyword-in-depth) por [egghead.io](https://egghead.io), que é extremamente recomendada!
 
 ### Classes
 
@@ -534,6 +535,6 @@ Outra ótima fonte para aprender JavaScript é [javascript.info](https://javascr
   
 O extremamente cativante e gratuito [Eloquent JavaScript](https://eloquentjavascript.net) te leva rapidamente dos conceitos básicos à construção de aplicações muito interessantes. É uma mistura de teoria, projetos e exercícios, e cobre tanto a teoria geral de programação quanto a linguagem JavaScript.
 
-[egghead.io](https://egghead.io) possui muitos screencasts de qualidade sobre JavaScript, React e outros tópicos interessantes. Infelizmente, alguns dos materiais só são acessíveis na versão paga.
+[egghead.io](https://egghead.io) possui muitos _screencasts_ de qualidade sobre JavaScript, React e outros tópicos interessantes. Infelizmente, alguns dos materiais só são acessíveis na versão paga.
 
 </div>
