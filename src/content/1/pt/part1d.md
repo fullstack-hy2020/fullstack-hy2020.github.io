@@ -838,7 +838,7 @@ Agora, a aplicação têm três botões com gerenciadores de eventos definidos p
 O primeiro botão é definido como:
 
 ```js
-<button onClick={hello('mundo')}>botão</button>
+<button onClick={ola('mundo')}>botão</button>
 ```
 
 O gerenciador de evento é criado <i>executando</i> a chamada da função _ola('mundo')_. A chamada da função retorna a função:
@@ -852,7 +852,7 @@ O gerenciador de evento é criado <i>executando</i> a chamada da função _ola('
 O segundo botão é definido como:
 
 ```js
-<button onClick={hello('react')}>botão</button>
+<button onClick={ola('react')}>botão</button>
 ```
 
 A chamada da função _ola('react')_ que cria o gerenciador de evento retorna:

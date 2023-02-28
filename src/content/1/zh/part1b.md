@@ -289,7 +289,8 @@ const result = average(2, 5)
 <!--   <h3>Exercises 1.3.-1.5.</h3>-->
  <h3>练习1.3.-1.5.</h3> </h3
 
-<i>We continue building the application that we started working on in the previous exercises. You can write the code into the same project, since we are only interested in the final state of the submitted application.</i>
+
+<i>我们将继续构建我们在之前练习中开始编写的应用程序。您可以将代码编写到同一个项目中，因为我们只对提交的应用程序的最终状态感兴趣。<i>
 
 <!-- **Pro-tip:** you may run into issues when it comes to the structure of the <i>props</i> that components receive. A good way to make things more clear is by printing the props to the console, e.g. as follows:-->
  **建议：**当涉及到组件接收的<i>props</i>的结构时，你可能会遇到问题。一个让事情更明确的好方法是把prop打印到控制台，例如，如下所示。
@@ -304,7 +305,7 @@ const Header = (props) => {
 <!--   <h4>1.3: course information step3</h4>-->
  <h4>1.3：课程信息步骤3</h4
 
-<!-- Let's move forward to using objects in our application. Modify the variable definitions of the <i>App</i> component as follows and also refactor the application so that it still works:-->
+<!-- Let's move forward to using objects in our application. Modify the variable definitions of the <i>App</i> component as follows and also refactor the application so that it still works: -->
  让我们继续前进，在我们的应用中使用对象。修改<i>App</i>组件的变量定义，如下所示，同时重构应用，使其仍能工作。
 
 ```js
