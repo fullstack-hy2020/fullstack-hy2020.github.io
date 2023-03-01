@@ -944,7 +944,7 @@ npx static-server
 ### Polyfill
 
 <!-- Our application is finished and works with all relatively recent versions of modern browsers, with the exception of Internet Explorer. The reason for this is that, because of _axios_, our code uses [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), and no existing version of IE supports them:-->
- 我们的应用已经完成，可以在所有相对较新版本的现代浏览器中使用，但Internet Explorer除外。原因是，由于_axios_，我们的代码使用了[承诺](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)，而现有版本的IE都不支持。
+ 我们的应用已经完成，可以在所有相对较新版本的现代浏览器中使用，但Internet Explorer除外。原因是，由于_axios_，我们的代码使用了[ Promise ](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)，而现有版本的IE都不支持。
 
 ![](../../images/7/29.png)
 
@@ -954,7 +954,7 @@ npx static-server
 ![](../../images/7/30.png)
 
 <!-- In these situations it is not enough to transpile the code, as transpilation simply transforms the code from a newer version of JavaScript to an older one with wider browser support. IE understands Promises syntactically but it simply has not implemented their functionality. The _find_ property of arrays in IE is simply <i>undefined</i>.-->
- 在这些情况下，仅仅转译代码是不够的，因为转译只是把代码从较新的JavaScript版本转到较旧的浏览器支持的版本上。IE在语法上理解承诺，但它根本没有实现其功能。在IE中，数组的_find_属性是简单的<i>undefined</i>。
+ 在这些情况下，仅仅转译代码是不够的，因为转译只是把代码从较新的JavaScript版本转到较旧的浏览器支持的版本上。IE在语法上理解 Promise ，但它根本没有实现其功能。在IE中，数组的_find_属性是简单的<i>undefined</i>。
 
 <!-- If we want the application to be IE-compatible, we need to add a [polyfill](https://remysharp.com/2010/10/08/what-is-a-polyfill), which is code that adds the missing functionality to older browsers.-->
  如果我们想让应用与IE兼容，我们需要添加一个[polyfill](https://remysharp.com/2010/10/08/what-is-a-polyfill)，它是为旧版浏览器添加缺失功能的代码。

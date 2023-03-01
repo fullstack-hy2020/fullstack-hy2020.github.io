@@ -224,7 +224,7 @@ noteService.getAll().then(notes =>
 ```
 
 <!-- > **NB:** why didn't we use await in place of promises and event handlers (registered to _then_-methods)?-->
- > **NB:**我们为什么不用await来代替承诺和事件处理程序（注册到_then_-methods）？
+ > **NB:**我们为什么不用await来代替 Promise 和事件处理程序（注册到_then_-methods）？
 <!-- >-->
  >
 <!-- > Await only works inside <i>async</i> functions, and the code in <i>index.js</i> is not inside a function, so due to the simple nature of the operation, we'll abstain from using <i>async</i> this time.-->

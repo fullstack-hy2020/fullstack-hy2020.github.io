@@ -292,7 +292,7 @@ test('the first note is about HTTP methods', async () => {
 
 
 <!-- The benefit of using the async/await syntax is starting to become evident. Normally we would have to use callback functions to access the data returned by promises, but with the new syntax things are a lot more comfortable:-->
- 使用async/await语法的好处开始变得明显了。通常情况下，我们必须使用回调函数来访问由承诺返回的数据，但有了新的语法，事情就好办多了。
+ 使用async/await语法的好处开始变得明显了。通常情况下，我们必须使用回调函数来访问由 Promise 返回的数据，但有了新的语法，事情就好办多了。
 
 ```js
 const response = await api.get('/api/notes')
@@ -445,10 +445,10 @@ npm test -- -t 'notes'
  在我们写更多的测试之前，让我们看一下_async_和_await_关键字。
 
 <!-- The async/await syntax that was introduced in ES7 makes it possible to use <i>asynchronous functions that return a promise</i> in a way that makes the code look synchronous.-->
- ES7中引入的async/await语法使得使用返回承诺的<i>异步函数</i>的方式可以使代码看起来是同步的。
+ ES7中引入的async/await语法使得使用返回 Promise 的<i>异步函数</i>的方式可以使代码看起来是同步的。
 
 <!-- As an example, the fetching of notes from the database with promises looks like this:-->
- 作为一个例子，用承诺从数据库中获取笔记的过程看起来是这样的。
+ 作为一个例子，用 Promise 从数据库中获取笔记的过程看起来是这样的。
 
 ```js
 Note.find({}).then(notes => {
@@ -457,13 +457,13 @@ Note.find({}).then(notes => {
 ```
 
 <!-- The _Note.find()_ method returns a promise and we can access the result of the operation by registering a callback function with the _then_ method.-->
- _Note.find()_方法返回一个承诺，我们可以通过用_then_方法注册一个回调函数来访问操作的结果。
+ _Note.find()_方法返回一个 Promise ，我们可以通过用_then_方法注册一个回调函数来访问操作的结果。
 
 <!-- All of the code we want to execute once the operation finishes is written in the callback function. If we wanted to make several asynchronous function calls in sequence, the situation would soon become painful. The asynchronous calls would have to be made in the callback. This would likely lead to complicated code and could potentially give birth to a so-called [callback hell](http://callbackhell.com/).-->
  一旦操作完成，我们想要执行的所有代码都写在回调函数中。如果我们想依次进行几个异步函数的调用，情况很快就会变得很痛苦。异步调用将不得不在回调中进行。这将可能导致复杂的代码，并有可能诞生所谓的[回调地狱](http://callbackhell.com/)。
 
 <!-- By [chaining promises](https://javascript.info/promise-chaining) we could keep the situation somewhat under control, and avoid callback hell by creating a fairly clean chain of _then_ method calls. We have seen a few of these during the course. To illustrate this, you can view an artificial example of a function that fetches all notes and then deletes the first one:-->
- 通过[链式承诺](https://javascript.info/promise-chaining)，我们可以在一定程度上控制局面，并通过创建一个相当干净的_then_方法调用链来避免回调地狱。我们在课程中已经看到了一些这样的情况。为了说明这一点，你可以查看一个人为的例子，这个函数获取了所有的笔记，然后删除了第一条。
+ 通过[链式 Promise ](https://javascript.info/promise-chaining)，我们可以在一定程度上控制局面，并通过创建一个相当干净的_then_方法调用链来避免回调地狱。我们在课程中已经看到了一些这样的情况。为了说明这一点，你可以查看一个人为的例子，这个函数获取了所有的笔记，然后删除了第一条。
 
 ```js
 Note.find({})
@@ -492,7 +492,7 @@ console.log('operation returned the following notes', notes)
 ```
 
 <!-- The code looks exactly like synchronous code. The execution of code pauses at <em>const notes = await Note.find({})</em> and waits until the related promise is <i>fulfilled</i>, and then continues its execution to the next line. When the execution continues, the result of the operation that returned a promise is assigned to the _notes_ variable.-->
- 这段代码看起来和同步代码完全一样。代码的执行在<em>const notes = await Note.find({})</em>处暂停，等待相关的承诺被<i>满足</i>，然后继续执行到下一行。当继续执行时，返回承诺的操作结果被分配给_notes_变量。
+ 这段代码看起来和同步代码完全一样。代码的执行在<em>const notes = await Note.find({})</em>处暂停，等待相关的 Promise 被<i>满足</i>，然后继续执行到下一行。当继续执行时，返回 Promise 的操作结果被分配给_notes_变量。
 
 <!-- The slightly complicated example presented above could be implemented by using await like this:-->
  上面介绍的稍微复杂的例子可以通过使用await这样来实现。
@@ -508,7 +508,7 @@ console.log('the first note is removed')
  由于新的语法，代码比以前的then-chain简单多了。
 
 <!-- There are a few important details to pay attention to when using async/await syntax. In order to use the await operator with asynchronous operations, they have to return a promise. This is not a problem as such, as regular asynchronous functions using callbacks are easy to wrap around promises.-->
- 使用async/await语法时，有几个重要的细节需要注意。为了在异步操作中使用await操作符，它们必须返回一个承诺。这并不是一个问题，因为使用回调的常规异步函数很容易被承诺所包裹。
+ 使用async/await语法时，有几个重要的细节需要注意。为了在异步操作中使用await操作符，它们必须返回一个 Promise 。这并不是一个问题，因为使用回调的常规异步函数很容易被 Promise 所包裹。
 
 <!-- The await keyword can't be used just anywhere in JavaScript code. Using await is possible only inside of an [async](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) function.-->
  await关键字不能在JavaScript代码中随便使用。只有在[async](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)函数中才能使用await。
@@ -759,7 +759,7 @@ afterAll(() => {
 ```
 
 <!-- The code using promises works and the tests pass. We are ready to refactor our code to use the async/await syntax.-->
- 使用承诺的代码工作了，测试通过了。我们准备重构我们的代码以使用async/await语法。
+ 使用 Promise 的代码工作了，测试通过了。我们准备重构我们的代码以使用async/await语法。
 
 <!-- We make the following changes to the code that takes care of adding a new note(notice that the route handler definition is preceded by the _async_ keyword):-->
  我们对处理添加新注释的代码做如下修改（注意路由处理程序的定义前面有_async_关键字）。
@@ -790,7 +790,7 @@ notesRouter.post('/', async (request, response, next) => {
 ![](../../images/4/6.png)
 
 <!-- In other words we end up with an unhandled promise rejection, and the request never receives a response.-->
- 换句话说，我们最终会出现一个未处理的拒绝承诺，而且请求永远不会收到响应。
+ 换句话说，我们最终会出现一个未处理的拒绝 Promise ，而且请求永远不会收到响应。
 
 <!-- With async/await the recommended way of dealing with exceptions is the old and familiar _try/catch_ mechanism:-->
  在async/await中，处理异常的推荐方式是古老而熟悉的_try/catch_机制。
@@ -1095,16 +1095,16 @@ beforeEach(async () => {
 ```
 
 <!-- The solution is quite advanced despite its compact appearance. The _noteObjects_ variable is assigned to an array of Mongoose objects that are created with the _Note_ constructor for each of the notes in the _helper.initialNotes_ array. The next line of code creates a new array that <i>consists of promises</i>, that are created by calling the _save_ method of each item in the _noteObjects_ array. In other words, it is an array of promises for saving each of the items to the database.-->
- 这个解决方案尽管看起来很紧凑，但却相当先进。_noteObjects_变量被分配给一个Mongoose对象数组，这些对象是用_Note_构造函数为_helper.initialNotes_数组中的每个笔记创建的。下一行代码创建了一个新的数组，<i>由承诺组成</i>，这些承诺是通过调用_noteObjects_数组中每个项目的_save_方法创建的。换句话说，它是一个承诺数组，用于将每个项目保存到数据库中。
+ 这个解决方案尽管看起来很紧凑，但却相当先进。_noteObjects_变量被分配给一个Mongoose对象数组，这些对象是用_Note_构造函数为_helper.initialNotes_数组中的每个笔记创建的。下一行代码创建了一个新的数组，<i>由 Promise 组成</i>，这些 Promise 是通过调用_noteObjects_数组中每个项目的_save_方法创建的。换句话说，它是一个 Promise 数组，用于将每个项目保存到数据库中。
 
 <!-- The [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) method can be used for transforming an array of promises into a single promise, that will be <i>fulfilled</i> once every promise in the array passed to it as a parameter is resolved. The last line of code <em>await Promise.all(promiseArray)</em> waits that every promise for saving a note is finished, meaning that the database has been initialized.-->
- [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all)方法可用于将一个承诺数组转化为一个承诺，一旦作为参数传递给它的数组中的每个承诺被解决，这个承诺就会被<i>履行</i>。最后一行代码<em>await Promise.all(promiseArray)</em>等待每个保存笔记的承诺完成，这意味着数据库已经被初始化了。
+ [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all)方法可用于将一个 Promise 数组转化为一个 Promise ，一旦作为参数传递给它的数组中的每个 Promise 被解决，这个 Promise 就会被<i>履行</i>。最后一行代码<em>await Promise.all(promiseArray)</em>等待每个保存笔记的 Promise 完成，这意味着数据库已经被初始化了。
 
 <!-- > The returned values of each promise in the array can still be accessed when using the Promise.all method. If we wait for the promises to be resolved with the _await_ syntax <em>const results = await Promise.all(promiseArray)</em>, the operation will return an array that contains the resolved values for each promise in the _promiseArray_, and they appear in the same order as the promises in the array.-->
- > 使用Promise.all方法时，数组中每个承诺的返回值仍然可以被访问。如果我们用_await_语法<em>const results = await Promise.all(promiseArray)</em>来等待承诺的解析，该操作将返回一个数组，其中包含_promiseArray_中每个承诺的解析值，并且它们的出现顺序与数组中的承诺相同。
+ > 使用Promise.all方法时，数组中每个 Promise 的返回值仍然可以被访问。如果我们用_await_语法<em>const results = await Promise.all(promiseArray)</em>来等待 Promise 的解析，该操作将返回一个数组，其中包含_promiseArray_中每个 Promise 的解析值，并且它们的出现顺序与数组中的 Promise 相同。
 
 <!-- Promise.all executes the promises it receives in parallel. If the promises need to be executed in a particular order, this will be problematic. In situations like this, the operations can be executed inside of a [for...of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of) block, that guarantees a specific execution order.-->
- Promise.all以并行方式执行它收到的承诺。如果这些承诺需要以特定的顺序执行，这将是有问题的。在这样的情况下，可以在[for...of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of)块内执行操作，这样可以保证一个特定的执行顺序。
+ Promise.all以并行方式执行它收到的 Promise 。如果这些 Promise 需要以特定的顺序执行，这将是有问题的。在这样的情况下，可以在[for...of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of)块内执行操作，这样可以保证一个特定的执行顺序。
 
 ```js
 beforeEach(async () => {
@@ -1118,7 +1118,7 @@ beforeEach(async () => {
 ```
 
 <!-- The asynchronous nature of JavaScript can lead to surprising behavior, and for this reason, it is important to pay careful attention when using the async/await syntax. Even though the syntax makes it easier to deal with promises, it is still necessary to understand how promises work!-->
- JavaScript的异步性可能会导致令人惊讶的行为，为此，在使用async/await语法时，一定要仔细注意。即使该语法使处理承诺变得更容易，但仍然有必要了解承诺是如何工作的!
+ JavaScript的异步性可能会导致令人惊讶的行为，为此，在使用async/await语法时，一定要仔细注意。即使该语法使处理 Promise 变得更容易，但仍然有必要了解 Promise 是如何工作的!
 
 <!-- The code for our application can be found from [github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5), branch <i>part4-5</i>.-->
  我们应用的代码可以从[github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5)，分支<i>part4-5</i>找到。
