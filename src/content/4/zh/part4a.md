@@ -218,7 +218,7 @@ notesRouter.delete('/:id', (request, response) => {
  那么这些路由器对象到底是什么？Express手册提供了以下解释。
 
 <!-- > <i>A router object is an isolated instance of middleware and routes. You can think of it as a “mini-application,” capable only of performing middleware and routing functions. Every Express application has a built-in app router.</i>-->
- > <i>一个路由器对象是一个孤立的中间件和路由实例。你可以把它看作是一个 "小型应用"，只能够执行中间件和路由功能。每个Express应用都有一个内置的应用路由器。
+ > <i>一个路由器对象是一个孤立的中间件和路由实例。你可以把它看作是一个 "小型应用"，只能够执行中间件和路由功能。每个Express应用都有一个内置的应用路由器。</i>
 
 <!-- The router is in fact a <i>middleware</i>, that can be used for defining "related routes" in a single place, that is typically placed in its own module.-->
  路由器实际上是一个<i>中间件</i>，它可以用来在一个地方定义 "相关的路由"，它通常被放在自己的模块中。

@@ -331,7 +331,7 @@ jobs:
  看看工作流日志中会打印出什么!
 
 <!-- Note that you can access the commits and commit messages <i>only when pushing or merging to the main branch</i>, so for pull requests the <code>github.event.commits</code> is empty. It is anyway not needed, since we want to skip the step altogether for pull requests.-->
- 注意，你只能在推送或合并到主分支时访问提交和提交信息<i>，所以对于拉取请求，<code>github.event.commits</code>是空的。反正也不需要，因为我们想对拉取请求完全跳过这一步。
+ 注意，你只能在<i>推送或合并到主分支时访问提交和提交信息</i>，所以对于拉取请求，<code>github.event.commits</code>是空的。反正也不需要，因为我们想对拉取请求完全跳过这一步。
 
 <!-- You most likely need functions [contains](https://docs.github.com/en/actions/learn-github-actions/expressions#contains) and [join](https://docs.github.com/en/actions/learn-github-actions/expressions#join) for your if condition.-->
  你很可能需要函数 [contains](https://docs.github.com/en/actions/learn-github-actions/expressions#contains) 和 [join](https://docs.github.com/en/actions/learn-github-actions/expressions#join) 作为你的if条件。

@@ -61,7 +61,7 @@ export default { getAll, create, update }
  根据[维基百科](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)。
 
 <!-- > <i>Cross-origin resource sharing (CORS) is a mechanism that allows restricted resources (e.g. fonts) on a web page to be requested from another domain outside the domain from which the first resource was served. A web page may freely embed cross-origin images, stylesheets, scripts, iframes, and videos. Certain "cross-domain" requests, notably Ajax requests, are forbidden by default by the same-origin security policy.</i>-->
- > <i>跨源资源共享（CORS）是一种机制，它允许网页上的限制性资源（如字体）从第一个资源所来自的域之外的另一个域被请求。一个网页可以自由嵌入跨源图像、样式表、脚本、iframe和视频。某些 "跨域 "请求，特别是Ajax请求，在默认情况下是被同源安全策略所禁止的。
+ > <i>跨源资源共享（CORS）是一种机制，它允许网页上的限制性资源（如字体）从第一个资源所来自的域之外的另一个域被请求。一个网页可以自由嵌入跨源图像、样式表、脚本、iframe和视频。某些 "跨域 "请求，特别是Ajax请求，在默认情况下是被同源安全策略所禁止的。</i>
 
 <!-- In our context the problem is that, by default, the JavaScript code of an application that runs in a browser can only communicate with a server in the same [origin](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy).-->
 在我们的环境中，问题在于，默认情况下，在浏览器中运行的应用的JavaScript代码只能与同一[来源](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy)的服务器通信。

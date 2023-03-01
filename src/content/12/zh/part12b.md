@@ -423,7 +423,7 @@ services:
  上面定义的两个第一环境变量的含义在Docker Hub页面上有解释。
 
 <!-- > <i>These variables, used in conjunction, create a new user and set that user's password. This user is created in the admin authentication database and given the role of root, which is a "superuser" role.</i>-->
- > <i>这些变量结合起来使用，可以创建一个新的用户并设置该用户的密码。这个用户在管理员认证数据库中被创建，并被赋予root的角色，这是一个 "超级用户 "角色。
+ > <i>这些变量结合起来使用，可以创建一个新的用户并设置该用户的密码。这个用户在管理员认证数据库中被创建，并被赋予root的角色，这是一个 "超级用户 "角色。</i>
 
 <!-- The last environment variable *MONGO\_INITDB\_DATABASE* will tell MongoDB to create a database with that name.-->
  最后一个环境变量*MONGO\_INITDB\_DATABASE*将告诉MongoDB以该名称创建一个数据库。
@@ -937,7 +937,7 @@ services:
  除了对键和值的GET、SET和DEL操作外，Redis还可以做很多事情。例如，它可以自动过期键，当Redis被用作缓存时，这是一个非常有用的功能。
 
 <!-- Redis can also be used to implement so called [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) (or PubSub) pattern that is a asynchronous communication mechanism for distributed applications. In this scenario Redis works as a <i>message broker</i> between two or more applications. Some of the applications are <i>publishing</i> messages by sending those to Redis, that on arrival of a message, informs the parties that have <i>subscribed</i> to those messages.-->
- Redis也可以用来实现所谓的[发布-订阅](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern)(或PubSub)模式，这是一种分布式应用的异步通信机制。在这种情况下，Redis作为两个或多个应用之间的<i>消息代理</i>工作。一些应用通过向Redis发送消息来发布<i>消息，当消息到达时，Redis会通知已经<i>订阅</i>这些消息的各方。
+ Redis也可以用来实现所谓的[发布-订阅](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern)(或PubSub)模式，这是一种分布式应用的异步通信机制。在这种情况下，Redis作为两个或多个应用之间的<i>消息代理</i>工作。一些应用通过向Redis发送消息来<i>发布</i>消息，当消息到达时，Redis会通知已经<i>订阅</i>这些消息的各方。
 
 </div>
 
@@ -951,6 +951,6 @@ services:
  检查数据是否默认不被持久化：在运行_docker-compose -f docker-compose.dev.yml down_和_docker-compose -f docker-compose.dev.yml up_之后，计数器值被重置为0。
 
 <!-- Then create a volume for Redis data (by modifying <i>todo-app/todo-backend/docker-compose.dev.yml </i>) and make sure that the data survives after running _docker-compose -f docker-compose.dev.yml down_ and _docker-compose -f docker-compose.dev.yml up_.-->
- 然后为Redis数据创建一个卷（通过modifying <i>todo-app/todo-backend/docker-compose.dev.yml <i>），并确保数据在运行_docker-compose -f docker-compose.dev.yml down_和_docker-compose -f docker-compose.dev.yml up_之后仍然存在。
+ 然后为Redis数据创建一个卷（通过modifying <i>todo-app/todo-backend/docker-compose.dev.yml </i>），并确保数据在运行_docker-compose -f docker-compose.dev.yml down_和_docker-compose -f docker-compose.dev.yml up_之后仍然存在。
 
 </div>

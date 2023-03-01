@@ -263,7 +263,7 @@ const api = supertest(app) // highlight-line
  supertest的文档说如下。
 
 <!-- > <i>if the server is not already listening for connections then it is bound to an ephemeral port for you so there is no need to keep track of ports.</i>-->
- > <i>如果服务器还没有监听连接，那么它就会为你绑定一个短暂的端口，所以不需要跟踪端口。
+ > <i>如果服务器还没有监听连接，那么它就会为你绑定一个短暂的端口，所以不需要跟踪端口。</i>
 
 
 <!-- In other words, supertest takes care that the application being tested is started at the port that it uses internally.-->

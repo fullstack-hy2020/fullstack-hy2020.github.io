@@ -226,7 +226,7 @@ notesRouter.post('/', async (request, response) => {
 ```
 
 <!-- The helper function _getTokenFrom_ isolates the token from the <i>authorization</i> header. The validity of the token is checked with _jwt.verify_. The method also decodes the token, or returns the Object which the token was based on. If there is no token passed, it will return error <i>"jwt must be provided"</i>.-->
- 辅助函数_getTokenFrom_将令牌从<i>授权</i>头中分离出来。用_jwt.verify_检查令牌的有效性。该方法还对令牌进行解码，或返回令牌所基于的对象。如果没有传递令牌，它将返回错误<i>"必须提供jwt"<i>。
+ 辅助函数_getTokenFrom_将令牌从<i>授权</i>头中分离出来。用_jwt.verify_检查令牌的有效性。该方法还对令牌进行解码，或返回令牌所基于的对象。如果没有传递令牌，它将返回错误<i>"必须提供jwt"</i>。
 
 ```js
 const decodedToken = jwt.verify(token, process.env.SECRET)
@@ -667,7 +667,6 @@ router.post('/', userExtractor, async (request, response) => {
 
 <!-- user -> user:-->
 用户->用户。
-<!-- -->-->
  -->
 
 </div>
