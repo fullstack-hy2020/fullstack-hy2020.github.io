@@ -1062,7 +1062,6 @@ const App = () => {
 ```
 
 A aplicação ainda parece funcionar, porém, **não implemente componentes desta forma!**
-
 Nunca defina componentes dentro de outros componentes. O método não oferece nenhum benefício e leva a muitos problemas desagradáveis. Os maiores problemas acontecem devido ao React tratar um componente definido dentro de outro componente como um novo componente em cada renderização. Isso torna impossível para o React otimizar o componente.
 
 Em vez disso, vamos mover a função do componente <i>Exibir</i> para o seu lugar correto, que fica fora da função do componente <i>App</i>:
@@ -1102,11 +1101,12 @@ A internet está cheia de material relacionado à biblioteca React. No entanto, 
 Estes links talvez possam lhe ser úteis:
 
 - Vale a pena dar uma olhada em algum momento na [documentação oficial React](https://reactjs.org/docs/hello-world.html), embora a maior parte dela só se torne relevante mais para frente no curso. Além disso, tudo relacionado a componentes baseados em classe é irrelevante para nós;
-- Alguns cursos no [Egghead.io](https://egghead.io), como o [Start learning React](https://egghead.io/courses/start-learning-react), são de altíssima qualidade; e o recentemente atualizado [Beginner's Guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) também é relativamente bom; ambos os cursos introduzem conceitos que também serão introduzido no decorrer deste curso. **N.B.: O primeiro curso usa componentes de classe, mas o segundo usa a nova abordagem baseada em funções.**
+- Alguns cursos no [Egghead.io](https://egghead.io), como o [Start learning React](https://egghead.io/courses/start-learning-react), são de altíssima qualidade; e o recentemente atualizado [Beginner's Guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) também é relativamente bom; ambos os cursos introduzem conceitos que também serão introduzido no decorrer deste curso. **Obs.: O primeiro curso usa componentes de classe, mas o segundo usa a nova abordagem baseada em funções.**
 
 ### Juramento do Programador Web
 
 Programar é difícil, e é por isso que eu usarei todos os meios possíveis para ser mais fácil:
+
 - Eu manterei meu Console do navegador aberto o tempo todo;
 - Eu vou progredir aos poucos, passo a passo;
 - Eu escreverei muitas instruções _console.log_ para ter certeza de que estou entendendo como o código se comporta e para me ajudar a identificar os erros;
@@ -1129,17 +1129,17 @@ Lembre-se: envie **todos** os exercícios de uma parte **de uma única vez**; is
 
 Algumas vezes você terá que executar na raiz do projeto o comando abaixo:
 
-```
+```bash
 rm -rf node_modules/ && npm i
 ```
 
-Se e <i>quando</i> você encontrar uma mensagem de erro...
+Se e <i>quando</i> você encontrar uma mensagem de erro
 
-> <i>Objetos não são válidos como elementos-filho React.</i>
+> <i>Objects are not valid as a React child</i>
 
-... lembre-se do que foi explicado [aqui](/ptbr/part1/introducao_a_biblioteca_react#nao-renderize-objetos).
+lembre-se do que foi explicado [aqui](/ptbr/part1/introducao_a_biblioteca_react#nao-renderize-objetos).
 
-**N.B.:** o conteúdo dos exercícios foram deixados no idioma original da tradução (inglês) por questões de conveniência, visto a revisão que os mantenedores do curso devem fazer no código enviado ao sistema de avaliação da Universidade de Helsinque. Desta forma, escreva suas aplicações utilizando os mesmos termos usados nas variáveis, componentes, etc que estão em inglês.
+_**Obs.:** o conteúdo dos exercícios foram deixados no idioma original da tradução (inglês) por questões de conveniência, visto a revisão que os mantenedores do curso devem fazer no código enviado ao sistema de avaliação da Universidade de Helsinque. Desta forma, escreva suas aplicações utilizando os mesmos termos usados nas variáveis, componentes, etc que estão em inglês._
 
 <h4> 1.6: unicafe — 1º passo</h4>
 
@@ -1255,11 +1255,11 @@ Exiba as estatísticas em uma [tabela HTML](https://developer.mozilla.org/en-US/
 
 ![captura de tela da tabela de estatísticas](../../images/1/16e.png)
 
-Lembre-se de manter seu console aberto o tempo todo. Se você ver este aviso no seu console...
+Lembre-se de manter seu console aberto o tempo todo. Se você ver este aviso no seu console
 
 ![aviso do console](../../images/1/17a.png)
 
-... faça o necessário para fazer o aviso desaparecer. Tente colar a mensagem de erro em um buscador (Google, Bing, etc) se ficar preso.
+faça o necessário para fazer o aviso desaparecer. Tente colar a mensagem de erro em um buscador (Google, Bing, etc) se ficar preso.
 
 <i>A origem típica de um erro `Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.` vem de alguma extensão do Chrome. Vá até `chrome://extensions/` e desative uma por uma e atualize a página da aplicação React; o erro deve por fim desaparecer.</i>
 
@@ -1278,8 +1278,8 @@ const App = () => {
   const anecdotes = [
     'Se fazer algo dói, faça isso com mais frequência.',
     'Contratar mão de obra para um projeto de software que já está atrasado, faz com que se atrase mais ainda!',
-    'Os primeiros 90% do código correspondem ao primeiro 10% do tempo de desenvolvimento... Os outros 10% do código correspondem aos outros 90% do tempo de desenvolvimento.',
-    'Qualquer idiota escreve código que um computador consegue entender. Bons programadores escrevem código que humanos conseguem entender.',
+    'Os primeiros 90% do código correspondem aos primeiros 10% do tempo de desenvolvimento... Os outros 10% do código correspondem aos outros 90% do tempo de desenvolvimento.',
+    'Qualquer tolo escreve código que um computador consegue entender. Bons programadores escrevem código que humanos conseguem entender.',
     'Otimização prematura é a raiz de todo o mal.',
     'Antes de mais nada, depurar é duas vezes mais difícil do que escrever o código. Portanto, se você escrever o código da forma mais inteligente possível, você, por definição, não é inteligente o suficiente para depurá-lo.',
     'Programar sem o uso extremamente intenso do console.log é o mesmo que um médico se recusar a usar raio-x ou testes sanguíneos ao diagnosticar pacientes.',
@@ -1300,7 +1300,7 @@ export default App
 
 O conteúdo do arquivo <i>index.js</i> é o mesmo dos exercícios anteriores.
 
-Descubra como gerar números aleatórios (random numbers) em JavaScript, por exemplo, pesquisando na internet ou lendo o [Mozilla Developer Network](https://developer.mozilla.org). Lembre-se de que você pode testar a criação de números aleatórios diretamente no console do seu navegador, por exemplo.
+Descubra como gerar números aleatórios (_random numbers_) em JavaScript, por exemplo, pesquisando na internet ou lendo o [Mozilla Developer Network](https://developer.mozilla.org). Lembre-se de que você pode testar a criação de números aleatórios diretamente no console do seu navegador, por exemplo.
 
 Sua aplicação no estado final pode ficar mais ou menos assim:
 
@@ -1314,16 +1314,16 @@ Amplie sua aplicação para que você possa votar na anedota exibida.
 
 ![aplicação de anedotas com botão de votos adicionado](../../images/1/19a.png)
 
-**N.B.:** armazene os votos de cada anedota em um array ou objeto no estado do componente. Lembre-se de que a forma correta de atualizar o estado armazenado em estruturas de dados complexas, como objetos e arrays, é fazer uma cópia do estado.
+**Obs.:** armazene os votos de cada anedota em um array ou objeto no estado do componente. Lembre-se de que a forma correta de atualizar o estado armazenado em estruturas de dados complexas, como objetos e arrays, é fazer uma cópia do estado.
 
 Você pode criar uma cópia de um objeto assim:
 
 ```js
 const pontos = { 0: 1, 1: 3, 2: 4, 3: 2 }
 
-const copia = { ...pontos } // *cópia
+const copia = { ...pontos }
 // incrementa o valor da propriedade 2 (dois) por 1 (um)
-cópia[2] += 1     
+copia[2] += 1     
 ```
 
 Ou uma cópia de um array assim:
@@ -1333,7 +1333,7 @@ const pontos = [1, 4, 6, 3]
 
 const copia = [...pontos]
 // incrementa o valor na posição 2 (dois) por 1 (um)
-cópia[2] += 1     
+copia[2] += 1     
 ```
 
 Utilizar um array pode ser a escolha mais simples neste caso. Uma pesquisa na Internet vai te mostrar muitas formas de como [criar um array preenchido com zeros com um comprimento arbitrário](https://stackoverflow.com/questions/20222501/how-to-create-a-zero-filled-javascript-array-of-arbitrary-length/22209781).
