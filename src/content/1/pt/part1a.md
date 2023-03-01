@@ -145,7 +145,7 @@ export default App
 
 E observe o que acontece no console do navegador:
 
-![browser console showing console log with arrow to "Hello from component"](../../images/1/30.png)
+![console do navegador com uma seta mostrando o log com a mensagem "Hello from component"](../../images/1/30.png)
 
 A primeira regra do desenvolvimento web front-end:
 

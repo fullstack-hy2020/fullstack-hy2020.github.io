@@ -164,7 +164,7 @@ xhttp.send()
 
 Os detalhes do código não são importantes agora, mas algum código foi incluído para dar vida às imagens e ao texto. Começaremos a programar de verdade na [parte 1](/ptbr/part1). O código-exemplo nesta parte, na realidade, não tem relação alguma com as técnicas de programação deste curso.
 
-> Alguns podem se perguntar o porquê do objeto "xhttp" ser usado aqui em vez do moderno "fetch". Isso se deve ao fato de não querermos entrar no assunto das "Promises" (promessas) ainda, e o código ter um papel secundário nesta parte. Voltaremos às formas modernas de fazer requisições ao servidor na Parte 2.
+> Alguns podem se perguntar o porquê do objeto "xhttp" ser usado aqui em vez do moderno "fetch" ("buscar" ou "ir buscar"). Isso se deve ao fato de não querermos entrar no assunto das "Promises" (promessas) ainda, e o código ter um papel secundário nesta parte. Voltaremos às formas modernas de fazer requisições ao servidor na Parte 2.
 
 Imediatamente após baixar a tag <i>script</i>, o navegador começa a executar o código.
 

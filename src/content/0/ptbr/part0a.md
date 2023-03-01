@@ -70,9 +70,9 @@ Uma boa pergunta poderia ser:
 > // dados impressos no console
 > ```
 >
-> A guia Network no navegador exibe o seguinte:</i>
+> A guia Rede (Network) no navegador exibe o seguinte:</i>
 >
-> [captura de tela da guia de network]
+> [captura de tela da guia Rede (Network)]
 > 
 > <i>Todo o código pode ser encontrado aqui (um link para o repositório no GitHub)</i>
 
