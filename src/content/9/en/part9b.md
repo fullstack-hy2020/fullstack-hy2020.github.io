@@ -279,7 +279,7 @@ try {
 }
 ```
 
-Here the narrowing was done with a [typeof](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#typeof-type-guards) type guard, that is just one of the many ways to narrow a type. We shall see many others later in this part.
+Here the narrowing was done with the [instanceof](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#instanceof-narrowing) type guard, that is just one of the many ways to narrow a type. We shall see many others later in this part.
 
 ### Accessing command line arguments
 

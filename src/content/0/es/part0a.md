@@ -101,7 +101,7 @@ Los resultados del examen se pueden encontrar en la pestaña <i>Mis envíos</i> 
 
 Al enviar al menos 22/26 de los ejercicios para la parte 8 del curso, GraphQL, puede obtener un crédito adicional. La parte 8 puede realizarse en cualquier momento después de la parte 5, porque su contenido es independiente de las partes 6 y 7.
 
-Al enviar al menos 24/27 de los ejercicios de la parte 9 del curso, TypeScript, puede obtener un crédito adicional. Se recomienda que complete las partes 0-7 antes de tomar la parte 9.
+Al enviar al menos 24/29 de los ejercicios de la parte 9 del curso, TypeScript, puede obtener un crédito adicional. Se recomienda que complete las partes 0-7 antes de tomar la parte 9.
 
 Los ejercicios de las partes 8 y 9 no cuentan para la calificación del curso de 5-7 créditos.
 
