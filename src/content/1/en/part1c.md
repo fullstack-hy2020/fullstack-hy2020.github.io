@@ -586,7 +586,7 @@ Next, let's make a <i>Button</i> component for the buttons of our application. W
 ```js
 const Button = (props) => {
   return (
-    <button onClick={props.onClick}>
+    <button onClick={props.handleClick}>
       {props.text}
     </button>
   )
@@ -610,15 +610,15 @@ const App = () => {
       <Display counter={counter}/>
       // highlight-start
       <Button
-        onClick={increaseByOne}
+        handleClick={increaseByOne}
         text='plus'
       />
       <Button
-        onClick={setToZero}
+        handleClick={setToZero}
         text='zero'
       />     
       <Button
-        onClick={decreaseByOne}
+        handleClick={decreaseByOne}
         text='minus'
       />           
       // highlight-end
@@ -719,7 +719,7 @@ We can simplify the Button component as well.
 ```js
 const Button = (props) => {
   return (
-    <button onClick={props.onClick}>
+    <button onClick={props.handleClick}>
       {props.text}
     </button>
   )
@@ -729,8 +729,8 @@ const Button = (props) => {
 We can use destructuring to get only the required fields from <i>props</i>, and use the more compact form of arrow functions:
 
 ```js
-const Button = ({ onClick, text }) => (
-  <button onClick={onClick}>
+const Button = ({ handleClick, text }) => (
+  <button onClick={handleClick}>
     {text}
   </button>
 )
@@ -739,7 +739,7 @@ const Button = ({ onClick, text }) => (
 We can simplify the Button component once more by declaring the return statement in just one line:
 
 ```js
-const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
+const Button = ({ handleClick, text }) => <button onClick={handleClick}>{text}</button>
 ```
 
 However, be careful to not oversimplify your components, as this makes adding complexity a more tedious task down the road.

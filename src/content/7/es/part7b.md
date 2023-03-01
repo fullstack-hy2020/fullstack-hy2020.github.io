@@ -432,7 +432,7 @@ Si no se encuentra el país, se muestra un mensaje al usuario
 
 Por lo demás, la aplicación está completa, pero en este ejercicio debe implementar un hook personalizado _useCountry_, que se puede usar para buscar los detalles del país dado al hook como parámetro.
 
-Use el endpoint [full name](https://restcountries.com/#api-endpoints-full-name) de la api  para obtener los detalles del país en un hook _useEffect_ dentro de su hook personalizado.
+Use el endpoint [full name](https://restcountries.com/#api-endpoints-v2-full-name) de la api  para obtener los detalles del país en un hook _useEffect_ dentro de su hook personalizado.
 
 Tenga en cuenta que en este ejercicio es esencial utilizar el [segundo parámetro](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) de useEffect para controlar cuándo se ejecuta la función de efecto.
 
