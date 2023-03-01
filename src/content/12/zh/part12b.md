@@ -863,13 +863,13 @@ Emitted 'error' event on RedisClient instance at:
 #### Exercise 12.10:
 
 <!-- The project already has [https://www.npmjs.com/package/redis](https://www.npmjs.com/package/redis) installed and two functions "promisified" - getAsync and setAsync.-->
- 该项目已经安装了[https://www.npmjs.com/package/redis](https://www.npmjs.com/package/redis)和两个 " Promise  "的函数--getAsync和setAsync。
+ 该项目已经安装了[https://www.npmjs.com/package/redis](https://www.npmjs.com/package/redis)和两个 "承诺 "的函数--getAsync和setAsync。
 
 <!-- - setAsync function takes in key and value, using the key to store the value.-->
  - setAsync函数接收键和值，用键来存储值。
 
 <!-- - getAsync function takes in key and returns the value in a promise.-->
- - getAsync函数接收键并在一个 Promise 中返回值。
+ - getAsync函数接收键并在一个承诺中返回值。
 
 <!-- Implement a todo counter that saves the number of created todos to Redis:-->
  实现一个todo计数器，将创建的todos的数量保存到Redis。

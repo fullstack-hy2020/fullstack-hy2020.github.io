@@ -1145,7 +1145,7 @@ cy.contains('logout').click()
 Cypress命令总是返回_undefined_，所以上述代码中的_button.click()_会导致一个错误。试图启动调试器不会在执行命令之间停止代码，而是在任何命令被执行之前。
 
 <!-- Cypress commands are <i>like promises</i>, so if we want to access their return values, we have to do it using the [then](https://docs.cypress.io/api/commands/then.html) command.-->
-Cypress命令<i>类似于 Promise </i>，所以如果我们想访问它们的返回值，我们必须使用[then](https://docs.cypress.io/api/commands/then.html)命令来完成。
+Cypress命令<i>类似于承诺</i>，所以如果我们想访问它们的返回值，我们必须使用[then](https://docs.cypress.io/api/commands/then.html)命令来完成。
 <!-- For example, the following test would print the number of buttons in the application, and click the first button:-->
  例如，下面的测试将打印应用中的按钮数量，并点击第一个按钮。
 

@@ -336,7 +336,7 @@ export default {
 ```
 
 <!-- The module returns an object that has three functions (<i>getAll</i>, <i>create</i>, and <i>update</i>) as its properties that deal with notes. The functions directly return the promises returned by the axios methods.-->
- 该模块返回一个对象，该对象有三个函数（<i>getAll</i>、<i>create</i>和<i>update</i>）作为其属性，处理笔记。这些函数直接返回axios方法所返回的 Promise 。
+ 该模块返回一个对象，该对象有三个函数（<i>getAll</i>、<i>create</i>和<i>update</i>）作为其属性，处理笔记。这些函数直接返回axios方法所返回的承诺。
 
 <!-- The <i>App</i> component uses <em>import</em> to get access to the module:-->
  <i>App</i>组件使用<em>import</em>来获得对模块的访问。
@@ -457,7 +457,7 @@ export default {
 
 
 <!-- We no longer return the promise returned by axios directly. Instead, we assign the promise to the <em>request</em> variable and call its <em>then</em> method:-->
- 我们不再直接返回axios返回的 Promise 。相反，我们将 Promise 分配给<em>request</em>变量并调用其<em>then</em>方法。
+ 我们不再直接返回axios返回的承诺。相反，我们将承诺分配给<em>request</em>变量并调用其<em>then</em>方法。
 
 ```js
 const getAll = () => {
@@ -481,7 +481,7 @@ const getAll = () => {
 ```
 
 <!-- The modified <em>getAll</em> function still returns a promise, as the <em>then</em> method of a promise also [returns a promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then).-->
- 修改后的<em>getAll</em>函数仍然返回一个 Promise ，因为一个 Promise 的<em>then</em>方法也[返回一个 Promise ](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)。
+ 修改后的<em>getAll</em>函数仍然返回一个承诺，因为一个承诺的<em>then</em>方法也[返回一个承诺](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)。
 
 <!-- After defining the parameter of the <em>then</em> method to directly return <i>response.data</i>, we have gotten the <em>getAll</em> function to work like we wanted it to. When the HTTP request is successful, the promise returns the data sent back in the response from the backend.-->
  在定义了<em>then</em>方法的参数以直接返回<i>response.data</i>之后，我们已经让<em>getAll</em>函数像我们希望的那样工作。当HTTP请求成功时，promise会返回从后端响应中发回的数据。
@@ -545,7 +545,7 @@ const App = () => {
 [你不懂JS](https://github.com/getify/You-Dont-Know-JS/tree/1st-ed)系列书籍中的 "异步和性能 "一书[很好地解释了这个话题](https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/async%20%26%20performance/ch3.md)，但解释的篇幅很多。
 
 <!-- Promises are central to modern JavaScript development and it is highly recommended to invest a reasonable amount of time into understanding them.-->
-  Promise 是现代JavaScript开发的核心，强烈建议投入合理的时间来理解它们。
+ 承诺是现代JavaScript开发的核心，强烈建议投入合理的时间来理解它们。
 
 ### Cleaner Syntax for Defining Object Literals
 
@@ -692,16 +692,16 @@ const getAll = () => {
  应用应该能够优雅地处理这些类型的错误情况。除非用户碰巧打开了他们的控制台，否则他们无法知道错误确实发生了。在应用中可以看到错误的唯一方法是，点击按钮对注释的重要性没有影响。
 
 <!-- We had [previously](/en/part2/getting_data_from_server#axios-and-promises) mentioned that a promise can be in one of three different states. When an HTTP request fails, the associated promise is <i>rejected</i>. Our current code does not handle this rejection in any way.-->
- 我们[之前](/en/part2/getting_data_from_server#axios-and-promises)提到，一个 Promise 可以处于三种不同的状态之一。当一个HTTP请求失败时，相关的 Promise 会被<i>拒绝</i>。我们目前的代码没有以任何方式处理这种拒绝。
+ 我们[之前](/en/part2/getting_data_from_server#axios-and-promises)提到，一个承诺可以处于三种不同的状态之一。当一个HTTP请求失败时，相关的承诺会被<i>拒绝</i>。我们目前的代码没有以任何方式处理这种拒绝。
 
 <!-- The rejection of a promise is [handled](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) by providing the <em>then</em> method with a second callback function, which is called in the situation where the promise is rejected.-->
- 拒绝 Promise 是通过提供带有第二个回调函数的<em>then</em>方法来[处理](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises)的，该函数在 Promise 被拒绝的情况下被调用。
+ 拒绝承诺是通过提供带有第二个回调函数的<em>then</em>方法来[处理](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises)的，该函数在承诺被拒绝的情况下被调用。
 
 <!-- The more common way of adding a handler for rejected promises is to use the [catch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch) method.-->
- 为被拒绝的 Promise 添加处理程序的更常见方式是使用[catch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch)方法。
+ 为被拒绝的承诺添加处理程序的更常见方式是使用[catch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch)方法。
 
 <!-- In practice, the error handler for rejected promises is defined like this:-->
- 在实践中，被拒绝的 Promise 的错误处理程序是这样定义的。
+ 在实践中，被拒绝的承诺的错误处理程序是这样定义的。
 
 ```js
 axios
@@ -718,10 +718,10 @@ axios
  如果请求失败，与<em>catch</em>方法注册的事件处理程序被调用。
 
 <!-- The <em>catch</em> method is often utilized by placing it deeper within the promise chain.-->
- <em>catch</em>方法经常被利用，将其置于 Promise 链的更深处。
+ <em>catch</em>方法经常被利用，将其置于承诺链的更深处。
 
 <!-- When our application makes an HTTP request, we are in fact creating a [promise chain](https://javascript.info/promise-chaining):-->
- 当我们的应用发出一个HTTP请求时，我们实际上是在创建一个[ Promise 链](https://javascript.info/promise-chaining)。
+ 当我们的应用发出一个HTTP请求时，我们实际上是在创建一个[承诺链](https://javascript.info/promise-chaining)。
 
 ```js
 axios
@@ -733,7 +733,7 @@ axios
 ```
 
 <!-- The <em>catch</em> method can be used to define a handler function at the end of a promise chain, which is called once any promise in the chain throws an error and the promise becomes <i>rejected</i>.-->
- <em>catch</em>方法可以用来在 Promise 链的末端定义一个处理函数，一旦 Promise 链中的任何一个 Promise 抛出错误， Promise 就会被调用，成为<i>拒绝</i>。
+ <em>catch</em>方法可以用来在承诺链的末端定义一个处理函数，一旦承诺链中的任何一个承诺抛出错误，承诺就会被调用，成为<i>拒绝</i>。
 
 ```js
 axios

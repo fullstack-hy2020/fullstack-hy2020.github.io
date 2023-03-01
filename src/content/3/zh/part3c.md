@@ -307,7 +307,7 @@ note.save().then(result => {
  我们还可以通过修改代码中的数据和再次执行程序来保存一些注释。
 
 <!-- **NB:** Unfortunately the Mongoose documentation is not very consistent, with parts of it using callbacks in its examples and other parts, other styles, so it is not recommended to copy paste code directly from there. Mixing promises with old-school callbacks in the same code is not recommended.-->
- **NB:**不幸的是，Mongoose文档不是很一致，它的部分例子中使用了回调，而其他部分则是其他风格，所以不建议直接从那里复制粘贴代码。不建议在同一段代码中混合使用 Promise 和老式的回调。
+ **NB:**不幸的是，Mongoose文档不是很一致，它的部分例子中使用了回调，而其他部分则是其他风格，所以不建议直接从那里复制粘贴代码。不建议在同一段代码中混合使用承诺和老式的回调。
 
 ### Fetching objects from the database
 
@@ -765,7 +765,7 @@ app.get('/api/notes/:id', (request, response) => {
  如果我们试图访问一个ID不存在的笔记的URL，例如：<http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431>，其中<i>5c41c90e84d891c15dfa3431</i>不是存储在数据库中的ID，那么响应将是_null_。
 
 <!-- Let's change this behavior so that if note with the given id doesn't exist, the server will respond to the request with the HTTP status code 404 not found. In addition let's implement a simple <em>catch</em> block to handle cases where the promise returned by the <em>findById</em> method is <i>rejected</i>:-->
- 让我们改变这个行为，如果给定id的注释不存在，服务器将以HTTP状态代码404未找到来响应请求。此外，让我们实现一个简单的<em>catch</em>块来处理由<em>findById</em>方法返回的 Promise 被<i>拒绝</i>的情况。
+ 让我们改变这个行为，如果给定id的注释不存在，服务器将以HTTP状态代码404未找到来响应请求。此外，让我们实现一个简单的<em>catch</em>块来处理由<em>findById</em>方法返回的承诺被<i>拒绝</i>的情况。
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
@@ -789,7 +789,7 @@ app.get('/api/notes/:id', (request, response) => {
 ```
 
 <!-- If no matching object is found in the database, the value of _note_ will be _null_ and the _else_ block is executed. This results in a response with the status code <i>404 not found</i>. If promise returned by the <em>findById</em> method is rejected, the response will have the status code <i>500 internal server error</i>. The console displays more detailed information about the error.-->
- 如果在数据库中没有找到匹配的对象，_note_的值将是_null_，_else_块被执行。这将导致一个状态代码为<i>404 not found</i>的响应。如果由<em>findById</em>方法返回的 Promise 被拒绝，那么响应的状态码将是<i>500 internal server error</i>。控制台会显示关于该错误的更详细的信息。
+ 如果在数据库中没有找到匹配的对象，_note_的值将是_null_，_else_块被执行。这将导致一个状态代码为<i>404 not found</i>的响应。如果由<em>findById</em>方法返回的承诺被拒绝，那么响应的状态码将是<i>500 internal server error</i>。控制台会显示关于该错误的更详细的信息。
 
 <!-- On top of the non-existing note, there's one more error situation needed to be handled. In this situation, we are trying to fetch a note with a wrong kind of _id_, meaning an _id_ that doesn't match the mongo identifier format.-->
  在不存在的注释之上，还有一个错误情况需要处理。在这种情况下，我们正试图获取一个带有错误的_id_的笔记，也就是说，一个不符合mongo标识符格式的_id_。

@@ -117,7 +117,7 @@ export default App
  登录是通过向服务器地址<i>api/login</i>发送一个HTTP POST请求来完成。让我们把负责这个请求的代码分离到自己的模块中，放到<i>services/login.js</i>文件中。
 
 <!-- We'll use <i>async/await</i> syntax instead of promises for the HTTP request:-->
- 我们将使用<i>async/await</i>语法而不是 Promise 来处理HTTP请求。
+ 我们将使用<i>async/await</i>语法而不是承诺来处理HTTP请求。
 
 ```js
 import axios from 'axios'
