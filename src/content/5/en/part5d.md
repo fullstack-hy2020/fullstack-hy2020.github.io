@@ -512,7 +512,7 @@ const NoteForm = ({ createNote }) => {
 } 
 ```
 
-There are multiple ways to test this. In the following example, we first search for a note and click its <i>make important</i> button. Then we check that the note now contains a <i>make not important</i> button.
+There are multiple ways to test this. In the following example, we first search for a note and click its <i>make not important</i> button. Then we check that the note now contains a <i>make important</i> button.
 
 ```js
 describe('Note app', function() {
@@ -528,7 +528,7 @@ describe('Note app', function() {
         cy.contains('save').click()
       })
 
-      it('it can be made important', function () {
+      it('it can be made not important', function () {
         cy.contains('another note cypress')
           .contains('make not important')
           .click()
@@ -541,9 +541,9 @@ describe('Note app', function() {
 })
 ```
 
-The first command searches for a component containing the text <i>another note cypress</i>, and then for a <i>make important</i> button within it. It then clicks the button.
+The first command searches for a component containing the text <i>another note cypress</i>, and then for a <i>make not important</i> button within it. It then clicks the button.
 
-The second command checks that the text on the button has changed to <i>make not important</i>.
+The second command checks that the text on the button has changed to <i>make important</i>.
 
 The tests and the current frontend code can be found on the [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-9) branch <i>part5-9</i>.
 

@@ -85,7 +85,7 @@ on:
  如果你以前没有使用过分支，可以查看[例如这个教程](https://www.atlassian.com/git/tutorials/using-branches)来开始。
 
 <!-- Note that when you open the pull request, make sure that you select here your <i>own</i> repository as the destination <i>base repository</i>. By default, the selection is the original repository by smartly and you **do not want** to do that:-->
- 注意，当你打开拉取请求时，确保在这里选择你的<i>自己的</i>仓库作为目标<i>基础仓库</i>。默认情况下，选择的是智能的原始仓库，你***不希望这样做。
+ 注意，当你打开拉取请求时，确保在这里选择你的<i>自己的</i>仓库作为目标<i>基础仓库</i>。默认情况下，选择的是智能的原始仓库，你**不希望**这样做。
 
 ![](../../images/11/15a.png)
 
