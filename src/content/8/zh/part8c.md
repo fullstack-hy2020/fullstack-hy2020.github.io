@@ -116,7 +116,7 @@ const resolvers = {
  这些变化是非常直接的。然而，有几个值得注意的地方。我们记得，在Mongo中，一个对象的识别字段被称为<i>_id</i>，我们以前必须自己把字段的名称解析为<i>id</i>。现在GraphQL可以自动做到这一点。
 
 <!-- Another noteworthy thing is that the resolver functions now return a <i>promise</i>, when they previously returned normal objects. When a resolver returns a promise, Apollo server [sends back](https://www.apollographql.com/docs/apollo-server/data/data/#resolver-results) the value which the promise resolves to.-->
- 另一件值得注意的事情是，解析器函数现在会返回一个<i>承诺</i>，而以前它们会返回普通的对象。当一个解析器返回一个承诺时，Apollo服务器[送回](https://www.apollographql.com/docs/apollo-server/data/data/#resolver-results)承诺所解析的值。
+ 另一件值得注意的事情是，解析器函数现在会返回一个<i> Promise </i>，而以前它们会返回普通的对象。当一个解析器返回一个 Promise 时，Apollo服务器[送回](https://www.apollographql.com/docs/apollo-server/data/data/#resolver-results) Promise 所解析的值。
 
 <!-- For example, if the following resolver function is executed,-->
  例如，如果执行了下面的解析器函数。
@@ -128,7 +128,7 @@ allPersons: async (root, args) => {
 ```
 
 <!-- Apollo server waits for the promise to resolve, and returns the result. So Apollo works roughly like this:-->
- Apollo服务器等待承诺的解析，并返回结果。所以Apollo的工作原理大致是这样的。
+ Apollo服务器等待 Promise 的解析，并返回结果。所以Apollo的工作原理大致是这样的。
 
 ```js
 Person.find({}).then( result => {

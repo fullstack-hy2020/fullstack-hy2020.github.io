@@ -760,7 +760,7 @@ const element = await screen.findByText('Does not work anymore :(')
 ```
 
 <!-- It is important to notice that unlike the other _ByText_ commands, _findByText_ returns a promise!-->
- 需要注意的是，与其他的_ByText_命令不同，_findByText_会返回一个承诺!
+ 需要注意的是，与其他的_ByText_命令不同，_findByText_会返回一个 Promise !
 
 <!-- There are situation where yet another form of the command _queryByText_ is useful. The command returns the element but <i>it does not cause an exception</i> if the element is not found.-->
  在有些情况下，另一种形式的命令_queryByText_是有用的。该命令返回元素，但如果没有找到该元素，它不会引起一个异常</i>。
