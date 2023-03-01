@@ -767,7 +767,7 @@ var sendToServer = function(note) {
 
 <div class="tasks">
 <!--   <h3>Exercises 0.1.-0.6.</h3>-->
- <h3>练习0.1.-0.6.</h3> </h3>
+ <h3>练习0.1.-0.6.</h3>
 
 <!-- The exercises are submitted via GitHub, and by marking the exercises as done in the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
  练习通过GitHub提交，并在[提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)中标记练习完成。
