@@ -563,6 +563,8 @@ See this [example submission repository](https://github.com/fullstack-hy2020/exa
 
 For each part of the course, there is a directory, which further branches into directories containing a series of exercises, like "unicafe" for part 1.
 
+Most of the exercises of the course build a larger application, eg. courseinfo, unicafe and anecdotes in this part, bit by bit. In is enough to submit the completed application. You can make a commit after each exercise, but that is not compulsory. For example the course info app is build in the exercises 1.1.-1.5. It is just the end result after 1.5 that you need to submit!
+
 For each web application for a series of exercises, it is recommended to submit all files relating to that application, except for the directory <i>node\_modules</i>.
 
   <h4>1.1: course information, step1</h4>

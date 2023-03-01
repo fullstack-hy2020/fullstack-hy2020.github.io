@@ -95,8 +95,8 @@ En soumettant au moins 22/26 des exercices de la partie 8 du cours, GraphQL, vou
 - [Demander des crédits pour la partie 8](/fr/part0/informations_generales#comment-obtenir-vos-credits).
 
 #### Partie 9 - Développement Web Full Stack : TypeScript (1 cr, CSM14110)
-En soumettant au moins 24/27 des exercices de la partie 9 du cours, TypeScript, vous pouvez obtenir un crédit supplémentaire. Il est recommandé de terminer les parties 0 à 7 avant de participer à la partie 9.
-- Soumettre au moins 24/27 exercices pour la partie 9.
+En soumettant au moins 24/29 des exercices de la partie 9 du cours, TypeScript, vous pouvez obtenir un crédit supplémentaire. Il est recommandé de terminer les parties 0 à 7 avant de participer à la partie 9.
+- Soumettre au moins 24/29 exercices pour la partie 9.
 - [Inscrivez-vous à la partie 9 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-d9125f89-a440-48e1-898a-ee4e16b06cdb).
 - [Demander des crédits pour la partie 9](/fr/part0/informations_generales#comment-obtenir-vos-credits).
 
