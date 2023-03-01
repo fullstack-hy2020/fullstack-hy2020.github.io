@@ -316,7 +316,7 @@ CMD npm start
  步骤1.通过创建一个<i>todo-app/todo-backend/Dockerfile</i>和构建一个镜像，将todo-backend容器化。
 
 <!-- Step 2. Run the todo-backend image with the correct ports open. Make sure the visit counter increases when used through a browser in http://localhost:3000/ (or some other port if you configure so)-->
- 第2步。在打开正确的端口的情况下运行todo-backend镜像。确保通过浏览器使用http://localhost:3000/（或其他端口，如果你这样配置）时，访问计数器会增加。
+ 第2步。在打开正确的端口的情况下运行todo-backend镜像。确保通过浏览器使用 http://localhost:3000/ （或其他端口，如果你这样配置）时，访问计数器会增加。
 
 <!-- Tip: Run the application outside of a container to examine it before starting to containerize.-->
  提示。在开始容器化之前，在容器外运行应用来检查它。
@@ -334,7 +334,7 @@ CMD npm start
  [Docker-compose](https://docs.docker.com/compose/)是另一个神奇的工具，它可以帮助我们管理容器。让我们开始使用docker-compose，因为它可以帮助我们节省一些配置的时间，当我们学习更多关于容器的知识。
 
 <!-- Install the docker-compose tool from this link: [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/).-->
- 从这个链接安装docker-compose工具。[https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/)。
+ 从这个链接安装docker-compose工具： [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/)
 
 <!-- Let's check that it works:-->
  让我们检查一下它是否工作。

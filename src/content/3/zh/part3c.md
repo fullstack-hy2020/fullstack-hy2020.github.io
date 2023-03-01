@@ -27,7 +27,7 @@ Visual Studio Code调试器在某些情况下是有用的。你可以像这样�
  注意，该应用不应该在另一个控制台中运行，否则该端口将已经被使用。
 
 <!-- __NB__ A newer version of Visual Studio Code may have _Run_ instead of _Debug_. Furthermore, you may have to configure your _launch.json_ file to start debugging. This can be done by choosing _Add Configuration..._ on the drop-down menu, which is located next to the green play button and above _VARIABLES_ menu, and select _Run "npm start" in a debug terminal_. For more detailed setup instructions, visit Visual Studio Code's [Debugging documentation](https://code.visualstudio.com/docs/editor/debugging).-->
- __NB__较新版本的Visual Studio Code可能有_Run_而不是_Debug_。此外，你可能需要配置你的_launch.json_文件来启动调试。这可以通过在下拉菜单中选择_Add Configuration..._来完成，该菜单位于绿色播放按钮旁边和_VARIABLES_菜单上面，并选择_Run "npm start" in a debug terminal_。关于更详细的设置说明，请访问Visual Studio Code's [调试文档](https://code.visualstudio.com/docs/editor/debugging)。
+ __NB__ 较新版本的Visual Studio Code可能有_Run_而不是_Debug_。此外，你可能需要配置你的_launch.json_文件来启动调试。这可以通过在下拉菜单中选择_Add Configuration..._来完成，该菜单位于绿色播放按钮旁边和_VARIABLES_菜单上面，并选择_Run "npm start" in a debug terminal_。关于更详细的设置说明，请访问Visual Studio Code's [调试文档](https://code.visualstudio.com/docs/editor/debugging)。
 
 <!-- Below you can see a screenshot where the code execution has been paused in the middle of saving a new note:-->
 下面你可以看到一个截图，在保存新的注释的过程中，代码的执行被暂停了。
@@ -117,7 +117,7 @@ node --inspect index.js
  让我们等待集群准备就绪，以供使用。这可能需要几分钟时间。
 
 <!-- **NB** do not continue before the cluster is ready.-->
- **NB*在集群准备好之前，不要继续。
+ **NB** 在集群准备好之前，不要继续。
 
 <!-- Let's use the <i>security</i> tab for creating user credentials for the database. Please note that these are not the same credentials you use for logging into MongoDB Atlas. These will be used for your application to connect to the database.-->
  让我们使用<i>安全</i>标签为数据库创建用户证书。请注意，这些并不是你用来登录MongoDB Atlas的相同凭证。这些将被用于你的应用连接到数据库。

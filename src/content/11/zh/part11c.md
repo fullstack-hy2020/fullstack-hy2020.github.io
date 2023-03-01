@@ -40,12 +40,12 @@ lang: zh
  - 如果一个用户在我们进行部署之前对我们的软件做了一个HTTP请求（我们没有时间向用户发送响应）会发生什么？
 
 <!-- These are just a small selection of what can go wrong during a deployment, or rather, things that we should plan for. Regardless of what happens, our deployment system should **never** leave our software in a broken state. We should also always know (or be easily able to find out) what state a deployment is in.-->
- 这些只是部署过程中可能出错的一小部分，或者说，我们应该计划的事情。无论发生什么，我们的部署系统都不应该***让我们的软件处于破碎状态。我们也应该总是知道（或者很容易找到）一个部署处于什么状态。
+ 这些只是部署过程中可能出错的一小部分，或者说，我们应该计划的事情。无论发生什么，我们的部署系统都**绝不应该**让我们的软件处于破碎状态。我们也应该总是知道（或者很容易找到）一个部署处于什么状态。
 
 <!-- Another important rule to remember when it comes to deployments (and CI in general) is:-->
  当涉及到部署（和一般的CI）时，要记住的另一个重要规则是。
 <!--   "Silent failures are **very** bad!"-->
- "无声的失败是***糟糕的！"
+ "无声的失败是**非常**糟糕的！"
 
 <!-- This doesn't mean that failures need to be shown to the users of the software, it means we need to be aware if anything goes wrong. If we are aware of a problem, we can fix it, if the deployment system doesn't give any errors but fails, we may end up in a state where we believe we have fixed a critical bug but the deployment failed, leaving the bug in our production environment and us unaware of the situation.-->
  这并不意味着故障需要显示给软件的用户，它意味着如果有什么问题，我们需要意识到。如果我们意识到一个问题，我们就可以修复它，如果部署系统没有给出任何错误，但却失败了，我们可能最终会陷入这样一种状态：我们认为我们已经修复了一个关键的错误，但部署却失败了，把这个错误留在了我们的生产环境中，而我们却没有意识到这种情况。
@@ -55,7 +55,7 @@ lang: zh
 <!-- Defining definitive rules or requirements for a deployment system is difficult, let's try anyway:-->
  为部署系统定义明确的规则或要求是困难的，无论如何让我们尝试一下。
 <!--  - Our deployment system should be able to fail gracefully at **any** step of the deployment.-->
- - 我们的部署系统应该能够在部署的***步骤中优雅地失败。
+ - 我们的部署系统应该能够在部署的**任何**步骤中优雅地失败。
 <!--  - Our deployment system should **never** leave our software in a broken state.-->
  - 我们的部署系统应该**永远不会**让我们的软件处于崩溃状态。
 <!--  - Our deployment system should let us know when a failure has happened. It's more important to notify about failure than about success.-->

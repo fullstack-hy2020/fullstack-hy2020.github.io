@@ -315,7 +315,7 @@ const App = () => {
  一般来说，当eslint抛出一个警告时禁用它并不是一个好主意。尽管有关的eslint规则引起了一些[争论](https://github.com/facebook/create-react-app/issues/6880)，我们将使用第一个解决方案。
 
 <!-- More about the need to define the hooks dependencies in [the react documentation](https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies).-->
- 更多关于需要定义钩子的依赖关系，请看【react文档】(https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies)。
+ 更多关于需要定义钩子的依赖关系，请看 [React文档](https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies)。
 
 <!-- We can do the same thing when it comes to creating a new note. Let's expand the code communicating with the server as follows:-->
 当涉及到创建一个新的笔记时，我们可以做同样的事情。让我们扩展一下与服务器通信的代码，如下。

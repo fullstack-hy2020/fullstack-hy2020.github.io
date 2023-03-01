@@ -1191,9 +1191,9 @@ const App = () => {
  你可能会发现下面的链接很有用。
 
 <!-- - The [official React documentation](https://reactjs.org/docs/hello-world.html) is worth checking out at some point, although most of it will become relevant only later on in the course. Also, everything related to class-based components is irrelevant to us;-->
- - [官方React文档](https://reactjs.org/docs/hello-world.html)值得在某些时候查看，尽管它的大部分内容在课程的后期才会变得相关。另外，与基于类的组件有关的一切都与我们无关。
+  - [官方React文档](https://reactjs.org/docs/hello-world.html)值得在某些时候查看，尽管它的大部分内容在课程的后期才会变得相关。另外，与基于类的组件有关的一切都与我们无关。
 <!-- - Some courses on [Egghead.io](https://egghead.io) like [Start learning React](https://egghead.io/courses/start-learning-react) are of high quality, and recently updated [The Beginner's Guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) is also relatively good; both courses introduce concepts that will also be introduced later on in this course. **NB** The first one uses class components but the latter uses the new functional ones.-->
- - [Egghead.io](https://egghead.io)上的一些课程，如[开始学习React](https://egghead.io/courses/start-learning-react)质量很高，最近更新的[The Beginner's Guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs)也比较好；这两个课程介绍的概念也将在本课程的后面介绍。**NB**前者使用类组件，但后者使用新的功能组件。
+  - [Egghead.io](https://egghead.io)上的一些课程，如[开始学习React](https://egghead.io/courses/start-learning-react)质量很高，最近更新的[The Beginner's Guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs)也比较好；这两个课程介绍的概念也将在本课程的后面介绍。**NB**前者使用类组件，但后者使用新的功能组件。
 
 </div>
 

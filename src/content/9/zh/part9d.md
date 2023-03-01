@@ -315,7 +315,7 @@ export default App;
  并删除不必要的文件。
 
 <!-- The whole app is now in one component. That is not what we want, so refactor the code so that it consists of three components: <i>Header</i>,  <i>Content</i> and <i>Total</i>. All data is still kept in the <i>App</i> component, which passes all necessary data to each component as props. <i>Be sure to add type declarations for each component's props!</i>-->
- 整个应用现在是在一个组件中。这不是我们想要的，所以重构代码，使其由三个组件组成。<i>标题</i>、<i>内容</i>和<i>总计</i>。所有的数据仍然保存在<i>App</i>组件中，它将所有必要的数据作为props传递给每个组件。<i>请确保为每个组件的props添加类型声明！</i>。
+ 整个应用现在是在一个组件中。这不是我们想要的，所以重构代码，使其由三个组件组成。<i>标题</i>、<i>内容</i>和<i>总计</i>。所有的数据仍然保存在<i>App</i>组件中，它将所有必要的数据作为props传递给每个组件。<i>请确保为每个组件的props添加类型声明！</i>
 
 <!-- The <i>Header</i> component should take care of rendering the name of the course. <i>Content</i> should render the names of the different parts and the amount of exercises in each part, and <i>Total</i> should render the total sum of exercises in all parts.-->
  <i>Header</i>组件应该负责渲染课程的名称。<i>Content</i>应该渲染不同部分的名称和每个部分的练习量，而<i>Total</i>应该渲染所有部分练习的总和。

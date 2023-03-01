@@ -136,7 +136,7 @@ multiplicator('how about a string?', 4, 'Multiplied a string and 4, the result i
  TypeScript原生支持多种类型，包括<i>number</i>、<i>string</i>和<i>Array</i>。请看全面的列表[这里](https://www.typescriptlang.org/docs/handbook/basic-types.html)。更复杂的自定义类型也可以被创建。
 
 <!-- The first two parameters of our function are of the type [number](http://www.typescriptlang.org/docs/handbook/basic-types.html#number) and the last is a [string](http://www.typescriptlang.org/docs/handbook/basic-types.html#string):-->
- 我们函数的前两个参数是[数字]类型(http://www.typescriptlang.org/docs/handbook/basic-types.html#number)，最后一个是[字符串](http://www.typescriptlang.org/docs/handbook/basic-types.html#string)。
+ 我们函数的前两个参数是[数字](http://www.typescriptlang.org/docs/handbook/basic-types.html#number)类型，最后一个是[字符串](http://www.typescriptlang.org/docs/handbook/basic-types.html#string)。
 
 ```js
 const multiplicator = (a: number, b: number, printText: string) => {
@@ -717,7 +717,7 @@ import express from 'express';
 ```
 
 <!-- **NB**: VSCode offers you a possibility to fix the issues automatically by clicking the <i>Quick Fix...</i> button. Keep your eyes open for these helpers/quick fixes; listening to your editor usually makes your code better and easier to read. The automatic fixes for issues can be a major time saver as well.-->
- **nb*:VSCode为你提供了一种可能性，通过点击<i>Quick Fix...<i>按钮自动修复这些问题。请留意这些助手/快速修复；听从你的编辑器通常会使你的代码更好，更容易阅读。对问题的自动修复也可以是一个主要的时间节省者。
+ **NB**:VSCode为你提供了一种可能性，通过点击<i>Quick Fix...<i>按钮自动修复这些问题。请留意这些助手/快速修复；听从你的编辑器通常会使你的代码更好，更容易阅读。对问题的自动修复也可以是一个主要的时间节省者。
 
 <!-- Now we run into another problem, the compiler complains about the import statement.-->
  现在我们遇到了另一个问题，编译器产生警告导入语句的问题。

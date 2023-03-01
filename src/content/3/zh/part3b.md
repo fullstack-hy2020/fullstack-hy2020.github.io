@@ -155,10 +155,10 @@ node_modules
  如果没有，可以通过命令<i>heroku logs</i>阅读heroku日志来发现问题。
 
 <!-- >**NB** At least in the beginning it's good to keep an eye on the heroku logs at all times. The best way to do this is with command <i>heroku logs -t</i> which prints the logs to console whenever something happens on the server.-->
- >***NB** 至少在开始的时候，随时注意heroku的日志是很好的。最好的方法是使用命令<i>heroku logs -t</i>，它可以在服务器上发生任何事情时将日志打印到控制台。
+ > **NB** 至少在开始的时候，随时注意heroku的日志是很好的。最好的方法是使用命令<i>heroku logs -t</i>，它可以在服务器上发生任何事情时将日志打印到控制台。
 
 <!-- >**NB** If you are deploying from a git repository where your code is not on the main branch (i.e. if you are altering the [notes repo](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2) from the last lesson) you will need to run _git push heroku HEAD:master_. If you have already done a push to heroku, you may need to run _git push heroku HEAD:main --force_.-->
- >***NB** 如果你从一个git仓库部署，而你的代码不在主分支上（例如，如果你正在改变上一课的[notes repo](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2)），你将需要运行_git push heroku HEAD:master_。如果你已经做了推送到heroku，你可能需要运行_git push heroku HEAD:main --force_。
+ > **NB** 如果你从一个git仓库部署，而你的代码不在主分支上（例如，如果你正在改变上一课的[notes repo](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2)），你将需要运行_git push heroku HEAD:master_。如果你已经做了推送到heroku，你可能需要运行_git push heroku HEAD:main --force_。
 
 <!-- The frontend also works with the backend on Heroku. You can check this by changing the backend's address on the frontend to be the backend's address in Heroku instead of <i>http://localhost:3001</i>.-->
  前台也可以和Heroku的后台一起工作。你可以通过把前端的后端地址改为Heroku中的后端地址，而不是<i>http://localhost:3001</i>来检查。
@@ -251,7 +251,7 @@ app.use(express.static('build'))
 每当express收到一个HTTP GET请求时，它将首先检查<i>build</i>目录中是否包含一个与请求地址相对应的文件。如果找到了正确的文件，express将返回它。
 
 <!-- Now HTTP GET requests to the address <i>www.serversaddress.com/index.html</i> or <i>www.serversaddress.com</i> will show the React frontend. GET requests to the address <i>www.serversaddress.com/api/notes</i> will be handled by the backend's code.-->
- 现在，对地址<i>www.serversaddress.com/index.html</i>或<i>www.serversaddress.com</i>的HTTP GET请求将显示React前端。对地址<i>www.serversaddress.com/api/notes</i>的GET请求将由后端's代码处理。
+ 现在，对地址<i>www.serversaddress.com/index.html</i>或<i>www.serversaddress.com</i>的HTTP GET请求将显示React前端。对地址<i>www.serversaddress.com/api/notes</i>的GET请求将由后端代码处理。
 
 <!-- Because of our situation, both the frontend and the backend are at the same address, we can declare _baseUrl_ as a [relative](https://www.w3.org/TR/WD-html40-970917/htmlweb.html#h-5.1.2) URL. This means we can leave out the part declaring the server.-->
  由于我们的情况，前端和后端都在同一个地址，我们可以将_baseUrl_声明为一个[相对](https://www.w3.org/TR/WD-html40-970917/htmlweb.html#h-5.1.2)URL。这意味着我们可以省去声明服务器的部分。
@@ -366,7 +366,7 @@ const getAll = () => {
  注意，脚本<i>build:ui</i>中的目录路径取决于文件系统中存储库的位置。
 
 <!-- >**NB**  On Windows, npm scripts are executed in cmd.exe as the default shell which does not support bash commands. For the above bash commands to work, you can change the default shell to Bash (in the default Git for Windows installation) as follows:-->
- >***NB** 在Windows上，npm脚本在cmd.exe中执行，作为默认的shell，不支持bash命令。为了让上述bash命令发挥作用，你可以将默认的shell改为Bash（在默认的Git for Windows安装中），方法如下。
+ >**NB** 在Windows上，npm脚本在cmd.exe中执行，作为默认的shell，不支持bash命令。为了让上述bash命令发挥作用，你可以将默认的shell改为Bash（在默认的Git for Windows安装中），方法如下。
 
 ```md
 npm config set script-shell "C:\\Program Files\\git\\bin\\bash.exe"
@@ -478,7 +478,7 @@ const baseUrl = '/api/notes'
  为你的前端生成一个生产版本，并使用本章节介绍的方法将其添加到互联网应用中。
 
 <!-- **NB** Make sure the directory <i>build</i> is not gitignored-->
- **NB* 确保目录<i>build</i>没有被gitignored
+ **NB** 确保目录<i>build</i>没有被gitignored
 
 <!-- Also make sure that the frontend still works locally (in development mode when started with command _npm start_).-->
  还要确保前端在本地仍然可以工作（在开发模式下，用_npm start_命令启动）。
