@@ -17,16 +17,16 @@ No código a seguir, criamos dois pedaços de estado para a aplicação, chamado
 
 ```js
 const App = () => {
-  const [esquerda, defEsquerda] = useState(0) // ou "definirEsquerda"
-  const [direita, defDireita] = useState(0) // ou "definirDireita"
+  const [esquerda, setEsquerda] = useState(0) 
+  const [direita, setDireita] = useState(0) 
 
   return (
     <div>
       {esquerda}
-      <button onClick={() => defEsquerda(esquerda + 1)}>
+      <button onClick={() => setEsquerda(esquerda + 1)}>
         Esquerda
       </button>
-      <button onClick={() => defDireita(direita + 1)}>
+      <button onClick={() => setDireita(direita + 1)}>
         Direita
       </button>
       {direita}
@@ -35,7 +35,7 @@ const App = () => {
 }
 ```
 
-O componente tem acesso às funções _defEsquerda_ e _defDireita_, que podem ser usadas para atualizar os dois pedaços de estado.
+O componente têm acesso às funções _setEsquerda_ e _setDireita_, que podem ser usadas para atualizar os dois pedaços de estado.
 
 O estado ou um pedaço de estado do componente pode ser de qualquer tipo. Poderíamos implementar a mesma funcionalidade salvando a contagem de cliques tanto dos botões "<i>esquerda</i>" quanto "<i>direita</i>" em um único objeto:
 ```js
@@ -49,36 +49,31 @@ Nesse caso, a aplicação ficaria assim:
 
 ```js
 const App = () => {
-  const [cliques, defCliques] = useState({ // ou "definirCliques"
+  const [cliques, setCliques] = useState({ 
     esquerda: 0, direita: 0
   })
 
-  const gerCliqueEsquerda = () => {
-    /* "handleLeftClick" pode ser traduzido, grosso modo,
-    como "gerenciarCliqueEsquerda".
-    Versão reduzida: "gerCliqueEsquerda". */
+  const handleCliqueEsquerda = () => {
     const novosCliques = { 
       esquerda: cliques.esquerda + 1, 
       direita: cliques.direita 
     }
-    defCliques(novosCliques)
+    setCliques(novosCliques)
   }
 
-  const gerCliqueDireita = () => {
-    /* A mesma lógica aplica-se à (variável) constante "handleRightClick". */
+  const handleCliqueDireita = () => {
     const novosCliques = { 
       esquerda: cliques.esquerda, 
       direita: cliques.direita + 1 
     }
-    defCliques(novosCliques)
+    setCliques(novosCliques)
   }
 
   return (
     <div>
       {cliques.esquerda}
-      <button onClick={gerCliqueEsquerda}>Esquerda</button>
-      <button onClick={gerCliqueDireita}>Direita</button>
-      {cliques.direita}
+      <button onClick={handleCliqueEsquerda}>Esquerda</button>
+      <button onClick={handleCliqueDireita}>Direita</button>
     </div>
   )
 }
@@ -88,12 +83,12 @@ Agora, o componente tem apenas um único pedaço de estado, e os gerenciadores d
 
 O formato do gerenciador de evento parece confuso aqui. Quando o botão da esquerda é clicado, a seguinte função é chamada:
 ```js
-const gerCliqueEsquerda = () => {
+const handleCliqueEsquerda = () => {
   const novosCliques = { 
     esquerda: cliques.esquerda + 1, 
     direita: cliques.direita 
   }
-  defCliques(novosCliques)
+  setCliques(novosCliques)
 }
 ```
 
@@ -110,44 +105,50 @@ O novo valor da propriedade <i>esquerda</i> agora é o mesmo que o valor de <i>e
 Podemos definir mais claramente o novo objeto de estado usando a ([sintaxe de espalhamento](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)) (Spread syntax (...)) que foi adicionada à especificação da linguagem no verão de 2018:
 
 ```js
-const gerCliqueEsquerda = () => {
+const handleCliqueEsquerda = () => {
   const novosCliques = { 
     ...cliques, 
     esquerda: cliques.esquerda + 1 
   }
-  defCliques(novosCliques)
+  setCliques(novosCliques)
 }
 
-const gerCliqueDireita = () => {
-  const novosCliques = { 
+const handleCliqueDireita = () => {
     ...cliques, 
     direita: cliques.direita + 1 
   }
-  defCliques(novosCliques)
+  setCliques(novosCliques)
 }
 ```
 
 A sintaxe pode parecer um tanto estranha no começo. Na prática, <em>{ ...cliques }</em> cria um novo objeto que tem cópias de todas as propriedades do objeto _cliques_. Quando discriminamos uma propriedade específica — por exemplo, <i>direita</i> em <em>{ ...cliques, direita: 1 }</em>, o valor da propriedade _direita_ no novo objeto será 1.
 
-No exemplo acima, este trecho...
+No exemplo acima, este trecho:
 
 ```js
 { ...cliques, direita: cliques.direita + 1 }
 ```
 
-... cria uma cópia do objeto _cliques_, onde o valor da propriedade _direita_ é aumentado em 1.
+cria uma cópia do objeto _cliques_, onde o valor da propriedade _direita_ é aumentado em 1.
 
 Não é necessário atribuir o objeto a uma variável nos gerenciadores de eventos, e podemos simplificar as funções da seguinte maneira:
 
 ```js
-const gerCliqueEsquerda = () =>
-  defCliques({ ...cliques, esquerda: cliques.esquerda + 1 })
+const handleCliqueEsquerda = () =>
+  setCliques({ ...cliques, esquerda: cliques.esquerda + 1 })
 
-const gerCliqueDireita = () =>
-  defCliques({ ...cliques, direita: cliques.direita + 1 })
+const handleCliqueDireita = () =>
+```
+Alguns leitores podem estar se perguntando o motivo de não termos atualizado o estado diretamente, desta forma:
+
+```js
+const handleCliqueEsquerda = () => {
+  cliques.esquerda++
+  setCliques(cliques)
+}
 ```
 
-A aplicação parece funcionar. Entretanto, <i> em React, é proibido mudar (mutate) diretamente o estado</i>, já que [pode resultar em efeitos colaterais inesperados](https://stackoverflow.com/a/40309023). A mudança de estado sempre tem que ser feita pela definição/atribuição do estado a um novo objeto. Se as propriedades do objeto de estado anterior não forem alteradas, podem simplesmente ser copiadas, que se dá copiando essas propriedades em um novo objeto e definindo-o como o novo estado.
+A aplicação parece funcionar. Entretanto, <i> em React, é proibido mudar (mutate) diretamente o estado</i>, já que [pode resultar em efeitos colaterais inesperados](https://stackoverflow.com/a/40309023). A mudança de estado sempre tem que ser feita pela definição/atribuição do estado a um novo objeto. Se as propriedades do objeto de estado anterior não forem alteradas, podem simplesmente ser copiadas, o que se faz copiando essas propriedades em um novo objeto e definindo-o como o novo estado.
 
 Armazenar todo o estado em um único objeto de estado é uma má escolha para esta aplicação, especificamente; não há qualquer benefício aparente, e a aplicação resultante fica muito mais complexa. Neste caso, armazenar os contadores de cliques em pedaços separados de estado é uma escolha muito mais adequada.
 
@@ -159,30 +160,28 @@ Vamos adicionar um pedaço de estado à nossa aplicação contendo o array _todo
 
 ```js
 const App = () => {
-  const [esquerda, defEsquerda] = useState(0)
-  const [direita, defDireita] = useState(0)
-  const [todosOsCliques, defTodos] = useState([]) // highlight-line
+  const [esquerda, setEsquerda] = useState(0)
+  const [direita, setDireita] = useState(0)
+  const [todosOsCliques, setTodos] = useState([]) // highlight-line
 
 // highlight-start
-  const gerCliqueEsquerda = () => {
-    defTodos(todosOsCliques.concat('E'))
-    defEsquerda(esquerda + 1)
+  const handleCliqueEsquerda = () => {
+    setTodos(todosOsCliques.concat('E'))
+    setEsquerda(esquerda + 1)
   } 
 // highlight-end
 
 // highlight-start
-  const gerCliqueDireita = () => {
-    defTodos(todosOsCliques.concat('D'))
-    defDireita(direita + 1)
+  const handleCliqueDireita = () => {
+    setDireita(direita + 1)
   }
 // highlight-end
 
   return (
     <div>
       {esquerda}
-      <button onClick={gerCliqueEsquerda}>Esquerda</button>
-      <button onClick={gerCliqueDireita}>Direita</button>
-      {direita}
+      <button onClick={handleCliqueEsquerda}>Esquerda</button>
+      <button onClick={handleCliqueDireita}>Direita</button>
       <p>{todosOsCliques.join(' ')}</p> // highlight-line
     </div>
   )
@@ -192,15 +191,15 @@ const App = () => {
 Cada clique é armazenado em um pedaço separado de estado chamado _todosOsCliques_, que é inicializado como um array vazio:
 
 ```js
-const [todosOsCliques, defTodos] = useState([])
+const [todosOsCliques, setTodos] = useState([])
 ```
 
 Quando o botão <i>Esquerda</i> é clicado, adicionamos a letra <i>E</i> ao array _todosOsCliques_:
 
 ```js
-const gerCliqueEsquerda = () => {
-  defTodos(todosOsCliques.concat('E'))
-  defEsquerda(esquerda + 1)
+const handleCliqueEsquerda = () => {
+  setTodos(todosOsCliques.concat('E'))
+  setEsquerda(esquerda + 1)
 }
 ```
 
@@ -209,14 +208,14 @@ O pedaço de estado armazenado em _todosOsCliques_ agora é definido para ser um
 Como mencionado anteriormente, também é possível em JavaScript adicionar itens a um array com o método [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) (Significa, literalmente, "empurrar", "apertar", "pressionar". Porém, nestes termos, o método push() ADICIONA um ou mais elementos ao final de um array e retorna o novo comprimento desse array). Se adicionarmos o item "empurrando-o" para o array _todosOsCliques_ e então atualizando o estado, a aplicação ainda aparentará funcionar:
 
 ```js
-const gerCliqueEsquerda = () => {
+const handleCliqueEsquerda = () => {
   todosOsCliques.push('E')
-  defTodos(todosOsCliques)
-  defEsquerda(esquerda + 1)
+  setTodos(todosOsCliques)
+  setEsquerda(esquerda + 1)
 }
 ```
 
-No entanto, __não__ faça isso. Como mencionado anteriormente, o estado dos componentes em React, tal como _todosOsCliques_, não devem ser mudados diretamente. Mesmo se estado mudado parecer funcionar em alguns casos, tal decisão pode levar a erros no código muito difíceis de depurar.
+No entanto, __não__ faça isso. Como mencionado anteriormente, o estado dos componentes em React, tal como _todosOsCliques_, não devem ser mudados diretamente. Mesmo se mudando o estado parecer funcionar em alguns casos, tal decisão pode levar a erros no código muito difíceis de depurar.
 
 Vamos olhar mais de perto em como o clique é renderizado na página:
 
@@ -227,8 +226,8 @@ const App = () => {
   return (
     <div>
       {esquerda}
-      <button onClick={gerCliqueEsquerda}>Esquerda</button>
-      <button onClick={gerCliqueDireita}>Direita</button>
+      <button onClick={handleCliqueEsquerda}>Esquerda</button>
+      <button onClick={handleCliqueDireita}>Direita</button>
       {direita}
       <p>{todosOsCliques.join(' ')}</p> // highlight-line
     </div>
@@ -244,29 +243,27 @@ Vamos expandir a aplicação para que ela mantenha o controle do número total d
 
 ```js
 const App = () => {
-  const [esquerda, defEsquerda] = useState(0)
-  const [direita, defDireita] = useState(0)
-  const [todosOsCliques, defTodos] = useState([])
-  const [total, defTotal] = useState(0) // highlight-line
+  const [esquerda, setEsquerda] = useState(0)
+  const [direita, setDireita] = useState(0)
+  const [todosOsCliques, setTodos] = useState([])
+  const [total, setTotal] = useState(0) // highlight-line
 
-  const gerCliqueEsquerda = () => {
-    defTodos(todosOsCliques.concat('E'))
-    defEsquerda(esquerda + 1)
-    defTotal(esquerda + direita)  // highlight-line
+  const handleCliqueEsquerda = () => {
+    setTodos(todosOsCliques.concat('E'))
+    setEsquerda(esquerda + 1)
+    setTotal(esquerda + direita)  // highlight-line
   }
 
-  const gerCliqueDireita = () => {
-    defTodos(todosOsCliques.concat('D'))
-    defDireita(direita + 1)
-    defTotal(esquerda + direita)  // highlight-line
+  const handleCliqueDireita = () => {
+    setDireita(direita + 1)
+    setTotal(esquerda + direita)  // highlight-line
   }
 
   return (
     <div>
       {esquerda}
-      <button onClick={gerCliqueEsquerda}>Esquerda</button>
-      <button onClick={gerCliqueDireita}>Direita</button>
-      {direita}
+      <button onClick={handleCliqueEsquerda}>Esquerda</button>
+      <button onClick={handleCliqueDireita}>Direita</button>
       <p>{todosOsCliques.join(' ')}</p>
       <p>Total {total}</p>  // highlight-line
     </div>
@@ -280,18 +277,17 @@ A solução não funciona corretamente:
 
 Por alguma razão, o total de cliques nos botões está sempre um clique atrás do valor real.
 
-Vamos adicionar alguns comandos console.log ao gerenciador de eventos:
+Vamos adicionar alguns comandos ```console.log``` ao gerenciador de eventos:
 
 ```js
 const App = () => {
   // ...
-
-  const gerCliqueEsquerda = () => {
-    defTodos(todosOsCliques.concat('E'))
+  const handleCliqueEsquerda = () => {
+    setTodos(todosOsCliques.concat('E'))
     console.log('clique esquerdo anterior', esquerda)  // highlight-line
-    defEsquerda(esquerda + 1)
+    setEsquerda(esquerda + 1)
     console.log('clique esquerdo posterior', esquerda)  // highlight-line
-    defTotal(esquerda + direita)
+    setTotal(esquerda + direita)
   }
 
   // ...
@@ -302,10 +298,10 @@ O console revela o problema:
 
 ![o console das ferramentas do desenvolvedor exibe left before 4 and left after 4](../../images/1/32.png)
 
-Embora um novo valor tenha sido definido para _esquerda_ chamando _defEsquerda(esquerda + 1)_, o valor antigo ainda está lá, apesar da atualização! Por causa disso, a tentativa de contar o número de cliques nos botões produz um resultado menor do que o correto:
+Embora um novo valor tenha sido definido para _esquerda_ chamando _setEsquerda(esquerda + 1)_, o valor antigo ainda está lá, apesar da atualização! Por causa disso, a tentativa de contar o número de cliques nos botões produz um resultado menor do que o correto:
 
 ```js
-defTotal(esquerda + direita) 
+setTotal(esquerda + direita) 
 ```
 
 O motivo para isso é que uma atualização de estado no React acontece [assincronicamente](https://reactjs.org/docs/state-and-lifecycle.html#state-updates-may-be-asynchronous) (asynchronously), ou seja, não imediatamente, mas "em algum momento" antes que o componente seja renderizado novamente.
@@ -315,12 +311,11 @@ Podemos consertar a aplicação da seguinte forma:
 ```js
 const App = () => {
   // ...
-
-  const gerCliqueEsquerda = () => {
-    defTodos(todosOsCliques.concat('E'))
+  const handleCliqueEsquerda = () => {
+    setTodos(todosOsCliques.concat('E'))
     const atualizaEsquerda = esquerda + 1
-    defEsquerda(atualizaEsquerda)
-    defTotal(atualizaEsquerda + direita)
+    setEsquerda(atualizaEsquerda)
+    setTotal(atualizaEsquerda + direita)
   }
 
   // ...
@@ -331,7 +326,7 @@ Assim, o número de cliques nos botões é agora, de forma definitiva, baseado n
 
 ### Renderização Condicional
 
-Vamos modificar nossa aplicação para que a renderização do histórico de cliques seja gerenciada por um novo componente chamado <i>Historico</i> (*Histórico):
+Vamos modificar nossa aplicação para que a renderização do histórico de cliques seja gerenciada por um novo componente chamado <i>Historico</i>:
 
 ```js
 // highlight-start
@@ -358,8 +353,8 @@ const App = () => {
   return (
     <div>
       {esquerda}
-      <button onClick={gerCliqueEsquerda}>Esquerda</button>
-      <button onClick={gerCliqueDireita}>Direita</button>
+      <button onClick={handleCliqueEsquerda}>Esquerda</button>
+      <button onClick={handleCliqueDireita}>Direita</button>
       {direita}
       <Historico todosOsCliques={todosOsCliques} /> // highlight-line
     </div>
@@ -405,35 +400,33 @@ const Historico = (props) => {
 }
 
 // highlight-start
-const Botao = ({ gerClique, texto }) => (
-  <button onClick={gerClique}>
+const Botao = ({ handleClique, texto }) => (
+  <button onClick={handleClique}>
     {texto}
   </button>
 )
 // highlight-end
 
 const App = () => {
-  const [esquerda, defEsquerda] = useState(0)
-  const [direita, defDireita] = useState(0)
-  const [todosOsCliques, defTodos] = useState([])
+  const [esquerda, setEsquerda] = useState(0)
+  const [direita, setDireita] = useState(0)
+  const [todosOsCliques, setTodos] = useState([])
 
-  const gerCliqueEsquerda = () => {
-    defTodos(todosOsCliques.concat('E'))
-    defEsquerda(esquerda + 1)
+  const handleCliqueEsquerda = () => {
+    setTodos(todosOsCliques.concat('E'))
+    setEsquerda(esquerda + 1)
   }
 
-  const gerCliqueDireita = () => {
-    defTodos(todosOsCliques.concat('D'))
-    defDireita(direita + 1)
+  const handleCliqueDireita = () => {
+    setDireita(direita + 1)
   }
 
   return (
     <div>
       {esquerda}
       // highlight-start
-      <Botao gerClique={gerCliqueEsquerda} texto='Esquerda' />
-      <Botao gerClique={gerCliqueDireita} texto='Direita' />
-      // highlight-end
+      <Botao handleClique={handleCliqueEsquerda} texto='Esquerda' />
+      <Botao handleClique={handleCliqueDireita} texto='Direita' />
       {direita}
       <Historico todosOsCliques={todosOsCliques} />
     </div>
@@ -465,30 +458,30 @@ Antes de continuarmos, vamos nos lembrar de uma das regras mais importantes do d
 
 Mantenha tanto o seu código quanto a página web abertos juntos **o tempo todo**.
 
-Se e quando seu código não compilar e seu navegador brilhar igual uma árvore de Natal,...
+Se e quando seu código não compilar e seu navegador brilhar igual uma árvore de Natal:
 
 ![captura de tela do código](../../images/1/6x.png)
 
-... não escreva nenhuma linha de código a mais, mas encontre e corrija **imediatamente** o problema. Ainda não aconteceu na história da programação de o código que não estivesse compilando começasse a funcionar após a adição de mais linhas de código. Duvido que tal evento ocorra durante este curso também.
+não escreva nenhuma linha de código a mais, mas encontre e corrija **imediatamente** o problema. Ainda não aconteceu na história da programação de o código que não estivesse compilando começasse a funcionar após a adição de mais linhas de código. Duvido que tal evento ocorra durante este curso também.
 
-A depuração (debug) "old-school", baseada na impressão no Console, é sempre uma das melhores opções. Se o componente...
+A depuração (_debug_) "old-school", baseada na impressão no Console, é sempre uma das melhores opções. Se o componente
 
 ```js
-const Botao = ({ gerClique, texto }) => (
-  <button onClick={gerClique}>
+const Botao = ({ handleClique, texto }) => (
+  <button onClick={handleClique}>
     {texto}
   </button>
 )
 ```
 
-... não estiver funcionando como desejado, é útil começar a imprimir suas variáveis ​​no console. Para que isso funcione, devemos transformar nossa função na forma menos compactada e receber todo o objeto "props" sem desestruturá-lo de forma imediata:
+não estiver funcionando como desejado, é útil começar a imprimir suas variáveis ​​no console. Para que isso funcione, devemos transformar nossa função na forma menos compactada e receber todo o objeto "props" sem desestruturá-lo de forma imediata:
 
 ```js
 const Botao = (props) => { 
   console.log(props) // highlight-line
-  const { gerClique, texto } = props
+  const { handleClique, texto } = props
   return (
-    <button onClick={gerClique}>
+    <button onClick={handleClique}>
       {texto}
     </button>
   )
@@ -497,19 +490,19 @@ const Botao = (props) => {
 
 Isso revelará imediatamente se, por exemplo, um dos atributos foi escrito incorretamente ao usar o componente.
 
-**N.B. (Nota Bene):** Quando você usar _console.log_ para depuração, não combine _objetos (objects)_ do jeito Java de se fazer usando o operador de adição. Em vez de escrever...
+**Obs.:** Quando você usar _console.log_ para depuração, não combine _objetos (objects)_ do jeito Java de se fazer usando o operador de adição. Em vez de escrever
 
 ```js
 console.log('o valor de props é ' + props)
 ```
 
-... separe as coisas que você deseja registrar no console com uma vírgula:
+separe as coisas que você deseja registrar no console com uma vírgula:
 
 ```js
 console.log('o valor de props é', props)
 ```
 
-Se você usar do jeito Java de concatenar uma string com um objeto, aparecerá uma mensagem de log muito pouco informativa:
+Se você usar o jeito Java de concatenar uma string com um objeto, aparecerá uma mensagem de log muito pouco informativa:
 
 ```js
 o valor de props é [object Object]
@@ -527,9 +520,9 @@ Ao ir para a guia <i>Console</i>, é fácil inspecionar o estado atual das vari�
 
 Uma vez que a causa do erro é descoberta, é possível remover o comando _debugger_ e atualizar a página.
 
-O depurador também nos permite executar nosso código linha por linha com os controles encontrados na parte direita da guia <i>Fontes</i> (sources).
+O depurador também nos permite executar nosso código linha por linha com os controles encontrados na parte direita da guia <i>Fontes (Sources)</i>.
 
-Você também pode acessar o depurador sem o comando _debugger_, adicionando pontos de interrupção na guia <i>Fontes</i>. Inspecionar os valores das variáveis do componente pode ser feito na seção _Escopo (Scope)_:
+Você também pode acessar o depurador sem o comando _debugger_, adicionando pontos de interrupção na guia <i>Fontes (Sources)</i>. Inspecionar os valores das variáveis do componente pode ser feito na seção _Escopo (Scope)_:
 
 ![exemplo de ponto de interrupção nas ferramentas do desenvolvedor](../../images/1/9a.png)
 
@@ -540,44 +533,44 @@ Você também pode acessar o depurador sem o comando _debugger_, adicionando pon
 O estado do componente _App_ é definido assim:
 
 ```js
-const [esquerda, defEsquerda] = useState(0)
-const [direita, defDireita] = useState(0)
-const [todosOsCliques, defTodos] = useState([])
+const [esquerda, setEsquerda] = useState(0)
+const [direita, setDireita] = useState(0)
+const [todosOsCliques, setTodos] = useState([])
 ```
 
 As ferramentas do desenvolvedor mostram o estado dos hooks na ordem de sua definição:
 
 ![estado dos hooks nas ferramentas do desenvolvedor React](../../images/1/11ea.png)
 
-O primeiro <i>State</i> (Estado) contém o valor do estado <i>esquerda</i>; a próxima contém o valor do estado <i>direita</i> e a última contém o valor do estado <i>todosOsCliques</i>.
+O primeiro <i>State</i> (Estado) contém o valor do estado <i>esquerda</i>; o próximo contém o valor do estado <i>direita</i> e o último contém o valor do estado <i>todosOsCliques</i>.
 
 ### Regras dos Hooks
 
 Há algumas limitações e regras que devemos seguir para garantir que a nossa aplicação use corretamente as funções de estado baseadas em hooks.
 
-A função _useState_ ("usarEstado", assim como a função _useEffect_, ou "usarEfeito", introduzida mais tarde neste curso) <i>não deve ser chamada</i> dentro de um loop, uma expressão condicional ou qualquer lugar que não seja uma função que define um componente. Assim deve ser para garantir que os hooks sejam sempre chamados na mesma ordem e, se isso não acontecer, a aplicação se comportará erraticamente.
+A função _useState_ ("usarEstado", assim como a função _useEffect_, ou "usarEfeito", introduzida mais tarde neste curso) <i>não deve ser chamada</i> dentro de um loop, uma expressão condicional ou qualquer lugar que não seja uma função que define um componente. Assim deve ser para garantir que os hooks sejam sempre chamados na mesma ordem e, se isso não acontecer, a aplicação se apresentará erros.
 
 Resumindo, hooks só podem ser chamados de dentro do corpo de uma função que define um componente React:
 
 ```js
 const App = () => {
   // Desta forma funciona!
-  const [idade, defIdade] = useState(0)
-  const [nome, defNome] = useState('Juha Tauriainen')
+  const [idade, setIdade] = useState(0)
+  const [nome, setNome] = useState('Juha Tauriainen')
 
   if ( idade > 10 ) {
     // Desta forma não funciona!
-    const [foobar, defFoobar] = useState(null)
+    const [foobar, setFoobar] = useState(null)
   }
 
   for ( let i = 0; i < idade; i++ ) {
     // Não faça deste jeito também!
-    const [formaCorreta, defFormaCorreta] = useState(false)
+    const [formaCorreta, setFormaCorreta] = useState(false)
   }
 
   const bemRuim = () => {
-    // E isto aqui é ilegal!
-    const [x, defX] = useState(-1000)
+    // Isso também não é permitido!
+    const [x, setX] = useState(-1000)
   }
 
   return (
@@ -586,16 +579,16 @@ const App = () => {
 }
 ```
 
-### Revisão sobre Gerência de Eventos
+### Revisão sobre Gerenciamento de Eventos (_Event Handling_)
 
-A gerência de eventos se mostrou um tópico difícil em iterações anteriores neste curso.
+O gerenciamento de eventos se mostrou um tópico difícil em iterações anteriores neste curso.
 
 Por essa razão, revisaremos o tópico.
 
 Vamos supor que estejamos desenvolvendo essa aplicação simples com o seguinte componente <i>App</i>:
 ```js
 const App = () => {
-  const [valor, defValor] = useState(10)
+  const [valor, setValor] = useState(10)
 
   return (
     <div>
@@ -612,21 +605,21 @@ Para fazer com que o botão reaja a um evento de clique, precisamos adicionar um
 
 Os gerenciadores de eventos devem sempre ser uma função ou uma referência a uma função. O botão não funcionará se o gerenciador de evento for definido como uma variável de outro tipo.
 
-Se definíssemos o gerenciador de evento como uma string...
+Se definíssemos o gerenciador de evento como uma string:
 
 ```js
 <button onClick="lixo...">botão</button>
 ```
 
-... React nos avisaria sobre isso no console:
+o React nos avisaria sobre isso no console:
 
 ```js
 index.js:2178 Warning: Expected `onClick` listener to be a function, instead got a value of `string` type.
-/* index.js:2178 Aviso: Esperava-se que o ouvinte `onClick` fosse uma função, mas obteve-se um valor do tipo `string`. */
     in button (at index.js:20)
     in div (at index.js:18)
     in App (at index.js:27)
 ```
+A mensagem de erro diz: index.js:2178 Aviso: Esperava-se que o ouvinte `onClick` fosse uma função, mas obteve-se um valor do tipo `string`.
 
 O seguinte também não funcionaria:
 
@@ -638,8 +631,8 @@ Tentamos definir o gerenciador de evento como _valor + 1_, o que simplesmente re
 
 ```js
 index.js:2178 Warning: Expected `onClick` listener to be a function, instead got a value of `number` type.
-/* index.js:2178 Aviso: Esperava-se que o ouvinte `onClick` fosse uma função, mas obteve-se um valor do tipo `number`. */
 ```
+A mensagem de erro diz: index.js:2178 Aviso: Esperava-se que o ouvinte `onClick` fosse uma função, mas obteve-se um valor do tipo `number`.
 
 Este também não funcionaria:
 ```js
@@ -663,11 +656,12 @@ O problema aqui é que nosso gerenciador de evento é definido como uma <i>chama
 A função _console.log_ é chamada quando o componente é renderizado e, por esse motivo, é impresso uma vez no console.
 
 A tentativa a seguir também não funciona:
+
 ```js
 <button onClick={setValue(0)}>botão</button>
 ```
 
-Novamente, tentamos definir uma chamada de função como o gerenciador de evento. Isso não funciona. Essa tentativa específica também causa outro problema. Quando o componente é renderizado, a função _setValue(0)_ é executada, o que por sua vez faz com que o componente seja renderizado novamente. A re-renderização, por conseguinte, chama _setValue(0)_ novamente, resultando em uma recursão infinita.
+Novamente, tentamos definir uma chamada de função como o gerenciador de evento. Isso não funciona. Essa tentativa específica também causa outro problema: quando o componente é renderizado, a função _setValue(0)_ é executada, o que por sua vez faz com que o componente seja renderizado novamente. A re-renderização, por conseguinte, chama _setValue(0)_ novamente, resultando em uma recursão infinita.
 
 A execução de uma chamada de função específica quando o botão é clicado pode ser realizada da seguinte maneira:
 
@@ -677,7 +671,7 @@ A execução de uma chamada de função específica quando o botão é clicado p
 </button>
 ```
 
-Agora, o gerenciador de evento é uma função definida com a sintaxe de função de seta _() => console.log('clicou no botão')_. Quando o componente é renderizado, nenhuma função é chamada e apenas a referência à função de seta é definida como o gerenciador de evento. A chamada da função ocorre apenas quando o botão é clicado.
+Agora, o gerenciador de evento é uma função definida com a sintaxe de uma _arrow function_, isto é, ```() => console.log('clicou no botão')```. Quando o componente é renderizado, nenhuma função é chamada e apenas a referência à _arrow function_ é definida como o gerenciador de evento. A chamada da função ocorre apenas quando o botão é clicado.
 
 Podemos implementar a reinicialização do estado em nossa aplicação com essa mesma técnica:
 
@@ -685,51 +679,51 @@ Podemos implementar a reinicialização do estado em nossa aplicação com essa 
 <button onClick={() => setValue(0)}>botão</button>
 ```
 
-O gerenciador de evento agora é a função _() => setValue(0)_.
+O gerenciador de evento agora é a função ```() => setValue(0)```.
 
 Definir gerenciadores de eventos diretamente no atributo do botão nem sempre é a melhor opção a se aplicar.
 
-Você verá frequentemente gerenciadores de eventos definidos em um lugar separado. Na versão seguinte de nossa aplicação, definimos uma função que então é atribuída à variável _gerClique_ no corpo da função do componente:
+Você verá frequentemente gerenciadores de eventos definidos em um lugar separado. Na versão seguinte de nossa aplicação, definimos uma função que então é atribuída à variável _handleClique_ no corpo da função do componente:
 
 ```js
 const App = () => {
-  const [valor, defValor] = useState(10)
+  const [valor, setValor] = useState(10)
 
-  const gerClique = () =>
+  const handleClique = () =>
     console.log('clicou no botão')
 
   return (
     <div>
       {valor}
-      <button onClick={gerClique}>botão</button>
+      <button onClick={handleClique}>botão</button>
     </div>
   )
 }
 ```
 
-Agora, a variável _gerClique_ está atribuída a uma referência à função. A referência é passada ao botão como o atributo <i>onClick</i>:
+Agora, a variável _handleClique_ está atribuída a uma referência à função. A referência é passada ao botão como o atributo <i>onClick</i>:
 
 ```js
-<button onClick={gerClique}>botão</button>
+<button onClick={handleClique}>botão</button>
 ```
 
-Naturalmente, nossa função gerenciadora de eventos pode ser composta por múltiplos comandos. Nestes casos, usamos a sintaxe de chaves mais longa para funções de seta:
+Naturalmente, nossa função gerenciadora de eventos pode ser composta por múltiplos comandos. Nestes casos, usamos a sintaxe de chaves mais longa para _arrow functions_: 
 
 ```js
 const App = () => {
-  const [valor, defValor] = useState(10)
+  const [valor, setValor] = useState(10)
 
 // highlight-start
-  const gerClique = () => {
+  const handleClique = () => {
     console.log('clicou no botão')
-    defValor(0)
+    setValor(0)
   }
 // highlight-end
 
   return (
     <div>
       {valor}
-      <button onClick={gerClique}>botão</button>
+      <button onClick={handleClique}>botão</button>
     </div>
   )
 }
@@ -745,12 +739,12 @@ Vamos fazer as seguintes alterações em nosso código:
 
 ```js
 const App = () => {
-  const [valor, defValor] = useState(10)
+  const [valor, setValor] = useState(10)
 
   // highlight-start
-  const ola = () => { // Traduz-se "hello" como "ola" (*olá)
+  const ola = () => {
     const gerenciador = () => console.log('Olá, mundo!')
-    // Traduz-se "handler" como "gerenciador"
+
     return gerenciador
   }
   // highlight-end
@@ -808,7 +802,7 @@ Vamos mudar um pouco o código:
 
 ```js
 const App = () => {
-  const [valor, defValor] = useState(10)
+  const [valor, setValor] = useState(10)
 
   // highlight-start
   const ola = (quem) => {
@@ -910,14 +904,12 @@ Podemos usar o mesmo "macete" para definir gerenciadores de eventos que definem 
 
 ```js
 const App = () => {
-  const [valor, defValor] = useState(10)
+  const [valor, setValor] = useState(10)
   
   // highlight-start
-  const defAoValor = (novoValor) => () => {
-    /* "setToValue" traduz-se, grosso modo, como "definirAoValor"
-        Versão reduzida: "defAoValor" */
-    console.log('Valor atual', novoValor)  // Imprime o novo valor no console
-    defValor(novoValor)
+  const setNoValor = (novoValor) => () => {
+    console.log('setValor atual', novoValor)  // Imprime o novo valor no console
+    setValor(novoValor)
   }
   // highlight-end
   
@@ -925,9 +917,9 @@ const App = () => {
     <div>
       {valor}
       // highlight-start
-      <button onClick={defAoValor(1000)}>mil</button>
-      <button onClick={defAoValor(0)}>zerar</button>
-      <button onClick={defAoValor(valor + 1)}>incrementar</button>
+      <button onClick={setNoValor(1000)}>mil</button>
+      <button onClick={setNoValor(0)}>zerar</button>
+      <button onClick={setNoValor(valor + 1)}>incrementar</button>
       // highlight-end
     </div>
   )
@@ -937,54 +929,54 @@ const App = () => {
 Quando o componente é renderizado, é criado o botão <i>mil</i>:
 
 ```js
-<button onClick={defAoValor(1000)}>mil</button>
+<button onClick={setNoValor(1000)}>mil</button>
 ```
 
-O gerenciador de evento é definido como o valor retornado de _defAoValor(1000)_, que é a seguinte função:
+O gerenciador de evento é definido como o valor retornado de _setNoValor(1000)_, que é a seguinte função:
 
 ```js
 () => {
-  console.log('Valor atual', 1000)
-  defValor(1000)
+  console.log('setValor atual', 1000)
+  setValor(1000)
 }
 ```
 
 O botão de incremento é declarado da seguinte forma:
 
 ```js
-<button onClick={defAoValor(valor + 1)}>incrementar</button>
+<button onClick={setNoValor(valor + 1)}>incrementar</button>
 ```
 
-O gerenciador de evento é criado pela chamada da função _defAoValor(valor + 1)_, que recebe como parâmetro o valor atual da variável de estado _valor_ incrementado em 1 (um). Se o valor de _valor_ fosse 10, então o gerenciador de evento criado seria a seguinte função:
+O gerenciador de evento é criado pela chamada da função _setNoValor(valor + 1)_, que recebe como parâmetro o valor atual da variável de estado _valor_ incrementado em 1 (um). Se o conteúdo de _valor_ fosse 10, então o gerenciador de evento criado seria a seguinte função:
 
 ```js
 () => {
-  console.log('Valor atual', 11)
-  defValor(11)
+  console.log('setValor atual', 11)
+  setValor(11)
 }
 ```
 
-Não é necessário usar funções que retornam funções para alcançar esta funcionalidade. Vamos retornar a função _defAoValor_, responsável por atualizar o estado, como uma função normal:
+Não é necessário usar funções que retornam funções para alcançar esta funcionalidade. Vamos retornar a função _setNoValor_, responsável por atualizar o estado, como uma função normal:
 
 ```js
 const App = () => {
-  const [valor, defValor] = useState(10)
+  const [valor, setValor] = useState(10)
 
-  const defAoValor = (novoValor) => {
-    console.log('Valor atual', novoValor)
-    defValor(novoValor)
+  const setNoValor = (novoValor) => {
+    console.log('setValor atual', novoValor)
+    setValor(novoValor)
   }
 
   return (
     <div>
       {valor}
-      <button onClick={() => defAoValor(1000)}>
+      <button onClick={() => setNoValor(1000)}>
         mil
       </button>
-      <button onClick={() => defAoValor(0)}>
+      <button onClick={() => setNoValor(0)}>
         zerar
       </button>
-      <button onClick={() => defAoValor(valor + 1)}>
+      <button onClick={() => setNoValor(valor + 1)}>
         incrementar
       </button>
     </div>
@@ -992,10 +984,10 @@ const App = () => {
 }
 ```
 
-Agora, podemos definir o gerenciador de evento como uma função que chama a função _defAoValor_ com um parâmetro apropriado. O gerenciador de evento utilizado para redefinir o estado da aplicação seria:
+Agora, podemos definir o gerenciador de evento como uma função que chama a função _setNoValor_ com um parâmetro apropriado. O gerenciador de evento utilizado para redefinir o estado da aplicação seria:
 
 ```js
-<button onClick={() => defAoValor(0)}>zerar</button>
+<button onClick={() => setNoValor(0)}>zerar</button>
 ```
 
 Escolher entre as duas formas apresentadas de definir seus gerenciadores de eventos é, em grande parte, uma questão de gosto.
@@ -1006,13 +998,13 @@ Vamos extrair o botão para seu próprio componente:
 
 ```js
 const Botao = (props) => (
-  <button onClick={props.gerClique}>
+  <button onClick={props.handleClique}>
     {props.texto}
   </button>
 )
 ```
 
-O componente obtém a função de gerência de evento da propriedade _gerClique_, e o texto do botão da propriedade _texto_. Vamos usar o novo componente:
+O componente obtém a função de gerência de evento da propriedade _handleClique_, e o texto do botão da propriedade _texto_. Vamos usar o novo componente:
 
 ```js
 const App = (props) => {
@@ -1020,17 +1012,18 @@ const App = (props) => {
   return (
     <div>
       {valor}
-      <Botao gerClique={defAoValor(1000)} texto="mil" /> // highlight-line
-      <Botao gerClique={defAoValor(0)} texto="zerar" /> // highlight-line
-      <Botao gerClique={defAoValor(valor + 1)} texto="incrementar" /> // highlight-line
+      <Botao handleClique={setNoValor(1000)} texto="mil" /> // highlight-line
+      <Botao handleClique={setNoValor(0)} texto="zerar" /> // highlight-line
+      <Botao handleClique={setNoValor(valor + 1)} texto="incrementar" /> // highlight-line
     </div>
   )
 }
 ```
 
-Usar a componente <i>Botao</i> é simples, embora tenhamos que nos certificar de usar os nomes corretos de atributo ao passar props para o componente.
+Usar o componente <i>Botao</i> é simples, embora tenhamos que nos certificar de usar os nomes corretos de atributo ao passar props para o componente.
 
 ![captura de tela do código de nomes de atributos corretos](../../images/1/12e.png)
+_Nota de tradução: ao longo do texto, apresentamos os códigos contendo termos traduzidos para o português, os quais não aparecem na imagem acima, pois esta traz o código escrito com os termos em inglês._
 
 ### Não defina Componentes dentro de Componentes
 
@@ -1041,17 +1034,17 @@ Vamos mudar a aplicação definindo um novo componente dentro do componente <i>A
 ```js
 // Este é o lugar correto para definir um componente
 const Botao = (props) => (
-  <button onClick={props.gerClique}>
+  <button onClick={props.handleClique}>
     {props.texto}
   </button>
 )
 
 const App = () => {
-  const [valor, defValor] = useState(10)
+  const [valor, setValor] = useState(10)
 
-  const defAoValor = novoValor => {
-    console.log('Valor atual', novoValor)
-    defValor(novoValor)
+  const setNoValor = novoValor => {
+    console.log('setValor atual', novoValor)
+    setValor(novoValor)
   }
 
   // Não defina um componente dentro de outro componente
@@ -1060,9 +1053,9 @@ const App = () => {
   return (
     <div>
       <Exibir valor={valor} />
-      <Botao gerClique={() => defAoValor(1000)} texto="mil" />
-      <Botao gerClique={() => defAoValor(0)} texto="zerar" />
-      <Botao gerClique={() => defAoValor(valor + 1)} texto="incrementar" />
+      <Botao handleClique={() => setNoValor(1000)} texto="mil" />
+      <Botao handleClique={() => setNoValor(0)} texto="zerar" />
+      <Botao handleClique={() => setNoValor(valor + 1)} texto="incrementar" />
     </div>
   )
 }
@@ -1078,25 +1071,25 @@ Em vez disso, vamos mover a função do componente <i>Exibir</i> para o seu luga
 const Exibir = props => <div>{props.valor}</div>
 
 const Botao = (props) => (
-  <button onClick={props.gerClique}>
+  <button onClick={props.handleClique}>
     {props.texto}
   </button>
 )
 
 const App = () => {
-  const [valor, defValor] = useState(10)
+  const [valor, setValor] = useState(10)
 
-  const defAoValor = novoValor => {
-    console.log('Valor atual', novoValor)
-    defValor(novoValor)
+  const setNoValor = novoValor => {
+    console.log('setValor atual', novoValor)
+    setValor(novoValor)
   }
 
   return (
     <div>
       <Exibir valor={valor} />
-      <Botao gerClique={() => defAoValor(1000)} texto="mil" />
-      <Botao gerClique={() => defAoValor(0)} texto="zerar" />
-      <Botao gerClique={() => defAoValor(valor + 1)} texto="incrementar" />
+      <Botao handleClique={() => setNoValor(1000)} texto="mil" />
+      <Botao handleClique={() => setNoValor(0)} texto="zerar" />
+      <Botao handleClique={() => setNoValor(valor + 1)} texto="incrementar" />
     </div>
   )
 }
