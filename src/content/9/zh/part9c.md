@@ -100,7 +100,7 @@ lang: zh
 <!-- For us, perhaps the most important is the already-familiar [noImplicitAny](https://www.staging-typescript.org/tsconfig#noImplicitAny). It prevents implicitly setting type <i>any</i>, which can for example happen if you don't type the parameters of a function.-->
  对我们来说，也许最重要的是已经很熟悉的[noImplicitAny](https://www.staging-typescript.org/tsconfig#noImplicitAny)。它可以防止隐式设置类型<i>any</i>，例如，如果你不输入函数的参数，就会发生这种情况。
 <!-- Details about the rest of the configurations can be found in the [tsconfig documentation](https://www.staging-typescript.org/tsconfig#strict).-->
- 关于其余配置的细节可以在 [tsconfig documentation] (https://www.staging-typescript.org/tsconfig#strict) 中找到。
+ 关于其余配置的细节可以在 [tsconfig documentation](https://www.staging-typescript.org/tsconfig#strict) 中找到。
 <!-- Using <i>strict</i> is suggested by the official documentation.-->
  官方文档建议使用<i>strict</i>。
 
@@ -356,7 +356,7 @@ npm update chokidar
 <!-- He wants to be able to save </i>diary entries</i> which contain:-->
  他希望能够保存包含以下内容的</i>日记条目</i>。
 <!-- - The date of the entry-->
- -条目的日期
+ - 条目的日期
 <!-- - Weather conditions (good, windy, rainy or stormy)-->
  - 天气状况（良好、大风、雨天或暴风雨）。
 <!-- - Visibility (good, ok or poor)-->
@@ -515,7 +515,7 @@ export default {
  然后我们的问题就解决了。
 
 <!-- > **NB**: For some reason, VSCode tends to complain that it cannot find the file <i>../../data/diaries.json</i> from the service despite the file existing. That is a bug in the editor, and goes away when the editor is restarted.-->
- > **nb*:由于某些原因，VSCode往往产生警告说它不能从服务中找到<i>.../.../data/diaries.json</i>文件，尽管该文件存在。这是编辑器中的一个错误，当编辑器重新启动时就会消失。
+ > **NB**:由于某些原因，VSCode往往产生警告说它不能从服务中找到<i>.../.../data/diaries.json</i>文件，尽管该文件存在。这是编辑器中的一个错误，当编辑器重新启动时就会消失。
 
 <!-- Earlier, we saw how the compiler can decide the type of a variable by the value it is assigned.-->
  早些时候，我们看到编译器如何通过分配给它的值来决定变量的类型。
@@ -713,7 +713,7 @@ export interface DiaryEntry {
 ```
 
 <!-- > **NB**: The validity of <i>.js</i>, <i>.json</i> and <i>.node</i> files as modules in TypeScript depend on environment configuration, including <i>tsconfig</i> options such as <i>allowJs</i> and <i>resolveJsonModule</i>.-->
- > **nb*:<i>.js</i>、<i>.json</i>和<i>.node</i>文件作为TypeScript中的模块的有效性取决于环境配置，包括<i>tsconfig</i>选项，例如<i>allowJs</i>和<i>resolveJsonModule</i>。
+ > **NB**:<i>.js</i>、<i>.json</i>和<i>.node</i>文件作为TypeScript中的模块的有效性取决于环境配置，包括<i>tsconfig</i>选项，例如<i>allowJs</i>和<i>resolveJsonModule</i>。
 
 <!-- Consider a flat folder structure containing files:-->
  考虑一个包含文件的平面文件夹结构。

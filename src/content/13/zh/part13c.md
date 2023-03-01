@@ -801,7 +801,7 @@ router.get('/', async (req, res) => {
 
 
 <!-- By carefully reading the documentation, you can find a [solution](https://sequelize.org/master/manual/advanced-many-to-many.html#specifying-attributes-from-the-through-table):-->
- 通过仔细阅读文档，你可以找到一个【解决方案】(https://sequelize.org/master/manual/advanced-many-to-many.html#specifying-attributes-from-the-through-table)。
+ 通过仔细阅读文档，你可以找到一个[解决方案](https://sequelize.org/master/manual/advanced-many-to-many.html#specifying-attributes-from-the-through-table)。
 
 ```js
 router.get('/', async (req, res) => {

@@ -592,15 +592,15 @@ npm run dev
 <!-- We can execute different operations on resources. The operation to be executed is defined by the HTTP <i>verb</i>:-->
 我们可以对资源执行不同的操作。要执行的操作是由 HTTP <i>verb</i> 定义的。
 
-| URL                   | verb                | functionality                                                    |
-| --------------------- | ------------------- | -----------------------------------------------------------------|
-| notes/10              | GET                 | fetches a single resource                                        |
-| notes                 | GET                 | fetches all resources in the collection                          |
-| notes                 | POST                | creates a new resource based on the request data                 |
-| notes/10              | DELETE              | removes the identified resource                                  |
-| notes/10              | PUT                 | replaces the entire identified resource with the request data    |
-| notes/10              | PATCH               | replaces a part of the identified resource with the request data |
-|                       |                     |                                                                  |
+| URL      | verb   | functionality                                                    |
+| -------- | ------ | ---------------------------------------------------------------- |
+| notes/10 | GET    | fetches a single resource                                        |
+| notes    | GET    | fetches all resources in the collection                          |
+| notes    | POST   | creates a new resource based on the request data                 |
+| notes/10 | DELETE | removes the identified resource                                  |
+| notes/10 | PUT    | replaces the entire identified resource with the request data    |
+| notes/10 | PATCH  | replaces a part of the identified resource with the request data |
+|          |        |                                                                  |
 
 
 <!-- This is how we manage to roughly define what REST refers to as a [uniform interface](https://en.wikipedia.org/wiki/Representational_state_transfer#Architectural_constraints), which means a consistent way of defining interfaces that makes it possible for systems to co-operate.-->
@@ -952,7 +952,7 @@ content-type: application/json
  Postman 也允许用户保存请求，但情况可能变得相当混乱，特别是当你在多个不相关的项目上工作时。
 
 <!-- > **Important sidenote**-->
- > ** 重要的附注 **。
+ > **重要的附注**。
 <!-- >-->
  >
 <!-- > Sometimes when you're debugging, you may want to find out what headers have been set in the HTTP request. One way of accomplishing this is through the [get](http://expressjs.com/en/4x/api.html#req.get) method of the _request_ object, that can be used for getting the value of a single header. The _request_ object also has the <i>headers</i> property, that contains all of the headers of a specific request.-->
@@ -1119,7 +1119,7 @@ Math.max(...notes.map(n => n.id))
 
 
 <!-- **Strong recommendation:** When you are working on backend code, always keep an eye on what's going on in the terminal that is running your application.-->
- ** 强烈建议：** 当你在处理后端代码时，始终关注运行你的应用的终端中发生的事情。
+ **强烈建议：** 当你在处理后端代码时，始终关注运行你的应用的终端中发生的事情。
 
 
 #### 3.1: Phonebook backend step1
@@ -1241,7 +1241,7 @@ Math.max(...notes.map(n => n.id))
 ### About HTTP request types
 
 <!-- [The HTTP standard](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) talks about two properties related to request types, **safety** and **idempotence**.-->
- [HTTP 标准](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) 谈到了与请求类型有关的两个属性：** 安全 ** 和 ** 空闲 **。
+ [HTTP 标准](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) 谈到了与请求类型有关的两个属性：**安全** 和 **空闲**。
 
 <!-- The HTTP GET request should be <i>safe</i>:-->
  HTTP GET 请求应该是 <i> 安全的 </i>。

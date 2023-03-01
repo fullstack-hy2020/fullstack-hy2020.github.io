@@ -567,7 +567,7 @@ module.exports = {
  Jest是本课程的自然选择，因为它在测试后端时效果很好，而在测试React应用时，它又很出色。
 
 <!-- > <i>**Windows users:**</i> Jest may not work if the path of the project directory contains a directory that has spaces in its name.-->
- > <i>***Windows用户：**</i> 如果项目目录的路径包含一个名称中有空格的目录，Jest可能无法工作。
+ > <i>**Windows用户：**</i> 如果项目目录的路径包含一个名称中有空格的目录，Jest可能无法工作。
 
 
 <!-- Since tests are only executed during the development of our application, we will install <i>jest</i> as a development dependency with the command:-->

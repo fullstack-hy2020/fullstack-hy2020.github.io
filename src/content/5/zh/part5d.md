@@ -740,7 +740,7 @@ it('login fails with wrong password', function() {
 ```
 
 <!-- Cypress requires the colors to be given as [rgb](https://rgbcolorcode.com/color/red).-->
- Cypress要求颜色以[rgb]形式给出(https://rgbcolorcode.com/color/red)。
+ Cypress要求颜色以[rgb](https://rgbcolorcode.com/color/red)形式给出。
 
 <!-- Because all tests are for the same component we accessed using [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax), we can chain them using [and](https://docs.cypress.io/api/commands/and.html).-->
  因为所有的测试都是针对我们使用[cy.get](https://docs.cypress.io/api/commands/get.html#Syntax)访问的同一个组件，我们可以使用[and](https://docs.cypress.io/api/commands/and.html)将它们连锁起来。
@@ -1171,7 +1171,7 @@ it('then example', function() {
 <!-- So far we have run our Cypress tests using the graphical test runner.-->
  到目前为止，我们使用图形化的测试运行器运行我们的Cypress测试。
 <!-- It is also possible to run them [from the command line](https://docs.cypress.io/guides/guides/command-line.html). We just have to add an npm script for it:-->
-也可以[从命令行]运行它们(https://docs.cypress.io/guides/guides/command-line.html)。我们只需要为它添加一个npm脚本。
+也可以[从命令行](https://docs.cypress.io/guides/guides/command-line.html)运行它们。我们只需要为它添加一个npm脚本。
 
 ```js
   "scripts": {

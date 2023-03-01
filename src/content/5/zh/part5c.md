@@ -744,7 +744,7 @@ test('renders content', () => {
 ```
 
 <!-- Command _getByText_ looks for an element that has exactly the **same text** that it has as parameter, and nothing more. If we want to look for element that <i>contains</i> the text, we could use a extra option:-->
-命令_getByText_寻找一个元素，该元素具有与它的参数相同的***文本，仅此而已。如果我们想寻找<i>包含</i>文本的元素，我们可以使用一个额外的选项。
+命令_getByText_寻找一个元素，该元素具有与它的参数**相同的文本**，仅此而已。如果我们想寻找<i>包含</i>文本的元素，我们可以使用一个额外的选项。
 
 ```js
 const element = screen.getByText(
