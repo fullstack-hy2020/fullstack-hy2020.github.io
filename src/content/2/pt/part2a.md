@@ -7,7 +7,7 @@ lang: ptbr
 
 <div class="content">
 
-Antes de começar esta nova parte, vamos revisar alguns dos tópicos que, ano passado, provaram ser difíceis para alguns estudantes.
+Antes de começar esta nova parte, vamos revisar alguns dos tópicos que, ano passado, se provaram difíceis para alguns estudantes.
 
 ### console.log
 
@@ -17,13 +17,13 @@ Paradoxalmente, isso parece ser verdade, mesmo que um programador iniciante prec
 
 Quando algo não funciona, não tente adivinhar o que está errado. Em vez disso, faça o log ou use outra forma de depuração.
 
-**N.B. (Nota Bene):** Como explicado na Parte 1, ao usar o comando _console.log_ para depuração, não concatene coisas "do jeito Java" com o sinal de adição (+). Em vez de escrever...
+**Obs.:** Como explicado na Parte 1, ao usar o comando _console.log_ para depuração, não concatene coisas "do jeito Java" com o sinal de adição (+). Em vez de escrever
 
 ```js
 console.log('valor de props é ' + props)
 ```
 
-... separe os valores a serem impressos com uma vírgula:
+separe os valores a serem impressos com uma vírgula:
 
 ```js
 console.log('valor de props é', props)
@@ -47,6 +47,7 @@ As instruções para criar atalhos podem ser encontradas [aqui](https://code.vis
 Atalhos úteis pré-prontos também podem ser encontrados como plugins do VS Code, no [marketplace](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets).
 
 O atalho mais importante é o do comando <em>console.log()</em>, por exemplo, <em>clog</em>. Ele pode ser criado assim: 
+
 ```js
 {
   "console.log": {
@@ -69,19 +70,19 @@ Se operar arrays com operadores funcionais parecer estranho para você, vale a p
 
 - [Funções de ordem superior](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84)
 - [Map](https://www.youtube.com/watch?v=bCqtb-Z5YGQ&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84&index=2)
-- [Básicos do método Reduce](https://www.youtube.com/watch?v=Wl98eZpkp-c&t=31s)
+- [Básico do método Reduce](https://www.youtube.com/watch?v=Wl98eZpkp-c&t=31s)
 
 ### Revisão sobre Gerenciadores de Evento
 
 Baseado no curso do ano passado, o gerenciamento de eventos provou ser algo difícil. 
 
-Vale a pena ler o capítulo de revisão no final da parte anterior — [Revisão sobre Gerência de Eventos](/ptbr/part1/um_estado_mais_complexo_e_depuracao_de_aplicacoes_react#revisao-sobre-gerencia-de-eventos) — caso ainda ache que precise estudar mais sobre o assunto.
+Vale a pena ler o capítulo de revisão no final da parte anterior — [Revisão sobre Gerenciamento de Eventos](/ptbr/part1/um_estado_mais_complexo_e_depuracao_de_aplicacoes_react#revisao-sobre-gerenciamento-de-eventos) — caso ainda ache que precise estudar mais sobre o assunto.
 
 A passagem de gerenciadores de eventos para os componentes-filho do componente <i>App</i> levantou algumas questões. Uma pequena revisão sobre o tópico pode ser encontrada [aqui](/ptbr/part1/um_estado_mais_complexo_e_depuracao_de_aplicacoes_react#passando-gerenciadores-de-evento-para-componentes-filho).
 
 ### Renderização de Coleções
 
-**N.B.:** A partir deste momento, os códigos utilizados como exemplo permanecerão no idioma original (inglês), visto que é disponibilizado ao final de cada sessão o repositório onde o código-exemplo pode ser encontrado na íntegra. É muito provável que o estudante se confunda caso os nomes de variáveis, funções, componentes, etc estejam em português, dado que estaria diferente do código disponibilizado no repositório do GitHub, que está em inglês. (nota do tradutor)
+<i>**Nota dos tradutores:** A partir deste momento, os códigos utilizados como exemplo permanecerão no idioma original (inglês), visto que é disponibilizado ao final de cada sessão o repositório onde o código-exemplo pode ser encontrado na íntegra. É muito provável que o estudante se confunda caso os nomes de variáveis, funções, componentes, etc estejam em português, dado que estaria diferente do código disponibilizado no repositório do GitHub, que está em inglês.</i>
 
 Faremos neste momento a lógica da aplicação do lado do cliente (navegador), ou o "front-end", em React, para uma aplicação semelhante à aplicação de exemplo da [Parte 0](/ptbr/part0).
 
@@ -90,9 +91,6 @@ Comecemos com o seguinte (arquivo <i>App.js</i>):
 ```js
 const App = (props) => {
   const { notes } = props
-
-  // "notes" traduz-se como "notas"
-  // "content" traduz-se como "conteúdo"
 
   return (
     <div>
@@ -119,7 +117,6 @@ import App from './App'
 
 const notes = [
 
-  // "important" traduz-se como "importante"
 
   {
     id: 1,
@@ -256,17 +253,17 @@ A aplicação contém um array chamado _notes_:
 const notes = [
   {
     id: 1,
-    content: 'HTML é fácil',
+    content: 'HTML is easy',
     important: true
   },
   {
     id: 2,
-    content: 'O navegador só pode executar JavaScript',
+    content: 'Browser can execute only JavaScript',
     important: false
   },
   {
     id: 3,
-    content: 'GET e POST são os métodos mais importantes do protocolo HTTP',
+    content: 'GET and POST are the most important methods of HTTP protocol',
     important: true
   }
 ]
@@ -274,16 +271,15 @@ const notes = [
 
 Vamos parar por um momento e examinar como o _map_ funciona.
 
-Se o código a seguir for adicionado, digamos, ao final do arquivo...
+Se o código a seguir for adicionado, digamos, ao final do arquivo:
 
 ```js
-// "result" traduz-se como "resultado"
 const result = notes.map(note => note.id)
 console.log(result)
 ```
 
 <i>[1, 2, 3]</i> será impresso no console.
-_map_ (mapear) sempre cria um array novo, cujos elementos foram criados a partir dos elementos do array original por meio do <i>mapping</i> (mapeamento): usa-se a função fornecida como um parâmetro para o método _map_. 
+O método _map_ sempre cria um array novo, cujos elementos foram criados a partir dos elementos do array original por meio do <i>mapping</i> (mapeamento): usa-se a função fornecida como um parâmetro para o método _map_. 
 
 A função é esta:
 
@@ -291,7 +287,7 @@ A função é esta:
 note => note.id
 ```
 
-Que, neste caso, é uma função de seta escrita de forma compacta. A forma completa seria:
+Que, neste caso, é uma _arrow function_ escrita de forma compacta. A forma completa seria:
 
 ```js
 (note) => {
@@ -301,15 +297,15 @@ Que, neste caso, é uma função de seta escrita de forma compacta. A forma comp
 
 A função recebe um objeto "note" como parâmetro e retorna o valor de seu campo <i>id</i>.
 
-Se mudarmos a instrução para...
+Se mudarmos a instrução para:
 
 ```js
 const result = notes.map(note => note.content)
 ```
 
-... vem como resultado um array contendo o conteúdo das notas.
+o resultado será um array contendo as notas.
 
-Essa forma está bem parecida com o código React que usamos...
+Essa forma está bem parecida com o código React que usamos:
 
 ```js
 notes.map(note =>
@@ -319,7 +315,7 @@ notes.map(note =>
 )
 ```
 
-... do qual gera uma tag <i>li</i> contendo o conteúdo da nota de cada objeto de nota. 
+o qual gera uma tag <i>li</i> contendo o conteúdo da nota de cada objeto de nota. 
 
 Por conta do parâmetro da função passado para o método _map_ — 
 
@@ -341,7 +337,7 @@ notes.map((note, i) => ...)
 
 Quando chamado desta forma, é atribuído ao _i_ o valor do índice da posição no array onde a nota reside.
 
-Como tal, uma forma de definir a criação de linhas (row) sem gerar erros é esta:
+Como tal, uma forma de definir a criação de linhas (_row_) sem gerar erros é esta:
 
 ```js
 <ul>
@@ -409,9 +405,9 @@ const App = ({ notes }) => {
 
 Note que o atributo <i>key</i> agora deve ser definido para os componentes <i>Note</i>, e não para as tags <i>li</i> como antes. 
 
-Uma aplicação React pode ser escrita inteiramente em um único arquivo, mesmo que fazer isso seja, obviamente, nada prático. A prática comum é declarar cada componente em seu próprio arquivo como um <i>módulo ES6</i>.
+Uma aplicação React pode ser escrita inteiramente em um único arquivo, embora fazer isso não seja muito prático. O ideal é declarar cada componente em seu próprio arquivo como um <i>módulo ES6</i>.
 
-Estamos utilizando módulos o tempo todo. As primeiras linhas do arquivo <i>index.js</i>...
+Estamos utilizando módulos o tempo todo. As primeiras linhas do arquivo <i>index.js</i>:
 
 ```js
 import ReactDOM from "react-dom/client"
@@ -419,7 +415,7 @@ import ReactDOM from "react-dom/client"
 import App from "./App"
 ```
 
-... [importam](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) (import) dois módulos, habilitando-os a serem usados ​​nessa pasta. É importado o módulo <i>react-dom/client</i> para a variável _ReactDOM_ e o módulo que define o componente principal da aplicação é atribuído à variável _App_.
+[importam](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) dois módulos, habilitando-os a serem usados ​​nessa pasta. É importado o módulo <i>react-dom/client</i> para a variável _ReactDOM_ e o módulo que define o componente principal da aplicação é atribuído à variável _App_.
 
 Vamos separar nosso componente <i>Note</i> em um módulo próprio.
 
@@ -438,7 +434,7 @@ const Note = ({ note }) => {
 export default Note
 ```
 
-A última linha do módulo [exporta](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) (exports) o módulo declarado, a variável <i>Note</i>.
+A última linha do código [exporta](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) o módulo declarado, a variável <i>Note</i>.
 
 Agora, o arquivo que está usando o componente — <i>App.js</i> — pode [importar](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) o módulo: 
 
@@ -464,7 +460,7 @@ Módulos têm muitas outras utilidades além de permitir que as declarações de
 
 O código atual da aplicação pode ser encontrado [neste repositório GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1).
 
-Note que a branch (ramo ou ramificação) <i>main</i> do repositório contém o código para uma versão posterior da aplicação. O código atual está na branch [part2-1](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1):
+Note que a branch <i>main</i> do repositório contém o código para uma versão posterior da aplicação. O código atual está na branch [part2-1](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1):
 
 ![captura de tela da branch do GitHub](../../images/2/2e.png)
 
@@ -512,7 +508,7 @@ const App = () => {
     // ...
   }
 
-  console.log('A aplicação está funcionando...') // highlight-line
+  console.log('App works...') // highlight-line
 
   return (
     // ..
@@ -570,6 +566,7 @@ Adicionei este capítulo ao material após a resposta do modelo da próxima perg
 Antes de fazer os exercícios, deixe-me lembrá-lo do que havia jurado no final da parte anterior.
 
 Programar é difícil, e é por isso que eu usarei todos os meios possíveis para ser mais fácil:
+
 - Eu manterei meu Console do navegador aberto o tempo todo;
 - Eu vou progredir aos poucos, passo a passo;
 - Eu escreverei muitas instruções _console.log_ para ter certeza de que estou entendendo como o código se comporta e para me ajudar a identificar os erros;
@@ -590,7 +587,7 @@ Lembre-se: envie **todos** os exercícios de uma parte **de uma única vez**; is
 
 **AVISO**: "create-react-app" transformará automaticamente seu projeto em um repositório git, a menos que você crie sua aplicação dentro de um repositório git já existente. **Você muito provavelmente não quer que cada um de seus projetos seja um repositório separado**, então basta executar o comando _rm -rf .git_ na raiz de sua aplicação para aplicar as modificações.
 
-**N.B.:** o conteúdo dos exercícios foram deixados no idioma original da tradução (inglês) por questões de conveniência, visto a revisão que os mantenedores do curso devem fazer no código enviado ao sistema de avaliação da Universidade de Helsinque. Desta forma, escreva suas aplicações utilizando os mesmos termos usados nas variáveis, componentes, etc que estão em inglês.
+**Obs.:** o conteúdo dos exercícios foram deixados no idioma original da tradução (inglês) por questões de conveniência, visto a revisão que os mantenedores do curso devem fazer no código enviado ao sistema de avaliação da Universidade de Helsinque. Desta forma, escreva suas aplicações utilizando os mesmos termos usados nas variáveis, componentes, etc que estão em inglês.
 
 <h4>2.1: Course information — 6º passo</h4>
 
@@ -604,20 +601,20 @@ Vamos modificar o componente <i>App</i> desta maneira:
 const App = () => {
   const course = {
     id: 1,
-    name: 'Desenvolvimento de aplicação Half Stack',
+    name: 'Half Stack application development',
     parts: [
       {
-        name: 'Fundamentos do React',
+        name: 'Fundamentals of React',
         exercises: 10,
         id: 1
       },
       {
-        name: 'Usando props para passar dados',
+        name: 'Using props to pass data',
         exercises: 7,
         id: 2
       },
       {
-        name: 'Estado de um componente',
+        name: 'State of a component',
         exercises: 14,
         id: 3
       }
@@ -648,7 +645,7 @@ Desta forma, o componente <i>Course</i> conterá os componentes definidos na par
 
 O resultado da página pode ficar assim, por exemplo: 
 
-![half stack application screenshot](../../images/teht/8e.png)
+![captura de tela de um app chamado half stack application](../../images/teht/8e.png)
 
 Você ainda não precisa da soma do número de exercícios. 
 
@@ -666,25 +663,25 @@ Mostre também a soma (ou total) dos exercícios do curso.
 
 Se você ainda não o fez, calcule a soma dos exercícios com o método de array [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) (reduzir).
 
-**Dica I:** quando seu código fica assim...
+**Dica I:** quando seu código fica assim:
 
 ```js
 const total = 
   parts.reduce((s, p) => someMagicHere)
 ```
   
-... e ao mesmo tempo que não funciona, vale a pena usar o <i>console.log</i>, o que requer que a função de seta seja escrita em sua forma mais longa:
+e ao mesmo tempo que não funciona, vale a pena usar o <i>console.log</i>, o que requer que a função de seta seja escrita em sua forma mais longa:
 
 ```js
 const total = parts.reduce((s, p) => {
-  console.log('o que está acontecendo', s, p)
+  console.log('what is happening', s, p)
   return someMagicHere 
 })
 ```
  
 **Não está funcionando? :** Pesquise na internet como `reduce` é usado em um **Array de Objetos**.
 
-**Dica II:** Existe um [plugin para o VS Code](https://marketplace.visualstudio.com/items?itemName=cmstead.js-codeformer) que altera automaticamente as funções de seta da forma curta para sua forma mais longa e vice-versa. 
+**Dica II:** Existe um [plugin para o VS Code](https://marketplace.visualstudio.com/items?itemName=cmstead.js-codeformer) que altera automaticamente as _arrow functions_ da forma curta para sua forma mais longa e vice-versa. 
 
 ![vscode sample suggestion for arrow function](../../images/2/5b.png)
 
@@ -696,21 +693,21 @@ Vamos estender nossa aplicação para que permita um número <i>arbitrário</i> 
 const App = () => {
   const courses = [
     {
-      name: 'Desenvolvimento de aplicação Half Stack',
+      name: 'Half Stack application development',
       id: 1,
       parts: [
         {
-          name: 'Fundamentos do React',
+          name: 'Fundamentals of React',
           exercises: 10,
           id: 1
         },
         {
-          name: 'Usando props para passar dados',
+          name: 'Using props to pass data',
           exercises: 7,
           id: 2
         },
         {
-          name: 'Estado de um componente',
+          name: 'State of a component',
           exercises: 14,
           id: 3
         },
@@ -726,7 +723,7 @@ const App = () => {
       id: 2,
       parts: [
         {
-          name: 'Roteamento',
+          name: 'Routing',
           exercises: 3,
           id: 1
         },
