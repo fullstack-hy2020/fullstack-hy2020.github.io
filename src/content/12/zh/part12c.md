@@ -437,7 +437,7 @@ services:
  接下来，我们将在我们的docker-compose.yml中添加一个[反向代理](https://en.wikipedia.org/wiki/Reverse_proxy)。根据维基百科的说法
 
 <!-- > <i>A reverse proxy is a type of proxy server that retrieves resources on behalf of a client from one or more servers. These resources are then returned to the client, appearing as if they originated from the reverse proxy server itself.</i>-->
-> <i>反向代理是一种代理服务器，它代表客户从一个或多个服务器中检索资源。这些资源然后被返回给客户，看起来就像它们来自反向代理服务器本身。
+> <i>反向代理是一种代理服务器，它代表客户从一个或多个服务器中检索资源。这些资源然后被返回给客户，看起来就像它们来自反向代理服务器本身。</i>
 
 <!-- So in our case, the reverse proxy will be the single point of entry to our application, and the final goal will be to set both the React frontend and the Express backend behind the reverse proxy.-->
 所以在我们的案例中，反向代理将是我们应用的单一入口点，而最终的目标是将React前端和Express后端都设置在反向代理后面。

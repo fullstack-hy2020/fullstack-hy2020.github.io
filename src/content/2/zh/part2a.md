@@ -751,7 +751,7 @@ App
  你还不需要练习的总和。
 
 <!-- The application must work <i>regardless of the number of parts a course has</i>, so make sure the application works if you add or remove parts of a course.-->
-<i> 无论课程有多少部分，应用都必须工作<i>，所以要确保在你增加或删除课程的部分时，应用能够工作。
+<i> 无论课程有多少部分，应用都必须工作</i>，所以要确保在你增加或删除课程的部分时，应用能够工作。
 
 <!-- Ensure that the console shows no errors!-->
 确保控制台没有显示错误!

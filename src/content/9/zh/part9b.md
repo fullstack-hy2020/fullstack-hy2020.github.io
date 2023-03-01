@@ -570,7 +570,7 @@ Normal (healthy weight)
  对于结果对象，你应该创建一个[接口](https://www.typescriptlang.org/docs/handbook/interfaces.html)。
 
 <!-- If you call the function with parameters <i>[3, 0, 2, 4.5, 0, 3, 1]</i> and <i>2</i>, it should return:-->
- 如果你用参数<i>[3, 0, 2, 4.5, 0, 3, 1]<i>和<i>2</i>调用该函数，它应该返回。
+ 如果你用参数<i>[3, 0, 2, 4.5, 0, 3, 1]</i>和<i>2</i>调用该函数，它应该返回。
 
 ```js
 { periodLength: 7,
@@ -717,7 +717,8 @@ import express from 'express';
 ```
 
 <!-- **NB**: VSCode offers you a possibility to fix the issues automatically by clicking the <i>Quick Fix...</i> button. Keep your eyes open for these helpers/quick fixes; listening to your editor usually makes your code better and easier to read. The automatic fixes for issues can be a major time saver as well.-->
- **NB**:VSCode为你提供了一种可能性，通过点击<i>Quick Fix...<i>按钮自动修复这些问题。请留意这些助手/快速修复；听从你的编辑器通常会使你的代码更好，更容易阅读。对问题的自动修复也可以是一个主要的时间节省者。
+
+ **nb**:VSCode为你提供了一种可能性，通过点击<i>Quick Fix...</i>按钮自动修复这些问题。请留意这些助手/快速修复；听从你的编辑器通常会使你的代码更好，更容易阅读。对问题的自动修复也可以是一个主要的时间节省者。
 
 <!-- Now we run into another problem, the compiler complains about the import statement.-->
  现在我们遇到了另一个问题，编译器产生警告导入语句的问题。
@@ -754,7 +755,7 @@ npm install --save-dev @types/express
 <!-- A good rule of thumb is to try importing a module using the <i>import</i> statement first. We will always use this method in the <i>frontend</i>.-->
  一个好的经验法则是先尝试用<i>import</i>语句导入一个模块。我们总是在<i>前端</i>中使用这种方法。
 <!-- If  <i>import</i> does not work, try a combined method: <i>import ... = require('...')</i>.-->
- 如果 <i>import</i> 不起作用，请尝试使用组合方法。<i>import ... = require(''...')<i>。
+ 如果 <i>import</i> 不起作用，请尝试使用组合方法。<i>import ... = require(''...')</i>。
 
 <!-- We strongly suggest you read more about TypeScript modules [here](https://www.typescriptlang.org/docs/handbook/modules.html).-->
  我们强烈建议你阅读更多关于TypeScript模块的信息[这里](https://www.typescriptlang.org/docs/handbook/modules.html)。

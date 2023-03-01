@@ -398,7 +398,7 @@ import 'regenerator-runtime/runtime.js'
  将代码从一种形式的JavaScript转换为另一种形式的过程被称为[转译](https://en.wiktionary.org/wiki/transpile)。这个术语的一般定义是通过将源代码从一种语言转换为另一种语言来进行编译。
 
 <!-- By using the configuration from the previous section, we are <i>transpiling</i> the code containing JSX into regular JavaScript with the help of [babel](https://babeljs.io/), which is currently the most popular tool for the job.-->
-通过使用上一节的配置，我们在[babel](https://babeljs.io/)的帮助下，将包含JSX的代码<i>转译成普通的JavaScript，这是目前最流行的工作工具。
+通过使用上一节的配置，我们在[babel](https://babeljs.io/)的帮助下，将包含JSX的代码<i>转译</i>成普通的JavaScript，这是目前最流行的工作工具。
 
 <!-- As mentioned in part 1, most browsers do not support the latest features that were introduced in ES6 and ES7, and for this reason the code is usually transpiled to a version of JavaScript that implements the ES5 standard.-->
  如第一章节所述，大多数浏览器不支持ES6和ES7中引入的最新特性，为此，代码通常被转译为实现ES5标准的JavaScript版本。

@@ -727,7 +727,7 @@ type DiaryEntry = {
  在这个应用中采取的方法使用了React [context](https://reactjs.org/docs/context.html)，根据其文档。
 
 <!-- > <i>... is designed to share data that can be considered "global" for a tree of React components, such as the current authenticated user, theme, or preferred language.</i>-->
- > <i>......被设计用来共享那些可以被认为是React组件树的 "全局 "数据，例如当前的认证用户、主题或首选语言。
+ > <i>......被设计用来共享那些可以被认为是React组件树的 "全局 "数据，例如当前的认证用户、主题或首选语言。</i>
 
 <!-- In our case, the "global", shared data is the application state <i>and</i> the dispatch function that is used to make changes to data. In many ways our code works much like the Redux-based state management we used in [part 6](/en/part6), but is more lightweight since it does not require the use of any external libraries. This part assumes that you are at least familiar with the way Redux works, e.g. you should have covered at least [the first section](/en/part6/flux_architecture_and_redux) of part 6.-->
  在我们的例子中，"全局"、共享的数据是应用状态<i>和</i>调度函数，用于对数据进行更改。在许多方面，我们的代码很像我们在[第6章节](/en/part6)中使用的基于Redux的状态管理，但由于它不需要使用任何外部库，所以更加轻量级。这一部分假设你至少熟悉Redux的工作方式，例如，你至少应该涵盖第六章节的[第一节](/en/part6/flux_architecture_and_redux)。
@@ -775,7 +775,7 @@ console.log(myPatient.name); // error, Object is possibly 'undefined'
  如果你使用来自外部的数据或使用用户输入的值来访问代码中的数据，这种额外的类型安全总是很好实现的。但如果你确信你只处理实际存在的数据，那么没有人阻止你使用第一个提出的解决方案。
 
 <!-- Even though we are not using them in this course part, it is good to mention that a more type-strict way would be to use [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) objects, to which you can declare a type for both the key and the content. The Map's accessor function <i>get()</i> always returns a union of the declared value type and undefined, so TypeScript automatically requires you to perform validity checks on data retrieved from a map:-->
- 尽管我们在这个课程部分没有使用它们，但值得一提的是，一个更严格的类型方式是使用[Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)对象，你可以为它的键和内容都声明一个类型。Map's accessor函数<i>get()<i>总是返回声明的值类型和未定义的联合体，所以TypeScript自动要求你对从Map检索的数据执行有效性检查。
+ 尽管我们在这个课程部分没有使用它们，但值得一提的是，一个更严格的类型方式是使用[Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)对象，你可以为它的键和内容都声明一个类型。Map's accessor函数<i>get()</i>总是返回声明的值类型和未定义的联合体，所以TypeScript自动要求你对从Map检索的数据执行有效性检查。
 
 ```js
 interface State {
@@ -1183,7 +1183,7 @@ interface BaseEntry {
 ```
 
 <!-- As you might remember, <i>Array&lt;Type&gt;</i> is just an alternative way to say <i>Type[]</i>. In cases like this, it is just much clearer to use the array convention since the other option would be to define the type by saying <i>Diagnosis['code'][]</i> which starts to look a bit strange.-->
- 正如你可能记得的，<i>Array&lt;Type&gt;<i>只是说<i>Type[]<i>的一种替代方式。在这样的情况下，使用数组约定更清楚，因为另一种选择是通过说<i>Diagnosis[''code'][]<i>来定义类型，这看起来有点奇怪。
+ 正如你可能记得的，<i>Array&lt;Type&gt;</i>只是说<i>Type[]</i>的一种替代方式。在这样的情况下，使用数组约定更清楚，因为另一种选择是通过说<i>Diagnosis[''code'][]</i>来定义类型，这看起来有点奇怪。
 
 <!-- Now that we have the <i>BaseEntry</i> defined, we can start creating the extended entry types we will actually be using. Let's start by creating the <i>HealthCheckEntry</i> type.-->
  现在我们已经定义了<i>BaseEntry</i>，我们可以开始创建我们将实际使用的扩展条目类型。让我们从创建<i>HealthCheckEntry</i>类型开始。

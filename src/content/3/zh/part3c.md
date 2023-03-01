@@ -263,7 +263,7 @@ const Note = mongoose.model('Note', noteSchema)
  首先我们定义一个笔记的[模式](http://mongoosejs.com/docs/guide.html)，它被存储在_noteSchema_变量中。该模式告诉Mongoose如何将笔记对象存储在数据库中。
 
 <!-- In the _Note_ model definition, the first <i>"Note"</i> parameter is the singular name of the model. The name of the collection will be the lowercased plural <i>notes</i>, because the [Mongoose convention](http://mongoosejs.com/docs/models.html) is to automatically name collections as the plural (e.g. <i>notes</i>) when the schema refers to them in the singular (e.g. <i>Note</i>).-->
- 在_Note_模型定义中，第一个<i>"Note"<i>参数是模型的单数名称。集合的名称将是小写的复数<i>notes</i>，因为[Mongoose惯例](http://mongoosejs.com/docs/models.html)是自动将集合命名为复数(例如：<i>notes</i>)，而模式是以单数指代它们(例如：<i>Note</i>)。
+ 在_Note_模型定义中，第一个<i>"Note"</i>参数是模型的单数名称。集合的名称将是小写的复数<i>notes</i>，因为[Mongoose惯例](http://mongoosejs.com/docs/models.html)是自动将集合命名为复数(例如：<i>notes</i>)，而模式是以单数指代它们(例如：<i>Note</i>)。
 
 <!-- Document databases like Mongo are <i>schemaless</i>, meaning that the database itself does not care about the structure of the data that is stored in the database. It is possible to store documents with completely different fields in the same collection.-->
  像Mongo这样的文档数据库是<i>无模式</i>，意味着数据库本身并不关心存储在数据库中的数据结构。有可能在同一个集合中存储具有完全不同字段的文档。
@@ -415,7 +415,7 @@ mongoose.connection.close()
 ```
 
 <!-- In the code above the <i>mongoose.connection.close()</i> command will get executed immediately after the <i>Person.find</i> operation is started. This means that the database connection will be closed immediately, and the execution will never get to the point where <i>Person.find</i> operation finishes and the <i>callback</i> function gets called.-->
- 在上面的代码中，<i>mongoose.connection.close()<i>命令将在<i>Person.find</i>操作开始后立即被执行。这意味着数据库连接将被立即关闭，而执行将永远不会到达<i>Person.find</i>操作结束和<i>callback</i>函数被调用的位置。
+ 在上面的代码中，<i>mongoose.connection.close()</i>命令将在<i>Person.find</i>操作开始后立即被执行。这意味着数据库连接将被立即关闭，而执行将永远不会到达<i>Person.find</i>操作结束和<i>callback</i>函数被调用的位置。
 
 <!-- The correct place for closing the database connection is at the end of the callback function:-->
  关闭数据库连接的正确位置是在回调函数的最后。

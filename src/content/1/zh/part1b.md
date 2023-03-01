@@ -287,10 +287,10 @@ const result = average(2, 5)
 
 <div class="tasks">
 <!--   <h3>Exercises 1.3.-1.5.</h3>-->
- <h3>练习1.3.-1.5.</h3> </h3
+ <h3>练习1.3.-1.5.</h3> 
 
 
-<i>我们将继续构建我们在之前练习中开始编写的应用程序。您可以将代码编写到同一个项目中，因为我们只对提交的应用程序的最终状态感兴趣。<i>
+<i>我们将继续构建我们在之前练习中开始编写的应用程序。您可以将代码编写到同一个项目中，因为我们只对提交的应用程序的最终状态感兴趣。</i>
 
 <!-- **Pro-tip:** you may run into issues when it comes to the structure of the <i>props</i> that components receive. A good way to make things more clear is by printing the props to the console, e.g. as follows:-->
  **建议：**当涉及到组件接收的<i>props</i>的结构时，你可能会遇到问题。一个让事情更明确的好方法是把prop打印到控制台，例如，如下所示。
@@ -333,7 +333,7 @@ const App = () => {
 ```
 
 <!--   <h4>1.4: course information step4</h4>-->
- <h4>1.4：课程信息步骤4</h4
+ <h4>1.4：课程信息步骤4</h4>
 
 <!-- And then place the objects into an array. Modify the variable definitions of <i>App</i> into the following form and modify the other parts of the application accordingly:-->
 然后将对象放入一个数组。将<i>App</i>的变量定义修改为以下形式，并相应地修改应用的其他部分。
@@ -385,7 +385,7 @@ const App = () => {
 ```
 
 <!--   <h4>1.5: course information step5</h4>-->
- <h4>1.5: 课程信息步骤5</h4
+ <h4>1.5: 课程信息步骤5</h4>
 <!-- Let's take the changes one step further. Change the course and its parts into a single JavaScript object. Fix everything that breaks.-->
  让我们再进一步改变。把课程和它的部分改成一个单一的JavaScript对象。修复所有破坏的地方。
 
@@ -417,7 +417,6 @@ const App = () => {
 }
 ```
 
-</div>
 
 <div class="content">
 

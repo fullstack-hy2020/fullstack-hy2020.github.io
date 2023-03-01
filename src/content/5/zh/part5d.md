@@ -757,7 +757,7 @@ it('login fails with wrong password', function() {
 ```
 
 <!-- Let's finish the test so that it also checks that the application does not render the success message <i>'Matti Luukkainen logged in'</i>:-->
- 让我们完成这个测试，以便它也能检查应用是否渲染成功信息 <i>"Matti Luukkainen logged in"<i>。
+ 让我们完成这个测试，以便它也能检查应用是否渲染成功信息 <i>"Matti Luukkainen logged in"</i>。
 
 ```js
 it('login fails with wrong password', function() {

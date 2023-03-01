@@ -836,7 +836,7 @@ export default {
  在我们的应用中，有一件事是值得关注的。在<i>getNonSensitiveEntries</i>中，我们正在返回完整的日记条目，而且<i>没有给出错误</i>，尽管输入了!
 
 <!-- This happens because [TypeScript only checks](http://www.typescriptlang.org/docs/handbook/type-compatibility.html) whether we have all of the required fields or not, but excess fields are not prohibited. In our case, this means that it is <i>not prohibited</i> to return an object of type <i>DiaryEntry[]</i>, but if we were to try to access the <i>comment</i> field, it would not be possible because we would be accessing a field that TypeScript is unaware of even though it exists.-->
-发生这种情况是因为[TypeScript只检查](http://www.typescriptlang.org/docs/handbook/type-compatibility.html)我们是否有所有需要的字段，但多余的字段不被禁止。在我们的例子中，这意味着返回一个<i>DiaryEntry[]<i>类型的对象是<i>不禁止的<i>，但是如果我们试图访问<i>comment</i>字段，这将是不可能的，因为我们将访问一个TypeScript不知道的字段，即使它存在。
+发生这种情况是因为[TypeScript只检查](http://www.typescriptlang.org/docs/handbook/type-compatibility.html)我们是否有所有需要的字段，但多余的字段不被禁止。在我们的例子中，这意味着返回一个<i>DiaryEntry[]</i>类型的对象是<i>不禁止的</i>，但是如果我们试图访问<i>comment</i>字段，这将是不可能的，因为我们将访问一个TypeScript不知道的字段，即使它存在。
 
 <!-- Unfortunately, this can lead to unwanted behaviour if you are not aware of what you are doing; the situation is valid as far as TypeScript is concerned, but you are most likely allowing use that is not wanted.-->
  不幸的是，如果你不知道你在做什么，这可能会导致不必要的行为；就TypeScript而言，这种情况是有效的，但你很可能允许使用不想要的东西。
