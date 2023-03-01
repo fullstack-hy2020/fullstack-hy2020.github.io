@@ -30,8 +30,6 @@ const LanguagePicker = ({
   return (
     /*eslint jsx-a11y/no-onchange: "off" */
     <>
-    {console.log(value)}
-    {console.log(fontSizeStyle)}
       <SrOnly>
         <label htmlFor="language-select">
           {t('navigation:LanguagePickerSrLabel')}
