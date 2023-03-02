@@ -85,7 +85,7 @@ on:
  如果你以前没有使用过分支，可以查看[例如这个教程](https://www.atlassian.com/git/tutorials/using-branches)来开始。
 
 <!-- Note that when you open the pull request, make sure that you select here your <i>own</i> repository as the destination <i>base repository</i>. By default, the selection is the original repository by smartly and you **do not want** to do that:-->
- 注意，当你打开拉取请求时，确保在这里选择你的<i>自己的</i>仓库作为目标<i>基础仓库</i>。默认情况下，选择的是智能的原始仓库，你***不希望这样做。
+ 注意，当你打开拉取请求时，确保在这里选择你的<i>自己的</i>仓库作为目标<i>基础仓库</i>。默认情况下，选择的是智能的原始仓库，你**不希望**这样做。
 
 ![](../../images/11/15a.png)
 
@@ -331,7 +331,7 @@ jobs:
  看看工作流日志中会打印出什么!
 
 <!-- Note that you can access the commits and commit messages <i>only when pushing or merging to the main branch</i>, so for pull requests the <code>github.event.commits</code> is empty. It is anyway not needed, since we want to skip the step altogether for pull requests.-->
- 注意，你只能在推送或合并到主分支时访问提交和提交信息<i>，所以对于拉取请求，<code>github.event.commits</code>是空的。反正也不需要，因为我们想对拉取请求完全跳过这一步。
+ 注意，你只能在<i>推送或合并到主分支时访问提交和提交信息</i>，所以对于拉取请求，<code>github.event.commits</code>是空的。反正也不需要，因为我们想对拉取请求完全跳过这一步。
 
 <!-- You most likely need functions [contains](https://docs.github.com/en/actions/learn-github-actions/expressions#contains) and [join](https://docs.github.com/en/actions/learn-github-actions/expressions#join) for your if condition.-->
  你很可能需要函数 [contains](https://docs.github.com/en/actions/learn-github-actions/expressions#contains) 和 [join](https://docs.github.com/en/actions/learn-github-actions/expressions#join) 作为你的if条件。

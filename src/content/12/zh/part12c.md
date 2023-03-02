@@ -109,10 +109,10 @@ CMD ["serve", "build"] # highlight-line
 ```
 
 <!-- Our CMD now includes square brackets and as a result we now used the so called <i>exec form</i> of CMD. There are actually **three** different forms for the CMD out of which the exec form is preferred. Read the [documentation](https://docs.docker.com/engine/reference/builder/#cmd) for more info.-->
- 我们的CMD现在包括方括号，因此我们现在使用了所谓的CMD的<i>exec形式</i>。实际上，CMD有***三种不同的形式，其中exec形式是首选。阅读[文档](https://docs.docker.com/engine/reference/builder/#cmd)获取更多信息。
+ 我们的CMD现在包括方括号，因此我们现在使用了所谓的CMD的<i>exec形式</i>。实际上，CMD有**三种**不同的形式，其中exec形式是首选。阅读[文档](https://docs.docker.com/engine/reference/builder/#cmd)获取更多信息。
 
 <!-- When we now build the image with _docker build . -t hello-front_ and run it with _docker run -p 5000:3000 hello-front_, the app will be available in http://localhost:5000.-->
- 当我们现在用_docker build构建镜像。-t hello-front_并使用_docker run -p 5000:3000 hello-front_运行它，应用将在http://localhost:5000。
+ 当我们现在用_docker build构建镜像。-t hello-front_并使用_docker run -p 5000:3000 hello-front_运行它，应用将在http://localhost:5000 
 
 ### Using multiple stages
 
@@ -155,7 +155,7 @@ COPY --from=build-stage /usr/src/app/build /usr/share/nginx/html # highlight-lin
  在我们再次构建之后，图像就可以为静态内容提供服务了。Nginx的默认端口将是80，所以像_-p 8000:80_这样的端口也可以工作，所以运行命令的参数需要改变一下。
 
 <!-- Multi-stage builds also include some internal optimizations that may affect your builds. As an example, multi-stage builds skip stages that are not used. If we wish to use a stage to replace a part of a build pipeline, like testing or notifications, we must pass **some** data to the following stages. In some cases this is justified: copy the code from the testing stage to the build stage. This ensures that you are building the tested code.-->
- 多阶段构建还包括一些内部优化，可能会影响你的构建。举个例子，多阶段构建会跳过那些不使用的阶段。如果我们想用一个阶段来代替构建管道的一部分，比如测试或通知，我们必须把***的数据传递给下面的阶段。在某些情况下，这是合理的：把测试阶段的代码复制到构建阶段。这可以确保你正在构建经过测试的代码。
+ 多阶段构建还包括一些内部优化，可能会影响你的构建。举个例子，多阶段构建会跳过那些不使用的阶段。如果我们想用一个阶段来代替构建管道的一部分，比如测试或通知，我们必须把**一些**数据传递给下面的阶段。在某些情况下，这是合理的：把测试阶段的代码复制到构建阶段。这可以确保你正在构建经过测试的代码。
 
 </div>
 
@@ -278,7 +278,7 @@ services:
  有了这个配置，_docker-compose up_可以在开发模式下运行应用。你甚至不需要安装Node来开发它!
 
 <!-- Installing new dependencies is a headache for a development setup like this. One of the better options is to install the new dependency **inside** the container. So instead of doing e.g. _npm install axios_, you have to do it in the running container e.g. _docker exec hello-front-dev npm install axios_, or add it to the package.json and run _docker build_ again.-->
- 对于这样的开发设置来说，安装新的依赖项是一个令人头痛的问题。其中一个更好的选择是将新的依赖关系安装在***容器内。因此，你必须在运行中的容器中进行安装，例如：_docker exec hello-front-dev npm install axios_，或者将其添加到package.json中并再次运行_docker build_，而不是做例如_npm install axios。
+ 对于这样的开发设置来说，安装新的依赖项是一个令人头痛的问题。其中一个更好的选择是将新的依赖关系安装在**容器内**。因此，你必须在运行中的容器中进行安装，例如：_docker exec hello-front-dev npm install axios_，或者将其添加到package.json中并再次运行_docker build_，而不是做例如_npm install axios。
 
 </div>
 <div class="tasks">
@@ -437,7 +437,7 @@ services:
  接下来，我们将在我们的docker-compose.yml中添加一个[反向代理](https://en.wikipedia.org/wiki/Reverse_proxy)。根据维基百科的说法
 
 <!-- > <i>A reverse proxy is a type of proxy server that retrieves resources on behalf of a client from one or more servers. These resources are then returned to the client, appearing as if they originated from the reverse proxy server itself.</i>-->
-> <i>反向代理是一种代理服务器，它代表客户从一个或多个服务器中检索资源。这些资源然后被返回给客户，看起来就像它们来自反向代理服务器本身。
+> <i>反向代理是一种代理服务器，它代表客户从一个或多个服务器中检索资源。这些资源然后被返回给客户，看起来就像它们来自反向代理服务器本身。</i>
 
 <!-- So in our case, the reverse proxy will be the single point of entry to our application, and the final goal will be to set both the React frontend and the Express backend behind the reverse proxy.-->
 所以在我们的案例中，反向代理将是我们应用的单一入口点，而最终的目标是将React前端和Express后端都设置在反向代理后面。
@@ -509,7 +509,7 @@ a02ae58f3e8d   nginx:1.20.1      "/docker-entrypoint.…"   4 minutes ago   Up 4
  连接到http://localhost:8080 将导致一个看起来很熟悉的页面，状态为502。
 
 <!-- This is because directing requests to http://localhost:3000 leads to nowhere as the Nginx container does not have an application running in port 3000. By definition, localhost refers to the current computer used to access it. With containers localhost is unique for each container, leading to the container itself.-->
- 这是因为将请求指向http://localhost:3000，没有任何结果，因为Nginx容器没有在3000端口运行的应用。根据定义，localhost指的是当前用于访问的计算机。对于容器来说，localhost对每个容器都是唯一的，导致容器本身。
+ 这是因为将请求指向 http://localhost:3000 没有任何结果，因为Nginx容器没有在3000端口运行的应用。根据定义，localhost指的是当前用于访问的计算机。对于容器来说，localhost对每个容器都是唯一的，导致容器本身。
 
 <!-- Let's test this by going inside the Nginx container and using curl to send a request to the application itself. In our usage curl is similar to wget, but won't need any flags.-->
  让我们通过进入Nginx容器内部，用curl向应用本身发送一个请求来测试一下。在我们的用法中，curl类似于wget，但不需要任何标志。

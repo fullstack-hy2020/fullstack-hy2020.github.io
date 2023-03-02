@@ -55,7 +55,7 @@ lang: zh
  React提供了创建我们自己的[自定义](https://reactjs.org/docs/hooks-custom.html)挂钩的选项。根据React的说法，自定义钩子的主要目的是促进组件中使用的逻辑的重用。
 
 <!-- > <i>Building your own Hooks lets you extract component logic into reusable functions.</i>-->
- > <i>建立你自己的钩子让你将组件逻辑提取为可重用的函数。
+ > <i>建立你自己的钩子让你将组件逻辑提取为可重用的函数。</i>
 
 
 <!-- Custom hooks are regular JavaScript functions that can use any other hooks, as long as they adhere to the [rules of hooks](/en/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks). Additionally, the name of custom hooks must start with the word _use_.-->

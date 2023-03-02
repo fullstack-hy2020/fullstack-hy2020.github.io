@@ -179,7 +179,7 @@ afterAll(() => {
  我们的测试向<i>api/notes</i>网址发出HTTP GET请求，并验证该请求被响应，状态代码为200。该测试还验证了<i>Content-Type</i>头被设置为<i>application/json</i>，表明数据为所需格式。(如果你不熟悉<i>/application/json/</i>的RegEx语法，你可以了解更多[这里](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)。)
 
 <!-- The test contains some details that we will explore [a bit later on](/en/part4/testing_the_backend#async-await). The arrow function that defines the test is preceded by the <i>async</i> keyword and the method call for the <i>api</i> object is preceded by the <i>await</i> keyword. We will write a few tests and then take a closer look at this async/await magic. Do not concern yourself with them for now, just be assured that the example tests work correctly. The async/await syntax is related to the fact that making a request to the API is an <i>asynchronous</i> operation. The [Async/await syntax](https://jestjs.io/docs/asynchronous) can be used for writing asynchronous code with the appearance of synchronous code.-->
- 该测试包含了一些细节，我们将[稍后](/en/part4/testing_the_backend#async-await)进行探讨。定义测试的箭头函数前面有<i>async</i>关键字，对<i>api</i>对象的方法调用前面有<i>await</i>关键字。我们将写一些测试，然后仔细看看这个async/await的魔法。暂时不要关注它们，只需保证示例测试的正常工作。async/await语法与向API发出请求是一个<i>异步</i>操作的事实有关。Async/await语法](https://jestjs.io/docs/asynchronous)可用于编写具有同步代码外观的异步代码。
+ 该测试包含了一些细节，我们将[稍后](/en/part4/testing_the_backend#async-await)进行探讨。定义测试的箭头函数前面有<i>async</i>关键字，对<i>api</i>对象的方法调用前面有<i>await</i>关键字。我们将写一些测试，然后仔细看看这个async/await的魔法。暂时不要关注它们，只需保证示例测试的正常工作。async/await语法与向API发出请求是一个<i>异步</i>操作的事实有关。[Async/await语法](https://jestjs.io/docs/asynchronous)可用于编写具有同步代码外观的异步代码。
 
 <!-- Once all the tests (there is currently only one) have finished running we have to close the database connection used by Mongoose. This can be easily achieved with the [afterAll](https://jestjs.io/docs/api#afterallfn-timeout) method:-->
  一旦所有的测试（目前只有一个）都运行完毕，我们必须关闭Mongoose使用的数据库连接。这可以通过[afterAll](https://jestjs.io/docs/api#afterallfn-timeout)方法轻松实现。
@@ -263,7 +263,7 @@ const api = supertest(app) // highlight-line
  supertest的文档说如下。
 
 <!-- > <i>if the server is not already listening for connections then it is bound to an ephemeral port for you so there is no need to keep track of ports.</i>-->
- > <i>如果服务器还没有监听连接，那么它就会为你绑定一个短暂的端口，所以不需要跟踪端口。
+ > <i>如果服务器还没有监听连接，那么它就会为你绑定一个短暂的端口，所以不需要跟踪端口。</i>
 
 
 <!-- In other words, supertest takes care that the application being tested is started at the port that it uses internally.-->

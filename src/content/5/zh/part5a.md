@@ -177,7 +177,7 @@ const App = () => {
 如果登录失败，或运行_loginService.login_函数导致错误，用户将被通知。
 
 <!-- The user is not notified about a successful login in any way. Let's modify the application to show the login form only <i>if the user is not logged-in</i> so when _user === null_. The form for adding new notes is shown only if the <i>user is logged-in</i>, so <i>user</i> contains the user details.-->
- 用户不会以任何方式得到关于成功登录的通知。让我们修改应用，只有在用户没有登录的情况下才显示登录表单<i>，所以当_user == null_。只有当<i>用户登录</i>时，才会显示添加新笔记的表单，所以<i>用户</i>包含用户的详细信息。
+ 用户不会以任何方式得到关于成功登录的通知。让我们修改应用，只有在<i>用户没有登录的情况下才显示登录表单</i>，所以当_user == null_。只有当<i>用户登录</i>时，才会显示添加新笔记的表单，所以<i>用户</i>包含用户的详细信息。
 
 <!-- Let's add two helper functions to the <i>App</i> component for generating the forms:-->
  让我们在<i>App</i>组件中添加两个辅助函数来生成表单。

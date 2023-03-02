@@ -190,7 +190,7 @@ The helper function _getTokenFrom_ isolates the token from the <i>authorization<
 const decodedToken = jwt.verify(token, process.env.SECRET)
 ```
 
-If the token is missing or is it invalid, the exception <i>JsonWebTokenError</i> is raised. We need to extend the error handling middleware to take care of this particular case:
+If the token is missing or it is invalid, the exception <i>JsonWebTokenError</i> is raised. We need to extend the error handling middleware to take care of this particular case:
 
 ```js
 const errorHandler = (error, request, response, next) => {

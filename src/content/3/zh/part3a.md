@@ -472,7 +472,7 @@ response.end(JSON.stringify(notes))
  解决这个问题的方法是 [nodemon](https://github.com/remy/nodemon)。
 
 <!-- > <i>nodemon will watch the files in the directory in which nodemon was started, and if any files change, nodemon will automatically restart your node application.</i>-->
- > <i>nodemon 将观察 nodemon 启动时所在目录中的文件，如果有任何文件发生变化，nodemon 将自动重启你的 node 应用。
+ > <i>nodemon 将观察 nodemon 启动时所在目录中的文件，如果有任何文件发生变化，nodemon 将自动重启你的 node 应用</i>
 
 
 <!-- Let's install nodemon by defining it as a <i>development dependency</i> with the command:-->
@@ -592,15 +592,15 @@ npm run dev
 <!-- We can execute different operations on resources. The operation to be executed is defined by the HTTP <i>verb</i>:-->
 我们可以对资源执行不同的操作。要执行的操作是由 HTTP <i>verb</i> 定义的。
 
-| URL                   | verb                | functionality                                                    |
-| --------------------- | ------------------- | -----------------------------------------------------------------|
-| notes/10              | GET                 | fetches a single resource                                        |
-| notes                 | GET                 | fetches all resources in the collection                          |
-| notes                 | POST                | creates a new resource based on the request data                 |
-| notes/10              | DELETE              | removes the identified resource                                  |
-| notes/10              | PUT                 | replaces the entire identified resource with the request data    |
-| notes/10              | PATCH               | replaces a part of the identified resource with the request data |
-|                       |                     |                                                                  |
+| URL      | verb   | functionality                                                    |
+| -------- | ------ | ---------------------------------------------------------------- |
+| notes/10 | GET    | fetches a single resource                                        |
+| notes    | GET    | fetches all resources in the collection                          |
+| notes    | POST   | creates a new resource based on the request data                 |
+| notes/10 | DELETE | removes the identified resource                                  |
+| notes/10 | PUT    | replaces the entire identified resource with the request data    |
+| notes/10 | PATCH  | replaces a part of the identified resource with the request data |
+|          |        |                                                                  |
 
 
 <!-- This is how we manage to roughly define what REST refers to as a [uniform interface](https://en.wikipedia.org/wiki/Representational_state_transfer#Architectural_constraints), which means a consistent way of defining interfaces that makes it possible for systems to co-operate.-->
@@ -952,7 +952,7 @@ content-type: application/json
  Postman 也允许用户保存请求，但情况可能变得相当混乱，特别是当你在多个不相关的项目上工作时。
 
 <!-- > **Important sidenote**-->
- > ** 重要的附注 **。
+ > **重要的附注**。
 <!-- >-->
  >
 <!-- > Sometimes when you're debugging, you may want to find out what headers have been set in the HTTP request. One way of accomplishing this is through the [get](http://expressjs.com/en/4x/api.html#req.get) method of the _request_ object, that can be used for getting the value of a single header. The _request_ object also has the <i>headers</i> property, that contains all of the headers of a specific request.-->
@@ -1101,7 +1101,7 @@ Math.max(...notes.map(n => n.id))
 ```
 
 <!-- What exactly is happening in that line of code? <em>notes.map(n => n.id)</em> creates a new array that contains all the ids of the notes. [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) returns the maximum value of the numbers that are passed to it. However, <em>notes.map(n => n.id)</em> is an <i>array</i> so it can't directly be given as a parameter to _Math.max_. The array can be transformed into individual numbers by using the "three dot" [spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) syntax <em>...</em>.-->
- 这一行代码到底发生了什么？<em>notes.map(n => n.id)</em> 创建一个新的数组，其中包含了所有笔记的 ID。[Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) 返回传递给它的数字的最大值。然而，<em>notes.map(n => n.id)</em> 是一个 <i> 数组 </i>，所以它不能直接作为一个参数给 _Math.max_。数组可以通过使用 " 三点 "[spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) 语法 <em>...<em> 转换为单个数字。
+ 这一行代码到底发生了什么？<em>notes.map(n => n.id)</em> 创建一个新的数组，其中包含了所有笔记的 ID。[Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) 返回传递给它的数字的最大值。然而，<em>notes.map(n => n.id)</em> 是一个 <i> 数组 </i>，所以它不能直接作为一个参数给 _Math.max_。数组可以通过使用 " 三点 "[spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) 语法 <em>...</em> 转换为单个数字。
 
 </div>
 
@@ -1119,7 +1119,7 @@ Math.max(...notes.map(n => n.id))
 
 
 <!-- **Strong recommendation:** When you are working on backend code, always keep an eye on what's going on in the terminal that is running your application.-->
- ** 强烈建议：** 当你在处理后端代码时，始终关注运行你的应用的终端中发生的事情。
+ **强烈建议：** 当你在处理后端代码时，始终关注运行你的应用的终端中发生的事情。
 
 
 #### 3.1: Phonebook backend step1
@@ -1241,7 +1241,7 @@ Math.max(...notes.map(n => n.id))
 ### About HTTP request types
 
 <!-- [The HTTP standard](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) talks about two properties related to request types, **safety** and **idempotence**.-->
- [HTTP 标准](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) 谈到了与请求类型有关的两个属性：** 安全 ** 和 ** 空闲 **。
+ [HTTP 标准](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) 谈到了与请求类型有关的两个属性：**安全** 和 **空闲**。
 
 <!-- The HTTP GET request should be <i>safe</i>:-->
  HTTP GET 请求应该是 <i> 安全的 </i>。
