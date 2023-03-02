@@ -17,11 +17,6 @@ import Note from './components/Note'
 
 const App = (props) => { // highlight-line
   const [notes, setNotes] = useState(props.notes) // highlight-line
-  /* 
-    "notes" traduz-se como "notas"
-    "setNotes" traduz-se, grosso modo, como "definirNotas"
-    - Versão reduzida: "defNotas"
-  */
 
   return (
     <div>
@@ -50,7 +45,7 @@ const App = (props) => {
 
 Também podemos usar o "React Developer Tools" para ver o que realmente está acontecendo:
 
-![](../../images/2/30.png)
+![navegador mostrando a janela ](../../images/2/30.png)
 
 Se quiséssemos inicializá-la com uma lista vazia de notas, definiríamos o valor inicial como um array vazio e, como as props não seriam utilizadas, poderíamos omitir o parâmetro <em>props</em> da definição da função:
 
@@ -72,9 +67,8 @@ const App = (props) => {
 
 // highlight-start 
   const addNote = (event) => {
-    //"addNote" traduz-se, grosso modo, como "adicionarNota"
     event.preventDefault()
-    console.log('botão clicado', event.target)
+    console.log('button clicked', event.target)
   }
   // highlight-end   
 
@@ -102,21 +96,21 @@ Adicionamos a função _addNote_ como um gerenciador de evento ao elemento de fo
 Usamos o método discutido na [Parte 1](/en/part1/component_state_event_handlers#event-handling) para definir nosso gerenciador de evento:
 
 ```js
-const addNote = (evento) => {
-  evento.preventDefault()
-  console.log('botão clicado', evento.target)
+const addNote = (event) => {
+  event.preventDefault()
+  console.log('button clicked', event.target)
 }
 ```
 
-O parâmetro <em>event</em> é o [event](https://reactjs.org/docs/handling-events.html) (evento) que aciona a chamada para a função gerenciadora de evento:
+O parâmetro <em>event</em> é o [evento](https://reactjs.org/docs/handling-events.html) que aciona a chamada para a função gerenciadora de evento:
 
-O gerenciador de evento chama imediatamente o método <em>event.preventDefault()</em>, o que "impede a ação padrão" (prevents the default action) de enviar um formulário. A ação padrão causaria, [entre outras coisas](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event), a recarga da página.
+O gerenciador de evento chama imediatamente o método <em>event.preventDefault()</em>, o que "impede a ação padrão" de enviar um formulário. A ação padrão causaria, [entre outras coisas](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event), o recarregamento da página.
 
-O alvo do evento armazenado em _event.target_ é registrado no console:
+O alvo (target) do evento armazenado em _event.target_ é registrado no console:
 
 ![console mostrando o botão clicado com o objeto formulário](../../images/2/6e.png)
 
-O alvo neste caso é o formulário que definimos em nosso componente.
+O <i>target</i> neste caso é o formulário que definimos em nosso componente.
 
 Como acessamos os dados armazenados no elemento <i>input</i> do formulário?
 
@@ -131,17 +125,13 @@ const App = (props) => {
   const [notes, setNotes] = useState(props.notes)
   // highlight-start
   const [newNote, setNewNote] = useState(
-    /* 
-      "newNote" traduz-se como "novaNota"
-      "setNewNote" traduz-se, grosso modo, como "defNovaNota"
-    */
-    'uma nova nota...'
+    'a new note...'
   ) 
   // highlight-end
 
   const addNote = (event) => {
     event.preventDefault()
-    console.log('botão clicado', event.target)
+    console.log('button clicked', event.target)
   }
 
   return (
@@ -165,7 +155,7 @@ O texto do espaço reservado armazenado como o valor inicial do estado <em>newNo
 
 ![console exibindo erro de valor fornecido para prop sem onchange](../../images/2/7e.png)
 
-A partir do momento que atribuímos um pedaço do estado do componente <i>App</i> como o atributo <i>value</i> do elemento de entrada (input element), o componente <i>App</i> passou a controlar o comportamento do elemento de entrada.
+A partir do momento em que atribuímos um pedaço do estado do componente <i>App</i> como o atributo <i>value</i> do elemento de entrada (input element), o componente <i>App</i> passou a controlar o comportamento do elemento de entrada.
 
 Para habilitar a edição do elemento de entrada, precisamos registrar um <i>gerenciador de evento</i> que sincroniza as mudanças feitas na entrada com o estado do componente:
 
@@ -173,13 +163,13 @@ Para habilitar a edição do elemento de entrada, precisamos registrar um <i>ger
 const App = (props) => {
   const [notes, setNotes] = useState(props.notes)
   const [newNote, setNewNote] = useState(
-    'uma nova nota...'
+    'a new note...'
   ) 
 
   // ...
 
 // highlight-start
-  const handleNoteChange = (event) => { // ou "gerEntradaDeNota"
+  const handleNoteChange = (event) => { 
     console.log(event.target.value)
     setNewNote(event.target.value)
   }
@@ -251,9 +241,9 @@ const addNote = (event) => {
 }
 ```
 
-Primeiramente, criamos um novo objeto para a nota (variável que cria as notas com suas propriedades) chamada <em>noteObject</em> (ou "objetoNota") que receberá seu conteúdo do estado <em>newNote</em> do componente. O identificador único <i>id</i> é gerado com base no número total de notas. Este método funciona para a nossa aplicação, já que as nossas notas nunca são excluídas. Com a ajuda da função <em>Math.random()</em>, a nossa nota tem 50% de chance de ser marcada como importante.
+Primeiramente, criamos um novo objeto para a nota (variável que cria as notas com suas propriedades) chamada <em>noteObject</em> que receberá seu conteúdo do estado <em>newNote</em> do componente. O identificador único <i>id</i> é gerado com base no número total de notas. Este método funciona para a nossa aplicação, já que as nossas notas nunca são excluídas. Com a ajuda da função <em>Math.random()</em>, a nossa nota tem 50% de chance de ser marcada como importante.
 
-A nova nota é adicionada à lista de notas usando o método de array [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) (concatenar), apresentado na [Parte 1](/ptbr/part1/java_script#arrays):
+A nova nota é adicionada à lista de notas usando o método de array [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), apresentado na [Parte 1](/ptbr/part1/java_script#arrays):
 
 ```js
 setNotes(notes.concat(noteObject))
@@ -269,18 +259,17 @@ setNewNote('')
 
 É possível encontrar o código atual completo da nossa aplicação na branch <i>part2-2</i> [neste repositório do GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-2).
 
-### Filtragem dos elementos exibidos
+### Filtrando os elementos exibidos
 
 Vamos adicionar algumas novas funcionalidades à nossa aplicação que nos permitam visualizar apenas as notas importantes.
 
-Vamos adicionar um pedaço de estado ao componente <i>App</i> que vai manter o registro das notas que devem ser exibidas:
+Vamos adicionar um estado ao componente <i>App</i> que vai manter o registro das notas que devem ser exibidas:
 
 ```js
 const App = (props) => {
   const [notes, setNotes] = useState(props.notes) 
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true) // highlight-line
-  // "exibirTudo" e "defExibirTudo", respectivamente.
 
   // ...
 }
@@ -301,7 +290,6 @@ const App = (props) => {
 
 // highlight-start
   const notesToShow = showAll
-    // "notesToShow" traduz-se como "notasParaExibir"
     ? notes
     : notes.filter(note => note.important === true)
 // highlight-end
@@ -330,13 +318,13 @@ const notesToShow = showAll
 
 A definição utiliza o operador [condicional](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) (ou operador ternário) encontrado também em muitas outras linguagens de programação.
 
-O operador funciona da seguinte maneira. Se tivermos...
+O operador funciona da seguinte maneira. Se tivermos
 
 ```js
 const result = condition ? val1 : val2
 ```
 
-... a variável <em>result</em> será definida com o valor de <em>val1</em> se <em>condition</em> for verdadeiro. Se <em>condition</em> for falso, a variável <em>result</em> será definida com o valor de <em>val2</em>.
+a variável <em>result</em> será definida com o valor de <em>val1</em> se <em>condition</em> for verdadeiro. Se <em>condition</em> for falso, a variável <em>result</em> será definida com o valor de <em>val2</em>.
 
 Se o valor de <em>showAll</em> for falso, a variável <em>notesToShow</em> será atribuída a uma lista que contém somente as notas que possuem a propriedade <em>important</em> definida como verdadeira. A filtragem é feita com a ajuda do método de array [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) (filtrar):
 
@@ -363,7 +351,7 @@ import { useState } from 'react'
 import Note from './components/Note'
 
 const App = (props) => {
-  const [notes, setNotes] = useState(props.notes)
+  const [notes, setNotes] = useState(props.notes) 
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
 
@@ -376,7 +364,7 @@ const App = (props) => {
       <div>
         <button onClick={() => setShowAll(!showAll)}>
           show {showAll ? 'important' : 'all' }
-            {/* exibirTudo ? 'importante' : 'tudo' */}
+            
         </button>
       </div>
 // highlight-end            
@@ -453,7 +441,7 @@ export default App
 
 O estado <em>newName</em> é destinado a controlar o elemento de entrada do formulário.
 
-Pode ser útil às vezes renderizar o estado e outras variáveis, como texto, para fins de depuração. Você pode adicionar temporariamente o seguinte elemento ao componente renderizado:
+Pode ser útil renderizar o estado e outras variáveis, como texto, para fins de depuração. Você pode adicionar temporariamente o seguinte elemento ao componente renderizado:
 
 ```
 <div>debug: {newName}</div>
@@ -467,16 +455,16 @@ Depois de concluir este exercício, sua aplicação deve ficar mais ou menos par
 
 Atente-se ao uso da extensão "React developer tools" na imagem acima!
 
-**N.B. (Nota Bene):**
+**Obs.:**
 
 - Você pode usar o nome da pessoa como um valor da propriedade <i>key</i>; e
-- Lembre-se de impedir a ação padrão de envio de formulários HTML! (preventDefault)
+- Lembre-se de impedir a ação padrão de envio de formulários HTML (preventDefault)!
 
 <h4>2.7: The Phonebook — 2º passo</h4>
 
 Impeça que o usuário adicione nomes que já existam na lista telefônica. JavaScript têm inúmeros [métodos](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) adequados para realizar esta tarefa. Tenha em mente [como funciona a igualdade de objetos](https://www.joshbritz.co/posts/why-its-so-hard-to-check-object-equality/) em JavaScript.
 
-Emita uma aviso com o comando [alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) (alerta) quando o usuário tentar fazer isso:
+Emita um aviso com o comando [alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) (alerta) quando o usuário tentar fazer isso:
 
 ![captura de tela mostrando o exemplo do exercício 2.7](../../images/2/11e.png)
 <i>Tradução do alerta em tela: "Arto Hellas já foi adicionado à lista telefônica"</i>
@@ -485,7 +473,6 @@ Emita uma aviso com o comando [alert](https://developer.mozilla.org/en-US/docs/W
 
 ```js
 `${newName} is already added to phonebook`
-// `${newName} já foi adicionado(a) à lista telefônica!`
 ```
 
 Se a variável <em>newName</em> contiver o valor <i>Arto Hellas</i>, a expressão template string retornará a string:
@@ -500,11 +487,11 @@ O mesmo pode ser feito de um "jeito mais Java" usando o operador de soma (+):
 newName + ' is already added to phonebook'
 ```
 
-Template strings é a opção mais idiomática, além de que seu uso é o sinal que representa um verdadeiro profissional JavaScript.
+Template strings é a opção mais idiomática, além de que seu uso é o indício de um verdadeiro profissional JavaScript.
 
 <h4>2.8: The Phonebook — 3º passo</h4>
 
-Expanda sua aplicação permitindo com que os usuários adicionem números de telefone à lista telefônica. Você precisará adicionar um segundo elemento de <i>entrada</i> (input) ao formulário (junto com seu próprio gerenciador de evento):
+Expanda sua aplicação permitindo que os usuários adicionem números de telefone à lista telefônica. Você precisará adicionar um segundo elemento de <i>entrada</i> (input) ao formulário (junto com seu próprio gerenciador de evento):
 
 ```js
 <form>
@@ -526,7 +513,7 @@ Implemente um campo de pesquisa que possa ser usado para filtrar a lista de pess
 
 Você pode implementar o campo de pesquisa como um elemento <i>input</i> que é colocado fora do formulário HTML. A lógica de filtragem mostrada na imagem é <i>case insensitive</i>, o que significa que se você pesquisar por <i>arto</i>, também há o retorno de resultados que contêm "Arto" com o A maiúsculo.
 
-**N.B.:** Quando se está trabalhando em uma nova funcionalidade, é útil inserir em sua aplicação um "código de teste" — como alguns dados fantasiosos de pessoas — desta forma:
+**Obs.:** Quando se está trabalhando em uma nova funcionalidade, é útil inserir em sua aplicação um "código de teste" — como alguns dados fantasiosos de pessoas — desta forma:
 
 ```js
 const App = () => {
@@ -575,6 +562,6 @@ const App = () => {
 }
 ```
 
-**N.B.**: Você pode ter problemas neste exercício se definir seus componentes "no lugar errado". Agora, é definitivamente uma boa ideia revisar o capítulo da seção anterior: [Não defina Componentes dentro de Componentes](/ptbr/part1/um_estado_mais_complexo_e_depuracao_de_aplicacoes_react#nao-defina-componentes-dentro-de-componentes).
+**Obs.:**: Você pode ter problemas neste exercício se definir seus componentes "no lugar errado". Agora, é definitivamente uma boa ideia revisar o capítulo da seção anterior: [Não defina Componentes dentro de Componentes](/ptbr/part1/um_estado_mais_complexo_e_depuracao_de_aplicacoes_react#nao-defina-componentes-dentro-de-componentes).
 
 </div>
