@@ -562,6 +562,6 @@ const App = () => {
 }
 ```
 
-**Obs.:**: Você pode ter problemas neste exercício se definir seus componentes "no lugar errado". Agora, é definitivamente uma boa ideia revisar o capítulo da seção anterior: [Não defina Componentes dentro de Componentes](/ptbr/part1/um_estado_mais_complexo_e_depuracao_de_aplicacoes_react#nao-defina-componentes-dentro-de-componentes).
+**Obs.:** Você pode ter problemas neste exercício se definir seus componentes "no lugar errado". Agora, é definitivamente uma boa ideia revisar o capítulo da seção anterior: [Não defina Componentes dentro de Componentes](/ptbr/part1/um_estado_mais_complexo_e_depuracao_de_aplicacoes_react#nao-defina-componentes-dentro-de-componentes).
 
 </div>
