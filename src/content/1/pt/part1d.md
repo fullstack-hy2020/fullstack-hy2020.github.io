@@ -1023,7 +1023,7 @@ const App = (props) => {
 Usar o componente <i>Botao</i> é simples, embora tenhamos que nos certificar de usar os nomes corretos de atributo ao passar props para o componente.
 
 ![captura de tela do código de nomes de atributos corretos](../../images/1/12e.png)
-_Nota de tradução: ao longo do texto, apresentamos os códigos contendo termos traduzidos para o português, os quais não aparecem na imagem acima, pois esta traz o código escrito com os termos em inglês._
+<i>Nota dos tradutores: ao longo do texto, apresentamos os códigos contendo termos traduzidos para o português, os quais não aparecem na imagem acima, pois esta traz o código escrito com os termos em inglês.</i>
 
 ### Não defina Componentes dentro de Componentes
 
@@ -1139,7 +1139,7 @@ Se e <i>quando</i> você encontrar uma mensagem de erro
 
 lembre-se do que foi explicado [aqui](/ptbr/part1/introducao_a_biblioteca_react#nao-renderize-objetos).
 
-_**Obs.:** o conteúdo dos exercícios foram deixados no idioma original da tradução (inglês) por questões de conveniência, visto a revisão que os mantenedores do curso devem fazer no código enviado ao sistema de avaliação da Universidade de Helsinque. Desta forma, escreva suas aplicações utilizando os mesmos termos usados nas variáveis, componentes, etc que estão em inglês._
+<i>**Obs.:** o conteúdo dos exercícios foram deixados no idioma original da tradução (inglês) por questões de conveniência, visto a revisão que os mantenedores do curso devem fazer no código enviado ao sistema de avaliação da Universidade de Helsinque. Desta forma, escreva suas aplicações utilizando os mesmos termos usados nas variáveis, componentes, etc que estão em inglês.</i>
 
 <h4> 1.6: unicafe — 1º passo</h4>
 
