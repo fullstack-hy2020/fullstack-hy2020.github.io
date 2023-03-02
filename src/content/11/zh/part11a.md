@@ -28,7 +28,7 @@ lang: zh
  我们已经使用GitHub来存储我们的源代码，但当我们在一个有更多开发者的团队中工作时，会发生什么？
 
 <!-- Many problems may arise when several developers are involved. The software might work just fine on <i>my computer</i>, but maybe some of the other developers are using a different operating system or different library versions. It is not uncommon that a code works just fine in one developer's machine but another developer can not even get it started. This is often called the "works on my machine" problem.-->
- 当几个开发人员参与时，可能会出现许多问题。该软件可能在<i>我的电脑上工作得很好，但也许其他一些开发者使用的是不同的操作系统或不同的库版本。一个代码在一个开发者的机器上工作得很好，但另一个开发者甚至无法启动它，这种情况并不罕见。这通常被称为 "在我的机器上工作 "的问题。
+ 当几个开发人员参与时，可能会出现许多问题。该软件可能在<i>我的电脑上</i>工作得很好，但也许其他一些开发者使用的是不同的操作系统或不同的库版本。一个代码在一个开发者的机器上工作得很好，但另一个开发者甚至无法启动它，这种情况并不罕见。这通常被称为 "在我的机器上工作 "的问题。
 
 <!-- There are also more involved problems. If two developers are both working on changes and they haven't decided on a way to deploy to production, whose changes get deployed? How would it be possible to prevent one developer's changes from overwriting another's?-->
  也有一些更复杂的问题。如果两个开发者都在做修改，而他们还没有决定如何部署到生产中，那么谁的修改会被部署？怎样才能防止一个开发者的修改覆盖另一个开发者的修改？
@@ -58,7 +58,7 @@ lang: zh
 #### Pull request
 
 <!-- In GitHub merging a branch back to the main branch of software is quite often happening using a mechanism called [pull request](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/about-pull-requests), where the developer who has done some changes is requesting the changes to be merged to the main branch. Once the pull request, or PR as it's often called, is made or <i>opened</i>, another developer checks that all is ok and <i>merges</i> the PR.-->
- 在GitHub中，将一个分支合并到软件的主干分支，通常是通过一个叫做[pull request](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/about-pull-requests)的机制实现的，在这个机制中，做了一些修改的开发者要求将这些修改合并到主干分支。一旦提出了拉动请求，也就是通常所说的PR，或者<i>打开了<i>，另一个开发者就会检查是否一切正常，然后<i>合并</i>PR。
+ 在GitHub中，将一个分支合并到软件的主干分支，通常是通过一个叫做[pull request](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/about-pull-requests)的机制实现的，在这个机制中，做了一些修改的开发者要求将这些修改合并到主干分支。一旦提出了拉动请求，也就是通常所说的PR，或者<i>打开了</i>，另一个开发者就会检查是否一切正常，然后<i>合并</i>PR。
 
 <!-- If you have proposed changes to the material of this course, you have already made a pull request!-->
  如果你对本课程的材料提出了修改意见，你就已经提出了一个拉动请求!
@@ -183,7 +183,7 @@ lang: zh
  - 如何在点击按钮时进行部署，或者在一个分支合并到主分支时自动部署？
 
 <!-- There even exists scientific evidence on the numerous benefits the usage of CI/CD has. According to a large study reported in the book [Accelerate: The Science of Lean Software and DevOps: Building and Scaling High Performing Technology Organizations](https://itrevolution.com/book/accelerate/), the use of CI/CD correlate heavily with organizational success (e.g. improves profitability and product quality, increases market share, shortens the time to market). CI/CD even makes developers happier by reducing their burnout rate. The results summarized in the book are also reported in scientific articles such as [this](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2681909).-->
- 甚至有科学证据表明CI/CD的使用有很多好处。根据《加速》一书中报告的一项大型研究。The Science of Lean Software and DevOps: Building and Scaling High Performing Technology Organizations](https://itrevolution.com/book/accelerate/)，CI/CD的使用与组织的成功有很大关系（例如，提高利润率和产品质量，增加市场份额，缩短上市时间）。CI/CD甚至通过减少开发人员的倦怠率而使他们更快乐。书中总结的结果在科学文章中也有报道，如[这个](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2681909)。
+ 甚至有科学证据表明CI/CD的使用有很多好处。根据[《加速》](https://itrevolution.com/book/accelerate/)一书中报告的一项大型研究。，CI/CD的使用与组织的成功有很大关系（例如，提高利润率和产品质量，增加市场份额，缩短上市时间）。CI/CD甚至通过减少开发人员的倦怠率而使他们更快乐。书中总结的结果在科学文章中也有报道，如[这个](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2681909)。
 #### Documented behavior
 
 <!-- There's an old joke that a bug is just an "undocumented feature". We'd like to avoid that. We'd like to avoid any situations where we don't know the exact outcome. For example, if we depend on a label on a PR to define whether something is a "major", "minor" or "patch" release (we'll cover the meanings of those terms later), then it's important that we know what happens if a developer forgets to put a label on their PR. What if they put a label on after the build/test process has started? What happens if the developer changes the label mid-way through, which one is the one that actually releases?-->

@@ -236,7 +236,7 @@ store.dispatch(createNote('combineReducers forms one reducer from many simple re
 
 
 <!-- At this point it is good to become aware of a tiny but important detail. If we add a console log statement <i>to the beginning of both reducers</i>:-->
- 在这一点上，最好能意识到一个微小但重要的细节。如果我们在两个还原器的开头添加一个控制台日志语句<i>，那么。
+ 在这一点上，最好能意识到一个微小但重要的细节。如果我们<i>在两个还原器的开头</i>添加一个控制台日志语句，那么。
 
 ```js
 const filterReducer = (state = 'ALL', action) => {

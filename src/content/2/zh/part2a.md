@@ -325,9 +325,9 @@ const result = notes.map(note => note.id)
 console.log(result)
 ```
 
-<i>[1, 2, 3]</i>  will be printed to the console.
+<!-- <i>[1, 2, 3]</i>  will be printed to the console. -->
 
-<i>[1, 2, 3]</i> 会打印出来
+<i>[1, 2, 3]</i> 会被打印出来
 
 <!--  _map_ always creates a new array, the elements of which have been created from the elements of the original array by <i>mapping</i>: using the function given as a parameter to the _map_ method.-->
  _map_总是创建一个新的数组，其中的元素是通过<i>mapping</i>从原始数组的元素中创建的：原始值作为_map_方法函数的参数。
@@ -374,9 +374,8 @@ notes.map(note =>
 它生成一个<i>li</i>标签，包含每个笔记对象的笔记内容。
 
 <!-- Because the function parameter passed to the _map_ method --->
- Because the function parameter passed to the _map_ method -
 
-因为函数参数是传递给 _map_ 方法：
+因为函数参数是传递给 _map_ 方法 - 
 
 ```js
 note => <li key={note.id}>{note.content}</li>
@@ -752,7 +751,7 @@ App
  你还不需要练习的总和。
 
 <!-- The application must work <i>regardless of the number of parts a course has</i>, so make sure the application works if you add or remove parts of a course.-->
-<i> 无论课程有多少部分，应用都必须工作<i>，所以要确保在你增加或删除课程的部分时，应用能够工作。
+<i> 无论课程有多少部分，应用都必须工作</i>，所以要确保在你增加或删除课程的部分时，应用能够工作。
 
 <!-- Ensure that the console shows no errors!-->
 确保控制台没有显示错误!

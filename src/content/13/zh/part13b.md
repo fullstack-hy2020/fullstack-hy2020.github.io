@@ -967,7 +967,7 @@ WHERE "note". "important" = true AND "note". "content" LIKE '%database%';
 ```
 
 <!-- There is still a beautiful flaw in our application that we see if we make a request to http://localhost:3001/api/notes, i.e. we want all the notes, our implementation will cause an unnecessary WHERE in the query, which may (depending on the implementation of the database engine) unnecessarily affect the query efficiency:-->
- 在我们的应用中仍然有一个美丽的缺陷，我们看到如果我们向http://localhost:3001/api/notes，即我们想要所有的笔记，我们的实现将在查询中引起一个不必要的WHERE，这可能（取决于数据库引擎的实现）不必要地影响查询的效率。
+ 在我们的应用中仍然有一个美丽的缺陷，我们看到如果我们向 http://localhost:3001/api/notes 即我们想要所有的笔记，我们的实现将在查询中引起一个不必要的WHERE，这可能（取决于数据库引擎的实现）不必要地影响查询的效率。
 
 ```sql
 SELECT "note". "id", "note". "content", "note". "important", "note". "date", "user". "id" AS "user.id", "user". "name" AS "user.name"
@@ -1006,7 +1006,7 @@ router.get('/', async (req, res) => {
 ```
 
 <!-- If the request has search conditions e.g. http://localhost:3001/api/notes?search=database&important=true, a query containing WHERE is formed-->
- 如果请求有搜索条件，例如：http://localhost:3001/api/notes?search=database&important=true，就会形成一个包含WHERE的查询
+ 如果请求有搜索条件，例如：http://localhost:3001/api/notes?search=database&important=true 就会形成一个包含WHERE的查询
 
 ```sql
 SELECT "note". "id", "note". "content", "note". "important", "note". "date", "user". "id" AS "user.id", "user". "name" AS "user.name"
@@ -1015,7 +1015,7 @@ WHERE "note". "important" = true AND "note". "content" LIKE '%database%';
 ```
 
 <!-- If the request has no search conditions http://localhost:3001/api/notes, then the query does not have an unnecessary WHERE-->
- 如果请求没有搜索条件http://localhost:3001/api/notes，那么查询就没有不必要的WHERE。
+ 如果请求没有搜索条件 http://localhost:3001/api/notes 那么查询就没有不必要的WHERE。
 
 ```sql
 SELECT "note". "id", "note". "content", "note". "important", "note". "date", "user". "id" AS "user.id", "user". "name" AS "user.name"

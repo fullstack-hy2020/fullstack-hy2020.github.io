@@ -156,7 +156,7 @@ setTimeout(() => {
 在互联网上可以找到大量关于这个主题的额外材料。菲利普-罗伯茨（Philip Roberts）对这一主题的一个特别清晰的介绍是名为[事件循环到底是什么？](https://www.youtube.com/watch?v=8aGhZQkoFbQ)的主题演讲。
 
 <!-- In today's browsers, it is possible to run parallelized code with the help of so-called [web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers). The event loop of an individual browser window is, however, still only handled by a [single thread](https://medium.com/techtrument/multithreading-javascript-46156179cf9a).-->
-在今天的浏览器中，可以借助所谓的[网络工作者](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers)来运行并行化的代码。然而，单个浏览器窗口的事件循环仍然只能由一个[单线程]处理(https://medium.com/techtrument/multithreading-javascript-46156179cf9a)。
+在今天的浏览器中，可以借助所谓的[网络工作者](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers)来运行并行化的代码。然而，单个浏览器窗口的事件循环仍然只能由一个[单线程](https://medium.com/techtrument/multithreading-javascript-46156179cf9a)处理。
 
 ### npm
 
@@ -286,7 +286,7 @@ npm run server
  我们将在[课程的第三章节](/en/part3)中更加熟悉_npm_工具。
 
 <!-- **NB** The previously started json-server must be terminated before starting a new one; otherwise there will be trouble:-->
- **NB* 在启动新的json-server之前，必须先终止之前启动的json-server；否则会有麻烦。
+ **NB** 在启动新的json-server之前，必须先终止之前启动的json-server；否则会有麻烦。
 
 ![](../../images/2/15b.png)
 
