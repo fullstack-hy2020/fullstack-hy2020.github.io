@@ -7,7 +7,7 @@ lang: ptbr
 
 <div class="content">
 
-Vamos focar no back-end nesta parte: ou seja, na implementação de funcionalidades no lado do servidor da pilha.
+Vamos focar no back-end nesta parte: ou seja, na implementação de funcionalidades no lado do servidor.
 
 Estaremos construindo nosso back-end utilizando [NodeJS](https://nodejs.org/en/), que é um ambiente de execução JavaScript baseado no motor JavaScript [Chrome V8](https://developers.google.com/v8/) do Google.
 
@@ -17,7 +17,7 @@ Como mencionado na [Parte 1](/ptbr/part1/java_script), os navegadores ainda não
 
 Nosso objetivo é implementar um back-end que funcione com a aplicação de notas da [Parte 2](/ptbr/part2/). No entanto, vamos começar com o básico implementando um clássico programa "Olá, mundo!".
 
-**Note** que nem todas as aplicações e exercícios nesta parte são aplicações React, e não usaremos o utilitário <i>create-react-app</i> para inicializar o projeto para esta aplicação.
+**Observe** que nem todas as aplicações e exercícios nesta parte são aplicações React, e não usaremos o utilitário <i>create-react-app</i> para inicializar o projeto para esta aplicação.
 
 Já tínhamos mencionado o [npm](/ptbr/part2/obtendo_dados_do_servidor#npm) na Parte 2, que é uma ferramenta usada para gerenciar pacotes JavaScript. Na verdade, o npm é originário do ecossistema Node.
 
@@ -105,22 +105,22 @@ const app = http.createServer((request, response) => {
 
 const PORT = 3001
 app.listen(PORT)
-console.log(`Server running on port (Servidor em execução na porta) ${PORT}`)
+console.log(`Server running on port ${PORT}`)
 ```
 
 Uma vez que a aplicação está em execução, a seguinte mensagem é impressa no console:
 
 ```bash
-Server running on port (Servidor em execução na porta) 3001
+Server running on port 3001
 ```
 
 Podemos abrir nossa humilde aplicação no navegador entrando no endereço <http://localhost:3001>:
 
 ![captura de tela do programa 'hello world'](../../images/3/1.png)
 
-O servidor funciona da mesma maneira independentemente da última parte da URL. Além disso, o endereço <http://localhost:3001/foo/bar> exibirá o mesmo conteúdo.
+O servidor funciona da mesma maneira independentemente da última parte da URL, por isso o endereço <http://localhost:3001/foo/bar> exibirá o mesmo conteúdo.
 
-**N.B.:** se a porta 3001 já estiver sendo usada por alguma outra aplicação, iniciar o servidor resultará na seguinte mensagem de erro:
+**Obs.:** se a porta 3001 já estiver sendo usada por alguma outra aplicação, iniciar o servidor resultará na seguinte mensagem de erro:
 
 ```bash
 ➜  hello npm start
@@ -163,7 +163,7 @@ O próximo trecho em nosso código é assim:
 ```js
 const app = http.createServer((request, response) => {
   response.writeHead(200, { 'Content-Type': 'text/plain' })
-  response.end('Hello World (Olá, mundo!)')
+  response.end('Hello World')
 })
 ```
 
@@ -176,7 +176,7 @@ As últimas linhas vinculam o servidor http atribuído à variável _app_ para o
 ```js
 const PORT = 3001
 app.listen(PORT)
-console.log(`Server running on port (Servidor em execução na porta) ${PORT}`)
+console.log(`Server running on port ${PORT}`)
 ```
 
 O objetivo principal do servidor back-end neste curso é oferecer dados brutos em formato JSON para o front-end. Por esse motivo, vamos imediatamente alterar nosso servidor para retornar uma lista codificada de notas no formato JSON:
@@ -188,17 +188,17 @@ const http = require('http')
 let notes = [
   {
     id: 1,
-    content: 'HTML é fácil',
+    content: "HTML is easy",
     important: true
   },
   {
     id: 2,
-    content: 'O navegador só pode executar JavaScript',
+    content: "Browser can execute only JavaScript",
     important: false
   },
   {
     id: 3,
-    content: 'GET e POST são os métodos mais importantes do protocolo HTTP',
+    content: "GET and POST are the most important methods of HTTP protocol",
     important: true
   }
 ]
@@ -211,10 +211,10 @@ const app = http.createServer((request, response) => {
 
 const PORT = 3001
 app.listen(PORT)
-console.log(`Server running on port (Servidor em execução na porta) ${PORT}`)
+console.log(`Server running on port ${PORT}`)
 ```
 
-Vamos reiniciar o servidor (você pode encerrá-lo pressionando _Ctrl + C_ no console) e atualizar o navegador.
+Vamos reiniciar o servidor (você pode encerrá-lo pressionando _ctrl + c_ no console) e atualizar o navegador.
 
 O valor <i>application/json</i> no cabeçalho <i>Content-Type</i> informa o receptor de que os dados estão no formato JSON. O array _notes_ é transformado em JSON com o método <em>JSON.stringify(notes)</em>.
 
@@ -297,7 +297,7 @@ app.get('/api/notes', (request, response) => {
 
 const PORT = 3001
 app.listen(PORT, () => {
-  console.log(`Server running on port (Servidor em execução na porta) ${PORT}`)
+  console.log(`Server running on port ${PORT}`)
 })
 ```
 
@@ -318,7 +318,7 @@ app.get('/', (request, response) => {
 })
 ```
 
-A função de gerência de evento aceita dois parâmetros. O primeiro parâmetro [request](http://expressjs.com/en/4x/api.html#req) (requisitar) contém todas as informações da requisição HTTP, e o segundo parâmetro [response](http://expressjs.com/en/4x/api.html#res) (resposta) é usado para definir como a requisição é respondida.
+A função de gerência de evento aceita dois parâmetros. O primeiro parâmetro [request](http://expressjs.com/en/4x/api.html#req) (requisição) contém todas as informações da requisição HTTP, e o segundo parâmetro [response](http://expressjs.com/en/4x/api.html#res) (resposta) é usado para definir como a requisição é respondida.
 
 Em nosso código, a requisição é respondida usando o método [send](http://expressjs.com/en/4x/api.html#res.send) (enviar) do objeto _response_. Ao chamar o método, o servidor responde à requisição HTTP enviando uma resposta contendo a string <code>\<h1>Hello World!\</h1></code> que foi passada para o método _send_. Como o parâmetro é uma string, o express define automaticamente o valor do cabeçalho <i>Content-Type</i> como <i>text/html</i>. O código de status da resposta é definido como 200 por padrão.
 
@@ -358,7 +358,7 @@ O experimento acima foi feito no [node-repl](https://nodejs.org/docs/latest-v8.x
 
 ### nodemon
 
-Se fizermos alterações no código da aplicação, precisamos reiniciá-la para ver as alterações. Reiniciamos a aplicação primeiro encerrando-a pressionando _Ctrl + C_ e depois reiniciando-a. Se compararmos isso ao conveniente fluxo de trabalho em React, em que o navegador é recarregado automaticamente após as alterações serem feitas, parece até um pouco trabalhoso.
+Se fizermos alterações no código da aplicação, precisamos reiniciá-la para ver as alterações. Reiniciamos a aplicação primeiro encerrando-a pressionando _ctrl + c_ e depois reiniciando-a. Se compararmos isso ao conveniente fluxo de trabalho em React, em que o navegador é recarregado automaticamente após as alterações serem feitas, parece até um pouco trabalhoso.
 
 A solução para esse problema é o [nodemon](https://github.com/remy/nodemon):
 
@@ -462,7 +462,7 @@ Em alguns lugares (ver, por exemplo, [Richardson, Ruby: RESTful Web Services](ht
 
 Vamos expandir nossa aplicação para que ela ofereça uma interface REST para operar em notas individuais. Primeiro, vamos criar uma [rota](http://expressjs.com/en/guide/routing.html) para buscar um único recurso.
 
-O endereço único que usaremos para uma nota individual é da forma <i>notes/10</i>, onde o número no final refere-se ao número de identificação único da nota.
+O endereço único que usaremos para uma nota individual é na forma <i>notes/10</i>, onde o número no final refere-se ao número de identificação único da nota.
 
 Podemos definir [parâmetros](http://expressjs.com/en/guide/routing.html#route-parameters) para rotas no Express usando a sintaxe de dois-pontos:
 
@@ -612,7 +612,7 @@ Como as notas na aplicação são salvas apenas na memória, a lista de notas re
 
 ### O cliente REST do Visual Studio Code
 
-Se quiser o usar o Visual Studio Code, é possível utilizar o plugin VS Code [REST client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) (ou "cliente Rest") em vez do Postman.
+Se quiser o usar o Visual Studio Code, é possível utilizar o plugin VS Code [REST client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) em vez do Postman.
 
 É muito fácil usar o plugin depois de instalado. Criamos um diretório na raiz da aplicação chamado <i>requests</i>. Salvamos todas as requisições do cliente REST no diretório como arquivos que terminam com a extensão <i>.rest</i>.
 
@@ -626,14 +626,13 @@ Ao clicar no texto <i>Send Request</i>, o cliente REST executará a requisição
 
 ### O cliente HTTP do WebStorm
 
-Se em vez daqueles você usar o *IntelliJ WebStorm*, é possível fazer um procedimento semelhante com o Cliente HTTP integrado. Crie um novo arquivo com extensão `.rest` e o editor exibirá suas opções para criar e executar suas requisições. Saiba mais sobre o processo seguindo [este guia](https://www.jetbrains.com/help/webstorm/http-client-in-product-code-editor.html).
+Se você usar o *IntelliJ WebStorm*, é possível fazer um procedimento semelhante com o Cliente HTTP integrado. Crie um novo arquivo com extensão `.rest` e o editor exibirá suas opções para criar e executar suas requisições. Saiba mais sobre o processo seguindo [este guia](https://www.jetbrains.com/help/webstorm/http-client-in-product-code-editor.html).
 
 ### Recebendo dados
 
 Em seguida, vamos implementar a funcionalidade de adicionar novas notas ao servidor. É possível adicionar uma nota fazendo uma requisição HTTP POST para o endereço http://localhost:3001/api/notes e enviando todas as informações para a nova nota no [corpo](https://www.w3.org/Protocols/rfc2616/rfc2616-sec7.html#sec7) (body) da requisição em formato JSON.
 
-
-Para que possamos acessar os dados facilmente, precisamos da ajuda do [json-parser](https://expressjs.com/en/api.html) (grosso modo, "analisador de JSON") do Express, que é usado com o comando _app.use(express.json())_.
+Para que possamos acessar os dados facilmente, precisamos da ajuda do [json-parser](https://expressjs.com/en/api.html) do Express, que é usado com o comando _app.use(express.json())_.
 
 Vamos ativar o json-parser e implementar um gerenciador inicial para lidar com requisições HTTP POST:
 
@@ -661,7 +660,7 @@ Sem o json-parser, a propriedade <i>body</i> seria indefinida. O json-parser fun
 
 Por enquanto, a aplicação não faz nada com os dados recebidos, exceto imprimi-los no console e enviá-los de volta na resposta.
 
-Antes de implementarmos o restante da lógica da aplicação, vamos verificar com o Postman se os dados são recebidos pelo servidor. Além de definir a URL e o tipo de requisição no Postman, também temos que definir os dados enviados no <i>body</i>:
+Antes de implementarmos o restante da lógica da aplicação, vamos verificar no Postman se os dados são recebidos pelo servidor. Além de definir a URL e o tipo de requisição no Postman, também temos que definir os dados enviados no <i>body</i>:
 
 ![postman - POST em api/notes com o conteúdo do POST](../../images/3/14new.png)
 
@@ -669,7 +668,7 @@ A aplicação imprime no console os dados que enviamos na requisição:
 
 ![terminal imprimindo o conteúdo provido no postman](../../images/3/15new.png)
 
-**N.B.:** <i>Mantenha o terminal visível o tempo todo enquanto a aplicação estiver sendo executada</i> quando estiver trabalhando no back-end. Graças ao Nodemon, quaisquer alterações que fizermos no código reiniciarão a aplicação. Se você prestar atenção no console, poderá identificar imediatamente os erros que ocorrem na aplicação:
+**Obs.:** <i>Mantenha o terminal visível o tempo todo enquanto a aplicação estiver sendo executada</i> quando estiver trabalhando no back-end. Graças ao Nodemon, quaisquer alterações que fizermos no código reiniciarão a aplicação. Se você prestar atenção no console, poderá identificar imediatamente os erros que ocorrem na aplicação:
 
 ![erro do nodemon: 'typing requre not defined'](../../images/3/16.png)
 
@@ -714,7 +713,7 @@ O Postman também permite que os usuários salvem requisições, mas a situaçã
 
 > **Observação importante**
 >
-> Às vezes, ao depurar, é possível que queira descobrir quais cabeçalhos foram definidos na requisição HTTP. Uma maneira de fazer isso é através do método [get](http://expressjs.com/en/4x/api.html#req.get) do objeto _request_, que pode ser usado para obter o valor de um único cabeçalho. O objeto _request_ também possui a propriedade <i>headers</i>, que contém todos os cabeçalhos de uma requisição específica.
+> Às vezes, ao depurar, é possível que você queira descobrir quais cabeçalhos foram definidos na requisição HTTP. Uma maneira de fazer isso é através do método [get](http://expressjs.com/en/4x/api.html#req.get) do objeto _request_, que pode ser usado para obter o valor de um único cabeçalho. O objeto _request_ também possui a propriedade <i>headers</i>, que contém todos os cabeçalhos de uma requisição específica.
 >
 
 > Podem ocorrer problemas com o cliente REST do VS Code se você adicionar acidentalmente uma linha vazia entre a linha superior e a linha que especifica os cabeçalhos HTTP. Nessa situação, o cliente REST interpreta como se todos os cabeçalhos estivessem vazios, o que faz com que o servidor back-end não saiba que os dados que recebeu estão no formato JSON.
@@ -756,7 +755,7 @@ app.post('/api/notes', (request, response) => {
 
   if (!body.content) {
     return response.status(400).json({ 
-      error: 'content missing' // "conteúdo em falta"
+      error: 'content missing' 
     })
   }
 
@@ -779,7 +778,7 @@ Se os dados recebidos estiverem faltando um valor para a propriedade <i>content<
 ```js
 if (!body.content) {
   return response.status(400).json({ 
-    error: 'content missing' // "conteúdo em falta"
+    error: 'content missing' 
   })
 }
 ```
@@ -793,7 +792,7 @@ Se estiver faltando a propriedade <i>important</i>, definimos o valor padrão co
 important: body.important || false,
 ```
 
-Se os dados salvos na variável _body_ tiverem a propriedade <i>important</i>, a expressão avaliará para o valor dela. Se a propriedade não existir, a expressão avaliará para <i>false</i>, que é definido no lado direito das barras verticais.
+Se os dados salvos na variável _body_ tiverem a propriedade <i>important</i>, a expressão resultará no seu valor. Se a propriedade não existir, a expressão resultará em <i>false</i>, que é definido no lado direito das barras verticais.
 
 > Sendo mais preciso, quando a propriedade <i>important</i> é <i>false</i>, então a expressão <em>body.important || false</em> retornará de fato  o <i>false</i> do lado direito...
 
@@ -805,7 +804,7 @@ O código para o estado atual da aplicação é especificado na branch [part3-1]
 
 Se você clonar o projeto, execute o comando _npm install_ antes de iniciar a aplicação com _npm start_ ou _npm run dev_.
 
-Mais uma coisa antes de prosseguirmos para os exercícios. A função para gerar IDs se parece atualmente com isso:
+Mais uma coisa antes de prosseguirmos para os exercícios. A função para gerar IDs é esta:
 
 ```js
 const generateId = () => {
@@ -830,9 +829,9 @@ O que exatamente está acontecendo nessa linha de código? <em>notes.map(n => n.
 
 ### Exercícios 3.1 a 3.6
 
-**N.B.:** É recomendado fazer todos os exercícios desta parte em um novo repositório Git separado e colocar o código-fonte na raiz do repositório. Caso contrário, você terá problemas no exercício 3.10.
+**Obs.:** É recomendado fazer todos os exercícios desta parte em um novo repositório Git separado e colocar o código-fonte na raiz do repositório. Caso contrário, você terá problemas no exercício 3.10.
 
-**N.B.:** Como este não é um projeto de front-end e não estamos trabalhando com React, a aplicação <strong>não é criada</strong> com "create-react-app". Inicializa-se este projeto com o comando <em>npm init</em> que foi demonstrado anteriormente nesta parte do material.
+**Obs.:** Como este não é um projeto de front-end e não estamos trabalhando com React, a aplicação <strong>não é criada</strong> com "create-react-app". Inicializa-se este projeto com o comando <em>npm init</em> que foi demonstrado anteriormente nesta parte do material.
 
 **Forte Recomendação:** quando você estiver trabalhando com código back-end, sempre fique de olho no que está acontecendo no terminal que está executando sua aplicação.
 
@@ -906,13 +905,14 @@ Gere um novo id para as entradas da lista telefônica com a função [Math.rando
 #### 3.6: Phonebook backend — 6º passo
 
 Implemente o gerenciamento de erro (error handling) para a criação de novas entradas. A requisição não pode ser bem-sucedida se:
+
 - O nome ou o número estão faltando; e se
 - O nome já existe na lista telefônica.
 
 Responda a requisições como essas com o código de status apropriado e envie também informações que explicam o motivo do erro, como por exemplo:
 
 ```js
-{ error: 'name must be unique' } // "o nome deve ser único"
+{ error: 'name must be unique' }
 ```
 
 </div>
@@ -952,7 +952,7 @@ O [json-parser](https://expressjs.com/en/api.html) do Express que usamos anterio
 
 <i>Middleware</i> são funções que podem ser usadas para lidar com objetos de _request_ e _response_.
 
-O json-parser que usamos anteriormente pega os dados brutos das requisições armazenadas no objeto _request_, decompõe-nos em um objeto JavaScript e os atribui ao objeto _request_ como uma nova propriedade <i>body</i>.
+O json-parser que usamos anteriormente pega os dados brutos das requisições armazenadas no objeto _request_, os decompõe em um objeto JavaScript e os atribui ao objeto _request_ como uma nova propriedade <i>body</i>.
 
 Na prática, é possível usar vários <i>middlewares</i> ao mesmo tempo. Quando você tem mais de um, eles são executados um por um na ordem em que foram adicionados no Express.
 
@@ -1019,6 +1019,7 @@ Note que registrar dados, mesmo no console, pode ser perigoso, pois pode conter 
 Este exercício pode ser bastante desafiador, embora a solução não exija muito código.
 
 Este exercício pode ser concluído de várias maneiras diferentes. Uma das soluções possíveis utiliza essas duas técnicas:
+
 - [criando novos tokens](https://github.com/expressjs/morgan#creating-new-tokens)
 - [JSON.stringify](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
 

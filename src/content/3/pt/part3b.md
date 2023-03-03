@@ -44,7 +44,7 @@ host: example.com
 port: 80
 ```
 
-Quando você visita um site (ou seja, <http://catwebsites.com>), o navegador emite uma requisição para o servidor em que o site (catwebsites.com) está hospedado. A resposta enviada pelo servidor é um arquivo HTML que pode conter uma ou mais referências a recursos/ativos externos hospedados no mesmo servidor que <i>catwebsites.com</i> está hospedado ou em um site diferente. Quando o navegador vê referência(s) a uma URL no HTML de origem, ele emite uma requisição. Se a requisição for feita usando a URL da qual o HTML de origem foi obtido, o navegador processa a resposta sem problemas. No entanto, se o recurso for obtido usando uma URL que não compartilha a mesma origem (esquema, host, porta) que o HTML de origem, o navegador deverá verificar o cabeçalho de resposta _Access-Control-Allow-origin_ (CORS). Se ele contiver _*_ ou a URL do HTML de origem, o navegador processará a resposta, caso contrário, o navegador se recusará a processá-la e lançará um erro.
+Quando você visita um site (ou seja, <http://catwebsites.com>), o navegador emite uma requisição para o servidor em que o site (catwebsites.com) está hospedado. A resposta enviada pelo servidor é um arquivo HTML que pode conter uma ou mais referências a recursos/ativos externos hospedados no mesmo servidor que <i>catwebsites.com</i> está hospedado ou em um site diferente. Quando o navegador vê referência(s) a uma URL no HTML de origem, ele emite uma requisição. Se a requisição for feita usando a URL na qual o HTML de origem foi obtido, o navegador processa a resposta sem problemas. No entanto, se o recurso for obtido usando uma URL que não compartilha a mesma origem (esquema, host, porta) que o HTML de origem, o navegador deverá verificar o cabeçalho de resposta _Access-Control-Allow-origin_ (CORS). Se ele contiver _*_ ou a URL do HTML de origem, o navegador processará a resposta, caso contrário, o navegador se recusará a processá-la e lançará um erro.
   
 A <strong>Política de Mesma Origem</strong> é um mecanismo de segurança implementado pelos navegadores para impedir sequestro de sessão (session hijacking), entre outras vulnerabilidades de segurança.
 
@@ -85,13 +85,13 @@ A aplicação React sendo executada no navegador agora obtém os dados do servid
 
 ### A Aplicação na Internet
 
-Agora que toda a pilha (stack) está pronta, vamos mover nossa aplicação para a internet.
+Agora que toda <i>stack</i> está pronta, vamos mover nossa aplicação para a internet.
 
 Há um número cada vez maior de serviços que podem ser usados para hospedar uma aplicação na internet. Serviços voltados a desenvolvedores (developer-friendly services), como o PaaS (Platform as a Service [Plataforma como Serviço]), cuidam da instalação do ambiente de execução (Node.js, por exemplo) e também podem fornecer vários serviços, como bancos de dados.
 
 Durante uma década, [Heroku](http://heroku.com) dominou a cena PaaS. Infelizmente, o plano gratuito do Heroku acabou em 27 de novembro de 2022. Muitos desenvolvedores ficaram tristes com isso, especialmente estudantes. O Heroku ainda é uma opção viável se você estiver disposto a gastar algum dinheiro. Eles também têm [um programa para estudantes](https://www.heroku.com/students) que fornece alguns créditos gratuitos.
 
-Agora estamos apresentando dois serviços: [Fly.io](https://fly.io/) e [Render](https://render.com/), onde ambos têm um plano gratuito (limitado). O Fly.io é nosso serviço de hospedagem "oficial", pois pode ser usado com certeza também nas Partes 11 e 13 do curso. O Render será bom pelo menos para as outras partes deste curso.
+Agora estamos apresentando dois serviços: [Fly.io](https://fly.io/) e [Render](https://render.com/), ambos possuem um plano gratuito (limitado). O Fly.io é nosso serviço de hospedagem "oficial", pois pode ser usado com certeza também nas Partes 11 e 13 do curso. O Render será bom pelo menos para as outras partes deste curso.
 
 Observe que, apesar de usar apenas o plano gratuito, o Fly.io <i>pode</i> exigir que você insira suas informações de cartão de crédito. No momento, o Render pode ser usado sem um cartão de crédito.
 
@@ -113,7 +113,7 @@ Tanto para o Fly.io quanto para o Render, precisamos mudar, no final do arquivo 
 ```js
 const PORT = process.env.PORT || 3001  // highlight-line
 app.listen(PORT, () => {
-  console.log(`Server running on port (Servidor em execução na porta) ${PORT}`)
+  console.log(`Server running on port ${PORT}`)
 })
 ```
 
@@ -184,15 +184,15 @@ fly deploy
 
 Um comando particularmente importante é _fly logs_. Este comando pode ser usado para visualizar os logs do servidor. É melhor manter os logs sempre visíveis!
 
-**Atenção:** Em alguns casos (a causa é até agora desconhecida) executar comandos Fly.io, especialmente no Windows WSL, causou problemas. Se o seguinte comando simplesmente travar...
+**Atenção:** Em alguns casos (a causa é até agora desconhecida) executar comandos Fly.io, especialmente no Windows WSL, causou problemas. Se o seguinte comando simplesmente travar:
 
 ```bash
 flyctl ping -o personal
 ```
 
-... seu computador não consegue, por algum motivo, se conectar ao Fly.io. Se isso acontecer com você, [aqui](https://github.com/fullstack-hy2020/misc/blob/master/fly_io_problem.md) encontra-se uma possível maneira de resolver o problema.
+seu computador não consegue, por algum motivo, se conectar ao Fly.io. Se isso acontecer com você, [aqui](https://github.com/fullstack-hy2020/misc/blob/master/fly_io_problem.md) encontra-se uma possível maneira de resolver o problema.
 
-Se a saída do comando abaixo se parecer com isto...
+Se a saída do comando abaixo se parecer com isto:
 
 ```bash
 $ flyctl ping -o personal
@@ -202,7 +202,7 @@ $ flyctl ping -o personal
 ...
 ```
 
-... então não há problemas de conexão!
+então não há problemas de conexão!
 
 #### Render
 
@@ -210,38 +210,38 @@ Este serviço pressupõe que o [login](https://dashboard.render.com/) tenha sido
 
 Depois de fazer login, vamos criar um novo "Web Service":
 
-![](../../images/3/r1.png)
+![imagem mostrando a opção para criar um novo Web Service](../../images/3/r1.png)
 
 O repositório da aplicação é então conectado ao Render:
 
-![](../../images/3/r2.png)
+![imagem mostrando o repositório da aplicação no Render](../../images/3/r2.png)
 
 A conexão parece exigir que o repositório da aplicação seja público.
 
 A seguir, definiremos as configurações básicas. Se a aplicação <i>não</i> estiver na raiz do repositório, o <i>diretório raiz</i> precisa receber um valor apropriado:
 
-![](../../images/3/r3.png)
+![imagem mostrando o campo Root Directory como sendo opcional](../../images/3/r3.png)
 
 Depois disso, a aplicação é iniciada no Render. O painel informa o estado da aplicação e a URL onde ela está sendo executada:
 
-![](../../images/3/r4.png)
+![no canto esquerdo superior da imagem é possível verificar o estado da aplicação e a sua URL](../../images/3/r4.png)
 
-De acordo com a [documentação](https://render.com/docs/deploys), cada confirmação no GitHub deve redesenhar a aplicação. Por alguma razão, isso nem sempre funciona.
+De acordo com a [documentação](https://render.com/docs/deploys), cada confirmação no GitHub deve fazer o redeploy (re-implantar) a aplicação. Por alguma razão, isso nem sempre funciona.
 
-Felizmente, também é possível redesenhar manualmente a aplicação:
+Felizmente, também é possível fazer o redeploy da aplicação manualmente:
 
-![](../../images/3/r5.png)
+![menu com a opção para fazer o deploy novamente em destaque](../../images/3/r5.png)
 
 Também é possível ver os logs da aplicação no painel:
 
-![](../../images/3/r7.png)
+![Guia logs no canto esquerdo em destaque. No lado direito, os los da aplicação](../../images/3/r7.png)
 
 Observamos nos logs que a aplicação foi iniciada na porta 10000. O código da aplicação obtém a porta correta por meio da variável de ambiente PORT, portanto, é essencial que o arquivo <i>index.js</i> tenha sido atualizado da seguinte maneira:
 
 ```js
 const PORT = process.env.PORT || 3001  // highlight-line
 app.listen(PORT, () => {
-  console.log(`Server running on port (Servidor em execução na porta) ${PORT}`)
+  console.log(`Server running on port ${PORT}`)
 })
 ```
 
@@ -249,7 +249,7 @@ app.listen(PORT, () => {
 
 Até agora, rodamos o código do React em <i>modo de desenvolvimento</i>. No modo de desenvolvimento, a aplicação é configurada para exibir mensagens de erro claras, renderizar imediatamente as mudanças de código para o navegador, e assim por diante.
 
-Quando a aplicação é implantada (deployed), é necessário criar um [build de produção](https://reactjs.org/docs/optimizing-performance.html#use-the-production-build) (grosso modo, "versão de produção" ou "compilação de produção" ou "estrutura de produção") ou uma versão da aplicação otimizada para produção.
+Quando a aplicação é implantada (deployed), é necessário criar um [build de produção](https://reactjs.org/docs/optimizing-performance.html#use-the-production-build),  ou seja, uma versão da aplicação otimizada para produção.
 
 Um build de produção de aplicações gerado com <i>create-react-app</i> pode ser criado com o comando [npm run build](https://github.com/facebookincubator/create-react-app#npm-run-build-or-yarn-build).
 
@@ -413,7 +413,7 @@ O script _npm run build:ui_ constrói o front-end e copia a versão de produçã
 
 Observe que os caminhos de diretório no script <i>build:ui</i> dependem da localização dos repositórios no sistema de arquivos.
 
->**N.B.:** No Windows, scripts npm são executados em cmd.exe como o shell padrão que não oferece suporte a comandos bash. Para que os comandos bash acima funcionem, é possível alterar o shell padrão para Bash (na instalação padrão do Git para Windows) da seguinte forma:
+>**Obs.:** No Windows, scripts npm são executados em cmd.exe como o shell padrão que não oferece suporte a comandos bash. Para que os comandos bash acima funcionem, é possível alterar o shell padrão para Bash (na instalação padrão do Git para Windows) da seguinte forma:
 
 ```md
 npm config set script-shell "C:\\Program Files\\git\\bin\\bash.exe"
@@ -423,7 +423,7 @@ Outra opção é usar o [shx](https://www.npmjs.com/package/shx).
 
 ### Proxy
 
-As alterações no front-end fizeram com que não funcionasse mais no modo de desenvolvimento (quando iniciado com o comando _npm start_), pois a conexão com o back-end não funciona.
+As alterações no front-end fizeram com que ele não funcionasse mais no modo de desenvolvimento (quando iniciado com o comando _npm start_), pois a conexão com o back-end não funciona.
 
 ![ferramentas do desenvolvedor mostrando um erro 404 ao obter notas](../../images/3/32new.png)
 
@@ -485,11 +485,15 @@ Teste o recém-implantado back-end com um navegador, com o Postman ou com o clie
 
 Crie um README.md na raiz do seu repositório e adicione um link de acesso à sua aplicação online.
 
+**OBSERVAÇÃO** como dito, o deploy do BACKEND deve ser feito em um serviço de nuvem. Se você estiver usando o Fly.io, o comando deve ser executado no diretório raiz do backend (que é o mesmo diretório onde está o arquivo do backend chamado package.json). No caso de estar usando o Render, o backend deve estar na raiz do seu repositório.
+
+Você NÃO deve fazer o deploy do frontend diretamente nesta parte. O deploy está sendo realizado apenas com o repositório do backend ao longo de toda esta parte do curso.
+
 #### 3.11: Phonebook backend — 11º passo
 
 Gere um build de produção do seu front-end e adicione-o à aplicação na internet utilizando o método introduzido nesta parte.
 
-**N.B.:** Se você usar o Render, certifique-se de que o diretório <i>build</i> não esteja no <i>gitignored</i>.
+**Obs.:** Se você usar o Render, certifique-se de que o diretório <i>build</i> não esteja no <i>gitignored</i>.
 
 Certifique-se também de que o front-end ainda funcione localmente (em modo de desenvolvimento quando iniciado com o comando _npm start_).
 

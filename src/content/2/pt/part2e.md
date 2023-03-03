@@ -7,7 +7,7 @@ lang: ptbr
 
 <div class="content">
 
-Está bastante modesta a aparência atual da nossa aplicação. No [exercício 0.2](/ptbr/part0/fundamentos_de_aplicacoes_web#exercicios-0-1-a-0-6), o objetivo era passar pelo tutorial [CSS da Mozilla](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics).
+A aparência atual da nossa aplicação está bastante modesta. No [exercício 0.2](/ptbr/part0/fundamentos_de_aplicacoes_web#exercicios-0-1-a-0-6), o objetivo era passar pelo tutorial [CSS da Mozilla](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics).
 
 Vamos dar uma olhada em como podemos adicionar estilos a uma aplicação React. Existem várias maneiras diferentes de fazer isso e veremos os outros métodos mais tarde. Primeiro, adicionaremos o CSS à nossa aplicação da maneira antiga; em um único arquivo sem usar um [pré-processador CSS](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor) (embora isso não seja inteiramente verdade, como aprenderemos mais tarde).
 
@@ -34,7 +34,7 @@ Uma regra CSS pode conter um número arbitrário de propriedades. Vamos modifica
 ```css
 h1 {
   color: green;
-  font-style: italic; // highlight-line
+  font-style: italic;  // highlight-line
 }
 ```
 
@@ -57,7 +57,7 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-Vamos adicionar a seguinte regra à nossa folha de estilo (já que meu conhecimento em web design moderno elegante é próximo a zero, os estilos aqui adicionados não são pra fazer muito sentido):
+Vamos adicionar a seguinte regra à nossa folha de estilo (já que meu conhecimento em web design moderno elegante é próximo a zero, os estilos aqui adicionados não fazem muito sentido):
 
 ```css
 li {
@@ -69,7 +69,7 @@ li {
 
 Usar tipos de elementos para definir regras CSS é um tanto problemático. Se nossa aplicação contiver outras tags <i>li</i>, a mesma regra de estilo também será aplicada a elas.
 
-Se quisermos aplicar nosso estilo especificamente às notas, é melhor opção é usar [seletores de classe](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors).
+Se quisermos aplicar nosso estilo especificamente às notas, a melhor opção é usar [seletores de classe](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors).
 
 Em HTML comum, as classes são definidas como o valor do atributo <i>class</i>:
 
@@ -94,7 +94,7 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-Os seletores de classe são definidos com a sintaxe _.classname_:
+Os seletores de classe são definidos com a sintaxe _.className_:
 
 ```css
 .note {
@@ -132,11 +132,10 @@ Vamos adicionar um novo pedaço de estado chamado <i>errorMessage</i> ao compone
 
 ```js
 const App = () => {
-  const [notes, setNotes] = useState([])
+  const [notes, setNotes] = useState([]) 
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
   const [errorMessage, setErrorMessage] = useState('some error happened...') // highlight-line
-  //  'mensagemDeErro', 'defMensagemDeErro'        'aconteceu algum erro...'
 
   // ...
 
@@ -146,9 +145,9 @@ const App = () => {
       <Notification message={errorMessage} /> // highlight-line
       <div>
         <button onClick={() => setShowAll(!showAll)}>
-          show {showAll ? 'important' : 'all'}
+          show {showAll ? 'important' : 'all' }
         </button>
-      </div>
+      </div>      
       // ...
     </div>
   )
@@ -184,7 +183,6 @@ Agora estamos prontos para adicionar a lógica para exibir a mensagem de erro. V
         // highlight-start
         setErrorMessage(
           `Note '${note.content}' was already removed from server`
-          //`A nota '${note.content} já foi excluída do servidor'`
         )
         setTimeout(() => {
           setErrorMessage(null)
@@ -244,10 +242,7 @@ const Footer = () => {
   return (
     <div style={footerStyle}>
       <br />
-      <em>
-        Note app, Department of Computer Science, University of Helsinki 2023
-{/*Note app, Departamento de Ciências da Computação, Universidade de Helsinque 2023*/}
-      </em>
+      <em>Note app, Department of Computer Science, University of Helsinki 2022</em>
     </div>
   )
 }
@@ -262,7 +257,7 @@ const App = () => {
 
       <Notification message={errorMessage} />
 
-      // ...
+      // ...  
 
       <Footer /> // highlight-line
     </div>
@@ -274,7 +269,7 @@ Estilos inline possuem certas limitações. Por exemplo, não é possível usar 
 
 Estilos inline e algumas outras maneiras de adicionar estilos aos componentes React vão completamente contra a corrente das antigas convenções. Tradicionalmente, tem sido considerada a melhor prática separar completamente o CSS do conteúdo (HTML) e da funcionalidade (JavaScript). De acordo com essa antiga escola de pensamento, o objetivo era escrever o CSS, o HTML e o JavaScript em arquivos separados.
 
-A filosofia do React é, na verdade, o oposto polar disso. As aplicações maiores não pareciam escalar bem com os arquivos CSS, HTML e JavaScript separados, então React decidiu basear a divisão dessas partes ao longo das linhas das entidades funcionais lógicas da aplicação.
+A filosofia do React é, na verdade, o oposto disso. Como a separação de CSS, HTML e JavaScript em arquivos separados não parecia ter escalabilidade em aplicativos maiores, o React baseia a divisão do aplicativo ao longo das linhas de suas entidades funcionais lógicas.
 
 As unidades estruturais que compõem as entidades funcionais da aplicação são os componentes React. Um componente React define o HTML para estruturar o conteúdo, as funções JavaScript para determinar a funcionalidade e também o estilo do componente; tudo em um só lugar. Isso é para criar componentes individuais que sejam o mais independentes e reutilizáveis possível.
 
@@ -302,7 +297,7 @@ Corrija o problema de acordo com o exemplo mostrado em [promessas e erros](/ptbr
 
 ![mensagem de erro exibida na tela em vez do console - recurso complementar](../../images/2/28e.png)
 
-**Note** que mesmo se você gerenciar (handle) a exceção, a mensagem de erro ainda é impressa no console.
+**Observe** que mesmo se você gerenciar (handle) a exceção, a mensagem de erro ainda é impressa no console.
 
 </div>
 
@@ -310,7 +305,7 @@ Corrija o problema de acordo com o exemplo mostrado em [promessas e erros](/ptbr
 
 ### Algumas observações importantes
 
-Têm alguns exercícios mais desafiadores no final desta parte. Você pode pular os exercícios se eles forem muito complicados, pois nós voltaremos aos mesmos temas mais tarde; porém, vale a pena ler o conteúdo, de qualquer forma.
+Há alguns exercícios mais desafiadores no final desta parte. Você pode pular os exercícios se eles forem muito complicados, pois nós voltaremos aos mesmos temas mais tarde; porém, vale a pena ler o conteúdo, de qualquer forma.
 
 Fizemos uma coisa em nossa aplicação que "mascara" uma fonte muito típica de erro.
 
@@ -338,12 +333,12 @@ const App = () => {
 
 A aplicação quebra:
 
-![](../../images/2/31a.png)
+![console com erro de tipo: typerror cannot read properties of null](../../images/2/31a.png)
 
 A mensagem de erro fornece a razão e a localização do erro. O código que causou o problema é o seguinte:
 
 ```js
-  // "notesToShow" obtém o valor de "notes"
+  // notesToShow gets the value of notes
   const notesToShow = showAll
     ? notes
     : notes.filter(note => note.important)
@@ -378,7 +373,7 @@ O hook de efeito (effect hook) utiliza a função _setNotes_ para definir que _n
 ```
 
 No entanto, o problema é que o efeito é executado somente <i>após a primeira renderização</i>.
-E por conta de _notes_ ter o valor inicial _null_,...
+E por conta de _notes_ ter o valor inicial _null_:
 
 ```js
 const App = () => {
@@ -387,7 +382,7 @@ const App = () => {
   // ...
 ```
 
-... o código a seguir é executado na primeira renderização...
+o código a seguir é executado na primeira renderização:
 
 ```js
 notesToShow = notes
@@ -397,7 +392,7 @@ notesToShow = notes
 notesToShow.map(note => ...)
 ```
 
-... e isso faz com que a aplicação quebre, já que não podemos chamar o método _map_ no valor _null_.
+e isso faz com que a aplicação quebre, já que não podemos chamar o método _map_ no valor _null_.
 
 Não há erro quando definimos _notes_ para ser inicialmente um array vazio, já que é permitido chamar o método _map_ em um array vazio.
 
@@ -418,7 +413,7 @@ const App = () => {
       })
   }, [])
 
-  // não renderize nada se "notes" estiverem como "null"
+  // do not render anything if notes is still null
   // highlight-start
   if (!notes) { 
     return null 
@@ -459,20 +454,19 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 const App = () => {
-  const [value, setValue] = useState('') // ou "valor" e "defValor"
-  const [rates, setRates] = useState({}) // ou "taxas" e "defTaxas"
-  const [currency, setCurrency] = useState(null) // ou "moeda" e "defMoeda"
+  const [value, setValue] = useState('')
+  const [rates, setRates] = useState({})
+  const [currency, setCurrency] = useState(null)
 
   useEffect(() => {
-    console.log('effect run, currency is now (efeito rodando, a moeda agora é)', currency)
+    console.log('effect run, currency is now', currency)
 
     // skip if currency is not defined
-    // pule se a moeda não for definida
     if (currency) {
-      console.log('fetching exchange rates... (buscando as taxas de câmbio)')
+      console.log('fetching exchange rates...')
       axios
         .get(`https://open.er-api.com/v6/latest/${currency}`)
-        .then((response) => {
+        .then(response => {
           setRates(response.data.rates)
         })
     }
@@ -491,11 +485,11 @@ const App = () => {
     <div>
       <form onSubmit={onSearch}>
         currency: <input value={value} onChange={handleChange} />
-        {/* moeda */}
         <button type="submit">exchange rate</button>
-        {/* taxa de câmbio */}
       </form>
-      <pre>{JSON.stringify(rates, null, 2)}</pre>
+      <pre>
+        {JSON.stringify(rates, null, 2)}
+      </pre>
     </div>
   )
 }
@@ -503,27 +497,26 @@ const App = () => {
 
 A interface de usuário da aplicação possui um formulário, onde no campo de entrada é escrito o nome da moeda (currency) desejada. Se a moeda existir, a aplicação renderiza as taxas de câmbio da moeda inserida para outras moedas:
 
-![](../../images/2/32new.png)
+![Navegador exibindo taxas de câmbio com "eur" digitado e console dizendo "buscando as taxas de câmbio..."](../../images/2/32new.png)
 
-Quando o botão é clicado, a aplicação define o nome da moeda inserido no formulário para o estado _currency_.
+Quando o botão é clicado, a aplicação pega o nome da moeda inserido no formulário e faz o set no estado _currency_.
 
 Quando _currency_ recebe um novo valor, a aplicação busca suas taxas de câmbio da API na função de efeito:
 
 ```js
 const App = () => {
   // ...
-  const [currency, setCurrency] = useState(null) // ou "moeda" e "defMoeda"
+  const [currency, setCurrency] = useState(null)
 
   useEffect(() => {
-    console.log('effect run, currency is now (efeito rodando, a moeda agora é)', currency)
+    console.log('effect run, currency is now', currency)
 
     // skip if currency is not defined
-    // pule se a moeda não for definida
     if (currency) {
-      console.log('fetching exchange rates... (buscando as taxas de câmbio)')
+      console.log('fetching exchange rates...')
       axios
         .get(`https://open.er-api.com/v6/latest/${currency}`)
-        .then((response) => {
+        .then(response => {
           setRates(response.data.rates)
         })
     }
@@ -534,22 +527,21 @@ const App = () => {
 
 O hook useEffect agora tem _[currency]_ como segundo parâmetro. A função de efeito é, portanto, executada após a primeira renderização e <i>sempre</i> depois que a tabela que é definida no segundo parâmetro _[currency]_ muda. Ou seja, quando o estado _currency_ recebe um novo valor, o conteúdo da tabela muda e a função de efeito é executada.
 
-O efeito tem esta condição...
+O efeito tem esta condição:
 
 ```js
-if (currency) {
+if (currency) { 
   // exchange rates are fetched
-  // as taxas de câmbio são buscadas
 }
 ```
 
-... que impede a requisição das taxas de câmbio logo após a primeira renderização, quando a variável _currency_ ainda tem o valor inicial, ou seja, um valor nulo.
+que impede a requisição das taxas de câmbio logo após a primeira renderização, quando a variável _currency_ ainda tem o valor inicial, ou seja, um valor nulo.
 
 Portanto, se o usuário escrever, por exemplo, <i>eur</i> no campo de pesquisa, a aplicação usa a biblioteca Axios para fazer uma requisição HTTP GET ao endereço https://open.er-api.com/v6/latest/eur e armazena a resposta no estado _rates_.
 
 Quando o usuário inserir outro valor no campo de pesquisa, por exemplo, <i>usd</i>, a função de efeito é executada novamente e as taxas de câmbio da nova moeda são requisitadas da API.
 
-A forma apresentada aqui para fazer requisições à API pode parecer um tanto estranha.
+A forma apresentada aqui para fazer requisições à API pode parecer um pouco estranha.
 Esta aplicação em específico poderia ter sido completamente construída sem a necessidade de usar o hook useEffect, por meio de requisições feitas à API diretamente na função de gerência de envio do formulário:
 
 ```js
@@ -575,14 +567,15 @@ No entanto, existem situações em que essa técnica não funcionaria. Por exemp
 
 A API [https://restcountries.com](https://restcountries.com) fornece dados de diferentes países em um formato legível por máquina (machine-readable format), uma chamada API REST.
 
-Crie uma aplicação onde se possa ver os dados de vários países. A aplicação vai provavelmente obter os dados do endpoint (ponto de terminação) [all](https://restcountries.com/v3.1/all).
+<i>**Nota dos tradutores:** A API recebe consultas somente em inglês.</i>
+
+Crie uma aplicação onde se possa ver os dados de vários países. A aplicação vai provavelmente obter os dados do <i>endpoint</i> [all](https://restcountries.com/v3.1/all).
 
 A interface de usuário é muito simples. O país a ser exibido deve ser encontrado através de uma consulta em um campo de pesquisa.
 
-Se houver muitos (mais de 10) países que correspondam à consulta, é solicitado ao usuário que seja mais específico na consulta:
+Se houver muitos países (mais de 10) que correspondam à consulta, é solicitado ao usuário que seja mais específico na consulta:
 
 ![captura de tela com a resposta 'too many matches'](../../images/2/19b1.png)
-<i>Descrição da imagem: Muitas correspondências encontradas. Especifique outro filtro.</i>
 
 Se houver dez ou menos países, porém mais de um, todos os países que correspondem à consulta são exibidos:
 
@@ -592,9 +585,7 @@ Quando houver apenas um país que corresponda à consulta, os dados básicos do 
 
 ![captura de tela da bandeira e dos atributos adicionais](../../images/2/19c3.png)
 
-**N.B.**: Já é suficiente que sua aplicação funcione para a maioria dos países. Alguns países, como o <i>Sudan</i> (Sudão), podem ser difíceis de ajustar, já que o nome do país faz parte do nome de outro país, <i>South Sudan</i> (Sudão do Sul). Você não precisa se preocupar com esses casos extremos.
-
-**N.B.**: A API recebe consultas somente em inglês. (nota do tradutor)
+**Obs.:**: Já é suficiente que sua aplicação funcione para a maioria dos países. Alguns países, como o <i>Sudan</i> (Sudão), podem ser difíceis de ajustar, já que o nome do país faz parte do nome de outro país, <i>South Sudan</i> (Sudão do Sul). Você não precisa se preocupar com esses casos extremos.
 
 **AVISO**: "create-react-app" transformará automaticamente seu projeto em um repositório git, a menos que você crie sua aplicação dentro de um repositório git já existente.**Você muito provavelmente não quer que cada um de seus projetos seja um repositório separado**, então basta executar o comando _rm -rf .git_ na raiz de sua aplicação para aplicar as modificações.
 
@@ -618,11 +609,11 @@ Adicione à funcionalidade que exibe os dados de um único país o relatório me
 
 Se você usar o Open Weather map, a descrição de como obter os ícones climáticos encontra-se [aqui](https://openweathermap.org/weather-conditions#Icon-list).
 
-**N.B.:** Em alguns navegadores (como o Firefox), a API escolhida pode enviar uma resposta de erro, o que indica que a criptografia HTTPS não é suportada, mesmo que a URL da requisição comece com _http://_. Esse problema pode ser corrigido concluindo o exercício usando o Chrome.
+**Obs.::** Em alguns navegadores (como o Firefox), a API escolhida pode enviar uma resposta de erro, o que indica que a criptografia HTTPS não é suportada, mesmo que a URL da requisição comece com _http://_. Esse problema pode ser corrigido concluindo o exercício usando o Chrome.
 
-**N.B.:** Quase todos os serviços meteorológicos exigem que você use uma chave de API. Não salve a chave de API no controle de versão (Git)! Nem programe usando a chave de API em seu código-fonte. Em vez disso, use uma [variável de ambiente](https://create-react-app.dev/docs/adding-custom-environment-variables/) (environment variable) para salvar a chave.
+**Obs.::** Quase todos os serviços meteorológicos exigem que você use uma chave de API. Não salve a chave de API no controle de versão (Git)! Nem programe usando a chave de API em seu código-fonte. Em vez disso, use uma [variável de ambiente](https://create-react-app.dev/docs/adding-custom-environment-variables/) (environment variable) para salvar a chave.
 
-Supondo que a chave de API seja <i>t0p53cr3t4p1k3yv4lu3</i>, quando a aplicação é iniciada desta forma...
+Supondo que a chave de API seja <i>t0p53cr3t4p1k3yv4lu3</i>, quando a aplicação é iniciada desta forma:
 
 ```bash
 REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 npm start // Para o Bash do Linux/macOS
@@ -630,11 +621,11 @@ REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 npm start // Para o Bash do Linux/macOS
 set "REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3" && npm start // Para o cmd.exe do Windows
 ```
 
-... é possível acessar o valor da chave através do objeto _process.env_:
+é possível acessar o valor da chave através do objeto _process.env_:
 
 ```js
 const api_key = process.env.REACT_APP_API_KEY
-// a variável "api_key" agora possui o valor definido na inicialização
+// variable api_key has now the value set in startup
 ```
 
 Observe que, se você criou a aplicação usando _npx create-react-app ..._ e deseja usar um nome diferente para sua variável de ambiente, o nome da variável de ambiente ainda deve começar com *REACT\_APP_*. Também é possível usar um arquivo `.env` em vez de defini-la na linha de comando todas a vezes, criando um arquivo chamado '.env' na raiz do projeto e adicionando o seguinte:

@@ -11,7 +11,7 @@ Antes de irmos ao assunto principal sobre persistência de dados em um banco de 
 
 ### Depurando aplicações Node
 
-A depuração de aplicações Node é um tanto mais difícil do que depurar JavaScript em execução no navegador. A impressão de dados no console é um método testado e comprovado, e sempre vale a pena utilizá-lo. Algumas pessoas acham que métodos mais sofisticados devem ser usados ​​em vez do console, mas eu discordo. Até os melhores desenvolvedores de código aberto do mundo [usam](https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html) esse [método](https://swizec.com/blog/javascript-debugging-slightly-beyond-consolelog/).
+A depuração de aplicações Node é um tanto mais difícil do que depurar JavaScript em execução no navegador. A impressão de dados no console é um método testado e comprovado, e sempre vale a pena utilizá-lo. Algumas pessoas acham que métodos mais sofisticados devem ser usados ​​em vez do console, mas eu discordo. Até os melhores desenvolvedores <i>open-sorce</i> do mundo [usam](https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html) esse [método](https://swizec.com/blog/javascript-debugging-slightly-beyond-consolelog/).
 
 #### Visual Studio Code
 
@@ -21,17 +21,17 @@ O depurador do Visual Studio Code pode ser útil em algumas situações. Você p
 
 Observe que a aplicação não deve estar em execução em outro console, caso contrário, a porta já estará em uso.
 
-__N.B.:__ Uma versão mais recente do Visual Studio Code pode ter _Run_ em vez de _Debug_. Além disso, talvez você precise configurar seu arquivo _launch.json_ para iniciar a depuração. Isso pode ser feito selecionando _Add Configuration..._ no menu, que está localizado ao lado do botão verde de play e acima do menu _VARIABLES_, selecionando _Run "npm start" in a debug terminal_. Para instruções de configuração mais detalhadas, leia a [documentação sobre depuração](https://code.visualstudio.com/docs/editor/debugging) do Visual Studio Code.
+__Obs.:__ Uma versão mais recente do Visual Studio Code pode ter _Run_ em vez de _Debug_. Além disso, talvez você precise configurar seu arquivo _launch.json_ para iniciar a depuração. Isso pode ser feito selecionando _Add Configuration..._ no menu, que está localizado ao lado do botão verde de play e acima do menu _VARIABLES_, selecionando _Run "npm start" in a debug terminal_. Para instruções de configuração mais detalhadas, leia a [documentação sobre depuração](https://code.visualstudio.com/docs/editor/debugging) do Visual Studio Code.
 
 Abaixo você pode ver uma captura de tela onde a execução do código foi interrompida no meio do salvamento uma nova nota:
 
-![captura de tela do vscode mostrando a execução em um ponto de parada(../../images/3/36x.png)
+![captura de tela do vscode mostrando a execução em um ponto de parada](../../images/3/36x.png)
 
 A execução parou no <i>ponto de parada</i> (breakpoint) na linha 69. É possível ver no console o valor da variável <i>note</i>. Na janela superior esquerda, é possível ver outras coisas relacionadas ao estado da aplicação.
 
 As setas na parte superior podem ser usadas para controlar o fluxo do depurador.
 
-Por algum razão, eu não uso muito o depurador do Visual Studio Code.
+Por alguma razão, eu não uso muito o depurador do Visual Studio Code.
 
 #### As Ferramentas do Desenvolvedor do Chrome
 
@@ -55,11 +55,11 @@ Todas as mensagens do <i>console.log</i> da aplicação aparecerão na guia <i>C
 
 #### Questione tudo!
 
-Depurar aplicações Full Stack pode parecer complicado no início. Em breve, nossa aplicação também terá um banco de dados além do front-end e back-end, e haverá muitas áreas potenciais para erros na aplicação.
+Depurar aplicações Full Stack pode parecer complicado no início. Em breve, nossa aplicação também terá um banco de dados além do frontend e backend, e haverá muitas áreas potenciais para erros na aplicação.
 
 Quando a aplicação "não funciona", primeiro precisamos descobrir onde o problema realmente está. É muito comum que o problema esteja em um lugar onde você menos esperava, e pode levar minutos, horas ou até mesmo dias antes de encontrar a fonte do problema.
 
-A resposta é ser sistemático. Como o problema pode existir em qualquer lugar, <i>você deve questionar tudo</i> e eliminar todas as possibilidades uma por uma. Impressão de logs no console, Postman, depuradores e experiência ajudarão.
+O segredo é ser sistemático. Como o problema pode existir em qualquer lugar, <i>você deve questionar tudo</i> e eliminar todas as possibilidades uma por uma. Impressão de logs no console, Postman, depuradores e experiência ajudarão.
 
 Quando bugs acontecem, <i>a pior de todas as estratégias possíveis</i> é continuar escrevendo mais código. Isso garantirá que seu código gere ainda mais bugs para frente, e depurá-los será ainda mais difícil. O princípio [pare e corrija](http://gettingtolean.com/toyota-principle-5-build-culture-stopping-fix/) do <i>Toyota Production Systems</i> também é muito eficaz nessa situação.
 
@@ -67,7 +67,7 @@ Quando bugs acontecem, <i>a pior de todas as estratégias possíveis</i> é cont
 
 Para armazenar indefinidamente nossas notas que estão sendo salvas, precisamos de um banco de dados. A maioria dos cursos ministrados na Universidade de Helsinque utiliza bancos de dados relacionais. Usaremos na maior parte deste curso o [MongoDB](https://www.mongodb.com/), que é um tipo de [banco de dados de documentos](https://en.wikipedia.org/wiki/Document-oriented_database) (document database).
 
-A razão para usar o Mongo como banco de dados é devido a sua menor complexidade em comparação com um banco de dados relacional. A [Parte 13](/ptbr/part13) do curso mostra como construir back-ends em Node.js que usam um banco de dados relacional.
+A razão para usar o Mongo como banco de dados é devido a sua menor complexidade em comparação com um banco de dados relacional. A [Parte 13](/ptbr/part13) do curso mostra como construir backends em Node.js que usam um banco de dados relacional.
 
 Bancos de dados de documentos diferem de bancos de dados relacionais em como eles organizam dados, bem como nas linguagens de consulta (query languages) que suportam. Bancos de dados de documentos são geralmente categorizados sob o termo genérico [NoSQL](https://en.wikipedia.org/wiki/NoSQL) (Not Only SQL [Não Somente SQL]).
 
@@ -87,7 +87,7 @@ Escolha o provedor de nuvem e a localização e crie o <i>cluster</i> (grupo, ag
 
 Vamos esperar o cluster ficar pronto para uso. Isso pode levar alguns minutos.
 
-**N.B.:** não continue antes que o cluster esteja pronto.
+**Obs.:** não continue antes que o cluster esteja pronto.
 
 Vamos usar a guia <i>security</i> (segurança) para criar credenciais de usuário para o banco de dados. Observe que essas não são as mesmas credenciais que você usa para fazer login no MongoDB Atlas. Essas serão usadas para que sua aplicação se conecte ao banco de dados.
 
@@ -97,11 +97,14 @@ Em seguida, temos que definir os endereços IP que têm permissão de acesso ao 
 
 ![acesso à rede mongodb/adicionar lista de acesso ip](../../images/3/mongo4.png)
 
-Por fim, estamos prontos para nos conectar ao nosso banco de dados. Comece clicando em <i>connect</i> (conectar)...
+Observação: Se o menu modal for diferente para você, de acordo com a documentação do MongoDB, adicione 0.0.0.0 como o IP e allow access from anywhere (permitir acesso de qualquer lugar).
+
+
+Por fim, estamos prontos para nos conectar ao nosso banco de dados. Comece clicando em <i>connect</i> (conectar).
 
 ![mongodb database deployment connect](../../images/3/mongo5.png)
 
-... e escolha: <i>Connect your application</i> (Conecte sua aplicação):
+e escolha: <i>Connect your application</i> (Conecte sua aplicação):
 
 ![conexão à aplicação do mongodb](../../images/3/mongo6.png)
 
@@ -117,7 +120,7 @@ Estamos prontos para usar o banco de dados.
 
 Poderíamos usar o banco de dados diretamente do nosso código JavaScript com a biblioteca oficial [MongoDB Node.js Driver](https://mongodb.github.io/node-mongodb-native/), mas ela é bastante complicada de usar. Em vez disso, usaremos a biblioteca [Mongoose](http://mongoosejs.com/index.html), que oferece uma API de alto nível.
 
-Mongoose poderia ser descrito como um <i>mapeador de documento-objeto</i> (ODM [object document mapper]), onde é possível, com esta biblioteca, salvar diretamente objetos JavaScript como documentos Mongo.
+Mongoose poderia ser descrito como um <i>mapeador de documento-objeto</i> (ODM [object document mapper]), que permite salvar diretamente objetos JavaScript como documentos Mongo.
 
 Vamos instalar o Mongoose:
 
@@ -125,13 +128,13 @@ Vamos instalar o Mongoose:
 npm install mongoose
 ```
 
-Ainda não vamos adicionar nenhum código relacionado ao Mongo em nosso back-end. Em vez disso, vamos fazer uma aplicação prática criando um novo arquivo, <i>mongo.js</i>:
+Ainda não vamos adicionar nenhum código relacionado ao Mongo em nosso backend. Em vez disso, vamos fazer uma aplicação prática criando um novo arquivo, <i>mongo.js</i>:
 
 ```js
 const mongoose = require('mongoose')
 
 if (process.argv.length<3) {
-  console.log('give password as argument (insira a senha como argumento)')
+  console.log('give password as argument')
   process.exit(1)
 }
 
@@ -156,12 +159,12 @@ const note = new Note({
 })
 
 note.save().then(result => {
-  console.log('note saved! (nota salva!)')
+  console.log('note saved!')
   mongoose.connection.close()
 })
 ```
 
-**N.B.:** Dependendo da região que você selecionou ao criar seu cluster, o <i>URI do MongoDB</i> pode ser diferente do exemplo fornecido acima. Você deve verificar e usar o URI correto que foi gerado pelo MongoDB Atlas.
+**Obs.:** Dependendo da região que você selecionou ao criar seu cluster, o <i>URI do MongoDB</i> pode ser diferente do exemplo fornecido acima. Você deve verificar e usar o URI correto que foi gerado pelo MongoDB Atlas.
 
 O código também assume que será passada a senha das credenciais que criamos no MongoDB Atlas como um parâmetro de linha de comando. Podemos acessar o parâmetro da linha de comando assim:
 
@@ -171,7 +174,7 @@ const password = process.argv[2]
 
 Quando o código é executado com o comando <i>node mongo.js password</i>, o Mongo adicionará um novo documento ao banco de dados.
 
-**N.B.:** Observe que a senha usada é a senha criada para o usuário do banco de dados, não a senha do MongoDB Atlas. Além disso, se criou uma senha com caracteres especiais, então você precisará [codificar por cento sua senha](https://docs.atlas.mongodb.com/troubleshoot-connection/#special-characters-in-connection-string-password) (URL encoding).
+**Obs.:** Observe que a senha usada é a senha criada para o usuário do banco de dados, não a senha do MongoDB Atlas. Além disso, se criou uma senha com caracteres especiais, então você precisará [codificar por cento sua senha (também conhecido como codificação URL ou URL encoding)](https://docs.atlas.mongodb.com/troubleshoot-connection/#special-characters-in-connection-string-password).
 
 Podemos visualizar o estado atual do banco de dados do MongoDB Atlas a partir da guia <i>Browse collections</i>, na opção <i>Databases</i>.
 
@@ -196,7 +199,7 @@ Os dados agora estão armazenados no banco de dados correto. A visualização ta
 
 ### Esquema (Schema)
 
-Depois de estabelecer a conexão com o banco de dados, definimos o [esquema](http://mongoosejs.com/docs/guide.html) (schema) para uma nota e o [modelo](http://mongoosejs.com/docs/models.html) (model) correspondente:
+Depois de estabelecer a conexão com o banco de dados, definimos o [schema](http://mongoosejs.com/docs/guide.html) (esquema) para uma nota e o [model](http://mongoosejs.com/docs/models.html) (modelo) correspondente:
 
 ```js
 const noteSchema = new mongoose.Schema({
@@ -207,7 +210,7 @@ const noteSchema = new mongoose.Schema({
 const Note = mongoose.model('Note', noteSchema)
 ```
 
-Primeiro, definimos o [esquema](http://mongoosejs.com/docs/guide.html) de uma nota que é armazenada na variável _noteSchema_. O esquema informa ao Mongoose como os objetos de nota devem ser armazenados no banco de dados.
+Primeiro, definimos o [schema](http://mongoosejs.com/docs/guide.html) de uma nota que é armazenada na variável _noteSchema_. O esquema informa ao Mongoose como os objetos de nota devem ser armazenados no banco de dados.
 
 Na definição do modelo _Note_, o primeiro parâmetro <i>"Note"</i> é o nome singular do modelo. O nome da coleção será o plural <i>notes</i> em minúsculo, porque a [convenção do Mongoose](http://mongoosejs.com/docs/models.html) estabelece a nomeação automática de coleções com o seu plural (por exemplo, <i>notes</i>) quando o esquema se refere a elas no singular (por exemplo, <i>Note</i>).
 
@@ -221,7 +224,7 @@ Em seguida, a aplicação cria um novo objeto de nota com a ajuda do [modelo](ht
 
 ```js
 const note = new Note({
-  content: 'HTML é fácil',
+  content: 'HTML is Easy',
   important: false,
 })
 ```
@@ -232,7 +235,7 @@ O salvamento do objeto no banco de dados ocorre com o método apropriadamente ch
 
 ```js
 note.save().then(result => {
-  console.log('note saved! (nota salva!)')
+  console.log('note saved!')
   mongoose.connection.close()
 })
 ```
@@ -243,7 +246,7 @@ O resultado da operação de salvamento está no parâmetro _result_ do gerencia
 
 Vamos também salvar algumas notas adicionais modificando os dados no código e executando o programa novamente.
 
-**N.B.:** Infelizmente, a documentação do Mongoose não é muito consistente: usam callbacks em alguns de seus exemplos; em outras partes, outros estilos. Portanto, não é recomendado copiar e colar o código diretamente de lá. Misturar promessas com callbacks antigos no mesmo código não é recomendado. 
+**Obs.:** Infelizmente, a documentação do Mongoose não é muito consistente: usam callbacks em alguns de seus exemplos; em outras partes, outros estilos. Portanto, não é recomendado copiar e colar o código diretamente de lá. Misturar promessas com callbacks antigos no mesmo código não é recomendado. 
 
 ### Recuperando objetos do banco de dados
 
@@ -264,9 +267,9 @@ Quando o código é executado, o programa imprime todas as notas armazenadas no 
 
 Os objetos são recuperados do banco de dados com o método [find](https://mongoosejs.com/docs/api/model.html#model_Model-find) do modelo _Note_. O parâmetro do método é um objeto que expressa condições de pesquisa. Como o parâmetro é um objeto vazio<code>{}</code>, obtemos todas as notas armazenadas na coleção  _notes_.
 
-As condições de pesquisa aderem à [sintaxe](https://docs.mongodb.com/manual/reference/operator/) (syntax) de consulta do Mongo.
+As condições de pesquisa aderem à [sintaxe](https://docs.mongodb.com/manual/reference/operator/) de consulta do Mongo.
 
-Podemos restringir nossa pesquisa incluíndo apenas notas importantes:
+Podemos restringir nossa pesquisa incluindo apenas notas importantes:
 
 ```js
 Note.find({ important: true }).then(result => {
@@ -282,11 +285,11 @@ Note.find({ important: true }).then(result => {
 
 #### 3.12: Command-line database
 
-Crie um banco de dados MongoDB em nuvem (ou baseado na nuvem) com o MongoDB Atlas para a aplicação da lista telefônica.
+Crie um banco de dados MongoDB em nuvem com o MongoDB Atlas para a aplicação da lista telefônica.
 
 Crie um arquivo <i>mongo.js</i> no diretório do projeto, que pode ser usado para adicionar entradas à lista telefônica e listar todas as entradas existentes na lista telefônica.
 
-**N.B.:** Não inclua sua senha no arquivo que você enviará ao GitHub!
+**Obs.:** Não inclua sua senha no arquivo que você enviará ao GitHub!
 
 A aplicação deve funcionar da seguinte maneira: o programa é usado através de três argumentos de linha de comando (o primeiro é a senha). Por exemplo:
 
@@ -306,13 +309,13 @@ A nova entrada na lista telefônica será salva no banco de dados. Observe que, 
 node mongo.js suasenha "Arto Vihavainen" 045-1232456
 ```
 
-Se a senha for o único parâmetro fornecido ao programa, ou seja, se for chamado assim...
+Se a senha for o único parâmetro fornecido ao programa, ou seja, se for chamado assim:
 
 ```bash
 node mongo.js suasenha
 ```
 
-... o programa deverá exibir todas as entradas da lista telefônica:
+o programa deverá exibir todas as entradas da lista telefônica:
 
 <pre>
 phonebook:
@@ -323,7 +326,7 @@ Ada Lovelace 040-1231236
 
 É possível obter os parâmetros da linha de comando através da variável [process.argv](https://nodejs.org/docs/latest-v8.x/api/process.html#process_process_argv).
 
-**N.B.: não encerre a conexão no lugar errado**. Por exemplo, o código a seguir não funcionará:
+**Obs.: não encerre a conexão no lugar errado**. Por exemplo, o código a seguir não funcionará:
 
 ```js
 Person
@@ -348,13 +351,13 @@ Person
   })
 ```
 
-**N.B.:** Se você definir um modelo com o nome <i>Person</i>, o mongoose nomeará automaticamente a coleção associada como <i>people</i>.
+**Obs.:** Se você definir um modelo com o nome <i>Person</i>, o mongoose nomeará automaticamente a coleção associada como <i>people</i>.
 
 </div>
 
 <div class="content">
 
-### Conectando o back-end a um banco de dados
+### Conectando o backend a um banco de dados
 
 Agora temos conhecimento suficiente para começar a usar o Mongo em nossa aplicação.
 
@@ -388,13 +391,13 @@ app.get('/api/notes', (request, response) => {
 })
 ```
 
-Podemos verificar no navegador que o back-end funciona na medida em que exibe todos os documentos:
+Podemos verificar no navegador que o backend funciona na medida em que exibe todos os documentos:
 
 ![o endereço 'api/notes' no navegador mostra as notas em formato JSON](../../images/3/44ea.png)
 
-A aplicação funciona quase perfeitamente. O front-end assume que cada objeto tem um id único no campo <i>id</i>. Também não queremos retornar o campo de versionamento do Mongo <i>\_\_v</i> para o front-end.
+A aplicação funciona quase perfeitamente. O frontend assume que cada objeto tem um id único no campo <i>id</i>. Também não queremos retornar o campo de versionamento do Mongo <i>\_\_v</i> para o frontend.
 
-Uma maneira de formatar os objetos retornados pelo Mongoose é [modificar](https://stackoverflow.com/questions/7034848/mongodb-output-id-instead-of-id) (modify) o método _toJSON_ do esquema, que é usado em todas as instâncias dos modelos produzidos com esse esquema.
+Uma maneira de formatar os objetos retornados pelo Mongoose é [modificar](https://stackoverflow.com/questions/7034848/mongodb-output-id-instead-of-id) o método _toJSON_ do esquema, que é usado em todas as instâncias dos modelos produzidos com esse esquema.
 
 Para modificar o método, precisamos alterar as opções configuráveis ​​do esquema. As opções podem ser alteradas usando o método _set_ do esquema. Entre aqui para obter mais informações sobre este método: https://mongoosejs.com/docs/guide.html#options. Veja https://mongoosejs.com/docs/guide.html#toJSON e https://mongoosejs.com/docs/api.html#document_Document-toObject para obter mais informações sobre a opção _toJSON_.
 
@@ -426,7 +429,7 @@ O código usa automaticamente o já definido _toJSON_ quando formata as notas pa
 
 ### A configuração do banco de dados em seu próprio módulo
 
-Antes de refatorarmos o restante do back-end para usar o banco de dados, vamos extrair o código específico do Mongoose em seu próprio módulo.
+Antes de refatorarmos o restante do backend para usar o banco de dados, vamos extrair o código específico do Mongoose em seu próprio módulo.
 
 Vamos criar um novo diretório para o módulo chamado <i>models</i>, onde adicionaremos um arquivo chamado <i>note.js</i>:
 
@@ -437,15 +440,15 @@ mongoose.set('strictQuery', false)
 
 const url = process.env.MONGODB_URI // highlight-line
 
-console.log('connecting to (conectando em)', url) // highlight-line
+console.log('connecting to', url) // highlight-line
 
 mongoose.connect(url)
 // highlight-start
   .then(result => {
-    console.log('connected to MongoDB (Conectado ao MongoDB)')
+    console.log('connected to MongoDB')
   })
   .catch((error) => {
-    console.log('error connecting to MongoDB (Erro ao conectar ao MongoDB):', error.message)
+    console.log('error connecting to MongoDB:', error.message)
   })
 // highlight-end
 
@@ -482,14 +485,14 @@ A forma como a conexão é feita mudou um pouco:
 ```js
 const url = process.env.MONGODB_URI
 
-console.log('connecting to (conectando em)', url)
+console.log('connecting to', url)
 
 mongoose.connect(url)
   .then(result => {
-    console.log('connected to MongoDB (Conectado ao MongoDB)')
+    console.log('connected to MongoDB')
   })
   .catch((error) => {
-    console.log('error connecting to MongoDB (Erro ao conectar ao MongoDB):', error.message)
+    console.log('error connecting to MongoDB:', error.message)
   })
 ```
 
@@ -564,11 +567,11 @@ Já que a variável PORT também é definida em nosso .env, é essencial ignorar
 
 Ao usar o Render, a url do banco de dados é fornecida definindo a variável de ambiente adequada no painel:
 
-![](../../images/3/render-env.png)
+![navegador mostrando as variáveis de ambiente](../../images/3/render-env.png)
 
 ### Usando o banco de dados em gerenciadores de evento de rotas
 
-Agora, vamos mudar o resto da funcionalidade do back-end para usar o banco de dados.
+Agora, vamos mudar o resto da funcionalidade do backend para usar o banco de dados.
 
 Cria-se uma nova nota desta forma:
 
@@ -577,7 +580,7 @@ app.post('/api/notes', (request, response) => {
   const body = request.body
 
   if (body.content === undefined) {
-    return response.status(400).json({ error: 'content missing' }) // "conteúdo em falta"
+    return response.status(400).json({ error: 'content missing' })
   }
 
   const note = new Note({
@@ -609,15 +612,16 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-### Verificando a integração entre front-end e back-end
+### Verificando a integração entre frontend e backend
 
-Ao se expandir o back-end, sempre é uma boa ideia testá-lo primeiro **com o navegador, com o Postman ou com o cliente REST do VS Code**. Em seguida, vamos tentar criar uma nova nota depois colocar o banco de dados em uso:
+Ao se expandir o backend, sempre é uma boa ideia testá-lo primeiro **com o navegador, com o Postman ou com o cliente REST do VS Code**. Em seguida, vamos tentar criar uma nova nota depois colocar o banco de dados em uso:
 
 ![Cliente REST do VS Code utilizando o método POST](../../images/3/46new.png)
 
-Somente depois de verificar se tudo funciona no back-end, é uma boa ideia testar se o front-end funciona com o back-end. É extremamente ineficiente testar as funcionalidades exclusivamente pelo front-end.
+Somente depois de verificar se tudo funciona no backend, é uma boa ideia testar se o frontend funciona com o backend. É extremamente ineficiente testar as funcionalidades exclusivamente pelo frontend.
 
-Sempre é uma boa ideia integrar tanto ao front-end quanto ao back-end uma funcionalidade de cada vez. Primeiro, poderíamos implementar a busca de todas as notas no banco de dados e testá-la por meio do <i>endpoint</i> (ou "ponto de terminação" — objetivamente, um <i>endpoint</i> ou ponto de terminação é qualquer dispositivo conectado a uma rede de computadores. Leia mais [aqui](https://www.cloudflare.com/ptbr-br/learning/security/glossary/what-is-endpoint/)) do back-end no navegador. Depois disso, verificaríamos se o front-end funciona com o novo back-end. Depois que tudo parecer estar funcionando, passaríamos para a próxima funcionalidade.
+Sempre é uma boa ideia integrar tanto ao frontend quanto ao backend uma funcionalidade de cada vez. Primeiro, poderíamos implementar a busca de todas as notas no banco de dados e testá-la por meio do <i>endpoint</i> do backend no navegador. Após, verificaríamos se o frontend funciona com o novo backend. Depois que tudo parecer estar funcionando, passaríamos para a próxima funcionalidade.
+<i>_Nota dos tradutores_: objetivamente, dentro do conceito de API, um <i>endpoint</i> é o endereço URL que identifica e acessa um recurso específico. Leia mais [aqui](https://www.cloudflare.com/pt-br/learning/security/api/what-is-api-endpoint/).</i>
 
 Uma vez que um banco de dados é introduzido nessa mistura, é sempre útil inspecionar o estado persistido no banco de dados através, por exemplo, do painel de controle do MongoDB Atlas. Muitas vezes, pequenos programas auxiliares do Node como o <i>mongo.js</i> que escrevemos anteriormente podem ser muito úteis durante o desenvolvimento.
 
@@ -629,19 +633,19 @@ Você pode encontrar o código da nossa aplicação atual na íntegra na branch 
 
 ### Exercícios 3.13 a 3.14
 
-Os próximos exercícios são bastante diretos, mas se o seu front-end parar de funcionar com o back-end, pode ser até bastante interessante encontrar e corrigir os bugs que forem surgindo.
+Os próximos exercícios são bem simples, mas se o seu frontend parar de funcionar com o backend, pode ser até bastante interessante encontrar e corrigir os bugs que forem surgindo.
 
 #### 3.13: Phonebook database — 1º passo
 
 Altere a funcionalidade que busca todas as entradas da lista telefônica para que os dados sejam <i>buscados do banco de dados</i>.
 
-Verifique se o front-end funciona depois que as alterações forem feitas.
+Verifique se o frontend funciona depois que as alterações forem feitas.
 
 Nos próximos exercícios, escreva todo o código específico do Mongoose em seu próprio módulo, assim como fizemos no capítulo ["A configuração do banco de dados em seu próprio módulo"](/ptbr/part3/salvando_dados_no_mongo_db#a-configuracao-do-banco-de-dados-em-seu-proprio-modulo).
 
 #### 3.14: Phonebook database — 2º passo
 
-Altere o back-end para que os novos números sejam <i>salvos no banco de dados</i>. Verifique se o seu front-end ainda funciona após as alterações.
+Altere o backend para que os novos números sejam <i>salvos no banco de dados</i>. Verifique se o seu frontend ainda funciona após as alterações.
 
 Você pode ignorar, nesta etapa, se já existe uma pessoa no banco de dados com o mesmo nome da pessoa que você está adicionando.
 
@@ -733,7 +737,7 @@ Nunca é uma má ideia imprimir o objeto que causou a exceção no console do ge
 
 A razão pela qual o gerenciador de erro é chamado pode ser algo completamente diferente do que você havia imaginado. Se você imprimir o erro no console, poderá se salvar de longas e frustrantes sessões de depuração. Além disso, a maioria dos serviços modernos onde você implanta sua aplicação suporta algum tipo de sistema de registro (logging system) que se pode usar para verificar esses logs. Como já mencionado, o Heroku é um deles.
 
-Toda vez que você trabalha em um projeto com um back-end, <i>é crucial ficar de olho na saída do console do back-end</i>. Se você está usando uma tela pequena, já é suficiente ver apenas um pedacinho da tela de saída em segundo plano. Qualquer mensagem de erro chamará sua atenção mesmo quando o console estiver bem escondido:
+Toda vez que você trabalha em um projeto com um backend, <i>é crucial ficar de olho na saída do console do backend</i>. Se você está usando uma tela pequena, já é suficiente ver apenas um pedacinho da tela de saída em segundo plano. Qualquer mensagem de erro chamará sua atenção mesmo quando o console estiver bem escondido:
 
 ![amostra de captura de tela mostrando um pedacinho da tela de saída](../../images/3/15b.png)
 
@@ -862,7 +866,7 @@ app.delete('/api/notes/:id', (request, response, next) => {
 })
 ```
 
-Em ambos os casos "bem-sucedidos" de exclusão de um recurso, o back-end responde com o código de status <i>204 no content</i> (204 sem conteúdo). Os dois casos diferentes são excluir uma nota que existe e excluir uma nota que não existe no banco de dados. O parâmetro de retorno _result_ poderia ser usado para verificar se um recurso foi realmente excluído, e poderíamos usar essa informação para retornar diferentes códigos de status para os dois casos, caso julgássemos necessário. Qualquer exceção que venha a ocorrer é lançada ao gerenciador de erro.
+Em ambos os casos "bem-sucedidos" de exclusão de um recurso, o backend responde com o código de status <i>204 no content</i> (204 sem conteúdo). Os dois casos diferentes são: (1) excluir uma nota que existe; e (2) excluir uma nota que não existe no banco de dados. O parâmetro de retorno _result_ poderia ser usado para verificar se um recurso foi realmente excluído, e poderíamos usar essa informação para retornar diferentes códigos de status para os dois casos, caso julgássemos necessário. Qualquer exceção que venha a ocorrer é lançada ao gerenciador de erro.
 
 A alternância da importância de uma nota pode ser facilmente realizada com o método [findByIdAndUpdate](https://mongoosejs.com/docs/api/model.html#model_Model-findByIdAndUpdate) (grosso modo, "acharPorIdEAtualizar").
 
@@ -889,22 +893,22 @@ Observe que o método <em>findByIdAndUpdate</em> recebe um objeto JavaScript com
 
 Existe um detalhe importante em relação ao uso do método <em>findByIdAndUpdate</em>. Por padrão, o parâmetro <em>updatedNote</em> do gerenciador de evento recebe o documento original [sem as modificações](https://mongoosejs.com/docs/api/model.html#model_Model-findByIdAndUpdate). Adicionamos o parâmetro opcional <code>{ new: true }</code>, que fará com que nosso gerenciador de evento seja chamado com o novo documento modificado em vez do original.
 
-Após testar o back-end diretamente com o Postman e o cliente REST do VS Code, podemos verificar que parece funcionar. O front-end também parece funcionar com o back-end usando o banco de dados.
+Após testar o backend diretamente com o Postman e o cliente REST do VS Code, podemos verificar que parece funcionar. O frontend também parece funcionar com o backend usando o banco de dados.
 
 É possível encontrar o código da nossa aplicação atual na íntegra na branch <i>part3-5</i> [neste repositório do GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5).
 
 ### Juramento de um Verdadeiro Programador Full Stack
 
-Chegou novamente a hora dos exercícios. A complexidade de nossa aplicação cresceu pois, além do front-end e do back-end, também temos um banco de dados. Há de fato muitas fontes potenciais de erros.
+Chegou novamente a hora dos exercícios. A complexidade de nossa aplicação cresceu pois, além do frontend e do backend, também temos um banco de dados. Há de fato muitas fontes potenciais de erros.
 
 Portanto, devemos estender novamente nosso juramento:
 
 Desenvolvimento Full Stack é algo <i>extremamente difícil</i>, e é por isso que eu usarei todos os meios possíveis para torná-lo mais fácil:
 
 - Eu manterei meu Console do navegador sempre aberto;
-- Eu usarei a guia Rede das Ferramentas do Desenvolvedor do navegador para garantir que o front-end e o back-end estejam se comunicando da forma que eu planejei;
-- Eu ficarei de olho no estado do servidor para garantir que os dados enviados pelo front-end estejam sendo salvos lá da forma que eu planejei;
-- <i>Eu ficarei de olho no banco de dados: o back-end salva os dados no banco de dados no formato correto?</i> ;
+- Eu usarei a guia Rede das Ferramentas do Desenvolvedor do navegador para garantir que o frontend e o backend estejam se comunicando da forma que eu planejei;
+- Eu ficarei de olho no estado do servidor para garantir que os dados enviados pelo frontend estejam sendo salvos lá da forma que eu planejei;
+- <i>Eu ficarei de olho no banco de dados: o backend salva os dados no banco de dados no formato correto?</i> ;
 - Eu vou progredir aos poucos, passo a passo;
 - Eu escreverei muitas instruções _console.log_ para ter certeza de que estou entendendo como o código se comporta e para me ajudar a identificar os erros;
 - Se meu código não funcionar, não escreverei mais nenhuma linha no código. Em vez disso, começarei a excluir o código até que funcione ou retornarei ao estado em que tudo ainda estava funcionando; e
@@ -918,9 +922,9 @@ Desenvolvimento Full Stack é algo <i>extremamente difícil</i>, e é por isso q
 
 #### 3.15: Phonebook database — 3º passo
 
-Altere o back-end para que a exclusão de entradas da lista telefônica seja refletida no banco de dados.
+Altere o backend para que a exclusão de entradas da lista telefônica seja refletida no banco de dados.
 
-Verifique se o front-end ainda funciona após as alterações.
+Verifique se o frontend ainda funciona após as alterações.
 
 #### 3.16: Phonebook database — 4º passo
 
@@ -928,11 +932,11 @@ Transfira o gerenciamento de erros da aplicação para um novo middleware gerenc
 
 #### 3.17*: Phonebook database — 5º passo
 
-Se o usuário tentar criar uma nova entrada na lista telefônica para uma pessoa cujo nome já está presente na lista, o front-end tentará atualizar o número de telefone da entrada existente fazendo uma requisição HTTP PUT para a URL única da entrada.
+Se o usuário tentar criar uma nova entrada na lista telefônica para uma pessoa cujo nome já está presente na lista, o frontend tentará atualizar o número de telefone da entrada existente fazendo uma requisição HTTP PUT para a URL única da entrada.
 
-Modifique o back-end para suportar essa requisição.
+Modifique o backend para suportar essa requisição.
 
-Verifique se o front-end funciona após fazer suas alterações.
+Verifique se o frontend funciona após fazer suas alterações.
 
 #### 3.18*: Phonebook database — 6º passo
 
