@@ -399,6 +399,8 @@ Note that the directory paths in the script <i>build:ui</i> depend on the locati
 
 #### Render
 
+Note: When you attempt to deploy your backend to Render, make sure you have a seperate repository for the backend and deploy that github repo through Render, attempting to deploy through your Fullstackopen repository will often throw "ERR path ....package.json". 
+
 In case of Render, the scripts look like the following
 
 ```json
