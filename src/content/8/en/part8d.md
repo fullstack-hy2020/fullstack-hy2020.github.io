@@ -189,7 +189,7 @@ const client = new ApolloClient({
 })
 ```
 
-The field *uri* that was previously used when creating the *client* object has been replaced by the field *link*, which defines in a more complicated case how Apollo is connected to the server. The server url is now wrapped using the function [createHttpLink](https://www.apollographql.com/docs/link/links/http.htm) into a suitable httpLink object. The link is modified by the [context](https://www .apollographql.com/docs/react/api/link/apollo-link-context/#overview) defined by the authLink object so that a possible token in localStorage is [set to header](https://www.apollographql.com/docs/react/networking/authentication /#header) <i>authorization</i> for each request to the server.
+The field *uri* that was previously used when creating the *client* object has been replaced by the field *link*, which defines in a more complicated case how Apollo is connected to the server. The server url is now wrapped using the function [createHttpLink](https://www.apollographql.com/docs/link/links/http.htm) into a suitable httpLink object. The link is modified by the [context](https://www.apollographql.com/docs/react/api/link/apollo-link-context/#overview) defined by the authLink object so that a possible token in localStorage is [set to header](https://www.apollographql.com/docs/react/networking/authentication/#header) <i>authorization</i> for each request to the server.
 
 Creating new persons and changing numbers works again. There is however one remaining problem. If we try to add a person without a phone number, it is not possible.
 
