@@ -7,6 +7,10 @@
     color: $black;
   }
 
+  li {
+    color: $black;
+  }
+
   p:not(:last-of-type) {
     padding-bottom: 2em;
   }
