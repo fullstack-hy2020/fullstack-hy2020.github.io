@@ -9,7 +9,7 @@ lang: ptbr
 
 Já estamos trabalhando há um tempo apenas no "front-end", ou seja, com as funcionalidades do lado do cliente (navegador). Começaremos a trabalhar no "back-end", ou seja, com as funcionalidades do lado do servidor na [Parte 3](/ptbr/part3) deste curso. Contudo, agora daremos um passo nessa direção, assim familiarizando-nos com a comunicação do código executado no navegador com o back-end.
 
-Vamos usar uma ferramenta destinada à fase de desenvolvimento de software, chamada [JSON Server](https://github.com/typicode/json-server), que atuará como nosso servidor.
+Vamos usar uma ferramenta destinada a ser usada durante a fase de desenvolvimento de software chamada [JSON Server](https://github.com/typicode/json-server), que atuará como nosso servidor.
 
 Crie um arquivo chamado <i>db.json</i> na raiz do diretório do projeto de notas com o seguinte conteúdo:
 
@@ -18,17 +18,17 @@ Crie um arquivo chamado <i>db.json</i> na raiz do diretório do projeto de notas
   "notes": [
     {
       "id": 1,
-      "content": "HTML is easy",
+      "content": "HTML é fácil",
       "important": true
     },
     {
       "id": 2,
-      "content": "Browser can execute only JavaScript",
+      "content": "O navegador só pode executar JavaScript",
       "important": false
     },
     {
       "id": 3,
-      "content": "GET and POST are the most important methods of HTTP protocol",
+      "content": "GET e POST são os métodos mais importantes do protocolo HTTP",
       "important": true
     }
   ]
@@ -37,7 +37,7 @@ Crie um arquivo chamado <i>db.json</i> na raiz do diretório do projeto de notas
 
 É possível [instalar](https://github.com/typicode/json-server#getting-started) globalmente um servidor JSON na sua máquina usando o comando _npm install -g json-server_. Uma instalação global requer privilégios administrativos, o que significa que não é possível fazer isso em computadores de faculdade, etc.
 
-Após a instalação, execute o comando abaixo para executar o json-server. O <i>json-server</i> é executado na porta 3000 por padrão; porém, como projetos criados usando o "create-react-app" reservam a porta 3000 para si, devemos definir uma porta alternativa — como a porta 3001 — para o json-server. A opção <em>--watch</em> procura automaticamente por quaisquer alterações salvas no arquivo <i>db.json</i>.
+Após a instalação, execute o seguinte comando para executar o json-server. O <i>json-server</i> é executado na porta 3000 por padrão; porém, como projetos criados usando o "create-react-app" reservam a porta 3000 para si, devemos definir uma porta alternativa — como a porta 3001 — para o json-server. A opção <em>--watch</em> procura automaticamente por quaisquer alterações salvas no arquivo <i>db.json</i>.
 
 ```js
 json-server --port 3001 --watch db.json
@@ -65,11 +65,11 @@ Nos familiarizaremos com os princípios de implementação das funcionalidades d
 
 Nossa primeira tarefa é buscar as notas já existentes em nossa aplicação React a partir do endereço <http://localhost:3001/notes>.
 
-Na [projeto-exemplo](/ptbr/part0/fundamentos_de_aplicacoes_web#executando-a-logica-da-aplicacao-no-navegador) da Parte 0, já aprendemos uma maneira de buscar dados de um servidor usando JavaScript. O código no exemplo estava buscando os dados usando [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest), também conhecido como uma "requisição HTTP" feita usando um objeto XHR. Esta é uma técnica introduzida em 1999 e todos os navegadores têm oferecido suporte a ela há um bom tempo.
+Na [projeto-exemplo](/ptbr/part0/fundamentos_de_aplicacoes_web#executando-a-logica-da-aplicacao-no-navegador) da Parte 0, já aprendemos uma maneira de buscar dados de um servidor usando JavaScript. O código no exemplo estava buscando os dados usando [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest), também conhecido como uma "requisição HTTP" feita usando um objeto XHR. Esta é uma técnica introduzida em 1999, no qual todos os navegadores têm oferecido suporte a ela já faz um bom tempo.
 
-Já não é mais recomendado o uso do objeto XHR e a maioria dos navegadores já suportam amplamente o método [fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch) ("ir buscar" ou "buscar"), que é baseado em chamadas conhecidas como [promessas](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) (promises), ao invés do modelo de gerenciamento de eventos utilizado pelo XHR.
+Já não é mais recomendado o uso do objeto XHR, e a maioria dos navegadores já suportam amplamente o método [fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch) ("ir buscar" ou "buscar"), que é baseado em chamadas conhecidas como [promessas](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) (promises), ao invés do modelo de gerenciamento de eventos utilizado pelo XHR.
 
-Como lembrete da Parte 0, os dados foram buscados usando o XHR da seguinte maneira (lembre-se que o exemplo abaixo <i>não deve ser usado</i> sem um motivo plausível):
+Como lembrete da Parte 0 (que deve ser lembrado <i>de não ser usado</i> sem um motivo plausível), os dados foram buscados usando o XHR da seguinte maneira:
 
 ```js
 const xhttp = new XMLHttpRequest()
@@ -89,7 +89,7 @@ Desde o início, registramos um <i>gerenciador de evento</i> ao objeto <em>xhttp
 
 Vale a pena notar que o código no gerenciador de evento é definido antes da requisição ser enviada ao servidor. Mesmo assim, o código dentro do gerenciador de evento será executado em um momento posterior. Portanto, o código não executa sincronicamente "de cima para baixo", mas sim <i>assincronamente</i> (asynchronously). JavaScript chama em algum momento o gerenciador de evento que foi registrado para a requisição.
 
-Uma forma comum de fazer requisições síncronas em Java, por exemplo, funcionaria da seguinte maneira (Obs.: este código Java não funciona):
+Uma forma comum de fazer requisições síncronas em Java, por exemplo, funcionaria da seguinte maneira (N.B. (Nota Bene): este código Java não funciona):
 
 ```java
 HTTPRequest request = new HTTPRequest();
@@ -104,13 +104,13 @@ notes.forEach(m => {
 
 Em Java, o código é executado linha a linha e é interrompido para esperar pela requisição HTTP, o que significa esperar até o comando _request.get(...)_ ser concluído. Os dados retornados pelo comando, neste caso as notas, são então armazenados em uma variável na qual podemos manipular os dados da maneira que desejarmos.
 
-Por outro lado, os ambientes de tempo de execução JavaScript, ou <i>engines</i> (motores), seguem o [modelo assíncrono](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop). Em princípio, isso requer que todas as [operações IO](https://en.wikipedia.org/wiki/Input/output) (com algumas exceções) sejam executadas como não-bloqueantes. Isso significa que a execução do código continua imediatamente após a chamada de uma função IO, sem esperar que ela termine.
+Por outro lado, os ambientes de tempo de execução JavaScript, ou "engines" (motores), seguem o [modelo assíncrono](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop). Em princípio, isso requer que todas as [operações IO](https://en.wikipedia.org/wiki/Input/output) (com algumas exceções) sejam executadas como não-bloqueantes. Isso significa que a execução do código continua imediatamente após a chamada de uma função IO, sem esperar que ela termine.
 
 Quando uma operação assíncrona é concluída, ou mais especificamente, algum tempo depois de sua conclusão, o que acontece é que o motor JavaScript chama os gerenciadores de evento registrados na operação.
 
 Atualmente, os motores JavaScript são <i>single-threaded</i> (linha de execução única), o que significa que não podem executar código em paralelo. Como resultado, na prática, é uma exigência usar um modelo não-bloqueante para a execução de operações IO. Caso contrário, o navegador "congelaria" durante a busca de dados em um servidor, por exemplo.
 
-Outra consequência da natureza <i>single-threaded</i> dos motores JavaScript é que se alguma execução de código levar muito tempo, o navegador ficará preso durante toda a execução. Se adicionássemos o seguinte código no topo de nossa aplicação:
+Outra consequência da natureza single-threaded dos motores JavaScript é que se alguma execução de código levar muito tempo, o navegador ficará preso durante toda a execução. Se adicionássemos o seguinte código no topo de nossa aplicação...
 
 ```js
 setTimeout(() => {
@@ -123,11 +123,11 @@ setTimeout(() => {
 }, 5000)
 ```
 
-tudo funcionaria normalmente por 5 segundos. No entanto, quando a função definida como o parâmetro para <em>setTimeout</em> é executada, o navegador fica preso durante toda a execução do longo loop. Mesmo a aba do navegador não pode ser fechada durante a execução do loop, pelo menos não no Chrome.
+... tudo funcionaria normalmente por 5 segundos. No entanto, quando a função definida como o parâmetro para <em>setTimeout</em> é executada, o navegador fica preso durante toda a execução do longo loop. Mesmo a aba do navegador não pode ser fechada durante a execução do loop, pelo menos não no Chrome.
 
 Para o navegador permanecer <i>responsivo</i>, ou seja, ser capaz de reagir continuamente às operações do usuário com velocidade suficiente, a lógica do código precisa ser tal que nenhuma única computação tenha de levar tanto tempo para se realizar.
 
-Existe uma série de materiais sobre o tema disponíveis na internet. Uma apresentação particularmente clara do tópico é a palestra de Philip Roberts chamada [What the heck is the event loop anyway?](https://www.youtube.com/watch?v=8aGhZQkoFbQ) (O que diabos é o loop de eventos?).
+Existe uma série de materiais sobre o tema disponíveis na internet. Uma apresentação particularmente clara do tópico é a palestra de Philip Roberts chamada [What the heck is the event loop anyway?](https://www.youtube.com/watch?v=8aGhZQkoFbQ) (disponível em português).
 
 É possível executar código paralelizado nos navegadores de hoje em dia com a ajuda dos chamados [web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers). No entanto, o loop de eventos de uma única janela do navegador ainda é realizado como [single thread](https://medium.com/techtrument/multithreading-javascript-46156179cf9a).
 
@@ -137,7 +137,7 @@ Vamos voltar ao assunto sobre obtenção de dados do servidor.
 
 Poderíamos usar a função baseada em promessas [fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch), mencionada anteriormente, para puxar (pull) os dados do servidor. Fetch é uma ótima ferramenta. É padronizada e tem suporte em todos os navegadores modernos (exceto o IE [Internet Explorer]).
 
-Ainda assim, usaremos a biblioteca [axios](https://github.com/axios/axios) para fazer essa comunicação entre navegador e servidor. Ela funciona como o fetch, mas é um pouco mais agradável de se usar. Outra boa razão para usar o axios é que nos familiarizaremos com a adição de bibliotecas externas em projetos React, conhecidas como <i>pacotes npm</i> (npm packages).
+Dito isso, usaremos a biblioteca [axios](https://github.com/axios/axios) para fazer essa comunicação entre navegador e servidor. Ela funciona como o fetch, mas é um pouco mais agradável de se usar. Outra boa razão para usar o axios é que nos familiarizaremos com a adição de bibliotecas externas em projetos React, conhecidas como <i>pacotes npm</i> (npm packages).
 
 Hoje em dia, praticamente todos os projetos JavaScript são definidos usando o gerenciador de pacotes do Node, conhecido como [npm](https://docs.npmjs.com/getting-started/what-is-npm) (abreviação de "Node Package Manager"). Os projetos criados usando "create-react-app" também seguem o formato npm. Um indicador claro de que um projeto usa npm é o arquivo <i>package.json</i> localizado na raiz do projeto:
 
@@ -162,17 +162,10 @@ Hoje em dia, praticamente todos os projetos JavaScript são definidos usando o g
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "extends": ["react-app", "react-app/jest"]
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
+    "production": [">0.2%", "not dead", "not op_mini all"],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
@@ -182,7 +175,7 @@ Hoje em dia, praticamente todos os projetos JavaScript são definidos usando o g
 }
 ```
 
-Neste momento, o objeto <i>dependencies</i>, que é uma parte do documento <i>package.json</i>, é o que mais nos interessa, pois define quais são as <i>dependências</i> ou bibliotecas externas do projeto.
+Neste ponto, o objeto <i>dependencies</i>, que é uma parte do documento <i>package.json</i>, é o que mais nos interessa agora, pois define quais são as <i>dependências</i> ou bibliotecas externas do projeto.
 
 Agora queremos usar o axios. Teoricamente, poderíamos definir a biblioteca diretamente no arquivo <i>package.json</i>, mas é melhor instalá-la a partir da linha de comando.
 
@@ -190,7 +183,7 @@ Agora queremos usar o axios. Teoricamente, poderíamos definir a biblioteca dire
 npm install axios
 ```
 
-**Obs.: os comandos do _npm_ sempre devem ser executados no diretório raiz do projeto**, onde o arquivo <i>package.json</i> pode ser encontrado.
+**N.B.: os comandos do _npm_ sempre devem ser executados no diretório raiz do projeto**, onde o arquivo <i>package.json</i> pode ser encontrado.
 
 O axios agora está incluído entre as outras dependências:
 
@@ -208,31 +201,31 @@ O axios agora está incluído entre as outras dependências:
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
-  },
+  }
   // ...
 }
 ```
 
-Além de adicionar o axios às dependências, o comando <em>npm install</em> também <i>baixou</i> o código da biblioteca. Como outras dependências, o código pode ser encontrado no diretório <i>node_modules</i> localizado na raiz. É possível notar que o diretório <i>node_modules</i> contém muitas coisas interessantes.
+Além de adicionar o axios às dependências, o comando <em>npm install</em> também <i>baixou</i> o código da biblioteca. Como outras dependências, o código pode ser encontrado no diretório <i>node_modules</i> localizado na raiz. É possível notar que o diretório <i>node_modules</i> contém uma quantidade significativa de coisas interessantes.
 
-Vamos fazer mais uma adição. Instale o <i>json-server</i> como uma dependência de desenvolvimento (usado apenas durante o desenvolvimento) executando o comando:
+Vamos fazer mais uma adição. Instale o <i>json-server</i> como uma dependência de desenvolvimento (usado apenas durante o desenvolvimento) executando o comando...
 
 ```js
 npm install json-server --save-dev
 ```
 
-e fazendo uma pequena adição ao objeto <i>scripts</i> do arquivo <i>package.json</i>:
+... e fazendo uma pequena adição ao objeto <i>scripts</i> do arquivo <i>package.json</i>:
 
 ```json
 {
-  // ... 
+  // ...
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "json-server -p3001 --watch db.json" // highlight-line
-  },
+  }
 }
 ```
 
@@ -244,7 +237,7 @@ npm run server
 
 Vamos ficar mais familiarizados com a ferramenta _npm_ na [terceira parte do curso](/ptbr/part3).
 
-**Obs.:** O json-server que foi iniciado anteriormente deve ser encerrado antes de iniciar um novo; caso contrário, haverá problemas:
+**N.B.:** O json-server que foi iniciado anteriormente deve ser encerrado antes de iniciar um novo; caso contrário, haverá problemas:
 
 ![erro: cannot bind to port 3001](../../images/2/15b.png)
 
@@ -261,13 +254,13 @@ npm install axios
 npm install json-server --save-dev
 ```
 
-Há uma pequena diferença nos parâmetros. O <i>axios</i> é instalado como uma dependência de tempo de execução da aplicação, pois a execução do programa exige a existência da biblioteca. Por outro lado, o <i>json-server</i> foi instalado como uma dependência de desenvolvimento (_--save-dev_), uma vez que o próprio programa não o requer. Ele é usado para ajudar durante a fase de desenvolvimento do software. A próxima parte do curso abordará ainda mais sobre diferentes dependências.
+Há uma pequena diferença nos parâmetros. O <i>axios</i> é instalado como uma dependência de tempo de execução da aplicação, pois a execução do programa exige a existência da biblioteca. Por outro lado, o <i>json-server</i> foi instalado como uma dependência de desenvolvimento (_--save-dev_), uma vez que o próprio programa não o requer. Ele é usado para ajudar durante a fase de desenvolvimento do software. Mais há de ser dito sobre diferentes dependências na próxima parte do curso.
 
 ### Axios e promessas (promises)
 
 Estamos prontos para usar a biblioteca axios. A partir de agora, supõe-se que o json-server esteja rodando na porta 3001.
 
-**Obs.:** Para executar o json-server e sua aplicação React simultaneamente, pode ser necessário usar duas janelas do terminal. Uma para manter o json-server em execução e outra para executar a aplicação React.
+**N.B.**: Para executar o json-server e sua aplicação React simultaneamente, é possível que seja necessário usar duas janelas do terminal. Uma para manter o json-server em execução e outra para executar a aplicação React.
 
 A biblioteca pode ser utilizada da mesma maneira que outras bibliotecas, como React, por exemplo, através de uma declaração <em>import</em> adequada.
 
@@ -315,7 +308,7 @@ O seguinte é impresso no console:
 
 ![dados de um objeto json impressos no console](../../images/2/17new.png)
 
-O ambiente de tempo de execução JavaScript chama a função <i>callback</i> (função de retorno de chamada) registrada pelo método <em>then</em> fornecendo-lhe um objeto <em>response</em> como parâmetro. O objeto <em>response</em> contém todos os dados essenciais relacionados à resposta de uma requisição HTTP GET, que incluiria os dados retornados <i>data</i>, o <i>código de status</i> e os <i>cabeçalhos</i>.
+O ambiente de tempo de execução JavaScript chama a função callback (função de retorno de chamada) registrada pelo método <em>then</em> fornecendo-lhe um objeto <em>response</em> como parâmetro. O objeto <em>response</em> contém todos os dados essenciais relacionados à resposta de uma requisição HTTP GET, que incluiria os dados retornados <i>data</i>, o <i>código de status</i> e os <i>cabeçalhos</i>.
 
 Em geral, armazenar o objeto de promessa em uma variável é desnecessário, e é uma prática comum encadear a chamada de método <em>then</em> à chamada de método axios, de modo que haja um seguimento lógico:
 
@@ -326,20 +319,18 @@ axios.get('http://localhost:3001/notes').then((response) => {
 })
 ```
 
-A função <i>callback</i> pega os dados contidos dentro da resposta, armazena-os em uma variável e imprime as notas no console.
+A função callback (função de retorno de chamada) pega os dados contidos dentro da resposta, armazena-os em uma variável e imprime as notas no console.
 
 Uma maneira mais legível de formatar chamadas de método <i>encadeadas</i> é colocar cada chamada em sua própria linha:
 
 ```js
-axios
-  .get('http://localhost:3001/notes')
-  .then(response => {
-    const notes = response.data
-    console.log(notes)
-  })
+axios.get('http://localhost:3001/notes').then((response) => {
+  const notes = response.data
+  console.log(notes)
+})
 ```
 
-Os dados retornados pelo servidor são texto simples ou texto puro (<i>plain text</i>), que é basicamente apenas uma string longa. A biblioteca axios ainda consegue analisar os dados em um array JavaScript, já que o servidor especificou que o formato de dados é <i>application/json; charset=utf-8</i> (veja a imagem anterior) usando o cabeçalho <i>content-type</i>.
+Os dados retornados pelo servidor são texto simples ou texto puro (plain text), que é basicamente apenas uma string longa. A biblioteca axios ainda consegue analisar os dados em um array JavaScript, já que o servidor especificou que o formato de dados é <i>application/json; charset=utf-8</i> (veja a imagem anterior) usando o cabeçalho <i>content-type</i>.
 
 Podemos finalmente começar a usar os dados obtidos do servidor.
 
@@ -350,9 +341,11 @@ import ReactDOM from 'react-dom/client'
 import axios from 'axios'
 import App from './App'
 
-axios.get('http://localhost:3001/notes').then(response => {
+axios.get('http://localhost:3001/notes').then((response) => {
   const notes = response.data
-  ReactDOM.createRoot(document.getElementById('root')).render(<App notes={notes} />)
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    <App notes={notes} />
+  )
 })
 ```
 
@@ -362,9 +355,9 @@ Porém, o que não é imediatamente óbvio é onde o comando <em>axios.get</em> 
 
 ### Effect-hooks
 
-Já usamos [state hooks](https://reactjs.org/docs/hooks-state.html), introduzidos juntamente com a versão do React [16.8.0](https://www.npmjs.com/package/react/v/16.8.0), que fornecem estado aos componentes React definidos como funções — os chamados <i>componentes funcionais</i>. A versão 16.8.0 também introduz [effect hooks](https://reactjs.org/docs/hooks-effect.html) como uma nova funcionalidade. De acordo com a documentação oficial:
+Já usamos [hooks de estado](https://reactjs.org/docs/hooks-state.html) que foram introduzidos juntamente com a versão do React [16.8.0](https://www.npmjs.com/package/react/v/16.8.0), que fornecem estado aos componentes React definidos como funções — os chamados <i>componentes funcionais</i>. A versão 16.8.0 também introduz [effect hooks](https://reactjs.org/docs/hooks-effect.html) (ou "ganchos de efeito" ou "hooks de efeito") como uma nova funcionalidade. De acordo com a documentação oficial:
 
-> <i>O Effect Hook (Hook de Efeito) permite executar efeitos colaterais em componentes funcionais</i> > <i>Buscar dados, configurar uma subscription (assinatura), e mudar o DOM manualmente dentro dos componentes React são exemplos de efeitos colaterais.</i>
+> <i>O Effect Hook (Hook de Efeito) te permite executar efeitos colaterais em componentes funcionais</i> > <i>Buscar dados, configurar uma subscription (assinatura), e mudar o DOM manualmente dentro dos componentes React são exemplos de efeitos colaterais.</i>
 
 Como tal, os hooks de efeito são precisamente a ferramenta certa a ser usada ao buscar dados de um servidor.
 
@@ -381,24 +374,23 @@ import { useState, useEffect } from 'react' // highlight-line
 import axios from 'axios' // highlight-line
 import Note from './components/Note'
 
-const App = () => { // highlight-line
+const App = () => {
+  // highlight-line
   const [notes, setNotes] = useState([]) // highlight-line
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
 
-// highlight-start
+  // highlight-start
   useEffect(() => {
-    console.log('effect')
-    axios
-      .get('http://localhost:3001/notes')
-      .then(response => {
-        console.log('promise fulfilled')
-        setNotes(response.data)
-      })
+    console.log('effect (efeito)')
+    axios.get('http://localhost:3001/notes').then((response) => {
+      console.log('promise fulfilled (promessa resolvida)')
+      setNotes(response.data)
+    })
   }, [])
 
-  console.log('render', notes.length, 'notes')
-// highlight-end
+  console.log('render (renderiza)', notes.length, 'notes (notas)')
+  // highlight-end
 
   // ...
 }
@@ -409,51 +401,48 @@ Também adicionamos algumas impressões úteis no console, que esclarecem a prog
 Isto é impresso no console:
 
 <pre>
-render 0 notes
-effect
-promise fulfilled
-render 3 notes
+render (renderiza) 0 notes (notas)
+effect (efeito)
+promise fulfilled (promessa resolvida)
+render (renderiza) 3 notes (notas)
 </pre>
 
-Assim, o corpo da função que define o componente é executado e o componente é renderizado pela primeira vez. Neste ponto, <i>render 0 notes</i> é impresso, o que significa que os dados ainda não foram buscados no servidor.
+Assim, o corpo da função que define o componente é executado e o componente é renderizado pela primeira vez. Neste ponto, <i>render (renderiza) 0 notes (notas)</i> é impresso, o que significa que os dados ainda não foram buscados no servidor.
 
-Em seguida, a função — ou efeito, no linguajar React:
+Em seguida, a função — ou efeito, no linguajar React — ...
 
 ```js
 () => {
-  console.log('effect')
-  axios
-    .get('http://localhost:3001/notes')
-    .then(response => {
-      console.log('promise fulfilled')
-      setNotes(response.data)
-    })
+  console.log('effect (efeito)')
+  axios.get('http://localhost:3001/notes').then((response) => {
+    console.log('promise fulfilled (promessa resolvida)')
+    setNotes(response.data)
+  })
 }
 ```
 
-é executada imediatamente após a renderização. A execução da função resulta na impressão de <i>effect</i> no console, e o comando <em>axios.get</em> inicia a busca de dados no servidor, bem como registra a seguinte função como um <i>gerenciador de evento</i> para a operação:
+... é executada imediatamente após a renderização. A execução da função resulta na impressão de <i>effect (efeito)</i> no console, e o comando <em>axios.get</em> inicia a busca de dados no servidor, bem como registra a seguinte função como um <i>gerenciador de evento</i> para a operação:
 
 ```js
 response => {
-  console.log('promise fulfilled')
+  console.log('promise fulfilled (promessa resolvida)')
   setNotes(response.data)
 })
 ```
 
-Quando os dados chegam do servidor, o ambiente de execução JavaScript chama a função registrada como o gerenciador de evento, o que imprime <i>promise fulfilled</i> no console e armazena as notas recebidas do servidor no estado usando a função <em>setNotes(response.data)</em>.
+Quando os dados chegam do servidor, o ambiente de execução JavaScript chama a função registrada como o gerenciador de evento, o que imprime <i>promise fulfilled (promessa resolvida)</i> no console e armazena as notas recebidas do servidor no estado usando a função <em>setNotes(response.data)</em>.
 
-Como sempre, uma chamada a uma função de atualização de estado gera a re-renderização do componente. Como resultado, <i>render 3 notes</i> é impresso no console e as notas buscadas do servidor são renderizadas na tela.
+Como sempre, uma chamada a uma função de atualização de estado gera a re-renderização do componente. Como resultado, <i>render (renderiza) 3 notes (notas)</i> é impresso no console e as notas buscadas do servidor são renderizadas na tela.
 
 Por fim, vamos dar uma olhada na definição do hook de efeito como um todo:
 
 ```js
 useEffect(() => {
-  console.log('effect')
-  axios
-    .get('http://localhost:3001/notes').then(response => {
-      console.log('promise fulfilled')
-      setNotes(response.data)
-    })
+  console.log('effect (efeito)')
+  axios.get('http://localhost:3001/notes').then((response) => {
+    console.log('promise fulfilled (promessa resolvida)')
+    setNotes(response.data)
+  })
 }, [])
 ```
 
@@ -461,21 +450,19 @@ Vamos reescrever o código de uma maneira um pouco diferente:
 
 ```js
 const hook = () => {
-  console.log('effect')
-  axios
-    .get('http://localhost:3001/notes')
-    .then(response => {
-      console.log('promise fulfilled')
-      setNotes(response.data)
-    })
+  console.log('effect (efeito)')
+  axios.get('http://localhost:3001/notes').then((response) => {
+    console.log('promise fulfilled (promessa resolvida)')
+    setNotes(response.data)
+  })
 }
 
 useEffect(hook, [])
 ```
 
-Podemos ver claramente que a função [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect) leva <i>dois parâmetros</i>. O primeiro é uma função, o próprio <i>effect (efeito)</i>. De acordo com a documentação:
+Podemos ver claramente que a função [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect) ("usarEfeito") leva <i>dois parâmetros</i>. O primeiro é uma função, o próprio <i>effect (efeito)</i>. De acordo com a documentação:
 
-> <i>Por padrão, useEffect é executado após cada renderização completa, mas é possível escolher executá-lo somente quando determinados valores tenham mudado.</i>
+> <i>Por padrão, useEffect roda depois da primeira renderização e depois de toda atualização, mas é possível escolher rodá-lo somente quando determinados valores tenham mudado.</i>
 
 Portanto, por padrão, o efeito é <i>sempre</i> executado após a renderização do componente. No nosso caso, no entanto, só queremos executar o efeito junto à primeira renderização.
 
@@ -485,14 +472,14 @@ Existem muitos casos possíveis de uso para um hook de efeito, além de buscar d
 
 Pense novamente na sequência de eventos que acabamos de discutir. Qual parte do código é executada? Em que ordem? Com qual frequência? Entender a ordem dos eventos é decisivo!
 
-Observe que também poderíamos ter escrito o código da função de efeito (<i>effect function</i>) desta forma:
+Observe que também poderíamos ter escrito o código da função de efeito (effect function) desta forma:
 
 ```js
 useEffect(() => {
-  console.log('effect')
+  console.log('effect (efeito)')
 
-  const eventHandler = response => {
-    console.log('promise fulfilled')
+  const eventHandler = (response) => {
+    console.log('promise fulfilled (promessa resolvida)')
     setNotes(response.data)
   }
 
@@ -501,17 +488,15 @@ useEffect(() => {
 }, [])
 ```
 
-Uma referência à função gerenciadora de evento é atribuída à variável <em>eventHandler</em>. A promessa retornada pelo método <em>get</em> do Axios é armazenada na variável <em>promise</em>. O registro do callback acontece dando à variável <em>eventHandler</em>, que referencia a função gerenciadora de evento, como parâmetro para o método <em>then</em> da promessa. Em geral, não é necessário atribuir funções e promessas a variáveis, e uma forma mais compacta de representação de ações já é suficiente, como a exibida acima, por exemplo.
+Uma referência à função gerenciadora de evento é atribuída à variável <em>eventHandler</em>. A promessa retornada pelo método <em>get</em> do Axios é armazenada na variável <em>promise</em>. O registro do callback (retorno de chamada) acontece dando à variável <em>eventHandler</em>, que referencia a função gerenciadora de evento, como parâmetro para o método <em>then</em> da promessa. Em geral, não é necessário atribuir funções e promessas a variáveis, e uma forma mais compacta de representação de ações já é suficiente, como a exibida acima, por exemplo.
 
 ```js
 useEffect(() => {
-  console.log('effect')
-  axios
-    .get('http://localhost:3001/notes')
-    .then(response => {
-      console.log('promise fulfilled')
-      setNotes(response.data)
-    })
+  console.log('effect (efeito)')
+  axios.get('http://localhost:3001/notes').then((response) => {
+    console.log('promise fulfilled (promessa resolvida)')
+    setNotes(response.data)
+  })
 }, [])
 ```
 
@@ -543,24 +528,24 @@ Continuemos com o desenvolvimento da lista telefônica. Armazene o estado inicia
 
 ```json
 {
-  "persons":[
-    { 
-      "name": "Arto Hellas", 
+  "persons": [
+    {
+      "name": "Arto Hellas",
       "number": "040-123456",
       "id": 1
     },
-    { 
-      "name": "Ada Lovelace", 
+    {
+      "name": "Ada Lovelace",
       "number": "39-44-5323523",
       "id": 2
     },
-    { 
-      "name": "Dan Abramov", 
+    {
+      "name": "Dan Abramov",
       "number": "12-43-234345",
       "id": 3
     },
-    { 
-      "name": "Mary Poppendieck", 
+    {
+      "name": "Mary Poppendieck",
       "number": "39-23-6423122",
       "id": 4
     }
@@ -570,19 +555,19 @@ Continuemos com o desenvolvimento da lista telefônica. Armazene o estado inicia
 
 Inicie o json-server na porta 3001 e verifique se o servidor retorna a lista de pessoas acessando o endereço <http://localhost:3001/persons> no navegador.
 
-Se você receber a seguinte mensagem de erro:
+Se você receber a seguinte mensagem de erro...
 
 ```js
 events.js:182
       throw er; // Unhandled 'error' event
-      ^
+      ^        //* Evento de 'erro' não gerenciado
 
 Error: listen EADDRINUSE 0.0.0.0:3001
     at Object._errnoException (util.js:1019:11)
     at _exceptionWithHostPort (util.js:1041:20)
 ```
 
-significa que a porta 3001 já está em uso por outra aplicação; alguma aplicação pode estar usando json-server nesse momento, por exemplo. Feche a outra aplicação ou altere a porta, caso a primeira opção não funcione.
+... significa que a porta 3001 já está em uso por outra aplicação; alguma aplicação pode estar usando json-server nesse momento, por exemplo. Feche a outra aplicação ou altere a porta, caso a primeira opção não funcione.
 
 Modifique a aplicação para que o estado inicial dos dados seja obtido do servidor usando a biblioteca <i>axios</i>. Conclua a busca (fetching) com um [hook de Efeito](https://reactjs.org/docs/hooks-effect.html) (Effect hook).
 
