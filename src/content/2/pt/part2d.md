@@ -23,25 +23,27 @@ Os recursos são buscados do servidor com requisições HTTP GET. Por exemplo, u
 
 A criação de um novo recurso para armazenar uma nota é feita fazendo uma requisição HTTP POST para a URL <i>notes</i> de acordo com a convenção REST a qual o json-server adere. Os dados para o novo recurso de nota são enviados no <i>corpo</i> (body) da requisição.
 
-O json-server exige que todos os dados sejam enviados no formato JSON. O que isso significa na prática é que os dados devem ser uma formatados em formato de string e que a requisição deve conter o cabeçalho de requisição <i>Content-Type</i> (Tipo de Conteúdo) com o valor <i>application/json</i>.
+O json-server exige que todos os dados sejam enviados no formato JSON. O que isso significa na prática é que os dados devem ser formatados como string e a requisição deve conter o cabeçalho de requisição <i>Content-Type</i> (Tipo de Conteúdo) com o valor <i>application/json</i>.
 
 ### Enviando dados ao servidor
 
 Vamos fazer as seguintes alterações no gerenciador de evento responsável por criar uma nova nota:
 
 ```js
-addNote = (event) => {
+addNote = event => {
   event.preventDefault()
   const noteObject = {
     content: newNote,
     important: Math.random() < 0.5,
   }
 
-  // highlight-start
-  axios.post('http://localhost:3001/notes', noteObject).then((response) => {
-    console.log(response)
-  })
-  // highlight-end
+// highlight-start
+  axios
+    .post('http://localhost:3001/notes', noteObject)
+    .then(response => {
+      console.log(response)
+    })
+// highlight-end
 }
 ```
 
@@ -59,40 +61,42 @@ Por vezes é útil inspecionar as requisições HTTP na guia <i>Rede</i> das Fer
 
 Podemos usar o inspetor para verificar se os cabeçalhos enviados na requisição POST são os que esperávamos:
 
-![](../../images/2/21new1.png)
+![o header no dev tools mostra '201 created' para localhost:3001/notes](../../images/2/21new1.png)
 
 Como os dados que enviamos na requisição POST eram um objeto JavaScript, o axios sabia automaticamente definir o valor apropriado de <i>application/json</i> para o cabeçalho <i>Content-Type</i>.
 
 A guia <i>Visualização</i> (<i>Payload</i>) pode ser usada para verificar os dados da requisição:
 
-![](../../images/2/21new2.png)
+![a guia VIsualização do devtools mostra os campos content e important](../../images/2/21new2.png)
 
 Também é útil a guia <i>Resposta</i> (<i>Response</i>), pois mostra qual foi os dados que o servidor respondeu:
 
-![](../../images/2/21new3.png)
+![a guia Resposta do devtools mostra o mesmo conteúdo visto na guia Visualização, mas com o campo id incluído](../../images/2/21new3.png)
 
 A nova nota ainda não é renderizada na tela. Isso se deve ao fato de que não atualizamos o estado do componente <i>App</i> quando criamos a nova nota. Vamos consertar isso:
 
 ```js
-addNote = (event) => {
+addNote = event => {
   event.preventDefault()
   const noteObject = {
     content: newNote,
     important: Math.random() > 0.5,
   }
 
-  axios.post('http://localhost:3001/notes', noteObject).then((response) => {
-    // highlight-start
-    setNotes(notes.concat(response.data))
-    setNewNote('')
-    // highlight-end
-  })
+  axios
+    .post('http://localhost:3001/notes', noteObject)
+    .then(response => {
+      // highlight-start
+      setNotes(notes.concat(response.data))
+      setNewNote('')
+      // highlight-end
+    })
 }
 ```
 
 A nova nota retornada pelo servidor back-end é adicionada à lista de notas no estado da nossa aplicação seguindo a forma habitual do uso da função <em>setNotes</em> e, em seguida, reinicia o formulário de criação de notas. Um [detalhe importante](/ptbr/part1/um_estado_mais_complexo_e_depuracao_de_aplicacoes_react#gerenciando-arrays) a lembrar é que o método <em>concat</em> não muda o estado original do componente, mas cria uma nova cópia da lista.
 
-Assim que os dados retornados pelo servidor começam a ter efeito no comportamento das nossas aplicações web, somos imediatamente confrontados com um conjunto inteiro de novos desafios decorrentes como, por exemplo, a assincronicidade da comunicação. Isso necessita de novas estratégias de depuração, como o "console.log" e outros meios de depuração que se tornam cada vez mais importantes. Também devemos desenvolver uma compreensão suficiente dos princípios do ambiente de execução JavaScript e dos componentes React. Só ficar adivinhando não será suficiente.
+Assim que os dados retornados pelo servidor começam a ter efeito no comportamento das nossas aplicações web, somos imediatamente confrontados com um conjunto inteiro de novos desafios decorrentes como, por exemplo, a assincronicidade da comunicação. Isso necessita de novas estratégias de depuração, como o "console.log" e outros meios de depuração que se tornam cada vez mais importantes. Também devemos desenvolver uma boa compreensão dos princípios do ambiente de execução JavaScript e dos componentes React. Só ficar adivinhando não será suficiente.
 
 Algo benéfico é inspecionar o estado do servidor back-end, por exemplo, através do navegador:
 
@@ -100,7 +104,7 @@ Algo benéfico é inspecionar o estado do servidor back-end, por exemplo, atrav�
 
 Isso torna possível verificar se todos os dados que pretendíamos enviar realmente foram recebidos pelo servidor.
 
-Na próxima parte do curso, aprenderemos a implementar nossa própria lógica no back-end. Em seguida, daremos uma olhada mais atenta em ferramentas como [Postman](https://www.postman.com/downloads/), que nos ajuda a depurar nossas aplicações de servidor. Entretanto, inspecionar o estado do json-server através do navegador já é suficiente para nossas necessidades atuais.
+Na próxima parte do curso, aprenderemos a implementar nossa própria lógica no back-end. Em seguida, daremos uma olhada mais atenta em ferramentas como [Postman](https://www.postman.com/downloads/), que nos ajuda a depurar nossas aplicações de servidor. Por ora, inspecionar o estado do json-server através do navegador é suficiente para nossas necessidades atuais.
 
 O código para o estado atual de nossa aplicação pode ser encontrado na branch <i>part2-5</i> neste repositório no [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-5).
 
@@ -112,9 +116,9 @@ Façamos as seguintes alterações no componente <i>Note</i>:
 
 ```js
 const Note = ({ note, toggleImportance }) => {
-  //"toggleImportance" traduz-se, grosso modo, como "alternarImportancia"
-  const label = note.important ? 'make not important' : 'make important'
-  // *"label" = "etiqueta"       'tornar desimportante':'tornar importante'
+  const label = note.important
+    ? 'make not important' : 'make important'
+
   return (
     <li>
       {note.content}
@@ -130,7 +134,7 @@ O componente <i>App</i> define uma versão inicial da função gerenciadora de e
 
 ```js
 const App = () => {
-  const [notes, setNotes] = useState([])
+  const [notes, setNotes] = useState([]) 
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
 
@@ -139,7 +143,6 @@ const App = () => {
   // highlight-start
   const toggleImportanceOf = (id) => {
     console.log('importance of ' + id + ' needs to be toggled')
-    //          'importância de ' + id + ' precisa ser alternada'
   }
   // highlight-end
 
@@ -150,18 +153,17 @@ const App = () => {
       <h1>Notes</h1>
       <div>
         <button onClick={() => setShowAll(!showAll)}>
-          show {showAll ? 'important' : 'all'}
-          {/* mostrar ... 'importante': 'todos' */}
+          show {showAll ? 'important' : 'all' }
         </button>
-      </div>
+      </div>      
       <ul>
-        {notesToShow.map((note) => (
+        {notesToShow.map(note => 
           <Note
             key={note.id}
-            note={note}
+            note={note} 
             toggleImportance={() => toggleImportanceOf(note.id)} // highlight-line
           />
-        ))}
+        )}
       </ul>
       // ...
     </div>
@@ -175,7 +177,6 @@ Por exemplo, se o <i>note.id</i> for 3, a função gerenciadora de evento retorn
 
 ```js
 () => { console.log('importance of 3 needs to be toggled') }
-//                'a importância de 3 precisa ser alternada'
 ```
 
 Um breve lembrete: a string impressa pelo gerenciador de evento é definida de um jeito Java, isto é, adicionando strings:
@@ -197,13 +198,13 @@ As notas individuais armazenadas no json-server do back-end podem ser modificada
 A forma final da função gerenciadora de evento é a seguinte:
 
 ```js
-const toggleImportanceOf = (id) => {
+const toggleImportanceOf = id => {
   const url = `http://localhost:3001/notes/${id}`
-  const note = notes.find((n) => n.id === id)
+  const note = notes.find(n => n.id === id)
   const changedNote = { ...note, important: !note.important }
 
-  axios.put(url, changedNote).then((response) => {
-    setNotes(notes.map((n) => (n.id !== id ? n : response.data)))
+  axios.put(url, changedNote).then(response => {
+    setNotes(notes.map(n => n.id !== id ? n : response.data))
   })
 }
 ```
@@ -241,15 +242,15 @@ A nova nota é então enviada com uma requisição PUT ao back-end, onde ela sub
 A função callback (função de retorno de chamada) define o estado do componente <em>notes</em> como um array novo que contém todos os itens do array <em>notes</em> anterior, exceto pela nota antiga, que é substituída pela versão atualizada dela retornada pelo servidor:
 
 ```js
-axios.put(url, changedNote).then((response) => {
-  setNotes(notes.map((note) => (note.id !== id ? note : response.data)))
+axios.put(url, changedNote).then(response => {
+  setNotes(notes.map(note => note.id !== id ? note : response.data))
 })
 ```
 
 Isto é feito utilizando o método <em>map</em>:
 
 ```js
-notes.map((note) => (note.id !== id ? note : response.data))
+notes.map(note => note.id !== id ? note : response.data)
 ```
 
 O método <i>map</i> cria um array novo mapeando cada item do array antigo em um item no array novo. Em nosso exemplo, o array novo é criado de forma condicional de modo que se <em>note.id !== id</em> for verdadeiro, simplesmente copiamos o item do array antigo para o array novo. Se a condição for falsa, então o objeto de nota retornado pelo servidor é adicionado ao array.
@@ -258,7 +259,7 @@ Esse truque do método <em>map</em> pode parecer um pouco estranho agora no iní
 
 ### Separando a Comunicação com o Back-end em um Módulo Único
 
-O componente <i>App</i> ficou um pouco pesado após adicionar o código para se comunicar com o servidor back-end. No espírito do [princípio da responsabilidade única](https://en.wikipedia.org/wiki/Single_responsibility_principle) (single responsibility principle), achamos sensato extrair esta comunicação em seu próprio [módulo](/ptbr/part2/renderizacao_de_uma_colecao_e_modulos#refatorando-modulos).
+O componente <i>App</i> ficou um pouco carregado após adicionar o código para se comunicar com o servidor back-end. No espírito do [princípio da responsabilidade única](https://en.wikipedia.org/wiki/Single_responsibility_principle) (single responsibility principle), achamos sensato extrair esta comunicação em seu próprio [módulo](/ptbr/part2/renderizacao_de_uma_colecao_e_modulos#refatorando-modulos).
 
 Vamos criar um diretório <i>src/services</i> e adicionar lá um arquivo chamado <i>notes.js</i>:
 
@@ -267,24 +268,21 @@ import axios from 'axios'
 const baseUrl = 'http://localhost:3001/notes'
 
 const getAll = () => {
-  // "getAll" traduz-se, grosso modo, como "requisitarTudo"
   return axios.get(baseUrl)
 }
 
-const create = (newObject) => {
-  // "criar"
+const create = newObject => {
   return axios.post(baseUrl, newObject)
 }
 
 const update = (id, newObject) => {
-  // Grosso modo, "atualizar" (tradução aproximada)
   return axios.put(`${baseUrl}/${id}`, newObject)
 }
 
-export default {
-  getAll: getAll,
-  create: create,
-  update: update,
+export default { 
+  getAll: getAll, 
+  create: create, 
+  update: update 
 }
 ```
 
@@ -306,20 +304,24 @@ const App = () => {
 
   useEffect(() => {
     // highlight-start
-    noteService.getAll().then((response) => {
-      setNotes(response.data)
-    })
+    noteService
+      .getAll()
+      .then(response => {
+        setNotes(response.data)
+      })
     // highlight-end
   }, [])
 
-  const toggleImportanceOf = (id) => {
-    const note = notes.find((n) => n.id === id)
+  const toggleImportanceOf = id => {
+    const note = notes.find(n => n.id === id)
     const changedNote = { ...note, important: !note.important }
 
     // highlight-start
-    noteService.update(id, changedNote).then((response) => {
-      setNotes(notes.map((note) => (note.id !== id ? note : response.data)))
-    })
+    noteService
+      .update(id, changedNote)
+      .then(response => {
+        setNotes(notes.map(note => note.id !== id ? note : response.data))
+      })
     // highlight-end
   }
 
@@ -327,15 +329,17 @@ const App = () => {
     event.preventDefault()
     const noteObject = {
       content: newNote,
-      important: Math.random() > 0.5,
+      important: Math.random() > 0.5
     }
 
-    // highlight-start
-    noteService.create(noteObject).then((response) => {
-      setNotes(notes.concat(response.data))
-      setNewNote('')
-    })
-    // highlight-end
+// highlight-start
+    noteService
+      .create(noteObject)
+      .then(response => {
+        setNotes(notes.concat(response.data))
+        setNewNote('')
+      })
+// highlight-end
   }
 
   // ...
@@ -347,21 +351,23 @@ export default App
 Poderíamos levar nossa implementação um passo adiante. Quando o componente <i>App</i> usa as funções, ele recebe um objeto que contém a resposta inteira para a requisição HTTP:
 
 ```js
-noteService.getAll().then((response) => {
-  setNotes(response.data)
-})
+noteService
+  .getAll()
+  .then(response => {
+    setNotes(response.data)
+  })
 ```
 
 O componente <i>App</i> usa apenas a propriedade <i>response.data</i> do objeto de resposta.
 
-Seria muito melhor de usar o módulo se, em vez da obter resposta a HTTP inteira, só obtivéssemos os dados da resposta. Então, o uso do módulo ficaria assim:
+Seria muito melhor de usar o módulo se, em vez de obter a resposta HTTP inteira, só obtivéssemos os dados da resposta. Então, o uso do módulo ficaria assim:
 
 ```js
-noteService.getAll().then((initialNotes) => {
-  /* "initialNotes" traduz-se, grosso modo,
-      como "notasIniciais" */
-  setNotes(initialNotes)
-})
+noteService
+  .getAll()
+  .then(initialNotes => {
+    setNotes(initialNotes)
+  })
 ```
 
 Podemos fazer o que estamos planejando mudando o código no módulo da seguinte forma (o código atual contém um pouco de "copia e cola", mas vamos tolerar isso por enquanto):
@@ -372,23 +378,23 @@ const baseUrl = 'http://localhost:3001/notes'
 
 const getAll = () => {
   const request = axios.get(baseUrl)
-  return request.then((response) => response.data)
+  return request.then(response => response.data)
 }
 
-const create = (newObject) => {
+const create = newObject => {
   const request = axios.post(baseUrl, newObject)
-  return request.then((response) => response.data)
+  return request.then(response => response.data)
 }
 
 const update = (id, newObject) => {
   const request = axios.put(`${baseUrl}/${id}`, newObject)
-  return request.then((response) => response.data)
+  return request.then(response => response.data)
 }
 
-export default {
-  getAll: getAll,
-  create: create,
-  update: update,
+export default { 
+  getAll: getAll, 
+  create: create, 
+  update: update 
 }
 ```
 
@@ -397,7 +403,7 @@ Não retornamos mais a promessa entregue diretamente pelo axios. Em vez disso, a
 ```js
 const getAll = () => {
   const request = axios.get(baseUrl)
-  return request.then((response) => response.data)
+  return request.then(response => response.data)
 }
 ```
 
@@ -407,7 +413,7 @@ A última linha em nossa função é simplesmente uma expressão mais compacta d
 const getAll = () => {
   const request = axios.get(baseUrl)
   // highlight-start
-  return request.then((response) => {
+  return request.then(response => {
     return response.data
   })
   // highlight-end
@@ -427,24 +433,23 @@ const App = () => {
   useEffect(() => {
     noteService
       .getAll()
-      // highlight-start
-      .then((initialNotes) => {
+      // highlight-start      
+      .then(initialNotes => {
         setNotes(initialNotes)
-        // highlight-end
+      // highlight-end
       })
   }, [])
 
-  const toggleImportanceOf = (id) => {
-    const note = notes.find((n) => n.id === id)
+  const toggleImportanceOf = id => {
+    const note = notes.find(n => n.id === id)
     const changedNote = { ...note, important: !note.important }
 
     noteService
       .update(id, changedNote)
-      // highlight-start
-      .then((returnedNote) => {
-        // ou "notaRetornada"
-        setNotes(notes.map((note) => (note.id !== id ? note : returnedNote)))
-        // highlight-end
+      // highlight-start      
+      .then(returnedNote => {
+        setNotes(notes.map(note => note.id !== id ? note : returnedNote))
+      // highlight-end
       })
   }
 
@@ -452,15 +457,15 @@ const App = () => {
     event.preventDefault()
     const noteObject = {
       content: newNote,
-      important: Math.random() > 0.5,
+      important: Math.random() > 0.5
     }
 
     noteService
       .create(noteObject)
-      // highlight-start
-      .then((returnedNote) => {
+      // highlight-start      
+      .then(returnedNote => {
         setNotes(notes.concat(returnedNote))
-        // highlight-end
+      // highlight-end
         setNewNote('')
       })
   }
@@ -487,23 +492,23 @@ const baseUrl = 'http://localhost:3001/notes'
 
 const getAll = () => {
   const request = axios.get(baseUrl)
-  return request.then((response) => response.data)
+  return request.then(response => response.data)
 }
 
-const create = (newObject) => {
+const create = newObject => {
   const request = axios.post(baseUrl, newObject)
-  return request.then((response) => response.data)
+  return request.then(response => response.data)
 }
 
 const update = (id, newObject) => {
   const request = axios.put(`${baseUrl}/${id}`, newObject)
-  return request.then((response) => response.data)
+  return request.then(response => response.data)
 }
 
-export default {
-  getAll: getAll,
-  create: create,
-  update: update,
+export default { 
+  getAll: getAll, 
+  create: create, 
+  update: update 
 }
 ```
 
@@ -522,8 +527,10 @@ As etiquetas (labels) à esquerda do dois-pontos na definição do objeto são a
 Como os nomes das chaves e das variáveis atribuídas são os mesmos, podemos escrever a definição do objeto com uma sintaxe mais compacta:
 
 ```js
-{
-  getAll, create, update
+{ 
+  getAll, 
+  create, 
+  update 
 }
 ```
 
@@ -535,17 +542,17 @@ const baseUrl = 'http://localhost:3001/notes'
 
 const getAll = () => {
   const request = axios.get(baseUrl)
-  return request.then((response) => response.data)
+  return request.then(response => response.data)
 }
 
-const create = (newObject) => {
+const create = newObject => {
   const request = axios.post(baseUrl, newObject)
-  return request.then((response) => response.data)
+  return request.then(response => response.data)
 }
 
 const update = (id, newObject) => {
   const request = axios.put(`${baseUrl}/${id}`, newObject)
-  return request.then((response) => response.data)
+  return request.then(response => response.data)
 }
 
 export default { getAll, create, update } // highlight-line
@@ -587,21 +594,19 @@ Vamos simular essa situação fazendo com que a função <em>getAll</em> do serv
 const getAll = () => {
   const request = axios.get(baseUrl)
   const nonExisting = {
-    //  'naoExistente'
     id: 10000,
     content: 'This note is not saved to server',
-    //       'Esta nota não está salva no servidor'
     important: true,
   }
-  return request.then((response) => response.data.concat(nonExisting))
+  return request.then(response => response.data.concat(nonExisting))
 }
 ```
 
-Quando tentamos mudar a importância da nota, vemos a seguinte mensagem de erro no console. A mensagem de erro diz que o servidor back-end respondeu à nossa requisição HTTP PUT com um código de status 404 <i>not found</i> (não encontrado(a)).
+Quando tentamos mudar a importância da nota, vemos no console a mensagem de erro abaixo, cujo conteúdo revela que o servidor back-end respondeu à nossa requisição HTTP PUT com um código de status 404 <i>not found</i> (não encontrado(a)).
 
 ![erro 404 not found nas ferramentas do desenvolvedor](../../images/2/23e.png)
 
-A aplicação deve ser capaz de lidar com estes tipos de erro de forma elegante. Os usuários não serão capazes de dizer que ocorreu um erro a menos que estejam com o console aberto. A única maneira de o erro ser visto na aplicação é a importância da nota não ser alternada quando se clica no botão.
+A aplicação deve ser capaz de lidar com estes tipos de erro de forma elegante. Os usuários não serão capazes de dizer que ocorreu um erro a menos que estejam com o console aberto. A única maneira de o erro ser percebido na aplicação é a importância da nota não ser alternada quando se clica no botão.
 
 Mencionamos [anteriormente](/ptbr/part2/obtendo_dados_do_servidor#axios-e-promessas-promises) que uma promessa pode estar em um dos três estados diferentes. Quando uma requisição HTTP falha, a promessa associada é <i>rejeitada</i>. O nosso código atual não gerencia por nenhum meio essa rejeição.
 
@@ -614,11 +619,11 @@ Na prática, o gerenciador de erro para promessas rejeitadas é definido da segu
 ```js
 axios
   .get('http://example.com/probably_will_fail')
-  .then((response) => {
-    console.log('success! (sucesso!)')
+  .then(response => {
+    console.log('success!')
   })
-  .catch((error) => {
-    console.log('fail (falha)')
+  .catch(error => {
+    console.log('fail')
   })
 ```
 
@@ -631,8 +636,8 @@ Quando a nossa aplicação faz uma requisição HTTP, na verdade estamos criando
 ```js
 axios
   .put(`${baseUrl}/${id}`, newObject)
-  .then((response) => response.data)
-  .then((changedNote) => {
+  .then(response => response.data)
+  .then(changedNote => {
     // ...
   })
 ```
@@ -642,34 +647,34 @@ O método <em>catch</em> pode ser usado para definir uma função gerenciadora n
 ```js
 axios
   .put(`${baseUrl}/${id}`, newObject)
-  .then((response) => response.data)
-  .then((changedNote) => {
+  .then(response => response.data)
+  .then(changedNote => {
     // ...
   })
-  .catch((error) => {
-    console.log('fail (falha)')
+  .catch(error => {
+    console.log('fail')
   })
 ```
 
 Vamos usar essa funcionalidade e registrar um gerenciador de erro no componente <i>App</i>:
 
 ```js
-const toggleImportanceOf = (id) => {
-  const note = notes.find((n) => n.id === id)
+const toggleImportanceOf = id => {
+  const note = notes.find(n => n.id === id)
   const changedNote = { ...note, important: !note.important }
 
   noteService
-    .update(id, changedNote)
-    .then((returnedNote) => {
-      setNotes(notes.map((note) => (note.id !== id ? note : returnedNote)))
+    .update(id, changedNote).then(returnedNote => {
+      setNotes(notes.map(note => note.id !== id ? note : returnedNote))
     })
     // highlight-start
-    .catch((error) => {
-      alert(`the note '${note.content}' was already deleted from server`)
-      //    `a nota '${note.content}' já foi excluída do servidor`
-      setNotes(notes.filter((n) => n.id !== id))
+    .catch(error => {
+      alert(
+        `the note '${note.content}' was already deleted from server`
+      )
+      setNotes(notes.filter(n => n.id !== id))
     })
-  // highlight-end
+    // highlight-end
 }
 ```
 
@@ -678,10 +683,10 @@ A mensagem de erro é exibida ao usuário com a antiga e confiável caixa de di�
 A remoção de uma nota já excluída do estado da aplicação é feita com o método de array [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) (filtrar), que retorna um array novo com apenas os itens da lista para os quais a função passada como parâmetro retorna verdadeiro para:
 
 ```js
-notes.filter((n) => n.id !== id)
+notes.filter(n => n.id !== id)
 ```
 
-Não é lá uma boa ideia usar o "alert" em aplicações React mais sérias. Em breve aprenderemos uma maneira mais avançada de exibir mensagens e notificações aos usuários. No entanto, há situações em que um método simples e testado como o <em>alert</em> pode funcionar como um ponto de partida. Uma maneira mais avançada sempre pode ser adicionada posteriormente, desde que haja tempo e energia disponíveis para isso.
+Não é uma boa ideia usar o "alert" em aplicações React mais sérias. Em breve aprenderemos uma maneira mais avançada de exibir mensagens e notificações aos usuários. No entanto, há situações em que um método simples e testado como o <em>alert</em> pode funcionar como um ponto de partida. Uma maneira mais avançada sempre pode ser adicionada posteriormente, desde que haja tempo e energia disponíveis para isso.
 
 O código para o estado atual de nossa aplicação pode ser encontrado na branch <i>part2-6</i> no [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-6).
 
@@ -697,7 +702,7 @@ Desenvolvimento Full Stack é algo <i>extremamente difícil</i>, e é por isso q
 
 - Eu manterei meu Console do navegador sempre aberto;
 - <i> Eu usarei a guia Rede das Ferramentas do Desenvolvedor do navegador para garantir que o front-end e o back-end estejam se comunicando da forma que eu planejei</i> ;
-- <i> Eu ficarei de olho no estado do servidor para garantir que os dados enviados pelo front-end estejam sendo salvos lá da forma que eu planejei</i>;
+- <i> Eu ficarei de olho no estado do servidor para garantir que os dados enviados pelo front-end estejam sendo salvos da forma que eu planejei</i>;
 - Eu vou progredir aos poucos, passo a passo;
 - Eu escreverei muitas instruções _console.log_ para ter certeza de que estou entendendo como o código se comporta e para me ajudar a identificar os erros;
 - Se meu código não funcionar, não escreverei mais nenhuma linha no código. Em vez disso, começarei a excluir o código até que funcione ou retornarei ao estado em que tudo ainda estava funcionando; e
@@ -729,7 +734,7 @@ O recurso associado a uma pessoa no back-end pode ser excluído fazendo uma requ
 
 Você pode fazer uma requisição HTTP DELETE com a biblioteca [axios](https://github.com/axios/axios) da mesma forma que fazemos todas as outras requisições.
 
-**N.B.:** Você não pode utilizar o nome <em>delete</em> para declarar uma variável, porque é uma palavra reservada em JavaScript. Por exemplo, não é possível fazer o seguinte:
+**Obs.:** Você não pode utilizar o nome <em>delete</em> para declarar uma variável, porque é uma palavra reservada em JavaScript. Por exemplo, não é possível fazer o seguinte:
 
 ```js
 // use algum outro nome para sua variável
