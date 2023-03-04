@@ -84,7 +84,7 @@ Quando a validação de um objeto falha, retornamos a seguinte mensagem de erro 
 
 ![mensagem de erro sendo exibida no postman](../../images/3/50.png)
 
-Percebemos que o back-end tem agora um problema: as validações não são executadas quando uma nota é editada.
+Percebemos que o backend tem agora um problema: as validações não são executadas quando uma nota é editada.
 A [documentação](https://github.com/blakehaswell/mongoose-unique-validator#find--updates) explica qual é o problema: as validações não são executadas por padrão quando <i>findOneAndUpdate</i> é executado.
 
 É fácil a correção. Também vamos reformular um pouco o código da rota:
@@ -105,13 +105,13 @@ app.put('/api/notes/:id', (request, response, next) => {
 })
 ```
 
-### Implantando o back-end do banco de dados para produção
+### Implantando o backend do banco de dados para produção
 
-A aplicação deve funcionar quase como está no Fly.io/Render. Não precisamos gerar um novo build de produção do front-end, uma vez que as alterações até agora ocorreram apenas no back-end.
+A aplicação deve funcionar quase como está no Fly.io/Render. Não precisamos gerar um novo build de produção do frontend, uma vez que as alterações até agora ocorreram apenas no backend.
 
-As variáveis de ambiente definidas em <i>dotenv</i> só serão usadas quando o back-end não estiver em <i>modo de produção</i> (production mode), ou seja, no Fly.io ou Render.
+As variáveis de ambiente definidas em <i>dotenv</i> só serão usadas quando o backend não estiver em <i>modo de produção</i> (production mode), ou seja, no Fly.io ou Render.
 
-Para se adaptar ao modo de produção, temos que definir a URL do banco de dados no serviço que está hospedando nossa aplicação.
+Para colocar em produção, temos que definir a URL do banco de dados no serviço que está hospedando nossa aplicação.
 
 Isso é feito no Fly.io com _fly secrets set_:
 
@@ -153,7 +153,7 @@ O Painel do Render mostra os logs do servidor:
 
 Expanda a validação para que o nome armazenado no banco de dados tenha pelo menos três caracteres.
 
-Expanda o front-end para que seja exibido algum tipo de mensagem de erro quando ocorrer um erro de validação. O gerenciamento de erros pode ser implementado adicionando um bloco <em>catch</em> como mostrado abaixo:
+Expanda o frontend para que seja exibido algum tipo de mensagem de erro quando ocorrer um erro de validação. O gerenciamento de erros pode ser implementado adicionando um bloco <em>catch</em> como mostrado abaixo:
 
 ```js
 personService
@@ -171,11 +171,12 @@ Você pode exibir a mensagem de erro padrão retornada pelo Mongoose, mesmo que 
 
 ![captura de tela da lista telefônica mostrando falha na validação de uma pessoa](../../images/3/56e.png)
 
-**N.B.:** Os validadores do mongoose são desativados por padrão nas operações de atualização. [Leia a documentação](https://mongoosejs.com/docs/validation.html) para saber como ativá-los.
+**Obs.:** Os validadores do mongoose são desativados por padrão nas operações de atualização. [Leia a documentação](https://mongoosejs.com/docs/validation.html) para saber como ativá-los.
 
 #### 3.20*: Phonebook database — 8º passo
 
 Aplique a validação à sua aplicação da lista telefônica, na qual garantirá que os números de telefone estejam no formato correto. Um número de telefone deve:
+
 - Ter comprimento de 8 ou mais caracteres;
 - Se for composto por duas partes que são separadas por "-" (hífen), a primeira parte deve ter dois ou três números e a segunda parte também é completada com o restante do número telefônico:
   - Ex.: 09-1234556 e 040-22334455 são números válidos;
@@ -185,15 +186,15 @@ Use um [Validador Personalizado](https://mongoosejs.com/docs/validation.html#cus
 
 Se uma requisição HTTP POST tentar adicionar uma pessoa com um número de telefone inválido, o servidor deve responder com um código de status apropriado e uma mensagem de erro.
 
-#### 3.21 Implantação do back-end do banco de dados para produção
+#### 3.21 Implantação do backend do banco de dados para produção
 
-Gere uma nova versão "full stack" da aplicação criando um novo build de produção do front-end, assim copiando-o ao repositório do back-end. Verifique se tudo funciona localmente acessando a aplicação inteira no endereço <http://localhost:3001/>.
+Gere uma nova versão "full stack" da aplicação criando um novo build de produção do frontend, assim copiando-o ao repositório do backend. Verifique se tudo funciona localmente acessando a aplicação inteira no endereço <http://localhost:3001/>.
 
 Envie a versão mais recente para o Fly.io/Render e verifique se tudo funciona lá também.
 
-**NOTA:** você deve implantar o BACK-END no serviço em nuvem. Se estiver usando o Fly.io, os comandos devem ser executados no diretório raiz do back-end (ou seja, no mesmo diretório onde está o package.json do back-end). Caso esteja usando o Render, o back-end deve estar na raiz do seu repositório.
+**NOTA:** você deve implantar o BACKEND no serviço em nuvem. Se estiver usando o Fly.io, os comandos devem ser executados no diretório raiz do backend (ou seja, no mesmo diretório onde está o package.json do backend). Caso esteja usando o Render, o backend deve estar na raiz do seu repositório.
 
-Você NÃO deve implantar o front-end diretamente em nenhuma etapa desta parte. Somente o repositório do back-end que é implantado nesta parte, nada mais.
+Você NÃO deve implantar o frontend diretamente em nenhuma etapa desta parte. Somente o repositório do backend que é implantado nesta parte, nada mais.
 
 </div>
 
@@ -209,7 +210,7 @@ Em linguagens compiladas de tipagem estática, como Java, IDEs (Integrated Devel
 
 No universo JavaScript, a ferramenta líder atual para análise estática, também conhecida como "linting", é o [ESlint](https://eslint.org/).
 
-Vamos instalar o ESlint como uma dependência de desenvolvimento no projeto back-end com o comando:
+Vamos instalar o ESlint como uma dependência de desenvolvimento no projeto backend com o comando:
 
 ```bash
 npm install eslint --save-dev
@@ -374,16 +375,15 @@ Isso inclui uma regra que avisa sobre comandos _console.log_. Para [desabilitar]
 }
 ```
 
-**N.B.:** quando se faz alterações no arquivo <i>.eslintrc.js</i>, é recomendado executar o linter a partir da linha de comando. Isso irá verificar se o arquivo de configuração está formatado corretamente:
+**Obs.:** quando se faz alterações no arquivo <i>.eslintrc.js</i>, é recomendado executar o linter a partir da linha de comando. Isso irá verificar se o arquivo de configuração está formatado corretamente:
 
 ![saída do terminal como resultado do comando 'npm run lint'](../../images/3/55.png)
 
-O plugin do lint irá se comportar de forma bem errática se houver algo errado em seu arquivo de configuração.
+O plugin do lint irá se comportar incorretamente se houver algo errado em seu arquivo de configuração.
 
 Muitas empresas definem padrões de código que são aplicados em toda a organização por meio do arquivo de configuração do ESlint. Não é recomendado reinventar a roda toda vez, e pode ser até uma boa ideia adotar uma configuração pré-pronta do projeto de outra pessoa no seu. Muitos projetos adotaram recentemente o [guia de estilo Javascript](https://github.com/airbnb/javascript) da Airbnb, adotando a [configuração do ESlint da empresa](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb).
 
 É possível encontrar o código da nossa aplicação atual na íntegra na branch <i>part3-6</i> [neste repositório do GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-6).
-
 </div>
 
 <div class="tasks">
