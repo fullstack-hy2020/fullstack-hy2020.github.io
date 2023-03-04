@@ -346,7 +346,7 @@ In the Apollo Explorer, the header is added to a query like so:
 
 ![apollo explorer highlighting headers with authorization and bearer token](../../images/8/24x.png)
 
-Modify the startup of the backend by giving the function that handles the startup [startStandaloneServer](https://www.apollographql.com/docs/apollo-server/api/standalone/) another parameter [context](https://www.apollographql.com /docs/apollo-server/data/context/)
+Modify the startup of the backend by giving the function that handles the startup [startStandaloneServer](https://www.apollographql.com/docs/apollo-server/api/standalone/) another parameter [context](https://www.apollographql.com/docs/apollo-server/data/context/)
 
 ```js
 startStandaloneServer(server, {
@@ -564,7 +564,7 @@ Add user management to your application. Expand the schema like so:
 ```js
 type User {
   username: String!
-  favouriteGenre: String!
+  favoriteGenre: String!
   id: ID!
 }
 
@@ -581,7 +581,7 @@ type Mutation {
   // ...
   createUser(
     username: String!
-    favouriteGenre: String!
+    favoriteGenre: String!
   ): User
   login(
     username: String!

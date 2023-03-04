@@ -249,7 +249,7 @@ app.listen(PORT, () => {
 
 Até agora, rodamos o código do React em <i>modo de desenvolvimento</i>. No modo de desenvolvimento, a aplicação é configurada para exibir mensagens de erro claras, renderizar imediatamente as mudanças de código para o navegador, e assim por diante.
 
-Quando a aplicação é implantada (deployed), é necessário criar um [build de produção](https://reactjs.org/docs/optimizing-performance.html#use-the-production-build),  ou seja, uma versão da aplicação otimizada para produção.
+Quando a aplicação é implantada (deployed), é necessário criar um [build de produção](https://reactjs.org/docs/optimizing-performance.html#use-the-production-build), ou seja, uma versão da aplicação otimizada para produção.
 
 Um build de produção de aplicações gerado com <i>create-react-app</i> pode ser criado com o comando [npm run build](https://github.com/facebookincubator/create-react-app#npm-run-build-or-yarn-build).
 
