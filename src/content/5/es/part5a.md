@@ -118,6 +118,16 @@ const login = async credentials => {
 export default { login }
 ```
 
+Si tiene instalado el plugin eslint en VS Code, puede que aparezca el siguiente error:
+
+![vs code warning - assign object to a variable before exporting as module default](../../images/5/50new.png)
+
+Luego configuraremos eslint. Por ahora, puede ignorar el error o eliminarlo al adicionar la siguiente línea antes de la advertencia:
+
+```js
+// eslint-disable-next-line import/no-anonymous-default-export
+export default { login }
+
 El método para manejar el inicio de sesión se puede implementar de la siguiente manera:
 
 ```js
