@@ -81,8 +81,8 @@ You most likely need to do at least two changes. Firstly, define the Node versio
 ```json
 {
   // highlight-start
-  "engines" : { 
-    "node" : "16.13.2" 
+  "engines": { 
+    "node": "16.13.2" 
   },
   // highlight-end
   "name": "fullstackopen-cicd",
