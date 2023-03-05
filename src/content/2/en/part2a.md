@@ -467,7 +467,7 @@ If you clone the project, run the command _npm install_ before starting the appl
 
 ### When the Application Breaks
 
-Early in your programming career (and even after 30 years of coding like yours truly), what often happens is that the application just completely breaks down. This is even moreso the case with dynamically typed languages, such as JavaScript, where the compiler does not check the data type. For instance, function variables or return values.
+Early in your programming career (and even after 30 years of coding like yours truly), what often happens is that the application just completely breaks down. This is even more so the case with dynamically typed languages, such as JavaScript, where the compiler does not check the data type. For instance, function variables or return values.
 
 A "React explosion" can, for example, look like this:
 
