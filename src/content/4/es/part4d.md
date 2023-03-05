@@ -194,6 +194,24 @@ La función auxiliar _getTokenFrom_ aísla el token del encabezado de <i>authori
 const decodedToken = jwt.verify(token, process.env.SECRET)
 ```
 
+La verificación del token también puede causar un error <i>JsonWebTokenError</i> si es que es inválido o está ausente. Extendamos nuestro middleware para tener en cuenta este caso particular.
+
+```js
+const errorHandler = (error, request, response, next) => {
+  logger.error(error.message)
+
+  if (error.name === 'CastError') {
+    return response.status(400).send({ error: 'malformatted id' })
+  } else if (error.name === 'ValidationError') {
+    return response.status(400).json({ error: error.message })
+  } else if (error.name ===  'JsonWebTokenError') { // highlight-line
+    return response.status(400).json({ error: error.message }) // highlight-line
+  }
+
+  next(error)
+}
+```
+
 El objeto decodificado del token contiene los campos <i>username</i> y <i>id</i>, que le dice al servidor quién hizo la solicitud.
 
 Si no hay ningún token, o el objeto decodificado del token no contiene la identidad del usuario (_decodedToken.id_ no está definido), el código de estado de error [401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2) es devuelto y el motivo del error se explica en el cuerpo de la respuesta.
@@ -217,50 +235,87 @@ Usando Postman, esto se ve de la siguiente manera:
 y con el cliente REST de Visual Studio Code
 
 ![](../../images/4/21e.png)
+  
+El código de la aplicación actual se puede encontrar en [Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-9), rama <i>part4-9</i>.
+  
+Si la aplicación tiene múltiples interfaces que requieren identificación, la validación de JWT debe separarse en su propio middleware. También se podría utilizar alguna librería existente como [express-jwt](https://www.npmjs.com/package/express-jwt).
 
-### Manejo de errores
+### Problemas de la autenticación basada en Tokens
 
-La verificación del token también puede causar un <i>JsonWebTokenError</i>. Si, por ejemplo, eliminamos algunos caracteres del token e intentamos crear una nueva nota, esto sucede:
+La autenticación basada en tokens es muy fácil de implementar, pero tiene un problema. Una vez que el cliente de la API, por ejemplo una aplicación React, obtiene un token, la API tiene una confianza ciega en el titular del token. ¿Qué sucede si necesitamos revocar los derechos de acceso del titular del token?
 
-```bash
-JsonWebTokenError: invalid signature
-    at /Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/node_modules/jsonwebtoken/verify.js:126:19
-    at getSecret (/Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/node_modules/jsonwebtoken/verify.js:80:14)
-    at Object.module.exports [as verify] (/Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/node_modules/jsonwebtoken/verify.js:84:10)
-    at notesRouter.post (/Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/controllers/notes.js:40:30)
-```
-
-Hay muchas razones posibles para un error de decodificación. El token puede ser defectuoso (como en nuestro ejemplo), falsificado o vencido. Extendamos nuestro middleware errorHandler para tener en cuenta los diferentes errores de decodificación.
+Hay dos soluciones al problema. La más fácil es limitar el período de validez de un token:
 
 ```js
-const unknownEndpoint = (request, response) => {
-  response.status(404).send({ error: 'unknown endpoint' })
-}
+loginRouter.post('/', async (request, response) => {
+  const { username, password } = request.body
 
-const errorHandler = (error, request, response, next) => {
-  if (error.name === 'CastError') {
-    return response.status(400).send({
-      error: 'malformatted id'
+  const user = await User.findOne({ username })
+  const passwordCorrect = user === null
+    ? false
+    : await bcrypt.compare(password, user.passwordHash)
+
+  if (!(user && passwordCorrect)) {
+    return response.status(401).json({
+      error: 'invalid username or password'
     })
-  } else if (error.name === 'ValidationError') {
-    return response.status(400).json({
-      error: error.message 
-    })
-  } else if (error.name === 'JsonWebTokenError') {  // highlight-line
-    return response.status(401).json({ // highlight-line
-      error: 'invalid token' // highlight-line
-    }) // highlight-line
   }
 
+  const userForToken = {
+    username: user.username,
+    id: user._id,
+  }
+
+  // token expires in 60*60 seconds, that is, in one hour
+  // highlight-start
+  const token = jwt.sign(
+    userForToken, 
+    process.env.SECRET,
+    { expiresIn: 60*60 }
+  )
+  // highlight-end
+
+  response
+    .status(200)
+    .send({ token, username: user.username, name: user.name })
+})
+```
+
+Una vez que el token caduca, la aplicación cliente necesita obtener un nuevo token. Por lo general, esto sucede al obligar al usuario a volver a iniciar sesión en la aplicación.
+
+El middleware de manejo de errores debe extenderse para dar un error adecuado en el caso de un token caducado:
+
+```js
+const errorHandler = (error, request, response, next) => {
   logger.error(error.message)
+
+  if (error.name === 'CastError') {
+    return response.status(400).send({ error: 'malformatted id' })
+  } else if (error.name === 'ValidationError') {
+    return response.status(400).json({ error: error.message })
+  } else if (error.name === 'JsonWebTokenError') {
+    return response.status(401).json({
+      error: 'invalid token'
+    })
+  // highlight-start  
+  } else if (error.name === 'TokenExpiredError') {
+    return response.status(401).json({
+      error: 'token expired'
+    })
+  }
+  // highlight-end
 
   next(error)
 }
 ```
 
-El código de la aplicación actual se puede encontrar en [Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-9), rama <i>part4-9</i>.
+Cuanto más corto sea el tiempo de caducidad, más segura será la solución. Por lo tanto, si el token cae en las manos equivocadas o es necesario revocar el acceso del usuario al sistema, el token solo se puede utilizar durante un período de tiempo limitado. Por otro lado, un tiempo de caducidad corto genera un dolor potencial para el usuario, ya que le implica iniciar sesión en el sistema con más frecuencia.
 
-Si la aplicación tiene múltiples interfaces que requieren identificación, la validación de JWT debe separarse en su propio middleware. También se podría utilizar alguna librería existente como [express-jwt](https://www.npmjs.com/package/express-jwt).
+La otra solución es guardar información sobre cada token en la base de datos y verificar en cada solicitud de API si el derecho de acceso correspondiente al token sigue siendo válido. Con este esquema, los derechos de acceso pueden ser revocados en cualquier momento. Este tipo de solución a menudo se denomina <i>server-side session</i>.
+
+El aspecto negativo de las sesiones del lado del servidor es la mayor complejidad en el backend y también el efecto en el rendimiento, ya que se debe verificar la validez del token para cada solicitud de API a la base de datos. El acceso a la base de datos es considerablemente más lento en comparación con la verificación de la validez del token en sí. Es por eso que es bastante común guardar la sesión correspondiente a un token en una <i>base de datos de llave-valor</i> como [Redis](https://redis.io/) que tiene una funcionalidad limitada en comparación con MongoDB o bases de datos relacionales, pero es extremadamente rápida en algunos escenarios de uso.
+
+Cuando se utilizan sesiones del lado del servidor, el token suele ser solo una cadena aleatoria, que no incluye ninguna información sobre el usuario, como suele ser el caso cuando se utilizan jwt-tokens. Para cada solicitud de API, el servidor obtiene la información relevante sobre la identidad del usuario de la base de datos. También es bastante habitual que, en lugar de utilizar el encabezado de autorización, se utilicen <i>cookies</i> como mecanismo para transferir el token entre el cliente y el servidor.
 
 ### Notas finales
 
