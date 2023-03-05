@@ -206,5 +206,52 @@
       "La partie 0 du support de cours détaille plus en détail le contenu et le déroulement du cours. Assurez-vous de lire attentivement le matériel et les instructions.",
       "Vous pouvez discuter du cours et des sujets connexes dans notre groupe dédié sur <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>Discord</a> et sur <a target='_blank' href='https://t.me/fullstackcourse'>Telegram</a>. Rejoignez la conversation !"
     ]
+  },
+  "ptbr": {
+    "name": "Geral",
+    "intro": [
+      "<em>Têm perguntas sobre o curso? Leia cuidadosamente a <a href='/ptbr/part0/informacoes_gerais'>Parte 0</a>, pois lá é possível encontrar a resposta para a maioria delas...</em>",
+      "Este curso é uma introdução ao desenvolvimento de aplicações <em>web</em> modernas com JavaScript. O objetivo principal é construir aplicações SPA (Single-Page Applications) com ReactJS, as quais utilizam APIs REST construídas em Node.js. O curso também contém uma seção sobre GraphQL, uma alternativa moderna às APIs REST.",
+      "O curso abrange testes, gerenciamento de configuração e ambiente, uso de bancos de dados para armazenamento dos dados da aplicação, entre outras coisas.",
+      "O curso vale de 5 a 14 créditos e o conteúdo é o mesmo do <a href='https://fullstack-hy2020.github.io/'>curso Full stack</a> realizado no <a href='https://www.helsinki.fi/en/computer-science'>Departamento de Ciência da Computação</a> na Universidade de Helsinki na primavera de 2022. Este também é um <a href='/osa0/yleista#full-stack-harjoitustyo'>projeto</a> associado que vale de 1 a 10 créditos.",
+      "Incluem-se como parceiros e afiliados do curso: <a href='https://www.houston-inc.com/'>Houston Inc</a>, <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>, <a href='https://elisa.fi/'>Elisa</a>, <a href='https://www.instagram.com/unitytechnologies/?hl=en'>Unity Technologies</a> e <a href='https://careers.konecranes.com/Konecranes/'>Konecranes</a>. Entre <a href='https://www.youtube.com/watch?v=BZexOyQZMMc&list=PLumQiZ25uijis31zaRL7rhzLalSwLqUtm'>aqui</a> para ver palestras ministradas por vários especialistas de nossos parceiros e afiliados sobre tópicos relacionados ao curso.",
+      "É esperado que os participantes tenham boas habilidades de programação, conhecimento básico de programação web e banco de dados e saibam os conceitos básicos práticos do sistema de controle de versão Git. Também é esperado que você tenha perseverança e habilidade para resolução de problemas e busca de informações de forma independente.",
+      "A <a href='/ptbr/part0/informacoes_gerais'>Parte 0</a> do material do curso explica o conteúdo e a conduta do curso com mais detalhes. Certifique-se de ler todo o material e as suas instruções.",
+      "Você também pode discutir sobre o curso e os tópicos relacionados em nosso grupo dedicado no Discord <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> e no Telegram: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. Venha conversar conosco!"
+    ],
+    "info": [
+      {
+        "title": "Material do Curso",
+        "content": [
+          "O material do curso é para ser lido \"parte por parte\" do início ao fim. Também pode ser vantajoso fazer todos os exercícios da parte em que se está estudando somente depois de ler todo o material da parte.",
+          "O material é baseado no desenvolvimento gradual de algumas aplicações que são usados como exemplo que vão mudando em cada parte do material. O material é melhor aproveitado se você escrever e fazer pequenas modificações no código por si mesmo."
+        ]
+      },
+      {
+        "title": "Desempenho",
+        "content": [
+          "O curso consiste em oito partes. A primeira começa como 'Parte 0 (zero)' por razões históricas.",
+          "No material, da parte <em>n</em> para <em>n + 1</em>, o avanço não é significativo até que se tenha alcançado conhecimento suficiente de alguns dos Ns.",
+          "Assume-se que você esteja fazendo pelo menos algumas das tarefas que não foram marcadas com um asterisco (*). As tarefas marcadas com um asterisco também afetarão a revisão, mas não fazê-las também não criará maiores dificuldades para que se consiga fazer a próxima seção (não marcada).",
+          "A velocidade para o término do curso é livre.",
+          "As estatísticas do tempo gasto para o envio das soluções dos exercícios já feitos em diferentes partes deste curso podem ser encontradas na página de envio de exercícios."
+        ]
+      },
+      {
+        "title": "Critérios de Classificação",
+        "content": [
+          "O curso pode ser concluído com 3 ou com 5 a 8 créditos.",
+          "A abrangência e a nota são determinadas por todas os exercícios realizadas, então exercícios indicados com um asterisco também afetarão a nota.",
+          "Se você quiser concluir o curso, salve sua solicitação de recuperação de número de estudante na opção 'my submissions'."
+        ]
+      },
+      {
+        "title": "Tipos de conteúdo",
+        "content": [
+          "Há muitos conteúdos no curso, e ele foi escrito muito rápido devido às circunstâncias. Apesar dos testes 'beta' e da revisão, o material tem erros de ortografia. /fullstackopen-2020.github.iok no material do curso.",
+          "Fazer uma solicitação 'pull' é fácil. Por exemplo, se essa página tiver algum erro de digitação, vá até a página de \"código-fonte\" https://github.com/fullstack-hy2019/fullstack-hy2019.github.io/edit/source/src/content/pages/about.json, clique na imagem de lápis à direita, faça as alterações e clique algumas vezes em \"verde\" de acordo com o curso de Perigo."
+        ]
+      }
+    ]
   }
 }

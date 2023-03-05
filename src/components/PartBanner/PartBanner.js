@@ -69,11 +69,37 @@ const partNameTranslations = {
     'Conteneurs',
     'Utilisation de bases de donées relationnelles'
   ],
+  ptbr: [
+    'Fundamentos de aplicações web',
+    'Introdução ao React',
+    'Comunicação com o servidor',
+    'Programando um servidor com NodeJS e Express',
+    'Teste de servidores Express e Administração de Usuários',
+    'Teste de aplicações React',
+    'Gerenciamento de Estado com Redux',
+    'React router, hooks personalizados, estilização de aplicações com CSS e Webpack',
+    'GraphQL',
+    'TypeScript',
+    'React Native',
+    'CI/CD',
+    'Containers',
+    'Utilizando bancos de dados relacionais',
+  ],
 };
 
 export const PartBanner = ({ lang }) => {
   // TODO change on release
   const parts = Object.keys(navigation[lang]);
+
+  function partName(lang) {
+    return lang === 'fi' ? 'Osa' : lang==='ptbr' ? 'Parte' : 'Part'
+    // if (lang === 'fi') {
+    //   return 'Osa'
+    // } else if (lang === 'ptbr') {
+    //   return 'Parte'
+    // } else {
+    //   return 'Part'
+    }
 
   return (
     <Banner
@@ -94,7 +120,8 @@ export const PartBanner = ({ lang }) => {
                 alt: partNames[part],
               }}
               hoverImageSrc={require(`../../images/thumbnails/part-${part}_ovr.svg`)}
-              name={`${lang === 'fi' ? 'Osa' : 'Part'} ${part}`}
+              // name={`${lang === 'fi' ? 'Osa' : 'Part'} ${part}`}
+              name={`${partName(lang)} ${part}`}
               summary={partNames[part]}
               path={getPartTranslationPath(lang, part)}
             />
