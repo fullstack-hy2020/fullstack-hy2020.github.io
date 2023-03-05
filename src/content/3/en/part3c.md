@@ -549,9 +549,9 @@ It's important that <i>dotenv</i> gets imported before the <i>note</i> model is 
 
 ### Important note to Fly.io users
 
-Because GitHub is not used with Fly.io, also the file .env gets to the Fly.io servers when the app is deployed. Because of this also the env variables defined in the file will be available there.
+Because GitHub is not used with Fly.io, the file .env also gets to the Fly.io servers when the app is deployed. Because of this, the env variables defined in the file will be available there.
 
-However, a [better option](https://community.fly.io/t/clarification-on-environment-variables/6309) is to prevent .env from being copied to Fly.io by creating to the project root the file _.dockerignore_, with the following contents
+However, a [better option](https://community.fly.io/t/clarification-on-environment-variables/6309) is to prevent .env from being copied to Fly.io by creating in the project root the file _.dockerignore_, with the following contents
 
 ```bash
 .env
@@ -563,7 +563,7 @@ and set the env value from the command line with the command:
 fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
 ```
 
-Since also the PORT is defined in our .env it is actually essential to ignore the file in Fly.io since otherways the app starts in the wrong port.
+Since the PORT also is defined in our .env it is actually essential to ignore the file in Fly.io since otherwise the app starts in the wrong port.
 
 When using Render, the database url is given by defining the proper env in the dashboard:
 
