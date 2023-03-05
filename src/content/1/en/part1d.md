@@ -288,7 +288,7 @@ The solution does not quite work:
 
 ![browser showing 2 left|right 1, RLL total 2](../../images/1/33.png)
 
-For some reason the total of button presses is all the time one behind the actual amount of presses.
+The total number of button presses is consistently one less than the actual amount of presses, for some reason.
 
 Let us add couple of console.log statements to the event handler:
 
@@ -311,7 +311,7 @@ The console reveals the problem
 
 ![devtools console showing left before 4 and left after 4](../../images/1/32.png)
 
-Even though a new value was set to _left_ by calling _setLeft(left + 1)_, the old value is still there despite the update! Because of this, the following attempt to count button presses produces a too small result:
+Even though a new value was set for _left_ by calling _setLeft(left + 1)_, the old value persists despite the update. As a result, the attempt to count button presses produces a result that is too small:
 
 ```js
 setTotal(left + right) 
@@ -478,7 +478,7 @@ If and when your code fails to compile and your browser lights up like a Christm
 ![screenshot of code](../../images/1/6x.png)
 
 don't write more code but rather find and fix the problem **immediately**. There has yet to be a moment in the history of coding where code that fails to compile would miraculously start working after writing large amounts of additional code. I highly doubt that such an event will transpire during this course either.
-
+  
 Old-school, print-based debugging is always a good idea. If the component
 
 ```js
@@ -505,25 +505,25 @@ const Button = (props) => {
 
 This will immediately reveal if, for instance, one of the attributes has been misspelled when using the component.
 
-**NB** When you use _console.log_ for debugging, don't combine _objects_ in a Java-like fashion by using the plus operator. Instead of writing:
+**NB** When you use _console.log_ for debugging, don't combine _objects_ in a Java-like fashion by using the plus operator:
 
 ```js
 console.log('props value is ' + props)
 ```
-
-Separate the things you want to log to the console with a comma:
-
-```js
-console.log('props value is', props)
-```
-
-If you use the Java-like way of concatenating a string with an object, you will end up with a rather uninformative log message:
+  
+If you do that, you will end up with a rather uninformative log message:
 
 ```js
 props value is [object Object]
 ```
 
-Whereas the items separated by a comma will all be available in the browser console for further inspection.
+Instead, separate the things you want to log to the console with a comma:
+
+```js
+console.log('props value is', props)
+```
+
+In this way, the separated items will all be available in the browser console for further inspection.
 
 Logging output to the console is by no means the only way of debugging our applications. You can pause the execution of your application code in the Chrome developer console's <i>debugger</i>, by writing the command [debugger](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger) anywhere in your code.
 
