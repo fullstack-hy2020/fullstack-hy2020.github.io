@@ -288,7 +288,7 @@ The solution does not quite work:
 
 ![browser showing 2 left|right 1, RLL total 2](../../images/1/33.png)
 
-For some reason the total of button presses is all the time one behind the actual amount of presses.
+The total number of button presses is consistently one less than the actual amount of presses, for some reason.
 
 Let us add couple of console.log statements to the event handler:
 
