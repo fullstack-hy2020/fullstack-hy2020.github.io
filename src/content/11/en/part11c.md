@@ -191,7 +191,7 @@ app.get('/health', (req, res) => {
 })
 ```
 
-Configure then a [HTTP-check](https://fly.io/docs/reference/configuration/#services-tcp_checks)  that ensures the health of the depyments based on the HTTP request to the defined health check endpoint.
+Configure then a [HTTP-check](https://fly.io/docs/reference/configuration/#services-tcp_checks)  that ensures the health of the deployments based on the HTTP request to the defined health check endpoint.
 
 Note that the default fly.toml has defined that <i>http\_checks</i> is an empty array. You need to remove this line when you are adding a manually defined HTTP-check:
 
