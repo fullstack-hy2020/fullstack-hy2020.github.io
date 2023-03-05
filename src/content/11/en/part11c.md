@@ -111,7 +111,7 @@ Here the <i>app</i> refers to the application process that is started up in the 
 [[services]]
   http_checks = []
   internal_port = 8080
-  processes = ["app"]  // highlight-line
+  processes = ["app"]  # highlight-line
 ```
 
 #### 11.10 Deploying your application to Fly.io
