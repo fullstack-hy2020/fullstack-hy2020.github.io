@@ -478,7 +478,7 @@ If and when your code fails to compile and your browser lights up like a Christm
 ![screenshot of code](../../images/1/6x.png)
 
 don't write more code but rather find and fix the problem **immediately**. There has yet to be a moment in the history of coding where code that fails to compile would miraculously start working after writing large amounts of additional code. I highly doubt that such an event will transpire during this course either.
-
+  
 Old-school, print-based debugging is always a good idea. If the component
 
 ```js
@@ -505,25 +505,25 @@ const Button = (props) => {
 
 This will immediately reveal if, for instance, one of the attributes has been misspelled when using the component.
 
-**NB** When you use _console.log_ for debugging, don't combine _objects_ in a Java-like fashion by using the plus operator. Instead of writing:
+**NB** When you use _console.log_ for debugging, don't combine _objects_ in a Java-like fashion by using the plus operator:
 
 ```js
 console.log('props value is ' + props)
 ```
-
-Separate the things you want to log to the console with a comma:
-
-```js
-console.log('props value is', props)
-```
-
-If you use the Java-like way of concatenating a string with an object, you will end up with a rather uninformative log message:
+  
+If you do that, you will end up with a rather uninformative log message:
 
 ```js
 props value is [object Object]
 ```
 
-Whereas the items separated by a comma will all be available in the browser console for further inspection.
+Instead, separate the things you want to log to the console with a comma:
+
+```js
+console.log('props value is', props)
+```
+
+In this way, the separated items will all be available in the browser console for further inspection.
 
 Logging output to the console is by no means the only way of debugging our applications. You can pause the execution of your application code in the Chrome developer console's <i>debugger</i>, by writing the command [debugger](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger) anywhere in your code.
 
