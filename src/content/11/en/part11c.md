@@ -81,8 +81,8 @@ You most likely need to do at least two changes. Firstly, define the Node versio
 ```json
 {
   // highlight-start
-  "engines" : { 
-    "node" : "16.13.2" 
+  "engines": { 
+    "node": "16.13.2" 
   },
   // highlight-end
   "name": "fullstackopen-cicd",
@@ -111,7 +111,7 @@ Here the <i>app</i> refers to the application process that is started up in the 
 [[services]]
   http_checks = []
   internal_port = 8080
-  processes = ["app"]  // highlight-line
+  processes = ["app"]  # highlight-line
 ```
 
 #### 11.10 Deploying your application to Fly.io
@@ -164,7 +164,7 @@ services.tcp_checks](https://fly.io/docs/reference/configuration/#services-tcp_c
     timeout = "2s"
 ```
 
-This section defines a basic health check of the deployment. The tcp check ensures that the virtual machine where the app resides is up and running and reachable from outside, by opening a [TCP](https://en.wikipedia.org/wiki/Transmission_Control_Protocol) connection to the virtual machine. 
+This section defines a basic health check of the deployment. The TCP check ensures that the virtual machine where the app resides is up and running and reachable from outside, by opening a [TCP](https://en.wikipedia.org/wiki/Transmission_Control_Protocol) connection to the virtual machine. 
 
 This check notices if something is fundamentally broken in the configurations. E.g. in my case for the app of this part, it took several trials until I got the app up and running:
 
@@ -191,7 +191,7 @@ app.get('/health', (req, res) => {
 })
 ```
 
-Configure then a [HTTP-check](https://fly.io/docs/reference/configuration/#services-tcp_checks)  that ensures the health of the depyments based on the HTTP request to the defined health check endpoint.
+Configure then a [HTTP-check](https://fly.io/docs/reference/configuration/#services-http_checks) that ensures the health of the depyments based on the HTTP request to the defined health check endpoint.
 
 Note that the default fly.toml has defined that <i>http\_checks</i> is an empty array. You need to remove this line when you are adding a manually defined HTTP-check:
 
