@@ -11,7 +11,7 @@ This course is an introduction to modern web development with JavaScript. The ma
 
 Other topics include debugging applications, container technology, configuration, managing runtime environments, and databases.
 
-The course is totally free of charge. You can get a certificate and even the University of Helsinki ECTS credits for free.
+The course is totally free of charge. You can get a certificate and even the University of Helsinki ECTS (European Credit Transfer and Accumulation System) credits for free.
 
 ### Prerequisites
 
