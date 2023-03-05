@@ -311,7 +311,7 @@ The console reveals the problem
 
 ![devtools console showing left before 4 and left after 4](../../images/1/32.png)
 
-Even though a new value was set to _left_ by calling _setLeft(left + 1)_, the old value is still there despite the update! Because of this, the following attempt to count button presses produces a too small result:
+Even though a new value was set for _left_ by calling _setLeft(left + 1)_, the old value persists despite the update. As a result, the attempt to count button presses produces a result that is too small:
 
 ```js
 setTotal(left + right) 
