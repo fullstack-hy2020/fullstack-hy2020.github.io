@@ -891,7 +891,7 @@ With a little [help from internet](https://upmostly.com/typescript/how-to-use-ax
 
 ```js
   useEffect(() => {
-    axios.get<Note[]>('http://localhost:3001/notes').then(response => { // highligh-line
+    axios.get<Note[]>('http://localhost:3001/notes').then(response => { // highlight-line
       console.log(response.data);
     })
   }, [])
