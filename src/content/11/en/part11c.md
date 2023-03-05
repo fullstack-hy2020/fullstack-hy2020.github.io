@@ -81,8 +81,8 @@ You most likely need to do at least two changes. Firstly, define the Node versio
 ```json
 {
   // highlight-start
-  "engines" : { 
-    "node" : "16.13.2" 
+  "engines": { 
+    "node": "16.13.2" 
   },
   // highlight-end
   "name": "fullstackopen-cicd",
@@ -111,7 +111,7 @@ Here the <i>app</i> refers to the application process that is started up in the 
 [[services]]
   http_checks = []
   internal_port = 8080
-  processes = ["app"]  // highlight-line
+  processes = ["app"]  # highlight-line
 ```
 
 #### 11.10 Deploying your application to Fly.io
@@ -164,7 +164,7 @@ services.tcp_checks](https://fly.io/docs/reference/configuration/#services-tcp_c
     timeout = "2s"
 ```
 
-This section defines a basic health check of the deployment. The tcp check ensures that the virtual machine where the app resides is up and running and reachable from outside, by opening a [TCP](https://en.wikipedia.org/wiki/Transmission_Control_Protocol) connection to the virtual machine. 
+This section defines a basic health check of the deployment. The TCP check ensures that the virtual machine where the app resides is up and running and reachable from outside, by opening a [TCP](https://en.wikipedia.org/wiki/Transmission_Control_Protocol) connection to the virtual machine. 
 
 This check notices if something is fundamentally broken in the configurations. E.g. in my case for the app of this part, it took several trials until I got the app up and running:
 
@@ -191,7 +191,7 @@ app.get('/health', (req, res) => {
 })
 ```
 
-Configure then a [HTTP-check](https://fly.io/docs/reference/configuration/#services-tcp_checks)  that ensures the health of the depyments based on the HTTP request to the defined health check endpoint.
+Configure then a [HTTP-check](https://fly.io/docs/reference/configuration/#services-http_checks) that ensures the health of the depyments based on the HTTP request to the defined health check endpoint.
 
 Note that the default fly.toml has defined that <i>http\_checks</i> is an empty array. You need to remove this line when you are adding a manually defined HTTP-check:
 
@@ -282,11 +282,11 @@ Now when you know that the script based health check works, it is time to define
 
 You propably should use [curl](https://curl.se/) in the script to do the HTTP request. You most likely need to Google how to get hold to the returned string and compare it with the expected value 'ok'.
 
-It is <strong>strongly advisable</strong> to check first locally that the script works since so many things can go wrong in it, and when run in GitHub Action, you can not do any debug printing. If and <i> when</i> things do not work as indended, it is also a very good idea to log in to the virtual machine (with <i>flyctl ssh console</i>) and check that the script works when runned manually there.
+It is <strong>strongly advisable</strong> to check first locally that the script works since so many things can go wrong in it, and when run in GitHub Action, you can not do any debug printing. If and <i> when</i> things do not work as indended, it is also a very good idea to log in to the virtual machine (with <i>flyctl ssh console</i>) and check that the script works when ran manually there.
 
 *Note* that in order to test the script in the virtual machine, you should have the script in your local directory when you make a successful deployment. So if your deployment fails, the script will not be uploaded to the Fly.io server. So in case of problems, comment out the script based health check from fly.toml and do a deployment to get your script to the virtual machine.
 
-Our script based health check is hardly meaningful in real life since it does essentially the same that is achievable with the simple HTTP check. The example here is just to show that the mechanism exists. Unlike with HTTP checks, with script based health checks you can in principle write an anrbitrarily compled and many sided health check to your app, should you need one.
+Our script based health check is hardly meaningful in real life since it does essentially the same that is achievable with the simple HTTP check. The example here is just to show that the mechanism exists. Unlike with HTTP checks, with script based health checks you can in principle write an arbitrarily compiled and many sided health check to your app, should you need one.
 
 </div>
 

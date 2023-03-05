@@ -118,6 +118,16 @@ const login = async credentials => {
 export default { login }
 ```
 
+Si tiene instalado el plugin eslint en VS Code, puede que aparezca el siguiente error:
+
+![vs code warning - assign object to a variable before exporting as module default](../../images/5/50new.png)
+
+Luego configuraremos eslint. Por ahora, puede ignorar el error o eliminarlo al adicionar la siguiente línea antes de la advertencia:
+
+```js
+// eslint-disable-next-line import/no-anonymous-default-export
+export default { login }
+
 El método para manejar el inicio de sesión se puede implementar de la siguiente manera:
 
 ```js
@@ -504,7 +514,7 @@ const App = () => {
 
 El array vacío como parámetro del effect hook asegura que el hook se ejecute solo cuando el componente es renderizado [por primera vez](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect).
 
-Ahora un usuario permanece conectado a la aplicación para siempre. Probablemente deberíamos agregar funcionalidad para <i>cerrar sesión</i> que elimine los detalles de inicio de sesión del almacenamiento local. Sin embargo, lo dejaremos para un ejercicio.
+Ahora un usuario permanece conectado a la aplicación para siempre. Probablemente deberíamos agregar funcionalidad para <i>cerrar sesión</i> que elimine los detalles de inicio de sesión del almacenamiento local. Sin embargo, lo dejaremos como un ejercicio posterior.
 
 Es posible cerrar la sesión de un usuario usando la consola, y eso es suficiente por ahora. Puede cerrar sesión con el comando:
 
@@ -538,13 +548,13 @@ Mientras realiza los ejercicios, recuerde todos los métodos de debugging de los
 
 #### 5.1: frontend de la lista de blogs, paso 1
 
-Clona la aplicación de [Github](https://github.com/fullstack-hy2020/bloglist-frontend) con el comando:
+Clone la aplicación de [Github](https://github.com/fullstack-hy2020/bloglist-frontend) con el comando:
 
 ```bash
 git clone https://github.com/fullstack-hy2020/bloglist-frontend
 ```
 
-<i>elimina la configuración de git de la aplicación clonada</i>
+<i>Elimine la configuración de git de la aplicación clonada</i>
 
 ```bash
 cd bloglist-frontend   // go to cloned repository

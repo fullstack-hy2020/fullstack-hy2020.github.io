@@ -467,7 +467,7 @@ If you clone the project, run the command _npm install_ before starting the appl
 
 ### When the Application Breaks
 
-Early in your programming career (and even after 30 years of coding like yours truly), what often happens is that the application just completely breaks down. This is even moreso the case with dynamically typed languages, such as JavaScript, where the compiler does not check the data type. For instance, function variables or return values.
+Early in your programming career (and even after 30 years of coding like yours truly), what often happens is that the application just completely breaks down. This is even more so the case with dynamically typed languages, such as JavaScript, where the compiler does not check the data type. For instance, function variables or return values.
 
 A "React explosion" can, for example, look like this:
 
@@ -576,7 +576,7 @@ Programming is hard, that is why I will use all the possible means to make it ea
 
 <h3>Exercises 2.1.-2.5.</h3>
 
-The exercises are submitted via GitHub, and by marking the exercises as done in the [submission system]https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+The exercises are submitted via GitHub, and by marking the exercises as done in the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 You can submit all of the exercises into the same repository, or use multiple different repositories. If you submit exercises from different parts into the same repository, name your directories well.
 
@@ -588,7 +588,7 @@ Note that this part has more exercises than the ones before, so <i>do not submit
 
 <h4>2.1: Course information step6</h4>
 
-Let's finish the code for rendering course contents from exercises 1.1 - 1.5. You can start with the code from the model answers. The model answers for part 1 can be found by going to the [submission system]https://studies.cs.helsinki.fi/stats/courses/fullstackopen), clicking on <i>my submissions</i> at the top, and in the row corresponding to part 1 under the <i>solutions</i> column clicking on <i>show</i>. To see the solution to the <i>course info</i> exercise, click on _index.js_ under <i>kurssitiedot</i> ("kurssitiedot" means "course info").
+Let's finish the code for rendering course contents from exercises 1.1 - 1.5. You can start with the code from the model answers. The model answers for part 1 can be found by going to the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen), clicking on <i>my submissions</i> at the top, and in the row corresponding to part 1 under the <i>solutions</i> column clicking on <i>show</i>. To see the solution to the <i>course info</i> exercise, click on _index.js_ under <i>kurssitiedot</i> ("kurssitiedot" means "course info").
 
 
 **Note that if you copy a project from one place to another, you might have to delete the <i>node\_modules</i> directory and install the dependencies again with the command _npm install_ before you can start the application.**
