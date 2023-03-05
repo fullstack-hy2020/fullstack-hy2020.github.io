@@ -414,7 +414,7 @@ And now adding new notes works again!
 
 ### Saving the token to the browser's local storage
 
-Our application has a small flaw: if the browser is refreshed (eg. pressig F5), the user's login information disappears.
+Our application has a small flaw: if the browser is refreshed (eg. pressing F5), the user's login information disappears.
 
 This problem is easily solved by saving the login details to [local storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage). Local Storage is a [key-value](https://en.wikipedia.org/wiki/Key-value_database) database in the browser.
 
