@@ -381,7 +381,7 @@ The file defines two [class selectors](https://developer.mozilla.org/en-US/docs/
 
 A class selector definition always starts with a period and contains the name of the class.
 
-The classes are [attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class), which can be added to HTML elements.
+Classes are [attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class), which can be added to HTML elements.
 
 CSS attributes can be examined on the <i>elements</i> tab of the console:
 
@@ -391,7 +391,7 @@ The outermost <i>div</i> element has the class <i>container</i>. The <i>ul</i> e
 
 The CSS rule defines that elements with the <i>container</i> class will be outlined with a one-pixel wide [border](https://developer.mozilla.org/en-US/docs/Web/CSS/border). It also sets 10-pixel [padding](https://developer.mozilla.org/en-US/docs/Web/CSS/padding) on the element. This adds some empty space between the element's content and the border.
 
-The second CSS rule sets the text color of the notes as blue.
+The second CSS rule sets the text color of the <i>notes</i> class as blue.
 
 HTML elements can also have other attributes apart from classes. The <i>div</i> element containing the notes has an [id](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id) attribute. JavaScript code uses the id to find the element.
 
