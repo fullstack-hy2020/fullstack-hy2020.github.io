@@ -164,7 +164,7 @@ xhttp.send()
 
 The details of the code are not important right now, but some code has been included to spice up the images and the text. We will properly start coding in [part 1](/en/part1). The sample code in this part is actually not relevant at all to the coding techniques of this course.
 
-> Some might wonder why xhttp-object is used instead of the modern fetch. This is due to not wanting to go into promises at all yet, and the code having a secondary role in this part. We will return to modern ways to make requests to the server in part 2.
+> Some might wonder why xhttp-object is used instead of the modern fetch. This is due to not wanting to go into promises at all yet, and the code having a secondary role in this part. We will return to modern ways to make requests to the server in [part 2](/en/part2).
 
 Immediately after fetching the <i>script</i> tag, the browser begins to execute the code.
 
@@ -471,7 +471,7 @@ notes.push({
 })
 ```
 
-The Note objects have two fields: <i>content</i> containing the actual content of the note, and <i>date</i> containing the date and time the note was created.
+Each note object has two fields: <i>content</i> containing the actual content of the note, and <i>date</i> containing the date and time the note was created.
 
 The server does not save new notes to a database, so new notes disappear when the server is restarted.
 
