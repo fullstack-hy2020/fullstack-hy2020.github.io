@@ -74,16 +74,16 @@ const partNameTranslations = {
     'Introdução ao React',
     'Comunicação com o servidor',
     'Programando um servidor com NodeJS e Express',
-    'Teste de servidores Express e Administração de Usuários',
-    'Teste de aplicações React',
-    'Gerenciamento de Estado com Redux',
-    'React router, hooks personalizados, estilização de aplicações com CSS e Webpack',
-    'GraphQL',
-    'TypeScript',
-    'React Native',
-    'CI/CD',
-    'Containers',
-    'Utilizando bancos de dados relacionais',
+    'Teste de servidores Express e Administração de Usuários (tradução em andamento)',
+    'Teste de aplicações React (tradução em andamento)',
+    'Gerenciamento de Estado com Redux (tradução em andamento)',
+    'React router, hooks personalizados, estilização de aplicações com CSS e Webpack (tradução em andamento)',
+    'GraphQL (tradução em andamento)',
+    'TypeScript (tradução em andamento)',
+    'React Native (tradução em andamento)',
+    'CI/CD (tradução em andamento)',
+    'Containers (tradução em andamento)',
+    'Utilizando bancos de dados relacionais (tradução em andamento)',
   ],
 };
 
@@ -92,14 +92,8 @@ export const PartBanner = ({ lang }) => {
   const parts = Object.keys(navigation[lang]);
 
   function partName(lang) {
-    return lang === 'fi' ? 'Osa' : lang==='ptbr' ? 'Parte' : 'Part'
-    // if (lang === 'fi') {
-    //   return 'Osa'
-    // } else if (lang === 'ptbr') {
-    //   return 'Parte'
-    // } else {
-    //   return 'Part'
-    }
+    return lang === 'fi' ? 'Osa' : lang === 'ptbr' ? 'Parte' : 'Part';
+  }
 
   return (
     <Banner
@@ -120,7 +114,6 @@ export const PartBanner = ({ lang }) => {
                 alt: partNames[part],
               }}
               hoverImageSrc={require(`../../images/thumbnails/part-${part}_ovr.svg`)}
-              // name={`${lang === 'fi' ? 'Osa' : 'Part'} ${part}`}
               name={`${partName(lang)} ${part}`}
               summary={partNames[part]}
               path={getPartTranslationPath(lang, part)}
