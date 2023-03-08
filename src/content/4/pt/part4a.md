@@ -66,9 +66,9 @@ app.listen(config.PORT, () => {
 })
 ```
 
-O arquivo <i>index.js</i> somente importa a aplicação do arquivo <i>app.js</i> e depois iniciar a aplicação. A função _info_ do módulo logger é usada para imprimir no console, informando que a aplicação está sendo executada.
+O arquivo <i>index.js</i> somente importa a aplicação do arquivo <i>app.js</i> e depois inicia a aplicação. A função _info_ do módulo logger é usada para imprimir no console, informando que a aplicação está sendo executada.
 
-Agora, o app Express e o código encarregado de cuidar do servidor web estão separados, seguindo assim [as melhores](https://dev.to/nermineslimane/always-separate-app-and-server-files--1nc7) [práticas](https://nodejsbestpractices.com/sections/projectstructre/separateexpress). Uma das vantages desse método é que a aplicação poderá agora ser testada a nível de chamadas de API HTTP, sem realizar chamadas via HTTP sobre a rede, o que resultará em execuções de testes mais rápidas.
+Agora, o app Express e o código encarregado de cuidar do servidor web estão separados, seguindo assim [as melhores](https://dev.to/nermineslimane/always-separate-app-and-server-files--1nc7) [práticas](https://nodejsbestpractices.com/sections/projectstructre/separateexpress). Uma das vantagens desse método é que a aplicação poderá agora ser testada a nível de chamadas de API HTTP, sem realizar chamadas via HTTP sobre a rede, o que resultará em execuções de testes mais rápidas.
 
 O gerenciamento de variáveis de ambiente é extraído em um arquivo separado <i>utils/config.js</i>:
 
@@ -200,7 +200,7 @@ app.use('/api/notes', notesRouter)
 
 Esse _router_ que definimos mais cedo é usado <i>se</i> a URL da requisição começar com <i>/api/notes</i>. Por este motivo, o objeto notesRouter somente deve definir rotas com caminhos relativos, por exemplo o caminho vazio <i>/</i> ou apenas o parâmetro <i>/:id</i>.
 
-Após estas mudanças, nosso arquivo <i>app.js</i> ficará está desta forma:
+Após estas mudanças, nosso arquivo <i>app.js</i> ficará desta forma:
 
 ```js
 const config = require('./utils/config')
@@ -237,7 +237,7 @@ app.use(middleware.errorHandler)
 module.exports = app
 ```
 
-O código coloca diferente middleware em uso, um deles é o <i>notesRouter</i> que está acoplado à rota <i>/api/notes</i>.
+O código coloca diferentes middleware em uso, um deles é o <i>notesRouter</i> que está acoplado à rota <i>/api/notes</i>.
 
 Nosso middleware personalizado foi movido para o novo módulo <i>utils/middleware.js</i>:
 
@@ -300,7 +300,7 @@ noteSchema.set('toJSON', {
 module.exports = mongoose.model('Note', noteSchema)
 ```
 
-Para recapitular, após estas mudanças a estrutura de diretórios está desta forma:
+Para recapitular, após estas mudanças a estrutura de diretórios estará desta forma:
 
 ```bash
 ├── index.js
@@ -321,7 +321,7 @@ Para recapitular, após estas mudanças a estrutura de diretórios está desta f
 
 Para aplicações pequenas, a estrutura de diretórios não é muito relevante. Mas uma vez que a aplicação começa a crescer, você precisará estabelecer algum tipo de estrutura e separar diferentes responsabilidades da aplicação em módulos distintos. Isso facilitará muito o desenvolvimento da aplicação.
 
-As aplicações Expresse não requerem uma estrutura de diretórios pré-determinada ou convenção de nomes para arquivos. Em contrapartida, Ruby on Rails de fato requer uma estrutura específica. Nossa estrutura atual simplesmente segue algumas das melhores práticas que você poderá encontrar na internet.
+As aplicações Express não requerem uma estrutura de diretórios pré-determinada ou convenção de nomes para arquivos. Em contrapartida, Ruby on Rails de fato requer uma estrutura específica. Nossa estrutura atual simplesmente segue algumas das melhores práticas que você poderá encontrar na internet.
 
 Você pode encontrar o código atual da nossa aplicação na branch <i>part4-1</i> [neste repositório GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-1).
 
@@ -366,7 +366,7 @@ info('message')
 error('error message')
 ```
 
-A segunda maneira pode ser mais indicada se somente uma pequena parte das funções exportadas forem utilizadas no código.
+A segunda maneira pode ser mais indicada caso somente uma pequena parte das funções exportadas forem utilizadas no código.
 
 No arquivo <i>controller/notes.js</i> a exportação funciona assim:
 
@@ -469,7 +469,7 @@ Uma boa prática é realizar _commits_ do seu código periodicamente, sempre que
 
 Nós negligenciamos completamente uma área essencial no desenvolvimento de software chamada de testes.
 
-Vamos iniciar nossa jornada nos testes dando uma olhada nos testes unitários (_unit tests_). A lógica de nossa aplicação é tão simples, que não faz muito sentido os testes unitários. Vamos criar um um novo arquivo <i>utils/for_testing.js</i> e escrever algumas funções simples para praticarmos escrita de teste:
+Vamos iniciar nossa jornada nos testes dando uma olhada nos testes unitários (_unit tests_). A lógica de nossa aplicação é tão simples, que não faz muito sentido os testes unitários. Vamos criar um novo arquivo <i>utils/for_testing.js</i> e escrever algumas funções simples para praticarmos a escrita de testes:
 
 ```js
 const reverse = (string) => {
@@ -526,7 +526,7 @@ Vamos definir um script para os testes com o comando <i>npm script _test_</i> qu
 }
 ```
 
-O Jest requer que seja especificado que o ambiente de execução é o Node. Isso pode ser feito adicionando as seguintes linhas ao final do arquivo <i>package.json</i>:
+O Jest requer a especificação de que o ambiente de execução é o Node. Isso pode ser feito adicionando as seguintes linhas ao final do arquivo <i>package.json</i>:
 
 ```js
 {
@@ -633,7 +633,7 @@ describe('average', () => {
 })
 ```
 
-O teste revela que a função não funciona corretamente com um array vazio (isso se deve ao fato de a divisão por zero no JavaScript resultar em <i>NaN</i>):
+O teste revela que a função não funciona corretamente com um array vazio (isso se deve ao fato da divisão por zero no JavaScript resultar em <i>NaN</i>):
 
 ![terminal output showing empty array fails with jest](../../images/4/3.png)
 
@@ -667,7 +667,7 @@ Os blocos de descrição (describe blocks) são utilizados para agrupar testes e
 
 Como veremos mais tarde, os blocos <i>describe</i> são necessários quando queremos executar alguma configuração compartilhada ou operações de encerramento (teardown) para um grupo de testes.
 
-Outra coisa a observar é que escrevemos testes de maneira compacta, sem atribuir a saída da função testada a uma variável:
+Outra coisa a se observar é que escrevemos testes de maneira compacta, sem atribuir a saída da função testada a uma variável:
 
 ```js
 test('of empty array is zero', () => {
@@ -714,7 +714,7 @@ test('dummy returns one', () => {
 
 Defina uma nova função _totalLikes_ que recebe uma lista de posts de blog como parâmetro. A função retorna o total da soma de <i>likes</i> em todos os posts.
 
-Escreva os testes apropriados para a função. É recomendado colocar os testes dentro de blocos <i>describe</i> block so that the test report output gets grouped nicely:
+Escreva os testes apropriados para a função. É recomendado colocar os testes dentro de um bloco <i>describe</i> para que a saída do relatório de testes seja agrupada de forma eficiente:
 
 ![npm test passing for list_helper_test](../../images/4/5.png)
 
@@ -740,7 +740,7 @@ describe('total likes', () => {
 })
 ```
 
-Se definir seus próprios inputs para testes for muito trabalho, você pode usar uma lista pronta [aqui](https://raw.githubusercontent.com/fullstack-hy2020/misc/master/blogs_for_test.md).
+Se definir seus próprios inputs para testes for muito trabalhoso, você pode usar uma lista pronta [aqui](https://raw.githubusercontent.com/fullstack-hy2020/misc/master/blogs_for_test.md).
 
 Você vai enfrentar problemas ao escrever testes. Lembre-se das coisas que aprendemos sobre [depuração](/ptbr/part3/salvando_dados_no_mongo_db#depurando-aplicacoes-node) na parte 3. Você pode imprimir coisas no console com _console.log_ mesmo durante a execução de testes. É possível até mesmo utilizar o depurador (debugger) enquanto estiver rodando os testes, veja como fazer isso [aqui](https://jestjs.io/docs/en/troubleshooting).
 
@@ -774,7 +774,7 @@ Escreva os testes para este exercício dentro de um novo bloco <i>describe</i>. 
 
 Esse e o próximo exercício são um pouco mais desafiadores. Terminar esses dois exercício não é um requisito para avançar pelo material do curso, então pode ser uma boa ideia retornar a estes exercícios quando você passar pelo material desta parte completamente.
 
-A conclusão deste exercício pode se dá sem o uso de bibliotecas adicionais . No entanto, esse exercício é uma grande oportunidade para aprender a utilizar a biblioteca [Lodash](https://lodash.com/).
+A conclusão deste exercício pode se dá sem o uso de bibliotecas adicionais. No entanto, esse exercício é uma grande oportunidade para aprender a utilizar a biblioteca [Lodash](https://lodash.com/).
 
 Crie uma função chamada _mostBlogs_ que recebe um array de blogs como parâmetro. A função retorna o <i>author</i> (autor) com o maior número de blogs. O retorno também deverá conter a quantidade de blogs que este autor possui:
 
@@ -789,7 +789,7 @@ Se houver empate, é suficiente retornar apenas um dos autores.
 
 #### 4.7*: funções auxiliares e testes unitários, passo 5
 
-Crie uma função _mostLikes_ que recebe um array de blogs como parâmetro. A função retorna o autor cujos posts têm a maior quantidade de likes. O valor retornado também deve conter o número total de likes que autor recebeu:
+Crie uma função _mostLikes_ que recebe um array de blogs como parâmetro. A função retorna o autor cujo os posts têm a maior quantidade de likes. O valor retornado também deve conter o número total de likes que o autor recebeu:
 
 ```js
 {
