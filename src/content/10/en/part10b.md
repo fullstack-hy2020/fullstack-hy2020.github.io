@@ -779,7 +779,49 @@ const BodyMassIndexForm = ({ onSubmit }) => {
 ```
 
 As we can see, implementing the <em>FormikTextInput</em> component that handles the <em>TextInput</em> component's Formik bindings saves a lot of code. If your Formik forms use other input components, it is a good idea to implement similar abstractions for them as well.
-
+     
+</div>
+<div class="content">
+### React Hook Form
+  
+Thanks to the implementation of React Hooks, a new option for controlling form states has began to gain popularity. This new option is called React Hook Form. It is well updated, easy to use, and incredibly light-weight which makes it a good choice for developing a mobile app. Let's install React Hook Form:
+``` shell
+  npm install react-hook-form
+```
+The basic concept of a React Hook Form is that we have an text input component living inside a form controller defined by the library. Let's begin by defining our parenet component named _Form.jsx_:
+ ```jsx
+  import { useForm, Controller } from 'react-hook-form'
+  import { TextInput, Text, Pressable } from 'react-native'
+  
+  const Form = () => {
+    const { control, handleSubmit } = useForm()
+  
+    const submit = () => {
+      console.log('hello world')
+    }
+  
+    return (
+    <>
+      <Controller
+        control={control}
+        name="username"
+        render={({field: { value, onChange, onBlue}}) => (
+          <TextInput 
+            value={value}
+            onChange={onChange}
+            onBlur={onBlur}
+            placeholder="Username"
+          />
+        )}
+      />
+      <Pressable onPress={handleSubmit(submit)}><Text>Submit></Text></Pressable>
+    </>
+    )
+  }
+  export default Form
+ ```
+  
+  useForm is a hook that can be destructured into the control and handleSubmit. handleSubmit is a function that takes our submit function. The control variable allows for variables inside the form to be changed. We render a Controller. Controller components have a render prop which takes in our field object and a field variable.
 </div>
 
 <div class="tasks">
