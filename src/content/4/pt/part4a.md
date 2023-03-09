@@ -789,7 +789,7 @@ Se houver empate, é suficiente retornar apenas um dos autores.
 
 #### 4.7*: funções auxiliares e testes unitários, passo 5
 
-Crie uma função _mostLikes_ que recebe um array de blogs como parâmetro. A função retorna o autor cujo os posts têm a maior quantidade de likes. O valor retornado também deve conter o número total de likes que o autor recebeu:
+Crie uma função _mostLikes_ que recebe um array de blogs como parâmetro. A função retorna o autor cujos posts têm a maior quantidade de likes. O valor retornado também deve conter o número total de likes que o autor recebeu:
 
 ```js
 {
