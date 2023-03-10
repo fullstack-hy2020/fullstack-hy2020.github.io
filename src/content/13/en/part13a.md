@@ -79,7 +79,7 @@ Let us create a new Fly.io-app by running the command _fly launch_ in a director
 
 ![](../../images/13/6.png)
 
-When creating the app, Fly.io reveals the password of the database that will be needed when connecting the app to the database. <i>This is the only time it is shown in plain text so it is essential to save it somewhere</i> (but not in any public plase such as GitHub).
+When creating the app, Fly.io reveals the password of the database that will be needed when connecting the app to the database. <i>This is the only time it is shown in plain text so it is essential to save it somewhere</i> (but not in any public place such as GitHub).
 
 Note that if you only need the database, and are not planning to deploy the app to Fly.io, it is also possible to [just create the database to Fly.io](https://fly.io/docs/reference/postgres/#creating-a-postgres-app).
 
