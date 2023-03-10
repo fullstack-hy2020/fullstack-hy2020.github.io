@@ -566,7 +566,7 @@ In the tasks of this section, we will build a blog application backend similar t
 
 #### Task 13.1.
 
-Create a GitHub repository for the application and create a new Heroku application for it, as well as a Postgres database. Make sure you are able to establish a connection to the application database.
+Create a GitHub repository for the application and create a new Heroku or Fly.io application for it, as well as a Postgres database. Make sure you are able to establish a connection to the application database.
 
 #### Task 13.2.
 
