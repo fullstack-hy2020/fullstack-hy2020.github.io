@@ -216,7 +216,7 @@ The app repository is then connected to Render:
 
 ![](../../images/3/r2.png)
 
-The connecting seem to require that the app reopository is public.
+The connecting seem to require that the app repository is public.
 
 Next we will define the basic configurations. If the app is <i>not</i> at the root of the repository the <i>Root directory</i> needs to be given a proper value:
 
