@@ -648,8 +648,8 @@ Tehdään sovellukseen mahdollisuus vaihtaa henkilöiden puhelinnumeroita. Ratka
 Mutaatio edellyttää jälleen muuttujien käyttöä.
 
 ```js
-export const EDIT_NUMBER = gql`
-  mutation editNumber($name: String!, $phone: String!) {
+export const CHANGE_NUMBER = gql`
+  mutation changeNumber($name: String!, $phone: String!) {
     editNumber(name: $name, phone: $phone)  {
       name
       phone
@@ -669,14 +669,14 @@ Muutoksen suorittava komponentti <i>PhoneForm</i> on suoraviivainen, se kysyy lo
 import { useState } from 'react'
 import { useMutation } from '@apollo/client'
 
-import { EDIT_NUMBER } from '../queries'
+import { CHANGE_NUMBER } from '../queries'
 
 const PhoneForm = () => {
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
 
 // highlight-start
-  const [ changeNumber ] = useMutation(EDIT_NUMBER)
+  const [ changeNumber ] = useMutation(CHANGE_NUMBER)
 // highlight-end
 
   const submit = async (event) => {
@@ -735,7 +735,7 @@ const PhoneForm = ({ setError }) => {
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
 
-  const [ changeNumber, result ] = useMutation(EDIT_NUMBER) // highlight-line
+  const [ changeNumber, result ] = useMutation(CHANGE_NUMBER) // highlight-line
 
   const submit = async (event) => {
     // ...
