@@ -1,58 +1,54 @@
 import './layout.css';
 import './index.scss';
 
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Header from './Header/Header';
 import InfoBanner from './InfoBanner';
+import Footer from './Footer/Footer';
 import PropTypes from 'prop-types';
+import SkipToContent from './SkipToContent/SkipToContent';
 
-class Layout extends Component {
-  state = {
-    siteLanguage: 'fi',
-    visible: true,
+const BANNER_TO_KEY = 'part_9_changes';
+
+const Layout = props => {
+  const { i18n } = useTranslation();
+
+  const { children, hideFooter, isCoursePage } = props;
+  const siteLanguage = i18n.language;
+
+  const [visible, setVisible] = useState(
+    false
+  );
+
+  useEffect(() => {
+    const key = localStorage.getItem(BANNER_TO_KEY)
+    console.log(key)
+    if (!key) {
+      setVisible(true)
+    }
+  }, [])
+
+  const hideNote = () => {
+    localStorage.setItem(BANNER_TO_KEY, 'yes');
+    setVisible(false);
   };
 
-  componentDidMount() {
-    const siteLanguage =
-      window.location.pathname.indexOf('/en') > -1
-        ? 'en'
-        : window.location.pathname.indexOf('/zh') > -1
-        ? 'zh'
-        : 'fi';
+  return (
+    <div className="main-wrapper">
+      <SkipToContent isCoursePage={isCoursePage} />
 
-    const visible = !localStorage.getItem('r18_banner_seen');
+      <Header lang={siteLanguage} />
 
-    console.log(visible);
+      <InfoBanner onHide={() => hideNote()} visible={visible} />
 
-    this.setState({
-      siteLanguage: siteLanguage,
-      visible,
-    });
-  }
+      <main id="main-content">{children}</main>
 
-  hideNote() {
-    localStorage.setItem('r18_banner_seen', 'yes');
-    this.setState({
-      siteLanguage: this.state.siteLanguage,
-      visible: false,
-    });
-  }
-
-  render() {
-    const { siteLanguage, visible } = this.state;
-
-    return (
-      <div className="main-wrapper">
-        <Header lang={siteLanguage} />
-
-        <InfoBanner onHide={() => this.hideNote()} visible={visible} />
-
-        {this.props.children}
-      </div>
-    );
-  }
-}
+      {!hideFooter && <Footer lang={siteLanguage} />}
+    </div>
+  );
+};
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,

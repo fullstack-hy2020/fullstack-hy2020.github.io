@@ -1,0 +1,23 @@
+@import '../common.scss';
+
+.skip-to-content {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  height: 50px;
+  padding: 0 30px;
+  transform: translateX(-50%);
+  background-color: var(--color-text);
+  color: var(--color-background);
+  border-radius: 0 0 3px 3px;
+  transition: top 0.3s;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+
+  &:focus {
+    top: 0;
+    transition: top 0.25s;
+  }
+}

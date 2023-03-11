@@ -566,7 +566,7 @@ Además de eso, de forma predeterminada, <i>ts-node</i> y <i>ts-node-dev</i> amp
  ["js", "json", "node", "ts", "tsx"]
 ```
 
-> **NB**: La validez de los archivos <i>.js</i>, <i>.json</i> y <i>.node</i> como módulos en Typecript depende de la configuración del entorno, incluidas las opciones <i>tsconfig</i> como <i>allowJs</i> y <i>resolveJsonModule</i>.
+> **NB**: La validez de los archivos <i>.js</i>, <i>.json</i> y <i>.node</i> como módulos en Typescript depende de la configuración del entorno, incluidas las opciones <i>tsconfig</i> como <i>allowJs</i> y <i>resolveJsonModule</i>.
 
 Considere una estructura de carpeta plana que contiene archivos:
 
@@ -1040,11 +1040,11 @@ Si la función de protección de tipos devuelve verdadero, el compilador de Type
 
 Antes de que se llame al tipo de protección, el tipo real de la variable <i>comment</i> no se conoce:
 
-![](../../images/9/28e.png)
+![](../../images/9/28e-21.png)
 
 Pero después de la llamada, si el código pasa de la excepción (es decir, el tipo guard devuelto verdadero), el compilador sabe que <i>comment</i> es del tipo <i>string</i>:
 
-![](../../images/9/29e.png)
+![](../../images/9/29e-21.png)
 
 ¿Por qué tenemos dos condiciones en la protección de tipo de string?
 

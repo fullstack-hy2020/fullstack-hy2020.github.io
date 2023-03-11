@@ -16,7 +16,7 @@ const InfoBanner = ({ visible, onHide }) => {
     flexWrap: 'wrap',
     flexDirection: 'row',
     alignContent: 'space-between',
-    backgroundColor: '#E8E8E8',
+    backgroundColor: 'var(--color-background)',
     zIndex: 2147483647,
   };
 
@@ -38,17 +38,19 @@ const InfoBanner = ({ visible, onHide }) => {
     outline: 'none',
     backgroundColor: 'transparent',
     border: 'none',
+    color: 'var(--color-text)',
+    cursor: 'pointer',
   };
 
   return (
     <div style={style}>
-      <div stule={textStyle}>
-        Note that some libraries might not work with the new React version 18.
-        If you run in trouble with library compatibility, read{' '}
-        <a href="/en/part1/a_more_complex_state_debugging_react_apps#a-note-on-react-version">
-          <span style={linkStyle}>this</span>
-        </a>
-        .
+      <div style={textStyle}>
+        <p>There are some changes in part 9. The <i>Patientor</i> example app structure has been refactored to a less complex form to make it easier to concentrate on learning TypeScript.</p>
+        <div style={{ marginTop: 10 }}>
+          If you are just working with the old Patientor, no worries, the old material shall stay online for a couple of weeks.
+        </div>
+
+        <div style={{ marginTop: 10 }}><i>If you have already completed the part 9, this change has absolutely no effect on your progress.</i></div>
       </div>
       <div style={buttonDiv}>
         <button style={buttonStyle} onClick={onHide}>

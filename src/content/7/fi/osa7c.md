@@ -7,38 +7,38 @@ lang: fi
 
 <div class="content">
 
-Osassa 2 on jo katsottu kahta tapaa tyylien lisäämiseen eli vanhan koulukunnan [yksittäistä CSS](/osa2#tyylien-lisääminen)-tiedostoa, [inline-tyylejä](/osa2/tyylien_lisaaminen_react_sovellukseen#inline-tyylit). Katsotaan tässä osassa vielä muutamaa tapaa.
+Osassa 2 on jo katsottu kahta tapaa tyylien lisäämiseen, eli vanhan koulukunnan [yksittäistä CSS](/osa2#tyylien-lisääminen)-tiedostoa ja [inline-tyylejä](/osa2/tyylien_lisaaminen_react_sovellukseen#inline-tyylit). Katsotaan tässä osassa vielä muutamaa tapaa.
 
 ### Valmiit käyttöliittymätyylikirjastot
 
-Eräs lähestymistapa sovelluksen tyylien määrittelyyn on valmiin "UI-frameworkin", eli suomeksi ehkä käyttöliittymätyylikirjaston käyttö.
+Eräs lähestymistapa sovelluksen tyylien määrittelyyn on valmiin "UI-frameworkin" eli suomeksi ehkä käyttöliittymätyylikirjaston käyttö.
 
 Ensimmäinen laajaa kuuluisuutta saanut UI-framework oli Twitterin kehittämä [Bootstrap](https://getbootstrap.com/), joka lienee edelleen UI-frameworkeista eniten käytetty. Viime aikoina UI-frameworkeja on noussut kuin sieniä sateella. Valikoima on niin iso, ettei tässä kannata edes yrittää tehdä tyhjentävää listaa.
 
-Monet UI-frameworkit sisältävät web-sovellusten käyttöön valmiiksi määriteltyjä teemoja sekä "komponentteja", kuten painikkeita, menuja, taulukkoja. Termi komponentti on edellä kirjotettu hipsuissa sillä kyse ei ole samasta asiasta kuin React-komponentti. Useimmiten UI-frameworkeja käytetään sisällyttämällä sovellukseen frameworkin määrittelemät CSS-tyylitiedostot sekä JavaScript-koodi.
+Monet UI-frameworkit sisältävät web-sovellusten käyttöön valmiiksi määriteltyjä teemoja sekä "komponentteja", kuten painikkeita, menuja ja taulukkoja. Termi komponentti on edellä kirjotettu hipsuissa sillä kyse ei ole samasta asiasta kuin React-komponentti. Useimmiten UI-frameworkeja käytetään sisällyttämällä sovellukseen frameworkin määrittelemät CSS-tyylitiedostot sekä JavaScript-koodi.
 
-Monesta UI-frameworkista on tehty React-ystävällisiä versiota, joissa UI-frameworkin avulla määritellyistä "komponenteista" on tehty React-komponentteja. Esim. Bootstrapista on olemassa parikin React-versiota joista suosituin on [react-bootstrap](https://react-bootstrap.github.io/).
+Monista UI-frameworkeista on tehty React-ystävällinen versio, jossa UI-frameworkin avulla määritellyistä "komponenteista" on tehty React-komponentteja. Esim. Bootstrapista on olemassa parikin React-versiota, joista suosituin on [React-Bootstrap](https://react-bootstrap.github.io/).
 
-Katsotaan seuraavaksi kahta UI-frameworkia bootstrapia ja [MaterialUI](https://material-ui.com/):ta. Lisätään molempien avulla samantapaiset tyylit luvun [React Router](/osa7/react_router) sovellukseen.
+Katsotaan seuraavaksi kahta UI-frameworkia: Bootstrapia ja [MaterialUI](https://material-ui.com/):ta. Lisätään molempien avulla samantapaiset tyylit luvun [React Router](/osa7/react_router) sovellukseen.
 
-### React Bootstrap
+### React-Bootstrap
 
-Aloitetaan Bootstrapista, käytetään kirjastoa [react-bootstrap](https://react-bootstrap.github.io/).
+Aloitetaan Bootstrapista käyttämällä kirjastoa [React-Bootstrap](https://react-bootstrap.github.io/).
 
-Asennetaan kirjasto suorittamalla komento
+Asennetaan kirjasto:
 
 ```bash
 npm install react-bootstrap
 ```
 
-Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> tagin <i>head</i> sisään bootstrapin css-määrittelyt lataava rivi:
+Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> tagin <i>head</i> sisään [Bootstrapin CSS-määrittelyt](https://react-bootstrap.github.io/getting-started/introduction#stylesheets) lataava rivi:
 
 ```js
 <head>
   <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
     crossorigin="anonymous"
   />
   // ...
@@ -67,7 +67,9 @@ Sovelluksen ulkoasu muuttuu siten, että sisältö ei ole enää yhtä kiinni se
 
 ![](../../images/7/6ea.png)
 
-Muutetaan seuraavaksi komponenttia <i>Notes</i> siten, että se renderöi muistiinpanojen listan [taulukkona](https://getbootstrap.com/docs/4.1/content/tables/). React bootstrap tarjoaa valmiin komponentin [Table](https://react-bootstrap.github.io/components/table/), joten CSS-luokan käyttöön ei ole tarvetta.
+#### Taulukko
+
+Muutetaan seuraavaksi komponenttia <i>Notes</i> siten, että se renderöi muistiinpanojen listan [taulukkona](https://getbootstrap.com/docs/4.1/content/tables/). React-Bootstrap tarjoaa valmiin komponentin [Table](https://react-bootstrap.github.io/components/table/), joten CSS-luokan käyttöön ei ole tarvetta.
 
 ```js
 const Notes = ({ notes }) => (
@@ -97,7 +99,7 @@ Ulkoasu on varsin tyylikäs:
 
 ![](../../images/7/7e.png)
 
-Huomaa, että koodissa käytettävät React bootstrapin komponentit täytyy importata, eli koodiin on lisättävä:
+Huomaa, että koodissa käytettävät React-Bootstrapin komponentit täytyy importata, eli koodiin on lisättävä:
 
 ```js
 import { Table } from 'react-bootstrap'
@@ -107,7 +109,7 @@ import { Table } from 'react-bootstrap'
 
 Parannellaan seuraavaksi näkymän <i>Login</i> kirjautumislomaketta Bootstrapin [lomakkeiden](https://getbootstrap.com/docs/4.1/components/forms/) avulla.
 
-React bootstrap tarjoaa valmiit [komponentit](https://react-bootstrap.github.io/forms/overview/) myös lomakkeiden muodostamiseen (dokumentaatio tosin ei ole paras mahdollinen):
+React-Bootstrap tarjoaa valmiit [komponentit](https://react-bootstrap.github.io/forms/overview/) myös lomakkeiden muodostamiseen (dokumentaatio tosin ei ole paras mahdollinen):
 
 ```js
 let Login = (props) => {
@@ -132,7 +134,8 @@ let Login = (props) => {
         </Form.Group>
       </Form>
     </div>
-)}
+  )
+}
 ```
 
 Importoitavien komponenttien määrä kasvaa:
@@ -151,7 +154,7 @@ Toteutetaan sovellukseen kirjautumisen jälkeinen <i>notifikaatio</i>:
 
 ![](../../images/7/9ea.png)
 
-Asetetaan notifikaatio kirjautumisen yhteydessä komponentin <i>App</i> tilan muuttujaan _message_:
+Asetetaan notifikaatio kirjautumisen yhteydessä komponentin <i>App</i> tilan muuttujaan _message_
 
 ```js
 const App = () => {
@@ -175,7 +178,7 @@ const App = () => {
 }
 ```
 
-ja renderöidään viesti Bootstrapin [Alert](https://getbootstrap.com/docs/4.1/components/alerts/)-komponentin avulla. React bootstrap tarjoaa tähän jälleen valmiin [React-komponentin](https://react-bootstrap.github.io/components/alerts/):
+ja renderöidään viesti Bootstrapin [Alert](https://getbootstrap.com/docs/4.1/components/alerts/)-komponentin avulla. React-Bootstrap tarjoaa tähän jälleen valmiin [React-komponentin](https://react-bootstrap.github.io/components/alerts/):
 
 ```js
 <div className="container">
@@ -190,9 +193,9 @@ ja renderöidään viesti Bootstrapin [Alert](https://getbootstrap.com/docs/4.1/
 </div>
 ```
 
-#### Navigaatiorakenne
+#### Navigaatiomenu
 
-Muutetaan vielä lopuksi sovelluksen navigaatiomenu käyttämään Bootstrapin [Navbaria](https://getbootstrap.com/docs/4.1/components/navbar/). Tähänkin React bootstrap tarjoaa [valmiit komponentit](https://react-bootstrap.github.io/components/navbar/#navbars-mobile-friendly), dokumentaatio on hieman kryptistä, mutta trial and error johtaa lopulta toimivaan ratkaisuun:
+Muutetaan vielä lopuksi sovelluksen navigaatiomenu käyttämään Bootstrapin [Navbaria](https://getbootstrap.com/docs/4.1/components/navbar/). Tähänkin React-Bootstrap tarjoaa [valmiit komponentit](https://react-bootstrap.github.io/components/navbar/#navbars-mobile-friendly). Dokumentaatio on hieman kryptistä, mutta trial and error johtaa lopulta toimivaan ratkaisuun:
 
 ```js
 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -219,7 +222,7 @@ Muutetaan vielä lopuksi sovelluksen navigaatiomenu käyttämään Bootstrapin [
 </Navbar>
 ```
 
-Ulkoasu on varsin tyylikäs
+Ulkoasu on varsin tyylikäs:
 
 ![](../../images/7/10ea.png)
 
@@ -229,32 +232,23 @@ Jos selaimen kokoa kaventaa, huomaamme että menu "kollapsoituu" ja sen saa näk
 
 Bootstrap ja valtaosa tarjolla olevista UI-frameworkeista tuottavat [responsiivisia](https://en.wikipedia.org/wiki/Responsive_web_design) näkymiä, eli sellaisia jotka renderöityvät vähintään kohtuullisesti monen kokoisilla näytöillä.
 
-Chromen developer-konsolin avulla on mahdollista simuloida sovelluksen käyttöä erilaisilla mobiilipäätteillä
+Chromen developer-konsolin avulla on mahdollista simuloida sovelluksen käyttöä erilaisilla mobiilipäätteillä:
 
 ![](../../images/7/12ea.png)
 
-Esimerkin sovelluksen koodi kokonaisuudessaan [täällä](https://github.com/fullstack-hy2020/misc/blob/master/notes-bootstrap.js)
+Esimerkin sovelluksen koodi on kokonaisuudessaan [täällä](https://github.com/fullstack-hy2020/misc/blob/master/notes-bootstrap.js).
 
 ### Material UI
 
 Tarkastellaan toisena esimerkkinä Googlen kehittämän "muotokielen" [Material designin](https://material.io/) toteuttavaa React-kirjastoa [MaterialUI](https://mui.com/). 
 
-Asennetaan kirjasto suorittamalla komento
+Asennetaan kirjasto:
 
 ```bash
 npm install @mui/material @emotion/react @emotion/styled
 ```
 
-Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> tagin <i>head</i> sisään MaterialUI:n css-määrittelyt lataava rivi:
-
-```js
-<head>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
-  // ...
-</head>
-```
-
-Tehdään nyt MaterialUI:n avulla koodiin suunnilleen samat muutokset, mitä teimme bootstrapilla.
+Tehdään nyt MaterialUI:n avulla koodiin suunnilleen samat muutokset kuin mitä teimme Bootstrapilla.
 
 Renderöidään koko sovelluksen sisältö komponentin [Container](https://material-ui.com/components/container/) sisälle:
 
@@ -270,6 +264,8 @@ const App = () => {
   )
 }
 ```
+
+#### Taulukko
 
 Aloitetaan komponentista <i>Notes</i> ja renderöidään muistiinpanojen lista [taulukkona](https://mui.com/material-ui/react-table/#simple-table):
 
@@ -302,7 +298,7 @@ Taulukko näyttää seuraavalta:
 
 ![](../../images/7/63eb.png)
 
-Hienoinen ikävä piirre Material UI:ssa on se, että jokainen komponentti on importattava erikseen, muistiinpanojen sivun import-lista on aika pitkä:
+Hienoinen ikävä piirre Material UI:ssa on se, että jokainen komponentti on importattava erikseen, joten muistiinpanojen sivun import-lista on aika pitkä:
 
 ```js
 import {
@@ -338,7 +334,7 @@ const Login = (props) => {
           <TextField label="username" />
         </div>
         <div>
-          <TextField  label="password" type='password' />
+          <TextField label="password" type='password' />
         </div>
         <div>
           <Button variant="contained" color="primary" type="submit">
@@ -351,17 +347,17 @@ const Login = (props) => {
 }
 ```
 
-Lopputulos on:
+Lopputulos on elegantti:
 
 ![](../../images/7/64ea.png)
 
-Bootstrapiin verrattuna pieni ero on nyt se, että MaterialUI ei tarjoa erillistä komponenttia itse lomakkeelle, lomake tehdään normaaliin tapaan HTML:n [form](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form)-elementtinä.
+Bootstrapiin verrattuna pieni ero on nyt se, että MaterialUI ei tarjoa erillistä komponenttia itse lomakkeelle, vaan lomake tehdään normaaliin tapaan HTML:n [form](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form)-elementtinä.
 
 Lomakkeen käyttämät komponentit on luonnollisesti importattava koodissa. 
 
 #### Notifikaatio
 
-Kirjautumisen jälkeisen notifikaation näyttämiseen sopii komponentti [Alert](https://mui.com/components/alert/), joka on lähes samanlainen kuin bootstrapin vastaava komponentti: 
+Kirjautumisen jälkeisen notifikaation näyttämiseen sopii komponentti [Alert](https://mui.com/components/alert/), joka on lähes samanlainen kuin Bootstrapin vastaava komponentti: 
 
 ```js
 <div>
@@ -379,9 +375,9 @@ Alert on ulkoasultaan tyylikäs:
 
 ![](../../images/7/65ea.png)
 
-#### Navigaatiorakenne
+#### Navigaatiomenu
 
-Navigaatiorakenne toteutetaan komponentin [AppBar](https://mui.com/components/app-bar/) avulla
+Navigaatiomenu toteutetaan komponentin [AppBar](https://mui.com/components/app-bar/) avulla
 
 Jos sovelletaan suoraan dokumentaation esimerkkiä  
 
@@ -409,11 +405,11 @@ Jos sovelletaan suoraan dokumentaation esimerkkiä
 </AppBar>
 ```
 
-saadaan kyllä toimiva ratkaisu, mutta sen ulkonäkö ei ole paras mahdollinen
+saadaan kyllä toimiva ratkaisu, mutta sen ulkonäkö ei ole paras mahdollinen:
 
 ![](../../images/7/66ea.png)
 
-Lueskelemalla [dokumentaatiota](https://mui.com/material-ui/guides/composition/#routing-libraries), löytyy parempi tapa eli [component props](https://mui.com/material-ui/guides/composition/#component-prop), jonka avulla voidaan muuttaa se miten MaterialUI-komponentin juurielementti renderöityy.
+[Dokumentaatiota](https://mui.com/material-ui/guides/composition/#routing-libraries) lueskelemalla löytyy parempi tapa eli [component props](https://mui.com/material-ui/guides/composition/#component-prop), jonka avulla voidaan muuttaa se miten MaterialUI-komponentin juurielementti renderöityy.
 
 Määrittelemällä
 
@@ -423,7 +419,7 @@ Määrittelemällä
 </Button>
 ```
 
-renderöidään komponentti _Button_, siten että sen juurikomponenttina onkin react-router-dom-kirjaston komponentti _Link_, jolle siirtyy polun kertova props _to_.  
+renderöidään komponentti _Button_ siten, että sen juurikomponenttina onkin react-router-dom-kirjaston komponentti _Link_, jolle siirtyy polun kertova props _to_.  
 
 Navigaatiopalkin koodi kokonaisuudessaan on seuraava
 
@@ -449,21 +445,21 @@ Navigaatiopalkin koodi kokonaisuudessaan on seuraava
 </AppBar>
 ```
 
-ja lopputulos on haluamamme kaltainen
+ja lopputulos on haluamamme kaltainen:
 
 ![](../../images/7/67ea.png)
 
-Esimerkin sovelluksen koodi kokonaisuudessaan [täällä](https://github.com/fullstack-hy2020/misc/blob/master/notes-materialui.js)
+Esimerkin sovelluksen koodi on kokonaisuudessaan [täällä](https://github.com/fullstack-hy2020/misc/blob/master/notes-materialui.js).
 
 ### Loppuhuomioita
 
-Ero React Bootstrapin ja MaterialUI:n välillä ei ole suuri. On makuasia kummalla tuotettu ulkoasu on tyylikkäämpi. En ole itse käyttänyt MaterialUI:ta kovin paljoa, mutta ensikosketus on positiivinen. Dokumentaatio vaikuttaa aavistuksen react-bootstrapin dokumentaatiota selkeämmältä. Eri npm-kirjastojen lautausmääriä vertailevan sivuston https://www.npmtrends.com/ mukaan MaterialUI ohitti react-boostrapin suosiossa vuoden 2018 loppupuolella ja on kasvattanut sen jälkeen eroa tasaisesti:
+Ero React-Bootstrapin ja MaterialUI:n välillä ei ole suuri. On makuasia kummalla tuotettu ulkoasu on tyylikkäämpi. En ole itse käyttänyt MaterialUI:ta kovin paljoa, mutta ensikosketus on positiivinen. Dokumentaatio vaikuttaa aavistuksen React-Bootstrapin dokumentaatiota selkeämmältä. Eri npm-kirjastojen lautausmääriä vertailevan sivuston https://www.npmtrends.com/ mukaan MaterialUI ohitti React-Boostrapin suosiossa vuoden 2018 loppupuolella ja on kasvattanut sen jälkeen eroa tasaisesti:
 
 ![](../../images/7/2021.png)
 
 Esimerkeissä käytettiin UI-frameworkeja niiden React-integraatiot tarjoavien kirjastojen kautta.
 
-Sen sijaan että käytämme kirjastoa [React Bootstrap](https://react-bootstrap.github.io/), olisimme voineet aivan yhtä hyvin käyttää [Bootstrapia](https://getbootstrap.com/) suoraan, liittämällä HTML-elementteihin CSS-luokkia. Eli sen sijaan että määrittelimme esim. taulukon komponentin <i>Table</i> avulla
+[React-Bootstrap](https://react-bootstrap.github.io/)-kirjaston sijaan olisimme voineet aivan yhtä hyvin käyttää [Bootstrapia](https://getbootstrap.com/) suoraan liittämällä HTML-elementteihin CSS-luokkia. Eli sen sijaan, että määrittelimme esim. taulukon komponentin <i>Table</i> avulla
 
 ```js
 <Table striped>
@@ -471,7 +467,7 @@ Sen sijaan että käytämme kirjastoa [React Bootstrap](https://react-bootstrap.
 </Table>
 ```
 
-olisimme voineet käyttää normaalia HTML:n taulukkoa <i>table</i> ja Bootstrapin [määrittelemää](https://getbootstrap.com/docs/4.4/content/tables/) CSS-luokkaa
+olisimme voineet käyttää normaalia HTML:n taulukkoa <i>table</i> ja Bootstrapin [määrittelemää](https://getbootstrap.com/docs/4.4/content/tables/) CSS-luokkaa:
 
 ```js
 <table className="table striped">
@@ -479,17 +475,17 @@ olisimme voineet käyttää normaalia HTML:n taulukkoa <i>table</i> ja Bootstrap
 </table>
 ```
 
-Taulukon määrittelyssä React bootstrapin tuoma etu ei ole suuri.
+Taulukon määrittelyssä React-Bootstrapin tuoma etu ei ole suuri.
 
 Tiiviimmän ja ehkä paremmin luettavissa olevan kirjoitusasun lisäksi toinen etu React-kirjastoina olevissa UI-frameworkeissa on se, että kirjastojen mahdollisesti käyttämä JavaScript-koodi on sisällytetty React-komponentteihin. Esim. osa Bootstrapin komponenteista edellyttää toimiakseen muutamaakin ikävää [JavaScript-riippuvuutta](https://getbootstrap.com/docs/4.1/getting-started/introduction/#js), joita emme mielellään halua React-sovelluksiin sisällyttää.
 
-React-kirjastoina tarjottavien UI-frameworkkien ikävä puoli verrattuna frameworkin "suoraan käyttöön" on React-kirjastojen API:n mahdollinen epästabiilius ja osittain huono dokumentaatio. 
+React-kirjastoina tarjottavien UI-frameworkien ikävä puoli verrattuna frameworkin "suoraan käyttöön" on React-kirjastojen API:n mahdollinen epästabiilius ja osittain huono dokumentaatio. 
 
-Kokonaan toinen kysymys on se kannattaako UI-frameworkkeja ylipäätään käyttää. Kukin muodostakoon oman mielipiteensä, mutta CSS:ää taitamattomalle ja puutteellisilla design-taidoilla varustetulle ne ovat varsin käyttökelpoisia työkaluja.
+Kokonaan toinen kysymys on se, kannattaako UI-frameworkeja ylipäätään käyttää. Kukin muodostakoon oman mielipiteensä, mutta CSS:ää taitamattomalle ja puutteellisilla design-taidoilla varustetulle ne ovat varsin käyttökelpoisia työkaluja.
 
 ### Muita UI-frameworkeja
 
-Luetellaan tässä kaikesta huolimatta muitakin UI-frameworkeja. Jos oma suosikkisi ei ole mukana, tee pull request
+Luetellaan tässä kaikesta huolimatta muitakin UI-frameworkeja:
 
 - <https://bulma.io/>
 - <https://ant.design/>
@@ -497,12 +493,23 @@ Luetellaan tässä kaikesta huolimatta muitakin UI-frameworkeja. Jos oma suosikk
 - <https://chakra-ui.com/>
 - <https://tailwindcss.com/>
 - <https://semantic-ui.com/>
+- <https://mantine.dev/>
+- <https://react.fluentui.dev/>
+- <https://www.primefaces.org/primereact/>
+- <https://v2.grommet.io>
+- <https://blueprintjs.com>
+- <https://evergreen.segment.com>
+- <https://www.radix-ui.com/>
+- <https://react-spectrum.adobe.com/react-aria/index.html>
+- <https://master.co/>
+
+Jos oma suosikkisi ei ole mukana, tee pull request!
 
 ### Styled components
 
-Tapoja liittää tyylejä React-sovellukseen on jo näkemäimme lisäksi [muitakin](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b).
+Tapoja liittää tyylejä React-sovellukseen on jo näkemiemme lisäksi [muitakin](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b).
 
-Mielenkiintoisen näkökulman tyylien määrittelyyn tarjoaa ES6:n [tagged template literal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) -syntaksia hyödyntävä [styled components](https://www.styled-components.com/) -kirjasto.
+Mielenkiintoisen näkökulman tyylien määrittelyyn tarjoaa ES6:n [tagged template literal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) -syntaksia hyödyntävä [styled-components](https://www.styled-components.com/)-kirjasto.
 
 Asennetaan styled-components ja tehdään sen avulla esimerkkisovellukseemme muutama tyylillinen muutos. Tehdään ensin kaksi tyylimäärittelyitä käytettävää komponenttia:
 
@@ -523,11 +530,11 @@ const Input = styled.input`
 `
 ```
 
-Koodi luo HTML:n elementeistä <i>button</i> ja <i>input</i> tyyleillä rikastetut versiot ja sijoitetaan ne muuttujiin <i>Button</i> ja <i>Input</i>.
+Koodi luo HTML:n elementeistä <i>button</i> ja <i>input</i> tyyleillä rikastetut versiot ja sijoittaa ne muuttujiin <i>Button</i> ja <i>Input</i>.
 
-Tyylien määrittelyn syntaksi on varsin mielenkiintoinen, css-määrittelyt asetetaan backtick-hipsujen sisään.
+Tyylien määrittelyn syntaksi on varsin mielenkiintoinen, sillä CSS-määrittelyt asetetaan backtick-hipsujen sisään.
 
-Määritellyt komponentit toimivat kuten normaali <i>button</i> ja <i>input</i> ja sovelluksessa käytetään niitä  normaaliin tapaan:
+Määritellyt komponentit toimivat kuten normaali <i>button</i> ja <i>input</i>, ja sovelluksessa käytetään niitä normaaliin tapaan:
 
 ```js
 const Login = (props) => {
@@ -619,7 +626,7 @@ Lopputulos on seuraavassa:
 
 ![](../../images/7/18ea.png)
 
-Styled components on nostanut tasaisesti suosiotaan viime aikoina ja tällä hetkellä näyttääkin, että se on melko monien mielestä paras tapa React-sovellusten tyylien määrittelyyn.
+styled-components on nostanut tasaisesti suosiotaan viime aikoina ja tällä hetkellä näyttääkin, että se on melko monien mielestä paras tapa React-sovellusten tyylien määrittelyyn.
 
 </div>
 

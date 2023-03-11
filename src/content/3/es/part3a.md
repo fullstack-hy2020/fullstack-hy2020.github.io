@@ -25,7 +25,7 @@ Nuestro objetivo es implementar un backend que funcione con la aplicación de no
 **Tenga en cuenta** que las aplicaciones y ejercicios de esta parte no son todas aplicaciones de React, y no usaremos la utilidad <i>create-react-app</i> para inicializar el proyecto para esta aplicación.
 
 
-Ya habíamos mencionado [npm](/es/part2/getting_data_from_server#npm) en la parte 2, que es una herramienta utilizada para administrar paquetes de JavaScript. De hecho, npm se origina en el ecosistema Node.
+Ya habíamos mencionado [npm](/es/part2/obteniendo_datos_del_servidor#npm) en la parte 2, que es una herramienta utilizada para administrar paquetes de JavaScript. De hecho, npm se origina en el ecosistema Node.
 
 
 Naveguemos a un directorio apropiado y creemos una nueva plantilla para nuestra aplicación con el comando _npm init_. Responderemos a las preguntas presentadas por la utilidad y el resultado será un archivo <i>package.json</i> generado automáticamente en la raíz del proyecto, que contiene información sobre el proyecto.
@@ -171,7 +171,7 @@ import http from 'http'
 
 En estos días, el código que se ejecuta en el navegador utiliza módulos ES6. Los módulos se definen con un [export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) y se utilizan con un [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import).
 
-Sin embargo, Node.js usa los llamados módulos [CommonJS](https://en.wikipedia.org/wiki/CommonJS). La razón de esto es que el ecosistema de Node necesitaba módulos mucho antes de que JavaScript los admitiera en la especificación del lenguaje. En el momento de escribir este material, Node no es compatible con los módulos ES6, pero el soporte para ellos [llegará](https://nodejs.org/api/esm.html) en algún momento.
+Sin embargo, Node.js usa los llamados módulos [CommonJS](https://en.wikipedia.org/wiki/CommonJS). La razón de esto es que el ecosistema de Node necesitaba módulos mucho antes de que JavaScript los admitiera en la especificación del lenguaje. En el momento de escribir este material, Node es compatible con los módulos ES6.
 
 Los módulos de CommonJS funcionan casi exactamente como los módulos de ES6, al menos en lo que respecta a nuestras necesidades en este curso.
 
@@ -239,7 +239,7 @@ Reiniciemos el servidor (puede apagar el servidor presionando _Ctrl+C_ en la con
 
 El valor <i>application/json</i> en el header <i>Content-Type</i> informa al receptor que los datos están en formato JSON. El arrray _notes_ de notas se transforma en JSON con el método <em>JSON.stringify(notes)</em>.
 
-Cuando abrimos el navegador, el formato que se muestra es exactamente el mismo que en la [parte 2](/es/part2/getting_data_from_server/), donde usamos [json-server](https://github.com/typicode/json-server) para entregar la lista de notas:
+Cuando abrimos el navegador, el formato que se muestra es exactamente el mismo que en la [parte 2](/es/part2/obteniendo_datos_del_servidor), donde usamos [json-server](https://github.com/typicode/json-server) para entregar la lista de notas:
 
 ![](../../images/3/2e.png)
 
@@ -466,7 +466,7 @@ Representational State Transfer, también conocido como REST, se introdujo en 20
 
 No vamos a profundizar en la definición de REST de Fielding ni a perder tiempo reflexionando sobre qué es y qué no es REST. En cambio, tomamos una [visión más estrecha](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) al preocuparnos solo por cómo las API RESTful se entienden generalmente en las aplicaciones web. De hecho, la definición original de REST ni siquiera se limita a las aplicaciones web.
 
-Mencionamos en la [parte anterior](/es/part2/altering_data_in_server#rest) que las cosas singulares, como las notas en el caso de nuestra aplicación, se llaman <i>recursos</i> en el pensamiento REST. Cada recurso tiene una URL asociada que es la dirección única del recurso.
+Mencionamos en la [parte anterior](/es/part2/alterando_datos_en_el_servidor#rest) que las cosas singulares, como las notas en el caso de nuestra aplicación, se llaman <i>recursos</i> en el pensamiento REST. Cada recurso tiene una URL asociada que es la dirección única del recurso.
 
 Una convención es crear la dirección única para los recursos combinando el nombre del tipo de recurso con el identificador único del recurso.
 
@@ -674,6 +674,10 @@ Al hacer clic en el texto <i>Send Request</i>, el cliente REST ejecutará la sol
 
 ![](../../images/3/13ea.png)
 
+### El Cliente HTTP de WebStorm
+
+Si usas *IntelliJ WebStorm* en cambio, puedes usar un procedimiento similar con su Cliente HTTP incorporado. Crea un nuevo archivo con la extensión `.rest` y el editor te mostrará opciones para crear y ejecutar tus solicitudes. Puedes obtener más información al respecto siguiendo [esta guía](https://www.jetbrains.com/help/webstorm/http-client-in-product-code-editor.html).
+
 ### Recibiendo información
 
 A continuación, hagamos posible agregar nuevas notas al servidor. La adición de una nota ocurre al hacer una solicitud HTTP POST a la dirección  http://localhost:3001/api/notes y se envía toda la información de la nueva nota en el [body](https://www.w3.org/Protocols/rfc2616/rfc2616-sec7.html#sec7) de la solicitud en formato JSON.
@@ -712,7 +716,7 @@ Antes de implementar el resto de la lógica de la aplicación, verifiquemos con 
 
 La aplicación imprime los datos que enviamos en la solicitud a la consola:
 
-![](../../images/3/15e.png)
+![](../../images/3/15new.png)
 
 
 **NB** <i>Mantenga visible el terminal que ejecuta la aplicación en todo momento</i> cuando esté trabajando en el backend. Gracias a Nodemon, cualquier cambio que hagamos en el código reiniciará la aplicación. Si prestas atención a la consola, inmediatamente podrás detectar los errores que ocurren en la aplicación:
@@ -921,7 +925,7 @@ La aplicación también debe ofrecer un comando _npm run dev_ que ejecutará la 
 
 Implemente una página en la dirección <http://localhost:3001/info> que se parezca más o menos a esto:
 
-![](../../images/3/23ea.png)
+![](../../images/3/23x.png)
 
 
 La página tiene que mostrar la hora en que se recibió la solicitud y cuántas entradas hay en la agenda telefónica en el momento de procesar la solicitud.

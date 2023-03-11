@@ -11,9 +11,9 @@ Siirrämme tässä osassa fokuksen backendiin eli palvelimella olevaan toiminnal
 
 Backendin toteutusympäristönä käytämme [Node.js](https://nodejs.org/en/):ää, joka on melkein missä vaan, erityisesti palvelimilla ja omalla koneellasikin toimiva Googlen [V8](https://developers.google.com/v8/)-JavaScript-moottoriin perustuva JavaScriptin suoritusympäristö.
 
-Kurssimateriaalia tehtäessä on ollut käytössä Node.js:n versio <i>v16.13.2</i>. Huolehdi, että omasi on vähintään yhtä tuore (ks. komentoriviltä _node -v_).
+Kurssimateriaalia tehtäessä on ollut käytössä Node.js:n versio <i>v18.13.02</i>. Suosittelen, että omasi on vähintään yhtä tuore (ks. komentoriviltä _node -v_).
 
-Kuten [osassa 1](/osa1/javascriptia) todettiin, selaimet eivät vielä osaa kaikkia uusimpia JavaScriptin ominaisuuksia, ja siksi selainpuolen koodi täytyy kääntää eli <i>transpiloida</i> esim [Babel](https://babeljs.io/):illa. Backendissa tilanne on kuitenkin toinen, koska uusin Node hallitsee riittävissä määrin myös JavaScriptin uusia versioita, joten suoritamme Nodella kirjoittamaamme koodia suoraan ilman transpilointivaihetta.
+Kuten [osassa 1](/osa1/java_scriptia) todettiin, selaimet eivät vielä osaa kaikkia uusimpia JavaScriptin ominaisuuksia, ja siksi selainpuolen koodi täytyy kääntää eli <i>transpiloida</i> esim [Babel](https://babeljs.io/):illa. Backendissa tilanne on kuitenkin toinen, koska uusin Node hallitsee riittävissä määrin myös JavaScriptin uusia versioita, joten suoritamme Nodella kirjoittamaamme koodia suoraan ilman transpilointivaihetta.
 
 Tavoitteenamme on tehdä [osan 2](/osa2) muistiinpanosovellukseen sopiva backend. Aloitetaan kuitenkin ensin perusteiden läpikäyminen toteuttamalla perinteinen "hello world" -sovellus.
 
@@ -116,7 +116,7 @@ Server running on port 3001
 
 Voimme avata selaimella osoitteessa <http://localhost:3001> olevan vaatimattoman sovelluksemme:
 
-![](../../images/3/1.png)
+![selaimessa näkyy teksti Hello World](../../images/3/1.png)
 
 Palvelin toimii samalla tavalla riippumatta urlin loppuosasta, eli myös sivun <http://localhost:3001/foo/bar> sisältö on sama.
 
@@ -187,19 +187,16 @@ let notes = [
   {
     id: 1,
     content: "HTML is easy",
-    date: "2022-01-10T17:30:31.098Z",
     important: true
   },
   {
     id: 2,
-    content: "Browser can execute only Javascript",
-    date: "2022-01-10T18:39:34.091Z",
+    content: "Browser can execute only JavaScript",
     important: false
   },
   {
     id: 3,
     content: "GET and POST are the most important methods of HTTP protocol",
-    date: "2022-01-10T19:20:14.298Z",
     important: true
   }
 ]
@@ -221,7 +218,7 @@ Headerin <i>Content-Type</i> arvolla <i>application/json</i> kerrotaan, että ky
 
 Kun avaamme selaimen, on tulostusasu sama kuin [osassa 2](/osa2/palvelimella_olevan_datan_hakeminen) käytetyn [json-serverin](https://github.com/typicode/json-server) tarjoamalla muistiinpanojen listalla:
 
-![](../../images/3/2e.png)
+![Selain renderöi json-muotoisen datan](../../images/3/2new.png)
 
 ### Express
 
@@ -241,7 +238,7 @@ Riippuvuus tulee nyt määritellyksi tiedostoon <i>package.json</i>:
 {
   // ...
   "dependencies": {
-    "express": "^4.17.2"
+   "express": "^4.18.2"
   }
 }
 
@@ -249,17 +246,17 @@ Riippuvuus tulee nyt määritellyksi tiedostoon <i>package.json</i>:
 
 Riippuvuuden koodi asentuu kaikkien projektin riippuvuuksien tapaan projektin juuressa olevaan hakemistoon <i>node\_modules</i>. Hakemistosta löytyy Expressin lisäksi suuri määrä muutakin tavaraa:
 
-![](../../images/3/4.png)
+![komennon ls tulostama suuri määrä kirjastoja vastaavia hakemistoja](../../images/3/4.png)
 
 Kyseessä ovat Expressin riippuvuudet ja niiden riippuvuudet jne. eli projektimme [transitiiviset riippuvuudet](https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/).
 
-Projektiin asentui Expressin versio 4.17.2. </i>package.json:issa</i> versiomerkinnän edessä on väkänen, eli muoto on
+Projektiin asentui Expressin versio 4.18.2. </i>package.json:issa</i> versiomerkinnän edessä on väkänen, eli muoto on
 
 ```json
-"express": "^4.17.2"
+"express": "^4.18.2"
 ```
   
-npm:n yhteydessä käytetään ns. [semanttista versiointia](https://docs.npmjs.com/getting-started/semantic-versioning). Merkintä <i>^4.17.2</i> tarkoittaa, että jos projektin riippuvuudet päivitetään, asennetaan Expressistä versio, joka on vähintään <i>4.17.2</i>, mutta asennetuksi voi tulla versio, jonka <i>patch</i> eli viimeinen numero tai <i>minor</i> eli keskimmäinen numero voi olla suurempi. Pääversio eli <i>major</i> täytyy kuitenkin olla edelleen sama.
+npm:n yhteydessä käytetään ns. [semanttista versiointia](https://docs.npmjs.com/getting-started/semantic-versioning). Merkintä <i>^4.18.2</i> tarkoittaa, että jos projektin riippuvuudet päivitetään, asennetaan Expressistä versio, joka on vähintään <i>4.18.2</i>, mutta asennetuksi voi tulla versio, jonka <i>patch</i> eli viimeinen numero tai <i>minor</i> eli keskimmäinen numero voi olla suurempi. Pääversio eli <i>major</i> täytyy kuitenkin olla edelleen sama.
 
 Voimme päivittää projektin riippuvuudet komennolla
 
@@ -324,7 +321,7 @@ Koodissa pyyntöön vastataan käyttäen _response_-olion metodia [send](http://
 
 Asian voi varmistaa konsolin välilehdeltä <i>Network</i>:
 
-![](../../images/3/5.png)
+![Avattu network-tabi näyttää että palvelin vastaa statuskoodilla 200](../../images/3/5.png)
 
 Routeista toinen määrittelee tapahtumankäsittelijän, joka hoitaa sovelluksen polkuun <i>/api/notes</i> tulevia HTTP GET -pyyntöjä:
 
@@ -336,7 +333,7 @@ app.get('/api/notes', (request, response) => {
 
 Pyyntöön vastataan _response_-olion metodilla [json](http://expressjs.com/en/4x/api.html#res.json), joka lähettää HTTP-pyynnön vastaukseksi parametrina olevaa JavaScript-olioa eli taulukkoa _notes_ vastaavan JSON-muotoisen merkkijonon. Express asettaa headerin <i>Content-Type</i> arvoksi <i>application/json</i>.
 
-![](../../images/3/6ea.png)
+![Selain renderöi json-muotoiset muistiinpanot](../../images/3/6new.png)
 
 Pieni huomio JSON-muodossa palautettavasta datasta.
 
@@ -352,7 +349,7 @@ Kannattaa huomata, että [JSON](https://en.wikipedia.org/wiki/JSON) on merkkijon
 
 Seuraava interaktiivisessa [node-repl](https://nodejs.org/docs/latest-v8.x/api/repl.html):issä suoritettu kokeilu havainnollistaa asiaa:
 
-![](../../assets/3/5.png)
+![js-objekti muuttuu string-tyyppiseksi JSON.stringify-operaation seurauksena](../../assets/3/5.png)
 
 Saat käynnistettyä interaktiivisen node-repl:in kirjoittamalla komentoriville _node_. Komentojen toimivuutta on koodatessa kätevä kokeilla konsolissa, suosittelen!
 
@@ -376,10 +373,10 @@ Tiedoston <i>package.json</i> sisältö muuttuu seuraavasti:
 {
   //...
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.18.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.20"
   }
 }
 ```
@@ -388,7 +385,7 @@ Jos nodemon-riippuvuus kuitenkin meni sovelluksessasi normaaliin "dependencies"-
 
 Kehitysaikaisilla riippuvuuksilla tarkoitetaan työkaluja, joita tarvitaan ainoastaan sovellusta kehitettäessä esim. testaukseen tai sovelluksen automaattiseen uudelleenkäynnistykseen kuten <i>nodemon</i>.
 
-Kun sovellusta suoritetaan tuotantomoodissa eli samoin kuin sitä tullaan suorittamaan tuotantopalvelimella (esim. Herokussa, johon tulemme kohta siirtämään sovelluksemme), ei kehitysaikaisia riippuvuuksia tarvita.
+Kun sovellusta suoritetaan tuotantomoodissa eli samoin kuin sitä tullaan suorittamaan tuotantopalvelimella (esim. Fly.io:ssa, johon tulemme kohta siirtämään sovelluksemme), ei kehitysaikaisia riippuvuuksia tarvita.
 
 Voimme käynnistää ohjelman <i>nodemonilla</i> seuraavasti:
 
@@ -396,7 +393,10 @@ Voimme käynnistää ohjelman <i>nodemonilla</i> seuraavasti:
 node_modules/.bin/nodemon index.js
 ```
 
+Huom: komennon tämä muoto ei välttämättä toimi Windowsilla. Se ei kuitenkaan haittaa sillä 5 sentin päästä kerrotaan komennosta parempi muoto.
+
 Sovelluksen koodin muutokset aiheuttavat nyt automaattisen palvelimen uudelleenkäynnistymisen. Kannattaa huomata, että vaikka palvelin uudelleenkäynnistyy automaattisesti, selain täytyy kuitenkin refreshata, sillä toisin kuin Reactin yhteydessä, meillä ei nyt ole eikä tässä skenaariossa (jossa palautamme JSON-muotoista dataa) edes voisikaan olla selainta päivittävää [hot reload](https://gaearon.github.io/react-hot-loader/getstarted/) -toiminnallisuutta.
+
 
 Komento on ikävä, joten määritellään sitä varten <i>npm-skripti</i> tiedostoon <i>package.json</i>:
 
@@ -500,7 +500,7 @@ app.get('/api/notes/:id', (request, response) => {
 
 Kun selaimella mennään jälleen osoitteeseen <http://localhost:3001/api/notes/1>, konsoliin (eli siihen terminaaliin, johon sovellus on käynnistetty) tulostuu
 
-![](../../images/3/8.png)
+![Konsoliin on tulostunut 'server running in port 3000' lisäksi 1 ja undefined](../../images/3/8.png)
 
 eli halutun muistiinpanon id välittyy sovellukseen aivan oikein, mutta _find_ komento ei löydä mitään.
 
@@ -540,15 +540,15 @@ app.get('/api/notes/:id', (request, response) => {
 
 Nyt yksittäisen resurssin hakeminen toimii.
 
-![](../../images/3/9ea.png)
+![Yksittäistä muistiinpanoa vastaava json renderöityy](../../images/3/9new.png)
 
 Toiminnallisuuteen jää kuitenkin pieni ongelma. Jos haemme muistiinpanoa sellaisella indeksillä, jota vastaavaa muistiinpanoa ei ole olemassa, vastaa palvelin seuraavasti:
 
-![](../../images/3/10ea.png)
+![Selaimeen ei renderöidy mitään, network-tab paljastaa että palvelin vastaa statuskoodilla 200](../../images/3/10ea.png)
 
 HTTP-statuskoodi on onnistumisesta kertova 200. Vastaukseen ei liity dataa, sillä headerin <i>content-length</i> arvo on 0, ja samaa todistaa selain: mitään ei näy.
 
-Syynä tälle käyttäytymiselle on se, että muuttujan _note_ arvoksi tulee _undefined_ jos muistiinpanoa ei löydy. Tilanne tulee käsitellä palvelimella järkevämmin, eli statuskoodin 200 sijaan tulee vastata statuskoodilla [404 not found](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5).
+Syynä tälle käyttäytymiselle on se, että muuttujan _note_ arvoksi tulee _undefined_ jos muistiinpanoa ei löydy. Tilanne tulee käsitellä palvelimella järkevämmin, eli statuskoodin 200 sijaan tulee vastata statuskoodilla [404 not found](https://www.rfc-editor.org/rfc/rfc9110.html#name-404-not-found).
 
 Tehdään koodiin muutos:
 
@@ -586,7 +586,7 @@ app.delete('/api/notes/:id', (request, response) => {
 })
 ```
 
-Jos poisto onnistuu eli poistettava muistiinpano on olemassa, vastataan statuskoodilla [204 no content](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.5) sillä mukaan ei lähetetä mitään dataa.
+Jos poisto onnistuu eli poistettava muistiinpano on olemassa, vastataan statuskoodilla [204 no content](https://www.rfc-editor.org/rfc/rfc9110.html#name-204-no-content) sillä mukaan ei lähetetä mitään dataa.
 
 Ei ole täyttä yksimielisyyttä siitä, mikä statuskoodi DELETE-pyynnöstä pitäisi palauttaa jos poistettavaa resurssia ei ole olemassa. Vaihtoehtoja ovat lähinnä 204 ja 404. Yksinkertaisuuden vuoksi sovellus palauttaa nyt molemmissa tilanteissa statuskoodin 204.
 
@@ -598,7 +598,7 @@ On olemassa useita backendin testaamista helpottavia työkaluja, eräs näistä 
 
 Asennetaan Postmanin desktop sovellus [täältä](https://www.postman.com/downloads/)  ja kokeillaan:
 
-![](../../images/3/11x.png) 
+![tehdään postmanilla operaatio DELETE http://localhost:3000/api/notes/1, huomataan että vastauksessa statuskoodi 204 no content](../../images/3/11x.png) 
 
 Postmanin käyttö on tässä tilanteessa suhteellisen yksinkertaista, riittää määritellä url ja valita oikea pyyntötyyppi.
 
@@ -615,11 +615,11 @@ Kun plugin on asennettu, on sen käyttö erittäin helppoa. Tehdään projektin 
 
 Luodaan kaikki muistiinpanot hakevan pyynnön määrittelevä tiedosto <i>get\_all\_notes.rest</i>:
 
-![](../../images/3/12ea.png)
+![Luodaan tiedosto jonka sisältlö GET http://localhost:3000/api/notes](../../images/3/12ea.png)
 
 Klikkaamalla tekstiä <i>Send Request</i>, REST client suorittaa määritellyn HTTP-pyynnön, ja palvelimen vastaus avautuu editoriin:
 
-![](../../images/3/13ea.png)
+![VS codeen avautuu näkymä missä palvelimen palauttama json-muotoinen taulukko muistiinpanoja sekä operaatioon vastattu statuskoodi ja palautetut headerit](../../images/3/13new.png)
 
 ### Datan vastaanottaminen
 
@@ -655,35 +655,35 @@ Toistaiseksi sovellus ei vielä tee vastaanotetulle datalle mitään muuta kuin 
 
 Ennen toimintalogiikan viimeistelyä varmistetaan ensin Postmanilla, että lähetetty tieto menee varmasti perille. Pyyntötyypin ja urlin lisäksi on määriteltävä myös pyynnön mukana menevä data eli <i>body</i>:
 
-![](../../images/3/14x.png)
+![Valitaan postmanissa JSON body-datan tyypiksi](../../images/3/14new.png)
 
 Sovellus tulostaa lähetetyn vastaanottamansa datan terminaaliin:
 
-![](../../images/3/15e.png)
+![Konsoliin tulostuu palvelimen vastaanottama json-objekti](../../images/3/15new.png)
 
 **HUOM:** Kun ohjelmoit backendia, <i>pidä sovellusta suorittava konsoli koko ajan näkyvillä</i>. Nodemonin ansiosta sovellus käynnistyy uudelleen jos koodiin tehdään muutoksia. Jos seuraat konsolia, huomaat välittömästi jos sovelluksen koodiin tulee virhe:
 
-![](../../images/3/16.png)
+![konsoliin tulostuu epävalidista javascriptistä johtuva parse error -virheilmoitus](../../images/3/16.png)
 
 Konsolista kannattaa seurata myös, reagoiko backend odotetulla tavalla esim. kun sovellukselle lähetetään dataa metodilla HTTP POST. Backendiin kannattaa luonnollisesti lisäillä runsaat määrät <em>console.log</em>-komentoja kun sovellus on kehitysvaiheessa. 
 
 Eräs ongelmanlähde on se, että dataa lähettäessä headerille <i>Content-Type</i> ei aseteta oikeaa arvoa. Näin tapahtuu esim. jos Postmanissa bodyn tyyppiä ei määritellä oikein:
 
-![](../../images/3/17x.png)
+![Valitaan postmanissa text body-datan tyypiksi](../../images/3/17new.png)
 
 Headerin <i>Content-Type</i> arvoksi asettuu <i>text/plain</i>:
 
-![](../../images/3/18x.png)
+![Nähdään postmanin headers-välilehdeltä että content-type on text/plain](../../images/3/18new.png)
 
 Palvelin näyttää vastaanottavan ainoastaan tyhjän olion:
 
-![](../../images/3/19.png)
+![Konsoliin tulostuu tyhjä json](../../images/3/19.png)
 
 Ilman oikeaa headerin arvoa palvelin ei osaa parsia dataa oikeaan muotoon. Se ei edes yritä arvailla missä muodossa data on, sillä potentiaalisia datan siirtomuotoja eli <i>Content-Typejä</i> on olemassa [suuri määrä](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types).
 
 Jos käytät VS Codea, edellisessä luvussa esitelty REST client kannattaa asentaa viimeistään <i>nyt</i>. POST-pyyntö tehdään REST clientillä seuraavasti:
 
-![](../../images/3/20eb.png)
+![VS codeen avautuu näkymä joka näyttää palvelimen palauttaman, luodun json-objektin, sekä siihen liittyvät headerit ja statuskoodin 200](../../images/3/20new.png)
 
 Pyyntöä varten on siis luotu oma tiedosto <i>create\_note.rest</i>. Pyyntö on muotoiltu [dokumentaation ohjetta](https://github.com/Huachao/vscode-restclient/blob/master/README.md#usage) noudatellen.
 
@@ -716,7 +716,7 @@ app.post('/api/notes', (request, response) => {
 
 Uudelle muistiinpanolle tarvitaan uniikki id. Ensin selvitetään olemassa olevista id:istä suurin muuttujaan _maxId_. Uuden muistiinpanon id:ksi asetetaan sitten _maxId + 1_. Tämä tapa ei ole kovin hyvä, mutta emme nyt välitä siitä, sillä tulemme pian korvaamaan tavan, jolla muistiinpanot talletetaan.
 
-Tämänhetkisessä versiossa on vielä se ongelma, että voimme HTTP POST -pyynnöllä lisätä mitä tahansa kenttiä sisältäviä olioita. Parannellaan sovellusta siten, että kenttä <i>content</i> ei saa olla tyhjä. Kentille <i>important</i> ja <i>date</i> asetetaan oletusarvot. Kaikki muut kentät hylätään:
+Tämänhetkisessä versiossa on vielä se ongelma, että voimme HTTP POST -pyynnöllä lisätä mitä tahansa kenttiä sisältäviä olioita. Parannellaan sovellusta siten, että kenttä <i>content</i> ei saa olla tyhjä. Kentälle <i>important</i> asetetaan oletusarvo false jos sen arvoa ei ole määritelty. Kaikki muut kentät hylätään:
 
 ```js
 const generateId = () => {
@@ -738,7 +738,6 @@ app.post('/api/notes', (request, response) => {
   const note = {
     content: body.content,
     important: body.important || false,
-    date: new Date(),
     id: generateId(),
   }
 
@@ -750,7 +749,7 @@ app.post('/api/notes', (request, response) => {
 
 Tunnisteena toimivan id-kentän arvon generointilogiikka on eriytetty funktioon _generateId_.
 
-Jos vastaanotetulta datalta puuttuu sisältö kentästä <i>content</i>, vastataan statuskoodilla [400 bad request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1):
+Jos vastaanotetulta datalta puuttuu sisältö kentästä <i>content</i>, vastataan statuskoodilla [400 bad request](https://www.rfc-editor.org/rfc/rfc9110.html#name-400-bad-request):
 
 ```js
 if (!body.content) {
@@ -762,9 +761,7 @@ if (!body.content) {
 
 Huomaa, että returnin kutsuminen on tärkeää. Ilman kutsua koodi jatkaisi suoritusta metodin loppuun asti, ja virheellinen muistiinpano tallettuisi!
 
-Jos content-kentällä on arvo, luodaan muistiinpano syötteen perusteella. Kuten edellisessä osassa mainitsimme, aikaleimoja ei kannata luoda selaimen koodissa, sillä käyttäjän koneen kellonaikaan ei voi luottaa. Aikaleiman eli kentän <i>date</i> arvon generointi onkin nyt palvelimen vastuulla.
-
-Jos kenttä <i>important</i> puuttuu, asetetaan sille oletusarvo <i>false</i>. Oletusarvo generoidaan nyt hieman erikoisella tavalla:
+Jos content-kentällä on arvo, luodaan muistiinpano syötteen perusteella. Jos kenttä <i>important</i> puuttuu, asetetaan sille oletusarvo <i>false</i>. Oletusarvo generoidaan nyt hieman erikoisella tavalla:
 
 ```js
 important: body.important || false,
@@ -778,7 +775,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://gith
 
 Tämän hetken koodi on branchissa [part3-1](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1):
 
-![](../../images/3/21.png)
+![Kuva havainnollistaa miten branchi löydetään githubista](../../images/3/21.png)
 
 Jos kloonaat projektin itsellesi, suorita komento _npm install_ ennen käynnistämistä eli ennen komentoa _npm start_ tai _npm run dev_.
 
@@ -818,7 +815,7 @@ Mitä rivillä tapahtuu? <em>notes.map(n => n.id)</em> muodostaa taulukon, joka 
 
 Tee Node-sovellus, joka tarjoaa osoitteessa <http://localhost:3001/api/persons> kovakoodatun taulukon puhelinnumerotietoja:
 
-![](../../images/3/22e.png)
+![Selain renderöi taulukollisen json-muotoisia objekteja joilla kentät id, name ja number](../../images/3/22e.png)
 
 Sovellus pitää pystyä käynnistämään komennolla _npm start_.
 
@@ -828,7 +825,7 @@ Komennolla _npm run dev_ käynnistettäessa sovelluksen tulee käynnistyä uudel
 
 Tee sovelluksen osoitteeseen <http://localhost:3001/info> suunnilleen seuraavanlainen sivu
 
-![](../../images/3/23x.png)
+![Selin renderöi kutsuhetken kellonajan sekä tekstin 'Phonebook has info for 2 people'](../../images/3/23x.png)
 
 Sivun tulee siis kertoa pyynnön tekohetki sekä se, kuinka monta puhelinluettelotietoa sovelluksen muistissa olevassa taulukossa on.
 
@@ -958,7 +955,7 @@ Morgan asennetaan kuten muutkin kirjastot, eli komennolla _npm install_ ja sen k
 
 Konfiguroi morgania siten, että se näyttää myös HTTP POST -pyyntöjen mukana tulevan datan:
 
-![](../../images/3/24.png)
+![Konsoliin tulostuu HTTP-pyntötyyppi, kutsuttu polku, paluuarvon statuskoodi, operaation viemä aika millisekunteina (tämä on morganin defaultina näyttämä) sekä pyynnön mukana mahdollisesti lähetetty data](../../images/3/24.png)
 
 Tämä tehtävä on kohtuullisen haastava, vaikka koodia ei tarvitakaan paljoa. 
 

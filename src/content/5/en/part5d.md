@@ -7,30 +7,30 @@ lang: en
 
 <div class="content">
 
-So far we have tested the backend as a whole on an API level using integration tests, and tested some frontend components using unit tests.
+So far we have tested the backend as a whole on an API level using integration tests and tested some frontend components using unit tests.
 
-Next we will look into one way to test the [system as a whole](https://en.wikipedia.org/wiki/System_testing) using <i>End to End</i> (E2E) tests.
+Next, we will look into one way to test the [system as a whole](https://en.wikipedia.org/wiki/System_testing) using <i>End to End</i> (E2E) tests.
 
-We can do E2E testing of a web application using a browser and a testing library. There are multiple libraries available, for example [Selenium](http://www.seleniumhq.org/) which can be used with almost any browser. 
-Another browser option are so called [headless browsers](https://en.wikipedia.org/wiki/Headless_browser), which are browsers with no graphical user interface. 
-For example Chrome can be used in Headless-mode. 
+We can do E2E testing of a web application using a browser and a testing library. There are multiple libraries available. One example is [Selenium](http://www.seleniumhq.org/), which can be used with almost any browser.
+Another browser option is so-called [headless browsers](https://en.wikipedia.org/wiki/Headless_browser), which are browsers with no graphical user interface.
+For example, Chrome can be used in headless mode.
 
-E2E tests are potentially the most useful category of tests, because they test the system through the same interface as real users use. 
+E2E tests are potentially the most useful category of tests because they test the system through the same interface as real users use.
 
-They do have some drawbacks too. Configuring E2E tests is more challenging than unit or integration tests. They also tend to be quite slow, and with a large system their execution time can be minutes, even hours. This is bad for development, because during coding it is beneficial to be able to run tests as often as possible in case of code [regressions](https://en.wikipedia.org/wiki/Regression_testing).
+They do have some drawbacks too. Configuring E2E tests is more challenging than unit or integration tests. They also tend to be quite slow, and with a large system, their execution time can be minutes or even hours. This is bad for development because during coding it is beneficial to be able to run tests as often as possible in case of code [regressions](https://en.wikipedia.org/wiki/Regression_testing).
 
-E2E tests can also be [flaky](https://hackernoon.com/flaky-tests-a-war-that-never-ends-9aa32fdef359). 
-Some tests might pass one time and fail another, even if the code does not change at all. 
+E2E tests can also be [flaky](https://hackernoon.com/flaky-tests-a-war-that-never-ends-9aa32fdef359).
+Some tests might pass one time and fail another, even if the code does not change at all.
 
 ### Cypress
 
-E2E library [Cypress](https://www.cypress.io/) has become popular within the last year. Cypress is exceptionally easy to use, and when compared to Selenium, for example, it requires a lot less hassle and headache. 
-Its operating principle is radically different than most E2E testing libraries, because Cypress tests are run completely within the browser.
-Other libraries run the tests in a Node-process, which is connected to the browser through an API. 
+E2E library [Cypress](https://www.cypress.io/) has become popular within the last year. Cypress is exceptionally easy to use, and when compared to Selenium, for example, it requires a lot less hassle and headache.
+Its operating principle is radically different than most E2E testing libraries because Cypress tests are run completely within the browser.
+Other libraries run the tests in a Node process, which is connected to the browser through an API.
 
-Let's  make some end to end tests for our note application.
+Let's make some end-to-end tests for our note application.
 
-We begin by installing Cypress to <i>the frontend</i> as development dependency
+We begin by installing Cypress to <i>the frontend</i> as a development dependency
 
 ```js
 npm install --save-dev cypress
@@ -46,74 +46,87 @@ and by adding an npm-script to run it:
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "json-server -p3001 db.json",
     "cypress:open": "cypress open"  // highlight-line
   },
   // ...
 }
 ```
 
-Unlike the frontend's unit tests, Cypress tests can be in the frontend or the backend repository, or even in their own separate repository. 
+Unlike the frontend's unit tests, Cypress tests can be in the frontend or the backend repository, or even in their separate repository.
 
-The tests require the tested system to be running. Unlike our backend integration tests, Cypress tests <i>do not start</i> the system when they are run. 
+The tests require the tested system to be running. Unlike our backend integration tests, Cypress tests <i>do not start</i> the system when they are run.
 
-Let's add an npm-script to <i>the backend</i> which starts it in test mode, or so that <i>NODE\_ENV</i> is <i>test</i>.
+Let's add an npm script to <i>the backend</i> which starts it in test mode, or so that <i>NODE\_ENV</i> is <i>test</i>.
 
 ```js
 {
   // ...
   "scripts": {
-    "start": "cross-env NODE_ENV=production node index.js",
-    "dev": "cross-env NODE_ENV=development nodemon index.js",
-    "build:ui": "rm -rf build && cd ../../../2/luento/notes && npm run build && cp -r build ../../../3/luento/notes-backend",
-    "deploy": "git push heroku master",
-    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",
-    "logs:prod": "heroku logs --tail",
+    "start": "NODE_ENV=production node index.js",
+    "dev": "NODE_ENV=development nodemon index.js",
+    "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
+    "deploy": "fly deploy",
+    "deploy:full": "npm run build:ui && npm run deploy",
+    "logs:prod": "fly logs",
     "lint": "eslint .",
-    "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
-    "start:test": "cross-env NODE_ENV=test node index.js" // highlight-line
+    "test": "jest --verbose --runInBand",
+    "start:test": "NODE_ENV=test node index.js" // highlight-line
   },
   // ...
 }
 ```
 
-NB! In order to get Cypress working with WSL2 one might need to do some additional configuring first. These two [links](https://docs.cypress.io/guides/getting-started/installing-cypress#Windows-Subsystem-for-Linux) are great places to [start](https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress).
-
-NB! For macbooks with m1 CPU instead of intel ones, cypress wouldn't work since it doesn't support m1 yet. To fix that, installing Rosetta 2 then configuring your terminal is a must. For step by step instructions follow [here](https://www.cypress.io/blog/2021/01/20/running-cypress-on-the-apple-m1-silicon-arm-architecture-using-rosetta-2/).
+NB! To get Cypress working with WSL2 one might need to do some additional configuring first. These two [links](https://docs.cypress.io/guides/getting-started/installing-cypress#Windows-Subsystem-for-Linux) are great places to [start](https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress).
   
-When both backend and frontend are running, we can start Cypress with the command
+./node_modules/.bin/cypress install -------- needed on windows.
+//https://github.com/cypress-io/cypress/issues/2610
+  
+When both the backend and frontend are running, we can start Cypress with the command
 
 ```js
 npm run cypress:open
 ```
 
-When we first run Cypress, it creates a <i>cypress</i> directory. It contains an <i>integration</i> subdirectory, where we will place our tests. Cypress creates a bunch of example tests for us in two subdirectories: the <i>integration/1-getting-started</i> and the <i>integration/2-advanced-examples</i> directory. We can delete both directories and make our own test in file <i>note\_app.spec.js</i>:
+Cypress asks what type of tests we are doing. Let us answer "E2E Testing":
+
+![cypress arrow towards e2e testing option](../../images/5/51new.png)
+
+Next a browser is selected (e.g. Chrome) and then we click "Create new spec":
+
+![create new spec with arrow pointing towards it](../../images/5/52new.png)
+
+Let us create the test file <i>cypress/e2e/note\_app.cy.js</i>:
+
+![cypress with path cypress/e2e/note_app.cy.js](../../images/5/53new.png)
+
+We could edit the tests in Cypress but let us rather use VS Code:
+
+![vscode showing edits of test and cypress showing spec added](../../images/5/54new.png)
+
+We can now close the edit view of Cypress.
+
+Let us chage the test content as follows:
 
 ```js
 describe('Note app', function() {
   it('front page can be opened', function() {
     cy.visit('http://localhost:3000')
     cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2022')
+    cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
   })
 })
 ```
 
-We start the test from the opened window:
+The test is run by clicking the test in the Cypress:
 
-![](../../images/5/40x.png)
+Running the test shows how the application behaves as the test is run:
 
-**NOTE**: you might need to restart Cypress after deleting the example tests.
+![cypress showing automation of note test](../../images/5/56new.png)
 
-Running the test opens your browser and shows how the application behaves as the test is run:
-
-![](../../images/5/32x.png)
-
-The structure of the test should look familiar. They use <i>describe</i> blocks to group different test cases like Jest does. The test cases have been defined with the <i>it</i> method. 
-Cypress borrowed these parts from the [Mocha](https://mochajs.org/) testing library it uses under the hood. 
+The structure of the test should look familiar. They use <i>describe</i> blocks to group different test cases, just like Jest. The test cases have been defined with the <i>it</i> method. Cypress borrowed these parts from the [Mocha](https://mochajs.org/) testing library it uses under the hood.
 
 [cy.visit](https://docs.cypress.io/api/commands/visit.html) and [cy.contains](https://docs.cypress.io/api/commands/contains.html) are Cypress commands, and their purpose is quite obvious.
-[cy.visit](https://docs.cypress.io/api/commands/visit.html) opens the web address given to it as a parameter in the browser used by the test. [cy.contains](https://docs.cypress.io/api/commands/contains.html) searches for the string it received as a parameter from the page. 
+[cy.visit](https://docs.cypress.io/api/commands/visit.html) opens the web address given to it as a parameter in the browser used by the test. [cy.contains](https://docs.cypress.io/api/commands/contains.html) searches for the string it received as a parameter from the page.
 
 We could have declared the test using an arrow function
 
@@ -122,12 +135,12 @@ describe('Note app', () => { // highlight-line
   it('front page can be opened', () => { // highlight-line
     cy.visit('http://localhost:3000')
     cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2022')
+    cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
   })
 })
 ```
 
-However, Mocha [recommends](https://mochajs.org/#arrow-functions) that arrow functions are not used, because they might cause some issues in certain situations. 
+However, Mocha [recommends](https://mochajs.org/#arrow-functions) that arrow functions are not used, because they might cause some issues in certain situations.
 
 If <i>cy.contains</i> does not find the text it is searching for, the test does not pass.  So if we extend our test like so
 
@@ -136,7 +149,7 @@ describe('Note app', function() {
   it('front page can be opened',  function() {
     cy.visit('http://localhost:3000')
     cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2022')
+    cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
   })
 
 // highlight-start
@@ -150,16 +163,51 @@ describe('Note app', function() {
 
 the test fails
 
-![](../../images/5/33x.png)
+![cypress showing failure expecting to find wtf but no](../../images/5/57new.png)
 
-Let's remove the failing code from the test. 
+Let's remove the failing code from the test.
+
+The variable _cy_ our tests use gives us a nasty Eslint error
+
+![vscode screenshot showing cy is not defined](../../images/5/58new.png)
+
+We can get rid of it by installing [eslint-plugin-cypress](https://github.com/cypress-io/eslint-plugin-cypress) as a development dependency
+
+```js
+npm install eslint-plugin-cypress --save-dev
+```
+
+and changing the configuration in <i>.eslintrc.js</i> like so:
+
+```js
+module.exports = {
+    "env": {
+        "browser": true,
+        "es6": true,
+        "jest/globals": true,
+        "cypress/globals": true // highlight-line
+    },
+    "extends": [ 
+      // ...
+    ],
+    "parserOptions": {
+      // ...
+    },
+    "plugins": [
+        "react", "jest", "cypress" // highlight-line
+    ],
+    "rules": {
+      // ...
+    }
+}
+```
 
 ### Writing to a form
 
-Let's extend our tests so that the test tries to log in to our application. 
+Let's extend our tests so that the test tries to log in to our application.
 We assume our backend contains a user with the username <i>mluukkai</i> and password <i>salainen</i>.
 
-The test begins by opening the login form. 
+The test begins by opening the login form.
 
 ```js
 describe('Note app',  function() {
@@ -167,14 +215,14 @@ describe('Note app',  function() {
 
   it('login form can be opened', function() {
     cy.visit('http://localhost:3000')
-    cy.contains('login').click()
+    cy.contains('log in').click()
   })
 })
 ```
 
-The test first searches for the login button by its text, and clicks the button with the command [cy.click](https://docs.cypress.io/api/commands/click.html#Syntax).
+The test first searches for the login button by its text and clicks the button with the command [cy.click](https://docs.cypress.io/api/commands/click.html#Syntax).
 
-Both of our tests begin the same way, by opening the page <i>http://localhost:3000</i>, so we should 
+Both of our tests begin the same way, by opening the page <i><http://localhost:3000></i>, so we should
 separate the shared part into a <i>beforeEach</i> block run before each test:
 
 ```js
@@ -187,32 +235,32 @@ describe('Note app', function() {
 
   it('front page can be opened', function() {
     cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2022')
+    cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
   })
 
   it('login form can be opened', function() {
-    cy.contains('login').click()
+    cy.contains('log in').click()
   })
 })
 ```
 
-The login field contains two <i>input</i> fields, which the test should write into. 
+The login field contains two <i>input</i> fields, which the test should write into.
 
-The [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax) command allows for searching elements by CSS selectors. 
+The [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax) command allows for searching elements by CSS selectors.
 
-We can access the first and the last input field on the page, and write to them with the command [cy.type](https://docs.cypress.io/api/commands/type.html#Syntax) like so: 
+We can access the first and the last input field on the page, and write to them with the command [cy.type](https://docs.cypress.io/api/commands/type.html#Syntax) like so:
 
 ```js
 it('user can login', function () {
-  cy.contains('login').click()
+  cy.contains('log in').click()
   cy.get('input:first').type('mluukkai')
   cy.get('input:last').type('salainen')
 })  
 ```
 
-The test works. The problem is if we later add more input fields, the test will break because it expects the fields it needs to be the first and the last on the page. 
+The test works. The problem is if we later add more input fields, the test will break because it expects the fields it needs to be the first and the last on the page.
 
-It would be better to give our inputs unique <i>ids</i> and use those to find them. 
+It would be better to give our inputs unique <i>ids</i> and use those to find them.
 We change our login form like so:
 
 ```js
@@ -247,7 +295,7 @@ const LoginForm = ({ ... }) => {
 }
 ```
 
-We also added an id to our submit button so we can access it in our tests. 
+We also added an id to our submit button so we can access it in our tests.
 
 The test becomes:
 
@@ -255,7 +303,7 @@ The test becomes:
 describe('Note app',  function() {
   // ..
   it('user can log in', function() {
-    cy.contains('login').click()
+    cy.contains('log in').click()
     cy.get('#username').type('mluukkai')  // highlight-line    
     cy.get('#password').type('salainen')  // highlight-line
     cy.get('#login-button').click()  // highlight-line
@@ -265,69 +313,15 @@ describe('Note app',  function() {
 })
 ```
 
-The last row ensures that the login was successful. 
+The last row ensures that the login was successful.
 
 Note that the CSS [id-selector](https://developer.mozilla.org/en-US/docs/Web/CSS/ID_selectors) is #, so if we want to search for an element with the id <i>username</i> the CSS selector is <i>#username</i>.
 
-### Some things to note
-
-The test first clicks the button opening the login form like so
-
-```js
-cy.contains('login').click()
-```
-
-When the form has been filled, the form is submitted by clicking the submit button
-
-```js
-cy.get('#login-button').click()
-```
-
-Both buttons have the text <i>login</i>, but they are two separate buttons. 
-Actually both buttons are in the application's DOM the whole time, but only one is visible at a time because of the <i>display:none</i> styling on one of them.
-
-If we search for a button by its text, [cy.contains](https://docs.cypress.io/api/commands/contains.html#Syntax) will return the first of them, or the one opening the login form. 
-This will happen even if the button is not visible. 
-To avoid name conflicts, we gave the submit button the id <i>login-button</i> we can use to access it.
-
-Now we notice that the variable _cy_ our tests use gives us a nasty Eslint error
-
-![](../../images/5/30ea.png)
-
-We can get rid of it by installing [eslint-plugin-cypress](https://github.com/cypress-io/eslint-plugin-cypress) as a development dependency
-
-```js
-npm install eslint-plugin-cypress --save-dev
-```
-
-and changing the configuration in <i>.eslintrc.js</i> like so:
-
-```js
-module.exports = {
-    "env": {
-        "browser": true,
-        "es6": true,
-        "jest/globals": true,
-        "cypress/globals": true // highlight-line
-    },
-    "extends": [ 
-      // ...
-    ],
-    "parserOptions": {
-      // ...
-    },
-    "plugins": [
-        "react", "jest", "cypress" // highlight-line
-    ],
-    "rules": {
-      // ...
-    }
-}
-```
+Please note that passing the test at this stage requires that there is a user in the test database of the backend environment whose username is <i>mluukkai</i> and the password is <i>salainen</i>. Create a user if needed!
 
 ### Testing new note form
 
-Let's next add tests which test the "new note" functionality: 
+Let's next add test methods to test the "new note" functionality:
 
 ```js
 describe('Note app', function() {
@@ -335,7 +329,7 @@ describe('Note app', function() {
   // highlight-start
   describe('when logged in', function() {
     beforeEach(function() {
-      cy.contains('login').click()
+      cy.contains('log in').click()
       cy.get('input:first').type('mluukkai')
       cy.get('input:last').type('salainen')
       cy.get('#login-button').click()
@@ -355,8 +349,8 @@ describe('Note app', function() {
 })
 ```
 
-The test has been defined in its own <i>describe</i> block. 
-Only logged-in users can create new notes, so we added logging in to the application to a <i>beforeEach</i> block. 
+The test has been defined in its own <i>describe</i> block.
+Only logged-in users can create new notes, so we added logging in to the application to a <i>beforeEach</i> block.
 
 The test trusts that when creating a new note the page contains only one input, so it searches for it like so:
 
@@ -366,9 +360,9 @@ cy.get('input')
 
 If the page contained more inputs, the test would break
 
-![](../../images/5/31x.png)
+![cypress error - cy.type can only be called on a single element](../../images/5/31x.png)
 
-Due to this it would again be better to give the input an <i>id</i> and search for the element by its id. 
+Due to this problem, it would again be better to give the input an <i>id</i> and search for the element by its id.
 
 The structure of the tests looks like so:
 
@@ -377,7 +371,7 @@ describe('Note app', function() {
   // ...
 
   it('user can log in', function() {
-    cy.contains('login').click()
+    cy.contains('log in').click()
     cy.get('#username').type('mluukkai')
     cy.get('#password').type('salainen')
     cy.get('#login-button').click()
@@ -387,7 +381,7 @@ describe('Note app', function() {
 
   describe('when logged in', function() {
     beforeEach(function() {
-      cy.contains('login').click()
+      cy.contains('log in').click()
       cy.get('input:first').type('mluukkai')
       cy.get('input:last').type('salainen')
       cy.get('#login-button').click()
@@ -400,19 +394,19 @@ describe('Note app', function() {
 })
 ```
 
-Cypress runs the tests in the order they are in the code. So first it runs <i>user can log in</i>, where the user logs in. Then cypress will run <i>a new note can be created</i> for which a <i>beforeEach</i> block logs in as well. 
-Why do this? Isn't the user logged in after the first test? 
-No, because <i>each</i> test starts from zero as far as the browser is concerned. 
+Cypress runs the tests in the order they are in the code. So first it runs <i>user can log in</i>, where the user logs in. Then cypress will run <i>a new note can be created</i> for which a <i>beforeEach</i> block logs in as well.
+Why do this? Isn't the user logged in after the first test?
+No, because <i>each</i> test starts from zero as far as the browser is concerned.
 All changes to the browser's state are reversed after each test.
 
 ### Controlling the state of the database
 
-If the tests need to be able to modify the server's database, the situation immediately becomes more complicated. Ideally, the server's database should be the same each time we run the tests, so our tests can be reliably and easily repeatable. 
+If the tests need to be able to modify the server's database, the situation immediately becomes more complicated. Ideally, the server's database should be the same each time we run the tests, so our tests can be reliably and easily repeatable.
 
-As with unit and integration tests, with E2E tests it is the best to empty the database and possibly format it before the tests are run. The challenge with E2E tests is that they do not have access to the database. 
+As with unit and integration tests, with E2E tests it is best to empty the database and possibly format it before the tests are run. The challenge with E2E tests is that they do not have access to the database.
 
-The solution is to create API endpoints to the backend for the test. 
-We can empty the database using these endpoints. 
+The solution is to create API endpoints for the backend tests.
+We can empty the database using these endpoints.
 Let's create a new <i>router</i> for the tests
 
 ```js
@@ -430,7 +424,7 @@ testingRouter.post('/reset', async (request, response) => {
 module.exports = testingRouter
 ```
 
-and add it to the backend only <i>if the application is run on test-mode</i>:
+and add it to the backend only <i>if the application is run in test-mode</i>:
 
 ```js
 // ...
@@ -453,15 +447,16 @@ module.exports = app
 ```
 
 After the changes, an HTTP POST request to the <i>/api/testing/reset</i> endpoint empties the database. Make sure your backend is running in test mode by starting it with this command (previously configured in the package.json file):
+
 ```js
   npm run start:test
 ```
 
-The modified backend code can be found from [GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1) branch <i>part5-1</i>.
+The modified backend code can be found on the [GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1) branch <i>part5-1</i>.
 
-Next we will change the <i>beforeEach</i> block so that it empties the server's database before tests are run. 
+Next, we will change the <i>beforeEach</i> block so that it empties the server's database before tests are run.
 
-Currently it is not possible to add new users through the frontend's UI, so we add a new user to the backend from the beforeEach block. 
+Currently, it is not possible to add new users through the frontend's UI, so we add a new user to the backend from the beforeEach block.
 
 ```js
 describe('Note app', function() {
@@ -492,12 +487,13 @@ describe('Note app', function() {
 })
 ```
 
-During the formatting the test does HTTP requests to the backend with [cy.request](https://docs.cypress.io/api/commands/request.html).
+During the formatting, the test does HTTP requests to the backend with [cy.request](https://docs.cypress.io/api/commands/request.html).
 
-Unlike earlier, now the testing starts with the backend in the same state every time. The backend will contain one user and no notes. 
+Unlike earlier, now the testing starts with the backend in the same state every time. The backend will contain one user and no notes.
 
-Let's add one more test for checking that we can change the importance of notes. 
-First we change the frontend so that a new note is unimportant by default, or the <i>important</i> field is <i>false</i>:
+Let's add one more test for checking that we can change the importance of notes.
+
+A while ago we changed the frontend so that a new note is important by default, or the <i>important</i> field is <i>true</i>:
 
 ```js
 const NoteForm = ({ createNote }) => {
@@ -507,7 +503,7 @@ const NoteForm = ({ createNote }) => {
     event.preventDefault()
     createNote({
       content: newNote,
-      important: false // highlight-line
+      important: true // highlight-line
     })
 
     setNewNote('')
@@ -516,7 +512,7 @@ const NoteForm = ({ createNote }) => {
 } 
 ```
 
-There are multiple ways to test this. In the following example we first search for a note and click its <i>make important</i> button. Then we check that the note now contains a <i>make not important</i> button. 
+There are multiple ways to test this. In the following example, we first search for a note and click its <i>make not important</i> button. Then we check that the note now contains a <i>make important</i> button.
 
 ```js
 describe('Note app', function() {
@@ -532,41 +528,41 @@ describe('Note app', function() {
         cy.contains('save').click()
       })
 
-      it('it can be made important', function () {
+      it('it can be made not important', function () {
         cy.contains('another note cypress')
-          .contains('make important')
+          .contains('make not important')
           .click()
 
         cy.contains('another note cypress')
-          .contains('make not important')
+          .contains('make important')
       })
     })
   })
 })
 ```
 
-The first command searches for a component containing the text <i>another note cypress</i>, and then for a <i>make important</i> button within it. It then clicks the button.
+The first command searches for a component containing the text <i>another note cypress</i>, and then for a <i>make not important</i> button within it. It then clicks the button.
 
-The second command checks that the text on the button has changed to <i>make not important</i>.
+The second command checks that the text on the button has changed to <i>make important</i>.
 
-The tests and the current frontend code can be found from [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-9) branch <i>part5-9</i>.
+The tests and the current frontend code can be found on the [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-9) branch <i>part5-9</i>.
 
 ### Failed login test
 
-Let's make a test to ensure that a login attempt fails if the password is wrong. 
+Let's make a test to ensure that a login attempt fails if the password is wrong.
 
-Cypress will run all tests each time by default, and as the number of tests increases it starts to become quite time-consuming. 
+Cypress will run all tests each time by default, and as the number of tests increases, it starts to become quite time-consuming.
 When developing a new test or when debugging a broken test, we can define the test with <i>it.only</i> instead of <i>it</i>, so that Cypress will only run the required test.
 When the test is working, we can remove <i>.only</i>.
 
-First  version of our tests is as follows:
+First version of our tests is as follows:
 
 ```js
 describe('Note app', function() {
   // ...
 
   it.only('login fails with wrong password', function() {
-    cy.contains('login').click()
+    cy.contains('log in').click()
     cy.get('#username').type('mluukkai')
     cy.get('#password').type('wrong')
     cy.get('#login-button').click()
@@ -578,7 +574,7 @@ describe('Note app', function() {
 )}
 ```
 
-The test uses [cy.contains](https://docs.cypress.io/api/commands/contains.html#Syntax) to ensure that the application prints an error message. 
+The test uses [cy.contains](https://docs.cypress.io/api/commands/contains.html#Syntax) to ensure that the application prints an error message.
 
 The application renders the error message to a component with the CSS class <i>error</i>:
 
@@ -598,7 +594,6 @@ const Notification = ({ message }) => {
 
 We could make the test ensure that the error message is rendered to the correct component, that is, the component with the CSS class <i>error</i>:
 
-
 ```js
 it('login fails with wrong password', function() {
   // ...
@@ -607,7 +602,7 @@ it('login fails with wrong password', function() {
 })
 ```
 
-First we use [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax) to search for a component with the CSS class <i>error</i>. Then we check that the error message can be found from this component. 
+First, we use [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax) to search for a component with the CSS class <i>error</i>. Then we check that the error message can be found from this component.
 Note that the [CSS class selector](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors) starts with a full stop, so the selector for the class <i>error</i> is <i>.error</i>.
 
 We could do the same using the [should](https://docs.cypress.io/api/commands/should.html) syntax:
@@ -620,9 +615,9 @@ it('login fails with wrong password', function() {
 })
 ```
 
-Using should is a bit trickier than using <i>contains</i>, but it allows for more diverse tests than <i>contains</i> which works based on text content only. 
+Using should is a bit trickier than using <i>contains</i>, but it allows for more diverse tests than <i>contains</i> which works based on text content only.
 
-A list of the most common assertions which can be used with should can be found [here](https://docs.cypress.io/guides/references/assertions.html#Common-Assertions).
+A list of the most common assertions which can be used with _should_ can be found [here](https://docs.cypress.io/guides/references/assertions.html#Common-Assertions).
 
 We can, for example, make sure that the error message is red and it has a border:
 
@@ -655,7 +650,7 @@ Let's finish the test so that it also checks that the application does not rende
 
 ```js
 it('login fails with wrong password', function() {
-  cy.contains('login').click()
+  cy.contains('log in').click()
   cy.get('#username').type('mluukkai')
   cy.get('#password').type('wrong')
   cy.get('#login-button').click()
@@ -669,8 +664,13 @@ it('login fails with wrong password', function() {
 })
 ```
 
-<i>Should</i> should always be chained with <i>get</i> (or another chainable command).
-We used <i>cy.get('html')</i> to access the whole visible content of the application. 
+The command <i>should</i> is most often used by chaining it after the command <i>get</i> (or another similar command that can be chained). The <i>cy.get('html')</i> used in the test practically means the visible content of the entire application.
+
+We would also check the same by chaining the command <i>contains</i> with the command <i>should</i> with a slightly different parameter:
+
+```js
+cy.contains('Matti Luukkainen logged in').should('not.exist')
+```
 
 **NOTE:** Some CSS properties [behave differently on Firefox](https://github.com/cypress-io/cypress/issues/9349). If you run the tests with Firefox:
   
@@ -682,12 +682,12 @@ We used <i>cy.get('html')</i> to access the whole visible content of the applica
 
 ### Bypassing the UI
 
-Currently we have the following tests:
+Currently, we have the following tests:
 
-```js 
+```js
 describe('Note app', function() {
   it('user can login', function() {
-    cy.contains('login').click()
+    cy.contains('log in').click()
     cy.get('#username').type('mluukkai')
     cy.get('#password').type('salainen')
     cy.get('#login-button').click()
@@ -701,7 +701,7 @@ describe('Note app', function() {
 
   describe('when logged in', function() {
     beforeEach(function() {
-      cy.contains('login').click()
+      cy.contains('log in').click()
       cy.get('input:first').type('mluukkai')
       cy.get('input:last').type('salainen')
       cy.get('#login-button').click()
@@ -715,18 +715,18 @@ describe('Note app', function() {
 })
 ```
 
-First we test logging in. Then, in their own describe block, we have a bunch of tests which expect the user to be logged in. User is logged in in the <i>beforeEach</i> block. 
+First, we test logging in. Then, in their own describe block, we have a bunch of tests, which expect the user to be logged in. User is logged in in the <i>beforeEach</i> block.
 
-As we said above, each test starts from zero! Tests do not start from the state where the previous tests ended. 
+As we said above, each test starts from zero! Tests do not start from the state where the previous tests ended.
 
-The Cypress documentation gives us the following advice: [Fully test the login flow – but only once!](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Logging-in). 
-So instead of logging in a user using the form in the <i>beforeEach</i> block, Cypress recommends that we [bypass the UI](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Bypassing-your-UI) and do an HTTP request to the backend to log in. The reason for this is that logging in with an HTTP request is much faster than filling a form. 
+The Cypress documentation gives us the following advice: [Fully test the login flow – but only once!](https://docs.cypress.io/guides/end-to-end-testing/testing-your-app#Fully-test-the-login-flow-but-only-once).
+So instead of logging in a user using the form in the <i>beforeEach</i> block, Cypress recommends that we [bypass the UI](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Bypassing-your-UI) and do an HTTP request to the backend to log in. The reason for this is that logging in with an HTTP request is much faster than filling out a form.
 
-Our situation is a bit more complicated than in the example in the Cypress documentation, because when a user logs in, our application saves their details to the localStorage.
-However Cypress can handle that as well. 
+Our situation is a bit more complicated than in the example in the Cypress documentation because when a user logs in, our application saves their details to the localStorage.
+However, Cypress can handle that as well.
 The code is the following
 
-```js 
+```js
 describe('when logged in', function() {
   beforeEach(function() {
     // highlight-start
@@ -748,8 +748,8 @@ describe('when logged in', function() {
 ```
 
 We can access the response to a [cy.request](https://docs.cypress.io/api/commands/request.html) with the _then_ method.  Under the hood <i>cy.request</i>, like all Cypress commands, are [promises](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Commands-Are-Promises).
-The callback function saves the details of a logged-in user to localStorage, and reloads the page. 
-Now there is no difference to a user logging in with the login form. 
+The callback function saves the details of a logged-in user to localStorage, and reloads the page.
+Now there is no difference to a user logging in with the login form.
 
 If and when we write new tests to our application, we have to use the login code in multiple places.
 We should make it a [custom command](https://docs.cypress.io/api/cypress-api/custom-commands.html).
@@ -757,7 +757,7 @@ We should make it a [custom command](https://docs.cypress.io/api/cypress-api/cus
 Custom commands are declared in <i>cypress/support/commands.js</i>.
 The code for logging in is as follows:
 
-```js 
+```js
 Cypress.Commands.add('login', ({ username, password }) => {
   cy.request('POST', 'http://localhost:3001/api/login', {
     username, password
@@ -770,7 +770,7 @@ Cypress.Commands.add('login', ({ username, password }) => {
 
 Using our custom command is easy, and our test becomes cleaner:
 
-```js 
+```js
 describe('when logged in', function() {
   beforeEach(function() {
     // highlight-start
@@ -786,7 +786,7 @@ describe('when logged in', function() {
 })
 ```
 
-The same applies to creating a new note now that we think about it. We have a test which makes a new note using the form. We also make a new note in the <i>beforeEach</i> block of the test testing changing the importance of a note: 
+The same applies to creating a new note now that we think about it. We have a test, which makes a new note using the form. We also make a new note in the <i>beforeEach</i> block of the test testing changing the importance of a note:
 
 ```js
 describe('Note app', function() {
@@ -816,7 +816,7 @@ describe('Note app', function() {
 })
 ```
 
-Let's make a new custom command for making a new note. The command will make a new note with an HTTP POST request: 
+Let's make a new custom command for making a new note. The command will make a new note with an HTTP POST request:
 
 ```js
 Cypress.Commands.add('createNote', ({ content, important }) => {
@@ -825,7 +825,7 @@ Cypress.Commands.add('createNote', ({ content, important }) => {
     method: 'POST',
     body: { content, important },
     headers: {
-      'Authorization': `bearer ${JSON.parse(localStorage.getItem('loggedNoteappUser')).token}`
+      'Authorization': `Bearer ${JSON.parse(localStorage.getItem('loggedNoteappUser')).token}`
     }
   })
 
@@ -833,7 +833,7 @@ Cypress.Commands.add('createNote', ({ content, important }) => {
 })
 ```
 
-The command expects the user to be logged in and the user's details to be saved to localStorage. 
+The command expects the user to be logged in and the user's details to be saved to localStorage.
 
 Now the formatting block becomes:
 
@@ -851,7 +851,7 @@ describe('Note app', function() {
         // highlight-start
         cy.createNote({
           content: 'another note cypress',
-          important: false
+          important: true
         })
         // highlight-end
       })
@@ -864,12 +864,78 @@ describe('Note app', function() {
 })
 ```
 
-The tests and the frontend code can be found from [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-10) branch <i>part5-10</i>.
+There is one more annoying feature in our tests. The application address <i>http:localhost:3000</i> is hardcoded in many places.
+
+Let's define the <i>baseUrl</i> for the application in the Cypress pre-generated [configuration file](https://docs.cypress.io/guides/references/configuration) <i>cypress.config.js</i>:
+
+```js
+const { defineConfig } = require("cypress")
+
+module.exports = defineConfig({
+  e2e: {
+    setupNodeEvents(on, config) {
+    },
+    baseUrl: 'http://localhost:3000' // highlight-line
+  },
+})
+```
+
+All the commands in the tests use the address of the application
+
+```js
+cy.visit('http://localhost:3000' )
+```
+
+can be transformed into
+
+```js
+cy.visit('')
+```
+
+The backend's hardcoded address <i>http://localhost:3001</i> is still in the tests. Cypress [documentation](https://docs.cypress.io/guides/guides/environment-variables) recommends defining other addresses used by the tests as environment variables.
+
+Let's expand the configuration file <i>cypress.config.js</i> as follows:
+
+```js
+const { defineConfig } = require("cypress")
+
+module.exports = defineConfig({
+  e2e: {
+    setupNodeEvents(on, config) {
+    },
+    baseUrl: 'http://localhost:3000',
+  },
+  env: {
+    BACKEND: 'http://localhost:3001/api' // highlight-line
+  }
+})
+```
+
+Let's replace all the backend addresses from the tests in the following way
+
+```js
+describe('Note ', function() {
+  beforeEach(function() {
+
+    cy.request('POST', `${Cypress.env('BACKEND')}/testing/reset`) // highlight-line
+    const user = {
+      name: 'Matti Luukkainen',
+      username: 'mluukkai',
+      password: 'secret'
+    }
+    cy.request('POST', `${Cypress.env('BACKEND')}/users`, user) // highlight-line
+    cy.visit('')
+  })
+  // ...
+})
+```
+
+The tests and the frontend code can be found on the [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-10) branch <i>part5-10</i>.
 
 ### Changing the importance of a note
 
-Lastly let's take a look at the test we did for changing the importance of a note. 
-First we'll change the formatting block so that it creates three notes instead of one:
+Lastly, let's take a look at the test we did for changing the importance of a note.
+First, we'll change the formatting block so that it creates three notes instead of one:
 
 ```js
 describe('when logged in', function() {
@@ -898,25 +964,25 @@ How does the [cy.contains](https://docs.cypress.io/api/commands/contains.html) c
 
 When we click the _cy.contains('second note')_ command in Cypress [Test Runner](https://docs.cypress.io/guides/core-concepts/test-runner.html), we see that the command searches for the element containing the text <i>second note</i>:
 
-![](../../images/5/34x.png)
+![cypress test runner clicking testbody and second note](../../images/5/34new.png)
 
-By clicking the next line _.contains('make important')_ we see that the test uses 
-the 'make important' button corresponding to <i>second note</i>:
+By clicking the next line _.contains('make important')_ we see that the test uses
+the 'make important' button corresponding to the <i>second note</i>:
 
-![](../../images/5/35x.png)
+![cypress test runner clicking make important](../../images/5/35new.png)
 
-When chained, the second <i>contains</i> command <i>continues</i> the search from within the component found by the first command. 
+When chained, the second <i>contains</i> command <i>continues</i> the search from within the component found by the first command.
 
-If we had not chained the commands, and instead wrote:
+If we had not chained the commands, and instead write:
 
 ```js
 cy.contains('second note')
 cy.contains('make important').click()
 ```
 
-the result would have been totally different. The second line of the test would click the button of a wrong note:
+the result would have been entirely different. The second line of the test would click the button of a wrong note:
 
-![](../../images/5/36x.png)
+![cypress showing error and incorrectly trying to click first button](../../images/5/36new.png)
 
 When coding tests, you should check in the test runner that the tests use the right components!
 
@@ -936,9 +1002,9 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-Our tests break! As the test runner reveals,  _cy.contains('second note')_ now returns the component containing the text, and the button is not in it. 
+Our tests break! As the test runner reveals,  _cy.contains('second note')_ now returns the component containing the text, and the button is not in it.
 
-![](../../images/5/37x.png)
+![cypress showing test is broken trying to click make important](../../images/5/37new.png)
 
 One way to fix this is the following:
 
@@ -950,13 +1016,12 @@ it('one of those can be made important', function () {
 })
 ```
 
-In the first line, we use the [parent](https://docs.cypress.io/api/commands/parent.html) command to access the parent element of the element containing <i>second note</i> and find the button from within it. 
-Then we click the button, and check that the text on it changes. 
+In the first line, we use the [parent](https://docs.cypress.io/api/commands/parent.html) command to access the parent element of the element containing <i>second note</i> and find the button from within it.
+Then we click the button and check that the text on it changes.
 
-Note that we use the command [find](https://docs.cypress.io/api/commands/find.html#Syntax) to search for the button. We cannot use [cy.get](https://docs.cypress.io/api/commands/get.html) here, because it always searches from the <i>whole</i> page and would return all 5 buttons on the page. 
+Note that we use the command [find](https://docs.cypress.io/api/commands/find.html#Syntax) to search for the button. We cannot use [cy.get](https://docs.cypress.io/api/commands/get.html) here, because it always searches from the <i>whole</i> page and would return all 5 buttons on the page.
 
-
-Unfortunately, we have some copy-paste in the tests now, because the code for searching for the right button is always the same. 
+Unfortunately, we have some copy-paste in the tests now, because the code for searching for the right button is always the same.
 
 In these kinds of situations, it is possible to use the [as](https://docs.cypress.io/api/commands/as.html) command:
 
@@ -968,7 +1033,7 @@ it('one of those can be made important', function () {
 })
 ```
 
-Now the first line finds the right button, and uses <i>as</i> to save it as <i>theButton</i>. The following lines can use the named element with <i>cy.get('@theButton')</i>.
+Now the first line finds the right button and uses <i>as</i> to save it as <i>theButton</i>. The following lines can use the named element with <i>cy.get('@theButton')</i>.
 
 ### Running and debugging the tests
 
@@ -977,19 +1042,19 @@ Finally, some notes on how Cypress works and debugging your tests.
 The form of the Cypress tests gives the impression that the tests are normal JavaScript code, and we could for example try this:
 
 ```js
-const button = cy.contains('login')
+const button = cy.contains('log in')
 button.click()
-debugger() 
+debugger
 cy.contains('logout').click()
 ```
 
-This won't work however. When Cypress runs a test, it adds each _cy_ command to an execution queue. 
-When the code of the test method has been executed, Cypress will execute each command in the queue one by one. 
+This won't work, however. When Cypress runs a test, it adds each _cy_ command to an execution queue.
+When the code of the test method has been executed, Cypress will execute each command in the queue one by one.
 
-Cypress commands always return _undefined_, so _button.click()_ in the above code would cause an error. An attempt to start the debugger would not stop the code between executing the commands, but before any commands have been executed. 
+Cypress commands always return _undefined_, so _button.click()_ in the above code would cause an error. An attempt to start the debugger would not stop the code between executing the commands, but before any commands have been executed.
 
-Cypress commands are <i>like promises</i>, so if we want to access their return values, we have to do it using the [then](https://docs.cypress.io/api/commands/then.html) command. 
-For example, the following test would print the number of buttons in the application, and click the first button: 
+Cypress commands are <i>like promises</i>, so if we want to access their return values, we have to do it using the [then](https://docs.cypress.io/api/commands/then.html) command.
+For example, the following test would print the number of buttons in the application, and click the first button:
 
 ```js
 it('then example', function() {
@@ -1000,12 +1065,12 @@ it('then example', function() {
 })
 ```
 
-Stopping the test execution with the debugger is [possible](https://docs.cypress.io/api/commands/debug.html). The debugger starts only if Cypress test runner's developer console is open. 
+Stopping the test execution with the debugger is [possible](https://docs.cypress.io/api/commands/debug.html). The debugger starts only if Cypress test runner's developer console is open.
 
-The developer console is all sorts of useful when debugging your tests. 
+The developer console is all sorts of useful when debugging your tests.
 You can see the HTTP requests done by the tests on the Network tab, and the console tab will show you information about your tests:
 
-![](../../images/5/38ea.png)
+![developer console while running cypress](../../images/5/38new.png)
 
 So far we have run our Cypress tests using the graphical test runner.
 It is also possible to run them [from the command line](https://docs.cypress.io/guides/guides/command-line.html). We just have to add an npm script for it:
@@ -1024,21 +1089,21 @@ It is also possible to run them [from the command line](https://docs.cypress.io/
 
 Now we can run our tests from the command line with the command <i>npm run test:e2e</i>
 
-![](../../images/5/39x.png)
+![terminal output of running npm e2e tests showing passed](../../images/5/39new.png)
 
-Note that videos of the test execution will be saved to <i>cypress/videos/</i>, so you should probably git ignore this directory. 
+Note that videos of the test execution will be saved to <i>cypress/videos/</i>, so you should probably git ignore this directory. It is also possible to [turn off](https://docs.cypress.io/guides/guides/screenshots-and-videos#Videos) the making of videos.
 
-The frontend and the test code can be found from [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-11) branch <i>part5-11</i>.
+The frontend and the test code can be found on the [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-11) branch <i>part5-11</i>.
 
 </div>
 
 <div class="tasks">
 
-### Exercises 5.17.-5.22.
+### Exercises 5.17.-5.23.
 
-In the last exercises of this part we will do some E2E tests for our blog application. 
-The material of this part should be enough to complete the exercises. 
-You should absolutely also check out the Cypress [documentation](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell). It is probably the best documentation I have ever seen for an open source project. 
+In the last exercises of this part, we will do some E2E tests for our blog application.
+The material of this part should be enough to complete the exercises.
+You **must check out the Cypress [documentation](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell)**. It is probably the best documentation I have ever seen for an open-source project.
 
 I especially recommend reading [Introduction to Cypress](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Cypress-Can-Be-Simple-Sometimes), which states
 
@@ -1046,11 +1111,11 @@ I especially recommend reading [Introduction to Cypress](https://docs.cypress.io
 
 #### 5.17: bloglist end to end testing, step1
 
-Configure Cypress to your project. Make a test for checking that the application displays the login form by default.
+Configure Cypress for your project. Make a test for checking that the application displays the login form by default.
 
 The structure of the test must be as follows:
 
-```js 
+```js
 describe('Blog app', function() {
   beforeEach(function() {
     cy.request('POST', 'http://localhost:3003/api/testing/reset')
@@ -1067,12 +1132,12 @@ The <i>beforeEach</i> formatting blog must empty the database using for example 
 
 #### 5.18: bloglist end to end testing, step2
 
-Make tests for logging in. Test both successful and unsuccessful login attempts. 
+Make tests for logging in. Test both successful and unsuccessful login attempts.
 Make a new user in the <i>beforeEach</i> block for the tests.
 
 The test structure extends like so:
 
-```js 
+```js
 describe('Blog app', function() {
   beforeEach(function() {
     cy.request('POST', 'http://localhost:3003/api/testing/reset')
@@ -1096,14 +1161,14 @@ describe('Blog app', function() {
 })
 ```
 
-<i>Optional bonus exercise</i>: Check that the notification shown with unsuccessful login is displayed red. 
+<i>Optional bonus exercise</i>: Check that the notification shown with unsuccessful login is displayed red.
 
 #### 5.19: bloglist end to end testing, step3
 
-Make a test which checks that a logged-in user can create a new blog. 
+Make a test that verifies a logged-in user can create a new blog.
 The structure of the test could be as follows:
 
-```js 
+```js
 describe('Blog app', function() {
   // ...
 
@@ -1120,31 +1185,33 @@ describe('Blog app', function() {
 })
 ```
 
-The test has to ensure that a new blog is added to the list of all blogs. 
+The test has to ensure that a new blog is added to the list of all blogs.
 
 #### 5.20: bloglist end to end testing, step4
 
-Make a test which checks that users can like a blog. 
+Make a test that confirms users can like a blog.
 
 #### 5.21: bloglist end to end testing, step5
 
-Make a test for ensuring that the user who created a blog can delete it. 
-
-<i>Optional bonus exercise:</i> also check that other users cannot delete the blog. 
+Make a test for ensuring that the user who created a blog can delete it.
 
 #### 5.22: bloglist end to end testing, step6
 
-Make a test which checks that the blogs are ordered according to likes with the blog with the most likes being first. 
+Make a test for ensuring that other users but the creator do not see the delete button.
 
-This exercise is quite a bit trickier than the previous ones. One solution is to add a certain class for the element which wraps the blog's content and use the [eq](https://docs.cypress.io/api/commands/eq#Syntax) method to get the blog element in a specific index:
+#### 5.23: bloglist end to end testing, step7
+
+Make a test that checks that the blogs are ordered according to likes with the blog with the most likes being first.
+
+<i>This exercise is quite a bit trickier than the previous ones.</i> One solution is to add a certain class for the element which wraps the blog's content and use the [eq](https://docs.cypress.io/api/commands/eq#Syntax) method to get the blog element in a specific index:
   
 ```js
 cy.get('.blog').eq(0).should('contain', 'The title with the most likes')
 cy.get('.blog').eq(1).should('contain', 'The title with the second most likes')
 ```
 
-Note that you might end up having problems if you click a like button many times in row. It might be that cypress does the clicking so fast that it does not have time to update the app state in between the clicks. One remedy for this is to wait for the number of likes to update in between all clicks.
+Note that you might end up having problems if you click a like button many times in a row. It might be that cypress does the clicking so fast that it does not have time to update the app state in between the clicks. One remedy for this is to wait for the number of likes to update in between all clicks.
 
-This was the last exercise of this part, and it's time to push your code to github and mark the exercises you completed in the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+This was the last exercise of this part, and it's time to push your code to GitHub and mark the exercises you completed in the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>

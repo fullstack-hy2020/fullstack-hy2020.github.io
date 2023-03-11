@@ -25,7 +25,7 @@ inside that Dockerfile we will tell the image three things:
 
 - Use the node:16 as the base for our image
 - Include the index.js inside the image, so we don't need to manually copy it into the container
-- When we run a container from the image, use node to execute the index.js file.
+- When we run a container from the image, use Node to execute the index.js file.
 
 The wishes above will translate into a basic Dockerfile. The best location to place this file is usually at the root of the project. 
 
@@ -55,9 +55,23 @@ $ docker build -t fs-hello-world .
 ...
 ```
 
-So the result is "docker please build with tag fs-hello-world the Dockerfile in this directory". You can point to any Dockerfile, but in our case, a simple dot will mean the Dockerfile in <i>this</i> directory. That is why the command ends with a period. After the build is finished, you can run it with _docker run fs-hello-world_.
+So the result is "Docker please build with tag (you may think the tag to be the name of the resulting image) fs-hello-world the Dockerfile in this directory". You can point to any Dockerfile, but in our case, a simple dot will mean the Dockerfile in <i>this</i> directory. That is why the command ends with a period. After the build is finished, you can run it with _docker run fs-hello-world_:
+
+```bash
+$ docker run fs-hello-world
+Hello, World
+```
 
 As images are just files, they can be moved around, downloaded and deleted. You can list the images you have locally with _docker image ls_, delete them with _docker image rm_. See what other command you have available with _docker image --help_.
+
+One more thing: in above it was mentioned that the default command, defined by the CMD in the Dockerfile, can be overridden if needed. We could e.g. open a bash session to the container and observe it's content: 
+
+```bash
+$ docker run -it fs-hello-world bash
+root@2932e32dbc09:/usr/src/app# ls
+index.js
+root@2932e32dbc09:/usr/src/app#
+```
 
 ### More meaningful image
 
@@ -138,7 +152,7 @@ In the future, let's use the same port on both sides of _-p_. Just so we don't h
 
 There are a few steps we need to change to create a more comprehensive Dockerfile. It may even be that the above example doesn't work in all cases because we skipped an important step.
 
-When we ran npm install on our machine, in some cases **node package manager** may install operating system specific dependencies during the install step. We may accidentally move non-functional parts to the image with the COPY instruction. This can easily happen if we copy the <i>node_modules</i> directory into the image.
+When we ran npm install on our machine, in some cases the **Node package manager** may install operating system specific dependencies during the install step. We may accidentally move non-functional parts to the image with the COPY instruction. This can easily happen if we copy the <i>node_modules</i> directory into the image.
 
 This is a critical thing to keep in mind when we build our images. It's best to do most things, such as to run _npm install_ during the build process <i>inside the container</i> rather than doing those prior to building. The easy rule of thumb is to only copy files that you would push to GitHub. Build artefacts or dependencies should not be copied since those can be installed during the build process.
 
@@ -195,7 +209,7 @@ Even better, we can use _npm ci --only=production_ to not waste time installing 
 
 > As you noticed in the comparison list; npm ci will delete the node_modules folder so creating the .dockerignore did not matter. However, .dockerignore is an amazing tool when you want to optimize your build process. We will talk briefly about these optimizations later.
 
-Now the Dockerfile should work again, try it with _docker build -t express-server . && docker run -p 3000:3000 express-server_
+Now the Dockerfile should work again, try it with _docker build -t express-server . && docker run -p 3123:3000 express-server_
 
 > Note that we are here chaining two bash commands with &&. We could get (nearly) the same effect by running both commands separately. When chaining commands with && if one command fails, the next ones in the chain will not be executed.
 
@@ -226,7 +240,7 @@ There are 2 rules of thumb you should follow when creating images:
 
 Smaller images are more secure by having less attack surface area, and smaller images also move faster in deployment pipelines.
 
-Snyk has a great list of 10 best practices for node/express containerization. Read those [here](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker/).
+Snyk has a great list of 10 best practices for Node/Express containerization. Read those [here](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker/).
 
 One big carelessness we have left is running the application as root instead of using a user with lower privileges. Let's do a final fix to the Dockerfile:
 
@@ -254,7 +268,7 @@ CMD npm start
 
 #### Exercise 12.5: Containerizing a Node application
 
-The repository you cloned or copied in the first exercise contains a todo-app. See the todo-app/todo-backend and read through the README. We will not touch the todo-frontend yet.
+The repository you cloned or copied in the [first exercise](/en/part12/introduction_to_containers#exercise-12-1) contains a todo-app. See the todo-app/todo-backend and read through the README. We will not touch the todo-frontend yet.
 
 Step 1. Containerize the todo-backend by creating a <i>todo-app/todo-backend/Dockerfile</i> and building an image.
 
@@ -266,24 +280,15 @@ Tip: Run the application outside of a container to examine it before starting to
   
 <div class="content">
 
-### Using docker-compose
+### Using Docker compose
 
-In the previous section, we created express-server and knew that it runs in port 3000, and ran it with _docker build -t express-server . && docker run -p 3000:3000 express-server_. This already looks like something you would need to put into a script to remember. Fortunately, Docker offers us a better solution.
+In the previous section, we created an Express server and knew that it runs in port 3000, and ran it with _docker build -t express-server . && docker run -p 3000:3000 express-server_. This already looks like something you would need to put into a script to remember. Fortunately, Docker offers us a better solution.
 
-[Docker-compose](https://docs.docker.com/compose/) is another fantastic tool, which can help us manage containers. Let's start using docker-compose as we learn more about containers as it will help us save some time with the configuration.
+[Docker compose](https://docs.docker.com/compose/) is another fantastic tool, which can help us to manage containers. Let's start using compose as we learn more about containers as it will help us save some time with the configuration.
 
-Install the docker-compose tool from this link: [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/).
+Now we can turn the previous spell into a yaml file. The best part about yaml files is that you can save these to a Git repository!
 
-Let's check that it works:
-
-```bash
-$ docker-compose -v
-docker-compose version 1.29.2, build 5becea4c
-```
-
-And now we can turn the previous spell into a yaml file. The best part about yaml files is that you can save these to a Git repository!
-
-Create file **docker-compose.yml** and place it at the root of the project, next to the Dockerfile. The file content is
+Create the file **docker-compose.yml** and place it at the root of the project, next to the Dockerfile. The file content is
 
 ```yaml
 version: '3.8'            # Version 3.8 is quite new and should work
@@ -298,11 +303,13 @@ services:
 
 The meaning of each line is explained as a comment. If you want to see the full specification see the [documentation](https://docs.docker.com/compose/compose-file/compose-file-v3/).
 
-Now we can use _docker-compose up_ to build and run the application. If we want to rebuild the images we can use _docker-compose up --build_.
+Now we can use _docker compose up_ to build and run the application. If we want to rebuild the images we can use _docker compose up --build_.
 
-You can also run the application in the background with _docker-compose up -d_ (_-d_ for detached) and close it with _docker-compose down_.
+You can also run the application in the background with _docker compose up -d_ (_-d_ for detached) and close it with _docker compose down_.
 
-Creating files like this that <i>declare</i> what you want instead of script files that you need to run in a specific order / a specific number of times is often a great practice.
+> <i>Note that some older Docker versions (especially in Windows ) do not support the  command _docker compose_. One way to circumwent this problem is to [install](https://docs.docker.com/compose/install/) the stand alone command _docker-compose_ that works mostly similarly to _docker compose_. However, the preferable fix is to update the Docker to a more recent version.</i>
+
+Creating files like _docker-compose.yml_ that <i>declare</i> what you want instead of script files that you need to run in a specific order / a specific number of times is often a great practice.
 
 </div>
 
@@ -310,9 +317,9 @@ Creating files like this that <i>declare</i> what you want instead of script fil
 
 ### Exercise 12.6.
 
-#### Exercise 12.6: docker-compose
+#### Exercise 12.6: Docker compose
 
-Create a <i>todo-app/todo-backend/docker-compose.yml</i> file that works with the node application from the previous exercise.
+Create a <i>todo-app/todo-backend/docker-compose.yml</i> file that works with the Node application from the previous exercise.
 
 The visit counter is the only feature that is required to be working.
 
@@ -324,7 +331,7 @@ The visit counter is the only feature that is required to be working.
 
 When you are developing software, containerization can be used in various ways to improve your quality of life. One of the most useful cases is by bypassing the need to install and configure tools twice.
 
-It may not be the best option to move your entire development environment into a container, but if that's what you want it's possible. We will revisit this idea at the end of this part. But until then, <i>run the node application itself outside of containers</i>.
+It may not be the best option to move your entire development environment into a container, but if that's what you want it's certainly possible. We will revisit this idea at the end of this part. But until then, <i>run the Node application itself outside of containers</i>.
 
 The application we met in the previous exercises uses MongoDB. Let's explore [Docker Hub](https://hub.docker.com/) to find a MongoDB image. Docker Hub is the default place where Docker pulls the images from, you can use other registries as well, but since we are already knee-deep in Docker it's a good choice. With a quick search, we can find [https://hub.docker.com/_/mongo](https://hub.docker.com/_/mongo)
 
@@ -350,11 +357,17 @@ The meaning of the two first environment variables defined above is explained on
 
 The last environment variable *MONGO\_INITDB\_DATABASE* will tell MongoDB to create a database with that name. 
 
-You can use _-f_ flag to specify a <i>file</i> to run the Docker Compose command with e.g. _docker-compose -f docker-compose.dev.yml up_. Now that we may have multiple it's useful.
+You can use _-f_ flag to specify a <i>file</i> to run the Docker Compose command with e.g.
 
-Now start the MongoDB with _docker-compose -f docker-compose.dev.yml up -d_. With _-d_ it will run it in the background. You can view the output logs with _docker-compose -f docker-compose.dev.yml logs -f_. There the _-f_ will ensure we <i>follow</i> the logs.
+```bash
+docker compose -f docker-compose.dev.yml up
+```
 
-As said previously, currently we <strong>do not</strong> want to run the Node application inside a container. Developing while the application itself is inside a container is a challenge. We will explore that option in the later in this part.
+Now that we may have multiple it's useful.
+
+Now start the MongoDB with _docker compose -f docker-compose.dev.yml up -d_. With _-d_ it will run it in the background. You can view the output logs with _docker compose -f docker-compose.dev.yml logs -f_. There the _-f_ will ensure we <i>follow</i> the logs.
+
+As said previously, currently we <strong>do not</strong> want to run the Node application inside a container. Developing while the application itself is inside a container is a challenge. We will explore that option later in this part.
 
 Run the good old _npm install_ first on your machine to set up the Node application. Then start the application with the relevant environment variable. You can modify the code to set them as the defaults or use the .env file. There is no hurt in putting these keys to GitHub since they are only used in your local development environment. I'll just throw them in with the _npm run dev_ to help you copy-paste.
 
@@ -370,9 +383,11 @@ This won't be enough; we need to create a user to be authorized inside of the co
 [nodemon] watching path(s): *.*
 [nodemon] watching extensions: js,mjs,json
 [nodemon] starting `node ./bin/www`
-(node:37616) UnhandledPromiseRejectionWarning: MongoError: command find requires authentication
-    at MessageStream.messageHandler (/Users/mluukkai/opetus/docker-fs/container-app/express-app/node_modules/mongodb/lib/cmap/connection.js:272:20)
-    at MessageStream.emit (events.js:314:20)
+/Users/mluukkai/dev/fs-ci-lokakuu/repo/todo-app/todo-backend/node_modules/mongodb/lib/cmap/connection.js:272
+          callback(new MongoError(document));
+                   ^
+MongoError: command find requires authentication
+    at MessageStream.messageHandler (/Users/mluukkai/dev/fs-ci-lokakuu/repo/todo-app/todo-backend/node_modules/mongodb/lib/cmap/connection.js:272:20)
 ```
 
 ### Bind mount and initializing the database
@@ -401,9 +416,9 @@ db.todos.insert({ text: 'Learn about containers', done: false });
 
 This file will initialize the database with a user and a few todos. Next, we need to get it inside the container at startup.
 
-We could create a new image FROM mongo and COPY the file inside, or we can use a <i>bind mount</i> to mount the file <i>mongo-init.js</i> to the container. Let's do the latter.
+We could create a new image FROM mongo and COPY the file inside, or we can use a [bind mount](https://docs.docker.com/storage/bind-mounts/) to mount the file <i>mongo-init.js</i> to the container. Let's do the latter.
 
-Bind mount is the act of binding a file on the host machine to a file in the container. We could add a _-v_ flag with _container run_. The syntax is _-v FILE-IN-HOST:FILE-IN-CONTAINER_. Since we already learned about Docker Compose let's skip that. The bind mount is declared under key <i>volumes</i> in docker-compose. Otherwise the format is the same, first host and then container:
+Bind mount is the act of binding a file (or directory) on the host machine to a file (or directory) in the container. A bind mount is done by adding a _-v_ flag with _container run_. The syntax is _-v FILE-IN-HOST:FILE-IN-CONTAINER_. Since we already learned about Docker Compose let's skip that. The bind mount is declared under key <i>volumes</i> in docker-compose-yml. Otherwise the format is the same, first host and then container:
 
 ```yml
   mongo:
@@ -422,7 +437,7 @@ Bind mount is the act of binding a file on the host machine to a file in the con
 
 The result of the bind mount is that the file <i>mongo-init.js</i> in the mongo folder of the host machine is the same as the <i>mongo-init.js</i> file in the container's /docker-entrypoint-initdb.d directory. Changes to either file will be available in the other. We don't need to make any changes during runtime. But this will be the key to software development in containers.
 
-Run _docker-compose -f docker-compose.dev.yml down --volumes_ to ensure that nothing is left and start from a clean slate with _docker-compose -f docker-compose.dev.yml up_ to initialize the database.
+Run _docker compose -f docker-compose.dev.yml down --volumes_ to ensure that nothing is left and start from a clean slate with _docker compose -f docker-compose.dev.yml up_ to initialize the database.
 
 If you see an error like this:
 
@@ -433,7 +448,7 @@ mongo_database | exiting with code -3
 
 you may have a read permission problem. They are not uncommon when dealing with volumes. In the above case, you can use _chmod a+r mongo-init.js_, which will give everyone read access to that file. Be careful when using _chmod_ since granting more privileges can be a security issue. Use the _chmod_ only on the mongo-init.js on your computer.
 
-Now starting the express application with the correct environment variable should work:
+Now starting the Express application with the correct environment variable should work:
 
 ```bash
 $ MONGO_URL=mongodb://the_username:the_password@localhost:3456/the_database npm run dev
@@ -443,15 +458,15 @@ Let's check that the http://localhost:3000/todos returns all todos. It should re
 
 ### Persisting data with volumes
 
-By default, containers are not going to preserve our data. When you close the mongo container you may or may not be able to get the data back.
+By default, containers are not going to preserve our data. When you close the Mongo container you may or may not be able to get the data back.
 
 This is a rare case in which it does preserve the data as the developers who made the Docker image for Mongo have defined a volume to be used: [https://github.com/docker-library/mongo/blob/cb8a419053858e510fc68ed2d69415b3e50011cb/4.4/Dockerfile#L113](https://github.com/docker-library/mongo/blob/cb8a419053858e510fc68ed2d69415b3e50011cb/4.4/Dockerfile#L113) This line will instruct Docker to preserve the data in those directories.
 
 There are two distinct methods to store the data: 
-- Declaring a location in your filesystem (called bind mount)
-- Letting Docker decide where to store the data (volume)
+- Declaring a location in your filesystem (called [bind mount](https://docs.docker.com/storage/bind-mounts/))
+- Letting Docker decide where to store the data ([volume](https://docs.docker.com/storage/volumes/))
 
-I prefer the first choice in most cases whenever you <i>really</i> need to avoid deleting the data. Let's see both in action with docker-compose:
+I prefer the first choice in most cases whenever you <i>really</i> need to avoid deleting the data. Let's see both in action with docker compose:
 
 ```yml
 services:
@@ -490,7 +505,31 @@ volumes:
   mongo_data:
 ```
 
-Now the volume is created but managed by Docker. After starting the application (_docker-compose -f docker-compose.dev.yml up_) you can list the volumes with _docker volume ls_, inspect one of them with _docker volume inspect_ and even delete them with _docker volume rm_. It's still stored in your local filesystem but figuring out <i>where</i> may not be as trivial as with the previous option.
+Now the volume is created but managed by Docker. After starting the application (_docker compose -f docker-compose.dev.yml up_) you can list the volumes with _docker volume ls_, inspect one of them with _docker volume inspect_ and even delete them with _docker volume rm_: 
+
+```bash
+$ docker volume ls
+DRIVER    VOLUME NAME
+local     todo-backend_mongo_data
+$ docker volume inspect todo-backend_mongo_data
+[
+    {
+        "CreatedAt": "2022-10-04T12:52:11Z",
+        "Driver": "local",
+        "Labels": {
+            "com.docker.compose.project": "todo-backend",
+            "com.docker.compose.version": "1.29.2",
+            "com.docker.compose.volume": "mongo_data"
+        },
+        "Mountpoint": "/var/lib/docker/volumes/todo-backend_mongo_data/_data",
+        "Name": "todo-backend_mongo_data",
+        "Options": null,
+        "Scope": "local"
+    }
+]
+```
+
+The named volume is still stored in your local filesystem but figuring out <i>where</i> may not be as trivial as with the previous option.
 
 </div>
 
@@ -500,7 +539,7 @@ Now the volume is created but managed by Docker. After starting the application 
 
 #### Exercise 12.7: Little bit of MongoDB coding
 
-Note that this exercise assumes that you have done all the configurations made in material after the exercise 12.5. You should still run the todo-app backend <i>outside a container</i> just the MongoDB is containerized for now.
+Note that this exercise assumes that you have done all the configurations made in the material after exercise 12.5. You should still run the todo-app backend <i>outside a container</i>; just the MongoDB is containerized for now.
 
 The todo application has no proper implementation of routes for getting one todo (GET <i>/todos/:id</i>) and updating one todo (PUT <i>/todos/:id</i>). Fix the code.
 
@@ -514,7 +553,7 @@ The todo application has no proper implementation of routes for getting one todo
 
 > \- Matti Luukkainen
 
-When developing with containers, we need to learn new tools for debugging since we can not just "console.log" everything. When code has a bug, you may often be in a state where at least something works so you can work forward from that. Configuration most often is in either of the two states: 1. working or 2. broken. We will go over a few tools that can help when your application is in the latter state.
+When developing with containers, we need to learn new tools for debugging, since we can not just "console.log" everything. When code has a bug, you may often be in a state where at least something works, so you can work forward from that. Configuration most often is in either of two states: 1. working or 2. broken. We will go over a few tools that can help when your application is in the latter state.
 
 When developing software, you can safely progress step by step, all the time verifying that what you have coded behaves as expected. Often, this is not the case when doing configurations. The configuration you may be writing can be broken until the moment it is finished. So when you write a long docker-compose.yml or Dockerfile and it does not work, you need to take a moment and think about the various ways you could confirm something is working.
 
@@ -556,7 +595,11 @@ $ docker container rm keen_darwin
 $ docker container run -d -p 8080:80 nginx
 ```
 
-Let's look at the app by going to http://localhost:8080. It seems the app is showing the wrong message! Let's hop right into the container and fix the it. Keep your browser open, we won't need to shut down the container for this fix. We will execute bash inside the container, the flags _-it_ will ensure that we can interact with the container:
+> <i>**Editor's note_** when doing development, it is **essential** to constantly follow the container logs. I'm usually not running containers in a detached mode (that is with -d) since it requires a bit of extra effor to open the logs. 
+> 
+> When I'm 100% sure that everything works... no, when I'm 200% sure, then I might relax a bit and start the containers in detached mode. Until everithing again falls apart and it is time to open the logs again.</i>
+
+Let's look at the app by going to http://localhost:8080. It seems that the app is showing the wrong message! Let's hop right into the container and fix this. Keep your browser open, we won't need to shut down the container for this fix. We will execute bash inside the container, the flags _-it_ will ensure that we can interact with the container:
 
 ```bash
 $ docker container ls
@@ -594,22 +637,22 @@ Refresh the page, and our message is displayed! Now we know how exec can be used
 
 > Use _script_ to record what you do, save the file as script-answers/exercise12_8.txt
 
-While the MongoDB from the previous exercise is running, access the database with mongo command-line interface (CLI). You can do that using docker exec. Then add a new todo using the CLI.
+While the MongoDB from the previous exercise is running, access the database with Mongo command-line interface (CLI). You can do that using docker exec. Then add a new todo using the CLI.
 
-The command to open CLI when inside the container is _mongo_
+The command to open CLI when inside the container is _mongosh_
 
-The mongo CLI will require the username and password flags to authenticate correctly. Flags _-u root -p example_ should work, the values are from the docker-compose.dev.yml.
+The Mongo CLI will require the username and password flags to authenticate correctly. Flags _-u root -p example_ should work, the values are from the docker-compose.dev.yml.
 
 * Step 1: Run MongoDB
 * Step 2: Use docker exec to get inside the container
-* Step 3: Open mongo cli
+* Step 3: Open Mongo cli
 
-When you have connected to the mongo cli you can ask it to show dbs inside:
+When you have connected to the Mongo cli you can ask it to show dbs inside:
 
 ```bash
 > show dbs
 admin         0.000GB
-config         0.000GB
+config        0.000GB
 local         0.000GB
 the_database  0.000GB
 ```
@@ -631,8 +674,18 @@ We can now access the data in those collections:
 
 ```bash
 > db.todos.find({})
-{ "_id" : ObjectId("611e54b688ddbb7e84d3c46b"), "text" : "Write code", "done" : true }
-{ "_id" : ObjectId("611e54b688ddbb7e84d3c46c"), "text" : "Learn about containers", "done" : false }
+[
+  {
+    _id: ObjectId("633c270ba211aa5f7931f078"),
+    text: 'Write code',
+    done: false
+  },
+  {
+    _id: ObjectId("633c270ba211aa5f7931f079"),
+    text: 'Learn about containers',
+    done: false
+  }
+]
 ```
 
 Insert one new todo with the text: "Increase the number of tools in my toolbelt" with status done as false. Consult the [documentation](https://docs.mongodb.com/v4.4/reference/method/db.collection.insertOne/#mongodb-method-db.collection.insertOne) to see how the addition is done.
@@ -645,7 +698,7 @@ Ensure that you see the new todo both in the Express app and when querying from 
 
 ### Redis
 
-[Redis](https://redis.io/) is a [key-value](https://redis.com/nosql/key-value-databases/) database. In contrast to eg. MongoDB the data stored to a key-value storage has a bit less structure, there are eg. no collections or tables, it just contains junks of data that can be fetched based on the <i>key</i> that was attached to the data  (the <i>value</i>).
+[Redis](https://redis.io/) is a [key-value](https://redis.com/nosql/key-value-databases/) database. In contrast to eg. MongoDB, the data stored to a key-value storage has a bit less structure, there are eg. no collections or tables, it just contains junks of data that can be fetched based on the <i>key</i> that was attached to the data  (the <i>value</i>).
 
 By default Redis works <i>in-memory</i>, which means that it does not store data persistently. 
 
@@ -680,7 +733,7 @@ We won't have any idea if the configuration works unless we try it. The applicat
 Once Redis is configured and started, restart the backend and give it the <i>REDIS\_URL</i>, that has the form <i>redis://host:port</i>
 
 ```bash
-$ REDIS_URL=insert-redis-url-here MONGO_URL=mongodb://localhost:3456/the_database npm run dev
+$ REDIS_URL=insert-redis-url-here MONGO_URL=mongodb://the_username:the_password@localhost:3456/the_database npm run dev
 ```
 
 You can now test the configuration by adding the line
@@ -729,7 +782,7 @@ Implement a todo counter that saves the number of created todos to Redis:
 
 ```json
 {
-  "added_todos": 0,
+  "added_todos": 0
 }
 ```
 
@@ -739,12 +792,12 @@ Implement a todo counter that saves the number of created todos to Redis:
 
 If the application does not behave as expected, a direct access to the database may be beneficial in pinpointing problems. Let us try out how [redis-cli](https://redis.io/topics/rediscli) can be used to access the database.
 
-- Go to the redis container with _docker exec_ and open the redis-cli.
+- Go to the Redis container with _docker exec_ and open the redis-cli.
 - Find the key you used with _[KEYS *](https://redis.io/commands/keys)_ 
 - Check the value of the key with command [GET](https://redis.io/commands/get)
 - Set the value of the counter to 9001, find the right command from [here](https://redis.io/commands/) 
 - Make sure that the new value works by refreshing the page http://localhost:3000/statistics
-- Create a new todo with postman and ensure from redis-cli that the counter has increased accordingly
+- Create a new todo with Postman and ensure from redis-cli that the counter has increased accordingly
 - Delete the key from cli and ensure that counter works when new todos are added
 
 </div>
@@ -771,7 +824,7 @@ Remember to add the directory to .gitignore!
 
 In addition to the GET, SET and DEL operations on keys and values, Redis can do also a quite a lot more. It can for example automatically expire keys, that is a very useful feature when Redis is used as a cache.
 
-Redis can also be used to implement so called [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) (or PubSub) pattern that is a asynchronous communication mechanism for distributed applications. In this scenario Redis works as a <i>message broker</i> between two or more applications. Some of the applications are <i>publishing</i> messages by sending those to Redis, that on arrival of a message, informs the parties that have <i>subscribed</i> to those messages. 
+Redis can also be used to implement so called [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) (or PubSub) pattern that is a asynchronous communication mechanism for distributed software. In this scenario Redis works as a <i>message broker</i> between two or more services. Some of the services are <i>publishing</i> messages by sending those to Redis, that on arrival of a message, informs the parties that have <i>subscribed</i> to those messages. 
 
 </div>
 
@@ -781,8 +834,8 @@ Redis can also be used to implement so called [publish-subscribe](https://en.wik
   
 #### Exercise 12.12: Persisting data in Redis
 
-Check that the data is not persisted by default: after running _docker-compose -f docker-compose.dev.yml down_ and _docker-compose -f docker-compose.dev.yml up_ the counter value is reset to 0.
+Check that the data is not persisted by default: after running _docker compose -f docker-compose.dev.yml down_ and _docker compose -f docker-compose.dev.yml up_ the counter value is reset to 0.
 
-Then create a volume for Redis data (by mofifying <i>todo-app/todo-backend/docker-compose.dev.yml </i>) and make sure that the data survives after running _docker-compose -f docker-compose.dev.yml down_ and _docker-compose -f docker-compose.dev.yml up_.
+Then create a volume for Redis data (by modifying <i>todo-app/todo-backend/docker-compose.dev.yml </i>) and make sure that the data survives after running _docker compose -f docker-compose.dev.yml down_ and _docker compose -f docker-compose.dev.yml up_.
 
 </div>

@@ -18,47 +18,46 @@ No podemos confiar en la magia negra de create-react-app para siempre y es hora 
 Hemos implementado nuestras aplicaciones dividiendo nuestro código en módulos separados que se han <i>importado</i> a lugares que los requieren. Aunque los módulos ES6 se definen en el estándar ECMAScript, ningún navegador sabe realmente cómo manejar el código dividido en módulos.
 
 
-Por esta razón, el código que se divide en módulos debe estar <i>empaquetado</i> para los navegadores, lo que significa que todos los archivos de código fuente se transforman en un solo archivo que contiene todo el código de la aplicación. Cuando implementamos nuestro frontend de React en producción en la [parte 3](/es/part3/deploying_app_to_internet), realizamos el empaquetado de nuestra aplicación con el comando _npm run build_. En la cara oculta, el script npm empaqueta el código fuente usando el webpack que produce la siguiente colección de archivos en el directorio de <i>compilación</i>:
+Por esta razón, el código que se divide en módulos debe estar <i>empaquetado</i> para los navegadores, lo que significa que todos los archivos de código fuente se transforman en un solo archivo que contiene todo el código de la aplicación. Cuando implementamos nuestro frontend de React en producción en la [parte 3](es/part3/implementacion_de_la_aplicacion_en_internet), realizamos el empaquetado de nuestra aplicación con el comando _npm run build_. En la cara oculta, el script npm empaqueta el código fuente usando el webpack que produce la siguiente colección de archivos en el directorio de <i>compilación</i>:
 
 
 <pre>
+.
 ├── asset-manifest.json
 ├── favicon.ico
 ├── index.html
+├── logo192.png
+├── logo512.png
 ├── manifest.json
-├── precache-manifest.8082e70dbf004a0fe961fc1f317b2683.js
-├── service-worker.js
+├── robots.txt
 └── static
     ├── css
-    │   ├── main.f9a47af2.chunk.css
-    │   └── main.f9a47af2.chunk.css.map
+    │   ├── main.1becb9f2.css
+    │   └── main.1becb9f2.css.map
     └── js
-        ├── 1.578f4ea1.chunk.js
-        ├── 1.578f4ea1.chunk.js.map
-        ├── main.8209a8f2.chunk.js
-        ├── main.8209a8f2.chunk.js.map
-        ├── runtime~main.229c360f.js
-        └── runtime~main.229c360f.js.map
+        ├── main.88d3369d.js
+        ├── main.88d3369d.js.LICENSE.txt
+        └── main.88d3369d.js.map
 </pre>
 
 
-El archivo <i>index.html</i> ubicado en la raíz del directorio de compilación es el "archivo principal" de la aplicación, que carga el archivo JavaScript incluido con la etiqueta <i>script</i> (de hecho, hay dos archivos JavaScript incluidos):
+El archivo <i>index.html</i> ubicado en la raíz del directorio de compilación es el "archivo principal" de la aplicación, que carga el archivo JavaScript incluido con la etiqueta <i>script</i>:
 
 ```html
-<!doctype html><html lang="en">
-<head>
-  <meta charset="utf-8"/>
-  <title>React App</title>
-  <link href="/static/css/main.f9a47af2.chunk.css" rel="stylesheet"></head>
-<body>
-  <div id="root"></div>
-  <script src="/static/js/1.578f4ea1.chunk.js"></script>
-  <script src="/static/js/main.8209a8f2.chunk.js"></script>
-</body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>React App</title>
+    <script defer="defer" src="/static/js/main.88d3369d.js"></script> 
+    <link href="/static/css/main.1becb9f2.css" rel="stylesheet">
+  </head>
+    <div id="root"></div>
+  </body>
 </html>
 ```
 
-Como podemos ver en la aplicación de ejemplo que se creó con create-react-app, el script de compilación también agrupa los archivos CSS de la aplicación en un solo archivo <i>/static/css/main.f9a47af2.chunk.css</i>.
+Como podemos ver en la aplicación de ejemplo que se creó con create-react-app, el script de compilación también agrupa los archivos CSS de la aplicación en un solo archivo <i>/static/css/main.1becb9f2.css</i>.
 
 
 En la práctica, la agrupación se realiza de modo que definamos un punto de entrada para la aplicación, que normalmente es el archivo <i>index.js</i>. Cuando webpack empaqueta el código, incluye todo el código que importa el punto de entrada y el código que importa, y así sucesivamente.
@@ -109,6 +108,23 @@ Definimos la funcionalidad de webpack en el archivo <i>webpack.config.js</i>, qu
 ```js
 const path = require('path')
 
+const config = () => {
+  return {
+    entry: './src/index.js',
+    output: {
+      path: path.resolve(__dirname, 'build'),
+      filename: 'main.js'
+    }
+  }
+}
+
+module.exports = config
+```
+**Nota:** es posible definirlo directamente como un objeto en lugar de una función:
+
+```js
+const path = require('path')
+
 const config = {
   entry: './src/index.js',
   output: {
@@ -116,9 +132,11 @@ const config = {
     filename: 'main.js'
   }
 }
+
 module.exports = config
 ```
 
+Un objeto puede ser suficiente para la mayoría de los casos, pero en algunos casos, necesitaremos ciertas características que requieren que la definición se realice como una función.
 
 Luego definiremos un nuevo script npm llamado <i>build</i> que ejecutará el empaquetado con webpack:
 
@@ -139,14 +157,15 @@ const hello = name => {
 }
 ```
 
-
 Cuando ejecutamos el comando _npm run build_ , el código de nuestra aplicación será empaquetado por webpack. La operación producirá un nuevo archivo <i>main.js</i> que se agregará al directorio de <i>compilación</i>:
 
-![](../../images/7/19ea.png)
+![](../../images/7/19x.png)
 
 El archivo contiene muchas cosas que parecen bastante interesantes. También podemos ver el código que escribimos anteriormente al final del archivo:
 
-![](../../images/7/19eb.png)
+```js
+eval("const hello = name => {\n  console.log(`hello ${name}`)\n}\n\n//# sourceURL=webpack://webpack-osa7/./src/index.js?");
+```
 
 Agreguemos un archivo <i>App.js</i> en el directorio <i>src</i> con el siguiente contenido:
 
@@ -172,50 +191,26 @@ App()
 
 Cuando empaquetamos la aplicación nuevamente con el comando _npm run build_, notamos que webpack ha reconocido ambos archivos:
 
-![](../../images/7/20ea.png)
+![](../../images/7/20x.png)
 
 El código de nuestra aplicación se puede encontrar al final del archivo del paquete en un formato bastante oscuro:
 
-```js
-/***/ "./src/App.js":
-/*!********************!*\
-  !*** ./src/App.js ***!
-  \********************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nconst App = () => {\n  return null\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (App);\n\n//# sourceURL=webpack:///./src/App.js?");
-
-/***/ }),
-
-/***/ "./src/index.js":
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App */ \"./src/App.js\");\n\n\nconst hello = name => {\n  console.log(`hello ${name}`)\n};\n\nObject(_App__WEBPACK_IMPORTED_MODULE_0__[\"default\"])()\n\n//# sourceURL=webpack:///./src/index.js?");
-
-/***/ })
-```
-
+![](../../images/7/20z.png)
 
 ### Archivo de configuración
-
 
 Echemos un vistazo más de cerca al contenido de nuestro archivo <i>webpack.config.js</i> actual:
 
 ```js
 const path = require('path')
 
-const config = {
-  entry: './src/index.js',
-  output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: 'main.js'
+const config = () => {
+  return {
+    entry: './src/index.js',
+    output: {
+      path: path.resolve(__dirname, 'build'),
+      filename: 'main.js'
+    }
   }
 }
 
@@ -223,7 +218,6 @@ module.exports = config
 ```
 
 El archivo de configuración se ha escrito en JavaScript y el objeto de configuración se exporta utilizando la sintaxis del módulo de Node.
-
 
 Nuestra definición de configuración mínima casi se explica sola. La propiedad [entry](https://webpack.js.org/concepts/#entry) del objeto de configuración especifica el archivo que servirá como punto de entrada para empaquetar la aplicación.
 
@@ -243,20 +237,24 @@ Y convirtamos nuestra aplicación en una aplicación React agregando las definic
 
 ```js
 import React from 'react'
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom/client'
 import App from './App'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
 También realizaremos los siguientes cambios en el archivo <i>App.js</i>:
 
 ```js
-import React from 'react'
+import React from 'react' // necesitamos esto también ahora en los archivos los componentes
 
-const App = () => (
-  <div>hello webpack</div>
-)
+const App = () => {
+  return (
+    <div>
+      hello webpack
+    </div>
+  )
+}
 
 export default App
 ```
@@ -280,7 +278,7 @@ Todavía necesitamos el archivo <i>build/index.html</i> que servirá como la "p�
 
 Cuando empaquetamos nuestra aplicación, nos encontramos con el siguiente problema:
 
-![](../../images/7/21.png)
+![](../../images/7/21x.png)
 
 ### Cargadores
 
@@ -288,40 +286,47 @@ El mensaje de error del paquete web indica que es posible que necesitemos un <i>
 
 ```js
 const App = () => {
-  return <div>hello webpack</div>
+  return (
+    <div>
+      hello webpack
+    </div>
+  )
 }
 ```
 
-
 La sintaxis utilizada anteriormente proviene de JSX y nos proporciona una forma alternativa de definir un elemento React para una etiqueta <i>div</i>.
 
-
-Podemos usar [caargadores](https://webpack.js.org/concepts/loaders/) para informar a webpack de los archivos que deben procesarse antes de que se empaqueten.
-
+Podemos usar [cargadores](https://webpack.js.org/concepts/loaders/) para informar a webpack de los archivos que deben procesarse antes de que se empaqueten.
 
 Configuremos un cargador para nuestra aplicación que transforme el código JSX en JavaScript normal:
 
 ```js
-const config = {
-  entry: './src/index.js',
-  output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: 'main.js',
-  },
-  // highlight-start
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        options: {
-          presets: ['@babel/preset-react'],
+const path = require('path')
+
+const config = () => {
+  return {
+    entry: './src/index.js',
+    output: {
+      path: path.resolve(__dirname, 'build'),
+      filename: 'main.js'
+    },
+      // highlight-start
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-react'],
+          },
         },
-      },
-    ],
-  },
-  // highlight-end
+      ],
+    },
+      // highlight-end
+  }
 }
+
+module.exports = config
 ```
 
 
@@ -367,21 +372,18 @@ Puede probar la aplicación incluida abriendo el archivo <i>build/index.html</i>
 ![](../../images/7/22.png)
 
 
-Vale la pena señalar que si el código fuente de la aplicación incluida usa <i>async/await</i>, el navegador no renderizará nada en algunos navegadores. [Buscar en Google el mensaje de error en la consola](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined) arrojará algo de luz sobre el problema. Tenemos que instalar una dependencia más que falta, que es [@babel/polyfill](https://babeljs.io/docs/en/babel-polyfill):
+Vale la pena señalar que si el código fuente de la aplicación incluida usa <i>async/await</i>, el navegador no renderizará nada en algunos navegadores. [Buscar en Google el mensaje de error en la consola](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined) arrojará algo de luz sobre el problema. Siendo la solución previa a este problema la instalación de [babel-polyfill](https://babeljs.io/docs/en/babel-polyfill/), la cual está [obsoleta](https://babeljs.io/docs/en/babel-polyfill/), ahora tenemos que instalar dos dependencias más, que son [core-js](https://www.npmjs.com/package/core-js) y [regenerator-runtime](https://www.npmjs.com/package/regenerator-runtime):
 
 ```bash
-npm install @babel/polyfill
+npm install core-js regenerator-runtime
 ```
-
-
-Realicemos los siguientes cambios en la propiedad <i>entry</i> del objeto de configuración de webpack en el archivo i>webpack.config.js</i>:
+Necesitas importar esas dependencias en la parte superior del archivo <i>index.js</i>:
 
 ```js
-  entry: ['@babel/polyfill', './src/index.js']
+import 'core-js/stable/index.js'
+import 'regenerator-runtime/runtime.js'
 ```
-
 Nuestra configuración contiene casi todo lo que necesitamos para el desarrollo de React.
-
 
 ### Transpiladores
 
@@ -472,7 +474,7 @@ import './index.css'
 
 Esto hará que el proceso de transpilación se interrumpa:
 
-![](../../images/7/23.png)
+![](../../images/7/23x.png)
 
 
 Cuando usamos CSS, tenemos que usar [css](https://webpack.js.org/loaders/css-loader/) y cargadores de [estilos](https://webpack.js.org/loaders/style-loader/):
@@ -511,7 +513,7 @@ npm install style-loader css-loader --save-dev
 
 El empaquetamiento volverá a tener éxito y la aplicación obtendrá nuevos estilos.
 
-### Webpack-dev-servidor
+### Webpack-dev-server
 
 La configuración actual hace posible el desarrollo de nuestra aplicación, pero el flujo de trabajo es terrible (hasta el punto en que se parece al flujo de trabajo de desarrollo con Java). Cada vez que hacemos un cambio en el código, tenemos que empaquetarlo y actualizar el navegador para probar el código.
 
@@ -561,7 +563,8 @@ El proceso de actualización del código es rápido. Cuando usamos el dev-server
 Extendamos el código cambiando la definición del componente <i>App</i> como se muestra a continuación:
 
 ```js
-import React, {useState} from 'react'
+import React, { useState } from 'react'
+import './index.css'
 
 const App = () => {
   const [counter, setCounter] = useState(0)
@@ -579,17 +582,9 @@ const App = () => {
 export default App
 ```
 
-
-Vale la pena notar que los mensajes de error no se muestran de la misma manera que con nuestras aplicaciones que fueron creadas usando create-react-app. Por este motivo tenemos que prestar más atención a la consola:
-
-![](../../images/7/24.png)
-
-
 La aplicación funciona bien y el flujo de trabajo de desarrollo es bastante fluido.
 
-
 ### Source maps
-
 
 Extraigamos el controlador de clics en su propia función y almacenemos el valor anterior del contador en su propio estado de <i>valores</i>:
 
@@ -598,15 +593,17 @@ const App = () => {
   const [counter, setCounter] = useState(0)
   const [values, setValues] = useState() // highlight-line
 
+//highlight-start
   const handleClick = () => {
     setCounter(counter + 1)
-    setValues(values.concat(counter)) // highlight-line
+    setValues(values.concat(counter))
   }
+//highlight-end
 
   return (
     <div className="container">
       hello webpack {counter} clicks
-      <button onClick={handleClick}>
+      <button onClick={handleClick}> // highlight-line
         press
       </button>
     </div>
@@ -741,20 +738,17 @@ Guardemos el siguiente contenido en el archivo <i>db.json</i>:
 }
 ```
 
-
 Nuestro objetivo es configurar la aplicación con webpack de tal manera que, cuando se use localmente, la aplicación use el servidor json disponible en el puerto 3001 como su backend.
 
+El archivo empaquetado se configurará para usar el backend disponible en la URL <https://notes2023.fly.dev/api/notes>.
 
-El archivo empaquetado se configurará para usar el backend disponible en la URL <https://blooming-atoll-75500.herokuapp.com/api/notes>.
-
-
-Instalaremos <i>axios</i>, iniciaremos el json-server y luego realizaremos los cambios necesarios en la aplicación. Con el fin de cambiar las cosas, obtendremos las notas del backend con nuestro [hook personalizado](/en/part7/custom_hooks) llamado _useNotes_:
+Instalaremos <i>axios</i>, iniciaremos el json-server y luego realizaremos los cambios necesarios en la aplicación. Con el fin de cambiar las cosas, obtendremos las notas del backend con nuestro [hook personalizado](/es/part7/hooks_personalizados) llamado _useNotes_:
 
 ```js
+// highlight-start
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
-// highlight-start
 const useNotes = (url) => {
   const [notes, setNotes] = useState([])
 
@@ -771,7 +765,7 @@ const useNotes = (url) => {
 const App = () => {
   const [counter, setCounter] = useState(0)
   const [values, setValues] = useState([])
-  const url = 'https://blooming-atoll-75500.herokuapp.com/api/notes'
+  const url = 'https://notes2023.fly.dev/api/notes' // highlight-line
   const notes = useNotes(url) // highlight-line
 
   const handleClick = () => {
@@ -782,7 +776,7 @@ const App = () => {
   return (
     <div className="container">
       hello webpack {counter} clicks
-      <button onClick={handleClick} >press</button>
+      <button onClick={handleClick}>press</button>
       <div>{notes.length} notes on server {url}</div> // highlight-line
     </div>
   )
@@ -791,39 +785,24 @@ const App = () => {
 export default App
 ```
 
-
 La dirección del servidor backend está actualmente hardcodeada en el código de la aplicación. ¿Cómo podemos cambiar la dirección de forma controlada para que apunte al servidor de backend de producción cuando el código está empaquetado para producción?
 
-
-Cambiemos el objeto de configuración en el archivo <i>webpack.config.js</i> para que sea una función en lugar de un objeto:
+La función de configuración de webpack tiene dos parámetros, <i>env</i> y <i>argv</i>. Podemos usar el segundo para averiguar el <i>modo</i> definido en el script npm:
 
 ```js
-const path = require('path');
+const path = require('path')
 
-const config = (env, argv) => {
+const config = (env, argv) => { // highlight-line
+  console.log('argv.mode:', argv.mode)
   return {
-    entry: './src/index.js',
-    output: {
-      // ...
-    },
-    devServer: {
-      // ...
-    },
-    devtool: 'source-map',
-    module: {
-      // ...
-    },
-    plugins: [
-      // ...
-    ],
+    // ...
   }
 }
 
 module.exports = config
 ```
 
-La definición sigue siendo casi exactamente la misma, excepto por el hecho de que la función ahora devuelve el objeto de configuración. La función recibe los dos parámetros, <i>env</i> y <i>argv</i>, el segundo de los cuales se puede utilizar para acceder al <i>modo</i> definido en el script npm.
-
+Ahora bien, si queremos, podemos configurar webpack para que funcione de manera diferente dependiendo de si el entorno de operación de la aplicación, o <i>mode</i>, está configurado para producción o desarrollo.
 
 También podemos usar [DefinePlugin](https://webpack.js.org/plugins/define-plugin/) de webpack para definir <i>constantes predeterminadas globales</i> que se pueden usar en el código incluido. Definamos una nueva constante global <i>BACKEND\_URL</i>, que obtiene un valor diferente según el entorno para el que se empaqueta el código:
 
@@ -836,8 +815,8 @@ const config = (env, argv) => {
 
   // highlight-start
   const backend_url = argv.mode === 'production'
-    ? 'https://blooming-atoll-75500.herokuapp.com/api/notes'
-    : 'http://localhost:3001/api/notes'
+    ? 'https://notes2023.fly.dev/api/notes'
+    : 'http://localhost:3001/notes'
   // highlight-end
 
   return {
@@ -847,7 +826,7 @@ const config = (env, argv) => {
       filename: 'main.js'
     },
     devServer: {
-      contentBase: path.resolve(__dirname, 'build'),
+      static: path.resolve(__dirname, 'build'),
       compress: true,
       port: 3000,
     },
@@ -868,7 +847,6 @@ const config = (env, argv) => {
 module.exports = config
 ```
 
-
 La constante global se usa de la siguiente manera en el código:
 
 ```js
@@ -888,22 +866,19 @@ const App = () => {
 }
 ```
 
-
 Si la configuración para el desarrollo y la producción difiere mucho, puede ser una buena idea [separar la configuración](https://webpack.js.org/guides/production/) de los dos en sus propios archivos.
 
+Ahora, si la aplicación se inicia con el comando _npm start_ en modo de desarrollo, obtiene las notas de la dirección http://localhost:3001/notes. La versión empaquetada con el comando _npm run build_ usa la dirección https://notes2023.fly.dev/api/notes para obtener la lista de notas.
 
-Podemos inspeccionar la versión de producción empaquetada de la aplicación localmente ejecutando el siguiente comando en el directorio de <i>compilación</i>:
+Podemos inspeccionar la versión de producción empaquetada de la aplicación localmente ejecutando el siguiente comando en el directorio de <i>compilación/build</i>:
 
 ```js
 npx static-server
 ```
 
-
 De forma predeterminada, la aplicación incluida estará disponible en <http://localhost:9080>.
 
-
 ### Polyfill
-
 
 Nuestra aplicación está terminada y funciona con todas las versiones relativamente recientes de los navegadores modernos, con la excepción de Internet Explorer. La razón de esto es que debido a _axios_, nuestro código usa [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), y ninguna versión existente de IE las admite:
 

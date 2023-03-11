@@ -240,16 +240,10 @@ Haimme nyt halutun tekstin sisältävän elemementin sisällön tulostettavaksi:
 
 Sisällön näyttämisen lisäksi toinen <i>Note</i>-komponenttien vastuulla oleva asia on huolehtia siitä, että propsina välitettyä tapahtumankäsittelijäfunktiota _toggleImportance_ kutsutaan kun noten yhteydessä olevaa nappia painetaan.
 
-Asennetaan testiä varten apukirjasto [user-event](https://testing-library.com/docs/ecosystem-user-event/):
+Asennetaan testiä varten apukirjasto [user-event](https://testing-library.com/docs/user-event/intro/):
 
 ```
 npm install --save-dev @testing-library/user-event
-```
-
-Tällä hetkellä (28.1.2022) create-react-appin ja user-eventin olettamien kirjastojen välillä on pieni yhteensopivuusero joka korjautuu kun asetetaan kirjastosta jest-watch-typeahead tietty versio:
-
-```
-npm install -D --exact jest-watch-typeahead@0.6.5
 ```
 
 Testaus onnistuu seuraavasti:
@@ -385,7 +379,7 @@ Ennen jokaista testiä suoritettava _beforeEach_ renderöi <i>Togglable</i>-komp
 Ensimmäinen testi tarkastaa, että <i>Togglable</i> renderöi sen lapsikomponentin
 
 ```js
-<div className="testDiv" >
+<div className="testDiv">
   togglable content
 </div>
 ```
@@ -533,7 +527,7 @@ const input = screen.getByRole('textbox')
 
 aiheuttaisi virheen:
 
-![](../../images/5/40.png)
+![Konsoli kertoo virheestä TestingLibraryElementError: Found multiple elements with the role "textbox"](../../images/5/40.png)
 
 Virheilmoitus ehdottaa käytettäväksi metodia <i>getAllByRole</i> (jos tilanne ylipäätään on se mitä halutaan). Testi korjautuisi seuraavasti:
 
@@ -545,7 +539,7 @@ await user.type(inputs[0], 'testing a form...')
 
 Metodi <i>getAllByRole</i>  palauttaa taulukon, ja oikea tekstikenttä on taulukossa ensimmäisenä. Testi on kuitenkin hieman epäilyttävä, sillä se luottaa tekstikenttien järjestykseen.
 
-Syötekentille määritellään usein placehoder-teksti, joka ohjaa käyttäjää kirjoittamaan syötekenttään oikean arvon. Lisätään placeholder lomakkeellemme:
+Syötekentille määritellään usein placeholder-teksti, joka ohjaa käyttäjää kirjoittamaan syötekenttään oikean arvon. Lisätään placeholder lomakkeellemme:
 
 ```js
 const NoteForm = ({ createNote }) => {
@@ -559,7 +553,7 @@ const NoteForm = ({ createNote }) => {
         <input
           value={newNote}
           onChange={handleChange}
-          placeholder='write here note content' // highlight-line 
+          placeholder='write note content here' // highlight-line 
         />
         <input
           value={...}
@@ -580,7 +574,7 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
 
   render(<NoteForm createNote={createNote} />) 
 
-  const input = screen.getByPlaceholderText('write here note content') // highlight-line 
+  const input = screen.getByPlaceholderText('write note content here') // highlight-line 
   const sendButton = screen.getByText('save')
 
   userEvent.type(input, 'testing a form...' )
@@ -668,7 +662,7 @@ test('renders content', () => {
 Komento _getByText_ nimittäin etsii elementtiä missä on <i>ainoastaan parametrina teksti</i> eikä mitään muuta. Jos halutaan etsiä komponenttia joka <i>sisältää</i> tekstin, voidaan joko lisätä komennolle ekstraoptio:
 
 ```js 
-const element = screenscreen.getByText(
+const element = screen.getByText(
   'Does not work anymore :(', { exact: false }
 )
 ```
@@ -707,11 +701,11 @@ test('renders no shit', () => {
 CI=true npm test -- --coverage
 ```
 
-![](../../images/5/18ea.png)
+![Konsoliin tulostuu taulukko joka näyttää kunkin tiedoston testien kattavuusraportin sekä mahdolliset testien kattamattomat rivit](../../images/5/18ea.png)
 
 Melko primitiivinen HTML-muotoinen raportti generoituu hakemistoon <i>coverage/lcov-report</i>. HTML-muotoinen raportti kertoo mm. yksittäisten komponentin testaamattomat koodirivit:
 
-![](../../images/5/19ea.png)
+![Selaimeen renderöityy näkymä tiedostoista jossa värein merkattu ne rivit joita testit eivät kattaneet](../../images/5/19ea.png)
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-8), branchissa <i>part5-8</i>.
 
@@ -723,11 +717,11 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://gith
 
 #### 5.13: blogilistan testit, step1
 
-Tee testi, joka varmistaa että blogin näyttävä komponentti renderöi blogin titlen, authorin mutta ei renderöi oletusarvoisesti urlia eikä likejen määrää.
+Tee testi, joka varmistaa että blogin näyttävä komponentti renderöi blogin titlen ja authorin mutta ei renderöi oletusarvoisesti urlia eikä likejen määrää. Mikäli toteutit tehtävän 5.7, niin pelkkä titlen renderöinnin testaus riittää.
 
 #### 5.14: blogilistan testit, step2
 
-Tee testi, joka varmistaa että myös url ja likejen määrä näytetään kun blogin kaikki tiedot näyttävää nappia on painettu.
+Tee testi, joka varmistaa että myös url, likejen määrä ja käyttäjä näytetään, kun blogin kaikki tiedot näyttävää nappia on painettu.
 
 #### 5.15: blogilistan testit, step3
 
@@ -735,7 +729,7 @@ Tee testi, joka varmistaa, että jos komponentin <i>like</i>-nappia painetaan ka
 
 #### 5.16: blogilistan testit, step4
 
-Tee uuden blogin luomisesta huolehtivalle lomakkelle testi, joka varmistaa, että lomake kutsuu propseina saamaansa takaisinkutsufunktiota oikeilla tiedoilla siinä vaiheessa kun blogi luodaan.
+Tee uuden blogin luomisesta huolehtivalle lomakkelle testi, joka varmistaa, että lomake kutsuu propsina saamaansa takaisinkutsufunktiota oikeilla tiedoilla siinä vaiheessa kun blogi luodaan.
 
 </div>
 

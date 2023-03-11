@@ -7,7 +7,6 @@ import ArrowToTop from '../images/up-arrow.svg';
 import { Banner } from '../components/Banner/Banner';
 import EditLink from '../components/EditLink/EditLink';
 import Element from '../components/Element/Element';
-import Footer from '../components/Footer/Footer';
 import Layout from '../components/layout';
 import Parser from 'html-react-parser';
 import PrevNext from '../components/PrevNext/PrevNext';
@@ -37,7 +36,7 @@ export default class ContentTemplate extends Component {
   }
 
   componentDidMount() {
-    const links = Array.from(document.querySelectorAll('a'));
+    const links = Array.from(document.querySelectorAll('a:not(.skip-to-content'));
     const h1 = document.querySelector('h1');
     const h3 = document.querySelectorAll('h3');
     const h3Arr = Array.from(h3).map(t => t.innerText);
@@ -46,7 +45,8 @@ export default class ContentTemplate extends Component {
 
     links.map(i => {
       i.style = `border-color: ${colors[partColors[frontmatter.part]]}`;
-      ! i.classList.contains('language-switcher__language') && (i.target = '_blank');
+      !i.classList.contains('language-switcher__language') &&
+        (i.target = '_blank');
 
       function over() {
         i.style.backgroundColor = colors[partColors[frontmatter.part]];
@@ -92,13 +92,17 @@ export default class ContentTemplate extends Component {
     const colorCode = colors[partColors[part]];
 
     const parserOptions = {
-      replace: ({ type, name, attribs, children }) => {
+      replace: props => {
+        const { type, name, attribs, children } = props;
         if (type === 'tag' && name === 'picture') {
+          const alt = children[0].attribs.alt
+            ? children[0].attribs.alt
+            : 'fullstack content';
           return (
             <picture>
               <img
                 style={{ borderColor: colorCode }}
-                alt="fullstack content"
+                alt={alt}
                 src={children[0].attribs.src}
               />
             </picture>
@@ -118,6 +122,7 @@ export default class ContentTemplate extends Component {
             <Banner
               style={{
                 backgroundColor: colorCode,
+                borderColor: colorCode,
               }}
               className="spacing tasks content-banner"
             >
@@ -144,7 +149,7 @@ export default class ContentTemplate extends Component {
     };
 
     return (
-      <Layout>
+      <Layout isCoursePage={true}>
         <SEO
           lang={lang}
           title={`Fullstack ${lang === 'fi' ? 'osa' : 'part'}${part} | ${
@@ -158,7 +163,7 @@ export default class ContentTemplate extends Component {
           ]}
         />
 
-{/* eslint-disable */}
+        {/* eslint-disable */}
         {this.state.showArrowUp && (
           <div
             className="arrow-go-up"
@@ -173,7 +178,7 @@ export default class ContentTemplate extends Component {
             <img src={ArrowToTop} alt="arrow-up" />
           </div>
         )}
-{/* eslint-enable */}
+        {/* eslint-enable */}
 
         <div className="course-container spacing--after">
           <Banner
@@ -207,7 +212,7 @@ export default class ContentTemplate extends Component {
             </div>
           </Banner>
 
-          <Element className="course">
+          <Element className="course" id="course-main-content">
             <ScrollNavigation
               part={part}
               letter={letter}
@@ -246,8 +251,6 @@ export default class ContentTemplate extends Component {
 
           <PrevNext part={part} letter={letter} lang={lang} />
         </div>
-
-        <Footer lang={lang} />
       </Layout>
     );
   }

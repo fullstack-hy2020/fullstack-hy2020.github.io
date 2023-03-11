@@ -29,12 +29,14 @@ export const DeveloperStory = props => {
 
       <Element className="col-6 col-8--mobile spacing--mobile">
         {companyLogo && (
-          <img
-            className="col-5--mobile"
-            style={{ width: '8em', objectFit: 'cover' }}
-            src={require(`../../images/story_logos/${companyLogo}`)}
-            alt={companyLogo.split('.')[0]}
-          />
+          <div className="developer-story__company-logo-wrapper">
+            <img
+              className="col-5--mobile"
+              style={{ width: '6em', objectFit: 'cover' }}
+              src={require(`../../images/story_logos/${companyLogo}`)}
+              alt={companyLogo.split('.')[0]}
+            />
+          </div>
         )}
 
         <BodyText

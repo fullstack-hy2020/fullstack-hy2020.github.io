@@ -19,27 +19,7 @@ Voisimmekin hoitaa React-sovelluksen ja GraphQL:n kommunikoinnin Axiosilla. Täm
 
 ### Apollo client
 
-Luodaan uusi React-sovellus. Kirjoittamishetkellä (21th April 2022) Apollo Client ei tue Reactin uutta versiota 18. Downgreidataan projekti käyttämään aiempaa versiota. Muutetaan tiedostoa  <i>package.json</i> seuraavasti:
-
-```js
-{
-  "dependencies": {
-    "react": "^17.0.2", // highlight-line
-    "react-dom": "^17.0.2", // highlight-line
-    "react-scripts": "5.0.0",
-    "web-vitals": "^2.1.4"
-  },
-  // ...
-}
-```
-
-Asennetaan muutoksen jälkeen riippuvuudet uudelleen suorittamalla komento
-
-```js
-npm install
-```
-
-Asennetaan nyt sovellukseen [Apollo Clientin](https://www.apollographql.com/docs/react/get-started/#installation) vaatimat riippuvuudet.
+Luodaan uusi React-sovellus ja asennetaan sovellukseen [Apollo Clientin](https://www.apollographql.com/docs/react/get-started/#installation) vaatimat riippuvuudet.
 
 ```bash
 npm install @apollo/client graphql
@@ -48,16 +28,14 @@ npm install @apollo/client graphql
 Aloitetaan seuraavalla ohjelmarungolla.
 
 ```js
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom/client'
 import App from './App'
 
-import { ApolloClient, HttpLink, InMemoryCache, gql } from '@apollo/client'
+import { ApolloClient, InMemoryCache, gql } from '@apollo/client'
 
 const client = new ApolloClient({
+  uri: 'http://localhost:4000',
   cache: new InMemoryCache(),
-  link: new HttpLink({
-    uri: 'http://localhost:4000',
-  })
 })
 
 const query = gql`
@@ -79,7 +57,8 @@ client.query({ query })
     console.log(response.data)
   })
 
-ReactDOM.render(<App />, document.getElementById('root'))
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
 Koodi aloittaa luomalla [client](https://www.apollographql.com/docs/react/get-started/#create-a-client)-olion, jonka avulla se lähettää kyselyn palvelimelle:
@@ -98,25 +77,24 @@ Palvelimen palauttama vastaus tulostuu konsoliin:
 Sovellus pystyy siis kommunikoimaan GraphQL-palvelimen kanssa olion _client_ välityksellä. Client saadaan sovelluksen kaikkien komponenttien saataville käärimällä komponentti <i>App</i> komponentin [ApolloProvider](https://www.apollographql.com/docs/react/get-started/#connect-your-client-to-react) lapseksi:
 
 ```js
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom/client'
 import App from './App'
 
-import { 
-  ApolloClient, ApolloProvider, HttpLink, InMemoryCache // highlight-line
-} from '@apollo/client' 
+import {
+  ApolloClient,
+  ApolloProvider, // highlight-line
+  InMemoryCache,
+} from '@apollo/client'
 
 const client = new ApolloClient({
+  uri: 'http://localhost:4000',
   cache: new InMemoryCache(),
-  link: new HttpLink({
-    uri: 'http://localhost:4000',
-  })
 })
 
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <ApolloProvider client={client}> // highlight-line
     <App />
-  </ApolloProvider>, // highlight-line
-  document.getElementById('root')
+  </ApolloProvider> // highlight-line
 )
 ```
 
@@ -599,7 +577,9 @@ const PersonForm = ({ setError }) => {
     refetchQueries: [  {query: ALL_PERSONS } ],
     // highlight-start
     onError: (error) => {
-      setError(error.graphQLErrors[0].message)
+      const errors = error.graphQLErrors[0].extensions.error.errors
+      const messages = Object.values(errors).map(e => e.message).join('\n')
+      setError(messages)
     }
     // highlight-end
   })
@@ -607,6 +587,8 @@ const PersonForm = ({ setError }) => {
   // ...
 }
 ```
+
+Joudumme kaivautumaan syvälle olion <i>error</i> sisälle, ennen kuin oikea virheilmoitus löytyy...
 
 Renderöidään mahdollinen virheilmoitus näytölle
 
@@ -740,13 +722,11 @@ Ulkoasu on karu mutta toimiva:
 
 Kun numero muutetaan, päivittyy se hieman yllättäen automaattisesti komponentin <i>Persons</i> renderöimään nimien ja numeroiden listaan. Tämä johtuu siitä, että koska henkilöillä on identifioiva, tyyppiä <i>ID</i> oleva kenttä, päivittyy henkilö välimuistissa uusilla tiedoilla päivitysoperaation yhteydessä. 
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4), branchissa <i>part8-4</i>.
-
 Sovelluksessa on  vielä pieni ongelma. Jos yritämme vaihtaa olemattomaan nimeen liittyvän puhelinnumeron, ei mitään näytä tapahtuvan. Syynä tälle on se, että jos nimeä vastaavaa henkilöä ei löydy, vastataan kyselyyn <i>null</i>:
 
 ![](../../images/8/23ea.png)
 
-Koska kyseessä ei ole GraphQL:n kannalta virhetilanne, ei _onError_-virheenkäsittelijän rekisteröimisestä tässä tilanteessa hyötyä.
+Koska kyseessä ei ole GraphQL:n kannalta virhetilanne, ei _onError_-virheenkäsittelijän rekisteröimisestä olisi tässä tilanteessa hyötyä.
 
 Voimme generoida virheilmoituksen _useMutation_-hookin toisena parametrina palauttaman mutaation tuloksen kertovan olion _result_ avulla.
 
@@ -774,7 +754,7 @@ const PhoneForm = ({ setError }) => {
 }
 ```
 
-Jos henkilöä ei löytynyt, eli kyselyn tulos _result.data.editNumber_ on _null_, asettaa komponentti propseina saamansa callback-funktion avulla sopivan virheilmoituksen. Virheilmoituksen asettamista kontrolloidaan jälleen useEffect-hookin avulla, eli virheviesti halutaan asettaa ainoastaan jos mutaation tulos _result.data_ muuttuu.
+Jos henkilöä ei löytynyt, eli kyselyn tulos _result.data.editNumber_ on _null_, asettaa komponentti propseina saamansa callback-funktion avulla sopivan virheilmoituksen. Virheilmoituksen asettamista kontrolloidaan useEffect-hookin avulla, eli virheviesti halutaan asettaa ainoastaan jos mutaation tulos _result.data_ muuttuu.
 
 useEffect aiheuttaa ESLint-virheilmoituksen:
 
@@ -806,7 +786,7 @@ useEffect(() => {
 
 Tämä ratkaisu ei kuitenkaan toimi, ellei _setError_-funktiota ole määritelty [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback)-funktioon käärittynä. Jos näin ei tehdä, seurauksena on ikuinen luuppi, sillä aina kun komponentti _App_ renderöidään uudelleen notifikaation poistamisen jälkeen, syntyy <i>uusi versio</i> funktiosta _setError_ ja se taas aiheuttaa efektifunktion uudelleensuorituksen ja taas uuden notifikaation...
 
-Sovelluksen tämänhetkinen koodi on [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-5), branchissa <i>part8-5</i>.
+Sovelluksen tämänhetkinen koodi on [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4), branchissa <i>part8-4</i>.
 
 ### Apollo Client ja sovelluksen tila
 
@@ -823,6 +803,8 @@ Apollo mahdollistaa tarvittaessa myös sovelluksen paikallisen tilan tallettamis
 Tehtävissä toteutetaan edellisen osan tehtävissä tehdylle backendille frontend.
 
 Ota sovelluksesi lähtökohdaksi [tämä projekti](https://github.com/fullstack-hy2020/library-frontend).
+
+**Huom** voit halutessasi käyttää myös [React routeria](/osa7/react_router) sovelluksen navigaation toteuttamiseen!
 
 #### 8.8: Kirjailijoiden näkymä
 

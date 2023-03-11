@@ -39,7 +39,7 @@ Register now to Discord if you have not already done that. You will also need a 
 
 #### 11.18 Build success/failure notification action
 
-You can find quite a few of third party actions from [GitHub Action Marketplace](https://github.com/marketplace?type=actions) by using the search phrase [discord](https://github.com/marketplace?type=actions&query=discord). Pick one for this exercise. My choice was [discord-webhook-notify)](https://github.com/marketplace/actions/discord-webhook-notify) since it has quite many stars and a decent documentation.
+You can find quite a few of third party actions from [GitHub Action Marketplace](https://github.com/marketplace?type=actions) by using the search phrase [discord](https://github.com/marketplace?type=actions&query=discord). Pick one for this exercise. My choice was [discord-webhook-notify](https://github.com/marketplace/actions/discord-webhook-notify) since it has quite many stars and a decent documentation.
 
 Setup the action so that it gives two types of notifications:
 - A success indication if a new version gets deployed
@@ -83,7 +83,7 @@ What about the tasks that don't have a tool? You can automate these yourself wit
 
 ### Exercises 11.19-11.21
 
-#### 11.19 Periodic health check
+#### 11.19 Periodic health check 
 
 We are pretty confident now that our pipeline prevents bad code from being deployed. However, there are many sources of errors. If our application would e.g. depend on a database that would for some reason become unavailable, our application would most likely crash. That's why it would be a good idea to set up <i>a periodic health check</i> that would regularly do an HTTP GET request to our server. We quite often refer to this kind of request as a <i>ping</i>.
 
@@ -93,11 +93,11 @@ Use now the action [url-health-check](https://github.com/marketplace/actions/url
 
 **Note** that unfortunately it takes quite long until GitHub Actions starts the scheduled workflow for the first time. For me, it took nearly one hour. So it might be a good idea to get the check working firstly by triggering the workflow with git push. When you are sure that the check is properly working, then switch to a scheduled trigger.
 
-**Note also** that once you get this working, it is best to drop the ping frequency (to max once in 24 hours) or disable the rule altogether since otherways your health check may consume [all your](https://devcenter.heroku.com/articles/free-dyno-hours) monthly free hours.
+**Note also** that once you get this working, it is best to drop the ping frequency (to max once in 24 hours) or disable the rule altogether since otherways your health check may consume all your monthly free hours.
 
 #### 11.20 Your own pipeline
 
-Build a similar CI/CD-pipeline for some of your own applications. Some of the good candidates are the phonebook app that was built in parts 2 and 3 of the course, or the blogapp built in parts 4 and 5, or the redux anecdotes built in part 6. You may also use some app of your own for this exercise.
+Build a similar CI/CD-pipeline for some of your own applications. Some of the good candidates are the phonebook app that was built in parts 2 and 3 of the course, or the blogapp built in parts 4 and 5, or the Redux anecdotes built in part 6. You may also use some app of your own for this exercise.
 
 You most likely need to do some restructuring to get all the pieces together. A logical first step is to store both the frontend and backend code in the same repository. This is not a requirement but it is recommended since it makes things much more simple.
 
@@ -113,7 +113,9 @@ Obviously, this exercise is not done in the same repository as the previous exer
 
 Protect the main branch of the repository where you did the previous exercise. This time prevent also the administrators from merging the code without a review.
 
-Do a pull request and ask any of GitHub users [mluukkai](https://github.com/mluukkai) and/or [kaltsoon](https://github.com/kaltsoon) to review your code. Once the review is done, merge your code to the main branch. Note that the reviewer needs to be a collaborator in the repository. Ping us in Discord to get the review, it is best to send a private message and to include the collaboration invite link to the message.  
+Do a pull request and ask GitHub user [mluukkai](https://github.com/mluukkai) to review your code. Once the review is done, merge your code to the main branch. Note that the reviewer needs to be a collaborator in the repository. Ping us in Discord to get the review,  and to include the collaboration invite link to the message.
+
+**Please note** what was written above, include the link to _the collaboration invite_ in the ping, not the link to the pull request.
 
 Then you are done!
 
@@ -130,8 +132,6 @@ Your solutions are in two repositories (pokedex and your own project), and since
 Once you have completed the exercises and want to get the credits, let us know through the exercise submission system that you have completed the course:
 
 ![Submissions](../../images/11/21.png)
-
-Note that the "exam done in Moodle" note refers to the [Full Stack Open course's exam](/en/part0/general_info#sign-up-for-the-exam), which has to be completed before you can earn credits from this part.
 
 **Note** that you need a registration to the corresponding course part for getting the credits registered, see [here](/en/part0/general_info#parts-and-completion) for more information.
 

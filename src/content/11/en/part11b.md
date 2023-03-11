@@ -116,6 +116,7 @@ on:
   push:
     branches:
       - master
+      # note that your "main" branch might be called main instead of master
 
 jobs:
   hello_world_job:
@@ -155,7 +156,7 @@ To see what your GitHub Action workflow has done, you can navigate to the **Acti
 
 You should see the "Hello World!" message as an output. If that's the case then you have successfully gone through all the necessary steps. You have your first GitHub Actions workflow active! 
 
-Note that GitHub Actions also gives you information what is the exact environment (operating system, and it's [setup](https://github.com/actions/virtual-environments/blob/ubuntu18/20201129.1/images/linux/Ubuntu1804-README.md)) where your workflow is run. This is important since if something surprising happens, it makes debugging so much easier if you can reproduce all the steps in your machine!
+Note that GitHub Actions also informs you on the exact environment (operating system, and its [setup](https://github.com/actions/virtual-environments/blob/ubuntu18/20201129.1/images/linux/Ubuntu1804-README.md)) where your workflow is run. This is important since if something surprising happens, it makes debugging so much easier if you can reproduce all the steps in your machine!
 
 #### 11.4 Date and directory contents
 
@@ -181,13 +182,14 @@ Let's implement a Github Action that will lint the code. If the checks don't pas
 
 At start, the workflow that we will save to file <code>pipeline.yml</code> looks like this:
 
-```js
+```yml
 name: Deployment pipeline
 
 on:
   push:
     branches:
       - master
+      # note that your "main" branch might be called main instead of master
 
 jobs:
 ```
@@ -202,9 +204,9 @@ It is important to replicate the same environment in CI as in production as clos
 
 Next, we list the steps in the "build" job that the CI would need to perform. As we noticed in the last exercise, by default the virtual environment does not have any code in it, so we need to <i>checkout the code</i> from the repository. 
 
-This an easy step:
+This is an easy step:
 
-```js
+```yml
 name: Deployment pipeline
 
 on:
@@ -213,19 +215,19 @@ on:
       - master
 
 jobs:
-  simple_deployment_pipeline: // highlight-line
-    runs-on: ubuntu-20.04 // highlight-line
-    steps: // highlight-line
-      - uses: actions/checkout@v3  // highlight-line
+  simple_deployment_pipeline: # highlight-line
+    runs-on: ubuntu-20.04 # highlight-line
+    steps: # highlight-line
+      - uses: actions/checkout@v3 # highlight-line
 ```
 
 The [uses](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsuses) keyword tells the workflow to run a specific <i>action</i>. An action is a reusable piece of code, like a function. Actions can be defined in your repository in a separate file or you can use the ones available in public repositories. 
 
 Here we're using a public action [actions/checkout](https://github.com/actions/checkout) and we specify a version (<code>@v3</code>) to avoid potential breaking changes if the action gets updated. The <code>checkout</code> action does what the name implies: it checkouts the project source code from git.
 
-Secondly, as the application is written in JavaSript, Node.js must be set up to be able to utilize the commands that are specified in <code>package.json</code>. To set up Node.js, [actions/setup-node](https://github.com/actions/setup-node) action can be used. Version <code>16</code> is selected because it is the version the application is using in the production environment.
+Secondly, as the application is written in JavaScript, Node.js must be set up to be able to utilize the commands that are specified in <code>package.json</code>. To set up Node.js, [actions/setup-node](https://github.com/actions/setup-node) action can be used. Version <code>16</code> is selected because it is the version the application is using in the production environment.
 
-```js
+```yml
 # name and trigger not shown anymore...
 
 jobs:
@@ -233,9 +235,9 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v2 // highlight-line
-        with: // highlight-line
-          node-version: '16' // highlight-line
+      - uses: actions/setup-node@v3 # highlight-line
+        with: # highlight-line
+          node-version: '16' # highlight-line
 ```
 
 As we can see, the [with](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepswith) keyword is used to give a "parameter" to the action. Here the parameter specifies the version of Node.js we want to use.
@@ -243,17 +245,17 @@ As we can see, the [with](https://docs.github.com/en/free-pro-team@latest/action
 
 Lastly, the dependencies of the application must be installed. Just like on your own machine we execute <code>npm install</code>. The steps in the job should now look something like
 
-```js
+```yml
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: '16'
-      - name: npm install  // highlight-line
-        run: npm install  // highlight-line
+      - name: npm install # highlight-line
+        run: npm install # highlight-line
 ```
 
 Now the environment should be completely ready for the job to run actual important tasks in!
@@ -262,19 +264,19 @@ Now the environment should be completely ready for the job to run actual importa
 
 After the environment has been set up we can run all the scripts from <code>package.json</code> like we would on our own machine. To lint the code all you have to do is add a step to run the <code>npm run eslint</code> command.
 
-```js
+```yml
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: '16'
       - name: npm install 
         run: npm install  
-      - name: lint  // highlight-line
-        run: npm run eslint // highlight-line
+      - name: lint  # highlight-line
+        run: npm run eslint # highlight-line
 ```
 
 </div>
@@ -339,6 +341,18 @@ Define a npm script <code>test:e2e</code> for running the e2e tests from the com
 
 **Note** do not include the word <i>spec</i> in the Cypress test file name, that would cause also Jest to run it, and it might cause problems. 
 
+**Note2** end to end tests are pretty slow and than can cause problems when run with the GitHub Actions. Slowness can be remedied by changing <i>App.jsx</i> to fetch a bit less Pokemons, eg. 50 works fine:
+
+```js
+const { 
+  data: pokemonList, error, isLoading 
+} = useApi('https://pokeapi.co/api/v2/pokemon/?limit=50', mapResults) // highlight-line
+```
+
+The same change must be done in the test file <i>App.jest.spec.jsx</i>
+
+The change is now (16th September 2022) done in the repository, but if you have fetched the code earlier, there might still be a bigger number. 
+
 **Another thing to note** is that despite the page renders the Pokemon names by starting with a capital letter, the names are actually written with lower case letters in the source, so it is <code>ivysaur</code> instead of <code>Ivysaur</code>!
 
 Ensure that the test passes locally. Remember that the Cypress tests _assume that the application is up and running_ when you run the test! If you have forgotten the details (that happened to me too!), please see [part 5](/en/part5/end_to_end_testing) how to get up and running with Cypress.
@@ -356,9 +370,20 @@ Once the end to end test works in your machine, include it in the GitHub Action 
 
 Three options are used. [command](https://github.com/cypress-io/github-action#custom-test-command) specifies how to run Cypress tests. [start](https://github.com/cypress-io/github-action#start-server) gives npm script that starts the server and [wait-on](https://github.com/cypress-io/github-action#wait-on) says that before the tests are run, the server should have started in url <http://localhost:5000>.
 
+If you are using Cypress 10.X, you may need to revise the steps as follows:
+  
+```js
+- name: e2e tests
+  uses: cypress-io/github-action@v4
+  with:
+     build: npm run build
+     start: npm run start-prod
+     wait-on: http://localhost:5000
+```  
+  
 Once you are sure that the pipeline works, write another test that ensures that one can navigate from the main page to the page of a particular Pokemon, e.g. <i>ivysaur</i>. The test does not need to be a complex one, just check that when you navigate a link, the page has some right content, such as the string <i>chlorophyll</i> in the case of <i>ivysaur</i>.
 
-**Note** also the Pokemon ablilities are written with lower case letters, the capitalization is done in CSS, so <i>do not</i> search eg. for <i>Chlorophyll</i> but <i>chlorophyll</i>.
+**Note** also the Pokemon abilities are written with lower case letters, the capitalization is done in CSS, so <i>do not</i> search eg. for <i>Chlorophyll</i> but <i>chlorophyll</i>.
 
 **Note2** that you should not try <i>bulbasaur</i>, for some reason the page of that particular Pokemon does not work properly...
 

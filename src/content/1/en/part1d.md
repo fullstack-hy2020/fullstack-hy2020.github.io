@@ -7,55 +7,11 @@ lang: en
 
 <div class="content">
 
-### A note on React version
-
-Version 18 of React was released late March 2022. The code in material should work as it is with the new React version. However, some libraries might not yet be compatible with React 18. At the moment of writing (4th April) at least the Apollo client used in [part 8](/en/part8) does not yet work with most recent React.
-
-In case you end up in a situation where your application breaks because of library compatibility problems, <i>downgrade</i> to the older React by changing the file <i>package.json</i> as follows:
-
-```js
-{
-  "dependencies": {
-    "react": "^17.0.2", // highlight-line
-    "react-dom": "^17.0.2", // highlight-line
-    "react-scripts": "5.0.0",
-    "web-vitals": "^2.1.4"
-  },
-  // ...
-}
-```
-
-After the change is made, reinstall dependencies by running
-
-```js
-npm install
-```
-
-Note that also the file <i>index.js</i> needs to be changed a bit. For React 17 it looks like
-
-```js
-import ReactDOM from 'react-dom'
-import App from './App'
-
-ReactDOM.render(<App />, document.getElementById('root'))
-```
-
-but for React 18 the correct form is
-
-```js
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-
-import App from './App'
-
-ReactDOM.createRoot(document.getElementById('root')).render(<App />)
-```
-
 ### Complex state
 
-In our previous example the application state was simple as it was comprised of a single integer. What if our application requires a more complex state?
+In our previous example, the application state was simple as it was comprised of a single integer. What if our application requires a more complex state?
 
-In most cases the easiest and best way to accomplish this is by using the _useState_ function multiple times to create separate "pieces" of state.
+In most cases, the easiest and best way to accomplish this is by using the _useState_ function multiple times to create separate "pieces" of state.
 
 In the following code we create two pieces of state for the application named _left_ and _right_ that both get the initial value of 0:
 
@@ -82,6 +38,7 @@ const App = () => {
 The component gets access to the functions _setLeft_ and _setRight_ that it can use to update the two pieces of state.
 
 The component's state or a piece of its state can be of any type. We could implement the same functionality by saving the click count of both the <i>left</i> and <i>right</i> buttons into a single object:
+
 ```js
 {
   left: 0,
@@ -89,7 +46,7 @@ The component's state or a piece of its state can be of any type. We could imple
 }
 ```
 
-In this case the application would look like this:
+In this case, the application would look like this:
 
 ```js
 const App = () => {
@@ -127,6 +84,7 @@ const App = () => {
 Now the component only has a single piece of state and the event handlers have to take care of changing the <i>entire application state</i>.
 
 The event handler looks a bit messy. When the left button is clicked, the following function is called:
+
 ```js
 const handleLeftClick = () => {
   const newClicks = { 
@@ -138,6 +96,7 @@ const handleLeftClick = () => {
 ```
 
 The following object is set as the new state of the application:
+
 ```js
 {
   left: clicks.left + 1,
@@ -145,7 +104,7 @@ The following object is set as the new state of the application:
 }
 ```
 
-The new value of the <i>left</i> property is now the same as the value of <i>left + 1</i> from the previous state, and the value of the <i>right</i> property is the same as value of the <i>right</i> property from the previous state.
+The new value of the <i>left</i> property is now the same as the value of <i>left + 1</i> from the previous state, and the value of the <i>right</i> property is the same as the value of the <i>right</i> property from the previous state.
 
 We can define the new state object a bit more neatly by using the [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)
 syntax that was added to the language specification in the summer of 2018:
@@ -197,9 +156,9 @@ const handleLeftClick = () => {
 }
 ```
 
-The application appears to work. However, <i>it is forbidden in React to mutate state directly</i>, since it can result in unexpected side effects. Changing state has to always be done by setting the state to a new object. If properties from the previous state object are not changed, they need to simply be copied, which is done by copying those properties into a new object, and setting that as the new state.
+The application appears to work. However, <i>it is forbidden in React to mutate state directly</i>, since [it can result in unexpected side effects](https://stackoverflow.com/a/40309023). Changing state has to always be done by setting the state to a new object. If properties from the previous state object are not changed, they need to simply be copied, which is done by copying those properties into a new object and setting that as the new state.
 
-Storing all of the state in a single state object is a bad choice for this particular application; there's no apparent benefit and the resulting application is a lot more complex. In this case storing the click counters into separate pieces of state is a far more suitable choice.
+Storing all of the state in a single state object is a bad choice for this particular application; there's no apparent benefit and the resulting application is a lot more complex. In this case, storing the click counters into separate pieces of state is a far more suitable choice.
 
 There are situations where it can be beneficial to store a piece of application state in a more complex data structure. [The official React documentation](https://reactjs.org/docs/hooks-faq.html#should-i-use-one-or-many-state-variables) contains some helpful guidance on the topic.
 
@@ -239,7 +198,7 @@ const App = () => {
 }
 ```
 
-Every click is stored into a separate piece of state called _allClicks_ that is initialized as an empty array:
+Every click is stored in a separate piece of state called _allClicks_ that is initialized as an empty array:
 
 ```js
 const [allClicks, setAll] = useState([])
@@ -254,7 +213,7 @@ const handleLeftClick = () => {
 }
 ```
 
-The piece of state stored in _allClicks_ is now set to be an array that contains all of the items of the previous state array plus the letter <i>L</i>. Adding the new item to the array is accomplished with the [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) method, that does not mutate the existing array but rather returns a <i>new copy of the array</i> with the item added to it.
+The piece of state stored in _allClicks_ is now set to be an array that contains all of the items of the previous state array plus the letter <i>L</i>. Adding the new item to the array is accomplished with the [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) method, which does not mutate the existing array but rather returns a <i>new copy of the array</i> with the item added to it.
 
 As mentioned previously, it's also possible in JavaScript to add items to an array with the [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) method. If we add the item by pushing it to the _allClicks_ array and then updating the state, the application would still appear to work:
 
@@ -268,7 +227,7 @@ const handleLeftClick = () => {
 
 However, __don't__ do this. As mentioned previously, the state of React components like _allClicks_ must not be mutated directly. Even if mutating state appears to work in some cases, it can lead to problems that are very hard to debug.
 
-Let's take a closer look at how the clicking 
+Let's take a closer look at how the clicking
 is rendered to the page:
 
 ```js
@@ -288,6 +247,95 @@ const App = () => {
 ```
 
 We call the [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) method on the _allClicks_ array that joins all the items into a single string, separated by the string passed as the function parameter, which in our case is an empty space.
+
+### Update of the state is asynchronous
+
+Let's expand the application so that it keeps track of the total number of button presses in the state _total_, whose value is always updated when the buttons are pressed:
+
+```js
+const App = () => {
+  const [left, setLeft] = useState(0)
+  const [right, setRight] = useState(0)
+  const [allClicks, setAll] = useState([])
+  const [total, setTotal] = useState(0) // highlight-line
+
+  const handleLeftClick = () => {
+    setAll(allClicks.concat('L'))
+    setLeft(left + 1)
+    setTotal(left + right)  // highlight-line
+  }
+
+  const handleRightClick = () => {
+    setAll(allClicks.concat('R'))
+    setRight(right + 1)
+    setTotal(left + right)  // highlight-line
+  }
+
+  return (
+    <div>
+      {left}
+      <button onClick={handleLeftClick}>left</button>
+      <button onClick={handleRightClick}>right</button>
+      {right}
+      <p>{allClicks.join(' ')}</p>
+      <p>total {total}</p>  // highlight-line
+    </div>
+  )
+}
+```
+
+The solution does not quite work:
+
+![browser showing 2 left|right 1, RLL total 2](../../images/1/33.png)
+
+The total number of button presses is consistently one less than the actual amount of presses, for some reason.
+
+Let us add couple of console.log statements to the event handler:
+
+```js
+const App = () => {
+  // ...
+  const handleLeftClick = () => {
+    setAll(allClicks.concat('L'))
+    console.log('left before', left)  // highlight-line
+    setLeft(left + 1)
+    console.log('left after', left)  // highlight-line
+    setTotal(left + right) 
+  }
+
+  // ...
+}
+```
+
+The console reveals the problem
+
+![devtools console showing left before 4 and left after 4](../../images/1/32.png)
+
+Even though a new value was set for _left_ by calling _setLeft(left + 1)_, the old value persists despite the update. As a result, the attempt to count button presses produces a result that is too small:
+
+```js
+setTotal(left + right) 
+```
+
+The reason for this is that a state update in React happens [asynchronously](https://reactjs.org/docs/state-and-lifecycle.html#state-updates-may-be-asynchronous), i.e. not immediately but "at some point" before the component is rendered again.
+
+We can fix the app as follows:
+
+```js
+const App = () => {
+  // ...
+  const handleLeftClick = () => {
+    setAll(allClicks.concat('L'))
+    const updatedLeft = left + 1
+    setLeft(updatedLeft)
+    setTotal(updatedLeft + right) 
+  }
+
+  // ...
+}
+```
+
+So now the number of button presses is definitely based on the correct number of left button presses.
 
 ### Conditional rendering
 
@@ -403,15 +451,15 @@ const App = () => {
 
 ### Old React
 
-In this course we use the [state hook](https://reactjs.org/docs/hooks-state.html) to add state to our React components, which is part of the newer versions of React and is available from version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) onwards. Before the addition of hooks, there was no way to add state to functional components. Components that required state had to be defined as [class](https://reactjs.org/docs/react-component.html) components, using the JavaScript class syntax.
+In this course, we use the [state hook](https://reactjs.org/docs/hooks-state.html) to add state to our React components, which is part of the newer versions of React and is available from version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) onwards. Before the addition of hooks, there was no way to add state to functional components. Components that required state had to be defined as [class](https://reactjs.org/docs/react-component.html) components, using the JavaScript class syntax.
 
-In this course we have made the slightly radical decision to use hooks exclusively from day one, to ensure that we are learning the current and future style of React. Even though functional components are the future of React, it is still important to learn the class syntax, as there are billions of lines of legacy React code that you might end up maintaining someday. The same applies to documentation and examples of React that you may stumble across on the internet.
+In this course, we have made the slightly radical decision to use hooks exclusively from day one, to ensure that we are learning the current and future variations of React. Even though functional components are the future of React, it is still important to learn the class syntax, as there are billions of lines of legacy React code that you might end up maintaining someday. The same applies to documentation and examples of React that you may stumble across on the internet.
 
 We will learn more about React class components later on in the course.
 
 ### Debugging React applications
 
-A large part of a typical developer's time is spent on debugging and reading existing code. Every now and then we do get to write a line or two of new code, but a large part of our time is spent on trying to figure out why something is broken or how something works. Good practices and tools for debugging are extremely important for this reason.
+A large part of a typical developer's time is spent on debugging and reading existing code. Every now and then we do get to write a line or two of new code, but a large part of our time is spent trying to figure out why something is broken or how something works. Good practices and tools for debugging are extremely important for this reason.
 
 Lucky for us, React is an extremely developer-friendly library when it comes to debugging.
 
@@ -419,7 +467,7 @@ Before we move on, let us remind ourselves of one of the most important rules of
 
 <h4>The first rule of web development</h4>
 
->  **Keep the browser's developer console open at all times.**
+> **Keep the browser's developer console open at all times.**
 >
 > The <i>Console</i> tab in particular should always be open, unless there is a specific reason to view another tab.
 
@@ -427,15 +475,15 @@ Keep both your code and the web page open together **at the same time, all the t
 
 If and when your code fails to compile and your browser lights up like a Christmas tree:
 
-![](../../images/1/6x.png)
+![screenshot of code](../../images/1/6x.png)
 
 don't write more code but rather find and fix the problem **immediately**. There has yet to be a moment in the history of coding where code that fails to compile would miraculously start working after writing large amounts of additional code. I highly doubt that such an event will transpire during this course either.
-
-Old school, print-based debugging is always a good idea. If the component
+  
+Old-school, print-based debugging is always a good idea. If the component
 
 ```js
-const Button = ({ onClick, text }) => (
-  <button onClick={onClick}>
+const Button = ({ handleClick, text }) => (
+  <button onClick={handleClick}>
     {text}
   </button>
 )
@@ -446,9 +494,9 @@ is not working as intended, it's useful to start printing its variables out to t
 ```js
 const Button = (props) => { 
   console.log(props) // highlight-line
-  const { onClick, text } = props
+  const { handleClick, text } = props
   return (
-    <button onClick={onClick}>
+    <button onClick={handleClick}>
       {text}
     </button>
   )
@@ -457,35 +505,35 @@ const Button = (props) => {
 
 This will immediately reveal if, for instance, one of the attributes has been misspelled when using the component.
 
-**NB** When you use _console.log_ for debugging, don't combine _objects_ in a Java-like fashion by using the plus operator. Instead of writing:
+**NB** When you use _console.log_ for debugging, don't combine _objects_ in a Java-like fashion by using the plus operator:
 
 ```js
 console.log('props value is ' + props)
 ```
+  
+If you do that, you will end up with a rather uninformative log message:
 
-Separate the things you want to log to the console with a comma:
+```js
+props value is [object Object]
+```
+
+Instead, separate the things you want to log to the console with a comma:
 
 ```js
 console.log('props value is', props)
 ```
 
-If you use the Java-like way of concatenating a string with an object, you will end up with a rather uninformative log message:
+In this way, the separated items will all be available in the browser console for further inspection.
 
-```js
-props value is [Object object]
-```
-
-Whereas the items separated by a comma will all be available in the browser console for further inspection.
-
-Logging to the console is by no means the only way of debugging our applications. You can pause the execution of your application code in the Chrome developer console's <i>debugger</i>, by writing the command [debugger](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger) anywhere in your code.
+Logging output to the console is by no means the only way of debugging our applications. You can pause the execution of your application code in the Chrome developer console's <i>debugger</i>, by writing the command [debugger](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger) anywhere in your code.
 
 The execution will pause once it arrives at a point where the _debugger_ command gets executed:
 
-![](../../images/1/7a.png)
+![debugger paused in dev tools](../../images/1/7a.png)
 
 By going to the <i>Console</i> tab, it is easy to inspect the current state of variables:
 
-![](../../images/1/8a.png)
+![console inspection screenshot](../../images/1/8a.png)
 
 Once the cause of the bug is discovered you can remove the _debugger_ command and refresh the page.
 
@@ -493,12 +541,11 @@ The debugger also enables us to execute our code line by line with the controls 
 
 You can also access the debugger without the _debugger_ command by adding breakpoints in the <i>Sources</i> tab. Inspecting the values of the component's variables can be done in the _Scope_-section:
 
-![](../../images/1/9a.png)
+![breakpoint example in devtools](../../images/1/9a.png)
 
 It is highly recommended to add the [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension to Chrome. It adds a new _Components_ tab to the developer tools. The new developer tools tab can be used to inspect the different React elements in the application, along with their state and props:
 
-![](../../images/1/10ea.png)
-
+![screenshot react developer tools extension](../../images/1/10ea.png)
 
 The _App_ component's state is defined like so:
 
@@ -508,9 +555,9 @@ const [right, setRight] = useState(0)
 const [allClicks, setAll] = useState([])
 ```
 
-Dev tools shows the state of hooks in the order of their definition:
+Dev tools show the state of hooks in the order of their definition:
 
-![](../../images/1/11ea.png)
+![state of hooks in react dev tools](../../images/1/11ea.png)
 
 The first <i>State</i> contains the value of the <i>left</i> state, the next contains the value of the <i>right</i> state and the last contains the value of the <i>allClicks</i> state.
 
@@ -553,9 +600,10 @@ const App = () => {
 
 Event handling has proven to be a difficult topic in previous iterations of this course.
 
-For this reason we will revisit the topic.
+For this reason, we will revisit the topic.
 
 Let's assume that we're developing this simple application with the following component <i>App</i>:
+
 ```js
 const App = () => {
   const [value, setValue] = useState(10)
@@ -603,6 +651,7 @@ index.js:2178 Warning: Expected `onClick` listener to be a function, instead got
 ```
 
 This attempt would not work either:
+
 ```js
 <button onClick={value = 0}>button</button>
 ```
@@ -619,11 +668,12 @@ What about the following:
 
 The message gets printed to the console once when the component is rendered but nothing happens when we click the button. Why does this not work even when our event handler contains a function _console.log_?
 
-The issue here is that our event handler is defined as a <i>function call</i> which means that the event handler is actually assigned the returned value from the function, which in the case of _console.log_ is <i>undefined</i>.
+The issue here is that our event handler is defined as a <i>function call</i> which means that the event handler is assigned the returned value from the function, which in the case of _console.log_ is <i>undefined</i>.
 
-The _console.log_ function call gets executed when the component is rendered and for this reason it gets printed once to the console.
+The _console.log_ function call gets executed when the component is rendered and for this reason, it gets printed once to the console.
 
 The following attempt is flawed as well:
+
 ```js
 <button onClick={setValue(0)}>button</button>
 ```
@@ -696,9 +746,9 @@ const App = () => {
 }
 ```
 
-### Function that returns a function
+### A function that returns a function
 
-Another way to define an event handler is to use <i>function that returns a function</i>.
+Another way to define an event handler is to use a <i>function that returns a function</i>.
 
 You probably won't need to use functions that return functions in any of the exercises in this course.  If the topic seems particularly confusing, you may skip over this section for now and return to it later.
 
@@ -725,7 +775,7 @@ const App = () => {
 }
 ```
 
-The code functions correctly even though it looks complicated. 
+The code functions correctly even though it looks complicated.
 
 The event handler is now set to a function call:
 
@@ -733,7 +783,7 @@ The event handler is now set to a function call:
 <button onClick={hello()}>button</button>
 ```
 
-Earlier on we stated that an event handler may not be a call to a function, and that it has to be a function or a reference to a function. Why then does a function call work in this case?
+Earlier on we stated that an event handler may not be a call to a function and that it has to be a function or a reference to a function. Why then does a function call work in this case?
 
 When the component is rendered, the following function gets executed:
 
@@ -824,7 +874,7 @@ The function call _hello('react')_ that creates the event handler returns:
 }
 ```
 
-Both buttons get their own individualized event handlers.
+Both buttons get their individualized event handlers.
 
 Functions returning functions can be utilized in defining generic functionality that can be customized with parameters. The _hello_ function that creates the event handlers can be thought of as a factory that produces customized event handlers meant for greeting users.
 
@@ -923,7 +973,7 @@ The event handler is created by the function call _setToValue(value + 1)_ which 
 }
 ```
 
-Using functions that return functions is not required to achieve this functionality. Let's return the _setToValue_ function that is responsible for updating state, into a normal function:
+Using functions that return functions is not required to achieve this functionality. Let's return the _setToValue_ function which is responsible for updating state into a normal function:
 
 ```js
 const App = () => {
@@ -971,17 +1021,31 @@ const Button = (props) => (
 )
 ```
 
-The component gets the event handler function from the _handleClick_ prop, and the text of the button from the _text_ prop.
+The component gets the event handler function from the _handleClick_ prop, and the text of the button from the _text_ prop. Lets use the new component:
+
+```js
+const App = (props) => {
+  // ...
+  return (
+    <div>
+      {value}
+      <Button handleClick={setToValue(1000)} text="thousand" /> // highlight-line
+      <Button handleClick={setToValue(0)} text="reset" /> // highlight-line
+      <Button handleClick={setToValue(value + 1)} text="increment" /> // highlight-line
+    </div>
+  )
+}
+```
 
 Using the <i>Button</i> component is simple, although we have to make sure that we use the correct attribute names when passing props to the component.
 
-![](../../images/1/12e.png)
+![using correct attribute names code screenshot](../../images/1/12e.png)
 
 ### Do Not Define Components Within Components
 
-Let's start displaying the value of the application into its own <i>Display</i> component.
+Let's start displaying the value of the application in its <i>Display</i> component.
 
-We will change the application by defining a new component inside of the <i>App</i>-component.
+We will change the application by defining a new component inside of the <i>App</i> component.
 
 ```js
 // This is the right place to define a component
@@ -1013,7 +1077,7 @@ const App = () => {
 }
 ```
 
-The application still appears to work, but **don't implement components like this!** Never define components inside of other components. The method provides no benefits and leads to many unpleasant problems. The biggest problems are due to the fact that React treats a component defined inside of another component as a new component in every render. This makes it impossible for React to optimize the component.
+The application still appears to work, but **don't implement components like this!** Never define components inside of other components. The method provides no benefits and leads to many unpleasant problems. The biggest problems are because React treats a component defined inside of another component as a new component in every render. This makes it impossible for React to optimize the component.
 
 Let's instead move the <i>Display</i> component function to its correct place, which is outside of the <i>App</i> component function:
 
@@ -1047,22 +1111,33 @@ const App = () => {
 
 ### Useful Reading
 
-The internet is full of React-related material. However, we use the new style of React that still a large majority of the material found online is outdated for our purposes.
+The internet is full of React-related material. However, we use the new style of React for which a large majority of the material found online is outdated.
 
 You may find the following links useful:
 
 - The [official React documentation](https://reactjs.org/docs/hello-world.html) is worth checking out at some point, although most of it will become relevant only later on in the course. Also, everything related to class-based components is irrelevant to us;
-- Some courses on [Egghead.io](https://egghead.io) like [Start learning React](https://egghead.io/courses/start-learning-react) are of high quality, and recently updated [The Beginner's Guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) is also relatively good; both courses introduce concepts that will also be introduced later on in this course. **NB** The first one uses class components but the latter uses the new functional ones.
+- Some courses on [Egghead.io](https://egghead.io) like [Start learning React](https://egghead.io/courses/start-learning-react) are of high quality, and the recently updated [Beginner's Guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) is also relatively good; both courses introduce concepts that will also be introduced later on in this course. **NB** The first one uses class components but the latter uses the new functional ones.
+
+### Web programmers oath
+
+Programming is hard, that is why I will use all the possible means to make it easier
+
+- I will have my browser developer console open all the time
+- I progress with small steps
+- I will write lots of _console.log_ statements to make sure I understand how the code behaves and to help pinpointing problems
+- If my code does not work, I will not write more code. Instead I start deleting the code until it works or just return to a state when everything was still working
+- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](http://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord-telegram) how to ask for help
 
 </div>
 
 <div class="tasks">
 
-<h3>Exercises  1.6.-1.14.</h3>
+<h3>Exercises 1.6.-1.14.</h3>
 
-Submit your solutions to the exercises by first pushing your code to GitHub and then marking the completed exercises into the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Submit your solutions to the exercises by first pushing your code to GitHub and then marking the completed exercises into
+the "my submissions" tab of the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
-Remember, submit **all** the exercises of one part **in a single submission**. Once you have submitted your solutions for one part, **you cannot submit more exercises to that part any more**.
+Remember, submit **all** the exercises of one part **in a single submission**. Once you have submitted your solutions for one part, **you cannot submit more exercises to that part anymore**.
 
 <i>Some of the exercises work on the same application. In these cases, it is sufficient to submit just the final version of the application. If you wish, you can make a commit after every finished exercise, but it is not mandatory.</i>
 
@@ -1070,21 +1145,27 @@ Remember, submit **all** the exercises of one part **in a single submission**. O
 
 In some situations you may also have to run the command below from the root of the project:
 
-``` 
+```bash
 rm -rf node_modules/ && npm i
 ```
 
+If and <i>when</i> you encounter an error message
+
+> <i>Objects are not valid as a React child</i>
+
+keep in mind the things told [here](/en/part1/introduction_to_react#do-not-render-objects).
+
 <h4> 1.6: unicafe step1</h4>
 
-Like most companies, [Unicafe](https://www.unicafe.fi/#/9/4) collects feedback from its customers. Your task is to implement a web application for collecting customer feedback. There are only three options for feedback: <i>good</i>, <i>neutral</i>, and <i>bad</i>.
+Like most companies, the student restaurant of the University of Helsinki [Unicafe](https://www.unicafe.fi) collects feedback from its customers. Your task is to implement a web application for collecting customer feedback. There are only three options for feedback: <i>good</i>, <i>neutral</i>, and <i>bad</i>.
 
 The application must display the total number of collected feedback for each category. Your final application could look like this:
 
-![](../../images/1/13e.png)
+![screenshot of feedback options](../../images/1/13e.png)
 
 Note that your application needs to work only during a single browser session. Once you refresh the page, the collected feedback is allowed to disappear.
 
-It is advisable to use the same structure that is used in material and previous exercise. File <i>index.js</i> is as follows:
+It is advisable to use the same structure that is used in the material and previous exercise. File <i>index.js</i> is as follows:
 
 ```js
 import React from 'react'
@@ -1120,7 +1201,7 @@ export default App
 
 Expand your application so that it shows more statistics about the gathered feedback: the total number of collected feedback, the average score (good: 1, neutral: 0, bad: -1) and the percentage of positive feedback.
 
-![](../../images/1/14e.png)
+![average and percentage positive screenshot feedback](../../images/1/14e.png)
 
 <h4>1.8: unicafe step3</h4>
 
@@ -1154,7 +1235,7 @@ const App = () => {
 
 Change your application to display statistics only once feedback has been gathered.
 
-![](../../images/1/15e.png)
+![no feedback given text screenshot](../../images/1/15e.png)
 
 <h4>1.10: unicafe step5</h4>
 
@@ -1186,11 +1267,11 @@ The application's state should still be kept in the root <i>App</i> component.
 
 Display the statistics in an HTML [table](https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Basics), so that your application looks roughly like this:
 
-![](../../images/1/16e.png)
+![screenshot of statistics table](../../images/1/16e.png)
 
 Remember to keep your console open at all times. If you see this warning in your console:
 
-![](../../images/1/17a.png)
+![console warning](../../images/1/17a.png)
 
 Then perform the necessary actions to make the warning disappear. Try pasting the error message into a search engine if you get stuck.
 
@@ -1202,20 +1283,21 @@ Then perform the necessary actions to make the warning disappear. Try pasting th
 
 The world of software engineering is filled with [anecdotes](http://www.comp.nus.edu.sg/~damithch/pages/SE-quotes.htm) that distill timeless truths from our field into short one-liners.
 
-Expand the following application by adding a button that can be clicked to display a <i>random</i> anecdote from the field of software engineering: 
+Expand the following application by adding a button that can be clicked to display a <i>random</i> anecdote from the field of software engineering:
 
 ```js
 import { useState } from 'react'
 
 const App = () => {
   const anecdotes = [
-    'If it hurts, do it more often',
+    'If it hurts, do it more often.',
     'Adding manpower to a late software project makes it later!',
     'The first 90 percent of the code accounts for the first 10 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
     'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
     'Premature optimization is the root of all evil.',
     'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
-    'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients'
+    'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.',
+    'The only way to go fast, is to go well.'
   ]
    
   const [selected, setSelected] = useState(0)
@@ -1230,13 +1312,13 @@ const App = () => {
 export default App
 ```
 
-Content of the file <i>index.js</i> is same as in previous exercises. 
+Content of the file <i>index.js</i> is the same as in previous exercises.
 
-Find out how to generate random numbers in JavaScript, eg. via search engine or on [Mozilla Developer Network](https://developer.mozilla.org). Remember that you can test generating random numbers e.g. straight in the console of your browser.
+Find out how to generate random numbers in JavaScript, eg. via a search engine or on [Mozilla Developer Network](https://developer.mozilla.org). Remember that you can test generating random numbers e.g. straight in the console of your browser.
 
 Your finished application could look something like this:
 
-![](../../images/1/18a.png)
+![random anecdote with next button](../../images/1/18a.png)
 
 **WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your projects to be a separate repository**, so simply run the _rm -rf .git_ command at the root of your application.
 
@@ -1244,7 +1326,7 @@ Your finished application could look something like this:
 
 Expand your application so that you can vote for the displayed anecdote.
 
-![](../../images/1/19a.png)
+![anecdote app with votes button added](../../images/1/19a.png)
 
 **NB** store the votes of each anecdote into an array or object in the component's state. Remember that the correct way of updating state stored in complex data structures like objects and arrays is to make a copy of the state.
 
@@ -1268,16 +1350,16 @@ const copy = [...points]
 copy[2] += 1     
 ```
 
-Using an array might be the simpler choice in this case. Searching the Internet will provide you with lots of hints on how to [create a zero-filled array of a desired length](https://stackoverflow.com/questions/20222501/how-to-create-a-zero-filled-javascript-array-of-arbitrary-length/22209781).
+Using an array might be the simpler choice in this case. Searching the Internet will provide you with lots of hints on how to [create a zero-filled array of the desired length](https://stackoverflow.com/questions/20222501/how-to-create-a-zero-filled-javascript-array-of-arbitrary-length/22209781).
 
 <h4>1.14*: anecdotes step3</h4>
 
 Now implement the final version of the application that displays the anecdote with the largest number of votes:
 
-![](../../images/1/20a.png)
+![anecdote with largest number of votes](../../images/1/20a.png)
 
 If multiple anecdotes are tied for first place it is sufficient to just show one of them.
 
-This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the "my submissions" tab of the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>

@@ -41,6 +41,10 @@ Sin embargo, tenga en cuenta que la fecha límite para realizar el examen de cr�
 
 Las estadísticas del tiempo de finalización del ejercicio se pueden encontrar en el [sistema de presentación](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
+### Canal de Discord y Telegram para el curso
+
+Puede discutir sobre el curso y temas relacionados en nuestro grupo dedicado en Discord https://study.cs.helsinki.fi/discord/join/fullstack y en Telegram: https://t.me/fullstackcourse. Discord tiene canales fullstack_general y especifico para cada parte (nombres de canal con prefijo fullstack) para discusiones relacionadas con el curso. Tenga en cuenta que el canal chat del grupo no es adecuado para la discusión relacionada con el curso. ¡Únase a la conversación!
+
 ### Calificación
 
 El curso se puede tomar como un curso más corto con un valor de 3 créditos o como el curso completo con un valor de 5-9 créditos, según la cantidad de ejercicios presentados.
@@ -97,7 +101,7 @@ Los resultados del examen se pueden encontrar en la pestaña <i>Mis envíos</i> 
 
 Al enviar al menos 22/26 de los ejercicios para la parte 8 del curso, GraphQL, puede obtener un crédito adicional. La parte 8 puede realizarse en cualquier momento después de la parte 5, porque su contenido es independiente de las partes 6 y 7.
 
-Al enviar al menos 24/27 de los ejercicios de la parte 9 del curso, TypeScript, puede obtener un crédito adicional. Se recomienda que complete las partes 0-7 antes de tomar la parte 9.
+Al enviar al menos 24/29 de los ejercicios de la parte 9 del curso, TypeScript, puede obtener un crédito adicional. Se recomienda que complete las partes 0-7 antes de tomar la parte 9.
 
 Los ejercicios de las partes 8 y 9 no cuentan para la calificación del curso de 5-7 créditos.
 
@@ -136,7 +140,7 @@ Incluso si no se registra en Open University para el examen, aún puede descarga
 
 Si ya ha realizado el curso como MOOC o como curso universitario, ahora puede ampliar su curso.
 
-#### Ampliación desde Full stack open 2019 o 2020
+#### Ampliación en Full stack
 
 ¡Puede continuar donde lo dejó! Si desea volver a enviar una parte completa, comuníquese con el personal del curso a través de [correo electrónico](mailto:matti.luukkainen@helsinki.fi) o Telegram [@mluukkai](https://t.me/mluukkai), con su nombre de usuario de Github y las partes que le gustaría eliminar de sus envíos.
 
@@ -144,22 +148,15 @@ Si ya ha realizado el curso como MOOC o como curso universitario, ahora puede am
 
 Puede sustituir <i>partes</i> de este curso por partes que haya enviado anteriormente. Por ejemplo, si ha completado previamente el curso de tres créditos, puede sustituir las partes 0-3 de este curso con las partes que haya completado anteriormente. Solo puede sustituir partes en secuencia, por lo que no puede sustituir, por ejemplo, las partes 0 y 2 pero no completar la parte 1.
 
-Solo puede sustituir partes enteras. Por ejemplo, si ha enviado previamente el 50% de los ejercicios en una parte, no puede sustituirlos; deberá comenzar de nuevo en esa parte del curso.
+Solo puede sustituir partes enteras. Por ejemplo, si ha enviado previamente el 75 % de los ejercicios en una parte, no puede sustituirlos; deberá comenzar de nuevo en esa parte del curso.
 
 La "transferencia de crédito" de las partes completadas anteriormente ocurre en la pestaña <i>mis envíos</i> del [sistema de envío](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 Si ya aprobó el examen del curso (excluyendo el examen del curso de tres créditos) y ahora está ampliando su curso, no es necesario que vuelva a realizar el examen.
 
-### Cambios desde el año 2019
+### Continuando el curso en el año 2023
 
-- Solo hay cambios menores en las partes 0-4.
-- La parte 5d, <i>pruebas de extremo a extremo (end-to-end testing)</i> utilizando la biblioteca [Cypress.io](https://www.cypress.io), es material casi completamente nuevo. El uso de hooks personalizados se ha trasladado de la parte 5 a la parte 7 con contenido nuevo.
-- La Parte 6, que trata sobre Redux, se concentra en la nueva API Redux basada en hooks.
-- El material sobre react-router en la parte 7 también se ha actualizado para usar Hook API. Semantic UI React se ha reemplazado con la biblioteca MaterialUI debido a la falta de mantenimiento.
-- La Parte 8 de GraphQL tiene actualizaciones importantes, especialmente en Apollo Client, que finalmente tiene API estables basadas en Hooks.
-- La parte 9 de TypeScript, la parte 10 de React Native y la parte 11 de CI/CD es completamente nueva.
-
-El material del curso del año pasado se puede encontrar [aquí](https://fullstackopen-2019.github.io/).
+La versión 2022 del curso finaliza el 1 de marzo de 2023. Al finalizar habrá una descanso de dos semanas por mantenimiento. Durante el descanso, el material permanece en línea y también se pueden enviar ejercicios. Durante el descanso el contenido del curso puede cambiar un poco, no se ha planeado nada demasiado dramático hasta el momento. Todos los ejercicios enviados para la versión 2022 se pueden usar en la edición 2023, por lo que básicamente se puede continuar el curso sin preocuparse demasiado por las diferentes versiones.
 
 ### Envío de ejercicios
 

@@ -15,7 +15,7 @@ Continuemos nuestro trabajo en el backend del aplicación de notas que comenzamo
 
 Antes de pasar al tema de las pruebas, modificaremos la estructura de nuestro proyecto para cumplir con las mejores prácticas de Node.js. 
 
-Después de realizar los cambios en la estructura de directorios de nuestro proyecto, terminamos con la siguiente estructura: 
+Después de realizar los cambios que explicaremos a continuación, terminaremos con la siguiente estructura: 
 
 ```bash
 ├── index.js
@@ -184,13 +184,13 @@ Todas las rutas están ahora definidas para el objeto enrutador, de manera simil
 Vale la pena señalar que los caminos en los controladores de ruta se han acortado. En la versión anterior, teníamos:
 
 ```js
-app.delete('/api/notes/:id', (request, response) => {
+app.delete('/api/notes/:id', (request, response, next) => {
 ```
 
 Y en la versión actual, tenemos:
 
 ```js
-notesRouter.delete('/:id', (request, response) => {
+notesRouter.delete('/:id', (request, response, next) => {
 ```
 
 Entonces , ¿qué son exactamente estos objetos de enrutador? El manual Express proporciona la siguiente explicación:
@@ -554,14 +554,14 @@ Primero ejecutamos el código a probar, lo que significa que generamos un palín
 
 Como se esperaba, todas las pruebas pasan:
 
-![](../../images/4/1.png)
+![](../../images/4/1x.png)
 
 Jest espera por defecto que los nombres de los archivos de prueba contengan <i>.test</i>. En este curso, seguiremos la convención de nombrar nuestros archivos de prueba con la extensión <i>.test.js</i>.
 
 Jest tiene excelentes mensajes de error, rompamos la prueba para demostrar esto:
 
 ```js
-test('palindrom of react', () => {
+test('palindrome of react', () => {
   const result = palindrome('react')
 
   expect(result).toBe('tkaer')
@@ -570,7 +570,7 @@ test('palindrom of react', () => {
 
 Ejecutar las pruebas anteriores da como resultado el siguiente mensaje de error:
 
-![](../../images/4/2e.png)
+![](../../images/4/2x.png)
 
 Agreguemos algunas pruebas para la función _average_, en un nuevo archivo <i>tests/average.test.js</i>.
 
@@ -622,7 +622,7 @@ describe('average', () => {
 
 Se pueden usar bloques de descripción para agrupar pruebas en colecciones lógicas. La salida de prueba de Jest también usa el nombre del bloque describe:
 
-![](../../images/4/4.png)
+![](../../images/4/4x.png)
 
 Como veremos más adelante, los bloques <i>describe</i> son necesarios cuando queremos ejecutar algunas operaciones de instalación o desmontaje compartidas para un grupo de pruebas.
 

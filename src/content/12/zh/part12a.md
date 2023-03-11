@@ -7,50 +7,44 @@ lang: zh
 
 <div class="content">
 
-<!-- Software development includes the whole lifecycle from envisioning the software to programming and to releasing the software to the end-users and even maintaining it. This part will introduce containers, a modern tool utilized in the latter parts of the software lifecycle. -->
-软件开发包含了软件从编程到发布的整个生命周期，甚至还包含了运维阶段。这一章我们会引入容器的概念，这一流行的工具通常会在软件生命周期的后半段应用到。
+<!-- Software development includes the whole lifecycle from envisioning the software to programming and to releasing the software to the end-users and even maintaining it. This part will introduce containers, a modern tool utilized in the latter parts of the software lifecycle.-->
+ 软件开发包括整个生命周期，从设想软件到编程，再到将软件发布给最终用户，甚至是维护软件。这一部分将介绍容器，一种在软件生命周期的后半部分使用的现代工具。
 
-<!-- Containers encapsulate your application into a single package. This package will then include all of the dependencies with the application. As a result, each container can run isolated from the other containers. -->
-容器将你的应用包装在一个单独的包中。这个包会包含该应用所有的依赖，因此每一个容器是可以单独运行的。
+<!-- Containers encapsulate your application into a single package. This package will then include all of the dependencies with the application. As a result, each container can run isolated from the other containers.-->
+ 容器将你的应用封装成一个单一的包。然后，这个包将包括所有与应用有关的依赖性。因此，每个容器可以与其他容器隔离运行。
 
-<!-- Containers prevent the application inside from accessing files and resources of the device. Developers can give the contained applications permission to access files and specify available resources. More accurately, containers are OS-level virtualization. The easiest-to-compare technology is a virtual machine (VM). VMs are used to run multiple operating systems on a single physical machine. They have to run the whole operating system, whereas a container runs the software using the host operating system. The resulting difference between VMs and containers is that there is hardly any overhead when running containers; they only need to run a single process. -->
+<!-- Containers prevent the application inside from accessing files and resources of the device. Developers can give the contained applications permission to access files and specify available resources. More accurately, containers are OS-level virtualization. The easiest-to-compare technology is a virtual machine (VM). VMs are used to run multiple operating systems on a single physical machine. They have to run the whole operating system, whereas a container runs the software using the host operating system. The resulting difference between VMs and containers is that there is hardly any overhead when running containers; they only need to run a single process.-->
+ 容器防止里面的应用访问设备的文件和资源。开发人员可以给所包含的应用访问文件的权限，并指定可用的资源。更准确地说，容器是操作系统级的虚拟化。最容易比较的技术是虚拟机（VM）。虚拟机被用来在一台物理机器上运行多个操作系统。他们必须运行整个操作系统，而容器则是使用主机操作系统运行软件。因此，虚拟机和容器之间的区别是，运行容器时几乎没有任何开销；它们只需要运行一个进程。
 
-容器阻止了应用从内部访问设备的文件和资源。开发者可以赋予容器化的应用相关权限，来访问文件和特定的资源。更准确地来说，容器是操作系统层级上的虚拟化。最简单的比较是和虚拟机（VM），虚拟机是用来在耽搁物理机上跑多个操作系统。需要运行起整个操作系统，而容器使用的宿主机的操作系统。也就是说，容器和虚拟机的区别是，容器仅仅需要很少的一部分额外开销来运行；它们仅仅需要跑在一个单独的进程中。
+<!-- As containers are relatively lightweight, at least compared to virtual machines, they can be quick to scale. And as they isolate the software running inside, it enables the software to run identically almost anywhere. As such, they are the go-to option in any cloud environment or application with more than a handful of users.-->
+由于容器是相对轻量级的，至少与虚拟机相比，它们可以快速扩展。而且，由于它们隔离了内部运行的软件，它使软件几乎可以在任何地方以相同的方式运行。因此，它们是任何云环境或应用中超过少数用户的首选方案。
 
-<!-- As containers are relatively lightweight, at least compared to virtual machines, they can be quick to scale. And as they isolate the software running inside, it enables the software to run identically almost anywhere. As such, they are the go-to option in any cloud environment or application with more than a handful of users. -->
-容器是相对轻量的，至少与虚拟机比较而言，他们扩展起来更迅速。而且它能将软件在内部运行，使得软件能够运行在完全相同的环境中。这些特点使得它是云环境或者多用户下的首选方案。
+<!-- Cloud services like AWS, Google Cloud, and Microsoft Azure all support containers in multiple different forms. These include AWS Fargate and Google Cloud Run, both of which run containers as serverless - where the application container does not even need to be running if it is not used. You can also install container runtime on most machines and run containers there yourself - including your own machine.-->
+ 像AWS、谷歌云和微软Azure这样的云服务都支持多种不同形式的容器。这些服务包括AWS Fargate和Google Cloud Run，这两种服务都是以无服务器的方式运行容器--如果不使用应用容器，甚至不需要运行。你也可以在大多数机器上安装容器运行时间，自己在那里运行容器--包括你自己的机器。
 
-<!-- Cloud services like AWS, Google Cloud, and Microsoft Azure all support containers in multiple different forms. These include AWS Fargate and Google Cloud Run, both of which run containers as serverless - where the application container does not even need to be running if it is not used. You can also install container runtime on most machines and run containers there yourself - including your own machine.   -->
-类似AWS、Google 云、微软 Azure 的云服务都不同方式地支持容器。比如AWS Fargate 与Google Cloud Run 会将容器作为serverless服务-也就是应用容器在不需要的时候压根不需要运行。你也可以将容器运行环境安装在大多数的机器中，并自己运行容器——包括能装到你的个人机中。
+<!-- So containers are used in cloud environment and even during development. What are the benefits of using containers? Here are two common scenarios:-->
+所以容器在云环境中，甚至在开发过程中都可以使用。使用容器的好处是什么？这里有两个常见的场景。
 
-<!-- So containers are used in cloud environment and even during development. What are the benefits of using containers? Here are two common scenarios: -->
+<i>Scenario 1: You are developing a new application that needs to run on the same machine as a legacy application. Both require different versions of Node installed.</i>
 
-所以说容器通常运行在云环境甚至开发环境中。容器化的收益是什么呢？有两个典型的场景：
+<!-- You can probably use nvm, virtual machines, or dark magic to get them running at the same time. However, containers are an excellent solution as you can run both applications in their respective containers. They are isolated from each other and do not interfere.-->
+ 你可能可以使用nvm、虚拟机或黑魔法来让它们同时运行。然而，容器是一个很好的解决方案，因为你可以在各自的容器中运行两个应用。它们是相互隔离的，不会相互干扰。
 
-<!-- > Scenario 1: You are developing a new application that needs to run on the same machine as a legacy application. Both require different versions of Node installed. -->
+<i>Scenario 2: Your application runs on your machine. You need to move the application to a server.</i>
 
-<i> 场景一： 你正在开发一个新的应用，它需要和你的遗留应用跑在同一个机器中。而且依赖的是不同的Node 版本。</i>
+<!-- It is not uncommon that the application just does not run on the server despite it working just fine in your machine. It may be due to some missing dependency or other differences in the environments. Here containers are an excellent solution since you can run the application in the same execution environment both on your machine and on the server. It is not perfect: different hardware can be an issue, but you can limit the differences between environments.-->
+尽管应用在你的机器上运行得很好，但它就是不能在服务器上运行，这种情况并不罕见。这可能是由于某些依赖性的缺失或环境的其他差异。在这里，容器是一个很好的解决方案，因为你可以在你的机器和服务器上的同一执行环境中运行应用。这并不完美：不同的硬件可能是一个问题，但你可以限制环境之间的差异。
 
-<!-- You can probably use nvm, virtual machines, or dark magic to get them running at the same time. However, containers are an excellent solution as you can run both applications in their respective containers. They are isolated from each other and do not interfere. -->
-你可以使用nvm，虚拟机或者其他一些黑科技来让他们同时运行。但是，容器一个完美的解决方案，因为你可以让应用跑在自己的容器中。他们是互相独立且不会互相干扰。
-
-<!-- > Scenario 2: Your application runs on your machine. You need to move the application to a server. -->
-<i> 场景2: 你的应用跑在自己的机器中，你需要把它迁移到服务器上。</i>
-
-<!-- It is not uncommon that the application just does not run on the server despite it working just fine in your machine. It may be due to some missing dependency or other differences in the environments. Here containers are an excellent solution since you can run the application in the same execution environment both on your machine and on the server. It is not perfect: different hardware can be an issue, but you can limit the differences between environments. -->
-应用很常见的一种情况是，在你的机器上跑起来没问题，但迁移到服务器上运转不起来。可能是由于环境缺失了依赖。而容器是一个完美的解决方案，虽然你可以在自己的机器和服务器上创建一个相同的环境（容器环境），但这并不完美：硬件可能会成为问题，但你可以限制不同的环境。
-
-<!-- Sometimes you may hear about the <i>"Works in my container"</i> issue. The phrase describes a situation in which the application works fine in a container running on your machine but breaks when the container is started on a server. The phrase is a play on the infamous <i>"Works in my machine"</i> issue, which containers are often promised to solve. The situation also is most likely a usage error. -->
-很少能听到<i>“在我的容器上明明是好用的”</i>这个问题。这句话描述的是应用在你机器上运行是好使的，但是到了服务器上的容器运行失败了。这句话像极了<i>“在我的机器上明明是好用的”</i>这个问题，容器化通常能够解决。这种情况的发生通常是使用问题。
+<!-- Sometimes you may hear about the <i>"Works in my container"</i> issue. The phrase describes a situation in which the application works fine in a container running on your machine but breaks when the container is started on a server. The phrase is a play on the infamous <i>"Works on my machine"</i> issue, which containers are often promised to solve. The situation also is most likely a usage error.-->
+ 有时你可能会听到<i>"在我的容器中工作"</i>问题。这句话描述了这样一种情况：应用在你的机器上运行的容器中工作正常，但当容器在服务器上启动时就会中断。这句话是对臭名昭著的<i>"在我的机器上工作"</i>问题的一种戏谑，容器通常被承诺解决这个问题。这种情况也很可能是一个使用错误。
 
 ### About this part ###
-【关于本章】
 
-<!-- In this part, the focus of our attention will not be on the JavaScript code. Instead, we are interested in the configuration of the environment in which the software is executed. As a result, the exercises may not contain any coding, the applications are available to you through GitHub and your tasks will include configuring them. The exercises are to be submitted to <i>a single GitHub repository</i> which will include all of the source code and configuration you do during this part. -->
-本章中，我们的重点不会放在JavaScript代码上。相反，我们把重点放在对软件运行的环境配置中。因此，练习可能不包含任何编码，你可以通过Githab访问应用，你的任务就是配置它们。联系提交到一个<i>单独的Github 仓库</i>，该仓库将包含此源码和本章中的配置。
+<!-- In this part, the focus of our attention will not be on the JavaScript code. Instead, we are interested in the configuration of the environment in which the software is executed. As a result, the exercises may not contain any coding, the applications are available to you through GitHub and your tasks will include configuring them. The exercises are to be submitted to <i>a single GitHub repository</i> which will include all of the source code and configuration you do during this part.-->
+ 在这一部分，我们关注的重点将不是JavaScript代码。相反，我们对执行软件的环境配置感兴趣。因此，练习可能不包含任何编码，应用可以通过GitHub提供给你，你的任务将包括配置它们。练习将被提交到<i>一个GitHub仓库</i>，其中将包括你在这部分所做的所有源代码和配置。
 
 <!-- You will need basic knowledge of Node, Express, and React. Only the core parts, 1 through 5, are required to be completed before this part.-->
-你需要Node、Express 和React的 基础知识。只有核心的章节，也就是1到5章是本章节的前置章节。
+ 你将需要Node、Express和React的基本知识。只有核心部分，即1到5，需要在这部分之前完成。
 
 </div>
 
@@ -58,84 +52,72 @@ lang: zh
 
 ### Exercise 12.1
 ### <i>Warning</i>
-注意
 
 <!-- Since we are stepping right outside of our comfort zone as JavaScript developers, this part may require you to take a detour and familiarize yourself with shell / command line / command prompt / terminal before getting started.-->
-由于我们正在慢慢走出JavaScript 开发者的舒适区，本章节开始前需要你了解一些 shell/命令行/命令语句/终端 等知识。
+ 由于我们正走出我们作为JavaScript开发者的舒适区，这部分可能需要你绕道而行，在开始之前熟悉shell/命令行/命令提示符/终端。
 
 <!-- If you have only ever used a graphical user interface and never touched e.g. Linux or terminal on Mac, or if you get stuck in the first exercises we recommend doing the Part 1 of "Computing tools for CS studies" first: <https://tkt-lapio.github.io/en/>. Skip the section for "SSH connection" and Exercise 11. Otherwise, it includes everything you are going to need to get started here!-->
-如果你一直是一个图形界面的使用者，并没有接触过任何类似Linux 或者Mac 里终端的概念，或者在第一个练习就卡壳了，我建议你首先学一下 “CS学习中的计算工具” <https://tkt-lapio.github.io/en/>这门课，可以跳过11章的“SSH 连接”这一章。这里面包含了所有你会遇到的所有内容。
-
+ 如果你只使用过图形用户界面，从未接触过例如Linux或Mac上的终端，或者如果你在第一个练习中被卡住了，我们建议先做 "CS学习的计算工具 "的第一章节。<https://tkt-lapio.github.io/en/>。跳过 "SSH连接 "部分和练习11。否则，它包括了你在这里开始学习所需要的一切!
 
 #### Exercise 12.1: Using a computer (without graphical user interface)
-联系12：使用计算机（不使用图形化用户界面）
 
-<!-- Step 1: Read the text below the Warning header. -->
-步骤一：阅读警告头下面的文字。
+<!-- Step 1: Read the text below the Warning header.-->
+ 第一步：阅读警告标题下的文字。
 
-<!-- Step 2: Download this [repository](https://github.com/fullstack-hy2020/part12-containers-applications) and make it your submission repository for this part. -->
-步骤二：下载这个[repository](https://github.com/fullstack-hy2020/part12-containers-applications)，将文件提交到你的仓库中。
+<!-- Step 2: Download this [repository](https://github.com/fullstack-hy2020/part12-containers-applications) and make it your submission repository for this part.-->
+ 第2步：下载这个[仓库](https://github.com/fullstack-hy2020/part12-containers-applications)，并把它作为你在这部分的提交仓库。
 
-<!-- Step 3: Run <i>curl http://helsinki.fi</i> and save the output into a file. Save that file into your repository as file <i>script-answers/exercise12_1.txt</i>. The directory <i>script-answers</i> was created in the previous step. -->
-
-步骤三： 运行 <i>curl http://helsinki.fi</i> 并将输出存储成文件。将文件保存到你的仓库中，文件名为<i>script-answers/exercise12_1.txt</i>。文件夹 <i>script-answers</i>  在之前的步骤会创建好。
+<!-- Step 3: Run <i>curl http://helsinki.fi</i> and save the output into a file. Save that file into your repository as file <i>script-answers/exercise12_1.txt</i>. The directory <i>script-answers</i> was created in the previous step.-->
+ 第三步：运行<i>curl http://helsinki.fi</i>，并将输出保存到一个文件中。将该文件保存到你的仓库中，作为文件<i>script-answers/exercise12_1.txt</i>。目录<i>script-answers</i>已在上一步中创建。
 
 </div>
 <div class="content">
 
 ### Submitting exercises and earning credits ###
-提交联系并获得学分
 
-<!-- Submit the exercises via the [submissions system](https://studies.cs.helsinki.fi/stats/) just like in the previous parts. Exercises in this part are submitted <i>to its [own course instance](https://studies.cs.helsinki.fi/stats/courses/fs-containers)</i>. -->
+<!-- Submit the exercises via the [submissions system](https://studies.cs.helsinki.fi/stats/) just like in the previous parts. Exercises in this part are submitted <i>to its [own course instance](https://studies.cs.helsinki.fi/stats/courses/fs-containers)</i>.-->
+ 通过[提交系统](https://studies.cs.helsinki.fi/stats/)提交练习，就像在前面的部分一样。这一部分的练习被提交<i>到其[自己的课程实例](https://studies.cs.helsinki.fi/stats/courses/fs-containers)</i>。
 
-练习通过 [submissions system](https://studies.cs.helsinki.fi/stats/) 提交，与之前章节是一样的。此章节的联系提交到它 [自己的课程实例中](https://studies.cs.helsinki.fi/stats/courses/fs-containers)。
+<!-- Completing this part on containers will get you 1 credit. Note that you need to do all the exercises for earning the credit or the certificate.-->
+ 在集装箱上完成这部分内容将得到1个学分。注意，你需要做所有的练习来获得学分或证书。
 
-<!-- Completing this part on containers will get you 1 credit. Note that you need to do all the exercises for earning the credit or the certificate. -->
-完成本章节关于容器的练习你会获得一个学分。注意你需要做完所有的练习来获得积分或认证证书。
-
-<!-- Once you have completed the exercises and want to get the credits, let us know through the exercise submission system that you have completed the course: -->
-你完成联系并想要获得学分，请通过联系提交系统告诉我们你已经完成了课程：
+<!-- Once you have completed the exercises and want to get the credits, let us know through the exercise submission system that you have completed the course:-->
+一旦你完成了练习并想获得学分，请通过练习提交系统让我们知道你已经完成了该课程。
 
 ![Submitting exercises for credits](../../images/10/23.png)
 
-<!-- You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the language of the certificate. -->
-你可以通过单击小旗图标来下载完成此章节的认证。小旗图标代表了认证通过。
+<!-- You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the language of the certificate.-->
+ 你可以通过点击其中一个旗帜图标下载完成这部分的证书。旗帜图标与证书的语言相对应。
 
 ### Tools of the trade
-商业版本的工具
 
-<!-- The basic tools you are going to need vary between operating systems: -->
-不同操作系统使用的基础工具不同：
+<!-- The basic tools you are going to need vary between operating systems:-->
+ 你所需要的基本工具在不同的操作系统中有所不同。
 
-<!-- * [WSL 2 terminal](https://docs.microsoft.com/en-us/windows/wsl/install-win10) on Windows
-* Terminal on Mac
-* Command Line on a Linux -->
-
-* Windows 的 [WSL 2 terminal](https://docs.microsoft.com/en-us/windows/wsl/install-win10)  
-* Mac 的 Terminal
-* Linux 的 命令行Command Line
-
+<!-- * [WSL 2 terminal](https://docs.microsoft.com/en-us/windows/wsl/install-win10) on Windows-->
+ * Windows上的[WSL 2终端](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
+<!-- * Terminal on Mac-->
+ * Mac上的终端
+<!-- * Command Line on a Linux-->
+ * Linux上的命令行
 
 ### Installing everything required for this part ###
-安装本章节所需要的所有内容
 
-<!-- We will begin by installing the required software. The installation step will be one of the possible obstacles. As we are dealing with OS-level virtualization, the tools will require superuser access on the computer. They will have access to your operating systems kernel. -->
+<!-- We will begin by installing the required software. The installation step will be one of the possible obstacles. As we are dealing with OS-level virtualization, the tools will require superuser access on the computer. They will have access to your operating systems kernel.-->
+ 我们将从安装所需软件开始。安装步骤将是可行的障碍之一。由于我们正在处理操作系统级的虚拟化，这些工具将需要计算机上的超级用户权限。他们将有机会进入你的操作系统内核。
 
-我们会从安装必备的软件开始。软件的安装步骤就是一个可能的阻碍。由于我们是在处理操作系统级别的虚拟化。因此工具需要超级管理员的权限。你需要能够访问操作系统的内核。
+<!-- The material is built around [Docker](https://www.docker.com/), a set of products that we will use for containerization and the management of containers. Unfortunately, if you can not install Docker you probably can not complete this part.-->
+ 该材料是围绕[Docker](https://www.docker.com/)建立的，这是一套我们将用于容器化和容器管理的产品。不幸的是，如果你不能安装Docker，你可能无法完成这一部分。
 
-<!-- The material is built around [Docker](https://www.docker.com/), a set of products that we will use for containerization and the management of containers. Unfortunately, if you can not install Docker you probably can not complete this part. -->
-
-该教材是围绕 [Docker](https://www.docker.com/) 构建，Docker 是一个我们用于容器化和容器管理的产品阵列。不幸的是，如果你不安装Docker 你可能完成不了本章节。
-
-<!-- As the install instructions depend on your operating system, you will have to find the correct install instructions from the link below. Note that they may have multiple different options for your operating system.  -->
-
-由于安装步骤取决于你的操作系统，你要在如下链接中找到正确的安装步骤。注意对你的操作系统来说，可能有多种不同的选项。
+<!-- As the install instructions depend on your operating system, you will have to find the correct install instructions from the link below. Note that they may have multiple different options for your operating system.-->
+ 由于安装说明取决于你的操作系统，你将不得不从下面的链接中找到正确的安装说明。注意，他们可能对你的操作系统有多个不同的选项。
 
 
-- [Get Docker](https://docs.docker.com/get-docker/)
+<!-- - [Get Docker](https://docs.docker.com/get-docker/)-->
+ - [获取Docker](https://docs.docker.com/get-docker/)
 
 <!-- Now that that headache is hopefully over, let's make sure that our versions match. Yours may have a bit higher numbers than here:-->
-既然头疼的问题希望已经解决了，让我们确保我们的版本匹配。你的版本号可能比这里高一点：
+ 现在这个令人头疼的问题有望得到解决，让我们确保我们的版本相符。你的版本可能比这里的数字高一点。
 
 ```bash
 $ docker -v
@@ -143,65 +125,56 @@ Docker version 20.10.5, build 55c4c88
 ```
 
 ### Containers and images
-容器和镜像
 
-<!-- There are two core concepts when starting with containers and they are easy to confuse with one another: -->
+<!-- There are two core concepts when starting with containers and they are easy to confuse with one another:-->
+ 在开始使用容器时有两个核心概念，它们很容易相互混淆。
 
-开始使用容器时有两个核心概念，它们很容易互相混淆：
+<!-- A **container** is a runtime instance of an **image**.-->
+ 一个**容器**是一个**图像**的运行时实例。
 
-<!-- A **container** is a runtime instance of an **image**. -->
+<!-- Both of the following statements are true:-->
+ 以下两种说法都是真的。
 
-**Container容器** 是 **image镜像** 的运行时实例。
+<!-- - Images include all of the code, dependencies and instructions on how to run the application-->
+ - 图像包括所有的代码、依赖性和关于如何运行应用的指示
+<!-- - Containers package software into standardized units-->
+ - 容器将软件打包成标准化的单元
 
-<!-- Both of the following statements are true: -->
+<!-- It is no wonder they are easily mixed up.-->
+ 难怪它们很容易被混淆。
 
-以下两句话都是正确的：
+<!-- To help with the confusion, almost everyone uses the word container to describe both. But you can never actually build a container or download one since containers only exist during runtime. Images, on the other hand, are **immutable** files. As a result of the immutability, you can not edit an image after you have created one. However, you can use existing images to create <i>a new image</i> by adding new layers on top of the existing ones.-->
+ 为了帮助混淆，几乎每个人都用容器这个词来描述两者。但你永远无法真正建立一个容器或下载一个，因为容器只在运行时存在。另一方面，图像是**不可变的**文件。由于它的不可更改性，在你创建了一个镜像之后，你不能再编辑它。然而，你可以使用现有的图像来创建<i>一个新的图像</i>，在现有的图像之上添加新的层。
 
-<!-- - Images include all of the code, dependencies and instructions on how to run the application 
-- Containers package software into standardized units  -->
+<!-- Cooking metaphor:-->
+ 烹饪比喻。
 
-- 镜像包含了所有的代码，依赖以及如何运行应用的指令
-- 容器将软件打包到标准单元中
+<!-- * Image is pre-cooked, frozen treat.-->
+ * 图像是预先煮好的、冷冻的食物。
+<!-- * Container is the delicious treat.-->
+ *容器是美味的食物。
 
-<!-- It is no wonder they are easily mixed up. -->
-难怪它们这么容易混淆。
+<!-- [Docker](https://www.docker.com/) is the most popular containerization technology and pioneered the standards most containerization technologies use today. In practice, Docker is a set of products that help us to manage images and containers. This set of products will enable us to leverage all of the benefits of containers. For example, the docker engine will take care of turning the immutable files called images into containers.-->
+ [Docker](https://www.docker.com/)是最流行的容器化技术，并开创了今天大多数容器化技术的标准。在实践中，Docker是一套帮助我们管理镜像和容器的产品。这套产品将使我们能够利用容器的所有好处。例如，docker引擎将负责把称为镜像的不可变文件变成容器。
 
-<!-- To help with the confusion, almost everyone uses the word container to describe both. But you can never actually build a container or download one since containers only exist during runtime. Images, on the other hand, are **immutable** files. As a result of the immutability, you can not edit an image after you have created one. However, you can use existing images to create <i>a new image</i> by adding new layers on top of the existing ones. -->
+<!-- For managing the docker containers, there is also a tool called [Docker Compose](https://docs.docker.com/compose/) that allows one to **orchestrate** (control) multiple containers at the same time. In this part we shall use Docker Compose to set up a complex local development environment. In the final version of the development environment that we set up, even installing the Node to our machine is not a requirement anymore.-->
+对于管理docker容器，还有一个叫做[Docker Compose](https://docs.docker.com/compose/)的工具，它允许人们在同一时间**orchestrate**（控制）多个容器。在这一部分，我们将使用Docker Compose来建立一个复杂的本地开发环境。在我们建立的最终版本的开发环境中，甚至将Node安装到我们的机器上都不再是一个要求了。
 
-为了消除这个歧义，大多数人使用容器这个词来同时描述镜像和容器。但是你不可能下载或构建一个容器，因为容器只存在于运行时。镜像，从另一方面来说，是**不变的** 文件。不变的结果就是你可以在创建后修改它们。但是你可以使用已经存在的镜像来创建一个<i>新的镜像</i>，只需要在已有的镜像上增加新的层即可
+<!-- There are several concepts we need to go over. But we will skip those for now and learn about Docker first!-->
+ 有几个概念我们需要去了解。但我们现在先跳过这些，先了解一下Docker!
 
-<!-- Cooking metaphor: -->
-烹饪比喻：
+<!-- Let us start with the command <i>docker container run</i> that is used to run images within a container. The command structure is the following: _container run <i>IMAGE-NAME</i>_ that we will tell Docker to create a container from an image. A particularly nice feature of the command is that it can run a container even if the image to run is not downloaded on our device yet.-->
+ 让我们从命令<i>docker container run</i>开始，该命令用于在容器中运行镜像。该命令的结构如下。_container run <i>IMAGE-NAME</i>_，我们将告诉Docker从一个镜像中创建一个容器。该命令的一个特别好的特点是，即使要运行的镜像还没有下载到我们的设备上，它也可以运行一个容器。
 
-<!-- * Image is pre-cooked, frozen treat. -->
-<!-- * Container is the delicious treat. -->
-* 镜像是预先煮熟的冷冻食品。
-* 容器是美味佳肴。
-
-<!-- [Docker](https://www.docker.com/) is the most popular containerization technology and pioneered the standards most containerization technologies use today. In practice, Docker is a set of products that help us to manage images and containers. This set of products will enable us to leverage all of the benefits of containers. For example, the docker engine will take care of turning the immutable files called images into containers. -->
-[Docker](https://www.docker.com/) 是最流行的容器化技术，开创了现在最常用的标准。实际上，Docker是一系列产品来帮助我们管理容器和镜像，这一系列产品将使我们能够利用容器的所有好处。 例如，docker engine 会将不可变文件，也就是镜像转换为容器。
-
-<!-- For managing the docker containers, there is also a tool called [Docker Compose](https://docs.docker.com/compose/) that allows one to **orchestrate** (control) multiple containers at the same time. In this part we shall use Docker Compose to set up a complex local development environment. In the final version of the development environment that we set up, even installing the Node to our machine is not a requirement anymore. -->
-为了管理 docker 容器，还有 [Docker Compose](https://docs.docker.com/compose/)。它用于同时**编排**（控制）多个容器。在这一章中，我们将使用 Docker Compose 快速搭建复杂的本地开发环境。在我们构建的开发环境的最终版本中，甚至将Node 安装到我们机器上的这个需求也消除了。
-
-<!-- There are several concepts we need to go over. But we will skip those for now and learn about Docker first!  -->
-有许多概念我们需要复习，但我们现在将跳过这些并首先了解 Docker！
-
-<!-- Let us start with the command <i>docker container run</i> that is used to run images within a container. The command structure is the following: _container run <i>IMAGE-NAME</i>_ that we will tell Docker to create a container from an image. A particularily nice feature of the command is that it can run a container even if the image to run is not downloaded on our device yet. -->
-让我们从命令  <i>docker container run</i> 开始讲起，它是用来将镜像运行成一个容器。命令结构类似：_container run <i>IMAGE-NAME</i>_  ，我们会告诉Docker 来从一个镜像中创建一个容器。一个额外的好的特性是即使这个镜像还没有下载到我们的设备上，也能运行这个容器。
-
-
-我最喜欢的功能之一是能够处理正在运行的容器，即使它们尚未下载到我们的设备上。
-
-<!-- The command structure is the following: _container run <i>IMAGE-NAME</i>_. So we will tell Docker to create a container from an image. -->
-命令结构如下：_container run <i>IMAGE-NAME</i>_。这样我们会告诉 docker 从一个镜像创建一个容器。
+<!-- Let us run the command-->
+ 让我们运行这个命令
 
 ```bash
 § docker container run hello-world
 ```
 
-<!-- There will be a lot of output, but let's split it into multiple sections, which we can decipher together. The lines are numbered by me so that it is easier to follow the explanation. Your output will not have the numbers. -->
-会有很多输出，让我们将它分成多个部分，一起破译它。这些行由我编号，以便更容易理解解释，您的输出将没有这些编号：
+<!-- There will be a lot of output, but let's split it into multiple sections, which we can decipher together. The lines are numbered by me so that it is easier to follow the explanation. Your output will not have the numbers.-->
+ 会有很多输出，但让我们把它分成多个部分，我们可以一起解读。这些行是由我来编号的，这样可以更容易地跟随解释。你的输出将不会有这些数字。
 
 ```bash
 1. Unable to find image 'hello-world:latest' locally
@@ -212,32 +185,30 @@ Docker version 20.10.5, build 55c4c88
 ```
 
 <!-- Because the image <i>hello-world</i> was not found on our machine, the command first downloaded it from a free registry called [Docker Hub](https://hub.docker.com/). You can see the Docker Hub page of the image with your browser here: [https://hub.docker.com/_/hello-world](https://hub.docker.com/_/hello-world)-->
+ 因为在我们的机器上没有找到镜像<i>hello-world</i>，所以该命令首先从一个名为[Docker Hub](https://hub.docker.com/)的免费注册中心下载它。你可以用你的浏览器在这里看到该镜像的Docker Hub页面。[https://hub.docker.com/_/hello-world](https://hub.docker.com/_/hello-world)
 
-由于 这个镜像没有在我们的机器中找到，这个命令会首先从一个免费的仓库，也就是 [Docker Hub](https://hub.docker.com/). 中下载下来。您可以在此处使用浏览器查看镜像的 docker hub 页面：[https://hub.docker.com/_/hello-world](https://hub.docker.com/_/hello-world) 
+<!-- The first part of the message states that we did not have the image "hello-world:latest" yet. This reveals a bit of detail about images themselves; image names consist of multiple parts, kind of like an URL. An image name is in the following format:-->
+ 消息的第一章节指出，我们还没有 "hello-world:最新 "的镜像。这揭示了关于图像本身的一些细节；图像名称由多个部分组成，有点像URL。一个图像名称的格式如下。
 
-<!-- The first part of the message states that we did not have the image "hello-world:latest" yet. This reveals a bit of detail about images themselves; image names consist of multiple parts, kind of like an URL. An image name is in the following format:   -->
-消息的第一部分指出我们还没有“hello-world:latest”这个镜像。这揭示了镜像本身的一些细节；镜像名称由多个部分组成，有点像 URL。镜像名称采用以下格式：
+<!-- - _registry/organisation/image:tag_-->
+ - _注册处/组织/图像:标签_
 
-- _registry/organisation/image:tag_
+<!-- In this case the 3 missing fields defaulted to:-->
+ 在这种情况下，3个缺失的字段默认为。
+<!-- - _index.docker.io/library/hello-world:latest_-->
+ - _index.docker.io/library/hello-world:update_
 
-<!-- In this case the 3 missing fields defaulted to:  -->
-<!-- - _index.docker.io/library/hello-world:latest_ -->
-在这种情况下，3 个缺失的字段默认为：
-- _index.docker.io/library/hello-world:latest_
+<!-- The second row shows the organisation name, "library" where it will get the image. In the Docker Hub url, the "library" is shortened to _.-->
+ 第二行显示了组织名称，"library"，它将在那里获得图像。在Docker Hub的网址中，"library "被缩短为_。
 
-
-<!-- The second row shows the organisation name, "library" where it will get the image. In the Docker Hub url, the "library" is shortened to _. -->
-
-第二行显示组织名称，“库”，它将在其中获取镜像。在 Docker Hub url 中，“库”缩短为 _。
-
-<!-- The 3rd and 5th rows only show the status. But the 4th row may be interesting: each image has a unique digest based on the <i>layers</i> from which the image is built. In practice, each step or command that was used in building the image creates a unique layer. The digest is used by Docker to identify that an image is the same. This is done when you try to pull the same image again. -->
-第 3 行和第 5 行仅显示状态。但是第 4 行可能很有趣：每个镜像都有一个基于<i>层</i>的唯一数字签名，通过这个层来构建的镜像。实践中，每一步对镜像的构建或命令都会在镜像上构建唯一的层。如果您再次尝试拉取镜像，docker 会使用签名来识别该镜像是否相同。
+<!-- The 3rd and 5th rows only show the status. But the 4th row may be interesting: each image has a unique digest based on the <i>layers</i> from which the image is built. In practice, each step or command that was used in building the image creates a unique layer. The digest is used by Docker to identify that an image is the same. This is done when you try to pull the same image again.-->
+ 第三和第五行只显示状态。但第4行可能很有趣：每个镜像都有一个基于构建该镜像的<i>层</i>的唯一摘要。在实践中，在构建镜像时使用的每个步骤或命令都会创建一个独特的层。Docker使用该摘要来识别一个镜像是相同的。当你试图再次拉取相同的镜像时，就会这样做。
 
 <!-- So the result of using the command was a pull and then output information about the **image**. After that, the status told us that a new version of hello-world:latest was indeed downloaded. You can try pulling the image with _docker image pull hello-world_ and see what happens.-->
-于是使用该命令的结果是，它会做出一些拉取动作，并打印出 **镜像** 的信息。然后，给出了下载了新版本 hello-world:latest 的状态。你可以使用拉取镜像的命令_docker image pull hello-world_。
+ 所以，使用该命令的结果是拉取，然后输出关于**图像的信息。之后，状态告诉我们，确实下载了一个新版本的hello-world:fresh。你可以尝试用_docker image pull hello-world_来拉取镜像，看看会发生什么。
 
-<!-- The following output was from the container itself. It also explains what happened when we ran _docker container run hello-world_. -->
-以下输出来自容器本身。它同时还解释了当我们运行 _docker container run hello-world_ 时发生了什么。
+<!-- The following output was from the container itself. It also explains what happened when we ran _docker container run hello-world_.-->
+ 下面的输出是来自容器本身。它也解释了当我们运行_docker container run hello-world_时发生了什么。
 
 ```bash
 Hello from Docker!
@@ -262,71 +233,57 @@ For more examples and ideas, visit:
  https://docs.docker.com/get-started/
 ```
 
-<!-- The output contains a few new things for us to learn. <i>Docker daemon</i> is a background service that makes sure the containers are running, and we use the <i>Docker client</i> to interact with the daemon. We now have interacted with the first image and created a container from the image. During the execution of that container, we received the output. -->
-输出包含了一些我们需要学习的新内容。<i>Docker 守护进程</i>是一个确保容器正常运行的后台服务，我们使用<i>Docker 客户端</i>与守护进程进行交互。我们现在已经和第一个镜像进行了通信，并通过镜像产生了一个容器。通过运行那个容器，我们获得了输出。
+<!-- The output contains a few new things for us to learn. <i>Docker daemon</i> is a background service that makes sure the containers are running, and we use the <i>Docker client</i> to interact with the daemon. We now have interacted with the first image and created a container from the image. During the execution of that container, we received the output.-->
+ 这个输出包含了一些新的东西供我们学习。<i>Docker daemon</i>是一个后台服务，它确保了容器的运行，我们使用<i>Docker client</i>来与daemon交互。现在我们已经与第一个镜像进行了交互，并从该镜像中创建了一个容器。在该容器的执行过程中，我们收到了这样的输出。
 
 </div>
 
 <div class="tasks">
 
 ### Exercise 12.2
-练习12.2
 
+<!-- Some of these exercises do not require you to write any code or configurations to a file.-->
+ 这些练习中有一些不需要你写任何代码或配置到文件中。
+<!-- In these exercises you should use [script](https://man7.org/linux/man-pages/man1/script.1.html) command to record the commands you have used; try it yourself with _script_ to start recording, _echo "hello"_ to generate some output, and _exit_ to stop recording. It saves your actions into a file names "typescript".-->
+ 在这些练习中，你应该使用[script](https://man7.org/linux/man-pages/man1/script.1.html)命令来记录你所使用的命令；自己尝试一下，用_script_开始记录，_echo "hello"_产生一些输出，_exit_停止记录。它将你的操作保存在一个名为 "typescript "的文件中。
 
-<!-- Some of these exercises do not require you to write any code or configurations to a file. -->
-一些练习并不需要你写任何代码或者配置文件。
-
-<!-- In these exercises you should use [script](https://man7.org/linux/man-pages/man1/script.1.html) command to record the commands you have used; try it yourself with _script_ to start recording, _echo "hello"_ to generate some output, and _exit_ to stop recording. It saves your actions into a file names "typescript". -->
-
-在这些练习中，你会使用 [script](https://man7.org/linux/man-pages/man1/script.1.html) 来记录你使用的命令，你可以使用_script_ 来记录 ，_echo "hello"_  来生成一些输出，_exit_  来停止记录。他会将你的行为保存到一个文件，名叫“typescript”。
-
-
-<!-- If _script_ does not work, you can just copy-paste all commands you used into a text file. -->
-如果 _script_ 不起作用，你可以使用 复制粘贴所有的命令到一个文本文件中。
+<!-- If _script_ does not work, you can just copy-paste all commands you used into a text file.-->
+ 如果_script_不起作用，你可以把你使用的所有命令复制粘贴到一个文本文件中。
 
 #### Exercise 12.2: Running your second container
-练习12.2： 运行你的第二个容器
 
-<!-- > Use _script_ to record what you do, save the file as script-answers/exercise12_2.txt -->
-> 使用 _script_ 来记录你的行为，将生成的文件保存到你答案的仓库中，保存为script-answers/exercise12_2.txt 。
+<!-- > Use _script_ to record what you do, save the file as script-answers/exercise12_2.txt-->
+ > 使用_script_来记录你所做的事情，将文件保存为script-answers/exercise12_2.txt。
 
+<!-- The hello-world output gave us an ambitious task to do. Do the following-->
+ hello-world的输出给了我们一个雄心勃勃的任务要做。做到以下几点
 
-<!-- The hello-world output gave us an ambitious task to do. Do the following -->
-hello-word 的输出为我们衍生出了雄心勃勃的任务。执行以下操作：
+<!-- Step 1. Run an Ubuntu container with the command given by hello-world-->
+ 步骤1.用hello-world给出的命令运行一个Ubuntu容器
 
-<!-- Step 1. Run an Ubuntu container with the command given by hello-world
+<!-- The step 1 will connect you straight into the container with bash. You will have access to all of the files and tools inside of the container. The following steps are run within the container:-->
+ 第1步将直接用bash连接到容器中。你将可以访问容器内的所有文件和工具。下面的步骤是在容器内运行的。
 
-The step 1 will connect you straight into the container with bash. You will have access to all of the files and tools inside of the container. The following steps are run within the container:
+<!-- Step 2. Create directory <i>/usr/src/app</i>-->
+ 第2步。创建目录<i>/usr/src/app</i>。
 
-Step 2. Create directory <i>/usr/src/app</i>
+<!-- Step 3. Create a file <i>/usr/src/app/index.js</i>-->
+ 第3步。创建一个文件<i>/usr/src/app/index.js</i>。
 
-Step 3. Create a file <i>/usr/src/app/index.js</i>
+<!-- Step 4. Run <i>exit</i> to quit from the container-->
+ 第4步。运行<i>exit</i>从容器中退出
 
-Step 4. Run <i>exit</i> to quit from the container
-
-Google should be able to help you with creating directories and files. -->
-
-步骤1. 使用hello-word 给出的命令运行一个Ubuntu 容器。
-
-步骤一会直接连接到你的容器并运行bash。你会访问容器中所有的文件和工具，一下命令是运行在容器中的：
-
-步骤2. 创建一个目录 <i>/usr/src/app</i>
-
-步骤3. 创建一个文件 <i>/usr/src/app/index.js</i>
-
-步骤4. 运行 <i>exit</i> 来退出容器
-
-Google 可以帮助你创建目录和文件。
+<!-- Google should be able to help you with creating directories and files.-->
+ 谷歌应该能够帮助你创建目录和文件。
 
 </div>
 
 <div class="content">
 
 ### Ubuntu image
-Ubuntu 镜像
 
-<!-- The command you just used to run the ubuntu container, _docker container run -it ubuntu bash_, contains a few additions to the previously run hello-world. Let's see the --help to get a better understanding. I'll cut some of the output so we can focus on the relevant parts. -->
-刚刚用于运行ubuntu 容器的命令，_docker container run -it ubuntu bash_ 与之前的hello-world相比包含了一些额外的信息。让我们输入 --help 来获取更多解释。我会裁剪一些输出信息，以便于我们可以专注于相关章节。
+<!-- The command you just used to run the ubuntu container, _docker container run -it ubuntu bash_, contains a few additions to the previously run hello-world. Let's see the --help to get a better understanding. I'll cut some of the output so we can focus on the relevant parts.-->
+ 你刚才用来运行ubuntu容器的命令，_docker container run -it ubuntu bash_，包含了对之前运行的hello-world的一些补充。让我们看看 --help，以获得更好的理解。我将剪掉一些输出，这样我们就可以把注意力集中在相关部分。
 
 ```bash
 $ docker container run --help
@@ -340,15 +297,15 @@ Options:
   -t, --tty                            Allocate a pseudo-TTY
   ...
 ```
-<!-- The two options, or flags, _-it_ make sure we can interact with the container. After the options, we defined that image to run is _ubuntu_. Then we have the command _bash_ to be executed inside the container when we start it. -->
-解释一下这两个参数，或者说标志， _-it_ 会确保我们能够与容器交互，在这些标志之后，我们定义了要运行一个镜像，也就是 _ubuntu_ 。然后我们用命令 _bash_ 来在启动后在容器内部执行。
 
+<!-- The two options, or flags, _-it_ make sure we can interact with the container. After the options, we defined that image to run is _ubuntu_. Then we have the command _bash_ to be executed inside the container when we start it.-->
+ 这两个选项，或者说标志，_-它_确保我们可以与容器互动。在这些选项之后，我们定义了要运行的镜像是_ubuntu_。然后，我们有一个命令_bash_，当我们启动容器时在里面执行。
 
-<!-- You can try other commands that the ubuntu image might be able to execute. As an example try _docker container run --rm ubuntu ls_. The _ls_ command will list all of the files in the directory and _--rm_ flag will remove the container after execution. Normally containers are not deleted automatically. -->
-你可以尝试ubuntu镜像可能具有的其他命令，比如 _docker container run --rm ubuntu ls_ 。 _ls_ 命令会列出目录中所有的文件，_--rm_执行后 会删除容器。通常境况下容器不会自动删除。
+<!-- You can try other commands that the ubuntu image might be able to execute. As an example try _docker container run --rm ubuntu ls_. The _ls_ command will list all of the files in the directory and _--rm_ flag will remove the container after execution. Normally containers are not deleted automatically.-->
+ 你可以试试ubuntu镜像可能会执行的其他命令。作为一个例子，尝试_docker container run --rm ubuntu ls_。ls_命令将列出目录中的所有文件，_--rm_标志将在执行后删除容器。通常情况下，容器是不会自动删除的。
 
-<!-- Let's continue with our first ubuntu container with the **index.js** file inside of it. The container has stopped running since we exited it. We can list all of the containers with _container ls -a_, the _-a_ (or --all) will list containers that have already been exited. -->
-让我们继续我们的第一个ubuntu容器，其中包含了 **index.js** 文件。自从我们退出它后容器就停止运行了。我们可以使用 _container ls -a_ 列出所有容器，  _-a_ (或 --all)将列出已经退出的容器。
+<!-- Let's continue with our first ubuntu container with the **index.js** file inside of it. The container has stopped running since we exited it. We can list all of the containers with _container ls -a_, the _-a_ (or --all) will list containers that have already been exited.-->
+ 让我们继续看我们的第一个ubuntu容器，它里面有**index.js**文件。自从我们退出后，该容器已经停止运行。我们可以用_container ls -a_列出所有的容器，_-a_（或--all）会列出已经退出的容器。
 
 ```bash
 $ docker container ls -a
@@ -356,24 +313,22 @@ CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS                      
 b8548b9faec3   ubuntu    "bash"    3 minutes ago    Exited (0) 6 seconds ago          hopeful_clarke
 ```
 
-<!-- We have two options when addressing a container. The identifier in the first column can be used to interact with the container almost always. Plus, most commands accept the container name as a more human-friendly method of working with them. The name of the container was automatically generated to be **"hopeful_clarke"** in my case. -->
+<!-- We have two options when addressing a container. The identifier in the first column can be used to interact with the container almost always. Plus, most commands accept the container name as a more human-friendly method of working with them. The name of the container was automatically generated to be **"hopeful_clarke"** in my case.-->
+ 在寻址一个容器时，我们有两个选择。第一列中的标识符几乎总是可以用来与容器进行交互。另外，大多数命令都接受容器的名字，作为一种更人性化的工作方法。在我的例子中，容器的名字被自动生成为**"hopeful_clarke "**。
 
-我们在登陆容器时有两个参数。第一个标识符，也就是第一列的值总是可以用来与容器进行交互。此外，大多数命令接受容器名，这种更容易被人读懂的方式来与容器进行交互。在我的例子中，容器被自动命名为 **"hopeful_clarke"** 。
-
-<!-- The container has already exited, yet we can start it again with the start command that will accept the id or name of the container as a parameter: _start <i>CONTAINER-ID-OR-CONTAINER-NAME</i>_. -->
-
-容器已经退出，但是我们可以再次启动它， 该命令将接受容器的id 或名称作为参数_start <i>CONTAINER-ID-OR-CONTAINER-NAME</i>_。
+<!-- The container has already exited, yet we can start it again with the start command that will accept the id or name of the container as a parameter: _start <i>CONTAINER-ID-OR-CONTAINER-NAME</i>_.-->
+ 容器已经退出了，然而我们可以用启动命令再次启动它，该命令将接受容器的id或名称作为参数。_start <i>CONTAINER-ID-OR-CONTAINER-NAME</i>_。
 
 ```bash
 $ docker start hopeful_clarke
 hopeful_clarke
 ```
 
-<!-- The start command will start the same container we had previously. Unfortunately, we forgot to start it with the flag _--interactive_ so we can not interact with it. -->
-start 命令会启动我们之前相同的容器。不幸的事，我们忘记了使用标志  _--interactive_ 来启动它，所以我们无法与它进行交互。
+<!-- The start command will start the same container we had previously. Unfortunately, we forgot to start it with the flag _--interactive_ so we can not interact with it.-->
+ 这个启动命令将启动我们之前的那个容器。不幸的是，我们忘了用标志_--interactive_来启动它，所以我们不能与它交互。
 
-<!-- The container is actually up and running as the command _container ls -a_ shows, but we just can not communicate it: -->
-容器实际上已经启动了，我们可以运行 _container ls -a_ 来看到，只是我们不能与之交互：
+<!-- The container is actually up and running as the command _container ls -a_ shows, but we just can not communicate it:-->
+ 正如命令_container ls -a_所显示的那样，这个容器实际上已经启动并运行了，但我们无法与它交流。
 
 ```bash
 $ docker container ls -a
@@ -381,25 +336,25 @@ CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS                      
 b8548b9faec3   ubuntu    "bash"    7 minutes ago    Up (0) 15 seconds ago            hopeful_clarke
 ```
 
-<!-- Note that we can also execute the command without the flag _-a_ to see just those containers that are running: -->
-注意我们也可以不带 _-a_ 标志来运行，这样仅能看到运行中的容器：
+<!-- Note that we can also execute the command without the flag _-a_ to see just those containers that are running:-->
+ 注意，我们也可以在不加标志_a_的情况下执行这个命令，只看那些正在运行的容器。
 
 ```bash
 $ docker container ls
 CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS             NAMES
-8f5abc55242a   ubuntu    "bash"    8 minutes ago    Up 1 minutes       hopeful_clarke             
+8f5abc55242a   ubuntu    "bash"    8 minutes ago    Up 1 minutes       hopeful_clarke
 ```
 
-<!-- Let's kill it with the _kill <i>CONTAINER-ID-OR-CONTAINER-NAME</i>_ command and try again.  -->
-让我们运行 _kill <i>CONTAINER-ID-OR-CONTAINER-NAME</i>_ 杀掉他来再次尝试
+<!-- Let's kill it with the _kill <i>CONTAINER-ID-OR-CONTAINER-NAME</i>_ command and try again.-->
+ 让我们用_kill <i>CONTAINER-ID-OR-CONTAINER-NAME</i>_命令杀死它，然后再试试。
 
 ```bash
 $ docker kill hopeful_clarke
 hopeful_clarke
 ```
 
-<!-- _docker kill_ sends a [signal SIGKILL](https://man7.org/linux/man-pages/man7/signal.7.html) to the process forcing it to exit, and that causes the container to stop. We can check it's status with _container ls -a_: -->
-_docker kill_  发送了一个  [signal SIGKILL](https://man7.org/linux/man-pages/man7/signal.7.html) 来强制进程停止，这会导致容器停止。我们可以通过运行 _container ls -a_ 来验证一下：
+<!-- _docker kill_ sends a [signal SIGKILL](https://man7.org/linux/man-pages/man7/signal.7.html) to the process forcing it to exit, and that causes the container to stop. We can check it's status with _container ls -a_:-->
+ _docker kill_向进程发送一个[信号SIGKILL](https://man7.org/linux/man-pages/man7/signal.7.html)，迫使它退出，这将导致容器的停止。我们可以用_container ls -a_来检查它的状态。
 
 ```bash
 $ docker container ls -a
@@ -407,18 +362,16 @@ CONTAINER ID   IMAGE     COMMAND   CREATED             STATUS                   
 b8548b9faec3   ubuntu     "bash"   26 minutes ago      Exited 2 seconds ago       hopeful_clarke
 ```
 
-<!-- Now let us start the container again, but this time in interactive mode: -->
-让我们再次运行容器，这次我们使用交互模式：
+<!-- Now let us start the container again, but this time in interactive mode:-->
+ 现在让我们再次启动容器，但这次是以交互式模式。
 
 ```bash
 $ docker start -i hopeful_clarke
 root@b8548b9faec3:/#
 ```
 
-
-<!-- Let's edit the file <i>index.js</i> and add in some JavaScript code to execute. We are just missing the tools to edit the file. Nano will be a good text editor for now. The install instructions were found from the first result of Google. We will omit using sudo since we are already root. -->
-
-让我们编辑 <i>index.js</i> 并添加些要执行的JavaScript 代码。我们现在缺少编辑文件的工具。Nono 目前是一个不错的选择。Google 能够查到安装指引。我们已经是root 用户，会省略使用sudo。
+<!-- Let's edit the file <i>index.js</i> and add in some JavaScript code to execute. We are just missing the tools to edit the file. Nano will be a good text editor for now. The install instructions were found from the first result of Google. We will omit using sudo since we are already root.-->
+ 让我们编辑文件<i>index.js</i>并添加一些JavaScript代码来执行。我们只是缺少编辑该文件的工具。目前，Nano将是一个很好的文本编辑器。安装说明是从谷歌的第一个结果中找到的。我们将省略使用sudo，因为我们已经是root。
 
 ```bash
 root@b8548b9faec3:/# apt-get update
@@ -426,55 +379,51 @@ root@b8548b9faec3:/# apt-get -y install nano
 root@b8548b9faec3:/# nano /usr/src/app/index.js
 ```
 
-<!-- Now we have nano installed and can start editing files! -->
-现在我们已经安装了nano 并可以开始编辑文件了。
+<!-- Now we have nano installed and can start editing files!-->
+ 现在我们已经安装了nano，可以开始编辑文件了!
 
 </div>
 
 <div class="tasks">
 
 ### Exercise 12.3 - 12.4
-练习12.3-12.4
 
 #### Exercise 12.3: Ubuntu 101
-练习12.3 Ubuntu 101
 
-<!-- > Use _script_ to record what you do, save the file as script-answers/exercise12_3.txt -->
-> 使用 _script_ 来记录你的行为，保存到文件 script-answers/exercise12_3.txt 中。
+<!-- > Use _script_ to record what you do, save the file as script-answers/exercise12_3.txt-->
+ > 使用_script_来记录你所做的事情，将文件保存为script-answers/exercise12_3.txt
 
-<!-- Edit the _/usr/src/app/index.js_ file inside the container with the now installed nano and add the following line -->
-使用刚安装的nono编辑容器中的 _/usr/src/app/index.js_  文件，添加如下行。
+<!-- Edit the _/usr/src/app/index.js_ file inside the container with the now installed nano and add the following line-->
+ 用现在安装的nano编辑容器内的_/usr/src/app/index.js_文件，添加以下一行
 
 ```js
 console.log('Hello World')
 ```
 
-<!-- If you are not familiar with Nano you can ask for help in the chat or Google. -->
-如果你不熟悉nano 的使用可以在聊天里询问或咨询谷歌。
+<!-- If you are not familiar with Nano you can ask for help in the chat or Google.-->
+ 如果你不熟悉Nano，你可以在聊天中或Google上寻求帮助。
 
 #### Exercise 12.4: Ubuntu 102
-练习12.4 Ubuntu 102
 
-<!-- > Use _script_ to record what you do, save the file as script-answers/exercise12_4.txt -->
-> 使用 _script_ 来记录你的行为，将文件保存到 script-answers/exercise12_4.txt 中。
+<!-- > Use _script_ to record what you do, save the file as script-answers/exercise12_4.txt-->
+ > 使用_script_来记录你所做的事情，将文件保存为script-answers/exercise12_4.txt
 
-<!-- Install Node while inside the container and run the index file with _node /usr/src/app/index.js_ in the container. -->
-在容器中安装Node 并运行index 文件：_node /usr/src/app/index.js_ 
+<!-- Install Node while inside the container and run the index file with _node /usr/src/app/index.js_ in the container.-->
+ 在容器内安装Node，在容器内用_node /usr/src/app/index.js_运行索引文件。
 
-<!-- The instructions for installing Node are sometimes hard to find, so here is something you can copy-paste: -->
-安装Node 的说明不太好找，所以你可以直接拷贝粘贴下面的命令：
+<!-- The instructions for installing Node are sometimes hard to find, so here is something you can copy-paste:-->
+安装Node的说明有时很难找到，所以这里是你可以复制粘贴的东西。
 
 ```bash
 curl -sL https://deb.nodesource.com/setup_16.x | bash
 apt install -y nodejs
 ```
 
-<!-- You will need to install the _curl_ into the container. It is installed in the same way as you did with _nano_. -->
-你需要将_curl_  安装到容器中。和安装 _nano_ 的方法是一样的。
+<!-- You will need to install the _curl_ into the container. It is installed in the same way as you did with _nano_.-->
+ 你将需要在容器中安装_curl_。它的安装方式与你安装_nano_的方式相同。
 
-
-<!-- After the installation, ensure that you can run your code inside the container with command -->
-安装完成后，确保你可以使用如下代码，将自己的代码运行在容器中：
+<!-- After the installation, ensure that you can run your code inside the container with command-->
+ 安装完成后，确保你可以在容器内用命令运行你的代码
 
 ```
 root@b8548b9faec3:/# node /usr/src/app/index.js
@@ -486,36 +435,35 @@ Hello World
 <div class="content">
 
 ### Other docker commands
-其他Docker 命令
 
-<!-- Now that we have Node installed in the container we can execute JavaScript in the container! Let's create a new image from the container. The _commit <i>CONTAINER-ID-OR-CONTAINER-NAME</i> <i>NEW-IMAGE-NAME</i>_ will create a new image that includes the changes we have made. You can use _container diff_ to check for the changes between the original image and container before doing so. -->
-目前我们已经在容器中安装了node ，并可以在容器中运行 JavaScript 了！ 让我们从容器中创建一个新的镜像。 命令 _commit <i>CONTAINER-ID-OR-CONTAINER-NAME</i> <i>NEW-IMAGE-NAME</i>_ 会创建一个新的镜像，镜像里包含了我们的修改。你可以使用 _container diff_ 来检查原始镜像和容器的不同。
+<!-- Now that we have Node installed in the container we can execute JavaScript in the container! Let's create a new image from the container. The _commit <i>CONTAINER-ID-OR-CONTAINER-NAME</i> <i>NEW-IMAGE-NAME</i>_ will create a new image that includes the changes we have made. You can use _container diff_ to check for the changes between the original image and container before doing so.-->
+ 现在我们已经在容器中安装了Node，我们可以在容器中执行JavaScript了!让我们从容器中创建一个新的镜像。_commit <i>CONTAINER-ID-OR-CONTAINER-NAME</i> <i>NEW-IMAGE-NAME</i>_将创建一个新的镜像，包括我们所做的修改。你可以在这样做之前使用_container diff_来检查原始镜像和容器之间的变化。
 
 ```bash
 $ docker commit hopeful_clarke hello-node-world
 ```
 
-<!-- You can list your images with _image ls_: -->
- 你可以利用 _image ls_ 来列出你的镜像。
+<!-- You can list your images with _image ls_:-->
+ 你可以用_image ls_列出你的镜像。
 
 ```bash
-$ docker docker image ls
+$ docker image ls
 REPOSITORY                                      TAG         IMAGE ID       CREATED         SIZE
 hello-node-world                                latest      eef776183732   9 minutes ago   252MB
 ubuntu                                          latest      1318b700e415   2 weeks ago     72.8MB
 hello-world                                     latest      d1165f221234   5 months ago    13.3kB
-``` 
- 
-<!-- You can now run the new image as follows: -->
- 现在你可以用如下命令来运行一个新的镜像了：
+```
+
+<!-- You can now run the new image as follows:-->
+ 你现在可以按以下方式运行新的镜像。
 
 ```bash
 docker run -it hello-node-world bash
 root@4d1b322e1aff:/# node /usr/src/app/index.js
 ```
 
-<!-- There are multiple ways to achieve the same conclusion. Let's go through a better solution. We will clean the slate with _container rm_ to remove the old container. -->
-有多种方式可以达到相同的结果。我们首先使用 _container rm_  删除老的容器。
+<!-- There are multiple ways to achieve the same conclusion. Let's go through a better solution. We will clean the slate with _container rm_ to remove the old container.-->
+ 有多种方法可以达到相同的结论。让我们来看看一个更好的解决方案。我们将用_container rm_清理石板，以删除旧的容器。
 
 ```bash
 $ docker container ls -a
@@ -526,35 +474,34 @@ $ docker container rm hopeful_clarke
 hopeful_clarke
 ```
 
-<!-- Create a file <i>index.js</i> to your current directory and write _console.log('Hello, World')_ inside it. No need for containers yet. -->
-创建一个 <i>index.js</i> 文件到你的文件夹中，并写入 _console.log('Hello, World')_ ，先没有必要创建容器。
+<!-- Create a file <i>index.js</i> to your current directory and write _console.log('Hello, World')_ inside it. No need for containers yet.-->
+在你的当前目录下创建一个文件<i>index.js</i>，并在其中写入_console.log(''Hello, World')_。现在还不需要容器。
 
-<!-- Next, let's skip installing Node altogether. There are plenty of useful Docker images in Docker Hub ready for our use. Let's use the image [https://hub.docker.com/_/Node](https://hub.docker.com/_/Node), which has Node already installed. We only need to pick a version. -->
-下面让我们省略安装node 的步骤。因为Docker Hub 中为我们提供了丰富的可用Docker镜像，让我们使用 [https://hub.docker.com/_/Node](https://hub.docker.com/_/Node)，该镜像中已经安装好了Node，我们只需要选择一个版本即可。
+<!-- Next, let's skip installing Node altogether. There are plenty of useful Docker images in Docker Hub ready for our use. Let's use the image [https://hub.docker.com/_/Node](https://hub.docker.com/_/Node), which has Node already installed. We only need to pick a version.-->
+ 接下来，让我们完全跳过安装Node。在Docker Hub中有很多有用的Docker镜像供我们使用。让我们使用[https://hub.docker.com/_/Node](https://hub.docker.com/_/Node)的镜像，它已经安装了Node。我们只需要选择一个版本。
 
-<!-- By the way, the _container run_ accepts _--name_ flag that we can use to give a name for the container. -->
-此外，_container run_ 接受 _--name_  标志我们可以给容器起一个名字。
+<!-- By the way, the _container run_ accepts _--name_ flag that we can use to give a name for the container.-->
+ 顺便说一下，_container run_接受_--name_标志，我们可以用它来给容器起个名字。
 
 ```bash
 $ docker container run -it --name hello-node node:16 bash
 ```
 
-<!-- Let us create a directory for the code inside the container: -->
-让我们创建一个文件夹来存放容器中的代码：
+<!-- Let us create a directory for the code inside the container:-->
+让我们为容器内的代码创建一个目录。
 
 ```
 root@77d1023af893:/# mkdir /usr/src/app
 ```
 
-<!-- While we are inside the container on this terminal, open another terminal and use the _container cp_ command to copy file from your own machine to the container. -->
-
-由于我们现在在当前容器的终端，我们打开另外一个终端，使用 _container cp_  命令来从宿主机拷贝文件到容器。
+<!-- While we are inside the container on this terminal, open another terminal and use the _container cp_ command to copy file from your own machine to the container.-->
+ 当我们在这个终端的容器内时，打开另一个终端，使用_container cp_命令将文件从你自己的机器复制到容器内。
 
 ```bash
 $ docker container cp ./index.js hello-node:/usr/src/app/index.js
 ```
 
 <!-- And now we can run _node /usr/src/app/index.js_ in the container. We can commit this as another new image, but there is an even better solution. The next section will be all about building your images like a pro.-->
-现在我们可以在容器中运行 _node /usr/src/app/index.js_  了。我们可以将这个提交为一个新的镜像，但有一个更好的解决方案。下一章我们会讨论像一个专家一样来构建你的镜像。
+ 现在我们可以在容器中运行_node /usr/src/app/index.js_。我们可以将其作为另一个新的镜像提交，但还有一个更好的解决方案。下一节将是关于像专家一样构建你的图像。
 
 </div>

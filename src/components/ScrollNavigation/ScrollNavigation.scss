@@ -33,16 +33,16 @@
   max-height: calc(100vh - 100px);
 
   padding-right: 1rem;
-  z-index: 199;
+  z-index: 30;
 
   li {
     list-style-type: none;
 
-    &:hover, &.selected {
-
+    &:hover,
+    &.selected {
       a {
-        background-color: $black;
-        color: $white !important;
+        background-color: var(--color-text);
+        color: var(--color-background) !important;
       }
     }
 
@@ -58,8 +58,8 @@
   display: block;
 
   &:hover {
-    background-color: $black !important;
-    color: $white !important;
+    background-color: var(--color-text) !important;
+    color: var(--color-background) !important;
   }
 
   // &::before {

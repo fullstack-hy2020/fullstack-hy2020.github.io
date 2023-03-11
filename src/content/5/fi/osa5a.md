@@ -13,9 +13,9 @@ Frontend näyttää tällä hetkellä olemassaolevat muistiinpanot ja antaa muut
 
 Toteutetaan nyt osa käyttäjienhallinnan edellyttämästä toiminnallisuudesta frontendiin. Aloitetaan käyttäjän kirjautumisesta. Oletetaan vielä tässä osassa, että käyttäjät luodaan suoraan backendiin.
 
-Sovelluksen yläosaan on nyt lisätty kirjautumislomake, ja uuden muistiinpanon lisäämisestä huolehtiva lomake on siirretty muistiinpanojen alapuolelle:
+Sovelluksen yläosaan on nyt lisätty kirjautumislomake:
 
-![](../../images/5/1e.png)
+![Sovellus koostuu syötekentät username ja password koostuvasta kirjautumislomakkeesta, muistiinpanojen listasta, sekä lomakkeesta joka mahdollistaa uuden muistiinpanon luomisen (ainoastaan yksi syötekenttä muistiinpanon sisällölle). Jokaisen listalla olevan muistiinpanon kohdalla on nappi, jonka avulla muistiinpano voidaan merkata tärkeäksi/epätärkeäksi](../../images/5/1new.png)
 
 Komponentin <i>App</i> koodi näyttää seuraavalta:
 
@@ -112,6 +112,17 @@ const login = async credentials => {
 export default { login }
 ```
 
+Jos olet asentanut VS Codeen eslint-pluginin, saatat nähdä nyt seuraavan varoituksen
+
+![](../../images/5/50new.png)
+
+Palaamme eslintin konfigurointiin hetken kuluttua. Voit olla toistaiseksi välittämättä virheestä tai vaimentaa sen lisäämällä varoitusta edeltävälle riville seuraavan
+
+```js
+
+// eslint-disable-next-line import/no-anonymous-default-export
+export default { login }
+```
 Kirjautumisen käsittelystä huolehtiva metodi voidaan toteuttaa seuraavasti:
 
 ```js
@@ -222,8 +233,8 @@ const App = () => {
 
       <Notification message={errorMessage} />
 
-      {user === null && loginForm()} // highlight-line
-      {user !== null && noteForm()} // highlight-line
+      {!user && loginForm()} // highlight-line
+      {user && noteForm()} // highlight-line
 
       <div>
         <button onClick={() => setShowAll(!showAll)}>
@@ -249,36 +260,10 @@ const App = () => {
 Lomakkeiden ehdolliseen renderöintiin käytetään hyväksi aluksi hieman erikoiselta näyttävää, mutta Reactin yhteydessä [yleisesti käytettyä kikkaa](https://reactjs.org/docs/conditional-rendering.html#inline-if-with-logical--operator):
 
 ```js
-{
-  user === null && loginForm()
-}
+{!user && loginForm()}
 ```
 
-Jos ensimmäinen osa evaluoituu epätodeksi eli on [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy), ei toista osaa eli lomakkeen generoivaa koodia suoriteta ollenkaan.
-
-Voimme suoraviivaistaa edellistä vielä hieman käyttämällä [kysymysmerkkioperaattoria](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator):
-
-```js
-return (
-  <div>
-    <h1>Notes</h1>
-
-    <Notification message={errorMessage}/>
-
-    {user === null ?
-      loginForm() :
-      noteForm()
-    }
-
-    <h2>Notes</h2>
-
-    // ...
-
-  </div>
-)
-```
-
-Eli jos _user === null_ on [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy), suoritetaan _loginForm_ ja muussa tapauksessa _noteForm_.
+Jos ensimmäinen osa evaluoituu epätodeksi eli on [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) (eli <i>user</i> ei ole määritelty), ei toista osaa eli lomakkeen generoivaa koodia suoriteta ollenkaan.
 
 Tehdään vielä sellainen muutos, että jos käyttäjä on kirjautunut, renderöidään kirjautuneen käyttäjän nimi:
 
@@ -289,13 +274,12 @@ return (
 
     <Notification message={errorMessage} />
 
-    {user === null ?
-      loginForm() :
-      <div>
-        <p>{user.name} logged in</p>
-        {noteForm()}
+    {!user && loginForm()} 
+    {user && <div>
+       <p>{user.name} logged in</p>
+         {noteForm()}
       </div>
-    }
+    } 
 
     <h2>Notes</h2>
 
@@ -346,7 +330,7 @@ let token = null // highlight-line
 
 // highlight-start
 const setToken = newToken => {
-  token = `bearer ${newToken}`
+  token = `Bearer ${newToken}`
 }
 // highlight-end
 
@@ -371,10 +355,11 @@ const update = (id, newObject) => {
   return request.then(response => response.data)
 }
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default { getAll, create, update, setToken } // highlight-line
 ```
 
-Moduulille on määritelty vain moduulin sisällä näkyvä muuttuja _token_, jolle voidaan asettaa arvo moduulin exporttaamalla funktiolla _setToken_. Async/await-syntaksiin muutettu _create_ asettaa moduulin tallessa pitämän tokenin <i>Authorization</i>-headeriin, jonka se antaa axiosille metodin <i>post</i> kolmantena parametrina.
+Moduulille on määritelty vain moduulin sisällä näkyvä muuttuja _token_, jolle voidaan asettaa arvo moduulin exporttaamalla funktiolla _setToken_. Async/await-syntaksiin muutettu _create_ asettaa moduulin tallessa pitämän tokenin <i>Authorization</i>-headeriin, jonka se antaa Axiosille metodin <i>post</i> kolmantena parametrina.
 
 Kirjautumisesta huolehtivaa tapahtumankäsittelijää pitää vielä viilata sen verran, että se kutsuu metodia <code>noteService.setToken(user.token)</code> onnistuneen kirjautumisen yhteydessä:
 
@@ -453,7 +438,7 @@ Kirjautumisen yhteyteen tehtävä muutos on seuraava:
 
 Kirjautuneen käyttäjän tiedot tallentuvat nyt local storageen ja niitä voidaan tarkastella konsolista (kirjoittamalla konsoliin _window.localStorage_):
 
-![](../../images/5/3e.png)
+![Selaimen konsoliin on evaluoitu window.localStorage-objektin arvo](../../images/5/3e.png)
 
 Sovellusta on vielä laajennettava siten, että kun sivulle tullaan uudelleen, esim. selaimen uudelleenlataamisen yhteydessä, tulee sovelluksen tarkistaa löytyykö local storagesta tiedot kirjautuneesta käyttäjästä. Jos löytyy, asetetaan ne sovelluksen tilaan ja <i>noteServicelle</i>.
 
@@ -527,14 +512,14 @@ Tämän osan alun tehtävät kertaavat käytännössä kaiken oleellisen tämän
 
 Muista tehtäviä tehdessäsi kaikki debuggaukseen liittyvät käytänteet, erityisesti konsolin tarkkailu.
 
-**Varoitus:** Jos huomaat kirjoittavasi samaan funktioon sekaisin async/awaitia ja _then_-kutsuja, on 99.9-prosenttisen varmaa, että teet jotain väärin. Käytä siis jompaa kumpaa tapaa, älä missään tapauksessa "varalta" molempia.
+**Varoitus:** Jos huomaat kirjoittavasi samaan funktioon sekaisin async/awaitia ja _then_-kutsuja, on 99,9-prosenttisen varmaa, että teet jotain väärin. Käytä siis jompaa kumpaa tapaa, älä missään tapauksessa "varalta" molempia.
 
 #### 5.1: blogilistan frontend, step1
 
-Ota tehtävien pohjaksi [GitHubissa](https://github.com/fullstack-hy/bloglist-frontend) oleva sovellusrunko kloonaamalla se sopivaan paikkaan:
+Ota tehtävien pohjaksi [GitHubissa](https://github.com/fullstack-hy2020/bloglist-frontend) oleva sovellusrunko kloonaamalla se sopivaan paikkaan:
 
 ```bash
-git clone https://github.com/fullstack-hy/bloglist-frontend
+git clone https://github.com/fullstack-hy2020/bloglist-frontend
 ```
 
 Seuraavaksi poista kloonatun sovelluksen Git-konfiguraatio:
@@ -557,11 +542,11 @@ Kirjautumisen yhteydessä backendin palauttama <i>token</i> tallennetaan sovellu
 
 Jos käyttäjä ei ole kirjautunut, sivulla näytetään <i>pelkästään</i> kirjautumislomake:
 
-![](../../images/5/4e.png)
+![Näkyvillä kirjautumislomake, jolla syötekentät username ja password sekä nappi "login"](../../images/5/4e.png)
 
 Kirjautuneelle käyttäjälle näytetään kirjautuneen käyttäjän nimi sekä blogien lista:
 
-![](../../images/5/5e.png)
+![Blogit listattuna riveittän muodossa "blogin nimi", "kiroittaja", ruudulla lisäksi tieto kirjautuneesta käyttäjästä, esim. "Matti Luukkainen logged in"](../../images/5/5e.png)
 
 Tässä vaiheessa kirjautuneiden käyttäjien tietoja ei vielä tarvitse muistaa local storagen avulla.
 
@@ -593,7 +578,7 @@ Tässä vaiheessa kirjautuneiden käyttäjien tietoja ei vielä tarvitse muistaa
 
 Tee kirjautumisesta "pysyvä" local storagen avulla. Tee sovellukseen myös mahdollisuus uloskirjautumiseen:
 
-![](../../images/5/6e.png)
+![Sovellukseen lisätty nappi "logout"](../../images/5/6e.png)
 
 Uloskirjautumisen jälkeen selain ei saa muistaa kirjautunutta käyttäjää reloadauksen jälkeen.
 
@@ -601,17 +586,17 @@ Uloskirjautumisen jälkeen selain ei saa muistaa kirjautunutta käyttäjää rel
 
 Laajenna sovellusta siten, että kirjautunut käyttäjä voi luoda uusia blogeja:
 
-![](../../images/5/7e.png)
+![Sovellukseen lisätty lomake uusien blogien luomiseen. Lomakkeella kentät title, author ja url. Lomake näytetään ainoastaan kun käyttäjä on kirjaantunut sovellukseen.](../../images/5/7e.png)
 
 #### 5.4: blogilistan frontend, step4
 
 Toteuta sovellukseen notifikaatiot, jotka kertovat sovelluksen yläosassa onnistuneista ja epäonnistuneista toimenpiteistä. Esim. blogin lisäämisen yhteydessä voi antaa seuraavan notifikaation:
 
-![](../../images/5/8e.png)
+![Sovellus näyttää notifikaation "a new blog ... by ... added"](../../images/5/8e.png)
 
 Epäonnistunut kirjautuminen taas johtaa virhenotifikaatioon:
 
-![](../../images/5/9e.png)
+![Sovellus näyttää notifikaation "wrong username/password"](../../images/5/9e.png)
 
 Notifikaation tulee olla näkyvillä muutaman sekunnin ajan. Värien lisääminen ei ole pakollista.
 

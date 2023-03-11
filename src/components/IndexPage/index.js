@@ -13,18 +13,17 @@ import { Some } from '../Some/Some';
 import { SubHeader } from '../SubHeader/SubHeader';
 import { TripleBorder } from '../TripleBorder/TripleBorder';
 import cc from '../../images/cc.svg';
-import colors from '../../colors';
 import content from '../../content/pages/main.json';
 import houstonLogo from '../../images/Houston_big.svg';
 import landingImage from '../../images/landing.svg';
-import licenceIcon from '../../images/cc-logo.svg';
+import licenceIcon from '../../images/cc-logo.png';
 import mainSEOdescription from '../../content/seo/mainSEOdescription';
 import mainSEOtags from '../../content/seo/mainSEOtags';
 import news from '../../images/noun_news_1248039.svg';
 import yliopistoLogo from '../../images/company_logos/uoh_centre.svg';
 import getTranslationPath from '../../utils/getTranslationPath';
 
-const IndexPage = ({ lang, title = 'Full stack open 2022' }) => {
+const IndexPage = ({ lang, title = 'Full stack open' }) => {
   const { t } = useTranslation();
 
   const {
@@ -36,55 +35,51 @@ const IndexPage = ({ lang, title = 'Full stack open 2022' }) => {
     houston,
     contacts,
     licenced,
-  } = content[lang];
+  } = content[lang] || content.en;
 
   const seoDescription = mainSEOdescription[lang];
 
   return (
-    <Layout>
+    <Layout hideFooter={true}>
       <SEO
         lang={lang}
         title={title}
         description={seoDescription}
         keywords={[...mainSEOtags]}
       />
-      <div className="container spacing--after spacing--mobile">
+      <div className="frontpage-hero container spacing--after spacing--mobile">
         <Element
           flex
           spaceBetween
-          className="col-10 spacing--small frontpage__hero spacing--mobile"
+          className="spacing--small spacing--mobile"
           relative
         >
-          <SubHeader
-            className="col-6 index__main-title"
-            text={mainTitle}
-            headingLevel="h1"
-          />
+          <Element dirColumn className="frontpage-hero__content col-6">
+            <SubHeader
+              className="frontpage-hero__heading"
+              text={mainTitle}
+              headingLevel="h1"
+            />
 
-          <SubHeader
-            className="col-10"
-            text={t('homePage:courseNameTitle')}
-            headingLevel="h2"
-          />
+            <SubHeader text={t('homePage:courseNameTitle')} headingLevel="h2" />
 
-          <Link
-            className="col-2 centered about__challenge-button spacing--after--mobile"
-            to={getTranslationPath(lang, '/about')}
-          >
-            {t('homePage:startCourseButton')}
-          </Link>
+            <Link
+              className="frontpage-hero__cta centered about__challenge-button spacing--after--mobile"
+              to={getTranslationPath(lang, '/about')}
+            >
+              {t('homePage:startCourseButton')}
+            </Link>
 
-          <div className="spacing--small" />
-
-          <BodyText
-            headingFont
-            className="col-4 order-1--mobile col-8--mobile link"
-            text={intro}
-          />
+            <BodyText
+              className="frontpage-hero__description"
+              headingFont
+              text={intro}
+            />
+          </Element>
 
           <Image
             contain
-            className="col-4--mobile spacing--tablet absolute-top-right--desktop"
+            className="col-4 frontpage-hero__image"
             style={{ margin: 0 }}
             alt="Stacked cubes with React logo and JavaScript text"
             src={landingImage}
@@ -96,7 +91,13 @@ const IndexPage = ({ lang, title = 'Full stack open 2022' }) => {
         <Element className="push-right-1 push-left-1" spaceBetween flex>
           <Element flex horizontalHalf flexStart>
             <Element flex spaceBetween autoBottomMargin className="col-10">
-              <Image contain small src={news} className="col-1--mobile" />
+              <Image
+                contain
+                small
+                darkThemeInvert
+                src={news}
+                className="col-1--mobile"
+              />
 
               <BodyText
                 className="col-7 col-8--mobile link"
@@ -122,7 +123,13 @@ const IndexPage = ({ lang, title = 'Full stack open 2022' }) => {
               autoBottomMargin
               className="col-10 spacing--mobile"
             >
-              <Image contain small src={cc} className="col-1--mobile" />
+              <Image
+                contain
+                small
+                darkThemeInvert
+                src={cc}
+                className="col-1--mobile"
+              />
 
               <BodyText
                 headingFont
@@ -151,7 +158,7 @@ const IndexPage = ({ lang, title = 'Full stack open 2022' }) => {
       <Element flex spaceBetween className="container col-10 spacing--after">
         <TripleBorder
           largeMargin
-          backgroundColor={colors['main']}
+          backgroundColor="var(--color-main)"
           className="col-10 centered--mobile"
         >
           <Element
@@ -169,6 +176,7 @@ const IndexPage = ({ lang, title = 'Full stack open 2022' }) => {
               >
                 <Image
                   contain
+                  darkThemeInvert
                   src={yliopistoLogo}
                   alt="Helsingin Yliopisto logo"
                   className="col-5 col-4--mobile"
@@ -185,7 +193,12 @@ const IndexPage = ({ lang, title = 'Full stack open 2022' }) => {
                 className="col-10 col-4--mobile"
                 href="https://www.houston-inc.com"
               >
-                <Image contain src={houstonLogo} alt="Houston Inc. logo" />
+                <Image
+                  contain
+                  darkThemeInvert
+                  src={houstonLogo}
+                  alt="Houston Inc. logo"
+                />
               </a>
 
               <BodyText headingFont className="link" text={houston} />

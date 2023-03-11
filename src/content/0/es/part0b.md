@@ -611,7 +611,7 @@ Solía ser más común que los desarrolladores se especializaran en una capa del
 
 El desarrollo web full stack es un desafío de muchas maneras. Suceden cosas en muchos lugares a la vez y la depuración es un poco más difícil que con las aplicaciones de escritorio normales. JavaScript no siempre funciona como cabría esperar (en comparación con muchos otros lenguajes), y la forma asincrónica en que funcionan sus entornos de ejecución genera todo tipo de desafíos. Comunicarse en la web requiere conocimientos del protocolo HTTP. También se deben manejar las bases de datos y la administración y configuración del servidor. También sería bueno saber suficiente CSS para hacer las aplicaciones al menos algo presentables.
 
-El mundo de JavaScript se desarrolla rápidamente, lo que conlleva sus propios desafíos. Las herramientas, las librerías y el propio lenguaje están en constante desarrollo. Algunos están empezando a cansarse del cambio constante y han acuñado un término para ello: [fatiga](https://auth0.com/blog/how-to-manage-javascript-fatiga/) de [JavaScript](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4).
+El mundo de JavaScript se desarrolla rápidamente, lo que conlleva sus propios desafíos. Las herramientas, las librerías y el propio lenguaje están en constante desarrollo. Algunos están empezando a cansarse del cambio constante y han acuñado un término para ello: [fatiga](https://auth0.com/blog/how-to-manage-javascript-fatigue/) de [JavaScript](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4).
 
 Usted mismo sufrirá fatiga de JavaScript durante este curso. Afortunadamente para nosotros, hay algunas formas de suavizar la curva de aprendizaje y podemos comenzar con la codificación en lugar de la configuración. No podemos evitar la configuración por completo, pero podemos seguir adelante alegremente en las próximas semanas mientras evitamos los peores infiernos de configuración.
 
@@ -693,12 +693,12 @@ Si es necesario, muestre las operaciones en el navegador o en el servidor como c
 
 El diagrama no tiene por qué ser un diagrama de secuencia. Cualquier forma sensata de presentar los eventos está bien.
 
-Toda la información necesaria para hacer esto, y los dos ejercicios siguientes, se pueden encontrar en el texto de [esta parte](/es/part0/fundamentos-de-las-aplicaciones-web#formularios-y-http-post).
+Toda la información necesaria para hacer esto, y los dos ejercicios siguientes, se pueden encontrar en el texto de [esta parte](/es/part0/fundamentos_de_las_aplicaciones_web#formularios-y-http-post).
 La idea de estos ejercicios es leer el texto una vez más y pensar en lo que está sucediendo allí. No es necesario leer el [código](https://github.com/mluukkai/example_app) de la aplicación pero, por supuesto, es posible.
 
 <h4>0.5: Aplicación de una sola página</h4>
 
-Cree un diagrama que describa la situación en la que el usuario accede a la versión de [aplicación de una sola página](/es/part0/fundamentos-de-las-aplicaciones-web#aplicacion-de-una-sola-pagina) de la aplicación de notas en <https://studies.cs.helsinki.fi/exampleapp/spa>.
+Cree un diagrama que describa la situación en la que el usuario accede a la versión de [aplicación de una sola página](/es/part0/fundamentos_de_las_aplicaciones_web#aplicacion-de-una-sola-pagina) de la aplicación de notas en <https://studies.cs.helsinki.fi/exampleapp/spa>.
 
 <h4>0.6: Nueva nota</h4>
 

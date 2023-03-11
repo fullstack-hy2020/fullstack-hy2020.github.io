@@ -13,12 +13,15 @@
     "generalTitle": "课程简介"
   },
   "navigation": {
+    "skipToContent": "跳到内容",
     "aboutCourse": "关于课程",
     "courseContents": "课程内容",
     "faq": "常见问题",
     "partners": "合作伙伴",
     "challenge": "挑战",
-    "searchLinkSrLabel": "从教程中搜索"
+    "searchLinkSrLabel": "从教程中搜索",
+    "ThemeSwitcherSrLabel": "切换黑暗主题",
+    "LanguagePickerSrLabel": "选择语言"
   },
   "challengePage": {
     "aboutTitle": "这就是全栈！——挑战内容",

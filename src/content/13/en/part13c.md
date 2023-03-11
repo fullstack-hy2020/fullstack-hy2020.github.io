@@ -50,7 +50,8 @@ module.exports = {
         allowNull: false
       },
       important: {
-        type: DataTypes.BOOLEAN
+        type: DataTypes.BOOLEAN,
+        allowNull: false
       },
       date: {
         type: DataTypes.DATE
@@ -116,14 +117,7 @@ const Sequelize = require('sequelize')
 const { DATABASE_URL } = require('./config')
 const { Umzug, SequelizeStorage } = require('umzug') // highlight-line
 
-const sequelize = new Sequelize(DATABASE_URL, {
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false
-    }
-  },
-});
+const sequelize = new Sequelize(DATABASE_URL)
 
 // highlight-start
 const runMigrations = async () => {
@@ -147,7 +141,9 @@ const runMigrations = async () => {
 const connectToDatabase = async () => {
   try {
     await sequelize.authenticate()
-    await runMigrations() // highlight-line
+    /*  highlight-start */
+    await runMigrations()
+    /* highlight-end */
     console.log('connected to the database')
   } catch (err) {
     console.log('failed to connect to the database')
@@ -185,7 +181,7 @@ If we restart the application, the log also shows that the migration was not rep
 The database schema of the application now looks like this
 
 ```sql
-username=> \d
+postgres=# \d
                  List of relations
  Schema |     Name     |   Type   |     Owner
 --------+--------------+----------+----------------
@@ -199,7 +195,7 @@ username=> \d
 So Sequelize has created a <i>migrations</i> table that allows it to keep track of the migrations that have been performed. The contents of the table look as follows:
 
 ```js
-username=> select * from migrations;
+postgres=# select * from migrations;
                    name
 -------------------------------------------
  20211209_00_initialize_notes_and_users.js
@@ -473,7 +469,9 @@ const rollbackMigration = async () => {
 }
 // highlight-end
 
-module.exports = { connectToDatabase, sequelize, rollbackMigration } // highlight-line
+/* highlight-start */
+module.exports = { connectToDatabase, sequelize, rollbackMigration }
+/* highlight-end */
 ```
 
 Let's create a file <i>util/rollback.js</i>, which will allow the npm script to execute the specified migration rollback function:
@@ -511,7 +509,7 @@ The current code for the application is in its entirety on [GitHub](https://gith
 
 Delete all tables from your application's database.
 
-Make a migration that intializes the database. Add <i>created\_at</i> and <i>updated\_at</i> [timestamps](https://sequelize.org/master/manual/model-basics.html#timestamps) for both tables. Keep in mind that you will have to add them in the migration yourself.
+Make a migration that initializes the database. Add <i>created\_at</i> and <i>updated\_at</i> [timestamps](https://sequelize.org/master/manual/model-basics.html#timestamps) for both tables. Keep in mind that you will have to add them in the migration yourself.
 
 **NOTE:** be sure to remove the commands <i>User.sync()</i> and <i>Blog.sync()</i>, which synchronizes the models' schemas from your code, otherwise your migrations will fail.
 
@@ -531,7 +529,7 @@ We will continue to expand the application so that each user can be added to one
 
 Since an arbitrary number of users can join one team, and one user can join an arbitrary number of teams, we are dealing with a [many-to-many](https://sequelize.org/master/manual/assocs.html#many-to-many-relationships) relationship, which is traditionally implemented in relational databases using a <i>connection table</i>.
 
-Let's now create the code needed for the teams table as well as the connection table. The migration is as follows:
+Let's now create the code needed for the teams table as well as the connection table. The migration (saved in file <i>20211209\_02\_add\_teams\_and\_memberships.js</i>) is as follows:
 
 ```js
 const { DataTypes } = require('sequelize')
@@ -620,12 +618,12 @@ Membership.init({
     primaryKey: true,
     autoIncrement: true
   },
-  user_id: {
+  userId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: { model: 'users', key: 'id' },
   },
-  team_id: {
+  teamId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: { model: 'teams', key: 'id' },
@@ -703,7 +701,7 @@ Membership.init({
 })
 ```
 
-Now let's create a couple of teams from the console, as well as a few memberships:
+Now let's create a couple of teams from the psql console, as well as a few memberships:
 
 ```js
 insert into teams (name) values ('toska');
@@ -863,7 +861,7 @@ router.get('/:id', async (req, res) => {
 
 Let's make another many-to-many relationship in the application. Each note is associated to the user who created it by a foreign key. It is now decided that the application also supports that the note can be associated with other users, and that a user can be associated with an arbitrary number of notes created by other users. The idea is that these notes are those that the user has <i>marked</i> for himself.
 
-Let's make a connection table <i>user_notes</i> for the situation. The migration is straightforward:
+Let's make a connection table <i>user\_notes</i> for the situation. The migration, that is saved in file <i>20211209\_03\_add\_user\_notes.js</i> is straightforward:
 
 ```js
 const { DataTypes } = require('sequelize')
@@ -963,7 +961,7 @@ router.get('/:id', async (req, res) => {
   const user = await User.findByPk(req.params.id, {
     attributes: { exclude: [''] } ,
     include:[{
-        model: note,
+        model: Note,
         attributes: { exclude: ['userId'] }
       },
       {
@@ -972,10 +970,6 @@ router.get('/:id', async (req, res) => {
         attributes: { exclude: ['userId']},
         through: {
           attributes: []
-        },
-        include: {
-          model: user,
-          attributes: ['name']
         }
       },
       {
@@ -1007,7 +1001,7 @@ insert into user_notes (user_id, note_id) values (1, 5);
 
 The end result is functional:
 
-![](../../images/13/5.png)
+![](../../images/13/5a.png)
 
 What if we wanted to include information about the author of the note in the notes marked by the user as well? This can be done by adding an <i>include</i> to the marked notes:
 
@@ -1016,7 +1010,7 @@ router.get('/:id', async (req, res) => {
   const user = await User.findByPk(req.params.id, {
     attributes: { exclude: [''] } ,
     include:[{
-        model: note,
+        model: Note,
         attributes: { exclude: ['userId'] }
       },
       {
@@ -1034,7 +1028,7 @@ router.get('/:id', async (req, res) => {
         // highlight-end
       },
       {
-        model: team,
+        model: Team,
         attributes: ['name', 'id'],
         through: {
           attributes: []
@@ -1115,9 +1109,9 @@ At this point, information about whether the blog is read or not does not need t
 
 #### Task 13.21.
 
-Expand the single-user route so that each blog in the reading list shows also whether the blog has been read <i>and</i> the id of the corresponding connection table row.
+Expand the single-user route so that each blog in the reading list shows also whether the blog has been read <i>and</i> the id of the corresponding join table row.
 
-For example, the information can be in the following form:
+For example, the information could be in the following form:
 
 ```js
 {
@@ -1148,7 +1142,7 @@ For example, the information can be in the following form:
       readinglists: [
         {
           read: false,
-          id: 2
+          id: 3
         }
       ]
     }
@@ -1157,6 +1151,8 @@ For example, the information can be in the following form:
 ```
 
 Note: there are several ways to implement this functionality. [This](https://sequelize.org/master/manual/advanced-many-to-many.html#the-best-of-both-worlds--the-super-many-to-many-relationship) should help.
+
+Note also that despite having an array field <i>readinglists</i> in the example, it should always just contain exactly one object, the join table entry that connects the book to the particular user's reading list.
 
 #### Exercise 13.22.
 
@@ -1506,7 +1502,7 @@ You will probably need at least the following for the implementation
 
 Keep in mind that actions requiring login should not be successful with an "expired token", i.e. with the same token after logging out.
 
-You may also choose to use some purpose-built npm library to handle sesssions.
+You may also choose to use some purpose-built npm library to handle sessions.
 
 Make the database changes required for this task using migrations.
 
@@ -1517,8 +1513,6 @@ Exercises of this part are submitted just like in the previous parts, but unlike
 Once you have completed the exercises and want to get the credits, let us know through the exercise submission system that you have completed the course:
 
 ![Submissions](../../images/11/21.png)
-
-Note that the "exam done in Moodle" note refers to the [Full Stack Open course's exam](/en/part0/general_info#sign-up-for-the-exam), which has to be completed before you can earn credits from this part.
 
 **Note** that you need a registration to the corresponding course part for getting the credits registered, see [here](/part0/general_info#parts-and-completion) for more information.
 

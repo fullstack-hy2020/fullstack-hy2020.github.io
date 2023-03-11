@@ -1,0 +1,59 @@
+{
+  "common": {
+    "nextPart": "Suivant",
+    "previousPart": "Précédent",
+    "readMore": "Lire plus",
+    "proposeChanges": "Proposer des modifications au contenu"
+  },
+  "searchPage": {
+    "noMatches": "Aucun résultat",
+    "matchesTitle": "{{count}} correspondances trouvées pour la requête \"{{query}}\""
+  },
+  "aboutPage": {
+    "generalTitle": "Géneral"
+  },
+  "navigation": {
+    "skipToContent": "Aller au contenu",
+    "aboutCourse": "À propos du cours",
+    "courseContents": "Contenu du cours",
+    "faq": "FAQ",
+    "partners": "Partenaires",
+    "challenge": "Challenge",
+    "searchLinkSrLabel": "Rechercher du contenu",
+    "ThemeSwitcherSrLabel": "Basculer le thème sombre",
+    "LanguagePickerSrLabel": "Choisir la langue"
+  },
+  "challengePage": {
+    "aboutTitle": "C'est le défi Full Stack",
+    "joinTitle": "Entreprises, répondez à l'appel !",
+    "registerButton": "Inscrivez votre entreprise au défi Full Stack",
+    "nameLabel": "Nom",
+    "namePlaceholder": "Jane Doe",
+    "titleLabel": "Titre",
+    "companyLabel": "Entreprise",
+    "companyPlaceholder": "Société",
+    "phoneLabel": "Téléphone",
+    "emailLabel": "Adresse mail",
+    "whereDidYouHearLabel": "Où avez-vous entendu parler du défi",
+    "submitButton": "Soumettre",
+    "submitSuccessMessage": "Merci! Nous vous contacterons très bientôt!",
+    "participantsTitle": "Ces entreprises ont rejoint le challenge Full Stack",
+    "coOperationTitle": "En coopération avec",
+    "infoButton": "En savoir plus sur le défi"
+  },
+  "companiesPage": {
+    "storiesTitle": "Récits des développeurs de nos partenaires"
+  },
+  "faqPage": {
+    "faqTitle": "Questions fréquemment posées"
+  },
+  "homePage": {
+    "startCourseButton": "Commencer le cours",
+    "announcementsTitle": "Annonces",
+    "authorsTitle": "Auteurs et Licence",
+    "courseNameTitle": "Full Stack open"
+  },
+  "notFoundPage": {
+    "title": "Page non trouvée"
+  }
+}

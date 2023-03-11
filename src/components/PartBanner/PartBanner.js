@@ -12,7 +12,7 @@ const partNameTranslations = {
     'Palvelimen ohjelmointi NodeJS:n Express-kirjastolla',
     'Express-sovellusten testaaminen, käyttäjänhallinta',
     'React-sovelluksen testaaminen',
-    'Sovelluksen tilan hallinta Redux-kirjastolla',
+    'Edistynyt tilan hallinta',
     'React router, custom-hookit, tyylikirjastot ja webpack',
     'GraphQL',
     'TypeScript',
@@ -28,7 +28,7 @@ const partNameTranslations = {
     'Programming a server with NodeJS and Express',
     'Testing Express servers, user administration',
     'Testing React apps',
-    'State management with Redux',
+    'Advanced state management',
     'React router, custom hooks, styling app with CSS and webpack',
     'GraphQL',
     'TypeScript',
@@ -53,11 +53,47 @@ const partNameTranslations = {
     '容器',
     '使用关系型数据库'
   ],
+  fr: [
+    'Introduction aux applications Web',
+    'Premiers pas avec React',
+    'Communiquer avec le serveur',
+    'Programmation côté serveur avec NodeJS et Express',
+    'Test des serveurs Express, gestion des utilisateurs',
+    'Tester des applications React',
+    'Gestion d\'état avec Redux',
+    'React router, hooks personnalisés, application de style avec CSS et webpack',
+    'GraphQL',
+    'TypeScript',
+    'React Native',
+    'CI/CD',
+    'Conteneurs',
+    'Utilisation de bases de donées relationnelles'
+  ],
+  ptbr: [
+    'Fundamentos de aplicações web',
+    'Introdução ao React',
+    'Comunicação com o servidor',
+    'Programando um servidor com NodeJS e Express',
+    'Teste de servidores Express e Administração de Usuários (tradução em andamento)',
+    'Teste de aplicações React (tradução em andamento)',
+    'Gerenciamento de Estado com Redux (tradução em andamento)',
+    'React router, hooks personalizados, estilização de aplicações com CSS e Webpack (tradução em andamento)',
+    'GraphQL (tradução em andamento)',
+    'TypeScript (tradução em andamento)',
+    'React Native (tradução em andamento)',
+    'CI/CD (tradução em andamento)',
+    'Containers (tradução em andamento)',
+    'Utilizando bancos de dados relacionais (tradução em andamento)',
+  ],
 };
 
 export const PartBanner = ({ lang }) => {
   // TODO change on release
   const parts = Object.keys(navigation[lang]);
+
+  function partName(lang) {
+    return lang === 'fi' ? 'Osa' : lang === 'ptbr' ? 'Parte' : 'Part';
+  }
 
   return (
     <Banner
@@ -78,7 +114,7 @@ export const PartBanner = ({ lang }) => {
                 alt: partNames[part],
               }}
               hoverImageSrc={require(`../../images/thumbnails/part-${part}_ovr.svg`)}
-              name={`${lang === 'fi' ? 'Osa' : 'Part'} ${part}`}
+              name={`${partName(lang)} ${part}`}
               summary={partNames[part]}
               path={getPartTranslationPath(lang, part)}
             />

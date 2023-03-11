@@ -43,11 +43,12 @@ class Header extends Component {
     const isSmallHeader = headerClass === 'header--small';
 
     return (
-      <div
+      <header
         ref={this.header}
         className={`header ${headerClass}`}
         style={{
-          backgroundColor: headerClass !== '' ? 'transparent' : 'white',
+          backgroundColor:
+            headerClass !== '' ? 'transparent' : 'var(--color-background)',
         }}
       >
         <div
@@ -66,7 +67,7 @@ class Header extends Component {
               <TripleBorder
                 hover
                 className="nav-item-hover"
-                childrenClassName="triple-border__logo"
+                childrenClassName="triple-border__logo triple-border__logo--small"
               >
                 fs
               </TripleBorder>
@@ -74,7 +75,7 @@ class Header extends Component {
           </Link>
           {!isSmallHeader && <Navigation lang={lang} />}
         </div>
-      </div>
+      </header>
     );
   }
 }

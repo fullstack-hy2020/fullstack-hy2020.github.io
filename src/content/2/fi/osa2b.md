@@ -43,6 +43,10 @@ const App = (props) => {
 }
 ```
 
+Voimme vielä havainnollistaa tilanteen React Developer Toolsin avulla:
+
+![](../../images/2/30.png)
+
 Jos haluaisimme lähteä liikkeelle tyhjästä muistiinpanojen listasta, annettaisiin tilan alkuarvoksi tyhjä taulukko, ja koska komponentti ei käyttäisi ollenkaan propseja, voitaisiin parametri <em>props</em> jättää kokonaan määrittelemättä:
 
 ```js
@@ -211,13 +215,13 @@ const handleNoteChange = (event) => {
 
 Tapahtumaolion kenttä <em>target</em> vastaa nyt kontrolloitua <i>input</i>-kenttää ja <em>event.target.value</em> viittaa inputin syötekentän arvoon.
 
-Huomaa, että toisin kuin lomakkeen lähettämistä vastaavan tapahtuman <i>onSubmit</i> käsittelijässä, nyt oletusarvoisen toiminnan estävää metodikutusua _event.preventDefault()_ ei tarvita, sillä syötekentän muutoksella ei ole oletusarvoista toimintaa toisin kuin lomakkeen lähettämisellä.
+Huomaa, että toisin kuin lomakkeen lähettämistä vastaavan tapahtuman <i>onSubmit</i> käsittelijässä, nyt oletusarvoisen toiminnan estävää metodikutsua _event.preventDefault()_ ei tarvita, sillä syötekentän muutoksella ei ole oletusarvoista toimintaa toisin kuin lomakkeen lähettämisellä.
 
 Voit seurata konsolista miten tapahtumankäsittelijää kutsutaan:
 
 ![](../../images/2/8e.png)
 
-Muistithan jo asentaa [React Developer Toolsin](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)? Developer Toolsista näet, miten tila muuttuu syötekenttään kirjoitettaessa:
+Olethan jo asentanut [React Developer Toolsin](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)? Developer Toolsista näet, miten tila muuttuu syötekenttään kirjoitettaessa:
 
 ![](../../images/2/9ea.png)
 
@@ -228,7 +232,6 @@ const addNote = (event) => {
   event.preventDefault()
   const noteObject = {
     content: newNote,
-    date: new Date().toISOString(),
     important: Math.random() > 0.5,
     id: notes.length + 1,
   }
@@ -240,7 +243,7 @@ const addNote = (event) => {
 
 Ensin luodaan uutta muistiinpanoa vastaava olio <em>noteObject</em>, jonka sisältökentän arvo saadaan komponentin tilasta <em>newNote</em>. Yksikäsitteinen tunnus eli <i>id</i> generoidaan kaikkien muistiinpanojen lukumäärän perusteella. Koska muistiinpanoja ei poisteta, menetelmä toimii sovelluksessamme. Komennon <em>Math.random()</em> avulla muistiinpanosta tulee 50 %:n todennäköisyydellä tärkeä.
 
-Uusi muistiinpano lisätään vanhojen joukkoon oikeaoppisesti käyttämällä [osasta 1](/osa1/javascriptia#taulukot) tuttua taulukon metodia [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat):
+Uusi muistiinpano lisätään vanhojen joukkoon oikeaoppisesti käyttämällä [osasta 1](/osa1/java_scriptia#taulukot) tuttua taulukon metodia [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat):
 
 ```js
 setNotes(notes.concat(noteObject))

@@ -12,10 +12,10 @@
 }
 
 .accordion {
-  background-color: $white;
-  border: 3px solid $black;
+  background-color: var(--color-background);
+  border: 3px solid var(--color-text);
   border-radius: 5px;
-  color: #444;
+  color: var(--color-text);
   cursor: pointer;
   padding: 1rem;
   width: 100%;
@@ -26,8 +26,13 @@
 }
 
 .active,
+.accordion:focus,
 .accordion:hover {
-  background-color: $main;
+  background-color: var(--color-main);
+}
+
+.active:focus {
+  border: 3px solid var(--color-text);
 }
 
 .accordion:after {
@@ -37,8 +42,9 @@
   margin-left: 5px;
 }
 
-.active {
-  border-color: $white;
+.active,
+.active:not(:focus-visible) {
+  border-color: var(--color-background);
 }
 
 .active:after {
@@ -47,10 +53,8 @@
 }
 
 .panel {
-  background-color: $white;
-  transition: height 0.3s;
-  transition-timing-function: ease-in-out;
-  overflow: hidden;
+  background-color: var(--color-background);
+  padding: 2rem 18px;
 }
 
 .accordion--side-navigation {
@@ -61,7 +65,7 @@
     border: none;
     padding: 0 !important;
     background-color: transparent !important;
-    color: $black !important;
+    color: var(--color-text) !important;
     border-radius: 0;
   }
 
@@ -71,8 +75,8 @@
     background-color: transparent;
 
     &:hover {
-      background-color: $black !important;
-      color: $white !important;
+      background-color: var(--color-text) !important;
+      color: var(--color-background) !important;
     }
   }
 
@@ -87,8 +91,8 @@
 
   .active,
   .accordion:hover {
-    background-color: $black;
-    color: $white;
+    background-color: var(--color-text);
+    color: var(--color-background);
   }
 
   .accordion:after,

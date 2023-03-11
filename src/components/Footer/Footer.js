@@ -29,6 +29,7 @@ const Footer = () => {
 
   return (
     <Element
+      Tag="footer"
       id="footer"
       className="container spacing--after-small spacing--mobile"
       flex
@@ -44,7 +45,13 @@ const Footer = () => {
             href={image.href}
             className="col-5 col-4--mobile spacing--mobile"
           >
-            <Image contain src={image.src} alt={image.alt} className="col-6" />
+            <Image
+              contain
+              darkThemeInvert
+              src={image.src}
+              alt={image.alt}
+              className="col-6"
+            />
           </a>
         ))}
       </Element>

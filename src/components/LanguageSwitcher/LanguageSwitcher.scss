@@ -20,12 +20,12 @@
     margin: 1px;
 
     &:hover {
-      background-color: $black !important;
-      color: $white !important;
+      background-color: var(--color-text) !important;
+      color: var(--color-background) !important;
     }
   }
 
   &__active-language {
-    border: 1px solid $black !important;
+    border: 1px solid var(--color-text) !important;
   }
 }

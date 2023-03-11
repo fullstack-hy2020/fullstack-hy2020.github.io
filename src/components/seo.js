@@ -7,13 +7,8 @@ import defaultImage from '../images/seo_image.jpg';
 import englishVersionSeoImage from '../images/EYE_green_wide.jpg';
 import path from 'path';
 
-function SEO({ description, lang, meta, image, keywords, title }) {
-  const seoImage =
-    image || lang === 'en'
-      ? englishVersionSeoImage
-      : lang === 'zh'
-      ? englishVersionSeoImage
-      : defaultImage;
+function SEO({ description, lang, meta, keywords, title }) {
+  const seoImage = lang === 'fi' ? defaultImage : englishVersionSeoImage;
 
   return (
     <StaticQuery

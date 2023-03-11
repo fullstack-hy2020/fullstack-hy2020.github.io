@@ -13,12 +13,15 @@
     "generalTitle": "General"
   },
   "navigation": {
+    "skipToContent": "Skip to content",
     "aboutCourse": "About course",
     "courseContents": "Course contents",
     "faq": "FAQ",
     "partners": "Partners",
     "challenge": "Challenge",
-    "searchLinkSrLabel": "Search from the material"
+    "searchLinkSrLabel": "Search from the material",
+    "ThemeSwitcherSrLabel": "Toggle dark theme",
+    "LanguagePickerSrLabel": "Select language"
   },
   "challengePage": {
     "aboutTitle": "This is Full Stack -challenge",
@@ -48,6 +51,9 @@
     "startCourseButton": "Start course",
     "announcementsTitle": "Announcements",
     "authorsTitle": "Authors and License",
-    "courseNameTitle": "Full Stack open 2022"
+    "courseNameTitle": "Full Stack open"
+  },
+  "notFoundPage": {
+    "title": "Page not found"
   }
 }

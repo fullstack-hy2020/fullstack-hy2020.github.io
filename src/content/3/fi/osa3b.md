@@ -27,7 +27,7 @@ export default { getAll, create, update }
 
 Frontendin tekemä GET-pyyntö osoitteeseen <http://localhost:3001/api/notes> ei jostain syystä toimi:
 
-![](../../images/3/3ae.png)
+![Konsolissa näkyy virhe 'Access ... blocked by CORS policy'](../../images/3/3ae.png)
 
 Mistä on kyse? Backend toimii kuitenkin selaimesta ja postmanista käytettäessä ilman ongelmaa.
 
@@ -63,23 +63,23 @@ CORS:ista voi lukea tarkemmin esim. [Mozillan sivuilta](https://developer.mozill
 
 Sovelluksen suoritusympäristö näyttää nyt seuraavalta:
 
-![](../../images/3/100.png)
+![Kuvassa localhost:3000 toimiva React dev server ja localhost:3001 toimiva node backend, jotka molemmat käyttävät lokaalilla levylä olevia fs-tiedostoja. Kuvassa myös selaimessa oleva react-sovellus. joka yhteydessä dev-serveriin (mistä se saa js-tiedoston) sekä node-backendiin jonka reitilt /app/notes sen saa json-muotoisen datan](../../images/3/100.png)
 
 Selaimessa toimiva frontendin koodi siis hakee datan osoitteessa localhost:3001 olevalta Express-palvelimelta.
 
 ### Sovellus Internetiin
 
-Kun koko "stäkki" on saatu vihdoin kuntoon, siirretään sovellus Internetiin. Käytetään seuraavassa vanhaa kunnon [Herokua](https://www.heroku.com).
+Kun koko "stäkki" on saatu vihdoin kuntoon, siirretään sovellus Internetiin.
 
-> <i>Jos et ole koskaan käyttänyt Herokua, löydät käyttöohjeita kurssin [Tietokantasovellus](https://hy-tsoha.github.io/materiaali/osa-3/#sovellus-tuotantoon)-materiaalista ja googlaamalla...</i>
+Sovellusten hostaamiseen, eli "internettiin laittamiseen" on olemassa lukematon määrä erilaisia ratkaisuja. Helpoimpia näistä sovelluskehittäjän kannalta ovat ns PaaS (eli Platform as a Service) -palvelut, jotka huolehtivat sovelluskehittäjän puolesta tietokannan ja suoritusympäristön asentamisen.
 
-Lisätään backendin projektin juureen tiedosto <i>Procfile</i>, joka kertoo Herokulle, miten sovellus käynnistetään:
+Kymmenen vuoden ajan PaaS-ratkaisujen ykkönen on ollut [Heroku](http://heroku.com). Elokuun 2022 lopussa Heroku ilmoitti että 27.11.2022 alkaen alustan maksuttomat palvelut loppuvat. Jos olet valmis maksamaan hiukan, on Heroku edelleen varteenotettava vaihtoehto.
 
-```bash
-web: npm start
-```
+Esittelemme seuraavassa kaksi hieman uudempaa palvelua [Fly.io:n](https://fly.io/):n sekä [Renderin](https://render.com/). Molemmilla on tarjolla jonkin verran ilmaista laskenta-aikaa.
 
-Muutetaan tiedoston <i>index.js</i> lopussa olevaa sovelluksen käyttämän portin määrittelyä seuraavasti:
+Hienoinen ikävä puoli Fly.io:ssa on se, että <i>saatat</i> joutua kertomaan palvelulle luottokorttitietosi vaikka <i>et käytä</i> palvelun maksullista osaa. Renderin käyttöönotto saattaa olla jossain tapauksissa helpompaa, sillä Render ei edellytä mitään asenuksia omalle koneelle.
+
+Molempia ratkaisuja varten muutetaan tiedoston <i>index.js</i> lopussa olevaa sovelluksen käyttämän portin määrittelyä seuraavasti:
 
 ```js
 const PORT = process.env.PORT || 3001  // highlight-line
@@ -88,27 +88,109 @@ app.listen(PORT, () => {
 })
 ```
 
-Nyt käyttöön tulee [ympäristömuuttujassa](https://en.wikipedia.org/wiki/Environment_variable) _PORT_ määritelty portti tai 3001, jos ympäristömuuttuja _PORT_ ei ole määritelty. Heroku konfiguroi sovelluksen portin ympäristömuuttujan avulla.
+Nyt käyttöön tulee [ympäristömuuttujassa](https://en.wikipedia.org/wiki/Environment_variable) _PORT_ määritelty portti tai 3001, jos ympäristömuuttuja _PORT_ ei ole määritelty. Sekä Fly.io että Render konfiguroivat sovelluksen portin ympäristömuuttujan avulla.
 
-Tehdään projektihakemistosta Git-repositorio ja lisätään <i>.gitignore</i>, jolla on seuraava sisältö:
+#### Fly.io
+
+Jos päätät käyttää [Fly.io](https://fly.io/):ta, aloita asentamalla Fly.io [tämän](https://fly.io/docs/hands-on/install-flyctl/) ohjeen mukaan ja luomalla itsellesi [tunnus](https://fly.io/docs/hands-on/sign-up/) palveluun.
+
+Oletusarvoisesti saat käyttöösi kaksi ilmaista virtuaalikonetta, ja pystyt käynnistämään molempiin yhden sovelluksen.
+
+Aloita [kirjautumalla](https://fly.io/docs/hands-on/sign-in/) komentoriviltä palveluun komennolla 
 
 ```bash
-node_modules
+fly auth login
 ```
 
-Luodaan Heroku-sovellus komennolla _heroku create_, tehdään sovelluksen hakemistosta Git-repositorio, commitoidaan koodi ja siirretään se Herokuun komennolla _git push heroku main_ (tai komennolla _git push heroku master_).
+*HUOM* jos komento fly ei toimi, kokeile toimiiko sen pidempi muoto _flyctl_. Esim. Macissa toimivat komennon molemmat muodot.
 
-Jos kaikki meni hyvin, sovellus toimii:
+Sovelluksen alustus tapahtuu seuraavasti. Mene sovelluksen juurihakemistoon ja anna komento
 
-![](../../images/3/25ea.png)
+```bash
+fly launch
+```
 
-Jos ei, vikaa voi selvittää Herokun lokeja lukemalla eli komennolla _heroku logs_.
+Anna sovellukselle nimi, tai anna Fly.io:n generoida automaattinen nimi, valitse "region" eli alue minkä konesaliissa sovelluksesi toimii. Älä luo sovellukselle postgres- sekä Upstash Redis-tietokantaa. Lopuksi vielä kysytään "Would you like to deploy now?" eli haluatko että sovellus myös viedään tuotantoympäristöön. Valitse "Ei".
 
-> **HUOM:** ainakin alussa on järkevää tarkkailla Herokussa olevan sovelluksen lokeja koko ajan. Parhaiten tämä onnistuu antamalla komento _heroku logs -t_, jolloin logit tulevat konsoliin sitä mukaan kun palvelimella tapahtuu jotain.
+Fly.io luo hakemistoosi tiedoston <i>fly.toml</i>, joka sisältää sovelluksen tuotantoympäristön konfiguraation.
 
-Myös frontend toimii Herokussa olevan backendin avulla. Voit varmistaa asian muuttamalla frontendiin määritellyn backendin osoitteen viittaamaan <i>http://localhost:3001</i>:n sijaan Herokussa olevaan backendiin.
+Jotta sovellus saadaan konfiguroitua oikein, tulee tiedostoon konfiguraatioon ehkä tehdä pieni lisäys osiin [env]
 
-Seuraavaksi herää kysymys: miten saamme myös frontendin Internetiin? Vaihtoehtoja on useita, mutta käydään seuraavaksi läpi yksi niistä.
+```bash
+[env]
+  PORT = "8080" # lisätään tämä
+
+[experimental]
+  auto_rollback = true
+
+[[services]]
+  http_checks = []
+  internal_port = 8080 
+  processes = ["app"]
+```
+
+Osaan [env] lisätään tarvittaessa (jos se ei jo siellä valmiiksi ole) määritelmä ympäristömuuttujalle PORT, jotta sovellus osaa käynnistää itsensä samaan samaan porttiin, missä Fly olettaa (määrittely kohdassa [services]) sen olevan käynnissä.
+
+Sovellus voidaan nyt käynnistää komennolla
+
+```bash
+fly deploy
+```
+
+Jos kaikki menee hyvin, sovellus käynnistyy ja saat sen avattua selaimeen komennolla 
+
+```bash
+fly open
+```
+
+Tämän jälkeen aina kun teet muutoksia sovellukseen, saat vietyä uuden version tuotantoon komennolla 
+
+```bash
+fly deploy
+```
+
+Erittäin tärkeä komento on myös _fly logs_ jonka avulla voit seurata tuotantopalvelimen konsoliin tulostuvia logeja. Logit on viisainta pitää koko ajan näkyvillä.
+
+#### Render
+
+Ohje olettaa, että Renderiin on [kirjauduttu](https://dashboard.render.com/) GitHub-tunnuksen avulla.
+
+Kirjautumisen jälkeen luodaan uusi "web service":
+
+![](../../images/3/r1.png)
+
+Yhdistetään sovelluksen repositorio Renderiin:
+
+![](../../images/3/r2.png)
+
+Yhdistäminen onnistuu ainakin jos repositorio on julkinen.
+
+Määritellään sovelluksen tiedot. Jos sovellus <i>ei ole</i> repositorion juuressa, tulee oikea hakemisto määritellä kohtaan <i>Root directory</i>:
+
+![](../../images/3/r3.png)
+
+Tämän jälkeen sovellus käynnistyy Renderiin. Sovelluksen sivu kertoo sovelluksen tilan ja osoitteen, mihin sovellus on käynnistynyt:
+
+![](../../images/3/r4.png)
+
+Oletusarvoisella konfiguraatiolla sovelluksen pitäisi [uudelleenkäynnistyä](https://render.com/docs/deploys) jokaisen GitHubiin pushatun commitin myötä automaattisesti uudelleen. Jostain syystä tämä ei kuitenkaan toimi aina.
+
+Sovelluksen saa myös uudelleenkäynnistettyä manuaalisesti:
+
+![](../../images/3/r5.png)
+
+Dashboardin kautta on myös mahdollista seurata sovelluksen lokia:
+
+![](../../images/3/r7.png)
+
+Huomaamme nyt lokista, että sovellus on käynnistynyt porttiin 10000. Sovellus saa käynnistysportin ympäristömuuttujan PORT kautta, eli on äärimmäisen tärkeää että tiedoston <i>index.js</i> loppu on päivitetty muotoon:
+
+```js
+const PORT = process.env.PORT || 3001  // highlight-line
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`)
+})
+```
 
 ### Frontendin tuotantoversio
 
@@ -119,28 +201,6 @@ Kun sovellus viedään tuotantoon, täytyy siitä tehdä [production build](http
 <i>create-react-app</i>:in avulla tehdyistä sovelluksista saadaan tehtyä tuotantoversio komennolla [_npm run build_](https://github.com/facebookincubator/create-react-app#npm-run-build-or-yarn-build).
 
 Suoritetaan nyt komento <i>frontendin projektin juuressa</i>.
-
-**HUOM:** tätä kirjoitettaessa (20.1.2022) create-react-app:issa on pieni bugi, ja jos komento aiheuttaa virheilmoituksen _TypeError: MiniCssExtractPlugin is not a constructor_, korjaus ongelmaan löytyy [täältä](https://github.com/facebook/create-react-app/issues/11930), eli lisää tiedostoon <i>package.json</i> 
-
-```json
-{
-  // ...
-  "resolutions": {
-    "mini-css-extract-plugin": "2.4.5"
-  }
-}
-```
-
-ja suorita komennot
-
-```bash
-rm -rf package-lock.json
-rm -rf node_modules
-npm cache clean --force
-npm install
-```
-
-Komennon _npm run build_ pitäisi taas toimia.
 
 Komennon seurauksena syntyy hakemiston <i>build</i> (joka sisältää jo sovelluksen ainoan html-tiedoston <i>index.html</i>) sisään hakemisto <i>static</i>, jonka alle generoituu sovelluksen JavaScript-koodin [minifioitu](<https://en.wikipedia.org/wiki/Minification_(programming)>) versio. Vaikka sovelluksen koodi on kirjoitettu useaan tiedostoon, generoituu kaikki JavaScript yhteen tiedostoon. Samaan tiedostoon tulee  myös kaikkien sovelluksen koodin tarvitsemien riippuvuuksien koodi.
 
@@ -157,12 +217,12 @@ Eräs mahdollisuus frontendin tuotantoon viemiseen on kopioida tuotantokoodi eli
 Aloitetaan kopioimalla frontendin tuotantokoodi backendin alle, projektin juureen. Omalla koneellani kopiointi tapahtuu frontendin hakemistosta käsin komennolla
 
 ```bash
-cp -r build ../notes-backend
+cp -r build ../backend
 ```
 
 Backendin sisältävän hakemiston tulee nyt näyttää seuraavalta:
 
-![](../../images/3/27ea.png)
+![ls-komento näyttää tiedostot index.js, Procfile, package.json, package-lock.json sekä hakemistot build ja node_modules](../../images/3/27new.png)
 
 Jotta saamme Expressin näyttämään <i>staattista sisältöä</i> eli sivun <i>index.html</i> ja sen lataaman JavaScriptin ym. tarvitsemme Expressiin sisäänrakennettua middlewarea [static](http://expressjs.com/en/starter/static-files.html).
 
@@ -194,7 +254,7 @@ Muutoksen jälkeen frontendistä on luotava uusi production build ja kopioitava 
 
 Sovellusta voidaan käyttää nyt <i>backendin</i> osoitteesta <http://localhost:3001>:
 
-![](../../images/3/28e.png)
+![Mentäessä osoitteeseen localhost:3001 selain renderöi react-sovelluksen, joka listaa muistiinpanot. Jokaisen muistiinpanon yhteydessä on sen tärkeyden muuttava nappi 'make important' tai 'make not important', näkymässä on myös lomake uuden muistiinpanon luomiseen. Tärkeyttä ei lomakkeella tarvitse voida asettaa, ainoastaan muistiinpanon sisältö.](../../images/3/28new.png)
 
 Sovelluksemme toiminta vastaa nyt täysin osan 0 luvussa [Single page app](/osa0/web_sovelluksen_toimintaperiaatteita#single-page-app) läpikäydyn esimerkkisovelluksen toimintaa.
 
@@ -218,21 +278,27 @@ Sivu sisältää ohjeen ladata sovelluksen tyylit määrittelevän CSS-tiedoston
 
 React-koodi hakee palvelimelta muistiinpanot osoitteesta <http://localhost:3001/api/notes> ja renderöi ne ruudulle. Selaimen ja palvelimen kommunikaatio selviää tuttuun tapaan konsolin välilehdeltä <i>Network</i>:
 
-![](../../images/3/29ea.png)
+![Välilehti Network kertoo että on tehty pyyntö GET localhost:3001/api/notes](../../images/3/29new.png)
 
 Tuotantoa varten tehty suoritusympäristö näyttää siis seuraavalta:
 
-![](../../images/3/101.png)
+![Selain hakee json-muotoisen datan localhost:3001/api/notes reitiltä ja suoritettavan react-sovelluksen js-koodin sekä index.html-tiedoston osoitteesta localhost:3001. Backend hakee tarvitsemansa js-tiedostot ja index.html:n paikalliselta levyltä.](../../images/3/101.png)
 
 Toisin kuin sovelluskehitysympäristössä, kaikki sovelluksen tarvitsema löytyy nyt node/express-palvelimelta osoitteesta localhost:3001. Kun osoitteeseen mennään, renderöi selain pääsivun <i>index.html</i> mikä taas aiheuttaa sen, että React-sovelluksen tuotantoversio haetaan palvelimelta ja selain alkaa suorittamaan sitä. Tämä taas saa aikaan sen, että ruudulla näytettävä JSON-muotoinen data haetaan osoitteesta localhost:3001/api/notes.
 
 ### Koko sovellus Internetiin
 
-Kun sovelluksen "Internetiin vietävä" tuotantoversio todetaan toimivaksi paikallisesti, commitoidaan frontendin tuotantoversio backendin repositorioon ja pushataan koodi uudelleen Herokuun.
+Kun sovelluksen "Internetiin vietävä" tuotantoversio todetaan toimivaksi paikallisesti, commitoidaan frontendin tuotantoversio backendin repositorioon ja pushataan koodi GtHubiin. Jos käytät Renderiä, saattaa automaattinen uudelleenkäynnistys toimia. Jos näin ei ole, käynnistä uusi versio itse dashboardin kautta tekemällä "manual deployment".
 
-[Sovellus](https://obscure-harbor-49797.herokuapp.com/) toimii moitteettomasti lukuun ottamatta vielä backendiin toteuttamatonta muistiinpanon tärkeyden muuttamista:
+Fly.io:n tapauksessa sovelluksen uusi versio käynnistyy komennolla
 
-![](../../images/3/30ea.png)
+```bash
+fly deploy
+```
+
+Sovellus toimii moitteettomasti lukuun ottamatta vielä backendiin toteuttamatonta muistiinpanon tärkeyden muuttamista:
+
+![Selain renderöi sovelluksen frontendin (joka näyttää palvelimella olevan datan) mentäessä sovelluksen heroku-urlin juureen](../../images/3/30new.png)
 
 Sovelluksemme tallettama tieto ei ole ikuisesti pysyvää, sillä sovellus tallettaa muistiinpanot muuttujaan. Jos sovellus kaatuu tai se uudelleenkäynnistetään, kaikki tiedot katoavat.
 
@@ -240,27 +306,53 @@ Tarvitsemme sovelluksellemme tietokannan. Ennen tietokannan käyttöönottoa kat
 
 Tuotannossa oleva sovellus näyttää seuraavalta:
 
-![](../../images/3/102.png)
+![Selain hakee json-muotoisen datan nameoftheapp.herokuapp.com/api/notes osoitteesta ja suoritettavan react-sovelluksen js-koodin sekä index.html-tiedoston osoitteesta  nameoftheapp.herokuapp.com. Backend hakee tarvitsemansa js-tiedostot ja index.html:n herokun palvelimen levyltä.](../../images/3/102.png)
 
-Nyt siis node/express-backend sijaitsee Herokun palvelimella. Kun selaimella mennään sovelluksen "juuriosoitteeseen", joka on muotoa https://glacial-ravine-74819.herokuapp.com/, alkaa selain suorittaa React-koodia joka taas hakee JSON-muotoisen datan Herokusta.
+Nyt siis node/express-backend sijaitsee Fly.io:n/Renderin palvelimella. Kun selaimella mennään sovelluksen "juuriosoitteeseen", alkaa selain suorittamaan React-koodia, joka taas hakee JSON-muotoisen datan Fly.io:sta/Renderistä.
 
-### Frontendin deployauksen suoraviivaistus
+### Frontendin deployauksen suoraviivaistus 
 
-Jotta uuden frontendin version generointi onnistuisi jatkossa ilman turhia manuaalisia askelia, lisätään uusia skriptejä backendin <i>package.json</i>-tiedostoon:
+Jotta uuden frontendin version generointi onnistuisi jatkossa ilman turhia manuaalisia askelia, lisätään uusia skriptejä backendin <i>package.json</i>-tiedostoon.
+
+#### Fly.io
+
+Fly.io:n tapauksessa skriptit näyttävät seuraavalta:
+
 ```json
 {
   "scripts": {
     // ...
-    "build:ui": "rm -rf build && cd ../part2-notes/ && npm run build && cp -r build ../notes-backend",
-    "deploy": "git push heroku main",
-    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",    
-    "logs:prod": "heroku logs --tail"
+    "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
+    "deploy": "fly deploy",
+    "deploy:full": "npm run build:ui && npm run deploy",    
+    "logs:prod": "fly logs"
   }
 }
 ```
-Skripteistä _npm run build:ui_ kääntää ui:n tuotantoversioksi ja kopioi sen. _npm run deploy_ julkaisee Herokuun.
 
-_npm run deploy:full_ yhdistää nuo molemmat sekä lisää vaadittavat <i>git</i>-komennot versionhallinnan päivittämistä varten. Lisätään lisäksi oma skripti _npm run logs:prod_ lokien lukemiseen, jolloin käytännössä kaikki toimii npm-skriptein.
+Skripteistä _npm run build:ui_ kääntää ui:n tuotantoversioksi ja kopioi sen. _npm run deploy_ julkaisee Fly.io:n.
+
+_npm run deploy:full_ yhdistää molemmat edellä mainitut komennot. Lisätään lisäksi oma skripti _npm run logs:prod_ lokien lukemiseen, jolloin käytännössä kaikki toimii npm-skriptein.
+
+Huomaa, että skriptissä <i>build:ui</i> olevat polut riippuvat repositorioiden sijainnista.
+
+#### Render
+
+Renderin tapauksessa skriptit näyttävät seuraavalta:
+
+```json
+{
+  "scripts": {
+    // ...
+    "build:ui": "rm -rf build && cd ../frontend && npm run build && cp -r build ../backend",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push"
+  }
+}
+```
+
+Skripteistä _npm run build:ui_ kääntää ui:n tuotantoversioksi ja kopioi sen.
+
+_npm run deploy:full_ sisältää edellisen lisää vaadittavat <i>git</i>-komennot versionhallinnan päivittämistä varten.
 
 Huomaa, että skriptissä <i>build:ui</i> olevat polut riippuvat repositorioiden sijainnista.
 
@@ -268,7 +360,7 @@ Huomaa, että skriptissä <i>build:ui</i> olevat polut riippuvat repositorioiden
 
 Frontendiin tehtyjen muutosten seurauksena on nyt se, että kun suoritamme frontendiä sovelluskehitysmoodissa eli käynnistämällä sen komennolla _npm start_, yhteys backendiin ei toimi:
 
-![](../../images/3/32ea.png)
+![Network-tabi kertoo että pyyntöön localhost:3000/api/notes vastataan statuskoodilla 404](../../images/3/32new.png)
 
 Syynä tälle on se, että backendin osoite muutettiin suhteellisesti määritellyksi:
 
@@ -320,23 +412,11 @@ Joudut todennäköisesti tekemään frontendiin erinäisiä pieniä muutoksia ai
 
 #### 3.10 puhelinluettelon backend step10
 
-Vie sovelluksen backend Internetiin, esim. Herokuun. 
-
-**Huom.** komento _heroku_ toimii laitoksen koneilla ja fuksikannettavilla. Jos et jostain syystä saa [asennettua](https://devcenter.heroku.com/articles/heroku-cli) herokua koneellesi, voit käyttää komentoa [npx heroku](https://www.npmjs.com/package/heroku).
+Vie sovelluksen backend Internetiin, esim. Fly.io:n tai Renderiin. 
 
 Testaa selaimen ja Postmanin tai VS Coden REST-clientin avulla, että Internetissä oleva backend toimii.
 
-**PRO TIP:** kun deployaat sovelluksen Herokuun, kannattaa ainakin alkuvaiheissa pitää **KOKO AJAN** näkyvillä Herokussa olevan sovelluksen loki antamalla komento <em>heroku logs -t</em>.
-
-Seuraavassa loki eräästä tyypillisestä ongelmatilanteesta, jossa Heroku ei löydä sovelluksen riippuvuutena olevaa moduulia <i>express</i>:
-
-![](../../images/3/33.png)
-
-Syynä ongelmalle on se, että <i>Express</i>-kirjastoa ei ole asennettu <em>npm install express</em> komennolla, joka tallentaa tiedon riippuvuudesta tiedostoon <i>package.json</i>. 
-
-Toinen tyypillinen ongelma on se, että sovellusta ei ole konfiguroitu käyttämään ympäristömuuttujana <em>PORT</em> määriteltyä porttia:
-
-![](../../images/3/34.png)
+**PRO TIP:** kun deployaat sovelluksen Fly.io:n tai Renderiin, kannattaa ainakin alkuvaiheissa pitää **KOKO AJAN** näkyvillä sovelluksen loki.
 
 Tee repositorion juureen tiedosto README.md ja lisää siihen linkki Internetissä olevaan sovellukseesi.
 
@@ -344,7 +424,7 @@ Tee repositorion juureen tiedosto README.md ja lisää siihen linkki Internetiss
 
 Generoi frontendistä tuotantoversio ja lisää se Internetissä olevaan sovellukseesi tässä osassa esiteltyä menetelmää noudattaen.
 
-**HUOM:** eihän hakemisto <i>build</i> ole gitignoroituna projektissasi?
+**HUOM:** eihän hakemisto <i>build</i> ole gitignoroituna projektissasi jos käytät Renderiä?
 
 Huolehdi myös, että frontend toimii edelleen myös paikallisesti.
 

@@ -56,13 +56,13 @@ const fetchMovies = async () => {
 
 For a more detailed introduction to the Fetch API, read the [Using Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) article in the MDN web docs.
 
-Next, let's try the Fetch API in practice. The rate-repository-api server provides an endpoint for returning a paginated list of reviewed repositories. Once the server is running, you should be able to access the endpoint at [http://localhost:5000/api/repositories](http://localhost:5000/api/repositories). The data is paginated in a common [cursor based pagination format](https://graphql.org/learn/pagination/). The actual repository data is behind the <i>node</i> key in the <i>edges</i> array.
+Next, let's try the Fetch API in practice. The rate-repository-api server provides an endpoint for returning a paginated list of reviewed repositories. Once the server is running, you should be able to access the endpoint at [http://localhost:5000/api/repositories](http://localhost:5000/api/repositories) (unless you have changed the port). The data is paginated in a common [cursor based pagination format](https://graphql.org/learn/pagination/). The actual repository data is behind the <i>node</i> key in the <i>edges</i> array.
 
-Unfortunately, we can't access the server directly in our application by using the <i>http://localhost:5000/api/repositories</i> URL. To make a request to this endpoint in our application we need to access the server using its IP address in its local network. To find out what it is, open the Expo development tools by running <em>npm start</em>. In the development tools you should be able to see an URL starting with <i>exp://</i> above the QR code:
+Unfortunately, we can't access the server directly in our application by using the <i>http://localhost:5000/api/repositories</i> URL. To make a request to this endpoint in our application we need to access the server using its IP address in its local network. To find out what it is, open the Expo development tools by running <em>npm start</em>. In the console you should be able to see an URL starting with <i>exp://</i> below the QR code, after the "Metro waiting on" text:
 
-![Development tools](../../images/10/10.png)
+![metro console output with highlight over exp://<ip> url](../../images/10/26new.png)
 
-Copy the IP address between the <i>exp://</i> and <i>:</i>, which is in this example <i>192.168.100.16</i>. Construct an URL in format <i>http://<IP_ADDRESS>:5000/api/repositories</i> and open it in the browser. You should see the same response as you did with the <i>localhost</i> URL.
+Copy the IP address between the <i>exp://</i> and <i>:</i>, which is in this example <i>192.168.1.33</i>. Construct an URL in format <i><http://><IP_ADDRESS>:5000/api/repositories</i> and open it in the browser. You should see the same response as you did with the <i>localhost</i> URL.
 
 Now that we know the end point's URL let's use the actual server-provided data in our reviewed repositories list. We are currently using mock data stored in the <em>repositories</em> variable. Remove the <em>repositories</em> variable and replace the usage of the mock data with this piece of code in the <i>RepositoryList.jsx</i> file in the <i>components</i> directory:
 
@@ -75,7 +75,7 @@ const RepositoryList = () => {
 
   const fetchRepositories = async () => {
     // Replace the IP address part with your own IP address!
-    const response = await fetch('http://192.168.100.16:5000/api/repositories');
+    const response = await fetch('http://192.168.1.33:5000/api/repositories');
     const json = await response.json();
 
     console.log(json);
@@ -105,7 +105,7 @@ export default RepositoryList;
 
 We are using the React's <em>useState</em> hook to maintain the repository list state and the <em>useEffect</em> hook to call the <em>fetchRepositories</em> function when the <em>RepositoryList</em> component is mounted. We extract the actual repositories into the <em>repositoryNodes</em> variable and replace the previously used <em>repositories</em> variable in the <em>FlatList</em> component's <em>data</em> prop with it. Now you should be able to see actual server-provided data in the reviewed repositories list.
 
-It is usually a good idea to log the server's response to be able to inspect it as we did in the <em>fetchRepositories</em> function. You should be able to see this log message in the Expo development tools if you navigate to your device's logs as we learned in the [Viewing logs](/en/part10/introduction_to_react_native#viewing-logs) section. If you are using the Expo's mobile app for development and the network request is failing, make sure that the computer you are using to run the server and your phone are <i>connected to the same Wi-Fi network</i>. If that's not possible either use an emulator in the same computer as the server is running in or set up a tunnel to the localhost, for example, using [Ngrok](https://ngrok.com/).
+It is usually a good idea to log the server's response to be able to inspect it as we did in the <em>fetchRepositories</em> function. You should be able to see this log message in the Expo development tools if you navigate to your device's logs as we learned in the [Debugging](/en/part10/introduction_to_react_native#debugging) section. If you are using the Expo's mobile app for development and the network request is failing, make sure that the computer you are using to run the server and your phone are <i>connected to the same Wi-Fi network</i>. If that's not possible either use an emulator in the same computer as the server is running in or set up a tunnel to the localhost, for example, using [Ngrok](https://ngrok.com/).
 
 The current data fetching code in the </em>RepositoryList</em> component could do with some refactoring. For instance, the component is aware of the network request's details such as the end point's URL. In addition, the data fetching code has lots of reuse potential. Let's refactor the component's code by extract the data fetching code into its own hook. Create a directory <i>hooks</i> in the <i>src</i> directory and in that <i>hooks</i> directory create a file <i>useRepositories.js</i> with the following content:
 
@@ -120,7 +120,7 @@ const useRepositories = () => {
     setLoading(true);
 
     // Replace the IP address part with your own IP address!
-    const response = await fetch('http://192.168.100.16:5000/api/repositories');
+    const response = await fetch('http://192.168.1.33:5000/api/repositories');
     const json = await response.json();
 
     setLoading(false);
@@ -204,7 +204,7 @@ import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 
 const httpLink = createHttpLink({
   // Replace the IP address part with your own IP address!
-  uri: 'http://192.168.100.16:4000/graphql',
+  uri: 'http://192.168.1.33:4000/graphql',
 });
 
 const createApolloClient = () => {
@@ -284,7 +284,7 @@ Once our application grows larger there might be times when certain files grow t
 
 - Create files <i>B.jsx</i> and <i>C.jsx</i> in the <i>components</i> directory. This results in the following structure:
 
-```
+```bash
 components/
   A.jsx
   B.jsx
@@ -294,7 +294,7 @@ components/
 
 - Create a directory <i>A</i> in the <i>components</i> directory and create files <i>B.jsx</i> and <i>C.jsx</i> there. To avoid breaking components that import the <i>A.jsx</i> file, move the <i>A.jsx</i> file to the <i>A</i> directory and rename it to <i>index.jsx</i>. This results in the following structure:
 
-```
+```bash
 components/
   A/
     B.jsx
@@ -309,13 +309,13 @@ The first option is fairly decent, however, if components <em>B</em> and <em>C</
 
 <div class="tasks">
 
-### Exercise 10.11.
+### Exercise 10.11
 
 #### Exercise 10.11: fetching repositories with Apollo Client
 
 We want to replace the Fetch API implementation in the <em>useRepositories</em> hook with a GraphQL query. Open the Apollo Sandbox at [http://localhost:4000](http://localhost:4000) and take a look at the documentation next to the operations editor. Look up the <em>repositories</em> query. The query has some arguments, however, all of these are optional so you don't need to specify them. In the Apollo Sandbox form a query for fetching the repositories with the fields you are currently displaying in the application. The result will be paginated and it contains the up to first 30 results by default. For now, you can ignore the pagination entirely.
 
-Once the query is working in the Apollo Sandbox, use it to replace the Fetch API implementation in the <em>useRepositories</em> hook. This can be achieved using the [useQuery](https://www.apollographql.com/docs/react/api/react/hooks/#usequery) hook. The <em>gql</em> template literal tag can be imported from the <i>@apollo/client</i> library as instructed earlier. Consider using the structure recommended earlier for the GraphQL related code. To avoid future caching issues, use the _cache-and-network_ [fetch policy](https://www.apollographql.com/docs/react/data/queries/#setting-a-fetch-policy) in the query. It can be used with the <em>useQuery</em> hook like this:
+Once the query is working in the Apollo Sandbox, use it to replace the Fetch API implementation in the <em>useRepositories</em> hook. This can be achieved using the [useQuery](https://www.apollographql.com/docs/react/api/react/hooks/#usequery) hook. The <em>gql</em> template literal tag can be imported from the <i>@apollo/client</i> library as instructed earlier. Consider using the structure recommended earlier for the GraphQL related code. To avoid future caching issues, use the *cache-and-network* [fetch policy](https://www.apollographql.com/docs/react/data/queries/#setting-a-fetch-policy) in the query. It can be used with the <em>useQuery</em> hook like this:
 
 ```javascript
 useQuery(MY_QUERY, {
@@ -431,7 +431,7 @@ npm install dotenv
 
 Next, add a <em>.env</em> file in the root directory of our project with the following content:
 
-```
+```text
 ENV=development
 ```
 
@@ -457,7 +457,7 @@ Note that it is <i>never</i> a good idea to put sensitive data into the applicat
 
 <div class="tasks">
 
-### Exercise 10.12.
+### Exercise 10.12
 
 #### Exercise 10.12: environment variables
 
@@ -473,10 +473,10 @@ Instead of the hardcoded Apollo Server's URL, use an environment variable define
 
 There are times when we need to store some persisted pieces of data in the user's device. One such common scenario is storing the user's authentication token so that we can retrieve it even if the user closes and reopens our application. In web development, we have used the browser's <em>localStorage</em> object to achieve such functionality. React Native provides similar persistent storage, the [AsyncStorage](https://react-native-async-storage.github.io/async-storage/docs/usage/).
 
-We can use the <em>expo install</em> command to install the version of the <i>@react-native-async-storage/async-storage</i> package that is suitable for our Expo SDK version:
+We can use the <em>npx expo install</em> command to install the version of the <i>@react-native-async-storage/async-storage</i> package that is suitable for our Expo SDK version:
 
 ```shell
-expo install @react-native-async-storage/async-storage
+npx expo install @react-native-async-storage/async-storage
 ```
 
 The API of the <em>AsyncStorage</em> is in many ways same as the <em>localStorage</em> API. They are both key-value storages with similar methods. The biggest difference between the two is that, as the name implies, the operations of <em>AsyncStorage</em> are <i>asynchronous</i>.
@@ -545,13 +545,13 @@ We can add an item to the storage using the [AsyncStorage.setItem](https://react
 
 <div class="tasks">
 
-### Exercises 10.13. - 10.14.
+### Exercises 10.13. - 10.14
 
 #### Exercise 10.13: the sign in form mutation
 
 The current implementation of the sign in form doesn't do much with the submitted user's credentials. Let's do something about that in this exercise. First, read the rate-repository-api server's [authentication documentation](https://github.com/fullstack-hy2020/rate-repository-api#-authentication) and test the provided queries and mutations in the Apollo Sandbox. If the database doesn't have any users, you can populate the database with some seed data. Instructions for this can be found in the [getting started](https://github.com/fullstack-hy2020/rate-repository-api#-getting-started) section of the README.
 
-Once you have figured out how the authentication works, create a file _useSignIn.js_ file in the <i>hooks</i> directory. In that file implement a <em>useSignIn</em> hook that sends the <em>authenticate</em> mutation using the [useMutation](https://www.apollographql.com/docs/react/api/react/hooks/#usemutation) hook. Note that the <em>authenticate</em> mutation has a <i>single</i> argument called <em>credentials</em>, which is of type <em>AuthenticateInput</em>. This [input type](https://graphql.org/graphql-js/mutations-and-input-types) contains <em>username</em> and <em>password</em> fields.
+Once you have figured out how the authentication works, create a file *useSignIn.js* file in the <i>hooks</i> directory. In that file implement a <em>useSignIn</em> hook that sends the <em>authenticate</em> mutation using the [useMutation](https://www.apollographql.com/docs/react/api/react/hooks/#usemutation) hook. Note that the <em>authenticate</em> mutation has a <i>single</i> argument called <em>credentials</em>, which is of type <em>AuthenticateInput</em>. This [input type](https://graphql.org/graphql-js/mutations-and-input-types) contains <em>username</em> and <em>password</em> fields.
 
 The return value of the hook should be a tuple <em>[signIn, result]</em> where <em>result</em> is the mutations result as it is returned by the <em>useMutation</em> hook and <em>signIn</em> a function that runs the mutation with a <em>{ username, password }</em> object argument. Hint: don't pass the mutation function to the return value directly. Instead, return a function that calls the mutation function like this:
 
@@ -652,7 +652,7 @@ const App = () => {
 export default App;
 ```
 
-We also provided the storage instance for the <em>createApolloClient</em> function as an argument. This is because next, we will send the access token to Apollo Server in each request. The Apollo Server will expect that the access token is present in the <i>Authorization</i> header in the format <i>Bearer <ACCESS_TOKEN></i>. We can enhance the Apollo Client's request by using the [setContext](https://www.apollographql.com/docs/react/api/link/apollo-link-context/s) function. Let's send the access token to the Apollo Server by modifying the <em>createApolloClient</em> function in the <i>apolloClient.js</i> file:
+We also provided the storage instance for the <em>createApolloClient</em> function as an argument. This is because next, we will send the access token to Apollo Server in each request. The Apollo Server will expect that the access token is present in the <i>Authorization</i> header in the format <i>Bearer <ACCESS_TOKEN></i>. We can enhance the Apollo Client's request by using the [setContext](https://www.apollographql.com/docs/react/api/link/apollo-link-context) function. Let's send the access token to the Apollo Server by modifying the <em>createApolloClient</em> function in the <i>apolloClient.js</i> file:
 
 ```javascript
 import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
@@ -702,9 +702,9 @@ export default createApolloClient;
 The last piece of the sign-in puzzle is to integrate the storage to the <em>useSignIn</em> hook. To achieve this the hook must be able to access token storage instance we have initialized in the <em>App</em> component. React [Context](https://reactjs.org/docs/context.html) is just the tool we need for the job. Create a directory <i>contexts</i> in the <i>src</i> directory. In that directory create a file <i>AuthStorageContext.js</i> with the following content:
 
 ```javascript
-import React from 'react';
+import { createContext } from 'react';
 
-const AuthStorageContext = React.createContext();
+const AuthStorageContext = createContext();
 
 export default AuthStorageContext;
 ```
@@ -757,22 +757,23 @@ Note that accessing a context's value using the <em>useContext</em> hook only wo
 Accessing the <em>AuthStorage</em> instance with <em>useContext(AuthStorageContext)</em> is quite verbose and reveals the details of the implementation. Let's improve this by implementing a <em>useAuthStorage</em> hook in a <i>useAuthStorage.js</i> file in the <i>hooks</i> directory:
 
 ```javascript
+import { createContext } from 'react';
 import { useContext } from 'react'; 
 
-import AuthStorageContext from '../contexts/AuthStorageContext';
+const AuthStorageContext = createContext();
 
-const useAuthStorage = () => {
+export const useAuthStorage = () => {
   return useContext(AuthStorageContext);
 };
 
-export default useAuthStorage;
+export default AuthStorageContext;
 ```
 
 The hook's implementation is quite simple but it improves the readability and maintainability of the hooks and components using it. We can use the hook to refactor the <em>useSignIn</em> hook like this:
 
 ```javascript
 // ...
-import useAuthStorage from '../hooks/useAuthStorage'; // highlight-line
+import { useAuthStorage } from '../hooks/useAuthStorage'; // highlight-line
 
 const useSignIn = () => {
   const authStorage = useAuthStorage(); //highlight-line
@@ -780,13 +781,15 @@ const useSignIn = () => {
 };
 ```
 
-The ability to provide data to component's descendants opens tons of use cases for React Context. To learn more about these use cases, read Kent C. Dodds' enlightening article [How to use React Context effectively](https://kentcdodds.com/blog/how-to-use-react-context-effectively) to find out how to combine the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) hook with the context to implement state management. You might find a way to use this knowledge in the upcoming exercises.
+The ability to provide data to component's descendants opens tons of use cases for React Context, as we already saw in the [last chapter](/en/part6/react_query_use_reducer_and_the_context) of part 6.
+
+To learn more about these use cases, read Kent C. Dodds' enlightening article [How to use React Context effectively](https://kentcdodds.com/blog/how-to-use-react-context-effectively) to find out how to combine the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) hook with the context to implement state management. You might find a way to use this knowledge in the upcoming exercises.
 
 </div>
 
 <div class="tasks">
 
-### Exercises 10.15. - 10.16.
+### Exercises 10.15. - 10.16
 
 #### Exercise 10.15: storing the access token step2
 
@@ -813,7 +816,7 @@ The final step in completing the sign in feature is to implement a sign out feat
 }
 ```
 
-You will probably end up with the <em>null</em> result. This is because the Apollo Sandbox is not authenticated, meaning that it doesn't send a valid access token with the request. Revise the [authentication documentation](https://github.com/fullstack-hy2020/rate-repository-api#-authentication) and retrieve an access token using the <em>authenticate</em> mutation. Use this access token in the _Authorization_ header as instructed in the documentation. Now, run the <em>me</em> query again and you should be able to see the authenticated user's information.
+You will probably end up with the <em>null</em> result. This is because the Apollo Sandbox is not authenticated, meaning that it doesn't send a valid access token with the request. Revise the [authentication documentation](https://github.com/fullstack-hy2020/rate-repository-api#-authentication) and retrieve an access token using the <em>authenticate</em> mutation. Use this access token in the *Authorization* header as instructed in the documentation. Now, run the <em>me</em> query again and you should be able to see the authenticated user's information.
 
 Open the <em>AppBar</em> component in the <i>AppBar.jsx</i> file where you currently have the tabs "Repositories" and "Sign in". Change the tabs so that if the user is signed in the tab "Sign out" is displayed, otherwise show the "Sign in" tab. You can achieve this by using the <em>me</em> query with the [useQuery](https://www.apollographql.com/docs/react/api/react/hooks/#usequery) hook.
 

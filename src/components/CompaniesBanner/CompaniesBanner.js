@@ -30,10 +30,6 @@ const partners = [
     url: 'https://corporate.elisa.fi/rekrytointi/',
   },
   {
-    image: { name: 'kesko.svg', alt: 'Kesko' },
-    url: 'https://www.kesko.fi/',
-  },
-  {
     image: { name: 'unity.svg', alt: 'Unity' },
     url: 'https://www.instagram.com/unitytechnologies/?hl=en',
   },
@@ -101,7 +97,7 @@ const inChallenge = [
   'Resilient E',
   'Neemia',
   'Bubblin',
-  "Zaibatsu"
+  'Zaibatsu',
 ];
 
 export const CompaniesBanner = ({ isFrontPage, lang }) => {
@@ -109,7 +105,7 @@ export const CompaniesBanner = ({ isFrontPage, lang }) => {
 
   return (
     <Banner
-      backgroundColor={isFrontPage && 'white'}
+      backgroundColor={isFrontPage && 'var(--color-background)'}
       className="spacing--after"
       id="challenge"
     >
@@ -128,6 +124,7 @@ export const CompaniesBanner = ({ isFrontPage, lang }) => {
             <ContentLiftup
               key={company.url}
               small
+              applyPadding
               companyPath={company.url}
               image={{
                 src: require(`../../images/company_logos/${
@@ -160,6 +157,7 @@ export const CompaniesBanner = ({ isFrontPage, lang }) => {
                   )}.svg`)}
                   alt={company}
                   className={`company__logo push-right-1 col-3--mobile col-3--tablet`}
+                  backdrop
                 />
               ))}
             </Element>

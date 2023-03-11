@@ -6,6 +6,7 @@ import { BodyText } from '../BodyText/BodyText';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import ReactGA from 'react-ga';
+import snakeCase from 'lodash/fp/snakeCase';
 
 ReactGA.initialize('UA-135975842-1');
 
@@ -47,6 +48,8 @@ class Accordion extends Component {
     } = this.props;
     const { isOpened } = this.state;
 
+    const identifier = snakeCase(title);
+
     return (
       <div
         className={`accordion__container col-8 push-right-1 ${containerClassName}`}
@@ -56,31 +59,31 @@ class Accordion extends Component {
             isOpened ? 'active' : ''
           } ${className}`}
           style={titleStyle}
+          aria-controls={identifier}
+          aria-expanded={isOpened}
           onClick={() => this.handleClick()}
         >
           {title}
         </button>
-        <div
-          className="panel"
-          style={{
-            padding: `${isOpened ? '2rem 18px' : ''}`,
-            maxHeight: `${!isOpened ? 0 : 'unset'}`,
-            transition: 'max-height 0.2s ease-out',
-          }}
-        >
-          {content && (
-            <BodyText className="col-8 push-right-1" text={content} />
-          )}
-          {list && (
-            <ul>
-              {list.map(l => (
-                <li key={l.text} className={selectedItem === l.id ? 'selected' : undefined}>
-                  <Link to={l.href}>{l.text}</Link>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+        {isOpened && (
+          <div className="panel" id={identifier}>
+            {content && (
+              <BodyText className="col-8 push-right-1" text={content} />
+            )}
+            {list && (
+              <ul>
+                {list.map(l => (
+                  <li
+                    key={l.text}
+                    className={selectedItem === l.id ? 'selected' : undefined}
+                  >
+                    <Link to={l.href}>{l.text}</Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        )}
       </div>
     );
   }

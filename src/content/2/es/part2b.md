@@ -91,7 +91,7 @@ const App = (props) => {
 
 Hemos agregado la función _addNote_ como un controlador de eventos al elemento del formulario que se llamará cuando se envíe el formulario, haciendo clic en el botón submit.
 
-Usamos el método discutido en la [parte 1](/es/part1/controladores_de_eventos_de_componentes#controladores_de_eventos) para definir nuestro controlador de eventos:
+Usamos el método discutido en la [parte 1](/es/part1/estado_del_componente_controladores_de_eventos#manejo-de-eventos) para definir nuestro controlador de eventos:
 
 ```js
 const addNote = (event) => {
@@ -114,6 +114,8 @@ El objetivo del evento almacenado en _event.target_ se registra en la consola:
 El objetivo (target) en este caso es el formulario que hemos definido en nuestro componente.
 
 ¿Cómo accedemos a los datos contenidos en el elemento <i>input</i> del formulario?
+  
+### Componentes controlados
 
 Hay muchas maneras de lograr esto; el primer método que veremos es mediante el uso de los llamados [componentes controlados](https://reactjs.org/docs/forms.html#controlled-components).
 
@@ -242,7 +244,7 @@ const addNote = (event) => {
 }
 ```
 
-Primero creamos un nuevo objeto para la nota llamado <em>noteObject</em> que recibirá su contenido del esatdo del componente <em>newNote</em>. El identificador único <i>id</i> se genera en función del número total de notas. Este método funciona para nuestra aplicación ya que las notas nunca se eliminan. Con la ayuda de la función <em>Math.random()</em>, nuestra nota tiene un 50% de posibilidades de ser marcada como importante.
+Primero creamos un nuevo objeto para la nota llamado <em>noteObject</em> que recibirá su contenido del estado del componente <em>newNote</em>. El identificador único <i>id</i> se genera en función del número total de notas. Este método funciona para nuestra aplicación ya que las notas nunca se eliminan. Con la ayuda de la función <em>Math.random()</em>, nuestra nota tiene un 50% de posibilidades de ser marcada como importante.
 
 La nueva nota se agrega a la lista de notas usando el método de matriz [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), introducido en la [parte 1](/es/part1/java_script#arrays):
 
@@ -392,7 +394,7 @@ El texto del botón depende del valor del estado de <em>showAll</em>:
 show {showAll ? 'important' : 'all'}
 ```
 
-Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part2-3</i> de [este repositorio de GitHub](https://github.com/fullstack-hy2020/part2-notes/árbol/part2-3).
+Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part2-3</i> de [este repositorio de GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-3).
 </div>
 
 <div class="tasks">
@@ -448,7 +450,7 @@ A veces puede resultar útil representar el estado y otras variables como texto 
 <div>debug: {newName}</div>
 ```
 
-También es importante poner lo que aprendimos en el capítulo [depuración de aplicaciones React](/es/part1/un_estado_mas_complejo#depurando_aplicaciones_react) de la parte uno en buen uso. La extensión [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) especialmente, es increíblemente útil para rastrear los cambios que ocurren en el estado de la aplicación.
+También es importante poner lo que aprendimos en el capítulo [depuración de aplicaciones React](/es/part1/un_estado_mas_complejo_depurando_aplicaciones_react) de la parte uno en buen uso. La extensión [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) especialmente, es increíblemente útil para rastrear los cambios que ocurren en el estado de la aplicación.
 
 Después de terminar este ejercicio, su aplicación debería verse así:
 
@@ -507,6 +509,7 @@ En este punto, la aplicación podría verse así. La imagen también muestra el 
 
 ![](../../images/2/12e.png)
 
+<h4>2.9*: La guía telefónica Paso4</h4>
 
 Implemente un campo de búsqueda que pueda usarse para filtrar la lista de personas por nombre:
 
@@ -566,5 +569,4 @@ const App = () => {
 
 <!-- ** HUOM **: saatat törmätä ongelmiin tässä tehtävässä, jos määrittelet komponentteja" väärässä paikassa ", nyt kannattaakin ehdottomasti kerrata edellisen osan luku [älä määrittele komponenttia komponentin sisällä] (/ osa1 / monimutkaisempi_tila_reactin_debuggaus # ala-maarittele-komponenttia-komponentin-sisalla). -->
 **NB**: Es posible que tenga problemas en este ejercicio si define sus componentes "en el lugar equivocado". Ahora sería un buen momento para ensayar 
-el capítulo [no defina un componente en otro componente](/es​​/part1/depuracion_de_app_de_react_con_estados_mas_complejos#no_defina_componentes_dentro_de_otros_componentes)
-de la última parte.
+el capítulo [no defina un componente en otro componente](/es/part1/un_estado_mas_complejo_depurando_aplicaciones_react#no-definir-componentes-dentro-de-los-componentes) de la última parte.

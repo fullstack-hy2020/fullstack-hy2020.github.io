@@ -8,6 +8,7 @@ import './Navigation.scss';
 import LanguagePicker from '../LanguagePicker';
 import { NavigationItem } from './Item';
 import SearchLink from './SearchLink';
+import ThemeSwitcher from './ThemeSwitcher';
 
 const getTranslationPath = (path, language) => {
   return language === 'fi' ? path : `/${language}${path}`;
@@ -36,7 +37,7 @@ export const getNavigation = (language, t) => {
 };
 
 const searchIsEnabledForLang = lang => {
-  return ['fi', 'en', 'zh'].includes(lang);
+  return ['fi', 'en', 'zh', 'ptbr'].includes(lang);
 };
 
 const handleCloseMenu = () =>
@@ -78,7 +79,10 @@ const Navigation = props => {
             <NavigationItem key={i.path} {...i} onClick={handleCloseMenu} />
           ))}
 
-          {showSearchLink && <SearchLink lang={lang} />}
+          <div className="navigation__icon-buttons">
+            {showSearchLink && <SearchLink lang={lang} />}
+            <ThemeSwitcher />
+          </div>
 
           <LanguagePicker
             className="navigation__language-picker"

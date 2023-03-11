@@ -1,4 +1,6 @@
-# Full stack open 2020
+# Full stack open
+
+Despite the repo name this IS the current course repository
 
 <https://fullstackopen.com/>
 

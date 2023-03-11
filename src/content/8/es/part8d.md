@@ -11,7 +11,6 @@ La interfaz de nuestra aplicación muestra el directorio telefónico muy bien co
 
 ### Inicio de sesión de usuario
 
-<!-- Lisätään sovelluksen tilaan muuttuja _token_, joka tallettaa tokenin siinä vaiheessa kun käyttäjä en kirjautunut. Jos _token_ ei ole määritelty, näytetään kirjautumisesta huolehtiva komponentti <i> LoginForm </i>, joka saa parametriksi virheenkäsittelijän sekä funktion _setToken_: -->
 Agreguemos la variable _token_ al estado de la aplicación. Contendrá el token del usuario cuando se inicie sesión. Si _token_ no está definido, representamos el componente <i>LoginForm</i> responsable del inicio de sesión del usuario. El componente recibe un controlador de errores y la función _setToken_ como parámetros:
 
 ```js
@@ -140,17 +139,36 @@ const App = () => {
   }
   // highlight-end
 
+  // highlight-start
+  if (!token) {
+    return (
+      <>
+        <Notify errorMessage={errorMessage} />
+        <LoginForm setToken={setToken} setError={notify} />
+      </>
+    )
+  }
+  // highlight-end
+
+  return (
+    <>
+      <Notify errorMessage={errorMessage} />
+      <button onClick={logout}>logout</button> // highlight-line
+      <Persons persons={result.data.allPersons} />
+      <PersonForm setError={notify} />
+      <PhoneForm setError={notify} />
+    </>
+  )
 }
 ```
-
-El código actual de la aplicación se puede encontrar en [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-6), rama <i>part8-6</i>.
 
 ### Agregar un token a un encabezado
 
 Después de que el backend cambie, la creación de nuevas personas requiere que se envíe un token de usuario válido con la solicitud. Para enviar el token, tenemos que cambiar un poco la forma en que definimos el objeto _ApolloClient_ en <i>index.js</i>.
 
 ```js
-import { setContext } from 'apollo-link-context' // highlight-line
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client'  // highlight-line
+import { setContext } from '@apollo/client/link/context' // highlight-line
 
 // highlight-start
 const authLink = setContext((_, { headers }) => {
@@ -158,13 +176,15 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: token ? `bearer ${token}` : null,
+      authorization: token ? `Bearer ${token}` : null,
     }
   }
 })
 // highlight-end
 
-const httpLink = new HttpLink({ uri: 'http://localhost:4000' }) // highlight-line
+const httpLink = createHttpLink({
+  uri: 'http://localhost:4000',
+})
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
@@ -172,22 +192,15 @@ const client = new ApolloClient({
 })
 ```
 
-<!-- _client_-olion muodostamisen yhteydessä oleva toinen parametri _link_ määrittelee, miten apollo on yhteydessä palvelimeen. Nyt normaalia [httpLink] (https://www.apollographql.com/docs/link/links/http.htm) -yhteyttä muokataan siten, että, että pyyntöjen mukaan [asetetaan headerille] (https://www.apollographql.com / docs / react / networking / authentication / # header) <i> autorización </i> arvoksi localStoragessa mahdollisesti oleva token. -->
-El parámetro de enlace dado al objeto _client_ define cómo apollo se conecta al servidor. Aquí, la conexión normal de [httpLink](https://www.apollographql.com/docs/link/links/http.htm) se modifica para que el [encabezado](https://www.apollographql.com/docs/react/networking/authentication/#header) <i>authorization</i> contenga el token si se ha guardado uno en localStorage.
+El campo _uri_ que fue usado anteriormente para crear el objeto _client_ se ha reemplazado por el campo _link_, que define en un caso más complicado cómo Apollo está conectado al servidor. La url del servidor ahora está envuelta usando la función [createHttpLink](https://www.apollographql.com/docs/link/links/http.htm) en un objeto httpLink adecuado. El enlace se modifica por el [context](https://www.apollographql.com/docs/react/api/link/apollo-link-context/#overview) definido por el objeto authLink para que un posible token en localStorage se [establezca en el encabezado](https://www.apollographql.com/docs/react/networking/authentication/#header) <i>authorization</i> para cada solicitud al servidor.
 
-<!-- Asennetaan vielä muutoksen tarvitsema kirjasto -->
-También necesitamos instalar la librería requerida por esta modificación
+Crear nuevas personas y cambiar números funcionan de nuevo. Sin embargo, hay un problema restante. Si intentamos agregar una persona sin un número de teléfono, no es posible.
 
-```bash
-npm install apollo-link-context
-```
-La creación de nuevas personas y el cambio de números funciona nuevamente. Sin embargo, queda un problema pendiente. Si intentamos agregar una persona sin un número de teléfono, no es posible.
+![browser showing person validation failed](../../images/8/25e.png)
 
-![](../../images/8/25e.png)
+La validación falla porque el frontend envía una cadena vacía como valor de _phone_.
 
-La validación falla, porque el frontend envía una cadena vacía como el valor de _phone_.
-
-Cambiemos la función creando nuevas personas para que establezca _phone_ en nulo si el usuario no ha dado un valor.
+Cambiemos la función que crea nuevas personas para que establezca _phone_ en _undefined_ si el usuario no ha dado un valor.
 
 ```js
 const PersonForm = ({ setError }) => {
@@ -197,7 +210,7 @@ const PersonForm = ({ setError }) => {
     createPerson({
       variables: { 
         name, street, city,  // highlight-line
-        phone: phone.length > 0 ? phone : null  // highlight-line
+        phone: phone.length > 0 ? phone : undefined  // highlight-line
       }
     })
 
@@ -208,20 +221,22 @@ const PersonForm = ({ setError }) => {
 }
 ```
 
-El código de aplicación actual se puede encontrar en [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-7), rama <i>part8-7</i>.
+El código actual de la aplicación se puede encontrar en [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-6), rama <i>part8-6</i>.
 
 ### Actualizando caché, revisado
 
 Tenemos que [actualizar](/es​​/part8/react*and_graph_ql#update-the-cache) el caché del cliente Apollo al crear nuevas personas. Podemos actualizarlo usando la opción _refetchQueries_ de la mutación para definir que la consulta <em>ALL_PERSONS</em> se realiza nuevamente.
 
-```js 
+```js
 const PersonForm = ({ setError }) => {
   // ...
 
   const [ createPerson ] = useMutation(CREATE_PERSON, {
     refetchQueries: [  {query: ALL_PERSONS} ], // highlight-line
     onError: (error) => {
-      setError(error.graphQLErrors[0].message)
+      const errors = error.graphQLErrors[0].extensions.error.errors
+      const messages = Object.values(errors).map(e => e.message).join('\n')
+      setError(messages)
     }
   })
 ```
@@ -230,7 +245,7 @@ Este enfoque es bastante bueno, el inconveniente es que la consulta siempre se v
 
 Es posible optimizar la solución gestionando la actualización de la caché nosotros mismos. Esto se hace definiendo una llamada de devolución de [actualización](https://www.apollographql.com/docs/react/api/react/hooks/#options) adecuada para la mutación, que Apollo ejecuta después la mutación:
 
-```js 
+```js
 const PersonForm = ({ setError }) => {
   // ...
 
@@ -239,16 +254,13 @@ const PersonForm = ({ setError }) => {
       setError(error.graphQLErrors[0].message)
     },
     // highlight-start
-    update: (store, response) => {
-      const dataInStore = store.readQuery({ query: ALL_PERSONS })
-      store.writeQuery({
-        query: ALL_PERSONS,
-        data: {
-          ...dataInStore,
-          allPersons: [ ...dataInStore.allPersons, response.data.addPerson ]
+    update: (cache, response) => {
+      cache.updateQuery({ query: ALL_PERSONS }, ({ allPersons }) => {
+        return {
+          allPersons: allPersons.concat(response.data.addPerson),
         }
       })
-    }
+    },
     // highlight-end
   })
  
@@ -258,11 +270,10 @@ const PersonForm = ({ setError }) => {
 
 La función de devolución de llamada recibe una referencia al caché y los datos devueltos por la mutación como parámetros. Por ejemplo, en nuestro caso sería la persona creada.
 
-El código lee el estado en caché de la consulta <em>ALL_PERSONS</em> usando [readQuery](https://www.apollographql.com/docs/react/caching/cache-interaction/#readquery) y actualiza el caché con la función [writeQuery](https://www.apollographql.com/docs/react/caching/cache-interaction/#writequery-and-writefragment) agregando la nueva persona a los datos almacenados en caché.
+query <em>ALL\_PERSONS</em> in cache by adding the new person to the cached data.
 
-Tenga en cuenta que readQuery arrojará un error si su caché no contiene todos los datos necesarios para cumplir con la consulta especificada. Esto se puede resolver usando un bloque try-catch.
+Usando la función [updateQuery](https://www.apollographql.com/docs/react/caching/cache-interaction/#using-updatequery-and-updatefragment) el código actualiza la consulta <em>ALL\_PERSONS</em> en caché agregando la nueva persona a los datos en caché.
 
-<!-- En myös olemassa tilanteita, joissa ainoa järkevä tapa saada välimuisti pidettyä ajantasaisena en _update_-callbackillä tehtävä päivitys. -->
 En algunas situaciones, la única forma sensata de mantener el caché actualizado es usando la devolución de llamada _update_.
 
 Cuando sea necesario, es posible deshabilitar el caché para toda la aplicación o [consultas únicas](https://www.apollographql.com/docs/react/api/react/hooks/#options) configurando el campo que administra el uso del caché , [fetchPolicy](https://www.apollographql.com/docs/react/data/queries/#configuring-fetch-logic) como <em>sin caché</em>.
@@ -271,13 +282,13 @@ Sea diligente con el caché. Los datos antiguos en la caché pueden causar error
 
 > <i>Solo hay dos cosas difíciles en Ciencias de la Computación: invalidación de caché y nombrar cosas. </i> Leer más [aquí](https://www.google.com/search?q=two+hard+things+in+Computer+Science&oq=two+hard+things+in+Computer+Science).
 
-El código actual de la aplicación se puede encontrar en [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-8), rama <i>part8-8</i>.
+El código actual de la aplicación se puede encontrar en [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-8), rama <i>part8-7</i>.
 
 </div>
 
 <div class="tasks">
 
-### Ejercicios 8.17.-8.22.
+### Ejercicios 8.17.-8.22
 
 #### 8.17 Listado de libros
 
@@ -317,20 +328,14 @@ Implemente una vista que muestre todos los libros según el género favorito del
 
 #### 8.21 libros por género con GraphQL
 
-En el ejercicio anterior 8.20, el filtrado podría haberse hecho usando solo React. Para completar este ejercicio, debe filtrar los libros en la página de recomendaciones mediante una consulta GraphQL al servidor. La consulta creada en el ejercicio 8.5 podría ser útil aquí.
+En los dos ejercicios anteriores, el filtrado se podría haber hecho usando solo React.
+Para completar este ejercicio, debe volver a realizar el filtrado de los libros según un género seleccionado (que se realizó en el ejercicio 8.19) usando una consulta GraphQL al servidor. Si ya lo hizo, no tiene que hacer nada.
 
 Este y los siguientes ejercicios son bastante **desafiantes** como debería ser a esta altura del curso. Es posible que desee completar primero los más fáciles en la [siguiente parte](/es/part8/fragments_and_subscriptions).
 
-Algunos consejos
-
-- En lugar de usar <i>useQuery</i>, probablemente sea mejor hacer las consultas con el hook <i>useLazyQuery</i>
-- A veces es útil guardar los resultados de una consulta GraphQL en el estado de un componente.
-- Tenga en cuenta que puede realizar consultas GraphQL en un hook <i>useEffect</i>.
-- El [segundo parámetro](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) de un hook <i>useEffect</i> puede resultar útil dependiendo de su enfoque.
-
 #### 8.22 Caché actualizado y recomendaciones de libros
 
-Si recuperas las recomendaciones de libros con GraphQL, asegúrate de alguna manera de que la vista de libros se mantenga actualizada. Entonces, cuando se agrega un libro nuevo, la vista de libros se actualiza **al menos** cuando se presiona un botón de selección de género.
+Si ya realizó el ejercicio anterior, es decir, buscar los libros en un género con GraphQL, asegúrese de alguna manera de que la vista de libros se mantenga actualizada. Por lo tanto, cuando se agrega un nuevo libro, la vista de libros se actualiza **al menos** cuando se presiona un botón de selección de género.
 
 <i>Cuando no se realiza la selección de un nuevo género, no es necesario actualizar la vista.</i>
 

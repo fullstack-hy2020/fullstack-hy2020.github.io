@@ -7,33 +7,32 @@ lang: zh
 
 <div class="content">
 
-
-<!-- We will now add user management to our application, but let's first start using a database for storing data. -->
-现在我们将向应用添加用户管理，但是首先让我们使用一个数据库来存储数据。
+<!-- We will now add user management to our application, but let's first start using a database for storing data.-->
+ 我们现在将把用户管理添加到我们的应用中，但让我们首先开始使用数据库来存储数据。
 
 ### Mongoose and Apollo
-<!-- Install mongoose and mongoose-unique-validator: -->
-安装 mongoose 和 mongoose-unique-validator:
+
+<!-- Install mongoose:-->
+ 安装mongoose。
 
 ```bash
-npm install mongoose@5.13.0 mongoose-unique-validator
+npm install mongoose
 ```
 
-<!-- We will imitate what we did in parts [3](/zh/part3/将数据存入_mongo_db) and [4](/zh/part4/从后端结构到测试入门). -->
-我们将模仿我们 第 [3](/zh/part3/将数据存入_mongo_db) 和 [4](/zh/part4/从后端结构到测试入门)章节中所做的。
+<!-- We will imitate what we did in parts [3](/en/part3/saving_data_to_mongo_db) and [4](/en/part4/structure_of_backend_application_introduction_to_testing).-->
+ 我们将模仿我们在[3](/en/part3/saving_data_to_mongo_db)和[4](/en/part4/structure_of_backend_application_introduction_to_testing)部分的做法。
 
-<!-- The person schema has been defined as follows: -->
-person模式被定义如下: 
+
+<!-- The person schema has been defined as follows:-->
+人的模式已被定义如下。
 
 ```js
 const mongoose = require('mongoose')
-const uniqueValidator = require('mongoose-unique-validator')
 
 const schema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    unique: true,
     minlength: 5
   },
   phone: {
@@ -52,26 +51,25 @@ const schema = new mongoose.Schema({
   },
 })
 
-schema.plugin(uniqueValidator)
 module.exports = mongoose.model('Person', schema)
 ```
 
-<!-- We also included a few validations. _required: true_, which ensures that value exists, which is actually redundant by using GraphQL we ensure that the fields exist. However it is good to also keep validation in the database.  -->
-我们还包括了一些验证。 Required: true，它确保值的存在，实际上是冗余的，因为仅使用 GraphQL 就可以确保字段的存在。 不过，最好还是在数据库中保持验证。
+<!-- We also included a few validations. _required: true_, which makes sure that a value exists, is actually redundant: we already ensure that the fields exist with GraphQL. However, it is good to also keep validation in the database.-->
+ 我们还包括一些验证。_required: true_，确保一个值的存在，实际上是多余的：我们已经用GraphQL确保字段的存在。然而，在数据库中也保留验证是很好的。
 
-<!-- We can get the application to mostly work with the following changes:  -->
-我们可以通过如下更改使应用基本可运行:
+<!-- We can get the application to mostly work with the following changes:-->
+ 我们可以通过以下的改变使应用大部分工作。
 
 ```js
 const { ApolloServer, UserInputError, gql } = require('apollo-server')
 const mongoose = require('mongoose')
 const Person = require('./models/person')
 
-const MONGODB_URI = 'mongodb+srv://fullstack:halfstack@cluster0-ostce.mongodb.net/graphql?retryWrites=true'
+const MONGODB_URI = 'mongodb+srv://databaseurlhere'
 
 console.log('connecting to', MONGODB_URI)
 
-mongoose.connect(MONGODB_URI)
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('connected to MongoDB')
   })
@@ -85,23 +83,23 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    personCount: () => Person.collection.countDocuments(),
-    allPersons: (root, args) => {
+    personCount: async () => Person.collection.countDocuments(),
+    allPersons: async (root, args) => {
       // filters missing
       return Person.find({})
     },
-    findPerson: (root, args) => Person.findOne({ name: args.name })
+    findPerson: async (root, args) => Person.findOne({ name: args.name }),
   },
   Person: {
-    address: root => {
+    address: (root) => {
       return {
         street: root.street,
-        city: root.city
+        city: root.city,
       }
-    }
+    },
   },
   Mutation: {
-    addPerson: (root, args) => {
+    addPerson: async (root, args) => {
       const person = new Person({ ...args })
       return person.save()
     },
@@ -109,70 +107,69 @@ const resolvers = {
       const person = await Person.findOne({ name: args.name })
       person.phone = args.phone
       return person.save()
-    }
-  }
+    },
+  },
 }
 ```
 
-<!-- The changes are pretty straightforward. However there are a few noteworthy things. As we remember, in Mongo the identifying field of an object is called <i>_id</i> and we previously had to parse the name of the field to <i>id</i> ourselves. Now GraphQL can do this automatically.  -->
-这些改变是非常直接的。 然而，还是有一些值得注意的事情。 正如我们所记得的，在 Mongo 中，对象的标识字段称为<i>_id</i>，我们以前必须将字段名解析为<i>id</i> 。 现在，GraphQL 可以自动完成此操作。
+<!-- The changes are pretty straightforward. However, there are a few noteworthy things. As we remember, in Mongo, the identifying field of an object is called <i>_id</i> and we previously had to parse the name of the field to <i>id</i> ourselves. Now GraphQL can do this automatically.-->
+ 这些变化是非常直接的。然而，有几个值得注意的地方。我们记得，在Mongo中，一个对象的识别字段被称为<i>_id</i>，我们以前必须自己把字段的名称解析为<i>id</i>。现在GraphQL可以自动做到这一点。
 
-<!-- Another noteworthy thing is that the resolver functions now return a <i>promise</i>, when they previously returned normal objects. When a resolver returns a promise, Apollo server [sends back](https://www.apollographql.com/docs/apollo-server/data/data/#resolver-results) the value which the promise resolves to.  -->
-另一个值得注意的事情是，解析器函数现在返回<i>promise</i>，当它们以前返回普通对象时。 当解析器返回一个承诺时，Apollo 服务器[发送回](https://www.apollographql.com/docs/apollo-server/data/data/#resolver-results) 该承诺解析好的值。
+<!-- Another noteworthy thing is that the resolver functions now return a <i>promise</i>, when they previously returned normal objects. When a resolver returns a promise, Apollo server [sends back](https://www.apollographql.com/docs/apollo-server/data/data/#resolver-results) the value which the promise resolves to.-->
+ 另一件值得注意的事情是，解析器函数现在会返回一个<i>承诺</i>，而以前它们会返回普通的对象。当一个解析器返回一个承诺时，Apollo服务器[送回](https://www.apollographql.com/docs/apollo-server/data/data/#resolver-results)承诺所解析的值。
 
-
-
-<!-- For example if the following resolver function is executed,  -->
-例如，如果执行如下解析器函数,
+<!-- For example, if the following resolver function is executed,-->
+ 例如，如果执行了下面的解析器函数。
 
 ```js
-allPersons: (root, args) => {
+allPersons: async (root, args) => {
   return Person.find({})
 },
 ```
 
-<!-- Apollo server waits for the promise to resolve, and returns the result. So Apollo works roughly like this: -->
-阿波罗服务器等待承诺解决，并返回结果。因此，阿波罗的工作大致如下:
+<!-- Apollo server waits for the promise to resolve, and returns the result. So Apollo works roughly like this:-->
+ Apollo服务器等待承诺的解析，并返回结果。所以Apollo的工作原理大致是这样的。
 
 ```js
 Person.find({}).then( result => {
-  // return the result 
+  // return the result
 })
 ```
 
-<!-- Let's complete the _allPersons_ resolver so it takes the optional parameter _phone_ into account: -->
-让我们来完成 allPersons 解析器，这样它就会考虑到可选参数 phone:
+<!-- Let's complete the _allPersons_ resolver so it takes the optional parameter _phone_ into account:-->
+ 让我们完成_allPersons_解析器，使其考虑到可选参数_phone_。
 
 ```js
 Query: {
   // ..
-  allPersons: (root, args) => {
+  allPersons: async (root, args) => {
     if (!args.phone) {
       return Person.find({})
     }
 
-    return Person.find({ phone: { $exists: args.phone === 'YES'  }})
+    return Person.find({ phone: { $exists: args.phone === 'YES' } })
   },
 },
 ```
 
-<!-- So if the query has not been given a parameter _phone_, all persons are returned. If the parameter has the value <i>YES</i>, the result of the query -->
-因此，如果查询没有给出参数电话，则返回所有人员。 如果参数值为<i>YES</i>，则为查询结果
+<!-- So if the query has not been given a parameter _phone_, all persons are returned. If the parameter has the value <i>YES</i>, the result of the query-->
+ 所以，如果查询没有给出参数_phone_，就会返回所有的人。如果该参数的值是<i>YES</i>，则查询的结果为
 
 ```js
 Person.find({ phone: { $exists: true }})
 ```
 
-<!-- is returned, so the objects in which the field _phone_ has a value. If the parameter has the value <i>NO</i>, the query returns the objects in which the _phone_ field has no value:  -->
-因此字段 _phone_ 在其中具有值的对象。 如果参数值为<i>NO</i>，查询将返回 _phone_ 字段中没有值的对象:
+<!-- is returned, so the objects in which the field _phone_ has a value. If the parameter has the value <i>NO</i>, the query returns the objects in which the _phone_ field has no value:-->
+ 返回的是字段_phone_有值的对象。如果参数的值是<i>NO</i>，则查询返回_phone_字段没有值的对象。
 
 ```js
 Person.find({ phone: { $exists: false }})
 ```
 
 ### Validation
-<!-- As well as in GraphQL, the input is now validated using the validations defined in the mongoose-schema. For handling possible validation errors in the schema, we must add an error handling _try/catch_-block to the _save_-method. When we end up in the catch, we throw a suitable exception:  -->
-与在 GraphQL 中一样，现在使用 mongoose 模式中定义的验证来验证输入。 为了处理模式中可能出现的验证错误，我们必须向 save-method 添加错误处理 try/catch-block。 当我们在 catch 中结束时，我们抛出一个合适的异常:
+
+<!-- As well as in GraphQL, the input is now validated using the validations defined in the mongoose schema. For handling possible validation errors in the schema, we must add an error-handling _try/catch_ block to the _save_ method. When we end up in the catch, we throw a suitable exception:-->
+ 和GraphQL一样，现在使用mongoose模式中定义的验证对输入进行验证。为了处理模式中可能出现的验证错误，我们必须在_save_方法中添加一个错误处理_try/catch_块。当我们在catch中结束时，我们抛出一个合适的异常。
 
 ```js
 Mutation: {
@@ -204,18 +201,16 @@ Mutation: {
 }
 ```
 
-<!-- The code of the backend can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-4), branch <i>part8-4</i>. -->
-后端的代码可以在[Github](https://Github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-4) ，branch<i>part8-4</i> 上找到。
-
+<!-- The code of the backend can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-4), branch <i>part8-4</i>.-->
+ 后台的代码可以在[Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-4)找到，分支<i>part8-4</i>。
 
 ### User and log in
-【用户及登录】
 
-<!-- Let's add user management to our application. For simplicity's sake, let's assume that all users have the same password which is hardcoded to the system. It would be straightforward to save individual passwords for all users following the principles from [第4章](/zh/part4/用户管理), but because our focus is on GraphQL, we will leave out all that extra hassle this time.  -->
-让我们在应用中添加用户管理。 为了简单起见，让我们假设所有用户都有硬编码到系统的相同密码。 遵循 [第4章](/zh/part4/用户管理)的原则，为所有用户保存个人密码将非常简单，但由于我们的重点是 GraphQL，这次将省去所有额外的麻烦。
+<!-- Let's add user management to our application. For simplicity's sake, let's assume that all users have the same password which is hardcoded to the system. It would be straightforward to save individual passwords for all users following the principles from [part 4](/en/part4/user_administration), but because our focus is on GraphQL, we will leave out all that extra hassle this time.-->
+ 让我们把用户管理加入我们的应用。为了简单起见，我们假设所有的用户都有相同的密码，并且是硬编码的。按照[第4章节](/en/part4/user_administration)的原则，为所有用户保存单独的密码是很直接的，但由于我们的重点是GraphQL，这次我们将省去所有这些额外的麻烦。
 
-<!-- The user schema is as follows:  -->
-用户模式如下:
+<!-- The user schema is as follows:-->
+ 用户模式如下。
 
 ```js
 const mongoose = require('mongoose')
@@ -224,7 +219,6 @@ const schema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
-    unique: true,
     minlength: 3
   },
   friends: [
@@ -238,14 +232,15 @@ const schema = new mongoose.Schema({
 module.exports = mongoose.model('User', schema)
 ```
 
-<!-- Every user is connected to a bunch of other persons in the system through the _friends_ field. The idea is that when a user, e.g. <i>mluukkai</i>, adds a person, e.g. <i>Arto Hellas</i>, to the list, the person is added to their _friends_ list. This way logged in users can have their own, personalized, view in the application.  -->
-每个用户都通过 _friends_ 字段连接到系统中的一群其他人。 这个想法是，当一个用户(即<i>mluukkai</i>)将一个人(即<i>Arto Hellas</i>)添加到列表中时，这个人将被添加到他们的好友列表中。 通过这种方式登录的用户可以在应用中拥有自己的、个性化的视图。
+<!-- Every user is connected to a bunch of other persons in the system through the _friends_ field. The idea is that when a user, e.g. <i>mluukkai</i>, adds a person, e.g. <i>Arto Hellas</i>, to the list, the person is added to their _friends_ list. This way, logged-in users can have their own personalized view in the application.-->
+ 每个用户都通过_friends_字段与系统中的一堆其他人相联系。我们的想法是，当一个用户，例如<i>mluukkai</i>，把一个人，例如<i>Arto Hellas</i>，添加到列表中时，这个人就被添加到他们的_friends_列表中。这样，登录的用户可以在应用中拥有自己的个性化视图。
 
-<!-- Logging in and identifying the user are handled the same way we used in [第4章](/zh/part4/密钥认证) when we used REST, by using tokens.  -->
-登录和识别用户的处理方式与我们使用 REST 时在[第4章](/zh/part4/密钥认证) 中使用的处理方式相同，即使用tokens。
+<!-- Logging in and identifying the user are handled the same way we used in [part 4](/en/part4/token_authentication) when we used REST, by using tokens.-->
+ 登录和识别用户的方式与我们在[第四章节](/en/part4/token_authentication)中使用REST时使用的方式相同，都是通过使用令牌。
 
-<!-- Let's extend the schema like so:  -->
-让我们像这样扩展模式:
+
+<!-- Let's extend the schema like so:-->
+ 让我们这样来扩展模式。
 
 ```js
 type User {
@@ -275,12 +270,12 @@ type Mutation {
 }
 ```
 
-<!-- The query _me_ returns the currently logged in user. New users are created with the _createUser_ mutation, and logging in happens with _login_ -mutation. -->
-查询 _me_ 返回当前登录的用户。 新用户是通过 _createUser_ Mutation创建的，登录是通过登录Mutation发生的。
+<!-- The query _me_ returns the currently logged-in user. New users are created with the _createUser_ mutation, and logging in happens with the _login_ mutation.-->
+ 查询_me_返回当前登录的用户。新用户是通过_createUser_改变创建的，而登录是通过_login_改变进行的。
 
 
-<!-- The resolvers of the mutations are as follows:  -->
-Mutation的解析器如下:
+<!-- The resolvers of the mutations are as follows:-->
+ 这些改变的解析器如下。
 
 ```js
 const jwt = require('jsonwebtoken')
@@ -289,7 +284,7 @@ const JWT_SECRET = 'NEED_HERE_A_SECRET_KEY'
 
 Mutation: {
   // ..
-  createUser: (root, args) => {
+  createUser: async (root, args) => {
     const user = new User({ username: args.username })
 
     return user.save()
@@ -316,21 +311,19 @@ Mutation: {
 },
 ```
 
-<!-- The new user mutation is straightforward. The log in mutation checks if the username/password pair is valid. And if it is indeed valid, it returns a jwt-token familiar from [第4章](/zh/part4/密钥认证). -->
-新用户Mutation很简单。 登录Mutation检查用户名/密码对是否有效。 如果它确实有效，它将返回一个类似于[第4章](/zh/part4/密钥认证)的 jwt-token。
+<!-- The new user mutation is straightforward. The login mutation checks if the username/password pair is valid. And if it is indeed valid, it returns a jwt token familiar from [part 4](/en/part4/token_authentication).-->
+ 新用户的改变是简单的。登录改变检查用户名/密码对是否有效。如果它确实有效，它会返回一个从[第4章节](/en/part4/token_authentication)熟悉的jwt令牌。
 
-<!-- Just like in the previous case with REST, the idea now is that a logged in user adds a token they receive upon log in to all of their requests. And just like with REST, the token is added to GraphQL queries using the <i>Authorization</i> header. -->
-就像以前 REST 的情况一样，现在的想法是登录用户将他们在登录时收到的令牌添加到所有请求中。 就像使用 REST 一样，令牌使用<i>Authorization</i> 头被添加到 GraphQL 查询中。
+<!-- Just like in the previous case with REST, the idea now is that a logged-in user adds a token they receive upon login to all of their requests. And just like with REST, the token is added to GraphQL queries using the <i>Authorization</i> header.-->
+ 就像之前的REST案例一样，现在的想法是，一个登录的用户将他们在登录时收到的令牌添加到他们的所有请求中。就像REST一样，使用<i>Authorization</i>头将令牌添加到GraphQL查询中。
 
-<!-- In the GraphQL-playground the header is added to a query like so -->
-在 graphql playground中，头部被添加到查询中，如下所示
+<!-- In the Apollo Explorer, the header is added to a query like so:-->
+ 在Apollo资源管理器中，该标头被添加到一个查询中，就像这样。
 
-![](../../images/8/24.png)
+![](../../images/8/24x.png)
 
-
-
-<!-- Let's now expand the definition of the _server_ object by adding a third parameter [context](https://www.apollographql.com/docs/apollo-server/data/data/#context-argument) to the constructor call: -->
-现在，让我们扩展服务器对象的定义，在构造函数调用中添加第三个参数[context](https://www.apollographql.com/docs/apollo-server/data/data/#context-argument) :
+<!-- Let's now expand the definition of the _server_ object by adding a third parameter [context](https://www.apollographql.com/docs/apollo-server/data/data/#context-argument) to the constructor call:-->
+ 现在让我们通过在构造函数调用中添加第三个参数[context](https://www.apollographql.com/docs/apollo-server/data/data/#context-argument)来扩展_server_对象的定义。
 
 ```js
 const server = new ApolloServer({
@@ -352,14 +345,14 @@ const server = new ApolloServer({
 })
 ```
 
-<!-- The object returned by context is given to all resolvers as their <i>third parameter</i>. Context is the right place to do things which are shared by multiple resolvers, like [user identification](https://blog.apollographql.com/authorization-in-graphql-452b1c402a9?_ga=2.45656161.474875091.1550613879-1581139173.1549828167). -->
-上下文返回的对象作为第三个参数给所有解析器。 上下文是处理多个解析器共享的事情的正确地方，比如[用户识别](https://blog.apollographql.com/authorization-in-graphql-452b1c402a9?_ga=2.45656161.474875091.1550613879-1581139173.1549828167)。
+<!-- The object returned by context is given to all resolvers as their <i>third parameter</i>. Context is the right place to do things which are shared by multiple resolvers, like [user identification](https://blog.apollographql.com/authorization-in-graphql-452b1c402a9?_ga=2.45656161.474875091.1550613879-1581139173.1549828167).-->
+ 由context返回的对象作为他们的<i>第三个参数</i>被提供给所有解析器。上下文是做多个解析器共享的事情的正确位置，比如[用户标识](https://blog.apollographql.com/authorization-in-graphql-452b1c402a9?_ga=2.45656161.474875091.1550613879-1581139173.1549828167)。
 
-<!-- So our code sets the object corresponding to the user who made the request to the _currentUser_ field of the context. If there is no user connected to the request, the value of the field is undefined.  -->
-因此，我们的代码设置对应于向上下文的 currentUser 字段发出请求的用户的对象。 如果没有用户连接到请求，则该字段的值是未定义的。
+<!-- So our code sets the object corresponding to the user who made the request to the _currentUser_ field of the context. If there is no user connected to the request, the value of the field is undefined.-->
+ 所以我们的代码将与发出请求的用户相对应的对象设置到上下文的_currentUser_字段。如果没有与请求相关的用户，则该字段的值是未定义的。
 
-<!-- The resolver of the _me_ query is very simple, it just returns the logged in user it receives in the _currentUser_ field of the third parameter of the resolver, _context_. It's worth noting that if there is no logged in user, i.e. there is no valid token in the header attached to the request, the query returns <i>null</i>: -->
-_me_ 查询的解析器非常简单，它只返回它在解析器的第三个参数 context 的 currentUser 字段中接收的登录用户。 值得注意的是，如果没有登录用户，即请求的头部没有有效的令牌，查询返回<i>null</i>: 
+<!-- The resolver of the _me_ query is very simple: it just returns the logged-in user it receives in the _currentUser_ field of the third parameter of the resolver, _context_. It's worth noting that if there is no logged-in user, i.e. there is no valid token in the header attached to the request, the query returns <i>null</i>:-->
+ _me_查询的解析器非常简单：它只是返回它在解析器的第三个参数_context_的_currentUser_字段中收到的已登录用户。值得注意的是，如果没有登录的用户，也就是说，在连接到请求的头中没有有效的令牌，查询就会返回<i>null</i>。
 
 ```js
 Query: {
@@ -372,15 +365,14 @@ Query: {
 
 ### Friends list
 
+<!-- Let's complete the application's backend so that adding and editing persons requires logging in, and added persons are automatically added to the friends list of the user.-->
+ 让我们完成应用的后端，使添加和编辑人员需要登录，并且添加的人员会自动添加到用户的好友列表中。
 
-<!-- Let's complete the application's backend so that adding and editing persons requires logging in, and added persons are automatically added to the friends list of the user.  -->
-让我们完成应用的后端，以便添加和编辑人员需要登录，添加的人员将自动添加到用户的好友列表中。
+<!-- Let's first remove all persons not in anyone's friends list from the database.-->
+ 首先让我们从数据库中删除所有不在任何人的好友列表中的人。
 
-<!-- Let's first remove all persons not in anyone's friends list from the database.  -->
-让我们首先从数据库中删除所有不在任何人的好友列表中的人。
-
-<!-- _addPerson_ mutation changes like so: -->
-_addPerson_变化如下:
+<!-- _addPerson_ mutation changes like so:-->
+ _addPerson_的改变是这样的。
 
 ```js
 Mutation: {
@@ -408,11 +400,11 @@ Mutation: {
 }
 ```
 
-<!-- If a logged in user cannot be found from the context, an _AuthenticationError_ is thrown. Creating new persons is now done with _async/await_ syntax, because if the operation is successful, the created person is added to the friends list of the user.  -->
-如果在上下文中找不到登录用户，将引发 AuthenticationError。 现在使用 async/await 语法创建新的 person，因为如果操作成功，创建的 person 将被添加到用户的好友列表中。
+<!-- If a logged-in user cannot be found from the context, an _AuthenticationError_ is thrown. Creating new persons is now done with _async/await_ syntax, because if the operation is successful, the created person is added to the friends list of the user.-->
+ 如果不能从上下文中找到一个登录的用户，会抛出一个_AuthenticationError_。现在创建新的人是用_async/await_语法完成的，因为如果操作成功，创建的人将被添加到用户的好友列表中。
 
-<!-- Let's also add functionality for adding an existing user to your friends list. The mutation is as follows:  -->
-我们还可以添加一个功能，将现有用户添加到好友列表中:
+<!-- Let's also add functionality for adding an existing user to your friends list. The mutation is as follows:-->
+ 我们也来增加将现有用户添加到好友列表的功能。改变的情况如下。
 
 ```js
 type Mutation {
@@ -423,14 +415,13 @@ type Mutation {
 }
 ```
 
-
-<!-- And the mutations resolver: -->
-Mutation解析器:
+<!-- And the mutation's resolver:-->
+ 还有改变的解析器。
 
 ```js
   addAsFriend: async (root, args, { currentUser }) => {
-    const nonFriendAlready = (person) => 
-      !currentUser.friends.map(f => f._id).includes(person._id)
+    const nonFriendAlready = (person) =>
+      !currentUser.friends.map(f => f._id.toString()).includes(person._id.toString())
 
     if (!currentUser) {
       throw new AuthenticationError("not authenticated")
@@ -447,22 +438,23 @@ Mutation解析器:
   },
 ```
 
-<!-- Note how the resolver <i>destructures</i> the logged in user from the context. So instead of saving _currentUser_ to a separate variable in a function -->
-注意解析器是如何从上下文中<i>通过解构得到</i> 登录用户的。 因此，不是将 currentUser 保存到函数中的一个单独的变量中
+<!-- Note how the resolver <i>destructures</i> the logged-in user from the context. So instead of saving _currentUser_ to a separate variable in a function-->
+ 注意解析器如何从上下文中<i>解构</i>登录的用户。所以不要把_currentUser_保存在一个函数中的单独变量中
 
 ```js
 addAsFriend: async (root, args, context) => {
   const currentUser = context.currentUser
 ```
 
-<!-- it is received straight in the parameter definition of the function: -->
-而是在函数的参数定义中被直接接收:
+<!-- it is received straight in the parameter definition of the function:-->
+它被直接收到函数的参数定义中。
 
 ```js
 addAsFriend: async (root, args, { currentUser }) => {
 ```
-<!-- The following query now returns the user's friendlist -->
-如下的查询返回了用户的朋友列表
+
+<!-- The following query now returns the user's friends list:-->
+ 下面的查询现在返回用户的好友列表。
 
 ```js
 query {
@@ -476,28 +468,24 @@ query {
 }
 ```
 
-<!-- The code of the backend can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-5) branch <i>part8-5</i>. -->
-后端的代码可以在[Github](https://Github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-5)分支<i>part8-5</i> 上找到。
-
+<!-- The code of the backend can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-5) branch <i>part8-5</i>.-->
+ 后台的代码可以在[Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-5)分支<i>part8-5</i>找到。
 
 </div>
 
-
 <div class="tasks">
-
 
 ### Exercises 8.13.-8.16.
 
-<!-- The following exercises are quite likely to break your frontend. Do not worry about it yet, the frontend shall be fixed and expanded in the next chapter. -->
+<!-- The following exercises are quite likely to break your frontend. Do not worry about it yet; the frontend shall be fixed and expanded in the next chapter.-->
+ 下面的练习很可能会破坏你的前台。先不要担心，前端将在下一章进行修复和扩展。
+#### 8.13: Database, part 1
 
-下面的几个练习可能会破坏你的前端界面。先不要担心，前端界面会在下个章节进行修复。
+<!-- Change the library application so that it saves the data to a database. You can find the <i>mongoose schema</i> for books and authors from [here](https://github.com/fullstack-hy/misc/blob/main/library-schema.md).-->
+ 改变库中的应用，使其将数据保存到数据库中。你可以从[这里](https://github.com/fullstack-hy/misc/blob/main/library-schema.md)找到书籍和作者的<i>mongoose模式</i>。
 
-#### 8.13: Database, 步骤 1
-<!-- Change the library application so that it saves the data to a database. You can find the <i>mongoose schema</i> for books and authors from [here](https://github.com/fullstack-hy/misc/blob/main/library-schema.md)). -->
-更改库应用，以便将数据保存到数据库中。 你可以在[这里](https://github.com/fullstack-hy/misc/blob/main/library-schema.md))找到书籍和作者的<i>mongoose schema</i>。
-
-<!-- Let's change the book graphql schema a little -->
-让我们稍微修改一下图书的 graphql 模式
+<!-- Let's change the book graphql schema a little-->
+ 让我们稍微改变一下图书graphql模式
 
 ```js
 type Book {
@@ -509,54 +497,61 @@ type Book {
 }
 ```
 
-<!-- so that instead of just the author's name, the book object contains all the details of the author.  -->
+<!-- so that instead of just the author's name, the book object contains all the details of the author.-->
+这样一来，书籍对象就不再只有作者的名字，而是包含了作者的所有细节。
 
-因此book对象不仅包含作者的姓名，还包含作者的所有详细信息。
+<!-- You can assume that the user will not try to add faulty books or authors, so you don't have to care about validation errors.-->
+ 你可以假设用户不会尝试添加有问题的书籍或作者，所以你不必关心验证错误。
 
-<!-- You can assume that the user will not try to add faulty books or authors, so you don't have to care about validation errors.  -->
+<!-- The following things do <i>not</i> have to work just yet:-->
+ 下面这些东西还不一定能用。
 
-您可以假设用户不会尝试添加有缺陷的书籍或作者，因此您不必担心验证错误。
+<!--  - _allBooks_ query with parameters-->
+ - 带有参数的_allBooks_查询
+<!--  -  _bookCount_ field of an author object-->
+ - 作者对象的_bookCount_字段
+<!--  -  _author_ field of a book-->
+ - 一本书的_作者_字段
+<!--  - _editAuthor_ mutation-->
+ - _editAuthor_变体
 
-<!-- The following things do <i>not</i> have to work just yet -->
+<!-- **Note**: despite the fact that author is now an <i>object </i>  within a book, the schema for adding a book can remain same, only the <i>name</i> of the author is given as a parameter-->
+ **注意**：尽管作者现在是一本书中的一个<i>对象</i>，但添加一本书的模式可以保持不变，只是将作者的<i>名称</i>作为一个参数给出。
 
-以下事情现在还不需要做
+```js
+type Mutation {
+  addBook(
+    title: String!
+    author: String! // highlight-line
+    published: Int!
+    genres: [String!]!
+  ): Book!
+  editAuthor(name: String!, setBornTo: Int!): Author
+}
+```
 
-<!--_allBooks_ query with parameters-->
-<!--<i>bookCount</i> field of an author object-->
-<!--_author_ field of a book-->
-<!--_editAuthor_ mutation-->
- - 使用参数进行allBooks查询
-- 作者对象的bookCount字段
-- 一本书的_author_字段
-- editAuthorMutation
+#### 8.14: Database, part 2
 
-#### 8.14: Database, 步骤 2
+<!-- Complete the program so that all queries (to get _allBooks_ working with the parameter _author_ and _bookCount_ field of an author object is not required) and mutations work.-->
+ 完成程序，使所有的查询（让_allBooks_与参数_author_和_bookCount_字段的作者对象一起工作是不需要的）和改变工作。
 
-<!-- Complete the program so that all queries (except _allBooks_ with the parameter _author_ ) and mutations work.  -->
+<!-- You might find [this](https://docs.mongodb.com/manual/reference/operator/query/in/) useful.-->
+ 你可能会发现[这个](https://docs.mongodb.com/manual/reference/operator/query/in/)很有用。
 
-<!-- You might find this [useful](https://docs.mongodb.com/manual/reference/operator/query/in/). -->
+#### 8.15 Database, part 3
 
-完成该程序，以便所有查询（带有参数author的allBooks除外）和Mutation均起作用。
-
-您可能会发现这很有用。
-
-#### 8.15 Database, 步骤 3
-
-<!-- Complete the program so that database validation errors (e.g. too short book title or author name) are handled sensibly. This means that they cause _UserInputError_ with a suitable error message to be thrown.  -->
-
-完成程序，以便合理处理数据库验证错误（例如，书名或作者姓名太短）。 这意味着它们会引发带有适当错误消息的UserInputError。
-
+<!-- Complete the program so that database validation errors (e.g. book title or author name being too short) are handled sensibly. This means that they cause _UserInputError_ with a suitable error message to be thrown.-->
+ 完成程序，使数据库验证错误（如书名或作者姓名太短）得到合理的处理。这意味着它们会导致_UserInputError_，并抛出一个合适的错误信息。
 
 #### 8.16 user and logging in
 
-<!-- Add user management to your application. Expand the schema like so: -->
-
-将用户管理添加到您的应用程序。 像这样展开模式：
+<!-- Add user management to your application. Expand the schema like so:-->
+ 在你的应用中加入用户管理。像这样扩展模式。
 
 ```js
 type User {
   username: String!
-  favoriteGenre: String!
+  favouriteGenre: String!
   id: ID!
 }
 
@@ -573,7 +568,7 @@ type Mutation {
   // ...
   createUser(
     username: String!
-    favoriteGenre: String!
+    favouriteGenre: String!
   ): User
   login(
     username: String!
@@ -582,14 +577,16 @@ type Mutation {
 }
 ```
 
-<!-- Create resolvers for query _me_ and the new mutations _createUser_ and  -->
-为查询 _me_ 创建解析器和新建Mutation解析器 _createUser_ 和 _login_
 
-<!-- _login_. Like in the course material, you can assume all users have the same hardcoded password.  -->
-与课程资料中一样，您可以假设所有用户都有相同的硬编码密码。
+<!-- Create resolvers for query _me_ and the new mutations _createUser_ and-->
+ 为查询_me_和新的改变_createUser_和=25784=创建解析器。
+<!-- _login_. Like in the course material, you can assume all users have the same hardcoded password.-->
+ _login_。像在教材中一样，你可以假设所有用户都有相同的硬编码密码。
 
-<!-- Make the mutations _addBook_ and _editAuthor_ possible only if the request includes a valid token.  -->
-只有在请求包含有效token的情况下，才能使Mutation addBook 和 editAuthor 成为可能。
+<!-- Make the mutations _addBook_ and _editAuthor_ possible only if the request includes a valid token.-->
+ 只有当请求包括一个有效的令牌时，才能使_addBook_和_editAuthor_的改变成为可能。
+
+<!-- (Don't worry about fixing the frontend for the moment.)-->
+ (暂时不要担心修复前台。)
 
 </div>
-

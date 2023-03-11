@@ -7,12 +7,11 @@ lang: zh
 
 <div class="content">
 
+<!-- Let's expand the application, such that the notes are stored to the backend. We'll use [json-server](/en/part2/getting_data_from_server), familiar from part 2.-->
+ 让我们扩展应用，使笔记被存储到后台。我们将使用[json-server](/en/part2/getting_data_from_server)，这在第二章节中已经很熟悉。
 
-<!-- Let's expand the application, such that the notes are stored to the backend. We'll use [json-server](/zh/part2/从服务器获取数据), familiar from part 2. -->
-让我们扩展应用，将便笺存储到后端，我们将使用 [json-server](/zh/part2/从服务器获取数据)，我们在第二章已经很熟悉了。
-
-<!-- The initial state of the database is stored into the file <i>db.json</i>, which is placed in the root of the project: -->
-数据库的初始状态存储在文件<i>db.json</i> 中，该文件位于项目的根目录中:
+<!-- The initial state of the database is stored into the file <i>db.json</i>, which is placed in the root of the project:-->
+ 数据库的初始状态被存储在文件<i>db.json</i>中，它被放置在项目的根部。
 
 ```json
 {
@@ -31,19 +30,15 @@ lang: zh
 }
 ```
 
+<!-- We'll install json-server for the project...-->
+ 我们将为项目安装json-server...
 
-
-<!-- We'll install json-server for the project... -->
-我们将为这个项目安装 json-server...
-
-```bash
+```js
 npm install json-server --save-dev
 ```
 
-
-
-<!-- and add the following line to the <i>scripts</i> part of the file <i>package.json</i> -->
-并将如下行添加到我 package.json <i>文件的  scripts</i> 部分
+<!-- and add the following line to the <i>scripts</i> part of the file <i>package.json</i>-->
+ 然后在文件<i>package.json</i>的<i>scripts</i>部分添加以下一行
 
 ```js
 "scripts": {
@@ -52,11 +47,11 @@ npm install json-server --save-dev
 }
 ```
 
-<!-- Now let's launch json-server with the command _npm run server_. -->
-现在，让我们使用命令 npm run server 启动 json-server。
+<!-- Now let's launch json-server with the command _npm run server_.-->
+ 现在让我们用命令_npm run server_来启动json-server。
 
-<!-- Next we'll create a method into the file <i>services/notes.js</i>, which uses <i>axios</i> to fetch data from the backend -->
-接下来，我们将在文件 <i>services/notes.js</i> 中创建一个方法，该方法使用<i>axios</i> 从后端获取数据
+<!-- Next we'll create a method into the file <i>services/notes.js</i>, which uses <i>axios</i> to fetch data from the backend-->
+ 接下来我们将在文件<i>services/notes.js</i>中创建一个方法，使用<i>axios</i>从后端获取数据。
 
 ```js
 import axios from 'axios'
@@ -71,40 +66,87 @@ const getAll = async () => {
 export default { getAll }
 ```
 
-<!-- We'll add axios to the project -->
-我们将在项目中添加 axios
+<!-- We'll add axios to the project-->
+ 我们将axios添加到项目中
 
 ```bash
 npm install axios
 ```
 
-<!-- We'll change the initialization of the state in <i>noteReducer</i>, such that by default there are no notes: -->
-我们将在<i>noteReducer</i> 中更改状态的初始化，这样默认情况下不存在便笺:
+<!-- We'll change the initialization of the state in <i>noteReducer</i>, such that by default there are no notes:-->
+ 我们将改变<i>noteReducer</i>中状态的初始化，这样默认情况下就没有笔记了。
 
 ```js
-const noteReducer = (state = [], action) => {
+const noteSlice = createSlice({
+  name: 'notes',
+  initialState: [], // highlight-line
   // ...
-}
+})
 ```
 
-<!-- A quick way to initialize the state based on the data on the server is to fetch the notes in the file <i>index.js</i> and dispatch the action <i>NEW\_NOTE</i> for each of them: -->
-根据服务器上的数据初始化状态的一种便捷方法是从文件<i>index.js</i> 中获取便笺，并为每个便笺分派action <i>NEW\_NOTE</i>:
+<!-- Let's also add a new action <em>appendNote</em> for adding a note object:-->
+ 我们还要添加一个新的动作<em>appendNote</em>来添加一个笔记对象。
+
+```js
+const noteSlice = createSlice({
+  name: 'notes',
+  initialState,
+  reducers: {
+    createNote(state, action) {
+      const content = action.payload
+
+      state.push({
+        content,
+        important: false,
+        id: generateId(),
+      })
+    },
+    toggleImportanceOf(state, action) {
+      const id = action.payload
+
+      const noteToChange = state.find(n => n.id === id)
+
+      const changedNote = {
+        ...noteToChange,
+        important: !noteToChange.important
+      }
+
+      return state.map(note =>
+        note.id !== id ? note : changedNote
+      )
+    },
+    // highlight-start
+    appendNote(state, action) {
+      state.push(action.payload)
+    }
+    // highlight-end
+  },
+})
+
+export const { createNote, toggleImportanceOf, appendNote } = noteSlice.actions // highlight-line
+
+export default noteSlice.reducer
+```
+
+<!-- A quick way to initialize the notes state based on the data received from the server is to fetch the notes in the <i>index.js</i> file and dispatch an action using the <em>appendNote</em> action creator for each individual note object:-->
+ 基于从服务器收到的数据初始化笔记状态的快速方法是在<i>index.js</i>文件中获取笔记，并使用<em>appendNote</em>动作创建器为每个单独的笔记对象分派一个动作。
 
 ```js
 // ...
 import noteService from './services/notes' // highlight-line
+import noteReducer, { appendNote } from './reducers/noteReducer' // highlight-line
 
-const reducer = combineReducers({
-  notes: noteReducer,
-  filter: filterReducer,
+const store = configureStore({
+  reducer: {
+    notes: noteReducer,
+    filter: filterReducer,
+  }
 })
-
-const store = createStore(reducer, composeWithDevTools())
 
 // highlight-start
 noteService.getAll().then(notes =>
   notes.forEach(note => {
-    store.dispatch({ type: 'NEW_NOTE', data: note })
+    store.dispatch(appendNote(note))
   })
 )
 // highlight-end
@@ -112,71 +154,100 @@ noteService.getAll().then(notes =>
 // ...
 ```
 
-
-
-<!-- Let's add support in the reducer for the action <i>INIT\_NOTES</i>, using which the initialization can be done by dispatching a single action. Let's also create an action creator function _initializeNotes_. -->
-让我们在 reducer 中为action <i>INIT\_NOTES</i> 添加支持，通过调度单个action可以使用它来完成初始化。 我们还要创建一个action创建器函数 _initializeNotes_。
+<!-- Dispatching multiple actions seems a bit 	impractical. Let's add an action creator <em>setNotes</em> which can be used to directly replace the notes array. We'll get the action creator from the <em>createSlice</em> function by implementing the <em>setNotes</em> action:-->
+ 派遣多个动作似乎有点不切实际。让我们添加一个动作创建器<em>setNotes</em>，可以用来直接替换笔记数组。我们将通过实现<em>setNotes</em>动作，从<em>createSlice</em>函数中获得动作创建器。
 
 ```js
 // ...
-const noteReducer = (state = [], action) => {
-  console.log('ACTION:', action)
-  switch (action.type) {
-    case 'NEW_NOTE':
-      return [...state, action.data]
-    case 'INIT_NOTES':   // highlight-line
-      return action.data // highlight-line
-    // ...
-  }
-}
 
-export const initializeNotes = (notes) => {
-  return {
-    type: 'INIT_NOTES',
-    data: notes,
-  }
-}
+const noteSlice = createSlice({
+  name: 'notes',
+  initialState,
+  reducers: {
+    createNote(state, action) {
+      const content = action.payload
 
-// ...
+      state.push({
+        content,
+        important: false,
+        id: generateId(),
+      })
+    },
+    toggleImportanceOf(state, action) {
+      const id = action.payload
+
+      const noteToChange = state.find(n => n.id === id)
+
+      const changedNote = {
+        ...noteToChange,
+        important: !noteToChange.important
+      }
+
+      return state.map(note =>
+        note.id !== id ? note : changedNote
+      )
+    },
+    appendNote(state, action) {
+      state.push(action.payload)
+    },
+    // highlight-start
+    setNotes(state, action) {
+      return action.payload
+    }
+    // highlight-end
+  },
+})
+
+export const { createNote, toggleImportanceOf, appendNote, setNotes } = noteSlice.actions // highlight-line
+
+export default noteSlice.reducer
 ```
 
-<!-- <i>index.js</i> simplifies: -->
-<i>index.js</i> 简化为:
+<!-- Now, the code in the <i>index.js</i> file looks a lot better:-->
+ 现在，<i>index.js</i>文件中的代码看起来好多了。
 
 ```js
-import noteReducer, { initializeNotes } from './reducers/noteReducer'
 // ...
+import noteService from './services/notes'
+import noteReducer, { setNotes } from './reducers/noteReducer' // highlight-line
+
+const store = configureStore({
+  reducer: {
+    notes: noteReducer,
+    filter: filterReducer,
+  }
+})
 
 noteService.getAll().then(notes =>
-  store.dispatch(initializeNotes(notes))
+  store.dispatch(setNotes(notes)) // highlight-line
 )
 ```
 
+<!-- > **NB:** why didn't we use await in place of promises and event handlers (registered to _then_-methods)?-->
+ > **NB:**我们为什么不用await来代替承诺和事件处理程序（注册到_then_-methods）？
+<!-- >-->
+ >
+<!-- > Await only works inside <i>async</i> functions, and the code in <i>index.js</i> is not inside a function, so due to the simple nature of the operation, we'll abstain from using <i>async</i> this time.-->
+ > 等待只在<i>async</i>函数中起作用，而<i>index.js</i>中的代码不在函数中，所以由于操作的简单性，我们这次就不使用<i>async</i>了。
 
-<!-- > **NB:** why didn't we use await in place of promises and event handlers (registered to _then_-methods)? -->
->**注意** 为什么我们没有使用 await 来代替 promises 和事件处理程序(注册到 then-methods) ？
->
-<!-- >Await only works inside <i>async</i> functions, and the code in <i>index.js</i> is not inside a function, so due to the simple nature of the operation, we'll abstain from using <i>async</i> this time. -->
-> Await 只在<i>async</i> 函数中工作，而<i>index.js</i> 中的代码不在函数中，因此由于action的简单性质，这次我们不使用<i>async</i>。
-
-<!-- We do, however, decide to move the initialization of the notes into the <i>App</i> component, and, as usual when fetching data from a server, we'll use the <i>effect hook</i>.  -->
-但是，我们确实决定将便笺的初始化移动到<i>App</i> 组件中，并且，像往常一样，在从服务器获取数据时，我们将使用<i>effect hook</i>。
+<!-- We do, however, decide to move the initialization of the notes into the <i>App</i> component, and, as usual when fetching data from a server, we'll use the <i>effect hook</i>.-->
+ 然而，我们决定将笔记的初始化移到<i>App</i>组件中，并且，像往常一样，当从服务器获取数据时，我们将使用<i>effect hook</i>。
 
 ```js
-import React, {useEffect} from 'react' // highlight-line
+import { useEffect } from 'react' // highlight-line
 import NewNote from './components/NewNote'
 import Notes from './components/Notes'
 import VisibilityFilter from './components/VisibilityFilter'
-import noteService from './services/notes' // highlight-line
-import { initializeNotes } from './reducers/noteReducer' // highlight-line
+import noteService from './services/notes'  // highlight-line
+import { setNotes } from './reducers/noteReducer' // highlight-line
 import { useDispatch } from 'react-redux' // highlight-line
 
 const App = () => {
-  // highlight-start
+    // highlight-start
   const dispatch = useDispatch()
   useEffect(() => {
     noteService
-      .getAll().then(notes => dispatch(initializeNotes(notes)))
+      .getAll().then(notes => dispatch(setNotes(notes)))
   }, [])
   // highlight-end
 
@@ -192,68 +263,62 @@ const App = () => {
 export default App
 ```
 
-
-
-<!-- Using the useEffect hook causes an eslint-warning: -->
-使用 useEffect hook 会导致一个 eslint-warning:
+<!-- Hookin useEffect käyttö aiheuttaa eslint-varoituksen: -->
+<!-- Using the useEffect hook causes an eslint warning:-->
+ 使用useEffect钩子会导致一个eslint警告。
 
 ![](../../images/6/26ea.png)
 
-
-
-<!-- We can get rid of it by doing the following: -->
-我们可以通过如下方法来摆脱它:
+<!-- Pääsemme varoituksesta eroon seuraavasti: -->
+<!-- We can get rid of it by doing the following:-->
+ 我们可以通过下面的操作摆脱它。
 
 ```js
 const App = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     noteService
-      .getAll().then(notes => dispatch(initializeNotes(notes)))
+      .getAll().then(notes => dispatch(setNotes(notes)))
   }, [dispatch]) // highlight-line
 
   // ...
 }
 ```
 
-<!-- Now the variable <i>dispatch</i> we define in the _App_ component, which practically is the dispatch function of the redux-store, has been added to the array useEffect receives as a parameter. -->
-现在，我们在 App 组件中定义的变量<i>dispatch</i> (实际上是 redux-store 的 dispatch 函数)已经被添加到作为参数接收的数组 useEffect 中。
-<!-- **If** the value of the dispatch-variable would change during runtime,  -->
-如果 dispatch-变量的值在运行期间发生变化,
-<!-- the effect would be executed again. This however cannot happen in our application, so the warning is unnecessary. -->
-该效果将再次执行。但是，这不能在我们的应用中发生，所以警告是不必要的。
+<!-- Nyt komponentin _App_ sisällä määritelty muuttuja <i>dispatch</i> eli käytännössä redux-storen dispatch-funktio on lisätty useEffectille parametrina annettuun taulukkoon. **Jos** dispatch-muuttujan sisältö muuttuisi ohjelman suoritusaikana, suoritettaisiin efekti uudelleen, näin ei kuitenkaan ole, eli varoitus on tässä tilanteessa oikeastaan aiheeton. -->
+<!-- Now the variable <i>dispatch</i> we define in the _App_ component, which practically is the dispatch function of the redux-store, has been added to the array useEffect receives as a parameter.-->
+ 现在我们在_App_组件中定义的变量<i>dispatch</i>，实际上是redux-store的调度函数，已经被添加到useEffect的数组中作为参数接收。
+<!-- **If** the value of the dispatch-variable would change during runtime,-->
+ **如果**调度变量的值在运行时发生变化。
+<!-- the effect would be executed again. This however cannot happen in our application, so the warning is unnecessary.-->
+该效果将被再次执行。然而这不会发生在我们的应用中，所以这个警告是不必要的。
 
-
-
-<!-- Another way to get rid of the warning would be to disable eslint on that line: -->
-另一个消除警告的方法是禁用该行上的 eslint:
+<!-- Toinen tapa päästä eroon varoituksesta olisi disabloida se kyseisen rivin kohdalta: -->
+<!-- Another way to get rid of the warning would be to disable eslint on that line:-->
+ 摆脱警告的另一个方法是在这一行禁用eslint。
 
 ```js
 const App = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     noteService
-      .getAll().then(notes => dispatch(initializeNotes(notes)))   
+      .getAll().then(notes => dispatch(setNotes(notes)))
       // highlight-start
-  },[]) // eslint-disable-line react-hooks/exhaustive-deps  
+  },[]) // eslint-disable-line react-hooks/exhaustive-deps
   // highlight-end
 
   // ...
 }
 ```
 
+<!-- Generally disabling eslint when it throws a warning is not a good idea. Even though the eslint rule in question has caused some [arguments](https://github.com/facebook/create-react-app/issues/6880), we will use the first solution.-->
+ 一般来说，当eslint抛出一个警告时禁用它并不是一个好主意。尽管有关的eslint规则引起了一些[争论](https://github.com/facebook/create-react-app/issues/6880)，我们将使用第一个解决方案。
 
+<!-- More about the need to define the hooks dependencies in [the react documentation](https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies).-->
+ 更多关于需要定义钩子的依赖关系，请看 [React文档](https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies)。
 
-<!-- Generally disabling eslint when it throws a warning is not a good idea. Even though the eslint rule in question has caused some [arguments](https://github.com/facebook/create-react-app/issues/6880), we will use the first solution. -->
-通常在 eslint 抛出警告时禁用它不是一个好主意。 尽管所讨论的 eslint 规则引起了一些[争论](https://github.com/facebook/create-react-app/issues/6880) ，我们将使用第一个解决方案。
-
-
-
-<!-- More about the need to define the hooks dependencies in [the react documentation](https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies). -->
-更多关于需要定义Hook依赖关系，可以参考[react documentation](https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies)。
-
-<!-- We can do the same thing when it comes to creating a new note. Let's expand the code communicating with the server as follows: -->
-当涉及到创建一个新的便笺，我们可以做同样的事情。 让我们将与服务器通信的代码展开如下:
+<!-- We can do the same thing when it comes to creating a new note. Let's expand the code communicating with the server as follows:-->
+当涉及到创建一个新的笔记时，我们可以做同样的事情。让我们扩展一下与服务器通信的代码，如下。
 
 ```js
 const baseUrl = 'http://localhost:3001/notes'
@@ -273,23 +338,21 @@ const createNew = async (content) => {
 
 export default {
   getAll,
-  createNew, // highlight-line
-}
+  createNew,
 }
 ```
 
-<!-- The method _addNote_ of the component <i>NoteForm</i> changes slightly: -->
-组件<i>NewNote</i> 的方法 _addNote_ 略有变化:
+<!-- The method _addNote_ of the component <i>NewNote</i> changes slightly:-->
+ 组件<i>NewNote</i>的_addNote_方法略有变化。
 
 ```js
-import React from 'react'
 import { useDispatch } from 'react-redux'
 import { createNote } from '../reducers/noteReducer'
 import noteService from '../services/notes' // highlight-line
 
 const NewNote = (props) => {
   const dispatch = useDispatch()
-  
+
   const addNote = async (event) => { // highlight-line
     event.preventDefault()
     const content = event.target.note.value
@@ -309,76 +372,68 @@ const NewNote = (props) => {
 export default NewNote
 ```
 
-<!-- Because the backend generates ids for the notes, we'll change the action creator _createNote_ -->
-因为后端为便笺生成 id，所以我们将更改action 创建器  _createNote_ 
+<!-- Because the backend generates ids for the notes, we'll change the action creator <em>createNote</em> accordingly:-->
+因为后台为笔记生成了ID，我们将相应地改变动作创建者<em>createNote</em>。
 
 ```js
-export const createNote = (data) => {
-  return {
-    type: 'NEW_NOTE',
-    data,
-  }
+createNote(state, action) {
+  state.push(action.payload)
 }
 ```
 
-<!-- Changing the importance of notes could be implemented using the same principle, meaning making an asynchronous method call to the server and then dispatching an appropriate action. -->
-更改便笺的重要性可以使用相同的原则实现，这意味着对服务器进行异步方法调用，然后调度适当的action。
+<!-- Changing the importance of notes could be implemented using the same principle, by making an asynchronous method call to the server and then dispatching an appropriate action.-->
+ 改变笔记的重要性可以用同样的原则来实现，通过对服务器进行异步方法调用，然后分派一个适当的动作。
 
-<!-- The current state of the code for the application can be found on [github](https://github.com/fullstack-hy/redux-notes/tree/part6-3) in the branch <i>part6-3</i>. -->
-应用代码的当前状态可以在分支<i>part6-3</i> 中的 [github](https://github.com/fullstack-hy/redux-notes/tree/part6-3)上找到。
+<!-- The current state of the code for the application can be found on [GitHub](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3) in the branch <i>part6-3</i>.-->
+ 该应用的代码的当前状态可以在[GitHub](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3)的分支<i>part6-3</i>中找到。
 
 </div>
-
 
 <div class="tasks">
 
-
 ### Exercises 6.13.-6.14.
 
+#### 6.13 Anecdotes and the backend, step1
 
-#### 6.13 Anecdotes and the backend, 步骤1
+<!-- When the application launches, fetch the anecdotes from the backend implemented using json-server.-->
+当应用启动时，从使用json-server实现的后端获取名言警句。
 
+<!-- As the initial backend data, you can use, e.g. [this](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json).-->
+ 作为初始的后端数据，你可以使用，例如[this](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json)。
 
-<!-- When the application launches, fetch the anecdotes from the backend implemented using json-server. -->
-当应用启动时，从使用 json-server 实现的后端获取八卦。
+#### 6.14 Anecdotes and the backend, step2
 
-<!-- As the initial backend data, you can use, e.g. [this](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json). -->
-作为初始的后端数据，你可以使用，例如[this](https://github.com/fullstack-hy/misc/blob/master/anecdotes.json)。
-
-#### 6.14 Anecdotes and the backend, 步骤2
-<!-- Modify the creation of new anecdotes, such that the anecdotes are stored in the backend. -->
-修改新八卦的创建，以便将八卦存储在后端。
+<!-- Modify the creation of new anecdotes, such that the anecdotes are stored in the backend.-->
+ 修改创建新的名言警句，使名言警句存储在后端。
 
 </div>
 
-
 <div class="content">
 
-
 ### Asynchronous actions and redux thunk
-【异步action和 redux thunk】
-<!-- Our approach is OK, but it is not great that the communication with the server happens inside the functions of the components. It would be better if the communication could be abstracted away from the components, such that they don't have to do anything else but call the appropriate <i>action creator</i>. As an example, <i>App</i> would initialize the state of the application as follows: -->
-我们的方法是可行的，但是与服务器的通信发生在组件的功能内部并不是很好。 如果能够将通信从组件中抽象出来就更好了，这样它们就不必做任何其他事情，只需调用适当的<i>action creator</i>。 例如，<i>App</i> 将应用的状态初始化如下:
+
+<!-- Our approach is quite good, but it is not great that the communication with the server happens inside the functions of the components. It would be better if the communication could be abstracted away from the components, such that they don't have to do anything else but call the appropriate <i>action creator</i>. As an example, <i>App</i> would initialize the state of the application as follows:-->
+ 我们的方法很好，但与服务器的通信发生在组件的功能中，这不是很好。如果能将通信从组件中抽象出来就更好了，这样它们就不必做任何其他事情，只需调用相应的<i>动作创建器</i>。举个例子，<i>App</i>将初始化应用的状态，如下所示。
 
 ```js
 const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(initializeNotes()))  
-  },[dispatch]) 
+    dispatch(initializeNotes())
+  },[dispatch])
 
   // ...
 }
 ```
 
-<!-- and <i>NoteForm</i> would create a new note as follows: -->
-<i>NoteForm</i> 将创建一个新的便笺如下:
+<!-- and <i>NewNote</i> would create a new note as follows:-->
+ 而<i>NewNote</i>将创建一个新的笔记，如下所示。
 
 ```js
 const NewNote = () => {
   const dispatch = useDispatch()
-  
+
   const addNote = async (event) => {
     event.preventDefault()
     const content = event.target.note.value
@@ -390,85 +445,47 @@ const NewNote = () => {
 }
 ```
 
-<!-- Both components would only use the function provided to them as a prop without caring about the communication with the server that is happening in the background. -->
-这两个组件将只使用提供给它们的功能作为一个props，而不考虑与服务器的后台通信。
+<!-- In this implementation, both components would dispatch an action without the need to know about the communication between the server that happens behind the scenes. These kind of <i>async actions</i> can be implemented using the [Redux Thunk](https://github.com/reduxjs/redux-thunk) library. The use of the library doesn't need any additional configuration when the Redux store is created using the Redux Toolkit's <em>configureStore</em> function.-->
+ 在这个实现中，两个组件都会派发一个动作，而不需要知道幕后发生的服务器之间的通信。这类<i>async动作</i>可以使用[Redux Thunk](https://github.com/reduxjs/redux-thunk)库来实现。当使用Redux工具包的<em>configureStore</em>函数创建Redux商店时，使用该库不需要任何额外配置。
 
-<!-- Now let's install the [redux-thunk](https://github.com/gaearon/redux-thunk)-library, which enables us to create <i>asynchronous actions</i>. Installation is done with the command: -->
-现在让我们安装[redux-thunk](https://github.com/gaearon/redux-thunk)-库，它允许我们创建<i>asynchronous actions</i>:
+<!-- Let us now install the library-->
+ 现在让我们安装该库
 
-```bash
+```
 npm install redux-thunk
 ```
 
-<!-- The redux-thunk-library is a so-called <i>redux-middleware</i>, which must be initialized along with the initialization of the store. While we're here, let's extract the definition of the store into its own file <i>src/store.js</i>: -->
-Redux-thunk-库 是所谓的<i>redux-中间件</i>，它必须在store的初始化过程中初始化。 在这里，让我们将store的定义提取到它自己的文件 <i>src/store.js</i> 中。: 
+<!-- With Redux Thunk it is possible to implement <i>action creators</i> which return a function instead of an object. The function receives Redux store's <em>dispatch</em> and <em>getState</em> methods as parameters. This allows for example implementations of asynchronous action creators, which first wait for the completion of a certain asynchronous operation and after that dispatch some action, which changes the store's state.-->
+ 通过Redux Thunk可以实现<i>action creators</i>，它返回一个函数而不是一个对象。该函数接收Redux存储的<em>dispatch</em>和<em>getState</em>方法作为参数。这允许异步动作创建者的实现，它首先等待某个异步操作的完成，然后分派一些动作，改变商店的状态。
+
+<!-- We can define an action creator <em>initializeNotes</em> which initializes the notes based on the data received from the server:-->
+ 我们可以定义一个动作创建器<em>initializeNotes</em>，根据从服务器收到的数据初始化笔记。
 
 ```js
-import { createStore, combineReducers, applyMiddleware } from 'redux' // highlight-line
-import thunk from 'redux-thunk' // highlight-line
-import { composeWithDevTools } from 'redux-devtools-extension'
+// ...
+import noteService from '../services/notes' // highlight-line
 
-import noteReducer from './reducers/noteReducer'
-import filterReducer from './reducers/filterReducer'
+const noteSlice = createSlice(/* ... */)
 
-const reducer = combineReducers({
-  notes: noteReducer,
-  filter: filterReducer,
-})
+export const { createNote, toggleImportanceOf, setNotes, appendNote } = noteSlice.actions
 
-const store = createStore(
-  reducer,
-  composeWithDevTools(
-    applyMiddleware(thunk) // highlight-line
-  )
-)
-
-export default store
-```
-
-<!-- After the changes the file <i>src/index.js</i> looks like this -->
-更改之后，文件 <i>src/index.js</i>如下所示
-
-```js
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux' 
-import store from './store' // highlight-line
-import App from './App'
-
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-)
-```
-
-<!-- Thanks to redux-thunk, it is possible to define <i>action creators</i> so that they return a function having the <i>dispatch</i>-method of redux-store as its parameter. As a result of this, one can make asynchronous action creators, which first wait for some operation to finish, after which they then dispatch the real action. -->
-感谢 redux-thunk，可以定义<i>action creators</i>，这样它们就可以返回一个函数，其参数是 redux-store 的<i>dispatch</i>-method。 因此，可以创建异步action创建器，它们首先等待某个action完成，然后分派真正的action。
-
-
-
-<!-- Now we can define the action creator, <i>initializeNotes</i>, that initializes the state of the notes as follows: -->
-现在，我们可以定义action创建器<i>initializeNotes</i>，它初始化便笺的状态如下:
-
-```js
+// highlight-start
 export const initializeNotes = () => {
   return async dispatch => {
     const notes = await noteService.getAll()
-    dispatch({
-      type: 'INIT_NOTES',
-      data: notes,
-    })
+    dispatch(setNotes(notes))
   }
 }
+// highlight-end
+
+export default noteSlice.reducer
 ```
 
-<!-- In the inner function, meaning the <i>asynchronous action</i>, the operation first fetches all the notes from the server and then <i>dispatches</i> the notes to the action, which adds them to the store. -->
-在内部函数(即<i>异步 action</i>)中，操作首先从服务器获取所有便笺，然后<i>将</i> 便笺分发到action中，从而将它们添加到store中。
+<!-- In the inner function, meaning the <i>asynchronous action</i>, the operation first fetches all the notes from the server and then <i>dispatches</i> the <em>setNotes</em> action, which adds them to the store.-->
+ 在内部函数中，指的是<i>异步操作</i>，该操作首先从服务器获取所有笔记，然后<i>分派</i><em>setNotes</em>操作，将它们添加到存储中。
 
-<!-- The component <i>App</i> can now be defined as follows: -->
-组件<i>App</i> 现在可以定义如下:
+<!-- The component <i>App</i> can now be defined as follows:-->
+ 组件<i>App</i>现在可以被定义如下。
 
 ```js
 const App = () => {
@@ -476,8 +493,8 @@ const App = () => {
 
   // highlight-start
   useEffect(() => {
-    dispatch(initializeNotes()) 
-  },[dispatch]) 
+    dispatch(initializeNotes())
+  },[dispatch])
   // highlight-end
 
   return (
@@ -490,34 +507,76 @@ const App = () => {
 }
 ```
 
-<!-- The solution is elegant. The initialization logic for the notes has been completely separated to outside the React component. -->
-这个解决方案非常优雅。便笺的初始化逻辑已经完全分离到 React 组件之外。
+<!-- The solution is elegant. The initialization logic for the notes has been completely separated from the React component.-->
+ 这个解决方案很优雅。笔记的初始化逻辑已经完全从React组件中分离出来。
 
-<!-- The action creator _createNew_, which adds a new note looks like this -->
-action 构造器 _createNote_ 添加了一个新的便笺，看起来像这样
+<!-- Next, let's replace the <em>createNote</em> action creator created by the <em>createSlice</em> function with an asynchronous action creator:-->
+ 接下来，让我们用一个异步的动作创建器来取代由<em>createSlice</em>函数创建的<em>createNote</em>动作创建器。
 
 ```js
+// ...
+import noteService from '../services/notes'
+
+const noteSlice = createSlice({
+  name: 'notes',
+  initialState,
+  reducers: {
+    // highlight-start
+    toggleImportanceOf(state, action) {
+      const id = action.payload
+
+      const noteToChange = state.find(n => n.id === id)
+
+      const changedNote = {
+        ...noteToChange,
+        important: !noteToChange.important
+      }
+
+      return state.map(note =>
+        note.id !== id ? note : changedNote
+      )
+    },
+    appendNote(state, action) {
+      state.push(action.payload)
+    },
+    setNotes(state, action) {
+      return action.payload
+    }
+    // highlight-end
+  },
+})
+
+export const { toggleImportanceOf, appendNote, setNotes } = noteSlice.actions // highlight-line
+
+export const initializeNotes = () => {
+  return async dispatch => {
+    const notes = await noteService.getAll()
+    dispatch(setNotes(notes))
+  }
+}
+
+// highlight-start
 export const createNote = content => {
   return async dispatch => {
     const newNote = await noteService.createNew(content)
-    dispatch({
-      type: 'NEW_NOTE',
-      data: newNote,
-    })
+    dispatch(appendNote(newNote))
   }
 }
+// highlight-end
+
+export default noteSlice.reducer
 ```
 
-<!-- The principle here is the same: first an asynchronous operation is executed, after which the action changing the state of the store is <i>dispatched</i>. -->
-这里的原理是相同的: 首先执行一个异步操作，然后调度改变store态的action。
+<!-- The principle here is the same: first, an asynchronous operation is executed, after which the action changing the state of the store is <i>dispatched</i>. Redux Toolkit offers a multitude of tools to simplify asynchronous state management. Suitable tools for this use case are for example the [createAsyncThunk](https://redux-toolkit.js.org/api/createAsyncThunk) function and the [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) API.-->
+ 这里的原理是一样的：首先，执行一个异步操作，之后，改变存储状态的动作被<i>dispatched</i>。Redux工具包提供了大量的工具来简化异步状态管理。适合这个用例的工具有：[createAsyncThunk](https://redux-toolkit.js.org/api/createAsyncThunk)函数和[RTK Query](https://redux-toolkit.js.org/rtk-query/overview) API。
 
-<!-- The component <i>NewNote</i> changes as follows: -->
-<i>NewNote</i>组件更改如下:
+<!-- The component <i>NewNote</i> changes as follows:-->
+ 组件<i>NewNote</i>的变化如下。
 
 ```js
 const NewNote = () => {
   const dispatch = useDispatch()
-  
+
   const addNote = async (event) => {
     event.preventDefault()
     const content = event.target.note.value
@@ -534,37 +593,73 @@ const NewNote = () => {
 }
 ```
 
-<!-- The current state of the code for the application can be found on [github](https://github.com/fullstack-hy/redux-notes/tree/part6-4) in the branch <i>part6-4</i>. -->
-应用代码的当前状态可以在分支<i>part6-4</i> 中的[github](https://github.com/fullstack-hy/redux-notes/tree/part6-4)上找到。
+<!-- Finally, let's clean up the <i>index.js</i> file a bit by moving the code related to the creation of the Redux store into its own, <i>store.js</i> file:-->
+ 最后，让我们清理一下<i>index.js</i>文件，把与创建Redux商店有关的代码移到自己的<i>store.js</i>文件中。
+
+```js
+import { configureStore } from '@reduxjs/toolkit'
+
+import noteReducer from './reducers/noteReducer'
+import filterReducer from './reducers/filterReducer'
+
+const store = configureStore({
+  reducer: {
+    notes: noteReducer,
+    filter: filterReducer
+  }
+})
+
+export default store
+```
+
+<!-- After the changes, the content of the <i>index.js</i> is the following:-->
+ 更改后，<i>index.js</i>的内容如下。
+
+```js
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { Provider } from 'react-redux'
+import store from './store' // highlight-line
+import App from './App'
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+)
+```
+
+<!-- The current state of the code for the application can be found on [GitHub](https://github.com/fullstack-hy2020/redux-notes/tree/part6-4) in the branch <i>part6-4</i>.-->
+ 应用的代码的当前状态可以在[GitHub](https://github.com/fullstack-hy2020/redux-notes/tree/part6-4)的分支<i>part6-4</i>中找到。
 
 </div>
-
 
 <div class="tasks">
 
 
-
 ### Exercises 6.15.-6.18.
 
+#### 6.15 Anecdotes and the backend, step3
 
-#### 6.15 Anecdotes and the backend, 步骤3
+<!-- Modify the initialization of Redux store to happen using asynchronous action creators, which are made possible by the Redux Thunk library.-->
+ 修改Redux存储的初始化，使其使用异步动作创建器来发生，这是由Redux Thunk库实现的。
+
+#### 6.16 Anecdotes and the backend, step4
+
+<!-- Also modify the creation of a new anecdote to happen using asynchronous action creators, made possible by the Redux Thunk library.-->
+ 还修改了创建一个新的名言警句，使其使用异步动作创建器发生，Redux Thunk库使之成为可能。
 
 
-<!-- Modify the initialization of redux-store to happen using asynchronous action creators, which are made possible by the <i>redux-thunk</i>-library. -->
-使用异步action创建器修改 redux-store 的初始化， redux-thunk-库 使异步action创建器成为可能。
+#### 6.17 Anecdotes and the backend, step5
 
-#### 6.16 Anecdotes and the backend, 步骤4
-<!-- Also modify the creation of a new anecdote to happen using asynchronous action creators, made possible by the <i>redux-thunk</i>-library. -->
-还可以使用异步action创建器(由<i>redux-thunk</i>-library 提供)修改新八卦的创建。
+<!-- Voting does not yet save changes to the backend. Fix the situation with the help of the Redux Thunk library.-->
+ 投票还不能将变化保存到后端。在Redux Thunk库的帮助下修复了这种情况。
 
+#### 6.18 Anecdotes and the backend, step6
 
-#### 6.17 Anecdotes and the backend, 步骤5
-<!-- Voting does not yet save changes to the backend. Fix the situation with the help of the <i>redux-thunk</i>-library. -->
-投票还不能保存对后端的更改。请在<i>redux-thunk</i>-library 的帮助下修复这种情况。
-
-#### 6.18 Anecdotes and the backend, 步骤6
-<!-- The creation of notifications is still a bit tedious, since one has to do two actions and use the _setTimeout_ function: -->
-创建通知仍然有点繁琐，因为必须执行两个action并使用 setTimeout 函数:
+<!-- The creation of notifications is still a bit tedious, since one has to do two actions and use the _setTimeout_ function:-->
+ 创建通知仍然有点繁琐，因为必须做两个动作并使用_setTimeout_函数。
 
 ```js
 dispatch(setNotification(`new anecdote '${content}'`))
@@ -573,18 +668,17 @@ setTimeout(() => {
 }, 5000)
 ```
 
-<!-- Make an asynchronous action creator, which enables one to provide the notification as follows: -->
-创建一个异步action创建器，它可以提供如下通知:
+<!-- Make an action creator, which enables one to provide the notification as follows:-->
+ 做一个动作的创建者，这使得人们能够提供通知，如下。
 
 ```js
 dispatch(setNotification(`you voted '${anecdote.content}'`, 10))
 ```
 
-<!-- the first parameter is the text to be rendered and the second parameter is the time to display the notification given in seconds.  -->
-第一个参数是要渲染的文本，第二个参数是以秒为单位显示通知的时间。
+<!-- The first parameter is the text to be rendered and the second parameter is the time to display the notification given in seconds.-->
+ 第一个参数是要渲染的文本，第二个参数是显示通知的时间，单位是秒。
 
-<!-- Implement the use of this improved notification in your application. -->
-在您的应用中实现这个改进的通知的使用。
+<!-- Implement the use of this improved notification in your application.-->
+在你的应用中实现使用这个改进的通知。
 
 </div>
-

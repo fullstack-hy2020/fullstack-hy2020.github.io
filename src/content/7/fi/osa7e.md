@@ -236,10 +236,7 @@ Sovelluksen komponenttien ulkoasun määrittelevät React-elementit muodostavat 
 [ReactDOM](https://reactjs.org/docs/react-dom.html)-kirjaston avulla komponenttien määrittelevä virtuaalinen DOM renderöidään oikeaksi DOM:iksi eli DOM API:n avulla selaimen näytettäväksi:
 
 ```js
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <App />,
-  document.getElementById('root')
-)
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
 Kun sovelluksen tila muuttuu, määrittyy komponenttien renderöinnin takia <i>uusi virtuaalinen DOM</i>. Reactilla on edellinen versio virtual DOM:ista muistissa ja sensijaan että uusi virtuaalinen DOM renderöitäisiin suoraviivaisesti DOM API:n avulla, React laskee mikä on optimaalisin tapa tehdä DOM:iin muutoksia (eli poistaa, lisätä ja muokata DOM:issa olevia elementtejä) siten, että DOM saadaan vastaamaan uutta Virtual DOM:ia.
@@ -254,11 +251,11 @@ React-sovellusten yhteydessä ei kuitenkaan yleensä puhuta MVC-arkkitehtuurista
 
 Koska sekä React että [Flux](https://facebook.github.io/flux/docs/in-depth-overview/) ovat Facebookilla syntyneinä, voi ajatella, että Reactin pitäminen ainoastaan käyttöliittymästä huolehtivana kirjastona on sen oikeaoppista käyttöä. Flux-arkkitehtuurin noudattaminen tuo sovelluksiin tietyn overheadin ja jos on kyse pienestä sovelluksesta tai prototyypistä, saattaa Reactin "väärinkäyttäminen" olla järkevää, sillä myöskään [overengineering](https://en.wikipedia.org/wiki/Overengineering) ei yleensä johda optimaaliseen tulokseen.
 
-Kuten [osan 6](/osa6/connect#redux-ja-komponenttien-tila) lopussa mainittiin, Reactin [Context-api](https://reactjs.org/docs/context.html) tarjoaa erään vaihtoehtoisen tavan keskitetylle tilan hallinnalle ilman tarvetta ulkoisille kirjastoille kuten Reduxille. Katso lisää esim. [täällä](https://www.simplethread.com/cant-replace-redux-with-hooks/) ja [täällä](https://hswolff.com/blog/how-to-usecontext-with-usereducer/). 
+Osan 6 [viimeinen luku](/osa6/react_query_use_reducer_ja_contex) käsittelee Reactin tilanhallinnan uudempia virtauksia. Reactin suoraan tarjoamat hook-funktiot <i>useReducer</i> ja <i>useContext</i> tarjoavat eräänlaisen kevytversion Reduxille. <i>React Query</i> taas on kirjasto joka ratkaisee monia palvelimella olevan tilan käsittelyyn liittyviä pulmia, eliminoiden tarvetta sille, että React-sovelluksen tarvitsee tallettaa suoraan frontendin tilaan palvelimelta haettua dataa.
 
 ### React/node-sovellusten tietoturva
 
-Emme ole vielä maininneet kurssilla kuin muutaman sanan tietoturvaan liittyen. Kovin paljon ei nytkään ole aikaa, ja onneksi laitoksella on MOOC-kurssi [Securing Software](https://cybersecuritybase.mooc.fi/module-2.1) tähän tärkeään aihepiiriin.
+Emme ole vielä maininneet kurssilla kuin muutaman sanan tietoturvaan liittyen. Kovin paljon ei nytkään ole aikaa, ja onneksi Helsingin Yliopistolla on MOOC-kurssi [Securing Software](https://cybersecuritybase.mooc.fi/module-2.1) tähän tärkeään aihepiiriin.
 
 Katsotaan kuitenkin muutamaa kurssispesifistä seikkaa.
 
@@ -290,7 +287,7 @@ SQL-injektiot estetään [parametrisoiduilla kyselyillä](https://security.stack
 execute("SELECT * FROM Users WHERE name = ?", [userName])
 ```
 
-Myös NoSQL-kantoihin tehtävät injektiohyökkäykset ovat mahdollisia. Mongoose kuitenkin estää ne [sanitoimalla](https://zanon.io/posts/nosql-injection-in-mongodb) kyselyt. Lisää aiheesta esim. [täällä](https://blog.websecurify.com/2014/08/hacking-nodejs-and-mongodb.html).
+Myös NoSQL-kantoihin tehtävät injektiohyökkäykset ovat mahdollisia. Mongoose kuitenkin estää ne [sanitoimalla](https://zanon.io/posts/nosql-injection-in-mongodb) kyselyt. Lisää aiheesta esim. [täällä](https://web.archive.org/web/20220901024441/https://blog.websecurify.com/2014/08/hacking-nodejs-and-mongodb.html).
 
 <i>Cross-site scripting eli XSS</i> on hyökkäys, missä sovellukseen on mahdollista injektoida suoritettavaksi vihollismielistä JavaScript-koodia. Jos kokeilemme injektoida esim. muistiinpanosovellukseen seuraavan
 
@@ -324,7 +321,7 @@ Riippuvuudet saa ajantasaistettua päivittämällä tiedostoa <i>package.json</i
 npm install -g npm-check-updates
 ```
 Tämän työkalun avulla tarkistetaan riippuvuuksien ajantasaisuus seuraavasti:
-```console
+```bash
 $ npm-check-updates
 Checking ...\ultimate-hooks\package.json
 [====================] 9/9 100%
@@ -336,7 +333,7 @@ Checking ...\ultimate-hooks\package.json
 Run ncu -u to upgrade package.json
 ```
 Tiedosto <i>package.json</i> päivitetään suorittamalla komento _ncu -u_.
-```console
+```bash
 $ ncu -u
 Upgrading ...\ultimate-hooks\package.json
 [====================] 9/9 100%
@@ -443,7 +440,7 @@ Palvelimella tapahtuvaan renderöintiin liittyen on alettu puhua <i>isomorfisist
 
 React ja Node tarjoavatkin varteenotettavan vaihtoehdon isomorfisten sovellusten toteuttamiseen universaalina koodina.
 
-Universaalin koodin kirjoittaminen suoraan Reactin avulla on vielä toistaiseksi melko vaivalloista. Viime aikoina paljon huomiota saanut Reactin päälle toteutettu [Next.js](https://github.com/zeit/next.js/)-kirjasto on hyvä vaihtoehto universaalien sovellusten tekemiseen.
+Universaalin koodin kirjoittaminen suoraan Reactin avulla on vielä toistaiseksi melko vaivalloista. Viime aikoina paljon huomiota saanut Reactin päälle toteutettu [Next.js](https://github.com/vercel/next.js)-kirjasto on hyvä vaihtoehto universaalien sovellusten tekemiseen.
 
 #### Progressive web apps
 
@@ -510,9 +507,7 @@ Javasciptin kehittäjäyhteisö on tuottanut valtavan määrän erilaisia hyödy
 
 Jos sovelluksessa on tarve operoida hieman monimutkaisemman datan kanssa, on jo [osassa 4](/osa4/sovelluksen_rakenne_ja_testauksen_alkeet#tehtavat-4-3-4-7) suositeltu kirjasto [lodash](https://www.npmjs.com/package/lodash) hyvä lisä. Jos olet mieltynyt funktionaaliseen ohjelmointityyliin, kannattaa harkita [ramda](https://ramdajs.com/):n käyttöä.
 
-Jos sovelluksessa käsitellään aikaa, esimerkiksi [date-fns](https://github.com/date-fns/date-fns)-kirjasto tarjoaa siihen hyvän välineistön.
-
-Lomakkeiden käyttöä helpottavia kirjastoja ovat [Formik](https://www.npmjs.com/package/formik) ja [react-final-form](https://final-form.org/react). Jos sovelluksessa tulee piirtää graafeja, on vaihtoehtoja lukuisia, sekä [recharts](http://recharts.org/en-US/) että [highcharts](https://github.com/highcharts/highcharts-react) ovat hyviksi havaittuja.
+Jos sovelluksessa käsitellään aikaa, esimerkiksi [date-fns](https://github.com/date-fns/date-fns)-kirjasto tarjoaa siihen hyvän välineistön.  Jos sovellus sisältää monimutkaisia lomakkeita, voi [React Hook Form](https://react-hook-form.com/) olla hyvä valinta. Jos sovelluksessa tulee piirtää graafeja, on vaihtoehtoja lukuisia, sekä [recharts](http://recharts.org/en-US/) että [highcharts](https://github.com/highcharts/highcharts-react) ovat hyviksi havaittuja.
 
 [Immer](https://github.com/mweststrate/immer) tarjoaa muutamista tietorakenteista <i>muuttumattomia</i> toteutuksia. Kirjastosta voi olla hyötyä Reduxia käytettäessä, sillä kuten osasta 6 [muistamme](/osa6/flux_arkkitehtuuri_ja_redux#puhtaat-funktiot-immutable) reducerien on oltava puhtaita funktioita eli ne eivät saa muuttaa storen tilaa vaan niiden on korvattava se muutostilanteissa uudella. 
 

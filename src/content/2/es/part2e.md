@@ -7,7 +7,7 @@ lang: es
 
 <div class="content">
 
-La apariencia de nuestra aplicación actual es bastante modesta . En el [ejercicio 0.2](/es/part0/fundamentos_de_aplicaiones_web#ejercicios-0-1-0-6), la tarea era pasar por el [tutorial CSS](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics) de Mozilla.
+La apariencia de nuestra aplicación actual es bastante modesta . En el [ejercicio 0.2](/es/part0/fundamentos_de_las_aplicaciones_web#ejercicios-0-1-0-6), la tarea era pasar por el [tutorial CSS](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics) de Mozilla.
 
 
 Antes de pasar a la siguiente parte, echemos un vistazo a cómo podemos agregar estilos a una aplicación React. Hay varias formas diferentes de hacer esto y veremos los otros métodos más adelante. Al principio, agregaremos CSS a nuestra aplicación a la vieja usanza; en un solo archivo sin usar un [preprocesador CSS](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor) (aunque esto no es del todo cierto como veremos más adelante).
@@ -284,7 +284,7 @@ El código de la versión final de nuestra aplicación se puede encontrar en la 
 
 <h4>2.19: Guía telefónica paso11 </h4>
 
-Utilice el ejemplo de [mensaje de error mejorado](/es/part2/agregando_estilos_a_aplicaciones_react#mensaje-de-error-mejorado) de la parte 2 como guía para mostrar una notificación que dura unos segundos después de que se ejecuta una operación exitosa (se agrega una persona o se cambia un número):
+Utilice el ejemplo de [mensaje de error mejorado](/es/part2/agregar_estilos_a_la_aplicacion_react#mensaje-de-error-mejorado) de la parte 2 como guía para mostrar una notificación que dura unos segundos después de que se ejecuta una operación exitosa (se agrega una persona o se cambia un número):
 
 ![](../../images/2/27e.png)
 
@@ -294,7 +294,7 @@ Abra su aplicación en dos navegadores. **Si elimina a una persona en el navegad
 
 ![](../../images/2/29b.png)
 
-Solucione el problema de acuerdo con el ejemplo que se muestra en [promesa y errores](/es​​/part2/alterando_datos_en_el_servidor#promesas-y-errores) en la parte 2. Modifique el ejemplo para que se muestre al usuario un mensaje cuando la operación no se realice correctamente. Los mensajes que se muestran para eventos exitosos y no exitosos deben verse diferentes
+Solucione el problema de acuerdo con el ejemplo que se muestra en [promesa y errores](/es/part2/alterando_datos_en_el_servidor#promesas-y-errores) en la parte 2. Modifique el ejemplo para que se muestre al usuario un mensaje cuando la operación no se realice correctamente. Los mensajes que se muestran para eventos exitosos y no exitosos deben verse diferentes
 
 ![](../../images/2/28e.png)
 

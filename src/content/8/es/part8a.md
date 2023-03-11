@@ -182,7 +182,6 @@ query {
 }
 ```
 
-
 El último ejemplo muestra una consulta que requiere un parámetro y devuelve los detalles de una persona.
 
 ```js
@@ -251,10 +250,13 @@ Cree un nuevo proyecto npm con _npm init_ e instale las dependencias necesarias.
 npm install apollo-server graphql
 ```
 
+También cree un archivo `index.js` en el directorio raíz de su proyecto.
+
 El código inicial es el siguiente:
 
 ```js
-const { ApolloServer, gql } = require('apollo-server')
+const { ApolloServer } = require('@apollo/server')
+const { startStandaloneServer } = require('@apollo/server/standalone')
 
 let persons = [
   {
@@ -309,7 +311,9 @@ const server = new ApolloServer({
   resolvers,
 })
 
-server.listen().then(({ url }) => {
+startStandaloneServer(server, {
+  listen: { port: 4000 },
+}).then(({ url }) => {
   console.log(`Server ready at ${url}`)
 })
 ```
@@ -384,29 +388,18 @@ tiene un resolutor que devuelve <i>todos</i> los objetos de la matriz _persons_.
 () => persons
 ```
 
-### GraphQL-playground
+Lanza el servidor ejecutando en la terminal `node index.js`
 
-Cuando Apollo-server se ejecuta en modo de desarrollo (_node filename.js_), inicia un [GraphQL-playground](https://www.apollographql.com/docs/apollo-server/testing/graphql-playground/) en la dirección [http://localhost:4000/graphql](http://localhost:4000/graphql). Esto es muy útil para un desarrollador y se puede utilizar para realizar consultas al servidor.
+### Apollo Studio Explorer
 
-Probemos
+Cuando Apollo-server se ejecuta en modo de desarrollo, la página [http://localhost:4000/](http://localhost:4000/) tiene un botón _Query your server_ que nos lleva a [Apollo Studio Explorer](https://www.apollographql.com/docs/graphos/explorer/explorer/).
+Esto es muy útil para un desarrollador y se puede utilizar para realizar consultas al servidor.
 
-![](../../images/8/1.png)
+Vamos a probarlo:
 
-A veces, Playground requiere que seas bastante pedante. Si la sintaxis de una consulta es incorrecta, el mensaje de error es bastante imperceptible y no sucede nada cuando presiona go.
+![](../../images/8/1x.png)
 
-![](../../images/8/2.png)
-
-El resultado de la consulta anterior permanece visible en el lado derecho del campo de juegos incluso cuando la consulta actual es defectuosa.
-
-Al señalar el lugar correcto en la línea con los errores, puede ver el mensaje de error
-
-![](../../images/8/3.png)
-
-Si el patio de juegos parece estar atascado, actualizar la página generalmente ayuda.
-
-Al hacer clic en el texto <i>DOCS</i> a la derecha, la zona de juegos muestra el esquema GraphQL del servidor.
-
-![](../../images/8/4e.png)
+Al lado izquierdo el navegador muestra la documentación de la API que se ha generado automáticamente a partir del esquema.
 
 ### Parámetros de un resolutor
 
@@ -692,7 +685,7 @@ Entonces, el resolutor del campo <i>address</i> del tipo <i>Person</i> formatea 
 
 Si intentamos crear una nueva persona, pero los parámetros no se corresponden con la descripción del esquema, el servidor muestra un mensaje de error:
 
-![](../../images/8/5.png)
+![](../../images/8/5x.png)
 
 Por lo tanto, parte del manejo de errores se puede realizar automáticamente con [validación](https://graphql.org/learn/validation/) GraphQL.
 
@@ -702,7 +695,7 @@ Los errores de esas reglas son manejados por [el mecanismo de manejo de errores 
 Bloqueemos agregar el mismo nombre al directorio telefónico varias veces:
 
 ```js
-const { ApolloServer, UserInputError, gql } = require('apollo-server') // highlight-line
+const { GraphQLError } = require('graphql') // highlight-line
 
 // ...
 
@@ -712,8 +705,11 @@ const resolvers = {
     addPerson: (root, args) => {
       // highlight-start
       if (persons.find(p => p.name === args.name)) {
-        throw new UserInputError('Name must be unique', {
-          invalidArgs: args.name,
+        throw new GraphQLError('Name must be unique', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name
+          }
         })
       }
       // highlight-end
@@ -728,7 +724,7 @@ const resolvers = {
 
 Entonces, si el nombre que se agregará ya existe en la agenda, arroje el error _UserInputError_.
 
-![](../../images/8/6.png)
+![](../../images/8/6new.png)
 
 El código actual de la aplicación se puede encontrar en [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-2), rama <i>part8-2</i>.
 
@@ -910,15 +906,11 @@ La respuesta se ve como
 
 En en algunos casos, puede resultar beneficioso nombrar las consultas. Este es el caso especialmente cuando las consultas o mutaciones tienen [parámetros](https://graphql.org/learn/queries/#variables). Pronto entraremos en los parámetros.
 
-Si hay varias consultas, Playground le pide que elija cuál de ellas ejecutar:
-
-![](../../images/8/7.png)
-
 </div>
 
 <div class="tasks">
 
-### Ejercicios 8.1.-8.7.
+### Ejercicios 8.1.-8.7
 
 A través de los ejercicios, implementaremos un backend GraphQL para una pequeña biblioteca.
 Comience con [este archivo](https://github.com/fullstack-hy2020/misc/blob/master/library-backend.js). ¡Recuerde _npm init_ e instalar dependencias!

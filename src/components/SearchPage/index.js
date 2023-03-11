@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDebounce } from 'use-debounce';
 import { useFlexSearch } from 'react-use-flexsearch';
+import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
 
 import Layout from '../layout';
@@ -8,7 +9,7 @@ import SearchResults from './SearchResults';
 import Element from '../Element/Element';
 import InputField from './InputField';
 import { SubHeader } from '../SubHeader/SubHeader';
-import Footer from '../Footer/Footer';
+import SrOnly from '../SrOnly';
 
 const SearchPage = ({
   localSearch,
@@ -19,6 +20,7 @@ const SearchPage = ({
   const { index, store } = localSearch;
   const [query, setQuery] = useState('');
   const [debouncedQuery] = useDebounce(query, 500);
+  const { t } = useTranslation();
 
   const handleInpuptChange = event => {
     setQuery(event.target.value);
@@ -34,11 +36,19 @@ const SearchPage = ({
         <SubHeader headingLevel="h1" text={title} />
 
         <Element className="container">
+          <SrOnly>
+            <label htmlFor="search-input">
+              {t('navigation:searchLinkSrLabel')}
+            </label>
+          </SrOnly>
           <InputField
+            id="search-input"
+            type="search"
             value={query}
             onChange={handleInpuptChange}
             placeholder={inputPlaceholder}
             className={cn({ 'spacing--after': showResults })}
+            autoFocus // eslint-disable-line jsx-a11y/no-autofocus
           />
 
           {showResults && (
@@ -50,7 +60,6 @@ const SearchPage = ({
           )}
         </Element>
       </Element>
-      <Footer lang={lang} />
     </Layout>
   );
 };

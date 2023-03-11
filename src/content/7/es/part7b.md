@@ -21,7 +21,7 @@ En la [parte 5](/es/part5/props_children_and_proptypes#references-to-components-
 
 Durante el último año, muchas librerías React han comenzado a ofrecer apis basadas en hooks. En la [parte 6](/es/part6/flux_architecture_and_redux) usamos los hooks [useSelector](https://react-redux.js.org/api/hooks#useselector) y [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) de la librería react-redux para compartir nuestra función redux-store y dispatch a nuestros componentes. La api basada en hooks de Redux es mucho más fácil de usar que la más antigua, aún disponible, [connect](/es/part6/connect) -api.
 
-La api de [React-router](https://reacttraining.com/react-router/web/guides) que presentamos en la [parte anterior](/es/part7/react_router) también se basa parcialmente en [hooks](https://reacttraining.com/react-router/web/api/Hooks). Sus hooks se pueden usar para acceder a los parámetros de la URL y al objeto history, lo que permite manipular la URL del navegador mediante programación.
+La api de [React-router](https://reactrouter.com/en/main/start/tutorial) que presentamos en la [parte anterior](/es/part7/react_router) también se basa parcialmente en [hooks](https://reacttraining.com/react-router/web/api/Hooks). Sus hooks se pueden usar para acceder a los parámetros de la URL y al objeto history, lo que permite manipular la URL del navegador mediante programación.
 
 Como se mencionó en la [parte 1](/es/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks), los hooks no son funciones normales y cuando los usamos tenemos que cumplir con ciertas [reglas o limitaciones](https://reactjs.org/docs/hooks-rules.html). Recapitulemos las reglas del uso de hooks, copiadas literalmente de la documentación oficial de React:
 
@@ -432,7 +432,7 @@ Si no se encuentra el país, se muestra un mensaje al usuario
 
 Por lo demás, la aplicación está completa, pero en este ejercicio debe implementar un hook personalizado _useCountry_, que se puede usar para buscar los detalles del país dado al hook como parámetro.
 
-Use el endpoint [full name](https://restcountries.com/#api-endpoints-full-name) de la api  para obtener los detalles del país en un hook _useEffect_ dentro de su hook personalizado.
+Use el endpoint [full name](https://restcountries.com/#api-endpoints-v2-full-name) de la api  para obtener los detalles del país en un hook _useEffect_ dentro de su hook personalizado.
 
 Tenga en cuenta que en este ejercicio es esencial utilizar el [segundo parámetro](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) de useEffect para controlar cuándo se ejecuta la función de efecto.
 

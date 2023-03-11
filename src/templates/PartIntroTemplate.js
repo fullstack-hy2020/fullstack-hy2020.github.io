@@ -3,7 +3,6 @@ import './PartIntroTemplate.scss';
 import Arrow from '../components/Arrow/Arrow';
 import { Banner } from '../components/Banner/Banner';
 import Element from '../components/Element/Element';
-import Footer from '../components/Footer/Footer';
 import Layout from '../components/layout';
 import Parser from 'html-react-parser';
 import PrevNext from '../components/PrevNext/PrevNext';
@@ -104,8 +103,6 @@ export default function PartIntroTemplate({ data }) {
 
         <PrevNext part={part} lang={lang} />
       </div>
-
-      <Footer lang={lang} />
     </Layout>
   );
 }

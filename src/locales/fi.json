@@ -13,12 +13,15 @@
     "generalTitle": "Yleistä"
   },
   "navigation": {
+    "skipToContent": "Siirry sisältöön",
     "aboutCourse": "Kurssista",
     "courseContents": "Kurssin sisältö",
     "faq": "FAQ",
     "partners": "Kurssilla mukana",
     "challenge": "Haaste",
-    "searchLinkSrLabel": "Hae materiaalista"
+    "searchLinkSrLabel": "Hae materiaalista",
+    "ThemeSwitcherSrLabel": "Käytä tummaa teemaa",
+    "LanguagePickerSrLabel": "Valitse kieli"
   },
   "challengePage": {
     "aboutTitle": "Tämä on Full Stack -haaste",
@@ -48,6 +51,9 @@
     "startCourseButton": "Aloita kurssi",
     "announcementsTitle": "Ajankohtaista",
     "authorsTitle": "Materiaalin tekijä ja lisenssi",
-    "courseNameTitle": "Full Stack open 2022"
+    "courseNameTitle": "Full Stack open"
+  },
+  "notFoundPage": {
+    "title": "Sivua ei löytynyt"
   }
 }

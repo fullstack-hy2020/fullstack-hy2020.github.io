@@ -825,9 +825,9 @@ Obtenga los datos del enpoint creado en el ejercicio anterior. Después de obten
 
 Dado que ahora tenemos el estado en el contexto, deberá definir un nuevo tipo de acción para actualizar los datos de un paciente individual.
 
-La aplicación usa [Semantic UI React](https://react.semantic-ui.com/) para estilar, que es bastante similar a [React Bootstrap](https://react-bootstrap.github.io/) y  [MaterialUI](https://material-ui.com/) que cubrimos en la [parte 7](/es/part7/more_about_styles). También puede usarlo para los nuevos componentes, pero eso depende de usted, ya que nuestro enfoque principal ahora es Typecript.
+La aplicación usa [Semantic UI React](https://react.semantic-ui.com/) para estilar, que es bastante similar a [React Bootstrap](https://react-bootstrap.github.io/) y  [MaterialUI](https://material-ui.com/) que cubrimos en la [parte 7](/es/part7/more_about_styles). También puede usarlo para los nuevos componentes, pero eso depende de usted, ya que nuestro enfoque principal ahora es Typescript.
 
-La aplicación también usa el [react router](https://reacttraining.com/react-router/web/guides/quick-start) para controlar qué vista es visible en el frontend. Es posible que desee echar un vistazo a la [parte 7](/es/part7/react_router) si aún no comprende cómo funciona el enrutador.
+La aplicación también usa el [react router](https://reactrouter.com/en/main/start/tutorial) para controlar qué vista es visible en el frontend. Es posible que desee echar un vistazo a la [parte 7](/es/part7/react_router) si aún no comprende cómo funciona el enrutador.
 
 El resultado podría verse así:
 
@@ -835,7 +835,7 @@ El resultado podría verse así:
 
 El género se muestra con el [icono](https://react.semantic-ui.com/elements/icon/#gendersicons-can-represent-genders-or-types-of-sexuality)  del componente react-semantic-ui
 
-**Tenga en cuenta** que para acceder al id en la URL, debe proporcionar a [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) un argumento de tipo adecuado:
+**Tenga en cuenta** que para acceder al id en la URL, debe proporcionar a [useParams](https://reactrouter.com/en/main/hooks/use-params) un argumento de tipo adecuado:
 
 ```js
 const { id } = useParams<{ id: string }>();

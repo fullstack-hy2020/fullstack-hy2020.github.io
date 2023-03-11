@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 
 import Accordion from '../Accordion/Accordion';
 import Element from '../Element/Element';
-import Footer from '../Footer/Footer';
 import Layout from '../layout';
 import SEO from '../seo';
 import { SubHeader } from '../SubHeader/SubHeader';
@@ -12,7 +11,7 @@ import mainSEOtags from '../../content/seo/mainSEOtags';
 
 const FaqPage = ({ lang, title, seoDescription }) => {
   const { t } = useTranslation();
-  const langContent = content[lang] || [];
+  const langContent = content[lang] || content.en;
 
   return (
     <Layout>
@@ -46,8 +45,6 @@ const FaqPage = ({ lang, title, seoDescription }) => {
           );
         })}
       </Element>
-
-      <Footer lang={lang} />
     </Layout>
   );
 };

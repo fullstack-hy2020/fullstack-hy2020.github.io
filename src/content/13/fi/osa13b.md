@@ -7,7 +7,7 @@ lang: fi
 
 <div class="content">
 
-# Sovelluksen strukturointi
+### Sovelluksen strukturointi
 
 Olemme toistaiseksi kirjoittaneet kaiken koodin samaan tiedostoon. Strukturoidaan nyt sovellus hieman paremmin. Luodaan seuraava hakemistorakenne ja tiedostot:
 
@@ -67,14 +67,7 @@ Tiedosto <i>util/db.js</i> sisältää tietokannan alustukseen liittyvän koodin
 const Sequelize = require('sequelize')
 const { DATABASE_URL } = require('./config')
 
-const sequelize = new Sequelize(DATABASE_URL, {
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false
-    }
-  },
-});
+const sequelize = new Sequelize(DATABASE_URL)
 
 const connectToDatabase = async () => {
   try {
@@ -234,7 +227,7 @@ router.put('/:id', noteFinder, async (req, res) => { // highlight-line
 
 Reitinkäsittelijät saavat nyt <i>kolme</i> parametria, näistä ensimmäinen on reitin määrittelevä merkkijono ja toisena on määrittelemämme middleware <i>noteFinder</i>, joka hakee muistiinpanon tietokannasta ja sijoittaa sen <i>req</i> olion kenttään <i>note</i>. Pieni määrä copypastea poistuu ja olemme tyytyväisiä!
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part132-notes/tree/part13-2), branchissa <i>part13-2</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part13-notes/tree/part13-2), branchissa <i>part13-2</i>.
 
 </div>
 
@@ -469,7 +462,7 @@ module.exports = {
 Näin siis [määritellään](https://sequelize.org/master/manual/assocs.html#one-to-one-relationships) että <i>users</i> ja <i>notes</i> rivien välillä on <i>yhden suhde moneen</i> -yhteys. Muutimme myös <i>sync</i>-kutsuja siten että ne muuttavat taulut, jos taulujen määrittelyyn on tullut muutoksia. Kun nyt katsotaan tietokannan skeemaa konsolista, se näyttää seuraavalta:
 
 ```js
-username=> \d users
+postgres=# \d users
                                      Table "public.users"
   Column  |          Type          | Collation | Nullable |              Default
 ----------+------------------------+-----------+----------+-----------------------------------
@@ -481,7 +474,7 @@ Indexes:
 Referenced by:
     TABLE "notes" CONSTRAINT "notes_user_id_fkey" FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE SET NULL
 
-username=> \d notes
+postgres=# \d notes
                                       Table "public.notes"
   Column   |           Type           | Collation | Nullable |              Default
 -----------+--------------------------+-----------+----------+-----------------------------------
@@ -572,7 +565,7 @@ const tokenExtractor = (req, res, next) => {
 }
 // highlight-end
 
-router.post('/', tokenExtractor, async (req, res) => {
+router.post('/', tokenExtractor, async (req, res) => { // highlight-line
   try {
     // highlight-start
     const user = await User.findByPk(req.decodedToken.id)
@@ -859,6 +852,32 @@ where: {
 
 riippuen query-parametrin arvosta.
 
+Tietokantaan on saattanut päästä note-rivejä joiden kentällä <i>important</i> ei ole arvoa. Näitä eivät ylläolevien muutosten jälkeen enää pysty kannasta hakemaan. Annetaan tietokantakonsolista puuttuville tärkeyksille jotkut arvot, ja muutetaan skeemaa siten, että tärkeys tulee pakolliseksi:
+
+```js
+Note.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    content: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    important: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false, // highlight-line
+    },
+    date: {
+      type: DataTypes.DATE,
+    },
+  },
+  // ...
+)
+```
+
 Laajennetaan toiminnallisuutta vielä siten, että muistiinpanoja haettaessa voidaan määritellä vaadittu hakusana, eli esim. tekemällä pyyntö http://localhost:3001/api/notes?search=database saadaan kaikki muistiinpanot, joissa mainitaan <i>database</i> tai pyynnöllä http://localhost:3001/api/notes?search=javascript&important=true saadaan kaikki tärkeäksi merkityt muistiinpanot, joissa mainitaan <i>javascript</i>. Toteutus on seuraavassa
 
 ```js
@@ -962,7 +981,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://gith
 #### Tehtävä 13.13.
 
 Toteuta sovellukseen kaikki blogit palauttavaan reittiin filtteröinti hakusanan perusteella. Filtteröinti toimii seuraavasti
-- _GET /api/blogs?serch=react_ palauttaa ne blogit joiden kentässä <i>title</i> esiintyy hakusana <i>react</i>, hakusana on epäcasesensitiivinen
+- _GET /api/blogs?search=react_ palauttaa ne blogit joiden kentässä <i>title</i> esiintyy hakusana <i>react</i>, hakusana on epäcasesensitiivinen
 - _GET /api/blogs_ palauttaa kaikki blogit
 
 
@@ -971,7 +990,7 @@ Toteuta sovellukseen kaikki blogit palauttavaan reittiin filtteröinti hakusanan
 
 Laajenna filtteriä siten, että se etsii hakusanaa kentistä <i>title</i> ja <i>author</i>, eli
 
-_GET /api/blogs?serch=jami_ palauttaa ne blogit joiden kentässä <i>title</i> tai kentässä <i>author</i> esiintyy hakusana <i>jami</i>
+_GET /api/blogs?search=jami_ palauttaa ne blogit joiden kentässä <i>title</i> tai kentässä <i>author</i> esiintyy hakusana <i>jami</i>
 #### Tehtävä 13.15.
 
 Muokkaa blogien reittiä siten, että se palauttaa blogit tykkäysten perusteella laskevassa järjestyksessä. Etsi [dokumentaatiosta](https://sequelize.org/master/manual/model-querying-basics.html) ohjeet järjestämiselle.

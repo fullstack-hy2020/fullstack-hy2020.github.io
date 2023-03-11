@@ -23,15 +23,18 @@ export const ContentLiftup = ({
   companyPath,
   small,
   className,
+  applyPadding,
 }) => {
   const classes = [];
 
   small && classes.push('content-liftup--small');
+  applyPadding && classes.push('content-liftup--padding');
 
   return path ? (
     <div className={`content-liftup ${className} ${classes.join(' ')}`}>
       <TripleBorder largeMargin>
         <Link
+          className="content-liftup__link"
           to={path}
           onMouseOver={e => {
             setSrcToChildrenImage(e, hoverImageSrc ? hoverImageSrc : image.src);
@@ -48,7 +51,7 @@ export const ContentLiftup = ({
         </Link>
       </TripleBorder>
 
-      <p className="content-liftup__name">{name}</p>
+      <h2 className="content-liftup__name">{name}</h2>
 
       <p className="content-liftup__summary">{summary}</p>
     </div>
@@ -67,6 +70,7 @@ export const ContentLiftup = ({
             {...image}
             contain
             squareBig
+            backdrop
             className="content-liftup__image"
           />
 

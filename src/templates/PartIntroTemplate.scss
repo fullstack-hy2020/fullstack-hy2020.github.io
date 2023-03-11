@@ -3,6 +3,14 @@
 .part-intro {
   font-family: $font-heading !important;
 
+  p {
+    color: $black;
+  }
+
+  li {
+    color: $black;
+  }
+
   p:not(:last-of-type) {
     padding-bottom: 2em;
   }
@@ -24,6 +32,7 @@
   }
 
   a {
+    color: $black;
     border-bottom: 1px solid $black;
 
     &:hover {
