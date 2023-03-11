@@ -1,3 +1,4 @@
+import translationProgress from '../../utils/translationProgress'
 import { Banner } from '../Banner/Banner';
 import { ContentLiftup } from '../ContentLiftup/ContentLiftup';
 import React from 'react';
@@ -74,16 +75,16 @@ const partNameTranslations = {
     'Introdução ao React',
     'Comunicação com o servidor',
     'Programando um servidor com NodeJS e Express',
-    'Teste de servidores Express e Administração de Usuários (tradução em andamento)',
-    'Teste de aplicações React (tradução em andamento)',
-    'Gerenciamento de Estado com Redux (tradução em andamento)',
-    'React router, hooks personalizados, estilização de aplicações com CSS e Webpack (tradução em andamento)',
-    'GraphQL (tradução em andamento)',
-    'TypeScript (tradução em andamento)',
-    'React Native (tradução em andamento)',
-    'CI/CD (tradução em andamento)',
-    'Containers (tradução em andamento)',
-    'Utilizando bancos de dados relacionais (tradução em andamento)',
+    'Teste de servidores Express e Administração de Usuários',
+    'Teste de aplicações React',
+    'Gerenciamento de Estado com Redux',
+    'React router, hooks personalizados, estilização de aplicações com CSS e Webpack',
+    'GraphQL',
+    'TypeScript',
+    'React Native',
+    'CI/CD',
+    'Containers',
+    'Utilizando bancos de dados relacionais',
   ],
 };
 
@@ -102,9 +103,10 @@ export const PartBanner = ({ lang }) => {
     >
       <div className="container spacing flex-fix-aligning col-7--mobile">
         {parts.map(part => {
-          const partNames =
-            partNameTranslations[lang] || partNameTranslations.en;
+            const partNames = 
+            partNameTranslations[lang] || partNameTranslations.en
 
+            const summary = translationProgress[lang] < part ? partNames[part] + ' (english only)' : partNames[part]
           return (
             <ContentLiftup
               key={partNames[part]}
@@ -115,7 +117,7 @@ export const PartBanner = ({ lang }) => {
               }}
               hoverImageSrc={require(`../../images/thumbnails/part-${part}_ovr.svg`)}
               name={`${partName(lang)} ${part}`}
-              summary={partNames[part]}
+              summary={summary}
               path={getPartTranslationPath(lang, part)}
             />
           );

@@ -12,3 +12,6 @@
 1. Prettify your code with `npm run format`
 2. Create a new branch for your changes
 3. Create the PR from that branch to the source branch
+
+# Contributing with translations
+When translation of a whole new part is completed, remember to update the file src/utils/translationProgress.json
