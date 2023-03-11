@@ -137,7 +137,7 @@ In the example above, this:
 
 creates a copy of the _clicks_ object where the value of the _right_ property is increased by one.
 
-Assigning the object to a variable in the event handlers is not necessary and we can simplify the functions to the following form:
+We can simplify the event handlers by directly passing a new object with the updated property to the _setClicks_ function, instead of creating a new object with a variable and then passing that to _setClicks_. This is because React automatically merges the updated state with the previous state, and we only need to update the relevant property. Therefore, assigning the object to a variable is not necessary and we can simplify the functions to the following form: 
 
 ```js
 const handleLeftClick = () =>
