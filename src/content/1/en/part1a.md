@@ -515,7 +515,7 @@ and age
 {friends[0].age}
 ```
 
-After correcting the error, you should clear the console error messages by pressing Ø and then reload the page content and make sure that no error messages are displayed.
+After correcting the error, you should clear the console error messages by pressing 🚫 and then reload the page content and make sure that no error messages are displayed.
 
 A small additional note to the previous one. React also allows arrays to be rendered <i>if</i> the array contains values ​​that are eligible for rendering (such as numbers or strings). So the following program would work, although the result might not be what we want:
 
