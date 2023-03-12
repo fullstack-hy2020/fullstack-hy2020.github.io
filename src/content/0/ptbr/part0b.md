@@ -304,7 +304,7 @@ A mesma estrutura de árvore pode ser vista na guia <i>Elementos</i> do console.
 
 O funcionamento do navegador baseia-se na ideia de representar os elementos HTML como uma árvore.
 
-O Modelo de Documento por Objetos, ou [DOM](https://en.wikipedia.org/wiki/Document_Object_Model), é uma API (<i>Application Programming Interface</i>), isto ém uma Interface de Programação de Aplicação, que possibilita a modificação programática das <i>árvores de elementos</i> correspondentes às páginas web.
+O Modelo de Documento por Objetos, ou [DOM](https://en.wikipedia.org/wiki/Document_Object_Model), é uma API (<i>Application Programming Interface</i>), isto é uma Interface de Programação de Aplicação, que possibilita a modificação programática das <i>árvores de elementos</i> correspondentes às páginas web.
 
 O código JavaScript introduzido no capítulo anterior usou a API DOM para adicionar uma lista de notas na página.
 
