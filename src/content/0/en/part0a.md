@@ -7,11 +7,11 @@ lang: en
 
 <div class="content">
 
-This course is an introduction to modern web development with JavaScript. The main focus is on single-page applications implemented with React and supporting them with RESTful and GraphQL web services implemented with Node.js. The course also has parts on TypeScript,  React Native, and Continuous integration.
+This course is an introduction to modern web development with JavaScript. The main focus is on single-page applications implemented with React and supporting them with RESTful and GraphQL web services implemented with Node.js. The course also has parts on TypeScript, React Native, and Continuous integration.
 
 Other topics include debugging applications, container technology, configuration, managing runtime environments, and databases.
 
-The course is totally free of charge. You can get a certificate and even the University of Helsinki ECTS credits for free.
+The course is totally free of charge. You can get a certificate and even the University of Helsinki ECTS (European Credit Transfer and Accumulation System) credits for free.
 
 ### Prerequisites
 
@@ -19,7 +19,7 @@ Participants are expected to have good programming skills, basic knowledge of we
 
 Previous knowledge of JavaScript or other course topics is not required.
 
-How much programming experience is needed? It is hard to say, but you should be pretty fluent with <i>your</i> language. This level of fluency takes usually at least 100-200 of hours practice to develop.
+How much programming experience is needed? It is hard to say, but you should be pretty fluent with <i>your</i> language. This level of fluency takes usually at least 100-200 hours of practice to develop.
 
 ### Course material
 
@@ -35,7 +35,7 @@ The course material is based on incrementally expanding example applications, wh
 
 The course contains fourteen parts, the first of which is numbered 0 for consistency with past iterations. One part corresponds loosely to one week (averaging 15-20 hours) of studying, but the speed of completing the course is flexible.
 
-Proceeding from part <i>n</i> to part <i>n+1</i> is not sensible before enough know-how of the topics in part <i>n</i>  has been achieved. In pedagogic terms, the course uses [Mastery Learning](https://en.wikipedia.org/wiki/Mastery_learning), and you are only intended to proceed to the next part after doing enough of the exercises of the previous part.
+Proceeding from part <i>n</i> to part <i>n+1</i> is not sensible before enough know-how of the topics in part <i>n</i> has been achieved. In pedagogic terms, the course uses [Mastery Learning](https://en.wikipedia.org/wiki/Mastery_learning), and you are only intended to proceed to the next part after doing enough of the exercises of the previous part.
 
 In parts 1-4 you are expected to do <i>at least</i> all of the exercises that are not marked with an asterisk(*). Exercises marked with an asterisk count towards your final grade, but skipping them does not prevent you from doing the compulsory exercises in the next parts. Parts 5- do not have asterisk marked exercises since there is no similar dependency on previous parts.
 
@@ -49,11 +49,11 @@ You can discuss the course and related topics in our dedicated group on Discord 
 
 ### How to get help in Discord/Telegram
 
-When you ask for help for a problem in the Discord/Telegram group your question should be as informative and precise as possible. If your question look like this
+When you ask for help for a problem in the Discord/Telegram group your question should be as informative and precise as possible. If your question looks like this
 
 > <i>Adding a new person does not work, could you help me with that?</i>
 
-it is quite likely that nobody will not bother to answer to you. The bug can be <i>anywhere</i>.
+it is quite likely that nobody will respond. The bug can be <i>anywhere</i>.
 
 A better question could be
 
@@ -100,7 +100,7 @@ Credits and grades are calculated as follows:
 
 Once you have completed enough exercises for a passing grade, you can download the course certificate from the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
-If you wish to receive university credits, you must complete the course exam. The exam does not count towards your final grade, but you must pass it. More info about the exam [here](/en/part0/general_info#the-course-exam).
+If you wish to receive university credits, you must complete the course exam. The exam does not count toward your final grade, but you must pass it. More information about the exam [here](/en/part0/general_info#the-course-exam).
 
 You can only take the exam after submitting enough exercises for five credits. It is not wise in practice to take the exam immediately after submitting the critical number of exercises. The exam is the same for 5-14 credits and does not count toward your grade.
 
@@ -148,7 +148,7 @@ By submitting 25 exercises for part 10 of the course on React Native, you can ea
 
 #### Part 11 - Full Stack Web Development: Continuous Integration / Continuous Delivery (1 cr, CSM14112)
 
-By submitting all exercises for part 11 of the course on Continuous Integration/Delivery, you can earn one additional credit. More information about this part's prerequisites and exercise submission can be found in [part 11](/en/part11).
+By submitting all exercises for part 11 of the course on Continuous Integration / Continuous Delivery, you can earn one additional credit. More information about this part's prerequisites and exercise submission can be found in [part 11](/en/part11).
 
 - Submit all exercises for part 11.
 - [Enroll in part 11 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-4cb66c68-da12-422e-a34d-c8e8e7c8db01).
@@ -222,7 +222,7 @@ After the course enrollment, save your University of Helsinki student number in 
 
 ![saving the student number](../../images/0/28b.png)
 
-See [this](/en/part0/general_info#where-do-i-get-my-university-of-helsinki-student-number) for info on how you find out your student number.
+See [this](/en/part0/general_info#where-do-i-get-my-university-of-helsinki-student-number) for information on how to find your student number.
 
 After these steps, you can do the course exam in the submission system:
 
@@ -234,7 +234,7 @@ You will have 120 minutes to complete the exam. If all goes well, you should see
 
 If you fail, you must wait for one week for trying the exam again.
 
-If you passed the exam, and you are not going to complete more exercises, you can go back to my submission tab and ask for the credits:
+If you passed the exam, and you are not going to complete more exercises, you can go back to the "my submissions" tab and ask for the credits:
 
 ![ask for course completion credits](../../images/0/enroll5a.png)
 
@@ -256,9 +256,9 @@ If you want to receive University of Helsinki credits, save your <b>University o
 
 ![saving the student number](../../images/0/28b.png)
 
-If you are not a student at the University of Helsinki, you can get a student number by registering for the course through [Open University](/en/part0/general_info#the-course-exam), see [this](/en/part0/general_info#where-do-i-get-my-university-of-helsinki-student-number) for more info.
+If you are not a student at the University of Helsinki, you can get a student number by registering for the course through [Open University](/en/part0/general_info#the-course-exam), see [this](/en/part0/general_info#where-do-i-get-my-university-of-helsinki-student-number) for more information.
 
-You will receive your credits after you have submitted enough exercises for a passing grade, passed the exam and let us know through the exercise submission system that you have completed the course:
+You will receive your credits after you have submitted enough exercises for a passing grade, passed the exam and then letting us know through the exercise submission system that you have completed the course:
 
 ![ask for course completion credits](../../images/0/enroll5a.png)
 
@@ -272,7 +272,7 @@ When pressed twice you should see the following text
 
 > <i>University credit registration in progress...</i>
 
-**Please note** that to get university credits you need a registration for each completed part, please see [more info about registration](/en/part0/general_info#parts-and-completion).
+**Please note** that to get university credits you need a registration for each completed part. Please see [more information about registration](/en/part0/general_info#parts-and-completion).
 
 You can view your grade in University of Helsinki Sisu and [Opintopolku](https://opintopolku.fi/oma-opintopolku/) approximately four weeks after notifying us.
 
@@ -290,7 +290,7 @@ You can find out what your student number is through one of the options below:
 
 #### A) Sisu
 
-If you have a university of Helsinki user account, you can find your student number from your profile in the University of Helsinki’s study information system Sisu:
+If you have a University of Helsinki user account, you can find your student number from your profile in the University of Helsinki’s study information system Sisu:
 
 - Log in to Sisu with your University of Helsinki username and password.
 - Select: My profile
@@ -298,11 +298,11 @@ If you have a university of Helsinki user account, you can find your student num
 
 #### B) Enrollment confirmation email
 
-After course enrollment, you will receive a confirmation email to an email address you have entered on the enrollment form. This message either directly has your student number on it or includes a link that takes you to a page displaying your University of Helsinki student number.  
+After course enrollment, you will receive a confirmation email to an email address you have entered on the enrollment form. This message either directly has your student number on it or includes a link that takes you to a page displaying your University of Helsinki student number. 
 
 #### C) Contact Student Services
 
-If you have trouble finding out your student number through the means listed above, you can send an email to University of Helsinki Student Services. <i>**Make sure you have enrolled on the course through the Open University before sending the email!**</i>
+If you have trouble finding your student number through the means listed above, you can send an email to University of Helsinki Student Services. <i>**Make sure you have enrolled in the course through the Open University before sending the email!**</i>
 
 In your email, include the following information
 
@@ -312,13 +312,13 @@ In your email, include the following information
 
 Student Services email address: avoin-student@helsinki.fi
 
- **One more reminded:** <i>make sure you have enrolled on the course through the Open University before sending the email</i>
+ **One more reminder:** <i>make sure you have enrolled in the course through the Open University before sending the email</i>
 
 ### Course certificate
 
 Even if you do not register to Open University for the exam and the credits, you can still download the course certificate from the "My submissions" tab in the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) once you have completed enough exercises for a passing grade.
 
-There is one certificate for the base parts (0-7) of the course and after that a separate cert for each course part.
+There is one certificate for the base parts (0-7) of the course and after that a separate certificate for each course part.
 
 ### Request a transcript of studies
 
@@ -336,14 +336,14 @@ The transcript will be delivered to you electronically through email. Present th
 
 There are no more "yearly versions" of the course, the course is open all the time. Each part is updated once or twice per year. Updates are mostly minor: library versions are updated and text clarity is improved. However, there might also be some bigger changes.
 
-Despite changes <i>all the submitted exercises remain valid</i>, and the course can be continued without bothering about the updates. Also the policy for getting certs, university credits etc. shall remain the same no matter what happens.
+Despite changes <i>all the submitted exercises remain valid</i>, and the course can be continued without being bothered about updates. Also, the policy for getting certificates, university credits etc. shall remain the same no matter what happens.
 
 Recent major changes
 
 - Part 2 (18th Jan 2023): Exercise numbering changed, the old 2.11-13. moved to the end of the part
 - Part 6 (30th Jan 2023): A new section on React Query, useReducer and React context replaced the section on Redux connect
 - Part 8 (5th Feb 2023): Backend updated to use Apollo Server 4.0
-- Part 9 (12th Feb 2023): content clarified, Patientor example app structure refactored to a much simpler form
+- Part 9 (12th Feb 2023): Content clarified, Patientor example app structure refactored to a much simpler form
 
 ### Expanding on a previously completed course
 
@@ -373,7 +373,7 @@ See [more information on the project](https://github.com/fullstack-hy2020/misc/b
 
 Our collaborators, [Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) and [Smartly.io](https://www.smartly.io/), have given the <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (14 + 10).
 
-This means that the student can, if they so choose, sign up for a job interview with a collaborator who has given the promise. The teacher of the course, Matti Luukkainen, will send instructions to the student after the courses have been completed with maximum credits.
+This means that the student can, if they so choose to, sign up for a job interview with a collaborator who has given the promise. The teacher of the course, Matti Luukkainen, will send instructions to the student after the courses have been completed with maximum credits.
 
 You need to be a resident of Finland to participate in these interviews.
 
@@ -385,7 +385,7 @@ The course exercises are submitted to GitHub, so Git must be installed and you s
 
 Install a sensible text editor that supports web development. [Visual Studio Code](https://code.visualstudio.com/) is highly recommended.
 
-Don't code with nano, Notepad or Gedit. NetBeans isn't very good for web development either. It is also rather heavy in comparison to Visual Studio Code.
+Don't code with nano, Notepad or Gedit. NetBeans isn't very good for web development either. It is also rather heavy in comparison to [Visual Studio Code](https://code.visualstudio.com/).
 
 Also, install [Node.js](https://nodejs.org/en/). The material has been done with version 16.13.2, so don't install any version older than that. See [Node.js installation instructions](https://nodejs.org/en/download/package-manager/).
 
