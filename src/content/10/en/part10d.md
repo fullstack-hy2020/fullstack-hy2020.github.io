@@ -187,7 +187,7 @@ The second very important React Native Testing Library concept is firing events.
 ```javascript
 import { useState } from 'react';
 import { Text, TextInput, Pressable, View } from 'react-native';
-import { render, fireEven, screen } from '@testing-library/react-native';
+import { render, fireEvent, screen } from '@testing-library/react-native';
 
 const Form = ({ onSubmit }) => {
   const [username, setUsername] = useState('');
