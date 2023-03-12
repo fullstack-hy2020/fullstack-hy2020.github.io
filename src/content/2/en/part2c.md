@@ -369,7 +369,7 @@ We have already used [state hooks](https://reactjs.org/docs/hooks-state.html) th
 
 As such, effect hooks are precisely the right tool to use when fetching data from a server.
 
-Let's remove the fetching of data from <i>index.js</i>. Since we're gonna be retrieving the notes from the server, there is no longer a need to pass data as props to the <i>App</i> component. So <i>index.js</i> can be simplified to:
+Let's remove the fetching of data from <i>index.js</i>. Since we're going to be retrieving the notes from the server, there is no longer a need to pass data as props to the <i>App</i> component. So <i>index.js</i> can be simplified to:
 
 ```js
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
