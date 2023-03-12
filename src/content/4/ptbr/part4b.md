@@ -200,7 +200,7 @@ e acrescentar nas definições do Jest no <i>package.json</i> o seguinte:
 }
 ```
 
-Outro erro que pode aparecer para você nos seus testes:
+Outro erro que pode aparecer para você nos seus testes é se a execução deles demorar mais do que 5 segundos (5000ms), que é o tempo padrão do Jest para <i>timeout</i>. Isso pode ser resolvido adicionando um terceiro parâmetro na função test:
   
 ```js
 test('notes are returned as json', async () => {
@@ -211,9 +211,9 @@ test('notes are returned as json', async () => {
 }, 100000)
 ```
   
-This third parameter sets the timeout to 100000 ms. A long timeout ensures that our test won't fail due to the time it takes to run. (A long timeout may not be what you want for tests based on performance or speed, but this is fine for our example tests).
+Esse terceiro parâmetro configura o <i>timeout</i> para 100 segundos (100000ms). Um tempo longo garantirá que seu teste não falhe em razão do tempo que ele leva para executar. (Um <i>timeout</i> muito longo talvez não seja o que você queira para testes baseados em performance ou velocidade, mas para este nosso exemplo é ok).
 
-One tiny but important detail: at the [beginning](/en/part4/structure_of_backend_application_introduction_to_testing#project-structure) of this part we extracted the Express application into the <i>app.js</i> file, and the role of the <i>index.js</i> file was changed to launch the application at the specified port with Node's built-in <i>http</i> object:
+Um detalhe importante é o seguinte: no [começo](/ptbr/part4/estrutura_de_uma_aplicacao_back_end_introducao_a_testes#estrutura-do-projeto) dessa parte, nós extraímos a aplicação Express no arquivo <i>app.js</i>, e o papel do arquivo <i>index.js</i> foi alterado para iniciar a aplicação na porta especificada com o objeto  <i>http</i> integrado do Node:
 
 ```js
 const app = require('./app') // the actual Express app
@@ -225,7 +225,7 @@ app.listen(config.PORT, () => {
 })
 ```
 
-The tests only use the express application defined in the <i>app.js</i> file:
+Os testes somente utilizam a aplicação express definida no arquivo <i>app.js</i>:
 
 ```js
 const mongoose = require('mongoose')
@@ -237,15 +237,15 @@ const api = supertest(app) // highlight-line
 // ...
 ```
 
-The documentation for supertest says the following:
+A documentação do <i>supertest</i> informa o seguinte:
 
-> <i>if the server is not already listening for connections then it is bound to an ephemeral port for you so there is no need to keep track of ports.</i>
+> <i>se o servidor ainda não estiver ouvindo as conexões, então ele estará ligado em uma porta efêmera, logo não há necessidade de acompanhar as portas.</i>
 
-In other words, supertest takes care that the application being tested is started at the port that it uses internally.
+Em outras palavras, o <i>supertest</i> se responsabiliza de iniciar a aplicação que está sendo testada na porta que está em uso internamente.
 
-Let's add two notes to the test database using the _mongo.js_ program (here we must remember to switch to the correct database url).
+Vamos adicionar duas notas no banco de dados de teste, usando o _mongo.js_ (lembre-se de mudar para a url correta do banco de dados).
 
-Let's write a few more tests:
+Vamos escrever alguns testes a mais:
 
 ```js
 test('there are two notes', async () => {
@@ -261,19 +261,19 @@ test('the first note is about HTTP methods', async () => {
 })
 ```
 
-Both tests store the response of the request to the _response_ variable, and unlike the previous test that used the methods provided by _supertest_ for verifying the status code and headers, this time we are inspecting the response data stored in <i>response.body</i> property. Our tests verify the format and content of the response data with the [expect](https://jestjs.io/docs/expect#expectvalue) method of Jest.
+Ambos os testes armazenam a resposta da requisição na variáveis _response_, e diferente da versão anterior do teste que utilizava o método provido pelo _supertest_ para verificar o código de status e o cabeçalho, desta vez nós estamos inspecionando os dados de resposta armazenados na propriedade <i>response.body</i>. Nossos testes verificam o formato e o conteúdo dos dados da resposta com o método do Jest [expect](https://jestjs.io/pt-BR/docs/expect).
 
-The benefit of using the async/await syntax is starting to become evident. Normally we would have to use callback functions to access the data returned by promises, but with the new syntax things are a lot more comfortable:
+O benefício de usar a sintaxe async/await começa a ficar evidente. Normalmente, teríamos que usar funções de retorno de chamada para acessar os dados retornados pelas promessas, mas, com a nova sintaxe, as coisas estão muito mais simples:
 
 ```js
 const response = await api.get('/api/notes')
 
-// execution gets here only after the HTTP request is complete
-// the result of HTTP request is saved in variable response
+// a execução chega aqui somente após a requisição HTTP estar completa
+// o resultado da requisição HTTP é salva na variável response
 expect(response.body).toHaveLength(2)
 ```
 
-The middleware that outputs information about the HTTP requests is obstructing the test execution output. Let us modify the logger so that it does not print to the console in test mode:
+O <i>middleware</i> que exibe informações sobre as solicitações HTTP está obstruindo a saída da execução do teste. Vamos modificar o logger para que ele não imprima no console no modo de teste:
 
 ```js
 const info = (...params) => {
@@ -297,13 +297,13 @@ module.exports = {
 }
 ```
 
-### Initializing the database before tests
+### Inicializando o banco de dados antes dos testes
 
-Testing appears to be easy and our tests are currently passing. However, our tests are bad as they are dependent on the state of the database, that now  happens to have two notes. To make our tests more robust, we have to reset the database and generate the needed test data in a controlled manner before we run the tests.
+Testar parece ser fácil e atualmente nossos testes estão passando. No entanto, nossos testes são ruins, uma vez que dependem do estado do banco de dados, que agora tem duas notas. Para tornar nossos testes mais robustos, devemos redefinir o banco de dados e gerar os dados de teste necessários de maneira controlada antes de executarmos os testes.
 
-Our tests are already using the [afterAll](https://jestjs.io/docs/api#afterallfn-timeout) function of Jest to close the connection to the database after the tests are finished executing. Jest offers many other [functions](https://jestjs.io/docs/setup-teardown) that can be used for executing operations once before any test is run or every time before a test is run.
+Nosso código já está utilizando a função do Jest [afterAll](https://jestjs.io/pt-BR/docs/api#afterallfn-timeout) para encerrar a conexão com o banco de dados após a conclusão da execução dos testes. O Jest oferece muitas outras [funções](https://jestjs.io/pt-BR/docs/setup-teardown) que podem ser utilizadas para executar operações uma vez antes de executar qualquer teste ou antes da execução de cada teste.
 
-Let's initialize the database <i>before every test</i> with the [beforeEach](https://jestjs.io/docs/en/api.html#beforeeachfn-timeout) function:
+Vamos inicializar o banco de dados <i>antes de cada teste</i> com a função [beforeEach](https://jestjs.io/docs/en/api.html#beforeeachfn-timeout):
 
 ```js
 const mongoose = require('mongoose')
@@ -341,9 +341,9 @@ beforeEach(async () => {
 // ...
 ```
 
-The database is cleared out at the beginning, and after that, we save the two notes stored in the _initialNotes_ array to the database. By doing this, we ensure that the database is in the same state before every test is run.
+O banco de dados é apagado logo no início, após isso salvamos no banco as duas notas armazenadas no <i>array</i> initialNotes. Fazendo isso, garantimos que o banco de dados esteja no mesmo estado antes da execução de cada teste.
 
-Let's also make the following changes to the last two tests:
+Vamos fazer também algumas alterações nos dois últimos testes:
 
 ```js
 test('all notes are returned', async () => {
@@ -365,42 +365,42 @@ test('a specific note is within the returned notes', async () => {
 })
 ```
 
-Pay special attention to the expect in the latter test. The <code>response.body.map(r => r.content)</code> command is used to create an array containing the content of every note returned by the API. The [toContain](https://jestjs.io/docs/expect#tocontainitem) method is used for checking that the note given to it as a parameter is in the list of notes returned by the API.
+Dê uma atenção especial no expect do último teste. O comando <code>response.body.map(r => r.content)</code> é utilizado para criar um array contendo o que está no <i>content</i> de cada nota retornada pela API. O método [toContain](https://jestjs.io/docs/expect#tocontainitem) é utilizado para checar se a nota passada como parâmetro está na lista de notas retornada pela API.
 
-### Running tests one by one
+### Executando os testes um por um
 
-The _npm test_ command executes all of the tests for the application. When we are writing tests, it is usually wise to only execute one or two tests. Jest offers a few different ways of accomplishing this, one of which is the [only](https://jestjs.io/docs/en/api#testonlyname-fn-timeout) method. If tests are written across many files, this method is not great.
+O comando _npm test_ executa todos os testes da aplicação. Quando estamos escrevendo testes, normalmente é sábio executar um ou dois testes. O Jest oferece algumas formas diferentes de fazer isso, uma delas é o método [only](https://jestjs.io/docs/en/api#testonlyname-fn-timeout). Se os testes estiverem escritos em vários arquivos, esse método não é muito bom.
 
-A better option is to specify the tests that need to be run as parameters of the <i>npm test</i> command.
+Uma opção melhor é especificar os testes que precisam ser executados como parâmetros do comando <i>npm test</i>.
 
-The following command only runs the tests found in the <i>tests/note_api.test.js</i> file:
+O comando a seguir somente executa os testes encontrados no arquivo <i>tests/note_api.test.js</i>:
 
 ```js
 npm test -- tests/note_api.test.js
 ```
 
-The <i>-t</i> option can be used for running tests with a specific name:
+A opção <i>-t</i> pode ser utilizada para executar testes com um nome específico:
+
 
 ```js
 npm test -- -t "a specific note is within the returned notes"
 ```
 
-The provided parameter can refer to the name of the test or the describe block. The parameter can also contain just a part of the name. The following command will run all of the tests that contain <i>notes</i> in their name:
+O parâmetros informado pode referenciar o nome do teste ou o bloco <i>describe</i>. O parâmetro também pode conter somente parte do nome. O comando a seguir vai executar todos os testes que contenha <i>notes</i> em seu nome
 
 ```js
 npm test -- -t 'notes'
 ```
 
-**Obs.:**: When running a single test, the mongoose connection might stay open if no tests using the connection are run.
-The problem might be because supertest primes the connection, but Jest does not run the afterAll portion of the code.
+**Obs.:**: Ao executar um único teste, a conexão mongoose pode permanecer aberta se nenhum teste usando a conexão for executado. O problema pode ser porque o <i>supertest</i> prepara a conexão, mas o Jest não executa a parte <i>afterAll</i> do código.
 
 ### async/await
 
-Before we write more tests let's take a look at the _async_ and _await_ keywords.
+Antes de escrevermos mais testes, vamos dar uma olhada nas palavras-chave _async_ e _await_.
 
-The async/await syntax that was introduced in ES7 makes it possible to use <i>asynchronous functions that return a promise</i> in a way that makes the code look synchronous.
+A sintaxe async/await que foi introduzida no ES7, torna possível o uso de <i>funções assíncronas que retornam uma promessa</i> de um jeito que parece com código síncrono.
 
-As an example, the fetching of notes from the database with promises looks like this:
+Como um exemplo, a busca das notas do banco de dados utilizando promessas é assim:
 
 ```js
 Note.find({}).then(notes => {
@@ -408,11 +408,11 @@ Note.find({}).then(notes => {
 })
 ```
 
-The _Note.find()_ method returns a promise and we can access the result of the operation by registering a callback function with the _then_ method.
+O método _Note.find()_ retorna uma promessa e podemos acessar o resultado da operação registrando a função <i>callback</i> com o método _then()_.
 
-All of the code we want to execute once the operation finishes is written in the callback function. If we wanted to make several asynchronous function calls in sequence, the situation would soon become painful. The asynchronous calls would have to be made in the callback. This would likely lead to complicated code and could potentially give birth to a so-called [callback hell](http://callbackhell.com/).
+Todo o código que queremos executar quando a operação termina está escrito na função <i>callback</i>. Se quisermos fazer diversas chamadas de funções assíncronas em sequência, a situação logo ficará complicada. As chamadas assíncronas seriam feitas na função <i>callback</i>. Isso resultaria em um código complicado e provavelmente surgiria o chamado [callback hell](http://callbackhell.com/).
 
-By [chaining promises](https://javascript.info/promise-chaining) we could keep the situation somewhat under control, and avoid callback hell by creating a fairly clean chain of _then_ method calls. We have seen a few of these during the course. To illustrate this, you can view an artificial example of a function that fetches all notes and then deletes the first one:
+[Encadeando promessas](https://javascript.info/promise-chaining), nós conseguiríamos manter a situação sob controle e evitar o <i>callback hell</i> ao criar uma cadeia bem limpa de chamadas de métodos _then()_. Vimos alguns desses durante o curso. Para ilustrar, você pode ver um exemplo de uma função que busca todas as notas e, em seguida, exclui a primeira delas:
 
 ```js
 Note.find({})
@@ -421,15 +421,15 @@ Note.find({})
   })
   .then(response => {
     console.log('the first note is removed')
-    // more code here
+    // mais código aqui
   })
 ```
 
-The then-chain is alright, but we can do better. The [generator functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator) introduced in ES6 provided a [clever way](https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/async%20%26%20performance/ch4.md#iterating-generators-asynchronously) of writing asynchronous code in a way that "looks synchronous". The syntax is a bit clunky and not widely used.
+A cadeia de métodos _then()_ é ok, mas podemos fazer melhor do que isso. As [generator functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator) introduzidas no ES6 trazem um [jeito inteligente](https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/async%20%26%20performance/ch4.md#iterating-generators-asynchronously) de escrever código assíncrono de uma forma que "parece síncrono". A sintaxe é um pouco estranha e não é muito utilizada.
 
-The _async_ and _await_ keywords introduced in ES7 bring the same functionality as the generators, but in an understandable and syntactically cleaner way to the hands of all citizens of the JavaScript world.
+As palavras-chave _async_ e _await_  introduzidas no ES7 trazem a mesma funcionalidade dos <i>generators</i>, mas de uma maneira compreensível e sintaticamente mais limpa para todos os cidadãos do mundo JavaScript.
 
-We could fetch all of the notes in the database by utilizing the [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await) operator like this:
+Poderíamos buscar todas as notas no banco de dados utilizando o operador [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await) dessa forma:
 
 ```js
 const notes = await Note.find({})
@@ -437,9 +437,9 @@ const notes = await Note.find({})
 console.log('operation returned the following notes', notes)
 ```
 
-The code looks exactly like synchronous code. The execution of code pauses at <em>const notes = await Note.find({})</em> and waits until the related promise is <i>fulfilled</i>, and then continues its execution to the next line. When the execution continues, the result of the operation that returned a promise is assigned to the _notes_ variable.
+O código parece idêntico a um código síncrono. A execução do código pausa em <em>const notes = await Note.find({})</em> e aguarda até que a promessa seja <i>completada (fulfilled)</i>, então continua a sua execução na próxima linha. Quando a execução continua, o resultado da operação que retornou a promessa é atribuído à variável _notes_.
 
-The slightly complicated example presented above could be implemented by using await like this:
+O exemplo um pouco complicado apresentado acima poderia ser implementado usando <i>await</i> assim:
 
 ```js
 const notes = await Note.find({})
@@ -448,13 +448,13 @@ const response = await notes[0].remove()
 console.log('the first note is removed')
 ```
 
-Thanks to the new syntax, the code is a lot simpler than the previous then-chain.
+Graças à nova sintaxe, o código é muito mais simples do que a cadeia de _then()_ anterior.
 
-There are a few important details to pay attention to when using async/await syntax. To use the await operator with asynchronous operations, they have to return a promise. This is not a problem as such, as regular asynchronous functions using callbacks are easy to wrap around promises.
+Existem alguns detalhes importantes para prestar atenção ao usar a sintaxe async/await. Para usar o operador await com operações assíncronas, elas precisam retornar uma promessa. Isso não é um problema em si, já que as funções assíncronas regulares que usam <i>callbacks</i> são fáceis de envolver em promessas.
 
-The await keyword can't be used just anywhere in JavaScript code. Using await is possible only inside of an [async](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) function.
+A palavra-chave await não pode ser utilizada em qualquer lugar do código JavaScript. Somente é possível usar o await dentro de uma função [assíncrona (async)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function).
 
-This means that in order for the previous examples to work, they have to be using async functions. Notice the first line in the arrow function definition:
+Isso significa que para os exemplos anteriores funcionarem, é preciso que estejam em funcções assíncronas. Note a primeira linha da definição da <i>arrow function</i>:
 
 ```js
 const main = async () => { // highlight-line
@@ -468,7 +468,7 @@ const main = async () => { // highlight-line
 main() // highlight-line
 ```
 
-The code declares that the function assigned to _main_ is asynchronous. After this, the code calls the function with <code>main()</code>.
+O código declara que a função atribuída a _main_ é assíncrona. Após isso, o código chama a função com <code>main()</code>.
 
 ### async/await in the backend
 
