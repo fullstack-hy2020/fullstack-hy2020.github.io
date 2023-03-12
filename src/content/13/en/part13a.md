@@ -75,7 +75,7 @@ In the theory material of this section, we will be building a Postgres-enabled v
 
 #### Fly.io
 
-Let us create a new Fly.io-app by running the command _fly launch_ in a directory where we shall add the code of the app. Let us also create the Postgress database for the app:
+Let us create a new Fly.io-app by running the command _fly launch_ in a directory where we shall add the code of the app. Let us also create the Postgres database for the app:
 
 ![](../../images/13/6.png)
 
@@ -316,7 +316,7 @@ DATABASE_URL=postgres://postgres:<password>@127.0.0.1:5432/postgres
 
 Password was shown when the database was created, so hopefully you have not lost it!
 
-The last part of the connect string, <i>postgres</i> refers to the database name. The name could be any string but we use here <i>postgres</i> since it is the default database that is automatically created within a Postgress database. If needed, new databases can be created with the command [CREATE DATABASE](https://www.postgresql.org/docs/14/sql-createdatabase.html).
+The last part of the connect string, <i>postgres</i> refers to the database name. The name could be any string but we use here <i>postgres</i> since it is the default database that is automatically created within a Postgres database. If needed, new databases can be created with the command [CREATE DATABASE](https://www.postgresql.org/docs/14/sql-createdatabase.html).
 
 Once the connect string has been set up in the file <i>.env</i> we can test for a connection:
 
