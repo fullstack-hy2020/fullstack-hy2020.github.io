@@ -83,7 +83,7 @@ When creating the app, Fly.io reveals the password of the database that will be 
 
 Note that if you only need the database, and are not planning to deploy the app to Fly.io, it is also possible to [just create the database to Fly.io](https://fly.io/docs/reference/postgres/#creating-a-postgres-app).
 
-A psql concole connection to the database can be opened as follows
+A psql console connection to the database can be opened as follows
 
 ```bash
 flyctl postgres connect -a <app_name-db>
