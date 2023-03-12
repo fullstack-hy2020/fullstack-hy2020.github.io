@@ -118,7 +118,7 @@ Writing HTML amid the code is of course not smart, but for old-school PHP progra
 
 In traditional web applications, the browser is "dumb". It only fetches HTML data from the server, and all application logic is on the server. A server can be created using [Java Spring](https://spring.io/projects/spring-framework) , [Python Flask](https://flask.palletsprojects.com/en/2.2.x/) or [Ruby on Rails](http://rubyonrails.org/) to name just a few examples.
 
-The example uses [Express](https://expressjs.com/) library with the Node.js. This course will use Node.js and Express to create web servers.
+The example uses [Express](https://expressjs.com/) library with Node.js. This course will use Node.js and Express to create web servers.
 
 ### Running application logic in the browser
 
