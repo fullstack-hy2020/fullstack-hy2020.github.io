@@ -502,7 +502,7 @@ The user interface of the application has a form, in the input field of which th
 
 The application sets the name of the currency entered to the form to the state _currency_ at the moment the button is pressed.
 
-When the _currency_ gets a new value, the application fetches it's exchange rates from the API in the effect function:
+When the _currency_ gets a new value, the application fetches its exchange rates from the API in the effect function:
 
 ```js
 const App = () => {
