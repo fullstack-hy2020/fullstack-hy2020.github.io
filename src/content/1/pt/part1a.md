@@ -515,7 +515,7 @@ Também a idade:
 {amigos[0].idade}
 ```
 
-Após corrigir o erro, limpe as mensagens de erro do console clicando em Ø e, em seguida, recarregue o conteúdo da página e garanta que não haja mensagens de erro exibidas.
+Após corrigir o erro, limpe as mensagens de erro do console clicando em 🚫 e, em seguida, recarregue o conteúdo da página e garanta que não haja mensagens de erro exibidas.
 
 Uma adição ao lembrete anterior: React também permite que arrays sejam renderizados se conterem valores elegíveis para renderização (como números ou strings). Então, o seguinte programa funcionaria, embora o resultado não seja o que desejamos:
 
