@@ -619,7 +619,7 @@ const App = () => {
 export default App
 ```
 
-Définissez un composant responsable de la mise en forme d'un seul cours appelé <i>Cours</i>.
+Définissez un composant responsable de la mise en forme d'un seul cours appelé <i>Course</i>.
 
 La structure des composants de l'application peut être, par exemple, la suivante :
 
