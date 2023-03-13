@@ -389,7 +389,7 @@ Implement adding new anecdotes to the server using React Query. The application 
 
 #### Exercise 6.22
 
-Implement voting for anecdotes using again the React Query. The application should automatically render the increased number of votes for the voted anecdote
+Implement voting for anecdotes using again the React Query. The application should automatically render the increased number of votes for the voted anecdote.
 
 </div>
 
