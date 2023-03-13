@@ -15,7 +15,7 @@ Debugging Node applications is slightly more difficult than debugging JavaScript
 
 #### Visual Studio Code
 
-The Visual Studio Code debugger can be useful in some situations. You can launch the application in debugging mode like this:
+The Visual Studio Code debugger can be useful in some situations. You can launch the application in debugging mode like this (in this and the next few images, the notes have a field _date_ which has been removed from the current version of the application):
 
 ![screenshot showing how to launch debugger in vscode](../../images/3/35x.png)
 
@@ -98,7 +98,6 @@ Next, we have to define the IP addresses that are allowed access to the database
 ![mongodb network access/add ip access list](../../images/3/mongo4.png)
 
 Note: In case the modal menu is different for you, according to MongoDB documentation, adding 0.0.0.0 as an IP allows access from anywhere as well.
-  
   
 Finally, we are ready to connect to our database. Start by clicking <i>connect</i>:
 

@@ -15,7 +15,7 @@ Nodella tehtyjen sovellusten debuggaaminen on jossain määrin hankalampaa kuin 
 
 #### Visual Studio Code
 
-Visual Studio Coden debuggeri voi olla hyödyksi joissain tapauksissa. Saat käynnistettyä sovelluksen debuggaustilassa seuraavasti:
+Visual Studio Coden debuggeri voi olla hyödyksi joissain tapauksissa. Saat käynnistettyä sovelluksen debuggaustilassa seuraavasti (tässä ja muutamassa seuraavassa kuvassa muistiinpanoilla on kenttä _date_ joka on poistunut sovelluksen nykyisestä versiosta): 
 
 ![Avataan run-tabi ja sieltä valinta start debugging](../../images/3/35x.png)
 
