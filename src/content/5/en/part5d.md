@@ -70,7 +70,7 @@ Let's add an npm script to <i>the backend</i> which starts it in test mode, or s
     "logs:prod": "fly logs",
     "lint": "eslint .",
     "test": "jest --verbose --runInBand",
-    "start:test": "NODE_ENV=test node index.js" // highlight-line
+    "start:test": "cross-env NODE_ENV=test node index.js" // highlight-line
   },
   // ...
 }
