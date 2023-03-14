@@ -472,9 +472,9 @@ O código declara que a função atribuída a _main_ é assíncrona. Após isso,
 
 ### async/await in the backend
 
-Let's start to change the backend to async and await. As all of the asynchronous operations are currently done inside of a function, it is enough to change the route handler functions into async functions.
+Vamos começar a alterar o backend para usar async/await. Como todas as operações assíncronas atualmente são feitas dentro de uma função, basta mudar as funções que gerenciam a rota. 
 
-The route for fetching all notes gets changed to the following:
+O código da rota para buscar todas as notas deve se alterado  como segue:
 
 ```js
 notesRouter.get('/', async (request, response) => { 
@@ -483,15 +483,15 @@ notesRouter.get('/', async (request, response) => {
 })
 ```
 
-We can verify that our refactoring was successful by testing the endpoint through the browser and by running the tests that we wrote earlier.
+Podemos verificar que nosso refatoramento foi bem sucedido testando o endpoint pelo navegador e executando os testes que escrevemos mais cedo.
 
-You can find the code for our current application in its entirety in the <i>part4-3</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-3).
+Você pode encontrar o código para da aplicação atual na branch da <i>part4-3</i> [nesse repositório GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-3).
 
-### More tests and refactoring the backend
+### Mais testes e refatoração do backend
 
-When code gets refactored, there is always the risk of [regression](https://en.wikipedia.org/wiki/Regression_testing), meaning that existing functionality may break. Let's refactor the remaining operations by first writing a test for each route of the API.
+Quando o código é refatorado, sempre existe o risco de[regressão](https://pt.wikipedia.org/wiki/Teste_de_regress%C3%A3o), o que significa que funcionalidades existentes podem quebrar. Vamos refatorar as operações primeiramente restantes escrevendo um teste para cada rota da API.
 
-Let's start with the operation for adding a new note. Let's write a test that adds a new note and verifies that the number of notes returned by the API increases and that the newly added note is in the list.
+Vamos começar com a operação que adiciona uma nova nota. Vamos escrever um teste que adiciona uma nova nota e verifica que se o número de notas retornadas pela API aumenta e se a nova nota adicionada está na lista.
 
 ```js
 test('a valid note can be added', async () => {
@@ -517,7 +517,7 @@ test('a valid note can be added', async () => {
 })
 ```
 
-Test fails since we are by accident returning the status code <i>200 OK</i> when a new note is created. Let us change that to <i>201 CREATED</i>:
+O teste falha já que nós estamos acidentalmente retornando o códio de status <i>200 OK</i> quando uma nova nota é criada. Vamos mudar para <i>201 CRIADO(CREATED)</i>:
 
 ```js
 notesRouter.post('/', (request, response, next) => {
@@ -536,7 +536,7 @@ notesRouter.post('/', (request, response, next) => {
 })
 ```
 
-Let's also write a test that verifies that a note without content will not be saved into the database.
+Vamos também escrever um teste que verifica que uma nota sem conteúdo não será salva no banco de dados.
 
 ```js
 test('note without content is not added', async () => {
@@ -555,13 +555,13 @@ test('note without content is not added', async () => {
 })
 ```
 
-Both tests check the state stored in the database after the saving operation, by fetching all the notes of the application.  
+Ambos os testes checam o estado armazenado no banco de dados após a operação salvar, buscando todas as notas da aplicação.
 
 ```js
 const response = await api.get('/api/notes')
 ```
 
-The same verification steps will repeat in other tests later on, and it is a good idea to extract these steps into helper functions. Let's add the function into a new file called <i>tests/test_helper.js</i> which is in the same directory as the test file.
+Os mesmos passos de verificação serão repetidos posteriormente em outros testes, então é uma boa ideia extrair esses passos em uma função auxiliadora. Vamos adicionar a função em um novo arquivo chamado <i>tests/test_helper.js</i> que está no mesmo diretório do arquivo de teste.
 
 ```js
 const Note = require('../models/note')
@@ -595,9 +595,9 @@ module.exports = {
 }
 ```
 
-The module defines the _notesInDb_ function that can be used for checking the notes stored in the database. The _initialNotes_ array containing the initial database state is also in the module. We also define the _nonExistingId_ function ahead of time, which can be used for creating a database object ID that does not belong to any note object in the database.
+O módulo define a função _notesInDb_ que pode ser utilizada para checar as notas armazenadas no banco de dados. O array _inicialNotes_ contendo o estado inicial do banco de dados também está no módulo. Além disso, definimos a futura função _noExistingId_. que pode ser utilizada para criar um objeto ID de banco de dados que não pertence a nenhum objeto nota no banco de dados.
 
-Our tests can now use the helper module and be changed like this:
+Nossos testes agora podem usar o módulo auxiliador (helper): 
 
 ```js
 const supertest = require('supertest')
@@ -682,9 +682,9 @@ afterAll(async () => {
 })
 ```
 
-The code using promises works and the tests pass. We are ready to refactor our code to use the async/await syntax.
+O código usando promessas funciona e os testes passam. Estamos prontos para refatorar nosso código para usar a sintaxe async/await
 
-We make the following changes to the code that takes care of adding a new note(notice that the route handler definition is preceded by the _async_ keyword):
+Nós fizemos as seguintes alterações no código que cuida de adicionar uma nova nota (note que a definição do gerenciador de rota está precedida pela palavra-chave _async_):
 
 ```js
 notesRouter.post('/', async (request, response, next) => {
@@ -700,7 +700,7 @@ notesRouter.post('/', async (request, response, next) => {
 })
 ```
 
-There's a slight problem with our code: we don't handle error situations. How should we deal with them?
+Existe um pequeno problema no código: nós não estamos tratando erros. Como deveríamos lidar com eles?
 
 ### Error handling and async/await
 
