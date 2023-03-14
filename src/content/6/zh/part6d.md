@@ -442,7 +442,9 @@ React Query 一个多功能的库，根据我们已看到的情况，它简化�
 </div>
 
 <div class="tasks">
-### Exercises 6.19.-6.21.
+
+### Exercises 6.20.-6.22.
+
 
 
 
@@ -509,15 +511,22 @@ Implement adding new anecdotes to the server using React Query. The application 
 
 <div class="content">
 
+
 ### useReducer
 
-So even if the application uses React Query, some kind of solution is usually needed to manage the rest of the frontend state (for example, the state of forms). Quite often, the state created with <i>useState</i> is a sufficient solution. Using Redux is of course possible, but there are other alternatives.
+<!--So even if the application uses React Query, some kind of solution is usually needed to manage the rest of the frontend state (for example, the state of forms). Quite often, the state created with <i>useState</i> is a sufficient solution. Using Redux is of course possible, but there are other alternatives.-->
 
-Let's look at a simple counter application. The application displays the counter value, and offers three buttons to update the counter status:
+即使应用使用了 React query，通常还需要某种解决方案以管理前端的其他状态（例如，表单状态）。通常，利用 *useState* 创建的状态足以应对这种状况。使用 Redux 当然也没问题，但是我们还有其他选择。
+
+<!--Let's look at a simple counter application. The application displays the counter value, and offers three buttons to update the counter status:-->
+
+让我们看一个简单的计数应用。这个应用显示计数器的值，并提供三个按钮以更新计数器的状态：
 
 ![](../../images/6/63new.png)
 
 We shall now implement the counter state management using a Redux-like state management mechanism provided by React's built-in [useReducer](https://beta.reactjs.org/reference/react/useReducer) hook. Code looks like the following:
+
+现在，我们利用 React 内置的 [useReducer](https://beta.reactjs.org/reference/react/useReducer)  钩子来进行状态管理，useReducer 钩子具有类似 Redux 的状态管理机制。代码如下：
 
 ```js
 import { useReducer } from 'react'
@@ -553,13 +562,17 @@ const App = () => {
 export default App
 ```
 
-The hook [useReducer](https://beta.reactjs.org/reference/react/useReducer) provides a mechanism to create a state for an application. The parameter for creating a state is the reducer function that handles state changes, and the initial value of the state:
+<!--The hook [useReducer](https://beta.reactjs.org/reference/react/useReducer) provides a mechanism to create a state for an application. The parameter for creating a state is the reducer function that handles state changes, and the initial value of the state:-->
+
+[useReducer](https://beta.reactjs.org/reference/react/useReducer) 钩子提供了为应用创建状态的机制。创建一个状态所需的参数有：处理状态变化的 reducer 函数，以及状态的初始值:
 
 ```js
 const [counter, counterDispatch] = useReducer(counterReducer, 0)
 ```
 
-The reducer function that handles state changes is similar to Redux's reducers, i.e. the function gets as parameters the current state and the action that changes the state. The function returns the new state updated based on the type and possible contents of the action:
+<!--The reducer function that handles state changes is similar to Redux's reducers, i.e. the function gets as parameters the current state and the action that changes the state. The function returns the new state updated based on the type and possible contents of the action:-->
+
+处理状态变化的 reducer 函数和 Redux 中的 reducers 类似，即，即该函数获得当前状态和改变此状态的 action 作为参数。该函数根据 action 的类型和其中的内容而返回更新后的状态。
 
 ```js
 const counterReducer = (state, action) => {
@@ -576,9 +589,13 @@ const counterReducer = (state, action) => {
 }
 ```
 
-In our example, actions have nothing but a type. If the action's type is <i>INC</i>, it increases the value of the counter by one, etc. Like Redux's reducers, actions can also contain arbitrary data, which is usually put in the action's <i>payload</i> field.
+I<!--n our example, actions have nothing but a type. If the action's type is <i>INC</i>, it increases the value of the counter by one, etc. Like Redux's reducers, actions can also contain arbitrary data, which is usually put in the action's <i>payload</i> field.-->
 
-The function <i>useReducer</i> returns an array that contains an element to access the current value of the state (first element of the array), and a <i>dispatch</i> function (second element of the array) to change the state:
+在我们的例子中，action 只有类型这一个字段。如果动作的类型是 *INC*，它就会将计数器的值增加 1，其他也类似。正如 Redux 的 reducers，actions 也可以包含任意的数据，这些数据通常都被放在 *payload* 字段中。
+
+<!--The function <i>useReducer</i> returns an array that contains an element to access the current value of the state (first element of the array), and a <i>dispatch</i> function (second element of the array) to change the state:-->
+
+<i>useReducer</i> 函数返回一个数组，该数组包含一个可以访问当前状态值的元素（数组的第一个元素），以及一个用于改变状态的 *dispatch* 函数（数组的第二个元素）：
 
 ```js
 const App = () => {
@@ -597,13 +614,17 @@ const App = () => {
 }
 ```
 
-As can be seen the state change is done exactly as in Redux, the dispatch function is given the appropriate state-changing action as a parameter:
+<!--As can be seen the state change is done exactly as in Redux, the dispatch function is given the appropriate state-changing action as a parameter:-->
+
+我们对状态的更改顺利完成，正如利用 Redux 一样。恰当的状态改变类型被传入 dispatch 函数作为参数：
 
 ```js
 counterDispatch({ type: "INC" })
 ```
 
-The current code for the application is in the repository [https://github.com/fullstack-hy2020/hook-counter](https://github.com/fullstack-hy2020/hook-counter/tree/part6-1) in the branch <i>part6-1</i>.
+<!--The current code for the application is in the repository [https://github.com/fullstack-hy2020/hook-counter](https://github.com/fullstack-hy2020/hook-counter/tree/part6-1) in the branch <i>part6-1</i>.-->
+
+当前应用的代码可以在 [GitHub](https://github.com/fullstack-hy2020/hook-counter/tree/part6-1) 上 *part6-1* 的分支中找到。
 
 ### Using context for passing the state to components
 
