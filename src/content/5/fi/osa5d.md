@@ -844,7 +844,7 @@ module.exports = defineConfig({
 Kaikki testeissä olevat sovelluksen osoitetta käyttävät komennot
 
 ```js
-cy.visit('http://localhost:3000' )
+cy.visit('http://localhost:3000')
 ```
 
 voidaan muuttaa muotoon
@@ -865,8 +865,12 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
     },
     baseUrl: 'http://localhost:3000',
-    BACKEND: 'http://localhost:3001/api' // highlight-line
   },
+  // highlight-start
+  env: {
+    BACKEND: 'http://localhost:3001/api'
+  }
+  // highlight-end
 })
 ```
 
@@ -876,13 +880,13 @@ Korvataan testeistä kaikki backendin osoitteet seuraavaan tapaan
 describe('Note ', function() {
   beforeEach(function() {
     cy.visit('')
-    cy.request('POST', `${Cypress.env('EXTERNAL_API')}/testing/reset`) // highlight-line
+    cy.request('POST', `${Cypress.env('BACKEND')}/testing/reset`) // highlight-line
     const user = {
       name: 'Matti Luukkainen',
       username: 'mluukkai',
       password: 'salainen'
     }
-    cy.request('POST', `${Cypress.env('EXTERNAL_API')}/users`, user) // highlight-line
+    cy.request('POST', `${Cypress.env('BACKEND')}/users`, user) // highlight-line
   })
   // ...
 })
