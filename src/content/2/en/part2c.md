@@ -94,7 +94,7 @@ A synchronous way of making requests that's common in Java programming, for inst
 ```java
 HTTPRequest request = new HTTPRequest();
 
-String url = "https://fullstack-exampleapp.herokuapp.com/data.json";
+String url = "https://studies.cs.helsinki.fi/exampleapp/data.json";
 List<Note> notes = request.get(url);
 
 notes.forEach(m => {
