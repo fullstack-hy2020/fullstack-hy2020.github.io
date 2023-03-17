@@ -662,7 +662,7 @@ Se você quiser jogar com segurança, a melhor opção é não armazenar um toke
 
 Foi sugerido que a identidade de um usuário logado deve ser salva como [cookies httpOnly](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#restrict_access_to_cookies), para que o código JavaScript não tenha acesso ao token. A desvantagem dessa solução é que tornaria a implementação de aplicativos SPA um pouco mais complexa. Seria necessário implementar pelo menos uma página separada para fazer login.
 
-However, it is good to notice that even the use of httpOnly cookies does not guarantee anything. It has even been suggested that httpOnly cookies are [not any safer than](https://academind.com/tutorials/localstorage-vs-cookies-xss/) the use of local storage.
+
 No entanto, é bom notar que mesmo o uso de cookies httpOnly não garante nada. Até mesmo foi sugerido que os cookies httpOnly [não são mais seguros do que](https://academind.com/tutorials/localstorage-vs-cookies-xss/) o uso do armazenamento local.
 
 Então não importa a solução usada, o mais importante é [minimizar o risco](https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html) de ataques XSS.
