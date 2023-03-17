@@ -259,7 +259,7 @@ props.toggleImportanceOf(note.id)
 
 There is no need to call the *dispatch* function separately since *connect* has already modified the *toggleImportanceOf* action creator into a form that contains the dispatch.
 
-It can take some time to wrap your head around how *mapDispatchToProps* works, especially once we take a look at an [alternative way of using it](/en/part6/connect#alternative-way-of-using-map-dispatch-to-props).
+It can take some time to wrap your head around how *mapDispatchToProps* works, especially once we take a look at an [alternative way of using it](/en/part6/connect_the_old_part#an-alternative-way-of-using-map-dispatch-to-props).
 
 The resulting situation from using *connect* can be visualized like this:
 
