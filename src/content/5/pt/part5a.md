@@ -2,24 +2,24 @@
 mainImage: ../../../images/part-5.svg
 part: 5
 letter: a
-lang: en
+lang: ptbr
 ---
 
 <div class="content">
 
-In the last two parts, we have mainly concentrated on the backend. The frontend that we developed in [part 2](/en/part2) does not yet support the user management we implemented to the backend in part 4.
+Nas últimas duas partes, nós focamos principalmente no backend. O frontend que desenvolvemos na [parte 2](/ptbr/part2) ainda não suporta o gerenciamento de usuários que implementamos no backend na parte 4.
 
-At the moment the frontend shows existing notes and lets users change the state of a note from important to not important and vice versa. New notes cannot be added anymore because of the changes made to the backend in part 4: the backend now expects that a token verifying a user's identity is sent with the new note.
+No momento, o frontend mostra as notas existentes e permite que os usuários mudem o estado de uma nota de importante para não importante e vice-versa. Novas notas não podem mais ser adicionadas por causa das mudanças feitas no backend na parte 4: o backend agora espera que um token verificando a identidade de um usuário seja enviado com a nova nota.
 
-We'll now implement a part of the required user management functionality in the frontend. Let's begin with the user login. Throughout this part, we will assume that new users will not be added from the frontend.
+Agora nós iremos implementar uma parte da funcionalidade de gerenciamento de usuários necessária no frontend. Vamos começar com o login de usuário. Durante toda essa parte, nós iremos assumir que novos usuários não serão adicionados a partir do frontend.
 
-### Handling login
+### Gerenciando o login
 
-A login form has now been added to the top of the page:
+Um formulário de login foi agora adicionado ao topo da página:
 
-![browser showing user login for notes](../../images/5/1new.png)
+![navegador mostrando login do usuário para as notas](../../images/5/1new.png)
 
-The code of the <i>App</i> component now looks as follows:
+O código do componente <i>App</i> agora se parece com o seguinte:
 
 ```js
 const App = () => {
@@ -86,24 +86,23 @@ const App = () => {
 export default App
 ```
 
-The current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-1), branch <i>part5-1</i>. If you clone the repo, don't forget to run _npm install_ before attempting to run the frontend.
+O código atual da aplicação pode ser encontrado no [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-1), branch <i>part5-1</i>. Se você clonar o repositório, não se esqueça de rodar _npm install_ antes de tentar iniciar o frontend.
 
-The frontend will not display any notes if it's not connected to the backend. You can start the backend with _npm run dev_ in its folder from Part 4. This will run the backend on port 3001. While that is active, in a separate terminal window you can start the frontend with _npm start_, and now you can see the notes that are saved in your MongoDB database from Part 4.
+O frontend não irá renderizar nenhuma nota se não estiver conectado ao backend. Você pode iniciar o back através do comando _npm run dev_ em sua pasta da Parte 4. Isso iniciará o backend na porta 3001. Enquanto ele estiver ativo, você pode iniciar o frontend em uma janela de terminal separada com o comando _npm start_, e agora você pode ver as notas que foram salvas no seu banco de dados MongoDB da Parte 4.
 
-Keep this in mind from now on.
+Mantenha isso em mente de agora em diante.
 
-The login form is handled the same way we handled forms in
-[part 2](/en/part2/forms). The app state has fields for <i>username</i> and <i>password</i> to store the data from the form. The form fields have event handlers, which synchronize changes in the field to the state of the <i>App</i> component. The event handlers are simple: An object is given to them as a parameter, and they destructure the field <i>target</i> from the object and save its value to the state.
+O formulário de login é gerenciado da mesma forma que gerenciamos formulários na [part 2](/ptbr/part2/forms). O estado do app tem campos de <i>username</i> e <i>password</i> para armazenar os dados do formulário. Os campos do formulário possuem gerenciadores de eventos, que sincronizam as alterações no campo e enviam o estado para o componente <i>App</i> . Os gerenciadores de eventos são simples: Um objeto é dados a eles como parâmetro, e eles desestruturam o campo <i>target</i> do objeto e salvam seu valor no estado.
 
 ```js
 ({ target }) => setUsername(target.value)
 ```
 
-The method _handleLogin_, which is responsible for handling the data in the form, is yet to be implemented.
+O método _handleLogin_, que é responsável por lidar com os dados no formulário, ainda está para ser implementado.
 
-Logging in is done by sending an HTTP POST request to the server address <i>api/login</i>. Let's separate the code responsible for this request into its own module, to file <i>services/login.js</i>.
+O login é feito enviando uma requisição HTTP POST para o endereço do servidor <i>api/login</i>. Vamos separar o código responsável por essa requisição em seu próprio módulo, para o arquivo <i>services/login.js</i>.
 
-We'll use <i>async/await</i> syntax instead of promises for the HTTP request:
+Nós usaremos a sintaxe <i>async/await</i> ao invés de promises para a requisição HTTP:
 
 ```js
 import axios from 'axios'
@@ -117,18 +116,18 @@ const login = async credentials => {
 export default { login }
 ```
 
-If you have installed the eslint plugin in VS Code, you may now see the following warning:
+Se você instalou o plugin eslint no VS Code, poderá ver agora o seguinte aviso:
 
-![vs code warning - assign object to a variable before exporting as module default](../../images/5/50new.png)
+![aviso do vs code - atribua o objeto a uma variável antes de exportá-la como um módulo padrão](../../images/5/50new.png)
 
-We'll get back to configuring eslint in a moment. You can ignore the error for the time being or suppress it by adding the following to the line before the warning:
+Nós iremos retornar a configuração do eslint em breve. Você pode ignorar o erro por enquanto ou silenciá-lo adicionando a seguinte linha de código antes do aviso:
 
 ```js
 // eslint-disable-next-line import/no-anonymous-default-export
 export default { login }
 ```
 
-The method for handling the login can be implemented as follows:
+O método para gerenciar o login pode ser implementado da seguinte forma:
 
 ```js
 import loginService from './services/login' // highlight-line
@@ -166,13 +165,13 @@ const App = () => {
 }
 ```
 
-If the login is successful, the form fields are emptied <i>and</i> the server response (including a <i>token</i> and the user details) is saved to the <i>user</i> field of the application's state.
+Se o login for um sucesso, os campos do formulário são esvaziados <i>e</i> a resposta do servidor (incluindo um <i>token</i> e os detalhes do usuário) é salva no campo do <i>usuário</i> no estado da aplicação.
 
-If the login fails or running the function _loginService.login_ results in an error, the user is notified.
+Se o login falhar ou a função _loginService.login_ resultar em erro, o usuário é notificado.
 
-The user is not notified about a successful login in any way. Let's modify the application to show the login form only <i>if the user is not logged-in</i> so when _user === null_. The form for adding new notes is shown only if the <i>user is logged-in</i>, so <i>user</i> contains the user details.
+O usuário não é notificado sobre um login bem-sucedido de nenhuma forma. Vamos modificar a aplicação para mostrar o formulário de login apenas <i>se o usuário não estiver logado</i>, ou seja, _user === null_. O formulário para adicionar novas notas é mostrado apenas se o <i>usuário estiver logado</i>, ou seja, <i>user</i> contém os detalhes do usuário.
 
-Let's add two helper functions to the <i>App</i> component for generating the forms:
+Vamos adicionar duas funções auxiliares ao componente <i>App</i> para gerar os formulários:
 
 ```js
 const App = () => {
@@ -218,7 +217,7 @@ const App = () => {
 }
 ```
 
-and conditionally render them:
+e condicionalmente renderizá-los:
 
 ```js
 const App = () => {
@@ -262,7 +261,10 @@ const App = () => {
 }
 ```
 
-A slightly odd looking, but commonly used [React trick](https://reactjs.org/docs/conditional-rendering.html#inline-if-with-logical--operator) is used to render the forms conditionally:
+
+Um [truque](https://reactjs.org/docs/conditional-rendering.html#inline-if-with-logical--operator) um pouco estranho, mas comumente usado no React, é usado para renderizar os formulários condicionalmente:
+
+
 
 ```js
 {
@@ -270,9 +272,13 @@ A slightly odd looking, but commonly used [React trick](https://reactjs.org/docs
 }
 ```
 
-If the first statement evaluates to false or is [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy), the second statement (generating the form) is not executed at all.
+Se a primeira declaração for avaliada como falsa ou for [falsy](https://developer.mozilla.org/pt-BR/docs/Glossary/Falsy), a segunda declaração (gerando o formulário) não será executada.
 
-We can make this even more straightforward by using the [conditional operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator):
+
+
+
+
+Podemos tornar isso ainda mais simples usando o [operador condicional](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Operators/Operador_Condicional):
 
 ```js
 return (
@@ -294,9 +300,10 @@ return (
 )
 ```
 
-If _user === null_ is [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy), _loginForm()_ is executed. If not, _noteForm()_ is.
+Se _user === null_ for igual a um valor [truthy](https://developer.mozilla.org/pt-BR/docs/Glossary/Truthy), _loginForm()_ será executado. Caso contrário, _noteForm()_ será executado.
 
-Let's do one more modification. If the user is logged in, their name is shown on the screen:
+
+Vamos fazer mais uma modificação. Se o usuário estiver logado, seu nome é exibido na tela:
 
 ```js
 return (
@@ -320,15 +327,18 @@ return (
 )
 ```
 
-The solution isn't perfect, but we'll leave it for now.
+A solução não é perfeita, mas vamos deixar assim por enquanto.
 
-Our main component <i>App</i> is at the moment way too large. The changes we did now are a clear sign that the forms should be refactored into their own components. However, we will leave that for an optional exercise.
 
-The current application code can be found on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-2), branch <i>part5-2</i>.
+Nosso componente principal <i>App</i> está muito grande no momento. As mudanças que fizemos agora são um sinal claro de que os formulários devem ser refatorados em seus próprios componentes. No entanto, deixaremos isso como um exercício opcional.
 
-### Creating new notes
 
-The token returned with a successful login is saved to the application's state - the <i>user</i>'s field <i>token</i>:
+
+O código atual da aplicação pode ser encontrado no [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-2), branch <i>part5-2</i>.
+
+### Criando novas notas
+
+O token retornado com um login bem-sucedido é salvo no estado da aplicação - o campo <i>token</i> do <i>usuário</i>:
 
 ```js
 const handleLogin = async (event) => {
@@ -347,9 +357,9 @@ const handleLogin = async (event) => {
 }
 ```
 
-Let's fix creating new notes so it works with the backend. This means adding the token of the logged-in user to the Authorization header of the HTTP request.
+Vamos corrigir a criação de novas notas para que funcione com o backend. Isso significa adicionar o token do usuário logado ao cabeçalho Authorization da solicitação HTTP.
 
-The <i>noteService</i> module changes like so:
+O módulo <i>noteService</i> muda da seguinte forma:
 
 ```js
 import axios from 'axios'
@@ -388,9 +398,9 @@ const update = (id, newObject) => {
 export default { getAll, create, update, setToken } // highlight-line
 ```
 
-The noteService module contains a private variable _token_. Its value can be changed with a function _setToken_, which is exported by the module. _create_, now with async/await syntax, sets the token to the <i>Authorization</i> header. The header is given to axios as the third parameter of the <i>post</i> method.
+O módulo <i>noteService</i> contém uma variável privada <i>token</i>. Seu valor pode ser alterado com uma função <i>setToken</i>, que é exportada pelo módulo. <i>create</i>, agora com sintaxe async/await, define o token para o cabeçalho <i>Authorization</i>. O cabeçalho é fornecido ao axios como o terceiro parâmetro do método <i>post</i>.
 
-The event handler responsible for login must be changed to call the method <code>noteService.setToken(user.token)</code> with a successful login:
+O gerenciador de eventos responsável pelo login deve ser alterado para chamar o método <code>noteService.setToken(user.token)</code> com um login bem-sucedido:
 
 ```js
 const handleLogin = async (event) => {
@@ -410,37 +420,41 @@ const handleLogin = async (event) => {
 }
 ```
 
-And now adding new notes works again!
+E agora, a adição de novas notas funciona novamente!
 
-### Saving the token to the browser's local storage
+### Salvando o token no armazenamento local do navegador
 
-Our application has a small flaw: if the browser is refreshed (eg. pressing F5), the user's login information disappears.
+Nossa aplicação tem uma pequena falha: se o navegador for atualizado (por exemplo, pressionando F5), as informações de login do usuário desaparecem.
 
-This problem is easily solved by saving the login details to [local storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage). Local Storage is a [key-value](https://en.wikipedia.org/wiki/Key-value_database) database in the browser.
+Esse problema é facilmente resolvido salvando os detalhes de login no [armazenamento local](https://developer.mozilla.org/pt-BR/docs/Web/API/Storage). O armazenamento local é um banco de dados de [chave-valor](https://pt.wikipedia.org/wiki/Banco_de_dados_de_chave-valor) no navegador.
 
-It is very easy to use. A <i>value</i> corresponding to a certain <i>key</i> is saved to the database with the method [setItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/setItem). For example:
+Ele é muito fácil de usar. Um <i>valor</i> correspondente a uma determinada <i>chave</i> é salvo no banco de dados com o método [setItem](https://developer.mozilla.org/pt-BR/docs/Web/API/Storage/setItem). Por exemplo:
 
 ```js
 window.localStorage.setItem('name', 'juha tauriainen')
 ```
 
-saves the string given as the second parameter as the value of the key <i>name</i>.
 
-The value of a key can be found with the method [getItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/getItem):
+salva a string dada como segundo parâmetro como o valor da chave <i>name</i>.
+
+
+O valor de uma chave pode ser encontrado com o método [getItem](https://developer.mozilla.org/pt-BR/docs/Web/API/Storage/getItem):
 
 ```js
 window.localStorage.getItem('name')
 ```
 
-and [removeItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/removeItem) removes a key.
+
+e o método [removeItem](https://developer.mozilla.org/pt-BR/docs/Web/API/Storage/removeItem) remove uma chave.
 
 Values in the local storage are persisted even when the page is re-rendered. The storage is [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin)-specific so each web application has its own storage.
+Valores no armazenamento local são persistidos mesmo quando a página é re-renderizada. O armazenamento é específico para [origem](https://developer.mozilla.org/pt-BR/docs/Glossary/Origin) , então cada aplicação web tem seu próprio armazenamento.
 
-Let's extend our application so that it saves the details of a logged-in user to the local storage.
+Vamos estender nossa aplicação para que ela salve os detalhes de um usuário logado no armazenamento local.
 
-Values saved to the storage are [DOMstrings](https://docs.w3cub.com/dom/domstring), so we cannot save a JavaScript object as it is. The object has to be parsed to JSON first, with the method _JSON.stringify_. Correspondingly, when a JSON object is read from the local storage, it has to be parsed back to JavaScript with _JSON.parse_.
+Valores salvos no armazenamento são [DOMstrings](https://docs.w3cub.com/dom/domstring), então não podemos salvar um objeto JavaScript da forma como ele é. O objeto deve ser convertido para JSON primeiro, com o método _JSON.stringify_. Correspondentemente, quando um objeto JSON é lido do armazenamento local, ele deve ser convertido de volta para JavaScript com _JSON.parse_.
 
-Changes to the login method are as follows:
+As mudanças no método login são as seguintes:
 
 ```js
   const handleLogin = async (event) => {
@@ -465,17 +479,17 @@ Changes to the login method are as follows:
   }
 ```
 
-The details of a logged-in user are now saved to the local storage, and they can be viewed on the console (by typing _window.localStorage_ to the console):
+Os detalhes de um usuário logado agora são salvos no armazenamento local e podem ser visualizados no console (digitando _window.localStorage_ no console):
 
-![browser showing someone logged into notes](../../images/5/3e.png)
+![navegador mostrando alguém logado em notas](../../images/5/3e.png)
 
-You can also inspect the local storage using the developer tools. On Chrome, go to the <i>Application</i> tab and select <i>Local Storage</i> (more details [here](https://developers.google.com/web/tools/chrome-devtools/storage/localstorage)). On Firefox go to the <i>Storage</i> tab and select <i>Local Storage</i> (details [here](https://developer.mozilla.org/en-US/docs/Tools/Storage_Inspector)).
+Você também pode inspecionar o armazenamento local usando as ferramentas de desenvolvedor. No Chrome, vá para a guia <i>Aplicativo</i> e selecione <i>Armazenamento local</i> (mais detalhes [aqui](https://developers.google.com/web/tools/chrome-devtools/storage/localstorage)). No Firefox, vá para a guia <i>Storage</i> e selecione <i>Local Storage</i> (detalhes [aqui](https://developer.mozilla.org/pt-BR/docs/Tools/Storage_Inspector)).
 
-We still have to modify our application so that when we enter the page, the application checks if user details of a logged-in user can already be found on the local storage. If they can, the details are saved to the state of the application and to <i>noteService</i>.
+Nós ainda temos que modificar nossa aplicação para que, quando entrarmos na página, a aplicação verifique se os detalhes de um usuário logado já podem ser encontrados no armazenamento local. Se eles puderem, os detalhes são salvos no estado da aplicação e no <i>noteService</i>.
 
-The right way to do this is with an [effect hook](https://reactjs.org/docs/hooks-effect.html): a mechanism we first encountered in [part 2](/en/part2/getting_data_from_server#effect-hooks), and used to fetch notes from the server.
+O jeito certo de fazer isso é com um [hook de efeito](https://pt-br.reactjs.org/docs/hooks-effect.html): um mecanismo que conhecemos pela primeira vez na [parte 2](/en/part2/getting_data_from_server#effect-hooks), e usamos para buscar notas do servidor.
 
-We can have multiple effect hooks, so let's create a second one to handle the first loading of the page:
+Nós podemos ter vários hooks de efeitos, então vamos criar um segundo para lidar com o primeiro carregamento da página:
 
 ```js
 const App = () => {
@@ -509,77 +523,77 @@ const App = () => {
 }
 ```
 
-The empty array as the parameter of the effect ensures that the effect is executed only when the component is rendered [for the first time](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect).
+O array vazio como parâmetro do hook de efeito garante que o efeito seja executado apenas quando o componente for renderizado [pela primeira vez](https://pt-br.reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect).
 
-Now a user stays logged in to the application forever. We should probably add a <i>logout</i> functionality, which removes the login details from the local storage. We will however leave it as an exercise.
 
-It's possible to log out a user using the console, and that is enough for now.
-You can log out with the command:
+Agora um usuário fica logado na aplicação para sempre. Provavelmente devemos adicionar uma funcionalidade de <i>logout</i>, que remove os detalhes de login do armazenamento local. No entanto, deixaremos isso como um exercício.
+
+É possível deslogar um usuário usando o console, e isso é o suficiente por enquanto.
+Você pode deslogar com o comando:
 
 ```js
 window.localStorage.removeItem('loggedNoteappUser')
 ```
 
-or with the command which empties <i>localstorage</i> completely:
+ou com o comando que esvazia o <i>localstorage</i> completamente:
 
 ```js
 window.localStorage.clear()
 ```
 
-The current application code can be found on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-3), branch <i>part5-3</i>.
+O código da aplicação atual pode ser encontrado no [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-3), branch <i>part5-3</i>.
 
 </div>
 
 <div class="tasks">
 
-### Exercises 5.1.-5.4.
+### Exercícios 5.1.-5.4.
 
-We will now create a frontend for the bloglist backend we created in the last part. You can use [this application](https://github.com/fullstack-hy2020/bloglist-frontend) from GitHub as the base of your solution. The application expects your backend to be running on port 3003.
+Nós agora criaremos um frontend para o backend do bloglist que criamos na última parte. Você pode usar [esta aplicação](https://github.com/fullstack-hy2020/bloglist-frontend) do GitHub como base para sua solução. A aplicação espera que seu backend esteja em execução na porta 3003.
 
-It is enough to submit your finished solution. You can do a commit after each exercise, but that is not necessary.
+É suficiente enviar sua solução final. Você pode fazer um commit após cada exercício, mas isso não é necessário.
 
-The first few exercises revise everything we have learned about React so far. They can be challenging, especially if your backend is incomplete.
-It might be best to use the backend that we marked as the answer for part 4.
+Os primeiros exercícios revisam tudo o que aprendemos sobre React até agora. Eles podem ser desafiadores, especialmente se seu backend estiver incompleto. Pode ser melhor usar o backend que marcamos como resposta para a parte 4.
 
-While doing the exercises, remember all of the debugging methods we have talked about, especially keeping an eye on the console.
+Enquanto faz os exercícios, lembre-se de todos os métodos de depuração que discutimos, especialmente prestando atenção no console.
 
-**Warning:** If you notice you are mixing in the functions _async/await_ and _then_ commands, it's 99.9%  certain you are doing something wrong. Use either or, never both.
+**Aviso:** Se você perceber que está misturando os comandos das funções _async/await_ e _then_, é 99,9% certo que está fazendo algo errado. Use apenas um ou outro, nunca os dois.
 
-#### 5.1: bloglist frontend, step1
+#### 5.1: frontend do bloglist, passo 1
 
-Clone the application from [GitHub](https://github.com/fullstack-hy2020/bloglist-frontend) with the command:
+Clone a aplicação do [GitHub](https://github.com/fullstack-hy2020/bloglist-frontend) com o comando:
 
 ```bash
 git clone https://github.com/fullstack-hy2020/bloglist-frontend
 ```
 
-<i>remove the git configuration of the cloned application</i>
+<i>remova a configuração do git da aplicação clonada</i>
 
 ```bash
-cd bloglist-frontend   // go to cloned repository
+cd bloglist-frontend   // vai para o repositório clonado
 rm -rf .git
 ```
 
-The application is started the usual way, but you have to install its dependencies first:
+A aplicação é iniciada da maneira usual, mas você deve instalar suas dependências primeiro:
 
 ```bash
 npm install
 npm start
 ```
 
-Implement login functionality to the frontend. The token returned with a successful login is saved to the application's state <i>user</i>.
+Implemente a funcionalidade de login no frontend. O token retornado com um login bem-sucedido é salvo no estado da aplicação <i>user</i>.
 
-If a user is not logged in, <i>only</i> the login form is visible.
+se um usuário não estiver logado, <i>apenas</i> o formulário de login pode ser visto.
 
-![browser showing visible login form only](../../images/5/4e.png)
+![navegador mostrando apenas o formulário de login visível](../../images/5/4e.png)
 
-If the user is logged-in, the name of the user and a list of blogs is shown.
+Se um usuário estiver logado, o nome do usuário e uma lista de blogs são exibidos.
 
-![browser showing notes and who is logged in](../../images/5/5e.png)
+![navegador mostrando notas e quem está logado](../../images/5/5e.png)
 
-User details of the logged-in user do not have to be saved to the local storage yet.
+Detalhes do usuário logado não precisam ser salvos no armazenamento local ainda.
 
-**NB** You can implement the conditional rendering of the login form like this for example:
+**NB** Você pode implementar a renderização condicional do formulário de login da seguinte maneira, por exemplo:
 
 ```js
   if (user === null) {
@@ -604,50 +618,53 @@ User details of the logged-in user do not have to be saved to the local storage 
 }
 ```
 
-#### 5.2: bloglist frontend, step2
+### 5.2: frontend do bloglist, passo 2
 
-Make the login 'permanent' by using the local storage. Also, implement a way to log out.
 
-![browser showing logout button after logging in](../../images/5/6e.png)
+Torne o login 'permanente' usando o armazenamento local. Além disso, implemente uma maneira de deslogar.
 
-Ensure the browser does not remember the details of the user after logging out.
+![navegador mostrando o botão de logout após o login](../../images/5/6e.png)
 
-#### 5.3: bloglist frontend, step3
+Assegure-se de que o navegador não lembre os detalhes do usuário após o logout.
 
-Expand your application to allow a logged-in user to add new blogs:
+#### 5.3: frontend do bloglist, passo 3
 
-![browser showing new blog form](../../images/5/7e.png)
+Expanda sua aplicação para permitir que um usuário logado adicione novos blogs:
 
-#### 5.4: bloglist frontend, step4
+![navegador mostrando o formulário do novo blog](../../images/5/7e.png)
 
-Implement notifications that inform the user about successful and unsuccessful operations at the top of the page. For example, when a new blog is added, the following notification can be shown:
+#### 5.4: frontend do bloglist, passo 4
 
-![browser showing successful operation](../../images/5/8e.png)
+Implemente notificações que informem o usuário sobre operações bem-sucedidas e mal-sucedidas no topo da página. Por exemplo, quando um novo blog é adicionado, a seguinte notificação pode ser exibida:
 
-Failed login can show the following notification:
+![navegador mostrando a operação bem-sucedida](../../images/5/8e.png)
 
-![browser showing failed login attempt](../../images/5/9e.png)
+Um login mal-sucedido pode mostrar a seguinte notificação:
 
-The notifications must be visible for a few seconds. It is not compulsory to add colors.
+![navagador mostrando a tentativa de login mal-sucedida](../../images/5/9e.png)
+
+As notificações devem ser visíveis por alguns segundos. Não é obrigatório adicionar cores.
 
 </div>
 
 <div class="content">
 
-### A note on using local storage
+### Uma nota sobre o uso do armazenamento local
 
-At the [end](/en/part4/token_authentication#problems-of-token-based-authentication) of the last part, we mentioned that the challenge of token-based authentication is how to cope with the situation when the API access of the token holder to the API needs to be revoked.
 
-There are two solutions to the problem. The first one is to limit the validity period of a token. This forces the user to re-login to the app once the token has expired. The other approach is to save the validity information of each token to the backend database. This solution is often called a <i>server-side session</i>.
+No [fim](/en/part4/token_authentication#problems-of-token-based-authentication) da última parte, nós mencionamos que o desafio da autenticação baseada em token é como lidar com a situação em que o acesso da API do titular do token à API precisa ser revogado.
 
-No matter how the validity of tokens is checked and ensured, saving a token in the local storage might contain a security risk if the application has a security vulnerability that allows [Cross Site Scripting (XSS)](https://owasp.org/www-community/attacks/xss/) attacks. An XSS attack is possible if the application would allow a user to inject arbitrary JavaScript code (e.g. using a form) that the app would then execute. When using React sensibly it should not be possible since [React sanitizes](https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks) all text that it renders, meaning that it is not executing the rendered content as JavaScript.
+Existem duas soluções para o problema. A primeira é limitar o período de validade de um token. Isso obriga o usuário a fazer login novamente no aplicativo assim que o token expirar. A outra abordagem é salvar as informações de validade de cada token no banco de dados do backend. Essa solução geralmente é chamada de <i>server-side session</i>.
 
-If one wants to play safe, the best option is to not store a token in local storage. This might be an option in situations where leaking a token might have tragic consequences.
+Não importa como a validade dos tokens é verificada e garantida, salvar um token no armazenamento local pode conter um risco de segurança se o aplicativo tiver uma vulnerabilidade de segurança que permita ataques [Cross Site Scripting (XSS)](https://owasp.org/www-community/attacks/xss/). Um ataque XSS é possível se o aplicativo permitir que um usuário injete código JavaScript arbitrário (por exemplo, usando um formulário) que o aplicativo então execute. Ao usar o React com sensatez, não deve ser possível aplicar esse ataque, pois o [React sanitiza](https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks) todo o texto que ele renderiza, o que significa que não está executando o conteúdo renderizado como JavaScript.
 
-It has been suggested that the identity of a signed-in user should be saved as [httpOnly cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#restrict_access_to_cookies), so that JavaScript code could not have any access to the token. The drawback of this solution is that it would make implementing SPA applications a bit more complex. One would need at least to implement a separate page for logging in.
+Se você quiser jogar com segurança, a melhor opção é não armazenar um token no armazenamento local. Essa pode ser uma opção em situações em que vazar um token pode ter consequências trágicas.
+
+Foi sugerido que a identidade de um usuário logado deve ser salva como [cookies httpOnly](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#restrict_access_to_cookies), para que o código JavaScript não tenha acesso ao token. A desvantagem dessa solução é que tornaria a implementação de aplicativos SPA um pouco mais complexa. Seria necessário implementar pelo menos uma página separada para fazer login.
 
 However, it is good to notice that even the use of httpOnly cookies does not guarantee anything. It has even been suggested that httpOnly cookies are [not any safer than](https://academind.com/tutorials/localstorage-vs-cookies-xss/) the use of local storage.
+No entanto, é bom notar que mesmo o uso de cookies httpOnly não garante nada. Até mesmo foi sugerido que os cookies httpOnly [não são mais seguros do que](https://academind.com/tutorials/localstorage-vs-cookies-xss/) o uso do armazenamento local.
 
-So no matter the used solution the most important thing is to [minimize the risk](https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html) of XSS attacks altogether.
+Então não importa a solução usada, o mais importante é [minimizar o risco](https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html) de ataques XSS.
 
 </div>
