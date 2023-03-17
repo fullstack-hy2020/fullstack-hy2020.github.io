@@ -57,7 +57,7 @@ Once the process has been finished, you should be redirected to your brand new r
 
 Clone the project now to your machine. As always, when starting with a new code, the most obvious place to look first is the file <code>package.json</code> 
 
-<i>**NOTE** since the project is aldeady a bit old, you need Node 16 to work with it!</i>
+<i>**NOTE** since the project is already a bit old, you need Node 16 to work with it!</i>
 
 Try now the following:
 - install dependencies (by running <code>npm install</code>)
