@@ -21,15 +21,15 @@ A solução existente salva cada nota na <i>coleção de notas</i> no banco de d
 
 Como em todos os bancos de dados de documentos, podemos usar IDs de objeto no Mongo para fazer referência a documentos em outras coleções. Isso é semelhante ao uso de chaves estrangeiras em bancos de dados relacionais.
 
-Tradicionalmente, os bancos de dados de documentos, como o Mongo, não oferecem suporte a <i>consultas de junção</i> que estão disponíveis em bancos de dados relacionais, usados ​​para agregar dados de várias tabelas. No entanto, a partir da versão 3.2, o Mongo oferece suporte a [consultas de agregação de pesquisa](https://docs.mongodb.com/manual/reference/operator/aggregation/lookup/). Não veremos essa funcionalidade neste curso.
+Tradicionalmente, os bancos de dados de documentos, como o Mongo, não oferecem suporte a <i>join queries</i> que estão disponíveis em bancos de dados relacionais, usados ​​para agregar dados de várias tabelas. No entanto, a partir da versão 3.2, o Mongo oferece suporte a [consultas de agregação de pesquisa](https://docs.mongodb.com/manual/reference/operator/aggregation/lookup/). Não veremos essa funcionalidade neste curso.
 
 Se precisarmos de funcionalidade semelhante a consultas de junção, iremos implementá-la em nosso aplicativo fazendo várias consultas. Em certas situações, o Mongoose pode cuidar da junção e agregação de dados, o que dá a aparência de uma consulta de junção. No entanto, mesmo nessas situações, o Mongoose faz várias consultas ao banco de dados em segundo plano.
 
 ### Referências entre coleções
 
-Se estivéssemos usando um banco de dados relacional, a nota conteria uma <i>chave de referência</i> para o usuário que a criou. Em bancos de dados de documentos, podemos fazer a mesma coisa.
+Se estivéssemos usando um banco de dados relacional, a nota conteria uma <i>chave estrangeira</i> para o usuário que a criou. Em bancos de dados de documentos, podemos fazer a mesma coisa.
 
-Vamos supor que a coleção de <i>usuários</i> contém dois usuários:
+Vamos supor que a coleção <i>users</i> contém dois usuários:
 
 ```js
 [
@@ -44,7 +44,7 @@ Vamos supor que a coleção de <i>usuários</i> contém dois usuários:
 ]
 ```
 
-A coleção <i>notas</i> contém três notas, que todas elas tem um campo de <i>usuário</i> que faz referência a um usuário na coleção de <i>usuários</i>:
+A coleção <i>notes</i> contém três notas, todas elas com um campo <i>user</i> que faz referência a um usuário na coleção <i>users</i>:
 
 ```js
 [
@@ -69,7 +69,7 @@ A coleção <i>notas</i> contém três notas, que todas elas tem um campo de <i>
 ]
 ```
 
-Os bancos de dados de documentos não exigem que a chave estrangeira seja armazenada nos recursos de nota, ela <i>também</i> pode ser armazenada na coleção de usuários ou até mesmo em ambos:
+Os bancos de dados de documentos não exigem que a chave estrangeira seja armazenada nos recursos de nota, ela <i>também</i> pode ser armazenada na coleção users ou até mesmo em ambos:
 
 ```js
 [
@@ -88,7 +88,7 @@ Os bancos de dados de documentos não exigem que a chave estrangeira seja armaze
 
 Como os usuários podem ter muitas notas, os IDs relacionados são armazenados em uma matriz no campo de <i>notas</i>.
 
-Os bancos de dados de documentos também oferecem uma maneira radicalmente diferente de organizar os dados: em algumas situações, pode ser benéfico aninhar todo o array de notas como parte dos documentos na coleção de usuários:
+Os bancos de dados de documentos também oferecem uma maneira radicalmente diferente de organizar os dados: em algumas situações, pode ser benéfico aninhar todo o array de notas como parte dos documentos na coleção users:
 
 ```js
 [
@@ -128,7 +128,7 @@ Paradoxalmente, bancos de dados sem esquema como o Mongo exigem que os desenvolv
 
 #### Esquema Mongoose para usuários
 
-Neste caso, decidimos armazenar os ids das notas criadas pelo usuário no documento do usuário. Vamos definir o modelo para representar um usuário no arquivo <i>models/user.js</i>:
+Neste caso, decidimos armazenar os ids das notas criadas pelo usuário no documento <i>user</i>. Vamos definir o modelo para representar um usuário no arquivo <i>models/user.js</i>:
 
 ```js
 const mongoose = require('mongoose')
@@ -160,7 +160,7 @@ const User = mongoose.model('User', userSchema)
 module.exports = User
 ```
 
-Os ids das notas são armazenados no documento do usuário como uma matriz de ids do Mongo. A definição é a seguinte:
+Os ids das notas são armazenados no documento <i>user</i> como uma matriz de ids do Mongo. A definição é a seguinte:
 
 ```js
 {
@@ -169,7 +169,7 @@ Os ids das notas são armazenados no documento do usuário como uma matriz de id
 }
 ```
 
-O tipo do campo é <i>ObjectId</i> que faz referência a documentos de estilo de <i>nota</i>. O Mongo não sabe inerentemente que este é um campo que faz referência a notas, a sintaxe é puramente relacionada e definida pelo Mongoose.
+O tipo do campo é <i>ObjectId</i> que faz referência a documentos de estilo <i>Note</i>. O Mongo não sabe inerentemente que este é um campo que faz referência a notas, a sintaxe é puramente relacionada e definida pelo Mongoose.
 
 Vamos expandir o esquema da nota definida no arquivo <i>models/note.js</i> de modo que que a nota contenha informações sobre o usuário que a criou:
 
@@ -194,7 +194,7 @@ Em total contraste com as convenções dos bancos de dados relacionais, as <i>re
 
 #### Criando usuários
 
-Vamos implementar uma rota para criar novos usuários. Os usuários têm um <i>nome de usuário</i> exclusivo, um nome e algo chamado <i>passwordHash</i>. O hash da senha é a saída de uma  [função hash unidirecional](https://en.wikipedia.org/wiki/Cryptographic_hash_function)  aplicada à senha do usuário. Nunca é aconselhável armazenar senhas de texto simples não criptografadas no banco de dados!
+Vamos implementar uma rota para criar novos usuários. Os usuários têm um <i>username</i> exclusivo, um <i>name</i> e algo chamado <i>passwordHash</i>. O hash da senha é a saída de uma  [função hash unidirecional](https://en.wikipedia.org/wiki/Cryptographic_hash_function)  aplicada à senha do usuário. Nunca é aconselhável armazenar senhas de texto simples não criptografadas no banco de dados!
 
 Vamos instalar o pacote [bcrypt](https://github.com/kelektiv/node.bcrypt.js) para gerar os hashes de senha:
 
@@ -202,7 +202,7 @@ Vamos instalar o pacote [bcrypt](https://github.com/kelektiv/node.bcrypt.js) par
 npm install bcrypt
 ```
 
-A criação de novos usuários ocorre em conformidade com as convenções RESTful discutidas na [part 3](/ptbr/part3/node_js_and_express#rest), fazendo uma solicitação HTTP POST para o caminho do <i>usuário</i>.
+A criação de novos usuários ocorre em conformidade com as convenções RESTful discutidas na [part 3](/ptbr/part3/node_js_and_express#rest), fazendo uma solicitação HTTP POST para o caminho <i>users</i>.
 
 Vamos definir um <i>roteador</i> separado para lidar com usuários em um novo arquivo <i>controllers/users.js</i>. Vamos colocar o roteador em uso em nossa aplicação no arquivo <i>app.js</i>, para que ele trate as solicitações feitas à url <i>/api/users</i>:
 
@@ -416,7 +416,7 @@ A lista fica assim:
 
 ![api do navegador/usuários mostra dados JSON com array de notas](../../images/4/9.png)
 
-Você pode encontrar o código da nossa aplicação atual na íntegra na ramificação <i>part4-7</i> [deste repositório GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-7).
+Você pode encontrar o código da nossa aplicação atual na íntegra na branch <i>part4-7</i> [deste repositório GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-7).
 
 #### Criando uma nova nota
 
@@ -548,6 +548,6 @@ const noteSchema = new mongoose.Schema({
 })
 ```
 
-Você pode encontrar o código de nosso aplicativo atual na íntegra na ramificação <i>part4-8</i> [deste repositório GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-8).
+Você pode encontrar o código da nossa aplicação atual na íntegra na ramificação <i>part4-8</i> [deste repositório GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-8).
 
 </div>
