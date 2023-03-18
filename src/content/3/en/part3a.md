@@ -420,7 +420,7 @@ We can now start the server in development mode with the command:
 npm run dev
 ```
 
-Unlike with the <i>start</i> and <i>test</i> scripts, we also have to add <i>run</i> to the command.
+Unlike with the <i>start</i> and <i>test</i> scripts, we also have to add <i>run</i> to the command because it is a non-native script.
 
 ### REST
 
