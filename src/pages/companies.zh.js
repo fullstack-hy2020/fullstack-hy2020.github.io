@@ -5,7 +5,7 @@ import CompaniesPage from '../components/CompaniesPage';
 const Companies = () => (
   <CompaniesPage
     lang="zh"
-    title="合作伙伴 | 全栈公开课2022"
+    title="合作伙伴 | 全栈公开课"
     seoDescription="合作伙伴中的全栈工程师"
   />
 );

@@ -496,14 +496,14 @@ Full stack development is <i> extremely hard</i>, that is why I will use all the
 
 - I will have my browser developer console open all the time
 - I will use the network tab of the browser dev tools to ensure that frontend and backend are communicating as I expect
-- I will constantly keep on eye the state of the server to make sure that the data sent there by the frontend is saved there as I expect
-- I will keep on eye on the database: does the backend save data there in the right format
+- I will constantly keep an eye on the state of the server to make sure that the data sent there by the frontend is saved there as I expect
+- I will keep an eye on the database: does the backend save data there in the right format
 - I progress with small steps
 - <i>when I suspect that there is a bug in the frontend, I make sure that the backend works for sure</i>
 - <i>when I suspect that there is a bug in the backend, I make sure that the frontend works for sure</i>
 - I will write lots of _console.log_ statements to make sure I understand how the code and the tests behave and to help pinpoint problems
 - If my code does not work, I will not write more code. Instead, I start deleting the code until it works or just return to a state when everything still was still working
--If a test does not pass, I make sure that the tested functionality for sure works in the application
+- If a test does not pass, I make sure that the tested functionality for sure works in the application
 - When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](https://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord-telegram) how to ask for help
 
 </div>

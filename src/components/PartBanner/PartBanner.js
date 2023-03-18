@@ -1,3 +1,4 @@
+import translationProgress from '../../utils/translationProgress'
 import { Banner } from '../Banner/Banner';
 import { ContentLiftup } from '../ContentLiftup/ContentLiftup';
 import React from 'react';
@@ -92,14 +93,8 @@ export const PartBanner = ({ lang }) => {
   const parts = Object.keys(navigation[lang]);
 
   function partName(lang) {
-    return lang === 'fi' ? 'Osa' : lang==='ptbr' ? 'Parte' : 'Part'
-    // if (lang === 'fi') {
-    //   return 'Osa'
-    // } else if (lang === 'ptbr') {
-    //   return 'Parte'
-    // } else {
-    //   return 'Part'
-    }
+    return lang === 'fi' ? 'Osa' : lang === 'ptbr' ? 'Parte' : 'Part';
+  }
 
   return (
     <Banner
@@ -108,9 +103,10 @@ export const PartBanner = ({ lang }) => {
     >
       <div className="container spacing flex-fix-aligning col-7--mobile">
         {parts.map(part => {
-          const partNames =
-            partNameTranslations[lang] || partNameTranslations.en;
+            const partNames = 
+            partNameTranslations[lang] || partNameTranslations.en
 
+            const summary = translationProgress[lang] < part ? partNames[part] + ' (english only)' : partNames[part]
           return (
             <ContentLiftup
               key={partNames[part]}
@@ -120,9 +116,8 @@ export const PartBanner = ({ lang }) => {
                 alt: partNames[part],
               }}
               hoverImageSrc={require(`../../images/thumbnails/part-${part}_ovr.svg`)}
-              // name={`${lang === 'fi' ? 'Osa' : 'Part'} ${part}`}
               name={`${partName(lang)} ${part}`}
-              summary={partNames[part]}
+              summary={summary}
               path={getPartTranslationPath(lang, part)}
             />
           );

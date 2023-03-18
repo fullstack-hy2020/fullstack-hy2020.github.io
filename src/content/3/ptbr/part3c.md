@@ -11,7 +11,7 @@ Antes de irmos ao assunto principal sobre persistência de dados em um banco de 
 
 ### Depurando aplicações Node
 
-A depuração de aplicações Node é um tanto mais difícil do que depurar JavaScript em execução no navegador. A impressão de dados no console é um método testado e comprovado, e sempre vale a pena utilizá-lo. Algumas pessoas acham que métodos mais sofisticados devem ser usados ​​em vez do console, mas eu discordo. Até os melhores desenvolvedores <i>open-sorce</i> do mundo [usam](https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html) esse [método](https://swizec.com/blog/javascript-debugging-slightly-beyond-consolelog/).
+A depuração de aplicações Node é um tanto mais difícil do que depurar JavaScript em execução no navegador. A impressão de dados no console é um método testado e comprovado, e sempre vale a pena utilizá-lo. Algumas pessoas acham que métodos mais sofisticados devem ser usados ​​em vez do console, mas eu discordo. Até os melhores desenvolvedores <i>open-source</i> do mundo [usam](https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html) esse [método](https://swizec.com/blog/javascript-debugging-slightly-beyond-consolelog/).
 
 #### Visual Studio Code
 

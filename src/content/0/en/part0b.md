@@ -17,7 +17,7 @@ Open the [example application](https://studies.cs.helsinki.fi/exampleapp) in you
 
 The course material is done with the Chrome browser.
 
-**The 1st rule of web development**: Always keep the Developer Console open on your web browser. On macOS, open the console by pressing _F12_ or _option-cmd-i_ simultaneously. On Windows or Linux, open the console by pressing _F12_ or _ctrl-shift-i_ simultaneously. The console can also be opened via the [context menu](https://en.wikipedia.org/wiki/Menu_key).
+**The 1st rule of web development**: Always keep the Developer Console open on your web browser. On macOS, open the console by pressing _fn_-_F12_ or _option-cmd-i_ simultaneously. On Windows or Linux, open the console by pressing _Fn_-_F12_ or _ctrl-shift-i_ simultaneously. The console can also be opened via the [context menu](https://en.wikipedia.org/wiki/Menu_key).
 
 Remember to <i>always</i> keep the Developer Console open when developing web applications.
 
@@ -33,7 +33,7 @@ Make sure that the <i>Network</i> tab is open, and check the <i>Disable cache</i
 
 The server and the web browser communicate with each other using the [HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP) protocol. The <i>Network</i> tab shows how the browser and the server communicate.
 
-When you reload the page (press the F5 key or the &#8635; symbol on your browser), the console will show that two events have happened:
+When you reload the page (To refresh a webpage, on windows, press the _Fn_-_F5_ keys. On macOS, press _command_-_R_. Or press the &#8635; symbol on your browser), the console will show that two events have happened:
 
 - The browser has fetched the contents of the page <i>studies.cs.helsinki.fi/exampleapp</i> from the server
 - And has downloaded the image <i>kuva.png</i>
@@ -66,7 +66,7 @@ Because of the img tag, the browser does a second <i>HTTP request</i> to fetch t
 
 The request was made to the address <https://studies.cs.helsinki.fi/exampleapp/kuva.png> and its type is HTTP GET. The response headers tell us that the response size is 89350 bytes, and its [Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) is <i>image/png</i>, so it is a png image. The browser uses this information to render the image correctly to the screen.
 
-The chain of events caused by opening the page <https://studies.cs.helsinki.fi/exampleapp> on a browser form the following [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/):
+The chain of events caused by opening the page <https://studies.cs.helsinki.fi/exampleapp> on a browser forms the following [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/):
 
 ![Sequence diagram of the flow covered above](../../images/0/7m.png)
 
@@ -112,13 +112,13 @@ app.get('/', (req, res) => {
 
 You don't have to understand the code just yet.
 
-The content of the HTML page has been saved as a template string or a string that allows for evaluating, for example, variables in the midst of it. The dynamically changing part of the homepage, the number of saved notes (in the code <em>noteCount</em>), is replaced by the current number of notes (in the code <em>notes.length</em>) in the template string.
+The content of the HTML page has been saved as a template string or a string that allows for evaluating, for example, variables, like <em>noteCount</em>, in the midst of it. The dynamically changing part of the homepage, the number of saved notes (in the code <em>noteCount</em>), is replaced by the current number of notes (in the code <em>notes.length</em>) in the template string.
 
 Writing HTML amid the code is of course not smart, but for old-school PHP programmers, it was a normal practice.
 
 In traditional web applications, the browser is "dumb". It only fetches HTML data from the server, and all application logic is on the server. A server can be created using [Java Spring](https://spring.io/projects/spring-framework) , [Python Flask](https://flask.palletsprojects.com/en/2.2.x/) or [Ruby on Rails](http://rubyonrails.org/) to name just a few examples.
 
-The example uses [Express](https://expressjs.com/) library with the Node.js. This course will use Node.js and Express to create web servers.
+The example uses [Express](https://expressjs.com/) library with Node.js. This course will use Node.js and Express to create web servers.
 
 ### Running application logic in the browser
 
@@ -164,7 +164,7 @@ xhttp.send()
 
 The details of the code are not important right now, but some code has been included to spice up the images and the text. We will properly start coding in [part 1](/en/part1). The sample code in this part is actually not relevant at all to the coding techniques of this course.
 
-> Some might wonder why xhttp-object is used instead of the modern fetch. This is due to not wanting to go into promises at all yet, and the code having a secondary role in this part. We will return to modern ways to make requests to the server in part 2.
+> Some might wonder why xhttp-object is used instead of the modern fetch. This is due to not wanting to go into promises at all yet, and the code having a secondary role in this part. We will return to modern ways to make requests to the server in [part 2](/en/part2).
 
 Immediately after fetching the <i>script</i> tag, the browser begins to execute the code.
 
@@ -381,7 +381,7 @@ The file defines two [class selectors](https://developer.mozilla.org/en-US/docs/
 
 A class selector definition always starts with a period and contains the name of the class.
 
-The classes are [attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class), which can be added to HTML elements.
+Classes are [attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class), which can be added to HTML elements.
 
 CSS attributes can be examined on the <i>elements</i> tab of the console:
 
@@ -391,7 +391,7 @@ The outermost <i>div</i> element has the class <i>container</i>. The <i>ul</i> e
 
 The CSS rule defines that elements with the <i>container</i> class will be outlined with a one-pixel wide [border](https://developer.mozilla.org/en-US/docs/Web/CSS/border). It also sets 10-pixel [padding](https://developer.mozilla.org/en-US/docs/Web/CSS/padding) on the element. This adds some empty space between the element's content and the border.
 
-The second CSS rule sets the text color of the notes as blue.
+The second CSS rule sets the text color of the <i>notes</i> class as blue.
 
 HTML elements can also have other attributes apart from classes. The <i>div</i> element containing the notes has an [id](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id) attribute. JavaScript code uses the id to find the element.
 
@@ -409,7 +409,7 @@ Let's review what happens when the page <https://studies.cs.helsinki.fi/examplea
 
 - The browser fetches the HTML code defining the content and the structure of the page from the server using an HTTP GET request.
 - Links in the HTML code cause the browser to also fetch the CSS style sheet <i>main.css</i>...
-- ...and a JavaScript code file <i>main.js</i>
+- ...and the JavaScript code file <i>main.js</i>
 - The browser executes the JavaScript code. The code makes an HTTP GET request to the address <https://studies.cs.helsinki.fi/exampleapp/data.json>, which
   returns the notes as JSON data.
 - When the data has been fetched, the browser executes an <i>event handler</i>, which renders the notes to the page using the DOM-API.
@@ -471,7 +471,7 @@ notes.push({
 })
 ```
 
-The Note objects have two fields: <i>content</i> containing the actual content of the note, and <i>date</i> containing the date and time the note was created.
+Each note object has two fields: <i>content</i> containing the actual content of the note, and <i>date</i> containing the date and time the note was created.
 
 The server does not save new notes to a database, so new notes disappear when the server is restarted.
 
@@ -486,7 +486,7 @@ All of the data shown on the page was fetched with the HTML code generated by th
 
 The Notes page uses AJAX to fetch the notes data. Submitting the form still uses the traditional mechanism of submitting web forms.
 
-The application URLs reflect the old, carefree times. JSON data is fetched from the URL <https://studies.cs.helsinki.fi/exampleapp/data.json> and new notes are sent to the URL <https://studies.cs.helsinki.fi/exampleapp/new_note>.  
+The application URLs reflect the old, carefree times. JSON data is fetched from the URL <https://studies.cs.helsinki.fi/exampleapp/data.json> and new notes are sent to the URL <https://studies.cs.helsinki.fi/exampleapp/new_note>.
 Nowadays URLs like these would not be considered acceptable, as they don't follow the generally acknowledged conventions of [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) APIs, which we'll look into more in [part 3](/en/part3).
 
 The thing termed AJAX is now so commonplace that it's taken for granted. The term has faded into oblivion, and the new generation has not even heard of it.
@@ -593,7 +593,7 @@ The status of React seems strong, but the world of JavaScript is ever-changing. 
 
 What does the name of the course, <i>Full stack web development</i>, mean? Full stack is a buzzword that everyone talks about, but no one knows what it means. Or at least, there is no agreed-upon definition for the term.
 
-Practically all web applications have (at least) two "layers": the browser, being closer to the end-user, is the top layer, and the server the bottom one. There is often also a database layer below the server. We can therefore think of the <i>architecture</i> of a web application as a kind of <i>stack</i> of layers.
+Practically all web applications have (at least) two "layers": the browser, being closer to the end-user, is the top layer, and the server the bottom one. There is often also a database layer below the server. We can therefore think of the <i>architecture</i> of a web application as a <i>stack</i> of layers.
 
 Often, we also talk about the [frontend and the backend](https://en.wikipedia.org/wiki/Front_and_back_ends). The browser is the frontend, and JavaScript that runs on the browser is frontend code. The server on the other hand is the backend.
 
@@ -666,24 +666,24 @@ The diagram was made as a GitHub Markdown-file using the [Mermaid](https://docs.
 sequenceDiagram
     participant browser
     participant server
-    
+
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
     activate server
     server-->>browser: HTML document
     deactivate server
-    
+
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
     activate server
     server-->>browser: the css file
     deactivate server
-    
+
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
     activate server
     server-->>browser: the JavaScript file
     deactivate server
-    
+
     Note right of browser: The browser starts executing the JavaScript code that fetches the JSON from the server
-    
+
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
     activate server
     server-->>browser: [{ "content": "HTML is easy", "date": "2023-1-1" }, ... ]
