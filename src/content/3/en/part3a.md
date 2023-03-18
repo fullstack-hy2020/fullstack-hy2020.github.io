@@ -717,8 +717,8 @@ Postman also allows users to save requests, but the situation can get quite chao
 >
 > Problems can occur with the VS REST client if you accidentally add an empty line between the top row and the row specifying the HTTP headers. In this situation, the REST client interprets this to mean that all headers are left empty, which leads to the backend server not knowing that the data it has received is in the JSON format.
 >
-
-You will be able to spot this missing <i>Content-Type</i> header if at some point in your code you print all of the request headers with the _console.log(request.headers)_ command.
+>
+> You will be able to spot this missing <i>Content-Type</i> header if at some point in your code you print all of the request headers with the _console.log(request.headers)_ command.
 
 Let's return to the application. Once we know that the application receives data correctly, it's time to finalize the handling of the request:
 
