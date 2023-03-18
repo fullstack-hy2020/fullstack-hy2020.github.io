@@ -1029,9 +1029,9 @@ const App = (props) => {
   return (
     <div>
       {value}
-      <Button handleClick={setToValue(1000)} text="thousand" /> // highlight-line
-      <Button handleClick={setToValue(0)} text="reset" /> // highlight-line
-      <Button handleClick={setToValue(value + 1)} text="increment" /> // highlight-line
+      <Button handleClick={() => setToValue(1000)} text="thousand" /> // highlight-line
+      <Button handleClick={() => setToValue(0)} text="reset" /> // highlight-line
+      <Button handleClick={() => setToValue(value + 1)} text="increment" /> // highlight-line
     </div>
   )
 }
@@ -1275,7 +1275,7 @@ Remember to keep your console open at all times. If you see this warning in your
 
 Then perform the necessary actions to make the warning disappear. Try pasting the error message into a search engine if you get stuck.
 
-<i>Typical source of an error `Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.` is Chrome extension. Try going to `chrome://extensions/` and try disabling them one by one and refreshing React app page; the error should eventually disappear.</i>
+<i>Typical source of an error _Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist._ is Chrome extension. Try going to _chrome://extensions/_ and try disabling them one by one and refreshing React app page; the error should eventually disappear.</i>
 
 **Make sure that from now on you don't see any warnings in your console!**
 

@@ -77,6 +77,7 @@
     "mainTitle": "Plongez dans le développement Web moderne",
     "intro": "Apprenez React, Redux, Node.js, MongoDB, GraphQL et TypeScript en une seule fois ! Ce cours vous présentera le développement Web moderne basé sur JavaScript. L'accent est mis sur la création d'applications à page unique avec ReactJS qui utilisent des API REST construites avec Node.js.",
     "current": [
+      "<a href='https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/issues/1164'>Looking for contributors for the French translation</a>",
       "L'édition 2022 est lancée ! Vous pouvez continuer un cours précédent dans la nouvelle édition, consultez <a href='/en/part0/general_info#expanding-on-a-previously-completed-course'>ceci</a> pour plus de détails.",
       "Vous pouvez discuter du cours et des sujets connexes dans notre groupe dédié sur Discord <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> et sur Telegram : <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</ un>. Veuillez vous joindre à la conversation !"
     ],

@@ -135,7 +135,7 @@ Komponentti <i>App</i> yksinkertaistuu nyt hiukan
 
 ```js
 import { useQuery } from 'react-query' 
-import { getAnecdotes } from './requests' // highlight-line
+import { getNotes } from './requests' // highlight-line
 
 const App = () => {
   // ...

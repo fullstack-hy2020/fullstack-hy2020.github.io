@@ -210,31 +210,31 @@ The following assumes that the [sign in](https://dashboard.render.com/) has been
 
 After signing in, let us create a new "web service":
 
-![](../../images/3/r1.png)
+![Image showing the option to create a new Web Service](../../images/3/r1.png)
 
 The app repository is then connected to Render:
 
-![](../../images/3/r2.png)
+![Image showing the application repository on Render.](../../images/3/r2.png)
 
-The connecting seem to require that the app reopository is public.
+The connecting seem to require that the app repository is public.
 
 Next we will define the basic configurations. If the app is <i>not</i> at the root of the repository the <i>Root directory</i> needs to be given a proper value:
 
-![](../../images/3/r3.png)
+![image showing the Root Directory field as optional](../../images/3/r3.png)
 
 After this, the app starts up in the Render. The dashboard tells us the app state and the url where the app is running:
 
-![](../../images/3/r4.png)
+![The top left corner of the image shows the status of the application and its URL](../../images/3/r4.png)
 
 According to the [documentation](https://render.com/docs/deploys) every commit to GitHub should redeploy the app. For some reason this is not always working.
 
 Fortunately it is also possible to manually redeploy the app:
 
-![](../../images/3/r5.png)
+![Menu with the option to deploy latest commit highlighted](../../images/3/r5.png)
 
 Also the app logs can be seen in the dashboard:
 
-![](../../images/3/r7.png)
+![Image with the logs tab highlighted on the left corner. On the right side, the application logs](../../images/3/r7.png)
 
 We notice now from the logs that the app has been started in the port 10000. The app code gets the right port through the environment variable PORT so it is essential that the file <i>index.js</i> has been updated as follows:
 

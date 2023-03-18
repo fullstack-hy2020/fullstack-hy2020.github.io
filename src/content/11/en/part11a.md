@@ -33,7 +33,7 @@ In this part we'll be using some terms you may not be familiar with or you may n
 
 #### Branches
 
-Git allows multiple copies, streams, or versions of the code to co-exist without overwriting each other. When you first create a repository, you will be looking at the main branch (usually in git, we call this <i>master</i> or <i>main</i>, but that does vary in older projects). This is fine if there's only one developer for a project and that developer only works on one feature at a time.
+Git allows multiple copies, streams, or versions of the code to co-exist without overwriting each other. When you first create a repository, you will be looking at the main branch (usually in Git, we call this <i>master</i> or <i>main</i>, but that does vary in older projects). This is fine if there's only one developer for a project and that developer only works on one feature at a time.
 
 Branches are useful when this environment becomes more complex. In this context, each developer can have one or more branches. Each branch is effectively a copy of the main branch with some changes that make it diverge from it. Once the feature or change in the branch is ready it can be <i>merged</i> back into the main branch, effectively making that feature or change part of the main software. In this way, each developer can work on their own set of changes and not affect any other developer until the changes are ready. 
 
@@ -49,36 +49,36 @@ If you have proposed changes to the material of this course, you have already ma
 
 #### Build
 
-The term "build" has different meanings in different languages. In some interpreted languages such as Python or Ruby , there is actually no need for a build step at all. 
+The term "build" has different meanings in different languages. In some interpreted languages such as Python or Ruby, there is actually no need for a build step at all. 
 
 In general when we talk about building we mean preparing software to run on the platform where it's intended to run. This might mean, for example, that if you've written your application in TypeScript, and you intend to run it on Node, then the build step might be transpiling the TypeScript into JavaScript. 
 
 This step is much more complicated (and required) in compiled languages such as C and Rust where the code needs to be compiled into an executable.
 
-In [part 7](/en/part7/webpack) we had a look at [webpack](https://webpack.js.org/) that is the current de facto tool for building a production version of a React or any other frontend JavaScript or TypeScript codebase.
+In [part 7](/en/part7/webpack) we had a look at [Webpack](https://webpack.js.org/) that is the current de facto tool for building a production version of a React or any other frontend JavaScript or TypeScript codebase.
 
 #### Deploy
 
-Deployment refers to putting the software where it needs to be for the end-user to use it. In the case of libraries, this may simply mean pushing an npm package to a package archive (such as npmjs.com) where other users can find it and include it in their software. 
+Deployment refers to putting the software where it needs to be for the end-user to use it. In the case of libraries, this may simply mean pushing an npm package to a package archive (such as [npmjs.com](https://www.npmjs.com/)) where other users can find it and include it in their software. 
 
-Deploying a service (such as a web app) can vary in complexity. In [part 3](/en/part3/deploying_app_to_internet) our deployment workflow involved running some scripts manually and pushing the repository code to [Fly.io](https://fly.io/) or [Heroku](https://www.heroku.com/) hosting service.
+Deploying a service (such as a web app) can vary in complexity. In [part 3](/en/part3/deploying_app_to_internet) our deployment workflow involved running some scripts manually and pushing the repository code to [Fly.io](https://fly.io/) or [Render](https://render.com/) hosting service.
 
-In this part, we'll develop a simple "deployment pipeline" that deploys each commit of your code automatically to Fly.io or Heroku <strong>if</strong> the committed code does not break anything.
+In this part, we'll develop a simple "deployment pipeline" that deploys each commit of your code automatically to Fly.io or Render <i>if</i> the committed code does not break anything.
 
 Deployments can be significantly more complex, especially if we add requirements such as "the software must be available at all times during the deployment" (zero downtime deployments) or if we have to take things like [database migrations](/en/part13/migrations_many_to_many_relationships#migrations) into account. We won't cover complex deployments like those in this part but it's important to know that they exist.
 
 ### What is CI?
 
-The strict definition of CI (Continuous Integration) and the way the term is used in the industry are quite different. One influential but quite early (written already in 2006) discussion of the topic is in [Martin Fowler's blog](https://www.martinfowler.com/articles/continuousIntegration.html).
+The strict definition of CI (Continuous Integration) and the way the term is used in the industry may sometimes be different. One influential but quite early (written already in 2006) discussion of the topic is in [Martin Fowler's blog](https://www.martinfowler.com/articles/continuousIntegration.html).
 
-Strictly speaking, CI refers to <a href='https://www.atlassian.com/continuous-delivery/principles/continuous-integration-vs-delivery-vs-deployment'>merging developer changes to the main branch</a> often, Wikipedia even helpfully suggests: "several times a day". This is usually true but when we refer to CI in industry, we're usually talking about what happens after the actual merge happens.
+Strictly speaking, CI refers to <a href='https://www.atlassian.com/continuous-delivery/principles/continuous-integration-vs-delivery-vs-deployment'>merging developer changes to the main branch</a> often, Wikipedia even helpfully suggests: "several times a day". This is usually true but when we refer to CI in industry, we're quite often talking about what happens after the actual merge happens.
 
 We'd likely want to do some of these steps:
  - Lint: to keep our code clean and maintainable
- - Build: put all of our code together into software
+ - Build: put all of our code together into runnable software bundle
  - Test: to ensure we don't break existing features
  - Package: Put it all together in an easily movable batch
- - Upload/Deploy: Make it available to the world
+ - Deploy: Make it available to the world
 
 We'll discuss each of these steps (and when they're suitable) in more detail later. What is important to remember is that this process should be strictly defined. 
 
@@ -110,10 +110,10 @@ With the use of continuous integration and systematic ways of working, we can av
  - We can build our packages for production in the known environment of the CI system
 
 There are other advantages to extending this setup:
- - If we use CD with deployment every time there is a merge to the main branch, then we know that it will always work in production
+ - If we use CI/CD with deployment every time there is a merge to the main branch, then we know that it will always work in production
  - If we only allow merges when the branch is up to date with the main branch, then we can be sure that different developers don't overwrite each other's changes
 
-Note that in this part we are assuming that the main branch (named <i>master</i> or <i>main</i>) contains the code that is running in production. There are numerous different [workflows](https://www.atlassian.com/git/tutorials/comparing-workflows) one can use with git, e.g. in some cases, it may be a specific <i>release branch</i> that contains the code which is running in production.
+Note that in this part we are assuming that the main branch (named <i>master</i> or <i>main</i>) contains the code that is running in production. There are numerous different [workflows](https://www.atlassian.com/git/tutorials/comparing-workflows) one can use with Git, e.g. in some cases, it may be a specific <i>release branch</i> that contains the code which is running in production.
 
 ### Important principles
 
