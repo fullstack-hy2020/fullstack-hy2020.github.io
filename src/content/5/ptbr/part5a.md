@@ -447,7 +447,7 @@ window.localStorage.getItem('name')
 
 e o método [removeItem](https://developer.mozilla.org/pt-BR/docs/Web/API/Storage/removeItem) remove uma chave.
 
-Values in the local storage are persisted even when the page is re-rendered. The storage is [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin)-specific so each web application has its own storage.
+
 Valores no armazenamento local são persistidos mesmo quando a página é re-renderizada. O armazenamento é específico para [origem](https://developer.mozilla.org/pt-BR/docs/Glossary/Origin) , então cada aplicação web tem seu próprio armazenamento.
 
 Vamos estender nossa aplicação para que ela salve os detalhes de um usuário logado no armazenamento local.
@@ -593,7 +593,7 @@ Se um usuário estiver logado, o nome do usuário e uma lista de blogs são exib
 
 Detalhes do usuário logado não precisam ser salvos no armazenamento local ainda.
 
-**NB** Você pode implementar a renderização condicional do formulário de login da seguinte maneira, por exemplo:
+**Obs.** Você pode implementar a renderização condicional do formulário de login da seguinte maneira, por exemplo:
 
 ```js
   if (user === null) {
@@ -641,7 +641,7 @@ Implemente notificações que informem o usuário sobre operações bem-sucedida
 
 Um login mal-sucedido pode mostrar a seguinte notificação:
 
-![navagador mostrando a tentativa de login mal-sucedida](../../images/5/9e.png)
+![navegador mostrando a tentativa de login mal-sucedida](../../images/5/9e.png)
 
 As notificações devem ser visíveis por alguns segundos. Não é obrigatório adicionar cores.
 
@@ -656,11 +656,11 @@ No [fim](/en/part4/token_authentication#problems-of-token-based-authentication) 
 
 Existem duas soluções para o problema. A primeira é limitar o período de validade de um token. Isso obriga o usuário a fazer login novamente no aplicativo assim que o token expirar. A outra abordagem é salvar as informações de validade de cada token no banco de dados do backend. Essa solução geralmente é chamada de <i>server-side session</i>.
 
-Não importa como a validade dos tokens é verificada e garantida, salvar um token no armazenamento local pode conter um risco de segurança se o aplicativo tiver uma vulnerabilidade de segurança que permita ataques [Cross Site Scripting (XSS)](https://owasp.org/www-community/attacks/xss/). Um ataque XSS é possível se o aplicativo permitir que um usuário injete código JavaScript arbitrário (por exemplo, usando um formulário) que o aplicativo então execute. Ao usar o React com sensatez, não deve ser possível aplicar esse ataque, pois o [React sanitiza](https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks) todo o texto que ele renderiza, o que significa que não está executando o conteúdo renderizado como JavaScript.
+Não importa como a validade dos tokens é verificada e garantida, salvar um token no armazenamento local pode conter um risco de segurança se o aplicativo tiver uma vulnerabilidade de segurança que permita ataques [Cross Site Scripting (XSS)](https://owasp.org/www-community/attacks/xss/). Um ataque XSS é possível se o aplicativo permitir que um usuário injete código JavaScript arbitrário (por exemplo, usando um formulário) que o aplicativo então execute. Ao usar o React com sensatez, não deve ser possível aplicar esse ataque, pois o [React sanitiza](https://pt-br.reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks) todo o texto que ele renderiza, o que significa que não está executando o conteúdo renderizado como JavaScript.
 
 Se você quiser jogar com segurança, a melhor opção é não armazenar um token no armazenamento local. Essa pode ser uma opção em situações em que vazar um token pode ter consequências trágicas.
 
-Foi sugerido que a identidade de um usuário logado deve ser salva como [cookies httpOnly](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#restrict_access_to_cookies), para que o código JavaScript não tenha acesso ao token. A desvantagem dessa solução é que tornaria a implementação de aplicativos SPA um pouco mais complexa. Seria necessário implementar pelo menos uma página separada para fazer login.
+Foi sugerido que a identidade de um usuário logado deve ser salva como [cookies httpOnly](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Cookies#restrict_access_to_cookies), para que o código JavaScript não tenha acesso ao token. A desvantagem dessa solução é que tornaria a implementação de aplicativos SPA um pouco mais complexa. Seria necessário implementar pelo menos uma página separada para fazer login.
 
 
 No entanto, é bom notar que mesmo o uso de cookies httpOnly não garante nada. Até mesmo foi sugerido que os cookies httpOnly [não são mais seguros do que](https://academind.com/tutorials/localstorage-vs-cookies-xss/) o uso do armazenamento local.
