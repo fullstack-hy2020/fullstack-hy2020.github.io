@@ -151,7 +151,7 @@ const reducer = combineReducers({
 })
  // highlight-end
 
-const store = createStore(reducer)
+const store = createStore(reducer) // highlight-line
 
 console.log(store.getState())
 
