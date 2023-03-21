@@ -262,7 +262,7 @@ const App = () => {
 ```
 
 
-Um [truque](https://reactjs.org/docs/conditional-rendering.html#inline-if-with-logical--operator) um pouco estranho, mas comumente usado no React, é usado para renderizar os formulários condicionalmente:
+Um [truque](https://pt-br.reactjs.org/docs/conditional-rendering.html#inline-if-with-logical--operator) um pouco estranho, mas comumente usado no React, é usado para renderizar os formulários condicionalmente:
 
 
 
@@ -452,7 +452,7 @@ Valores no armazenamento local são persistidos mesmo quando a página é re-ren
 
 Vamos estender nossa aplicação para que ela salve os detalhes de um usuário logado no armazenamento local.
 
-Valores salvos no armazenamento são [DOMstrings](https://docs.w3cub.com/dom/domstring), então não podemos salvar um objeto JavaScript da forma como ele é. O objeto deve ser convertido para JSON primeiro, com o método _JSON.stringify_. Correspondentemente, quando um objeto JSON é lido do armazenamento local, ele deve ser convertido de volta para JavaScript com _JSON.parse_.
+Valores salvos no armazenamento são [DOMstrings](https://docs.w3cub.com/dom/domstring), então não podemos salvar um objeto JavaScript da forma como ele é. O objeto deve ser convertido para JSON primeiro, com o método _JSON.stringify_. Da mesma forma, quando um objeto JSON é lido do armazenamento local, ele deve ser convertido de volta para JavaScript com _JSON.parse_.
 
 As mudanças no método login são as seguintes:
 
@@ -487,7 +487,7 @@ Você também pode inspecionar o armazenamento local usando as ferramentas de de
 
 Nós ainda temos que modificar nossa aplicação para que, quando entrarmos na página, a aplicação verifique se os detalhes de um usuário logado já podem ser encontrados no armazenamento local. Se eles puderem, os detalhes são salvos no estado da aplicação e no <i>noteService</i>.
 
-O jeito certo de fazer isso é com um [hook de efeito](https://pt-br.reactjs.org/docs/hooks-effect.html): um mecanismo que conhecemos pela primeira vez na [parte 2](/en/part2/getting_data_from_server#effect-hooks), e usamos para buscar notas do servidor.
+O jeito certo de fazer isso é com um [hook de efeito](https://pt-br.reactjs.org/docs/hooks-effect.html): um mecanismo que conhecemos pela primeira vez na [parte 2](/ptbr/part2/getting_data_from_server#effect-hooks), e usamos para buscar notas do servidor.
 
 Nós podemos ter vários hooks de efeitos, então vamos criar um segundo para lidar com o primeiro carregamento da página:
 
@@ -652,7 +652,7 @@ As notificações devem ser visíveis por alguns segundos. Não é obrigatório 
 ### Uma nota sobre o uso do armazenamento local
 
 
-No [fim](/en/part4/token_authentication#problems-of-token-based-authentication) da última parte, nós mencionamos que o desafio da autenticação baseada em token é como lidar com a situação em que o acesso da API do titular do token à API precisa ser revogado.
+No [fim](/ptbr/part4/token_authentication#problems-of-token-based-authentication) da última parte, nós mencionamos que o desafio da autenticação baseada em token é como lidar com a situação em que o acesso da API do titular do token à API precisa ser revogado.
 
 Existem duas soluções para o problema. A primeira é limitar o período de validade de um token. Isso obriga o usuário a fazer login novamente no aplicativo assim que o token expirar. A outra abordagem é salvar as informações de validade de cada token no banco de dados do backend. Essa solução geralmente é chamada de <i>server-side session</i>.
 
