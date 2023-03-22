@@ -307,7 +307,7 @@ Now we can use _docker compose up_ to build and run the application. If we want 
 
 You can also run the application in the background with _docker compose up -d_ (_-d_ for detached) and close it with _docker compose down_.
 
-> <i>Note that some older Docker versions (especially in Windows ) do not support the  command _docker compose_. One way to circumwent this problem is to [install](https://docs.docker.com/compose/install/) the stand alone command _docker-compose_ that works mostly similarly to _docker compose_. However, the preferable fix is to update the Docker to a more recent version.</i>
+> <i>Note that some older Docker versions (especially in Windows ) do not support the  command _docker compose_. One way to circumvent this problem is to [install](https://docs.docker.com/compose/install/) the stand alone command _docker-compose_ that works mostly similarly to _docker compose_. However, the preferable fix is to update the Docker to a more recent version.</i>
 
 Creating files like _docker-compose.yml_ that <i>declare</i> what you want instead of script files that you need to run in a specific order / a specific number of times is often a great practice.
 

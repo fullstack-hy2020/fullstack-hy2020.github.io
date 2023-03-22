@@ -418,7 +418,7 @@ By [chaining promises](https://javascript.info/promise-chaining) we could keep t
 ```js
 Note.find({})
   .then(notes => {
-    return notes[0].remove()
+    return notes[0].deleteOne()
   })
   .then(response => {
     console.log('the first note is removed')
@@ -444,7 +444,7 @@ The slightly complicated example presented above could be implemented by using a
 
 ```js
 const notes = await Note.find({})
-const response = await notes[0].remove()
+const response = await notes[0].deleteOne()
 
 console.log('the first note is removed')
 ```
@@ -462,7 +462,7 @@ const main = async () => { // highlight-line
   const notes = await Note.find({})
   console.log('operation returned the following notes', notes)
 
-  const response = await notes[0].remove()
+  const response = await notes[0].deleteOne()
   console.log('the first note is removed')
 }
 
@@ -581,7 +581,7 @@ const initialNotes = [
 const nonExistingId = async () => {
   const note = new Note({ content: 'willremovethissoon' })
   await note.save()
-  await note.remove()
+  await note.deleteOne()
 
   return note._id.toString()
 }

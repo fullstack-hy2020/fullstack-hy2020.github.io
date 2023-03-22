@@ -65,7 +65,7 @@ To use the eslint-plugin-jest plugin in ESLint, we need to include it in the plu
 }
 ```
 
-To see that the setup is working, create a directory <i>\_\_tests\_\_</i> in the <i>src</i> directory and in the created directory create a file <i>example.js</i>. In that file, add this simple test:
+To see that the setup is working, create a directory <i>\_\_tests\_\_</i> in the <i>src</i> directory and in the created directory create a file <i>example.test.js</i>. In that file, add this simple test:
 
 ```javascript
 describe('Example', () => {
@@ -75,7 +75,7 @@ describe('Example', () => {
 });
 ```
 
-Now, let's run our example test by running <em>npm test</em>. The command's output should indicate that the test located in the <i>src/\_\_tests\_\_/example.js</i> file is passed.
+Now, let's run our example test by running <em>npm test</em>. The command's output should indicate that the test located in the <i>src/\_\_tests\_\_/example.test.js</i> file is passed.
 
 ### Organizing tests
 
@@ -187,7 +187,7 @@ The second very important React Native Testing Library concept is firing events.
 ```javascript
 import { useState } from 'react';
 import { Text, TextInput, Pressable, View } from 'react-native';
-import { render, fireEven, screen } from '@testing-library/react-native';
+import { render, fireEvent, screen } from '@testing-library/react-native';
 
 const Form = ({ onSubmit }) => {
   const [username, setUsername] = useState('');

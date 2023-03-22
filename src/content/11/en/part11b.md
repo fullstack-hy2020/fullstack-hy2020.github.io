@@ -24,14 +24,14 @@ In general, to have CI operate on a repository, we need a few things:
 - A repository (obviously)
 - Some definition of what the CI needs to do:
   This can be in the form of a specific file inside the repository or it can be defined in the CI system
-- The CI needs to be aware that the repository (and the file within it) exist
+- The CI needs to be aware that the repository (and the configuration file within it) exist
 - The CI needs to be able to access the repository
 - The CI needs permissions to perform the actions it is supposed to be able to do:
   For example, if the CI needs to be able to deploy to a production environment, it needs <i>credentials</i> for that environment.
 
 That's the traditional model at least, we'll see in a minute how GitHub Actions short-circuit some of these steps or rather make it such that you don't have to worry about them!
 
-GitHub Actions have a great advantage over self-hosted solutions: the repository is hosted with the CI provider. In other words, Github provides both the repository and the CI platform. This means that if we've enabled actions for a repository, GitHub is already aware of the fact that we have workflows defined and what those definitions look like.
+GitHub Actions have a great advantage over self-hosted solutions: the repository is hosted with the CI provider. In other words, GitHub provides both the repository and the CI platform. This means that if we've enabled actions for a repository, GitHub is already aware of the fact that we have workflows defined and what those definitions look like.
 
 </div>
 
@@ -56,6 +56,8 @@ Once the process has been finished, you should be redirected to your brand new r
 ![](../../images/11/2.png)
 
 Clone the project now to your machine. As always, when starting with a new code, the most obvious place to look first is the file <code>package.json</code> 
+
+<i>**NOTE** since the project is already a bit old, you need Node 16 to work with it!</i>
 
 Try now the following:
 - install dependencies (by running <code>npm install</code>)
@@ -144,7 +146,7 @@ To learn more about which events can be used to trigger workflows, please refer 
 
 ### Exercises 11.3-11.4.
 
-To tie this all together, let us now get Github Actions up and running in the example project!
+To tie this all together, let us now get GitHub Actions up and running in the example project!
 
 #### 11.3 Hello world!
 
@@ -178,7 +180,7 @@ As the output of command <code>ls -l</code> shows, by default, the virtual envir
 
 After completing the first exercises, you should have a simple but pretty useless workflow set up. Let's make our workflow do something useful.
 
-Let's implement a Github Action that will lint the code. If the checks don't pass, Github Actions will show a red status. 
+Let's implement a GitHub Action that will lint the code. If the checks don't pass, GitHub Actions will show a red status. 
 
 At start, the workflow that we will save to file <code>pipeline.yml</code> looks like this:
 
@@ -223,7 +225,7 @@ jobs:
 
 The [uses](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsuses) keyword tells the workflow to run a specific <i>action</i>. An action is a reusable piece of code, like a function. Actions can be defined in your repository in a separate file or you can use the ones available in public repositories. 
 
-Here we're using a public action [actions/checkout](https://github.com/actions/checkout) and we specify a version (<code>@v3</code>) to avoid potential breaking changes if the action gets updated. The <code>checkout</code> action does what the name implies: it checkouts the project source code from git.
+Here we're using a public action [actions/checkout](https://github.com/actions/checkout) and we specify a version (<code>@v3</code>) to avoid potential breaking changes if the action gets updated. The <code>checkout</code> action does what the name implies: it checkouts the project source code from Git.
 
 Secondly, as the application is written in JavaScript, Node.js must be set up to be able to utilize the commands that are specified in <code>package.json</code>. To set up Node.js, [actions/setup-node](https://github.com/actions/setup-node) action can be used. Version <code>16</code> is selected because it is the version the application is using in the production environment.
 
@@ -254,7 +256,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
-      - name: npm install # highlight-line
+      - name: Install dependencies # highlight-line
         run: npm install # highlight-line
 ```
 
@@ -273,11 +275,19 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
-      - name: npm install 
+      - name: Install dependencies 
         run: npm install  
-      - name: lint  # highlight-line
+      - name: Check style  # highlight-line
         run: npm run eslint # highlight-line
 ```
+
+Note that the _name_ of a step is optional, if you define a step as follows
+
+```yml
+- run: npm run eslint
+```
+
+the command that is run is used as the default name.
 
 </div>
 
@@ -341,18 +351,6 @@ Define a npm script <code>test:e2e</code> for running the e2e tests from the com
 
 **Note** do not include the word <i>spec</i> in the Cypress test file name, that would cause also Jest to run it, and it might cause problems. 
 
-**Note2** end to end tests are pretty slow and than can cause problems when run with the GitHub Actions. Slowness can be remedied by changing <i>App.jsx</i> to fetch a bit less Pokemons, eg. 50 works fine:
-
-```js
-const { 
-  data: pokemonList, error, isLoading 
-} = useApi('https://pokeapi.co/api/v2/pokemon/?limit=50', mapResults) // highlight-line
-```
-
-The same change must be done in the test file <i>App.jest.spec.jsx</i>
-
-The change is now (16th September 2022) done in the repository, but if you have fetched the code earlier, there might still be a bigger number. 
-
 **Another thing to note** is that despite the page renders the Pokemon names by starting with a capital letter, the names are actually written with lower case letters in the source, so it is <code>ivysaur</code> instead of <code>Ivysaur</code>!
 
 Ensure that the test passes locally. Remember that the Cypress tests _assume that the application is up and running_ when you run the test! If you have forgotten the details (that happened to me too!), please see [part 5](/en/part5/end_to_end_testing) how to get up and running with Cypress.
@@ -361,7 +359,7 @@ Once the end to end test works in your machine, include it in the GitHub Action 
 
 ```js
 - name: e2e tests
-  uses: cypress-io/github-action@v2
+  uses: cypress-io/github-action@v5
   with:
     command: npm run test:e2e
     start: npm run start-prod
@@ -370,18 +368,8 @@ Once the end to end test works in your machine, include it in the GitHub Action 
 
 Three options are used. [command](https://github.com/cypress-io/github-action#custom-test-command) specifies how to run Cypress tests. [start](https://github.com/cypress-io/github-action#start-server) gives npm script that starts the server and [wait-on](https://github.com/cypress-io/github-action#wait-on) says that before the tests are run, the server should have started in url <http://localhost:5000>.
 
-If you are using Cypress 10.X, you may need to revise the steps as follows:
-  
-```js
-- name: e2e tests
-  uses: cypress-io/github-action@v4
-  with:
-     build: npm run build
-     start: npm run start-prod
-     wait-on: http://localhost:5000
-```  
-  
-Once you are sure that the pipeline works, write another test that ensures that one can navigate from the main page to the page of a particular Pokemon, e.g. <i>ivysaur</i>. The test does not need to be a complex one, just check that when you navigate a link, the page has some right content, such as the string <i>chlorophyll</i> in the case of <i>ivysaur</i>.
+
+Once you are sure that the pipeline works, <i>write another test</i> that ensures that one can navigate from the main page to the page of a particular Pokemon, e.g. <i>ivysaur</i>. The test does not need to be a complex one, just check that when you navigate a link, the page has some right content, such as the string <i>chlorophyll</i> in the case of <i>ivysaur</i>.
 
 **Note** also the Pokemon abilities are written with lower case letters, the capitalization is done in CSS, so <i>do not</i> search eg. for <i>Chlorophyll</i> but <i>chlorophyll</i>.
 

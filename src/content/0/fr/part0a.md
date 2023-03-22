@@ -79,52 +79,52 @@ Vous ne pouvez passer l'examen qu'après avoir soumis suffisamment d'exercices p
 #### Partie 6 - Développement Web Full Stack, extension 1 (1 cr, CSM141082)
 En soumettant au moins 127 des exercices pour les parties 0 à 7 tout en travaillant sur le cours de base, vous pouvez recevoir un crédit supplémentaire grâce à cette extension.
 - Soumettez au moins 127 exercices pour les parties 0-7.
-- [Inscrivez-vous à la partie 6 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-c67dc747-1d6a-43cb-b40b-9eacf425dcc0).
+- [Inscrivez-vous à la partie 6 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-de83e85f-a06e-4258-ad8c-30326d76228e).
 - [Demander des crédits pour la partie 6](/fr/part0/informations_generales#comment-obtenir-vos-credits).
 
 #### Partie 7 - Développement Web Full Stack, extension 2 (1 cr, CSM141083)
 En soumettant au moins 138 des exercices pour les parties 0 à 7 tout en travaillant sur le cours de base, vous pouvez recevoir un crédit supplémentaire grâce à cette extension.
 - Soumettez au moins 138 exercices pour les parties 0-7.
-- [Inscrivez-vous à la partie 7 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-3016e9c9-0fdc-4ee3-9e9b-38176359f9f3).
+- [Inscrivez-vous à la partie 7 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-53ccca2f-8e77-47e3-931a-63f9d5c8cc2e).
 - [Demander des crédits pour la partie 7](/fr/part0/informations_generales#comment-obtenir-vos-credits).
 
 #### Partie 8 - Développement Web Full Stack : GraphQL (1 cr, CSM14113)
 En soumettant au moins 22/26 des exercices de la partie 8 du cours, GraphQL, vous pouvez obtenir un crédit supplémentaire. La partie 8 peut être effectuée à tout moment après la partie 5, car son contenu est indépendant des parties 6 et 7.
 - Soumettez au moins 22/26 exercices pour la partie 8.
-- [Inscrivez-vous à la partie 8 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-067b1506-0307-4118-9e2b-292e0b81e491).
+- [Inscrivez-vous à la partie 8 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-b7f5ef26-b780-45f2-962d-f8d3432cae78).
 - [Demander des crédits pour la partie 8](/fr/part0/informations_generales#comment-obtenir-vos-credits).
 
 #### Partie 9 - Développement Web Full Stack : TypeScript (1 cr, CSM14110)
 En soumettant au moins 24/29 des exercices de la partie 9 du cours, TypeScript, vous pouvez obtenir un crédit supplémentaire. Il est recommandé de terminer les parties 0 à 7 avant de participer à la partie 9.
 - Soumettre au moins 24/29 exercices pour la partie 9.
-- [Inscrivez-vous à la partie 9 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-d9125f89-a440-48e1-898a-ee4e16b06cdb).
+- [Inscrivez-vous à la partie 9 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-e45a36b7-24d7-424b-9dc5-1c9b59a52a23).
 - [Demander des crédits pour la partie 9](/fr/part0/informations_generales#comment-obtenir-vos-credits).
 
 #### Partie 10 - Développement Web Full Stack : React Native (2 cr, CSM14111)
 En soumettant 25 exercices pour la partie 10 du cours sur React Native, vous pouvez gagner deux crédits supplémentaires. Vous trouverez plus d'informations sur les conditions préalables, la soumission d'exercices et les crédits de cette partie dans[partie 10](/en/part10/introduction_to_react_native).
 - Soumettez au moins 25 exercices pour la partie 10.
-- [Inscrivez-vous à la partie 10 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-aa395a19-4625-44a9-8301-5fbb946c6ed6).
+- [Inscrivez-vous à la partie 10 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-ec172afe-bc01-46ab-af23-694311f1950a).
 - [Demander des crédits pour la partie 10](/fr/part0/informations_generales#comment-obtenir-vos-credits).
 
 #### Partie 11 - Développement Web Full Stack : Intégration continue / Livraison continue (1 cr, CSM14112)
 
 En soumettant tous les exercices de la partie 11 du cours sur l'intégration/livraison continue, vous pouvez gagner un crédit supplémentaire. Vous trouverez plus d'informations sur les prérequis de cette partie et la soumission des exercices dans [partie 11](/en/part11).
 - Soumettez tous les exercices de la partie 11.
-- [Inscrivez-vous à la partie 11 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-4cb66c68-da12-422e-a34d-c8e8e7c8db01).
+- [Inscrivez-vous à la partie 11 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-23e79dc2-64e4-4f7e-86a4-8923a411443c).
 - [Demander des crédits pour la partie 11](/fr/part0/informations_generales#comment-obtenir-vos-credits).
 
 #### Partie 12 - Développement Web Full Stack : Conteneurs (1 cr, CSM141084)
 
 En soumettant tous les exercices de la partie 12 du cours sur la technologie des conteneurs, vous pouvez gagner un crédit supplémentaire. Vous trouverez plus d'informations sur les prérequis de cette partie et la soumission des exercices dans [partie 12](/en/part12).
 - Soumettez tous les exercices de la partie 12.
-- [Inscrivez-vous à la partie 12 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-51a6f590-607c-4e34-bd6f-2d87e2203d9a).
+- [Inscrivez-vous à la partie 12 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-bb07e139-3de0-4cb3-843d-414b1bb992cc).
 - [Demander des crédits pour la partie 12](/fr/part0/informations_generales#comment-obtenir-vos-credits).
 
 #### Partie 13 - Développement Web Full Stack : bases de données relationnelles (1 cr, CSM14114)
 
 En soumettant tous les exercices de la partie 13 du cours sur les bases de données relationnelles, vous pouvez gagner un crédit supplémentaire. Vous trouverez plus d'informations sur les prérequis de cette partie et la soumission des exercices dans [partie 13](/en/part13).
 - Soumettez tous les exercices de la partie 13.
-- [Inscrivez-vous à la partie 13 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-6e548d4e-75bf-483b-8426-c65d8c4e161c).
+- [Inscrivez-vous à la partie 13 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-a9204ed8-1346-4174-b27c-9e02c6136088).
 - [Demander des crédits pour la partie 13](/fr/part0/informations_generales#comment-obtenir-vos-credits).
 
 ### Étudier le cours en quelques mots

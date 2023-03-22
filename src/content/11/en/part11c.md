@@ -9,9 +9,9 @@ lang: en
 
 Having written a nice application it's time to think about how we're going to deploy it to the use of real users. 
 
-In [part 3](/en/part3/deploying_app_to_internet) of this course, we did this by simply by running a single command from terminal to get the code up and running the servers of the cloud provider [Fly.io](https://fly.io/) or [Heroku](https://www.heroku.com/home).
+In [part 3](/en/part3/deploying_app_to_internet) of this course, we did this by simply by running a single command from terminal to get the code up and running the servers of the cloud provider [Fly.io](https://fly.io/) or [Render](hhttps://render.com/).
 
-It is pretty simple to release software in Fly.io and Heroku at least compared to many other types of hosting setups but it still contains risks: nothing prevents us from accidentally pushing broken code to production.
+It is pretty simple to release software in Fly.io and Render at least compared to many other types of hosting setups but it still contains risks: nothing prevents us from accidentally releasing broken code to production.
 
 Next, we're going to look at the principles of making a deployment safely and some of the principles of deploying software on both a small and large scale. 
 
@@ -23,7 +23,7 @@ One on the phrasing of Murphy's Law holds that:
   "Anything that can go wrong will go wrong."
 
 It's important to remember this when we plan out our deployment system. Some of the things we'll need to consider could include:
- - What if my PC crashes or hangs during deployment?
+ - What if my computer crashes or hangs during deployment?
  - I'm connected to the server and deploying over the internet, what happens if my internet connection dies?
  - What happens if any specific instruction in my deployment script/system fails?
  - What happens if, for whatever reason, my software doesn't work as expected on the server I'm deploying to? Can I roll back to a previous version?
@@ -34,7 +34,7 @@ These are just a small selection of what can go wrong during a deployment, or ra
 Another important rule to remember when it comes to deployments (and CI in general) is:
   "Silent failures are **very** bad!"
 
-This doesn't mean that failures need to be shown to the users of the software, it means we need to be aware if anything goes wrong. If we are aware of a problem, we can fix it, if the deployment system doesn't give any errors but fails, we may end up in a state where we believe we have fixed a critical bug but the deployment failed, leaving the bug in our production environment and us unaware of the situation.
+This doesn't mean that failures need to be shown to the users of the software, it means we need to be aware if anything goes wrong. If we are aware of a problem, we can fix it. If the deployment system doesn't give any errors but fails, we may end up in a state where we believe we have fixed a critical bug but the deployment failed, leaving the bug in our production environment and us unaware of the situation.
 
 ### What does a good deployment system do?
 
@@ -76,13 +76,13 @@ You'll need the token soon for your deployment workflow!
 
 Before setting up the deployment pipeline let us ensure that a manual deployment with the command <i>flyctl deploy</i> works.
 
-You most likely need to do at least two changes. Firstly, define the Node version to use in the file <i>package.json</i> to match one used in your machine. For me it is 16.13.2:
+You most likely need to do at least three changes. Firstly, define the Node version to use in the file <i>package.json</i> to match one used in your machine. For me it is 16.19.1:
 
 ```json
 {
   // highlight-start
   "engines": { 
-    "node": "16.13.2" 
+    "node": "16.19.1" 
   },
   // highlight-end
   "name": "fullstackopen-cicd",
@@ -100,8 +100,22 @@ The configuration file <i>fly.toml</i> should also be modified to include the fo
 
 [processes]
   app = "node app.js"
+
+[build]
+  [build.args]
+    NODE_VERSION = "16.19.1"
 ```
 
+Besides these, we should also move _webpack_ from _devDependencies_ to _dependencies_ since our build step requires it to be installed:
+
+```json
+{
+  // ...
+  "dependencies": {
+    "webpack": "^4.43.0",
+  }
+}
+```
 
 The <i>release\_command</i> under [deploy](https://fly.io/docs/reference/configuration/) now ensures that the production built will be done before starting up the app. In [processes](https://fly.io/docs/reference/configuration/#the-processes-section) we define the command that starts the application. Without these changes Fly.io just starts the React dev server and that causes it to shut down since the app itself does not start up.
 
@@ -180,7 +194,7 @@ v0     	false 	release 	failed   	Deploy image           	mluukkai@iki.fi	6h19m 
 
 So finally in the 5th deployment (version v4) I got the configuration right and that ended in a succeeding release.
 
-Besides the rudimentary TCP health check, it is extremely beneficial to have also some "application level" health checks that ensure that the app for real is in functional state. One possibility for this is a HTTP-level check defined in section [
+Besides the rudimentary TCP health check, it is extremely beneficial to have also some "application level" health checks ensuring that the app for real is in functional state. One possibility for this is a HTTP-level check defined in section [
 services.http_checks](https://fly.io/docs/reference/configuration/#services-tcp_checks) that can be used to ensure that the app is responding to the HTTP requests.
 
 Add a simple endpoint for doing an application health check to the backend. You may e.g. copy this code:
@@ -281,6 +295,27 @@ Now when you know that the script based health check works, it is time to define
 <i>Write a script ensuring the health check endpoint (that is, the GET request to '/health') not only works, but also returns the correct string 'ok'.</i>
 
 You propably should use [curl](https://curl.se/) in the script to do the HTTP request. You most likely need to Google how to get hold to the returned string and compare it with the expected value 'ok'.
+
+By default _curl_ does not exist in the Fly.io virtual machine. You can install it by adding the following line in the file _Dockerfile_ that gets created in your project root directory when Fly.io app is set up:
+
+```bash
+# ...
+
+FROM debian:bullseye
+
+RUN apt-get update; apt install -y curl // highlight-line
+
+LABEL fly_launch_runtime="nodejs"
+
+COPY --from=builder /root/.volta /root/.volta
+COPY --from=builder /app /app
+
+WORKDIR /app
+ENV NODE_ENV production
+ENV PATH /root/.volta/bin:$PATH
+
+CMD [ "npm", "run", "start" ]
+```
 
 It is <strong>strongly advisable</strong> to check first locally that the script works since so many things can go wrong in it, and when run in GitHub Action, you can not do any debug printing. If and <i> when</i> things do not work as indended, it is also a very good idea to log in to the virtual machine (with <i>flyctl ssh console</i>) and check that the script works when ran manually there.
 

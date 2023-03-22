@@ -380,6 +380,18 @@ userSchema.plugin(uniqueValidator) // highlight-line
 // ...
 ```
 
+Huom: asentaessasi kirjastoa _mongoose-unique-validator_ saatat törmätä seuraavaan virheilmoitukseen:
+
+![](../../images/4/uniq.png)
+
+Syynä tälle on se, että kirjasto ei ole kirjoitushetkellä (13.3.2023) vielä yhteensopiva Mongoosen version 7 kanssa. Jos törmäät virheeseen, voit ottaa käyttöösi Mongoosen vanhemman version suorittamalla komennon
+
+```
+npm install mongoose@6
+```
+
+Tämän jälkeen kirjaston _mongoose-unique-validator_ asentaminen onnistuu.
+
 Voisimme toteuttaa käyttäjien luomisen yhteyteen myös muita tarkistuksia, esim. onko käyttäjätunnus tarpeeksi pitkä, koostuuko se sallituista merkeistä ja onko salasana tarpeeksi hyvä. Jätämme ne kuitenkin vapaaehtoiseksi harjoitustehtäväksi.
 
 Ennen kuin menemme eteenpäin, lisätään sovellukseen alustava versio kaikki käyttäjät palauttavasta käsittelijäfunktiosta:

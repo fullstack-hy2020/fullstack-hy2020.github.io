@@ -1197,7 +1197,7 @@ Make a test for ensuring that the user who created a blog can delete it.
 
 #### 5.22: bloglist end to end testing, step6
 
-Make a test for ensuring that other users but the creator do not see the delete button.
+Make a test for ensuring that only the creator can see the delete button of a blog, not anyone else.
 
 #### 5.23: bloglist end to end testing, step7
 
