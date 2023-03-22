@@ -1,14 +1,14 @@
 ---
 mainImage: ../../../images/part-5.svg
 part: 5
-lang: en
+lang: ptbr
 ---
 
 <div class="intro">
 
-In this part we return to the frontend, first looking at different possibilities for testing the React code.  We will also implement token based authentication which will enable users to log in to our application.
+Nessa parte, nós retornamos ao frontend, analisando as diferentes possibilidades de testar o código em React. Também implementaremos uma autenticação baseada em token, que irá permitir que os usuários façam login na nossa aplicação.
 
-<i>Part updated 25th Jan 2023</i>
-- <i>No major changes</i>
+<i>Parte atualizada em 25 de janeiro de 2023</i>
+- <i>Sem maiores atualizações</i>
 
 </div>
