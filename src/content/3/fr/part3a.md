@@ -1147,7 +1147,7 @@ Vous pouvez trouver le code de notre application actuelle dans son intégralité
 
 #### 3.7: Backend du répertoire téléphonique étape 7
 
-Ajoutez le middleware [morgan](https://github.com/expressjs/morgan) à votre application pour la journalisation. Configurez-le pour qu'il consigne les messages sur votre console en selon la <i>petite</i> configuration.
+Ajoutez le middleware [morgan](https://github.com/expressjs/morgan) à votre application pour la journalisation. Configurez-le pour qu'il consigne les messages sur votre console en selon la configuration <i>tiny</i>.
 
 La documentation de Morgan n'est pas la meilleure, et vous devrez peut-être passer un certain temps à comprendre comment le configurer correctement. Cependant, la plupart des documentations dans le monde tombent dans la même catégorie, il est donc bon d'apprendre à déchiffrer et à interpréter une documentation cryptique dans tous les cas.
 
