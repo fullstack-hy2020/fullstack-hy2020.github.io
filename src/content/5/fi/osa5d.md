@@ -108,7 +108,7 @@ describe('Note ', function() {
 })
 ```
 
-Testin suoritus käynnistetään kilkkaamalla testin nimeä Cypressin näkymästä:
+Testin suoritus käynnistetään klikkaamalla testin nimeä Cypressin näkymästä:
 
 ![](../../images/5/55new.png)
 
