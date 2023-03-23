@@ -11,15 +11,15 @@ Olemme noudattaneet sovelluksen tilan hallinnassa Reactin suosittelemaa käytän
 
 ### Flux-arkkitehtuuri
 
-Facebook kehitti jo Reactin historian varhaisvaiheissa tilan hallinnan ongelmia helpottamaan [Flux](https://facebook.github.io/flux/docs/in-depth-overview)-arkkitehtuurin. Fluxissa sovelluksen tilan hallinta erotetaan kokonaan Reactin komponenttien ulkopuolisiin varastoihin eli <i>storeihin</i>. Storessa olevaa tilaa ei muuteta suoraan, vaan tapahtumien eli <i>actionien</i> avulla.
+Facebook kehitti jo Reactin historian varhaisvaiheissa tilan hallinnan ongelmia helpottamaan [Flux]((https://facebook.github.io/flux/docs/in-depth-overview/)-arkkitehtuurin. Fluxissa sovelluksen tilan hallinta erotetaan kokonaan Reactin komponenttien ulkopuolisiin varastoihin eli <i>storeihin</i>. Storessa olevaa tilaa ei muuteta suoraan, vaan tapahtumien eli <i>actionien</i> avulla.
 
 Kun action muuttaa storen tilaa, renderöidään näkymät uudelleen:
 
-![Action -> Dispatcher -> Store -> View](https://facebook.github.io/flux/img/overview/flux-simple-f8-diagram-1300w.png)
+![Action -> Dispatcher -> Store -> View](../../images/6/flux1.png)
 
 Jos sovelluksen käyttö (esim. napin painaminen) aiheuttaa tarpeen tilan muutokseen, tehdään muutos actionin avulla. Tämä taas aiheuttaa uuden näytön renderöitymisen:
 
-![Action -> Dispatcher -> Store -> View -> Action -> Dispatcher -> View](https://facebook.github.io/flux/img/overview/flux-simple-f8-diagram-with-client-action-1300w.png)
+![Action -> Dispatcher -> Store -> View -> Action -> Dispatcher -> View](../../images/6/flux2.png)
 
 Flux tarjoaa siis standardin tavan sille miten ja missä sovelluksen tila pidetään sekä tavalle tehdä tilaan muutoksia.
 
