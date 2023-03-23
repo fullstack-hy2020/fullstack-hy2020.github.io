@@ -1078,7 +1078,7 @@ Cela signifie que si une demande ne génère pas d'effets secondaires, le résul
 Si nous effectuons une requête HTTP PUT vers l'url <i>/api/notes/10</i>  et que nous envoyons avec cette requête les données <em>{ content: "no side effects!", important: true }</em>, le résultat est le même, quel que soit le nombre de fois où la demande est envoyée
 
 
-Comme pour la <i>sécurité</i> de la requête GET, l'<i>idempotence</i> n'est également qu'une recommandation de la norme HTTP et ne peut être garantie simplement sur la base du type de requête. However, when our API adheres to RESTful principles, then GET, HEAD, PUT, and DELETE requests are used in such a way that they are idempotent.
+Comme pour la <i>sécurité</i> de la requête GET, l'<i>idempotence</i> n'est également qu'une recommandation de la norme HTTP et ne peut être garantie simplement sur la base du type de requête. Cependant, lorsque votre API adhère aux principes RESTfull, les requêtes GET, HEAD, PUT et DELETE sont utilisées de telle sorte qu'elles sont idempotentes.
 
 
 POST est le seul type de requête HTTP qui n'est ni <i>sûr</i> ni <i>idempotent</i>. Si nous envoyons 5 requêtes HTTP POST différentes à <i>/api/notes</i> avec un corps de <em>{content: "many same", important: true}</em>, les 5 notes qui en résultent sur le serveur auront toutes le même contenu.
