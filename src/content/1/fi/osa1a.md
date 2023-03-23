@@ -518,7 +518,7 @@ ja ikä
 
 Virheen korjauksen jälkeen kannattaa konsolin virheilmoitukset tyhjentää painamalla Ø ja tämän jälkeen uudelleenladata sivun sisältö ja varmistua että virheilmoituksia ei näy.
 
-Pieni lisähuomio edelliseen. React sallii myös taulukoiden renderöimisen <i>jos</i> taulukko sisältää arvoja, jotka kelpaavat renderöitäviksi (kuten nimeroita tai merkkijonoja). Eli seuraava ohjelma kyllä toimisi, vaikka tulos ei ole kenties se mitä haluamme: 
+Pieni lisähuomio edelliseen. React sallii myös taulukoiden renderöimisen <i>jos</i> taulukko sisältää arvoja, jotka kelpaavat renderöitäviksi (kuten numeroita tai merkkijonoja). Eli seuraava ohjelma kyllä toimisi, vaikka tulos ei ole kenties se mitä haluamme: 
 
 ```js
 const App = () => {
