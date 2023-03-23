@@ -200,7 +200,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 )
 ```
 
-You propably noticed that we used a [type assertion](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions) for the return value of the function *document.getElementById*
+You probably noticed that we used a [type assertion](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions) for the return value of the function *document.getElementById*
 
 ```ts
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(  // highlight-line
