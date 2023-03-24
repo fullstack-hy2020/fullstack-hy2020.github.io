@@ -363,7 +363,6 @@ const { ApolloServerPluginDrainHttpServer } = require('@apollo/server/plugin/dra
 const { makeExecutableSchema } = require('@graphql-tools/schema')
 const express = require('express')
 const cors = require('cors')
-const bodyParser = require('body-parser')
 const http = require('http')
 // highlight-end
 
