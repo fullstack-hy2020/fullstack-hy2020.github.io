@@ -779,6 +779,7 @@ Vamos a crear un archivo [.eslintignore](https://eslint.org/docs/user-guide/conf
 ```bash
 node_modules
 build
+.eslintrc.js
 ```
 
 Ahora los directorios <em>build</em> y <em>node_modules</em> se omitirán al realizar el linting.
@@ -826,7 +827,7 @@ export default Togglable
 
 Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part5-7</i> de [este repositorio de github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-7).
 
-Ten en cuenta que create-react-app también tiene una [configuracion de ESLint por defecto](https://www.npmjs.com/package/eslint-config-react-app), que ahora sobrescribimos. [La documentacion](https://create-react-app.dev/docs/setting-up-your-editor/#extending-or-replacing-the-default-eslint-config) menciona que esta bien reemplazar la configuración por defecto pero no nos anima a hacerlo:
+Tenga en cuenta que create-react-app también tiene una [configuracion de ESLint por defecto](https://www.npmjs.com/package/eslint-config-react-app), que ahora sobrescribimos. [La documentacion](https://create-react-app.dev/docs/setting-up-your-editor/#extending-or-replacing-the-default-eslint-config) menciona que está bien reemplazar la configuración por defecto, pero no nos anima a hacerlo:
 <i>Recomendamos enérgicamente extender la configuración base, ya que removerla podría introducir problemas difíciles de encontrar</i>.
 
 </div>
@@ -841,7 +842,7 @@ Defina PropTypes para uno de los componentes de su aplicación.
 
 #### 5.12: Frontend de la lista de blogs, paso 12
 
-Agregue ESlint al proyecto. Define la configuración a tu gusto. Corrija todos los errores de linter.
+Agregue ESlint al proyecto. Defina la configuración a su gusto. Corrija todos los errores de linter.
 
 Create-react-app ha instalado ESlint en el proyecto de forma predeterminada, por lo que todo lo que le queda por hacer es definir la configuración deseada en el archivo <i>.eslintrc.js</i>.
 
