@@ -108,7 +108,7 @@ const App = () => {
 }
 ```
 
-Retrieving data from the server is still done in the familiar way with the Axios <i>get</i> method. However, the Axios method call is now wrapped in a [query](https://react-query-v3.tanstack.com/guides/queries) formed with the [useQuery](https://react-query-v3.tanstack.com/reference/useQuery) function. The first parameter of the function call is a string <i>notes</i> which acts as a [key](https://react-query-v3.tanstack.com/guides/query-keys)  to the query defined, i.e. the list of notes.
+Retrieving data from the server is still done in the familiar way with the Axios <i>get</i> method. However, the Axios method call is now wrapped in a [query](https://tanstack.com/query/latest/docs/react/guides/queries) formed with the [useQuery](https://tanstack.com/query/latest/docs/react/reference/useQuery) function. The first parameter of the function call is a string <i>notes</i> which acts as a [key](https://tanstack.com/query/latest/docs/react/guides/query-keys)  to the query defined, i.e. the list of notes.
 
 The return value of the <i>useQuery</i> function is an object that indicates the status of the query. The output to the console illustrates the situation:
 
@@ -189,7 +189,7 @@ const App = () => {
 }
 ```
 
-To create a new note, a [mutation](https://react-query-v3.tanstack.com/guides/mutations) is defined using the function [useMutation](https://react-query-v3.tanstack.com/reference/useMutation):
+To create a new note, a [mutation](https://tanstack.com/query/latest/docs/react/guides/mutations) is defined using the function [useMutation](https://tanstack.com/query/latest/docs/react/reference/useMutation):
 
 ```js
 const newNoteMutation = useMutation(createNote)
@@ -205,7 +205,7 @@ newNoteMutation.mutate({ content, important: true })
 
 Our solution is good. Except it doesn't work. The new note is saved on the server, but it is not updated on the screen.
 
-In order to render a new note as well, we need to tell React Query that the old result of the query whose key is the string <i>notes</i> should be [invalidated](https://react-query-v3.tanstack.com/guides/invalidations-from-mutations).
+In order to render a new note as well, we need to tell React Query that the old result of the query whose key is the string <i>notes</i> should be [invalidated](https://tanstack.com/query/latest/docs/react/guides/invalidations-from-mutations).
 
 Fortunately, invalidation is easy, it can be done by defining the appropriate <i>onSuccess</i> callback function to the mutation:
 
@@ -286,7 +286,7 @@ The consequence of this, of course, is that after the PUT request that causes th
 
 If the amount of data retrieved by the application is not large, it doesn't really matter. After all, from a browser-side functionality point of view, making an extra HTTP GET request doesn't really matter, but in some situations it might put a strain on the server.
 
-If necessary, it is also possible to optimize performance [by manually updating](https://react-query-v3.tanstack.com/guides/updates-from-mutation-responses) the query state maintained by React Query.
+If necessary, it is also possible to optimize performance [by manually updating](https://tanstack.com/query/latest/docs/react/guides/updates-from-mutation-responses) the query state maintained by React Query.
 
 The change for the mutation adding a new note is as follows:
 
@@ -317,7 +317,7 @@ If we closely follow the browser's network tab, we notice that React Query retri
 
 ![dev tools notes app with input text field highlighted and arrow on network over notes request as 200](../../images/6/62new.png)
 
-What is going on? By reading the [documentation](https://react-query-v3.tanstack.com/reference/useQuery), we notice that the default functionality of React Query's queries is that the queries (whose status is <i>stale</i>) are updated when <i>window focus</i>, i.e. the active element of the application's user interface, changes. If we want, we can turn off the functionality by creating a query as follows:
+What is going on? By reading the [documentation](https://tanstack.com/query/latest/docs/react/reference/useQuery), we notice that the default functionality of React Query's queries is that the queries (whose status is <i>stale</i>) are updated when <i>window focus</i>, i.e. the active element of the application's user interface, changes. If we want, we can turn off the functionality by creating a query as follows:
 
 ```js
 const App = () => {
@@ -334,7 +334,7 @@ If you put a console.log statement to the code, you can see from browser console
 
 The code for the application is in [GitHub](https://github.com/fullstack-hy2020/query-notes/tree/part6-3) in the branch <i>part6-3</i>.
 
-React Query is a versatile library that, based on what we have already seen, simplifies the application. Does React Query make more complex state management solutions such as Redux unnecessary? No. React Query can partially replace the state of the application in some cases, but as the [documentation](https://react-query-v3.tanstack.com/guides/does-this-replace-client-state) states
+React Query is a versatile library that, based on what we have already seen, simplifies the application. Does React Query make more complex state management solutions such as Redux unnecessary? No. React Query can partially replace the state of the application in some cases, but as the [documentation](https://tanstack.com/query/latest/docs/react/guides/does-this-replace-client-state) states
 
 - React Query is a <i>server-state library</i>, responsible for managing asynchronous operations between your server and client
 - Redux, etc. are <i>client-state libraries</i> that can be used to store asynchronous data, albeit inefficiently when compared to a tool like React Query
@@ -359,7 +359,7 @@ The application should work in such a way that if there are problems communicati
 
 ![browser saying anecdote service not available due to problems in server on localhost](../../images/6/65new.png)
 
-You can find [here](https://react-query-v3.tanstack.com/guides/queries) info how to detect the possible errors.
+You can find [here](https://tanstack.com/query/latest/docs/react/guides/queries) info how to detect the possible errors.
 
 You can simulate a problem with the server by e.g. turning off the JSON Server. Please note that in a problem situation, the query is first in the state <i>isLoading</i> for a while, because if a request fails, React Query tries the request a few times before it states that the request is not successful. You can optionally specify that no retries are made:
 
@@ -775,7 +775,7 @@ As stated in exercise 6.21, the server requires that the content of the anecdote
 ![browser showing error notification for trying to add too short of an anecdoate](../../images/6/67new.png)
 
 The error condition should be handled in the callback function registered for it, see
-[here](https://react-query-v3.tanstack.com/reference/useMutation) how to register a function.
+[here](https://tanstack.com/query/latest/docs/react/reference/useMutation) how to register a function.
 
 This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your completed exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
