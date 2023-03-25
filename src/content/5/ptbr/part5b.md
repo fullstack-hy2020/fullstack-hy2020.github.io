@@ -2,24 +2,24 @@
 mainImage: ../../../images/part-5.svg
 part: 5
 letter: b
-lang: en
+lang: ptbr
 ---
 
 <div class="content">
 
-### Displaying the login form only when appropriate
+### Mostrando o formulário de login apenas quando apropriado
 
-Let's modify the application so that the login form is not displayed by default:
+Vamos modificar a aplicação para que o formulário de login não seja exibido por padrão:
 
-![browser showing log in button by default](../../images/5/10e.png)
+![navegador mostrando o botão de login por padrão](../../images/5/10e.png)
 
-The login form appears when the user presses the <i>login</i> button:
+O formulário de login aparece quando o usuário pressiona o botão <i>login</i>:
 
-![user at login screen about to press cancel](../../images/5/11e.png)
+![usuário na tela de login prestes a apertar o botão cancelar](../../images/5/11e.png)
 
-The user can close the login form by clicking the <i>cancel</i> button.
+O usuário pode fechar o formulário de login clicando no botão <i>cancelar</i>.
 
-Let's start by extracting the login form into its own component:
+Vamos começar extraindo o formulário de login para um componente próprio:
 
 ```js
 const LoginForm = ({
@@ -58,9 +58,9 @@ const LoginForm = ({
 export default LoginForm
 ```
 
-The state and all the functions related to it are defined outside of the component and are passed to the component as props.
+O estado e todas as funções relacionadas a ele são definidos fora do componente e são passados para o componente por meio de props.
 
-Notice that the props are assigned to variables through <i>destructuring</i>, which means that instead of writing:
+Perceba que as props são atribuídas a variáveis ​​através de <i>destructuring</i>, o que significa que, em vez de escrever:
 
 ```js
 const LoginForm = (props) => {
@@ -84,9 +84,9 @@ const LoginForm = (props) => {
 }
 ```
 
-where the properties of the _props_ object are accessed through e.g. _props.handleSubmit_, the properties are assigned directly to their own variables.
+Onde as propriedades do objeto _props_ são acessadas por meio de, por exemplo, _props.handleSubmit_, as propriedades são atribuídas diretamente às suas próprias variáveis.
 
-One fast way of implementing the functionality is to change the _loginForm_ function of the <i>App</i> component like so:
+Uma forma rápida de implementar a funcionalidade é alterar a função _loginForm_ do componente <i>App</i> da seguinte maneira:
 
 ```js
 const App = () => {
@@ -121,9 +121,9 @@ const App = () => {
 }
 ```
 
-The <i>App</i> components state now contains the boolean <i>loginVisible</i>, which defines if the login form should be shown to the user or not.
+O estado do componente <i>App</i> agora contém o boolean <i>loginVisible</i>, que define se o formulário de login deve ser exibido ao usuário ou não.
 
-The value of _loginVisible_ is toggled with two buttons. Both buttons have their event handlers defined directly in the component:
+O valor de _loginVisible_ é alternado com dois botões. Ambos os botões têm seus gerenciadores de eventos definidos diretamente no componente:
 
 ```js
 <button onClick={() => setLoginVisible(true)}>log in</button>
@@ -131,7 +131,7 @@ The value of _loginVisible_ is toggled with two buttons. Both buttons have their
 <button onClick={() => setLoginVisible(false)}>cancel</button>
 ```
 
-The visibility of the component is defined by giving the component an [inline](/en/part2/adding_styles_to_react_app#inline-styles) style rule, where the value of the [display](https://developer.mozilla.org/en-US/docs/Web/CSS/display) property is <i>none</i> if we do not want the component to be displayed:
+A visibilidade do componente é definida atribuindo uma regra de estilo [inline](/ptbr/part2/adicionando_estilos_a_aplicacao_react#estilos-inline), onde o valor da propriedade [display](https://developer.mozilla.org/pt-BR/docs/Web/CSS/display) é <i>none</i> se não quisermos que o componente seja exibido:
 
 ```js
 const hideWhenVisible = { display: loginVisible ? 'none' : '' }
@@ -146,19 +146,19 @@ const showWhenVisible = { display: loginVisible ? '' : 'none' }
 </div>
 ```
 
-We are once again using the "question mark" ternary operator. If _loginVisible_ is <i>true</i>, then the CSS rule of the component will be:
+Nós estamos usando novamente o operador ternário "ponto de interrogação". Se _loginVisible_ for <i>true</i>, então a regra CSS do componente será:
 
 ```css
 display: 'none';
 ```
 
-If _loginVisible_ is <i>false</i>, then <i>display</i> will not receive any value related to the visibility of the component.
+Se _loginVisible_ for <i>false</i>, então <i>display</i> não receberá nenhum valor relacionado à visibilidade do componente.
 
-### The components children, aka. props.children
+### Os componentes filhos, conhecidos como props.children
 
-The code related to managing the visibility of the login form could be considered to be its own logical entity, and for this reason, it would be good to extract it from the <i>App</i> component into a separate component.
+O código relacionado ao gerenciamento da visibilidade do formulário de login poderia ser considerado uma entidade lógica própria, e por esse motivo, seria bom extrai-lo do componente <i>App</i> para um componente separado.
 
-Our goal is to implement a new <i>Togglable</i> component that can be used in the following way:
+Nosso objetivo é implementar um novo componente <i>Togglable</i> que possa ser usado da seguinte maneira:
 
 ```js
 <Togglable buttonLabel='login'>
@@ -172,9 +172,9 @@ Our goal is to implement a new <i>Togglable</i> component that can be used in th
 </Togglable>
 ```
 
-The way that the component is used is slightly different from our previous components. The component has both opening and closing tags that surround a <i>LoginForm</i> component. In React terminology <i>LoginForm</i> is a child component of <i>Togglable</i>.
+A maneira como o componente é usado é ligeiramente diferente dos nossos componentes anteriores. O componente tem tags de abertura e fechamento que cercam um componente <i>LoginForm</i>. Na terminologia React, <i>LoginForm</i> é um componente filho de <i>Togglable</i>.
 
-We can add any React elements we want between the opening and closing tags of <i>Togglable</i>, like this for example:
+Nós podemos adicionar qualquer elemento React que quisermos entre as tags de abertura e fechamento de <i>Togglable</i>, como este, por exemplo:
 
 ```js
 <Togglable buttonLabel="reveal">
@@ -183,7 +183,7 @@ We can add any React elements we want between the opening and closing tags of <i
 </Togglable>
 ```
 
-The code for the <i>Togglable</i> component is shown below:
+O código do componente <i>Togglable</i> é mostrado abaixo:
 
 ```js
 import { useState } from 'react'
@@ -214,9 +214,10 @@ const Togglable = (props) => {
 export default Togglable
 ```
 
-The new and interesting part of the code is [props.children](https://reactjs.org/docs/glossary.html#propschildren), which is used for referencing the child components of the component. The child components are the React elements that we define between the opening and closing tags of a component.
+A nova e interessante parte do código é a [props.children](https://pt-br.reactjs.org/docs/glossary.html#propschildren), que é usada para referenciar os componentes filhos do componente. Os componentes filhos são os elementos React que definimos entre as tags de abertura e fechamento de um componente.
 
-This time the children are rendered in the code that is used for rendering the component itself:
+
+Dessa vez, os filhos são renderizados no código que é usado para renderizar o próprio componente:
 
 ```js
 <div style={showWhenVisible}>
@@ -225,7 +226,7 @@ This time the children are rendered in the code that is used for rendering the c
 </div>
 ```
 
-Unlike the "normal" props we've seen before, <i>children</i> is automatically added by React and always exists. If a component is defined with an automatically closing _/>_ tag, like this:
+Diferente das props "normais" que vimos antes, <i>children</i> é adicionada automaticamente pelo React e sempre existe na aplicação. Se um componente é definido com uma tag de fechamento automático _/>_, como este:
 
 ```js
 <Note
@@ -235,7 +236,7 @@ Unlike the "normal" props we've seen before, <i>children</i> is automatically ad
 />
 ```
 
-Then <i>props.children</i> is an empty array.
+Então <i>props.children</i> é um array vazio.
 
 The <i>Togglable</i> component is reusable and we can use it to add similar visibility toggling functionality to the form that is used for creating new notes.
 
