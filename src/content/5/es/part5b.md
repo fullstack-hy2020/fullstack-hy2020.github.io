@@ -779,6 +779,7 @@ Vamos a crear un archivo [.eslintignore](https://eslint.org/docs/user-guide/conf
 ```bash
 node_modules
 build
+.eslintrc.js
 ```
 
 Ahora los directorios <em>build</em> y <em>node_modules</em> se omitirán al realizar el linting.
