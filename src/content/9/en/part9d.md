@@ -465,7 +465,7 @@ type CoursePart = CoursePartBasic | CoursePartGroup | CoursePartBackround;
 
 How should we now use these types in our components?
 
-If we try to acess the objects in the array *courseParts: CoursePart[]* we notice that it is possible to only access the attributes that are common to all the types in the union:
+If we try to access the objects in the array *courseParts: CoursePart[]* we notice that it is possible to only access the attributes that are common to all the types in the union:
 
 ![vscode showing part.exerciseCou](../../images/9/65new.png)
 
