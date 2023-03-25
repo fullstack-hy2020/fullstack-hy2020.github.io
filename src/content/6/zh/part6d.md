@@ -626,9 +626,13 @@ counterDispatch({ type: "INC" })
 
 当前应用的代码可以在 [GitHub](https://github.com/fullstack-hy2020/hook-counter/tree/part6-1) 上 *part6-1* 的分支中找到。
 
-### Using context for passing the state to components
+### <!--Using context for passing the state to components-->
 
-If we want to split the application into several components, the value of the counter and the dispatch function used to manage it must also be passed to the other components. One solution would be to pass these as props in the usual way:
+### 使用 context 传递组件的状态
+
+<!--If we want to split the application into several components, the value of the counter and the dispatch function used to manage it must also be passed to the other components. One solution would be to pass these as props in the usual way:-->
+
+如果我们希望将应用拆分成多个组件，我们必须将计数器的值和用于管理它的 dispatch 函数也传递给其他组件。一个解决方案是将计数器的值和 dispatch 函数作为参数传递：
 
 ```js
 const Display = ({ counter }) => {
@@ -661,13 +665,21 @@ const App = () => {
 }
 ```
 
-The solution works, but is not optimal. If the component structure gets complicated, e.g. the dispatcher should be forwarded using props through many components to the components that need it, even though the components in between in the component tree do not need the dispatcher. This phenomenon is called <i>prop drilling</i>.
+<!--The solution works, but is not optimal. If the component structure gets complicated, e.g. the dispatcher should be forwarded using props through many components to the components that need it, even though the components in between in the component tree do not need the dispatcher. This phenomenon is called <i>prop drilling</i>.-->
 
-React's built-in [Context API](https://beta.reactjs.org/learn/passing-data-deeply-with-context) provides a solution for us. React's context is a kind of global state of the application, to which it is possible to give direct access to any component app.
+这个解决方案是可行的，但并不是最优的。如果组件的结构变得更复杂，例如，则要通过多个组件才能将 dispatch 函数转发到需要它的组件，即使组件树中处于两者之间的组件都不需要它。这种现象被称为 *prop drilling*.
 
-Let us now create a context in the application that stores the state management of the counter.
+<!--React's built-in [Context API](https://beta.reactjs.org/learn/passing-data-deeply-with-context) provides a solution for us. React's context is a kind of global state of the application, to which it is possible to give direct access to any component app.-->
 
-The context is created with React's hook [createContext](https://beta.reactjs.org/reference/react/createContext). Let's create a context in the file <i>CounterContext.js</i>:
+React 内置的 [Context API](https://beta.reactjs.org/learn/passing-data-deeply-with-context) 为我们提供了一个解决方。React 的 context 类似应用的全局状态，应用中的组件均可以直接访问。
+
+<!--Let us now create a context in the application that stores the state management of the counter.-->
+
+现在，让我们在应用中创建一个 context，用以存储计数器的状态。
+
+<!--The context is created with React's hook [createContext](https://beta.reactjs.org/reference/react/createContext). Let's create a context in the file <i>CounterContext.js</i>:-->
+
+使用 React 的 [createContext](https://beta.reactjs.org/reference/react/createContext) 钩子创建 context。让我们在文件 *CounterContext.js* 中创建 context:
 
 ```js
 import { createContext } from 'react'
@@ -677,7 +689,9 @@ const CounterContext = createContext()
 export default CounterContext
 ```
 
-The <i>App</i> component can now <i>provide</i> a context to its child components as follows:
+<!--The <i>App</i> component can now <i>provide</i> a context to its child components as follows:-->
+
+*App* 组件现在可以通过如下的方式，向子组件提供 context:
 
 ```js
 import CounterContext from './CounterContext' // highlight-line
@@ -698,11 +712,17 @@ const App = () => {
 }
 ```
 
-As can be seen, providing the context is done by wrapping the child components inside the <i>CounterContext.Provider</i> component and setting a suitable value for the context.
+<!--As can be seen, providing the context is done by wrapping the child components inside the <i>CounterContext.Provider</i> component and setting a suitable value for the context.-->
 
-The context value is now set to be an array containing the value of the counter, and the <i>dispatch</i> function.
+可以看到，我们通过将子组件包裹在 *CounterContext.Provider* 组件中，并为 context 设置合适的值，以传递 context。
+
+<!--The context value is now set to be an array containing the value of the counter, and the <i>dispatch</i> function.-->
+
+context 的值现在被设置为一个包含了计数器的值和 *dispatch* 函数的数组。
 
 Other components now access the context using the [useContext](https://beta.reactjs.org/reference/react/useContext) hook:
+
+其他的组件现在可以通过使用 [useContext](https://beta.reactjs.org/reference/react/useContext) 钩子来访问 context。
 
 ```js
 import { useContext } from 'react' // highlight-line
@@ -725,7 +745,9 @@ const Button = ({ type, label }) => {
 }
 ```
 
-The current code for the application is in [GitHub](https://github.com/fullstack-hy2020/hook-counter/tree/part6-2) in the branch <i>part6-2</i>.
+<!--The current code for the application is in [GitHub](https://github.com/fullstack-hy2020/hook-counter/tree/part6-2) in the branch <i>part6-2</i>.-->
+
+当前应用的代码可以在 [GitHub](https://github.com/fullstack-hy2020/hook-counter/tree/part6-2) 上 *part6-2* 的分支中找到。
 
 ### Defining the counter context in a separate file
 
