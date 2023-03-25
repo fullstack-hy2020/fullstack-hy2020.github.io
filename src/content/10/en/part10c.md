@@ -757,10 +757,8 @@ Note that accessing a context's value using the <em>useContext</em> hook only wo
 Accessing the <em>AuthStorage</em> instance with <em>useContext(AuthStorageContext)</em> is quite verbose and reveals the details of the implementation. Let's improve this by implementing a <em>useAuthStorage</em> hook in a <i>useAuthStorage.js</i> file in the <i>hooks</i> directory:
 
 ```javascript
-import { createContext } from 'react';
+import AuthStorageContext from '../contexts/AuthStorageContext';
 import { useContext } from 'react'; 
-
-const AuthStorageContext = createContext();
 
 export const useAuthStorage = () => {
   return useContext(AuthStorageContext);
