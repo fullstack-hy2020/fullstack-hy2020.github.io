@@ -121,7 +121,7 @@ We could use the database directly from our JavaScript code with the [official M
 
 Mongoose could be described as an <i>object document mapper</i> (ODM), and saving JavaScript objects as Mongo documents is straightforward with this library.
 
-Let's install Mongoose:
+Let's start a new project and install Mongoose:
 
 ```bash
 npm install mongoose
