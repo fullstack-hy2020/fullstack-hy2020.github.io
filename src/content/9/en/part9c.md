@@ -846,7 +846,7 @@ export default {
 
 But once again, a new problem emerges:
 
-![vscode error cant assign undefined to DiaryEntry](../../images/9/23e.png)
+![vscode error can't assign undefined to DiaryEntry](../../images/9/23e.png)
 
 The issue is that there is no guarantee that an entry with the specified id can be found.
 It is good that we are made aware of this potential problem already at compile phase. Without TypeScript, we would not be warned about this problem, and in the worst-case scenario, we could have ended up returning an *undefined* object instead of informing the user about the specified entry not being found.

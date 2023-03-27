@@ -122,7 +122,7 @@ The command _jwt.sign(userForToken, process.env.SECRET)_ fails. We forgot to set
 
 A successful login returns the user details and the token:
 
-![vs code rest resonse showing details and token](../../images/4/18ea.png)
+![vs code rest response showing details and token](../../images/4/18ea.png)
 
 A wrong username or password returns an error message and the proper status code:
 

@@ -63,7 +63,7 @@ A better question could be
 >
 > ```js
 >   // the relevant part of code is pasted here
->   // code should contain several console.log statements for helping the debuging
+>   // code should contain several console.log statements for helping the debugging
 > ```
 >
 > The following gets printed to the console

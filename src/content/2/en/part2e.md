@@ -498,7 +498,7 @@ const App = () => {
 
 The user interface of the application has a form, in the input field of which the name of the desired currency is written. If the currency exists, the application renders the exchange rates of the currency to other currencies:
 
-![browser showing currency exchange rates with eur typed and cosole saying fetching exchange rates](../../images/2/32new.png)
+![browser showing currency exchange rates with eur typed and console saying fetching exchange rates](../../images/2/32new.png)
 
 The application sets the name of the currency entered to the form to the state _currency_ at the moment the button is pressed.
 

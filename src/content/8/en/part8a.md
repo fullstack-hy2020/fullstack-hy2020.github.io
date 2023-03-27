@@ -691,7 +691,7 @@ If we try to create a new person, but the parameters do not correspond with the 
 
 So some of the error handling can be automatically done with GraphQL [validation](https://graphql.org/learn/validation/).
 
-However, GraphQL cannot handle everything automatically. For example, stricter rules for data sent to a Mutation have to be added manually. An error could be handeled by throwing [GraphQLError](https://www.apollographql.com/docs/apollo-server/data/errors/#custom-errors) with a proper
+However, GraphQL cannot handle everything automatically. For example, stricter rules for data sent to a Mutation have to be added manually. An error could be handled by throwing [GraphQLError](https://www.apollographql.com/docs/apollo-server/data/errors/#custom-errors) with a proper
 [error code](https://www.apollographql.com/docs/apollo-server/data/errors/#built-in-error-codes).
 
 Let's prevent adding the same name to the phonebook multiple times:
