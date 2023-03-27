@@ -9,7 +9,7 @@ lang: en
 
 Users must be able to log into our application, and when a user is logged in, their user information must automatically be attached to any new notes they create.
 
-We will now implement support for [token-based authentication](https://scotch.io/tutorials/the-ins-and-outs-of-token-based-authentication#toc-how-token-based-works) to the backend.
+We will now implement support for [token-based authentication](https://www.digitalocean.com/community/tutorials/the-ins-and-outs-of-token-based-authentication#how-token-based-works) to the backend.
 
 The principles of token-based authentication are depicted in the following sequence diagram:
 
