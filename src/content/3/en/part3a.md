@@ -868,7 +868,7 @@ Data:
 
 Output in the browser after GET request:
   
-![JSON data of 4 poeple in browser from api/persons](../../images/3/22e.png)
+![JSON data of 4 people in browser from api/persons](../../images/3/22e.png)
 
 Notice that the forward slash in the route <i>api/persons</i> is not a special character, and is just like any other character in the string.
 

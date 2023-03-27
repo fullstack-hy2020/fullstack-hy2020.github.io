@@ -248,7 +248,7 @@ v11    	true  	release 	succeeded	Deploy image           	mluukkai@iki.fi	59m25s
 v10    	true  	release 	succeeded	Deploy image           	mluukkai@iki.fi	1h6m ago
 ```
 
-So despite the problems in the relese, the app stays functional!
+So despite the problems in the release, the app stays functional!
 
 Before moving to next exercise, fix your deployment and ensure that the application works again as intended.
 
@@ -293,7 +293,7 @@ Now when you know that the script based health check works, it is time to define
 
 <i>Write a script ensuring the health check endpoint (that is, the GET request to '/health') not only works, but also returns the correct string 'ok'.</i>
 
-You propably should use [curl](https://curl.se/) in the script to do the HTTP request. You most likely need to Google how to get hold to the returned string and compare it with the expected value 'ok'.
+You probably should use [curl](https://curl.se/) in the script to do the HTTP request. You most likely need to Google how to get hold to the returned string and compare it with the expected value 'ok'.
 
 By default _curl_ does not exist in the Fly.io virtual machine. You can install it by adding the following line in the file _Dockerfile_ that gets created in your project root directory when Fly.io app is set up:
 
@@ -316,7 +316,7 @@ ENV PATH /root/.volta/bin:$PATH
 CMD [ "npm", "run", "start" ]
 ```
 
-It is <strong>strongly advisable</strong> to check first locally that the script works since so many things can go wrong in it, and when run in GitHub Action, you can not do any debug printing. If and <i> when</i> things do not work as indended, it is also a very good idea to log in to the virtual machine (with <i>flyctl ssh console</i>) and check that the script works when ran manually there.
+It is <strong>strongly advisable</strong> to check first locally that the script works since so many things can go wrong in it, and when run in GitHub Action, you can not do any debug printing. If and <i> when</i> things do not work as intended, it is also a very good idea to log in to the virtual machine (with <i>flyctl ssh console</i>) and check that the script works when ran manually there.
 
 *Note* that in order to test the script in the virtual machine, you should have the script in your local directory when you make a successful deployment. So if your deployment fails, the script will not be uploaded to the Fly.io server. So in case of problems, comment out the script based health check from fly.toml and do a deployment to get your script to the virtual machine.
 
@@ -355,7 +355,7 @@ $ ./build_step.sh
 Build script
 ```
 
-You also need to open the <i>Advanced settings</i> and turn the auto-deploy off since we want to controll the deployment in the GitHub Actions:
+You also need to open the <i>Advanced settings</i> and turn the auto-deploy off since we want to control the deployment in the GitHub Actions:
 
 ![](../../images/11/render2.png)
 

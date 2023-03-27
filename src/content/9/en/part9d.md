@@ -465,7 +465,7 @@ type CoursePart = CoursePartBasic | CoursePartGroup | CoursePartBackround;
 
 How should we now use these types in our components?
 
-If we try to acess the objects in the array *courseParts: CoursePart[]* we notice that it is possible to only access the attributes that are common to all the types in the union:
+If we try to access the objects in the array *courseParts: CoursePart[]* we notice that it is possible to only access the attributes that are common to all the types in the union:
 
 ![vscode showing part.exerciseCou](../../images/9/65new.png)
 
@@ -1072,7 +1072,7 @@ Let us now build a frontend for the Ilari's flight diaries that was developed in
 
 #### Exercise 9.16
 
-Create a TypeScript React app with simillar configurations as the apps of this section. Fetch the diaries from the backend and render those to screen. Do all the required typing and ensure that there are no Eslint errors.
+Create a TypeScript React app with similar configurations as the apps of this section. Fetch the diaries from the backend and render those to screen. Do all the required typing and ensure that there are no Eslint errors.
 
 Remember to keep the network tab open. It might give you a valuable hint...
 
