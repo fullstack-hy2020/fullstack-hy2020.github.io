@@ -180,7 +180,7 @@ Koeaika on 120 minuuttia. Jos koesuoritus hyväksytään, saat seuraavan vahvist
 
 Jos et pääse kokeesta läpi, voit yrittää uudelleen viikon kuluttua.
 
-Jos pääset kokeesta läpi, ja et halua tehdä enempää tehtäviä, voit mennä palautussovelluksen my submissons -välilehdelle ja pyytää suorituksen rekisteröintiä:
+Jos pääset kokeesta läpi, ja et halua tehdä enempää tehtäviä, voit mennä palautussovelluksen my submissions -välilehdelle ja pyytää suorituksen rekisteröintiä:
 
 ![](../../images/0/enroll5a.png)
 

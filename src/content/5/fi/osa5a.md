@@ -617,6 +617,6 @@ Toki jos haluaa pelata varman päälle, ei tokenia kannata tallettaa local stora
 
 Erääksi turvallisemmaksi ratkaisuksi kirjautuneen käyttäjän muistamiseen on tarjottu [httpOnly-evästeitä](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#restrict_access_to_cookies) (engl. httpOnly cookies), joita käytettäessä JavaScript-koodi ei pääse ollenkaan käsiksi session muistavaan tunnisteeseen. Pelkästään yhden sivun renderöivien SPA-sovellusten toteuttaminen HttpOnly-evästeiden avulla ei kuitenkaan ole helppoa. Niiden käyttö edellyttäisi erillistä näkymää kirjautumista varten. 
 
-Täytyy kuitenkin huomata, että httpOnly-evästeisiinkään perustuva ratkaisu ei ole vedenpitävä. Joidenkin mukaan se on itse asiassa [yhtä "turvaton"](https://academind.com/tutorials/localstorage-vs-cookies-xss/) kuin local strorage. Tärkeintä on siis joka tapauksessa ohjelmoida sovellukset [tavoilla](https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html), jotka minimoivat XSS-hyökkäysten riskit.
+Täytyy kuitenkin huomata, että httpOnly-evästeisiinkään perustuva ratkaisu ei ole vedenpitävä. Joidenkin mukaan se on itse asiassa [yhtä "turvaton"](https://academind.com/tutorials/localstorage-vs-cookies-xss/) kuin local storage. Tärkeintä on siis joka tapauksessa ohjelmoida sovellukset [tavoilla](https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html), jotka minimoivat XSS-hyökkäysten riskit.
 
 </div>
