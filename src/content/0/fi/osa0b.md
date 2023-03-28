@@ -306,7 +306,7 @@ Document Object Model eli [DOM](https://en.wikipedia.org/wiki/Document_Object_Mo
 
 Edellisessä luvussa esittelemämme JavaScript-koodi käytti nimenomaan DOM-apia lisätäkseen sivulle muistiinpanojen listan.
 
-Allaoleva koodi luo muuttujaan <em>ul</em> DOM-apin avulla uuden "solmun" ja lisää sille joukon lapsisolmuja:
+Alla oleva koodi luo muuttujaan <em>ul</em> DOM-apin avulla uuden "solmun" ja lisää sille joukon lapsisolmuja:
 
 ```js
 var ul = document.createElement('ul')
