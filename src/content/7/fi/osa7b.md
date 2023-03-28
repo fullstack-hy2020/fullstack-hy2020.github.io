@@ -232,7 +232,7 @@ const App = () => {
 
 ### Spread-attribuutit
 
-Pääsemme itseasiassa helpommalla. Koska oliolla _name_ on nyt täsmälleen ne kentät, jotka <i>input</i>-komponentti odottaa saavansa propseina, voimme välittää propsit hyödyntäen [spread-syntaksia](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes) seuraavasti:
+Pääsemme itse asiassa helpommalla. Koska oliolla _name_ on nyt täsmälleen ne kentät, jotka <i>input</i>-komponentti odottaa saavansa propseina, voimme välittää propsit hyödyntäen [spread-syntaksia](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes) seuraavasti:
 
 ```js
 <input {...name} /> 
