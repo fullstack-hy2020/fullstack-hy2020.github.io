@@ -15,7 +15,7 @@ Kurssin suosittelemaa tyyliä noudattavan koodin kirjoittaminen alkaa [osasta 1]
 
 Avataan selaimella [esimerkkisovellus](https://studies.cs.helsinki.fi/exampleapp/). Sivun ensimmäinen lataus kestää joskus hetken.
 
-Kurssimateriaali olettaaa että käytössä Chrome-selain.
+Kurssimateriaali olettaa että käytössä Chrome-selain.
 
 **Web-sovelluskehityksen sääntö numero yksi**: pidä selaimen Developer-konsoli koko ajan auki. Konsoli avautuu Macilla painamalla yhtä aikaa _alt_ _cmd_ ja _i_. Windowsilla konsolin saa auki painamalla _F12_ tai yhtä aikaa _ctrl_ _shift_ ja _i_.
 
