@@ -448,7 +448,7 @@ const update = (id, newObject) => {
 export default { getAll, create, update, setToken }
 ```
 
-Huomaamme, että koodi ei itse asiassa välitä ollenkaan siitä, että se käsittelee nimenomaan muistiinpanoja. Muuttujan _baseUrl_ arvoa lukuunottamatta käytännössä sama koodi voi hoitaa myös blogisovelluksen frontendin ja backendin välistä kommunikointia. 
+Huomaamme, että koodi ei itse asiassa välitä ollenkaan siitä, että se käsittelee nimenomaan muistiinpanoja. Muuttujan _baseUrl_ arvoa lukuun ottamatta käytännössä sama koodi voi hoitaa myös blogisovelluksen frontendin ja backendin välistä kommunikointia.
 
 Eristä kommunikoiva koodi hookiksi _useResource_. Riittää, että kaikkien olioiden haku ja uuden olion luominen onnistuvat.
 

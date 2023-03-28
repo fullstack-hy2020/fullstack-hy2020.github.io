@@ -67,7 +67,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 
 renderöi komponentin sisällön tiedoston <i>public/index.html</i> määrittelemään <i>div</i>-elementtiin, jonka <i>id:n</i> arvona on 'root'.
 
-Tiedosto <i>public/index.html</i> on headerin määrittelyjä lukuunottamatta oleellisesti ottaen tyhjä: 
+Tiedosto <i>public/index.html</i> on headerin määrittelyjä lukuun ottamatta oleellisesti ottaen tyhjä:
 
 ```html
 <!DOCTYPE html>
