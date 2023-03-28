@@ -1,0 +1,17 @@
+I have feedback for exercises 2.18-2.20. The API for the countries list (https://restcountries.com/v3.1/all)
+has updated to v3.1 as opposed to v2 when this problem set was initially posted. Because of this, the object structure has changed.
+
+Instead of there simply being a country name under the name of the country, 
+there are now multiple nested objects for common name and official name (I think there are even more options). 
+There is also a change with how the names in the object are structured. 
+Instead of each language having a key of "name" there is now a key that is an abbreviation of the NAME OF THE LANGUAGE. 
+Because of this you can't simply access the languages of the country by following the nested objects to its end point. 
+Instead, you need to change the nested objects to just display the values.
+
+I think the course should either give the link to the old v2 API of the countries to keep it consistent 
+OR make small mentions and hints throughout these exercises EX: "It's ok to just search by common name" 
+or "Hint: languages may need to be turned into just the values of the object (remember React doesn't render object children!)"
+
+I prefer the later option (keeping https://restcountries.com/v3.1/all and providing hints) 
+as I think I came away with great problem solving skills but figuring out displaying the countries 
+and languages was difficult as a new programmer without a least some warning. 
