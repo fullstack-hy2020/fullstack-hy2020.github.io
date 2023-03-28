@@ -241,7 +241,7 @@ const average = function(a, b) {
 const vastaus = average(2, 5)
 ```
 
-Määrittelemme tällä kurssilla muutamaa poikkeusta lukuunottamatta kaikki funktiot nuolisyntaksin avulla.
+Määrittelemme tällä kurssilla muutamaa poikkeusta lukuun ottamatta kaikki funktiot nuolisyntaksin avulla.
 
 </div>
 

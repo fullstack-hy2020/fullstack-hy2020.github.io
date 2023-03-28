@@ -15,7 +15,7 @@ Kurssin suosittelemaa tyyliä noudattavan koodin kirjoittaminen alkaa [osasta 1]
 
 Avataan selaimella [esimerkkisovellus](https://studies.cs.helsinki.fi/exampleapp/). Sivun ensimmäinen lataus kestää joskus hetken.
 
-Kurssimateriaali olettaaa että käytössä Chrome-selain.
+Kurssimateriaali olettaa että käytössä Chrome-selain.
 
 **Web-sovelluskehityksen sääntö numero yksi**: pidä selaimen Developer-konsoli koko ajan auki. Konsoli avautuu Macilla painamalla yhtä aikaa _alt_ _cmd_ ja _i_. Windowsilla konsolin saa auki painamalla _F12_ tai yhtä aikaa _ctrl_ _shift_ ja _i_.
 
@@ -181,7 +181,7 @@ Osoitteesta löytyvät muistiinpanot [JSON](https://en.wikipedia.org/wiki/JSON)-
 
 ![](../../images/0/11e.png)
 
-Ylläoleva muistiinpanojen sivun JavaScript-koodi siis lataa muistiinpanot sisältävän JSON-muotoisen datan ja muodostaa datan avulla selaimeen "bullet-listan" muistiinpanojen sisällöstä:
+Yllä oleva muistiinpanojen sivun JavaScript-koodi siis lataa muistiinpanot sisältävän JSON-muotoisen datan ja muodostaa datan avulla selaimeen "bullet-listan" muistiinpanojen sisällöstä:
 
 Tämän saa aikaan seuraava koodi:
 
@@ -306,7 +306,7 @@ Document Object Model eli [DOM](https://en.wikipedia.org/wiki/Document_Object_Mo
 
 Edellisessä luvussa esittelemämme JavaScript-koodi käytti nimenomaan DOM-apia lisätäkseen sivulle muistiinpanojen listan.
 
-Allaoleva koodi luo muuttujaan <em>ul</em> DOM-apin avulla uuden "solmun" ja lisää sille joukon lapsisolmuja:
+Alla oleva koodi luo muuttujaan <em>ul</em> DOM-apin avulla uuden "solmun" ja lisää sille joukon lapsisolmuja:
 
 ```js
 var ul = document.createElement('ul')
@@ -569,7 +569,7 @@ Sovelluksen koodi on osoitteessa <https://github.com/mluukkai/example_app>. Kann
 
 Kurssin esimerkkisovellus on tehty ns. [Vanilla JavaScriptillä](https://medium.freecodecamp.org/is-vanilla-javascript-worth-learning-absolutely-c2c67140ac34) eli käyttäen pelkkää DOM-apia ja JavaScript-kieltä sivujen rakenteen manipulointiin.
 
-Pelkän JavaScriptin ja DOM-apin käytön sijaan web-ohjelmoinnissa hyödynnetään yleensä kirjastoja, jotka sisältävät DOM-apia helpommin käytettäviä työkaluja sivujen muokkaamiseen. Eräs tälläinen kirjasto on edelleenkin hyvin suosittu [jQuery](https://jquery.com/).
+Pelkän JavaScriptin ja DOM-apin käytön sijaan web-ohjelmoinnissa hyödynnetään yleensä kirjastoja, jotka sisältävät DOM-apia helpommin käytettäviä työkaluja sivujen muokkaamiseen. Eräs tällainen kirjasto on edelleenkin hyvin suosittu [jQuery](https://jquery.com/).
 
 jQuery on kehitetty aikana, jolloin web-sivut olivat vielä suurimmaksi osaksi perinteisiä, eli palvelin muodosti HTML-sivuja, joiden toiminnallisuutta rikastettiin selaimessa jQueryllä kirjoitetun JavaScript-koodin avulla. Yksi syy jQueryn suosion taustalla oli niin sanottu cross-browser yhteensopivuus, eli kirjasto toimi selaimesta ja selainvalmistajasta riippumatta samalla tavalla, eikä sitä käyttäessä ollut enää tarvetta kirjoittaa selainversiokohtaisia ratkaisuja. Nykyisin tavallisen jQueryn käyttö ei ole enää yhtä perusteltua kuin aikaisemmin, JavaScript on kehittynyt paljon ja käytetyimmät selaimet tukevat yleisesti ottaen hyvin perustoiminnallisuuksia.
 
