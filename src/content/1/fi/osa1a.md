@@ -151,7 +151,7 @@ Web-sovelluskehityksen sääntö numero yksi on
 
 > <i>pidä konsoli koko ajan auki</i>
 
-Toistetaan tämä vielä yhdessä: <i>pidän konsolin koko ajan auki</i> tamän kurssin ja koko loppuelämäni ajan tehdessäni web-sovelluskehitystä.
+Toistetaan tämä vielä yhdessä: <i>pidän konsolin koko ajan auki</i> tämän kurssin ja koko loppuelämäni ajan tehdessäni web-sovelluskehitystä.
 
 Komponenttien sisällä on mahdollista renderöidä myös dynaamista sisältöä.
 
@@ -343,7 +343,7 @@ Komponentti <i>Hello</i> myös tulostaa props-olion arvon konsoliin.
 
 Toivottavasti konsolisi on auki, jos ei ole, muista yhteinen lupauksemme:
 
-> <i>pidän konsolin koko ajan auki tamän kurssin ja koko loppuelämäni ajan tehdessäni web-sovelluskehitystä</i>
+> <i>pidän konsolin koko ajan auki tämän kurssin ja koko loppuelämäni ajan tehdessäni web-sovelluskehitystä</i>
 
 Ohjemistokehitys on haastavaa, ja erityisen haastavaksi se muuttuu, jos jokainen mahdollinen apukeino kuten web-konsoli sekä komennolla _console.log_ tahtävät aputulostukset eivät ole käytössä. Ammattilaiset käyttävät näitä <i>aina</i>. Ei ole yhtään syytä miksi aloittelijan pitäisi jättää nämä fantastiset apuvälineet hyödyntämättä.
 
@@ -462,7 +462,7 @@ Mitään ei kuitenkaan tule ruudulle. Yritän etsiä koodista 15 minuutin ajan o
 
 Vihdoin mieleeni palaa antamamme lupaus
 
-> <i>pidän konsolin koko ajan auki tamän kurssin ja koko loppuelämäni ajan tehdessäni web-sovelluskehitystä</i>
+> <i>pidän konsolin koko ajan auki tämän kurssin ja koko loppuelämäni ajan tehdessäni web-sovelluskehitystä</i>
 
 Konsoli huutaakin punaisena:
 
