@@ -600,8 +600,6 @@ In this exercise, it is also enough that your application works for most countri
 
 <h4>2.20*: Data for countries, step3</h4>
 
-**There is still a lot to do in this part, so don't get stuck on this exercise!**
-
 Add to the view showing the data of a single country, the weather report for the capital of that country. There are dozens of providers for weather data. One suggested API is [https://openweathermap.org](https://openweathermap.org). Note that it might take some minutes until a generated API key is valid.
 
 ![weather report added feature](../../images/2/19x.png)
