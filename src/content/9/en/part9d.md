@@ -333,7 +333,7 @@ const courseParts = [
     name: "Deeper type usage",
     exerciseCount: 14,
     description: "Confusing description",
-    backroundMaterial: "https://type-level-typescript.com/template-literal-types"
+    backgroundMaterial: "https://type-level-typescript.com/template-literal-types"
   },
 ];
 ```
@@ -362,11 +362,11 @@ interface CoursePartGroup {
   kind: "group"
 }
 
-interface CoursePartBackround {
+interface CoursePartBackground {
   name: string;
   exerciseCount: number;
   description: string;
-  backroundMaterial: string;
+  backgroundMaterial: string;
   kind: "background"
 }
 ```
@@ -407,7 +407,7 @@ const App = () => {
       name: "Deeper type usage",
       exerciseCount: 14,
       description: "Confusing description",
-      backroundMaterial: "https://type-level-typescript.com/template-literal-types",
+      backgroundMaterial: "https://type-level-typescript.com/template-literal-types",
       kind: "background" // highlight-line
     },
   ]
@@ -452,13 +452,13 @@ interface CoursePartGroup extends CoursePartBase {
   kind: "group"
 }
 
-interface CoursePartBackround extends CoursePartBase {
+interface CoursePartBackground extends CoursePartBase {
   description: string;
-  backroundMaterial: string;
+  backgroundMaterial: string;
   kind: "background"
 }
 
-type CoursePart = CoursePartBasic | CoursePartGroup | CoursePartBackround;
+type CoursePart = CoursePartBasic | CoursePartGroup | CoursePartBackground;
 ```
 
 ### More type narrowing
@@ -483,7 +483,7 @@ One handy way to narrow these kinds of types in TypeScript is to use *switch cas
 
 ![vscode showing part. and then the attributes](../../images/9/64new.png)
 
-In the above example, TypeScript knows that a *part* has the type *CoursePart* and it can then infer that *part* is of either type *CoursePartBasic*, *CoursePartGroup* or *CoursePartBackround* based on the value of the attribute *kind*.
+In the above example, TypeScript knows that a *part* has the type *CoursePart* and it can then infer that *part* is of either type *CoursePartBasic*, *CoursePartGroup* or *CoursePartBackground* based on the value of the attribute *kind*.
 
 The specific technique of type narrowing where a union type is narrowed based on literal attribute value is called [discriminated union](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#discriminated-unions).
 
@@ -492,10 +492,10 @@ Note that the narrowing can naturally be also done with *if* clause. We could eg
 ```js
   courseParts.forEach(part => {
     if (part.kind === 'background') {
-      console.log('see the following:', part.backroundMaterial)
+      console.log('see the following:', part.backgroundMaterial)
     }
 
-    // can not refer to part.backroundMaterial here!
+    // can not refer to part.backgroundMaterial here!
   });
 ```
 
@@ -523,14 +523,14 @@ default:
   return assertNever(part);
 ```
 
-and remove the case that handles the type *CoursePartBackround*, we would see the following error:
+and remove the case that handles the type *CoursePartBackground*, we would see the following error:
 
 ![vscode error Argument of Ttype CoursePart not assignable to type never](../../images/9/66new.png)
 
 The error message says that
 
 ```text
-'CoursePartBackround' is not assignable to parameter of type 'never'.
+'CoursePartBackground' is not assignable to parameter of type 'never'.
 ```
 
 which tells us that we are using a variable somewhere where it should never be used. This tells us that something needs to be fixed.
@@ -561,13 +561,13 @@ interface CoursePartGroup extends CoursePartBase {
   kind: "group"
 }
 
-interface CoursePartBackround extends CoursePartBase {
+interface CoursePartBackground extends CoursePartBase {
   description: string;
-  backroundMaterial: string;
+  backgroundMaterial: string;
   kind: "background"
 }
 
-type CoursePart = CoursePartBasic | CoursePartGroup | CoursePartBackround;
+type CoursePart = CoursePartBasic | CoursePartGroup | CoursePartBackground;
 
 const courseParts: CoursePart[] = [
   {
@@ -592,7 +592,7 @@ const courseParts: CoursePart[] = [
     name: "Deeper type usage",
     exerciseCount: 14,
     description: "Confusing description",
-    backroundMaterial: "https://type-level-typescript.com/template-literal-types",
+    backgroundMaterial: "https://type-level-typescript.com/template-literal-types",
     kind: "background"
   },
   {
@@ -604,9 +604,9 @@ const courseParts: CoursePart[] = [
 ];
 ```
 
-Now we know that both interfaces *CoursePartBasic* and *CoursePartBackround* share not only the base attributes but also an attribute called *description*, which is a string in both interfaces.
+Now we know that both interfaces *CoursePartBasic* and *CoursePartBackground* share not only the base attributes but also an attribute called *description*, which is a string in both interfaces.
 
-Your first task is to declare a new interface that includes the *description* attribute and extends the *CoursePartBase* interface. Then modify the code so that you can remove the *description* attribute from both *CoursePartBasic* and *CoursePartBackround*  without getting any errors.
+Your first task is to declare a new interface that includes the *description* attribute and extends the *CoursePartBase* interface. Then modify the code so that you can remove the *description* attribute from both *CoursePartBasic* and *CoursePartBackground*  without getting any errors.
 
 Then create a component *Part* that renders all attributes of each type of course part. Use a switch case-based exhaustive type checking! Use the new component in component *Content*.
 
