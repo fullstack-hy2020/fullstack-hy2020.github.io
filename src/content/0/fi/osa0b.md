@@ -181,7 +181,7 @@ Osoitteesta löytyvät muistiinpanot [JSON](https://en.wikipedia.org/wiki/JSON)-
 
 ![](../../images/0/11e.png)
 
-Ylläoleva muistiinpanojen sivun JavaScript-koodi siis lataa muistiinpanot sisältävän JSON-muotoisen datan ja muodostaa datan avulla selaimeen "bullet-listan" muistiinpanojen sisällöstä:
+Yllä oleva muistiinpanojen sivun JavaScript-koodi siis lataa muistiinpanot sisältävän JSON-muotoisen datan ja muodostaa datan avulla selaimeen "bullet-listan" muistiinpanojen sisällöstä:
 
 Tämän saa aikaan seuraava koodi:
 
