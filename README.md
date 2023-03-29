@@ -33,7 +33,7 @@
 - [x] part4 (intro)
 - [x] part4a
 - [ ] part4b
-- [ ] part4c
+- [x] part4c
 - [ ] part4d
 
 ## part5 - Testing React apps
@@ -108,5 +108,6 @@
 1. @CassivsGabriellis 
 2. @mayconblopes 
 3. @FrancisBernard34 
+4. @jccallves
 
 🇧🇷  **Keep in touch to join us!** 🇧🇷 

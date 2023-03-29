@@ -71,3 +71,5 @@ yarn-error.log
 
 
 .nvmrc
+.vscode/settings.json
+package-lock.json
