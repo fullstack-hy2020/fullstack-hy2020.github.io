@@ -15,7 +15,7 @@ Nodella tehtyjen sovellusten debuggaaminen on jossain määrin hankalampaa kuin 
 
 #### Visual Studio Code
 
-Visual Studio Coden debuggeri voi olla hyödyksi joissain tapauksissa. Saat käynnistettyä sovelluksen debuggaustilassa seuraavasti:
+Visual Studio Coden debuggeri voi olla hyödyksi joissain tapauksissa. Saat käynnistettyä sovelluksen debuggaustilassa seuraavasti (tässä ja muutamassa seuraavassa kuvassa muistiinpanoilla on kenttä _date_ joka on poistunut sovelluksen nykyisestä versiosta): 
 
 ![Avataan run-tabi ja sieltä valinta start debugging](../../images/3/35x.png)
 
@@ -23,7 +23,7 @@ Huomaa, että sovellus ei saa olla samalla käynnissä "normaalisti" konsolista,
 
 Seuraavassa screenshot, jossa koodi on pysäytetty kesken uuden muistiinpanon lisäyksen:
 
-![Koodiin on lisätty breakpoint, johon suoritus pysähtyy. Vasemman puolen tabissa näkyvät muuttujien arvot, alhaalla Debuging console, jossa on mahdollista evaluoida koodia](../../images/3/36x.png)
+![Koodiin on lisätty breakpoint, johon suoritus pysähtyy. Vasemman puolen tabissa näkyvät muuttujien arvot, alhaalla Debugging console, jossa on mahdollista evaluoida koodia](../../images/3/36x.png)
 
 Koodi on pysähtynyt rivillä 63 olevan <i>breakpointin</i> kohdalle ja konsoliin on evaluoitu muuttujan <i>note</i> arvo. Vasemmalla olevassa ikkunassa on nähtävillä myös kaikki ohjelman muuttujien arvot.
 

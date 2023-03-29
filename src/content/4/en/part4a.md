@@ -406,7 +406,6 @@ In the exercises for this part, we will be building a <i>blog list application</
 Let's imagine a situation, where you receive an email that contains the following application body:
 
 ```js
-const http = require('http')
 const express = require('express')
 const app = express()
 const cors = require('cors')

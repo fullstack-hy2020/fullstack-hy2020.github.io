@@ -75,15 +75,15 @@ In the theory material of this section, we will be building a Postgres-enabled v
 
 #### Fly.io
 
-Let us create a new Fly.io-app by running the command _fly launch_ in a directory where we shall add the code of the app. Let us also create the Postgress database for the app:
+Let us create a new Fly.io-app by running the command _fly launch_ in a directory where we shall add the code of the app. Let us also create the Postgres database for the app:
 
 ![](../../images/13/6.png)
 
-When creating the app, Fly.io reveals the password of the database that will be needed when connecting the app to the database. <i>This is the only time it is shown in plain text so it is essential to save it somewhere</i> (but not in any public plase such as GitHub).
+When creating the app, Fly.io reveals the password of the database that will be needed when connecting the app to the database. <i>This is the only time it is shown in plain text so it is essential to save it somewhere</i> (but not in any public place such as GitHub).
 
 Note that if you only need the database, and are not planning to deploy the app to Fly.io, it is also possible to [just create the database to Fly.io](https://fly.io/docs/reference/postgres/#creating-a-postgres-app).
 
-A psql concole connection to the database can be opened as follows
+A psql console connection to the database can be opened as follows
 
 ```bash
 flyctl postgres connect -a <app_name-db>
@@ -316,7 +316,7 @@ DATABASE_URL=postgres://postgres:<password>@127.0.0.1:5432/postgres
 
 Password was shown when the database was created, so hopefully you have not lost it!
 
-The last part of the connect string, <i>postgres</i> refers to the database name. The name could be any string but we use here <i>postgres</i> since it is the default database that is automatically created within a Postgress database. If needed, new databases can be created with the command [CREATE DATABASE](https://www.postgresql.org/docs/14/sql-createdatabase.html).
+The last part of the connect string, <i>postgres</i> refers to the database name. The name could be any string but we use here <i>postgres</i> since it is the default database that is automatically created within a Postgres database. If needed, new databases can be created with the command [CREATE DATABASE](https://www.postgresql.org/docs/14/sql-createdatabase.html).
 
 Once the connect string has been set up in the file <i>.env</i> we can test for a connection:
 
@@ -566,7 +566,7 @@ In the tasks of this section, we will build a blog application backend similar t
 
 #### Task 13.1.
 
-Create a GitHub repository for the application and create a new Heroku application for it, as well as a Postgres database. Make sure you are able to establish a connection to the application database.
+Create a GitHub repository for the application and create a new Heroku or Fly.io application for it, as well as a Postgres database. Make sure you are able to establish a connection to the application database.
 
 #### Task 13.2.
 

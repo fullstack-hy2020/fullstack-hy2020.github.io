@@ -206,7 +206,7 @@ module.exports = User
 ```
 
 <!-- The type of the field is <i>ObjectId</i> that references <i>note</i>-style documents. Mongo does not inherently know that this is a field that references notes, the syntax is purely related to and defined by Mongoose.-->
-该字段的类型是<i>ObjectId</i>，引用<i>note</i>式文档。Mongo本身并不知道这是一个引用笔记的字段，这个语法纯粹是与Mongoose有关，并由Mongoose定义。
+该字段的类型是<i>ObjectId</i>，引用<i>note</i>式文档。Mongo 本身并不知道这是一个引用笔记的字段，这个语法纯粹是与 Mongoose 有关，并由 Mongoose 定义。
 
 <!-- Let's expand the schema of the note defined in the <i>models/note.js</i> file so that the note contains information about the user who created it:-->
  让我们扩展<i>models/note.js</i>文件中定义的笔记模式，使笔记包含创建它的用户的信息。
@@ -500,7 +500,7 @@ notesRouter.post('/', async (request, response, next) => {
 ```
 
 <!-- It's worth noting that the <i>user</i> object also changes. The <i>id</i> of the note is stored in the <i>notes</i> field:-->
- 值得注意的是，<i>user</i>对象也会改变。注释的<i>id</i>被保存在<i>notes</i>字段中。
+ 值得注意的是，<i>user</i>对象也会改变。笔记的<i>id</i>被保存在<i>notes</i>字段中。
 
 ```js
 const user = await User.findById(body.userId)
@@ -535,7 +535,7 @@ await user.save()
  我们希望我们的API能够以这样的方式工作，即当HTTP GET请求被发送到<i>/api/users</i>路由时，用户对象也将包含用户的笔记内容，而不仅仅是他们的ID。在一个关系型数据库中，这个功能将通过一个<i>连接查询</i>来实现。
 
 <!-- As previously mentioned, document databases do not properly support join queries between collections, but the Mongoose library can do some of these joins for us. Mongoose accomplishes the join by doing multiple queries, which is different from join queries in relational databases which are <i>transactional</i>, meaning that the state of the database does not change during the time that the query is made. With join queries in Mongoose, nothing can guarantee that the state between the collections being joined is consistent, meaning that if we make a query that joins the user and notes collections, the state of the collections may change during the query.-->
- 如前所述，文档数据库并不正确支持集合之间的连接查询，但Mongoose库可以为我们做一些这样的连接。Mongoose通过做多个查询来完成连接，这与关系数据库中的连接查询不同，关系数据库是<i>交易性的</i>，意味着数据库的状态在查询期间不会改变。在Mongoose的连接查询中，没有任何东西可以保证被连接的集合之间的状态是一致的，这意味着如果我们做一个连接用户和笔记集合的查询，集合的状态可能在查询过程中发生变化。
+ 如前所述，文档数据库并不正确支持集合之间的连接查询，但 Mongoose 库可以为我们做一些这样的连接。Mongoose 通过做多个查询来完成连接，这与关系数据库中的连接查询不同，关系数据库是<i>事务性的</i>，意味着数据库的状态在查询期间不会改变。在 Mongoose 的连接查询中，没有任何东西可以保证被连接的集合之间的状态是一致的，这意味着如果我们做一个连接用户和笔记集合的查询，集合的状态可能在查询过程中发生变化。
 
 
 <!-- The Mongoose join is done with the [populate](http://mongoosejs.com/docs/populate.html) method. Let's update the route that returns all users first:-->

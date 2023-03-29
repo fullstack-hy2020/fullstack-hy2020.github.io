@@ -11,7 +11,7 @@ For a while now we have only been working on "frontend", i.e. client-side (brows
 
 Let's use a tool meant to be used during software development called [JSON Server](https://github.com/typicode/json-server) to act as our server.
 
-Create a file named <i>db.json</i> in the root directory of the previous notes project with the following content:
+Create a file named <i>db.json</i> in the root directory of the previous <i>notes</i> project with the following content:
 
 ```json
 {
@@ -94,7 +94,7 @@ A synchronous way of making requests that's common in Java programming, for inst
 ```java
 HTTPRequest request = new HTTPRequest();
 
-String url = "https://fullstack-exampleapp.herokuapp.com/data.json";
+String url = "https://studies.cs.helsinki.fi/exampleapp/data.json";
 List<Note> notes = request.get(url);
 
 notes.forEach(m => {
@@ -369,7 +369,7 @@ We have already used [state hooks](https://reactjs.org/docs/hooks-state.html) th
 
 As such, effect hooks are precisely the right tool to use when fetching data from a server.
 
-Let's remove the fetching of data from <i>index.js</i>. Since we're gonna be retrieving the notes from the server, there is no longer a need to pass data as props to the <i>App</i> component. So <i>index.js</i> can be simplified to:
+Let's remove the fetching of data from <i>index.js</i>. Since we're going to be retrieving the notes from the server, there is no longer a need to pass data as props to the <i>App</i> component. So <i>index.js</i> can be simplified to:
 
 ```js
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
