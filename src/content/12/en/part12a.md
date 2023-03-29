@@ -243,7 +243,7 @@ CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS                      
 b8548b9faec3   ubuntu    "bash"    3 minutes ago    Exited (0) 6 seconds ago          hopeful_clarke
 ```
 
-> <i>Editor's note: that the command _docker container ls_ has also a shorter form _docker ps_</i>, I prefer the shorer one.
+> <i>Editor's note: that the command _docker container ls_ has also a shorter form _docker ps_</i>, I prefer the shorter one.
 
 We have two options when addressing a container. The identifier in the first column can be used to interact with the container almost always. Plus, most commands accept the container name as a more human-friendly method of working with them. The name of the container was automatically generated to be **"hopeful_clarke"** in my case.
 
