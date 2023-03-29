@@ -126,7 +126,7 @@ A estrutura e o esquema do banco de dados não são tão evidentes como eram nos
 
 Paradoxalmente, bancos de dados sem esquema como o Mongo exigem que os desenvolvedores tomem decisões de design muito mais radicais sobre a organização de dados no início do projeto do que bancos de dados relacionais com esquemas. Em média, os bancos de dados relacionais oferecem uma maneira mais ou menos adequada de organizar dados para muitos aplicativos.
 
-#### Esquema Mongoose para usuários
+### Esquema Mongoose para usuários
 
 Neste caso, decidimos armazenar os ids das notas criadas pelo usuário no documento <i>user</i>. Vamos definir o modelo para representar um usuário no arquivo <i>models/user.js</i>:
 
@@ -192,7 +192,7 @@ const noteSchema = new mongoose.Schema({
 
 Em total contraste com as convenções dos bancos de dados relacionais, as <i>referências agora são armazenadas em ambos os documentos</i>: a nota faz referência ao usuário que a criou e o usuário tem um array de referências a todas as notas criadas por ele.
 
-#### Criando usuários
+### Criando usuários
 
 Vamos implementar uma rota para criar novos usuários. Os usuários têm um <i>username</i> exclusivo, um <i>name</i> e algo chamado <i>passwordHash</i>. O hash da senha é a saída de uma  [função hash unidirecional](https://en.wikipedia.org/wiki/Cryptographic_hash_function)  aplicada à senha do usuário. Nunca é aconselhável armazenar senhas de texto simples não criptografadas no banco de dados!
 
@@ -418,7 +418,7 @@ A lista fica assim:
 
 Você pode encontrar o código da nossa aplicação atual na íntegra na branch <i>part4-7</i> [deste repositório GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-7).
 
-#### Criando uma nova nota
+### Criando uma nova nota
 
 O código para criar uma nova nota deve ser atualizado para que a nota seja atribuída ao usuário que a criou.
 
@@ -473,7 +473,7 @@ Da mesma forma, os ids dos usuários que criaram as notas podem ser vistos quand
 
 ![api/notes mostra ids de números em JSON](../../images/4/12e.png)
 
-### Preencher
+### Popular
 
 Gostaríamos que nossa API funcionasse de forma que, quando uma solicitação HTTP GET fosse feita para a rota <i>/api/users</i>, os objetos de usuário também contivessem o conteúdo das notas do usuário e não apenas seu id. Em um banco de dados relacional, essa funcionalidade seria implementada com uma <i>consulta de junção</i>.
 
