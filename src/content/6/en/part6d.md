@@ -552,7 +552,7 @@ const App = () => {
 
   return (
     <CounterContext.Provider value={[counter, counterDispatch]}>  // highlight-line
-      <Display counter={counter}/>
+      <Display />
       <div>
         <Button type='INC' label='+' />
         <Button type='DEC' label='-' />
@@ -574,7 +574,7 @@ import { useContext } from 'react' // highlight-line
 import CounterContext from './CounterContext'
 
 const Display = () => {
-  const [counter, dispatch] = useContext(CounterContext) // highlight-line
+  const [counter] = useContext(CounterContext) // highlight-line
   return <div>
     {counter}
   </div>
