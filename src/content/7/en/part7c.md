@@ -7,7 +7,7 @@ lang: en
 
 <div class="content">
 
-In part 2, we examined two different ways of adding styles to our application: the old-school [single CSS](/en/part2/adding_styles_to_react_app) file and [inline styles](/en/part2/adding_styles_to_react_app#inline_styles). In this part, we will take a look at a few other ways.
+In part 2, we examined two different ways of adding styles to our application: the old-school [single CSS](/en/part2/adding_styles_to_react_app) file and [inline styles](/en/part2/adding_styles_to_react_app#inline-styles). In this part, we will take a look at a few other ways.
 
 ### Ready-made UI libraries
 

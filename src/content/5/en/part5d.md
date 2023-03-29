@@ -105,7 +105,7 @@ We could edit the tests in Cypress but let us rather use VS Code:
 
 We can now close the edit view of Cypress.
 
-Let us chage the test content as follows:
+Let us change the test content as follows:
 
 ```js
 describe('Note app', function() {

@@ -406,7 +406,7 @@ fix available via `npm audit fix --force`
 Will install react-scripts@5.0.0, which is a breaking change
 ```
 
-Komento _npm audit fix --force_ päivittäisi käytetyn kirjastoversion, mutta emme nyt uskalla tehdä päivistystä sillä se aiheuttaisi _react-scripts_-kirjaston uuden versoion asennuksen ja se taas todennäköisesti hajottaisi sovelluskehitysympäristön. Jätämme siis tällä kertaa mahdollisten haavoittuvuuksien korjaamisen myöhempään kertaan.
+Komento _npm audit fix --force_ päivittäisi käytetyn kirjastoversion, mutta emme nyt uskalla tehdä päivistystä sillä se aiheuttaisi _react-scripts_-kirjaston uuden version asennuksen ja se taas todennäköisesti hajottaisi sovelluskehitysympäristön. Jätämme siis tällä kertaa mahdollisten haavoittuvuuksien korjaamisen myöhempään kertaan.
 
 Eräs OWASP:in listan mainitsemista uhista on <i>Broken Authentication</i> ja siihen liittyvä <i>Broken Access Control</i>. Käyttämämme token-perustainen autentikointi on kohtuullisen robusti, jos sovellusta käytetään tietoliikenteen salaavalla HTTPS-protokollalla. Access Controlin eli pääsynhallinnan toteuttamisessa on aina syytä muistaa tehdä esim. käyttäjän identiteetin tarkastus selaimen lisäksi myös palvelimella. Huonoa tietoturvaa olisi estää jotkut toimenpiteet ainoastaan piilottamalla niiden suoritusmahdollisuus selaimessa olevasta koodista.
 

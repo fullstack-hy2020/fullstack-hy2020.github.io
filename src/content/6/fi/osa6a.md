@@ -11,15 +11,15 @@ Olemme noudattaneet sovelluksen tilan hallinnassa Reactin suosittelemaa käytän
 
 ### Flux-arkkitehtuuri
 
-Facebook kehitti jo Reactin historian varhaisvaiheissa tilan hallinnan ongelmia helpottamaan [Flux](https://facebook.github.io/flux/docs/in-depth-overview)-arkkitehtuurin. Fluxissa sovelluksen tilan hallinta erotetaan kokonaan Reactin komponenttien ulkopuolisiin varastoihin eli <i>storeihin</i>. Storessa olevaa tilaa ei muuteta suoraan, vaan tapahtumien eli <i>actionien</i> avulla.
+Facebook kehitti jo Reactin historian varhaisvaiheissa tilan hallinnan ongelmia helpottamaan [Flux]((https://facebook.github.io/flux/docs/in-depth-overview/)-arkkitehtuurin. Fluxissa sovelluksen tilan hallinta erotetaan kokonaan Reactin komponenttien ulkopuolisiin varastoihin eli <i>storeihin</i>. Storessa olevaa tilaa ei muuteta suoraan, vaan tapahtumien eli <i>actionien</i> avulla.
 
 Kun action muuttaa storen tilaa, renderöidään näkymät uudelleen:
 
-![Action -> Dispatcher -> Store -> View](https://facebook.github.io/flux/img/overview/flux-simple-f8-diagram-1300w.png)
+![Action -> Dispatcher -> Store -> View](../../images/6/flux1.png)
 
 Jos sovelluksen käyttö (esim. napin painaminen) aiheuttaa tarpeen tilan muutokseen, tehdään muutos actionin avulla. Tämä taas aiheuttaa uuden näytön renderöitymisen:
 
-![Action -> Dispatcher -> Store -> View -> Action -> Dispatcher -> View](https://facebook.github.io/flux/img/overview/flux-simple-f8-diagram-with-client-action-1300w.png)
+![Action -> Dispatcher -> Store -> View -> Action -> Dispatcher -> View](../../images/6/flux2.png)
 
 Flux tarjoaa siis standardin tavan sille miten ja missä sovelluksen tila pidetään sekä tavalle tehdä tilaan muutoksia.
 
@@ -254,7 +254,7 @@ Selitys on kokonaisuudessaan seuraava
 
 Funktion <i>createStore</i> sijaan siis suositellaan käytettäväksi hieman "kehittyneempää" funktiota <i>configureStore</i>, ja mekin tulemme ottamaan sen käyttöömme kun olemme ottaneet Reduxin perustoiminnallisuuden haltuun.
 
-Sivuhuomio: <i>createStore</i> on määritelty olevan "deprecated", joka yleensä tarkoittaa sitä, että ominaisuus tulee postumaan kirjaston jossain uudemmassa versiossa. Ylläoleva selitys ja [tämäkin](https://stackoverflow.com/questions/71944111/redux-createstore-is-deprecated-cannot-get-state-from-getstate-in-redux-ac) keskustelu paljastavat, että <i>createStore</i> ei tule poistumaan, ja sille onkin annettu ehkä hieman virheellisin perustein status <i>deprecated</i>. Funktio ei siis ole vanhentunut, mutta nykyään on olemassa suositeltavampi, uusi tapa tehdä suunilleen sama asia.
+Sivuhuomio: <i>createStore</i> on määritelty olevan "deprecated", joka yleensä tarkoittaa sitä, että ominaisuus tulee postumaan kirjaston jossain uudemmassa versiossa. Yllä oleva selitys ja [tämäkin](https://stackoverflow.com/questions/71944111/redux-createstore-is-deprecated-cannot-get-state-from-getstate-in-redux-ac) keskustelu paljastavat, että <i>createStore</i> ei tule poistumaan, ja sille onkin annettu ehkä hieman virheellisin perustein status <i>deprecated</i>. Funktio ei siis ole vanhentunut, mutta nykyään on olemassa suositeltavampi, uusi tapa tehdä suunilleen sama asia.
 
 ### Redux-muistiinpanot
 
@@ -668,7 +668,7 @@ Varmista testeissä <i>deep-freeze</i>-kirjaston avulla, että kyseessä on <i>p
 
 Aloita laajentamalla reduceria siten, että molemmat testeistä menevät läpi. Lisää tämän jälkeen loput testit ja niitä vastaava toiminnallisuus.
 
-Reducerin toteutuksessa kannattaa ottaa mallia ylläolevasta [Redux-muistiinpanot](/osa6/flux_arkkitehtuuri_ja_redux#puhtaat-funktiot-immutable)-esimerkistä. 
+Reducerin toteutuksessa kannattaa ottaa mallia yllä olevasta [Redux-muistiinpanot](/osa6/flux_arkkitehtuuri_ja_redux#puhtaat-funktiot-immutable)-esimerkistä.
 
 #### 6.2: Unicafe revisited, step2
 
@@ -739,7 +739,7 @@ const App = () => {
 }
 ```
 
-Molemmat toiminnallisuudet on toteutettu suoraviivaisesti. Huomionarvoista uuden muistiinpanon lisäämisessä on nyt se, että toisin kuin aiemmat Reactilla toteutetut lomakkeet, <i>emme ole</i> nyt sitoneet lomakkeen kentän arvoa komponentin <i>App</i> tilaan. React kutsuu tälläisiä lomakkeita [ei-kontrolloiduiksi](https://reactjs.org/docs/uncontrolled-components.html).
+Molemmat toiminnallisuudet on toteutettu suoraviivaisesti. Huomionarvoista uuden muistiinpanon lisäämisessä on nyt se, että toisin kuin aiemmat Reactilla toteutetut lomakkeet, <i>emme ole</i> nyt sitoneet lomakkeen kentän arvoa komponentin <i>App</i> tilaan. React kutsuu tällaisia lomakkeita [ei-kontrolloiduiksi](https://reactjs.org/docs/uncontrolled-components.html).
 
 > Ei-kontrolloiduilla lomakkeilla on tiettyjä rajoitteita. Ne eivät mahdollista esim. lennossa annettavia validointiviestejä, lomakkeen lähetysnapin disabloimista sisällön perusteella yms. Meidän käyttötapaukseemme ne kuitenkin tällä kertaa sopivat.
 Voit halutessasi lukea aiheesta enemmän [täältä](https://goshakkk.name/controlled-vs-uncontrolled-inputs-react/).

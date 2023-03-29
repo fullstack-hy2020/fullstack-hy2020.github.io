@@ -1264,7 +1264,7 @@ const copy = { ...points }
 copy[2] += 1     
 ```
 
-OR a copy of an array like this:
+OU une copie du tableau comme cela :
 
 ```js
 const points = [1, 4, 6, 3]

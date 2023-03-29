@@ -47,7 +47,7 @@ Estatísticas de tempo de conclusão dos exercícios podem ser encontradas atrav
 
 Você pode discutir sobre o curso e tópicos relacionados em nosso grupo dedicado no Discord <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> e no Telegram: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. O Discord possui os canais "fullstack_general" e os específicos das partes (nomes de canais com prefixo "fullstack") para discussões relacionadas ao curso. Observe que o <i>chat do Discord não é adequado para discussões relacionadas ao curso</i>. Venha participar da conversa conosco!
 
-### Como pedir ajuda no Discord/Telegam
+### Como pedir ajuda no Discord/Telegram
 
 Ao pedir ajuda no grupo do Discord/Telegram, sua pergunta deve ser a mais informativa e precisa possível. Se sua pergunta se parecer com isso:
 

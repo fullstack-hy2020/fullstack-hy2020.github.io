@@ -62,7 +62,7 @@ Next we will have two sets of exercises for automazing the deployment with GitHu
 
 Before going to the below exercises, you should setup your application in [Fly.io](https://fly.io/) hosting service like the one we did in [part 3](/en/part3/deploying_app_to_internet#application-to-the-internet).
 
-If you rather want to use Heroku, there is an [alternative set of exercises](/en/part11/deployment/#exercises-11-10-11-12-heroku) for that.
+If you rather want to use other hosting options, there is an alternative set of exercises for [Render](http://localhost:8000/en/part11/deployment#exercises-11-10-11-12-render) and for [Heroku](/en/part11/deployment#exercises-11-10-11-12-heroku).
 
 In contrast to part 3 now we <i>do not deploy the code</i> to Fly.io ourselves (with the command <i>flyctl deploy</i>), we let the GitHub Actions workflow do that for us!
 
@@ -194,8 +194,7 @@ v0     	false 	release 	failed   	Deploy image           	mluukkai@iki.fi	6h19m 
 
 So finally in the 5th deployment (version v4) I got the configuration right and that ended in a succeeding release.
 
-Besides the rudimentary TCP health check, it is extremely beneficial to have also some "application level" health checks ensuring that the app for real is in functional state. One possibility for this is a HTTP-level check defined in section [
-services.http_checks](https://fly.io/docs/reference/configuration/#services-tcp_checks) that can be used to ensure that the app is responding to the HTTP requests.
+Besides the rudimentary TCP health check, it is extremely beneficial to have also some "application level" health checks ensuring that the app for real is in functional state. One possibility for this is a HTTP-level check defined in section [services.http_checks](https://fly.io/docs/reference/configuration/#services-tcp_checks) that can be used to ensure that the app is responding to the HTTP requests.
 
 Add a simple endpoint for doing an application health check to the backend. You may e.g. copy this code:
 
@@ -249,7 +248,7 @@ v11    	true  	release 	succeeded	Deploy image           	mluukkai@iki.fi	59m25s
 v10    	true  	release 	succeeded	Deploy image           	mluukkai@iki.fi	1h6m ago
 ```
 
-So despite the problems in the relese, the app stays functional!
+So despite the problems in the release, the app stays functional!
 
 Before moving to next exercise, fix your deployment and ensure that the application works again as intended.
 
@@ -294,7 +293,7 @@ Now when you know that the script based health check works, it is time to define
 
 <i>Write a script ensuring the health check endpoint (that is, the GET request to '/health') not only works, but also returns the correct string 'ok'.</i>
 
-You propably should use [curl](https://curl.se/) in the script to do the HTTP request. You most likely need to Google how to get hold to the returned string and compare it with the expected value 'ok'.
+You probably should use [curl](https://curl.se/) in the script to do the HTTP request. You most likely need to Google how to get hold to the returned string and compare it with the expected value 'ok'.
 
 By default _curl_ does not exist in the Fly.io virtual machine. You can install it by adding the following line in the file _Dockerfile_ that gets created in your project root directory when Fly.io app is set up:
 
@@ -317,7 +316,7 @@ ENV PATH /root/.volta/bin:$PATH
 CMD [ "npm", "run", "start" ]
 ```
 
-It is <strong>strongly advisable</strong> to check first locally that the script works since so many things can go wrong in it, and when run in GitHub Action, you can not do any debug printing. If and <i> when</i> things do not work as indended, it is also a very good idea to log in to the virtual machine (with <i>flyctl ssh console</i>) and check that the script works when ran manually there.
+It is <strong>strongly advisable</strong> to check first locally that the script works since so many things can go wrong in it, and when run in GitHub Action, you can not do any debug printing. If and <i> when</i> things do not work as intended, it is also a very good idea to log in to the virtual machine (with <i>flyctl ssh console</i>) and check that the script works when ran manually there.
 
 *Note* that in order to test the script in the virtual machine, you should have the script in your local directory when you make a successful deployment. So if your deployment fails, the script will not be uploaded to the Fly.io server. So in case of problems, comment out the script based health check from fly.toml and do a deployment to get your script to the virtual machine.
 
@@ -327,11 +326,108 @@ Our script based health check is hardly meaningful in real life since it does es
 
 <div class="tasks">
 
+### Exercises 11.10-11.12. (Render)
+
+If you rather want to use other hosting options, there is an alternative set of exercises for [Fly.io](/en/part11/deployment/#exercises-11-10-11-12-fly-io) and for [Heroku](/en/part11/deployment#exercises-11-10-11-12-heroku).
+
+#### 11.10 Deploying your application to Render
+
+Set up your application in [Render](render.com). The setup is now not quite as straightforward as in [part 3](/en/part3/deploying_app_to_internet#application-to-the-internet). You have to carefully think about what should go to these settings:
+
+![](../../images/11/render1.png)
+
+If you need to run several commands in the build or start command, you may use a simple shell script for that.
+
+Create eg. a file <i>build_step.sh</i> with the following content:
+
+```bash
+#!/bin/bash
+
+echo "Build script"
+
+# add the commands here
+```
+
+Give it execution permissions (Google or see e.g. [this](https://www.guru99.com/file-permissions.html) to find out how) and ensure that you can run it from the command line:
+
+```bash
+$ ./build_step.sh
+Build script
+```
+
+You also need to open the <i>Advanced settings</i> and turn the auto-deploy off since we want to control the deployment in the GitHub Actions:
+
+![](../../images/11/render2.png)
+
+Ensure now that you get the app up and running. Use the <i>Manual deploy</i>.
+
+Most likely things will fail at the start, so remember to keep the <i>Logs</i> open all the time.
+
+#### 11.11 Automatic deployments
+
+Go now to GitHub Actions [marketplace](https://github.com/marketplace) and search for action for our purposes. You might search with <i>render deploy</i>. There are several actions to choose from. You can pick any. Quite often the best choice is the one with the most stars. It is also a good idea to look if the action is actively maintained (time of the last release) and does it have many open issues or pull requests.
+
+Set up the action to your workflow and ensure that every commit that pass all the checks results in a new deployment. Note that you need Render API key and the app service id for the deployment. See [here](https://render.com/docs/api) how the API key is generated. You can get the service id from the URL of the Render dashboard of your app. The end of the URL (starting with _srv-_) is the id:
+
+```bash
+https://dashboard.render.com/web/srv-crandomcharachtershere
+```
+
+The deployment takes some time. See the events tab of the Render dashboard to see when the new deployment is ready:
+
+![](../../images/11/render3.png)
+
+It might be a good idea to have a dummy endpoint in the app that makes it possible to do some code changes and to ensure that the deployed version has really changed:
+
+```js
+app.get('/version', (req, res) => {
+  res.send('1') // change this string to ensure a new version deployed
+})
+```
+
+#### 11.12 Health check
+
+All tests pass and the new version of the app gets automatically deployed to Render so everything seems to be in order. But does the app really work? Besides the checks done in the deployment pipeline, it is extremely beneficial to have also some "application level" health checks ensuring that the app for real is in a functional state.
+
+Add a simple endpoint for doing an application health check to the backend. You may e.g. copy this code:
+
+```js
+app.get('/health', (req, res) => {
+  res.send('ok')
+})
+```
+
+Commit the code and push it to GitHub. Ensure that you can access the health check endpoint of your app.
+
+Configure now a <i>Health Check Path</i> to your app. The configuration is done in the settings tab of the Render dashboard.
+
+Make a change in your code, push it to GitHub, and ensure that the deployment succeeds.
+
+Note that you can see the log of deployment by clicking the most recent deployment in the events tab.
+
+When you are set up with the health check, simulate a broken deployment by changing the code as follows:
+
+```js
+app.get('/health', (req, res) => {
+  throw 'error...'
+  // eslint-disable-next-line no-unreachable
+  res.send('ok')
+})
+```
+
+Push the code to GitHub and ensure that a broken version does not get deployed and the previous version of the app keeps running.
+
+Before moving on, fix your deployment and ensure that the application works again as intended.
+
+</div>
+
+<div class="tasks">
+
 ### Exercises 11.10-11.12. (Heroku)
 
 Before going to the below exercises, you should setup your application in [Heroku](heroku.com) hosting service like the one we did in [part 3](/en/part3/deploying_app_to_internet#application-to-the-internet).
 
-If you rather want to use Fly.io for hosting, there is an [alternative set of exercises](/en/part11/deployment/#exercises-11-10-11-12-fly-io) for that.
+If you rather want to use other hosting options, there is an alternative set of exercises for [Fly.io](/en/part11/deployment/#exercises-11-10-11-12-fly-io) and for [Render](/en/part11/deployment#exercises-11-10-11-12-render).
 
 In contrast to part 3 now we <i>do not push the code</i> to Heroku ourselves, we let the Github Actions workflow do that for us!
 

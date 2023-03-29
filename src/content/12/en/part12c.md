@@ -627,14 +627,14 @@ Next, the browser starts executing the React app, and all the requests it makes 
 
 ![](../../images/12/nginx-setup2.png)
 
-The frontent container is actually no more accessed beyond the first request that gets the React app source code to the browser.
+The frontend container is actually no more accessed beyond the first request that gets the React app source code to the browser.
 
 Set up now your app to work as in the abovefigure. Make sure that the todo-frontend works with todo-backend. It will require changes to the *REACT\_APP\_BACKEND\_URL* environmental variable in the frontend.
 
 Make sure that the development environment is now fully functional, that is:
 - all features of the todo app work
 - you can edit the source files <i>and</i> the changes take effect by reloading the app (the hot reloading may or may not work...)
-- frontend should access the backend throught Nginx, so the requests should be done to http://localhost:8080/api/todos:
+- frontend should access the backend through Nginx, so the requests should be done to http://localhost:8080/api/todos:
 
 ![](../../images/12/todos-dev-right-2.png)
 

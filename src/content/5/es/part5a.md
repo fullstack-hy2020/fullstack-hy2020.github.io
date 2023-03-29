@@ -127,6 +127,7 @@ Luego configuraremos eslint. Por ahora, puede ignorar el error o eliminarlo al a
 ```js
 // eslint-disable-next-line import/no-anonymous-default-export
 export default { login }
+```
 
 El método para manejar el inicio de sesión se puede implementar de la siguiente manera:
 
