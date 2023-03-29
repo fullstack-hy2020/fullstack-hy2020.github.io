@@ -1245,7 +1245,7 @@ Nyt siis <i>User.findByPk</i>-kysely ei hae joukkueita, vaan ne haetaan tarvitta
 
 #### Modelien ominaisuuksia
 
-On joitain tilanteita, missä emme oletusarvoisesti halua käsitellä kaikkia tietyn taulun rivejä. Eräs tälläinen tapaus voisi olla se, että emme normaalisti haluasi näyttää sovelluksessamme niitä käyttäjiä joiden tunnus on suljettu (<i>disabled</i>). Tälläisessä tilanteessa voisimme määritellä modelille oletusarvoisen [scopen](https://sequelize.org/master/manual/scopes.html):
+On joitain tilanteita, missä emme oletusarvoisesti halua käsitellä kaikkia tietyn taulun rivejä. Eräs tällainen tapaus voisi olla se, että emme normaalisti haluasi näyttää sovelluksessamme niitä käyttäjiä joiden tunnus on suljettu (<i>disabled</i>). Tälläisessä tilanteessa voisimme määritellä modelille oletusarvoisen [scopen](https://sequelize.org/master/manual/scopes.html):
 
 ```js
 class User extends Model {}

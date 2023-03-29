@@ -498,7 +498,7 @@ const App = () => {
 
 The user interface of the application has a form, in the input field of which the name of the desired currency is written. If the currency exists, the application renders the exchange rates of the currency to other currencies:
 
-![browser showing currency exchange rates with eur typed and cosole saying fetching exchange rates](../../images/2/32new.png)
+![browser showing currency exchange rates with eur typed and console saying fetching exchange rates](../../images/2/32new.png)
 
 The application sets the name of the currency entered to the form to the state _currency_ at the moment the button is pressed.
 
@@ -599,8 +599,6 @@ Improve on the application in the previous exercise, such that when the names of
 In this exercise, it is also enough that your application works for most countries. Countries whose name appears in the name of another country, like <i>Sudan</i>, can be ignored.
 
 <h4>2.20*: Data for countries, step3</h4>
-
-**There is still a lot to do in this part, so don't get stuck on this exercise!**
 
 Add to the view showing the data of a single country, the weather report for the capital of that country. There are dozens of providers for weather data. One suggested API is [https://openweathermap.org](https://openweathermap.org). Note that it might take some minutes until a generated API key is valid.
 

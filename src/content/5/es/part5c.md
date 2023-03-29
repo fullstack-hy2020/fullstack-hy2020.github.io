@@ -542,12 +542,12 @@ Realice una prueba que verifique que la URL del blog y el número de likes se mu
 #### 5.15*: Pruebas de lista de blogs, paso 3
 
 <!-- Tee testi, joka varmistaa, että jos komponentin <i> like </i> -nappia painetaan kahdesti, komponentin propsina saamaa tapahtumankäsittelijäfunktiota kutsutaan kaksi kertaa. -->
-Realice una prueba que garantice que si se hace clic dos veces en el botón <i>like</i>, se llama dos veces al controlador de eventos que el componente recibió como accesorios.
+Realice una prueba que garantice que si se hace clic dos veces en el botón <i>like</i>, se llama dos veces al controlador de eventos que el componente recibió como props.
 
 #### 5.16*: Pruebas de lista de blogs, paso 4
 
 <!-- Tee uuden blogin luomisesta huolehtivalle lomakkelle testi, joka varmistaa, että lomake kutsuu propseina saamaansa takaisinkutsufunktiota oikeilla tiedoilla siinä vaiheessa kun blogi luodaan. -->
-Haga una prueba para el nuevo formulario de blog. La prueba debe verificar que el formulario llama al controlador de eventos que recibió como accesorios con los detalles correctos cuando se crea un nuevo blog.
+Haga una prueba para el nuevo formulario de blog. La prueba debe verificar que el formulario llama al controlador de eventos que recibió como props con los detalles correctos cuando se crea un nuevo blog.
 
 <!-- Jos esim. määrittelet <i> input </i> -elementille id: n 'author': -->
 Si, por ejemplo, establece el atributo id de un elemento <i>input</i> como 'author':

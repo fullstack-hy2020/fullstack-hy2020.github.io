@@ -108,7 +108,7 @@ describe('Note ', function() {
 })
 ```
 
-Testin suoritus käynnistetään kilkkaamalla testin nimeä Cypressin näkymästä:
+Testin suoritus käynnistetään klikkaamalla testin nimeä Cypressin näkymästä:
 
 ![](../../images/5/55new.png)
 
@@ -844,7 +844,7 @@ module.exports = defineConfig({
 Kaikki testeissä olevat sovelluksen osoitetta käyttävät komennot
 
 ```js
-cy.visit('http://localhost:3000' )
+cy.visit('http://localhost:3000')
 ```
 
 voidaan muuttaa muotoon
@@ -865,8 +865,12 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
     },
     baseUrl: 'http://localhost:3000',
-    BACKEND: 'http://localhost:3001/api' // highlight-line
   },
+  // highlight-start
+  env: {
+    BACKEND: 'http://localhost:3001/api'
+  }
+  // highlight-end
 })
 ```
 
@@ -876,13 +880,13 @@ Korvataan testeistä kaikki backendin osoitteet seuraavaan tapaan
 describe('Note ', function() {
   beforeEach(function() {
     cy.visit('')
-    cy.request('POST', `${Cypress.env('EXTERNAL_API')}/testing/reset`) // highlight-line
+    cy.request('POST', `${Cypress.env('BACKEND')}/testing/reset`) // highlight-line
     const user = {
       name: 'Matti Luukkainen',
       username: 'mluukkai',
       password: 'salainen'
     }
-    cy.request('POST', `${Cypress.env('EXTERNAL_API')}/users`, user) // highlight-line
+    cy.request('POST', `${Cypress.env('BACKEND')}/users`, user) // highlight-line
   })
   // ...
 })
@@ -1052,7 +1056,7 @@ Testien ja frontendin koodin lopullinen versio on kokonaisuudessaan [GitHubissa]
 
 ### Tehtävät 5.17.-5.23.
 
-Tehdään osan lopuksi muutamia E2E-testejä blogisovellukseen. Ylläolevan materiaalin pitäisi riittää ainakin suurimmaksi osaksi tehtävien tekemiseen. Cypressin [dokumentaatiota](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell) kannattaa ehdottomasti myös lueskella, kyseessä on ehkä paras dokumentaatio, mitä olen koskaan open source -projektissa nähnyt. 
+Tehdään osan lopuksi muutamia E2E-testejä blogisovellukseen. Yllä olevan materiaalin pitäisi riittää ainakin suurimmaksi osaksi tehtävien tekemiseen. Cypressin [dokumentaatiota](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell) kannattaa ehdottomasti myös lueskella, kyseessä on ehkä paras dokumentaatio, mitä olen koskaan open source -projektissa nähnyt.
 
 Erityisesti kannattaa lukea luku [Introduction to Cypress](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Cypress-Can-Be-Simple-Sometimes), joka toteaa
 

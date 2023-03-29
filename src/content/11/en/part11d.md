@@ -233,7 +233,7 @@ By clicking <i>view all tags</i>, you can see all the tags listed:
 
 ![Releases](../../images/11/18-new.png)
 
-And if needed, you can navigate to the view of a single tag that shows eg. what is the GitHub commit corressponding to the tag.
+And if needed, you can navigate to the view of a single tag that shows eg. what is the GitHub commit corresponding to the tag.
 
 #### 11.16 Skipping a commit for tagging and deployment
 

@@ -680,7 +680,7 @@ On myös jotain tilanteita, missä komennon muoto _queryByText_ on käyttökelpo
 Komentoa voidaan hyödyntää esim. varmistamaan, että jokin asia <i>ei renderöidy</i>:
 
 ```js 
-test('renders no shit', () => {
+test('does not render this', () => {
   const note = {
     content: 'This is a reminder',
     important: true
@@ -688,7 +688,7 @@ test('renders no shit', () => {
 
   render(<Note note={note} />)
 
-  const element = screen.queryByText('do not want this shit to be rendered')
+  const element = screen.queryByText('do not want this thing to be rendered')
   expect(element).toBeNull()
 })
 ```

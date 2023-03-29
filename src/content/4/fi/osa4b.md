@@ -494,7 +494,7 @@ test('a valid note can be added ', async () => {
 })
 ```
 
-Testi ei itseasiassa mene läpi, sillä olemme vahingossa palauttaneet statuskoodin <i>200 OK</i> uuden muistiinpanon luomisen yhteydessä, parempi statuskoodi on <i>201 CREATED</i>. Muutetaan koodia siten että testi menee läpi: 
+Testi ei itse asiassa mene läpi, sillä olemme vahingossa palauttaneet statuskoodin <i>200 OK</i> uuden muistiinpanon luomisen yhteydessä, parempi statuskoodi on <i>201 CREATED</i>. Muutetaan koodia siten että testi menee läpi:
 
 ```js
 notesRouter.post('/', (request, response, next) => {
