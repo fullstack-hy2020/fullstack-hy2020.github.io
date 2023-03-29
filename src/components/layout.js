@@ -18,17 +18,15 @@ const Layout = props => {
   const { children, hideFooter, isCoursePage } = props;
   const siteLanguage = i18n.language;
 
-  const [visible, setVisible] = useState(
-    false
-  );
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const key = localStorage.getItem(BANNER_TO_KEY)
-    console.log(key)
+    const key = localStorage.getItem(BANNER_TO_KEY);
+    console.log(key);
     if (!key) {
-      setVisible(true)
+      setVisible(true);
     }
-  }, [])
+  }, []);
 
   const hideNote = () => {
     localStorage.setItem(BANNER_TO_KEY, 'yes');
