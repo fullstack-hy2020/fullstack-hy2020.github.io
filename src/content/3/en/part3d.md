@@ -133,7 +133,7 @@ It is also vital to follow continuously the server logs. The problem became obvi
 
 The database url was _undefined_, so the command *fly secrets set MONGODB\_URI* was forgotten.
 
-When using Render, the database url is given by definig the proper env in the dashboard:
+When using Render, the database url is given by defining the proper env in the dashboard:
 
 ![browser render showing the MONGODB_URI env variable](../../images/3/render-env.png)
 

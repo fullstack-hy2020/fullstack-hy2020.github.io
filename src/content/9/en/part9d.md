@@ -376,7 +376,7 @@ Besides the attributes that are found in the various course parts, we have now i
 Next, we will create a type [union](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types) of all these types. We can then use it to define a type for our array, which should accept any of these course part types:
 
 ```js
-type CoursePart = CoursePartBasic | CoursePartGroup | CoursePartBackround;
+type CoursePart = CoursePartBasic | CoursePartGroup | CoursePartBackground;
 ```
 
 Now we can set the type for our *courseParts* variable:

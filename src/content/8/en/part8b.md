@@ -233,7 +233,7 @@ The name of the query is <i>findPersonByName</i>, and it is given a string <i>$n
 
 It is also possible to do queries with parameters with the Apollo Explorer. The parameters are given in <i>Variables</i>:
 
-![apollostudio findPersonByName highlighting nameToSEarch Arto Hellas](../../images/8/10x.png)
+![apollostudio findPersonByName highlighting nameToSearch Arto Hellas](../../images/8/10x.png)
 
 The *useQuery* hook is well-suited for situations where the query is done when the component is rendered.  However, we now want to make the query only when a user wants to see the details of a specific person, so the query is done only [as required](https://www.apollographql.com/docs/react/data/queries/#executing-queries-manually).
 
