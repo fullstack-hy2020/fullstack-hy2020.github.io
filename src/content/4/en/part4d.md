@@ -9,7 +9,7 @@ lang: en
 
 Users must be able to log into our application, and when a user is logged in, their user information must automatically be attached to any new notes they create.
 
-We will now implement support for [token-based authentication](https://scotch.io/tutorials/the-ins-and-outs-of-token-based-authentication#toc-how-token-based-works) to the backend.
+We will now implement support for [token-based authentication](https://www.digitalocean.com/community/tutorials/the-ins-and-outs-of-token-based-authentication#how-token-based-works) to the backend.
 
 The principles of token-based authentication are depicted in the following sequence diagram:
 
@@ -122,7 +122,7 @@ The command _jwt.sign(userForToken, process.env.SECRET)_ fails. We forgot to set
 
 A successful login returns the user details and the token:
 
-![vs code rest resonse showing details and token](../../images/4/18ea.png)
+![vs code rest response showing details and token](../../images/4/18ea.png)
 
 A wrong username or password returns an error message and the proper status code:
 
@@ -317,7 +317,7 @@ When server-side sessions are used, the token is quite often just a random strin
 
 There have been many changes to the code which have caused a typical problem for a fast-paced software project: most of the tests have broken. Because this part of the course is already jammed with new information, we will leave fixing the tests to a non-compulsory exercise.
 
-Usernames, passwords and applications using token authentication must always be used over [HTTPS](https://en.wikipedia.org/wiki/HTTPS). We could use a Node [HTTPS](https://nodejs.org/api/https.html) server in our application instead of the [HTTP](https://nodejs.org/docs/latest-v8.x/api/http.html) server (it requires more configuration). On the other hand, the production version of our application is in Heroku, so our application stays secure: Heroku routes all traffic between a browser and the Heroku server over HTTPS.
+Usernames, passwords and applications using token authentication must always be used over [HTTPS](https://en.wikipedia.org/wiki/HTTPS). We could use a Node [HTTPS](https://nodejs.org/api/https.html) server in our application instead of the [HTTP](https://nodejs.org/docs/latest-v8.x/api/http.html) server (it requires more configuration). On the other hand, the production version of our application is in Fly.io, so our application stays secure: Fly.io routes all traffic between a browser and the Fly.io server over HTTPS.
 
 We will implement login to the frontend in the [next part](/en/part5).
 

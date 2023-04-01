@@ -339,7 +339,7 @@ The setup that is ready for a product deployment looks as follows:
 
 ![diagram of deployment ready react app](../../images/3/101.png)
 
-Unlike when running the app in a development environment, everything is now in the same node/express-backend that runs in localhost:3001. When the browser goes to the page, the file <i>index.html</i> is rendered. That causes the browser to fetch the product version of the React app. Once it starts to run, it fetches the json-data from the address localhost:3001/api/notes.
+Unlike when running the app in a development environment, everything is now in the same node/express-backend that runs in localhost:3001. When the browser goes to the page, the file <i>index.html</i> is rendered. That causes the browser to fetch the production version of the React app. Once it starts to run, it fetches the json-data from the address localhost:3001/api/notes.
 
 ### The whole app to the internet
 
@@ -399,7 +399,7 @@ Note that the directory paths in the script <i>build:ui</i> depend on the locati
 
 #### Render
 
-Note: When you attempt to deploy your backend to Render, make sure you have a seperate repository for the backend and deploy that github repo through Render, attempting to deploy through your Fullstackopen repository will often throw "ERR path ....package.json". 
+Note: When you attempt to deploy your backend to Render, make sure you have a separate repository for the backend and deploy that github repo through Render, attempting to deploy through your Fullstackopen repository will often throw "ERR path ....package.json".
 
 In case of Render, the scripts look like the following
 

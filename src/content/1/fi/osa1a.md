@@ -67,7 +67,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 
 renderöi komponentin sisällön tiedoston <i>public/index.html</i> määrittelemään <i>div</i>-elementtiin, jonka <i>id:n</i> arvona on 'root'.
 
-Tiedosto <i>public/index.html</i> on headerin määrittelyjä lukuunottamatta oleellisesti ottaen tyhjä: 
+Tiedosto <i>public/index.html</i> on headerin määrittelyjä lukuun ottamatta oleellisesti ottaen tyhjä:
 
 ```html
 <!DOCTYPE html>
@@ -151,7 +151,7 @@ Web-sovelluskehityksen sääntö numero yksi on
 
 > <i>pidä konsoli koko ajan auki</i>
 
-Toistetaan tämä vielä yhdessä: <i>pidän konsolin koko ajan auki</i> tamän kurssin ja koko loppuelämäni ajan tehdessäni web-sovelluskehitystä.
+Toistetaan tämä vielä yhdessä: <i>pidän konsolin koko ajan auki</i> tämän kurssin ja koko loppuelämäni ajan tehdessäni web-sovelluskehitystä.
 
 Komponenttien sisällä on mahdollista renderöidä myös dynaamista sisältöä.
 
@@ -343,7 +343,7 @@ Komponentti <i>Hello</i> myös tulostaa props-olion arvon konsoliin.
 
 Toivottavasti konsolisi on auki, jos ei ole, muista yhteinen lupauksemme:
 
-> <i>pidän konsolin koko ajan auki tamän kurssin ja koko loppuelämäni ajan tehdessäni web-sovelluskehitystä</i>
+> <i>pidän konsolin koko ajan auki tämän kurssin ja koko loppuelämäni ajan tehdessäni web-sovelluskehitystä</i>
 
 Ohjemistokehitys on haastavaa, ja erityisen haastavaksi se muuttuu, jos jokainen mahdollinen apukeino kuten web-konsoli sekä komennolla _console.log_ tahtävät aputulostukset eivät ole käytössä. Ammattilaiset käyttävät näitä <i>aina</i>. Ei ole yhtään syytä miksi aloittelijan pitäisi jättää nämä fantastiset apuvälineet hyödyntämättä.
 
@@ -462,7 +462,7 @@ Mitään ei kuitenkaan tule ruudulle. Yritän etsiä koodista 15 minuutin ajan o
 
 Vihdoin mieleeni palaa antamamme lupaus
 
-> <i>pidän konsolin koko ajan auki tamän kurssin ja koko loppuelämäni ajan tehdessäni web-sovelluskehitystä</i>
+> <i>pidän konsolin koko ajan auki tämän kurssin ja koko loppuelämäni ajan tehdessäni web-sovelluskehitystä</i>
 
 Konsoli huutaakin punaisena:
 
@@ -518,7 +518,7 @@ ja ikä
 
 Virheen korjauksen jälkeen kannattaa konsolin virheilmoitukset tyhjentää painamalla Ø ja tämän jälkeen uudelleenladata sivun sisältö ja varmistua että virheilmoituksia ei näy.
 
-Pieni lisähuomio edelliseen. React sallii myös taulukoiden renderöimisen <i>jos</i> taulukko sisältää arvoja, jotka kelpaavat renderöitäviksi (kuten nimeroita tai merkkijonoja). Eli seuraava ohjelma kyllä toimisi, vaikka tulos ei ole kenties se mitä haluamme: 
+Pieni lisähuomio edelliseen. React sallii myös taulukoiden renderöimisen <i>jos</i> taulukko sisältää arvoja, jotka kelpaavat renderöitäviksi (kuten numeroita tai merkkijonoja). Eli seuraava ohjelma kyllä toimisi, vaikka tulos ei ole kenties se mitä haluamme: 
 
 ```js
 const App = () => {
@@ -560,7 +560,7 @@ Kunkin tehtäväsarjan ohjelmasta kannattaa palauttaa kaikki sovelluksen sisält
 
 Tehtävät palautetaan **yksi osa kerrallaan**. Kun olet palauttanut osan tehtävät, et voi enää palauttaa saman osan tekemättä jättämiäsi tehtäviä.
 
-Huomaa, että tässä osassa on muitakin tehtäviä kuin allaolevat. <i>Älä siis tee palautusta</i> ennen kun olet tehnyt osan tehtävistä kaikki, jotka haluat palauttaa.
+Huomaa, että tässä osassa on muitakin tehtäviä kuin alla olevat. <i>Älä siis tee palautusta</i> ennen kun olet tehnyt osan tehtävistä kaikki, jotka haluat palauttaa.
 
 **Vinkki:** Kun olet avaamassa tehtävääsi Visual Studio Codella, huomaathan avata koko projektin kansion editoriin. Tämä mahdollistaa editorissa helpomman tiedostojen välillä siirtymisen ja paremmat automaattiset täydennykset. Tämä onnistuu siirtymällä terminaalissa projektin kansioon ja komentamalla:
 
@@ -639,7 +639,7 @@ const App = () => {
 
 **VAROITUS** älä yritä tehdä ohjelmassasi kaikkia komponentteja yhtä aikaa, sillä se johtaa lähes varmasti siihen että ohjelma ei toimi. Etene pieni askel kerrallaan, tee aluksi esim. komponentti <i>Header</i> ja vasta kun se toimii 100% varmasti, kannattaa edetä seuraavaan komponenttiin.
 
-Huolellinen, pienin askelin eteneminen saattaa tuntua hitaalta, mutta se on itseasiassa <i> ylivoimaisesti nopein</i> tapa edetä. Kuuluisa ohjelmistokehittäjä Robert "Uncle Bob" Martin on todennut
+Huolellinen, pienin askelin eteneminen saattaa tuntua hitaalta, mutta se on itse asiassa <i> ylivoimaisesti nopein</i> tapa edetä. Kuuluisa ohjelmistokehittäjä Robert "Uncle Bob" Martin on todennut
 
 > <i>"The only way to go fast, is to go well"</i>
 

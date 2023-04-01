@@ -595,9 +595,9 @@ $ docker container rm keen_darwin
 $ docker container run -d -p 8080:80 nginx
 ```
 
-> <i>**Editor's note_** when doing development, it is **essential** to constantly follow the container logs. I'm usually not running containers in a detached mode (that is with -d) since it requires a bit of extra effor to open the logs. 
+> <i>**Editor's note_** when doing development, it is **essential** to constantly follow the container logs. I'm usually not running containers in a detached mode (that is with -d) since it requires a bit of an extra effort to open the logs. 
 > 
-> When I'm 100% sure that everything works... no, when I'm 200% sure, then I might relax a bit and start the containers in detached mode. Until everithing again falls apart and it is time to open the logs again.</i>
+> When I'm 100% sure that everything works... no, when I'm 200% sure, then I might relax a bit and start the containers in detached mode. Until everything again falls apart and it is time to open the logs again.</i>
 
 Let's look at the app by going to http://localhost:8080. It seems that the app is showing the wrong message! Let's hop right into the container and fix this. Keep your browser open, we won't need to shut down the container for this fix. We will execute bash inside the container, the flags _-it_ will ensure that we can interact with the container:
 

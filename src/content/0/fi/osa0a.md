@@ -39,7 +39,7 @@ Tämän kurssin eri osiin jo tehtyjen palautusten ajankäyttöstatistiikan näet
 
 Kurssilla ei tällä hetkellä ole varsinaista opetusta, mutta tehtäviin voi yrittää kysyä apua kurssin keskustelukanavalla Discordissa <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> sekä Telegramissa, kanavalla <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. Discordissa kurssiin liittyvää keskustelua varten on kanava fullstack_general ja osa-kohtaiset kanavat (muut fullstack-alkuiset kanavat). Huomaa, että Discordin <i>chat-kanava ei ole kurssiin liittyvää keskustelua varten</i>.
 
-Huom: kaikki epäasialliset, halventavat ja jotain ihmisryhmää syrjivät kommentit kanavalla ovat kiellettyjä ja tälläisten kommenttien esittäjät poistetaan kanavalta.
+Huom: kaikki epäasialliset, halventavat ja jotain ihmisryhmää syrjivät kommentit kanavalla ovat kiellettyjä ja tällaisten kommenttien esittäjät poistetaan kanavalta.
 
 ### Osat ja suorittaminen
 
@@ -180,7 +180,7 @@ Koeaika on 120 minuuttia. Jos koesuoritus hyväksytään, saat seuraavan vahvist
 
 Jos et pääse kokeesta läpi, voit yrittää uudelleen viikon kuluttua.
 
-Jos pääset kokeesta läpi, ja et halua tehdä enempää tehtäviä, voit mennä palautussovelluksen my submissons -välilehdelle ja pyytää suorituksen rekisteröintiä:
+Jos pääset kokeesta läpi, ja et halua tehdä enempää tehtäviä, voit mennä palautussovelluksen my submissions -välilehdelle ja pyytää suorituksen rekisteröintiä:
 
 ![](../../images/0/enroll5a.png)
 
@@ -284,7 +284,7 @@ Muutoksista huolimatta <i>kaikki jo tehdyt palautukset säilyvät voimassa</i>, 
 Viimeaikaisia isompia muutoksia
 - Osa 2 (18.1.2023): Muutos tehtävien numeroinnissa, tehtävät 2.11-13. siirretty osan loppuun
 - Osa 6 (30.1.2023): Uusi luku, aiheenaan React Query, useReducer ja React context korvasi Redux connect -luvun
-- Osa 8 (5.2.2023): Backend muutettu käyttäämään Apollo Server -kirjaston versiota 4.0
+- Osa 8 (5.2.2023): Backend muutettu käyttämään Apollo Server -kirjaston versiota 4.0
 - Osa 9 (12.2.2023): Sisältöä tarkennettu, Patientor-esimerkkisovelluksen rakennetta yksinkertaistettu
 
 ### Aiemmin suoritetun kurssin täydentäminen

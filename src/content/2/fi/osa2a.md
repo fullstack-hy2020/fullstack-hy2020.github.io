@@ -80,7 +80,7 @@ Jos taulukon funktionaalinen käsittely tuntuu vielä vieraalta, kannattaa katso
 
 ### Kokoelmien renderöiminen
 
-Tehdään nyt Reactilla [osan 0](/osa0) alussa käytettyä esimerkkisovelluksen [Single page app -versiota](https://fullstack-exampleapp.herokuapp.com/spa) vastaavan sovelluksen 'frontend' eli selainpuolen sovelluslogiikka.
+Tehdään nyt Reactilla [osan 0](/osa0) alussa käytettyä esimerkkisovelluksen [Single page app -versiota](https://studies.cs.helsinki.fi/exampleapp/spa) vastaavan sovelluksen 'frontend' eli selainpuolen sovelluslogiikka.
 
 Aloitetaan seuraavasta (tiedosto <i>App.js</i>):
 

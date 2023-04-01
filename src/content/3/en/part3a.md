@@ -420,7 +420,7 @@ We can now start the server in development mode with the command:
 npm run dev
 ```
 
-Unlike with the <i>start</i> and <i>test</i> scripts, we also have to add <i>run</i> to the command.
+Unlike with the <i>start</i> and <i>test</i> scripts, we also have to add <i>run</i> to the command because it is a non-native script.
 
 ### REST
 
@@ -717,8 +717,8 @@ Postman also allows users to save requests, but the situation can get quite chao
 >
 > Problems can occur with the VS REST client if you accidentally add an empty line between the top row and the row specifying the HTTP headers. In this situation, the REST client interprets this to mean that all headers are left empty, which leads to the backend server not knowing that the data it has received is in the JSON format.
 >
-
-You will be able to spot this missing <i>Content-Type</i> header if at some point in your code you print all of the request headers with the _console.log(request.headers)_ command.
+>
+> You will be able to spot this missing <i>Content-Type</i> header if at some point in your code you print all of the request headers with the _console.log(request.headers)_ command.
 
 Let's return to the application. Once we know that the application receives data correctly, it's time to finalize the handling of the request:
 
@@ -868,7 +868,7 @@ Data:
 
 Output in the browser after GET request:
   
-![JSON data of 4 poeple in browser from api/persons](../../images/3/22e.png)
+![JSON data of 4 people in browser from api/persons](../../images/3/22e.png)
 
 Notice that the forward slash in the route <i>api/persons</i> is not a special character, and is just like any other character in the string.
 

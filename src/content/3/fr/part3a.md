@@ -1078,7 +1078,7 @@ Cela signifie que si une demande ne génère pas d'effets secondaires, le résul
 Si nous effectuons une requête HTTP PUT vers l'url <i>/api/notes/10</i>  et que nous envoyons avec cette requête les données <em>{ content: "no side effects!", important: true }</em>, le résultat est le même, quel que soit le nombre de fois où la demande est envoyée
 
 
-Comme pour la <i>sécurité</i> de la requête GET, l'<i>idempotence</i> n'est également qu'une recommandation de la norme HTTP et ne peut être garantie simplement sur la base du type de requête. However, when our API adheres to RESTful principles, then GET, HEAD, PUT, and DELETE requests are used in such a way that they are idempotent.
+Comme pour la <i>sécurité</i> de la requête GET, l'<i>idempotence</i> n'est également qu'une recommandation de la norme HTTP et ne peut être garantie simplement sur la base du type de requête. Cependant, lorsque votre API adhère aux principes RESTfull, les requêtes GET, HEAD, PUT et DELETE sont utilisées de telle sorte qu'elles sont idempotentes.
 
 
 POST est le seul type de requête HTTP qui n'est ni <i>sûr</i> ni <i>idempotent</i>. Si nous envoyons 5 requêtes HTTP POST différentes à <i>/api/notes</i> avec un corps de <em>{content: "many same", important: true}</em>, les 5 notes qui en résultent sur le serveur auront toutes le même contenu.
@@ -1147,7 +1147,7 @@ Vous pouvez trouver le code de notre application actuelle dans son intégralité
 
 #### 3.7: Backend du répertoire téléphonique étape 7
 
-Ajoutez le middleware [morgan](https://github.com/expressjs/morgan) à votre application pour la journalisation. Configurez-le pour qu'il consigne les messages sur votre console en selon la <i>petite</i> configuration.
+Ajoutez le middleware [morgan](https://github.com/expressjs/morgan) à votre application pour la journalisation. Configurez-le pour qu'il consigne les messages sur votre console en selon la configuration <i>tiny</i>.
 
 La documentation de Morgan n'est pas la meilleure, et vous devrez peut-être passer un certain temps à comprendre comment le configurer correctement. Cependant, la plupart des documentations dans le monde tombent dans la même catégorie, il est donc bon d'apprendre à déchiffrer et à interpréter une documentation cryptique dans tous les cas.
 
