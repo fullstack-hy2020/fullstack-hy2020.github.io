@@ -329,7 +329,7 @@ Il n'y a pas de structure de répertoire stricte ou de convention de nommage de 
 
 Vous pouvez trouver le code de notre application actuelle dans son intégralité dans la branche <i>part4-1</i> de ce [dépôt GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-1).
 
-Si vous clonez le projet pour vous-même, exécutez la commande npm install avant de lancer l'application avec npm start.
+Si vous clonez le projet pour vous-même, exécutez la commande  _npm install_ avant de lancer l'application avec  _npm start_.
 
 </div>
 
