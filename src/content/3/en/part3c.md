@@ -358,7 +358,7 @@ Person
 
 ### Connecting the backend to a database
 
-Now we have enough knowledge to start using Mongo in our application.
+Now we have enough knowledge to start using Mongo in our notes application backend.
 
 Let's get a quick start by copy-pasting the Mongoose definitions to the <i>index.js</i> file:
 
