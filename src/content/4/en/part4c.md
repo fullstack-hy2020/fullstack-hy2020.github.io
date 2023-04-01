@@ -448,6 +448,19 @@ notesRouter.post('/', async (request, response) => {
   response.json(savedNote)
 })
 ```
+The note scheme will also need to change as follows in our models/note.js file:
+
+```js
+const noteSchema = new mongoose.Schema({
+  content: {
+    type: String,
+    minLength: 5,
+    required: true,
+  },
+  important: Boolean,
+  user: String, //highlight-line
+})
+```
 
 It's worth noting that the <i>user</i> object also changes. The <i>id</i> of the note is stored in the <i>notes</i> field:
 
