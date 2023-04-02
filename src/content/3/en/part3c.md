@@ -424,7 +424,7 @@ app.get('/api/notes', (request, response) => {
 })
 ```
 
-the code uses automatically the defined _toJSON_ when formatting notes to the response.
+The code automatically uses the defined _toJSON_ when formatting notes to the response.
 
 ### Database configuration into its own module
 
