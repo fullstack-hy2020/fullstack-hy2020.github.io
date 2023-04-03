@@ -752,7 +752,7 @@ Ratkaisu on varsin tyylikäs. Koko sovelluksen tila eli laskurin arvo ja sen hal
 
 Sovelluksen lopullinen koodi on GitHubissa repositorion [https://github.com/fullstack-hy2020/hook-counter](https://github.com/fullstack-hy2020/hook-counter/tree/part6-3) branchissa <i>part6-3</i>.
 
-Teknisenä yksityiskohtana todettakoon, että apufunktiot <i>useCounterValue</i> ja <i>useCounterDispatch</i> on määritelty ns. [custom hookeina](https://reactjs.org/docs/hooks-custom.html), sillä funktion <i>useContext</i> kutsuminen [ei ole mahdollista](https://reactjs.org/docs/hooks-rules.html) muualta kuin React-komponenteista tai custom hookeista käsin. Custom hookit taas ovat JavaScript-funktioita joiden nimen pitää alkaa merkkijonolla _use_. Palaamme custom hookeihin hieman tarkemmin kurssin [osassa 7](http://localhost:8000/osa7/custom_hookit).
+Teknisenä yksityiskohtana todettakoon, että apufunktiot <i>useCounterValue</i> ja <i>useCounterDispatch</i> on määritelty ns. [custom hookeina](https://reactjs.org/docs/hooks-custom.html), sillä funktion <i>useContext</i> kutsuminen [ei ole mahdollista](https://reactjs.org/docs/hooks-rules.html) muualta kuin React-komponenteista tai custom hookeista käsin. Custom hookit taas ovat JavaScript-funktioita joiden nimen pitää alkaa merkkijonolla _use_. Palaamme custom hookeihin hieman tarkemmin kurssin [osassa 7](/osa7/custom_hookit).
 
 </div>
 
