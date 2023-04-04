@@ -629,7 +629,7 @@ Next, the browser starts executing the React app, and all the requests it makes 
 
 The frontend container is actually no more accessed beyond the first request that gets the React app source code to the browser.
 
-Set up now your app to work as in the abovefigure. Make sure that the todo-frontend works with todo-backend. It will require changes to the *REACT\_APP\_BACKEND\_URL* environmental variable in the frontend.
+Now set up your app to work as depicted in the above figure. Make sure that the todo-frontend works with todo-backend. It will require changes to the *REACT\_APP\_BACKEND\_URL* environmental variable in the frontend.
 
 Make sure that the development environment is now fully functional, that is:
 - all features of the todo app work
