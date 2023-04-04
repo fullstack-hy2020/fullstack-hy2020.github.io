@@ -586,7 +586,7 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
 
   render(<NoteForm createNote={createNote} />) 
 
-  const input = screen.getByPlaceholderText('write here note content') // highlight-line 
+  const input = screen.getByPlaceholderText('write note content here') // highlight-line 
   const sendButton = screen.getByText('save')
 
   userEvent.type(input, 'testing a form...')
