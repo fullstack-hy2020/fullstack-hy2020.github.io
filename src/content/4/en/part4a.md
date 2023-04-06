@@ -690,7 +690,7 @@ First, define a _dummy_ function that receives an array of blog posts as a param
 
 ```js
 const dummy = (blogs) => {
-  // ...
+  return 1
 }
 
 module.exports = {
