@@ -173,7 +173,7 @@ We will extend our workflow with one more step:
 - name: Bump version and push tag
   uses: anothrNick/github-tag-action@1.55.0
   env:
-    GITHUB_TOKEN: ${{ secrets.GHUB_TOKEN }}
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 Note: you should use the most recent version of the action, see [here](https://github.com/anothrNick/github-tag-action) if a more recent version is available. 
