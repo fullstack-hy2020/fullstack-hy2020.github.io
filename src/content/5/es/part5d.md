@@ -77,6 +77,8 @@ Agreguemos un script npm al <i>backend </i> que lo inicia en modo de prueba, o p
 }
 ```
 
+**NB** Para conseguir que Cypress funcione con WSL2 se debe realizar una configuración preliminar. Estos dos [enlaces](https://docs.cypress.io/guides/getting-started/installing-cypress#Windows-Subsystem-for-Linux) son buenos lugares para [iniciar](https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress).
+
 Cuando tanto el backend como el frontend están ejecutándose, podemos iniciar Cypress con el comando
 
 ```js
