@@ -1,6 +1,6 @@
 import './PrevNext.scss';
 
-import translationProgress from '../../utils/translationProgress'
+import translationProgress from '../../utils/translationProgress';
 import Element from '../Element/Element';
 import { Link } from 'gatsby';
 import { PropTypes } from 'prop-types';
@@ -108,7 +108,7 @@ const PrevNext = ({ part, letter, lang }) => {
   const getNext = () => {
     if (!letter && hasPart(part + 1, lang)) {
       if (translationProgress[lang] <= part) {
-        lang = 'en'
+        lang = 'en';
       }
       return (
         <Link

@@ -36,7 +36,9 @@ export default class ContentTemplate extends Component {
   }
 
   componentDidMount() {
-    const links = Array.from(document.querySelectorAll('a:not(.skip-to-content'));
+    const links = Array.from(
+      document.querySelectorAll('a:not(.skip-to-content')
+    );
     const h1 = document.querySelector('h1');
     const h3 = document.querySelectorAll('h3');
     const h3Arr = Array.from(h3).map(t => t.innerText);

@@ -154,7 +154,7 @@ A checagem do valor do cabeçalho possui uma sintaxe estranha:
 .expect('Content-Type', /application\/json/)
 ```
 
-O valor desejado foi definido por meio de uma [expressão regular](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Regular_Expressions), ou simplesmente regex. Uma regex inicia e termina com uma barra /; já que a string que desejamos também possui em seu conteúdo a mesma barra (<i>application/json</i>) precisamos inserir antes dela uma contra-barra \ para que ela não seja entendida como um carácter de encerramento de nossa regex.
+O valor desejado foi definido por meio de uma [expressão regular](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Regular_Expressions), ou simplesmente regex. Uma regex inicia e termina com uma barra /; já que a string que desejamos também possui em seu conteúdo a mesma barra (<i>application/json</i>) precisamos inserir antes dela uma contra-barra \ para que ela não seja entendida como um caractere de encerramento de nossa regex.
 
 Em princípio, poderíamos definir o parâmetro para o teste como uma string:
 
@@ -710,7 +710,7 @@ Se ocorrer uma exceção durante a requisição POST, enfrentaremos uma situaç�
 
 Em outras palavras, acabamos com uma rejeição de promessa que não foi tratada e a solicitação nunca recebe uma resposta.
 
-Com o async/await, o recomendado no tratamento de exceções é o familiar mecanismo _try/catch_:
+Com o async/await, o recomendado no tratamento de exceções é o mecanismo familiar _try/catch_:
 
 ```js
 notesRouter.post('/', async (request, response, next) => {
