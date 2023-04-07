@@ -105,7 +105,7 @@ Since the return type of most React components is generally either *JSX.Element*
 Now we don't need to explicitly state our function return types everywhere. We will also disable [react/react-in-jsx-scope](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/react-in-jsx-scope.md) since importing React is [no longer needed](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html) in every file.
 
 Next, we need to get our linting script to parse <i>*.tsx </i> files, which are the TypeScript equivalent of React's JSX files.
-We can do that by altering our lint command in <i>.package.json</i> to the following:
+We can do that by altering our lint command in <i>package.json</i> to the following:
 
 ```json
 {
@@ -376,7 +376,7 @@ Besides the attributes that are found in the various course parts, we have now i
 Next, we will create a type [union](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types) of all these types. We can then use it to define a type for our array, which should accept any of these course part types:
 
 ```js
-type CoursePart = CoursePartBasic | CoursePartGroup | CoursePartBackround;
+type CoursePart = CoursePartBasic | CoursePartGroup | CoursePartBackground;
 ```
 
 Now we can set the type for our *courseParts* variable:

@@ -7,7 +7,7 @@ lang: en
 
 <div class="content">
 
-We will now start getting familiar with probably the most important topic of this course, namely the [React](https://reactjs.org/) library. Let's start by making a simple React application as well as getting to know the core concepts of React.
+We will now start getting familiar with probably the most important topic of this course, namely the [React](https://react.dev/) library. Let's start by making a simple React application as well as getting to know the core concepts of React.
 
 The easiest way to get started by far is by using a tool called [create-react-app](https://github.com/facebook/create-react-app). It is possible (but not necessary) to install <i>create-react-app</i> on your machine if the <i>npm</i> tool that was installed along with Node has a version number of at least <i>5.3</i>.
 
@@ -59,7 +59,7 @@ The files <i>App.css</i>, <i>App.test.js</i>, <i>index.css</i>, <i>logo.svg</i>,
 
 ### Component
 
-The file <i>App.js</i> now defines a [React component](https://reactjs.org/docs/components-and-props.html) with the name <i>App</i>. The command on the final line of file <i>index.js</i>
+The file <i>App.js</i> now defines a [React component](https://react.dev/learn/your-first-component) with the name <i>App</i>. The command on the final line of file <i>index.js</i>
 
 ```js
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
@@ -189,7 +189,7 @@ Did you remember your promise to keep the console open? What was printed out the
 
 ### JSX
 
-It seems like React components are returning HTML markup. However, this is not the case. The layout of React components is mostly written using [JSX](https://reactjs.org/docs/introducing-jsx.html). Although JSX looks like HTML, we are dealing with a way to write JavaScript. Under the hood, JSX returned by React components is compiled into JavaScript.
+It seems like React components are returning HTML markup. However, this is not the case. The layout of React components is mostly written using [JSX](https://react.dev/learn/writing-markup-with-jsx). Although JSX looks like HTML, we are dealing with a way to write JavaScript. Under the hood, JSX returned by React components is compiled into JavaScript.
 
 After compiling, our application looks like this:
 
@@ -277,7 +277,7 @@ Another strong convention is the idea of a <i>root component</i> called <i>App</
 
 ### props: passing data to components
 
-It is possible to pass data to components using so-called [props](https://reactjs.org/docs/components-and-props.html).
+It is possible to pass data to components using so-called [props](https://react.dev/learn/passing-props-to-a-component).
 
 Let's modify the component <i>Hello</i> as follows:
 
@@ -415,7 +415,7 @@ const App = () => {
 
 However, when defining the root component of the application this is not a particularly wise thing to do, and it makes the code look a bit ugly.
 
-Because the root element is stipulated, we have "extra" div elements in the DOM tree. This can be avoided by using [fragments](https://reactjs.org/docs/fragments.html#short-syntax), i.e. by wrapping the elements to be returned by the component with an empty element:
+Because the root element is stipulated, we have "extra" div elements in the DOM tree. This can be avoided by using [fragments](https://react.dev/reference/react/Fragment), i.e. by wrapping the elements to be returned by the component with an empty element:
 
 ```js
 const App = () => {

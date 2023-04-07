@@ -9,7 +9,7 @@ lang: en
 
 Having written a nice application it's time to think about how we're going to deploy it to the use of real users. 
 
-In [part 3](/en/part3/deploying_app_to_internet) of this course, we did this by simply by running a single command from terminal to get the code up and running the servers of the cloud provider [Fly.io](https://fly.io/) or [Render](hhttps://render.com/).
+In [part 3](/en/part3/deploying_app_to_internet) of this course, we did this by simply running a single command from terminal to get the code up and running the servers of the cloud provider [Fly.io](https://fly.io/) or [Render](hhttps://render.com/).
 
 It is pretty simple to release software in Fly.io and Render at least compared to many other types of hosting setups but it still contains risks: nothing prevents us from accidentally releasing broken code to production.
 
@@ -52,7 +52,7 @@ Let's define some things we **want** in this hypothetical deployment system too:
  - We would like it to be fast
  - We'd like to have no downtime during the deployment (this is distinct from the requirement we have for handling user requests just before/during the deployment).
 
-Next we will have two sets of exercises for automazing the deployment with GitHub Actions, one for those who want to use [Fly.io](https://fly.io/) and one for those who want to use [Heroku](https://heroku.com) for the deployment.  The process of deployment is always specific to the particular cloud provider, so you can also do the both the exercise sets if you want to see the differences how these services work with respect to deployments.
+Next we will have three sets of exercises for automazing the deployment with GitHub Actions, one for [Fly.io](https://fly.io/), another one for [Render](https://render.com/) and finally the good old [Heroku](https://heroku.com). The process of deployment is always specific to the particular cloud provider, so you can also do the both the exercise sets if you want to see the differences how these services work with respect to deployments.
 
 </div>
 

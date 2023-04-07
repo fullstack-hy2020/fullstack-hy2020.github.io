@@ -358,7 +358,7 @@ Person
 
 ### Connecting the backend to a database
 
-Now we have enough knowledge to start using Mongo in our application.
+Now we have enough knowledge to start using Mongo in our notes application backend.
 
 Let's get a quick start by copy-pasting the Mongoose definitions to the <i>index.js</i> file:
 
@@ -398,9 +398,9 @@ The application works almost perfectly. The frontend assumes that every object h
 
 One way to format the objects returned by Mongoose is to [modify](https://stackoverflow.com/questions/7034848/mongodb-output-id-instead-of-id) the _toJSON_ method of the schema, which is used on all instances of the models produced with that schema.
   
-To modify the method we need to change the configurable options of the schema, options can be changed using the set method of the schema, see here for more info on this method: https://mongoosejs.com/docs/guide.html#options. See <https://mongoosejs.com/docs/guide.html#toJSON> and <https://mongoosejs.com/docs/api.html#document_Document-toObject> for more info on the toJSON option.
+To modify the method we need to change the configurable options of the schema, options can be changed using the set method of the schema, see here for more info on this method: https://mongoosejs.com/docs/guide.html#options. See <https://mongoosejs.com/docs/guide.html#toJSON> and <https://mongoosejs.com/docs/api.html#document_Document-toObject> for more info on the _toJSON_ option.
   
-see <https://mongoosejs.com/docs/api.html#transform> for more info on the transform function.
+see <https://mongoosejs.com/docs/api.html#transform> for more info on the _transform_ function.
 
 ```js
 noteSchema.set('toJSON', {
@@ -424,7 +424,7 @@ app.get('/api/notes', (request, response) => {
 })
 ```
 
-the code uses automatically the defined _toJSON_ when formatting notes to the response.
+The code automatically uses the defined _toJSON_ when formatting notes to the response.
 
 ### Database configuration into its own module
 
