@@ -598,7 +598,7 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
 })
 ```
 
-A maneira mais flexível de encontrar elementos nos testes é o método <i>querySelector</i> do objeto _container_, que é retornado por _render_, como foi mencionado [anteriormente nesta parte] (/ptbr/part5/testando_aplicacoes_react#procurando-por-conteudo-em-um-componente). Qualquer seletor de CSS pode ser usado com esse método para pesquisar elementos nos testes.
+A maneira mais flexível de encontrar elementos nos testes é o método <i>querySelector</i> do objeto _container_, que é retornado por _render_, como foi mencionado [anteriormente nesta parte](/ptbr/part5/testando_aplicacoes_react#procurando-por-conteudo-em-um-componente). Qualquer seletor de CSS pode ser usado com esse método para pesquisar elementos nos testes.
 
 Considere por exemplo. que definiríamos um _id _id único para o campo de entrada:
 
