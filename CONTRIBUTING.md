@@ -7,7 +7,7 @@
 4. Install dependencies with `npm install`
 5. Start the application with `npm start`
 
-# Setting up the PR'
+# Setting up the PR
 
 1. Prettify your code with `npm run format`
 2. Create a new branch for your changes

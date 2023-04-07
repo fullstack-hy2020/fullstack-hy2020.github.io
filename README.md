@@ -32,13 +32,13 @@
 ## part4 - Testing Express servers, user administration
 - [x] part4 (intro)
 - [x] part4a
-- [ ] part4b
+- [x] part4b
 - [x] part4c
-- [ ] part4d
+- [x] part4d
 
 ## part5 - Testing React apps
-- [ ] part5 (intro)
-- [ ] part5a
+- [x] part5 (intro)
+- [x] part5a
 - [ ] part5b
 - [ ] part5c
 - [ ] part5d
