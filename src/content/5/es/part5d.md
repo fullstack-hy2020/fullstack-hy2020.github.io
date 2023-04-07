@@ -425,7 +425,7 @@ Si las pruebas necesitan poder modificar la base de datos del servidor, la situa
 Al igual que con las pruebas unitarias y de integración, con las pruebas E2E es mejor vaciar la base de datos y posiblemente formatearla antes de ejecutar las pruebas. El desafío con las pruebas E2E es que no tienen acceso a la base de datos.
 
 La solución es crear endpoints de API en el backend para la prueba.
-Creemos un nuevo <i>enrutador</i> para las pruebas
+Creemos un nuevo enrutador para las pruebas dentro de la carpeta <i>controllers</i>, en el archivo <i>testing.js</i>
 
 ```js
 const router = require('express').Router()
