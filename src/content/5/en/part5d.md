@@ -404,7 +404,7 @@ As with unit and integration tests, with E2E tests it is best to empty the datab
 
 The solution is to create API endpoints for the backend tests.
 We can empty the database using these endpoints.
-Let's create a new <i>router</i> for the tests
+Let's create a new router for the tests inside the <i>controllers</i> folder, in the <i>testing.js</i> file
 
 ```js
 const testingRouter = require('express').Router()
