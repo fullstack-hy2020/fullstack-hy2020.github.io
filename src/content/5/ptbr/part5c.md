@@ -3,6 +3,7 @@ mainImage: ../../../images/part-5.svg
 part: 5
 letter: c
 lang: ptbr
+
 ---
 
 <div class="content">
@@ -236,9 +237,9 @@ Agora o HTML do elemento procurado é impresso:
   <li
     class="note"
   >
-    O teste de componentes é feito com a biblioteca de teste de reação
+    Component testing is done with react-testing-library
     <button>
-      não tornar importante
+      make not important
     </button>
   </li>
 ```
@@ -536,7 +537,7 @@ Agora a abordagem que nosso teste usa para encontrar o campo de entrada
 ```js
 const input = screen.getByRole('textbox')
 ```
-
+  
 causaria um erro:
 
 ![Erro do nó que mostra dois elementos com caixa de texto, já que usamos getByRole](../../images/5/40.png)
