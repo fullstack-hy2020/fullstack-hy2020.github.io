@@ -1192,15 +1192,24 @@ Hacer una prueba que compruebe que al usuario le puede gustar ("like") un blog.
 #### 5.21: prueba de extremo a extremo de la lista de blogs, paso 5
 
 Realice una prueba para asegurarse de que el usuario que creó un blog pueda eliminarlo.
-
-<i>Ejercicio adicional opcional:</i> también verifique que otros usuarios no puedan eliminar el blog.
-
+	
 #### 5.22: prueba de extremo a extremo de la lista de blogs , paso 6
+
+Realice una prueba para asegurarse de que otros usuarios no puedan eliminar el blog.
+
+#### 5.23: prueba de extremo a extremo de la lista de blogs , paso 7
 
 Realice una prueba que verifique que los blogs estén ordenados de acuerdo con los likes con el blog con más likes en primer lugar.
 
-Este ejercicio puede ser un poco más complicado. Una solución es encontrar todos los blogs y luego compararlos en la función de devolución de llamada de un comando [then](https://docs.cypress.io/api/commands/then.html#DOM-element).
+<i>Este ejercicio puede ser un poco más complicado que los anteriores</i>. Una posible solución es adicionar cierta clase para el elemento que cubre el contenido del blog y luego usar el método [eq](https://docs.cypress.io/api/commands/eq#Syntax) para obtener el elemento en un índice específico:
+  
+```js
+cy.get('.blog').eq(0).should('contain', 'The title with the most likes')
+cy.get('.blog').eq(1).should('contain', 'The title with the second most likes')
+```
 
-Este fue el último ejercicio de esta parte, y es hora de enviar su código a github y marcar los ejercicios que completó en el [sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) .
+Tenga en cuenta que podría terminar teniendo problemas si hace clic en el botón "Like" muchas veces seguidas. Puede ser que Cypress haga clic tan rápido que no tenga tiempo de actualizar el estado de la aplicación entre los clics. Una solución para esto es esperar a que se actualice la cantidad de Likes entre todos los clics.
+
+Este fue el último ejercicio de esta parte, y es hora de enviar su código a github y marcar los ejercicios que completó en el [sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>
