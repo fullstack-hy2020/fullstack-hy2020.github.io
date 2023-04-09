@@ -347,13 +347,13 @@ The database is cleared out at the beginning, and after that, we save the two no
 Let's also make the following changes to the last two tests:
 
 ```js
-test('all notes are returned', async () => {
+test('all notes are returned', async () => { // highlight-line
   const response = await api.get('/api/notes')
 
   expect(response.body).toHaveLength(initialNotes.length) // highlight-line
 })
 
-test('a specific note is within the returned notes', async () => {
+test('a specific note is within the returned notes', async () => { // highlight-line
   const response = await api.get('/api/notes')
 
   // highlight-start
