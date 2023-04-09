@@ -329,6 +329,15 @@ Fly.io:n tapauksessa skriptit näyttävät seuraavalta:
   }
 }
 ```
+  
+##### Huomautus Windows-käyttäjille
+Huomaa, että näistä `build:ui` toimii ainoastaan Linuxilla ja Macilla. Windowsin powershell toimii eri tavalla ja tällöin skripti olisi
+```json
+"build:ui": "Remove-Item -Recurse -Force build && cd ../frontend && npm run build && Copy-Item build -Recurse ../backend",
+```
+  
+Mikäli skripti ei toimi Windowsilla, tarkista, että terminaalisi sovelluskehitysympäristössäsi on Powershell eikä esimerkiksi Command Prompt. Jos olet asentanut Git Bash -terminaalin, tai muun Linuxia matkivan terminaalin tai ympäristön, saatat pystyä ajamaan Linuxin kaltaisia komentoja myös Windowsilla.
+
 
 Skripteistä _npm run build:ui_ kääntää ui:n tuotantoversioksi ja kopioi sen. _npm run deploy_ julkaisee Fly.io:n.
 
