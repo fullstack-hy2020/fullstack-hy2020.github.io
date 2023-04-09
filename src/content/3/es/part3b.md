@@ -227,6 +227,16 @@ Para crear una nueva compilación de producción del frontend sin trabajo manual
 }
 ```
 
+##### Para usuarios de Windows
+
+Tenga en cuenta que los comandos de shell estándar en `build:ui` no funcionan de forma nativa en Windows. En Powershell de Windows se puede escribir el script como
+
+```json
+"build:ui": "Remove-Item -Recurse -Force build && cd ../../osa2/materiaali/notes-new && npm run build && Copy-Item build -Recurse ../../../osa3/notes-backend/"
+```
+ 
+Si el script no funciona en Windows, confirme que está utilizando Powershell en vez de Command Prompt. Si ha instalado Git Bash u otro terminal como Linux, también posiblemente puede ejecutar comandos similares a Linux en Windows.
+
 El script  _npm run build:ui_ construye el frontend y copia la versión de producción en el repositorio backend. _npm run deploy_ libera el backend actual a heroku.
 
 _npm run deploy:full_: full combina estos dos y contiene los comandos <i>git</i> necesarios para actualizar el repositorio de backend.
