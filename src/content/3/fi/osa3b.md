@@ -331,7 +331,7 @@ Fly.io:n tapauksessa skriptit näyttävät seuraavalta:
 ```
   
 ##### Huomautus Windows-käyttäjille
-Huomaa, että näistä `build:ui` toimii ainoastaan Linuxilla ja Macilla. Windowsin powershell toimii eri tavalla ja tällöin skripti olisi
+Huomaa, että näistä `build:ui`:n käyttämät shell-komennot eivät toimi natiivisti Windowsilla, jonka powershell käyttää eri komentoja. Tällöin skripti olisi
 ```json
 "build:ui": "Remove-Item -Recurse -Force build && cd ../frontend && npm run build && Copy-Item build -Recurse ../backend",
 ```
