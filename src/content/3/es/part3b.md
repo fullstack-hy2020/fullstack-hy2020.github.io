@@ -232,7 +232,7 @@ Para crear una nueva compilación de producción del frontend sin trabajo manual
 Tenga en cuenta que los comandos de shell estándar en `build:ui` no funcionan de forma nativa en Windows. En Powershell de Windows se puede escribir el script como
 
 ```json
-"build:ui": "Remove-Item -Recurse -Force build && cd ../../osa2/materiaali/notes-new && npm run build && Copy-Item build -Recurse ../../../osa3/notes-backend/"
+"build:ui": "@powershell Remove-Item -Recurse -Force build && cd ../../osa2/materiaali/notes-new && npm run build && @powershell Copy-Item build -Recurse ../../../osa3/notes-backend/"
 ```
  
 Si el script no funciona en Windows, confirme que está utilizando Powershell en vez de Command Prompt. Si ha instalado Git Bash u otro terminal como Linux, también posiblemente puede ejecutar comandos similares a Linux en Windows.
