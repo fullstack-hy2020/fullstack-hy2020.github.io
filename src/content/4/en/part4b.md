@@ -685,7 +685,7 @@ afterAll(async () => {
 
 The code using promises works and the tests pass. We are ready to refactor our code to use the async/await syntax.
 
-We make the following changes to the code that takes care of adding a new note(notice that the route handler definition is preceded by the _async_ keyword):
+We make the following changes to the code that takes care of adding a new note (notice that the route handler definition is preceded by the _async_ keyword):
 
 ```js
 notesRouter.post('/', async (request, response, next) => {
