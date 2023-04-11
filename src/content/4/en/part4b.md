@@ -214,7 +214,7 @@ test('notes are returned as json', async () => {
   
 This third parameter sets the timeout to 100000 ms. A long timeout ensures that our test won't fail due to the time it takes to run. (A long timeout may not be what you want for tests based on performance or speed, but this is fine for our example tests).
 
-One tiny but important detail: at the [beginning](/en/part4/structure_of_backend_application_introduction_to_testing#project-structure) of this part we extracted the Express application into the <i>app.js</i> file, and the role of the <i>index.js</i> file was changed to launch the application at the specified port with Node's built-in <i>http</i> object:
+One tiny but important detail: at the [beginning](/en/part4/structure_of_backend_application_introduction_to_testing#project-structure) of this part we extracted the Express application into the <i>app.js</i> file, and the role of the <i>index.js</i> file was changed to launch the application at the specified port via `app.listen`:
 
 ```js
 const app = require('./app') // the actual Express app
@@ -226,7 +226,7 @@ app.listen(config.PORT, () => {
 })
 ```
 
-The tests only use the express application defined in the <i>app.js</i> file:
+The tests only use the Express application defined in the <i>app.js</i> file, which does not listen to any ports:
 
 ```js
 const mongoose = require('mongoose')
