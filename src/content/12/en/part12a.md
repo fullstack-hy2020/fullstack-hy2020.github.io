@@ -188,7 +188,7 @@ The output contains a few new things for us to learn. <i>Docker daemon</i> is a 
 ### Exercise 12.2
 
 Some of these exercises do not require you to write any code or configurations to a file.
-In these exercises you should use [script](https://man7.org/linux/man-pages/man1/script.1.html) command to record the commands you have used; try it yourself with _script_ to start recording, _echo "hello"_ to generate some output, and _exit_ to stop recording. It saves your actions into a file names "typescript" (that has nothing to do with the TypeScript programming language, the name is just a coincidence).
+In these exercises you should use [script](https://man7.org/linux/man-pages/man1/script.1.html) command to record the commands you have used; try it yourself with _script_ to start recording, _echo "hello"_ to generate some output, and _exit_ to stop recording. It saves your actions into a file named "typescript" (that has nothing to do with the TypeScript programming language, the name is just a coincidence).
 
 If _script_ does not work, you can just copy-paste all commands you used into a text file.
 
