@@ -372,6 +372,18 @@ Set up the action to your workflow and ensure that every commit that pass all th
 ```bash
 https://dashboard.render.com/web/srv-crandomcharachtershere
 ```
+Alternatively you could just use [Render Deploy Hook](https://render.com/docs/deploy-hooks) which is a private url to trigger the deployment. You can get it from your app settings ![fsorender1](https://user-images.githubusercontent.com/47830671/230722899-1ebb414e-ae1e-4a5e-a7b8-f376c4f1ca4d.png). 
+DON'T USE the plain url in your pipeline. Instead create github secrets for your key and service id: ![fsorender2](https://user-images.githubusercontent.com/47830671/230723138-77d027be-3162-4697-987e-b654bc710187.png)
+Then you can use them like this: 
+``` bash
+    main:
+    name: Deploy to Render
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger deployment
+        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
+```
+
 
 The deployment takes some time. See the events tab of the Render dashboard to see when the new deployment is ready:
 
