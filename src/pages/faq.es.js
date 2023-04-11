@@ -6,7 +6,7 @@ const FAQ = () => (
   <FaqPage
     lang="es"
     title="FAQ | Full Stack open"
-    seoDescription="Frequently asked questions"
+    seoDescription="Preguntas frecuentes"
   />
 );
 
