@@ -368,9 +368,7 @@ info('message')
 error('error message')
 ```
 
-The latter way may be preferable if only a small portion of the exported functions are used in a file.
-
-E.g. in file <i>controller/notes.js</i> exporting happens as follows:
+The second way of of exporting may be preferable if only a small portion of the exported functions are used in a file.  E.g. in file <i>controller/notes.js</i> exporting happens as follows:
 
 ```js
 const notesRouter = require('express').Router()
