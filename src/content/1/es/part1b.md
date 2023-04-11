@@ -482,7 +482,7 @@ setTimeout(arto.greet.bind(arto), 1000)
 
 Al llamar a <em>arto.greet.bind(arto)</em> se crea una nueva función donde _this_ está obligado a apuntar a Arto, independientemente de dónde y cómo se llame al método.
 
-Usando [funciones de flecha](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) es posible resolver algunos de los problemas relacionados con _this_. Sin embargo, no deben usarse como métodos para objetos porque entonces _esto_ no funciona en absoluto. Más adelante volveremos al comportamiento de _este_ en relación con las funciones de flecha. 
+Usando [funciones de flecha](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) es posible resolver algunos de los problemas relacionados con _this_. Sin embargo, no deben usarse como métodos para objetos porque entonces _this_ no funciona en absoluto. Más adelante volveremos al comportamiento de _este_ en relación con las funciones de flecha. 
 
 Si desea obtener una mejor comprensión de cómo _this_ funciona en JavaScript, Internet está lleno de material sobre el tema, por ejemplo, la serie de screencasts [Comprender la palabra clave this de JavaScript en profundidad](https://egghead.io/courses/understand-javascript-s-this-keyword-in-depth) de [egghead.io](https://egghead.io) es muy recomendable. 
 
