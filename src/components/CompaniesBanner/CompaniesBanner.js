@@ -18,7 +18,7 @@ const partners = [
     url: 'https://www.helsinki.fi/',
   },
   {
-    image: { name: 'houston.svg', alt: 'Houston inc.' },
+    image: { name: 'houston2.svg', alt: 'Houston inc.' },
     url: 'https://www.houston-inc.com/careers',
   },
   {
