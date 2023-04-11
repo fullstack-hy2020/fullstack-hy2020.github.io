@@ -210,7 +210,7 @@ In compiled statically typed languages like Java, IDEs like NetBeans can point o
 
 In the JavaScript universe, the current leading tool for static analysis aka. "linting" is [ESlint](https://eslint.org/).
 
-Let's install ESlint as a development dependency to the backend project with the command:
+Let's install ESlint as a development dependency to the notes backend project with the command:
 
 ```bash
 npm install eslint --save-dev
