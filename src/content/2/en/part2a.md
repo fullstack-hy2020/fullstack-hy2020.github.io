@@ -348,7 +348,7 @@ As such, one way to define the row generation without getting errors is:
 </ul>
 ```
 
-This is; however, **not recommended** and can create undesired problems even if it seems to be working just fine.
+This is, however, **not recommended** and can create undesired problems even if it seems to be working just fine.
 
 Read more about this in [this article](https://robinpokorny.medium.com/index-as-a-key-is-an-anti-pattern-e0349aece318).
 
