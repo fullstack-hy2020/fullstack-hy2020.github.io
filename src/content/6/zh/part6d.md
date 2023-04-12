@@ -720,7 +720,7 @@ const App = () => {
 
 context 的值现在被设置为一个包含了计数器的值和 *dispatch* 函数的数组。
 
-Other components now access the context using the [useContext](https://beta.reactjs.org/reference/react/useContext) hook:
+<!--Other components now access the context using the [useContext](https://beta.reactjs.org/reference/react/useContext) hook:-->
 
 其他的组件现在可以通过使用 [useContext](https://beta.reactjs.org/reference/react/useContext) 钩子来访问 context。
 
@@ -749,9 +749,13 @@ const Button = ({ type, label }) => {
 
 当前应用的代码可以在 [GitHub](https://github.com/fullstack-hy2020/hook-counter/tree/part6-2) 上 *part6-2* 的分支中找到。
 
-### Defining the counter context in a separate file
+### <!--Defining the counter context in a separate file-->
 
-Our application has an annoying feature, that the functionality of the counter state management is partly defined in the <i>App</i> component. Now let's move everything related to the counter to <i>CounterContext.js</i>:
+### 在单独的文件中定义计数器的 context
+
+<!--Our application has an annoying feature, that the functionality of the counter state management is partly defined in the <i>App</i> component. Now let's move everything related to the counter to <i>CounterContext.js</i>:-->
+
+我们的应用有个令人讨厌的特点：计数器一部分状态管理的功能，是在 *APP* 组件中定义的。现在，让我们将和计数器有关的内容，都移动到 *CounterContext.js*。
 
 ```js
 import { createContext, useReducer } from 'react'
@@ -784,9 +788,13 @@ export const CounterContextProvider = (props) => {
 export default CounterContext
 ```
 
-The file now exports, in addition to the <i>CounterContext</i> object corresponding to the context, the <i>CounterContextProvider</i> component, which is practically a context provider whose value is a counter and a dispatcher used for its state management.
+<!--The file now exports, in addition to the <i>CounterContext</i> object corresponding to the context, the <i>CounterContextProvider</i> component, which is practically a context provider whose value is a counter and a dispatcher used for its state management.-->
 
-Let's enable the context provider by making a change in <i>index.js</i>:
+这个文件除了导出和 context 对应的 *CounterContext* 对象外，还导出了<i>CounterContextProvider</i> 组件，这个组件实际上是一个 context 提供者，它的值包括一个计数器和一个用于其状态管理的调度器。
+
+<!--Let's enable the context provider by making a change in <i>index.js</i>:-->
+
+让我们更新 *index.js* ，以启用 context 提供者：
 
 ```js
 import ReactDOM from 'react-dom/client'
@@ -800,9 +808,13 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 )
 ```
 
-Now the context defining the value and functionality of the counter is available to <i>all</i> components of the application.
+<!--Now the context defining the value and functionality of the counter is available to <i>all</i> components of the application.-->
 
-The <i>App</i> component is simplified to the following form:
+现在，定义了计数器的值和功能的 context，可以被应用中的*所有*组件使用。
+
+<!--The <i>App</i> component is simplified to the following form:-->
+
+*App* 组件被简化成如下的形式：
 
 ```js
 import Display from './components/Display'
@@ -824,7 +836,9 @@ const App = () => {
 export default App
 ```
 
-The context is still used in the same way, e.g. the component <i>Button</i> is defined as follows:
+<!--The context is still used in the same way, e.g. the component <i>Button</i> is defined as follows:-->
+
+context 仍然按和此前相同的方法使用，例如， *Button* 组件可以通过如下的方式定义：
 
 ```js
 import { useContext } from 'react'
@@ -842,13 +856,17 @@ const Button = ({ type, label }) => {
 export default Button
 ```
 
-The <i>Button</i> component only needs the <i>dispatch</i> function of the counter, but it also gets the value of the counter from the context using the function <i>useContext</i>:
+<!--The <i>Button</i> component only needs the <i>dispatch</i> function of the counter, but it also gets the value of the counter from the context using the function <i>useContext</i>:-->
+
+*Button* 组件仅需要计数器的 *dispatch* 函数，但是它也可以通过 *useContext* 从 context 中获取计数器的值：
 
 ```js
   const [counter, dispatch] = useContext(CounterContext)
 ```
 
-This is not a big problem, but it is possible to make the code a bit more pleasant and expressive by defining a couple of helper functions in the <i>CounterContext</i> file:
+<!--This is not a big problem, but it is possible to make the code a bit more pleasant and expressive by defining a couple of helper functions in the <i>CounterContext</i> file:-->
+
+这不是个大问题，但是我们可以通过在 *CounterContext* 文件中编写一些辅助函数，使我们的代码更加优雅、清晰：
 
 ```js
 import { createContext, useReducer, useContext } from 'react' // highlight-line
@@ -870,7 +888,9 @@ export const useCounterDispatch = () => {
 // ...
 ```
 
-With the help of these helper functions, it is possible for the components that use the context to get hold of the part of the context that they need. The <i>Display</i> component changes as follows:
+<!--With the help of these helper functions, it is possible for the components that use the context to get hold of the part of the context that they need. The <i>Display</i> component changes as follows:-->
+
+有了辅助函数的帮助，需要使用 context 的组件就可以只获得它们所需的部分。*Display* 组件的更新如下：
 
 ```js
 import { useCounterValue } from '../CounterContext' // highlight-line
@@ -886,7 +906,9 @@ const Display = () => {
 export default Display
 ```
 
-Component <i>Button</i> becomes:
+<!--Component <i>Button</i> becomes:-->
+
+Button 组件更新为：
 
 ```js
 import { useCounterDispatch } from '../CounterContext' // highlight-line
@@ -903,11 +925,17 @@ const Button = ({ type, label }) => {
 export default Button
 ```
 
-The solution is quite elegant. The entire state of the application, i.e. the value of the counter and the code for managing it, is now isolated in the file <i>CounterContext</i>, which provides components with well-named and easy-to-use auxiliary functions for managing the state.
+<!--The solution is quite elegant. The entire state of the application, i.e. the value of the counter and the code for managing it, is now isolated in the file <i>CounterContext</i>, which provides components with well-named and easy-to-use auxiliary functions for managing the state.-->
 
-The final code for the application is in [GitHub](https://github.com/fullstack-hy2020/hook-counter/tree/part6-3) in the branch <i>part6-3</i>.
+这个解决方案非常优雅。整个应用的状态，即，计数器的值和管理值的代码，已经独立放置于  <i>CounterContext</i> 文件中，这个文件提供了命名良好和易于使用的辅助函数来管理状态。
 
-As a technical detail, it should be noted that the helper functions <i>useCounterValue</i> and <i>useCounterDispatch</i> are defined as [custom hooks](https://reactjs.org/docs/hooks-custom.html), because calling the hook function <i>useContext</i> is [possible](https://reactjs.org/docs/hooks -rules.html) only from React components or custom hooks. Custom Hooks, on the other hand, are JavaScript functions whose name must start with the string _use_. We will return to custom hooks in a little more detail in [part 7](http://localhost:8000/en/part7/custom_hooks) of the course.
+<!--The final code for the application is in [GitHub](https://github.com/fullstack-hy2020/hook-counter/tree/part6-3) in the branch <i>part6-3</i>.-->
+
+当前应用的代码可以在 [GitHub](https://github.com/fullstack-hy2020/hook-counter/tree/part6-3) 上 *part6-3* 的分支中找到。
+
+<!--As a technical detail, it should be noted that the helper functions <i>useCounterValue</i> and <i>useCounterDispatch</i> are defined as [custom hooks](https://reactjs.org/docs/hooks-custom.html), because calling the hook function <i>useContext</i> is [possible](https://reactjs.org/docs/hooks -rules.html) only from React components or custom hooks. Custom Hooks, on the other hand, are JavaScript functions whose name must start with the string _use_. We will return to custom hooks in a little more detail in [part 7](http://localhost:8000/en/part7/custom_hooks) of the course.-->
+
+作为一个技术细节，应当注意到辅助函数——<i>useCounterValue</i> 和 <i>useCounterDispatch</i>，是 [自定义钩子（custom hooks）](https://reactjs.org/docs/hooks-custom.html)，因为[只能](https://reactjs.org/docs/hooks -rules.html)通过 React 组件或自定义钩子调用钩子函数 *useContext*。此外，自定义钩子是必须以 *use* 作为名称开头的 JavaScript 函数。我们将在这门课程的 [part 7](http://localhost:8000/en/part7/custom_hooks) 更深入地探讨自定义钩子。
 
 </div>
 
