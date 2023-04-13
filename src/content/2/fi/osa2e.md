@@ -392,7 +392,7 @@ notesToShow.map(note => ...)
 
 ja tämä aiheuttaa ongelman, sillä arvolle _null_ ei voida kutsua metodia _map_. 
 
-Kun annoimme tilalle _notes_ alkuarvoksi tyhjän taulukon, ei samaa ongelmaa esiinny, tyhjälle taulukolle on luvallista kutsua metodia _filter_.
+Kun annoimme tilalle _notes_ alkuarvoksi tyhjän taulukon, ei samaa ongelmaa esiinny, tyhjälle taulukolle on luvallista kutsua metodia _map_.
 
 Sopiva tilan alustaminen siis "peitti" ongelman, joka johtuu siitä että muistiinpanoja ei ole vielä alustettu palvelimelta haettavalla datalla.
 
