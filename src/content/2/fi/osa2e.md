@@ -600,7 +600,7 @@ Tässäkin tehtävässä riittää, että ohjelmasi toimii suurella osalla maita
 
 <h4>2.20*: maiden tiedot, step3</h4>
 
-**Tässä osassa on vielä paljon tekemistä, joten älä juutu tähän tehtävään!**
+
 
 Lisää yksittäisen maan näkymään pääkaupungin säätiedotus. Säätiedotuksen tarjoavia palveluita on kymmeniä. Itse käytin [https://openweathermap.org/](https://openweathermap.org/):ia. Huomaa että api-avaimen luomisen jälkeen saattaa kulua hetki ennen kuin avain alkaa toimia.
 
