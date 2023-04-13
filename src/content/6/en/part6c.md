@@ -354,7 +354,7 @@ const noteSlice = createSlice({
   initialState: [],
   reducers: {
     createNote(state, action) {
-      state.push(action.payload) // highlight-line
+      state.push({...action.payload, id: generateId()}) // highlight-line
     },
     // ..
   },
