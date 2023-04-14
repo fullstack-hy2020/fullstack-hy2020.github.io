@@ -623,6 +623,6 @@ const api_key = process.env.REACT_APP_API_KEY
 // muuttujassa api_key on nyt käynnistyksessä annettu API-avaimen arvo
 ```
 
-Tämä oli osan viimeinen tehtävä ja on aika sekä puskea koodi GitHubiin että merkitä tehdyt tehtävät [palautussovellukseen]https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Tämä oli osan viimeinen tehtävä ja on aika sekä puskea koodi GitHubiin että merkitä tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>
