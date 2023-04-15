@@ -76,10 +76,7 @@ Let's add an npm script to <i>the backend</i> which starts it in test mode, or s
 }
 ```
 
-NB! To get Cypress working with WSL2 one might need to do some additional configuring first. These two [links](https://docs.cypress.io/guides/getting-started/installing-cypress#Windows-Subsystem-for-Linux) are great places to [start](https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress).
-  
-./node_modules/.bin/cypress install -------- needed on windows.
-//https://github.com/cypress-io/cypress/issues/2610
+**NB** To get Cypress working with WSL2 one might need to do some additional configuring first. These two [links](https://docs.cypress.io/guides/getting-started/installing-cypress#Windows-Subsystem-for-Linux) are great places to [start](https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress).
   
 When both the backend and frontend are running, we can start Cypress with the command
 
@@ -407,7 +404,7 @@ As with unit and integration tests, with E2E tests it is best to empty the datab
 
 The solution is to create API endpoints for the backend tests.
 We can empty the database using these endpoints.
-Let's create a new <i>router</i> for the tests
+Let's create a new router for the tests inside the <i>controllers</i> folder, in the <i>testing.js</i> file
 
 ```js
 const testingRouter = require('express').Router()

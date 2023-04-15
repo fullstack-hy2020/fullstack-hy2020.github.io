@@ -390,9 +390,9 @@ notesToShow = notes
 notesToShow.map(note => ...)
 ```
 
-ja tämä aiheuttaa ongelman, sillä arvolle _null_ ei voida kutsua metodia _filter_. 
+ja tämä aiheuttaa ongelman, sillä arvolle _null_ ei voida kutsua metodia _map_. 
 
-Kun annoimme tilalle _notes_ alkuarvoksi tyhjän taulukon, ei samaa ongelmaa esiinny, tyhjälle taulukolle on luvallista kutsua metodia _filter_.
+Kun annoimme tilalle _notes_ alkuarvoksi tyhjän taulukon, ei samaa ongelmaa esiinny, tyhjälle taulukolle on luvallista kutsua metodia _map_.
 
 Sopiva tilan alustaminen siis "peitti" ongelman, joka johtuu siitä että muistiinpanoja ei ole vielä alustettu palvelimelta haettavalla datalla.
 
@@ -600,7 +600,7 @@ Tässäkin tehtävässä riittää, että ohjelmasi toimii suurella osalla maita
 
 <h4>2.20*: maiden tiedot, step3</h4>
 
-**Tässä osassa on vielä paljon tekemistä, joten älä juutu tähän tehtävään!**
+
 
 Lisää yksittäisen maan näkymään pääkaupungin säätiedotus. Säätiedotuksen tarjoavia palveluita on kymmeniä. Itse käytin [https://openweathermap.org/](https://openweathermap.org/):ia. Huomaa että api-avaimen luomisen jälkeen saattaa kulua hetki ennen kuin avain alkaa toimia.
 
@@ -623,6 +623,6 @@ const api_key = process.env.REACT_APP_API_KEY
 // muuttujassa api_key on nyt käynnistyksessä annettu API-avaimen arvo
 ```
 
-Tämä oli osan viimeinen tehtävä ja on aika sekä puskea koodi GitHubiin että merkitä tehdyt tehtävät [palautussovellukseen]https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Tämä oli osan viimeinen tehtävä ja on aika sekä puskea koodi GitHubiin että merkitä tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>

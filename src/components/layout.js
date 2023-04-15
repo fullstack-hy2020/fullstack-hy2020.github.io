@@ -21,8 +21,7 @@ const Layout = props => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const key = localStorage.getItem(BANNER_TO_KEY);
-    console.log(key);
+    const key = localStorage.getItem(BANNER_TO_KEY)
     if (!key) {
       setVisible(true);
     }
@@ -39,7 +38,7 @@ const Layout = props => {
 
       <Header lang={siteLanguage} />
 
-      <InfoBanner onHide={() => hideNote()} visible={visible} />
+      <InfoBanner onHide={() => hideNote()} visible={false} />
 
       <main id="main-content">{children}</main>
 

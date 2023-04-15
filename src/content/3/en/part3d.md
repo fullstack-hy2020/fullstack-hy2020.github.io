@@ -175,10 +175,10 @@ You can display the default error message returned by Mongoose, even though they
 
 #### 3.20*: Phonebook database, step8
 
-Add validation to your phonebook application, which will make sure that phone numbers are of the correct form. A phone number must
+Add validation to your phonebook application, which will make sure that phone numbers are of the correct form. A phone number must:
 
-- has length of 8 or more
-- if formed of two parts that are separated by -, the first part has two or three numbers and the second part also consists of numbers
+- have length of 8 or more
+- be formed of two parts that are separated by -, the first part has two or three numbers and the second part also consists of numbers
     - eg. 09-1234556 and 040-22334455 are valid phone numbers
     - eg. 1234556, 1-22334455 and 10-22-334455 are invalid
 
@@ -208,9 +208,9 @@ Before we move on to the next part, we will take a look at an important tool cal
 
 In compiled statically typed languages like Java, IDEs like NetBeans can point out errors in the code, even ones that are more than just compile errors. Additional tools for performing [static analysis](https://en.wikipedia.org/wiki/Static_program_analysis) like [checkstyle](https://checkstyle.sourceforge.io), can be used for expanding the capabilities of the IDE to also point out problems related to style, like indentation.
 
-In the JavaScript universe, the current leading tool for static analysis aka. "linting" is [ESlint](https://eslint.org/).
+In the JavaScript universe, the current leading tool for static analysis (aka "linting") is [ESlint](https://eslint.org/).
 
-Let's install ESlint as a development dependency to the backend project with the command:
+Let's install ESlint as a development dependency to the notes backend project with the command:
 
 ```bash
 npm install eslint --save-dev
