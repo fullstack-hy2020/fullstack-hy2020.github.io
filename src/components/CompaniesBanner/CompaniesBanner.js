@@ -127,9 +127,7 @@ export const CompaniesBanner = ({ isFrontPage, lang }) => {
               applyPadding
               companyPath={company.url}
               image={{
-                src: require(`../../images/company_logos/${
-                  company.image.name
-                }`),
+                src: require(`../../images/company_logos/${company.image.name}`),
                 alt: company.image.alt,
               }}
               className={`col-3 col-5--mobile col-5--tablet`}

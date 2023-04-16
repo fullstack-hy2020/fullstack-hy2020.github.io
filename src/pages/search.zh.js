@@ -4,11 +4,12 @@ import { graphql } from 'gatsby';
 import SearchPage from '../components/SearchPage';
 
 const Search = ({ data }) => (
-  <SearchPage 
-    localSearch={data.localSearchChinese} 
+  <SearchPage
+    localSearch={data.localSearchChinese}
     title="搜索课程"
     inputPlaceholder="输入关键词"
-    lang="zh"/>
+    lang="zh"
+  />
 );
 
 export default Search;
