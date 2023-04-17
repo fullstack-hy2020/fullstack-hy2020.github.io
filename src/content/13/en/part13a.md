@@ -781,7 +781,7 @@ Now the result is exactly what we want:
 In the case of a collection of objects, the method toJSON does not work directly, the method must be called separately for each object in the collection:
 
 ```js
-router.get('/', async (req, res) => {
+app.get('/api/notes', async (req, res) => {
   const notes = await Note.findAll()
 
   console.log(notes.map(n=>n.toJSON())) // highlight-line
@@ -806,7 +806,7 @@ The print looks like the following:
 However, perhaps a better solution is to turn the collection into JSON for printing by using the method [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify):
 
 ```js
-router.get('/', async (req, res) => {
+app.get('/api/notes', async (req, res) => {
   const notes = await Note.findAll()
 
   console.log(JSON.stringify(notes)) // highlight-line
