@@ -1156,7 +1156,7 @@ Note also that despite having an array field <i>readinglists</i> in the example,
 
 #### Exercise 13.22.
 
-Implement functionality in the application to mark a blog in the reading list as read. Marking as read is done by making a request to the _PUT /api/readinglists/:id_ path, and sending the request with
+Implement functionality in the application to mark a blog in the reading list as read. Marking as read is done by making a request to the _PUT /api/readinglists/:blog_id_ path, and sending the request with
 
 ```js
 { "read": true }
