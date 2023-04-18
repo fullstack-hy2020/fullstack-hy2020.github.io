@@ -813,7 +813,7 @@ It does not quite work, there is an Eslint error complaining about implicit any:
 
 ![vscode error event implicitly has any type](../../images/9/68new.png)
 
-TypeScript compiler has now no clue what is the type of the parameter, so that is why the type is the infamous implicit any that we wan to [avoid](/en/part9/first_steps_with_type_script#the-horrors-of-any) at all costs. The React TypeScript cheatsheet comes again to rescue, the chapter about
+TypeScript compiler has now no clue what is the type of the parameter, so that is why the type is the infamous implicit any that we want to [avoid](/en/part9/first_steps_with_type_script#the-horrors-of-any) at all costs. The React TypeScript cheatsheet comes again to rescue, the chapter about
 [forms and events](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/forms_and_events) reveals that the right type of event handler is *React.SyntheticEvent*.
 
 The code becomes
