@@ -400,7 +400,7 @@ One way to format the objects returned by Mongoose is to [modify](https://stacko
   
 To modify the method we need to change the configurable options of the schema, options can be changed using the set method of the schema, see here for more info on this method: https://mongoosejs.com/docs/guide.html#options. See <https://mongoosejs.com/docs/guide.html#toJSON> and <https://mongoosejs.com/docs/api.html#document_Document-toObject> for more info on the _toJSON_ option.
   
-see <https://mongoosejs.com/docs/api.html#transform> for more info on the _transform_ function.
+see <https://mongoosejs.com/docs/api/document.html#transform> for more info on the _transform_ function.
 
 ```js
 noteSchema.set('toJSON', {
