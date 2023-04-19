@@ -156,7 +156,7 @@ postgres=#
 ```
 
 Defined in this way, the data stored in the database is persisted only as long as the container exists. The data can be preserved by defining a
-[volume](/en/part12/building_and_configuring_environments#persisting-data-with-volumes) fort the data, see more
+[volume](/en/part12/building_and_configuring_environments#persisting-data-with-volumes) for the data, see more
 [here](https://github.com/docker-library/docs/blob/master/postgres/README.md#pgdata).
 
 #### Using the psql console
