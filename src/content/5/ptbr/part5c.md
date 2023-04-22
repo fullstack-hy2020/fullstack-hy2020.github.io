@@ -2,27 +2,26 @@
 mainImage: ../../../images/part-5.svg
 part: 5
 letter: c
-lang: ptbr
-
+lang: en
 ---
 
 <div class="content">
 
-Existem algumas formas de testar aplicações React. Vamos dar uma olhada em algumas deles a frente. 
+There are many different ways of testing React applications. Let's take a look at them next.
 
-Testes serão implementados com a mesma [Jest](http://jestjs.io/) biblioteca de teste desenvolvida pelo Facebook que foi usado na parte anterior. Jest é configurado por padrão para aplicações criadas com o create-react-app.
+Tests will be implemented with the same [Jest](http://jestjs.io/) testing library developed by Facebook that was used in the previous part. Jest is configured by default to applications created with create-react-app.
 
-Além do JEST, também precisamos de outra biblioteca de testes que nos ajude a renderizar componentes para fins de teste. A melhor opção atual para isso é [react-test-library] (https://github.com/testing-library/react-testing-library) que sofreu um rápido crescimento de popularidade nos últimos tempos.
+In addition to Jest, we also need another testing library that will help us render components for testing purposes. The current best option for this is [react-testing-library](https://github.com/testing-library/react-testing-library) which has seen rapid growth in popularity in recent times.
 
-Vamos instalar a biblioteca com o comando:
+Let's install the library with the command:
 
 ```bash
 npm install --save-dev @testing-library/react @testing-library/jest-dom
 ```
 
-Também instalamos [jest-dom] (https://testing-library.com/docs/ecosystem-jest-dom/), que fornece alguns métodos auxiliares relacionados a Jest.
+We also installed [jest-dom](https://testing-library.com/docs/ecosystem-jest-dom/) which provides some nice Jest-related helper methods.
 
-Vamos primeiro escrever testes para o componente responsável por renderizar uma nota:
+Let's first write tests for the component that is responsible for rendering a note:
 
 ```js
 const Note = ({ note, toggleImportance }) => {
@@ -39,13 +38,13 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-Observe que o elemento <i>li</i> possui o [CSS](https://reactjs.org/docs/dom-elements.html#classname) classname <i>nota</i> , que poderia ser usado para acessar o componente em nossos testes.
+Notice that the <i>li</i> element has the [CSS](https://reactjs.org/docs/dom-elements.html#classname) classname <i>note</i>, that could be used to access the component in our tests.
 
-### Renderizando o componente para testes
+### Rendering the component for tests
 
-Escreveremos nosso teste no arquivo <i>src/components/note.test.js</i> , que está no mesmo diretório que o próprio componente.
+We will write our test in the <i>src/components/Note.test.js</i> file, which is in the same directory as the component itself.
 
-O primeiro teste verifica que o componente renderiza o conteúdo da nota:
+The first test verifies that the component renders the contents of the note:
 
 ```js
 import React from 'react'
@@ -66,52 +65,52 @@ test('renders content', () => {
 })
 ```
 
-Após a configuração inicial, o teste renderiza o componente com o [render] (https://testing-library.com/docs/react-testing-library/api#render) função fornecida pela react-testing-library:
+After the initial configuration, the test renders the component with the [render](https://testing-library.com/docs/react-testing-library/api#render) function provided by the react-testing-library:
 
 ```js
 render(<Note note={note} />)
 ```
 
-Normalmente, os componentes reagentes são renderizados ao <i>DOM</i> . O método de renderização que usamos renderiza os componentes em um formato adequado para testes sem renderizá-los ao DOM.
+Normally React components are rendered to the <i>DOM</i>. The render method we used renders the components in a format that is suitable for tests without rendering them to the DOM.
 
-Podemos usar o objeto [screen](https://testing-library.com/docs/queries/about#screen) para acessar o componente renderizado. Usamos o método da Screen [getByText](https://testing-library.com/docs/queries/bytext) para procurar um elemento que tenha o conteúdo da nota e garantir que ele exista:
+We can use the object [screen](https://testing-library.com/docs/queries/about#screen) to access the rendered component. We use screen's method [getByText](https://testing-library.com/docs/queries/bytext) to search for an element that has the note content and ensure that it exists:
 
 ```js
   const element = screen.getByText('Component testing is done with react-testing-library')
   expect(element).toBeDefined()
 ```
 
-### Testes de execução
+### Running tests
 
-Create-react-app configura os testes a serem executados no modo assistido por padrão, o que significa que o comando _npm test_ não terminará assim que os testes terminarem e, em vez disso, aguardará as alterações a serem feitas no código. Depois que novas alterações no código são salvas, os testes são executados automaticamente, depois disso Jest volta a aguardar que novas alterações sejam feitas.
+Create-react-app configures tests to be run in watch mode by default, which means that the _npm test_ command will not exit once the tests have finished, and will instead wait for changes to be made to the code. Once new changes to the code are saved, the tests are executed automatically after which Jest goes back to waiting for new changes to be made.
 
-Se você deseja executar testes "normalmente", pode fazê-lo com o comando:
+If you want to run tests "normally", you can do so with the command:
 
 ```js
 CI=true npm test
 ```
 
-Para usuários do Windows (PowerShell)
+For Windows (PowerShell) users
 
 ```js
 $env:CI=$true; npm test
 ```
 
-**Obs:** O console pode emitir um aviso se você não tiver instalado o Watchman. O Watchman é um aplicativo desenvolvido pelo Facebook que assiste a alterações feitas nos arquivos. O programa acelera a execução dos testes e pelo menos a partir do MacOS Sierra, executando testes no modo assistido emite alguns avisos no console, que podem ser removidos instalando o Watchman.
+**NB:** the console may issue a warning if you have not installed Watchman. Watchman is an application developed by Facebook that watches for changes that are made to files. The program speeds up the execution of tests and at least starting from macOS Sierra, running tests in watch mode issues some warnings to the console, that can be removed by installing Watchman.
 
-As instruções para instalar o Watchman em diferentes sistemas operacionais podem ser encontradas no site oficial do Watchman: <https://facebook.github.io/watchman/>
+Instructions for installing Watchman on different operating systems can be found on the official Watchman website: <https://facebook.github.io/watchman/>
 
-### Localização do arquivo de teste
+### Test file location
 
-No React, existem (pelo menos) [duas convenções diferentes](https://medium.com/@jefflombardjr/organizing-tests-in-jest-17fc431ff850) para a localização do arquivo de teste. Criamos nossos arquivos de teste de acordo com o padrão atual, colocando -os no mesmo diretório que o componente que está sendo testado.
+In React there are (at least) [two different conventions](https://medium.com/@JeffLombardJr/organizing-tests-in-jest-17fc431ff850) for the test file's location. We created our test files according to the current standard by placing them in the same directory as the component being tested.
 
-A outra convenção é armazenar os arquivos de teste "normalmente" em um diretório _test_ separado. Qualquer que seja a convenção que escolhemos, é quase garantido que esteja errado de acordo com a opinião de alguém.
+The other convention is to store the test files "normally" in a separate _test_ directory. Whichever convention we choose, it is almost guaranteed to be wrong according to someone's opinion.
 
-Não gosto dessa maneira de armazenar testes e código de aplicações no mesmo diretório. O motivo pelo qual escolhemos seguir esta convenção é que ela é configurada por padrão em aplicações criados pelo Create-React-App.
+I do not like this way of storing tests and application code in the same directory. The reason we choose to follow this convention is that it is configured by default in applications created by create-react-app.
 
-### Procurando conteúdo em um componente
+### Searching for content in a component
 
-O pacote react-testing-library oferece muitas maneiras diferentes de investigar o conteúdo do componente que está sendo testado. Na realidade, o _expect_ em nosso teste não é necessário.
+The react-testing-library package offers many different ways of investigating the content of the component being tested. In reality, the _expect_ in our test is not needed at all
 
 ```js
 import React from 'react'
@@ -133,9 +132,9 @@ test('renders content', () => {
 })
 ```
 
-O teste falha se _getByText_ não encontrar o elemento que está procurando.
+Test fails if _getByText_ does not find the element it is looking for.
 
-Também poderíamos usar [CSS-selectors](https://developer.mozilla.org/pt-BR/docs/web/css/css_selectors) para encontrar elementos renderizados usando o método [queryselector] (https: // desenvolvedor. mozilla.org/en-us/docs/web/api/document/queryselector) do objeto [container] (https://testing-library.com/docs/react-testing-library/api/#container-1) que é um dos campos retornados pela renderização:
+We could also use [CSS-selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors) to find rendered elements by using the method [querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) of the object [container](https://testing-library.com/docs/react-testing-library/api/#container-1) that is one of the fields returned by the render:
 
 ```js
 import React from 'react'
@@ -160,13 +159,13 @@ test('renders content', () => {
 })
 ```
 
-Existem também outros métodos, por exemplo, [getByTestId] (https://testing-library.com/docs/queries/bytestid/), que procuram elementos com base em id-attributes que são inseridos no código especificamente para fins de teste.
+There are also other methods, eg. [getByTestId](https://testing-library.com/docs/queries/bytestid/), that look for elements based on id-attributes that are inserted into the code specifically for testing purposes.
 
-### Testes de depuração
+### Debugging tests
 
-Normalmente, encontramos muitos tipos diferentes de problemas ao escrever nossos testes.
+We typically run into many different kinds of problems when writing our tests.
 
-Objeto _screen_ possui método [debug] (https://testing-library.com/docs/queries/about/#screendebug) que pode ser usado para imprimir o HTML de um componente para o terminal. Se alterarmos o teste da seguinte forma:
+Object _screen_ has method [debug](https://testing-library.com/docs/queries/about/#screendebug) that can be used to print the HTML of a component to the terminal. If we change the test as follows:
 
 ```js
 import React from 'react'
@@ -189,7 +188,7 @@ test('renders content', () => {
 })
 ```
 
-O HTML é impresso no console:
+the HTML gets printed to the console:
 
 ```js
 console.log
@@ -207,7 +206,7 @@ console.log
   </body>
 ```
 
-Também é possível usar o mesmo método para imprimir um elemento procurado para consolar:
+It is also possible to use the same method to print a wanted element to console:
 
 ```js
 import React from 'react'
@@ -231,7 +230,7 @@ test('renders content', () => {
 })
 ```
 
-Agora o HTML do elemento procurado é impresso:
+Now the HTML of the wanted element gets printed:
 
 ```js
   <li
@@ -244,17 +243,17 @@ Agora o HTML do elemento procurado é impresso:
   </li>
 ```
 
-### Botões de clique em testes
+### Clicking buttons in tests
 
-Além de exibir conteúdo, o componente <i>Nota</i> também garante que, quando o botão associado à nota é pressionado, a função que manipula eventos (event handler) _toggleImportance_ é chamada.
+In addition to displaying content, the <i>Note</i> component also makes sure that when the button associated with the note is pressed, the _toggleImportance_ event handler function gets called.
 
-Vamos instalar uma biblioteca [user-event] (https://testing-library.com/docs/user-event/intro) que facilita a simulação de entrada do usuário:
+Let us install a library [user-event](https://testing-library.com/docs/user-event/intro) that makes simulating user input a bit easier:
 
 ```bash
 npm install --save-dev @testing-library/user-event
 ```
 
-Testando essa funcionalidade pode ser realizada assim:
+Testing this functionality can be accomplished like this:
 
 ```js
 import React from 'react'
@@ -285,40 +284,40 @@ test('clicking the button calls event handler once', async () => {
 })
 ```
 
-Existem algumas coisas interessantes relacionadas a este teste. O event handler é uma função [mock](https://jestjs.io/pt-BR/docs/mock-functions) definida com jest:
+There are a few interesting things related to this test. The event handler is a [mock](https://facebook.github.io/jest/docs/en/mock-functions.html) function defined with Jest:
 
 ```js
 const mockHandler = jest.fn()
 ```
 
-Uma [sessão](https://testing-library.com/docs/user-event/setup/) é iniciada para interagir com o componente renderizado:
+A [session](https://testing-library.com/docs/user-event/setup/) is started to interact with the rendered component:
 
 ```js
 const user = userEvent.setup()
 ```
 
-O teste encontra o botão com <i>base no texto</i> do componente renderizado e clica no elemento:
+The test finds the button <i>based on the text</i> from the rendered component and clicks the element:
 
 ```js
 const button = screen.getByText('make not important')
 await user.click(button)
 ```
 
-Clicar acontece com o método [click] (https://testing-library.com/docs/user-event/convenience/#click) da biblioteca userevent-library.
+Clicking happens with the method [click](https://testing-library.com/docs/user-event/convenience/#click) of the userEvent-library.
 
-A expectativa do teste verifica que a <i>função mock</i> foi chamada exatamente uma vez.
+The expectation of the test verifies that the <i>mock function</i> has been called exactly once.
 
 ```js
 expect(mockHandler.mock.calls).toHaveLength(1)
 ```
 
-[Objetos e funções mock](https://pt.wikipedia.org/wiki/Objeto_mock) são componentes omumente usados nos testes para substituir as dependências dos componentes que estão sendo testados. Mocks possibilitam retornar respostas codificadas e verificar o número de vezes que as funções mocks são chamadas e com quais parâmetros.
+[Mock objects and functions](https://en.wikipedia.org/wiki/Mock_object) are commonly used stub components in testing that are used for replacing dependencies of the components being tested. Mocks make it possible to return hardcoded responses, and to verify the number of times the mock functions are called and with what parameters.
 
-Em nosso exemplo, a função mock é uma escolha perfeita, desde que ela  possa ser facilmente usada para verificar se o método é chamado exatamente uma vez.
+In our example, the mock function is a perfect choice since it can be easily used for verifying that the method gets called exactly once.
 
-### Testes para o componente <i>Togglable</i>
+### Tests for the <i>Togglable</i> component
 
-Vamos escrever alguns testes para o componente <i>Togglable</i>. Vamos adicionar o o nome de classe de css <i>togglableContent</i>  ao DIV que retorna os componentes filhos.
+Let's write a few tests for the <i>Togglable</i> component. Let's add the <i>togglableContent</i> CSS classname to the div that returns the child components.
 
 ```js
 const Togglable = forwardRef((props, ref) => {
@@ -340,7 +339,7 @@ const Togglable = forwardRef((props, ref) => {
 })
 ```
 
-Os testes são mostrados abaixo:
+The tests are shown below:
 
 ```js
 import React from 'react'
@@ -382,19 +381,19 @@ describe('<Togglable />', () => {
 })
 ```
 
-A função _beforeEach_ é chamada antes de cada teste, o que renderiza o componente <i>Togglable</i> e salva o campo _container_ do valor de retorno.
+The _beforeEach_ function gets called before each test, which then renders the <i>Togglable</i> component and saves the field _container_ of the return value.
 
-O primeiro teste verifica que o componente <i>Togglable</i> renderiza seu componente filho
+The first test verifies that the <i>Togglable</i> component renders its child component
 
 ```js
 <div className="testDiv">
-  conteúdo alternável
+  togglable content
 </div>
 ```
 
-Os testes restantes usam o método [toHaveStyle](https://www.npmjs.com/package/@testing-library/jest-dom#tohavestyle) para verificar se o componente filho do componente <i>Togglable</i> não é visível inicialmente, verificando se o estilo do elemento <i>div</i> contém _{ display: 'none' }_. Outro teste verifica que, quando o botão é pressionado, o componente é visível, o que significa que o estilo para ocultar o componente <i>não é mais</i> atribuído ao componente.
+The remaining tests use the [toHaveStyle](https://www.npmjs.com/package/@testing-library/jest-dom#tohavestyle) method to verify that the child component of the <i>Togglable</i> component is not visible initially, by checking that the style of the <i>div</i> element contains _{ display: 'none' }_. Another test verifies that when the button is pressed the component is visible, meaning that the style for hiding the component <i>is no longer</i> assigned to the component.
 
-Vamos também adicionar um teste que pode ser usado para verificar se o conteúdo visível pode ser oculto clicando no segundo botão do componente:
+Let's also add a test that can be used to verify that the visible content can be hidden by clicking the second button of the component:
 
 ```js
 describe('<Togglable />', () => {
@@ -415,9 +414,9 @@ describe('<Togglable />', () => {
 })
 ```
 
-### Testando os formulários
+### Testing the forms
 
-Já usamos a função Click do [user-event](https://testing-library.com/docs/user-event/intro) em nossos testes anteriores para clicar em botões.
+We already used the _click_ function of the [user-event](https://testing-library.com/docs/user-event/intro) in our previous tests to click buttons.
 
 ```js
 const user = userEvent.setup()
@@ -425,9 +424,9 @@ const button = screen.getByText('show...')
 await user.click(button)
 ```
 
-Também podemos simular a entrada de texto com <i>userEvent</i>.
+We can also simulate text input with <i>userEvent</i>.
 
-Vamos fazer um teste para o componente <i>NoteForm</i>. O código do componente é o seguinte.
+Let's make a test for the <i>NoteForm</i> component. The code of the component is as follows.
 
 ```js
 import { useState } from 'react'
@@ -467,9 +466,9 @@ const NoteForm = ({ createNote }) => {
 export default NoteForm
 ```
 
-O formulário funciona chamando a função _createNote_ que ele recebeu como adereços com os detalhes da nova nota.
+The form works by calling the _createNote_ function it received as props with the details of the new note.
 
-O teste é o seguinte:
+The test is as follows:
 
 ```js
 import React from 'react'
@@ -495,16 +494,16 @@ test('<NoteForm /> updates parent state and calls onSubmit', async () => {
 })
 ```
 
-Os testes têm acesso ao campo de entrada usando a função [getByRole] (https://testing-library.com/docs/queries/byrole).
+Tests get access to the input field using the function [getByRole](https://testing-library.com/docs/queries/byrole).
 
-O método [type](https://testing-library.com/docs/user-event/utility#type) do userEvent é usado para escrever texto no campo de entrada.
+The method [type](https://testing-library.com/docs/user-event/utility#type) of the userEvent is used to write text to the input field.
 
-A primeira expectativa de teste garante que o envio do formulário chama o método _createNote_.
-A segunda expectativa verifica, que o event handler é chamado com os parâmetros corretos - que uma nota com o conteúdo correta é criada quando o formulário é preenchido.
+The first test expectation ensures, that submitting the form calls the _createNote_ method.
+The second expectation checks, that the event handler is called with the right parameters - that a note with the correct content is created when the form is filled.
 
-### Sobre encontrar os elementos
+### About finding the elements
 
-Vamos supor que o formulário tenha dois campos de entrada
+Let us assume that the form has two input fields
 
 ```js
 const NoteForm = ({ createNote }) => {
@@ -532,17 +531,17 @@ const NoteForm = ({ createNote }) => {
 }
 ```
 
-Agora a abordagem que nosso teste usa para encontrar o campo de entrada
+Now the approach that our test uses to find the input field
 
 ```js
 const input = screen.getByRole('textbox')
 ```
-  
-causaria um erro:
 
-![Erro do nó que mostra dois elementos com caixa de texto, já que usamos getByRole](../../images/5/40.png)
+would cause an error:
 
-A mensagem de erro sugere usar <i>getAllByRole</i>. O teste pode ser corrigido da seguinte maneira:
+![node error that shows two elements with textbox since we use getByRole](../../images/5/40.png)
+
+The error message suggests using <i>getAllByRole</i>. The test could be fixed as follows:
 
 ```js
 const inputs = screen.getAllByRole('textbox')
@@ -550,9 +549,9 @@ const inputs = screen.getAllByRole('textbox')
 await user.type(inputs[0], 'testing a form...')
 ```
 
-Método <i>getAllByRole</i> agora retorna uma matriz e o campo de entrada correto é o primeiro elemento da matriz. No entanto, essa abordagem é um pouco suspeita, pois se baseia na ordem dos campos de entrada.
+Method <i>getAllByRole</i> now returns an array and the right input field is the first element of the array. However, this approach is a bit suspicious since it relies on the order of the input fields.
 
-Muitas vezes, os campos de entrada têm um <i>placeholder</i> que sugere o usuário que tipo de entrada é esperada. Vamos adicionar um espaço reservado ao nosso formulário:
+Quite often input fields have a <i>placeholder</i> text that hints user what kind of input is expected. Let us add a placeholder to our form:
 
 ```js
 const NoteForm = ({ createNote }) => {
@@ -579,7 +578,7 @@ const NoteForm = ({ createNote }) => {
 }
 ```
 
-Agora, encontrar o campo de entrada certo é fácil com o método [getByPlaceholderText](https://testing-library.com/docs/queries/byplaceholdertext):
+Now finding the right input field is easy with the method [getByPlaceholderText](https://testing-library.com/docs/queries/byplaceholdertext):
 
 ```js
 test('<NoteForm /> updates parent state and calls onSubmit', () => {
@@ -587,7 +586,7 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
 
   render(<NoteForm createNote={createNote} />) 
 
-  const input = screen.getByPlaceholderText('write here note content') // highlight-line 
+  const input = screen.getByPlaceholderText('write note content here') // highlight-line 
   const sendButton = screen.getByText('save')
 
   userEvent.type(input, 'testing a form...')
@@ -598,9 +597,9 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
 })
 ```
 
-A maneira mais flexível de encontrar elementos nos testes é o método <i>querySelector</i> do objeto _container_, que é retornado por _render_, como foi mencionado [anteriormente nesta parte](/ptbr/part5/testando_aplicacoes_react#procurando-por-conteudo-em-um-componente). Qualquer seletor de CSS pode ser usado com esse método para pesquisar elementos nos testes.
+The most flexible way of finding elements in tests is the method <i>querySelector</i> of the _container_ object, which is returned by _render_, as was mentioned [earlier in this part](/en/part5/testing_react_apps#searching-for-content-in-a-component). Any CSS selector can be used with this method for searching elements in tests.
 
-Considere por exemplo. que definiríamos um _id _id único para o campo de entrada:
+Consider eg. that we would define a unique _id_ to the input field:
 
 ```js
 const NoteForm = ({ createNote }) => {
@@ -627,7 +626,7 @@ const NoteForm = ({ createNote }) => {
 }
 ```
 
-O elemento input agora pode ser encontrado no teste da seguinte forma:
+The input element could now be found in the test as follows:
 
 ```js
 const { container } = render(<NoteForm createNote={createNote} />)
@@ -635,9 +634,9 @@ const { container } = render(<NoteForm createNote={createNote} />)
 const input = container.querySelector('#note-input')
 ```
 
-No entanto, seguiremos a abordagem de usar _getByPlaceholderText_ no teste.
+However, we shall stick to the approach of using _getByPlaceholderText_ in the test.
 
-Vejamos alguns detalhes antes de seguir em frente. Vamos supor que um componente renderia o texto para um elemento HTML da seguinte maneira:
+Let us look at a couple of details before moving on. Let us assume that a component would render text to an HTML element as follows:
 
 ```js
 const Note = ({ note, toggleImportance }) => {
@@ -655,7 +654,7 @@ const Note = ({ note, toggleImportance }) => {
 export default Note
 ```
 
-O comando _getByText_ que o teste usa faz <i>não</i> Encontre o elemento
+the _getByText_ command that the test uses does <i>not</i> find the element
 
 ```js
 test('renders content', () => {
@@ -672,7 +671,7 @@ test('renders content', () => {
 })
 ```
 
-Command _getByText_ procura um elemento que tenha o **mesmo texto**  que possui como parâmetro e nada mais. Se quisermos procurar um elemento que <i>contém</i> o texto, poderíamos usar uma opção extra:
+Command _getByText_ looks for an element that has the **same text** that it has as a parameter, and nothing more. If we want to look for an element that <i>contains</i> the text, we could use an extra option:
 
 ```js
 const element = screen.getByText(
@@ -680,17 +679,17 @@ const element = screen.getByText(
 )
 ```
 
-ou poderíamos usar o comando _findByText_:
+or we could use the command _findByText_:
 
 ```js
 const element = await screen.findByText('Does not work anymore :(')
 ```
 
-É importante notar que, diferentemente dos outros comandos _ByText_, _findByText_ retorna uma promessa!
+It is important to notice that, unlike the other _ByText_ commands, _findByText_ returns a promise!
 
-Existem situações em que mais uma forma do comando _queryByText_ é útil. O comando retorna o elemento, mas <i>não causa uma exceção</i> se o elemento não for encontrado.
+There are situations where yet another form of the command _queryByText_ is useful. The command returns the element but <i>it does not cause an exception</i> if the element is not found.
 
-Nós poderíamos por exemplo. Use o comando para garantir que algo <i>não seja renderizado</i> ao componente:
+We could eg. use the command to ensure that something <i>is not rendered</i> to the component:
 
 ```js
 test('does not render this', () => {
@@ -706,65 +705,65 @@ test('does not render this', () => {
 })
 ```
 
-### Cobertura de teste
+### Test coverage
 
-Podemos descobrir facilmente a [cobertura](https://github.com/facebookincubator/create-react-app/blob/ed5c48c81b2139b4414810e1efe917e04c96ee8d/packages/react-scripts/template/README.md#coverage-reporting) de nossos testes executando-os com o comando.
+We can easily find out the [coverage](https://github.com/facebookincubator/create-react-app/blob/ed5c48c81b2139b4414810e1efe917e04c96ee8d/packages/react-scripts/template/README.md#coverage-reporting) of our tests by running them with the command.
 
 ```js
 CI=true npm test -- --coverage
 ```
 
-![saída do terminal da cobertura de teste](../../images/5/18ea.png)
+![terminal output of test coverage](../../images/5/18ea.png)
 
-Um relatório HTML bastante primitivo será gerado para o diretório <i>coverage/lcov-report</i>.
-O relatório nos dirá as linhas de código não testado em cada componente:
+A quite primitive HTML report will be generated to the <i>coverage/lcov-report</i> directory.
+The report will tell us the lines of untested code in each component:
 
-![Relatório HTML da cobertura do teste](../../images/5/19ea.png)
+![HTML report of the test coverage](../../images/5/19ea.png)
 
-Você pode encontrar o código para nossa aplicação atual na íntegra em  <i>part5-8</i> deste [repositório do github](https://github.com/fullstack-hy2020/part2-notes/tree/parte5-8).
+You can find the code for our current application in its entirety in the <i>part5-8</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-8).
 </div>
 
 <div class="tasks">
 
-### Exercícios 5.13.-5.16.
+### Exercises 5.13.-5.16.
 
-#### 5.13: Testes da lista de blogs, Etapa1
+#### 5.13: Blog list tests, step1
 
-Faça um teste, que verifica se o componente que exibe um blog renderiza o título e o autor do blog, mas não renderiza sua URL ou número de curtidas por padrão.
+Make a test, which checks that the component displaying a blog renders the blog's title and author, but does not render its URL or number of likes by default.
 
-Adicione as classes CSS ao componente para ajudar o teste conforme necessário.
+Add CSS classes to the component to help the testing as necessary.
 
-#### 5.14: Testes da lista de blogs, Etapa2
+#### 5.14: Blog list tests, step2
 
-Faça um teste, que verifica se a URL do blog e o número de curtidas são mostrados quando o botão que controla os detalhes mostrado foi clicado.
+Make a test, which checks that the blog's URL and number of likes are shown when the button controlling the shown details has been clicked.
 
-#### 5.15: Testes da lista de blogs, Etapa3
+#### 5.15: Blog list tests, step3
 
-Faça um teste, que garante que, se o botão como foi clicado duas vezes, o componente event handlerrecebido é chamado duas vezes.
+Make a test, which ensures that if the <i>like</i> button is clicked twice, the event handler the component received as props is called twice.
 
-#### 5.16: Testes da lista de blogs, Etapa4
+#### 5.16: Blog list tests, step4
 
-Faça um teste para o novo formulário do blog. O teste deve verificar se o formulário chama o event handler que recebeu como parâmetro com os detalhes certos quando um novo blog for criado.
+Make a test for the new blog form. The test should check, that the form calls the event handler it received as props with the right details when a new blog is created.
 
 </div>
 
 <div class="content">
 
-### Testes de integração de front -end
+### Frontend integration tests
 
-Na parte anterior do material do curso, escrevemos testes de integração para o back-end que testou sua lógica e conectou o banco de dados através da API fornecida pelo back-end. Ao escrever esses testes, tomamos a decisão consciente de não escrever testes de unidade, pois o código para esse back-end é bastante simples, e é provável que os bugs em nossa aplicação ocorram em cenários mais complicados do que os testes de unidade adequados.
+In the previous part of the course material, we wrote integration tests for the backend that tested its logic and connected the database through the API provided by the backend. When writing these tests, we made the conscious decision not to write unit tests, as the code for that backend is fairly simple, and it is likely that bugs in our application occur in more complicated scenarios than unit tests are well suited for.
 
-Até agora, todos os nossos testes para o frontend foram testes de unidade que validaram o funcionamento correto de componentes individuais. Às vezes, o teste de unidade é útil, mas mesmo um conjunto abrangente de testes de unidade não é suficiente para validar que o aplicação funciona como um todo.
+So far all of our tests for the frontend have been unit tests that have validated the correct functioning of individual components. Unit testing is useful at times, but even a comprehensive suite of unit tests is not enough to validate that the application works as a whole.
 
-Também poderíamos fazer testes de integração para o front-end. Testes de integração testa a colaboração de vários componentes. É consideravelmente mais difícil do que os testes de unidade, pois teríamos que, por exemplo, por exemplo mockar dados do servidor.
-Optamos por nos concentrar em fazer testes de ponta a ponta para testar todo a aplicação. Trabalharemos nos testes de ponta a ponta no último capítulo desta parte.
+We could also make integration tests for the frontend. Integration testing tests the collaboration of multiple components. It is considerably more difficult than unit testing, as we would have to for example mock data from the server.
+We chose to concentrate on making end-to-end tests to test the whole application. We will work on the end-to-end tests in the last chapter of this part.
 
-### Teste de Snapshot 
+### Snapshot testing
 
-O JEST oferece uma alternativa completamente diferente aos chamados testes "tradicionais" [snapshot] (https://jestjs.io/pt-BR/docs/snapshot-testing). A característica interessante dos snapshots é que os desenvolvedores não precisam definir nenhum teste, é simples o suficiente para adotar testes snapshot.
+Jest offers a completely different alternative to "traditional" testing called [snapshot](https://facebook.github.io/jest/docs/en/snapshot-testing.html) testing. The interesting feature of snapshot testing is that developers do not need to define any tests themselves, it is simple enough to adopt snapshot testing.
 
-O princípio fundamental é comparar o código HTML definido pelo componente depois de alterar para o código HTML que existia antes de ser alterado.
+The fundamental principle is to compare the HTML code defined by the component after it has changed the HTML code that existed before it was changed.
 
-Se o snapshot perceber alguma alteração no HTML definido pelo componente, será uma nova funcionalidade ou um "bug" causado por acidente. Os testes de snapshot notificam o desenvolvedor se o código HTML do componente mudar. O desenvolvedor deve dizer a JEST se a alteração foi desejada ou indesejada. Se a alteração no código HTML for inesperada, ela implicará fortemente um bug, e o desenvolvedor poderá tomar conhecimento desses problemas em potencial, graças facilmente aos testes de snapshot.
+If the snapshot notices some change in the HTML defined by the component, then either it is new functionality or a "bug" caused by accident. Snapshot tests notify the developer if the HTML code of the component changes. The developer has to tell Jest if the change was desired or undesired. If the change to the HTML code is unexpected, it strongly implies a bug, and the developer can become aware of these potential issues easily thanks to snapshot testing.
 
 </div>
