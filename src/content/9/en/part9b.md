@@ -521,13 +521,13 @@ Write a function *calculateExercises* that calculates the average time of <i>dai
 - a rating between the numbers 1-3 that tells how well the hours are met. You can decide on the metric on your own.
 - a text value explaining the rating, you can come up with the explanations
 
-The daily exercise hours are given to the function as an [array](https://www.typescriptlang.org/docs/handbook/basic-types.html#array) that contains the number of exercise hours for each day in the training period. Eg. a week with 3 hours of training on Monday, none on Tuesday, 2 hours on Wednesday, 4.5 hours on Thursday and so on would be represented by the following array:
+The daily exercise hours are given to the function as an [array](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#arrays) that contains the number of exercise hours for each day in the training period. Eg. a week with 3 hours of training on Monday, none on Tuesday, 2 hours on Wednesday, 4.5 hours on Thursday and so on would be represented by the following array:
 
 ```js
 [3, 0, 2, 4.5, 0, 3, 1]
 ```
 
-For the Result object, you should create an [interface](https://www.typescriptlang.org/docs/handbook/interfaces.html).
+For the Result object, you should create an [interface](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#interfaces).
 
 If you call the function with parameters *[3, 0, 2, 4.5, 0, 3, 1]* and *2*, it should return:
 
