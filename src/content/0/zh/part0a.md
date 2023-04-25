@@ -96,8 +96,8 @@ lang: zh
 <!-- - Submit at least 127 exercises for parts 0-7.-->
 
  - 提交至少127道0-7章节的练习。
-<!-- - [Enroll in part 6 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-c67dc747-1d6a-43cb-b40b-9eacf425dcc0).-->
- - [通过开放大学报名学习第6章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-c67dc747-1d6a-43cb-b40b-9eacf425dcc0)。
+<!-- - [Enroll in part 6 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-de83e85f-a06e-4258-ad8c-30326d76228e).-->
+ - [通过开放大学报名学习第6章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-de83e85f-a06e-4258-ad8c-30326d76228e)。
 <!-- - [Request credits for part 6](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).-->
  - [申请第六章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)。
 
@@ -107,8 +107,8 @@ lang: zh
 <!-- - Submit at least 138 exercises for parts 0-7.-->
 
  - 提交至少138道0-7章节的练习。
-<!-- - [Enroll in part 7 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-3016e9c9-0fdc-4ee3-9e9b-38176359f9f3).-->
- - [通过开放大学报名学习第7章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-3016e9c9-0fdc-4ee3-9e9b-38176359f9f3)。
+<!-- - [Enroll in part 7 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-53ccca2f-8e77-47e3-931a-63f9d5c8cc2e).-->
+ - [通过开放大学报名学习第7章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-53ccca2f-8e77-47e3-931a-63f9d5c8cc2e)。
 <!-- - [Request credits for part 7](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).-->
  - [申请第七章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)。
 
@@ -118,8 +118,8 @@ lang: zh
 <!-- - Submit at least 22/26 exercises for part 8.-->
 
  - 第8章节提交至少22/26道练习。
-<!-- - [Enroll in part 8 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-067b1506-0307-4118-9e2b-292e0b81e491).-->
- - [通过开放大学报名参加第八章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-067b1506-0307-4118-9e2b-292e0b81e491)。
+<!-- - [Enroll in part 8 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-b7f5ef26-b780-45f2-962d-f8d3432cae78).-->
+ - [通过开放大学报名参加第八章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-b7f5ef26-b780-45f2-962d-f8d3432cae78)。
 <!-- - [Request credits for part 8](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).-->
  - [申请第八章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)。
 
@@ -128,8 +128,8 @@ lang: zh
  通过提交课程第九章节TypeScript的至少24/29道练习，你可以获得一个额外的学分。建议你在学习第9章节之前完成第0-7章节。
 
  - 提交至少24/29道第九章节的练习。
-<!-- - [Enroll in part 9 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-d9125f89-a440-48e1-898a-ee4e16b06cdb).-->
- - [通过开放大学报名参加第9章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-d9125f89-a440-48e1-898a-ee4e16b06cdb)。
+<!-- - [Enroll in part 9 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-e45a36b7-24d7-424b-9dc5-1c9b59a52a23).-->
+ - [通过开放大学报名参加第9章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-e45a36b7-24d7-424b-9dc5-1c9b59a52a23)。
 <!-- - [Request credits for part 9](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).-->
  - [申请第九章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)。
 
@@ -139,8 +139,8 @@ lang: zh
 <!-- - Submit at least 25 exercises for part 10.-->
 
  - 为第10章节提交至少25道练习。
-<!-- - [Enroll in part 10 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-aa395a19-4625-44a9-8301-5fbb946c6ed6).-->
- - [通过开放大学报名参加第10章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-aa395a19-4625-44a9-8301-5fbb946c6ed6)。
+<!-- - [Enroll in part 10 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-ec172afe-bc01-46ab-af23-694311f1950a).-->
+ - [通过开放大学报名参加第10章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-ec172afe-bc01-46ab-af23-694311f1950a)。
 <!-- - [Request credits for part 10](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).-->
  - [申请第十章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)。
 
@@ -151,8 +151,8 @@ lang: zh
 <!-- - Submit all exercises for part 11.-->
 
  - 提交第11章节的所有练习。
-<!-- - [Enroll in part 11 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-4cb66c68-da12-422e-a34d-c8e8e7c8db01).-->
- - [通过开放大学报名参加第11章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-4cb66c68-da12-422e-a34d-c8e8e7c8db01)。
+<!-- - [Enroll in part 11 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-23e79dc2-64e4-4f7e-86a4-8923a411443c).-->
+ - [通过开放大学报名参加第11章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-23e79dc2-64e4-4f7e-86a4-8923a411443c)。
 <!-- - [Request credits for part 11](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).-->
  - [申请第11章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)。
 
@@ -163,8 +163,8 @@ lang: zh
 <!-- - Submit all exercises for part 12.-->
 
  - 提交第12章节的所有练习。
-<!-- - [Enroll in part 12 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-51a6f590-607c-4e34-bd6f-2d87e2203d9a).-->
- - [通过开放大学报名参加第12章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-51a6f590-607c-4e34-bd6f-2d87e2203d9a)。
+<!-- - [Enroll in part 12 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-bb07e139-3de0-4cb3-843d-414b1bb992cc).-->
+ - [通过开放大学报名参加第12章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-bb07e139-3de0-4cb3-843d-414b1bb992cc)。
 <!-- - [Request credits for part 12](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).-->
  - [申请第12章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)。
 
@@ -175,8 +175,8 @@ lang: zh
 <!-- - Submit all exercises for part 13.-->
 
  - 提交第13章节的所有练习。
-<!-- - [Enroll in part 13 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-6e548d4e-75bf-483b-8426-c65d8c4e161c).-->
- - [通过开放大学报名参加第13章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-6e548d4e-75bf-483b-8426-c65d8c4e161c)。
+<!-- - [Enroll in part 13 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-a9204ed8-1346-4174-b27c-9e02c6136088).-->
+ - [通过开放大学报名参加第13章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-a9204ed8-1346-4174-b27c-9e02c6136088)。
 <!-- - [Request credits for part 13](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).-->
  - [申请第13章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)。
 

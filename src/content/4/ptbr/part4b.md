@@ -7,13 +7,13 @@ lang: ptbr
 
 <div class="content">
 
-Nós começaremos agora a escrever testes para o backend. Já que o backend não contém nenhuma lógica complicada, não faz sentido escrever [testes de unidade (unit tests)](https://pt.wikipedia.org/wiki/Teste_de_unidade) para ele. A única coisa que provavelmente poderíamos testar com unit test seria o método _toJSON_ que é utilizado para formatar as notas.
+Começaremos agora a escrever testes para o backend. Já que o backend não contém nenhuma lógica complicada, não faz sentido escrever [testes de unidade (unit tests)](https://pt.wikipedia.org/wiki/Teste_de_unidade) para ele. A única coisa que provavelmente poderíamos testar com unit test seria o método _toJSON_ que é utilizado para formatar as notas.
 
 Em algumas situações, pode ser vantajoso implementar alguns dos testes de backend fazendo um <i>mock</i> do banco de dados ao invés de utilizar um banco de dados real. Uma biblioteca que poderia ser utilizada para isso é a [mongodb-memory-server](https://github.com/nodkz/mongodb-memory-server).
 
 Já que o backend de nossa aplicação ainda é relativamente simples, nós iremos testar a aplicação inteira por meio de sua API REST, o que inclui o banco de dados. Esse tipo de teste no qual múltiplos componentes do sistema estão sendo testados em grupo é chamado de [teste de integração](https://pt.wikipedia.org/wiki/Teste_de_integra%C3%A7%C3%A3o).
 
-### Teste de ambiente
+### Ambiente de teste
 
 Em um dos capítulos anteriores do curso, nós mencionamos que quando o seu backend está rodando no Fly.io ou no Render, ele está em modo de <i>produção</i>.
 
@@ -154,7 +154,7 @@ A checagem do valor do cabeçalho possui uma sintaxe estranha:
 .expect('Content-Type', /application\/json/)
 ```
 
-O valor desejado foi definido por meio de uma [expressão regular](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Regular_Expressions), ou simplesmente regex. Uma regex inicia e termina com uma barra /; já que a string que desejamos também possui em seu conteúdo a mesma barra (<i>application/json</i>) precisamos inserir antes dela uma contra-barra \ para que ela não seja entendida como um caracter de encerramento de nossa regex.
+O valor desejado foi definido por meio de uma [expressão regular](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Regular_Expressions), ou simplesmente regex. Uma regex inicia e termina com uma barra /; já que a string que desejamos também possui em seu conteúdo a mesma barra (<i>application/json</i>) precisamos inserir antes dela uma contra-barra \ para que ela não seja entendida como um carácter de encerramento de nossa regex.
 
 Em princípio, poderíamos definir o parâmetro para o teste como uma string:
 
@@ -164,7 +164,7 @@ Em princípio, poderíamos definir o parâmetro para o teste como uma string:
 
 O problema aqui, no entanto, é que ao utilizar uma string, o valor do cabeçalho deve ser exatamente o mesmo. Para a regex que criamos, é aceitável que o cabeçalho <i>contenha</i> a string em questão. O valor atual do cabeçalho é <i>application/json; charset=utf-8</i>, pois ele também contém informação sobre a codificação dos caracteres. No entanto, nosso teste não está interessado nisso, motivo pelo qual é melhor usar neste caso uma regex ao invés de uma string.
 
-O teste contém alguns detalhes que vamos explorar [um pouco mais tarde](/ptbr/part4/testando_o_backend#async-await). A <i>arrow function</i> que define o teste é precedida pela palavra-chave <i>async</i> e a chamada dos métodos no objeto <i>api</i> está precedida da palavra-chave <i>await</i>. Nós iremos escrever alguns testes e depois daremos uma olhada nessa mágica async/await. Não se preocupe com isso agora, apenas assegure que os testes do exemplo funcionem corretamente. A sintax async/await está relacionada ao fato de fazer requisições para a API em uma operação <i>assíncrona</i>. A [sintaxe async/await](https://jestjs.io/pt-BR/docs/asynchronous) pode ser utilizada para escrever código assíncrono com aparência de código síncrono.
+O teste contém alguns detalhes que vamos explorar [um pouco mais tarde](/ptbr/part4/testando_o_backend#async-await). A <i>arrow function</i> que define o teste é precedida pela palavra-chave <i>async</i> e a chamada dos métodos no objeto <i>api</i> está precedida da palavra-chave <i>await</i>. Nós iremos escrever alguns testes e depois daremos uma olhada nessa mágica async/await. Não se preocupe com isso agora, apenas assegure que os testes do exemplo funcionem corretamente. A sintaxe async/await está relacionada ao fato de fazer requisições para a API em uma operação <i>assíncrona</i>. A [sintaxe async/await](https://jestjs.io/pt-BR/docs/asynchronous) pode ser utilizada para escrever código assíncrono com aparência de código síncrono.
 
 Assim que todos os testes (atualmente existe apenas um) terminarem a execução, temos que encerrar a conexão usada pelo Mongoose. Isso pode ser facilmente feito com o método [afterAll](https://jestjs.io/pt-BR/docs/api#afterallfn-timeout):
 
@@ -454,7 +454,7 @@ Existem alguns detalhes importantes para prestar atenção ao usar a sintaxe asy
 
 A palavra-chave await não pode ser utilizada em qualquer lugar do código JavaScript. Somente é possível usar o await dentro de uma função [assíncrona (async)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function).
 
-Isso significa que para os exemplos anteriores funcionarem, é preciso que estejam em funcções assíncronas. Note a primeira linha da definição da <i>arrow function</i>:
+Isso significa que para os exemplos anteriores funcionarem, é preciso que estejam em funções assíncronas. Note a primeira linha da definição da <i>arrow function</i>:
 
 ```js
 const main = async () => { // highlight-line
@@ -702,15 +702,15 @@ notesRouter.post('/', async (request, response, next) => {
 
 Existe um pequeno problema no código: nós não estamos tratando erros. Como deveríamos lidar com eles?
 
-### Error handling and async/await
+### Tratamento de erro e async/await
 
-If there's an exception while handling the POST request we end up in a familiar situation:
+Se ocorrer uma exceção durante a requisição POST, enfrentaremos uma situação familiar: 
 
-![terminal showing unhandled promise rejection warning](../../images/4/6.png)
+![terminal mostrando alertas de rejeições não tratadas de promessas](../../images/4/6.png)
 
-In other words, we end up with an unhandled promise rejection, and the request never receives a response.
+Em outras palavras, acabamos com uma rejeição de promessa que não foi tratada e a solicitação nunca recebe uma resposta.
 
-With async/await the recommended way of dealing with exceptions is the old and familiar _try/catch_ mechanism:
+Com o async/await, o recomendado no tratamento de exceções é o familiar mecanismo _try/catch_:
 
 ```js
 notesRouter.post('/', async (request, response, next) => {
@@ -731,11 +731,11 @@ notesRouter.post('/', async (request, response, next) => {
 })
 ```
 
-The catch block simply calls the _next_ function, which passes the request handling to the error handling middleware.
+O bloco <i>catch</i> simplesmente chama a função <i>next</i>, que passa o tratamento da requisição para o <i>middleware</i> de tratamento de erro.
 
-After making the change, all of our tests will pass once again.
+Depois de fazer essa alteração, todos os nossos testes passarão novamente.
 
-Next, let's write tests for fetching and removing an individual note:
+Em seguida, vamos escrever testes para buscar e apagar uma nota individual:
 
 ```js
 test('a specific note can be viewed', async () => {
@@ -775,9 +775,9 @@ test('a note can be deleted', async () => {
 })
 ```
 
-Both tests share a similar structure. In the initialization phase, they fetch a note from the database. After this, the tests call the actual operation being tested, which is highlighted in the code block. Lastly, the tests verify that the outcome of the operation is as expected.
+Ambos os testes compartilham uma estrutura semelhante. Na fase de inicialização, eles buscam uma nota no banco de dados. Depois disso, os testes chamam a operação que está sendo testada, que é destacada no bloco de código. Por último, os testes verificam se o resultado da operação está de acordo com o esperado.
 
-The tests pass and we can safely refactor the tested routes to use async/await:
+Os testes passam e podemos seguramente refatorar as rotas testadas para usar async/await:
 
 ```js
 notesRouter.get('/:id', async (request, response, next) => {
@@ -803,33 +803,33 @@ notesRouter.delete('/:id', async (request, response, next) => {
 })
 ```
 
-You can find the code for our current application in its entirety in the <i>part4-4</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-4).
+Você encontrará o código de nossa aplicação atual na branch <i>part4-4</i>[nesse repositório GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-4).
 
-### Eliminating the try-catch
+### Eliminando o try-catch
 
-Async/await unclutters the code a bit, but the 'price' is the <i>try/catch</i> structure required for catching exceptions.
-All of the route handlers follow the same structure
+Async/await simplifica um pouco o código, mas o 'preço' a se pagar é a estrutura <i>try/catch</i> necessária ao tratamento de exceções.
+Todos os gerenciadores de rotas seguem a mesma estrutura:
 
 ```js
 try {
-  // do the async operations here
+  // faça as operações assíncronas aqui
 } catch(exception) {
   next(exception)
 }
 ```
 
-One starts to wonder if it would be possible to refactor the code to eliminate the <i>catch</i> from the methods?
+Talvez você esteja se perguntando se é possível refatorar o código para eliminar o <i>try/catch</i> dos métodos.
 
-The [express-async-errors](https://github.com/davidbanham/express-async-errors) library has a solution for this.
+A biblioteca [express-async-errors](https://github.com/davidbanham/express-async-errors) traz uma solução para isso.
 
-Let's install the library
+Vamos instalar a biblioteca:
 
 ```bash
 npm install express-async-errors
 ```
 
-Using the library is <i>very</i> easy.
-You introduce the library in <i>app.js</i>:
+Utilizar essa biblioteca é <i>muito</i> fácil.
+Você deve usar a biblioteca no arquivo <i>app.js</i>:
 
 ```js
 const config = require('./utils/config')
@@ -847,8 +847,7 @@ const mongoose = require('mongoose')
 module.exports = app
 ```
 
-The 'magic' of the library allows us to eliminate the try-catch blocks completely.
-For example the route for deleting a note
+A 'mágica' aqui é eliminar completamente os blocos try-catch. Por exemplo, a rota para deletar notas:
 
 ```js
 notesRouter.delete('/:id', async (request, response, next) => {
@@ -861,7 +860,7 @@ notesRouter.delete('/:id', async (request, response, next) => {
 })
 ```
 
-becomes
+fica assim:
 
 ```js
 notesRouter.delete('/:id', async (request, response) => {
@@ -870,10 +869,10 @@ notesRouter.delete('/:id', async (request, response) => {
 })
 ```
 
-Because of the library, we do not need the _next(exception)_ call anymore.
-The library handles everything under the hood. If an exception occurs in an <i>async</i> route, the execution is automatically passed to the error handling middleware.
+Por causa da biblioteca, não precisamos mais chamar _next(exception)_.
+A biblioteca cuida de gerenciar tudo por baixo dos panos. Se uma exceção ocorre em uma rota <i>async</i>, ela é automaticamente passada para o <i>middleware</i> de tratamento de exceção.
 
-The other routes become:
+As outras rotas ficam assim:
 
 ```js
 notesRouter.post('/', async (request, response) => {
@@ -898,9 +897,9 @@ notesRouter.get('/:id', async (request, response) => {
 })
 ```
 
-### Optimizing the beforeEach function
+### Otimizando a função beforeEach
 
-Let's return to writing our tests and take a closer look at the _beforeEach_ function that sets up the tests:
+Vamos retornar a escrita de nossos testes a dar uma olhada mais de perto na função _beforeEach_ que configura os testes:
 
 ```js
 beforeEach(async () => {
@@ -914,7 +913,7 @@ beforeEach(async () => {
 })
 ```
 
-The function saves the first two notes from the _helper.initialNotes_ array into the database with two separate operations. The solution is alright, but there's a better way of saving multiple objects to the database:
+A função armazena no banco de dados as primeiras duas notas do array _helper.initialNotes_ em duas operações separadas. A solução está correta, mas há uma forma melhor de salvar múltiplos objetos no banco de dados:
 
 ```js
 beforeEach(async () => {
@@ -935,9 +934,9 @@ test('notes are returned as json', async () => {
 }
 ```
 
-We save the notes stored in the array into the database inside of a _forEach_ loop. The tests don't quite seem to work however, so we have added some console logs to help us find the problem.
+Nós salvamos no banco dedados as notas armazenadas no array por meio de um <i>loop</i> _forEach_. No entanto, os testes não parecem funcionar, então precisamos adicionar alguns logs no console para nos ajudar a encontrar o problema.
 
-The console displays the following output:
+O console mostra a seguinte saída:
 
 <pre>
 cleared
@@ -947,13 +946,13 @@ saved
 saved
 </pre>
 
-Despite our use of the async/await syntax, our solution does not work as we expected it to. The test execution begins before the database is initialized!
+Apesar de usarmos a sintaxe async/await, nossa solução não funciona como esperávamos. A execução do teste começa antes que o banco de dados seja inicializado!
 
-The problem is that every iteration of the forEach loop generates an asynchronous operation, and _beforeEach_ won't wait for them to finish executing. In other words, the _await_ commands defined inside of the _forEach_ loop are not in the _beforeEach_ function, but in separate functions that _beforeEach_ will not wait for.
+O problema é que cada iteração do loop forEach gera uma operação assíncrona e o _beforeEach_ não aguardará até que elas terminem de ser executadas. Em outras palavras, os comandos _await_ definidos dentro do loop _forEach_ não estão na função _beforeEach_, mas em funções separadas cujas execuções _beforeEach_ não aguardará chegar ao fim.
 
-Since the execution of tests begins immediately after _beforeEach_ has finished executing, the execution of tests begins before the database state is initialized.
+Como a execução dos testes começa imediatamente após o _beforeEach_ ter sido concluído, a execução dos testes começa antes que o estado do banco de dados seja inicializado.
 
-One way of fixing this is to wait for all of the asynchronous operations to finish executing with the [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) method:
+Uma maneira de corrigir isso é aguardar que todas as operações assíncronas terminem de ser executadas com o método [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all):
 
 ```js
 beforeEach(async () => {
@@ -966,13 +965,13 @@ beforeEach(async () => {
 })
 ```
 
-The solution is quite advanced despite its compact appearance. The _noteObjects_ variable is assigned to an array of Mongoose objects that are created with the _Note_ constructor for each of the notes in the _helper.initialNotes_ array. The next line of code creates a new array that <i>consists of promises</i>, that are created by calling the _save_ method of each item in the _noteObjects_ array. In other words, it is an array of promises for saving each of the items to the database.
+A solução é bastante avançada, apesar de sua aparência compacta. A variável _noteObjects_ é atribuída a um array de objetos Mongoose que são criados com o construtor _Note_ para cada uma das notas no array _helper.initialNotes_. A próxima linha de código cria um novo array <i>de promessas</i>, que são criadas chamando o método _save_ de cada item no array _noteObjects_. Em outras palavras, é um array de promessas para salvar cada um dos itens no banco de dados.
 
-The [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) method can be used for transforming an array of promises into a single promise, that will be <i>fulfilled</i> once every promise in the array passed to it as a parameter is resolved. The last line of code <em>await Promise.all(promiseArray)</em> waits until every promise for saving a note is finished, meaning that the database has been initialized.
+O método [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) pode ser usado para transformar um array de promessas em uma única promessa, que será <i>cumprida (fulfilled)</i> assim que todas as promessas no array passado como parâmetro forem resolvidas. A última linha de código <em>await Promise.all(promiseArray)</em> espera até que todas as promessas para salvar uma nota sejam concluídas, o que significa que o banco de dados foi inicializado.
 
-> The returned values of each promise in the array can still be accessed when using the Promise.all method. If we wait for the promises to be resolved with the _await_ syntax <em>const results = await Promise.all(promiseArray)</em>, the operation will return an array that contains the resolved values for each promise in the _promiseArray_, and they appear in the same order as the promises in the array.
+> Os valores retornados por cada promessa do array ainda podem ser acessados ao usar o método Promise.all. Se esperarmos pelas promessas serem resolvidas com a sintaxe _await_ <em>const results = await Promise.all(promiseArray)</em>, a operação retornará um array que contém os valores resultantes de cada promessa em _promiseArray_, e elas aparecem na mesma ordem das promessas no array.
 
-Promise.all executes the promises it receives in parallel. If the promises need to be executed in a particular order, this will be problematic. In situations like this, the operations can be executed inside of a [for...of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of) block, that guarantees a specific execution order.
+O método Promise.all executa as promessas que recebe em paralelo. Se as promessas precisam ser executadas em uma ordem específica, isso será um problema. Nestas situações, as operações podem ser executadas dentro de um bloco [for...of](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Statements/for...of) que garante uma ordem específica de execução:
 
 ```js
 beforeEach(async () => {
@@ -985,52 +984,51 @@ beforeEach(async () => {
 })
 ```
 
-The asynchronous nature of JavaScript can lead to surprising behavior, and for this reason, it is important to pay careful attention when using the async/await syntax. Even though the syntax makes it easier to deal with promises, it is still necessary to understand how promises work!
+A natureza assíncrona do JavaScript pode conduzir em comportamentos surpreendentes, por esta razão é importante prestar atenção na utilização da sintaxe async/await. Mesmo que a sintaxe facilite lidar com promessas, ainda é necessário entender como as promessas funcionam!
 
-The code for our application can be found on [GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5), branch <i>part4-5</i>.
+O código de nossa aplicação pode ser encontrado no [GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5), na branch <i>part4-5</i>.
 
-### A true full stack developer's oath
+### O juramento de um verdadeiro desenvolvedor full stack
 
-Making tests brings yet another layer of challenge to programming. We have to update our full stack developer oath to remind you that systematicity is also key when developing tests.
+Incluir testes traz mais um desafio à programação. Precisamos atualizar nosso juramento de desenvolvedor full stack para lembrar que a sistemática também é fundamental ao desenvolver testes.
 
-So we should once more extend our oath:
+Então devemos estender nosso juramento novamente:
 
-Full stack development is <i> extremely hard</i>, that is why I will use all the possible means to make it easier
+O desenvolvimento full stack é extremamente difícil, por isso usarei todos os meios possíveis para torná-lo mais fácil.
 
-- I will have my browser developer console open all the time
-- I will use the network tab of the browser dev tools to ensure that frontend and backend are communicating as I expect
-- I will constantly keep an eye on the state of the server to make sure that the data sent there by the frontend is saved there as I expect
-- I will keep an eye on the database: does the backend save data there in the right format
-- I will progress in small steps
-- <i>I will write lots of _console.log_ statements to make sure I understand how the code and the tests behave and to help pinpoint problems</i>
-- If my code does not work, I will not write more code. Instead, I start deleting the code until it works or just return to a state when everything was still working
-- <i>If a test does not pass, I make sure that the tested functionality for sure works in the application</i>
-- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](https://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord-telegram) how to ask for help
+- Vou manter sempre aberto o console do desenvolvedor do meu navegador
+- Usarei a guia de rede das ferramentas de desenvolvimento do navegador para garantir que o frontend e o backend estejam se comunicando como esperado
+- Vou constantemente monitorar o estado do servidor para ter certeza que o dado enviado pelo frontend foi salvo conforme esperado
+- Vou monitorar o banco de dados: o backend está salvando os dados no formato adequado?
+- Eu progredirei em pequenos passos
+- <i>Vou escrever muitos comandos console.log para entender o comportamento do código e dos testes e auxiliar na identificação de problemas</i>
+- Se meu código não funcionar, não escreverei mais código. Em vez disso, voltarei a apagar o código até que funcione ou simplesmente retorne a um estado anterior em que tudo ainda estava funcionando.
+- <i>Se um teste falhar, eu vou me certificar de que a funcionalidade testada realmente funcione na aplicação</i>
+- Quando pedir ajuda no canal Discord ou Telegram do curso ou em outro lugar, formularei corretamente minhas perguntas. Veja [aqui](https://fullstackopen.com/ptbr/part0/informacoes_gerais#canal-do-curso-no-discord-e-telegram) como pedir ajuda.
 
 </div>
 
 <div class="tasks">
 
-### Exercises 4.8.-4.12.
+### Exercícios 4.8.-4.12.
 
-**NB:** the material uses the [toContain](https://jestjs.io/docs/expect#tocontainitem) matcher in several places to verify that an array contains a specific element. It's worth noting that the method uses the === operator for comparing and matching elements, which means that it is often not well-suited for matching objects. In most cases, the appropriate method for verifying objects in arrays is the [toContainEqual](https://jestjs.io/docs/expect#tocontainequalitem) matcher. However, the model solutions don't check for objects in arrays with matchers, so using the method is not required for solving the exercises.
+**Obs.:** o material utiliza o comparador [toContain](https://jestjs.io/pt-BR/docs/expect#tocontainitem) em vários lugares para verificar se um array contém um elemento específico. Vale ressaltar que o método utiliza o operador === para comparar a correspondência de elementos, o que significa que nem sempre é apropriado para comparar objetos. Em muitos casos, o método mais adequado para verificação de objetos em um array é o comparador [toContainEqual](https://jestjs.io/pt-BR/docs/expect#tocontainequalitem). No entanto, as soluções-modelo não checam os objetos do array com comparadores, logo utilizar o método não é necessário para resolver os exercícios.
 
-**Warning:** If you find yourself using async/await and <i>then</i> methods in the same code, it is almost guaranteed that you are doing something wrong. Use one or the other and don't mix the two.
+**Atenção:** Se você estiver utilizando async/await e métodos <i>then</i> no mesmo código, é quase certo de que você esteja fazendo algo errado. Use um ou outro, mas não misture ambos.
 
-#### 4.8: Blog list tests, step1
+#### 4.8: Testes para lista de Blog, passo1
 
-Use the supertest package for writing a test that makes an HTTP GET request to the <i>/api/blogs</i> URL. Verify that the blog list application returns the correct amount of blog posts in the JSON format.
+Utilize o pacote supertest para escrever um teste que faça uma requisição HTTP GET para a URL <i>/api/blogs</i>. Verifica se a aplicação de lista de blog retorna a quantidade correta de posts de blog em formato JSON.
 
-Once the test is finished, refactor the route handler to use the async/await syntax instead of promises.
+Uma vez que os testes estejam concluídos, refatore o gerenciador de rotas para utilizar a sintaxe async/await ao invés de promises.
 
-Notice that you will have to make similar changes to the code that were made [in the material](/en/part4/testing_the_backend#test-environment), like defining the test environment so that you can write tests that use separate databases.
+Note que você terá que fazer mudanças no código parecidas com as que fizemos [no material](/ptbr/part4/testando_o_back_end#ambiente-de-teste), como definir o ambiente de teste de forma que você possa escrever os testes em banco de dados separados.
 
-**NB:** When running the tests, you may run into the following warning:
+**Obs.:** Quando estiver executando os testes, você pode se deparar com os seguintes alertas:
 
-![Warning to read docs on connecting mongoose to jest](../../images/4/8a.png)
+![Alerta sobre a documentação enquanto conectando ao mongoose pelo jest](../../images/4/8a.png)
 
-[One way](https://stackoverflow.com/questions/50687592/jest-and-mongoose-jest-has-detected-opened-handles) to get rid of this is to
-add to the <i>tests</i> directory a file <i>teardown.js</i> with the following content
+[Uma forma](https://stackoverflow.com/questions/50687592/jest-and-mongoose-jest-has-detected-opened-handles) de se livrar disso é adicionar no diretório de <i>tests</i> um arquivo de desmontagem chamado <i>teardown.js</i> com o seguinte conteúdo:
 
 ```js
 module.exports = () => {
@@ -1038,7 +1036,7 @@ module.exports = () => {
 }
 ```
 
-and by extending the Jest definitions in the <i>package.json</i> as follows
+e incluir nas definições do Jest no <i>package.json</i> o seguinte:
 
 ```js
 {
@@ -1050,41 +1048,41 @@ and by extending the Jest definitions in the <i>package.json</i> as follows
 }
 ```
 
-**NB:** when you are writing your tests **<i>it is better to not execute all of your tests</i>**, only execute the ones you are working on. Read more about this [here](/en/part4/testing_the_backend#running-tests-one-by-one).
+**Obs.:** quando estiver escrevendo seus testes **<i>é melhor não executar todos os testes de uma vez</i>**, somente execute aqueles em que estiver trabalhando no momento. Leia mais sobre isso [aqui](/ptbr/part4/testando_o_back_end#executando-os-testes-um-por-um).
 
-#### 4.9: Blog list tests, step2
+#### 4.9: Testes para lista de Blog, passo2
 
-Write a test that verifies that the unique identifier property of the blog posts is named <i>id</i>, by default the database names the property <i>_id</i>. Verifying the existence of a property is easily done with Jest's [toBeDefined](https://jestjs.io/docs/en/expect#tobedefined) matcher.
+Escreva um teste que verifique se a propriedade para o identificador único dos posts de blog tem o nome de <i>id</i>, por padrão o banco de dados nomeia a propriedade como <i>_id</i>. Verificar a existência de uma propriedade é fácil com o comparador [toBeDefined](https://jestjs.io/pt-BR/docs/expect#tobedefined) do Jest.
 
-Make the required changes to the code so that it passes the test. The [toJSON](/en/part3/saving_data_to_mongo_db#backend-connected-to-a-database) method discussed in part 3 is an appropriate place for defining the <i>id</i> parameter.
+Faça as mudanças necessárias no código a fim de que os testes passem. O método [toJSON](/ptbr/part3/salvando_dados_no_mongo_db#conectando-o-backend-a-um-banco-de-dados) discutido na parte 3 é o mais apropriado para definir o parâmetro <i>id</i>.
 
-#### 4.10: Blog list tests, step3
+#### 4.10: Testes para lista de Blog, passo3
 
-Write a test that verifies that making an HTTP POST request to the <i>/api/blogs</i> URL successfully creates a new blog post. At the very least, verify that the total number of blogs in the system is increased by one. You can also verify that the content of the blog post is saved correctly to the database.
+Escreva um teste que verifica se ao fazer uma requisição HTTP POST para a URL <i>/api/blogs</i> um novo post de blog é criado. Ao fim, verifica se o número total de blogs no sistema aumentou para mais um. Você também pode verificar se o conteúdo do post de blog está salvo no banco de dados.
 
-Once the test is finished, refactor the operation to use async/await instead of promises.
+Uma vez que o teste estiver finalizado, refatore-o utilizando a sintaxe async/await ao invés de promises.
 
-#### 4.11*: Blog list tests, step4
+#### 4.11*: Testes para lista de Blog, passo4
 
-Write a test that verifies that if the <i>likes</i> property is missing from the request, it will default to the value 0. Do not test the other properties of the created blogs yet.
+Escreva um teste que verifica se a propriedade <i>likes</i> está faltando na requisição e se estiver, defina como padrão o valor 0 para esta propriedade.
 
-Make the required changes to the code so that it passes the test.
+Faça as mudanças necessárias no código para que o teste passe.
 
-#### 4.12*: Blog list tests, step5
+#### 4.12*: Testes para lista de Blog, passo5
 
-Write tests related to creating new blogs via the <i>/api/blogs</i> endpoint, that verify that if the <i>title</i> or <i>url</i> properties are missing from the request data, the backend responds to the request with the status code <i>400 Bad Request</i>.
+Escreva testes relacionados a criação de um novo blog pelo endpoint <i>/api/blogs</i>, que verifique se as propriedades <i>title</i> ou <i>url</i> estão faltando nos dados da requisição, o backend deve responder a requisição com código de status <i>400 Bad Request</i>.
 
-Make the required changes to the code so that it passes the test.
+Faça as mudanças necessárias no código para que o teste passe.
 
 </div>
 
 <div class="content">
 
-### Refactoring tests
+### Refatorando os testes
 
-Our test coverage is currently lacking. Some requests like <i>GET /api/notes/:id</i> and <i>DELETE /api/notes/:id</i> aren't tested when the request is sent with an invalid id. The grouping and organization of tests could also use some improvement, as all tests exist on the same "top level" in the test file. The readability of the test would improve if we group related tests with <i>describe</i> blocks.
+Atualmente, nossa cobertura de testes é insuficiente. Algumas requisições como <i>GET /api/notes/:id</i> e <i>DELETE /api/notes/:id</i> não foram testadas quando uma requisição é feita com um id inválido. O agrupamento e a organização dos testes também podem melhorar, já que todos os testes estão "no mesmo nível" no arquivo de testes. A legibilidade dos testes aumentaria se agrupássemos os testes relacionados com blocos <i>describe</i>.
 
-Below is an example of the test file after making some minor improvements:
+Abaixo está um exemplo do arquivo de teste após pequenas melhorias:
 
 ```js
 const supertest = require('supertest')
@@ -1220,15 +1218,15 @@ afterAll(async () => {
 })
 ```
 
-The test output is grouped according to the <i>describe</i> blocks:
+A saída é agrupada de acordo com os blocos <i>describe</i>:
 
-![jest output showing grouped describe blocks](../../images/4/7.png)
+![saídas do jest mostrando blocos describe agrupados](../../images/4/7.png)
 
-There is still room for improvement, but it is time to move forward.
+Ainda há espaço para melhorias, mas precisamos seguir adiante.
 
-This way of testing the API, by making HTTP requests and inspecting the database with Mongoose, is by no means the only nor the best way of conducting API-level integration tests for server applications. There is no universal best way of writing tests, as it all depends on the application being tested and available resources.
+Essa forma de testar a API, fazendo solicitações HTTP e inspecionando o banco de dados com o Mongoose, não é de forma alguma a única nem a melhor maneira de conduzir testes de integração em nível de API para aplicações de servidor. Não há uma melhor maneira universal de escrever testes, pois tudo depende da aplicação sendo testada e dos recursos disponíveis.
 
-You can find the code for our current application in its entirety in the <i>part4-6</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-6).
+Você encontrará o código atual de nossa aplicação na branch <i>part4-6</i> do [repositório GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-6).
 
 </div>
 
@@ -1236,22 +1234,22 @@ You can find the code for our current application in its entirety in the <i>part
 
 ### Exercises 4.13.-4.14.
 
-#### 4.13 Blog list expansions, step1
+#### 4.13 Expansões na lista de Blog, passo1
 
-Implement functionality for deleting a single blog post resource.
+Implemente a funcionalidade de deletar um post de blog.
 
-Use the async/await syntax. Follow [RESTful](/en/part3/node_js_and_express#rest) conventions when defining the HTTP API.
+Utilize a sintaxe async/await. Siga a convenção [RESTful](ptbr/part3/node_js_e_express#rest) quando estiver definindo a API HTTP.
 
-Implement tests for the functionality.
+Implemente os testes para a funcionalidade.
 
-#### 4.14 Blog list expansions, step2
+#### 4.14 Expansões na lista de Blog, passo2
 
-Implement functionality for updating the information of an individual blog post.
+Implemente a funcionalidade de atualizar informações individuais de um post de blog.
 
 Use async/await.
 
-The application mostly needs to update the number of <i>likes</i> for a blog post. You can implement this functionality the same way that we implemented updating notes in [part 3](/en/part3/saving_data_to_mongo_db#other-operations).
+A aplicação necessita atualizar o número de <i>likes</i> de um post de blog. Você pode implementar esta funcionalidade da mesma forma que fizemos para atualizar as notas na [parte 3](/ptbr/part3/salvando_dados_no_mongo_db#outras-operacoes).
 
-Implement tests for the functionality.
+Implemente os testes para a funcionalidade.
 
 </div>

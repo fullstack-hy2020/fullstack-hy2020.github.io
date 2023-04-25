@@ -379,6 +379,18 @@ userSchema.plugin(uniqueValidator) // highlight-line
 // ...
 ```
 
+Note: when installing the _mongoose-unique-validator_ library, you may encounter the following error message:
+
+![](../../images/4/uniq.png)
+
+The reason for this is that the library is not yet compatible with Mongoose version 7 at the time of writing (March 13, 2023). If you encounter an error, you can downgrade to an older version of Mongoose by running the command
+
+```
+npm install mongoose@6
+```
+
+After this, you can install the library _mongoose-unique-validator_ without problems.
+
 We could also implement other validations into the user creation. We could check that the username is long enough, that the username only consists of permitted characters, or that the password is strong enough. Implementing these functionalities is left as an optional exercise.
 
 Before we move onward, let's add an initial implementation of a route handler that returns all of the users in the database:
