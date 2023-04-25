@@ -600,9 +600,8 @@ const PersonForm = ({ setError }) => {
     refetchQueries: [  {query: ALL_PERSONS } ],
     // highlight-start
     onError: (error) => {
-      const errors = error.graphQLErrors[0].extensions.error.errors
-      const messages = Object.values(errors).map(e => e.message).join('\n')
-      setError(messages)
+      const message = error.graphQLErrors[0].extensions.stacktrace[0]
+      setError(message)
     }
     // highlight-end
   })
