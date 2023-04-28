@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+
+html[dir='rtl'] {
+  font-family: $font-body-rtl;
+
+  body,
+  .arrow--stacked-title,
+  .arrow--stacked-title,
+  .sub-header,
+  em {
+    font-family: $font-body-rtl;
+  }
+
+  .heading-font,
+  .arrow__rectangle,
+  .form p,
+  .course p,
+  .course ul,
+  .part-intro {
+    font-family: $font-heading-rtl;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: $font-heading-rtl;
+  }
+
+  .body-text__content:not(:last-of-type) {
+    padding-bottom: 0.5em;
+  }
+
+  .body-text__content {
+    line-height: 1.7em;
+  }
+
+  .part-intro__banner,
+  .part-main__banner {
+    background-position: center left;
+    .arrow__wrapper--stacked {
+      margin: auto 0 auto auto;
+    }
+    .arrow__rectangle {
+      border-right: 2px;
+      border-right-style: solid;
+      border-left: none;
+    }
+    .arrow__point {
+      transform: translate(1.3rem, 0rem) rotate(225deg);
+    }
+    .arrow__wrapper:nth-of-type(n + 2) {
+      margin-left: 0;
+      margin-right: -3rem;
+    }
+    .arrow__wrapper:nth-of-type(n + 2) .arrow__rectangle {
+      padding-right: 4rem;
+      padding-left: 1rem;
+    }
+  }
+
+  p,
+  thead,
+  th,
+  .accordion {
+    text-align: right;
+  }
+
+  .scroll-navigation-container {
+    @include from($desktop) {
+      margin-left: -100%;
+      margin-right: 0;
+    }
+  }
+
+  .course {
+    .letter {
+      @include from($tablet) {
+        transform: translate(3rem, 4.5rem);
+      }
+    }
+  }
+
+  .course-content-inner {
+    @include from($desktop) {
+      padding-right: 30%;
+      padding-left: 5%;
+    }
+    p {
+      line-height: 1.7em;
+      @include from($tablet) {
+        margin-right: 1rem;
+        margin-left: 0;
+      }
+    }
+  }
+
+  .scroll-navigation {
+    padding-right: 0;
+    padding-left: 1rem;
+  }
+
+  h1 {
+    @include from($tablet) {
+      margin-left: 0;
+      margin-right: 3rem;
+    }
+  }
+
+  h2,
+  h3,
+  h4 {
+    @include from($tablet) {
+      margin-left: 0;
+      margin-right: 1rem;
+    }
+  }
+
+  table {
+    @include from($tablet) {
+      margin-left: 0;
+      margin-right: 1rem;
+    }
+  }
+
+  ul {
+    @include from($tablet) {
+      margin-left: 0;
+      margin-right: 2.2rem;
+    }
+  }
+
+  td {
+    text-align: right;
+  }
+
+  .challenge-title {
+    margin-left: auto;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .contributors-logos {
+    margin-left: 0;
+    margin-right: 20%;
+  }
+
+  .col-spacing {
+    margin-right: 0;
+    width: 80%;
+  }
+}
+
+.col-spacing {
+  margin-right: 2em;
+}

@@ -1,0 +1,61 @@
+{
+  "common": {
+    "Part": "الجزء",
+    "Fullstack": "مطور الويب الشامل",
+    "nextPart": "الجزء التالي",
+    "previousPart": "الجزء السابق",
+    "readMore": "قراءة المزيد",
+    "proposeChanges": "اقترح تعديلات حول المحتوى"
+  },
+  "searchPage": {
+    "noMatches": "لا يوجد نتائج",
+    "matchesTitle": "العثور على {{count}} نتائج مطابقة للبحث عن \"{{query}}\""
+  },
+  "aboutPage": {
+    "generalTitle": "عام"
+  },
+  "navigation": {
+    "skipToContent": "تخطي الى المحتوى",
+    "aboutCourse": "عن الدورة التدريبية",
+    "courseContents": "محتوى الدورة التدريبية",
+    "faq": "أسئلة شائعة",
+    "partners": "شركائنا",
+    "challenge": "التحدي",
+    "searchLinkSrLabel": "البحث في المحتوى",
+    "ThemeSwitcherSrLabel": "اختيار النسق المظلم",
+    "LanguagePickerSrLabel": "اختيار اللغة"
+  },
+  "challengePage": {
+    "aboutTitle": "تطوير تطبيقات الانترنت الكاملة",
+    "joinTitle": "للشركات, نرجوا الانتباه!",
+    "registerButton": "قم بتسجيل شركتك في تحدي تطوير التطبيقات الانترنت الكاملة",
+    "nameLabel": "الإسم",
+    "namePlaceholder": "محمد عادل",
+    "titleLabel": "المسمى الوظيفي",
+    "companyLabel": "الشركة",
+    "companyPlaceholder": "شركة تطوير البرمجيات",
+    "phoneLabel": "الهاتف",
+    "emailLabel": "البريد الالكتروني",
+    "whereDidYouHearLabel": "كيف تعرفت على تحدي تطوير التطبيقات",
+    "submitButton": "تسليم",
+    "submitSuccessMessage": "شكراً. سيتم التواصل معك في أقرب وقت!",
+    "participantsTitle": "هذه الشركات انضمت لتحدي تطوير التطبيقات الكاملة",
+    "coOperationTitle": "بالتعاون مع",
+    "infoButton": "المزيد عن التحدي"
+  },
+  "companiesPage": {
+    "storiesTitle": "قصص نجاح المطورين من شركائنا"
+  },
+  "faqPage": {
+    "faqTitle": "أسئلة شائعة"
+  },
+  "homePage": {
+    "startCourseButton": "بدأ الدورة التدريبية",
+    "announcementsTitle": "اعلانات",
+    "authorsTitle": "المحررين ورخصة الاستخدام",
+    "courseNameTitle": "دورة تطوير التطبيقات الانترنت الكاملة المفتوحه"
+  },
+  "notFoundPage": {
+    "title": "صفحة غير موجودة"
+  }
+}

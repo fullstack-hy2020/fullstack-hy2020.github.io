@@ -22,6 +22,22 @@ const partNameTranslations = {
     'Konttiteknologia',
     'Relaatiotietokannan käyttö',
   ],
+  ar: [
+    'أساسيات تطوير تطبيقات الانترنت',
+    'مقدمة عن React',
+    'التواصل مع الخادم ( server )',
+    'برمجة الخادم بلغة NodeJS ومكتبة Express',
+    'فحص خادم Express و ادارة المستخدمين',
+    'فحص تطبيقات React',
+    'ادارة متقدمة لحالة متغيرات التطبيق',
+    'استخدام React router, custom hooks, وتصميم التطبيق بواسطة CSS و استخدام webpack',
+    'GraphQL لغة',
+    'TypeScript لغة',
+    'React Native اطار عمل',
+    'CI/CD أساسيات الدمج والنشر المستمر',
+    'Containers الحاويات',
+    'قواعد البيانات العلائقية',
+  ],
   en: [
     'Fundamentals of Web apps',
     'Introduction to React',
@@ -93,6 +109,9 @@ export const PartBanner = ({ lang }) => {
   const parts = Object.keys(navigation[lang]);
 
   function partName(lang) {
+    if (lang === 'ar') {
+      return 'الجزء';
+    }
     return lang === 'fi' ? 'Osa' : lang === 'ptbr' ? 'Parte' : 'Part';
   }
 

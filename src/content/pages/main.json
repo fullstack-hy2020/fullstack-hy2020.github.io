@@ -18,6 +18,41 @@
     "contacts": ["Full stack open", "matti.luukkainen@helsinki.fi"],
     "licenced": "Materiaali on lisensoitu Creative Commons BY-NC-SA 3.0 -lisenssillä."
   },
+  "ar":{
+    "mainTitle": "تعمق في تطوير تطبيقات الانترنت الكاملة",
+    "intro":[
+      "ستتعلم في هذه الدورة تطوير تطبيقات الانترنت الحديثة باستخدام",
+      "React, Redux, Node.js, MongoDB, GraphQL, Typescript",
+      "محور الدورة هو تطوير تطبيقات الصفحة الواحدة باستخدام",
+      "ReactJS, REST APIs, Node.js"
+    ],
+    "current": [
+      "<em>لديك أسئلة عن الدورة التدريبية ؟ قم بقراءة  <a href='/en/part0/general_info'>الجزء 0</a> بتمعن, يحتوي الجزء الأول على اجابات لمعظم الأسئلة </em>",
+      "لن يتم اصدار نسخة سنوية. يمكن استئناف الدورة بدون فواصل. <a href='/en/part0/general_info/#no-more-yearly-versions'>اضغط هنا</a> لمزيد من التفاصيل.",
+      "يمكنك مناقشة محتوى الكورس على منصة دسكورد",
+      "<a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a>",
+      "يمكنك مناقشة محتوى الكورس على منصة تلجرام",
+      "<a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>",
+      "يرجى مراجعة <a href='/en/part0/general_info#how-to-ask-help-in-discord-telegam'>الرابط</a> للاطلاع على الطريقة المناسبة للتفاعل على منصات الدورة"
+    ],
+    "telegram": "تلجرام هي منصة اجتماعية تابعة لواتس آب ويمكن استخدامها من المتصفح أو الموبايل",
+    "notice": "ملاحظة: التعليقات غير الملائمة والمهينة والتمييزية ممنوعة تمامًا على القناة ، وأي شخص يرسل هذه الأنواع من الرسائل سيتم استبعاده نهائيًا من المناقشة.",
+    "licence": [
+      "الأجزاء من 0-8 و 13 حررت بواسطة <a href='https://github.com/mluukkai'>Matti Luukkainen</a>.",
+      "الجزء 9 حرره المطورين من <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>.",
+      "الجزء 10 حرره <a href='https://github.com/Kaltsoon'>Kalle Ilves</a>",
+      "الجزء 11 حرره المطورين من <a href='https://www.smartly.io/'>Smartly</a> ",
+      "الجزء 12 حرره <a href='https://github.com/jakousa'>Jami Kousa</a>. ",
+      "العديد من  <a href='https://github.com/fullstack-hy2020/misc/blob/master/contributors.md'>المشاركين</a> قاموا بتحسين وتنقيح المادة العلمية والنصية. يمكنك أيضاً المشاركه في تطوير المحتوى.",
+      "هذه الصفحة تم تصميمها من قبل <a target='_blank' href='https://www.houston-inc.com/'>Houston inc</a>, وقمنا بمراجعة المحتوى. الترجمة الصينية تمت بواسطة <a target='_blank' href='https://zhangwei.online/blog'>Zhang Wei</a>. الترجمة الأسبانية بواسطة <a target='_blank' href='https://github.com/sebastiantorres86'>Sebastian Torres</a>, <a target='_blank' href='https://github.com/cynthiamv'>Cynthia Vico Vacca</a>.",
+      "تم ترجمة المادة العلمية للغة العربية بواسطة <a target='_blank' href='https://www.linkedin.com/in/mohamed-adel-aa199773/'>محمد عادل</a>",
+      "المادة العلمية للدورة تخضع لرخصة <a href='https://creativecommons.org/licenses/by-nc-sa/3.0/'>Creative Commons BY-NC-SA 3.0 license</a>, مما يعني أن استخدام المادة العلمية متاح مجاناً بشرط ذكر المؤلفين الأصليين, أي تعديل للمادة العلمية يشترط خضوعه لنفس الرخصة. يحظر استخدام المادة العلمية لأغراض تجارية بدون اذن المؤلفين."
+    ],
+    "university": "جامعة هلسنكي هي أقدم وأكبر الجامعات العلمية في فنلندا وينتمي للمجتمع العلمي الدولي التابع للجامعة 40000 شخص",
+    "houston": "منظمة هوستن الفنلندية أنشأت في 2003 لتطوير البرمجيات. نقوم بتصميم وتطوير خدمات الكترونية للأعمال التجارية",
+    "contacts": ["دورة تطوير تطبيقات الانترنت الكاملة المفتوحة", "matti.luukkainen@helsinki.fi"],
+    "licenced": "تخطع المادة العلمية لرخصة Creative Commons BY-NC-SA 3.0"
+  },
   "en": {
     "mainTitle": "Deep Dive Into Modern Web Development",
     "intro": "Learn React, Redux, Node.js, MongoDB, GraphQL and TypeScript in one go! This course will introduce you to modern JavaScript-based web development. The main focus is on building single page applications with ReactJS that use REST APIs built with Node.js.",

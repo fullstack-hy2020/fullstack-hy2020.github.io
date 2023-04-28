@@ -100,8 +100,7 @@ const IndexPage = ({ lang, title = 'Full stack open' }) => {
               />
 
               <BodyText
-                className="col-7 col-8--mobile link"
-                style={{ marginRight: '2rem' }}
+                className="col-7 col-8--mobile link col-spacing"
                 heading={{
                   title: t('homePage:announcementsTitle'),
                   level: 'h3',
@@ -133,8 +132,7 @@ const IndexPage = ({ lang, title = 'Full stack open' }) => {
 
               <BodyText
                 headingFont
-                className="col-7 col-8--mobile"
-                style={{ marginRight: '2rem' }}
+                className="col-7 col-8--mobile col-spacing"
                 heading={{
                   title: t('homePage:authorsTitle'),
                   level: 'h3',

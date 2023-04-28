@@ -36,6 +36,7 @@ const LanguagePicker = ({
         </label>
       </SrOnly>
       <select
+        dir="ltr"
         id="language-select"
         value={value}
         onChange={selectOnChange}

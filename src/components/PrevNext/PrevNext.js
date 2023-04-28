@@ -4,7 +4,7 @@ import translationProgress from '../../utils/translationProgress';
 import Element from '../Element/Element';
 import { Link } from 'gatsby';
 import { PropTypes } from 'prop-types';
-import React from 'react';
+import React, { useCallback } from 'react';
 import navigation from '../../content/partnavigation/partnavigation';
 import snakeCase from 'lodash/fp/snakeCase';
 import { useTranslation } from 'react-i18next';
@@ -23,12 +23,15 @@ const hasNext = (letter, part, lang) => {
   );
 };
 
-const labelOsaPart = lang => (lang === 'fi' ? 'Osa' : 'Part');
-
 const langUrl = lang => (lang === 'fi' ? '/osa' : `/${lang}/part`);
 
 const PrevNext = ({ part, letter, lang }) => {
   const { t } = useTranslation();
+
+  const labelOsaPart = useCallback(
+    lang => (lang === 'fi' ? 'Osa' : t('Part')),
+    [t]
+  );
 
   const getPrev = () => {
     if (!letter && hasPart(part - 1, lang)) {

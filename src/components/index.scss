@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,500,600');
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400');
 @import './common.scss';
+@import './rtl.scss';
 
 :root,
 html[data-theme='light'] {
@@ -20,6 +21,7 @@ html[data-theme='dark'] {
   --color-main: #{$main--dark};
   --color-pre-background: #{$main--dark};
 }
+
 
 html,
 body {

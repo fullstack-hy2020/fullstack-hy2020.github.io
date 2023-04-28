@@ -53,6 +53,87 @@
       ]
     }
   ],
+  "ar":[
+    {
+      "title": "What are the prerequisites of the course?",
+      "text": [
+        "See <a href='/en/part0/general_info#prerequisites'>here</a>."
+      ]
+    },
+    {
+      "title": "How much does this course cost?",
+      "text": [
+        "The course is totally free of charge. You can get a certificate and even the University of Helsinki ECTS credits for free. See <a href='/en/part0/general_info#parts-and-completion'><here/a> for more."
+      ]
+    },
+    {
+      "title": "How do I sign up for the course?",
+      "text": [
+        "You don't have to sign up until you want to do the course exam. You can find more information <a href='/en/part0/general_info#parts-and-completion'>here</a>. <br><br>For the course certificate signup is not needed."
+      ]
+    },
+    {
+      "title": "How many credits is the course?",
+      "text": [
+        "The course is 5-14 ECTS credits <a href='/en/part0/general_info#parts-and-completion'>depending on the amount of returned exercises</a>. After completing the course you can continue to deepen your knowledge on the subject matter by doing the 1-10 ECTS credit <a href='/en/part0/general_info#full-stack-project'>Full Stack project</a>."
+      ]
+    },
+    {
+      "title": "When is the deadline for the exercises and the exam?",
+      "text": [
+        "You can complete the course at your own pace and there are no deadlines for anything. See <a href='/en/part0/general_info/#no-more-yearly-versions'>this</a> for more details."
+      ]
+    },
+    {
+      "title": "How do I submit the exercises?",
+      "text": [
+        "The exercises are submitted to GitHub, and by marking the exercises as done in the exercise submission system. You can read more from <a href='/en/part0/general_info#submitting-exercises'>here</a>. "
+      ]
+    },
+    {
+      "title": "Do I have to submit each part to a separate repository?",
+      "text": [
+        "No. You can use one or more repositories, most important is to name everything in a repository clearly. "
+      ]
+    },
+    {
+      "title": "Can I edit a submission?",
+      "text": [
+        "No. All exercises for a part must be submitted at the same time. If you marked exercises wrong by accident, or wrote the repository name wrong, send an e-mail to matti.luukkainen@helsinki.fi or message in Telegram to <i>mluukkai</i>, tell your GitHub username and how the submission should be edited."
+      ]
+    },
+    {
+      "title": "When and how can I get my credits?",
+      "text": [
+        "You can get your credits after submitting enough exercises for passing the course, passing the course exam and letting us know through the exercise submission system that you are ready with the course.<br><br>For the course certificate signup or the exam are not needed."
+      ]
+    },
+    {
+      "title": "Do I get a certificate after completing the course?",
+      "text": [
+        "Yes! You can download the certificate after completing the course from the exercise submission system. For the course certificate signup to Open university and the exam are not needed."
+      ]
+    },
+    {
+      "title": "Should I signup to Open University to get the course certificate?",
+      "text": [
+        "For the course certificate signup to Open University is not needed. You can download the certificate after completing the course from the exercise submission system."
+      ]
+    },
+    {
+      "title": "I started the course last year, how should I continue?",
+      "text": [
+        "Read more from <a href='/en/part0/general_info#expanding-on-a-previously-completed-course'>here</a>"
+      ]
+    },
+    {
+      "title": "I heard that I could get a job interview by completing the course.",
+      "text": [
+        "That's right. If you complete the course with full credits, and complete the practical work with 10 credits, you get a job interview with our partners. Read more <a href='/en/part0/general_info#interview-promise'>here</a>. You need to be a resident of Finland in order to participate in these interviews."
+      ]
+    }
+  ]
+  ,
   "en": [
     {
       "title": "What are the prerequisites of the course?",

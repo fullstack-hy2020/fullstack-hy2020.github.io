@@ -61,7 +61,7 @@ class Header extends Component {
                 className="nav-item-hover"
                 childrenClassName="triple-border__logo"
               >
-                {'{() => fs}'}
+                <bdi dir="ltr">{'{() => fs}'}</bdi>
               </TripleBorder>
             ) : (
               <TripleBorder

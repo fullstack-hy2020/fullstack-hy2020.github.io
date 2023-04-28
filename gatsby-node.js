@@ -47,7 +47,11 @@ exports.createPages = ({ actions, graphql }) => {
             lang: lang,
           },
         });
-      } else if (navigation[lang] && !isEmpty(navigation[lang][part]) && frontmatter.letter) {
+      } else if (
+        navigation[lang] &&
+        !isEmpty(navigation[lang][part]) &&
+        frontmatter.letter
+      ) {
         createPage({
           path:
             lang === 'fi'

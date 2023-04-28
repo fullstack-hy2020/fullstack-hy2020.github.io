@@ -71,6 +71,79 @@
       "title": "Software Developer"
     }
   ],
+  "ar":[
+    {
+      "image": "Juha_Tauriainen.jpg",
+      "companyLogo": "houston2.svg",
+      "text": [
+        "My role at Houston concentrates on Frontend-development. We use a whole spectrum of technologies and libraries, including those taught in this course. As a consulting house we help our customers and partners to achieve better results through better quality. As well as the code, we bring the best practices of the field and help our customers to succeed.",
+        "Working at Houston is awesome because of multiple reasons. The most I like that the employees are always number one. The ideas, suggestions and opinions of the staff are heard and reacted to. For example Houston gave me their full support to starting a mentorship program. We help people from different fields with programming, guide them to best practices and aim to get them to the business. This has taught both me and Houston very much. I get a huge kick out of helping others – no matter if they are customers, work mates or students."
+      ],
+      "name": "Juha Tauriainen",
+      "title": "Senior Consultant"
+    },
+    {
+      "image": "burcu_aybak.jpg",
+      "companyLogo": "unity.svg",
+      "text": [
+        "I am working at Unity as a Full-stack Software Engineer and have ten years of experience in software development including e.g. web applications, command and control systems and communication systems.",
+        "I love being in software engineering because it is a combination of intelligent problem solving and creative work. Sometimes it makes me feel like I am a superhero! Then again there are always new things and subjects to learn and you get paid to do what you enjoy with people you like - work in engineering is fun! Our industry and customers are fun (games!) and it is great to do work that helps our customers to make a living with what they love.",
+        "I like working at Unity because the work allows me to work with excellent colleagues and different personalities from all over the world who are also very good at their jobs. It is a perfect place to learn new technologies and explore new areas. Unity is a perfect workplace for me in ways that I can’t explain in just a few sentences."
+      ],
+      "name": "Burcu Aybak",
+      "title": "Software Engineer"
+    },
+    {
+      "image": "Tuukka_Peuraniemi.jpg",
+      "companyLogo": "terveystalo.svg",
+      "text": [
+        "I have many years of experience on health technologies. I ended up as a software developer after a few twists and turns. I started out as a pharmacist. Then I graduated as a Master of Computer Science and proceeded to work as a development director and later as a software developer.",
+        "I enjoy working at Terveystalo, because here you have a say on the technologies we use and which projects you want to take part on. Due to my role and my experience I get to take part on starting and developing different new services. Right now I develop a new mobile application, which will see the light of day among customers in the near future. ",
+        "In the future I want to continue to advance in my job and to keep learning. Working in  multivendor-projects with experienced colleagues maintains and  develops my skills.",
+        "I believe Terveystalo will keep offering new meaningful projects in the future."
+      ],
+      "name": "Tuukka Peuraniemi",
+      "title": "Sovelluskehittäjä ja digitaalinen moniosaaja"
+    },
+    {
+      "image": "kristiina_ronnberg.jpg",
+      "companyLogo": "konecranes.svg",
+      "text": [
+        "In a field where continuous learning is almost vital, I have been lucky to get to work with the latest technologies and experienced colleagues. In my role at Konecranes I get to work in an international environment and develop solutions which bring the benefits of industrial internet to the everyday lives of our customers. The technology palette we use is rich, and the development methods have become even more agile – the contents covered by this course are also present in our work.",
+        "My road to IT was not the most straight forwards. I studied as a Finnish teacher, but ended up, after continuing my education, shifting careers to this different world where language and  writing skills and creativity are emphazised as well. Partly due to my background I have been delighted, that at Konecrass the different backgrounds and skills of the employees are appreciated and their advancement is supported. In this kind of environment the new field and developing in it has felt natural and motivating."
+      ],
+      "name": "Kristiina Rönnberg",
+      "title": "Software Engineer"
+    },
+    {
+      "image": "Juho_Kyrola.jpg",
+      "companyLogo": "elisa.svg",
+      "text": [
+        "I work at Elisa as a software developer and study IT at Aalto University. I am at the end of my studies, and will soon begin my thesis. I have also completed courses and worked here at the same time. I ended up at Elisa because of a recommendation from a friend, he told me, that this is a good company to work for and urged me to apply.",
+        "Previously I worked for a couple other companies for roughly 1.5 years as a developer. Programming has been a hobby of mine since childhood, and I have always known computers are my thing. My first programming language was Java.",
+        "I work at Elisa Automate working on an optimization platform for mobile networks. I work with the platform itself, not the optimization algorithms. Technologies I have used for projects include Python, React, Elasticsearch and Docker, and for me the best is exactly this – full stack programming. You are not a front end hero, but you get to do it all. It keeps the passion up. The projects are also meaningful for me. It’s fun that we are the pioneers of the field and not just doing our own versions of something already existing.",
+        "In the beginning it was a bit difficult to get the hang of the project I work on, but bit by bit I got there. It has been really motivating, that this is something else than just creating a “normal” website.  It is easy to immerse yourself with the work alone, but it is important to keep the importance of team work in mind. Without teamwork the work proceeds slowly and you might end up doing the wrong thing. For new employees (both trainees and more experienced coders) it would be beneficial to do for example parner coding in the beginning.",
+        "Beforehand I was interested to know, wether the culture in a large company would be very stuck up, but I was pleasantly surprised that my team is so agile. Advancing the work does not feel like getting blood from a stone, but is almost a walk in the park. Before starting my job I thought I would easily end up tighly siloed, but in reality I have been able to do diversely different things. You just have to ask for diverse things to do yourself! You have to take charge of your own motivation.",
+        "The interview had two parts. First I met my future boss, who determined wha kind of person I am. On a different day there was a technical interview, where my competence was tested through chatting and small exercises. Thjroughout the process you could clearly see the humane side, they did not only care about how good a coder you are, but also who you are as a person. The application process did not give me the feeling of being examined, but that we were looking for a common ground, and I got a feel of who my future teammates are.",
+        "The corporate culture here meets my expectations, and it is easy to arrange your job around your life. Communication also works well, things are discussed enough within the company, and I have not gotten the feeling that there is this shady “upper floor” where everything is decided. Of course you don’t always know what is being done in other teams, but that seems to be the same in every other big company.",
+        "There are enough opportunities to advance and learn, and you get to use your skills. Your manager and your teams scrum master proposes different things, now I am going to React Finland event. All in all, it’s fun rather than annoying to come to work everyday."
+      ],
+      "name": "Juho Kyrölä",
+      "title": "Software Developer"
+    },
+    {
+      "image": "holly_gibson_sq.jpg",
+      "companyLogo": "smartly_io.svg",
+      "text": [
+        "I’m working as a software developer at Smartly.io, building our image and video templating tools and creating a beautiful and powerful experience for designers who make visual media. Our team works with JavaScript, React, and Node.js. From the first moment, I loved the culture at Smartly.io especially our value of being Humble Hungry Hunters. We have no egos here, and we’re humble.",
+        "At the same time, we’re lifelong learners, hunting for new knowledge, and constantly leveling up. I have a bit of an alternative background. I used to work in IT at a university and took an online PHP class to improve my technical skills. I had the worst experience and thought I’d never become a developer. I went on to work at nonprofits in marketing, website management, and graphic design. My career in software development started when I took part in an intensive Ruby on Rails bootcamp. It was one of the hardest things I had done so far, but it landed me a job as the first—and only—developer in an ed-tech startup. As I was in charge of everything from th servers to the database to the web app, I needed to learn lots of new skills very quickly. I even rebuilt our server in the middle of a Finnish forest during my holiday after it got hacked! Having so much responsibility grew my confidence as a professional developer. Since then, I have worked in multiple companies with different tech stacks and frameworks and advanced to a team lead position.",
+        "I’m one part engineer and one part artist. Coding allows me to use both halves of my brain: the logical part that loves puzzles and problem solving, and the artistic one that enjoys creating beautiful and functional user interfaces. There’s also a profoundly human element to developing software that I like. When we are building creative tools, we need to have empathy and understand our customers’ needs to succeed in producing something easy and powerful to use."
+      ],
+      "name": "Holly Gibson",
+      "title": "Software Developer"
+    }
+  ]
+  ,
   "en": [
     {
       "image": "Juha_Tauriainen.jpg",

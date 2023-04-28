@@ -23,8 +23,9 @@ import { partColors } from './partColors';
 import path from 'path';
 import snakeCase from 'lodash/fp/snakeCase';
 import getPartTranslationPath from '../utils/getPartTranslationPath';
+import { withTranslation } from 'react-i18next';
 
-export default class ContentTemplate extends Component {
+class ContentTemplate extends Component {
   constructor(props) {
     super(props);
 
@@ -154,9 +155,9 @@ export default class ContentTemplate extends Component {
       <Layout isCoursePage={true}>
         <SEO
           lang={lang}
-          title={`Fullstack ${lang === 'fi' ? 'osa' : 'part'}${part} | ${
-            this.state.h1Title
-          }`}
+          title={`${this.props.t('Fullstack')} ${
+            lang === 'fi' ? 'osa' : this.props.t('part')
+          }${part} | ${this.state.h1Title}`}
           description={mainSEOdescription[lang]}
           keywords={[
             ...mainSEOtags,
@@ -197,12 +198,14 @@ export default class ContentTemplate extends Component {
                 content={[
                   {
                     backgroundColor: colorCode,
-                    text: 'Fullstack',
+                    text: this.props.t('Fullstack'),
                     link: `/${lang === 'fi' ? '' : `${lang}/`}#course-contents`,
                   },
                   {
                     backgroundColor: colorCode,
-                    text: `${lang === 'fi' ? 'Osa' : 'Part'} ${part}`,
+                    text: `${
+                      lang === 'fi' ? 'Osa' : this.props.t('Part')
+                    } ${part}`,
                     link: getPartTranslationPath(lang, part),
                   },
                   {
@@ -257,6 +260,8 @@ export default class ContentTemplate extends Component {
     );
   }
 }
+
+export default withTranslation()(ContentTemplate);
 
 export const contentPageQuery = graphql`
   query($part: Int!, $letter: String!, $lang: String!) {

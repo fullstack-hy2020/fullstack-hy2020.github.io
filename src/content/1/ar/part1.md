@@ -1,0 +1,14 @@
+---
+mainImage: ../../../images/part-1.svg
+part: 1
+lang: ar
+---
+
+<div class="intro">
+
+In this part, we will familiarize ourselves with the React-library, which we will be using to write the code that runs in the browser. We will also look at some features of JavaScript that are important for understanding React.
+
+<i>Part updated 10th Jan 2023</i>
+- <i>No major changes</i>
+
+</div>

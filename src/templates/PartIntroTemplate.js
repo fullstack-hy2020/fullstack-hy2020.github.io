@@ -19,11 +19,13 @@ import { partColors } from './partColors';
 import path from 'path';
 import snakeCase from 'lodash/fp/snakeCase';
 import getPartTranslationPath from '../utils/getPartTranslationPath';
+import { useTranslation } from 'react-i18next';
 
 export default function PartIntroTemplate({ data }) {
   const { markdownRemark } = data;
   const { frontmatter, html } = markdownRemark;
   const { mainImage, part, lang } = frontmatter;
+  const { t } = useTranslation();
 
   const titles = !isEmpty(navigation[lang][part])
     ? Object.keys(navigation[lang][part])
@@ -44,7 +46,7 @@ export default function PartIntroTemplate({ data }) {
     <Layout>
       <SEO
         lang={lang}
-        title={`Fullstack ${lang === 'fi' ? 'osa' : 'part'}${part}`}
+        title={`${t('Fullstack')} ${lang === 'fi' ? 'osa' : t('part')}${part}`}
         description={mainSEOdescription[lang]}
         keywords={[
           ...mainSEOtags,
@@ -66,12 +68,12 @@ export default function PartIntroTemplate({ data }) {
               content={[
                 {
                   backgroundColor: colors[partColors[part]],
-                  text: 'Fullstack',
+                  text: t('Fullstack'),
                   link: `/${lang === 'fi' ? '' : `${lang}/`}#course-contents`,
                 },
                 {
                   backgroundColor: colors['black'],
-                  text: `${lang === 'fi' ? 'Osa' : 'Part'} ${part}`,
+                  text: `${lang === 'fi' ? 'Osa' : t('Part')} ${part}`,
                 },
               ]}
             />

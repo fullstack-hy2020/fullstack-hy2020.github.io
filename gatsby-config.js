@@ -43,6 +43,7 @@ const createSearchConfig = (indexName, language) => {
 const plugins = [
   createSearchConfig('finnish', 'fi'),
   createSearchConfig('english', 'en'),
+  createSearchConfig('arabic', 'ar'),
   createSearchConfig('chinese', 'zh'),
   createSearchConfig('portuguese', 'ptbr'),
   {

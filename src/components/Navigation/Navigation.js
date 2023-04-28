@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { navigate } from '@reach/router';
@@ -9,6 +9,7 @@ import LanguagePicker from '../LanguagePicker';
 import { NavigationItem } from './Item';
 import SearchLink from './SearchLink';
 import ThemeSwitcher from './ThemeSwitcher';
+import { RTL_LANGUAGES } from '../../config';
 
 const getTranslationPath = (path, language) => {
   return language === 'fi' ? path : `/${language}${path}`;
@@ -37,7 +38,7 @@ export const getNavigation = (language, t) => {
 };
 
 const searchIsEnabledForLang = lang => {
-  return ['fi', 'en', 'zh', 'ptbr'].includes(lang);
+  return ['fi', 'en', 'zh', 'ptbr', 'ar'].includes(lang);
 };
 
 const handleCloseMenu = () =>
@@ -45,6 +46,14 @@ const handleCloseMenu = () =>
 
 const handleHamburgerClick = () => {
   document.body.classList.toggle('is-open--navigation');
+};
+
+const handleRightToLeftLang = lang => {
+  if (RTL_LANGUAGES.includes(lang)) {
+    document.documentElement.setAttribute('dir', 'rtl');
+  } else {
+    document.documentElement.setAttribute('dir', 'ltr');
+  }
 };
 
 const Navigation = props => {
@@ -56,8 +65,13 @@ const Navigation = props => {
   const navigation = getNavigation(lang, t);
   const showSearchLink = searchIsEnabledForLang(lang);
 
+  useEffect(() => {
+    handleRightToLeftLang(lang);
+  }, [lang]);
+
   const onLanguageChange = newLang => {
     navigate(getTranslationPath('/', newLang));
+    handleRightToLeftLang(newLang);
   };
 
   return (
@@ -83,7 +97,6 @@ const Navigation = props => {
             {showSearchLink && <SearchLink lang={lang} />}
             <ThemeSwitcher />
           </div>
-
           <LanguagePicker
             className="navigation__language-picker"
             onChange={onLanguageChange}
