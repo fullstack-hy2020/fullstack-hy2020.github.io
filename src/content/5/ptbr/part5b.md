@@ -2,24 +2,24 @@
 mainImage: ../../../images/part-5.svg
 part: 5
 letter: b
-lang: en
+lang: ptbr
 ---
 
 <div class="content">
 
-### Displaying the login form only when appropriate
+### Mostrando o formulário de login apenas quando apropriado
 
-Let's modify the application so that the login form is not displayed by default:
+Vamos modificar a aplicação para que o formulário de login não seja exibido por padrão:
 
-![browser showing log in button by default](../../images/5/10e.png)
+![navegador mostrando o botão de login por padrão](../../images/5/10e.png)
 
-The login form appears when the user presses the <i>login</i> button:
+O formulário de login aparece quando o usuário pressiona o botão <i>login</i>:
 
-![user at login screen about to press cancel](../../images/5/11e.png)
+![usuário na tela de login prestes a apertar o botão cancelar](../../images/5/11e.png)
 
-The user can close the login form by clicking the <i>cancel</i> button.
+O usuário pode fechar o formulário de login clicando no botão <i>cancelar</i>.
 
-Let's start by extracting the login form into its own component:
+Vamos começar extraindo o formulário de login para um componente próprio:
 
 ```js
 const LoginForm = ({
@@ -58,9 +58,9 @@ const LoginForm = ({
 export default LoginForm
 ```
 
-The state and all the functions related to it are defined outside of the component and are passed to the component as props.
+O estado e todas as funções relacionadas a ele são definidos fora do componente e são passados para o componente por meio de props.
 
-Notice that the props are assigned to variables through <i>destructuring</i>, which means that instead of writing:
+Perceba que as props são atribuídas a variáveis ​​através de <i>destructuring</i>, o que significa que, em vez de escrever:
 
 ```js
 const LoginForm = (props) => {
@@ -84,9 +84,9 @@ const LoginForm = (props) => {
 }
 ```
 
-where the properties of the _props_ object are accessed through e.g. _props.handleSubmit_, the properties are assigned directly to their own variables.
+Onde as propriedades do objeto _props_ são acessadas por meio de, por exemplo, _props.handleSubmit_, as propriedades são atribuídas diretamente às suas próprias variáveis.
 
-One fast way of implementing the functionality is to change the _loginForm_ function of the <i>App</i> component like so:
+Uma forma rápida de implementar a funcionalidade é alterar a função _loginForm_ do componente <i>App</i> da seguinte maneira:
 
 ```js
 const App = () => {
@@ -121,9 +121,9 @@ const App = () => {
 }
 ```
 
-The <i>App</i> components state now contains the boolean <i>loginVisible</i>, which defines if the login form should be shown to the user or not.
+O estado do componente <i>App</i> agora contém o boolean <i>loginVisible</i>, que define se o formulário de login deve ser exibido ao usuário ou não.
 
-The value of _loginVisible_ is toggled with two buttons. Both buttons have their event handlers defined directly in the component:
+O valor de _loginVisible_ é alternado com dois botões. Ambos os botões têm seus gerenciadores de eventos definidos diretamente no componente:
 
 ```js
 <button onClick={() => setLoginVisible(true)}>log in</button>
@@ -131,7 +131,7 @@ The value of _loginVisible_ is toggled with two buttons. Both buttons have their
 <button onClick={() => setLoginVisible(false)}>cancel</button>
 ```
 
-The visibility of the component is defined by giving the component an [inline](/en/part2/adding_styles_to_react_app#inline-styles) style rule, where the value of the [display](https://developer.mozilla.org/en-US/docs/Web/CSS/display) property is <i>none</i> if we do not want the component to be displayed:
+A visibilidade do componente é definida atribuindo uma regra de estilo [inline](/ptbr/part2/adicionando_estilos_a_aplicacao_react#estilos-inline), onde o valor da propriedade [display](https://developer.mozilla.org/pt-BR/docs/Web/CSS/display) é <i>none</i> se não quisermos que o componente seja exibido:
 
 ```js
 const hideWhenVisible = { display: loginVisible ? 'none' : '' }
@@ -146,19 +146,19 @@ const showWhenVisible = { display: loginVisible ? '' : 'none' }
 </div>
 ```
 
-We are once again using the "question mark" ternary operator. If _loginVisible_ is <i>true</i>, then the CSS rule of the component will be:
+Nós estamos usando novamente o operador ternário "ponto de interrogação". Se _loginVisible_ for <i>true</i>, então a regra CSS do componente será:
 
 ```css
 display: 'none';
 ```
 
-If _loginVisible_ is <i>false</i>, then <i>display</i> will not receive any value related to the visibility of the component.
+Se _loginVisible_ for <i>false</i>, então <i>display</i> não receberá nenhum valor relacionado à visibilidade do componente.
 
-### The components children, aka. props.children
+### Os componentes filhos, conhecidos como props.children
 
-The code related to managing the visibility of the login form could be considered to be its own logical entity, and for this reason, it would be good to extract it from the <i>App</i> component into a separate component.
+O código relacionado ao gerenciamento da visibilidade do formulário de login poderia ser considerado uma entidade lógica própria, e por esse motivo, seria bom extrai-lo do componente <i>App</i> para um componente separado.
 
-Our goal is to implement a new <i>Togglable</i> component that can be used in the following way:
+Nosso objetivo é implementar um novo componente <i>Togglable</i> que possa ser usado da seguinte maneira:
 
 ```js
 <Togglable buttonLabel='login'>
@@ -172,9 +172,9 @@ Our goal is to implement a new <i>Togglable</i> component that can be used in th
 </Togglable>
 ```
 
-The way that the component is used is slightly different from our previous components. The component has both opening and closing tags that surround a <i>LoginForm</i> component. In React terminology <i>LoginForm</i> is a child component of <i>Togglable</i>.
+A maneira como o componente é usado é ligeiramente diferente dos nossos componentes anteriores. O componente tem tags de abertura e fechamento que cercam um componente <i>LoginForm</i>. Na terminologia React, <i>LoginForm</i> é um componente filho de <i>Togglable</i>.
 
-We can add any React elements we want between the opening and closing tags of <i>Togglable</i>, like this for example:
+Nós podemos adicionar qualquer elemento React que quisermos entre as tags de abertura e fechamento de <i>Togglable</i>, como este, por exemplo:
 
 ```js
 <Togglable buttonLabel="reveal">
@@ -183,7 +183,7 @@ We can add any React elements we want between the opening and closing tags of <i
 </Togglable>
 ```
 
-The code for the <i>Togglable</i> component is shown below:
+O código do componente <i>Togglable</i> é mostrado abaixo:
 
 ```js
 import { useState } from 'react'
@@ -214,9 +214,10 @@ const Togglable = (props) => {
 export default Togglable
 ```
 
-The new and interesting part of the code is [props.children](https://reactjs.org/docs/glossary.html#propschildren), which is used for referencing the child components of the component. The child components are the React elements that we define between the opening and closing tags of a component.
+A nova e interessante parte do código é a [props.children](https://pt-br.reactjs.org/docs/glossary.html#propschildren), que é usada para referenciar os componentes filhos do componente. Os componentes filhos são os elementos React que definimos entre as tags de abertura e fechamento de um componente.
 
-This time the children are rendered in the code that is used for rendering the component itself:
+
+Dessa vez, os filhos são renderizados no código que é usado para renderizar o próprio componente:
 
 ```js
 <div style={showWhenVisible}>
@@ -225,7 +226,7 @@ This time the children are rendered in the code that is used for rendering the c
 </div>
 ```
 
-Unlike the "normal" props we've seen before, <i>children</i> is automatically added by React and always exists. If a component is defined with an automatically closing _/>_ tag, like this:
+Diferente das props "normais" que vimos antes, <i>children</i> é adicionada automaticamente pelo React e sempre existe na aplicação. Se um componente é definido com uma tag de fechamento automático _/>_, como este:
 
 ```js
 <Note
@@ -235,11 +236,11 @@ Unlike the "normal" props we've seen before, <i>children</i> is automatically ad
 />
 ```
 
-Then <i>props.children</i> is an empty array.
+Então <i>props.children</i> é um array vazio.
 
-The <i>Togglable</i> component is reusable and we can use it to add similar visibility toggling functionality to the form that is used for creating new notes.
+O componente <i>Togglable</i> é reutilizável e podemos usá-lo para adicionar funcionalidade semelhante de alternância de visibilidade ao formulário usado para criar novas anotações.
 
-Before we do that, let's extract the form for creating notes into a component:
+Antes de fazermos isso, vamos extrair o formulário para criar notas em um componente:
 
 ```js
 const NoteForm = ({ onSubmit, handleChange, value}) => {
@@ -259,7 +260,8 @@ const NoteForm = ({ onSubmit, handleChange, value}) => {
 }
 ```
 
-Next let's define the form component inside of a <i>Togglable</i> component:
+Depois vamos definir o componente do formulário dentro de um componente <i>Togglable</i>:
+
 
 ```js
 <Togglable buttonLabel="new note">
@@ -271,20 +273,20 @@ Next let's define the form component inside of a <i>Togglable</i> component:
 </Togglable>
 ```
 
-You can find the code for our current application in its entirety in the <i>part5-4</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-4).
+Você pode encontrar o código completo da nossa aplicação atual no branch <i>part5-4</i> [deste repositório do GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-4).
 
-### State of the forms
+### Estado dos formulários
 
-The state of the application currently is in the _App_ component.
+O estado da aplicação atualmente está no componente _App_.
 
-React documentation says the [following](https://reactjs.org/docs/lifting-state-up.html) about where to place the state:
+A documentação do React diz o [seguinte](https://pt-br.reactjs.org/docs/lifting-state-up.html) sobre onde colocar o estado:
 
-<i>Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor.</i>
+<i>Muitas vezes, vários componentes precisam refletir os mesmos dados em mudança. Recomendamos levantar o estado compartilhado até o ancestral comum mais próximo.</i>
 
-If we think about the state of the forms, so for example the contents of a new note before it has been created, the _App_ component does not need it for anything.
-We could just as well move the state of the forms to the corresponding components.
+Se pensarmos no estado dos formulários, como por exemplo o conteúdo de uma nova nota antes que ela tenha sido criada, o componente _App_ não precisa dele para nada.
+Nós poderíamos simplesmente mover o estado dos formulários para os componentes correspondentes.
 
-The component for a note changes like so:
+O componente para uma nota muda da seguinte maneira:
 
 ```js
 import { useState } from 'react'
@@ -320,14 +322,14 @@ const NoteForm = ({ createNote }) => {
 export default NoteForm
 ```
 
-**NOTE** At the same time, we changed the behavior of the application so that new notes are important by default, i.e. the field <i>important</i> gets the value <i>true</i>.
+**NOTA** Ao mesmo tempo, mudamos o comportamento da aplicação para que as novas notas sejam importantes por padrão, ou seja, o campo <i>important</i> recebe o valor <i>true</i>.
 
-The <i>newNote</i> state attribute and the event handler responsible for changing it have been moved from the _App_ component to the component responsible for the note form.
+O atributo de estado <i>newNote</i> e o gerenciador de eventos responsável por alterá-lo foram movidos do componente _App_ para o componente responsável pelo formulário de notas.
 
-There is only one prop left, the _createNote_ function, which the form calls when a new note is created.
+Há apenas uma prop restante, a função _createNote_, que o formulário chama quando uma nova nota é criada.
 
-The _App_ component becomes simpler now that we have got rid of the <i>newNote</i> state and its event handler.
-The _addNote_ function for creating new notes receives a new note as a parameter, and the function is the only prop we send to the form:
+O componente _App_ fica mais simples agora que nós nos livramos do estado <i>newNote</i> e do seu gerenciador de eventos.
+A função _addNote_ para criar novas notas recebe uma nova nota como parâmetro, e a função é a única prop que enviamos para o formulário:
 
 ```js
 const App = () => {
@@ -350,20 +352,21 @@ const App = () => {
 }
 ```
 
-We could do the same for the log in form, but we'll leave that for an optional exercise.
+Nós poderíamos fazer o mesmo para o formulário de login, mas vamos deixar isso para um exercício opcional.
 
-The application code can be found on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5),
+
+O código da aplicação pode ser encontrado no [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5),
 branch <i>part5-5</i>.
 
-### References to components with ref
+### Referências para componentes com ref
 
-Our current implementation is quite good; it has one aspect that could be improved.
+Nossa implementação atual é muito boa; ela tem um aspecto que poderia ser melhorado.
 
-After a new note is created, it would make sense to hide the new note form. Currently, the form stays visible. There is a slight problem with hiding the form. The visibility is controlled with the <i>visible</i> variable inside of the <i>Togglable</i> component. How can we access it outside of the component?
+Depois que uma nova nota é criada, faria sentido esconder o formulário de nova nota. Atualmente, o formulário permanece visível. Há um pequeno problema em ocultar o formulário. A visibilidade é controlada com a variável <i>visible</i> dentro do componente <i>Togglable</i>. Como podemos acessá-la fora do componente?
 
-There are many ways to implement closing the form from the parent component, but let's use the [ref](https://reactjs.org/docs/refs-and-the-dom.html) mechanism of React, which offers a reference to the component.
+Há muitas maneiras de implementar o fechamento do formulário a partir do componente pai, mas vamos usar o mecanismo [ref](https://pt-br.reactjs.org/docs/refs-and-the-dom.html)
 
-Let's make the following changes to the <i>App</i> component:
+Vamos fazer as seguintes alterações no componente <i>App</i>:
 
 ```js
 import { useState, useEffect, useRef } from 'react' // highlight-line
@@ -382,9 +385,9 @@ const App = () => {
 }
 ```
 
-The [useRef](https://reactjs.org/docs/hooks-reference.html#useref) hook is used to create a <i>noteFormRef</i> ref, that is assigned to the <i>Togglable</i> component containing the creation note form. The <i>noteFormRef</i> variable acts as a reference to the component. This hook ensures the same reference (ref) that is kept throughout re-renders of the component.
+O hook [useRef](https://pt-br.reactjs.org/docs/hooks-reference.html#useref) é usado para criar uma referência <i>noteFormRef</i>, que é atribuída ao componente <i>Togglable</i> que contém o formulário de criação de notas. A variável <i>noteFormRef</i> atua como uma referência ao componente. Este hook garante a mesma referência (ref) que é mantida durante as re-renderizações do componente.
 
-We also make the following changes to the <i>Togglable</i> component:
+Nós também fazemos as seguintes alterações no componente <i>Togglable</i>:
 
 ```js
 import { useState, forwardRef, useImperativeHandle } from 'react' // highlight-line
@@ -423,11 +426,11 @@ const Togglable = forwardRef((props, refs) => { // highlight-line
 export default Togglable
 ```
 
-The function that creates the component is wrapped inside of a [forwardRef](https://reactjs.org/docs/react-api.html#reactforwardref) function call. This way the component can access the ref that is assigned to it.
+A função que cria o componente é envolvida dentro de uma chamada de função [forwardRef](https://pt-br.reactjs.org/docs/react-api.html#reactforwardref). Desta forma, o componente pode acessar a referência (ref) que é atribuída a ele.
 
-The component uses the [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) hook to make its <i>toggleVisibility</i> function available outside of the component.
+O componente usa o hook [useImperativeHandle](https://pt-br.reactjs.org/docs/hooks-reference.html#useref) para tornar a função <i>toggleVisibility</i> disponível fora do componente.
 
-We can now hide the form by calling <i>noteFormRef.current.toggleVisibility()</i> after a new note has been created:
+Nós podemos agora ocultar o formulário chamando <i>noteFormRef.current.toggleVisibility()</i> após a criação de uma nova nota:
 
 ```js
 const App = () => {
@@ -444,17 +447,17 @@ const App = () => {
 }
 ```
 
-To recap, the [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) function is a React hook, that is used for defining functions in a component, which can be invoked from outside of the component.
+Para recapitular, a função [useImperativeHandle](https://pt-br.reactjs.org/docs/hooks-reference.html#useimperativehandle) é um hook do React, que é usado para definir funções em um componente, que podem ser invocadas de fora do componente.
 
-This trick works for changing the state of a component, but it looks a bit unpleasant. We could have accomplished the same functionality with slightly cleaner code using "old React" class-based components. We will take a look at these class components during part 7 of the course material. So far this is the only situation where using React hooks leads to code that is not cleaner than with class components.
+Esse truque funciona para alterar o estado de um componente, mas parece um pouco desagradável. Poderíamos ter conseguido a mesma funcionalidade com um código um pouco mais limpo usando componentes baseados em classe do "antigo React". Vamos dar uma olhada nesses componentes de classe durante a parte 7 do material do curso. Até agora, esta é a única situação em que o uso de hooks do React leva a um código que não é mais limpo do que com componentes de classe.
 
-There are also [other use cases](https://reactjs.org/docs/refs-and-the-dom.html) for refs than accessing React components.
+Existem também [outros casos de uso](https://pt-br.reactjs.org/docs/refs-and-the-dom.html) para referências além de acessar componentes React.
 
-You can find the code for our current application in its entirety in the <i>part5-6</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-6).
+Você pode encontrar o código para nossa aplicação atual em sua totalidade na branch <i>part5-6</i> [deste repositório do GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-6).
 
-### One point about components
+### Um ponto sobre componentes
 
-When we define a component in React:
+Quando definimos um componente no React:
 
 ```js
 const Togglable = () => ...
@@ -462,7 +465,7 @@ const Togglable = () => ...
 }
 ```
 
-And use it like this:
+E o usamos assim:
 
 ```js
 <div>
@@ -480,73 +483,73 @@ And use it like this:
 </div>
 ```
 
-We create <i>three separate instances of the component</i> that all have their separate state:
+Nós criamos <i>três instâncias separadas do componente</i> que todas têm seu próprio estado:
 
-![browser of three togglable components](../../images/5/12e.png)
+![navegador com três componentes togglable](../../images/5/12e.png)
 
-The <i>ref</i> attribute is used for assigning a reference to each of the components in the variables <i>togglable1</i>, <i>togglable2</i> and <i>togglable3</i>.
+O atributo <i>ref</i> é usado para atribuir uma referência a cada um dos componentes nas variáveis <i>togglable1</i>, <i>togglable2</i> e <i>togglable3</i>.
 
-### The updated full stack developer's oath
+### O juramento atualizado do desenvolvedor full stack
 
-The number of moving parts increases. At the same time, the likelihood of ending up in a situation where we are looking for a bug in the wrong place increases. So we need to be even more systematic.
+O número de partes móveis aumenta. Ao mesmo tempo, a probabilidade de acabar em uma situação em que estamos procurando um bug no lugar errado aumenta. Portanto, precisamos ser ainda mais sistemáticos.
 
-So we should once more extend our oath:
+Então, devemos estender novamente nosso juramento:
 
-Full stack development is <i> extremely hard</i>, that is why I will use all the possible means to make it easier
+Desenvolvimento Full Stack é <i>extremamente difícil</i>, por isso usarei todos os meios possíveis para torná-lo mais fácil
 
-- I will have my browser developer console open all the time
-- I will use the network tab of the browser dev tools to ensure that frontend and backend are communicating as I expect
-- I will constantly keep on eye the state of the server to make sure that the data sent there by the frontend is saved there as I expect
-- I will keep on eye on the database: does the backend save data there in the right format
-- I progress with small steps
-- <i>when I suspect that there is a bug in the frontend, I make sure that the backend works for sure</i>
-- <i>when I suspect that there is a bug in the backend, I make sure that the frontend works for sure</i>
-- I will write lots of _console.log_ statements to make sure I understand how the code and the tests behave and to help pinpoint problems
-- If my code does not work, I will not write more code. Instead, I start deleting the code until it works or just return to a state when everything still was still working
--If a test does not pass, I make sure that the tested functionality for sure works in the application
-- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](https://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord-telegram) how to ask for help
+- Eu irei ter o meu console de desenvolvedor do navegador aberto o tempo todo
+- Eu irei usar a aba "rede" das ferramentas de desenvolvedor do navegador para garantir que o frontend e o backend estejam se comunicando como eu espero
+- Eu irei constantemente vigiar o estado do servidor para assegurar que os dados enviados lá pelo frontend sejam salvos como eu espero
+- Eu irei ficar de olho no banco de dados: os dados salvos lá pelo backend estão no formato correto?
+- Eu avanço com pequenos passos
+- <i>Quando eu suspeito que há um bug no frontend, eu me certifico de que o backend funciona corretamente</i>
+- <i>Quando eu suspeito que há um bug no backend, eu me certifico de que o frontend funciona corretamente</i>
+- Eu irei escrever vários _console.log_ para me certificar de que eu entendo como o código e os testes se comportam e para ajudar a localizar problemas
+- Se meu código não funciona, eu não escreverei mais código. Em vez disso, eu começo a apagar o código até que ele funcione ou apenas volte para um estado em que tudo ainda estava funcionando
+- Se um teste não passa, eu me certifico de que a funcionalidade testada funciona com certeza na aplicação
+- Quando eu peço ajuda no canal do Discord, Telegram do curso ou em outro lugar, eu formulo minhas perguntas corretamente, veja [aqui](/ptbr/part0/informacoes_gerais#como-pedir-ajuda-no-discord-telegram) como pedir ajuda
 
 </div>
 
-<div class="tasks">
+<div class="tasks"
 
-### Exercises 5.5.-5.11.
+### Exercícios 5.5. - 5.11.
 
-#### 5.5 Blog list frontend, step5
+#### 5.5 Frontend da lista de blogs, passo 5
 
-Change the form for creating blog posts so that it is only displayed when appropriate. Use functionality similar to what was shown [earlier in this part of the course material](/en/part5/props_children_and_proptypes#displaying-the-login-form-only-when-appropriate). If you wish to do so, you can use the <i>Togglable</i> component defined in part 5.
+Altere o formulário para criar posts de blog para que ele seja exibido apenas quando apropriado. Use uma funcionalidade semelhante ao que foi mostrado [anteriormente nesta parte do material do curso](/ptbr/part5/props_children_e_proptypes#mostrando-o-formulario-de-login-apenas-quando-apropriado). Se desejar, você pode usar o componente <i>Togglable</i> definido na parte 5.
 
-By default the form is not visible
+Por padrão o formulário não é visível
 
-![browser showing new note button with no form](../../images/5/13ae.png)
+![navegador mostrando botão de nova nota com nenhum formulário](../../images/5/13ae.png)
 
-It expands when button <i>create new blog</i> is clicked
+Ele se expande quando o botão <i>create new blog</i> é clicado
 
-![browser showing form with create new](../../images/5/13be.png)
+![navegador mostrando formulário com create new](../../images/5/13be.png)
 
-The form closes when a new blog is created.
+O formulário fecha quando um novo blog é criado.
 
-#### 5.6 Blog list frontend, step6
+#### 5.6 Frontend da lista de blogs, passo 6
 
-Separate the form for creating a new blog into its own component (if you have not already done so), and move all the states required for creating a new blog to this component.
+Separe o formulário para criar um novo blog em seu próprio componente (se você ainda não o fez) e mova todos os estados necessários para criar um novo blog para este componente.
 
-The component must work like the <i>NoteForm</i> component from the [material](/en/part5/props_children_and_proptypes) of this part.
+O componente deve funcionar como o componente <i>NoteForm</i> do [material](/ptbr/part5/props_children_e_proptypes) desta parte.
 
-#### 5.7 Blog list frontend, step7
+#### 5.7 Frontend da lista de blogs, passo 7
 
-Let's add a button to each blog, which controls whether all of the details about the blog are shown or not.
+Vamos adicionar um botão a cada blog, que controla se todos os detalhes sobre o blog são mostrados ou não.
 
-Full details of the blog open when the button is clicked.
+Detalhes completos do blog abrem quando o botão é clicado.
 
-![browser showing full details of a blog with others just having view buttons](../../images/5/13ea.png)
+![navegador mostrando detalhes completos de um blog com outros tendo apenas botões de visualização](../../images/5/13ea.png)
 
-And the details are hidden when the button is clicked again.
+E os detalhes são escondidos quando o botão é clicado novamente.
 
-At this point, the <i>like</i> button does not need to do anything.
+Neste ponto, o botão <i>like</i> não precisa fazer nada.
 
-The application shown in the picture has a bit of additional CSS to improve its appearance.
+A aplicação mostrada na imagem tem um pouco de CSS adicional para melhorar sua aparência.
 
-It is easy to add styles to the application as shown in part 2 using [inline](/en/part2/adding_styles_to_react_app#inline-styles) styles:
+É fácil adicionar estilos à aplicação como mostrado na parte 2 usando [estilos inline](/ptbr/part2/adicionando_estilos_a_aplicacao_react#estilos-inline):
 
 ```js
 const Blog = ({ blog }) => {
@@ -568,21 +571,21 @@ const Blog = ({ blog }) => {
 )}
 ```
 
-**NB:** even though the functionality implemented in this part is almost identical to the functionality provided by the <i>Togglable</i> component, the component can not be used directly to achieve the desired behavior. The easiest solution will be to add a state to the blog post that controls the displayed form of the blog post.
+**Obs.:** mesmo que a funcionalidade implementada nesta parte seja quase idêntica à funcionalidade fornecida pelo componente <i>Togglable</i>, o componente não pode ser usado diretamente para obter o comportamento desejado. A solução mais fácil será adicionar um estado ao post do blog que controla o formulário exibido do post do blog.
 
-#### 5.8: Blog list frontend, step8
+#### 5.8: Frontend da lista de blogs, passo 8
 
-We notice that something is wrong. When a new blog is created in the app, the name of the user that added the blog is not shown in the details of the blog:
+Nós notamos que algo está errado. Quando um novo blog é criado na aplicação, o nome do usuário que adicionou o blog não é mostrado nos detalhes do blog:
 
-![browser showing missing name underneath like button](../../images/5/59new.png)
+![navegador mostrando nome faltando abaixo do botão like](../../images/5/59new.png)
 
-When the browser is reloaded, the information of the person is displayed. This is not acceptable, find out where the problem is and make the necessary correction.
+Quando o navegador é recarregado, as informações da pessoa são exibidas. Isso não é aceitável, descubra onde está o problema e faça a correção necessária.
 
-#### 5.9: Blog list frontend, step9
+#### 5.9: Frontend da lista de blogs, passo 9
 
-Implement the functionality for the like button. Likes are increased by making an HTTP _PUT_ request to the unique address of the blog post in the backend.
+Implemente a funcionalidade para o botão like. Os likes são incrementados fazendo uma requisição HTTP _PUT_ para o endereço único do post do blog no backend.
 
-Since the backend operation replaces the entire blog post, you will have to send all of its fields in the request body. If you wanted to add a like to the following blog post:
+Como a operação do backend substitui todo o post do blog, você terá que enviar todos os seus campos no corpo da requisição. Se você quisesse acicionar um like ao seguinte post do blog:
 
 ```js
 {
@@ -599,7 +602,7 @@ Since the backend operation replaces the entire blog post, you will have to send
 },
 ```
 
-You would have to make an HTTP PUT request to the address <i>/api/blogs/5a43fde2cbd20b12a2c34e91</i> with the following request data:
+Você teria que fazer uma requisição HTTP PUT para o endereço <i>/api/blogs/5a43fde2cbd20b12a2c34e91</i> com a seguinte requisição de dados:
 
 ```js
 {
@@ -611,25 +614,25 @@ You would have to make an HTTP PUT request to the address <i>/api/blogs/5a43fde2
 }
 ```
 
-The backend has to be updated too to handle the user reference.
+O backend também tem que ser atualizado para lidar com a referência do usuário.
 
-**One last warning:** if you notice that you are using async/await and the _then_-method in the same code, it is almost certain that you are doing something wrong. Stick to using one or the other, and never use both at the same time "just in case".
+**Um último aviso:** se você notar que está usando async/await e o método _then_ no mesmo código, é quase certo que você está fazendo algo errado. Fique com um ou outro, e nunca use os dois ao mesmo tempo "só por precaução".
 
-#### 5.10: Blog list frontend, step10
+#### 5.10: Frontend da lista de blogs, passo 10
 
-Modify the application to list the blog posts by the number of <i>likes</i>. Sorting the blog posts can be done with the array [sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) method.
+Modifique a aplicação para listar os posts do blog pelo número de <i>likes</i>. Ordenar os posts do blog pode ser feito com o método [sort](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) do array.
 
-#### 5.11: Blog list frontend, step11
+#### 5.11: Frontend da lista de blogs, passo 11
 
-Add a new button for deleting blog posts. Also, implement the logic for deleting blog posts in the frontend.
+Adicione um novo botão para deletar posts do blog. Além disso, implemente a lógica para deletar posts do blog no frontend.
 
-Your application could look something like this:
+Sua aplicação pode parecer algo como isso:
 
-![browser of confirmation of blog removal](../../images/5/14ea.png)
+![navegador mostrando confirmação de remoção de blog](../../images/5/14ea.png)
 
-The confirmation dialog for deleting a blog post is easy to implement with the [window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm) function.
+O diálogo de confirmação para deletar um post do blog é fácil de implementar com a função [window.confirm](https://developer.mozilla.org/pt-BR/docs/Web/API/Window/confirm).
 
-Show the button for deleting a blog post only if the blog post was added by the user.
+Exiba o botão para deletar um post do blog apenas se o post do blog foi adicionado pelo usuário.
 
 </div>
 
@@ -637,23 +640,23 @@ Show the button for deleting a blog post only if the blog post was added by the 
 
 ### PropTypes
 
-The <i>Togglable</i> component assumes that it is given the text for the button via the <i>buttonLabel</i> prop. If we forget to define it to the component:
+O componente <i>Togglable</i> assume que ele recebe o texto para o botão via a prop <i>buttonLabel</i>. Se esquecermos de defini-lo para o componente:
 
 ```js
 <Togglable> buttonLabel forgotten... </Togglable>
 ```
 
-The application works, but the browser renders a button that has no label text.
+A aplicação funciona, mas o navegador renderiza um botão que não tem texto de label.
 
-We would like to enforce that when the <i>Togglable</i> component is used, the button label text prop must be given a value.
+Nós gostaríamos de impor que quando o componente <i>Togglable</i> é usado, o texto do label do botão deve ter um valor atribuído a ele.
 
-The expected and required props of a component can be defined with the [prop-types](https://github.com/facebook/prop-types) package. Let's install the package:
+As props esperadas e obrigatórias de um componente podem ser definidas com o pacote [prop-types](https://github.com/facebook/prop-types). Vamos instalar o pacote:
 
 ```shell
 npm install prop-types
 ```
 
-We can define the <i>buttonLabel</i> prop as a mandatory or <i>required</i> string-type prop as shown below:
+Nós podemos definir a prop <i>buttonLabel</i> como uma prop do tipo string obrigatória como mostrado abaixo:
 
 ```js
 import PropTypes from 'prop-types'
@@ -667,13 +670,13 @@ Togglable.propTypes = {
 }
 ```
 
-The console will display the following error message if the prop is left undefined:
+O console irá exibir a seguinte mensagem de erro se a prop for deixada indefinida:
 
-![console error stating buttonLabel is undefined](../../images/5/15.png)
+![erro no console dizendo que buttonLabel está indefinido](../../images/5/15.png)
 
-The application still works and nothing forces us to define props despite the PropTypes definitions. Mind you, it is extremely unprofessional to leave <i>any</i> red output in the browser console.
+A aplicação ainda funciona e nada nos força a definir props apesar das definições de PropTypes. Tenha em mente que é extremamente não profissional deixar <i>qualquer</i> saída vermelha no console do navegador.
 
-Let's also define PropTypes to the <i>LoginForm</i> component:
+Vamos também definir PropTypes para o componente <i>LoginForm</i>:
 
 ```js
 import PropTypes from 'prop-types'
@@ -697,25 +700,25 @@ LoginForm.propTypes = {
 }
 ```
 
-If the type of a passed prop is wrong, e.g. if we try to define the <i>handleSubmit</i> prop as a string, then this will result in the following warning:
+Se o tipo de uma prop passada estiver errado, por exemplo, se tentarmos definir a prop <i>handleSubmit</i> como uma string, então isso resultará no seguinte aviso:
 
-![console error saying handleSubmit expected a function](../../images/5/16.png)
+![erro no console dizendo que handleSubmit esperava uma função](../../images/5/16.png)
 
 ### ESlint
 
-In part 3 we configured the [ESlint](/en/part3/validation_and_es_lint#lint) code style tool to the backend. Let's take ESlint to use in the frontend as well.
+Na parte 3 nós configuramos a ferramenta de estilo de código [ESlint](/ptbr/part3/validacao_e_eslint#lint) para o backend. Vamos usar o ESlint no frontend também.
 
-Create-react-app has installed ESlint to the project by default, so all that's left for us to do is define our desired configuration in the <i>.eslintrc.js</i> file.
+Create-react-app instalou o ESlint no projeto por padrão, então tudo que precisamos fazer é definir nossa configuração desejada no arquivo <i>.eslintrc.js</i>.
 
-*NB:* do not run the _eslint --init_ command. It will install the latest version of ESlint that is not compatible with the configuration file created by create-react-app!
+*Obs.:* não execute o comando _eslint --init_. Ele irá instalar a última versão do ESlint que não é compatível com o arquivo de configuração criado pelo create-react-app!
 
-Next, we will start testing the frontend and in order to avoid undesired and irrelevant linter errors we will install the [eslint-plugin-jest](https://www.npmjs.com/package/eslint-plugin-jest) package:
+Depois, nós iremos começar a testar o frontend e para evitar erros de linter indesejados e irrelevantes nós iremos instalar o pacote [eslint-plugin-jest](https://www.npmjs.com/package/eslint-plugin-jest):
 
 ```bash
 npm install --save-dev eslint-plugin-jest
 ```
 
-Let's create a <i>.eslintrc.js</i> file with the following contents:
+Vamos criar um arquivo <i>.eslintrc.js</i> com o seguinte conteúdo:
 
 ```js
 /* eslint-env node */
@@ -776,9 +779,9 @@ module.exports = {
 }
 ```
 
-NOTE: If you are using Visual Studio Code together with ESLint plugin, you might need to add a workspace setting for it to work. If you are seeing ```Failed to load plugin react: Cannot find module 'eslint-plugin-react'``` additional configuration is needed. Adding the line ```"eslint.workingDirectories": [{ "mode": "auto" }]``` to settings.json in the workspace seems to work. See [here](https://github.com/microsoft/vscode-eslint/issues/880#issuecomment-578052807) for more information.
+NOTA: Se estiver usando o Visual Studio Code junto com o plugin ESLint, você pode precisar adicionar uma configuração de workspace para que ele funcione. Se você estiver vendo ```Failed to load plugin react: Cannot find module 'eslint-plugin-react'```, uma configuração adicional é necessária. Adicionando a linha ```"eslint.workingDirectories": [{ "mode": "auto" }]``` em settings.json no workspace parece funcionar. Veja [aqui](https://github.com/microsoft/vscode-eslint/issues/880#issuecomment-578052807) para mais informações.
 
-Let's create [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) file with the following contents to the repository root
+Vamos criar um arquivo [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) com o seguinte conteúdo na raiz do repositório:
 
 ```bash
 node_modules
@@ -786,9 +789,9 @@ build
 .eslintrc.js
 ```
 
-Now the directories <em>build</em> and <em>node_modules</em> will be skipped when linting.
+Agora os diretórios <em>build</em> e <em>node_modules</em> serão ignorados quando o lint for executado.
 
-Let us also create an npm script to run the lint:
+Vamos também criar um script npm para executar o lint:
 
 ```js
 {
@@ -805,15 +808,30 @@ Let us also create an npm script to run the lint:
 }
 ```
 
-Component _Togglable_ causes a nasty-looking warning <i>Component definition is missing display name</i>:
+```js
+{
+  // ...
+  {
+    "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "eslint": "eslint ." // highlight-line
+  },
+  // ...
+}
+```
 
-![vscode showing component definition error](../../images/5/25x.png)
+O componente _Togglable_ causa um aviso desagradável <i>Component definition is missing display name</i>:
 
-The react-devtools also reveals that the component does not have a name:
+![vscode mostrando erro de definição de componente](../../images/5/25x.png)
 
-![react devtools showing forwardRef as anonymous](../../images/5/26ea.png)
+O react-devtools também revela que o componente não tem um nome:
 
-Fortunately, this is easy to fix
+![react devtools mostrando forwardRef como anônimo](../../images/5/26ea.png)
+
+Felizmente, isso é fácil de consertar
 
 ```js
 import { useState, useImperativeHandle } from 'react'
@@ -828,23 +846,24 @@ Togglable.displayName = 'Togglable' // highlight-line
 export default Togglable
 ```
 
-You can find the code for our current application in its entirety in the <i>part5-7</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-7).
+Você pode encontrar o código para nossa aplicação atual na sua totalidade na branch <i>part5-7</i> [desse repositório do GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-7).
 
-Note that create-react-app has also a [default ESLint-configuration](https://www.npmjs.com/package/eslint-config-react-app), that we have now overridden. [The documentation](https://create-react-app.dev/docs/setting-up-your-editor/#extending-or-replacing-the-default-eslint-config) mentions that it is ok to replace the default but does not encourage us to do so:
- <i>We highly recommend extending the base config, as removing it could introduce hard-to-find issues</i>.
+
+
+Note que o create-react-app também tem uma [configuração padrão do ESLint](https://www.npmjs.com/package/eslint-config-react-app), que nós agora substituímos. [A documentação](https://create-react-app.dev/docs/setting-up-your-editor/#extending-or-replacing-the-default-eslint-config) menciona que é ok substituir o padrão, mas não nos encoraja a fazê-lo: <i>Nós altamente recomendamos estender a configuração base, pois removê-la pode introduzir problemas difíceis de encontrar</i>.
 
 </div>
 
 <div class="tasks">
 
-### Exercise 5.12.
+### Ecercício 5.12.
 
-#### 5.12: Blog list frontend, step12
+#### 5.12: Frontend da lista de blogs, passo 12
 
-Define PropTypes for one of the components of your application, and add ESlint to the project. Define the configuration according to your liking. Fix all of the linter errors.
+Defina PropTypes para um dos componentes da sua aplicação e adicione o ESlint ao projeto. Defina a configuração de acordo com sua preferência. Corrija todos os erros do linter.
 
-Create-react-app has installed ESlint to the project by default, so all that's left for you to do is define your desired configuration in the <i>.eslintrc.js</i> file.
+Create-react-app instalou o ESlint no projeto por padrão, então tudo que precisamos fazer é definir nossa configuração desejada no arquivo <i>.eslintrc.js</i>.
 
-*NB:* do not run the _eslint --init_ command. It will install the latest version of ESlint that is not compatible with the configuration file created by create-react-app!
+*Obs.:* não execute o comando _eslint --init_. Ele irá instalar a última versão do ESlint que não é compatível com o arquivo de configuração criado pelo create-react-app!
 
 </div>
