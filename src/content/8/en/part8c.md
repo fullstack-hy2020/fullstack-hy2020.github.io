@@ -450,7 +450,7 @@ And the mutation's resolver:
 ```js
   addAsFriend: async (root, args, { currentUser }) => {
     const isFriend = (person) => 
-      currentUser.friends.map(f => f._id.toString()).includes(person._id.toString())
+      currentUser.friends.map(f => f._id.toString().includes(person._id.toString())
 
     if (!currentUser) {
       throw new GraphQLError('wrong credentials', {
