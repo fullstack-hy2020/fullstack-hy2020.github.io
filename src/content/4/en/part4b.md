@@ -936,7 +936,7 @@ test('notes are returned as json', async () => {
 }
 ```
 
-We save the notes stored in the array into the database inside of a _forEach_ loop. The tests don't quite seem to work however, so we have added some console logs to help us find the problem.
+We save the notes stored in the array into the database inside of a _forEach_ loop. The tests seem to work however, so we have added some console logs to help us find the problem.
 
 The console displays the following output:
 
