@@ -11,8 +11,6 @@ lang: ar
 
 ومواضيع أخرى تتضمن تصحيح الأخطاء البرمجية (debugging), تقنية الحاويات (containers), الضبط (configuration), ادارة بيئة التشغيل (runtime environments) و قواعد البيانات
 
-The course is totally free of charge. You can get a certificate and even the University of Helsinki ECTS (European Credit Transfer and Accumulation System) credits for free.
-
 هذه الدورة التدريبية مجانية بالكامل. يمكنك الحصول على شهادة وأيضاً يمكنك تحويل النقاط التابع لنظام تفعيل نظام تحويل وتراكم الرصيد الأوروبي من جامعة هلسنكي
 
 ### المتطلبات الأساسية
@@ -73,8 +71,6 @@ The course is totally free of charge. You can get a certificate and even the Uni
 
 #### الأجزء من 0-5 تحتوي على الجزء الأساسي للدورة - تطوير التطبيقات الشاملة (5 cr, CSM141081)
 
-The number of credits and the grade for the course are based on the total number of submitted exercises for parts 0-7 (including exercises marked with an asterisk).
-
 النقاط المحصلة والدرجات تعتمد على عدد التمرينات التى تم تسليمها للأجزاء من 0-7 ويتضمن ذلك التمرينات المشار اليها بعلامة النجمة (\*)
 
 يتم حساب النقاط والدرجات كالتالي
@@ -130,8 +126,6 @@ The number of credits and the grade for the course are based on the total number
 - [طلب النقاط للجزء 9](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
 #### الجزء 10 - تطوير تطبيقات الانترنت: استخدام React Native ـ (2 cr, CSM14111)
-
-By submitting 25 exercises for part 10 of the course on React Native, you can earn two additional credits. More information about this part's prerequisites, exercise submission, and credits can be found in [part 10](/en/part10/introduction_to_react_native).
 
 من خلال تقديم 25 تمرينًا للجزء 10 من الدورة التدريبية على React Native ، يمكنك الحصول على اثنين من النقاط الإضافية.يمكن العثور على مزيد من المعلومات حول المتطلبات الأساسية لهذا الجزء ، وتقديم التمرينات ، والنقاط هنا [الجزء 10](/en/part10/introduction_to_react_native).
 
@@ -193,8 +187,6 @@ By submitting 25 exercises for part 10 of the course on React Native, you can ea
 
 التمرينات يتم تسليمها **جزء واحد في المرة الواحدة**. بمجرد تسليم التمرينات الخاصة بجزء من الدورة, لن يمكنك تسليم أي تمرينات أخري لذلك الجزء
 
-A system for detecting plagiarism is used to check exercises submitted to GitHub. If code is found from model answers or multiple students hand in the same code, the situation is handled according to the [policy on plagiarism](https://guide.student.helsinki.fi/en/article/what-cheating-and-plagiarism) of the University of Helsinki.
-
 يتم استخدام نظام لاكتشاف الانتحال للتحقق من التمارين المقدمة إلى GitHub.إذا تم العثور على كود برمجي من إجابات نموذجية أو عدة طلاب قاموا باستخدام نفس الكود البرمجي ، يتم التعامل مع الموقف وفقًا لـ [السياسة المتعلقة بالانتحال](https://guide.student.helsinki.fi/en/article/what-cheating-and-plagiarism) من جامعة هلسنكي.
 
 العديد من التمرينات تهدف لبناء تطبيق كبير بتطوير أجزاء صغيره. في هذه الحالة تسليم الجزء المطلوب فقط كافي. يمكنك عمل commit بعد كل تمرين ولكن الأمر ليس اجبارياً.
@@ -251,8 +243,6 @@ A system for detecting plagiarism is used to check exercises submitted to GitHub
 
 ![حفظ رقم الطالب](../../images/0/28b.png)
 
-If you are not a student at the University of Helsinki, you can get a student number by registering for the course through [Open University](/en/part0/general_info#the-course-exam), see [this](/en/part0/general_info#where-do-i-get-my-university-of-helsinki-student-number) for more information.
-
 إذا لم تكن طالبًا في جامعة هلسنكي ، فيمكنك الحصول على رقم الطالب عن طريق التسجيل للدورة من خلال [الجامعة المفتوحة](/en/part0/general_info#the-course-exam), قم بالاطلاع [هنا](/en/part0/general_info#where-do-i-get-my-university-of-helsinki-student-number) لمزيد من المعلومات.
 
 ستحصل على نقاطك بعد تسليم التمرينات المكافئة لدرجات النجاح, واجتياز الاختبار ثم اشعارنا بانهائك للدورة خلال نظام تسليم التمرينات.
@@ -279,8 +269,6 @@ If you are not a student at the University of Helsinki, you can get a student nu
 
 ### كيف أحصل على الرقم التعريفي للطالب الخاص بجامعة هلسنكي
 
-When and if you enroll in a course for the first time through the Open University, a University of Helsinki student number will be automatically generated. <i>**Please make sure you have enrolled in the course before you try to find out what your student number is.** </i>
-
 عند الالتحاق بالدورة لأول مره من خلال الجامعة المفتوحة, سيتم انشاء رقم تعريفي خاص بك بصورة اوتوماتيكية. <i>**يرجي التسجيل في الدورة قبل البحث عن الرقم التعريفي للطالب.** </i>
 
 يرجى ملاحظة <strong>أنك لا تحتاج للالتحاق في دورة</strong> الجامعة المفتوحة للحصول على الشهادة.
@@ -288,8 +276,6 @@ When and if you enroll in a course for the first time through the Open Universit
 يمكنك معرفة ما هو رقم الطالب الخاص بك من خلال أحد الخيارات أدناه:
 
 #### A) Sisu
-
-If you have a University of Helsinki user account, you can find your student number from your profile in the University of Helsinki’s study information system Sisu:
 
 ان كان لديك حساب في جامعة هلسنكي, يمكنك ايجاد رقم الطالب التعريفي في صفحتك الشخصية على نظام المعلومات التابع لجامعة هلسنكي
 
@@ -303,11 +289,7 @@ If you have a University of Helsinki user account, you can find your student num
 
 #### C) التواصل مع خدمات الطلاب
 
-If you have trouble finding your student number through the means listed above, you can send an email to University of Helsinki Student Services. <i>**Make sure you have enrolled in the course through the Open University before sending the email!**</i>
-
 اذا واجهت صعوبة في الحصول على الرقم التعريفي الخاص بك بالطرق المذكورة أعلاه. يمكنك ارسال ايميل لخدمات الطلاب بجامعة هلسنكي.<i>**يرجى التسجيل في الدورة قبل ارسال الايميل**</i>
-
-In your email, include the following information
 
 في بريدك الإلكتروني ، قم بتضمين المعلومات التالية
 
@@ -320,8 +302,6 @@ In your email, include the following information
 **تذكير واحد آخر:** <i>يرجي التسجيل في الدورة قبل ارسال الايميل</i>
 
 ### شهادة الدورة التدريبية
-
-Even if you do not register to Open University for the exam and the credits, you can still download the course certificate from the "My submissions" tab in the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) once you have completed enough exercises for a passing grade.
 
 في حالة عدم تسجيلك في الجامعة المفتوحة للحصول على النقاط واجراء الاختبار, لازال يمكنك تحميل الشهادة من قسم "My submissions" في [نظام التسليم](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) بمجرد انهاء التمارين والحصول على درجات النجاح
 
@@ -344,13 +324,6 @@ Even if you do not register to Open University for the exam and the credits, you
 لم يعد هناك "إصدارات سنوية" للدورة التدريبية ، والدورة مفتوحة طوال الوقت.يتم تحديث كل جزء مرة أو مرتين في السنة.التحديثات بسيطة في الغالب: يتم تحديث إصدارات المكتبة وتحسين وضوح النص.ومع ذلك ، قد يكون هناك أيضا بعض التغييرات الأكبر.
 
 على الرغم من التغييرات <i> تظل جميع التمارين المقدمة صالحة </i> ، ويمكن استمرار الدورة دون أن تتضايق من التحديثات.أيضًا ، تظل سياسة الحصول على الشهادات ، النقاط الجامعية ، وما إلى ذلك ، تظل كما هي بغض النظر عن التغييرات في الدورة.
-
-Recent major changes
-
-- Part 2 (18th Jan 2023): Exercise numbering changed, the old 2.11-13. moved to the end of the part
-- Part 6 (30th Jan 2023): A new section on React Query, useReducer and React context replaced the section on Redux connect
-- Part 8 (5th Feb 2023): Backend updated to use Apollo Server 4.0
-- Part 9 (12th Feb 2023): Content clarified, Patientor example app structure refactored to a much simpler form
 
 التغييرات الرئيسية الأخيرة
 
@@ -395,13 +368,9 @@ Recent major changes
 
 استخدام متصفح كروم [Chrome browser](https://www.google.com/chrome/) مفضل لوجود أدوات مساعدة في عملية التطوير. بديل آخر هو نسخة المطورين من فايرفوكس [Developer Edition of Firefox](https://www.mozilla.org/en-US/firefox/developer/), والتى تحتوى على نفس الأدوات.
 
-The course exercises are submitted to GitHub, so Git must be installed and you should know how to use it. For instructions, see [Git and GitHub tutorial for beginners](https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners).
-
 يتم تسليم التمرينات عبر موقع Github, لذلك ينبغى عليك تثبيته وتعلم استخدامه, للمزيد قم بالاطلاع على [Git/Github للمبتدئين](https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners).
 
 قم بتثبيت محرر نصي وننصح باستخدام. [Visual Studio Code](https://code.visualstudio.com/) للمطورين.
-
-Don't code with nano, Notepad or Gedit. NetBeans isn't very good for web development either. It is also rather heavy in comparison to [Visual Studio Code](https://code.visualstudio.com/).
 
 لا تستخدم nano, Notepad او Gedit. وكذلك NetBeans هذه المحررات غير مناسبة لتطوير تطبيقات الانترنت قم باستخدام [Visual Studio Code](https://code.visualstudio.com/).
 

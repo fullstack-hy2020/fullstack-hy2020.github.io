@@ -35,9 +35,6 @@ lang: ar
 
 عند اعادة تحميل الصفحة تعرض شاشة الكونسول تفاصيل الأحداث التى تمت. (لإعادة تحميل الصفحة في نظام تشغيل ويندوز قم بالضغط على _Fn_-_F5_ keys. لنظام ماك, اضغط _command_-_R_. أو قم بالضغط على هذا الرمز في متصفحك &#8635;, ستعرض شاشة الكونسول حدثين تم حدوثمها في تلك العملية.
 
-- The browser has fetched the contents of the page <i>studies.cs.helsinki.fi/exampleapp</i> from the server
-- And has downloaded the image <i>kuva.png</i>
-
 - قام المتصفح بتحميل محتويات الصفحة التالية <i>studies.cs.helsinki.fi/exampleapp</i> من الخادم.
 - قام المتصفح بتحميل صورة <i>kuva.png</i>
 
@@ -62,8 +59,6 @@ lang: ar
 ![صورة قسم الرد من الخادم](../../images/0/5e.png)
 
 تحتوى الصفحة على [div](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div) عنصر من نوع, والذي يحتوى على عنوان, ورابط لصفحة الملاحظات <i>notes</i>, وكذلك صورة [img](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img), ويظهر أيضاً عدد الملاحظات التى تم انشاءها.
-
-Because of the img tag, the browser does a second <i>HTTP request</i> to fetch the image <i>kuva.png</i> from the server. The details of the request are as follows:
 
 لوجود عنصر من نوع (img) صورة, يقوم المتصفح بارسال طلب آخر الى الخادم <i>HTTP request</i> لطلب بيانات الصورة <i>kuva.png</i> وتظهر تفاصيل الطلب كالتالى:
 
@@ -132,8 +127,6 @@ In traditional web applications, the browser is "dumb". It only fetches HTML dat
 
 قم بإبقاء واجهة الكونسول مفتوحة. وقم بمسح التفاصيل السابقة بالضغط على 🚫, أو بكتابة الأمر clear() في واجهة الكونسول.
 
-Now when you go to the [notes](https://studies.cs.helsinki.fi/exampleapp/notes) page, the browser does 4 HTTP requests:
-
 قم بزيارة صفحة الملاحظات [notes](https://studies.cs.helsinki.fi/exampleapp/notes), نلاحظ قيام المتصفح بإرسال 4 طلبات للخادم:
 
 ![صورة توضح الطلبات المرسلة](../../images/0/8e.png)
@@ -143,8 +136,6 @@ Now when you go to the [notes](https://studies.cs.helsinki.fi/exampleapp/notes) 
 ![تفاصيل الطلب الأول](../../images/0/9e.png)
 
 عند مقارنة الصفحة المعروضة على المتصفح والكود البرمجي بصيغة HTML المرسل من الخادم, نلاحظ هذا المحتوى لا يحتوى على قائمة الملاحظات.
-
-The [head](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head) section of the HTML contains a [script](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script) tag, which causes the browser to fetch a JavaScript file called <i>main.js</i>.
 
 قسم ال [head](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head) من صفحة ال HTML تحتوى على عنصر [script](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script), والذي يوجه المتصفح لطلب ملف برمجي باسم <i>main.js</i>.
 
@@ -685,7 +676,6 @@ part2
 
 في هذا القسم من الدورة [مراجعة - تحميل صفحة تجتوى على كود جافاسكريبت](/en/part0/fundamentals_of_web_apps#loading-a-page-containing-java-script-review), تسلسل الأحداث التى تحدث بزيارة الصفحة التالية <https://studies.cs.helsinki.fi/exampleapp/notes> يمكن تمثيله بالرسم التوضيحي التتابعي [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/)
 
-The diagram was made as a GitHub Markdown-file using the [Mermaid](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams)-syntax, as follows:
 الرسم التوضيحي يمكن انشاؤه باستخدام لغة Markdown الخاصة بمنصة Github باستخدام تقنية[Mermaid](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams) التالي:
 
 ```text

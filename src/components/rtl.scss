@@ -152,6 +152,15 @@ html[dir='rtl'] {
     margin-right: 0;
     width: 80%;
   }
+
+  .gatsby-highlight {
+    direction: ltr;
+  }
+
+  &[data-theme='dark'] .tasks {
+    border-left: 0 solid;
+    border-right: 15px solid;
+  }
 }
 
 .col-spacing {
