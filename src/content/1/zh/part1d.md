@@ -116,12 +116,12 @@ const handleLeftClick = () => {
 <!-- The new value of the <i>left</i> property is now the same as the value of <i>left + 1</i> from the previous state, and the value of the <i>right</i> property is the same as the value of the <i>right</i> property from the previous state.-->
 新的<i>left</i>属性值现在与先前状态中<i>left + 1</i>的值相同，而<i>right</i>属性的值与先前状态中<i>right</i>属性的值相同。
 
-<!-- We can define the new state object a bit more neatly by using the [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)-->
-operator.
+<!-- We can define the new state object a bit more neatly by using the [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) operator.-->
+
 
 我们可以通过使用 [对象展开](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) 运算符更加整洁地定义新的状态对象。
 <!-- syntax that was added to the language specification in the summer of 2018:-->
-2018年夏天增加到语言规范中的语法：
+这是2018年夏天增加到语言规范中的语法：
 
 ```js
 const handleLeftClick = () => {
@@ -142,7 +142,7 @@ const handleRightClick = () => {
 ```
 
 <!-- The syntax may seem a bit strange at first. In practice <em>{ ...clicks }</em> creates a new object that has copies of all of the properties of the _clicks_ object. When we specify a particular property - e.g. <i>right</i> in <em>{ ...clicks, right: 1 }</em>, the value of the _right_ property in the new object will be 1.-->
-语法一开始可能会有点奇怪。实践中<em>{ ...clicks }</em>会创建一个新的对象，它拥有_clicks_对象的所有属性的副本。当我们指定一个特定的属性 - 例如<i>right</i>在<em>{ ...clicks, right: 1 }</em>中，新对象中_right_属性的值将为1。
+语法一开始可能会有点奇怪。实践中<em>{ ...clicks }</em>会创建一个新的对象，它拥有_clicks_对象的所有属性的副本。当我们指定一个特定的属性 - 例如<i>right</i>在<em>{ ...clicks, right: 1 }</em>中，新对象中 _right_ 属性的值将为1。
 
 <!-- In the example above, this:-->
 在上面的例子中，这个：
@@ -152,7 +152,7 @@ const handleRightClick = () => {
 ```
 
 <!-- creates a copy of the _clicks_ object where the value of the _right_ property is increased by one.-->
-创建一个_clicks_对象的副本，其中_right_属性的值增加1。
+创建一个 _clicks_ 对象的副本，其中 _right_ 属性的值增加1。
 
 <!-- Assigning the object to a variable in the event handlers is not necessary and we can simplify the functions to the following form:-->
 在事件处理程序中将对象分配给变量是不必要的，我们可以将函数简化为以下形式：
@@ -179,7 +179,7 @@ const handleLeftClick = () => {
 应用似乎可以正常工作。然而，<i>在React中禁止直接改变状态</i>，因为[它可能会导致意想不到的副作用](https://stackoverflow.com/a/40309023)。改变状态必须始终设置新对象来完成。如果没有改变从之前状态对象中的属性，它们需要简单地复制，这是通过将这些属性复制到新对象中，并将其设置为新状态来完成的。
 
 <!-- Storing all of the state in a single state object is a bad choice for this particular application; there''s no apparent benefit and the resulting application is a lot more complex. In this case, storing the click counters into separate pieces of state is a far more suitable choice.-->
-在这种特定的应用中，将所有状态都存储在单个状态对象中是一个不好的选择；没有明显的好处，而且导致的应用程序更加复杂。在这种情况下，将点击计数器存储到单独的状态片段中是一个更合适的选择。
+在这种特定的应用中，将所有状态都存储在单个状态对象中是一个不好的选择；没有明显的好处，并且会导致的应用程序更加复杂。在这种情况下，将点击计数器存储到单独的状态片段中是一个更合适的选择。
 
 <!-- There are situations where it can be beneficial to store a piece of application state in a more complex data structure. [The official React documentation](https://react.dev/learn/choosing-the-state-structure) contains some helpful guidance on the topic.-->
 有时候，将应用状态存储在更复杂的数据结构中可以带来好处。[官方 React 文档](https://react.dev/learn/choosing-the-state-structure) 就这个主题提供了一些有用的指导。
@@ -187,7 +187,7 @@ const handleLeftClick = () => {
 ### Handling arrays
 
 <!-- Let''s add a piece of state to our application containing an array _allClicks_ that remembers every click that has occurred in the application.-->
-让我们在我们的应用程序中添加一个包含数组_allClicks_的状态，记住应用程序中发生的每一次点击。
+让我们在我们的应用程序中添加一个包含数组 _allClicks_ 的状态，记住应用程序中发生的每一次点击。
 
 ```js
 const App = () => {
@@ -222,14 +222,14 @@ const App = () => {
 ```
 
 <!-- Every click is stored in a separate piece of state called _allClicks_ that is initialized as an empty array:-->
-每次点击都会存储在一个叫做_allClicks_的独立状态中，它初始化为一个空数组：
+每次点击都会存储在一个叫做 _allClicks_ 的独立状态中，它初始化为一个空数组：
 
 ```js
 const [allClicks, setAll] = useState([])
 ```
 
 <!-- When the <i>left</i> button is clicked, we add the letter <i>L</i> to the _allClicks_ array:-->
-当点击<i>左</i>按钮时，我们将字母<i>L</i>添加到_allClicks_数组中：
+当点击<i>左</i>按钮时，我们将字母<i>L</i>添加到 _allClicks_ 数组中：
 
 ```js
 const handleLeftClick = () => {
@@ -239,7 +239,7 @@ const handleLeftClick = () => {
 ```
 
 <!-- The piece of state stored in _allClicks_ is now set to be an array that contains all of the items of the previous state array plus the letter <i>L</i>. Adding the new item to the array is accomplished with the [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) method, which does not mutate the existing array but rather returns a <i>new copy of the array</i> with the item added to it.-->
-在_allClicks_中存储的状态片段现在被设置为一个数组，其中包含前一个状态数组中的所有项目以及字母<i>L</i>。使用[concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat)方法将新项添加到数组中，该方法不会改变现有数组，而是返回一个<i>新的数组副本</i>，其中包含添加的项目。
+在 _allClicks_ 中存储的状态片段现在被设置为一个数组，其中包含前一个状态数组中的所有项目以及字母<i>L</i>。使用[concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat)方法将新项添加到数组中，该方法不会改变现有数组，而是返回一个<i>新的数组副本</i>，其中包含添加的项目。
 
 <!-- As mentioned previously, it''s also possible in JavaScript to add items to an array with the [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) method. If we add the item by pushing it to the _allClicks_ array and then updating the state, the application would still appear to work:-->
 如前所述，JavaScript 也可以使用[push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) 方法向数组中添加项目。如果我们通过将其推入 _allClicks_ 数组并更新状态来添加项目，应用程序仍然会正常工作：
@@ -253,14 +253,14 @@ const handleLeftClick = () => {
 ```
 
 <!-- However, __don''t__ do this. As mentioned previously, the state of React components like _allClicks_ must not be mutated directly. Even if mutating state appears to work in some cases, it can lead to problems that are very hard to debug.-->
-但是，__不要__这样做。正如之前提到的，像 _allClicks_ 这样的 React 组件的状态不应该直接改变。即使在某些情况下改变状态似乎有效，也可能导致很难调试的问题。
+但是，__不要__ 这样做。正如之前提到的，像 _allClicks_ 这样的 React 组件的状态不应该直接改变。即使在某些情况下改变状态似乎有效，也可能导致很难调试的问题。
 
-<!-- Let''s take a closer look at how the clicking-->
-works
+<!-- Let''s take a closer look at how the clicking works-->
+
 
 让我们来仔细看看点击是如何工作的
 <!-- is rendered to the page:-->
-这段文本被呈现在页面上：
+这段文本被渲染在页面上：
 
 ```js
 const App = () => {
@@ -284,7 +284,7 @@ const App = () => {
 ### Update of the state is asynchronous
 
 <!-- Let''s expand the application so that it keeps track of the total number of button presses in the state _total_, whose value is always updated when the buttons are pressed:-->
-让我们扩展这个应用程序，以便它跟踪状态_total_中按钮按下的总次数，当按钮被按下时，该值总是被更新：
+让我们扩展这个应用程序，以便它跟踪状态 _total_ 中按钮按下的总次数，当按钮被按下时，该值总是被更新：
 
 ```js
 const App = () => {
@@ -350,7 +350,7 @@ const App = () => {
 ![devtools console showing left before 4 and left after 4](../../images/1/32.png)
 
 <!-- Even though a new value was set for _left_ by calling _setLeft(left + 1)_, the old value persists despite the update. As a result, the attempt to count button presses produces a result that is too small:-->
-尽管通过调用`setLeft(left + 1)`为_left_设置了一个新值，但旧值仍然保持不变，尽管已经更新了。结果，尝试计算按钮按下次数产生的结果太小了：
+尽管通过调用`setLeft(left + 1)`为 _left_ 设置了一个新值，但旧值仍然保持不变，尽管已经更新了。结果，尝试计算按钮按下次数产生的结果太小了：
 
 ```js
 setTotal(left + right)
@@ -382,7 +382,7 @@ const App = () => {
 ### Conditional rendering
 
 <!-- Let''s modify our application so that the rendering of the clicking history is handled by a new <i>History</i> component:-->
-让我们修改我们的应用程序，以便由新的<i>历史</i>组件处理点击历史的呈现：
+让我们修改我们的应用程序，以便由新的 <i>History</i> 组件处理点击History的渲染：
 
 ```js
 // highlight-start
@@ -435,13 +435,13 @@ const App = () => {
 ```
 
 <!-- The <i>History</i> component renders completely different React elements depending on the state of the application. This is called <i>conditional rendering</i>.-->
-<i>历史</i>组件根据应用的状态完全渲染不同的React元素，这被称为<i>条件渲染</i>。
+<i>History</i>组件根据应用的状态完全渲染不同的React元素，这被称为<i>条件渲染</i>。
 
 <!-- React also offers many other ways of doing [conditional rendering](https://react.dev/learn/conditional-rendering). We will take a closer look at this in [part 2](/en/part2).-->
-React 还提供了许多其他的[条件渲染](https://react.dev/learn/conditional-rendering)方式。我们将在[第二部分](/en/part2)中更加仔细地研究这一点。
+React 还提供了许多其他的[条件渲染](https://react.dev/learn/conditional-rendering)方式。我们将在[第二章节](/en/part2)中更加仔细地研究这一点。
 
 <!-- Let''s make one last modification to our application by refactoring it to use the _Button_ component that we defined earlier on:-->
-让我们对我们的应用程序做一个最后的修改，将其重构以使用我们之前定义的_Button_组件：
+让我们对我们的应用程序做一个最后的修改，将其重构以使用我们之前定义的 _Button_ 组件：
 
 ```js
 const History = (props) => {
@@ -524,9 +524,7 @@ const App = () => {
 <!-- > **Keep the browser''s developer console open at all times.**-->
 > **始终保持浏览器的开发者控制台处于打开状态。**
 <!-- >-->
-My name is John
 
-我的名字叫约翰
 <!-- > The <i>Console</i> tab in particular should always be open, unless there is a specific reason to view another tab.-->
 > 尤其是<i>控制台</i>选项卡应该始终打开，除非有特定的原因要查看其他选项卡。
 
@@ -539,12 +537,10 @@ My name is John
 ![screenshot of code](../../images/1/6x.png)
 
 <!-- don''t write more code but rather find and fix the problem **immediately**. There has yet to be a moment in the history of coding where code that fails to compile would miraculously start working after writing large amounts of additional code. I highly doubt that such an event will transpire during this course either.-->
-不要写更多的代码，而是**立即**找出并修复问题。在编码历史上，还没有一个时刻，编译失败的代码会在写入大量额外代码后奇迹般地开始运行。我非常怀疑这门课程中也不会发生这样的事件。
+不要写更多的代码，而是**立即**找出并修复问题。在编码历史上，还没有一个时刻，编译失败的代码会在写入大量额外代码后奇迹般地开始运行。因此这门课程中也不会发生这样的事件。
 
-<!-- Old-school, print-based debugging is always a good idea. If the component-->
-you are debugging has a printed manual, you should always consult it first.
-
-老派的，印刷基础的调试总是一个好主意。如果你正在调试的组件有一个印刷的手册，你应该总是先参考它。
+<!-- Old-school, print-based debugging is always a good idea. If the component you are debugging has a printed manual, you should always consult it first.-->
+老派的，用打印方式来调试是一个好主意。如果你正在调试的组件有一个打印手册，你应该总是先参考它。
 
 ```js
 const Button = ({ handleClick, text }) => (
@@ -573,7 +569,7 @@ const Button = (props) => {
 这将立即揭示，例如，当使用组件时，是否有属性拼写错误。
 
 <!-- **NB** When you use _console.log_ for debugging, don''t combine _objects_ in a Java-like fashion by using the plus operator:-->
-**NB** 在使用_console.log_进行调试时，不要像在 Java 中一样使用加号运算符组合_objects_:
+**注意：** 在使用_console.log_进行调试时，不要像在 Java 中一样使用加号运算符组合_objects_:
 
 ```js
 console.log('props value is ' + props)
@@ -594,13 +590,13 @@ console.log('props value is', props)
 ```
 
 <!-- In this way, the separated items will all be available in the browser console for further inspection.-->
-在这种方式下，分离的项目将都可以在浏览器控制台中进行进一步检查。
+在这种方式下，对象中的数据项都可以在浏览器控制台中打印，进行进一步检查。
 
 <!-- Logging output to the console is by no means the only way of debugging our applications. You can pause the execution of your application code in the Chrome developer console''s <i>debugger</i>, by writing the command [debugger](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger) anywhere in your code.-->
 在控制台记录输出绝不是调试我们应用程序的唯一方式。您可以在Chrome开发者控制台的<i>调试器</i>中通过在代码中的任何位置写入[debugger](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger)命令来暂停应用程序代码的执行。
 
 <!-- The execution will pause once it arrives at a point where the _debugger_ command gets executed:-->
-执行一旦到达_调试器_命令被执行的点，将暂停：
+执行一旦到达 _调试器_ 命令被执行的点，将暂停：
 
 ![debugger paused in dev tools](../../images/1/7a.png)
 
@@ -610,18 +606,18 @@ console.log('props value is', props)
 ![console inspection screenshot](../../images/1/8a.png)
 
 <!-- Once the cause of the bug is discovered you can remove the _debugger_ command and refresh the page.-->
-一旦发现了bug的原因，你可以移除_debugger_命令，并刷新页面。
+一旦发现了bug的原因，你可以移除 _debugger_ 命令，并刷新页面。
 
 <!-- The debugger also enables us to execute our code line by line with the controls found on the right-hand side of the <i>Sources</i> tab.-->
-调试器还使我们能够通过<i>源</i>选项卡右侧找到的控件，一行一行地执行我们的代码。
+调试器还使我们能够通过<i>Sources</i>选项卡右侧找到的控件，一行一行地执行我们的代码。
 
 <!-- You can also access the debugger without the _debugger_ command by adding breakpoints in the <i>Sources</i> tab. Inspecting the values of the component''s variables can be done in the _Scope_-section:-->
-你也可以不用`debugger`命令来访问调试器，而是在<i>Sources</i>标签中添加断点。可以在_Scope_-section中查看组件变量的值：
+你也可以不用 `debugger` 命令来访问调试器，而是在<i>Sources</i>标签中添加断点。可以在_Scope_ -section中查看组件变量的值：
 
 ![breakpoint example in devtools](../../images/1/9a.png)
 
 <!-- It is highly recommended to add the [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension to Chrome. It adds a new _Components_ tab to the developer tools. The new developer tools tab can be used to inspect the different React elements in the application, along with their state and props:-->
-[建议将[React开发者工具](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)添加到Chrome中。](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)它会为开发者工具添加一个新的_组件_标签。新的开发者工具标签可用于检查应用程序中不同的React元素及其状态和属性：
+建议将[React开发者工具](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)添加到Chrome中。它会为开发者工具添加一个新的_组件_标签。新的开发者工具标签可用于检查应用程序中不同的React元素及其状态和属性：
 
 ![screenshot react developer tools extension](../../images/1/10ea.png)
 
@@ -705,7 +701,7 @@ const App = () => {
 ```
 
 <!-- We want the clicking of the button to reset the state stored in the _value_ variable.-->
-我们希望点击按钮能够重置存储在_value_变量中的状态。
+我们希望点击按钮能够重置存储在 _value_ 变量中的状态。
 
 <!-- In order to make the button react to a click event, we have to add an <i>event handler</i> to it.-->
 为了使按钮对点击事件做出反应，我们必须为它添加一个<i>事件处理程序</i>。
@@ -770,7 +766,7 @@ index.js:2178 Warning: Expected `onClick` listener to be a function, instead got
 问题在于我们的事件处理程序被定义为一个<i>函数调用</i>，这意味着事件处理程序被赋予从函数返回的值，在_console.log_的情况下是<i>未定义</i>的。
 
 <!-- The _console.log_ function call gets executed when the component is rendered and for this reason, it gets printed once to the console.-->
-`console.log` 函数调用在组件渲染时被执行，因此它只会被打印一次到控制台。
+`console.log` 函数调用在组件渲染时被执行，因此它只会被打印到控制台一次。
 
 <!-- The following attempt is flawed as well:-->
 以下尝试也有缺陷：
@@ -792,7 +788,7 @@ index.js:2178 Warning: Expected `onClick` listener to be a function, instead got
 ```
 
 <!-- Now the event handler is a function defined with the arrow function syntax _() => console.log('clicked the button')_. When the component gets rendered, no function gets called and only the reference to the arrow function is set to the event handler. Calling the function happens only once the button is clicked.-->
-现在，事件处理程序是用箭头函数语法定义的函数_() => console.log('clicked the button')_。当组件渲染时，不会调用任何函数，只有对箭头函数的引用被设置为事件处理程序。只有在单击按钮时，才会调用该函数。
+现在，事件处理程序是用箭头函数语法定义的函数 _() => console.log('clicked the button')_ 。当组件渲染时，不会调用任何函数，只有对箭头函数的引用被设置为事件处理程序。只有在单击按钮时，才会调用该函数。
 
 <!-- We can implement resetting the state in our application with this same technique:-->
 我们可以用同样的技术在我们的应用中实现重置状态：
@@ -802,10 +798,10 @@ index.js:2178 Warning: Expected `onClick` listener to be a function, instead got
 ```
 
 <!-- The event handler is now the function _() => setValue(0)_.-->
-事件处理程序现在是函数_() => setValue(0)_。
+事件处理程序现在是函数 _() => setValue(0)_ 。
 
 <!-- Defining event handlers directly in the attribute of the button is not necessarily the best possible idea.-->
-不一定是最好的想法，直接在按钮的属性中定义事件处理程序。
+这不一定是最好的想法，直接在按钮的属性中定义事件处理程序。
 
 <!-- You will often see event handlers defined in a separate place. In the following version of our application we define a function that then gets assigned to the _handleClick_ variable in the body of the component function:-->
 你经常会看到事件处理器在一个单独的地方定义。在下面的应用程序版本中，我们定义了一个函数，然后将其分配给组件函数中的_handleClick_变量：
@@ -834,7 +830,7 @@ const App = () => {
 ```
 
 <!-- Naturally, our event handler function can be composed of multiple commands. In these cases we use the longer curly brace syntax for arrow functions:-->
-自然，我们的事件处理函数可以由多个命令组成。 在这些情况下，我们使用更长的大括号语法来为箭头函数：
+我们的事件处理函数可以由多个命令组成。 在这种情况下，我们使用更长的大括号语法来包含箭头函数的逻辑：
 
 ```js
 const App = () => {
@@ -922,9 +918,7 @@ const hello = () => {
 <button onClick={hello()}>button</button>
 ```
 
-<!-- It assigns the return value of _hello()_ to the onClick attribute. Essentially the line gets transformed into:-->
-`onClick={hello()}`
-
+<!-- It assigns the return value of _hello()_ to the onClick attribute. Essentially the line gets transformed into:`onClick={hello()}`-->
 它将_hello()_的返回值分配给onClick属性。本质上，该行被转换为：`onClick={hello()}`
 
 ```js
@@ -973,16 +967,14 @@ const App = () => {
 现在应用程序有三个按钮，事件处理程序由_hello_函数定义，该函数接受一个参数。
 
 <!-- The first button is defined as-->
-**bold**
-
-第一个按钮被定义为**粗体**
+第一个按钮被定义为
 
 ```js
 <button onClick={hello('world')}>button</button>
 ```
 
 <!-- The event handler is created by <i>executing</i> the function call _hello('world')_. The function call returns the function:-->
-事件处理程序是通过<i>执行</i>函数调用_hello('world')_创建的。该函数调用返回函数：
+事件处理程序是通过<i>执行</i>函数调用 _hello('world')_ 创建的。该函数调用返回函数：
 
 ```js
 () => {
@@ -1010,7 +1002,7 @@ const App = () => {
 两个按钮都有它们各自的事件处理程序。
 
 <!-- Functions returning functions can be utilized in defining generic functionality that can be customized with parameters. The _hello_ function that creates the event handlers can be thought of as a factory that produces customized event handlers meant for greeting users.-->
-函数返回函数可以用来定义可以通过参数定制的通用功能。创建事件处理程序的_hello_函数可以被看作是一个工厂，它生产用于问候用户的定制事件处理程序。
+函数返回函数可以用来定义可以通过参数定制的通用功能。创建事件处理程序的 _hello_ 函数可以被看作是一个工厂，它生产用于问候用户的定制事件处理程序。
 
 <!-- Our current definition is slightly verbose:-->
 我们目前的定义略显冗长：
@@ -1083,7 +1075,7 @@ const App = () => {
 ```
 
 <!-- When the component is rendered, the <i>thousand</i> button is created:-->
-当组件被渲染时，会创建<i>千</i>按钮：
+当组件被渲染时，会创建<i>thousand</i>按钮：
 
 ```js
 <button onClick={setToValue(1000)}>thousand</button>
@@ -1100,14 +1092,14 @@ const App = () => {
 ```
 
 <!-- The increase button is declared as follows:-->
-# 按钮增加如下声明：
+按钮增加如下声明：
 
 ```js
 <button onClick={setToValue(value + 1)}>increment</button>
 ```
 
 <!-- The event handler is created by the function call _setToValue(value + 1)_ which receives as its parameter the current value of the state variable _value_ increased by one. If the value of _value_ was 10, then the created event handler would be the function:-->
-事件处理程序由函数调用_setToValue(value + 1)_创建，该函数接收状态变量_value_的当前值加一作为参数。如果_value_的值为10，那么创建的事件处理程序将是函数：
+事件处理程序由函数调用 _setToValue(value + 1)_ 创建，该函数接收状态变量_value_的当前值加一作为参数。如果_value_的值为10，那么创建的事件处理程序将是函数：
 
 ```js
 () => {
@@ -1117,7 +1109,7 @@ const App = () => {
 ```
 
 <!-- Using functions that return functions is not required to achieve this functionality. Let''s return the _setToValue_ function which is responsible for updating state into a normal function:-->
-不需要使用返回函数的函数来实现这个功能。让我们将负责更新状态的_setToValue_函数改为一个普通函数：
+不需要使用返回函数的函数来实现这个功能。让我们将负责更新状态的 _setToValue_ 函数改为一个普通函数：
 
 ```js
 const App = () => {
@@ -1146,7 +1138,7 @@ const App = () => {
 ```
 
 <!-- We can now define the event handler as a function that calls the _setToValue_ function with an appropriate parameter. The event handler for resetting the application state would be:-->
-我们现在可以将事件处理程序定义为一个函数，该函数使用适当的参数调用_setToValue_函数。用于重置应用程序状态的事件处理程序为：
+我们现在可以将事件处理程序定义为一个函数，该函数使用适当的参数调用 _setToValue_ 函数。用于重置应用程序状态的事件处理程序为：
 
 ```js
 <button onClick={() => setToValue(0)}>reset</button>
@@ -1169,7 +1161,7 @@ const Button = (props) => (
 ```
 
 <!-- The component gets the event handler function from the _handleClick_ prop, and the text of the button from the _text_ prop. Lets use the new component:-->
-组件从_handleClick_ prop获取事件处理函数，从_text_ prop获取按钮文本。让我们使用新组件：
+组件从 _handleClick_ prop获取事件处理函数，从 _text_ prop获取按钮文本。让我们使用新组件：
 
 ```js
 const App = (props) => {
@@ -1186,17 +1178,17 @@ const App = (props) => {
 ```
 
 <!-- Using the <i>Button</i> component is simple, although we have to make sure that we use the correct attribute names when passing props to the component.-->
-使用<i>按钮</i>组件很简单，尽管我们必须确保在传递props到组件时使用正确的属性名称。
+使用 <i>Button</i> 组件很简单，尽管我们必须确保在传递props到组件时使用正确的属性名称。
 
 ![using correct attribute names code screenshot](../../images/1/12e.png)
 
 ### Do Not Define Components Within Components
 
 <!-- Let''s start displaying the value of the application in its <i>Display</i> component.-->
-让我们开始在其<i>显示</i>组件中显示应用程序的值。
+让我们开始在其 <i>Display</i> 组件中显示应用程序的值。
 
 <!-- We will change the application by defining a new component inside of the <i>App</i> component.-->
-我们将通过在<i>App</i>组件内部定义一个新组件来改变应用程序。
+我们将通过在 <i>App</i> 组件内部定义一个新组件来改变应用程序。
 
 ```js
 // This is the right place to define a component
@@ -1232,7 +1224,7 @@ const App = () => {
 应用程序似乎仍在工作，但**不要像这样实现组件！**永远不要在其他组件内定义组件。该方法没有任何好处，并导致许多不愉快的问题。最大的问题是因为React将在另一个组件中定义的组件视为每次渲染中的新组件。这使得React无法优化组件。
 
 <!-- Let''s instead move the <i>Display</i> component function to its correct place, which is outside of the <i>App</i> component function:-->
-让我们把<i>Display</i>组件函数移动到它正确的位置，也就是<i>App</i>组件函数之外：
+让我们把 <i>Display</i> 组件函数移动到它正确的位置，也就是 <i>App</i> 组件函数之外：
 
 ```js
 const Display = props => <div>{props.value}</div>
@@ -1270,34 +1262,31 @@ const App = () => {
 <!-- You may find the following links useful:-->
 你可能会发现以下链接有用：
 
-<!-- - The [official React documentation](https://react.dev/learn) is worth checking out at some point, although most of it will become relevant only later on in the course. Also, everything related to class-based components is irrelevant to us;-->
-we'll stick to functional components.
+<!-- - The [official React documentation](https://react.dev/learn) is worth checking out at some point, although most of it will become relevant only later on in the course. Also, everything related to class-based components is irrelevant to us;we'll stick to functional components.-->
 
-[官方 React 文档](https://react.dev/learn) 值得查看一次，尽管大部分内容只有在课程晚些时候才会变得相关。此外，与基于类的组件相关的一切都与我们无关；我们将坚持使用功能组件。
+[官方 React 文档](https://react.dev/learn) 值得查看一次，尽管大部分内容只有在课程晚些时候才会变得相关。此外，与基于类的组件相关的一切都与我们无关；我们将坚持使用函数组件。
+
 <!-- - Some courses on [Egghead.io](https://egghead.io) like [Start learning React](https://egghead.io/courses/start-learning-react) are of high quality, and the recently updated [Beginner''s Guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) is also relatively good; both courses introduce concepts that will also be introduced later on in this course. **NB** The first one uses class components but the latter uses the new functional ones.-->
 [Egghead.io](https://egghead.io) 上的一些课程，如[开始学习 React](https://egghead.io/courses/start-learning-react) 质量很高，最近更新的[React 入门指南](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) 也相对不错；这两门课都介绍了本课程稍后会介绍的概念。**注意**：前者使用的是类组件，而后者使用的是新的函数组件。
 
 ### Web programmers oath
 
 <!-- Programming is hard, that is why I will use all the possible means to make it easier-->
-.
 
-编程很难，这就是为什么我会用尽一切可能的手段来让它变得更容易。
+- 编程很难，这就是为什么我会用尽一切可能的手段来让它变得更容易。
 
 <!-- - I will have my browser developer console open all the time-->
-我会一直开著浏览器开发者控制台。
+- 我会一直开著浏览器开发者控制台。
+
 <!-- - I progress with small steps-->
-我一步一步地前进。
+- 我一步一步地前进。
+
 <!-- - I will write lots of _console.log_ statements to make sure I understand how the code behaves and to help pinpointing problems-->
-.
-
-我会写很多`console.log`语句来确保我理解代码的行为，并帮助确定问题。
+- 我会写很多`console.log`语句来确保我理解代码的行为，并帮助确定问题。
 <!-- - If my code does not work, I will not write more code. Instead I start deleting the code until it works or just return to a state when everything was still working-->
-.
-
-如果我的代码不起作用，我不会写更多的代码。相反，我会开始删除代码，直到它可以正常工作，或者只是回到一个所有事情仍然正常的状态。
+- 如果我的代码不起作用，我不会写更多的代码。相反，我会开始删除代码，直到它可以正常工作，或者只是回到一个所有事情仍然正常的状态。
 <!-- - When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](http://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord-telegram) how to ask for help-->
-当我在课程Discord或Telegram频道或其他地方寻求帮助时，我会正确地提出我的问题，参见[这里](http://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord-telegram)如何寻求帮助。
+- 当我在课程Discord或Telegram频道或其他地方寻求帮助时，我会正确地提出我的问题，参见[这里](http://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord-telegram)如何寻求帮助。
 
 </div>
 
@@ -1305,10 +1294,9 @@ we'll stick to functional components.
 
 <h3>Exercises 1.6.-1.14.</h3>
 
-<!-- Submit your solutions to the exercises by first pushing your code to GitHub and then marking the completed exercises into-->
-the spreadsheet.
-
+<!-- Submit your solutions to the exercises by first pushing your code to GitHub and then marking the completed exercises into the spreadsheet.-->
 把你的解答提交到练习上，首先把你的代码推送到GitHub上，然后把完成的练习填写到电子表格中。
+
 <!-- the "my submissions" tab of the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
 [我的提交] 选项卡，[提交应用程序](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)
 
@@ -1327,10 +1315,8 @@ the spreadsheet.
 rm -rf node_modules/ && npm i
 ```
 
-<!-- If and <i>when</i> you encounter an error message-->
-, take a screenshot and contact the developer
-
-如果（和<i>当</i>）你遇到错误消息，请撷取截图并联系开发者。
+<!-- If and <i>when</i> you encounter an error message, take a screenshot and contact the developer-->
+如果<i>当</i>你遇到错误消息，请撷取截图并联系开发者。
 
 <!-- > <i>Objects are not valid as a React child</i>-->
 <i>对象无效，不能用作 React 子组件</i>
