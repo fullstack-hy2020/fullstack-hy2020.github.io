@@ -660,7 +660,7 @@ part2
 看看这个[示例提交仓库](https://github.com/fullstack-hy2020/example-submission-repository)!
 
 <!-- For each part of the course, there is a directory, which further branches into directories containing a series of exercises, like "unicafe" for part 1.-->
-每一章节的課程都有一個目錄，該目錄可以進一步分支到包含一系列練習的目錄，例如第一部分的「unicafe」。
+每一章节的课程都有一个目录，该目录可以进一步分支到包含一系列练习的目录，例如第一部分的「unicafe」。
 
 <!-- Most of the exercises of the course build a larger application, eg. courseinfo, unicafe and anecdotes in this part, bit by bit. It is enough to submit the completed application. You can make a commit after each exercise, but that is not compulsory. For example the course info app is built in exercises 1.1.-1.5. It is just the end result after 1.5 that you need to submit!-->
 大部分的课程练习都会构建一个更大的应用，比如课程信息，Uni Cafe和轶事，一点一点地。只要提交完成的应用就够了。每个练习后你可以做一个提交，但不是必须的。比如课程信息应用是在1.1-1.5练习中构建的，只有1.5后的最终结果你需要提交！
@@ -774,7 +774,7 @@ const App = () => {
 <i>小心，小步的进展可能看起来很慢，但实际上<i>远比其他方式更快</i>。著名的软件开发人员Robert "Uncle Bob" Martin也曾表示，这在软件开发中也是如此。
 
 <!-- > <i>"The only way to go fast, is to go well"</i>-->
-> <i>「唯一能夠快速前進的方式，就是做得更好」</i>
+> <i>「唯一能够快速前进的方式，就是做得更好」</i>
 
 <!-- that is, according to Martin, careful progress with small steps is even the only way to be fast.-->
 据马丁所说，谨慎前进，一步一个脚印，是唯一能够快速前进的方式。

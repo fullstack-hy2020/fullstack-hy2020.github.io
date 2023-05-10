@@ -418,7 +418,7 @@ Apollo客户端将查询的响应保存到[缓存](https://www.apollographql.com
 让我们实现添加新人的功能。
 
 <!--  In the previous chapter, we hardcoded the parameters for mutations. Now, we need a version of the addPerson mutation which uses [variables](https://graphql.org/learn/queries/#variables):-->
-在上一章中，我們對突變硬編碼了參數。現在，我們需要一個使用[變量](https://graphql.org/learn/queries/#variables)的addPerson突變版本：
+在上一章中，我们对突变硬编码了参数。现在，我们需要一个使用[变量](https://graphql.org/learn/queries/#variables)的addPerson突变版本：
 
 ```js
 const CREATE_PERSON = gql`
@@ -532,7 +532,7 @@ createPerson({  variables: { name, phone, street, city } })
 <!-- New persons are added just fine, but the screen is not updated. This is because Apollo Client cannot automatically update the cache of an application, so it still contains the state from before the mutation.-->
 新人员添加得很好，但屏幕没有更新。这是因为Apollo Client无法自动更新应用程序的缓存，因此它仍然包含变异之前的状态。
 <!-- We could update the screen by reloading the page, as the cache is emptied when the page is reloaded. However, there must be a better way to do this.-->
-我們可以通過重新加載頁面來更新屏幕，因為當頁面重新加載時緩存將被清空。但是，一定有更好的方法來做到這一點。
+我们可以通过重新加载页面来更新屏幕，因为当页面重新加载时缓存将被清空。但是，一定有更好的方法来做到这一点。
 
 ### Updating the cache
 
@@ -540,7 +540,7 @@ createPerson({  variables: { name, phone, street, city } })
 这里有几种不同的解决方案。一种方法是为所有人[poll](https://www.apollographql.com/docs/react/data/queries/#polling)服务器，或者反复进行查询。
 
 <!-- The change is small. Let''s set the query to poll every two seconds:-->
-小改變。讓我們將查詢設置為每兩秒投票一次：
+小改变。让我们将查询设置为每两秒投票一次：
 
 ```js
 const App = () => {
@@ -570,7 +570,7 @@ export default App
 **坏面的解决方案就是所有毫无意义的网络流量。**
 
 <!-- Another easy way to keep the cache in sync is to use the *useMutation* hook''s [refetchQueries](https://www.apollographql.com/docs/react/data/refetching/) parameter to define that the query fetching all persons is done again whenever a new person is created.-->
-另一种簡單的保持緩存同步的方法是使用*useMutation*鉤子的[refetchQueries](https://www.apollographql.com/docs/react/data/refetching/)參數定義為每次創建新人時再次執行查詢獲取所有人的查詢。
+另一种简单的保持缓存同步的方法是使用*useMutation*钩子的[refetchQueries](https://www.apollographql.com/docs/react/data/refetching/)参数定义为每次创建新人时再次执行查询获取所有人的查询。
 
 ```js
 const ALL_PERSONS = gql`
@@ -687,7 +687,7 @@ const PersonForm = ({ setError }) => {
 我们必须深入挖掘错误对象，直到找到正确的错误信息...
 
 <!-- We can then render the error message on the screen as necessary:-->
-我們可以根據需要將錯誤訊息呈現在螢幕上：
+我们可以根据需要将错误讯息呈现在萤幕上：
 
 ```js
 const App = () => {
@@ -876,7 +876,7 @@ const PhoneForm = ({ setError }) => {
 <!-- We want to set the error message only when the result of the mutation-->
 is false
 
-我們只想在突變的結果為false時設定錯誤訊息。
+我们只想在突变的结果为false时设定错误讯息。
 <!-- *result.data* changes, so we use the useEffect hook to control setting the error message.-->
 因为 *result.data* 变化，所以我们使用 useEffect 钩子来控制设置错误消息。
 
@@ -967,7 +967,7 @@ useEffect(() => {
 确保在添加新书籍后，作者和书籍视图保持最新。
 
 <!-- In case of problems when making queries or mutations, check from the developer console what the server response is:-->
-在做查詢或者突變時遇到問題時，請檢查開發者控制台服務器的響應是什麼：
+在做查询或者突变时遇到问题时，请检查开发者控制台服务器的响应是什么：
 
 ![browser unhandled rejection and dev tools network and preview highlighted showing error message](../../images/8/42ea.png)
 

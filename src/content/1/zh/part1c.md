@@ -10,7 +10,7 @@ lang: zh
 让我们回到使用React的工作中。
 
 <!-- We start with a new example:-->
-我們開始一個新的例子：
+我们开始一个新的例子：
 
 ```js
 const Hello = (props) => {
@@ -149,7 +149,7 @@ const Hello = (props) => {
 <!-- If the object we are destructuring has the values-->
 we need, we can assign them to variables
 
-如果被解構的對象具有我們需要的值，我們可以將它們分配給變量。
+如果被解构的对象具有我们需要的值，我们可以将它们分配给变量。
 
 ```js
 props = {
@@ -540,7 +540,7 @@ const App = () => {
 ```
 
 <!-- What if we tried to define the event handlers in a simpler form?-->
-如果我們嘗試以更簡單的形式定義事件處理程序呢？
+如果我们尝试以更简单的形式定义事件处理程序呢？
 
 ```js
 <button onClick={setCounter(counter + 1)}>
@@ -673,7 +673,7 @@ const App = () => {
 一切仍然正常工作。当按钮被点击，<i>应用程序</i>重新渲染时，其所有子组件，包括<i>显示</i>组件也会重新渲染。
 
 <!-- Next, let's make a <i>Button</i> component for the buttons of our application. We have to pass the event handler as well as the title of the button through the component's props:-->
-接下來，讓我們為我們應用程序的按鈕製作一個<i>按鈕</i>組件。我們必須通過組件的props傳遞事件處理程序以及按鈕的標題：
+接下来，让我们为我们应用程序的按钮制作一个<i>按钮</i>组件。我们必须通过组件的props传递事件处理程序以及按钮的标题：
 
 ```js
 const Button = (props) => {
@@ -686,7 +686,7 @@ const Button = (props) => {
 ```
 
 <!-- Our <i>App</i> component now looks like this:-->
-我們的<i>應用程式</i>組件現在看起來像這樣：
+我们的<i>应用程式</i>组件现在看起来像这样：
 
 ```js
 const App = () => {
@@ -721,7 +721,7 @@ const App = () => {
 ```
 
 <!-- Since we now have an easily reusable <i>Button</i> component, we''ve also implemented new functionality into our application by adding a button that can be used to decrement the counter.-->
-由於我們現在有一個容易重複使用的<i>按鈕</i>組件，我們還通過添加一個可用於減少計數器的按鈕來實現新的功能到我們的應用程序中。
+由于我们现在有一个容易重复使用的<i>按钮</i>组件，我们还通过添加一个可用于减少计数器的按钮来实现新的功能到我们的应用程序中。
 
 <!-- The event handler is passed to the <i>Button</i> component through the _handleClick_ prop. The name of the prop itself is not that significant, but our naming choice wasn't completely random. React's own official [tutorial](https://react.dev/learn/tutorial-tic-tac-toe) suggests this convention.-->
 经过_handleClick_ prop传递给<i>Button</i>组件的事件处理器。属性本身的名称并不是很重要，但我们的命名选择并不是完全随机的。 React自己的官方[教程](https://react.dev/learn/tutorial-tic-tac-toe)建议使用这种约定。
@@ -751,7 +751,7 @@ _显示_接收新的计数器值1作为props。 _按钮_组件接收事件处理
 <!-- To be sure to understand how the program works, let us add some _console.log_ statements to it-->
 .
 
-確保理解程序的工作原理，讓我們為它添加一些_console.log_語句。
+确保理解程序的工作原理，让我们为它添加一些_console.log_语句。
 
 ```js
 const App = () => {

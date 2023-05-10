@@ -8,7 +8,7 @@ lang: zh
 <div class="content">
 
 <!-- In part 2, we examined two different ways of adding styles to our application: the old-school [single CSS](/en/part2/adding_styles_to_react_app) file and [inline styles](/en/part2/adding_styles_to_react_app#inline-styles). In this part, we will take a look at a few other ways.-->
-在第二部分，我們檢查了兩種不同的方法為我們的應用程序添加樣式：老式的[單個CSS](/en/part2/adding_styles_to_react_app)文件和[內聯樣式](/en/part2/adding_styles_to_react_app#inline-styles)。在本部分中，我們將看一下其他一些方法。
+在第二部分，我们检查了两种不同的方法为我们的应用程序添加样式：老式的[单个CSS](/en/part2/adding_styles_to_react_app)文件和[内联样式](/en/part2/adding_styles_to_react_app#inline-styles)。在本部分中，我们将看一下其他一些方法。
 
 ### Ready-made UI libraries
 
@@ -25,7 +25,7 @@ lang: zh
 许多UI框架都有针对React的版本，其中框架的“组件”已被转换成React组件。有几个不同的React版本的Bootstrap，如[reactstrap](http://reactstrap.github.io/)和[react-bootstrap](https://react-bootstrap.github.io/)。
 
 <!-- Next, we will take a closer look at two UI frameworks, Bootstrap and [MaterialUI](https://mui.com/). We will use both frameworks to add similar styles to the application we made in the [React Router](/en/part7/react_router) section of the course material.-->
-接下來，我們將仔細研究兩個UI框架，Bootstrap和[MaterialUI](https://mui.com/)。 我們將使用兩個框架來為我們在[React Router](/en/part7/react_router)部分中製作的應用程序添加類似的樣式。
+接下来，我们将仔细研究两个UI框架，Bootstrap和[MaterialUI](https://mui.com/)。 我们将使用两个框架来为我们在[React Router](/en/part7/react_router)部分中制作的应用程序添加类似的样式。
 
 ### React Bootstrap
 
@@ -358,7 +358,7 @@ import {
 #### Form
 
 <!-- Next, let''s make the login form in the <i>Login</i> view better using the [TextField](https://mui.com/material-ui/react-text-field/) and [Button](https://mui.com/material-ui/api/button/) components:-->
-接下來，讓我們使用[文本框](https://mui.com/material-ui/react-text-field/)和[按鈕](https://mui.com/material-ui/api/button/)組件來改進<i>登錄</i>視圖中的登錄表單：
+接下来，让我们使用[文本框](https://mui.com/material-ui/react-text-field/)和[按钮](https://mui.com/material-ui/api/button/)组件来改进<i>登录</i>视图中的登录表单：
 
 ```js
 const Login = (props) => {
@@ -467,7 +467,7 @@ MaterialUI 与 Bootstrap 不同，不提供表单本身的组件。这里的表�
 <!-- By defining-->
 the problem
 
-通過定義問題
+通过定义问题
 
 ```js
 <Button color="inherit" component={Link} to="/">
@@ -557,7 +557,7 @@ We have a lot of work to do
 使用集成库而不是直接使用UI框架的潜在缺点是集成库可能具有不稳定的API和糟糕的文档。[Semantic UI React](https://react.semantic-ui.com)的情况比许多其他UI框架要好得多，因为它是官方的React集成库。
 
 <!-- There is also the question of whether or not UI framework libraries should be used in the first place. It is up to everyone to form their own opinion, but for people lacking knowledge in CSS and web design, they are very useful tools.-->
-也有一個問題是，UI框架庫是否應該首先被使用。每個人都可以形成自己的意見，但對於缺乏CSS和網頁設計知識的人來說，它們是非常有用的工具。
+也有一个问题是，UI框架库是否应该首先被使用。每个人都可以形成自己的意见，但对于缺乏CSS和网页设计知识的人来说，它们是非常有用的工具。
 
 ### Other UI frameworks
 

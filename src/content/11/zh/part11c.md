@@ -11,7 +11,7 @@ lang: zh
 写了一个不错的应用程序之后，是时候考虑一下如何将它部署到真正的用户中去了。
 
 <!-- In [part 3](/en/part3/deploying_app_to_internet) of this course, we did this by simply running a single command from terminal to get the code up and running the servers of the cloud provider [Fly.io](https://fly.io/) or [Render](hhttps://render.com/).-->
-在本課程的[第三部分](/en/part3/deploying_app_to_internet)中，我們只需從終端運行一個單個命令就可以將代碼部署到雲端提供商[Fly.io](https://fly.io/)或[Render](hhttps://render.com/)的服務器上。
+在本课程的[第三部分](/en/part3/deploying_app_to_internet)中，我们只需从终端运行一个单个命令就可以将代码部署到云端提供商[Fly.io](https://fly.io/)或[Render](hhttps://render.com/)的服务器上。
 
 <!-- It is pretty simple to release software in Fly.io and Render at least compared to many other types of hosting setups but it still contains risks: nothing prevents us from accidentally releasing broken code to production.-->
 Fly.io 和 Render 至少比起许多其他类型的托管设置来说，发布软件相当简单，但仍然存在风险：没有任何东西可以阻止我们不小心将损坏的代码发布到生产环境中。
@@ -29,7 +29,7 @@ Fly.io 和 Render 至少比起许多其他类型的托管设置来说，发布�
 
 如果有可能出错，那么它就一定会出错。
 <!--   "Anything that can go wrong will go wrong."-->
-「凡事都有可能出錯。」
+「凡事都有可能出错。」
 
 <!-- It's important to remember this when we plan out our deployment system. Some of the things we'll need to consider could include:-->
 这在我们计划部署系统时很重要要记住。我们需要考虑的事情可能包括：
@@ -48,7 +48,7 @@ Fly.io 和 Render 至少比起许多其他类型的托管设置来说，发布�
 这只是部署中可能出现的一小部分问题，或者说，我们应该做好计划。无论发生什么，我们的部署系统**永远不应**将软件置于损坏状态。我们也应该始终知道（或者很容易找到）部署的状态。
 
 <!-- Another important rule to remember when it comes to deployments (and CI in general) is:-->
-另一個重要的規則，在部署（和一般的持續整合）時要記住的是：
+另一个重要的规则，在部署（和一般的持续整合）时要记住的是：
 <!--   "Silent failures are **very** bad!"-->
 **默默的失败是非常糟糕的！**
 
@@ -114,7 +114,7 @@ flyctl auth token
 你很快就需要令牌来部署工作流程了！
 
 <!-- Before setting up the deployment pipeline let us ensure that a manual deployment with the command <i>flyctl deploy</i> works.-->
-在設置部署管道之前，讓我們確保使用命令<i>flyctl deploy</i>可以進行手動部署。
+在设置部署管道之前，让我们确保使用命令<i>flyctl deploy</i>可以进行手动部署。
 
 <!-- You most likely need to do at least three changes. Firstly, define the Node version to use in the file <i>package.json</i> to match one used in your machine. For me it is 16.19.1:-->
 首先，在文件<i>package.json</i>中定义要使用的Node版本，以匹配您的机器使用的版本。对我来说是16.19.1：
@@ -276,7 +276,7 @@ app.get('/health', (req, res) => {
 ```
 
 <!-- Configure then a [HTTP-check](https://fly.io/docs/reference/configuration/#services-http_checks) that ensures the health of the depyments based on the HTTP request to the defined health check endpoint.-->
-配置一個[HTTP-check](https://fly.io/docs/reference/configuration/#services-http_checks)，根據對定義的健康檢查端點的HTTP請求，確保部署的健康狀態。
+配置一个[HTTP-check](https://fly.io/docs/reference/configuration/#services-http_checks)，根据对定义的健康检查端点的HTTP请求，确保部署的健康状态。
 
 <!-- Note that the default fly.toml has defined that <i>http\_checks</i> is an empty array. You need to remove this line when you are adding a manually defined HTTP-check:-->
 注意，默认的fly.toml中已经定义了<i>http\_checks</i>是一个空数组。当您添加一个手动定义的HTTP检查时，您需要删除此行：
@@ -545,7 +545,7 @@ app.get('/health', (req, res) => {
 推送代码到GitHub，确保不会部署坏版本，并且之前的应用程序保持运行。
 
 <!-- Before moving on, fix your deployment and ensure that the application works again as intended.-->
-在繼續前進之前，請修復你的部署並確保應用程序再次按預期工作。
+在继续前进之前，请修复你的部署并确保应用程序再次按预期工作。
 
 </div>
 
@@ -583,7 +583,7 @@ app.get('/health', (req, res) => {
 以下假设您使用社区开发的准备好的Heroku部署操作[AkhileshNS/heroku-deploy](https://github.com/AkhileshNS/heroku-deploy)。
 
 <!-- You need the authorization token that you just created for the deployment. The proper way to pass it''s value to GitHub Actions is to use repository secrets:-->
-你需要剛剛創建的授權令牌來部署。正確的傳遞它的值給GitHub Actions的方式是使用存儲庫秘密：
+你需要刚刚创建的授权令牌来部署。正确的传递它的值给GitHub Actions的方式是使用存储库秘密：
 
 ![repo secret](../../images/11/10x.png)
 
@@ -606,12 +606,12 @@ ${{secrets.HEROKU_API_KEY}}
 所以，添加一个合适的`Procfile`，确保应用程序启动正常。
 
 <!-- **Remember** that it is always essential to keep an eye on what is happening in server logs when playing around with product deployments, so use <code>heroku logs</code> early and use it often. No, use it all the time!-->
-**記住**，在玩弄產品部署時，總是必須密切留意伺服器日誌中發生的事情，因此要早早使用<code>heroku logs</code>，而且要經常使用它。不，要一直使用它！
+**记住**，在玩弄产品部署时，总是必须密切留意伺服器日志中发生的事情，因此要早早使用<code>heroku logs</code>，而且要经常使用它。不，要一直使用它！
 
 #### 11.11 Health check
 
 <!-- Before moving on let us expand the workflow with one more step, a check that ensures that the application is up and running after the deployment.-->
-在繼續前，讓我們增加一個步驟來擴展工作流程，即進行一個檢查，以確保部署後應用程序正常運行。
+在继续前，让我们增加一个步骤来扩展工作流程，即进行一个检查，以确保部署后应用程序正常运行。
 
 <!-- Actually a separate workflow step is not needed, since the action-->
 is already part of the existing workflow

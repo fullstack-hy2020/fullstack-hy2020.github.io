@@ -8,7 +8,7 @@ lang: zh
 <div class="content">
 
 <!-- The exercises in this seventh part of the course differ a bit from the ones before. In this and the next chapter, as usual, there are [exercises related to the theory in the chapter](/en/part7/react_router#exercises-7-1-7-3).-->
-在本課程的第七部分，練習與之前有些不同。在本章和下一章，和往常一樣，有[與章節理論相關的練習](/en/part7/react_router#exercises-7-1-7-3)。
+在本课程的第七部分，练习与之前有些不同。在本章和下一章，和往常一样，有[与章节理论相关的练习](/en/part7/react_router#exercises-7-1-7-3)。
 
 <!-- In addition to the exercises in this and the next chapter, there are a series of exercises in which we'll be revising what we've learned during the whole course by expanding the Bloglist application which we worked on during parts 4 and 5.-->
 此章和下一章的练习之外，我们还有一系列的练习，通过扩展我们在第4和第5部分工作的Bloglist应用程序，我们将复习整个课程中学到的内容。
@@ -50,7 +50,7 @@ lang: zh
 ![browser showing notes app with notes nav link](../../images/7/2ea.png)
 
 <!-- In an [old school web app](/en/part0/fundamentals_of_web_apps#traditional-web-applications), changing the page shown by the application would be accomplished by the browser making an HTTP GET request to the server and rendering the HTML representing the view that was returned.-->
-在一個[舊式的web應用程式](/en/part0/fundamentals_of_web_apps#traditional-web-applications)中，改變應用程式所顯示的頁面可以通過瀏覽器向伺服器發出HTTP GET請求並渲染返回的表示視圖的HTML來完成。
+在一个[旧式的web应用程式](/en/part0/fundamentals_of_web_apps#traditional-web-applications)中，改变应用程式所显示的页面可以通过浏览器向伺服器发出HTTP GET请求并渲染返回的表示视图的HTML来完成。
 
 <!-- In single-page apps, we are, in reality, always on the same page. The Javascript code run by the browser creates an illusion of different "pages". If HTTP requests are made when switching views, they are only for fetching JSON-formatted data, which the new view might require for it to be shown.-->
 在单页应用中，实际上我们总是在同一页面上。浏览器运行的 Javascript 代码创造出不同的“页面”的错觉。如果在切换视图时发出 HTTP 请求，它们只是用于获取 JSON 格式的数据，新视图可能需要这些数据才能显示。
@@ -198,7 +198,7 @@ import {
 <i>BrowserRouter</i> 是一种使用 HTML5 历史 API（pushState、replaceState 和 popState 事件）来保持 UI 与 URL 同步的<i>路由器</i>。
 
 <!-- Normally the browser loads a new page when the URL in the address bar changes. However, with the help of the [HTML5 history API](https://css-tricks.com/using-the-html5-history-api/), <i>BrowserRouter</i> enables us to use the URL in the address bar of the browser for internal "routing" in a React application. So, even if the URL in the address bar changes, the content of the page is only manipulated using Javascript, and the browser will not load new content from the server. Using the back and forward actions, as well as making bookmarks, is still logical like on a traditional web page.-->
-通常，當地址欄中的URL改變時，瀏覽器會加載一個新頁面。但是，借助[HTML5歷史API]（https://css-tricks.com/using-the-html5-history-api/），<i>BrowserRouter</i>可以讓我們在React應用程序中使用瀏覽器地址欄中的URL進行內部“路由”。因此，即使地址欄中的URL改變，頁面的內容也只能使用Javascript操作，而瀏覽器也不會從服務器加載新內容。使用后退和前進操作，以及做書簽，仍然像傳統網頁一樣合乎邏輯。
+通常，当地址栏中的URL改变时，浏览器会加载一个新页面。但是，借助[HTML5历史API]（https://css-tricks.com/using-the-html5-history-api/），<i>BrowserRouter</i>可以让我们在React应用程序中使用浏览器地址栏中的URL进行内部“路由”。因此，即使地址栏中的URL改变，页面的内容也只能使用Javascript操作，而浏览器也不会从服务器加载新内容。使用后退和前进操作，以及做书签，仍然像传统网页一样合乎逻辑。
 
 <!-- Inside the router, we define <i>links</i> that modify the address bar with the help of the [Link](https://reactrouter.com/en/main/components/link) component. For example,-->
 在路由器中，我们使用[Link](https://reactrouter.com/en/main/components/link)组件定义<i>链接</i>，以修改地址栏。例如，

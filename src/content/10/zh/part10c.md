@@ -121,7 +121,7 @@ export default RepositoryList;
 我们正在使用React的<em>useState</em>钩子来维护存储库列表状态，以及<em>useEffect</em>钩子来在<em>RepositoryList</em>组件挂载时调用<em>fetchRepositories</em>函数。我们将实际存储库提取到<em>repositoryNodes</em>变量中，并用它替换<em>FlatList</em>组件的<em>data</em>属性中先前使用的<em>repositories</em>变量。现在，您应该能够在审查的存储库列表中看到实际的服务器提供的数据。
 
 <!-- It is usually a good idea to log the server's response to be able to inspect it as we did in the <em>fetchRepositories</em> function. You should be able to see this log message in the Expo development tools if you navigate to your device's logs as we learned in the [Debugging](/en/part10/introduction_to_react_native#debugging) section. If you are using the Expo's mobile app for development and the network request is failing, make sure that the computer you are using to run the server and your phone are <i>connected to the same Wi-Fi network</i>. If that's not possible either use an emulator in the same computer as the server is running in or set up a tunnel to the localhost, for example, using [Ngrok](https://ngrok.com/).-->
-通常最好記錄服務器的響應，以便像我們在<em>fetchRepositories</em>函數中所做的那樣檢查它。如果您按照我們在[調試](/en/part10/introduction_to_react_native#debugging)部分學到的內容導航到設備的日誌，您應該能夠看到此日誌消息。如果您使用Expo的移動應用程序進行開發，並且網絡請求失敗，請確保用於運行服務器的計算機和您的手機<i>連接到同一個Wi-Fi網絡</i>。如果不可能，要么在與服務器運行的同一計算機上使用模擬器，要么使用[Ngrok](https://ngrok.com/)等設置對本地主機的隧道。
+通常最好记录服务器的响应，以便像我们在<em>fetchRepositories</em>函数中所做的那样检查它。如果您按照我们在[调试](/en/part10/introduction_to_react_native#debugging)部分学到的内容导航到设备的日志，您应该能够看到此日志消息。如果您使用Expo的移动应用程序进行开发，并且网络请求失败，请确保用于运行服务器的计算机和您的手机<i>连接到同一个Wi-Fi网络</i>。如果不可能，要么在与服务器运行的同一计算机上使用模拟器，要么使用[Ngrok](https://ngrok.com/)等设置对本地主机的隧道。
 
 <!-- The current data fetching code in the </em>RepositoryList</em> component could do with some refactoring. For instance, the component is aware of the network request's details such as the end point's URL. In addition, the data fetching code has lots of reuse potential. Let's refactor the component's code by extract the data fetching code into its own hook. Create a directory <i>hooks</i> in the <i>src</i> directory and in that <i>hooks</i> directory create a file <i>useRepositories.js</i> with the following content:-->
 当前在<em>RepositoryList</em>组件中的数据获取代码需要重构。例如，该组件知道网络请求的详细信息，如端点URL。此外，数据获取代码具有很多可重用性。让我们通过将数据获取代码提取到自己的钩子中来重构组件的代码。在<i>src</i>目录中创建一个<i>hooks</i>目录，并在该<i>hooks</i>目录中创建一个名为<i>useRepositories.js</i>的文件，其内容如下：
@@ -180,7 +180,7 @@ export default RepositoryList;
 ```
 
 <!-- That''s it, now the <em>RepositoryList</em> component is no longer aware of the way the repositories are acquired. Maybe in the future, we will acquire them through a GraphQL API instead of a REST API. We will see what happens.-->
-那就是了，現在<em>RepositoryList</em> 組件不再知道如何獲取存儲庫了。也許將來，我們會使用GraphQL API而不是REST API來獲取它們。我們將會看到會發生什麼事情。
+那就是了，现在<em>RepositoryList</em> 组件不再知道如何获取存储库了。也许将来，我们会使用GraphQL API而不是REST API来获取它们。我们将会看到会发生什么事情。
 
 ### GraphQL and Apollo client
 
@@ -193,7 +193,7 @@ export default RepositoryList;
 ![Apollo Sandbox](../../images/10/11.png)
 
 <!-- In our React Native application, we will be using the same [@apollo/client](https://www.npmjs.com/package/@apollo/client) library as in part 8. Let''s get started by installing the library along with the [graphql](https://www.npmjs.com/package/graphql) library which is required as a peer dependency:-->
-在我們的React Native應用程序中，我們將使用與第8部分相同的[@apollo/client](https://www.npmjs.com/package/@apollo/client)庫。 讓我們開始安裝該庫以及作為同行依賴項所需的[graphql](https://www.npmjs.com/package/graphql)庫：
+在我们的React Native应用程序中，我们将使用与第8部分相同的[@apollo/client](https://www.npmjs.com/package/@apollo/client)库。 让我们开始安装该库以及作为同行依赖项所需的[graphql](https://www.npmjs.com/package/graphql)库：
 
 ```shell
 npm install @apollo/client graphql
@@ -220,7 +220,7 @@ module.exports = defaultConfig;
 ```
 
 <!-- Restart the Expo development tools so that changes in the configuration are applied.-->
-重新啟動Expo開發工具，以便將配置更改應用。
+重新启动Expo开发工具，以便将配置更改应用。
 
 <!-- Now that the Metro configuration is in order, let''s create a utility function for creating the Apollo Client with the required configuration. Create a <i>utils</i> directory in the <i>src</i> directory and in that <i>utils</i> directory create a file <i>apolloClient.js</i>. In that file configure the Apollo Client to connect to the Apollo Server:-->
 现在Metro配置已经安排好了，让我们创建一个用于创建所需配置的Apollo Client的实用函数。在<i>src</i>目录下创建一个<i>utils</i>目录，在<i>utils</i>目录下创建一个<i>apolloClient.js</i>文件。在该文件中配置Apollo Client以连接Apollo Server：
@@ -371,7 +371,7 @@ useQuery(MY_QUERY, {
 ### Environment variables
 
 <!-- Every application will most likely run in more than one environment. Two obvious candidates for these environments are the development environment and the production environment. Out of these two, the development environment is the one we are running the application right now. Different environments usually have different dependencies, for example, the server we are developing locally might use a local database whereas the server that is deployed to the production environment uses the production database. To make the code environment independent we need to parametrize these dependencies. At the moment we are using one very environment dependant hardcoded value in our application: the URL of the server.-->
-每個應用程式很可能會在不止一個環境中運行。兩個明顯的環境候選者是開發環境和產品環境。其中，開發環境就是我們現在運行應用程式的環境。不同的環境通常有不同的依賴，例如，我們在本地開發的伺服器可能使用本地資料庫，而部署到產品環境的伺服器則使用產品資料庫。為了使代碼環境獨立，我們需要對這些依賴進行參數化。目前我們在應用程式中使用了一個非常環境依賴的硬編碼值：伺服器的URL。
+每个应用程式很可能会在不止一个环境中运行。两个明显的环境候选者是开发环境和产品环境。其中，开发环境就是我们现在运行应用程式的环境。不同的环境通常有不同的依赖，例如，我们在本地开发的伺服器可能使用本地资料库，而部署到产品环境的伺服器则使用产品资料库。为了使代码环境独立，我们需要对这些依赖进行参数化。目前我们在应用程式中使用了一个非常环境依赖的硬编码值：伺服器的URL。
 
 <!-- We have previously learned that we can provide running programs with environment variables. These variables can be defined in the command line or using environment configuration files such as <i>.env</i> files and third-party libraries such as <i>Dotenv</i>. Unfortunately, React Native doesn''t have direct support for environment variables. However, we can access the Expo configuration defined in the <i>app.json</i> file at runtime from our JavaScript code. This configuration can be used to define and access environment dependant variables.-->
 我们之前学习过，我们可以为运行程序提供环境变量。这些变量可以在命令行中定义，也可以使用环境配置文件（如<i>.env</i>文件）和第三方库（如<i>Dotenv</i>）定义。不幸的是，React Native没有直接支持环境变量。然而，我们可以从JavaScript代码中运行时访问<i>app.json</i>文件中定义的Expo配置。此配置可用于定义和访问与环境相关的变量。
@@ -862,7 +862,7 @@ const useSignIn = () => {
 能够向组件的后代提供数据，为 React Context 带来了大量的使用场景，正如我们在第 6 部分的[上一章](/en/part6/react_query_use_reducer_and_the_context)中所看到的。
 
 <!-- To learn more about these use cases, read Kent C. Dodds'' enlightening article [How to use React Context effectively](https://kentcdodds.com/blog/how-to-use-react-context-effectively) to find out how to combine the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) hook with the context to implement state management. You might find a way to use this knowledge in the upcoming exercises.-->
-要了解更多關於這些用例，請閱讀 Kent C. Dodds 的精彩文章[如何有效地使用 React Context](https://kentcdodds.com/blog/how-to-use-react-context-effectively)，以找出如何將[useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer)鉤與上下文結合以實現狀態管理。您可能會在即將到來的練習中找到一種使用這些知識的方法。
+要了解更多关于这些用例，请阅读 Kent C. Dodds 的精彩文章[如何有效地使用 React Context](https://kentcdodds.com/blog/how-to-use-react-context-effectively)，以找出如何将[useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer)钩与上下文结合以实现状态管理。您可能会在即将到来的练习中找到一种使用这些知识的方法。
 
 </div>
 

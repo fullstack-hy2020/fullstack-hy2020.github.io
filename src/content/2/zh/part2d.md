@@ -225,7 +225,7 @@ console.log(`importance of ${id} needs to be toggled`)
 ```
 
 <!-- We can now use the "dollar-bracket"-syntax to add parts to the string that will evaluate JavaScript expressions, e.g. the value of a variable. Note that we use backticks in template strings instead of quotation marks used in regular JavaScript strings.-->
-我們現在可以使用「美元-括號」語法來將部分添加到字符串中，該字符串將評估JavaScript表達式，例如變量的值。請注意，我們在模板字符串中使用反引號，而不是在普通JavaScript字符串中使用的引號。
+我们现在可以使用「美元-括号」语法来将部分添加到字符串中，该字符串将评估JavaScript表达式，例如变量的值。请注意，我们在模板字符串中使用反引号，而不是在普通JavaScript字符串中使用的引号。
 
 <!-- Individual notes stored in the json-server backend can be modified in two different ways by making HTTP requests to the note's unique URL. We can either <i>replace</i> the entire note with an HTTP PUT request or only change some of the note's properties with an HTTP PATCH request.-->
 在json-server后端存储的单个笔记可以通过向该笔记的唯一URL发出HTTP请求来进行两种不同的修改。我们可以使用HTTP PUT请求<i>替换</i>整个笔记，或者只使用HTTP PATCH请求更改笔记的某些属性。
@@ -262,7 +262,7 @@ const changedNote = { ...note, important: !note.important }
 ```
 
 <!-- In practice, <em>{ ...note }</em> creates a new object with copies of all the properties from the _note_ object. When we add properties inside the curly braces after the spread object, e.g. <em>{ ...note, important: true }</em>, then the value of the _important_ property of the new object will be _true_. In our example, the <em>important</em> property gets the negation of its previous value in the original object.-->
-在實踐中，<em>{ ...note }</em>創建一個新對象，對_note_對象的所有屬性進行拷貝。當我們在花括號中添加屬性時，例如<em>{ ...note, important: true }</em>，那么新對象的_important_屬性的值將為_true_。在我們的示例中，<em>important</em>屬性在原始對象中獲得其先前值的否定。
+在实践中，<em>{ ...note }</em>创建一个新对象，对_note_对象的所有属性进行拷贝。当我们在花括号中添加属性时，例如<em>{ ...note, important: true }</em>，那么新对象的_important_属性的值将为_true_。在我们的示例中，<em>important</em>属性在原始对象中获得其先前值的否定。
 
 <!-- There are a few things to point out. Why did we make a copy of the note object we wanted to modify when the following code also appears to work?-->
 这里有几件事要指出。当以下代码似乎也能正常工作时，为什么我们还要复制要修改的note对象？
@@ -403,7 +403,7 @@ export default App
 ```
 
 <!-- We could take our implementation a step further. When the <i>App</i> component uses the functions, it receives an object that contains the entire response for the HTTP request:-->
-我們可以將我們的實現推進一步。當<i>App</i>組件使用功能時，它收到一個對象，其中包含HTTP請求的整個響應：
+我们可以将我们的实现推进一步。当<i>App</i>组件使用功能时，它收到一个对象，其中包含HTTP请求的整个响应：
 
 ```js
 noteService
@@ -581,7 +581,7 @@ export default {
 ```
 
 <!-- The module exports the following, rather peculiar looking, object:-->
-模块輸出以下看起來比較特別的對象：
+模块输出以下看起来比较特别的对象：
 
 ```js
 {
@@ -642,7 +642,7 @@ const age = 0
 ```
 
 <!-- In older versions of JavaScript we had to define an object like this:-->
-在JavaScript的較舊版本中，我們必須像這樣定義一個對象：
+在JavaScript的较旧版本中，我们必须像这样定义一个对象：
 
 ```js
 const person = {
@@ -699,7 +699,7 @@ const getAll = () => {
 更常见的添加处理被拒绝的promise的方式是使用[catch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch)方法。
 
 <!-- In practice, the error handler for rejected promises is defined like this:-->
-在實務上，拒絕的承諾的錯誤處理程序是這樣定義的：
+在实务上，拒绝的承诺的错误处理程序是这样定义的：
 
 ```js
 axios
@@ -801,7 +801,7 @@ notes.filter(n => n.id !== id)
 全栈开发<i>非常困难</i>，这就是为什么我要用尽一切可能的手段来使它变得更容易。
 
 <!-- - I will have my browser developer console open all the time-->
-我會一直開著瀏覽器的開發者控制台。
+我会一直开著浏览器的开发者控制台。
 <!-- - <i>I will use the network tab of the browser dev tools to ensure that frontend and backend are communicating as I expect</i>-->
 我将使用浏览器开发工具的网络选项卡来确保前端和后端按照我的预期进行通信。
 <!-- - <i>I will constantly keep an eye on the state of the server to make sure that the data sent there by the frontend is saved there as I expect</i>-->

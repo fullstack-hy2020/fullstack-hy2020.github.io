@@ -115,7 +115,7 @@ $ DEBUG=playground:* npm start
 ```
 
 <!-- Great, so now we can navigate to [http://localhost:3000](http://localhost:3000) and the app is running there.-->
-好的，現在我們可以導航到[http://localhost:3000](http://localhost:3000)，應用程序就在那裡運行了。
+好的，现在我们可以导航到[http://localhost:3000](http://localhost:3000)，应用程序就在那里运行了。
 
 <!-- Containerizing that should be relatively easy based on the previous example.-->
 容器化应该根据先前的例子相对容易。
@@ -180,7 +180,7 @@ $ docker kill 48
 ```
 
 <!-- In the future, let's use the same port on both sides of _-p_. Just so we don't have to remember which one we happened to choose.-->
-未來，讓我們在_-p_的兩邊都使用同一個端口，這樣我們就不用記住我們恰巧選擇了哪一個。
+未来，让我们在_-p_的两边都使用同一个端口，这样我们就不用记住我们恰巧选择了哪一个。
 
 #### Fixing potential issues we created by copy-pasting
 
@@ -239,7 +239,7 @@ npm 安装可能有风险。npm 提供了一个更好的工具来安装依赖，
 ci 将遵循 package-lock.json，不会改变任何文件。
 
 <!-- So in short: _ci_ creates reliable builds, while _install_ is the one to use when you want to install new dependencies.-->
-所以簡而言之：_ci_ 創建可靠的構建，而 _install_ 是當你想安裝新的依賴時使用的。
+所以简而言之：_ci_ 创建可靠的构建，而 _install_ 是当你想安装新的依赖时使用的。
 
 <!-- As we are not installing anything new during the build step, and we don''t want the versions to suddenly change, we will use _ci_:-->
 正因为我们在构建步骤中没有安装任何新的东西，而且我们不希望版本突然改变，所以我们将使用_ci_：
@@ -257,7 +257,7 @@ CMD DEBUG=playground:* npm start
 ```
 
 <!-- Even better, we can use _npm ci --only=production_ to not waste time installing development dependencies.-->
-更好的是，我們可以使用 _npm ci --only=production_ 來不浪費時間安裝開發依賴關係。
+更好的是，我们可以使用 _npm ci --only=production_ 来不浪费时间安装开发依赖关系。
 
 <!-- > As you noticed in the comparison list; npm ci will delete the node_modules folder so creating the .dockerignore did not matter. However, .dockerignore is an amazing tool when you want to optimize your build process. We will talk briefly about these optimizations later.-->
 > 如你从比较列表中注意到的；npm ci 会删除 node_modules 文件夹，因此创建 .dockerignore 没有什么意义。然而，当你想要优化你的构建过程时，.dockerignore 是一个很棒的工具。我们稍后会简单谈谈这些优化。
@@ -518,7 +518,7 @@ db.todos.insert({ text: 'Learn about containers', done: false });
 这个文件将使用用户和几个todos初始化数据库。接下来，我们需要在启动时将其放入容器中。
 
 <!-- We could create a new image FROM mongo and COPY the file inside, or we can use a [bind mount](https://docs.docker.com/storage/bind-mounts/) to mount the file <i>mongo-init.js</i> to the container. Let''s do the latter.-->
-我們可以從Mongo建立一個新的映像檔並複製文件內部，或者我們可以使用[掛載](https://docs.docker.com/storage/bind-mounts/)將文件<i>mongo-init.js</i>掛載到容器中。讓我們做後者吧。
+我们可以从Mongo建立一个新的映像档并复制文件内部，或者我们可以使用[挂载](https://docs.docker.com/storage/bind-mounts/)将文件<i>mongo-init.js</i>挂载到容器中。让我们做后者吧。
 
 <!-- Bind mount is the act of binding a file (or directory) on the host machine to a file (or directory) in the container. A bind mount is done by adding a _-v_ flag with _container run_. The syntax is _-v FILE-IN-HOST:FILE-IN-CONTAINER_. Since we already learned about Docker Compose let''s skip that. The bind mount is declared under key <i>volumes</i> in docker-compose-yml. Otherwise the format is the same, first host and then container:-->
 绑定挂载是把主机上的文件（或目录）绑定到容器中的文件（或目录）的行为。使用 _-v_ 标记和 _container run_ 命令可以实现绑定挂载。语法为 _-v FILE-IN-HOST:FILE-IN-CONTAINER_。由于我们已经学习了 Docker Compose，我们就跳过这一步吧。绑定挂载在 docker-compose-yml 文件中的 <i>volumes</i> 键下声明。格式也是一样的，先是主机，然后是容器：
@@ -581,7 +581,7 @@ $ MONGO_URL=mongodb://the_username:the_password@localhost:3456/the_database npm 
 - 让Docker决定存储数据的位置（[卷](https://docs.docker.com/storage/volumes/)）
 
 <!-- I prefer the first choice in most cases whenever you <i>really</i> need to avoid deleting the data. Let''s see both in action with docker compose:-->
-我在大多數情況下都會偏好第一個選擇，只要你<i>真正</i>需要避免刪除數擇。讓我們用docker compose來看看兩者的實際操作：
+我在大多数情况下都会偏好第一个选择，只要你<i>真正</i>需要避免删除数择。让我们用docker compose来看看两者的实际操作：
 
 ```yml
 services:
@@ -700,7 +700,7 @@ $ docker container run -d nginx
 ```
 
 <!-- Ok, now the questions are:-->
-好的，現在問題是：
+好的，现在问题是：
 
 <!-- - Where should we go with our browser?-->
 我们应该用浏览器去哪里？
@@ -762,7 +762,7 @@ root@7edcb36aff08:/# rm index.html
 ```
 
 <!-- Now, if we go to http://localhost:8080/ we know that we deleted the correct file. The page shows 404. Let''s replace it with one containing the correct contents:-->
-現在，如果我們訪問http：//localhost：8080/，我們知道我們刪除了正確的文件。頁面顯示404。讓我們用一個包含正確內容的文件來替換它：
+现在，如果我们访问http：//localhost：8080/，我们知道我们删除了正确的文件。页面显示404。让我们用一个包含正确内容的文件来替换它：
 
 ```bash
 root@7edcb36aff08:/# echo "Hello, exec!" > index.html
@@ -780,7 +780,7 @@ root@7edcb36aff08:/# echo "Hello, exec!" > index.html
 #### Exercise 12.8: Mongo command-line interface
 
 <!-- > Use _script_ to record what you do, save the file as script-answers/exercise12_8.txt-->
-使用腳本記錄你所做的，將檔案儲存為script-answers/exercise12_8.txt
+使用脚本记录你所做的，将档案储存为script-answers/exercise12_8.txt
 
 <!-- While the MongoDB from the previous exercise is running, access the database with Mongo command-line interface (CLI). You can do that using docker exec. Then add a new todo using the CLI.-->
 而前面练习中的MongoDB正在运行时，使用Mongo命令行界面（CLI）访问数据库。 您可以使用docker exec来完成。 然后使用CLI添加新的待办事项。
@@ -911,7 +911,7 @@ const redis = require('../redis')
 ```
 
 <!-- to the Express server eg. in file <i>routes/index.js</i>. If nothing happens, the configuration is done right. If not, the server crashes:-->
-若沒有任何事情發生，則配置已經完成。若不然，服務器就會崩潰：將以下文字從英文翻譯為中文，保持markdown格式：對於Express服務器，例如在<i>routes/index.js</i>文件中。
+若没有任何事情发生，则配置已经完成。若不然，服务器就会崩溃：将以下文字从英文翻译为中文，保持markdown格式：对于Express服务器，例如在<i>routes/index.js</i>文件中。
 
 ```bash
 events.js:291
@@ -980,7 +980,7 @@ Emitted 'error' event on RedisClient instance at:
 
 `SET counter 9001`
 <!-- - Make sure that the new value works by refreshing the page http://localhost:3000/statistics-->
-確保新值通過刷新頁面 http://localhost:3000/statistics 來運作。
+确保新值通过刷新页面 http://localhost:3000/statistics 来运作。
 <!-- - Create a new todo with Postman and ensure from redis-cli that the counter has increased accordingly-->
 使用Postman创建一个新的todo，并确保从redis-cli中计数器已经相应增加。
 <!-- - Delete the key from cli and ensure that counter works when new todos are added-->
@@ -1007,7 +1007,7 @@ services:
 <!-- The data will now be persisted to directory <i>redis_data</i> of the host machine.-->
 将数据现在持久化到主机机器的<i>redis_data</i> 目录中。
 <!-- Remember to add the directory to .gitignore!-->
-記得將該目錄添加到`.gitignore`！
+记得将该目录添加到`.gitignore`！
 
 #### Other functionality of Redis
 

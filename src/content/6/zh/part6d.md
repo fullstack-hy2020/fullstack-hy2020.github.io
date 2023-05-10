@@ -54,7 +54,7 @@ export default App
 ### Managing data on the server with the React Query library
 
 <!-- We shall now use the [React Query](https://react-query-v3.tanstack.com/) library to store and manage data retrieved from the server.-->
-我們現在將使用 [React Query](https://react-query-v3.tanstack.com/) 庫來儲存和管理從伺服器檢索的資料。
+我们现在将使用 [React Query](https://react-query-v3.tanstack.com/) 库来储存和管理从伺服器检索的资料。
 
 <!-- Install the library with the command-->
 安装库使用命令：`pip install libraryname`
@@ -225,7 +225,7 @@ newNoteMutation.mutate({ content, important: true })
 ```
 
 <!-- Our solution is good. Except it doesn''t work. The new note is saved on the server, but it is not updated on the screen.-->
-我們的解決方案很好。但它不起作用。新的筆記已保存在服務器上，但它沒有更新到屏幕上。
+我们的解决方案很好。但它不起作用。新的笔记已保存在服务器上，但它没有更新到屏幕上。
 
 <!-- In order to render a new note as well, we need to tell React Query that the old result of the query whose key is the string <i>notes</i> should be [invalidated](https://tanstack.com/query/latest/docs/react/guides/invalidations-from-mutations).-->
 为了渲染新的note，我们需要告诉React Query，其key为字符串<i>notes</i>的查询的旧结果应该[失效](https://tanstack.com/query/latest/docs/react/guides/invalidations-from-mutations)。
@@ -295,7 +295,7 @@ const App = () => {
 ```
 
 <!-- So again, a mutation was created that invalidated the query <i>notes</i> so that the updated note is rendered correctly. Using mutation is easy, the method <i>mutate</i> receives a note as a parameter, the importance of which has been changed to the negation of the old value.-->
-所以再次，一個突變被創造出來，使查詢<i>筆記</i>無效，以便正確地呈現更新後的筆記。使用突變很容易，方法<i>突變</i>接收一個筆記作為參數，其重要性已被改為舊值的否定。
+所以再次，一个突变被创造出来，使查询<i>笔记</i>无效，以便正确地呈现更新后的笔记。使用突变很容易，方法<i>突变</i>接收一个笔记作为参数，其重要性已被改为旧值的否定。
 
 <!-- The current code for the application is in [GitHub](https://github.com/fullstack-hy2020/query-notes/tree/part6-2) in the branch <i>part6-2</i>.-->
 当前应用程序的代码在[GitHub](https://github.com/fullstack-hy2020/query-notes/tree/part6-2)的<i>part6-2</i>分支上。
@@ -868,7 +868,7 @@ export default Button
 #### Exercise 6.24.
 
 <!-- As stated in exercise 6.21, the server requires that the content of the anecdote to be added is at least 5 characters long. Now implement error handling for the insertion. In practice, it is sufficient to display a notification to the user in case of a failed POST request:-->
-根據第6.21題所述，服務器要求新增的anecdote內容至少要有5個字符。現在對新增操作加入錯誤處理。在實踐中，只要在POST請求失敗時向用戶顯示提示即可：
+根据第6.21题所述，服务器要求新增的anecdote内容至少要有5个字符。现在对新增操作加入错误处理。在实践中，只要在POST请求失败时向用户显示提示即可：
 
 ![browser showing error notification for trying to add too short of an anecdoate](../../images/6/67new.png)
 

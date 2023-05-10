@@ -8,7 +8,7 @@ lang: zh
 <div class="content">
 
 <!-- We will now add user management to our application, but let''s first start using a database for storing data.-->
-我們現在將為我們的應用程序添加用戶管理，但讓我們先開始使用數據庫來存儲數據。
+我们现在将为我们的应用程序添加用户管理，但让我们先开始使用数据库来存储数据。
 
 ### Mongoose and Apollo
 
@@ -369,7 +369,7 @@ mutation {
 ```
 
 <!-- Just like in the previous case with REST, the idea now is that a logged-in user adds a token they receive upon login to all of their requests. And just like with REST, the token is added to GraphQL queries using the <i>Authorization</i> header.-->
-就像之前在REST中一樣，現在的想法是，登錄的用戶將在登錄時收到的令牌添加到所有請求中。就像REST一樣，令牌使用<i>授權</i>頭添加到GraphQL查詢中。
+就像之前在REST中一样，现在的想法是，登录的用户将在登录时收到的令牌添加到所有请求中。就像REST一样，令牌使用<i>授权</i>头添加到GraphQL查询中。
 
 <!-- In the Apollo Explorer, the header is added to a query like so:-->
 在Apollo Explorer中，头部被添加到查询中，如下所示：
@@ -488,7 +488,7 @@ type Mutation {
 ```
 
 <!-- And the mutation''s resolver:-->
-而突變的解決方案：
+而突变的解决方案：
 
 ```js
   addAsFriend: async (root, args, { currentUser }) => {
@@ -562,7 +562,7 @@ query {
 更改图书馆应用程序，使其将数据保存到数据库中。您可以从[这里](https://github.com/fullstack-hy/misc/blob/main/library-schema.md)找到图书和作者的<i>mongoose模式</i>。
 
 <!-- Let''s change the book graphql schema a little-->
-讓我們改變一下書籍graphql架構吧！
+让我们改变一下书籍graphql架构吧！
 
 ```js
 type Book {
@@ -677,6 +677,6 @@ type Mutation {
 使得*addBook*和*editAuthor*只有在请求包含有效令牌时才可能。
 
 <!-- (Don''t worry about fixing the frontend for the moment.)-->
-不用擔心現在前端的修復。
+不用担心现在前端的修复。
 
 </div>

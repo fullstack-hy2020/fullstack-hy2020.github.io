@@ -77,7 +77,7 @@ json-server存储所有数据在<i>db.json</i>文件中，该文件位于服务�
 ### The browser as a runtime environment
 
 <!-- Our first task is fetching the already existing notes to our React application from the address <http://localhost:3001/notes>.-->
-我們的第一個任務是從地址<http://localhost:3001/notes>中獲取已經存在的筆記到我們的React應用程序中。
+我们的第一个任务是从地址<http://localhost:3001/notes>中获取已经存在的笔记到我们的React应用程序中。
 
 <!-- In the part0 [example project](/en/part0/fundamentals_of_web_apps#running-application-logic-on-the-browser), we already learned a way to fetch data from a server using JavaScript. The code in the example was fetching the data using [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest), otherwise known as an HTTP request made using an XHR object. This is a technique introduced in 1999, which every browser has supported for a good while now.-->
 在第0部分[示例项目](/en/part0/fundamentals_of_web_apps#running-application-logic-on-the-browser)中，我们已经学习了一种使用JavaScript从服务器获取数据的方法。示例中的代码是使用[XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest)获取数据，也称为使用XHR对象发出的HTTP请求。这是一种在1999年引入的技术，现在每个浏览器都支持它。
@@ -132,7 +132,7 @@ notes.forEach(m => {
 当一个异步操作完成，或者更具体地说，在它完成之后的某个时刻，JavaScript引擎会调用为此操作注册的事件处理函数。
 
 <!-- Currently, JavaScript engines are <i>single-threaded</i>, which means that they cannot execute code in parallel. As a result, it is a requirement in practice to use a non-blocking model for executing IO operations. Otherwise, the browser would "freeze" during, for instance, the fetching of data from a server.-->
-目前，JavaScript 引擎是<i>單線程</i>的，這意味著它們無法平行執行代碼。因此，在實踐中，需要使用非阻塞模型來執行 IO 操作。否則，在從服務器獲取數據時，瀏覽器將會“冻結”。
+目前，JavaScript 引擎是<i>单线程</i>的，这意味著它们无法平行执行代码。因此，在实践中，需要使用非阻塞模型来执行 IO 操作。否则，在从服务器获取数据时，浏览器将会“冻结”。
 
 <!-- Another consequence of this single-threaded nature of JavaScript engines is that if some code execution takes up a lot of time, the browser will get stuck for the duration of the execution. If we added the following code at the top of our application:-->
 另一个JavaScript引擎单线程的后果是，如果某些代码执行需要很长时间，浏览器将在执行期间被卡住。如果我们在应用程序的顶部添加以下代码：
@@ -158,7 +158,7 @@ setTimeout(() => {
 在互联网上可以找到大量有关此主题的附加材料。其中一个特别清晰的介绍是Philip Roberts的主题演讲[到底什么是事件循环？](https://www.youtube.com/watch?v=8aGhZQkoFbQ)
 
 <!-- In today''s browsers, it is possible to run parallelized code with the help of so-called [web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers). The event loop of an individual browser window is, however, still only handled by a [single thread](https://medium.com/techtrument/multithreading-javascript-46156179cf9a).-->
-在今天的瀏覽器中，可以利用所謂的[網頁工作者](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers)來運行並行代碼。然而，個別瀏覽器視窗的事件循環仍然僅由[單個線程](https://medium.com/techtrument/multithreading-javascript-46156179cf9a)處理。
+在今天的浏览器中，可以利用所谓的[网页工作者](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers)来运行并行代码。然而，个别浏览器视窗的事件循环仍然仅由[单个线程](https://medium.com/techtrument/multithreading-javascript-46156179cf9a)处理。
 
 ### npm
 
@@ -172,7 +172,7 @@ setTimeout(() => {
 那么说来，我们将使用[axios](https://github.com/axios/axios)库来代替浏览器和服务器之间的通信。 它的功能类似于fetch，但使用起来更加愉快。 另一个使用axios的好原因是我们熟悉将外部库，即所谓的<i>npm 包</i>添加到React项目中。
 
 <!-- Nowadays, practically all JavaScript projects are defined using the node package manager, aka [npm](https://docs.npmjs.com/getting-started/what-is-npm). The projects created using create-react-app also follow the npm format. A clear indicator that a project uses npm is the <i>package.json</i> file located at the root of the project:-->
-現在，幾乎所有JavaScript專案都是使用節點套件管理器（也就是[npm](https://docs.npmjs.com/getting-started/what-is-npm)）定義的。 使用create-react-app創建的專案也遵循npm格式。 清楚地表明專案使用npm的指標是位於專案根目錄下的<i>package.json</i>文件：
+现在，几乎所有JavaScript专案都是使用节点套件管理器（也就是[npm](https://docs.npmjs.com/getting-started/what-is-npm)）定义的。 使用create-react-app创建的专案也遵循npm格式。 清楚地表明专案使用npm的指标是位于专案根目录下的<i>package.json</i>文件：
 
 ```json
 {
@@ -277,7 +277,7 @@ npm install json-server --save-dev
 ```
 
 <!-- We can now conveniently, without parameter definitions, start the json-server from the project root directory with the command:-->
-我們現在可以很方便的，在不需要參數定義的情況下，從專案根目錄啟動 json-server，命令如下：
+我们现在可以很方便的，在不需要参数定义的情况下，从专案根目录启动 json-server，命令如下：
 
 ```js
 npm run server
@@ -345,7 +345,7 @@ console.log(promise2)
 Axios 的方法 _get_ 返回一个[承诺](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises)。
 
 <!-- The documentation on Mozilla''s site states the following about promises:-->
-Mozilla 的網站上的文件說明如下有關於承諾：
+Mozilla 的网站上的文件说明如下有关于承诺：
 
 <!-- > <i>A Promise is an object representing the eventual completion or failure of an asynchronous operation.</i>-->
 > <i>承诺是一个代表异步操作最终完成或失败的对象。</i>
@@ -533,7 +533,7 @@ response => {
 当数据从服务器接收到时，JavaScript运行时会调用注册为事件处理程序的函数，该函数将 <i>promise fulfilled</i> 打印到控制台，并使用函数 <em>setNotes(response.data)</em>将从服务器接收到的笔记存储到状态中。
 
 <!-- As always, a call to a state-updating function triggers the re-rendering of the component. As a result, <i>render 3 notes</i> is printed to the console, and the notes fetched from the server are rendered to the screen.-->
-如往常一樣，調用狀態更新函數就會觸發組件的重新渲染。結果，控制台會打印出 <i>渲染3個筆記</i>，並將從服務器獲取的筆記渲染到屏幕上。
+如往常一样，调用状态更新函数就会触发组件的重新渲染。结果，控制台会打印出 <i>渲染3个笔记</i>，并将从服务器获取的笔记渲染到屏幕上。
 
 <!-- Finally, let''s take a look at the definition of the effect hook as a whole:-->
 最后，让我们总体看一下 effect hook 的定义：

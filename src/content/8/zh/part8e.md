@@ -7,7 +7,7 @@ lang: zh
 <div class="content">
 
 <!-- We are approaching the end of this part. Let''s finish by having a look at a few more details of GraphQL.-->
-我們快要到達這一部分的結尾了。讓我們來看看 GraphQL 的一些更多細節吧。
+我们快要到达这一部分的结尾了。让我们来看看 GraphQL 的一些更多细节吧。
 
 ### Fragments
 
@@ -30,7 +30,7 @@ query {
 ```
 
 <!-- and the query for all persons-->
-查詢所有人：
+查询所有人：
 
 SELECT * FROM Persons
 
@@ -85,7 +85,7 @@ query {
 <i><strong>不是</strong></i>在GraphQL架构中定义的片段，而是在客户端中定义的。当客户端使用它们进行查询时，必须声明片段。
 
 <!-- In principle, we could declare the fragment with each query like so:-->
-原則上，我們可以像這樣宣告每個查詢的片段：
+原则上，我们可以像这样宣告每个查询的片段：
 
 ```js
 export const FIND_PERSON = gql`
@@ -143,14 +143,14 @@ export const FIND_PERSON = gql`
 随着查询和变更类型，GraphQL提供了第三种操作类型：[订阅](https://www.apollographql.com/docs/react/data/subscriptions/)。 通过订阅，客户端可以<i>订阅</i>有关服务器更改的更新。
 
 <!-- Subscriptions are radically different from anything we have seen in this course so far. Until now, all interaction between browser and server was due to a React application in the browser making HTTP requests to the server. GraphQL queries and mutations have also been done this way.-->
-訂閱與我們在本課程中看到的任何東西都大不相同。到目前為止，瀏覽器和伺服器之間的所有交互都是由瀏覽器中的React應用程序向伺服器發出HTTP請求而實現的。 GraphQL查詢和突變也是這樣做的。
+订阅与我们在本课程中看到的任何东西都大不相同。到目前为止，浏览器和伺服器之间的所有交互都是由浏览器中的React应用程序向伺服器发出HTTP请求而实现的。 GraphQL查询和突变也是这样做的。
 <!-- With subscriptions, the situation is the opposite. After an application has made a subscription, it starts to listen to the server.-->
 随着订阅，情况恰恰相反。在应用程序已经做出订阅之后，它开始侦听服务器。
 <!-- When changes occur on the server, it sends a notification to all of its <i>subscribers</i>.-->
 当服务器发生变化时，它会向所有<i>订阅者</i>发送通知。
 
 <!-- Technically speaking, the HTTP protocol is not well-suited for communication from the server to the browser. So, under the hood, Apollo uses [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) for server subscriber communication.-->
-技術上來說，HTTP 協定不適合用於從伺服器到瀏覽器的通訊。因此，Apollo 在底層使用[WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API)來進行伺服器訂閱通訊。
+技术上来说，HTTP 协定不适合用于从伺服器到浏览器的通讯。因此，Apollo 在底层使用[WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API)来进行伺服器订阅通讯。
 
 ### Refactoring the backend
 
@@ -381,7 +381,7 @@ npm install express cors
 ```
 
 <!-- and the file <i>index.js</i> changes to:-->
-把下面的文字從英文翻譯成中文，保持markdown格式：以及<i>index.js</i>檔案改為：
+把下面的文字从英文翻译成中文，保持markdown格式：以及<i>index.js</i>档案改为：
 
 ```
 console.log('Hello World!');
@@ -594,7 +594,7 @@ start()
 WebSocket是GraphQL订阅的完美匹配，因为当使用WebSocket时，服务器也可以发起通信。
 
 <!-- The subscription *personAdded* needs a resolver. The *addPerson* resolver also has to be modified so that it sends a notification to subscribers.-->
-訂閱*personAdded*需要一個解析器。 *addPerson*解析器也必須被修改，以便它向訂閱者發送通知。
+订阅*personAdded*需要一个解析器。 *addPerson*解析器也必须被修改，以便它向订阅者发送通知。
 
 <!-- The required changes are as follows:-->
 以下是所需的更改：

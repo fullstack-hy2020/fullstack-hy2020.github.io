@@ -8,7 +8,7 @@ lang: zh
 <div class="content">
 
 <!-- Before we start delving into how you can use TypeScript with React, we should first have a look at what we want to achieve. When everything works as it should, TypeScript will help us catch the following errors:-->
-在我們開始深入研究如何將TypeScript與React結合使用之前，我們應該先看看我們想要達成的目標。當一切都按預期運行時，TypeScript將會幫助我們捕捉以下錯誤：
+在我们开始深入研究如何将TypeScript与React结合使用之前，我们应该先看看我们想要达成的目标。当一切都按预期运行时，TypeScript将会帮助我们捕捉以下错误：
 
 <!-- - Trying to pass an extra/unwanted prop to a component-->
 尝试向组件传递额外/不需要的prop
@@ -125,12 +125,12 @@ other apps.
 ```
 
 <!-- Since the return type of most React components is generally either *JSX.Element* or *null*, we have loosened up the default linting rules a bit by disabling the rules [explicit-function-return-type](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-function-return-type.md) and [explicit-module-boundary-types](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-module-boundary-types.md).-->
-由於大多數 React 組件的返回類型通常是 *JSX.Element* 或 *null*，我們已經放寬了默認的 linting 規則，通過禁用[explicit-function-return-type](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-function-return-type.md)和[explicit-module-boundary-types](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-module-boundary-types.md)規則來實現。
+由于大多数 React 组件的返回类型通常是 *JSX.Element* 或 *null*，我们已经放宽了默认的 linting 规则，通过禁用[explicit-function-return-type](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-function-return-type.md)和[explicit-module-boundary-types](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-module-boundary-types.md)规则来实现。
 <!-- Now we don''t need to explicitly state our function return types everywhere. We will also disable [react/react-in-jsx-scope](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/react-in-jsx-scope.md) since importing React is [no longer needed](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html) in every file.-->
 现在我们不需要在每个地方都明确声明函数的返回类型。由于[不再需要](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html)在每个文件中导入React，我们也将禁用[react/react-in-jsx-scope](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/react-in-jsx-scope.md)。
 
 <!-- Next, we need to get our linting script to parse <i>*.tsx </i> files, which are the TypeScript equivalent of React''s JSX files.-->
-下一步，我們需要讓我們的 linting 腳本解析 <i>*.tsx </i> 檔案，它們是 TypeScript 的 React 的 JSX 檔案的等價物。
+下一步，我们需要让我们的 linting 脚本解析 <i>*.tsx </i> 档案，它们是 TypeScript 的 React 的 JSX 档案的等价物。
 <!-- We can do that by altering our lint command in <i>package.json</i> to the following:-->
 我们可以通过更改<i>package.json</i>中的lint命令来实现：
 
@@ -249,7 +249,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(  // 
 <!-- We need to do this since the *ReactDOM.createRoot* takes an HTMLElement as a parameter but the return value of function *document.getElementById* has the following type-->
 :
 
-我們需要這樣做，因為*ReactDOM.createRoot*需要一個HTMLElement作為參數，但是函數*document.getElementById*的返回值的類型是：
+我们需要这样做，因为*ReactDOM.createRoot*需要一个HTMLElement作为参数，但是函数*document.getElementById*的返回值的类型是：
 
 ```js
 HTMLElement | null
@@ -367,7 +367,7 @@ const App = () => {
 ### Deeper type usage
 
 <!-- In the previous exercise, we had three parts of a course, and all parts had the same attributes *name* and *exerciseCount*. But what if we needed additional attributes for the parts where all parts do not have the same attributes? How would this look, codewise? Let''s consider the following example:-->
-在前一個練習中，我們有三個課程的部分，所有部分都具有相同的屬性*名稱*和*練習計數*。但是，如果我們需要為所有部分都不相同屬性的部分添加額外屬性時，代碼會是什么樣子？讓我們考慮以下示例：
+在前一个练习中，我们有三个课程的部分，所有部分都具有相同的属性*名称*和*练习计数*。但是，如果我们需要为所有部分都不相同属性的部分添加额外属性时，代码会是什么样子？让我们考虑以下示例：
 
 ```js
 const courseParts = [
@@ -503,7 +503,7 @@ const App = () => {
 ![vscode exerciseCoutn not assignable to type CoursePart - description missing](../../images/9/63new.png)
 
 <!-- Since our new entry has the attribute *kind* with value *"basic"* TypeScript knows that the entry does not only have the type *CoursePart* but it is actually meant to be a *CoursePartBasic*. So here the attribute *kind* "narrows" the type of the entry from a more general to a more specific type that has a certain set of attributes. We shall soon see this style of type narrowing in action in the code!-->
-因為我們的新項目有屬性*kind*，值為*"basic"*，TypeScript知道該項目不僅具有類型*CoursePart*，而且它實際上應該是一個*CoursePartBasic*。因此，屬性*kind*將條目的類型從更一般的類型窄化為具有一定屬性集的更具體的類型。我們很快就會在代碼中看到這種類型窄化的風格！
+因为我们的新项目有属性*kind*，值为*"basic"*，TypeScript知道该项目不仅具有类型*CoursePart*，而且它实际上应该是一个*CoursePartBasic*。因此，属性*kind*将条目的类型从更一般的类型窄化为具有一定属性集的更具体的类型。我们很快就会在代码中看到这种类型窄化的风格！
 
 <!-- But we''re not satisfied yet! There is still a lot of duplication in our types, and we want to avoid that. We start by identifying the attributes all course parts have in common, and defining a base type that contains them. Then we will [extend](https://www.typescriptlang.org/docs/handbook/2/objects.html#extending-types) that base type to create our kind-specific types:-->
 但我们还不满意！我们的类型中仍然有很多重复，我们想避免这种情况。我们首先确定所有课程部分具有的属性，并定义一个包含它们的基本类型。然后，我们将[扩展](https://www.typescriptlang.org/docs/handbook/2/objects.html#extending-types)该基本类型以创建我们特定类型的类型：
@@ -1049,7 +1049,7 @@ const App = () => {
 ```
 
 <!-- So just like with *useState*, we gave a type  parameter to *axios.get* to instruct it how the typing should be done. Just like *useState* also *axios.get* is a [generic function](https://www.typescriptlang.org/docs/handbook/2/generics.html#working-with-generic-type-variables). Unlike some generic functions, the type parameter of *axios.get* has a default value *any* so, if the function is used without defining the type parameter, the type of the response data will be any.-->
-所以就像*useState*一樣，我們給了一個型別參數給*axios.get*來指示它如何完成類型定義。就像*useState*一樣，*axios.get*也是一個[泛型函數](https://www.typescriptlang.org/docs/handbook/2/generics.html#working-with-generic-type-variables)。不像某些泛型函數，*axios.get*的型別參數有一個默認值*any*，所以如果函數在不定義型別參數的情況下使用，響應數據的類型將是任何類型。
+所以就像*useState*一样，我们给了一个型别参数给*axios.get*来指示它如何完成类型定义。就像*useState*一样，*axios.get*也是一个[泛型函数](https://www.typescriptlang.org/docs/handbook/2/generics.html#working-with-generic-type-variables)。不像某些泛型函数，*axios.get*的型别参数有一个默认值*any*，所以如果函数在不定义型别参数的情况下使用，响应数据的类型将是任何类型。
 
 <!-- The code works, compiler and Eslint are happy and remain quiet. However, giving a type parameter to *axios.get* is a potentially dangerous thing to do. The response body can contain data in an arbitrary form, and when giving a type parameter we are essentially just telling to TypeScript compiler to trust us that the data has type *Note[]*.-->
 代码运行正常，编译器和Eslint都很满意并保持安静。但是，给*axios.get*提供类型参数可能是一件危险的事情。响应体可以以任意形式包含数据，而当我们提供类型参数时，我们本质上只是告诉TypeScript编译器相信我们，数据具有类型*Note[]*。
@@ -1237,7 +1237,7 @@ TypeScript 文档[推荐在大多数情况下使用接口](https://www.typescrip
 在本节的应用程序的类似配置下创建一个TypeScript React应用程序。 从后端获取日记并将其渲染到屏幕上。 执行所有必要的键入，并确保没有Eslint错误。
 
 <!-- Remember to keep the network tab open. It might give you a valuable hint...-->
-記得保持網絡選項開啟，它可能會給你一個寶貴的提示...
+记得保持网络选项开启，它可能会给你一个宝贵的提示...
 
 <!-- You can decide how the diary entries are rendered. If you wish, you may take inspiration form the figure below. Note that the backend API does not return the diary comments, you may modify it to return also those on a GET request.-->
 你可以决定日记条目的呈现方式。如果你愿意，可以从下面的图中获取灵感。请注意，后端API不会返回日记评论，你可以修改它以在 GET 请求中也返回这些评论。

@@ -59,7 +59,7 @@ capabilities.
 
 在本节中，我们将描述TypeScript语言的一些关键特性。其目的是为您提供TypeScript功能的基本了解。
 <!-- key features to help you understand more of what is to come during this course.-->
-# 主要特性，協助您更加了解此課程中將會涉及到的內容
+# 主要特性，协助您更加了解此课程中将会涉及到的内容
 
 #### Type annotations
 
@@ -92,7 +92,7 @@ TypeScript 是一种结构类型的语言。在结构类型中，如果第一个
 TypeScript 编译器可以尝试推断类型信息，如果没有指定类型。变量的类型可以根据其赋值和使用情况推断出来。类型推断发生在初始化变量和成员、设置参数默认值以及确定函数返回类型时。
 
 <!-- For example, consider the function *add*:-->
-例如，考慮函數*add*：
+例如，考虑函数*add*：
 
 ```js
 const add = (a: number, b: number) => {

@@ -26,7 +26,7 @@ Visual Studio Code 调试器在某些情况下可能很有用。你可以像这�
 **注意，应用程序不应该在另一个控制台中运行，否则端口将已经被使用。**
 
 <!-- __NB__ A newer version of Visual Studio Code may have _Run_ instead of _Debug_. Furthermore, you may have to configure your _launch.json_ file to start debugging. This can be done by choosing _Add Configuration..._ on the drop-down menu, which is located next to the green play button and above _VARIABLES_ menu, and select _Run "npm start" in a debug terminal_. For more detailed setup instructions, visit Visual Studio Code''s [Debugging documentation](https://code.visualstudio.com/docs/editor/debugging).-->
-__NB__ 可能會有比 _Debug_ 更新版本的 Visual Studio Code。此外，您可能需要配置 _launch.json_ 檔案才能開始偵錯。這可以通過在綠色播放按鈕旁的下拉式功能表上選擇 _Add Configuration..._，並在 _VARIABLES_ 功能表上方選擇 _Run "npm start" in a debug terminal_ 來完成。有關更詳細的設定說明，請訪問 Visual Studio Code 的[偵錯文檔](https://code.visualstudio.com/docs/editor/debugging)。
+__NB__ 可能会有比 _Debug_ 更新版本的 Visual Studio Code。此外，您可能需要配置 _launch.json_ 档案才能开始侦错。这可以通过在绿色播放按钮旁的下拉式功能表上选择 _Add Configuration..._，并在 _VARIABLES_ 功能表上方选择 _Run "npm start" in a debug terminal_ 来完成。有关更详细的设定说明，请访问 Visual Studio Code 的[侦错文档](https://code.visualstudio.com/docs/editor/debugging)。
 
 <!-- Below you can see a screenshot where the code execution has been paused in the middle of saving a new note:-->
 下面你可以看到一张截图，其中代码执行已经暂停，正在保存一条新笔记：
@@ -224,7 +224,7 @@ const password = process.argv[2]
 ![mongodb databases browse collections button](../../images/3/mongo7.png)
 
 <!-- As the view states, the <i>document</i> matching the note has been added to the <i>notes</i> collection in the <i>myFirstDatabase</i> database.-->
-根據此視圖所述，筆記所對應的文件已添加到名為myFirstDatabase的數據庫中的notes集合中。
+根据此视图所述，笔记所对应的文件已添加到名为myFirstDatabase的数据库中的notes集合中。
 
 ![mongodb collections tab db myfirst app notes](../../images/3/mongo8new.png)
 
@@ -441,7 +441,7 @@ Person
 ### Connecting the backend to a database
 
 <!-- Now we have enough knowledge to start using Mongo in our notes application backend.-->
-現在我們有足夠的知識開始在我們的筆記應用後端使用Mongo了。
+现在我们有足够的知识开始在我们的笔记应用后端使用Mongo了。
 
 <!-- Let''s get a quick start by copy-pasting the Mongoose definitions to the <i>index.js</i> file:-->
 让我们通过将Mongoose定义复制粘贴到<i>index.js</i>文件中来快速开始：

@@ -387,7 +387,7 @@ const App = () => {
 ```
 
 <!-- We could do the same for the log in form, but we''ll leave that for an optional exercise.-->
-我們也可以對登入表單做同樣的事情，但我們將把它留給作為一個可選的練習。
+我们也可以对登入表单做同样的事情，但我们将把它留给作为一个可选的练习。
 
 <!-- The application code can be found on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5),-->
 or you can clone the repository
@@ -477,7 +477,7 @@ export default Togglable
 组件使用[useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle)钩子来使其<i>toggleVisibility</i>函数在组件之外可用。
 
 <!-- We can now hide the form by calling <i>noteFormRef.current.toggleVisibility()</i> after a new note has been created:-->
-我們現在可以在新建筆記後呼叫<i>noteFormRef.current.toggleVisibility()</i> 來隱藏表單。
+我们现在可以在新建笔记后呼叫<i>noteFormRef.current.toggleVisibility()</i> 来隐藏表单。
 
 ```js
 const App = () => {
@@ -539,7 +539,7 @@ const Togglable = () => ...
 ```
 
 <!-- We create <i>three separate instances of the component</i> that all have their separate state:-->
-我們創建<i>三個獨立的組件實例</i>，它們都有自己的狀態：
+我们创建<i>三个独立的组件实例</i>，它们都有自己的状态：
 
 ![browser of three togglable components](../../images/5/12e.png)
 
@@ -558,7 +558,7 @@ const Togglable = () => ...
 全栈开发<i>非常困难</i>，所以我会尽可能多的手段来让它变得更容易。
 
 <!-- - I will have my browser developer console open all the time-->
-我會一直開著瀏覽器開發者控制台。
+我会一直开著浏览器开发者控制台。
 <!-- - I will use the network tab of the browser dev tools to ensure that frontend and backend are communicating as I expect-->
 我将使用浏览器开发工具的网络选项卡来确保前端和后端按照我的预期进行通信。
 <!-- - I will constantly keep an eye on the state of the server to make sure that the data sent there by the frontend is saved there as I expect-->
@@ -580,7 +580,7 @@ const Togglable = () => ...
 
 如果我的代码不起作用，我不会再写更多的代码。相反，我会开始删除代码，直到它可以工作，或者只是返回到一个所有事情都仍然正常工作的状态。
 <!-- - If a test does not pass, I make sure that the tested functionality for sure works in the application-->
-如果測試不通過，我確保應用程序中測試的功能確實有效。
+如果测试不通过，我确保应用程序中测试的功能确实有效。
 <!-- - When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](https://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord-telegram) how to ask for help-->
 当我在课程Discord或Telegram频道或其他地方寻求帮助时，我会正确地提出问题，[参见此处](https://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord-telegram)如何寻求帮助。
 
@@ -816,7 +816,7 @@ LoginForm.propTypes = {
 ### ESlint
 
 <!-- In part 3 we configured the [ESlint](/en/part3/validation_and_es_lint#lint) code style tool to the backend. Let''s take ESlint to use in the frontend as well.-->
-在第三部分，我們將[ESlint](/en/part3/validation_and_es_lint#lint)代碼風格工具配置到了後端。讓我們也將ESlint用於前端。
+在第三部分，我们将[ESlint](/en/part3/validation_and_es_lint#lint)代码风格工具配置到了后端。让我们也将ESlint用于前端。
 
 <!-- Create-react-app has installed ESlint to the project by default, so all that''s left for us to do is define our desired configuration in the <i>.eslintrc.js</i> file.-->
 默认情况下，Create-react-app已经将ESLint安装到项目中，因此我们要做的就是在<i>.eslintrc.js</i>文件中定义所需的配置。

@@ -389,7 +389,7 @@ note => <li key={note.id}>{note.content}</li>
 ### Anti-pattern: Array Indexes as Keys
 
 <!-- We could have made the error message on our console disappear by using the array indexes as keys. The indexes can be retrieved by passing a second parameter to the callback function of the _map_ method:-->
-我們可以通過使用陣列索引作為鍵，使控制台上的錯誤訊息消失。可以通過將第二個參數傳遞給_map_方法的回調函數來獲取索引。
+我们可以通过使用阵列索引作为键，使控制台上的错误讯息消失。可以通过将第二个参数传递给_map_方法的回调函数来获取索引。
 
 ```js
 notes.map((note, i) => ...)
@@ -477,7 +477,7 @@ const App = ({ notes }) => {
 一个完整的React应用程序可以写在一个文件中。当然，这并不是很实用。通常的做法是将每个组件声明在其自己的文件中作为<i>ES6模块</i>。
 
 <!-- We have been using modules the whole time. The first few lines of the file <i>index.js</i>:-->
-我們一直在使用模組。<i>index.js</i>文件的前幾行：
+我们一直在使用模组。<i>index.js</i>文件的前几行：
 
 ```js
 import ReactDOM from "react-dom/client"
@@ -492,7 +492,7 @@ import App from "./App"
 让我们把我们的<i>笔记</i>组件移动到它自己的模块中。
 
 <!-- In smaller applications, components are usually placed in a directory called <i>components</i>, which is in turn placed within the <i>src</i> directory. The convention is to name the file after the component.-->
-在較小的應用程式中，組件通常放置在一個叫做<i>components</i>的目錄中，而該目錄又放置在<i>src</i>目錄中。習慣是將文件命名為該組件的名稱。
+在较小的应用程式中，组件通常放置在一个叫做<i>components</i>的目录中，而该目录又放置在<i>src</i>目录中。习惯是将文件命名为该组件的名称。
 
 <!-- Now, we''ll create a directory called <i>components</i> for our application and place a file named <i>Note.js</i> inside.-->
 现在，我们为我们的应用程序创建一个名为<i>components</i>的目录，并在其中放置一个名为<i>Note.js</i>的文件。
@@ -587,7 +587,7 @@ const App = () => {
 ```
 
 <!-- We'll hone in on the reason for the breakdown by adding <em>console.log</em> commands to the code. Because the first thing to be rendered is the <i>App</i> component, it's worth putting the first <em>console.log</em> there:-->
-我們將通過添加<em>console.log</em>命令來精確定位故障原因。因為最先被渲染的是<i>App</i>組件，因此在那裡放置第一個<em>console.log</em>是值得的：
+我们将通过添加<em>console.log</em>命令来精确定位故障原因。因为最先被渲染的是<i>App</i>组件，因此在那里放置第一个<em>console.log</em>是值得的：
 
 ```js
 const App = () => {
@@ -663,7 +663,7 @@ const Course = (props) => { // highlight-line
 编程很难，这就是为什么我会用一切可能的手段来让它变得更容易。
 
 <!-- - I will have my browser developer console open all the time-->
-我會一直開著瀏覽器開發者控制台。
+我会一直开著浏览器开发者控制台。
 <!-- - I progress with small steps-->
 我一步一步地进步。
 <!-- - I will write lots of _console.log_ statements to make sure I understand how the code behaves and to help pinpointing problems-->

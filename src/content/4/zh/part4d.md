@@ -171,7 +171,7 @@ app.use('/api/login', loginRouter)
 <i>持有人</i>方案适合我们的需求。
 
 <!-- In practice, this means that if the token is, for example, the string <i>eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW</i>, the Authorization header will have the value:-->
-在實踐中，這意味著如果標記是例如字符串<i>eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW</i>，授權標頭將具有值：
+在实践中，这意味著如果标记是例如字符串<i>eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW</i>，授权标头将具有值：
 
 <pre>
 Bearer eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW
@@ -574,7 +574,7 @@ app.use('/api/login', loginRouter)
 ```
 
 <!-- we could register it to be only executed with path <i>/api/blogs</i> routes:-->
-我們可以將它註冊為只能用路徑<i>/api/blogs</i>路由執行：
+我们可以将它注册为只能用路径<i>/api/blogs</i>路由执行：
 
 ```js
 // use the middleware only in /api/blogs routes

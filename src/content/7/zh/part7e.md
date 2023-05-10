@@ -10,7 +10,7 @@ lang: zh
 ### Class Components
 
 <!-- During the course, we have only used React components having been defined as Javascript functions. This was not possible without the [hook](https://reactjs.org/docs/hooks-intro.html) functionality that came with version 16.8 of React. Before, when defining a component that uses state, one had to define it using Javascript''s [Class](https://reactjs.org/docs/state-and-lifecycle.html#converting-a-function-to-a-class) syntax.-->
-在本課程中，我們只使用定義為Javascript函數的React組件。若沒有React 16.8版本中提供的[hook](https://reactjs.org/docs/hooks-intro.html)功能，這是不可能的。在此之前，如果要定義使用狀態的組件，則必須使用Javascript的[Class](https://reactjs.org/docs/state-and-lifecycle.html#converting-a-function-to-a-class)語法來定義。
+在本课程中，我们只使用定义为Javascript函数的React组件。若没有React 16.8版本中提供的[hook](https://reactjs.org/docs/hooks-intro.html)功能，这是不可能的。在此之前，如果要定义使用状态的组件，则必须使用Javascript的[Class](https://reactjs.org/docs/state-and-lifecycle.html#converting-a-function-to-a-class)语法来定义。
 
 <!-- It is beneficial to at least be familiar with Class Components to some extent since the world contains a lot of old React code, which will probably never be completely rewritten using the updated syntax.-->
 至少要熟悉类组件，因为世界上有很多旧的 React 代码，这些代码可能永远不会用更新的语法重写，这是有益的。
@@ -121,7 +121,7 @@ class App extends React.Component {
 调用`setState`方法总是会触发类组件的重新渲染，即调用`_render_`方法。
 
 <!-- We''ll finish off the component with the ability to change the shown anecdote. The following is the code for the entire component with the addition highlighted:-->
-我們將以更改顯示的故事的能力來完成該組件。以下是整個組件的代碼，其中顯示了增加的部分：
+我们将以更改显示的故事的能力来完成该组件。以下是整个组件的代码，其中显示了增加的部分：
 
 ```js
 class App extends React.Component {
@@ -321,7 +321,7 @@ let query = "SELECT * FROM Users WHERE name = '" + userName + "';"
 <!-- Now let''s assume that a malicious user <i>Arto Hellas</i> would define their name as-->
 `<script>alert("Hacked!")</script>`.
 
-現在假設一個惡意使用者<i>Arto Hellas</i>將他們的名字定義為`<script>alert("Hacked!")</script>`。
+现在假设一个恶意使用者<i>Arto Hellas</i>将他们的名字定义为`<script>alert("Hacked!")</script>`。
 
 <pre>
 Arto Hell-as''; DROP TABLE Users; --
@@ -358,7 +358,7 @@ NoSQL 数据库也有可能受到注入攻击。但是，mongoose 通过[清理]
 ![browser showing notes with XSS attempt](../../images/7/32e.png)
 
 <!-- since React [takes care of sanitizing data in variables](https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks). Some versions of React [have been vulnerable](https://medium.com/dailyjs/exploiting-script-injection-flaws-in-reactjs-883fb1fe36c1) to XSS attacks. The security holes have of course been patched, but there is no guarantee that there couldn''t be any more.-->
-由於 React [會負責對變數中的資料進行消毒](https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks)，某些版本的 React [可能會受到 XSS 攻擊](https://medium.com/dailyjs/exploiting-script-injection-flaws-in-reactjs-883fb1fe36c1)。當然，安全漏洞已經被修補，但不能保證不會有更多漏洞。
+由于 React [会负责对变数中的资料进行消毒](https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks)，某些版本的 React [可能会受到 XSS 攻击](https://medium.com/dailyjs/exploiting-script-injection-flaws-in-reactjs-883fb1fe36c1)。当然，安全漏洞已经被修补，但不能保证不会有更多漏洞。
 
 <!-- One needs to remain vigilant when using libraries; if there are security updates to those libraries, it is advisable to update those libraries in one's applications. Security updates for Express are found in the [library's documentation](https://expressjs.com/en/advanced/security-updates.html) and the ones for Node are found in [this blog](https://nodejs.org/en/blog/).-->
 一旦使用库时，需要保持警惕；如果这些库有安全更新，建议在应用程序中更新这些库。Express 的安全更新可以在[库文档](https://expressjs.com/en/advanced/security-updates.html)中找到，而 Node 的安全更新可以在[这个博客](https://nodejs.org/en/blog/)中找到。
@@ -555,7 +555,7 @@ npx create-react-app my-app --template cra-template-pwa
 #### Microservice architecture
 
 <!-- During this course, we have only scratched the surface of the server end of things. In our applications, we had a <i>monolithic</i> backend, meaning one application making up a whole and running on a single server, serving only a few API endpoints.-->
-在本課程中，我們只接觸到了服務器端的一面。在我們的應用程序中，我們有一個<i>單体后端</i>，意味著一個應用程序組成了整個系統，並運行在單個服務器上，只提供少量的API端點。
+在本课程中，我们只接触到了服务器端的一面。在我们的应用程序中，我们有一个<i>单体后端</i>，意味著一个应用程序组成了整个系统，并运行在单个服务器上，只提供少量的API端点。
 
 <!-- As the application grows, the monolithic backend approach starts turning problematic both in terms of performance and maintainability.-->
 随着应用程序的增长，单体后端方法在性能和可维护性方面开始出现问题。
@@ -668,7 +668,7 @@ Hello, my name is John
 
 生活是一种美妙的体验，它可以让我们感受到每一个瞬间的欢乐。它教会我们如何去面
 <!-- > No exceptions.-->
-沒有例外。
+没有例外。
 <!-- >-->
 I am a student
 

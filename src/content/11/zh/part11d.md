@@ -78,7 +78,7 @@ on:
 #### 11.13 Pull request
 
 <!-- Update the trigger of the existing workflow as suggested above to run on new pull requests to your main branch.-->
-按照上述建議更新現有工作流程的觸發器，以在您的主分支上執行新的拉取請求。
+按照上述建议更新现有工作流程的触发器，以在您的主分支上执行新的拉取请求。
 
 <!-- Create a new branch, commit your changes, and open a pull request to your main branch.-->
 创建一个新的分支，提交您的更改，并向主分支发起拉取请求。
@@ -135,7 +135,7 @@ if: ${{ github.event_name == 'push' }}
 #### Semantic Versioning and Hash Versioning
 
 <!-- How an application is versioned is sometimes called a versioning strategy. We''ll look at and compare two such strategies.-->
-如何版本化一個應用程式有時被稱為版本策略。我們將比較兩種此類策略。
+如何版本化一个应用程式有时被称为版本策略。我们将比较两种此类策略。
 
 <!-- The first one is [semantic versioning](https://semver.org/), where a version is in the form <code>{major}.{minor}.{patch}</code>. For example, if the version is <code>1.2.3</code>, it has <code>1</code> as the major version, <code>2</code> is the minor version, and <code>3</code> is the patch version.-->
 [语义版本控制](https://semver.org/)，版本格式为<code>{major}.{minor}.{patch}</code>。例如，版本号为<code>1.2.3</code>，其中<code>1</code>为主要版本号，<code>2</code>为次要版本号，<code>3</code>为补丁版本号。
@@ -202,7 +202,7 @@ if: ${{ github.event_name == 'push' }}
 有一个把柄。我们在本节开头讨论过，我们总是需要精确地知道我们的代码在发生什么，例如，我们需要确保我们已经测试了我们要部署的代码。拥有两个并行的版本（或命名）约定可能会使这变得更加困难。
 
 <!-- For example, when we have a project that uses hash-based artifact builds for testing, it''s always possible to track the result of every build, lint, and test to a specific commit and developers know the state their code is in. This is all automated and transparent to the developers. They never need to be aware of the fact that the CI system is using the commit hash underneath to name build and test artifacts. When the developers merge their code to the main branch, again the CI takes over. This time, it will build and test all the code and give it a semantic version number all in one go. It attaches the version number to the relevant commit with a Git tag.-->
-例如，當我們有一個使用基於哈希的工件建構來測試的專案時，可以隨時跟蹤每個建構，lint和測試的結果與特定的提交相關聯，開發人員知道他們的代碼处於什麼狀態。這一切都是自動化的，對開發人員透明。他們永遠不需要意識到CI系統正在使用提交哈希來命名建構和測試工件。當開發人員將他們的代碼合併到主分支時，CI再次接管。這次，它將構建和測試所有代碼，並以一個步驟將該版本號附加到相應的提交上，並使用Git標籤標記。
+例如，当我们有一个使用基于哈希的工件建构来测试的专案时，可以随时跟踪每个建构，lint和测试的结果与特定的提交相关联，开发人员知道他们的代码处于什么状态。这一切都是自动化的，对开发人员透明。他们永远不需要意识到CI系统正在使用提交哈希来命名建构和测试工件。当开发人员将他们的代码合并到主分支时，CI再次接管。这次，它将构建和测试所有代码，并以一个步骤将该版本号附加到相应的提交上，并使用Git标签标记。
 
 <!-- In the case above, the software we release is tested because the CI system makes sure that tests are run on the code it is about to tag. It would not be incorrect to say that the project uses semantic versioning and simply ignore that the CI system tests individual developer branches/PRs with a hash-based naming system. We do this because the version we care about (the one that is released) is given a semantic version.-->
 在上述情况下，我们发布的软件是经过测试的，因为CI系统确保在要标记的代码上运行测试。不能说该项目使用语义版本并忽略CI系统使用基于哈希的命名系统对单个开发者分支/PR进行测试是不正确的。我们这样做是因为我们关心的版本（发布的版本）被赋予语义版本。
@@ -235,7 +235,7 @@ if: ${{ github.event_name == 'push' }}
 我们正在向动作传递环境变量<code>secrets.GITHUB\_TOKEN</code>。由于它是第三方动作，它需要令牌来认证您的存储库。您可以在[此处](https://docs.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token)了解有关GitHub动作认证的更多信息。
 
 <!-- You may end up having this error message-->
-你可能會遇到這個錯誤訊息
+你可能会遇到这个错误讯息
 
 ![Submissions](../../images/11/tag-error.png)
 

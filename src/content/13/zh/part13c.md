@@ -124,7 +124,7 @@ npm install umzug
 ```
 
 <!-- Let''s change the file <i>util/db.js</i> that handles the connection to the database as follows:-->
-讓我們更改處理與資料庫連接的檔案 <i>util/db.js</i> 如下：
+让我们更改处理与资料库连接的档案 <i>util/db.js</i> 如下：
 
 ```js
 const Sequelize = require('sequelize')
@@ -172,10 +172,10 @@ module.exports = { connectToDatabase, sequelize }
 ```
 
 <!-- The <i>runMigrations</i> function that performs migrations is now executed every time the application opens a database connection when it starts. Sequelize keeps track of which migrations have already been completed, so if there are no new migrations, running the <i>runMigrations</i> function does nothing.-->
-<i>runMigrations</i> 功能現在每次應用程序啟動時開啟數據庫連接時都會執行遷移。Sequelize追蹤哪些遷移已經完成，因此如果沒有新的遷移，執行<i>runMigrations</i>功能將不會有任何作用。
+<i>runMigrations</i> 功能现在每次应用程序启动时开启数据库连接时都会执行迁移。Sequelize追踪哪些迁移已经完成，因此如果没有新的迁移，执行<i>runMigrations</i>功能将不会有任何作用。
 
 <!-- Now let''s start with a clean slate and remove all existing database tables from the application:-->
-現在讓我們從一個乾淨的開始，從應用程序中移除所有現有的資料庫表：
+现在让我们从一个干净的开始，从应用程序中移除所有现有的资料库表：
 
 ```sql
 username => drop table notes;
@@ -376,7 +376,7 @@ username => select * from users;
 ```
 
 <!-- And make sure that logging in is no longer possible-->
-確保登錄不再可能。
+确保登录不再可能。
 
 ![](../../images/13/2.png)
 
@@ -546,7 +546,7 @@ rollbackMigration()
 ```
 
 <!-- So we can now undo the previous migration by running _npm run migration:down_ from the command line.-->
-所以我們現在可以從命令行執行`npm run migration:down`來撤銷之前的遷移。
+所以我们现在可以从命令行执行`npm run migration:down`来撤销之前的迁移。
 
 <!-- Migrations are currently executed automatically when the program is started. In the development phase of the program, it might sometimes be more appropriate to disable the automatic execution of migrations and make migrations manually from the command line.-->
 程序启动时当前会自动执行迁移操作。在程序的开发阶段，有时可能更合适地禁用自动执行迁移，并从命令行手动执行迁移。
@@ -577,7 +577,7 @@ rollbackMigration()
 #### Task 13.18.
 
 <!-- Expand your application (by migration) so that the blogs have a year written attribute, i.e. a field <i>year</i> which is an integer at least equal to 1991 but not greater than the current year. Make sure the application gives an appropriate error message if an incorrect value is attempted to be given for a year written.-->
-(透過遷移)擴展您的應用程序，使博客具有一個年份屬性，即<i>年份</i>字段，該字段的整數值至少等於1991，但不大於當前年份。確保應用程序在嘗試給出錯誤的年份值時給出適當的錯誤信息。
+(透过迁移)扩展您的应用程序，使博客具有一个年份属性，即<i>年份</i>字段，该字段的整数值至少等于1991，但不大于当前年份。确保应用程序在尝试给出错误的年份值时给出适当的错误信息。
 
 </div>
 
@@ -752,7 +752,7 @@ await queryInterface.createTable('memberships', {
 ```
 
 <!-- in the model, the same fields are defined in camel case:-->
-在模型中，同一字段以駝峰式定義：
+在模型中，同一字段以驼峰式定义：
 
 ```js
 Membership.init({
@@ -1176,7 +1176,7 @@ router.get('/:id', async (req, res) => {
 给用户在系统上添加博客到<i>阅读列表</i>的能力。当添加到阅读列表时，博客应处于<i>未读</i>状态。稍后可以将博客标记为<i>已读</i>。使用连接表实现阅读列表。使用迁移进行数据库更改。
 
 <!-- In this task, adding to a reading list and displaying the list need not be successful other than directly using the database.-->
-在這個任務中，除了直接使用數據庫外，對閱讀清單進行添加和顯示也不一定能成功。
+在这个任务中，除了直接使用数据库外，对阅读清单进行添加和显示也不一定能成功。
 
 #### Exercise 13.20.
 
@@ -1669,7 +1669,7 @@ npx sequelize-cli model:generate --name User --attributes name:string,username:s
 一条允许用户“注销”系统的路由，即从数据库中删除活动会话，该路由可以是_DELETE /api/logout_
 
 <!-- Keep in mind that actions requiring login should not be successful with an "expired token", i.e. with the same token after logging out.-->
-請記住，需要登錄的操作在使用"過期令牌"時不應該成功，也就是在登出後使用同一個令牌。
+请记住，需要登录的操作在使用"过期令牌"时不应该成功，也就是在登出后使用同一个令牌。
 
 <!-- You may also choose to use some purpose-built npm library to handle sessions.-->
 你也可以选择使用一些专门用于处理会话的npm库。

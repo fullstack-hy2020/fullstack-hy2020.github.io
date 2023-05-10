@@ -14,6 +14,6 @@ lang: zh
 
 <i>Part updated 30th Jan 2023</i>
 <!-- - <i>A new section on React Query, useReducer and React context replaced the section on Redux connect</i>-->
-<i>新增了一個關於 React Query、useReducer 和 React context 的部分，取代了原本關於 Redux connect 的部分</i>
+<i>新增了一个关于 React Query、useReducer 和 React context 的部分，取代了原本关于 Redux connect 的部分</i>
 
 </div>

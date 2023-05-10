@@ -229,7 +229,7 @@ app.use('/api/notes', notesRouter)
 我们之前定义的路由器会在请求的URL以<i>/api/notes</i>开头时使用。因此，notesRouter对象必须只定义相对路径的部分，即空路径<i>/</i>或仅参数<i>/:id</i>。
 
 <!-- After making these changes, our <i>app.js</i> file looks like this:-->
-在做出這些更改後，我們的<i>app.js</i>檔案會長這樣：
+在做出这些更改后，我们的<i>app.js</i>档案会长这样：
 
 ```js
 const config = require('./utils/config')
@@ -386,7 +386,7 @@ module.exports = {
 ```
 
 <!-- The file exports <i>an object</i> that has two fields, both of which are functions. The functions can be used in two different ways. The first option is to require the whole object and refer to functions through the object using the dot notation:-->
-文件輸出<i>一個對象</i>，該對象具有兩個字段，兩個字段均為函數。這些函數可以以兩種不同的方式使用。第一個選項是需要整個對象，並通過對象使用點記法引用函數：
+文件输出<i>一个对象</i>，该对象具有两个字段，两个字段均为函数。这些函数可以以两种不同的方式使用。第一个选项是需要整个对象，并通过对象使用点记法引用函数：
 
 ```js
 const logger = require('./utils/logger')
@@ -546,7 +546,7 @@ module.exports = {
 > _平均值_ 函数使用数组 [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) 方法。如果这种方法对你还不太熟悉，那么现在是一个很好的时间去观看 YouTube 上的 [Functional Javascript](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84) 系列的前三个视频。
 
 <!-- There are many different testing libraries or <i>test runners</i> available for JavaScript. In this course we will be using a testing library developed and used internally by Facebook called [jest](https://jestjs.io/), which resembles the previous king of JavaScript testing libraries [Mocha](https://mochajs.org/).-->
-有許多不同的測試庫或<i>測試執行器</i>可用於JavaScript。在本課程中，我們將使用由Facebook內部開發並使用的測試庫[jest](https://jestjs.io/)，它類似於以前的JavaScript測試庫[Mocha](https://mochajs.org/)之王。
+有许多不同的测试库或<i>测试执行器</i>可用于JavaScript。在本课程中，我们将使用由Facebook内部开发并使用的测试库[jest](https://jestjs.io/)，它类似于以前的JavaScript测试库[Mocha](https://mochajs.org/)之王。
 
 <!-- Jest is a natural choice for this course, as it works well for testing backends, and it shines when it comes to testing React applications.-->
 Jest是这门课程的自然之选，因为它很适合测试后端，而且在测试React应用程序时表现更出色。

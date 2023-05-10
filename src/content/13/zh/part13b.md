@@ -670,7 +670,7 @@ const note = await Note.create({ ...req.body, userId: user.id, date: new Date() 
 ```
 
 <!-- The reason for this is that we specified in the file <i>models/index.js</i> that there is a one-to-many connection between users and notes:-->
-原因是我們在文件<i>models/index.js</i>中指定用戶與筆記之間有一對多關係：
+原因是我们在文件<i>models/index.js</i>中指定用户与笔记之间有一对多关系：
 
 ```js
 const Note = require('./note')
@@ -767,7 +767,7 @@ Note.belongsTo(User)
 用户名（字符串，不能为空）
 
 <!-- Unlike in the material, do not prevent Sequelize from creating [timestamps](https://sequelize.org/master/manual/model-basics.html#timestamps) <i>created\_at</i> and <i>updated\_at</i> for users-->
-不像在材料中一樣，不要阻止Sequelize為用戶創建[timestamps](https://sequelize.org/master/manual/model-basics.html#timestamps) <i>created\_at</i> 和 <i>updated\_at</i>。
+不像在材料中一样，不要阻止Sequelize为用户创建[timestamps](https://sequelize.org/master/manual/model-basics.html#timestamps) <i>created\_at</i> 和 <i>updated\_at</i>。
 
 <!-- All users can have the same password as the material. You can also choose to properly implement passwords as in [part 4](/en/part4/user_administration).-->
 所有用户都可以有相同的密码作为材料。您也可以选择按照[第4章节](/en/part4/user_administration)正确实施密码。
@@ -895,7 +895,7 @@ router.get('/', async (req, res) => {
 <!-- The <i>important</i> object now stores the query condition. The default query is-->
 <b>all</b>
 
-<i>重要</i> 物件現在儲存查詢條件。預設查詢是 <b>全部</b>
+<i>重要</i> 物件现在储存查询条件。预设查询是 <b>全部</b>
 
 ```js
 where: {

@@ -512,7 +512,7 @@ lang: zh
 #### Expanding on Full stack open
 
 <!-- You can just pick up where you left off! If you wish to resubmit a whole part, please contact the course personnel via [email](mailto:matti.luukkainen@helsinki.fi) or Discord <i>mluukkai</i>, with your GitHub username and which parts you would like to have deleted from your submissions.-->
-你可以从你停下的地方继续学习！如果你希望重新提交整个章节，请通过[电子邮件](mailto:matti.luukkainen@helsinki.fi)或Discord <i>mluukkai</i>与课程人员进行联系，告知你的GitHub用户名以及你希望从提交中刪除的部分。
+你可以从你停下的地方继续学习！如果你希望重新提交整个章节，请通过[电子邮件](mailto:matti.luukkainen@helsinki.fi)或Discord <i>mluukkai</i>与课程人员进行联系，告知你的GitHub用户名以及你希望从提交中删除的部分。
 
 #### Expanding on the University of Helsinki instance of this course
 

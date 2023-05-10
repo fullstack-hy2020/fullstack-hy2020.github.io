@@ -43,7 +43,7 @@ GitHub Actions 基于[工作流](https://docs.github.com/en/free-pro-team@latest
 <!-- - The CI needs to be aware that the repository (and the configuration file within it) exist-->
 CI需要意识到存在这个仓库（以及其中的配置文件）。
 <!-- - The CI needs to be able to access the repository-->
-CI 需要能夠訪問該存儲庫
+CI 需要能够访问该存储库
 <!-- - The CI needs permissions to perform the actions it is supposed to be able to do:-->
 CI 需要权限才能执行它被设定应该能够做的动作：
 <!--   For example, if the CI needs to be able to deploy to a production environment, it needs <i>credentials</i> for that environment.-->
@@ -67,7 +67,7 @@ GitHub Actions 相比于自托管的解决方案有一个很大的优势：代�
 #### 11.2 The example project
 
 <!-- The first thing you''ll want to do is to fork the example repository under your name. What it essentially does is it creates a copy of the repository under your GitHub user profile for your use.-->
-第一件你想要做的事情是在你的名字下fork一個示例庫。它本質上做的就是在你的GitHub用戶資料庫中創建一個複製，供你使用。
+第一件你想要做的事情是在你的名字下fork一个示例库。它本质上做的就是在你的GitHub用户资料库中创建一个复制，供你使用。
 
 <!-- To fork the repository, you can click on the Fork button in the top-right area of the repository view next to the Star button:-->
 点击仓库视图右上角附近的Star按钮旁边的Fork按钮即可fork仓库：
@@ -304,13 +304,13 @@ jobs:
 #### Setting up the environment
 
 <!-- Setting up the environment is an important task while configuring a pipeline. We're going to use an <code>ubuntu-20.04</code> virtual environment because this is the version of Ubuntu we're going to be running in production.-->
-設定環境是配置管道時的一項重要任務。我們將使用<code>ubuntu-20.04</code>虛擬環境，因為這是我們將在生產環境中運行的Ubuntu版本。
+设定环境是配置管道时的一项重要任务。我们将使用<code>ubuntu-20.04</code>虚拟环境，因为这是我们将在生产环境中运行的Ubuntu版本。
 
 <!-- It is important to replicate the same environment in CI as in production as closely as possible, to avoid situations where the same code works differently in CI and production, which would effectively defeat the purpose of using CI.-->
 重要的是，尽可能地复制CI和生产环境中的相同环境，以避免相同代码在CI和生产环境中表现不同的情况，这实际上会使用CI失去意义。
 
 <!-- Next, we list the steps in the "build" job that the CI would need to perform. As we noticed in the last exercise, by default the virtual environment does not have any code in it, so we need to <i>checkout the code</i> from the repository.-->
-接下來，我們列出CI需要執行的「構建」作業步驟。正如我們在上一個練習中所注意到的，預設情況下虛擬環境中沒有任何代碼，因此我們需要從存儲庫中<i>檢出代碼</i>。
+接下来，我们列出CI需要执行的「构建」作业步骤。正如我们在上一个练习中所注意到的，预设情况下虚拟环境中没有任何代码，因此我们需要从存储库中<i>检出代码</i>。
 
 <!-- This is an easy step:-->
 这是一个容易的步骤：
@@ -353,7 +353,7 @@ jobs:
 ```
 
 <!-- As we can see, the [with](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepswith) keyword is used to give a "parameter" to the action. Here the parameter specifies the version of Node.js we want to use.-->
-正如我們所看到的，[with](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepswith) 關鍵字用於為動作提供一個“參數”。在這裡，參數指定了我們要使用的Node.js版本。
+正如我们所看到的，[with](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepswith) 关键字用于为动作提供一个“参数”。在这里，参数指定了我们要使用的Node.js版本。
 
 
 <!-- Lastly, the dependencies of the application must be installed. Just like on your own machine we execute <code>npm install</code>. The steps in the job should now look something like-->
@@ -455,7 +455,7 @@ _名称_：做点什么
 #### 11.8 Back to green
 
 <!-- Investigate which test fails and fix the issue in the code (do not change the tests).-->
-探索哪個測試失敗了，並在代碼中修復該問題（不要改變測試）。
+探索哪个测试失败了，并在代码中修复该问题（不要改变测试）。
 
 <!-- Once you have fixed all the issues and the Pokedex is bug-free, the workflow run will succeed and show green!-->
 一旦你修复了所有的问题，Pokedex也没有bug，工作流就会成功地运行并显示绿色！
@@ -471,7 +471,7 @@ _名称_：做点什么
 测试组件的孤立性是非常有用的，但这仍然不能确保整个系统按照我们的意愿工作。为了更有信心，让我们用[Cypress](https://www.cypress.io/)库编写一些非常简单的端到端测试，就像我们在第5部分的[端到端测试](/en/part5/end_to_end_testing)中所做的那样。
 
 <!-- So, setup Cypress (you''ll find [here](/en/part5/end_to_end_testing/) all info you need) and use this test at first:-->
-所以，設置Cypress（你會在[這裡](/en/part5/end_to_end_testing/)找到你所需的所有信息），並且首先使用這個測試：
+所以，设置Cypress（你会在[这里](/en/part5/end_to_end_testing/)找到你所需的所有信息），并且首先使用这个测试：
 
 ```js
 describe('Pokedex', function() {
@@ -518,7 +518,7 @@ describe('Pokedex', function() {
 **注意**：口袋妖怪的能力也是用小写字母写的，大小写是用CSS实现的，所以<i>不要</i>搜索比如<i>Chlorophyll</i>，而是<i>chlorophyll</i>。
 
 <!-- **Note2** that you should not try <i>bulbasaur</i>, for some reason the page of that particular Pokemon does not work properly...-->
-**注意2**：你不應該試試<i>bulbasaur</i>，由於某些原因該特定Pokemon的頁面無法正常工作...
+**注意2**：你不应该试试<i>bulbasaur</i>，由于某些原因该特定Pokemon的页面无法正常工作...
 
 <!-- The end result should be something like this-->
 # 结果

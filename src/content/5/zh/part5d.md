@@ -51,14 +51,14 @@ npm install --save-dev cypress
 ```
 
 <!-- and by adding an npm-script to run it:-->
-# 翻譯
+# 翻译
 
-以下文本從英語翻譯為中文，保持標記語言格式：並通過添加npm腳本來運行它：
+以下文本从英语翻译为中文，保持标记语言格式：并通过添加npm脚本来运行它：
 
 ```
 Adding an npm-script to run it
 
-添加npm腳本來運行它
+添加npm脚本来运行它
 ```
 
 ```js
@@ -76,7 +76,7 @@ Adding an npm-script to run it
 ```
 
 <!-- Unlike the frontend''s unit tests, Cypress tests can be in the frontend or the backend repository, or even in their separate repository.-->
-不像前端的單元測試，Cypress 測試可以在前端或後端存儲庫中，甚至可以在它們的獨立存儲庫中。
+不像前端的单元测试，Cypress 测试可以在前端或后端存储库中，甚至可以在它们的独立存储库中。
 
 <!-- The tests require the tested system to be running. Unlike our backend integration tests, Cypress tests <i>do not start</i> the system when they are run.-->
 测试需要测试系统正在运行。不像我们的后端集成测试，Cypress测试<i>不会</i>在运行时启动系统。
@@ -130,12 +130,12 @@ Cypress 问我们正在做什么样的测试？让我们回答“端到端测试
 ![cypress with path cypress/e2e/note_app.cy.js](../../images/5/53new.png)
 
 <!-- We could edit the tests in Cypress but let us rather use VS Code:-->
-我們可以在Cypress中編輯測試，但讓我們改用VS Code吧！
+我们可以在Cypress中编辑测试，但让我们改用VS Code吧！
 
 ![vscode showing edits of test and cypress showing spec added](../../images/5/54new.png)
 
 <!-- We can now close the edit view of Cypress.-->
-我們現在可以關閉Cypress的編輯視圖了。
+我们现在可以关闭Cypress的编辑视图了。
 
 <!-- Let us change the test content as follows:-->
 # 让我们改变测试内容如下
@@ -257,7 +257,7 @@ module.exports = {
 <!-- Let''s extend our tests so that the test tries to log in to our application.-->
 让我们扩展我们的测试，以便测试尝试登录我们的应用程序。
 <!-- We assume our backend contains a user with the username <i>mluukkai</i> and password <i>salainen</i>.-->
-我們假設我們的後端包含一個使用者，使用者名稱為<i>mluukkai</i>，密碼為<i>salainen</i>。
+我们假设我们的后端包含一个使用者，使用者名称为<i>mluukkai</i>，密码为<i>salainen</i>。
 
 <!-- The test begins by opening the login form.-->
 测试从打开登录表单开始。
@@ -565,7 +565,7 @@ module.exports = app
 ```
 
 <!-- After the changes, an HTTP POST request to the <i>/api/testing/reset</i> endpoint empties the database. Make sure your backend is running in test mode by starting it with this command (previously configured in the package.json file):-->
-在進行了更改後，對 <i>/api/testing/reset</i> 端點的 HTTP POST 請求將清空資料庫。確保您的後端以此命令啟動並運行在測試模式（之前在 package.json 檔案中配置）：
+在进行了更改后，对 <i>/api/testing/reset</i> 端点的 HTTP POST 请求将清空资料库。确保您的后端以此命令启动并运行在测试模式（之前在 package.json 档案中配置）：
 
 ```js
   npm run start:test
@@ -610,16 +610,16 @@ describe('Note app', function() {
 ```
 
 <!-- During the formatting, the test does HTTP requests to the backend with [cy.request](https://docs.cypress.io/api/commands/request.html).-->
-在格式化期間，測試會使用[cy.request](https://docs.cypress.io/api/commands/request.html)向後端發出HTTP請求。
+在格式化期间，测试会使用[cy.request](https://docs.cypress.io/api/commands/request.html)向后端发出HTTP请求。
 
 <!-- Unlike earlier, now the testing starts with the backend in the same state every time. The backend will contain one user and no notes.-->
-不像以前，現在每次測試都從相同的後端狀態開始。後端將包含一個用戶和沒有筆記。
+不像以前，现在每次测试都从相同的后端状态开始。后端将包含一个用户和没有笔记。
 
 <!-- Let''s add one more test for checking that we can change the importance of notes.-->
 让我们再加一个测试，以检查我们是否可以更改注释的重要性。
 
 <!-- A while ago we changed the frontend so that a new note is important by default, or the <i>important</i> field is <i>true</i>:-->
-一段時間以前，我們更改了前端，以便新筆記默認為重要，或者<i>重要</i>字段為<i>true</i>：
+一段时间以前，我们更改了前端，以便新笔记默认为重要，或者<i>重要</i>字段为<i>true</i>：
 
 ```js
 const NoteForm = ({ createNote }) => {
@@ -956,7 +956,7 @@ describe('when logged in', function() {
 ```
 
 <!-- The same applies to creating a new note now that we think about it. We have a test, which makes a new note using the form. We also make a new note in the <i>beforeEach</i> block of the test testing changing the importance of a note:-->
-<i>同樣的道理也適用於現在創建一個新的筆記。我們有一個測試，它使用表單創建一個新的筆記。我們還在測試改變筆記重要性的<i>beforeEach</i>區塊中創建一個新的筆記：</i>
+<i>同样的道理也适用于现在创建一个新的笔记。我们有一个测试，它使用表单创建一个新的笔记。我们还在测试改变笔记重要性的<i>beforeEach</i>区块中创建一个新的笔记：</i>
 
 ```js
 describe('Note app', function() {
@@ -1038,7 +1038,7 @@ describe('Note app', function() {
 ```
 
 <!-- There is one more annoying feature in our tests. The application address <i>http:localhost:3000</i> is hardcoded in many places.-->
-在我們的測試中還有一個令人討厭的功能。在許多地方都硬編碼了應用地址<i>http:localhost:3000</i>。
+在我们的测试中还有一个令人讨厌的功能。在许多地方都硬编码了应用地址<i>http:localhost:3000</i>。
 
 <!-- Let''s define the <i>baseUrl</i> for the application in the Cypress pre-generated [configuration file](https://docs.cypress.io/guides/references/configuration) <i>cypress.config.js</i>:-->
 在Cypress预生成的[配置文件](https://docs.cypress.io/guides/references/configuration)<i>cypress.config.js</i>中，让我们为应用定义<i>baseUrl</i>：
@@ -1213,7 +1213,7 @@ it('one of those can be made important', function () {
 ```
 
 <!-- In the first line, we use the [parent](https://docs.cypress.io/api/commands/parent.html) command to access the parent element of the element containing <i>second note</i> and find the button from within it.-->
-在第一行，我們使用[parent](https://docs.cypress.io/api/commands/parent.html)命令來存取元素，該元素包含<i>second note</i>，並從中找到按鈕。
+在第一行，我们使用[parent](https://docs.cypress.io/api/commands/parent.html)命令来存取元素，该元素包含<i>second note</i>，并从中找到按钮。
 <!-- Then we click the button and check that the text on it changes.-->
 然后我们点击按钮，检查它上面的文字是否发生了变化。
 
@@ -1224,7 +1224,7 @@ it('one of those can be made important', function () {
 不幸的是，我们现在有一些复制粘贴在测试中，因为搜索正确按钮的代码总是一样的。
 
 <!-- In these kinds of situations, it is possible to use the [as](https://docs.cypress.io/api/commands/as.html) command:-->
-在這種情況下，可以使用[as](https://docs.cypress.io/api/commands/as.html)命令：
+在这种情况下，可以使用[as](https://docs.cypress.io/api/commands/as.html)命令：
 
 ```js
 it('one of those can be made important', function () {

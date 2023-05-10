@@ -17,6 +17,6 @@ lang: zh
 
 <i>Part updated 12th Feb 2023</i>
 <!-- - <i>No major changes</i>-->
-<i>沒有重大變化</i>
+<i>没有重大变化</i>
 
 </div>

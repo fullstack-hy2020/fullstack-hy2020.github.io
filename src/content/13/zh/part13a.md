@@ -74,13 +74,13 @@ SQL（结构化查询语言）是一种标准的数据库访问和处理语言�
 MongoDB不知道存储实体的字段的类型，但是它不知道用户记录id指的是哪个实体集合。MongoDB也不关心集合中存储的实体有哪些字段。因此，MongoDB完全由程序员来确保正确的信息存储在数据库中。
 
 <!-- There are both advantages and disadvantages to not having a schema. One of the advantages is the flexibility that schema agnosticism brings: since the schema does not need to be defined at the database level, application development may be faster in certain cases, and easier, with less effort needed in defining and modifying the schema in any case. Problems with not having a schema are related to error-proneness: everything is left up to the programmer. The database itself has no way of checking whether the data in it is <i>honest</i>, i.e. whether all mandatory fields have values, whether the reference type fields refer to existing entities of the right type in general, etc.-->
-有沒有schema都有優點和缺點。其中一個優點是schema無關性帶來的靈活性：由於不需要在資料庫層面定義schema，在某些情況下應用程序開發可以更快，並且更容易，在定義和修改schema時所需的努力更少。沒有schema的問題與容易出錯有關：一切都取決於程序員。資料庫本身沒有辦法檢查其中的資料是否<i>真實</i>，即是否所有必填欄位都有值，參考類型字段是否指向某個類型的現有實體等等。
+有没有schema都有优点和缺点。其中一个优点是schema无关性带来的灵活性：由于不需要在资料库层面定义schema，在某些情况下应用程序开发可以更快，并且更容易，在定义和修改schema时所需的努力更少。没有schema的问题与容易出错有关：一切都取决于程序员。资料库本身没有办法检查其中的资料是否<i>真实</i>，即是否所有必填栏位都有值，参考类型字段是否指向某个类型的现有实体等等。
 
 <!-- The relational databases that are the focus of this section, on the other hand, lean heavily on the existence of a schema, and the advantages and disadvantages of schema databases are almost the opposite compared of the non-schema databases.-->
 然而，本节重点关注的关系数据库非常依赖于架构的存在，而架构数据库的优缺点与非架构数据库几乎是相反的。
 
 <!-- The reason why the the previous sections of the course used MongoDB is precisely because of its schema-less nature, which has made it easier to use the database for someone with little knowledge of relational databases. For most of the use cases of this course, I personally would have chosen to use a relational database.-->
-因為先前課程的部分使用MongoDB，正是因為它的無架構性，使得對於對關聯資料庫知識不多的人來說，更容易使用該資料庫。對於本課程的大多數用例，我個人會選擇使用關聯資料庫。
+因为先前课程的部分使用MongoDB，正是因为它的无架构性，使得对于对关联资料库知识不多的人来说，更容易使用该资料库。对于本课程的大多数用例，我个人会选择使用关联资料库。
 
 ### Application database
 
@@ -94,7 +94,7 @@ MongoDB不知道存储实体的字段的类型，但是它不知道用户记录i
 在本节的理论材料中，我们将从第3和第4节构建的笔记存储应用程序的后端构建一个启用Postgres的版本。
 
 <!-- Since we don''t need any database in the cloud in this part (we only use the application locally), there is a possibility to use the lessons of the course [part 12](/en/part12) and use Postgres locally with Docker. After the Postgres instructions for cloud services, we also give a short instruction on how to easily get Postgres up and running with Docker.-->
-由於在這一部分我們不需要在雲端使用任何資料庫（我們只在本地使用應用程式），所以可以使用[第12章节](/en/part12)的課程並在本地使用Postgres和Docker。在Postgres說明雲端服務之後，我們還簡單介紹了如何使用Docker輕鬆啟動Postgres。
+由于在这一部分我们不需要在云端使用任何资料库（我们只在本地使用应用程式），所以可以使用[第12章节](/en/part12)的课程并在本地使用Postgres和Docker。在Postgres说明云端服务之后，我们还简单介绍了如何使用Docker轻松启动Postgres。
 
 #### Fly.io
 
@@ -153,7 +153,7 @@ heroku run psql -h <host-of-postgres-addon> -p 5432 -U <username> <dbname> -a <a
 <!-- The commands asks the password and opens the psql console:-->
 `psql -U postgres -W`
 
-`psql -U postgres -W`：要求輸入密碼並打開psql控制台
+`psql -U postgres -W`：要求输入密码并打开psql控制台
 
 ```bash
 Password for user <username>:

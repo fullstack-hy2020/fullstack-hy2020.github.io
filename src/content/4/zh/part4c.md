@@ -8,7 +8,7 @@ lang: zh
 <div class="content">
 
 <!-- We want to add user authentication and authorization to our application. Users should be stored in the database and every note should be linked to the user who created it. Deleting and editing a note should only be allowed for the user who created it.-->
-我們想要為我們的應用程序添加用戶身份驗證和授權。用戶應該存儲在數據庫中，每個筆記應該與創建它的用戶相關聯。只有創建它的用戶才能刪除和編輯筆記。
+我们想要为我们的应用程序添加用户身份验证和授权。用户应该存储在数据库中，每个笔记应该与创建它的用户相关联。只有创建它的用户才能删除和编辑笔记。
 
 <!-- Let''s start by adding information about users to the database. There is a one-to-many relationship between the user (<i>User</i>) and notes (<i>Note</i>):-->
 让我们从向数据库添加用户信息开始。用户（<i>User</i>）与笔记（<i>Note</i>）之间存在一对多的关系：
@@ -227,7 +227,7 @@ npm install bcrypt
 ```
 
 <!-- Creating new users happens in compliance with the RESTful conventions discussed in [part 3](/en/part3/node_js_and_express#rest), by making an HTTP POST request to the <i>users</i> path.-->
-遵循[第三部分](/en/part3/node_js_and_express#rest)討論的RESTful規範，通過向<i>用戶</i>路徑發出HTTP POST請求來創建新用戶。
+遵循[第三部分](/en/part3/node_js_and_express#rest)讨论的RESTful规范，通过向<i>用户</i>路径发出HTTP POST请求来创建新用户。
 
 <!-- Let's define a separate <i>router</i> for dealing with users in a new <i>controllers/users.js</i> file. Let's take the router into use in our application in the <i>app.js</i> file, so that it handles requests made to the <i>/api/users</i> url:-->
 让我们为处理新的<i>controllers/users.js</i>文件中的用户定义一个单独的<i>路由器</i>。 让我们在我们的应用程序中的<i>app.js</i>文件中使用该路由器，以便它处理发送到<i>/api/users</i> url的请求：
@@ -275,7 +275,7 @@ module.exports = usersRouter
 # 由于本课程教材范围之外，[存储密码](https://codahale.com/how-to-safely-store-a-password/)的基本原理不在此讨论范围内。我们不会讨论分配给[saltRounds](https://github.com/kelektiv/node.bcrypt.js/#a-note-on-rounds)变量的神奇数字10的意义，但您可以在链接材料中阅读更多信息。
 
 <!-- Our current code does not contain any error handling or input validation for verifying that the username and password are in the desired format.-->
-我們目前的代碼沒有對用戶名和密碼是否符合所需格式進行任何錯誤處理或輸入驗證。
+我们目前的代码没有对用户名和密码是否符合所需格式进行任何错误处理或输入验证。
 
 <!-- The new feature can and should initially be tested manually with a tool like Postman. However testing things manually will quickly become too cumbersome, especially once we implement functionality that enforces usernames to be unique.-->
 新功能可以且应该最初用像Postman这样的工具进行手动测试。然而，手动测试事物很快就会变得太麻烦，特别是当我们实施强制用户名唯一的功能时。
@@ -381,7 +381,7 @@ describe('when there is initially one user in db', () => {
 测试用例显然在此刻不会通过。我们实质上是在练习[测试驱动开发(TDD)](https://en.wikipedia.org/wiki/Test-driven_development)，在实现新功能之前先写测试。
 
 <!-- Mongoose does not have a built-in validator for checking the uniqueness of a field. Fortunately there is a ready-made solution for this, the [mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator) library. Let us install the library:-->
-Mongoose沒有內建的驗證器來檢查欄位的唯一性。幸運的是，有一個現成的解決方案，即[mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator)庫。讓我們安裝該庫：
+Mongoose没有内建的验证器来检查栏位的唯一性。幸运的是，有一个现成的解决方案，即[mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator)库。让我们安装该库：
 
 ```bash
 npm install mongoose-unique-validator
@@ -427,7 +427,7 @@ userSchema.plugin(uniqueValidator) // highlight-line
 我们也可以在用户创建过程中实施其他有效的验证。我们可以检查用户名是否足够长，用户名是否只由允许的字符组成，或者密码是否足够强大。实施这些功能是一个可选的练习。
 
 <!-- Before we move onward, let''s add an initial implementation of a route handler that returns all of the users in the database:-->
-在我們繼續前進之前，讓我們增加一個初始的路由處理程序，它會返回資料庫中的所有使用者：
+在我们继续前进之前，让我们增加一个初始的路由处理程序，它会返回资料库中的所有使用者：
 
 ```js
 usersRouter.get('/', async (request, response) => {
@@ -495,7 +495,7 @@ notesRouter.post('/', async (request, response) => {
 })
 ```
 <!-- The note scheme will also need to change as follows in our models/note.js file:-->
-在我們的模型/note.js文件中，筆記方案也需要按照以下方式進行變更：
+在我们的模型/note.js文件中，笔记方案也需要按照以下方式进行变更：
 
 ```js
 const noteSchema = new mongoose.Schema({

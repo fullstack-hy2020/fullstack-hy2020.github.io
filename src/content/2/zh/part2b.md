@@ -99,7 +99,7 @@ const App = (props) => {
 ```
 
 <!-- We have added the _addNote_ function as an event handler to the form element that will be called when the form is submitted, by clicking the submit button.-->
-我們已將_addNote_功能新增為表單元素的事件處理程序，當點擊提交按鈕時將會調用該函數。
+我们已将_addNote_功能新增为表单元素的事件处理程序，当点击提交按钮时将会调用该函数。
 
 <!-- We use the method discussed in [part 1](/en/part1/component_state_event_handlers#event-handling) for defining our event handler:-->
 我们使用[第一部分](/en/part1/component_state_event_handlers#event-handling)讨论的方法定义我们的事件处理程序：
@@ -385,7 +385,7 @@ notes.filter(note => note.important)
 你可以通过改变<em>showAll</em>状态的初始值来测试过滤功能。
 
 <!-- Next, let''s add functionality that enables users to toggle the <em>showAll</em> state of the application from the user interface.-->
-接下來，讓我們添加功能，使用戶可以從用戶界面切換應用程序的<em>showAll</em>狀態。
+接下来，让我们添加功能，使用户可以从用户界面切换应用程序的<em>showAll</em>状态。
 
 <!-- The relevant changes are shown below:-->
 以下是相关的变更：
@@ -445,7 +445,7 @@ show {showAll ? 'important' : 'all'}
 <h3>Exercises 2.6.-2.10.</h3>
 
 <!-- In the first exercise, we will start working on an application that will be further developed in the later exercises. In related sets of exercises, it is sufficient to return the final version of your application. You may also make a separate commit after you have finished each part of the exercise set, but doing so is not required.-->
-在第一個練習中，我們將開始開發一個將在以後的練習中進一步開發的應用程式。在相關的練習集中，只需返回應用程式的最終版本即可。您也可以在完成練習集的每個部分後進行单獨提交，但這樣做並不是必須的。
+在第一个练习中，我们将开始开发一个将在以后的练习中进一步开发的应用程式。在相关的练习集中，只需返回应用程式的最终版本即可。您也可以在完成练习集的每个部分后进行单独提交，但这样做并不是必须的。
 
 <!-- **WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. You likely **do not want** your project to be a repository, so simply run the _rm -rf .git_ command at the root of your application.-->
 **警告**：除非在现有的git存储库中创建应用程序，否则create-react-app将自动将您的项目转换为git存储库。您可能**不希望**您的项目成为存储库，因此只需在应用程序的根目录中运行_rm -rf .git_命令即可。
@@ -532,11 +532,11 @@ This is a test
 ![2.7 sample screenshot](../../images/2/11e.png)
 
 <!-- **Hint:** when you are forming strings that contain values from variables, it is recommended to use a [template string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals):-->
-**我今年${age}歲，我的父親${fatherAge}歲。**
+**我今年${age}岁，我的父亲${fatherAge}岁。**
 
-**我今年${age}歲，我的父親${fatherAge}歲。**
+**我今年${age}岁，我的父亲${fatherAge}岁。**
 
-**我今年${age}歲，我的父親${fatherAge}歲。**
+**我今年${age}岁，我的父亲${fatherAge}岁。**
 
 ```js
 `${newName} is already added to phonebook`

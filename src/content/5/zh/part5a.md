@@ -98,7 +98,7 @@ export default App
 前端如果没有连接到后端，将不会显示任何笔记。你可以在第四部分的文件夹里使用 `npm run dev` 来启动后端，它将在端口 3001 上运行。当后端运行时，在另一个终端窗口里使用 `npm start` 启动前端，现在你可以看到从第四部分保存在 MongoDB 数据库中的笔记了。
 
 <!-- Keep this in mind from now on.-->
-請從現在開始牢記這一點。
+请从现在开始牢记这一点。
 
 <!-- The login form is handled the same way we handled forms in-->
 the last lesson
@@ -122,7 +122,7 @@ the last lesson
 登录是通过发送HTTP POST请求到服务器地址<i>api/login</i>完成的。让我们把负责此请求的代码分离到它自己的模块中，文件名为<i>services/login.js</i>。
 
 <!-- We''ll use <i>async/await</i> syntax instead of promises for the HTTP request:-->
-我們將使用<i>非同步/等待</i>語法而不是承諾為HTTP請求：
+我们将使用<i>非同步/等待</i>语法而不是承诺为HTTP请求：
 
 ```js
 import axios from 'axios'
@@ -142,7 +142,7 @@ export default { login }
 ![vs code warning - assign object to a variable before exporting as module default](../../images/5/50new.png)
 
 <!-- We''ll get back to configuring eslint in a moment. You can ignore the error for the time being or suppress it by adding the following to the line before the warning:-->
-我們馬上回來設置eslint，你可以暫時忽略該警告，或者在警告之前添加以下內容以抑制它：
+我们马上回来设置eslint，你可以暂时忽略该警告，或者在警告之前添加以下内容以抑制它：
 
 ```js
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -458,7 +458,7 @@ const handleLogin = async (event) => {
 ### Saving the token to the browser''s local storage
 
 <!-- Our application has a small flaw: if the browser is refreshed (eg. pressing F5), the user''s login information disappears.-->
-我們的應用程序有一個小缺陷：如果刷新瀏覽器（例如按F5），用戶的登錄信息就會消失。
+我们的应用程序有一个小缺陷：如果刷新浏览器（例如按F5），用户的登录信息就会消失。
 
 <!-- This problem is easily solved by saving the login details to [local storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage). Local Storage is a [key-value](https://en.wikipedia.org/wiki/Key-value_database) database in the browser.-->
 这个问题很容易通过将登录详情保存到[本地存储](https://developer.mozilla.org/en-US/docs/Web/API/Storage)来解决。本地存储是浏览器中的一个[键值](https://en.wikipedia.org/wiki/Key-value_database)数据库。
@@ -574,7 +574,7 @@ const App = () => {
 现在用户永久登录到应用程序中。我们可能应该添加一个<i>注销</i>功能，它会从本地存储中删除登录详细信息。不过，我们将把它作为一个练习留给大家。
 
 <!-- It''s possible to log out a user using the console, and that is enough for now.-->
-可以通過控制台登出用戶，這就夠了。
+可以通过控制台登出用户，这就够了。
 <!-- You can log out with the command:-->
 你可以用以下指令登出：
 
@@ -689,7 +689,7 @@ npm start
 ![browser showing logout button after logging in](../../images/5/6e.png)
 
 <!-- Ensure the browser does not remember the details of the user after logging out.-->
-確保登出後瀏覽器不記住用戶的詳細資料。
+确保登出后浏览器不记住用户的详细资料。
 
 #### 5.3: bloglist frontend, step3
 
@@ -729,7 +729,7 @@ npm start
 无论如何检查和确保令牌的有效性，如果应用程序具有允许[跨站脚本（XSS）]（https://owasp.org/www-community/attacks/xss/）攻击的安全漏洞，那么将令牌保存在本地存储中可能会带来安全风险。如果应用程序允许用户注入任意JavaScript代码（例如使用表单），然后应用程序将执行该代码，则可能发生XSS攻击。如果合理使用React，则不应该发生，因为[React对所渲染的所有文本进行消毒]（https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks），这意味着它不会将渲染的内容执行为JavaScript。
 
 <!-- If one wants to play safe, the best option is to not store a token in local storage. This might be an option in situations where leaking a token might have tragic consequences.-->
-如果一個人想要玩得安全，最好的選擇是不要將令牌存儲在本地存儲裝置中。 在泄露令牌可能會造成悲劇性後果的情況下，這可能是一個選擇。
+如果一个人想要玩得安全，最好的选择是不要将令牌存储在本地存储装置中。 在泄露令牌可能会造成悲剧性后果的情况下，这可能是一个选择。
 
 <!-- It has been suggested that the identity of a signed-in user should be saved as [httpOnly cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#restrict_access_to_cookies), so that JavaScript code could not have any access to the token. The drawback of this solution is that it would make implementing SPA applications a bit more complex. One would need at least to implement a separate page for logging in.-->
 建议将登录用户的身份保存为[httpOnly cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#restrict_access_to_cookies)，以便JavaScript代码无法访问令牌。这种解决方案的缺点是，它会使实现SPA应用程序变得更加复杂。至少需要为登录实现一个单独的页面。

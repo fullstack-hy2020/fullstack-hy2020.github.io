@@ -8,7 +8,7 @@ lang: zh
 <div class="content">
 
 <!-- During this part, you will build a robust <i>deployment pipeline</i> to a ready made [example project](https://github.com/smartlyio/full-stack-open-pokedex) starting in [exercise 11.2](/en/part11/getting_started_with_git_hub_actions#exercise-11-2). You will [fork](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo) the example project and that will create you a personal copy of the repository. In the [last two](/en/part11/expanding_further#exercises-11-20-22) exercises, you will build another deployment pipeline for some of <i>your own</i> previously created apps!-->
-在此部分，您將建立一個強大的<i>部署管道</i>來部署[示例項目](https://github.com/smartlyio/full-stack-open-pokedex)，從[第11.2節](/en/part11/getting_started_with_git_hub_actions#exercise-11-2)開始。您將[fork](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo)示例項目，這將為您創建一個個人副本的存儲庫。在[最後兩個](/en/part11/expanding_further#exercises-11-20-22)練習中，您將為某些<i>您自己</i>創建的應用程序構建另一個部署管道！
+在此部分，您将建立一个强大的<i>部署管道</i>来部署[示例项目](https://github.com/smartlyio/full-stack-open-pokedex)，从[第11.2节](/en/part11/getting_started_with_git_hub_actions#exercise-11-2)开始。您将[fork](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo)示例项目，这将为您创建一个个人副本的存储库。在[最后两个](/en/part11/expanding_further#exercises-11-20-22)练习中，您将为某些<i>您自己</i>创建的应用程序构建另一个部署管道！
 
 <!-- There are 21 exercises in this part, and you need to complete <i>each</i> exercise for completing the course. Exercises are submitted via [the submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-cicd) just like in the previous parts, but unlike parts 0 to 7, the submission goes to a different "course instance".-->
 这一部分有21道练习，你需要完成<i>每一道</i>练习才能完成课程。练习需要通过[提交系统](https://studies.cs.helsinki.fi/stats/courses/fs-cicd)提交，就像之前的部分一样，但是不同于0到7部分，提交的内容会发送到不同的“课程实例”。
@@ -143,7 +143,7 @@ CI（持续集成）的严格定义以及这个术语在行业中的使用方式
 ### Why is it important?
 
 <!-- Above we talked about the "works on my machine" problem and the deployment of multiple changes, but what about other issues. What if Alice committed directly to the main branch? What if Bob used a branch but didn''t bother to run tests before merging? What if Charlie tries to build the software for production but does so with the wrong parameters?-->
-上面我們討論了“在我的機器上運行”問題和部署多個更改，但是其他問題呢？如果Alice直接提交到主分支怎麼辦？如果Bob使用分支但沒有執行測試就合併怎麼辦？如果Charlie嘗試為生產編譯軟件但使用了錯誤的參數怎麼辦？
+上面我们讨论了“在我的机器上运行”问题和部署多个更改，但是其他问题呢？如果Alice直接提交到主分支怎么办？如果Bob使用分支但没有执行测试就合并怎么办？如果Charlie尝试为生产编译软件但使用了错误的参数怎么办？
 
 <!-- With the use of continuous integration and systematic ways of working, we can avoid these.-->
 通过使用持续集成和系统化的工作方式，我们可以避免这些问题。
@@ -259,7 +259,7 @@ has a huge library of plugins.
 实际的CI配置对于基于云的选项通常会简单一些，至少如果你停留在所谓的“正常”使用范围内的话。如果你想做一些更特别的事情，那么基于云的选项可能会变得更加受限，或者你可能会发现很难为那个特定的任务做到，因为云平台并不是专门为此而构建的。
 
 <!-- In this part, we''ll look at a fairly normal use case. The more complicated setups might, for example, make use of specific hardware resources, e.g. a GPU.-->
-在這一部分，我們將看看一個相當正常的案例。更複雜的設置可能會使用特定的硬件資源，例如GPU。
+在这一部分，我们将看看一个相当正常的案例。更复杂的设置可能会使用特定的硬件资源，例如GPU。
 
 <!-- Aside from the configuration issue mentioned above, there are often resource limitations on cloud-based platforms. In a self-hosted setup, if a build is slow, you can just get a bigger server and throw more resources at it. In cloud-based options, this may not be possible. For example, in [GitHub Actions](https://github.com/features/actions), the nodes your builds will run on have 2 vCPUs and 8GB of RAM.-->
 除了上面提到的配置问题外，基于云的平台通常也存在资源限制。在自托管设置中，如果构建速度慢，可以购买更大的服务器并投入更多的资源。在基于云的选项中，可能无法实现这一点。例如，在[GitHub Actions](https://github.com/features/actions)中，您的构建将运行的节点具有2个vCPU和8GB的RAM。

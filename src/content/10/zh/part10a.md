@@ -70,7 +70,7 @@ npx create-expo-app rate-repository-app --template expo-template-blank@sdk-46
 注意，<em>@sdk-46</em> 将项目的 <i>Expo SDK 版本设置为 46</i>，它支持 <i>React Native 版本 0.69</i>。使用其他 Expo SDK 版本可能会在遵循本教程时出现问题。此外，与普通 React Native CLI 相比，Expo 还有[一些局限性](https://docs.expo.io/introduction/why-not-expo/)。但是，这些局限性不会影响本教程中实现的应用程序。
 
 <!-- Next, let's navigate to the created <i>rate-repository-app</i> directory with the terminal and install a few dependencies we'll be needing soon:-->
-接下來，讓我們使用終端機導航到已創建的<i>rate-repository-app</i>目錄，並安裝一些我們很快就需要的依賴項：
+接下来，让我们使用终端机导航到已创建的<i>rate-repository-app</i>目录，并安装一些我们很快就需要的依赖项：
 
 ```shell
 npx expo install react-native-web@~0.18.7 react-dom@18.2.0 @expo/webpack-config@^0.17.0
@@ -144,7 +144,7 @@ Expo命令行界面提供了几种打开我们应用程序的方式。让我们�
 ### Setting up the development environment
 
 <!-- We have had the first glance of our application using the Expo's browser view. Although the browser view is quite usable, it is still a quite poor simulation of the native environment. Let's have a look at the alternatives we have regarding the development environment.-->
-我們已經使用Expo的瀏覽器檢視第一眼看到了我們的應用程式。雖然瀏覽器檢視還算可用，但仍然是對原生環境的相當糟糕的模擬。讓我們來看看我們在開發環境方面有什麼樣的替代方案。
+我们已经使用Expo的浏览器检视第一眼看到了我们的应用程式。虽然浏览器检视还算可用，但仍然是对原生环境的相当糟糕的模拟。让我们来看看我们在开发环境方面有什么样的替代方案。
 
 <!-- Android and iOS devices such as tablets and phones can be emulated in computers using specific <i>emulators</i>. This is very useful for developing native applications. macOS users can use both Android and iOS emulators with their computers. Users of other operating systems such as Linux or Windows have to settle for Android emulators. Next, depending on your operating system follow one of these instructions on setting up an emulator:-->
 Android和iOS设备，如平板电脑和手机，可以使用特定的<i>模拟器</i>在电脑中进行仿真。这对于开发原生应用非常有用。macOS用户可以使用Android和iOS模拟器与他们的电脑一起使用。其他操作系统（如Linux或Windows）的用户只能使用Android模拟器。接下来，根据您的操作系统，按照以下说明设置模拟器：

@@ -283,7 +283,7 @@ const result = average(2, 5)
 ```
 
 <!-- During this course, we will define all functions using the arrow syntax.-->
-在本課程中，我們將使用箭頭語法定義所有函數。
+在本课程中，我们将使用箭头语法定义所有函数。
 
 </div>
 
@@ -313,7 +313,7 @@ const Header = (props) => {
 <i>作为React子组件，对象无效</i>
 
 <!-- keep in mind the things told [here](/en/part1/introduction_to_react#do-not-render-objects).-->
-記住這裡所說的事情[here](/zh/part1/introduction_to_react#do-not-render-objects)。
+记住这里所说的事情[here](/zh/part1/introduction_to_react#do-not-render-objects)。
 
 <!--   <h4>1.3: course information step3</h4>-->
 <h4>1.3：课程信息第三步</h4>

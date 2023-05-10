@@ -52,7 +52,7 @@ const noteSchema = new mongoose.Schema({
 <i>minLength</i> 和 <i>required</i> 验证器是[内置的](https://mongoosejs.com/docs/validation.html#built-in-validators)，由Mongoose提供。Mongoose的[自定义验证器](https://mongoosejs.com/docs/validation.html#custom-validators)功能允许我们创建新的验证器，如果内置的验证器不能满足我们的需求。
 
 <!-- If we try to store an object in the database that breaks one of the constraints, the operation will throw an exception. Let''s change our handler for creating a new note so that it passes any potential exceptions to the error handler middleware:-->
-如果我們嘗試將一個違反約束的對象存儲到數據庫中，該操作將拋出異常。讓我們改變我們用於創建新筆記的處理程序，使其將任何潛在的異常傳遞到錯誤處理中間件：
+如果我们尝试将一个违反约束的对象存储到数据库中，该操作将抛出异常。让我们改变我们用于创建新笔记的处理程序，使其将任何潜在的异常传递到错误处理中间件：
 
 ```js
 app.post('/api/notes', (request, response, next) => { // highlight-line
@@ -219,7 +219,7 @@ personService
 使用[自定义验证器](https://mongoosejs.com/docs/validation.html#custom-validators)来实现验证的第二部分。
 
 <!-- If an HTTP POST request tries to add a person with an invalid phone number, the server should respond with an appropriate status code and error message.-->
-如果一個HTTP POST請求試圖添加一個有無效電話號碼的人，服務器應該以適當的狀態碼和錯誤消息作出回應。
+如果一个HTTP POST请求试图添加一个有无效电话号码的人，服务器应该以适当的状态码和错误消息作出回应。
 
 #### 3.21 Deploying the database backend to production
 
@@ -242,7 +242,7 @@ personService
 ### Lint
 
 <!-- Before we move on to the next part, we will take a look at an important tool called [lint](<https://en.wikipedia.org/wiki/Lint_(software)>). Wikipedia says the following about lint:-->
-在我們進入下一部分之前，我們將看一下一個重要的工具，稱為[lint](<https://en.wikipedia.org/wiki/Lint_(software)>)。維基百科對lint的描述如下：
+在我们进入下一部分之前，我们将看一下一个重要的工具，称为[lint](<https://en.wikipedia.org/wiki/Lint_(software)>)。维基百科对lint的描述如下：
 
 <!-- > <i>Generically, lint or a linter is any tool that detects and flags errors in programming languages, including stylistic errors. The term lint-like behavior is sometimes applied to the process of flagging suspicious language usage. Lint-like tools generally perform static analysis of source code.</i>-->
 <i>通常来说，lint或linter是任何检测和标记编程语言中错误（包括风格错误）的工具。有时将“lint-like”行为应用于标记可疑语言使用的过程中。Lint-like工具通常对源代码进行静态分析。</i>

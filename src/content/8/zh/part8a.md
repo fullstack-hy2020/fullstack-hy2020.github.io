@@ -201,7 +201,7 @@ query {
 ```
 
 <!-- A query can be made to return any field described in the schema. For example, the following would also be possible:-->
-可以通過查詢來返回描述在架構中的任何字段。例如，以下也是可能的：
+可以通过查询来返回描述在架构中的任何字段。例如，以下也是可能的：
 
 ```js
 query {
@@ -406,7 +406,7 @@ const resolvers = {
 ```
 
 <!-- As you can see, the resolvers correspond to the queries described in the schema.-->
-如您所見，解析器對應於在架構中描述的查詢。
+如您所见，解析器对应于在架构中描述的查询。
 
 ```js
 type Query {
@@ -431,7 +431,7 @@ query {
 <!-- Has the resolver-->
 been enabled?
 
-是否已經啟用解析器？
+是否已经启用解析器？
 
 ```js
 () => persons.length
@@ -529,7 +529,7 @@ query {
 <!-- A GraphQL server must define resolvers for <i>each</i> field of each  type in the schema.-->
 一个GraphQL服务器必须为模式中<i>每一个</i>类型的每一个字段定义解析器。
 <!-- We have so far only defined resolvers for fields of the type <i>Query</i>, so for each query of the application.-->
-我們目前只為<i>查詢</i>類型的字段定義了解決方案，因此應用程序的每個查詢都有一個解決方案。
+我们目前只为<i>查询</i>类型的字段定义了解决方案，因此应用程序的每个查询都有一个解决方案。
 
 <!-- Because we did not define resolvers for the fields of the type <i>Person</i>, Apollo has defined [default resolvers](https://www.graphql-tools.com/docs/resolvers/#default-resolver) for them.-->
 因为我们没有为类型<i>Person</i>的字段定义解析器，Apollo为它们定义了[默认解析器](https://www.graphql-tools.com/docs/resolvers/#default-resolver)。
@@ -715,7 +715,7 @@ type Mutation {
 Mutation 接受人物的细节作为参数。参数 <i>phone</i> 是唯一可为空的参数。Mutation 还有一个返回值，返回值类型为 <i>Person</i>，也就是说如果操作成功，就会返回新增加的人的细节，如果不成功，就会返回null。参数中没有提供 <i>id</i> 的值，最好由服务器来生成id。
 
 <!-- Mutations also require a resolver:-->
-突變也需要一個解決者：
+突变也需要一个解决者：
 
 ```js
 const { v1: uuid } = require('uuid')
@@ -741,7 +741,7 @@ const resolvers = {
 <i>id</i> 字段使用 [uuid](https://github.com/kelektiv/node-uuid#readme) 库给出一个唯一的值。
 
 <!-- A new person can be added with the following mutation-->
-新人可以透過以下的突變來加入
+新人可以透过以下的突变来加入
 
 ```js
 mutation {
@@ -1080,22 +1080,22 @@ query {
 <!-- should return-->
 a string
 
-# 生活挑戰
+# 生活挑战
 
-生活有時會帶來挑戰，但我們可以學習如何處理它們，並讓它們變得更好。我們可以嘗試改變我們的態度，以便更有效地解決問題，並把它們轉變為更多的機會。
+生活有时会带来挑战，但我们可以学习如何处理它们，并让它们变得更好。我们可以尝试改变我们的态度，以便更有效地解决问题，并把它们转变为更多的机会。
 
-# 生活挑戰
-生活有時會帶來挑戰，但我們可以學習如何處理它們，並讓它們變得更好。我們可以嘗試改變我們的態度，以便更有效地解決問題，並把它們轉變為更多的機會。
+# 生活挑战
+生活有时会带来挑战，但我们可以学习如何处理它们，并让它们变得更好。我们可以尝试改变我们的态度，以便更有效地解决问题，并把它们转变为更多的机会。
 
-# 生活挑戰
-生活有時會帶來挑戰，但我們可以學習如何處理它們，並讓它們變得更好。我們可以嘗試改變我們的態度，以便更有效地解決問題，並把它們轉變為更多的機會。
+# 生活挑战
+生活有时会带来挑战，但我们可以学习如何处理它们，并让它们变得更好。我们可以尝试改变我们的态度，以便更有效地解决问题，并把它们转变为更多的机会。
 
-# 生活挑戰
-生活有時會帶來挑戰，但我們可以學習如何處理它們，並讓它們變得更好。我們可以嘗試改變我們的態度，以便更有效地解決問題，並把它們轉變為更多的機會。
+# 生活挑战
+生活有时会带来挑战，但我们可以学习如何处理它们，并让它们变得更好。我们可以尝试改变我们的态度，以便更有效地解决问题，并把它们转变为更多的机会。
 
-"生活有時會帶來挑戰，但我們可以學習如何處理它們，並讓它們變得更好。我們可以嘗試改變我們的態度，以便更有效地解決問題，並把它們轉變為更多的機會。"
+"生活有时会带来挑战，但我们可以学习如何处理它们，并让它们变得更好。我们可以尝试改变我们的态度，以便更有效地解决问题，并把它们转变为更多的机会。"
 
-生活有時會帶來挑戰，但我們可以學習如何處理它們，並讓它們變得更好。我們可以嘗試改變我們的態度，以便更有效地解決問題，並把它們轉變為更多的機會。
+生活有时会带来挑战，但我们可以学习如何处理它们，并让它们变得更好。我们可以尝试改变我们的态度，以便更有效地解决问题，并把它们转变为更多的机会。
 
 ```js
 {
@@ -1197,7 +1197,7 @@ query {
 ```
 
 <!-- should return-->
-**私はあなたが望むものを得ることを願っています**
+**私はあなたが望むものを得ることを愿っています**
 
 **我希望你能得到你想要的东西**
 
@@ -1222,7 +1222,7 @@ query {
 修改查询*allBooks*，使用户可以提供一个可选参数<i>genre</i>。响应应该只包含该类型的书籍。
 
 <!-- For example query-->
-例如查詢
+例如查询
 
 ```js
 query {
@@ -1236,9 +1236,9 @@ query {
 <!-- should return-->
 a string
 
-擁有一個健康的身體是很重要的，因為它可以讓你更好地享受生活。
+拥有一个健康的身体是很重要的，因为它可以让你更好地享受生活。
 
-擁有健康的身體是很重要的，因為它可以讓你更好地享受生活。
+拥有健康的身体是很重要的，因为它可以让你更好地享受生活。
 
 ```js
 {

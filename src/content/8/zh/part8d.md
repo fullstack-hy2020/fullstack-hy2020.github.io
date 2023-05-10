@@ -132,7 +132,7 @@ export default LoginForm
 <!-- Let's also add a button which enables a logged-in user to log out. The button's onClick handler sets the *token* state to null, removes the token from local storage and resets the cache of the Apollo client. The last step is [important](https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout), because some queries might have fetched data to cache, which only logged-in users should have access to.-->
 让我们还添加一个按钮，使已登录用户可以退出登录。按钮的`onClick`处理程序将*token*状态设置为`null`，从本地存储中删除令牌，并重置Apollo客户端的缓存。最后一步[很重要](https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout)，因为某些查询可能已经获取了数据缓存，只有登录用户才能访问。
 
-讓我們還添加一個按鈕，使已登錄用戶可以退出登錄。按鈕的`onClick`處理程序將*token*狀態設置為`null`，從本地存儲中刪除令牌，並重置Apollo客戶端的緩存。最後一步[很重要](https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout)，因為某些查詢可能已經獲取了數據緩存，只有登錄用戶才能訪問。
+让我们还添加一个按钮，使已登录用户可以退出登录。按钮的`onClick`处理程序将*token*状态设置为`null`，从本地存储中删除令牌，并重置Apollo客户端的缓存。最后一步[很重要](https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout)，因为某些查询可能已经获取了数据缓存，只有登录用户才能访问。
 
 <!-- We can reset the cache using the [resetStore](https://www.apollographql.com/docs/react/api/core/ApolloClient/#ApolloClient.resetStore) method of an Apollo *client* object.-->
 我们可以使用Apollo *client*对象的[resetStore](https://www.apollographql.com/docs/react/api/core/ApolloClient/#ApolloClient.resetStore)方法来重置缓存。

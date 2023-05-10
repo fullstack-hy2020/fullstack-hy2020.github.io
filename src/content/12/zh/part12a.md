@@ -36,7 +36,7 @@ lang: zh
 它在服务器上无法运行，尽管在你的机器上可以正常运行，这并不少见。这可能是由于环境中缺少的依赖项或其他差异造成的。在这里，容器是一个很好的解决方案，因为你可以在你的机器和服务器上使用相同的执行环境来运行应用程序。这并不完美：不同的硬件可能是一个问题，但是你可以限制环境之间的差异。
 
 <!-- Sometimes you may hear about the <i>"Works in my container"</i> issue. The phrase describes a situation in which the application works fine in a container running on your machine but breaks when the container is started on a server. The phrase is a play on the infamous <i>"Works on my machine"</i> issue, which containers are often promised to solve. The situation also is most likely a usage error.-->
-有時你可能會聽到關於<i>"我的容器內的工作"</i>問題。這句話描述的是一種情況，即應用程序在你的機器上運行的容器中正常工作，但在服務器上啟動容器時就會出錯。這句話是對著名的<i>"我的機器上的工作"</i>問題的一種改編，容器通常被承諾可以解決這個問題。這種情況很可能是用法錯誤。
+有时你可能会听到关于<i>"我的容器内的工作"</i>问题。这句话描述的是一种情况，即应用程序在你的机器上运行的容器中正常工作，但在服务器上启动容器时就会出错。这句话是对著名的<i>"我的机器上的工作"</i>问题的一种改编，容器通常被承诺可以解决这个问题。这种情况很可能是用法错误。
 
 ### About this part
 
@@ -54,7 +54,7 @@ lang: zh
 ### <i>Warning</i>
 
 <!-- Since we are stepping right outside of our comfort zone as JavaScript developers, this part may require you to take a detour and familiarize yourself with shell / command line / command prompt / terminal before getting started.-->
-自從我們作為JavaScript開發人員踏出了舒適圈，這一部分可能需要你轉向，先熟悉shell/命令行/命令提示/終端，然後再開始。
+自从我们作为JavaScript开发人员踏出了舒适圈，这一部分可能需要你转向，先熟悉shell/命令行/命令提示/终端，然后再开始。
 
 <!-- If you have only ever used a graphical user interface and never touched e.g. Linux or terminal on Mac, or if you get stuck in the first exercises we recommend doing the Part 1 of "Computing tools for CS studies" first: <https://tkt-lapio.github.io/en/>. Skip the section for "SSH connection" and Exercise 11. Otherwise, it includes everything you are going to need to get started here!-->
 如果你只曾使用过图形用户界面，从未触碰过Linux或Mac的终端，或者在第一个练习中遇到了困难，我们建议先完成《计算机科学研究的计算工具》的第一部分：<https://tkt-lapio.github.io/en/>。跳过“SSH连接”部分和练习11。否则，它包含了你在这里开始所需要的一切！
@@ -225,7 +225,7 @@ _index.docker.io/library/hello-world:最新_
 结果使用该命令将**图像**拉取下来，并输出相关信息。然后，状态提示我们确实下载了hello-world:latest的新版本。你可以尝试使用`docker image pull hello-world`拉取图像，看看会发生什么。
 
 <!-- The following output was from the container itself. It also explains what happened when we ran _docker container run hello-world_.-->
-以下輸出來自容器本身，它還解釋了當我們執行 _docker container run hello-world_ 時發生了什麼。
+以下输出来自容器本身，它还解释了当我们执行 _docker container run hello-world_ 时发生了什么。
 
 ```bash
 Hello from Docker!
@@ -270,7 +270,7 @@ For more examples and ideas, visit:
 #### Exercise 12.2: Running your second container
 
 <!-- > Use _script_ to record what you do, save the file as script-answers/exercise12_2.txt-->
-使用腳本記錄你做的事情，將文件保存為script-answers/exercise12_2.txt
+使用脚本记录你做的事情，将文件保存为script-answers/exercise12_2.txt
 
 <!-- The hello-world output gave us an ambitious task to do. Do the following-->
 **给我们一个雄心勃勃的任务来完成，hello-world输出。**
@@ -300,7 +300,7 @@ Google 应该能够帮助你创建目录和文件。
 ### Ubuntu image
 
 <!-- The command you just used to run the Ubuntu container, _docker container run -it ubuntu bash_, contains a few additions to the previously run hello-world. Let's see the --help to get a better understanding. I'll cut some of the output so we can focus on the relevant parts.-->
-你剛剛用來執行Ubuntu容器的指令`docker container run -it ubuntu bash`，比之前執行的hello-world多了一些東西。讓我們看一下--help來更好地了解它。我將把一些輸出減少，以便我們可以專注於相關部分。
+你刚刚用来执行Ubuntu容器的指令`docker container run -it ubuntu bash`，比之前执行的hello-world多了一些东西。让我们看一下--help来更好地了解它。我将把一些输出减少，以便我们可以专注于相关部分。
 
 ```bash
 $ docker container run --help
@@ -383,7 +383,7 @@ b8548b9faec3   ubuntu     "bash"   26 minutes ago      Exited 2 seconds ago     
 ```
 
 <!-- Now let us start the container again, but this time in interactive mode:-->
-現在讓我們再次啟動容器，但這次是以互動模式：
+现在让我们再次启动容器，但这次是以互动模式：
 
 ```bash
 $ docker start -i hopeful_clarke
@@ -400,7 +400,7 @@ root@b8548b9faec3:/# nano /usr/src/app/index.js
 ```
 
 <!-- Now we have Nano installed and can start editing files!-->
-現在我們已經安裝了Nano，可以開始編輯文件了！
+现在我们已经安装了Nano，可以开始编辑文件了！
 
 </div>
 
@@ -428,7 +428,7 @@ console.log('Hello World')
 #### Exercise 12.4: Ubuntu 102
 
 <!-- > Use _script_ to record what you do, save the file as script-answers/exercise12_4.txt-->
-使用腳本記錄你的操作，將檔案儲存為script-answers/exercise12_4.txt
+使用脚本记录你的操作，将档案储存为script-answers/exercise12_4.txt
 
 <!-- Install Node while inside the container and run the index file with _node /usr/src/app/index.js_ in the container.-->
 在容器内安装Node，并使用`node /usr/src/app/index.js`在容器中运行index文件。

@@ -761,7 +761,7 @@ React 的状态似乎很强势，但 JavaScript 世界变化无常。例如，�
 几乎所有的网络应用都有（至少）两个“层”：浏览器更靠近最终用户，是顶层，而服务器是底层。通常还有一个数据库层在服务器下面。因此，我们可以把网络应用的<i>架构</i>想象成一个<i>层叠</i>的层次结构。
 
 <!-- Often, we also talk about the [frontend and the backend](https://en.wikipedia.org/wiki/Front_and_back_ends). The browser is the frontend, and JavaScript that runs on the browser is frontend code. The server on the other hand is the backend.-->
-通常，我们也会说[前端和后端](https://en.wikipedia.org/wiki/Front_and_back_ends)。浏览器是前端，而在浏览器上运行的JavaScript则是前端代碼。另一面，服务器端就是后端。
+通常，我们也会说[前端和后端](https://en.wikipedia.org/wiki/Front_and_back_ends)。浏览器是前端，而在浏览器上运行的JavaScript则是前端代码。另一面，服务器端就是后端。
 
 <!-- In the context of this course, full-stack web development means that we focus on all parts of the application: the frontend, the backend, and the database. Sometimes the software on the server and its operating system are seen as parts of the stack, but we won''t go into those.-->
 在本课程的背景下，全栈网络开发意味着我们应关注应用程序的所有部分：前端、后端和数据库。有时服务器上的软件及其操作系统被视为堆栈的一部分，但我们不会深入研究这些。
@@ -924,7 +924,7 @@ sequenceDiagram
 
 创建一个图来展示当用户利用单页版本的应用创建一个新笔记所发生的情况。
 
-![圖片](https://i.imgur.com/DpvFjgT.png)
+![图片](https://i.imgur.com/DpvFjgT.png)
 
 <!-- This was the last exercise, and it''s time to push your answers to GitHub and mark the exercises as done in the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
 这是最后一个练习，现在是时候把你的答案推送到GitHub，并在[提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)中标记为已完成。

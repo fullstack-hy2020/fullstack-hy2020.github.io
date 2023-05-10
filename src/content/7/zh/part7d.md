@@ -60,7 +60,7 @@ lang: zh
 正如我们从使用`create-react-app`创建的示例应用程序中所看到的，构建脚本还将应用程序的CSS文件打包到单个<i>/static/css/main.1becb9f2.css</i>文件中。
 
 <!-- In practice, bundling is done so that we define an entry point for the application, which typically is the <i>index.js</i> file. When webpack bundles the code, it includes all of the code that the entry point imports, the code that its imports import, and so on.-->
-在實踐中，將代碼捆綁在一起的目的是為了定義應用程序的入口點，這通常是<i>index.js</i>文件。當webpack捆綁代碼時，它將包括入口點所導入的所有代碼，以及它導入的代碼所導入的代碼，依此類推。
+在实践中，将代码捆绑在一起的目的是为了定义应用程序的入口点，这通常是<i>index.js</i>文件。当webpack捆绑代码时，它将包括入口点所导入的所有代码，以及它导入的代码所导入的代码，依此类推。
 
 <!-- Since part of the imported files are packages like React, Redux, and Axios, the bundled JavaScript file will also contain the contents of each of these libraries.-->
 由于部分导入的文件是诸如React、Redux和Axios等包，因此打包的JavaScript文件也将包含每个库的内容。
@@ -391,7 +391,7 @@ const App = () =>
 ```
 
 <!-- As we can see from the example above, the React elements that were written in JSX are now created with regular JavaScript by using React''s [createElement](https://reactjs.org/docs/react-without-jsx.html) function.-->
-正如我們從上面的示例中所看到的，用JSX寫的React元素現在通過使用React的[createElement](https://reactjs.org/docs/react-without-jsx.html)函數用普通JavaScript創建。
+正如我们从上面的示例中所看到的，用JSX写的React元素现在通过使用React的[createElement](https://reactjs.org/docs/react-without-jsx.html)函数用普通JavaScript创建。
 
 <!-- You can test the bundled application by opening the <i>build/index.html</i> file with the <i>open file</i> functionality of your browser:-->
 你可以通过使用浏览器的<i>打开文件</i>功能打开<i>build/index.html</i>文件来测试打包的应用程序：
@@ -667,7 +667,7 @@ const App = () => {
 ![devtools console cannot concat on undefined in handleClick](../../images/7/25.png)
 
 <!-- We know that the error is in the onClick method, but if the application was any larger the error message would be quite difficult to track down:-->
-我們知道錯誤在onClick方法中，但如果應用程序更大，錯誤消息將很難追蹤。
+我们知道错误在onClick方法中，但如果应用程序更大，错误消息将很难追踪。
 
 <pre>
 App.js:27 Uncaught TypeError: Cannot read property 'concat' of undefined
@@ -737,7 +737,7 @@ const App = () => {
 当我们将应用程序部署到生产环境时，我们使用由webpack生成的<i>main.js</i>代码包。尽管我们的应用程序只包含几行代码，<i>main.js</i>文件的大小仍为1009487字节。文件大小很大是因为包也包含了整个React库的源代码。该包的大小很重要，因为当应用程序第一次使用时，浏览器必须加载代码。对于高速互联网连接，1009487字节不是问题，但是如果我们继续添加更多的外部依赖项，加载速度可能成为问题，特别是对于移动用户。
 
 <!-- If we inspect the contents of the bundle file, we notice that it could be greatly optimized in terms of file size by removing all of the comments. There''s no point in manually optimizing these files, as there are many existing tools for the job.-->
-如果我們檢查捆綁文件的內容，我們會注意到它可以通過移除所有評論來大大優化文件大小。 手動優化這些文件沒有意義，因為有許多現有的工具可以完成這項工作。
+如果我们检查捆绑文件的内容，我们会注意到它可以通过移除所有评论来大大优化文件大小。 手动优化这些文件没有意义，因为有许多现有的工具可以完成这项工作。
 
 <!-- The optimization process for JavaScript files is called <i>minification</i>. One of the leading tools intended for this purpose is [UglifyJS](http://lisperator.net/uglifyjs/).-->
 JavaScript 文件的优化过程称为<i>精简</i>。针对此目的的领先工具之一是[UglifyJS](http://lisperator.net/uglifyjs/)。
@@ -782,7 +782,7 @@ function h(){if(!d){var e=u(p);d=!0;for(var t=c.length;t;){for(s=c,c=[];++f<t;)s
 ### Development and production configuration
 
 <!-- Next, let''s add a backend to our application by repurposing the now-familiar note application backend.-->
-接下來，讓我們通過重新利用現在熟悉的筆記應用後端來為我們的應用程序添加一個後端。
+接下来，让我们通过重新利用现在熟悉的笔记应用后端来为我们的应用程序添加一个后端。
 
 <!-- Let''s store the following content in the <i>db.json</i> file:-->
 让我们把以下内容存储在<i>db.json</i>文件中：
@@ -874,7 +874,7 @@ module.exports = config
 ```
 
 <!-- Now, if we want, we can set Webpack to work differently depending on whether the application''s operating environment, or <i>mode</i>, is set to production or development.-->
-現在，如果我們想要的話，我們可以根據應用程序的操作環境，或<i>模式</i>，設置為生產或開發，讓Webpack有不同的工作方式。
+现在，如果我们想要的话，我们可以根据应用程序的操作环境，或<i>模式</i>，设置为生产或开发，让Webpack有不同的工作方式。
 
 <!-- We can also use webpack's [DefinePlugin](https://webpack.js.org/plugins/define-plugin/) for defining <i>global default constants</i> that can be used in the bundled code. Let's define a new global constant <i>BACKEND\_URL</i> that gets a different value depending on the environment that the code is being bundled for:-->
 我们也可以使用webpack的[DefinePlugin](https://webpack.js.org/plugins/define-plugin/)来定义<i>全局默认常量</i>，可以在打包代码中使用。让我们定义一个新的全局常量<i>BACKEND\_URL</i>，它根据代码打包的环境获得不同的值：

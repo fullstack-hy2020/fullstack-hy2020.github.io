@@ -318,7 +318,7 @@ inline style有一定的局限性。例如，所谓的[伪类](https://developer
 在线样式和其他一些为 React 组件添加样式的方式完全违反了旧的约定。传统上，最佳实践是完全将 CSS 与内容（HTML）和功能（JavaScript）分离开来。根据这种较旧的思想，目标是将 CSS、HTML 和 JavaScript 写入各自的文件中。
 
 <!-- The philosophy of React is, in fact, the polar opposite of this. Since the separation of CSS, HTML, and JavaScript into separate files did not seem to scale well in larger applications, React bases the division of the application along the lines of its logical functional entities.-->
-React 的哲學與此截然相反。由於將 CSS、HTML 和 JavaScript 分離到不同的檔案在較大的應用程式中並未能有效的擴展，因此 React 將應用程式按照其邏輯功能實體進行划分。
+React 的哲学与此截然相反。由于将 CSS、HTML 和 JavaScript 分离到不同的档案在较大的应用程式中并未能有效的扩展，因此 React 将应用程式按照其逻辑功能实体进行划分。
 
 <!-- The structural units that make up the application's functional entities are React components. A React component defines the HTML for structuring the content, the JavaScript functions for determining functionality, and also the component's styling; all in one place. This is to create individual components that are as independent and reusable as possible.-->
 组成应用功能实体的结构单元是 React 组件。React 组件定义了用于结构化内容的 HTML、用于确定功能的 JavaScript 函数以及组件的样式；所有内容都放在一个地方。这是为了创建尽可能独立且可重用的单独组件。
@@ -343,7 +343,7 @@ React 的哲學與此截然相反。由於將 CSS、HTML 和 JavaScript 分離�
 <h4>2.17*: Phonebook step12</h4>
 
 <!-- Open your application in two browsers. **If you delete a person in browser 1** a short while before attempting to <i>change the person''s phone number</i> in browser 2, you will get the following error message:-->
-如果你在第一個瀏覽器中刪除一個人，然後在第二個瀏覽器中嘗試更改該人的電話號碼，你會收到以下錯誤訊息：
+如果你在第一个浏览器中删除一个人，然后在第二个浏览器中尝试更改该人的电话号码，你会收到以下错误讯息：
 
 ![error message 404 not found when changing multiple browsers](../../images/2/29b.png)
 
@@ -474,7 +474,7 @@ notesToShow.map(note => ...)
 所以，状态的初始化“masked”由于数据尚未从后端获取而导致的问题。
 
 <!-- Another way to circumvent the problem is to use <i>conditional rendering</i> and return null if the component state is not properly initialized:-->
-另一種解決該問題的方法是使用<i>條件渲染</i>，如果組件狀態沒有正確初始化，則返回null：
+另一种解决该问题的方法是使用<i>条件渲染</i>，如果组件状态没有正确初始化，则返回null：
 
 ```js
 const App = () => {
@@ -522,7 +522,7 @@ const App = () => {
 <!-- The second parameter of <em>useEffect</em> is used to [specify how often the effect is run](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect).-->
 <em>useEffect</em>的第二个参数用于[指定效果运行的频率](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect)。
 <!-- The principle is that the effect is always executed after the first render of the component <i>and</i> when the value of the second parameter changes.-->
-原則是，組件首次渲染後就會執行效果， <i>並且</i> 當第二個參數的值發生變化時也會執行。
+原则是，组件首次渲染后就会执行效果， <i>并且</i> 当第二个参数的值发生变化时也会执行。
 
 <!-- If the second parameter is an empty array <em>[]</em>, it''s content never changes and the effect is only run after the first render of the component. This is exactly what we want when we are initializing the app state from the server.-->
 如果第二个参数是一个空数组<em>[]</em>，它的内容永远不会改变，而且效果只会在组件的第一次渲染之后才会生效。当我们从服务器初始化应用程序状态时，这正是我们所希望的。
@@ -703,7 +703,7 @@ if (currency) {
 ![attach show buttons for each country feature](../../images/2/19b4.png)
 
 <!-- In this exercise, it is also enough that your application works for most countries. Countries whose name appears in the name of another country, like <i>Sudan</i>, can be ignored.-->
-在這個練習中，只要你的應用程序對大多數國家有效就足夠了。可以忽略像<i>蘇丹</i>這樣以另一個國家名字命名的國家。
+在这个练习中，只要你的应用程序对大多数国家有效就足够了。可以忽略像<i>苏丹</i>这样以另一个国家名字命名的国家。
 
 <h4>2.20*: Data for countries, step3</h4>
 
@@ -722,7 +722,7 @@ if (currency) {
 **注意：**几乎每个天气服务都需要使用API密钥。不要将API密钥保存到源控制中！也不要将API密钥硬编码到源代码中。而是使用[环境变量](https://create-react-app.dev/docs/adding-custom-environment-variables/)来保存密钥。
 
 <!-- Assuming the api-key is <i>t0p53cr3t4p1k3yv4lu3</i>, when the application is started like so:-->
-假設api-key為<i>t0p53cr3t4p1k3yv4lu3</i>，當應用程序以下面的方式啟動時：
+假设api-key为<i>t0p53cr3t4p1k3yv4lu3</i>，当应用程序以下面的方式启动时：
 
 ```bash
 REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 npm start // For Linux/macOS Bash

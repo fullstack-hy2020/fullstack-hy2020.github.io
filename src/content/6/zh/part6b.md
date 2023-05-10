@@ -100,7 +100,7 @@ const App = () => {
 ### Combined reducers
 
 <!-- We could modify our current reducer to deal with the new shape of the state. However, a better solution in this situation is to define a new separate reducer for the state of the filter:-->
-我們可以修改我們目前的reducer來處理新狀態的形狀。然而，在這種情況下，更好的解決方案是為過濾器的狀態定義一個新的單獨的reducer：
+我们可以修改我们目前的reducer来处理新状态的形状。然而，在这种情况下，更好的解决方案是为过滤器的状态定义一个新的单独的reducer：
 
 ```js
 const filterReducer = (state = 'ALL', action) => {
@@ -255,7 +255,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 ```
 
 <!-- Next, let''s fix a bug that is caused by the code expecting the application store to be an array of notes:-->
-接下來，讓我們修復一個由於代碼期望應用商店為一個筆記數組而導致的錯誤：
+接下来，让我们修复一个由于代码期望应用商店为一个笔记数组而导致的错误：
 
 ![browser TypeError: notes.map is not a function](../../images/6/7ea.png)
 
@@ -592,7 +592,7 @@ createNote(state, action) {
 ```
 
 <!-- We are mutating <em>state</em> argument's array by calling the <em>push</em> method instead of returning a new instance of the array. What's this all about?-->
-我們正在通過調用<em>push</em>方法而不是返回一個新的數組實例來改變<em>state</em>參數的數組。這都是關於什麼的？
+我们正在通过调用<em>push</em>方法而不是返回一个新的数组实例来改变<em>state</em>参数的数组。这都是关于什么的？
 
 <!-- Redux Toolkit utilizes the [Immer](https://immerjs.github.io/immer/) library with reducers created by <em>createSlice</em> function, which makes it possible to mutate the <em>state</em> argument inside the reducer. Immer uses the mutated state to produce a new, immutable state and thus the state changes remain immutable. Note that <em>state</em> can be changed without "mutating" it, as we have done with the <em>toggleImportanceOf</em> action. In this case, the function <i>returns</i> the new state. Nevertheless mutating the state will often come in handy especially when a complex state needs to be updated.-->
 Redux Toolkit 利用 [Immer](https://immerjs.github.io/immer/) 库以及由 <em>createSlice</em> 函数创建的 reducer，使得可以在 reducer 内部突变 <em>state</em> 参数。Immer 使用突变的 state 来生成一个新的不可变的 state，因此 state 的变化仍然保持不可变。请注意，<em>state</em> 可以在不 "突变" 它的情况下被改变，就像我们对 <em>toggleImportanceOf</em> 动作所做的那样。在这种情况下，函数 <i>returns</i> 新的 state。尽管如此，当需要更新复杂的 state 时，突变 state 往往会派上用场。
@@ -723,7 +723,7 @@ console.log(JSON.parse(JSON.stringify(state))) // highlight-line
 ```
 
 <!-- Console output is now human readable-->
-控制台輸出現在是可讀的人類
+控制台输出现在是可读的人类
 
 ![dev tools showing array of 2 notes](../../images/6/41new.png)
 

@@ -161,7 +161,7 @@ export type Action =
 ```
 
 <!-- The reducer looks quite similar to the ones we wrote in [part 6](/en/part6/many_reducers#combined-reducers) before we started to use the Redux Toolkit. It changes the state for each type of action:-->
-紅ucer看起來非常類似於我們在[第6章节](/en/part6/many_reducers#combined-reducers)之前寫的那些，在我們開始使用Redux Toolkit之前。 它會根據每種類型的動作更改狀態：
+红ucer看起来非常类似于我们在[第6章节](/en/part6/many_reducers#combined-reducers)之前写的那些，在我们开始使用Redux Toolkit之前。 它会根据每种类型的动作更改状态：
 
 ```js
 export const reducer = (state: State, action: Action): State => {

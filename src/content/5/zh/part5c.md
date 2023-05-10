@@ -8,7 +8,7 @@ lang: zh
 <div class="content">
 
 <!-- There are many different ways of testing React applications. Let''s take a look at them next.-->
-有許多不同的測試React應用程式的方式。讓我們來看看它們。
+有许多不同的测试React应用程式的方式。让我们来看看它们。
 
 <!-- Tests will be implemented with the same [Jest](http://jestjs.io/) testing library developed by Facebook that was used in the previous part. Jest is configured by default to applications created with create-react-app.-->
 测试将使用Facebook开发的[Jest](http://jestjs.io/)测试库来实施，这是之前部分使用的测试库。 默认情况下，Jest配置为使用create-react-app创建的应用程序。
@@ -133,7 +133,7 @@ $env:CI=$true; npm test
 <!-- The react-testing-library package offers many different ways of investigating the content of the component being tested. In reality, the _expect_ in our test is not needed at all-->
 .
 
-react-testing-library 包提供了許多不同的方式來調查被測試組件的內容。事實上，我們測試中的 _expect_ 根本不需要。
+react-testing-library 包提供了许多不同的方式来调查被测试组件的内容。事实上，我们测试中的 _expect_ 根本不需要。
 
 ```js
 import React from 'react'
@@ -517,7 +517,7 @@ export default NoteForm
 ```
 
 <!-- The form works by calling the _createNote_ function it received as props with the details of the new note.-->
-該表單通過調用其作為props接收到的_createNote_函數，來提交新筆記的詳細信息。
+该表单通过调用其作为props接收到的_createNote_函数，来提交新笔记的详细信息。
 
 <!-- The test is as follows:-->
 测试如下：
@@ -752,7 +752,7 @@ const element = screen.getByText(
 ```
 
 <!-- or we could use the command _findByText_:-->
-我們可以使用指令 _findByText_：
+我们可以使用指令 _findByText_：
 
 ```js
 const element = await screen.findByText('Does not work anymore :(')
@@ -843,7 +843,7 @@ CI=true npm test -- --coverage
 到目前为止，我们对前端的所有测试都是单元测试，以验证各个组件的正确功能。单元测试在某些时候是有用的，但是即使是一套全面的单元测试也不足以验证应用程序作为一个整体是否有效。
 
 <!-- We could also make integration tests for the frontend. Integration testing tests the collaboration of multiple components. It is considerably more difficult than unit testing, as we would have to for example mock data from the server.-->
-我們也可以為前端做整合測試。整合測試測試多個組件之間的協作。它比單元測試要困難得多，因為我們必須模擬來自伺服器的資料。
+我们也可以为前端做整合测试。整合测试测试多个组件之间的协作。它比单元测试要困难得多，因为我们必须模拟来自伺服器的资料。
 <!-- We chose to concentrate on making end-to-end tests to test the whole application. We will work on the end-to-end tests in the last chapter of this part.-->
 我们选择集中精力在做端到端测试来测试整个应用程序。我们将在本部分的最后一章节致力于端到端测试。
 

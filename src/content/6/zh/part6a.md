@@ -208,7 +208,7 @@ store.dispatch({ type: 'DECREMENT' })
 </pre>
 
 <!-- The code of our counter application is the following. All of the code has been written in the same file (_index.js_), so <i>store</i> is straight available for the React code. We will get to know better ways to structure React/Redux code later.-->
-以下是我們計數器應用程式的代碼。所有代碼都寫在同一個文件（_index.js_）中，因此<i>商店</i>對於React代碼直接可用。稍後我們將更好地了解如何結構React/Redux代碼。
+以下是我们计数器应用程式的代码。所有代码都写在同一个文件（_index.js_）中，因此<i>商店</i>对于React代码直接可用。稍后我们将更好地了解如何结构React/Redux代码。
 
 ```js
 import React from 'react'
@@ -975,7 +975,7 @@ const App = () => {
 ### Forwarding Redux Store to various components
 
 <!-- Aside from the reducer, our application is in one file. This is of course not sensible, and we should separate <i>App</i> into its module.-->
-除了Reducer，我們的應用程序都在一個文件中。當然，這是不明智的，我們應該將<i>App</i>拆分為其模塊。
+除了Reducer，我们的应用程序都在一个文件中。当然，这是不明智的，我们应该将<i>App</i>拆分为其模块。
 
 <!-- Now the question is, how can the <i>App</i> access the store after the move? And more broadly, when a component is composed of many smaller components, there must be a way for all of the components to access the store.-->
 现在的问题是，<i>App</i>在迁移后如何访问商店？更广泛地说，当一个组件由许多较小的组件组成时，必须有一种方法让所有组件都能访问存储库。
@@ -990,7 +990,7 @@ npm install react-redux
 ```
 
 <!-- Next, we move the _App_ component into its own file _App.js_. Let''s see how this affects the rest of the application files.-->
-接下來，我們將_App_組件移動到自己的文件_App.js_中。讓我們看看這對應用程序的其他文件有什麼影響。
+接下来，我们将_App_组件移动到自己的文件_App.js_中。让我们看看这对应用程序的其他文件有什么影响。
 
 <!-- _index.js_ becomes:-->
 _index.js_ 变成：
@@ -1198,7 +1198,7 @@ state => state
 <!-- Usually, selector functions are a bit more interesting and return only selected parts of the contents of the Redux store.-->
 通常，选择器函数更有趣一些，只返回 Redux 存储库的部分内容。
 <!-- We could for example return only notes marked as important:-->
-我們可以例如只回傳標記為重要的筆記：
+我们可以例如只回传标记为重要的笔记：
 
 ```js
 const importantNotes = useSelector(state => state.filter(note => note.important))

@@ -88,7 +88,7 @@ describe('Example', () => {
 ```
 
 <!-- Now, let's run our example test by running <em>npm test</em>. The command's output should indicate that the test located in the <i>src/\_\_tests\_\_/example.test.js</i> file is passed.-->
-現在，讓我們通過運行<em>npm test</em>來運行我們的示例測試。該命令的輸出應該表明位於<i>src/\_\_tests\_\_/example.test.js</i>文件中的測試已通過。
+现在，让我们通过运行<em>npm test</em>来运行我们的示例测试。该命令的输出应该表明位于<i>src/\_\_tests\_\_/example.test.js</i>文件中的测试已通过。
 
 ### Organizing tests
 
@@ -211,7 +211,7 @@ React Native Testing Library 的文档有一些很好的提示[如何查询不�
 对于所有可用的查询，请查看React Native Testing Library的[文档](https://callstack.github.io/react-native-testing-library/docs/api-queries)。可在jest-native库的[文档](https://github.com/testing-library/jest-native#matchers)中找到可用的React Native特定匹配器的完整列表。Jest的[文档](https://jestjs.io/docs/en/expect)包含每个通用Jest匹配器。
 
 <!-- The second very important React Native Testing Library concept is firing events. We can fire an event in a provided node by using the [fireEvent](https://callstack.github.io/react-native-testing-library/docs/api#fireevent) object''s methods. This is useful for example typing text into a text field or pressing a button. Here is an example of how to test submitting a simple form:-->
-第二個非常重要的React Native測試庫概念是觸發事件。我們可以使用[fireEvent](https://callstack.github.io/react-native-testing-library/docs/api#fireevent)對象的方法在提供的節點中觸發事件。這對於例如在文本字段中輸入文本或按下按鈕很有用。以下是如何測試提交簡單表單的示例：
+第二个非常重要的React Native测试库概念是触发事件。我们可以使用[fireEvent](https://callstack.github.io/react-native-testing-library/docs/api#fireevent)对象的方法在提供的节点中触发事件。这对于例如在文本字段中输入文本或按下按钮很有用。以下是如何测试提交简单表单的示例：
 
 ```javascript
 import { useState } from 'react';
@@ -275,7 +275,7 @@ describe('Form', () => {
 在这个测试中，我们想要测试在使用<em>fireEvent.changeText</em>方法填充表单字段，并使用<em>fireEvent.press</em>方法按下提交按钮后，<em>onSubmit</em>回调函数是否正确调用。为了检查<em>onSubmit</em>函数是否被调用以及使用哪些参数，我们可以使用[模拟函数](https://jestjs.io/docs/en/mock-function-api)。模拟函数是具有预先编程行为的函数，例如特定的返回值。此外，我们可以为模拟函数创建期望，例如“期望模拟函数被调用一次”。可用期望的完整列表可在Jest的[期望文档](https://jestjs.io/docs/en/expect)中找到。
 
 <!-- Before heading further into the world of testing React Native applications, play around with these examples by adding a test file in the <i>\_\_tests\_\_</i> directory we created earlier.-->
-在進一步深入測試React Native應用程序的世界之前，請在我們剛剛創建的<i>\_\_tests\_\_</i>目錄中添加一個測試文件，玩玩這些示例。
+在进一步深入测试React Native应用程序的世界之前，请在我们刚刚创建的<i>\_\_tests\_\_</i>目录中添加一个测试文件，玩玩这些示例。
 
 ### Handling dependencies in tests
 
@@ -493,7 +493,7 @@ describe('SignIn', () => {
 一如既往，在在应用程序中使用查询之前，请先在Apollo沙盒中测试查询。如果不确定图形查询模式或可用查询，请参阅操作编辑器旁边的文档。如果您在查询中使用id作为变量时遇到问题，请花一点时间研究Apollo客户端[文档](https://www.apollographql.com/docs/react/data/queries/)上的查询。
 
 <!-- To learn how to open a URL in a browser, read the Expo''s [Linking API documentation](https://docs.expo.dev/versions/latest/sdk/linking/). You will need this feature while implementing the button for opening the repository in GitHub. Hint: [Linking.openURL](https://docs.expo.dev/versions/latest/sdk/linking/#linkingopenurlurl) method will come in handy.-->
-要學習如何在瀏覽器中開啟URL，請閱讀Expo的[Linking API文檔](https://docs.expo.dev/versions/latest/sdk/linking/)。在實現打開GitHub存儲庫的按鈕時，您將需要此功能。提示：[Linking.openURL](https://docs.expo.dev/versions/latest/sdk/linking/#linkingopenurlurl)方法會派上用場。
+要学习如何在浏览器中开启URL，请阅读Expo的[Linking API文档](https://docs.expo.dev/versions/latest/sdk/linking/)。在实现打开GitHub存储库的按钮时，您将需要此功能。提示：[Linking.openURL](https://docs.expo.dev/versions/latest/sdk/linking/#linkingopenurlurl)方法会派上用场。
 
 <!-- The view should have its own route. It would be a good idea to define the repository's id in the route's path as a path parameter, which you can access by using the [useParams](https://reactrouter.com/docs/en/v6/api#useparams) hook. The user should be able to access the view by pressing a repository in the reviewed repositories list. You can achieve this by for example wrapping the <em>RepositoryItem</em> with a [Pressable](https://reactnative.dev/docs/pressable) component in the <em>RepositoryList</em> component and using <em>navigate</em> function to change the route in an <em>onPress</em> event handler. You can access the <em>navigate</em> function with the [useNavigate](https://reactrouter.com/docs/en/v6/api#usenavigate) hook.-->
 视图应该有自己的路由。最好在路由的路径中定义存储库的id作为路径参数，您可以通过使用[useParams](https://reactrouter.com/docs/en/v6/api#useparams) hook来访问它。用户应该能够通过在已审查存储库列表中按下存储库来访问该视图。您可以通过例如在<em>RepositoryList</em>组件中包装<em>RepositoryItem</em>并使用<em>navigate</em>函数在<em>onPress</em>事件处理程序中更改路由来实现这一点。您可以使用[useNavigate](https://reactrouter.com/docs/en/v6/api#usenavigate) hook访问<em>navigate</em>函数。
@@ -1183,7 +1183,7 @@ const cache = new InMemoryCache({
 <!-- As we are getting closer to the end of this part, let's take a moment to look at some additional React Native related resources. [Awesome React Native](https://github.com/jondot/awesome-react-native) is an extremely encompassing curated list of React Native resources such as libraries, tutorials, and articles. Because the list is exhaustively long, let's have a closer look at few of its highlights-->
 .
 
-隨著我們越來越接近本部分的結束，讓我們花一點時間來看看一些額外的 React Native 相關資源。[Awesome React Native](https://github.com/jondot/awesome-react-native) 是一份涵蓋性極強的 React Native 資源精選列表，包含了許多函式庫、教學文章和文章。由於該列表極為詳盡，讓我們來看看其中的一些重點吧。
+随著我们越来越接近本部分的结束，让我们花一点时间来看看一些额外的 React Native 相关资源。[Awesome React Native](https://github.com/jondot/awesome-react-native) 是一份涵盖性极强的 React Native 资源精选列表，包含了许多函式库、教学文章和文章。由于该列表极为详尽，让我们来看看其中的一些重点吧。
 
 #### React Native Paper
 

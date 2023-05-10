@@ -8,7 +8,7 @@ lang: zh
 <div class="content">
 
 <!-- We will now start writing tests for the backend. Since the backend does not contain any complicated logic, it doesn''t make sense to write [unit tests](https://en.wikipedia.org/wiki/Unit_testing) for it. The only potential thing we could unit test is the _toJSON_ method that is used for formatting notes.-->
-我們現在開始為後端寫測試。由於後端不包含任何複雜的邏輯，因此寫[單元測試](https://en.wikipedia.org/wiki/Unit_testing)對它沒有意義。我們唯一可以單元測試的東西是用於格式化筆記的_toJSON_方法。
+我们现在开始为后端写测试。由于后端不包含任何复杂的逻辑，因此写[单元测试](https://en.wikipedia.org/wiki/Unit_testing)对它没有意义。我们唯一可以单元测试的东西是用于格式化笔记的_toJSON_方法。
 
 <!-- In some situations, it can be beneficial to implement some of the backend tests by mocking the database instead of using a real database. One library that could be used for this is [mongodb-memory-server](https://github.com/nodkz/mongodb-memory-server).-->
 在某些情况下，使用模拟数据库而不是使用真实数据库来实施一些后端测试可能是有益的。可以使用[mongodb-memory-server](https://github.com/nodkz/mongodb-memory-server)库来实现这一点。
@@ -174,7 +174,7 @@ afterAll(async () => {
 我们的测试向<i>api/notes</i> URL发出HTTP GET请求，并验证请求被响应状态码为200。测试还验证<i>Content-Type</i>头被设置为<i>application/json</i>，表明数据是所需格式。
 
 <!-- Checking the value of the header uses a bit strange looking syntax:-->
-檢查頭值使用一個看起來有點奇怪的語法：
+检查头值使用一个看起来有点奇怪的语法：
 
 ```js
 .expect('Content-Type', /application\/json/)
@@ -184,7 +184,7 @@ afterAll(async () => {
 所需的值现在定义为[正则表达式](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)或简称为regex。正则表达式以斜杠/开头和结尾，因为所需的字符串<i>application/json</i>也包含相同的斜杠，所以它前面有一个\，以便不将其解释为正则表达式终止字符。
 
 <!-- In principle, the test could also have been defined as a string-->
-**原則上，試驗也可以定義為一個字串**
+**原则上，试验也可以定义为一个字串**
 
 ```js
 .expect('Content-Type', 'application/json')
@@ -465,7 +465,7 @@ npm test -- -t 'notes'
 ### async/await
 
 <!-- Before we write more tests let''s take a look at the _async_ and _await_ keywords.-->
-在我們寫更多測試之前，讓我們來看看_async_和_await_關鍵字。
+在我们写更多测试之前，让我们来看看_async_和_await_关键字。
 
 <!-- The async/await syntax that was introduced in ES7 makes it possible to use <i>asynchronous functions that return a promise</i> in a way that makes the code look synchronous.-->
 ES7 引入的 async/await 语法使得能够以同步代码的方式使用 <i>返回 promise 的异步函数</i>。
@@ -570,7 +570,7 @@ notesRouter.get('/', async (request, response) => {
 ```
 
 <!-- We can verify that our refactoring was successful by testing the endpoint through the browser and by running the tests that we wrote earlier.-->
-我們可以通過瀏覽器測試端點以及運行之前編寫的測試來驗證我們的重構是否成功。
+我们可以通过浏览器测试端点以及运行之前编写的测试来验证我们的重构是否成功。
 
 <!-- You can find the code for our current application in its entirety in the <i>part4-3</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-3).-->
 您可以在[此GitHub存储库](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-3)的<i>part4-3</i>分支中找到我们当前应用程序的完整代码。
@@ -1287,7 +1287,7 @@ beforeEach(async () => {
 ```
 
 <!-- The asynchronous nature of JavaScript can lead to surprising behavior, and for this reason, it is important to pay careful attention when using the async/await syntax. Even though the syntax makes it easier to deal with promises, it is still necessary to understand how promises work!-->
-JavaScript 的非同步性質可能導致令人驚訝的行為，因此，在使用 async/await 語法時需要仔細注意。儘管語法使得處理 promise 變得更容易，但仍然需要理解 promise 是如何運作的！
+JavaScript 的非同步性质可能导致令人惊讶的行为，因此，在使用 async/await 语法时需要仔细注意。尽管语法使得处理 promise 变得更容易，但仍然需要理解 promise 是如何运作的！
 
 <!-- The code for our application can be found on [GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5), branch <i>part4-5</i>.-->
 我们应用的代码可以在[GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5)的<i>part4-5</i>分支上找到。
@@ -1306,7 +1306,7 @@ JavaScript 的非同步性質可能導致令人驚訝的行為，因此，在使
 全栈开发<i>非常困难</i>，这就是为什么我要用尽一切可能的方法来使它变得更容易。
 
 <!-- - I will have my browser developer console open all the time-->
-我會一直開啟我的瀏覽器開發人員控制台。
+我会一直开启我的浏览器开发人员控制台。
 <!-- - I will use the network tab of the browser dev tools to ensure that frontend and backend are communicating as I expect-->
 我将使用浏览器开发工具的网络选项卡来确保前端和后端正如我所期望的那样进行通信。
 <!-- - I will constantly keep an eye on the state of the server to make sure that the data sent there by the frontend is saved there as I expect-->
@@ -1383,7 +1383,7 @@ module.exports = () => {
 ```
 
 <!-- **NB:** when you are writing your tests **<i>it is better to not execute all of your tests</i>**, only execute the ones you are working on. Read more about this [here](/en/part4/testing_the_backend#running-tests-one-by-one).-->
-**<i>最好不要執行所有的測試，只執行你正在做的測試。更多關於此的資訊請參閱[這裡](/en/part4/testing_the_backend#running-tests-one-by-one)。</i>**
+**<i>最好不要执行所有的测试，只执行你正在做的测试。更多关于此的资讯请参阅[这里](/en/part4/testing_the_backend#running-tests-one-by-one)。</i>**
 
 #### 4.9: Blog list tests, step2
 

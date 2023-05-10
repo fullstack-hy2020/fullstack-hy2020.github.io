@@ -8,7 +8,7 @@ lang: zh
 <div class="content">
 
 <!-- Let's expand the application so that the notes are stored in the backend. We'll use [json-server](/en/part2/getting_data_from_server), familiar from part 2.-->
-讓我們擴展應用，使筆記存儲在後端。 我們將使用[json-server](/en/part2/getting_data_from_server)，從第2部分熟悉。
+让我们扩展应用，使笔记存储在后端。 我们将使用[json-server](/en/part2/getting_data_from_server)，从第2部分熟悉。
 
 <!-- The initial state of the database is stored in the file <i>db.json</i>, which is placed in the root of the project:-->
 数据库的初始状态存储在文件<i>db.json</i>中，该文件放置在项目根目录中：
@@ -61,7 +61,7 @@ npm install json-server --save-dev
 <!-- Next, we''ll create a method into the file <i>services/notes.js</i>, which uses <i>axios</i> to fetch data from the backend-->
 .
 
-接下來，我們將在文件<i>services/notes.js</i>中創建一個方法，該方法使用<i>axios</i>從後端獲取數據。
+接下来，我们将在文件<i>services/notes.js</i>中创建一个方法，该方法使用<i>axios</i>从后端获取数据。
 
 ```js
 import axios from 'axios'
@@ -84,7 +84,7 @@ npm install axios
 ```
 
 <!-- We''ll change the initialization of the state in <i>noteReducer</i>, so that by default there are no notes:-->
-我們將會改變<i>noteReducer</i>的狀態初始化，這樣預設就沒有筆記了：
+我们将会改变<i>noteReducer</i>的状态初始化，这样预设就没有笔记了：
 
 ```js
 const noteSlice = createSlice({
@@ -669,7 +669,7 @@ Redux Toolkit 提供了多种工具来简化异步状态管理。适用于此用
 #### 6.18 Anecdotes and the backend, step5
 
 <!-- Voting does not yet save changes to the backend. Fix the situation with the help of the Redux Thunk library.-->
-投票尚未將更改儲存到後端。使用 Redux Thunk 庫來修復這個情況。
+投票尚未将更改储存到后端。使用 Redux Thunk 库来修复这个情况。
 
 #### 6.19 Anecdotes and the backend, step6
 

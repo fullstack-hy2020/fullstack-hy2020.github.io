@@ -10,7 +10,7 @@ lang: zh
 ### Complex state
 
 <!-- In our previous example, the application state was simple as it was comprised of a single integer. What if our application requires a more complex state?-->
-在我們之前的示例中，應用狀態很簡單，因為它只包含一個整數。如果我們的應用需要一個更複雜的狀態呢？
+在我们之前的示例中，应用状态很简单，因为它只包含一个整数。如果我们的应用需要一个更复杂的状态呢？
 
 <!-- In most cases, the easiest and best way to accomplish this is by using the _useState_ function multiple times to create separate "pieces" of state.-->
 在大多数情况下，最简单、最好的方法是多次使用_useState_函数来创建独立的"状态片段"。
@@ -500,10 +500,10 @@ const App = () => {
 ### Old React
 
 <!-- In this course, we use the [state hook](https://react.dev/learn/state-a-components-memory) to add state to our React components, which is part of the newer versions of React and is available from version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) onwards. Before the addition of hooks, there was no way to add state to functional components. Components that required state had to be defined as [class](https://react.dev/reference/react/Component) components, using the JavaScript class syntax.-->
-在本課程中，我們使用[state hook](https://react.dev/learn/state-a-components-memory)來為我們的React組件增加狀態，這是React新版本的一部分，從[16.8.0](https://www.npmjs.com/package/react/v/16.8.0)版本開始就可以使用。在添加hooks之前，沒有辦法將狀態添加到功能組件中。需要狀態的組件必須使用JavaScript類語法定義為[class](https://react.dev/reference/react/Component)組件。
+在本课程中，我们使用[state hook](https://react.dev/learn/state-a-components-memory)来为我们的React组件增加状态，这是React新版本的一部分，从[16.8.0](https://www.npmjs.com/package/react/v/16.8.0)版本开始就可以使用。在添加hooks之前，没有办法将状态添加到功能组件中。需要状态的组件必须使用JavaScript类语法定义为[class](https://react.dev/reference/react/Component)组件。
 
 <!-- In this course, we have made the slightly radical decision to use hooks exclusively from day one, to ensure that we are learning the current and future variations of React. Even though functional components are the future of React, it is still important to learn the class syntax, as there are billions of lines of legacy React code that you might end up maintaining someday. The same applies to documentation and examples of React that you may stumble across on the internet.-->
-在本課程中，我們做出了一個略微激進的決定，從一開始就僅僅使用hook，以確保我們正在學習React的當前和未來變化。儘管函數組件是React的未來，學習類語法仍然很重要，因為您可能有數十億行的React遺留代碼需要維護。同樣適用於您可能在互聯網上遇到的React文檔和示例。
+在本课程中，我们做出了一个略微激进的决定，从一开始就仅仅使用hook，以确保我们正在学习React的当前和未来变化。尽管函数组件是React的未来，学习类语法仍然很重要，因为您可能有数十亿行的React遗留代码需要维护。同样适用于您可能在互联网上遇到的React文档和示例。
 
 <!-- We will learn more about React class components later on in the course.-->
 我们稍后在课程中会更多地了解React类组件。
@@ -1037,7 +1037,7 @@ const hello = (who) => {
 ```
 
 <!-- Since our _hello_ function is composed of a single return command, we can omit the curly braces and use the more compact syntax for arrow functions:-->
-自從我們的`hello`函數由單一的返回命令組成，我們可以省略大括號並使用更簡潔的箭頭函數語法：
+自从我们的`hello`函数由单一的返回命令组成，我们可以省略大括号并使用更简洁的箭头函数语法：
 
 ```js
 const hello = (who) =>
@@ -1285,7 +1285,7 @@ we'll stick to functional components.
 编程很难，这就是为什么我会用尽一切可能的手段来让它变得更容易。
 
 <!-- - I will have my browser developer console open all the time-->
-我會一直開著瀏覽器開發者控制台。
+我会一直开著浏览器开发者控制台。
 <!-- - I progress with small steps-->
 我一步一步地前进。
 <!-- - I will write lots of _console.log_ statements to make sure I understand how the code behaves and to help pinpointing problems-->
@@ -1313,7 +1313,7 @@ the spreadsheet.
 [我的提交] 选项卡，[提交应用程序](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)
 
 <!-- Remember, submit **all** the exercises of one part **in a single submission**. Once you have submitted your solutions for one part, **you cannot submit more exercises to that part anymore**.-->
-記住，**一次提交**就把一部分的所有練習提交上去。一旦你把一部分的練習提交完畢，**就不能再提交更多練習給那一部分了**。
+记住，**一次提交**就把一部分的所有练习提交上去。一旦你把一部分的练习提交完毕，**就不能再提交更多练习给那一部分了**。
 
 <i>Some of the exercises work on the same application. In these cases, it is sufficient to submit just the final version of the application. If you wish, you can make a commit after every finished exercise, but it is not mandatory.</i>
 
@@ -1330,7 +1330,7 @@ rm -rf node_modules/ && npm i
 <!-- If and <i>when</i> you encounter an error message-->
 , take a screenshot and contact the developer
 
-如果（和<i>當</i>）你遇到錯誤消息，請擷取截圖並聯繫開發者。
+如果（和<i>当</i>）你遇到错误消息，请撷取截图并联系开发者。
 
 <!-- > <i>Objects are not valid as a React child</i>-->
 <i>对象无效，不能用作 React 子组件</i>
@@ -1478,7 +1478,7 @@ const Statistics = (props) => {
 <i>Typical source of an error _Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist._ is Chrome extension. Try going to _chrome://extensions/_ and try disabling them one by one and refreshing React app page; the error should eventually disappear.</i>
 
 <!-- **Make sure that from now on you don''t see any warnings in your console!**-->
-確保從現在開始你的控制台不再出現任何警告！
+确保从现在开始你的控制台不再出现任何警告！
 
 <h4>1.12*: anecdotes step1</h4>
 
@@ -1540,7 +1540,7 @@ export default App
 **注意**：将每个轶事的投票存储在组件状态中的数组或对象中。请记住，更新存储在对象和数组等复杂数据结构中的状态的正确方法是制作一个状态的副本。
 
 <!-- You can create a copy of an object like this:-->
-你可以像這樣創建一個對象的副本：
+你可以像这样创建一个对象的副本：
 
 ```js
 const points = { 0: 1, 1: 3, 2: 4, 3: 2 }

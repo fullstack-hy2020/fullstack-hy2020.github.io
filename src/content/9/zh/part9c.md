@@ -59,7 +59,7 @@ TypeScript 的原生编译器（<i>tsc</i>）可以帮助我们通过生成<i>ts
 *npm run build --* -p src/tsconfig.json
 
 <!-- The <i>tsconfig.json</i> file we just created contains a lengthy list of every configuration available to us. However, most of them are commented out.-->
-<i>tsconfig.json</i> 文件我們剛剛創建包含了一個詳細的配置列表可供我們使用。但是，其中大部分都是被注釋掉的。
+<i>tsconfig.json</i> 文件我们刚刚创建包含了一个详细的配置列表可供我们使用。但是，其中大部分都是被注释掉的。
 <!-- Studying this file can help you find some configuration options you might need.-->
 研究这个文件可以帮助你找到一些可能需要的配置选项。
 <!-- It is also completely okay to keep the commented lines, in case you might need them someday.-->
@@ -192,9 +192,9 @@ npm install --save-dev eslint @types/express @typescript-eslint/eslint-plugin @t
 ```
 
 <!-- Now we just need to set up our development environment, and we are ready to start writing some serious code.-->
-現在，我們只需要設置我們的開發環境，我們就準備好開始編寫一些嚴肅的代碼了。
+现在，我们只需要设置我们的开发环境，我们就准备好开始编写一些严肃的代码了。
 <!-- There are many different options for this. One option could be to use the familiar <i>nodemon</i> with <i>ts-node</i>. However, as we saw earlier, <i>ts-node-dev</i> does the same thing, so we will use that instead.-->
-有許多不同的選項可以選擇，其中一個選項可以是使用熟悉的<i>nodemon</i>加上<i>ts-node</i>。但正如我們之前看到的，<i>ts-node-dev</i>也可以做到同樣的事情，所以我們將改用它。
+有许多不同的选项可以选择，其中一个选项可以是使用熟悉的<i>nodemon</i>加上<i>ts-node</i>。但正如我们之前看到的，<i>ts-node-dev</i>也可以做到同样的事情，所以我们将改用它。
 <!-- So, let''s install <i>ts-node-dev</i>:-->
 那么，让我们安装<i>ts-node-dev</i>：
 
@@ -339,7 +339,7 @@ npm run lint
 #### 9.8: Patientor backend, step1
 
 <!-- Initialize a new backend project that will work with the frontend. Configure eslint and tsconfig with the same configurations as proposed in the material. Define an endpoint that answers HTTP GET requests for route */api/ping*.-->
-初始化一個新的後端專案，該專案將與前端配合工作。使用和材料中提出的相同配置配置eslint和tsconfig。定義一個回應HTTP GET請求的端點，路由為*/api/ping*。
+初始化一个新的后端专案，该专案将与前端配合工作。使用和材料中提出的相同配置配置eslint和tsconfig。定义一个回应HTTP GET请求的端点，路由为*/api/ping*。
 
 <!-- The project should be runnable with npm scripts, both in development mode and, as compiled code, in production mode.-->
 项目应该可以通过npm脚本在开发模式和编译后的生产模式下运行。
@@ -350,7 +350,7 @@ npm run lint
 Fork 和 clone 这个项目 [patientor](https://github.com/fullstack-hy2020/patientor)。 通过 README 文件开始这个项目。
 
 <!-- You can run this command if you get an error message when trying to start the frontend:-->
-如果在啟動前端時遇到錯誤訊息，您可以執行以下指令：
+如果在启动前端时遇到错误讯息，您可以执行以下指令：
 
 ```shell
 npm update chokidar
@@ -562,7 +562,7 @@ export default {
 ```
 
 <!-- And our problem is solved.-->
-而我們的問題就這樣解決了。
+而我们的问题就这样解决了。
 
 <!-- > **NB**: For some reason, VSCode sometimes complains that it cannot find the file <i>../../data/entries.json</i> from the service despite the file existing. That is a bug in the editor, and goes away when the editor is restarted.-->
 > **注意**：由于某些原因，VSCode有时会抱怨它无法从服务器中找到文件<i>../../data/entries.json</i>，尽管文件存在。这是编辑器中的一个错误，重新启动编辑器后就会消失。
@@ -570,7 +570,7 @@ export default {
 <!-- Earlier, we saw how the compiler can decide the type of a variable by the value it is assigned.-->
 以前，我们看到编译器可以通过赋予变量的值来决定变量的类型。
 <!-- Similarly, the compiler can interpret large data sets consisting of objects and arrays.-->
-同樣地，編譯器可以解釋由對象和陣列組成的大型資料集。
+同样地，编译器可以解释由对象和阵列组成的大型资料集。
 <!-- Due to this, the compiler warns us if we try to do something suspicious with the JSON data we are handling. For example, if we are handling an array containing objects of a specific type, and we try to add an object which does not have all the fields the other objects have, or has type conflicts (for example, a number where there should be a string), the compiler can give us a warning.-->
 由于这个原因，如果我们试图对处理的JSON数据做一些可疑的操作，编译器会向我们发出警告。例如，如果我们处理的是一个包含特定类型对象的数组，并且我们尝试添加一个没有其他对象所有字段的对象，或者有类型冲突（例如，应该是字符串的地方却是数字），编译器可以给我们一个警告。
 
@@ -606,7 +606,7 @@ export interface DiaryEntry {
 ```
 
 <!-- We can now try to type our imported JSON:-->
-我們現在可以嘗試輸入我們導入的JSON：
+我们现在可以尝试输入我们导入的JSON：
 
 ```js
 import diaryData from '../../data/entries.json';
@@ -745,7 +745,7 @@ export interface DiaryEntry {
 ```
 
 <!-- According to the node documentation for [file modules](https://nodejs.org/api/modules.html#modules_file_modules),-->
-根據[文件模塊](https://nodejs.org/api/modules.html#modules_file_modules)的節點文檔，
+根据[文件模块](https://nodejs.org/api/modules.html#modules_file_modules)的节点文档，
 <!-- node will try to resolve modules in order of extensions:-->
 node 将按照扩展名的顺序尝试解析模块：
 
@@ -779,7 +779,7 @@ import myModule from "./myModule";
 ```
 
 <!-- Looking closely at the order of node module extensions:-->
-看細了節點模塊擴展的順序：
+看细了节点模块扩展的顺序：
 
 ```shell
  ["js", "json", "node", "ts", "tsx"]
@@ -803,14 +803,14 @@ import myModule from "./myModule";
 我们可以通过使用实用类型[Pick](https://www.typescriptlang.org/docs/handbook/utility-types.html#picktype-keys)来实现。
 
 <!-- In our project, we should consider that Ilari might want to create a listing of all his diary entries <i>excluding</i> the comment field since, during a very scary flight, he might end up writing something he wouldn''t necessarily want to show anyone else.-->
-在我們的項目中，我們應該考慮Ilari可能想要創建一個所有日記條目的列表，<i>排除</i>評論欄，因為在一次非常可怕的飛行中，他可能會寫下一些他不想讓別人看到的東西。
+在我们的项目中，我们应该考虑Ilari可能想要创建一个所有日记条目的列表，<i>排除</i>评论栏，因为在一次非常可怕的飞行中，他可能会写下一些他不想让别人看到的东西。
 
 <!-- The [Pick](https://www.typescriptlang.org/docs/handbook/utility-types.html#picktype-keys) utility type allows us to choose which fields of an existing type we want to use.-->
 [Pick](https://www.typescriptlang.org/docs/handbook/utility-types.html#picktype-keys) 实用类型允许我们选择现有类型中我们想要使用的字段。
 <!-- Pick can be used to either construct a completely new type or to inform a function what it should return on runtime.-->
 使用 Pick 可以用来构造一个全新的类型，或者在运行时告知函数它应该返回什么。
 <!-- Utility types are a special kind of type, but they can be used just like regular types.-->
-utility 型是一種特殊類型，但它們可以像普通類型一樣使用。
+utility 型是一种特殊类型，但它们可以像普通类型一样使用。
 
 <!-- In our case, to create a "censored" version of the *DiaryEntry* for public displays, we can use *Pick* in the function declaration:-->
 在我们的情况下，为了在公共展示中创建一个“被审查”版本的*日记条目*，我们可以在函数声明中使用*选择*：
@@ -931,7 +931,7 @@ const getNonSensitiveEntries = (): DiaryEntry[] => {
 \* 注意，如果你使用 *？* 操作符使评论字段变为可选，一切都会正常工作。
 
 <!-- Utility types include many handy tools, and it is undoubtedly worth it to take some time to study [the documentation](https://www.typescriptlang.org/docs/handbook/utility-types.html).-->
-包括許多實用的工具，而且毫無疑問值得花些時間研究[文檔](https://www.typescriptlang.org/docs/handbook/utility-types.html)。
+包括许多实用的工具，而且毫无疑问值得花些时间研究[文档](https://www.typescriptlang.org/docs/handbook/utility-types.html)。
 
 <!-- Finally, we can complete the route which returns all diary entries:-->
 最后，我们可以完成返回所有日记条目的路由：
@@ -1224,7 +1224,7 @@ app.listen(PORT, () => {
 <!-- Applications rarely work completely on their own, and we are forced to live with the fact that data from sources outside of our system cannot be fully trusted.-->
 应用程序很少能完全独立运行，我们不得不忍受系统外部数据不能完全受信任的事实。
 <!-- When we receive data from an outside source, there is no way it can already be typed when we receive it. We need to make decisions on how to handle the uncertainty that comes with this.-->
-当我們從外部來源收到資料時，它無法已經被打字排列好。我們需要對如何處理不確定性做出決定。
+当我们从外部来源收到资料时，它无法已经被打字排列好。我们需要对如何处理不确定性做出决定。
 
 <!-- The disabled ESlint rule was hinting to us that the following assignment is risky:-->
 被禁用的ESlint规则暗示我们，以下赋值有风险：
@@ -1239,7 +1239,7 @@ const newDiaryEntry = diaryService.addDiary({
 ```
 
 <!-- We would like to have the assurance that the object in a POST request has the correct type. Let us now define a function *toNewDiaryEntry* that receives the request body as a parameter and returns a properly-typed *NewDiaryEntry* object. The function shall be defined in the file <i>utils.ts</i>.-->
-我們希望能確保POST請求中的對象具有正確的類型。現在讓我們定義一個接收請求體作為參數並返回正確類型的*NewDiaryEntry*對象的函數*toNewDiaryEntry*。該函數將定義在文件<i>utils.ts</i>中。
+我们希望能确保POST请求中的对象具有正确的类型。现在让我们定义一个接收请求体作为参数并返回正确类型的*NewDiaryEntry*对象的函数*toNewDiaryEntry*。该函数将定义在文件<i>utils.ts</i>中。
 
 <!-- The route definition uses the function as follows:-->
 路由定义使用如下功能：
@@ -1323,7 +1323,7 @@ export default toNewDiaryEntry;
 
 >太阳灿烂地照耀
 <!-- > <i>If you are like me and hate having a code in broken state for a long time due to incomplete typing, you could star by "faking" the function: </i>-->
-> <i>如果你像我一樣討厭因為沒有完成輸入而導致代碼長時間处於損壞狀態，你可以從“偽裝”功能開始：</i>
+> <i>如果你像我一样讨厌因为没有完成输入而导致代码长时间处于损坏状态，你可以从“伪装”功能开始：</i>
 <!-- >-->
 I like to learn Chinese
 
@@ -1617,11 +1617,11 @@ var x = 5;
 然而，不太可能有人会用构造函数创建一个字符串。最可能的情况是，类型检查的简单版本就足够了。
 
 <!-- Next, let''s consider the *date* field.-->
-接下來，讓我們來考慮*日期*欄位。
+接下来，让我们来考虑*日期*栏位。
 <!-- Parsing and validating the date object is pretty similar to what we did with comments.-->
 解析和验证日期对象与我们对评论所做的工作相当相似。
 <!-- Since TypeScript doesn''t know a type for a date, we need to treat it as a *string*.-->
-由於TypeScript不知道日期的類型，我們需要將其視為*字符串*。
+由于TypeScript不知道日期的类型，我们需要将其视为*字符串*。
 <!-- We should however still use JavaScript-level validation to check whether the date format is acceptable.-->
 我们应该仍然使用JavaScript-level验证来检查日期格式是否可接受。
 

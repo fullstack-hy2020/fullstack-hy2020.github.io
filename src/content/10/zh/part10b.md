@@ -47,7 +47,7 @@ const HelloWorld = props => {
 ```
 
 <!-- So we import the [Text](https://reactnative.dev/docs/text) component from React Native and replace the *div* element with a *Text* element. Many familiar DOM elements have their React Native "counterparts". Here are some examples picked from React Native''s [Core Components documentation](https://reactnative.dev/docs/components-and-apis):-->
-所以我們從React Native導入[文本](https://reactnative.dev/docs/text)組件，並用*Text*元素替換*div*元素。很多熟悉的DOM元素都有它們的React Native "對應項"。以下是從React Native的[核心組件文檔](https://reactnative.dev/docs/components-and-apis)中選取的一些示例：
+所以我们从React Native导入[文本](https://reactnative.dev/docs/text)组件，并用*Text*元素替换*div*元素。很多熟悉的DOM元素都有它们的React Native "对应项"。以下是从React Native的[核心组件文档](https://reactnative.dev/docs/components-and-apis)中选取的一些示例：
 
 <!-- - [Text](https://reactnative.dev/docs/text) component is <i>the only</i> React Native component that can have textual children. It is similar to for example the _&lt;strong&gt;_ and the _&lt;h1&gt;_ elements.-->
 <i>React Native</i> 组件中，[文本](https://reactnative.dev/docs/text) 组件是唯一可以有文本子元素的组件。它类似于<strong>和<h1>元素。
@@ -120,7 +120,7 @@ export default App;
 ### Manually reloading the application
 
 <!-- As we have seen, Expo will automatically reload the application when we make changes to the code. However, there might be times when automatic reload isn''t working and the application has to be reloaded manually. This can be achieved through the in-app developer menu.-->
-如我們所見，當我們對代碼進行更改時，Expo將自動重新加載應用程序。 但是，有時自動重新加載可能不起作用，應用程序必須手動重新加載。 這可以通過應用程序內的開發人員菜單實現。
+如我们所见，当我们对代码进行更改时，Expo将自动重新加载应用程序。 但是，有时自动重新加载可能不起作用，应用程序必须手动重新加载。 这可以通过应用程序内的开发人员菜单实现。
 
 <!-- You can access the developer menu by shaking your device or by selecting "Shake Gesture" inside the Hardware menu in the iOS Simulator. You can also use the <em>⌘D</em> keyboard shortcut when your app is running in the iOS Simulator, or <em>⌘M</em> when running in an Android emulator on Mac OS and <em>Ctrl+M</em> on Windows and Linux.-->
 你可以通过摇动设备或在iOS模拟器的硬件菜单中选择“摇动手势”来访问开发者菜单。当你的应用程序在iOS模拟器中运行时，也可以使用<em>⌘D</em>键盘快捷键，或者在Mac OS上运行Android模拟器时使用<em>⌘M</em>，在Windows和Linux上使用<em>Ctrl+M</em>。
@@ -365,7 +365,7 @@ export default theme;
 ```
 
 <!-- Next, we should create the actual <em>Text</em> component which uses this theme configuration. Create a <i>Text.jsx</i> file in the <i>components</i> directory where we already have our other components. Add the following content to the <i>Text.jsx</i> file:-->
-接下來，我們應該創建一個實際的<em>文字</em>組件，它使用這個主題配置。在<i>組件</i>目錄中創建一個<i>Text.jsx</i>文件，我們已經有其他組件了。將以下內容添加到<i>Text.jsx</i>文件：
+接下来，我们应该创建一个实际的<em>文字</em>组件，它使用这个主题配置。在<i>组件</i>目录中创建一个<i>Text.jsx</i>文件，我们已经有其他组件了。将以下内容添加到<i>Text.jsx</i>文件：
 
 ```javascript
 import { Text as NativeText, StyleSheet } from 'react-native';
@@ -437,7 +437,7 @@ export default Main;
 ### Using flexbox for layout
 
 <!-- The last concept we will cover related to styling is implementing layouts with [flexbox](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox). Those who are more familiar with CSS know that flexbox is not related only to React Native, it has many use cases in web development as well. Those who know how flexbox works in web development won't probably learn that much from this section. Nevertheless, let's learn or revise the basics of flexbox.-->
-最后一個與樣式有關的概念是使用[flexbox](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox)實現佈局。那些對CSS更熟悉的人知道，flexbox不僅僅與React Native有關，在網頁開發中也有很多用途。那些知道flexbox在網頁開發中的工作原理的人可能不會從這一部分學到太多。不過，讓我們來學習或重新檢查flexbox的基礎知識吧。
+最后一个与样式有关的概念是使用[flexbox](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox)实现布局。那些对CSS更熟悉的人知道，flexbox不仅仅与React Native有关，在网页开发中也有很多用途。那些知道flexbox在网页开发中的工作原理的人可能不会从这一部分学到太多。不过，让我们来学习或重新检查flexbox的基础知识吧。
 
 <!-- Flexbox is a layout entity consisting of two separate components: a <i>flex container</i> and inside it a set of <i>flex items</i>. A Flex container has a set of properties that control the flow of its items. To make a component a flex container it must have the style property <em>display</em> set as <em>flex</em> which is the default value for the <em>display</em> property. Here is an example of a flex container:-->
 Flexbox 是一个由两个单独组件组成的布局实体：一个<i>flex容器</i>和它内部的一组<i>flex项</i>。Flex容器有一组控制其项目流动的属性。要使一个组件成为flex容器，它必须将样式属性<em>display</em>设置为<em>flex</em>，这是<em>display</em>属性的默认值。这里是一个flex容器的示例：
@@ -522,7 +522,7 @@ const FlexboxExample = () => {
 #### Exercise 10.4: the app bar
 
 <!-- We will soon need to navigate between different views in our application. That is why we need an [app bar](https://material.io/components/app-bars-top/) to display tabs for switching between different views. Create a file <i>AppBar.jsx</i> in the <i>components</i> folder with the following content:-->
-我們很快就需要在我們的應用程序之間導航。這就是為什麼我們需要一個[應用程序欄](https://material.io/components/app-bars-top/)來顯示切換不同視圖的標籤。在<i>components</i>文件夾中創建一個文件<i>AppBar.jsx</i>，其內容如下：
+我们很快就需要在我们的应用程序之间导航。这就是为什么我们需要一个[应用程序栏](https://material.io/components/app-bars-top/)来显示切换不同视图的标签。在<i>components</i>文件夹中创建一个文件<i>AppBar.jsx</i>，其内容如下：
 
 ```javascript
 import { View, StyleSheet } from 'react-native';
@@ -544,7 +544,7 @@ export default AppBar;
 ```
 
 <!-- Now that the <em>AppBar</em> component will prevent the status bar from overlapping the content, you can remove the <em>marginTop</em> style we added for the <em>Main</em> component earlier in the <i>Main.jsx</i> file. The <em>AppBar</em> component should currently contain a tab with the text <em>"Repositories"</em>. Make the tab pressable by using the [Pressable](https://reactnative.dev/docs/pressable) component but you don''t have to handle the <em>onPress</em> event in any way. Add the <em>AppBar</em> component to the <em>Main</em> component so that it is the uppermost component on the screen. The <em>AppBar</em> component should look something like this:-->
-現在，<em>AppBar</em> 組件可以防止狀態欄重疊內容，您可以在 <i>Main.jsx</i> 文件中移除我們之前為 <em>Main</em> 組件添加的 <em>marginTop</em> 樣式。<em>AppBar</em> 組件當前應該包含一個帶有文本 <em>"Repositories"</em> 的標籤。使用 [Pressable](https://reactnative.dev/docs/pressable) 組件使標籤可按，但您不必以任何方式處理 <em>onPress</em> 事件。將 <em>AppBar</em> 組件添加到 <em>Main</em> 組件中，使其成為屏幕上最上層的組件。<em>AppBar</em> 組件應該看起來像這樣：
+现在，<em>AppBar</em> 组件可以防止状态栏重叠内容，您可以在 <i>Main.jsx</i> 文件中移除我们之前为 <em>Main</em> 组件添加的 <em>marginTop</em> 样式。<em>AppBar</em> 组件当前应该包含一个带有文本 <em>"Repositories"</em> 的标签。使用 [Pressable](https://reactnative.dev/docs/pressable) 组件使标签可按，但您不必以任何方式处理 <em>onPress</em> 事件。将 <em>AppBar</em> 组件添加到 <em>Main</em> 组件中，使其成为屏幕上最上层的组件。<em>AppBar</em> 组件应该看起来像这样：
 
 ![Application preview](../../images/10/6.jpg)
 
@@ -975,7 +975,7 @@ const FormikTextInput = ({ name, ...props }) => {
 当前<em>FormikTextInput</em>组件的实现应该在被触摸的字段出现错误时显示一条错误消息。通过将错误消息的颜色设置为红色来强调这条错误消息。
 
 <!-- On top of the red error message, give an invalid field a visual indication of an error by giving it a red border color. Remember that if a field has an error, the <em>FormikTextInput</em> component sets the <em>TextInput</em> component''s <em>error</em> prop as <em>true</em>. You can use the value of the <em>error</em> prop to attach conditional styles to the <em>TextInput</em> component.-->
-在紅色錯誤訊息之上，給無效欄位一個紅色邊框的視覺指示，以指示錯誤。請記住，如果欄位有錯誤，<em>FormikTextInput</em>元件將<em>TextInput</em>元件的<em>error</em> prop設置為<em>true</em>。您可以使用<em>error</em> prop的值將條件樣式附加到<em>TextInput</em>元件。
+在红色错误讯息之上，给无效栏位一个红色边框的视觉指示，以指示错误。请记住，如果栏位有错误，<em>FormikTextInput</em>元件将<em>TextInput</em>元件的<em>error</em> prop设置为<em>true</em>。您可以使用<em>error</em> prop的值将条件样式附加到<em>TextInput</em>元件。
 
 <!-- Here''s what the sign-in form should roughly look like with an invalid field:-->
 这就是登录表单应该大致看起来的样子，有一个无效字段： 

@@ -80,7 +80,7 @@ npm run ts-node file.ts -- -s --someoption
 #### A note about the coding style
 
 <!-- JavaScript is a quite relaxed language in itself, and things can often be done in multiple different ways. For example, we have named vs anonymous functions, using const and let or var, and the use of <i>semicolons</i>. This part of the course differs from the rest by using semicolons. It is not a TypeScript-specific pattern but a general coding style decision taken when creating any kind of JavaScript project. Whether to use them or not is usually in the hands of the programmer, but since it is expected to adapt one''s coding habits to the existing codebase, you are expected to use semicolons and adjust to the coding style in the exercises for this part. This part has some other coding style differences compared to the rest of the course as well, e.g. in the directory naming conventions.-->
-JavaScript 本身是一種相當寬鬆的語言，事情往往可以用多種不同的方式來完成。例如，我們有命名和匿名函數，使用 `const` 和 `let` 或 `var`，以及 <i>分號</i> 的使用。這部分課程與其他部分不同之處在於使用分號。這不是 TypeScript 特定的模式，而是在創建任何類型的 JavaScript 項目時採取的一般編碼風格決定。是否使用它們通常掌握在程序員手中，但由於預期將編碼習慣適應現有的代碼庫，因此您應該使用分號並適應此部分練習中的編碼風格。與課程其餘部分相比，此部分還有一些其他的編碼風格差異，例如目錄命名約定。
+JavaScript 本身是一种相当宽松的语言，事情往往可以用多种不同的方式来完成。例如，我们有命名和匿名函数，使用 `const` 和 `let` 或 `var`，以及 <i>分号</i> 的使用。这部分课程与其他部分不同之处在于使用分号。这不是 TypeScript 特定的模式，而是在创建任何类型的 JavaScript 项目时采取的一般编码风格决定。是否使用它们通常掌握在程序员手中，但由于预期将编码习惯适应现有的代码库，因此您应该使用分号并适应此部分练习中的编码风格。与课程其余部分相比，此部分还有一些其他的编码风格差异，例如目录命名约定。
 
 <!-- Let us add a configuration file *tsconfig.json* to the project with the following content:-->
 让我们把以下内容的配置文件*tsconfig.json*添加到该项目中：
@@ -96,7 +96,7 @@ JavaScript 本身是一種相當寬鬆的語言，事情往往可以用多種不
 <!-- The <i>tsconfig.json</i> file is used to define how the TypeScript compiler should interpret the code, how strictly the compiler should work, which files to watch or ignore, and [much more](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html).-->
 `<i>tsconfig.json</i>`文件用于定义TypeScript编译器如何解释代码、编译器的严格程度、哪些文件需要监视或忽略等[更多内容](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)。
 <!-- For now, we will only use the compiler option [noImplicitAny](https://www.typescriptlang.org/tsconfig#noImplicitAny), which does not require having types for all variables used.-->
-現在，我們只會使用編譯器選項[noImplicitAny](https://www.typescriptlang.org/tsconfig#noImplicitAny)，它不需要對所使用的所有變量都有類型。
+现在，我们只会使用编译器选项[noImplicitAny](https://www.typescriptlang.org/tsconfig#noImplicitAny)，它不需要对所使用的所有变量都有类型。
 
 <!-- Let''s start by creating a simple Multiplier. It looks exactly as it would in JavaScript.-->
 让我们从创建一个简单的乘法器开始。它看起来和JavaScript中的一样。
@@ -139,7 +139,7 @@ multiplicator('how about a string?', 4, 'Multiplied a string and 4, the result i
 TypeScript 原生支持多种类型，包括 *number*、*string* 和 *Array*。可以参考[这里](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)的全面列表。也可以创建更复杂的自定义类型。
 
 <!-- The first two parameters of our function are the number and the string [primitives](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#the-primitives-string-number-and-boolean), respectively:-->
-我們函數的前兩個參數分別是[原始型別](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#the-primitives-string-number-and-boolean)的數字和字串：
+我们函数的前两个参数分别是[原始型别](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#the-primitives-string-number-and-boolean)的数字和字串：
 
 ```js
 const multiplicator = (a: number, b: number, printText: string) => {
@@ -150,7 +150,7 @@ multiplicator('how about a string?', 4, 'Multiplied a string and 4, the result i
 ```
 
 <!-- Now the code is no longer valid JavaScript but in fact TypeScript. When we try to run the code, we notice that it does not compile:-->
-現在這段代碼不再是有效的JavaScript，而是TypeScript。當我們嘗試運行代碼時，我們注意到它沒有編譯：
+现在这段代码不再是有效的JavaScript，而是TypeScript。当我们尝试运行代码时，我们注意到它没有编译：
 
 ![terminal output showing error assigning string to number](../../images/9/2a.png)
 
@@ -254,7 +254,7 @@ const calculator = (a: number, b: number, op: Operation): Result =>  {
 ```
 
 <!-- But now the question is if it''s <i>really</i> okay for the function to return a string?-->
-但是現在的問題是，這個函數真的可以返回一個字符串嗎？
+但是现在的问题是，这个函数真的可以返回一个字符串吗？
 
 <!-- When your code can end up in a situation where something is divided by 0, something has probably gone terribly wrong and an error should be thrown and handled where the function was called.-->
 当你的代码最终会陷入一个被0除的情况时，可能出现了一些严重的错误，应该抛出一个错误并在调用该函数的地方进行处理。
@@ -416,7 +416,7 @@ npm install --save-dev @types/node
 ### Improving the project
 
 <!-- Next, let''s add npm scripts to run our two programs <i>multiplier</i> and <i>calculator</i>:-->
-接下來，讓我們加入npm腳本來執行我們的兩個程式<i>multiplier</i>和<i>calculator</i>:
+接下来，让我们加入npm脚本来执行我们的两个程式<i>multiplier</i>和<i>calculator</i>:
 
 ```json
 {
@@ -531,7 +531,7 @@ npm run multiply 1 lol
 ```
 
 <!-- we get a proper error message:-->
-我們得到一個適當的錯誤訊息：
+我们得到一个适当的错误讯息：
 
 ```shell
 Something bad happened. Error: Provided values were not numbers!
@@ -586,7 +586,7 @@ let values: Array<number>;
 ```
 
 <!-- In this course we shall mostly be following the convention enforced by the Eslint rule [array-simple](https://typescript-eslint.io/rules/array-type/#array-simple) that suggests to write the simple arrays with the [] syntax and use the the <> syntax for the more complex ones, see [here](https://typescript-eslint.io/rules/array-type/#array-simple) for examples.-->
-在本課程中，我們將主要遵循Eslint規則[array-simple](https://typescript-eslint.io/rules/array-type/#array-simple)強制執行的約定，該規則建議使用[]語法編寫簡單數組，並使用<>語法編寫更复雜的數組，詳見[此處](https://typescript-eslint.io/rules/array-type/#array-simple)獲取示例。
+在本课程中，我们将主要遵循Eslint规则[array-simple](https://typescript-eslint.io/rules/array-type/#array-simple)强制执行的约定，该规则建议使用[]语法编写简单数组，并使用<>语法编写更复杂的数组，详见[此处](https://typescript-eslint.io/rules/array-type/#array-simple)获取示例。
 
 </div>
 
@@ -650,7 +650,7 @@ Normal (healthy weight)
 <!-- - the number of days-->
 **天数**
 <!-- - the number of training days-->
-- 訓練天數
+- 训练天数
 <!-- - the original target value-->
 # 这个目标值
 
@@ -726,7 +726,7 @@ $ npm run calculateExercises 2 1 0 2 4.5 0 3 1 0 4
 ```
 
 <!-- In the example, the <i>first argument</i> is the target value.-->
-在這個例子中，<i>第一個參數</i>是目標值。
+在这个例子中，<i>第一个参数</i>是目标值。
 
 <!-- Handle exceptions and errors appropriately. The exerciseCalculator should accept inputs of varied lengths. Determine by yourself how you manage to collect all needed input.-->
 处理异常和错误的方式恰当。`exerciseCalculator`应该接受不同长度的输入。自行决定如何收集所有所需的输入。
@@ -762,7 +762,7 @@ default export "this is the default..."
 ```
 
 <!-- Another note: somehow surprisingly TypeScript does not allow to define the same variable in many files at a "block-scope", that is, outside functions (or classes):-->
-另一個注意事項：令人意外的是，TypeScript不允許在許多檔案中以「區塊範圍」（即在函數（或類別）之外）定義相同的變數：
+另一个注意事项：令人意外的是，TypeScript不允许在许多档案中以「区块范围」（即在函数（或类别）之外）定义相同的变数：
 
 ![browser showing pong from localhost:3000/ping](../../images/9/60new.png)
 
@@ -894,7 +894,7 @@ npm install --save-dev @types/express
 ![vscode showing problem of implicitly having any type](../../images/9/8a.png)
 
 <!-- Whereas when we use *import*, the editor knows the actual types:-->
-而當我們使用*import*時，編輯器知道實際類型：
+而当我们使用*import*时，编辑器知道实际类型：
 
 ![vscode showing req is of type Request](../../images/9/9x.png)
 
@@ -1100,7 +1100,7 @@ export const calculator = (a: number, b: number, op: Operation) : number => {
 我们也可以明确地类型化东西 *任何*。隐式和显式任何类型之间唯一的区别是代码看起来如何；编译器不关心这种区别。
 
 <!-- Programmers however see the code differently when *any* is explicitly enforced than when it is implicitly inferred.-->
-程序員然而會以不同的方式看待代碼，當明確強調 *任何* 時比起隱式推斷更加強烈。
+程序员然而会以不同的方式看待代码，当明确强调 *任何* 时比起隐式推断更加强烈。
 <!-- Implicit *any* typings are usually considered problematic, since it is quite often due to the coder forgetting to assign types (or being too lazy to do it), and it also means that the full power of TypeScript is not properly exploited.-->
 隐式*任何*类型通常被认为是有问题的，因为这往往是由于程序员忘记指定类型（或者太懒而没有做），这也意味着TypeScript的全部功能没有得到正确利用。
 
@@ -1119,7 +1119,7 @@ our coding styles.
 
 如果我们想限制开发者使用*任何*类型，那该怎么办？幸运的是，我们除了<i>tsconfig.json</i>之外还有其他方法来强制执行编码风格。我们可以使用<i>ESlint</i>来管理我们的编码风格。
 <!-- our code.-->
-我們的代碼。
+我们的代码。
 <!-- Let''s install ESlint and its TypeScript extensions:-->
 # 让我们安装ESlint及其TypeScript扩展：
 
@@ -1171,10 +1171,10 @@ npm install --save-dev eslint @typescript-eslint/eslint-plugin @typescript-eslin
 <!-- [@typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) has a lot of TypeScript-specific ESlint rules, but you can also use all basic ESlint rules in TypeScript projects.-->
 [@typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) 拥有大量特定于 TypeScript 的 ESLint 规则，但是你也可以在 TypeScript 项目中使用所有基本的 ESLint 规则。
 <!-- For now, we should probably go with the recommended settings, and we will modify the rules as we go along whenever we find something we want to change the behavior of.-->
-現在，我們應該選擇推薦的設置，然後，當我們發現有什麼想改變行為的時候，我們就會隨時修改規則。
+现在，我们应该选择推荐的设置，然后，当我们发现有什么想改变行为的时候，我们就会随时修改规则。
 
 <!-- On top of the recommended settings, we should try to get familiar with the coding style required in this part and <i>set the semicolon at the end of each line of code to required</i>.-->
-在推薦的設置之上，我們應該嘗試熟悉這部分所需的編碼風格，並<i>將分號設置在每行代碼的末尾</i>。
+在推荐的设置之上，我们应该尝试熟悉这部分所需的编码风格，并<i>将分号设置在每行代码的末尾</i>。
 
 <!-- So we will use the following <i>.eslintrc</i>-->
 file
@@ -1213,7 +1213,7 @@ file
 ```
 
 <!-- Quite a few semicolons are missing, but those are easy to add. We also have to solve the ESlint issues concerning the *any* type:-->
-漏掉了不少分號，但這些很容易補上。我們也必須解決關於 *任意* 類型的 ESLint 問題：
+漏掉了不少分号，但这些很容易补上。我们也必须解决关于 *任意* 类型的 ESLint 问题：
 
 ![vscode error unsafe assignment of any value](../../images/9/50x.png)
 
@@ -1403,7 +1403,7 @@ provided by the server or generated by the client.
 根据错误情况而定。后一种情况发生在输入值的类型不正确，即它们不是数字或者不可转换为数字时。
 
 <!-- In this exercise, you might find it beneficial to use the *explicit any* type when handling the data in the request body. Our ESlint configuration is preventing this but you may unset this rule for a particular line by inserting the following comment as the previous line:-->
-在這個練習中，當處理請求體中的數據時，你可能會發現使用*明確任何*類型有益。我們的ESlint配置正在阻止這種情況，但你可以通過在上一行插入以下評論來取消此規則：
+在这个练习中，当处理请求体中的数据时，你可能会发现使用*明确任何*类型有益。我们的ESlint配置正在阻止这种情况，但你可以通过在上一行插入以下评论来取消此规则：
 
 ```js
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

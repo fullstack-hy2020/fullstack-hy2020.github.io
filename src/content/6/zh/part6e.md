@@ -95,15 +95,15 @@ export default ConnectedNotes           // highlight-line
 该组件需要从Redux存储中获取笔记列表和过滤器的值。*connect*函数接受所谓的[mapStateToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapstatetoprops-state-ownprops--object)函数作为其第一个参数。该函数可用于定义基于Redux存储状态的<i>连接组件</i>的props。
 
 <!-- If we define:-->
-若我們定義：
+若我们定义：
 
 1. Success as being happy
 
-1. 成功就是快樂
+1. 成功就是快乐
 
 2. Failure as being unhappy
 
-2. 失敗就是不快樂
+2. 失败就是不快乐
 
 ```js
 const Notes = (props) => { // highlight-line
@@ -162,7 +162,7 @@ export default ConnectedNotes
 <!-- The *NoteList* component does not need the information about which filter is selected, so we can move the filtering logic elsewhere.-->
 *NoteList* 组件不需要有关哪个过滤器被选中的信息，因此我们可以把过滤逻辑放在其他地方。
 <!-- We just have to give it correctly filtered notes in the *notes* prop:-->
-我們只需要在*notes* prop中提供正確篩選過的筆記：
+我们只需要在*notes* prop中提供正确筛选过的笔记：
 
 ```js
 const Notes = (props) => {
@@ -434,7 +434,7 @@ import { createNote } from './../reducers/noteReducer'
 调用*createNote*也可以直接引用action creator，但不应这样做，因为这是没有添加自动分发的未修改版本的action creator。
 
 <!-- If we print the functions to the console from the code (we have not yet looked at this useful debugging trick):-->
-如果我們從代碼中打印出功能到控制台（我們還沒有看到這個有用的調試技巧）：
+如果我们从代码中打印出功能到控制台（我们还没有看到这个有用的调试技巧）：
 
 ```js
 const NewNote = (props) => {
@@ -507,7 +507,7 @@ export default connect(
 这是一个具有单个<i>createNote</i>属性，其值为<i>createNote</i>函数的对象。
 
 <!-- Alternatively, we could pass the following <i>function</i> definition as the second parameter to *connect*:-->
-我們也可以將以下<i>函數</i>定義作為第二個參數傳遞給*connect*：
+我们也可以将以下<i>函数</i>定义作为第二个参数传递给*connect*：
 
 ```js
 const NewNote = (props) => {
@@ -581,7 +581,7 @@ Dan Abramov创造了一个叫做[Getting started with Redux](https://egghead.io/
 <!-- - Often allow containment via props.children.-->
 通常通过props.children允许封装。
 <!-- - Have no dependencies on the rest of the app, such as Redux actions or stores.-->
-沒有依賴其他應用程序，如Redux動作或商店。
+没有依赖其他应用程序，如Redux动作或商店。
 <!-- - Don’t specify how the data is loaded or mutated.-->
 不要指定数据如何被加载或变更。
 <!-- - Receive data and callbacks exclusively via props.-->
@@ -589,7 +589,7 @@ Dan Abramov创造了一个叫做[Getting started with Redux](https://egghead.io/
 <!-- - Rarely have their own state (when they do, it’s UI state rather than data).-->
 他们很少拥有自己的状态（如果有的话，那是UI状态而不是数据）。
 <!-- - Are written as functional components unless they need state, lifecycle hooks, or performance optimizations.-->
-除非它們需要狀態、生命週期鉤子或性能優化，否則會以功能組件的形式書寫。
+除非它们需要状态、生命周期钩子或性能优化，否则会以功能组件的形式书写。
 
 <!-- The *connected component* that is created with the *connect* function:-->
 *连接组件*，通过*连接*函数创建：
@@ -674,7 +674,7 @@ HOCs 是[高阶函数](https://en.wikipedia.org/wiki/Higher-order_function) (HOF
 **应该我们总是使用Redux吗？可能不是。Redux的开发者Dan Abramov在他的文章《你可能不需要Redux》（[You Might Not Need Redux](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367)）中讨论了这个问题。**
 
 <!-- Nowadays it is possible to implement Redux-like state management without Redux by using the React [context](https://reactjs.org/docs/context.html) api and the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) hook.-->
-現在可以通過使用React [context](https://reactjs.org/docs/context.html) api和[useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) hook來實現類似Redux的狀態管理，而不需要Redux。
+现在可以通过使用React [context](https://reactjs.org/docs/context.html) api和[useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) hook来实现类似Redux的状态管理，而不需要Redux。
 <!-- More about this [here](https://www.simplethread.com/cant-replace-redux-with-hooks/) and [here](https://hswolff.com/blog/how-to-usecontext-with-usereducer/). We will also practice this in-->
 class.
 

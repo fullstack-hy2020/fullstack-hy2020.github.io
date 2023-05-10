@@ -44,7 +44,7 @@ TypeScript 提供了用于预期数据结构、函数、组件和状态的类型
 是时候让我们认真完成[练习9.8-9.13](/en/part9/typing_an_express_app)中构建的后端的前端了。 为了完成应用程序，我们实际上还需要一些新功能来支持后端。
 
 <!-- Before diving into the code, let us start both the frontend and the backend.-->
-在潛入代碼之前，讓我們開始前端和後端。
+在潜入代码之前，让我们开始前端和后端。
 
 <!-- If all goes well, you should see a patient listing page. It fetches a list of patients from our backend, and renders it to the screen as a simple table. There is also a button for creating new patients on the backend. As we are using mock data instead of a database, the data will not persist - closing the backend will delete all the data we have added. UI design has not been a strong point of the creators, so let''s disregard the UI for now.-->
 如果一切顺利，您应该能看到一个病人列表页面。它从我们的后端获取一系列病人，并将其渲染到屏幕上作为一个简单的表格。还有一个按钮可以在后端创建新的病人。由于我们正在使用模拟数据而不是数据库，因此数据不会永久保存 - 关闭后端将删除我们添加的所有数据。UI设计不是创造者的强项，所以让我们暂时忽略UI吧。
@@ -55,7 +55,7 @@ TypeScript 提供了用于预期数据结构、函数、组件和状态的类型
 <!-- In principle, we could use the same types for both backend and frontend, but usually, the frontend has different data structures and use cases for the data, which causes the types to be different.-->
 在原则上，我们可以同时使用后端和前端的同一种类型，但通常情况下，前端的数据结构和数据使用情况不同，这就导致类型也不同。
 <!-- For example, the frontend has a state and may want to keep data in objects or maps whereas the backend uses an array. The frontend might also not need all the fields of a data object saved in the backend, and it may need to add some new fields to use for rendering.-->
-例如，前端有一個狀態，可能希望將數據保存在對象或地圖中，而後端使用一個數組。前端可能不需要後端保存的數據對象的所有字段，也可能需要添加一些新字段用於渲染。
+例如，前端有一个状态，可能希望将数据保存在对象或地图中，而后端使用一个数组。前端可能不需要后端保存的数据对象的所有字段，也可能需要添加一些新字段用于渲染。
 
 <!-- The folder structure looks as follows:-->
 文件夹结构如下：
@@ -267,9 +267,9 @@ export type NonSensitivePatient = Omit<Patient, 'ssn' | 'entries'>;  // highligh
 <!-- In [exercise 9.10](/en/part9/typing_an_express_app#exercises-9-10-9-11) we implemented an endpoint for fetching information about various diagnoses, but we are still not using that endpoint at all.-->
 在[练习9.10](/en/part9/typing_an_express_app#exercises-9-10-9-11)中，我们实现了一个用于获取有关各种诊断信息的端点，但我们仍然没有使用该端点。
 <!-- Since we now have a page for viewing a patient''s information, it would be nice to expand our data a bit.-->
-自從我們現在有了一個可以查看病人資料的頁面，那麼增加一些資料會很好。
+自从我们现在有了一个可以查看病人资料的页面，那么增加一些资料会很好。
 <!-- Let's add an *Entry* field to our patient data so that a patient's data contains their medical entries, including possible diagnoses.-->
-讓我們為我們的病人資料新增一個*記錄*欄位，以便病人資料包含他們的醫療記錄，包括可能的診斷。
+让我们为我们的病人资料新增一个*记录*栏位，以便病人资料包含他们的医疗记录，包括可能的诊断。
 
 <!-- Let''s ditch our old patient seed data from the backend and start using [this expanded format](https://github.com/fullstack-hy2020/misc/blob/master/patients-full.ts).-->
 让我们抛弃后端的旧患者种子数据，开始使用[这种扩展格式](https://github.com/fullstack-hy2020/misc/blob/master/patients-full.ts)。
@@ -502,7 +502,7 @@ We must take the initiative to make our dreams come true.
 记住我们的应用程序有不同类型的条目，因此我们的后端应该支持所有这些类型，并确保每种类型至少提供所有必填字段。
 
 <!-- In this exercise you quite likely need to remember [this trick](/en/part9/grande_finale_patientor#omit-with-unions).-->
-在這個練習中，你很可能需要記住[這個技巧](/en/part9/grande_finale_patientor#omit-with-unions)。
+在这个练习中，你很可能需要记住[这个技巧](/en/part9/grande_finale_patientor#omit-with-unions)。
 
 <!-- You may assume that the diagnostic codes are sent in a correct form and use eg. the following kind of parser to extract those from the request body:-->
 您可以假设诊断码以正确的形式发送，并使用例如以下类型的解析器从请求正文中提取这些信息：
@@ -521,7 +521,7 @@ const parseDiagnosisCodes = (object: unknown): Array<Diagnosis['code']> =>  {
 #### 9.27: Patientor, step8
 
 <!-- Now that our backend supports adding entries, we want to add the corresponding functionality to the frontend. In this exercise, you should add a form for adding an entry to a patient. An intuitive place for accessing the form would be on a patient''s page.-->
-現在我們的後端支持添加條目，我們想將相應的功能添加到前端。 在本次練習中，您應該添加一個用於對患者添加條目的表單。 訪問表單的直觀位置是在患者頁面上。
+现在我们的后端支持添加条目，我们想将相应的功能添加到前端。 在本次练习中，您应该添加一个用于对患者添加条目的表单。 访问表单的直观位置是在患者页面上。
 
 <!-- In this exercise, it is enough to **support <i>one</i> entry type**. All the fields in the form can be just plain text inputs, so it is up to user to enter valid values.-->
 在这个练习中，**足以支持<i>一个</i>条目类型**就可以了。表单中的所有字段都可以是普通的文本输入，因此用户输入有效值取决于用户自己。

@@ -154,7 +154,7 @@ COPY --from=build-stage /usr/src/app/build /usr/share/nginx/html # highlight-lin
 我们还宣布了<i>另一个阶段</i>，只移动第一阶段的相关文件（包含静态内容的<i>构建</i>目录）。
 
 <!-- After we build it again, the image is ready to serve the static content. The default port will be 80 for Nginx, so something like _-p 8000:80_ will work, so the parameters of the run command need to be changed a bit.-->
-在我們重新構建它之後，圖像就準備好提供靜態內容了。Nginx的默認端口將是80，因此像_-p 8000:80_這樣的東西將會有用，因此需要對運行命令的參數進行一些更改。
+在我们重新构建它之后，图像就准备好提供静态内容了。Nginx的默认端口将是80，因此像_-p 8000:80_这样的东西将会有用，因此需要对运行命令的参数进行一些更改。
 
 <!-- Multi-stage builds also include some internal optimizations that may affect your builds. As an example, multi-stage builds skip stages that are not used. If we wish to use a stage to replace a part of a build pipeline, like testing or notifications, we must pass **some** data to the following stages. In some cases this is justified: copy the code from the testing stage to the build stage. This ensures that you are building the tested code.-->
 多级构建还包括一些可能影响构建的内部优化。例如，多级构建会跳过未使用的阶段。如果我们希望使用一个阶段来替换构建流水线的一部分，比如测试或通知，我们必须将**一些**数据传递给后续阶段。在某些情况下这是合理的：从测试阶段复制代码到构建阶段。这可以确保您正在构建测试过的代码。
@@ -560,7 +560,7 @@ a02ae58f3e8d   nginx:1.20.1      "/docker-entrypoint.…"   4 minutes ago   Up 4
 访问`http://localhost:8080`会跳转到一个看起来熟悉的页面，但是状态码为502。
 
 <!-- This is because directing requests to http://localhost:3000 leads to nowhere as the Nginx container does not have an application running in port 3000. By definition, localhost refers to the current computer used to access it. With containers localhost is unique for each container, leading to the container itself.-->
-因为將請求導向到http://localhost:3000導致無法連接，因為Nginx容器沒有在3000端口運行應用程序。按照定義，localhost指的是當前用於訪問它的電腦。對於容器而言，localhost對於每個容器都是獨一無二的，導致容器本身。
+因为将请求导向到http://localhost:3000导致无法连接，因为Nginx容器没有在3000端口运行应用程序。按照定义，localhost指的是当前用于访问它的电脑。对于容器而言，localhost对于每个容器都是独一无二的，导致容器本身。
 
 <!-- Let's test this by going inside the Nginx container and using curl to send a request to the application itself. In our usage curl is similar to wget, but won't need any flags.-->
 让我们通过进入Nginx容器并使用curl向应用程序本身发送请求来测试这一点。 在我们的用法中，curl类似于wget，但不需要任何标志。
@@ -578,7 +578,7 @@ root@374f9e62bfa8:/# curl http://localhost:80
 为了帮助我们，当我们运行_docker compose up_时，Docker Compose设置了一个网络。它还将<i>docker-compose.yml</i>中的所有容器添加到网络中。DNS确保我们可以找到其他容器。每个容器都有两个名称：服务名称和容器名称。
 
 <!-- Since we are inside the container, we can also test the DNS! Let''s curl the service name (app) in port 3000-->
-自從我們在容器內，我們也可以測試DNS！讓我們用curl測試服務名稱（app）在3000端口！
+自从我们在容器内，我们也可以测试DNS！让我们用curl测试服务名称（app）在3000端口！
 
 ```html
 root@374f9e62bfa8:/# curl http://app:3000

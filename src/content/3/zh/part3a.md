@@ -8,7 +8,7 @@ lang: zh
 <div class="content">
 
 <!-- In this part, our focus shifts towards the backend: that is, towards implementing functionality on the server side of the stack.-->
-在這一部分，我們的重點轉移到後端：也就是在堆棧的伺服器端實現功能。
+在这一部分，我们的重点转移到后端：也就是在堆栈的伺服器端实现功能。
 
 <!-- We will be building our backend on top of [NodeJS](https://nodejs.org/en/), which is a JavaScript runtime based on Google''s [Chrome V8](https://developers.google.com/v8/) JavaScript engine.-->
 我们将在[NodeJS](https://nodejs.org/en/)的基础上构建我们的后端，它是基于Google的[Chrome V8](https://developers.google.com/v8/)JavaScript引擎的JavaScript运行时环境。
@@ -20,7 +20,7 @@ lang: zh
 正如[部分1](/en/part1/java_script)中提到的，浏览器尚不支持JavaScript的最新功能，这就是为什么在浏览器中运行的代码必须使用例如[babel](https://babeljs.io/)进行<i>转译</i>。而JavaScript在后端运行的情况则不同。最新版本的Node支持大部分JavaScript的最新功能，因此我们可以使用最新的功能而无需转译我们的代码。
 
 <!-- Our goal is to implement a backend that will work with the notes application from [part 2](/en/part2/). However, let''s start with the basics by implementing a classic "hello world" application.-->
-我們的目標是實現一個與[第二部分](/en/part2/)中的筆記應用程序配合使用的後端。不過，讓我們先從實現一個經典的“Hello World”應用程序開始。
+我们的目标是实现一个与[第二部分](/en/part2/)中的笔记应用程序配合使用的后端。不过，让我们先从实现一个经典的“Hello World”应用程序开始。
 
 <!-- **Notice** that the applications and exercises in this part are not all React applications, and we will not use the <i>create-react-app</i> utility for initializing the project for this application.-->
 **注意**：本部分的应用程序和练习并非全部是React应用程序，我们不会使用<i>create-react-app</i>工具来初始化该应用程序的项目。
@@ -63,7 +63,7 @@ lang: zh
 ```
 
 <!-- Next, let''s create the first version of our application by adding an <i>index.js</i> file to the root of the project with the following code:-->
-接下來，我們可以通過在項目根目錄添加一個 <i>index.js</i> 文件來創建我們應用程序的第一個版本，文件內容如下：
+接下来，我们可以通过在项目根目录添加一个 <i>index.js</i> 文件来创建我们应用程序的第一个版本，文件内容如下：
 
 ```js
 console.log('hello world')
@@ -229,7 +229,7 @@ console.log(`Server running on port ${PORT}`)
 ```
 
 <!-- The primary purpose of the backend server in this course is to offer raw data in JSON format to the frontend. For this reason, let''s immediately change our server to return a hardcoded list of notes in the JSON format:-->
-在本課程中，後端伺服器的主要目的是以JSON格式提供原始資料給前端。因此，讓我們立刻更改我們的伺服器，以JSON格式返回一個硬編碼的筆記列表：
+在本课程中，后端伺服器的主要目的是以JSON格式提供原始资料给前端。因此，让我们立刻更改我们的伺服器，以JSON格式返回一个硬编码的笔记列表：
 
 ```js
 const http = require('http')
@@ -331,7 +331,7 @@ npm update
 ```
 
 <!-- Likewise, if we start working on the project on another computer, we can install all up-to-date dependencies of the project defined in <i>package.json</i> by running this next command in the project''s root directory:-->
-同樣地，如果我們在另一台電腦上開始這個專案，我們可以在專案的根目錄下執行下一個指令來安裝<i>package.json</i>中定義的所有最新的依賴：
+同样地，如果我们在另一台电脑上开始这个专案，我们可以在专案的根目录下执行下一个指令来安装<i>package.json</i>中定义的所有最新的依赖：
 
 ```bash
 npm install
@@ -413,10 +413,10 @@ app.get('/api/notes', (request, response) => {
 ![api/notes gives the formatted JSON data again](../../images/3/6new.png)
 
 <!-- Next, let''s take a quick look at the data sent in JSON format.-->
-接下來，讓我們快速看一下以JSON格式發送的資料。
+接下来，让我们快速看一下以JSON格式发送的资料。
 
 <!-- In the earlier version where we were only using Node, we had to transform the data into the JSON format with the _JSON.stringify_ method:-->
-在我們只使用Node的早期版本中，我們必須使用_JSON.stringify_方法將資料轉換為JSON格式：
+在我们只使用Node的早期版本中，我们必须使用_JSON.stringify_方法将资料转换为JSON格式：
 
 ```js
 response.end(JSON.stringify(notes))
@@ -473,7 +473,7 @@ npm install --save-dev nodemon
 如果您不小心使用了错误的命令，并且nodemon依赖项被添加到“dependencies”而不是“devDependencies”下，那么手动将<i>package.json</i>的内容更改为上面所示。
 
 <!-- By development dependencies, we are referring to tools that are needed only during the development of the application, e.g. for testing or automatically restarting the application, like <i>nodemon</i>.-->
-通過開發依賴，我們指的是只在應用程序開發期間才需要的工具，例如用於測試或自動重新啟動應用程序的<i>nodemon</i>。
+通过开发依赖，我们指的是只在应用程序开发期间才需要的工具，例如用于测试或自动重新启动应用程序的<i>nodemon</i>。
 
 <!-- These development dependencies are not needed when the application is run in production mode on the production server (e.g. Fly.io or Heroku).-->
 这些开发依赖在生产服务器（例如Fly.io或Heroku）上以生产模式运行应用程序时是不需要的。
@@ -522,7 +522,7 @@ npm run dev
 让我们扩展我们的应用，使它提供与[json-server](https://github.com/typicode/json-server#routes)相同的RESTful HTTP API。
 
 <!-- Representational State Transfer, aka REST, was introduced in 2000 in Roy Fielding''s [dissertation](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm). REST is an architectural style meant for building scalable web applications.-->
-Representational State Transfer，也稱為REST，於2000年由Roy Fielding在他的[論文](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)中介紹。REST 是一種架構風格，用於構建可擴展的Web應用程序。
+Representational State Transfer，也称为REST，于2000年由Roy Fielding在他的[论文](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)中介绍。REST 是一种架构风格，用于构建可扩展的Web应用程序。
 
 <!-- We are not going to dig into Fielding's definition of REST or spend time pondering about what is and isn't RESTful. Instead, we take a more [narrow view](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) by only concerning ourselves with how RESTful APIs are typically understood in web applications. The original definition of REST is not even limited to web applications.-->
 我们不会深入研究Fielding关于REST的定义，也不会花时间思考什么是RESTful，什么不是RESTful。相反，我们以[狭义的视角](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services)来看待RESTful API，只关注它在web应用中的典型理解。REST的原始定义甚至不局限于web应用。
@@ -540,7 +540,7 @@ Representational State Transfer，也稱為REST，於2000年由Roy Fielding在�
 如果我们将笔记的资源类型定义为<i>笔记</i>，那么具有标识符10的笔记资源的唯一地址为<i>www.example.com/api/notes/10</i>。
 
 <!-- The URL for the entire collection of all note resources is <i>www.example.com/api/notes</i>.-->
-URL 整個筆記資源的集合是 <i>www.example.com/api/notes</i>。
+URL 整个笔记资源的集合是 <i>www.example.com/api/notes</i>。
 
 <!-- We can execute different operations on resources. The operation to be executed is defined by the HTTP <i>verb</i>:-->
 我们可以对资源执行不同的操作。要执行的操作由HTTP <i>动词</i>定义：
@@ -675,7 +675,7 @@ app.get('/api/notes/:id', (request, response) => {
 HTTP状态码返回200，这意味着响应成功。由于<i>内容长度</i>头的值为0，因此没有数据随响应一起发送，同样可以从浏览器中验证。
 
 <!-- The reason for this behavior is that the _note_ variable is set to _undefined_ if no matching note is found. The situation needs to be handled on the server in a better way. If no note is found, the server should respond with the status code [404 not found](https://www.rfc-editor.org/rfc/rfc9110.html#name-404-not-found) instead of 200.-->
-因為如果沒有找到匹配的筆記，則_note_變量將設置為_undefined_。該情況需要在服務器上以更好的方式進行處理。如果沒有找到筆記，服務器應該響應[404 not found](https://www.rfc-editor.org/rfc/rfc9110.html#name-404-not-found)狀態碼，而不是200。
+因为如果没有找到匹配的笔记，则_note_变量将设置为_undefined_。该情况需要在服务器上以更好的方式进行处理。如果没有找到笔记，服务器应该响应[404 not found](https://www.rfc-editor.org/rfc/rfc9110.html#name-404-not-found)状态码，而不是200。
 
 <!-- Let''s make the following change to our code:-->
 让我们对我们的代码做出以下更改：
@@ -725,7 +725,7 @@ app.delete('/api/notes/:id', (request, response) => {
 如果删除资源成功，即笔记存在并被移除，我们就会用状态码[204 no content](https://www.rfc-editor.org/rfc/rfc9110.html#name-204-no-content)回复请求，并在响应中不返回数据。
 
 <!-- There''s no consensus on what status code should be returned to a DELETE request if the resource does not exist. The only two options are 204 and 404. For the sake of simplicity, our application will respond with 204 in both cases.-->
-沒有共識認為對一個 DELETE 請求，如果資源不存在應該返回什麼狀態碼。唯二選擇是 204 和 404。為了簡單起見，我們的應用程式將在兩種情況下都返回 204。
+没有共识认为对一个 DELETE 请求，如果资源不存在应该返回什么状态码。唯二选择是 204 和 404。为了简单起见，我们的应用程式将在两种情况下都返回 204。
 
 ### Postman
 
@@ -778,7 +778,7 @@ app.delete('/api/notes/:id', (request, response) => {
 接下来，让我们使得向服务器添加新笔记成为可能。添加笔记是通过向地址<http://localhost:3001/api/notes>发出HTTP POST请求，并将新笔记的所有信息以[body](https://www.w3.org/Protocols/rfc2616/rfc2616-sec7.html#sec7)的JSON格式发送到请求中。
 
 <!-- To access the data easily, we need the help of the express [json-parser](https://expressjs.com/en/api.html) that is taken to use with command _app.use(express.json())_.-->
-要輕鬆訪問資料，我們需要express的[json-parser](https://expressjs.com/en/api.html)的幫助，它可以使用命令_app.use(express.json())_來使用。
+要轻松访问资料，我们需要express的[json-parser](https://expressjs.com/en/api.html)的帮助，它可以使用命令_app.use(express.json())_来使用。
 
 <!-- Let''s activate the json-parser and implement an initial handler for dealing with the HTTP POST requests:-->
 让我们激活json-parser，并实现一个用于处理HTTP POST请求的初始处理程序：
@@ -805,7 +805,7 @@ app.post('/api/notes', (request, response) => {
 事件处理函数可以从_request_对象的<i>body</i>属性访问数据。
 
 <!-- Without the json-parser, the <i>body</i> property would be undefined. The json-parser functions so that it takes the JSON data of a request, transforms it into a JavaScript object and then attaches it to the <i>body</i> property of the _request_ object before the route handler is called.-->
-沒有json-parser，<i>body</i>屬性將會是未定義的。json-parser的功能是它會把請求的JSON資料轉換成一個JavaScript對象，然後在路由處理程序被調用之前附加到<i>body</i>屬性上的_request_對象。
+没有json-parser，<i>body</i>属性将会是未定义的。json-parser的功能是它会把请求的JSON资料转换成一个JavaScript对象，然后在路由处理程序被调用之前附加到<i>body</i>属性上的_request_对象。
 
 <!-- For the time being, the application does not do anything with the received data besides printing it to the console and sending it back in the response.-->
 目前，该应用程序除了将接收到的数据打印到控制台并在响应中将其发送回去之外，不会做任何其他事情。
@@ -834,7 +834,7 @@ app.post('/api/notes', (request, response) => {
 ![postman having text as content-type](../../images/3/17new.png)
 
 <!-- The <i>Content-Type</i> header is set to <i>text/plain</i>:-->
-<i>Content-Type</i> 頭被設置為 <i>text/plain</i>：
+<i>Content-Type</i> 头被设置为 <i>text/plain</i>：
 
 ![postman showing headers and content-type as text/plain](../../images/3/18new.png)
 
@@ -1156,7 +1156,7 @@ Math.max(...notes.map(n => n.id))
 安全意味着执行的请求不能对服务器造成任何<i>副作用</i>。所谓副作用，我们是指，数据库的状态不应因请求而改变，而响应只应返回服务器上已存在的数据。
 
 <!-- Nothing can ever guarantee that a GET request is <i>safe</i>, this is just a recommendation that is defined in the HTTP standard. By adhering to RESTful principles in our API, GET requests are always used in a way that they are <i>safe</i>.-->
-沒有什麼可以保證GET請求是<i>安全的</i>，這只是HTTP標準中定義的一個建議。通過在我們的API中遵守RESTful原則，GET請求總是以<i>安全</i>的方式使用。
+没有什么可以保证GET请求是<i>安全的</i>，这只是HTTP标准中定义的一个建议。通过在我们的API中遵守RESTful原则，GET请求总是以<i>安全</i>的方式使用。
 
 <!-- The HTTP standard also defines the request type [HEAD](https://www.rfc-editor.org/rfc/rfc9110.html#name-head), which ought to be safe. In practice, HEAD should work exactly like GET but it does not return anything but the status code and response headers. The response body will not be returned when you make a HEAD request.-->
 HTTP 标准也定义了请求类型 [HEAD](https://www.rfc-editor.org/rfc/rfc9110.html#name-head)，应该是安全的。在实践中，HEAD 应该和 GET 一样工作，但是它不会返回任何东西，只会返回状态码和响应头。当你发出 HEAD 请求时，响应体不会被返回。
@@ -1171,7 +1171,7 @@ HTTP 标准也定义了请求类型 [HEAD](https://www.rfc-editor.org/rfc/rfc911
 这意味着，如果一个请求不产生副作用，那么无论请求发送多少次，结果都应该是一样的。
 
 <!-- If we make an HTTP PUT request to the URL <i>/api/notes/10</i> and with the request we send the data <em>{ content: "no side effects!", important: true }</em>, the result is the same regardless of how many times the request is sent.-->
-如果我們向URL <i>/api/notes/10</i> 發出HTTP PUT請求，並隨請求發送數據<em>{ content: "no side effects!", important: true }</em>，不管請求發送多少次，結果都是一樣的。
+如果我们向URL <i>/api/notes/10</i> 发出HTTP PUT请求，并随请求发送数据<em>{ content: "no side effects!", important: true }</em>，不管请求发送多少次，结果都是一样的。
 
 <!-- Like <i>safety</i> for the GET request, <i>idempotence</i> is also just a recommendation in the HTTP standard and not something that can be guaranteed simply based on the request type. However, when our API adheres to RESTful principles, then GET, HEAD, PUT, and DELETE requests are used in such a way that they are idempotent.-->
 像<i>安全</i>一样，<i>幂等性</i>也只是HTTP标准中的一个建议，而不是仅仅基于请求类型就能保证的东西。但是，当我们的API遵循RESTful原则时，GET，HEAD，PUT和DELETE请求将以幂等的方式使用。
@@ -1188,10 +1188,10 @@ POST 是唯一一种既不是<i>安全的</i>也不是<i>幂等的</i>HTTP 请�
 中间件是可用于处理_请求_和_响应_对象的函数。
 
 <!-- The json-parser we used earlier takes the raw data from the requests that are stored in the _request_ object, parses it into a JavaScript object and assigns it to the _request_ object as a new property <i>body</i>.-->
-我們前面使用的json-parser會從存儲在_request_對象中的原始數據中解析出一個JavaScript對象，並將其分配給_request_對象作為新屬性<i>body</i>。
+我们前面使用的json-parser会从存储在_request_对象中的原始数据中解析出一个JavaScript对象，并将其分配给_request_对象作为新属性<i>body</i>。
 
 <!-- In practice, you can use several middlewares at the same time. When you have more than one, they''re executed one by one in the order that they were taken into use in express.-->
-在實踐中，你可以同時使用多個中間件。當你有多個時，它們按照在express中使用的順序依次執行。
+在实践中，你可以同时使用多个中间件。当你有多个时，它们按照在express中使用的顺序依次执行。
 
 <!-- Let''s implement our own middleware that prints information about every request that is sent to the server.-->
 让我们实现自己的中间件，打印出服务器接收到的每个请求的信息。
@@ -1226,7 +1226,7 @@ app.use(requestLogger)
 中间件函数必须在路由之前使用，如果我们希望它们在调用路由事件处理程序之前被执行。也有情况下，我们希望在路由之后定义中间件函数。在实践中，这意味着我们定义的中间件函数只有在没有路由处理HTTP请求时才会被调用。
 
 <!-- Let''s add the following middleware after our routes. This middleware will be used for catching requests made to non-existent routes. For these requests, the middleware will return an error message in the JSON format.-->
-讓我們在路由之後添加以下中介軟件。 這個中介軟件將用於捕獲對不存在的路由所做的請求。 對於這些請求，中介軟件將以JSON格式返回錯誤消息。
+让我们在路由之后添加以下中介软件。 这个中介软件将用于捕获对不存在的路由所做的请求。 对于这些请求，中介软件将以JSON格式返回错误消息。
 
 ```js
 const unknownEndpoint = (request, response) => {
