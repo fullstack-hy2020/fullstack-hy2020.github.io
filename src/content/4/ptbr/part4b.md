@@ -123,7 +123,7 @@ Vamos instalar o pacote como uma dependência de desenvolvimento:
 npm install --save-dev supertest
 ```
 
-Let's write our first test in the <i>tests/note_api.test.js</i> file:
+Vamos escrever nosso primeiro teste no arquivo <i>tests/note_api.test.js</i>:
 
 ```js
 const mongoose = require('mongoose')
