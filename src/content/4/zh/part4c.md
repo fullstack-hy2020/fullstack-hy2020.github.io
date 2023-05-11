@@ -10,7 +10,7 @@ lang: zh
 <!-- We want to add user authentication and authorization to our application. Users should be stored in the database and every note should be linked to the user who created it. Deleting and editing a note should only be allowed for the user who created it.-->
 我们想要为我们的应用程序添加用户身份验证和授权。用户应该存储在数据库中，每个笔记应该与创建它的用户相关联。只有创建它的用户才能删除和编辑笔记。
 
-<!-- Let''s start by adding information about users to the database. There is a one-to-many relationship between the user (<i>User</i>) and notes (<i>Note</i>):-->
+<!-- Let's start by adding information about users to the database. There is a one-to-many relationship between the user (<i>User</i>) and notes (<i>Note</i>):-->
 让我们从向数据库添加用户信息开始。用户（<i>User</i>）与笔记（<i>Note</i>）之间存在一对多的关系：
 
 ![diagram linking user and notes](https://yuml.me/a187045b.png)
@@ -38,7 +38,7 @@ lang: zh
 <!-- If we were using a relational database the note would contain a <i>reference key</i> to the user who created it. In document databases, we can do the same thing.-->
 如果我们使用关系型数据库，该笔记将包含一个<i>参考键</i>来指向创建它的用户。在文档数据库中，我们也可以做同样的事情。
 
-<!-- Let''s assume that the <i>users</i> collection contains two users:-->
+<!-- Let's assume that the <i>users</i> collection contains two users:-->
 假设<i>用户</i>集合包含两个用户：
 
 ```js
@@ -145,7 +145,7 @@ lang: zh
 
 ### Mongoose schema for users
 
-<!-- In this case, we decide to store the ids of the notes created by the user in the user document. Let''s define the model for representing a user in the <i>models/user.js</i> file:-->
+<!-- In this case, we decide to store the ids of the notes created by the user in the user document. Let's define the model for representing a user in the <i>models/user.js</i> file:-->
 在这种情况下，我们决定将用户创建的笔记的id存储在用户文档中。让我们在<i>models/user.js</i>文件中定义表示用户的模型：
 
 ```js
@@ -191,7 +191,7 @@ module.exports = User
 <!-- The type of the field is <i>ObjectId</i> that references <i>note</i>-style documents. Mongo does not inherently know that this is a field that references notes, the syntax is purely related to and defined by Mongoose.-->
 字段的类型是<i>ObjectId</i>，它引用<i>note</i>风格的文档。 Mongo本身不知道这是一个引用笔记的字段，语法完全与Mongoose定义有关。
 
-<!-- Let''s expand the schema of the note defined in the <i>models/note.js</i> file so that the note contains information about the user who created it:-->
+<!-- Let's expand the schema of the note defined in the <i>models/note.js</i> file so that the note contains information about the user who created it:-->
 让我们扩展<i>models/note.js</i>文件中定义的笔记的架构，以便笔记包含有关创建它的用户的信息：
 
 ```js
@@ -219,7 +219,7 @@ const noteSchema = new mongoose.Schema({
 <!-- Let's implement a route for creating new users. Users have a unique <i>username</i>, a <i>name</i> and something called a <i>passwordHash</i>. The password hash is the output of a [one-way hash function](https://en.wikipedia.org/wiki/Cryptographic_hash_function) applied to the user's password. It is never wise to store unencrypted plain text passwords in the database!-->
 让我们来实现一条用于创建新用户的路由。用户有一个唯一的<i>用户名</i>，一个<i>姓名</i>和一个叫做<i>passwordHash</i>的东西。passwordHash是应用于用户密码的[单向哈希函数](https://en.wikipedia.org/wiki/Cryptographic_hash_function)的输出。永远不要在数据库中存储未加密的纯文本密码！
 
-<!-- Let''s install the [bcrypt](https://github.com/kelektiv/node.bcrypt.js) package for generating the password hashes:-->
+<!-- Let's install the [bcrypt](https://github.com/kelektiv/node.bcrypt.js) package for generating the password hashes:-->
 让我们安装[bcrypt](https://github.com/kelektiv/node.bcrypt.js) 包来生成密码哈希：
 
 ```bash
@@ -227,7 +227,7 @@ npm install bcrypt
 ```
 
 <!-- Creating new users happens in compliance with the RESTful conventions discussed in [part 3](/en/part3/node_js_and_express#rest), by making an HTTP POST request to the <i>users</i> path.-->
-遵循[第三部分](/en/part3/node_js_and_express#rest)讨论的RESTful规范，通过向<i>用户</i>路径发出HTTP POST请求来创建新用户。
+遵循[第三章节](/en/part3/node_js_and_express#rest)讨论的RESTful规范，通过向<i>用户</i>路径发出HTTP POST请求来创建新用户。
 
 <!-- Let's define a separate <i>router</i> for dealing with users in a new <i>controllers/users.js</i> file. Let's take the router into use in our application in the <i>app.js</i> file, so that it handles requests made to the <i>/api/users</i> url:-->
 让我们为处理新的<i>controllers/users.js</i>文件中的用户定义一个单独的<i>路由器</i>。 让我们在我们的应用程序中的<i>app.js</i>文件中使用该路由器，以便它处理发送到<i>/api/users</i> url的请求：
@@ -426,7 +426,7 @@ userSchema.plugin(uniqueValidator) // highlight-line
 <!-- We could also implement other validations into the user creation. We could check that the username is long enough, that the username only consists of permitted characters, or that the password is strong enough. Implementing these functionalities is left as an optional exercise.-->
 我们也可以在用户创建过程中实施其他有效的验证。我们可以检查用户名是否足够长，用户名是否只由允许的字符组成，或者密码是否足够强大。实施这些功能是一个可选的练习。
 
-<!-- Before we move onward, let''s add an initial implementation of a route handler that returns all of the users in the database:-->
+<!-- Before we move onward, let's add an initial implementation of a route handler that returns all of the users in the database:-->
 在我们继续前进之前，让我们增加一个初始的路由处理程序，它会返回资料库中的所有使用者：
 
 ```js
@@ -468,7 +468,7 @@ usersRouter.get('/', async (request, response) => {
 <!-- The code for creating a new note has to be updated so that the note is assigned to the user who created it.-->
 代码需要更新以便将新建笔记分配给创建它的用户。
 
-<!-- Let''s expand our current implementation so that the information about the user who created a note is sent in the <i>userId</i> field of the request body:-->
+<!-- Let's expand our current implementation so that the information about the user who created a note is sent in the <i>userId</i> field of the request body:-->
 让我们扩展我们当前的实现，以便将创建笔记的用户的信息发送到请求体的<i>userId</i>字段中：
 
 ```js
@@ -509,7 +509,7 @@ const noteSchema = new mongoose.Schema({
 })
 ```
 
-<!-- It''s worth noting that the <i>user</i> object also changes. The <i>id</i> of the note is stored in the <i>notes</i> field:-->
+<!-- It's worth noting that the <i>user</i> object also changes. The <i>id</i> of the note is stored in the <i>notes</i> field:-->
 注意，<i>用户</i> 对象也会发生变化。笔记的<i>id</i>存储在<i>notes</i>字段中：
 
 ```js
@@ -521,12 +521,12 @@ user.notes = user.notes.concat(savedNote._id)
 await user.save()
 ```
 
-<!-- Let''s try to create a new note-->
+<!-- Let's try to create a new note-->
 让我们尝试创建一个新笔记
 
 ![Postman creating a new note](../../images/4/10e.png)
 
-<!-- The operation appears to work. Let''s add one more note and then visit the route for fetching all users:-->
+<!-- The operation appears to work. Let's add one more note and then visit the route for fetching all users:-->
 操作似乎可以正常工作。让我们再加上一个注释，然后访问用于获取所有用户的路由：
 
 ![api/users returns JSON with users and their array of notes](../../images/4/11e.png)
@@ -541,13 +541,13 @@ await user.save()
 
 ### Populate
 
-<!-- We would like our API to work in such a way, that when an HTTP GET request is made to the <i>/api/users</i> route, the user objects would also contain the contents of the user''s notes and not just their id. In a relational database, this functionality would be implemented with a <i>join query</i>.-->
+<!-- We would like our API to work in such a way, that when an HTTP GET request is made to the <i>/api/users</i> route, the user objects would also contain the contents of the user's notes and not just their id. In a relational database, this functionality would be implemented with a <i>join query</i>.-->
 我们希望我们的API的工作方式是这样的：当向<i>/api/users</i>路由发出HTTP GET请求时，用户对象也将包含用户笔记的内容，而不仅仅是他们的ID。在关系数据库中，这种功能将通过<i>join query</i>实现。
 
 <!-- As previously mentioned, document databases do not properly support join queries between collections, but the Mongoose library can do some of these joins for us. Mongoose accomplishes the join by doing multiple queries, which is different from join queries in relational databases which are <i>transactional</i>, meaning that the state of the database does not change during the time that the query is made. With join queries in Mongoose, nothing can guarantee that the state between the collections being joined is consistent, meaning that if we make a query that joins the user and notes collections, the state of the collections may change during the query.-->
 正如先前提到的，文档数据库不能很好地支持集合之间的联接查询，但是Mongoose库可以为我们做一些这样的联接。Mongoose实现联接的方式是多次查询，这与关系数据库中的联接查询<i>事务性</i>不同，意味着在查询期间数据库的状态不会改变。使用Mongoose的联接查询，没有任何能够保证联接的集合之间的状态是一致的，这意味着如果我们做一个连接用户和笔记集合的查询，在查询期间这些集合的状态可能会改变。
 
-<!-- The Mongoose join is done with the [populate](http://mongoosejs.com/docs/populate.html) method. Let''s update the route that returns all users first:-->
+<!-- The Mongoose join is done with the [populate](http://mongoosejs.com/docs/populate.html) method. Let's update the route that returns all users first:-->
 Mongoose 的联接是通过 [populate](http://mongoosejs.com/docs/populate.html) 方法完成的。让我们先更新一下返回所有用户的路由：
 
 ```js
@@ -587,7 +587,7 @@ usersRouter.get('/', async (request, response) => {
 
 ![combined data showing no repetition](../../images/4/14new.png)
 
-<!-- Let''s also add a suitable population of user information to notes:-->
+<!-- Let's also add a suitable population of user information to notes:-->
 # 让我们也添加一组合适的用户信息到笔记中：
 
 ```js
@@ -599,12 +599,12 @@ notesRouter.get('/', async (request, response) => {
 })
 ```
 
-<!-- Now the user''s information is added to the <i>user</i> field of note objects.-->
+<!-- Now the user's information is added to the <i>user</i> field of note objects.-->
 现在用户信息已添加到笔记对象的<i>用户</i>字段中。
 
 ![notes JSON now has user info embedded too](../../images/4/15new.png)
 
-<!-- It''s important to understand that the database does not know that the ids stored in the <i>user</i> field of notes reference documents in the user collection.-->
+<!-- It's important to understand that the database does not know that the ids stored in the <i>user</i> field of notes reference documents in the user collection.-->
 它很重要要明白，数据库不知道笔记字段中存储的ID引用用户集合中的文档。
 
 <!-- The functionality of the <i>populate</i> method of Mongoose is based on the fact that we have defined "types" to the references in the Mongoose schema with the <i>ref</i> option:-->

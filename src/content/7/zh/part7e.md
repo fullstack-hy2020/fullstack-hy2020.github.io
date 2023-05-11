@@ -9,13 +9,13 @@ lang: zh
 
 ### Class Components
 
-<!-- During the course, we have only used React components having been defined as Javascript functions. This was not possible without the [hook](https://reactjs.org/docs/hooks-intro.html) functionality that came with version 16.8 of React. Before, when defining a component that uses state, one had to define it using Javascript''s [Class](https://reactjs.org/docs/state-and-lifecycle.html#converting-a-function-to-a-class) syntax.-->
+<!-- During the course, we have only used React components having been defined as Javascript functions. This was not possible without the [hook](https://reactjs.org/docs/hooks-intro.html) functionality that came with version 16.8 of React. Before, when defining a component that uses state, one had to define it using Javascript's [Class](https://reactjs.org/docs/state-and-lifecycle.html#converting-a-function-to-a-class) syntax.-->
 在本课程中，我们只使用定义为Javascript函数的React组件。若没有React 16.8版本中提供的[hook](https://reactjs.org/docs/hooks-intro.html)功能，这是不可能的。在此之前，如果要定义使用状态的组件，则必须使用Javascript的[Class](https://reactjs.org/docs/state-and-lifecycle.html#converting-a-function-to-a-class)语法来定义。
 
 <!-- It is beneficial to at least be familiar with Class Components to some extent since the world contains a lot of old React code, which will probably never be completely rewritten using the updated syntax.-->
 至少要熟悉类组件，因为世界上有很多旧的 React 代码，这些代码可能永远不会用更新的语法重写，这是有益的。
 
-<!-- Let''s get to know the main features of Class Components by producing yet another very familiar anecdote application. We store the anecdotes in the file <i>db.json</i> using <i>json-server</i>. The contents of the file are lifted from [here](https://github.com/fullstack-hy/misc/blob/master/anecdotes.json).-->
+<!-- Let's get to know the main features of Class Components by producing yet another very familiar anecdote application. We store the anecdotes in the file <i>db.json</i> using <i>json-server</i>. The contents of the file are lifted from [here](https://github.com/fullstack-hy/misc/blob/master/anecdotes.json).-->
 让我们通过创建另一个非常熟悉的轶事应用程序来了解类组件的主要特征。我们使用<i>json-server</i>将轶事存储在文件<i>db.json</i>中。文件的内容来自[here](https://github.com/fullstack-hy/misc/blob/master/anecdotes.json)。
 
 <!-- The initial version of the Class Component looks like this-->
@@ -44,7 +44,7 @@ export default App
 <!-- The component now has a [constructor](https://reactjs.org/docs/react-component.html#constructor), in which nothing happens at the moment, and contains the method [render](https://reactjs.org/docs/react-component.html#render). As one might guess, render defines how and what is rendered to the screen.-->
 现在，该组件有一个[构造函数](https://reactjs.org/docs/react-component.html#constructor)，目前什么也没有发生，并包含了[render](https://reactjs.org/docs/react-component.html#render)方法。正如人们可以猜测的，render定义了如何以及什么样的内容渲染到屏幕上。
 
-<!-- Let''s define a state for the list of anecdotes and the currently-visible anecdote. In contrast to when using the [useState](https://reactjs.org/docs/hooks-state.html) hook, Class Components only contain one state. So if the state is made up of multiple "parts", they should be stored as properties of the state. The state is initialized in the constructor:-->
+<!-- Let's define a state for the list of anecdotes and the currently-visible anecdote. In contrast to when using the [useState](https://reactjs.org/docs/hooks-state.html) hook, Class Components only contain one state. So if the state is made up of multiple "parts", they should be stored as properties of the state. The state is initialized in the constructor:-->
 让我们为列表中的轶事和当前可见的轶事定义一个状态。与使用[useState](https://reactjs.org/docs/hooks-state.html)钩子不同，类组件只包含一个状态。因此，如果状态由多个“部分”组成，它们应该存储为状态的属性。状态在构造函数中初始化：
 
 ```js
@@ -248,7 +248,7 @@ WebSockets是浏览器提供的一种API，但尚未在所有浏览器中完全�
 代替直接使用WebSocket API，建议使用[Socket.io](https://socket.io/)库，该库在浏览器不完全支持WebSockets的情况下提供各种<i>回退</i>选项。
 
 <!-- In [part 8](/en/part8), our topic is GraphQL, which provides a nice mechanism for notifying clients when there are changes in the backend data.-->
-在[第八部分](/zh/part8)，我们的主题是GraphQL，它提供了一种很好的机制，当后端数据发生变化时，可以通知客户端。
+在[第八章节](/zh/part8)，我们的主题是GraphQL，它提供了一种很好的机制，当后端数据发生变化时，可以通知客户端。
 
 ### Virtual DOM
 
@@ -294,7 +294,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 <!-- Because both React and [Flux](https://facebook.github.io/flux/docs/in-depth-overview) were created at Facebook, one could say that using React only as a UI library is the intended use case. Following the Flux architecture adds some overhead to the application, and if we''re talking about a small application or prototype, it might be a good idea to use React "wrong", since [over-engineering](https://en.wikipedia.org/wiki/Overengineering) rarely yields an optimal result.-->
 因为React和[Flux](https://facebook.github.io/flux/docs/in-depth-overview)都是Facebook创建的，所以可以说只把React当作UI库来使用是预期的用例。遵循Flux架构会给应用增加一些开销，如果我们谈论的是一个小的应用或者原型，那么使用“错误”的React可能是一个好主意，因为[过度设计](https://en.wikipedia.org/wiki/Overengineering)很少会产生最佳结果。
 
-<!-- Part 6 [last chapter](/en/part6/react_query_use_reducer_and_the_context) covers the newer trends of state management in React. React''s hook functions <i>useReducer</i> and <i>useContext</i> provide a kind of lightweight version of Redux. <i>React Query</i>, on the other hand, is a library that solves many of the problems associated with handling state on the server, eliminating the need for a React application to store data retrieved from the server directly in frontend state.-->
+<!-- Part 6 [last chapter](/en/part6/react_query_use_reducer_and_the_context) covers the newer trends of state management in React. React's hook functions <i>useReducer</i> and <i>useContext</i> provide a kind of lightweight version of Redux. <i>React Query</i>, on the other hand, is a library that solves many of the problems associated with handling state on the server, eliminating the need for a React application to store data retrieved from the server directly in frontend state.-->
 Part 6 [最后一章](/en/part6/react_query_use_reducer_and_the_context) 涵盖了 React 中状态管理的新趋势。React 的钩子函数<i>useReducer</i> 和 <i>useContext</i> 提供了一种轻量级的 Redux 版本。<i>React Query</i> 另一方面，是一个解决处理服务器端状态相关问题的库，消除了 React 应用程序直接将从服务器检索到的数据存储在前端状态中的需求。
 
 ### React/node-application security
@@ -318,7 +318,7 @@ Part 6 [最后一章](/en/part6/react_query_use_reducer_and_the_context) 涵盖�
 let query = "SELECT * FROM Users WHERE name = '" + userName + "';"
 ```
 
-<!-- Now let''s assume that a malicious user <i>Arto Hellas</i> would define their name as-->
+<!-- Now let's assume that a malicious user <i>Arto Hellas</i> would define their name as-->
 `<script>alert("Hacked!")</script>`.
 
 现在假设一个恶意使用者<i>Arto Hellas</i>将他们的名字定义为`<script>alert("Hacked!")</script>`。
@@ -457,7 +457,7 @@ To address all issues (including breaking changes), run:
   npm audit fix --force
 ```
 
-<!-- After only one year, the code is full of small security threats. Luckily, there are only 2 critical threats.  Let''s run _npm audit fix_ as the report suggests:-->
+<!-- After only one year, the code is full of small security threats. Luckily, there are only 2 critical threats.  Let's run _npm audit fix_ as the report suggests:-->
 一年之后，代码充满了小安全威胁。幸运的是，只有2个关键威胁。让我们按照报告建议运行 _npm audit fix_：
 
 ```js
@@ -487,10 +487,10 @@ Will install react-scripts@5.0.0, which is a breaking change
 <!-- Running _npm audit fix --force_ would upgrade the library version but would also upgrade the library _react-scripts_ and that would potentially break down the development environment. So we will leave the library upgrades for later...-->
 运行`npm audit fix --force`会升级库版本，但也会升级库`react-scripts`，可能会破坏开发环境。所以我们暂时留着库升级...
 
-<!-- One of the threats mentioned in the list from OWASP is <i>Broken Authentication</i> and the related <i>Broken Access Control</i>. The token-based authentication we have been using is fairly robust if the application is being used on the traffic-encrypting HTTPS protocol. When implementing access control, one should e.g. remember to not only check a user''s identity in the browser but also on the server. Bad security would be to prevent some actions to be taken only by hiding the execution options in the code of the browser.-->
+<!-- One of the threats mentioned in the list from OWASP is <i>Broken Authentication</i> and the related <i>Broken Access Control</i>. The token-based authentication we have been using is fairly robust if the application is being used on the traffic-encrypting HTTPS protocol. When implementing access control, one should e.g. remember to not only check a user's identity in the browser but also on the server. Bad security would be to prevent some actions to be taken only by hiding the execution options in the code of the browser.-->
 <i>破碎的认证</i>和相关的<i>破碎的访问控制</i>是OWASP列出的威胁之一。如果应用程序在加密的HTTPS协议上使用，我们使用的基于令牌的认证相当强大。实施访问控制时，应该记住，不仅要在浏览器中检查用户的身份，还要在服务器上检查。坏的安全性将仅通过在浏览器的代码中隐藏执行选项来阻止某些操作。
 
-<!-- On Mozilla''s MDN, there is a very good [Website security guide](https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Website_security), which brings up this very important topic:-->
+<!-- On Mozilla's MDN, there is a very good [Website security guide](https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Website_security), which brings up this very important topic:-->
 在Mozilla的MDN上，有一个非常好的[网站安全指南](https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Website_security)，提出了这个非常重要的话题：
 
 ![screenshot of website security from MDN](../../images/7/34.png)
@@ -503,13 +503,13 @@ Will install react-scripts@5.0.0, which is a breaking change
 
 ### Current trends
 
-<!-- Finally, let''s take a look at some technology of tomorrow (or, actually, already today), and the directions in which Web development is heading.-->
+<!-- Finally, let's take a look at some technology of tomorrow (or, actually, already today), and the directions in which Web development is heading.-->
 最后，让我们来看看明天（或者实际上是现在）的一些技术，以及Web开发正在走向的方向。
 
 #### Typed versions of JavaScript
 
 <!-- Sometimes, the [dynamic typing](https://developer.mozilla.org/en-US/docs/Glossary/Dynamic_typing) of JavaScript variables creates annoying bugs. In part 5, we talked briefly about [PropTypes](/en/part5/props_children_and_proptypes#prop-types): a mechanism which enables one to enforce type-checking for props passed to React components.-->
-有时，JavaScript变量的[动态类型](https://developer.mozilla.org/en-US/docs/Glossary/Dynamic_typing)会带来令人恼火的bug。在第5部分，我们简要讨论了[PropTypes](/en/part5/props_children_and_proptypes#prop-types)：一种机制，可以强制对传递给React组件的props进行类型检查。
+有时，JavaScript变量的[动态类型](https://developer.mozilla.org/en-US/docs/Glossary/Dynamic_typing)会带来令人恼火的bug。在第5章节，我们简要讨论了[PropTypes](/en/part5/props_children_and_proptypes#prop-types)：一种机制，可以强制对传递给React组件的props进行类型检查。
 
 <!-- Lately, there has been a notable uplift in the interest in [static type checking](https://en.wikipedia.org/wiki/Type_system#Static_type_checking). At the moment, the most popular typed version of Javascript is [Typescript](https://www.typescriptlang.org/) which has been developed by Microsoft. Typescript is covered in [part 9](/en/part9).-->
 最近，[静态类型检查](https://en.wikipedia.org/wiki/Type_system#Static_type_checking)的兴趣显著上升。目前，最流行的Javascript类型版本是由Microsoft开发的[Typescript](https://www.typescriptlang.org/)，它在[第9章节](/en/part9)中有所涉及。
@@ -560,7 +560,7 @@ npx create-react-app my-app --template cra-template-pwa
 <!-- As the application grows, the monolithic backend approach starts turning problematic both in terms of performance and maintainability.-->
 随着应用程序的增长，单体后端方法在性能和可维护性方面开始出现问题。
 
-<!-- A [microservice architecture](https://martinfowler.com/articles/microservices.html) (microservices) is a way of composing the backend of an application from many separate, independent services, which communicate with each other over the network. An individual microservice''s purpose is to take care of a particular logical functional whole. In a pure microservice architecture, the services do not use a shared database.-->
+<!-- A [microservice architecture](https://martinfowler.com/articles/microservices.html) (microservices) is a way of composing the backend of an application from many separate, independent services, which communicate with each other over the network. An individual microservice's purpose is to take care of a particular logical functional whole. In a pure microservice architecture, the services do not use a shared database.-->
 [微服务架构](https://martinfowler.com/articles/microservices.html)（微服务）是一种从许多独立的、相互之间通过网络通信的服务构建应用后端的方式。单个微服务的目的是负责特定的逻辑功能整体。在纯微服务架构中，服务不使用共享数据库。
 
 <!-- For example, the bloglist application could consist of two services: one handling the user and another taking care of the blogs. The responsibility of the user service would be user registration and user authentication, while the blog service would take care of operations related to the blogs.-->
@@ -679,7 +679,7 @@ I am a student
 <!-- Nowadays, one of the biggest forerunners in the use of microservices is [Netflix](https://www.infoq.com/presentations/netflix-chaos-microservices).-->
 现今，在微服务使用方面最具先驱性的公司之一是[Netflix](https://www.infoq.com/presentations/netflix-chaos-microservices)。
 
-<!-- The use of microservices has steadily been gaining hype to be kind of a [silver bullet](https://en.wikipedia.org/wiki/No_Silver_Bullet) of today, which is being offered as a solution to almost every kind of problem. However, there are several challenges when it comes to applying a microservice architecture, and it might make sense to go [monolith first](https://martinfowler.com/bliki/MonolithFirst.html) by initially making a traditional all-encompassing backend. Or maybe [not](https://martinfowler.com/articles/dont-start-monolith.html). There are a bunch of different opinions on the subject. Both links lead to Martin Fowler''s site; as we can see, even the wise are not entirely sure which one of the right ways is more right.-->
+<!-- The use of microservices has steadily been gaining hype to be kind of a [silver bullet](https://en.wikipedia.org/wiki/No_Silver_Bullet) of today, which is being offered as a solution to almost every kind of problem. However, there are several challenges when it comes to applying a microservice architecture, and it might make sense to go [monolith first](https://martinfowler.com/bliki/MonolithFirst.html) by initially making a traditional all-encompassing backend. Or maybe [not](https://martinfowler.com/articles/dont-start-monolith.html). There are a bunch of different opinions on the subject. Both links lead to Martin Fowler's site; as we can see, even the wise are not entirely sure which one of the right ways is more right.-->
 使用微服务逐渐受到热捧，被视为当今的[银弹](https://en.wikipedia.org/wiki/No_Silver_Bullet)，被提供作为几乎所有问题的解决方案。然而，在应用微服务架构时存在一些挑战，最初通过制作传统的全面后端可能是一个明智的选择[先采用单体架构](https://martinfowler.com/bliki/MonolithFirst.html)。或者[不是](https://martinfowler.com/articles/dont-start-monolith.html)。关于这个问题有很多不同的观点。这两个链接都引到了 Martin Fowler 的网站；正如我们所看到的，即使是智者也不能完全确定哪一种正确的方法更正确。
 
 <!-- Unfortunately, we cannot dive deeper into this important topic during this course. Even a cursory look at the topic would require at least 5 more weeks.-->
@@ -687,16 +687,16 @@ I am a student
 
 #### Serverless
 
-<!-- After the release of Amazon''s [lambda](https://aws.amazon.com/lambda/) service at the end of 2014, a new trend started to emerge in web application development: [serverless](https://serverless.com/).-->
+<!-- After the release of Amazon's [lambda](https://aws.amazon.com/lambda/) service at the end of 2014, a new trend started to emerge in web application development: [serverless](https://serverless.com/).-->
 2014年底，Amazon的[lambda](https://aws.amazon.com/lambda/)服务发布后，网络应用开发开始出现一种新的趋势：[无服务器](https://serverless.com/)。
 
-<!-- The main thing about lambda, and nowadays also Google''s [Cloud functions](https://cloud.google.com/functions/) as well as [similar functionality in Azure](https://azure.microsoft.com/en-us/services/functions/), is that it enables <i>the execution of individual functions</i> in the cloud. Before, the smallest executable unit in the cloud was a single <i>process</i>, e.g. a runtime environment running a Node backend.-->
+<!-- The main thing about lambda, and nowadays also Google's [Cloud functions](https://cloud.google.com/functions/) as well as [similar functionality in Azure](https://azure.microsoft.com/en-us/services/functions/), is that it enables <i>the execution of individual functions</i> in the cloud. Before, the smallest executable unit in the cloud was a single <i>process</i>, e.g. a runtime environment running a Node backend.-->
 关于lambda，以及如今谷歌的[Cloud Functions](https://cloud.google.com/functions/)以及[Azure中的类似功能](https://azure.microsoft.com/en-us/services/functions/)，最重要的是它使得在云端<i>单个函数的执行</i>成为可能。在此之前，云端最小的可执行单元是单个<i>进程</i>，比如一个运行Node后端的运行时环境。
 
-<!-- E.g. Using Amazon''s [API gateway](https://aws.amazon.com/api-gateway/) it is possible to make serverless applications where the requests to the defined HTTP API get responses directly from cloud functions. Usually, the functions already operate using stored data in the databases of the cloud service.-->
+<!-- E.g. Using Amazon's [API gateway](https://aws.amazon.com/api-gateway/) it is possible to make serverless applications where the requests to the defined HTTP API get responses directly from cloud functions. Usually, the functions already operate using stored data in the databases of the cloud service.-->
 使用Amazon的[API网关](https://aws.amazon.com/api-gateway/)，可以创建无服务器应用程序，其中对定义的HTTP API的请求可以直接从云功能获得响应。 通常，功能已经使用云服务的数据库中的存储数据进行操作。
 
-<!-- Serverless is not about there not being a server in applications, but about how the server is defined. Software developers can shift their programming efforts to a higher level of abstraction as there is no longer a need to programmatically define the routing of HTTP requests, database relations, etc., since the cloud infrastructure provides all of this. Cloud functions also lend themselves to creating a well-scaling system, e.g. Amazon''s Lambda can execute a massive amount of cloud functions per second. All of this happens automatically through the infrastructure and there is no need to initiate new servers, etc.-->
+<!-- Serverless is not about there not being a server in applications, but about how the server is defined. Software developers can shift their programming efforts to a higher level of abstraction as there is no longer a need to programmatically define the routing of HTTP requests, database relations, etc., since the cloud infrastructure provides all of this. Cloud functions also lend themselves to creating a well-scaling system, e.g. Amazon's Lambda can execute a massive amount of cloud functions per second. All of this happens automatically through the infrastructure and there is no need to initiate new servers, etc.-->
 Serverless并不意味着应用程序中没有服务器，而是关于服务器如何定义的。由于不再需要编程定义HTTP请求、数据库关系等的路由，软件开发人员可以将编程工作转移到更高的抽象层次。云基础架构提供了所有这些。云功能也有助于创建一个可以良好扩展的系统，例如亚马逊的Lambda可以每秒执行大量的云功能。所有这一切都是自动通过基础架构完成的，不需要启动新的服务器等。
 
 ### Useful libraries and interesting links
@@ -712,17 +712,17 @@ JavaScript 开发者社区已经生产了大量有用的库。如果你正在开
 <!-- If you are handling times and dates, [date-fns](https://github.com/date-fns/date-fns) offers good tools for that. If you have complex forms in your apps, have a look at whether [React Hook Form](https://react-hook-form.com/) would be a good fit. If your application displays graphs, there are multiple options to choose from. Both [recharts](http://recharts.org/en-US/) and [highcharts](https://github.com/highcharts/highcharts-react) are well-recommended.-->
 如果您正在处理时间和日期，[date-fns](https://github.com/date-fns/date-fns)提供了很好的工具。如果您的应用程序中有复杂的表单，请查看[React Hook Form](https://react-hook-form.com/)是否适合。如果您的应用程序显示图表，可以选择多种选项。[recharts](http://recharts.org/en-US/)和[highcharts](https://github.com/highcharts/highcharts-react)均受到推荐。
 
-<!-- The [Immer](https://github.com/mweststrate/immer) provides immutable implementations of some data structures. The library could be of use when using Redux, since as we [remember](/en/part6/flux_architecture_and_redux#pure-functions-immutable) in part 6, reducers must be pure functions, meaning they must not modify the store''s state but instead have to replace it with a new one when a change occurs.-->
+<!-- The [Immer](https://github.com/mweststrate/immer) provides immutable implementations of some data structures. The library could be of use when using Redux, since as we [remember](/en/part6/flux_architecture_and_redux#pure-functions-immutable) in part 6, reducers must be pure functions, meaning they must not modify the store's state but instead have to replace it with a new one when a change occurs.-->
 [Immer](https://github.com/mweststrate/immer) 提供不可变的数据结构实现。当使用 Redux 时，该库可能会很有用，因为正如我们在第 6 部分中[记住](/en/part6/flux_architecture_and_redux#pure-functions-immutable)的，reducers 必须是纯函数，这意味着它们不能修改 store 的状态，而必须在发生更改时替换它们。
 
 <!-- [Redux-saga](https://redux-saga.js.org/) provides an alternative way to make asynchronous actions for [Redux Thunk](/en/part6/communicating_with_server_in_a_redux_application#asynchronous-actions-and-redux-thunk) familiar from part 6. Some embrace the hype and like it. I don''t.-->
 # Redux-saga
-[Redux-saga](https://redux-saga.js.org/) 为[Redux Thunk](/en/part6/communicating_with_server_in_a_redux_application#asynchronous-actions-and-redux-thunk)提供了一种替代方式来实现异步操作，从第六部分开始就熟悉了。有些人热衷于它，而我则不是。
+[Redux-saga](https://redux-saga.js.org/) 为[Redux Thunk](/en/part6/communicating_with_server_in_a_redux_application#asynchronous-actions-and-redux-thunk)提供了一种替代方式来实现异步操作，从第六章节开始就熟悉了。有些人热衷于它，而我则不是。
 
 <!-- For single-page applications, the gathering of analytics data on the interaction between the users and the page is [more challenging](https://developers.google.com/analytics/devguides/collection/gtagjs/single-page-applications) than for traditional web applications where the entire page is loaded. The [React Google Analytics](https://github.com/react-ga/react-ga) library offers a solution.-->
 对于单页面应用程序，收集用户与页面之间交互的分析数据比传统的Web应用程序（整个页面加载）更具挑战性[更具挑战性](https://developers.google.com/analytics/devguides/collection/gtagjs/single-page-applications)。[React Google Analytics](https://github.com/react-ga/react-ga)库提供了一种解决方案。
 
-<!-- You can take advantage of your React know-how when developing mobile applications using Facebook''s extremely popular [React Native](https://facebook.github.io/react-native/) library, which is the topic of [part 10](/en/part10) of the course.-->
+<!-- You can take advantage of your React know-how when developing mobile applications using Facebook's extremely popular [React Native](https://facebook.github.io/react-native/) library, which is the topic of [part 10](/en/part10) of the course.-->
 你可以利用你的React知识开发使用Facebook极受欢迎的[React Native](https://facebook.github.io/react-native/)库的移动应用程序，这是本课程的[第10章节](/en/part10)。
 
 <!-- When it comes to the tools used for the management and bundling of JavaScript projects, the community has been very fickle. Best practices have changed rapidly (the years are approximations, nobody remembers that far back in the past):-->
@@ -749,7 +749,7 @@ was released
 
 2015年，[Webpack](https://www.npmjs.com/package/webpack) 是一个模块打包器。
 
-<!-- Hipsters seem to have lost their interest in tool development after webpack started to dominate the markets. A few years ago, [Parcel](https://parceljs.org) started to make the rounds marketing itself as simple (which Webpack is not) and faster than Webpack. However, after a promising start, Parcel has not gathered any steam, and it''s beginning to look like it will not be the end of Webpack. Currently, [Vite](https://vitejs.dev) tools, also simpler than Webpack, are gaining popularity - but their success can only be measured in the future.-->
+<!-- Hipsters seem to have lost their interest in tool development after webpack started to dominate the markets. A few years ago, [Parcel](https://parceljs.org) started to make the rounds marketing itself as simple (which Webpack is not) and faster than Webpack. However, after a promising start, Parcel has not gathered any steam, and it's beginning to look like it will not be the end of Webpack. Currently, [Vite](https://vitejs.dev) tools, also simpler than Webpack, are gaining popularity - but their success can only be measured in the future.-->
 Hipsters似乎在Webpack开始占据市场之后，已经失去了对工具开发的兴趣。几年前，[Parcel](https://parceljs.org)开始推销自己，宣称比Webpack更简单（Webpack并不简单）和更快。然而，在一个许诺的开始之后，Parcel没有获得任何动力，而且看起来它不会成为Webpack的终结。目前，[Vite](https://vitejs.dev)工具，也比Webpack更简单，正在获得流行，但它们的成功只能在未来才能衡量。
 
 <!-- Another notable mention is the [Rome](https://rome.tools/) library, which aspires to be an all-encompassing toolchain to unify linter, compiler, bundler, and more. It is currently under heavy development since the initial commit earlier this year on Feb 27, but the outlook sure seems promising.-->

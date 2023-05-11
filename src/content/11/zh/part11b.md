@@ -7,7 +7,7 @@ lang: zh
 
 <div class="content">
 
-<!-- Before we start playing with GitHub Actions, let''s have a look at what they are and how do they work.-->
+<!-- Before we start playing with GitHub Actions, let's have a look at what they are and how do they work.-->
 在我们开始使用GitHub Actions之前，让我们来看看它们是什么以及它们如何工作。
 
 <!-- GitHub Actions work on a basis of [workflows](https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/introduction-to-github-actions#workflows). A workflow is a series of [jobs](https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/introduction-to-github-actions#jobs) that are run when a certain triggering [event](https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/introduction-to-github-actions#events) happens. The jobs that are run then themselves contain instructions for what GitHub Actions should do.-->
@@ -163,7 +163,7 @@ We are looking for an experienced and motivated Account Manager to join our grow
 <!-- Each workflow must specify at least one [Job](https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/introduction-to-github-actions#jobs), which contains a set of [Steps](https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/introduction-to-github-actions#steps) to perform individual tasks. The jobs will be run in parallel and the steps in each job will be executed sequentially.-->
 每个工作流必须至少指定一个[作业](https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/introduction-to-github-actions#jobs)，其中包含一组[步骤](https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/introduction-to-github-actions#steps)来执行单个任务。作业将并行运行，每个作业中的步骤将按顺序执行。
 
-<!-- Steps can vary from running a custom command to using pre-defined actions, thus the name GitHub Actions. You can create [customized actions](https://docs.github.com/en/free-pro-team@latest/actions/creating-actions) or use any actions published by the community, which are plenty, but let''s get back to that later!-->
+<!-- Steps can vary from running a custom command to using pre-defined actions, thus the name GitHub Actions. You can create [customized actions](https://docs.github.com/en/free-pro-team@latest/actions/creating-actions) or use any actions published by the community, which are plenty, but let's get back to that later!-->
 步骤可以从运行自定义命令到使用预定义动作不等，因此得名为GitHub Actions。您可以创建[自定义动作](https://docs.github.com/en/free-pro-team@latest/actions/creating-actions)，或者使用社区发布的任何动作，这些动作很多，但让我们稍后再回到这一点！
 
 <!-- For GitHub to recognize your workflows, they must be specified in <code>.github/workflows</code> folder in your repository. Each Workflow is its own separate file which needs to be configured using the <code>YAML</code> data-serialization language.-->
@@ -226,7 +226,7 @@ at a <i>predefined time</i>.
 <!-- - An <i>external event</i> occurs, for example, a command is performed in an external application such as [Slack](https://slack.com/) or [Discord](https://discord.com/) messaging app-->
 一个<i>外部事件</i>发生，例如，在外部应用程序（例如[Slack](https://slack.com/)或[Discord](https://discord.com/)消息应用程序）中执行命令。
 
-<!-- To learn more about which events can be used to trigger workflows, please refer to GitHub Action''s [documentation](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows).-->
+<!-- To learn more about which events can be used to trigger workflows, please refer to GitHub Action's [documentation](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows).-->
 要了解有哪些事件可用于触发工作流，请参阅GitHub Action的[文档](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows)。
 
 
@@ -249,7 +249,7 @@ at a <i>predefined time</i>.
 
 ![A properly configured Hello World workflow](../../images/11/3.png)
 
-<!-- You should see the "Hello World!" message as an output. If that''s the case then you have successfully gone through all the necessary steps. You have your first GitHub Actions workflow active!-->
+<!-- You should see the "Hello World!" message as an output. If that's the case then you have successfully gone through all the necessary steps. You have your first GitHub Actions workflow active!-->
 你应该看到"Hello World!" 作为一个输出。如果是这种情况，那么你已经成功完成了所有必要的步骤。你有你的第一个GitHub Actions工作流程处于活动状态！
 
 <!-- Note that GitHub Actions also informs you on the exact environment (operating system, and its [setup](https://github.com/actions/virtual-environments/blob/ubuntu18/20201129.1/images/linux/Ubuntu1804-README.md)) where your workflow is run. This is important since if something surprising happens, it makes debugging so much easier if you can reproduce all the steps in your machine!-->
@@ -277,7 +277,7 @@ at a <i>predefined time</i>.
 
 ### Setting up lint, test and build steps
 
-<!-- After completing the first exercises, you should have a simple but pretty useless workflow set up. Let''s make our workflow do something useful.-->
+<!-- After completing the first exercises, you should have a simple but pretty useless workflow set up. Let's make our workflow do something useful.-->
 完成第一个练习后，您应该已经设置了一个简单但毫无用处的工作流程。让我们让我们的工作流程做点有用的事情吧。
 
 <!-- Let's implement a GitHub Action that will lint the code. If the checks don't pass, GitHub Actions will show a red status.-->
@@ -442,7 +442,7 @@ _名称_：做点什么
 
 #### 11.7 Building and testing
 
-<!-- Let''s expand on the previous workflow that currently does the linting of the code. Edit the workflow and similarly to the lint command add commands for build and test. After this step outcome should look like this-->
+<!-- Let's expand on the previous workflow that currently does the linting of the code. Edit the workflow and similarly to the lint command add commands for build and test. After this step outcome should look like this-->
 :
 
 让我们扩展之前的工作流，目前正在对代码进行linting。编辑工作流，并类似于lint命令添加构建和测试命令。此步骤之后的结果应如下所示：
@@ -465,10 +465,10 @@ _名称_：做点什么
 #### 11.9 Simple end to end -tests
 
 <!-- The current set of tests use [Jest](https://jestjs.io/) to ensure that the React components work as intended. This is exactly the same thing that is done in section [Testing React apps](/en/part5/testing_react_apps) of part 5.-->
-当前的测试集使用[Jest](https://jestjs.io/)来确保React组件正常工作。这与第五部分[测试React应用程序](/en/part5/testing_react_apps)的内容完全一致。
+当前的测试集使用[Jest](https://jestjs.io/)来确保React组件正常工作。这与第五章节[测试React应用程序](/en/part5/testing_react_apps)的内容完全一致。
 
 <!-- Testing components in isolation is quite useful but that still does not ensure that the system as a whole works as we wish. To have more confidence about this, let us write a couple of really simple end to end -tests with the [Cypress](https://www.cypress.io/) library similarly what we do in section [End to end testing](/en/part5/end_to_end_testing) of part 5.-->
-测试组件的孤立性是非常有用的，但这仍然不能确保整个系统按照我们的意愿工作。为了更有信心，让我们用[Cypress](https://www.cypress.io/)库编写一些非常简单的端到端测试，就像我们在第5部分的[端到端测试](/en/part5/end_to_end_testing)中所做的那样。
+测试组件的孤立性是非常有用的，但这仍然不能确保整个系统按照我们的意愿工作。为了更有信心，让我们用[Cypress](https://www.cypress.io/)库编写一些非常简单的端到端测试，就像我们在第5章节的[端到端测试](/en/part5/end_to_end_testing)中所做的那样。
 
 <!-- So, setup Cypress (you''ll find [here](/en/part5/end_to_end_testing/) all info you need) and use this test at first:-->
 所以，设置Cypress（你会在[这里](/en/part5/end_to_end_testing/)找到你所需的所有信息），并且首先使用这个测试：
@@ -527,7 +527,7 @@ describe('Pokedex', function() {
 
 ![e2e tests](../../images/11/9.png)
 
-<!-- End to end -tests are nice since they give us confidence that software works from the end user''s perspective. The price we have to pay is the slower feedback time. Now executing the whole workflow takes quite much longer.-->
+<!-- End to end -tests are nice since they give us confidence that software works from the end user's perspective. The price we have to pay is the slower feedback time. Now executing the whole workflow takes quite much longer.-->
 端到端测试很棒，因为它们让我们有信心，软件从用户的角度来看是可以正常工作的。我们要付出的代价是反馈时间较慢。现在执行整个工作流程需要的时间更长了。
 
 </div>

@@ -27,10 +27,10 @@ lang: zh
 <!-- We''ve already used GitHub to store our source code, but what happens when we work within a team with more developers?-->
 我们已经使用GitHub来存储我们的源代码，但是当我们在一个拥有更多开发者的团队中工作又会发生什么呢？
 
-<!-- Many problems may arise when several developers are involved. The software might work just fine on <i>my computer</i>, but maybe some of the other developers are using a different operating system or different library versions. It is not uncommon that a code works just fine in one developer''s machine but another developer can not even get it started. This is often called the "works on my machine" problem.-->
+<!-- Many problems may arise when several developers are involved. The software might work just fine on <i>my computer</i>, but maybe some of the other developers are using a different operating system or different library versions. It is not uncommon that a code works just fine in one developer's machine but another developer can not even get it started. This is often called the "works on my machine" problem.-->
 多个开发人员参与时可能会出现许多问题。软件可能在<i>我的电脑</i>上运行得很好，但是也可能其他开发人员使用的是不同的操作系统或不同的库版本。一段代码在一个开发人员的机器上可能运行得很好，但另一个开发人员却无法启动它，这种情况并不少见，这通常被称为“我的机器上可以运行”的问题。
 
-<!-- There are also more involved problems. If two developers are both working on changes and they haven't decided on a way to deploy to production, whose changes get deployed? How would it be possible to prevent one developer's changes from overwriting another''s?-->
+<!-- There are also more involved problems. If two developers are both working on changes and they haven't decided on a way to deploy to production, whose changes get deployed? How would it be possible to prevent one developer's changes from overwriting another's?-->
 也有更复杂的问题。如果两个开发人员都在做更改，但他们没有决定如何部署到生产环境，谁的更改会被部署？如何才能防止一个开发人员的更改覆盖另一个开发人员的更改？
 
 <!-- In this part, we'll cover ways to work together and build and deploy software in a strictly defined way so that it's clear <i>exactly</i> what will happen under any given circumstance.-->
@@ -43,7 +43,7 @@ lang: zh
 
 #### Branches
 
-<!-- Git allows multiple copies, streams, or versions of the code to co-exist without overwriting each other. When you first create a repository, you will be looking at the main branch (usually in Git, we call this <i>master</i> or <i>main</i>, but that does vary in older projects). This is fine if there''s only one developer for a project and that developer only works on one feature at a time.-->
+<!-- Git allows multiple copies, streams, or versions of the code to co-exist without overwriting each other. When you first create a repository, you will be looking at the main branch (usually in Git, we call this <i>master</i> or <i>main</i>, but that does vary in older projects). This is fine if there's only one developer for a project and that developer only works on one feature at a time.-->
 Git允许多个代码副本、流或版本共存而不会相互覆盖。当你第一次创建一个仓库时，你将查看主分支（通常在Git中，我们称之为<i>master</i>或<i>main</i>，但在较旧的项目中会有所不同）。如果一个项目只有一个开发者，而且该开发者一次只工作在一个特性上，这样就很好了。
 
 <!-- Branches are useful when this environment becomes more complex. In this context, each developer can have one or more branches. Each branch is effectively a copy of the main branch with some changes that make it diverge from it. Once the feature or change in the branch is ready it can be <i>merged</i> back into the main branch, effectively making that feature or change part of the main software. In this way, each developer can work on their own set of changes and not affect any other developer until the changes are ready.-->
@@ -57,7 +57,7 @@ Git允许多个代码副本、流或版本共存而不会相互覆盖。当你�
 
 #### Pull request
 
-<!-- In GitHub merging a branch back to the main branch of software is quite often happening using a mechanism called [pull request](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/about-pull-requests), where the developer who has done some changes is requesting the changes to be merged to the main branch. Once the pull request, or PR as it''s often called, is made or <i>opened</i>, another developer checks that all is ok and <i>merges</i> the PR.-->
+<!-- In GitHub merging a branch back to the main branch of software is quite often happening using a mechanism called [pull request](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/about-pull-requests), where the developer who has done some changes is requesting the changes to be merged to the main branch. Once the pull request, or PR as it's often called, is made or <i>opened</i>, another developer checks that all is ok and <i>merges</i> the PR.-->
 在GitHub中，使用一种称为[拉取请求](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/about-pull-requests)的机制，经常会将分支合并回软件的主分支。一旦拉取请求（通常简称为PR）被<i>打开</i>，另一个开发人员会检查一切正常，并<i>合并</i>PR。
 
 <!-- If you have proposed changes to the material of this course, you have already made a pull request!-->
@@ -83,7 +83,7 @@ Git允许多个代码副本、流或版本共存而不会相互覆盖。当你�
 部署指的是将软件放置在最终用户可以使用它的地方。 就库而言，这可能只意味着将npm包推送到包存档（例如[npmjs.com](https://www.npmjs.com/)），其他用户可以在其中找到它并将其包含在自己的软件中。
 
 <!-- Deploying a service (such as a web app) can vary in complexity. In [part 3](/en/part3/deploying_app_to_internet) our deployment workflow involved running some scripts manually and pushing the repository code to [Fly.io](https://fly.io/) or [Render](https://render.com/) hosting service.-->
-部署服务（如网络应用）的复杂程度可能不同。在[第三部分](/en/part3/deploying_app_to_internet)中，我们的部署工作流程涉及手动运行一些脚本，并将存储库代码推送到[Fly.io](https://fly.io/)或[Render](https://render.com/)托管服务。
+部署服务（如网络应用）的复杂程度可能不同。在[第三章节](/en/part3/deploying_app_to_internet)中，我们的部署工作流程涉及手动运行一些脚本，并将存储库代码推送到[Fly.io](https://fly.io/)或[Render](https://render.com/)托管服务。
 
 <!-- In this part, we''ll develop a simple "deployment pipeline" that deploys each commit of your code automatically to Fly.io or Render <i>if</i> the committed code does not break anything.-->
 在这一部分中，我们将开发一个简单的“部署管道”，如果提交的代码没有破坏任何东西，就会自动将每次提交的代码部署到Fly.io或Render。
@@ -93,7 +93,7 @@ Git允许多个代码副本、流或版本共存而不会相互覆盖。当你�
 
 ### What is CI?
 
-<!-- The strict definition of CI (Continuous Integration) and the way the term is used in the industry may sometimes be different. One influential but quite early (written already in 2006) discussion of the topic is in [Martin Fowler''s blog](https://www.martinfowler.com/articles/continuousIntegration.html).-->
+<!-- The strict definition of CI (Continuous Integration) and the way the term is used in the industry may sometimes be different. One influential but quite early (written already in 2006) discussion of the topic is in [Martin Fowler's blog](https://www.martinfowler.com/articles/continuousIntegration.html).-->
 CI（持续集成）的严格定义以及这个术语在行业中的使用方式有时会有所不同。2006年就已经写出的一篇具有影响力的讨论可以参考[Martin Fowler的博客](https://www.martinfowler.com/articles/continuousIntegration.html)。
 
 <!-- Strictly speaking, CI refers to <a href='https://www.atlassian.com/continuous-delivery/principles/continuous-integration-vs-delivery-vs-deployment'>merging developer changes to the main branch</a> often, Wikipedia even helpfully suggests: "several times a day". This is usually true but when we refer to CI in industry, we''re quite often talking about what happens after the actual merge happens.-->
@@ -168,7 +168,7 @@ CI（持续集成）的严格定义以及这个术语在行业中的使用方式
 
 ### Important principles
 
-<!-- It''s important to remember that CI/CD is not the goal. The goal is better, faster software development with fewer preventable bugs and better team cooperation.-->
+<!-- It's important to remember that CI/CD is not the goal. The goal is better, faster software development with fewer preventable bugs and better team cooperation.-->
 **这很重要要记住，CI/CD不是目标，目标是更好、更快的软件开发，更少的可预防的 bug，更好的团队合作。**
 
 <!-- To that end, CI should always be configured to the task at hand and the project itself. The end goal should be kept in mind at all times. You can think of CI as the answer to these questions:-->
@@ -191,7 +191,7 @@ CI（持续集成）的严格定义以及这个术语在行业中的使用方式
 <!-- There's an old joke that a bug is just an "undocumented feature". We'd like to avoid that. We'd like to avoid any situations where we don't know the exact outcome. For example, if we depend on a label on a PR to define whether something is a "major", "minor" or "patch" release (we'll cover the meanings of those terms later), then it's important that we know what happens if a developer forgets to put a label on their PR. What if they put a label on after the build/test process has started? What happens if the developer changes the label mid-way through, which one is the one that actually releases?-->
 有一个老笑话说，一个错误只是一个“未文档化的功能”。我们希望避免这种情况。我们希望避免任何情况，我们不知道确切的结果。例如，如果我们依赖PR上的标签来定义某些内容是“主要”，“次要”还是“补丁”发布（我们稍后会讨论这些术语的含义），那么我们就需要知道如果开发人员忘记添加标签会发生什么。如果他们在构建/测试过程开始后才添加标签会发生什么？如果开发人员在过程中更改标签，哪个标签最终会发布？
 
-<!-- It's possible to cover all cases you can think of and still have gaps where the developer will do something "creative" that you didn't think of, so it''s important to have the process fail safely in this case.-->
+<!-- It's possible to cover all cases you can think of and still have gaps where the developer will do something "creative" that you didn't think of, so it's important to have the process fail safely in this case.-->
 可能覆盖你能想到的所有情况，但仍然会有开发者做出你没有想到的“创造性”的事情的空缺，因此在这种情况下，重要的是要让过程安全失败。
 
 <!-- For example, if we have the case mentioned above where the label changes midway through the build. If we didn't think of this beforehand, it might be best to fail the build and alert the user if something we weren't expecting happened. The alternative, where we deploy the wrong type of version anyway, could result in bigger problems, so failing and notifying the developer is the safest way out of this situation.-->
@@ -210,10 +210,10 @@ CI（持续集成）的严格定义以及这个术语在行业中的使用方式
 
 #### Code always kept deployable
 
-<!-- Having code that''s always deployable makes life easier. This is especially true when the main branch contains the code running in the production environment. For example, if a bug is found and it needs to be fixed, you can pull a copy of the main branch (knowing it is the code running in production), fix the bug, and make a pull request back to the main branch. This is relatively straight forward.-->
+<!-- Having code that's always deployable makes life easier. This is especially true when the main branch contains the code running in the production environment. For example, if a bug is found and it needs to be fixed, you can pull a copy of the main branch (knowing it is the code running in production), fix the bug, and make a pull request back to the main branch. This is relatively straight forward.-->
 有可随时部署的代码可以让生活变得更轻松。当主分支包含了在生产环境中运行的代码时，这尤其如此。例如，如果发现了一个 bug，需要修复它，你可以拉取一份主分支的副本（知道它是在生产环境中运行的代码），修复 bug，然后提交一个 pull request 回到主分支。这相对来说是相当直接的。
 
-<!-- If, on the other hand, the main branch and production are very different and the main branch is not deployable, then you would have to find out what code <i>is</i> running in production, pull a copy of that, fix the bug, figure out a way to push it back, then work out how to deploy that specific commit. That''s not great and would have to be a completely different workflow from a normal deployment.-->
+<!-- If, on the other hand, the main branch and production are very different and the main branch is not deployable, then you would have to find out what code <i>is</i> running in production, pull a copy of that, fix the bug, figure out a way to push it back, then work out how to deploy that specific commit. That's not great and would have to be a completely different workflow from a normal deployment.-->
 如果另一方面，主分支和生产环境非常不同，而且主分支不可部署，那么你就必须找出当前生产环境中运行的代码是什么，拉取一份副本，修复 bug，找到一种方法将其推回，然后弄清楚如何部署该特定提交。这样的工作流程肯定不如正常部署好。
 
 #### Knowing what code is deployed (sha sum/version)
@@ -221,7 +221,7 @@ CI（持续集成）的严格定义以及这个术语在行业中的使用方式
 <!-- It's often important to know what is actually running in production. Ideally, as we discussed above, we'd have the main branch running in production. This is not always possible. Sometimes we intend to have the main branch in production but a build fails, sometimes we batch together several changes and want to have them all deployed at once.-->
 通常很重要知道在生产环境中实际运行的是什么。理想情况下，正如我们上面讨论的，我们将主分支运行在生产环境中。这并不总是可能的。有时，我们打算将主分支部署到生产环境，但构建失败，有时我们将几个更改批量地放在一起，希望它们一次性部署。
 
-<!-- What we need in these cases (and is a good idea in general) is to know exactly <i>what code is running in production</i>. Sometimes this can be done with a version number, sometimes it''s useful to have the commit SHA sum (uniquely identifying hash of that particular commit in git) attached to the code. We will discuss versioning further [a bit later in this part](/en/part11/keeping_green#versioning).-->
+<!-- What we need in these cases (and is a good idea in general) is to know exactly <i>what code is running in production</i>. Sometimes this can be done with a version number, sometimes it's useful to have the commit SHA sum (uniquely identifying hash of that particular commit in git) attached to the code. We will discuss versioning further [a bit later in this part](/en/part11/keeping_green#versioning).-->
 在这些情况下（一般来说）我们需要确切地知道<i>生产环境中正在运行的代码</i>。有时候可以通过版本号来实现，有时候附带提交的SHA和（git中唯一标识提交的哈希）对代码也很有用。我们将在[后面的部分](/en/part11/keeping_green#versioning)进一步讨论版本控制。
 
 <!-- It is even more useful if we combine the version information with a history of all releases. If, for example, we found out that a particular commit has introduced a bug, we can find out exactly when that was released and how many users were affected. This is especially useful when that bug has written bad data to the database. We''d now be able to track where that bad data went based on the time.-->
@@ -237,7 +237,7 @@ CI（持续集成）的严格定义以及这个术语在行业中的使用方式
 
 #### Jenkins (and other self-hosted setups)
 
-<!-- Among the self-hosted options, [Jenkins](https://www.jenkins.io/) is the most popular. It''s extremely flexible and-->
+<!-- Among the self-hosted options, [Jenkins](https://www.jenkins.io/) is the most popular. It's extremely flexible and-->
 has a huge library of plugins.
 
 在自托管选项中，[Jenkins](https://www.jenkins.io/)是最受欢迎的。它非常灵活，拥有巨大的插件库。
@@ -252,7 +252,7 @@ has a huge library of plugins.
 
 #### GitHub Actions and other cloud-based solutions
 
-<!-- In a cloud-hosted setup, the setup of the environment is not something you need to worry about. It''s there, all you need to do is tell it what to do. Doing that usually involves putting a file in your repository and then telling the CI system to read the file (or to check your repository for that particular file).-->
+<!-- In a cloud-hosted setup, the setup of the environment is not something you need to worry about. It's there, all you need to do is tell it what to do. Doing that usually involves putting a file in your repository and then telling the CI system to read the file (or to check your repository for that particular file).-->
 在云托管的设置中，环境的设置不是你需要担心的事情。它就在那里，你所需要做的就是告诉它该做什么。这通常涉及将文件放入您的存储库，然后告诉CI系统读取该文件（或检查您的存储库以获取该特定文件）。
 
 <!-- The actual CI config for the cloud-based options is often a little simpler, at least if you stay within what is considered "normal" usage. If you want to do something a little bit more special, then cloud-based options may become more limited, or you may find it difficult to do that one specific task for which the cloud platform just isn''t built for.-->

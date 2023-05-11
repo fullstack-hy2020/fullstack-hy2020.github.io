@@ -11,7 +11,7 @@ lang: zh
 这一部分的练习与前面几部分的练习有些不同。前面几部分的练习和本部分的练习[都是关于本部分提出的理论](/en/part7/custom_hooks#exercises-7-4-7-8)。
 
 <!-- This part also contains a [series of exercises](/en/part7/exercises_extending_the_bloglist) in which we modify the Bloglist application from parts 4 and 5 to rehearse and apply the skills we have learned.-->
-这一部分也包含了一系列[练习](/en/part7/exercises_extending_the_bloglist)，我们可以通过修改第4部分和第5部分的Bloglist应用来复习和应用我们所学习的技能。
+这一部分也包含了一系列[练习](/en/part7/exercises_extending_the_bloglist)，我们可以通过修改第4章节和第5章节的Bloglist应用来复习和应用我们所学习的技能。
 
 ### Hooks
 
@@ -24,11 +24,11 @@ React 提供了 15 种不同的[内置钩子](https://reactjs.org/docs/hooks-ref
 <!-- Within the last couple of years, many React libraries have begun to offer hook-based APIs. [In part 6](/en/part6/flux_architecture_and_redux) we used the [useSelector](https://react-redux.js.org/api/hooks#useselector) and [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) hooks from the react-redux library to share our redux-store and dispatch function to our components.-->
 在过去的几年里，许多 React 库开始提供基于钩子的 API。[在第 6 部分](/en/part6/flux_architecture_and_redux)中，我们使用了 [useSelector](https://react-redux.js.org/api/hooks#useselector) 和 [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) 钩子，从 react-redux 库中分享我们的 redux-store 和 dispatch 函数到我们的组件中。
 
-<!-- The [React Router''s](https://reactrouter.com/en/main/start/tutorial) API we introduced in the [previous part](/en/part7/react_router) is also partially hook-based. Its hooks can be used to access URL parameters and the <i>navigation</i> object, which allows for manipulating the browser URL programmatically.-->
-[前一部分](/en/part7/react_router)中介绍的[React Router''s](https://reactrouter.com/en/main/start/tutorial) API也是部分基于Hook的。它的Hook可用于访问URL参数和<i>导航</i>对象，允许程序化地操纵浏览器URL。
+<!-- The [React Router's](https://reactrouter.com/en/main/start/tutorial) API we introduced in the [previous part](/en/part7/react_router) is also partially hook-based. Its hooks can be used to access URL parameters and the <i>navigation</i> object, which allows for manipulating the browser URL programmatically.-->
+[前一部分](/en/part7/react_router)中介绍的[React Router's](https://reactrouter.com/en/main/start/tutorial) API也是部分基于Hook的。它的Hook可用于访问URL参数和<i>导航</i>对象，允许程序化地操纵浏览器URL。
 
-<!-- As mentioned in [part 1](/en/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks), hooks are not normal functions, and when using those we have to adhere to certain [rules or limitations](https://reactjs.org/docs/hooks-rules.html). Let''s recap the rules of using hooks, copied verbatim from the official React documentation:-->
-[如在第一部分中所提及](/en/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks)，hooks不是正常的函数，使用它们时我们必须遵守某些[规则或限制](https://reactjs.org/docs/hooks-rules.html)。让我们复习一下使用hooks的规则，以下文字摘自官方React文档：
+<!-- As mentioned in [part 1](/en/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks), hooks are not normal functions, and when using those we have to adhere to certain [rules or limitations](https://reactjs.org/docs/hooks-rules.html). Let's recap the rules of using hooks, copied verbatim from the official React documentation:-->
+[如在第一章节中所提及](/en/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks)，hooks不是正常的函数，使用它们时我们必须遵守某些[规则或限制](https://reactjs.org/docs/hooks-rules.html)。让我们复习一下使用hooks的规则，以下文字摘自官方React文档：
 
 <!-- **Don’t call Hooks inside loops, conditions, or nested functions.** Instead, always use Hooks at the top level of your React function.-->
 **不要在循环、条件或嵌套函数中调用 Hooks。** 相反，始终在 React 函数的顶级位置使用 Hooks。
@@ -41,7 +41,7 @@ React 提供了 15 种不同的[内置钩子](https://reactjs.org/docs/hooks-ref
 <!-- - Call Hooks from custom Hooks-->
 从自定义钩子中调用钩子
 
-<!-- There''s an existing [ESlint](https://www.npmjs.com/package/eslint-plugin-react-hooks) rule that can be used to verify that the application uses hooks correctly.-->
+<!-- There's an existing [ESlint](https://www.npmjs.com/package/eslint-plugin-react-hooks) rule that can be used to verify that the application uses hooks correctly.-->
 有一个现有的[ESlint](https://www.npmjs.com/package/eslint-plugin-react-hooks)规则可以用来验证应用程序是否正确使用hooks。
 
 <!-- Create-react-app has the readily-configured rule [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks) that complains if hooks are used in an illegal manner:-->
@@ -85,7 +85,7 @@ const App = () => {
 }
 ```
 
-<!-- Let''s extract the counter logic into a custom hook. The code for the hook is as follows:-->
+<!-- Let's extract the counter logic into a custom hook. The code for the hook is as follows:-->
 让我们将计数器逻辑提取到一个自定义钩子中。 钩子的代码如下：
 
 ```js
@@ -214,7 +214,7 @@ const App = () => {
 <!-- Every field of the form has its own state. To keep the state of the form synchronized with the data provided by the user, we have to register an appropriate <i>onChange</i> handler for each of the <i>input</i> elements.-->
 每个表单域都有它自己的状态。为了使表单的状态与用户提供的数据保持同步，我们必须为每个<i>输入</i>元素注册适当的<i>onChange</i>处理程序。
 
-<!-- Let''s define our own custom _useField_ hook that simplifies the state management of the form:-->
+<!-- Let's define our own custom _useField_ hook that simplifies the state management of the form:-->
 让我们定义自己的自定义_useField_钩子，以简化表单的状态管理：
 
 ```js
@@ -453,13 +453,13 @@ const App = () => {
 
 #### 7.7: country hook
 
-<!-- Let''s return to exercises [2.18-2.20](/en/part2/adding_styles_to_react_app#exercises-2-18-2-20).-->
+<!-- Let's return to exercises [2.18-2.20](/en/part2/adding_styles_to_react_app#exercises-2-18-2-20).-->
 让我们回到练习[2.18-2.20](/en/part2/adding_styles_to_react_app#exercises-2-18-2-20)。
 
 <!-- Use the code from <https://github.com/fullstack-hy2020/country-hook> as your starting point.-->
 使用<https://github.com/fullstack-hy2020/country-hook>中的代码作为你的起点。
 
-<!-- The application can be used to search for a country''s details from the <https://restcountries.com/> interface. If a country is found, the details of the country are displayed:-->
+<!-- The application can be used to search for a country's details from the <https://restcountries.com/> interface. If a country is found, the details of the country are displayed:-->
 应用程序可以用来从<https://restcountries.com/>接口搜索一个国家的详细信息。如果找到了国家，则会显示国家的详细信息：
 
 ![browser displaying country details](../../images/7/69ea.png)
@@ -472,10 +472,10 @@ const App = () => {
 <!-- The application is otherwise complete, but in this exercise, you have to implement a custom hook _useCountry_, which can be used to search for the details of the country given to the hook as a parameter.-->
 应用程序已经完成，但在本次练习中，你必须实现一个自定义钩子 _useCountry_，它可以用来搜索给定钩子的国家的详细信息。
 
-<!-- Use the API endpoint [full name](https://restcountries.com/#api-endpoints-v2-full-name) to fetch a country''s details in a _useEffect_ hook within your custom hook.-->
+<!-- Use the API endpoint [full name](https://restcountries.com/#api-endpoints-v2-full-name) to fetch a country's details in a _useEffect_ hook within your custom hook.-->
 使用API端点[全名](https://restcountries.com/#api-endpoints-v2-full-name)在自定义钩子中的_useEffect_钩子中获取国家的详细信息。
 
-<!-- Note that in this exercise it is essential to use useEffect''s [second parameter](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) array to control when the effect function is executed. See the course [part 2](/en/part2/adding_styles_to_react_app#couple-of-important-remarks) for more info how the second parameter could be used.-->
+<!-- Note that in this exercise it is essential to use useEffect's [second parameter](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) array to control when the effect function is executed. See the course [part 2](/en/part2/adding_styles_to_react_app#couple-of-important-remarks) for more info how the second parameter could be used.-->
 注意，在本练习中，必须使用useEffect的[第二个参数](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect)数组来控制何时执行效果函数。有关如何使用第二个参数的更多信息，请参阅课程[第2章节](/en/part2/adding_styles_to_react_app#couple-of-important-remarks)。
 
 #### 7.8: ultimate hooks

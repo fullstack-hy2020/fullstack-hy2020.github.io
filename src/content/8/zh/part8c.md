@@ -7,7 +7,7 @@ lang: zh
 
 <div class="content">
 
-<!-- We will now add user management to our application, but let''s first start using a database for storing data.-->
+<!-- We will now add user management to our application, but let's first start using a database for storing data.-->
 我们现在将为我们的应用程序添加用户管理，但让我们先开始使用数据库来存储数据。
 
 ### Mongoose and Apollo
@@ -139,7 +139,7 @@ allPersons: async (root, args) => {
 }
 ```
 
-<!-- Let''s complete the *allPersons* resolver so it takes the optional parameter *phone* into account:-->
+<!-- Let's complete the *allPersons* resolver so it takes the optional parameter *phone* into account:-->
 让我们完成*allPersons*解析器，以便它考虑可选参数*phone*：
 
 ```js
@@ -228,7 +228,7 @@ Mutation: {
 
 ### User and log in
 
-<!-- Let's add user management to our application. For simplicity's sake, let''s assume that all users have the same password which is hardcoded to the system. It would be straightforward to save individual passwords for all users following the principles from [part 4](/en/part4/user_administration), but because our focus is on GraphQL, we will leave out all that extra hassle this time.-->
+<!-- Let's add user management to our application. For simplicity's sake, let's assume that all users have the same password which is hardcoded to the system. It would be straightforward to save individual passwords for all users following the principles from [part 4](/en/part4/user_administration), but because our focus is on GraphQL, we will leave out all that extra hassle this time.-->
 让我们给我们的应用程序添加用户管理。为了简单起见，让我们假设所有用户都有相同的密码，该密码被硬编码到系统中。按照[第4章节](/en/part4/user_administration)的原则，保存所有用户的单独密码是很简单的，但是因为我们的重点是GraphQL，所以这次我们将省略所有额外的麻烦。
 
 <!-- The user schema is as follows:-->
@@ -258,9 +258,9 @@ module.exports = mongoose.model('User', schema)
 每个用户都通过*朋友*字段与系统中的其他人连接在一起。这个想法是，当用户，例如<i>mluukkai</i>，将一个人，例如<i>Arto Hellas</i>，添加到列表中时，该人将被添加到他们的*朋友*列表中。这样，登录的用户可以在应用程序中拥有自己的个性化视图。
 
 <!-- Logging in and identifying the user are handled the same way we used in [part 4](/en/part4/token_authentication) when we used REST, by using tokens.-->
-登录和识别用户的方式与我们在[第四部分](/en/part4/token_authentication)使用REST时使用的方式相同，即使用令牌。
+登录和识别用户的方式与我们在[第四章节](/en/part4/token_authentication)使用REST时使用的方式相同，即使用令牌。
 
-<!-- Let''s extend the schema like so:-->
+<!-- Let's extend the schema like so:-->
 让我们像这样扩展模式：
 
 ```js
@@ -406,7 +406,7 @@ startStandaloneServer(server, {
 <!-- So our code sets the object corresponding to the user who made the request to the *currentUser* field of the context. If there is no user connected to the request, the value of the field is undefined.-->
 所以我们的代码将与请求者相对应的对象设置为上下文的*currentUser*字段。如果没有用户与请求相连，该字段的值就是未定义的。
 
-<!-- The resolver of the *me* query is very simple: it just returns the logged-in user it receives in the *currentUser* field of the third parameter of the resolver, *context*. It''s worth noting that if there is no logged-in user, i.e. there is no valid token in the header attached to the request, the query returns <i>null</i>:-->
+<!-- The resolver of the *me* query is very simple: it just returns the logged-in user it receives in the *currentUser* field of the third parameter of the resolver, *context*. It's worth noting that if there is no logged-in user, i.e. there is no valid token in the header attached to the request, the query returns <i>null</i>:-->
 解析*me*查询非常简单：它只返回它在解析器的第三个参数*context*的*currentUser*字段中接收到的已登录用户。值得注意的是，如果没有已登录的用户，即请求附带的头中没有有效的令牌，则查询返回<i>null</i>：
 
 ```js
@@ -475,7 +475,7 @@ Mutation: {
 <!-- If a logged-in user cannot be found from the context, an *GraphQLError* with a proper message is thrown. Creating new persons is now done with *async/await* syntax, because if the operation is successful, the created person is added to the friends list of the user.-->
 如果在上下文中找不到登录用户，就会抛出一个带有适当消息的*GraphQLError*。现在使用*async/await*语法创建新的人物，因为如果操作成功，创建的人物将被添加到用户的朋友列表中。
 
-<!-- Let''s also add functionality for adding an existing user to your friends list. The mutation is as follows:-->
+<!-- Let's also add functionality for adding an existing user to your friends list. The mutation is as follows:-->
 让我们也增加功能，以便将现有用户添加到您的朋友列表中。变异如下：
 
 ```js
@@ -487,7 +487,7 @@ type Mutation {
 }
 ```
 
-<!-- And the mutation''s resolver:-->
+<!-- And the mutation's resolver:-->
 而突变的解决方案：
 
 ```js
@@ -529,7 +529,7 @@ addAsFriend: async (root, args, context) => {
 addAsFriend: async (root, args, { currentUser }) => {
 ```
 
-<!-- The following query now returns the user''s friends list:-->
+<!-- The following query now returns the user's friends list:-->
 以下查询现在可以返回用户的朋友列表：
 
 ```js
@@ -561,7 +561,7 @@ query {
 <!-- Change the library application so that it saves the data to a database. You can find the <i>mongoose schema</i> for books and authors from [here](https://github.com/fullstack-hy/misc/blob/main/library-schema.md).-->
 更改图书馆应用程序，使其将数据保存到数据库中。您可以从[这里](https://github.com/fullstack-hy/misc/blob/main/library-schema.md)找到图书和作者的<i>mongoose模式</i>。
 
-<!-- Let''s change the book graphql schema a little-->
+<!-- Let's change the book graphql schema a little-->
 让我们改变一下书籍graphql架构吧！
 
 ```js
@@ -574,7 +574,7 @@ type Book {
 }
 ```
 
-<!-- so that instead of just the author''s name, the book object contains all the details of the author.-->
+<!-- so that instead of just the author's name, the book object contains all the details of the author.-->
 这样，书籍对象就不仅仅包含作者的名字，还包括作者的所有详细信息。
 
 <!-- You can assume that the user will not try to add faulty books or authors, so you don''t have to care about validation errors.-->

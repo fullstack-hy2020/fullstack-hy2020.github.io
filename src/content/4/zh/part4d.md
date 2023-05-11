@@ -37,7 +37,7 @@ lang: zh
 <!-- - The server uses the token to identify the user-->
 服务器使用令牌来识别用户
 
-<!-- Let''s first implement the functionality for logging in. Install the [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) library, which allows us to generate [JSON web tokens](https://jwt.io/).-->
+<!-- Let's first implement the functionality for logging in. Install the [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) library, which allows us to generate [JSON web tokens](https://jwt.io/).-->
 让我们首先实现登录功能。安装[jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)库，它允许我们生成[JSON web tokens](https://jwt.io/)。
 
 ```bash
@@ -129,7 +129,7 @@ const loginRouter = require('./controllers/login')
 app.use('/api/login', loginRouter)
 ```
 
-<!-- Let''s try logging in using VS Code REST-client:-->
+<!-- Let's try logging in using VS Code REST-client:-->
 让我们尝试使用VS Code REST-client登录：
 
 ![vscode rest post with username/password](../../images/4/17e.png)
@@ -159,7 +159,7 @@ app.use('/api/login', loginRouter)
 
 ### Limiting creating new notes to logged-in users
 
-<!-- Let''s change creating new notes so that it is only possible if the post request has a valid token attached. The note is then saved to the notes list of the user identified by the token.-->
+<!-- Let's change creating new notes so that it is only possible if the post request has a valid token attached. The note is then saved to the notes list of the user identified by the token.-->
 让我们改变创建新笔记的方式，只有在提交请求中附带有效令牌时才可以。笔记然后被保存到由令牌标识的用户的笔记列表中。
 
 <!-- There are several ways of sending the token from the browser to the server. We will use the [Authorization](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization) header. The header also tells which [authentication scheme](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#Authentication_schemes) is used. This can be necessary if the server offers multiple ways to authenticate.-->
@@ -248,7 +248,7 @@ const errorHandler = (error, request, response, next) => {
 <!-- The object decoded from the token contains the <i>username</i> and <i>id</i> fields, which tell the server who made the request.-->
 从令牌解码出来的对象包含<i>用户名</i>和<i>ID</i>字段，这些字段告诉服务器是谁发出了请求。
 
-<!-- If the object decoded from the token does not contain the user''s identity (_decodedToken.id_ is undefined), error status code [401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2) is returned and the reason for the failure is explained in the response body.-->
+<!-- If the object decoded from the token does not contain the user's identity (_decodedToken.id_ is undefined), error status code [401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2) is returned and the reason for the failure is explained in the response body.-->
 如果从令牌解码出的对象不包含用户的身份（_decodedToken.id_未定义），则返回错误状态码[401未授权](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2)，并在响应体中解释失败的原因。
 
 ```js
@@ -278,7 +278,7 @@ if (!decodedToken.id) {
 <!-- Current application code can be found on [Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-9), branch <i>part4-9</i>.-->
 当前应用程序的代码可以在[Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-9)上找到，分支为<i>part4-9</i>。
 
-<!-- If the application has multiple interfaces requiring identification, JWT''s validation should be separated into its own middleware. An existing library like [express-jwt](https://www.npmjs.com/package/express-jwt) could also be used.-->
+<!-- If the application has multiple interfaces requiring identification, JWT's validation should be separated into its own middleware. An existing library like [express-jwt](https://www.npmjs.com/package/express-jwt) could also be used.-->
 如果应用程序有多个需要身份验证的接口，则JWT的验证应该分离到其自己的中间件中。也可以使用类似[express-jwt](https://www.npmjs.com/package/express-jwt)的现有库。
 
 ### Problems of Token-based authentication
@@ -375,7 +375,7 @@ const errorHandler = (error, request, response, next) => {
 用户名、密码和使用令牌认证的应用程序必须始终使用[HTTPS](https://en.wikipedia.org/wiki/HTTPS)。 我们可以在应用程序中使用Node [HTTPS](https://nodejs.org/api/https.html)服务器而不是[HTTP](https://nodejs.org/docs/latest-v8.x/api/http.html)服务器（它需要更多的配置）。 另一方面，我们应用程序的生产版本在Fly.io中，因此我们的应用程序保持安全：Fly.io将浏览器和Fly.io服务器之间的所有流量都通过HTTPS路由。
 
 <!-- We will implement login to the frontend in the [next part](/en/part5).-->
-我们将在[下一部分](/en/part5)对前端实现登录。
+我们将在[下一章节](/en/part5)对前端实现登录。
 
 </div>
 
@@ -395,7 +395,7 @@ const errorHandler = (error, request, response, next) => {
 通过发送HTTP POST请求到<i>api/users</i>地址来实现创建新用户的方法。用户拥有<i>用户名、密码和姓名</i>。
 
 <!-- Do not save passwords to the database as clear text, but use the <i>bcrypt</i> library like we did in part 4 chapter [Creating new users](/en/part4/user_administration#creating-users).-->
-不要将密码以明文形式保存到数据库中，而是像我们在第4部分第[创建新用户](/en/part4/user_administration#creating-users)章节中所做的那样，使用<i>bcrypt</i>库。
+不要将密码以明文形式保存到数据库中，而是像我们在第4章节第[创建新用户](/en/part4/user_administration#creating-users)章节中所做的那样，使用<i>bcrypt</i>库。
 
 <!-- **NB** Some Windows users have had problems with <i>bcrypt</i>. If you run into problems, remove the library with command-->
 `gem uninstall bcrypt`
@@ -445,7 +445,7 @@ npm uninstall bcrypt
 <!-- Which user is designated as the creator does not matter just yet. The functionality is finished in exercise 4.19.-->
 哪位用户被指定为创建者还不重要。功能在练习4.19中已完成。
 
-<!-- Modify listing all blogs so that the creator''s user information is displayed with the blog:-->
+<!-- Modify listing all blogs so that the creator's user information is displayed with the blog:-->
 修改列出所有博客的功能，以便在博客中显示创建者的用户信息：
 
 ![api/blogs embeds creators user information in JSON data](../../images/4/23e.png)
@@ -470,7 +470,7 @@ npm uninstall bcrypt
 #### 4.20*: bloglist expansion, step8
 
 <!-- [This example](/en/part4/token_authentication) from part 4 shows taking the token from the header with the _getTokenFrom_ helper function.-->
-[这个例子](/en/part4/token_authentication) 来自第4部分，展示了如何使用_getTokenFrom_辅助函数从头中获取令牌。
+[这个例子](/en/part4/token_authentication) 来自第4章节，展示了如何使用_getTokenFrom_辅助函数从头中获取令牌。
 
 <!-- If you used the same solution, refactor taking the token to a [middleware](/en/part3/node_js_and_express#middleware). The middleware should take the token from the <i>Authorization</i> header and place it into the <i>token</i> field of the <i>request</i> object.-->
 如果您使用相同的解决方案，请将令牌重构为[中间件](/en/part3/node_js_and_express#middleware)。该中间件应从<i>Authorization</i>标头中获取令牌，并将其放入<i>request</i>对象的<i>token</i>字段中。
@@ -508,7 +508,7 @@ const tokenExtractor = (request, response, next) => {
 
 #### 4.21*: bloglist expansion, step9
 
-<!-- Change the delete blog operation so that a blog can be deleted only by the user who added the blog. Therefore, deleting a blog is possible only if the token sent with the request is the same as that of the blog''s creator.-->
+<!-- Change the delete blog operation so that a blog can be deleted only by the user who added the blog. Therefore, deleting a blog is possible only if the token sent with the request is the same as that of the blog's creator.-->
 改变删除博客操作，只有添加博客的用户才能删除该博客。因此，只有当发送的请求的令牌与博客创建者的令牌相同时，才可以删除博客。
 
 <!-- If deleting a blog is attempted without a token or by an invalid user, the operation should return a suitable status code.-->
@@ -600,7 +600,7 @@ router.post('/', userExtractor, async (request, response) => {
 <!-- [This](https://github.com/visionmedia/supertest/issues/398) is most likely useful when doing the fix.-->
 [这](https://github.com/visionmedia/supertest/issues/398)很可能在修复时很有用。
 
-<!-- This is the last exercise for this part of the course and it''s time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
+<!-- This is the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
 这是本课程的最后一个练习，是时候把你的代码推送到GitHub上，并将所有已完成的练习提交到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)。
 
 </div>

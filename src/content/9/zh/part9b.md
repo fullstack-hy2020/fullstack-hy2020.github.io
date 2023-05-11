@@ -45,7 +45,7 @@ npm install -g ts-node typescript
 <!-- As we recall from [part 3](/en/part3), an npm project is set by running the command *npm init* in an empty directory. Then we can install the dependencies by running-->
 the command *npm install <package-name>*.
 
-正如我们从[第三部分](/en/part3)回忆起，在一个空目录中运行命令*npm init*可以设置一个npm项目。然后我们可以通过运行命令*npm install <package-name>*来安装依赖项。
+正如我们从[第三章节](/en/part3)回忆起，在一个空目录中运行命令*npm init*可以设置一个npm项目。然后我们可以通过运行命令*npm install <package-name>*来安装依赖项。
 
 ```bash
 npm install --save-dev ts-node typescript
@@ -71,15 +71,15 @@ npm install --save-dev ts-node typescript
 npm run ts-node file.ts -- -s --someoption
 ```
 
-<!-- It is worth mentioning that TypeScript also provides an online playground, where you can quickly try out TypeScript code and instantly see the resulting JavaScript and possible compilation errors. You can access TypeScript''s official playground [here](https://www.typescriptlang.org/play/index.html).-->
+<!-- It is worth mentioning that TypeScript also provides an online playground, where you can quickly try out TypeScript code and instantly see the resulting JavaScript and possible compilation errors. You can access TypeScript's official playground [here](https://www.typescriptlang.org/play/index.html).-->
 值得一提的是，TypeScript还提供了一个在线游乐场，您可以快速尝试TypeScript代码，并立即看到生成的JavaScript以及可能的编译错误。您可以访问TypeScript的官方游乐场[这里](https://www.typescriptlang.org/play/index.html)。
 
-<!-- **NB:** The playground might contain different tsconfig rules (which will be introduced later) than your local environment, which is why you might see different warnings there compared to your local environment. The playground''s tsconfig is modifiable through the config dropdown menu.-->
+<!-- **NB:** The playground might contain different tsconfig rules (which will be introduced later) than your local environment, which is why you might see different warnings there compared to your local environment. The playground's tsconfig is modifiable through the config dropdown menu.-->
 **翻译：** 注意：操作台可能包含不同于您本地环境的tsconfig规则（稍后将介绍），因此您可能会在那里看到与您本地环境不同的警告。操作台的tsconfig可以通过配置下拉菜单进行修改。
 
 #### A note about the coding style
 
-<!-- JavaScript is a quite relaxed language in itself, and things can often be done in multiple different ways. For example, we have named vs anonymous functions, using const and let or var, and the use of <i>semicolons</i>. This part of the course differs from the rest by using semicolons. It is not a TypeScript-specific pattern but a general coding style decision taken when creating any kind of JavaScript project. Whether to use them or not is usually in the hands of the programmer, but since it is expected to adapt one''s coding habits to the existing codebase, you are expected to use semicolons and adjust to the coding style in the exercises for this part. This part has some other coding style differences compared to the rest of the course as well, e.g. in the directory naming conventions.-->
+<!-- JavaScript is a quite relaxed language in itself, and things can often be done in multiple different ways. For example, we have named vs anonymous functions, using const and let or var, and the use of <i>semicolons</i>. This part of the course differs from the rest by using semicolons. It is not a TypeScript-specific pattern but a general coding style decision taken when creating any kind of JavaScript project. Whether to use them or not is usually in the hands of the programmer, but since it is expected to adapt one's coding habits to the existing codebase, you are expected to use semicolons and adjust to the coding style in the exercises for this part. This part has some other coding style differences compared to the rest of the course as well, e.g. in the directory naming conventions.-->
 JavaScript 本身是一种相当宽松的语言，事情往往可以用多种不同的方式来完成。例如，我们有命名和匿名函数，使用 `const` 和 `let` 或 `var`，以及 <i>分号</i> 的使用。这部分课程与其他部分不同之处在于使用分号。这不是 TypeScript 特定的模式，而是在创建任何类型的 JavaScript 项目时采取的一般编码风格决定。是否使用它们通常掌握在程序员手中，但由于预期将编码习惯适应现有的代码库，因此您应该使用分号并适应此部分练习中的编码风格。与课程其余部分相比，此部分还有一些其他的编码风格差异，例如目录命名约定。
 
 <!-- Let us add a configuration file *tsconfig.json* to the project with the following content:-->
@@ -98,7 +98,7 @@ JavaScript 本身是一种相当宽松的语言，事情往往可以用多种不
 <!-- For now, we will only use the compiler option [noImplicitAny](https://www.typescriptlang.org/tsconfig#noImplicitAny), which does not require having types for all variables used.-->
 现在，我们只会使用编译器选项[noImplicitAny](https://www.typescriptlang.org/tsconfig#noImplicitAny)，它不需要对所使用的所有变量都有类型。
 
-<!-- Let''s start by creating a simple Multiplier. It looks exactly as it would in JavaScript.-->
+<!-- Let's start by creating a simple Multiplier. It looks exactly as it would in JavaScript.-->
 让我们从创建一个简单的乘法器开始。它看起来和JavaScript中的一样。
 
 ```js
@@ -115,7 +115,7 @@ multiplicator(2, 4, 'Multiplied numbers 2 and 4, the result is:');
 <!-- But what happens if we end up passing the wrong <i>types</i> of arguments to the multiplicator function?-->
 但是如果我们最终传递给乘法函数错误的<i>类型</i>的参数又会发生什么呢？
 
-<!-- Let''s try it out!-->
+<!-- Let's try it out!-->
 让我们来试试看！
 
 ```js
@@ -132,7 +132,7 @@ multiplicator('how about a string?', 4, 'Multiplied a string and 4, the result i
 
 <!-- Wouldn''t it be nice if the language itself could prevent us from ending up in situations like this?-->
 假如语言本身能够防止我们陷入这种情况，那该多好啊？
-<!-- This is where we see the first benefits of TypeScript.  Let''s add types to the parameters and see where it takes us.-->
+<!-- This is where we see the first benefits of TypeScript.  Let's add types to the parameters and see where it takes us.-->
 这就是我们看到TypeScript的第一个好处的地方。让我们给参数添加类型，看看会发生什么。
 
 <!-- TypeScript natively supports multiple types including *number*, *string* and *Array*. See the comprehensive list [here](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html). More complex custom types can also be created.-->
@@ -163,13 +163,13 @@ VSCode 插件非常有效，当你试图使用错误类型时，它会立即通�
 
 ### Creating your first own types
 
-<!-- Let''s expand our multiplicator into a slightly more versatile calculator that also supports addition and division. The calculator should accept three arguments: two numbers and the operation, either *multiply*, *add* or *divide*, which tells it what to do with the numbers.-->
+<!-- Let's expand our multiplicator into a slightly more versatile calculator that also supports addition and division. The calculator should accept three arguments: two numbers and the operation, either *multiply*, *add* or *divide*, which tells it what to do with the numbers.-->
 让我们将我们的乘法器扩展成一个略微更具多功能的计算器，它还支持加法和除法。计算器应该接受三个参数：两个数字和操作，要么是*乘法*，要么是*加法*或*除法*，它告诉它要对数字做什么。
 
 <!-- In JavaScript, the code would require additional validation to make sure the last argument is indeed a string. TypeScript offers a way to define specific types for inputs, which describe exactly what type of input is acceptable. On top of that, TypeScript can also show the info on the accepted values already at the editor level.-->
 在JavaScript中，代码需要额外的验证来确保最后一个参数确实是一个字符串。TypeScript提供了一种定义特定类型的输入的方法，可以描述准确的输入类型是可接受的。此外，TypeScript还可以在编辑器级别显示可接受值的信息。
 
-<!-- We can create a *type* using the TypeScript native keyword *type*. Let''s describe our type *Operation*:-->
+<!-- We can create a *type* using the TypeScript native keyword *type*. Let's describe our type *Operation*:-->
 我们可以使用TypeScript原生关键字*type*创建一个*type*。让我们描述我们的类型*Operation*：
 
 ```js
@@ -186,7 +186,7 @@ type Operation = 'multiply' | 'add' | 'divide';
 <!-- The *type* keyword defines a new name for a type: [a type alias](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases). Since the defined type is a union of three possible values, it is handy to give it an alias that has a representative name.-->
 `type` 关键字定义了一个新的类型名称：[类型别名](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases)。由于定义的类型是三个可能值的联合，因此给它起一个有代表性的别名是很方便的。
 
-<!-- Let''s look at our calculator now:-->
+<!-- Let's look at our calculator now:-->
 让我们看看我们的计算器吧：
 
 ```js
@@ -253,7 +253,7 @@ const calculator = (a: number, b: number, op: Operation): Result =>  {
 }
 ```
 
-<!-- But now the question is if it''s <i>really</i> okay for the function to return a string?-->
+<!-- But now the question is if it's <i>really</i> okay for the function to return a string?-->
 但是现在的问题是，这个函数真的可以返回一个字符串吗？
 
 <!-- When your code can end up in a situation where something is divided by 0, something has probably gone terribly wrong and an error should be thrown and handled where the function was called.-->
@@ -368,7 +368,7 @@ try {
 <!-- The programs we have written are alright, but it sure would be better if we could use command-line arguments instead of always having to change the code to calculate different things.-->
 我们编写的程序还可以，但如果我们能够使用命令行参数来计算不同的东西，那就更好了。
 
-<!-- Let''s try it out, as we would in a regular Node application, by accessing *process.argv*. If you are using a recent npm-version (7.0 or later), there are no problems but with an older setup something is not right:-->
+<!-- Let's try it out, as we would in a regular Node application, by accessing *process.argv*. If you are using a recent npm-version (7.0 or later), there are no problems but with an older setup something is not right:-->
 让我们像在正常的Node应用程序中一样尝试一下，通过访问*process.argv*。如果你使用的是最新版本的npm（7.0或更高版本），那么没有问题，但是如果是旧版本，就会出现问题：
 
 ![vs code error cannot find name process need to install type definitions](../../images/9/5.png)
@@ -378,7 +378,7 @@ try {
 
 ### @types/{npm_package}
 
-<!-- Let''s return to the basic idea of TypeScript. TypeScript expects all globally-used code to be typed, as it does for your code when your project has a reasonable configuration. The TypeScript library itself contains only typings for the code of the TypeScript package. It is possible to write your own typings for a library, but that is rarely needed - since the TypeScript community has done it for us!-->
+<!-- Let's return to the basic idea of TypeScript. TypeScript expects all globally-used code to be typed, as it does for your code when your project has a reasonable configuration. The TypeScript library itself contains only typings for the code of the TypeScript package. It is possible to write your own typings for a library, but that is rarely needed - since the TypeScript community has done it for us!-->
 让我们回到 TypeScript 的基本概念。TypeScript 期望所有全局使用的代码都是类型化的，就像当你的项目有一个合理的配置时，你的代码一样。TypeScript 库本身只包含 TypeScript 包的代码的类型定义。可以编写自己的库类型定义，但这很少是必要的 - 因为 TypeScript 社区已经为我们做了这件事！
 
 <!-- As with npm, the TypeScript world also celebrates open-source code. The community is active and continuously reacting to updates and changes in commonly-used npm packages. You can almost always find the typings for npm packages, so you don''t have to create types for all of your thousands of dependencies alone.-->
@@ -415,7 +415,7 @@ npm install --save-dev @types/node
 
 ### Improving the project
 
-<!-- Next, let''s add npm scripts to run our two programs <i>multiplier</i> and <i>calculator</i>:-->
+<!-- Next, let's add npm scripts to run our two programs <i>multiplier</i> and <i>calculator</i>:-->
 接下来，让我们加入npm脚本来执行我们的两个程式<i>multiplier</i>和<i>calculator</i>:
 
 ```json
@@ -562,7 +562,7 @@ interface MultiplyValues {
 }
 ```
 
-<!-- The definition utilizes TypeScript''s [Interface](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#interfaces) keyword, which is one way to define the "shape" an object should have. In our case, it is quite obvious that the return value should be an object with the two properties *value1* and *value2*, which should both be of type number.-->
+<!-- The definition utilizes TypeScript's [Interface](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#interfaces) keyword, which is one way to define the "shape" an object should have. In our case, it is quite obvious that the return value should be an object with the two properties *value1* and *value2*, which should both be of type number.-->
 定义使用TypeScript的[接口](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#interfaces)关键字，这是定义对象应该具有的“形状”的一种方式。在我们的例子中，很明显返回值应该是一个具有两个属性*value1*和*value2*的对象，它们都应该是number类型。
 
 ### The alternative array syntax
@@ -781,7 +781,7 @@ default export "this is the default..."
 <!-- As mentioned, the [tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) file contains all your core configurations on how you want TypeScript to work in your project.-->
 # 如前所述，[tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) 文件包含了您在项目中如何使用TypeScript的所有核心配置。
 
-<!-- Let''s specify the following configurations in our <i>tsconfig.json</i> file:-->
+<!-- Let's specify the following configurations in our <i>tsconfig.json</i> file:-->
 让我们在我们的<i>tsconfig.json</i>文件中指定以下配置：
 
 ```json
@@ -878,14 +878,14 @@ import express from 'express';
 
 <!-- We haven''t installed types for <i>express</i>.-->
 我们还没有为<i>express</i>安装类型。
-<!-- Let''s do what the suggestion says and run:-->
+<!-- Let's do what the suggestion says and run:-->
 让我们按照建议做，跑起来！
 
 ```bash
 npm install --save-dev @types/express
 ```
 
-<!-- And no more errors! Let''s take a look at what changed.-->
+<!-- And no more errors! Let's take a look at what changed.-->
 # 再也没有错误了！让我们来看看发生了什么变化。
 
 <!-- When we hover over the *require* statement, we can see the compiler interprets everything express-related to be of type *any*.-->
@@ -931,7 +931,7 @@ npm install --save-dev @types/express
 }
 ```
 
-<!-- This configuration might create problems if you have library-wide predefined functions which require declaring a variable even if it''s not used at all, as is the case here.-->
+<!-- This configuration might create problems if you have library-wide predefined functions which require declaring a variable even if it's not used at all, as is the case here.-->
 这种配置可能会产生问题，如果你有库范围内预定义的函数，即使它根本不被使用，也需要声明一个变量，就像这里一样。
 <!-- Fortunately, this issue has already been solved on the configuration level.-->
 幸运的是，这个问题已经在配置层面上被解决了。
@@ -943,7 +943,7 @@ npm install --save-dev @types/express
 <!-- If it is absolutely impossible to get rid of an unused variable, you can prefix it with an underscore to inform the compiler you have thought about it and there is nothing you can do.-->
 如果绝对不可能摆脱一个未使用的变量，你可以在它前面加一个下划线，以告知编译器你已经考虑过了，而且已经无能为力。
 
-<!-- Let''s rename the *req* variable to *_req*. Finally, we are ready to start the application. It seems to work fine:-->
+<!-- Let's rename the *req* variable to *_req*. Finally, we are ready to start the application. It seems to work fine:-->
 让我们将*req*变量重命名为*_req*。最后，我们准备好开始应用程序了。看起来工作得很好：
 
 ![browser result showing pong on /ping](../../images/9/11a.png)
@@ -951,7 +951,7 @@ npm install --save-dev @types/express
 <!-- To simplify the development, we should enable <i>auto-reloading</i> to improve our workflow. In this course, you have already used <i>nodemon</i>, but ts-node has an alternative called <i>ts-node-dev</i>. It is meant to be used only with a development environment that takes care of recompilation on every change, so restarting the application won''t be necessary.-->
 为了简化开发，我们应该启用<i>自动重新加载</i>来改善我们的工作流程。在本课程中，您已经使用过<i>nodemon</i>，但ts-node有一个名为<i>ts-node-dev</i>的替代方案。它仅用于开发环境，该环境负责在每次更改时重新编译，因此不需要重新启动应用程序。
 
-<!-- Let''s install *ts-node-dev* to our development dependencies:-->
+<!-- Let's install *ts-node-dev* to our development dependencies:-->
 让我们将*ts-node-dev*安装到我们的开发依赖项中：
 
 ```bash
@@ -1053,7 +1053,7 @@ npm install --save-dev ts-node-dev
 <!-- Now that we have our first endpoints completed, you might notice we have used barely any TypeScript in these small examples. When examining the code a bit closer, we can see a few dangers lurking there.-->
 现在我们已经完成了第一个端点，你可能会注意到我们在这些小的例子中几乎没有使用TypeScript。当仔细检查代码时，我们可以看到一些危险正潜伏在那里。
 
-<!-- Let''s add the HTTP POST endpoint *calculate* to our app:-->
+<!-- Let's add the HTTP POST endpoint *calculate* to our app:-->
 让我们给我们的应用添加HTTP POST端点*calculate*：
 
 ```js
@@ -1120,7 +1120,7 @@ our coding styles.
 如果我们想限制开发者使用*任何*类型，那该怎么办？幸运的是，我们除了<i>tsconfig.json</i>之外还有其他方法来强制执行编码风格。我们可以使用<i>ESlint</i>来管理我们的编码风格。
 <!-- our code.-->
 我们的代码。
-<!-- Let''s install ESlint and its TypeScript extensions:-->
+<!-- Let's install ESlint and its TypeScript extensions:-->
 # 让我们安装ESlint及其TypeScript扩展：
 
 ```shell

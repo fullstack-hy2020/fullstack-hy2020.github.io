@@ -19,7 +19,7 @@ GraphQL 的哲学与 REST 完全不同。REST 是基于 <i>资源</i> 的。每�
 <!-- The resource-basedness of REST works well in most situations. However, it can be a bit awkward sometimes.-->
 资源导向的REST在大多数情况下都能很好地工作。但有时候有点尴尬。
 
-<!-- Let''s consider the following example: our bloglist application contains some kind of social media functionality, and we would like to show a list of all the blogs that were added by users who have commented on any of the blogs we follow.-->
+<!-- Let's consider the following example: our bloglist application contains some kind of social media functionality, and we would like to show a list of all the blogs that were added by users who have commented on any of the blogs we follow.-->
 让我们来看一个例子：我们的博客列表应用程序包含某种社交媒体功能，我们想要显示我们关注的所有博客的用户添加的博客列表。
 
 <!-- If the server implemented a REST API, we would probably have to do multiple HTTP requests from the browser before we had all the data we wanted. The requests would also return a lot of unnecessary data, and the code on the browser would probably be quite complicated.-->
@@ -58,7 +58,7 @@ query FetchBlogsQuery {
 <!-- The content of the `FetchBlogsQuery` can be roughly interpreted as: find a user named `"mluukkai"` and for each of his `followedUsers`, find all their `blogs`, and for each blog, all its `comments`, and for each `user` who wrote each comment, find their `blogs`, and return the `title` of each of them.-->
 `FetchBlogsQuery` 的内容可以大致解释为：查找名为 `"mluukkai"` 的用户，并且对他的每个 `followedUsers`，找出所有他们的 `blogs`，并且对每个 blog，找出其所有的 `comments`，并且对每个 `user`，写了每个 comment，找出他们的 `blogs`，并且返回每个 `title`。
 
-<!-- The server''s response would be about the following JSON object:-->
+<!-- The server's response would be about the following JSON object:-->
 服务器的响应将是关于以下JSON对象：
 
 ```bash
@@ -102,7 +102,7 @@ query FetchBlogsQuery {
 ### Schemas and queries
 
 <!-- We will get to know the basics of GraphQL by implementing a GraphQL version of the phonebook application from parts 2 and 3.-->
-我们将通过实现第2和第3部分的电话簿应用程序的GraphQL版本来了解GraphQL的基础知识。
+我们将通过实现第2和第3章节的电话簿应用程序的GraphQL版本来了解GraphQL的基础知识。
 
 <!-- In the heart of all GraphQL applications is a [schema](https://graphql.org/learn/schema/), which describes the data sent between the client and the server. The initial schema for our phonebook is as follows:-->
 在所有GraphQL应用程序的核心是一个[模式](https://graphql.org/learn/schema/)，它描述了客户端和服务器之间发送的数据。我们电话簿的初始模式如下：
@@ -295,7 +295,7 @@ GraphQL 查询只描述了服务器和客户端之间移动的数据。在服务
 npm install @apollo/server graphql
 ```
 
-<!-- Also create a `index.js` file in your project''s root directory.-->
+<!-- Also create a `index.js` file in your project's root directory.-->
 也在你项目的根目录中创建一个`index.js`文件。
 
 <!-- The initial code is as follows:-->
@@ -466,7 +466,7 @@ query {
 <!-- When Apollo server is run in development mode the page [http://localhost:4000](http://localhost:4000) has a button <i>Query your server</i> that takes us to [Apollo Studio Explorer](https://www.apollographql.com/docs/studio/explorer/explorer/).  This is very useful for a developer, and can be used to make queries to the server.-->
 当Apollo服务器以开发模式运行时，页面[http://localhost:4000](http://localhost:4000)会有一个<i>查询服务器</i>的按钮，可以让我们访问[Apollo Studio Explorer](https://www.apollographql.com/docs/studio/explorer/explorer/)。 这对开发人员非常有用，可以用来向服务器发出查询。
 
-<!-- Let''s try it out:-->
+<!-- Let's try it out:-->
 让我们来试试看！
 
 ![apollo studio Example Query with response allPersons](../../images/8/1x.png)
@@ -576,7 +576,7 @@ Person: {
 
 ### Object within an object
 
-<!-- Let''s modify the schema a bit-->
+<!-- Let's modify the schema a bit-->
 让我们稍微修改一下架构吧
 
 ```js
@@ -662,7 +662,7 @@ let persons = [
 
 <!-- Because the objects saved in the array do not have an <i>address</i> field, the default resolver is not sufficient.-->
 因为数组中保存的对象没有<i>地址</i>字段，所以默认解析器不够充分。
-<!-- Let''s add a resolver for the <i>address</i> field  of <i>Person</i> type :-->
+<!-- Let's add a resolver for the <i>address</i> field  of <i>Person</i> type :-->
 让我们为<i>Person</i>类型的<i>address</i>字段添加一个解析器。
 
 ```js
@@ -694,7 +694,7 @@ const resolvers = {
 
 ### Mutations
 
-<!-- Let''s add a functionality for adding new persons to the phonebook. In GraphQL, all operations which cause a change are done with [mutations](https://graphql.org/learn/queries/#mutations). Mutations are described in the schema as the keys of type <i>Mutation</i>.-->
+<!-- Let's add a functionality for adding new persons to the phonebook. In GraphQL, all operations which cause a change are done with [mutations](https://graphql.org/learn/queries/#mutations). Mutations are described in the schema as the keys of type <i>Mutation</i>.-->
 让我们为电话簿添加一个添加新人员的功能。在GraphQL中，所有引起变化的操作都是通过[突变](https://graphql.org/learn/queries/#mutations)完成的。突变在模式中被描述为<i>突变</i>类型的键。
 
 <!-- The schema for a mutation for adding a new person looks as follows:-->
@@ -818,7 +818,7 @@ much more complicated
 <!-- [error code](https://www.apollographql.com/docs/apollo-server/data/errors/#built-in-error-codes).-->
 [错误代码](https://www.apollographql.com/docs/apollo-server/data/errors/#built-in-error-codes)
 
-<!-- Let''s prevent adding the same name to the phonebook multiple times:-->
+<!-- Let's prevent adding the same name to the phonebook multiple times:-->
 让我们防止在电话簿中重复添加相同的名字：
 
 ```js
@@ -859,7 +859,7 @@ const resolvers = {
 
 ### Enum
 
-<!-- Let''s add a possibility to filter the query returning all persons with the parameter <i>phone</i> so that it returns only persons with a phone number-->
+<!-- Let's add a possibility to filter the query returning all persons with the parameter <i>phone</i> so that it returns only persons with a phone number-->
 让我们添加一种可能性，使用参数<i>phone</i>过滤查询，以便只返回具有电话号码的人。
 
 ```js
@@ -928,7 +928,7 @@ Query: {
 
 ### Changing a phone number
 
-<!-- Let''s add a mutation for changing the phone number of a person. The schema of this mutation looks as follows:-->
+<!-- Let's add a mutation for changing the phone number of a person. The schema of this mutation looks as follows:-->
 让我们为更改人员电话号码添加一个突变。此突变的模式如下：
 
 ```js

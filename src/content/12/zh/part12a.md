@@ -57,7 +57,7 @@ lang: zh
 自从我们作为JavaScript开发人员踏出了舒适圈，这一部分可能需要你转向，先熟悉shell/命令行/命令提示/终端，然后再开始。
 
 <!-- If you have only ever used a graphical user interface and never touched e.g. Linux or terminal on Mac, or if you get stuck in the first exercises we recommend doing the Part 1 of "Computing tools for CS studies" first: <https://tkt-lapio.github.io/en/>. Skip the section for "SSH connection" and Exercise 11. Otherwise, it includes everything you are going to need to get started here!-->
-如果你只曾使用过图形用户界面，从未触碰过Linux或Mac的终端，或者在第一个练习中遇到了困难，我们建议先完成《计算机科学研究的计算工具》的第一部分：<https://tkt-lapio.github.io/en/>。跳过“SSH连接”部分和练习11。否则，它包含了你在这里开始所需要的一切！
+如果你只曾使用过图形用户界面，从未触碰过Linux或Mac的终端，或者在第一个练习中遇到了困难，我们建议先完成《计算机科学研究的计算工具》的第一章节：<https://tkt-lapio.github.io/en/>。跳过“SSH连接”部分和练习11。否则，它包含了你在这里开始所需要的一切！
 
 #### Exercise 12.1: Using a computer (without graphical user interface)
 
@@ -123,7 +123,7 @@ System
 <!-- - [Get Docker](https://docs.docker.com/get-docker/)-->
 - [获取Docker](https://docs.docker.com/get-docker/)
 
-<!-- Now that that headache is hopefully over, let''s make sure that our versions match. Yours may have a bit higher numbers than here:-->
+<!-- Now that that headache is hopefully over, let's make sure that our versions match. Yours may have a bit higher numbers than here:-->
 现在这个头痛希望已经结束了，让我们确保我们的版本匹配。你的可能会有比这里更高的数字：
 
 ```bash
@@ -186,7 +186,7 @@ for development, deployment, and scaling
 $ docker container run hello-world
 ```
 
-<!-- There will be a lot of output, but let''s split it into multiple sections, which we can decipher together. The lines are numbered by me so that it is easier to follow the explanation. Your output will not have the numbers.-->
+<!-- There will be a lot of output, but let's split it into multiple sections, which we can decipher together. The lines are numbered by me so that it is easier to follow the explanation. Your output will not have the numbers.-->
 1. 这里会有很多输出，但是让我们把它分成多个部分，我们可以一起解读。为了便于跟踪解释，我给每行加上了编号。你的输出不会有编号。
 
 ```bash
@@ -203,7 +203,7 @@ $ docker container run hello-world
 <!-- The first part of the message states that we did not have the image "hello-world:latest" yet. This reveals a bit of detail about images themselves; image names consist of multiple parts, kind of like an URL. An image name is in the following format:-->
 {image-name}:{tag}.
 
-第一部分消息表明我们还没有图像“hello-world：latest”。这揭示了一些有关图像本身的细节；图像名称由多个部分组成，有点像URL。图像名称的格式如下：{image-name}：{tag}。
+第一章节消息表明我们还没有图像“hello-world：latest”。这揭示了一些有关图像本身的细节；图像名称由多个部分组成，有点像URL。图像名称的格式如下：{image-name}：{tag}。
 
 <!-- - _registry/organisation/image:tag_-->
 _注册表/组织/图像：标签_
@@ -321,7 +321,7 @@ Options:
 <!-- You can try other commands that the ubuntu image might be able to execute. As an example try _docker container run --rm ubuntu ls_. The _ls_ command will list all of the files in the directory and _--rm_ flag will remove the container after execution. Normally containers are not deleted automatically.-->
 你可以尝试ubuntu镜像可以执行的其他命令。例如试试 _docker container run --rm ubuntu ls_。_ls_ 命令将列出目录中的所有文件，而 _--rm_ 标志将在执行后删除容器。通常情况下容器不会自动删除。
 
-<!-- Let''s continue with our first Ubuntu container with the **index.js** file inside of it. The container has stopped running since we exited it. We can list all of the containers with _container ls -a_, the _-a_ (or --all) will list containers that have already been exited.-->
+<!-- Let's continue with our first Ubuntu container with the **index.js** file inside of it. The container has stopped running since we exited it. We can list all of the containers with _container ls -a_, the _-a_ (or --all) will list containers that have already been exited.-->
 让我们继续我们的第一个Ubuntu容器，里面有**index.js**文件。容器在我们退出后就停止运行了。我们可以用_container ls -a_列出所有容器，_-a_（或--all）会列出已经退出的容器。
 
 ```bash
@@ -330,7 +330,7 @@ CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS                      
 b8548b9faec3   ubuntu    "bash"    3 minutes ago    Exited (0) 6 seconds ago          hopeful_clarke
 ```
 
-<!-- > <i>Editor''s note: that the command _docker container ls_ has also a shorter form _docker ps_</i>, I prefer the shorter one.-->
+<!-- > <i>Editor's note: that the command _docker container ls_ has also a shorter form _docker ps_</i>, I prefer the shorter one.-->
 > <i>编辑者提示：命令_docker container ls_也有一个简短的形式_docker ps_，我更喜欢简短的形式。</i>
 
 <!-- We have two options when addressing a container. The identifier in the first column can be used to interact with the container almost always. Plus, most commands accept the container name as a more human-friendly method of working with them. The name of the container was automatically generated to be **"hopeful_clarke"** in my case.-->
@@ -365,7 +365,7 @@ CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS             NAMES
 8f5abc55242a   ubuntu    "bash"    8 minutes ago    Up 1 minutes       hopeful_clarke
 ```
 
-<!-- Let''s kill it with the _kill <i>CONTAINER-ID-OR-CONTAINER-NAME</i>_ command and try again.-->
+<!-- Let's kill it with the _kill <i>CONTAINER-ID-OR-CONTAINER-NAME</i>_ command and try again.-->
 让我们用`kill CONTAINER-ID-OR-CONTAINER-NAME`命令来终止它，然后再试一次。
 
 ```bash
@@ -373,7 +373,7 @@ $ docker kill hopeful_clarke
 hopeful_clarke
 ```
 
-<!-- _docker kill_ sends a [signal SIGKILL](https://man7.org/linux/man-pages/man7/signal.7.html) to the process forcing it to exit, and that causes the container to stop. We can check it''s status with _container ls -a_:-->
+<!-- _docker kill_ sends a [signal SIGKILL](https://man7.org/linux/man-pages/man7/signal.7.html) to the process forcing it to exit, and that causes the container to stop. We can check it's status with _container ls -a_:-->
 _docker kill_ 向进程发送[信号 SIGKILL](https://man7.org/linux/man-pages/man7/signal.7.html)，强制它退出，从而导致容器停止。我们可以使用 _container ls -a_ 检查它的状态：
 
 ```bash
@@ -390,7 +390,7 @@ $ docker start -i hopeful_clarke
 root@b8548b9faec3:/#
 ```
 
-<!-- Let''s edit the file <i>index.js</i> and add in some JavaScript code to execute. We are just missing the tools to edit the file. [Nano](https://www.nano-editor.org/) will be a good text editor for now. The install instructions were found from the first result of Google. We will omit using sudo since we are already root.-->
+<!-- Let's edit the file <i>index.js</i> and add in some JavaScript code to execute. We are just missing the tools to edit the file. [Nano](https://www.nano-editor.org/) will be a good text editor for now. The install instructions were found from the first result of Google. We will omit using sudo since we are already root.-->
 让我们编辑文件<i>index.js</i>并添加一些JavaScript代码以执行。我们只是缺少编辑文件的工具。[Nano](https://www.nano-editor.org/)将是一个很好的文本编辑器。安装说明是从Google的第一个结果中找到的。由于我们已经是root，我们将省略使用sudo。
 
 ```bash
@@ -465,7 +465,7 @@ Hello World
 
 ### Other Docker commands
 
-<!-- Now that we have Node installed in the container, we can execute JavaScript in the container! Let''s create a new image from the container. The command-->
+<!-- Now that we have Node installed in the container, we can execute JavaScript in the container! Let's create a new image from the container. The command-->
 to create a new image is `docker commit`.
 
 现在我们已经在容器中安装了Node，我们可以在容器中执行JavaScript！让我们从容器中创建一个新的镜像。创建新镜像的命令是`docker commit`。
@@ -500,7 +500,7 @@ docker run -it hello-node-world bash
 root@4d1b322e1aff:/# node /usr/src/app/index.js
 ```
 
-<!-- There are multiple ways to achieve the same conclusion. Let''s go through a better solution. We will clean the slate with _container rm_ to remove the old container.-->
+<!-- There are multiple ways to achieve the same conclusion. Let's go through a better solution. We will clean the slate with _container rm_ to remove the old container.-->
 有多种方式可以达到同样的结论。让我们来看看一个更好的解决方案。我们将用_container rm_清除旧容器来清空板子。
 
 ```bash

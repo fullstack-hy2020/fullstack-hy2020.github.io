@@ -13,7 +13,7 @@ lang: zh
 
 ### Dockerfile
 
-<!-- Instead of modifying a container by copying files inside, we can create a new image that contains the "Hello, World!" application. The tool for this is the Dockerfile. Dockerfile is a simple text file that contains all of the instructions for creating an image. Let''s create an example Dockerfile from the "Hello, World!" application.-->
+<!-- Instead of modifying a container by copying files inside, we can create a new image that contains the "Hello, World!" application. The tool for this is the Dockerfile. Dockerfile is a simple text file that contains all of the instructions for creating an image. Let's create an example Dockerfile from the "Hello, World!" application.-->
 替代通过复制文件到容器内修改容器，我们可以创建一个包含"Hello, World!"应用的新镜像。这个工具就是Dockerfile。Dockerfile是一个简单的文本文件，包含了创建镜像所需的所有指令。让我们从"Hello, World!"应用来创建一个示例Dockerfile。
 
 <!-- If you did not already, create a directory on your machine and create a file called <i>Dockerfile</i> inside that directory. Let's also put an <i>index.js</i> containing _console.log('Hello, World!'')_ next to the Dockerfile. Your directory structure should look like this:-->
@@ -59,7 +59,7 @@ WORKDIR 指令被插入以确保我们不会干扰镜像的内容。它将保证
 <!-- If we do not specify a WORKDIR, we risk overwriting important files by accident. If you check the root (_/_) of the node:16 image with _docker run node:16 ls_, you can notice all of the directories and files that are already included in the image.-->
 如果我们没有指定一个WORKDIR，我们就有可能会意外地覆盖重要文件。如果你用`docker run node:16 ls`检查node:16镜像的根(_/_)，你就会注意到所有包含在镜像中的目录和文件。
 
-<!-- Now we can use the command _docker build_ to build an image based on the Dockerfile. Let''s spice up the command with one additional flag: _-t_, this will help us name the image:-->
+<!-- Now we can use the command _docker build_ to build an image based on the Dockerfile. Let's spice up the command with one additional flag: _-t_, this will help us name the image:-->
 现在我们可以使用命令_docker build_根据Dockerfile构建一个镜像。让我们使用一个额外的标志来丰富这个命令：_-t_，这将帮助我们给镜像命名。
 
 ```bash
@@ -79,7 +79,7 @@ Hello, World
 <!-- As images are just files, they can be moved around, downloaded and deleted. You can list the images you have locally with _docker image ls_, delete them with _docker image rm_. See what other command you have available with _docker image --help_.-->
 当图像只是文件时，它们可以移动，下载和删除。您可以使用_docker image ls_列出本地拥有的图像，使用_docker image rm_删除它们。使用_docker image --help_查看您可用的其他命令。
 
-<!-- One more thing: in above it was mentioned that the default command, defined by the CMD in the Dockerfile, can be overridden if needed. We could e.g. open a bash session to the container and observe it''s content:-->
+<!-- One more thing: in above it was mentioned that the default command, defined by the CMD in the Dockerfile, can be overridden if needed. We could e.g. open a bash session to the container and observe it's content:-->
 最后一件事：在上面提到，Dockerfile中定义的CMD默认命令可以在需要时被覆盖。例如，我们可以打开一个bash会话来观察容器的内容：
 
 ```bash
@@ -91,7 +91,7 @@ root@2932e32dbc09:/usr/src/app#
 
 ### More meaningful image
 
-<!-- Moving an Express server to a container should be as simple as moving the "Hello, World!" application inside a container. The only difference is that there are more files. Thankfully _COPY_ instruction can handle all that. Let''s delete the index.js and create a new Express server. Lets use [express-generator](https://expressjs.com/en/starter/generator.html) to create a basic Express application skeleton.-->
+<!-- Moving an Express server to a container should be as simple as moving the "Hello, World!" application inside a container. The only difference is that there are more files. Thankfully _COPY_ instruction can handle all that. Let's delete the index.js and create a new Express server. Lets use [express-generator](https://expressjs.com/en/starter/generator.html) to create a basic Express application skeleton.-->
 移动一个Express服务到容器里应该和移动"Hello, World!"应用程序到容器里一样简单。唯一的不同之处在于文件数量更多。幸运的是，_COPY_指令可以处理所有这些。让我们删除index.js并创建一个新的Express服务器。让我们使用[express-generator](https://expressjs.com/en/starter/generator.html)来创建一个基本的Express应用程序骨架。
 
 ```bash
@@ -105,7 +105,7 @@ $ npx express-generator
     $ DEBUG=playground:* npm start
 ```
 
-<!-- First, let''s run the application to get an idea of what we just created. Note that the command to run the application may be different from you, my directory was called playground.-->
+<!-- First, let's run the application to get an idea of what we just created. Note that the command to run the application may be different from you, my directory was called playground.-->
 首先，让我们运行应用程序，以便了解我们刚刚创建的内容。注意，运行应用程序的命令可能与您不同，我的目录被称为playground。
 
 ```bash
@@ -133,7 +133,7 @@ DEBUG=playground:* npm start
 调试=操场：* npm开始
 
 
-<!-- Let''s place the following Dockerfile at the root of the project:-->
+<!-- Let's place the following Dockerfile at the root of the project:-->
 让我们把下面的Dockerfile放在项目的根目录：
 
 ```Dockerfile
@@ -146,7 +146,7 @@ COPY . .
 CMD DEBUG=playground:* npm start
 ```
 
-<!-- Let''s build the image from the Dockerfile with a command, _docker build -t express-server ._ and run it with _docker run -p 3123:3000 express-server_. The _-p_ flag will inform Docker that a port from the host machine should be opened and directed to a port in the container. The format for is _-p host-port:application-port_.-->
+<!-- Let's build the image from the Dockerfile with a command, _docker build -t express-server ._ and run it with _docker run -p 3123:3000 express-server_. The _-p_ flag will inform Docker that a port from the host machine should be opened and directed to a port in the container. The format for is _-p host-port:application-port_.-->
 让我们用一个命令从Dockerfile构建镜像，`docker build -t express-server .`，并用`docker run -p 3123:3000 express-server`来运行它。`-p`标志将告诉Docker，主机机器上的一个端口应该被打开并重定向到容器中的一个端口。格式为`-p host-port:application-port`。
 
 ```bash
@@ -161,7 +161,7 @@ Tue, 29 Jun 2021 10:55:10 GMT playground:server Listening on port 3000
 <!-- > If yours doesn''t work, skip to the next section. There is an explanation why it may not work even if you followed the steps correctly.-->
 如果你的不起作用，跳到下一节。即使你按照步骤正确操作，也有可能不起作用的解释。
 
-<!-- The application is now running! Let''s test it by sending a GET request to [http://localhost:3123/](http://localhost:3123/).-->
+<!-- The application is now running! Let's test it by sending a GET request to [http://localhost:3123/](http://localhost:3123/).-->
 应用程序现在正在运行！让我们通过发送GET请求到[http://localhost:3123/](http://localhost:3123/)来测试它。
 
 <!-- Shutting it down is a headache at the moment. Use another terminal and _docker kill_ command to kill the application. The _docker kill_ will send a kill signal (SIGKILL) to the application to force it to shut down. It needs the name or id of the container as an argument.-->
@@ -190,7 +190,7 @@ $ docker kill 48
 <!-- When we ran npm install on our machine, in some cases the **Node package manager** may install operating system specific dependencies during the install step. We may accidentally move non-functional parts to the image with the COPY instruction. This can easily happen if we copy the <i>node_modules</i> directory into the image.-->
 当我们在机器上运行npm install时，在某些情况下，**节点软件包管理器**可能会在安装步骤中安装操作系统特定的依赖项。我们可能会意外地将非功能部件移动到COPY指令的图像中。如果我们将<i>node_modules</i>目录复制到图像中，这很容易发生。
 
-<!-- This is a critical thing to keep in mind when we build our images. It''s best to do most things, such as to run _npm install_ during the build process <i>inside the container</i> rather than doing those prior to building. The easy rule of thumb is to only copy files that you would push to GitHub. Build artefacts or dependencies should not be copied since those can be installed during the build process.-->
+<!-- This is a critical thing to keep in mind when we build our images. It's best to do most things, such as to run _npm install_ during the build process <i>inside the container</i> rather than doing those prior to building. The easy rule of thumb is to only copy files that you would push to GitHub. Build artefacts or dependencies should not be copied since those can be installed during the build process.-->
 这是在构建我们的镜像时要牢记的一件关键的事情。最好在容器内部执行大多数操作，例如运行_npm install_，而不是在构建之前进行这些操作。简单的经验法则是只复制你会推送到GitHub的文件。构建成果或依赖项不应该被复制，因为这些可以在构建过程中安装。
 
 <!-- We can use <i>.dockerignore</i> to solve the problem. The file .dockerignore is very similar to .gitignore, you can use that to prevent unwanted files from being copied to your image. The file should be placed next to the Dockerfile. Here is a possible content of a <i>.dockerignore</i>-->
@@ -268,7 +268,7 @@ CMD DEBUG=playground:* npm start
 <!-- > Note that we are here chaining two bash commands with &&. We could get (nearly) the same effect by running both commands separately. When chaining commands with && if one command fails, the next ones in the chain will not be executed.-->
 > 注意我们此处用&&来连接两个bash命令。我们可以单独运行这两个命令来达到（几乎）相同的效果。当用&&连接命令时，如果一个命令失败，那么链中的其他命令将不会被执行。
 
-<!-- We set an environment variable _DEBUG=playground:*_ during CMD for the npm start. However, with Dockerfiles we could also use the instruction ENV to set environment variables. Let''s do that:-->
+<!-- We set an environment variable _DEBUG=playground:*_ during CMD for the npm start. However, with Dockerfiles we could also use the instruction ENV to set environment variables. Let's do that:-->
 我们在CMD中设置了一个环境变量_DEBUG=playground:*_用于npm start。但是，我们也可以使用指令ENV来设置环境变量。让我们来做吧：
 
 ```Dockerfile
@@ -305,7 +305,7 @@ CMD npm start # highlight-line
 <!-- Snyk has a great list of 10 best practices for Node/Express containerization. Read those [here](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker/).-->
 Snyk有一个很棒的Node/Express容器化十大最佳实践清单。[点击这里](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker/)阅读。
 
-<!-- One big carelessness we have left is running the application as root instead of using a user with lower privileges. Let''s do a final fix to the Dockerfile:-->
+<!-- One big carelessness we have left is running the application as root instead of using a user with lower privileges. Let's do a final fix to the Dockerfile:-->
 一个我们遗留下来的大疏忽是以root用户而不是使用拥有较低权限的用户来运行应用程序。让我们对Dockerfile做一个最终修复：
 
 ```Dockerfile
@@ -353,7 +353,7 @@ CMD npm start
 <!-- In the previous section, we created an Express server and knew that it runs in port 3000, and ran it with _docker build -t express-server . && docker run -p 3000:3000 express-server_. This already looks like something you would need to put into a script to remember. Fortunately, Docker offers us a better solution.-->
 在前一节中，我们创建了一个Express服务器，知道它运行在端口3000，并用`docker build -t express-server . && docker run -p 3000:3000 express-server`运行它。这看起来像你需要把它放进一个脚本来记住。幸运的是，Docker为我们提供了一个更好的解决方案。
 
-<!-- [Docker compose](https://docs.docker.com/compose/) is another fantastic tool, which can help us to manage containers. Let''s start using compose as we learn more about containers as it will help us save some time with the configuration.-->
+<!-- [Docker compose](https://docs.docker.com/compose/) is another fantastic tool, which can help us to manage containers. Let's start using compose as we learn more about containers as it will help us save some time with the configuration.-->
 [Docker Compose](https://docs.docker.com/compose/)是另一个奇妙的工具，它可以帮助我们管理容器。随着我们对容器的了解越来越深入，让我们开始使用Compose来帮助我们节省配置的时间。
 
 <!-- Now we can turn the previous spell into a yaml file. The best part about yaml files is that you can save these to a Git repository!-->
@@ -443,7 +443,7 @@ services:
 <!-- The meaning of the two first environment variables defined above is explained on the Docker Hub page:-->
 两个上面定义的环境变量的含义在Docker Hub页面上有解释：
 
-<!-- > <i>These variables, used in conjunction, create a new user and set that user''s password. This user is created in the admin authentication database and given the role of root, which is a "superuser" role.</i>-->
+<!-- > <i>These variables, used in conjunction, create a new user and set that user's password. This user is created in the admin authentication database and given the role of root, which is a "superuser" role.</i>-->
 > <i>这些变量结合在一起，创建一个新用户并设置该用户的密码。 这个用户在管理员验证数据库中创建，并赋予根角色，这是一个“超级用户”角色。</i>
 
 <!-- The last environment variable *MONGO\_INITDB\_DATABASE* will tell MongoDB to create a database with that name.-->
@@ -456,7 +456,7 @@ services:
 docker compose -f docker-compose.dev.yml up
 ```
 
-<!-- Now that we may have multiple it''s useful.-->
+<!-- Now that we may have multiple it's useful.-->
 现在我们可能有多个它，这很有用。
 
 <!-- Now start the MongoDB with _docker compose -f docker-compose.dev.yml up -d_. With _-d_ it will run it in the background. You can view the output logs with _docker compose -f docker-compose.dev.yml logs -f_. There the _-f_ will ensure we <i>follow</i> the logs.-->
@@ -517,10 +517,10 @@ db.todos.insert({ text: 'Learn about containers', done: false });
 <!-- This file will initialize the database with a user and a few todos. Next, we need to get it inside the container at startup.-->
 这个文件将使用用户和几个todos初始化数据库。接下来，我们需要在启动时将其放入容器中。
 
-<!-- We could create a new image FROM mongo and COPY the file inside, or we can use a [bind mount](https://docs.docker.com/storage/bind-mounts/) to mount the file <i>mongo-init.js</i> to the container. Let''s do the latter.-->
+<!-- We could create a new image FROM mongo and COPY the file inside, or we can use a [bind mount](https://docs.docker.com/storage/bind-mounts/) to mount the file <i>mongo-init.js</i> to the container. Let's do the latter.-->
 我们可以从Mongo建立一个新的映像档并复制文件内部，或者我们可以使用[挂载](https://docs.docker.com/storage/bind-mounts/)将文件<i>mongo-init.js</i>挂载到容器中。让我们做后者吧。
 
-<!-- Bind mount is the act of binding a file (or directory) on the host machine to a file (or directory) in the container. A bind mount is done by adding a _-v_ flag with _container run_. The syntax is _-v FILE-IN-HOST:FILE-IN-CONTAINER_. Since we already learned about Docker Compose let''s skip that. The bind mount is declared under key <i>volumes</i> in docker-compose-yml. Otherwise the format is the same, first host and then container:-->
+<!-- Bind mount is the act of binding a file (or directory) on the host machine to a file (or directory) in the container. A bind mount is done by adding a _-v_ flag with _container run_. The syntax is _-v FILE-IN-HOST:FILE-IN-CONTAINER_. Since we already learned about Docker Compose let's skip that. The bind mount is declared under key <i>volumes</i> in docker-compose-yml. Otherwise the format is the same, first host and then container:-->
 绑定挂载是把主机上的文件（或目录）绑定到容器中的文件（或目录）的行为。使用 _-v_ 标记和 _container run_ 命令可以实现绑定挂载。语法为 _-v FILE-IN-HOST:FILE-IN-CONTAINER_。由于我们已经学习了 Docker Compose，我们就跳过这一步吧。绑定挂载在 docker-compose-yml 文件中的 <i>volumes</i> 键下声明。格式也是一样的，先是主机，然后是容器：
 
 ```yml
@@ -562,7 +562,7 @@ mongo_database | exiting with code -3
 $ MONGO_URL=mongodb://the_username:the_password@localhost:3456/the_database npm run dev
 ```
 
-<!-- Let''s check that the http://localhost:3000/todos returns all todos. It should return the two todos we initialized. We can and should use Postman to test the basic functionality of the app, such as adding or deleting a todo.-->
+<!-- Let's check that the http://localhost:3000/todos returns all todos. It should return the two todos we initialized. We can and should use Postman to test the basic functionality of the app, such as adding or deleting a todo.-->
 让我们检查http://localhost:3000/todos是否返回所有待办事项。它应该返回我们初始化的两个待办事项。我们可以也应该使用Postman来测试应用程序的基本功能，例如添加或删除待办事项。
 
 ### Persisting data with volumes
@@ -580,7 +580,7 @@ $ MONGO_URL=mongodb://the_username:the_password@localhost:3456/the_database npm 
 <!-- - Letting Docker decide where to store the data ([volume](https://docs.docker.com/storage/volumes/))-->
 - 让Docker决定存储数据的位置（[卷](https://docs.docker.com/storage/volumes/)）
 
-<!-- I prefer the first choice in most cases whenever you <i>really</i> need to avoid deleting the data. Let''s see both in action with docker compose:-->
+<!-- I prefer the first choice in most cases whenever you <i>really</i> need to avoid deleting the data. Let's see both in action with docker compose:-->
 我在大多数情况下都会偏好第一个选择，只要你<i>真正</i>需要避免删除数择。让我们用docker compose来看看两者的实际操作：
 
 ```yml
@@ -689,7 +689,7 @@ $ docker volume inspect todo-backend_mongo_data
 
 #### exec
 
-<!-- The Docker command [exec](https://docs.docker.com/engine/reference/commandline/exec/) is a heavy hitter. It can be used to jump right into a container when it''s running.-->
+<!-- The Docker command [exec](https://docs.docker.com/engine/reference/commandline/exec/) is a heavy hitter. It can be used to jump right into a container when it's running.-->
 Docker 命令 [exec](https://docs.docker.com/engine/reference/commandline/exec/) 是一个重要的命令。它可以用来在容器运行时立即跳入容器。
 
 <!-- Let's start a web server in the background and do a little bit of debugging to get it running and displaying the message "Hello, exec!" in our browser. Let's choose [Nginx](https://www.nginx.com/) which is, among other things, a server capable of serving static HTML files. It has a default index.html that we can replace.-->
@@ -719,7 +719,7 @@ CONTAINER ID   IMAGE           COMMAND                  CREATED              STA
 <!-- Yes! We got the first question answered as well. It seems to listen on port 80, as seen on the output above.-->
 是的！我们也回答了第一个问题。看起来它在端口80上监听，如上面的输出所示。
 
-<!-- Let''s shut it down and restart with the _-p_ flag to have our browser access it.-->
+<!-- Let's shut it down and restart with the _-p_ flag to have our browser access it.-->
 让我们关闭它，并用_-p_标志重新启动，以便我们的浏览器访问它。
 
 ```bash
@@ -753,7 +753,7 @@ root@7edcb36aff08:/#
 <!-- Now that we are in, we need to find the faulty file and replace it. Quick Google tells us that file itself is _/usr/share/nginx/html/index.html_.-->
 现在我们已经进入，我们需要找到有问题的文件并替换它。快速的谷歌告诉我们该文件本身是_/usr/share/nginx/html/index.html_。
 
-<!-- Let''s move to the directory and delete the file-->
+<!-- Let's move to the directory and delete the file-->
 让我们移动到该目录并删除该文件.
 
 ```bash
@@ -761,7 +761,7 @@ root@7edcb36aff08:/# cd /usr/share/nginx/html/
 root@7edcb36aff08:/# rm index.html
 ```
 
-<!-- Now, if we go to http://localhost:8080/ we know that we deleted the correct file. The page shows 404. Let''s replace it with one containing the correct contents:-->
+<!-- Now, if we go to http://localhost:8080/ we know that we deleted the correct file. The page shows 404. Let's replace it with one containing the correct contents:-->
 现在，如果我们访问http：//localhost：8080/，我们知道我们删除了正确的文件。页面显示404。让我们用一个包含正确内容的文件来替换它：
 
 ```bash
@@ -861,7 +861,7 @@ todos
 <!-- By default Redis works <i>in-memory</i>, which means that it does not store data persistently.-->
 默认情况下，Redis <i>在内存中</i>工作，这意味着它不会持久存储数据。
 
-<!-- An excellent use case for Redis is to use it as a <i>cache</i>. Caches are often used to store data that is otherwise slow to fetch and save the data until it''s no longer valid. After the cache becomes invalid, you would then fetch the data again and store it in the cache.-->
+<!-- An excellent use case for Redis is to use it as a <i>cache</i>. Caches are often used to store data that is otherwise slow to fetch and save the data until it's no longer valid. After the cache becomes invalid, you would then fetch the data again and store it in the cache.-->
 Redis 很适合用作<i>缓存</i>。缓存常用来存储获取较慢的数据，直到数据失效。当缓存失效后，你可以重新获取数据，并存储到缓存中。
 
 <!-- Redis has nothing to do with containers. But since we are already able to add <i>any</i> 3rd party service to your applications, why not learn about a new one.-->

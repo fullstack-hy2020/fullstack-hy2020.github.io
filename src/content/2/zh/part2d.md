@@ -16,8 +16,8 @@ lang: zh
 <!-- The json-server does not exactly match the description provided by the textbook [definition](https://en.wikipedia.org/wiki/Representational_state_transfer) of a REST API, but neither do most other APIs claiming to be RESTful.-->
 JSON-Server与教科书提供的[定义](https://en.wikipedia.org/wiki/Representational_state_transfer)的REST API并不完全匹配，但大多数声称是RESTful的其他API也是如此。
 
-<!-- We will take a closer look at REST in the [next part](/en/part3) of the course. But it''s important to familiarize ourselves at this point with some of the [conventions](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) used by json-server and REST APIs in general. In particular, we will be taking a look at the conventional use of [routes](https://github.com/typicode/json-server#routes), aka URLs and HTTP request types, in REST.-->
-我们将在课程的[下一部分](/en/part3)中更深入地研究REST。但是在这一点上，重要的是让我们熟悉json-server和REST API中使用的一些[约定](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services)。特别是，我们将研究REST中传统使用的[路由](https://github.com/typicode/json-server#routes)，也就是URL和HTTP请求类型。
+<!-- We will take a closer look at REST in the [next part](/en/part3) of the course. But it's important to familiarize ourselves at this point with some of the [conventions](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) used by json-server and REST APIs in general. In particular, we will be taking a look at the conventional use of [routes](https://github.com/typicode/json-server#routes), aka URLs and HTTP request types, in REST.-->
+我们将在课程的[下一章节](/en/part3)中更深入地研究REST。但是在这一点上，重要的是让我们熟悉json-server和REST API中使用的一些[约定](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services)。特别是，我们将研究REST中传统使用的[路由](https://github.com/typicode/json-server#routes)，也就是URL和HTTP请求类型。
 
 ### REST
 
@@ -35,7 +35,7 @@ json-server要求所有数据以JSON格式发送。这在实践中意味着数�
 
 ### Sending Data to the Server
 
-<!-- Let''s make the following changes to the event handler responsible for creating a new note:-->
+<!-- Let's make the following changes to the event handler responsible for creating a new note:-->
 让我们对负责创建新笔记的事件处理程序做出以下更改：
 
 ```js
@@ -56,7 +56,7 @@ addNote = event => {
 }
 ```
 
-<!-- We create a new object for the note but omit the <i>id</i> property since it''s better to let the server generate ids for our resources!-->
+<!-- We create a new object for the note but omit the <i>id</i> property since it's better to let the server generate ids for our resources!-->
 我们为笔记创建了一个新的对象，但是省略了<i>id</i>属性，因为让服务器为我们的资源生成id更好！
 
 <!-- The object is sent to the server using the axios <em>post</em> method. The registered event handler logs the response that is sent back from the server to the console.-->
@@ -91,7 +91,7 @@ addNote = event => {
 
 ![devtools response tab shows same content as payload but with id field too](../../images/2/21new3.png)
 
-<!-- The new note is not rendered to the screen yet. This is because we did not update the state of the <i>App</i> component when we created the new note. Let''s fix this:-->
+<!-- The new note is not rendered to the screen yet. This is because we did not update the state of the <i>App</i> component when we created the new note. Let's fix this:-->
 新笔记还没有呈现到屏幕上。这是因为我们在创建新笔记时没有更新<i>App</i>组件的状态。让我们来修复这个问题：
 
 ```js
@@ -119,7 +119,7 @@ addNote = event => {
 <!-- Once the data returned by the server starts to have an effect on the behavior of our web applications, we are immediately faced with a whole new set of challenges arising from, for instance, the asynchronicity of communication. This necessitates new debugging strategies, console logging and other means of debugging become increasingly more important. We must also develop a sufficient understanding of the principles of both the JavaScript runtime and React components. Guessing won''t be enough.-->
 一旦服务器返回的数据开始影响我们网络应用程序的行为，我们就立刻面临着一系列新的挑战，比如通信的异步性。这就需要新的调试策略，控制台日志和其他调试手段变得越来越重要。我们还必须充分理解JavaScript运行时和React组件的原理。猜测是不够的。
 
-<!-- It''s beneficial to inspect the state of the backend server, e.g. through the browser:-->
+<!-- It's beneficial to inspect the state of the backend server, e.g. through the browser:-->
 审查后端服务器的状态有益，例如通过浏览器：
 
 ![JSON data output from backend](../../images/2/22e.png)
@@ -128,14 +128,14 @@ addNote = event => {
 这使得我们可以验证我们本来要发送的所有数据是否实际被服务器接收到。
 
 <!-- In the next part of the course, we will learn to implement our own logic in the backend. We will then take a closer look at tools like [Postman](https://www.postman.com/downloads/) that helps us to debug our server applications. However, inspecting the state of the json-server through the browser is sufficient for our current needs.-->
-在课程的下一部分，我们将学习如何在后端实现自己的逻辑。然后，我们将更加仔细地研究像[Postman](https://www.postman.com/downloads/)这样的工具，它可以帮助我们调试服务器应用程序。但是，通过浏览器检查json-server的状态对于我们目前的需求已经足够了。
+在课程的下一章节，我们将学习如何在后端实现自己的逻辑。然后，我们将更加仔细地研究像[Postman](https://www.postman.com/downloads/)这样的工具，它可以帮助我们调试服务器应用程序。但是，通过浏览器检查json-server的状态对于我们目前的需求已经足够了。
 
 <!-- The code for the current state of our application can be found in the  <i>part2-5</i> branch on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-5).-->
 代码可以在[GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-5)上的<i>part2-5</i>分支找到，它代表我们应用程序当前的状态。
 
 ### Changing the Importance of Notes
 
-<!-- Let''s add a button to every note that can be used for toggling its importance.-->
+<!-- Let's add a button to every note that can be used for toggling its importance.-->
 让我们为每一个笔记添加一个按钮，用于切换其重要性。
 
 <!-- We make the following changes to the <i>Note</i> component:-->
@@ -155,7 +155,7 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-<!-- We add a button to the component and assign its event handler as the <em>toggleImportance</em> function passed in the component''s props.-->
+<!-- We add a button to the component and assign its event handler as the <em>toggleImportance</em> function passed in the component's props.-->
 我们在组件中添加了一个按钮，并将其事件处理程序分配为组件props中传入的<em>toggleImportance</em>函数。
 
 <!-- The <i>App</i> component defines an initial version of the <em>toggleImportanceOf</em> event handler function and passes it to every <i>Note</i> component:-->
@@ -275,16 +275,16 @@ axios.put(url, note).then(response => {
   // ...
 ```
 
-<!-- This is not recommended because the variable <em>note</em> is a reference to an item in the <em>notes</em> array in the component''s state, and as we recall we must [never mutate state directly](https://react.dev/learn/updating-objects-in-state#why-is-mutating-state-not-recommended-in-react) in React.-->
+<!-- This is not recommended because the variable <em>note</em> is a reference to an item in the <em>notes</em> array in the component's state, and as we recall we must [never mutate state directly](https://react.dev/learn/updating-objects-in-state#why-is-mutating-state-not-recommended-in-react) in React.-->
 这不推荐，因为变量<em>note</em>是指组件状态中的<em>notes</em>数组中的一个项目，正如我们所知，我们必须[永远不要直接改变状态](https://react.dev/learn/updating-objects-in-state#why-is-mutating-state-not-recommended-in-react)在React中。
 
-<!-- It''s also worth noting that the new object _changedNote_ is only a so-called [shallow copy](https://en.wikipedia.org/wiki/Object_copying#Shallow_copy), meaning that the values of the new object are the same as the values of the old object. If the values of the old object were objects themselves, then the copied values in the new object would reference the same objects that were in the old object.-->
+<!-- It's also worth noting that the new object _changedNote_ is only a so-called [shallow copy](https://en.wikipedia.org/wiki/Object_copying#Shallow_copy), meaning that the values of the new object are the same as the values of the old object. If the values of the old object were objects themselves, then the copied values in the new object would reference the same objects that were in the old object.-->
 值得注意的是，新对象_changedNote_只是所谓的[浅拷贝](https://en.wikipedia.org/wiki/Object_copying#Shallow_copy)，这意味着新对象的值与旧对象的值相同。如果旧对象的值本身是对象，那么新对象中复制的值将引用旧对象中的相同对象。
 
 <!-- The new note is then sent with a PUT request to the backend where it will replace the old object.-->
 新笔记随着一个PUT请求发送到后端，它将取代旧的对象。
 
-<!-- The callback function sets the component''s <em>notes</em> state to a new array that contains all the items from the previous <em>notes</em> array, except for the old note which is replaced by the updated version of it returned by the server:-->
+<!-- The callback function sets the component's <em>notes</em> state to a new array that contains all the items from the previous <em>notes</em> array, except for the old note which is replaced by the updated version of it returned by the server:-->
 回调函数将组件的<em>笔记</em>状态设置为一个新的数组，该数组包含了以前<em>笔记</em>数组中的所有项，除了旧笔记，它被服务器返回的更新版本所取代：
 
 ```js
@@ -303,15 +303,15 @@ notes.map(note => note.id !== id ? note : response.data)
 <!-- The map method creates a new array by mapping every item from the old array into an item in the new array. In our example, the new array is created conditionally so that if <em>note.id !== id</em> is true; we simply copy the item from the old array into the new array. If the condition is false, then the note object returned by the server is added to the array instead.-->
 map 方法通过将旧数组中的每一项映射到新数组中的一项来创建一个新的数组。在我们的例子中，新数组是有条件地创建的，因此，如果 <em>note.id !== id</em> 为真，则仅从旧数组中复制项到新数组中。如果条件为假，则服务器返回的笔记对象将添加到数组中。
 
-<!-- This <em>map</em> trick may seem a bit strange at first, but it''s worth spending some time wrapping your head around it. We will be using this method many times throughout the course.-->
-这个<em>地图</em>技巧可能一开始会有点奇怪，但值得花点时间去理解它。我们在整个课程中会多次使用这种方法。
+<!-- This <em>map</em> trick may seem a bit strange at first, but it's worth spending some time wrapping your head around it. We will be using this method many times throughout the course.-->
+这个<em>Map</em>技巧可能一开始会有点奇怪，但值得花点时间去理解它。我们在整个课程中会多次使用这种方法。
 
 ### Extracting Communication with the Backend into a Separate Module
 
 <!-- The <i>App</i> component has become somewhat bloated after adding the code for communicating with the backend server. In the spirit of the [single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle), we deem it wise to extract this communication into its own [module](/en/part2/rendering_a_collection_modules#refactoring-modules).-->
 <i>App</i> 组件在添加与后端服务器通信的代码后变得有些臃肿。为了符合[单一职责原则](https://en.wikipedia.org/wiki/Single_responsibility_principle)，我们认为最好将这种通信抽取到自己的[模块](/en/part2/rendering_a_collection_modules#refactoring-modules)中去。
 
-<!-- Let''s create a <i>src/services</i> directory and add a file there called <i>notes.js</i>:-->
+<!-- Let's create a <i>src/services</i> directory and add a file there called <i>notes.js</i>:-->
 让我们创建一个<i>src/services</i>目录，并在其中添加一个叫<i>notes.js</i>的文件：
 
 ```js
@@ -486,7 +486,7 @@ const getAll = () => {
 <!-- After defining the parameter of the <em>then</em> method to directly return <i>response.data</i>, we have gotten the <em>getAll</em> function to work like we wanted it to. When the HTTP request is successful, the promise returns the data sent back in the response from the backend.-->
 在定义了<em>then</em>方法的参数以直接返回<i>response.data</i>后，我们已经让<em>getAll</em>函数按照我们所想的那样工作了。当HTTP请求成功时，承诺会返回后端发回的响应中的数据。
 
-<!-- We have to update the <i>App</i> component to work with the changes made to our module.  We have to fix the callback functions given as parameters to the <em>noteService</em> object''s methods so that they use the directly returned response data:-->
+<!-- We have to update the <i>App</i> component to work with the changes made to our module.  We have to fix the callback functions given as parameters to the <em>noteService</em> object's methods so that they use the directly returned response data:-->
 我们必须更新<i>App</i>组件以适应我们模块的变更。我们必须修复给<em>noteService</em>对象方法的回调函数，使它们使用直接返回的响应数据：
 
 ```js
@@ -633,7 +633,7 @@ export default { getAll, create, update } // highlight-line
 <!-- In defining the object using this shorter notation, we make use of a [new feature](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#Property_definitions) that was introduced to JavaScript through ES6, enabling a slightly more compact way of defining objects using variables.-->
 在使用这种较短的表示法定义对象时，我们利用了[ES6引入的新特性](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#Property_definitions)，使得可以使用变量以更紧凑的方式定义对象。
 
-<!-- To demonstrate this feature, let''s consider a situation where we have the following values assigned to variables:-->
+<!-- To demonstrate this feature, let's consider a situation where we have the following values assigned to variables:-->
 展示这个特性，让我们考虑一个情况，我们把下面的值赋值给变量：
 
 ```js
@@ -651,7 +651,7 @@ const person = {
 }
 ```
 
-<!-- However, since both the property fields and the variable names in the object are the same, it''s enough to simply write the following in ES6 JavaScript:-->
+<!-- However, since both the property fields and the variable names in the object are the same, it's enough to simply write the following in ES6 JavaScript:-->
 但是，由于对象中的属性字段和变量名相同，因此在ES6 JavaScript中只需简单地编写以下内容即可：
 
 ```js
@@ -666,7 +666,7 @@ const person = { name, age }
 <!-- If our application allowed users to delete notes, we could end up in a situation where a user tries to change the importance of a note that has already been deleted from the system.-->
 如果我们的应用允许用户删除笔记，我们可能会陷入一种情况，即用户试图更改已从系统中删除的笔记的重要性。
 
-<!-- Let''s simulate this situation by making the <em>getAll</em> function of the note service return a "hardcoded" note that does not actually exist on the backend server:-->
+<!-- Let's simulate this situation by making the <em>getAll</em> function of the note service return a "hardcoded" note that does not actually exist on the backend server:-->
 让我们通过使note服务的<em>getAll</em>函数返回一个"硬编码"的note，来模拟这种情况，该note实际上不存在于后端服务器中：
 
 ```js
@@ -745,7 +745,7 @@ axios
   })
 ```
 
-<!-- Let''s use this feature and register an error handler in the <i>App</i> component:-->
+<!-- Let's use this feature and register an error handler in the <i>App</i> component:-->
 让我们使用这个功能，在<i>App</i>组件中注册一个错误处理程序：
 
 ```js
@@ -771,7 +771,7 @@ const toggleImportanceOf = id => {
 <!-- The error message is displayed to the user with the trusty old [alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) dialog popup, and the deleted note gets filtered out from the state.-->
 错误消息以及信任的[警报](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert)对话框弹出框显示给用户，而被删除的笔记则被过滤出状态。
 
-<!-- Removing an already deleted note from the application''s state is done with the array [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) method, which returns a new array comprising only the items from the list for which the function that was passed as a parameter returns true for:-->
+<!-- Removing an already deleted note from the application's state is done with the array [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) method, which returns a new array comprising only the items from the list for which the function that was passed as a parameter returns true for:-->
 使用[filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) 方法从应用程序的状态中移除已删除的笔记，该方法返回一个新数组，其中仅包含传递给参数的函数为真的列表项：
 
 ```js
@@ -784,7 +784,7 @@ notes.filter(n => n.id !== id)
 <!-- The code for the current state of our application can be found in the  <i>part2-6</i> branch on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-6).-->
 当前应用程序的代码可以在[GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-6)上的<i>part2-6</i>分支中找到。
 
-### Full stack developer''s oath
+### Full stack developer's oath
 
 <!-- It is again time for the exercises. The complexity of our app is now increasing since besides just taking care of the React components in the frontend, we also have a backend that is persisting the application data.-->
 这又是时候做练习了。我们的应用的复杂性现在正在增加，因为除了只关心前端的React组件，我们还有一个后端来持久化应用数据。
@@ -827,8 +827,8 @@ notes.filter(n => n.id !== id)
 
 <h4>2.12: The Phonebook step7</h4>
 
-<!-- Let''s return to our phonebook application.-->
-# 让我们回到我们的电话簿应用程序。
+<!-- Let's return to our phonebook application.-->
+让我们回到我们的电话簿应用程序。
 
 <!-- Currently, the numbers that are added to the phonebook are not saved to a backend server. Fix this situation.-->
 目前，添加到电话簿的号码没有保存到后端服务器。解决这种情况。
@@ -845,7 +845,7 @@ notes.filter(n => n.id !== id)
 
 ![2.17 window confirm feature screeshot](../../images/2/24e.png)
 
-<!-- The associated resource for a person in the backend can be deleted by making an HTTP DELETE request to the resource''s URL. If we are deleting e.g. a person who has the <i>id</i> 2, we would have to make an HTTP DELETE request to the URL <i>localhost:3001/persons/2</i>. No data is sent with the request.-->
+<!-- The associated resource for a person in the backend can be deleted by making an HTTP DELETE request to the resource's URL. If we are deleting e.g. a person who has the <i>id</i> 2, we would have to make an HTTP DELETE request to the URL <i>localhost:3001/persons/2</i>. No data is sent with the request.-->
 通过向资源的URL发送 HTTP DELETE 请求可以删除后端的关联资源。例如，如果我们要删除具有 <i>id</i> 2 的人，我们必须向URL <i>localhost:3001/persons/2</i> 发送 HTTP DELETE 请求。请求中不发送数据。
 
 <!-- You can make an HTTP DELETE request with the [axios](https://github.com/axios/axios) library in the same way that we make all of the other requests.-->
@@ -865,10 +865,10 @@ const delete = (id) => {
 
 <i>Why is there a star in the exercise? See [here](/en/part0/general_info#taking-the-course) for the explanation.</i>
 
-<!-- Change the functionality so that if a number is added to an already existing user, the new number will replace the old number. It''s recommended to use the HTTP PUT method for updating the phone number.-->
+<!-- Change the functionality so that if a number is added to an already existing user, the new number will replace the old number. It's recommended to use the HTTP PUT method for updating the phone number.-->
 更改功能，使得如果向已存在的用户添加数字，则新数字将替换旧数字。建议使用HTTP PUT方法来更新电话号码。
 
-<!-- If the person''s information is already in the phonebook, the application can ask the user to confirm the action:-->
+<!-- If the person's information is already in the phonebook, the application can ask the user to confirm the action:-->
 如果该人的信息已经在电话簿中，应用程序可以要求用户确认该操作：
 
 ![2.18 screenshot alert confirmation](../../images/teht/16e.png)

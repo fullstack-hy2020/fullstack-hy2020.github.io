@@ -10,7 +10,7 @@ lang: zh
 <!-- In this part, our focus shifts towards the backend: that is, towards implementing functionality on the server side of the stack.-->
 在这一部分，我们的重点转移到后端：也就是在堆栈的伺服器端实现功能。
 
-<!-- We will be building our backend on top of [NodeJS](https://nodejs.org/en/), which is a JavaScript runtime based on Google''s [Chrome V8](https://developers.google.com/v8/) JavaScript engine.-->
+<!-- We will be building our backend on top of [NodeJS](https://nodejs.org/en/), which is a JavaScript runtime based on Google's [Chrome V8](https://developers.google.com/v8/) JavaScript engine.-->
 我们将在[NodeJS](https://nodejs.org/en/)的基础上构建我们的后端，它是基于Google的[Chrome V8](https://developers.google.com/v8/)JavaScript引擎的JavaScript运行时环境。
 
 <!-- This course material was written with version <i>v18.13.0</i> of Node.js. Please make sure that your version of Node is at least as new as the version used in the material (you can check the version by running _node -v_ in the command line).-->
@@ -19,16 +19,16 @@ lang: zh
 <!-- As mentioned in [part 1](/en/part1/java_script), browsers don''t yet support the newest features of JavaScript, and that is why the code running in the browser must be <i>transpiled</i> with e.g. [babel](https://babeljs.io/). The situation with JavaScript running in the backend is different. The newest version of Node supports a large majority of the latest features of JavaScript, so we can use the latest features without having to transpile our code.-->
 正如[部分1](/en/part1/java_script)中提到的，浏览器尚不支持JavaScript的最新功能，这就是为什么在浏览器中运行的代码必须使用例如[babel](https://babeljs.io/)进行<i>转译</i>。而JavaScript在后端运行的情况则不同。最新版本的Node支持大部分JavaScript的最新功能，因此我们可以使用最新的功能而无需转译我们的代码。
 
-<!-- Our goal is to implement a backend that will work with the notes application from [part 2](/en/part2/). However, let''s start with the basics by implementing a classic "hello world" application.-->
-我们的目标是实现一个与[第二部分](/en/part2/)中的笔记应用程序配合使用的后端。不过，让我们先从实现一个经典的“Hello World”应用程序开始。
+<!-- Our goal is to implement a backend that will work with the notes application from [part 2](/en/part2/). However, let's start with the basics by implementing a classic "hello world" application.-->
+我们的目标是实现一个与[第二章节](/en/part2/)中的笔记应用程序配合使用的后端。不过，让我们先从实现一个经典的“Hello World”应用程序开始。
 
 <!-- **Notice** that the applications and exercises in this part are not all React applications, and we will not use the <i>create-react-app</i> utility for initializing the project for this application.-->
 **注意**：本部分的应用程序和练习并非全部是React应用程序，我们不会使用<i>create-react-app</i>工具来初始化该应用程序的项目。
 
 <!-- We had already mentioned [npm](/en/part2/getting_data_from_server#npm) back in part 2, which is a tool used for managing JavaScript packages. In fact, npm originates from the Node ecosystem.-->
-我们在第2部分已经提到[npm](/en/part2/getting_data_from_server#npm)，它是一个用于管理JavaScript包的工具。事实上，npm源自Node生态系统。
+我们在第2章节已经提到[npm](/en/part2/getting_data_from_server#npm)，它是一个用于管理JavaScript包的工具。事实上，npm源自Node生态系统。
 
-<!-- Let''s navigate to an appropriate directory, and create a new template for our application with the _npm init_ command. We will answer the questions presented by the utility, and the result will be an automatically generated <i>package.json</i> file at the root of the project that contains information about the project.-->
+<!-- Let's navigate to an appropriate directory, and create a new template for our application with the _npm init_ command. We will answer the questions presented by the utility, and the result will be an automatically generated <i>package.json</i> file at the root of the project that contains information about the project.-->
 让我们导航到一个合适的目录，然后使用`npm init`命令创建一个新的模板给我们的应用程序。我们将回答实用程序提出的问题，结果将是一个自动生成的<i>package.json</i>文件在项目的根目录，其中包含有关该项目的信息。
 
 ```json
@@ -48,7 +48,7 @@ lang: zh
 <!-- The file defines, for instance, that the entry point of the application is the <i>index.js</i> file.-->
 文件定义，例如，应用程序的入口点是<i>index.js</i>文件。
 
-<!-- Let''s make a small change to the <i>scripts</i> object:-->
+<!-- Let's make a small change to the <i>scripts</i> object:-->
 让我们对<i>脚本</i>对象做一个小的改变：
 
 ```bash
@@ -62,7 +62,7 @@ lang: zh
 }
 ```
 
-<!-- Next, let''s create the first version of our application by adding an <i>index.js</i> file to the root of the project with the following code:-->
+<!-- Next, let's create the first version of our application by adding an <i>index.js</i> file to the root of the project with the following code:-->
 接下来，我们可以通过在项目根目录添加一个 <i>index.js</i> 文件来创建我们应用程序的第一个版本，文件内容如下：
 
 ```js
@@ -97,7 +97,7 @@ npm start
 }
 ```
 
-<!-- Even though the execution of the project works when it is started by calling _node index.js_ from the command line, it''s customary for npm projects to execute such tasks as npm scripts.-->
+<!-- Even though the execution of the project works when it is started by calling _node index.js_ from the command line, it's customary for npm projects to execute such tasks as npm scripts.-->
 即使当从命令行调用_node index.js_启动项目时，执行也可以正常工作，但是通常npm项目会执行诸如npm脚本之类的任务。
 
 <!-- By default, the <i>package.json</i> file also defines another commonly used npm script called <i>npm test</i>. Since our project does not yet have a testing library, the _npm test_ command simply executes the following command:-->
@@ -109,7 +109,7 @@ echo "Error: no test specified" && exit 1
 
 ### Simple web server
 
-<!-- Let''s change the application into a web server by editing the _index.js_ files as follow:-->
+<!-- Let's change the application into a web server by editing the _index.js_ files as follow:-->
 让我们通过编辑 _index.js_ 文件将应用程序更改为 web 服务器，如下所示：
 
 ```js
@@ -162,14 +162,14 @@ Error: listen EADDRINUSE :::3001
 <!-- You have two options. Either shut down the application using port 3001 (the json-server in the last part of the material was using port 3001), or use a different port for this application.-->
 你有两个选择。要么关闭使用端口3001的应用程序（材料的最后一部分使用的是端口3001的json-server），要么为这个应用程序使用不同的端口。
 
-<!-- Let''s take a closer look at the first line of the code:-->
+<!-- Let's take a closer look at the first line of the code:-->
 让我们仔细看看代码的第一行：
 
 ```js
 const http = require('http')
 ```
 
-<!-- In the first row, the application imports Node''s built-in [web server](https://nodejs.org/docs/latest-v8.x/api/http.html) module. This is practically what we have already been doing in our browser-side code, but with a slightly different syntax:-->
+<!-- In the first row, the application imports Node's built-in [web server](https://nodejs.org/docs/latest-v8.x/api/http.html) module. This is practically what we have already been doing in our browser-side code, but with a slightly different syntax:-->
 在第一行，应用程序引入了Node的内置[web服务器](https://nodejs.org/docs/latest-v8.x/api/http.html)模块。 这实际上是我们已经在浏览器端代码中所做的，但语法略有不同：
 
 ```js
@@ -213,7 +213,7 @@ const app = http.createServer((request, response) => {
 })
 ```
 
-<!-- The code uses the _createServer_ method of the [http](https://nodejs.org/docs/latest-v8.x/api/http.html) module to create a new web server. An <i>event handler</i> is registered to the server that is called <i>every time</i> an HTTP request is made to the server''s address <http://localhost:3001>.-->
+<!-- The code uses the _createServer_ method of the [http](https://nodejs.org/docs/latest-v8.x/api/http.html) module to create a new web server. An <i>event handler</i> is registered to the server that is called <i>every time</i> an HTTP request is made to the server's address <http://localhost:3001>.-->
 代码使用[http](https://nodejs.org/docs/latest-v8.x/api/http.html)模块的_createServer_方法创建一个新的Web服务器。注册到服务器上的<i>事件处理程序</i>每当向服务器地址<http://localhost:3001>发出HTTP请求时都会被调用。
 
 <!-- The request is responded to with the status code 200, with the <i>Content-Type</i> header set to <i>text/plain</i>, and the content of the site to be returned set to <i>Hello World</i>.-->
@@ -228,7 +228,7 @@ app.listen(PORT)
 console.log(`Server running on port ${PORT}`)
 ```
 
-<!-- The primary purpose of the backend server in this course is to offer raw data in JSON format to the frontend. For this reason, let''s immediately change our server to return a hardcoded list of notes in the JSON format:-->
+<!-- The primary purpose of the backend server in this course is to offer raw data in JSON format to the frontend. For this reason, let's immediately change our server to return a hardcoded list of notes in the JSON format:-->
 在本课程中，后端伺服器的主要目的是以JSON格式提供原始资料给前端。因此，让我们立刻更改我们的伺服器，以JSON格式返回一个硬编码的笔记列表：
 
 ```js
@@ -271,19 +271,19 @@ console.log(`Server running on port ${PORT}`)
 <i>Content-Type</i> 标头中的 <i>application/json</i> 值通知接收者数据以JSON格式提供。 使用 <em>JSON.stringify(notes)</em> 方法将 _notes_ 数组转换为JSON。
 
 <!-- When we open the browser, the displayed format is exactly the same as in [part 2](/en/part2/getting_data_from_server/) where we used [json-server](https://github.com/typicode/json-server) to serve the list of notes:-->
-当我们打开浏览器时，显示的格式与[第二部分](/en/part2/getting_data_from_server/)中我们使用[json-server](https://github.com/typicode/json-server)提供笔记列表时完全相同：
+当我们打开浏览器时，显示的格式与[第二章节](/en/part2/getting_data_from_server/)中我们使用[json-server](https://github.com/typicode/json-server)提供笔记列表时完全相同：
 
 ![formatted JSON notes data](../../images/3/2new.png)
 
 ### Express
 
-<!-- Implementing our server code directly with Node''s built-in [http](https://nodejs.org/docs/latest-v8.x/api/http.html) web server is possible. However, it is cumbersome, especially once the application grows in size.-->
+<!-- Implementing our server code directly with Node's built-in [http](https://nodejs.org/docs/latest-v8.x/api/http.html) web server is possible. However, it is cumbersome, especially once the application grows in size.-->
 实施我们的服务器代码直接使用Node内置的[http](https://nodejs.org/docs/latest-v8.x/api/http.html)网络服务器是可能的。但是，一旦应用程序规模增大，这将是非常繁琐的。
 
 <!-- Many libraries have been developed to ease server-side development with Node, by offering a more pleasing interface to work with the built-in http module. These libraries aim to provide a better abstraction for general use cases we usually require to build a backend server. By far the most popular library intended for this purpose is [express](http://expressjs.com).-->
 许多库已经开发出来，以简化使用Node进行服务器端开发，通过提供一个更好的界面来处理内置的http模块。这些库的目的是为我们通常需要构建后端服务器的一般用例提供更好的抽象。到目前为止，最受欢迎的用于此目的的库是[express](http://expressjs.com)。
 
-<!-- Let''s take express into use by defining it as a project dependency with the command:-->
+<!-- Let's take express into use by defining it as a project dependency with the command:-->
 让我们通过使用以下命令将Express作为项目依赖项来使用：`npm install express --save`
 
 ```bash
@@ -330,8 +330,8 @@ npm 使用的版本模型称为[语义版本](https://docs.npmjs.com/getting-sta
 npm update
 ```
 
-<!-- Likewise, if we start working on the project on another computer, we can install all up-to-date dependencies of the project defined in <i>package.json</i> by running this next command in the project''s root directory:-->
-同样地，如果我们在另一台电脑上开始这个专案，我们可以在专案的根目录下执行下一个指令来安装<i>package.json</i>中定义的所有最新的依赖：
+<!-- Likewise, if we start working on the project on another computer, we can install all up-to-date dependencies of the project defined in <i>package.json</i> by running this next command in the project's root directory:-->
+同样地，如果我们在另一台电脑上开始这个项目，我们可以在项目的根目录下执行下一个指令来安装<i>package.json</i>中定义的所有最新的依赖：
 
 ```bash
 npm install
@@ -342,7 +342,7 @@ npm install
 
 ### Web and express
 
-<!-- Let''s get back to our application and make the following changes:-->
+<!-- Let's get back to our application and make the following changes:-->
 让我们回到我们的应用程序，并做出以下更改：
 
 ```js
@@ -378,7 +378,7 @@ const express = require('express')
 const app = express()
 ```
 
-<!-- Next, we define two <i>routes</i> to the application. The first one defines an event handler that is used to handle HTTP GET requests made to the application''s <i>/</i> root:-->
+<!-- Next, we define two <i>routes</i> to the application. The first one defines an event handler that is used to handle HTTP GET requests made to the application's <i>/</i> root:-->
 接下来，我们定义两个<i>路由</i>到应用程序。第一个定义了一个事件处理程序，用于处理应用程序<i>/</i>根目录发出的HTTP GET请求：
 
 ```js
@@ -412,7 +412,7 @@ app.get('/api/notes', (request, response) => {
 
 ![api/notes gives the formatted JSON data again](../../images/3/6new.png)
 
-<!-- Next, let''s take a quick look at the data sent in JSON format.-->
+<!-- Next, let's take a quick look at the data sent in JSON format.-->
 接下来，让我们快速看一下以JSON格式发送的资料。
 
 <!-- In the earlier version where we were only using Node, we had to transform the data into the JSON format with the _JSON.stringify_ method:-->
@@ -425,7 +425,7 @@ response.end(JSON.stringify(notes))
 <!-- With express, this is no longer required, because this transformation happens automatically.-->
 由于Express，这不再是必需的，因为这个转换自动发生。
 
-<!-- It''s worth noting that [JSON](https://en.wikipedia.org/wiki/JSON) is a string and not a JavaScript object like the value assigned to _notes_.-->
+<!-- It's worth noting that [JSON](https://en.wikipedia.org/wiki/JSON) is a string and not a JavaScript object like the value assigned to _notes_.-->
 值得注意的是[JSON](https://en.wikipedia.org/wiki/JSON)是一个字符串，而不像赋值给_notes_的那样是JavaScript对象。
 
 <!-- The experiment shown below illustrates this point:-->
@@ -438,7 +438,7 @@ response.end(JSON.stringify(notes))
 
 ### nodemon
 
-<!-- If we make changes to the application''s code we have to restart the application to see the changes. We restart the application by first shutting it down by typing _Ctrl+C_ and then restarting the application. Compared to the convenient workflow in React where the browser automatically reloaded after changes were made, this feels slightly cumbersome.-->
+<!-- If we make changes to the application's code we have to restart the application to see the changes. We restart the application by first shutting it down by typing _Ctrl+C_ and then restarting the application. Compared to the convenient workflow in React where the browser automatically reloaded after changes were made, this feels slightly cumbersome.-->
 如果我们对应用程序的代码做出更改，我们必须重新启动应用程序才能看到更改。我们通过首先输入_Ctrl+C_关闭应用程序，然后重新启动应用程序来重新启动应用程序。与在React中更改后浏览器会自动重新加载的便捷工作流相比，这感觉有点繁琐。
 
 <!-- The solution to this problem is [nodemon](https://github.com/remy/nodemon):-->
@@ -447,7 +447,7 @@ response.end(JSON.stringify(notes))
 <!-- > <i>nodemon will watch the files in the directory in which nodemon was started, and if any files change, nodemon will automatically restart your node application.</i>-->
 > <i>nodemon 将会监视被 nodemon 启动时所在目录中的文件，如果有任何文件发生变化，nodemon 将自动重启你的 node 应用。</i>
 
-<!-- Let''s install nodemon by defining it as a <i>development dependency</i> with the command:-->
+<!-- Let's install nodemon by defining it as a <i>development dependency</i> with the command:-->
 让我们通过使用命令定义它为<i>开发依赖项</i>来安装nodemon：
 
 ```bash
@@ -488,7 +488,7 @@ node_modules/.bin/nodemon index.js
 <!-- Changes to the application code now cause the server to restart automatically. It's worth noting that even though the backend server restarts automatically, the browser still has to be manually refreshed. This is because unlike when working in React, we don't have the [hot reload](https://gaearon.github.io/react-hot-loader/getstarted/) functionality needed to automatically reload the browser.-->
 改动应用程序代码现在会导致服务器自动重启。值得注意的是，即使后端服务器自动重启，浏览器仍然需要手动刷新。这是因为与在React中工作不同，我们没有[热重载](https://gaearon.github.io/react-hot-loader/getstarted/)功能来自动重新加载浏览器。
 
-<!-- The command is long and quite unpleasant, so let''s define a dedicated <i>npm script</i> for it in the <i>package.json</i> file:-->
+<!-- The command is long and quite unpleasant, so let's define a dedicated <i>npm script</i> for it in the <i>package.json</i> file:-->
 命令很长而且很不愉快，所以让我们在<i>package.json</i>文件中为它定义一个专用的<i>npm脚本</i>：
 
 ```bash
@@ -518,22 +518,22 @@ npm run dev
 
 ### REST
 
-<!-- Let''s expand our application so that it provides the same RESTful HTTP API as [json-server](https://github.com/typicode/json-server#routes).-->
+<!-- Let's expand our application so that it provides the same RESTful HTTP API as [json-server](https://github.com/typicode/json-server#routes).-->
 让我们扩展我们的应用，使它提供与[json-server](https://github.com/typicode/json-server#routes)相同的RESTful HTTP API。
 
-<!-- Representational State Transfer, aka REST, was introduced in 2000 in Roy Fielding''s [dissertation](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm). REST is an architectural style meant for building scalable web applications.-->
+<!-- Representational State Transfer, aka REST, was introduced in 2000 in Roy Fielding's [dissertation](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm). REST is an architectural style meant for building scalable web applications.-->
 Representational State Transfer，也称为REST，于2000年由Roy Fielding在他的[论文](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)中介绍。REST 是一种架构风格，用于构建可扩展的Web应用程序。
 
 <!-- We are not going to dig into Fielding's definition of REST or spend time pondering about what is and isn't RESTful. Instead, we take a more [narrow view](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) by only concerning ourselves with how RESTful APIs are typically understood in web applications. The original definition of REST is not even limited to web applications.-->
 我们不会深入研究Fielding关于REST的定义，也不会花时间思考什么是RESTful，什么不是RESTful。相反，我们以[狭义的视角](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services)来看待RESTful API，只关注它在web应用中的典型理解。REST的原始定义甚至不局限于web应用。
 
-<!-- We mentioned in the [previous part](/en/part2/altering_data_in_server#rest) that singular things, like notes in the case of our application, are called <i>resources</i> in RESTful thinking. Every resource has an associated URL which is the resource''s unique address.-->
+<!-- We mentioned in the [previous part](/en/part2/altering_data_in_server#rest) that singular things, like notes in the case of our application, are called <i>resources</i> in RESTful thinking. Every resource has an associated URL which is the resource's unique address.-->
 我们在[前一部分](/en/part2/altering_data_in_server#rest)提到，像我们应用程序中的笔记这样的单一事物，在REST思想中被称为<i>资源</i>。每个资源都有一个关联的URL，这是资源的唯一地址。
 
-<!-- One convention for creating unique addresses is to combine the name of the resource type with the resource''s unique identifier.-->
+<!-- One convention for creating unique addresses is to combine the name of the resource type with the resource's unique identifier.-->
 一种创建唯一地址的约定是将资源类型的名称与资源的唯一标识符结合在一起。
 
-<!-- Let''s assume that the root URL of our service is <i>www.example.com/api</i>.-->
+<!-- Let's assume that the root URL of our service is <i>www.example.com/api</i>.-->
 让我们假设我们服务的根URL是<i>www.example.com/api</i>。
 
 <!-- If we define the resource type of note to be <i>notes</i>, then the address of a note resource with the identifier 10, has the unique address <i>www.example.com/api/notes/10</i>.-->
@@ -569,7 +569,7 @@ URL 整个笔记资源的集合是 <i>www.example.com/api/notes</i>。
 <!-- Let's expand our application so that it offers a REST interface for operating on individual notes. First, let's create a [route](http://expressjs.com/en/guide/routing.html) for fetching a single resource.-->
 让我们扩展我们的应用程序，以便它提供用于操作单个笔记的REST接口。首先，让我们为获取单个资源创建[路由](http://expressjs.com/en/guide/routing.html)。
 
-<!-- The unique address we will use for an individual note is of the form <i>notes/10</i>, where the number at the end refers to the note''s unique id number.-->
+<!-- The unique address we will use for an individual note is of the form <i>notes/10</i>, where the number at the end refers to the note's unique id number.-->
 <i>notes/10</i> 这个独特的地址我们将用于个人笔记，其中结尾的数字代表笔记的唯一ID号码。
 
 <!-- We can define [parameters](http://expressjs.com/en/guide/routing.html#route-parameters) for routes in express by using the colon syntax:-->
@@ -596,7 +596,7 @@ const id = request.params.id
 <!-- The now familiar _find_ method of arrays is used to find the note with an id that matches the parameter. The note is then returned to the sender of the request.-->
 数组中现在熟悉的_find_方法被用来查找与参数匹配的id的笔记。然后笔记被返回给请求者。
 
-<!-- When we test our application by going to <http://localhost:3001/api/notes/1> in our browser, we notice that it does not appear to work, as the browser displays an empty page. This comes as no surprise to us as software developers, and it''s time to debug.-->
+<!-- When we test our application by going to <http://localhost:3001/api/notes/1> in our browser, we notice that it does not appear to work, as the browser displays an empty page. This comes as no surprise to us as software developers, and it's time to debug.-->
 当我们在浏览器中访问<http://localhost:3001/api/notes/1>来测试我们的应用程序时，我们注意到它似乎不起作用，因为浏览器显示了一个空白页面。对于我们这些软件开发人员来说，这并不令人惊讶，现在是时候进行调试了。
 
 <!-- Adding _console.log_ commands into our code is a time-proven trick:-->
@@ -647,7 +647,7 @@ app.get('/api/notes/:id', (request, response) => {
 <!-- The cause of the bug becomes clear. The _id_ variable contains a string '1', whereas the ids of notes are integers. In JavaScript, the "triple equals" comparison === considers all values of different types to not be equal by default, meaning that 1 is not '1'.-->
 因素变得清楚了。_id_变量包含一个字符串'1'，而笔记的id是整数。在JavaScript中，"三等号"比较===默认情况下将不同类型的所有值视为不相等，这意味着1不是'1'。
 
-<!-- Let''s fix the issue by changing the id parameter from a string into a [number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number):-->
+<!-- Let's fix the issue by changing the id parameter from a string into a [number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number):-->
 让我们通过将id参数从字符串更改为[数字](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)来解决问题：
 
 ```js
@@ -663,7 +663,7 @@ app.get('/api/notes/:id', (request, response) => {
 
 ![api/notes/1 gives a single note as JSON](../../images/3/9new.png)
 
-<!-- However, there''s another problem with our application.-->
+<!-- However, there's another problem with our application.-->
 但是，我们的应用程序还有另一个问题。
 
 <!-- If we search for a note with an id that does not exist, the server responds with:-->
@@ -677,7 +677,7 @@ HTTP状态码返回200，这意味着响应成功。由于<i>内容长度</i>头
 <!-- The reason for this behavior is that the _note_ variable is set to _undefined_ if no matching note is found. The situation needs to be handled on the server in a better way. If no note is found, the server should respond with the status code [404 not found](https://www.rfc-editor.org/rfc/rfc9110.html#name-404-not-found) instead of 200.-->
 因为如果没有找到匹配的笔记，则_note_变量将设置为_undefined_。该情况需要在服务器上以更好的方式进行处理。如果没有找到笔记，服务器应该响应[404 not found](https://www.rfc-editor.org/rfc/rfc9110.html#name-404-not-found)状态码，而不是200。
 
-<!-- Let''s make the following change to our code:-->
+<!-- Let's make the following change to our code:-->
 让我们对我们的代码做出以下更改：
 
 ```js
@@ -704,12 +704,12 @@ app.get('/api/notes/:id', (request, response) => {
 <!-- Our application works and sends the error status code if no note is found. However, the application doesn''t return anything to show to the user, like web applications normally do when we visit a page that does not exist. We do not need to display anything in the browser because REST APIs are interfaces that are intended for programmatic use, and the error status code is all that is needed.-->
 我们的应用程序可以正常工作，如果没有找到笔记，则会发送错误状态码。然而，该应用程序不会返回任何内容给用户，就像我们访问不存在的页面时，web应用程序通常会显示的内容一样。我们不需要在浏览器中显示任何内容，因为REST API是用于编程使用的接口，而错误状态码就足够了。
 
-<!-- Anyway, it''s possible to give a clue about the reason for sending a 404 error by [overriding the default NOT FOUND message](https://stackoverflow.com/questions/14154337/how-to-send-a-custom-http-status-message-in-node-express/36507614#36507614).-->
+<!-- Anyway, it's possible to give a clue about the reason for sending a 404 error by [overriding the default NOT FOUND message](https://stackoverflow.com/questions/14154337/how-to-send-a-custom-http-status-message-in-node-express/36507614#36507614).-->
 无论如何，可以通过[覆盖默认的NOT FOUND消息](https://stackoverflow.com/questions/14154337/how-to-send-a-custom-http-status-message-in-node-express/36507614#36507614)来给出发送404错误的原因的线索。
 
 ### Deleting resources
 
-<!-- Next, let''s implement a route for deleting resources. Deletion happens by making an HTTP DELETE request to the URL of the resource:-->
+<!-- Next, let's implement a route for deleting resources. Deletion happens by making an HTTP DELETE request to the URL of the resource:-->
 接下来，让我们实现一个用于删除资源的路由。 通过向资源的URL发出HTTP DELETE请求来完成删除：
 
 ```js
@@ -724,7 +724,7 @@ app.delete('/api/notes/:id', (request, response) => {
 <!-- If deleting the resource is successful, meaning that the note exists and is removed, we respond to the request with the status code [204 no content](https://www.rfc-editor.org/rfc/rfc9110.html#name-204-no-content) and return no data with the response.-->
 如果删除资源成功，即笔记存在并被移除，我们就会用状态码[204 no content](https://www.rfc-editor.org/rfc/rfc9110.html#name-204-no-content)回复请求，并在响应中不返回数据。
 
-<!-- There''s no consensus on what status code should be returned to a DELETE request if the resource does not exist. The only two options are 204 and 404. For the sake of simplicity, our application will respond with 204 in both cases.-->
+<!-- There's no consensus on what status code should be returned to a DELETE request if the resource does not exist. The only two options are 204 and 404. For the sake of simplicity, our application will respond with 204 in both cases.-->
 没有共识认为对一个 DELETE 请求，如果资源不存在应该返回什么状态码。唯二选择是 204 和 404。为了简单起见，我们的应用程式将在两种情况下都返回 204。
 
 ### Postman
@@ -735,12 +735,12 @@ app.delete('/api/notes/:id', (request, response) => {
 <!-- Many tools exist for making the testing of backends easier. One of these is a command line program [curl](https://curl.haxx.se). However, instead of curl, we will take a look at using [Postman](https://www.postman.com) for testing the application.-->
 许多工具可以帮助更容易地测试后端。其中之一是命令行程序[curl](https://curl.haxx.se)。然而，我们将考虑使用[Postman](https://www.postman.com)来测试应用程序。
 
-<!-- Let''s install the Postman desktop client [from here](https://www.postman.com/downloads/)  and try it out:-->
+<!-- Let's install the Postman desktop client [from here](https://www.postman.com/downloads/)  and try it out:-->
 让我们从[这里](https://www.postman.com/downloads/)安装Postman桌面客户端，并试用一下：
 
 ![postman screenshot on api/notes/2](../../images/3/11x.png)
 
-<!-- Using Postman is quite easy in this situation. It''s enough to define the URL and then select the correct request type (DELETE).-->
+<!-- Using Postman is quite easy in this situation. It's enough to define the URL and then select the correct request type (DELETE).-->
 使用Postman在这种情况下相当容易。只需定义URL，然后选择正确的请求类型（DELETE）就足够了。
 
 <!-- The backend server appears to respond correctly. By making an HTTP GET request to <http://localhost:3001/api/notes> we see that the note with the id 2 is no longer in the list, which indicates that the deletion was successful.-->
@@ -757,7 +757,7 @@ app.delete('/api/notes/:id', (request, response) => {
 <!-- Once the plugin is installed, using it is very simple. We make a directory at the root of the application named <i>requests</i>. We save all the REST client requests in the directory as files that end with the <i>.rest</i> extension.-->
 一旦插件安装完成，使用它非常简单。我们在应用程序的根目录下创建一个名为<i>requests</i>的目录。我们将所有REST客户端请求保存在该目录中，文件以<i>.rest</i>为扩展名。
 
-<!-- Let''s create a new <i>get\_all\_notes.rest</i> file and define the request that fetches all notes.-->
+<!-- Let's create a new <i>get\_all\_notes.rest</i> file and define the request that fetches all notes.-->
 让我们创建一个新的<i>get\_all\_notes.rest</i>文件，并定义获取所有笔记的请求。
 
 ![get all notes rest file with get request on notes](../../images/3/12ea.png)
@@ -774,13 +774,13 @@ app.delete('/api/notes/:id', (request, response) => {
 
 ### Receiving data
 
-<!-- Next, let''s make it possible to add new notes to the server. Adding a note happens by making an HTTP POST request to the address <http://localhost:3001/api/notes>, and by sending all the information for the new note in the request [body](https://www.w3.org/Protocols/rfc2616/rfc2616-sec7.html#sec7) in JSON format.-->
+<!-- Next, let's make it possible to add new notes to the server. Adding a note happens by making an HTTP POST request to the address <http://localhost:3001/api/notes>, and by sending all the information for the new note in the request [body](https://www.w3.org/Protocols/rfc2616/rfc2616-sec7.html#sec7) in JSON format.-->
 接下来，让我们使得向服务器添加新笔记成为可能。添加笔记是通过向地址<http://localhost:3001/api/notes>发出HTTP POST请求，并将新笔记的所有信息以[body](https://www.w3.org/Protocols/rfc2616/rfc2616-sec7.html#sec7)的JSON格式发送到请求中。
 
 <!-- To access the data easily, we need the help of the express [json-parser](https://expressjs.com/en/api.html) that is taken to use with command _app.use(express.json())_.-->
 要轻松访问资料，我们需要express的[json-parser](https://expressjs.com/en/api.html)的帮助，它可以使用命令_app.use(express.json())_来使用。
 
-<!-- Let''s activate the json-parser and implement an initial handler for dealing with the HTTP POST requests:-->
+<!-- Let's activate the json-parser and implement an initial handler for dealing with the HTTP POST requests:-->
 让我们激活json-parser，并实现一个用于处理HTTP POST请求的初始处理程序：
 
 ```js
@@ -810,7 +810,7 @@ app.post('/api/notes', (request, response) => {
 <!-- For the time being, the application does not do anything with the received data besides printing it to the console and sending it back in the response.-->
 目前，该应用程序除了将接收到的数据打印到控制台并在响应中将其发送回去之外，不会做任何其他事情。
 
-<!-- Before we implement the rest of the application logic, let''s verify with Postman that the data is in fact received by the server. In addition to defining the URL and request type in Postman, we also have to define the data sent in the <i>body</i>:-->
+<!-- Before we implement the rest of the application logic, let's verify with Postman that the data is in fact received by the server. In addition to defining the URL and request type in Postman, we also have to define the data sent in the <i>body</i>:-->
 在我们实施应用程序逻辑的其余部分之前，让我们使用Postman验证数据实际上是否已被服务器接收。除了在Postman中定义URL和请求类型外，我们还必须在<i>body</i>中定义发送的数据：
 
 ![postman post on api/notes with post content](../../images/3/14new.png)
@@ -825,7 +825,7 @@ app.post('/api/notes', (request, response) => {
 
 ![nodemon error as typing requre not defined](../../images/3/16.png)
 
-<!-- Similarly, it is useful to check the console for making sure that the backend behaves as we expect it to in different situations, like when we send data with an HTTP POST request. Naturally, it''s a good idea to add lots of <em>console.log</em> commands to the code while the application is still being developed.-->
+<!-- Similarly, it is useful to check the console for making sure that the backend behaves as we expect it to in different situations, like when we send data with an HTTP POST request. Naturally, it's a good idea to add lots of <em>console.log</em> commands to the code while the application is still being developed.-->
 同样，检查控制台有助于确保后端在不同情况下如我们期望的那样响应，比如我们使用HTTP POST请求发送数据。当然，在应用程序开发过程中添加大量 <em>console.log </em> 命令是一个好主意。
 
 <!-- A potential cause for issues is an incorrectly set <i>Content-Type</i> header in requests. This can happen with Postman if the type of body is not defined correctly:-->
@@ -919,7 +919,7 @@ app.post('/api/notes', (request, response) => {
 <!-- We need a unique id for the note. First, we find out the largest id number in the current list and assign it to the _maxId_ variable. The id of the new note is then defined as _maxId + 1_. This method is not recommended, but we will live with it for now as we will replace it soon enough.-->
 我们需要一个唯一的ID来记录这条笔记。首先，我们找出当前列表中最大的ID号，然后将其赋值给_maxId_变量。新笔记的ID就定义为_maxId + 1_。虽然这种方法不推荐使用，但现在我们还是暂时使用它，因为很快就会有替代方案了。
 
-<!-- The current version still has the problem that the HTTP POST request can be used to add objects with arbitrary properties. Let''s improve the application by defining that the <i>content</i> property may not be empty. The <i>important</i> property will be given default value false. All other properties are discarded:-->
+<!-- The current version still has the problem that the HTTP POST request can be used to add objects with arbitrary properties. Let's improve the application by defining that the <i>content</i> property may not be empty. The <i>important</i> property will be given default value false. All other properties are discarded:-->
 目前的版本仍然存在一个问题，即可以使用HTTP POST请求添加具有任意属性的对象。让我们通过定义<i>content</i>属性不能为空来改进应用程序。<i>important</i>属性将被赋予默认值false。所有其他属性都将被丢弃：
 
 ```js
@@ -1023,14 +1023,14 @@ Math.max(...notes.map(n => n.id))
 
 ### Exercises 3.1.-3.6.
 
-<!-- **NB:** It''s recommended to do all of the exercises from this part into a new dedicated git repository, and place your source code right at the root of the repository. Otherwise, you will run into problems in exercise 3.10.-->
+<!-- **NB:** It's recommended to do all of the exercises from this part into a new dedicated git repository, and place your source code right at the root of the repository. Otherwise, you will run into problems in exercise 3.10.-->
 **翻译：**
 **注意：**建议把这一部分的所有练习都放到一个新的专用git仓库中，并将源代码放在仓库的根目录下。否则，练习3.10会遇到问题。
 
 <!-- **NB:** Because this is not a frontend project and we are not working with React, the application <strong>is not created</strong> with create-react-app. You initialize this project with the <em>npm init</em> command that was demonstrated earlier in this part of the material.-->
 **翻译：**由于这不是一个前端项目，我们没有使用React，所以应用程序<strong>没有使用</strong>create-react-app创建。您可以使用之前在本教程中演示的<em>npm init</em>命令来初始化此项目。
 
-<!-- **Strong recommendation:** When you are working on backend code, always keep an eye on what''s going on in the terminal that is running your application.-->
+<!-- **Strong recommendation:** When you are working on backend code, always keep an eye on what's going on in the terminal that is running your application.-->
 **强烈推荐：**当你在后端代码上工作时，总是要留意正在运行你的应用程序的终端上正在发生的事情。
 
 #### 3.1: Phonebook backend step1
@@ -1193,7 +1193,7 @@ POST 是唯一一种既不是<i>安全的</i>也不是<i>幂等的</i>HTTP 请�
 <!-- In practice, you can use several middlewares at the same time. When you have more than one, they''re executed one by one in the order that they were taken into use in express.-->
 在实践中，你可以同时使用多个中间件。当你有多个时，它们按照在express中使用的顺序依次执行。
 
-<!-- Let''s implement our own middleware that prints information about every request that is sent to the server.-->
+<!-- Let's implement our own middleware that prints information about every request that is sent to the server.-->
 让我们实现自己的中间件，打印出服务器接收到的每个请求的信息。
 
 <!-- Middleware is a function that receives three parameters:-->
@@ -1225,7 +1225,7 @@ app.use(requestLogger)
 <!-- Middleware functions have to be taken into use before routes if we want them to be executed before the route event handlers are called. There are also situations where we want to define middleware functions after routes. In practice, this means that we are defining middleware functions that are only called if no route handles the HTTP request.-->
 中间件函数必须在路由之前使用，如果我们希望它们在调用路由事件处理程序之前被执行。也有情况下，我们希望在路由之后定义中间件函数。在实践中，这意味着我们定义的中间件函数只有在没有路由处理HTTP请求时才会被调用。
 
-<!-- Let''s add the following middleware after our routes. This middleware will be used for catching requests made to non-existent routes. For these requests, the middleware will return an error message in the JSON format.-->
+<!-- Let's add the following middleware after our routes. This middleware will be used for catching requests made to non-existent routes. For these requests, the middleware will return an error message in the JSON format.-->
 让我们在路由之后添加以下中介软件。 这个中介软件将用于捕获对不存在的路由所做的请求。 对于这些请求，中介软件将以JSON格式返回错误消息。
 
 ```js
@@ -1250,7 +1250,7 @@ app.use(unknownEndpoint)
 <!-- Add the [morgan](https://github.com/expressjs/morgan) middleware to your application for logging. Configure it to log messages to your console based on the <i>tiny</i> configuration.-->
 把[morgan](https://github.com/expressjs/morgan)中间件添加到你的应用程序，以便进行日志记录。根据<i>tiny</i>配置，将消息配置为记录到控制台。
 
-<!-- The documentation for Morgan is not the best, and you may have to spend some time figuring out how to configure it correctly. However, most documentation in the world falls under the same category, so it''s good to learn to decipher and interpret cryptic documentation in any case.-->
+<!-- The documentation for Morgan is not the best, and you may have to spend some time figuring out how to configure it correctly. However, most documentation in the world falls under the same category, so it's good to learn to decipher and interpret cryptic documentation in any case.-->
 Morgan 的文档不是最好的，你可能需要花些时间才能正确配置它。但是，世界上大多数文档都属于同一类，因此学会解读和解释晦涩的文档也是很有用的。
 
 <!-- Morgan is installed just like all other libraries with the _npm install_ command. Taking morgan into use happens the same way as configuring any other middleware by using the _app.use_ command.-->

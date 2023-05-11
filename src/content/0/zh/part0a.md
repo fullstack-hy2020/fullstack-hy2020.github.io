@@ -38,7 +38,7 @@ lang: zh
 <!-- In many parts of the course, the exercises build one larger application one small piece at a time. Some of the exercise applications are developed through multiple parts.-->
 在课程的许多章节，练习是一次构建一个大型应用程序的一小部分。一些练习的应用程序是通过多个章节综合构建的。
 
-<!-- The course material is based on incrementally expanding example applications, which change from part to part. It''s best to follow the code along while making small modifications independently. The code of the example applications for each step of each part can be found on GitHub.-->
+<!-- The course material is based on incrementally expanding example applications, which change from part to part. It's best to follow the code along while making small modifications independently. The code of the example applications for each step of each part can be found on GitHub.-->
 教学内容是基于逐步扩展的示例应用，每一章节都有所不同。最好跟着示例代码一起，同时独立做一些小的修改。每一章节每一步的示例应用代码可以在GitHub上找到。
 
 ### Taking the course
@@ -60,7 +60,7 @@ lang: zh
 
 ### Course channel in Discord and Telegram
 
-<!-- You can discuss the course and related topics in our dedicated group on Discord <https://study.cs.helsinki.fi/discord/join/fullstack> and on Telegram: <https://t.me/fullstackcourse>. Discord has fullstack_general and part-specific (channel names with fullstack prefix) channels for course-related discussion. Note that Discord''s <i>chat channel is not suitable for course-related discussions</i>. Please join the conversation!-->
+<!-- You can discuss the course and related topics in our dedicated group on Discord <https://study.cs.helsinki.fi/discord/join/fullstack> and on Telegram: <https://t.me/fullstackcourse>. Discord has fullstack_general and part-specific (channel names with fullstack prefix) channels for course-related discussion. Note that Discord's <i>chat channel is not suitable for course-related discussions</i>. Please join the conversation!-->
 你可以在我们在Discord <https://study.cs.helsinki.fi/discord/join/fullstack> 以及Telegram <https://t.me/fullstackcourse> 上讨论课程和相关话题。Discord有fullstack_general和特定章节（含有fullstack前缀）的频道，专门用于课程相关的讨论。请注意，Discord的<i>聊天频道不适合讨论课程相关的问题</i>。欢迎参与讨论！
 
 ### How to get help in Discord/Telegram
@@ -190,7 +190,7 @@ lang: zh
 
 #### Part 10 - Full Stack Web Development: React Native (2 cr, CSM14111)
 
-<!-- By submitting 25 exercises for part 10 of the course on React Native, you can earn two additional credits. More information about this part''s prerequisites, exercise submission, and credits can be found in [part 10](/en/part10/introduction_to_react_native).-->
+<!-- By submitting 25 exercises for part 10 of the course on React Native, you can earn two additional credits. More information about this part's prerequisites, exercise submission, and credits can be found in [part 10](/en/part10/introduction_to_react_native).-->
 通过提交课程第 10 章节-React Native-的25个练习，可以获得两个额外的学分。有关此章节的先决条件，练习提交和学分的更多信息，请参阅[第10章节](/en/part10/introduction_to_react_native)。
 
 <!-- - Submit at least 25 exercises for part 10.-->
@@ -204,7 +204,7 @@ lang: zh
 
 #### Part 11 - Full Stack Web Development: Continuous Integration / Continuous Delivery (1 cr, CSM14112)
 
-<!-- By submitting all exercises for part 11 of the course on Continuous Integration / Continuous Delivery, you can earn one additional credit. More information about this part''s prerequisites and exercise submission can be found in [part 11](/en/part11).-->
+<!-- By submitting all exercises for part 11 of the course on Continuous Integration / Continuous Delivery, you can earn one additional credit. More information about this part's prerequisites and exercise submission can be found in [part 11](/en/part11).-->
 通过提交课程第 11 章节-持续集成/持续交付-的所有练习，可以获得一个额外的学分。有关此章节的先决条件，练习提交和学分的更多信息，请参阅[第11章节](/en/part11)。
 
 <!-- - Submit all exercises for part 11.-->
@@ -218,7 +218,7 @@ lang: zh
 
 #### Part 12 - Full Stack Web Development: Containers (1 cr, CSM141084)
 
-<!-- By submitting all exercises for part 12 of the course on Container technology, you can earn one additional credit. More information about this part''s prerequisites and exercise submission can be found in [part 12](/en/part12).-->
+<!-- By submitting all exercises for part 12 of the course on Container technology, you can earn one additional credit. More information about this part's prerequisites and exercise submission can be found in [part 12](/en/part12).-->
 通过提交课程第 12 章节-容器技术-的所有练习，可以获得一个额外的学分。有关此章节的先决条件，练习提交和学分的更多信息，请参阅[第12章节](/en/part12)。
 
 <!-- - Submit all exercises for part 12.-->
@@ -232,7 +232,7 @@ lang: zh
 
 #### Part 13 - Full Stack Web Development: Relational databases (1 cr, CSM14114)
 
-<!-- By submitting all exercises for part 13 of the course on Relational databases, you can earn one additional credit. More information about this part''s prerequisites and exercise submission can be found in [part 13](/en/part13).-->
+<!-- By submitting all exercises for part 13 of the course on Relational databases, you can earn one additional credit. More information about this part's prerequisites and exercise submission can be found in [part 13](/en/part13).-->
 通过提交课程第 13 章节-数据库-的所有练习，可以获得一个额外的学分。有关此章节的先决条件，练习提交和学分的更多信息，请参阅[第13章节](/en/part13)。
 
 <!-- - Submit all exercises for part 13.-->

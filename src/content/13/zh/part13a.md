@@ -27,7 +27,7 @@ SQL（结构化查询语言）是一种标准的数据库访问和处理语言�
 我们在本课程的所有前几节中都使用了MongoDB数据库。Mongo是一个[文档数据库](https://en.wikipedia.org/wiki/Document-oriented_database)，其最具特色的一个特征是它是<i>无模式的</i>，也就是说，数据库只有非常有限的了解存储在其集合中的数据类型。数据库的模式只存在于程序代码中，它以特定的方式解释数据，例如通过识别某些字段是指向另一个集合中对象的引用。
 
 <!-- In the example application of parts 3 and 4, the database stores notes and users.-->
-在第三和第四部分的示例应用程序中，数据库存储笔记和用户。
+在第三和第四章节的示例应用程序中，数据库存储笔记和用户。
 
 <!-- A collection of <i>notes</i> that stores notes looks like the following:-->
 一个存储笔记的<i>笔记集</i>如下所示：
@@ -88,7 +88,7 @@ MongoDB不知道存储实体的字段的类型，但是它不知道用户记录i
 对于我们的应用程序，我们需要一个关系数据库。有很多选择，但我们将使用目前最流行的开源解决方案[PostgreSQL](https://www.postgresql.org/)。如果你愿意，你可以在你的机器上安装Postgres（数据库通常称为）。一个更简单的选择是使用Postgres作为云服务，例如[ElephantSQL](https://www.elephantsql.com/)。
 
 <!-- However, we will be taking advantage of the fact that it is possible to create a Postgres database for the application on the Fly.io and Heroku cloud service platforms, which are familiar from the parts 3 and 4.-->
-但是，我们将利用Fly.io和Heroku云服务平台上可以为应用程序创建Postgres数据库的事实，这些平台在第3部分和第4部分都很熟悉。
+但是，我们将利用Fly.io和Heroku云服务平台上可以为应用程序创建Postgres数据库的事实，这些平台在第3章节和第4章节都很熟悉。
 
 <!-- In the theory material of this section, we will be building a Postgres-enabled version from the backend of the notes-storage application, which was built in sections 3 and 4.-->
 在本节的理论材料中，我们将从第3和第4节构建的笔记存储应用程序的后端构建一个启用Postgres的版本。
@@ -206,7 +206,7 @@ pgdata 是一个 Postgres 数据库文件夹，用于存储 Postgres 数据库�
 <!-- Particularly when using a relational database, it is essential to access the database directly as well. There are many ways to do this, there are several different graphical user interfaces, such as [pgAdmin](https://www.pgadmin.org/). However, we will be using Postgres [psql](https://www.postgresql.org/docs/current/app-psql.html) command-line tool.-->
 特别是在使用关系数据库时，直接访问数据库也是必不可少的。有很多方法可以做到这一点，有几种不同的图形用户界面，例如[pgAdmin](https://www.pgadmin.org/)。但是，我们将使用Postgres [psql](https://www.postgresql.org/docs/current/app-psql.html)命令行工具。
 
-<!-- When the console is opened, let''s try the main psql command _\d_, which tells you the contents of the database:-->
+<!-- When the console is opened, let's try the main psql command _\d_, which tells you the contents of the database:-->
 当控制台被打开时，让我们尝试主要的psql命令_\d_，它会告诉你数据库的内容：
 
 ```bash
@@ -222,7 +222,7 @@ Did not find any relations.
 <!-- As you might guess, there is currently nothing in the database.-->
 如你所猜，数据库中目前什么都没有。
 
-<!-- Let''s create a table for notes:-->
+<!-- Let's create a table for notes:-->
 | 标题 | 内容 |
 | :--- | :--- |
 | 记录 | 让我们创建一个表格来记录笔记 |
@@ -239,7 +239,7 @@ CREATE TABLE notes (
 <!-- A few points: column <i>id</i> is defined as a <i>primary key</i>, which means that the value in the column id must be unique for each row in the table and the value must not be empty. The type for this column is defined as [SERIAL](https://www.postgresql.org/docs/9.1/datatype-numeric.html#DATATYPE-SERIAL), which is not the actual type but an abbreviation for an integer column to which Postgres automatically assigns a unique, increasing value when creating rows. The column named <i>content</i> with type text is defined in such a way that it must be assigned a value.-->
 几点：列<i>id</i>被定义为<i>主键</i>，这意味着表中每一行的id列的值必须是唯一的，并且不能为空。该列的类型被定义为[SERIAL](https://www.postgresql.org/docs/9.1/datatype-numeric.html#DATATYPE-SERIAL)，这不是实际的类型，而是一个整数列的缩写，在创建行时，Postgres会自动分配一个唯一的、递增的值。名为<i>content</i>的列的类型为text，它必须分配一个值。
 
-<!-- Let''s look at the situation from the console. First, the _\d_ command, which tells us what tables are in the database:-->
+<!-- Let's look at the situation from the console. First, the _\d_ command, which tells us what tables are in the database:-->
 让我们从控制台来看看这种情况。 首先，_\d_ 命令，它告诉我们数据库中有哪些表：
 
 ```sql
@@ -272,7 +272,7 @@ Indexes:
 <!-- Therefore the column <i>id</i> has a default value, which is obtained by calling the internal function of Postgres <i>nextval</i>.-->
 因此，该列<i>id</i>具有默认值，该值是通过调用Postgres内部函数<i>nextval</i>获得的。
 
-<!-- Let''s add some content to the table:-->
+<!-- Let's add some content to the table:-->
 让我们在表格中添加一些内容：
 
 ```sql
@@ -280,7 +280,7 @@ insert into notes (content, important) values ('Relational databases rule the wo
 insert into notes (content, important) values ('MongoDB is webscale', false);
 ```
 
-<!-- And let''s see what the created content looks like:-->
+<!-- And let's see what the created content looks like:-->
 ## 让我们看看创建的内容长什么样：
 
 ```sql
@@ -316,11 +316,11 @@ ERROR: column "value" of relation "notes" does not exist
 LINE 1: insert into notes (content, important, value) values (''only ...
 ```
 
-Next it''s time to move on to accessing the database from the application.
+Next it's time to move on to accessing the database from the application.
 
 ### Node application using a relational database
 
-Let''s start the application as usual with the <i>npm init</i> and install <i>nodemon</i> as a development dependency and also the following runtime dependencies:
+Let's start the application as usual with the <i>npm init</i> and install <i>nodemon</i> as a development dependency and also the following runtime dependencies:
 
 ```bash
 npm install express dotenv pg sequelize
@@ -328,7 +328,7 @@ npm install express dotenv pg sequelize
 
 Of these, the latter [sequelize](https://sequelize.org/master/) is the library through which we use Postgres. Sequelize is a so-called [Object relational mapping](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping) (ORM) library that allows you to store JavaScript objects in a relational database without using the SQL language itself, similar to Mongoose that we used with MongoDB.
 
-Let''s test that we can connect successfully. Create the file <i>index.js</i> and add the following content:
+Let's test that we can connect successfully. Create the file <i>index.js</i> and add the following content:
 
 ```js
 require('dotenv').config()
@@ -413,7 +413,7 @@ Executing (default): SELECT 1+1 AS result
 Connection has been established successfully.
 ```
 
-If and when the connection works, we can then run the first query. Let''s modify the program as follows:
+If and when the connection works, we can then run the first query. Let's modify the program as follows:
 
 ```js
 require('dotenv').config()
@@ -466,7 +466,7 @@ Executing (default): SELECT * FROM notes
 
 Even though Sequelize is an ORM library, which means there is little need to write SQL yourself when using it, we just used [direct SQL](https://sequelize.org/master/manual/raw-queries.html) with the sequelize method [query](https://sequelize.org/api/v6/class/src/sequelize.js~sequelize#instance-method-query).
 
-Since everything seems to be working, let''s change the application into a web application.
+Since everything seems to be working, let's change the application into a web application.
 
 ```js
 require('dotenv').config()
@@ -496,7 +496,7 @@ app.listen(PORT, () => {
 // highlight-end
 ```
 
-The application seems to be working. However, let''s now switch to using Sequelize instead of SQL as it is intended to be used.
+The application seems to be working. However, let's now switch to using Sequelize instead of SQL as it is intended to be used.
 
 ### Model
 
@@ -574,7 +574,7 @@ The name of the corresponding column in the database would be <i>creation_year</
 
 We have also defined <i>modelName: 'note'</i>, the default "model name" would be capitalized <i>Note</i>. However we want to have a lowercase initial, it will make a few things a bit more convenient going forward.
 
-The database operation is easy to do using the [query interface](https://sequelize.org/master/manual/model-querying-basics.html) provided by models, the method [findAll](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findAll) works exactly as it is assumed by it''s name to work:
+The database operation is easy to do using the [query interface](https://sequelize.org/master/manual/model-querying-basics.html) provided by models, the method [findAll](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findAll) works exactly as it is assumed by it's name to work:
 
 ```js
 app.get('/api/notes', async (req, res) => {
@@ -589,7 +589,7 @@ The console tells you that the method call <i>Note.findAll()</i> causes the foll
 Executing (default): SELECT "id", "content", "important", "date" FROM "notes" AS "note";
 ```
 
-Next, let''s implement an endpoint for creating new notes:
+Next, let's implement an endpoint for creating new notes:
 
 ```js
 app.use(express.json())
@@ -603,7 +603,7 @@ app.post('/api/notes', async (req, res) => {
 })
 ```
 
-Creating a new note is done by calling the model''s <i>Note</i> method [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) and passing as a parameter an object that defines the values of the columns.
+Creating a new note is done by calling the model's <i>Note</i> method [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) and passing as a parameter an object that defines the values of the columns.
 
 Instead of the <i>create</i> method, it [is also possible](https://sequelize.org/master/manual/model-instances.html#creating-an-instance) to save to a database using the [build](https://sequelize.org/api/v6/class/src/model.js~model#static-method-build) method first to create a Model-object from the desired data, and then calling the [save](https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-save) method on it:
 
@@ -620,7 +620,7 @@ note.important = true // highlight-line
 await note.save()
 ```
 
-For the use case of the example code, the [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) method is better suited, so let''s stick to that.
+For the use case of the example code, the [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) method is better suited, so let's stick to that.
 
 If the object being created is not valid, there is an error message as a result. For example, when trying to create a note without content, the operation fails, and the console reveals the reason to be <i>SequelizeValidationError: notNull Violation Note.content cannot be null</i>:
 
@@ -630,7 +630,7 @@ If the object being created is not valid, there is an error message as a result.
     at processTicksAndRejections (internal/process/task_queues.js:93:5)
 ```
 
-Let''s add some simple error handling when adding a new note:
+Let's add some simple error handling when adding a new note:
 
 ```js
 app.post('/api/notes', async (req, res) => {
@@ -689,7 +689,7 @@ Our application now has one unpleasant side, it assumes that a database with exa
 
 Since the program code is being stored on GitHub, it would make sense to also store the commands that create the database in the context of the program code, so that the database schema is definitely the same as what the program code is expecting. Sequelize is actually able to generate a schema automatically from the model definition by using the models method [sync](https://sequelize.org/master/manual/model-basics.html#model-synchronization).
 
-Let''s now destroy the database from the console by entering the following command:
+Let's now destroy the database from the console by entering the following command:
 
 ```
 drop table notes;
@@ -704,7 +704,7 @@ Did not find any relations.
 
 The application no longer works.
 
-Let''s add the following command to the application immediately after the model <i>Note</i> is defined:
+Let's add the following command to the application immediately after the model <i>Note</i> is defined:
 
 ```js
 Note.sync()
@@ -720,7 +720,7 @@ That is, when the application starts, the command <i>CREATE TABLE IF NOT EXISTS 
 
 ### Other operations
 
-Let''s complete the application with a few more operations.
+Let's complete the application with a few more operations.
 
 Searching for a single note is possible with the method [findByPk](https://sequelize.org/docs/v6/core-concepts/model-querying-finders/#findbypk), because it is retrieved based on the id of the primary key:
 
@@ -743,7 +743,7 @@ Executing (default): SELECT "id", "content", "important", "date" FROM "notes" AS
 
 If no note is found, the operation returns <i>null</i>, and in this case the relevant status code is given.
 
-Modifying the note is done as follows. Only the modification of the <i>important</i> field is supported, since the application''s frontend does not need anything else:
+Modifying the note is done as follows. Only the modification of the <i>important</i> field is supported, since the application's frontend does not need anything else:
 
 ```js
 app.put('/api/notes/:id', async (req, res) => {

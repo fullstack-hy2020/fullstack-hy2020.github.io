@@ -25,7 +25,7 @@ Visual Studio Code 调试器在某些情况下可能很有用。你可以像这�
 <!-- Note that the application shouldn''t be running in another console, otherwise the port will already be in use.-->
 **注意，应用程序不应该在另一个控制台中运行，否则端口将已经被使用。**
 
-<!-- __NB__ A newer version of Visual Studio Code may have _Run_ instead of _Debug_. Furthermore, you may have to configure your _launch.json_ file to start debugging. This can be done by choosing _Add Configuration..._ on the drop-down menu, which is located next to the green play button and above _VARIABLES_ menu, and select _Run "npm start" in a debug terminal_. For more detailed setup instructions, visit Visual Studio Code''s [Debugging documentation](https://code.visualstudio.com/docs/editor/debugging).-->
+<!-- __NB__ A newer version of Visual Studio Code may have _Run_ instead of _Debug_. Furthermore, you may have to configure your _launch.json_ file to start debugging. This can be done by choosing _Add Configuration..._ on the drop-down menu, which is located next to the green play button and above _VARIABLES_ menu, and select _Run "npm start" in a debug terminal_. For more detailed setup instructions, visit Visual Studio Code's [Debugging documentation](https://code.visualstudio.com/docs/editor/debugging).-->
 __NB__ 可能会有比 _Debug_ 更新版本的 Visual Studio Code。此外，您可能需要配置 _launch.json_ 档案才能开始侦错。这可以通过在绿色播放按钮旁的下拉式功能表上选择 _Add Configuration..._，并在 _VARIABLES_ 功能表上方选择 _Run "npm start" in a debug terminal_ 来完成。有关更详细的设定说明，请访问 Visual Studio Code 的[侦错文档](https://code.visualstudio.com/docs/editor/debugging)。
 
 <!-- Below you can see a screenshot where the code execution has been paused in the middle of saving a new note:-->
@@ -61,7 +61,7 @@ node --inspect index.js
 
 ![dev tools sources tab breakpoint and watch variables](../../images/3/38eb.png)
 
-<!-- All of the application''s <i>console.log</i> messages will appear in the <i>Console</i> tab of the debugger. You can also inspect values of variables and execute your own JavaScript code.-->
+<!-- All of the application's <i>console.log</i> messages will appear in the <i>Console</i> tab of the debugger. You can also inspect values of variables and execute your own JavaScript code.-->
 所有应用程序的<i>console.log</i>消息都会出现在调试器的<i>控制台</i>选项卡中。您还可以检查变量的值并执行自己的JavaScript代码。
 
 ![dev tools console tab showing note object typed in](../../images/3/39ea.png)
@@ -110,13 +110,13 @@ node --inspect index.js
 
 ![mongodb picking shared, aws and region](../../images/3/mongo2.png)
 
-<!-- Let''s wait for the cluster to be ready for use. This can take some minutes.-->
+<!-- Let's wait for the cluster to be ready for use. This can take some minutes.-->
 让我们等待集群准备就绪，这可能需要几分钟。
 
 <!-- **NB** do not continue before the cluster is ready.-->
 **注意：**在集群准备就绪之前不要继续。
 
-<!-- Let''s use the <i>security</i> tab for creating user credentials for the database. Please note that these are not the same credentials you use for logging into MongoDB Atlas. These will be used for your application to connect to the database.-->
+<!-- Let's use the <i>security</i> tab for creating user credentials for the database. Please note that these are not the same credentials you use for logging into MongoDB Atlas. These will be used for your application to connect to the database.-->
 让我们使用<i>安全性</i>标签来为数据库创建用户凭据。请注意，这些不是您用于登录MongoDB Atlas的凭据。这些将用于您的应用程序连接到数据库。
 
 ![mongodb security quickstart](../../images/3/mongo3.png)
@@ -158,7 +158,7 @@ mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/?retryWrites=true&
 <!-- Mongoose could be described as an <i>object document mapper</i> (ODM), and saving JavaScript objects as Mongo documents is straightforward with this library.-->
 Mongoose 可以被描述为一个 <i> 对象文档映射器 </i> (ODM)，使用这个库可以很容易地将 JavaScript 对象保存为 Mongo 文档。
 
-<!-- Let''s install Mongoose in our notes project backend:-->
+<!-- Let's install Mongoose in our notes project backend:-->
 让我们在我们的笔记项目后端安装Mongoose：
 
 ```bash
@@ -228,7 +228,7 @@ const password = process.argv[2]
 
 ![mongodb collections tab db myfirst app notes](../../images/3/mongo8new.png)
 
-<!-- Let''s destroy the default database <i>test</i> and change the name of the database referenced in our connection string to <i>noteApp</i> instead, by modifying the URI:-->
+<!-- Let's destroy the default database <i>test</i> and change the name of the database referenced in our connection string to <i>noteApp</i> instead, by modifying the URI:-->
 让我们摧毁默认的数据库<i>test</i>，并将连接字符串中引用的数据库名称改为<i>noteApp</i>，通过修改URI来实现：
 
 ```js
@@ -236,7 +236,7 @@ const url =
   `mongodb+srv://fullstack:${password}@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority`
 ```
 
-<!-- Let''s run our code again:-->
+<!-- Let's run our code again:-->
 让我们再次运行我们的代码：
 
 ![mongodb collections tab noteApp notes](../../images/3/mongo9.png)
@@ -282,7 +282,7 @@ const note = new Note({
 })
 ```
 
-<!-- Models are so-called <i>constructor functions</i> that create new JavaScript objects based on the provided parameters. Since the objects are created with the model''s constructor function, they have all the properties of the model, which include methods for saving the object to the database.-->
+<!-- Models are so-called <i>constructor functions</i> that create new JavaScript objects based on the provided parameters. Since the objects are created with the model's constructor function, they have all the properties of the model, which include methods for saving the object to the database.-->
 模型是所谓的<i>构造函数</i>，根据提供的参数创建新的JavaScript对象。由于对象是使用模型的构造函数创建的，它们具有模型的所有属性，其中包括用于将对象保存到数据库的方法。
 
 <!-- Saving the object to the database happens with the appropriately named _save_ method, which can be provided with an event handler with the _then_ method:-->
@@ -301,7 +301,7 @@ note.save().then(result => {
 <!-- The result of the save operation is in the _result_ parameter of the event handler. The result is not that interesting when we''re storing one object in the database. You can print the object to the console if you want to take a closer look at it while implementing your application or during debugging.-->
 结果保存操作存储在事件处理程序的_result_参数中。当我们在数据库中存储一个对象时，结果并不是很有趣。如果你想在实现应用程序或调试时更仔细地查看它，可以将对象打印到控制台。
 
-<!-- Let''s also save a few more notes by modifying the data in the code and by executing the program again.-->
+<!-- Let's also save a few more notes by modifying the data in the code and by executing the program again.-->
 让我们通过修改代码中的数据以及再次执行程序来保存更多笔记。
 
 <!-- **NB:** Unfortunately the Mongoose documentation is not very consistent, with parts of it using callbacks in its examples and other parts, other styles, so it is not recommended to copy and paste code directly from there. Mixing promises with old-school callbacks in the same code is not recommended.-->
@@ -309,7 +309,7 @@ note.save().then(result => {
 
 ### Fetching objects from the database
 
-<!-- Let''s comment out the code for generating new notes and replace it with the following:-->
+<!-- Let's comment out the code for generating new notes and replace it with the following:-->
 让我们注释掉用于生成新笔记的代码，并用下面的代码替换它：
 
 ```js
@@ -443,7 +443,7 @@ Person
 <!-- Now we have enough knowledge to start using Mongo in our notes application backend.-->
 现在我们有足够的知识开始在我们的笔记应用后端使用Mongo了。
 
-<!-- Let''s get a quick start by copy-pasting the Mongoose definitions to the <i>index.js</i> file:-->
+<!-- Let's get a quick start by copy-pasting the Mongoose definitions to the <i>index.js</i> file:-->
 让我们通过将Mongoose定义复制粘贴到<i>index.js</i>文件中来快速开始：
 
 ```js
@@ -464,7 +464,7 @@ const noteSchema = new mongoose.Schema({
 const Note = mongoose.model('Note', noteSchema)
 ```
 
-<!-- Let''s change the handler for fetching all notes to the following form:-->
+<!-- Let's change the handler for fetching all notes to the following form:-->
 让我们把获取所有笔记的处理器改成以下形式：
 
 ```js
@@ -521,10 +521,10 @@ app.get('/api/notes', (request, response) => {
 
 ### Database configuration into its own module
 
-<!-- Before we refactor the rest of the backend to use the database, let''s extract the Mongoose-specific code into its own module.-->
+<!-- Before we refactor the rest of the backend to use the database, let's extract the Mongoose-specific code into its own module.-->
 在我们把后端的其余部分重构使用数据库之前，让我们把Mongoose特定的代码提取到自己的模块中。
 
-<!-- Let''s create a new directory for the module called <i>models</i>, and add a file called <i>note.js</i>:-->
+<!-- Let's create a new directory for the module called <i>models</i>, and add a file called <i>note.js</i>:-->
 让我们为模块创建一个新的目录叫做<i>models</i>，并添加一个叫做<i>note.js</i>的文件：
 
 ```js
@@ -563,7 +563,7 @@ module.exports = mongoose.model('Note', noteSchema) // highlight-line
 ```
 
 <!-- Defining Node [modules](https://nodejs.org/docs/latest-v8.x/api/modules.html) differs slightly from the way of defining [ES6 modules](/en/part2/rendering_a_collection_modules#refactoring-modules) in part 2.-->
-定义Node [模块](https://nodejs.org/docs/latest-v8.x/api/modules.html)与在第2部分定义[ES6模块](/en/part2/rendering_a_collection_modules#refactoring-modules)的方式略有不同。
+定义Node [模块](https://nodejs.org/docs/latest-v8.x/api/modules.html)与在第2章节定义[ES6模块](/en/part2/rendering_a_collection_modules#refactoring-modules)的方式略有不同。
 
 <!-- The public interface of the module is defined by setting a value to the _module.exports_ variable. We will set the value to be the <i>Note</i> model. The other things defined inside of the module, like the variables _mongoose_ and _url_ will not be accessible or visible to users of the module.-->
 模块的公共接口由将一个值设置到`_module.exports_`变量来定义。我们将该值设置为<i>Note</i>模型。模块内部定义的其他东西，比如变量`_mongoose_`和`_url_`，将不可访问或可见给模块的用户。
@@ -595,7 +595,7 @@ mongoose.connect(url)
   })
 ```
 
-<!-- It''s not a good idea to hardcode the address of the database into the code, so instead the address of the database is passed to the application via the <em>MONGODB_URI</em> environment variable.-->
+<!-- It's not a good idea to hardcode the address of the database into the code, so instead the address of the database is passed to the application via the <em>MONGODB_URI</em> environment variable.-->
 这不是一个好主意，将数据库的地址硬编码到代码中，所以把数据库的地址通过<em>MONGODB_URI</em>环境变量传递给应用程序。
 
 <!-- The method for establishing the connection is now given functions for dealing with a successful and unsuccessful connection attempt. Both functions just log a message to the console about the success status:-->
@@ -636,7 +636,7 @@ PORT=3001
 <!-- The environment variables defined in the <i>.env</i> file can be taken into use with the expression <em>require('dotenv').config()</em> and you can reference them in your code just like you would reference normal environment variables, with the familiar <em>process.env.MONGODB_URI</em> syntax.-->
 `.env` 文件中定义的环境变量可以通过表达式 `require('dotenv').config()` 使用，您可以像引用正常环境变量一样在代码中引用它们，使用熟悉的 `process.env.MONGODB_URI` 语法。
 
-<!-- Let''s change the <i>index.js</i> file in the following way:-->
+<!-- Let's change the <i>index.js</i> file in the following way:-->
 让我们以下面的方式更改<i>index.js</i>文件：
 
 ```js
@@ -653,7 +653,7 @@ app.listen(PORT, () => {
 })
 ```
 
-<!-- It''s important that <i>dotenv</i> gets imported before the <i>note</i> model is imported. This ensures that the environment variables from the <i>.env</i> file are available globally before the code from the other modules is imported.-->
+<!-- It's important that <i>dotenv</i> gets imported before the <i>note</i> model is imported. This ensures that the environment variables from the <i>.env</i> file are available globally before the code from the other modules is imported.-->
 <i>dotenv</i> 在 <i>note</i> 模型导入之前必须导入，这样可以确保从 <i>.env</i> 文件中获取的环境变量在其他模块的代码导入之前就可以全局访问。
 
 ### Important note to Fly.io users
@@ -691,7 +691,7 @@ fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.m
 
 ### Using database in route handlers
 
-<!-- Next, let''s change the rest of the backend functionality to use the database.-->
+<!-- Next, let's change the rest of the backend functionality to use the database.-->
 接下来，让我们把后端的其余功能改用数据库。
 
 <!-- Creating a new note is accomplished like this:-->
@@ -726,7 +726,7 @@ app.post('/api/notes', (request, response) => {
 response.json(savedNote)
 ```
 
-<!-- Using Mongoose''s [findById](https://mongoosejs.com/docs/api/model.html#model_Model-findById) method, fetching an individual note gets changed into the following:-->
+<!-- Using Mongoose's [findById](https://mongoosejs.com/docs/api/model.html#model_Model-findById) method, fetching an individual note gets changed into the following:-->
 使用Mongoose的[findById](https://mongoosejs.com/docs/api/model.html#model_Model-findById)方法，抓取单个笔记变为以下内容：
 
 ```js
@@ -747,7 +747,7 @@ app.get('/api/notes/:id', (request, response) => {
 <!-- Only once everything has been verified to work in the backend, is it a good idea to test that the frontend works with the backend. It is highly inefficient to test things exclusively through the frontend.-->
 只有在后端验证所有内容都可以正常工作之后，测试前端与后端的兼容性才是一个好主意。仅仅通过前端来测试是极其低效的。
 
-<!-- It''s probably a good idea to integrate the frontend and backend one functionality at a time. First, we could implement fetching all of the notes from the database and test it through the backend endpoint in the browser. After this, we could verify that the frontend works with the new backend. Once everything seems to be working, we would move on to the next feature.-->
+<!-- It's probably a good idea to integrate the frontend and backend one functionality at a time. First, we could implement fetching all of the notes from the database and test it through the backend endpoint in the browser. After this, we could verify that the frontend works with the new backend. Once everything seems to be working, we would move on to the next feature.-->
 可能最好是一次只整合前端和后端的一个功能。首先，我们可以实现从数据库中获取所有笔记，并在浏览器中通过后端端点进行测试。之后，我们可以验证前端与新的后端是否能够正常工作。一切似乎都正常的时候，我们就可以继续进行下一个功能的实现了。
 
 <!-- Once we introduce a database into the mix, it is useful to inspect the state persisted in the database, e.g. from the control panel in MongoDB Atlas. Quite often little Node helper programs like the <i>mongo.js</i> program we wrote earlier can be very helpful during development.-->
@@ -793,7 +793,7 @@ app.get('/api/notes/:id', (request, response) => {
 <!-- If we try to visit the URL of a note with an id that does not exist e.g. <http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431> where <i>5c41c90e84d891c15dfa3431</i> is not an id stored in the database, then the response will be _null_.-->
 如果我们尝试访问一个id不存在的笔记URL，例如<http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431>，其中<i>5c41c90e84d891c15dfa3431</i>不是数据库中存储的id，那么响应将是_null_。
 
-<!-- Let's change this behavior so that if a note with the given id doesn't exist, the server will respond to the request with the HTTP status code 404 not found. In addition let''s implement a simple <em>catch</em> block to handle cases where the promise returned by the <em>findById</em> method is <i>rejected</i>:-->
+<!-- Let's change this behavior so that if a note with the given id doesn't exist, the server will respond to the request with the HTTP status code 404 not found. In addition let's implement a simple <em>catch</em> block to handle cases where the promise returned by the <em>findById</em> method is <i>rejected</i>:-->
 让我们改变这种行为，以便如果给定ID的笔记不存在，服务器将使用HTTP状态代码404未找到来响应请求。此外，让我们实现一个简单的<em>catch</em>块来处理<em>findById</em>方法返回的promise被<i>拒绝</i>的情况：
 
 ```js
@@ -839,7 +839,7 @@ Body:   {}
 
 Given a malformed id as an argument, the <em>findById</em> method will throw an error causing the returned promise to be rejected. This will cause the callback function defined in the <em>catch</em> block to be called.
 
-Let''s make some small adjustments to the response in the <em>catch</em> block:
+Let's make some small adjustments to the response in the <em>catch</em> block:
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
@@ -864,9 +864,9 @@ If the format of the id is incorrect, then we will end up in the error handler d
 
 We have also added some data to the response to shed some light on the cause of the error.
 
-When dealing with Promises, it''s almost always a good idea to add error and exception handling. Otherwise, you will find yourself dealing with strange bugs.
+When dealing with Promises, it's almost always a good idea to add error and exception handling. Otherwise, you will find yourself dealing with strange bugs.
 
-It''s never a bad idea to print the object that caused the exception to the console in the error handler:
+It's never a bad idea to print the object that caused the exception to the console in the error handler:
 
 ```js
 .catch(error => {
@@ -885,7 +885,7 @@ Every time you''re working on a project with a backend, <i>it is critical to kee
 
 We have written the code for the error handler among the rest of our code. This can be a reasonable solution at times, but there are cases where it is better to implement all error handling in a single place. This can be particularly useful if we want to report data related to errors to an external error-tracking system like [Sentry](https://sentry.io/welcome/) later on.
 
-Let''s change the handler for the <i>/api/notes/:id</i> route so that it passes the error forward with the <em>next</em> function. The next function is passed to the handler as the third parameter:
+Let's change the handler for the <i>/api/notes/:id</i> route so that it passes the error forward with the <em>next</em> function. The next function is passed to the handler as the third parameter:
 
 ```js
 app.get('/api/notes/:id', (request, response, next) => { // highlight-line
@@ -971,7 +971,7 @@ app.use(express.json())
 
 Then the JSON data sent with the HTTP requests would not be available for the logger middleware or the POST route handler, since the _request.body_ would be _undefined_ at that point.
 
-It''s also important that the middleware for handling unsupported routes is next to the last middleware that is loaded into Express, just before the error handler.
+It's also important that the middleware for handling unsupported routes is next to the last middleware that is loaded into Express, just before the error handler.
 
 For example, the following loading order would cause an issue:
 
@@ -992,7 +992,7 @@ Now the handling of unknown endpoints is ordered <i>before the HTTP request hand
 
 ### Other operations
 
-Let''s add some missing functionality to our application, including deleting and updating an individual note.
+Let's add some missing functionality to our application, including deleting and updating an individual note.
 
 The easiest way to delete a note from the database is with the [findByIdAndRemove](https://mongoosejs.com/docs/api/model.html#model_Model-findByIdAndRemove) method:
 
@@ -1037,7 +1037,7 @@ After testing the backend directly with Postman and the VS Code REST client, we 
 
 You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5).
 
-### A true full stack developer''s oath
+### A true full stack developer's oath
 
 It is again time for the exercises. The complexity of our app is now taken another step since besides frontend and backend we also have a database.
 There are indeed really many potential sources of error.
@@ -1073,7 +1073,7 @@ Move the error handling of the application to a new error handler middleware.
 
 #### 3.17*: Phonebook database, step5
 
-If the user tries to create a new phonebook entry for a person whose name is already in the phonebook, the frontend will try to update the phone number of the existing entry by making an HTTP PUT request to the entry''s unique URL.
+If the user tries to create a new phonebook entry for a person whose name is already in the phonebook, the frontend will try to update the phone number of the existing entry by making an HTTP PUT request to the entry's unique URL.
 
 Modify the backend to support this request.
 

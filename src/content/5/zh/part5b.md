@@ -9,7 +9,7 @@ lang: zh
 
 ### Displaying the login form only when appropriate
 
-<!-- Let''s modify the application so that the login form is not displayed by default:-->
+<!-- Let's modify the application so that the login form is not displayed by default:-->
 让我们修改应用程序，使登录表单默认不显示：
 
 ![browser showing log in button by default](../../images/5/10e.png)
@@ -22,7 +22,7 @@ lang: zh
 <!-- The user can close the login form by clicking the <i>cancel</i> button.-->
 用户可以通过点击<i>取消</i>按钮关闭登录表单。
 
-<!-- Let''s start by extracting the login form into its own component:-->
+<!-- Let's start by extracting the login form into its own component:-->
 让我们从把登录表单提取到它自己的组件开始：
 
 ```js
@@ -262,7 +262,7 @@ export default Togglable
 <!-- The <i>Togglable</i> component is reusable and we can use it to add similar visibility toggling functionality to the form that is used for creating new notes.-->
 <i>可切换</i>组件是可复用的，我们可以使用它来为用于创建新笔记的表单添加类似的可见性切换功能。
 
-<!-- Before we do that, let''s extract the form for creating notes into a component:-->
+<!-- Before we do that, let's extract the form for creating notes into a component:-->
 在我们做之前，让我们把创建笔记的表单提取到一个组件中：
 
 ```js
@@ -283,7 +283,7 @@ const NoteForm = ({ onSubmit, handleChange, value}) => {
 }
 ```
 
-<!-- Next let''s define the form component inside of a <i>Togglable</i> component:-->
+<!-- Next let's define the form component inside of a <i>Togglable</i> component:-->
 接下来，让我们来定义<i>可切换</i>组件内部的表单组件：
 
 ```js
@@ -404,10 +404,10 @@ or you can clone the repository
 <!-- After a new note is created, it would make sense to hide the new note form. Currently, the form stays visible. There is a slight problem with hiding the form. The visibility is controlled with the <i>visible</i> variable inside of the <i>Togglable</i> component. How can we access it outside of the component?-->
 在创建一个新笔记之后，隐藏新笔记表单会是一个明智的做法。目前，表单仍然可见。这里有一个小问题：可见性是由<i>Togglable</i>组件内的<i>visible</i>变量控制的。那么，我们如何在组件外部访问它呢？
 
-<!-- There are many ways to implement closing the form from the parent component, but let''s use the [ref](https://react.dev/learn/referencing-values-with-refs) mechanism of React, which offers a reference to the component.-->
+<!-- There are many ways to implement closing the form from the parent component, but let's use the [ref](https://react.dev/learn/referencing-values-with-refs) mechanism of React, which offers a reference to the component.-->
 有很多种方式可以实现从父组件关闭表单，但让我们使用React的[ref](https://react.dev/learn/referencing-values-with-refs)机制，它提供了对组件的引用。
 
-<!-- Let''s make the following changes to the <i>App</i> component:-->
+<!-- Let's make the following changes to the <i>App</i> component:-->
 让我们对<i>App</i>组件做出以下更改：
 
 ```js
@@ -498,7 +498,7 @@ const App = () => {
 总结一下，[useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle)函数是一个React hook，用于在组件中定义可以从组件外部调用的函数。
 
 <!-- This trick works for changing the state of a component, but it looks a bit unpleasant. We could have accomplished the same functionality with slightly cleaner code using "old React" class-based components. We will take a look at these class components during part 7 of the course material. So far this is the only situation where using React hooks leads to code that is not cleaner than with class components.-->
-这个技巧可以改变组件的状态，但看起来有点不太好。我们可以用“旧的React”基于类的组件用稍微更清晰的代码实现同样的功能。我们将在课程材料的第7部分讨论这些类组件。到目前为止，这是使用React钩子导致代码不比类组件更清洁的唯一情况。
+这个技巧可以改变组件的状态，但看起来有点不太好。我们可以用“旧的React”基于类的组件用稍微更清晰的代码实现同样的功能。我们将在课程材料的第7章节讨论这些类组件。到目前为止，这是使用React钩子导致代码不比类组件更清洁的唯一情况。
 
 <!-- There are also [other use cases](https://reactjs.org/docs/refs-and-the-dom.html) for refs than accessing React components.-->
 也有[其他用例](https://reactjs.org/docs/refs-and-the-dom.html) 不仅仅是用于访问 React 组件的 refs。
@@ -546,7 +546,7 @@ const Togglable = () => ...
 <!-- The <i>ref</i> attribute is used for assigning a reference to each of the components in the variables <i>togglable1</i>, <i>togglable2</i> and <i>togglable3</i>.-->
 <i>ref</i>属性用于为变量<i>togglable1</i>、<i>togglable2</i>和<i>togglable3</i>中的每个组件分配引用。
 
-### The updated full stack developer''s oath
+### The updated full stack developer's oath
 
 <!-- The number of moving parts increases. At the same time, the likelihood of ending up in a situation where we are looking for a bug in the wrong place increases. So we need to be even more systematic.-->
 随着零件数量的增加，最终陷入在错误的地方寻找 bug 的情况的可能性也会增加。因此我们需要更加系统地处理。
@@ -593,7 +593,7 @@ const Togglable = () => ...
 #### 5.5 Blog list frontend, step5
 
 <!-- Change the form for creating blog posts so that it is only displayed when appropriate. Use functionality similar to what was shown [earlier in this part of the course material](/en/part5/props_children_and_proptypes#displaying-the-login-form-only-when-appropriate). If you wish to do so, you can use the <i>Togglable</i> component defined in part 5.-->
-改变创建博客文章的表单，以便仅在适当的情况下才显示。使用与本课程材料[早些时候展示的](/en/part5/props_children_and_proptypes#displaying-the-login-form-only-when-appropriate)功能类似的功能。如果您愿意，可以使用第5部分定义的<i>Togglable</i>组件。
+改变创建博客文章的表单，以便仅在适当的情况下才显示。使用与本课程材料[早些时候展示的](/en/part5/props_children_and_proptypes#displaying-the-login-form-only-when-appropriate)功能类似的功能。如果您愿意，可以使用第5章节定义的<i>Togglable</i>组件。
 
 <!-- By default the form is not visible-->
 默认情况下，表格不可见
@@ -618,7 +618,7 @@ const Togglable = () => ...
 
 #### 5.7 Blog list frontend, step7
 
-<!-- Let''s add a button to each blog, which controls whether all of the details about the blog are shown or not.-->
+<!-- Let's add a button to each blog, which controls whether all of the details about the blog are shown or not.-->
 让我们为每个博客添加一个按钮，用来控制是否显示所有关于博客的细节。
 
 <!-- Full details of the blog open when the button is clicked.-->
@@ -753,7 +753,7 @@ const Blog = ({ blog }) => {
 <!-- We would like to enforce that when the <i>Togglable</i> component is used, the button label text prop must be given a value.-->
 我们希望强制要求，当使用<i>可切换</i>组件时，按钮标签文本prop必须被赋值。
 
-<!-- The expected and required props of a component can be defined with the [prop-types](https://github.com/facebook/prop-types) package. Let''s install the package:-->
+<!-- The expected and required props of a component can be defined with the [prop-types](https://github.com/facebook/prop-types) package. Let's install the package:-->
 [prop-types](https://github.com/facebook/prop-types) 包可以用来定义组件的预期和必需的 props。让我们来安装该包：
 
 ```shell
@@ -783,7 +783,7 @@ Togglable.propTypes = {
 <!-- The application still works and nothing forces us to define props despite the PropTypes definitions. Mind you, it is extremely unprofessional to leave <i>any</i> red output in the browser console.-->
 应用程序仍然有效，尽管有PropTypes定义，但没有任何强迫我们定义props。请注意，在浏览器控制台留下<i>任何</i>红色输出都是极不专业的。
 
-<!-- Let''s also define PropTypes to the <i>LoginForm</i> component:-->
+<!-- Let's also define PropTypes to the <i>LoginForm</i> component:-->
 也让我们为 <i>LoginForm</i> 组件定义 PropTypes：
 
 ```js
@@ -815,10 +815,10 @@ LoginForm.propTypes = {
 
 ### ESlint
 
-<!-- In part 3 we configured the [ESlint](/en/part3/validation_and_es_lint#lint) code style tool to the backend. Let''s take ESlint to use in the frontend as well.-->
-在第三部分，我们将[ESlint](/en/part3/validation_and_es_lint#lint)代码风格工具配置到了后端。让我们也将ESlint用于前端。
+<!-- In part 3 we configured the [ESlint](/en/part3/validation_and_es_lint#lint) code style tool to the backend. Let's take ESlint to use in the frontend as well.-->
+在第三章节，我们将[ESlint](/en/part3/validation_and_es_lint#lint)代码风格工具配置到了后端。让我们也将ESlint用于前端。
 
-<!-- Create-react-app has installed ESlint to the project by default, so all that''s left for us to do is define our desired configuration in the <i>.eslintrc.js</i> file.-->
+<!-- Create-react-app has installed ESlint to the project by default, so all that's left for us to do is define our desired configuration in the <i>.eslintrc.js</i> file.-->
 默认情况下，Create-react-app已经将ESLint安装到项目中，因此我们要做的就是在<i>.eslintrc.js</i>文件中定义所需的配置。
 
 
@@ -832,7 +832,7 @@ LoginForm.propTypes = {
 npm install --save-dev eslint-plugin-jest
 ```
 
-<!-- Let''s create a <i>.eslintrc.js</i> file with the following contents:-->
+<!-- Let's create a <i>.eslintrc.js</i> file with the following contents:-->
 让我们创建一个<i>.eslintrc.js</i>文件，内容如下：
 
 ```js
@@ -897,7 +897,7 @@ module.exports = {
 <!-- NOTE: If you are using Visual Studio Code together with ESLint plugin, you might need to add a workspace setting for it to work. If you are seeing ```Failed to load plugin react: Cannot find module 'eslint-plugin-react'``` additional configuration is needed. Adding the line ```"eslint.workingDirectories": [{ "mode": "auto" }]``` to settings.json in the workspace seems to work. See [here](https://github.com/microsoft/vscode-eslint/issues/880#issuecomment-578052807) for more information.-->
 如果您使用Visual Studio Code配合ESLint插件，您可能需要添加一个工作区设置才能让它正常工作。如果您看到```Failed to load plugin react: Cannot find module 'eslint-plugin-react'```，则需要额外的配置。将行```"eslint.workingDirectories": [{ "mode": "auto" }]```添加到工作区中的settings.json似乎可以正常工作。有关更多信息，请参见[这里](https://github.com/microsoft/vscode-eslint/issues/880#issuecomment-578052807)。
 
-<!-- Let''s create [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) file with the following contents to the repository root-->
+<!-- Let's create [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) file with the following contents to the repository root-->
 让我们在存储库根目录创建[.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories)文件，其内容如下：
 
 ```bash
@@ -974,7 +974,7 @@ export default Togglable
 <!-- Define PropTypes for one of the components of your application, and add ESlint to the project. Define the configuration according to your liking. Fix all of the linter errors.-->
 定义应用程序的一个组件的PropTypes，并将ESlint添加到项目中。根据您的喜好定义配置。修复所有的linter错误。
 
-<!-- Create-react-app has installed ESlint to the project by default, so all that''s left for you to do is define your desired configuration in the <i>.eslintrc.js</i> file.-->
+<!-- Create-react-app has installed ESlint to the project by default, so all that's left for you to do is define your desired configuration in the <i>.eslintrc.js</i> file.-->
 默认情况下，Create-react-app已经将ESlint安装到了项目中，因此您所要做的就是在<i>.eslintrc.js</i>文件中定义所需的配置。
 
 <!-- *NB:* do not run the _eslint --init_ command. It will install the latest version of ESlint that is not compatible with the configuration file created by create-react-app!-->

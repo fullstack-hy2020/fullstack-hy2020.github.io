@@ -133,10 +133,10 @@ const App = () => {
 <!-- However, the HTTP request is completed so quickly that even the most astute will not be able to see the text. When the request is completed, the component is rendered again. The query is in the state <i>success</i> on the second rendering, and the field <i>data</i> of the query object contains the data returned by the request, i.e. the list of notes that is rendered on the screen.-->
 然而，HTTP请求完成得如此之快，以至于即使是最精明的人也无法看到文本。当请求完成时，组件会再次渲染。在第二次渲染中，查询的状态为<i>成功</i>，查询对象的<i>数据</i>字段包含请求返回的数据，即在屏幕上渲染的笔记列表。
 
-<!-- So the application retrieves data from the server and renders it on the screen without using the React hooks <i>useState</i> and <i>useEffect</i> used in chapters 2-5 at all. The data on the server is now entirely under the administration of the React Query library, and the application does not need the state defined with React''s <i>useState</i> hook at all!-->
+<!-- So the application retrieves data from the server and renders it on the screen without using the React hooks <i>useState</i> and <i>useEffect</i> used in chapters 2-5 at all. The data on the server is now entirely under the administration of the React Query library, and the application does not need the state defined with React's <i>useState</i> hook at all!-->
 因此，该应用程序不使用第2-5章中的React钩子<i>useState</i>和<i>useEffect</i>来从服务器检索数据并在屏幕上呈现它。服务器上的数据现在完全由React Query库管理，应用程序根本不需要使用React的<i>useState</i>钩子定义状态！
 
-<!-- Let''s move the function making the actual HTTP request to its own file <i>requests.js</i>-->
+<!-- Let's move the function making the actual HTTP request to its own file <i>requests.js</i>-->
 让我们把实际的HTTP请求函数移动到它自己的文件<i>requests.js</i>中
 
 ```js
@@ -167,10 +167,10 @@ const App = () => {
 
 ### Synchronizing data to the server using React Query
 
-<!-- Data is already successfully retrieved from the server. Next, we will make sure that the added and modified data is stored on the server. Let''s start by adding new notes.-->
+<!-- Data is already successfully retrieved from the server. Next, we will make sure that the added and modified data is stored on the server. Let's start by adding new notes.-->
 数据已经从服务器成功获取。接下来，我们将确保添加和修改的数据存储在服务器上。让我们从添加新笔记开始。
 
-<!-- Let''s make a function <i>createNote</i> to the file <i>requests.js</i> for saving new notes:-->
+<!-- Let's make a function <i>createNote</i> to the file <i>requests.js</i> for saving new notes:-->
 在文件`requests.js`中新建一个函数`createNote`来保存新笔记：
 
 ```js
@@ -217,7 +217,7 @@ const newNoteMutation = useMutation(createNote)
 <!-- The parameter is the function we added to the file <i>requests.js</i>, which uses Axios to send a new note to the server.-->
 参数是我们添加到文件<i>requests.js</i>中的函数，它使用Axios向服务器发送一个新的笔记。
 
-<!-- The event handler <i>addNote</i> performs the mutation by calling the mutation object''s function <i>mutate</i> and passing the new note as a parameter:-->
+<!-- The event handler <i>addNote</i> performs the mutation by calling the mutation object's function <i>mutate</i> and passing the new note as a parameter:-->
 事件处理程序<i>addNote</i>通过调用变异对象的函数<i>mutate</i>并传入新笔记作为参数来执行变异：
 
 ```js
@@ -352,7 +352,7 @@ export const createNote = newNote =>
 <!-- It would be relatively easy to make a similar change to a mutation that changes the importance of the note, but we leave it as an optional exercise.-->
 这很容易对一个突变做出类似的改变，以改变笔记的重要性，但我们把它作为一个可选的练习。
 
-<!-- If we closely follow the browser''s network tab, we notice that React Query retrieves all notes as soon as we move the cursor to the input field:-->
+<!-- If we closely follow the browser's network tab, we notice that React Query retrieves all notes as soon as we move the cursor to the input field:-->
 如果我们仔细跟踪浏览器的网络标签，我们会注意到，只要我们将光标移动到输入字段，React Query 就会立即检索所有笔记。
 
 ![dev tools notes app with input text field highlighted and arrow on network over notes request as 200](../../images/6/62new.png)
@@ -403,7 +403,7 @@ Redux 等是<i>客户端状态库</i>，可用于存储异步数据，尽管与 
 
 ### Exercises 6.20.-6.22.
 
-<!-- Now let''s make a new version of the anecdote application that uses the React Query library. Take [this project](https://github.com/fullstack-hy2020/query-anecdotes) as your starting point. The project has a ready-installed JSON Server, the operation of which has been slightly modified. Start the server with <i>npm run server</i>.-->
+<!-- Now let's make a new version of the anecdote application that uses the React Query library. Take [this project](https://github.com/fullstack-hy2020/query-anecdotes) as your starting point. The project has a ready-installed JSON Server, the operation of which has been slightly modified. Start the server with <i>npm run server</i>.-->
 现在让我们制作一个使用React Query库的新版本的轶事应用程序。以[此项目](https://github.com/fullstack-hy2020/query-anecdotes)为起点。该项目已经安装了一个JSON服务器，其操作已经稍微修改过。使用<i>npm run server</i>启动服务器。
 
 #### Exercise 6.20
@@ -462,12 +462,12 @@ const result = useQuery(
 <!-- So even if the application uses React Query, some kind of solution is usually needed to manage the rest of the frontend state (for example, the state of forms). Quite often, the state created with <i>useState</i> is a sufficient solution. Using Redux is of course possible, but there are other alternatives.-->
 即使应用程序使用React Query，通常还需要某种解决方案来管理剩余的前端状态（例如表单的状态）。通常，使用<i>useState</i>创建的状态就足够了。当然可以使用Redux，但也有其他选择。
 
-<!-- Let''s look at a simple counter application. The application displays the counter value, and offers three buttons to update the counter status:-->
+<!-- Let's look at a simple counter application. The application displays the counter value, and offers three buttons to update the counter status:-->
 让我们来看一个简单的计数器应用程序。该应用程序显示计数器值，并提供三个按钮来更新计数器状态：
 
 ![browser showing + - 0 buttons and 7 above](../../images/6/63new.png)
 
-<!-- We shall now implement the counter state management using a Redux-like state management mechanism provided by React''s built-in [useReducer](https://beta.reactjs.org/reference/react/useReducer) hook. Code looks like the following:-->
+<!-- We shall now implement the counter state management using a Redux-like state management mechanism provided by React's built-in [useReducer](https://beta.reactjs.org/reference/react/useReducer) hook. Code looks like the following:-->
 我们现在将使用React内置的[useReducer](https://beta.reactjs.org/reference/react/useReducer)钩子提供的类似Redux的状态管理机制来实现计数器状态管理。代码如下：
 
 ```js
@@ -511,7 +511,7 @@ export default App
 const [counter, counterDispatch] = useReducer(counterReducer, 0)
 ```
 
-<!-- The reducer function that handles state changes is similar to Redux''s reducers, i.e. the function gets as parameters the current state and the action that changes the state. The function returns the new state updated based on the type and possible contents of the action:-->
+<!-- The reducer function that handles state changes is similar to Redux's reducers, i.e. the function gets as parameters the current state and the action that changes the state. The function returns the new state updated based on the type and possible contents of the action:-->
 reducer函数处理状态更改与Redux的reducers类似，即函数作为参数获取当前状态和更改状态的动作。该函数根据动作的类型和可能的内容返回更新后的新状态：
 
 ```js
@@ -529,7 +529,7 @@ const counterReducer = (state, action) => {
 }
 ```
 
-<!-- In our example, actions have nothing but a type. If the action's type is <i>INC</i>, it increases the value of the counter by one, etc. Like Redux's reducers, actions can also contain arbitrary data, which is usually put in the action''s <i>payload</i> field.-->
+<!-- In our example, actions have nothing but a type. If the action's type is <i>INC</i>, it increases the value of the counter by one, etc. Like Redux's reducers, actions can also contain arbitrary data, which is usually put in the action's <i>payload</i> field.-->
 在我们的示例中，行动除了一种类型外没有其他。如果行动的类型是<i>INC</i>，它会增加计数器的值1等等。就像Redux的reducers一样，行动也可以包含任意数据，通常放在行动的<i>payload</i>字段中。
 
 <!-- The function <i>useReducer</i> returns an array that contains an element to access the current value of the state (first element of the array), and a <i>dispatch</i> function (second element of the array) to change the state:-->
@@ -675,7 +675,7 @@ const Button = ({ type, label }) => {
 
 ### Defining the counter context in a separate file
 
-<!-- Our application has an annoying feature, that the functionality of the counter state management is partly defined in the <i>App</i> component. Now let''s move everything related to the counter to <i>CounterContext.js</i>:-->
+<!-- Our application has an annoying feature, that the functionality of the counter state management is partly defined in the <i>App</i> component. Now let's move everything related to the counter to <i>CounterContext.js</i>:-->
 我们的应用有一个令人讨厌的特性，即计数器状态管理的功能部分定义在<i>App</i>组件中。现在让我们将与计数器相关的一切移动到<i>CounterContext.js</i>：
 
 ```js
@@ -712,7 +712,7 @@ export default CounterContext
 <!-- The file now exports, in addition to the <i>CounterContext</i> object corresponding to the context, the <i>CounterContextProvider</i> component, which is practically a context provider whose value is a counter and a dispatcher used for its state management.-->
 文件现在除了对应于上下文的<i>CounterContext</i>对象外，还导出了<i>CounterContextProvider</i>组件，它实质上是一个上下文提供者，其值是一个计数器和一个用于管理其状态的调度程序。
 
-<!-- Let''s enable the context provider by making a change in <i>index.js</i>:-->
+<!-- Let's enable the context provider by making a change in <i>index.js</i>:-->
 让我们通过在<i>index.js</i>中做出更改来启用上下文提供者：
 
 ```js
@@ -844,7 +844,7 @@ export default Button
 最终的应用代码在[GitHub](https://github.com/fullstack-hy2020/hook-counter/tree/part6-3)的<i>part6-3</i>分支中。
 
 <!-- As a technical detail, it should be noted that the helper functions <i>useCounterValue</i> and <i>useCounterDispatch</i> are defined as [custom hooks](https://reactjs.org/docs/hooks-custom.html), because calling the hook function <i>useContext</i> is [possible](https://reactjs.org/docs/hooks -rules.html) only from React components or custom hooks. Custom hooks are JavaScript functions whose name must start with the string _use_. We will return to custom hooks in a little more detail in [part 7](/en/part7/custom_hooks) of the course.-->
-作为技术细节，应该指出辅助函数<i>useCounterValue</i>和<i>useCounterDispatch</i>被定义为[自定义钩子](https://reactjs.org/docs/hooks-custom.html)，因为只有从React组件或自定义钩子中才能调用钩子函数<i>useContext</i>。[规则](https://reactjs.org/docs/hooks-rules.html)。自定义钩子是JavaScript函数，其名称必须以字符串_use_开头。我们将在课程的[第七部分](/en/part7/custom_hooks)中更详细地回顾自定义钩子。
+作为技术细节，应该指出辅助函数<i>useCounterValue</i>和<i>useCounterDispatch</i>被定义为[自定义钩子](https://reactjs.org/docs/hooks-custom.html)，因为只有从React组件或自定义钩子中才能调用钩子函数<i>useContext</i>。[规则](https://reactjs.org/docs/hooks-rules.html)。自定义钩子是JavaScript函数，其名称必须以字符串_use_开头。我们将在课程的[第七章节](/en/part7/custom_hooks)中更详细地回顾自定义钩子。
 
 </div>
 
@@ -857,7 +857,7 @@ export default Button
 <!-- The application has a <i>Notification</i> component for displaying notifications to the user.-->
 应用程序具有<i>通知</i>组件，用于向用户显示通知。
 
-<!-- Implement the application''s notification state management using the useReducer hook and context. The notification should tell the user when a new anecdote is created or an anecdote is voted on:-->
+<!-- Implement the application's notification state management using the useReducer hook and context. The notification should tell the user when a new anecdote is created or an anecdote is voted on:-->
 使用useReducer hook和context来实现应用程序的通知状态管理。通知应告知用户当新的轶事被创建或轶事被投票时：
 
 ![browser showing notification for added anecdote](../../images/6/66new.png)
@@ -881,7 +881,7 @@ the example below
 
 使用`useMutation`函数可以注册一个函数，该函数将返回一个`MutationFunction`，该函数可以用来执行与特定操作相关的变更操作。它还可以接受一个可选的参数，用于指定变更操作的参数。
 
-<!-- This was the last exercise for this part of the course and it''s time to push your code to GitHub and mark all of your completed exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
+<!-- This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your completed exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
 这是本部分课程的最后一个练习，是时候把你的代码推送到GitHub，并将所有完成的练习提交到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)了。
 
 </div>
@@ -890,10 +890,10 @@ the example below
 
 ### Which state management solution to choose?
 
-<!-- In chapters 1-5, all state management of the application was done using React''s hook <i>useState</i>. Asynchronous calls to the backend required the use of the <i>useEffect</i> hook in some situations. In principle, nothing else is needed.-->
+<!-- In chapters 1-5, all state management of the application was done using React's hook <i>useState</i>. Asynchronous calls to the backend required the use of the <i>useEffect</i> hook in some situations. In principle, nothing else is needed.-->
 在第1-5章中，所有应用程序的状态管理都使用React的hook <i>useState</i> 完成。 在某些情况下，需要使用<i>useEffect</i> hook来执行对后端的异步调用。 原则上，不需要其他任何东西。
 
-<!-- A subtle problem with a solution based on a state created with the <i>useState</i> hook is that if some part of the application''s state is needed by multiple components of the application, the state and the functions for manipulating it must be passed via props to all components that handle the state. Sometimes props need to be passed through multiple components, and the components along the way may not even be interested in the state in any way. This somewhat unpleasant phenomenon is called <i>prop drilling</i>.-->
+<!-- A subtle problem with a solution based on a state created with the <i>useState</i> hook is that if some part of the application's state is needed by multiple components of the application, the state and the functions for manipulating it must be passed via props to all components that handle the state. Sometimes props need to be passed through multiple components, and the components along the way may not even be interested in the state in any way. This somewhat unpleasant phenomenon is called <i>prop drilling</i>.-->
 一个基于<i>useState</i>钩子创建的状态的微妙问题是，如果应用程序的某些状态被多个组件所需，则必须通过props将状态和操纵它的函数传递给处理状态的所有组件。有时候props需要通过多个组件传递，而沿途的组件甚至可能对状态没有任何兴趣。这种有些不愉快的现象被称为<i>prop drilling</i>。
 
 <!-- Over the years, several alternative solutions have been developed for state management of React applications, which can be used to ease problematic situations (e.g. prop drilling). However, no solution has been "final", all have their own pros and cons, and new solutions are being developed all the time.-->

@@ -50,7 +50,7 @@ npm install --save-dev jest jest-expo eslint-plugin-jest
 }
 ```
 
-<!-- The <em>transform</em> option tells Jest to transform <i>.js</i> and <i>.jsx</i> files with the [Babel](https://babeljs.io/) compiler. The <em>transformIgnorePatterns</em> option is for ignoring certain directories in the <i>node_modules</i> directory while transforming files. This Jest configuration is almost identical to the one proposed in the Expo''s [documentation](https://docs.expo.io/guides/testing-with-jest/).-->
+<!-- The <em>transform</em> option tells Jest to transform <i>.js</i> and <i>.jsx</i> files with the [Babel](https://babeljs.io/) compiler. The <em>transformIgnorePatterns</em> option is for ignoring certain directories in the <i>node_modules</i> directory while transforming files. This Jest configuration is almost identical to the one proposed in the Expo's [documentation](https://docs.expo.io/guides/testing-with-jest/).-->
 <em>transform</em> 选项告诉 Jest 使用 [Babel](https://babeljs.io/) 编译器来转换 <i>.js</i> 和 <i>.jsx</i> 文件。<em>transformIgnorePatterns</em> 选项用于在转换文件时忽略 <i>node_modules</i> 目录中的某些目录。这个 Jest 配置几乎与 Expo 的[文档](https://docs.expo.io/guides/testing-with-jest/)中提出的配置相同。
 
 <!-- To use the eslint-plugin-jest plugin in ESLint, we need to include it in the plugins and extensions array in the <i>.eslintrc</i> file:-->
@@ -108,7 +108,7 @@ src/
     ...
 ```
 
-<!-- Another approach is to organize the tests near the implementation. This means that for example, the test file containing tests for the <em>AppBar</em> component is in the same directory as the component''s code. This will result in the following structure:-->
+<!-- Another approach is to organize the tests near the implementation. This means that for example, the test file containing tests for the <em>AppBar</em> component is in the same directory as the component's code. This will result in the following structure:-->
 另一种方法是在实现附近组织测试。这意味着例如，包含<em>AppBar</em>组件测试的测试文件位于与组件代码相同的目录中。这将导致以下结构：
 
 ```bash
@@ -121,35 +121,35 @@ src/
   ...
 ```
 
-<!-- In this example, the component''s code is in the <i>index.jsx</i> file and the test in the <i>AppBar.test.jsx</i> file. Note that in order to Jest finding your test files you either have to put them into a <i>\_\_tests\_\_</i> directory, use the <i>.test</i> or <i>.spec</i> suffix, or [manually configure](https://jestjs.io/docs/en/configuration#testmatch-arraystring) the global patterns.-->
+<!-- In this example, the component's code is in the <i>index.jsx</i> file and the test in the <i>AppBar.test.jsx</i> file. Note that in order to Jest finding your test files you either have to put them into a <i>\_\_tests\_\_</i> directory, use the <i>.test</i> or <i>.spec</i> suffix, or [manually configure](https://jestjs.io/docs/en/configuration#testmatch-arraystring) the global patterns.-->
 在这个例子中，组件的代码在<i>index.jsx</i>文件中，而测试在<i>AppBar.test.jsx</i>文件中。注意，为了让Jest找到你的测试文件，你要么把它们放到<i>\_\_tests\_\_</i>目录中，要么使用<i>.test</i>或<i>.spec</i>后缀，要么[手动配置](https://jestjs.io/docs/en/configuration#testmatch-arraystring)全局模式。
 
 ### Testing components
 
-<!-- Now that we have managed to set up Jest and run a very simple test, it is time to find out how to test components. As we know, testing components requires a way to serialize a component''s render output and simulate firing different kind of events, such as pressing a button. For these purposes, there is the [Testing Library](https://testing-library.com/docs/intro) family, which provides libraries for testing user interface components in different platforms. All of these libraries share similar API for testing user interface components in a user-centric way.-->
+<!-- Now that we have managed to set up Jest and run a very simple test, it is time to find out how to test components. As we know, testing components requires a way to serialize a component's render output and simulate firing different kind of events, such as pressing a button. For these purposes, there is the [Testing Library](https://testing-library.com/docs/intro) family, which provides libraries for testing user interface components in different platforms. All of these libraries share similar API for testing user interface components in a user-centric way.-->
 现在我们已经成功地设置了Jest并运行了一个非常简单的测试，是时候弄清楚如何测试组件了。正如我们所知，测试组件需要一种方法来序列化组件的渲染输出，并模拟触发不同类型的事件，比如按下按钮。为此，有[Testing Library](https://testing-library.com/docs/intro)家族，它提供了用于在不同平台上测试用户界面组件的库。所有这些库都共享相似的API，以以用户为中心的方式测试用户界面组件。
 
-<!-- In [part 5](/en/part5/testing_react_apps) we got familiar with one of these libraries, the [React Testing Library](https://testing-library.com/docs/react-testing-library/intro). Unfortunately, this library is only suitable for testing React web applications. Luckily, there exists a React Native counterpart for this library, which is the [React Native Testing Library](https://callstack.github.io/react-native-testing-library/). This is the library we will be using while testing our React Native application's components. The good news is, that these libraries share a very similar API, so there aren't too many new concepts to learn. In addition to the React Native Testing Library, we need a set of React Native specific Jest matchers such as <em>toHaveTextContent</em> and <em>toHaveProp</em>. These matchers are provided by the [jest-native](https://github.com/testing-library/jest-native) library. Before getting into the details, let''s install these packages:-->
-在[第五部分](/en/part5/testing_react_apps)中，我们熟悉了其中一个库[React Testing Library](https://testing-library.com/docs/react-testing-library/intro)。不幸的是，这个库只适用于测试React网络应用程序。幸运的是，这个库有一个React Native对应库，即[React Native Testing Library](https://callstack.github.io/react-native-testing-library/)。这就是我们在测试React Native应用程序组件时要使用的库。好消息是，这些库具有非常相似的API，所以没有太多新的概念要学习。除了React Native Testing Library之外，我们还需要一组React Native特定的Jest匹配器，如<em>toHaveTextContent</em>和<em>toHaveProp</em>。这些匹配器由[jest-native](https://github.com/testing-library/jest-native)库提供。在深入细节之前，让我们安装这些软件包：
+<!-- In [part 5](/en/part5/testing_react_apps) we got familiar with one of these libraries, the [React Testing Library](https://testing-library.com/docs/react-testing-library/intro). Unfortunately, this library is only suitable for testing React web applications. Luckily, there exists a React Native counterpart for this library, which is the [React Native Testing Library](https://callstack.github.io/react-native-testing-library/). This is the library we will be using while testing our React Native application's components. The good news is, that these libraries share a very similar API, so there aren't too many new concepts to learn. In addition to the React Native Testing Library, we need a set of React Native specific Jest matchers such as <em>toHaveTextContent</em> and <em>toHaveProp</em>. These matchers are provided by the [jest-native](https://github.com/testing-library/jest-native) library. Before getting into the details, let's install these packages:-->
+在[第五章节](/en/part5/testing_react_apps)中，我们熟悉了其中一个库[React Testing Library](https://testing-library.com/docs/react-testing-library/intro)。不幸的是，这个库只适用于测试React网络应用程序。幸运的是，这个库有一个React Native对应库，即[React Native Testing Library](https://callstack.github.io/react-native-testing-library/)。这就是我们在测试React Native应用程序组件时要使用的库。好消息是，这些库具有非常相似的API，所以没有太多新的概念要学习。除了React Native Testing Library之外，我们还需要一组React Native特定的Jest匹配器，如<em>toHaveTextContent</em>和<em>toHaveProp</em>。这些匹配器由[jest-native](https://github.com/testing-library/jest-native)库提供。在深入细节之前，让我们安装这些软件包：
 
 ```shell
 npm install --save-dev --legacy-peer-deps react-test-renderer@18.2.0 @testing-library/react-native @testing-library/jest-native
 ```
 
-<!-- **NB:** If you face peer dependency issues, make sure that the react-test-renderer version matches the project''s React version in the <em>npm install</em> command above. You can check the React version by running <em>npm list react --depth=0</em>.-->
+<!-- **NB:** If you face peer dependency issues, make sure that the react-test-renderer version matches the project's React version in the <em>npm install</em> command above. You can check the React version by running <em>npm list react --depth=0</em>.-->
 **中文：**如果遇到对等依赖关系问题，请确保在上面的<em>npm install</em>命令中，react-test-renderer版本与项目的React版本匹配。您可以通过运行<em>npm list react --depth=0</em>来检查React版本。
 
 <!-- If the installation fails due to peer dependency issues, try again using the <em>--legacy-peer-deps</em> flag with the <em>npm install</em> command.-->
 如果安装由于对等依赖关系问题失败，请使用<em>--legacy-peer-deps</em>标志再次尝试<em>npm install</em>命令。
 
-<!-- To be able to use these matchers we need to extend the Jest''s <em>expect</em> object. This can be done by using a global setup file. Create a file <i>setupTests.js</i> in the root directory of your project, that is, the same directory where the <i>package.json</i> file is located. In that file add the following line:-->
+<!-- To be able to use these matchers we need to extend the Jest's <em>expect</em> object. This can be done by using a global setup file. Create a file <i>setupTests.js</i> in the root directory of your project, that is, the same directory where the <i>package.json</i> file is located. In that file add the following line:-->
 要使用这些匹配器，我们需要扩展 Jest 的<em>expect</em> 对象。这可以通过使用全局设置文件来完成。在项目的根目录下创建一个文件 <i>setupTests.js</i>，也就是与 <i>package.json</i> 文件位于同一目录下的文件。在该文件中添加以下行：
 
 ```javascript
 import '@testing-library/jest-native/extend-expect';
 ```
 
-<!-- Next, configure this file as a setup file in the Jest''s configuration in the <i>package.json</i> file (note that the <em>\<rootDir></em> in the path is intentional and there is no need to replace it):-->
+<!-- Next, configure this file as a setup file in the Jest's configuration in the <i>package.json</i> file (note that the <em>\<rootDir></em> in the path is intentional and there is no need to replace it):-->
 下一步，在<i>package.json</i>文件中的Jest配置中配置此文件作为设置文件（注意路径中的<em>\<rootDir></em>是有意的，无需替换）：
 
 ```javascript
@@ -201,7 +201,7 @@ describe('Greeting', () => {
 <!-- We acquire the <em>Text</em> node containing certain text by using the <em>getByText</em> function. The Jest matcher [toBeDefined](https://jestjs.io/docs/expect#tobedefined) is used to to ensure that the query has found the element.-->
 我们通过使用<em>getByText</em>函数来获取包含某些文本的<em>Text</em>节点。Jest matcher [toBeDefined](https://jestjs.io/docs/expect#tobedefined)用于确保查询已找到元素。
 
-<!-- React Native Testing Library''s documentation has some good hints on [how to query different kinds of elements](https://callstack.github.io/react-native-testing-library/docs/how-should-i-query). Another guide worth reading is Kent C. Dodds article [Making your UI tests resilient to change](https://kentcdodds.com/blog/making-your-ui-tests-resilient-to-change).-->
+<!-- React Native Testing Library's documentation has some good hints on [how to query different kinds of elements](https://callstack.github.io/react-native-testing-library/docs/how-should-i-query). Another guide worth reading is Kent C. Dodds article [Making your UI tests resilient to change](https://kentcdodds.com/blog/making-your-ui-tests-resilient-to-change).-->
 React Native Testing Library 的文档有一些很好的提示[如何查询不同类型的元素](https://callstack.github.io/react-native-testing-library/docs/how-should-i-query)。另一篇值得阅读的指南是Kent C. Dodds的文章[使你的UI测试对更改具有弹性](https://kentcdodds.com/blog/making-your-ui-tests-resilient-to-change)。
 
 <!-- The object [screen](https://callstack.github.io/react-native-testing-library/docs/api#screen) has also a helper method [debug](https://callstack.github.io/react-native-testing-library/docs/api#debug) that prints the rendered React tree in a user-friendly format. Use it if you are unsure what the React tree rendered by the <em>render</em> function looks like.-->
@@ -210,7 +210,7 @@ React Native Testing Library 的文档有一些很好的提示[如何查询不�
 <!-- For all available queries, check the React Native Testing Library's [documentation](https://callstack.github.io/react-native-testing-library/docs/api-queries). The full list of available React Native specific matchers can be found in the [documentation](https://github.com/testing-library/jest-native#matchers) of the jest-native library. Jest's [documentation](https://jestjs.io/docs/en/expect) contains every universal Jest matcher.-->
 对于所有可用的查询，请查看React Native Testing Library的[文档](https://callstack.github.io/react-native-testing-library/docs/api-queries)。可在jest-native库的[文档](https://github.com/testing-library/jest-native#matchers)中找到可用的React Native特定匹配器的完整列表。Jest的[文档](https://jestjs.io/docs/en/expect)包含每个通用Jest匹配器。
 
-<!-- The second very important React Native Testing Library concept is firing events. We can fire an event in a provided node by using the [fireEvent](https://callstack.github.io/react-native-testing-library/docs/api#fireevent) object''s methods. This is useful for example typing text into a text field or pressing a button. Here is an example of how to test submitting a simple form:-->
+<!-- The second very important React Native Testing Library concept is firing events. We can fire an event in a provided node by using the [fireEvent](https://callstack.github.io/react-native-testing-library/docs/api#fireevent) object's methods. This is useful for example typing text into a text field or pressing a button. Here is an example of how to test submitting a simple form:-->
 第二个非常重要的React Native测试库概念是触发事件。我们可以使用[fireEvent](https://callstack.github.io/react-native-testing-library/docs/api#fireevent)对象的方法在提供的节点中触发事件。这对于例如在文本字段中输入文本或按下按钮很有用。以下是如何测试提交简单表单的示例：
 
 ```javascript
@@ -489,10 +489,10 @@ describe('SignIn', () => {
 }
 ```
 
-<!-- As always, test your queries in the Apollo Sandbox first before using them in your application. If you are unsure about the GraphQL schema or what are the available queries, take a look at the documentation next to the operations editor. If you have trouble using the id as a variable in the query, take a moment to study the Apollo Client''s [documentation](https://www.apollographql.com/docs/react/data/queries/) on queries.-->
+<!-- As always, test your queries in the Apollo Sandbox first before using them in your application. If you are unsure about the GraphQL schema or what are the available queries, take a look at the documentation next to the operations editor. If you have trouble using the id as a variable in the query, take a moment to study the Apollo Client's [documentation](https://www.apollographql.com/docs/react/data/queries/) on queries.-->
 一如既往，在在应用程序中使用查询之前，请先在Apollo沙盒中测试查询。如果不确定图形查询模式或可用查询，请参阅操作编辑器旁边的文档。如果您在查询中使用id作为变量时遇到问题，请花一点时间研究Apollo客户端[文档](https://www.apollographql.com/docs/react/data/queries/)上的查询。
 
-<!-- To learn how to open a URL in a browser, read the Expo''s [Linking API documentation](https://docs.expo.dev/versions/latest/sdk/linking/). You will need this feature while implementing the button for opening the repository in GitHub. Hint: [Linking.openURL](https://docs.expo.dev/versions/latest/sdk/linking/#linkingopenurlurl) method will come in handy.-->
+<!-- To learn how to open a URL in a browser, read the Expo's [Linking API documentation](https://docs.expo.dev/versions/latest/sdk/linking/). You will need this feature while implementing the button for opening the repository in GitHub. Hint: [Linking.openURL](https://docs.expo.dev/versions/latest/sdk/linking/#linkingopenurlurl) method will come in handy.-->
 要学习如何在浏览器中开启URL，请阅读Expo的[Linking API文档](https://docs.expo.dev/versions/latest/sdk/linking/)。在实现打开GitHub存储库的按钮时，您将需要此功能。提示：[Linking.openURL](https://docs.expo.dev/versions/latest/sdk/linking/#linkingopenurlurl)方法会派上用场。
 
 <!-- The view should have its own route. It would be a good idea to define the repository's id in the route's path as a path parameter, which you can access by using the [useParams](https://reactrouter.com/docs/en/v6/api#useparams) hook. The user should be able to access the view by pressing a repository in the reviewed repositories list. You can achieve this by for example wrapping the <em>RepositoryItem</em> with a [Pressable](https://reactnative.dev/docs/pressable) component in the <em>RepositoryList</em> component and using <em>navigate</em> function to change the route in an <em>onPress</em> event handler. You can access the <em>navigate</em> function with the [useNavigate](https://reactrouter.com/docs/en/v6/api#usenavigate) hook.-->
@@ -510,7 +510,7 @@ describe('SignIn', () => {
 npm install expo-linking --legacy-peer-deps
 ```
 
-#### Exercise 10.20: repository''s review list
+#### Exercise 10.20: repository's review list
 
 <!-- Now that we have a view for a single repository, let's display repository's reviews there. Repository's reviews are in the <em>reviews</em> field of the <em>Repository</em> type in the GraphQL schema. <em>reviews</em> is a similar paginated list as in the <em>repositories</em> query. Here's an example of getting reviews of a repository:-->
 现在我们已经有了一个单个存储库的视图，让我们在那里显示存储库的评论。存储库的评论在GraphQL模式中的<em>reviews</em>字段中。 <em>reviews</em>是与<em>repositories</em>查询中的类似分页列表。以下是获取存储库评论的示例：
@@ -538,15 +538,15 @@ npm install expo-linking --legacy-peer-deps
 }
 ```
 
-<!-- Review's <em>text</em> field contains the textual review, <em>rating</em> field a numeric rating between 0 and 100, and <em>createdAt</em> the date when the review was created. Review's <em>user</em> field contains the reviewer''s information, which is of type <em>User</em>.-->
+<!-- Review's <em>text</em> field contains the textual review, <em>rating</em> field a numeric rating between 0 and 100, and <em>createdAt</em> the date when the review was created. Review's <em>user</em> field contains the reviewer's information, which is of type <em>User</em>.-->
 Review 的 <em>text</em> 字段包含文本评论，<em>rating</em> 字段是 0 到 100 之间的数字评分，以及 <em>createdAt</em> 评论创建的日期。Review 的 <em>user</em> 字段包含评论者的信息，类型为 <em>User</em>。
 
-<!-- We want to display reviews as a scrollable list, which makes [FlatList](https://reactnative.dev/docs/flatlist) a suitable component for the job. To display the previous exercise's repository's information at the top of the list, you can use the <em>FlatList</em> components [ListHeaderComponent](https://reactnative.dev/docs/flatlist#listheadercomponent) prop. You can use the [ItemSeparatorComponent](https://reactnative.dev/docs/flatlist#itemseparatorcomponent) to add some space between the items like in the <em>RepositoryList</em> component. Here''s an example of the structure:-->
+<!-- We want to display reviews as a scrollable list, which makes [FlatList](https://reactnative.dev/docs/flatlist) a suitable component for the job. To display the previous exercise's repository's information at the top of the list, you can use the <em>FlatList</em> components [ListHeaderComponent](https://reactnative.dev/docs/flatlist#listheadercomponent) prop. You can use the [ItemSeparatorComponent](https://reactnative.dev/docs/flatlist#itemseparatorcomponent) to add some space between the items like in the <em>RepositoryList</em> component. Here's an example of the structure:-->
 我们想要将评论以可滚动的列表形式显示，这使得[FlatList](https://reactnative.dev/docs/flatlist)成为这项工作的合适组件。要在列表顶部显示上一个练习的存储库信息，您可以使用<em>FlatList</em>组件的[ListHeaderComponent](https://reactnative.dev/docs/flatlist#listheadercomponent)属性。您可以使用[ItemSeparatorComponent](https://reactnative.dev/docs/flatlist#itemseparatorcomponent)在项目之间添加一些空间，就像<em>RepositoryList</em>组件中一样。这里是结构的示例：
 
 ```javascript
 const RepositoryInfo = ({ repository }) => {
-  // Repository''s information implemented in the previous exercise
+  // Repository's information implemented in the previous exercise
 };
 
 const ReviewItem = ({ review }) => {
@@ -570,12 +570,12 @@ const SingleRepository = () => {
 export default SingleRepository;
 ```
 
-<!-- The final version of the repository''s reviews list should look something like this:-->
+<!-- The final version of the repository's reviews list should look something like this:-->
 最终版本的存储库的评论列表应该看起来像这样：
 
 ![Application preview](../../images/10/14.jpg)
 
-<!-- The date under the reviewer''s username is the creation date of the review, which is in the <em>createdAt</em> field of the <em>Review</em> type. The date format should be user-friendly such as <i>date.month.year</i>. You can for example install the [date-fns](https://date-fns.org/) library and use the [format](https://date-fns.org/v2.28.0/docs/format) function for formatting the creation date.-->
+<!-- The date under the reviewer's username is the creation date of the review, which is in the <em>createdAt</em> field of the <em>Review</em> type. The date format should be user-friendly such as <i>date.month.year</i>. You can for example install the [date-fns](https://date-fns.org/) library and use the [format](https://date-fns.org/v2.28.0/docs/format) function for formatting the creation date.-->
 评论者用户名下的日期是评论的创建日期，它位于<em>Review</em>类型的<em>createdAt</em>字段中。日期格式应该是用户友好的，比如<i>date.month.year</i>。例如，您可以安装[date-fns](https://date-fns.org/)库并使用[format](https://date-fns.org/v2.28.0/docs/format)函数来格式化创建日期。
 
 <!-- The round shape of the rating's container can be achieved with the <em>borderRadius</em> style property. You can make it round by fixing the container's <em>width</em> and <em>height</em> style property and setting the border-radius as <em>width / 2</em>.-->
@@ -586,19 +586,19 @@ export default SingleRepository;
 <!-- Implement a form for creating a review using Formik. The form should have four fields: repository owner's GitHub username (for example "jaredpalmer"), repository's name (for example "formik"), a numeric rating, and a textual review. Validate the fields using Yup schema so that it contains the following validations:-->
 实施一个使用Formik创建评论的表单。该表单应有四个字段：存储库所有者的GitHub用户名（例如“jaredpalmer”），存储库的名称（例如“formik”），数字评分和文字评论。使用Yup模式验证字段，以便其包含以下验证：
 
-<!-- - Repository owner''s username is a required string-->
+<!-- - Repository owner's username is a required string-->
 仓库所有者的用户名是必需的字符串
-<!-- - Repository''s name is a required string-->
+<!-- - Repository's name is a required string-->
 仓库名称为必填字符串
 <!-- - Rating is a required number between 0 and 100-->
 **评分是一个0到100之间的必需数字**
 <!-- - Review is a optional string-->
 # 点评是一个可选的字符串
 
-<!-- Explore Yup's [documentation](https://github.com/jquense/yup#yup) to find suitable validators. Use sensible error messages with the validators. The validation message can be defined as the validator method's <em>message</em> argument. You can make the review field expand to multiple lines by using <em>TextInput</em> component''s [multiline](https://reactnative.dev/docs/textinput#multiline) prop.-->
+<!-- Explore Yup's [documentation](https://github.com/jquense/yup#yup) to find suitable validators. Use sensible error messages with the validators. The validation message can be defined as the validator method's <em>message</em> argument. You can make the review field expand to multiple lines by using <em>TextInput</em> component's [multiline](https://reactnative.dev/docs/textinput#multiline) prop.-->
 探索Yup的[文档](https://github.com/jquense/yup#yup)以找到合适的验证器。使用合理的错误消息与验证器一起使用。验证消息可以定义为验证器方法的<em>message</em>参数。您可以通过使用<em>TextInput</em>组件的[multiline](https://reactnative.dev/docs/textinput#multiline) prop来使审查字段扩展到多行。
 
-<!-- You can create a review using the <em>createReview</em> mutation. Check this mutation''s arguments in the Apollo Sandbox. You can use the [useMutation](https://www.apollographql.com/docs/react/api/react/hooks/#usemutation) hook to send a mutation to the Apollo Server.-->
+<!-- You can create a review using the <em>createReview</em> mutation. Check this mutation's arguments in the Apollo Sandbox. You can use the [useMutation](https://www.apollographql.com/docs/react/api/react/hooks/#usemutation) hook to send a mutation to the Apollo Server.-->
 你可以使用<em>createReview</em> mutation创建一个review。在Apollo Sandbox中检查这个mutation的参数。你可以使用[useMutation](https://www.apollographql.com/docs/react/api/react/hooks/#usemutation) hook将mutation发送到Apollo Server。
 
 <!-- After a successful <em>createReview</em> mutation, redirect the user to the repository's view you implemented in the previous exercise. This can be done with the <em>navigate</em> function after you have obtained it using the [useNavigate](https://reactrouter.com/docs/en/v6/api#usenavigate) hook. The created review has a <em>repositoryId</em> field which you can use to construct the route's path.-->
@@ -640,7 +640,7 @@ useQuery(GET_REPOSITORY, {
 <!-- - Password confirmation matches the password-->
 密码确认与密码匹配
 
-<!-- The password confirmation field''s validation can be a bit tricky, but it can be done for example by using the [oneOf](https://github.com/jquense/yup#schemaoneofarrayofvalues-arrayany-message-string--function-schema-alias-equals) and [ref](https://github.com/jquense/yup#refpath-string-options--contextprefix-string--ref) methods like suggested in [this issue](https://github.com/jaredpalmer/formik/issues/90#issuecomment-354873201).-->
+<!-- The password confirmation field's validation can be a bit tricky, but it can be done for example by using the [oneOf](https://github.com/jquense/yup#schemaoneofarrayofvalues-arrayany-message-string--function-schema-alias-equals) and [ref](https://github.com/jquense/yup#refpath-string-options--contextprefix-string--ref) methods like suggested in [this issue](https://github.com/jaredpalmer/formik/issues/90#issuecomment-354873201).-->
 密码确认字段的验证可能有点棘手，但可以像[这个问题](https://github.com/jaredpalmer/formik/issues/90#issuecomment-354873201)中建议的那样使用[oneOf](https://github.com/jquense/yup#schemaoneofarrayofvalues-arrayany-message-string--function-schema-alias-equals)和[ref](https://github.com/jquense/yup#refpath-string-options--contextprefix-string--ref)方法来实现。
 
 <!-- You can create a new user by using the <em>createUser</em> mutation. Find out how this mutation works by exploring the documentation in the Apollo Sandbox. After a successful <em>createUser</em> mutation, sign the created user in by using the <em>useSignIn</em> hook as we did in the sign in the form. After the user has been signed in, redirect the user to the reviewed repositories list view.-->
@@ -659,7 +659,7 @@ useQuery(GET_REPOSITORY, {
 
 #### Exercise 10.23: sorting the reviewed repositories list
 
-<!-- At the moment repositories in the reviewed repositories list are ordered by the date of repository''s first review. Implement a feature that allows users to select the principle, which is used to order the repositories. The available ordering principles should be:-->
+<!-- At the moment repositories in the reviewed repositories list are ordered by the date of repository's first review. Implement a feature that allows users to select the principle, which is used to order the repositories. The available ordering principles should be:-->
 目前，在审查仓库列表中的仓库按照仓库首次审查的日期进行排序。实现一个功能，允许用户选择用于排序仓库的原则。可用的排序原则应该是：
 
 <!-- - Latest repositories. The repository with the latest first review is on the top of the list. This is the current behavior and should be the default principle.-->
@@ -672,10 +672,10 @@ useQuery(GET_REPOSITORY, {
 <!-- The <em>repositories</em> query used to fetch the reviewed repositories has an argument called <em>orderBy</em>, which you can use to define the ordering principle. The argument has two allowed values: CREATED\_AT (order by the date of repository's first review) and RATING\_AVERAGE, (order by the repository's average rating). The query also has an argument called <em>orderDirection</em> which can be used to change the order direction. The argument has two allowed values: <em>ASC</em> (ascending, smallest value first) and <em>DESC</em> (descending, biggest value first).-->
 <em>仓库</em>查询用于提取审核过的仓库，其中有一个参数叫做<em>orderBy</em>，可以用来定义排序原则。该参数有两个允许的值：CREATED\_AT（按仓库第一次审核的日期排序）和RATING\_AVERAGE（按仓库的平均评分排序）。查询还有一个参数叫做<em>orderDirection</em>，可以用来改变排序方向。该参数有两个允许的值：<em>ASC</em>（升序，最小值优先）和<em>DESC</em>（降序，最大值优先）。
 
-<!-- The selected ordering principle state can be maintained for example using the React''s [useState](https://reactjs.org/docs/hooks-reference.html#usestate) hook. The variables used in the <em>repositories</em> query can be given to the <em>useRepositories</em> hook as an argument.-->
+<!-- The selected ordering principle state can be maintained for example using the React's [useState](https://reactjs.org/docs/hooks-reference.html#usestate) hook. The variables used in the <em>repositories</em> query can be given to the <em>useRepositories</em> hook as an argument.-->
 使用 React 的 [useState](https://reactjs.org/docs/hooks-reference.html#usestate) 钩子可以维持所选择的排序原则状态。可以将 <em>repositories</em> 查询中使用的变量作为参数传给 <em>useRepositories</em> 钩子。
 
-<!-- You can use for example [@react-native-picker/picker](https://docs.expo.io/versions/latest/sdk/picker/) library, or [React Native Paper](https://callstack.github.io/react-native-paper/) library's [Menu](https://callstack.github.io/react-native-paper/menu.html) component to implement the ordering principle's selection. You can use the <em>FlatList</em> component''s [ListHeaderComponent](https://reactnative.dev/docs/flatlist#listheadercomponent) prop to provide the list with a header containing the selection component.-->
+<!-- You can use for example [@react-native-picker/picker](https://docs.expo.io/versions/latest/sdk/picker/) library, or [React Native Paper](https://callstack.github.io/react-native-paper/) library's [Menu](https://callstack.github.io/react-native-paper/menu.html) component to implement the ordering principle's selection. You can use the <em>FlatList</em> component's [ListHeaderComponent](https://reactnative.dev/docs/flatlist#listheadercomponent) prop to provide the list with a header containing the selection component.-->
 你可以使用例如[@react-native-picker/picker](https://docs.expo.io/versions/latest/sdk/picker/)库，或[React Native Paper](https://callstack.github.io/react-native-paper/)库的[Menu](https://callstack.github.io/react-native-paper/menu.html)组件来实现排序原则的选择。你可以使用<em>FlatList</em>组件的[ListHeaderComponent](https://reactnative.dev/docs/flatlist#listheadercomponent)属性，提供列表的头部包含选择组件。
 
 <!-- The final version of the feature, depending on the selection component in use, should look something like this:-->
@@ -685,7 +685,7 @@ useQuery(GET_REPOSITORY, {
 
 #### Exercise 10.24: filtering the reviewed repositories list
 
-<!-- The Apollo Server allows filtering repositories using the repository's name or the owner's username. This can be done using the <em>searchKeyword</em> argument in the <em>repositories</em> query. Here''s an example of how to use the argument in a query:-->
+<!-- The Apollo Server allows filtering repositories using the repository's name or the owner's username. This can be done using the <em>searchKeyword</em> argument in the <em>repositories</em> query. Here's an example of how to use the argument in a query:-->
 Apollo Server允许使用仓库的名称或所有者的用户名来过滤仓库。 这可以通过在`repositories`查询中使用`searchKeyword`参数来完成。 以下是如何在查询中使用该参数的示例：
 
 ```javascript
@@ -704,16 +704,16 @@ Apollo Server允许使用仓库的名称或所有者的用户名来过滤仓库�
 <!-- Implement a feature for filtering the reviewed repositories list based on a keyword. Users should be able to type in a keyword into a text input and the list should be filtered as the user types. You can use a simple <em>TextInput</em> component or something a bit fancier such as React Native Paper's [Searchbar](https://callstack.github.io/react-native-paper/searchbar.html) component as the text input. Put the text input component in the <em>FlatList</em> component's header.-->
 实现一个功能，可以根据关键字过滤审查过的存储库列表。用户应该能够在文本输入框中输入关键字，并且随着用户输入而过滤列表。您可以使用简单的<em>TextInput</em>组件或更加漂亮的React Native Paper的[Searchbar](https://callstack.github.io/react-native-paper/searchbar.html)组件作为文本输入。将文本输入组件放在<em>FlatList</em>组件的头部。
 
-<!-- To avoid a multitude of unnecessary requests while the user types the keyword fast, only pick the latest input after a short delay. This technique is often referred to as [debouncing](https://lodash.com/docs/4.17.15#debounce). [use-debounce](https://www.npmjs.com/package/use-debounce) library is a handy hook for debouncing a state variable. Use it with a sensible delay time, such as 500 milliseconds. Store the text input''s value by using the <em>useState</em> hook and then pass the debounced value to the query as the value of the <em>searchKeyword</em> argument.-->
+<!-- To avoid a multitude of unnecessary requests while the user types the keyword fast, only pick the latest input after a short delay. This technique is often referred to as [debouncing](https://lodash.com/docs/4.17.15#debounce). [use-debounce](https://www.npmjs.com/package/use-debounce) library is a handy hook for debouncing a state variable. Use it with a sensible delay time, such as 500 milliseconds. Store the text input's value by using the <em>useState</em> hook and then pass the debounced value to the query as the value of the <em>searchKeyword</em> argument.-->
 为了避免用户输入关键字时发出大量不必要的请求，只在短暂延迟后选取最新的输入。这一技术通常被称为[防抖](https://lodash.com/docs/4.17.15#debounce)。[use-debounce](https://www.npmjs.com/package/use-debounce)库是一个方便的钩子，用于防抖动状态变量。使用合理的延迟时间，如500毫秒。使用<em>useState</em>钩子存储文本输入的值，然后将防抖值作为<em>searchKeyword</em>参数的值传递给查询。
 
-<!-- You probably face an issue that the text input component loses focus after each keystroke. This is because the content provided by the <em>ListHeaderComponent</em> prop is constantly unmounted. This can be fixed by turning the component rendering the <em>FlatList</em> component into a class component and defining the header''s render function as a class property like this:-->
+<!-- You probably face an issue that the text input component loses focus after each keystroke. This is because the content provided by the <em>ListHeaderComponent</em> prop is constantly unmounted. This can be fixed by turning the component rendering the <em>FlatList</em> component into a class component and defining the header's render function as a class property like this:-->
 你可能会遇到一个问题，即每按下一次键后，文本输入组件就会失去焦点。这是因为<em>ListHeaderComponent</em> prop提供的内容不断卸载。可以通过将渲染<em>FlatList</em>组件的组件转换为类组件，并将标题的render函数定义为类属性来解决这个问题，如下所示：
 
 ```javascript
 export class RepositoryListContainer extends React.Component {
   renderHeader = () => {
-    // this.props contains the component''s props
+    // this.props contains the component's props
     const props = this.props;
 
     // ...
@@ -741,17 +741,17 @@ export class RepositoryListContainer extends React.Component {
 
 ![Application preview](../../images/10/18.jpg)
 
-#### Exercise 10.25: the user''s reviews view
+#### Exercise 10.25: the user's reviews view
 
 <!-- Implement a feature which allows user to see their reviews. Once signed in, the user should be able to access this view by pressing a "My reviews" tab in the app bar. Here is what the review list view should roughly look like:-->
 实现一个功能，允许用户查看他们的评论。一旦登录，用户应该能够通过在应用程序栏中按“我的评论”选项卡来访问此视图。以下是评论列表视图的大致外观：
 
 ![Application preview](../../images/10/20.jpg)
 
-<!-- Remember that you can fetch the authenticated user from the Apollo Server with the <em>me</em> query. This query returns a <em>User</em> type, which has a field <em>reviews</em>. If you have already implemented a reusable <em>me</em> query in your code, you can customize this query to fetch the <em>reviews</em> field conditionally. This can be done using GraphQL''s [include](https://graphql.org/learn/queries/#directives) directive.-->
+<!-- Remember that you can fetch the authenticated user from the Apollo Server with the <em>me</em> query. This query returns a <em>User</em> type, which has a field <em>reviews</em>. If you have already implemented a reusable <em>me</em> query in your code, you can customize this query to fetch the <em>reviews</em> field conditionally. This can be done using GraphQL's [include](https://graphql.org/learn/queries/#directives) directive.-->
 记住，您可以使用<em>me</em>查询从Apollo服务器获取认证用户。该查询返回一个<em>User</em>类型，其中包含一个字段<em>reviews</em>。如果您已经在代码中实现了可重用的<em>me</em>查询，则可以使用GraphQL的[include](https://graphql.org/learn/queries/#directives)指令条件性地获取<em>reviews</em>字段。
 
-<!-- Let''s say that the current query is implemented roughly in the following manner:-->
+<!-- Let's say that the current query is implemented roughly in the following manner:-->
 让我们说当前的查询大致以下面的方式实现：
 
 ```javascript
@@ -803,7 +803,7 @@ const GET_CURRENT_USER = gql`
 
 ![Application preview](../../images/10/22.jpg)
 
-<!-- You can delete a review using the <em>deleteReview</em> mutation. This mutation has a single argument, which is the id of the review to be deleted. After the mutation has been performed, the easiest way to update the review list''s query is to call the [refetch](https://www.apollographql.com/docs/react/data/queries/#refetching) function.-->
+<!-- You can delete a review using the <em>deleteReview</em> mutation. This mutation has a single argument, which is the id of the review to be deleted. After the mutation has been performed, the easiest way to update the review list's query is to call the [refetch](https://www.apollographql.com/docs/react/data/queries/#refetching) function.-->
 你可以使用<em> deleteReview </em>变异来删除评论。此变异有一个参数，即要删除的评论的ID。在执行变异后，更新评论列表查询的最简单方法是调用[refetch](https://www.apollographql.com/docs/react/data/queries/#refetching)函数。
 
 </div>
@@ -815,7 +815,7 @@ const GET_CURRENT_USER = gql`
 <!-- When an API returns an ordered list of items from some collection, it usually returns a subset of the whole set of items to reduce the required bandwidth and to decrease the memory usage of the client applications. The desired subset of items can be parameterized so that the client can request for example the first twenty items on the list after some index. This technique is commonly referred to as <i>pagination</i>. When items can be requested after a certain item defined by a <i>cursor</i>, we are talking about <i>cursor-based pagination</i>.-->
 当API从某个集合中返回一个有序的项目列表时，它通常只返回整个集合的一个子集，以减少所需的带宽，并减少客户端应用程序的内存使用量。所需的子集项目可以参数化，以便客户端可以请求某个索引后的前二十项。这种技术通常被称为<i>分页</i>。当可以在由<i>光标</i>定义的某个项目之后请求项目时，我们谈论的是<i>基于光标的分页</i>。
 
-<!-- So cursor is just a serialized presentation of an item in an ordered list. Let''s have a look at the paginated repositories returned by the <em>repositories</em> query using the following query:-->
+<!-- So cursor is just a serialized presentation of an item in an ordered list. Let's have a look at the paginated repositories returned by the <em>repositories</em> query using the following query:-->
 所以光标只是一个有序列表中项目的序列化呈现。让我们看一下用下面的查询返回的分页存储库：<em>存储库</em>查询：
 
 ```javascript
@@ -839,7 +839,7 @@ const GET_CURRENT_USER = gql`
 }
 ```
 
-<!-- The <em>first</em> argument tells the API to return only the first two repositories. Here''s an example of a result of the query:-->
+<!-- The <em>first</em> argument tells the API to return only the first two repositories. Here's an example of a result of the query:-->
 <em>第一</em>个参数告诉API只返回前两个存储库。下面是查询结果的一个例子：
 
 ```javascript
@@ -878,7 +878,7 @@ const GET_CURRENT_USER = gql`
 <!-- The format of the result object and the arguments are based on the [Relay's GraphQL Cursor Connections Specification](https://relay.dev/graphql/connections.htm), which has become a quite common pagination specification and has been widely adopted for example in the [GitHub's GraphQL API](https://docs.github.com/en/graphql). In the result object, we have the <em>edges</em> array containing items with <em>node</em> and <em>cursor</em> attributes. As we know, the <em>node</em> contains the repository itself. The <em>cursor</em> on the other hand is a Base64 encoded representation of the node. In this case, it contains the repository's id and date of repository's creation as a timestamp. This is the information we need to point to the item when they are ordered by the creation time of the repository. The <em>pageInfo</em> contains information such as the cursor of the first and the last item in the array.-->
 根据[Relay 的 GraphQL Cursor Connections Specification](https://relay.dev/graphql/connections.htm)，结果对象的格式和参数已经成为一种相当普遍的分页规范，并且已经被[GitHub 的 GraphQL API](https://docs.github.com/en/graphql)广泛采用。在结果对象中，我们有一个包含具有<em>node</em>和<em>cursor</em>属性的项目的<em>edges</em>数组。众所周知，<em>node</em>包含了存储库本身。另一方面，<em>cursor</em>是节点的Base64编码表示。在这种情况下，它包含存储库的ID和存储库创建的时间戳。当按存储库的创建时间排序时，这就是我们需要指向该项目的信息。<em>pageInfo</em>包含诸如数组中第一个和最后一个项目的游标等信息。
 
-<!-- Let''s say that we want to get the next set of items <i>after</i> the last item of the current set, which is the "zeit/swr" repository. We can set the <em>after</em> argument of the query as the value of the <em>endCursor</em> like this:-->
+<!-- Let's say that we want to get the next set of items <i>after</i> the last item of the current set, which is the "zeit/swr" repository. We can set the <em>after</em> argument of the query as the value of the <em>endCursor</em> like this:-->
 让我们假设我们想要在当前集合的最后一个项目“zeit/swr”之后获取下一组项目。我们可以将查询的<em>after</em>参数设置为<em>endCursor</em>的值，如下所示：
 
 ```javascript
@@ -902,7 +902,7 @@ const GET_CURRENT_USER = gql`
 }
 ```
 
-<!-- Now that we have the next two items and we can keep on doing this until the <em>hasNextPage</em> has the value <em>false</em>, meaning that we have reached the end of the list. To dig deeper into cursor-based pagination, read Shopify''s article [Pagination with Relative Cursors](https://engineering.shopify.com/blogs/engineering/pagination-relative-cursors). It provides great details on the implementation itself and the benefits over the traditional index-based pagination.-->
+<!-- Now that we have the next two items and we can keep on doing this until the <em>hasNextPage</em> has the value <em>false</em>, meaning that we have reached the end of the list. To dig deeper into cursor-based pagination, read Shopify's article [Pagination with Relative Cursors](https://engineering.shopify.com/blogs/engineering/pagination-relative-cursors). It provides great details on the implementation itself and the benefits over the traditional index-based pagination.-->
 现在我们已经有了下两个项目，我们可以继续这样做，直到<em>hasNextPage</em>的值为<em>false</em>，这意味着我们已经到达了列表的末尾。要更深入地了解基于游标的分页，请阅读Shopify的文章[Pagination with Relative Cursors](https://engineering.shopify.com/blogs/engineering/pagination-relative-cursors)。它提供了有关实施本身和传统索引分页的好处的详细信息。
 
 ### Infinite scrolling
@@ -918,10 +918,10 @@ const GET_CURRENT_USER = gql`
 <!-- The second step is repeated until the user gets tired of scrolling or some scrolling limit is exceeded. The name "infinite scrolling" refers to the way the list seems to be infinite - the user can just keep on scrolling and new items keep on appearing on the list.-->
 第二步重复进行，直到用户厌倦滚动或者超过某个滚动限制。“无限滚动”这个名称指的是列表似乎是无限的方式，用户可以一直滚动，而新项目会不断出现在列表中。
 
-<!-- Let's have a look at how this works in practice using the Apollo Client's <em>useQuery</em> hook. Apollo Client has a great [documentation](https://www.apollographql.com/docs/react/pagination/cursor-based/) on implementing the cursor-based pagination. Let''s implement infinite scrolling for the reviewed repositories list as an example.-->
+<!-- Let's have a look at how this works in practice using the Apollo Client's <em>useQuery</em> hook. Apollo Client has a great [documentation](https://www.apollographql.com/docs/react/pagination/cursor-based/) on implementing the cursor-based pagination. Let's implement infinite scrolling for the reviewed repositories list as an example.-->
 让我们看一下这在实践中如何使用 Apollo Client 的<em>useQuery</em>钩子。Apollo Client 在实现基于游标的分页上有很好的[文档](https://www.apollographql.com/docs/react/pagination/cursor-based/)。让我们以评论仓库列表为例来实现无限滚动。
 
-<!-- First, we need to know when the user has reached the end of the list. Luckily, the <em>FlatList</em> component has a prop [onEndReached](https://reactnative.dev/docs/flatlist#onendreached), which will call the provided function once the user has scrolled to the last item on the list. You can change how early the <em>onEndReach</em> callback is called using the [onEndReachedThreshold](https://reactnative.dev/docs/flatlist#onendreachedthreshold) prop. Alter the <em>RepositoryList</em> component''s <em>FlatList</em> component so that it calls a function once the end of the list is reached:-->
+<!-- First, we need to know when the user has reached the end of the list. Luckily, the <em>FlatList</em> component has a prop [onEndReached](https://reactnative.dev/docs/flatlist#onendreached), which will call the provided function once the user has scrolled to the last item on the list. You can change how early the <em>onEndReach</em> callback is called using the [onEndReachedThreshold](https://reactnative.dev/docs/flatlist#onendreachedthreshold) prop. Alter the <em>RepositoryList</em> component's <em>FlatList</em> component so that it calls a function once the end of the list is reached:-->
 首先，我们需要知道用户何时到达列表的末尾。幸运的是，<em>FlatList</em>组件有一个属性[onEndReached]（https://reactnative.dev/docs/flatlist#onendreached），它会在用户滚动到列表的最后一项时调用提供的函数。您可以使用[onEndReachedThreshold]（https://reactnative.dev/docs/flatlist#onendreachedthreshold）属性更改<em>onEndReach</em>回调被调用的早晚。更改<em>RepositoryList</em>组件的<em>FlatList</em>组件，以便在到达列表末尾时调用函数：
 
 ```javascript
@@ -971,7 +971,7 @@ export default RepositoryList;
 <!-- Next, we need to fetch more repositories once the end of the list is reached. This can be achieved using the [fetchMore](https://www.apollographql.com/docs/react/pagination/core-api/#the-fetchmore-function) function provided by the <em>useQuery</em> hook. To describe Apollo Client, how to merge the existing repositories in the cache with the next set of repositories, we can use a [field policy](https://www.apollographql.com/docs/react/caching/cache-field-behavior/). In general, field policies can be used to customize the cache behavior during read and write operations with [read](https://www.apollographql.com/docs/react/caching/cache-field-behavior/#the-read-function) and [merge](https://www.apollographql.com/docs/react/caching/cache-field-behavior/#the-merge-function) functions.-->
 接下来，当到达列表末尾时，我们需要获取更多仓库。这可以使用<em>useQuery</em>提供的[fetchMore](https://www.apollographql.com/docs/react/pagination/core-api/#the-fetchmore-function)函数来实现。要描述Apollo Client如何将现有仓库与下一组仓库合并，我们可以使用[字段策略](https://www.apollographql.com/docs/react/caching/cache-field-behavior/)。一般来说，字段策略可用于在读取和写入操作期间自定义缓存行为，使用[读取](https://www.apollographql.com/docs/react/caching/cache-field-behavior/#the-read-function)和[合并](https://www.apollographql.com/docs/react/caching/cache-field-behavior/#the-merge-function)函数。
 
-<!-- Let''s add a field policy for the <em>repositories</em> query in the <i>apolloClient.js</i> file:-->
+<!-- Let's add a field policy for the <em>repositories</em> query in the <i>apolloClient.js</i> file:-->
 让我们在`apolloClient.js`文件中为`repositories`查询添加一个字段策略：
 
 ```javascript
@@ -1030,7 +1030,7 @@ export default createApolloClient;
 <!-- As mentioned earlier, the format of the pagination's result object and the arguments are based on the Relay's pagination specification. Luckily, Apollo Client provides a predefined field policy, <em>relayStylePagination</em>, which can be used in this case.-->
 正如前面提到的，分页结果对象的格式和参数基于Relay的分页规范。幸运的是，Apollo Client提供了一个预定义的字段策略<em>relayStylePagination</em>，可以在这种情况下使用。
 
-<!-- Next, let''s alter the <em>useRepositories</em> hook so that it returns a decorated <em>fetchMore</em> function, which calls the actual <em>fetchMore</em> function with appropriate arguments so that we can fetch the next set of repositories:-->
+<!-- Next, let's alter the <em>useRepositories</em> hook so that it returns a decorated <em>fetchMore</em> function, which calls the actual <em>fetchMore</em> function with appropriate arguments so that we can fetch the next set of repositories:-->
 接下来，让我们更改<em>useRepositories</em>钩子，以便它返回一个装饰过的<em>fetchMore</em>函数，该函数使用适当的参数调用实际的<em>fetchMore</em>函数，以便我们可以获取下一组存储库：
 
 ```javascript
@@ -1067,7 +1067,7 @@ const useRepositories = (variables) => {
 <!-- Make sure you have the <em>pageInfo</em> and the <em>cursor</em> fields in your <em>repositories</em> query as described in the pagination examples. You will also need to include the <em>after</em> and <em>first</em> arguments for the query.-->
 确保您的<em>repositories</em>查询中包含<em>pageInfo</em>和<em>cursor</em>字段，如分页示例所述。 您还需要包括查询的<em>after</em>和<em>first</em>参数。
 
-<!-- The <em>handleFetchMore</em> function will call the Apollo Client''s <em>fetchMore</em> function if there are more items to fetch, which is determined by the <em>hasNextPage</em> property. We also want to prevent fetching more items if fetching is already in process. In this case, <em>loading</em> will be <em>true</em>. In the <em>fetchMore</em> function we are providing the query with an <em>after</em> variable, which receives the latest <em>endCursor</em> value.-->
+<!-- The <em>handleFetchMore</em> function will call the Apollo Client's <em>fetchMore</em> function if there are more items to fetch, which is determined by the <em>hasNextPage</em> property. We also want to prevent fetching more items if fetching is already in process. In this case, <em>loading</em> will be <em>true</em>. In the <em>fetchMore</em> function we are providing the query with an <em>after</em> variable, which receives the latest <em>endCursor</em> value.-->
 <em>handleFetchMore</em> 函数将调用 Apollo Client 的 <em>fetchMore</em> 函数，如果有更多的项目要获取，这取决于 <em>hasNextPage</em> 属性。我们还希望在正在获取时防止获取更多项目。在这种情况下，<em>loading</em> 为 <em>true</em>。在 <em>fetchMore</em> 函数中，我们为查询提供了一个 <em>after</em> 变量，它接收最新的 <em>endCursor</em> 值。
 
 <!-- The final step is to call the <em>fetchMore</em> function in the <em>onEndReach</em> handler:-->
@@ -1107,12 +1107,12 @@ export default RepositoryList;
 
 ### Exercise 10.27
 
-#### Exercise 10.27: infinite scrolling for the repository''s reviews list
+#### Exercise 10.27: infinite scrolling for the repository's reviews list
 
 <!-- Implement infinite scrolling for the repository's reviews list. The <em>Repository</em> type's <em>reviews</em> field has the <em>first</em> and <em>after</em> arguments similar to the <em>repositories</em> query. <em>ReviewConnection</em> type also has the <em>pageInfo</em> field just like the <em>RepositoryConnection</em> type.-->
 实现仓库评论列表的无限滚动。<em>Repository</em>类型的<em>reviews</em>字段具有与<em>repositories</em>查询相似的<em>first</em>和<em>after</em>参数。<em>ReviewConnection</em>类型也具有与<em>RepositoryConnection</em>类型相同的<em>pageInfo</em>字段。
 
-<!-- Here''s an example query:-->
+<!-- Here's an example query:-->
 这是一个例子查询：
 
 ```javascript
@@ -1146,7 +1146,7 @@ export default RepositoryList;
 }
 ```
 
-<!-- The cache''s field policy can be similar as with the <em>repositories</em> query:-->
+<!-- The cache's field policy can be similar as with the <em>repositories</em> query:-->
 缓存的字段策略可以与<em>仓库</em>查询类似：
 
 ```javascript
@@ -1171,8 +1171,8 @@ const cache = new InMemoryCache({
 <!-- As with the reviewed repositories list, use a relatively small <em>first</em> argument value while you are trying out the infinite scrolling. You might need to create a few new users and use them to create a few new reviews to make the reviews list long enough to scroll. Set the value of the <em>first</em> argument high enough so that the <em>onEndReach</em> handler isn''t called immediately after the view is loaded, but low enough so that you can see that more reviews are fetched once you reach the end of the list. Once everything is working as intended you can use a larger value for the <em>first</em> argument.-->
 随着审查仓库列表，在尝试无限滚动时，使用相对较小的<em>first</em>参数值。您可能需要创建一些新用户，并使用它们来创建一些新评论，以使评论列表足够长，可以滚动。将<em>first</em>参数的值设置得足够高，以便在加载视图后不立即调用<em>onEndReach</em>处理程序，但足够低，以便您可以看到更多评论在到达列表末尾时被获取。一旦一切按预期工作，您可以使用更大的<em>first</em>参数值。
 
-<!-- This was the last exercise in this section. It''s time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020). Note that exercises in this section should be submitted to the part 4 in the exercise submission system.-->
-这是本节的最后一个练习。是时候把你的代码推送到GitHub，并将所有完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020)中。请注意，本节的练习应提交到练习提交系统的第4部分。
+<!-- This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020). Note that exercises in this section should be submitted to the part 4 in the exercise submission system.-->
+这是本节的最后一个练习。是时候把你的代码推送到GitHub，并将所有完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020)中。请注意，本节的练习应提交到练习提交系统的第4章节。
 
 </div>
 
@@ -1198,7 +1198,7 @@ const cache = new InMemoryCache({
 <!-- > Utilising tagged template literals (a recent addition to JavaScript) and the power of CSS, styled-components allows you to write actual CSS code to style your components. It also removes the mapping between components and styles – using components as a low-level styling construct could not be easier!-->
 > 利用标记模板文字（JavaScript的最新添加功能）和CSS的力量，styled-components可以让您编写实际的CSS代码来设计组件。它还消除了组件和样式之间的映射 - 使用组件作为低级别的样式构造再也不能更容易了！
 
-<!-- [Styled-components](https://styled-components.com/) is a library for styling React components using [CSS-in-JS](https://en.wikipedia.org/wiki/CSS-in-JS) technique. In React Native we are already used to defining component''s styles as a JavaScript object, so CSS-in-JS is not so uncharted territory. However, the approach of styled-components is quite different from using the <em>StyleSheet.create</em> method and the <em>style</em> prop.-->
+<!-- [Styled-components](https://styled-components.com/) is a library for styling React components using [CSS-in-JS](https://en.wikipedia.org/wiki/CSS-in-JS) technique. In React Native we are already used to defining component's styles as a JavaScript object, so CSS-in-JS is not so uncharted territory. However, the approach of styled-components is quite different from using the <em>StyleSheet.create</em> method and the <em>style</em> prop.-->
 [styled-components](https://styled-components.com/) 是一个使用[CSS-in-JS](https://en.wikipedia.org/wiki/CSS-in-JS)技术来样式化React组件的库。在React Native中，我们已经习惯于将组件的样式定义为JavaScript对象，因此CSS-in-JS并不是太陌生的领域。但是，styled-components的方法与使用<em>StyleSheet.create</em>方法和<em>style</em> prop有很大的不同。
 
 <!-- In styled-components components'' styles are defined with the component using a feature called [tagged template literal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_templates) or a plain JavaScript object. Styled-components makes it possible to define new style properties for component based on its props *at runtime*. This brings many possibilities, such as seamlessly switching between a light and a dark theme. It also has a full [theming support](https://styled-components.com/docs/advanced#theming). Here is an example of creating a <em>Text</em> component with style variations based on props:-->

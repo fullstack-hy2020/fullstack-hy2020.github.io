@@ -83,7 +83,7 @@ client.query({ query })
   })
 ```
 
-<!-- The server''s response is printed to the console:-->
+<!-- The server's response is printed to the console:-->
 服务器的响应被打印到控制台：
 
 ![devtools shows allPersons array with 3 people](../../images/8/9a.png)
@@ -115,7 +115,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 ### Making queries
 
-<!-- We are ready to implement the main view of the application, which shows a list of person''s name and phone number.-->
+<!-- We are ready to implement the main view of the application, which shows a list of person's name and phone number.-->
 我们准备实施应用程序的主视图，它显示一个人的姓名和电话号码列表。
 
 <!-- Apollo Client offers a few alternatives for making [queries](https://www.apollographql.com/docs/react/data/queries/).-->
@@ -180,7 +180,7 @@ if (result.loading) {
 </div>
 ```
 
-<!-- Let''s separate displaying the list of persons into its own component:-->
+<!-- Let's separate displaying the list of persons into its own component:-->
 让我们把显示人员名单分离成自己的组件：
 
 ```js
@@ -217,7 +217,7 @@ const App = () => {
 
 ### Named queries and variables
 
-<!-- Let''s implement functionality for viewing the address details of a person. The <i>findPerson</i> query is well-suited for this.-->
+<!-- Let's implement functionality for viewing the address details of a person. The <i>findPerson</i> query is well-suited for this.-->
 让我们实现查看一个人的地址详情的功能。<i>findPerson</i>查询非常适合这个。
 
 <!-- The queries we did in the last chapter had the parameter hardcoded into the query:-->
@@ -414,7 +414,7 @@ Apollo客户端将查询的响应保存到[缓存](https://www.apollographql.com
 
 ### Doing mutations
 
-<!-- Let''s implement functionality for adding new persons.-->
+<!-- Let's implement functionality for adding new persons.-->
 让我们实现添加新人的功能。
 
 <!--  In the previous chapter, we hardcoded the parameters for mutations. Now, we need a version of the addPerson mutation which uses [variables](https://graphql.org/learn/queries/#variables):-->
@@ -444,7 +444,7 @@ mutation createPerson($name: String!, $street: String!, $city: String!, $phone: 
 <!-- The hook function [useMutation](https://www.apollographql.com/docs/react/api/react/hooks/#usemutation) provides the functionality for making mutations.-->
 [useMutation](https://www.apollographql.com/docs/react/api/react/hooks/#usemutation) 钩子函数提供了进行变更的功能。
 
-<!-- Let''s create a new component for adding a new person to the directory:-->
+<!-- Let's create a new component for adding a new person to the directory:-->
 让我们创建一个新组件来添加一个新人到目录中：
 
 ```js
@@ -539,7 +539,7 @@ createPerson({  variables: { name, phone, street, city } })
 <!-- There are a few different solutions for this. One way is to make the query for all persons [poll](https://www.apollographql.com/docs/react/data/queries/#polling) the server, or make the query repeatedly.-->
 这里有几种不同的解决方案。一种方法是为所有人[poll](https://www.apollographql.com/docs/react/data/queries/#polling)服务器，或者反复进行查询。
 
-<!-- The change is small. Let''s set the query to poll every two seconds:-->
+<!-- The change is small. Let's set the query to poll every two seconds:-->
 小改变。让我们将查询设置为每两秒投票一次：
 
 ```js
@@ -569,7 +569,7 @@ export default App
 <!-- The bad side of the solution is all the pointless web traffic.-->
 **坏面的解决方案就是所有毫无意义的网络流量。**
 
-<!-- Another easy way to keep the cache in sync is to use the *useMutation* hook''s [refetchQueries](https://www.apollographql.com/docs/react/data/refetching/) parameter to define that the query fetching all persons is done again whenever a new person is created.-->
+<!-- Another easy way to keep the cache in sync is to use the *useMutation* hook's [refetchQueries](https://www.apollographql.com/docs/react/data/refetching/) parameter to define that the query fetching all persons is done again whenever a new person is created.-->
 另一种简单的保持缓存同步的方法是使用*useMutation*钩子的[refetchQueries](https://www.apollographql.com/docs/react/data/refetching/)参数定义为每次创建新人时再次执行查询获取所有人的查询。
 
 ```js
@@ -591,7 +591,7 @@ const PersonForm = (props) => {
   })
 ```
 
-<!-- The pros and cons of this solution are almost opposite of the previous one''s. There is no extra web traffic, because queries are not done just in case.  However, if one user now updates the state of the server, the changes do not show to other users immediately.-->
+<!-- The pros and cons of this solution are almost opposite of the previous one's. There is no extra web traffic, because queries are not done just in case.  However, if one user now updates the state of the server, the changes do not show to other users immediately.-->
 这个解决方案的利弊几乎与之前的相反。不会有额外的网络流量，因为查询不是为了什么都做。但是，如果一个用户现在更新服务器的状态，这些变化不会立即显示给其他用户。
 
 <!-- If you want to do multiple queries, you can pass multiple objects inside refetchQueries. This will allow you to update different parts of your app at the same time. Here is an example:-->
@@ -608,7 +608,7 @@ const PersonForm = (props) => {
 
 <!-- At the moment, queries and components are defined in the same place in our code.-->
 目前，我们的代码中查询和组件都定义在同一个地方。
-<!-- Let''s separate the query definitions into their own file <i>queries.js</i>:-->
+<!-- Let's separate the query definitions into their own file <i>queries.js</i>:-->
 让我们把查询定义放到它们自己的文件<i>queries.js</i>中：
 
 ```js
@@ -654,10 +654,10 @@ const App = () => {
 
 ![devtools showing error: name must be unique](../../images/8/14x.png)
 
-<!-- We should handle the exception. We can register an error handler function to the mutation using the *useMutation* hook''s *onError* [option](https://www.apollographql.com/docs/react/api/react/hooks/#params-2).-->
+<!-- We should handle the exception. We can register an error handler function to the mutation using the *useMutation* hook's *onError* [option](https://www.apollographql.com/docs/react/api/react/hooks/#params-2).-->
 我们应该处理异常。我们可以使用*useMutation* hook的*onError* [选项](https://www.apollographql.com/docs/react/api/react/hooks/#params-2)将错误处理函数注册到变异中。
 
-<!-- Let''s register the mutation with an error handler which uses the *setError*-->
+<!-- Let's register the mutation with an error handler which uses the *setError*-->
 function
 
 让我们使用*setError*函数注册一个带有错误处理器的变异
@@ -742,7 +742,7 @@ const Notify = ({errorMessage}) => {
 
 ### Updating a phone number
 
-<!-- Let''s add the possibility to change the phone numbers of persons to our application. The solution is almost identical to the one we used for adding new persons.-->
+<!-- Let's add the possibility to change the phone numbers of persons to our application. The solution is almost identical to the one we used for adding new persons.-->
 让我们在我们的应用中加入更改人员电话号码的可能性。这个解决方案几乎和我们用来添加新人员的方案是一样的。
 
 <!-- Again, the mutation requires parameters.-->
@@ -764,7 +764,7 @@ export const EDIT_NUMBER = gql`
 `
 ```
 
-<!-- The <i>PhoneForm</i> component responsible for the change is straightforward. The form has fields for the person''s name and new phone number, and calls the *changeNumber* function. The function is done using the *useMutation* hook.-->
+<!-- The <i>PhoneForm</i> component responsible for the change is straightforward. The form has fields for the person's name and new phone number, and calls the *changeNumber* function. The function is done using the *useMutation* hook.-->
 <i>PhoneForm</i> 组件负责更改是很简单的。 该表格具有人员姓名和新电话号码的字段，并调用*changeNumber*函数。 该函数使用*useMutation*钩子完成。
 <!-- Interesting lines on the code have been highlighted.-->
 有趣的代码行已经被突出显示。
@@ -825,9 +825,9 @@ export default PhoneForm
 
 ![browser showing main page with name and phone having information in the input](../../images/8/22a.png)
 
-<!-- Surprisingly, when a person''s number is changed, the new number automatically appears on the list of persons rendered by the <i>Persons</i> component.-->
+<!-- Surprisingly, when a person's number is changed, the new number automatically appears on the list of persons rendered by the <i>Persons</i> component.-->
 令人惊讶的是，当一个人的号码被改变时，新号码会自动出现在<i>Persons</i>组件渲染的人员列表中。
-<!-- This happens because each person has an identifying field of type <i>ID</i>, so the person''s details saved to the cache update automatically when they are changed with the mutation.-->
+<!-- This happens because each person has an identifying field of type <i>ID</i>, so the person's details saved to the cache update automatically when they are changed with the mutation.-->
 因为每个人都有一个类型为<i>ID</i>的识别字段，所以当他们的细节通过变异被更新时，这个人的详细信息也会自动保存到缓存中。
 
 <!-- Our application still has one small flaw. If we try to change the phone number for a name which does not exist, nothing seems to happen.-->
@@ -898,7 +898,7 @@ useEffect(() => {
 // highlight-end
 ```
 
-<!-- We could try to get rid of the warning by adding the *setError* function to useEffect''s second parameter array:-->
+<!-- We could try to get rid of the warning by adding the *setError* function to useEffect's second parameter array:-->
 我们可以通过将*setError*函数添加到useEffect的第二个参数数组中来尝试消除警告：
 
 ```js
@@ -911,7 +911,7 @@ useEffect(() => {
 // highlight-end
 ```
 
-<!-- However, this solution does not work if the *notify* function is not wrapped to a [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback) function.  If it''s not, this results in an endless loop. When the *App* component is rerendered after a notification is removed, a <i>new version</i> of *notify* gets created which causes the effect function to be executed, which causes a new notification, and so on, and so on...-->
+<!-- However, this solution does not work if the *notify* function is not wrapped to a [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback) function.  If it's not, this results in an endless loop. When the *App* component is rerendered after a notification is removed, a <i>new version</i> of *notify* gets created which causes the effect function to be executed, which causes a new notification, and so on, and so on...-->
 然而，如果*notify*函数没有被包装到[useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback)函数中，这种解决方案就不起作用了。如果没有包装，就会导致无限循环。当*App*组件在通知被移除后重新渲染时，*notify*会创建一个<i>新版本</i>，这会导致effect函数被执行，从而导致新的通知，如此循环往复......
 
 <!-- The current code of the application can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4) branch <i>part8-4</i>.-->
@@ -924,7 +924,7 @@ useEffect(() => {
 <!-- Our example uses the state of the React components only to manage the state of a form and to show error notifications. As a result, it could be that there are no justifiable reasons to use Redux to manage application state when using GraphQL.-->
 我们的示例只使用React组件的状态来管理表单的状态并显示错误通知。因此，在使用GraphQL时，可能没有合理的理由使用Redux来管理应用程序状态。
 
-<!-- When necessary, Apollo enables saving the application''s local state to [Apollo cache](https://www.apollographql.com/docs/react/local-state/local-state-management/).-->
+<!-- When necessary, Apollo enables saving the application's local state to [Apollo cache](https://www.apollographql.com/docs/react/local-state/local-state-management/).-->
 当有必要时，Apollo可以将应用程序的本地状态保存到[Apollo缓存](https://www.apollographql.com/docs/react/local-state/local-state-management/)中。
 
 </div>
@@ -939,7 +939,7 @@ useEffect(() => {
 <!-- Take [this project](https://github.com/fullstack-hy2020/library-frontend) as a start for your application.-->
 把[这个项目](https://github.com/fullstack-hy2020/library-frontend)作为你的应用的起点。
 
-<!-- **Note** if you want, you can also use [React router](/en/part7/react_router) to implement the application''s navigation!-->
+<!-- **Note** if you want, you can also use [React router](/en/part7/react_router) to implement the application's navigation!-->
 **注意**：如果你愿意，你也可以使用[React router](/en/part7/react_router)来实现应用程序的导航！
 
 #### 8.8: Authors view

@@ -7,10 +7,10 @@ lang: zh
 
 <div class="content">
 
-<!-- Let''s continue our work with the simplified [redux version](/en/part6/flux_architecture_and_redux#redux-notes) of our notes application.-->
+<!-- Let's continue our work with the simplified [redux version](/en/part6/flux_architecture_and_redux#redux-notes) of our notes application.-->
 让我们继续我们的工作，使用我们笔记应用的简化[redux版本](/en/part6/flux_architecture_and_redux#redux-notes)。
 
-<!-- To ease our development, let''s change our reducer so that the store gets initialized with a state that contains a couple of notes:-->
+<!-- To ease our development, let's change our reducer so that the store gets initialized with a state that contains a couple of notes:-->
 为了简化我们的开发，让我们改变我们的 reducer，使 store 以包含几条笔记的状态初始化：
 
 ```js
@@ -37,12 +37,12 @@ export default noteReducer
 
 ### Store with complex state
 
-<!-- Let''s implement filtering for the notes that are displayed to the user. The user interface for the filters will be implemented with [radio buttons](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio):-->
+<!-- Let's implement filtering for the notes that are displayed to the user. The user interface for the filters will be implemented with [radio buttons](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio):-->
 让我们为显示给用户的笔记实现过滤功能。用户界面的过滤器将使用[单选按钮](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio)实现：
 
 ![browser with important/not radio buttons and list](../../images/6/01e.png)
 
-<!-- Let''s start with a very simple and straightforward implementation:-->
+<!-- Let's start with a very simple and straightforward implementation:-->
 让我们从一个非常简单直接的实现开始：
 
 ```js
@@ -123,7 +123,7 @@ const filterReducer = (state = 'ALL', action) => {
 }
 ```
 
-<!-- Let''s also create a new _action creator_ function. We will write the code for the action creator in a new <i>src/reducers/filterReducer.js</i> module:-->
+<!-- Let's also create a new _action creator_ function. We will write the code for the action creator in a new <i>src/reducers/filterReducer.js</i> module:-->
 让我们也创建一个新的_action creator_函数。我们将在新的<i>src/reducers/filterReducer.js</i>模块中编写action creator的代码：
 
 ```js
@@ -144,7 +144,7 @@ export default filterReducer
 <!-- We can create the actual reducer for our application by combining the two existing reducers with the [combineReducers](https://redux.js.org/api/combinereducers) function.-->
 我们可以通过使用[combineReducers](https://redux.js.org/api/combinereducers)函数将两个现有的reducer结合起来，来为我们的应用程序创建实际的reducer。
 
-<!-- Let''s define the combined reducer in the <i>index.js</i> file:-->
+<!-- Let's define the combined reducer in the <i>index.js</i> file:-->
 在<i>index.js</i>文件中定义组合reducer：
 
 ```js
@@ -193,7 +193,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 <!-- As we can see from the output, the store has the exact shape we wanted it to!-->
 从输出结果可以看出，商店拥有我们想要的正确形状！
 
-<!-- Let''s take a closer look at how the combined reducer is created:-->
+<!-- Let's take a closer look at how the combined reducer is created:-->
 让我们仔细看看如何创建组合reducer：
 
 ```js
@@ -243,7 +243,7 @@ const filterReducer = (state = 'ALL', action) => {
 
 ### Finishing the filters
 
-<!-- Let''s finish the application so that it uses the combined reducer. We start by changing the rendering of the application and hooking up the store to the application in the <i>index.js</i> file:-->
+<!-- Let's finish the application so that it uses the combined reducer. We start by changing the rendering of the application and hooking up the store to the application in the <i>index.js</i> file:-->
 让我们完成应用程序，以便它使用组合的reducer。我们从更改应用程序的渲染并在<i>index.js</i>文件中将存储钩入应用程序开始：
 
 ```js
@@ -254,7 +254,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 )
 ```
 
-<!-- Next, let''s fix a bug that is caused by the code expecting the application store to be an array of notes:-->
+<!-- Next, let's fix a bug that is caused by the code expecting the application store to be an array of notes:-->
 接下来，让我们修复一个由于代码期望应用商店为一个笔记数组而导致的错误：
 
 ![browser TypeError: notes.map is not a function](../../images/6/7ea.png)
@@ -297,7 +297,7 @@ const notes = useSelector(state => state)
 const notes = useSelector(state => state.notes)
 ```
 
-<!-- Let''s extract the visibility filter into its own <i>src/components/VisibilityFilter.js</i> component:-->
+<!-- Let's extract the visibility filter into its own <i>src/components/VisibilityFilter.js</i> component:-->
 让我们把可见性过滤器提取到它自己的<i>src/components/VisibilityFilter.js</i> 组件中：
 
 ```js
@@ -355,10 +355,10 @@ const App = () => {
 export default App
 ```
 
-<!-- The implementation is rather straightforward. Clicking the different radio buttons changes the state of the store''s <i>filter</i> property.-->
+<!-- The implementation is rather straightforward. Clicking the different radio buttons changes the state of the store's <i>filter</i> property.-->
 实施相当直接。点击不同的单选按钮会改变商店的<i>过滤器</i>属性状态。
 
-<!-- Let''s change the <i>Notes</i> component to incorporate the filter:-->
+<!-- Let's change the <i>Notes</i> component to incorporate the filter:-->
 让我们改变<i>笔记</i>组件，以纳入过滤器：
 
 ```js
@@ -399,7 +399,7 @@ called "getSelector".
 useSelector(state => state.notes)
 ```
 
-<!-- Let''s simplify the selector by destructuring the fields from the state it receives as a parameter:-->
+<!-- Let's simplify the selector by destructuring the fields from the state it receives as a parameter:-->
 让我们通过从参数接收的状态中解构字段来简化选择器：
 
 ```js
@@ -463,17 +463,17 @@ export default Filter
 
 ### Redux Toolkit
 
-<!-- As we have seen so far, Redux''s configuration and state management implementation requires quite a lot of effort. This is manifested for example in the reducer and action creator-related code which has somewhat repetitive boilerplate code. [Redux Toolkit](https://redux-toolkit.js.org/) is a library that solves these common Redux-related problems. The library for example greatly simplifies the configuration of the Redux store and offers a large variety of tools to ease state management.-->
+<!-- As we have seen so far, Redux's configuration and state management implementation requires quite a lot of effort. This is manifested for example in the reducer and action creator-related code which has somewhat repetitive boilerplate code. [Redux Toolkit](https://redux-toolkit.js.org/) is a library that solves these common Redux-related problems. The library for example greatly simplifies the configuration of the Redux store and offers a large variety of tools to ease state management.-->
 随着我们迄今为止所看到的，Redux的配置和状态管理实施需要相当多的努力。这在reducer和action creator相关的代码中表现出来，这些代码有一定的重复的样板代码。[Redux Toolkit](https://redux-toolkit.js.org/)是一个解决这些常见Redux问题的库。该库可以大大简化Redux store的配置，并提供大量的工具来简化状态管理。
 
-<!-- Let''s start using Redux Toolkit in our application by refactoring the existing code. First, we will need to install the library:-->
+<!-- Let's start using Redux Toolkit in our application by refactoring the existing code. First, we will need to install the library:-->
 让我们开始在我们的应用程序中使用Redux Toolkit来重构现有的代码。首先，我们需要安装这个库：
 
 ```bash
 npm install @reduxjs/toolkit
 ```
 
-<!-- Next, open the <i>index.js</i> file which currently creates the Redux store. Instead of Redux's <em>createStore</em> function, let's create the store using Redux Toolkit''s [configureStore](https://redux-toolkit.js.org/api/configureStore) function:-->
+<!-- Next, open the <i>index.js</i> file which currently creates the Redux store. Instead of Redux's <em>createStore</em> function, let's create the store using Redux Toolkit's [configureStore](https://redux-toolkit.js.org/api/configureStore) function:-->
 接下来，打开<i>index.js</i>文件，目前它正在创建Redux存储。不要使用Redux的<em>createStore</em>功能，而是使用Redux Toolkit的[configureStore](https://redux-toolkit.js.org/api/configureStore)功能来创建存储：
 
 ```js
@@ -507,7 +507,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 <!-- We already got rid of a few lines of code now that we don''t need the <em>combineReducers</em> function to create the reducer for the store. We will soon see that the <em>configureStore</em> function has many additional benefits such as the effortless integration of development tools and many commonly used libraries without the need for additional configuration.-->
 我们已经摆脱了一些代码，因为我们不需要<em>combineReducers</em>函数来创建store的reducer了。我们很快就会发现<em>configureStore</em>函数有许多额外的好处，比如无需额外配置即可轻松集成开发工具和许多常用库。
 
-<!-- Let''s move on to refactoring the reducers, which brings forth the benefits of the Redux Toolkit. With Redux Toolkit, we can easily create reducer and related action creators using the [createSlice](https://redux-toolkit.js.org/api/createSlice) function. We can use the <em>createSlice</em> function to refactor the reducer and action creators in the <i>reducers/noteReducer.js</i> file in the following manner:-->
+<!-- Let's move on to refactoring the reducers, which brings forth the benefits of the Redux Toolkit. With Redux Toolkit, we can easily create reducer and related action creators using the [createSlice](https://redux-toolkit.js.org/api/createSlice) function. We can use the <em>createSlice</em> function to refactor the reducer and action creators in the <i>reducers/noteReducer.js</i> file in the following manner:-->
 让我们继续重构 reducer，从而获得 Redux Toolkit 的好处。使用 Redux Toolkit，我们可以使用 [createSlice](https://redux-toolkit.js.org/api/createSlice) 函数轻松创建 reducer 和相关的 action creators。我们可以使用 <em>createSlice</em> 函数以下列方式重构 <i>reducers/noteReducer.js</i> 文件中的 reducer 和 action creators：
 
 ```js
@@ -562,7 +562,7 @@ const noteSlice = createSlice({
 // highlight-end
 ```
 
-<!-- The <em>createSlice</em> function's <em>name</em> parameter defines the prefix which is used in the action's type values. For example, the <em>createNote</em> action defined later will have the type value of <em>notes/createNote</em>. It is a good practice to give the parameter a value, which is unique among the reducers. This way there won't be unexpected collisions between the application's action type values. The <em>initialState</em> parameter defines the reducer''s initial state. The <em>reducers</em> parameter takes the reducer itself as an object, of which functions handle state changes caused by certain actions. Note that the <em>action.payload</em> in the function contains the argument provided by calling the action creator:-->
+<!-- The <em>createSlice</em> function's <em>name</em> parameter defines the prefix which is used in the action's type values. For example, the <em>createNote</em> action defined later will have the type value of <em>notes/createNote</em>. It is a good practice to give the parameter a value, which is unique among the reducers. This way there won't be unexpected collisions between the application's action type values. The <em>initialState</em> parameter defines the reducer's initial state. The <em>reducers</em> parameter takes the reducer itself as an object, of which functions handle state changes caused by certain actions. Note that the <em>action.payload</em> in the function contains the argument provided by calling the action creator:-->
 <em>createSlice</em> 函数的 <em>name</em> 参数定义了用于动作类型值的前缀。例如，稍后定义的 <em>createNote</em> 动作将具有 <em>notes/createNote</em> 的类型值。给参数赋予一个在 reducer 中唯一的值是一种良好的做法，这样就不会有意想不到的动作类型值冲突。<em>initialState</em> 参数定义了 reducer 的初始状态。<em>reducers</em> 参数将 reducer 本身作为一个对象传入，其中的函数处理由某些动作引起的状态变化。请注意，函数中的 <em>action.payload</em> 包含调用动作创建者时提供的参数。
 
 ```js
@@ -597,7 +597,7 @@ createNote(state, action) {
 <!-- Redux Toolkit utilizes the [Immer](https://immerjs.github.io/immer/) library with reducers created by <em>createSlice</em> function, which makes it possible to mutate the <em>state</em> argument inside the reducer. Immer uses the mutated state to produce a new, immutable state and thus the state changes remain immutable. Note that <em>state</em> can be changed without "mutating" it, as we have done with the <em>toggleImportanceOf</em> action. In this case, the function <i>returns</i> the new state. Nevertheless mutating the state will often come in handy especially when a complex state needs to be updated.-->
 Redux Toolkit 利用 [Immer](https://immerjs.github.io/immer/) 库以及由 <em>createSlice</em> 函数创建的 reducer，使得可以在 reducer 内部突变 <em>state</em> 参数。Immer 使用突变的 state 来生成一个新的不可变的 state，因此 state 的变化仍然保持不可变。请注意，<em>state</em> 可以在不 "突变" 它的情况下被改变，就像我们对 <em>toggleImportanceOf</em> 动作所做的那样。在这种情况下，函数 <i>returns</i> 新的 state。尽管如此，当需要更新复杂的 state 时，突变 state 往往会派上用场。
 
-<!-- The <em>createSlice</em> function returns an object containing the reducer as well as the action creators defined by the <em>reducers</em> parameter. The reducer can be accessed by the <em>noteSlice.reducer</em> property, whereas the action creators by the <em>noteSlice.actions</em> property. We can produce the file''s exports in the following way:-->
+<!-- The <em>createSlice</em> function returns an object containing the reducer as well as the action creators defined by the <em>reducers</em> parameter. The reducer can be accessed by the <em>noteSlice.reducer</em> property, whereas the action creators by the <em>noteSlice.actions</em> property. We can produce the file's exports in the following way:-->
 <em>createSlice</em> 函数返回一个对象，其中包含由<em>reducers</em>参数定义的reducer以及action creators。可以通过<em>noteSlice.reducer</em>属性访问reducer，而通过<em>noteSlice.actions</em>属性访问action creators。我们可以以下面的方式生成文件的导出：
 
 ```js
@@ -678,7 +678,7 @@ describe('noteReducer', () => {
 <!-- As we have learned, console.log is an extremely powerful tool, it usually always saves us from trouble.-->
 我们已经学习到，`console.log` 是一个极其强大的工具，它通常总能拯救我们免遭麻烦。
 
-<!-- Let''s try to print the state of the Redux Store to the console in the middle of the reducer created with the function createSlice:-->
+<!-- Let's try to print the state of the Redux Store to the console in the middle of the reducer created with the function createSlice:-->
 让我们试着在用函数createSlice创建的reducer中间，将Redux Store的状态打印到控制台：
 
 ```js
@@ -729,10 +729,10 @@ console.log(JSON.parse(JSON.stringify(state))) // highlight-line
 
 ### Redux DevTools
 
-<!-- [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) is a Chrome addon that offers useful development tools for Redux. It can be used for example to inspect the Redux store's state and dispatch actions through the browser's console. When the store is created using Redux Toolkit''s <em>configureStore</em> function, no additional configuration is needed for Redux DevTools to work.-->
+<!-- [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) is a Chrome addon that offers useful development tools for Redux. It can be used for example to inspect the Redux store's state and dispatch actions through the browser's console. When the store is created using Redux Toolkit's <em>configureStore</em> function, no additional configuration is needed for Redux DevTools to work.-->
 [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) 是一款Chrome插件，为Redux提供有用的开发工具。它可以用来检查Redux store的状态，并通过浏览器的控制台调度动作。当使用Redux Toolkit的<em>configureStore</em>函数创建存储库时，无需额外的配置即可使用Redux DevTools。
 
-<!-- Once the addon is installed, clicking the <i>Redux</i> tab in the browser''s console should open the development tools:-->
+<!-- Once the addon is installed, clicking the <i>Redux</i> tab in the browser's console should open the development tools:-->
 一旦安装了附加组件，在浏览器控制台点击<i>Redux</i>标签就可以打开开发工具：
 
 ![browser with redux addon in devtools](../../images/6/42new.png)
@@ -756,23 +756,23 @@ console.log(JSON.parse(JSON.stringify(state))) // highlight-line
 
 ### Exercises 6.10.-6.13.
 
-<!-- Let''s continue working on the anecdote application using Redux that we started in exercise 6.3.-->
+<!-- Let's continue working on the anecdote application using Redux that we started in exercise 6.3.-->
 让我们继续在练习6.3中开始使用Redux来开发轶事应用程序。
 
 #### 6.10 Better anecdotes, step8
 
-<!-- Install Redux Toolkit for the project. Move the Redux store creation into the file <i>store.js</i> and use Redux Toolkit''s <em>configureStore</em> to create the store.-->
+<!-- Install Redux Toolkit for the project. Move the Redux store creation into the file <i>store.js</i> and use Redux Toolkit's <em>configureStore</em> to create the store.-->
 安装Redux Toolkit用于该项目。将Redux存储创建移至文件<i>store.js</i>中，并使用Redux Toolkit的<em>configureStore</em>来创建存储。
 
-<!-- Change the definition of the <i>filter reducer and action creators</i> to use the Redux Toolkit''s <em>createSlice</em> function.-->
+<!-- Change the definition of the <i>filter reducer and action creators</i> to use the Redux Toolkit's <em>createSlice</em> function.-->
 将 <i>filter reducer 和 action creators</i> 的定义更改为使用 Redux Toolkit 的 <em>createSlice</em> 函数。
 
-<!-- Also, start using Redux DevTools to debug the application''s state easier.-->
+<!-- Also, start using Redux DevTools to debug the application's state easier.-->
 也可以开始使用Redux DevTools来更轻松地调试应用程序的状态。
 
 #### 6.11 Better anecdotes, step9
 
-<!-- Change also the definition of the <i>anecdote reducer and action creators</i> to use the Redux Toolkit''s <em>createSlice</em> function.-->
+<!-- Change also the definition of the <i>anecdote reducer and action creators</i> to use the Redux Toolkit's <em>createSlice</em> function.-->
 改变<i>anecdote reducer 和 action creators</i>的定义，使用Redux Toolkit的<em>createSlice</em>函数。
 
 #### 6.12 Better anecdotes, step10
@@ -831,7 +831,7 @@ const Notification = () => {
 
 ![browser showing message of having voted](../../images/6/8ea.png)
 
-<!-- It''s recommended to create separate [action creators](https://redux-toolkit.js.org/api/createSlice#reducers) for setting and removing notifications.-->
+<!-- It's recommended to create separate [action creators](https://redux-toolkit.js.org/api/createSlice#reducers) for setting and removing notifications.-->
 建议分别为设置和移除通知创建[动作创建者](https://redux-toolkit.js.org/api/createSlice#reducers)。
 
 </div>

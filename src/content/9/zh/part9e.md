@@ -26,7 +26,7 @@ lang: zh
 <!-- It is always a good idea to start the application and click around to verify you have a functional development environment.-->
 总是有一个好主意去启动应用程序，并点击四处以验证您有一个功能强大的开发环境。
 
-<!-- You can also browse the folder structure to get some insight into the application''s functionality and/or the architecture used. These are not always clear, and the developers might have chosen a way to organize code that is not familiar to you. The [sample project](https://github.com/fullstack-hy2020/patientor) used in the rest of this part is organized, feature-wise. You can see what pages the application has, and some general components, e.g. modals and state. Keep in mind that the features may have different scopes. For example, modals are visible UI-level components whereas the state is comparable to business logic and keeps the data organized under the hood for the rest of the app to use.-->
+<!-- You can also browse the folder structure to get some insight into the application's functionality and/or the architecture used. These are not always clear, and the developers might have chosen a way to organize code that is not familiar to you. The [sample project](https://github.com/fullstack-hy2020/patientor) used in the rest of this part is organized, feature-wise. You can see what pages the application has, and some general components, e.g. modals and state. Keep in mind that the features may have different scopes. For example, modals are visible UI-level components whereas the state is comparable to business logic and keeps the data organized under the hood for the rest of the app to use.-->
 你也可以浏览文件夹结构，以获得应用程序功能和/或所使用的架构的一些见解。这些并不总是清楚的，开发人员可能选择了一种你不熟悉的方式来组织代码。本部分使用的[样本项目](https://github.com/fullstack-hy2020/patientor)按功能组织。你可以看到应用程序有哪些页面，以及一些常见组件，例如模态窗口和状态。请记住，功能可能具有不同的范围。例如，模态窗口是可见的UI级组件，而状态可以比作业务逻辑，并在后台为其余的应用程序使用的数据进行组织。
 
 <!-- TypeScript provides types for what kind of data structures, functions, components, and state to expect.  You can try looking for <i>types.ts</i> or something similar to get started. VSCode is a big help and simply highlighting variables and parameters can provide quite a lot of insight. All this naturally depends on how types are used in the project.-->
@@ -40,13 +40,13 @@ TypeScript 提供了用于预期数据结构、函数、组件和状态的类型
 
 ### Patientor frontend
 
-<!-- It''s time to get our hands dirty finalizing the frontend for the backend we built in [exercises 9.8.-9.13](/en/part9/typing_an_express_app). We will actually also need some new features to the backend for finishing the app.-->
+<!-- It's time to get our hands dirty finalizing the frontend for the backend we built in [exercises 9.8.-9.13](/en/part9/typing_an_express_app). We will actually also need some new features to the backend for finishing the app.-->
 是时候让我们认真完成[练习9.8-9.13](/en/part9/typing_an_express_app)中构建的后端的前端了。 为了完成应用程序，我们实际上还需要一些新功能来支持后端。
 
 <!-- Before diving into the code, let us start both the frontend and the backend.-->
 在潜入代码之前，让我们开始前端和后端。
 
-<!-- If all goes well, you should see a patient listing page. It fetches a list of patients from our backend, and renders it to the screen as a simple table. There is also a button for creating new patients on the backend. As we are using mock data instead of a database, the data will not persist - closing the backend will delete all the data we have added. UI design has not been a strong point of the creators, so let''s disregard the UI for now.-->
+<!-- If all goes well, you should see a patient listing page. It fetches a list of patients from our backend, and renders it to the screen as a simple table. There is also a button for creating new patients on the backend. As we are using mock data instead of a database, the data will not persist - closing the backend will delete all the data we have added. UI design has not been a strong point of the creators, so let's disregard the UI for now.-->
 如果一切顺利，您应该能看到一个病人列表页面。它从我们的后端获取一系列病人，并将其渲染到屏幕上作为一个简单的表格。还有一个按钮可以在后端创建新的病人。由于我们正在使用模拟数据而不是数据库，因此数据不会永久保存 - 关闭后端将删除我们添加的所有数据。UI设计不是创造者的强项，所以让我们暂时忽略UI吧。
 
 <!-- After verifying that everything works, we can start studying the code. All the interesting stuff resides in the <i>src</i> folder. For your convenience, there is already a <i>types.ts</i> file for basic types used in the app, which you will have to extend or refactor in the exercises.-->
@@ -55,7 +55,7 @@ TypeScript 提供了用于预期数据结构、函数、组件和状态的类型
 <!-- In principle, we could use the same types for both backend and frontend, but usually, the frontend has different data structures and use cases for the data, which causes the types to be different.-->
 在原则上，我们可以同时使用后端和前端的同一种类型，但通常情况下，前端的数据结构和数据使用情况不同，这就导致类型也不同。
 <!-- For example, the frontend has a state and may want to keep data in objects or maps whereas the backend uses an array. The frontend might also not need all the fields of a data object saved in the backend, and it may need to add some new fields to use for rendering.-->
-例如，前端有一个状态，可能希望将数据保存在对象或地图中，而后端使用一个数组。前端可能不需要后端保存的数据对象的所有字段，也可能需要添加一些新字段用于渲染。
+例如，前端有一个状态，可能希望将数据保存在对象或Map中，而后端使用一个数组。前端可能不需要后端保存的数据对象的所有字段，也可能需要添加一些新字段用于渲染。
 
 <!-- The folder structure looks as follows:-->
 文件夹结构如下：
@@ -66,7 +66,7 @@ TypeScript 提供了用于预期数据结构、函数、组件和状态的类型
 除了组件*App*（一个服务目录）之外，目前还有三个主要组件：*AddPatientModal* 和 *PatientListPage* 都定义在一个目录中，另一个组件 *HealthRatingBar* 定义在一个文件中。如果一个组件有一些不在应用程序其他地方使用的子组件，最好的办法是在一个目录中定义该组件及其子组件。例如，现在 *AddPatientModal* 在文件 *components/AddPatientModal/index.tsx* 中定义，它的子组件 *AddPatientForm* 在同一目录的另一个文件中定义。
 
 <!-- There is nothing very surprising in the code. The state and communication with the backend are implemented with *useState* hook and Axios, similar to the notes app in the previous section. [Material UI](/en/part7/more_about_styles#material-ui) is used to style the app and the navigation structure is implementer with [React Router](/en/part7/react_router), both familiar to us from part 7 of the course.-->
-没有什么特别令人惊讶的代码。状态和与后端的通信使用*useState*钩子和Axios实现，类似于前一节中的笔记应用。[Material UI](/en/part7/more_about_styles#material-ui)用于样式化应用程序，导航结构使用[React Router](/en/part7/react_router)实现，这些都是我们从课程第7部分熟悉的内容。
+没有什么特别令人惊讶的代码。状态和与后端的通信使用*useState*钩子和Axios实现，类似于前一节中的笔记应用。[Material UI](/en/part7/more_about_styles#material-ui)用于样式化应用程序，导航结构使用[React Router](/en/part7/react_router)实现，这些都是我们从课程第7章节熟悉的内容。
 
 <!-- From typing point of view, there are a couple of interesting things. Component *App* passes the function *setPatients* as a prop to the component *PatientListPage*:-->
 从打字的角度来看，有几件有趣的事情。组件*App*将函数*setPatients*作为prop传递给组件*PatientListPage*：
@@ -235,7 +235,7 @@ export type NonSensitivePatient = Omit<Patient, 'ssn' | 'entries'>;  // highligh
 
 #### 9.21: Patientor, step2
 
-<!-- Create a page for showing a patient''s full information in the frontend.-->
+<!-- Create a page for showing a patient's full information in the frontend.-->
 创建一个页面，用于在前端显示患者的完整信息。
 
 <!-- The user should be able to access a patient's information by clicking the patient's name.-->
@@ -266,18 +266,18 @@ export type NonSensitivePatient = Omit<Patient, 'ssn' | 'entries'>;  // highligh
 
 <!-- In [exercise 9.10](/en/part9/typing_an_express_app#exercises-9-10-9-11) we implemented an endpoint for fetching information about various diagnoses, but we are still not using that endpoint at all.-->
 在[练习9.10](/en/part9/typing_an_express_app#exercises-9-10-9-11)中，我们实现了一个用于获取有关各种诊断信息的端点，但我们仍然没有使用该端点。
-<!-- Since we now have a page for viewing a patient''s information, it would be nice to expand our data a bit.-->
+<!-- Since we now have a page for viewing a patient's information, it would be nice to expand our data a bit.-->
 自从我们现在有了一个可以查看病人资料的页面，那么增加一些资料会很好。
 <!-- Let's add an *Entry* field to our patient data so that a patient's data contains their medical entries, including possible diagnoses.-->
 让我们为我们的病人资料新增一个*记录*栏位，以便病人资料包含他们的医疗记录，包括可能的诊断。
 
-<!-- Let''s ditch our old patient seed data from the backend and start using [this expanded format](https://github.com/fullstack-hy2020/misc/blob/master/patients-full.ts).-->
+<!-- Let's ditch our old patient seed data from the backend and start using [this expanded format](https://github.com/fullstack-hy2020/misc/blob/master/patients-full.ts).-->
 让我们抛弃后端的旧患者种子数据，开始使用[这种扩展格式](https://github.com/fullstack-hy2020/misc/blob/master/patients-full.ts)。
 
 <!-- Let us now create a proper *Entry* type based on the data we have.-->
 让我们现在根据我们拥有的数据创建一个正确的*Entry*类型。
 
-<!-- If we take a closer look at the data, we can see that the entries are quite different from one another. For example, let''s take a look at the first two entries:-->
+<!-- If we take a closer look at the data, we can see that the entries are quite different from one another. For example, let's take a look at the first two entries:-->
 如果我们仔细看一下数据，我们会发现这些条目彼此之间有很大的不同。例如，让我们看一下前两个条目：
 
 ```js
@@ -369,7 +369,7 @@ interface BaseEntry {
 }
 ```
 
-<!-- Now that we have the *BaseEntry* defined, we can start creating the extended entry types we will actually be using. Let''s start by creating the *HealthCheckEntry* type.-->
+<!-- Now that we have the *BaseEntry* defined, we can start creating the extended entry types we will actually be using. Let's start by creating the *HealthCheckEntry* type.-->
 现在我们已经定义了*BaseEntry*，我们可以开始创建我们实际使用的扩展条目类型。让我们从创建*HealthCheckEntry*类型开始。
 
 <!-- Entries of type *HealthCheck* contain the field *HealthCheckRating*, which is an integer from 0 to 3, zero meaning *Healthy* and 3 meaning *CriticalRisk*. This is a perfect case for an enum definition.-->
@@ -433,7 +433,7 @@ type EntryWithoutId = UnionOmit<Entry, 'id'>;
 
 #### 9.22: Patientor, step3
 
-<!-- Define the types *OccupationalHealthcareEntry* and *HospitalEntry* so that those conform with the example data. Ensure that your backend returns the entries properly when you go to an individual patient''s route:-->
+<!-- Define the types *OccupationalHealthcareEntry* and *HospitalEntry* so that those conform with the example data. Ensure that your backend returns the entries properly when you go to an individual patient's route:-->
 定义类型*OccupationalHealthcareEntry*和*HospitalEntry*，以便符合示例数据。确保当您访问单个患者的路由时，后端正确地返回条目：
 
 *OccupationalHealthcareEntry*：职业保健条目，指的是患者在职业保健机构接受的治疗，包括诊断、治疗、药物治疗以及其他有关措施。
@@ -460,14 +460,14 @@ type EntryWithoutId = UnionOmit<Entry, 'id'>;
 
 #### 9.24: Patientor, step5
 
-<!-- Fetch and add diagnoses to the application state from the <i>/api/diagnoses</i> endpoint. Use the new diagnosis data to show the descriptions for patient''s diagnosis codes:-->
+<!-- Fetch and add diagnoses to the application state from the <i>/api/diagnoses</i> endpoint. Use the new diagnosis data to show the descriptions for patient's diagnosis codes:-->
 从<i>/api/diagnoses</i>端点获取并将诊断添加到应用状态中。使用新的诊断数据来显示患者诊断码的描述：
 
 ![browser showing list of codes and their descriptions for patient ](../../images/9/42.png)
 
 #### 9.25: Patientor, step6
 
-<!-- Extend the entry listing on the patient's page to include the Entry's details with a new component that shows the rest of the information of the patient''s entries distinguishing different types from each other.-->
+<!-- Extend the entry listing on the patient's page to include the Entry's details with a new component that shows the rest of the information of the patient's entries distinguishing different types from each other.-->
 在病人页面上增加条目列表，添加新组件，显示病人条目的其余信息，以区分不同类型的条目。
 
 <!-- You could use eg. [Icons](https://mui.com/components/material-icons/) or some other [Material UI](https://mui.com/) component to get appropriate visuals for your listing.-->
@@ -520,13 +520,13 @@ const parseDiagnosisCodes = (object: unknown): Array<Diagnosis['code']> =>  {
 
 #### 9.27: Patientor, step8
 
-<!-- Now that our backend supports adding entries, we want to add the corresponding functionality to the frontend. In this exercise, you should add a form for adding an entry to a patient. An intuitive place for accessing the form would be on a patient''s page.-->
+<!-- Now that our backend supports adding entries, we want to add the corresponding functionality to the frontend. In this exercise, you should add a form for adding an entry to a patient. An intuitive place for accessing the form would be on a patient's page.-->
 现在我们的后端支持添加条目，我们想将相应的功能添加到前端。 在本次练习中，您应该添加一个用于对患者添加条目的表单。 访问表单的直观位置是在患者页面上。
 
 <!-- In this exercise, it is enough to **support <i>one</i> entry type**. All the fields in the form can be just plain text inputs, so it is up to user to enter valid values.-->
 在这个练习中，**足以支持<i>一个</i>条目类型**就可以了。表单中的所有字段都可以是普通的文本输入，因此用户输入有效值取决于用户自己。
 
-<!-- Upon a successful submit, the new entry should be added to the correct patient and the patient''s entries on the patient page should be updated to contain the new entry.-->
+<!-- Upon a successful submit, the new entry should be added to the correct patient and the patient's entries on the patient page should be updated to contain the new entry.-->
 成功提交后，新条目应该添加到正确的患者上，并且患者页面上的条目应该更新以包含新条目。
 
 <!-- Your form might look something like this:-->
@@ -570,7 +570,7 @@ const parseDiagnosisCodes = (object: unknown): Array<Diagnosis['code']> =>  {
 <!-- **Note** that you need a registration to the corresponding course part for getting the credits registered, see [here](/en/part0/general_info#parts-and-completion) for more information.-->
 **注意**，您需要注册相应课程部分才能获得学分登记，更多信息请参见[这里](/en/part0/general_info#parts-and-completion)。
 
-<!-- You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the certificate''s language.-->
+<!-- You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the certificate's language.-->
 您可以通过点击一个旗帜图标来下载完成此部分的证书。旗帜图标对应证书的语言。
 
 </div>

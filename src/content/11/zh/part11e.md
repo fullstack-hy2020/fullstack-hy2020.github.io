@@ -76,7 +76,7 @@ lang: zh
 
 ### Metrics
 
-<!-- In the previous section, we mentioned that as projects get more complicated, so too, do their builds, and the duration of the builds increases. That''s obviously not ideal: The longer the feedback loop, the slower the development.-->
+<!-- In the previous section, we mentioned that as projects get more complicated, so too, do their builds, and the duration of the builds increases. That's obviously not ideal: The longer the feedback loop, the slower the development.-->
 在前一部分，我们提到随着项目变得更加复杂，构建也变得更加复杂，构建持续时间也会增加。显然这不是理想的：反馈回路越长，开发就越慢。
 
 <!-- While there are things that can be done about this increase in build times, it's useful to have a better view of the overall picture. It's useful to know how long a build took a few months ago versus how long it takes now. Was the progression linear or did it suddenly jump? Knowing what caused the increase in build time can be very useful in helping to solve it. If the build time increased linearly from 5 minutes to 10 minutes over the last year, maybe we can expect it to take another few months to get to 15 minutes and we have an idea of how much value there is in spending time speeding up the CI process.-->
@@ -110,7 +110,7 @@ lang: zh
 
 #### 11.19 Periodic health check
 
-<!-- We are pretty confident now that our pipeline prevents bad code from being deployed. However, there are many sources of errors. If our application would e.g. depend on a database that would for some reason become unavailable, our application would most likely crash. That''s why it would be a good idea to set up <i>a periodic health check</i> that would regularly do an HTTP GET request to our server. We quite often refer to this kind of request as a <i>ping</i>.-->
+<!-- We are pretty confident now that our pipeline prevents bad code from being deployed. However, there are many sources of errors. If our application would e.g. depend on a database that would for some reason become unavailable, our application would most likely crash. That's why it would be a good idea to set up <i>a periodic health check</i> that would regularly do an HTTP GET request to our server. We quite often refer to this kind of request as a <i>ping</i>.-->
 我们现在很有信心，我们的管道可以防止坏代码被部署。但是，有许多来源的错误。如果我们的应用程序依赖于一个数据库，由于某种原因不可用，我们的应用程序很可能会崩溃。这就是为什么建立<i>定期健康检查</i>来定期发出HTTP GET请求到我们的服务器是一个好主意。我们经常把这种请求称为<i>ping</i>。
 
 <!-- It is possible to [schedule](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule) GitHub actions to happen regularly.-->
@@ -128,7 +128,7 @@ lang: zh
 #### 11.20 Your own pipeline
 
 <!-- Build a similar CI/CD-pipeline for some of your own applications. Some of the good candidates are the phonebook app that was built in parts 2 and 3 of the course, or the blogapp built in parts 4 and 5, or the Redux anecdotes built in part 6. You may also use some app of your own for this exercise.-->
-建立一个类似的CI/CD流水线来部署你自己的应用程序。一些较好的候选应用程序是在本课程的第2和第3部分构建的电话簿应用程序，或者在第4和第5部分构建的博客应用程序，或者在第6部分构建的Redux轶事。你也可以使用自己的应用程序来进行此练习。
+建立一个类似的CI/CD流水线来部署你自己的应用程序。一些较好的候选应用程序是在本课程的第2和第3章节构建的电话簿应用程序，或者在第4和第5章节构建的博客应用程序，或者在第6章节构建的Redux轶事。你也可以使用自己的应用程序来进行此练习。
 
 <!-- You most likely need to do some restructuring to get all the pieces together. A logical first step is to store both the frontend and backend code in the same repository. This is not a requirement but it is recommended since it makes things much more simple.-->
 你很可能需要做一些重组来把所有的部分放在一起。一个合理的第一步是把前端和后端代码都存储在同一个仓库中。这不是一个要求，但是建议这样做，因为这样可以让事情变得更简单。
@@ -179,7 +179,7 @@ lang: zh
 <!-- **Note** that you need a registration to the corresponding course part for getting the credits registered, see [here](/en/part0/general_info#parts-and-completion) for more information.-->
 **注意**：你需要注册对应的课程部分才能获得学分登记，更多信息请参见[这里](/en/part0/general_info#parts-and-completion)。
 
-<!-- You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the certificate''s language.-->
+<!-- You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the certificate's language.-->
 你可以点击其中一个旗帜图标来下载完成这部分的证书。旗帜图标对应证书的语言。
 
 </div>

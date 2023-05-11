@@ -41,7 +41,7 @@ npx create-react-app my-app --template typescript
 
 <!-- After running the command, you should have a complete basic React app that uses TypeScript.-->
 在运行命令之后，您应该有一个使用TypeScript的完整的基本React应用程序。
-<!-- You can start the app by running *npm start* in the application''s root.-->
+<!-- You can start the app by running *npm start* in the application's root.-->
 你可以在应用程序的根目录下运行*npm start*来启动应用。
 
 <!-- If you take a look at the files and folders, you''ll notice that the app is not that different from-->
@@ -51,7 +51,7 @@ other apps.
 <!-- one using pure JavaScript. The only differences are that the <i>.js</i> and <i>.jsx</i> files are now  <i>.ts</i> and <i>.tsx</i> files, they contain some type annotations, and the root directory contains a <i>tsconfig.json</i> file.-->
 使用纯JavaScript，唯一的区别是<i>.js</i> 和 <i>.jsx</i> 文件现在是<i>.ts</i> 和 <i>.tsx</i> 文件，它们包含一些类型注释，根目录包含一个<i>tsconfig.json</i> 文件。
 
-<!-- Now, let''s take a look at the <i>tsconfig.json</i> file that has been created for us:-->
+<!-- Now, let's take a look at the <i>tsconfig.json</i> file that has been created for us:-->
 现在，让我们来看看为我们创建的<i>tsconfig.json</i>文件：
 
 ```js
@@ -88,7 +88,7 @@ other apps.
 
 <!-- Everything else should be more or less fine except that, at the moment, the configuration allows compiling JavaScript files because *allowJs* is set to *true*.-->
 除此之外，其他的应该都比较正常，但目前，由于`allowJs`被设置为`true`，配置允许编译JavaScript文件。
-<!-- That would be fine if you need to mix TypeScript and JavaScript (e.g. if you are in the process of transforming a JavaScript project into TypeScript or something like that), but we want to create a pure TypeScript app, so let''s change that configuration to *false*.-->
+<!-- That would be fine if you need to mix TypeScript and JavaScript (e.g. if you are in the process of transforming a JavaScript project into TypeScript or something like that), but we want to create a pure TypeScript app, so let's change that configuration to *false*.-->
 如果你需要混合TypeScript和JavaScript（例如，如果你正在将一个JavaScript项目转换为TypeScript或类似的东西），那将是很好的，但我们想要创建一个纯TypeScript应用程序，所以让我们将该配置更改为* false *。
 
 <!-- In our previous project, we used ESlint to help us enforce a coding style, and we''ll do the same with this app. We do not need to install any dependencies, since create-react-app has taken care of that already.-->
@@ -129,7 +129,7 @@ other apps.
 <!-- Now we don''t need to explicitly state our function return types everywhere. We will also disable [react/react-in-jsx-scope](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/react-in-jsx-scope.md) since importing React is [no longer needed](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html) in every file.-->
 现在我们不需要在每个地方都明确声明函数的返回类型。由于[不再需要](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html)在每个文件中导入React，我们也将禁用[react/react-in-jsx-scope](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/react-in-jsx-scope.md)。
 
-<!-- Next, we need to get our linting script to parse <i>*.tsx </i> files, which are the TypeScript equivalent of React''s JSX files.-->
+<!-- Next, we need to get our linting script to parse <i>*.tsx </i> files, which are the TypeScript equivalent of React's JSX files.-->
 下一步，我们需要让我们的 linting 脚本解析 <i>*.tsx </i> 档案，它们是 TypeScript 的 React 的 JSX 档案的等价物。
 <!-- We can do that by altering our lint command in <i>package.json</i> to the following:-->
 我们可以通过更改<i>package.json</i>中的lint命令来实现：
@@ -177,8 +177,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 )
 ```
 
-<!-- In this example, we have a component called *Welcome* to which we pass a *name* as a prop. It then renders the name to the screen.  We know that the *name* should be a string, and we use the [prop-types](https://www.npmjs.com/package/prop-types) package introduced in [part 5](/en/part5/props_children_and_proptypes#prop-types) to receive hints about the desired types of a component''s props and warnings about invalid prop types.-->
-在这个例子中，我们有一个叫做*Welcome*的组件，我们向它传递一个*name*作为prop。然后它将name渲染到屏幕上。我们知道*name*应该是一个字符串，我们使用在[第五部分](/en/part5/props_children_and_proptypes#prop-types)中介绍的[prop-types](https://www.npmjs.com/package/prop-types)包来获得有关组件prop期望类型的提示和有关无效prop类型的警告。
+<!-- In this example, we have a component called *Welcome* to which we pass a *name* as a prop. It then renders the name to the screen.  We know that the *name* should be a string, and we use the [prop-types](https://www.npmjs.com/package/prop-types) package introduced in [part 5](/en/part5/props_children_and_proptypes#prop-types) to receive hints about the desired types of a component's props and warnings about invalid prop types.-->
+在这个例子中，我们有一个叫做*Welcome*的组件，我们向它传递一个*name*作为prop。然后它将name渲染到屏幕上。我们知道*name*应该是一个字符串，我们使用在[第五章节](/en/part5/props_children_and_proptypes#prop-types)中介绍的[prop-types](https://www.npmjs.com/package/prop-types)包来获得有关组件prop期望类型的提示和有关无效prop类型的警告。
 
 <!-- With TypeScript, we don''t need the <i>prop-types</i> package anymore. We can define the types with the help of TypeScript just like we define types for a regular function as React components are nothing but mere functions. We will use an interface for the parameter types (i.e., props) and *JSX.Element* as the return type for any react component:-->
 随着TypeScript的出现，我们不再需要<i>prop-types</i> 这个包了。我们可以像定义普通函数类型一样，用TypeScript定义React组件类型。我们将使用接口来定义参数类型（即props），以及*JSX.Element*作为任何React组件的返回类型：
@@ -199,7 +199,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 )
 ```
 
-<!-- We defined a new type, *WelcomeProps*, and passed it to the function''s parameter types.-->
+<!-- We defined a new type, *WelcomeProps*, and passed it to the function's parameter types.-->
 我们定义了一个新类型，*WelcomeProps*，并将其传递给函数的参数类型。
 
 ```jsx
@@ -273,7 +273,7 @@ HTMLElement | null
 创建一个新的带有TypeScript的Create React App，并像我们刚才做的那样为该项目设置ESLint。
 
 <!-- This exercise is similar to the one you have already done in [Part 1](/en/part1/java_script#exercises-1-3-1-5) of the course, but with TypeScript and some extra tweaks. Start off by modifying the contents of <i>index.tsx</i> to the following:-->
-这个练习与课程[第一部分](/en/part1/java_script#exercises-1-3-1-5)中你已经完成的练习类似，但使用TypeScript并做了一些额外的调整。首先，将<i>index.tsx</i>的内容修改为以下内容：
+这个练习与课程[第一章节](/en/part1/java_script#exercises-1-3-1-5)中你已经完成的练习类似，但使用TypeScript并做了一些额外的调整。首先，将<i>index.tsx</i>的内容修改为以下内容：
 
 ```jsx
 import ReactDOM from 'react-dom/client'
@@ -337,7 +337,7 @@ export default App;
 
 移除不必要的文件是一项重要的任务，可以确保系统的有效运行。定期清理系统可以帮助提高系统的性能，减少系统可能出现的问题。清理系统时，最好先备份重要的文件，然后再删除不必要的文件。
 
-<!-- The whole app is now in one component. That is not what we want, so refactor the code so that it consists of three components: *Header*,  *Content* and *Total*. All data is still kept in the *App* component, which passes all necessary data to each component as props. <i>Be sure to add type declarations for each component''s props!</i>-->
+<!-- The whole app is now in one component. That is not what we want, so refactor the code so that it consists of three components: *Header*,  *Content* and *Total*. All data is still kept in the *App* component, which passes all necessary data to each component as props. <i>Be sure to add type declarations for each component's props!</i>-->
 整个应用现在只有一个组件。这不是我们想要的，所以重构代码，使其由三个组件组成：*Header*、*Content* 和 *Total*。所有数据仍然保留在*App*组件中，它将所有必要的数据作为props传递给每个组件。<i>务必为每个组件的props添加类型声明！</i>
 
 <!-- The *Header* component should take care of rendering the name of the course. *Content* should render the names of the different parts and the number of exercises in each part, and *Total* should render the total sum of exercises in all parts.-->
@@ -366,7 +366,7 @@ const App = () => {
 
 ### Deeper type usage
 
-<!-- In the previous exercise, we had three parts of a course, and all parts had the same attributes *name* and *exerciseCount*. But what if we needed additional attributes for the parts where all parts do not have the same attributes? How would this look, codewise? Let''s consider the following example:-->
+<!-- In the previous exercise, we had three parts of a course, and all parts had the same attributes *name* and *exerciseCount*. But what if we needed additional attributes for the parts where all parts do not have the same attributes? How would this look, codewise? Let's consider the following example:-->
 在前一个练习中，我们有三个课程的部分，所有部分都具有相同的属性*名称*和*练习计数*。但是，如果我们需要为所有部分都不相同属性的部分添加额外属性时，代码会是什么样子？让我们考虑以下示例：
 
 ```js
@@ -398,12 +398,12 @@ const courseParts = [
 <!-- In the above example, we have added some additional attributes to each course part.-->
 在上面的例子中，我们给每个课程部分添加了一些额外的属性。
 <!-- Each part has the *name* and *exerciseCount* attributes, but the first, the third  and fourth also have an attribute called *description*, and the second and fourth parts also have some distinct additional attributes.-->
-每部分都有*name*和*exerciseCount*属性，但是第一、第三和第四部分还有一个叫做*description*的属性，而第二和第四部分还有一些不同的附加属性。
+每部分都有*name*和*exerciseCount*属性，但是第一、第三和第四章节还有一个叫做*description*的属性，而第二和第四章节还有一些不同的附加属性。
 
-<!-- Let''s imagine that our application just keeps on growing, and we need to pass the different course parts around in our code. On top of that, there are also additional attributes and course parts added to the mix. How can we know that our code is capable of handling all the different types of data correctly, and we are not for example forgetting to render a new course part on some page? This is where TypeScript comes in handy!-->
+<!-- Let's imagine that our application just keeps on growing, and we need to pass the different course parts around in our code. On top of that, there are also additional attributes and course parts added to the mix. How can we know that our code is capable of handling all the different types of data correctly, and we are not for example forgetting to render a new course part on some page? This is where TypeScript comes in handy!-->
 让我们想象一下，我们的应用程序不断增长，我们需要在代码中传递不同的课程部分。此外，还添加了其他属性和课程部分。我们怎么知道我们的代码能够正确处理所有不同类型的数据，而不是例如忘记在某些页面上渲染新课程部分？这就是TypeScript发挥作用的地方！
 
-<!-- Let''s start by defining types for our different course parts. We notice that the first and third have the same set of attributes. The second and fourth are a bit different so we have three different kinds of course part elements.-->
+<!-- Let's start by defining types for our different course parts. We notice that the first and third have the same set of attributes. The second and fourth are a bit different so we have three different kinds of course part elements.-->
 让我们从定义我们不同课程部分的类型开始。我们注意到第一和第三有相同的属性集。第二和第四有点不同，所以我们有三种不同类型的课程部分元素。
 
 <!-- So let us define a type for each of the different kind of course parts:-->
@@ -985,7 +985,7 @@ const App = () => {
 }
 ```
 
-<!-- And that''s it, our app is ready and perfectly typed!-->
+<!-- And that's it, our app is ready and perfectly typed!-->
 而且就是这样，我们的应用程序已经准备好了，而且完美地打字！
 
 ### Communicating with the server
@@ -1228,7 +1228,7 @@ TypeScript 文档[推荐在大多数情况下使用接口](https://www.typescrip
 
 ### Exercises 9.16-9.19
 
-<!-- Let us now build a frontend for the Ilari''s flight diaries that was developed in [the previous section](/en/part9/typing_an_express_app). The source code of the backend can be found in [this GitHub repository](https://github.com/fullstack-hy2020/flight-diary).-->
+<!-- Let us now build a frontend for the Ilari's flight diaries that was developed in [the previous section](/en/part9/typing_an_express_app). The source code of the backend can be found in [this GitHub repository](https://github.com/fullstack-hy2020/flight-diary).-->
 让我们现在为在[上一节](/en/part9/typing_an_express_app)中开发的Ilari的飞行日记构建一个前端。后端的源代码可以在[这个GitHub存储库](https://github.com/fullstack-hy2020/flight-diary)中找到。
 
 #### Exercise 9.16

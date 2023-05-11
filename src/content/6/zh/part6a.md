@@ -29,7 +29,7 @@ lang: zh
 
 ![same diagram as above but with action looping back](../../images/6/flux2.png)
 
-<!-- Flux offers a standard way for how and where the application''s state is kept and how it is modified.-->
+<!-- Flux offers a standard way for how and where the application's state is kept and how it is modified.-->
 Flux 提供一种标准的方式来维护应用状态，以及如何修改它。
 
 ### Redux
@@ -72,7 +72,7 @@ npm install redux
 <!-- The impact of the action to the state of the application is defined using a [reducer](https://redux.js.org/basics/reducers). In practice, a reducer is a function that is given the current state and an action as parameters. It <i>returns</i> a new state.-->
 行动对应用状态的影响是通过[reducer](https://redux.js.org/basics/reducers)来定义的。实际上，reducer是一个函数，它接收当前状态和操作作为参数。它<i>返回</i>一个新的状态。
 
-<!-- Let''s now define a reducer for our application:-->
+<!-- Let's now define a reducer for our application:-->
 让我们现在为我们的应用程序定义一个reducer：
 
 ```js
@@ -92,10 +92,10 @@ const counterReducer = (state, action) => {
 <!-- The first parameter is the <i>state</i> in the store. The reducer returns a <i>new state</i> based on the _action_ type. So, e.g. when the type of Action is <i>INCREMENT</i>, the state gets the old value plus one. If the type of Action is <i>ZERO</i> the new value of state is zero.-->
 第一个参数是存储中的<i>状态</i>。 Reducer根据_action_类型返回<i>新状态</i>。 因此，例如，当Action的类型为<i>INCREMENT</i>时，状态将获得旧值加1。 如果Action的类型为<i>ZERO</i>，则state的新值为零。
 
-<!-- Let''s change the code a bit. We have used if-else statements to respond to an action and change the state. However, the [switch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) statement is the most common approach to writing a reducer.-->
+<!-- Let's change the code a bit. We have used if-else statements to respond to an action and change the state. However, the [switch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) statement is the most common approach to writing a reducer.-->
 让我们改变一下代码。我们已经使用 if-else 语句来响应一个动作并改变状态。然而，[switch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) 语句是编写 reducer 的最常见方法。
 
-<!-- Let''s also define a [default value](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters) of 0 for the parameter <i>state</i>. Now the reducer works even if the store state has not been primed yet.-->
+<!-- Let's also define a [default value](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters) of 0 for the parameter <i>state</i>. Now the reducer works even if the store state has not been primed yet.-->
 让我们为参数<i>state</i>定义一个[默认值](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters)为0。现在，即使存储状态尚未初始化，也可以正常工作。
 
 ```js
@@ -113,7 +113,7 @@ const counterReducer = (state = 0, action) => {
 }
 ```
 
-<!-- Reducer is never supposed to be called directly from the application''s code. Reducer is only given as a parameter to the _createStore_-function which creates the store:-->
+<!-- Reducer is never supposed to be called directly from the application's code. Reducer is only given as a parameter to the _createStore_-function which creates the store:-->
 Reducer绝不应该直接从应用程序的代码中调用。Reducer只是作为一个参数给_createStore_-函数，该函数创建存储：
 
 ```js
@@ -320,7 +320,7 @@ I am a student
 
 ### Redux-notes
 
-<!-- We aim to modify our note application to use Redux for state management. However, let''s first cover a few key concepts through a simplified note application.-->
+<!-- We aim to modify our note application to use Redux for state management. However, let's first cover a few key concepts through a simplified note application.-->
 我们的目标是修改我们的笔记应用程序以使用Redux进行状态管理。但是，让我们首先通过一个简化的笔记应用程序来涵盖一些关键概念。
 
 <!-- The first version of our application is the following-->
@@ -446,12 +446,12 @@ const noteReducer = (state = [], action) => {
 
 <!-- Since we do not have any code which uses this functionality yet, we are expanding the reducer in the 'test-driven' way.-->
 由于我们还没有任何使用这个功能的代码，我们正在以'测试驱动'的方式扩展 reducer。
-<!-- Let''s start by creating a test for handling the action <i>NEW\_NOTE</i>.-->
+<!-- Let's start by creating a test for handling the action <i>NEW\_NOTE</i>.-->
 让我们从创建一个处理动作<i>NEW\_NOTE</i>的测试开始。
 
 <!-- To make testing easier, we'll first move the reducer's code to its own module to file <i>src/reducers/noteReducer.js</i>. We''ll also add the library [deep-freeze](https://www.npmjs.com/package/deep-freeze), which can be used to ensure that the reducer has been correctly defined as an immutable function.-->
 为了使测试更容易，我们首先将reducer的代码移动到自己的模块<i>src/reducers/noteReducer.js</i>中。我们还将添加库[deep-freeze](https://www.npmjs.com/package/deep-freeze)，它可以用来确保reducer已被正确定义为不可变函数。
-<!-- Let''s install the library as a development dependency-->
+<!-- Let's install the library as a development dependency-->
 让我们将这个库作为开发依赖安装吧
 
 ```js
@@ -575,9 +575,9 @@ const noteReducer = (state = [], action) => {
 ```
 
 <!-- We create a copy of the note whose importance has changed with the syntax [familiar from part 2](/en/part2/altering_data_in_server#changing-the-importance-of-notes), and replace the state with a new state containing all the notes which have not changed and the copy of the changed note <i>changedNote</i>.-->
-我们用从第二部分熟悉的语法[familiar from part 2](/en/part2/altering_data_in_server#changing-the-importance-of-notes)创建一个重要性已经改变的笔记的副本，并用一个新的状态替换原来的状态，其中包括所有没有改变的笔记和改变后的笔记副本<i>changedNote</i>。
+我们用从第二章节熟悉的语法[familiar from part 2](/en/part2/altering_data_in_server#changing-the-importance-of-notes)创建一个重要性已经改变的笔记的副本，并用一个新的状态替换原来的状态，其中包括所有没有改变的笔记和改变后的笔记副本<i>changedNote</i>。
 
-<!-- Let''s recap what goes on in the code. First, we search for a specific note object, the importance of which we want to change:-->
+<!-- Let's recap what goes on in the code. First, we search for a specific note object, the importance of which we want to change:-->
 让我们回顾一下代码中发生了什么。首先，我们搜索一个特定的笔记对象，其重要性我们想要改变：
 
 ```js
@@ -674,7 +674,7 @@ console.log(rest)     // prints [3, 4, 5, 6]
 ### Exercises 6.1.-6.2.
 
 <!-- Let's make a simplified version of the unicafe exercise from part 1. Let's handle the state management with Redux.-->
-让我们从第一部分简化unicafe练习。让我们用Redux来处理状态管理。
+让我们从第一章节简化unicafe练习。让我们用Redux来处理状态管理。
 
 <!-- You can take the project from this repository <https://github.com/fullstack-hy2020/unicafe-redux> for the base of your project.-->
 你可以从这个仓库<https://github.com/fullstack-hy2020/unicafe-redux>获取项目作为你项目的基础。
@@ -689,7 +689,7 @@ npm install
 
 #### 6.1: unicafe revisited, step1
 
-<!-- Before implementing the functionality of the UI, let''s implement the functionality required by the store.-->
+<!-- Before implementing the functionality of the UI, let's implement the functionality required by the store.-->
 在实现UI的功能之前，让我们先实现商店所需的功能。
 
 <!-- We have to save the number of each kind of feedback to the store, so the form of the state in the store is:-->
@@ -811,7 +811,7 @@ describe('unicafe reducer', () => {
 
 ### Uncontrolled form
 
-<!-- Let''s add the functionality for adding new notes and changing their importance:-->
+<!-- Let's add the functionality for adding new notes and changing their importance:-->
 让我们添加添加新笔记和更改它们的重要性的功能：
 
 ```js
@@ -905,7 +905,7 @@ addNote = (event) => {
 </form>
 ```
 
-<!-- A note''s importance can be changed by clicking its name. The event handler is very simple:-->
+<!-- A note's importance can be changed by clicking its name. The event handler is very simple:-->
 点击注释的名称可以改变它的重要性。事件处理程序非常简单：
 
 ```js
@@ -925,7 +925,7 @@ toggleImportance = (id) => {
 
 <!-- React components don''t need to know the Redux action types and forms.-->
 React 组件不需要知道 Redux 的 action 类型和形式。
-<!-- Let''s separate creating actions into separate functions:-->
+<!-- Let's separate creating actions into separate functions:-->
 让我们把创建行动分解为单独的函数：
 
 ```js
@@ -989,7 +989,7 @@ const App = () => {
 npm install react-redux
 ```
 
-<!-- Next, we move the _App_ component into its own file _App.js_. Let''s see how this affects the rest of the application files.-->
+<!-- Next, we move the _App_ component into its own file _App.js_. Let's see how this affects the rest of the application files.-->
 接下来，我们将_App_组件移动到自己的文件_App.js_中。让我们看看这对应用程序的其他文件有什么影响。
 
 <!-- _index.js_ becomes:-->
@@ -1015,7 +1015,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 <!-- Note, that the application is now defined as a child of a [Provider](https://react-redux.js.org/api/provider) component provided by the react-redux library.-->
 注意，该应用现在被定义为由react-redux库提供的[提供者](https://react-redux.js.org/api/provider)组件的子组件。
-<!-- The application''s store is given to the Provider as its attribute <i>store</i>.-->
+<!-- The application's store is given to the Provider as its attribute <i>store</i>.-->
 应用程序的<i>store</i>被作为Provider的属性提供给它。
 
 <!-- Defining the action creators has been moved to the file <i>reducers/noteReducer.js</i> where the reducer is defined. That file looks like this:-->
@@ -1209,7 +1209,7 @@ const importantNotes = useSelector(state => state.filter(note => note.important)
 
 ### More components
 
-<!-- Let''s separate creating a new note into a component.-->
+<!-- Let's separate creating a new note into a component.-->
 让我们把创建一个新笔记分解成一个组件。
 
 ```js
@@ -1312,8 +1312,8 @@ Redux 应用的代码可以在 [GitHub](https://github.com/fullstack-hy2020/redu
 
 ### Exercises 6.3.-6.8.
 
-<!-- Let''s make a new version of the anecdote voting application from part 1. Take the project from this repository <https://github.com/fullstack-hy2020/redux-anecdotes> to base your solution on.-->
-让我们从第一部分开始制作一个新版本的轶事投票应用程序。以<https://github.com/fullstack-hy2020/redux-anecdotes>这个仓库中的项目为基础来构建你的解决方案。
+<!-- Let's make a new version of the anecdote voting application from part 1. Take the project from this repository <https://github.com/fullstack-hy2020/redux-anecdotes> to base your solution on.-->
+让我们从第一章节开始制作一个新版本的轶事投票应用程序。以<https://github.com/fullstack-hy2020/redux-anecdotes>这个仓库中的项目为基础来构建你的解决方案。
 
 <!-- If you clone the project into an existing git repository, <i>remove the git configuration of the cloned application:</i>-->
 如果你克隆项目到一个已存在的git仓库，<i>请移除克隆应用的git配置：</i>

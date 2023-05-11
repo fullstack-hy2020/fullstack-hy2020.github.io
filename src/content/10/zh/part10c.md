@@ -7,13 +7,13 @@ lang: zh
 
 <div class="content">
 
-<!-- So far we have implemented features to our application without any actual server communication. For example, the reviewed repositories list we have implemented uses mock data and the sign in form doesn't send the user's credentials to any authentication endpoint. In this section, we will learn how to communicate with a server using HTTP requests, how to use Apollo Client in a React Native application, and how to store data in the user''s device.-->
+<!-- So far we have implemented features to our application without any actual server communication. For example, the reviewed repositories list we have implemented uses mock data and the sign in form doesn't send the user's credentials to any authentication endpoint. In this section, we will learn how to communicate with a server using HTTP requests, how to use Apollo Client in a React Native application, and how to store data in the user's device.-->
 到目前为止，我们已经在没有任何实际服务器通信的情况下为我们的应用程序实现了功能。例如，我们实现的已审核的存储库列表使用模拟数据，而登录表单不会将用户凭据发送到任何身份验证端点。在本节中，我们将学习如何使用HTTP请求与服务器通信，如何在React Native应用程序中使用Apollo客户端以及如何在用户设备中存储数据。
 
 <!-- Soon we will learn how to communicate with a server in our application. Before we get to that, we need a server to communicate with. For this purpose, we have a completed server implementation in the [rate-repository-api](https://github.com/fullstack-hy2020/rate-repository-api) repository. The rate-repository-api server fulfills all our application's API needs during this part. It uses [SQLite](https://www.sqlite.org/index.html) database which doesn't need any setup and provides an Apollo GraphQL API along with a few REST API endpoints.-->
 很快我们就会学习如何在我们的应用程序中与服务器进行通信。在此之前，我们需要一个服务器来进行通信。为此，我们在[rate-repository-api]（https://github.com/fullstack-hy2020/rate-repository-api）存储库中有一个完整的服务器实现。 rate-repository-api服务器在此部分满足我们应用程序的所有API需求。它使用[SQLite]（https://www.sqlite.org/index.html）数据库，不需要任何设置，并提供Apollo GraphQL API以及几个REST API端点。
 
-<!-- Before heading further into the material, set up the rate-repository-api server by following the setup instructions in the repository''s [README](https://github.com/fullstack-hy2020/rate-repository-api/blob/master/README.md). Note that if you are using an emulator for development it is recommended to run the server and the emulator <i>on the same computer</i>. This eases network requests considerably.-->
+<!-- Before heading further into the material, set up the rate-repository-api server by following the setup instructions in the repository's [README](https://github.com/fullstack-hy2020/rate-repository-api/blob/master/README.md). Note that if you are using an emulator for development it is recommended to run the server and the emulator <i>on the same computer</i>. This eases network requests considerably.-->
 在进一步深入材料之前，请按照存储库的[README](https://github.com/fullstack-hy2020/rate-repository-api/blob/master/README.md)中的设置说明设置rate-repository-api服务器。请注意，如果您正在使用模拟器进行开发，则建议将服务器和模拟器<i>放在同一台计算机上</i>。这将大大简化网络请求。
 
 ### HTTP requests
@@ -66,7 +66,7 @@ const fetchMovies = async () => {
 <!-- For a more detailed introduction to the Fetch API, read the [Using Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) article in the MDN web docs.-->
 为了更详细地了解Fetch API，请阅读MDN网络文档中的[使用Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)文章。
 
-<!-- Next, let''s try the Fetch API in practice. The rate-repository-api server provides an endpoint for returning a paginated list of reviewed repositories. Once the server is running, you should be able to access the endpoint at [http://localhost:5000/api/repositories](http://localhost:5000/api/repositories) (unless you have changed the port). The data is paginated in a common [cursor based pagination format](https://graphql.org/learn/pagination/). The actual repository data is behind the <i>node</i> key in the <i>edges</i> array.-->
+<!-- Next, let's try the Fetch API in practice. The rate-repository-api server provides an endpoint for returning a paginated list of reviewed repositories. Once the server is running, you should be able to access the endpoint at [http://localhost:5000/api/repositories](http://localhost:5000/api/repositories) (unless you have changed the port). The data is paginated in a common [cursor based pagination format](https://graphql.org/learn/pagination/). The actual repository data is behind the <i>node</i> key in the <i>edges</i> array.-->
 接下来，让我们实践一下Fetch API。rate-repository-api服务器提供了一个端点，用于返回分页的审查仓库列表。一旦服务器启动，您应该可以访问[http://localhost:5000/api/repositories](http://localhost:5000/api/repositories)端点（除非您更改了端口）。数据以[游标分页格式](https://graphql.org/learn/pagination/)分页。实际的仓库数据在<i>节点</i>键下的<i>边缘</i>数组中。
 
 <!-- Unfortunately, we can''t access the server directly in our application by using the <i>http://localhost:5000/api/repositories</i> URL. To make a request to this endpoint in our application we need to access the server using its IP address in its local network. To find out what it is, open the Expo development tools by running <em>npm start</em>. In the console you should be able to see an URL starting with <i>exp://</i> below the QR code, after the "Metro waiting on" text:-->
@@ -154,7 +154,7 @@ const useRepositories = () => {
 export default useRepositories;
 ```
 
-<!-- Now that we have a clean abstraction for fetching the reviewed repositories, let''s use the <em>useRepositories</em> hook in the <em>RepositoryList</em> component:-->
+<!-- Now that we have a clean abstraction for fetching the reviewed repositories, let's use the <em>useRepositories</em> hook in the <em>RepositoryList</em> component:-->
 现在我们有了一个用于获取审查过的存储库的清晰抽象，让我们在<em>RepositoryList</em>组件中使用<em>useRepositories</em>钩子：
 
 ```javascript
@@ -179,27 +179,27 @@ const RepositoryList = () => {
 export default RepositoryList;
 ```
 
-<!-- That''s it, now the <em>RepositoryList</em> component is no longer aware of the way the repositories are acquired. Maybe in the future, we will acquire them through a GraphQL API instead of a REST API. We will see what happens.-->
+<!-- That's it, now the <em>RepositoryList</em> component is no longer aware of the way the repositories are acquired. Maybe in the future, we will acquire them through a GraphQL API instead of a REST API. We will see what happens.-->
 那就是了，现在<em>RepositoryList</em> 组件不再知道如何获取存储库了。也许将来，我们会使用GraphQL API而不是REST API来获取它们。我们将会看到会发生什么事情。
 
 ### GraphQL and Apollo client
 
 <!-- In [part 8](https://fullstackopen.com/en/part8) we learned about GraphQL and how to send GraphQL queries to an Apollo Server using the [Apollo Client](https://www.apollographql.com/docs/react/) in React applications. The good news is that we can use the Apollo Client in a React Native application exactly as we would with a React web application.-->
-在[第八部分](https://fullstackopen.com/en/part8)中，我们学习了GraphQL以及如何使用[Apollo Client](https://www.apollographql.com/docs/react/)在React应用中发送GraphQL查询到Apollo Server。好消息是，我们可以在React Native应用中像在React Web应用中一样使用Apollo Client。
+在[第八章节](https://fullstackopen.com/en/part8)中，我们学习了GraphQL以及如何使用[Apollo Client](https://www.apollographql.com/docs/react/)在React应用中发送GraphQL查询到Apollo Server。好消息是，我们可以在React Native应用中像在React Web应用中一样使用Apollo Client。
 
 <!-- As mentioned earlier, the rate-repository-api server provides a GraphQL API which is implemented with Apollo Server. Once the server is running, you can access the [Apollo Sandbox](https://www.apollographql.com/docs/studio/explorer/) at [http://localhost:4000](http://localhost:4000). Apollo Sandbox is a tool for making GraphQL queries and inspecting the GraphQL APIs schema and documentation. If you need to send a query in your application <i>always</i> test it with the Apollo Sandbox first before implementing it in the code. It is much easier to debug possible problems in the query in the Apollo Sandbox than in the application. If you are uncertain what the available queries are or how to use them, you can see the documentation next to the operations editor:-->
 正如前面提到的，rate-repository-api 服务器提供了一个使用 Apollo Server 实现的 GraphQL API。一旦服务器运行，您可以访问[Apollo Sandbox](https://www.apollographql.com/docs/studio/explorer/)，地址是[http://localhost:4000](http://localhost:4000)。Apollo Sandbox 是一个用于制作 GraphQL 查询和检查 GraphQL API 模式和文档的工具。如果您需要在应用程序中发送查询，<i>一定要</i>先在 Apollo Sandbox 中测试，然后再在代码中实现它。在 Apollo Sandbox 中调试查询可能存在的问题比在应用程序中调试要容易得多。如果您不确定可用的查询是什么或如何使用它们，您可以在操作编辑器旁边查看文档：
 
 ![Apollo Sandbox](../../images/10/11.png)
 
-<!-- In our React Native application, we will be using the same [@apollo/client](https://www.npmjs.com/package/@apollo/client) library as in part 8. Let''s get started by installing the library along with the [graphql](https://www.npmjs.com/package/graphql) library which is required as a peer dependency:-->
-在我们的React Native应用程序中，我们将使用与第8部分相同的[@apollo/client](https://www.npmjs.com/package/@apollo/client)库。 让我们开始安装该库以及作为同行依赖项所需的[graphql](https://www.npmjs.com/package/graphql)库：
+<!-- In our React Native application, we will be using the same [@apollo/client](https://www.npmjs.com/package/@apollo/client) library as in part 8. Let's get started by installing the library along with the [graphql](https://www.npmjs.com/package/graphql) library which is required as a peer dependency:-->
+在我们的React Native应用程序中，我们将使用与第8章节相同的[@apollo/client](https://www.npmjs.com/package/@apollo/client)库。 让我们开始安装该库以及作为同行依赖项所需的[graphql](https://www.npmjs.com/package/graphql)库：
 
 ```shell
 npm install @apollo/client graphql
 ```
 
-<!-- Before we can start using Apollo Client, we will need to slightly configure the Metro bundler so that it handles the <i>.cjs</i> file extensions used by the Apollo Client. First, let''s install the <i>@expo/metro-config</i> package which has the default Metro configuration:-->
+<!-- Before we can start using Apollo Client, we will need to slightly configure the Metro bundler so that it handles the <i>.cjs</i> file extensions used by the Apollo Client. First, let's install the <i>@expo/metro-config</i> package which has the default Metro configuration:-->
 在我们开始使用Apollo Client之前，我们需要轻微地配置Metro bundler，以便它处理Apollo Client使用的<i>.cjs</i>文件扩展名。首先，让我们安装具有默认Metro配置的<i>@expo/metro-config</i>软件包：
 
 ```shell
@@ -222,7 +222,7 @@ module.exports = defaultConfig;
 <!-- Restart the Expo development tools so that changes in the configuration are applied.-->
 重新启动Expo开发工具，以便将配置更改应用。
 
-<!-- Now that the Metro configuration is in order, let''s create a utility function for creating the Apollo Client with the required configuration. Create a <i>utils</i> directory in the <i>src</i> directory and in that <i>utils</i> directory create a file <i>apolloClient.js</i>. In that file configure the Apollo Client to connect to the Apollo Server:-->
+<!-- Now that the Metro configuration is in order, let's create a utility function for creating the Apollo Client with the required configuration. Create a <i>utils</i> directory in the <i>src</i> directory and in that <i>utils</i> directory create a file <i>apolloClient.js</i>. In that file configure the Apollo Client to connect to the Apollo Server:-->
 现在Metro配置已经安排好了，让我们创建一个用于创建所需配置的Apollo Client的实用函数。在<i>src</i>目录下创建一个<i>utils</i>目录，在<i>utils</i>目录下创建一个<i>apolloClient.js</i>文件。在该文件中配置Apollo Client以连接Apollo Server：
 
 ```javascript
@@ -270,12 +270,12 @@ export default App;
 
 ### Organizing GraphQL related code
 
-<!-- It is up to you how to organize the GraphQL related code in your application. However, for the sake of a reference structure, let''s have a look at one quite simple and efficient way to organize the GraphQL related code. In this structure, we define queries, mutations, fragments, and possibly other entities in their own files. These files are located in the same directory. Here is an example of the structure you can use to get started:-->
+<!-- It is up to you how to organize the GraphQL related code in your application. However, for the sake of a reference structure, let's have a look at one quite simple and efficient way to organize the GraphQL related code. In this structure, we define queries, mutations, fragments, and possibly other entities in their own files. These files are located in the same directory. Here is an example of the structure you can use to get started:-->
 # 由你自己决定如何组织应用程序中的GraphQL相关代码。但是，为了参考结构，让我们看一下一种相当简单和有效的组织GraphQL相关代码的方式。在这种结构中，我们在同一个目录中定义查询、变异、片段以及可能的其他实体。以下是你可以用来开始的结构的示例：
 
 ![GraphQL structure](../../images/10/12.png)
 
-<!-- You can import the <em>gql</em> template literal tag used to define GraphQL queries from <i>@apollo/client</i> library. If we follow the structure suggested above, we could have a <i>queries.js</i> file in the <i>graphql</i> directory for our application''s GraphQL queries. Each of the queries can be stored in a variable and exported like this:-->
+<!-- You can import the <em>gql</em> template literal tag used to define GraphQL queries from <i>@apollo/client</i> library. If we follow the structure suggested above, we could have a <i>queries.js</i> file in the <i>graphql</i> directory for our application's GraphQL queries. Each of the queries can be stored in a variable and exported like this:-->
 你可以从 <i>@apollo/client</i> 库中导入用于定义 GraphQL 查询的<em>gql</em> 模板文字标记。如果我们遵循上面提到的结构，我们可以在应用程序的 <i>graphql</i> 目录中拥有一个 <i>queries.js</i> 文件来存储 GraphQL 查询。每个查询可以存储在一个变量中，并像这样导出：
 
 ```javascript
@@ -376,7 +376,7 @@ useQuery(MY_QUERY, {
 <!-- We have previously learned that we can provide running programs with environment variables. These variables can be defined in the command line or using environment configuration files such as <i>.env</i> files and third-party libraries such as <i>Dotenv</i>. Unfortunately, React Native doesn''t have direct support for environment variables. However, we can access the Expo configuration defined in the <i>app.json</i> file at runtime from our JavaScript code. This configuration can be used to define and access environment dependant variables.-->
 我们之前学习过，我们可以为运行程序提供环境变量。这些变量可以在命令行中定义，也可以使用环境配置文件（如<i>.env</i>文件）和第三方库（如<i>Dotenv</i>）定义。不幸的是，React Native没有直接支持环境变量。然而，我们可以从JavaScript代码中运行时访问<i>app.json</i>文件中定义的Expo配置。此配置可用于定义和访问与环境相关的变量。
 
-<!-- The configuration can be accessed by importing the <em>Constants</em> constant from the <i>expo-constants</i> module as we have done a few times before. Once imported, the <em>Constants.manifest</em> property will contain the configuration. Let''s try this by logging <em>Constants.manifest</em> in the <em>App</em> component:-->
+<!-- The configuration can be accessed by importing the <em>Constants</em> constant from the <i>expo-constants</i> module as we have done a few times before. Once imported, the <em>Constants.manifest</em> property will contain the configuration. Let's try this by logging <em>Constants.manifest</em> in the <em>App</em> component:-->
 可以通过从<i>expo-constants</i>模块导入<em>Constants</em>常量来访问配置，这是我们之前已经做过几次了。一旦导入，<em>Constants.manifest</em>属性将包含配置。让我们在<em>App</em>组件中尝试一下，打印<em>Constants.manifest</em>：
 
 ```javascript
@@ -407,7 +407,7 @@ export default App;
 <!-- You should now see the configuration in the logs.-->
 你现在应该在日志中看到配置了。
 
-<!-- The next step is to use the configuration to define environment dependant variables in our application. Let''s get started by renaming the <i>app.json</i> file to <i>app.config.js</i>. Once the file is renamed, we can use JavaScript inside the configuration file. Change the file contents so that the previous object:-->
+<!-- The next step is to use the configuration to define environment dependant variables in our application. Let's get started by renaming the <i>app.json</i> file to <i>app.config.js</i>. Once the file is renamed, we can use JavaScript inside the configuration file. Change the file contents so that the previous object:-->
 下一步是使用配置来定义我们应用程序中的环境相关变量。让我们先将<i>app.json</i>文件重命名为<i>app.config.js</i>。文件重命名后，我们可以在配置文件中使用JavaScript。更改文件内容，使先前的对象：
 
 ```javascript
@@ -447,7 +447,7 @@ export default {
 <!-- Restart Expo development tools to apply the changes and you should see that the value of <em>Constants.manifest</em> property has changed and now includes the <em>extra</em> property containing our application-specific configuration. Now the value of the <em>env</em> variable is accessible through the <em>Constants.manifest.extra.env</em> property.-->
 重新启动Expo开发工具以应用更改，您应该会看到<em>Constants.manifest</em>属性的值已更改，并且现在包含包含我们的应用特定配置的<em>extra</em>属性。现在，<em>env</em>变量的值可通过<em>Constants.manifest.extra.env</em>属性访问。
 
-<!-- Because using hard coded configuration is a bit silly, let''s use an environment variable instead:-->
+<!-- Because using hard coded configuration is a bit silly, let's use an environment variable instead:-->
 因为使用硬编码配置有点傻，让我们改用环境变量：
 
 ```javascript
@@ -462,7 +462,7 @@ export default {
 };
 ```
 
-<!-- As we have learned, we can set the value of an environment variable through the command line by defining the variable''s name and value before the actual command. As an example, start Expo development tools and set the environment variable <em>ENV</em> as <em>test</em> like this:-->
+<!-- As we have learned, we can set the value of an environment variable through the command line by defining the variable's name and value before the actual command. As an example, start Expo development tools and set the environment variable <em>ENV</em> as <em>test</em> like this:-->
 我们已经学习到，我们可以通过命令行设置环境变量的值，在实际命令之前定义变量的名称和值。 例如，启动Expo开发工具，将环境变量<em> ENV </em>设置为<em> test </em>，如下所示：
 
 ```shell
@@ -504,7 +504,7 @@ export default {
 <!-- You need to restart Expo development tools to apply the changes you have made to the <i>.env</i> file.-->
 你需要重新启动Expo开发工具来应用你对<i>.env</i>文件所做的更改。
 
-<!-- Note that it is <i>never</i> a good idea to put sensitive data into the application''s configuration. The reason for this is that once a user has downloaded your application, they can, at least in theory, reverse engineer your application and figure out the sensitive data you have stored into the code.-->
+<!-- Note that it is <i>never</i> a good idea to put sensitive data into the application's configuration. The reason for this is that once a user has downloaded your application, they can, at least in theory, reverse engineer your application and figure out the sensitive data you have stored into the code.-->
 <i>永远</i>不要把敏感数据放入应用程序的配置中是一个不好的主意。原因是一旦用户下载了你的应用程序，他们至少在理论上可以逆向工程你的应用程序，并找出你存储在代码中的敏感数据。
 
 </div>
@@ -515,7 +515,7 @@ export default {
 
 #### Exercise 10.12: environment variables
 
-<!-- Instead of the hardcoded Apollo Server''s URL, use an environment variable defined in the <i>.env</i> file when initializing the Apollo Client. You can name the environment variable for example <em>APOLLO_URI</em>.-->
+<!-- Instead of the hardcoded Apollo Server's URL, use an environment variable defined in the <i>.env</i> file when initializing the Apollo Client. You can name the environment variable for example <em>APOLLO_URI</em>.-->
 代替在<i>.env</i>文件中定义的硬编码的Apollo Server的URL，在初始化Apollo Client时使用环境变量。你可以把环境变量命名为<em>APOLLO_URI</em>。
 
 <i>Do not</i> try to access environment variables like <em>process.env.APOLLO_URI</em> outside the <i>app.config.js</i> file. Instead use the <em>Constants.manifest.extra</em> object like in the previous example. In addition, do not import the dotenv library outside the <i>app.config.js</i> file or you will most likely face errors.
@@ -524,9 +524,9 @@ export default {
 
 <div class="content">
 
-### Storing data in the user''s device
+### Storing data in the user's device
 
-<!-- There are times when we need to store some persisted pieces of data in the user's device. One such common scenario is storing the user's authentication token so that we can retrieve it even if the user closes and reopens our application. In web development, we have used the browser''s <em>localStorage</em> object to achieve such functionality. React Native provides similar persistent storage, the [AsyncStorage](https://react-native-async-storage.github.io/async-storage/docs/usage/).-->
+<!-- There are times when we need to store some persisted pieces of data in the user's device. One such common scenario is storing the user's authentication token so that we can retrieve it even if the user closes and reopens our application. In web development, we have used the browser's <em>localStorage</em> object to achieve such functionality. React Native provides similar persistent storage, the [AsyncStorage](https://react-native-async-storage.github.io/async-storage/docs/usage/).-->
 有时候我们需要在用户设备中存储一些持久化的数据。一个常见的场景是存储用户的身份验证令牌，这样即使用户关闭并重新打开我们的应用程序，我们也可以检索它。在Web开发中，我们已经使用浏览器的<em>localStorage</em>对象来实现此功能。React Native提供类似的持久存储，[AsyncStorage](https://react-native-async-storage.github.io/async-storage/docs/usage/)。
 
 <!-- We can use the <em>npx expo install</em> command to install the version of the <i>@react-native-async-storage/async-storage</i> package that is suitable for our Expo SDK version:-->
@@ -594,13 +594,13 @@ const doShopping = async () => {
 doShopping();
 ```
 
-<!-- Because <em>AsyncStorage</em> keys are global, it is usually a good idea to add a <i>namespace</i> for the keys. In this context, the namespace is just a prefix we provide for the storage abstraction's keys. Using the namespace prevents the storage's keys from colliding with other <em>AsyncStorage</em> keys. In this example, the namespace is defined as the constructor''s argument and we are using the <em>namespace:key</em> format for the keys.-->
+<!-- Because <em>AsyncStorage</em> keys are global, it is usually a good idea to add a <i>namespace</i> for the keys. In this context, the namespace is just a prefix we provide for the storage abstraction's keys. Using the namespace prevents the storage's keys from colliding with other <em>AsyncStorage</em> keys. In this example, the namespace is defined as the constructor's argument and we are using the <em>namespace:key</em> format for the keys.-->
 因为AsyncStorage的键是全局的，所以为键添加一个命名空间通常是一个好主意。在这种情况下，命名空间只是我们为存储抽象提供的前缀。使用命名空间可以防止存储的键与其他AsyncStorage键发生冲突。在本例中，命名空间定义为构造函数的参数，我们使用namespace:key格式的键。
 
 <!-- We can add an item to the storage using the [AsyncStorage.setItem](https://react-native-async-storage.github.io/async-storage/docs/api#setitem) method. The first argument of the method is the item's key and the second argument its value. The value <i>must be a string</i>, so we need to serialize non-string values as we did with the <em>JSON.stringify</em> method. The [AsyncStorage.getItem](https://react-native-async-storage.github.io/async-storage/docs/api/#getitem) method can be used to get an item from the storage. The argument of the method is the item's key, of which value will be resolved. The [AsyncStorage.removeItem](https://react-native-async-storage.github.io/async-storage/docs/api/#removeitem) method can be used to remove the item with the provided key from the storage.-->
 我们可以使用 [AsyncStorage.setItem](https://react-native-async-storage.github.io/async-storage/docs/api#setitem) 方法向存储添加一个项目。该方法的第一个参数是项目的键，第二个参数是其值。<i>值必须是字符串</i>，因此我们需要像使用 <em>JSON.stringify</em> 方法一样对非字符串值进行序列化。可以使用 [AsyncStorage.getItem](https://react-native-async-storage.github.io/async-storage/docs/api/#getitem) 方法从存储中获取项目。该方法的参数是项目的键，其值将被解析。可以使用 [AsyncStorage.removeItem](https://react-native-async-storage.github.io/async-storage/docs/api/#removeitem) 方法从存储中使用提供的键删除项目。
 
-<!-- **NB:** [SecureStore](https://docs.expo.dev/versions/latest/sdk/securestore/) is similar persisted storage as the <em>AsyncStorage</em> but it encrypts the stored data. This makes it more suitable for storing more sensitive data such as the user''s credit card number.-->
+<!-- **NB:** [SecureStore](https://docs.expo.dev/versions/latest/sdk/securestore/) is similar persisted storage as the <em>AsyncStorage</em> but it encrypts the stored data. This makes it more suitable for storing more sensitive data such as the user's credit card number.-->
 **SecureStore** 与<em>AsyncStorage</em>类似，但它对存储的数据进行了加密。这使得它更适合存储更敏感的数据，比如用户的信用卡号。
 
 </div>
@@ -632,7 +632,7 @@ const useSignIn = () => {
 };
 ```
 
-<!-- Once the hook is implemented, use it in the <em>SignIn</em> component''s <em>onSubmit</em> callback for example like this:-->
+<!-- Once the hook is implemented, use it in the <em>SignIn</em> component's <em>onSubmit</em> callback for example like this:-->
 一旦钩子实现，就可以在<em>SignIn</em>组件的<em>onSubmit</em>回调中使用它，例如：
 
 ```javascript
@@ -693,9 +693,9 @@ export default AuthStorage;
 
 <div class="content">
 
-### Enhancing Apollo Client''s requests
+### Enhancing Apollo Client's requests
 
-<!-- Now that we have implemented storage for storing the user''s access token, it is time to start using it. Initialize the storage in the <em>App</em> component:-->
+<!-- Now that we have implemented storage for storing the user's access token, it is time to start using it. Initialize the storage in the <em>App</em> component:-->
 现在我们已经实现了存储用于存储用户的访问令牌，是时候开始使用它了。在<em>App</em>组件中初始化存储：
 
 ```javascript
@@ -730,7 +730,7 @@ import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import Constants from 'expo-constants';
 import { setContext } from '@apollo/client/link/context'; // highlight-line
 
-// You might need to change this depending on how you have configured the Apollo Server''s URI
+// You might need to change this depending on how you have configured the Apollo Server's URI
 const { apolloUri } = Constants.manifest.extra;
 
 const httpLink = createHttpLink({
@@ -781,7 +781,7 @@ const AuthStorageContext = createContext();
 export default AuthStorageContext;
 ```
 
-<!-- Now we can use the <em>AuthStorageContext.Provider</em> to provide the storage instance to the descendants of the context. Let''s add it to the <em>App</em> component:-->
+<!-- Now we can use the <em>AuthStorageContext.Provider</em> to provide the storage instance to the descendants of the context. Let's add it to the <em>App</em> component:-->
 现在我们可以使用<em>AuthStorageContext.Provider</em>来为上下文的后代提供存储实例。让我们将其添加到<em>App</em>组件中：
 
 ```javascript
@@ -811,7 +811,7 @@ const App = () => {
 export default App;
 ```
 
-<!-- Accessing the storage instance in the <em>useSignIn</em> hook is now possible using the React''s [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext) hook like this:-->
+<!-- Accessing the storage instance in the <em>useSignIn</em> hook is now possible using the React's [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext) hook like this:-->
 使用React的[useContext](https://reactjs.org/docs/hooks-reference.html#usecontext) hook，现在可以在<em>useSignIn</em> hook中访问存储实例，就像这样：
 
 ```javascript
@@ -826,10 +826,10 @@ const useSignIn = () => {
 };
 ```
 
-<!-- Note that accessing a context''s value using the <em>useContext</em> hook only works if the <em>useContext</em> hook is used in a component that is a <i>descendant</i> of the [Context.Provider](https://reactjs.org/docs/context.html#contextprovider) component.-->
+<!-- Note that accessing a context's value using the <em>useContext</em> hook only works if the <em>useContext</em> hook is used in a component that is a <i>descendant</i> of the [Context.Provider](https://reactjs.org/docs/context.html#contextprovider) component.-->
 注意，如果使用<em>useContext</em>钩子访问上下文的值，则只有在[Context.Provider](https://reactjs.org/docs/context.html#contextprovider)组件的<i>后代</i>组件中使用<em>useContext</em>钩子时才有效。
 
-<!-- Accessing the <em>AuthStorage</em> instance with <em>useContext(AuthStorageContext)</em> is quite verbose and reveals the details of the implementation. Let''s improve this by implementing a <em>useAuthStorage</em> hook in a <i>useAuthStorage.js</i> file in the <i>hooks</i> directory:-->
+<!-- Accessing the <em>AuthStorage</em> instance with <em>useContext(AuthStorageContext)</em> is quite verbose and reveals the details of the implementation. Let's improve this by implementing a <em>useAuthStorage</em> hook in a <i>useAuthStorage.js</i> file in the <i>hooks</i> directory:-->
 访问<em>AuthStorage</em>实例使用<em>useContext(AuthStorageContext)</em>比较冗长，暴露了实现的细节。让我们来改进一下，在<i>hooks</i>目录下的<i>useAuthStorage.js</i>文件中实现一个<em>useAuthStorage</em> hook：
 
 ```javascript
@@ -845,7 +845,7 @@ export const useAuthStorage = () => {
 export default AuthStorageContext;
 ```
 
-<!-- The hook''s implementation is quite simple but it improves the readability and maintainability of the hooks and components using it. We can use the hook to refactor the <em>useSignIn</em> hook like this:-->
+<!-- The hook's implementation is quite simple but it improves the readability and maintainability of the hooks and components using it. We can use the hook to refactor the <em>useSignIn</em> hook like this:-->
 hook 的实现非常简单，但它提高了 hooks 和使用它的组件的可读性和可维护性。我们可以使用该 hook 来重构 <em>useSignIn</em> hook，如下所示：
 
 ```javascript
@@ -858,7 +858,7 @@ const useSignIn = () => {
 };
 ```
 
-<!-- The ability to provide data to component''s descendants opens tons of use cases for React Context, as we already saw in the [last chapter](/en/part6/react_query_use_reducer_and_the_context) of part 6.-->
+<!-- The ability to provide data to component's descendants opens tons of use cases for React Context, as we already saw in the [last chapter](/en/part6/react_query_use_reducer_and_the_context) of part 6.-->
 能够向组件的后代提供数据，为 React Context 带来了大量的使用场景，正如我们在第 6 部分的[上一章](/en/part6/react_query_use_reducer_and_the_context)中所看到的。
 
 <!-- To learn more about these use cases, read Kent C. Dodds'' enlightening article [How to use React Context effectively](https://kentcdodds.com/blog/how-to-use-react-context-effectively) to find out how to combine the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) hook with the context to implement state management. You might find a way to use this knowledge in the upcoming exercises.-->
@@ -872,7 +872,7 @@ const useSignIn = () => {
 
 #### Exercise 10.15: storing the access token step2
 
-<!-- Improve the <em>useSignIn</em> hook so that it stores the user''s access token retrieved from the <i>authenticate</i> mutation. The return value of the hook should not change. The only change you should make to the <em>SignIn</em> component is that you should redirect the user to the reviewed repositories list view after a successful sign in. You can achieve this by using the [useNavigate](https://reactrouter.com/docs/en/v6/api#usenavigate) hook.-->
+<!-- Improve the <em>useSignIn</em> hook so that it stores the user's access token retrieved from the <i>authenticate</i> mutation. The return value of the hook should not change. The only change you should make to the <em>SignIn</em> component is that you should redirect the user to the reviewed repositories list view after a successful sign in. You can achieve this by using the [useNavigate](https://reactrouter.com/docs/en/v6/api#usenavigate) hook.-->
 改进<em>useSignIn</em>钩子，使其存储用户从<i>authenticate</i>变体中检索到的访问令牌。钩子的返回值不应改变。您唯一要对<em>SignIn</em>组件做的改变是，成功登录后，应将用户重定向到已审查存储库列表视图。您可以通过使用[useNavigate](https://reactrouter.com/docs/en/v6/api#usenavigate)钩子来实现这一点。
 
 <!-- After the <i>authenticate</i> mutation has been executed and you have stored the user's access token to the storage, you should reset the Apollo Client's store. This will clear the Apollo Client's cache and re-execute all active queries. You can do this by using the Apollo Client's [resetStore](https://www.apollographql.com/docs/react/api/core/ApolloClient/#ApolloClient.resetStore) method. You can access the Apollo Client in the <em>useSignIn</em> hook using the [useApolloClient](https://www.apollographql.com/docs/react/api/react/hooks/#useapolloclient) hook. Note that the order of the execution is crucial and should be the following:-->
@@ -904,9 +904,9 @@ apolloClient.resetStore();
 <!-- Open the <em>AppBar</em> component in the <i>AppBar.jsx</i> file where you currently have the tabs "Repositories" and "Sign in". Change the tabs so that if the user is signed in the tab "Sign out" is displayed, otherwise show the "Sign in" tab. You can achieve this by using the <em>me</em> query with the [useQuery](https://www.apollographql.com/docs/react/api/react/hooks/#usequery) hook.-->
 在当前拥有“仓库”和“登录”标签的<i>AppBar.jsx</i>文件中打开<em>AppBar</em>组件。通过使用[useQuery](https://www.apollographql.com/docs/react/api/react/hooks/#usequery)钩子，更改标签以使用户登录时显示“注销”标签，否则显示“登录”标签。
 
-<!-- Pressing the "Sign out" tab should remove the user's access token from the storage and reset the Apollo Client's store with the [resetStore](https://www.apollographql.com/docs/react/api/core/ApolloClient/#ApolloClient.resetStore) method. Calling the <em>resetStore</em> method should automatically re-execute all active queries which means that the <em>me</em> query should be re-executed. Note that the order of execution is crucial: access token must be removed from the storage <i>before</i> the Apollo Client''s store is reset.-->
+<!-- Pressing the "Sign out" tab should remove the user's access token from the storage and reset the Apollo Client's store with the [resetStore](https://www.apollographql.com/docs/react/api/core/ApolloClient/#ApolloClient.resetStore) method. Calling the <em>resetStore</em> method should automatically re-execute all active queries which means that the <em>me</em> query should be re-executed. Note that the order of execution is crucial: access token must be removed from the storage <i>before</i> the Apollo Client's store is reset.-->
 按下“登出”标签应该从存储中移除用户的访问令牌，并使用[resetStore](https://www.apollographql.com/docs/react/api/core/ApolloClient/#ApolloClient.resetStore)方法重置Apollo Client的存储。调用<em>resetStore</em>方法应该自动重新执行所有活动查询，这意味着<em>me</em>查询应该重新执行。请注意，执行顺序至关重要：必须<i>先</i>从存储中删除访问令牌，然后才能重置Apollo Client的存储。
 
-<!-- This was the last exercise in this section. It''s time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020). Note that exercises in this section should be submitted to the part 3 in the exercise submission system.-->
-这是本节的最后一个练习。是时候将你的代码推送到GitHub，并将所有已完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020)。请注意，本节的练习应提交到练习提交系统的第3部分。
+<!-- This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020). Note that exercises in this section should be submitted to the part 3 in the exercise submission system.-->
+这是本节的最后一个练习。是时候将你的代码推送到GitHub，并将所有已完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020)。请注意，本节的练习应提交到练习提交系统的第3章节。
 </div>

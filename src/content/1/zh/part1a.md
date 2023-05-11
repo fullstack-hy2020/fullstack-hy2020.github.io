@@ -6,7 +6,7 @@ lang: zh
 ---
 
 <div class="content">
-<!-- We will now start getting familiar with probably the most important topic of this course, namely the [React](https://react.dev/) library. Let''s start by making a simple React application as well as getting to know the core concepts of React.-->
+<!-- We will now start getting familiar with probably the most important topic of this course, namely the [React](https://react.dev/) library. Let's start by making a simple React application as well as getting to know the core concepts of React.-->
 我们现在进入本门课最重要的主题，[React](https://react.dev/) 库。让我们从制作一个简单的React应用入手，来了解React的核心概念。
 
 
@@ -660,7 +660,7 @@ part2
 看看这个[示例提交仓库](https://github.com/fullstack-hy2020/example-submission-repository)!
 
 <!-- For each part of the course, there is a directory, which further branches into directories containing a series of exercises, like "unicafe" for part 1.-->
-每一章节的课程都有一个目录，该目录可以进一步分支到包含一系列练习的目录，例如第一部分的「unicafe」。
+每一章节的课程都有一个目录，该目录可以进一步分支到包含一系列练习的目录，例如第一章节的「unicafe」。
 
 <!-- Most of the exercises of the course build a larger application, eg. courseinfo, unicafe and anecdotes in this part, bit by bit. It is enough to submit the completed application. You can make a commit after each exercise, but that is not compulsory. For example the course info app is built in exercises 1.1.-1.5. It is just the end result after 1.5 that you need to submit!-->
 大部分的课程练习都会构建一个更大的应用，比如课程信息，Uni Cafe和轶事，一点一点地。只要提交完成的应用就够了。每个练习后你可以做一个提交，但不是必须的。比如课程信息应用是在1.1-1.5练习中构建的，只有1.5后的最终结果你需要提交！
@@ -800,6 +800,6 @@ const Content = ... {
 ```
 
 <!-- Our application passes on information in quite a primitive way at the moment, since it is based on individual variables. We shall fix that in [part 2](/en/part2), but before that, let's go to part1b to learn about JavaScript.-->
-我们目前的应用程序以非常原始的方式传递信息，因为它基于单个变量。我们将在[第二部分](/en/part2)中修复它，但在此之前，让我们去part1b学习JavaScript。
+我们目前的应用程序以非常原始的方式传递信息，因为它基于单个变量。我们将在[第二章节](/en/part2)中修复它，但在此之前，让我们去part1b学习JavaScript。
 
 </div>

@@ -1,7 +1,7 @@
 {
   "common": {
-    "nextPart": "下一部分",
-    "previousPart": "上一部分",
+    "nextPart": "下一章节",
+    "previousPart": "上一章节",
     "readMore": "阅读更多",
     "proposeChanges": "对讲课材料提出建议"
   },

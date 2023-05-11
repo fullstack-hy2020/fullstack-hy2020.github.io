@@ -51,7 +51,7 @@ const noteSchema = new mongoose.Schema({
 <!-- The <i>minLength</i> and <i>required</i> validators are [built-in](https://mongoosejs.com/docs/validation.html#built-in-validators) and provided by Mongoose. The Mongoose [custom validator](https://mongoosejs.com/docs/validation.html#custom-validators) functionality allows us to create new validators if none of the built-in ones cover our needs.-->
 <i>minLength</i> 和 <i>required</i> 验证器是[内置的](https://mongoosejs.com/docs/validation.html#built-in-validators)，由Mongoose提供。Mongoose的[自定义验证器](https://mongoosejs.com/docs/validation.html#custom-validators)功能允许我们创建新的验证器，如果内置的验证器不能满足我们的需求。
 
-<!-- If we try to store an object in the database that breaks one of the constraints, the operation will throw an exception. Let''s change our handler for creating a new note so that it passes any potential exceptions to the error handler middleware:-->
+<!-- If we try to store an object in the database that breaks one of the constraints, the operation will throw an exception. Let's change our handler for creating a new note so that it passes any potential exceptions to the error handler middleware:-->
 如果我们尝试将一个违反约束的对象存储到数据库中，该操作将抛出异常。让我们改变我们用于创建新笔记的处理程序，使其将任何潜在的异常传递到错误处理中间件：
 
 ```js
@@ -71,7 +71,7 @@ app.post('/api/notes', (request, response, next) => { // highlight-line
 })
 ```
 
-<!-- Let''s expand the error handler to deal with these validation errors:-->
+<!-- Let's expand the error handler to deal with these validation errors:-->
 让我们扩展错误处理程序来处理这些验证错误：
 
 ```js
@@ -216,7 +216,7 @@ personService
 -  1234556，1-22334455 和 10-22-334455 都是无效的
 
 <!-- Use a [Custom validator](https://mongoosejs.com/docs/validation.html#custom-validators) to implement the second part of the validation.-->
-使用[自定义验证器](https://mongoosejs.com/docs/validation.html#custom-validators)来实现验证的第二部分。
+使用[自定义验证器](https://mongoosejs.com/docs/validation.html#custom-validators)来实现验证的第二章节。
 
 <!-- If an HTTP POST request tries to add a person with an invalid phone number, the server should respond with an appropriate status code and error message.-->
 如果一个HTTP POST请求试图添加一个有无效电话号码的人，服务器应该以适当的状态码和错误消息作出回应。
@@ -242,7 +242,7 @@ personService
 ### Lint
 
 <!-- Before we move on to the next part, we will take a look at an important tool called [lint](<https://en.wikipedia.org/wiki/Lint_(software)>). Wikipedia says the following about lint:-->
-在我们进入下一部分之前，我们将看一下一个重要的工具，称为[lint](<https://en.wikipedia.org/wiki/Lint_(software)>)。维基百科对lint的描述如下：
+在我们进入下一章节之前，我们将看一下一个重要的工具，称为[lint](<https://en.wikipedia.org/wiki/Lint_(software)>)。维基百科对lint的描述如下：
 
 <!-- > <i>Generically, lint or a linter is any tool that detects and flags errors in programming languages, including stylistic errors. The term lint-like behavior is sometimes applied to the process of flagging suspicious language usage. Lint-like tools generally perform static analysis of source code.</i>-->
 <i>通常来说，lint或linter是任何检测和标记编程语言中错误（包括风格错误）的工具。有时将“lint-like”行为应用于标记可疑语言使用的过程中。Lint-like工具通常对源代码进行静态分析。</i>
@@ -253,7 +253,7 @@ personService
 <!-- In the JavaScript universe, the current leading tool for static analysis (aka "linting") is [ESlint](https://eslint.org/).-->
 在JavaScript宇宙中，目前领先的静态分析（也称为“linting”）工具是[ESlint](https://eslint.org/)。
 
-<!-- Let''s install ESlint as a development dependency to the notes backend project with the command:-->
+<!-- Let's install ESlint as a development dependency to the notes backend project with the command:-->
 让我们使用以下命令将ESLint安装为notes后端项目的开发依赖：`npm install --save-dev eslint`：
 
 ```bash
@@ -307,7 +307,7 @@ module.exports = {
 }
 ```
 
-<!-- Let''s immediately change the rule concerning indentation, so that the indentation level is two spaces.-->
+<!-- Let's immediately change the rule concerning indentation, so that the indentation level is two spaces.-->
 让我们立即改变关于缩进的规则，使缩进级别为两个空格。
 
 ```js
@@ -343,7 +343,7 @@ npx eslint index.js
 <!-- Now the _npm run lint_ command will check every file in the project.-->
 现在，`npm run lint` 命令将检查项目中的每个文件。
 
-<!-- Also the files in the <em>build</em> directory get checked when the command is run. We do not want this to happen, and we can accomplish this by creating an [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) file in the project''s root with the following contents:-->
+<!-- Also the files in the <em>build</em> directory get checked when the command is run. We do not want this to happen, and we can accomplish this by creating an [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) file in the project's root with the following contents:-->
 也会在运行命令时检查<em>build</em>目录中的文件。我们不希望这种情况发生，我们可以在项目根目录中创建一个[.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories)文件，其内容如下：
 
 ```bash
@@ -358,7 +358,7 @@ Lint 对我们的代码有很多要说的：
 
 ![terminal output of ESlint errors](../../images/3/53ea.png)
 
-<!-- Let''s not fix these issues just yet.-->
+<!-- Let's not fix these issues just yet.-->
 让我们先不着急去解决这些问题。
 
 <!-- A better alternative to executing the linter from the command line is to configure a <i>eslint-plugin</i> to the editor, that runs the linter continuously. By using the plugin you will see errors in your code immediately. You can find more information about the Visual Studio ESLint plugin [here](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).-->
@@ -375,7 +375,7 @@ VS Code 的 ESLint 插件会用红线下划示出样式违反：
 <!-- ESlint has a vast array of [rules](https://eslint.org/docs/rules/) that are easy to take into use by editing the <i>.eslintrc.js</i> file.-->
 ESLint 有大量的[规则](https://eslint.org/docs/rules/)，可以通过编辑<i>.eslintrc.js</i>文件轻松使用。
 
-<!-- Let''s add the [eqeqeq](https://eslint.org/docs/rules/eqeqeq) rule that warns us, if equality is checked with anything but the triple equals operator. The rule is added under the <i>rules</i> field in the configuration file.-->
+<!-- Let's add the [eqeqeq](https://eslint.org/docs/rules/eqeqeq) rule that warns us, if equality is checked with anything but the triple equals operator. The rule is added under the <i>rules</i> field in the configuration file.-->
 让我们添加[eqeqeq](https://eslint.org/docs/rules/eqeqeq)规则，它会警告我们如果不使用三个等号操作符检查相等性。该规则添加到配置文件的<i>rules</i>字段中。
 
 ```js
@@ -391,7 +391,7 @@ ESLint 有大量的[规则](https://eslint.org/docs/rules/)，可以通过编辑
 <!-- While we're at it, let's make a few other changes to the rules.-->
 而我们正在做的事情，让我们对规则做出一些其他的改变。
 
-<!-- Let's prevent unnecessary [trailing spaces](https://eslint.org/docs/rules/no-trailing-spaces) at the ends of lines, let's require that [there is always a space before and after curly braces](https://eslint.org/docs/rules/object-curly-spacing), and let''s also demand a consistent use of whitespaces in the function parameters of arrow functions.-->
+<!-- Let's prevent unnecessary [trailing spaces](https://eslint.org/docs/rules/no-trailing-spaces) at the ends of lines, let's require that [there is always a space before and after curly braces](https://eslint.org/docs/rules/object-curly-spacing), and let's also demand a consistent use of whitespaces in the function parameters of arrow functions.-->
 让我们防止行尾处不必要的[尾随空格](https://eslint.org/docs/rules/no-trailing-spaces)，让我们要求[花括号前后总是有空格](https://eslint.org/docs/rules/object-curly-spacing)，并且让我们还要求箭头函数的函数参数中使用空格保持一致。
 
 ```js
@@ -418,7 +418,7 @@ ESLint 有大量的[规则](https://eslint.org/docs/rules/)，可以通过编辑
 'extends': 'eslint:recommended',
 ```
 
-<!-- This includes a rule that warns about _console.log_ commands. [Disabling](https://eslint.org/docs/user-guide/configuring#configuring-rules) a rule can be accomplished by defining its "value" as 0 in the configuration file. Let''s do this for the <i>no-console</i> rule in the meantime.-->
+<!-- This includes a rule that warns about _console.log_ commands. [Disabling](https://eslint.org/docs/user-guide/configuring#configuring-rules) a rule can be accomplished by defining its "value" as 0 in the configuration file. Let's do this for the <i>no-console</i> rule in the meantime.-->
 这包括一条警告有关 _console.log_ 命令的规则。[禁用](https://eslint.org/docs/user-guide/configuring#configuring-rules)规则可以通过在配置文件中将其"值"设置为0来实现。暂时让我们这样做<i>no-console</i>规则。
 
 ```js
@@ -463,7 +463,7 @@ ESLint 有大量的[规则](https://eslint.org/docs/rules/)，可以通过编辑
 <!-- Add ESlint to your application and fix all the warnings.-->
 添加ESLint到你的应用程序，并修复所有警告。
 
-<!-- This was the last exercise of this part of the course. It''s time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
+<!-- This was the last exercise of this part of the course. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
 这是本部分课程的最后一个练习了。是时候把你的代码推送到GitHub，并把你完成的所有练习提交到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)了。
 
 </div>

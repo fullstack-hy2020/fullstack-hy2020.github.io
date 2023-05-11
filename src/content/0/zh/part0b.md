@@ -57,7 +57,7 @@ lang: zh
 <!-- On a small screen, you might have to widen the console window to see these.-->
 在小屏幕上，你可能需要把控制台窗口拉宽来看到这些内容。
 
-<!-- Clicking the first event reveals more information on what''s happening:-->
+<!-- Clicking the first event reveals more information on what's happening:-->
 点击第一个事件可以查看更多关于正在发生的信息：
 
 ![Detailed view of a single event](../../images/0/3e.png)
@@ -108,7 +108,7 @@ lang: zh
 <!-- The homepage of the example application works like a <i>traditional web application</i>. When entering the page, the browser fetches the HTML document detailing the structure and the textual content of the page from the server.-->
 该示例应用的页面就像一个<i>传统的Web应用程序</i>一样。当进入页面时，浏览器从服务器获取描述页面结构和文本内容的HTML文档。
 
-<!-- The server has formed this document somehow. The document can be a <i>static</i> text file saved into the server''s directory. The server can also form the HTML documents <i>dynamically</i> according to the application code, using, for example, data from a database.-->
+<!-- The server has formed this document somehow. The document can be a <i>static</i> text file saved into the server's directory. The server can also form the HTML documents <i>dynamically</i> according to the application code, using, for example, data from a database.-->
 服务器以某种方式生成了这个文档。文档可以是一个保存到服务器的目录中的静态</i>文本文件。服务器也可以根据应用程序代码<i>动态</i>地生成HTML文档，例如使用数据库中的数据。
 <!-- The HTML code of the example application has been formed dynamically because it contains information on the number of created notes.-->
 示例应用程序的HTML代码是动态生成的，因为它包含有关已创建笔记数量的信息。
@@ -165,7 +165,7 @@ HTML 页面的内容已经被保存为一个模板字符串，或者一个用于
 
 ![Screenshot of the developer console with the 4 requests visible](../../images/0/8e.png)
 
-<!-- All of the requests have <i>different</i> types. The first request''s type is <i>document</i>. It is the HTML code of the page, and it looks as follows:-->
+<!-- All of the requests have <i>different</i> types. The first request's type is <i>document</i>. It is the HTML code of the page, and it looks as follows:-->
 所有的请求都有<i>不同</i>的类型。第一个请求的类型是<i>文档</i>。它是页面的HTML代码，看起来如下：
 
 ![Detailed view of the first request](../../images/0/9e.png)
@@ -227,7 +227,7 @@ xhttp.send()
 <!-- Immediately after fetching the <i>script</i> tag, the browser begins to execute the code.-->
 在取回<i>脚本</i>标签后，浏览器就立即开始执行代码。
 
-<!-- The last two lines instruct the browser to do an HTTP GET request to the server''s address <i>/data.json</i>:-->
+<!-- The last two lines instruct the browser to do an HTTP GET request to the server's address <i>/data.json</i>:-->
 最后两行指示浏览器向服务器地址<i>/data.json</i>发出HTTP GET请求：
 
 ```js
@@ -331,7 +331,7 @@ xhttp.open(''GET'', ''/data.json'', true)
 xhttp.send()
 ```
 
-<!-- The request to the server is sent on the last line, but the code to handle the response can be found further up. What''s going on?-->
+<!-- The request to the server is sent on the last line, but the code to handle the response can be found further up. What's going on?-->
 最后一行发送了服务器的请求，但是处理响应的代码却在上面，这是怎么回事？
 
 ```js
@@ -416,7 +416,7 @@ HTML文档的DOM树的顶部节点称为<em>文档(document)</em>对象。我们
 
 ![document in console tab of developer tools](../../images/0/15e.png)
 
-<!-- Let''s add a new note to the page from the console.-->
+<!-- Let's add a new note to the page from the console.-->
 让我们从控制台向页面添加一条新的笔记。
 
 <!-- First, we''ll get the list of notes from the page. The list is in the first ul-element of the page:-->
@@ -486,7 +486,7 @@ Cascading Style Sheets（CSS），或称为CSS，是一种样式表语言，用�
 <!-- The outermost <i>div</i> element has the class <i>container</i>. The <i>ul</i> element containing the list of notes has the class <i>notes</i>.-->
 外层<i>div</i>元素拥有类<i>container</i>。包含笔记列表的<i>ul</i>元素拥有的类<i>notes</i>。
 
-<!-- The CSS rule defines that elements with the <i>container</i> class will be outlined with a one-pixel wide [border](https://developer.mozilla.org/en-US/docs/Web/CSS/border). It also sets 10-pixel [padding](https://developer.mozilla.org/en-US/docs/Web/CSS/padding) on the element. This adds some empty space between the element''s content and the border.-->
+<!-- The CSS rule defines that elements with the <i>container</i> class will be outlined with a one-pixel wide [border](https://developer.mozilla.org/en-US/docs/Web/CSS/border). It also sets 10-pixel [padding](https://developer.mozilla.org/en-US/docs/Web/CSS/padding) on the element. This adds some empty space between the element's content and the border.-->
 CSS 规则定义了带有<i>container</i>类的元素将用一像素宽的[边框](https://developer.mozilla.org/en-US/docs/Web/CSS/border)绘制出轮廓。它还为元素设置了 10 像素的[填充](https://developer.mozilla.org/en-US/docs/Web/CSS/padding)。这样就在元素的内容和边框之间添加了一些空白空间。
 
 <!-- The second CSS rule sets the text color of the <i>notes</i> class as blue.-->
@@ -505,7 +505,7 @@ HTML 元素除了类之外还可以有其他属性。包含笔记的 <i>div</i> 
 
 ### Loading a page containing JavaScript - review
 
-<!-- Let''s review what happens when the page <https://studies.cs.helsinki.fi/exampleapp/notes> is opened on the browser.-->
+<!-- Let's review what happens when the page <https://studies.cs.helsinki.fi/exampleapp/notes> is opened on the browser.-->
 让我们复习一下，当在浏览器中打开<https://studies.cs.helsinki.fi/exampleapp/notes>页面时会发生什么。
 
 ![sequence diagram of browser/server interaction](../../images/0/19m.png)
@@ -526,7 +526,7 @@ HTML代码中的Links会导致浏览器也获取<i>main.css</i>样式表...
 
 ### Forms and HTTP POST
 
-<!-- Next, let''s examine how adding a new note is done.-->
+<!-- Next, let's examine how adding a new note is done.-->
 接下来，让我们来看看如何添加新笔记。
 
 <!-- The Notes page contains a [form element](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form).-->
@@ -534,19 +534,19 @@ HTML代码中的Links会导致浏览器也获取<i>main.css</i>样式表...
 
 ![form element highlight in webpage and developer tools](../../images/0/20e.png)
 
-<!-- When the button on the form is clicked, the browser will send the user input to the server. Let''s open the <i>Network</i> tab and see what submitting the form looks like:-->
+<!-- When the button on the form is clicked, the browser will send the user input to the server. Let's open the <i>Network</i> tab and see what submitting the form looks like:-->
 当表单上的按钮被点击时，浏览器会将用户输入发送到服务器。让我们打开<i>网络</i>选项卡，看看提交表单的样子：
 
 ![Screenshot of the Network tab where the events for submitting the form are shown](../../images/0/21e.png)
 
 <!-- Surprisingly, submitting the form causes no fewer than <i>five</i> HTTP requests.-->
 出乎意料的是，提交表单会产生不少于<i>五</i>个HTTP请求。
-<!-- The first one is the form submit event. Let''s zoom into it:-->
+<!-- The first one is the form submit event. Let's zoom into it:-->
 第一个是表单提交事件。让我们放大它：
 
 ![Detailed view of the first request](../../images/0/22e.png)
 
-<!-- It is an [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request to the server address <i>new\_note</i>. The server responds with HTTP status code 302. This is a [URL redirect](https://en.wikipedia.org/wiki/URL\_redirection), with which the server asks the browser to do a new HTTP GET request to the address defined in the header''s <i>Location</i> - the address <i>notes</i>.-->
+<!-- It is an [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request to the server address <i>new\_note</i>. The server responds with HTTP status code 302. This is a [URL redirect](https://en.wikipedia.org/wiki/URL\_redirection), with which the server asks the browser to do a new HTTP GET request to the address defined in the header's <i>Location</i> - the address <i>notes</i>.-->
 它是一个发送到服务器地址<i>new\_note</i>的HTTP POST请求。服务器回复HTTP状态码302。这是一个[URL重定向](https://en.wikipedia.org/wiki/URL\_redirection)，服务器要求浏览器执行一个新的HTTP GET请求到头信息<i>Location</i>中定义的地址-即地址<i>notes</i>。
 
 <!-- So, the browser reloads the Notes page. The reload causes three more HTTP requests: fetching the style sheet (main.css), the JavaScript code (main.js), and the raw data of the notes (data.json).-->
@@ -603,7 +603,7 @@ notes.push({
 
 ### AJAX
 
-<!-- The Notes page of the application follows an early-nineties style of web development and uses "Ajax". As such, it''s on the crest of the wave of early 2000s web technology.-->
+<!-- The Notes page of the application follows an early-nineties style of web development and uses "Ajax". As such, it's on the crest of the wave of early 2000s web technology.-->
 应用程序的Notes页面遵循了90年代初的网页开发风格，并使用“Ajax”。即使是这样，它在2000年初网络技术也是最fashion 的。
 
 <!-- [AJAX](<https://en.wikipedia.org/wiki/Ajax_(programming)>) (Asynchronous JavaScript and XML) is a term introduced in February 2005 on the back of advancements in browser technology to describe a new revolutionary approach that enabled the fetching of content to web pages using JavaScript included within the HTML, without the need to rerender the page.-->
@@ -622,7 +622,7 @@ Notes 页面使用 AJAX 来获取笔记数据。提交表单仍然使用传统�
 <!-- Nowadays URLs like these would not be considered acceptable, as they don''t follow the generally acknowledged conventions of [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) APIs, which we''ll look into more in [part 3](/en/part3).-->
 如今，像这样的URL已经钉在了历史的耻辱柱上，因为它们不遵循如今公认的[RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) APIs的约定，我们将在[第3章](/en/part3)中进一步研究。
 
-<!-- The thing termed AJAX is now so commonplace that it''s taken for granted. The term has faded into oblivion, and the new generation has not even heard of it.-->
+<!-- The thing termed AJAX is now so commonplace that it's taken for granted. The term has faded into oblivion, and the new generation has not even heard of it.-->
 AJAX现在是如此普遍，以至于人们认为它是理所当然的。这个术语已经渐渐消失，新生代甚至连听都没有听说过。
 
 ### Single page app
@@ -636,7 +636,7 @@ Notes页面将一部分责任分配给浏览器，即为现有的notes生成HTML
 <!-- In recent years, the [Single-page application](https://en.wikipedia.org/wiki/Single-page_application) (SPA) style of creating web applications has emerged. SPA-style websites don''t fetch all of their pages separately from the server like our sample application does, but instead comprise only one HTML page fetched from the server, the contents of which are manipulated with JavaScript that executes in the browser.-->
 近年来，[单页应用](https://en.wikipedia.org/wiki/Single-page_application) (SPA) 式的网络应用已经出现。 SPA 风格的网站不像我们的示例应用程序那样从服务器单独获取所有页面，而是仅包含从服务器获取的一个 HTML 页面，其内容由在浏览器中执行的 JavaScript 进行操作。
 
-<!-- The Notes page of our application bears some resemblance to SPA-style apps, but it''s not quite there yet. Even though the logic for rendering the notes is run on the browser, the page still uses the traditional way of adding new notes. The data is sent to the server via the form''s submit, and the server instructs the browser to reload the Notes page with a <i>redirect</i>.-->
+<!-- The Notes page of our application bears some resemblance to SPA-style apps, but it's not quite there yet. Even though the logic for rendering the notes is run on the browser, the page still uses the traditional way of adding new notes. The data is sent to the server via the form's submit, and the server instructs the browser to reload the Notes page with a <i>redirect</i>.-->
 我们应用程序的Notes页面与SPA风格的应用程序有一些相似之处，但尚不够完善。尽管渲染笔记的逻辑是在浏览器上运行的，但该页面仍然使用传统的方式添加新笔记。数据通过表单的提交发送到服务器，服务器指示浏览器使用<i>重定向</i>重新加载Notes页面。
 
 <!-- A single-page app version of our example application can be found at <https://studies.cs.helsinki.fi/exampleapp/spa>.-->
@@ -699,7 +699,7 @@ form.onsubmit = function(e) {
 }
 ```
 
-<!-- The command <em>document.getElementById(''notes_form'')</em> instructs the code to fetch the form element from the page and to register an <i>event handler</i> to handle the form''s submit event. The event handler immediately calls the method <em>e.preventDefault()</em> to prevent the default handling of form''s submit. The default method would send the data to the server and cause a new GET request, which we don''t want to happen.-->
+<!-- The command <em>document.getElementById(''notes_form'')</em> instructs the code to fetch the form element from the page and to register an <i>event handler</i> to handle the form's submit event. The event handler immediately calls the method <em>e.preventDefault()</em> to prevent the default handling of form's submit. The default method would send the data to the server and cause a new GET request, which we don''t want to happen.-->
 <em>document.getElementById(''notes_form'')</em> 指令会指示代码从页面中获取表单元素，并注册一个<i>事件处理程序</i>来处理表单的提交事件。事件处理程序立即调用方法<em>e.preventDefault()</em>来阻止表单的默认处理。默认方法会将数据发送到服务器，并导致一个新的GET请求，这不是我们希望发生的。
 
 <!-- Then the event handler creates a new note, adds it to the notes list with the command <em>notes.push(note)</em>, rerenders the note list on the page and sends the new note to the server.-->
@@ -724,7 +724,7 @@ var sendToServer = function(note) {
 
 <!-- The application code is available at <https://github.com/mluukkai/example_app>.-->
 应用代码可在<https://github.com/mluukkai/example_app>获取。
-<!-- It''s worth remembering that the application is only meant to demonstrate the concepts of the course. The code follows a poor style of development in some measures, and should not be used as an example when creating your applications. The same is true for the URLs used. The URL <i>new\_note\_spa</i> that new notes are sent to, does not adhere to current best practices.-->
+<!-- It's worth remembering that the application is only meant to demonstrate the concepts of the course. The code follows a poor style of development in some measures, and should not be used as an example when creating your applications. The same is true for the URLs used. The URL <i>new\_note\_spa</i> that new notes are sent to, does not adhere to current best practices.-->
 记住，这个应用程序只是为了展示课程的概念。在某些方面，该代码遵循了不好的开发风格，不应该用作创建应用程序的示例。使用的URL也是如此。新笔记发送到的URL<i>new\_note\_spa</i>不符合当前的最佳实践。
 
 ### JavaScript-libraries
@@ -738,13 +738,13 @@ var sendToServer = function(note) {
 <!-- jQuery was developed back when web applications mainly followed the traditional style of the server generating HTML pages, the functionality of which was enhanced on the browser side using JavaScript written with jQuery. One of the reasons for the success of jQuery was its so-called cross-browser compatibility. The library worked regardless of the browser or the company that made it, so there was no need for browser-specific solutions. Nowadays using jQuery is not as justified given the advancement of JavaScript, and the most popular browsers generally support basic functionalities well.-->
 jQuery 在网络应用中主要遵循服务器生成HTML页面的传统风格开发的，其功能是通过使用jQuery编写的JavaScript在浏览器端进行增强。 jQuery成功的一个原因是其所谓的跨浏览器兼容性。 该库无论使用哪种浏览器或制造商，都可以正常工作，因此无需特定浏览器的解决方案。 现在，由于JavaScript的进步，使用jQuery并不合理，而且最流行的浏览器通常都能很好地支持基本功能。
 
-<!-- The rise of the single-page app brought several more "modern" ways of web development than jQuery. The favorite of the first wave of developers was [BackboneJS](http://backbonejs.org/). After its [launch](https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13) in 2012, Google''s [AngularJS](https://angularjs.org/) quickly became almost the de facto standard of modern web development.-->
+<!-- The rise of the single-page app brought several more "modern" ways of web development than jQuery. The favorite of the first wave of developers was [BackboneJS](http://backbonejs.org/). After its [launch](https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13) in 2012, Google's [AngularJS](https://angularjs.org/) quickly became almost the de facto standard of modern web development.-->
 随着单页应用的兴起，比jQuery更多的"现代"网页开发方式应运而生。第一波开发者最喜欢的是[BackboneJS](http://backbonejs.org/)。在2012年[发布](https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13)后，谷歌的[AngularJS](https://angularjs.org/)很快就成为现代网页开发的几乎默认的标准。
 
 <!-- However, the popularity of Angular plummeted in October 2014 after the [Angular team announced that support for version 1 will end](https://web.archive.org/web/20151208002550/https://jaxenter.com/angular-2-0-announcement-backfires-112127.html), and Angular 2 will not be backwards compatible with the first version. Angular 2 and the newer versions have not gotten too warm of a welcome.-->
 然而，在2014年10月，Angular的流行度在[Angular团队宣布将停止对第一版本的支持](https://web.archive.org/web/20151208002550/https://jaxenter.com/angular-2-0-announcement-backfires-112127.html)后迅速下降，而Angular 2与第一版本不兼容。Angular 2及更新版本并未受到太热烈的欢迎。
 
-<!-- Currently, the most popular tool for implementing the browser-side logic of web applications is Facebook''s [React](https://reactjs.org/) library.-->
+<!-- Currently, the most popular tool for implementing the browser-side logic of web applications is Facebook's [React](https://reactjs.org/) library.-->
 目前，用于实现Web应用浏览器端逻辑的最受欢迎的框架是是Facebook的[React](https://reactjs.org/)库。
 <!-- During this course, we will get familiar with React and the [Redux](https://github.com/reactjs/redux) library, which are frequently used together.-->
 在本课程中，我们将熟悉[Redux](https://github.com/reactjs/redux)库和React，它们经常被一起使用。
@@ -766,7 +766,7 @@ React 的状态似乎很强势，但 JavaScript 世界变化无常。例如，�
 <!-- In the context of this course, full-stack web development means that we focus on all parts of the application: the frontend, the backend, and the database. Sometimes the software on the server and its operating system are seen as parts of the stack, but we won''t go into those.-->
 在本课程的背景下，全栈网络开发意味着我们应关注应用程序的所有部分：前端、后端和数据库。有时服务器上的软件及其操作系统被视为堆栈的一部分，但我们不会深入研究这些。
 
-<!-- We will code the backend with JavaScript, using the [Node.js](https://nodejs.org/en/) runtime environment. Using the same programming language on multiple layers of the stack gives full-stack web development a whole new dimension. However, it''s not a requirement of full-stack web development to use the same programming language (JavaScript) for all layers of the stack.-->
+<!-- We will code the backend with JavaScript, using the [Node.js](https://nodejs.org/en/) runtime environment. Using the same programming language on multiple layers of the stack gives full-stack web development a whole new dimension. However, it's not a requirement of full-stack web development to use the same programming language (JavaScript) for all layers of the stack.-->
 我们将使用JavaScript编写后端，使用[Node.js](https://nodejs.org/en/)运行时环境。在堆栈的多个层面使用相同的编程语言为全栈Web开发带来了全新的维度。但是，使用相同的编程语言（JavaScript）为堆栈的所有层面不是全栈Web开发的必要条件。
 
 <!-- It used to be more common for developers to specialize in one layer of the stack, for example, the backend. Technologies on the backend and the frontend were quite different. With the Full stack trend, it has become common for developers to be proficient in all layers of the application and the database. Oftentimes, full-stack developers must also have enough configuration and administration skills to operate their applications, for example, in the cloud.-->
@@ -822,7 +822,7 @@ part2
 <!-- Review the basics of HTML by reading this tutorial from Mozilla: [HTML tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics).-->
 通过阅读Mozilla的[HTML教程](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics)来复习HTML的基础知识。
 
-<i>This exercise is not submitted to GitHub, it''s enough to just read the tutorial</i>
+<i>This exercise is not submitted to GitHub, it's enough to just read the tutorial</i>
 
 这个练习不用提交GitHub，只阅读教程即可。
 
@@ -833,7 +833,7 @@ part2
 <!-- Review the basics of CSS by reading this tutorial from Mozilla: [CSS tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics).-->
 阅读Mozilla的这篇教程来复习CSS的基础知识：[CSS 教程](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics)。
 
-<i>This exercise is not submitted to GitHub, it''s enough to just read the tutorial</i>
+<i>This exercise is not submitted to GitHub, it's enough to just read the tutorial</i>
 
 这个练习不用提交GitHub，只阅读教程即可。
 
@@ -841,10 +841,10 @@ part2
 
 <h4>0.3：HTML 表单</h4>
 
-<!-- Learn about the basics of HTML forms by reading Mozilla''s tutorial [Your first form](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form).-->
+<!-- Learn about the basics of HTML forms by reading Mozilla's tutorial [Your first form](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form).-->
 学习通过阅读Mozilla的教程[你的第一个表单](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form)了解HTML表单的基础知识。
 
-<i>This exercise is not submitted to GitHub, it''s enough to just read the tutorial</i>
+<i>This exercise is not submitted to GitHub, it's enough to just read the tutorial</i>
 
 这个练习不用提交GitHub，只阅读教程即可。
 
@@ -926,7 +926,7 @@ sequenceDiagram
 
 ![图片](https://i.imgur.com/DpvFjgT.png)
 
-<!-- This was the last exercise, and it''s time to push your answers to GitHub and mark the exercises as done in the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
+<!-- This was the last exercise, and it's time to push your answers to GitHub and mark the exercises as done in the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
 这是最后一个练习，现在是时候把你的答案推送到GitHub，并在[提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)中标记为已完成。
 
 </div>

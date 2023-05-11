@@ -11,7 +11,7 @@ lang: zh
 写了一个不错的应用程序之后，是时候考虑一下如何将它部署到真正的用户中去了。
 
 <!-- In [part 3](/en/part3/deploying_app_to_internet) of this course, we did this by simply running a single command from terminal to get the code up and running the servers of the cloud provider [Fly.io](https://fly.io/) or [Render](hhttps://render.com/).-->
-在本课程的[第三部分](/en/part3/deploying_app_to_internet)中，我们只需从终端运行一个单个命令就可以将代码部署到云端提供商[Fly.io](https://fly.io/)或[Render](hhttps://render.com/)的服务器上。
+在本课程的[第三章节](/en/part3/deploying_app_to_internet)中，我们只需从终端运行一个单个命令就可以将代码部署到云端提供商[Fly.io](https://fly.io/)或[Render](hhttps://render.com/)的服务器上。
 
 <!-- It is pretty simple to release software in Fly.io and Render at least compared to many other types of hosting setups but it still contains risks: nothing prevents us from accidentally releasing broken code to production.-->
 Fly.io 和 Render 至少比起许多其他类型的托管设置来说，发布软件相当简单，但仍然存在风险：没有任何东西可以阻止我们不小心将损坏的代码发布到生产环境中。
@@ -24,7 +24,7 @@ Fly.io 和 Render 至少比起许多其他类型的托管设置来说，发布�
 <!-- We''d like to define some rules about how our deployment process should work but before that, we have to look at some constraints of reality.-->
 我们想定义一些关于我们的部署过程应该如何工作的规则，但在此之前，我们必须先考虑一些现实的约束。
 
-<!-- One on the phrasing of Murphy''s Law holds that:-->
+<!-- One on the phrasing of Murphy's Law holds that:-->
 **一句关于墨菲定律的表述是：**
 
 如果有可能出错，那么它就一定会出错。
@@ -57,13 +57,13 @@ Fly.io 和 Render 至少比起许多其他类型的托管设置来说，发布�
 
 ### What does a good deployment system do?
 
-<!-- Defining definitive rules or requirements for a deployment system is difficult, let''s try anyway:-->
+<!-- Defining definitive rules or requirements for a deployment system is difficult, let's try anyway:-->
 定义一个部署系统的明确规则或要求是很困难的，但我们还是尝试一下：
 <!--  - Our deployment system should be able to fail gracefully at **any** step of the deployment.-->
 我们的部署系统应该能够在部署的**任何**一步优雅地失败。
 <!--  - Our deployment system should **never** leave our software in a broken state.-->
 我们的部署系统**永远不应**使我们的软件处于损坏状态。
-<!--  - Our deployment system should let us know when a failure has happened. It''s more important to notify about failure than about success.-->
+<!--  - Our deployment system should let us know when a failure has happened. It's more important to notify about failure than about success.-->
 我们的部署系统应该让我们知道失败发生时。通知失败比通知成功更重要。
 <!--  - Our deployment system should allow us to roll back to a previous deployment-->
 我们的部署系统应该允许我们回滚到以前的部署。
@@ -76,7 +76,7 @@ Fly.io 和 Render 至少比起许多其他类型的托管设置来说，发布�
 <!--  - Our deployment system should make sure that the software we are deploying meets the requirements we have set for this (e.g. don't deploy if tests haven't been run).-->
 我们的部署系统应该确保我们部署的软件符合我们为此设定的要求（例如，如果没有运行测试，则不要部署）。
 
-<!-- Let''s define some things we **want** in this hypothetical deployment system too:-->
+<!-- Let's define some things we **want** in this hypothetical deployment system too:-->
 让我们定义一些我们**想要**在这个假设的部署系统中的东西：
 <!--  - We would like it to be fast-->
 我们希望它能快速完成。
@@ -99,7 +99,7 @@ Fly.io 和 Render 至少比起许多其他类型的托管设置来说，发布�
 如果您更喜欢使用其他托管选项，[Render](http://localhost:8000/en/part11/deployment#exercises-11-10-11-12-render) 和 [Heroku](/en/part11/deployment#exercises-11-10-11-12-heroku) 均有一套替代练习。
 
 <!-- In contrast to part 3 now we <i>do not deploy the code</i> to Fly.io ourselves (with the command <i>flyctl deploy</i>), we let the GitHub Actions workflow do that for us!-->
-相比起第三部分，我们<i>不再自己部署代码</i>到Fly.io上（使用命令<i>flyctl deploy</i>），我们让GitHub Actions工作流来帮我们完成！
+相比起第三章节，我们<i>不再自己部署代码</i>到Fly.io上（使用命令<i>flyctl deploy</i>），我们让GitHub Actions工作流来帮我们完成！
 
 <!-- Create a new app in Fly.io and after that generate a Fly.io API token with command-->
 line
@@ -181,7 +181,7 @@ flyctl auth token
 <!-- Extend the workflow with a step to deploy your application to Fly.io by following the advice given [here](https://fly.io/docs/app-guides/continuous-deployment-with-github-actions/).-->
 扩展工作流，按照[这里](https://fly.io/docs/app-guides/continuous-deployment-with-github-actions/)给出的建议，添加一个步骤将应用部署到Fly.io。
 
-<!-- You need the authorization token that you just created for the deployment. The proper way to pass it''s value to GitHub Actions is to use repository secrets:-->
+<!-- You need the authorization token that you just created for the deployment. The proper way to pass it's value to GitHub Actions is to use repository secrets:-->
 你需要刚刚创建的用于部署的授权令牌。向GitHub Actions传递它的值的正确方法是使用存储库秘密：
 
 ![repo secret](../../images/11/10f.png)
@@ -201,7 +201,7 @@ ${{secrets.FLY_API_TOKEN}}
 <!-- You can then try the app with a browser, but most likely you run into a problem. If we read carefully [the section 'Application to the Internet' in part 3](/en/part3/deploying_app_to_internet#application-to-the-internet)-->
 of this guide, we can find the solution.
 
-你可以用浏览器试用这个应用，但很可能会遇到问题。如果仔细阅读[本指南第三部分的「将应用部署到互联网」一节](/en/part3/deploying_app_to_internet#application-to-the-internet)，我们就可以找到解决方案。
+你可以用浏览器试用这个应用，但很可能会遇到问题。如果仔细阅读[本指南第三章节的「将应用部署到互联网」一节](/en/part3/deploying_app_to_internet#application-to-the-internet)，我们就可以找到解决方案。
 
 <!-- **Remember** that it is always essential to keep an eye on what is happening in server logs when playing around with product deployments, so use <code>flyctl logs</code> early and use it often. No, use it all the time!-->
 **记住**，当玩转产品部署时，总是必须密切关注服务器日志上发生的事情，因此尽早使用<code>flyctl logs</code>，并经常使用它。不，一直使用它！
@@ -554,13 +554,13 @@ app.get('/health', (req, res) => {
 ### Exercises 11.10-11.12. (Heroku)
 
 <!-- Before going to the below exercises, you should setup your application in [Heroku](heroku.com) hosting service like the one we did in [part 3](/en/part3/deploying_app_to_internet#application-to-the-internet).-->
-在做下面的练习之前，你应该像我们在[第三部分](/en/part3/deploying_app_to_internet#application-to-the-internet)中所做的那样，在[Heroku](heroku.com)托管服务上设置你的应用程序。
+在做下面的练习之前，你应该像我们在[第三章节](/en/part3/deploying_app_to_internet#application-to-the-internet)中所做的那样，在[Heroku](heroku.com)托管服务上设置你的应用程序。
 
 <!-- If you rather want to use other hosting options, there is an alternative set of exercises for [Fly.io](/en/part11/deployment/#exercises-11-10-11-12-fly-io) and for [Render](/en/part11/deployment#exercises-11-10-11-12-render).-->
 如果您想使用其他主机选项，还有另一套针对[Fly.io](/en/part11/deployment/#exercises-11-10-11-12-fly-io)和[Render](/en/part11/deployment#exercises-11-10-11-12-render)的练习。
 
 <!-- In contrast to part 3 now we <i>do not push the code</i> to Heroku ourselves, we let the Github Actions workflow do that for us!-->
-在与第3部分形成对比的是，我们<i>不再自己把代码推送到Heroku上</i>，而是让Github Actions工作流来为我们完成这项任务！
+在与第3章节形成对比的是，我们<i>不再自己把代码推送到Heroku上</i>，而是让Github Actions工作流来为我们完成这项任务！
 
 <!-- Ensure now that you have [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install) installed and login to Heroku using the CLI with <code>heroku login</code>.-->
 确保现在您已经安装[Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)，并使用CLI通过<code>heroku login</code>登录Heroku。
@@ -582,7 +582,7 @@ app.get('/health', (req, res) => {
 <!-- The below assumes that you use the ready-made Heroku deploy action [AkhileshNS/heroku-deploy](https://github.com/AkhileshNS/heroku-deploy) that has been developed by the community.-->
 以下假设您使用社区开发的准备好的Heroku部署操作[AkhileshNS/heroku-deploy](https://github.com/AkhileshNS/heroku-deploy)。
 
-<!-- You need the authorization token that you just created for the deployment. The proper way to pass it''s value to GitHub Actions is to use repository secrets:-->
+<!-- You need the authorization token that you just created for the deployment. The proper way to pass it's value to GitHub Actions is to use repository secrets:-->
 你需要刚刚创建的授权令牌来部署。正确的传递它的值给GitHub Actions的方式是使用存储库秘密：
 
 ![repo secret](../../images/11/10x.png)
@@ -600,7 +600,7 @@ ${{secrets.HEROKU_API_KEY}}
 ![](../../images/11/11.png)
 
 <!-- You can then try the app with a browser, but most likely you run into a problem. If we read carefully [the section 'Application to the Internet' in part 3](/en/part3/deploying_app_to_internet#application-to-the-internet) we notice that Heroku assumes that the repository has a file called <i>Procfile</i> that tells Heroku how to start the application.-->
-你可以用浏览器试用该应用，但很可能会遇到问题。如果我们仔细阅读[第3部分的“应用程序上网”一节](/en/part3/deploying_app_to_internet#application-to-the-internet)，我们会注意到Heroku假定存储库中有一个叫做<i>Procfile</i>的文件，它告诉Heroku如何启动应用程序。
+你可以用浏览器试用该应用，但很可能会遇到问题。如果我们仔细阅读[第3章节的“应用程序上网”一节](/en/part3/deploying_app_to_internet#application-to-the-internet)，我们会注意到Heroku假定存储库中有一个叫做<i>Procfile</i>的文件，它告诉Heroku如何启动应用程序。
 
 <!-- So, add a proper Procfile and ensure that the application starts properly.-->
 所以，添加一个合适的`Procfile`，确保应用程序启动正常。
@@ -652,7 +652,7 @@ app.get('/version', (req, res) => {
 
 #### 11.12. Rollback
 
-<!-- If the deployment results in a broken application, the best thing to do is to <i>roll back</i> to the previous release. Luckily Heroku makes this pretty easy. Every deployment to Heroku results in a [release](https://blog.heroku.com/releases-and-rollbacks#releases). You can see your application''s releases with the command <code>heroku releases</code>:-->
+<!-- If the deployment results in a broken application, the best thing to do is to <i>roll back</i> to the previous release. Luckily Heroku makes this pretty easy. Every deployment to Heroku results in a [release](https://blog.heroku.com/releases-and-rollbacks#releases). You can see your application's releases with the command <code>heroku releases</code>:-->
 如果部署导致应用程序出现故障，最好的办法是<i>回滚</i>到以前的发布版本。幸运的是，Heroku使这一切变得相当容易。每次部署到Heroku都会产生一个[发布](https://blog.heroku.com/releases-and-rollbacks#releases)。您可以使用命令<code>heroku releases</code>查看应用程序的发布版本：
 
 ```js

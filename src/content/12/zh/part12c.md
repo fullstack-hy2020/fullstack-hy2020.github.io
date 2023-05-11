@@ -9,7 +9,7 @@ lang: zh
 
 ### React in container
 
-<!-- Let''s create and containerize a React application next.-->
+<!-- Let's create and containerize a React application next.-->
 让我们接下来创建并容器化一个React应用程序吧。
 
 ```
@@ -22,7 +22,7 @@ $ npx create-react-app hello-front
 <!-- The create-react-app already installed all dependencies for us, so we did not need to run npm install here.-->
 create-react-app已经为我们安装了所有的依赖，因此我们不需要在这里运行npm install。
 
-<!-- The next step is to turn the JavaScript code and CSS, into production-ready static files. The create-react-app already has _build_ as an npm script so let''s use that:-->
+<!-- The next step is to turn the JavaScript code and CSS, into production-ready static files. The create-react-app already has _build_ as an npm script so let's use that:-->
 下一步是把JavaScript代码和CSS转换成生产准备就绪的静态文件。create-react-app已经有_build_作为npm脚本，所以让我们使用它：
 
 ```
@@ -50,7 +50,7 @@ RUN npm ci
 RUN npm run build
 ```
 
-<!-- That looks about right. Let''s build it and see if we are on the right track. Our goal is to have the build succeed without errors. Then we will use bash to check inside of the container to see if the files are there.-->
+<!-- That looks about right. Let's build it and see if we are on the right track. Our goal is to have the build succeed without errors. Then we will use bash to check inside of the container to see if the files are there.-->
 那看起来差不多了。让我们构建它，看看我们是否走上正确的轨道。我们的目标是让构建成功而不出错。然后我们将使用bash检查容器内部，看看文件是否在那里。
 
 ```bash
@@ -66,7 +66,7 @@ root@98fa9483ee85:/usr/src/app# ls build/
   asset-manifest.json  favicon.ico  index.html  logo192.png  logo512.png  manifest.json  robots.txt  static
 ```
 
-<!-- A valid option for serving static files now that we already have Node in the container is [serve](https://www.npmjs.com/package/serve). Let''s try installing serve and serving the static files while we are inside the container.-->
+<!-- A valid option for serving static files now that we already have Node in the container is [serve](https://www.npmjs.com/package/serve). Let's try installing serve and serving the static files while we are inside the container.-->
 现在我们已经在容器中安装了Node，一个用于服务静态文件的有效选项是[serve](https://www.npmjs.com/package/serve)。让我们试着安装serve，在容器内服务静态文件。
 
 ```bash
@@ -87,7 +87,7 @@ root@98fa9483ee85:/usr/src/app# serve build
 
 ```
 
-<!-- Great! Let''s ctrl+c and exit out and then add those to our Dockerfile.-->
+<!-- Great! Let's ctrl+c and exit out and then add those to our Dockerfile.-->
 好的！让我们按下Ctrl+C，退出，然后把它们添加到我们的Dockerfile中。
 
 <!-- The installation of serve turns into a RUN in the Dockerfile. This way the dependency is installed during the build process. The command to serve build directory will become the command to start the container:-->
@@ -127,7 +127,7 @@ CMD ["serve", "build"] # highlight-line
 <!-- With multi-stage builds, a tried and true solution like [Nginx](https://en.wikipedia.org/wiki/Nginx) can be used to serve static files without a lot of headaches. The Docker Hub [page for Nginx](https://hub.docker.com/_/nginx) tells us the required info to open the ports and "Hosting some simple static content".-->
 使用多阶段构建，一个经过考验的解决方案[Nginx](https://en.wikipedia.org/wiki/Nginx)可以用来提供静态文件而不需要太多的麻烦。Docker Hub [Nginx页面](https://hub.docker.com/_/nginx)告诉我们打开端口和“托管一些简单的静态内容”所需的信息。
 
-<!-- Let''s use the previous Dockerfile but change the FROM to include the name of the stage:-->
+<!-- Let's use the previous Dockerfile but change the FROM to include the name of the stage:-->
 FROM <阶段名称>:latest
 
 ```Dockerfile
@@ -201,7 +201,7 @@ md
 
 ### Development in containers
 
-<!-- Let''s move the whole todo application development to a container. There are a few reasons why you would want to do that:-->
+<!-- Let's move the whole todo application development to a container. There are a few reasons why you would want to do that:-->
 让我们把整个待办事项应用开发移到一个容器中去吧。你想要这么做有以下几个原因：
 
 <!-- - To keep the environment similar between development and production to avoid bugs that appear only in the production environment-->
@@ -224,7 +224,7 @@ and deployment
 <!-- Let's start with the frontend. Since the Dockerfile will be significantly different to the production Dockerfile let's create a new one called <i>dev.Dockerfile</i>.-->
 让我们从前端开始。由于Dockerfile将与生产Dockerfile显着不同，让我们创建一个叫做<i>dev.Dockerfile</i>的新文件。
 
-<!-- Starting the create-react-app in development mode should be easy. Let''s start with the following:-->
+<!-- Starting the create-react-app in development mode should be easy. Let's start with the following:-->
 开始以开发模式使用create-react-app应该很容易。让我们从下面开始：
 
 ```Dockerfile
@@ -282,10 +282,10 @@ $ docker run -p 3000:3000 -v "$(pwd):/usr/src/app/" hello-front-dev
 You can now view hello-frontend in the browser.
 ```
 
-<!-- > <i>**Editor''s note:** hot reload might work in your computer, but it is currently known to have some [issues](https://github.com/facebook/create-react-app/issues/11879). So if it does not work for you, just continue without the hot reload support, and reload the browser when you change the frontend code. You may also use use [The Visual Studio Code Containers extension](https://code.visualstudio.com/docs/remote/containers).</i>-->
+<!-- > <i>**Editor's note:** hot reload might work in your computer, but it is currently known to have some [issues](https://github.com/facebook/create-react-app/issues/11879). So if it does not work for you, just continue without the hot reload support, and reload the browser when you change the frontend code. You may also use use [The Visual Studio Code Containers extension](https://code.visualstudio.com/docs/remote/containers).</i>-->
 > <i>**编辑者按：**热加载可能在你的电脑上可以工作，但是目前已知有一些[问题](https://github.com/facebook/create-react-app/issues/11879)。所以如果它不能为你工作，就不要使用热加载，当你改变前端代码时重新加载浏览器。你也可以使用[Visual Studio Code Containers扩展](https://code.visualstudio.com/docs/remote/containers)。</i>
 
-<!-- Next, let''s move the config to a <i>docker-compose.yml</i>. That file should be at the root of the project as well:-->
+<!-- Next, let's move the config to a <i>docker-compose.yml</i>. That file should be at the root of the project as well:-->
 接下来，让我们将配置移动到<i>docker-compose.yml</i>。该文件也应该位于项目的根目录中：
 
 ```yml
@@ -324,7 +324,7 @@ services:
 
 ### Communication between containers in a Docker network
 
-<!-- The Docker Compose tool sets up a network between the containers and includes a DNS to easily connect two containers. Let''s add a new service to the Docker Compose and we shall see how the network and DNS work.-->
+<!-- The Docker Compose tool sets up a network between the containers and includes a DNS to easily connect two containers. Let's add a new service to the Docker Compose and we shall see how the network and DNS work.-->
 Docker Compose 工具建立了容器之间的网络，并包括一个DNS来轻松连接两个容器。让我们向Docker Compose添加一项新服务，看看网络和DNS如何工作。
 
 <!-- [Busybox](https://www.busybox.net/) is a small executable with multiple tools you may need. It is called "The Swiss Army Knife of Embedded Linux", and we definitely can use it to our advantage.-->
@@ -369,7 +369,7 @@ $ docker compose up
   hello-front-dev | > react-scripts start
 ```
 
-<!-- This is expected as it's just a toolbox. Let's use it to send a request to hello-front-dev and see how the DNS works. While the hello-front-dev is running, we can do the request with [wget](https://en.wikipedia.org/wiki/Wget) since it''s a tool included in Busybox to send a request from the debug-helper to hello-front-dev.-->
+<!-- This is expected as it's just a toolbox. Let's use it to send a request to hello-front-dev and see how the DNS works. While the hello-front-dev is running, we can do the request with [wget](https://en.wikipedia.org/wiki/Wget) since it's a tool included in Busybox to send a request from the debug-helper to hello-front-dev.-->
 这是预料之中的，因为它只是一个工具箱。让我们用它来向hello-front-dev发出请求，看看DNS是如何工作的。当hello-front-dev运行时，我们可以使用[wget](https://en.wikipedia.org/wiki/Wget)（它是Busybox中包含的一个工具）从debug-helper发出请求到hello-front-dev。
 
 <!-- With Docker Compose we can use _docker compose run SERVICE COMMAND_ to run a service with a specific command. Command wget requires the flag _-O_ with _-_ to output the response to the stdout:-->
@@ -408,7 +408,7 @@ services:
 <!-- And the port used is the port from which the application is available in that container, also specified in the <i>docker-compose.yml</i>. The port does not need to be published for other services in the same network to be able to connect to it. The "ports" in the docker-compose file are only for external access.-->
 而使用的端口是容器中应用程序可用的端口，也在<i>docker-compose.yml</i>中指定。端口不需要发布给同一网络中的其他服务来连接它。docker-compose文件中的“端口”仅用于外部访问。
 
-<!-- Let''s change the port configuration in the <i>docker-compose.yml</i> to emphasize this:-->
+<!-- Let's change the port configuration in the <i>docker-compose.yml</i> to emphasize this:-->
 让我们更改<i>docker-compose.yml</i>中的端口配置来强调这一点：
 
 ```yml
@@ -577,7 +577,7 @@ root@374f9e62bfa8:/# curl http://localhost:80
 <!-- To help us, Docker Compose set up a network when we ran _docker compose up_. It also added all of the containers in the <i>docker-compose.yml</i> to the network. A DNS makes sure we can find the other container. The containers are each given two names: the service name and the container name.-->
 为了帮助我们，当我们运行_docker compose up_时，Docker Compose设置了一个网络。它还将<i>docker-compose.yml</i>中的所有容器添加到网络中。DNS确保我们可以找到其他容器。每个容器都有两个名称：服务名称和容器名称。
 
-<!-- Since we are inside the container, we can also test the DNS! Let''s curl the service name (app) in port 3000-->
+<!-- Since we are inside the container, we can also test the DNS! Let's curl the service name (app) in port 3000-->
 自从我们在容器内，我们也可以测试DNS！让我们用curl测试服务名称（app）在3000端口！
 
 ```html
@@ -593,7 +593,7 @@ root@374f9e62bfa8:/# curl http://app:3000
     ...
 ```
 
-<!-- That is it! Let''s replace the proxy_pass address in nginx.conf with that one.-->
+<!-- That is it! Let's replace the proxy_pass address in nginx.conf with that one.-->
 那就是它了！让我们用那个替换nginx.conf中的proxy_pass地址吧。
 
 <!-- If you are still encountering 502, make sure that the create-react-app has been built first. You can read the logs output from the _docker compose up_.-->
@@ -648,7 +648,7 @@ http {
 
 #### Exercise 12.17: Set up an Nginx reverse proxy server in front of todo-frontend
 
-<!-- We are going to put the Nginx server in front of both todo-frontend and todo-backend. Let''s start by creating a new docker-compose file <i>todo-app/docker-compose.dev.yml</i> and <i>todo-app/nginx.conf</i>.-->
+<!-- We are going to put the Nginx server in front of both todo-frontend and todo-backend. Let's start by creating a new docker-compose file <i>todo-app/docker-compose.dev.yml</i> and <i>todo-app/nginx.conf</i>.-->
 我们将Nginx服务器放在todo-frontend和todo-backend的前面。让我们从创建新的docker-compose文件<i>todo-app/docker-compose.dev.yml</i>和<i>todo-app/nginx.conf</i>开始。
 
 ```bash
@@ -866,7 +866,7 @@ todo-app
 ```
 ### Submitting exercises and getting the credits
 
-<!-- This was the last exercise in this section. It''s time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-containers).-->
+<!-- This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-containers).-->
 这是本节中的最后一个练习。是时候将你的代码推送到GitHub，并将所有已完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fs-containers)上了。
 
 <!-- Exercises of this part are submitted just like in the previous parts, but unlike parts 0 to 7, the submission goes to an own [course instance](https://studies.cs.helsinki.fi/stats/courses/fs-containers). Remember that you have to finish <i>all the exercises</i> to pass this part!-->
@@ -881,7 +881,7 @@ todo-app
 <!-- **Note** that you need a registration to the corresponding course part for getting the credits registered, see [here](/en/part0/general_info#parts-and-completion) for more information.-->
 **注意**，您需要注册相应的课程部分才能获得注册学分，有关更多信息，请参见[此处](/en/part0/general_info#parts-and-completion)。
 
-<!-- You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the certificate''s language.-->
+<!-- You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the certificate's language.-->
 你可以通过点击其中一个旗帜图标来下载完成这部分的证书。旗帜图标对应证书的语言。
 
 </div>

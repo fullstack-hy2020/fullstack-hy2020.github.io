@@ -6,11 +6,10 @@ lang: zh
 ---
 
 <div class="content">
-
-<!-- Let''s continue expanding our application by allowing users to add new notes. You can find the code for our current application [here](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1).-->
+<!-- Let's continue expanding our application by allowing users to add new notes. You can find the code for our current application [here](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1).-->
 让我们继续扩展我们的应用，允许用户添加新的笔记。您可以在[这里](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1)找到我们当前应用程序的代码。
 
-<!-- To get our page to update when new notes are added it's best to store the notes in the <i>App</i> component's state. Let''s import the [useState](https://react.dev/reference/react/useState) function and use it to define a piece of state that gets initialized with the initial notes array passed in the props.-->
+<!-- To get our page to update when new notes are added it's best to store the notes in the <i>App</i> component's state. Let's import the [useState](https://react.dev/reference/react/useState) function and use it to define a piece of state that gets initialized with the initial notes array passed in the props.-->
 要让我们的页面在添加新笔记时更新，最好将笔记存储在<i>App</i>组件的状态中。让我们导入[useState](https://react.dev/reference/react/useState)函数，并使用它来定义一个状态，该状态使用在props中传入的初始笔记数组进行初始化。
 
 ```js
@@ -62,10 +61,10 @@ const App = () => {
 }
 ```
 
-<!-- Let''s stick with the initial value passed in the props for the time being.-->
+<!-- Let's stick with the initial value passed in the props for the time being.-->
 让我们暂时继续使用props传入的初始值吧。
 
-<!-- Next, let''s add an HTML [form](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms) to the component that will be used for adding new notes.-->
+<!-- Next, let's add an HTML [form](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms) to the component that will be used for adding new notes.-->
 接下来，让我们向组件中添加一个 HTML [表单](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms)，用于添加新笔记。
 
 ```js
@@ -102,7 +101,7 @@ const App = (props) => {
 我们已将_addNote_功能新增为表单元素的事件处理程序，当点击提交按钮时将会调用该函数。
 
 <!-- We use the method discussed in [part 1](/en/part1/component_state_event_handlers#event-handling) for defining our event handler:-->
-我们使用[第一部分](/en/part1/component_state_event_handlers#event-handling)讨论的方法定义我们的事件处理程序：
+我们使用[第一章节](/en/part1/component_state_event_handlers#event-handling)讨论的方法定义我们的事件处理程序：
 
 ```js
 const addNote = (event) => {
@@ -115,7 +114,7 @@ const addNote = (event) => {
 <em>事件</em>参数是触发调用事件处理函数的[事件](https://react.dev/learn/responding-to-events)：
 
 <!-- The event handler immediately calls the <em>event.preventDefault()</em> method, which prevents the default action of submitting a form. The default action would, [among other things](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event), cause the page to reload.-->
-事件处理程序立即调用<em>event.preventDefault()</em> 方法，以防止提交表单的默认操作。默认操作将，[除其他外](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event)，也会导致页面重新加载。
+事件处理程序立即调用<em>event.preventDefault()</em> 方法，以防止提交表单的默认操作。默认操作将，[除其他外](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event)，导致页面重新加载。
 
 <!-- The target of the event stored in _event.target_ is logged to the console:-->
 在控制台记录存储在_event.target_中的事件目标：
@@ -125,7 +124,7 @@ const addNote = (event) => {
 <!-- The target in this case is the form that we have defined in our component.-->
 这种情况下的目标是我们在组件中定义的表单。
 
-<!-- How do we access the data contained in the form''s <i>input</i> element?-->
+<!-- How do we access the data contained in the form's <i>input</i> element?-->
 我们如何访问表单<i>输入</i>元素中包含的数据？
 
 ### Controlled component
@@ -133,7 +132,7 @@ const addNote = (event) => {
 <!-- There are many ways to accomplish this; the first method we will take a look at is through the use of so-called [controlled components](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable).-->
 有很多方法可以实现这一目标；我们首先要看的是通过所谓的[受控组件](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)。
 
-<!-- Let's add a new piece of state called <em>newNote</em> for storing the user-submitted input **and** let's set it as the <i>input</i> element''s <i>value</i> attribute:-->
+<!-- Let's add a new piece of state called <em>newNote</em> for storing the user-submitted input **and** let's set it as the <i>input</i> element's <i>value</i> attribute:-->
 让我们添加一个新的状态叫做<em>newNote</em>来存储用户提交的输入，并设置它作为<i>input</i>元素的<i>value</i>属性：
 
 ```js
@@ -172,10 +171,10 @@ const App = (props) => {
 
 ![provided value to prop without onchange console error](../../images/2/7e.png)
 
-<!-- Since we assigned a piece of the <i>App</i> component''s state as the <i>value</i> attribute of the input element, the <i>App</i> component now [controls](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable) the behavior of the input element.-->
+<!-- Since we assigned a piece of the <i>App</i> component's state as the <i>value</i> attribute of the input element, the <i>App</i> component now [controls](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable) the behavior of the input element.-->
 由于我们将<i>App</i>组件的一部分状态分配给输入元素的<i>value</i>属性，因此<i>App</i>组件现在[控制](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)输入元素的行为。
 
-<!-- To enable editing of the input element, we have to register an <i>event handler</i> that synchronizes the changes made to the input with the component''s state:-->
+<!-- To enable editing of the input element, we have to register an <i>event handler</i> that synchronizes the changes made to the input with the component's state:-->
 要使输入元素可编辑，我们必须注册一个<i>事件处理程序</i>，以将对输入所做的更改与组件状态同步：
 
 ```js
@@ -214,7 +213,7 @@ const App = (props) => {
 }
 ```
 
-<!-- We have now registered an event handler to the <i>onChange</i> attribute of the form''s <i>input</i> element:-->
+<!-- We have now registered an event handler to the <i>onChange</i> attribute of the form's <i>input</i> element:-->
 我们现在已经为表单的<i>onChange</i>属性注册了一个事件处理程序，<i>input</i>元素：
 
 ```js
@@ -250,7 +249,7 @@ const handleNoteChange = (event) => {
 
 ![state changes in react devtools shows typing too](../../images/2/9ea.png)
 
-<!-- Now the <i>App</i> component''s <em>newNote</em> state reflects the current value of the input, which means that we can complete the <em>addNote</em> function for creating new notes:-->
+<!-- Now the <i>App</i> component's <em>newNote</em> state reflects the current value of the input, which means that we can complete the <em>addNote</em> function for creating new notes:-->
 现在<i>App</i>组件的<em>newNote</em>状态反映了输入的当前值，这意味着我们可以完成<em>addNote</em>函数来创建新的笔记：
 
 ```js
@@ -267,7 +266,7 @@ const addNote = (event) => {
 }
 ```
 
-<!-- First, we create a new object for the note called <em>noteObject</em> that will receive its content from the component''s <em>newNote</em> state. The unique identifier <i>id</i> is generated based on the total number of notes. This method works for our application since notes are never deleted. With the help of the <em>Math.random()</em> function, our note has a 50% chance of being marked as important.-->
+<!-- First, we create a new object for the note called <em>noteObject</em> that will receive its content from the component's <em>newNote</em> state. The unique identifier <i>id</i> is generated based on the total number of notes. This method works for our application since notes are never deleted. With the help of the <em>Math.random()</em> function, our note has a 50% chance of being marked as important.-->
 首先，我们创建一个新的对象<em>noteObject</em>来存储笔记内容，它的内容来自组件的<em>newNote</em>状态。唯一标识符<i>id</i>是基于笔记的总数来生成的。这种方法对我们的应用程序有效，因为笔记永远不会被删除。借助<em>Math.random()</em>函数，我们的笔记有50%的机会被标记为重要的。
 
 <!-- The new note is added to the list of notes using the [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) array method, introduced in [part 1](/en/part1/java_script#arrays):-->
@@ -292,10 +291,10 @@ setNewNote('')
 
 ### Filtering Displayed Elements
 
-<!-- Let''s add some new functionality to our application that allows us to only view the important notes.-->
+<!-- Let's add some new functionality to our application that allows us to only view the important notes.-->
 让我们给我们的应用程序添加一些新的功能，让我们只能查看重要的笔记。
 
-<!-- Let''s add a piece of state to the <i>App</i> component that keeps track of which notes should be displayed:-->
+<!-- Let's add a piece of state to the <i>App</i> component that keeps track of which notes should be displayed:-->
 让我们给<i>App</i>组件增加一个状态，用来跟踪哪些笔记应该被显示：
 
 ```js
@@ -308,7 +307,7 @@ const App = (props) => {
 }
 ```
 
-<!-- Let''s change the component so that it stores a list of all the notes to be displayed in the <em>notesToShow</em> variable. The items on the list depend on the state of the component:-->
+<!-- Let's change the component so that it stores a list of all the notes to be displayed in the <em>notesToShow</em> variable. The items on the list depend on the state of the component:-->
 让我们改变组件，以便它存储一个列表，所有的笔记都存储在<em>notesToShow</em>变量中。该列表的项目取决于组件的状态：
 
 ```js
@@ -378,17 +377,17 @@ notes.filter(note => note.important === true)
 notes.filter(note => note.important)
 ```
 
-<!-- We showed the comparison operator first to emphasize an important detail: in JavaScript <em>val1 == val2</em> does not always work as expected. When performing comparisons, it''s therefore safer to exclusively use <em>val1 === val2</em>. You can read more about the topic [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness).-->
+<!-- We showed the comparison operator first to emphasize an important detail: in JavaScript <em>val1 == val2</em> does not always work as expected. When performing comparisons, it's therefore safer to exclusively use <em>val1 === val2</em>. You can read more about the topic [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness).-->
 我们首先展示了比较运算符，以强调一个重要细节：在JavaScript中，<em>val1 == val2</em>并不总是按预期工作。因此，在执行比较时，最好只使用<em>val1 === val2</em>。您可以在[此处](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness)阅读有关该主题的更多信息。
 
 <!-- You can test out the filtering functionality by changing the initial value of the <em>showAll</em> state.-->
 你可以通过改变<em>showAll</em>状态的初始值来测试过滤功能。
 
-<!-- Next, let''s add functionality that enables users to toggle the <em>showAll</em> state of the application from the user interface.-->
+<!-- Next, let's add functionality that enables users to toggle the <em>showAll</em> state of the application from the user interface.-->
 接下来，让我们添加功能，使用户可以从用户界面切换应用程序的<em>showAll</em>状态。
 
 <!-- The relevant changes are shown below:-->
-以下是相关的变更：
+以下是相关的变化：
 
 ```js
 import { useState } from 'react'
@@ -423,7 +422,8 @@ const App = (props) => {
 ```
 
 <!-- The displayed notes (all versus important) are controlled with a button. The event handler for the button is so simple that it has been defined directly in the attribute of the button element. The event handler switches the value of _showAll_ from true to false and vice versa:-->
-<div class="zh-CN">显示的笔记（全部对重要的）可以通过一个按钮来控制。按钮的事件处理程序如此简单，以至于它已经直接定义在按钮元素的属性中。事件处理程序会将_showAll_的值从true切换到false，反之亦然：</div>
+
+<div class="zh-CN">显示的笔记（全部的或重要的）可以通过一个按钮来控制。按钮的事件处理程序如此简单，以至于它已经直接定义在按钮元素的属性中。事件处理程序会将_showAll_的值从true切换到false，反之亦然：</div>
 
 ```js
 () => setShowAll(!showAll)
@@ -452,7 +452,7 @@ show {showAll ? 'important' : 'all'}
 
 <h4>2.6: The Phonebook Step1</h4>
 
-<!-- Let''s create a simple phonebook. <i>**In this part, we will only be adding names to the phonebook.**</i>-->
+<!-- Let's create a simple phonebook. <i>**In this part, we will only be adding names to the phonebook.**</i>-->
 让我们创建一个简单的电话簿。<i>**在这一部分，我们只会向电话簿中添加名字。**</i>
 
 <!-- Let us start by implementing the addition of a person to the phonebook.-->
@@ -501,7 +501,7 @@ export default App
 ```
 
 <!-- It's also important to put what we learned in the [debugging React applications](/en/part1/a_more_complex_state_debugging_react_apps) chapter of part one into good use. The [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension is <i>incredibly</i> useful for tracking changes that occur in the application's state.-->
-也很重要的是把我们在第一部分的[debugging React applications](/en/part1/a_more_complex_state_debugging_react_apps) 章节学到的内容用起来。[React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) 扩展程序对于追踪应用程序状态发生的变化<i>非常有用</i>。
+也很重要的是把我们在第一章节的[debugging React applications](/en/part1/a_more_complex_state_debugging_react_apps) 章节学到的内容用起来。[React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) 扩展程序对于追踪应用程序状态发生的变化<i>非常有用</i>。
 
 <!-- After finishing this exercise your application should look something like this:-->
 完成这个练习后，你的应用程序应该看起来像这样：
@@ -516,7 +516,7 @@ This is a test
 
 **这是一个测试**
 
-<!-- - you can use the person''s name as a value of the <i>key</i> property-->
+<!-- - you can use the person's name as a value of the <i>key</i> property-->
 你可以把一个人的名字作为<i>key</i>属性的值。
 <!-- - remember to prevent the default action of submitting HTML forms!-->
 **记住要阻止提交HTML表单的默认行为！**
@@ -574,7 +574,7 @@ newName + ' is already added to phonebook'
 </form>
 ```
 
-<!-- At this point, the application could look something like this. The image also displays the application''s state with the help of [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi):-->
+<!-- At this point, the application could look something like this. The image also displays the application's state with the help of [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi):-->
 此时，应用程序可能看起来像这样。图像还使用[React开发者工具](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)显示应用程序的状态：
 
 ![2.8 sample screenshot](../../images/2/12e.png)
@@ -589,7 +589,7 @@ newName + ' is already added to phonebook'
 <!-- You can implement the search field as an <i>input</i> element that is placed outside the HTML form. The filtering logic shown in the image is <i>case insensitive</i>, meaning that the search term <i>arto</i> also returns results that contain Arto with an uppercase A.-->
 你可以将搜索字段实现为一个放置在HTML表单之外的<i>输入</i>元素。图中显示的过滤逻辑是<i>不区分大小写</i>的，这意味着搜索词<i>arto</i>也会返回包含大写A的Arto的结果。
 
-<!-- **NB:** When you are working on new functionality, it''s often useful to "hardcode" some dummy data into your application, e.g.-->
+<!-- **NB:** When you are working on new functionality, it's often useful to "hardcode" some dummy data into your application, e.g.-->
 to test a UI.
 
 当你在开发新功能时，经常有用的是在应用程序中“硬编码”一些虚拟数据，例如用于测试UI。
@@ -612,13 +612,13 @@ const App = () => {
 
 <h4>2.10: The Phonebook Step5</h4>
 
-<!-- If you have implemented your application in a single component, refactor it by extracting suitable parts into new components. Maintain the application''s state and all event handlers in the <i>App</i> root component.-->
+<!-- If you have implemented your application in a single component, refactor it by extracting suitable parts into new components. Maintain the application's state and all event handlers in the <i>App</i> root component.-->
 如果你已经在一个组件中实现了你的应用，那么通过把合适的部分提取到新的组件中来重构它。将应用程序的状态和所有事件处理程序维护在<i>App</i>根组件中。
 
-<!-- It is sufficient to extract <i>**three**</i> components from the application. Good candidates for separate components are, for example, the search filter, the form for adding new people to the phonebook, a component that renders all people from the phonebook, and a component that renders a single person''s details.-->
+<!-- It is sufficient to extract <i>**three**</i> components from the application. Good candidates for separate components are, for example, the search filter, the form for adding new people to the phonebook, a component that renders all people from the phonebook, and a component that renders a single person's details.-->
 它足以从应用程序中提取<i>**三**</i>个组件。好的候选组件例如，搜索过滤器，添加新人员到电话簿的表格，一个渲染所有电话簿人员的组件，以及一个渲染单个人物详情的组件。
 
-<!-- The application''s root component could look similar to this after the refactoring. The refactored root component below only renders titles and lets the extracted components take care of the rest.-->
+<!-- The application's root component could look similar to this after the refactoring. The refactored root component below only renders titles and lets the extracted components take care of the rest.-->
 此应用的根组件在重构后可能会类似于以下：下面重构后的根组件只渲染标题，而由提取的组件来处理其余部分。
 
 ```js
@@ -651,10 +651,9 @@ the concepts of "component composition" and "component nesting".
 **译文：**
 **注意：**如果您在错误的地方定义组件，可能会遇到问题。现在是复习“组件组合”和“组件嵌套”概念的好时机。
 <!-- the chapter [do not define a component in another component](/en/part1/a_more_complex_state_debugging_react_apps#do-not-define-components-within-components)-->
-# 不要在另一个组件中定义组件[不要在另一个组件中定义组件](/zh-CN/part1/a_more_complex_state_debugging_react_apps#不要在另一个组件中定义组件)
-<!-- from the last part.-->
-最后，让我们一起努力，共同构建一个更美好的未来！
 
-最后，让我们一起努力，共同构建一个更美好的未来！
+我们在上一章学到的，不要在另一个组件中定义组件[不要在另一个组件中定义组件](/zh-CN/part1/a_more_complex_state_debugging_react_apps#不要在另一个组件中定义组件)
+
+<!-- from the last part.-->
 
 </div>

@@ -42,7 +42,7 @@ lang: zh
 
 ![Open a new pull request](../../images/11/part11d_01.png)
 
-<!-- GitHub''s pull request interface presents a description and the discussion interface. At the bottom, it displays all the CI checks (in our case each of our Github Actions) that are configured to run for each PR and the statuses of these checks. A green board is what you aim for! You can click on Details of each check to view details and run logs.-->
+<!-- GitHub's pull request interface presents a description and the discussion interface. At the bottom, it displays all the CI checks (in our case each of our Github Actions) that are configured to run for each PR and the statuses of these checks. A green board is what you aim for! You can click on Details of each check to view details and run logs.-->
 GitHub 的拉取请求界面提供了描述和讨论界面。在底部，它显示了所有配置为每个 PR 运行的 CI 检查（在我们的情况下，每个 Github Actions）及其状态。你的目标是绿色的！您可以单击每个检查的详细信息以查看详细信息和运行日志。
 
 <!-- All the workflows we looked at so far were triggered by commits to the main branch. To make the workflow run for each pull request we would have to update the trigger part of the workflow. We use the "pull_request" trigger for branch "master" (our main branch) and limit the trigger to events "opened" and "synchronize". Basically, this means, that the workflow will run when a PR into the main branch is opened or updated.-->
@@ -72,7 +72,7 @@ on:
 
 ### Exercises 11.13-11.14.
 
-<!-- Our workflow is doing a nice job of ensuring good code quality, but since it is run on commits to the main branch, it''s catching the problems too late!-->
+<!-- Our workflow is doing a nice job of ensuring good code quality, but since it is run on commits to the main branch, it's catching the problems too late!-->
 我们的工作流程很好地确保了良好的代码质量，但由于它是在主分支上运行的，所以它抓住问题的时间太晚了！
 
 #### 11.13 Pull request
@@ -96,7 +96,7 @@ on:
 
 ![](../../images/11/16.png)
 
-<!-- Once the checks have been run, the status should turn to green. Make sure all the checks pass. Do not merge your branch yet, there''s still one more thing we need to improve on our pipeline.-->
+<!-- Once the checks have been run, the status should turn to green. Make sure all the checks pass. Do not merge your branch yet, there's still one more thing we need to improve on our pipeline.-->
 一旦检查完成，状态应该变成绿色。确保所有检查都通过。不要立即合并分支，我们仍然需要改进我们的流水线上的一件事情。
 
 #### 11.14 Run deployment step only for the main branch
@@ -148,18 +148,18 @@ if: ${{ github.event_name == 'push' }}
 
 <i>Hash versioning</i> (also sometimes known as SHA versioning) is quite different. The version "number" in hash versioning is a hash (that looks like a random string) derived from the contents of the repository and the changes introduced in the commit that created the version. In Git, this is already done for you as the commit hash that is unique for any change set.
 
-<!-- Hash versioning is almost always used in conjunction with automation. It''s a pain (and error-prone) to copy 32 character long version numbers around to make sure that everything is correctly deployed.-->
+<!-- Hash versioning is almost always used in conjunction with automation. It's a pain (and error-prone) to copy 32 character long version numbers around to make sure that everything is correctly deployed.-->
 哈希版本控制几乎总是与自动化结合使用。把32个字符长的版本号复制到各处，以确保正确部署，是一件痛苦（且容易出错）的事情。
 
 #### But what does the version point to?
 
-<!-- Determining what code belongs to a given version is important and the way this is achieved is again quite different between semantic and hash versioning. In hash versioning (at least in Git) it''s as simple as looking up the commit based on the hash. This will let us know exactly what code is deployed with a specific version.-->
+<!-- Determining what code belongs to a given version is important and the way this is achieved is again quite different between semantic and hash versioning. In hash versioning (at least in Git) it's as simple as looking up the commit based on the hash. This will let us know exactly what code is deployed with a specific version.-->
 确定哪些代码属于给定的版本是重要的，而实现这一点的方式又在语义版本和哈希版本之间大相径庭。在哈希版本（至少在Git中），它很简单，只需要查找基于哈希的提交。这将让我们知道特定版本部署了哪些代码。
 
-<!-- It''s a little more complicated when using semantic versioning and there are several ways to approach the problem. These boil down to three possible approaches: something in the code itself, something in the repo or repo metadata, something completely outside the repo.-->
+<!-- It's a little more complicated when using semantic versioning and there are several ways to approach the problem. These boil down to three possible approaches: something in the code itself, something in the repo or repo metadata, something completely outside the repo.-->
 使用语义版本控制时会稍微复杂一些，有几种方法可以解决这个问题。这些可以归结为三种可能的方法：代码本身的东西，存储库或存储库元数据中的东西，完全在存储库之外的东西。
 
-<!-- While we won't cover the last option on the list (since that's a rabbit hole all on its own), it''s worth mentioning that this can be as simple as a spreadsheet that lists the Semantic Version and the commit it points to.-->
+<!-- While we won't cover the last option on the list (since that's a rabbit hole all on its own), it's worth mentioning that this can be as simple as a spreadsheet that lists the Semantic Version and the commit it points to.-->
 虽然我们不会涵盖列表中的最后一个选项（因为这是一个独立的兔子洞），但值得一提的是，这可以像一个列出语义版本和它指向的提交的电子表格一样简单。
 
 <!-- For the two repository based approaches, the approach with something in the code usually boils down to a version number in a file and the repo/metadata approach usually relies on [tags](https://www.atlassian.com/git/tutorials/inspecting-a-repository/git-tag) or (in the case of GitHub) releases. In the case of tags or releases, this is relatively simple, the tag or release points to a commit, the code in that commit is the code in the release.-->
@@ -167,7 +167,7 @@ if: ${{ github.event_name == 'push' }}
 
 #### Version order
 
-<!-- In semantic versioning, even if we have version bumps of different types (major, minor, or patch) it's still quite easy to put the releases in order: 1.3.7 comes before 2.0.0 which itself comes before 2.1.5 which comes before 2.2.0. A list of releases (conveniently provided by a package manager or GitHub) is still needed to know what the last version is but it's easier to look at that list and discuss it: It''s easier to say "We need to roll back to 3.2.4" than to try communicate a hash in person.-->
+<!-- In semantic versioning, even if we have version bumps of different types (major, minor, or patch) it's still quite easy to put the releases in order: 1.3.7 comes before 2.0.0 which itself comes before 2.1.5 which comes before 2.2.0. A list of releases (conveniently provided by a package manager or GitHub) is still needed to know what the last version is but it's easier to look at that list and discuss it: It's easier to say "We need to roll back to 3.2.4" than to try communicate a hash in person.-->
 在语义版本控制中，即使我们有不同类型（主要，次要或补丁）的版本更新，我们仍然很容易将发布排序：1.3.7在2.0.0之前，2.1.5在2.2.0之前。仍然需要一个发布列表（由包管理器或GitHub方便提供）来知道最新版本是什么，但是看这个列表和讨论它会更容易：比起试图亲自传达一个哈希值，说“我们需要回滚到3.2.4”更容易。
 
 <!-- That's not to say that hashes are inconvenient: if you know which commit caused the particular problem, it's easy enough to look back through a Git history and get the hash of the previous commit. But if you have two hashes, say <code>d052aa41edfb4a7671c974c5901f4abe1c2db071</code> and <code>12c6f6738a18154cb1cef7cf0607a681f72eaff3</code>, you really can not say which came earlier in history, you need something more, such as the Git log that reveals the ordering.-->
@@ -178,13 +178,13 @@ if: ${{ github.event_name == 'push' }}
 <!-- We've already touched on some of the advantages and disadvantages of the two versioning methods discussed above but it's perhaps useful to address where they''d each likely be used.-->
 我们已经讨论了上述两种版本控制方法的一些优点和缺点，但也许有用的是讨论一下它们可能在哪里被使用。
 
-<!-- Semantic Versioning works well when deploying services where the version number could be of significance or might actually be looked at. As an example, think of the JavaScript libraries that you're using. If you're using version 3.4.6 of a particular library, and there's an update available to 3.4.8, if the library uses semantic versioning, you could (hopefully) safely assume that you're ok to upgrade without breaking anything. If the version jumps to 4.0.1 then maybe it''s not such a safe upgrade.-->
+<!-- Semantic Versioning works well when deploying services where the version number could be of significance or might actually be looked at. As an example, think of the JavaScript libraries that you're using. If you're using version 3.4.6 of a particular library, and there's an update available to 3.4.8, if the library uses semantic versioning, you could (hopefully) safely assume that you're ok to upgrade without breaking anything. If the version jumps to 4.0.1 then maybe it's not such a safe upgrade.-->
 语义版本控制在部署服务时非常有用，因为版本号可能具有重要意义，甚至可能会被关注。例如，想想你正在使用的JavaScript库。如果你正在使用特定库的3.4.6版本，并且有一个更新可用到3.4.8，如果该库使用语义版本控制，你可以（希望）安全地假设你可以不会破坏任何东西而升级。如果版本跳转到4.0.1，也许不是一个安全的升级。
 
 <!-- Hash versioning is very useful where most commits are being built into artifacts (e.g. runnable binaries or Docker images) that are themselves uploaded or stored. As an example, if your testing requires building your package into an artifact, uploading it to a server, and running tests against it, it would be convenient to have hash versioning as it would prevent accidents.-->
 哈希版本控制非常有用，因为大多数提交都被构建成可执行的二进制文件或Docker镜像，并上传或存储。例如，如果您的测试需要将您的包构建成一个工件，将其上传到服务器并对其进行测试，那么使用哈希版本控制将非常方便，因为它可以防止意外发生。
 
-<!-- As an example think that you're working on version 3.2.2 and you have a failing test, you fix the failure and push the commit but as you're working in your branch, you're not going to update the version number. Without hash versioning, the artifact name may not change. If there's an error in uploading the artifact, maybe the tests run again with the older artifact (since it''s still there and has the same name) and you get the wrong test results. If the artifact is versioned with the hash, then the version number *must* change on every commit and this means that if the upload fails, there will be an error since the artifact you told the tests to run against does not exist.-->
+<!-- As an example think that you're working on version 3.2.2 and you have a failing test, you fix the failure and push the commit but as you're working in your branch, you're not going to update the version number. Without hash versioning, the artifact name may not change. If there's an error in uploading the artifact, maybe the tests run again with the older artifact (since it's still there and has the same name) and you get the wrong test results. If the artifact is versioned with the hash, then the version number *must* change on every commit and this means that if the upload fails, there will be an error since the artifact you told the tests to run against does not exist.-->
 例如，如果你正在处理3.2.2版本，有一个失败的测试，你修复了失败的测试并提交了提交，但是由于你在自己的分支上工作，你不会更新版本号。如果没有哈希版本，则工件名称可能不会更改。如果上传工件出错，也许会使用旧工件（因为它仍然存在并具有相同的名称）再次运行测试，从而得到错误的测试结果。如果工件是用哈希版本的，那么每次提交的版本号*必须*更改，这意味着如果上传失败，将会出现错误，因为你告诉测试运行的工件不存在。
 
 <!-- Having an error happen when something goes wrong is almost always preferable to having a problem silently ignored in CI.-->
@@ -201,8 +201,8 @@ if: ${{ github.event_name == 'push' }}
 <!-- There is a catch. We discussed at the beginning of this part that we always have to know exactly what is happening with our code, for example, we need to be sure that we have tested the code we want to deploy. Having two parallel versioning (or naming) conventions can make this a little more difficult.-->
 有一个把柄。我们在本节开头讨论过，我们总是需要精确地知道我们的代码在发生什么，例如，我们需要确保我们已经测试了我们要部署的代码。拥有两个并行的版本（或命名）约定可能会使这变得更加困难。
 
-<!-- For example, when we have a project that uses hash-based artifact builds for testing, it''s always possible to track the result of every build, lint, and test to a specific commit and developers know the state their code is in. This is all automated and transparent to the developers. They never need to be aware of the fact that the CI system is using the commit hash underneath to name build and test artifacts. When the developers merge their code to the main branch, again the CI takes over. This time, it will build and test all the code and give it a semantic version number all in one go. It attaches the version number to the relevant commit with a Git tag.-->
-例如，当我们有一个使用基于哈希的工件建构来测试的专案时，可以随时跟踪每个建构，lint和测试的结果与特定的提交相关联，开发人员知道他们的代码处于什么状态。这一切都是自动化的，对开发人员透明。他们永远不需要意识到CI系统正在使用提交哈希来命名建构和测试工件。当开发人员将他们的代码合并到主分支时，CI再次接管。这次，它将构建和测试所有代码，并以一个步骤将该版本号附加到相应的提交上，并使用Git标签标记。
+<!-- For example, when we have a project that uses hash-based artifact builds for testing, it's always possible to track the result of every build, lint, and test to a specific commit and developers know the state their code is in. This is all automated and transparent to the developers. They never need to be aware of the fact that the CI system is using the commit hash underneath to name build and test artifacts. When the developers merge their code to the main branch, again the CI takes over. This time, it will build and test all the code and give it a semantic version number all in one go. It attaches the version number to the relevant commit with a Git tag.-->
+例如，当我们有一个使用基于哈希的工件建构来测试的项目时，可以随时跟踪每个建构，lint和测试的结果与特定的提交相关联，开发人员知道他们的代码处于什么状态。这一切都是自动化的，对开发人员透明。他们永远不需要意识到CI系统正在使用提交哈希来命名建构和测试工件。当开发人员将他们的代码合并到主分支时，CI再次接管。这次，它将构建和测试所有代码，并以一个步骤将该版本号附加到相应的提交上，并使用Git标签标记。
 
 <!-- In the case above, the software we release is tested because the CI system makes sure that tests are run on the code it is about to tag. It would not be incorrect to say that the project uses semantic versioning and simply ignore that the CI system tests individual developer branches/PRs with a hash-based naming system. We do this because the version we care about (the one that is released) is given a semantic version.-->
 在上述情况下，我们发布的软件是经过测试的，因为CI系统确保在要标记的代码上运行测试。不能说该项目使用语义版本并忽略CI系统使用基于哈希的命名系统对单个开发者分支/PR进行测试是不正确的。我们这样做是因为我们关心的版本（发布的版本）被赋予语义版本。
@@ -213,7 +213,7 @@ if: ${{ github.event_name == 'push' }}
 
 ### Exercises 11.15-11.16.
 
-<!-- Let''s extend our workflow so that it will automatically increase (bump) the version when a pull request is merged into the main branch and [tag](https://www.atlassian.com/git/tutorials/inspecting-a-repository/git-tag) the release with the version number. We will use an open source action developed by a third-party: [anothrNick/github-tag-action](https://github.com/anothrNick/github-tag-action).-->
+<!-- Let's extend our workflow so that it will automatically increase (bump) the version when a pull request is merged into the main branch and [tag](https://www.atlassian.com/git/tutorials/inspecting-a-repository/git-tag) the release with the version number. We will use an open source action developed by a third-party: [anothrNick/github-tag-action](https://github.com/anothrNick/github-tag-action).-->
 让我们扩展我们的工作流，以便在将拉取请求合并到主分支时自动增加（提升）版本，并使用版本号[标记](https://www.atlassian.com/git/tutorials/inspecting-a-repository/git-tag)发布。 我们将使用第三方开发的开源操作：[anothrNick/github-tag-action](https://github.com/anothrNick/github-tag-action)。
 
 #### 11.15 Adding versioning
@@ -368,7 +368,7 @@ jobs:
 
 ### A note about using third party actions
 
-<!-- When using a third party action such that <i>github-tag-action</i> it might be a good idea to specify the used version with hash instead of using a version number. The reason for this is that the version number, that is implemented with a Git tag can in principle be <i>moved</i>. So today''s version 1.61.0 might be a different code that is at the next week the version 1.61.0!-->
+<!-- When using a third party action such that <i>github-tag-action</i> it might be a good idea to specify the used version with hash instead of using a version number. The reason for this is that the version number, that is implemented with a Git tag can in principle be <i>moved</i>. So today's version 1.61.0 might be a different code that is at the next week the version 1.61.0!-->
 当使用第三方操作，如<i>github-tag-action</i>时，最好使用哈希而不是使用版本号来指定所使用的版本。原因是用Git标签实现的版本号理论上可以<i>移动</i>。因此今天的1.61.0版可能是下周1.61.0版的不同代码！
 
 <!-- However, the code in commit with a particular hash does not change in any circumstances, so if we want to be 100% sure about the code we use, it is safest to use the hash.-->

@@ -30,7 +30,7 @@ lang: zh
 
 ### Using the connect function to share the Redux store to components
 
-<!-- Let''s modify the <i>Notes</i> component so that instead of using the hook API (the *useDispatch* and  *useSelector* functions ) it uses the *connect* function.-->
+<!-- Let's modify the <i>Notes</i> component so that instead of using the hook API (the *useDispatch* and  *useSelector* functions ) it uses the *connect* function.-->
 让我们修改<i>Notes</i>组件，使用*connect*函数而不是使用hook API（*useDispatch*和*useSelector*函数）。
 <!-- We have to modify the following parts of the component:-->
 我们必须修改组件的以下部分：
@@ -70,10 +70,10 @@ const Notes = () => {
 export default Notes
 ````
 
-<!-- The *connect* function can be used for transforming "regular" React components so that the state of the Redux store can be "mapped" into the component''s props.-->
+<!-- The *connect* function can be used for transforming "regular" React components so that the state of the Redux store can be "mapped" into the component's props.-->
 使用*connect*函数可以用于转换“常规”React组件，以便将Redux存储中的状态“映射”到组件的props中。
 
-<!-- Let''s first use the connect function to transform our <i>Notes</i> component into a <i>connected component</i>:-->
+<!-- Let's first use the connect function to transform our <i>Notes</i> component into a <i>connected component</i>:-->
 让我们首先使用连接功能将我们的<i>笔记</i>组件转换成<i>连接组件</i>：
 
 ```js
@@ -229,7 +229,7 @@ const Notes = (props) => {
 }
 ```
 
-<!-- The second parameter of the *connect* function can be used for defining [mapDispatchToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapdispatchtoprops-object--dispatch-ownprops--object) which is a group of <i>action creator</i> functions passed to the connected component as props. Let''s make the following changes to our existing connect operation:-->
+<!-- The second parameter of the *connect* function can be used for defining [mapDispatchToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapdispatchtoprops-object--dispatch-ownprops--object) which is a group of <i>action creator</i> functions passed to the connected component as props. Let's make the following changes to our existing connect operation:-->
 第二个参数*connect*函数可以用于定义[mapDispatchToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapdispatchtoprops-object--dispatch-ownprops--object)，它是一组<i>action creator</i>函数，作为props传递给连接的组件。让我们对我们现有的连接操作做出以下更改：
 
 ```js
@@ -298,7 +298,7 @@ props.toggleImportanceOf(note.id)
 
 ![diagram showing toggle connecting to state in redux and dispatch inside of redux](../../images/6/25b.png)
 
-<!-- In addition to accessing the store''s state via <i>props.notes</i> and <i>props.filter</i>, the component also references a function that can be used for dispatching <i>notes/toggleImportanceOf</i>-type actions via its <i>toggleImportanceOf</i> prop.-->
+<!-- In addition to accessing the store's state via <i>props.notes</i> and <i>props.filter</i>, the component also references a function that can be used for dispatching <i>notes/toggleImportanceOf</i>-type actions via its <i>toggleImportanceOf</i> prop.-->
 此外，除了通过<i>props.notes</i>和<i>props.filter</i>访问存储状态外，该组件还引用了一个可用于通过其<i>toggleImportanceOf</i> prop调度<i>notes/toggleImportanceOf</i>类型操作的函数。
 
 <!-- The code for the newly refactored <i>Notes</i> component looks like this:-->
@@ -347,7 +347,7 @@ export default connect(
 )(Notes)
 ```
 
-<!-- Let''s also use *connect* to create new notes:-->
+<!-- Let's also use *connect* to create new notes:-->
 让我们也使用*连接*来创建新的笔记：
 
 ```js
@@ -379,7 +379,7 @@ export default connect(
 // highlight-end
 ```
 
-<!-- Since the component does not need to access the store''s state, we can simply pass <i>null</i> as the first parameter to *connect*.-->
+<!-- Since the component does not need to access the store's state, we can simply pass <i>null</i> as the first parameter to *connect*.-->
 由于组件不需要访问存储库的状态，我们可以将<i>null</i>作为第一个参数传递给*connect*。
 
 <!-- You can find the code for our current application in its entirety in the <i>part6-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5).-->
@@ -387,7 +387,7 @@ export default connect(
 
 ### Referencing action creators passed as props
 
-<!-- Let''s direct our attention to one interesting detail in the <i>NewNote</i> component:-->
+<!-- Let's direct our attention to one interesting detail in the <i>NewNote</i> component:-->
 让我们将注意力转向<i>NewNote</i>组件中一个有趣的细节：
 
 ```js
@@ -420,7 +420,7 @@ export default connect(
 <!-- Developers who are new to connect may find it puzzling that there are two versions of the <i>createNote</i> action creator in the component.-->
 开发人员如果是初次接触connect，可能会觉得奇怪，因为组件中有两个版本的<i>createNote</i> action creator。
 
-<!-- The function must be referenced as <i>props.createNote</i> through the component''s props, as this is the version that <i>contains the automatic dispatch</i> added by *connect*.-->
+<!-- The function must be referenced as <i>props.createNote</i> through the component's props, as this is the version that <i>contains the automatic dispatch</i> added by *connect*.-->
 函数必须通过组件的props引用为<i>props.createNote</i>，因为这是由*connect*添加的带有自动分发的版本。
 
 <!-- Due to the way that the action creator is imported:-->
@@ -680,11 +680,11 @@ class.
 
 关于此[这里](https://www.simplethread.com/cant-replace-redux-with-hooks/)和[这里](https://hswolff.com/blog/how-to-usecontext-with-usereducer/)更多信息。我们也将在课堂上练习这个。
 <!-- [part 9](/en/part9).-->
-# 第九部分
+# 第九章节
 
 现在你已经准备好了，你可以开始投资了。
 
-# 第九部分
+# 第九章节
 
 现在你已经准备好了，你可以开始投资了。
 
@@ -730,7 +730,7 @@ the notification says: "You voted twice in three seconds."
 <!-- The [documentation](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) for the setTimeout function might also be useful for this.-->
 [文档](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout)关于setTimeout函数也可能对此有用。
 
-<!-- This was the last exercise for this part of the course and it''s time to push your code to GitHub and mark all of your completed exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
+<!-- This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your completed exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
 这是本部分课程的最后一个练习，现在是时候把你的代码推送到GitHub，并把你完成的所有练习提交到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)了。
 
 </div>

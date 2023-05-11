@@ -7,7 +7,7 @@ lang: zh
 
 <div class="content">
 
-<!-- Now that we have a basic understanding of how TypeScript works and how to create small projects with it, it''s time to start creating something useful. We are now going to create a new project that will introduce use cases that are a little more realistic.-->
+<!-- Now that we have a basic understanding of how TypeScript works and how to create small projects with it, it's time to start creating something useful. We are now going to create a new project that will introduce use cases that are a little more realistic.-->
 现在我们对 TypeScript 的工作原理和如何创建小项目有了基本的了解，是时候开始创建一些有用的东西了。我们现在将创建一个新项目，它将介绍一些更现实的用例。
 
 <!-- One major change from the previous part is that <i>we're not going to use ts-node anymore</i>. It is a handy tool that helps you get started, but in the long run, it is advisable to use the official TypeScript compiler that comes with the <i>typescript</i> npm-package. The official compiler generates and packages JavaScript files from the .ts files so that the built <i>production version</i> won't contain any TypeScript code anymore. This is the exact outcome we are aiming for since TypeScript itself is not executable by browsers or Node.-->
@@ -25,7 +25,7 @@ lang: zh
  npm install typescript --save-dev
 ```
 
-<!-- TypeScript''s Native Compiler (<i>tsc</i>) can help us initialize our project by generating our <i>tsconfig.json</i> file.-->
+<!-- TypeScript's Native Compiler (<i>tsc</i>) can help us initialize our project by generating our <i>tsconfig.json</i> file.-->
 TypeScript 的原生编译器（<i>tsc</i>）可以帮助我们通过生成<i>tsconfig.json</i>文件来初始化我们的项目。
 <!-- First, we need to add the *tsc* command to the list of executable scripts in <i>package.json</i> (unless you have installed *typescript* globally). Even if you installed TypeScript globally, you should always add it as a dev dependency to your project.-->
 首先，我们需要将*tsc*命令添加到<i>package.json</i>中的可执行脚本列表中（除非您已全局安装*typescript*）。即使您全局安装了TypeScript，也应该将其添加为项目的开发依赖项。
@@ -84,7 +84,7 @@ TypeScript 的原生编译器（<i>tsc</i>）可以帮助我们通过生成<i>ts
 }
 ```
 
-<!-- Let''s go through each configuration:-->
+<!-- Let's go through each configuration:-->
 让我们来看一下每个配置：
 
 <!-- The *target* configuration tells the compiler which *ECMAScript* version to use when generating JavaScript. ES6 is supported by most browsers, so it is a good and safe option.-->
@@ -195,7 +195,7 @@ npm install --save-dev eslint @types/express @typescript-eslint/eslint-plugin @t
 现在，我们只需要设置我们的开发环境，我们就准备好开始编写一些严肃的代码了。
 <!-- There are many different options for this. One option could be to use the familiar <i>nodemon</i> with <i>ts-node</i>. However, as we saw earlier, <i>ts-node-dev</i> does the same thing, so we will use that instead.-->
 有许多不同的选项可以选择，其中一个选项可以是使用熟悉的<i>nodemon</i>加上<i>ts-node</i>。但正如我们之前看到的，<i>ts-node-dev</i>也可以做到同样的事情，所以我们将改用它。
-<!-- So, let''s install <i>ts-node-dev</i>:-->
+<!-- So, let's install <i>ts-node-dev</i>:-->
 那么，让我们安装<i>ts-node-dev</i>：
 
 ```shell
@@ -283,7 +283,7 @@ app.listen(PORT, () => {
 <!-- Currently, if we run ESlint it will also interpret the files in the <i>build</i> directory. We don''t want that, since the code there is compiler-generated. We can prevent this by creating a  <i>.eslintignore</i> file that lists the content we want ESlint to ignore, just like we do with git and <i>.gitignore</i>.-->
 目前，如果我们运行ESLint，它也会解释<i>build</i>目录中的文件。我们不想这样，因为那里的代码是编译器生成的。我们可以通过创建一个<i>.eslintignore</i>文件来防止这种情况，就像我们用git和<i>.gitignore</i>一样。
 
-<!-- Let''s add an npm script for running the application in production mode:-->
+<!-- Let's add an npm script for running the application in production mode:-->
 让我们添加一个npm脚本来以生产模式运行应用程序：
 
 ```json
@@ -339,7 +339,7 @@ npm run lint
 #### 9.8: Patientor backend, step1
 
 <!-- Initialize a new backend project that will work with the frontend. Configure eslint and tsconfig with the same configurations as proposed in the material. Define an endpoint that answers HTTP GET requests for route */api/ping*.-->
-初始化一个新的后端专案，该专案将与前端配合工作。使用和材料中提出的相同配置配置eslint和tsconfig。定义一个回应HTTP GET请求的端点，路由为*/api/ping*。
+初始化一个新的后端项目，该项目将与前端配合工作。使用和材料中提出的相同配置配置eslint和tsconfig。定义一个回应HTTP GET请求的端点，路由为*/api/ping*。
 
 <!-- The project should be runnable with npm scripts, both in development mode and, as compiled code, in production mode.-->
 项目应该可以通过npm脚本在开发模式和编译后的生产模式下运行。
@@ -376,7 +376,7 @@ npm update chokidar
 <!-- Finally, we are ready to start writing some code.-->
 最后，我们准备好开始编写一些代码了。
 
-<!-- Let''s start from the basics. Ilari wants to be able to keep track of his experiences on his flight journeys.-->
+<!-- Let's start from the basics. Ilari wants to be able to keep track of his experiences on his flight journeys.-->
 让我们从基础开始。Ilari想要能够跟踪他的飞行旅程的经历。
 
 <!-- He wants to be able to save <i>diary entries</i>, which contain:-->
@@ -421,7 +421,7 @@ can have a big impact on people's mood
 ]
 ```
 
-<!-- Let''s start by creating an endpoint that returns all flight diary entries.-->
+<!-- Let's start by creating an endpoint that returns all flight diary entries.-->
 让我们从创建一个返回所有飞行日志条目的端点开始。
 
 <!-- First, we need to make some decisions on how to structure our source code. It is better to place all source code under <i>src</i> directory, so source code is not mixed with configuration files.-->
@@ -510,7 +510,7 @@ app.listen(PORT, () => {
 <!-- The name service originates from [Domain-driven design](https://en.wikipedia.org/wiki/Domain-driven_design) and was made popular by the [Spring](https://spring.io/) framework.-->
 来自[领域驱动设计](https://en.wikipedia.org/wiki/Domain-driven_design)的名称服务，并由[Spring](https://spring.io/)框架流行起来。
 
-<!-- Let''s create a <i>src/services</i> directory and-->
+<!-- Let's create a <i>src/services</i> directory and-->
 add a <i>users.js</i> file
 
 让我们创建一个<i>src/services</i> 目录并添加一个<i>users.js</i> 文件
@@ -541,7 +541,7 @@ export default {
 
 ![vscode asking to consider using resolveJsonModule since can''t find module](../../images/9/17c.png)
 
-<!-- The hint says we might want to use *resolveJsonModule*. Let''s add it to our tsconfig:-->
+<!-- The hint says we might want to use *resolveJsonModule*. Let's add it to our tsconfig:-->
 提示说我们可能想使用*resolveJsonModule*。让我们把它添加到我们的tsconfig中：
 
 ```json
@@ -583,7 +583,7 @@ export default {
 <!-- Let's create a file for our types, <i>types.ts</i>, where we'll define all our types for this project.-->
 让我们为我们的类型创建一个文件，<i>types.ts</i>，在这里我们将定义所有的类型用于这个项目。
 
-<!-- First, let''s type the *Weather* and *Visibility* values using a [union type](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types) of the allowed strings:-->
+<!-- First, let's type the *Weather* and *Visibility* values using a [union type](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types) of the allowed strings:-->
 首先，让我们使用允许的字符串的[联合类型](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types)来输入*天气*和*能见度*的值：
 
 ```js
@@ -924,7 +924,7 @@ const getNonSensitiveEntries = (): DiaryEntry[] => {
 
 ![vs code error - comment is declared here](../../images/9/22b.png)
 
-<!-- Again, the last line of the error message is the most helpful one. Let''s undo this undesired modification.-->
+<!-- Again, the last line of the error message is the most helpful one. Let's undo this undesired modification.-->
 再一次，错误信息的最后一行是最有用的。让我们撤销这个不需要的修改。
 
 <!-- \* Note that if you make the comment field optional (using the *?* operator), everything will work fine.-->
@@ -964,7 +964,7 @@ export default router;
 
 ### Exercises 9.10-9.11
 
-<!-- Similarly to Ilari''s flight service, we do not use a real database in our app but instead use hardcoded data that is in the files [diagnoses.ts](https://github.com/fullstack-hy2020/misc/blob/master/diagnoses.ts) and [patients.ts](https://github.com/fullstack-hy2020/misc/blob/master/patients.ts). Get the files and store those in a directory called <i>data</i> in your project. All data modification can be done in runtime memory, so during this part, it is <i>not necessary to write to a file</i>.-->
+<!-- Similarly to Ilari's flight service, we do not use a real database in our app but instead use hardcoded data that is in the files [diagnoses.ts](https://github.com/fullstack-hy2020/misc/blob/master/diagnoses.ts) and [patients.ts](https://github.com/fullstack-hy2020/misc/blob/master/patients.ts). Get the files and store those in a directory called <i>data</i> in your project. All data modification can be done in runtime memory, so during this part, it is <i>not necessary to write to a file</i>.-->
 同样地，我们的应用程序不使用真实的数据库，而是使用存储在文件[diagnoses.ts](https://github.com/fullstack-hy2020/misc/blob/master/diagnoses.ts) 和 [patients.ts](https://github.com/fullstack-hy2020/misc/blob/master/patients.ts)中的硬编码数据。 请获取文件并将其存储在项目中的<i>data</i>目录中。 所有数据修改都可以在运行时内存中完成，因此在此部分中<i>不需要写入文件</i>。
 
 #### 9.10: Patientor backend, step3
@@ -1002,7 +1002,7 @@ export default router;
 
 ### Preventing an accidental undefined result
 
-<!-- Let''s extend the backend to support fetching one specific entry with an HTTP GET request to route *api/diaries/:id*.-->
+<!-- Let's extend the backend to support fetching one specific entry with an HTTP GET request to route *api/diaries/:id*.-->
 让我们扩展后端，以支持通过HTTP GET请求到路由*api/diaries/:id*来获取一个特定的条目。
 
 <!-- The DiaryService needs to be extended with a *findById* function:-->
@@ -1074,7 +1074,7 @@ export default router;
 
 ### Adding a new diary
 
-<!-- Let''s start building the HTTP POST endpoint for adding new flight diary entries.-->
+<!-- Let's start building the HTTP POST endpoint for adding new flight diary entries.-->
 让我们开始构建用于添加新飞行日记条目的HTTP POST端点。
 <!-- The new entries should have the same type as the existing data.-->
 新条目应该和现有数据类型相同。
@@ -1616,7 +1616,7 @@ var x = 5;
 <!-- ><i>However, it is unlikely that anyone would create a string with a constructor function. Most likely the simpler version of the type guard would be just fine.</i>-->
 然而，不太可能有人会用构造函数创建一个字符串。最可能的情况是，类型检查的简单版本就足够了。
 
-<!-- Next, let''s consider the *date* field.-->
+<!-- Next, let's consider the *date* field.-->
 接下来，让我们来考虑*日期*栏位。
 <!-- Parsing and validating the date object is pretty similar to what we did with comments.-->
 解析和验证日期对象与我们对评论所做的工作相当相似。

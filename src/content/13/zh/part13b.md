@@ -198,7 +198,7 @@ module.exports = router
 const note = await Note.findByPk(req.params.id)
 ```
 
-<!-- Let''s refactor this into our own <i>middleware</i> and implement it in the route handlers:-->
+<!-- Let's refactor this into our own <i>middleware</i> and implement it in the route handlers:-->
 让我们将其重构成我们自己的<i>中间件</i>，并在路由处理程序中实现它：
 
 ```js
@@ -252,7 +252,7 @@ router.put('/:id', noteFinder, async (req, res) => {
 
 #### Task 13.6.
 
-<!-- Also, implement support for changing the number of a blog''s likes in the application, i.e. the operation-->
+<!-- Also, implement support for changing the number of a blog's likes in the application, i.e. the operation-->
 should be able to increment or decrement the number of likes
 
 同时，在应用中实现对博客点赞数量的更改支持，即该操作应能够增加或减少点赞数量。
@@ -286,8 +286,8 @@ _PUT /api/blogs/:id_（修改博客的点赞数）
 
 ### User management
 
-<!-- Next, let''s add a database table <i>users</i> to the application, where the users of the application will be stored. In addition, we will add the ability to create users and token-based login as we implemented in [part 4](/en/part4/token_authentication). For simplicity, we will adjust the implementation so that all users will have the same password <i>secret</i>.-->
-接下来，我们给应用程序添加一个数据库表<i>users</i>，用来存储应用程序的用户。此外，我们还将添加创建用户和基于令牌的登录功能，就像我们在[第四部分](/en/part4/token_authentication)中实现的那样。为了简化实现，我们将调整实现，以便所有用户都具有相同的密码<i>secret</i>。
+<!-- Next, let's add a database table <i>users</i> to the application, where the users of the application will be stored. In addition, we will add the ability to create users and token-based login as we implemented in [part 4](/en/part4/token_authentication). For simplicity, we will adjust the implementation so that all users will have the same password <i>secret</i>.-->
+接下来，我们给应用程序添加一个数据库表<i>users</i>，用来存储应用程序的用户。此外，我们还将添加创建用户和基于令牌的登录功能，就像我们在[第四章节](/en/part4/token_authentication)中实现的那样。为了简化实现，我们将调整实现，以便所有用户都具有相同的密码<i>secret</i>。
 
 <!-- The model defining users in the file <i>models/user.js</i> is straightforward-->
 模型定义在文件<i>models/user.js</i>中的用户很简单
@@ -438,7 +438,7 @@ FROM "users" AS "User"
 WHERE "User". "username" = 'mluukkai';
 ```
 
-<!-- If the user is found and the password is correct (i.e. _secret_ for all the users), A <i>jsonwebtoken</i> containing the user''s information is returned in the response. To do this, we install the dependency-->
+<!-- If the user is found and the password is correct (i.e. _secret_ for all the users), A <i>jsonwebtoken</i> containing the user's information is returned in the response. To do this, we install the dependency-->
 <i>jsonwebtoken</i>
 
 如果用户被发现，且密码正确（即所有用户的_secret_），在响应中会返回一个包含用户信息的<i>jsonwebtoken</i>。为此，我们安装了依赖<i>jsonwebtoken</i>。
@@ -526,7 +526,7 @@ Foreign-key constraints:
 <!-- The foreign key <i>user_id</i> has been created in the <i>notes</i> table, which refers to rows of the <i>users</i> table.-->
 <i>notes</i> 表中已创建了外键 <i>user_id</i>，它指向 <i>users</i> 表的行。
 
-<!-- Now let's make every insertion of a new note be associated to a user. Before we do the proper implementation (where we associate the note with the logged-in user's token), let''s hard code the note to be attached to the first user found in the database:-->
+<!-- Now let's make every insertion of a new note be associated to a user. Before we do the proper implementation (where we associate the note with the logged-in user's token), let's hard code the note to be attached to the first user found in the database:-->
 现在让我们让每次新增笔记都与一个用户关联起来。在我们进行正确的实施（将笔记与登录用户的令牌关联）之前，让我们将笔记硬编码到数据库中的第一个用户：
 
 ```js
@@ -544,7 +544,7 @@ router.post('/', async (req, res) => {
 })
 ```
 
-<!-- Pay attention to how there is now a <i>user\_id</i> column in the notes at the database level. The corresponding object in each database row is referred to by Sequelize''s naming convention as opposed to camel case (<i>userId</i>) as typed in the source code.-->
+<!-- Pay attention to how there is now a <i>user\_id</i> column in the notes at the database level. The corresponding object in each database row is referred to by Sequelize's naming convention as opposed to camel case (<i>userId</i>) as typed in the source code.-->
 注意，现在数据库层面的注释中有一个<i>user\_id</i>列。每个数据库行中相应的对象称为Sequelize的命名约定，而不是在源代码中输入的驼峰形式（<i>userId</i>）。
 
 <!-- Making a join query is very easy. Let's change the route that returns all users so that each user's notes are also shown:-->
@@ -581,7 +581,7 @@ FROM "users" AS "User" LEFT OUTER JOIN "notes" AS "Notes" ON "User". "id" = "Not
 
 ### Proper insertion of notes
 
-<!-- Let''s change the note insertion by making it work the same as in [part 4](/en/part4), i.e. the creation of a note can only be successful if the request corresponding to the creation is accompanied by a valid token from login. The note is then stored in the list of notes created by the user identified by the token:-->
+<!-- Let's change the note insertion by making it work the same as in [part 4](/en/part4), i.e. the creation of a note can only be successful if the request corresponding to the creation is accompanied by a valid token from login. The note is then stored in the list of notes created by the user identified by the token:-->
 让我们改变笔记插入，使其与[第4章节](/en/part4)相同，即创建笔记只有在相应的请求伴随有一个有效的登录令牌时才能成功。然后，该笔记将存储在由令牌标识的用户创建的笔记列表中：
 
 ```js
@@ -619,8 +619,8 @@ router.post('/', tokenExtractor, async (req, res) => {
 
 ### Fine-tuning
 
-<!-- Our backend currently works almost the same way as the Part 4 version of the same application, except for error handling. Before we make a few extensions to backend, let''s change the routes for retrieving all notes and all users slightly.-->
-我们的后端目前的工作方式几乎与同一应用程序的第4部分版本相同，除了错误处理。在我们对后端做一些扩展之前，让我们稍微改变一下检索所有笔记和所有用户的路由。
+<!-- Our backend currently works almost the same way as the Part 4 version of the same application, except for error handling. Before we make a few extensions to backend, let's change the routes for retrieving all notes and all users slightly.-->
+我们的后端目前的工作方式几乎与同一应用程序的第4章节版本相同，除了错误处理。在我们对后端做一些扩展之前，让我们稍微改变一下检索所有笔记和所有用户的路由。
 
 <!-- We will add to each note information about the user who added it:-->
 我们将为每个笔记添加有关添加它的用户的信息：
@@ -641,7 +641,7 @@ router.get('/', async (req, res) => {
 <!-- We have also [restricted](https://sequelize.org/master/manual/model-querying-basics.html#specifying-attributes-for-select-queries) the values of which fields we want. For each note, we return all fields including the <i>name</i> of the user associated with the note but excluding the <i>userId</i>.-->
 我们也限制了我们想要的字段的值。对于每个笔记，我们返回所有字段，包括与笔记关联的用户的<i>名称</i>，但排除<i>userId</i>。
 
-<!-- Let''s make a similar change to the route that retrieves all users, removing the unnecessary field <i>userId</i> from the notes associated with the user:-->
+<!-- Let's make a similar change to the route that retrieves all users, removing the unnecessary field <i>userId</i> from the notes associated with the user:-->
 让我们对检索所有用户的路由做出类似的改变，从用户相关的笔记中删除不必要的字段<i>userId</i>：
 
 ```js
@@ -790,7 +790,7 @@ PUT api/users/:username
 <!-- Sequelize provides a set of pre-defined [validations](https://sequelize.org/master/manual/validations-and-constraints.html) for the model fields, which it performs before storing the objects in the database.-->
 Sequelize 提供了一组预定义的[验证](https://sequelize.org/master/manual/validations-and-constraints.html)，用于模型字段，它在将对象存储到数据库中之前执行这些验证。
 
-<!-- It''s decided to change the user creation policy so that only a valid email address is valid as a username. Implement validation that verifies this issue during the creation of a user.-->
+<!-- It's decided to change the user creation policy so that only a valid email address is valid as a username. Implement validation that verifies this issue during the creation of a user.-->
 决定更改用户创建策略，以便只有有效的电子邮件地址才能作为用户名有效。 在创建用户时实施验证以验证此问题。
 
 <!-- Modify the error handling middleware to provide a more descriptive error message of the situation (for example, using the Sequelize error message), e.g.-->
@@ -825,7 +825,7 @@ Sequelize 提供了一组预定义的[验证](https://sequelize.org/master/manua
 
 ### More queries
 
-<!-- So far our application has been very simple in terms of queries, queries have searched for either a single row based on the primary key using the method [findByPk](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findByPk) or they have searched for all rows in the table using the method [findAll](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findAll). These are sufficient for the frontend of the application made in Section 5, but let''s expand the backend so that we can also practice making slightly more complex queries.-->
+<!-- So far our application has been very simple in terms of queries, queries have searched for either a single row based on the primary key using the method [findByPk](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findByPk) or they have searched for all rows in the table using the method [findAll](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findAll). These are sufficient for the frontend of the application made in Section 5, but let's expand the backend so that we can also practice making slightly more complex queries.-->
 到目前为止，我们的应用程序在查询方面非常简单，查询可以使用[findByPk](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findByPk)方法根据主键搜索单个行，或者使用[findAll](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findAll)方法搜索表中的所有行。 这些对于第5节中制作的前端应用程序来说足够了，但让我们扩展后端，以便我们也可以练习制作稍微复杂一点的查询。
 
 <!-- Let's first implement the possibility to retrieve only important or non-important notes. Let's implement this using the [query-parameter](http://expressjs.com/en/5x/api.html#req.query) important:-->
@@ -997,7 +997,7 @@ router.get('/', async (req, res) => {
 })
 ```
 
-<!-- Sequelize''s [Op.substring](https://sequelize.org/master/manual/model-querying-basics.html#operators) generates the query we want using the LIKE keyword in SQL. For example, if we make a query to http://localhost:3001/api/notes?search=database&important=true we will see that the SQL query it generates is exactly as we expect.-->
+<!-- Sequelize's [Op.substring](https://sequelize.org/master/manual/model-querying-basics.html#operators) generates the query we want using the LIKE keyword in SQL. For example, if we make a query to http://localhost:3001/api/notes?search=database&important=true we will see that the SQL query it generates is exactly as we expect.-->
 Sequelize 的 [Op.substring](https://sequelize.org/master/manual/model-querying-basics.html#operators) 使用 SQL 中的 LIKE 关键字生成我们想要的查询。例如，如果我们对 http://localhost:3001/api/notes?search=database&important=true 做一个查询，我们会发现生成的 SQL 查询正是我们所期望的。
 
 ```sql
@@ -1015,7 +1015,7 @@ FROM "notes" AS "note" LEFT OUTER JOIN "users" AS "user" ON "note". "user_id" = 
 WHERE "note". "important" IN (true, false) AND "note". "content" LIKE '%%';
 ```
 
-<!-- Let''s optimize the code so that the WHERE conditions are used only if necessary:-->
+<!-- Let's optimize the code so that the WHERE conditions are used only if necessary:-->
 让我们优化代码，以便只有在必要时才使用WHERE条件：
 
 ```js

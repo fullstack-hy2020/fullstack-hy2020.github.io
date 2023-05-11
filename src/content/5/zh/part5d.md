@@ -40,7 +40,7 @@ E2E 测试也可能[毛毛的](https://hackernoon.com/flaky-tests-a-war-that-nev
 <!-- Other libraries run the tests in a Node process, which is connected to the browser through an API.-->
 其他库在Node进程中运行测试，该Node进程通过API与浏览器连接。
 
-<!-- Let''s make some end-to-end tests for our note application.-->
+<!-- Let's make some end-to-end tests for our note application.-->
 让我们为我们的笔记应用程序做一些端到端的测试。
 
 <!-- We begin by installing Cypress to <i>the frontend</i> as a development dependency-->
@@ -75,13 +75,13 @@ Adding an npm-script to run it
 }
 ```
 
-<!-- Unlike the frontend''s unit tests, Cypress tests can be in the frontend or the backend repository, or even in their separate repository.-->
+<!-- Unlike the frontend's unit tests, Cypress tests can be in the frontend or the backend repository, or even in their separate repository.-->
 不像前端的单元测试，Cypress 测试可以在前端或后端存储库中，甚至可以在它们的独立存储库中。
 
 <!-- The tests require the tested system to be running. Unlike our backend integration tests, Cypress tests <i>do not start</i> the system when they are run.-->
 测试需要测试系统正在运行。不像我们的后端集成测试，Cypress测试<i>不会</i>在运行时启动系统。
 
-<!-- Let''s add an npm script to <i>the backend</i> which starts it in test mode, or so that <i>NODE\_ENV</i> is <i>test</i>.-->
+<!-- Let's add an npm script to <i>the backend</i> which starts it in test mode, or so that <i>NODE\_ENV</i> is <i>test</i>.-->
 让我们给<i>后台</i>添加一个npm脚本，以便以测试模式启动它，或者使<i>NODE\_ENV</i>为<i>test</i>。
 
 ```js
@@ -209,7 +209,7 @@ describe('Note app', function() {
 
 ![cypress showing failure expecting to find wtf but no](../../images/5/57new.png)
 
-<!-- Let''s remove the failing code from the test.-->
+<!-- Let's remove the failing code from the test.-->
 让我们从测试中移除失败的代码吧。
 
 <!-- The variable _cy_ our tests use gives us a nasty Eslint error-->
@@ -254,7 +254,7 @@ module.exports = {
 
 ### Writing to a form
 
-<!-- Let''s extend our tests so that the test tries to log in to our application.-->
+<!-- Let's extend our tests so that the test tries to log in to our application.-->
 让我们扩展我们的测试，以便测试尝试登录我们的应用程序。
 <!-- We assume our backend contains a user with the username <i>mluukkai</i> and password <i>salainen</i>.-->
 我们假设我们的后端包含一个使用者，使用者名称为<i>mluukkai</i>，密码为<i>salainen</i>。
@@ -422,7 +422,7 @@ describe('Note app',  function() {
 
 ### Testing new note form
 
-<!-- Let''s next add test methods to test the "new note" functionality:-->
+<!-- Let's next add test methods to test the "new note" functionality:-->
 让我们接下来添加一些测试方法来测试"新笔记"功能：
 
 ```js
@@ -508,7 +508,7 @@ Cypress 按照代码中的顺序运行测试。因此，首先它运行 <i>user 
 为什么要这样做？用户在第一次测试后不是已经登录了吗？
 <!-- No, because <i>each</i> test starts from zero as far as the browser is concerned.-->
 不，因为就浏览器而言，<i>每</i>个测试都从零开始。
-<!-- All changes to the browser''s state are reversed after each test.-->
+<!-- All changes to the browser's state are reversed after each test.-->
 所有对浏览器状态的更改在每次测试后都会被恢复。
 
 ### Controlling the state of the database
@@ -523,7 +523,7 @@ Cypress 按照代码中的顺序运行测试。因此，首先它运行 <i>user 
 解决方案是为后端测试创建API端点。
 <!-- We can empty the database using these endpoints.-->
 我们可以通过这些端点清空数据库。
-<!-- Let''s create a new router for the tests inside the <i>controllers</i> folder, in the <i>testing.js</i> file-->
+<!-- Let's create a new router for the tests inside the <i>controllers</i> folder, in the <i>testing.js</i> file-->
 让我们在<i>controllers</i>文件夹中为测试创建一个新的路由器，在<i>testing.js</i>文件中。
 
 ```js
@@ -574,10 +574,10 @@ module.exports = app
 <!-- The modified backend code can be found on the [GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1) branch <i>part5-1</i>.-->
 修改后的后端代码可以在[GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1)分支<i>part5-1</i>上找到。
 
-<!-- Next, we will change the <i>beforeEach</i> block so that it empties the server''s database before tests are run.-->
+<!-- Next, we will change the <i>beforeEach</i> block so that it empties the server's database before tests are run.-->
 接下来，我们将更改<i>beforeEach</i>块，以便在运行测试之前清空服务器的数据库。
 
-<!-- Currently, it is not possible to add new users through the frontend''s UI, so we add a new user to the backend from the beforeEach block.-->
+<!-- Currently, it is not possible to add new users through the frontend's UI, so we add a new user to the backend from the beforeEach block.-->
 目前，无法通过前端的用户界面添加新用户，因此我们从beforeEach块中添加新用户到后端。
 
 ```js
@@ -615,7 +615,7 @@ describe('Note app', function() {
 <!-- Unlike earlier, now the testing starts with the backend in the same state every time. The backend will contain one user and no notes.-->
 不像以前，现在每次测试都从相同的后端状态开始。后端将包含一个用户和没有笔记。
 
-<!-- Let''s add one more test for checking that we can change the importance of notes.-->
+<!-- Let's add one more test for checking that we can change the importance of notes.-->
 让我们再加一个测试，以检查我们是否可以更改注释的重要性。
 
 <!-- A while ago we changed the frontend so that a new note is important by default, or the <i>important</i> field is <i>true</i>:-->
@@ -679,7 +679,7 @@ describe('Note app', function() {
 
 ### Failed login test
 
-<!-- Let''s make a test to ensure that a login attempt fails if the password is wrong.-->
+<!-- Let's make a test to ensure that a login attempt fails if the password is wrong.-->
 让我们做一个测试来确保如果密码错误，登录尝试失败。
 
 <!-- Cypress will run all tests each time by default, and as the number of tests increases, it starts to become quite time-consuming.-->
@@ -986,7 +986,7 @@ describe('Note app', function() {
 })
 ```
 
-<!-- Let''s make a new custom command for making a new note. The command will make a new note with an HTTP POST request:-->
+<!-- Let's make a new custom command for making a new note. The command will make a new note with an HTTP POST request:-->
 让我们为创建新笔记制定一个新的自定义命令。该命令将使用HTTP POST请求创建一个新笔记：
 
 ```js
@@ -1004,7 +1004,7 @@ Cypress.Commands.add('createNote', ({ content, important }) => {
 })
 ```
 
-<!-- The command expects the user to be logged in and the user''s details to be saved to localStorage.-->
+<!-- The command expects the user to be logged in and the user's details to be saved to localStorage.-->
 命令期望用户已登录，并且用户的详细信息被保存到本地存储中。
 
 <!-- Now the formatting block becomes:-->
@@ -1040,7 +1040,7 @@ describe('Note app', function() {
 <!-- There is one more annoying feature in our tests. The application address <i>http:localhost:3000</i> is hardcoded in many places.-->
 在我们的测试中还有一个令人讨厌的功能。在许多地方都硬编码了应用地址<i>http:localhost:3000</i>。
 
-<!-- Let''s define the <i>baseUrl</i> for the application in the Cypress pre-generated [configuration file](https://docs.cypress.io/guides/references/configuration) <i>cypress.config.js</i>:-->
+<!-- Let's define the <i>baseUrl</i> for the application in the Cypress pre-generated [configuration file](https://docs.cypress.io/guides/references/configuration) <i>cypress.config.js</i>:-->
 在Cypress预生成的[配置文件](https://docs.cypress.io/guides/references/configuration)<i>cypress.config.js</i>中，让我们为应用定义<i>baseUrl</i>：
 
 ```js
@@ -1069,10 +1069,10 @@ cy.visit('http://localhost:3000' )
 cy.visit('')
 ```
 
-<!-- The backend''s hardcoded address <i>http://localhost:3001</i> is still in the tests. Cypress [documentation](https://docs.cypress.io/guides/guides/environment-variables) recommends defining other addresses used by the tests as environment variables.-->
+<!-- The backend's hardcoded address <i>http://localhost:3001</i> is still in the tests. Cypress [documentation](https://docs.cypress.io/guides/guides/environment-variables) recommends defining other addresses used by the tests as environment variables.-->
 后端硬编码的地址<i>http://localhost:3001</i>仍然在测试中。Cypress [文档](https://docs.cypress.io/guides/guides/environment-variables)建议将测试中使用的其他地址定义为环境变量。
 
-<!-- Let''s expand the configuration file <i>cypress.config.js</i> as follows:-->
+<!-- Let's expand the configuration file <i>cypress.config.js</i> as follows:-->
 让我们将配置文件 <i>cypress.config.js</i> 扩展如下：
 
 ```js
@@ -1090,7 +1090,7 @@ module.exports = defineConfig({
 })
 ```
 
-<!-- Let''s replace all the backend addresses from the tests in the following way-->
+<!-- Let's replace all the backend addresses from the tests in the following way-->
 让我们以下列方式用新的后端地址替换所有测试中的后端地址：
 
 ```js
@@ -1115,7 +1115,7 @@ describe('Note ', function() {
 
 ### Changing the importance of a note
 
-<!-- Lastly, let''s take a look at the test we did for changing the importance of a note.-->
+<!-- Lastly, let's take a look at the test we did for changing the importance of a note.-->
 最后，让我们来看看我们为更改笔记的重要性所做的测试。
 <!-- First, we''ll change the formatting block so that it creates three notes instead of one:-->
 首先，我们将更改格式块，使其创建三个注释而不是一个：
@@ -1179,7 +1179,7 @@ cy.contains('make important').click()
 <!-- When coding tests, you should check in the test runner that the tests use the right components!-->
 当编码测试时，你应该检查测试运行器，确保测试使用正确的组件！
 
-<!-- Let''s change the _Note_ component so that the text of the note is rendered to a <i>span</i>.-->
+<!-- Let's change the _Note_ component so that the text of the note is rendered to a <i>span</i>.-->
 让我们改变 _Note_ 组件，以便将笔记的文本呈现为 <i>span</i> 。
 
 ```js
@@ -1274,7 +1274,7 @@ it('then example', function() {
 })
 ```
 
-<!-- Stopping the test execution with the debugger is [possible](https://docs.cypress.io/api/commands/debug.html). The debugger starts only if Cypress test runner''s developer console is open.-->
+<!-- Stopping the test execution with the debugger is [possible](https://docs.cypress.io/api/commands/debug.html). The debugger starts only if Cypress test runner's developer console is open.-->
 停止调试器执行测试是[可能的](https://docs.cypress.io/api/commands/debug.html)。调试器只有在Cypress测试运行器的开发者控制台打开的情况下才会启动。
 
 <!-- The developer console is all sorts of useful when debugging your tests.-->
@@ -1440,7 +1440,7 @@ describe('Blog app', function() {
 <!-- Make a test that checks that the blogs are ordered according to likes with the blog with the most likes being first.-->
 制定一个测试，检查博客是否按照喜欢的数量排序，其中最受欢迎的博客排在第一位。
 
-<i>This exercise is quite a bit trickier than the previous ones.</i> One solution is to add a certain class for the element which wraps the blog''s content and use the [eq](https://docs.cypress.io/api/commands/eq#Syntax) method to get the blog element in a specific index:
+<i>This exercise is quite a bit trickier than the previous ones.</i> One solution is to add a certain class for the element which wraps the blog's content and use the [eq](https://docs.cypress.io/api/commands/eq#Syntax) method to get the blog element in a specific index:
 
 ```js
 cy.get('.blog').eq(0).should('contain', 'The title with the most likes')
@@ -1450,7 +1450,7 @@ cy.get('.blog').eq(1).should('contain', 'The title with the second most likes')
 <!-- Note that you might end up having problems if you click a like button many times in a row. It might be that cypress does the clicking so fast that it does not have time to update the app state in between the clicks. One remedy for this is to wait for the number of likes to update in between all clicks.-->
 **注意，如果你连续多次点击喜欢按钮可能会遇到问题。可能是因为Cypress点击得太快，没有时间更新应用程序状态。解决这个问题的一个办法是在所有点击之间等待喜欢的数量更新。**
 
-<!-- This was the last exercise of this part, and it''s time to push your code to GitHub and mark the exercises you completed in the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
+<!-- This was the last exercise of this part, and it's time to push your code to GitHub and mark the exercises you completed in the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
 这是本部分的最后一个练习，是时候把你的代码推送到GitHub，并在[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)中标记你完成的练习了。
 
 </div>

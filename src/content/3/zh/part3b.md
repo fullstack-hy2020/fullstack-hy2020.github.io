@@ -7,12 +7,12 @@ lang: zh
 
 <div class="content">
 
-<!-- Next, let''s connect the frontend we made in [part 2](/en/part2) to our own backend.-->
-接下来，让我们把我们在[第二部分](/en/part2)制作的前端连接到我们自己的后端。
+<!-- Next, let's connect the frontend we made in [part 2](/en/part2) to our own backend.-->
+接下来，让我们把我们在[第二章节](/en/part2)制作的前端连接到我们自己的后端。
 
 <!-- In the previous part, the frontend could ask for the list of notes from the json-server we had as a backend, from the address <http://localhost:3001/notes>.-->
 在前一部分，前端可以从我们作为后端的json-server的地址<http://localhost:3001/notes>请求笔记列表。
-<!-- Our backend has a slightly different URL structure now, as the notes can be found at <http://localhost:3001/api/notes>. Let''s change the attribute __baseUrl__ in the <i>src/services/notes.js</i> like so:-->
+<!-- Our backend has a slightly different URL structure now, as the notes can be found at <http://localhost:3001/api/notes>. Let's change the attribute __baseUrl__ in the <i>src/services/notes.js</i> like so:-->
 我们的后端现在有一个略有不同的URL结构，因为笔记可以在<http://localhost:3001/api/notes>中找到。让我们更改<i>src/services/notes.js</i>中的属性__baseUrl__，如下：
 
 ```js
@@ -29,17 +29,17 @@ const getAll = () => {
 export default { getAll, create, update }
 ```
 
-<!-- Now frontend''s GET request to <http://localhost:3001/api/notes> does not work for some reason:-->
+<!-- Now frontend's GET request to <http://localhost:3001/api/notes> does not work for some reason:-->
 现在前端的对<http://localhost:3001/api/notes>的GET请求由于某种原因不起作用了：
 
 ![Get request showing error in dev tools](../../images/3/3ae.png)
 
-<!-- What''s going on here? We can access the backend from a browser and from postman without any problems.-->
+<!-- What's going on here? We can access the backend from a browser and from postman without any problems.-->
 这里发生了什么？我们可以从浏览器和Postman访问后端而不会出现任何问题。
 
 ### Same origin policy and CORS
 
-<!-- The issue lies with a thing called _same origin policy_. A URL''s origin is defined by the combination of protocol (AKA scheme), hostname, and port.-->
+<!-- The issue lies with a thing called _same origin policy_. A URL's origin is defined by the combination of protocol (AKA scheme), hostname, and port.-->
 问题在于一个叫做_同源策略_的东西。URL的源由协议（又称为方案）、主机名和端口组合而定。
 
 ```text
@@ -70,7 +70,7 @@ port: 80
 <!-- Keep in mind, that [same-origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy) and CORS are not specific to React or Node. They are universal principles regarding the safe operation of web applications.-->
 请记住，[同源策略](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy)和CORS不是React或Node的特定内容。它们是关于网络应用安全操作的普遍原则。
 
-<!-- We can allow requests from other <i>origins</i> by using Node''s [cors](https://github.com/expressjs/cors) middleware.-->
+<!-- We can allow requests from other <i>origins</i> by using Node's [cors](https://github.com/expressjs/cors) middleware.-->
 我们可以通过使用Node的[cors](https://github.com/expressjs/cors)中间件来允许来自其他<i>源</i>的请求。
 
 <!-- In your backend repository, install <i>cors</i> with the command-->
@@ -92,7 +92,7 @@ app.use(cors())
 <!-- And the frontend works! However, the functionality for changing the importance of notes has not yet been implemented on the backend.-->
 而前端工作得很好！然而，更改笔记重要性的功能尚未在后端实现。
 
-<!-- You can read more about CORS from [Mozilla''s page](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).-->
+<!-- You can read more about CORS from [Mozilla's page](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).-->
 你可以在[Mozilla 的页面](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)上了解更多关于 CORS 的信息。
 
 <!-- The setup of our app looks now as follows:-->
@@ -105,7 +105,7 @@ React应用现在在浏览器中运行，从运行在localhost:3001上的node/ex
 
 ### Application to the Internet
 
-<!-- Now that the whole stack is ready, let''s move our application to the internet.-->
+<!-- Now that the whole stack is ready, let's move our application to the internet.-->
 现在整个堆栈已经准备就绪，让我们把我们的应用程序移动到互联网上吧。
 
 <!-- There are an ever-growing number of services that can be used to host an app on the internet. The developer-friendly services like PaaS (i.e. Platform as a Service) take care of installing the execution environment (eg. Node.js) and could also provide various services such as databases.-->
@@ -339,8 +339,8 @@ app.listen(PORT, () => {
 <!-- A production build of applications created with <i>create-react-app</i> can be created with the command [npm run build](https://github.com/facebookincubator/create-react-app#npm-run-build-or-yarn-build).-->
 使用<i>create-react-app</i>创建的应用程序的生产构建可以使用命令[npm run build](https://github.com/facebookincubator/create-react-app#npm-run-build-or-yarn-build)创建。
 
-<!-- Let''s run this command from the <i>root of the notes frontend project</i> that we developend in [Part 2](/en/part2).-->
-让我们从我们在[第二部分](/en/part2)开发的<i>notes frontend项目的根目录</i>运行这个命令。
+<!-- Let's run this command from the <i>root of the notes frontend project</i> that we developend in [Part 2](/en/part2).-->
+让我们从我们在[第二章节](/en/part2)开发的<i>notes frontend项目的根目录</i>运行这个命令。
 
 <!-- This creates a directory called <i>build</i> (which contains the only HTML file of our application, <i>index.html</i> ) which contains the directory <i>static</i>. [Minified](<https://en.wikipedia.org/wiki/Minification_(programming)>) version of our application's JavaScript code will be generated in the <i>static</i> directory. Even though the application code is in multiple files, all of the JavaScript will be minified into one file. All of the code from all of the application's dependencies will also be minified into this single file.-->
 这将创建一个叫做<i>build</i>的目录（其中包含我们应用程序的唯一的HTML文件<i>index.html</i>），其中包含目录<i>static</i>。我们应用程序的JavaScript代码的[最小化](<https://en.wikipedia.org/wiki/Minification_(programming)>)版本将被生成在<i>static</i>目录中。尽管应用程序代码分布在多个文件中，但所有的JavaScript代码都将被最小化到一个文件中。所有来自应用程序依赖的代码也将被最小化到这个单一文件中。
@@ -354,7 +354,7 @@ app.listen(PORT, () => {
 
 ### Serving static files from the backend
 
-<!-- One option for deploying the frontend is to copy the production build (the <i>build</i> directory) to the root of the backend repository and configure the backend to show the frontend''s <i>main page</i> (the file <i>build/index.html</i>) as its main page.-->
+<!-- One option for deploying the frontend is to copy the production build (the <i>build</i> directory) to the root of the backend repository and configure the backend to show the frontend's <i>main page</i> (the file <i>build/index.html</i>) as its main page.-->
 一种部署前端的选项是将生产构建（<i>构建</i>目录）复制到后端仓库的根目录，并配置后端将前端的<i>主页</i>（文件<i>build/index.html</i>）显示为其主页。
 
 <!-- We begin by copying the production build of the frontend to the root of the backend. With a Mac or Linux computer, the copying can be done from the frontend directory with the command-->
@@ -386,10 +386,10 @@ cp -r build ../backend
 app.use(express.static('build'))
 ```
 
-<!-- whenever express gets an HTTP GET request it will first check if the <i>build</i> directory contains a file corresponding to the request''s address. If a correct file is found, express will return it.-->
+<!-- whenever express gets an HTTP GET request it will first check if the <i>build</i> directory contains a file corresponding to the request's address. If a correct file is found, express will return it.-->
 每当Express收到一个HTTP GET请求时，它会首先检查<i>build</i>目录是否包含与请求地址对应的文件。如果找到正确的文件，Express将返回它。
 
-<!-- Now HTTP GET requests to the address <i>www.serversaddress.com/index.html</i> or <i>www.serversaddress.com</i> will show the React frontend. GET requests to the address <i>www.serversaddress.com/api/notes</i> will be handled by the backend''s code.-->
+<!-- Now HTTP GET requests to the address <i>www.serversaddress.com/index.html</i> or <i>www.serversaddress.com</i> will show the React frontend. GET requests to the address <i>www.serversaddress.com/api/notes</i> will be handled by the backend's code.-->
 现在，向<i>www.serversaddress.com/index.html</i>或<i>www.serversaddress.com</i>发出的HTTP GET请求将显示React前端。 向地址<i>www.serversaddress.com/api/notes</i>发出的GET请求将由后端的代码处理。
 
 <!-- Because of our situation, both the frontend and the backend are at the same address, we can declare _baseUrl_ as a [relative](https://www.w3.org/TR/WD-html40-970917/htmlweb.html#h-5.1.2) URL. This means we can leave out the part declaring the server.-->
@@ -416,7 +416,7 @@ const getAll = () => {
 ![Notes application screenshot](../../images/3/28new.png)
 
 <!-- Our application now works exactly like the [single-page app](/en/part0/fundamentals_of_web_apps#single-page-app) example application we studied in part 0.-->
-我们的应用现在的工作方式完全像我们在第0部分学习的[单页应用程序](/en/part0/fundamentals_of_web_apps#single-page-app)示例应用程序一样。
+我们的应用现在的工作方式完全像我们在第0章节学习的[单页应用程序](/en/part0/fundamentals_of_web_apps#single-page-app)示例应用程序一样。
 
 <!-- When we use a browser to go to the address <http://localhost:3001>, the server returns the <i>index.html</i> file from the <i>build</i> repository. The summarized contents of the file are as follows:-->
 当我们使用浏览器访问<http://localhost:3001>时，服务器会从<i>build</i>仓库返回<i>index.html</i>文件。文件的概要内容如下：
@@ -480,7 +480,7 @@ fly deploy
 <!-- Our application saves the notes to a variable. If the application crashes or is restarted, all of the data will disappear.-->
 我们的应用程序将笔记保存到一个变量中。如果应用程序崩溃或重新启动，所有的数据都会消失。
 
-<!-- The application needs a database. Before we introduce one, let''s go through a few things.-->
+<!-- The application needs a database. Before we introduce one, let's go through a few things.-->
 应用程序需要一个数据库。在我们引入一个之前，让我们先简单介绍一下几件事。
 
 <!-- The setup looks like now as follows:-->
@@ -493,7 +493,7 @@ fly deploy
 
 ### Streamlining deploying of the frontend
 
-<!-- To create a new production build of the frontend without extra manual work, let''s add some npm-scripts to the <i>package.json</i> of the backend repository.-->
+<!-- To create a new production build of the frontend without extra manual work, let's add some npm-scripts to the <i>package.json</i> of the backend repository.-->
 要在不需要额外手动工作的情况下创建前端的新生产构建，让我们在后端存储库的<i>package.json</i>中添加一些npm脚本。
 
 #### Fly.io script
@@ -636,7 +636,7 @@ const baseUrl = '/api/notes'
 <!-- Make the backend work with the phonebook frontend from the exercises of the previous part. Do not implement the functionality for making changes to the phone numbers yet, that will be implemented in exercise 3.17.-->
 使后端与上一部分练习中的电话簿前端配合工作。暂时不要实现更改电话号码的功能，这将在练习3.17中实现。
 
-<!-- You will probably have to do some small changes to the frontend, at least to the URLs for the backend. Remember to keep the developer console open in your browser. If some HTTP requests fail, you should check from the <i>Network</i>-tab what is going on. Keep an eye on the backend''s console as well. If you did not do the previous exercise, it is worth it to print the request data or <i>request.body</i> to the console in the event handler responsible for POST requests.-->
+<!-- You will probably have to do some small changes to the frontend, at least to the URLs for the backend. Remember to keep the developer console open in your browser. If some HTTP requests fail, you should check from the <i>Network</i>-tab what is going on. Keep an eye on the backend's console as well. If you did not do the previous exercise, it is worth it to print the request data or <i>request.body</i> to the console in the event handler responsible for POST requests.-->
 你可能需要对前端做一些小的改动，至少要改变后端的URL。记得在浏览器中保持开发者控制台的开启状态。如果有HTTP请求失败，你应该从<i>网络</i>标签查看发生了什么。同时也要关注后端的控制台。如果你没有做前面的练习，在负责POST请求的事件处理器中打印请求数据或<i>request.body</i>到控制台是值得的。
 
 #### 3.10 phonebook backend step10

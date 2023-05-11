@@ -30,13 +30,13 @@ module.exports = {
 }
 ```
 
-<!-- However, this approach does not make sense in the long run. Let''s remove the lines that do the synchronization and move to using a much more robust way, [migrations](https://sequelize.org/master/manual/migrations.html) provided by Sequelize (and many other libraries).-->
+<!-- However, this approach does not make sense in the long run. Let's remove the lines that do the synchronization and move to using a much more robust way, [migrations](https://sequelize.org/master/manual/migrations.html) provided by Sequelize (and many other libraries).-->
 但是，从长远来看，这种方法是没有意义的。让我们删除做同步的行，并转而使用更加强大的方式，[迁移](https://sequelize.org/master/manual/migrations.html)，由Sequelize（和许多其他库）提供。
 
 <!-- In practice, a migration is a single JavaScript file that describes some modification to a database. A separate migration file is created for each single or multiple changes at once. Sequelize keeps a record of which migrations have been performed, i.e. which changes caused by the migrations are synchronized to the database schema. When creating new migrations, Sequelize keeps up to date on which changes to the database schema are yet to be made. In this way, changes are made in a controlled manner, with the program code stored in version control.-->
 在实践中，迁移是一个描述对数据库的某些修改的单个JavaScript文件。为每个单个或多个更改一次创建一个单独的迁移文件。Sequelize记录已执行的迁移，即迁移引起的哪些更改已同步到数据库模式。在创建新的迁移时，Sequelize会及时更新数据库模式尚未进行的更改。通过这种方式，以程序代码存储在版本控制中的方式进行更改。
 
-<!-- First, let''s create a migration that initializes the database. The code for the migration is as follows-->
+<!-- First, let's create a migration that initializes the database. The code for the migration is as follows-->
 首先，让我们创建一个初始化数据库的迁移。迁移的代码如下：
 
 ```js
@@ -108,13 +108,13 @@ await queryInterface.addColumn('notes', 'user_id', { // highlight-line
 })
 ```
 
-<!-- So in migrations, the names of the tables and columns are written exactly as they appear in the database, while models use Sequelize''s default camelCase naming convention.-->
+<!-- So in migrations, the names of the tables and columns are written exactly as they appear in the database, while models use Sequelize's default camelCase naming convention.-->
 所以在迁移中，表和列的名称与数据库中的名称完全一样，而模型使用Sequelize的默认驼峰命名约定。
 
 <!-- Save the migration code in the file <i>migrations/20211209\_00\_initialize\_notes\_and\_users.js</i>. Migration file names should always be named alphabetically when created so that previous changes are always before newer changes. One good way to achieve this order is to start the migration file name with the date and a sequence number.-->
 保存迁移代码到文件<i>migrations/20211209\_00\_initialize\_notes\_and\_users.js</i>中。迁移文件名称创建时应始终按字母顺序命名，以便以前的更改始终在较新的更改之前。一种达到此顺序的好方法是以日期和序列号开头命名迁移文件。
 
-<!-- We could run the migrations from the command line using the [Sequelize command line tool](https://github.com/sequelize/cli). However, we choose to perform the migrations manually from the program code using the [Umzug](https://github.com/sequelize/umzug) library. Let''s install the library-->
+<!-- We could run the migrations from the command line using the [Sequelize command line tool](https://github.com/sequelize/cli). However, we choose to perform the migrations manually from the program code using the [Umzug](https://github.com/sequelize/umzug) library. Let's install the library-->
 first.
 
 我们可以使用[Sequelize命令行工具](https://github.com/sequelize/cli)从命令行运行迁移。但是，我们选择从程序代码中手动执行迁移，使用[Umzug](https://github.com/sequelize/umzug)库。让我们先安装该库。
@@ -123,7 +123,7 @@ first.
 npm install umzug
 ```
 
-<!-- Let''s change the file <i>util/db.js</i> that handles the connection to the database as follows:-->
+<!-- Let's change the file <i>util/db.js</i> that handles the connection to the database as follows:-->
 让我们更改处理与资料库连接的档案 <i>util/db.js</i> 如下：
 
 ```js
@@ -174,7 +174,7 @@ module.exports = { connectToDatabase, sequelize }
 <!-- The <i>runMigrations</i> function that performs migrations is now executed every time the application opens a database connection when it starts. Sequelize keeps track of which migrations have already been completed, so if there are no new migrations, running the <i>runMigrations</i> function does nothing.-->
 <i>runMigrations</i> 功能现在每次应用程序启动时开启数据库连接时都会执行迁移。Sequelize追踪哪些迁移已经完成，因此如果没有新的迁移，执行<i>runMigrations</i>功能将不会有任何作用。
 
-<!-- Now let''s start with a clean slate and remove all existing database tables from the application:-->
+<!-- Now let's start with a clean slate and remove all existing database tables from the application:-->
 现在让我们从一个干净的开始，从应用程序中移除所有现有的资料库表：
 
 ```sql
@@ -184,7 +184,7 @@ username => \d
 Did not find any relations.
 ```
 
-<!-- Let''s start up the application. A message about the migrations status is printed on the log-->
+<!-- Let's start up the application. A message about the migrations status is printed on the log-->
 .
 
 让我们启动应用程序吧。关于迁移状态的消息已经打印在日志上了。
@@ -222,7 +222,7 @@ postgres=# select * from migrations;
  20211209_00_initialize_notes_and_users.js
 ```
 
-<!-- Let''s create a few users in the database, as well as a set of notes, and after that we are ready to expand the application.-->
+<!-- Let's create a few users in the database, as well as a set of notes, and after that we are ready to expand the application.-->
 让我们在数据库中创建一些用户，以及一组笔记，然后我们就可以扩展应用程序了。
 
 <!-- The current code for the application is in its entirety on [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-6), branch <i>part13-6</i>.-->
@@ -236,7 +236,7 @@ _管理员_ 告诉你用户是否是管理员
 <!-- - _disabled_ tells you whether the user is disabled from actions-->
 disabled：告诉你用户是否被禁止执行操作
 
-<!-- Let''s create the migration that modifies the database in the file <i>migrations/20211209\_01\_admin\_and\_disabled\_to\_users.js</i>:-->
+<!-- Let's create the migration that modifies the database in the file <i>migrations/20211209\_01\_admin\_and\_disabled\_to\_users.js</i>:-->
 让我们创建修改文件<i>migrations/20211209\_01\_admin\_and\_disabled\_to\_users.js</i>中数据库的迁移：
 
 ```js
@@ -319,7 +319,7 @@ Referenced by:
     TABLE "notes" CONSTRAINT "notes_user_id_fkey" FOREIGN KEY (user_id) REFERENCES users(id)
 ```
 
-Now let''s expand the controllers as follows. We prevent logging in if the user field <i>disabled</i> is set to <i>true</i>:
+Now let's expand the controllers as follows. We prevent logging in if the user field <i>disabled</i> is set to <i>true</i>:
 
 ```js
 loginRouter.post('/', async (request, response) => {
@@ -360,7 +360,7 @@ loginRouter.post('/', async (request, response) => {
 })
 ```
 
-Let''s disable the user <i>jakousa</i> using his ID:
+Let's disable the user <i>jakousa</i> using his ID:
 
 ```sql
 username => update users set disabled=true where id=3;
@@ -449,12 +449,12 @@ module.exports = { tokenExtractor }
 ```
 
 <!-- As noted in [the end of Part 4](/en/part4/token_authentication#problems-of-token-based-authentication), the way we implement disabling users here is problematic. Whether or not the user is disabled is only checked at _login_, if the user has a token at the time the user is disabled, the user may continue to use the same token, since no lifetime has been set for the token and the disabled status of the user is not checked when creating notes.-->
-如[第4部分末尾](/en/part4/token_authentication#problems-of-token-based-authentication)所述，我们在这里实现禁用用户的方式是有问题的。仅在_登录_时检查用户是否被禁用，如果用户在被禁用时具有令牌，则用户可能会继续使用相同的令牌，因为令牌没有设置生存期，而且在创建笔记时不检查用户的禁用状态。
+如[第4章节末尾](/en/part4/token_authentication#problems-of-token-based-authentication)所述，我们在这里实现禁用用户的方式是有问题的。仅在_登录_时检查用户是否被禁用，如果用户在被禁用时具有令牌，则用户可能会继续使用相同的令牌，因为令牌没有设置生存期，而且在创建笔记时不检查用户的禁用状态。
 
-<!-- Before we proceed, let''s make an npm script for the application, which allows us to undo the previous migration. After all, not everything always goes right the first time when developing migrations.-->
+<!-- Before we proceed, let's make an npm script for the application, which allows us to undo the previous migration. After all, not everything always goes right the first time when developing migrations.-->
 在我们继续之前，让我们为应用程序创建一个npm脚本，它允许我们撤消先前的迁移。毕竟，在开发迁移时，不是每件事都一次就正确的。
 
-<!-- Let''s modify the file <i>util/db.js</i> as follows:-->
+<!-- Let's modify the file <i>util/db.js</i> as follows:-->
 让我们修改文件<i>util/db.js</i>如下：
 
 ```js
@@ -514,7 +514,7 @@ module.exports = { connectToDatabase, sequelize, rollbackMigration }
 /* highlight-end */
 ```
 
-<!-- Let''s create a file <i>util/rollback.js</i>, which will allow the npm script to execute the specified migration rollback function:-->
+<!-- Let's create a file <i>util/rollback.js</i>, which will allow the npm script to execute the specified migration rollback function:-->
 让我们创建一个文件<i>util/rollback.js</i>，它将允许npm脚本执行指定的迁移回滚功能：
 
 ```js
@@ -562,7 +562,7 @@ rollbackMigration()
 
 #### Task 13.17.
 
-<!-- Delete all tables from your application''s database.-->
+<!-- Delete all tables from your application's database.-->
 从你的应用程序的数据库中删除所有表。
 
 <!-- Make a migration that initializes the database. Add <i>created\_at</i> and <i>updated\_at</i> [timestamps](https://sequelize.org/master/manual/model-basics.html#timestamps) for both tables. Keep in mind that you will have to add them in the migration yourself.-->
@@ -591,7 +591,7 @@ rollbackMigration()
 <!-- Since an arbitrary number of users can join one team, and one user can join an arbitrary number of teams, we are dealing with a [many-to-many](https://sequelize.org/master/manual/assocs.html#many-to-many-relationships) relationship, which is traditionally implemented in relational databases using a <i>connection table</i>.-->
 由于任意数量的用户可以加入一个团队，而一个用户可以加入任意数量的团队，我们正在处理一种[多对多](https://sequelize.org/master/manual/assocs.html#many-to-many-relationships)关系，传统上使用<i>连接表</i>在关系数据库中实现。
 
-<!-- Let''s now create the code needed for the teams table as well as the connection table. The migration (saved in file <i>20211209\_02\_add\_teams\_and\_memberships.js</i>) is as follows:-->
+<!-- Let's now create the code needed for the teams table as well as the connection table. The migration (saved in file <i>20211209\_02\_add\_teams\_and\_memberships.js</i>) is as follows:-->
 \# 创建teams表和connection表所需的代码
 \# 迁移文件（存储在<i>20211209\_02\_add\_teams\_and\_memberships.js</i>中）如下：
 
@@ -771,7 +771,7 @@ Membership.init({
 })
 ```
 
-<!-- Now let''s create a couple of teams from the psql console, as well as a few memberships:-->
+<!-- Now let's create a couple of teams from the psql console, as well as a few memberships:-->
 现在让我们从psql控制台创建一些团队以及一些成员：
 
 ```js
@@ -811,7 +811,7 @@ router.get('/', async (req, res) => {
 <!-- The most observant will notice that the query printed to the console now combines three tables.-->
 最细心的人会注意到，现在打印到控制台的查询现在结合了三个表。
 
-<!-- The solution is pretty good, but there''s a beautiful flaw in it. The result also comes with the attributes of the corresponding row of the connection table, although we do not want this:-->
+<!-- The solution is pretty good, but there's a beautiful flaw in it. The result also comes with the attributes of the corresponding row of the connection table, although we do not want this:-->
 解决方案相当不错，但它存在一个漂亮的缺陷。结果也包括连接表的相应行的属性，尽管我们不想要这样：
 
 ![](../../images/13/3.png)
@@ -862,7 +862,7 @@ Team.belongsToMany(User, { through: Membership })
 <!-- These allow Sequelize to make queries that retrieve, for example, all the notes of users, or all members of a team.-->
 这些允许Sequelize进行查询，例如，检索所有用户的笔记或所有团队成员。
 
-<!-- Thanks to the definitions, we also have direct access to, for example, the user''s notes in the code. In the following code, we will search for a user with id 1 and print the notes associated with the user:-->
+<!-- Thanks to the definitions, we also have direct access to, for example, the user's notes in the code. In the following code, we will search for a user with id 1 and print the notes associated with the user:-->
 感谢这些定义，我们也可以直接访问代码中的用户笔记。在下面的代码中，我们将搜索具有id 1的用户并打印与用户关联的笔记：
 
 ```js
@@ -958,10 +958,10 @@ router.get('/:id', async (req, res) => {
 ```
 ### Revisiting many-to-many relationships
 
-<!-- Let''s make another many-to-many relationship in the application. Each note is associated to the user who created it by a foreign key. It is now decided that the application also supports that the note can be associated with other users, and that a user can be associated with an arbitrary number of notes created by other users. The idea is that these notes are those that the user has <i>marked</i> for himself.-->
+<!-- Let's make another many-to-many relationship in the application. Each note is associated to the user who created it by a foreign key. It is now decided that the application also supports that the note can be associated with other users, and that a user can be associated with an arbitrary number of notes created by other users. The idea is that these notes are those that the user has <i>marked</i> for himself.-->
 让我们在应用程序中再建立一个多对多的关系。每个笔记都通过外键与创建它的用户相关联。现在决定应用程序也支持笔记可以与其他用户相关联，并且一个用户可以与任意数量的其他用户创建的笔记相关联。这个想法是这些笔记是用户<i>标记</i>给自己的。
 
-<!-- Let''s make a connection table <i>user\_notes</i> for the situation. The migration, that is saved in file <i>20211209\_03\_add\_user\_notes.js</i> is straightforward:-->
+<!-- Let's make a connection table <i>user\_notes</i> for the situation. The migration, that is saved in file <i>20211209\_03\_add\_user\_notes.js</i> is straightforward:-->
 让我们为这种情况创建一个连接表<i>user\_notes</i>。保存在文件<i>20211209\_03\_add\_user\_notes.js</i>中的迁移很简单：
 
 ```js
@@ -1055,10 +1055,10 @@ module.exports = {
 }
 ```
 
-<!-- Once again <i>belongsToMany</i> is used, which now links users to notes via the <i>UserNotes</i> model corresponding to the connection table. However, this time we give an <i>alias name</i> for the attribute formed using the keyword [as](https://sequelize.org/master/manual/advanced-many-to-many.html#aliases-and-custom-key-names), the default name (a user''s <i>notes</i>) would overlap with its previous meaning, i.e. notes created by the user.-->
+<!-- Once again <i>belongsToMany</i> is used, which now links users to notes via the <i>UserNotes</i> model corresponding to the connection table. However, this time we give an <i>alias name</i> for the attribute formed using the keyword [as](https://sequelize.org/master/manual/advanced-many-to-many.html#aliases-and-custom-key-names), the default name (a user's <i>notes</i>) would overlap with its previous meaning, i.e. notes created by the user.-->
 再次使用<i>belongsToMany</i>，它现在通过<i>UserNotes</i>模型将用户与笔记链接起来，这是一个连接表。但是，这次我们使用关键字[as]给属性起了一个<i>别名</i>，默认的名字（用户的<i>笔记</i>）与其先前的含义重叠，即用户创建的笔记。
 
-<!-- We extend the route for an individual user to return the user''s teams, their own notes, and other notes marked by the user:-->
+<!-- We extend the route for an individual user to return the user's teams, their own notes, and other notes marked by the user:-->
 我们延长了一个个人用户的路由，以返回用户的团队、他们自己的笔记以及用户标记的其他笔记：
 
 ```js
@@ -1098,7 +1098,7 @@ router.get('/:id', async (req, res) => {
 <!-- In the context of the include, we must now use the alias name <i>marked\_notes</i> which we have just defined with the <i>as</i> attribute.-->
 在include的上下文中，我们现在必须使用我们刚刚使用<i>as</i>属性定义的别名<i>marked\_notes</i>。
 
-<!-- In order to test the feature, let''s create some test data in the database:-->
+<!-- In order to test the feature, let's create some test data in the database:-->
 为了测试这个功能，让我们在数据库中创建一些测试数据：
 
 ```sql
@@ -1193,7 +1193,7 @@ router.get('/:id', async (req, res) => {
 }
 ```
 
-<!-- Also modify the individual user route _GET /api/users/:id_ to return not only the user''s other information but also the reading list, e.g. in the following format:-->
+<!-- Also modify the individual user route _GET /api/users/:id_ to return not only the user's other information but also the reading list, e.g. in the following format:-->
 也修改单个用户路由_GET /api/users/:id_，不仅返回用户的其他信息，还返回阅读列表，例如以下格式：
 
 ```js
@@ -1272,7 +1272,7 @@ router.get('/:id', async (req, res) => {
 <!-- Note: there are several ways to implement this functionality. [This](https://sequelize.org/master/manual/advanced-many-to-many.html#the-best-of-both-worlds--the-super-many-to-many-relationship) should help.-->
 注意：有几种方法可以实现此功能。[这里](https://sequelize.org/master/manual/advanced-many-to-many.html#the-best-of-both-worlds--the-super-many-to-many-relationship)应该可以帮助。
 
-<!-- Note also that despite having an array field <i>readinglists</i> in the example, it should always just contain exactly one object, the join table entry that connects the book to the particular user''s reading list.-->
+<!-- Note also that despite having an array field <i>readinglists</i> in the example, it should always just contain exactly one object, the join table entry that connects the book to the particular user's reading list.-->
 注意，尽管在示例中有一个数组字段<i>readinglists</i>，但它应始终只包含一个对象，即连接书籍到特定用户的阅读列表的联接表条目。
 
 #### Exercise 13.22.
@@ -1291,7 +1291,7 @@ a _status_ field set to _read_.
 
 #### Exercise 13.23.
 
-<!-- Modify the route that returns a single user''s information so that the request can control which of the blogs in the reading list are returned:-->
+<!-- Modify the route that returns a single user's information so that the request can control which of the blogs in the reading list are returned:-->
 修改返回单个用户信息的路由，以便请求可以控制哪些博客在阅读列表中被返回：
 
 <!-- - _GET /api/users/:id_ returns the entire reading list-->
@@ -1309,7 +1309,7 @@ GET /api/users/:id?read=false 返回尚未阅读的博客
 
 ### Concluding remarks
 
-<!-- The state of our application is starting to be at least acceptable. However, before the end of the section, let''s look at a few more points.-->
+<!-- The state of our application is starting to be at least acceptable. However, before the end of the section, let's look at a few more points.-->
 我们的应用状态开始至少可以接受了。然而，在本节结束之前，让我们再看一些其他的要点。
 
 #### Eager vs lazy fetch
@@ -1623,10 +1623,10 @@ module.exports = {
 <!-- Couldn''t we optimize the code so that, for example, the model exports the shared parts needed for the migration?-->
 **难道我们不能优化代码，比如模型导出迁移所需的共享部分吗？**
 
-<!-- However, the problem is that the definition of the model may change over time, for example the <i>name</i> field may change or its data type may change. Migrations must be able to be performed successfully at any time from start to end, and if the migrations are relying on the model to have certain content, it may no longer be true in a month or a year''s time. Therefore, despite the "copy paste", the migration code should be completely separate from the model code.-->
+<!-- However, the problem is that the definition of the model may change over time, for example the <i>name</i> field may change or its data type may change. Migrations must be able to be performed successfully at any time from start to end, and if the migrations are relying on the model to have certain content, it may no longer be true in a month or a year's time. Therefore, despite the "copy paste", the migration code should be completely separate from the model code.-->
 然而，问题在于模型的定义可能会随时间变化，例如<i>name</i>字段可能会改变或其数据类型可能会改变。迁移必须能够在任何时候从开始到结束成功执行，如果迁移依赖于模型具有某些内容，则一个月或一年后可能不再成立。因此，尽管有“复制粘贴”，但迁移代码应完全独立于模型代码。
 
-<!-- One solution would be to use Sequelize''s [command line tool](https://sequelize.org/master/manual/migrations.html#creating-the-first-model--and-migration-), which generates both models and migration files based on commands given at the command line. For example, the following command would create a <i>User</i> model with <i>name</i>, <i>username</i>, and <i>admin</i> as attributes, as well as the migration that manages the creation of the database table:-->
+<!-- One solution would be to use Sequelize's [command line tool](https://sequelize.org/master/manual/migrations.html#creating-the-first-model--and-migration-), which generates both models and migration files based on commands given at the command line. For example, the following command would create a <i>User</i> model with <i>name</i>, <i>username</i>, and <i>admin</i> as attributes, as well as the migration that manages the creation of the database table:-->
 一种解决方案是使用Sequelize的[命令行工具](https://sequelize.org/master/manual/migrations.html#creating-the-first-model--and-migration-)，它基于命令行给出的命令生成模型和迁移文件。例如，以下命令将创建一个<i>User</i>模型，具有<i>name</i>、<i>username</i>和<i>admin</i>作为属性，以及管理数据库表创建的迁移：
 
 ```
@@ -1644,8 +1644,8 @@ npx sequelize-cli model:generate --name User --attributes name:string,username:s
 
 #### Task 13.24.
 
-<!-- Grand finale: [towards the end of part 4](/en/part4/token_authentication#problems-of-token-based-authentication) there was mention of a token-criticality problem: if a user''s access to the system is decided to be revoked, the user may still use the token in possession to use the system.-->
-最终结局：[在第四部分末尾](/en/part4/token_authentication#problems-of-token-based-authentication)提到了一个令牌关键性问题：如果某用户被决定撤销访问系统的权限，该用户仍可以使用所拥有的令牌来使用系统。
+<!-- Grand finale: [towards the end of part 4](/en/part4/token_authentication#problems-of-token-based-authentication) there was mention of a token-criticality problem: if a user's access to the system is decided to be revoked, the user may still use the token in possession to use the system.-->
+最终结局：[在第四章节末尾](/en/part4/token_authentication#problems-of-token-based-authentication)提到了一个令牌关键性问题：如果某用户被决定撤销访问系统的权限，该用户仍可以使用所拥有的令牌来使用系统。
 
 <!-- The usual solution to this is to store a record of each token issued to the client in the backend database, and to check with each request whether access is still valid. In this case, the validity of the token can be removed immediately if necessary. Such a solution is often referred to as a <i>server-side session</i>.-->
 通常的解决方案是在后端数据库中存储每个客户端发出的令牌的记录，并在每次请求时检查访问是否仍然有效。在这种情况下，如果有必要，可以立即删除令牌的有效性。这种解决方案通常被称为<i>服务器端会话</i>。

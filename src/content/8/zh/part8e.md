@@ -6,7 +6,7 @@ lang: zh
 ---
 <div class="content">
 
-<!-- We are approaching the end of this part. Let''s finish by having a look at a few more details of GraphQL.-->
+<!-- We are approaching the end of this part. Let's finish by having a look at a few more details of GraphQL.-->
 我们快要到达这一部分的结尾了。让我们来看看 GraphQL 的一些更多细节吧。
 
 ### Fragments
@@ -50,7 +50,7 @@ query {
 <!-- both return persons. When choosing the fields to return, both queries have to define exactly the same fields.-->
 当选择要返回的字段时，两个查询必须完全定义相同的字段。
 
-<!-- These kinds of situations can be simplified with the use of [fragments](https://graphql.org/learn/queries/#fragments). Let''s declare a fragment for selecting all fields of a person:-->
+<!-- These kinds of situations can be simplified with the use of [fragments](https://graphql.org/learn/queries/#fragments). Let's declare a fragment for selecting all fields of a person:-->
 这种情况可以通过使用[片段](https://graphql.org/learn/queries/#fragments)来简化。让我们声明一个用于选择人的所有字段的片段：
 
 ```js
@@ -370,7 +370,7 @@ startStandaloneServer(server, {
 })
 ```
 
-<!-- Unfortunately startStandaloneServer does not allow adding subscriptions to the application, so let''s switch to the more robust [expressMiddleware](https://www.apollographql.com/docs/apollo-server/api/express-middleware/) function. As the name of the function already suggests, it is an Express middleware, which means that Express must also be configured for the application, with the GraphQL server acting as middleware.-->
+<!-- Unfortunately startStandaloneServer does not allow adding subscriptions to the application, so let's switch to the more robust [expressMiddleware](https://www.apollographql.com/docs/apollo-server/api/express-middleware/) function. As the name of the function already suggests, it is an Express middleware, which means that Express must also be configured for the application, with the GraphQL server acting as middleware.-->
 不幸的是，startStandaloneServer不允许向应用程序添加订阅，因此让我们切换到更强大的[expressMiddleware]（https://www.apollographql.com/docs/apollo-server/api/express-middleware/）功能。正如函数的名称所暗示的，它是一个Express中间件，这意味着必须为应用程序配置Express，其中GraphQL服务器作为中间件。
 
 <!-- Let us install Express-->
@@ -483,7 +483,7 @@ start()
 
 ### Subscriptions on the server
 
-<!-- Let''s implement subscriptions for subscribing for notifications about new persons added.-->
+<!-- Let's implement subscriptions for subscribing for notifications about new persons added.-->
 让我们实施订阅，以订阅有关新增人员的通知。
 
 <!-- The schema changes like so:-->
@@ -586,7 +586,7 @@ start()
 当使用查询和变更时，GraphQL使用HTTP协议进行通信。在订阅的情况下，客户端和服务器之间的通信是通过[WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API)完成的。
 
 <!-- The above code registers a WebSocketServer object to listen the WebSocket connections, besides the usual HTTP connections that the server listens. The second part of the definition registers a function that closes the WebSocket connection on server shutdown.-->
-上面的代码注册了一个WebSocketServer对象来监听WebSocket连接，除了服务器监听的通常的HTTP连接。定义的第二部分注册了一个函数，在服务器关闭时关闭WebSocket连接。
+上面的代码注册了一个WebSocketServer对象来监听WebSocket连接，除了服务器监听的通常的HTTP连接。定义的第二章节注册了一个函数，在服务器关闭时关闭WebSocket连接。
 <!-- If you're interested in more details about configurations, Apollo's [documentation](https://www.apollographql.com/docs/apollo-server/data/subscriptions) explains in relative detail what each line of code does.-->
 如果你对配置的更多细节感兴趣，Apollo的[文档](https://www.apollographql.com/docs/apollo-server/data/subscriptions)详细解释了每一行代码的作用。
 
@@ -679,7 +679,7 @@ Subscription: {
 <!-- The iterator name is an arbitrary string, now the name follows the convention, it is the subscription name written in capital letters.-->
 迭代器名称是一个任意的字符串，现在名称遵循约定，它是以大写字母写的订阅名称。
 
-<!-- Adding a new person <i>publishes</i> a notification about the operation to all subscribers with PubSub''s method *publish*:-->
+<!-- Adding a new person <i>publishes</i> a notification about the operation to all subscribers with PubSub's method *publish*:-->
 添加新人使用PubSub的*publish*方法向所有订阅者发布有关操作的通知。
 
 ```js
@@ -689,7 +689,7 @@ pubsub.publish('PERSON_ADDED', { personAdded: person })
 <!-- Execution of this line sends a WebSocket message about the added person to all the clients registered in the iterator <i>PERSON\_ADDED</i>.-->
 执行这一行将发送一条关于添加的人的WebSocket消息给迭代器<i>PERSON\_ADDED</i>中注册的所有客户端。
 
-<!-- It''s possible to test the subscriptions with the Apollo Explorer like this:-->
+<!-- It's possible to test the subscriptions with the Apollo Explorer like this:-->
 这样可以用Apollo Explorer来测试订阅：
 
 ![apollo explorer showing subscriptions tab and response](../../images/8/31x.png)
@@ -705,7 +705,7 @@ pubsub.publish('PERSON_ADDED', { personAdded: person })
 <!-- The backend code can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-7), branch <i>part8-7</i>.-->
 后端代码可以在 [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-7) 上找到，分支为<i>part8-7</i>。
 
-<!-- Implementing subscriptions involves a lot of configurations. You will be able to cope with the few exercises of this course without worrying much about the details. If you planning to use subsctiptions in an production use application, you should definitely read carefully Apollo''s [documentation on subscriptions](https://www.apollographql.com/docs/apollo-server/data/subscriptions).-->
+<!-- Implementing subscriptions involves a lot of configurations. You will be able to cope with the few exercises of this course without worrying much about the details. If you planning to use subsctiptions in an production use application, you should definitely read carefully Apollo's [documentation on subscriptions](https://www.apollographql.com/docs/apollo-server/data/subscriptions).-->
 实施订阅涉及许多配置。您可以轻松应对本课程的几个练习，而无需太多担心细节。如果您计划在生产使用应用程序中使用subsctiptions，则应该仔细阅读Apollo的[订阅文档](https://www.apollographql.com/docs/apollo-server/data/subscriptions)。
 
 ### Subscriptions on the client
@@ -795,7 +795,7 @@ const wsLink = new GraphQLWsLink(
 <!-- The subscriptions are done using the [useSubscription](https://www.apollographql.com/docs/react/api/react/hooks/#usesubscription) hook function.-->
 使用[useSubscription](https://www.apollographql.com/docs/react/api/react/hooks/#usesubscription)钩子函数完成订阅。
 
-<!-- Let''s make the following changes to the code. Add the code defining the order to the file <i>queries.js</i>:-->
+<!-- Let's make the following changes to the code. Add the code defining the order to the file <i>queries.js</i>:-->
 让我们对代码做出以下更改。 将定义订单的代码添加到文件<i>queries.js</i>中：
 
 ```js
@@ -861,7 +861,7 @@ const App = () => {
 }
 ```
 
-<!-- When a new person is now added to the phonebook, no matter where it''s done, the details of the new person are printed to the client’s console:-->
+<!-- When a new person is now added to the phonebook, no matter where it's done, the details of the new person are printed to the client’s console:-->
 当一个新的人被添加到电话簿时，无论在哪里完成，新人的详细信息都会打印到客户端的控制台：
 
 ![dev tools showing data personAdded Object with Mainroad](../../images/8/32e.png)
@@ -869,7 +869,7 @@ const App = () => {
 <!-- When a new person is added, the server sends a notification to the client, and the callback function defined in the *onData* attribute is called and given the details of the new person as parameters.-->
 当添加新人员时，服务器会向客户端发送通知，并调用*onData*属性中定义的回调函数，并将新人员的详细信息作为参数给出。
 
-<!-- Let''s extend our solution so that when the details of a new person are received, the person is added to the Apollo cache, so it is rendered to the screen immediately.-->
+<!-- Let's extend our solution so that when the details of a new person are received, the person is added to the Apollo cache, so it is rendered to the screen immediately.-->
 让我们扩展我们的解决方案，以便当收到新人的细节时，该人被添加到Apollo缓存中，因此立即呈现到屏幕上。
 
 ```js
@@ -1010,7 +1010,7 @@ query {
 }
 ```
 
-<!-- Because *friendOf* is not a field of <i>Person</i> objects on the database, we have to create a resolver for it, which can solve this issue. Let''s first create a resolver that returns an empty list:-->
+<!-- Because *friendOf* is not a field of <i>Person</i> objects on the database, we have to create a resolver for it, which can solve this issue. Let's first create a resolver that returns an empty list:-->
 因为<i>Person</i>对象在数据库中没有*friendOf*字段，我们必须为它创建一个解析器来解决这个问题。让我们先创建一个返回空列表的解析器：
 
 ```js
@@ -1200,7 +1200,7 @@ query {
 <!-- > <i>Programmers waste enormous amounts of time thinking about, or worrying about, the speed of noncritical parts of their programs, and these attempts at efficiency actually have a strong negative impact when debugging and maintenance are considered. We should forget about small efficiencies, say about 97% of the time: <strong>premature optimization is the root of all evil.</strong></i>-->
 > <i>程序员会浪费大量时间思考或担心程序中不关键的部分的速度，当考虑调试和维护时，这些寻求效率的尝试实际上会产生很强的负面影响。我们应该忘记小效率，大约97％的时间：<strong>过早的优化是万恶之源。</strong></i>
 
-<!-- GraphQL Foundation''s [DataLoader](https://github.com/graphql/dataloader) library offers a good solution for the n+1 problem among other issues. More about using DataLoader with Apollo server [here](https://www.robinwieruch.de/graphql-apollo-server-tutorial/#graphql-server-data-loader-caching-batching) and [here](http://www.petecorey.com/blog/2017/08/14/batching-graphql-queries-with-dataloader/).-->
+<!-- GraphQL Foundation's [DataLoader](https://github.com/graphql/dataloader) library offers a good solution for the n+1 problem among other issues. More about using DataLoader with Apollo server [here](https://www.robinwieruch.de/graphql-apollo-server-tutorial/#graphql-server-data-loader-caching-batching) and [here](http://www.petecorey.com/blog/2017/08/14/batching-graphql-queries-with-dataloader/).-->
 GraphQL Foundation 的 [DataLoader](https://github.com/graphql/dataloader) 库为 n+1 问题及其他问题提供了一个很好的解决方案。更多关于使用 DataLoader 与 Apollo 服务器的信息可以参考[这里](https://www.robinwieruch.de/graphql-apollo-server-tutorial/#graphql-server-data-loader-caching-batching) 和[这里](http://www.petecorey.com/blog/2017/08/14/batching-graphql-queries-with-dataloader/)。
 
 ### Epilogue
@@ -1277,7 +1277,7 @@ GraphQL 已经是一项相当老的技术了，自2012年以来被Facebook使用
 
 #### 8.25: Subscriptions - client, part 2
 
-<!-- Keep the application''s book view updated when the server notifies about new books (you can ignore the author view!). You can test your implementation by opening the app in two browser tabs and adding a new book in one tab. Adding the new book should update the view in both tabs.-->
+<!-- Keep the application's book view updated when the server notifies about new books (you can ignore the author view!). You can test your implementation by opening the app in two browser tabs and adding a new book in one tab. Adding the new book should update the view in both tabs.-->
 保持应用程序的书籍视图在服务器通知有新书籍时得以更新（可以忽略作者视图！）。您可以通过在两个浏览器标签中打开应用程序，在其中一个标签中添加新书籍来测试您的实现。添加新书籍应该更新两个标签中的视图。
 
 #### 8.26: n+1
@@ -1307,7 +1307,7 @@ query {
 <!-- **Note** that you need a registration to the corresponding course part for getting the credits registered, see [here](/en/part0/general_info#parts-and-completion) for more information.-->
 **注意**：要获得学分，需要注册相应的课程部分，更多信息请参见[这里](/en/part0/general_info#parts-and-completion)。
 
-<!-- You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the certificate''s language.-->
+<!-- You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the certificate's language.-->
 你可以通过点击其中一个旗帜图标来下载完成这一部分的证书。 旗帜图标对应证书的语言。
 
 </div>

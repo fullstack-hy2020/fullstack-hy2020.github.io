@@ -6,30 +6,29 @@ lang: zh
 ---
 
 <div class="content">
-
-<!-- Before starting a new part, let''s recap some of the topics that proved difficult last year.-->
-在开始新的部分之前，让我们回顾一下去年比较困难的一些主题。
+<!-- Before starting a new part, let's recap some of the topics that proved difficult last year.-->
+在开始新的章节之前，让我们回顾一下根据去年经验比较困难的一些主题。
 
 ### console.log
 
-<!-- ***What''s the difference between an experienced JavaScript programmer and a rookie? The experienced one uses console.log 10-100 times more.***-->
-什么是经验丰富的JavaScript程序员和新手之间的区别？经验丰富的人使用`console.log`次数要多10-100倍。
+<!-- ***What's the difference between an experienced JavaScript programmer and a rookie? The experienced one uses console.log 10-100 times more.***-->
+经验丰富的JavaScript程序员和新手之间的区别是什么？经验丰富的人使用`console.log`次数要多10-100倍。
 
 <!-- Paradoxically, this seems to be true even though a rookie programmer would need <i>console.log</i> (or any debugging method) more than an experienced one.-->
-<i>矛盾的是，即使一个新手程序员比一个经验丰富的程序员更需要<i>console.log</i>（或任何调试方法），但这似乎是正确的。</i>
+<i>矛盾的是，一个新手程序员比一个经验丰富的程序员更需要<i>console.log</i>（或任何调试方法）。</i>
 
 <!-- When something does not work, don't just guess what's wrong. Instead, log or use some other way of debugging.-->
-当某事不起作用时，不要猜测出什么是错的。相反，记录下来或者使用其他调试方式。
+当某事不起作用时，不要猜测哪里出了问题。相反，采用日志或者使用其他调试方式。
 
 <!-- **NB** As explained in part 1, when you use the command _console.log_ for debugging, don't concatenate things 'the Java way'' with a plus. Instead of writing:-->
-**NB** 如第一部分所解释的那样，当你使用命令 _console.log_ 进行调试时，不要用加号以“Java方式”连接东西。而不是写：
+**注意：** 如第一章节所解释的那样，当你使用命令 _console.log_ 进行调试时，不要用加号以“Java方式”连接东西。即不是写：
 
 ```js
 console.log('props value is ' + props)
 ```
 
 <!-- separate the things to be printed with a comma:-->
-Hello,你好
+用逗号将需要打印的内容分隔开
 
 ```js
 console.log('props value is', props)
@@ -50,13 +49,13 @@ props value is [object Object]
 ### Protip: Visual Studio Code snippets
 
 <!-- With Visual Studio Code it's easy to create 'snippets', i.e., shortcuts for quickly generating commonly re-used portions of code, much like how 'sout'' works in Netbeans.-->
-使用Visual Studio Code，很容易创建「片段」，即用于快速生成常用代码段的快捷方式，就像Netbeans中的「sout」一样。
+使用Visual Studio Code，很容易创建「代码片段」，即用于快速生成常用代码段的快捷方式，就像Netbeans中的「sout」一样。
 
 <!-- Instructions for creating snippets can be found [here](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_creating-your-own-snippets).-->
 查看如何创建片段的说明可以[在此](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_creating-your-own-snippets)处找到。
 
 <!-- Useful, ready-made snippets can also be found as VS Code plugins, in the [marketplace](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets).-->
-可以在[市场](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets)中找到有用的现成的片段也可以作为VS Code插件。
+可以在[应用市场](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets)中找到有用的现成的片段也可以作为VS Code插件。
 
 <!-- The most important snippet is the one for the <em>console.log()</em> command, for example, <em>clog</em>. This can be created like so:-->
 最重要的片段是<em>console.log()</em> 命令，例如<em>clog</em>。可以这样创建：
@@ -74,7 +73,7 @@ props value is [object Object]
 ```
 
 <!-- Debugging your code using _console.log()_ is so common that Visual Studio Code has that snippet built in. To use it, type _log_ and hit Tab to autocomplete. More fully featured _console.log()_ snippet extensions can be found in the [marketplace](https://marketplace.visualstudio.com/search?term=console.log&target=VSCode&category=All%20categories&sortBy=Relevance).-->
-使用`console.log()`调试你的代码是如此常见，以至于Visual Studio Code已经内置了该片段。要使用它，请键入`log`并按Tab键自动完成。更加功能强大的`console.log()`片段扩展可以在[市场](https://marketplace.visualstudio.com/search?term=console.log&target=VSCode&category=All%20categories&sortBy=Relevance)中找到。
+使用`console.log()`调试你的代码是如此常见，以至于Visual Studio Code已经内置了该片段。要使用它，请键入`log`并按Tab键自动完成。更加功能强大的`console.log()`片段扩展可以在[应用市场](https://marketplace.visualstudio.com/search?term=console.log&target=VSCode&category=All%20categories&sortBy=Relevance)中找到。
 
 ### JavaScript Arrays
 
@@ -82,34 +81,36 @@ props value is [object Object]
 从这里开始，我们将一直使用JavaScript [数组](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)的函数式编程操作符，如_find_、_filter_和_map_ - 一直都是这样。
 
 <!-- If operating arrays with functional operators feels foreign to you, it is worth watching at least the first three parts of the YouTube video series [Functional Programming in JavaScript](https://www.youtube.com/playlist?list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84):-->
-如果用功能操作符操作数组对你来说感觉陌生，值得至少观看YouTube视频系列[Functional Programming in JavaScript](https://www.youtube.com/playlist?list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84)的前三部分：
+如果用函数式操作符操作数组对你来说感觉陌生，值得至少观看YouTube视频系列[Functional Programming in JavaScript](https://www.youtube.com/playlist?list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84)的前三部分：
 
 <!-- - [Higher-order functions](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84)-->
+
 - [高阶函数](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84)
 <!-- - [Map](https://www.youtube.com/watch?v=bCqtb-Z5YGQ&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84&index=2)-->
-# 地图
-[视频](https://www.youtube.com/watch?v=bCqtb-Z5YGQ&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84&index=2)
-<!-- - [Reduce basics](https://www.youtube.com/watch?v=Wl98eZpkp-c&t=31s)-->
-[减少基础](https://www.youtube.com/watch?v=Wl98eZpkp-c&t=31s)
+
+- [Map](https://www.youtube.com/watch?v=bCqtb-Z5YGQ&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84&index=2)
+  <!-- - [Reduce basics](https://www.youtube.com/watch?v=Wl98eZpkp-c&t=31s)-->
+- [Reduce基础](https://www.youtube.com/watch?v=Wl98eZpkp-c&t=31s)
 
 ### Event Handlers Revisited
 
-<!-- Based on last year''s course, event handling has proved to be difficult.-->
-根据去年的课程，事件处理已被证明是困难的。
+<!-- Based on last year's course, event handling has proved to be difficult.-->
+根据去年的课程，事件处理被证明是一个难点。
 
-<!-- It''s worth reading the revision chapter at the end of the previous part - [event handlers revisited](/en/part1/a_more_complex_state_debugging_react_apps#event-handling-revisited) - if it feels like your own knowledge on the topic needs some brushing up.-->
-如果感觉自己对这个主题的知识需要一些刷新，建议阅读前一部分的结尾处的修订章节 - [事件处理再探](/en/part1/a_more_complex_state_debugging_react_apps#event-handling-revisited)。
+<!-- It's worth reading the revision chapter at the end of the previous part - [event handlers revisited](/en/part1/a_more_complex_state_debugging_react_apps#event-handling-revisited) - if it feels like your own knowledge on the topic needs some brushing up.-->
+如果感觉自己对这个主题的知识需要一些更新，建议阅读前一章节的结尾处的修订章节 - [事件处理复习](/en/part1/a_more_complex_state_debugging_react_apps#event-handling-revisited)。
 
 <!-- Passing event handlers to the child components of the <i>App</i> component has raised some questions. A small revision on the topic can be found [here](/en/part1/a_more_complex_state_debugging_react_apps#passing-event-handlers-to-child-components).-->
 传递事件处理程序给<i>App</i>组件的子组件引发了一些问题。 关于该主题的小修订可以在[这里](/en/part1/a_more_complex_state_debugging_react_apps#passing-event-handlers-to-child-components)找到。
 
 ### Rendering Collections
 
-<!-- We will now do the 'frontend', or the browser-side application logic, in React for an application that''s similar to the example application from [part 0](/en/part0)-->
+<!-- We will now do the 'frontend', or the browser-side application logic, in React for an application that's similar to the example application from [part 0](/en/part0)-->
 我们现在要用React来做'前端'，或者浏览器端应用程序逻辑，这个应用程序类似于[第0章节](/en/part0)中的示例应用程序。
 
-<!-- Let''s start with the following (the file <i>App.js</i>):-->
-# 开始以下（文件<i>App.js</i>）：
+<!-- Let's start with the following (the file <i>App.js</i>):-->
+
+让我们从如下代码开始（文件<i>App.js</i>）：
 
 ```js
 const App = (props) => {
@@ -166,10 +167,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 每一条笔记都包含它的文本内容，一个_布尔值_用于标记该笔记是否被分类为重要，以及一个唯一的<i>id</i>。
 
 <!-- The example above works due to the fact that there are exactly three notes in the array.-->
-上面的例子之所以有效是因为数组中有完全三个笔记。
+上面的例子之所以有效是因为数组中有完整的三个笔记。
 
 <!-- A single note is rendered by accessing the objects in the array by referring to a hard-coded index number:-->
-通过引用硬编码的索引号来访问数组中的对象，就可以渲染出一个音符：
+通过引用硬编码的索引号来访问数组中的对象，就可以渲染出一个笔记：
 
 ```js
 <li>{notes[1].content}</li>
@@ -217,7 +218,7 @@ const App = (props) => {
 因为生成<i>li</i>标签的代码是JavaScript，它必须像其他所有JavaScript代码一样，用大括号包裹在JSX模板中。
 
 <!-- Parannetaan koodin luetteloa vielä jakamalla nuolifunktion määrittely useammalle riville: -->
-<!-- We will also make the code more readable by separating the arrow function''s declaration across multiple lines:-->
+<!-- We will also make the code more readable by separating the arrow function's declaration across multiple lines:-->
 我们还可以通过将箭头函数的声明拆分到多行来使代码更易读：
 
 ```js
@@ -244,15 +245,15 @@ const App = (props) => {
 ### Key-attribute
 
 <!-- Even though the application seems to be working, there is a nasty warning in the console:-->
-尽管应用似乎正在工作，但控制台中有一个讨厌的警告：
+尽管应用似乎工作良好，但控制台中有一个讨厌的警告：
 
 ![unique key prop console error](../../images/2/1a.png)
 
 <!-- As the linked [React page](https://react.dev/learn/rendering-lists#keeping-list-items-in-order-with-key) in the error message suggests; the list items, i.e. the elements generated by the _map_ method, must each have a unique key value:  an attribute called <i>key</i>.-->
 正如错误消息中链接的[React页面](https://react.dev/learn/rendering-lists#keeping-list-items-in-order-with-key)所建议的；列表项，即_map_方法生成的元素，必须每个都有一个唯一的键值：一个叫做<i>key</i>的属性。
 
-<!-- Let''s add the keys:-->
-让我们添加钥匙：
+<!-- Let's add the keys:-->
+让我们添加key：
 
 ```js
 const App = (props) => {
@@ -307,11 +308,10 @@ const notes = [
 ]
 ```
 
-<!-- Let''s pause for a moment and examine how _map_ works.-->
+<!-- Let's pause for a moment and examine how _map_ works.-->
 让我们暂停一会儿，看看_map_是如何工作的。
 
-
-<!-- If the following code is added to, let''s say, the end of the file:-->
+<!-- If the following code is added to, let's say, the end of the file:-->
 如果把以下代码添加到，比如说，文件末尾：
 
 ```js
@@ -320,23 +320,23 @@ console.log(result)
 ```
 
 <i>[1, 2, 3]</i>  will be printed to the console.
+
+控制台中会打印<i>[1, 2, 3]</i>  
+
 <!--  _map_ always creates a new array, the elements of which have been created from the elements of the original array by <i>mapping</i>: using the function given as a parameter to the _map_ method.-->
 _map_ 总是创建一个新的数组，其元素是通过 _map_ 方法的参数给出的函数从原始数组的元素<i>映射</i>而来的。
 
+<!-- The function is to **provide an easy way** to **manage information**-->
 
-<!-- The function is-->
-to **provide an easy way** to **manage information**
-
-**提供一种简便的方式来管理信息**
+函数**提供一种简便的方式来管理信息**
 
 ```js
 note => note.id
 ```
 
-<!-- Which is an arrow function written in compact form. The full form would be:-->
-`const add = (a, b) => { return a + b; }`
+<!-- Which is an arrow function written in compact form. The full form would be: `const add = (a, b) => { return a + b; }`-->
 
-const add = (a, b) => a + b;
+也就是利用箭头函数来包装表单，表单的完整形式为：`const add = (a, b) => a + b`;
 
 ```js
 (note) => {
@@ -371,8 +371,7 @@ notes.map(note =>
 <!-- which generates a <i>li</i> tag containing the contents of the note from each note object.-->
 生成一个包含每个笔记对象中笔记内容的<i>li</i>标签。
 
-<!-- Because the function parameter passed to the _map_ method --->
-`lambda x: x * 2` - is a lambda expression, it is sometimes referred to as an anonymous function.
+<!-- Because the function parameter passed to the _map_ method `lambda x: x * 2` - is a lambda expression, it is sometimes referred to as an anonymous function. --->
 
 因为传递给_map_方法的函数参数 - `lambda x: x * 2` - 是一个lambda表达式，它有时被称为匿名函数。
 
@@ -412,7 +411,7 @@ notes.map((note, i) => ...)
 ```
 
 <!-- This is, however, **not recommended** and can create undesired problems even if it seems to be working just fine.-->
-这不建议，即使看起来一切正常，也可能带来不必要的问题。
+不建议这么做，即使看起来一切正常，也可能带来不必要的问题。
 
 <!-- Read more about this in [this article](https://robinpokorny.medium.com/index-as-a-key-is-an-anti-pattern-e0349aece318).-->
 阅读更多关于此的文章，请参阅[此文章](https://robinpokorny.medium.com/index-as-a-key-is-an-anti-pattern-e0349aece318)。
@@ -443,7 +442,7 @@ const App = ({ notes }) => { //highlight-line
 如果您忘记了什么是解构以及它是如何工作的，请查看[解构部分](/en/part1/component_state_event_handlers#destructuring)。
 
 <!-- We''ll separate displaying a single note into its own component <i>Note</i>:-->
-我们将将单个笔记的显示分离到它自己的组件<i>笔记</i>中：
+我们将单个笔记的显示分离到它自己的组件<i>笔记</i>中：
 
 ```js
 // highlight-start
@@ -488,7 +487,7 @@ import App from "./App"
 <!-- [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) two modules, enabling them to be used in that file. The module <i>react-dom/client</i> into the variable _ReactDOM_, and the module that defines the main component of the app is placed into the variable _App_-->
 [导入](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/import)两个模块，使其可以在该文件中使用。将模块<i>react-dom/client</i>导入变量_ReactDOM_中，将定义应用程序主组件的模块导入变量_App_中。
 
-<!-- Let''s move our <i>Note</i> component into its own module.-->
+<!-- Let's move our <i>Note</i> component into its own module.-->
 让我们把我们的<i>笔记</i>组件移动到它自己的模块中。
 
 <!-- In smaller applications, components are usually placed in a directory called <i>components</i>, which is in turn placed within the <i>src</i> directory. The convention is to name the file after the component.-->
@@ -497,7 +496,8 @@ import App from "./App"
 <!-- Now, we''ll create a directory called <i>components</i> for our application and place a file named <i>Note.js</i> inside.-->
 现在，我们为我们的应用程序创建一个名为<i>components</i>的目录，并在其中放置一个名为<i>Note.js</i>的文件。
 <!-- The contents of the Note.js file are as follows:-->
-# 注意事项.js文件的内容如下：
+
+Note.js文件的内容如下：
 
 ```js
 const Note = ({ note }) => {
@@ -533,7 +533,7 @@ const App = ({ notes }) => {
 './components/Note'
 ```
 
-<!-- The period - <i>.</i> - in the beginning refers to the current directory, so the module''s location is a file called <i>Note.js</i> in the <i>components</i> sub-directory of the current directory. The filename extension _.js_ can be omitted.-->
+<!-- The period - <i>.</i> - in the beginning refers to the current directory, so the module's location is a file called <i>Note.js</i> in the <i>components</i> sub-directory of the current directory. The filename extension _.js_ can be omitted.-->
 <i>.</i> 开头的符号指的是当前目录，因此模块的位置是当前目录的<i>components</i>子目录中的一个叫做<i>Note.js</i>的文件。可以省略文件名的扩展名 _.js_ 。
 
 <!-- Modules have plenty of other uses other than enabling component declarations to be separated into their own files. We will get back to them later in this course.-->
@@ -556,7 +556,7 @@ const App = ({ notes }) => {
 早在你的编程生涯初期（即使是像您这样编程30年的人），经常发生的情况是应用程序完全崩溃。 对于动态类型的语言（例如JavaScript），编译器不检查数据类型，情况更加严重。 例如，函数变量或返回值。
 
 <!-- A "React explosion" can, for example, look like this:-->
-一个“React 爆炸”可以看起来像这样：
+一个“React 应用崩溃”可以看起来像这样：
 
 ![react sample error](../../images/2/3b.png)
 
@@ -604,12 +604,12 @@ const App = () => {
 ```
 
 <!-- To see the printing in the console, we must scroll up over the long red wall of errors.-->
-要看到控制台中的打印，我们必须滚动超过长长的红色错误墙。
+要看到控制台中的打印信息，我们必须滚动长长的红色错误墙。
 
 ![initial printing of the console](../../images/2/4b.png)
 
-<!-- When one thing is found to be working, it''s time to log deeper. If the component has been declared as a single statement or a function without a return, it makes printing to the console harder.-->
-当一件事情发现可以正常工作时，就是时候深入记录了。如果组件已被声明为单个语句或没有返回值的函数，就会使打印到控制台变得更难。
+<!-- When one thing is found to be working, it's time to log deeper. If the component has been declared as a single statement or a function without a return, it makes printing to the console harder.-->
+当第一个打印发现可以正常工作时，就是时候深入打印日志了。如果组件已被声明为单个语句或没有返回值的函数，就会使打印到控制台变得更难。
 
 ```js
 const Course = ({ course }) => (
@@ -620,7 +620,7 @@ const Course = ({ course }) => (
 ```
 
 <!-- The component should be changed to its longer form for us to add the printing:-->
-该组件应该改变为其较长的形式，以便我们添加印刷：
+该组件应该改变为其较长的形式，以便我们添加打印：
 
 ```js
 const Course = ({ course }) => {
@@ -649,33 +649,32 @@ const Course = (props) => { // highlight-line
 ```
 
 <!-- If the problem has still not been resolved, sadly there isn''t much to do apart from continuing to bug-hunt by sprinkling more _console.log_ statements around your code.-->
-如果问题仍未得到解决，可惜除了继续在你的代码中撒满 _console.log_ 语句以便进行 bug 搜索，别无他法。
+如果问题仍未得到解决，除了继续在你的代码中撒满 _console.log_ 语句以便进行 bug 搜索，别无他法。
 
 <!-- I added this chapter to the material after the model answer for the next question exploded completely (due to props being of the wrong type), and I had to debug it using <em>console.log</em>.-->
-我在模型答案对下一个问题完全爆炸（因为props的类型错误）之后，把这一章节添加到材料中，并且我不得不使用<em>console.log</em>来调试它。
 
-### Web developer''s oath
+我在模型答案对下一个问题完全崩溃（因为props的类型错误）之后，把这一章节添加到材料中，并且我不得不使用<em>console.log</em>来调试它。
+
+### Web developer's oath
 
 <!-- Before the exercises, let me remind what you promised at the end of the previous part.-->
-在练习之前，让我提醒一下你在上一部分结束时所做的承诺。
+在练习之前，让我提醒一下你在上一章节结束时所做的承诺。
 
 <!-- Programming is hard, that is why I will use all the possible means to make it easier-->
-编程很难，这就是为什么我会用一切可能的手段来让它变得更容易。
+
+- 编程很难，这就是为什么我会用一切可能的手段来让它变得更容易。
 
 <!-- - I will have my browser developer console open all the time-->
-我会一直开著浏览器开发者控制台。
-<!-- - I progress with small steps-->
-我一步一步地进步。
-<!-- - I will write lots of _console.log_ statements to make sure I understand how the code behaves and to help pinpointing problems-->
-.
 
-我会写很多`console.log`语句来确保我理解代码的行为，并帮助确定问题。
-<!-- - If my code does not work, I will not write more code. Instead, I start deleting the code until it works or just return to a state when everything still was still working-->
-.
-
-如果我的代码不起作用，我不会再编写更多的代码。相反，我开始删除代码，直到它可以工作，或者只是返回到一个一切仍然正常的状态。
-<!-- - When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](/en/part0/general_info#how-to-get-help-in-discord-telegram) how to ask for help-->
-当我在课程 Discord 或 Telegram 频道或其他地方寻求帮助时，我会正确地提出问题，请参见[此处](/en/part0/general_info#how-to-get-help-in-discord-telegram)如何寻求帮助。
+- 我会一直开著浏览器开发者控制台。
+  <!-- - I progress with small steps-->
+- 我一步一步地进步。
+  <!-- - I will write lots of _console.log_ statements to make sure I understand how the code behaves and to help pinpointing problems-->
+- 我会写很多`console.log`语句来确保我理解代码的行为，并帮助确定问题。
+  <!-- - If my code does not work, I will not write more code. Instead, I start deleting the code until it works or just return to a state when everything still was still working-->
+- 如果我的代码不起作用，我不会再编写更多的代码。相反，我开始删除代码，直到它可以工作，或者只是返回到一个一切仍然正常的状态。
+  <!-- - When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](/en/part0/general_info#how-to-get-help-in-discord-telegram) how to ask for help-->
+- 当我在课程 Discord 或 Telegram 频道或其他地方寻求帮助时，我会正确地提出问题，请参见[此处](/en/part0/general_info#how-to-get-help-in-discord-telegram)如何寻求帮助。
 
 </div>
 
@@ -700,8 +699,8 @@ const Course = (props) => { // highlight-line
 
 <h4>2.1: Course information step6</h4>
 
-<!-- Let''s finish the code for rendering course contents from exercises 1.1 - 1.5. You can start with the code from the model answers. The model answers for part 1 can be found by going to the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen), clicking on <i>my submissions</i> at the top, and in the row corresponding to part 1 under the <i>solutions</i> column clicking on <i>show</i>. To see the solution to the <i>course info</i> exercise, click on _index.js_ under <i>kurssitiedot</i> ("kurssitiedot" means "course info").-->
-让我们完成从练习1.1 - 1.5渲染课程内容的代码。您可以从模型答案开始。可以通过访问[提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)，点击顶部的<i>我的提交</i>，在<i>解答</i>列中对应于第1部分的行上点击<i>显示</i>来找到第1部分的模型答案。要查看<i>课程信息</i>练习的解决方案，请在<i>kurssitiedot</i>（“kurssitiedot”的意思是“课程信息”）下点击_index.js_。
+<!-- Let's finish the code for rendering course contents from exercises 1.1 - 1.5. You can start with the code from the model answers. The model answers for part 1 can be found by going to the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen), clicking on <i>my submissions</i> at the top, and in the row corresponding to part 1 under the <i>solutions</i> column clicking on <i>show</i>. To see the solution to the <i>course info</i> exercise, click on _index.js_ under <i>kurssitiedot</i> ("kurssitiedot" means "course info").-->
+让我们完成从练习1.1 - 1.5渲染课程内容的代码。您可以从模型答案开始。可以通过访问[提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)，点击顶部的<i>我的提交</i>，在<i>解答</i>列中对应于第1章节的行上点击<i>显示</i>来找到第1章节的模型答案。要查看<i>课程信息</i>练习的解决方案，请在<i>kurssitiedot</i>（“kurssitiedot”的意思是“课程信息”）下点击_index.js_。
 
 
 <!-- **Note that if you copy a project from one place to another, you might have to delete the <i>node\_modules</i> directory and install the dependencies again with the command _npm install_ before you can start the application.**-->
@@ -709,7 +708,7 @@ const Course = (props) => { // highlight-line
 <!-- Generally, it's not recommended that you copy a project's whole contents and/or add the <i>node\_modules</i> directory to the version control system.-->
 一般来说，不建议您复制项目的所有内容并/或将<i>node\_modules</i>目录添加到版本控制系统中。
 
-<!-- Let''s change the <i>App</i> component like so:-->
+<!-- Let's change the <i>App</i> component like so:-->
 让我们更改<i>App</i> 组件如下：
 
 ```js
@@ -795,7 +794,7 @@ const total =
   parts.reduce((s, p) => someMagicHere)
 ```
 
-<!-- and does not work, it''s worth it to use <i>console.log</i>, which requires the arrow function to be written in its longer form:-->
+<!-- and does not work, it's worth it to use <i>console.log</i>, which requires the arrow function to be written in its longer form:-->
 如果箭头函数不起作用，值得使用<i>console.log</i>，它需要把箭头函数写成它的较长形式：
 
 ```js
@@ -815,7 +814,7 @@ const total = parts.reduce((s, p) => {
 
 <h4>2.4: Course information step9</h4>
 
-<!-- Let''s extend our application to allow for an <i>arbitrary number</i> of courses:-->
+<!-- Let's extend our application to allow for an <i>arbitrary number</i> of courses:-->
 让我们扩展我们的应用程序，以允许<i>任意数量</i>的课程：
 
 ```js

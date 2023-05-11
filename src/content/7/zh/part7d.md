@@ -9,7 +9,7 @@ lang: zh
 <!-- Developing with React was notorious for requiring tools that were very difficult to configure. These days, getting started with React development is almost painless thanks to [create-react-app](https://github.com/facebookincubator/create-react-app). A better development workflow has probably never existed for browser-side JavaScript development.-->
 开发React一直以来都以配置非常困难而臭名昭著。如今，由于[create-react-app](https://github.com/facebookincubator/create-react-app)，开始React开发几乎可以说是无痛的。对于浏览器端JavaScript开发来说，可能从未有过更好的开发工作流程。
 
-<!-- We cannot rely on the black magic of create-react-app forever and it''s time for us to take a look under the hood. One of the key players in making React applications functional is a tool called [webpack](https://webpack.js.org/).-->
+<!-- We cannot rely on the black magic of create-react-app forever and it's time for us to take a look under the hood. One of the key players in making React applications functional is a tool called [webpack](https://webpack.js.org/).-->
 我们不能永远依赖create-react-app的黑魔法，是时候让我们看看引擎盖下面的情况了。使React应用程序可以正常工作的关键工具之一是[webpack](https://webpack.js.org/)。
 
 ### Bundling
@@ -56,7 +56,7 @@ lang: zh
 </html>
 ```
 
-<!-- As we can see from the example application that was created with create-react-app, the build script also bundles the application''s CSS files into a single <i>/static/css/main.1becb9f2.css</i> file.-->
+<!-- As we can see from the example application that was created with create-react-app, the build script also bundles the application's CSS files into a single <i>/static/css/main.1becb9f2.css</i> file.-->
 正如我们从使用`create-react-app`创建的示例应用程序中所看到的，构建脚本还将应用程序的CSS文件打包到单个<i>/static/css/main.1becb9f2.css</i>文件中。
 
 <!-- In practice, bundling is done so that we define an entry point for the application, which typically is the <i>index.js</i> file. When webpack bundles the code, it includes all of the code that the entry point imports, the code that its imports import, and so on.-->
@@ -65,13 +65,13 @@ lang: zh
 <!-- Since part of the imported files are packages like React, Redux, and Axios, the bundled JavaScript file will also contain the contents of each of these libraries.-->
 由于部分导入的文件是诸如React、Redux和Axios等包，因此打包的JavaScript文件也将包含每个库的内容。
 
-<!-- > The old way of dividing the application''s code into multiple files was based on the fact that the <i>index.html</i> file loaded all of the separate JavaScript files of the application with the help of script tags. This resulted in  decreased performance, since the loading of each separate file results in some overhead. For this reason, these days the preferred method is to bundle the code into a single file.-->
+<!-- > The old way of dividing the application's code into multiple files was based on the fact that the <i>index.html</i> file loaded all of the separate JavaScript files of the application with the help of script tags. This resulted in  decreased performance, since the loading of each separate file results in some overhead. For this reason, these days the preferred method is to bundle the code into a single file.-->
 > 老的分割应用程序代码到多个文件的方式是基于<i>index.html</i>文件通过使用脚本标签来加载应用程序的所有单独的JavaScript文件。由于每个单独文件的加载都会带来一定的开销，这导致性能下降。因此，如今的首选方法是将代码打包到一个单独的文件中。
 
 <!-- Next, we will create a suitable webpack configuration for a React application by hand from scratch.-->
 接下来，我们将从零开始手动为 React 应用程序创建一个合适的 webpack 配置。
 
-<!-- Let''s create a new directory for the project with the following subdirectories (<i>build</i> and <i>src</i>) and files:-->
+<!-- Let's create a new directory for the project with the following subdirectories (<i>build</i> and <i>src</i>) and files:-->
 让我们为项目创建一个新的目录，其中包含以下子目录（<i>build</i> 和 <i>src</i>）和文件：
 
 <pre>
@@ -95,7 +95,7 @@ lang: zh
 }
 ```
 
-<!-- Let''s install webpack with the command:-->
+<!-- Let's install webpack with the command:-->
 让我们用以下命令安装webpack：
 
 ```bash
@@ -152,7 +152,7 @@ module.exports = config
 // ...
 ```
 
-<!-- Let''s add some more code to the <i>src/index.js</i> file:-->
+<!-- Let's add some more code to the <i>src/index.js</i> file:-->
 让我们在<i>src/index.js</i>文件中再添加一些代码：
 
 ```js
@@ -173,7 +173,7 @@ const hello = name => {
 eval("const hello = name => {\n  console.log(`hello ${name}`)\n}\n\n//# sourceURL=webpack://webpack-osa7/./src/index.js?");
 ```
 
-<!-- Let''s add an <i>App.js</i> file under the <i>src</i> directory with the following content:-->
+<!-- Let's add an <i>App.js</i> file under the <i>src</i> directory with the following content:-->
 让我们在<i>src</i>目录下添加一个<i>App.js</i>文件，其内容如下：
 
 ```js
@@ -184,7 +184,7 @@ const App = () => {
 export default App
 ```
 
-<!-- Let''s import and use the <i>App</i> module in the <i>index.js</i> file:-->
+<!-- Let's import and use the <i>App</i> module in the <i>index.js</i> file:-->
 在`index.js`文件中，让我们导入并使用`App`模块：
 
 ```js
@@ -209,7 +209,7 @@ App()
 
 ### Configuration file
 
-<!-- Let''s take a closer look at the contents of our current <i>webpack.config.js</i> file:-->
+<!-- Let's take a closer look at the contents of our current <i>webpack.config.js</i> file:-->
 让我们仔细看一下我们当前的<i>webpack.config.js</i>文件的内容：
 
 ```js
@@ -228,7 +228,7 @@ const config = () => {
 module.exports = config
 ```
 
-<!-- The configuration file has been written in JavaScript and the function returning the configuration object is exported using Node''s module syntax.-->
+<!-- The configuration file has been written in JavaScript and the function returning the configuration object is exported using Node's module syntax.-->
 配置文件已经用JavaScript编写，并且使用Node的模块语法导出返回配置对象的函数。
 
 <!-- Our minimal configuration definition almost explains itself. The [entry](https://webpack.js.org/concepts/#entry) property of the configuration object specifies the file that will serve as the entry point for bundling the application.-->
@@ -246,7 +246,7 @@ module.exports = config
 npm install react react-dom
 ```
 
-<!-- And let''s turn our application into a React application by adding the familiar definitions in the <i>index.js</i> file:-->
+<!-- And let's turn our application into a React application by adding the familiar definitions in the <i>index.js</i> file:-->
 让我们通过在<i>index.js</i>文件中添加熟悉的定义，将应用程序转换为React应用程序：
 
 ```js
@@ -317,7 +317,7 @@ const App = () => {
 <!-- We can use [loaders](https://webpack.js.org/concepts/loaders/) to inform webpack of the files that need to be processed before they are bundled.-->
 我们可以使用[加载器](https://webpack.js.org/concepts/loaders/)来通知webpack在将它们捆绑在一起之前需要处理的文件。
 
-<!-- Let''s configure a loader to our application that transforms the JSX code into regular JavaScript:-->
+<!-- Let's configure a loader to our application that transforms the JSX code into regular JavaScript:-->
 让我们配置一个加载器到我们的应用程序，用于将JSX代码转换为常规JavaScript：
 
 ```js
@@ -368,7 +368,7 @@ module.exports = config
 <!-- The <i>test</i> property specifies that the loader is for files that have names ending with <i>.js</i>. The <i>loader</i> property specifies that the processing for those files will be done with [babel-loader](https://github.com/babel/babel-loader). The <i>options</i> property is used for specifying parameters for the loader, which configure its functionality.-->
 <i>test</i> 属性指定加载器是为以 <i>.js</i> 结尾的文件而准备的。<i>loader</i> 属性指定这些文件的处理将由 [babel-loader](https://github.com/babel/babel-loader) 来完成。<i>options</i> 属性用于指定加载器的参数，以配置其功能。
 
-<!-- Let''s install the loader and its required packages as a <i>development dependency</i>:-->
+<!-- Let's install the loader and its required packages as a <i>development dependency</i>:-->
 让我们把加载器及其所需的软件包安装为<i>开发依赖项</i>：
 
 ```bash
@@ -390,7 +390,7 @@ const App = () =>
   )
 ```
 
-<!-- As we can see from the example above, the React elements that were written in JSX are now created with regular JavaScript by using React''s [createElement](https://reactjs.org/docs/react-without-jsx.html) function.-->
+<!-- As we can see from the example above, the React elements that were written in JSX are now created with regular JavaScript by using React's [createElement](https://reactjs.org/docs/react-without-jsx.html) function.-->
 正如我们从上面的示例中所看到的，用JSX写的React元素现在通过使用React的[createElement](https://reactjs.org/docs/react-without-jsx.html)函数用普通JavaScript创建。
 
 <!-- You can test the bundled application by opening the <i>build/index.html</i> file with the <i>open file</i> functionality of your browser:-->
@@ -425,7 +425,7 @@ import 'regenerator-runtime/runtime.js'
 通过使用前面部分的配置，我们正在利用[babel](https://babeljs.io/)将包含JSX的代码<i>转译</i>成普通的JavaScript，它目前是这项工作中最受欢迎的工具。
 
 <!-- As mentioned in part 1, most browsers do not support the latest features that were introduced in ES6 and ES7, and for this reason, the code is usually transpiled to a version of JavaScript that implements the ES5 standard.-->
-正如在第一部分中提到的，大多数浏览器不支持ES6和ES7中引入的最新功能，因此，通常将代码转换为实现ES5标准的JavaScript版本。
+正如在第一章节中提到的，大多数浏览器不支持ES6和ES7中引入的最新功能，因此，通常将代码转换为实现ES5标准的JavaScript版本。
 
 <!-- The transpilation process that is executed by Babel is defined with <i>plugins</i>. In practice, most developers use ready-made [presets](https://babeljs.io/docs/plugins/) that are groups of pre-configured plugins.-->
 Babel 执行的转译过程定义为 <i>插件</i>。实际上，大多数开发人员使用预先配置的 [预设]（https://babeljs.io/docs/plugins/）插件组。
@@ -443,7 +443,7 @@ Babel 执行的转译过程定义为 <i>插件</i>。实际上，大多数开发
 }
 ```
 
-<!-- Let''s add the [@babel/preset-env](https://babeljs.io/docs/plugins/preset-env/) plugin that contains everything needed to take code using all of the latest features and transpile it to code that is compatible with the ES5 standard:-->
+<!-- Let's add the [@babel/preset-env](https://babeljs.io/docs/plugins/preset-env/) plugin that contains everything needed to take code using all of the latest features and transpile it to code that is compatible with the ES5 standard:-->
 让我们添加[@babel/preset-env](https://babeljs.io/docs/plugins/preset-env/)插件，它包含了所有的东西，可以将使用最新功能的代码转换为与ES5标准兼容的代码：
 
 ```js
@@ -456,7 +456,7 @@ Babel 执行的转译过程定义为 <i>插件</i>。实际上，大多数开发
 }
 ```
 
-<!-- Let''s install the preset with the command:-->
+<!-- Let's install the preset with the command:-->
 让我们用命令安装预设：`let's install the preset with the command`
 
 ```bash
@@ -487,7 +487,7 @@ var App = function App() {
 }
 ```
 
-<!-- Then let''s use the style in the <i>App</i> component:-->
+<!-- Then let's use the style in the <i>App</i> component:-->
 那么我们就在<i>App</i>组件中使用这种样式：
 
 ```js
@@ -541,7 +541,7 @@ import './index.css'
 <!-- With this configuration, the CSS definitions are included in the <i>main.js</i> file of the application. For this reason, there is no need to separately import the <i>CSS</i> styles in the main <i>index.html</i> file of the application.-->
 随着这个配置，CSS 定义被包含在应用程序的<i>main.js</i>文件中。因此，无需在应用程序的主<i>index.html</i>文件中单独导入<i>CSS</i>样式。
 
-<!-- If needed, the application''s CSS can also be generated into its own separate file by using the [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin).-->
+<!-- If needed, the application's CSS can also be generated into its own separate file by using the [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin).-->
 如果需要，可以使用[mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin)将应用程序的CSS生成到自己的单独文件中。
 
 <!-- When we install the loaders:-->
@@ -559,14 +559,14 @@ bundling 将会再次成功，应用程序获得新的样式。
 <!-- The current configuration makes it possible to develop our application but the workflow is awful (to the point where it resembles the development workflow with Java). Every time we make a change to the code, we have to bundle it and refresh the browser to test the code.-->
 目前的配置使我们可以开发应用程序，但工作流程很糟糕（甚至可以说和使用Java开发的工作流程相似）。每次我们对代码做出更改时，我们都必须打包它，然后刷新浏览器才能测试代码。
 
-<!-- The [webpack-dev-server](https://webpack.js.org/guides/development/#using-webpack-dev-server) offers a solution to our problems. Let''s install it with the command:-->
+<!-- The [webpack-dev-server](https://webpack.js.org/guides/development/#using-webpack-dev-server) offers a solution to our problems. Let's install it with the command:-->
 [webpack-dev-server](https://webpack.js.org/guides/development/#using-webpack-dev-server) 提供了解决我们问题的解决方案。让我们使用以下命令安装它：
 
 ```js
 npm install --save-dev webpack-dev-server
 ```
 
-<!-- Let''s define an npm script for starting the dev server:-->
+<!-- Let's define an npm script for starting the dev server:-->
 让我们为启动开发服务器定义一个npm脚本：
 
 ```js
@@ -580,7 +580,7 @@ npm install --save-dev webpack-dev-server
 }
 ```
 
-<!-- Let''s also add a new <i>devServer</i> property to the configuration object in the <i>webpack.config.js</i> file:-->
+<!-- Let's also add a new <i>devServer</i> property to the configuration object in the <i>webpack.config.js</i> file:-->
 让我们也在`webpack.config.js`文件中的配置对象中添加一个新的`devServer`属性：
 
 ```js
@@ -607,7 +607,7 @@ const config = {
 <!-- The process for updating the code is fast. When we use the dev-server, the code is not bundled the usual way into the <i>main.js</i> file. The result of the bundling exists only in memory.-->
 进行代码更新的过程很快。当我们使用dev-server时，代码不会以通常的方式打包到<i>main.js</i>文件中。捆绑的结果只存在于内存中。
 
-<!-- Let''s extend the code by changing the definition of the <i>App</i> component as shown below:-->
+<!-- Let's extend the code by changing the definition of the <i>App</i> component as shown below:-->
 让我们通过更改如下所示的<i>App</i>组件的定义来扩展代码：
 
 ```js
@@ -635,7 +635,7 @@ export default App
 
 ### Source maps
 
-<!-- Let''s extract the click handler into its own function and store the previous value of the counter in its own <i>values</i> state:-->
+<!-- Let's extract the click handler into its own function and store the previous value of the counter in its own <i>values</i> state:-->
 让我们把点击处理程序提取到它自己的函数中，并将计数器之前的值存储在它自己的<i>值</i>状态中：
 
 ```js
@@ -720,7 +720,7 @@ Webpack 需要在我们对它的配置做出更改时重新启动。也可以让
 
 ![devtools debugger paused just before offending line](../../images/7/28.png)
 
-<!-- Let''s fix the bug by initializing the state of <i>values</i> as an empty array:-->
+<!-- Let's fix the bug by initializing the state of <i>values</i> as an empty array:-->
 让我们通过将<i>values</i>的状态初始化为一个空数组来修复这个 bug：
 
 ```js
@@ -736,7 +736,7 @@ const App = () => {
 <!-- When we deploy the application to production, we are using the <i>main.js</i> code bundle that is generated by webpack. The size of the <i>main.js</i> file is 1009487 bytes even though our application only contains a few lines of our code. The large file size is because the bundle also contains the source code for the entire React library. The size of the bundled code matters since the browser has to load the code when the application is first used. With high-speed internet connections, 1009487 bytes is not an issue, but if we were to keep adding more external dependencies, loading speeds could become an issue, particularly for mobile users.-->
 当我们将应用程序部署到生产环境时，我们使用由webpack生成的<i>main.js</i>代码包。尽管我们的应用程序只包含几行代码，<i>main.js</i>文件的大小仍为1009487字节。文件大小很大是因为包也包含了整个React库的源代码。该包的大小很重要，因为当应用程序第一次使用时，浏览器必须加载代码。对于高速互联网连接，1009487字节不是问题，但是如果我们继续添加更多的外部依赖项，加载速度可能成为问题，特别是对于移动用户。
 
-<!-- If we inspect the contents of the bundle file, we notice that it could be greatly optimized in terms of file size by removing all of the comments. There''s no point in manually optimizing these files, as there are many existing tools for the job.-->
+<!-- If we inspect the contents of the bundle file, we notice that it could be greatly optimized in terms of file size by removing all of the comments. There's no point in manually optimizing these files, as there are many existing tools for the job.-->
 如果我们检查捆绑文件的内容，我们会注意到它可以通过移除所有评论来大大优化文件大小。 手动优化这些文件没有意义，因为有许多现有的工具可以完成这项工作。
 
 <!-- The optimization process for JavaScript files is called <i>minification</i>. One of the leading tools intended for this purpose is [UglifyJS](http://lisperator.net/uglifyjs/).-->
@@ -781,10 +781,10 @@ function h(){if(!d){var e=u(p);d=!0;for(var t=c.length;t;){for(s=c,c=[];++f<t;)s
 
 ### Development and production configuration
 
-<!-- Next, let''s add a backend to our application by repurposing the now-familiar note application backend.-->
+<!-- Next, let's add a backend to our application by repurposing the now-familiar note application backend.-->
 接下来，让我们通过重新利用现在熟悉的笔记应用后端来为我们的应用程序添加一个后端。
 
-<!-- Let''s store the following content in the <i>db.json</i> file:-->
+<!-- Let's store the following content in the <i>db.json</i> file:-->
 让我们把以下内容存储在<i>db.json</i>文件中：
 
 ```json
@@ -857,7 +857,7 @@ export default App
 <!-- The address of the backend server is currently hardcoded in the application code. How can we change the address in a controlled fashion to point to the production backend server when the code is bundled for production?-->
 目前应用程序代码中将后端服务器的地址硬编码了。当编组代码用于生产时，我们如何以受控的方式更改地址以指向生产后端服务器？
 
-<!-- Webpack''s configuration function has two parameters, <i>env</i> and <i>argv</i>. We can use the latter to find out the <i>mode</i> defined in the npm script:-->
+<!-- Webpack's configuration function has two parameters, <i>env</i> and <i>argv</i>. We can use the latter to find out the <i>mode</i> defined in the npm script:-->
 Webpack 的配置功能有两个参数，<i>env</i> 和 <i>argv</i>。我们可以使用后者来查找 npm 脚本中定义的<i>mode</i>：
 
 ```js
@@ -873,7 +873,7 @@ const config = (env, argv) => { // highlight-line
 module.exports = config
 ```
 
-<!-- Now, if we want, we can set Webpack to work differently depending on whether the application''s operating environment, or <i>mode</i>, is set to production or development.-->
+<!-- Now, if we want, we can set Webpack to work differently depending on whether the application's operating environment, or <i>mode</i>, is set to production or development.-->
 现在，如果我们想要的话，我们可以根据应用程序的操作环境，或<i>模式</i>，设置为生产或开发，让Webpack有不同的工作方式。
 
 <!-- We can also use webpack's [DefinePlugin](https://webpack.js.org/plugins/define-plugin/) for defining <i>global default constants</i> that can be used in the bundled code. Let's define a new global constant <i>BACKEND\_URL</i> that gets a different value depending on the environment that the code is being bundled for:-->
@@ -994,7 +994,7 @@ if (!window.Promise) {
 <!-- One exhaustive list of existing polyfills can be found [here](https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills).-->
 一份详尽的现有polyfill列表可以在[这里](https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills)找到。
 
-<!-- The browser compatibility of different APIs can be checked by visiting [https://caniuse.com](https://caniuse.com) or [Mozilla''s website](https://developer.mozilla.org/en-US/).-->
+<!-- The browser compatibility of different APIs can be checked by visiting [https://caniuse.com](https://caniuse.com) or [Mozilla's website](https://developer.mozilla.org/en-US/).-->
 可以通过访问[https://caniuse.com](https://caniuse.com) 或 [Mozilla的网站](https://developer.mozilla.org/en-US/) 来检查不同API的浏览器兼容性。
 
 ### Eject

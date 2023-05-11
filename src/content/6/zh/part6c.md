@@ -8,7 +8,7 @@ lang: zh
 <div class="content">
 
 <!-- Let's expand the application so that the notes are stored in the backend. We'll use [json-server](/en/part2/getting_data_from_server), familiar from part 2.-->
-让我们扩展应用，使笔记存储在后端。 我们将使用[json-server](/en/part2/getting_data_from_server)，从第2部分熟悉。
+让我们扩展应用，使笔记存储在后端。 我们将使用[json-server](/en/part2/getting_data_from_server)，从第2章节熟悉。
 
 <!-- The initial state of the database is stored in the file <i>db.json</i>, which is placed in the root of the project:-->
 数据库的初始状态存储在文件<i>db.json</i>中，该文件放置在项目根目录中：
@@ -53,7 +53,7 @@ npm install json-server --save-dev
 }
 ```
 
-<!-- Now let''s launch json-server with the command _npm run server_.-->
+<!-- Now let's launch json-server with the command _npm run server_.-->
 现在让我们用命令_npm run server_启动json-server。
 
 ### Getting data from the backend
@@ -94,7 +94,7 @@ const noteSlice = createSlice({
 })
 ```
 
-<!-- Let''s also add a new action <em>appendNote</em> for adding a note object:-->
+<!-- Let's also add a new action <em>appendNote</em> for adding a note object:-->
 让我们也为添加一个新的动作<em>appendNote</em>来添加一个笔记对象：
 
 ```js
@@ -327,7 +327,7 @@ const App = () => {
 
 ### Sending data to the backend
 
-<!-- We can do the same thing when it comes to creating a new note. Let''s expand the code communicating with the server as follows:-->
+<!-- We can do the same thing when it comes to creating a new note. Let's expand the code communicating with the server as follows:-->
 当涉及到创建新笔记时，我们也可以做同样的事情。让我们把与服务器通信的代码扩展如下：
 
 ```js
@@ -523,7 +523,7 @@ const App = () => {
 <!-- The solution is elegant. The initialization logic for the notes has been completely separated from the React component.-->
 解决方案很优雅。笔记的初始化逻辑已经完全从 React 组件中分离出来。
 
-<!-- Next, let''s replace the <em>createNote</em> action creator created by the <em>createSlice</em> function with an asynchronous action creator:-->
+<!-- Next, let's replace the <em>createNote</em> action creator created by the <em>createSlice</em> function with an asynchronous action creator:-->
 接下来，让我们用一个异步的action creator替换<em>createSlice</em>函数创建的<em>createNote</em> action creator：
 
 ```js
@@ -608,7 +608,7 @@ const NewNote = () => {
 }
 ```
 
-<!-- Finally, let''s clean up the <i>index.js</i> file a bit by moving the code related to the creation of the Redux store into its own, <i>store.js</i> file:-->
+<!-- Finally, let's clean up the <i>index.js</i> file a bit by moving the code related to the creation of the Redux store into its own, <i>store.js</i> file:-->
 最后，让我们把与创建Redux存储相关的代码清理一下<i>index.js</i>文件，把它们移动到自己的<i>store.js</i>文件中：
 
 ```js

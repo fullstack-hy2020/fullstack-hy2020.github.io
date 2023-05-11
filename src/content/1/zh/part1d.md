@@ -41,7 +41,7 @@ const App = () => {
 <!-- The component gets access to the functions _setLeft_ and _setRight_ that it can use to update the two pieces of state.-->
 这个组件可以访问_setLeft_和_setRight_两个函数来更新两个状态。
 
-<!-- The component''s state or a piece of its state can be of any type. We could implement the same functionality by saving the click count of both the <i>left</i> and <i>right</i> buttons into a single object:-->
+<!-- The component's state or a piece of its state can be of any type. We could implement the same functionality by saving the click count of both the <i>left</i> and <i>right</i> buttons into a single object:-->
 组件的状态或其状态的一部分可以是任何类型。我们可以通过将<i>左</i>和<i>右</i>按钮的点击计数保存到单个对象中来实现相同的功能：
 
 ```js
@@ -178,7 +178,7 @@ const handleLeftClick = () => {
 <!-- The application appears to work. However, <i>it is forbidden in React to mutate state directly</i>, since [it can result in unexpected side effects](https://stackoverflow.com/a/40309023). Changing state has to always be done by setting the state to a new object. If properties from the previous state object are not changed, they need to simply be copied, which is done by copying those properties into a new object and setting that as the new state.-->
 应用似乎可以正常工作。然而，<i>在React中禁止直接改变状态</i>，因为[它可能会导致意想不到的副作用](https://stackoverflow.com/a/40309023)。改变状态必须始终设置新对象来完成。如果没有改变从之前状态对象中的属性，它们需要简单地复制，这是通过将这些属性复制到新对象中，并将其设置为新状态来完成的。
 
-<!-- Storing all of the state in a single state object is a bad choice for this particular application; there''s no apparent benefit and the resulting application is a lot more complex. In this case, storing the click counters into separate pieces of state is a far more suitable choice.-->
+<!-- Storing all of the state in a single state object is a bad choice for this particular application; there's no apparent benefit and the resulting application is a lot more complex. In this case, storing the click counters into separate pieces of state is a far more suitable choice.-->
 在这种特定的应用中，将所有状态都存储在单个状态对象中是一个不好的选择；没有明显的好处，并且会导致的应用程序更加复杂。在这种情况下，将点击计数器存储到单独的状态片段中是一个更合适的选择。
 
 <!-- There are situations where it can be beneficial to store a piece of application state in a more complex data structure. [The official React documentation](https://react.dev/learn/choosing-the-state-structure) contains some helpful guidance on the topic.-->
@@ -186,7 +186,7 @@ const handleLeftClick = () => {
 
 ### Handling arrays
 
-<!-- Let''s add a piece of state to our application containing an array _allClicks_ that remembers every click that has occurred in the application.-->
+<!-- Let's add a piece of state to our application containing an array _allClicks_ that remembers every click that has occurred in the application.-->
 让我们在我们的应用程序中添加一个包含数组 _allClicks_ 的状态，记住应用程序中发生的每一次点击。
 
 ```js
@@ -241,7 +241,7 @@ const handleLeftClick = () => {
 <!-- The piece of state stored in _allClicks_ is now set to be an array that contains all of the items of the previous state array plus the letter <i>L</i>. Adding the new item to the array is accomplished with the [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) method, which does not mutate the existing array but rather returns a <i>new copy of the array</i> with the item added to it.-->
 在 _allClicks_ 中存储的状态片段现在被设置为一个数组，其中包含前一个状态数组中的所有项目以及字母<i>L</i>。使用[concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat)方法将新项添加到数组中，该方法不会改变现有数组，而是返回一个<i>新的数组副本</i>，其中包含添加的项目。
 
-<!-- As mentioned previously, it''s also possible in JavaScript to add items to an array with the [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) method. If we add the item by pushing it to the _allClicks_ array and then updating the state, the application would still appear to work:-->
+<!-- As mentioned previously, it's also possible in JavaScript to add items to an array with the [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) method. If we add the item by pushing it to the _allClicks_ array and then updating the state, the application would still appear to work:-->
 如前所述，JavaScript 也可以使用[push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) 方法向数组中添加项目。如果我们通过将其推入 _allClicks_ 数组并更新状态来添加项目，应用程序仍然会正常工作：
 
 ```js
@@ -255,7 +255,7 @@ const handleLeftClick = () => {
 <!-- However, __don''t__ do this. As mentioned previously, the state of React components like _allClicks_ must not be mutated directly. Even if mutating state appears to work in some cases, it can lead to problems that are very hard to debug.-->
 但是，__不要__ 这样做。正如之前提到的，像 _allClicks_ 这样的 React 组件的状态不应该直接改变。即使在某些情况下改变状态似乎有效，也可能导致很难调试的问题。
 
-<!-- Let''s take a closer look at how the clicking works-->
+<!-- Let's take a closer look at how the clicking works-->
 
 
 让我们来仔细看看点击是如何工作的
@@ -283,7 +283,7 @@ const App = () => {
 
 ### Update of the state is asynchronous
 
-<!-- Let''s expand the application so that it keeps track of the total number of button presses in the state _total_, whose value is always updated when the buttons are pressed:-->
+<!-- Let's expand the application so that it keeps track of the total number of button presses in the state _total_, whose value is always updated when the buttons are pressed:-->
 让我们扩展这个应用程序，以便它跟踪状态 _total_ 中按钮按下的总次数，当按钮被按下时，该值总是被更新：
 
 ```js
@@ -381,7 +381,7 @@ const App = () => {
 
 ### Conditional rendering
 
-<!-- Let''s modify our application so that the rendering of the clicking history is handled by a new <i>History</i> component:-->
+<!-- Let's modify our application so that the rendering of the clicking history is handled by a new <i>History</i> component:-->
 让我们修改我们的应用程序，以便由新的 <i>History</i> 组件处理点击History的渲染：
 
 ```js
@@ -440,7 +440,7 @@ const App = () => {
 <!-- React also offers many other ways of doing [conditional rendering](https://react.dev/learn/conditional-rendering). We will take a closer look at this in [part 2](/en/part2).-->
 React 还提供了许多其他的[条件渲染](https://react.dev/learn/conditional-rendering)方式。我们将在[第二章节](/en/part2)中更加仔细地研究这一点。
 
-<!-- Let''s make one last modification to our application by refactoring it to use the _Button_ component that we defined earlier on:-->
+<!-- Let's make one last modification to our application by refactoring it to use the _Button_ component that we defined earlier on:-->
 让我们对我们的应用程序做一个最后的修改，将其重构以使用我们之前定义的 _Button_ 组件：
 
 ```js
@@ -510,7 +510,7 @@ const App = () => {
 
 ### Debugging React applications
 
-<!-- A large part of a typical developer''s time is spent on debugging and reading existing code. Every now and then we do get to write a line or two of new code, but a large part of our time is spent trying to figure out why something is broken or how something works. Good practices and tools for debugging are extremely important for this reason.-->
+<!-- A large part of a typical developer's time is spent on debugging and reading existing code. Every now and then we do get to write a line or two of new code, but a large part of our time is spent trying to figure out why something is broken or how something works. Good practices and tools for debugging are extremely important for this reason.-->
 大部分开发者的时间都花在调试和阅读现有代码上。我们偶尔会写几行新代码，但大部分时间都花在试图弄清楚为什么某些东西坏了或者如何工作上。出于这个原因，良好的实践和调试工具非常重要。
 
 <!-- Lucky for us, React is an extremely developer-friendly library when it comes to debugging.-->
@@ -521,7 +521,7 @@ const App = () => {
 
 <h4>The first rule of web development</h4>
 
-<!-- > **Keep the browser''s developer console open at all times.**-->
+<!-- > **Keep the browser's developer console open at all times.**-->
 > **始终保持浏览器的开发者控制台处于打开状态。**
 <!-- >-->
 
@@ -550,7 +550,7 @@ const Button = ({ handleClick, text }) => (
 )
 ```
 
-<!-- is not working as intended, it''s useful to start printing its variables out to the console. In order to do this effectively, we must transform our function into the less compact form and receive the entire props object without destructuring it immediately:-->
+<!-- is not working as intended, it's useful to start printing its variables out to the console. In order to do this effectively, we must transform our function into the less compact form and receive the entire props object without destructuring it immediately:-->
 如果函数没有按预期工作，最有效的方法是将其变量打印到控制台。为此，我们必须将函数转换为不太紧凑的形式，并立即获取整个props对象而不进行解构：
 
 ```js
@@ -592,7 +592,7 @@ console.log('props value is', props)
 <!-- In this way, the separated items will all be available in the browser console for further inspection.-->
 在这种方式下，对象中的数据项都可以在浏览器控制台中打印，进行进一步检查。
 
-<!-- Logging output to the console is by no means the only way of debugging our applications. You can pause the execution of your application code in the Chrome developer console''s <i>debugger</i>, by writing the command [debugger](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger) anywhere in your code.-->
+<!-- Logging output to the console is by no means the only way of debugging our applications. You can pause the execution of your application code in the Chrome developer console's <i>debugger</i>, by writing the command [debugger](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger) anywhere in your code.-->
 在控制台记录输出绝不是调试我们应用程序的唯一方式。您可以在Chrome开发者控制台的<i>调试器</i>中通过在代码中的任何位置写入[debugger](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger)命令来暂停应用程序代码的执行。
 
 <!-- The execution will pause once it arrives at a point where the _debugger_ command gets executed:-->
@@ -611,7 +611,7 @@ console.log('props value is', props)
 <!-- The debugger also enables us to execute our code line by line with the controls found on the right-hand side of the <i>Sources</i> tab.-->
 调试器还使我们能够通过<i>Sources</i>选项卡右侧找到的控件，一行一行地执行我们的代码。
 
-<!-- You can also access the debugger without the _debugger_ command by adding breakpoints in the <i>Sources</i> tab. Inspecting the values of the component''s variables can be done in the _Scope_-section:-->
+<!-- You can also access the debugger without the _debugger_ command by adding breakpoints in the <i>Sources</i> tab. Inspecting the values of the component's variables can be done in the _Scope_-section:-->
 你也可以不用 `debugger` 命令来访问调试器，而是在<i>Sources</i>标签中添加断点。可以在_Scope_ -section中查看组件变量的值：
 
 ![breakpoint example in devtools](../../images/1/9a.png)
@@ -621,7 +621,7 @@ console.log('props value is', props)
 
 ![screenshot react developer tools extension](../../images/1/10ea.png)
 
-<!-- The _App_ component''s state is defined like so:-->
+<!-- The _App_ component's state is defined like so:-->
 _App_ 组件的状态定义如下：
 
 ```js
@@ -860,7 +860,7 @@ const App = () => {
 <!-- You probably won''t need to use functions that return functions in any of the exercises in this course.  If the topic seems particularly confusing, you may skip over this section for now and return to it later.-->
 你可能不需要在本课程中的任何练习中使用返回函数的函数。如果这个主题看起来特别令人困惑，你可以暂时跳过这一部分，稍后再回来复习。
 
-<!-- Let''s make the following changes to our code:-->
+<!-- Let's make the following changes to our code:-->
 让我们对我们的代码做出以下更改：
 
 ```js
@@ -930,10 +930,10 @@ const hello = () => {
 <!-- Since the _hello_ function returns a function, the event handler is now a function.-->
 由于_hello_函数返回一个函数，因此事件处理程序现在是一个函数。
 
-<!-- What''s the point of this concept?-->
+<!-- What's the point of this concept?-->
 **这个概念的意义是什么？**
 
-<!-- Let''s change the code a tiny bit:-->
+<!-- Let's change the code a tiny bit:-->
 让我们稍微改变一下代码：
 
 ```js
@@ -1017,7 +1017,7 @@ const hello = (who) => {
 }
 ```
 
-<!-- Let''s eliminate the helper variables and directly return the created function:-->
+<!-- Let's eliminate the helper variables and directly return the created function:-->
 让我们消除辅助变量，直接返回创建的函数：
 
 ```js
@@ -1038,7 +1038,7 @@ const hello = (who) =>
   }
 ```
 
-<!-- Lastly, let''s write all of the arrows on the same line:-->
+<!-- Lastly, let's write all of the arrows on the same line:-->
 最后，让我们把所有的箭头写在同一行：
 
 ```js
@@ -1047,7 +1047,7 @@ const hello = (who) => () => {
 }
 ```
 
-<!-- We can use the same trick to define event handlers that set the state of the component to a given value. Let''s make the following changes to our code:-->
+<!-- We can use the same trick to define event handlers that set the state of the component to a given value. Let's make the following changes to our code:-->
 我们可以使用相同的技巧来定义事件处理程序，将组件的状态设置为给定值。 让我们对代码做出以下更改：
 
 ```js
@@ -1108,7 +1108,7 @@ const App = () => {
 }
 ```
 
-<!-- Using functions that return functions is not required to achieve this functionality. Let''s return the _setToValue_ function which is responsible for updating state into a normal function:-->
+<!-- Using functions that return functions is not required to achieve this functionality. Let's return the _setToValue_ function which is responsible for updating state into a normal function:-->
 不需要使用返回函数的函数来实现这个功能。让我们将负责更新状态的 _setToValue_ 函数改为一个普通函数：
 
 ```js
@@ -1149,7 +1149,7 @@ const App = () => {
 
 ### Passing Event Handlers to Child Components
 
-<!-- Let''s extract the button into its own component:-->
+<!-- Let's extract the button into its own component:-->
 让我们把按钮提取到它自己的组件中：
 
 ```js
@@ -1184,7 +1184,7 @@ const App = (props) => {
 
 ### Do Not Define Components Within Components
 
-<!-- Let''s start displaying the value of the application in its <i>Display</i> component.-->
+<!-- Let's start displaying the value of the application in its <i>Display</i> component.-->
 让我们开始在其 <i>Display</i> 组件中显示应用程序的值。
 
 <!-- We will change the application by defining a new component inside of the <i>App</i> component.-->
@@ -1223,7 +1223,7 @@ const App = () => {
 <!-- The application still appears to work, but **don''t implement components like this!** Never define components inside of other components. The method provides no benefits and leads to many unpleasant problems. The biggest problems are because React treats a component defined inside of another component as a new component in every render. This makes it impossible for React to optimize the component.-->
 应用程序似乎仍在工作，但**不要像这样实现组件！**永远不要在其他组件内定义组件。该方法没有任何好处，并导致许多不愉快的问题。最大的问题是因为React将在另一个组件中定义的组件视为每次渲染中的新组件。这使得React无法优化组件。
 
-<!-- Let''s instead move the <i>Display</i> component function to its correct place, which is outside of the <i>App</i> component function:-->
+<!-- Let's instead move the <i>Display</i> component function to its correct place, which is outside of the <i>App</i> component function:-->
 让我们把 <i>Display</i> 组件函数移动到它正确的位置，也就是 <i>App</i> 组件函数之外：
 
 ```js
@@ -1266,7 +1266,7 @@ const App = () => {
 
 [官方 React 文档](https://react.dev/learn) 值得查看一次，尽管大部分内容只有在课程晚些时候才会变得相关。此外，与基于类的组件相关的一切都与我们无关；我们将坚持使用函数组件。
 
-<!-- - Some courses on [Egghead.io](https://egghead.io) like [Start learning React](https://egghead.io/courses/start-learning-react) are of high quality, and the recently updated [Beginner''s Guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) is also relatively good; both courses introduce concepts that will also be introduced later on in this course. **NB** The first one uses class components but the latter uses the new functional ones.-->
+<!-- - Some courses on [Egghead.io](https://egghead.io) like [Start learning React](https://egghead.io/courses/start-learning-react) are of high quality, and the recently updated [Beginner's Guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) is also relatively good; both courses introduce concepts that will also be introduced later on in this course. **NB** The first one uses class components but the latter uses the new functional ones.-->
 [Egghead.io](https://egghead.io) 上的一些课程，如[开始学习 React](https://egghead.io/courses/start-learning-react) 质量很高，最近更新的[React 入门指南](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) 也相对不错；这两门课都介绍了本课程稍后会介绍的概念。**注意**：前者使用的是类组件，而后者使用的是新的函数组件。
 
 ### Web programmers oath
@@ -1417,7 +1417,7 @@ const App = () => {
 
 <h4>1.10: unicafe step5</h4>
 
-<!-- Let''s continue refactoring the application. Extract the following two components:-->
+<!-- Let's continue refactoring the application. Extract the following two components:-->
 让我们继续重构应用程序。提取以下两个组件：
 
 <!-- - <i>Button</i> for defining the buttons used for submitting feedback-->
@@ -1443,7 +1443,7 @@ const Statistics = (props) => {
 
 ```
 
-<!-- The application''s state should still be kept in the root <i>App</i> component.-->
+<!-- The application's state should still be kept in the root <i>App</i> component.-->
 应该仍然将应用程序的状态保存在根<i>App</i>组件中。
 
 <h4>1.11*: unicafe step6</h4>
@@ -1522,7 +1522,7 @@ export default App
 
 ![anecdote app with votes button added](../../images/1/19a.png)
 
-<!-- **NB** store the votes of each anecdote into an array or object in the component''s state. Remember that the correct way of updating state stored in complex data structures like objects and arrays is to make a copy of the state.-->
+<!-- **NB** store the votes of each anecdote into an array or object in the component's state. Remember that the correct way of updating state stored in complex data structures like objects and arrays is to make a copy of the state.-->
 **注意**：将每个轶事的投票存储在组件状态中的数组或对象中。请记住，更新存储在对象和数组等复杂数据结构中的状态的正确方法是制作一个状态的副本。
 
 <!-- You can create a copy of an object like this:-->
@@ -1562,7 +1562,7 @@ copy[2] += 1
 <!-- If multiple anecdotes are tied for first place it is sufficient to just show one of them.-->
 如果多个轶事并列第一，只需要展示其中一个就足够了。
 
-<!-- This was the last exercise for this part of the course and it''s time to push your code to GitHub and mark all of your finished exercises to the "my submissions" tab of the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
+<!-- This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the "my submissions" tab of the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
 这是本部分课程的最后一个练习，现在是时候将你的代码推送到GitHub，并将所有已完成的练习标记到[提交应用程序](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)的“我的提交”选项卡中。
 
 </div>

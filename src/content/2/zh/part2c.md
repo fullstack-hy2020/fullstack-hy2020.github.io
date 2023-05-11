@@ -6,11 +6,10 @@ lang: zh
 ---
 
 <div class="content">
-
 <!-- For a while now we have only been working on "frontend", i.e. client-side (browser) functionality. We will begin working on "backend", i.e. server-side functionality in the [third part](/en/part3) of this course. Nonetheless, we will now take a step in that direction by familiarizing ourselves with how the code executing in the browser communicates with the backend.-->
-近来我们只致力于“前端”，即客户端（浏览器）功能。我们将在本课程的[第三部分](/en/part3)开始进行“后端”，即服务器端功能的工作。尽管如此，我们现在将采取一步行动，熟悉在浏览器中执行的代码如何与后端进行通信。
+近来我们只致力于“前端”，即客户端（浏览器）功能。我们将在本课程的[第三章节](/en/part3)开始进行“后端”，即服务器端功能的工作。尽管如此，我们现在将采取一步行动，熟悉在浏览器中执行的代码如何与后端进行通信。
 
-<!-- Let''s use a tool meant to be used during software development called [JSON Server](https://github.com/typicode/json-server) to act as our server.-->
+<!-- Let's use a tool meant to be used during software development called [JSON Server](https://github.com/typicode/json-server) to act as our server.-->
 让我们使用一个旨在在软件开发过程中使用的工具[JSON Server](https://github.com/typicode/json-server)来充当我们的服务器。
 
 <!-- Create a file named <i>db.json</i> in the root directory of the previous <i>notes</i> project with the following content:-->
@@ -41,8 +40,7 @@ lang: zh
 <!-- You can [install](https://github.com/typicode/json-server#getting-started) a JSON server globally on your machine using the command _npm install -g json-server_. A global installation requires administrative privileges, which means that it is not possible on faculty computers or freshman laptops.-->
 你可以使用命令`npm install -g json-server`在你的机器上全局[安装](https://github.com/typicode/json-server#getting-started)一个JSON服务器。全局安装需要管理员权限，这意味着在教职工电脑或新生笔记本上不可能安装。
 
-<!-- After installing run the following command to run the json-server. The <i>json-server</i> starts running on port 3000 by default; but since projects created using create-react-app reserve port 3000, we must define an alternate port, such as port 3001, for the json-server. The --watch option automatically looks for any saved changes to db.json-->
-and updates the server accordingly.
+<!-- After installing run the following command to run the json-server. The <i>json-server</i> starts running on port 3000 by default; but since projects created using create-react-app reserve port 3000, we must define an alternate port, such as port 3001, for the json-server. The --watch option automatically looks for any saved changes to db.json and updates the server accordingly.-->
 
 安装完成后，运行以下命令来运行<i>json-server</i>。<i>json-server</i> 默认会在端口3000上运行；但是，由于使用create-react-app创建的项目会保留端口3000，因此我们必须为json-server定义一个替代端口，比如端口3001。--watch选项会自动查找对db.json所做的任何更改，并相应地更新服务器。
 
@@ -57,7 +55,7 @@ json-server --port 3001 --watch db.json
 npx json-server --port 3001 --watch db.json
 ```
 
-<!-- Let''s navigate to the address <http://localhost:3001/notes> in the browser. We can see that <i>json-server</i> serves the notes we previously wrote to the file in JSON format:-->
+<!-- Let's navigate to the address <http://localhost:3001/notes> in the browser. We can see that <i>json-server</i> serves the notes we previously wrote to the file in JSON format:-->
 让我们在浏览器中导航到地址<http://localhost:3001/notes>。我们可以看到<i>json-server</i>以JSON格式提供了我们先前写入文件的笔记：
 
 ![](../../images/2/14new.png)
@@ -72,7 +70,7 @@ npx json-server --port 3001 --watch db.json
 json-server存储所有数据在<i>db.json</i>文件中，该文件位于服务器上。在现实世界中，数据会存储在某种数据库中。然而，json-server是一个方便的工具，可以在开发阶段使用服务器端功能，而无需编写任何代码。
 
 <!-- We will get familiar with the principles of implementing server-side functionality in more detail in [part 3](/en/part3) of this course.-->
-我们将在本课程的[第三部分](/en/part3)详细了解实现服务器端功能的原则。
+我们将在本课程的[第三章节](/en/part3)详细了解实现服务器端功能的原则。
 
 ### The browser as a runtime environment
 
@@ -80,10 +78,10 @@ json-server存储所有数据在<i>db.json</i>文件中，该文件位于服务�
 我们的第一个任务是从地址<http://localhost:3001/notes>中获取已经存在的笔记到我们的React应用程序中。
 
 <!-- In the part0 [example project](/en/part0/fundamentals_of_web_apps#running-application-logic-on-the-browser), we already learned a way to fetch data from a server using JavaScript. The code in the example was fetching the data using [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest), otherwise known as an HTTP request made using an XHR object. This is a technique introduced in 1999, which every browser has supported for a good while now.-->
-在第0部分[示例项目](/en/part0/fundamentals_of_web_apps#running-application-logic-on-the-browser)中，我们已经学习了一种使用JavaScript从服务器获取数据的方法。示例中的代码是使用[XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest)获取数据，也称为使用XHR对象发出的HTTP请求。这是一种在1999年引入的技术，现在每个浏览器都支持它。
+在第0章节[示例项目](/en/part0/fundamentals_of_web_apps#running-application-logic-on-the-browser)中，我们已经学习了一种使用JavaScript从服务器获取数据的方法。示例中的代码是使用[XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest)获取数据，也称为使用XHR对象发出的HTTP请求。这是一种在1999年引入的技术，现在每个浏览器都支持它。
 
 <!-- The use of XHR is no longer recommended, and browsers already widely support the [fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch) method, which is based on so-called [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), instead of the event-driven model used by XHR.-->
-不再推荐使用XHR，浏览器已经广泛支持基于所谓[promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)的[fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch)方法，而不是XHR使用的事件驱动模型。
+目前不再推荐使用XHR，浏览器已经广泛支持基于所谓[promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)的[fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch)方法，而不是XHR使用的事件驱动模型。
 
 <!-- As a reminder from part0 (which one should <i>remember to not use</i> without a pressing reason), data was fetched using XHR in the following way:-->
 作为part0的提醒（应<i>记住不要没有紧急原因而使用</i>），数据以下列方式使用XHR获取：
@@ -108,7 +106,7 @@ xhttp.send()
 <!-- It is worth noting that the code in the event handler is defined before the request is sent to the server. Despite this, the code within the event handler will be executed at a later point in time. Therefore, the code does not execute synchronously "from top to bottom", but does so <i>asynchronously</i>. JavaScript calls the event handler that was registered for the request at some point.-->
 值得注意的是，事件处理程序中的代码是在请求发送到服务器之前定义的。尽管如此，事件处理程序中的代码将在稍后的时间点执行。因此，代码不是按“自上而下”的方式同步执行，而是<i>异步</i>执行。JavaScript在某个时间点调用为请求注册的事件处理程序。
 
-<!-- A synchronous way of making requests that''s common in Java programming, for instance, would play out as follows (NB, this is not actually working Java code):-->
+<!-- A synchronous way of making requests that's common in Java programming, for instance, would play out as follows (NB, this is not actually working Java code):-->
 Java 编程中常见的同步请求方式如下（注意：以下并非实际的 Java 代码）：
 
 ```java
@@ -157,22 +155,22 @@ setTimeout(() => {
 <!-- There is a host of additional material on the subject to be found on the internet. One particularly clear presentation of the topic is the keynote by Philip Roberts called [What the heck is the event loop anyway?](https://www.youtube.com/watch?v=8aGhZQkoFbQ)-->
 在互联网上可以找到大量有关此主题的附加材料。其中一个特别清晰的介绍是Philip Roberts的主题演讲[到底什么是事件循环？](https://www.youtube.com/watch?v=8aGhZQkoFbQ)
 
-<!-- In today''s browsers, it is possible to run parallelized code with the help of so-called [web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers). The event loop of an individual browser window is, however, still only handled by a [single thread](https://medium.com/techtrument/multithreading-javascript-46156179cf9a).-->
-在今天的浏览器中，可以利用所谓的[网页工作者](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers)来运行并行代码。然而，个别浏览器视窗的事件循环仍然仅由[单个线程](https://medium.com/techtrument/multithreading-javascript-46156179cf9a)处理。
+<!-- In today's browsers, it is possible to run parallelized code with the help of so-called [web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers). The event loop of an individual browser window is, however, still only handled by a [single thread](https://medium.com/techtrument/multithreading-javascript-46156179cf9a).-->
+在今天的浏览器中，可以利用所谓的[web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers)来运行并行代码。然而，个别浏览器视窗的事件循环仍然仅由[单个线程](https://medium.com/techtrument/multithreading-javascript-46156179cf9a)处理。
 
 ### npm
 
-<!-- Let''s get back to the topic of fetching data from the server.-->
+<!-- Let's get back to the topic of fetching data from the server.-->
 让我们回到从服务器获取数据的话题。
 
 <!-- We could use the previously mentioned promise-based function [fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch) to pull the data from the server. Fetch is a great tool. It is standardized and supported by all modern browsers (excluding IE).-->
 我们可以使用先前提到的基于promise的函数[fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch)从服务器拉取数据。Fetch是一个很棒的工具，它是标准化的，并且所有现代浏览器（不包括IE）都支持它。
 
 <!-- That being said, we will be using the [axios](https://github.com/axios/axios) library instead for communication between the browser and server. It functions like fetch but is somewhat more pleasant to use. Another good reason to use axios is our getting familiar with adding external libraries, so-called <i>npm packages</i>, to React projects.-->
-那么说来，我们将使用[axios](https://github.com/axios/axios)库来代替浏览器和服务器之间的通信。 它的功能类似于fetch，但使用起来更加愉快。 另一个使用axios的好原因是我们熟悉将外部库，即所谓的<i>npm 包</i>添加到React项目中。
+这么说来，我们将使用[axios](https://github.com/axios/axios)库来代替浏览器和服务器之间的通信。 它的功能类似于fetch，但使用起来更加愉快。 另一个使用axios的好原因是我们熟悉将外部库，即所谓的<i>npm 包</i>添加到React项目中。
 
 <!-- Nowadays, practically all JavaScript projects are defined using the node package manager, aka [npm](https://docs.npmjs.com/getting-started/what-is-npm). The projects created using create-react-app also follow the npm format. A clear indicator that a project uses npm is the <i>package.json</i> file located at the root of the project:-->
-现在，几乎所有JavaScript专案都是使用节点套件管理器（也就是[npm](https://docs.npmjs.com/getting-started/what-is-npm)）定义的。 使用create-react-app创建的专案也遵循npm格式。 清楚地表明专案使用npm的指标是位于专案根目录下的<i>package.json</i>文件：
+现在，几乎所有JavaScript项目都是使用节点套件管理器（也就是[npm](https://docs.npmjs.com/getting-started/what-is-npm)）定义的。 使用create-react-app创建的项目也遵循npm格式。 清楚地表明项目使用npm的标志是位于项目根目录下的<i>package.json</i>文件：
 
 ```json
 {
@@ -226,7 +224,7 @@ npm install axios
 ```
 
 <!-- **NB _npm_-commands should always be run in the project root directory**, which is where the <i>package.json</i> file can be found.-->
-**NB _npm_ 命令应该始终在项目根目录下运行**，这里可以找到<i>package.json</i>文件。
+**注意： _npm_ 命令应该始终在项目根目录下运行**，这里可以找到<i>package.json</i>文件。
 
 <!-- Axios is now included among the other dependencies:-->
 Axios现已被包含在其他依赖项中：
@@ -253,7 +251,7 @@ Axios现已被包含在其他依赖项中：
 <!-- In addition to adding axios to the dependencies, the <em>npm install</em> command also <i>downloaded</i> the library code. As with other dependencies, the code can be found in the <i>node\_modules</i> directory located in the root. As one might have noticed, <i>node\_modules</i> contains a fair amount of interesting stuff.-->
 除了添加axios到依赖之外，<em>npm install</em> 命令也<i>下载</i>了库代码。与其他依赖一样，代码可以在根目录中的<i>node\_modules</i>目录中找到。正如人们所注意到的，<i>node\_modules</i>包含了大量有趣的东西。
 
-<!-- Let''s make another addition. Install <i>json-server</i> as a development dependency (only used during development) by executing the command:-->
+<!-- Let's make another addition. Install <i>json-server</i> as a development dependency (only used during development) by executing the command:-->
 让我们再做一个添加。通过执行以下命令安装<i>json-server</i>作为开发依赖项（仅在开发期间使用）：
 
 ```js
@@ -277,14 +275,14 @@ npm install json-server --save-dev
 ```
 
 <!-- We can now conveniently, without parameter definitions, start the json-server from the project root directory with the command:-->
-我们现在可以很方便的，在不需要参数定义的情况下，从专案根目录启动 json-server，命令如下：
+我们现在可以很方便的，在不需要参数定义的情况下，从项目根目录启动 json-server，命令如下：
 
 ```js
 npm run server
 ```
 
 <!-- We will get more familiar with the _npm_ tool in the [third part of the course](/en/part3).-->
-我们将在[第三部分课程](/en/part3)中更加熟悉_npm_工具。
+我们将在[第三章节课程](/en/part3)中更加熟悉_npm_工具。
 
 <!-- **NB** The previously started json-server must be terminated before starting a new one; otherwise, there will be trouble:-->
 **注意：** 在启动新的json-server之前，必须先终止之前启动的json-server，否则会出现麻烦。
@@ -308,7 +306,7 @@ npm install json-server --save-dev
 ```
 
 <!-- There is a fine difference in the parameters. <i>axios</i> is installed as a runtime dependency of the application because the execution of the program requires the existence of the library. On the other hand, <i>json-server</i> was installed as a development dependency (_--save-dev_), since the program itself doesn''t require it. It is used for assistance during software development. There will be more on different dependencies in the next part of the course.-->
-有一个微小的差别在参数上。因为程序的执行需要库的存在，所以<i>axios</i>被安装为应用程序的运行时依赖项。另一方面，<i>json-server</i>被安装为开发依赖项（_--save-dev_），因为程序本身不需要它。它用于软件开发期间的辅助。课程的下一部分将有更多关于不同依赖项的内容。
+有一个微小的差别在参数上。因为程序的执行需要库的存在，所以<i>axios</i>被安装为应用程序的运行时依赖项。另一方面，<i>json-server</i>被安装为开发依赖项（_--save-dev_），因为程序本身不需要它。它用于软件开发期间的辅助。课程的下一章节将有更多关于不同依赖项的内容。
 
 ### Axios and promises
 
@@ -319,7 +317,7 @@ npm install json-server --save-dev
 NB：要同时运行json-server和您的react应用程序，您可能需要使用两个终端窗口。 一个用于保持json-server运行，另一个用于运行react-app。
 
 <!-- The library can be brought into use the same way other libraries, e.g. React, are, i.e., by using an appropriate <em>import</em> statement.-->
-图书馆可以像使用其他库（如 React）一样使用，即通过使用适当的<em>import</em>语句。
+Library 可以像使用其他库（如 React）一样使用，即通过使用适当的<em>import</em>语句。
 
 <!-- Add the following to the file <i>index.js</i>:-->
 在文件<i>index.js</i>中添加以下内容：
@@ -335,36 +333,37 @@ console.log(promise2)
 ```
 
 <!-- If you open <http://localhost:3000> in the browser, this should be printed to the console-->
-:
 
 如果您在浏览器中打开 <http://localhost:3000>，这应该会被打印到控制台：
 
 ![promises printed to console](../../images/2/16new.png)
 
 <!-- Axios'' method _get_ returns a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises).-->
-Axios 的方法 _get_ 返回一个[承诺](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises)。
+Axios 的方法 _get_ 返回一个[promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises)。
 
-<!-- The documentation on Mozilla''s site states the following about promises:-->
-Mozilla 的网站上的文件说明如下有关于承诺：
+<!-- The documentation on Mozilla's site states the following about promises:-->
+Mozilla 的网站上的文件说明如下有关于promise：
 
 <!-- > <i>A Promise is an object representing the eventual completion or failure of an asynchronous operation.</i>-->
-> <i>承诺是一个代表异步操作最终完成或失败的对象。</i>
+> <i>promise是一个代表异步操作最终完成或失败的对象。</i>
 
 <!-- In other words, a promise is an object that represents an asynchronous operation. A promise can have three distinct states:-->
-所以，承诺是一个代表异步操作的对象。承诺可以有三种不同的状态：
+所以，promise是一个代表异步操作的对象。promise可以有三种不同的状态：
 
 <!-- 1. The promise is <i>pending</i>: It means that the final value (one of the following two) is not available yet.-->
-承诺<i>尚未定型</i>：这意味着最终值（其中之一）尚未可用。
-<!-- 2. The promise is <i>fulfilled</i>: It means that the operation has been completed and the final value is available, which generally is a successful operation. This state is sometimes also called <i>resolved</i>.-->
-承诺已<i>兑现</i>：这意味着操作已经完成，最终值可用，通常表示操作成功。这种状态有时也被称为<i>解决</i>。
-<!-- 3. The promise is <i>rejected</i>: It means that an error prevented the final value from being determined, which generally represents a failed operation.-->
-3. 承诺被<i>拒绝</i>：这意味着一个错误阻止了最终值被确定，这通常代表一个失败的操作。
+
+1. promise<i>处于 pending状态</i>：这意味着最终值（其中之一）尚未可用。
+   <!-- 2. The promise is <i>fulfilled</i>: It means that the operation has been completed and the final value is available, which generally is a successful operation. This state is sometimes also called <i>resolved</i>.-->
+2. promise 已<i>兑现fulfilled</i>：这意味着操作已经完成，最终值可用，通常表示操作成功。这种状态有时也被称为<i>解决</i>。
+   <!-- 3. The promise is <i>rejected</i>: It means that an error prevented the final value from being determined, which generally represents a failed operation.-->
+
+3. promise被<i>拒绝</i>：这意味着一个错误阻止了最终值被确定，这通常代表一个失败的操作。
 
 <!-- The first promise in our example is <i>fulfilled</i>, representing a successful _axios.get('http://localhost:3001/notes')_ request. The second one, however, is <i>rejected</i>, and the console tells us the reason. It looks like we were trying to make an HTTP GET request to a non-existent address.-->
-第一个承诺在我们的例子中是<i>兑现</i>的，代表一个成功的_axios.get('http://localhost:3001/notes')_请求。然而，第二个是<i>拒绝</i>的，控制台告诉我们原因。看起来我们试图向一个不存在的地址发出HTTP GET请求。
+第一个promise在我们的例子中是<i>兑现</i>的，代表一个成功的_axios.get('http://localhost:3001/notes')_请求。然而，第二个是<i>拒绝</i>的，控制台告诉我们原因。看起来我们试图向一个不存在的地址发出HTTP GET请求。
 
 <!-- If, and when, we want to access the result of the operation represented by the promise, we must register an event handler to the promise. This is achieved using the method <em>then</em>:-->
-如果我们想要访问承诺所表示操作的结果，我们必须向承诺注册一个事件处理程序。这是通过<em>then</em>方法实现的：
+如果我们想要访问promise所表示操作的结果，我们必须向promise注册一个事件处理程序。这是通过<em>then</em>方法实现的：
 
 ```js
 const promise = axios.get('http://localhost:3001/notes')
@@ -375,18 +374,15 @@ promise.then(response => {
 ```
 
 <!-- The following is printed to the console:-->
-`Hello World!`
 
-**输出到控制台：**
-
-`你好，世界！`
+**如下内容输出到控制台：**
 
 ![json object data printed to console](../../images/2/17new.png)
 
 <!-- The JavaScript runtime environment calls the callback function registered by the <em>then</em> method providing it with a <em>response</em> object as a parameter. The <em>response</em> object contains all the essential data related to the response of an HTTP GET request, which would include the returned <i>data</i>, <i>status code</i>, and <i>headers</i>.-->
 JavaScript 运行时环境调用由 <em>then</em> 方法注册的回调函数，并将 <em>response</em> 对象作为参数提供给它。 <em>response</em> 对象包含与 HTTP GET 请求响应相关的所有基本数据，其中包括返回的 <i>数据</i>、<i>状态码</i> 和 <i>标头</i>。
 
-<!-- Storing the promise object in a variable is generally unnecessary, and it''s instead common to chain the <em>then</em> method call to the axios method call, so that it follows it directly:-->
+<!-- Storing the promise object in a variable is generally unnecessary, and it's instead common to chain the <em>then</em> method call to the axios method call, so that it follows it directly:-->
 将promise对象存储在变量中通常是不必要的，更常见的是将<em>then</em>方法调用链接到axios方法调用，以便它直接跟随它：
 
 ```js
@@ -434,13 +430,13 @@ axios.get('http://localhost:3001/notes').then(response => {
 <!-- This method could be acceptable in some circumstances, but it's somewhat problematic. Let's instead move the fetching of the data into the <i>App</i> component.-->
 这种方法在某些情况下可以接受，但有些问题。让我们把数据的获取移动到<i>App</i>组件中吧。
 
-<!-- What''s not immediately obvious, however, is where the command <em>axios.get</em> should be placed within the component.-->
-<em>axios.get</em> 然而不是立刻明显的是应该把命令放在组件内部的哪里。
+<!-- What's not immediately obvious, however, is where the command <em>axios.get</em> should be placed within the component.-->
+然而<em>axios.get</em> 不是立刻明显的是应该把命令放在组件内部的哪里。
 
 ### Effect-hooks
 
 <!-- We have already used [state hooks](https://react.dev/learn/state-a-components-memory) that were introduced along with React version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0), which provide state to React components defined as functions - the so-called <i>functional components</i>. Version 16.8.0 also introduces [effect hooks](https://react.dev/reference/react#effect-hooks) as a new feature. As per the official docs:-->
-我们已经使用伴随 React 版本[16.8.0](https://www.npmjs.com/package/react/v/16.8.0)一起引入的[状态钩子](https://react.dev/learn/state-a-components-memory)，它们为定义为函数的 React 组件提供状态 - 所谓的<i>函数组件</i>。版本 16.8.0 也引入了[效果钩子](https://react.dev/reference/react#effect-hooks)作为一项新功能。根据官方文档：
+我们已经使用伴随 React 版本[16.8.0](https://www.npmjs.com/package/react/v/16.8.0)一起引入的[state hooks](https://react.dev/learn/state-a-components-memory)，它们为定义为函数的 React 组件提供状态 - 所谓的<i>函数组件</i>。版本 16.8.0 也引入了[effect hooks](https://react.dev/reference/react#effect-hooks)作为一项新功能。根据官方文档：
 
 <!-- > <i>The Effect Hook lets you perform side effects on function components.</i>-->
 > <i>Effect Hook 可以让你在函数组件上执行副作用。</i>
@@ -505,7 +501,7 @@ render 3 notes
 首先，执行定义组件的函数体，并首次渲染组件。此时会打印<i>render 0 notes</i>，意味着尚未从服务器获取数据。
 
 <!-- The following function, or effect in React parlance:-->
-下面的函数，或者在 React 语言中称为效果：
+下面的函数，或者在 React 语言中称为effect ：
 
 ```js
 () => {
@@ -535,7 +531,7 @@ response => {
 <!-- As always, a call to a state-updating function triggers the re-rendering of the component. As a result, <i>render 3 notes</i> is printed to the console, and the notes fetched from the server are rendered to the screen.-->
 如往常一样，调用状态更新函数就会触发组件的重新渲染。结果，控制台会打印出 <i>渲染3个笔记</i>，并将从服务器获取的笔记渲染到屏幕上。
 
-<!-- Finally, let''s take a look at the definition of the effect hook as a whole:-->
+<!-- Finally, let's take a look at the definition of the effect hook as a whole:-->
 最后，让我们总体看一下 effect hook 的定义：
 
 ```js
@@ -549,7 +545,7 @@ useEffect(() => {
 }, [])
 ```
 
-<!-- Let''s rewrite the code a bit differently.-->
+<!-- Let's rewrite the code a bit differently.-->
 让我们以不同的方式重写代码吧。
 
 ```js
@@ -567,10 +563,10 @@ useEffect(hook, [])
 ```
 
 <!-- Now we can see more clearly that the function [useEffect](https://react.dev/reference/react/useEffect) takes <i>two parameters</i>. The first is a function, the <i>effect</i> itself. According to the documentation:-->
-现在我们可以更清楚地看到，函数[useEffect](https://react.dev/reference/react/useEffect)接受<i>两个参数</i>。第一个是一个函数，<i>效果</i>本身。根据文档：
+现在我们可以更清楚地看到，函数[useEffect](https://react.dev/reference/react/useEffect)接受<i>两个参数</i>。第一个是一个函数，<i>effect </i>本身。根据文档：
 
 <!-- > <i>By default, effects run after every completed render, but you can choose to fire it only when certain values have changed.</i>-->
-<i>默认情况下，每次渲染完成后都会运行效果，但您可以选择仅在某些值发生变化时触发它。</i>
+<i>默认情况下，每次渲染完成后都会运行effect ，但您可以选择仅在某些值发生变化时触发它。</i>
 
 <!-- So by default, the effect is <i>always</i> run after the component has been rendered. In our case, however, we only want to execute the effect along with the first render.-->
 所以默认情况下，效果<i>总是</i>在组件渲染后运行。但是在我们的情况下，我们只希望在第一次渲染时执行效果。
@@ -624,7 +620,7 @@ useEffect(() => {
 
 ### The development runtime environment
 
-<!-- The configuration for the whole application has steadily grown more complex. Let''s review what happens and where. The following image describes the makeup of the application-->
+<!-- The configuration for the whole application has steadily grown more complex. Let's review what happens and where. The following image describes the makeup of the application-->
 .
 
 为整个应用程序的配置不断变得更加复杂。让我们回顾一下发生了什么以及发生在哪里。下图描述了应用程序的组成。
@@ -632,13 +628,13 @@ useEffect(() => {
 ![diagram of composition of react app](../../images/2/18e.png)
 
 <!-- The JavaScript code making up our React application is run in the browser. The browser gets the JavaScript from the <i>React dev server</i>, which is the application that runs after running the command <em>npm start</em>. The dev-server transforms the JavaScript into a format understood by the browser. Among other things, it stitches together JavaScript from different files into one file. We''ll discuss the dev-server in more detail in part 7 of the course.-->
-浏览器运行组成我们的React应用的JavaScript代码。浏览器从<i>React开发服务器</i>获取JavaScript，这是在运行命令<em>npm start</em>后运行的应用程序。开发服务器将JavaScript转换为浏览器可以理解的格式。除其他外，它将来自不同文件的JavaScript拼接在一起成为一个文件。我们将在课程的第七部分中更详细地讨论开发服务器。
+浏览器运行组成我们的React应用的JavaScript代码。浏览器从<i>React开发服务器</i>获取JavaScript，这是在运行命令<em>npm start</em>后运行的应用程序。开发服务器将JavaScript转换为浏览器可以理解的格式。除其他外，它将来自不同文件的JavaScript拼接在一起成为一个文件。我们将在课程的第七章节中更详细地讨论开发服务器。
 
 <!-- The React application running in the browser fetches the JSON formatted data from <i>json-server</i> running on port 3001 on the machine. The server we query the data from - <i>json-server</i> - gets its data from the file <i>db.json</i>.-->
 浏览器中运行的React应用程序从运行在机器上端口3001上的<i>json-server</i>获取JSON格式的数据。我们查询数据的服务器-<i>json-server</i>-从文件<i>db.json</i>获取数据。
 
-<!-- At this point in development, all the parts of the application happen to reside on the software developer''s machine, otherwise known as localhost. The situation changes when the application is deployed to the internet. We will do this in part 3.-->
-此时在开发中，应用程序的所有部分都发生在软件开发者的机器上，也称为localhost。当应用程序部署到互联网上时，情况就会改变。我们将在第3部分进行此操作。
+<!-- At this point in development, all the parts of the application happen to reside on the software developer's machine, otherwise known as localhost. The situation changes when the application is deployed to the internet. We will do this in part 3.-->
+此时在开发中，应用程序的所有部分都发生在软件开发者的机器上，也称为localhost。当应用程序部署到互联网上时，情况就会改变。我们将在第3章节进行此操作。
 
 </div>
 

@@ -124,7 +124,7 @@ const LoginForm = ({ setError, setToken }) => {
 export default LoginForm
 ```
 
-<!-- We are using an effect hook to save the token''s value to the state of the *App* component and the local storage after the server has responded to the mutation.-->
+<!-- We are using an effect hook to save the token's value to the state of the *App* component and the local storage after the server has responded to the mutation.-->
 我们正在使用一个effect hook来将token值保存到*App*组件的state和服务器响应mutation后的本地存储中。
 <!-- Use of the effect hook is necessary to avoid an endless rendering loop.-->
 使用effect Hook是必要的，以避免无限渲染循环。
@@ -223,7 +223,7 @@ const client = new ApolloClient({
 <!-- Validation fails, because frontend sends an empty string as the value of *phone*.-->
 验证失败，因为前端将一个空字符串作为*手机*的值发送了。
 
-<!-- Let''s change the function creating new persons so that it sets *phone* to *undefined* if user has not given a value.-->
+<!-- Let's change the function creating new persons so that it sets *phone* to *undefined* if user has not given a value.-->
 让我们改变创建新人的功能，以便如果用户没有给出值，则将*电话*设置为*未定义*。
 
 ```js
@@ -250,7 +250,7 @@ const PersonForm = ({ setError }) => {
 
 ### Updating cache, revisited
 
-<!-- We have to [update](/en/part8/react_and_graph_ql#updating-the-cache) the cache of the Apollo client on creating new persons. We can update it using the mutation''s *refetchQueries* option to define that the-->
+<!-- We have to [update](/en/part8/react_and_graph_ql#updating-the-cache) the cache of the Apollo client on creating new persons. We can update it using the mutation's *refetchQueries* option to define that the-->
 query should be refetched after the mutation.
 
 我们必须[更新](/en/part8/react_and_graph_ql#updating-the-cache) Apollo客户端的缓存，以便在创建新人员时进行更新。 我们可以使用变异* refetchQueries *选项更新它，以定义在变异后应重新获取查询。
@@ -373,7 +373,7 @@ cache
 
 #### 8.20 Books by genre, part 2
 
-<!-- Implement a view which shows all the books based on the logged-in user''s favourite genre.-->
+<!-- Implement a view which shows all the books based on the logged-in user's favourite genre.-->
 实现一个视图，根据登录用户最喜欢的类型显示所有书籍。
 
 ![browser showing two books via patterns](../../images/8/29.png)
@@ -386,7 +386,7 @@ cache
 要完成这项练习，您应该根据所选择的流派（在练习8.19中已经完成）重新使用GraphQL查询到服务器来过滤书籍。如果您已经完成了，则不必做任何事情。
 
 <!-- This and the next exercises are quite **challenging** like it should be this late in the course. You might want to complete first the easier ones in the [next part](/en/part8/fragments_and_subscriptions).-->
-这个和下一个练习很**有挑战性**，正如课程的最后一部分应该有的那样。你可能想先完成[下一部分](/en/part8/fragments_and_subscriptions)中更容易的练习。
+这个和下一个练习很**有挑战性**，正如课程的最后一部分应该有的那样。你可能想先完成[下一章节](/en/part8/fragments_and_subscriptions)中更容易的练习。
 
 #### 8.22 Up-to-date cache and book recommendations
 

@@ -25,7 +25,7 @@ lang: zh
 <!-- It is always a good idea to start the application and click around to verify you have a functional development environment.-->
 **总是有一个好主意，去启动应用程序，点击环境中的各个部分来验证你有一个可用的开发环境。**
 
-<!-- You can also browse the folder structure to get some insight into the application''s functionality and/or the architecture used. These are not always clear, and the developers might have chosen a way to organize code that is not familiar to you. The [sample project](https://github.com/fullstack-hy2020/old-patientor) used in the rest of this part is organized, feature-wise. You can see what pages the application has, and some general components, e.g. modals and state. Keep in mind that the features may have-->
+<!-- You can also browse the folder structure to get some insight into the application's functionality and/or the architecture used. These are not always clear, and the developers might have chosen a way to organize code that is not familiar to you. The [sample project](https://github.com/fullstack-hy2020/old-patientor) used in the rest of this part is organized, feature-wise. You can see what pages the application has, and some general components, e.g. modals and state. Keep in mind that the features may have-->
 been split up into multiple files.
 
 你也可以浏览文件夹结构，以便对应用程序的功能和/或所使用的架构有更深入的了解。这些不一定很明确，开发人员可能选择了一种对代码进行组织的方式，这对你来说可能不太熟悉。本部分所使用的[样例项目](https://github.com/fullstack-hy2020/old-patientor)是按功能组织的。您可以查看应用程序有哪些页面，以及一些常见的组件，例如模态和状态。请记住，功能可能分割到多个文件中。
@@ -43,13 +43,13 @@ TypeScript 提供了类型来定义数据结构、函数、组件和状态。你
 
 ### Patientor frontend
 
-<!-- It''s time to get our hands dirty finalizing the frontend for the backend we built in [exercises 9.8.-9.13](/en/part9/typing_the_express_app).-->
+<!-- It's time to get our hands dirty finalizing the frontend for the backend we built in [exercises 9.8.-9.13](/en/part9/typing_the_express_app).-->
 是时候让我们把前端最终完善起来了，我们在[练习9.8.-9.13]中构建了后端。
 
 <!-- Before diving into the code, let us start both the frontend and the backend.-->
 在深入研究代码之前，让我们先启动前端和后端。
 
-<!-- If all goes well, you should see a patient listing page. It fetches a list of patients from our backend, and renders it to the screen as a simple table. There is also a button for creating new patients on the backend. As we are using mock data instead of a database, the data will not persist - closing the backend will delete all the data we have added. UI design has not been a strong point of the creators, so let''s disregard the UI for now.-->
+<!-- If all goes well, you should see a patient listing page. It fetches a list of patients from our backend, and renders it to the screen as a simple table. There is also a button for creating new patients on the backend. As we are using mock data instead of a database, the data will not persist - closing the backend will delete all the data we have added. UI design has not been a strong point of the creators, so let's disregard the UI for now.-->
 如果一切顺利，你应该会看到一个患者列表页面。它从我们的后端获取一个患者列表，并将其渲染到屏幕上作为一个简单的表格。还有一个按钮可以在后端创建新的患者。由于我们使用的是模拟数据而不是数据库，因此数据不会保留 - 关闭后端将删除我们添加的所有数据。UI设计不是创造者的强项，所以现在我们忽略UI。
 
 <!-- After verifying that everything works, we can start studying the code. All the interesting stuff resides in the <i>src</i> folder. For your convenience, there is already a <i>types.ts</i> file for basic types used in the app, which you will have to extend or refactor in the exercises.-->
@@ -72,7 +72,7 @@ TypeScript 提供了类型来定义数据结构、函数、组件和状态。你
 
 ### State handling
 
-<!-- Let''s study the state handling a bit closer as a lot of stuff seems to be happening under the hood and it differs a bit from the methods used in the course so far.-->
+<!-- Let's study the state handling a bit closer as a lot of stuff seems to be happening under the hood and it differs a bit from the methods used in the course so far.-->
 让我们更仔细地研究一下状态处理，因为似乎在幕后发生了很多事情，而且它与迄今为止课程中使用的方法有些不同。
 
 <!-- The state management is built using the React Hooks [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext) and [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer). This is quite a good setup because we know the app will be rather small and we don''t want to use <i>redux</i> or other similar libraries for state management.-->
@@ -87,7 +87,7 @@ TypeScript 提供了类型来定义数据结构、函数、组件和状态。你
 > <i>...被设计用来分享可以被认为是 React 组件树的“全局”数据，比如当前认证用户、主题或者首选语言。</i>
 
 <!-- In our case, the "global", shared data is the application state <i>and</i> the dispatch function that is used to make changes to data. In many ways, our code works much like the Redux-based state management we used in [part 6](/en/part6), but is more lightweight since it does not require the use of any external libraries. This part assumes that you are at least familiar with the way Redux works, e.g. you should have covered at least [the first section](/en/part6/flux_architecture_and_redux) of part 6.-->
-在我们的情况下，“全局”的共享数据是应用程序状态<i>和</i>用于对数据进行更改的dispatch函数。在许多方面，我们的代码与我们在[第6章节](/en/part6)中使用的基于Redux的状态管理类似，但更轻量级，因为它不需要使用任何外部库。本部分假定您至少熟悉Redux的工作方式，例如，您应该至少覆盖[第一节](/en/part6/flux_architecture_and_redux)的内容。
+在我们的情况下，“全局”的共享数据是应用程序状态<i>和</i>用于对数据进行更改的dispatch函数。在许多方面，我们的代码与我们在[第6章节](/en/part6)中使用的基于Redux的状态管理类似，但更轻量级，因为它不需要使用任何外部库。本章节假定您至少熟悉Redux的工作方式，例如，您应该至少覆盖[第一节](/en/part6/flux_architecture_and_redux)的内容。
 
 <!-- The [context](https://reactjs.org/docs/context.html) of our application has a tuple containing the app state and the dispatcher for changing the state.-->
 [上下文](https://reactjs.org/docs/context.html) 我们应用程序的上下文具有一个元组，其中包含应用程序状态和更改状态的调度程序。
@@ -131,7 +131,7 @@ console.log(myPatient.name); // error, Object is possibly 'undefined'
 <!-- This type of additional type security is always good to implement if you e.g. use data from external sources or use the value of a user input to access data in your code. But if you are sure that you only handle data that actually exists, then there is no one stopping you from using the first presented solution.-->
 这种额外的类型安全总是很好的实施，如果你使用来自外部源的数据或者使用用户输入的值来访问代码中的数据。但是如果你确定只处理实际存在的数据，那么没有人阻止你使用第一个提出的解决方案。
 
-<!-- Even though we are not using them in this course part, it is good to mention that a more type-strict way would be to use [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) objects, to which you can declare a type for both the key and the content. The Map''s accessor function *get()* always returns a union of the declared value type and undefined, so TypeScript automatically requires you to perform validity checks on data retrieved from a map:-->
+<!-- Even though we are not using them in this course part, it is good to mention that a more type-strict way would be to use [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) objects, to which you can declare a type for both the key and the content. The Map's accessor function *get()* always returns a union of the declared value type and undefined, so TypeScript automatically requires you to perform validity checks on data retrieved from a map:-->
 即使我们在这个课程部分不使用它们，但是提一下更类型严格的方式是使用[Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)对象，你可以为键和内容都声明一种类型。Map的访问函数*get()*总是返回声明的值类型和undefined的联合，所以TypeScript自动要求你对从Map中获取的数据进行有效性检查。
 
 ```js
@@ -299,7 +299,7 @@ const closeModal = (): void => {
 };
 ```
 
-<!-- The frontend''s types are based on what you have created when developing the backend in the previous part.-->
+<!-- The frontend's types are based on what you have created when developing the backend in the previous part.-->
 前端的类型是基于你在前面部分开发后端时创建的内容。
 
 <!-- When the component *App* mounts, it fetches patients from the backend using [Axios](https://github.com/axios/axios). Note how we are giving the *axios.get* function a type parameter to describe the type of the response data:-->
@@ -327,7 +327,7 @@ React.useEffect(() => {
 }, [dispatch]);
 ````
 
-<!-- **A word of warning!** Passing a type parameter to Axios will not validate any data. It is quite dangerous especially if you are using external APIs. You can create custom validation functions that take in the whole payload and return the correct type, or you can use a type guard. Both are valid options. Many libraries also provide validation through different kinds of schemas (e.g. [io-ts](https://gcanti.github.io/io-ts/)). For simplicity''s sake, we will continue to trust our work and trust that we will get data of the correct form from the backend.-->
+<!-- **A word of warning!** Passing a type parameter to Axios will not validate any data. It is quite dangerous especially if you are using external APIs. You can create custom validation functions that take in the whole payload and return the correct type, or you can use a type guard. Both are valid options. Many libraries also provide validation through different kinds of schemas (e.g. [io-ts](https://gcanti.github.io/io-ts/)). For simplicity's sake, we will continue to trust our work and trust that we will get data of the correct form from the backend.-->
 **警告！** 将类型参数传递给Axios不会验证任何数据。 如果您使用外部API，这非常危险。 您可以创建自定义验证函数，接收整个有效负载并返回正确的类型，或者您可以使用类型检查。 两者都是有效的选项。 许多库也通过不同类型的模式（例如[io-ts]（https://gcanti.github.io/io-ts/））提供验证。 为了简单起见，我们将继续信任我们的工作，并相信我们会从后端获得正确形式的数据。
 
 <!-- As our app is quite small, we will update the state by simply calling the *dispatch* function provided to us by the *useStateValue* hook.-->
@@ -385,7 +385,7 @@ export type PublicPatient = Omit<Patient, 'ssn' | 'entries'>;  // highlight-line
 
 #### 9.21: patientor, step2
 
-<!-- Create a page for showing a patient''s full information in the frontend.-->
+<!-- Create a page for showing a patient's full information in the frontend.-->
 在前端建立一个用于展示患者完整信息的页面。
 
 <!-- The user should be able to access a patient's information by clicking the patient's name.-->
@@ -451,12 +451,12 @@ dispatch(setPatientList(patientListFromApi));
 
 <!-- In [exercise 9.10](/en/part9/typing_an_express_app#exercises-9-10-9-11) we implemented an endpoint for fetching information about various diagnoses, but we are still not using that endpoint at all.-->
 在[练习9.10](/en/part9/typing_an_express_app#exercises-9-10-9-11)中，我们实现了一个用于获取有关各种诊断信息的端点，但我们仍然没有使用该端点。
-<!-- Since we now have a page for viewing a patient''s information, it would be nice to expand our data a bit.-->
+<!-- Since we now have a page for viewing a patient's information, it would be nice to expand our data a bit.-->
 自从我们现在有一个查看病人信息的页面，扩充一下我们的数据会很好。
 <!-- Let's add an *Entry* field to our patient data so that a patient's data contains their medical entries, including possible diagnoses.-->
 让我们为我们的病人数据添加一个*条目*字段，以便病人的数据包括他们的医疗条目，包括可能的诊断。
 
-<!-- Let''s ditch our old patient seed data from the backend and start using [this expanded format](https://github.com/fullstack-hy/misc/blob/master/patients.ts).-->
+<!-- Let's ditch our old patient seed data from the backend and start using [this expanded format](https://github.com/fullstack-hy/misc/blob/master/patients.ts).-->
 让我们抛弃我们后端的旧患者种子数据，开始使用[这种扩展格式](https://github.com/fullstack-hy/misc/blob/master/patients.ts)。
 
 <!-- **Notice:** This time, the data is not in the .json format but instead in the .ts format. You should already have the complete *Gender* and *Patient* types implemented, so only correct the paths where they are imported from if needed.-->
@@ -465,7 +465,7 @@ dispatch(setPatientList(patientListFromApi));
 <!-- Let us now create a proper *Entry* type based on the data we have.-->
 让我们根据我们拥有的数据现在创建一个合适的*Entry*类型。
 
-<!-- If we take a closer look at the data, we can see that the entries are quite different from one another. For example, let''s take a look at the first two entries:-->
+<!-- If we take a closer look at the data, we can see that the entries are quite different from one another. For example, let's take a look at the first two entries:-->
 如果我们仔细看一下数据，就会发现条目彼此有很大的不同。例如，让我们来看一下前两个条目：
 
 ```js
@@ -547,7 +547,7 @@ interface BaseEntry {
 <!-- As you might remember, _Array<Type>_ is just an alternative way to say *Type[]*. In cases like this, it is just much clearer to use the array convention since the other option would be to define the type by saying *Diagnosis['code'][]* which starts to look a bit strange.-->
 当你可能记得， _Array<Type>_ 只是另一种方式来表达 *Type[]*。 在这种情况下，最好使用数组约定，因为另一种选择就是定义类型，比如 *Diagnosis['code'][]*，这看起来有点奇怪。
 
-<!-- Now that we have the *BaseEntry* defined, we can start creating the extended entry types we will actually be using. Let''s start by creating the *HealthCheckEntry* type.-->
+<!-- Now that we have the *BaseEntry* defined, we can start creating the extended entry types we will actually be using. Let's start by creating the *HealthCheckEntry* type.-->
 现在我们已经定义了*BaseEntry*，我们可以开始创建我们实际使用的扩展条目类型。让我们从创建*HealthCheckEntry*类型开始。
 
 <!-- Entries of type *HealthCheck* contain the field *HealthCheckRating*, which is an integer from 0 to 3, zero meaning *Healthy* and 3 meaning *CriticalRisk*. This is a perfect case for an enum definition.-->
@@ -597,7 +597,7 @@ type EntryWithoutId = UnionOmit<Entry, 'id'>;
 
 #### 9.23: Patientor, step4
 
-<!-- Define the types *OccupationalHealthcareEntry* and *HospitalEntry* so that those conform with the example data. Ensure that your backend returns the entries properly when you go to an individual patient''s route:-->
+<!-- Define the types *OccupationalHealthcareEntry* and *HospitalEntry* so that those conform with the example data. Ensure that your backend returns the entries properly when you go to an individual patient's route:-->
 定义类型*OccupationalHealthcareEntry*和*HospitalEntry*，以符合示例数据。确保当您访问个别患者路由时，您的后端正确返回条目：
 
 *OccupationalHealthcareEntry*：职业保健条目是指为解决职业相关健康问题而提供的医疗服务，包括但不限于诊断，治疗，康复和预防服务。
@@ -624,14 +624,14 @@ type EntryWithoutId = UnionOmit<Entry, 'id'>;
 
 #### 9.25: Patientor, step6
 
-<!-- Fetch and add diagnoses to the application state from the <i>/api/diagnoses</i> endpoint. Use the new diagnosis data to show the descriptions for patient''s diagnosis codes:-->
+<!-- Fetch and add diagnoses to the application state from the <i>/api/diagnoses</i> endpoint. Use the new diagnosis data to show the descriptions for patient's diagnosis codes:-->
 从<i>/api/diagnoses</i>端点获取并将诊断添加到应用程序状态中。使用新的诊断数据来显示患者诊断码的描述：
 
 ![browser showing list of codes and their descriptions for patient ](../../images/9/42.png)
 
 #### 9.26: Patientor, step7
 
-<!-- Extend the entry listing on the patient's page to include the Entry's details with a new component that shows the rest of the information of the patient''s entries distinguishing different types from each other.-->
+<!-- Extend the entry listing on the patient's page to include the Entry's details with a new component that shows the rest of the information of the patient's entries distinguishing different types from each other.-->
 在患者页面上扩展条目列表，添加一个新组件，显示患者条目的其他信息，以区分不同类型的条目。
 
 <!-- You could use eg. [Icons](https://mui.com/components/material-icons/) or some other [Material UI](https://mui.com/) component to get appropriate visuals for your listing.-->
@@ -711,7 +711,7 @@ interface Props {
 <!-- object of type *PatientFormValues* as an argument so that the callback can handle our form values.-->
 传递一个类型为*PatientFormValues*的对象作为参数，以便回调函数能够处理我们的表单值。
 
-<!-- Looking at the *AddPatientForm* function component, you can see we have bound the *Props* as our component''s props, and we destructure *onSubmit* and *onCancel* from those props.-->
+<!-- Looking at the *AddPatientForm* function component, you can see we have bound the *Props* as our component's props, and we destructure *onSubmit* and *onCancel* from those props.-->
 看看*AddPatientForm*函数组件，你可以看到我们将*Props*绑定为我们组件的props，并且我们从这些props中解构出*onSubmit*和*onCancel*。
 
 ```js
@@ -720,12 +720,12 @@ export const AddPatientForm = ({ onSubmit, onCancel }: Props) => {
 }
 ```
 
-<!-- Now before we continue, let''s take a look at our form helpers in <i>FormField.tsx</i>.-->
+<!-- Now before we continue, let's take a look at our form helpers in <i>FormField.tsx</i>.-->
 现在在我们继续之前，让我们看一下我们在<i>FormField.tsx</i>中的表单助手。
 <!-- If you check what is exported from the file, you''ll find the type *GenderOption* and the function components *SelectField* and *TextField*.-->
 如果您检查文件导出的内容，您会发现类型*GenderOption*和功能组件*SelectField*和*TextField*。
 
-<!-- Let''s take a closer look at *SelectField* and the types around it.-->
+<!-- Let's take a closer look at *SelectField* and the types around it.-->
 让我们仔细看看*SelectField*及其周围的类型。
 <!-- First, we create a generic type for each option object that contains a value and a label for that value. These are the kind of option objects we want to allow on our form in the select field.-->
 首先，我们为每个选项对象创建一个通用类型，其中包含该值的值和标签。 这些就是我们想在下拉字段的表单中允许的选项对象。
@@ -788,7 +788,7 @@ export const SelectField = ({ name, label, options }: SelectFieldProps) => (
 );
 ```
 
-<!-- Now let''s move on to the *TextField* component. The component renders a TextFieldMUI that is a [Material UI TextField](https://mui.com/components/text-fields/) with a label:-->
+<!-- Now let's move on to the *TextField* component. The component renders a TextFieldMUI that is a [Material UI TextField](https://mui.com/components/text-fields/) with a label:-->
 现在让我们继续来看*TextField*组件。该组件渲染一个TextFieldMUI，它是一个[Material UI TextField](https://mui.com/components/text-fields/)，带有一个标签：
 
 ```jsx
@@ -831,10 +831,10 @@ export const TextField = ({ field, label, placeholder, form }: TextProps) => {
 现在，回到<i>AddPatientForm.tsx</i>中的实际表单组件。
 <!-- The function component *AddPatientForm* renders a [Formik component](https://formik.org/docs/api/formik). The Formik component is a wrapper, which requires two props: *initialValues* and *onSubmit*. The role of the props is quite self-explanatory.-->
 功能组件*AddPatientForm*渲染一个[Formik组件](https://formik.org/docs/api/formik)。Formik组件是一个包装器，需要两个属性：*initialValues*和*onSubmit*。属性的作用很明显。
-<!-- The Formik wrapper keeps a track of your form''s state, and then exposes it and a few reusable methods and event handlers to your form via props.-->
+<!-- The Formik wrapper keeps a track of your form's state, and then exposes it and a few reusable methods and event handlers to your form via props.-->
 Formik 包裹器跟踪你表单的状态，然后通过 props 向你的表单暴露它和一些可重用的方法和事件处理程序。
 
-<!-- We are also using an optional *validate* prop that expects a validation function and returns an object containing possible errors. Here, we only check that our text fields are not falsy, but it could easily contain e.g. some validation for the social security number format or something like that. The error messages defined by this function can then be displayed on the corresponding field''s ErrorMessage component.-->
+<!-- We are also using an optional *validate* prop that expects a validation function and returns an object containing possible errors. Here, we only check that our text fields are not falsy, but it could easily contain e.g. some validation for the social security number format or something like that. The error messages defined by this function can then be displayed on the corresponding field's ErrorMessage component.-->
 我们还使用了一个可选的*验证* prop，它期望一个验证函数，并返回一个包含可能错误的对象。在这里，我们只检查我们的文本字段是否为虚假，但它可以很容易地包含例如一些社会安全号码格式的验证或类似的东西。此函数定义的错误消息可以在相应字段的ErrorMessage组件上显示。
 
 <!-- First, have a look at the entire component. We will later discuss the different parts in detail.-->
@@ -942,7 +942,7 @@ export default AddPatientForm;
 
 <!-- As a child of our Formik wrapper, we have a <i>function</i> that returns the form contents.-->
 作为我们Formik包裹的一个子，我们有一个<i>函数</i>可以返回表单内容。
-<!-- We use Formik''s [Form](https://formik.org/docs/api/form) to render the actual form element. Inside the Form element, we use our *TextField* and *SelectField* components that we created in <i>FormField.tsx</i>.-->
+<!-- We use Formik's [Form](https://formik.org/docs/api/form) to render the actual form element. Inside the Form element, we use our *TextField* and *SelectField* components that we created in <i>FormField.tsx</i>.-->
 我们使用Formik的[表单](https://formik.org/docs/api/form)来渲染实际的表单元素。在表单元素内，我们使用我们在<i>FormField.tsx</i>中创建的*TextField*和*SelectField*组件。
 
 <!-- Lastly, we create two buttons: one for canceling the form submission and one for submitting the form. The cancel button calls the *onCancel* callback straight away when clicked.-->
@@ -984,7 +984,7 @@ export default AddPatientForm;
 
 <!-- The *onSubmit* callback has been passed all the way down from our patient list page.-->
 回调函数*onSubmit*已经从我们的患者列表页面传递了一路。
-<!-- It sends an HTTP POST request to our backend, adds the patient returned from the backend to our app''s state and closes the modal.-->
+<!-- It sends an HTTP POST request to our backend, adds the patient returned from the backend to our app's state and closes the modal.-->
 它向我们的后端发送一个HTTP POST请求，将后端返回的患者添加到我们应用程序的状态中，然后关闭模态。
 <!-- If the backend returns an error, the error is displayed on the form.-->
 如果后端返回错误，错误将显示在表单上。
@@ -1012,7 +1012,7 @@ const submitNewPatient = async (values: FormValues) => {
 };
 ```
 
-<!-- With this material, you should be able to complete the rest of this part''s exercises. When in doubt, try reading the existing code to find clues on how to proceed!-->
+<!-- With this material, you should be able to complete the rest of this part's exercises. When in doubt, try reading the existing code to find clues on how to proceed!-->
 用这个材料，你应该能够完成这部分剩余的练习。当不确定的时候，尝试阅读现有的代码来找到如何继续的线索！
 
 </div>
@@ -1034,13 +1034,13 @@ const submitNewPatient = async (values: FormValues) => {
 
 #### 9.28: Patientor, step9
 
-<!-- Now that our backend supports adding entries, we want to add the corresponding functionality to the frontend. In this exercise, you should add a form for adding an entry to a patient. An intuitive place for accessing the form would be on a patient''s page.-->
+<!-- Now that our backend supports adding entries, we want to add the corresponding functionality to the frontend. In this exercise, you should add a form for adding an entry to a patient. An intuitive place for accessing the form would be on a patient's page.-->
 现在我们的后端支持添加条目，我们想在前端添加相应的功能。在这个练习中，您应该添加一个表单来为患者添加一个条目。一个直观的访问表单的地方是在患者页面上。
 
 <!-- In this exercise, it is enough to **support <i>one</i> entry type**, and you do not have to handle any errors. It is enough if a new entry can be created when the form is filled with valid data.-->
 在这个练习中，**只需要支持<i>一种</i>条目类型**，不必处理任何错误。只要在表单中填入有效数据就可以创建一个新条目，这就足够了。
 
-<!-- Upon a successful submit, the new entry should be added to the correct patient and the patient''s entries on the patient page should be updated to contain the new entry.-->
+<!-- Upon a successful submit, the new entry should be added to the correct patient and the patient's entries on the patient page should be updated to contain the new entry.-->
 一旦提交成功，新条目应该被添加到正确的患者中，患者页面上的患者条目应该被更新以包含新条目。
 
 <!-- If you like, you can re-use some of the code from the <i>Add patient</i> form for this exercise, but this is not a requirement.-->
@@ -1099,7 +1099,7 @@ const AddEntryForm = ({ onSubmit, onCancel }: Props) => {
 
 #### 9.30: Patientor, step11
 
-<!-- Extend your solution so that it supports <i>two</i> entry types and displays an error message if some required values are missing or formatted incorrectly. You do not need to care about possible errors in the server''s response.-->
+<!-- Extend your solution so that it supports <i>two</i> entry types and displays an error message if some required values are missing or formatted incorrectly. You do not need to care about possible errors in the server's response.-->
 扩展你的解决方案，使它支持<i>两</i>种输入类型，如果有必要的值缺失或格式不正确，则显示错误消息。你不需要关心服务器响应中可能出现的错误。
 
 <!-- The easiest but surely not the most elegant way to do this exercise is to have a separate form for each different entry type. Getting the types to work properly might be a slight challenge if you use just a single form.-->
@@ -1126,7 +1126,7 @@ const AddEntryForm = ({ onSubmit, onCancel }: Props) => {
 
 #### 9.31: Patientor, step12
 
-<!-- Extend your solution so that it supports <i>all the entry types</i> and displays an error message if some required values are missing or formatted incorrectly. You do not need to care about possible errors in the server''s response.-->
+<!-- Extend your solution so that it supports <i>all the entry types</i> and displays an error message if some required values are missing or formatted incorrectly. You do not need to care about possible errors in the server's response.-->
 扩展你的解决方案，使其支持<i>所有的条目类型</i>并在某些必要的值缺失或格式不正确时显示错误消息。你不需要关心服务器响应中可能出现的错误。
 
 </div>

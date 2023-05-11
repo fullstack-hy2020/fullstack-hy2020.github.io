@@ -7,7 +7,7 @@ lang: zh
 
 <div class="content">
 
-<!-- [TypeScript](https://www.typescriptlang.org/) is a programming language designed for large-scale JavaScript development created by Microsoft. For example, Microsoft''s <i>Azure Management Portal</i> (1,2 million lines of code) and <i>Visual Studio Code</i> (300 000 lines of code) have both been written in TypeScript. To support building large-scale JavaScript applications, TypeScript offers features such as better development-time tooling, static code analysis, compile-time type checking and code-level documentation.-->
+<!-- [TypeScript](https://www.typescriptlang.org/) is a programming language designed for large-scale JavaScript development created by Microsoft. For example, Microsoft's <i>Azure Management Portal</i> (1,2 million lines of code) and <i>Visual Studio Code</i> (300 000 lines of code) have both been written in TypeScript. To support building large-scale JavaScript applications, TypeScript offers features such as better development-time tooling, static code analysis, compile-time type checking and code-level documentation.-->
 [TypeScript](https://www.typescriptlang.org/) 是由微软创建的一种针对大型JavaScript开发而设计的编程语言。例如，微软的<i>Azure Management Portal</i>（100 万行代码）和<i>Visual Studio Code</i>（30 万行代码）都是用TypeScript编写的。为了支持构建大型JavaScript应用程序，TypeScript提供了诸如更好的开发时工具、静态代码分析、编译时类型检查和代码级文档等功能。
 
 ### Main principle
@@ -54,7 +54,7 @@ industry
 
 ### TypeScript key language features
 
-<!-- In this section, we will describe some of the key features of the TypeScript language. The intent is to provide you with a basic understanding of TypeScript''s-->
+<!-- In this section, we will describe some of the key features of the TypeScript language. The intent is to provide you with a basic understanding of TypeScript's-->
 capabilities.
 
 在本节中，我们将描述TypeScript语言的一些关键特性。其目的是为您提供TypeScript功能的基本了解。
@@ -102,7 +102,7 @@ const add = (a: number, b: number) => {
 }
 ```
 
-<!-- The type of the function''s return value is inferred by retracing the code back to the return expression. The return expression performs an addition of the parameters a and b. We can see that a and b are numbers based on their types. Thus, we can infer the return value to be of type *number*.-->
+<!-- The type of the function's return value is inferred by retracing the code back to the return expression. The return expression performs an addition of the parameters a and b. We can see that a and b are numbers based on their types. Thus, we can infer the return value to be of type *number*.-->
 函数的返回值类型是通过追溯代码回到返回表达式来推断的。返回表达式执行参数a和b的加法。我们可以看到a和b的类型是数字。因此，我们可以推断返回值的类型为*数字*。
 
 #### Type erasure
@@ -146,10 +146,10 @@ let x;
 
 <!-- The second advantage of TypeScript is that the type annotations in the code can function as a type of <i>code-level documentation</i>.-->
 第二个 TypeScript 的优势是，代码中的类型注释可以作为一种<i>代码级文档</i>。
-<!-- It''s easy to check from a function signature what kind of arguments the function can consume and what type of data it will return. This form of type annotation-bound documentation will always be up to date and it makes it easier for new programmers to start working on an existing project. It is also helpful when returning to an old project.-->
+<!-- It's easy to check from a function signature what kind of arguments the function can consume and what type of data it will return. This form of type annotation-bound documentation will always be up to date and it makes it easier for new programmers to start working on an existing project. It is also helpful when returning to an old project.-->
 它很容易从函数签名检查函数可以消费什么样的参数以及它将返回什么类型的数据。这种类型注释绑定的文档将始终保持最新，并且它使得新程序员更容易开始在现有项目上工作。当回到旧项目时，这也是有帮助的。
 
-<!-- Types can be reused all around the code base, and a change to a type definition will automatically be reflected everywhere the type is used. One might argue that you can achieve similar code-level documentation with e.g. [JSDoc](https://jsdoc.app/about-getting-started.html), but it is not connected to the code as tightly as TypeScript''s types, and may thus get out of sync more easily, and is also more verbose.-->
+<!-- Types can be reused all around the code base, and a change to a type definition will automatically be reflected everywhere the type is used. One might argue that you can achieve similar code-level documentation with e.g. [JSDoc](https://jsdoc.app/about-getting-started.html), but it is not connected to the code as tightly as TypeScript's types, and may thus get out of sync more easily, and is also more verbose.-->
 类型可以在整个代码库中重复使用，对类型定义的更改将自动反映到使用类型的每个地方。有人可能会认为，您可以使用例如[JSDoc](https://jsdoc.app/about-getting-started.html)达到类似的代码级文档，但它与代码的联系不像TypeScript的类型那么紧密，因此可能更容易失去同步，而且也更冗长。
 
 <!-- The third advantage of TypeScript is that IDEs can provide more <i>specific and smarter IntelliSense</i> when they know exactly what types of data you are processing.-->
@@ -174,14 +174,14 @@ let x;
 当使用外部库时，您可能发现某些库缺少或以某种方式无效的类型声明。 通常，这是由于库未使用TypeScript编写，而添加类型声明的人在手动操作方面做得不够好。 在这些情况下，您可能需要自己定义类型声明。
 <!-- However, there is a good chance someone has already added typings for the package you are using. Always check the DefinitelyTyped [GitHub page](https://github.com/DefinitelyTyped/DefinitelyTyped) first. They are probably the most popular sources for type declaration files.-->
 然而，有很大的可能性有人已经为您正在使用的包添加了类型声明。首先要检查[DefinitelyTyped GitHub页面](https://github.com/DefinitelyTyped/DefinitelyTyped)。它们可能是最受欢迎的类型声明文件来源。
-<!-- Otherwise, you might want to start by getting acquainted with TypeScript''s [documentation](https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html) regarding type declarations.-->
+<!-- Otherwise, you might want to start by getting acquainted with TypeScript's [documentation](https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html) regarding type declarations.-->
 否则，您可能想要首先熟悉TypeScript的[文档](https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html)，关于类型声明。
 
 #### Sometimes, type inference needs assistance
 
 <!-- The type inference in TypeScript is pretty good but not quite perfect.-->
 TypeScript 的类型推断功能相当不错，但并不完美。
-<!-- Sometimes, you may feel like you have declared your types perfectly, but the compiler still tells you that the property does not exist or that this kind of usage is not allowed. In these cases, you might need to help the compiler out by doing something like an "extra" type check. One should be careful with type casting (that is quite often called type assertion) or type guards: when using those, you are giving your word to the compiler that the value <i>is</i> of the type that you declare. You might want to check out TypeScript''s documentation regarding [type assertions](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions) and [type guarding/narrowing](https://www.typescriptlang.org/docs/handbook/2/narrowing.html).-->
+<!-- Sometimes, you may feel like you have declared your types perfectly, but the compiler still tells you that the property does not exist or that this kind of usage is not allowed. In these cases, you might need to help the compiler out by doing something like an "extra" type check. One should be careful with type casting (that is quite often called type assertion) or type guards: when using those, you are giving your word to the compiler that the value <i>is</i> of the type that you declare. You might want to check out TypeScript's documentation regarding [type assertions](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions) and [type guarding/narrowing](https://www.typescriptlang.org/docs/handbook/2/narrowing.html).-->
 有时候，你可能觉得自己完美地声明了类型，但是编译器仍然告诉你属性不存在或者这种用法不允许。在这些情况下，你可能需要帮助编译器做一些“额外”的类型检查。人们应该小心使用类型转换（通常称为类型断言）或类型守卫：使用这些时，你向编译器保证值<i>是</i>你声明的类型。你可能希望查看TypeScript的文档，关于[类型断言](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions)和[类型守卫/缩小](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)。
 
 #### Mysterious type errors

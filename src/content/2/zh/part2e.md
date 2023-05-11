@@ -6,21 +6,20 @@ lang: zh
 ---
 
 <div class="content">
-
-<!-- The appearance of our current application is quite modest. In [exercise 0.2](/en/part0/fundamentals_of_web_apps#exercises-0-1-0-6), the assignment was to go through Mozilla''s [CSS tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics).-->
+<!-- The appearance of our current application is quite modest. In [exercise 0.2](/en/part0/fundamentals_of_web_apps#exercises-0-1-0-6), the assignment was to go through Mozilla's [CSS tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics).-->
 我们当前应用的外观相当普通。在[练习0.2](/en/part0/fundamentals_of_web_apps#exercises-0-1-0-6)中，任务是浏览Mozilla的[CSS教程](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics)。
 
-<!-- Let''s take a look at how we can add styles to a React application. There are several different ways of doing this and we will take a look at the other methods later on. First, we will add CSS to our application the old-school way; in a single file without using a [CSS preprocessor](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor) (although this is not entirely true as we will learn later on).-->
+<!-- Let's take a look at how we can add styles to a React application. There are several different ways of doing this and we will take a look at the other methods later on. First, we will add CSS to our application the old-school way; in a single file without using a [CSS preprocessor](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor) (although this is not entirely true as we will learn later on).-->
 让我们来看看我们如何给 React 应用程序添加样式。有几种不同的方法，我们稍后会看到其他方法。首先，我们将以旧式的方式向我们的应用程序添加 CSS；在没有使用[CSS 预处理器](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor)的情况下，在一个文件中（尽管这并不完全正确，因为我们稍后会学到）。
 
-<!-- Let''s add a new <i>index.css</i> file under the <i>src</i> directory and then add it to the application by importing it in the <i>index.js</i> file:-->
+<!-- Let's add a new <i>index.css</i> file under the <i>src</i> directory and then add it to the application by importing it in the <i>index.js</i> file:-->
 让我们在<i>src</i>目录下添加一个新的<i>index.css</i>文件，然后通过在<i>index.js</i>文件中导入它来将其添加到应用程序中：
 
 ```js
 import './index.css'
 ```
 
-<!-- Let''s add the following CSS rule to the <i>index.css</i> file:-->
+<!-- Let's add the following CSS rule to the <i>index.css</i> file:-->
 让我们把以下CSS规则添加到<i>index.css</i>文件中：
 
 ```css
@@ -35,7 +34,7 @@ CSS 规则包括<i>选择器</i>和<i>声明</i>。选择器定义了该规则�
 <!-- The declaration sets the _color_ property to the value <i>green</i>.-->
 声明将 _颜色_ 属性设置为值 <i>绿色</i>。
 
-<!-- One CSS rule can contain an arbitrary number of properties. Let''s modify the previous rule to make the text cursive, by defining the font style as <i>italic</i>:-->
+<!-- One CSS rule can contain an arbitrary number of properties. Let's modify the previous rule to make the text cursive, by defining the font style as <i>italic</i>:-->
 一条CSS规则可以包含任意数量的属性。让我们修改前面的规则，使文本为斜体，通过定义字体样式为<i>斜体</i>：
 
 ```css
@@ -48,7 +47,7 @@ h1 {
 <!-- There are many ways of matching elements by using [different types of CSS selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors).-->
 有许多方法可以使用[不同类型的CSS选择器](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors)来匹配元素。
 
-<!-- If we wanted to target, let''s say, each one of the notes with our styles, we could use the selector <i>li</i>, as all of the notes are wrapped inside <i>li</i> tags:-->
+<!-- If we wanted to target, let's say, each one of the notes with our styles, we could use the selector <i>li</i>, as all of the notes are wrapped inside <i>li</i> tags:-->
 如果我们想以我们的风格来针对每一个笔记，我们可以使用选择器<i>li</i>，因为所有的笔记都包裹在<i>li</i>标签内：
 
 ```js
@@ -90,7 +89,7 @@ li {
 <li class="note">some text...</li>
 ```
 
-<!-- In React we have to use the [className](https://react.dev/learn#adding-styles) attribute instead of the class attribute. With this in mind, let''s make the following changes to our <i>Note</i> component:-->
+<!-- In React we have to use the [className](https://react.dev/learn#adding-styles) attribute instead of the class attribute. With this in mind, let's make the following changes to our <i>Note</i> component:-->
 在React中，我们必须使用[className](https://react.dev/learn#adding-styles)属性而不是class属性。考虑到这一点，让我们对<i>Note</i>组件做出以下更改：
 
 ```js
@@ -124,7 +123,7 @@ const Note = ({ note, toggleImportance }) => {
 
 ### Improved error message
 
-<!-- We previously implemented the error message that was displayed when the user tried to toggle the importance of a deleted note with the <em>alert</em> method. Let''s implement the error message as its own React component.-->
+<!-- We previously implemented the error message that was displayed when the user tried to toggle the importance of a deleted note with the <em>alert</em> method. Let's implement the error message as its own React component.-->
 我们之前用<em>alert</em>方法实现了当用户试图切换已删除笔记重要性时显示的错误消息。让我们把错误消息实现为它自己的React组件。
 
 <!-- The component is quite simple:-->
@@ -174,7 +173,7 @@ const App = () => {
 }
 ```
 
-<!-- Then let''s add a style rule that suits an error message:-->
+<!-- Then let's add a style rule that suits an error message:-->
 然后让我们添加一条适合错误消息的样式规则：
 
 ```css
@@ -189,7 +188,7 @@ const App = () => {
 }
 ```
 
-<!-- Now we are ready to add the logic for displaying the error message. Let''s change the <em>toggleImportanceOf</em> function in the following way:-->
+<!-- Now we are ready to add the logic for displaying the error message. Let's change the <em>toggleImportanceOf</em> function in the following way:-->
 现在我们准备添加显示错误消息的逻辑了。让我们改变一下<em>toggleImportanceOf</em>函数：
 
 ```js
@@ -237,22 +236,6 @@ React 还可以让开发者在代码中直接编写样式，这称为[内联样�
 <!-- CSS rules are defined slightly differently in JavaScript than in normal CSS files. Let's say that we wanted to give some element the color green and italic font that's 16 pixels in size. In CSS, it would look like this:-->
 ```
 element {
-  color: green;
-  font-style: italic;
-  font-size: 16px;
-}
-```
-
-```
-element {
-  颜色：绿色;
-  字体样式：斜体;
-  字号：16px;
-}
-```
-
-```css
-{
   color: green;
   font-style: italic;
   font-size: 16px;
@@ -342,13 +325,13 @@ React 的哲学与此截然相反。由于将 CSS、HTML 和 JavaScript 分离�
 
 <h4>2.17*: Phonebook step12</h4>
 
-<!-- Open your application in two browsers. **If you delete a person in browser 1** a short while before attempting to <i>change the person''s phone number</i> in browser 2, you will get the following error message:-->
+<!-- Open your application in two browsers. **If you delete a person in browser 1** a short while before attempting to <i>change the person's phone number</i> in browser 2, you will get the following error message:-->
 如果你在第一个浏览器中删除一个人，然后在第二个浏览器中尝试更改该人的电话号码，你会收到以下错误讯息：
 
 ![error message 404 not found when changing multiple browsers](../../images/2/29b.png)
 
 <!-- Fix the issue according to the example shown in [promise and errors](/en/part2/altering_data_in_server#promises-and-errors) in part 2. Modify the example so that the user is shown a message when the operation does not succeed. The messages shown for successful and unsuccessful events should look different:-->
-根据第2部分中[承诺和错误]（/en/part2/altering_data_in_server#promises-and-errors）的示例修复问题。 修改示例，以便在操作不成功时向用户显示消息。 成功和不成功事件显示的消息应该有所不同：
+根据第2章节中[承诺和错误]（/en/part2/altering_data_in_server#promises-and-errors）的示例修复问题。 修改示例，以便在操作不成功时向用户显示消息。 成功和不成功事件显示的消息应该有所不同：
 
 ![error message shown on screen instead of in console feature add-on](../../images/2/28e.png)
 
@@ -524,7 +507,7 @@ const App = () => {
 <!-- The principle is that the effect is always executed after the first render of the component <i>and</i> when the value of the second parameter changes.-->
 原则是，组件首次渲染后就会执行效果， <i>并且</i> 当第二个参数的值发生变化时也会执行。
 
-<!-- If the second parameter is an empty array <em>[]</em>, it''s content never changes and the effect is only run after the first render of the component. This is exactly what we want when we are initializing the app state from the server.-->
+<!-- If the second parameter is an empty array <em>[]</em>, it's content never changes and the effect is only run after the first render of the component. This is exactly what we want when we are initializing the app state from the server.-->
 如果第二个参数是一个空数组<em>[]</em>，它的内容永远不会改变，而且效果只会在组件的第一次渲染之后才会生效。当我们从服务器初始化应用程序状态时，这正是我们所希望的。
 
 <!-- However, there are situations where we want to perform the effect at other times, e.g. when the state of the component changes in a particular way.-->
@@ -750,7 +733,7 @@ REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3
 <!-- Note that you will need to restart the server to apply the changes.-->
 注意，您需要重新启动服务器以应用更改。
 
-<!-- This was the last exercise of this part of the course. It''s time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
+<!-- This was the last exercise of this part of the course. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
 这是本课程的最后一个练习。是时候将你的代码推送到GitHub，并将你完成的所有练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)上了。
 
 </div>

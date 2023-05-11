@@ -13,7 +13,7 @@ lang: zh
 <!-- In some situations, it can be beneficial to implement some of the backend tests by mocking the database instead of using a real database. One library that could be used for this is [mongodb-memory-server](https://github.com/nodkz/mongodb-memory-server).-->
 在某些情况下，使用模拟数据库而不是使用真实数据库来实施一些后端测试可能是有益的。可以使用[mongodb-memory-server](https://github.com/nodkz/mongodb-memory-server)库来实现这一点。
 
-<!-- Since our application''s backend is still relatively simple, we will decide to test the entire application through its REST API, so that the database is also included. This kind of testing where multiple components of the system are being tested as a group is called [integration testing](https://en.wikipedia.org/wiki/Integration_testing).-->
+<!-- Since our application's backend is still relatively simple, we will decide to test the entire application through its REST API, so that the database is also included. This kind of testing where multiple components of the system are being tested as a group is called [integration testing](https://en.wikipedia.org/wiki/Integration_testing).-->
 由于我们应用程序的后端仍然相对简单，我们将决定通过其REST API来测试整个应用程序，以便包括数据库。这种测试系统的多个组件作为一组进行测试的测试方法称为[集成测试](https://en.wikipedia.org/wiki/Integration_testing)。
 
 ### Test environment
@@ -27,7 +27,7 @@ lang: zh
 <!-- It is common practice to define separate modes for development and testing.-->
 一般情况下，会为开发和测试定义不同的模式。
 
-<!-- Next, let''s change the scripts in our <i>package.json</i> so that when tests are run, <i>NODE\_ENV</i> gets the value <i>test</i>:-->
+<!-- Next, let's change the scripts in our <i>package.json</i> so that when tests are run, <i>NODE\_ENV</i> gets the value <i>test</i>:-->
 接下来，让我们更改<i>package.json</i>中的脚本，以便在运行测试时，<i>NODE\_ENV</i>获得<i>test</i>的值：
 
 ```json
@@ -89,7 +89,7 @@ npm install cross-env
 <!-- We can create our separate test database in MongoDB Atlas. This is not an optimal solution in situations where many people are developing the same application. Test execution in particular typically requires a single database instance that is not used by tests that are running concurrently.-->
 我们可以在MongoDB Atlas中创建我们自己的独立测试数据库。在许多人开发同一个应用程序的情况下，这不是一个最佳解决方案。特别是测试执行通常需要一个不被同时运行的测试所使用的单个数据库实例。
 
-<!-- It would be better to run our tests using a database that is installed and running on the developer''s local machine. The optimal solution would be to have every test execution use a separate database. This is "relatively simple" to achieve by [running Mongo in-memory](https://docs.mongodb.com/manual/core/inmemory/) or by using [Docker](https://www.docker.com) containers. We will not complicate things and will instead continue to use the MongoDB Atlas database.-->
+<!-- It would be better to run our tests using a database that is installed and running on the developer's local machine. The optimal solution would be to have every test execution use a separate database. This is "relatively simple" to achieve by [running Mongo in-memory](https://docs.mongodb.com/manual/core/inmemory/) or by using [Docker](https://www.docker.com) containers. We will not complicate things and will instead continue to use the MongoDB Atlas database.-->
 最好的解决方案是让每次测试执行使用一个单独的数据库，这可以通过[运行Mongo内存](https://docs.mongodb.com/manual/core/inmemory/)或使用[Docker](https://www.docker.com)容器来实现，但我们不会使事情变得复杂，而是继续使用MongoDB Atlas数据库。
 
 <!-- Let's make some changes to the module that defines the application's configuration:-->
@@ -127,7 +127,7 @@ TEST_MONGODB_URI=mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/t
 <!-- The _config_ module that we have implemented slightly resembles the [node-config](https://github.com/lorenwest/node-config) package. Writing our implementation is justified since our application is simple, and also because it teaches us valuable lessons.-->
 我们实现的_config_模块有点类似[node-config](https://github.com/lorenwest/node-config)包。写出我们的实现是合理的，因为我们的应用很简单，而且还能教会我们宝贵的经验。
 
-<!-- These are the only changes we need to make to our application''s code.-->
+<!-- These are the only changes we need to make to our application's code.-->
 这些是我们需要对应用程序代码做出的唯一更改。
 
 <!-- You can find the code for our current application in its entirety in the <i>part4-2</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-2).-->
@@ -135,7 +135,7 @@ TEST_MONGODB_URI=mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/t
 
 ### supertest
 
-<!-- Let''s use the [supertest](https://github.com/visionmedia/supertest) package to help us write our tests for testing the API.-->
+<!-- Let's use the [supertest](https://github.com/visionmedia/supertest) package to help us write our tests for testing the API.-->
 让我们使用[supertest](https://github.com/visionmedia/supertest)包来帮助我们编写测试来测试API。
 
 <!-- We will install the package as a development dependency:-->
@@ -145,7 +145,7 @@ TEST_MONGODB_URI=mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/t
 npm install --save-dev supertest
 ```
 
-<!-- Let''s write our first test in the <i>tests/note_api.test.js</i> file:-->
+<!-- Let's write our first test in the <i>tests/note_api.test.js</i> file:-->
 让我们在<i>tests/note_api.test.js</i>文件中编写我们的第一个测试：
 
 ```js
@@ -289,10 +289,10 @@ const api = supertest(app) // highlight-line
 <!-- In other words, supertest takes care that the application being tested is started at the port that it uses internally.-->
 换句话说，supertest确保被测试的应用程序在其内部使用的端口上启动。
 
-<!-- Let''s add two notes to the test database using the _mongo.js_ program (here we must remember to switch to the correct database url).-->
+<!-- Let's add two notes to the test database using the _mongo.js_ program (here we must remember to switch to the correct database url).-->
 使用_mongo.js_程序向测试数据库添加两条笔记（这里我们必须记住切换到正确的数据库url）。
 
-<!-- Let''s write a few more tests:-->
+<!-- Let's write a few more tests:-->
 让我们写几个更多的测试：
 
 ```js
@@ -356,7 +356,7 @@ module.exports = {
 <!-- Our tests are already using the [afterAll](https://jestjs.io/docs/api#afterallfn-timeout) function of Jest to close the connection to the database after the tests are finished executing. Jest offers many other [functions](https://jestjs.io/docs/setup-teardown) that can be used for executing operations once before any test is run or every time before a test is run.-->
 我们的测试已经使用了Jest的[afterAll](https://jestjs.io/docs/api#afterallfn-timeout)函数，在测试执行完毕后关闭与数据库的连接。 Jest提供了许多其他[功能](https://jestjs.io/docs/setup-teardown)，可用于在运行任何测试之前或每次在运行测试之前执行一次操作。
 
-<!-- Let''s initialize the database <i>before every test</i> with the [beforeEach](https://jestjs.io/docs/en/api.html#beforeeachfn-timeout) function:-->
+<!-- Let's initialize the database <i>before every test</i> with the [beforeEach](https://jestjs.io/docs/en/api.html#beforeeachfn-timeout) function:-->
 让我们用[beforeEach](https://jestjs.io/docs/en/api.html#beforeeachfn-timeout)函数在每次测试<i>之前</i>初始化数据库：
 
 ```js
@@ -398,7 +398,7 @@ beforeEach(async () => {
 <!-- The database is cleared out at the beginning, and after that, we save the two notes stored in the _initialNotes_ array to the database. By doing this, we ensure that the database is in the same state before every test is run.-->
 数据库一开始就被清空，然后我们把存储在`initialNotes`数组中的两条笔记保存到数据库中。通过这样做，我们确保在每次测试运行前数据库都处于同一状态。
 
-<!-- Let''s also make the following changes to the last two tests:-->
+<!-- Let's also make the following changes to the last two tests:-->
 让我们也对最后两次测试做出以下改变：
 
 ```js
@@ -464,7 +464,7 @@ npm test -- -t 'notes'
 
 ### async/await
 
-<!-- Before we write more tests let''s take a look at the _async_ and _await_ keywords.-->
+<!-- Before we write more tests let's take a look at the _async_ and _await_ keywords.-->
 在我们写更多测试之前，让我们来看看_async_和_await_关键字。
 
 <!-- The async/await syntax that was introduced in ES7 makes it possible to use <i>asynchronous functions that return a promise</i> in a way that makes the code look synchronous.-->
@@ -556,7 +556,7 @@ main() // highlight-line
 
 ### async/await in the backend
 
-<!-- Let''s start to change the backend to async and await. As all of the asynchronous operations are currently done inside of a function, it is enough to change the route handler functions into async functions.-->
+<!-- Let's start to change the backend to async and await. As all of the asynchronous operations are currently done inside of a function, it is enough to change the route handler functions into async functions.-->
 让我们开始把后端改为 async 和 await。由于所有的异步操作目前都在函数内部完成，因此只需要把路由处理函数改为 async 函数就足够了。
 
 <!-- The route for fetching all notes gets changed to the following:-->
@@ -577,7 +577,7 @@ notesRouter.get('/', async (request, response) => {
 
 ### More tests and refactoring the backend
 
-<!-- When code gets refactored, there is always the risk of [regression](https://en.wikipedia.org/wiki/Regression_testing), meaning that existing functionality may break. Let''s refactor the remaining operations by first writing a test for each route of the API.-->
+<!-- When code gets refactored, there is always the risk of [regression](https://en.wikipedia.org/wiki/Regression_testing), meaning that existing functionality may break. Let's refactor the remaining operations by first writing a test for each route of the API.-->
 当代码重构时，总会有[回归](https://en.wikipedia.org/wiki/Regression_testing)的风险，这意味着现有功能可能会出现故障。让我们先为API的每个路由编写一个测试，然后再重构剩余的操作。
 
 <!-- Let's start with the operation for adding a new note. Let's write a test that adds a new note and verifies that the number of notes returned by the API increases and that the newly added note is in the list.-->
@@ -627,7 +627,7 @@ notesRouter.post('/', (request, response, next) => {
 })
 ```
 
-<!-- Let''s also write a test that verifies that a note without content will not be saved into the database.-->
+<!-- Let's also write a test that verifies that a note without content will not be saved into the database.-->
 让我们也写一个测试来验证没有内容的笔记不会被保存到数据库中。
 
 ```js
@@ -654,7 +654,7 @@ test('note without content is not added', async () => {
 const response = await api.get('/api/notes')
 ```
 
-<!-- The same verification steps will repeat in other tests later on, and it is a good idea to extract these steps into helper functions. Let''s add the function into a new file called <i>tests/test_helper.js</i> which is in the same directory as the test file.-->
+<!-- The same verification steps will repeat in other tests later on, and it is a good idea to extract these steps into helper functions. Let's add the function into a new file called <i>tests/test_helper.js</i> which is in the same directory as the test file.-->
 同样的验证步骤将在以后的其他测试中重复，把这些步骤抽取到辅助函数中是个好主意。让我们把这个函数添加到一个叫做<i>tests/test_helper.js</i>的新文件中，它和测试文件在同一个目录下。
 
 ```js
@@ -803,7 +803,7 @@ notesRouter.post('/', async (request, response, next) => {
 
 ### Error handling and async/await
 
-<!-- If there''s an exception while handling the POST request we end up in a familiar situation:-->
+<!-- If there's an exception while handling the POST request we end up in a familiar situation:-->
 如果在处理POST请求时出现异常，我们就会陷入一个熟悉的情境：
 
 ![terminal showing unhandled promise rejection warning](../../images/4/6.png)
@@ -839,7 +839,7 @@ catch 块只是简单地调用 _next_ 函数，该函数将请求处理传递给
 <!-- After making the change, all of our tests will pass once again.-->
 在做出改变之后，我们所有的测试都会再次通过。
 
-<!-- Next, let''s write tests for fetching and removing an individual note:-->
+<!-- Next, let's write tests for fetching and removing an individual note:-->
 接下来，让我们为获取和删除单个笔记编写测试：
 
 ```js
@@ -934,7 +934,7 @@ try {
 <!-- The [express-async-errors](https://github.com/davidbanham/express-async-errors) library has a solution for this.-->
 [express-async-errors](https://github.com/davidbanham/express-async-errors) 库为此提供了解决方案。
 
-<!-- Let''s install the library-->
+<!-- Let's install the library-->
 .
 
 让我们安装这个库吧。
@@ -1189,7 +1189,7 @@ notesRouter.get('/:id', async (request, response) => {
 
 ### Optimizing the beforeEach function
 
-<!-- Let''s return to writing our tests and take a closer look at the _beforeEach_ function that sets up the tests:-->
+<!-- Let's return to writing our tests and take a closer look at the _beforeEach_ function that sets up the tests:-->
 让我们回到写测试，并仔细看看设置测试的`beforeEach`函数：
 
 ```js
@@ -1204,7 +1204,7 @@ beforeEach(async () => {
 })
 ```
 
-<!-- The function saves the first two notes from the _helper.initialNotes_ array into the database with two separate operations. The solution is alright, but there''s a better way of saving multiple objects to the database:-->
+<!-- The function saves the first two notes from the _helper.initialNotes_ array into the database with two separate operations. The solution is alright, but there's a better way of saving multiple objects to the database:-->
 函数通过两个单独的操作，将`_helper.initialNotes_`数组中的前两个笔记保存到数据库中，解决方案还可以，但是有一种更好的方式可以一次性将多个对象保存到数据库中。
 
 ```js
@@ -1292,7 +1292,7 @@ JavaScript 的非同步性质可能导致令人惊讶的行为，因此，在使
 <!-- The code for our application can be found on [GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5), branch <i>part4-5</i>.-->
 我们应用的代码可以在[GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5)的<i>part4-5</i>分支上找到。
 
-### A true full stack developer''s oath
+### A true full stack developer's oath
 
 <!-- Making tests brings yet another layer of challenge to programming. We have to update our full stack developer oath to remind you that systematicity is also key when developing tests.-->
 编写测试给编程带来了另一个层面的挑战。我们必须更新我们的全栈开发者誓言，提醒你在开发测试时系统性也是关键。
@@ -1387,11 +1387,11 @@ module.exports = () => {
 
 #### 4.9: Blog list tests, step2
 
-<!-- Write a test that verifies that the unique identifier property of the blog posts is named <i>id</i>, by default the database names the property <i>_id</i>. Verifying the existence of a property is easily done with Jest''s [toBeDefined](https://jestjs.io/docs/en/expect#tobedefined) matcher.-->
+<!-- Write a test that verifies that the unique identifier property of the blog posts is named <i>id</i>, by default the database names the property <i>_id</i>. Verifying the existence of a property is easily done with Jest's [toBeDefined](https://jestjs.io/docs/en/expect#tobedefined) matcher.-->
 编写一个测试来验证博客文章的唯一标识符属性默认名称为<i>id</i>，数据库默认命名为<i>_id</i>。使用Jest的[toBeDefined](https://jestjs.io/docs/en/expect#tobedefined)匹配器可以很容易地验证属性的存在。
 
 <!-- Make the required changes to the code so that it passes the test. The [toJSON](/en/part3/saving_data_to_mongo_db#connecting-the-backend-to-a-database) method discussed in part 3 is an appropriate place for defining the <i>id</i> parameter.-->
-修改代码，使其通过测试。 第3部分讨论的[toJSON](/en/part3/saving_data_to_mongo_db#connecting-the-backend-to-a-database) 方法是定义<i>id</i>参数的合适位置。
+修改代码，使其通过测试。 第3章节讨论的[toJSON](/en/part3/saving_data_to_mongo_db#connecting-the-backend-to-a-database) 方法是定义<i>id</i>参数的合适位置。
 
 #### 4.10: Blog list tests, step3
 

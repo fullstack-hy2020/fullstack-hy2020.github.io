@@ -8,10 +8,10 @@ lang: zh
 <div class="content">
 
 <!-- In the last two parts, we have mainly concentrated on the backend. The frontend that we developed in [part 2](/en/part2) does not yet support the user management we implemented to the backend in part 4.-->
-在最近的两部分中，我们主要集中在后端。我们在[第二部分](/en/part2)开发的前端尚未支持我们在第四部分实现的用户管理。
+在最近的两部分中，我们主要集中在后端。我们在[第二章节](/en/part2)开发的前端尚未支持我们在第四章节实现的用户管理。
 
-<!-- At the moment the frontend shows existing notes and lets users change the state of a note from important to not important and vice versa. New notes cannot be added anymore because of the changes made to the backend in part 4: the backend now expects that a token verifying a user''s identity is sent with the new note.-->
-目前前端显示现有笔记，并允许用户将笔记从重要更改为不重要，反之亦然。由于第4部分对后端的更改，新笔记不能再添加：后端现在需要发送一个验证用户身份的令牌来添加新的笔记。
+<!-- At the moment the frontend shows existing notes and lets users change the state of a note from important to not important and vice versa. New notes cannot be added anymore because of the changes made to the backend in part 4: the backend now expects that a token verifying a user's identity is sent with the new note.-->
+目前前端显示现有笔记，并允许用户将笔记从重要更改为不重要，反之亦然。由于第4章节对后端的更改，新笔记不能再添加：后端现在需要发送一个验证用户身份的令牌来添加新的笔记。
 
 <!-- We'll now implement a part of the required user management functionality in the frontend. Let's begin with the user login. Throughout this part, we will assume that new users will not be added from the frontend.-->
 我们现在将在前端实现部分所需的用户管理功能。让我们从用户登录开始。在这一部分中，我们假设不会从前端添加新用户。
@@ -94,8 +94,8 @@ export default App
 <!-- The current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-1), branch <i>part5-1</i>. If you clone the repo, don''t forget to run _npm install_ before attempting to run the frontend.-->
 当前的应用代码可以在[Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-1)上找到，分支为<i>part5-1</i>。如果你克隆了这个仓库，在尝试运行前端之前不要忘记运行 _npm install_。
 
-<!-- The frontend will not display any notes if it''s not connected to the backend. You can start the backend with _npm run dev_ in its folder from Part 4. This will run the backend on port 3001. While that is active, in a separate terminal window you can start the frontend with _npm start_, and now you can see the notes that are saved in your MongoDB database from Part 4.-->
-前端如果没有连接到后端，将不会显示任何笔记。你可以在第四部分的文件夹里使用 `npm run dev` 来启动后端，它将在端口 3001 上运行。当后端运行时，在另一个终端窗口里使用 `npm start` 启动前端，现在你可以看到从第四部分保存在 MongoDB 数据库中的笔记了。
+<!-- The frontend will not display any notes if it's not connected to the backend. You can start the backend with _npm run dev_ in its folder from Part 4. This will run the backend on port 3001. While that is active, in a separate terminal window you can start the frontend with _npm start_, and now you can see the notes that are saved in your MongoDB database from Part 4.-->
+前端如果没有连接到后端，将不会显示任何笔记。你可以在第四章节的文件夹里使用 `npm run dev` 来启动后端，它将在端口 3001 上运行。当后端运行时，在另一个终端窗口里使用 `npm start` 启动前端，现在你可以看到从第四章节保存在 MongoDB 数据库中的笔记了。
 
 <!-- Keep this in mind from now on.-->
 请从现在开始牢记这一点。
@@ -118,7 +118,7 @@ the last lesson
 <!-- The method _handleLogin_, which is responsible for handling the data in the form, is yet to be implemented.-->
 方法`handleLogin`，负责处理表单中的数据，尚未实现。
 
-<!-- Logging in is done by sending an HTTP POST request to the server address <i>api/login</i>. Let''s separate the code responsible for this request into its own module, to file <i>services/login.js</i>.-->
+<!-- Logging in is done by sending an HTTP POST request to the server address <i>api/login</i>. Let's separate the code responsible for this request into its own module, to file <i>services/login.js</i>.-->
 登录是通过发送HTTP POST请求到服务器地址<i>api/login</i>完成的。让我们把负责此请求的代码分离到它自己的模块中，文件名为<i>services/login.js</i>。
 
 <!-- We''ll use <i>async/await</i> syntax instead of promises for the HTTP request:-->
@@ -188,16 +188,16 @@ const App = () => {
 }
 ```
 
-<!-- If the login is successful, the form fields are emptied <i>and</i> the server response (including a <i>token</i> and the user details) is saved to the <i>user</i> field of the application''s state.-->
+<!-- If the login is successful, the form fields are emptied <i>and</i> the server response (including a <i>token</i> and the user details) is saved to the <i>user</i> field of the application's state.-->
 如果登录成功，表单字段将被清空<i>并且</i>服务器响应（包括一个<i>令牌</i>和用户详细信息）将被保存到应用程序状态的<i>用户</i>字段中。
 
 <!-- If the login fails or running the function _loginService.login_ results in an error, the user is notified.-->
 如果登录失败或者运行函数 _loginService.login_ 导致错误，用户会收到通知。
 
-<!-- The user is not notified about a successful login in any way. Let''s modify the application to show the login form only <i>if the user is not logged-in</i> so when _user === null_. The form for adding new notes is shown only if the <i>user is logged-in</i>, so <i>user</i> contains the user details.-->
+<!-- The user is not notified about a successful login in any way. Let's modify the application to show the login form only <i>if the user is not logged-in</i> so when _user === null_. The form for adding new notes is shown only if the <i>user is logged-in</i>, so <i>user</i> contains the user details.-->
 用户未以任何方式被通知登录成功。让我们修改应用程序，仅在<i>用户未登录时</i>显示登录表单，因此当_user === null_时。仅在<i>用户已登录时</i>才会显示添加新笔记的表单，因此<i>user</i>包含用户详细信息。
 
-<!-- Let''s add two helper functions to the <i>App</i> component for generating the forms:-->
+<!-- Let's add two helper functions to the <i>App</i> component for generating the forms:-->
 让我们为<i>App</i>组件添加两个辅助函数来生成表单：
 
 ```js
@@ -329,7 +329,7 @@ return (
 <!-- If _user === null_ is [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy), _loginForm()_ is executed. If not, _noteForm()_ is.-->
 如果`user === null`是[真值](https://developer.mozilla.org/en-US/docs/Glossary/Truthy)，就执行`loginForm()`，否则执行`noteForm()`。
 
-<!-- Let''s do one more modification. If the user is logged in, their name is shown on the screen:-->
+<!-- Let's do one more modification. If the user is logged in, their name is shown on the screen:-->
 让我们做一个更多的修改。如果用户已登录，他们的名字就会显示在屏幕上：
 
 ```js
@@ -385,7 +385,7 @@ const handleLogin = async (event) => {
 }
 ```
 
-<!-- Let''s fix creating new notes so it works with the backend. This means adding the token of the logged-in user to the Authorization header of the HTTP request.-->
+<!-- Let's fix creating new notes so it works with the backend. This means adding the token of the logged-in user to the Authorization header of the HTTP request.-->
 让我们修复创建新笔记的功能，以便它可以与后端一起工作。这意味着将已登录用户的令牌添加到HTTP请求的Authorization标头中。
 
 <!-- The <i>noteService</i> module changes like so:-->
@@ -455,9 +455,9 @@ const handleLogin = async (event) => {
 <!-- And now adding new notes works again!-->
 现在又可以添加新笔记了！
 
-### Saving the token to the browser''s local storage
+### Saving the token to the browser's local storage
 
-<!-- Our application has a small flaw: if the browser is refreshed (eg. pressing F5), the user''s login information disappears.-->
+<!-- Our application has a small flaw: if the browser is refreshed (eg. pressing F5), the user's login information disappears.-->
 我们的应用程序有一个小缺陷：如果刷新浏览器（例如按F5），用户的登录信息就会消失。
 
 <!-- This problem is easily solved by saving the login details to [local storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage). Local Storage is a [key-value](https://en.wikipedia.org/wiki/Key-value_database) database in the browser.-->
@@ -486,7 +486,7 @@ window.localStorage.getItem('name')
 <!-- Values in the local storage are persisted even when the page is re-rendered. The storage is [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin)-specific so each web application has its own storage.-->
 本地存储中的值即使在页面重新渲染时也会被持久化。存储是[origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin)特定的，因此每个Web应用程序都有自己的存储。
 
-<!-- Let''s extend our application so that it saves the details of a logged-in user to the local storage.-->
+<!-- Let's extend our application so that it saves the details of a logged-in user to the local storage.-->
 让我们扩展我们的应用，将已登录用户的详细信息保存到本地存储中。
 
 <!-- Values saved to the storage are [DOMstrings](https://docs.w3cub.com/dom/domstring), so we cannot save a JavaScript object as it is. The object has to be parsed to JSON first, with the method _JSON.stringify_. Correspondingly, when a JSON object is read from the local storage, it has to be parsed back to JavaScript with _JSON.parse_.-->
@@ -532,7 +532,7 @@ window.localStorage.getItem('name')
 <!-- The right way to do this is with an [effect hook](https://reactjs.org/docs/hooks-effect.html): a mechanism we first encountered in [part 2](/en/part2/getting_data_from_server#effect-hooks), and used to fetch notes from the server.-->
 正确的做法是使用[effect hook](https://reactjs.org/docs/hooks-effect.html)：这是我们在[第2章节](/en/part2/getting_data_from_server#effect-hooks)中首次遇到的机制，用于从服务器获取笔记。
 
-<!-- We can have multiple effect hooks, so let''s create a second one to handle the first loading of the page:-->
+<!-- We can have multiple effect hooks, so let's create a second one to handle the first loading of the page:-->
 我们可以有多个effect Hooks，所以让我们创建第二个来处理页面的第一次加载：
 
 ```js
@@ -573,7 +573,7 @@ const App = () => {
 <!-- Now a user stays logged in to the application forever. We should probably add a <i>logout</i> functionality, which removes the login details from the local storage. We will however leave it as an exercise.-->
 现在用户永久登录到应用程序中。我们可能应该添加一个<i>注销</i>功能，它会从本地存储中删除登录详细信息。不过，我们将把它作为一个练习留给大家。
 
-<!-- It''s possible to log out a user using the console, and that is enough for now.-->
+<!-- It's possible to log out a user using the console, and that is enough for now.-->
 可以通过控制台登出用户，这就够了。
 <!-- You can log out with the command:-->
 你可以用以下指令登出：
@@ -607,12 +607,12 @@ window.localStorage.clear()
 <!-- The first few exercises revise everything we have learned about React so far. They can be challenging, especially if your backend is incomplete.-->
 第一些练习回顾了我们迄今为止学到的所有关于 React 的知识。它们可能很有挑战性，特别是如果你的后端不完整的时候。
 <!-- It might be best to use the backend that we marked as the answer for part 4.-->
-可能最好使用我们在第4部分标记为答案的后端。
+可能最好使用我们在第4章节标记为答案的后端。
 
 <!-- While doing the exercises, remember all of the debugging methods we have talked about, especially keeping an eye on the console.-->
 在做练习的时候，记住我们讨论过的所有调试方法，尤其是要留意控制台。
 
-<!-- **Warning:** If you notice you are mixing in the functions _async/await_ and _then_ commands, it''s 99.9%  certain you are doing something wrong. Use either or, never both.-->
+<!-- **Warning:** If you notice you are mixing in the functions _async/await_ and _then_ commands, it's 99.9%  certain you are doing something wrong. Use either or, never both.-->
 **警告：**如果您注意到您正在混合使用_async / await_和_then_命令，那么99.9％的确定性您正在做错事。要么使用一个，要么不要使用两个。
 
 #### 5.1: bloglist frontend, step1
@@ -639,7 +639,7 @@ npm install
 npm start
 ```
 
-<!-- Implement login functionality to the frontend. The token returned with a successful login is saved to the application''s state <i>user</i>.-->
+<!-- Implement login functionality to the frontend. The token returned with a successful login is saved to the application's state <i>user</i>.-->
 实现登录功能到前端。登录成功后返回的令牌被保存到应用程序的<i>用户</i>状态中。
 
 <!-- If a user is not logged in, <i>only</i> the login form is visible.-->

@@ -8,7 +8,7 @@ lang: zh
 <div class="content">
 
 <!-- In addition to the eight exercises in the [React router](/en/part7/react_router) and [custom hooks](en/part7/custom_hooks) sections of this seventh part of the course material, 13 exercises continue our work on the Bloglist application that we worked on in parts four and five of the course material. Some of the following exercises are "features" that are independent of one another, meaning that there is no need to finish the exercises in any particular order. You are free to skip over a part of the exercises if you wish to do so. Quite many of the exercises are applying the advanced state management technique (Redux, React Query and context) covered in part [part 6](/en/part6).-->
-此第七部分课程材料中的[React 路由](/en/part7/react_router)和[自定义钩子](en/part7/custom_hooks)部分除了八个练习之外，还有13个练习继续我们对第四和第五部分课程材料中的Bloglist应用程序的工作。其中一些练习是相互独立的“功能”，这意味着没有必要按照特定顺序完成练习。您可以自由跳过某些练习。许多练习都应用了第[六部分](/en/part6)中涵盖的高级状态管理技术（Redux，React Query和context）。
+此第七章节课程材料中的[React 路由](/en/part7/react_router)和[自定义钩子](en/part7/custom_hooks)部分除了八个练习之外，还有13个练习继续我们对第四和第五章节课程材料中的Bloglist应用程序的工作。其中一些练习是相互独立的“功能”，这意味着没有必要按照特定顺序完成练习。您可以自由跳过某些练习。许多练习都应用了第[六部分](/en/part6)中涵盖的高级状态管理技术（Redux，React Query和context）。
 
 <!-- If you do not want to use your Bloglist application, you are free to use the code from the model solution as a starting point for these exercises.-->
 如果你不想使用你的Bloglist应用程序，你可以自由使用模型解决方案中的代码作为这些练习的起点。
@@ -198,7 +198,7 @@ const User = () => {
 <!-- You can mark this exercise as finished if you use an hour or more for styling your application.-->
 你可以把这个练习标记为完成，如果你花费一个小时或更多时间来设计你的应用程序。
 
-<!-- This was the last exercise for this part of the course and it''s time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
+<!-- This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
 这是本部分课程的最后一个练习，是时候将你的代码推送到GitHub，并将所有已完成的练习提交到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)了。
 
 </div>

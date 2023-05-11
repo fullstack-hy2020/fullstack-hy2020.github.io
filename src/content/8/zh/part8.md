@@ -6,7 +6,7 @@ lang: zh
 
 <div class="intro">
 
-<!-- This part of the course is about GraphQL, Facebook''s alternative to REST for communication between browser and server.-->
+<!-- This part of the course is about GraphQL, Facebook's alternative to REST for communication between browser and server.-->
 这部分课程是关于GraphQL，Facebook为浏览器和服务器之间的通信提供的REST的替代方案。
 
 <i>Part updated 5th Feb 2023</i>

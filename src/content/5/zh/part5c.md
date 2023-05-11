@@ -7,7 +7,7 @@ lang: zh
 
 <div class="content">
 
-<!-- There are many different ways of testing React applications. Let''s take a look at them next.-->
+<!-- There are many different ways of testing React applications. Let's take a look at them next.-->
 有许多不同的测试React应用程式的方式。让我们来看看它们。
 
 <!-- Tests will be implemented with the same [Jest](http://jestjs.io/) testing library developed by Facebook that was used in the previous part. Jest is configured by default to applications created with create-react-app.-->
@@ -16,7 +16,7 @@ lang: zh
 <!-- In addition to Jest, we also need another testing library that will help us render components for testing purposes. The current best option for this is [react-testing-library](https://github.com/testing-library/react-testing-library) which has seen rapid growth in popularity in recent times.-->
 除了Jest之外，我们还需要另一个测试库来帮助我们渲染组件以进行测试。目前这方面的最佳选择是[react-testing-library](https://github.com/testing-library/react-testing-library)，它近来的受欢迎程度迅速增长。
 
-<!-- Let''s install the library with the command:-->
+<!-- Let's install the library with the command:-->
 让我们用下面的命令安装库：
 
 ```bash
@@ -26,7 +26,7 @@ npm install --save-dev @testing-library/react @testing-library/jest-dom
 <!-- We also installed [jest-dom](https://testing-library.com/docs/ecosystem-jest-dom/) which provides some nice Jest-related helper methods.-->
 我们也安装了[jest-dom](https://testing-library.com/docs/ecosystem-jest-dom/)，它提供了一些很棒的Jest相关的辅助方法。
 
-<!-- Let''s first write tests for the component that is responsible for rendering a note:-->
+<!-- Let's first write tests for the component that is responsible for rendering a note:-->
 让我们首先为负责渲染一个笔记的组件编写测试：
 
 ```js
@@ -84,8 +84,8 @@ render(<Note note={note} />)
 <!-- Normally React components are rendered to the <i>DOM</i>. The render method we used renders the components in a format that is suitable for tests without rendering them to the DOM.-->
 一般来说，React 组件会渲染到 <i>DOM</i> 中。我们使用的 render 方法可以渲染出组件，而无需将它们渲染到 DOM 中，以适应测试的格式。
 
-<!-- We can use the object [screen](https://testing-library.com/docs/queries/about#screen) to access the rendered component. We use screen''s method [getByText](https://testing-library.com/docs/queries/bytext) to search for an element that has the note content and ensure that it exists:-->
-我们可以使用对象[screen](https://testing-library.com/docs/queries/about#screen)来访问渲染的组件。我们使用screen''s方法[getByText](https://testing-library.com/docs/queries/bytext)来搜索具有注释内容的元素，并确保它存在：
+<!-- We can use the object [screen](https://testing-library.com/docs/queries/about#screen) to access the rendered component. We use screen's method [getByText](https://testing-library.com/docs/queries/bytext) to search for an element that has the note content and ensure that it exists:-->
+我们可以使用对象[screen](https://testing-library.com/docs/queries/about#screen)来访问渲染的组件。我们使用screen's方法[getByText](https://testing-library.com/docs/queries/bytext)来搜索具有注释内容的元素，并确保它存在：
 
 ```js
   const element = screen.getByText('Component testing is done with react-testing-library')
@@ -119,10 +119,10 @@ $env:CI=$true; npm test
 
 ### Test file location
 
-<!-- In React there are (at least) [two different conventions](https://medium.com/@JeffLombardJr/organizing-tests-in-jest-17fc431ff850) for the test file''s location. We created our test files according to the current standard by placing them in the same directory as the component being tested.-->
+<!-- In React there are (at least) [two different conventions](https://medium.com/@JeffLombardJr/organizing-tests-in-jest-17fc431ff850) for the test file's location. We created our test files according to the current standard by placing them in the same directory as the component being tested.-->
 在React中，[至少有两种不同的约定](https://medium.com/@JeffLombardJr/organizing-tests-in-jest-17fc431ff850)用于测试文件的位置。我们根据当前标准创建了测试文件，将它们放在与要测试的组件相同的目录中。
 
-<!-- The other convention is to store the test files "normally" in a separate _test_ directory. Whichever convention we choose, it is almost guaranteed to be wrong according to someone''s opinion.-->
+<!-- The other convention is to store the test files "normally" in a separate _test_ directory. Whichever convention we choose, it is almost guaranteed to be wrong according to someone's opinion.-->
 另一种惯例是正常地将测试文件存储在单独的_test_目录中。无论我们选择哪种惯例，几乎可以肯定根据某人的意见是错误的。
 
 <!-- I do not like this way of storing tests and application code in the same directory. The reason we choose to follow this convention is that it is configured by default in applications created by create-react-app.-->
@@ -439,7 +439,7 @@ describe('<Togglable />', () => {
 <!-- The remaining tests use the [toHaveStyle](https://www.npmjs.com/package/@testing-library/jest-dom#tohavestyle) method to verify that the child component of the <i>Togglable</i> component is not visible initially, by checking that the style of the <i>div</i> element contains _{ display: 'none' }_. Another test verifies that when the button is pressed the component is visible, meaning that the style for hiding the component <i>is no longer</i> assigned to the component.-->
 剩下的测试使用[toHaveStyle](https://www.npmjs.com/package/@testing-library/jest-dom#tohavestyle)方法来验证<i>Togglable</i>组件的子组件最初不可见，通过检查<i>div</i>元素的样式包含_{ display: 'none' }_。另一个测试验证按下按钮时组件可见，这意味着隐藏组件的样式<i>不再</i>分配给组件。
 
-<!-- Let''s also add a test that can be used to verify that the visible content can be hidden by clicking the second button of the component:-->
+<!-- Let's also add a test that can be used to verify that the visible content can be hidden by clicking the second button of the component:-->
 让我们也添加一个测试，用于验证点击组件的第二个按钮可以隐藏可见内容：
 
 ```js
@@ -475,7 +475,7 @@ await user.click(button)
 <!-- We can also simulate text input with <i>userEvent</i>.-->
 我们也可以用<i>userEvent</i>来模拟文本输入。
 
-<!-- Let''s make a test for the <i>NoteForm</i> component. The code of the component is as follows.-->
+<!-- Let's make a test for the <i>NoteForm</i> component. The code of the component is as follows.-->
 让我们为<i>NoteForm</i>组件做一个测试。组件的代码如下。
 
 ```js
@@ -809,7 +809,7 @@ CI=true npm test -- --coverage
 
 #### 5.13: Blog list tests, step1
 
-<!-- Make a test, which checks that the component displaying a blog renders the blog''s title and author, but does not render its URL or number of likes by default.-->
+<!-- Make a test, which checks that the component displaying a blog renders the blog's title and author, but does not render its URL or number of likes by default.-->
 测试一下，检查组件是否默认渲染了博客的标题和作者，但不渲染它的 URL 或点赞数。
 
 <!-- Add CSS classes to the component to help the testing as necessary.-->
@@ -817,7 +817,7 @@ CI=true npm test -- --coverage
 
 #### 5.14: Blog list tests, step2
 
-<!-- Make a test, which checks that the blog''s URL and number of likes are shown when the button controlling the shown details has been clicked.-->
+<!-- Make a test, which checks that the blog's URL and number of likes are shown when the button controlling the shown details has been clicked.-->
 制作一个测试，检查当点击控制显示细节的按钮时，博客的URL和点赞数是否会显示出来。
 
 #### 5.15: Blog list tests, step3

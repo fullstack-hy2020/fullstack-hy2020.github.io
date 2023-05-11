@@ -8,15 +8,15 @@ lang: zh
 <div class="content">
 
 <!-- The exercises in this seventh part of the course differ a bit from the ones before. In this and the next chapter, as usual, there are [exercises related to the theory in the chapter](/en/part7/react_router#exercises-7-1-7-3).-->
-在本课程的第七部分，练习与之前有些不同。在本章和下一章，和往常一样，有[与章节理论相关的练习](/en/part7/react_router#exercises-7-1-7-3)。
+在本课程的第七章节，练习与之前有些不同。在本章和下一章，和往常一样，有[与章节理论相关的练习](/en/part7/react_router#exercises-7-1-7-3)。
 
 <!-- In addition to the exercises in this and the next chapter, there are a series of exercises in which we'll be revising what we've learned during the whole course by expanding the Bloglist application which we worked on during parts 4 and 5.-->
-此章和下一章的练习之外，我们还有一系列的练习，通过扩展我们在第4和第5部分工作的Bloglist应用程序，我们将复习整个课程中学到的内容。
+此章和下一章的练习之外，我们还有一系列的练习，通过扩展我们在第4和第5章节工作的Bloglist应用程序，我们将复习整个课程中学到的内容。
 
 ### Application navigation structure
 
 <!-- Following part 6, we return to React without Redux.-->
-# 继第6部分之后，我们回到没有 Redux 的 React 上。
+# 继第6章节之后，我们回到没有 Redux 的 React 上。
 
 <!-- It is very common for web applications to have a navigation bar, which enables switching the view of the application.-->
 它很常见的网络应用有一个导航栏，它可以让应用程序的视图可以切换。
@@ -132,7 +132,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 <!-- Luckily, React has the [React Router](https://reactrouter.com/) library which provides an excellent solution for managing navigation in a React application.-->
 幸运的是，React拥有[React Router](https://reactrouter.com/)库，它为React应用程序中的导航提供了出色的解决方案。
 
-<!-- Let''s change the above application to use React Router. First, we install React Router with the command-->
+<!-- Let's change the above application to use React Router. First, we install React Router with the command-->
 `npm install react-router-dom`.
 
 让我们改变上面的应用来使用React Router。首先，我们使用命令`npm install react-router-dom`安装React Router。
@@ -235,12 +235,12 @@ if the URL is `/about`, then the `About` component is rendered.
 </Routes>
 ```
 
-<!-- The Routes works by rendering the first component whose <i>path</i> matches the URL in the browser''s address bar.-->
+<!-- The Routes works by rendering the first component whose <i>path</i> matches the URL in the browser's address bar.-->
 Routes 通过渲染与浏览器地址栏中 URL 匹配的第一个 <i>path</i> 组件来工作。
 
 ### Parameterized route
 
-<!-- Let''s examine the slightly modified version from the previous example. The complete code for the example can be found [here](https://github.com/fullstack-hy2020/misc/blob/master/router-app-v1.js).-->
+<!-- Let's examine the slightly modified version from the previous example. The complete code for the example can be found [here](https://github.com/fullstack-hy2020/misc/blob/master/router-app-v1.js).-->
 让我们来检查一下从前一个例子里稍微修改过的版本。该示例的完整代码可以在[这里](https://github.com/fullstack-hy2020/misc/blob/master/router-app-v1.js)找到。
 
 <!-- The application now contains five different views whose display is controlled by the router. In addition to the components from the previous example (<i>Home</i>, <i>Notes</i> and <i>Users</i>), we have <i>Login</i> representing the login view and <i>Note</i> representing the view of a single note.-->
@@ -383,14 +383,14 @@ const Login = (props) => {
 }
 ```
 
-<!-- What is interesting about this component is the use of the [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate) function of the React Router. With this function, the browser''s URL can be changed programmatically.-->
+<!-- What is interesting about this component is the use of the [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate) function of the React Router. With this function, the browser's URL can be changed programmatically.-->
 这个组件有趣的地方在于使用了 React Router 的[useNavigate](https://reactrouter.com/en/main/hooks/use-navigate)函数。有了这个函数，浏览器的 URL 就可以被编程改变。
 
-<!-- With user login, we call _navigate('/')_ which causes the browser''s URL to change to _/_ and the application renders the corresponding component <i>Home</i>.-->
+<!-- With user login, we call _navigate('/')_ which causes the browser's URL to change to _/_ and the application renders the corresponding component <i>Home</i>.-->
 使用用户登录，我们调用_navigate('/')_，这会导致浏览器的URL更改为_/_，并且应用程序渲染相应的组件<i>Home</i>。
 
 <!-- Both [useParams](https://reactrouter.com/en/main/hooks/use-params) and [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate) are hook functions, just like useState and useEffect which we have used many times now.  As you remember from part 1, there are some [rules](/en/part1/a_more_complex_state_debugging_react_apps/#rules-of-hooks) to using hook functions. Create-react-app has been configured to warn you if you break these rules, for example, by calling a hook function from a conditional statement.-->
-两个[useParams](https://reactrouter.com/en/main/hooks/use-params)和[useNavigate](https://reactrouter.com/en/main/hooks/use-navigate)都是钩子函数，就像我们现在已经使用过的useState和useEffect一样。 正如您从第一部分记住的，使用钩子函数有一些[规则](/en/part1/a_more_complex_state_debugging_react_apps/#rules-of-hooks)。 Create-react-app已配置为警告您，如果您违反了这些规则，例如，从条件语句中调用钩子函数。
+两个[useParams](https://reactrouter.com/en/main/hooks/use-params)和[useNavigate](https://reactrouter.com/en/main/hooks/use-navigate)都是钩子函数，就像我们现在已经使用过的useState和useEffect一样。 正如您从第一章节记住的，使用钩子函数有一些[规则](/en/part1/a_more_complex_state_debugging_react_apps/#rules-of-hooks)。 Create-react-app已配置为警告您，如果您违反了这些规则，例如，从条件语句中调用钩子函数。
 
 ### redirect
 
@@ -491,10 +491,10 @@ const Note = ({ note }) => {
 }
 ```
 
-<!-- One way to do this would be to use React Router''s [useMatch](https://reactrouter.com/en/v6.3.0/api#usematch) hook to figure out the id of the note to be displayed in the _App_ component.-->
+<!-- One way to do this would be to use React Router's [useMatch](https://reactrouter.com/en/v6.3.0/api#usematch) hook to figure out the id of the note to be displayed in the _App_ component.-->
 一种做法是使用React Router的[useMatch](https://reactrouter.com/en/v6.3.0/api#usematch)钩子来确定在_App_组件中显示的笔记的id。
 
-<!-- It is not possible to use the <i>useMatch</i> hook in the component which defines the routed part of the application. Let''s move the use of the _Router_ components from _App_:-->
+<!-- It is not possible to use the <i>useMatch</i> hook in the component which defines the routed part of the application. Let's move the use of the _Router_ components from _App_:-->
 <i>useMatch</i> 钩子不能在定义应用路由部分的组件中使用。让我们将 _Router_ 组件的使用从 _App_ 中移除：
 
 ```js
@@ -548,7 +548,7 @@ const App = () => {
 }
 ```
 
-<!-- Every time the component is rendered, so practically every time the browser''s URL changes, the following command is executed:-->
+<!-- Every time the component is rendered, so practically every time the browser's URL changes, the following command is executed:-->
 每次组件被渲染，也就是说每次浏览器的URL发生变化时，都会执行以下命令：
 
 ```js
@@ -572,7 +572,7 @@ const note = match
 
 ### Exercises 7.1.-7.3.
 
-<!-- Let''s return to working with anecdotes. Use the redux-free anecdote app found in the repository <https://github.com/fullstack-hy2020/routed-anecdotes> as the starting point for the exercises.-->
+<!-- Let's return to working with anecdotes. Use the redux-free anecdote app found in the repository <https://github.com/fullstack-hy2020/routed-anecdotes> as the starting point for the exercises.-->
 让我们回到使用轶事的工作。使用存储库<https://github.com/fullstack-hy2020/routed-anecdotes>中的redux-free轶事应用程序作为练习的起点。
 
 <!-- If you clone the project into an existing git repository, remember to <i>delete the git configuration of the cloned application:</i>-->

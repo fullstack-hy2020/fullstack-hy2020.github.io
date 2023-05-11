@@ -7,8 +7,8 @@ lang: zh
 
 <div class="content">
 
-<!-- Let''s continue our work on the backend of the notes application we started in [part 3](/en/part3).-->
-让我们继续我们在[第三部分](/en/part3)开始的笔记应用程序的后端工作。
+<!-- Let's continue our work on the backend of the notes application we started in [part 3](/en/part3).-->
+让我们继续我们在[第三章节](/en/part3)开始的笔记应用程序的后端工作。
 
 ### Project structure
 
@@ -39,7 +39,7 @@ lang: zh
 所以迄今为止，我们一直在使用<i>console.log</i>和<i>console.error</i>来打印代码中的不同信息。
 <!-- However, this is not a very good way to do things.-->
 但是，这不是一个很好的做事方式。
-<!-- Let''s separate all printing to the console to its own module <i>utils/logger.js</i>:-->
+<!-- Let's separate all printing to the console to its own module <i>utils/logger.js</i>:-->
 让我们把所有的打印到控制台的内容都放到它自己的模块<i>utils/logger.js</i>中：
 
 ```js
@@ -194,7 +194,7 @@ module.exports = notesRouter
 <!-- All routes are now defined for the router object, similar to what did before with the object representing the entire application.-->
 现在为路由对象定义了所有路由，与之前用来表示整个应用程序的对象类似。
 
-<!-- It''s worth noting that the paths in the route handlers have shortened. In the previous version, we had:-->
+<!-- It's worth noting that the paths in the route handlers have shortened. In the previous version, we had:-->
 在路由处理程序中，值得注意的是路径已经缩短了。在之前的版本中，我们有：
 
 ```js
@@ -443,7 +443,7 @@ app.use('/api/notes', notesRouter)
 
 #### 4.1 Blog list, step1
 
-<!-- Let''s imagine a situation, where you receive an email that contains the following application body:-->
+<!-- Let's imagine a situation, where you receive an email that contains the following application body:-->
 让我们想象一个场景，你收到一封电子邮件，其中包含以下申请内容：
 
 ```js
@@ -491,7 +491,7 @@ app.listen(PORT, () => {
 })
 ```
 
-<!-- Turn the application into a functioning <i>npm</i> project. To keep your development productive, configure the application to be executed with <i>nodemon</i>. You can create a new database for your application with MongoDB Atlas, or use the same database from the previous part''s exercises.-->
+<!-- Turn the application into a functioning <i>npm</i> project. To keep your development productive, configure the application to be executed with <i>nodemon</i>. You can create a new database for your application with MongoDB Atlas, or use the same database from the previous part's exercises.-->
 将应用程序转换为功能<i>npm</i>项目。为了保持您的开发效率，请配置应用程序以<i>nodemon</i>执行。您可以使用MongoDB Atlas为您的应用程序创建一个新的数据库，或者使用前一部分练习中的相同数据库。
 
 <!-- Verify that it is possible to add blogs to the list with Postman or the VS Code REST client and that the application returns the added blogs at the correct endpoint.-->
@@ -502,7 +502,7 @@ app.listen(PORT, () => {
 <!-- Refactor the application into separate modules as shown earlier in this part of the course material.-->
 重构应用程序，将其拆分为如本课程材料中所示的独立模块。
 
-<!-- **NB** refactor your application in baby steps and verify that the application works after every change you make. If you try to take a "shortcut" by refactoring many things at once, then [Murphy''s law](https://en.wikipedia.org/wiki/Murphy%27s_law) will kick in and it is almost certain that something will break in your application. The "shortcut" will end up taking more time than moving forward slowly and systematically.-->
+<!-- **NB** refactor your application in baby steps and verify that the application works after every change you make. If you try to take a "shortcut" by refactoring many things at once, then [Murphy's law](https://en.wikipedia.org/wiki/Murphy%27s_law) will kick in and it is almost certain that something will break in your application. The "shortcut" will end up taking more time than moving forward slowly and systematically.-->
 **NB** 逐步重构你的应用程序，并在每次更改后验证应用程序是否正常工作。如果你试图采取“捷径”，一次重构很多东西，那么[墨菲定律](https://en.wikipedia.org/wiki/Murphy%27s_law)就会生效，几乎可以肯定应用程序会出现问题。“捷径”最终会比慢慢前进花费更多的时间。
 
 <!-- One best practice is to commit your code every time it is in a stable state. This makes it easy to rollback to a situation where the application still works.-->
@@ -561,7 +561,7 @@ Jest是这门课程的自然之选，因为它很适合测试后端，而且在�
 npm install --save-dev jest
 ```
 
-<!-- Let''s define the <i>npm script _test_</i> to execute tests with Jest and to report about the test execution with the <i>verbose</i> style:-->
+<!-- Let's define the <i>npm script _test_</i> to execute tests with Jest and to report about the test execution with the <i>verbose</i> style:-->
 让我们定义 <i>npm 脚本 _test_</i> 来使用 Jest 执行测试，并以 <i>详细</i> 样式报告测试执行情况：
 
 ```bash
@@ -593,7 +593,7 @@ npm install --save-dev jest
 }
 ```
 
-<!-- Let''s create a separate directory for our tests called <i>tests</i> and create a new file called <i>reverse.test.js</i> with the following contents:-->
+<!-- Let's create a separate directory for our tests called <i>tests</i> and create a new file called <i>reverse.test.js</i> with the following contents:-->
 让我们为我们的测试创建一个单独的目录叫<i>tests</i>，并创建一个新文件叫<i>reverse.test.js</i>，内容如下：
 
 ```js
@@ -618,7 +618,7 @@ test('reverse of releveler', () => {
 })
 ```
 
-<!-- The ESLint configuration we added to the project in the previous part complains about the _test_ and _expect_ commands in our test file since the configuration does not allow <i>globals</i>. Let''s get rid of the complaints by adding <i>"jest": true</i> to the <i>env</i> property in the <i>.eslintrc.js</i> file.-->
+<!-- The ESLint configuration we added to the project in the previous part complains about the _test_ and _expect_ commands in our test file since the configuration does not allow <i>globals</i>. Let's get rid of the complaints by adding <i>"jest": true</i> to the <i>env</i> property in the <i>.eslintrc.js</i> file.-->
 在前一部分中，我们添加到项目中的ESLint配置会对我们测试文件中的_test_和_expect_命令报出警告，因为该配置不允许使用<i>全局变量</i>。让我们通过在<i>.eslintrc.js</i>文件中的<i>env</i>属性中添加<i>"jest": true</i>来消除这些警告。
 
 ```js
@@ -662,7 +662,7 @@ const reverse = require('../utils/for_testing').reverse
 <!-- Jest expects by default that the names of test files contain <i>.test</i>. In this course, we will follow the convention of naming our tests files with the extension <i>.test.js</i>.-->
 Jest 默认期望测试文件的名字包含 <i>.test</i>。 在这个课程中，我们将遵循以 <i>.test.js</i> 为扩展名命名我们的测试文件的约定。
 
-<!-- Jest has excellent error messages, let''s break the test to demonstrate this:-->
+<!-- Jest has excellent error messages, let's break the test to demonstrate this:-->
 Jest有出色的错误消息，让我们打破测试来证明这一点：
 
 ```js
@@ -678,7 +678,7 @@ test('palindrome of react', () => {
 
 ![terminal output shows failure from npm test](../../images/4/2x.png)
 
-<!-- Let''s add a few tests for the _average_ function, into a new file <i>tests/average.test.js</i>.-->
+<!-- Let's add a few tests for the _average_ function, into a new file <i>tests/average.test.js</i>.-->
 让我们在一个新的文件<i>tests/average.test.js</i>中为_average_函数添加几个测试。
 
 ```js
@@ -754,7 +754,7 @@ test('of empty array is zero', () => {
 
 ### Exercises 4.3.-4.7.
 
-<!-- Let''s create a collection of helper functions that are meant to assist in dealing with the blog list. Create the functions into a file called <i>utils/list_helper.js</i>. Write your tests into an appropriately named test file under the <i>tests</i> directory.-->
+<!-- Let's create a collection of helper functions that are meant to assist in dealing with the blog list. Create the functions into a file called <i>utils/list_helper.js</i>. Write your tests into an appropriately named test file under the <i>tests</i> directory.-->
 让我们创建一组辅助函数，旨在帮助处理博客列表。将函数创建到一个名为<i>utils/list_helper.js</i>的文件中。将测试写入<i>tests</i>目录下的适当命名的测试文件中。
 
 #### 4.3: helper functions and unit tests, step1
@@ -796,7 +796,7 @@ test('dummy returns one', () => {
 <!-- Define a new _totalLikes_ function that receives a list of blog posts as a parameter. The function returns the total sum of <i>likes</i> in all of the blog posts.-->
 定义一个新的_totalLikes_函数，它接收一个博客帖子列表作为参数。该函数返回所有博客帖子中<i>likes</i>的总和。
 
-<!-- Write appropriate tests for the function. It''s recommended to put the tests inside of a <i>describe</i> block so that the test report output gets grouped nicely:-->
+<!-- Write appropriate tests for the function. It's recommended to put the tests inside of a <i>describe</i> block so that the test report output gets grouped nicely:-->
 写适当的测试用例来测试该函数，建议将测试用例放在<i>describe</i>块中，以便测试报告输出得到良好的分组：
 
 ![npm test passing for list_helper_test](../../images/4/5.png)
@@ -828,7 +828,7 @@ describe('total likes', () => {
 如果定义自己的测试输入博客列表太费劲了，你可以使用[这里](https://raw.githubusercontent.com/fullstack-hy2020/misc/master/blogs_for_test.md)提供的现成列表。
 
 <!-- You are bound to run into problems while writing tests. Remember the things that we learned about [debugging](/en/part3/saving_data_to_mongo_db#debugging-node-applications) in part 3. You can print things to the console with _console.log_ even during test execution. It is even possible to use the debugger while running tests, you can find instructions for that [here](https://jestjs.io/docs/en/troubleshooting).-->
-你在写测试的时候肯定会遇到问题。记住我们在第三部分学到的关于[调试](/en/part3/saving_data_to_mongo_db#debugging-node-applications)的东西。你可以使用_console.log_在测试执行期间打印东西到控制台。甚至可以在运行测试时使用调试器，你可以在[这里](https://jestjs.io/docs/en/troubleshooting)找到相关的指示。
+你在写测试的时候肯定会遇到问题。记住我们在第三章节学到的关于[调试](/en/part3/saving_data_to_mongo_db#debugging-node-applications)的东西。你可以使用_console.log_在测试执行期间打印东西到控制台。甚至可以在运行测试时使用调试器，你可以在[这里](https://jestjs.io/docs/en/troubleshooting)找到相关的指示。
 
 <!-- **NB:** if some test is failing, then it is recommended to only run that test while you are fixing the issue. You can run a single test with the [only](https://jestjs.io/docs/api#testonlyname-fn-timeout) method.-->
 如果某些测试失败，建议只在修复问题时运行该测试。您可以使用[only](https://jestjs.io/docs/api#testonlyname-fn-timeout)方法运行单个测试。
