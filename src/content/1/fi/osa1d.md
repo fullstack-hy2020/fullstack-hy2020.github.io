@@ -318,7 +318,7 @@ Konsoli paljastaa ongelman
 
 ![](../../images/1/32.png)
 
-Vaikka tilalle _left_ asetettiin uusi arvo kutsumalla _setLeft(left + 1)_ on tilalla siis tapahtumankäsittelijän sisällä edelleen vanha arvo päivityksestä huolimatta! Tämän takia seuraava takia nappien painallusten laskuyritys tuottaa aina yhtä liian pienen tuloksen:
+Vaikka tilalle _left_ asetettiin uusi arvo kutsumalla _setLeft(left + 1)_ on tilalla siis tapahtumankäsittelijän sisällä edelleen vanha arvo päivityksestä huolimatta! Tämän takia seuraava nappien painallusten laskuyritys tuottaa aina yhtä liian pienen tuloksen:
 
 ```js
 setTotal(left + right) 
