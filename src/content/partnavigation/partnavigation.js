@@ -453,7 +453,7 @@ module.exports = {
       a: 'Login no front-end',
       b: 'props.children e proptypes',
       c: 'Testando aplicações React',
-      d: 'Teste de ponta a ponta',
+      d: 'Testes end-to-end',
     },
     '6': {
       a: 'Arquitetura Flux e Redux',
