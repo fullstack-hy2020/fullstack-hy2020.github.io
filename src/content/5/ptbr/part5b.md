@@ -217,7 +217,7 @@ export default Togglable
 A nova e interessante parte do código é a [props.children](https://pt-br.reactjs.org/docs/glossary.html#propschildren), que é usada para referenciar os componentes filhos do componente. Os componentes filhos são os elementos React que definimos entre as tags de abertura e fechamento de um componente.
 
 
-Dessa vez, os filhos são renderizados no código que é usado para renderizar o próprio componente:
+Dessa vez, os <i>children</i> são renderizados no código que é usado para renderizar o próprio componente:
 
 ```js
 <div style={showWhenVisible}>
