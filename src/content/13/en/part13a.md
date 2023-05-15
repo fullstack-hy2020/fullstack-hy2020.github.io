@@ -156,7 +156,7 @@ postgres=#
 ```
 
 Defined in this way, the data stored in the database is persisted only as long as the container exists. The data can be preserved by defining a
-[volume](/en/part12/building_and_configuring_environments#persisting-data-with-volumes) fort the data, see more
+[volume](/en/part12/building_and_configuring_environments#persisting-data-with-volumes) for the data, see more
 [here](https://github.com/docker-library/docs/blob/master/postgres/README.md#pgdata).
 
 #### Using the psql console
@@ -781,7 +781,7 @@ Now the result is exactly what we want:
 In the case of a collection of objects, the method toJSON does not work directly, the method must be called separately for each object in the collection:
 
 ```js
-router.get('/', async (req, res) => {
+app.get('/api/notes', async (req, res) => {
   const notes = await Note.findAll()
 
   console.log(notes.map(n=>n.toJSON())) // highlight-line
@@ -806,7 +806,7 @@ The print looks like the following:
 However, perhaps a better solution is to turn the collection into JSON for printing by using the method [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify):
 
 ```js
-router.get('/', async (req, res) => {
+app.get('/api/notes', async (req, res) => {
   const notes = await Note.findAll()
 
   console.log(JSON.stringify(notes)) // highlight-line

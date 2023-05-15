@@ -11,7 +11,7 @@ Olemme noudattaneet sovelluksen tilan hallinnassa Reactin suosittelemaa käytän
 
 ### Flux-arkkitehtuuri
 
-Facebook kehitti jo Reactin historian varhaisvaiheissa tilan hallinnan ongelmia helpottamaan [Flux]((https://facebook.github.io/flux/docs/in-depth-overview/)-arkkitehtuurin. Fluxissa sovelluksen tilan hallinta erotetaan kokonaan Reactin komponenttien ulkopuolisiin varastoihin eli <i>storeihin</i>. Storessa olevaa tilaa ei muuteta suoraan, vaan tapahtumien eli <i>actionien</i> avulla.
+Facebook kehitti jo Reactin historian varhaisvaiheissa tilan hallinnan ongelmia helpottamaan [Flux](https://facebookarchive.github.io/flux/docs/in-depth-overview)-arkkitehtuurin. Fluxissa sovelluksen tilan hallinta erotetaan kokonaan Reactin komponenttien ulkopuolisiin varastoihin eli <i>storeihin</i>. Storessa olevaa tilaa ei muuteta suoraan, vaan tapahtumien eli <i>actionien</i> avulla.
 
 Kun action muuttaa storen tilaa, renderöidään näkymät uudelleen:
 
@@ -549,7 +549,7 @@ Jos olisimme sijoittaneet taulukon toisen sisälle ilman spreadia, eli
 [luvut, 4, 5]
 ```
 
-lopputulos olisi ollut /i>.[[1, 2, 3], 4, 5]</i>..
+lopputulos olisi ollut <i>[[1, 2, 3], 4, 5]</i>.
 
 Samannäköinen syntaksi toimii taulukosta [destrukturoimalla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) alkioita otettaessa siten, että se <i>kerää</i> loput alkiot:
 

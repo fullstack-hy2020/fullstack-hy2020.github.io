@@ -1045,8 +1045,8 @@ and by extending the Jest definitions in the <i>package.json</i> as follows
 {
  //...
  "jest": {
-   "testEnvironment": "node"
-   "globalTeardown": ".test/teardown.js" // highlight-line
+   "testEnvironment": "node",
+   "globalTeardown": "./tests/teardown.js" // highlight-line
  }
 }
 ```
