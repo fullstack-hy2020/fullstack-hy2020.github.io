@@ -7,9 +7,9 @@ lang: ptbr
 
 <div class="content">
 
-Nas últimas duas partes, nós focamos principalmente no backend. O frontend que desenvolvemos na [parte 2](/ptbr/part2) ainda não suporta o gerenciamento de usuários que implementamos no backend na parte 4.
+Nas últimas duas partes, nós focamos principalmente no backend. O frontend que desenvolvemos na [parte 2](/ptbr/part2) ainda não suporta o gerenciamento de usuários que implementamos no backend na [parte 4](/ptbr/part4).
 
-No momento, o frontend mostra as notas existentes e permite que os usuários mudem o estado de uma nota de importante para não importante e vice-versa. Novas notas não podem mais ser adicionadas por causa das mudanças feitas no backend na parte 4: o backend agora espera que um token verificando a identidade de um usuário seja enviado com a nova nota.
+No momento, o frontend mostra as notas existentes e permite que os usuários mudem o estado de uma nota de importante para não importante e vice-versa. Novas notas não podem mais ser adicionadas por causa das mudanças feitas no backend na parte 4: o backend agora espera que um token contendo a identidade de um usuário seja enviado com a nova nota.
 
 Agora nós iremos implementar uma parte da funcionalidade de gerenciamento de usuários necessária no frontend. Vamos começar com o login de usuário. Durante toda essa parte, nós iremos assumir que novos usuários não serão adicionados a partir do frontend.
 
@@ -19,7 +19,7 @@ Um formulário de login foi agora adicionado ao topo da página:
 
 ![navegador mostrando login do usuário para as notas](../../images/5/1new.png)
 
-O código do componente <i>App</i> agora se parece com o seguinte:
+O código do componente <i>App</i> agora é o seguinte:
 
 ```js
 const App = () => {
@@ -88,17 +88,17 @@ export default App
 
 O código atual da aplicação pode ser encontrado no [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-1), branch <i>part5-1</i>. Se você clonar o repositório, não se esqueça de rodar _npm install_ antes de tentar iniciar o frontend.
 
-O frontend não irá renderizar nenhuma nota se não estiver conectado ao backend. Você pode iniciar o back através do comando _npm run dev_ em sua pasta da Parte 4. Isso iniciará o backend na porta 3001. Enquanto ele estiver ativo, você pode iniciar o frontend em uma janela de terminal separada com o comando _npm start_, e agora você pode ver as notas que foram salvas no seu banco de dados MongoDB da Parte 4.
+O frontend não irá renderizar nenhuma nota se não estiver conectado ao backend. Você pode iniciar o backend através do comando _npm run dev_ em sua pasta da Parte 4. Isso iniciará o backend na porta 3001. Enquanto ele estiver ativo, você pode iniciar o frontend em uma janela de terminal separada com o comando _npm start_, e agora você pode ver as notas que foram salvas no seu banco de dados MongoDB da Parte 4.
 
 Mantenha isso em mente de agora em diante.
 
-O formulário de login é gerenciado da mesma forma que gerenciamos formulários na [part 2](/ptbr/part2/forms). O estado do app tem campos de <i>username</i> e <i>password</i> para armazenar os dados do formulário. Os campos do formulário possuem gerenciadores de eventos, que sincronizam as alterações no campo e enviam o estado para o componente <i>App</i> . Os gerenciadores de eventos são simples: Um objeto é dados a eles como parâmetro, e eles desestruturam o campo <i>target</i> do objeto e salvam seu valor no estado.
+O formulário de login é gerenciado da mesma forma que gerenciamos formulários na [parte 2](/ptbr/part2/forms). O estado do app tem campos de <i>username</i> e <i>password</i> para armazenar os dados do formulário. Os campos do formulário possuem gerenciadores de eventos, que sincronizam as alterações no campo e enviam o estado para o componente <i>App</i> . Os gerenciadores de eventos são simples: Um objeto é passado como parâmetro, e eles desestruturam o campo <i>target</i> do objeto e salvam seu valor no estado.
 
 ```js
 ({ target }) => setUsername(target.value)
 ```
 
-O método _handleLogin_, que é responsável por lidar com os dados no formulário, ainda está para ser implementado.
+O método _handleLogin_, que responsável por lidar com os dados no formulário, ainda será implementado.
 
 O login é feito enviando uma requisição HTTP POST para o endereço do servidor <i>api/login</i>. Vamos separar o código responsável por essa requisição em seu próprio módulo, para o arquivo <i>services/login.js</i>.
 
@@ -120,7 +120,7 @@ Se você instalou o plugin eslint no VS Code, poderá ver agora o seguinte aviso
 
 ![aviso do vs code - atribua o objeto a uma variável antes de exportá-la como um módulo padrão](../../images/5/50new.png)
 
-Nós iremos retornar a configuração do eslint em breve. Você pode ignorar o erro por enquanto ou silenciá-lo adicionando a seguinte linha de código antes do aviso:
+Nós iremos retornar à configuração do eslint em breve. Você pode ignorar o erro por enquanto ou silenciá-lo adicionando a seguinte linha de código antes do aviso:
 
 ```js
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -165,11 +165,11 @@ const App = () => {
 }
 ```
 
-Se o login for um sucesso, os campos do formulário são esvaziados <i>e</i> a resposta do servidor (incluindo um <i>token</i> e os detalhes do usuário) é salva no campo do <i>usuário</i> no estado da aplicação.
+Se o login for um sucesso, os campos do formulário serão apagados e o <i>e</i> a resposta do servidor (incluindo um <i>token</i> e os detalhes do usuário) será salva no campo do <i>usuário</i> no estado (state) da aplicação.
 
-Se o login falhar ou a função _loginService.login_ resultar em erro, o usuário é notificado.
+Se o login falhar ou a função _loginService.login_ resultar em erro, o usuário será notificado.
 
-O usuário não é notificado sobre um login bem-sucedido de nenhuma forma. Vamos modificar a aplicação para mostrar o formulário de login apenas <i>se o usuário não estiver logado</i>, ou seja, _user === null_. O formulário para adicionar novas notas é mostrado apenas se o <i>usuário estiver logado</i>, ou seja, <i>user</i> contém os detalhes do usuário.
+O usuário não é notificado sobre um login bem-sucedido de nenhuma forma. Vamos modificar a aplicação para mostrar o formulário de login apenas <i>se o usuário não estiver logado</i>, ou seja, _user === null_. O formulário para adicionar novas notas será mostrado apenas se o <i>usuário estiver logado</i>, ou seja, se <i>user</i> contiver os detalhes do usuário.
 
 Vamos adicionar duas funções auxiliares ao componente <i>App</i> para gerar os formulários:
 
@@ -338,7 +338,7 @@ O código atual da aplicação pode ser encontrado no [GitHub](https://github.co
 
 ### Criando novas notas
 
-O token retornado com um login bem-sucedido é salvo no estado da aplicação - o campo <i>token</i> do <i>usuário</i>:
+O token retornado com um login bem-sucedido é salvo no estado (state) da aplicação - o campo <i>token</i> do <i>usuário</i>:
 
 ```js
 const handleLogin = async (event) => {
@@ -398,7 +398,7 @@ const update = (id, newObject) => {
 export default { getAll, create, update, setToken } // highlight-line
 ```
 
-O módulo <i>noteService</i> contém uma variável privada <i>token</i>. Seu valor pode ser alterado com uma função <i>setToken</i>, que é exportada pelo módulo. <i>create</i>, agora com sintaxe async/await, define o token para o cabeçalho <i>Authorization</i>. O cabeçalho é fornecido ao axios como o terceiro parâmetro do método <i>post</i>.
+O módulo <i>noteService</i> contém uma variável privada <i>token</i>. Seu valor pode ser alterado com uma função <i>setToken</i>, que é exportada pelo módulo. A função <i>create</i>, agora com sintaxe async/await, define o token para o cabeçalho <i>Authorization</i>. O cabeçalho é fornecido ao axios como o terceiro parâmetro do método <i>post</i>.
 
 O gerenciador de eventos responsável pelo login deve ser alterado para chamar o método <code>noteService.setToken(user.token)</code> com um login bem-sucedido:
 
@@ -422,11 +422,11 @@ const handleLogin = async (event) => {
 
 E agora, a adição de novas notas funciona novamente!
 
-### Salvando o token no armazenamento local do navegador
+### Salvando o token no local storage do navegador
 
 Nossa aplicação tem uma pequena falha: se o navegador for atualizado (por exemplo, pressionando F5), as informações de login do usuário desaparecem.
 
-Esse problema é facilmente resolvido salvando os detalhes de login no [armazenamento local](https://developer.mozilla.org/pt-BR/docs/Web/API/Storage). O armazenamento local é um banco de dados de [chave-valor](https://pt.wikipedia.org/wiki/Banco_de_dados_de_chave-valor) no navegador.
+Esse problema é facilmente resolvido salvando os detalhes de login no [local storage](https://developer.mozilla.org/pt-BR/docs/Web/API/Storage). O local storage é um banco de dados de [chave-valor](https://pt.wikipedia.org/wiki/Banco_de_dados_de_chave-valor) no navegador.
 
 Ele é muito fácil de usar. Um <i>valor</i> correspondente a uma determinada <i>chave</i> é salvo no banco de dados com o método [setItem](https://developer.mozilla.org/pt-BR/docs/Web/API/Storage/setItem). Por exemplo:
 
@@ -448,11 +448,11 @@ window.localStorage.getItem('name')
 e o método [removeItem](https://developer.mozilla.org/pt-BR/docs/Web/API/Storage/removeItem) remove uma chave.
 
 
-Valores no armazenamento local são persistidos mesmo quando a página é re-renderizada. O armazenamento é específico para [origem](https://developer.mozilla.org/pt-BR/docs/Glossary/Origin) , então cada aplicação web tem seu próprio armazenamento.
+Valores no local storage são persistidos mesmo quando a página é re-renderizada. O armazenamento é específico para [origem](https://developer.mozilla.org/pt-BR/docs/Glossary/Origin) , então cada aplicação web tem seu próprio armazenamento.
 
-Vamos estender nossa aplicação para que ela salve os detalhes de um usuário logado no armazenamento local.
+Vamos estender nossa aplicação para que ela salve os detalhes de um usuário logado no local storage.
 
-Valores salvos no armazenamento são [DOMstrings](https://docs.w3cub.com/dom/domstring), então não podemos salvar um objeto JavaScript da forma como ele é. O objeto deve ser convertido para JSON primeiro, com o método _JSON.stringify_. Da mesma forma, quando um objeto JSON é lido do armazenamento local, ele deve ser convertido de volta para JavaScript com _JSON.parse_.
+Valores salvos no armazenamento são [DOMstrings](https://docs.w3cub.com/dom/domstring), então não podemos salvar um objeto JavaScript da forma como ele é. O objeto deve ser convertido para JSON primeiro, com o método _JSON.stringify_. Da mesma forma, quando um objeto JSON é lido do local storage, ele deve ser convertido de volta para JavaScript com _JSON.parse_.
 
 As mudanças no método login são as seguintes:
 
@@ -479,17 +479,17 @@ As mudanças no método login são as seguintes:
   }
 ```
 
-Os detalhes de um usuário logado agora são salvos no armazenamento local e podem ser visualizados no console (digitando _window.localStorage_ no console):
+Os detalhes de um usuário logado agora são salvos no local storage e podem ser visualizados no console (digitando _window.localStorage_ no console):
 
 ![navegador mostrando alguém logado em notas](../../images/5/3e.png)
 
-Você também pode inspecionar o armazenamento local usando as ferramentas de desenvolvedor. No Chrome, vá para a guia <i>Aplicativo</i> e selecione <i>Armazenamento local</i> (mais detalhes [aqui](https://developers.google.com/web/tools/chrome-devtools/storage/localstorage)). No Firefox, vá para a guia <i>Storage</i> e selecione <i>Local Storage</i> (detalhes [aqui](https://developer.mozilla.org/pt-BR/docs/Tools/Storage_Inspector)).
+Você também pode inspecionar o local storage usando as ferramentas de desenvolvedor. No Chrome, vá para a guia <i>Aplicativo</i> e selecione <i>local storage</i> (mais detalhes [aqui](https://developers.google.com/web/tools/chrome-devtools/storage/localstorage)). No Firefox, vá para a guia <i>Storage</i> e selecione <i>Local Storage</i> (detalhes [aqui](https://developer.mozilla.org/pt-BR/docs/Tools/Storage_Inspector)).
 
-Nós ainda temos que modificar nossa aplicação para que, quando entrarmos na página, a aplicação verifique se os detalhes de um usuário logado já podem ser encontrados no armazenamento local. Se eles puderem, os detalhes são salvos no estado da aplicação e no <i>noteService</i>.
+Nós ainda temos que modificar nossa aplicação para que, quando entrarmos na página, a aplicação verifique se os detalhes de um usuário logado já podem ser encontrados no local storage. Se eles puderem, os detalhes são salvos no estado da aplicação e no <i>noteService</i>.
 
-O jeito certo de fazer isso é com um [hook de efeito](https://pt-br.reactjs.org/docs/hooks-effect.html): um mecanismo que conhecemos pela primeira vez na [parte 2](/ptbr/part2/obtendo_dados_do_servidor#effect-hooks), e usamos para buscar notas do servidor.
+O jeito certo de fazer isso é com um [effect hook](https://pt-br.reactjs.org/docs/hooks-effect.html): um mecanismo que conhecemos pela primeira vez na [parte 2](/ptbr/part2/obtendo_dados_do_servidor#effect-hooks), e usamos para buscar notas do servidor.
 
-Nós podemos ter vários hooks de efeitos, então vamos criar um segundo para lidar com o primeiro carregamento da página:
+Nós podemos ter vários hooks de efeitos, então vamos criar um para lidar com o primeiro carregamento da página:
 
 ```js
 const App = () => {
@@ -526,7 +526,7 @@ const App = () => {
 O array vazio como parâmetro do hook de efeito garante que o efeito seja executado apenas quando o componente for renderizado [pela primeira vez](https://pt-br.reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect).
 
 
-Agora um usuário fica logado na aplicação para sempre. Provavelmente devemos adicionar uma funcionalidade de <i>logout</i>, que remove os detalhes de login do armazenamento local. No entanto, deixaremos isso como um exercício.
+Agora um usuário fica logado na aplicação para sempre. Provavelmente devemos adicionar uma funcionalidade de <i>logout</i>, que remove os detalhes de login do local storage. No entanto, deixaremos isso como um exercício.
 
 É possível deslogar um usuário usando o console, e isso é o suficiente por enquanto.
 Você pode deslogar com o comando:
@@ -591,7 +591,7 @@ Se um usuário estiver logado, o nome do usuário e uma lista de blogs são exib
 
 ![navegador mostrando notas e quem está logado](../../images/5/5e.png)
 
-Detalhes do usuário logado não precisam ser salvos no armazenamento local ainda.
+Detalhes do usuário logado não precisam ser salvos no local storage ainda.
 
 **Obs.** Você pode implementar a renderização condicional do formulário de login da seguinte maneira, por exemplo:
 
@@ -621,7 +621,7 @@ Detalhes do usuário logado não precisam ser salvos no armazenamento local aind
 ### 5.2: frontend do bloglist, passo 2
 
 
-Torne o login 'permanente' usando o armazenamento local. Além disso, implemente uma maneira de deslogar.
+Torne o login 'permanente' usando o local storage. Além disso, implemente uma maneira de deslogar.
 
 ![navegador mostrando o botão de logout após o login](../../images/5/6e.png)
 
@@ -649,21 +649,21 @@ As notificações devem ser visíveis por alguns segundos. Não é obrigatório 
 
 <div class="content">
 
-### Uma nota sobre o uso do armazenamento local
+### Uma nota sobre o uso do loca storagel
 
 
 No [fim](/ptbr/part4/autenticacao_por_token#problemas-da-autenticacao-baseada-em-token) da última parte, nós mencionamos que o desafio da autenticação baseada em token é como lidar com a situação em que o acesso da API do titular do token à API precisa ser revogado.
 
 Existem duas soluções para o problema. A primeira é limitar o período de validade de um token. Isso obriga o usuário a fazer login novamente no aplicativo assim que o token expirar. A outra abordagem é salvar as informações de validade de cada token no banco de dados do backend. Essa solução geralmente é chamada de <i>server-side session</i>.
 
-Não importa como a validade dos tokens é verificada e garantida, salvar um token no armazenamento local pode conter um risco de segurança se o aplicativo tiver uma vulnerabilidade de segurança que permita ataques [Cross Site Scripting (XSS)](https://owasp.org/www-community/attacks/xss/). Um ataque XSS é possível se o aplicativo permitir que um usuário injete código JavaScript arbitrário (por exemplo, usando um formulário) que o aplicativo então execute. Ao usar o React com sensatez, não deve ser possível aplicar esse ataque, pois o [React sanitiza](https://pt-br.reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks) todo o texto que ele renderiza, o que significa que não está executando o conteúdo renderizado como JavaScript.
+Não importa como a validade dos tokens é verificada e garantida, salvar um token no local storage pode conter um risco de segurança se o aplicativo tiver uma vulnerabilidade de segurança que permita ataques [Cross Site Scripting (XSS)](https://owasp.org/www-community/attacks/xss/). Um ataque XSS é possível se o aplicativo permitir que um usuário injete código JavaScript arbitrário (por exemplo, usando um formulário) que o aplicativo então execute. Ao usar o React com sensatez, não deve ser possível aplicar esse ataque, pois o [React sanitiza](https://pt-br.reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks) todo o texto que ele renderiza, o que significa que não está executando o conteúdo renderizado como JavaScript.
 
-Se você quiser jogar com segurança, a melhor opção é não armazenar um token no armazenamento local. Essa pode ser uma opção em situações em que vazar um token pode ter consequências trágicas.
+Se você quiser mais segurança, a melhor opção é não armazenar um token no local storage. Essa pode ser uma opção em situações em que vazar um token pode ter consequências trágicas.
 
 Foi sugerido que a identidade de um usuário logado deve ser salva como [cookies httpOnly](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Cookies#restrict_access_to_cookies), para que o código JavaScript não tenha acesso ao token. A desvantagem dessa solução é que tornaria a implementação de aplicativos SPA um pouco mais complexa. Seria necessário implementar pelo menos uma página separada para fazer login.
 
 
-No entanto, é bom notar que mesmo o uso de cookies httpOnly não garante nada. Até mesmo foi sugerido que os cookies httpOnly [não são mais seguros do que](https://academind.com/tutorials/localstorage-vs-cookies-xss/) o uso do armazenamento local.
+No entanto, é bom notar que mesmo o uso de cookies httpOnly não garante nada. Até mesmo foi sugerido que os cookies httpOnly [não são mais seguros do que](https://academind.com/tutorials/localstorage-vs-cookies-xss/) o uso do local storage.
 
 Então não importa a solução usada, o mais importante é [minimizar o risco](https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html) de ataques XSS.
 
