@@ -8,9 +8,9 @@ lang: ptbr
 
 <div class="content">
 
-Existem algumas formas de testar aplicações React. Vamos dar uma olhada em algumas deles a frente. 
+Existem algumas formas de testar aplicações React. Vamos dar uma olhada em algumas delas a frente. 
 
-Testes serão implementados com a mesma [Jest](http://jestjs.io/) biblioteca de teste desenvolvida pelo Facebook que foi usado na parte anterior. Jest é configurado por padrão para aplicações criadas com o create-react-app.
+Testes serão implementados com a mesma [Jest](http://jestjs.io/) biblioteca de teste desenvolvida pelo Facebook que foi usada na parte anterior. Jest é configurado por padrão para aplicações criadas com o create-react-app.
 
 Além do JEST, também precisamos de outra biblioteca de testes que nos ajude a renderizar componentes para fins de teste. A melhor opção atual para isso é [react-test-library] (https://github.com/testing-library/react-testing-library) que sofreu um rápido crescimento de popularidade nos últimos tempos.
 
@@ -66,13 +66,13 @@ test('renders content', () => {
 })
 ```
 
-Após a configuração inicial, o teste renderiza o componente com o [render] (https://testing-library.com/docs/react-testing-library/api#render) função fornecida pela react-testing-library:
+Após a configuração inicial, o teste renderiza o componente com o [render] (https://testing-library.com/docs/react-testing-library/api#render) que é uma função fornecida pela react-testing-library:
 
 ```js
 render(<Note note={note} />)
 ```
 
-Normalmente, os componentes reagentes são renderizados ao <i>DOM</i> . O método de renderização que usamos renderiza os componentes em um formato adequado para testes sem renderizá-los ao DOM.
+Normalmente, os componentes React são renderizados ao <i>DOM</i> . O método de renderização que usamos renderiza os componentes em um formato adequado para testes sem renderizá-los ao DOM.
 
 Podemos usar o objeto [screen](https://testing-library.com/docs/queries/about#screen) para acessar o componente renderizado. Usamos o método da Screen [getByText](https://testing-library.com/docs/queries/bytext) para procurar um elemento que tenha o conteúdo da nota e garantir que ele exista:
 
@@ -83,7 +83,7 @@ Podemos usar o objeto [screen](https://testing-library.com/docs/queries/about#sc
 
 ### Testes de execução
 
-Create-react-app configura os testes a serem executados no modo assistido por padrão, o que significa que o comando _npm test_ não terminará assim que os testes terminarem e, em vez disso, aguardará as alterações a serem feitas no código. Depois que novas alterações no código são salvas, os testes são executados automaticamente, depois disso Jest volta a aguardar que novas alterações sejam feitas.
+Create-react-app configura os testes a serem executados no modo Watch por padrão, o que significa que o comando _npm test_ não terminará assim que os testes terminarem e, em vez disso, aguardará as alterações a serem feitas no código. Depois que novas alterações no código são salvas, os testes são executados automaticamente, depois disso Jest volta a aguardar que novas alterações sejam feitas.
 
 Se você deseja executar testes "normalmente", pode fazê-lo com o comando:
 
@@ -97,7 +97,7 @@ Para usuários do Windows (PowerShell)
 $env:CI=$true; npm test
 ```
 
-**Obs:** O console pode emitir um aviso se você não tiver instalado o Watchman. O Watchman é um aplicativo desenvolvido pelo Facebook que assiste a alterações feitas nos arquivos. O programa acelera a execução dos testes e pelo menos a partir do MacOS Sierra, executando testes no modo assistido emite alguns avisos no console, que podem ser removidos instalando o Watchman.
+**Obs:** O console pode emitir um aviso se você não tiver instalado o Watchman. O Watchman é uma aplicação desenvolvida pelo Facebook que observa as alterações feitas nos arquivos. O programa acelera a execução dos testes e pelo menos a partir do MacOS Sierra, executando testes no modo watch emite alguns avisos no console, que podem ser removidos instalando o Watchman.
 
 As instruções para instalar o Watchman em diferentes sistemas operacionais podem ser encontradas no site oficial do Watchman: <https://facebook.github.io/watchman/>
 
