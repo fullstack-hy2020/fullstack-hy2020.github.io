@@ -1040,7 +1040,7 @@ export type Operation = 'multiply' | 'add' | 'divide';
 Now we can import the type and use a <i>type assertion</i> to tell the TypeScript compiler what type a variable has:
 
 ```js
-import { calculator, Operation } from './calculator'; // highligh-line
+import { calculator, Operation } from './calculator'; // highlight-line
 
 app.post('/calculate', (req, res) => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
