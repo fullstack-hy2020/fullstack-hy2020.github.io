@@ -9,7 +9,7 @@ lang: fi
 
 Olemme tehneet backendille sitä apin tasolla kokonaisuutena testaavia integraatiotestejä ja frontendille yksittäisiä komponentteja testaavia yksikkötestejä. 
 
-Katsotaan nyt erästä tapaa tehdä [järjestelmää kokonaisuutena](https://en.wikipedia.org/wiki/System_testing) tutkivia <i>End to End (E2E) -testejä</i>.
+Katsotaan nyt erästä tapaa tehdä [järjestelmää kokonaisuutena](https://en.wikipedia.org/wiki/System_testing) tutkivia <i>End to End (E2E) ‑testejä</i>.
 
 Web-sovellusten E2E-testaus tapahtuu käyttäen selainta jonkin kirjaston avulla. Ratkaisuja on tarjolla useita, esimerkiksi [Selenium](http://www.seleniumhq.org/), joka mahdollistaa testien automatisoinnin lähes millä tahansa selaimella. Toinen vaihtoehto on käyttää ns. [headless browseria](https://en.wikipedia.org/wiki/Headless_browser) eli selainta, jolla ei ole ollenkaan graafista käyttöliittymää. Esim. Chromea on mahdollista suorittaa Headless-moodissa.
 
@@ -23,7 +23,7 @@ Ongelmana on  usein myös se, että käyttöliittymän kautta tehtävät testit 
 
 [Cypress](https://www.cypress.io/)-niminen E2E-testaukseen soveltuva kirjasto on kasvattanut nopeasti suosiotaan viimeisen reilun vuoden aikana. Cypress on poikkeuksellisen helppokäyttöinen, kaikenlaisen säätämisen ja tunkkaamisen määrä esim. Seleniumin käyttöön verrattuna on lähes olematon. Cypressin toimintaperiaate poikkeaa radikaalisti useimmista E2E-testaukseen sopivista kirjastoista, sillä Cypress-testit ajetaan kokonaisuudessaan selaimen sisällä. Muissa lähestymistavoissa testit suoritetaan Node-prosessissa, joka on yhteydessä selaimeen  ohjelmointirajapintojen kautta.
 
-Tehdään tämän osan lopuksi muutamia end to end -testejä muistiinpanosovellukselle. 
+Tehdään tämän osan lopuksi muutamia end to end ‑testejä muistiinpanosovellukselle. 
 
 Aloitetaan asentamalla Cypress <i>frontendin</i> kehitysaikaiseksi riippuvuudeksi
 
@@ -431,7 +431,7 @@ app.use(middleware.errorHandler)
 module.exports = app
 ```
 
-eli lisäyksen jälkeen HTTP POST -operaatio backendin endpointiin <i>/api/testing/reset</i> tyhjentää tietokannan.
+eli lisäyksen jälkeen HTTP POST ‑operaatio backendin endpointiin <i>/api/testing/reset</i> tyhjentää tietokannan.
 
 Backendin testejä varten muokattu koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1), branchissä <i>part5-1</i>.
 
@@ -1056,13 +1056,13 @@ Testien ja frontendin koodin lopullinen versio on kokonaisuudessaan [GitHubissa]
 
 ### Tehtävät 5.17.-5.23.
 
-Tehdään osan lopuksi muutamia E2E-testejä blogisovellukseen. Yllä olevan materiaalin pitäisi riittää ainakin suurimmaksi osaksi tehtävien tekemiseen. Cypressin [dokumentaatiota](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell) kannattaa ehdottomasti myös lueskella, kyseessä on ehkä paras dokumentaatio, mitä olen koskaan open source -projektissa nähnyt.
+Tehdään osan lopuksi muutamia E2E-testejä blogisovellukseen. Yllä olevan materiaalin pitäisi riittää ainakin suurimmaksi osaksi tehtävien tekemiseen. Cypressin [dokumentaatiota](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell) kannattaa ehdottomasti myös lueskella, kyseessä on ehkä paras dokumentaatio, mitä olen koskaan open source ‑projektissa nähnyt.
 
 Erityisesti kannattaa lukea luku [Introduction to Cypress](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Cypress-Can-Be-Simple-Sometimes), joka toteaa
 
 > <i>This is the single most important guide for understanding how to test with Cypress. Read it. Understand it.</i>
 
-#### 5.17: blogilistan end to end -testit, step1
+#### 5.17: blogilistan end to end ‑testit, step1
 
 Konfiguroi Cypress projektiisi. Tee testi, joka varmistaa, että sovellus näyttää oletusarvoisesti kirjautumislomakkeen.
 
@@ -1083,7 +1083,7 @@ describe('Blog app', function() {
 
 Testin <i>beforeEach</i>-alustuslohkon tulee nollata tietokannan tilanne esim. [materiaalissa](/osa5/end_to_end_testaus#tietokannan-tilan-kontrollointi) näytetyllä tavalla.
 
-#### 5.18: blogilistan end to end -testit, step2
+#### 5.18: blogilistan end to end ‑testit, step2
 
 Tee testit kirjautumiselle, testaa sekä onnistunut että epäonnistunut kirjautuminen. Luo testejä varten käyttäjä <i>beforeEach</i>-lohkossa. 
 
@@ -1113,7 +1113,7 @@ describe('Blog app', function() {
 })
 ```
 
-#### 5.19: blogilistan end to end -testit, step3
+#### 5.19: blogilistan end to end ‑testit, step3
 
 Tee testi, joka varmistaa, että kirjaantunut käyttäjä pystyy luomaan blogin. Testin runko voi näyttää seuraavalta
 
@@ -1136,19 +1136,19 @@ describe('Blog app', function() {
 
 Testin tulee varmistaa, että luotu blogi tulee näkyville blogien listalle.
 
-#### 5.20: blogilistan end to end -testit, step4
+#### 5.20: blogilistan end to end ‑testit, step4
 
 Tee testi, joka varmistaa, että blogia voi likettää.
 
-#### 5.21: blogilistan end to end -testit, step5
+#### 5.21: blogilistan end to end ‑testit, step5
 
 Tee testi, joka varmistaa, että blogin lisännyt käyttäjä voi poistaa blogin.
 
-#### 5.22: blogilistan end to end -testit, step6
+#### 5.22: blogilistan end to end ‑testit, step6
 
 Tee testi, joka varmista, että vain blogin lisännyt käyttäjä näkee blogin poistonapin.
 
-#### 5.23: blogilistan end to end -testit, step6
+#### 5.23: blogilistan end to end ‑testit, step6
 
 Tee testi, joka varmistaa, että blogit järjestetään likejen mukaiseen järjestykseen, eniten likejä saanut blogi ensin.
 

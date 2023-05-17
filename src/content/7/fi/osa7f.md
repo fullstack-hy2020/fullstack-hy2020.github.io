@@ -65,7 +65,7 @@ Muuta tässä tehtävässä notifikaation tilanhallinta tapahtumaan käyttäen u
 
 #### 7.11: React Query ja context step2
 
-Siirrä blogien tietojen hallinnointi tapahtumaan React Query -kirjastoa hyväksikäyttäen. Tässä tehtävässä riittää, että sovellus näyttää olemassa olevat blogit ja, että uuden blogin luominen onnistuu.
+Siirrä blogien tietojen hallinnointi tapahtumaan React Query ‑kirjastoa hyväksikäyttäen. Tässä tehtävässä riittää, että sovellus näyttää olemassa olevat blogit ja, että uuden blogin luominen onnistuu.
 
 Kirjautumisen ja uuden blogin luomisen lomakkeiden tilaa kannattaa hallita edelleen Reactin tilan avulla.
 
@@ -79,7 +79,7 @@ Siirrä myös kirjautuneen käyttäjän tietojen hallinnointi tapahtumaan useRed
 
 ### Näkymät
 
-Loput tehtävät ovat yhteisiä sekä Redux- että React Query -versiota tekeville.
+Loput tehtävät ovat yhteisiä sekä Redux- että React Query ‑versiota tekeville.
 
 #### 7.14: käyttäjien näkymä
 
@@ -150,7 +150,7 @@ Kommentit ovat anonyymejä, eli ne eivät liity järjestelmän käyttäjiin.
 
 Tässä tehtävässä riittää, että frontend osaa näyttää blogilla olevat backendin kautta lisätyt kommentit.
 
-Sopiva rajapinta kommentin luomiseen on osoitteeseen <i>api/blogs/:id/comments</i> tapahtuva HTTP POST -pyyntö.
+Sopiva rajapinta kommentin luomiseen on osoitteeseen <i>api/blogs/:id/comments</i> tapahtuva HTTP POST ‑pyyntö.
 
 #### 7.19: kommentit, step2
 

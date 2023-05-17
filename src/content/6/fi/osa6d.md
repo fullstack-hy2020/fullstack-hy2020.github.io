@@ -48,9 +48,9 @@ export default App
 
 Alkuvaiheen koodi on GitHubissa repositorion [https://github.com/fullstack-hy2020/query-notes](https://github.com/fullstack-hy2020/query-notes/tree/part6-0) branchissa <i>part6-0</i>.
 
-### Palvelimella olevan datan hallinta React Query -kirjaston avulla
+### Palvelimella olevan datan hallinta React Query ‑kirjaston avulla
 
-Hyödynnämme nyt [React Query](https://react-query-v3.tanstack.com/) -kirjastoa palvelimelta haettavan datan säilyttämiseen ja hallinnointiin. Asennetaan kirjasto komennolla
+Hyödynnämme nyt [React Query](https://react-query-v3.tanstack.com/) ‑kirjastoa palvelimelta haettavan datan säilyttämiseen ja hallinnointiin. Asennetaan kirjasto komennolla
 
 ```bash
 npm install react-query
@@ -120,7 +120,7 @@ Eli ensimmäistä kertaa komponenttia renderöitäessä kysely on vielä tilassa
 
 HTTP-pyyntö kuitenkin valmistuu niin nopeasti, että tekstiä eivät edes tarkkasilmäisimmät ehdi näkemään. Kun pyyntö valmistuu, renderöidään komponentti uudelleen. Kysely on toisella renderöinnillä tilassa <i>success</i>, ja kyselyolion kenttä <i>data</i> sisältää pyynnön palauttaman datan, eli muistiinpanojen listan, joka renderöidään ruudulle.
 
-Sovellus siis hakee datan palvelimelta ja renderöi sen ruudulle käyttämättä ollenkaan luvuissa 2-5 käytettyjä Reactin hookeja <i>useState</i> ja <i>useEffect</i>. Palvelimella oleva data on nyt kokonaisuudessaan React Query -kirjaston hallinnoinnin alaisuudessa, ja sovellus ei tarvitse ollenkaan Reactin <i>useState</i>-hookilla määriteltyä tilaa!
+Sovellus siis hakee datan palvelimelta ja renderöi sen ruudulle käyttämättä ollenkaan luvuissa 2-5 käytettyjä Reactin hookeja <i>useState</i> ja <i>useEffect</i>. Palvelimella oleva data on nyt kokonaisuudessaan React Query ‑kirjaston hallinnoinnin alaisuudessa, ja sovellus ei tarvitse ollenkaan Reactin <i>useState</i>-hookilla määriteltyä tilaa!
 
 Siirretään varsinaisen HTTP-pyynnön tekevä funktio omaan tiedostoonsa <i>requests.js</i>:
 
@@ -283,7 +283,7 @@ Tästä on toki seurauksena se, että sovellus tekee muistiinpanon muutoksen aih
 
 ![](../../images/6/61new.png)
 
-Jos sovelluksen hakema datamäärä ei ole suuri, ei asialla ole juurikaan merkitystä. Selainpuolen toiminnallisuuden kannaltahan ylimääräisen HTTP GET -pyynnön tekeminen ei juurikaan haittaa, mutta joissain tilanteissa se saattaa rasittaa palvelinta.
+Jos sovelluksen hakema datamäärä ei ole suuri, ei asialla ole juurikaan merkitystä. Selainpuolen toiminnallisuuden kannaltahan ylimääräisen HTTP GET ‑pyynnön tekeminen ei juurikaan haittaa, mutta joissain tilanteissa se saattaa rasittaa palvelinta.
 
 Tarvittaessa on myös mahdollista optimoida suorituskykyä [päivittämällä itse](https://react-query-v3.tanstack.com/guides/updates-from-mutation-responses) React Queryn ylläpitämää kyselyn tilaa.
 
@@ -347,7 +347,7 @@ React Query on siis kirjasto, joka ylläpitää frontendissä <i>palvelimen tila
 
 ### Tehtävät 6.20.-6.22.
 
-Tehdään nyt anekdoottisovelluksesta uusi, React Query -kirjastoa hyödyntävä versio. Ota lähtökohdaksesi
+Tehdään nyt anekdoottisovelluksesta uusi, React Query ‑kirjastoa hyödyntävä versio. Ota lähtökohdaksesi
 [täällä](https://github.com/fullstack-hy2020/query-anecdotes) oleva projekti. Projektissa on valmiina asennettuna JSON Server, jonka toimintaa on hieman modifioitu. Käynnistä palvelin komennolla <i>npm run server</i>.
 
 #### Tehtävä 6.20
