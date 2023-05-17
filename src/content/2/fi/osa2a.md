@@ -51,7 +51,7 @@ Myös tapahtumankäsittelijöiden välittäminen komponentin <i>App</i> alikompo
 
 Visual Studio Codeen on helppo määritellä "snippettejä", eli Netbeansin "sout":in tapaisia oikoteitä yleisesti käytettyjen koodinpätkien generointiin. Ohje snippetien luomiseen [täällä](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_creating-your-own-snippets).
 
-VS Code -plugineina löytyy myös hyödyllisiä valmiiksi määriteltyjä snippettejä, esim.
+VS Code ‑plugineina löytyy myös hyödyllisiä valmiiksi määriteltyjä snippettejä, esim.
 [tämä](https://marketplace.visualstudio.com/items?itemName=xabikos.ReactSnippets).
 
 Ehkä kätevin kaikista snippeteistä on komennon <em>console.log()</em> nopeasti ruudulle tekevä snippet, esim. <em>clog</em>, jonka voi määritellä seuraavasti:
@@ -80,7 +80,7 @@ Jos taulukon funktionaalinen käsittely tuntuu vielä vieraalta, kannattaa katso
 
 ### Kokoelmien renderöiminen
 
-Tehdään nyt Reactilla [osan 0](/osa0) alussa käytettyä esimerkkisovelluksen [Single page app -versiota](https://studies.cs.helsinki.fi/exampleapp/spa) vastaavan sovelluksen 'frontend' eli selainpuolen sovelluslogiikka.
+Tehdään nyt Reactilla [osan 0](/osa0) alussa käytettyä esimerkkisovelluksen [Single page app ‑versiota](https://studies.cs.helsinki.fi/exampleapp/spa) vastaavan sovelluksen 'frontend' eli selainpuolen sovelluslogiikka.
 
 Aloitetaan seuraavasta (tiedosto <i>App.js</i>):
 

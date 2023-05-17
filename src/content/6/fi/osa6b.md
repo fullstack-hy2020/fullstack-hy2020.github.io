@@ -113,7 +113,7 @@ Filtterin arvon asettavat actionit ovat siis muotoa:
 }
 ```
 
-Määritellään samalla myös sopiva _action creator_ -funktio. Sijoitetaan koodi moduuliin <i>src/reducers/filterReducer.js</i>:
+Määritellään samalla myös sopiva _action creator_ ‑funktio. Sijoitetaan koodi moduuliin <i>src/reducers/filterReducer.js</i>:
 
 ```js
 const filterReducer = (state = 'ALL', action) => {
@@ -550,7 +550,7 @@ Mutatoimme <em>state</em>-argumentin taulukkoa kutsumalla <em>push</em>-metodia 
 
 Redux Toolkit hyödyntää <em>createSlice</em>-funktion avulla määritellyissä reducereissa [Immer](https://immerjs.github.io/immer/)-kirjastoa, joka mahdollistaa <em>state</em>-argumentin mutatoinnin reducerin sisällä. Immer muodostaa mutatoidun tilan perusteella uuden, immutablen tilan ja näin tilamuutosten immutabiliteetti säilyy.
 
-Huomaa, että tilaa voi muuttaa myös "mutatoimatta" kuten esimerkiksi <em>toggleImportanceOf</em> -actionin kohdalla on tehty. Tällöin funktio palauttaa uuden tilan. Mutatointi osoittautuu kuitenkin usein hyödylliseksi etenkin rakenteeltaan monimutkaisen tilan päivittämisessä.
+Huomaa, että tilaa voi muuttaa myös "mutatoimatta" kuten esimerkiksi <em>toggleImportanceOf</em> ‑actionin kohdalla on tehty. Tällöin funktio palauttaa uuden tilan. Mutatointi osoittautuu kuitenkin usein hyödylliseksi etenkin rakenteeltaan monimutkaisen tilan päivittämisessä.
 
 Funktio <em>createSlice</em> palauttaa objektin, joka sisältää sekä reducerin että <em>reducers</em>-parametrin actioneiden mukaiset action creatorit. Reducer on palautetussa objektissa <em>noteSlice.reducer</em>-kentässä kun taas action creatorit ovat <em>noteSlice.actions</em>-kentässä. Voimme muodostaa tiedoston exportit kätevästi:
 
@@ -675,7 +675,7 @@ Konsolitulostus on nyt ihmisluettava
 
 ### Redux DevTools
 
-Chromeen on asennettavissa [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=fi) -lisäosa, jonka avulla Redux-storen tilaa ja sitä muuttavia actioneja on mahdollisuus seurata selaimen konsolista. Redux Toolkitin <em>configureStore</em>-funktion avulla luodussa storessa Redux DevTools on käytössä automaattisesti ilman ylimääräistä konfigurointia.
+Chromeen on asennettavissa [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=fi) ‑lisäosa, jonka avulla Redux-storen tilaa ja sitä muuttavia actioneja on mahdollisuus seurata selaimen konsolista. Redux Toolkitin <em>configureStore</em>-funktion avulla luodussa storessa Redux DevTools on käytössä automaattisesti ilman ylimääräistä konfigurointia.
 
 Kun lisäosa on asennettu Chromeen, konsolin <i>Redux</i>-välilehti pitäisi näyttää seuraavalta:
 

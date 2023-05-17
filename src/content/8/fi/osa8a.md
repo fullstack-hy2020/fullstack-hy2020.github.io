@@ -23,7 +23,7 @@ Jos kyseessä olisi usein käytetty toiminnallisuus, voitaisiin sitä varten tot
 
 GraphQL:n avulla toteutettu rajapinta sopii tämänkaltaisiin tilanteisiin hyvin.
 
-GraphQL:ssä periaatteena on, että selaimen koodi muodostaa <i>kyselyn</i>, joka kuvailee halutun datan ja lähettää sen API:lle HTTP POST -pyynnöllä. Toisin kuin REST:issä, GraphQL:ssä kaikki kyselyt kohdistetaan samaan osoitteeseen ja ovat POST-tyyppisiä.
+GraphQL:ssä periaatteena on, että selaimen koodi muodostaa <i>kyselyn</i>, joka kuvailee halutun datan ja lähettää sen API:lle HTTP POST ‑pyynnöllä. Toisin kuin REST:issä, GraphQL:ssä kaikki kyselyt kohdistetaan samaan osoitteeseen ja ovat POST-tyyppisiä.
 
 Edellä kuvatun skenaarion data saataisiin haettua (suurinpiirtein) seuraavan kaltaisella kyselyllä:
 
@@ -545,7 +545,7 @@ let persons = [
 ]
 ```
 
-Nyt siis palvelimen tallettamat henkilö-oliot eivät ole muodoltaan täysin samanlaisia kuin GraphQL-skeeman määrittelemät tyypin <i>Person</i> -oliot. 
+Nyt siis palvelimen tallettamat henkilö-oliot eivät ole muodoltaan täysin samanlaisia kuin GraphQL-skeeman määrittelemät tyypin <i>Person</i>-oliot. 
 
 Toisin kuin tyypille <i>Person</i> ei tyypille <i>Address</i> ole määritelty <i>id</i>-kenttää, sillä osoitteita ei ole talletettu palvelimella omaan tietorakenteeseensa.
 
