@@ -8,11 +8,11 @@ lang: ptbr
 
 <div class="content">
 
-Existem algumas formas de testar aplicações React. Vamos dar uma olhada em algumas deles a frente. 
+Existem algumas formas de testar aplicações React. Vamos dar uma olhada em algumas delas a frente. 
 
-Testes serão implementados com a mesma [Jest](http://jestjs.io/) biblioteca de teste desenvolvida pelo Facebook que foi usado na parte anterior. Jest é configurado por padrão para aplicações criadas com o create-react-app.
+Testes serão implementados com a mesma [Jest](http://jestjs.io/) biblioteca de teste desenvolvida pelo Facebook que foi usada na parte anterior. Jest é configurado por padrão para aplicações criadas com o create-react-app.
 
-Além do JEST, também precisamos de outra biblioteca de testes que nos ajude a renderizar componentes para fins de teste. A melhor opção atual para isso é [react-test-library] (https://github.com/testing-library/react-testing-library) que sofreu um rápido crescimento de popularidade nos últimos tempos.
+Além do JEST, também precisamos de outra biblioteca de testes que nos ajude a renderizar componentes para fins de teste. A melhor opção atual para isso é [react-test-library](https://github.com/testing-library/react-testing-library) que sofreu um rápido crescimento de popularidade nos últimos tempos.
 
 Vamos instalar a biblioteca com o comando:
 
@@ -20,7 +20,7 @@ Vamos instalar a biblioteca com o comando:
 npm install --save-dev @testing-library/react @testing-library/jest-dom
 ```
 
-Também instalamos [jest-dom] (https://testing-library.com/docs/ecosystem-jest-dom/), que fornece alguns métodos auxiliares relacionados a Jest.
+Também instalamos [jest-dom](https://testing-library.com/docs/ecosystem-jest-dom/), que fornece alguns métodos auxiliares relacionados a Jest.
 
 Vamos primeiro escrever testes para o componente responsável por renderizar uma nota:
 
@@ -39,7 +39,7 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-Observe que o elemento <i>li</i> possui o [CSS](https://reactjs.org/docs/dom-elements.html#classname) classname <i>nota</i> , que poderia ser usado para acessar o componente em nossos testes.
+Observe que o elemento <i>li</i> possui o [CSS](https://reactjs.org/docs/dom-elements.html#classname) className <i>note</i> , que poderia ser usado para acessar o componente em nossos testes.
 
 ### Renderizando o componente para testes
 
@@ -66,13 +66,13 @@ test('renders content', () => {
 })
 ```
 
-Após a configuração inicial, o teste renderiza o componente com o [render] (https://testing-library.com/docs/react-testing-library/api#render) função fornecida pela react-testing-library:
+Após a configuração inicial, o teste renderiza o componente com o [render](https://testing-library.com/docs/react-testing-library/api#render) que é uma função fornecida pela react-testing-library:
 
 ```js
 render(<Note note={note} />)
 ```
 
-Normalmente, os componentes reagentes são renderizados ao <i>DOM</i> . O método de renderização que usamos renderiza os componentes em um formato adequado para testes sem renderizá-los ao DOM.
+Normalmente, os componentes React são renderizados no <i>DOM</i> . O método de renderização que usamos renderiza os componentes em um formato adequado para testes sem renderizá-los ao DOM.
 
 Podemos usar o objeto [screen](https://testing-library.com/docs/queries/about#screen) para acessar o componente renderizado. Usamos o método da Screen [getByText](https://testing-library.com/docs/queries/bytext) para procurar um elemento que tenha o conteúdo da nota e garantir que ele exista:
 
@@ -83,7 +83,7 @@ Podemos usar o objeto [screen](https://testing-library.com/docs/queries/about#sc
 
 ### Testes de execução
 
-Create-react-app configura os testes a serem executados no modo assistido por padrão, o que significa que o comando _npm test_ não terminará assim que os testes terminarem e, em vez disso, aguardará as alterações a serem feitas no código. Depois que novas alterações no código são salvas, os testes são executados automaticamente, depois disso Jest volta a aguardar que novas alterações sejam feitas.
+Create-react-app configura os testes a serem executados no modo Watch por padrão, o que significa que o comando _npm test_ não terminará assim que os testes terminarem e, em vez disso, aguardará as alterações a serem feitas no código. Depois que novas alterações no código são salvas, os testes são executados automaticamente, depois disso Jest volta a aguardar que novas alterações sejam feitas.
 
 Se você deseja executar testes "normalmente", pode fazê-lo com o comando:
 
@@ -97,7 +97,7 @@ Para usuários do Windows (PowerShell)
 $env:CI=$true; npm test
 ```
 
-**Obs:** O console pode emitir um aviso se você não tiver instalado o Watchman. O Watchman é um aplicativo desenvolvido pelo Facebook que assiste a alterações feitas nos arquivos. O programa acelera a execução dos testes e pelo menos a partir do MacOS Sierra, executando testes no modo assistido emite alguns avisos no console, que podem ser removidos instalando o Watchman.
+**Obs:** O console pode emitir um aviso se você não tiver instalado o Watchman. O Watchman é uma aplicação desenvolvida pelo Facebook que observa as alterações feitas nos arquivos. O programa acelera a execução dos testes e pelo menos a partir do MacOS Sierra, executando testes no modo watch emite alguns avisos no console, que podem ser removidos instalando o Watchman.
 
 As instruções para instalar o Watchman em diferentes sistemas operacionais podem ser encontradas no site oficial do Watchman: <https://facebook.github.io/watchman/>
 
@@ -135,7 +135,7 @@ test('renders content', () => {
 
 O teste falha se _getByText_ não encontrar o elemento que está procurando.
 
-Também poderíamos usar [CSS-selectors](https://developer.mozilla.org/pt-BR/docs/web/css/css_selectors) para encontrar elementos renderizados usando o método [queryselector] (https: // desenvolvedor. mozilla.org/en-us/docs/web/api/document/queryselector) do objeto [container] (https://testing-library.com/docs/react-testing-library/api/#container-1) que é um dos campos retornados pela renderização:
+Também poderíamos usar [CSS-selectors](https://developer.mozilla.org/pt-BR/docs/web/css/css_selectors) para encontrar elementos renderizados usando o método [queryselector](https: // desenvolvedor. mozilla.org/en-us/docs/web/api/document/queryselector) do objeto [container](https://testing-library.com/docs/react-testing-library/api/#container-1) que é um dos campos retornados pela renderização:
 
 ```js
 import React from 'react'
@@ -160,13 +160,13 @@ test('renders content', () => {
 })
 ```
 
-Existem também outros métodos, por exemplo, [getByTestId] (https://testing-library.com/docs/queries/bytestid/), que procuram elementos com base em id-attributes que são inseridos no código especificamente para fins de teste.
+Existem também outros métodos, por exemplo, [getByTestId](https://testing-library.com/docs/queries/bytestid/), que procuram elementos com base em id-attributes que são inseridos no código especificamente para fins de teste.
 
 ### Testes de depuração
 
 Normalmente, encontramos muitos tipos diferentes de problemas ao escrever nossos testes.
 
-Objeto _screen_ possui método [debug] (https://testing-library.com/docs/queries/about/#screendebug) que pode ser usado para imprimir o HTML de um componente para o terminal. Se alterarmos o teste da seguinte forma:
+Objeto _screen_ possui método [debug](https://testing-library.com/docs/queries/about/#screendebug) que pode ser usado para imprimir o HTML de um componente para o terminal. Se alterarmos o teste da seguinte forma:
 
 ```js
 import React from 'react'
@@ -248,7 +248,7 @@ Agora o HTML do elemento procurado é impresso:
 
 Além de exibir conteúdo, o componente <i>Nota</i> também garante que, quando o botão associado à nota é pressionado, a função que manipula eventos (event handler) _toggleImportance_ é chamada.
 
-Vamos instalar uma biblioteca [user-event] (https://testing-library.com/docs/user-event/intro) que facilita a simulação de entrada do usuário:
+Vamos instalar uma biblioteca [user-event](https://testing-library.com/docs/user-event/intro) que facilita a simulação de entrada do usuário:
 
 ```bash
 npm install --save-dev @testing-library/user-event
@@ -304,7 +304,7 @@ const button = screen.getByText('make not important')
 await user.click(button)
 ```
 
-Clicar acontece com o método [click] (https://testing-library.com/docs/user-event/convenience/#click) da biblioteca userevent-library.
+Clicar acontece com o método [click](https://testing-library.com/docs/user-event/convenience/#click) da biblioteca userevent-library.
 
 A expectativa do teste verifica que a <i>função mock</i> foi chamada exatamente uma vez.
 
@@ -495,7 +495,7 @@ test('<NoteForm /> updates parent state and calls onSubmit', async () => {
 })
 ```
 
-Os testes têm acesso ao campo de entrada usando a função [getByRole] (https://testing-library.com/docs/queries/byrole).
+Os testes têm acesso ao campo de entrada usando a função [getByRole](https://testing-library.com/docs/queries/byrole).
 
 O método [type](https://testing-library.com/docs/user-event/utility#type) do userEvent é usado para escrever texto no campo de entrada.
 
@@ -761,7 +761,7 @@ Optamos por nos concentrar em fazer testes de ponta a ponta para testar todo a a
 
 ### Teste de Snapshot 
 
-O JEST oferece uma alternativa completamente diferente aos chamados testes "tradicionais" [snapshot] (https://jestjs.io/pt-BR/docs/snapshot-testing). A característica interessante dos snapshots é que os desenvolvedores não precisam definir nenhum teste, é simples o suficiente para adotar testes snapshot.
+O JEST oferece uma alternativa completamente diferente aos chamados testes "tradicionais" [snapshot](https://jestjs.io/pt-BR/docs/snapshot-testing). A característica interessante dos snapshots é que os desenvolvedores não precisam definir nenhum teste, é simples o suficiente para adotar testes snapshot.
 
 O princípio fundamental é comparar o código HTML definido pelo componente depois de alterar para o código HTML que existia antes de ser alterado.
 
