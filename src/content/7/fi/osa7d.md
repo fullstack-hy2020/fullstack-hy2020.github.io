@@ -349,7 +349,7 @@ const App = () =>
 
 Eli JSX-syntaksin sijaan komponentit luodaan pelkällä JavaScriptilla käyttäen Reactin funktiota [createElement](https://reactjs.org/docs/react-without-jsx.html).
 
-Sovellusta voi nyt kokeilla avaamalla tiedoston <i>build/index.html</i> selaimen <i>open file</i> -toiminnolla:
+Sovellusta voi nyt kokeilla avaamalla tiedoston <i>build/index.html</i> selaimen <i>open file</i> ‑toiminnolla:
 
 ![](../../images/7/22.png)
 

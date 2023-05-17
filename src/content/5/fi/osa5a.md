@@ -96,7 +96,7 @@ Kirjautumislomakkeen käsittely noudattaa samaa periaatetta kuin [osassa 2](/osa
 
 Kirjautumislomakkeen lähettämisestä vastaava metodi _handleLogin_ ei tee vielä mitään.
 
-Kirjautuminen tapahtuu tekemällä HTTP POST -pyyntö palvelimen osoitteeseen <i>api/login</i>. Eristetään pyynnön tekevä koodi omaan moduuliinsa, tiedostoon <i>services/login.js</i>.
+Kirjautuminen tapahtuu tekemällä HTTP POST ‑pyyntö palvelimen osoitteeseen <i>api/login</i>. Eristetään pyynnön tekevä koodi omaan moduuliinsa, tiedostoon <i>services/login.js</i>.
 
 Käytetään HTTP-pyynnön tekemiseen nyt promisejen sijaan <i>async/await</i>-syntaksia:
 
@@ -611,7 +611,7 @@ Edellisen osan [lopussa](/osa4/token_perustainen_kirjautuminen#token-perustaisen
 
 Ratkaisuja ongelmaan on kaksi. Tokenille voidaan asettaa voimassaoloaika, jonka päätyttyä käyttäjä pakotetaan kirjautumaan järjestelmään uudelleen. Toinen ratkaisu on tallentaa tokeniin liittyvät tiedot palvelimen tietokantaan ja tarkastaa jokaisen API-kutsun yhteydessä, onko tokeniin liittyvä käyttöoikeus tai "sessio" edelleen voimassa. Jälkimmäistä tapaa kutsutaan usein palvelinpuolen sessioksi.
 
-Riippumatta siitä miten palvelin hoitaa tokenin voimassaolon tarkastuksen, saattaa tokenin tallentaminen local storageen olla pienimuotoinen turvallisuusriski jos sovelluksessa on ns. [Cross Site Scripting (XSS)](https://owasp.org/www-community/attacks/xss/) -hyökkäyksen mahdollistava tietoturva-aukko. XSS-hyökkäys mahdollistuu, jos sovelluksen suoritettavaksi on mahdollista ujuttaa mielivaltaista JavaScript-koodia, minkä taas ei pitäisi olla "normaalisti" Reactia käyttäen mahdollista sillä [React sanitoi](https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks) renderöimänsä sisällön, eli ei suorita sitä koodina. 
+Riippumatta siitä miten palvelin hoitaa tokenin voimassaolon tarkastuksen, saattaa tokenin tallentaminen local storageen olla pienimuotoinen turvallisuusriski jos sovelluksessa on ns. [Cross Site Scripting (XSS)](https://owasp.org/www-community/attacks/xss/) ‑hyökkäyksen mahdollistava tietoturva-aukko. XSS-hyökkäys mahdollistuu, jos sovelluksen suoritettavaksi on mahdollista ujuttaa mielivaltaista JavaScript-koodia, minkä taas ei pitäisi olla "normaalisti" Reactia käyttäen mahdollista sillä [React sanitoi](https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks) renderöimänsä sisällön, eli ei suorita sitä koodina. 
 
 Toki jos haluaa pelata varman päälle, ei tokenia kannata tallettaa local storageen ainakaan niissä tapauksissa, joissa potentiaalisella tokenin vääriin käsiin joutumisella olisi traagisia seurauksia. 
 

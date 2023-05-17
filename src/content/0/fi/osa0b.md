@@ -72,7 +72,7 @@ Sivun https://studies.cs.helsinki.fi/exampleapp/ avaaminen selaimessa saa siis a
 
 Sekvenssikaavio kuvaa selaimen (browser) ja palvelimen (server) välisen kommunikaation aikajärjestyksessä "ylhäältä alaspäin", eli ylimpänä on ensin selaimen ensin lähettämä pyyntö, jonka jälkeen tulee palvelimen vastaus tähän pyyntöön, ja tämän jälkeen selaimen seuraava pyyntö jne.
 
-Ensin selain tekee palvelimelle HTTP GET -pyynnön, jonka avulla se hakee sivun HTML-koodin. HTML-koodissa olevan <i>img</i>-tagin ansiosta selain hakee palvelimelta kuvan <i>kuva.png</i>. Selain renderöi HTML-kielellä muotoillun sivun ja kuvan näytölle. Vaikka käyttäjä ei sitä helposti huomaa, alkaa sivu renderöityä näytölle jo ennen kuvan hakemista.
+Ensin selain tekee palvelimelle HTTP GET ‑pyynnön, jonka avulla se hakee sivun HTML-koodin. HTML-koodissa olevan <i>img</i>-tagin ansiosta selain hakee palvelimelta kuvan <i>kuva.png</i>. Selain renderöi HTML-kielellä muotoillun sivun ja kuvan näytölle. Vaikka käyttäjä ei sitä helposti huomaa, alkaa sivu renderöityä näytölle jo ennen kuvan hakemista.
 
 ### Perinteinen web-sovellus
 
@@ -407,10 +407,10 @@ Kerrataan vielä mitä tapahtuu kun selaimessa avataan sivu https://studies.cs.h
 
 ![](../../images/0/19m.png)
 
-- selain hakee palvelimelta sivun sisällön ja rakenteen määrittelevän HTML-koodin HTTP GET -pyynnöllä
+- selain hakee palvelimelta sivun sisällön ja rakenteen määrittelevän HTML-koodin HTTP GET ‑pyynnöllä
 - HTML-koodi saa aikaan sen, että selain hakee sivun tyylit määrittelevän tiedoston <i>main.css</i>
 - sekä JavaScript-koodia sisältävän tiedoston <i>main.js</i>
-- selain alkaa suorittamaan hakemaansa JavaScript-koodia, joka tekee HTTP GET -pyynnön muistiinpanot json-muotoisena raakadatana palauttavaan osoitteeseen https://studies.cs.helsinki.fi/exampleapp/data.json
+- selain alkaa suorittamaan hakemaansa JavaScript-koodia, joka tekee HTTP GET ‑pyynnön muistiinpanot json-muotoisena raakadatana palauttavaan osoitteeseen https://studies.cs.helsinki.fi/exampleapp/data.json
 - datan saapuessa selain suorittaa _tapahtumankäsittelijän_, joka renderöi DOM-apia hyväksikäyttäen muistiinpanot ruudulle
 
 ### Lomake ja HTTP POST
@@ -427,7 +427,7 @@ Lomakkeen lähettäminen aiheuttaa yllättäen yhteensä <i>viisi</i> HTTP-pyynt
 
 ![](../../images/0/22e.png)
 
-Kyseessä on siis [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) -pyyntö ja se on tehty palvelimen osoitteeseen <i>new\_note</i>. Palvelin vastaa pyyntöön HTTP-statuskoodilla 302. Kyseessä on ns. [uudelleenohjauspyyntö](https://en.wikipedia.org/wiki/URL_redirection) eli redirectaus, minkä avulla palvelin kehottaa selainta tekemään automaattisesti uuden HTTP GET -pyynnön headerin <i>Location</i> kertomaan paikkaan, eli osoitteeseen <i>notes</i>.
+Kyseessä on siis [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) ‑pyyntö ja se on tehty palvelimen osoitteeseen <i>new\_note</i>. Palvelin vastaa pyyntöön HTTP-statuskoodilla 302. Kyseessä on ns. [uudelleenohjauspyyntö](https://en.wikipedia.org/wiki/URL_redirection) eli redirectaus, minkä avulla palvelin kehottaa selainta tekemään automaattisesti uuden HTTP GET ‑pyynnön headerin <i>Location</i> kertomaan paikkaan, eli osoitteeseen <i>notes</i>.
 
 Selain siis lataa uudelleen muistiinpanojen sivun. Sivunlataus saa aikaan myös kolme muuta HTTP-pyyntöä: tyylitiedoston (<i>main.css</i>), JavaScript-koodin (<i>main.js</i>) ja muistiinpanojen raakadatan (<i>data.json</i>) lataamisen.
 
@@ -435,7 +435,7 @@ Network-välilehti näyttää myös lomakkeen mukana lähetetyn datan:
 
 ![](../../images/0/23e.png)
 
-Lomakkeen lähettäminen tapahtuu HTTP POST -pyyntönä ja osoitteeseen <i>new_note</i> form-tagiin määriteltyjen attribuuttien <i>action</i> ja <i>method</i> ansiosta:
+Lomakkeen lähettäminen tapahtuu HTTP POST ‑pyyntönä ja osoitteeseen <i>new_note</i> form-tagiin määriteltyjen attribuuttien <i>action</i> ja <i>method</i> ansiosta:
 
 ![](../../images/0/24e.png)
 
@@ -488,11 +488,11 @@ AJAXiksi kutsuttu asia on arkipäiväistynyt ja muuttunut itsestäänselvyydeksi
 Esimerkkisovelluksemme pääsivu toimii perinteisten web-sivujen tapaan: kaikki sovelluslogiikka on palvelimella ja selain ainoastaan renderöi palvelimen lähettämää HTML-koodia.
 
 Muistiinpanoista huolehtivassa sivussa osa sovelluslogiikasta, eli olemassaolevien muistiinpanojen HTML-koodin generointi on siirretty selaimen vastuulle. Selain hoitaa tehtävän suorittamalla palvelimelta lataamansa JavaScript-koodin. Selaimella suoritettava koodi hakee ensin muistiinpanot palvelimelta JSON-muotoisena raakadatana ja lisää sivulle muistiinpanoja edustavat HTML-elementit [DOM-apia](/osa0/web_sovelluksen_toimintaperiaatteita#document-object-model-eli-dom) hyödyntäen.
-Viimeisten vuosien aikana on noussut esiin tyyli tehdä web-sovelluksia käyttäen [Single-page application](https://en.wikipedia.org/wiki/Single-page_application) (SPA) -tyyliä, missä sovelluksilla ei enää ole esimerkkisovelluksemme tapaan erillisiä, palvelimen sille lähettämiä sivuja, vaan sovellus koostuu ainoastaan yhdestä palvelimen lähettämästä HTML-sivusta, jonka sisältöä manipuloidaan selaimessa suoritettavalla JavaScriptillä.
+Viimeisten vuosien aikana on noussut esiin tyyli tehdä web-sovelluksia käyttäen [Single-page application](https://en.wikipedia.org/wiki/Single-page_application) (SPA) ‑tyyliä, missä sovelluksilla ei enää ole esimerkkisovelluksemme tapaan erillisiä, palvelimen sille lähettämiä sivuja, vaan sovellus koostuu ainoastaan yhdestä palvelimen lähettämästä HTML-sivusta, jonka sisältöä manipuloidaan selaimessa suoritettavalla JavaScriptillä.
 
 Sovelluksemme muistiinpanosivu muistuttaa jo hiukan SPA-tyylistä sovellusta. Sitä se ei kuitenkaan vielä ole, sillä vaikka muistiinpanojen renderöintilogiikka on toteutettu selaimessa, käyttää sivu vielä perinteistä mekanismia uusien muistiinpanojen luomiseen, eli se lähettää uuden muistiinpanon tiedot lomakkeen avulla ja palvelin pyytää <i>uudelleenohjauksen</i> avulla selainta lataamaan muistiinpanojen sivun uudelleen.
 
-Osoitteessa <https://studies.cs.helsinki.fi/exampleapp/spa> on sovelluksen Single Page App -versio.
+Osoitteessa <https://studies.cs.helsinki.fi/exampleapp/spa> on sovelluksen Single Page App ‑versio.
 
 Sovellus näyttää ensivilkaisulta täsmälleen samalta kuin edellinen versio.
 
@@ -523,7 +523,7 @@ Ilman headeria palvelin ei osaisi parsia pyynnön mukana tulevaa dataa oikein.
 
 Palvelin vastaa kyselyyn statuskoodilla [201 created](https://httpstatuses.com/201). Tällä kertaa palvelin ei pyydä uudelleenohjausta kuten aiemmassa versiossamme. Selain pysyy samalla sivulla ja muita HTTP-pyyntöjä ei suoriteta.
 
-Ohjelman Single Page App -versiossa lomakkeen tietoja ei lähetetä selaimen normaalin lomakkeiden lähetysmekanismin avulla, lähettämisen hoitaa selaimen lataamassa JavaScript-tiedostossa määritelty koodi. Katsotaan hieman koodia vaikka yksityiskohdista ei tarvitse nytkään välittää liikaa.
+Ohjelman Single Page App ‑versiossa lomakkeen tietoja ei lähetetä selaimen normaalin lomakkeiden lähetysmekanismin avulla, lähettämisen hoitaa selaimen lataamassa JavaScript-tiedostossa määritelty koodi. Katsotaan hieman koodia vaikka yksityiskohdista ei tarvitse nytkään välittää liikaa.
 
 ```js
 var form = document.getElementById('notes_form')
@@ -542,7 +542,7 @@ form.onsubmit = function(e) {
 }
 ```
 
-Komennolla <em>document.getElementById('notes_form')</em> koodi hakee sivulta lomake-elementin ja rekisteröi sille <i>tapahtumankäsittelijän</i> hoitamaan tilanteen, jossa lomake "submitoidaan" eli lähetetään. Tapahtumankäsittelijä kutsuu heti metodia <em>e.preventDefault()</em> jolla se estää lomakkeen lähetyksen oletusarvoisen toiminnan. Oletusarvoinen toiminta aiheuttaisi lomakkeen lähettämisen ja sivun uudelleen lataamisen, joita emme single page -sovelluksissa halua tapahtuvan.
+Komennolla <em>document.getElementById('notes_form')</em> koodi hakee sivulta lomake-elementin ja rekisteröi sille <i>tapahtumankäsittelijän</i> hoitamaan tilanteen, jossa lomake "submitoidaan" eli lähetetään. Tapahtumankäsittelijä kutsuu heti metodia <em>e.preventDefault()</em> jolla se estää lomakkeen lähetyksen oletusarvoisen toiminnan. Oletusarvoinen toiminta aiheuttaisi lomakkeen lähettämisen ja sivun uudelleen lataamisen, joita emme single page ‑sovelluksissa halua tapahtuvan.
 
 Tämän jälkeen koodi luo muistiinpanon, lisää sen muistiinpanojen listalle komennolla <em>notes.push(note)</em>, piirtää ruudun sisällön eli muistiinpanojen listan uudelleen ja lähettää uuden muistiinpanon palvelimelle.
 
@@ -561,9 +561,9 @@ var sendToServer = function(note) {
 )
 ```
 
-Koodissa siis määritellään, että kyse on HTTP POST -pyynnöstä, määritellään headerin <i>Content-type</i> avulla lähetettävän datan tyypiksi JSON, ja lähetetään data JSON-merkkijonona.
+Koodissa siis määritellään, että kyse on HTTP POST ‑pyynnöstä, määritellään headerin <i>Content-type</i> avulla lähetettävän datan tyypiksi JSON, ja lähetetään data JSON-merkkijonona.
 
-Sovelluksen koodi on osoitteessa <https://github.com/mluukkai/example_app>. Kannattaa huomata, että sovellus on tarkoitettu ainoastaan kurssin käsitteistöä demonstroivaksi esimerkiksi, koodi on osin tyyliltään huonoa ja siitä ei tule ottaa mallia omia sovelluksia tehdessä. Sama koskee käytettyjä urleja, Single Page App -tyyliä noudattavan sivun käyttämä uusien muistiinpanojen kohdeosoite <i>new_note_spa</i> ei noudata nykyisin suositeltavia käytäntöjä.
+Sovelluksen koodi on osoitteessa <https://github.com/mluukkai/example_app>. Kannattaa huomata, että sovellus on tarkoitettu ainoastaan kurssin käsitteistöä demonstroivaksi esimerkiksi, koodi on osin tyyliltään huonoa ja siitä ei tule ottaa mallia omia sovelluksia tehdessä. Sama koskee käytettyjä urleja, Single Page App ‑tyyliä noudattavan sivun käyttämä uusien muistiinpanojen kohdeosoite <i>new_note_spa</i> ei noudata nykyisin suositeltavia käytäntöjä.
 
 ### JavaScript-kirjastot
 
@@ -573,7 +573,7 @@ Pelkän JavaScriptin ja DOM-apin käytön sijaan web-ohjelmoinnissa hyödynnetä
 
 jQuery on kehitetty aikana, jolloin web-sivut olivat vielä suurimmaksi osaksi perinteisiä, eli palvelin muodosti HTML-sivuja, joiden toiminnallisuutta rikastettiin selaimessa jQueryllä kirjoitetun JavaScript-koodin avulla. Yksi syy jQueryn suosion taustalla oli niin sanottu cross-browser yhteensopivuus, eli kirjasto toimi selaimesta ja selainvalmistajasta riippumatta samalla tavalla, eikä sitä käyttäessä ollut enää tarvetta kirjoittaa selainversiokohtaisia ratkaisuja. Nykyisin tavallisen jQueryn käyttö ei ole enää yhtä perusteltua kuin aikaisemmin, JavaScript on kehittynyt paljon ja käytetyimmät selaimet tukevat yleisesti ottaen hyvin perustoiminnallisuuksia.
 
-Single page app -tyylin noustua suosioon on ilmestynyt useita jQueryä "modernimpia" tapoja sovellusten kehittämiseen. Ensimmäisen aallon suosikki oli [Backbone.js](http://backbonejs.org/). Googlen kehittämä [AngularJS](https://angularjs.org/) nousi 2012 tapahtuneen [julkaisun](https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13) jälkeen erittäin nopeasti lähes <i>de facto</i> -standardin asemaan modernissa web-sovelluskehityksessä.
+Single page app ‑tyylin noustua suosioon on ilmestynyt useita jQueryä "modernimpia" tapoja sovellusten kehittämiseen. Ensimmäisen aallon suosikki oli [Backbone.js](http://backbonejs.org/). Googlen kehittämä [AngularJS](https://angularjs.org/) nousi 2012 tapahtuneen [julkaisun](https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13) jälkeen erittäin nopeasti lähes <i>de facto</i> ‑standardin asemaan modernissa web-sovelluskehityksessä.
 
 Angularin suosio kuitenkin romahti siinä vaiheessa kun Angular-tiimi [ilmoitti](https://jaxenter.com/angular-2-0-announcement-backfires-112127.html) lokakuussa 2014, että version 1 kehitys lopetetaan ja Angular 2 ei tule olemaan taaksepäin yhteensopiva ykkösversion kanssa. Angular 2 ja uudemmat versiot eivät ole saaneet kovin innostunutta vastaanottoa mutta ovat kohtuullisen laajalti käytettyjä.
 
@@ -581,23 +581,23 @@ Nykyisin, tai oikeastaan jo lähes puolen vuosikymmenen ajan, suosituin tapa tot
 
 Reactin asema näyttää tällä hetkellä vahvalta, mutta JavaScript-maailma ei lepää koskaan. Muutama vuosi sitten hieman uudempi tulokas [Vue.js](https://vuejs.org/) herätti jossain määrin kiinnostusta, mutta ei sekään näytä nousseen uhkaamaan Reactin asemaa.
 
-### Full stack -websovelluskehitys
+### Full stack ‑websovelluskehitys
 
-Mitä tarkoitetaan kurssin nimellä <i>Full stack -websovelluskehitys?</i> Full stack on hypenomainen termi; kaikki puhuvat siitä, mutta kukaan ei oikein tiedä, mitä se tarkoittaa tai ainakaan mitään yhteneväistä määritelmää termille ei ole.
+Mitä tarkoitetaan kurssin nimellä <i>Full stack ‑websovelluskehitys?</i> Full stack on hypenomainen termi; kaikki puhuvat siitä, mutta kukaan ei oikein tiedä, mitä se tarkoittaa tai ainakaan mitään yhteneväistä määritelmää termille ei ole.
 
 Käytännössä kaikki websovellukset sisältävät (ainakin) kaksi "kerrosta", ylempänä, eli lähempänä loppukäyttäjää olevan selaimen ja alla olevan palvelimen. Palvelimen alapuolella on usein vielä tietokanta. Näin websovelluksen <i>arkkitehtuurin</i> voi ajatella muodostavan pinon, englanniksi <i>stack</i>.
 
 Web-sovelluskehityksen yhteydessä puhutaan usein myös "frontista" ([frontend](https://en.wikipedia.org/wiki/Front_and_back_ends)) ja "backistä" ([backend](https://en.wikipedia.org/wiki/Front_and_back_ends)). Selain on frontend ja selaimessa suoritettava JavaScript on frontend-koodia. Palvelimella taas pyörii backend-koodi.
 
-Tämän kurssin kontekstissa full stack -sovelluskehitys tarkoittaa sitä, että fokus on kaikissa sovelluksen osissa, niin frontendissä kuin backendissä sekä taustalla olevassa tietokannassa. Myös palvelimen käyttöjärjestelmä ja sen ohjelmistot lasketaan usein osaksi stackia, niihin emme kuitenkaan tällä kurssilla puutu.
+Tämän kurssin kontekstissa full stack ‑sovelluskehitys tarkoittaa sitä, että fokus on kaikissa sovelluksen osissa, niin frontendissä kuin backendissä sekä taustalla olevassa tietokannassa. Myös palvelimen käyttöjärjestelmä ja sen ohjelmistot lasketaan usein osaksi stackia, niihin emme kuitenkaan tällä kurssilla puutu.
 
-Ohjelmoimme myös palvelinpuolta, eli backendia JavaScriptilla, käyttäen [Node.js](https://nodejs.org/en/)-suoritusympäristöä. Näin full stack -sovelluskehitys saa vielä uuden ulottuvuuden, kun voimme käyttää samaa ohjelmointikieltä pinon useammassa kerroksessa. Full stack -sovelluskehitys ei välttämättä edellytä sitä, että kaikissa "sovelluspinon" kerroksissa on käytössä sama kieli (JavaScript).
+Ohjelmoimme myös palvelinpuolta, eli backendia JavaScriptilla, käyttäen [Node.js](https://nodejs.org/en/)-suoritusympäristöä. Näin full stack ‑sovelluskehitys saa vielä uuden ulottuvuuden, kun voimme käyttää samaa ohjelmointikieltä pinon useammassa kerroksessa. Full stack ‑sovelluskehitys ei välttämättä edellytä sitä, että kaikissa "sovelluspinon" kerroksissa on käytössä sama kieli (JavaScript).
 
-Aiemmin on ollut yleisempää, että sovelluskehittäjät ovat erikoistuneet tiettyyn sovelluksen osaan, esim. backendiin. Tekniikat backendissa ja frontendissa ovat saattaneet olla hyvin erilaisia. Full stack -trendin myötä on tullut tavanomaiseksi, että sovelluskehittäjä hallitsee riittävästi kaikkia sovelluksen tasoja ja tietokantaa. Usein full stack -kehittäjän on myös omattava riittävä määrä konfiguraatio- ja ylläpito-osaamista, jotta kehittäjä pystyy operoimaan sovellustaan esim. pilvipalveluissa.
+Aiemmin on ollut yleisempää, että sovelluskehittäjät ovat erikoistuneet tiettyyn sovelluksen osaan, esim. backendiin. Tekniikat backendissa ja frontendissa ovat saattaneet olla hyvin erilaisia. Full stack ‑trendin myötä on tullut tavanomaiseksi, että sovelluskehittäjä hallitsee riittävästi kaikkia sovelluksen tasoja ja tietokantaa. Usein full stack ‑kehittäjän on myös omattava riittävä määrä konfiguraatio- ja ylläpito-osaamista, jotta kehittäjä pystyy operoimaan sovellustaan esim. pilvipalveluissa.
 
 ### JavaScript fatigue
 
-Full stack -sovelluskehitys on monella tapaa haastavaa. Asioita tapahtuu monessa paikassa ja mm. debuggaaminen on oleellisesti normaalia työpöytäsovellusta hankalampaa. JavaScript ei toimi aina niin kuin sen olettaisi toimivan (verrattuna moniin muihin kieliin) ja sen suoritusympäristöjen asynkroninen toimintamalli aiheuttaa monenlaisia haasteita. Verkon yli tapahtuva kommunikointi edellyttää HTTP-protokollan tuntemusta. On tunnettava myös tietokantoja ja hallittava palvelinten konfigurointia ja ylläpitoa. Hyvä olisi myös hallita riittävästi CSS:ää, jotta sovellukset saataisiin edes siedettävän näköisiksi.
+Full stack ‑sovelluskehitys on monella tapaa haastavaa. Asioita tapahtuu monessa paikassa ja mm. debuggaaminen on oleellisesti normaalia työpöytäsovellusta hankalampaa. JavaScript ei toimi aina niin kuin sen olettaisi toimivan (verrattuna moniin muihin kieliin) ja sen suoritusympäristöjen asynkroninen toimintamalli aiheuttaa monenlaisia haasteita. Verkon yli tapahtuva kommunikointi edellyttää HTTP-protokollan tuntemusta. On tunnettava myös tietokantoja ja hallittava palvelinten konfigurointia ja ylläpitoa. Hyvä olisi myös hallita riittävästi CSS:ää, jotta sovellukset saataisiin edes siedettävän näköisiksi.
 
 Oman haasteensa tuo vielä se, että JavaScript-maailma etenee koko ajan todella kovaa vauhtia eteenpäin. Kirjastot, työkalut ja itse kielikin ovat jatkuvan kehityksen alla. Osa alkaa kyllästyä nopeaan kehitykseen ja sitä kuvaamaan on lanseerattu termi [JavaScript](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4) [fatigue](https://auth0.com/blog/how-to-manage-javascript-fatigue/) eli [JavaScript](https://hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f)-väsymys.
 
@@ -697,7 +697,7 @@ Tee kaavio tilanteesta, jossa käyttäjä menee selaimella osoitteeseen <https:/
 
   <h4>0.6: Uusi muistiinpano</h4>
 
-Tee kaavio tilanteesta, jossa käyttäjä luo uuden muistiinpanon single page -versiossa.
+Tee kaavio tilanteesta, jossa käyttäjä luo uuden muistiinpanon single page ‑versiossa.
 
 Tämä oli osan viimeinen tehtävä ja on aika pushata vastaukset GitHubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 

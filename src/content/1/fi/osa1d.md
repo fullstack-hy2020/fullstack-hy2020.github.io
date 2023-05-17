@@ -110,7 +110,7 @@ ja uudeksi tilaksi asetetaan siis seuraava olio
 
 jolloin kentän <i>left</i> arvo on sama kuin alkuperäisen tilan kentän <i>left + 1</i> ja kentän <i>right</i> arvo on sama kuin alkuperäisen tilan kentän <i>right</i>.
 
-Uuden tilan määrittelevän olion muodostaminen onnistuu hieman tyylikkäämmin hyödyntämällä kesällä 2018 kieleen tuotua [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) -syntaksia:
+Uuden tilan määrittelevän olion muodostaminen onnistuu hieman tyylikkäämmin hyödyntämällä kesällä 2018 kieleen tuotua [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) ‑syntaksia:
 
 ```js
 const handleLeftClick = () => {
@@ -470,7 +470,7 @@ Tutustummekin riittävällä tasolla class-komponentteihin kurssin [seitsemänne
 
 ### React-sovellusten debuggaus
 
-Ohjelmistokehittäjän työ sisältää monesti debuggaamista ja olemassa olevan koodin lukemista. Silloin tällöin syntyy toki muutama rivi uuttakin koodia, mutta suuri osa ajasta ihmetellään, miksi joku on rikki tai miksi joku asia ylipäätään toimii. Hyvät debuggauskäytännöt ja -työkalut ovatkin todella tärkeitä.
+Ohjelmistokehittäjän työ sisältää monesti debuggaamista ja olemassa olevan koodin lukemista. Silloin tällöin syntyy toki muutama rivi uuttakin koodia, mutta suuri osa ajasta ihmetellään, miksi joku on rikki tai miksi joku asia ylipäätään toimii. Hyvät debuggauskäytännöt ja ‑työkalut ovatkin todella tärkeitä.
 
 Onneksi React on debuggauksen suhteen jopa harvinaisen kehittäjäystävällinen kirjasto.
 
@@ -554,7 +554,7 @@ Debuggeriin pääsee myös ilman komentoa _debugger_ lisäämällä <i>Sources</
 
 ![](../../images/1/9a.png)
 
-Chromeen kannattaa ehdottomasti asentaa [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) -lisäosa, joka tuo konsoliin uuden välilehden _Components_. Uuden välilehden avulla voidaan tarkkailla sovelluksen React-komponentteja ja niiden tilaa ja propseja:
+Chromeen kannattaa ehdottomasti asentaa [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) ‑lisäosa, joka tuo konsoliin uuden välilehden _Components_. Uuden välilehden avulla voidaan tarkkailla sovelluksen React-komponentteja ja niiden tilaa ja propseja:
 
 ![](../../images/1/10ea.png)
 

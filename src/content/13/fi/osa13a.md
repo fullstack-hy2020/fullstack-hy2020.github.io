@@ -66,7 +66,7 @@ Syy sille miksi kurssin aiemmat osat käyttivät MongoDB:tä liittyvät juuri se
 
 ### Sovelluksen tietokanta
 
-Tarvitsemme sovellustamme varten relaatiotietokannan. Vaihtoehtoja on monia, käytämme kurssilla tämän hetken suosituinta Open Source -ratkaisua [PostgreSQL:ää](https://www.postgresql.org/). Voit halutessasi asentaa Postgresin (kuten tietokantaa usein kutsutaan) koneellesi. Helpommalla pääset käyttämällä jotain pilvipalveluna tarjottavaa Postgresia, esim. [ElephantSQL:ää](https://www.elephantsql.com/).
+Tarvitsemme sovellustamme varten relaatiotietokannan. Vaihtoehtoja on monia, käytämme kurssilla tämän hetken suosituinta Open Source ‑ratkaisua [PostgreSQL:ää](https://www.postgresql.org/). Voit halutessasi asentaa Postgresin (kuten tietokantaa usein kutsutaan) koneellesi. Helpommalla pääset käyttämällä jotain pilvipalveluna tarjottavaa Postgresia, esim. [ElephantSQL:ää](https://www.elephantsql.com/).
 
 Käytämme nyt hyväksemme sitä, että osista 3 ja 4 tuttuille pilvipalvelualustoille Fly.io ja Heroku on mahdollista luoda sovellukselle Postgres-tietokanta.
 
@@ -262,7 +262,7 @@ Alustetaan sovellus tavalliseen tapaan komennolla <i>npm init</i> ja asennetaan 
 npm install express dotenv pg sequelize
 ```
 
-Näistä jälkimmäinen [Sequelize](https://sequelize.org/master/) on kirjasto, jonka kautta käytämme Postgresia. Sequelize on niin sanottu [Object relational mapping](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping) (ORM) -kirjasto, joka mahdollistaa JavaScript-olioiden tallentamisen relaatiotietokantaan ilman SQL-kielen käyttöä, samaan tapaan kuin MongoDB:n yhteydessä käyttämämme Mongoose.
+Näistä jälkimmäinen [Sequelize](https://sequelize.org/master/) on kirjasto, jonka kautta käytämme Postgresia. Sequelize on niin sanottu [Object relational mapping](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping) (ORM) ‑kirjasto, joka mahdollistaa JavaScript-olioiden tallentamisen relaatiotietokantaan ilman SQL-kielen käyttöä, samaan tapaan kuin MongoDB:n yhteydessä käyttämämme Mongoose.
 
 Testataan, että yhteyden muodostaminen onnistuu. Luodaan tiedosto <i>index.js</i> ja sille seuraava sisältö:
 
@@ -474,7 +474,7 @@ app.listen(PORT, () => {
 
 Muutama kommentti koodista. Modelin <i>Note</i> määrittelyssä ei ole mitään kovin yllättävää, jokaiselle sarakkeelle on määritelty tyyppi, sekä tarvittaessa muut ominaisuudet, kuten se onko kyseessä taulun pääavain. Modelin määrittelyssä oleva toinen parametri sisältää <i>sequelize</i>-olion sekä muuta konfiguraatiotietoa. Määrittelimme, että taululla ei ole usein käytettyjä aikaleimasarakkeita (created\_at ja updated\_at).
 
-Määrittelimme myös <i>underscored: true</i>, joka tarkoittaa sitä, että taulujen nimet johdetaan modelien nimistä monikkomuotoisina [snake case](https://en.wikipedia.org/wiki/Snake_case) -versiona. Käytännössä tämä tarkoittaa sitä, että jos modelin nimi on, kuten tapauksessamme, <i>Note</i> päätellään siitä, että vastaavan taulun nimi on pienellä alkukirjaimella kirjoitettu nimen monikko eli <i>notes</i>. Jos taas modelin nimi olisi "kaksiosainen" esim. <i>StudyGroup</i> olisi taulun nimi <i>study_groups</i>. Sequelize mahdollistaa automaattisen taulujen nimien päättelyn sijaan myös eksplisiittisesti määriteltävät taulujen nimet.
+Määrittelimme myös <i>underscored: true</i>, joka tarkoittaa sitä, että taulujen nimet johdetaan modelien nimistä monikkomuotoisina [snake case](https://en.wikipedia.org/wiki/Snake_case) ‑versiona. Käytännössä tämä tarkoittaa sitä, että jos modelin nimi on, kuten tapauksessamme, <i>Note</i> päätellään siitä, että vastaavan taulun nimi on pienellä alkukirjaimella kirjoitettu nimen monikko eli <i>notes</i>. Jos taas modelin nimi olisi "kaksiosainen" esim. <i>StudyGroup</i> olisi taulun nimi <i>study_groups</i>. Sequelize mahdollistaa automaattisen taulujen nimien päättelyn sijaan myös eksplisiittisesti määriteltävät taulujen nimet.
 
 Sama käytäntöä nimityksien osalta koskee myös sarakkeita. Jos olisimme määritelleet, että muistiinpanoon liittyy <i>creationYear</i>, eli tieto sen luomisvuodesta, määrittelisimme sen modeliin seuraavasti:
 
@@ -604,7 +604,7 @@ Robert C. Martin: 'FP vs. OO List Processing', 0 likes
 
 ### Tietokantataulujen automaattinen luominen
 
-Sovelluksessamme on nyt yksi ikävä puoli, se olettaa että täsmälleen oikean skeeman omaava tietokanta on olemassa, eli että taulu <i>notes</i> on luotu sopivalla _create table_ -komennolla.
+Sovelluksessamme on nyt yksi ikävä puoli, se olettaa että täsmälleen oikean skeeman omaava tietokanta on olemassa, eli että taulu <i>notes</i> on luotu sopivalla _create table_ ‑komennolla.
 
 Koska ohjelmakoodi säilytetään GitHubissa, olisi järkevää säilyttää myös tietokannan luovat komennot ohjelmakoodin yhteydessä, jotta tietokannan skeema on varmasti sama mitä ohjelmakoodi odottaa. Sequelize pystyy itse asiassa generoimaan skeeman automaattisesti modelien määritelmästä modelien metodin [sync](https://sequelize.org/master/manual/model-basics.html#model-synchronization) avulla.
 

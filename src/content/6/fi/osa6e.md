@@ -16,9 +16,9 @@ Jos olet jo ehtinyt aloittaa Redux connectia käsittelevät tehtävät (6.19-6.2
 
 ###
 
-Olemme käyttäneet Redux-storea React Redux -kirjaston [hook](https://react-redux.js.org/api/hooks)-apin eli funktioiden [useSelector](https://react-redux.js.org/api/hooks#useselector) ja [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) avulla.
+Olemme käyttäneet Redux-storea React Redux ‑kirjaston [hook](https://react-redux.js.org/api/hooks)-apin eli funktioiden [useSelector](https://react-redux.js.org/api/hooks#useselector) ja [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) avulla.
 
-Tarkastellaan tämän osan lopuksi toista, hieman vanhempaa ja jonkin verran monimutkaisempaa tapaa Reduxin käyttöön eli [React Redux](https://github.com/reactjs/react-redux) -kirjaston määrittelemää [connect](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md)-funktiota.
+Tarkastellaan tämän osan lopuksi toista, hieman vanhempaa ja jonkin verran monimutkaisempaa tapaa Reduxin käyttöön eli [React Redux](https://github.com/reactjs/react-redux) ‑kirjaston määrittelemää [connect](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md)-funktiota.
 
 <i>**Uusissa sovelluksissa kannattaa ehdottomasti käyttää hook-apia**</i>, mutta _connect_-funktion tuntemisesta on hyötyä vanhempia Reduxia käyttäviä projekteja ylläpidettäessä.
 
@@ -200,7 +200,7 @@ const Notes = (props) => {
 }
 ```
 
-_connect_-funktion toisena parametrina voidaan määritellä [mapDispatchToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#connect-parameters) eli joukko <i>action creator</i> -funktioita, jotka välitetään yhdistetylle komponentille propseina. Laajennetaan connectausta seuraavasti:
+_connect_-funktion toisena parametrina voidaan määritellä [mapDispatchToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#connect-parameters) eli joukko <i>action creator</i> ‑funktioita, jotka välitetään yhdistetylle komponentille propseina. Laajennetaan connectausta seuraavasti:
 
 ```js
 const mapStateToProps = (state) => {
@@ -242,7 +242,7 @@ const Notes = (props) => {
 }
 ```
 
-Eli se sijaan että kutsuttaisiin action creator -funktiota _dispatch_-funktion kanssa
+Eli se sijaan että kutsuttaisiin action creator ‑funktiota _dispatch_-funktion kanssa
 
 ```js
 dispatch(toggleImportanceOf(note.id))
@@ -408,7 +408,7 @@ const NewNote = (props) => {
 
 näemme eron:
 
-![Ensin tulostuu pelkkä action creatot -funktion koodi. Tämän jälkeen tulostuu koodi joka sisältää komennon, dispatch(actionCreator.apply(this, arguments)) eli dispatchiin "sidottu" action creator](../../images/6/10.png)
+![Ensin tulostuu pelkkä action creatot ‑funktion koodi. Tämän jälkeen tulostuu koodi joka sisältää komennon, dispatch(actionCreator.apply(this, arguments)) eli dispatchiin "sidottu" action creator](../../images/6/10.png)
 
 Ensimmäinen funktioista on siis normaali <i>action creator</i>, toinen taas _connect_-funktion muotoilema funktio, joka sisältää storen metodin dispatch-kutsun.
 
@@ -559,7 +559,7 @@ taas on selkeästi <i>container</i>-komponentti, joita Dan Abramov [luonnehtii](
 - Are often stateful, as they tend to serve as data sources.
 - Are usually generated using higher order components such as connect from React Redux, rather than written by hand.
 
-Komponenttien presentational vs. container -jaottelu on eräs hyväksi havaittu tapa strukturoida React-sovelluksia. Jako voi olla toimiva tai sitten ei, kaikki riippuu kontekstista.
+Komponenttien presentational vs. container ‑jaottelu on eräs hyväksi havaittu tapa strukturoida React-sovelluksia. Jako voi olla toimiva tai sitten ei, kaikki riippuu kontekstista.
 
 Abramov mainitsee jaon [eduiksi](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) muun muassa seuraavat:
 
