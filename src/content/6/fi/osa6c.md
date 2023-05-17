@@ -121,7 +121,7 @@ export const { createNote, toggleImportanceOf, appendNote } = noteSlice.actions 
 export default noteSlice.reducer
 ```
 
-Nopea tapa saada storen tila alustettua palvelimella olevan datan perusteella on hakea muistiinpanot tiedostossa <i>index.js</i> ja dispatchata niille yksitellen <em>appendNote</em> -action creatorin avulla:
+Nopea tapa saada storen tila alustettua palvelimella olevan datan perusteella on hakea muistiinpanot tiedostossa <i>index.js</i> ja dispatchata niille yksitellen <em>appendNote</em>- action creatorin avulla:
 
 ```js
 // ...
@@ -472,7 +472,7 @@ const App = () => {
 
 Ratkaisu on elegantti, sillä muistiinpanojen alustuslogiikka on eriytetty kokonaan React-komponenttien ulkopuolelle.
 
-Korvataan seuraavaksi <em>createSlice</em>-funktion avulla toteutettu <em>createNote</em> -action creator saman nimisellä asynkronisella action creatorilla:  
+Korvataan seuraavaksi <em>createSlice</em>-funktion avulla toteutettu <em>createNote</em>- action creator saman nimisellä asynkronisella action creatorilla:  
 
 ```js
 // ...
@@ -587,7 +587,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 Sovelluksen tämänhetkinen koodi on [GitHubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5) branchissa <i>part6-5</i>.
 
-Redux Toolkit tarjoaa myös hieman kehittyneempiä työkaluja asynkronisen tilanhallinnan helpottamiseksi, esim mm. [createAsyncThunk](https://redux-toolkit.js.org/api/createAsyncThunk)-funktion ja [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) -API:n. Yksinkertaisissa sovelluksissa näiden tuoma hyöty lienee kuitenkin vähäinen.
+Redux Toolkit tarjoaa myös hieman kehittyneempiä työkaluja asynkronisen tilanhallinnan helpottamiseksi, esim mm. [createAsyncThunk](https://redux-toolkit.js.org/api/createAsyncThunk)-funktion ja [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) ‑API:n. Yksinkertaisissa sovelluksissa näiden tuoma hyöty lienee kuitenkin vähäinen.
 
 </div>
 
@@ -597,15 +597,15 @@ Redux Toolkit tarjoaa myös hieman kehittyneempiä työkaluja asynkronisen tilan
 
 #### 6.16 anekdootit ja backend, step3
 
-Muuta Redux-storen alustus tapahtumaan Redux Thunk -kirjaston avulla toteutettuun asynkroniseen actioniin.
+Muuta Redux-storen alustus tapahtumaan Redux Thunk ‑kirjaston avulla toteutettuun asynkroniseen actioniin.
 
 #### 6.17 anekdootit ja backend, step4
 
-Muuta myös uuden anekdootin luominen tapahtumaan Redux Thunk -kirjaston avulla toteutettuihin asynkronisiin actioneihin.
+Muuta myös uuden anekdootin luominen tapahtumaan Redux Thunk ‑kirjaston avulla toteutettuihin asynkronisiin actioneihin.
 
 #### 6.18 anekdootit ja backend, step5
 
-Äänestäminen ei vielä talleta muutoksia backendiin. Korjaa tilanne Redux Thunk -kirjastoa hyödyntäen.
+Äänestäminen ei vielä talleta muutoksia backendiin. Korjaa tilanne Redux Thunk ‑kirjastoa hyödyntäen.
 
 #### 6.19 anekdootit ja backend, step6
 

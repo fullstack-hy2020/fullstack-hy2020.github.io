@@ -221,7 +221,7 @@ const tSquared = t.map(p => p * p)
 
 Nuolifunktio on tullut JavaScriptiin vasta muutama vuosi sitten version [ES6](http://es6-features.org/) myötä. Tätä ennen ainoa tapa funktioiden määrittelyyn oli avainsanan _function_ käyttö.
 
-Määrittelytapoja on kaksi, funktiolle voidaan antaa [function declaration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function) -tyyppisessä määrittelyssä <i>nimi</i>, jonka avulla funktioon voidaan viitata:
+Määrittelytapoja on kaksi, funktiolle voidaan antaa [function declaration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function) ‑tyyppisessä määrittelyssä <i>nimi</i>, jonka avulla funktioon voidaan viitata:
 
 ```js
 function product(a, b) {
@@ -526,7 +526,7 @@ ES6:n luokkasyntaksia käytetään paljon "vanhassa" Reactissa ja Node.js:ssä j
 
 ### JavaScript-materiaalia
 
-JavaScriptistä löytyy verkosta suuret määrät sekä hyvää että huonoa materiaalia. Tällä sivulla lähes kaikki JavaScriptin ominaisuuksia käsittelevät linkit ovat [Mozillan JavaScript -materiaaliin](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
+JavaScriptistä löytyy verkosta suuret määrät sekä hyvää että huonoa materiaalia. Tällä sivulla lähes kaikki JavaScriptin ominaisuuksia käsittelevät linkit ovat [Mozillan JavaScript-materiaaliin](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
 
 Mozillan sivuilta kannattaa lukea oikeastaan välittömästi [A re-introduction to JavaScript (JS tutorial)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript).
 
