@@ -564,9 +564,7 @@ On kuitenkin tilanteita, missä vastaava tekniikka ei onnistu. Esim. eräs tapa 
 
 Siirrtyään osan lopuksi hieman toisenlaiseen teemaan.
 
-RESTCountries [https://restcountries.com](https://restcountries.com) tarjoaa paljon eri maihin liittyvää tietoa koneluettavassa muodossa ns. REST API:n välityksellä.
-
-Tee sovellus, jonka avulla voit tarkastella eri maiden tietoja. Sovelluksen kannattaa hakea tiedot endpointista [all](https://restcountries.com/#api-endpoints-v3-all).
+Osoitteesta [https://studies.cs.helsinki.fi/restcountries/](https://studies.cs.helsinki.fi/restcountries/) löytyy palvelu, joka tarjoaa paljon eri maihin liittyvää tietoa koneluettavassa muodossa ns. REST API:n välityksellä. Tee sovellus, jonka avulla voit tarkastella eri maiden tietoja.
 
 Sovelluksen käyttöliittymä on yksinkertainen. Näytettävä maa haetaan kirjoittamalla hakuehto hakukenttään.
 

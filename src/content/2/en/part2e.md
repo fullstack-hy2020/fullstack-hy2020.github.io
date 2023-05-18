@@ -566,9 +566,7 @@ However, there are situations where that technique would not work. For example, 
 
 <h4>2.18* Data for countries, step1</h4>
 
-The API [https://restcountries.com](https://restcountries.com) provides data for different countries in a machine-readable format, a so-called REST API.
-
-Create an application, in which one can look at data from various countries. The application should probably get the data from the endpoint [all](https://restcountries.com/v3.1/all).
+At [https://studies.cs.helsinki.fi/restcountries/](https://studies.cs.helsinki.fi/restcountries/) you can find a service that offers a lot of information related to different countries in a so-called machine-readable format via the REST API. Make an application that allows you to view information from different countries.
 
 The user interface is very simple. The country to be shown is found by typing a search query into the search field.
 

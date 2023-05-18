@@ -602,6 +602,8 @@ La API [https://restcountries.com](https://restcountries.com) proporciona datos 
 
 Cree una aplicación en la que se puedan ver datos de varios países. La aplicación probablemente debería obtener los datos del endpoint [all](https://restcountries.com/#api-endpoints-all). 
 
+Si la API no está disponible, use el sitio espejo en [https://studies.cs.helsinki.fi/restcountries/](https://studies.cs.helsinki.fi/restcountries/)
+
 La interfaz de usuario es muy sencilla. El país que se mostrará se encuentra escribiendo una consulta de búsqueda en el campo de búsqueda.
 
 Si hay demasiados países (más de 10) que coinciden con la consulta, se solicita al usuario que haga su consulta más específica:
