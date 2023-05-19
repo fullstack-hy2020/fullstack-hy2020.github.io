@@ -881,7 +881,7 @@ const App = () => {
 
 ```
 
-When we hover over the *response.data* we see that is has the type *any*
+When we hover over the *response.data* we see that it has the type *any*
 
 ![vscode response.data showing the any type](../../images/9/69new.png)
 
