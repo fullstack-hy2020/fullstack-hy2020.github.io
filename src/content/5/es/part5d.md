@@ -432,7 +432,7 @@ const router = require('express').Router()
 const Note = require('../models/note')
 const User = require('../models/user')
 
-router.post('/reset', async (request, response) => {
+router.delete('/reset', async (request, response) => {
   await Note.deleteMany({})
   await User.deleteMany({})
 
@@ -464,7 +464,7 @@ app.use(middleware.errorHandler)
 module.exports = app
 ```
 
-después de los cambios, una solicitud HTTP POST al extremo <i>/api/testing/reset</i> vacía la base de datos.
+después de los cambios, una solicitud HTTP DELETE al extremo <i>/api/testing/reset</i> vacía la base de datos.
 
 El código de backend modificado se puede encontrar en [github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1), rama <i>part5-1</i>.
 

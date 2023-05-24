@@ -496,7 +496,7 @@ const testingRouter = require('express').Router()
 const Note = require('../models/note')
 const User = require('../models/user')
 
-testingRouter.post('/reset', async (request, response) => {
+testingRouter.delete('/reset', async (request, response) => {
   await Note.deleteMany({})
   await User.deleteMany({})
 
@@ -529,8 +529,8 @@ app.use(middleware.errorHandler)
 module.exports = app
 ```
 
-<!-- After the changes, an HTTP POST request to the <i>/api/testing/reset</i> endpoint empties the database. Make sure your backend is running in test mode by starting it with this command (previously configured in the package.json file):-->
- 更改后，对<i>/api/testing/reset</i>端点的HTTP POST请求会清空数据库。确保你的后端在测试模式下运行，用这个命令启动它（之前在package.json文件中配置）。
+<!-- After the changes, an HTTP DELETE request to the <i>/api/testing/reset</i> endpoint empties the database. Make sure your backend is running in test mode by starting it with this command (previously configured in the package.json file):-->
+ 更改后，对<i>/api/testing/reset</i>端点的HTTP DELETE请求会清空数据库。确保你的后端在测试模式下运行，用这个命令启动它（之前在package.json文件中配置）。
 ```js
   npm run start:test
 ```

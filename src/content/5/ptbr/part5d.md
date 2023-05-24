@@ -409,7 +409,7 @@ const testingRouter = require('express').Router()
 const Note = require('../models/note')
 const User = require('../models/user')
 
-testingRouter.post('/reset', async (request, response) => {
+testingRouter.delete('/reset', async (request, response) => {
   await Note.deleteMany({})
   await User.deleteMany({})
 
@@ -441,7 +441,7 @@ app.use(middleware.errorHandler)
 module.exports = app
 ```
 
-Após as alterações, uma solicitação HTTP POST para o endpoint <i>/api/testing/reset</i> esvazia o banco de dados. Verifique se o backend está sendo executado no modo de teste iniciando-o com o seguinte comando (previamente configurado no arquivo package.json):
+Após as alterações, uma solicitação HTTP DELETE para o endpoint <i>/api/testing/reset</i> esvazia o banco de dados. Verifique se o backend está sendo executado no modo de teste iniciando-o com o seguinte comando (previamente configurado no arquivo package.json):
 
 ```js
   npm run start:test

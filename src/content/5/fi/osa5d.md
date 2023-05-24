@@ -399,7 +399,7 @@ const router = require('express').Router()
 const Note = require('../models/note')
 const User = require('../models/user')
 
-router.post('/reset', async (request, response) => {
+router.delete('/reset', async (request, response) => {
   await Note.deleteMany({})
   await User.deleteMany({})
 
@@ -431,7 +431,7 @@ app.use(middleware.errorHandler)
 module.exports = app
 ```
 
-eli lisäyksen jälkeen HTTP POST ‑operaatio backendin endpointiin <i>/api/testing/reset</i> tyhjentää tietokannan.
+eli lisäyksen jälkeen HTTP DELETE ‑operaatio backendin endpointiin <i>/api/testing/reset</i> tyhjentää tietokannan.
 
 Backendin testejä varten muokattu koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1), branchissä <i>part5-1</i>.
 
