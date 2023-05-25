@@ -184,6 +184,10 @@ Add validation to your phonebook application, which will make sure that phone nu
 
 Use a [Custom validator](https://mongoosejs.com/docs/validation.html#custom-validators) to implement the second part of the validation.
 
+Make use of [regular expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions) to match strings. You can test regular expression patterns at [RegExr](https://regexr.com/) to match the string. Fill in your desired pattern matcher, go to "Tests", and add a few cases to check its validity.
+
+![regex example](../../images/3/regex-example.png)
+
 If an HTTP POST request tries to add a person with an invalid phone number, the server should respond with an appropriate status code and error message.
 
 #### 3.21 Deploying the database backend to production
