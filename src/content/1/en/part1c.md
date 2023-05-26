@@ -300,7 +300,7 @@ const [ counter, setCounter ] = useState(0)
 
 The function call adds <i>state</i> to the component and renders it initialized with the value of zero. The function returns an array that contains two items. We assign the items to the variables _counter_ and _setCounter_ by using the destructuring assignment syntax shown earlier.
 
-The _counter_ variable is assigned the initial value of <i>state</i> which is zero. The variable _setCounter_ is assigned to a function that will be used to <i>modify the state</i>.
+The _counter_ variable is assigned the initial value of <i>state</i> which is zero. The variable _setCounter_ is assigned a function that will be used to <i>modify the state</i>.
 
 The application calls the [setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) function and passes it two parameters: a function to increment the counter state and a timeout of one second:
 
