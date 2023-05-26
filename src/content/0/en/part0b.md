@@ -80,7 +80,7 @@ Even though it is difficult to notice, the HTML page begins to render before the
 
 The homepage of the example application works like a <i>traditional web application</i>. When entering the page, the browser fetches the HTML document detailing the structure and the textual content of the page from the server.
 
-The server has formed this document somehow. The document can be a <i>static</i> text file saved into the server's directory. The server can also form the HTML documents <i>dynamically</i> according to the application code, using, for example, data from a database.
+The server has formed this document somehow. The document can be a <i>static</i> text file saved into the server's directory. The server can also form the HTML documents <i>dynamically</i> according to the application's code, using, for example, data from a database.
 The HTML code of the example application has been formed dynamically because it contains information on the number of created notes.
 
 The HTML code of the homepage is as follows:
