@@ -214,6 +214,8 @@ test('notes are returned as json', async () => {
   
 This third parameter sets the timeout to 100000 ms. A long timeout ensures that our test won't fail due to the time it takes to run. (A long timeout may not be what you want for tests based on performance or speed, but this is fine for our example tests).
 
+If you still encounter issues with mongoose timeouts, set `bufferTimeoutMS` variable to a value significantly higher than 10000 (10 seconds). You could set it like this at the top, right after the `require` statements. `mongoose.set("bufferTimeoutMS", 30000)`  
+  
 One tiny but important detail: at the [beginning](/en/part4/structure_of_backend_application_introduction_to_testing#project-structure) of this part we extracted the Express application into the <i>app.js</i> file, and the role of the <i>index.js</i> file was changed to launch the application at the specified port via `app.listen`:
 
 ```js
