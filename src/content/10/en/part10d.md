@@ -106,7 +106,7 @@ src/
   ...
 ```
 
-In this example, the component's code is in the <i>index.jsx</i> file and the test in the <i>AppBar.test.jsx</i> file. Note that in order to Jest finding your test files you either have to put them into a <i>\_\_tests\_\_</i> directory, use the <i>.test</i> or <i>.spec</i> suffix, or [manually configure](https://jestjs.io/docs/en/configuration#testmatch-arraystring) the global patterns.
+In this example, the component's code is in the <i>index.jsx</i> file and the test in the <i>AppBar.test.jsx</i> file. Note that in order for Jest to find your test files you either have to put them into a <i>\_\_tests\_\_</i> directory, use the <i>.test</i> or <i>.spec</i> suffix, or [manually configure](https://jestjs.io/docs/en/configuration#testmatch-arraystring) the global patterns.
 
 ### Testing components
 
@@ -178,7 +178,7 @@ We acquire the <em>Text</em> node containing certain text by using the <em>getBy
 
 React Native Testing Library's documentation has some good hints on [how to query different kinds of elements](https://callstack.github.io/react-native-testing-library/docs/how-should-i-query). Another guide worth reading is Kent C. Dodds article [Making your UI tests resilient to change](https://kentcdodds.com/blog/making-your-ui-tests-resilient-to-change).
 
-The object [screen](https://callstack.github.io/react-native-testing-library/docs/api#screen) has also a helper method [debug](https://callstack.github.io/react-native-testing-library/docs/api#debug) that prints the rendered React tree in a user-friendly format. Use it if you are unsure what the React tree rendered by the <em>render</em> function looks like.
+The object [screen](https://callstack.github.io/react-native-testing-library/docs/api#screen) also has  a helper method [debug](https://callstack.github.io/react-native-testing-library/docs/api#debug) that prints the rendered React tree in a user-friendly format. Use it if you are unsure what the React tree rendered by the <em>render</em> function looks like.
 
 For all available queries, check the React Native Testing Library's [documentation](https://callstack.github.io/react-native-testing-library/docs/api-queries). The full list of available React Native specific matchers can be found in the [documentation](https://github.com/testing-library/jest-native#matchers) of the jest-native library. Jest's [documentation](https://jestjs.io/docs/en/expect) contains every universal Jest matcher.
 
@@ -562,7 +562,7 @@ This screenshot has been taken after invalid form submission to present what the
 
 Implement a sign up form for registering a user using Formik. The form should have three fields: username, password, and password confirmation. Validate the form using Yup schema so that it contains the following validations:
 
-- Username is a required string with a length between 1 and 30
+- Username is a required string with a length between 5 and 30
 - Password is a required string with a length between 5 and 50
 - Password confirmation matches the password
 
