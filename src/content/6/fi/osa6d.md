@@ -150,7 +150,7 @@ Sovelluksen tämän hetken koodi on [GitHubissa](https://github.com/fullstack-hy
 
 ### Datan vieminen palvelimelle React Queryn avulla
 
-Data haetaan jo onnistuneesti palvelimelta. Huolehditan seuraavaksi siitä, että lisätty ja muutettu data tallennetaan palvelimelle. Aloitetaan uusien muistiinpanojen lisäämisestä.
+Data haetaan jo onnistuneesti palvelimelta. Huolehditaan seuraavaksi siitä, että lisätty ja muutettu data tallennetaan palvelimelle. Aloitetaan uusien muistiinpanojen lisäämisestä.
 
 Tehdään tiedostoon <i>requests.js</i> funktio <i>createNote</i> uusien muistiinpanojen talletusta varten:
 
