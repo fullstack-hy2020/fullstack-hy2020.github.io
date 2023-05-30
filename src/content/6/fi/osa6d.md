@@ -765,7 +765,7 @@ Teknisenä yksityiskohtana todettakoon, että apufunktiot <i>useCounterValue</i>
 
 Sovelluksessa on valmiina komponentti <i>Notification</i> käyttäjälle tehtävien notifikaatioiden näyttämistä varten.
 
-Toteuta sovelluksen notifikaation tilan hallinta useReduce-hookin ja contextin avulla. Notifikaatio kertoo kun uusi anekdootti luodaan tai anekdoottia äänestetään:
+Toteuta sovelluksen notifikaation tilan hallinta useReducer-hookin ja contextin avulla. Notifikaatio kertoo kun uusi anekdootti luodaan tai anekdoottia äänestetään:
 
 ![](../../images/6/66new.png)
 
