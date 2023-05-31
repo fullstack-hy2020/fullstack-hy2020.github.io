@@ -59,7 +59,7 @@ The files <i>App.css</i>, <i>App.test.js</i>, <i>index.css</i>, <i>logo.svg</i>,
 
 ### Component
 
-The file <i>App.js</i> now defines a [React component](https://react.dev/learn/your-first-component) with the name <i>App</i>. The command on the final line of file <i>index.js</i>
+The file <i>index.js</i> now defines a [React component](https://react.dev/learn/your-first-component) with the name <i>App</i>. The command on the final line of file <i>index.js</i>
 
 ```js
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
