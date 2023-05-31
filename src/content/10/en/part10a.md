@@ -210,6 +210,9 @@ That might actually be enough in most cases, but sometimes we need more.
 
 **NB:** If the debugger can't connect to the application and you see the error message "Another debugger is already connected", make sure that <i><http://localhost:19000/debugger-ui></i> is not open in some browser tab.
   
+Only after adding "expo": {....., "jsEngine": "jsc"} to app.config.js, React Native Debugger works. After that, add correct port to React Native Debugger, and click 'Debug Remote Js' button on emulator.
+https://docs.expo.dev/guides/configuring-js-engines/
+  
 Next, we need to start our application and connect to the debugger. Start the application by running <em>npm start</em>. Once the application is running, open it with either an emulator or the Expo mobile app. Inside the emulator or the Expo mobile app, open the developer menu by following the [instructions](https://docs.expo.dev/debugging/tools/) in the Expo's documentation. From the developer menu, select <i>Debug remote JS</i> to connect to the debugger. Now, you should be able to see the application's component tree in the debugger:
 
 ![React Native Debugger](../../images/10/24.png)
