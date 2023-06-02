@@ -253,7 +253,7 @@ When the application is deployed, we must create a [production build](https://re
 
 A production build of applications created with <i>create-react-app</i> can be created with the command [npm run build](https://github.com/facebookincubator/create-react-app#npm-run-build-or-yarn-build).
 
-Let's run this command from the <i>root of the notes frontend project</i> that we developend in [Part 2](/en/part2).
+Let's run this command from the <i>root of the notes frontend project</i> that we developed in [Part 2](/en/part2).
 
 This creates a directory called <i>build</i> (which contains the only HTML file of our application, <i>index.html</i> ) which contains the directory <i>static</i>. [Minified](<https://en.wikipedia.org/wiki/Minification_(programming)>) version of our application's JavaScript code will be generated in the <i>static</i> directory. Even though the application code is in multiple files, all of the JavaScript will be minified into one file. All of the code from all of the application's dependencies will also be minified into this single file.
 
