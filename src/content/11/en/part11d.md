@@ -42,9 +42,9 @@ on:
   push:
     branches:
       - master
-  pull_request: // highlight-line
-    branches: [master] // highlight-line
-    types: [opened, synchronize] // highlight-line
+  pull_request: # highlight-line
+    branches: [master] # highlight-line
+    types: [opened, synchronize] # highlight-line
     
 # note that your "main" branch might be called main instead of master
 ```
