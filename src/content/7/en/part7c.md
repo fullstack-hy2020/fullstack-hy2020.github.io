@@ -507,6 +507,7 @@ Here are some other UI frameworks for your consideration. If you do not see your
 - <https://master.co/>
 - <https://www.radix-ui.com/>
 - <https://nextui.org/>
+- <https://daisyui.com/>
 
 ### Styled components
 
