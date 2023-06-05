@@ -357,7 +357,7 @@ The error message is
 Cannot read properties of null (reading 'map')
 ```
 
-The variable _notesToShow_ is first assigned the value of the state _notes_ and then the code tries to call method _map_ to an nonexisting object, that is, to _null_.
+The variable _notesToShow_ is first assigned the value of the state _notes_ and then the code tries to call method _map_ to a nonexisting object, that is, to _null_.
 
 What is the reason for that?
 
