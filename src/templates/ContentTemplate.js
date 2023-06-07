@@ -23,6 +23,9 @@ import { partColors } from './partColors';
 import path from 'path';
 import snakeCase from 'lodash/fp/snakeCase';
 import getPartTranslationPath from '../utils/getPartTranslationPath';
+import { createCopyButton } from './copy-code-button/create-copy-buttons';
+
+
 
 export default class ContentTemplate extends Component {
   constructor(props) {
@@ -69,6 +72,7 @@ export default class ContentTemplate extends Component {
     });
 
     window.addEventListener('scroll', this.handleScroll);
+    createCopyButton();
   }
 
   componentWillUnmount() {
