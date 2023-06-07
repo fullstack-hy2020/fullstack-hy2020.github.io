@@ -148,8 +148,6 @@ If all goes well, your workflow log should look a bit like this:
 
 ![](../../images/11/11.png)
 
-You can then try the app with a browser, but most likely you run into a problem. If we read carefully [the section 'Application to the Internet' in part 3](/en/part3/deploying_app_to_internet#application-to-the-internet)
-
 **Remember** that it is always essential to keep an eye on what is happening in server logs when playing around with product deployments, so use <code>flyctl logs</code> early and use it often. No, use it all the time!
 
 #### 11.11 Health check and rollback
