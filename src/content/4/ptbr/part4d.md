@@ -489,7 +489,7 @@ router.post('/', userExtractor, async (request, response) => {
 
 #### 4.23*: Expansão da lista de Blog, passo11 
 
-Após adicionar a autenticação baseada em token, os testes para adicionar novo blog quebraram. Corriga os testes. Além disso, escreva um novo teste que certifique que a adição de um novo blog falhará com o código de status apropriado <i>401 Unauthorized</i> se um token não for provido. 
+Após adicionar a autenticação baseada em token, os testes para adicionar novo blog quebraram. Corrija os testes. Além disso, escreva um novo teste que certifique que a adição de um novo blog falhará com o código de status apropriado <i>401 Unauthorized</i> se um token não for provido. 
 
 [Isso](https://github.com/visionmedia/supertest/issues/398) será muito útil para fazer a correção.
 
