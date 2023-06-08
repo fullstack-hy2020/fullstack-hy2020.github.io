@@ -101,7 +101,6 @@ There are also some other free options hosting options that work well for this c
 
 Some course participants have also used the following
 
-- [Railway](https://railway.app/)
 - [Cyclic](https://www.cyclic.sh/)
 - [Replit](https://replit.com)
 - [CodeSandBox](https://codesandbox.io)
