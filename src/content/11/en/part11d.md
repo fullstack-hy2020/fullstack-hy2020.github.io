@@ -78,6 +78,8 @@ In the "Conversation" tab of the pull request you should see your latest commit(
 Once the checks have been run, the status should turn to green. Make sure all the checks pass. Do not merge your branch yet, there's still one more thing we need to improve on our pipeline.
 
 #### 11.14 Run deployment step only for the main branch
+  
+**NOTE:** this exercise is not necessary for deployment to Fly.io and to Heroku if the ready-made Heroku deploy action [AkhileshNS/heroku-deploy](https://github.com/AkhileshNS/heroku-deploy) is used. This is because, the deployement step is not dirrectly defined on the pipeline but is triggered by separate files such as fly.yml and main.yml which will oly redeploy the app on push to branch master.
 
 All looks good, but there is actually a pretty serious problem with the current workflow. All the steps, including the deployment, are run also for pull requests. This is surely something we do not want!
 
