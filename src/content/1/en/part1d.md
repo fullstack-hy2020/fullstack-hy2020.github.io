@@ -36,7 +36,7 @@ const App = () => {
 ```
 
 The component gets access to the functions _setLeft_ and _setRight_ that it can use to update the two pieces of state.
-
+The component gets access to the functions _setLeft_ and _setRight_ that it can use to update the two pieces of state.
 The component's state or a piece of its state can be of any type. We could implement the same functionality by saving the click count of both the <i>left</i> and <i>right</i> buttons into a single object:
 
 ```js
