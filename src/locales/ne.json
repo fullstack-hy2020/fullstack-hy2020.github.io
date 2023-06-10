@@ -1,0 +1,60 @@
+{
+    "common": {
+      "nextPart": "अर्को भाग",
+      "previousPart": "अघिल्लो भाग",
+      "readMore": "थप पढ्नुहोस्",
+      "proposeChanges": "सामग्रीमा परिवर्तनहरू प्रस्ताव गर्नुहोस् ।"
+    },
+    "searchPage": {
+      "noMatches": "मिल्ने सामग्री फेला परेनन् ।",
+      "matchesTitle": "\"{{query}}\" को निम्ति {{count}} सामग्रीहरू भेटिए ।"
+    },
+    "aboutPage": {
+      "generalTitle": "सामान्य जानकारी"
+    },
+    "navigation": {
+      "skipToContent": "सामग्रीमा जानुहोस्",
+      "aboutCourse": "पाठ्यक्रम(कोर्ष)को बारे",
+      "courseContents": "पाठ्यक्रम/कोर्ष सामग्री",
+      "faq": "बारम्बार सोधिने प्रश्नहरू",
+      "partners": "साझेदारहरू(patners)",
+      "challenge": "चुनौती",
+      "searchLinkSrLabel": "सामग्रीहरूबाट खोज्नुहोस्",
+      "ThemeSwitcherSrLabel": "उज्यालो वा अध्यारो थिम छान्नुहोस्",
+      "LanguagePickerSrLabel": "भाषा छनोट गर्नुहोस्"
+    },
+    "challengePage": {
+      "aboutTitle": "यो फुल स्ट्याक(अथवा वेब बिकासका सबै तहको) - चुनौती हो ।",
+      "joinTitle": "कम्पनीहरू, सूचनालाई ध्यान दिनुहोस् !",
+      "registerButton": "फुल स्ट्याक चुनौतीमा आफ्नो कम्पनी दर्ता गर्नुहोस् ।",
+      "nameLabel": "नाम",
+      "namePlaceholder": "जेन डो",
+      "titleLabel": "शीर्षक",
+      "companyLabel": "कम्पनी",
+      "companyPlaceholder": "कम्पनीको नाम",
+      "phoneLabel": "फोन",
+      "emailLabel": "इ-मेल ठेगाना",
+      "whereDidYouHearLabel": "तपाईले चुनौतीको बिषयमा कहाँबाट सुन्नुभयो ?",
+      "submitButton": "पेश गर्नुहोस्",
+      "submitSuccessMessage": "धन्यवाद! हामी तपाईंलाई चाँडै सम्पर्क गर्नेछौं ।",
+      "participantsTitle": "फुल स्ट्याक चुनौतीमा सामेल भएका कम्पनीहरू",
+      "coOperationTitle": "सहकार्यमा",
+      "infoButton": "चुनौती बारे थप जानकारी"
+    },
+    "companiesPage": {
+      "storiesTitle": "हाम्रा साझेदारहरू(patners)बाट विकासकर्ताहरूको(Developers) कथाहरू"
+    },
+    "faqPage": {
+      "faqTitle": "बारम्बार सोधिने प्रश्नहरू"
+    },
+    "homePage": {
+      "startCourseButton": "पाठ्यक्रम सुरु गर्नुहोस् ।",
+      "announcementsTitle": "सूचनाहरू",
+      "authorsTitle": "लेखकहरु र लाइसेन्सहरु",
+      "courseNameTitle": "फुल स्ट्याक ओपन"
+    },
+    "notFoundPage": {
+      "title": "पृष्ठ फेला परेन ।"
+    }
+  }
+  
