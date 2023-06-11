@@ -340,7 +340,8 @@ const App = () => {
       })
   }
   // ...
-  const noteForm = () => (
+  return (
+     // ...
     <Togglable buttonLabel='new note'>
       <NoteForm createNote={addNote} />
     </Togglable>
