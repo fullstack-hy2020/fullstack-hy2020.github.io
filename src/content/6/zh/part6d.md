@@ -945,50 +945,82 @@ export default Button
 
 #### Exercise 6.22.
 
-The application has a <i>Notification</i> component for displaying notifications to the user.
+<!--The application has a <i>Notification</i> component for displaying notifications to the user.-->
 
-Implement the application's notification state management using the useReducer hook and context. The notification should tell the user when a new anecdote is created or an anecdote is voted on:
+应用有一个 Notification 的组件，用于向用户展示通知。
+
+<!--Implement the application's notification state management using the useReducer hook and context. The notification should tell the user when a new anecdote is created or an anecdote is voted on:-->
+
+使用 useReducer 和 context 实现应用程序通知功能的状态管理。当新的箴言被创建或被投票时，应该向用户推送通知。
 
 ![](../../images/6/66new.png)
 
-The notification is displayed for five seconds.
+<!--The notification is displayed for five seconds.-->
+
+通知应显示 5 秒。
 
 #### Exercise 6.23.
 
-As stated in exercise 6.20, the server requires that the content of the anecdote to be added is at least 5 characters long. Now implement error handling for the insertion. In practice, it is sufficient to display a notification to the user in case of a failed POST request:
+<!--As stated in exercise 6.20, the server requires that the content of the anecdote to be added is at least 5 characters long. Now implement error handling for the insertion. In practice, it is sufficient to display a notification to the user in case of a failed POST request:-->
+
+正如在练习 6.20 中说明的，被添加至服务器的箴言，长度不应少于 5 个字符。现在我们在新增操作中添加错误处理。在实践中，当 POST 请求失败时，向用户展示一条通知就足够了。
 
 ![](../../images/6/67new.png)
 
-The error condition should be handled in the callback function registered for it, see
-[here](https://react-query-v3.tanstack.com/reference/useMutation) how to register a function.
+The error condition should be handled in the callback function registered for it, see [here](https://react-query-v3.tanstack.com/reference/useMutation) how to register a function.
 
-This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your completed exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+触发的错误情境应在回调函数中处理，你可以在[这里](https://react-query-v3.tanstack.com/reference/useMutation)了解如何注册一个函数。
+
+<!--This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your completed exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
+
+这是该部分课程的最后一个练习，现在是时候将你的代码推送至 GitHub 并在[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)中将所有你已完成的练习进行标注。
 
 </div>
 
 <div class="content">
+### <!--Which state management solution to choose?-->
 
-### Which state management solution to choose?
+### 应该选择哪一个状态管理方案？
 
-In chapters 1-5, all state management of the application was done using React's hook <i>useState</i>. Asynchronous calls to the backend required the use of the <i>useEffect</i> hook in some situations. In principle, nothing else is needed.
 
-A subtle problem with a solution based on a state created with the <i>useState</i> hook is that if some part of the application's state is needed by multiple components of the application, the state and the functions for manipulating it must be passed via props to all components that handle the state. Sometimes props need to be passed through multiple components, and the components along the way may not even be interested in the state in any way. This somewhat unpleasant phenomenon is called <i>prop drilling</i>.
 
-Over the years, several alternative solutions have been developed for state management of React applications, which can be used to ease problematic situations (e.g. prop drilling). However, no solution has been "final", all have their own pros and cons, and new solutions are being developed all the time.
+<!--In chapters 1-5, all state management of the application was done using React's hook <i>useState</i>. Asynchronous calls to the backend required the use of the <i>useEffect</i> hook in some situations. In principle, nothing else is needed.-->
 
-The situation may confuse a beginner and even an experienced web developer. Which solution should be used?
+在 1 至 5 章中，应用的所有状态管理都通过 React 的钩子 —— *useState* 来处理. 一些情况下，对后端的异步调用还需要 *useEffect*。通常情况下，我们就不需要额外的东西了。
 
-For a simple application, <i>useState</i> is certainly a good starting point. If the application is communicating with the server, the communication can be handled in the same way as in chapters 1-5, using the state of the application itself. Recently, however, it has become more common to move the communication and associated state management at least partially under the control of React Query (or some other similar library). If you are concerned about useState and the prop drilling it entails, using context may be a good option. There are also situations where it may make sense to handle some of the state with useState and some with contexts.
+<!--A subtle problem with a solution based on a state created with the <i>useState</i> hook is that if some part of the application's state is needed by multiple components of the application, the state and the functions for manipulating it must be passed via props to all components that handle the state. Sometimes props need to be passed through multiple components, and the components along the way may not even be interested in the state in any way. This somewhat unpleasant phenomenon is called <i>prop drilling</i>.-->
 
-The most comprehensive and robust state management solution is Redux, which is a way to implement the so-called [Flux](https://facebook.github.io/flux/) architecture. Redux is slightly older than the solutions presented in this section. The rigidity of Redux has been the motivation for many new state management solutions, such as React's <i>useReducer</i>. Some of the criticisms of Redux's rigidity have already become obsolete thanks to the [Redux Toolkit](https://redux-toolkit.js.org/).
+在使用 *useState* 作为状态管理解决方案时，存在一个微妙的问题：如果应用某部分状态被多个组件需要，那么该状态和对应的操作状态的函数，必须通过 props 在所有处理状态的组件中层层传递。有时，props 需要在多个组件中传递，虽然这些过程中的组件并不需要该状态。这种有些令人不快的现象叫做 <i>prop drilling</i> 。
 
-Over the years, there have also been other state management libraries developed that are similar to Redux, such as the newer entrant [Recoil](https://recoiljs.org/) and the slightly older [MobX](https://mobx.js.org/). However, according to [Npm trends](https://npmtrends.com/mobx-vs-recoil-vs-redux), Redux still clearly dominates, and in fact seems to be increasing its lead:
+<!--Over the years, several alternative solutions have been developed for state management of React applications, which can be used to ease problematic situations (e.g. prop drilling). However, no solution has been "final", all have their own pros and cons, and new solutions are being developed all the time.-->
+
+过去几年中，一些针对 Rect 应用状态管理的替代方案开始显露头角，它们可用于解决棘手的状况（例如：prop drilling）。然而，目前还不存在一个终极方案，当下所有的方案都有其自己的优势和劣势，而且新的解决方案层出不穷。
+
+<!--The situation may confuse a beginner and even an experienced web developer. Which solution should be used?-->
+
+这种状况可能让初学者、甚至经验丰富的网页开发者感到无所适从——究竟应该使用哪一种方案？
+
+<!--For a simple application, <i>useState</i> is certainly a good starting point. If the application is communicating with the server, the communication can be handled in the same way as in chapters 1-5, using the state of the application itself. Recently, however, it has become more common to move the communication and associated state management at least partially under the control of React Query (or some other similar library). If you are concerned about useState and the prop drilling it entails, using context may be a good option. There are also situations where it may make sense to handle some of the state with useState and some with contexts.-->
+
+对于简单的应用，*useState* 是个很好的起点。如果应用需要和服务器进行通信的话，这样的通信可以用与 1-5 章中相同的方式处理——即利用应用本身的状态。然而最近，利用 React Query （或类似的库）去处理——或至少处理一部分——通信和相关的状态管理，已变得越来越普遍。如果你对 *useState* 及相应的 prop drilling 抱有疑虑，context 可能会是一个好的选择。在一些情境下，利用 useState 管理部分状态，同时使用 context 管理其他部分的状态，也会是合理的。
+
+<!--The most comprehensive and robust state management solution is Redux, which is a way to implement the so-called [Flux](https://facebook.github.io/flux/) architecture. Redux is slightly older than the solutions presented in this section. The rigidity of Redux has been the motivation for many new state management solutions, such as React's <i>useReducer</i>. Some of the criticisms of Redux's rigidity have already become obsolete thanks to the [Redux Toolkit](https://redux-toolkit.js.org/).-->
+
+Redux 是其中最全面和强大的状态管理方案，它是实现所谓 [Flux](https://facebook.github.io/flux/) 架构的一种方式。Redux 比本章介绍的方案更有历史。Redux 的僵化成为了当前很多新状态管理工具的开发动力，例如 React 的 *useReducer* 。但在有了 [Redux Toolkit](https://redux-toolkit.js.org/) 后，对 Redux 僵化的批评已经消退。
+
+<!--Over the years, there have also been other state management libraries developed that are similar to Redux, such as the newer entrant [Recoil](https://recoiljs.org/) and the slightly older [MobX](https://mobx.js.org/). However, according to [Npm trends](https://npmtrends.com/mobx-vs-recoil-vs-redux), Redux still clearly dominates, and in fact seems to be increasing its lead:-->
+
+过去几年中，类似 Redux 的状态管理库层出不穷，比如新晋的 [Recoil](https://recoiljs.org/) 和略老一些的 [MobX](https://mobx.js.org/)。然而，根据 [Npm 趋势](https://npmtrends.com/mobx-vs-recoil-vs-redux)，Redux 仍旧是主宰，而且甚至扩大了领先优势。
 
 ![](../../images/6/64new.png)
 
-Also, Redux does not have to be used in its entirety in an application. It may make sense, for example, to manage the form state outside of Redux, especially in situations where the state of a form does not affect the rest of the application. It is also perfectly possible to use Redux and React Query together in the same application. 
+<!--Also, Redux does not have to be used in its entirety in an application. It may make sense, for example, to manage the form state outside of Redux, especially in situations where the state of a form does not affect the rest of the application. It is also perfectly possible to use Redux and React Query together in the same application.--> 
 
-The question of which state management solution should be used is not at all straightforward. It is impossible to give a single correct answer. It is also likely that the selected state management solution may turn out to be suboptimal as the application grows to such an extent that the solution have to be changed even if the application has already been put into production use.
+此外，Redux 不需要应用于整个应用。例如，当一个表单状态完全不会影响应用中的其他状态时，不使用 Reudx 去管理表单状态也是合理的。另外，在一个应用中，同时使用 Redux 和 React Query 也是完全可以接受的。
+
+<!--The question of which state management solution should be used is not at all straightforward. It is impossible to give a single correct answer. It is also likely that the selected state management solution may turn out to be suboptimal as the application grows to such an extent that the solution have to be changed even if the application has already been put into production use.-->
+
+该选择哪一个状态管理方案？这个问题并不容易回答，也无法给出一个单一的正确答案。当应用增长到一定程度，此前的状态管理方案也可能成为一个次优的选择，即使该应用已经投入了生产使用。
 
 </div>
 
