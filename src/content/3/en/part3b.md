@@ -97,7 +97,7 @@ Note that despite using the free tier only, Fly.io <i>might</i> require one to e
 
 Render might be a bit easier to use since it does not require any software to be installed on your machine.
 
-There are also some other free options hosting options that work well for this course, at least for all parts other than part 11 (CI/CD) that might have one tricky exercise for other platforms.
+There are also some other free hosting options that work well for this course, at least for all parts other than part 11 (CI/CD) that might have one tricky exercise for other platforms.
 
 Some course participants have also used the following
 
