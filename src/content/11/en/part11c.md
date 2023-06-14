@@ -95,9 +95,6 @@ You most likely need to do at least three changes. Firstly, define the Node vers
 The configuration file <i>fly.toml</i> should also be modified to include the following:
 
 ```yml
-[deploy]
-  release_command = "npm run build"
-
 [processes]
   app = "node app.js"
 
@@ -106,18 +103,7 @@ The configuration file <i>fly.toml</i> should also be modified to include the fo
     NODE_VERSION = "16.19.1"
 ```
 
-Besides these, we should also move _webpack_ from _devDependencies_ to _dependencies_ since our build step requires it to be installed:
-
-```json
-{
-  // ...
-  "dependencies": {
-    "webpack": "^4.43.0",
-  }
-}
-```
-
-The <i>release\_command</i> under [deploy](https://fly.io/docs/reference/configuration/) now ensures that the production built will be done before starting up the app. In [processes](https://fly.io/docs/reference/configuration/#the-processes-section) we define the command that starts the application. Without these changes Fly.io just starts the React dev server and that causes it to shut down since the app itself does not start up.
+In [processes](https://fly.io/docs/reference/configuration/#the-processes-section) we define the command that starts the application. Without the change Fly.io just starts the React dev server and that causes it to shut down since the app itself does not start up.
 
 Here the <i>app</i> refers to the application process that is started up in the [services](https://fly.io/docs/reference/configuration/#the-services-sections) section:
 
