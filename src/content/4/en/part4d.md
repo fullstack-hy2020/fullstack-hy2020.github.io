@@ -76,7 +76,7 @@ Because the passwords themselves are not saved to the database, but <i>hashes</i
 await bcrypt.compare(body.password, user.passwordHash)
 ```
 
-If the user is not found, or the password is incorrect, the request is responded to with the status code [401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2). The reason for the failure is explained in the response body.
+If the user is not found, or the password is incorrect, the request is responded to with the status code [401 unauthorized](https://www.rfc-editor.org/rfc/rfc9110.html#name-401-unauthorized). The reason for the failure is explained in the response body.
 
 If the password is correct, a token is created with the method _jwt.sign_. The token contains the username and the user id in a digitally signed form.
 
