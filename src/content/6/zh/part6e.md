@@ -10,7 +10,7 @@ lang: zh
 <div class="tasks">
 <!--**NOTE**: this is the old ending section of the 6 part that has 30th January 2023 been replaced with material about [React Query, useReducer and context](/en/part6/react_query_use_reducer_and_the_contex). This section remains here for couple of weeks.-->
 
-**注意**: 本章作为旧版第 6 部分的结束章节，已经在2023年1月30日被替换为“ [React Query, useReducer 和 context](/zh/part6/react_query_use_reducer_and_the_contex)“。这一章将仅在此保留几周。
+**注意**: 本章作为旧版第 6 部分的结束章节，已经在2023年1月30日被替换为“ [React Query, useReducer 和 context](/zh/part6/react_query_use_reducer_and_the_context)“。这一章将仅在此保留几周。
 
 <!--If you have started with the exercises (6.19-6.21) that use the Redux connect you may continue with those. If you have not yet started, I recommend to proceed with the new section.-->
 
@@ -34,8 +34,8 @@ lang: zh
 
 ### Using the connect-function to share the redux store to components
 
-<!-- Let's modify the <i>Notes</i> component so that instead of using the hook-api (the _useDispatch_ and  _useSelector_ functions ) it uses the _connect_-function.-->
- 让我们修改<i>Notes</i>组件，使其不再使用hook-api（_useDispatch_和_useSelector_函数）而是使用_connect_函数。
+<!-- Let's modify the <i>Notes</i> component so that instead of using the hook-api (the *useDispatch* and  *useSelector* functions ) it uses the *connect*-function.-->
+ 让我们修改<i>Notes</i>组件，使其不再使用hook-api（*useDispatch* 和 *useSelector* 函数）而是使用 *connect* 函数。
 <!-- We have to modify the following parts of the component:-->
  我们必须修改该组件的以下部分。
 
@@ -74,8 +74,8 @@ const Notes = () => {
 export default Notes
 ````
 
-<!-- The _connect_ function can be used for transforming "regular" React components so that the state of the Redux store can be "mapped" into the component's props.-->
- _connect_函数可以用来转换 "常规 "的React组件，这样Redux商店的状态就可以 "映射 "到组件的props中。
+<!-- The *connect* function can be used for transforming "regular" React components so that the state of the Redux store can be "mapped" into the component's props.-->
+ *connect* 函数可以用来转换 "常规 "的React组件，这样Redux商店的状态就可以 "映射 "到组件的props中。
 
 <!-- Let's first use the connect function to transform our <i>Notes</i> component into a <i>connected component</i>:-->
  让我们首先使用connect函数将我们的<i>Notes</i>组件转换成<i>connected component</i>。
@@ -95,8 +95,8 @@ export default ConnectedNotes           // highlight-line
 <!-- The module exports the <i>connected component</i> that works exactly like the previous regular component for now.-->
  该模块导出了<i>连接组件</i>，其工作原理与之前的普通组件完全相同。
 
-<!-- The component needs the list of notes and the value of the filter from the Redux store. The _connect_ function accepts a so-called [mapStateToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapstatetoprops-state-ownprops--object) function as its first parameter. The function can be used for defining the props of the <i>connected component</i> that are based on the state of the Redux store.-->
- 该组件需要Redux商店中的笔记列表和过滤器的值。_connect_函数接受一个所谓的[mapStateToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapstatetoprops-state-ownprops--object)函数作为其第一个参数。该函数可用于定义<i>连接组件的prop</i>，这些prop是基于Redux商店的状态。
+<!-- The component needs the list of notes and the value of the filter from the Redux store. The *connect* function accepts a so-called [mapStateToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapstatetoprops-state-ownprops--object) function as its first parameter. The function can be used for defining the props of the <i>connected component</i> that are based on the state of the Redux store.-->
+ 该组件需要Redux商店中的笔记列表和过滤器的值。*connect*函数接受一个所谓的[mapStateToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapstatetoprops-state-ownprops--object)函数作为其第一个参数。该函数可用于定义<i>连接组件的prop</i>，这些prop是基于Redux商店的状态。
 
 <!-- If we define:-->
  如果我们定义。
@@ -157,10 +157,10 @@ export default ConnectedNotes
 <!-- The <i>Notes</i> component has "direct access" via <i>props.notes</i> and <i>props.filter</i> for inspecting the state of the Redux store.-->
  <i>Notes</i>组件可以通过<i>props.notes</i>和<i>props.filter</i>"直接访问 "Redux商店的状态。
 
-<!-- The _NoteList_ component actually does not need the information about which filter is selected, so we can move the filtering logic elsewhere.-->
- _NoteList_组件实际上不需要关于哪个过滤器被选中的信息，所以我们可以将过滤逻辑移到其他地方。
-<!-- We just have to give it correctly filtered notes in the _notes_ prop:-->
- 我们只需要在_notes_prop中给它正确的过滤的笔记。
+<!-- The *NoteList* component actually does not need the information about which filter is selected, so we can move the filtering logic elsewhere.-->
+ *NoteList*组件实际上不需要关于哪个过滤器被选中的信息，所以我们可以将过滤逻辑移到其他地方。
+<!-- We just have to give it correctly filtered notes in the *notes* prop:-->
+ 我们只需要在*notes*prop中给它正确的过滤的笔记。
 
 ```js
 const Notes = (props) => {
@@ -204,8 +204,8 @@ export default ConnectedNotes
 
 ### mapDispatchToProps
 
-<!-- Now we have gotten rid of _useSelector_, but <i>Notes</i> still uses the _useDispatch_ hook and the _dispatch_ function returning it:-->
- 现在我们已经摆脱了_useSelector_，但是<i>Notes</i>仍然使用_useDispatch_钩子和返回它的_dispatch_函数。
+<!-- Now we have gotten rid of *useSelector*, but <i>Notes</i> still uses the *useDispatch* hook and the *dispatch* function returning it:-->
+ 现在我们已经摆脱了*useSelector*，但是<i>Notes</i>仍然使用*useDispatch*钩子和返回它的*dispatch*函数。
 
 ```js
 const Notes = (props) => {
@@ -227,8 +227,8 @@ const Notes = (props) => {
 }
 ```
 
-<!-- The second parameter of the _connect_ function can be used for defining [mapDispatchToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapdispatchtoprops-object--dispatch-ownprops--object) which is a group of <i>action creator</i> functions passed to the connected component as props. Let's make the following changes to our existing connect operation:-->
- _connect_函数的第二个参数可用于定义[mapDispatchToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapdispatchtoprops-object--dispatch-ownprops--object)，这是一组<i>action creator</i>函数，作为props传递给连接的组件。让我们对我们现有的连接操作做如下修改。
+<!-- The second parameter of the *connect* function can be used for defining [mapDispatchToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapdispatchtoprops-object--dispatch-ownprops--object) which is a group of <i>action creator</i> functions passed to the connected component as props. Let's make the following changes to our existing connect operation:-->
+ *connect*函数的第二个参数可用于定义[mapDispatchToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapdispatchtoprops-object--dispatch-ownprops--object)，这是一组<i>action creator</i>函数，作为props传递给连接的组件。让我们对我们现有的连接操作做如下修改。
 
 
 ```js
@@ -253,8 +253,8 @@ const ConnectedNotes = connect(
 export default ConnectedNotes
 ```
 
-<!-- Now the component can directly dispatch the action defined by the _toggleImportanceOf_ action creator by calling the function through its props:-->
- 现在，组件可以直接调度由_toggleImportanceOf_动作创建者定义的动作，通过其props调用该函数。
+<!-- Now the component can directly dispatch the action defined by the *toggleImportanceOf* action creator by calling the function through its props:-->
+ 现在，组件可以直接调度由*toggleImportanceOf*动作创建者定义的动作，通过其props调用该函数。
 
 ```js
 const Notes = (props) => {
@@ -279,21 +279,21 @@ const Notes = (props) => {
 dispatch(toggleImportanceOf(note.id))
 ```
 
-<!-- When using _connect_ we can simply do this:-->
- 当使用_connect_时，我们可以简单地这样做。
+<!-- When using *connect* we can simply do this:-->
+ 当使用*connect*时，我们可以简单地这样做。
 
 ```js
 props.toggleImportanceOf(note.id)
 ```
 
-<!-- There is no need to call the _dispatch_ function separately since _connect_ has already modified the _toggleImportanceOf_ action creator into a form that contains the dispatch.-->
- 没有必要单独调用_dispatch_函数，因为_connect_已经将_toggleImportanceOf_动作创建者修改为包含调度的形式。
+<!-- There is no need to call the *dispatch* function separately since *connect* has already modified the *toggleImportanceOf* action creator into a form that contains the dispatch.-->
+ 没有必要单独调用*dispatch*函数，因为*connect*已经将*toggleImportanceOf*动作创建者修改为包含调度的形式。
 
-<!-- It can take some to time to wrap your head around how _mapDispatchToProps_ works, especially once we take a look at an [alternative way of using it](/en/part6/connect#alternative-way-of-using-map-dispatch-to-props).-->
- 你可能需要一些时间来理解_mapDispatchToProps_的工作原理，尤其是当我们看了一个[使用它的替代方法](/en/part6/connect#alternative-way-of-using-map-dispatch-to-props)。
+<!-- It can take some to time to wrap your head around how _mapDispatchToProps_ works, especially once we take a look at an [alternative way of using it](/en/part6/connect_the_old_part#an-alternative-way-of-using-map-dispatch-to-props).-->
+ 你可能需要一些时间来理解_mapDispatchToProps_的工作原理，尤其是当我们看了一个[使用它的替代方法](/en/part6/connect_the_old_part#an-alternative-way-of-using-map-dispatch-to-props)。
 
-<!-- The resulting situation from using _connect_ can be visualized like this:-->
- 使用_connect_所产生的情况可以被可视化为这样。
+<!-- The resulting situation from using *connect* can be visualized like this:-->
+ 使用*connect*所产生的情况可以被可视化为这样。
 
 ![](../../images/6/25b.png)
 
@@ -346,8 +346,8 @@ export default connect(
 )(Notes)
 ```
 
-<!-- Let's also use _connect_ to create new notes:-->
- 让我们也使用_connect_来创建新的笔记。
+<!-- Let's also use *connect* to create new notes:-->
+ 让我们也使用*connect*来创建新的笔记。
 
 ```js
 import { connect } from 'react-redux'
@@ -378,8 +378,8 @@ export default connect(
 // highlight-end
 ```
 
-<!-- Since the component does not need to access the store's state, we can simply pass <i>null</i> as the first parameter to _connect_.-->
- 由于该组件不需要访问商店的状态，我们可以简单地传递<i>null</i>作为_connect_的第一个参数。
+<!-- Since the component does not need to access the store's state, we can simply pass <i>null</i> as the first parameter to *connect*.-->
+ 由于该组件不需要访问商店的状态，我们可以简单地传递<i>null</i>作为*connect*的第一个参数。
 
 
 <!-- You can find the code for our current application in its entirety in the <i>part6-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5).-->
@@ -420,8 +420,8 @@ export default connect(
 <!-- Developers who are new to connect may find it puzzling that there are two versions of the <i>createNote</i> action creator in the component.-->
  初次接触连接的开发者可能会发现，组件中的<i>createNote</i>动作创建者有两个版本，这令人费解。
 
-<!-- The function must be referenced as <i>props.createNote</i> through the component's props, as this is the version that <i>contains the automatic dispatch</i> added by _connect_.-->
- 该函数必须通过组件的props被引用为<i>props.createNote</i>，因为这是<i>包含_connect_添加的自动调度</i>的那个版本。
+<!-- The function must be referenced as <i>props.createNote</i> through the component's props, as this is the version that <i>contains the automatic dispatch</i> added by *connect*.-->
+ 该函数必须通过组件的props被引用为<i>props.createNote</i>，因为这是<i>包含*connect*添加的自动调度</i>的那个版本。
 
 <!-- Due to the way that the action creator is imported:-->
  由于动作创建者的导入方式。
@@ -429,8 +429,8 @@ export default connect(
 ```js
 import { createNote } from './../reducers/noteReducer'
 ```
-<!-- The action creator can also be referenced directly by calling _createNote_. You should not do this, since this is the unmodified version of the action creator that does not contain the added automatic dispatch.-->
- 也可以通过调用_createNote_直接引用动作创建者。你不应该这样做，因为这是未经修改的动作创建者的版本，不包含添加的自动调度。
+<!-- The action creator can also be referenced directly by calling *createNote*. You should not do this, since this is the unmodified version of the action creator that does not contain the added automatic dispatch.-->
+ 也可以通过调用*createNote*直接引用动作创建者。你不应该这样做，因为这是未经修改的动作创建者的版本，不包含添加的自动调度。
 
 <!-- If we print the functions to the console from the code (we have not yet looked at this useful debugging trick):-->
  如果我们从代码中把这些函数打印到控制台（我们还没有看这个有用的调试技巧）。
@@ -508,8 +508,8 @@ export default connect(
 <!-- Which is an object that has a single <i>createNote</i> property with the <i>createNote</i> function as its value.-->
  这是一个具有单一的<i>createNote</i>属性的对象，其值为<i>createNote</i>函数。
 
-<!-- Alternatively, we could pass the following <i>function</i> definition as the second parameter to _connect_:-->
- 另外，我们可以把下面的<i>函数</i>定义作为第二个参数传递给_connect_。
+<!-- Alternatively, we could pass the following <i>function</i> definition as the second parameter to *connect*:-->
+ 另外，我们可以把下面的<i>函数</i>定义作为第二个参数传递给 *connect*。
 
 ```js
 const NewNote = (props) => {
@@ -533,8 +533,8 @@ export default connect(
 ```
 
 
-<!-- In this alternative definition, <i>mapDispatchToProps</i> is a function that _connect_ will invoke by passing it the _dispatch_-function as its parameter. The return value of the function is an object that defines a group of functions that get passed to the connected component as props. Our example defines the function passed as the <i>createNote</i> prop:-->
- 在这个替代定义中，<i>mapDispatchToProps</i>是一个函数，_connect_将把_dispatch_-函数作为其参数传递给它，从而调用该函数。该函数的返回值是一个定义了一组函数的对象，这些函数被作为prop传递给连接的组件。我们的例子定义了作为<i>createNote</i>prop传递的函数。
+<!-- In this alternative definition, <i>mapDispatchToProps</i> is a function that *connect* will invoke by passing it the *dispatch*-function as its parameter. The return value of the function is an object that defines a group of functions that get passed to the connected component as props. Our example defines the function passed as the <i>createNote</i> prop:-->
+ 在这个替代定义中，<i>mapDispatchToProps</i>是一个函数，*connect*将把*dispatch*-函数作为其参数传递给它，从而调用该函数。该函数的返回值是一个定义了一组函数的对象，这些函数被作为prop传递给连接的组件。我们的例子定义了作为<i>createNote</i>prop传递的函数。
 
 ```js
 value => {
@@ -569,8 +569,8 @@ const NewNote = (props) => {
 <!-- The concept is quite complex and describing it through text is challenging. In most cases it is sufficient to use the simpler form of <i>mapDispatchToProps</i>. However, there are situations where the more complicated definition is necessary, like if the <i>dispatched actions</i> need to reference [the props of the component](https://github.com/gaearon/redux-devtools/issues/250#issuecomment-186429931).-->
  这个概念相当复杂，通过文字来描述它是有难度的。在大多数情况下，使用<i>mapDispatchToProps</i>的较简单形式就足够了。然而，在某些情况下，更复杂的定义是必要的，例如，如果<i>dispatched actions</i>需要引用[组件的prop](https://github.com/gaearon/redux-devtools/issues/250#issuecomment-186429931)。
 
-<!-- The creator of Redux Dan Abramov has created a wonderful tutorial called [Getting started with Redux](https://egghead.io/courses/getting-started-with-redux) that you can find on Egghead.io. I highly recommend the tutorial to everyone. The last four videos discuss the _connect_ method, particularly the more "complicated" way of using it.-->
- Redux的创造者Dan Abramov创造了一个精彩的教程，叫做[Redux入门](https://egghead.io/courses/getting-started-with-redux)，你可以在Egghead.io上找到。我向大家强烈推荐这个教程。最后四个视频讨论了_connect_方法，特别是使用它的更 "复杂 "的方式。
+<!-- The creator of Redux Dan Abramov has created a wonderful tutorial called [Getting started with Redux](https://egghead.io/courses/getting-started-with-redux) that you can find on Egghead.io. I highly recommend the tutorial to everyone. The last four videos discuss the *connect* method, particularly the more "complicated" way of using it.-->
+ Redux的创造者Dan Abramov创造了一个精彩的教程，叫做[Redux入门](https://egghead.io/courses/getting-started-with-redux)，你可以在Egghead.io上找到。我向大家强烈推荐这个教程。最后四个视频讨论了*connect*方法，特别是使用它的更 "复杂 "的方式。
 
 ### Presentational/Container revisited
 
@@ -594,8 +594,8 @@ const NewNote = (props) => {
 <!-- - Are written as functional components unless they need state, lifecycle hooks, or performance optimizations.-->
  - 除非它们需要状态、生命周期钩子或性能优化，否则就被写成功能组件。
 
-<!-- The _connected component_ that is created with the _connect_ function:-->
- 用_connect_函数创建的_connected组件_。
+<!-- The _connected component_ that is created with the *connect* function:-->
+ 用*connect*函数创建的_connected组件_。
 
 ```js
 const mapStateToProps = (state) => {
@@ -658,8 +658,8 @@ export default connect(
 <!-- High order components, or HOCs, are a way of defining generic functionality that can be applied to components. This is a concept from functional programming that very slightly resembles inheritance in object oriented programming.-->
 高阶组件，或称HOC，是一种定义可以应用于组件的通用功能的方式。这是一个来自函数式编程的概念，与面向对象编程中的继承非常相似。
 
-<!-- HOCs are in fact a generalization of the [High Order Function](https://en.wikipedia.org/wiki/Higher-order_function) (HOF) concept. HOFs are functions that either accept functions as parameters or return functions. We have actually been using HOFs throughout the course, e.g. all of the methods used for dealing with arrays like _map, filter and find_ are HOFs.-->
- HOCs实际上是[高阶函数](https://en.wikipedia.org/wiki/Higher-order_function) (HOF)概念的概括。HOFs是接受函数作为参数或返回函数的函数。实际上，我们在整个课程中一直在使用HOF，例如，所有用于处理数组的方法，如_map、filter和find_都是HOF。
+<!-- HOCs are a generalization of the [High Order Function](https://en.wikipedia.org/wiki/Higher-order_function) (HOF) concept. HOFs are functions that either accept functions as parameters or return functions. We have actually been using HOFs throughout the course, e.g. all of the methods used for dealing with arrays like *map, filter and find* are HOFs.-->
+ HOCs实际上是[高阶函数](https://en.wikipedia.org/wiki/Higher-order_function) (HOF)概念的概括。HOFs是接受函数作为参数或返回函数的函数。实际上，我们在整个课程中一直在使用HOF，例如，所有用于处理数组的方法，如*map、filter和find*都是HOF。
 
 <!-- Reactin hook-apin ilmestymisen jälkeen HOC:ien suosio on kääntynyt laskuun, ja melkein kaikki kirjastot, joiden käyttö on aiemmin perustunut HOC:eihin on saanut hook-perustaisen apin. Useimmiten , kuten myös reduxin kohdalla, hook-perustaiset apit ovat HOC-apeja huomattavasti yksinkertaisempia. -->
 <!-- After the React hook-api was published, HOCs have become less and less popular. Almost all libraries which used to be based on HOCs have now been modified to use hooks. Most of the time hook based apis are a lot simpler than HOC based ones, as is the case with redux as well.-->
@@ -670,8 +670,8 @@ export default connect(
 <!-- We have come a long way in this course and, finally, we have come to the point at which we are using React "the right way", meaning React only focuses on generating the views, and the application state is separated completely from the React components and passed on to Redux, its actions, and its reducers.-->
  在这个课程中，我们已经走了很长的路，最后，我们已经走到了 "正确的方式 "使用React的地步，这意味着React只专注于生成视图，应用状态完全与React组件分离，并传递给Redux、其动作和其还原器。
 
-<!-- What about the _useState_-hook, which provides components with their own state? Does it have any role if an application is using Redux or some other external state management solution? If the application has more complicated forms, it may be beneficial to implement their local state using the state provided by the _useState_ function. One can, of course, have Redux manage the state of the forms, however, if the state of the form is only relevant when filling the form (e.g. for validation) it may be wise to leave the management of state to the component responsible for the form.-->
- 那么_useState_-hook呢，它为组件提供了它们自己的状态？如果一个应用使用Redux或其他外部状态管理解决方案，它是否有任何作用？如果应用有更复杂的表单，使用_useState_函数提供的状态来实现它们的本地状态可能是有益的。当然，人们可以让Redux管理表单的状态，然而，如果表单的状态只在填写表单时才相关（例如用于验证），那么将状态的管理留给负责表单的组件可能是明智的。
+<!-- What about the *useState*-hook, which provides components with their own state? Does it have any role if an application is using Redux or some other external state management solution? If the application has more complicated forms, it may be beneficial to implement their local state using the state provided by the *useState* function. One can, of course, have Redux manage the state of the forms, however, if the state of the form is only relevant when filling the form (e.g. for validation) it may be wise to leave the management of state to the component responsible for the form.-->
+ 那么*useState*-hook呢，它为组件提供了它们自己的状态？如果一个应用使用Redux或其他外部状态管理解决方案，它是否有任何作用？如果应用有更复杂的表单，使用*useState*函数提供的状态来实现它们的本地状态可能是有益的。当然，人们可以让Redux管理表单的状态，然而，如果表单的状态只在填写表单时才相关（例如用于验证），那么将状态的管理留给负责表单的组件可能是明智的。
 
 <!-- Should we always use redux? Probably not. Dan Abramov, the developer of redux, discusses this in his article [You Might Not Need Redux](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367).-->
  我们应该总是使用redux吗？也许不是。redux的开发者Dan Abramov在他的文章[You Might Not Need Redux](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367)中讨论了这个问题。
@@ -687,8 +687,8 @@ export default connect(
 
 <div class="tasks">
 
-### Exercises 6.19.-6.21.
-<!--**NOTE**: this is the old ending section of the 6 part that has 30th January 2023 been replaced with material about [React Query, useReducer and context](/en/part6/react_query_use_reducer_and_the_contex). This section remains here for couple of weeks.-->
+### Exercises 6.19.-6.21
+<!--**NOTE**: this is the old ending section of the 6 part that has 30th January 2023 been replaced with material about [React Query, useReducer and context](/en/part6/react_query_use_reducer_and_the_contex). This section remains here for a couple of weeks.-->
 
 **注意**: 本章作为旧版第 6 部分的结束章节，已经在2023年1月30日被替换为“ [React Query, useReducer 和 context](/zh/part6/react_query_use_reducer_and_the_contex)“。这一章将仅在此保留几周。
 
@@ -701,8 +701,8 @@ export default connect(
 <!-- The <i>redux store</i> is currently being accessed by the components through the <em>useSelector</em> and <em>useDispatch</em> hooks.-->
  <i>redux存储</i>目前被组件通过<em>useSelector</em>和<em>useDispatch</em>挂钩访问。
 
-<!-- Modify the <i>Notification</i> component so that it uses the _connect_ function instead of the hooks.-->
- 修改<i>Notification</i>组件，使其使用_connect_函数而不是钩子。
+<!-- Modify the <i>Notification</i> component so that it uses the *connect* function instead of the hooks.-->
+ 修改<i>Notification</i>组件，使其使用*connect*函数而不是钩子。
 
 #### 6.20 anecdotes and connect, step2
 
