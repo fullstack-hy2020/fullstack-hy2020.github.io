@@ -126,7 +126,7 @@ const App = () => {
 
 <!--Retrieving data from the server is still done in the familiar way with the Axios <i>get</i> method. However, the Axios method call is now wrapped in a [query](https://tanstack.com/query/latest/docs/react/guides/queries) formed with the [useQuery](https://tanstack.com/query/latest/docs/react/reference/useQuery) function. The first parameter of the function call is a string <i>notes</i> which acts as a [key](https://tanstack.com/query/latest/docs/react/guides/query-keys)  to the query defined, i.e. the list of notes.-->
 
-从服务器中获取数据的方式和 Axios 的 *get* 方法类似。然而，Axios 的调用方法现在被包装在一个用 [useQuery](https://tanstack.com/query/latest/docs/react/reference/useQuery) 函数形成的 [query](https://tanstack.com/query/latest/docs/react/guides/queries) 查询中。在这个函数调用中，第一个参数——一个字符串 <i>notes</i>——是已经定义的查询的 [key](https://tanstack.com/query/latest/docs/react/guides/query-keys)，即笔记列表。
+从服务器中获取数据的方式和 Axios 的 *get* 方法类似。然而，Axios 的调用方法现在被包装在一个用 [useQuery](https://tanstack.com/query/latest/docs/react/reference/useQuery) 函数形成的 [query](https://tanstack.com/query/latest/docs/react/guides/queries) 查询中。在这个函数调用中，第一个参数（字符串 "<i>notes</i>" ）是已定义查询的 [key](https://tanstack.com/query/latest/docs/react/guides/query-keys)，即笔记列表。
 
 <!--The return value of the <i>useQuery</i> function is an object that indicates the status of the query. The output to the console illustrates the situation:--> 
 
@@ -148,11 +148,11 @@ const App = () => {
 
 <!--So the application retrieves data from the server and renders it on the screen without using the React hooks <i>useState</i> and <i>useEffect</i> used in chapters 2-5 at all. The data on the server is now entirely under the administration of the React Query library, and the application does not need the state defined with React's <i>useState</i> hook at all!-->
 
-因此，这个应用可以从服务器中获取数据并将其渲染到屏幕上，而完全不使用我们在第 2 章至第 5 章谈及的 React 钩子—— *useState* 和 *useEffect*。服务器中的数据现在完全在 React Query 库的管理下，应用程序完全不需要用 React 的 useState 钩子定义状态。
+因此，这个应用可以从服务器中获取数据并将其渲染到屏幕上，而完全不使用我们在第 2 章至第 5 章谈及的 React 钩子—— *useState* 和 *useEffect*。服务器中的数据现在完全在 React Query 库的管理下，应用程序完全不需要用 React 的 useState 钩子定义状态！
 
 <!--Let's move the function making the actual HTTP request to its own file <i>requests.js</i>-->
 
-让我将发出实际 HTTP 请求的函数移动到它自己的文件 <i>requests.js</i> 中。
+让我们将发出实际 HTTP 请求的函数，移动到单独的 <i>requests.js</i> 文件中。
 
 ```js
 import axios from 'axios'
@@ -239,11 +239,11 @@ const newNoteMutation = useMutation(createNote)
 
 <!--The parameter is the function we added to the file <i>requests.js</i>, which uses Axios to send a new note to the server.-->
 
-*useMutation* 的参数即是我们在 *requests.js* 中添加的，使用 Axios 向服务器发送一条新笔记的函数。
+*useMutation* 的参数即是我们在 *requests.js* 中添加的函数——它使用 Axios 向服务器发送一条新笔记。
 
 <!--The event handler <i>addNote</i> performs the mutation by calling the mutation object's function <i>mutate</i> and passing the new note as a parameter:-->
 
-事件处理器 *addNote* 在调用 mutation 对象中的 mutate 函数的同时，将新笔记作为参数传入，以执行突变：
+事件处理器 *addNote* 在调用 mutation 对象中的 mutate 函数时，将新笔记作为参数传入，以执行 mutation ：
 
 
 ```js
@@ -252,7 +252,7 @@ newNoteMutation.mutate({ content, important: true })
 
 <!--Our solution is good. Except it doesn't work. The new note is saved on the server, but it is not updated on the screen.-->
 
-我们的解决方案挺不错，但仍美中不足。新的笔记虽然存储在了服务器上，但并没有在屏幕上更新。
+我们的解决方案挺不错，但仍有改进空间。新的笔记虽然存储在了服务器上，但并没有在屏幕上更新。
 
 <!--In order to render a new note as well, we need to tell React Query that the old result of the query whose key is the string <i>notes</i> should be [invalidated](https://tanstack.com/query/latest/docs/react/guides/invalidations-from-mutations).-->
 
@@ -260,7 +260,7 @@ newNoteMutation.mutate({ content, important: true })
 
 <!--Fortunately, invalidation is easy, it can be done by defining the appropriate <i>onSuccess</i> callback function to the mutation:-->
 
-幸运的是，无效化很容易，它可以通过为突变定义适当的 *onSuccess* 回调函数来完成：
+幸运的是，无效化很容易，它可以通过为 mutation 定义适当的 *onSuccess* 回调函数来完成：
 
 ```js
 import { useQuery, useMutation, useQueryClient } from 'react-query' // highlight-line
@@ -281,7 +281,7 @@ const App = () => {
 
 <!--Now that the mutation has been successfully executed, a function call is made to-->
 
-在突变已经成功执行后，一个函数被调用
+在 mutation 已经成功执行后，一个函数被调用：
 
 ```js
 queryClient.invalidateQueries('notes')
@@ -293,7 +293,7 @@ queryClient.invalidateQueries('notes')
 
 <!--Let us also implement the change in the importance of notes. A function for updating notes is added to the file <i>requests.js</i>:-->
 
-让我们加入更改笔记重要性的功能。用于更新笔记的函数被加入到文件 *requests.js*:
+让我们加入更改笔记重要性的功能。更新笔记的函数被加入到文件 *requests.js* 中:
 
 ```js
 export const updateNote = updatedNote =>
@@ -302,7 +302,7 @@ export const updateNote = updatedNote =>
 
 <!--Updating the note is also done by mutation. The <i>App</i> component expands as follows:-->
 
-更新笔记同样通过突变来完成。*App* 组件扩展为如下：
+更新笔记同样通过 mutation 来完成。*App* 组件扩展为如下：
 
 ```js
 import { useQuery, useMutation, useQueryClient } from 'react-query' 
@@ -327,9 +327,9 @@ const App = () => {
 
 <!--So again, a mutation was created that invalidated the query <i>notes</i> so that the updated note is rendered correctly. Using mutation is easy, the method <i>mutate</i> receives a note as a parameter, the importance of which has been changed to the negation of the old value.-->
 
-一个能够无效化查询的突变被再次创建，更新后的笔记也可以正常渲染。使用突变是轻松的，*mutate* 方法接收一个笔记作为参数，这个笔记的重要性已变为旧值的反义。
+一个能够无效化查询的 mutation 被再次创建，更新后的笔记也可以正常渲染。使用 mutation 很轻松，*mutate* 方法接收一个笔记作为参数，这个笔记的重要性已变为旧值的反义。
 
-The current code for the application is in [GitHub](https://github.com/fullstack-hy2020/query-notes/tree/part6-2) in the branch <i>part6-2</i>.
+<!--The current code for the application is in [GitHub](https://github.com/fullstack-hy2020/query-notes/tree/part6-2) in the branch <i>part6-2</i>.-->
 
 当前应用的代码可以在 [GitHub](https://github.com/fullstack-hy2020/query-notes/tree/part6-2) 上 *part6-2* 的分支中找到。
 
@@ -339,7 +339,7 @@ The current code for the application is in [GitHub](https://github.com/fullstack
 
 <!--The application works well, and the code is relatively simple. The ease of making changes to the list of notes is particularly surprising. For example, when we change the importance of a note, invalidating the query <i>notes</i> is enough for the application data to be updated:-->
 
-应用目前运转良好，代码也相对简单。对笔记列表的更改意外地轻松。例如，当我们改变了笔记的重要性，使 key 为 *notes* 的查询无效即可更新应用中的数据。
+应用目前运转良好，代码也相对简单。对笔记列表的更改也异常轻松。例如，当我们改变了笔记的重要性，使 key 为 *notes* 的查询无效即可更新应用中的数据。
 
 ```js
   const updateNoteMutation = useMutation(updateNote, {
@@ -351,20 +351,20 @@ The current code for the application is in [GitHub](https://github.com/fullstack
 
 <!--The consequence of this, of course, is that after the PUT request that causes the note change, the application makes a new GET request to retrieve the query data from the server:-->
 
-这样的结果，就是在一个导致笔记更新的 PUT 请求后，应用会创建一个 GET 请求在服务器上获取数据。
+但这样的话，应用会在一个导致笔记更新的 PUT 请求后，创建一个 GET 请求向服务器获取数据。
 
 ![devtools network tab with highlight over 3 and notes requests](../../images/6/61new.png)
 
 <!--If the amount of data retrieved by the application is not large, it doesn't really matter. After all, from a browser-side functionality point of view, making an extra HTTP GET request doesn't really matter, but in some situations it might put a strain on the server.-->
 
-如果应用从服务器中获取的数据量不大，这样的更新流程无关紧要。毕竟，从浏览器功能的角度来看，多做一个 HTTP 请求并不重要，但在某些情况下，这可能会给服务器带来压力。
+如果应用从服务器中获取的数据量不大，这样的更新流程无关紧要。毕竟，从浏览器功能的角度来看，额外的一个 HTTP 请求并不重要，但在某些情况下，这可能会给服务器带来压力。
 
 <!--If necessary, it is also possible to optimize performance [by manually updating](https://tanstack.com/query/latest/docs/react/guides/updates-from-mutation-responses) the query state maintained by React Query.-->
 必要情况下，也可以通过 [手动更新](https://tanstack.com/query/latest/docs/react/guides/updates-from-mutation-responses) React Query 所维护的查询状态，以实现性能优化。
 
 <!--The change for the mutation adding a new note is as follows:-->
 
-对新增笔记的突变，做出如下更改：
+对新增笔记的 mutation，做出如下更改：
 
 ```js
 const App = () => {
@@ -395,7 +395,7 @@ export const createNote = newNote =>
 
 <!--If we closely follow the browser's network tab, we notice that React Query retrieves all notes as soon as we move the cursor to the input field:-->
 
-如果我们仔细观察浏览器的网络面板，我们会注意到：当我们将光标移动至输入框时，React Query 立即去获取全部的笔记。
+如果我们仔细观察浏览器的网络面板，我们会注意到：当我们将光标移动至输入框时，React Query 会立即去获取全部笔记。
 
 ![dev tools notes app with input text field highlighted and arrow on network over notes request as 200](../../images/6/62new.png)
 
@@ -416,7 +416,7 @@ const App = () => {
 
 <!--If you put a console.log statement to the code, you can see from browser console how often React Query causes the application to be re-rendered. The rule of thumb is that rerendering happens at least whenever there is a need for it, i.e. when the state of the query changes. You can read more about it e.g. [here](https://tkdodo.eu/blog/react-query-render-optimizations).-->
 
-如果你在代码中放入 console.log，你会在浏览器的控制台中发现 React Query 多么频繁地导致应用的重复渲染。经验法则是，至少应在有需要的时候，即在查询状态发生变化时，进行重新渲染。你可以在 [这里](https://tkdodo.eu/blog/react-query-render-optimizations) 了解更多。
+如果你在代码中放入 console.log，就会在浏览器的控制台中发现： React Query 引发的应用重复渲染是多么频繁。经验法则是，应在有需要的时候（即在查询状态发生变化时），才进行重新渲染。你可以在 [这里](https://tkdodo.eu/blog/react-query-render-optimizations) 了解更多。
 
 <!--The code for the application is in [GitHub](https://github.com/fullstack-hy2020/query-notes/tree/part6-3) in the branch <i>part6-3</i>.-->
 
@@ -433,7 +433,7 @@ React Query 一个多功能的库，根据我们已看到的情况，它简化�
 
 <!--So React Query is a library that maintains the <i>server state</i> in the frontend, i.e. acts as a cache for what is stored on the server. React Query simplifies the processing of data on the server, and can in some cases eliminate the need for data on the server to be saved in the frontend state.-->
 
-因此，React Query 是一个在前端维护服务器状态的库，即作为服务器存储内容的缓存。React Query 简化了对服务器数据的处理，在某些情况下，可以消除将服务器数据保存在前端的需求。
+因此，React Query 是一个在前端维护服务器状态的库，即作为服务器存储内容的缓存。React Query 简化了对服务器数据的处理，在某些情况下，可以消除将服务器数据存储在前端的需求。
 
 <!--Most React applications need not only a way to temporarily store the served data, but also some solution for how the rest of the frontend state (e.g. the state of forms or notifications) is handled.-->
 
@@ -467,7 +467,7 @@ React Query 一个多功能的库，根据我们已看到的情况，它简化�
 
 <!--You can simulate a problem with the server by e.g. turning off the JSON Server. Please note that in a problem situation, the query is first in the state <i>isLoading</i> for a while, because if a request fails, React Query tries the request a few times before it states that the request is not successful. You can optionally specify that no retries are made:-->
 
-你可以在通过关闭 JSON 服务器来模拟服务器故障。请注意在一个故障情况下，查询会在 *isLoading* 状态中停留一会儿，这是因为在一次请求失败后，React Query 会在多尝试几次后，才反馈请求失败。你可以选择不进行额外尝试：
+你可以在通过关闭 JSON 服务器来模拟服务器故障。请注意在某种故障情况下，查询会在 *isLoading* 状态中停留一会儿，这是因为在一次请求失败后，React Query 会在多尝试几次后，才反馈请求失败。你可以选择不进行这种额外尝试：
 
 
 ```js
@@ -481,7 +481,7 @@ const result = useQuery(
 
 <!--or that the request is retried e.g. only once:-->
 
-你也可以指定仅尝试一次：
+你也可以指定仅额外尝试一次：
 
 ```js
 const result = useQuery(
@@ -494,7 +494,7 @@ const result = useQuery(
 
 #### Exercise 6.21
 
-Implement adding new anecdotes to the server using React Query. The application should render a new anecdote by default. Note that the content of the anecdote must be at least 5 characters long, otherwise the server will reject the POST request. You don't have to worry about error handling now.
+<!--Implement adding new anecdotes to the server using React Query. The application should render a new anecdote by default. Note that the content of the anecdote must be at least 5 characters long, otherwise the server will reject the POST request. You don't have to worry about error handling now.-->
 
 使用 React Query 向服务器添加新的箴言。这个应用默认应渲染出全部箴言。注意，箴言的内容应不少于 5 个字符，否则，服务器将拒绝 POST 请求。你目前还不用考虑异常处理。
 
@@ -521,7 +521,7 @@ Implement adding new anecdotes to the server using React Query. The application 
 
 ![browser showing + - 0 buttons and 7 above](../../images/6/63new.png)
 
-We shall now implement the counter state management using a Redux-like state management mechanism provided by React's built-in [useReducer](https://beta.reactjs.org/reference/react/useReducer) hook. Code looks like the following:
+<!--We shall now implement the counter state management using a Redux-like state management mechanism provided by React's built-in [useReducer](https://beta.reactjs.org/reference/react/useReducer) hook. Code looks like the following:-->
 
 现在，我们利用 React 内置的 [useReducer](https://beta.reactjs.org/reference/react/useReducer)  钩子来进行状态管理，useReducer 钩子具有类似 Redux 的状态管理机制。代码如下：
 
@@ -569,7 +569,7 @@ const [counter, counterDispatch] = useReducer(counterReducer, 0)
 
 <!--The reducer function that handles state changes is similar to Redux's reducers, i.e. the function gets as parameters the current state and the action that changes the state. The function returns the new state updated based on the type and possible contents of the action:-->
 
-处理状态变化的 reducer 函数和 Redux 中的 reducers 类似，即，即该函数获得当前状态和改变此状态的 action 作为参数。该函数根据 action 的类型和其中的内容而返回更新后的状态。
+处理状态变化的 reducer 函数和 Redux 中的 reducers 类似，即，用该函数获得当前状态和改变此状态的 action 作为参数。该函数根据 action 的类型和其中的内容而返回更新后的状态。
 
 ```js
 const counterReducer = (state, action) => {
@@ -664,11 +664,11 @@ const App = () => {
 
 <!--The solution works, but is not optimal. If the component structure gets complicated, e.g. the dispatcher should be forwarded using props through many components to the components that need it, even though the components in between in the component tree do not need the dispatcher. This phenomenon is called <i>prop drilling</i>.-->
 
-这个解决方案是可行的，但并不是最优的。如果组件的结构变得更复杂，例如，则要通过多个组件才能将 dispatch 函数转发到需要它的组件，即使组件树中处于两者之间的组件都不需要它。这种现象被称为 *prop drilling*.
+这个解决方案是可行的，但并不是最优的。如果组件的结构变得更复杂，例如，需要经过多个组件才能将 dispatch 函数转发到真正需要它的组件，即使处于组件树中的其他组件都不需要它。这种现象被称为 *prop drilling*.
 
 <!--React's built-in [Context API](https://beta.reactjs.org/learn/passing-data-deeply-with-context) provides a solution for us. React's context is a kind of global state of the application, to which it is possible to give direct access to any component app.-->
 
-React 内置的 [Context API](https://beta.reactjs.org/learn/passing-data-deeply-with-context) 为我们提供了一个解决方。React 的 context 类似应用的全局状态，应用中的组件均可以直接访问。
+React 内置的 [Context API](https://beta.reactjs.org/learn/passing-data-deeply-with-context) 为我们提供了一个解决方案。React 的 context 类似应用的全局状态，应用中的组件均可以直接访问它。
 
 <!--Let us now create a context in the application that stores the state management of the counter.-->
 
@@ -787,11 +787,11 @@ export default CounterContext
 
 <!--The file now exports, in addition to the <i>CounterContext</i> object corresponding to the context, the <i>CounterContextProvider</i> component, which is practically a context provider whose value is a counter and a dispatcher used for its state management.-->
 
-这个文件除了导出和 context 对应的 *CounterContext* 对象外，还导出了<i>CounterContextProvider</i> 组件，这个组件实际上是一个 context 提供者，它的值包括一个计数器和一个用于其状态管理的调度器。
+这个文件除了导出和 context 对应的 *CounterContext* 对象外，还导出了<i>CounterContextProvider</i> 组件，这个组件实际上是一个 context 提供方，它的值包括一个计数器和一个用于其状态管理的调度器。
 
 <!--Let's enable the context provider by making a change in <i>index.js</i>:-->
 
-让我们更新 *index.js* ，以启用 context 提供者：
+让我们更新 *index.js* ，以启用 context 提供方：
 
 ```js
 import ReactDOM from 'react-dom/client'
@@ -811,7 +811,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 <!--The <i>App</i> component is simplified to the following form:-->
 
-*App* 组件被简化成如下的形式：
+*App* 组件则被简化成如下的形式：
 
 ```js
 import Display from './components/Display'
@@ -835,7 +835,7 @@ export default App
 
 <!--The context is still used in the same way, e.g. the component <i>Button</i> is defined as follows:-->
 
-context 仍然按和此前相同的方法使用，例如， *Button* 组件可以通过如下的方式定义：
+对 context 的使用仍然遵循先前的相同方法，例如， *Button* 组件可以通过如下的方式定义：
 
 ```js
 import { useContext } from 'react'
@@ -863,7 +863,7 @@ export default Button
 
 <!--This is not a big problem, but it is possible to make the code a bit more pleasant and expressive by defining a couple of helper functions in the <i>CounterContext</i> file:-->
 
-这不是个大问题，但是我们可以通过在 *CounterContext* 文件中编写一些辅助函数，使我们的代码更加优雅、清晰：
+这不是个大问题，但是我们可以通过在 *CounterContext* 文件中编写一些辅助函数，使我们的代码更加优雅和清晰：
 
 ```js
 import { createContext, useReducer, useContext } from 'react' // highlight-line
@@ -887,7 +887,7 @@ export const useCounterDispatch = () => {
 
 <!--With the help of these helper functions, it is possible for the components that use the context to get hold of the part of the context that they need. The <i>Display</i> component changes as follows:-->
 
-有了辅助函数的帮助，需要使用 context 的组件就可以只获得它们所需的部分。*Display* 组件的更新如下：
+有了辅助函数的帮助，组件使用 context 就可以只获取它们所需要的那部分。*Display* 组件的更新如下：
 
 ```js
 import { useCounterValue } from '../CounterContext' // highlight-line
@@ -932,7 +932,7 @@ export default Button
 
 <!--As a technical detail, it should be noted that the helper functions <i>useCounterValue</i> and <i>useCounterDispatch</i> are defined as [custom hooks](https://reactjs.org/docs/hooks-custom.html), because calling the hook function <i>useContext</i> is [possible](https://reactjs.org/docs/hooks -rules.html) only from React components or custom hooks. Custom hooks are JavaScript functions whose name must start with the string _use_. We will return to custom hooks in a little more detail in [part 7](/en/part7/custom_hooks) of the course.-->
 
-作为一个技术细节，应当注意到辅助函数——<i>useCounterValue</i> 和 <i>useCounterDispatch</i>，是 [自定义钩子（custom hooks）](https://reactjs.org/docs/hooks-custom.html)，因为[只能](https://reactjs.org/docs/hooks -rules.html)通过 React 组件或自定义钩子调用钩子函数 *useContext*。此外，自定义钩子是必须以 *use* 作为名称开头的 JavaScript 函数。我们将在这门课程的 [part 7](/en/part7/custom_hooks) 更深入地探讨自定义钩子。
+作为一个技术细节，应当注意到辅助函数——<i>useCounterValue</i> 和 <i>useCounterDispatch</i>，是 [自定义钩子（custom hooks）](https://reactjs.org/docs/hooks-custom.html)，因为[只能](https://reactjs.org/docs/hooks -rules.html)通过 React 组件或自定义钩子调用钩子函数——*useContext*。此外，自定义钩子是必须以 *use* 作为名称开头的 JavaScript 函数。我们将在这门课程的 [part 7](/en/part7/custom_hooks) 更深入地探讨自定义钩子。
 
 </div>
 
@@ -960,17 +960,17 @@ export default Button
 
 <!--As stated in exercise 6.21, the server requires that the content of the anecdote to be added is at least 5 characters long. Now implement error handling for the insertion. In practice, it is sufficient to display a notification to the user in case of a failed POST request:-->
 
-正如在练习 6.20 中说明的，被添加至服务器的箴言，长度不应少于 5 个字符。现在我们在新增操作中添加错误处理。在实践中，当 POST 请求失败时，向用户展示一条通知就足够了。
+正如在练习 6.20 中说明的，被添加至服务器的箴言，长度不应少于 5 个字符。现在我们在新增操作中添加异常处理。在实践中，当 POST 请求失败时，向用户展示一条通知就足够了。
 
 ![browser showing error notification for trying to add too short of an anecdoate](../../images/6/67new.png)
 
-The error condition should be handled in the callback function registered for it, see [here](https://tanstack.com/query/latest/docs/react/reference/useMutation) how to register a function.
+<!--The error condition should be handled in the callback function registered for it, see [here](https://tanstack.com/query/latest/docs/react/reference/useMutation) how to register a function.-->
 
-触发的错误情境应在回调函数中处理，你可以在[这里](https://tanstack.com/query/latest/docs/react/reference/useMutation)了解如何注册一个函数。
+触发的错误情境应在回调函数中处理——被注册的回调函数会专门处理该种错误情境，你可以在[这里](https://tanstack.com/query/latest/docs/react/reference/useMutation)了解如何注册一个函数。
 
 <!--This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your completed exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
 
-这是该部分课程的最后一个练习，现在是时候将你的代码推送至 GitHub 并在[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)中将所有你已完成的练习进行标注。
+这是该部分课程的最后一个练习，现在是时候将你的代码推送至 GitHub，并在[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)中将所有你已完成的练习进行标注。
 
 </div>
 
@@ -983,7 +983,7 @@ The error condition should be handled in the callback function registered for it
 
 <!--In chapters 1-5, all state management of the application was done using React's hook <i>useState</i>. Asynchronous calls to the backend required the use of the <i>useEffect</i> hook in some situations. In principle, nothing else is needed.-->
 
-在 1 至 5 章中，应用的所有状态管理都通过 React 的钩子 —— *useState* 来处理. 一些情况下，对后端的异步调用还需要 *useEffect*。通常情况下，我们就不需要额外的东西了。
+在 1 至 5 章中，应用的所有状态管理都通过 React 的钩子 —— *useState* 来处理. 偶尔，对后端的异步调用还需要用上 *useEffect*。通常情况下，我们就不再需要额外的东西了。
 
 <!--A subtle problem with a solution based on a state created with the <i>useState</i> hook is that if some part of the application's state is needed by multiple components of the application, the state and the functions for manipulating it must be passed via props to all components that handle the state. Sometimes props need to be passed through multiple components, and the components along the way may not even be interested in the state in any way. This somewhat unpleasant phenomenon is called <i>prop drilling</i>.-->
 
@@ -991,7 +991,7 @@ The error condition should be handled in the callback function registered for it
 
 <!--Over the years, several alternative solutions have been developed for state management of React applications, which can be used to ease problematic situations (e.g. prop drilling). However, no solution has been "final", all have their own pros and cons, and new solutions are being developed all the time.-->
 
-过去几年中，一些针对 Rect 应用状态管理的替代方案开始显露头角，它们可用于解决棘手的状况（例如：prop drilling）。然而，目前还不存在一个终极方案，当下所有的方案都有其自己的优势和劣势，而且新的解决方案层出不穷。
+过去几年中，一些针对 Rect 应用状态管理的替代方案开始显露头角，它们可用于解决棘手的状况（例如：prop drilling）。然而，目前还不存在一个终极方案，当下所有的方案都有其自己的优势和劣势，而且新的解决方案还在层出不穷。
 
 <!--The situation may confuse a beginner and even an experienced web developer. Which solution should be used?-->
 
@@ -999,11 +999,11 @@ The error condition should be handled in the callback function registered for it
 
 <!--For a simple application, <i>useState</i> is certainly a good starting point. If the application is communicating with the server, the communication can be handled in the same way as in chapters 1-5, using the state of the application itself. Recently, however, it has become more common to move the communication and associated state management at least partially under the control of React Query (or some other similar library). If you are concerned about useState and the prop drilling it entails, using context may be a good option. There are also situations where it may make sense to handle some of the state with useState and some with contexts.-->
 
-对于简单的应用，*useState* 是个很好的起点。如果应用需要和服务器进行通信的话，这样的通信可以用与 1-5 章中相同的方式处理——即利用应用本身的状态。然而最近，利用 React Query （或类似的库）去处理——或至少处理一部分——通信和相关的状态管理，已变得越来越普遍。如果你对 *useState* 及相应的 prop drilling 抱有疑虑，context 可能会是一个好的选择。在一些情境下，利用 useState 管理部分状态，同时使用 context 管理其他部分的状态，也会是合理的。
+对于简单的应用，*useState* 是个很好的起点。如果应用需要和服务器进行通信的话，这样的通信可以用与 1 - 5 章中相同的方式处理——即利用应用本身的状态。然而最近，利用 React Query （或类似的库）去处理全部，或至少一部分，通信和相关的状态管理，已变得越来越普遍。如果你对 *useState* 及相应的 prop drilling 抱有疑虑，context 可能会是一个好的选择。在一些情境下，利用 useState 管理部分状态，同时使用 context 管理其他部分的状态，也会是合理的。
 
 <!--The most comprehensive and robust state management solution is Redux, which is a way to implement the so-called [Flux](https://facebookarchive.github.io/flux/) architecture. Redux is slightly older than the solutions presented in this section. The rigidity of Redux has been the motivation for many new state management solutions, such as React's <i>useReducer</i>. Some of the criticisms of Redux's rigidity have already become obsolete thanks to the [Redux Toolkit](https://redux-toolkit.js.org/).-->
 
-Redux 是其中最全面和强大的状态管理方案，它是实现所谓 [Flux](https://facebook.github.io/flux/) 架构的一种方式。Redux 比本章介绍的方案更有历史。Redux 的僵化成为了当前很多新状态管理工具的开发动力，例如 React 的 *useReducer* 。但在有了 [Redux Toolkit](https://redux-toolkit.js.org/) 后，对 Redux 僵化的批评已经消退。
+Redux 是其中最全面和强大的状态管理方案，它是实现所谓 [Flux](https://facebook.github.io/flux/) 架构的一种方式。Redux 比本章介绍的方案更有历史。Redux 过去的僵化成为了当前很多新状态管理工具的开发动力，例如 React 的 *useReducer* 。但在有了 [Redux Toolkit](https://redux-toolkit.js.org/) 后，对 Redux 僵化的批评已经消散。
 
 <!--Over the years, there have also been other state management libraries developed that are similar to Redux, such as the newer entrant [Recoil](https://recoiljs.org/) and the slightly older [MobX](https://mobx.js.org/). However, according to [Npm trends](https://npmtrends.com/mobx-vs-recoil-vs-redux), Redux still clearly dominates, and in fact seems to be increasing its lead:-->
 
@@ -1013,7 +1013,7 @@ Redux 是其中最全面和强大的状态管理方案，它是实现所谓 [Flu
 
 <!--Also, Redux does not have to be used in its entirety in an application. It may make sense, for example, to manage the form state outside of Redux, especially in situations where the state of a form does not affect the rest of the application. It is also perfectly possible to use Redux and React Query together in the same application.-->
 
-此外，Redux 不需要应用于整个应用。例如，当一个表单状态完全不会影响应用中的其他状态时，不使用 Reudx 去管理表单状态也是合理的。另外，在一个应用中，同时使用 Redux 和 React Query 也是完全可以接受的。
+此外，Redux 不需要应用于整个应用。例如，当一个表单状态完全不影响应用的其他状态时，不使用 Reudx 去管理表单状态也是合理的。另外，在一个应用中，同时使用 Redux 和 React Query 也是完全可以接受的。
 
 <!--The question of which state management solution should be used is not at all straightforward. It is impossible to give a single correct answer. It is also likely that the selected state management solution may turn out to be suboptimal as the application grows to such an extent that the solution have to be changed even if the application has already been put into production use.-->
 
