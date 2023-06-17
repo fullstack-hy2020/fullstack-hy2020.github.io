@@ -361,7 +361,7 @@ const noteReducer = (state = [], action) => {
  现在的状态是一个数组。<i>NEW\_NOTE</i>-类型的动作导致一个新的笔记被添加到[push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push)方法的状态。
 
 <!-- The application seems to be working, but the reducer we have declared is bad. It breaks the [basic assumption](https://redux.js.org/tutorials/essentials/part-1-overview-concepts#reducers) of Redux reducer that reducers must be [pure functions](https://en.wikipedia.org/wiki/Pure_function).-->
- 应用似乎在工作，但我们所声明的还原器是坏的。它打破了Redux减速器的【基本假设】(https://redux.js.org/tutorials/essentials/part-1-overview-concepts#reducers)，即减速器必须是【纯函数】(https://en.wikipedia.org/wiki/Pure_function)。
+ 应用似乎在工作，但我们所声明的还原器是坏的。它打破了Redux减速器的[基本假设](https://redux.js.org/tutorials/essentials/part-1-overview-concepts#reducers)，即减速器必须是[纯函数](https://en.wikipedia.org/wiki/Pure_function)。
 
 <!-- Pure functions are such, that they <i>do not cause any side effects</i> and they must always return the same response when called with the same parameters.-->
  纯函数是这样的，它们<i>不会引起任何副作用</i>，而且当用同样的参数调用时，它们必须总是返回同样的响应。
@@ -623,7 +623,7 @@ console.log(rest)     // prints [3, 4, 5, 6]
  让我们做一个第一章节的unicafe练习的简化版。让我们用Redux来处理状态管理。
 
 <!-- You can take the project from this repository https://github.com/fullstack-hy2020/unicafe-redux for the base of your project.-->
- 你可以把这个仓库的项目https://github.com/fullstack-hy2020/unicafe-redux，作为你项目的基础。
+ 你可以把这个仓库的项目 https://github.com/fullstack-hy2020/unicafe-redux ，作为你项目的基础。
 
 <i>Start by removing the git-configuration of the cloned repository, and by installing dependencies</i>
 
@@ -1246,7 +1246,7 @@ const App = () => {
 ### Exercises 6.3.-6.8.
 
 <!-- Let's make a new version of the anecdote voting application from part 1. Take the project from this repository https://github.com/fullstack-hy2020/redux-anecdotes to base your solution on.-->
- 让我们为第一章节中的名言警句投票应用制作一个新版本。从这个仓库中获取项目https://github.com/fullstack-hy2020/redux-anecdotes，作为你的解决方案的基础。
+ 让我们为第一章节中的名言警句投票应用制作一个新版本。从这个仓库中获取项目 https://github.com/fullstack-hy2020/redux-anecdotes ，作为你的解决方案的基础。
 
 <!-- If you clone the project into an existing git-repository, <i>remove the git-configuration of the cloned application:</i>-->
  如果你把项目克隆到一个现有的git-repository中，<i>删除克隆的应用的git-configuration：</i>。

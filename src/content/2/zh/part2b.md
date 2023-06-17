@@ -7,6 +7,7 @@ lang: zh
 
 <div class="content">
 <!-- Let's continue expanding our application by allowing users to add new notes. You can find the code for our current application [here](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1).-->
+
  让我们继续扩展我们的应用，允许用户添加新的笔记。你可以找到我们当前应用的代码[这里](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1)。
 
 <!-- In order to get our page to update when new notes are added it's best to store the notes in the <i>App</i> component's state. Let's import the [useState](https://reactjs.org/docs/hooks-state.html) function and use it to define a piece of state that gets initialized with the initial notes array passed in the props.-->
@@ -605,7 +606,7 @@ const App = () => {
  如果你已经在一个单一的组件中实现了你的应用，通过提取合适的部分到新的组件中来重构它。在<i>App</i>根组件中维护应用的状态和所有事件处理程序。
 
 <!-- It is sufficient to extract <i>**three**</i> components from the application. Good candidates for separate components are, for example, the search filter, the form for adding new people into the phonebook, a component that renders all people from the phonebook, and a component that renders a single person's details.-->
-从应用中提取<i>***三个***</i>组件即可。独立组件的良好候选者是，例如，搜索过滤器、将新的人加入电话簿的表格、显示电话簿中所有的人的组件，以及显示一个人的详细资料的组件。
+从应用中提取<i>**三个**</i>组件即可。独立组件的良好候选者是，例如，搜索过滤器、将新的人加入电话簿的表格、显示电话簿中所有的人的组件，以及显示一个人的详细资料的组件。
 
 <!-- The application's root component could look similar to this after the refactoring. The refactored root component below only renders titles and lets the extracted components take care of the rest.-->
  在重构之后，应用的根组件看起来与此类似。下面这个重构后的根组件只渲染标题，让提取的组件来处理其余的部分。
@@ -635,7 +636,7 @@ const App = () => {
 ```
 
 <!-- **NB**: You might run into problems in this exercise if you define your components "in the wrong place". Now would be a good time to rehearse-->
- **NB*:如果你在 "错误的地方 "定义你的组件，你可能会在这个练习中遇到问题。现在是一个很好的时机来排练一下
+ **NB**: 如果你在 "错误的地方 "定义你的组件，你可能会在这个练习中遇到问题。现在是一个很好的时机来排练一下
 <!-- the chapter [do not define a component in another component](/en/part1/a_more_complex_state_debugging_react_apps#do-not-define-components-within-components)-->
  [不要在另一个组件中定义一个组件](/en/part1/a_more_complex_state_debugging_react_apps#do-not-define-components-within-components)这一章节。
 <!-- from last part.-->

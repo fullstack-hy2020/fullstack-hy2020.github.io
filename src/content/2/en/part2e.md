@@ -7,10 +7,9 @@ lang: en
 
 <div class="content">
 
-
 The appearance of our current application is quite modest. In [exercise 0.2](/en/part0/fundamentals_of_web_apps#exercises-0-1-0-6), the assignment was to go through Mozilla's [CSS tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics).
 
-Let's take a look at how we can add styles to a React application. There are several different ways of doing this and we will take a look at the other methods later on. First, we will add CSS to our application the old-school way; in a single file without using a [CSS preprocessor](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor) (although this is not entirely true as we will learn later on). 
+Let's take a look at how we can add styles to a React application. There are several different ways of doing this and we will take a look at the other methods later on. First, we will add CSS to our application the old-school way; in a single file without using a [CSS preprocessor](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor) (although this is not entirely true as we will learn later on).
 
 Let's add a new <i>index.css</i> file under the <i>src</i> directory and then add it to the application by importing it in the <i>index.js</i> file:
 
@@ -39,9 +38,7 @@ h1 {
 }
 ```
 
-
 There are many ways of matching elements by using [different types of CSS selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors).
-
 
 If we wanted to target, let's say, each one of the notes with our styles, we could use the selector <i>li</i>, as all of the notes are wrapped inside <i>li</i> tags:
 
@@ -60,7 +57,6 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-
 Let's add the following rule to our style sheet (since my knowledge of elegant web design is close to zero, the styles don't make much sense):
 
 ```css
@@ -71,12 +67,9 @@ li {
 }
 ```
 
-
 Using element types for defining CSS rules is slightly problematic. If our application contained other <i>li</i> tags, the same style rule would also be applied to them.
 
-
 If we want to apply our style specifically to notes, then it is better to use [class selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors).
-
 
 In regular HTML, classes are defined as the value of the <i>class</i> attribute:
 
@@ -84,8 +77,7 @@ In regular HTML, classes are defined as the value of the <i>class</i> attribute:
 <li class="note">some text...</li>
 ```
 
-
-In React we have to use the [className](https://reactjs.org/docs/dom-elements.html#classname) attribute instead of the class attribute. With this in mind, let's make the following changes to our <i>Note</i> component:
+In React we have to use the [className](https://react.dev/learn#adding-styles) attribute instead of the class attribute. With this in mind, let's make the following changes to our <i>Note</i> component:
 
 ```js
 const Note = ({ note, toggleImportance }) => {
@@ -102,7 +94,6 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-
 Class selectors are defined with the _.classname_ syntax:
 
 ```css
@@ -113,15 +104,11 @@ Class selectors are defined with the _.classname_ syntax:
 }
 ```
 
-
 If you now add other <i>li</i> elements to the application, they will not be affected by the style rule above.
-
 
 ### Improved error message
 
-
 We previously implemented the error message that was displayed when the user tried to toggle the importance of a deleted note with the <em>alert</em> method. Let's implement the error message as its own React component.
-
 
 The component is quite simple:
 
@@ -139,10 +126,7 @@ const Notification = ({ message }) => {
 }
 ```
 
-
-
 If the value of the <em>message</em> prop is <em>null</em>, then nothing is rendered to the screen, and in other cases, the message gets rendered inside of a div element.
-
 
 Let's add a new piece of state called <i>errorMessage</i> to the <i>App</i> component. Let's initialize it with some error message so that we can immediately test our component:
 
@@ -184,7 +168,6 @@ Then let's add a style rule that suits an error message:
 }
 ```
 
-
 Now we are ready to add the logic for displaying the error message. Let's change the <em>toggleImportanceOf</em> function in the following way:
 
 ```js
@@ -216,14 +199,13 @@ The result looks like this:
 
 ![error removed from server screenshot from app](../../images/2/26e.png)
 
-
 The code for the current state of our application can be found in the  <i>part2-7</i> branch on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-7).
 
 ### Inline styles
 
 React also makes it possible to write styles directly in the code as so-called [inline styles](https://react-cn.github.io/react/tips/inline-styles.html).
 
-The idea behind defining inline styles is extremely simple. Any React component or element can be provided with a set of CSS properties as a JavaScript object through the [style](https://reactjs.org/docs/dom-elements.html#style) attribute.
+The idea behind defining inline styles is extremely simple. Any React component or element can be provided with a set of CSS properties as a JavaScript object through the [style](https://react.dev/reference/react-dom/components/common#applying-css-styles) attribute.
 
 CSS rules are defined slightly differently in JavaScript than in normal CSS files. Let's say that we wanted to give some element the color green and italic font that's 16 pixels in size. In CSS, it would look like this:
 
@@ -302,7 +284,7 @@ The code of the final version of our application can be found in the  <i>part2-8
 
 <h4>2.16: Phonebook step11</h4>
 
-Use the [improved error message](/en/part2/adding_styles_to_react_app#improved-error-message) example from part 2 as a guide to show a notification that lasts for a few seconds after a successful operation is executed (a person is added or a number is changed): 
+Use the [improved error message](/en/part2/adding_styles_to_react_app#improved-error-message) example from part 2 as a guide to show a notification that lasts for a few seconds after a successful operation is executed (a person is added or a number is changed):
 
 ![successful green added screenshot](../../images/2/27e.png)
 
@@ -326,7 +308,7 @@ Fix the issue according to the example shown in [promise and errors](/en/part2/a
 
 At the end of this part there are a few more challenging exercises. At this stage, you can skip the exercises if they are too much of a headache, we will come back to the same themes again later. The material is worth reading through in any case.
 
-We have done one thing in our app that is masking away a very typical source of error. 
+We have done one thing in our app that is masking away a very typical source of error.
 
 We set the state _notes_ to have initial value of an empty array:
 
@@ -340,7 +322,7 @@ const App = () => {
 
 This is a pretty natural initial value since the notes are a set, that is, there are many notes that the state will store.
 
-If the state would be only saving "one thing", a more proper initial value would be _null_ denoting that there is <i>noting</i> in the state at the start. Let us try what happens if we use this initial value:
+If the state would be only saving "one thing", a more proper initial value would be _null_ denoting that there is <i>nothing</i> in the state at the start. Let us try what happens if we use this initial value:
 
 ```js
 const App = () => {
@@ -352,7 +334,7 @@ const App = () => {
 
 The app breaks down:
 
-![](../../images/2/31a.png)
+![console typerror cannot read properties of null via map from App](../../images/2/31a.png)
 
 The error message gives the reason and location for the error. The code that caused the problems is the following:
 
@@ -371,11 +353,11 @@ The error message gives the reason and location for the error. The code that cau
 
 The error message is
 
-```
+```bash
 Cannot read properties of null (reading 'map')
 ```
 
-The variable _notesToShow_ is first assigned the value of the state _notes_ and then the code tries to call method _map_ to an nonexisting object, that is, to _null_.
+The variable _notesToShow_ is first assigned the value of the state _notes_ and then the code tries to call method _map_ to a nonexisting object, that is, to _null_.
 
 What is the reason for that?
 
@@ -393,6 +375,7 @@ The effect hook uses the function _setNotes_ to set _notes_ to have the notes th
 
 However the problem is that the effect is executed only <i>after the first render</i>.
 And because _notes_ has the initial value of null:
+
 ```js
 const App = () => {
   const [notes, setNotes] = useState(null) // highlight-line
@@ -410,7 +393,7 @@ notesToShow = notes
 notesToShow.map(note => ...)
 ```
 
-and this blows up the app since we can not call method _map_ of the value _null_. 
+and this blows up the app since we can not call method _map_ of the value _null_.
 
 When we set _notes_ to be initially an empty array, there is no error since it is allowed to call _map_ to an empty array.
 
@@ -457,7 +440,6 @@ The other thing that we still need to have a closer look is the second parameter
       })
   }, []) // highlight-line
 ```
-
 
 The second parameter of <em>useEffect</em> is used to [specify how often the effect is run](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect).
 The principle is that the effect is always executed after the first render of the component <i>and</i> when the value of the second parameter changes.
@@ -516,11 +498,11 @@ const App = () => {
 
 The user interface of the application has a form, in the input field of which the name of the desired currency is written. If the currency exists, the application renders the exchange rates of the currency to other currencies:
 
-![](../../images/2/32new.png)
+![browser showing currency exchange rates with eur typed and console saying fetching exchange rates](../../images/2/32new.png)
 
 The application sets the name of the currency entered to the form to the state _currency_ at the moment the button is pressed.
 
-When the _currency_ gets a new value, the application fetches it's exchange rates form the API in the effect function:
+When the _currency_ gets a new value, the application fetches its exchange rates from the API in the effect function:
 
 ```js
 const App = () => {
@@ -550,15 +532,15 @@ The effect has the following condition
 
 ```js
 if (currency) { 
-  // haetaan valuuttakurssit
+  // exchange rates are fetched
 }
 ```
 
-which prevents requesting the exchange rates just after the first render when the variable _currency_ still has the initial value, i.e. an empty string.
+which prevents requesting the exchange rates just after the first render when the variable _currency_ still has the initial value, i.e. a null value.
 
-So if the user writes e.g. <i>eur</i> in the search field, the application uses Axios to perform an HTTP GET request to the address https://open.er-api.com/v6/latest/eur and stores the response in the _rates_ state.
+So if the user writes e.g. <i>eur</i> in the search field, the application uses Axios to perform an HTTP GET request to the address <https://open.er-api.com/v6/latest/eur> and stores the response in the _rates_ state.
 
-When the user then enters another value in the search field, e.g. <i>usd</i>, the effect function is executed again and the exchange rates of the new currency are requested form the API.
+When the user then enters another value in the search field, e.g. <i>usd</i>, the effect function is executed again and the exchange rates of the new currency are requested from the API.
 
 The way presented here for making API requests might seem a bit awkward.
 This particular application could have been made completely without using the useEffect, by making the API requests directly in the form submit handler function:
@@ -584,9 +566,7 @@ However, there are situations where that technique would not work. For example, 
 
 <h4>2.18* Data for countries, step1</h4>
 
-The API [https://restcountries.com](https://restcountries.com) provides data for different countries in a machine-readable format, a so-called REST API.
-
-Create an application, in which one can look at data from various countries. The application should probably get the data from the endpoint [all](https://restcountries.com/v3.1/all).
+At [https://studies.cs.helsinki.fi/restcountries/](https://studies.cs.helsinki.fi/restcountries/) you can find a service that offers a lot of information related to different countries in a so-called machine-readable format via the REST API. Make an application that allows you to view information from different countries.
 
 The user interface is very simple. The country to be shown is found by typing a search query into the search field.
 
@@ -618,8 +598,6 @@ In this exercise, it is also enough that your application works for most countri
 
 <h4>2.20*: Data for countries, step3</h4>
 
-**There is still a lot to do in this part, so don't get stuck on this exercise!**
-
 Add to the view showing the data of a single country, the weather report for the capital of that country. There are dozens of providers for weather data. One suggested API is [https://openweathermap.org](https://openweathermap.org). Note that it might take some minutes until a generated API key is valid.
 
 ![weather report added feature](../../images/2/19x.png)
@@ -645,7 +623,7 @@ const api_key = process.env.REACT_APP_API_KEY
 // variable api_key has now the value set in startup
 ```
 
-Note that if you created the application using _npx create-react-app ..._ and you want to use a different name for your environment variable then the environment variable name must still begin with *REACT\_APP_*. You can also use a `.env` file rather than defining it on the command line each time by creating a file entitled '.env' in the root of the project and adding the following. 
+Note that if you created the application using _npx create-react-app ..._ and you want to use a different name for your environment variable then the environment variable name must still begin with *REACT\_APP_*. You can also use a `.env` file rather than defining it on the command line each time by creating a file entitled '.env' in the root of the project and adding the following.
 
 ```
 # .env

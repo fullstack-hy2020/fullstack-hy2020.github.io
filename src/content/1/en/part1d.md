@@ -38,6 +38,7 @@ const App = () => {
 The component gets access to the functions _setLeft_ and _setRight_ that it can use to update the two pieces of state.
 
 The component's state or a piece of its state can be of any type. We could implement the same functionality by saving the click count of both the <i>left</i> and <i>right</i> buttons into a single object:
+
 ```js
 {
   left: 0,
@@ -83,6 +84,7 @@ const App = () => {
 Now the component only has a single piece of state and the event handlers have to take care of changing the <i>entire application state</i>.
 
 The event handler looks a bit messy. When the left button is clicked, the following function is called:
+
 ```js
 const handleLeftClick = () => {
   const newClicks = { 
@@ -94,6 +96,7 @@ const handleLeftClick = () => {
 ```
 
 The following object is set as the new state of the application:
+
 ```js
 {
   left: clicks.left + 1,
@@ -157,7 +160,7 @@ The application appears to work. However, <i>it is forbidden in React to mutate 
 
 Storing all of the state in a single state object is a bad choice for this particular application; there's no apparent benefit and the resulting application is a lot more complex. In this case, storing the click counters into separate pieces of state is a far more suitable choice.
 
-There are situations where it can be beneficial to store a piece of application state in a more complex data structure. [The official React documentation](https://reactjs.org/docs/hooks-faq.html#should-i-use-one-or-many-state-variables) contains some helpful guidance on the topic.
+There are situations where it can be beneficial to store a piece of application state in a more complex data structure. [The official React documentation](https://react.dev/learn/choosing-the-state-structure) contains some helpful guidance on the topic.
 
 ### Handling arrays
 
@@ -224,7 +227,7 @@ const handleLeftClick = () => {
 
 However, __don't__ do this. As mentioned previously, the state of React components like _allClicks_ must not be mutated directly. Even if mutating state appears to work in some cases, it can lead to problems that are very hard to debug.
 
-Let's take a closer look at how the clicking 
+Let's take a closer look at how the clicking
 is rendered to the page:
 
 ```js
@@ -244,6 +247,95 @@ const App = () => {
 ```
 
 We call the [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) method on the _allClicks_ array that joins all the items into a single string, separated by the string passed as the function parameter, which in our case is an empty space.
+
+### Update of the state is asynchronous
+
+Let's expand the application so that it keeps track of the total number of button presses in the state _total_, whose value is always updated when the buttons are pressed:
+
+```js
+const App = () => {
+  const [left, setLeft] = useState(0)
+  const [right, setRight] = useState(0)
+  const [allClicks, setAll] = useState([])
+  const [total, setTotal] = useState(0) // highlight-line
+
+  const handleLeftClick = () => {
+    setAll(allClicks.concat('L'))
+    setLeft(left + 1)
+    setTotal(left + right)  // highlight-line
+  }
+
+  const handleRightClick = () => {
+    setAll(allClicks.concat('R'))
+    setRight(right + 1)
+    setTotal(left + right)  // highlight-line
+  }
+
+  return (
+    <div>
+      {left}
+      <button onClick={handleLeftClick}>left</button>
+      <button onClick={handleRightClick}>right</button>
+      {right}
+      <p>{allClicks.join(' ')}</p>
+      <p>total {total}</p>  // highlight-line
+    </div>
+  )
+}
+```
+
+The solution does not quite work:
+
+![browser showing 2 left|right 1, RLL total 2](../../images/1/33.png)
+
+The total number of button presses is consistently one less than the actual amount of presses, for some reason.
+
+Let us add couple of console.log statements to the event handler:
+
+```js
+const App = () => {
+  // ...
+  const handleLeftClick = () => {
+    setAll(allClicks.concat('L'))
+    console.log('left before', left)  // highlight-line
+    setLeft(left + 1)
+    console.log('left after', left)  // highlight-line
+    setTotal(left + right) 
+  }
+
+  // ...
+}
+```
+
+The console reveals the problem
+
+![devtools console showing left before 4 and left after 4](../../images/1/32.png)
+
+Even though a new value was set for _left_ by calling _setLeft(left + 1)_, the old value persists despite the update. As a result, the attempt to count button presses produces a result that is too small:
+
+```js
+setTotal(left + right) 
+```
+
+The reason for this is that a state update in React happens [asynchronously](https://react.dev/learn/queueing-a-series-of-state-updates), i.e. not immediately but "at some point" before the component is rendered again.
+
+We can fix the app as follows:
+
+```js
+const App = () => {
+  // ...
+  const handleLeftClick = () => {
+    setAll(allClicks.concat('L'))
+    const updatedLeft = left + 1
+    setLeft(updatedLeft)
+    setTotal(updatedLeft + right) 
+  }
+
+  // ...
+}
+```
+
+So now the number of button presses is definitely based on the correct number of left button presses.
 
 ### Conditional rendering
 
@@ -299,7 +391,7 @@ And in all other cases, the component renders the clicking history:
 
 The <i>History</i> component renders completely different React elements depending on the state of the application. This is called <i>conditional rendering</i>.
 
-React also offers many other ways of doing [conditional rendering](https://reactjs.org/docs/conditional-rendering.html). We will take a closer look at this in [part 2](/en/part2).
+React also offers many other ways of doing [conditional rendering](https://react.dev/learn/conditional-rendering). We will take a closer look at this in [part 2](/en/part2).
 
 Let's make one last modification to our application by refactoring it to use the _Button_ component that we defined earlier on:
 
@@ -359,7 +451,7 @@ const App = () => {
 
 ### Old React
 
-In this course, we use the [state hook](https://reactjs.org/docs/hooks-state.html) to add state to our React components, which is part of the newer versions of React and is available from version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) onwards. Before the addition of hooks, there was no way to add state to functional components. Components that required state had to be defined as [class](https://reactjs.org/docs/react-component.html) components, using the JavaScript class syntax.
+In this course, we use the [state hook](https://react.dev/learn/state-a-components-memory) to add state to our React components, which is part of the newer versions of React and is available from version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) onwards. Before the addition of hooks, there was no way to add state to functional components. Components that required state had to be defined as [class](https://react.dev/reference/react/Component) components, using the JavaScript class syntax.
 
 In this course, we have made the slightly radical decision to use hooks exclusively from day one, to ensure that we are learning the current and future variations of React. Even though functional components are the future of React, it is still important to learn the class syntax, as there are billions of lines of legacy React code that you might end up maintaining someday. The same applies to documentation and examples of React that you may stumble across on the internet.
 
@@ -375,7 +467,7 @@ Before we move on, let us remind ourselves of one of the most important rules of
 
 <h4>The first rule of web development</h4>
 
->  **Keep the browser's developer console open at all times.**
+> **Keep the browser's developer console open at all times.**
 >
 > The <i>Console</i> tab in particular should always be open, unless there is a specific reason to view another tab.
 
@@ -386,7 +478,7 @@ If and when your code fails to compile and your browser lights up like a Christm
 ![screenshot of code](../../images/1/6x.png)
 
 don't write more code but rather find and fix the problem **immediately**. There has yet to be a moment in the history of coding where code that fails to compile would miraculously start working after writing large amounts of additional code. I highly doubt that such an event will transpire during this course either.
-
+  
 Old-school, print-based debugging is always a good idea. If the component
 
 ```js
@@ -413,25 +505,25 @@ const Button = (props) => {
 
 This will immediately reveal if, for instance, one of the attributes has been misspelled when using the component.
 
-**NB** When you use _console.log_ for debugging, don't combine _objects_ in a Java-like fashion by using the plus operator. Instead of writing:
+**NB** When you use _console.log_ for debugging, don't combine _objects_ in a Java-like fashion by using the plus operator:
 
 ```js
 console.log('props value is ' + props)
 ```
-
-Separate the things you want to log to the console with a comma:
-
-```js
-console.log('props value is', props)
-```
-
-If you use the Java-like way of concatenating a string with an object, you will end up with a rather uninformative log message:
+  
+If you do that, you will end up with a rather uninformative log message:
 
 ```js
 props value is [object Object]
 ```
 
-Whereas the items separated by a comma will all be available in the browser console for further inspection.
+Instead, separate the things you want to log to the console with a comma:
+
+```js
+console.log('props value is', props)
+```
+
+In this way, the separated items will all be available in the browser console for further inspection.
 
 Logging output to the console is by no means the only way of debugging our applications. You can pause the execution of your application code in the Chrome developer console's <i>debugger</i>, by writing the command [debugger](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger) anywhere in your code.
 
@@ -454,7 +546,6 @@ You can also access the debugger without the _debugger_ command by adding breakp
 It is highly recommended to add the [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension to Chrome. It adds a new _Components_ tab to the developer tools. The new developer tools tab can be used to inspect the different React elements in the application, along with their state and props:
 
 ![screenshot react developer tools extension](../../images/1/10ea.png)
-
 
 The _App_ component's state is defined like so:
 
@@ -512,6 +603,7 @@ Event handling has proven to be a difficult topic in previous iterations of this
 For this reason, we will revisit the topic.
 
 Let's assume that we're developing this simple application with the following component <i>App</i>:
+
 ```js
 const App = () => {
   const [value, setValue] = useState(10)
@@ -559,6 +651,7 @@ index.js:2178 Warning: Expected `onClick` listener to be a function, instead got
 ```
 
 This attempt would not work either:
+
 ```js
 <button onClick={value = 0}>button</button>
 ```
@@ -580,6 +673,7 @@ The issue here is that our event handler is defined as a <i>function call</i> wh
 The _console.log_ function call gets executed when the component is rendered and for this reason, it gets printed once to the console.
 
 The following attempt is flawed as well:
+
 ```js
 <button onClick={setValue(0)}>button</button>
 ```
@@ -681,7 +775,7 @@ const App = () => {
 }
 ```
 
-The code functions correctly even though it looks complicated. 
+The code functions correctly even though it looks complicated.
 
 The event handler is now set to a function call:
 
@@ -935,9 +1029,9 @@ const App = (props) => {
   return (
     <div>
       {value}
-      <Button handleClick={setToValue(1000)} text="thousand" /> // highlight-line
-      <Button handleClick={setToValue(0)} text="reset" /> // highlight-line
-      <Button handleClick={setToValue(value + 1)} text="increment" /> // highlight-line
+      <Button handleClick={() => setToValue(1000)} text="thousand" /> // highlight-line
+      <Button handleClick={() => setToValue(0)} text="reset" /> // highlight-line
+      <Button handleClick={() => setToValue(value + 1)} text="increment" /> // highlight-line
     </div>
   )
 }
@@ -1021,17 +1115,18 @@ The internet is full of React-related material. However, we use the new style of
 
 You may find the following links useful:
 
-- The [official React documentation](https://reactjs.org/docs/hello-world.html) is worth checking out at some point, although most of it will become relevant only later on in the course. Also, everything related to class-based components is irrelevant to us;
+- The [official React documentation](https://react.dev/learn) is worth checking out at some point, although most of it will become relevant only later on in the course. Also, everything related to class-based components is irrelevant to us;
 - Some courses on [Egghead.io](https://egghead.io) like [Start learning React](https://egghead.io/courses/start-learning-react) are of high quality, and the recently updated [Beginner's Guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) is also relatively good; both courses introduce concepts that will also be introduced later on in this course. **NB** The first one uses class components but the latter uses the new functional ones.
 
 ### Web programmers oath
 
 Programming is hard, that is why I will use all the possible means to make it easier
+
 - I will have my browser developer console open all the time
 - I progress with small steps
 - I will write lots of _console.log_ statements to make sure I understand how the code behaves and to help pinpointing problems
 - If my code does not work, I will not write more code. Instead I start deleting the code until it works or just return to a state when everything was still working
-- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](http://fullstackopen.com/en/part0/general_info#how-to-ask-help-in-discord-telegam) how to ask for help
+- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](http://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord-telegram) how to ask for help
 
 </div>
 
@@ -1039,7 +1134,7 @@ Programming is hard, that is why I will use all the possible means to make it ea
 
 <h3>Exercises 1.6.-1.14.</h3>
 
-Submit your solutions to the exercises by first pushing your code to GitHub and then marking the completed exercises into 
+Submit your solutions to the exercises by first pushing your code to GitHub and then marking the completed exercises into
 the "my submissions" tab of the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 Remember, submit **all** the exercises of one part **in a single submission**. Once you have submitted your solutions for one part, **you cannot submit more exercises to that part anymore**.
@@ -1050,7 +1145,7 @@ Remember, submit **all** the exercises of one part **in a single submission**. O
 
 In some situations you may also have to run the command below from the root of the project:
 
-``` 
+```bash
 rm -rf node_modules/ && npm i
 ```
 
@@ -1058,7 +1153,7 @@ If and <i>when</i> you encounter an error message
 
 > <i>Objects are not valid as a React child</i>
 
-keep in mind the things told [here](/en/part1/introduction_to_react#do-not-render-object).
+keep in mind the things told [here](/en/part1/introduction_to_react#do-not-render-objects).
 
 <h4> 1.6: unicafe step1</h4>
 
@@ -1180,7 +1275,7 @@ Remember to keep your console open at all times. If you see this warning in your
 
 Then perform the necessary actions to make the warning disappear. Try pasting the error message into a search engine if you get stuck.
 
-<i>Typical source of an error `Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.` is Chrome extension. Try going to `chrome://extensions/` and try disabling them one by one and refreshing React app page; the error should eventually disappear.</i>
+<i>Typical source of an error _Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist._ is Chrome extension. Try going to _chrome://extensions/_ and try disabling them one by one and refreshing React app page; the error should eventually disappear.</i>
 
 **Make sure that from now on you don't see any warnings in your console!**
 
@@ -1188,7 +1283,7 @@ Then perform the necessary actions to make the warning disappear. Try pasting th
 
 The world of software engineering is filled with [anecdotes](http://www.comp.nus.edu.sg/~damithch/pages/SE-quotes.htm) that distill timeless truths from our field into short one-liners.
 
-Expand the following application by adding a button that can be clicked to display a <i>random</i> anecdote from the field of software engineering: 
+Expand the following application by adding a button that can be clicked to display a <i>random</i> anecdote from the field of software engineering:
 
 ```js
 import { useState } from 'react'
@@ -1217,7 +1312,7 @@ const App = () => {
 export default App
 ```
 
-Content of the file <i>index.js</i> is the same as in previous exercises. 
+Content of the file <i>index.js</i> is the same as in previous exercises.
 
 Find out how to generate random numbers in JavaScript, eg. via a search engine or on [Mozilla Developer Network](https://developer.mozilla.org). Remember that you can test generating random numbers e.g. straight in the console of your browser.
 

@@ -7,9 +7,11 @@ lang: en
 
 <div class="content">
 
-We will now start getting familiar with probably the most important topic of this course, namely the [React](https://reactjs.org/) library. Let's start by making a simple React application as well as getting to know the core concepts of React.
+We will now start getting familiar with probably the most important topic of this course, namely the [React](https://react.dev/) library. Let's start by making a simple React application as well as getting to know the core concepts of React.
 
 The easiest way to get started by far is by using a tool called [create-react-app](https://github.com/facebook/create-react-app). It is possible (but not necessary) to install <i>create-react-app</i> on your machine if the <i>npm</i> tool that was installed along with Node has a version number of at least <i>5.3</i>.
+
+> <i>You may also use the new generation frontend tool [Vite](https://vitejs.dev/) in this course if you wish. The create-react-app is still the tool recommended by the React team and that is why it remains the default tool to set up a React project in this course. Read [here](https://github.com/reactjs/reactjs.org/pull/5487#issuecomment-1409720741) how the React team sees the future of React tooling.</i>
 
 Let's create an application called <i>part1</i> and navigate to its directory.
 
@@ -57,7 +59,7 @@ The files <i>App.css</i>, <i>App.test.js</i>, <i>index.css</i>, <i>logo.svg</i>,
 
 ### Component
 
-The file <i>App.js</i> now defines a [React component](https://reactjs.org/docs/components-and-props.html) with the name <i>App</i>. The command on the final line of file <i>index.js</i> 
+The file <i>App.js</i> now defines a [React component](https://react.dev/learn/your-first-component) with the name <i>App</i>. The command on the final line of file <i>index.js</i>
 
 ```js
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
@@ -143,13 +145,13 @@ export default App
 
 and observe what happens in the browser console
 
-![](../../images/1/30.png)
+![browser console showing console log with arrow to "Hello from component"](../../images/1/30.png)
 
-The first rule of frontend web development: 
+The first rule of frontend web development:
 
 > <i>keep the console open all the time</i>
 
-Let us repeat this together: <i>I promise to keep the console open all the time</i> during this course, and for the rest of my life when I'm doing web development. 
+Let us repeat this together: <i>I promise to keep the console open all the time</i> during this course, and for the rest of my life when I'm doing web development.
 
 It is also possible to render dynamic content inside of a component.
 
@@ -187,7 +189,7 @@ Did you remember your promise to keep the console open? What was printed out the
 
 ### JSX
 
-It seems like React components are returning HTML markup. However, this is not the case. The layout of React components is mostly written using [JSX](https://reactjs.org/docs/introducing-jsx.html). Although JSX looks like HTML, we are dealing with a way to write JavaScript. Under the hood, JSX returned by React components is compiled into JavaScript.
+It seems like React components are returning HTML markup. However, this is not the case. The layout of React components is mostly written using [JSX](https://react.dev/learn/writing-markup-with-jsx). Although JSX looks like HTML, we are dealing with a way to write JavaScript. Under the hood, JSX returned by React components is compiled into JavaScript.
 
 After compiling, our application looks like this:
 
@@ -275,7 +277,7 @@ Another strong convention is the idea of a <i>root component</i> called <i>App</
 
 ### props: passing data to components
 
-It is possible to pass data to components using so-called [props](https://reactjs.org/docs/components-and-props.html).
+It is possible to pass data to components using so-called [props](https://react.dev/learn/passing-props-to-a-component).
 
 Let's modify the component <i>Hello</i> as follows:
 
@@ -341,7 +343,7 @@ Component <i>Hello</i> also logs the value of the object props to the console.
 
 I really hope your console was open. If it was not, remember what you promised:
 
->  <i>I promise to keep the console open all the time during this course, and for the rest of my life when I'm doing web development</i>
+> <i>I promise to keep the console open all the time during this course, and for the rest of my life when I'm doing web development</i>
 
 Software development is hard. It gets even harder if one is not using all the possible available tools such as the web-console and debug printing with _console.log_. Professionals use both <i>all the time</i> and there is no single reason why a beginner should not adopt the use of these wonderful helper methods that will make life so much easier.
 
@@ -413,7 +415,7 @@ const App = () => {
 
 However, when defining the root component of the application this is not a particularly wise thing to do, and it makes the code look a bit ugly.
 
-Because the root element is stipulated, we have "extra" div elements in the DOM tree. This can be avoided by using [fragments](https://reactjs.org/docs/fragments.html#short-syntax), i.e. by wrapping the elements to be returned by the component with an empty element:
+Because the root element is stipulated, we have "extra" div elements in the DOM tree. This can be avoided by using [fragments](https://react.dev/reference/react/Fragment), i.e. by wrapping the elements to be returned by the component with an empty element:
 
 ```js
 const App = () => {
@@ -463,7 +465,7 @@ I finally remember the promise we made
 
 The console screams in red:
 
-![](../../images/1/34new.png)
+![devtools showing error with highlight around "Objects are not valid as a React child"](../../images/1/34new.png)
 
 The core of the problem is <i>Objects are not valid as a React child</i>, i.e. the application tries to render <i>objects</i> and it fails again.
 
@@ -513,7 +515,7 @@ and age
 {friends[0].age}
 ```
 
-After correcting the error, you should clear the console error messages by pressing Ø and then reload the page content and make sure that no error messages are displayed.
+After correcting the error, you should clear the console error messages by pressing 🚫 and then reload the page content and make sure that no error messages are displayed.
 
 A small additional note to the previous one. React also allows arrays to be rendered <i>if</i> the array contains values ​​that are eligible for rendering (such as numbers or strings). So the following program would work, although the result might not be what we want:
 
@@ -546,7 +548,7 @@ You may submit all the exercises of this course into the same repository, or use
 
 One very functional file  structure for the submission repository is as follows:
 
-```
+```text
 part0
 part1
   courseinfo
@@ -560,6 +562,8 @@ part2
 See this [example submission repository](https://github.com/fullstack-hy2020/example-submission-repository)!
 
 For each part of the course, there is a directory, which further branches into directories containing a series of exercises, like "unicafe" for part 1.
+
+Most of the exercises of the course build a larger application, eg. courseinfo, unicafe and anecdotes in this part, bit by bit. It is enough to submit the completed application. You can make a commit after each exercise, but that is not compulsory. For example the course info app is built in exercises 1.1.-1.5. It is just the end result after 1.5 that you need to submit!
 
 For each web application for a series of exercises, it is recommended to submit all files relating to that application, except for the directory <i>node\_modules</i>.
 
@@ -632,7 +636,7 @@ const App = () => {
 }
 ```
 
-**WARNING** Don't try to program all the components concurrently, because that will almost certainly break down the whole app. Proceed in small steps, first make e.g. the component <i>Header</i> and only when it works for sure, you could proceed to the next component. 
+**WARNING** Don't try to program all the components concurrently, because that will almost certainly break down the whole app. Proceed in small steps, first make e.g. the component <i>Header</i> and only when it works for sure, you could proceed to the next component.
 
 Careful, small-step progress may seem slow, but it is actually <i> by far the fastest</i> way to progress. Famous software developer Robert "Uncle Bob" Martin has stated
 
@@ -658,6 +662,6 @@ const Content = ... {
 }
 ```
 
-Our application passes on information in quite a primitive way at the moment, since it is based on individual variables. We shall fix that in the [part 2](/en/part2).
+Our application passes on information in quite a primitive way at the moment, since it is based on individual variables. We shall fix that in [part 2](/en/part2), but before that, let's go to part1b to learn about JavaScript.
 
 </div>

@@ -65,7 +65,7 @@ test('renders content', () => {
 })
 ```
 
-Alun konfiguroinnin jälkeen testi renderöi komponentin  React Testing Library -kirjaston tarjoaman funktion [render](https://testing-library.com/docs/react-testing-library/api#render) avulla:
+Alun konfiguroinnin jälkeen testi renderöi komponentin  React Testing Library ‑kirjaston tarjoaman funktion [render](https://testing-library.com/docs/react-testing-library/api#render) avulla:
 
 ```js
 render(<Note note={note} />)
@@ -103,7 +103,7 @@ Itse en pidä siitä, että testit ja normaali koodi ovat samassa hakemistossa. 
 
 ### Sisällön etsiminen testattavasta komponentista
 
-React Testing Library -kirjasto tarjoaa runsaasti tapoja testattavan komponentin sisällön tutkimiseen. Itse asiassa testimme viimeisellä rivillä oleva expect on turha
+React Testing Library ‑kirjasto tarjoaa runsaasti tapoja testattavan komponentin sisällön tutkimiseen. Itse asiassa testimme viimeisellä rivillä oleva expect on turha
 
 ```js
 import React from 'react'
@@ -304,7 +304,7 @@ Testin ekspektaatio varmistaa, että <i>mock-funktiota</i> on kutsuttu täsmäll
 expect(mockHandler.mock.calls).toHaveLength(1)
 ```
 
-[Mock-oliot ja -funktiot](https://en.wikipedia.org/wiki/Mock_object) ovat testauksessa yleisesti käytettyjä valekomponentteja, joiden avulla korvataan testattavien komponenttien riippuvuuksia eli niiden tarvitsemia muita komponentteja. Mockit mahdollistavat mm. kovakoodattujen syötteiden palauttamisen ja metodikutsujen lukumäärän ja parametrien tarkkailun testauksen aikana.
+[Mock-oliot ja ‑funktiot](https://en.wikipedia.org/wiki/Mock_object) ovat testauksessa yleisesti käytettyjä valekomponentteja, joiden avulla korvataan testattavien komponenttien riippuvuuksia eli niiden tarvitsemia muita komponentteja. Mockit mahdollistavat mm. kovakoodattujen syötteiden palauttamisen ja metodikutsujen lukumäärän ja parametrien tarkkailun testauksen aikana.
 
 Esimerkissämme mock-funktio sopi tarkoitukseen erinomaisesti, sillä sen avulla on helppo varmistaa, että metodia on kutsuttu täsmälleen kerran.
 
@@ -680,7 +680,7 @@ On myös jotain tilanteita, missä komennon muoto _queryByText_ on käyttökelpo
 Komentoa voidaan hyödyntää esim. varmistamaan, että jokin asia <i>ei renderöidy</i>:
 
 ```js 
-test('renders no shit', () => {
+test('does not render this', () => {
   const note = {
     content: 'This is a reminder',
     important: true
@@ -688,7 +688,7 @@ test('renders no shit', () => {
 
   render(<Note note={note} />)
 
-  const element = screen.queryByText('do not want this shit to be rendered')
+  const element = screen.queryByText('do not want this thing to be rendered')
   expect(element).toBeNull()
 })
 ```
@@ -741,7 +741,7 @@ Suoritimme edellisessä osassa backendille integraatiotestejä, jotka testasivat
 
 Toistaiseksi kaikki frontendiin tekemämme testit ovat olleet yksittäisten komponenttien oikeellisuutta valvovia yksikkötestejä. Yksikkötestaus on toki välillä hyödyllistä, mutta kattavinkaan yksikkötestaus ei riitä antamaan riittävää luotettavuutta sille, että järjestelmä toimii kokonaisuudessaan.
 
-Voisimme tehdä myös frontendille useiden komponenttien yhteistoiminnallisuutta testaavia integraatiotestejä, mutta se on oleellisesti yksikkötestausta hankalampaa, sillä integraatiotesteissä jouduttaisiin ottamaan kantaa mm. palvelimelta haettavan datan mockaamiseen. Päätämmekin keskittyä koko sovellusta testaavien <i>end to end -testien</i> tekemiseen, jonka parissa jatkamme tämän osan seuraavassa luvussa.
+Voisimme tehdä myös frontendille useiden komponenttien yhteistoiminnallisuutta testaavia integraatiotestejä, mutta se on oleellisesti yksikkötestausta hankalampaa, sillä integraatiotesteissä jouduttaisiin ottamaan kantaa mm. palvelimelta haettavan datan mockaamiseen. Päätämmekin keskittyä koko sovellusta testaavien <i>end to end ‑testien</i> tekemiseen, jonka parissa jatkamme tämän osan seuraavassa luvussa.
 
 ### Snapshot-testaus
 

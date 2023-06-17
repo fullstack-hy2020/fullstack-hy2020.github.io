@@ -390,9 +390,9 @@ notesToShow = notes
 notesToShow.map(note => ...)
 ```
 
-ja tämä aiheuttaa ongelman, sillä arvolle _null_ ei voida kutsua metodia _filter_. 
+ja tämä aiheuttaa ongelman, sillä arvolle _null_ ei voida kutsua metodia _map_. 
 
-Kun annoimme tilalle _notes_ alkuarvoksi tyhjän taulukon, ei samaa ongelmaa esiinny, tyhjälle taulukolle on luvallista kutsua metodia _filter_.
+Kun annoimme tilalle _notes_ alkuarvoksi tyhjän taulukon, ei samaa ongelmaa esiinny, tyhjälle taulukolle on luvallista kutsua metodia _map_.
 
 Sopiva tilan alustaminen siis "peitti" ongelman, joka johtuu siitä että muistiinpanoja ei ole vielä alustettu palvelimelta haettavalla datalla.
 
@@ -444,7 +444,7 @@ Kun toisena parametrina on tyhjä taulukko <em>[]</em>, sen sisältö ei koskaan
 
 On kuitenkin tilanteita, missä efekti halutaan suorittaa muulloinkin, esim. komponentin tilan muuttuessa sopivalla tavalla.
 
-Tarkastellaan seuraavaa yksinkertaista sovellusta, jonka avulla voidaan kysellä valuuttojen vaihtokursseja [Exchange rate API](https://www.exchangerate-api.com/) -palvelusta:
+Tarkastellaan seuraavaa yksinkertaista sovellusta, jonka avulla voidaan kysellä valuuttojen vaihtokursseja [Exchange rate API](https://www.exchangerate-api.com/) ‑palvelusta:
 
 ```js
 import { useState, useEffect } from 'react'
@@ -534,7 +534,7 @@ if (currency) {
 
 joka estää valuuttakurssien hakemisen ensimmäisen renderöininin yhteydessä, eli siinä vaiheessa kuin muuttujalla _currency_ on vasta alkuarvo eli tyhjää merkkijono.
 
-Jos käyttäjä siis kirjoittaa hakukenttään esim. <i>eur</i>, suorittaa sovellus Axiosin avulla HTTP GET -pyynnön osoitteeseen https://open.er-api.com/v6/latest/eur ja tallentaa vastauksen tilaaan _rates_. 
+Jos käyttäjä siis kirjoittaa hakukenttään esim. <i>eur</i>, suorittaa sovellus Axiosin avulla HTTP GET ‑pyynnön osoitteeseen https://open.er-api.com/v6/latest/eur ja tallentaa vastauksen tilaaan _rates_. 
 
 Kun käyttäjä tämän jälkeen kirjoittaa hakukenttään jonkin toisen arvon, esim. <i>usd</i> suoritetaan efekti jälleen ja uuden valuutan kurssit haetaan.
 
@@ -564,9 +564,7 @@ On kuitenkin tilanteita, missä vastaava tekniikka ei onnistu. Esim. eräs tapa 
 
 Siirrtyään osan lopuksi hieman toisenlaiseen teemaan.
 
-RESTCountries [https://restcountries.com](https://restcountries.com) tarjoaa paljon eri maihin liittyvää tietoa koneluettavassa muodossa ns. REST API:n välityksellä.
-
-Tee sovellus, jonka avulla voit tarkastella eri maiden tietoja. Sovelluksen kannattaa hakea tiedot endpointista [all](https://restcountries.com/#api-endpoints-v3-all).
+Osoitteesta [https://studies.cs.helsinki.fi/restcountries/](https://studies.cs.helsinki.fi/restcountries/) löytyy palvelu, joka tarjoaa paljon eri maihin liittyvää tietoa koneluettavassa muodossa ns. REST API:n välityksellä. Tee sovellus, jonka avulla voit tarkastella eri maiden tietoja.
 
 Sovelluksen käyttöliittymä on yksinkertainen. Näytettävä maa haetaan kirjoittamalla hakuehto hakukenttään.
 
@@ -600,7 +598,7 @@ Tässäkin tehtävässä riittää, että ohjelmasi toimii suurella osalla maita
 
 <h4>2.20*: maiden tiedot, step3</h4>
 
-**Tässä osassa on vielä paljon tekemistä, joten älä juutu tähän tehtävään!**
+
 
 Lisää yksittäisen maan näkymään pääkaupungin säätiedotus. Säätiedotuksen tarjoavia palveluita on kymmeniä. Itse käytin [https://openweathermap.org/](https://openweathermap.org/):ia. Huomaa että api-avaimen luomisen jälkeen saattaa kulua hetki ennen kuin avain alkaa toimia.
 
@@ -623,6 +621,6 @@ const api_key = process.env.REACT_APP_API_KEY
 // muuttujassa api_key on nyt käynnistyksessä annettu API-avaimen arvo
 ```
 
-Tämä oli osan viimeinen tehtävä ja on aika sekä puskea koodi GitHubiin että merkitä tehdyt tehtävät [palautussovellukseen]https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Tämä oli osan viimeinen tehtävä ja on aika sekä puskea koodi GitHubiin että merkitä tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>

@@ -66,11 +66,13 @@ Syy sille miksi kurssin aiemmat osat käyttivät MongoDB:tä liittyvät juuri se
 
 ### Sovelluksen tietokanta
 
-Tarvitsemme sovellustamme varten relaatiotietokannan. Vaihtoehtoja on monia, käytämme kurssilla tämän hetken suosituinta Open Source -ratkaisua [PostgreSQL:ää](https://www.postgresql.org/). Voit halutessasi asentaa Postgresin (kuten tietokantaa usein kutsutaan) koneellesi. Helpommalla pääset käyttämällä jotain pilvipalveluna tarjottavaa Postgresia, esim. [ElephantSQL:ää](https://www.elephantsql.com/). Voit myös hyödyntää kurssin [osan 12](/en/part12) oppeja ja käyttää Postgresia paikallisesti Dockerin avulla.
+Tarvitsemme sovellustamme varten relaatiotietokannan. Vaihtoehtoja on monia, käytämme kurssilla tämän hetken suosituinta Open Source ‑ratkaisua [PostgreSQL:ää](https://www.postgresql.org/). Voit halutessasi asentaa Postgresin (kuten tietokantaa usein kutsutaan) koneellesi. Helpommalla pääset käyttämällä jotain pilvipalveluna tarjottavaa Postgresia, esim. [ElephantSQL:ää](https://www.elephantsql.com/).
 
-Käytämme nyt kuitenkin hyväksemme sitä, että osista 3 ja 4 tuttuille pilvipalvelualustoille Fly.io ja Heroku on mahdollista luoda sovellukselle Postgres-tietokanta.
+Käytämme nyt hyväksemme sitä, että osista 3 ja 4 tuttuille pilvipalvelualustoille Fly.io ja Heroku on mahdollista luoda sovellukselle Postgres-tietokanta.
 
 Tämän osan teoriamateriaalissa rakennetaan osissa 3 ja 4 rakennetun muistiinpanoja tallettavan sovelluksen backendendistä Postgresia käyttävä versio.
+
+Koska emme tarvitse tässä osassa mihinkään pilvessä olevaa tietokantaa (käytämme sovellusta ainoastaan paikallisesti) on eräs mahdollisuus hyödyntää kurssin [osan 12](/en/part12) oppeja ja käyttää Postgresia paikallisesti Dockerin avulla. Pilvipalveluiden Postgresohjeiden jälkeen annamme myös lyhyen ohjeen miten Postgresin saa helposti pystyn Dockerin avulla.
 
 #### Fly.io
 
@@ -123,6 +125,33 @@ Type "help" for help.
 
 postgres=# 
 ```
+
+#### Docker
+
+Tämä ohje olettaa, että hallitset Dockerin peruskäytön esim. [osan 12](/en/part12) opettamassa laajuudessa.
+
+Käynnistä Postgresin [Docker image](https://hub.docker.com/_/postgres) komennolla
+
+```bash
+docker run -e POSTGRES_PASSWORD=mysecretpassword -p 5432:5432 postgres
+```
+
+Tietokantaan saadaan psql-konsoliyhteys komennon _docker exec_ avulla. Ensin tulee selvittää kontainerin id:
+
+```bash
+$ docker ps
+CONTAINER ID   IMAGE      COMMAND                  CREATED          STATUS          PORTS                    NAMES
+ff3f49eadf27   postgres   "docker-entrypoint.s…"   31 minutes ago   Up 31 minutes   0.0.0.0:5432->5432/tcp   great_raman
+docker exec -it ff3f49eadf27 psql -U postgres postgres
+psql (15.2 (Debian 15.2-1.pgdg110+1))
+Type "help" for help.
+
+postgres=#
+```
+
+Näin määriteltynä tietokantaan talletettu data sailyy ainoastaan niin kauan kontti on olemassa. Data saadaan säilymään määrittelemällä datan talletukseen
+[volume](/en/part12/building_and_configuring_environments#persisting-data-with-volumes), katso lisää 
+[täältä](https://github.com/docker-library/docs/blob/master/postgres/README.md#pgdata).
 
 #### psql-konsolin käyttöä
 
@@ -233,7 +262,7 @@ Alustetaan sovellus tavalliseen tapaan komennolla <i>npm init</i> ja asennetaan 
 npm install express dotenv pg sequelize
 ```
 
-Näistä jälkimmäinen [Sequelize](https://sequelize.org/master/) on kirjasto, jonka kautta käytämme Postgresia. Sequelize on niin sanottu [Object relational mapping](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping) (ORM) -kirjasto, joka mahdollistaa JavaScript-olioiden tallentamisen relaatiotietokantaan ilman SQL-kielen käyttöä, samaan tapaan kuin MongoDB:n yhteydessä käyttämämme Mongoose.
+Näistä jälkimmäinen [Sequelize](https://sequelize.org/master/) on kirjasto, jonka kautta käytämme Postgresia. Sequelize on niin sanottu [Object relational mapping](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping) (ORM) ‑kirjasto, joka mahdollistaa JavaScript-olioiden tallentamisen relaatiotietokantaan ilman SQL-kielen käyttöä, samaan tapaan kuin MongoDB:n yhteydessä käyttämämme Mongoose.
 
 Testataan, että yhteyden muodostaminen onnistuu. Luodaan tiedosto <i>index.js</i> ja sille seuraava sisältö:
 
@@ -302,6 +331,12 @@ DATABASE_URL=postgres://postgres:<password>@localhost:5432/postgres
 ```
 
 Salasana on se, jonka on otettu talteen tietokantaa luodessa.
+
+Dockeria käytettäessä connect string on:
+
+```bash
+DATABASE_URL=postgres://postgres:mysecretpassword@localhost:5432/postgres
+```
 
 Connect stringin viimeinen osa <i>postgres</i> viittaa käytettävään tietokannan nimeen. Nyt se on valmiiksi luotava ja oletusarvoisesti käytössä oleva <i>postgres</i>-niminen tietokanta. Komennolla [CREATE DATABASE](https://www.postgresql.org/docs/14/sql-createdatabase.html) on tarvittaessa mahdollista luoda muita tietokantoja Postgres-tietokantainstanssiin.
 
@@ -439,7 +474,7 @@ app.listen(PORT, () => {
 
 Muutama kommentti koodista. Modelin <i>Note</i> määrittelyssä ei ole mitään kovin yllättävää, jokaiselle sarakkeelle on määritelty tyyppi, sekä tarvittaessa muut ominaisuudet, kuten se onko kyseessä taulun pääavain. Modelin määrittelyssä oleva toinen parametri sisältää <i>sequelize</i>-olion sekä muuta konfiguraatiotietoa. Määrittelimme, että taululla ei ole usein käytettyjä aikaleimasarakkeita (created\_at ja updated\_at).
 
-Määrittelimme myös <i>underscored: true</i>, joka tarkoittaa sitä, että taulujen nimet johdetaan modelien nimistä monikkomuotoisina [snake case](https://en.wikipedia.org/wiki/Snake_case) -versiona. Käytännössä tämä tarkoittaa sitä, että jos modelin nimi on, kuten tapauksessamme, <i>Note</i> päätellään siitä, että vastaavan taulun nimi on pienellä alkukirjaimella kirjoitettu nimen monikko eli <i>notes</i>. Jos taas modelin nimi olisi "kaksiosainen" esim. <i>StudyGroup</i> olisi taulun nimi <i>study_groups</i>. Sequelize mahdollistaa automaattisen taulujen nimien päättelyn sijaan myös eksplisiittisesti määriteltävät taulujen nimet.
+Määrittelimme myös <i>underscored: true</i>, joka tarkoittaa sitä, että taulujen nimet johdetaan modelien nimistä monikkomuotoisina [snake case](https://en.wikipedia.org/wiki/Snake_case) ‑versiona. Käytännössä tämä tarkoittaa sitä, että jos modelin nimi on, kuten tapauksessamme, <i>Note</i> päätellään siitä, että vastaavan taulun nimi on pienellä alkukirjaimella kirjoitettu nimen monikko eli <i>notes</i>. Jos taas modelin nimi olisi "kaksiosainen" esim. <i>StudyGroup</i> olisi taulun nimi <i>study_groups</i>. Sequelize mahdollistaa automaattisen taulujen nimien päättelyn sijaan myös eksplisiittisesti määriteltävät taulujen nimet.
 
 Sama käytäntöä nimityksien osalta koskee myös sarakkeita. Jos olisimme määritelleet, että muistiinpanoon liittyy <i>creationYear</i>, eli tieto sen luomisvuodesta, määrittelisimme sen modeliin seuraavasti:
 
@@ -569,7 +604,7 @@ Robert C. Martin: 'FP vs. OO List Processing', 0 likes
 
 ### Tietokantataulujen automaattinen luominen
 
-Sovelluksessamme on nyt yksi ikävä puoli, se olettaa että täsmälleen oikean skeeman omaava tietokanta on olemassa, eli että taulu <i>notes</i> on luotu sopivalla _create table_ -komennolla.
+Sovelluksessamme on nyt yksi ikävä puoli, se olettaa että täsmälleen oikean skeeman omaava tietokanta on olemassa, eli että taulu <i>notes</i> on luotu sopivalla _create table_ ‑komennolla.
 
 Koska ohjelmakoodi säilytetään GitHubissa, olisi järkevää säilyttää myös tietokannan luovat komennot ohjelmakoodin yhteydessä, jotta tietokannan skeema on varmasti sama mitä ohjelmakoodi odottaa. Sequelize pystyy itse asiassa generoimaan skeeman automaattisesti modelien määritelmästä modelien metodin [sync](https://sequelize.org/master/manual/model-basics.html#model-synchronization) avulla.
 

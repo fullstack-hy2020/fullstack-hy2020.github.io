@@ -7,6 +7,7 @@ lang: zh
 
 <div class="content">
 <!-- We will now start getting familiar with probably the most important topic of this course, namely the [React](https://reactjs.org/)-library. Let's start off with making a simple React application as well as getting to know the core concepts of React.-->
+
  我们现在将开始入门的可能是本课程最重要的主题，即[React](https://reactjs.org/)-库。让我们从制作一个简单的React应用开始，同时了解React的核心概念。
 
 <!-- The easiest way to get started by far is by using a tool called [create-react-app](https://github.com/facebook/create-react-app). It is possible (but not necessary) to install <i>create-react-app</i> on your machine if the <i>npm</i> tool that was installed along with Node has a version number of at least <i>5.3</i>.-->
@@ -505,9 +506,11 @@ part2
 
 <!--   <h4>1.1: course information, step1</h4>-->
 
- <h4>1.1：课程信息，第1步</h4>。
+ <h4>1.1：课程信息，第1步</h4>
 
-<i>The application that we will start working on in this exercise will be further developed in a few of the following exercises. In this and other upcoming exercise sets in this course, it is enough to only submit the final state of the application. If desired, you may also create a commit for each exercise of the series, but this is entirely optional.</i>
+<!-- <i>The application that we will start working on in this exercise will be further developed in a few of the following exercises. In this and other upcoming exercise sets in this course, it is enough to only submit the final state of the application. If desired, you may also create a commit for each exercise of the series, but this is entirely optional.</i> -->
+ 
+ <i>我们将在本练习中开始处理的应用程序将在以下几个练习中得到进一步开发。 在本课程的这个和其他即将到来的练习集中，仅提交应用程序的最终状态就足够了。 如果你想，你也可以为本系列的每个练习创建一个提交，但这不是必要的。</i>
 
 <!-- Use create-react-app to initialize a new application. Modify <i>index.js</i> to match the following-->
  使用create-react-app来初始化一个新的应用。修改<i>index.js</i>如下：

@@ -33,7 +33,6 @@ const noteReducer = (state = initialState, action) => {
 export default noteReducer
 ```
 
-
 ### Store with complex state
 
 Let's implement filtering for the notes that are displayed to the user. The user interface for the filters will be implemented with [radio buttons](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio):
@@ -72,12 +71,9 @@ const App = () => {
 }
 ```
 
-
 Since the <i>name</i> attribute of all the radio buttons is the same, they form a <i>button group</i> where only one option can be selected.
 
-
 The buttons have a change handler that currently only prints the string associated with the clicked button to the console.
-
 
 We decide to implement the filter functionality by storing <i>the value of the filter</i> in the redux store in addition to the notes themselves. The state of the store should look like this after making these changes:
 
@@ -91,11 +87,9 @@ We decide to implement the filter functionality by storing <i>the value of the f
 }
 ```
 
-
 Only the array of notes is stored in the state of the current implementation of our application. In the new implementation, the state object has two properties, <i>notes</i> that contains the array of notes and <i>filter</i> that contains a string indicating which notes should be displayed to the user.
 
 ### Combined reducers
-
 
 We could modify our current reducer to deal with the new shape of the state. However, a better solution in this situation is to define a new separate reducer for the state of the filter:
 
@@ -110,7 +104,6 @@ const filterReducer = (state = 'ALL', action) => {
 }
 ```
 
-
 The actions for changing the state of the filter look like this:
 
 ```js
@@ -119,7 +112,6 @@ The actions for changing the state of the filter look like this:
   payload: 'IMPORTANT'
 }
 ```
-
 
 Let's also create a new _action creator_ function. We will write the code for the action creator in a new <i>src/reducers/filterReducer.js</i> module:
 
@@ -137,7 +129,6 @@ export const filterChange = filter => {
 
 export default filterReducer
 ```
-
 
 We can create the actual reducer for our application by combining the two existing reducers with the [combineReducers](https://redux.js.org/api/combinereducers) function.
 
@@ -160,7 +151,7 @@ const reducer = combineReducers({
 })
  // highlight-end
 
-const store = createStore(reducer)
+const store = createStore(reducer) // highlight-line
 
 console.log(store.getState())
 
@@ -180,14 +171,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 Since our application breaks completely at this point, we render an empty <i>div</i> element instead of the <i>App</i> component.
 
-
 The state of the store gets printed to the console:
 
 ![devtools console showing notes array data](../../images/6/4e.png)
 
-
 As we can see from the output, the store has the exact shape we wanted it to!
-
 
 Let's take a closer look at how the combined reducer is created:
 
@@ -198,9 +186,7 @@ const reducer = combineReducers({
 })
 ```
 
-
 The state of the store defined by the reducer above is an object with two properties: <i>notes</i> and <i>filter</i>. The value of the <i>notes</i> property is defined by the <i>noteReducer</i>, which does not have to deal with the other properties of the state. Likewise, the <i>filter</i> property is managed by the <i>filterReducer</i>.
-
 
 Before we make more changes to the code, let's take a look at how different actions change the state of the store defined by the combined reducer. Let's add the following to the <i>index.js</i> file:
 
@@ -213,11 +199,9 @@ store.dispatch(filterChange('IMPORTANT'))
 store.dispatch(createNote('combineReducers forms one reducer from many simple reducers'))
 ```
 
-
 By simulating the creation of a note and changing the state of the filter in this fashion, the state of the store gets logged to the console after every change that is made to the store:
 
 ![devtools console output showing notes filter and new note](../../images/6/5e.png)
-
 
 At this point, it is good to become aware of a tiny but important detail. If we add a console log statement <i>to the beginning of both reducers</i>:
 
@@ -393,9 +377,9 @@ const notes = useSelector(({ filter, notes }) => {
 })
 ```
 
-There is a slight cosmetic flaw in our application. Even though the filter is set to <i>ALL</i> by default, the associated radio button is not selected. Naturally, this issue can be fixed, but since this is an unpleasant but ultimately harmless bug we will save the fix for later. 
+There is a slight cosmetic flaw in our application. Even though the filter is set to <i>ALL</i> by default, the associated radio button is not selected. Naturally, this issue can be fixed, but since this is an unpleasant but ultimately harmless bug we will save the fix for later.
 
-The current version of the application can be found on [GitHub](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3), branch <i>part6-3</i>.
+The current version of the application can be found on [GitHub](https://github.com/fullstack-hy2020/redux-notes/tree/part6-2), branch <i>part6-2</i>.
 
 </div>
 
@@ -442,7 +426,7 @@ As we have seen so far, Redux's configuration and state management implementatio
 
 Let's start using Redux Toolkit in our application by refactoring the existing code. First, we will need to install the library:
 
-```
+```bash
 npm install @reduxjs/toolkit
 ```
 
@@ -558,7 +542,7 @@ createNote(state, action) {
 }
 ```
 
-We are mutating <em>state</em> argument's array by calling the <em>push</em> method instead of returning a new instance of the array. What's this all about? 
+We are mutating <em>state</em> argument's array by calling the <em>push</em> method instead of returning a new instance of the array. What's this all about?
 
 Redux Toolkit utilizes the [Immer](https://immerjs.github.io/immer/) library with reducers created by <em>createSlice</em> function, which makes it possible to mutate the <em>state</em> argument inside the reducer. Immer uses the mutated state to produce a new, immutable state and thus the state changes remain immutable. Note that <em>state</em> can be changed without "mutating" it, as we have done with the <em>toggleImportanceOf</em> action. In this case, the function <i>returns</i> the new state. Nevertheless mutating the state will often come in handy especially when a complex state needs to be updated.
 
@@ -582,7 +566,7 @@ import noteReducer, { createNote, toggleImportanceOf } from './reducers/noteRedu
 
 We need to alter the action type names in the tests due to the conventions of ReduxToolkit:
 
-```js 
+```js
 import noteReducer from './noteReducer'
 import deepFreeze from 'deep-freeze'
 
@@ -669,7 +653,7 @@ const noteSlice = createSlice({
 
 The following is printed to the console
 
-![](../../images/6/40new.png)
+![devtools console showing Handler,Target as null but IsRevoked as true](../../images/6/40new.png)
 
 The output is interesting but not very useful. This is about the previously mentioned Immer library used by the Redux Toolkit, which is now used internally to save the state of the Store.
 
@@ -681,7 +665,7 @@ console.log(JSON.parse(JSON.stringify(state))) // highlight-line
 
 Console output is now human readable
 
-![](../../images/6/41new.png)
+![dev tools showing array of 2 notes](../../images/6/41new.png)
 
 ### Redux DevTools
 
@@ -707,7 +691,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 ### Exercises 6.10.-6.13.
 
-Let's continue working on the anecdote application using Redux that we started in exercise 6.3. 
+Let's continue working on the anecdote application using Redux that we started in exercise 6.3.
 
 #### 6.10 Better anecdotes, step8
 

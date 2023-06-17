@@ -11,4 +11,8 @@
 
 1. Prettify your code with `npm run format`
 2. Create a new branch for your changes
-3. Create the PR from that branch to the master branch
+3. Create the PR from that branch to the source branch
+
+# Contributing with translations
+When translation of a whole new part is completed, remember to update the file src/utils/translationProgress.json
+This file tracks the progress of translations, ranging from 0 (part0) to 13 (part13). It is used in the to avoid navigation errors when the user tries to access untranslated parts of the course. At the same time, it is used to automatically redirect the user to the English material (until the part is translated). So, if you have been working on a translation, remember to update this file after completing the translation of a whole part.

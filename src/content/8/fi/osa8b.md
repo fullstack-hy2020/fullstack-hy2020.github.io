@@ -9,7 +9,7 @@ lang: fi
 
 Toteutetaan seuraavaksi React-sovellus, joka käyttää toteuttamaamme GraphQL-palvelinta. Palvelimen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3), branchissa <i>part8-3</i>.
 
-GraphQL:ää on periaatteessa mahdollista käyttää HTTP POST -pyyntöjen avulla. Seuraavassa esimerkki Postmanilla tehdystä kyselystä.
+GraphQL:ää on periaatteessa mahdollista käyttää HTTP POST ‑pyyntöjen avulla. Seuraavassa esimerkki Postmanilla tehdystä kyselystä.
 
 ![](../../images/8/8x.png)
 
@@ -726,7 +726,7 @@ Sovelluksessa on  vielä pieni ongelma. Jos yritämme vaihtaa olemattomaan nimee
 
 ![](../../images/8/23ea.png)
 
-Koska kyseessä ei ole GraphQL:n kannalta virhetilanne, ei _onError_-virheenkäsittelijän rekisteröimisestä tässä tilanteessa hyötyä.
+Koska kyseessä ei ole GraphQL:n kannalta virhetilanne, ei _onError_-virheenkäsittelijän rekisteröimisestä olisi tässä tilanteessa hyötyä.
 
 Voimme generoida virheilmoituksen _useMutation_-hookin toisena parametrina palauttaman mutaation tuloksen kertovan olion _result_ avulla.
 

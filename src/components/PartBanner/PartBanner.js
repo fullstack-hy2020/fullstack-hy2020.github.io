@@ -1,3 +1,4 @@
+import translationProgress from '../../utils/translationProgress';
 import { Banner } from '../Banner/Banner';
 import { ContentLiftup } from '../ContentLiftup/ContentLiftup';
 import React from 'react';
@@ -35,7 +36,7 @@ const partNameTranslations = {
     'React Native',
     'CI/CD',
     'Containers',
-    'Using relational databases'
+    'Using relational databases',
   ],
   zh: [
     'Web 应用的基础设施',
@@ -51,7 +52,7 @@ const partNameTranslations = {
     'React Native',
     'CI/CD',
     '容器',
-    '使用关系型数据库'
+    '使用关系型数据库',
   ],
   fr: [
     'Introduction aux applications Web',
@@ -60,20 +61,40 @@ const partNameTranslations = {
     'Programmation côté serveur avec NodeJS et Express',
     'Test des serveurs Express, gestion des utilisateurs',
     'Tester des applications React',
-    'Gestion d\'état avec Redux',
+    "Gestion d'état avec Redux",
     'React router, hooks personnalisés, application de style avec CSS et webpack',
     'GraphQL',
     'TypeScript',
     'React Native',
     'CI/CD',
     'Conteneurs',
-    'Utilisation de bases de donées relationnelles'
+    'Utilisation de bases de donées relationnelles',
+  ],
+  ptbr: [
+    'Fundamentos de aplicações web',
+    'Introdução ao React',
+    'Comunicação com o servidor',
+    'Programando um servidor com NodeJS e Express',
+    'Teste de servidores Express e Administração de Usuários',
+    'Teste de aplicações React',
+    'Gerenciamento de Estado com Redux',
+    'React router, hooks personalizados, estilização de aplicações com CSS e Webpack',
+    'GraphQL',
+    'TypeScript',
+    'React Native',
+    'CI/CD',
+    'Containers',
+    'Utilizando bancos de dados relacionais',
   ],
 };
 
 export const PartBanner = ({ lang }) => {
   // TODO change on release
   const parts = Object.keys(navigation[lang]);
+
+  function partName(lang) {
+    return lang === 'fi' ? 'Osa' : lang === 'ptbr' ? 'Parte' : 'Part';
+  }
 
   return (
     <Banner
@@ -85,6 +106,10 @@ export const PartBanner = ({ lang }) => {
           const partNames =
             partNameTranslations[lang] || partNameTranslations.en;
 
+          const summary =
+            translationProgress[lang] < part
+              ? partNames[part] + ' (english only)'
+              : partNames[part];
           return (
             <ContentLiftup
               key={partNames[part]}
@@ -94,8 +119,8 @@ export const PartBanner = ({ lang }) => {
                 alt: partNames[part],
               }}
               hoverImageSrc={require(`../../images/thumbnails/part-${part}_ovr.svg`)}
-              name={`${lang === 'fi' ? 'Osa' : 'Part'} ${part}`}
-              summary={partNames[part]}
+              name={`${partName(lang)} ${part}`}
+              summary={summary}
               path={getPartTranslationPath(lang, part)}
             />
           );

@@ -234,7 +234,7 @@ personService
  在我们进入下一部分之前，我们将看一下一个重要的工具，叫做[lint](<https://en.wikipedia.org/wiki/Lint_(软件)>)。维基百科对lint的评价如下。
 
 <!-- > <i>Generically, lint or a linter is any tool that detects and flags errors in programming languages, including stylistic errors. The term lint-like behavior is sometimes applied to the process of flagging suspicious language usage. Lint-like tools generally perform static analysis of source code.</i>-->
- > <i>一般来说，lint或linter是任何检测和标记编程语言错误的工具，包括文体错误。术语类林特行为有时被用于标记可疑的语言使用过程。类林特工具通常对源代码进行静态分析。
+ > <i>一般来说，lint或linter是任何检测和标记编程语言错误的工具，包括文体错误。术语类林特行为有时被用于标记可疑的语言使用过程。类林特工具通常对源代码进行静态分析。</i>
 
 <!-- In compiled statically typed languages like Java, IDEs like NetBeans can point out errors in the code, even ones that are more than just compile errors. Additional tools for performing [static analysis](https://en.wikipedia.org/wiki/Static_program_analysis) like [checkstyle](https://checkstyle.sourceforge.io), can be used for expanding the capabilities of the IDE to also point out problems related to style, like indentation.-->
 在像Java这样的编译静态类型语言中，像NetBeans这样的IDE可以指出代码中的错误，甚至那些不仅仅是编译错误。执行[静态分析](https://en.wikipedia.org/wiki/Static_program_analysis)的额外工具，如[checkstyle](https://checkstyle.sourceforge.io)，可用于扩展IDE的能力，以指出与风格有关的问题，如缩进。

@@ -439,7 +439,7 @@ type Mutation {
 ```
 
 <!-- Note how the resolver <i>destructures</i> the logged-in user from the context. So instead of saving _currentUser_ to a separate variable in a function-->
- 注意解析器如何从上下文中解构<i>登录的用户。所以不要把_currentUser_保存在一个函数中的单独变量中
+ 注意解析器如何从上下文中<i>解构</i>登录的用户。所以不要把_currentUser_保存在一个函数中的单独变量中
 
 ```js
 addAsFriend: async (root, args, context) => {

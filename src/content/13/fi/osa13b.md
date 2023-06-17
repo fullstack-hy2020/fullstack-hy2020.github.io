@@ -459,7 +459,7 @@ module.exports = {
 }
 ```
 
-Näin siis [määritellään](https://sequelize.org/master/manual/assocs.html#one-to-one-relationships) että <i>users</i> ja <i>notes</i> rivien välillä on <i>yhden suhde moneen</i> -yhteys. Muutimme myös <i>sync</i>-kutsuja siten että ne muuttavat taulut, jos taulujen määrittelyyn on tullut muutoksia. Kun nyt katsotaan tietokannan skeemaa konsolista, se näyttää seuraavalta:
+Näin siis [määritellään](https://sequelize.org/master/manual/assocs.html#one-to-one-relationships) että <i>users</i> ja <i>notes</i> rivien välillä on <i>yhden suhde moneen</i> ‑yhteys. Muutimme myös <i>sync</i>-kutsuja siten että ne muuttavat taulut, jos taulujen määrittelyyn on tullut muutoksia. Kun nyt katsotaan tietokannan skeemaa konsolista, se näyttää seuraavalta:
 
 ```js
 postgres=# \d users
@@ -628,7 +628,7 @@ const user = await User.findByPk(req.decodedToken.id)
 const note = await Note.create({ ...req.body, userId: user.id, date: new Date() })
 ```
 
-Syynä tälle on se, että kun määrittelimme tiedostossa <i>models/index.js</i>, että käyttäjien ja muistiinpanojen välillä on yhdestä moneen -yhteys:
+Syynä tälle on se, että kun määrittelimme tiedostossa <i>models/index.js</i>, että käyttäjien ja muistiinpanojen välillä on yhdestä moneen ‑yhteys:
 
 ```js
 const Note = require('./note')

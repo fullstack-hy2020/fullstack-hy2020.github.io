@@ -55,7 +55,7 @@ lang: zh
  React提供了创建我们自己的[自定义](https://reactjs.org/docs/hooks-custom.html)挂钩的选项。根据React的说法，自定义钩子的主要目的是促进组件中使用的逻辑的重用。
 
 <!-- > <i>Building your own Hooks lets you extract component logic into reusable functions.</i>-->
- > <i>建立你自己的钩子让你将组件逻辑提取为可重用的函数。
+ > <i>建立你自己的钩子让你将组件逻辑提取为可重用的函数。</i>
 
 
 <!-- Custom hooks are regular JavaScript functions that can use any other hooks, as long as they adhere to the [rules of hooks](/en/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks). Additionally, the name of custom hooks must start with the word _use_.-->
@@ -483,7 +483,7 @@ const App = () => {
  该应用在其他方面是完整的，但在这个练习中，你必须实现一个自定义钩子_useCountry_，它可以用来搜索作为参数给钩子的国家的细节。
 
 <!-- Use the api endpoint [full name](https://restcountries.com/#api-endpoints-v3-full-name) to fetch a country's details in a _useEffect_ hook within your custom hook.-->
- 使用api端点[全名](https://restcountries.com/#api-endpoints-v3-full-name)在你的自定义钩子的_useEffect_钩子中获取一个国家的详细信息。
+ 使用api端点[全名](https://restcountries.com/#api-endpoints-v2-full-name)在你的自定义钩子的_useEffect_钩子中获取一个国家的详细信息。
 
 <!-- Note that in this exercise it is essential to use useEffect's [second parameter](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) array to control when the effect function is executed.-->
  注意在这个练习中，使用useEffect's [第二个参数](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect)数组来控制效果函数的执行时间是很重要的。

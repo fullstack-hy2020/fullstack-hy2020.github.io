@@ -7,7 +7,7 @@ lang: en
 
 <div class="content">
 
-In addition to the eight exercises in the [React router](/en/part7/react_router) and [custom hooks](en/part7/custom_hooks) sections of this seventh part of the course material, 13 exercises continue our work on the Bloglist application that we worked on in parts four and five of the course material. Some of the following exercises are "features" that are independent of one another, meaning that there is no need to finish the exercises in any particular order. You are free to skip over a part of the exercises if you wish to do so. Quite many of the exercises are applying the advanced state management technique (Redux, React Query and context) covered in part [part 6](/en/part6).
+In addition to the eight exercises in the [React router](/en/part7/react_router) and [custom hooks](/en/part7/custom_hooks) sections of this seventh part of the course material, 13 exercises continue our work on the Bloglist application that we worked on in parts four and five of the course material. Some of the following exercises are "features" that are independent of one another, meaning that there is no need to finish the exercises in any particular order. You are free to skip over a part of the exercises if you wish to do so. Quite many of the exercises are applying the advanced state management technique (Redux, React Query and context) covered in part [part 6](/en/part6).
 
 If you do not want to use your Bloglist application, you are free to use the code from the model solution as a starting point for these exercises.
 
@@ -35,9 +35,7 @@ Take Prettier to use in your app and configure it to work with your editor.
 
 #### 7.10: Redux, step1
 
-Refactor the application from using the internal React component state to using Redux for the application's state management.
-
-Change the application's notifications to use Redux at this point of the exercise set.
+Refactor the application to use Redux to manage the notification data.
 
 #### 7.11: Redux, step2
 
@@ -57,7 +55,7 @@ Store the information about the signed-in user in the Redux store.
 
 ### State management: React Query and context
 
-<i>There are two alternative versions to choose for exercises 7.10-7.13: you can do the state management of the application either using Redux or React Query and Context</i>. 
+<i>There are two alternative versions to choose for exercises 7.10-7.13: you can do the state management of the application either using Redux or React Query and Context</i>.
 
 #### 7.10: React Query and context step1
 

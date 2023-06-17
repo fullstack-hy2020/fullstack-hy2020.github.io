@@ -11,7 +11,7 @@ For a while now we have only been working on "frontend", i.e. client-side (brows
 
 Let's use a tool meant to be used during software development called [JSON Server](https://github.com/typicode/json-server) to act as our server.
 
-Create a file named <i>db.json</i> in the root directory of the previous notes project with the following content:
+Create a file named <i>db.json</i> in the root directory of the previous <i>notes</i> project with the following content:
 
 ```json
 {
@@ -69,8 +69,7 @@ In the part0 [example project](/en/part0/fundamentals_of_web_apps#running-applic
 
 The use of XHR is no longer recommended, and browsers already widely support the [fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch) method, which is based on so-called [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), instead of the event-driven model used by XHR.
 
-As a reminder from part0 (which one should <i>remember to not use</i> without a pressing reason), data was fetched using XHR in the following way: 
-
+As a reminder from part0 (which one should <i>remember to not use</i> without a pressing reason), data was fetched using XHR in the following way:
 
 ```js
 const xhttp = new XMLHttpRequest()
@@ -95,7 +94,7 @@ A synchronous way of making requests that's common in Java programming, for inst
 ```java
 HTTPRequest request = new HTTPRequest();
 
-String url = "https://fullstack-exampleapp.herokuapp.com/data.json";
+String url = "https://studies.cs.helsinki.fi/exampleapp/data.json";
 List<Note> notes = request.get(url);
 
 notes.forEach(m => {
@@ -105,7 +104,7 @@ notes.forEach(m => {
 
 In Java, the code executes line by line and stops to wait for the HTTP request, which means waiting for the command _request.get(...)_ to finish. The data returned by the command, in this case the notes, are then stored in a variable, and we begin manipulating the data in the desired manner.
 
-On the other hand, JavaScript engines, or runtime environments, follow the [asynchronous model](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop). In principle, this requires all [IO operations](https://en.wikipedia.org/wiki/Input/output) (with some exceptions) to be executed as non-blocking. This means that code execution continues immediately after calling an IO function, without waiting for it to return.
+In contrast, JavaScript engines, or runtime environments follow the [asynchronous model](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop). In principle, this requires all [IO operations](https://en.wikipedia.org/wiki/Input/output) (with some exceptions) to be executed as non-blocking. This means that code execution continues immediately after calling an IO function, without waiting for it to return.
 
 When an asynchronous operation is completed, or, more specifically, at some point after its completion, the JavaScript engine calls the event handlers registered to the operation.
 
@@ -251,7 +250,7 @@ We will get more familiar with the _npm_ tool in the [third part of the course](
 
 The red print in the error message informs us about the issue:
 
-<i>Cannot bind to port 3001. Please specify another port number either through --port argument or through the json-server.json configuration file</i> 
+<i>Cannot bind to port 3001. Please specify another port number either through --port argument or through the json-server.json configuration file</i>
 
 As we can see, the application is not able to bind itself to the [port](https://en.wikipedia.org/wiki/Port_(computer_networking)). The reason being that port 3001 is already occupied by the previously started json-server.
 
@@ -311,6 +310,7 @@ promise.then(response => {
   console.log(response)
 })
 ```
+
 The following is printed to the console:
 
 ![json object data printed to console](../../images/2/17new.png)
@@ -362,14 +362,14 @@ What's not immediately obvious, however, is where the command <em>axios.get</em>
 
 ### Effect-hooks
 
-We have already used [state hooks](https://reactjs.org/docs/hooks-state.html) that were introduced along with React version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0), which provide state to React components defined as functions - the so-called <i>functional components</i>. Version 16.8.0 also introduces [effect hooks](https://reactjs.org/docs/hooks-effect.html) as a new feature. As per the official docs:
+We have already used [state hooks](https://react.dev/learn/state-a-components-memory) that were introduced along with React version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0), which provide state to React components defined as functions - the so-called <i>functional components</i>. Version 16.8.0 also introduces [effect hooks](https://react.dev/reference/react#effect-hooks) as a new feature. As per the official docs:
 
 > <i>The Effect Hook lets you perform side effects on function components.</i>
 > <i>Data fetching, setting up a subscription, and manually changing the DOM in React components are all examples of side effects.</i>
 
 As such, effect hooks are precisely the right tool to use when fetching data from a server.
 
-Let's remove the fetching of data from <i>index.js</i>. Since we're gonna be retrieving the notes from the server, there is no longer a need to pass data as props to the <i>App</i> component. So <i>index.js</i> can be simplified to:
+Let's remove the fetching of data from <i>index.js</i>. Since we're going to be retrieving the notes from the server, there is no longer a need to pass data as props to the <i>App</i> component. So <i>index.js</i> can be simplified to:
 
 ```js
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
@@ -419,6 +419,7 @@ render 3 notes
 First, the body of the function defining the component is executed and the component is rendered for the first time. At this point <i>render 0 notes</i> is printed, meaning data hasn't been fetched from the server yet.
 
 The following function, or effect in React parlance:
+
 ```js
 () => {
   console.log('effect')
@@ -473,7 +474,7 @@ const hook = () => {
 useEffect(hook, [])
 ```
 
-Now we can see more clearly that the function [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect) takes <i>two parameters</i>. The first is a function, the <i>effect</i> itself. According to the documentation:
+Now we can see more clearly that the function [useEffect](https://react.dev/reference/react/useEffect) takes <i>two parameters</i>. The first is a function, the <i>effect</i> itself. According to the documentation:
 
 > <i>By default, effects run after every completed render, but you can choose to fire it only when certain values have changed.</i>
 
@@ -519,7 +520,7 @@ We still have a problem with our application. When adding new notes, they are no
 
 The code for the application, as described so far, can be found in full on [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-4), on branch <i>part2-4</i>.
 
-### The development runtime environment 
+### The development runtime environment
 
 The configuration for the whole application has steadily grown more complex. Let's review what happens and where. The following image describes the makeup of the application
 
@@ -570,7 +571,6 @@ We continue with developing the phonebook. Store the initial state of the applic
 
 Start json-server on port 3001 and make sure that the server returns the list of people by going to the address <http://localhost:3001/persons> in the browser.
 
-
 If you receive the following error message:
 
 ```js
@@ -585,6 +585,6 @@ Error: listen EADDRINUSE 0.0.0.0:3001
 
 it means that port 3001 is already in use by another application, e.g. in use by an already running json-server. Close the other application, or change the port in case that doesn't work.
 
-Modify the application such that the initial state of the data is fetched from the server using the <i>axios</i>-library. Complete the fetching with an [Effect hook](https://reactjs.org/docs/hooks-effect.html).
+Modify the application such that the initial state of the data is fetched from the server using the <i>axios</i>-library. Complete the fetching with an [Effect hook](https://react.dev/reference/react/useEffect).
 
 </div>

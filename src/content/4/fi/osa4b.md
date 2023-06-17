@@ -139,7 +139,7 @@ afterAll(async () => {
 
 Testi importtaa tiedostoon <i>app.js</i> määritellyn Express-sovelluksen ja käärii sen funktion <i>supertest</i> avulla ns. [superagent](https://github.com/visionmedia/superagent)-olioksi. Tämä olio sijoitetaan muuttujaan <i>api</i> ja sen kautta testit voivat tehdä HTTP-pyyntöjä backendiin.
 
-Testimetodi tekee HTTP GET -pyynnön osoitteeseen <i>api/notes</i> ja varmistaa, että pyyntöön vastataan statuskoodilla 200 ja että data palautetaan oikeassa muodossa, eli että <i>Content-Type</i>:n arvo on <i>application/json</i>.
+Testimetodi tekee HTTP GET ‑pyynnön osoitteeseen <i>api/notes</i> ja varmistaa, että pyyntöön vastataan statuskoodilla 200 ja että data palautetaan oikeassa muodossa, eli että <i>Content-Type</i>:n arvo on <i>application/json</i>.
 
 Headerin arvon tarkastaminen näyttää syntaksiltaan hieman kummalliselta:
 
@@ -197,13 +197,12 @@ Pieni mutta tärkeä huomio: eristimme tämän osan [alussa](/osa4/sovelluksen_r
 
 ```js
 const app = require('./app') // varsinainen Express-sovellus
-const http = require('http')
 const config = require('./utils/config')
 const logger = require('./utils/logger')
 
-const server = http.createServer(app)
 
-server.listen(config.PORT, () => {
+
+app.listen(config.PORT, () => {
   logger.info(`Server running on port ${config.PORT}`)
 })
 ```
@@ -495,7 +494,7 @@ test('a valid note can be added ', async () => {
 })
 ```
 
-Testi ei itseasiassa mene läpi, sillä olemme vahingossa palauttaneet statuskoodin <i>200 OK</i> uuden muistiinpanon luomisen yhteydessä, parempi statuskoodi on <i>201 CREATED</i>. Muutetaan koodia siten että testi menee läpi: 
+Testi ei itse asiassa mene läpi, sillä olemme vahingossa palauttaneet statuskoodin <i>200 OK</i> uuden muistiinpanon luomisen yhteydessä, parempi statuskoodi on <i>201 CREATED</i>. Muutetaan koodia siten että testi menee läpi:
 
 ```js
 notesRouter.post('/', (request, response, next) => {
@@ -973,11 +972,11 @@ beforeEach(async () => {
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5), haarassa <i>part4-5</i>. 
 
-### Testejä tekevän full stack -sovelluskehittäjän vala
+### Testejä tekevän full stack ‑sovelluskehittäjän vala
 
-Testien tekeminen tuo ohjelmointiin jälleen uuden kerroksen haasteellisuutta. Joudumme päivittämään full stack -kehittäjän valaamme muistuttamaan siitä että sytemaattisuus on myös testejä kehitettäessä avainasemassa.
+Testien tekeminen tuo ohjelmointiin jälleen uuden kerroksen haasteellisuutta. Joudumme päivittämään full stack ‑kehittäjän valaamme muistuttamaan siitä että sytemaattisuus on myös testejä kehitettäessä avainasemassa.
 
-Full stack -ohjelmointi on <i>todella</i> hankalaa, ja sen takia lupaan hyödyntää kaikkia ohjelmointia helpottavia keinoja:
+Full stack ‑ohjelmointi on <i>todella</i> hankalaa, ja sen takia lupaan hyödyntää kaikkia ohjelmointia helpottavia keinoja:
 
 - pidän selaimen konsolin koko ajan auki
 - tarkkailen säännöllisesti selaimen network-välilehdeltä, että frontendin ja backendin välinen kommunikaatio tapahtuu oletusteni mukaan
@@ -1001,7 +1000,7 @@ Full stack -ohjelmointi on <i>todella</i> hankalaa, ja sen takia lupaan hyödynt
 
 #### 4.8: blogilistan testit, step 1
 
-Tee SuperTest-kirjastolla testit blogilistan osoitteeseen <i>/api/blogs</i> tapahtuvalle HTTP GET -pyynnölle. Testaa, että sovellus palauttaa oikean määrän JSON-muotoisia blogeja. 
+Tee SuperTest-kirjastolla testit blogilistan osoitteeseen <i>/api/blogs</i> tapahtuvalle HTTP GET ‑pyynnölle. Testaa, että sovellus palauttaa oikean määrän JSON-muotoisia blogeja. 
 
 Kun testi on valmis, refaktoroi operaatio käyttämään promisejen sijaan async/awaitia.
 
@@ -1041,7 +1040,7 @@ Muuta koodia siten, että testi menee läpi. Osassa 3 käsitelty [toJSON](/osa3/
 
 #### 4.10: blogilistan testit, step3
 
-Tee testi, joka varmistaa, että sovellukseen voi lisätä blogeja osoitteeseen <i>/api/blogs</i> tapahtuvalla HTTP POST -pyynnöllä. Testaa ainakin, että blogien määrä kasvaa yhdellä. Voit myös varmistaa, että oikeansisältöinen blogi on lisätty järjestelmään.
+Tee testi, joka varmistaa, että sovellukseen voi lisätä blogeja osoitteeseen <i>/api/blogs</i> tapahtuvalla HTTP POST ‑pyynnöllä. Testaa ainakin, että blogien määrä kasvaa yhdellä. Voit myös varmistaa, että oikeansisältöinen blogi on lisätty järjestelmään.
 
 Kun testi on valmis, refaktoroi operaatio käyttämään promisejen sijaan async/awaitia.
 
@@ -1053,7 +1052,7 @@ Laajenna ohjelmaa siten, että testi menee läpi.
 
 #### 4.12*: blogilistan testit, step5
 
-Tee testit blogin lisäämiselle eli osoitteeseen <i>/api/blogs</i> tapahtuvalle HTTP POST -pyynnölle jotka varmistavat, että jos uusi blogi ei sisällä kenttää <i>title</i> tai kenttää <i>url</i>, pyyntöön vastataan statuskoodilla <i>400 Bad Request</i>.
+Tee testit blogin lisäämiselle eli osoitteeseen <i>/api/blogs</i> tapahtuvalle HTTP POST ‑pyynnölle jotka varmistavat, että jos uusi blogi ei sisällä kenttää <i>title</i> tai kenttää <i>url</i>, pyyntöön vastataan statuskoodilla <i>400 Bad Request</i>.
 
 Laajenna toteutusta siten, että testit menevät läpi.
 

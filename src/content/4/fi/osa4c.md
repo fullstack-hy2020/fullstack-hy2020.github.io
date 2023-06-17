@@ -9,7 +9,7 @@ lang: fi
 
 Haluamme toteuttaa sovellukseemme käyttäjien hallinnan. Käyttäjät tulee tallettaa tietokantaan, ja jokaisesta muistiinpanosta tulee tietää sen luonut käyttäjä. Muistiinpanojen poiston ja editoinnin tulee olla sallittua ainoastaan muistiinpanot tehneelle käyttäjälle.
 
-Aloitetaan lisäämällä tietokantaan tieto käyttäjistä. Käyttäjän <i>User</i> ja muistiinpanojen <i>Note</i> välillä on yhden suhde moneen -yhteys:
+Aloitetaan lisäämällä tietokantaan tieto käyttäjistä. Käyttäjän <i>User</i> ja muistiinpanojen <i>Note</i> välillä on yhden suhde moneen ‑yhteys:
 
 ![Yhteen käyttäjään liittyy monta muistiinpanoa eli UML:nä User 1 --- * Note](https://yuml.me/a187045b.png)
 
@@ -203,7 +203,7 @@ Asennetaan salasanojen hashaamiseen käyttämämme [bcrypt](https://github.com/k
 npm install bcrypt
 ```
 
-Käyttäjien luominen tapahtuu osassa 3 läpikäytyjä [RESTful](/osa3/node_js_ja_express#rest)-periaatteita seuraten tekemällä HTTP POST -pyyntö polkuun <i>users</i>.
+Käyttäjien luominen tapahtuu osassa 3 läpikäytyjä [RESTful](/osa3/node_js_ja_express#rest)-periaatteita seuraten tekemällä HTTP POST ‑pyyntö polkuun <i>users</i>.
 
 Määritellään käyttäjienhallintaa varten oma <i>router</i> tiedostoon <i>controllers/users.js</i>, ja liitetään se <i>app.js</i>-tiedostossa huolehtimaan polulle <i>/api/users/</i> tulevista pyynnöistä:
 
@@ -380,6 +380,18 @@ userSchema.plugin(uniqueValidator) // highlight-line
 // ...
 ```
 
+Huom: asentaessasi kirjastoa _mongoose-unique-validator_ saatat törmätä seuraavaan virheilmoitukseen:
+
+![](../../images/4/uniq.png)
+
+Syynä tälle on se, että kirjasto ei ole kirjoitushetkellä (13.3.2023) vielä yhteensopiva Mongoosen version 7 kanssa. Jos törmäät virheeseen, voit ottaa käyttöösi Mongoosen vanhemman version suorittamalla komennon
+
+```
+npm install mongoose@6
+```
+
+Tämän jälkeen kirjaston _mongoose-unique-validator_ asentaminen onnistuu.
+
 Voisimme toteuttaa käyttäjien luomisen yhteyteen myös muita tarkistuksia, esim. onko käyttäjätunnus tarpeeksi pitkä, koostuuko se sallituista merkeistä ja onko salasana tarpeeksi hyvä. Jätämme ne kuitenkin vapaaehtoiseksi harjoitustehtäväksi.
 
 Ennen kuin menemme eteenpäin, lisätään sovellukseen alustava versio kaikki käyttäjät palauttavasta käsittelijäfunktiosta:
@@ -450,11 +462,11 @@ Huomaamme siis, että käyttäjällä on kaksi muistiinpanoa.
 
 Muistiinpanon luoneen käyttäjän id tulee näkyviin muistiinpanon yhteyteen:
 
-![Selain renderöi osoitteessa localhost:3001/api/notes taulukollisen JSON:eja joilla kentät content, important, date, id ja user, jonka arvo käyttäjäid](../../images/4/12e.png)
+![Selain renderöi osoitteessa localhost:3001/api/notes taulukollisen JSON:eja joilla kentät content, important, id ja user, jonka arvo käyttäjäid](../../images/4/12e.png)
 
 ### populate
 
-Haluaisimme API:n toimivan siten, että haettaessa esim. käyttäjien tiedot polulle <i>/api/users</i> tehtävällä HTTP GET -pyynnöllä tulisi käyttäjien tekemien muistiinpanojen id:iden lisäksi näyttää niiden sisältö. Relaatiotietokannoilla toiminnallisuus toteutettaisiin <i>liitoskyselyn</i> avulla.
+Haluaisimme API:n toimivan siten, että haettaessa esim. käyttäjien tiedot polulle <i>/api/users</i> tehtävällä HTTP GET ‑pyynnöllä tulisi käyttäjien tekemien muistiinpanojen id:iden lisäksi näyttää niiden sisältö. Relaatiotietokannoilla toiminnallisuus toteutettaisiin <i>liitoskyselyn</i> avulla.
 
 Kuten aiemmin mainittiin, eivät dokumenttitietokannat tue (kunnolla) eri kokoelmien välisiä liitoskyselyitä. Mongoose-kirjasto osaa kuitenkin tehdä liitoksen puolestamme. Mongoose toteuttaa liitoksen tekemällä useampia tietokantakyselyitä, joten siinä mielessä kyseessä on täysin erilainen tapa kuin relaatiotietokantojen liitoskyselyt, jotka ovat <i>transaktionaalisia</i>, eli liitoskyselyä tehdessä tietokannan tila ei muutu. Mongoosella tehtävä liitos taas on sellainen, että mikään ei takaa sitä, että liitettävien kokoelmien tila on konsistentti, toisin sanoen jos tehdään users- ja notes-kokoelmat liittävä kysely, kokoelmien tila saattaa muuttua kesken Mongoosen liitosoperaation.
 
@@ -503,7 +515,7 @@ notesRouter.get('/', async (request, response) => {
 
 Nyt käyttäjän tiedot tulevat muistiinpanon kenttään <i>user</i>:
 
-![Selain renderöi osoitteessa localhost:3001/api/notes taulukollisen JSON:eja joilla kentät content, important, date, id ja user. Kenttä user on olio jolla on kentät name, username ja id](../../images/4/15new.png)
+![Selain renderöi osoitteessa localhost:3001/api/notes taulukollisen JSON:eja joilla kentät content, important, id ja user. Kenttä user on olio jolla on kentät name, username ja id](../../images/4/15new.png)
 
 Korostetaan vielä, että tietokannan tasolla ei siis ole mitään määrittelyä sille, että esim. muistiinpanojen kenttään <i>user</i> talletetut id:t viittaavat <i>users</i>-kokoelman dokumentteihin.
 

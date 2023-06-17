@@ -19,7 +19,6 @@ npm install mongoose dotenv
 
 We will imitate what we did in parts [3](/en/part3/saving_data_to_mongo_db) and [4](/en/part4/structure_of_backend_application_introduction_to_testing).
 
-
 The person schema has been defined as follows:
 
 ```js
@@ -50,9 +49,9 @@ const schema = new mongoose.Schema({
 module.exports = mongoose.model('Person', schema)
 ```
 
-We also included a few validations. _required: true_, which makes sure that a value exists, is actually redundant: we already ensure that the fields exist with GraphQL. However, it is good to also keep validation in the database. 
+We also included a few validations. *required: true*, which makes sure that a value exists, is actually redundant: we already ensure that the fields exist with GraphQL. However, it is good to also keep validation in the database.
 
-We can get the application to mostly work with the following changes: 
+We can get the application to mostly work with the following changes:
 
 ```js
 // ...
@@ -109,11 +108,11 @@ const resolvers = {
 }
 ```
 
-The changes are pretty straightforward. However, there are a few noteworthy things. As we remember, in Mongo, the identifying field of an object is called <i>_id</i> and we previously had to parse the name of the field to <i>id</i> ourselves. Now GraphQL can do this automatically. 
+The changes are pretty straightforward. However, there are a few noteworthy things. As we remember, in Mongo, the identifying field of an object is called <i>_id</i> and we previously had to parse the name of the field to <i>id</i> ourselves. Now GraphQL can do this automatically.
 
-Another noteworthy thing is that the resolver functions now return a <i>promise</i>, when they previously returned normal objects. When a resolver returns a promise, Apollo server [sends back](https://www.apollographql.com/docs/apollo-server/data/data/#resolver-results) the value which the promise resolves to. 
+Another noteworthy thing is that the resolver functions now return a <i>promise</i>, when they previously returned normal objects. When a resolver returns a promise, Apollo server [sends back](https://www.apollographql.com/docs/apollo-server/data/data/#resolver-results) the value which the promise resolves to.
 
-For example, if the following resolver function is executed, 
+For example, if the following resolver function is executed,
 
 ```js
 allPersons: async (root, args) => {
@@ -130,7 +129,7 @@ allPersons: async (root, args) => {
 }
 ```
 
-Let's complete the _allPersons_ resolver so it takes the optional parameter _phone_ into account:
+Let's complete the *allPersons* resolver so it takes the optional parameter *phone* into account:
 
 ```js
 Query: {
@@ -145,13 +144,13 @@ Query: {
 },
 ```
 
-So if the query has not been given a parameter _phone_, all persons are returned. If the parameter has the value <i>YES</i>, the result of the query
+So if the query has not been given a parameter *phone*, all persons are returned. If the parameter has the value <i>YES</i>, the result of the query
 
 ```js
 Person.find({ phone: { $exists: true }})
 ```
 
-is returned, so the objects in which the field _phone_ has a value. If the parameter has the value <i>NO</i>, the query returns the objects in which the _phone_ field has no value: 
+is returned, so the objects in which the field *phone* has a value. If the parameter has the value <i>NO</i>, the query returns the objects in which the *phone* field has no value:
 
 ```js
 Person.find({ phone: { $exists: false }})
@@ -159,7 +158,7 @@ Person.find({ phone: { $exists: false }})
 
 ### Validation
 
-As well as in GraphQL, the input is now validated using the validations defined in the mongoose schema. For handling possible validation errors in the schema, we must add an error-handling _try/catch_ block to the _save_ method. When we end up in the catch, we throw a exception [GraphQLError](https://www.apollographql.com/docs/apollo-server/data/errors/#custom-errors) with error code : 
+As well as in GraphQL, the input is now validated using the validations defined in the mongoose schema. For handling possible validation errors in the schema, we must add an error-handling *try/catch* block to the *save* method. When we end up in the catch, we throw a exception [GraphQLError](https://www.apollographql.com/docs/apollo-server/data/errors/#custom-errors) with error code :
 
 ```js
 Mutation: {
@@ -205,15 +204,15 @@ Mutation: {
 }
 ```
 
-We have also added the Mongoose error and the data that caused the error to the <i>extensions</i> object that is used to convey more info about the cause of the error to the caller. The frontend can then display this information to the user, who can try the operation again with a better input. 
+We have also added the Mongoose error and the data that caused the error to the <i>extensions</i> object that is used to convey more info about the cause of the error to the caller. The frontend can then display this information to the user, who can try the operation again with a better input.
 
 The code of the backend can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-4), branch <i>part8-4</i>.
 
 ### User and log in
 
-Let's add user management to our application. For simplicity's sake, let's assume that all users have the same password which is hardcoded to the system. It would be straightforward to save individual passwords for all users following the principles from [part 4](/en/part4/user_administration), but because our focus is on GraphQL, we will leave out all that extra hassle this time. 
+Let's add user management to our application. For simplicity's sake, let's assume that all users have the same password which is hardcoded to the system. It would be straightforward to save individual passwords for all users following the principles from [part 4](/en/part4/user_administration), but because our focus is on GraphQL, we will leave out all that extra hassle this time.
 
-The user schema is as follows: 
+The user schema is as follows:
 
 ```js
 const mongoose = require('mongoose')
@@ -235,11 +234,11 @@ const schema = new mongoose.Schema({
 module.exports = mongoose.model('User', schema)
 ```
 
-Every user is connected to a bunch of other persons in the system through the _friends_ field. The idea is that when a user, e.g. <i>mluukkai</i>, adds a person, e.g. <i>Arto Hellas</i>, to the list, the person is added to their _friends_ list. This way, logged-in users can have their own personalized view in the application. 
+Every user is connected to a bunch of other persons in the system through the *friends* field. The idea is that when a user, e.g. <i>mluukkai</i>, adds a person, e.g. <i>Arto Hellas</i>, to the list, the person is added to their *friends* list. This way, logged-in users can have their own personalized view in the application.
 
-Logging in and identifying the user are handled the same way we used in [part 4](/en/part4/token_authentication) when we used REST, by using tokens. 
+Logging in and identifying the user are handled the same way we used in [part 4](/en/part4/token_authentication) when we used REST, by using tokens.
 
-Let's extend the schema like so: 
+Let's extend the schema like so:
 
 ```js
 type User {
@@ -269,10 +268,9 @@ type Mutation {
 }
 ```
 
-The query _me_ returns the currently logged-in user. New users are created with the _createUser_ mutation, and logging in happens with the _login_ mutation.
+The query *me* returns the currently logged-in user. New users are created with the *createUser* mutation, and logging in happens with the *login* mutation.
 
-
-The resolvers of the mutations are as follows: 
+The resolvers of the mutations are as follows:
 
 ```js
 const jwt = require('jsonwebtoken')
@@ -346,9 +344,9 @@ Just like in the previous case with REST, the idea now is that a logged-in user 
 
 In the Apollo Explorer, the header is added to a query like so:
 
-![](../../images/8/24x.png)
+![apollo explorer highlighting headers with authorization and bearer token](../../images/8/24x.png)
 
-Modify the startup of the backend by giving the function that handles the startup [startStandaloneServer](https://www.apollographql.com/docs/apollo-server/api/standalone/) another parameter [context](https://www.apollographql.com /docs/apollo-server/data/context/)
+Modify the startup of the backend by giving the function that handles the startup [startStandaloneServer](https://www.apollographql.com/docs/apollo-server/api/standalone/) another parameter [context](https://www.apollographql.com/docs/apollo-server/data/context/)
 
 ```js
 startStandaloneServer(server, {
@@ -373,9 +371,9 @@ startStandaloneServer(server, {
 
 The object returned by context is given to all resolvers as their <i>third parameter</i>. Context is the right place to do things which are shared by multiple resolvers, like [user identification](https://blog.apollographql.com/authorization-in-graphql-452b1c402a9?_ga=2.45656161.474875091.1550613879-1581139173.1549828167).
 
-So our code sets the object corresponding to the user who made the request to the _currentUser_ field of the context. If there is no user connected to the request, the value of the field is undefined. 
+So our code sets the object corresponding to the user who made the request to the *currentUser* field of the context. If there is no user connected to the request, the value of the field is undefined.
 
-The resolver of the _me_ query is very simple: it just returns the logged-in user it receives in the _currentUser_ field of the third parameter of the resolver, _context_. It's worth noting that if there is no logged-in user, i.e. there is no valid token in the header attached to the request, the query returns <i>null</i>:
+The resolver of the *me* query is very simple: it just returns the logged-in user it receives in the *currentUser* field of the third parameter of the resolver, *context*. It's worth noting that if there is no logged-in user, i.e. there is no valid token in the header attached to the request, the query returns <i>null</i>:
 
 ```js
 Query: {
@@ -385,17 +383,18 @@ Query: {
   }
 },
 ```
+
 If the header has the correct value, the query returns the user information identified by the header
 
-![](../../images/8/50new.png)
+![apollo studio showing query response object](../../images/8/50new.png)
 
 ### Friends list
 
-Let's complete the application's backend so that adding and editing persons requires logging in, and added persons are automatically added to the friends list of the user. 
+Let's complete the application's backend so that adding and editing persons requires logging in, and added persons are automatically added to the friends list of the user.
 
-Let's first remove all persons not in anyone's friends list from the database. 
+Let's first remove all persons not in anyone's friends list from the database.
 
-_addPerson_ mutation changes like so:
+*addPerson* mutation changes like so:
 
 ```js
 Mutation: {
@@ -433,9 +432,9 @@ Mutation: {
 }
 ```
 
-If a logged-in user cannot be found from the context, an _GraphQLError_ with a proper message is thrown. Creating new persons is now done with _async/await_ syntax, because if the operation is successful, the created person is added to the friends list of the user. 
+If a logged-in user cannot be found from the context, an *GraphQLError* with a proper message is thrown. Creating new persons is now done with *async/await* syntax, because if the operation is successful, the created person is added to the friends list of the user.
 
-Let's also add functionality for adding an existing user to your friends list. The mutation is as follows: 
+Let's also add functionality for adding an existing user to your friends list. The mutation is as follows:
 
 ```js
 type Mutation {
@@ -470,7 +469,7 @@ And the mutation's resolver:
   },
 ```
 
-Note how the resolver <i>destructures</i> the logged-in user from the context. So instead of saving _currentUser_ to a separate variable in a function
+Note how the resolver <i>destructures</i> the logged-in user from the context. So instead of saving *currentUser* to a separate variable in a function
 
 ```js
 addAsFriend: async (root, args, context) => {
@@ -503,9 +502,10 @@ The code of the backend can be found on [Github](https://github.com/fullstack-hy
 
 <div class="tasks">
 
-### Exercises 8.13.-8.16.
+### Exercises 8.13.-8.16
 
 The following exercises are quite likely to break your frontend. Do not worry about it yet; the frontend shall be fixed and expanded in the next chapter.
+
 #### 8.13: Database, part 1
 
 Change the library application so that it saves the data to a database. You can find the <i>mongoose schema</i> for books and authors from [here](https://github.com/fullstack-hy/misc/blob/main/library-schema.md).
@@ -522,16 +522,16 @@ type Book {
 }
 ```  
 
-so that instead of just the author's name, the book object contains all the details of the author. 
+so that instead of just the author's name, the book object contains all the details of the author.
 
-You can assume that the user will not try to add faulty books or authors, so you don't have to care about validation errors. 
+You can assume that the user will not try to add faulty books or authors, so you don't have to care about validation errors.
 
 The following things do <i>not</i> have to work just yet:
 
- - _allBooks_ query with parameters
- -  _bookCount_ field of an author object
- -  _author_ field of a book
- - _editAuthor_ mutation
+- *allBooks* query with parameters
+- *bookCount* field of an author object
+- *author* field of a book
+- *editAuthor* mutation
 
 **Note**: despite the fact that author is now an <i>object </i>  within a book, the schema for adding a book can remain same, only the <i>name</i> of the author is given as a parameter
 
@@ -549,13 +549,13 @@ type Mutation {
 
 #### 8.14: Database, part 2
 
-Complete the program so that all queries (to get _allBooks_ working with the parameter _author_ and _bookCount_ field of an author object is not required) and mutations work. 
+Complete the program so that all queries (to get *allBooks* working with the parameter *author* and *bookCount* field of an author object is not required) and mutations work.
 
 Regarding the <i>genre</i> parameter of the all books query, the situation is a bit more challenging. The solution is simple, but finding it can be a headache. You might benefit from [this](https://www.mongodb.com/docs/manual/tutorial/query-array-of-documents/).
 
 #### 8.15 Database, part 3
 
-Complete the program so that database validation errors (e.g. book title or author name being too short) are handled sensibly. This means that they cause [GraphQLError](https://www.apollographql.com/docs/apollo-server/data/errors/#custom-errors) with a suitable error message to be thrown. 
+Complete the program so that database validation errors (e.g. book title or author name being too short) are handled sensibly. This means that they cause [GraphQLError](https://www.apollographql.com/docs/apollo-server/data/errors/#custom-errors) with a suitable error message to be thrown.
 
 #### 8.16 user and logging in
 
@@ -564,7 +564,7 @@ Add user management to your application. Expand the schema like so:
 ```js
 type User {
   username: String!
-  favouriteGenre: String!
+  favoriteGenre: String!
   id: ID!
 }
 
@@ -581,7 +581,7 @@ type Mutation {
   // ...
   createUser(
     username: String!
-    favouriteGenre: String!
+    favoriteGenre: String!
   ): User
   login(
     username: String!
@@ -590,11 +590,10 @@ type Mutation {
 }
 ```
 
+Create resolvers for query *me* and the new mutations *createUser* and
+*login*. Like in the course material, you can assume all users have the same hardcoded password.
 
-Create resolvers for query _me_ and the new mutations _createUser_ and 
-_login_. Like in the course material, you can assume all users have the same hardcoded password. 
-
-Make the mutations _addBook_ and _editAuthor_ possible only if the request includes a valid token. 
+Make the mutations *addBook* and *editAuthor* possible only if the request includes a valid token.
 
 (Don't worry about fixing the frontend for the moment.)
 

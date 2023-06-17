@@ -7,9 +7,9 @@ lang: en
 
 <div class="content">
 
-Let's continue expanding our application by allowing users to add new notes. You can find the code for our current application [here](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1). 
+Let's continue expanding our application by allowing users to add new notes. You can find the code for our current application [here](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1).
 
-To get our page to update when new notes are added it's best to store the notes in the <i>App</i> component's state. Let's import the [useState](https://reactjs.org/docs/hooks-state.html) function and use it to define a piece of state that gets initialized with the initial notes array passed in the props. 
+To get our page to update when new notes are added it's best to store the notes in the <i>App</i> component's state. Let's import the [useState](https://react.dev/reference/react/useState) function and use it to define a piece of state that gets initialized with the initial notes array passed in the props.
 
 ```js
 import { useState } from 'react' // highlight-line
@@ -45,7 +45,7 @@ const App = (props) => {
 
 We can also use React Developer Tools to see that this really happens:
 
-![](../../images/2/30.png)
+![browser showing dev react tools window](../../images/2/30.png)
 
 If we wanted to start with an empty list of notes, we would set the initial value as an empty array, and since the props would not be used, we could omit the <em>props</em> parameter from the function definition:
 
@@ -102,16 +102,13 @@ const addNote = (event) => {
 }
 ```
 
-The <em>event</em> parameter is the [event](https://reactjs.org/docs/handling-events.html) that triggers the call to the event handler function: 
-
+The <em>event</em> parameter is the [event](https://react.dev/learn/responding-to-events) that triggers the call to the event handler function:
 
 The event handler immediately calls the <em>event.preventDefault()</em> method, which prevents the default action of submitting a form. The default action would, [among other things](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event), cause the page to reload.
-
 
 The target of the event stored in _event.target_ is logged to the console:
 
 ![button clicked with form object console](../../images/2/6e.png)
-
 
 The target in this case is the form that we have defined in our component.
 
@@ -119,8 +116,7 @@ How do we access the data contained in the form's <i>input</i> element?
 
 ### Controlled component
 
-There are many ways to accomplish this; the first method we will take a look at is through the use of so-called [controlled components](https://reactjs.org/docs/forms.html#controlled-components).
-
+There are many ways to accomplish this; the first method we will take a look at is through the use of so-called [controlled components](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable).
 
 Let's add a new piece of state called <em>newNote</em> for storing the user-submitted input **and** let's set it as the <i>input</i> element's <i>value</i> attribute:
 
@@ -159,7 +155,7 @@ The placeholder text stored as the initial value of the <em>newNote</em> state a
 
 ![provided value to prop without onchange console error](../../images/2/7e.png)
 
-Since we assigned a piece of the <i>App</i> component's state as the <i>value</i> attribute of the input element, the <i>App</i> component now [controls](https://reactjs.org/docs/forms.html#controlled-components) the behavior of the input element.
+Since we assigned a piece of the <i>App</i> component's state as the <i>value</i> attribute of the input element, the <i>App</i> component now [controls](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable) the behavior of the input element.
 
 To enable editing of the input element, we have to register an <i>event handler</i> that synchronizes the changes made to the input with the component's state:
 
@@ -253,7 +249,7 @@ The new note is added to the list of notes using the [concat](https://developer.
 setNotes(notes.concat(noteObject))
 ```
 
-The method does not mutate the original <em>notes</em> array, but rather creates <i>a new copy of the array with the new item added to the end</i>. This is important since we must [never mutate state directly](https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly) in React!
+The method does not mutate the original <em>notes</em> array, but rather creates <i>a new copy of the array with the new item added to the end</i>. This is important since we must [never mutate state directly](https://react.dev/learn/updating-objects-in-state#why-is-mutating-state-not-recommended-in-react) in React!
 
 The event handler also resets the value of the controlled input element by calling the <em>setNewNote</em> function of the <em>newNote</em> state:
 
@@ -342,7 +338,7 @@ The comparison operator is redundant, since the value of <em>note.important</em>
 notes.filter(note => note.important)
 ```
 
-The reason we showed the comparison operator first was to emphasize an important detail: in JavaScript <em>val1 == val2</em> does not work as expected in all situations and it's safer to use <em>val1 === val2</em> exclusively in comparisons. You can read more about the topic [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness).
+We showed the comparison operator first to emphasize an important detail: in JavaScript <em>val1 == val2</em> does not always work as expected. When performing comparisons, it's therefore safer to exclusively use <em>val1 === val2</em>. You can read more about the topic [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness).
 
 You can test out the filtering functionality by changing the initial value of the <em>showAll</em> state.
 
@@ -381,7 +377,6 @@ const App = (props) => {
   )
 }
 ```
-
 
 The displayed notes (all versus important) are controlled with a button. The event handler for the button is so simple that it has been defined directly in the attribute of the button element. The event handler switches the value of _showAll_ from true to false and vice versa:
 
@@ -447,7 +442,7 @@ The <em>newName</em> state is meant for controlling the form input element.
 
 Sometimes it can be useful to render state and other variables as text for debugging purposes. You can temporarily add the following element to the rendered component:
 
-```
+```html
 <div>debug: {newName}</div>
 ```
 
@@ -460,7 +455,6 @@ After finishing this exercise your application should look something like this:
 Note the use of the React developer tools extension in the picture above!
 
 **NB:**
-
 
 - you can use the person's name as a value of the <i>key</i> property
 - remember to prevent the default action of submitting HTML forms!
@@ -505,7 +499,6 @@ Expand your application by allowing users to add phone numbers to the phone book
 </form>
 ```
 
-
 At this point, the application could look something like this. The image also displays the application's state with the help of [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi):
 
 ![2.8 sample screenshot](../../images/2/12e.png)
@@ -517,7 +510,6 @@ Implement a search field that can be used to filter the list of people by name:
 ![2.9 sample screenshot](../../images/2/13e.png)
 
 You can implement the search field as an <i>input</i> element that is placed outside the HTML form. The filtering logic shown in the image is <i>case insensitive</i>, meaning that the search term <i>arto</i> also returns results that contain Arto with an uppercase A.
-
 
 **NB:** When you are working on new functionality, it's often useful to "hardcode" some dummy data into your application, e.g.
 
@@ -568,7 +560,7 @@ const App = () => {
 }
 ```
 
-**NB**: You might run into problems in this exercise if you define your components "in the wrong place". Now would be a good time to rehearse 
+**NB**: You might run into problems in this exercise if you define your components "in the wrong place". Now would be a good time to rehearse
 the chapter [do not define a component in another component](/en/part1/a_more_complex_state_debugging_react_apps#do-not-define-components-within-components)
 from the last part.
 

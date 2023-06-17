@@ -23,6 +23,8 @@ const LanguageSwitcher = ({ lang }) => {
       <Language language="en" active={lang} />
 
       <Language language="zh" active={lang} />
+
+      <Language language="ptbr" active={lang} />
     </div>
   );
 };

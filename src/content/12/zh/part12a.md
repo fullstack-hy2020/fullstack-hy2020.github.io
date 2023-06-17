@@ -36,7 +36,7 @@ lang: zh
 尽管应用在你的机器上运行得很好，但它就是不能在服务器上运行，这种情况并不罕见。这可能是由于某些依赖性的缺失或环境的其他差异。在这里，容器是一个很好的解决方案，因为你可以在你的机器和服务器上的同一执行环境中运行应用。这并不完美：不同的硬件可能是一个问题，但你可以限制环境之间的差异。
 
 <!-- Sometimes you may hear about the <i>"Works in my container"</i> issue. The phrase describes a situation in which the application works fine in a container running on your machine but breaks when the container is started on a server. The phrase is a play on the infamous <i>"Works on my machine"</i> issue, which containers are often promised to solve. The situation also is most likely a usage error.-->
- 有时你可能会听到<i>"在我的容器中工作"<i>问题。这句话描述了这样一种情况：应用在你的机器上运行的容器中工作正常，但当容器在服务器上启动时就会中断。这句话是对臭名昭著的<i>"在我的机器上工作"</i>问题的一种戏谑，容器通常被承诺解决这个问题。这种情况也很可能是一个使用错误。
+ 有时你可能会听到<i>"在我的容器中工作"</i>问题。这句话描述了这样一种情况：应用在你的机器上运行的容器中工作正常，但当容器在服务器上启动时就会中断。这句话是对臭名昭著的<i>"在我的机器上工作"</i>问题的一种戏谑，容器通常被承诺解决这个问题。这种情况也很可能是一个使用错误。
 
 ### About this part ###
 
@@ -76,7 +76,7 @@ lang: zh
 ### Submitting exercises and earning credits ###
 
 <!-- Submit the exercises via the [submissions system](https://studies.cs.helsinki.fi/stats/) just like in the previous parts. Exercises in this part are submitted <i>to its [own course instance](https://studies.cs.helsinki.fi/stats/courses/fs-containers)</i>.-->
- 通过[提交系统](https://studies.cs.helsinki.fi/stats/)提交练习，就像在前面的部分一样。这一部分的练习被提交<i>到其[自己的课程实例](https://studies.cs.helsinki.fi/stats/courses/fs-containers)<i>。
+ 通过[提交系统](https://studies.cs.helsinki.fi/stats/)提交练习，就像在前面的部分一样。这一部分的练习被提交<i>到其[自己的课程实例](https://studies.cs.helsinki.fi/stats/courses/fs-containers)</i>。
 
 <!-- Completing this part on containers will get you 1 credit. Note that you need to do all the exercises for earning the credit or the certificate.-->
  在集装箱上完成这部分内容将得到1个学分。注意，你需要做所有的练习来获得学分或证书。

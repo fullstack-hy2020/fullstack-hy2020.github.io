@@ -112,7 +112,7 @@ xhttp.send()
 ```java
 HTTPRequest request = new HTTPRequest();
 
-String url = "https://fullstack-exampleapp.herokuapp.com/data.json";
+String url = "https://studies.cs.helsinki.fi/exampleapp/data.json";
 List<Note> notes = request.get(url);
 
 notes.forEach(m => {
@@ -156,7 +156,7 @@ setTimeout(() => {
 在互联网上可以找到大量关于这个主题的额外材料。菲利普-罗伯茨（Philip Roberts）对这一主题的一个特别清晰的介绍是名为[事件循环到底是什么？](https://www.youtube.com/watch?v=8aGhZQkoFbQ)的主题演讲。
 
 <!-- In today's browsers, it is possible to run parallelized code with the help of so-called [web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers). The event loop of an individual browser window is, however, still only handled by a [single thread](https://medium.com/techtrument/multithreading-javascript-46156179cf9a).-->
-在今天的浏览器中，可以借助所谓的[网络工作者](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers)来运行并行化的代码。然而，单个浏览器窗口的事件循环仍然只能由一个[单线程]处理(https://medium.com/techtrument/multithreading-javascript-46156179cf9a)。
+在今天的浏览器中，可以借助所谓的[网络工作者](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers)来运行并行化的代码。然而，单个浏览器窗口的事件循环仍然只能由一个[单线程](https://medium.com/techtrument/multithreading-javascript-46156179cf9a)处理。
 
 ### npm
 
@@ -286,7 +286,7 @@ npm run server
  我们将在[课程的第三章节](/en/part3)中更加熟悉_npm_工具。
 
 <!-- **NB** The previously started json-server must be terminated before starting a new one; otherwise there will be trouble:-->
- **NB* 在启动新的json-server之前，必须先终止之前启动的json-server；否则会有麻烦。
+ **NB** 在启动新的json-server之前，必须先终止之前启动的json-server；否则会有麻烦。
 
 ![](../../images/2/15b.png)
 
@@ -348,7 +348,7 @@ console.log(promise2)
  Mozilla网站上的文档对承诺有如下说明。
 
 <!-- > <i>A Promise is an object representing the eventual completion or failure of an asynchronous operation.</i>-->
- > <i>A Promise是一个代表异步操作最终完成或失败的对象。
+ > <i>A Promise是一个代表异步操作最终完成或失败的对象。</i>
 
 <!-- In other words, a promise is an object that represents an asynchronous operation. A promise can have three distinct states:-->
  换句话说，一个承诺是一个代表异步操作的对象。一个承诺可以有三种不同的状态。
@@ -445,7 +445,7 @@ axios.get('http://localhost:3001/notes').then(response => {
 <!-- > <i>The Effect Hook lets you perform side effects on function components.</i>-->
  > <i>效果钩可以让你对函数组件执行副作用。</i>。
 <!-- > <i>Data fetching, setting up a subscription, and manually changing the DOM in React components are all examples of side effects.</i>-->
- > <i>获取数据、设置订阅、以及手动改变React组件中的DOM都是副作用的例子。
+ > <i>获取数据、设置订阅、以及手动改变React组件中的DOM都是副作用的例子。</i>
 
 <!-- As such, effect hooks are precisely the right tool to use when fetching data from a server.-->
  因此，当从服务器获取数据时，效果钩子正是正确的工具。
@@ -569,13 +569,13 @@ useEffect(hook, [])
  现在我们可以更清楚地看到，函数[useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect)实际上需要<i>两个参数</i>。第一个是一个函数，即<i>effect</i>本身。根据文档的内容。
 
 <!-- > <i>By default, effects run after every completed render, but you can choose to fire it only when certain values have changed.</i>-->
- > <i>默认情况下，效果会在每次完成渲染后运行，但你可以选择只在某些值发生变化时启动它。
+ > <i>默认情况下，效果会在每次完成渲染后运行，但你可以选择只在某些值发生变化时启动它。</i>
 
 <!-- So by default the effect is <i>always</i> run after the component has been rendered. In our case, however, we only want to execute the effect along with the first render.-->
  所以默认情况下，效果是<i>总是</i>在组件被渲染后运行。然而，在我们的例子中，我们只想在第一次渲染时执行效果。
 
 <!-- The second parameter of <em>useEffect</em> is used to [specify how often the effect is run](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect). If the second parameter is an empty array <em>[]</em>, then the effect is only run along with the first render of the component.-->
- <em>useEffect</em>的第二个参数用于[指定效果的运行频率](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect)。如果第二个参数是一个空的数组<em>[]<em>，那么效果就只在组件的第一次渲染时运行。
+ <em>useEffect</em>的第二个参数用于[指定效果的运行频率](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect)。如果第二个参数是一个空的数组<em>[]</em>，那么效果就只在组件的第一次渲染时运行。
 
 <!-- There are many possible use cases for an effect hook other than fetching data from the server. However, this use is sufficient for us, for now.-->
  除了从服务器上获取数据之外，效果钩子还有许多可能的使用情况。然而，目前这个用途对我们来说已经足够了。
@@ -695,7 +695,7 @@ Error: listen EADDRINUSE 0.0.0.0:3001
 <!-- it means that port 3001 is already in use by another application, e.g. in use by an already running json-server. Close the other application, or change the port in case that doesn't work.-->
  这意味着3001端口已经被另一个应用使用，例如，被一个已经运行的json-server使用。关闭另一个应用，或者改变端口，如果这不起作用的话。
 
-<!-- Modify the application such that the initial state of the data is fetched from the server using the <i>axios</i>-library. Complete the fetching with an [Effect hook](https://reactjs.org/docs/hooks-effect.html).-->
+<!-- Modify the application such that the initial state of the data is fetched from the server using the <i>axios</i>-library. Complete the fetching with an [Effect hook](https://reactjs.org/docs/hooks-effect.html). -->
  修改应用，使数据的初始状态是使用<i>axios</i>-library从服务器获取的。用一个[效果钩子](https://reactjs.org/docs/hooks-effect.html)来完成获取。
 
 <h4>2.12* Data for countries, step1</h4>

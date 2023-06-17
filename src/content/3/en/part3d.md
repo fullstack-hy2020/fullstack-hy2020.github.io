@@ -7,7 +7,6 @@ lang: en
 
 <div class="content">
 
-
 There are usually constraints that we want to apply to the data that is stored in our application's database. Our application shouldn't accept notes that have a missing or empty <i>content</i> property. The validity of the note is checked in the route handler:
 
 ```js
@@ -23,12 +22,9 @@ app.post('/api/notes', (request, response) => {
 })
 ```
 
-
 If the note does not have the <i>content</i> property, we respond to the request with the status code <i>400 bad request</i>.
 
-
 One smarter way of validating the format of the data before it is stored in the database is to use the [validation](https://mongoosejs.com/docs/validation.html) functionality available in Mongoose.
-
 
 We can define specific validation rules for each field in the schema:
 
@@ -58,7 +54,6 @@ app.post('/api/notes', (request, response, next) => { // highlight-line
   const note = new Note({
     content: body.content,
     important: body.important || false,
-    date: new Date(),
   })
 
   note.save()
@@ -68,7 +63,6 @@ app.post('/api/notes', (request, response, next) => { // highlight-line
     .catch(error => next(error)) // highlight-line
 })
 ```
-
 
 Let's expand the error handler to deal with these validation errors:
 
@@ -91,7 +85,7 @@ When validating an object fails, we return the following default error message f
 ![postman showing error message](../../images/3/50.png)
 
 We notice that the backend has now a problem: validations are not done when editing a note.
-The [documentation](https://github.com/blakehaswell/mongoose-unique-validator#find--updates) explains what is the problem, validations are not run by default when <i>findOneAndUpdate</i> is executed.
+The [documentation](https://github.com/blakehaswell/mongoose-unique-validator#find--updates) addresses the issue by explaining that validations are not run by default when <i>findOneAndUpdate</i> is executed.
 
 The fix is easy. Let us also reformulate the route code a bit:
 
@@ -113,7 +107,7 @@ app.put('/api/notes/:id', (request, response, next) => {
 
 ### Deploying the database backend to production
 
-The application should work almost as-is in Fly.io/Render. We do have to generate a new production build of the frontend since changes thus far were only on our backend.
+The application should work almost as-is in Fly.io/Render. We do not have to generate a new production build of the frontend since changes thus far were only on our backend.
 
 The environment variables defined in dotenv will only be used when the backend is not in <i>production mode</i>, i.e. Fly.io or Render.
 
@@ -121,13 +115,13 @@ For production, we have to set the database URL in the service that is hosting o
 
 In Fly.io that is done _fly secrets set_:
 
-```
+```bash
 fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
 ```
 
 When the app is being developed, it is more than likely that something fails. Eg. when I deployed my app for the first time with the database, not a single note was seen:
 
-![](../../images/3/fly-problem1.png)
+![browser showing no notes appearing](../../images/3/fly-problem1.png)
 
 The network tab of the browser console revealed that fetching the notes did not succeed, the request just remained for a long time in the _pending_ state until it failed with statuscode 502.
 
@@ -135,17 +129,17 @@ The browser console has to be open <i>all the time!</i>
 
 It is also vital to follow continuously the server logs. The problem became obvious when the logs were opened with  _fly logs_:
 
-![](../../images/3/fly-problem3.png)
+![fly.io server log showing connecting to undefined](../../images/3/fly-problem3.png)
 
 The database url was _undefined_, so the command *fly secrets set MONGODB\_URI* was forgotten.
 
-When using Render, the database url is given by definig the proper env in the dashboard:
+When using Render, the database url is given by defining the proper env in the dashboard:
 
-![](../../images/3/render-env.png)
+![browser render showing the MONGODB_URI env variable](../../images/3/render-env.png)
 
 The Render Dashboard shows the server logs:
 
-![](../../images/3/r7.png)
+![render dashboard with arrow pointting to server running on port 10000](../../images/3/r7.png)
 
 You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-5).
 
@@ -181,21 +175,26 @@ You can display the default error message returned by Mongoose, even though they
 
 #### 3.20*: Phonebook database, step8
 
-Add validation to your phonebook application, which will make sure that phone numbers are of the correct form. A phone number must 
-- has length of 8 or more
-- if formed of two parts that are separated by -, the first part has two or three numbers and the second part also consists of numbers
-  - eg. 09-1234556 and 040-22334455 are valid phone numbers
-  - eg. 1234556, 1-22334455 and 10-22-334455 are invalid
+Add validation to your phonebook application, which will make sure that phone numbers are of the correct form. A phone number must:
+
+- have length of 8 or more
+- be formed of two parts that are separated by -, the first part has two or three numbers and the second part also consists of numbers
+    - eg. 09-1234556 and 040-22334455 are valid phone numbers
+    - eg. 1234556, 1-22334455 and 10-22-334455 are invalid
 
 Use a [Custom validator](https://mongoosejs.com/docs/validation.html#custom-validators) to implement the second part of the validation.
 
-If an HTTP POST request tries to add a name that is already in the phonebook, the server must respond with an appropriate status code and error message.
+If an HTTP POST request tries to add a person with an invalid phone number, the server should respond with an appropriate status code and error message.
 
 #### 3.21 Deploying the database backend to production
 
 Generate a new "full stack" version of the application by creating a new production build of the frontend, and copying it to the backend repository. Verify that everything works locally by using the entire application from the address <http://localhost:3001/>.
 
 Push the latest version to Fly.io/Render and verify that everything works there as well.
+
+**NOTE**: you should deploy the BACKEND to the cloud service. If you are using Fly.io the commands should be run in the root directory of the backend (that is, in the same directory where the backend package.json is). In case of using Render, the backend must be in the root of your repository.
+
+You shall NOT be deploying the frontend directly at any stage of this part. It is just backend repository that is deployed throughout the whole part, nothing else.
 
 </div>
 
@@ -209,9 +208,9 @@ Before we move on to the next part, we will take a look at an important tool cal
 
 In compiled statically typed languages like Java, IDEs like NetBeans can point out errors in the code, even ones that are more than just compile errors. Additional tools for performing [static analysis](https://en.wikipedia.org/wiki/Static_program_analysis) like [checkstyle](https://checkstyle.sourceforge.io), can be used for expanding the capabilities of the IDE to also point out problems related to style, like indentation.
 
-In the JavaScript universe, the current leading tool for static analysis aka. "linting" is [ESlint](https://eslint.org/).
+In the JavaScript universe, the current leading tool for static analysis (aka "linting") is [ESlint](https://eslint.org/).
 
-Let's install ESlint as a development dependency to the backend project with the command:
+Let's install ESlint as a development dependency to the notes backend project with the command:
 
 ```bash
 npm install eslint --save-dev
@@ -227,7 +226,7 @@ We will answer all of the questions:
 
 ![terminal output from ESlint init](../../images/3/52new.png)
 
-The configuration will be saved in the _.eslintrc.js_ file:
+The configuration will be saved in the _.eslintrc.js_ file.  We will change `browser` to `node` in the `env` configuration:
 
 ```js
 module.exports = {
@@ -309,17 +308,13 @@ Let's not fix these issues just yet.
 
 A better alternative to executing the linter from the command line is to configure a <i>eslint-plugin</i> to the editor, that runs the linter continuously. By using the plugin you will see errors in your code immediately. You can find more information about the Visual Studio ESLint plugin [here](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
 
-
 The VS Code ESlint plugin will underline style violations with a red line:
 
 ![Screenshot of vscode ESlint plugin showing errors](../../images/3/54a.png)
 
-
 This makes errors easy to spot and fix right away.
 
-
 ESlint has a vast array of [rules](https://eslint.org/docs/rules/) that are easy to take into use by editing the <i>.eslintrc.js</i> file.
-
 
 Let's add the [eqeqeq](https://eslint.org/docs/rules/eqeqeq) rule that warns us, if equality is checked with anything but the triple equals operator. The rule is added under the <i>rules</i> field in the configuration file.
 
@@ -354,13 +349,11 @@ Let's prevent unnecessary [trailing spaces](https://eslint.org/docs/rules/no-tra
 }
 ```
 
-
 Our default configuration takes a bunch of predetermined rules into use from <i>eslint:recommended</i>:
 
 ```bash
 'extends': 'eslint:recommended',
 ```
-
 
 This includes a rule that warns about _console.log_ commands. [Disabling](https://eslint.org/docs/user-guide/configuring#configuring-rules) a rule can be accomplished by defining its "value" as 0 in the configuration file. Let's do this for the <i>no-console</i> rule in the meantime.
 

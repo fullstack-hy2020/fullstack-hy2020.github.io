@@ -64,6 +64,7 @@ We can then achieve cross-platform compatibility by using the cross-env library 
   // ...
 }
 ```
+
 **NB**: If you are deploying this application to Fly.io/Render, keep in mind that if cross-env is saved as a development dependency, it would cause an application error on your web server. To fix this, change cross-env to a production dependency by running this in the command line:
 
 ```bash
@@ -75,7 +76,6 @@ Now we can modify the way that our application runs in different modes. As an ex
 We can create our separate test database in MongoDB Atlas. This is not an optimal solution in situations where many people are developing the same application. Test execution in particular typically requires a single database instance that is not used by tests that are running concurrently.
 
 It would be better to run our tests using a database that is installed and running on the developer's local machine. The optimal solution would be to have every test execution use a separate database. This is "relatively simple" to achieve by [running Mongo in-memory](https://docs.mongodb.com/manual/core/inmemory/) or by using [Docker](https://www.docker.com) containers. We will not complicate things and will instead continue to use the MongoDB Atlas database.
-
 
 Let's make some changes to the module that defines the application's configuration:
 
@@ -164,7 +164,7 @@ In principle, the test could also have been defined as a string
 
 The problem here, however, is that when using a string, the value of the header must be exactly the same. For the regex we defined, it is acceptable that the header <i>contains</i> the string in question. The actual value of the header is <i>application/json; charset=utf-8</i>, i.e. it also contains information about character encoding. However, our test is not interested in this and therefore it is better to define the test as a regex instead of an exact string.
 
-The test contains some details that we will explore [a bit later on](/en/part4/testing_the_backend#async-await). The arrow function that defines the test is preceded by the <i>async</i> keyword and the method call for the <i>api</i> object is preceded by the <i>await</i> keyword. We will write a few tests and then take a closer look at this async/await magic. Do not concern yourself with them for now, just be assured that the example tests work correctly. The async/await syntax is related to the fact that making a request to the API is an <i>asynchronous</i> operation. The [Async/await syntax](https://jestjs.io/docs/asynchronous) can be used for writing asynchronous code with the appearance of synchronous code.
+The test contains some details that we will explore [a bit later on](/en/part4/testing_the_backend#async-await). The arrow function that defines the test is preceded by the <i>async</i> keyword and the method call for the <i>api</i> object is preceded by the <i>await</i> keyword. We will write a few tests and then take a closer look at this async/await magic. Do not concern yourself with them for now, just be assured that the example tests work correctly. The async/await syntax is related to the fact that making a request to the API is an <i>asynchronous</i> operation. The [async/await syntax](https://jestjs.io/docs/asynchronous) can be used for writing asynchronous code with the appearance of synchronous code.
 
 Once all the tests (there is currently only one) have finished running we have to close the database connection used by Mongoose. This can be easily achieved with the [afterAll](https://jestjs.io/docs/api#afterallfn-timeout) method:
 
@@ -178,10 +178,10 @@ When running your tests you may run across the following console warning:
 
 ![jest console warning about not exiting](../../images/4/8.png)
 
-The problem is quite likely caused by the Mongoose version 6.x, the problem does not appear when version 5.x is used. [Mongoose documentation](https://mongoosejs.com/docs/jest.html) does not recommend testing Mongoose applications with Jest.
+The problem is quite likely caused by the Mongoose version 6.x, the problem does not appear when version 5.x or 7.x is used. [Mongoose documentation](https://mongoosejs.com/docs/jest.html) does not recommend testing Mongoose applications with Jest.
 
 [One way](https://stackoverflow.com/questions/50687592/jest-and-mongoose-jest-has-detected-opened-handles) to get rid of this is to
-create to the directory <i>tests</i> a file <i>teardown.js</i> with the following content
+add to the directory <i>tests</i> a file <i>teardown.js</i> with the following content
 
 ```js
 module.exports = () => {
@@ -214,22 +214,21 @@ test('notes are returned as json', async () => {
   
 This third parameter sets the timeout to 100000 ms. A long timeout ensures that our test won't fail due to the time it takes to run. (A long timeout may not be what you want for tests based on performance or speed, but this is fine for our example tests).
 
-One tiny but important detail: at the [beginning](/en/part4/structure_of_backend_application_introduction_to_testing#project-structure) of this part we extracted the Express application into the <i>app.js</i> file, and the role of the <i>index.js</i> file was changed to launch the application at the specified port with Node's built-in <i>http</i> object:
+If you still encounter issues with mongoose timeouts, set `bufferTimeoutMS` variable to a value significantly higher than 10000 (10 seconds). You could set it like this at the top, right after the `require` statements. `mongoose.set("bufferTimeoutMS", 30000)`  
+  
+One tiny but important detail: at the [beginning](/en/part4/structure_of_backend_application_introduction_to_testing#project-structure) of this part we extracted the Express application into the <i>app.js</i> file, and the role of the <i>index.js</i> file was changed to launch the application at the specified port via `app.listen`:
 
 ```js
 const app = require('./app') // the actual Express app
-const http = require('http')
 const config = require('./utils/config')
 const logger = require('./utils/logger')
 
-const server = http.createServer(app)
-
-server.listen(config.PORT, () => {
+app.listen(config.PORT, () => {
   logger.info(`Server running on port ${config.PORT}`)
 })
 ```
 
-The tests only use the express application defined in the <i>app.js</i> file:
+The tests only use the Express application defined in the <i>app.js</i> file, which does not listen to any ports:
 
 ```js
 const mongoose = require('mongoose')
@@ -350,13 +349,13 @@ The database is cleared out at the beginning, and after that, we save the two no
 Let's also make the following changes to the last two tests:
 
 ```js
-test('all notes are returned', async () => {
+test('all notes are returned', async () => { // highlight-line
   const response = await api.get('/api/notes')
 
   expect(response.body).toHaveLength(initialNotes.length) // highlight-line
 })
 
-test('a specific note is within the returned notes', async () => {
+test('a specific note is within the returned notes', async () => { // highlight-line
   const response = await api.get('/api/notes')
 
   // highlight-start
@@ -395,12 +394,12 @@ The provided parameter can refer to the name of the test or the describe block. 
 npm test -- -t 'notes'
 ```
 
-**NB**: When running a single test, the mongoose connection might stay open if no tests using the connection are run. 
-The problem might be because supertest primes the connection, but Jest does not run the afterAll portion of the code. 
+**NB**: When running a single test, the mongoose connection might stay open if no tests using the connection are run.
+The problem might be because supertest primes the connection, but Jest does not run the afterAll portion of the code.
 
 ### async/await
 
-Before we write more tests let's take a look at the _async_ and _await_ keywords. 
+Before we write more tests let's take a look at the _async_ and _await_ keywords.
 
 The async/await syntax that was introduced in ES7 makes it possible to use <i>asynchronous functions that return a promise</i> in a way that makes the code look synchronous.
 
@@ -421,7 +420,7 @@ By [chaining promises](https://javascript.info/promise-chaining) we could keep t
 ```js
 Note.find({})
   .then(notes => {
-    return notes[0].remove()
+    return notes[0].deleteOne()
   })
   .then(response => {
     console.log('the first note is removed')
@@ -447,7 +446,7 @@ The slightly complicated example presented above could be implemented by using a
 
 ```js
 const notes = await Note.find({})
-const response = await notes[0].remove()
+const response = await notes[0].deleteOne()
 
 console.log('the first note is removed')
 ```
@@ -465,7 +464,7 @@ const main = async () => { // highlight-line
   const notes = await Note.find({})
   console.log('operation returned the following notes', notes)
 
-  const response = await notes[0].remove()
+  const response = await notes[0].deleteOne()
   console.log('the first note is removed')
 }
 
@@ -584,7 +583,7 @@ const initialNotes = [
 const nonExistingId = async () => {
   const note = new Note({ content: 'willremovethissoon' })
   await note.save()
-  await note.remove()
+  await note.deleteOne()
 
   return note._id.toString()
 }
@@ -688,7 +687,7 @@ afterAll(async () => {
 
 The code using promises works and the tests pass. We are ready to refactor our code to use the async/await syntax.
 
-We make the following changes to the code that takes care of adding a new note(notice that the route handler definition is preceded by the _async_ keyword):
+We make the following changes to the code that takes care of adding a new note (notice that the route handler definition is preceded by the _async_ keyword):
 
 ```js
 notesRouter.post('/', async (request, response, next) => {
@@ -811,7 +810,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 ### Eliminating the try-catch
 
-Async/await unclutters the code a bit, but the 'price' is the <i>try/catch</i> structure required for catching exceptions. 
+Async/await unclutters the code a bit, but the 'price' is the <i>try/catch</i> structure required for catching exceptions.
 All of the route handlers follow the same structure
 
 ```js
@@ -824,7 +823,7 @@ try {
 
 One starts to wonder if it would be possible to refactor the code to eliminate the <i>catch</i> from the methods?
 
-The [express-async-errors](https://github.com/davidbanham/express-async-errors) library has a solution for this. 
+The [express-async-errors](https://github.com/davidbanham/express-async-errors) library has a solution for this.
 
 Let's install the library
 
@@ -832,7 +831,7 @@ Let's install the library
 npm install express-async-errors
 ```
 
-Using the library is <i>very</i> easy. 
+Using the library is <i>very</i> easy.
 You introduce the library in <i>app.js</i>:
 
 ```js
@@ -851,7 +850,7 @@ const mongoose = require('mongoose')
 module.exports = app
 ```
 
-The 'magic' of the library allows us to eliminate the try-catch blocks completely. 
+The 'magic' of the library allows us to eliminate the try-catch blocks completely.
 For example the route for deleting a note
 
 ```js
@@ -874,7 +873,7 @@ notesRouter.delete('/:id', async (request, response) => {
 })
 ```
 
-Because of the library, we do not need the _next(exception)_ call anymore. 
+Because of the library, we do not need the _next(exception)_ call anymore.
 The library handles everything under the hood. If an exception occurs in an <i>async</i> route, the execution is automatically passed to the error handling middleware.
 
 The other routes become:
@@ -939,7 +938,7 @@ test('notes are returned as json', async () => {
 }
 ```
 
-We save the notes stored in the array into the database inside of a _forEach_ loop. The tests don't quite seem to work however, so we have added some console logs to help us find the problem. 
+We save the notes stored in the array into the database inside of a _forEach_ loop. The tests don't quite seem to work however, so we have added some console logs to help us find the problem.
 
 The console displays the following output:
 
@@ -1003,13 +1002,13 @@ Full stack development is <i> extremely hard</i>, that is why I will use all the
 
 - I will have my browser developer console open all the time
 - I will use the network tab of the browser dev tools to ensure that frontend and backend are communicating as I expect
-- I will constantly keep on eye the state of the server to make sure that the data sent there by the frontend is saved there as I expect
+- I will constantly keep an eye on the state of the server to make sure that the data sent there by the frontend is saved there as I expect
 - I will keep an eye on the database: does the backend save data there in the right format
 - I will progress in small steps
 - <i>I will write lots of _console.log_ statements to make sure I understand how the code and the tests behave and to help pinpoint problems</i>
 - If my code does not work, I will not write more code. Instead, I start deleting the code until it works or just return to a state when everything was still working
 - <i>If a test does not pass, I make sure that the tested functionality for sure works in the application</i>
-- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](https://fullstackopen.com/en/part0/general_info#how-to-ask-help-in-discord-telegam) how to ask for help
+- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](https://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord-telegram) how to ask for help
 
 </div>
 
@@ -1034,7 +1033,7 @@ Notice that you will have to make similar changes to the code that were made [in
 ![Warning to read docs on connecting mongoose to jest](../../images/4/8a.png)
 
 [One way](https://stackoverflow.com/questions/50687592/jest-and-mongoose-jest-has-detected-opened-handles) to get rid of this is to
-create to the <i>tests</i> directory a file <i>teardown.js</i> with the following content
+add to the <i>tests</i> directory a file <i>teardown.js</i> with the following content
 
 ```js
 module.exports = () => {
@@ -1048,8 +1047,8 @@ and by extending the Jest definitions in the <i>package.json</i> as follows
 {
  //...
  "jest": {
-   "testEnvironment": "node"
-   "globalTeardown": ".test/teardown.js" // highlight-line
+   "testEnvironment": "node",
+   "globalTeardown": "./tests/teardown.js" // highlight-line
  }
 }
 ```
@@ -1060,20 +1059,23 @@ and by extending the Jest definitions in the <i>package.json</i> as follows
 
 Write a test that verifies that the unique identifier property of the blog posts is named <i>id</i>, by default the database names the property <i>_id</i>. Verifying the existence of a property is easily done with Jest's [toBeDefined](https://jestjs.io/docs/en/expect#tobedefined) matcher.
 
-Make the required changes to the code so that it passes the test. The [toJSON](/en/part3/saving_data_to_mongo_db#backend-connected-to-a-database) method discussed in part 3 is an appropriate place for defining the <i>id</i> parameter.
+Make the required changes to the code so that it passes the test. The [toJSON](/en/part3/saving_data_to_mongo_db#connecting-the-backend-to-a-database) method discussed in part 3 is an appropriate place for defining the <i>id</i> parameter.
+
 #### 4.10: Blog list tests, step3
 
 Write a test that verifies that making an HTTP POST request to the <i>/api/blogs</i> URL successfully creates a new blog post. At the very least, verify that the total number of blogs in the system is increased by one. You can also verify that the content of the blog post is saved correctly to the database.
 
 Once the test is finished, refactor the operation to use async/await instead of promises.
+
 #### 4.11*: Blog list tests, step4
 
 Write a test that verifies that if the <i>likes</i> property is missing from the request, it will default to the value 0. Do not test the other properties of the created blogs yet.
 
 Make the required changes to the code so that it passes the test.
+
 #### 4.12*: Blog list tests, step5
 
-Write tests related to creating new blogs via the <i>/api/blogs</i> endpoint, that verifiy that if the <i>title</i> or <i>url</i> properties are missing from the request data, the backend responds to the request with the status code <i>400 Bad Request</i>.
+Write tests related to creating new blogs via the <i>/api/blogs</i> endpoint, that verify that if the <i>title</i> or <i>url</i> properties are missing from the request data, the backend responds to the request with the status code <i>400 Bad Request</i>.
 
 Make the required changes to the code so that it passes the test.
 

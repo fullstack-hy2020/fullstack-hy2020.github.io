@@ -83,9 +83,7 @@ The <i>start</i> npm script works because we defined it in the <i>package.json</
 }
 ```
 
-
 Even though the execution of the project works when it is started by calling _node index.js_ from the command line, it's customary for npm projects to execute such tasks as npm scripts.
-
 
 By default, the <i>package.json</i> file also defines another commonly used npm script called <i>npm test</i>. Since our project does not yet have a testing library, the _npm test_ command simply executes the following command:
 
@@ -93,9 +91,7 @@ By default, the <i>package.json</i> file also defines another commonly used npm 
 echo "Error: no test specified" && exit 1
 ```
 
-
 ### Simple web server
-
 
 Let's change the application into a web server by editing the _index.js_ files as follow:
 
@@ -123,7 +119,6 @@ We can open our humble application in the browser by visiting the address <http:
 ![hello world screen capture](../../images/3/1.png)
 
 The server works the same way regardless of the latter part of the URL. Also the address <http://localhost:3001/foo/bar> will display the same content.
-
 
 **NB** if port 3001 is already in use by some other application, then starting the server will result in the following error message:
 
@@ -172,11 +167,9 @@ const app = http.createServer((request, response) => {
 })
 ```
 
-The code uses the _createServer_ method of the [http](https://nodejs.org/docs/latest-v8.x/api/http.html) module to create a new web server. An <i>event handler</i> is registered to the server that is called <i>every time</i> an HTTP request is made to the server's address http://localhost:3001.
-
+The code uses the _createServer_ method of the [http](https://nodejs.org/docs/latest-v8.x/api/http.html) module to create a new web server. An <i>event handler</i> is registered to the server that is called <i>every time</i> an HTTP request is made to the server's address <http://localhost:3001>.
 
 The request is responded to with the status code 200, with the <i>Content-Type</i> header set to <i>text/plain</i>, and the content of the site to be returned set to <i>Hello World</i>.
-
 
 The last rows bind the http server assigned to the _app_ variable, to listen to HTTP requests sent to port 3001:
 
@@ -185,7 +178,6 @@ const PORT = 3001
 app.listen(PORT)
 console.log(`Server running on port ${PORT}`)
 ```
-
 
 The primary purpose of the backend server in this course is to offer raw data in JSON format to the frontend. For this reason, let's immediately change our server to return a hardcoded list of notes in the JSON format:
 
@@ -354,17 +346,13 @@ In the earlier version where we were only using Node, we had to transform the da
 response.end(JSON.stringify(notes))
 ```
 
-
 With express, this is no longer required, because this transformation happens automatically.
 
-
 It's worth noting that [JSON](https://en.wikipedia.org/wiki/JSON) is a string and not a JavaScript object like the value assigned to _notes_.
-
 
 The experiment shown below illustrates this point:
 
 ![node terminal demonstrating json is of type string](../../assets/3/5.png)
-
 
 The experiment above was done in the interactive [node-repl](https://nodejs.org/docs/latest-v8.x/api/repl.html). You can start the interactive node-repl by typing in _node_ in the command line. The repl is particularly useful for testing how commands work while you're writing application code. I highly recommend this!
 
@@ -372,10 +360,9 @@ The experiment above was done in the interactive [node-repl](https://nodejs.org/
 
 If we make changes to the application's code we have to restart the application to see the changes. We restart the application by first shutting it down by typing _Ctrl+C_ and then restarting the application. Compared to the convenient workflow in React where the browser automatically reloaded after changes were made, this feels slightly cumbersome.
 
-The solution to this problem is [nodemon](https://github.com/remy/nodemon): 
+The solution to this problem is [nodemon](https://github.com/remy/nodemon):
 
 > <i>nodemon will watch the files in the directory in which nodemon was started, and if any files change, nodemon will automatically restart your node application.</i>
-
 
 Let's install nodemon by defining it as a <i>development dependency</i> with the command:
 
@@ -425,7 +412,7 @@ The command is long and quite unpleasant, so let's define a dedicated <i>npm scr
 }
 ```
 
-In the script there is no need to specify the <i>node\_modules/.bin/nodemon</i> path to nodemon, because _npm_ automatically knows to search for the file from that directory. 
+In the script there is no need to specify the <i>node\_modules/.bin/nodemon</i> path to nodemon, because _npm_ automatically knows to search for the file from that directory.
 
 We can now start the server in development mode with the command:
 
@@ -433,7 +420,7 @@ We can now start the server in development mode with the command:
 npm run dev
 ```
 
-Unlike with the <i>start</i> and <i>test</i> scripts, we also have to add <i>run</i> to the command.
+Unlike with the <i>start</i> and <i>test</i> scripts, we also have to add <i>run</i> to the command because it is a non-native script.
 
 ### REST
 
@@ -539,7 +526,7 @@ When we visit the URL again in the browser, each call to the comparison function
 3 'number' '1' 'string' false
 </pre>
 
-The cause of the bug becomes clear. The _id_ variable contains a string '1', whereas the ids of notes are integers. In JavaScript, the "triple equals" comparison === considers all values of different types to not be equal by default, meaning that 1 is not '1'. 
+The cause of the bug becomes clear. The _id_ variable contains a string '1', whereas the ids of notes are integers. In JavaScript, the "triple equals" comparison === considers all values of different types to not be equal by default, meaning that 1 is not '1'.
 
 Let's fix the issue by changing the id parameter from a string into a [number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number):
 
@@ -561,7 +548,7 @@ If we search for a note with an id that does not exist, the server responds with
 
 ![network tools showing 200 and content-length 0](../../images/3/10ea.png)
 
-The HTTP status code that is returned is 200, which means that the response succeeded. There is no data sent back with the response, since the value of the <i>content-length</i> header is 0, and the same can be verified from the browser. 
+The HTTP status code that is returned is 200, which means that the response succeeded. There is no data sent back with the response, since the value of the <i>content-length</i> header is 0, and the same can be verified from the browser.
 
 The reason for this behavior is that the _note_ variable is set to _undefined_ if no matching note is found. The situation needs to be handled on the server in a better way. If no note is found, the server should respond with the status code [404 not found](https://www.rfc-editor.org/rfc/rfc9110.html#name-404-not-found) instead of 200.
 
@@ -619,7 +606,7 @@ Let's install the Postman desktop client [from here](https://www.postman.com/dow
 
 Using Postman is quite easy in this situation. It's enough to define the URL and then select the correct request type (DELETE).
 
-The backend server appears to respond correctly. By making an HTTP GET request to <http://localhost:3001/api/notes> we see that the note with the id 2 is no longer in the list, which indicates that the deletion was successful. 
+The backend server appears to respond correctly. By making an HTTP GET request to <http://localhost:3001/api/notes> we see that the note with the id 2 is no longer in the list, which indicates that the deletion was successful.
 
 Because the notes in the application are only saved to memory, the list of notes will return to its original state when we restart the application.
 
@@ -643,7 +630,7 @@ If you use *IntelliJ WebStorm* instead, you can use a similar procedure with its
 
 ### Receiving data
 
-Next, let's make it possible to add new notes to the server. Adding a note happens by making an HTTP POST request to the address http://localhost:3001/api/notes, and by sending all the information for the new note in the request [body](https://www.w3.org/Protocols/rfc2616/rfc2616-sec7.html#sec7) in JSON format.
+Next, let's make it possible to add new notes to the server. Adding a note happens by making an HTTP POST request to the address <http://localhost:3001/api/notes>, and by sending all the information for the new note in the request [body](https://www.w3.org/Protocols/rfc2616/rfc2616-sec7.html#sec7) in JSON format.
 
 To access the data easily, we need the help of the express [json-parser](https://expressjs.com/en/api.html) that is taken to use with command _app.use(express.json())_.
 
@@ -709,7 +696,7 @@ We created a new <i>create\_note.rest</i> file for the request. The request is f
 
 One benefit that the REST client has over Postman is that the requests are handily available at the root of the project repository, and they can be distributed to everyone in the development team. You can also add multiple requests in the same file using `###` separators:
 
-```
+```text
 GET http://localhost:3001/api/notes/
 
 ###
@@ -728,11 +715,10 @@ Postman also allows users to save requests, but the situation can get quite chao
 >
 > Sometimes when you're debugging, you may want to find out what headers have been set in the HTTP request. One way of accomplishing this is through the [get](http://expressjs.com/en/4x/api.html#req.get) method of the _request_ object, that can be used for getting the value of a single header. The _request_ object also has the <i>headers</i> property, that contains all of the headers of a specific request.
 >
-
 > Problems can occur with the VS REST client if you accidentally add an empty line between the top row and the row specifying the HTTP headers. In this situation, the REST client interprets this to mean that all headers are left empty, which leads to the backend server not knowing that the data it has received is in the JSON format.
 >
-
-You will be able to spot this missing <i>Content-Type</i> header if at some point in your code you print all of the request headers with the _console.log(request.headers)_ command.
+>
+> You will be able to spot this missing <i>Content-Type</i> header if at some point in your code you print all of the request headers with the _console.log(request.headers)_ command.
 
 Let's return to the application. Once we know that the application receives data correctly, it's time to finalize the handling of the request:
 
@@ -775,7 +761,6 @@ app.post('/api/notes', (request, response) => {
   const note = {
     content: body.content,
     important: body.important || false,
-    date: new Date(),
     id: generateId(),
   }
 
@@ -808,20 +793,15 @@ important: body.important || false,
 
 If the data saved in the _body_ variable has the <i>important</i> property, the expression will evaluate to its value. If the property does not exist, then the expression will evaluate to false which is defined on the right-hand side of the vertical lines.
 
-
 > To be exact, when the <i>important</i> property is <i>false</i>, then the <em>body.important || false</em> expression will in fact return the <i>false</i> from the right-hand side...
 
-
 You can find the code for our current application in its entirety in the <i>part3-1</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1).
-
 
 The code for the current state of the application is specified in branch [part3-1](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1).
 
 ![GitHub screenshot of branch 3-1](../../images/3/21.png)
 
-
 If you clone the project, run the _npm install_ command before starting the application with _npm start_ or _npm run dev_.
-
 
 One more thing before we move on to the exercises. The function for generating IDs looks currently like this:
 
@@ -833,7 +813,6 @@ const generateId = () => {
   return maxId + 1
 }
 ```
-
 
 The function body contains a row that looks a bit intriguing:
 
@@ -852,19 +831,14 @@ What exactly is happening in that line of code? <em>notes.map(n => n.id)</em> cr
 
 **NB:** It's recommended to do all of the exercises from this part into a new dedicated git repository, and place your source code right at the root of the repository. Otherwise, you will run into problems in exercise 3.10.
 
-
 **NB:** Because this is not a frontend project and we are not working with React, the application <strong>is not created</strong> with create-react-app. You initialize this project with the <em>npm init</em> command that was demonstrated earlier in this part of the material.
-
 
 **Strong recommendation:** When you are working on backend code, always keep an eye on what's going on in the terminal that is running your application.
 
-
 #### 3.1: Phonebook backend step1
-
 
 Implement a Node application that returns a hardcoded list of phonebook entries from the address <http://localhost:3001/api/persons>.
   
-
 Data:
   
 ```js
@@ -894,25 +868,27 @@ Data:
 
 Output in the browser after GET request:
   
-![JSON data of 4 poeple in browser from api/persons](../../images/3/22e.png)
+![JSON data of 4 people in browser from api/persons](../../images/3/22e.png)
 
-Notice that the forward slash in the route <i>api/persons</i> is not a special character, and is just like any other character in the string. 
+Notice that the forward slash in the route <i>api/persons</i> is not a special character, and is just like any other character in the string.
 
 The application must be started with the command _npm start_.
 
 The application must also offer an _npm run dev_ command that will run the application and restart the server whenever changes are made and saved to a file in the source code.
- 
+
 #### 3.2: Phonebook backend step2
 
 Implement a page at the address <http://localhost:3001/info> that looks roughly like this:
 
 ![Screenshot for 3.2](../../images/3/23x.png)
 
-
 The page has to show the time that the request was received and how many entries are in the phonebook at the time of processing the request.
+  
+There can only be one response.send() statement in an Express app route. Once you send a response to the client using response.send(), the request-response cycle is complete and no further response can be sent. 
+  
+To include a line space in the output, use `<br/>` tag, or wrap the statements in `<p>` tags.
 
 #### 3.3: Phonebook backend step3
-
 
 Implement the functionality for displaying the information for a single phonebook entry. The url for getting the data for a person with the id 5 should be <http://localhost:3001/api/persons/5>
 
@@ -920,31 +896,22 @@ If an entry for the given id is not found, the server has to respond with the ap
 
 #### 3.4: Phonebook backend step4
 
-
 Implement functionality that makes it possible to delete a single phonebook entry by making an HTTP DELETE request to the unique URL of that phonebook entry.
-
 
 Test that your functionality works with either Postman or the Visual Studio Code REST client.
 
-
 #### 3.5: Phonebook backend step5
-
 
 Expand the backend so that new phonebook entries can be added by making HTTP POST requests to the address <http://localhost:3001/api/persons>.
 
-
 Generate a new id for the phonebook entry with the [Math.random](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random) function. Use a big enough range for your random values so that the likelihood of creating duplicate ids is small.
-
 
 #### 3.6: Phonebook backend step6
 
-
-
-
 Implement error handling for creating new entries. The request is not allowed to succeed, if:
-- The name or number is missing 
-- The name already exists in the phonebook
 
+- The name or number is missing
+- The name already exists in the phonebook
 
 Respond to requests like these with the appropriate status code, and also send back information that explains the reason for the error, e.g.:
 
@@ -956,7 +923,6 @@ Respond to requests like these with the appropriate status code, and also send b
 
 <div class="content">
 
-
 ### About HTTP request types
 
 [The HTTP standard](https://www.rfc-editor.org/rfc/rfc9110.html#name-common-method-properties) talks about two properties related to request types, **safety** and **idempotency**.
@@ -965,48 +931,35 @@ The HTTP GET request should be <i>safe</i>:
 
 > <i>In particular, the convention has been established that the GET and HEAD methods SHOULD NOT have the significance of taking an action other than retrieval. These methods ought to be considered "safe".</i>
 
-
 Safety means that the executing request must not cause any <i>side effects</i> on the server. By side effects, we mean that the state of the database must not change as a result of the request, and the response must only return data that already exists on the server.
-
 
 Nothing can ever guarantee that a GET request is <i>safe</i>, this is just a recommendation that is defined in the HTTP standard. By adhering to RESTful principles in our API, GET requests are always used in a way that they are <i>safe</i>.
 
-
 The HTTP standard also defines the request type [HEAD](https://www.rfc-editor.org/rfc/rfc9110.html#name-head), which ought to be safe. In practice, HEAD should work exactly like GET but it does not return anything but the status code and response headers. The response body will not be returned when you make a HEAD request.
-
 
 All HTTP requests except POST should be <i>idempotent</i>:
 
 > <i>Methods can also have the property of "idempotence" in that (aside from error or expiration issues) the side-effects of N > 0 identical requests is the same as for a single request. The methods GET, HEAD, PUT and DELETE share this property</i>
 
-
 This means that if a request does not generate side effects, then the result should be the same regardless of how many times the request is sent.
-
 
 If we make an HTTP PUT request to the URL <i>/api/notes/10</i> and with the request we send the data <em>{ content: "no side effects!", important: true }</em>, the result is the same regardless of how many times the request is sent.
 
-
 Like <i>safety</i> for the GET request, <i>idempotence</i> is also just a recommendation in the HTTP standard and not something that can be guaranteed simply based on the request type. However, when our API adheres to RESTful principles, then GET, HEAD, PUT, and DELETE requests are used in such a way that they are idempotent.
 
-
 POST is the only HTTP request type that is neither <i>safe</i> nor <i>idempotent</i>. If we send 5 different HTTP POST requests to <i>/api/notes</i> with a body of <em>{content: "many same", important: true}</em>, the resulting 5 notes on the server will all have the same content.
-
 
 ### Middleware
 
 The express [json-parser](https://expressjs.com/en/api.html) we took into use earlier is a so-called [middleware](http://expressjs.com/en/guide/using-middleware.html).
 
-
 Middleware are functions that can be used for handling _request_ and _response_ objects.
 
 The json-parser we used earlier takes the raw data from the requests that are stored in the _request_ object, parses it into a JavaScript object and assigns it to the _request_ object as a new property <i>body</i>.
 
-
 In practice, you can use several middlewares at the same time. When you have more than one, they're executed one by one in the order that they were taken into use in express.
 
-
 Let's implement our own middleware that prints information about every request that is sent to the server.
-
 
 Middleware is a function that receives three parameters:
 
@@ -1030,9 +983,7 @@ app.use(requestLogger)
 
 Middleware functions are called in the order that they're taken into use with the express server object's _use_ method. Notice that json-parser is taken into use before the _requestLogger_ middleware, because otherwise <i>request.body</i> will not be initialized when the logger is executed!
 
-
 Middleware functions have to be taken into use before routes if we want them to be executed before the route event handlers are called. There are also situations where we want to define middleware functions after routes. In practice, this means that we are defining middleware functions that are only called if no route handles the HTTP request.
-
 
 Let's add the following middleware after our routes. This middleware will be used for catching requests made to non-existent routes. For these requests, the middleware will return an error message in the JSON format.
 
@@ -1043,7 +994,6 @@ const unknownEndpoint = (request, response) => {
 
 app.use(unknownEndpoint)
 ```
-
 
 You can find the code for our current application in its entirety in the <i>part3-2</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2).
 
@@ -1072,6 +1022,7 @@ Note that logging data even in the console can be dangerous since it can contain
 This exercise can be quite challenging, even though the solution does not require a lot of code.
 
 This exercise can be completed in a few different ways. One of the possible solutions utilizes these two techniques:
+
 - [creating new tokens](https://github.com/expressjs/morgan#creating-new-tokens)
 - [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
 

@@ -94,7 +94,7 @@ Una forma síncrona de realizar solicitudes que es común en la programación Ja
 ```java
 HTTPRequest request = new HTTPRequest();
 
-String url = "https://fullstack-exampleapp.herokuapp.com/data.json";
+String url = "https://studies.cs.helsinki.fi/exampleapp/data.json";
 List<Note> notes = request.get(url);
 
 notes.forEach(m => {
@@ -601,6 +601,8 @@ Modifique la aplicación de modo que el estado inicial de los datos se obtenga d
 La API [https://restcountries.com](https://restcountries.com) proporciona datos para diferentes países en un formato legible para máquinas, llamada API REST.
 
 Cree una aplicación en la que se puedan ver datos de varios países. La aplicación probablemente debería obtener los datos del endpoint [all](https://restcountries.com/#api-endpoints-all). 
+
+Si la API no está disponible, use el sitio espejo en [https://studies.cs.helsinki.fi/restcountries/](https://studies.cs.helsinki.fi/restcountries/)
 
 La interfaz de usuario es muy sencilla. El país que se mostrará se encuentra escribiendo una consulta de búsqueda en el campo de búsqueda.
 

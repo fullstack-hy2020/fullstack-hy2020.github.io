@@ -13,9 +13,11 @@ Les autres sujets incluent le débogage des applications, la technologie des con
 
 ### Prérequis
 
-Les participants doivent avoir de bonnes compétences en programmation, des connaissances de base en programmation Web et en bases de données, et maîtriser le système de gestion de versions Git. On attend également de vous que vous ayez de la persévérance et une capacité à résoudre des problèmes et à rechercher des informations de manière autonome.
+On s'attend des participants qu'ils aient de bonnes compétences en programmation, des connaissances de base en programmation Web et en bases de données, et qu'ils maîtrisent le système de gestion de versions Git. On attend également de vous que vous ayez de la persévérance et une capacité à résoudre des problèmes et à rechercher des informations de manière autonome.
 
 Une connaissance préalable de JavaScript ou d'autres sujets de cours n'est pas requise.
+
+Quelle est la quantié d'experience en programmation nécessaire?  Difficile à dire avec précision, néanmoins, on s'attend à un niveau de maîtrise suffisante avec <i>votre</i> language, qui équivaut approximativement à 100-200 heures de pratique.
 
 ### Matériel de cours
 
@@ -29,7 +31,7 @@ Le matériel de cours est basé sur des exemples d'applications en expansion pro
 
 ### Suivre le cours
 
-Le cours contient quatorze parties, dont la première est numérotée 0 par souci de cohérence avec les itérations passées. Une partie correspond à peu près à une semaine (15 à 20 heures en moyenne) d'études, mais la vitesse de réalisation du cours est flexible.
+Le cours contient quatorze parties, dont la première est numérotée 0 par souci de cohérence avec les itérations passées. Une partie correspond environ à une semaine (15 à 20 heures en moyenne) d'études, mais la vitesse de réalisation du cours est flexible.
 
 Passer de la partie <i>n</i> à la partie <i>n+1</i> n'est pas judicieux avant d'avoir acquis une connaissance suffisante des sujets de la partie <i>n</i>. En termes pédagogiques, le cours utilise [Mastery Learning](https://en.wikipedia.org/wiki/Mastery_learning), et vous n'êtes censé passer à la partie suivante qu'après avoir fait suffisamment d'exercices de la partie précédente.
 
@@ -44,7 +46,43 @@ Les statistiques de temps d'exécution des exercices peuvent être trouvées via
 
 ### Chaîne de cours dans Discord et Telegram
 
-Vous pouvez discuter du cours et des sujets connexes dans notre groupe dédié sur <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>Discord</a> et sur <a target='_blank' href='https://t.me/fullstackcourse'>Telegram</a>. Rejoignez la conversation !
+Vous pouvez discuter du cours et des sujets connexes dans notre groupe dédié sur <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>Discord</a> et sur <a target='_blank' href='https://t.me/fullstackcourse'>Telegram</a>. 
+
+Le serveur Discord possède une chaîne fullstack_general et d'autres chaînes spécifiques à chaque partie.  Prenez note que <i>l'utilisation de la chaîne de clavardage principale n'est pas appropriée aux discussions dédiées au matériel du cours.</i>
+
+Rejoignez la conversation !
+
+### Comment recevoir de l'aide par Discord/Telegram
+
+Lorsque vous demandez de l'aide pour un problème par Discord/Telegram, votre question se doit d'être aussi claire et informative que possible.  Si votre question ressemble à ceci:
+
+> <i>Ajouter une nouvelle personne ne fonctionne pas, pouvez vous m'aider?</i>
+
+il est for probable que personne ne répondra.  Le problème pourrait être <i>n'importe où</i>.
+
+Une meilleure question pourrait être:
+
+> <i> Dans l'exercice 2.15, lorsque j'essaie d'ajouter une nouvelle personne à l'application, le serveur répond à 403, bien que la demande me semble correcte.
+>
+> Le code ressemble à ceci
+>
+> ```js
+> // la partie de code pertinente est collée ici
+> // le code doit contenir plusieurs instructions console.log pour faciliter le débogage
+> ```
+>
+> Ce qui suit est imprimé sur la console
+>
+> ```bash
+> // données imprimées sur la console
+> ```
+>
+> L'onglet réseau ressemble à ceci</i>
+>
+> [capture d'écran de la console réseau]
+>
+> Tout le code se trouve ici (un lien vers GitHub)
+
 
 ### Parties et complétion
 
@@ -70,8 +108,6 @@ Une fois que vous avez terminé suffisamment d'exercices pour obtenir une note d
 
 Si vous souhaitez recevoir des crédits universitaires, vous devez réussir l'examen du cours. L'examen ne compte pas dans votre note finale, mais vous devez le réussir. Plus d'infos sur l'examen [ici](/fr/part0/informations_generales#lexamen-du-cours).
 
-La dernière date possible pour passer l'examen est le 10 janvier 2023. **Notez que vous devez vous inscrire à l'examen au plus tard le 9 janvier 2023.**
-
 Vous ne pouvez passer l'examen qu'après avoir soumis suffisamment d'exercices pour cinq crédits. En pratique, il n'est pas judicieux de passer l'examen immédiatement après avoir soumis le nombre critique d'exercices. L'examen est le même pour 5 à 14 crédits et ne compte pas dans votre note.
 
 <i>Vous n'avez pas besoin d'assister à l'examen du cours ou de vous inscrire au cours Open University pour obtenir le certificat du cours.</i>
@@ -79,52 +115,52 @@ Vous ne pouvez passer l'examen qu'après avoir soumis suffisamment d'exercices p
 #### Partie 6 - Développement Web Full Stack, extension 1 (1 cr, CSM141082)
 En soumettant au moins 127 des exercices pour les parties 0 à 7 tout en travaillant sur le cours de base, vous pouvez recevoir un crédit supplémentaire grâce à cette extension.
 - Soumettez au moins 127 exercices pour les parties 0-7.
-- [Inscrivez-vous à la partie 6 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-c67dc747-1d6a-43cb-b40b-9eacf425dcc0).
+- [Inscrivez-vous à la partie 6 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-de83e85f-a06e-4258-ad8c-30326d76228e).
 - [Demander des crédits pour la partie 6](/fr/part0/informations_generales#comment-obtenir-vos-credits).
 
 #### Partie 7 - Développement Web Full Stack, extension 2 (1 cr, CSM141083)
 En soumettant au moins 138 des exercices pour les parties 0 à 7 tout en travaillant sur le cours de base, vous pouvez recevoir un crédit supplémentaire grâce à cette extension.
 - Soumettez au moins 138 exercices pour les parties 0-7.
-- [Inscrivez-vous à la partie 7 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-3016e9c9-0fdc-4ee3-9e9b-38176359f9f3).
+- [Inscrivez-vous à la partie 7 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-53ccca2f-8e77-47e3-931a-63f9d5c8cc2e).
 - [Demander des crédits pour la partie 7](/fr/part0/informations_generales#comment-obtenir-vos-credits).
 
 #### Partie 8 - Développement Web Full Stack : GraphQL (1 cr, CSM14113)
 En soumettant au moins 22/26 des exercices de la partie 8 du cours, GraphQL, vous pouvez obtenir un crédit supplémentaire. La partie 8 peut être effectuée à tout moment après la partie 5, car son contenu est indépendant des parties 6 et 7.
 - Soumettez au moins 22/26 exercices pour la partie 8.
-- [Inscrivez-vous à la partie 8 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-067b1506-0307-4118-9e2b-292e0b81e491).
+- [Inscrivez-vous à la partie 8 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-b7f5ef26-b780-45f2-962d-f8d3432cae78).
 - [Demander des crédits pour la partie 8](/fr/part0/informations_generales#comment-obtenir-vos-credits).
 
 #### Partie 9 - Développement Web Full Stack : TypeScript (1 cr, CSM14110)
-En soumettant au moins 24/27 des exercices de la partie 9 du cours, TypeScript, vous pouvez obtenir un crédit supplémentaire. Il est recommandé de terminer les parties 0 à 7 avant de participer à la partie 9.
-- Soumettre au moins 24/27 exercices pour la partie 9.
-- [Inscrivez-vous à la partie 9 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-d9125f89-a440-48e1-898a-ee4e16b06cdb).
+En soumettant au moins 24/29 des exercices de la partie 9 du cours, TypeScript, vous pouvez obtenir un crédit supplémentaire. Il est recommandé de terminer les parties 0 à 7 avant de participer à la partie 9.
+- Soumettre au moins 24/29 exercices pour la partie 9.
+- [Inscrivez-vous à la partie 9 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-e45a36b7-24d7-424b-9dc5-1c9b59a52a23).
 - [Demander des crédits pour la partie 9](/fr/part0/informations_generales#comment-obtenir-vos-credits).
 
 #### Partie 10 - Développement Web Full Stack : React Native (2 cr, CSM14111)
 En soumettant 25 exercices pour la partie 10 du cours sur React Native, vous pouvez gagner deux crédits supplémentaires. Vous trouverez plus d'informations sur les conditions préalables, la soumission d'exercices et les crédits de cette partie dans[partie 10](/en/part10/introduction_to_react_native).
 - Soumettez au moins 25 exercices pour la partie 10.
-- [Inscrivez-vous à la partie 10 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-aa395a19-4625-44a9-8301-5fbb946c6ed6).
+- [Inscrivez-vous à la partie 10 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-ec172afe-bc01-46ab-af23-694311f1950a).
 - [Demander des crédits pour la partie 10](/fr/part0/informations_generales#comment-obtenir-vos-credits).
 
 #### Partie 11 - Développement Web Full Stack : Intégration continue / Livraison continue (1 cr, CSM14112)
 
 En soumettant tous les exercices de la partie 11 du cours sur l'intégration/livraison continue, vous pouvez gagner un crédit supplémentaire. Vous trouverez plus d'informations sur les prérequis de cette partie et la soumission des exercices dans [partie 11](/en/part11).
 - Soumettez tous les exercices de la partie 11.
-- [Inscrivez-vous à la partie 11 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-4cb66c68-da12-422e-a34d-c8e8e7c8db01).
+- [Inscrivez-vous à la partie 11 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-23e79dc2-64e4-4f7e-86a4-8923a411443c).
 - [Demander des crédits pour la partie 11](/fr/part0/informations_generales#comment-obtenir-vos-credits).
 
 #### Partie 12 - Développement Web Full Stack : Conteneurs (1 cr, CSM141084)
 
 En soumettant tous les exercices de la partie 12 du cours sur la technologie des conteneurs, vous pouvez gagner un crédit supplémentaire. Vous trouverez plus d'informations sur les prérequis de cette partie et la soumission des exercices dans [partie 12](/en/part12).
 - Soumettez tous les exercices de la partie 12.
-- [Inscrivez-vous à la partie 12 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-51a6f590-607c-4e34-bd6f-2d87e2203d9a).
+- [Inscrivez-vous à la partie 12 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-bb07e139-3de0-4cb3-843d-414b1bb992cc).
 - [Demander des crédits pour la partie 12](/fr/part0/informations_generales#comment-obtenir-vos-credits).
 
 #### Partie 13 - Développement Web Full Stack : bases de données relationnelles (1 cr, CSM14114)
 
 En soumettant tous les exercices de la partie 13 du cours sur les bases de données relationnelles, vous pouvez gagner un crédit supplémentaire. Vous trouverez plus d'informations sur les prérequis de cette partie et la soumission des exercices dans [partie 13](/en/part13).
 - Soumettez tous les exercices de la partie 13.
-- [Inscrivez-vous à la partie 13 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-6e548d4e-75bf-483b-8426-c65d8c4e161c).
+- [Inscrivez-vous à la partie 13 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-a9204ed8-1346-4174-b27c-9e02c6136088).
 - [Demander des crédits pour la partie 13](/fr/part0/informations_generales#comment-obtenir-vos-credits).
 
 ### Étudier le cours en quelques mots

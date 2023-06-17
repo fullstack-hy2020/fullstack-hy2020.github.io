@@ -71,7 +71,7 @@ Selaimessa toimiva frontendin koodi siis hakee datan osoitteessa localhost:3001 
 
 Kun koko "stäkki" on saatu vihdoin kuntoon, siirretään sovellus Internetiin.
 
-Sovellusten hostaamiseen, eli "internettiin laittamiseen" on olemassa lukematon määrä erilaisia ratkaisuja. Helpoimpia näistä sovelluskehittäjän kannalta ovat ns PaaS (eli Platform as a Service) -palvelut, jotka huolehtivat sovelluskehittäjän puolesta tietokannan ja suoritusympäristön asentamisen.
+Sovellusten hostaamiseen, eli "internettiin laittamiseen" on olemassa lukematon määrä erilaisia ratkaisuja. Helpoimpia näistä sovelluskehittäjän kannalta ovat ns PaaS (eli Platform as a Service) ‑palvelut, jotka huolehtivat sovelluskehittäjän puolesta tietokannan ja suoritusympäristön asentamisen.
 
 Kymmenen vuoden ajan PaaS-ratkaisujen ykkönen on ollut [Heroku](http://heroku.com). Elokuun 2022 lopussa Heroku ilmoitti että 27.11.2022 alkaen alustan maksuttomat palvelut loppuvat. Jos olet valmis maksamaan hiukan, on Heroku edelleen varteenotettava vaihtoehto.
 
@@ -234,7 +234,7 @@ app.use(express.static('build'))
 
 tarkastaa Express GET-tyyppisten HTTP-pyyntöjen yhteydessä ensin löytyykö pyynnön polkua vastaavan nimistä tiedostoa hakemistosta <i>build</i>. Jos löytyy, palauttaa Express tiedoston.
 
-Nyt HTTP GET -pyyntö osoitteeseen <i>www.palvelimenosoite.com/index.html</i> tai <i>www.palvelimenosoite.com</i> näyttää Reactilla tehdyn frontendin. GET-pyynnön esim. osoitteeseen <i>www.palvelimenosoite.com/api/notes</i> hoitaa backendin koodi.
+Nyt HTTP GET ‑pyyntö osoitteeseen <i>www.palvelimenosoite.com/index.html</i> tai <i>www.palvelimenosoite.com</i> näyttää Reactilla tehdyn frontendin. GET-pyynnön esim. osoitteeseen <i>www.palvelimenosoite.com/api/notes</i> hoitaa backendin koodi.
 
 Koska tässä tapauksessa sekä frontend että backend toimivat samassa osoitteessa, voidaan React-sovelluksessa eli frontendin koodissa oleva palvelimen _baseUrl_ määritellä [suhteellisena](https://www.w3.org/TR/WD-html40-970917/htmlweb.html#h-5.1.2) URL:ina eli ilman palvelinta yksilöivää osaa:
 
@@ -288,7 +288,7 @@ Toisin kuin sovelluskehitysympäristössä, kaikki sovelluksen tarvitsema löyty
 
 ### Koko sovellus Internetiin
 
-Kun sovelluksen "Internetiin vietävä" tuotantoversio todetaan toimivaksi paikallisesti, commitoidaan frontendin tuotantoversio backendin repositorioon ja pushataan koodi GtHubiin. Jos käytät Renderiä, saataa automaattinen uudelleenkäynnistys toimia. Jos näin ei ole, käynnistä uusi versio itse dashbordin kautta tekemälä "manual depolyment".
+Kun sovelluksen "Internetiin vietävä" tuotantoversio todetaan toimivaksi paikallisesti, commitoidaan frontendin tuotantoversio backendin repositorioon ja pushataan koodi GtHubiin. Jos käytät Renderiä, saattaa automaattinen uudelleenkäynnistys toimia. Jos näin ei ole, käynnistä uusi versio itse dashboardin kautta tekemällä "manual deployment".
 
 Fly.io:n tapauksessa sovelluksen uusi versio käynnistyy komennolla
 
@@ -316,7 +316,7 @@ Jotta uuden frontendin version generointi onnistuisi jatkossa ilman turhia manua
 
 #### Fly.io
 
-Skripit seuraavassa
+Fly.io:n tapauksessa skriptit näyttävät seuraavalta:
 
 ```json
 {
@@ -329,6 +329,15 @@ Skripit seuraavassa
   }
 }
 ```
+  
+##### Huomautus Windows-käyttäjille
+Huomaa, että näistä `build:ui`:n käyttämät shell-komennot eivät toimi natiivisti Windowsilla, jonka powershell käyttää eri komentoja. Tällöin skripti olisi
+```json
+"build:ui": "@powershell Remove-Item -Recurse -Force build && cd ../frontend && npm run build && @powershell Copy-Item build -Recurse ../backend",
+```
+  
+Mikäli skripti ei toimi Windowsilla, tarkista, että terminaalisi sovelluskehitysympäristössäsi on Powershell eikä esimerkiksi Command Prompt. Jos olet asentanut Git Bash ‑terminaalin, tai muun Linuxia matkivan terminaalin tai ympäristön, saatat pystyä ajamaan Linuxin kaltaisia komentoja myös Windowsilla.
+
 
 Skripteistä _npm run build:ui_ kääntää ui:n tuotantoversioksi ja kopioi sen. _npm run deploy_ julkaisee Fly.io:n.
 
@@ -338,7 +347,7 @@ Huomaa, että skriptissä <i>build:ui</i> olevat polut riippuvat repositorioiden
 
 #### Render
 
-Renderin tapauksessa skriptit täyttävät seuraavalta
+Renderin tapauksessa skriptit näyttävät seuraavalta:
 
 ```json
 {

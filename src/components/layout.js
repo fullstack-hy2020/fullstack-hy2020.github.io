@@ -10,7 +10,7 @@ import Footer from './Footer/Footer';
 import PropTypes from 'prop-types';
 import SkipToContent from './SkipToContent/SkipToContent';
 
-const BANNER_TO_KEY = 'part_6_changes';
+const BANNER_TO_KEY = 'part_9_changes';
 
 const Layout = props => {
   const { i18n } = useTranslation();
@@ -18,17 +18,14 @@ const Layout = props => {
   const { children, hideFooter, isCoursePage } = props;
   const siteLanguage = i18n.language;
 
-  const [visible, setVisible] = useState(
-    false
-  );
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const key = localStorage.getItem(BANNER_TO_KEY)
-    console.log(key)
     if (!key) {
-      setVisible(true)
+      setVisible(true);
     }
-  }, [])
+  }, []);
 
   const hideNote = () => {
     localStorage.setItem(BANNER_TO_KEY, 'yes');
@@ -41,7 +38,7 @@ const Layout = props => {
 
       <Header lang={siteLanguage} />
 
-      <InfoBanner onHide={() => hideNote()} visible={visible} />
+      <InfoBanner onHide={() => hideNote()} visible={false} />
 
       <main id="main-content">{children}</main>
 

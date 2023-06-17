@@ -194,6 +194,24 @@ La función auxiliar _getTokenFrom_ aísla el token del encabezado de <i>authori
 const decodedToken = jwt.verify(token, process.env.SECRET)
 ```
 
+La verificación del token también puede causar un error <i>JsonWebTokenError</i> si es que es inválido o está ausente. Extendamos nuestro middleware para tener en cuenta este caso particular.
+
+```js
+const errorHandler = (error, request, response, next) => {
+  logger.error(error.message)
+
+  if (error.name === 'CastError') {
+    return response.status(400).send({ error: 'malformatted id' })
+  } else if (error.name === 'ValidationError') {
+    return response.status(400).json({ error: error.message })
+  } else if (error.name ===  'JsonWebTokenError') { // highlight-line
+    return response.status(400).json({ error: error.message }) // highlight-line
+  }
+
+  next(error)
+}
+```
+
 El objeto decodificado del token contiene los campos <i>username</i> y <i>id</i>, que le dice al servidor quién hizo la solicitud.
 
 Si no hay ningún token, o el objeto decodificado del token no contiene la identidad del usuario (_decodedToken.id_ no está definido), el código de estado de error [401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2) es devuelto y el motivo del error se explica en el cuerpo de la respuesta.
@@ -217,50 +235,87 @@ Usando Postman, esto se ve de la siguiente manera:
 y con el cliente REST de Visual Studio Code
 
 ![](../../images/4/21e.png)
+  
+El código de la aplicación actual se puede encontrar en [Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-9), rama <i>part4-9</i>.
+  
+Si la aplicación tiene múltiples interfaces que requieren identificación, la validación de JWT debe separarse en su propio middleware. También se podría utilizar alguna librería existente como [express-jwt](https://www.npmjs.com/package/express-jwt).
 
-### Manejo de errores
+### Problemas de la autenticación basada en Tokens
 
-La verificación del token también puede causar un <i>JsonWebTokenError</i>. Si, por ejemplo, eliminamos algunos caracteres del token e intentamos crear una nueva nota, esto sucede:
+La autenticación basada en tokens es muy fácil de implementar, pero tiene un problema. Una vez que el cliente de la API, por ejemplo una aplicación React, obtiene un token, la API tiene una confianza ciega en el titular del token. ¿Qué sucede si necesitamos revocar los derechos de acceso del titular del token?
 
-```bash
-JsonWebTokenError: invalid signature
-    at /Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/node_modules/jsonwebtoken/verify.js:126:19
-    at getSecret (/Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/node_modules/jsonwebtoken/verify.js:80:14)
-    at Object.module.exports [as verify] (/Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/node_modules/jsonwebtoken/verify.js:84:10)
-    at notesRouter.post (/Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/controllers/notes.js:40:30)
-```
-
-Hay muchas razones posibles para un error de decodificación. El token puede ser defectuoso (como en nuestro ejemplo), falsificado o vencido. Extendamos nuestro middleware errorHandler para tener en cuenta los diferentes errores de decodificación.
+Hay dos soluciones al problema. La más fácil es limitar el período de validez de un token:
 
 ```js
-const unknownEndpoint = (request, response) => {
-  response.status(404).send({ error: 'unknown endpoint' })
-}
+loginRouter.post('/', async (request, response) => {
+  const { username, password } = request.body
 
-const errorHandler = (error, request, response, next) => {
-  if (error.name === 'CastError') {
-    return response.status(400).send({
-      error: 'malformatted id'
+  const user = await User.findOne({ username })
+  const passwordCorrect = user === null
+    ? false
+    : await bcrypt.compare(password, user.passwordHash)
+
+  if (!(user && passwordCorrect)) {
+    return response.status(401).json({
+      error: 'invalid username or password'
     })
-  } else if (error.name === 'ValidationError') {
-    return response.status(400).json({
-      error: error.message 
-    })
-  } else if (error.name === 'JsonWebTokenError') {  // highlight-line
-    return response.status(401).json({ // highlight-line
-      error: 'invalid token' // highlight-line
-    }) // highlight-line
   }
 
+  const userForToken = {
+    username: user.username,
+    id: user._id,
+  }
+
+  // token expires in 60*60 seconds, that is, in one hour
+  // highlight-start
+  const token = jwt.sign(
+    userForToken, 
+    process.env.SECRET,
+    { expiresIn: 60*60 }
+  )
+  // highlight-end
+
+  response
+    .status(200)
+    .send({ token, username: user.username, name: user.name })
+})
+```
+
+Una vez que el token caduca, la aplicación cliente necesita obtener un nuevo token. Por lo general, esto sucede al obligar al usuario a volver a iniciar sesión en la aplicación.
+
+El middleware de manejo de errores debe extenderse para dar un error adecuado en el caso de un token caducado:
+
+```js
+const errorHandler = (error, request, response, next) => {
   logger.error(error.message)
+
+  if (error.name === 'CastError') {
+    return response.status(400).send({ error: 'malformatted id' })
+  } else if (error.name === 'ValidationError') {
+    return response.status(400).json({ error: error.message })
+  } else if (error.name === 'JsonWebTokenError') {
+    return response.status(401).json({
+      error: 'invalid token'
+    })
+  // highlight-start  
+  } else if (error.name === 'TokenExpiredError') {
+    return response.status(401).json({
+      error: 'token expired'
+    })
+  }
+  // highlight-end
 
   next(error)
 }
 ```
 
-El código de la aplicación actual se puede encontrar en [Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-9), rama <i>part4-9</i>.
+Cuanto más corto sea el tiempo de caducidad, más segura será la solución. Por lo tanto, si el token cae en las manos equivocadas o es necesario revocar el acceso del usuario al sistema, el token solo se puede utilizar durante un período de tiempo limitado. Por otro lado, un tiempo de caducidad corto genera un dolor potencial para el usuario, ya que le implica iniciar sesión en el sistema con más frecuencia.
 
-Si la aplicación tiene múltiples interfaces que requieren identificación, la validación de JWT debe separarse en su propio middleware. También se podría utilizar alguna librería existente como [express-jwt](https://www.npmjs.com/package/express-jwt).
+La otra solución es guardar información sobre cada token en la base de datos y verificar en cada solicitud de API si el derecho de acceso correspondiente al token sigue siendo válido. Con este esquema, los derechos de acceso pueden ser revocados en cualquier momento. Este tipo de solución a menudo se denomina <i>server-side session</i>.
+
+El aspecto negativo de las sesiones del lado del servidor es la mayor complejidad en el backend y también el efecto en el rendimiento, ya que se debe verificar la validez del token para cada solicitud de API a la base de datos. El acceso a la base de datos es considerablemente más lento en comparación con la verificación de la validez del token en sí. Es por eso que es bastante común guardar la sesión correspondiente a un token en una <i>base de datos de llave-valor</i> como [Redis](https://redis.io/) que tiene una funcionalidad limitada en comparación con MongoDB o bases de datos relacionales, pero es extremadamente rápida en algunos escenarios de uso.
+
+Cuando se utilizan sesiones del lado del servidor, el token suele ser solo una cadena aleatoria, que no incluye ninguna información sobre el usuario, como suele ser el caso cuando se utilizan jwt-tokens. Para cada solicitud de API, el servidor obtiene la información relevante sobre la identidad del usuario de la base de datos. También es bastante habitual que, en lugar de utilizar el encabezado de autorización, se utilicen <i>cookies</i> como mecanismo para transferir el token entre el cliente y el servidor.
 
 ### Notas finales
 
@@ -274,9 +329,9 @@ Implementaremos el inicio de sesión en la interfaz en la [siguiente parte](/es/
 
 <div class="tasks">
 
-### Ejercicios 4.15.-4.22.
+### Ejercicios 4.15.-4.23.
 
-En los próximos ejercicios, se implementarán los conceptos básicos de la gestión de usuarios para la aplicación Bloglist. La forma más segura es seguir la historia desde el capítulo de la parte 4 [Administración de usuarios](/es/part4/user_administration) hasta el capítulo [Autenticación basada en token](/es/part4/token_authentication). Por supuesto, también puede utilizar su creatividad.
+En los próximos ejercicios, se implementarán los conceptos básicos de la gestión de usuarios para la aplicación Bloglist. La forma más segura es seguir la historia desde el capítulo de la parte 4 [Administración de usuarios](/es/part4/administracion_de_usuarios) hasta el capítulo [Autenticación basada en token](/es/part4/autenticacion_de_token). Por supuesto, también puede utilizar su creatividad.
 
 **Una advertencia más:** Si nota que está mezclando llamadas async/await y _then_, es 99% seguro que está haciendo algo mal. Utilice uno u otro, nunca ambos.
 
@@ -284,7 +339,7 @@ En los próximos ejercicios, se implementarán los conceptos básicos de la gest
 
 Implemente una forma de crear nuevos usuarios realizando una solicitud POST HTTP para la dirección <i>api/users</i>. Los usuarios tienen <i>nombre de usuario, contraseña y nombre</i>.
 
-No guarde las contraseñas en la base de datos como texto sin cifrar, utilice la biblioteca <i>bcrypt</i> como hicimos en el capítulo de la parte 4 [Creación de nuevos usuarios](/es​​/part4/user_administration#creation-users).
+No guarde las contraseñas en la base de datos como texto sin cifrar, utilice la biblioteca <i>bcrypt</i> como hicimos en el capítulo de la parte 4 [Creación de nuevos usuarios](/es/part4/administracion_de_usuarios#creando-usuarios).
 
 **NB** Algunos usuarios de Windows han tenido problemas con <i>bcrypt</i>. Si tiene problemas, elimine la librería con el comando
 
@@ -306,7 +361,7 @@ Agrega una función que agrega las siguientes restricciones para la creación de
 
 La operación debe responder con un código de estado adecuado y algún tipo de mensaje de error si se crea un usuario no válido.
 
-**NB** No pruebe las restricciones de contraseña con las validaciones de Mongoose. No es una buena idea porque la contraseña recibida por el backend y el hash de contraseña guardado en la base de datos no son lo mismo. La longitud de la contraseña debe validarse en el controlador como hicimos en la [parte 3](/es/part3/validation_and_es_lint) antes de usar la validación de Mongoose.
+**NB** No pruebe las restricciones de contraseña con las validaciones de Mongoose. No es una buena idea porque la contraseña recibida por el backend y el hash de contraseña guardado en la base de datos no son lo mismo. La longitud de la contraseña debe validarse en el controlador como hicimos en la [parte 3](/es/part3/validacion_y_es_lint) antes de usar la validación de Mongoose.
 
 Además, implemente pruebas que verifiquen que no se creen usuarios no válidos y que la operación de agregar usuario no válida devuelva un código de estado adecuado y un mensaje de error.
 
@@ -314,7 +369,7 @@ Además, implemente pruebas que verifiquen que no se creen usuarios no válidos 
 
 Expande los blogs para que cada blog contenga información sobre el creador del blog.
 
-Modifique la adición de nuevos blogs para que cuando se cree un nuevo blog, <i>cualquier</i> usuario de la base de datos sea designado como su creador (por ejemplo, el que se encontró primero). Implemente esto de acuerdo con el capítulo de la parte 4 [poblar](/es/part4/user_administration#populate).
+Modifique la adición de nuevos blogs para que cuando se cree un nuevo blog, <i>cualquier</i> usuario de la base de datos sea designado como su creador (por ejemplo, el que se encontró primero). Implemente esto de acuerdo con el capítulo de la parte 4 [poblar](/administracion_de_usuarios#poblar).
 El usuario designado como creador no importa todavía. La funcionalidad se termina en el ejercicio 4.19.
 
 Modificar la lista de todos los blogs para que la información de usuario del creador se muestre con el blog:
@@ -327,7 +382,7 @@ y la lista de todos los usuarios también muestra los blogs creados por cada usu
 
 #### 4.18: expansión de la lista de blogs, paso 6
 
-Implementar la autenticación basada en token según la parte 4 capítulo [Autenticación de token](/es/part4/token_authentication).
+Implementar la autenticación basada en token según la parte 4 [Autenticación de token](/es/part4/autenticacion_de_token).
 
 #### 4.19: expansión de la lista de blogs , paso 7
 
@@ -335,9 +390,9 @@ Modificar la adición de nuevos blogs para que solo sea posible si se envía un 
 
 #### 4.20*: expansión de la lista de blogs, paso 8
 
-[Este ejemplo](/es/part4/token_authentication) de la parte 4 muestra cómo tomar el token del encabezado con la función auxiliar _getTokenFrom_.
+[Este ejemplo](/es/part4/autenticacion_de_token) de la parte 4 muestra cómo tomar el token del encabezado con la función auxiliar _getTokenFrom_.
 
-Si usó la misma solución, refactorice llevando el token a un [middleware](/es/part3/node_js_and_express#middleware). El middleware debe tomar el token del encabezado <i>Authorization</i> y colocarlo en el campo <i>token</i> del objeto <i>request</i>.
+Si usó la misma solución, refactorice llevando el token a un [middleware](/es/part3/node_js_y_express#middleware). El middleware debe tomar el token del encabezado <i>Authorization</i> y colocarlo en el campo <i>token</i> del objeto <i>request</i>.
 
 En otras palabras, si registra este middleware en el archivo <i>app.js</i> antes de todas las rutas
 
@@ -345,7 +400,7 @@ En otras palabras, si registra este middleware en el archivo <i>app.js</i> antes
 app.use(middleware.tokenExtractor)
 ```
 
-routes can access the token with _request.token_:
+Las rutas pueden acceder al token con _request.token_:
 ```js
 blogsRouter.post('/', async (request, response) => {
   // ..
@@ -354,7 +409,7 @@ blogsRouter.post('/', async (request, response) => {
 })
 ```
 
-Recuerde que un [middleware] normal (/es/part3/node_js_and_express#middleware) es una función con tres parámetros, que al final llama al último parámetro <i>next</i> para mover el control al siguiente middleware:
+Recuerde que una [función middleware](/es/part3/node_js_y_express#middleware) es una función con tres parámetros, que al final llama al último parámetro <i>next</i> para mover el control al siguiente middleware:
 
 ```js
 const tokenExtractor = (request, response, next) => {
@@ -384,39 +439,64 @@ if ( blog.user.toString() === userid.toString() ) ...
 
 #### 4.22*: expansión de la lista de blogs, paso 10
 
+Tanto la creación de un nuevo blog como su eliminación necesitan averiguar la identidad del usuario que está realizando la operación. El middleware _tokenExtractor_ que hicimos en el ejercicio 4.20 ayuda, pero los controladores de las operaciones <i>post</i> y <i>delete</i> necesitan averiguar quién es el usuario que posee un token específico.
+
+Ahora cree un nuevo middleware _userExtractor_, que encuentre al usuario y lo establezca en el objeto de solicitud. Cuando registra el middleware en <i>app.js</i>
+
+```js
+app.use(middleware.userExtractor)
+```
+
+el usuario se configurará en el campo _request.user_:
+
+```js
+blogsRouter.post('/', async (request, response) => {
+  // get user from request object
+  const user = request.user
+  // ..
+})
+
+blogsRouter.delete('/:id', async (request, response) => {
+  // get user from request object
+  const user = request.user
+  // ..
+})
+```
+
+Tenga en cuenta que es posible registrar un middleware solo para un conjunto específico de rutas. Entonces, en lugar de usar _userExtractor_ con todas las rutas,
+
+```js
+// use the middleware in all routes
+app.use(userExtractor) // highlight-line
+
+app.use('/api/blogs', blogsRouter)  
+app.use('/api/users', usersRouter)
+app.use('/api/login', loginRouter)
+```
+
+podríamos registrarlo para que solo se ejecute con rutas de ruta <i>/api/blogs</i>:
+
+```js
+// use the middleware only in /api/blogs routes
+app.use('/api/blogs', userExtractor, blogsRouter) // highlight-line
+app.use('/api/users', usersRouter)
+app.use('/api/login', loginRouter)
+```
+
+Como puede verse, esto se ouede realizar al encadenar múltiples middlewares como parámetro de la función <i>use</i>. También sería posible registrar un middleware solo para una operación específica:
+
+```js
+router.post('/', userExtractor, async (request, response) => {
+  // ...
+}
+```
+
+#### 4.23*: expansión de la lista de blogs, paso 11
+
 Después de agregar la autenticación basada en token, las pruebas para agregar un nuevo blog se rompió. Arregle las pruebas. También escriba una nueva prueba para asegurarse de que la adición de un blog falla con el código de estado adecuado <i>401 Unauthorized</i> si no se proporciona un token.
 
 [Esto](https://github.com/visionmedia/supertest/issues/398) probablemente sea útil al hacer la corrección.
 
 Este es el último ejercicio de esta parte del curso y es hora de enviar su código a GitHub y marcar todos sus ejercicios terminados en el [sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
-
-<!---
-note left of user
-  user fills in login form with
-  username and password
-end note
-user -> browser: login button pressed
-
-browser -> backend: HTTP POST /api/login { username, password }
-note left of backend
-  backend generates TOKEN that identifies user 
-end note
-backend -> browser: TOKEN returned as message body 
-note left of browser
-  browser saves TOKEN
-end note
-note left of user
-  user creates a note
-end note
-user -> browser: create note button pressed
-browser -> backend: HTTP POST /api/notes { content } TOKEN in header
-note left of backend
-  backend identifies userfrom the TOKEN
-end note
-
-backend -> browser: 201 created
-
-user -> user:
--->
 
 </div>

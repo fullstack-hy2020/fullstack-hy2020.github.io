@@ -80,11 +80,9 @@ class ScrollNavigation extends Component {
     let arr = [];
 
     for (let key in partsNode) {
-      console.log(getPartTranslationPath(
-        lang,
-        part,
-        `/${snakeCase(partsNode[key])}`
-      ));
+      console.log(
+        getPartTranslationPath(lang, part, `/${snakeCase(partsNode[key])}`)
+      );
 
       if (currentPartTitle !== partsNode[key]) {
         arr.push(

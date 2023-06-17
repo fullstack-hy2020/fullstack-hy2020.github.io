@@ -48,9 +48,9 @@ export default App
 
 Alkuvaiheen koodi on GitHubissa repositorion [https://github.com/fullstack-hy2020/query-notes](https://github.com/fullstack-hy2020/query-notes/tree/part6-0) branchissa <i>part6-0</i>.
 
-### Palvelimella olevan datan hallinta React Query -kirjaston avulla
+### Palvelimella olevan datan hallinta React Query ‑kirjaston avulla
 
-Hyödynnämme nyt [React Query](https://react-query-v3.tanstack.com/) -kirjastoa palvelimelta haettavan datan säilyttämiseen ja hallinnointiin. Asennetaan kirjasto komennolla
+Hyödynnämme nyt [React Query](https://react-query-v3.tanstack.com/) ‑kirjastoa palvelimelta haettavan datan säilyttämiseen ja hallinnointiin. Asennetaan kirjasto komennolla
 
 ```bash
 npm install react-query
@@ -120,7 +120,7 @@ Eli ensimmäistä kertaa komponenttia renderöitäessä kysely on vielä tilassa
 
 HTTP-pyyntö kuitenkin valmistuu niin nopeasti, että tekstiä eivät edes tarkkasilmäisimmät ehdi näkemään. Kun pyyntö valmistuu, renderöidään komponentti uudelleen. Kysely on toisella renderöinnillä tilassa <i>success</i>, ja kyselyolion kenttä <i>data</i> sisältää pyynnön palauttaman datan, eli muistiinpanojen listan, joka renderöidään ruudulle.
 
-Sovellus siis hakee datan palvelimelta ja renderöi sen ruudulle käyttämättä ollenkaan luvuissa 2-5 käytettyjä Reactin hookeja <i>useState</i> ja <i>useEffect</i>. Palvelimella oleva data on nyt kokonaisuudessaan React Query -kirjaston hallinnoinnin alaisuudessa, ja sovellus ei tarvitse ollenkaan Reactin <i>useState</i>-hookilla määriteltyä tilaa!
+Sovellus siis hakee datan palvelimelta ja renderöi sen ruudulle käyttämättä ollenkaan luvuissa 2-5 käytettyjä Reactin hookeja <i>useState</i> ja <i>useEffect</i>. Palvelimella oleva data on nyt kokonaisuudessaan React Query ‑kirjaston hallinnoinnin alaisuudessa, ja sovellus ei tarvitse ollenkaan Reactin <i>useState</i>-hookilla määriteltyä tilaa!
 
 Siirretään varsinaisen HTTP-pyynnön tekevä funktio omaan tiedostoonsa <i>requests.js</i>:
 
@@ -135,7 +135,7 @@ Komponentti <i>App</i> yksinkertaistuu nyt hiukan
 
 ```js
 import { useQuery } from 'react-query' 
-import { getAnecdotes } from './requests' // highlight-line
+import { getNotes } from './requests' // highlight-line
 
 const App = () => {
   // ...
@@ -150,9 +150,9 @@ Sovelluksen tämän hetken koodi on [GitHubissa](https://github.com/fullstack-hy
 
 ### Datan vieminen palvelimelle React Queryn avulla
 
-Data haetaan jo onnistuneesti palvelimelta. Huolehditan seuraavaksi siitä, että lisätty ja muutettu data tallennetaan palvelimelle. Aloitetaan uusien muistiinpanojen lisäämisestä.
+Data haetaan jo onnistuneesti palvelimelta. Huolehditaan seuraavaksi siitä, että lisätty ja muutettu data tallennetaan palvelimelle. Aloitetaan uusien muistiinpanojen lisäämisestä.
 
-Tehdään tiedostoon <i>requests.js</i> funktio <i>addANote</i> uusien muistiinpanojen talletusta varten:
+Tehdään tiedostoon <i>requests.js</i> funktio <i>createNote</i> uusien muistiinpanojen talletusta varten:
 
 ```js
 import axios from 'axios'
@@ -283,7 +283,7 @@ Tästä on toki seurauksena se, että sovellus tekee muistiinpanon muutoksen aih
 
 ![](../../images/6/61new.png)
 
-Jos sovelluksen hakema datamäärä ei ole suuri, ei asialla ole juurikaan merkitystä. Selainpuolen toiminnallisuuden kannaltahan ylimääräisen HTTP GET -pyynnön tekeminen ei kuurikaan haittaa, mutta joissain tilanteissa se saattaa rasittaa palvelinta.
+Jos sovelluksen hakema datamäärä ei ole suuri, ei asialla ole juurikaan merkitystä. Selainpuolen toiminnallisuuden kannaltahan ylimääräisen HTTP GET ‑pyynnön tekeminen ei juurikaan haittaa, mutta joissain tilanteissa se saattaa rasittaa palvelinta.
 
 Tarvittaessa on myös mahdollista optimoida suorituskykyä [päivittämällä itse](https://react-query-v3.tanstack.com/guides/updates-from-mutation-responses) React Queryn ylläpitämää kyselyn tilaa.
 
@@ -347,14 +347,14 @@ React Query on siis kirjasto, joka ylläpitää frontendissä <i>palvelimen tila
 
 ### Tehtävät 6.20.-6.22.
 
-Tehdään nyt anekdoottisovelluksesta uusi, React Query -kirjastoa hyödyntävä versio. Ota lähtökohdaksesi
+Tehdään nyt anekdoottisovelluksesta uusi, React Query ‑kirjastoa hyödyntävä versio. Ota lähtökohdaksesi
 [täällä](https://github.com/fullstack-hy2020/query-anecdotes) oleva projekti. Projektissa on valmiina asennettuna JSON Server, jonka toimintaa on hieman modifioitu. Käynnistä palvelin komennolla <i>npm run server</i>.
 
 #### Tehtävä 6.20
 
 Toteuta anekdoottien hakeminen palvelimelta React Queryn avulla. 
 
-Sovelluksen tulee toimia siten, että jos palvelimen kanssa kommuikoinnissa ilmenee ongelmia, tulee näkyviin ainoastaan virhesivu:
+Sovelluksen tulee toimia siten, että jos palvelimen kanssa kommunikoinnissa ilmenee ongelmia, tulee näkyviin ainoastaan virhesivu:
 
 ![](../../images/6/65new.png)
 
@@ -552,7 +552,7 @@ const App = () => {
 
   return (
     <CounterContext.Provider value={[counter, counterDispatch]}>  // highlight-line
-      <Display counter={counter}/>
+      <Display />
       <div>
         <Button type='INC' label='+' />
         <Button type='DEC' label='-' />
@@ -590,7 +590,7 @@ const Button = ({ type, label }) => {
 }
 ```
 
-Komponetit saavat siis näin tietoonsa kontekstin tarjoajan siihen asettaman sisällön, joka on tällä kertaa taulukko mikä sisältää laskurin arvon, sekä laskurin tilaa muuttavan dispatch-funktion.
+Komponentit saavat siis näin tietoonsa kontekstin tarjoajan siihen asettaman sisällön, joka on tällä kertaa taulukko mikä sisältää laskurin arvon, sekä laskurin tilaa muuttavan dispatch-funktion.
 
 Sovelluksen tämänhetkinen koodi on GitHubissa repositorion [https://github.com/fullstack-hy2020/hook-counter](https://github.com/fullstack-hy2020/hook-counter/tree/part6-2) branchissa <i>part6-2</i>.
 
@@ -629,7 +629,7 @@ export const CounterContextProvider = (props) => {
 export default CounterContext
 ```
 
-Tiedosto exporttaa nyt kontekstia vastaavan olion <i>CounterContext</i> lisäksi komponentin <i>CouterContextProvider</i> joka on käytännössä kontekstin tarjoaja (context provider), jonka arvona on laskuri ja sen tilanhallintaan käytettävä dispatcheri.
+Tiedosto exporttaa nyt kontekstia vastaavan olion <i>CounterContext</i> lisäksi komponentin <i>CounterContextProvider</i> joka on käytännössä kontekstin tarjoaja (context provider), jonka arvona on laskuri ja sen tilanhallintaan käytettävä dispatcheri.
 
 Otetaan kontekstin tarjoaja käyttöön tiedostossa <i>index.js</i>
 
@@ -752,7 +752,7 @@ Ratkaisu on varsin tyylikäs. Koko sovelluksen tila eli laskurin arvo ja sen hal
 
 Sovelluksen lopullinen koodi on GitHubissa repositorion [https://github.com/fullstack-hy2020/hook-counter](https://github.com/fullstack-hy2020/hook-counter/tree/part6-3) branchissa <i>part6-3</i>.
 
-Teknisenä yksityiskohtana todettakoon, että apufunktiot <i>useCounterValue</i> ja <i>useCounterDispatch</i> on määritelty ns. [custom hookeina](https://reactjs.org/docs/hooks-custom.html), sillä funktion <i>useContext</i> kutsuminen [ei ole mahdollista](https://reactjs.org/docs/hooks-rules.html) muualta kuin React-komponenteista tai custom hookeista käsin. Custom hookit taas ovat JavaScript-funktioita joiden nimen pitää alkaa merkkijonolla _use_. Palaamme custom hookeihin hieman tarkemmin kurssin [osassa 7](http://localhost:8000/osa7/custom_hookit).
+Teknisenä yksityiskohtana todettakoon, että apufunktiot <i>useCounterValue</i> ja <i>useCounterDispatch</i> on määritelty ns. [custom hookeina](https://reactjs.org/docs/hooks-custom.html), sillä funktion <i>useContext</i> kutsuminen [ei ole mahdollista](https://reactjs.org/docs/hooks-rules.html) muualta kuin React-komponenteista tai custom hookeista käsin. Custom hookit taas ovat JavaScript-funktioita joiden nimen pitää alkaa merkkijonolla _use_. Palaamme custom hookeihin hieman tarkemmin kurssin [osassa 7](/osa7/custom_hookit).
 
 </div>
 
@@ -765,7 +765,7 @@ Teknisenä yksityiskohtana todettakoon, että apufunktiot <i>useCounterValue</i>
 
 Sovelluksessa on valmiina komponentti <i>Notification</i> käyttäjälle tehtävien notifikaatioiden näyttämistä varten.
 
-Toteuta sovelluksen notifikaation tilan hallinta useReduce-hookin ja contextin avulla. Notifikaatio kertoo kun uusi anekdootti luodaan tai anekdoottia äänestetään:
+Toteuta sovelluksen notifikaation tilan hallinta useReducer-hookin ja contextin avulla. Notifikaatio kertoo kun uusi anekdootti luodaan tai anekdoottia äänestetään:
 
 ![](../../images/6/66new.png)
 
@@ -792,7 +792,7 @@ Luvuissa 1-5 kaikki sovelluksen tilanhallinta hoidettiin Reactin hookin <i>useSt
 
 Hienoisena ongelmana <i>useState</i>-hookilla luotuun tilaan perustuvassa ratkaisussa on se, että jos jotain osaa sovelluksen tilasta tarvitaan useissa sovelluksen komponenteissa, tulee tila ja sen muuttamiseksi tarvittavat funktiot välittää propsien avulla kaikille tilaa käsitteleville komponenteille. Joskus propseja on välitettävä usean komponentin läpi, ja voi olla, että matkan varrella olevat komponentit eivät edes ole tilasta millään tavalla kiinnostuneita. Tästä hieman ikävästä ilmiöstä käytetään nimitystä <i>prop drilling</i>.
 
-Aikojen saatossa React-sovellusten tilanhallintaan on kehitelty muutamiakin vaihtoehtoisia ratkaisuja, joiden avulla ongelmllisia tilanteinta (esim. prop drilling) saadaan helpotettua. Mikään ratkaisu ei kuitenkaan ole ollut "lopullinen", kaikilla on omat hyvät ja huonot puolensa, ja uusia ratkaisuja kehitellään koko ajan.
+Aikojen saatossa React-sovellusten tilanhallintaan on kehitelty muutamiakin vaihtoehtoisia ratkaisuja, joiden avulla ongelmallisia tilanteinta (esim. prop drilling) saadaan helpotettua. Mikään ratkaisu ei kuitenkaan ole ollut "lopullinen", kaikilla on omat hyvät ja huonot puolensa, ja uusia ratkaisuja kehitellään koko ajan.
 
 Aloittelijaa ja kokenuttakin web-kehittäjää tilanne saattaa hämmentää. Mitä ratkaisua tulisi käytää?
 
@@ -800,11 +800,11 @@ Yksinkertaisessa sovelluksessa <i>useState</i> on varmasti hyvä lähtökohta. J
 
 Kaikkien kattavimman ja järeimmän tilanhallintaratkaisun tarjoaa Redux, joka on eräs tapa toteuttaa ns. [Flux](https://facebook.github.io/flux/)-arkkitehtuuri. Redux on hieman vanhempi kuin tässä aliosassa esitetyt ratkaisut. Reduxin jähmeys onkin ollut motivaationa monille uusille tilanhallintaratkaisuille kuten tässä osassa esittelemällemme Reactin <i>useReducer</i>:ille. Osa Reduxin jäykkyyteen kohdistuvasta kritiikistä tosin on jo vanhentunut [Redux Toolkit](https://redux-toolkit.js.org/):in ansiosta. 
 
-Vuosien saatossa on myös kehitelty muita Reduxia vastaavia tilantahallintakirjastoja, kuten esim. uudempi tulokas [Recoil](https://recoiljs.org/) ja hieman iäkkäämpi [MobX](https://mobx.js.org/). [Npm trendsien](https://npmtrends.com/mobx-vs-recoil-vs-redux) perusteella Redux kuitenkin dominoi edelleen selvästi, ja näyttää itseasiassa vaan kasvattavan etumatkaansa:
+Vuosien saatossa on myös kehitelty muita Reduxia vastaavia tilantahallintakirjastoja, kuten esim. uudempi tulokas [Recoil](https://recoiljs.org/) ja hieman iäkkäämpi [MobX](https://mobx.js.org/). [Npm trendsien](https://npmtrends.com/mobx-vs-recoil-vs-redux) perusteella Redux kuitenkin dominoi edelleen selvästi, ja näyttää itse asiassa vaan kasvattavan etumatkaansa:
 
 ![](../../images/6/64new.png)
 
-Myöskään Reduxia ei ole pakko käyttää sovelluksessa kokonaisvaltaisesti. Saattaa olla mielekästä hoitaa esim. sovellusten lomakkeiden datan tallentaminen Reduxin ulkopuolella, erityisesti niissä tilanteissa, missä lomakkeen tila ei vaikuta muuhun sovellukseen. Myös Reduxin ja Reqct Queryn yhteiskäyttö samassa sovellukssa on täysin mahdollista. 
+Myöskään Reduxia ei ole pakko käyttää sovelluksessa kokonaisvaltaisesti. Saattaa olla mielekästä hoitaa esim. sovellusten lomakkeiden datan tallentaminen Reduxin ulkopuolella, erityisesti niissä tilanteissa, missä lomakkeen tila ei vaikuta muuhun sovellukseen. Myös Reduxin ja React Queryn yhteiskäyttö samassa sovellukssa on täysin mahdollista. 
 
 Kysymys siitä mitä tilanhallintarkatkaisua tulisi käyttää ei ole ollenkaan suoraviivainen. Yhtä oikeaa vastausta on mahdotonta antaa, ja on myös todennäköistä, että valittu tilanhallintaratkaisu saattaa sovelluksen kasvaessa osoittautua siinä määrin epäoptimaaliseksi, että tilanhallinnan ratkaisuja täytyy vaihtaa vaikka sovellus olisi jo ehditty viedä tuotantokäyttöön.
 

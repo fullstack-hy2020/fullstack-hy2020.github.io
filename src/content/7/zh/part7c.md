@@ -515,7 +515,7 @@ const Login = (props) => {
 <!-- I myself have not used MaterialUI a lot, but my first impressions are positive. Its documentation is a bit better than react-bootstrap's.-->
  我自己并没有经常使用MaterialUI，但我的第一印象是积极的。它的文档比 react-bootstrap's 好一点。
 <!-- According to https://www.npmtrends.com/ which tracks the popularity of different npm-libraries, MaterialUI passed react-bootstrap in popularity at the end of 2018:-->
- 根据追踪不同npm-libraries流行度的https://www.npmtrends.com/，MaterialUI在2018年底的流行度超过了react-bootstrap。
+ 根据追踪不同npm-libraries流行度的 https://www.npmtrends.com/ ，MaterialUI在2018年底的流行度超过了react-bootstrap。
 
 ![](../../images/7/68ea.png)
 
@@ -730,6 +730,6 @@ const App = () => {
 ### Exercises
 
 <!-- The exercises related to the topics presented here, can be found at the end of this course material section in the exercise set [for extending the blog list application](/en/part7/exercises_extending_the_bloglist).-->
- 与这里介绍的主题相关的练习，可以在本课程教材部分的末尾找到[扩展博客列表应用]的练习集（/en/part7/exercises_extending_the_bloglist）。
+ 与这里介绍的主题相关的练习，可以在本课程教材部分的末尾找到[扩展博客列表应用](/en/part7/exercises_extending_the_bloglist)的练习集。
 
 </div>

@@ -2,7 +2,7 @@
   "fi": [
     {
       "image": "Juha_Tauriainen.jpg",
-      "companyLogo": "houston.svg",
+      "companyLogo": "houston2.svg",
       "text": [
         "Roolini Houstonilla keskittyy frontend-kehitykseen. Käytämme teknologioita ja kirjastoja laidasta laitaan, muun muassa kurssilla opetettuja teknologioita. Konsulttitalona autamme asiakkaitamme ja yhteistyökumppaneitamme saavuttamaan korkean laadun kautta paremman tuloksen. Tuomme projekteihin koodin lisäksi myös alan parhaat käytännöt ja autamme asiakkaitamme menestymään.",
         "Työskentely Houstonille on mahtavaa monesta syystä, eniten pidän siitä että työntekijät ovat aina ykkössijalla, henkilökunnan ideoita, ehdotuksia ja mielipiteitä todellakin kuunnellaan ja niihin reagoidaan. Esimerkiksi olen saanut Houstonilta täyden tuen mentorointiohjelman aloittamiseen. Autamme ihmisiä eri aloilta ohjelmoinnin parissa, opastamme heitä parhaiden käytäntöjen kanssa ja pyrimme saamaan heidät alalle. Tämä on opettanut sekä minulle että Houstonille todella paljon. Saankin todella paljon kiksejä muiden auttamisesta - olivat he sitten asiakkaita, työkavereita tai opiskelijoita."
@@ -74,7 +74,7 @@
   "en": [
     {
       "image": "Juha_Tauriainen.jpg",
-      "companyLogo": "houston.svg",
+      "companyLogo": "houston2.svg",
       "text": [
         "My role at Houston concentrates on Frontend-development. We use a whole spectrum of technologies and libraries, including those taught in this course. As a consulting house we help our customers and partners to achieve better results through better quality. As well as the code, we bring the best practices of the field and help our customers to succeed.",
         "Working at Houston is awesome because of multiple reasons. The most I like that the employees are always number one. The ideas, suggestions and opinions of the staff are heard and reacted to. For example Houston gave me their full support to starting a mentorship program. We help people from different fields with programming, guide them to best practices and aim to get them to the business. This has taught both me and Houston very much. I get a huge kick out of helping others – no matter if they are customers, work mates or students."
@@ -146,7 +146,7 @@
   "es": [
     {
       "image": "Juha_Tauriainen.jpg",
-      "companyLogo": "houston.svg",
+      "companyLogo": "houston2.svg",
       "text": [
         "Mi función en Houston se concentra en el desarrollo del frontend. Utilizamos una amplia gama de tecnologías y bibliotecas, incluidas las que se enseñan en este curso. Como empresa de consultoría, ayudamos a nuestros clientes y socios a lograr mejores resultados a través de una mejor calidad. Así como el código, traemos las mejores prácticas del campo y ayudamos a nuestros clientes a tener éxito.",
         "Trabajar en Houston es fantástico por varias razones. Lo que más me gusta es que los empleados son siempre el número uno. Las ideas, sugerencias y opiniones del personal son escuchadas y reaccionadas. Por ejemplo, Houston me brindó todo su apoyo para iniciar una tutoría Ayudamos a personas de diferentes campos con la programación, los guiamos hacia las mejores prácticas y nuestro objetivo es llevarlos al negocio. Esto nos ha enseñado mucho a mí y a Houston. Me encanta ayudar a los demás, sin importar si clientes, compañeros de trabajo o estudiantes."
@@ -218,7 +218,7 @@
   "zh": [
     {
       "image": "Juha_Tauriainen.jpg",
-      "companyLogo": "houston.svg",
+      "companyLogo": "houston2.svg",
       "text": [
         "我在Houston的任务集中在前端开发上。我们会使用各种技术和库，当然包括本课程中讲授的技术和库。作为一家咨询公司，我们帮助客户和合作伙伴通过更高的质量获得更好的结果。除了代码外，我们还带来了该领域的最佳实践，并帮助我们的客户取得成功。",
         "从很多方面来说，在Houston工作真是棒极了。我最喜欢员工至上的理念。听取并回应员工的想法，建议和意见。例如，Houston全力支持我启动导师计划。我们帮助来自不同领域的人员进行编程，指导他们获得最佳实践，并致力于使他们融入业务。这对我和Houston都非常有帮助。无论对方是客户，同事还是学生，我都会竭尽全力帮助他人。"
@@ -290,7 +290,7 @@
   "fr": [
     {
       "image": "Juha_Tauriainen.jpg",
-      "companyLogo": "houston.svg",
+      "companyLogo": "houston2.svg",
       "text": [
         "Mon rôle à Houston se concentre sur le développement Frontend. Nous utilisons tout un éventail de technologies et de bibliothèques, y compris celles enseignées dans ce cours. En tant que Counsulting house, nous aidons nos clients et partenaires à obtenir de meilleurs résultats grâce à une meilleure qualité. En plus du code, nous apportons les meilleures pratiques du domaine et aidons nos clients à réussir.",
         "Travailler à Houston est génial pour plusieurs raisons. Ce que j'aime le plus, c'est que les employés sont toujours numéro un. Les idées, suggestions et opinions du personnel sont entendues et prises en charge. Par exemple, Houston m'a apporté son soutien total pour démarrer un programme de mentorat. Nous aidons les personnes de différents domaines avec la programmation, les guidons vers les meilleures pratiques et visons à les amener à l'entreprise. Cela m'a beaucoup appris, ainsi qu'à Houston. J'aime beaucoup aider les autres, qu'ils soient clients, collègues de travail ou étudiants."
@@ -357,6 +357,78 @@
       ],
       "name": "Holly Gibson",
       "title": "Software Developer"
+    }
+  ],
+  "ptbr": [
+    {
+      "image": "Juha_Tauriainen.jpg",
+      "companyLogo": "houston2.svg",
+      "text": [
+        "Meu papel na Houston se concentra em desenvolvimento front-end. Usamos uma ampla gama de tecnologias e bibliotecas, incluindo as ensinadas neste curso. Como empresa de consultoria, ajudamos nossos clientes e parceiros a obterem melhores resultados através da melhor qualidade. Além do código, trazemos as melhores práticas do campo e ajudamos nossos clientes a alcançarem o sucesso.",
+        "Trabalhar na Houston é incrível por várias razões. O que mais gosto é que os funcionários são sempre tidos como prioridade. As ideias, sugestões e opiniões dos funcionários são ouvidas e respondidas. Por exemplo, a Houston me deu todo o seu apoio para iniciar um programa de mentoria. Ajudamos pessoas de diferentes campos com programação, orientamo-las com as melhores práticas e buscamos levá-las ao negócio. Isso me ensinou muito e muito também à Houston. Eu adoro ajudar outras pessoas, não importa se são clientes, colegas de trabalho ou alunos."
+      ],
+      "name": "Juha Tauriainen",
+      "title": "Consultor Sênior"
+    },
+    {
+      "image": "burcu_aybak.jpg",
+      "companyLogo": "unity.svg",
+      "text": [
+        "Trabalho na Unity como Engenheira de Software Full-stack e tenho dez anos de experiência em desenvolvimento de software, incluindo aplicações web, sistemas de comando e controle e sistemas de comunicação.",
+        "Amo trabalhar na área da engenharia de software porque é uma combinação entre soluções inteligentes de problemas e trabalho criativo. Às vezes me sinto como uma super-heroína! Porém, sempre há novas coisas e assuntos para aprender e você é pago para fazer o que gosta com pessoas que gosta — o trabalho na engenharia de software é divertido! Nossa indústria e clientes são divertidos (jogos!), e é ótimo fazer um trabalho que ajuda nossos clientes a ganhar a vida com o que amam.",
+        "Gosto de trabalhar na Unity porque me permite trabalhar com excelentes colegas e personalidades diferentes de todo o mundo que também são muito bons em suas respectivas áreas. É um lugar perfeito para aprender novas tecnologias e explorar novas áreas. A Unity é um lugar de trabalho tão perfeito em minha opnião que não consigo explicar em poucas palavras."
+      ],
+      "name": "Burcu Aybak",
+      "title": "Engenheira de Software"
+    },
+    {
+      "image": "Tuukka_Peuraniemi.jpg",
+      "companyLogo": "terveystalo.svg",
+      "text": [
+        "Tenho muitos anos de experiência em tecnologias relacionadas à saúde. Acabei me tornando um desenvolvedor de software após algumas reviravoltas. Comecei como farmacêutico. Em seguida, formei-me como Mestre em Ciência da Computação e prossegui como diretor de desenvolvimento e posteriormente como desenvolvedor de software.",
+        "Gosto de trabalhar na Terveystalo, porque aqui você tem voz ativa nas tecnologias que usamos e tem a escolha de decidir em quais projetos quer participar. Devido ao meu papel e minha experiência, tenho a oportunidade de participar do início e desenvolvimento de diferentes novos serviços. No momento, estou desenvolvendo um novo aplicativo móvel, que será lançado em breve.",
+        "Daqui para frente, quero continuar avançando em meu trabalho e continuar aprendendo. Trabalhar em projetos de multivendas com colegas experientes mantém e desenvolve minhas habilidades.",
+        "Acredito que a Terveystalo continuará oferecendo novos projetos significativos no futuro."
+      ],
+      "name": "Tuukka Peuraniemi",
+      "title": "Desenvolvedor de aplicativos e especialista digital."
+    },
+    {
+      "image": "kristiina_ronnberg.jpg",
+      "companyLogo": "konecranes.svg",
+      "text": [
+        "Em um campo onde o aprendizado contínuo é quase vital, eu tive a sorte de trabalhar com as tecnologias mais recentes e com os colegas mais experientes. Na Konecranes, tenho a oportunidade de trabalhar em um ambiente internacional e desenvolver soluções que trazem os benefícios da internet industrial para a vida cotidiana dos nossos clientes. A paleta de tecnologias que usamos é rica, e os métodos de desenvolvimento tornaram-se ainda mais ágeis — os conteúdos abrangidos neste curso também estão presentes em nosso trabalho.",
+        "Meu caminho para a TI não foi o mais direto. Estudei para ser uma professora finlandesa, mas acabei, continuando mmeus estudos, mudando de carreira para esse mundo diferente onde as habilidades de linguagem e escrita e criatividade são também enfatizadas. Em parte devido ao meu background, eu fiquei encantada que na Konecrass os diferentes backgrounds e habilidades dos funcionários são apreciados e seus avanços são apoiados. Neste tipo de ambiente, o novo campo no qual eu embarcava e meu desenvolvimento nele fez com que se torna-se algo natural e motivador."
+      ],
+      "name": "Kristiina Rönnberg",
+      "title": "Engenheira de Software"
+    },
+    {
+      "image": "Juho_Kyrola.jpg",
+      "companyLogo": "elisa.svg",
+      "text": [
+        "Eu trabalho na Elisa como desenvolvedor de software e estudo TI na Aalto University. Estou no final dos meus estudos e logo começarei a escrever minha tese. Também já completei diversos cursos enquanto que ao mesmo tempo travalhava aqui. Acabei na Elisa por recomendação de um amigo, ele me disse que esta é uma boa empresa para se trabalhar e me incentivou a me inscrever.",
+        "Trabalhei anteriormente em outras empresas por cerca de 1 ano e meio como desenvolvedor. A programação tem sido um hobby meu desde a infância e sempre soube que os computadores são minha praia. Minha primeira linguagem de programação foi Java.",
+        "Eu trabalho na Elisa Automate, com foco em uma plataforma de otimização para redes móveis. Trabalho com a plataforma em si, não com os algoritmos de otimização. As tecnologias que usei para projetos incluem Python, React, Elasticsearch e Docker, e para mim o melhor é exatamente isso — programação full stack. Você não é um herói do front-end, mas consegue fazer tudo. Isso mantém a paixão viva. Os projetos também têm significado para mim. É divertido que sejamos os pioneiros do campo e não apenas fazendo nossas próprias versões de algo que já existe.",
+        "Foi um pouco difícil no início entender o projeto em que trabalho hoje, mas pouco a pouco cheguei lá. Tem sido realmente motivador saber que isso é algo além de apenas criar um site \"normal\". É fácil se envolver com o trabalho sozinho, mas é importante manter em mente a importância do trabalho em equipe. Sem trabalho em equipe, avança-se lentamente e você pode acabar fazendo a coisa errada. Para novos funcionários (tanto estagiários quanto programadores mais experientes), seria benéfico fazer, por exemplo, programar em conjunto no início.",
+        "Antes disso, eu estava interessado em saber se a cultura em uma empresa grande seria muito presa, mas fiquei agradavelmente surpreso que minha equipe é muito ágil. Avançar o trabalho não parece uma tarefa difícil, mas quase uma caminhada no parque. Antes de começar meu trabalho, achei que acabaria facilmente isolado, mas na realidade pude fazer muitas coisas diferentes. É só pedir coisas diferentes para fazer! Você tem que assumir sua própria motivação.",
+        "A entrevista teve duas partes. Primeiro, eu conheci meu futuro chefe, que determinou que tipo de pessoa eu sou. No dia seguinte, houve uma entrevista técnica, onde minha competência foi testada através de conversas e pequenos exercícios. Durante todo o processo, você podia claramente ver o lado humano, eles não se preocupavam apenas em quão bom você era como desenvolvedor, mas também quem você é como pessoa. O processo de candidatura não me deu a sensação de estar sendo examinado, mas que estávamos procurando um terreno comum, e eu tive uma noção de quem seriam meus futuros colegas de equipe.",
+        "A cultura corporativa daqui atende às minhas expectativas e é fácil de organizar o seu trabalho em torno da sua vida. A comunicação também funciona bem, as coisas são discutidas o suficiente dentro da empresa e eu não tive a sensação de que há um lugar escuro e distante onde as coisas são decididas. Claro, você nem sempre sabe o que está sendo feito em outras equipes, mas isso parece acontecer em todas as outras grandes empresas.",
+        "Há oportunidades suficientes para avançar e aprender, e você pode usar suas habilidades. O gerente e o scrum master da sua equipe propõem coisas diferentes. Agora memso vou ao evento React Finland. No geral, é divertido em vez de ser chato ir ao trabalho todos os dias."
+      ],
+      "name": "Juho Kyrölä",
+      "title": "Desenvolvedor de Software"
+    },
+    {
+      "image": "holly_gibson_sq.jpg",
+      "companyLogo": "smartly_io.svg",
+      "text": [
+        "Trabalho como desenvolvedora de software na Smartly.io, construindo nossas ferramentas de templates de imagens e vídeos e criando uma experiência bonita e poderosa para os designers que criam mídias visuais. Nossa equipe trabalha com JavaScript, React e Node.js. Desde o primeiro momento, amei a cultura da Smartly.io, especialmente o nosso valor de sermos 'Humildes Caçadores Famintos'. Não temos ego inflado aqui, e somos humildes.",
+        "Ao mesmo tempo, sabemos que somos eternamente aprendizes, buscando sempre novos conhecimentos e nos aprimorando constantemente. Tenho alguma formação alternativa. Costumava trabalhar em TI em uma universidade e fiz um curso online de PHP para melhorar minhas habilidades técnicas. Tive uma das piores experiências possíveis e pensei que nunca me tornaria uma desenvolvedora. Fui trabalhar em organizações sem fins lucrativos na parte de marketing, gestão de websites e design gráfico. Minha carreira em desenvolvimento de software começou quando participei de um bootcamp intensivo de Ruby on Rails. Foi uma das coisas mais difíceis que fiz até então, mas me rendeu um emprego como o primeira e única desenvolvedora em uma startup de edtech. Como era responsável por tudo, desde os servidores até o banco de dados e o aplicativo web, precisei aprender muitas habilidades novas rapidamente. Até reconstruí nosso servidor no meio de uma floresta finlandesa durante minhas férias depois que ele foi hackeado! Ter tanta responsabilidade aumentou minha confiança como desenvolvedora profissional. Desde então, trabalhei em várias empresas com diferentes stacks e frameworks e avancei para uma posição de lider de equipe.",
+        "Sou parte engenheira e parte artista. Programar me permite usar ambos os lados do meu cérebro: a parte lógica que adora quebra-cabeças e solução de problemas e a parte artística que gosta de criar interfaces de usuário bonitas e funcionais. Também há um elemento profundamente humano no desenvolvimento de software que gosto. Quando estamos construindo ferramentas criativas, precisamos ter empatia e entender as necessidades de nossos clientes para ter sucesso em produzir algo fácil e poderoso de se usar."
+      ],
+      "name": "Holly Gibson",
+      "title": "Desenvolvedora de Software"
     }
   ]
 }

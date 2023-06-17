@@ -70,12 +70,12 @@ const fetchMovies = async () => {
  接下来，让我们在实践中尝试Fetch API。Rate-repository-api 服务器提供了一个端点，用于返回一个分页的已审核仓库的列表。一旦服务器运行，你应该能够访问[http://localhost:5000/api/repositories](http://localhost:5000/api/repositories)这个端点。数据是以常见的[基于游标的分页格式](https://graphql.org/learn/pagination/)分页的。实际的存储库数据在<i>node</i>键后面的<i>edges</i>阵列中。
 
 <!-- Unfortunately, we can't access the server directly in our application by using the <i>http://localhost:5000/api/repositories</i> URL. To make a request to this endpoint in our application we need to access the server using its IP address in its local network. To find out what it is, open the Expo development tools by running <em>npm start</em>. In the development tools you should be able to see an URL starting with <i>exp://</i> above the QR code:-->
- 不幸的是，我们不能通过使用<i>http://localhost:5000/api/repositories</i> URL在我们的应用中直接访问该服务器。为了在我们的应用中向这个端点发出请求，我们需要使用其本地网络中的IP地址访问服务器。要知道它是什么，通过运行<em>npm start</em>打开Expo开发工具。在开发工具中，你应该能够看到二维码上面有一个以<i>exp://<i>开头的URL。
+ 不幸的是，我们不能通过使用<i>http://localhost:5000/api/repositories</i> URL在我们的应用中直接访问该服务器。为了在我们的应用中向这个端点发出请求，我们需要使用其本地网络中的IP地址访问服务器。要知道它是什么，通过运行<em>npm start</em>打开Expo开发工具。在开发工具中，你应该能够看到二维码上面有一个以<i>exp://</i>开头的URL。
 
 ![Development tools](../../images/10/10.png)
 
 <!-- Copy the IP address between the <i>exp://</i> and <i>:</i>, which is in this example <i>192.168.100.16</i>. Construct an URL in format <i>http://<IP_ADDRESS>:5000/api/repositories</i> and open it in the browser. You should see the same response as you did with the <i>localhost</i> URL.-->
- 复制<i>exp://<i>和<i>:</i>之间的IP地址，在这个例子中是<i>192.168.100.16</i>。构建一个格式为<i>http://<IP_ADDRESS>:5000/api/repositories</i>的URL，并在浏览器中打开它。你应该看到与<i>localhost</i> URL相同的响应。
+ 复制<i>exp://</i>和<i>:</i>之间的IP地址，在这个例子中是<i>192.168.100.16</i>。构建一个格式为<i>http://<IP_ADDRESS>:5000/api/repositories</i>的URL，并在浏览器中打开它。你应该看到与<i>localhost</i> URL相同的响应。
 
 <!-- Now that we know the end point's URL let's use the actual server-provided data in our reviewed repositories list. We are currently using mock data stored in the <em>repositories</em> variable. Remove the <em>repositories</em> variable and replace the usage of the mock data with this piece of code in the <i>RepositoryList.jsx</i> file in the <i>components</i> directory:-->
  现在我们知道了端点的URL，让我们在审查的存储库列表中使用服务器提供的实际数据。我们目前正在使用存储在<em>repositories</em>变量中的模拟数据。删除<em>repositories</em>变量，用<i>components</i>目录下的<i>RepositoryList.jsx</i>文件中的这段代码替换模拟数据的使用。
