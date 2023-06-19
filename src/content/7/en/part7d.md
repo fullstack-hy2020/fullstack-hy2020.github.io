@@ -46,6 +46,7 @@ The <i>index.html</i> file located at the root of the build directory is the "ma
     <script defer="defer" src="/static/js/main.88d3369d.js"></script> 
     <link href="/static/css/main.1becb9f2.css" rel="stylesheet">
   </head>
+  <body>
     <div id="root"></div>
   </body>
 </html>
