@@ -502,6 +502,7 @@ Luetellaan tässä kaikesta huolimatta muitakin UI-frameworkeja:
 - <https://www.radix-ui.com/>
 - <https://react-spectrum.adobe.com/react-aria/index.html>
 - <https://master.co/>
+- <https://baseweb.design/>
 
 Jos oma suosikkisi ei ole mukana, tee pull request!
 
