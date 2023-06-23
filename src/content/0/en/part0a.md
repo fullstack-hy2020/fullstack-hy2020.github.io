@@ -1,5 +1,5 @@
 ---
-mainImage: ../../../images/part-0.svg
+main image: ../../../images/part-0.svg
 part: 0
 letter: a
 lang: en
@@ -57,12 +57,12 @@ it is quite likely that nobody will respond. The bug can be <i>anywhere</i>.
 
 A better question could be
 
-> <i> In the exercise 2.15 when I try to add a new person to the app, server responds to 403, despite the request looks ok to me.
+> <i> In exercise 2.15 when I try to add a new person to the app, the server responds to 403, despite the request looking ok to me.
 >
 > The code looks like this
 >
 > ```js
->   // the relevant part of code is pasted here
+>   //The relevant part of the code is pasted here
 >   // code should contain several console.log statements for helping the debugging
 > ```
 >
@@ -74,7 +74,7 @@ A better question could be
 >
 > The network tab looks like the following</i>
 >
-> [screen shot from the network console]
+> [screenshot from the network console]
 >
 > All the code can be found here (a link to GitHub)
 
