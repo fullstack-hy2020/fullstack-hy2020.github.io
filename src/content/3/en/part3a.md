@@ -603,6 +603,8 @@ Many tools exist for making the testing of backends easier. One of these is a co
 Let's install the Postman desktop client [from here](https://www.postman.com/downloads/)  and try it out:
 
 ![postman screenshot on api/notes/2](../../images/3/11x.png)
+NB: Postman is also available on VS Code which can be dowloaded from the Extension tab on the left -> search for Postman -> First result (Verified Publisher) -> Install
+You will then see an extra icon added on the activity bar below the extensions tab. Once you login, you can follow from the steps below 
 
 Using Postman is quite easy in this situation. It's enough to define the URL and then select the correct request type (DELETE).
 
