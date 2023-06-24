@@ -154,7 +154,7 @@ xhttp.onreadystatechange = function() {
       li.appendChild(document.createTextNode(note.content))
     })
 
-    document.getElementsByClassName('notes').appendChild(ul)
+    document.getElementsByClassName('notes')[0].appendChild(ul)
   }
 }
 
