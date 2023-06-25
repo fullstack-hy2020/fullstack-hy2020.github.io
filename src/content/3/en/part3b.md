@@ -104,6 +104,7 @@ Some course participants have also used the following
 - [Cyclic](https://www.cyclic.sh/)
 - [Replit](https://replit.com)
 - [CodeSandBox](https://codesandbox.io)
+- [Vercel](https://vercel.com/new)
 
 If you know some other good and easy-to-use services for hosting NodeJS, please let us know!
 
