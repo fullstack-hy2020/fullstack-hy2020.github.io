@@ -13,7 +13,7 @@ Let's continue our work on the backend of the notes application we started in [p
 
 Before we move into the topic of testing, we will modify the structure of our project to adhere to Node.js best practices.
 
-After making the changes to the directory structure of our project, we end up with the following structure:
+Once we make the changes to the directory structure of our project, we will end up with the following structure:
 
 ```bash
 ├── index.js
