@@ -832,7 +832,7 @@ npm install express-async-errors
 ```
 
 Using the library is <i>very</i> easy.
-You introduce the library in <i>app.js</i>:
+You introduce the library in <i>app.js</i>, _before_ you import your routes:
 
 ```js
 const config = require('./utils/config')
