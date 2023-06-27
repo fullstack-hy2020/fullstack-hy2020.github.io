@@ -82,7 +82,7 @@ We'd likely want to do some of these steps:
 
 We'll discuss each of these steps (and when they're suitable) in more detail later. What is important to remember is that this process should be strictly defined. 
 
-Usually, strict definitions act as a constraint on creativity/development speed. This, however, should usually not be true for CI. This strictness should be set up in such a way as to allow for easier development and working together. Using a good CI system (such as GitHub Actions that we'll cover in this part) will allow us to do this all automagically.
+Usually, strict definitions act as a constraint on creativity/development speed. This, however, should usually not be true for CI. This strictness should be set up in such a way as to allow for easier development and working together. Using a good CI system (such as GitHub Actions that we'll cover in this part) will allow us to do this all automatically.
 
 ### Packaging and Deployment as a part of CI
 
