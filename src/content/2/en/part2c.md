@@ -372,7 +372,10 @@ As such, effect hooks are precisely the right tool to use when fetching data fro
 Let's remove the fetching of data from <i>index.js</i>. Since we're going to be retrieving the notes from the server, there is no longer a need to pass data as props to the <i>App</i> component. So <i>index.js</i> can be simplified to:
 
 ```js
-ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+import ReactDOM from "react-dom/client";
+import App from "./App";
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 ```
 
 The <i>App</i> component changes as follows:
