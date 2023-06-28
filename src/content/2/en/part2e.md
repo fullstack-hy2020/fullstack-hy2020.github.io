@@ -526,7 +526,7 @@ const App = () => {
 }
 ```
 
-The useEffect hook has now _[currency]_ as the second parameter. The effect function is therefore executed after the first render, and <i>always</i> after the table as its second parameter _[currency]_ changes. That is, when the state _currency_ gets a new value, the content of the table changes and the effect function is executed.
+The useEffect hook now has _[currency]_ as the second parameter. The effect function is therefore executed after the first render, and <i>always</i> after the table as its second parameter _[currency]_ changes. That is, when the state _currency_ gets a new value, the content of the table changes and the effect function is executed.
 
 The effect has the following condition
 
@@ -620,7 +620,7 @@ you can access the value of the key from the _process.env_ object:
 
 ```js
 const api_key = process.env.REACT_APP_API_KEY
-// variable api_key has now the value set in startup
+// variable api_key now has the value set in startup
 ```
 
 Note that if you created the application using _npx create-react-app ..._ and you want to use a different name for your environment variable then the environment variable name must still begin with *REACT\_APP_*. You can also use a `.env` file rather than defining it on the command line each time by creating a file entitled '.env' in the root of the project and adding the following.
