@@ -7,7 +7,7 @@ lang: en
 
 <div class="tasks">
 
-**NOTE**: this is the old ending section of the 6 part that has 30th January 2023 been replaced with material about [React Query, useReducer and context](/en/part6/react_query_use_reducer_and_the_context). This section remains here for a couple of weeks.
+**NOTE**: this is the old ending section of the part 6 that has 30th January 2023 been replaced with material about [React Query, useReducer and context](/en/part6/react_query_use_reducer_and_the_context). This section remains here for a couple of weeks.
 
 If you have started with the exercises (6.19-6.21) that use the Redux connect you may continue with those. If you have not yet started, I recommend to proceed with the new section.
 </div>
@@ -595,7 +595,7 @@ More about this [here](https://www.simplethread.com/cant-replace-redux-with-hook
 
 ### Exercises 6.19.-6.21
 
-**NOTE**: this is the old ending section of the 6 part that has 30th January 2023 been replaced with material about [React Query, useReducer and context](/en/part6/react_query_use_reducer_and_the_contex). This section remains here for a couple of weeks.
+**NOTE**: this is the old ending section of the part 6 that has 30th January 2023 been replaced with material about [React Query, useReducer and context](/en/part6/react_query_use_reducer_and_the_contex). This section remains here for a couple of weeks.
 
 If you have started with the exercises that use the Redux connect you may continue with those. If you have not yet started, I recommend to proceed with the new section.
 
