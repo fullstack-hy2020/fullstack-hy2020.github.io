@@ -856,7 +856,7 @@ Note que o create-react-app também tem uma [configuração padrão do ESLint](h
 
 <div class="tasks">
 
-### Ecercício 5.12.
+### Exercício 5.12.
 
 #### 5.12: Frontend da lista de blogs, passo 12
 
