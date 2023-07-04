@@ -525,6 +525,11 @@ Let's define the <i>npm script _test_</i> to execute tests with Jest and to repo
 }
 ```
 
+If you are using _import_ statements you need to modify the _test_ script to this for it to work, see: https://stackoverflow.com/a/64491317
+```bash
+"test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+```
+
 Jest requires one to specify that the execution environment is Node. This can be done by adding the following to the end of <i>package.json</i>:
 
 ```js
