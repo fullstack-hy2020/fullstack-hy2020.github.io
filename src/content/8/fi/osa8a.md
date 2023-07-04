@@ -699,7 +699,7 @@ Jos yritämme luoda uuden henkilön, mutta parametrit eivät vastaa skeemassa m�
 
 GraphQL:n [validoinnin](https://graphql.org/learn/validation/) avulla pystytään siis jo automaattisesti hoitamaan osa virheenkäsittelyä. 
 
-Kaikkea GraphQL ei kuitenkaan pysty hoitamaan automaattisesti. Esimerkiksi tarkemmat säännöt mutaatiolla lisättävän datan kenttien muodolle on lisättävä itse. Niistä aiheutuvat virheet tulee hoitaa itse heittämällä sopivalla [virhekoodilla](https://www.apollographql.com/docs/apollo-server/data/errors/#built-in-error-codes) varustetu [GraphQLError](https://www.apollographql.com/docs/apollo-server/data/errors/#custom-errors).
+Kaikkea GraphQL ei kuitenkaan pysty hoitamaan automaattisesti. Esimerkiksi tarkemmat säännöt mutaatiolla lisättävän datan kenttien muodolle on lisättävä itse. Niistä aiheutuvat virheet tulee hoitaa itse heittämällä sopivalla [virhekoodilla](https://www.apollographql.com/docs/apollo-server/data/errors/#built-in-error-codes) varustettu [GraphQLError](https://www.apollographql.com/docs/apollo-server/data/errors/#custom-errors).
 
 Estetään saman nimen lisääminen puhelinluetteloon useampaan kertaan:
 
