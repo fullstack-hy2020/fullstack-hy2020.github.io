@@ -525,6 +525,11 @@ Määritellään npm-skripti <i>test</i> suorittamaan testaus Jestillä ja rapor
 }
 ```
 
+Jos käytät _import_ tapaa, tarvitsee muokata _test_ skripti alla olevaan jotta se toimii. Lisätietoa: https://stackoverflow.com/a/64491317
+```bash
+"test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+```
+
 Jestille pitää vielä kertoa, että suoritusympäristönä on käytössä Node. Tämä tapahtuu esim. lisäämällä <i>package.json</i> tiedoston loppuun seuraavaa:
 
 ```js
