@@ -760,7 +760,7 @@ Accessing the <em>AuthStorage</em> instance with <em>useContext(AuthStorageConte
 import { createContext } from 'react';
 import { useContext } from 'react'; 
 
-const AuthStorageContext = createContext();
+import AuthStorageContext from './src/contexts/AuthStorageContext';
 
 export const useAuthStorage = () => {
   return useContext(AuthStorageContext);
