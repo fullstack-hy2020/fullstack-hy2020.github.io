@@ -366,6 +366,7 @@ In the case of Fly.io the new deployment is done with the command
 ```bash
 fly deploy
 ```
+Before running the above command, you need to check the `.dockerignore` file in the root of your backend repository: if it contains `/build`, you should delete that part. If you don't, your build folder will not be copied to the Docker container.
 
 The application works perfectly, except we haven't added the functionality for changing the importance of a note to the backend yet.
 
