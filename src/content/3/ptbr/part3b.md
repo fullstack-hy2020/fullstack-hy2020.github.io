@@ -176,12 +176,6 @@ Se tudo correr bem, a aplicação deverá estar em funcionamento. Você pode abr
 fly open
 ```
 
-Depois da configuração inicial, quando o código da aplicação for atualizado, poderá ser implantada na produção com o comando:
-
-```bash
-fly deploy
-```
-
 Um comando particularmente importante é _fly logs_. Este comando pode ser usado para visualizar os logs do servidor. É melhor manter os logs sempre visíveis!
 
 **Atenção:** Em alguns casos (a causa é até agora desconhecida) executar comandos Fly.io, especialmente no Windows WSL, causou problemas. Se o seguinte comando simplesmente travar:

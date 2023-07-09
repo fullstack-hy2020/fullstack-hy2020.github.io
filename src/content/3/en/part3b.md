@@ -190,12 +190,6 @@ If all goes well, the app should now be up and running. You can open it in the b
 fly open
 ```
 
-After the initial setup, when the app code has been updated, it can be deployed to production with the command
-
-```bash
-fly deploy
-```
-
 A particularly important command is _fly logs_. This command can be used to view server logs. It is best to keep logs always visible!
 
 **Note:** In some cases (the cause is so far unknown) running Fly.io commands especially on Windows WSL has caused problems. If the following command just hangs
