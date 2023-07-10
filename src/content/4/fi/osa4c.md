@@ -440,6 +440,7 @@ notesRouter.post('/', async (request, response) => {
 ```
 
 Huomionarvoista on nyt se, että myös <i>user</i>-olio muuttuu. Sen kenttään <i>notes</i> talletetaan luodun muistiinpanon <i>id</i>:
+Koska tieto tallennetaan <i>user</i>-olioon tulee muistiinpanoa poistettaessa tieto poistaa myös <i>user</i>-olion listalta.
 
 ```js
 const user = User.findById(body.userId)
