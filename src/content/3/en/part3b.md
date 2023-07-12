@@ -176,7 +176,12 @@ This will cause the following warning once deployed and result in your app being
 WARNING The app is not listening on the expected address and will not be reachable by fly-proxy
 ```
 
-Change internal_port to 8080 if your configuration is as mentioned above.
+Change internal_port to 8080 if your configuration is as mentioned above. Also add:
+
+```bash
+[env]
+  PORT = "8080"
+```
 
 We are now ready to deploy the app to the Fly.io servers. That is done with the following command:
 
