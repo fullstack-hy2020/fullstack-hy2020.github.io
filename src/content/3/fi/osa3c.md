@@ -491,7 +491,7 @@ Yhteyden muodostavalle metodille on nyt rekisteröity onnistuneen ja epäonnistu
 On useita tapoja määritellä ympäristömuuttujan arvo. Voimme esim. antaa sen ohjelman käynnistyksen yhteydessä seuraavasti:
 
 ```bash
-MONGODB_URI=osoite_tahan npm run dev
+MONGODB_URI=osoite_tahan
 ```
 
 Eräs kehittyneempi tapa on käyttää [dotenv](https://github.com/motdotla/dotenv#readme)-kirjastoa. Asennetaan kirjasto komennolla

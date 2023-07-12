@@ -598,7 +598,7 @@ mongoose.connect(url)
  定义环境变量的值有很多方法。一种方法是在应用启动时定义它。
 
 ```bash
-MONGODB_URI=address_here npm run dev
+MONGODB_URI=address_here
 ```
 
 <!-- A more sophisticated way is to use the [dotenv](https://github.com/motdotla/dotenv#readme) library. You can install the library with the command:-->

@@ -507,7 +507,7 @@ La méthode d'établissement de la connexion est maintenant dotée de fonctions 
 Il existe de nombreuses façons de définir la valeur d'une variable d'environnement. L'une d'elles consiste à la définir au démarrage de l'application :
 
 ```bash
-MONGODB_URI=address_here npm run dev
+MONGODB_URI=address_here
 ```
 
 Une méthode plus sophistiquée consiste à utiliser la bibliothèque [dotenv](https://github.com/motdotla/dotenv#readme). Vous pouvez installer la bibliothèque avec la commande :
