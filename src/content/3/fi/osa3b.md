@@ -143,12 +143,6 @@ Jos kaikki menee hyvin, sovellus käynnistyy ja saat sen avattua selaimeen komen
 fly open
 ```
 
-Tämän jälkeen aina kun teet muutoksia sovellukseen, saat vietyä uuden version tuotantoon komennolla 
-
-```bash
-fly deploy
-```
-
 Erittäin tärkeä komento on myös _fly logs_ jonka avulla voit seurata tuotantopalvelimen konsoliin tulostuvia logeja. Logit on viisainta pitää koko ajan näkyvillä.
 
 #### Render
