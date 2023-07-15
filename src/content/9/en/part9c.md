@@ -654,7 +654,7 @@ We can do that by using the utility type [Pick](https://www.typescriptlang.org/d
 In our project, we should consider that Ilari might want to create a listing of all his diary entries <i>excluding</i> the comment field since, during a very scary flight, he might end up writing something he wouldn't necessarily want to show anyone else.
 
 The [Pick](https://www.typescriptlang.org/docs/handbook/utility-types.html#picktype-keys) utility type allows us to choose which fields of an existing type we want to use.
-Pick can be used to either construct a completely new type or to inform a function what it should return on runtime.
+Pick can be used to either construct a completely new type or to inform a function that it should return on runtime.
 Utility types are a special kind of type, but they can be used just like regular types.
 
 In our case, to create a "censored" version of the *DiaryEntry* for public displays, we can use *Pick* in the function declaration:
@@ -1112,7 +1112,7 @@ export default toNewDiaryEntry;
 >};
 >```
 >
-> <i>So before the real data and types are ready to use, I am just returning here something that has for the sure the right type. The code stays in an operational state all the time and my blood pressure remains in normal level. </i>
+> <i>So before the real data and types are ready to use, I am just returning here something that has for sure the right type. The code stays in an operational state all the time and my blood pressure remains in normal level. </i>
 
 ### Type guards
 
