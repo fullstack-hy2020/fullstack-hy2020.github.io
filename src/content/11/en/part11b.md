@@ -329,11 +329,11 @@ Once you have fixed all the issues and the Pokedex is bug-free, the workflow run
 
 ![tests fixed](../../images/11/8.png)
 
-#### 11.9 Simple end to end -tests
+#### 11.9 Simple end to end tests
 
 The current set of tests use [Jest](https://jestjs.io/) to ensure that the React components work as intended. This is exactly the same thing that is done in section [Testing React apps](/en/part5/testing_react_apps) of part 5. 
 
-Testing components in isolation is quite useful but that still does not ensure that the system as a whole works as we wish. To have more confidence about this, let us write a couple of really simple end to end -tests with the [Cypress](https://www.cypress.io/) library similarly what we do in section [End to end testing](/en/part5/end_to_end_testing) of part 5. 
+Testing components in isolation is quite useful but that still does not ensure that the system as a whole works as we wish. To have more confidence about this, let us write a couple of really simple end to end tests with the [Cypress](https://www.cypress.io/) library similarly what we do in section [End to end testing](/en/part5/end_to_end_testing) of part 5. 
 
 So, setup Cypress (you'll find [here](/en/part5/end_to_end_testing/) all info you need) and use this test at first:
 
@@ -379,6 +379,6 @@ The end result should be something like this
 
 ![e2e tests](../../images/11/9.png)
 
-End to end -tests are nice since they give us confidence that software works from the end user's perspective. The price we have to pay is the slower feedback time. Now executing the whole workflow takes quite much longer.
+End to end tests are nice since they give us confidence that software works from the end user's perspective. The price we have to pay is the slower feedback time. Now executing the whole workflow takes quite much longer.
 
 </div>
