@@ -366,7 +366,7 @@ Once the end to end test works in your machine, include it in the GitHub Action 
     wait-on: http://localhost:5000
 ```
 
-Three options are used. [command](https://github.com/cypress-io/github-action#custom-test-command) specifies how to run Cypress tests. [start](https://github.com/cypress-io/github-action#start-server) gives npm script that starts the server and [wait-on](https://github.com/cypress-io/github-action#wait-on) says that before the tests are run, the server should have started in url <http://localhost:5000>.
+Three options are used: [command](https://github.com/cypress-io/github-action#custom-test-command) specifies how to run Cypress tests, [start](https://github.com/cypress-io/github-action#start-server) gives npm script that starts the server, and [wait-on](https://github.com/cypress-io/github-action#wait-on) says that before the tests are run, the server should have started on url <http://localhost:5000>.
 
 
 Once you are sure that the pipeline works, <i>write another test</i> that ensures that one can navigate from the main page to the page of a particular Pokemon, e.g. <i>ivysaur</i>. The test does not need to be a complex one, just check that when you navigate a link, the page has some right content, such as the string <i>chlorophyll</i> in the case of <i>ivysaur</i>.
