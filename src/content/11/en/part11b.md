@@ -351,7 +351,7 @@ Define a npm script <code>test:e2e</code> for running the e2e tests from the com
 
 **Note** do not include the word <i>spec</i> in the Cypress test file name, that would cause also Jest to run it, and it might cause problems. 
 
-**Another thing to note** is that despite the page renders the Pokemon names by starting with a capital letter, the names are actually written with lower case letters in the source, so it is <code>ivysaur</code> instead of <code>Ivysaur</code>!
+**Another thing to note** is that although the page renders the Pokemon names with an initial capital letter, the names are actually written with lower case letters in the source, so you should test for <code>ivysaur</code> instead of <code>Ivysaur</code>!
 
 Ensure that the test passes locally. Remember that the Cypress tests _assume that the application is up and running_ when you run the test! If you have forgotten the details (that happened to me too!), please see [part 5](/en/part5/end_to_end_testing) how to get up and running with Cypress.
 
