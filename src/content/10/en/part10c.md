@@ -757,16 +757,14 @@ Note that accessing a context's value using the <em>useContext</em> hook only wo
 Accessing the <em>AuthStorage</em> instance with <em>useContext(AuthStorageContext)</em> is quite verbose and reveals the details of the implementation. Let's improve this by implementing a <em>useAuthStorage</em> hook in a <i>useAuthStorage.js</i> file in the <i>hooks</i> directory:
 
 ```javascript
-import { createContext } from 'react';
-import { useContext } from 'react'; 
+import { useContext } from 'react';
+import AuthStorageContext from '../contexts/AuthStorageContext';
 
-const AuthStorageContext = createContext();
-
-export const useAuthStorage = () => {
+const useAuthStorage = () => {
   return useContext(AuthStorageContext);
 };
 
-export default AuthStorageContext;
+export default useAuthStorage;
 ```
 
 The hook's implementation is quite simple but it improves the readability and maintainability of the hooks and components using it. We can use the hook to refactor the <em>useSignIn</em> hook like this:
