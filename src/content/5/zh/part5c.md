@@ -737,7 +737,7 @@ test('renders content', () => {
 
   render(<Note note={note} />)
 
-  const element = screen.getByText('Does not work anymore :(')
+  const element = screen.getByText('Does not work')
 
   expect(element).toBeDefined()
 })
@@ -748,7 +748,7 @@ test('renders content', () => {
 
 ```js
 const element = screen.getByText(
-  'Does not work anymore :(', { exact: false }
+  'Does not work', { exact: false }
 )
 ```
 
@@ -756,7 +756,7 @@ const element = screen.getByText(
  或者我们可以使用_findByText_命令。
 
 ```js
-const element = await screen.findByText('Does not work anymore :(')
+const element = await screen.findByText('Does not work')
 ```
 
 <!-- It is important to notice that unlike the other _ByText_ commands, _findByText_ returns a promise!-->

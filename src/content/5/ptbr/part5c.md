@@ -666,7 +666,7 @@ test('renders content', () => {
 
   render(<Note note={note} />)
 
-  const element = screen.getByText('Does not work anymore :(')
+  const element = screen.getByText('Does not work')
 
   expect(element).toBeDefined()
 })
@@ -676,14 +676,14 @@ Command _getByText_ procura um elemento que tenha o **mesmo texto**  que possui 
 
 ```js
 const element = screen.getByText(
-  'Does not work anymore :(', { exact: false }
+  'Does not work', { exact: false }
 )
 ```
 
 ou poderíamos usar o comando _findByText_:
 
 ```js
-const element = await screen.findByText('Does not work anymore :(')
+const element = await screen.findByText('Does not work')
 ```
 
 É importante notar que, diferentemente dos outros comandos _ByText_, _findByText_ retorna uma promessa!
