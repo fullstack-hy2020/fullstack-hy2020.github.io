@@ -369,6 +369,8 @@ fly deploy
 
 The application works perfectly, except we haven't added the functionality for changing the importance of a note to the backend yet.
 
+<i>**NOTE:** If you are using Fly.io, there could be a .dockerignore file that specifies the exclusion of the "./build" directory during deployment. To ensure it gets deployed, consider renaming the ./build directory to ./static_build or an equivalent name.</i>
+
 ![screenshot of notes application](../../images/3/30new.png)
 
 <i>**NOTE:** changing of the importance DOES NOT work yet since the backend has no implementation for it yet.</i>
