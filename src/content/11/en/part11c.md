@@ -332,7 +332,7 @@ If you rather want to use other hosting options, there is an alternative set of 
 
 #### 11.10 Deploying your application to Render
 
-Set up your application in [Render](render.com). The setup is now not quite as straightforward as in [part 3](/en/part3/deploying_app_to_internet#application-to-the-internet). You have to carefully think about what should go to these settings:
+Set up your application in [Render](https://render.com/). The setup is now not quite as straightforward as in [part 3](/en/part3/deploying_app_to_internet#application-to-the-internet). You have to carefully think about what should go to these settings:
 
 ![](../../images/11/render1.png)
 
