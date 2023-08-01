@@ -175,7 +175,7 @@ would cause the following to be printed
 -1
 </pre>
 
-The code of our counter application is the following. All of the code has been written in the same file (_index.js_), so <i>store</i> is straight available for the React code. We will get to know better ways to structure React/Redux code later.
+The code of our counter application is the following. All of the code has been written in the same file (_index.js_), so <i>store</i> is directly available for the React code. We will get to know better ways to structure React/Redux code later.
 
 ```js
 import React from 'react'
@@ -256,7 +256,7 @@ The full explanation is as follows
 >
 ><i>You should not be using the redux core package by itself today, except for learning purposes. The createStore method from the core redux package will not be removed, but we encourage all users to migrate to using Redux Toolkit for all Redux code.</i>
 
-So, instead of the function <i>createStore</i>, it is recommended to use the slightly more "advanced" function <i>configureStore</i>, and we will also use it when we have taken over the basic functionality of Redux.
+So, instead of the function <i>createStore</i>, it is recommended to use the slightly more "advanced" function <i>configureStore</i>, and we will also use it when we have achieved the basic functionality of Redux.
 
 Side note: <i>createStore</i> is defined as "deprecated", which usually means that the feature will be removed in some newer version of the library. The explanation above and the discussion of [this one](https://stackoverflow.com/questions/71944111/redux-createstore-is-deprecated-cannot-get-state-from-getstate-in-redux-ac) reveal that <i> createStore</i> will not be removed, and it has been given the status <i>deprecated</i>, perhaps with slightly incorrect reasons. So the function is not obsolete, but today there is a more preferable, new way to do almost the same thing.
 
