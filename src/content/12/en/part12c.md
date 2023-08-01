@@ -553,7 +553,7 @@ http {
 
 #### Exercise 12.17: Set up an Nginx reverse proxy server in front of todo-frontend
 
-We are going to put the Nginx server in front of both todo-frontend and todo-backend. Let's start by creating a new docker-compose file <i>todo-app/docker-compose.dev.yml</i> and <i>todo-app/nginx.conf</i>.
+We are going to put the Nginx server in front of both todo-frontend and todo-backend. Let's start by creating a new docker-compose file <i>todo-app/docker-compose.dev.yml</i> and <i>todo-app/nginx.dev.conf</i>.
 
 ```bash
 todo-app
