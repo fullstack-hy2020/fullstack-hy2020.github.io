@@ -214,7 +214,7 @@ const Togglable = (props) => {
 export default Togglable
 ```
 
-The new and interesting part of the code is [props.children](https://reactjs.org/docs/glossary.html#propschildren), which is used for referencing the child components of the component. The child components are the React elements that we define between the opening and closing tags of a component.
+The new and interesting part of the code is [props.children](https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children), which is used for referencing the child components of the component. The child components are the React elements that we define between the opening and closing tags of a component.
 
 This time the children are rendered in the code that is used for rendering the component itself:
 
@@ -277,9 +277,9 @@ You can find the code for our current application in its entirety in the <i>part
 
 The state of the application currently is in the _App_ component.
 
-React documentation says the [following](https://reactjs.org/docs/lifting-state-up.html) about where to place the state:
+React documentation says the [following](https://react.dev/learn/sharing-state-between-components) about where to place the state:
 
-<i>Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor.</i>
+<i>Sometimes, you want the state of two components to always change together. To do it, remove state from both of them, move it to their closest common parent, and then pass it down to them via props. This is known as lifting state up, and it’s one of the most common things you will do writing React code.</i>
 
 If we think about the state of the forms, so for example the contents of a new note before it has been created, the _App_ component does not need it for anything.
 We could just as well move the state of the forms to the corresponding components.
@@ -382,7 +382,7 @@ const App = () => {
 }
 ```
 
-The [useRef](https://reactjs.org/docs/hooks-reference.html#useref) hook is used to create a <i>noteFormRef</i> ref, that is assigned to the <i>Togglable</i> component containing the creation note form. The <i>noteFormRef</i> variable acts as a reference to the component. This hook ensures the same reference (ref) that is kept throughout re-renders of the component.
+The [useRef](https://react.dev/reference/react/useRef) hook is used to create a <i>noteFormRef</i> ref, that is assigned to the <i>Togglable</i> component containing the creation note form. The <i>noteFormRef</i> variable acts as a reference to the component. This hook ensures the same reference (ref) that is kept throughout re-renders of the component.
 
 We also make the following changes to the <i>Togglable</i> component:
 
@@ -423,9 +423,9 @@ const Togglable = forwardRef((props, refs) => { // highlight-line
 export default Togglable
 ```
 
-The function that creates the component is wrapped inside of a [forwardRef](https://reactjs.org/docs/react-api.html#reactforwardref) function call. This way the component can access the ref that is assigned to it.
+The function that creates the component is wrapped inside of a [forwardRef](https://react.dev/reference/react/forwardRef) function call. This way the component can access the ref that is assigned to it.
 
-The component uses the [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) hook to make its <i>toggleVisibility</i> function available outside of the component.
+The component uses the [useImperativeHandle](https://react.dev/reference/react/useImperativeHandle) hook to make its <i>toggleVisibility</i> function available outside of the component.
 
 We can now hide the form by calling <i>noteFormRef.current.toggleVisibility()</i> after a new note has been created:
 
@@ -444,11 +444,11 @@ const App = () => {
 }
 ```
 
-To recap, the [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) function is a React hook, that is used for defining functions in a component, which can be invoked from outside of the component.
+To recap, the [useImperativeHandle](https://react.dev/reference/react/useImperativeHandle) function is a React hook, that is used for defining functions in a component, which can be invoked from outside of the component.
 
 This trick works for changing the state of a component, but it looks a bit unpleasant. We could have accomplished the same functionality with slightly cleaner code using "old React" class-based components. We will take a look at these class components during part 7 of the course material. So far this is the only situation where using React hooks leads to code that is not cleaner than with class components.
 
-There are also [other use cases](https://reactjs.org/docs/refs-and-the-dom.html) for refs than accessing React components.
+There are also [other use cases](https://react.dev/learn/manipulating-the-dom-with-refs) for refs than accessing React components.
 
 You can find the code for our current application in its entirety in the <i>part5-6</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-6).
 
