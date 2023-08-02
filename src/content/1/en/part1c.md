@@ -218,11 +218,16 @@ the component won't re-render. We can get the component to re-render by calling 
 ```js
 let counter = 1
 
+const root  =  {
+  ReactDOM.createRoot(document.getElementById('root'))
+}
+
 const refresh = () => {
-  ReactDOM.createRoot(document.getElementById('root')).render(
+  root.render(
     <App counter={counter} />
   )
 }
+
 
 refresh()
 counter += 1
@@ -232,6 +237,8 @@ refresh()
 ```
 
 The re-rendering command has been wrapped inside of the _refresh_ function to cut down on the amount of copy-pasted code.
+
+Note that it is not a good practice in React 18 to call _ReactDOM.createRoot()_ inside the _refresh_ function to avoid _ReactDOM.createRoot()_ being called multiple times.
 
 Now the component <i>renders three times</i>, first with the value 1, then 2, and finally 3. However, values 1 and 2 are displayed on the screen for such a short amount of time that they can't be noticed.
 
