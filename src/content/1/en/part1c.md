@@ -90,7 +90,7 @@ const Hello = (props) => {
   const age = props.age
   // highlight-end
 
-  const bornYear = () => new Date().getFullYear() - age
+  const bornYear = () => new Date().getFullYear() - age // highlight-line
 
   return (
     <div>
