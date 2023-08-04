@@ -62,7 +62,7 @@ Next we will have three sets of exercises for automazing the deployment with Git
 
 Before going to the below exercises, you should setup your application in [Fly.io](https://fly.io/) hosting service like the one we did in [part 3](/en/part3/deploying_app_to_internet#application-to-the-internet).
 
-If you rather want to use other hosting options, there is an alternative set of exercises for [Render](http://localhost:8000/en/part11/deployment#exercises-11-10-11-12-render) and for [Heroku](/en/part11/deployment#exercises-11-10-11-12-heroku).
+If you rather want to use other hosting options, there is an alternative set of exercises for [Render](/en/part11/deployment#exercises-11-10-11-12-render) and for [Heroku](/en/part11/deployment#exercises-11-10-11-12-heroku).
 
 In contrast to part 3 now we <i>do not deploy the code</i> to Fly.io ourselves (with the command <i>flyctl deploy</i>), we let the GitHub Actions workflow do that for us!
 
