@@ -174,7 +174,7 @@ describe('Greeting', () => {
 
 Tests use the object [screen](https://callstack.github.io/react-native-testing-library/docs/api#screen) to do the queries to the rendered component.
 
-We acquire the <em>Text</em> node containing certain text by using the <em>getByText</em> function. The Jest matcher [toBeDefined](https://jestjs.io/docs/expect#tobedefined) is used to to ensure that the query has found the element.
+We acquire the <em>Text</em> node containing certain text by using the <em>getByText</em> function. The Jest matcher [toBeDefined](https://jestjs.io/docs/expect#tobedefined) is used to ensure that the query has found the element.
 
 React Native Testing Library's documentation has some good hints on [how to query different kinds of elements](https://callstack.github.io/react-native-testing-library/docs/how-should-i-query). Another guide worth reading is Kent C. Dodds article [Making your UI tests resilient to change](https://kentcdodds.com/blog/making-your-ui-tests-resilient-to-change).
 
