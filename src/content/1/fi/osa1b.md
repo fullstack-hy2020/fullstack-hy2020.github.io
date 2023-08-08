@@ -325,7 +325,7 @@ const App = () => {
 }
 ```
 
-**HUOM:** tässä vaiheessa <i>voit olettaa, että taulukossa on aina kolme alkiota</i>, eli taulukkoa ei ole pakko käydä läpi looppaamalla. Palataan taulukossa olevien olioiden perusteella tapahtuvaan komponenttien renderöintiin myöhemmin kurssin [seuraavassa osassa](../osa2).
+**HUOM:** tässä vaiheessa <i>voit olettaa, että taulukossa on aina kolme alkiota</i>, eli taulukkoa ei ole pakko käydä läpi silmukalla. Palataan taulukossa olevien olioiden perusteella tapahtuvaan komponenttien renderöintiin myöhemmin kurssin [seuraavassa osassa](../osa2).
 
 Älä kuitenkaan välitä eri olioita komponentista <i>App</i> sen sisältämiin komponentteihin <i>Content</i> ja <i>Total</i> erillisinä propseina, vaan suoraan taulukkona:
 
