@@ -528,7 +528,7 @@ erottele tulostettavat asiat pilkulla:
 console.log('props value is', props)
 ```
 
-Jos yhdistät merkkijonoon olion, tuloksena on suhteellisen hyödytön tulostusmuoto
+Jos yhdistät plussaa käyttäen merkkijonoon olion, tuloksena on suhteellisen hyödytön tulostusmuoto
 
 ```js
 props value is [Object object]
