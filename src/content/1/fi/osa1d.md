@@ -630,7 +630,7 @@ const App = (props) => {
 }
 ```
 
-Haluamme, että napin avulla tilan tallettava muuttuja _value_ saadaan nollattua.
+Haluamme, että napin avulla saadaan nollattua tilan tallettava muuttuja _value_.
 
 Jotta saamme napin reagoimaan, on napille lisättävä <i>tapahtumankäsittelijä</i>.
 
