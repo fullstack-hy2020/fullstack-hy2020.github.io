@@ -575,9 +575,9 @@ jQuery on kehitetty aikana, jona web-sivut olivat vielä suurimmaksi osaksi peri
 
 Single page app ‑tyylin noustua suosioon on ilmestynyt useita jQueryä "modernimpia" tapoja sovellusten kehittämiseen. Ensimmäisen trendiaallon suosikki oli [Backbone.js](http://backbonejs.org/). Googlen kehittämä [AngularJS](https://angularjs.org/) nousi 2012 tapahtuneen [julkaisun](https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13) jälkeen erittäin nopeasti lähes <i>de facto</i> ‑standardin asemaan modernissa web-sovelluskehityksessä.
 
-Angularin suosio kuitenkin romahti siinä vaiheessa, kun Angular-tiimi [ilmoitti](https://jaxenter.com/angular-2-0-announcement-backfires-112127.html) lokakuussa 2014, että version 1 kehitys lopetetaan ja Angular 2 ei tule olemaan taaksepäin yhteensopiva ykkösversion kanssa. Angular 2 ja uudemmat versiot eivät ole saaneet kovin innostunutta vastaanottoa mutta ovat kohtuullisen laajalti käytettyjä.
+Angularin suosio kuitenkin romahti siinä vaiheessa, kun Angular-tiimi ilmoitti lokakuussa 2014, että version 1 kehitys lopetetaan ja Angular 2 ei tule olemaan taaksepäin yhteensopiva ykkösversion kanssa. Angular 2 ja uudemmat versiot eivät ole saaneet kovin innostunutta vastaanottoa mutta ovat kohtuullisen laajalti käytettyjä.
 
-Nykyisin, tai oikeastaan jo lähes puolen vuosikymmenen ajan, suosituin tapa toteuttaa web-sovellusten selainpuolen logiikka on Facebookin kehittämä [React](https://reactjs.org/)-kirjasto. Tulemme tutustumaan kurssin aikana Reactiin ja sen kanssa yleisesti käytettyyn [Redux](https://github.com/reactjs/redux)-kirjastoon.
+Nykyisin, tai oikeastaan jo lähes puolen vuosikymmenen ajan, suosituin tapa toteuttaa web-sovellusten selainpuolen logiikka on Facebookin kehittämä [React](https://react.dev/)-kirjasto. Tulemme tutustumaan kurssin aikana Reactiin ja sen kanssa yleisesti käytettyyn [Redux](https://github.com/reactjs/redux)-kirjastoon.
 
 Reactin asema näyttää tällä hetkellä vahvalta, mutta JavaScript-maailma ei lepää koskaan. Muutama vuosi sitten hieman uudempi tulokas [Vue.js](https://vuejs.org/) herätti jossain määrin kiinnostusta, mutta ei sekään näytä nousseen uhkaamaan Reactin asemaa.
 
