@@ -218,9 +218,9 @@ const handleLeftClick = () => {
 }
 ```
 
-Tila _allClicks_ saa nyt arvokseen taulukon, jossa on entisen taulukon alkiot ja <i>L</i>. Uuden alkion liittäminen on tehty metodilla [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), joka toimii siten, että se ei muuta olemassa olevaa taulukkoa vaan luo <i>uuden taulukon</i>, johon uusi alkio on lisätty.
+Tila _allClicks_ saa nyt arvokseen taulukon, jossa ovat entisen taulukon alkiot ja <i>L</i>. Uuden alkion liittäminen on tehty metodilla [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), joka toimii siten, että se ei muuta olemassa olevaa taulukkoa vaan luo <i>uuden taulukon</i>, johon uusi alkio on lisätty.
 
-Kuten jo aiemmin mainittiin, JavaScriptissa on mahdollista lisätä taulukkoon myös metodilla [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) ja sovellus näyttäisi tässä tilanteessa toimivan myös jos lisäys hoidettaisiin siten, että _allClicks_-tilaa muutetaan pushaamalla siihen alkio ja sitten päivitetään tila:
+Kuten jo aiemmin mainittiin, JavaScriptissa on mahdollista lisätä taulukkoon myös metodilla [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push). Sovelluksemme näyttäisikin toimivan myös silloin, kun lisäys hoidetaan muuttamalla _allClicks_-tilaa pushaamalla siihen alkio ja päivittämällä sitten tila:
 
 ```js
 const handleLeftClick = () => {
@@ -398,7 +398,7 @@ ja muussa tapauksessa näppäilyhistorian:
 </div>
 ```
 
-Komponentin _History_ ulkoasun muodostamat React-elementit riippuvat siis sovelluksen tilasta, eli komponentissa on <i>ehdollista renderöintiä</i>.
+Komponentti _History_ renderöi siis eri React-elementit riippuen sovelluksen tilasta, eli komponentissa on <i>ehdollista renderöintiä</i>.
 
 Reactissa on monia muitakin tapoja [ehdolliseen renderöintiin](https://react.dev/learn/conditional-rendering). Katsotaan niitä tarkemmin [seuraavassa osassa](/osa2).
 
