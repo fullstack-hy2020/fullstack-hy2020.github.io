@@ -578,7 +578,7 @@ Chromella tapahtuvaan JavaScriptin debuggaukseen voi tutustua myös esim. [täm�
 
 Jotta hookeilla muodostettu sovelluksen tila toimisi oikein, on hookeja käytettävä tiettyjä [rajoituksia](https://react.dev/learn/state-a-components-memory#meet-your-first-hook) noudattaen.
 
-Funktiota _useState_ <i>ei saa kutsua</i> loopissa (sama koskee  seuraavassa osassa esiteltävää funktiota _useEffect_), ehtolausekkeiden sisältä tai muista kuin komponentin määrittelevästä funktiosta. Tämä takaa sen, että hookeja kutsutaan aina samassa järjestyksessä. Jos näin ei ole, sovellus saattaa toimia miten sattuu.
+Funktiota _useState_ <i>ei saa kutsua</i> silmukassa (sama koskee  seuraavassa osassa esiteltävää funktiota _useEffect_), ehtolausekkeiden sisältä tai muista kuin komponentin määrittelevästä funktiosta. Tämä takaa sen, että hookeja kutsutaan aina samassa järjestyksessä. Jos näin ei ole, sovellus saattaa toimia miten sattuu.
 
 Hookeja siis kuuluu kutsua ainoastaan React-komponentin määrittelevän funktion rungosta:
 
