@@ -175,7 +175,7 @@ Jälkimmäinen lisäyksistä on pakko tehdä hakasulkeiden avulla, sillä pisten
 
 JavaScriptissä olioilla voi olla myös metodeja. Tällä kurssilla emme kuitenkaan tarvitse itse määriteltyjä metodillisia olioita, joten asiaa ei käsitellä kuin lyhyesti.
 
-Olioita on mahdollista määritellä myös ns. konstruktorifunktioiden avulla, jolloin saadaan aikaan hieman monien muiden ohjelmointikielten, esim. Javan tai Pythonin luokkia (class) muistuttava mekanismi. JavaScriptissä ei kuitenkaan ole luokkia samassa mielessä kuin olio-ohjelmointikielissä. Kieleen on kuitenkin lisätty versiosta ES6 alkaen <i>luokkasyntaksi</i>, joka helpottaa tietyissä tilanteissa olio-ohjelmointikielimäisten luokkien esittämistä.
+Olioita on mahdollista määritellä myös ns. konstruktorifunktioiden avulla, jolloin saadaan aikaan hieman monien muiden ohjelmointikielten, esim. Javan tai Pythonin, luokkia (class) muistuttava mekanismi. JavaScriptissä ei kuitenkaan ole luokkia samassa mielessä kuin olio-ohjelmointikielissä. Kieleen on kuitenkin lisätty versiosta ES6 alkaen <i>luokkasyntaksi</i>, joka helpottaa tietyissä tilanteissa olio-ohjelmointikielimäisten luokkien esittämistä.
 
 ### Funktiot
 
@@ -259,7 +259,7 @@ const Header = (props) => {
 }
 ```
 
-Jos, ja kun törmäät virheilmoitukseen
+Jos ja kun törmäät virheilmoitukseen
 
 > <i>Objects are not valid as a React child</i>
 
