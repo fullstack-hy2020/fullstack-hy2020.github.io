@@ -383,9 +383,9 @@ const App = () => {
 
 Koska käytämme tällä kurssilla Reactin hookit sisältävää versiota, meidän ei kurssin aikana tarvitse määritellä ollenkaan olioita, joilla on metodeja. **Tämän luvun asiat eivät siis ole kurssin kannalta relevantteja**, mutta varmasti monella tapaa hyödyllisiä tietää. Käytettäessä "vanhempaa Reactia" tämän luvun asiat on hallittava.
 
-Nuolifunktiot ja avainsanan _function_ avulla määritellyt funktiot poikkeavat radikaalisti siinä miten ne käyttäytyvät olioon itseensä viittaavan avainsanan [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) suhteen.
+Nuolifunktiot ja avainsanan _function_ avulla määritellyt funktiot poikkeavat radikaalisti siinä, miten ne käyttäytyvät olioon itseensä viittaavan avainsanan [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) suhteen.
 
-Voimme liittää oliolle metodeja määrittelemällä niille kenttiä, jotka ovat funktioita:
+Voimme liittää olioihin metodeja määrittelemällä niille kenttiä, jotka ovat funktioita:
 
 ```js
 const arto = {
@@ -459,7 +459,7 @@ const referenceToGreet = arto.greet
 referenceToGreet() // tulostuu ainoastaan hello, my name is
 ```
 
-Kun metodia kutsutaan viitteen kautta, metodi on kadottanut tiedon siitä, mikä alkuperäinen _this_ oli. Toisin kuin melkein kaikissa muissa kielissä, JavaScriptissa [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this):n arvo määrittyy sen mukaan <i>miten metodia on kutsuttu</i>. Kutsuttaessa metodia viitteen kautta, _this_:in arvoksi tulee ns. [globaali objekti](https://developer.mozilla.org/en-US/docs/Glossary/Global_object) ja lopputulos ei ole yleensä ollenkaan se, mitä sovelluskehittäjä olettaa.
+Kun metodia kutsutaan viitteen kautta, metodi on kadottanut tiedon siitä, mikä alkuperäinen _this_ oli. Toisin kuin melkein kaikissa muissa kielissä, JavaScriptissa [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this):n arvo määrittyy sen mukaan <i>miten metodia on kutsuttu</i>. Kutsuttaessa metodia viitteen kautta, _this_:in arvoksi tulee ns. [globaali objekti](https://developer.mozilla.org/en-US/docs/Glossary/Global_object), ja lopputulos ei ole yleensä ollenkaan se, mitä sovelluskehittäjä olettaa.
 
 This:in kadottaminen saattaa aiheuttaa ongelmia. Eteen tulee usein tilanteita, joissa Reactin/Noden (tai oikeammin ilmaistuna selaimen JavaScript-moottorin) tulee kutsua joitain ohjelmoijan määrittelemien olioiden metodeja. Tällä kurssilla kuitenkin säästymme näiltä ongelmilta, sillä käytämme ainoastaan "thissitöntä" JavaScriptia.
 
@@ -477,9 +477,9 @@ setTimeout(arto.greet, 1000)  // highlight-line
 // sekunnin päästä tulostuu hello, my name is
 ```
 
-JavaScriptissa this:in arvo siis määräytyy siitä miten metodia on kutsuttu. setTimeoutia käytettäessä metodia kutsuu JavaScript-moottori, ja this viittaa Timeout-olioon.
+JavaScriptissa this:in arvo siis määräytyy siitä, miten metodia on kutsuttu. setTimeoutia käytettäessä metodia kutsuu JavaScript-moottori, jolloin this viittaa Timeout-olioon.
 
-On useita mekanismeja, joiden avulla alkuperäinen _this_ voidaan säilyttää, eräs näistä on metodin [bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind) käyttö:
+On useita mekanismeja, joiden avulla alkuperäinen _this_ voidaan säilyttää. Eräs näistä on metodin [bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind) käyttö:
 
 ```js
 setTimeout(arto.greet.bind(arto), 1000)
@@ -518,7 +518,7 @@ const juhq = new Person('Juha Tauriainen', 48)
 juhq.greet()
 ```
 
-Syntaksin osalta luokat ja niistä luodut oliot muistuttavat erittäin paljon esim. Javan tai Pythonin luokkia ja olioita. Käyttäytymiseltäänkin ne ovat aika lähellä tavanomaisten oliokielten olioita. Kyse on kuitenkin edelleen JavaScriptin [prototyyppiperintään](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance) perustuvista olioista. Molempien olioiden todellinen tyyppi on _Object_ sillä JavaScriptissä ei ole muita tyyppejä kuin [Boolean, Null, Undefined, Number, String, Symbol, BigInt ja Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures).
+Syntaksin osalta luokat ja niistä luodut oliot muistuttavat erittäin paljon esim. Javan tai Pythonin luokkia ja olioita. Käyttäytymiseltäänkin ne ovat aika lähellä tavanomaisten oliokielten olioita. Kyse on kuitenkin edelleen JavaScriptin [prototyyppiperintään](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance) perustuvista olioista. Molempien olioiden todellinen tyyppi on _Object_, sillä JavaScriptissä ei ole muita tyyppejä kuin [Boolean, Null, Undefined, Number, String, Symbol, BigInt ja Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures).
 
 Luokkasyntaksin tuominen JavaScriptiin on osin kiistelty lisäys, kts. esim. [Not Awesome: ES6 Classes](https://github.com/petsel/not-awesome-es6-classes) tai [Is “Class” In ES6 The New “Bad” Part?](https://medium.com/@rajaraodv/is-class-in-es6-the-new-bad-part-6c4e6fe1ee65).
 
