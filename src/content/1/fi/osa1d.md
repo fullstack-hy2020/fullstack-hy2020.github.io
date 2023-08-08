@@ -1050,7 +1050,7 @@ Komponentin <i>Button</i> käyttö on helppoa, mutta on toki pidettävä huolta 
 
 ### Älä määrittele komponenttia komponentin sisällä
 
-Eriytetään vielä sovelluksestamme luvun näyttäminen omaan komponenttiin <i>Display</i>.
+Eriytetään vielä sovelluksestamme luvun näyttäminen omaan komponenttiinsa <i>Display</i>.
 
 Määritellään uusi komponentti <i>App</i>-komponentin sisällä:
 
