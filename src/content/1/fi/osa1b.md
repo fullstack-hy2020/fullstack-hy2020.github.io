@@ -530,7 +530,7 @@ JavaScriptistä löytyy verkosta suuret määrät sekä hyvää että huonoa mat
 
 Mozillan sivuilta kannattaa lukea oikeastaan välittömästi [A re-introduction to JavaScript (JS tutorial)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript).
 
-Jos haluat tutustua JavaScriptiin syvällisesti, Internetistä on ilmaiseksi mainio kirjasarja [You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS).
+Jos haluat tutustua JavaScriptiin syvällisesti, Internetistä on ladattavissa ilmaiseksi mainio kirjasarja [You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS).
 
 Toinen hieno sivusto JavaScriptin oppimiseen on [javascript.info](https://javascript.info).
 
