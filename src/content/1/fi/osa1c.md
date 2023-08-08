@@ -68,7 +68,7 @@ Syntymävuoden selvittävä funktio on määritelty komponentin toiminnan määr
 
 ### Destrukturointi
 
-Tarkastellaan erästä pientä, mutta käyttökelpoista ES6:n mukanaan tuomaa uutta piirrettä JavaScriptissa, eli muuttujaan sijoittamisen yhteydessä tapahtuvaa [destrukturointia](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment).
+Tarkastellaan erästä pientä mutta käyttökelpoista ES6:n mukanaan tuomaa uutta piirrettä JavaScriptissa, eli muuttujaan sijoittamisen yhteydessä tapahtuvaa [destrukturointia](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment).
 
 Jouduimme äskeisessä koodissa viittaamaan propseina välitettyyn dataan hieman ikävästi muodossa _props.name_ ja _props.age_. Näistä _props.age_ pitää toistaa komponentissa kahteen kertaan.
 
@@ -230,7 +230,7 @@ counter += 1
 refresh()
 ```
 
-Copy-pasten vähentämisen takia komponentin renderöinti on refaktoroitu funktioon _refresh_.
+Copy-pasten vähentämiseksi komponentin renderöinti on refaktoroitu funktioon _refresh_.
 
 Nyt komponentti <i>renderöityy kolme kertaa</i>, saaden ensin arvon 1, sitten 2 ja lopulta 3. Luvut 1 ja 2 tosin ovat ruudulla niin vähän aikaa, että niitä ei ehdi havaita.
 
