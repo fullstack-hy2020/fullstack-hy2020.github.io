@@ -268,7 +268,7 @@ pidä mielessä [täällä](/osa1/reactin_alkeet#ala-renderoi-olioita) kerrotut 
 
   <h4>1.3: kurssitiedot step3</h4>
 
-Siirrytään käyttämään sovelluksessamme oliota. Muuta komponentin <i>App</i> muuttujamäärittelyt seuraavaan muotoon ja muuta sovelluksen kaikkia osia niin, että sovellus edelleen toimii:
+Siirrytään käyttämään sovelluksessamme olioita. Muuta komponentin <i>App</i> muuttujamäärittelyt seuraavaan muotoon ja muuta sovelluksen kaikkia osia niin, että sovellus edelleen toimii:
 
 ```js
 const App = () => {
