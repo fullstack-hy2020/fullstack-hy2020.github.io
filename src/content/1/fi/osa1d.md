@@ -1150,7 +1150,7 @@ Tehtävät palautetaan **yksi osa kerrallaan**. Kun olet palauttanut osan tehtä
 
 **VAROITUS** create-react-app tekee projektista automaattisesti Git-repositorion, ellei sovellusta luoda jo olemassa olevan repositorion sisälle. Todennäköisesti **et halua** että projektista tulee repositorio, joten suorita projektin juuressa komento _rm -rf .git_.
 
-Jos, ja kun törmäät virheilmoitukseen
+Jos ja kun törmäät virheilmoitukseen
 
 > <i>Objects are not valid as a React child</i>
 
