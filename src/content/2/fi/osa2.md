@@ -10,6 +10,6 @@ Jatkamme Reactiin tutustumista. Ensin käsitellään datakokoelmien, esimerkiksi
 
 
 <i>Osa päivitetty 18.1.2023</i>
-- <i>Muutos tehtävien numeroinnissa, tehtävät 2.11-13. siirretty osan loppuun</i>
+- <i>Muutos tehtävien numeroinnissa, tehtävät 2.11.-13. siirretty osan loppuun.</i>
 
 </div>
