@@ -68,7 +68,7 @@ t.forEach(value => {
 })                    
 ```
 
-Huomaa, että taulukon sisältöä voi muuttaa, vaikka taulukko on määritelty _const_:ksi. Tämä johtuu siitä, että taulukko on <i>olio</i>, muuttuja viittaa koko ajan samaan olioon, jonka sisältö muuttuu kun taulukkoon lisätään uusia alkioita.
+Huomaa, että taulukon sisältöä voi muuttaa, vaikka taulukko on määritelty _const_:ksi. Tämä johtuu siitä, että taulukko on <i>olio</i>. Muuttuja _t_ viittaa koko ajan samaan olioon, vaikka olion sisältö muuttuukin, kun taulukkoon lisätään uusia alkioita.
 
 Eräs tapa käydä taulukon alkiot läpi on esimerkissä käytetty _forEach_, joka saa parametrikseen nuolisyntaksilla määritellyn <i>funktion</i>
 
