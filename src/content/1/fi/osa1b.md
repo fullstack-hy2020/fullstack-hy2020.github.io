@@ -19,7 +19,7 @@ Tällä hetkellä johtava tapa tehdä transpilointi on [Babel](https://babeljs.i
 
 Koodi kirjoitetaan <i>.js</i>-päätteiseen tiedostoon ja suoritetaan komennolla <em>node tiedosto.js</em>
 
-Koodia on mahdollista kirjoittaa myös Node.js-konsoliin, joka aukeaa kun kirjoitat komentorivillä _node_ tai myös selaimen developer toolin konsoliin. Chromen uusimmat versiot osaavat suoraan transpiloimatta [melko hyvin](http://kangax.github.io/compat-table/es2016plus/) JavaScriptin uusiakin piirteitä.
+Koodia on mahdollista kirjoittaa myös Node.js-konsoliin, joka aukeaa kun kirjoitat komentorivillä _node_, tai myös selaimen developer toolin konsoliin. Chromen uusimmat versiot osaavat suoraan transpiloimatta [melko hyvin](http://kangax.github.io/compat-table/es2016plus/) JavaScriptin uusiakin piirteitä.
 
 JavaScript muistuttaa nimensä ja syntaksinsa puolesta läheisesti Javaa. Perusmekanismeiltaan kielet kuitenkin poikkeavat radikaalisti. Java-ohjelmoijalle JavaScriptin käyttäytyminen saattaa aiheuttaa hämmennystä, erityisesti jos kielen piirteistä ei viitsi ottaa selvää.
 
@@ -45,7 +45,7 @@ x = 4               // aiheuttaa virheen
 
 Muuttujan tallettaman tiedon tyyppi voi vaihtua suorituksen aikana, _y_ tallettaa aluksi luvun ja lopulta merkkijonon.
 
-JavaScriptissa on myös mahdollista määritellä muuttujia avainsanan [var](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var) avulla. Var oli pitkään ainoa tapa muuttujien määrittelyyn, const ja let tulivat kieleen mukaan vasta versiossa ES6. Var toimii tietyissä tilanteissa [eri](https://medium.com/craft-academy/javascript-variables-should-you-use-let-var-or-const-394f7645c88f) [tavalla](http://www.jstips.co/en/javascript/keyword-var-vs-let/) kuin useimpien muiden kielien muuttujien määrittely. Tällä kurssilla varin käyttö ei ole suositeltavaa eli käytä aina const:ia tai let:iä!
+JavaScriptissa on myös mahdollista määritellä muuttujia avainsanan [var](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var) avulla. Var oli pitkään ainoa tapa muuttujien määrittelyyn, const ja let tulivat kieleen mukaan vasta versiossa ES6. Var toimii tietyissä tilanteissa [eri](https://medium.com/craft-academy/javascript-variables-should-you-use-let-var-or-const-394f7645c88f) [tavalla](http://www.jstips.co/en/javascript/keyword-var-vs-let/) kuin useimpien muiden kielien muuttujien määrittely. Tällä kurssilla var:in käyttö ei ole suositeltavaa, eli käytä aina const:ia tai let:iä!
 
 Lisää aiheesta on esim. YouTubessa: [var, let and const - ES6 JavaScript Features](https://youtu.be/sjyJBL5fkp8)
 
