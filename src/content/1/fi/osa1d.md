@@ -150,7 +150,7 @@ const handleRightClick = () =>
   setClicks({ ...clicks, right: clicks.right + 1 })
 ```
 
-Miksi emme hoitaneet tilan päivitystä seuraavasti:
+Miksi emme hoitaneet tilan päivitystä seuraavasti?
 
 ```js
 const handleLeftClick = () => {
