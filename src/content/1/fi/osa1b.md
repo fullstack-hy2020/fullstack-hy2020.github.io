@@ -381,7 +381,7 @@ const App = () => {
 
 ### Olioiden metodit ja this
 
-Koska käytämme tällä kurssilla Reactin hookit sisältävää versiota, meidän ei kurssin aikana tarvitse määritellä ollenkaan olioita, joilla on metodeja. **Tämän luvun asiat siis eivät ole kurssin kannalta relevantteja**, mutta varmasti monella tapaa hyödyllisiä tietää. Käytettäessä "vanhempaa Reactia" tämän luvun asiat on hallittava.
+Koska käytämme tällä kurssilla Reactin hookit sisältävää versiota, meidän ei kurssin aikana tarvitse määritellä ollenkaan olioita, joilla on metodeja. **Tämän luvun asiat eivät siis ole kurssin kannalta relevantteja**, mutta varmasti monella tapaa hyödyllisiä tietää. Käytettäessä "vanhempaa Reactia" tämän luvun asiat on hallittava.
 
 Nuolifunktiot ja avainsanan _function_ avulla määritellyt funktiot poikkeavat radikaalisti siinä miten ne käyttäytyvät olioon itseensä viittaavan avainsanan [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) suhteen.
 
