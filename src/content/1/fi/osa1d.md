@@ -534,7 +534,7 @@ Jos yhdistät plussaa käyttäen merkkijonoon olion, tuloksena on suhteellisen h
 props value is [Object object]
 ```
 
-kun taas pilkulla tulostettavat asiat erotellessa saat developer-konsoliin olion, jonka sisältöä on mahdollista tarkastella.
+kun taas erotellessasi tulostettavat asiat pilkulla saat developer-konsoliin olion, jonka sisältöä on mahdollista tarkastella.
 
 Konsoliin tulostus ei ole suinkaan ainoa keino debuggaamiseen. Koodin suorituksen voi pysäyttää Chromen developer-konsolin <i>debuggeriin</i> kirjoittamalla omassa tekstieditorissasi olevaan lähdekoodiin mihin tahansa kohtaan koodia komennon [debugger](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger).
 
