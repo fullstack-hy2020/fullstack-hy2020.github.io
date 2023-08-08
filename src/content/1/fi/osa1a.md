@@ -355,7 +355,7 @@ React on konfiguroitu antamaan varsin hyviä virheilmoituksia. Kannattaa kuitenk
 
 ![](../../images/1/2c.png)
 
-Kuten jo todettiin, myös React-koodissakin on mahdollista ja kannattavaa lisätä koodin sekaan sopivia konsoliin tulostavia <em>console.log()</em>-komentoja. Tulemme hieman [myöhemmin](#react-sovellusten-debuggaus) tutustumaan muutamiin muihinkin tapoihin debugata Reactia.
+Kuten jo todettiin, myös React-koodissa on mahdollista ja kannattavaa lisätä koodin sekaan sopivia konsoliin tulostavia <em>console.log()</em>-komentoja. Tulemme hieman [myöhemmin](#react-sovellusten-debuggaus) tutustumaan muutamiin muihinkin tapoihin debugata Reactia.
 
 Kannattaa pitää mielessä, että **React-komponenttien nimien tulee alkaa isolla kirjaimella**. Jos yrität määritellä komponentin seuraavasti:
 
@@ -384,7 +384,7 @@ const App = () => {
 }
 ```
 
-sivulle ei kuitenkaan ilmesty näkyviin Footer-komponentissa määriteltyä sisältöä, vaan React luo sivulle ainoastaan tyhjän <i>footer</i>-elementin. Jos muutat komponentin nimen alkamaan isolla kirjaimella, React luo sivulle <i>div</i>-elementin, joka määriteltiin Footer-komponentissa.
+sivulle ei ilmestykään näkyviin Footer-komponentissa määriteltyä sisältöä, vaan React luo sivulle ainoastaan tyhjän <i>footer</i>-elementin. Jos muutat komponentin nimen alkamaan isolla kirjaimella, React luo sivulle <i>div</i>-elementin, joka määriteltiin Footer-komponentissa.
 
 Kannattaa pitää mielessä myös, että React-komponentin sisällön tulee (yleensä) sisältää **yksi juurielementti**. Eli jos yrittäisimme määritellä komponentin <i>App</i> ilman uloimmaista <i>div</i>-elementtiä
 
@@ -414,7 +414,7 @@ const App = () => {
 }
 ```
 
-Määritellessä sovelluksen juurikomponenttia, tämä ei kuitenkaan ole järkevää ja näyttää koodissakin pahalta.
+Määriteltäessä sovelluksen juurikomponenttia tämä ei kuitenkaan ole järkevää, ja taulukko näyttää koodissakin pahalta.
 
 Juurielementin pakollisesta käytöstä on se seuraus, että sovelluksen DOM-puuhun tulee "ylimääräisiä" div-elementtejä. Tämä on mahdollista välttää käyttämällä [fragmentteja](https://reactjs.org/docs/fragments.html#short-syntax), eli ympäröimällä komponentin palauttamat elementit tyhjällä elementillä:
 
@@ -516,7 +516,7 @@ ja ikä
 {friends[0].age}
 ```
 
-Virheen korjauksen jälkeen kannattaa konsolin virheilmoitukset tyhjentää painamalla Ø ja tämän jälkeen uudelleenladata sivun sisältö ja varmistua että virheilmoituksia ei näy.
+Virheen korjauksen jälkeen kannattaa konsolin virheilmoitukset tyhjentää painamalla Ø, uudelleenladata tämän jälkeen sivun sisältö ja varmistua että virheilmoituksia ei näy.
 
 Pieni lisähuomio edelliseen. React sallii myös taulukoiden renderöimisen <i>jos</i> taulukko sisältää arvoja, jotka kelpaavat renderöitäviksi (kuten numeroita tai merkkijonoja). Eli seuraava ohjelma kyllä toimisi, vaikka tulos ei ole kenties se mitä haluamme: 
 
@@ -532,7 +532,7 @@ const App = () => {
 }
 ```
 
-Tässä osassa ei kannata edes yrittää hyödyntää taulukkojen suoraa renderöintiä, palaamme siihen seuraavassa osassa.
+Tässä osassa ei kannata edes yrittää hyödyntää taulukoiden suoraa renderöintiä. Palaamme siihen seuraavassa osassa.
 
 </div>
 
@@ -541,7 +541,7 @@ Tässä osassa ei kannata edes yrittää hyödyntää taulukkojen suoraa render�
 
 Tehtävät palautetaan GitHubin kautta ja merkitsemällä tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
-Voit palauttaa kurssin kaikki tehtävät samaan repositorioon tai käyttää useita repositorioita. Jos palautat eri osien tehtäviä samaan repositorioon, nimeä hakemistot järkevästi. Jos käytät privaattirepositorioa tehtävien palautukseen, liitä repositoriolle collaboratoriksi <i>mluukkai</i>.
+Voit palauttaa kurssin kaikki tehtävät samaan repositorioon tai käyttää useita repositorioita. Jos palautat eri osien tehtäviä samaan repositorioon, nimeä hakemistot järkevästi. Jos käytät yksityistä (private) repositoriota tehtävien palautukseen, liitä repositoriolle collaboratoriksi <i>mluukkai</i>.
 
 Eräs varsin toimiva hakemistorakenne palautusrepositoriolle on [tässä esimerkkirepositoriossa käytetty tapa](https://github.com/FullStack-HY2020/palauitusrepositorio), jossa kutakin osaa kohti on oma hakemistonsa, joka vielä jakautuu tehtäväsarjat (esim. osan 1 <i>kurssitiedot</i>) sisältäviin hakemistoihin:
 
