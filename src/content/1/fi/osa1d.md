@@ -1245,7 +1245,7 @@ Jatketaan sovelluksen refaktorointia. Eriytä seuraavat <i>kaksi</i> komponentti
 - <i>Button</i> vastaa yksittäistä palautteenantonappia
 - <i>StatisticLine</i> huolehtii tilastorivien, esim. keskiarvon näyttämisestä
 
-Tarkennuksena: komponentti <i>StatisticLine</i> näyttää aina yhden tilastorivin, joten sovellus käyttää montaa komponenttia kaikkien tilastorivien renderöintiin 
+Tarkennuksena: komponentti <i>StatisticLine</i> näyttää aina yhden tilastorivin, joten sovellus käyttää komponenttia useaan kertaan renderöidäkseen kaikki tilastorivit 
 
 ```js
 const Statistics = (props) => {
