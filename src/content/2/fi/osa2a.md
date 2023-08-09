@@ -316,7 +316,7 @@ note => <li key={note.id}>{note.content}</li>
 
 käyttötarkoitus on näkymäelementtien muodostaminen, tulee muuttujien <i>note.id</i> ja <i>note.content </i> arvo renderöidä aaltosulkeiden sisällä. Kokeile mitä koodi tekee, jos poistat aaltosulkeet.
 
-Aaltosulkeiden käyttö tulee varmaan aiheuttamaan alussa pientä päänvaivaa, mutta totut niihin pian. Reactin antama visuaalinen feedback on välitön.
+Aaltosulkeiden käyttö tulee varmaan aiheuttamaan alussa pientä päänvaivaa, mutta totut niihin pian. Reactin antama visuaalinen palaute on välitön.
 
 ### Antipattern: taulukon indeksit avaimina
 
