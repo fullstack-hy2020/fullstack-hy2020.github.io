@@ -484,7 +484,7 @@ const App = () => {
 }
 ```
 
-Syy toimimattomuuteen alkaa selvitä lisäilemällä koodiin <em>console.log</em>-komentoja. Koska ensimmäinen renderöitävä asia on komponentti <i>App</i>, kannattaa sinne laittaa ensimmäisen tulostus:
+Syy toimimattomuuteen alkaa selvitä lisäilemällä koodiin <em>console.log</em>-komentoja. Koska ensimmäinen renderöitävä asia on komponentti <i>App</i>, kannattaa ensimmäinen tulostus laittaa sinne:
 
 ```js
 const App = () => {
