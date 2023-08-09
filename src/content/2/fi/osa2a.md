@@ -543,7 +543,7 @@ const Course = (props) => { // highlight-line
 
 Jos ongelma ei vieläkään ratkea, ei auta kuin jatkaa vianjäljitystä eli kirjoittaa lisää console.logeja.
 
-Lisäsin tämän luvun materiaaliin, kun seuraavan tehtävän mallivastauksen koodi räjähti ihan totaalisesti (syynä väärässä muodossa ollut propsi), ja jouduin jälleen kerran debuggaamaan console.logaamalla.
+Lisäsin tämän luvun materiaaliin sen jälkeen, kun seuraavan tehtävän mallivastauksen koodi räjähti ihan totaalisesti (syynä väärässä muodossa ollut propsi), ja jouduin jälleen kerran debuggaamaan console.logaamalla.
 
 ### Websovelluskehittäjän vala
 
