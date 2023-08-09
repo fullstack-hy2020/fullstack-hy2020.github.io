@@ -270,7 +270,7 @@ const result = notes.map(note => note.id)
 console.log(result)
 ```
 
-Konsoliin tulostuu <i>[1, 2, 3]</i> eli _map_ muodostaa uuden taulukon, jonka jokainen alkio on saatu alkuperäisen taulukon _notes_ alkioista <i>mappaamalla</i> komennon parametrina olevan funktion avulla.
+Konsoliin tulostuu <i>[1, 2, 3]</i>, eli _map_ muodostaa uuden taulukon, jonka jokainen alkio on saatu alkuperäisen taulukon _notes_ alkioista <i>mappaamalla</i> se komennon parametrina olevan funktion avulla.
 
 Funktio on
 
