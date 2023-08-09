@@ -237,7 +237,7 @@ React käyttää taulukossa olevien elementtien <i>key</i>-kenttiä päätelless
 
 ### Map
 
-Taulukoiden [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)-metodin toiminnan sisäistäminen on jatkon kannalta äärimmäisen tärkeää.
+Taulukoiden [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)-metodin toiminnan sisäistäminen on jatkon kannalta äärimmäisen tärkeää. Sillä ei ole mitään tekemistä karttojen kanssa, vaan oikeampi suomenkielinen termi olisi matematiikan <i>kuvaus</i>.
 
 Sovellus siis sisältää taulukon _notes_:
 
