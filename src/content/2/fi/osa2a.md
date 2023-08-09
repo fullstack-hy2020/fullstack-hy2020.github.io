@@ -233,7 +233,7 @@ const App = (props) => {
 
 Virheilmoitus katoaa.
 
-React käyttää taulukossa olevien elementtien <i>key</i>-kenttiä päätellessään miten sen tulee päivittää komponentin generoimaa näkymää silloin kun komponentti uudelleenrenderöidään. Lisää aiheesta on [täällä](https://reactjs.org/docs/reconciliation.html#recursing-on-children).
+React käyttää taulukossa olevien elementtien <i>key</i>-kenttiä päätellessään, miten sen tulee päivittää komponentin generoimaa näkymää silloin, kun komponentti uudelleenrenderöidään. Lisää aiheesta on [täällä](https://reactjs.org/docs/reconciliation.html#recursing-on-children).
 
 ### Map
 
