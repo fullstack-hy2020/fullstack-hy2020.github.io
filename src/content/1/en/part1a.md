@@ -64,7 +64,7 @@ The files <i>App.css</i> and <i>index.css</i>, and the directory <i>assets</i> m
 
 ### create-react-app
 
-Instead od Vite you can also use the older generation tool [create-react-app](https://github.com/facebookincubator/create-react-app) in the course to set up the applications. The most visible difference to Vite is the name of the application startup file, which is <i>index.js</i>.
+Instead of Vite you can also use the older generation tool [create-react-app](https://github.com/facebookincubator/create-react-app) in the course to set up the applications. The most visible difference to Vite is the name of the application startup file, which is <i>index.js</i>.
 
 The way to start the application is also different, it is started with a command
 
