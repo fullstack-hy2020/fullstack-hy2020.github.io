@@ -9,38 +9,41 @@ lang: fi
 
 Alamme nyt tutustua kurssin ehkä tärkeimpään teemaan, [React](https://react.dev/)-kirjastoon. Tehdään heti yksinkertainen React-sovellus ja tutustutaan samalla Reactin peruskäsitteistöön.
 
-Ehdottomasti helpoin tapa päästä alkuun on [create-react-app](https://github.com/facebookincubator/create-react-app)-nimisen työkalun käyttö. <i>create-react-app</i> on mahdollista asentaa omalle koneelle, mutta asennukseen ei ole tarvetta jos Noden mukana asentunut <i>npm</i>-työkalu on versioltaan vähintään <i>5.3</i>. Tällöin npm:n mukana asentuu komento </i>npx</i>, joka mahdollistaa create-react-app:in käytön asentamatta sitä erikseen. Npm:n version saa selville komennolla <em>npm -v</em>.
+Helpoin tapa päästä alkuun on [Vite](https://vitejs.dev/)-nimisen työkalun käyttö.
 
-> <i>Voit halutessasi käyttää kurssilla React-projektien luomiseen myös "uuden generaation" [Vite](https://vitejs.dev/)-kirjastoa. Koska create-react-app on edelleen Reactin kehitystiimin suositus, on se myös tämän kurssin oletusarvoinen työkalu React-projektien luomiseen. Voit lukea [täältä](https://github.com/reactjs/reactjs.org/pull/5487#issuecomment-1409720741) React-tiimin ajatuksista frontendin "bootstrappaus"-työkalujen tulevaisuudesta.</i>
-
-Luodaan sovellus nimeltään <i>part1</i> ja mennään sovelluksen sisältämään hakemistoon:
+Luodaan sovellus nimeltään <i>part1</i>, mennään sovelluksen sisältämään hakemistoon ja asennetaan sovelluksen käyttämät kirjastot:
 
 ```bash
-npx create-react-app part1
+npm create vite@latest part -- --template react
 cd part1
+npm install
 ```
 
 Sovellus käynnistetään seuraavasti:
 
 ```bash
-npm start
+npm run dev
 ```
 
-Sovellus käynnistyy oletusarvoisesti localhostin porttiin 3000, eli osoitteeseen <http://localhost:3000>.
+Konsoli kertoo että sovellus on käynnistynyt localhostin porttiin 5173, eli osoitteeseen <http://localhost:5173/>:
 
-Chromen pitäisi aueta automaattisesti. Avaa konsoli **välittömästi**. Avaa myös tekstieditori siten, että näet koodin ja web-sivun samaan aikaan ruudulla:
+![](../../images/1/1-vite1.png)
 
-![](../../images/1/1e.png)
+Vite käynnistää sovelluksen [oletusarvoisesti](https://vitejs.dev/config/server-options.html#server-port) porttiin 5173. Jos se ei ole vapaana, käyttä Vite seuraavaa vapaata porttinumeroa.
 
-Sovelluksen koodi on hakemistossa <i>src</i>. Yksinkertaistetaan valmiina olevaa koodia siten, että tiedoston <i>index.js</i> sisällöksi tulee:
+Avataan selan sekä tekstieditori siten, että näet koodin ja web-sivun samaan aikaan ruudulla:
+
+![](../../images/1/1-vite4.png)
+
+Sovelluksen koodi on hakemistossa <i>src</i>. Yksinkertaistetaan valmiina olevaa koodia siten, että tiedoston <i>main.js</i> sisällöksi tulee:
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App'
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+
 ```
 
 ja tiedoston <i>App.js</i> sisällöksi
@@ -55,31 +58,45 @@ const App = () => (
 export default App
 ```
 
-Tiedostot <i>App.css</i>, <i>App.test.js</i>, <i>index.css</i>, <i>logo.svg</i>, <i>reportWebVitals.js</i> ja <i>setupTests.js</i> voi poistaa, sillä emme tarvitse niitä.
+Tiedostot <i>App.css</i> ja <i>index.css</i> sekä hakemiston <i>assets</i> voi poistaa, sillä emme tarvitse niitä.
+
+### create-react-app
+
+Voit halutessasi käyttä kurssilla Viten sijaan myös [create-react-app](https://github.com/facebookincubator/create-react-app)-nimistä sovellusta. Näkyvin ero Viteen on sovelluksen aloitustiedoston nimi, joka on <i>index.js</i>. Myös sovelluksen käynnistämistapa eroaa, käynnistäminen tapahtuu komennolla 
+
+```
+npm start
+```
+
+Kurssia ollaan tällä hetkellä (11.8.2023) päivittämässä käyttämään Viteä. Joissain erimerkeissä voi vielä olla käytössä create-react-app:illa luotu sovelluspohja.
 
 ### Komponentti
 
-Tiedosto <i>App.js</i> määrittelee nyt React-[komponentin](https://react.dev/learn/your-first-component) nimeltään <i>App</i>. Tiedoston <i>index.js</i> viimeisen rivin komento
+Tiedosto <i>App.js</i> määrittelee nyt React-[komponentin](https://react.dev/learn/your-first-component) nimeltään <i>App</i>. Tiedoston <i>main.js</i> viimeisen rivin komento
 
 ```js
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-renderöi komponentin sisällön tiedoston <i>public/index.html</i> määrittelemään <i>div</i>-elementtiin, jonka <i>id:n</i> arvona on 'root'.
+renderöi komponentin sisällön tiedoston <i>index.html</i> määrittelemään <i>div</i>-elementtiin, jonka <i>id:n</i> arvona on 'root'.
 
-Tiedosto <i>public/index.html</i> on headerin määrittelyjä lukuun ottamatta oleellisesti ottaen tyhjä:
+Tiedosto <i>index.html</i> on headerin määrittelyjä lukuun ottamatta oleellisesti ottaen tyhjä:
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-      content not shown ...
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
+
 ```
 
 Voit kokeilla lisätä tiedostoon HTML:ää. Reactilla ohjelmoitaessa yleensä kuitenkin kaikki renderöitävä sisältö määritellään Reactin komponenttien avulla.
@@ -347,13 +364,48 @@ Toivottavasti konsolisi on auki, jos ei ole, muista yhteinen lupauksemme:
 
 Ohjemistokehitys on haastavaa, ja erityisen haastavaksi se muuttuu, jos jokainen mahdollinen apukeino kuten web-konsoli sekä komennolla _console.log_ tehtävät aputulostukset eivät ole käytössä. Ammattilaiset käyttävät näitä <i>aina</i>. Ei ole yhtään syytä miksi aloittelijan pitäisi jättää nämä fantastiset apuvälineet hyödyntämättä.
 
+### Mahdollinen virheilmoitus
+
+Käyttämästäsi editorista riippuen saatat saada tässä vaiheessa seuraavan virheilmoituksen:
+
+![](../../images/1/1-vite5.png)
+
+Kyse ei ole varsinaisesta virheestä vaan [ESLint](https://eslint.org/)-työkalun aiheuttamasta varoituksesta. Saat hiljennettyä varoituksen [react/prop-types](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md) lisäämällä tiedostoon <i>.eslintrc.cjs</i> seuraavan rivin
+
+```js
+module.exports = {
+  root: true,
+  env: { browser: true, es2020: true },
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
+    'plugin:react-hooks/recommended',
+  ],
+  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
+  settings: { react: { version: '18.2' } },
+  plugins: ['react-refresh'],
+  rules: {
+    'react-refresh/only-export-components': [
+      'warn',
+      { allowConstantExport: true },
+    ],
+    'react/prop-types': false // highlight-line
+  },
+}
+```
+
+Tutustumme ESLintiin tarkemmin [osassa 3](/osa3/validointi_ja_es_lint#lint).
+
+
 ### Muutamia huomioita
 
 React on konfiguroitu antamaan varsin hyviä virheilmoituksia. Kannattaa kuitenkin edetä ainakin alussa **todella pienin askelin** ja varmistaa, että jokainen muutos toimii halutulla tavalla.
 
 <i>**Konsolin tulee olla koko ajan auki**.</i> Jos selain ilmoittaa virheestä, ei kannata kirjoittaa sokeasti lisää koodia ja toivoa ihmettä tapahtuvaksi, vaan tulee yrittää ymmärtää virheen syy ja esim. palata edelliseen toimivaan tilaan:
 
-![](../../images/1/2c.png)
+![](../../images/1/1-vite6.png)
 
 Kuten jo todettiin, myös React-koodissa on mahdollista ja kannattavaa lisätä koodin sekaan sopivia konsoliin tulostavia <em>console.log()</em>-komentoja. Tulemme hieman [myöhemmin](#react-sovellusten-debuggaus) tutustumaan muutamiin muihinkin tapoihin debugata Reactia.
 
@@ -400,7 +452,7 @@ const App = () => {
 
 seurauksena on virheilmoitus:
 
-![](../../images/1/3c.png)
+![](../../images/1/1-vite7.png)
 
 Juurielementin käyttö ei ole ainoa toimiva vaihtoehto, myös <i>taulukollinen</i> komponentteja on validi tapa:
 
@@ -572,10 +624,9 @@ code .
 
 <i>Tässä tehtävässä aloitettavaa ohjelmaa kehitellään eteenpäin muutamassa seuraavassa tehtävässä. Tässä ja kurssin aikana muissakin vastaan tulevissa tehtäväsarjoissa ohjelman lopullisen version palauttaminen riittää. Voit toki halutessasi tehdä commitin jokaisen tehtävän jälkeisestä tilanteesta, mutta se ei ole välttämätöntä.</i>
 
-Luo create-react-app:illa uusi sovellus. Muuta <i>index.js</i> muotoon
+Luo Vitellä uusi sovellus. Muuta <i>main.js</i> muotoon
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App'
@@ -615,7 +666,7 @@ const App = () => {
 export default App
 ```
 
-ja poista ylimääräiset tiedostot (App.css, App.test.js, index.css, logo.svg, reportWebVitals.js, setupTests.js).
+ja poista ylimääräiset tiedostot <i>App.css</i> ja <i>index.css</i> ja hakemisto <i>assets</i>.
 
 Koko sovellus on nyt ikävästi yhdessä komponentissa. Refaktoroi sovelluksen koodi siten, että se koostuu kolmesta uudesta komponentista: <i>Header</i>, <i>Content</i> ja <i>Total</i>. Kaikki data pidetään edelleen komponentissa <i>App</i>, joka välittää tarpeelliset tiedot kullekin komponentille <i>props:ien</i> avulla. <i>Header</i> huolehtii kurssin nimen renderöimisestä, <i>Content</i> osista ja niiden tehtävämääristä ja <i>Total</i> tehtävien yhteismäärästä.
 
@@ -644,8 +695,6 @@ Huolellinen, pienin askelin eteneminen saattaa tuntua hitaalta, mutta se on itse
 > <i>"The only way to go fast, is to go well"</i>
 
 eli Martinin mukaan pienin askelin tapahtuva huolellinen eteneminen on jopa ainoa tapa olla nopea.
-
-**VAROITUS2** create-react-app tekee projektista automaattisesti Git-repositorion, ellei sovellusta luoda jo olemassa olevan repositorion sisälle. Todennäköisesti **et halua**, että projektista tulee repositorio, joten suorita projektin juuressa komento _rm -rf .git_.
 
 <h4>1.2: kurssitiedot, step2</h4>
 

@@ -192,10 +192,9 @@ const App = (props) => {
 export default App
 ```
 
-And file <i>index.js</i> becomes:
+And file <i>main.js</i> becomes:
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App'
@@ -252,10 +251,9 @@ All of our components up till now have been simple in the sense that they have n
 
 Next, let's add state to our application's <i>App</i> component with the help of React's [state hook](https://react.dev/learn/state-a-components-memory).
 
-We will change the application as follows.  <i>index.js</i> goes back to
+We will change the application as follows.  <i>main.js</i> goes back to
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App'

@@ -191,10 +191,9 @@ const App = (props) => {
 export default App
 ```
 
-Tiedoston <i>index.js</i> sisältö on:
+Tiedoston <i>main.js</i> sisältö on:
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App'
@@ -251,10 +250,9 @@ Tähänastiset komponenttimme ovat olleet siinä mielessä yksinkertaisia, että
 
 Määritellään nyt sovelluksemme komponentille <i>App</i> tila Reactin [state hookin](https://react.dev/learn/state-a-components-memory#meet-your-first-hook) avulla.
 
-Palautetaan <i>index.js</i> muotoon
+Palautetaan <i>main.js</i> muotoon
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App'
