@@ -15,7 +15,7 @@ The easiest way to get started by far is by using a tool called
 Let's create an application called <i>part1</i>, navigate to its directory and install the libraries:
 
 ```bash
-npm create vite@latest part -- --template react
+npm create vite@latest part1 -- --template react
 cd part1
 npm install
 ```
@@ -36,7 +36,7 @@ Open the browser and a text editor so that you can view the code as well as the 
 
 ![](../../images/1/1-vite4.png)
 
-The code of the application resides in the <i>src</i> folder. Let's simplify the default code such that the contents of the file main.js looks like this:
+The code of the application resides in the <i>src</i> folder. Let's simplify the default code such that the contents of the file main.jsx looks like this:
 
 ```js
 import ReactDOM from 'react-dom/client'
@@ -46,7 +46,7 @@ import App from './App'
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-and file <i>App.js</i> looks like this
+and file <i>App.jsx</i> looks like this
 
 ```js
 const App = () => {
@@ -76,7 +76,7 @@ The course is currently (11 August 2023) being updated to use Vite. Some brands 
 
 ### Component
 
-The file <i>App.js</i> now defines a [React component](https://react.dev/learn/your-first-component) with the name <i>App</i>. The command on the final line of file <i>main.js</i>
+The file <i>App.jsx</i> now defines a [React component](https://react.dev/learn/your-first-component) with the name <i>App</i>. The command on the final line of file <i>main.jsx</i>
 
 ```js
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
@@ -252,7 +252,7 @@ but when writing JSX, the tag needs to be closed:
 
 ### Multiple components
 
-Let's modify the file <i>App.js</i> as follows (NB: export at the bottom is left out in these <i>examples</i>, now and in the future. It is still needed for the code to work):
+Let's modify the file <i>App.jsx</i> as follows (NB: export at the bottom is left out in these <i>examples</i>, now and in the future. It is still needed for the code to work):
 
 ```js
 // highlight-start
@@ -626,7 +626,7 @@ For each web application for a series of exercises, it is recommended to submit 
 
 <i>The application that we will start working on in this exercise will be further developed in a few of the following exercises. In this and other upcoming exercise sets in this course, it is enough to only submit the final state of the application. If desired, you may also create a commit for each exercise of the series, but this is entirely optional.</i>
 
-Use create-react-app to initialize a new application. Modify <i>main.js</i> to match the following
+Use create-react-app to initialize a new application. Modify <i>main.jsx</i> to match the following
 
 ```js
 import ReactDOM from 'react-dom/client'
@@ -636,7 +636,7 @@ import App from './App'
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-and <i>App.js</i> to match the following
+and <i>App.jsx</i> to match the following
 
 ```js
 const App = () => {
@@ -668,11 +668,11 @@ const App = () => {
 export default App
 ```
 
-and remove extra files (App.css, App.test.js, index.css, logo.svg, setupTests.js, reportWebVitals.js)).
+and remove extra files App.css and index.css, and the directory assets.
 
 Unfortunately, the entire application is in the same component. Refactor the code so that it consists of three new components: <i>Header</i>, <i>Content</i>, and <i>Total</i>. All data still resides in the <i>App</i> component, which passes the necessary data to each component using <i>props</i>. <i>Header</i> takes care of rendering the name of the course, <i>Content</i> renders the parts and their number of exercises and <i>Total</i> renders the total number of exercises.
 
-Define the new components in the file <i>App.js</i>.
+Define the new components in the file <i>App.jsx</i>.
 
 The <i>App</i> component's body will approximately be as follows:
 

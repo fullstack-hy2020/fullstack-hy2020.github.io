@@ -11,7 +11,7 @@ Sovelluksemme ulkoasu on tällä hetkellä hyvin vaatimaton. Osaan 0 liittyväss
 
 Katsotaan vielä tämän osan lopussa nopeasti kahta tapaa liittää tyylejä React-sovellukseen. Tapoja on useita, ja tulemme tarkastelemaan muita myöhemmin. Ensimmäisenä liitämme CSS:n sovellukseemme vanhan kansan tapaan yksittäisenä tiedostona, joka on kirjoitettu käsin ilman [esiprosessorien](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor) apua (tulemme myöhemmin huomaamaan, että tämä ei ole täysin totta).
 
-Tehdään sovelluksen hakemistoon <i>src</i> tiedosto <i>index.css</i> ja liitetään se sovellukseen lisäämällä tiedostoon <i>index.js</i> seuraava import:
+Tehdään sovelluksen hakemistoon <i>src</i> tiedosto <i>index.css</i> ja liitetään se sovellukseen lisäämällä tiedostoon <i>main.jsx</i> seuraava import:
 
 ```js
 import './index.css'
@@ -77,7 +77,7 @@ Normaalissa HTML:ssä luokat määritellään elementtien attribuutin <i>class</
 <li class="note">tekstiä</li>
 ```
 
-Reactissa tulee kuitenkin classin sijaan käyttää attribuuttia [className](https://reactjs.org/docs/dom-elements.html#classname), joten muutetaan komponenttia <i>Note</i> seuraavasti:
+Reactissa tulee kuitenkin classin sijaan käyttää attribuuttia [className](https://react.dev/learn#adding-styles), joten muutetaan komponenttia <i>Note</i> seuraavasti:
 
 ```js
 const Note = ({ note, toggleImportance }) => {
@@ -205,7 +205,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://gith
 
 React mahdollistaa tyylien kirjoittamisen myös suoraan komponenttien koodin joukkoon niin sanoittuina [inline-tyyleinä](https://react-cn.github.io/react/tips/inline-styles.html).
 
-Periaate inline-tyylien määrittelyssä on erittäin yksinkertainen. Mihin tahansa React-komponenttiin tai elementtiin voi liittää attribuutin [style](https://reactjs.org/docs/dom-elements.html#style), jolle annetaan arvoksi JavaScript-oliona määritelty joukko CSS-sääntöjä.
+Periaate inline-tyylien määrittelyssä on erittäin yksinkertainen. Mihin tahansa React-komponenttiin tai elementtiin voi liittää attribuutin [style](https://react.dev/reference/react-dom/components/common#applying-css-styles), jolle annetaan arvoksi JavaScript-oliona määritelty joukko CSS-sääntöjä.
 
 CSS-säännöt määritellään JavaScriptin avulla hieman eri tavalla kuin normaaleissa CSS-tiedostoissa. Jos haluamme asettaa jollekin elementille esimerkiksi vihreän, kursivoidun ja 16 pikselin korkuisen fontin, määrittely ilmaistaan CSS-syntaksilla seuraavasti:
 
@@ -242,7 +242,7 @@ const Footer = () => {
   return (
     <div style={footerStyle}>
       <br />
-      <em>Note app, Department of Computer Science, University of Helsinki 2022</em>
+      <em>Note app, Department of Computer Science, University of Helsinki 2023</em>
     </div>
   )
 }
@@ -584,8 +584,6 @@ Kun ehdon täyttäviä maita on enää yksi, näytetään maan perustiedot, lipp
 
 **Huom2:** Saatat törmätä ongelmiin tässä tehtävässä, jos määrittelet komponentteja "väärässä paikassa". Nyt kannattaakin ehdottomasti kerrata edellisen osan luku [älä määrittele komponenttia komponentin sisällä](/osa1/monimutkaisempi_tila_reactin_debuggaus#ala-maarittele-komponenttia-komponentin-sisalla).
 
-**VAROITUS** create-react-app tekee projektista automaattisesti Git-repositorion, ellei sovellusta luoda jo olemassa olevan repositorion sisälle. Todennäköisesti **et halua** että projektista tulee repositorio, joten suorita projektin juuressa komento _rm -rf .git_.
-
 <h4>2.19*: maiden tiedot, step2</h4>
 
 **Tässä osassa on vielä paljon tekemistä, joten älä juutu tähän tehtävään!**
@@ -606,18 +604,18 @@ Lisää yksittäisen maan näkymään pääkaupungin säätiedotus. Säätiedotu
 
 Jos käytät Open weather mapia, [täällä](https://openweathermap.org/weather-conditions#Icon-list) on ohje sääikonien generointiin.
 
-**Huom:** Tarvitset melkein kaikkia säätietoja tarjoavia palveluja käyttääksesi API-avaimen. Älä talleta avainta versionhallintaan eli älä kirjoita avainta suoraan koodiin. Avaimen arvo kannattaa määritellä ns. [ympäristömuuttujana](https://create-react-app.dev/docs/adding-custom-environment-variables/).
+**Huom:** Tarvitset melkein kaikkia säätietoja tarjoavia palveluja käyttääksesi API-avaimen. Älä talleta avainta versionhallintaan eli älä kirjoita avainta suoraan koodiin. Avaimen arvo kannattaa määritellä ns. [ympäristömuuttujana](https://vitejs.dev/guide/env-and-mode.html).
 
 Oletetaan että API-avaimen arvo on <i>54l41n3n4v41m34rv0</i>. Kun ohjelma käynnistetään seuraavasti
 
 ```bash
-REACT_APP_API_KEY=54l41n3n4v41m34rv0 npm start
+VITE_SOME_KEY=54l41n3n4v41m34rv0 npm start
 ```
 
-koodista päästään avaimen arvoon käsiksi olion _process.env_ kautta:
+koodista päästään avaimen arvoon käsiksi olion _import.meta.env_ kautta:
 
 ```js
-const api_key = process.env.REACT_APP_API_KEY
+const api_key = import.meta.env.VITE_SOME_KEY
 // muuttujassa api_key on nyt käynnistyksessä annettu API-avaimen arvo
 ```
 

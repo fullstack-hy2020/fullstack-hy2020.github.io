@@ -1163,7 +1163,7 @@ The application must display the total number of collected feedback for each cat
 
 Note that your application needs to work only during a single browser session. Once you refresh the page, the collected feedback is allowed to disappear.
 
-It is advisable to use the same structure that is used in the material and previous exercise. File <i>main.js</i> is as follows:
+It is advisable to use the same structure that is used in the material and previous exercise. File <i>main.jsx</i> is as follows:
 
 ```js
 import React from 'react'
@@ -1174,7 +1174,7 @@ import App from './App'
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-You can use the code below as a starting point for the <i>App.js</i> file:
+You can use the code below as a starting point for the <i>App.jsx</i> file:
 
 ```js
 import { useState } from 'react'
@@ -1310,7 +1310,7 @@ const App = () => {
 export default App
 ```
 
-Content of the file <i>main.js</i> is the same as in previous exercises.
+Content of the file <i>main.jsx</i> is the same as in previous exercises.
 
 Find out how to generate random numbers in JavaScript, eg. via a search engine or on [Mozilla Developer Network](https://developer.mozilla.org). Remember that you can test generating random numbers e.g. straight in the console of your browser.
 

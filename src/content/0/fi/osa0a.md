@@ -282,10 +282,7 @@ Kurssilla ei ole enää vuosittaisia versiota. Kurssi on siis käynnissä koko a
 Muutoksista huolimatta <i>kaikki jo tehdyt palautukset säilyvät voimassa</i>, eli voit jatkaa kurssia päivityksistä huolimatta normaaliin tapaan.
 
 Viimeaikaisia isompia muutoksia
-- Osa 2 (18.1.2023): Muutos tehtävien numeroinnissa, tehtävät 2.11-13. siirretty osan loppuun
-- Osa 6 (30.1.2023): Uusi luku aiheenaan React Query; useReducer ja React context korvasi Redux connect ‑luvun
-- Osa 8 (5.2.2023): Backend muutettu käyttämään Apollo Server ‑kirjaston versiota 4.0
-- Osa 9 (12.2.2023): Sisältöä tarkennettu, Patientor-esimerkkisovelluksen rakennetta yksinkertaistettu
+- Osat 1 ja 2 (11-14.8.2023): Create React app korvattu Vitellä
 
 ### Aiemmin suoritetun kurssin täydentäminen
 

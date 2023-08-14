@@ -11,7 +11,7 @@ The appearance of our current application is quite modest. In [exercise 0.2](/en
 
 Let's take a look at how we can add styles to a React application. There are several different ways of doing this and we will take a look at the other methods later on. First, we will add CSS to our application the old-school way; in a single file without using a [CSS preprocessor](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor) (although this is not entirely true as we will learn later on).
 
-Let's add a new <i>index.css</i> file under the <i>src</i> directory and then add it to the application by importing it in the <i>index.js</i> file:
+Let's add a new <i>index.css</i> file under the <i>src</i> directory and then add it to the application by importing it in the <i>main.jsx</i> file:
 
 ```js
 import './index.css'
@@ -243,7 +243,7 @@ const Footer = () => {
   return (
     <div style={footerStyle}>
       <br />
-      <em>Note app, Department of Computer Science, University of Helsinki 2022</em>
+      <em>Note app, Department of Computer Science, University of Helsinki 2023</em>
     </div>
   )
 }
@@ -584,8 +584,6 @@ When there is only one country matching the query, then the basic data of the co
 
 **NB**: It is enough that your application works for most countries. Some countries, like <i>Sudan</i>, can be hard to support since the name of the country is part of the name of another country, <i>South Sudan</i>. You don't need to worry about these edge cases.
 
-**WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your projects to be a separate repository**, so simply run the _rm -rf .git_ command at the root of your application.
-
 <h4>2.19*: Data for countries, step2</h4>
 
 **There is still a lot to do in this part, so don't get stuck on this exercise!**
@@ -606,29 +604,21 @@ If you use Open weather map, [here](https://openweathermap.org/weather-condition
 
 **NB:** In some browsers (such as Firefox) the chosen API might send an error response, which indicates that HTTPS encryption is not supported, although the request URL starts with _http://_. This issue can be fixed by completing the exercise using Chrome.
 
-**NB:** You need an api-key to use almost every weather service. Do not save the api-key to source control! Nor hardcode the api-key to your source code. Instead use an [environment variable](https://create-react-app.dev/docs/adding-custom-environment-variables/) to save the key.
+**NB:** You need an api-key to use almost every weather service. Do not save the api-key to source control! Nor hardcode the api-key to your source code. Instead use an [environment variable](https://vitejs.dev/guide/env-and-mode.html) to save the key.
 
 Assuming the api-key is <i>t0p53cr3t4p1k3yv4lu3</i>, when the application is started like so:
 
 ```bash
-REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 npm start // For Linux/macOS Bash
-($env:REACT_APP_API_KEY="t0p53cr3t4p1k3yv4lu3") -and (npm start) // For Windows PowerShell
-set "REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3" && npm start // For Windows cmd.exe
+VITE_SOME_KEY=54l41n3n4v41m34rv0 npm start3 npm start // For Linux/macOS Bash
+($env:VITE_SOME_KEY="54l41n3n4v41m34rv0") -and (npm start) // For Windows PowerShell
+set "VITE_SOME_KEY=54l41n3n4v41m34rv0" && npm start // For Windows cmd.exe
 ```
 
 you can access the value of the key from the _process.env_ object:
 
 ```js
-const api_key = process.env.REACT_APP_API_KEY
+const api_key = import.meta.env.VITE_SOME_KEY
 // variable api_key now has the value set in startup
-```
-
-Note that if you created the application using _npx create-react-app ..._ and you want to use a different name for your environment variable then the environment variable name must still begin with *REACT\_APP_*. You can also use a `.env` file rather than defining it on the command line each time by creating a file entitled '.env' in the root of the project and adding the following.
-
-```
-# .env
-
-REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3
 ```
 
 Note that you will need to restart the server to apply the changes.

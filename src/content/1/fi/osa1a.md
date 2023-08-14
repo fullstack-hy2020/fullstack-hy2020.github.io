@@ -14,7 +14,7 @@ Helpoin tapa päästä alkuun on [Vite](https://vitejs.dev/)-nimisen työkalun k
 Luodaan sovellus nimeltään <i>part1</i>, mennään sovelluksen sisältämään hakemistoon ja asennetaan sovelluksen käyttämät kirjastot:
 
 ```bash
-npm create vite@latest part -- --template react
+npm create vite@latest part1 -- --template react
 cd part1
 npm install
 ```
@@ -35,7 +35,7 @@ Avataan selan sekä tekstieditori siten, että näet koodin ja web-sivun samaan 
 
 ![](../../images/1/1-vite4.png)
 
-Sovelluksen koodi on hakemistossa <i>src</i>. Yksinkertaistetaan valmiina olevaa koodia siten, että tiedoston <i>main.js</i> sisällöksi tulee:
+Sovelluksen koodi on hakemistossa <i>src</i>. Yksinkertaistetaan valmiina olevaa koodia siten, että tiedoston <i>main.jsx</i> sisällöksi tulee:
 
 ```js
 import ReactDOM from 'react-dom/client'
@@ -46,7 +46,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 
 ```
 
-ja tiedoston <i>App.js</i> sisällöksi
+ja tiedoston <i>App.jsx</i> sisällöksi
 
 ```js
 const App = () => (
@@ -72,7 +72,7 @@ Kurssia ollaan tällä hetkellä (11.8.2023) päivittämässä käyttämään Vi
 
 ### Komponentti
 
-Tiedosto <i>App.js</i> määrittelee nyt React-[komponentin](https://react.dev/learn/your-first-component) nimeltään <i>App</i>. Tiedoston <i>main.js</i> viimeisen rivin komento
+Tiedosto <i>App.js</i> määrittelee nyt React-[komponentin](https://react.dev/learn/your-first-component) nimeltään <i>App</i>. Tiedoston <i>main.jsx</i> viimeisen rivin komento
 
 ```js
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
@@ -248,7 +248,7 @@ mutta JSX:ää kirjoittaessa tagi on pakko sulkea:
 
 ### Monta komponenttia
 
-Muutetaan tiedostoa <i>App.js</i> seuraavasti (muista, että alimman rivin export jätetään <i>esimerkeistä</i> nyt ja jatkossa pois, niiden on kuitenkin oltava koodissa jotta ohjelma toimisi):
+Muutetaan tiedostoa <i>App.jsx</i> seuraavasti (muista, että alimman rivin export jätetään <i>esimerkeistä</i> nyt ja jatkossa pois, niiden on kuitenkin oltava koodissa jotta ohjelma toimisi):
 
 ```js
 // highlight-start
@@ -624,7 +624,7 @@ code .
 
 <i>Tässä tehtävässä aloitettavaa ohjelmaa kehitellään eteenpäin muutamassa seuraavassa tehtävässä. Tässä ja kurssin aikana muissakin vastaan tulevissa tehtäväsarjoissa ohjelman lopullisen version palauttaminen riittää. Voit toki halutessasi tehdä commitin jokaisen tehtävän jälkeisestä tilanteesta, mutta se ei ole välttämätöntä.</i>
 
-Luo Vitellä uusi sovellus. Muuta <i>main.js</i> muotoon
+Luo Vitellä uusi sovellus. Muuta <i>main.jsc</i> muotoon
 
 ```js
 import ReactDOM from 'react-dom/client'
@@ -634,7 +634,7 @@ import App from './App'
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-ja tiedosto <i>App.js</i> muotoon
+ja tiedosto <i>App.jsx</i> muotoon
 
 ```js
 const App = () => {
@@ -670,7 +670,7 @@ ja poista ylimääräiset tiedostot <i>App.css</i> ja <i>index.css</i> ja hakemi
 
 Koko sovellus on nyt ikävästi yhdessä komponentissa. Refaktoroi sovelluksen koodi siten, että se koostuu kolmesta uudesta komponentista: <i>Header</i>, <i>Content</i> ja <i>Total</i>. Kaikki data pidetään edelleen komponentissa <i>App</i>, joka välittää tarpeelliset tiedot kullekin komponentille <i>props:ien</i> avulla. <i>Header</i> huolehtii kurssin nimen renderöimisestä, <i>Content</i> osista ja niiden tehtävämääristä ja <i>Total</i> tehtävien yhteismäärästä.
 
-Tee uudet komponentit tiedostoon <i>App.js</i>.
+Tee uudet komponentit tiedostoon <i>App.jsx</i>.
 
 Komponentin <i>App</i> runko tulee olemaan suunnilleen seuraavanlainen:
 

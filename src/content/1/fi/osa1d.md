@@ -1164,7 +1164,7 @@ Sovelluksen tulee näyttää jokaisen palautteen lukumäärä. Sovellus voi näy
 
 Huomaa, että sovelluksen tarvitsee toimia vain yhden selaimen käyttökerran ajan. Esim. kun sivu refreshataan, tilastot saavat hävitä.
 
-Kannattaa noudattaa samaa rakennetta kuin materiaalissa ja edellisessä tehtävässä, eli tiedoston <i>main.js</i> sisältö on seuraava:
+Kannattaa noudattaa samaa rakennetta kuin materiaalissa ja edellisessä tehtävässä, eli tiedoston <i>main.jsx</i> sisältö on seuraava:
 
 ```js
 import ReactDOM from 'react-dom/client'
@@ -1173,7 +1173,7 @@ import App from './App'
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-Muun sovelluksen voi tehdä tiedostoon <i>App.js</i>. Tiedoston sisältö voi olla aluksi seuraava:
+Muun sovelluksen voi tehdä tiedostoon <i>App.jsx</i>. Tiedoston sisältö voi olla aluksi seuraava:
 
 ```js
 import { useState } from 'react'
@@ -1307,7 +1307,7 @@ const App = () => {
 export default App
 ```
 
-Tiedoston <i>main.js</i> sisältö on sama kuin edellisissä tehtävissä.
+Tiedoston <i>main.jsx</i> sisältö on sama kuin edellisissä tehtävissä.
 
 Google kertoo, miten voit generoida JavaScriptilla sopivia satunnaisia lukuja. Muista, että voit testata esim. satunnaislukujen generointia konsolissa.
 

@@ -84,7 +84,7 @@ Passing event handlers to the child components of the <i>App</i> component has r
 
 We will now do the 'frontend', or the browser-side application logic, in React for an application that's similar to the example application from [part 0](/en/part0)
 
-Let's start with the following (the file <i>App.js</i>):
+Let's start with the following (the file <i>App.jsx</i>):
 
 ```js
 const App = (props) => {
@@ -105,7 +105,7 @@ const App = (props) => {
 export default App
 ```
 
-The file <i>index.js</i> looks like this:
+The file <i>main.jsx</i> looks like this:
 
 ```js
 import React from 'react'
@@ -406,7 +406,7 @@ Note that the <i>key</i> attribute must now be defined for the <i>Note</i> compo
 
 A whole React application can be written in a single file. Although that is, of course, not very practical. Common practice is to declare each component in its own file as an <i>ES6-module</i>.
 
-We have been using modules the whole time. The first few lines of the file <i>index.js</i>:
+We have been using modules the whole time. The first few lines of the file <i>main.jsx</i>:
 
 ```js
 import ReactDOM from "react-dom/client"
@@ -420,8 +420,7 @@ Let's move our <i>Note</i> component into its own module.
 
 In smaller applications, components are usually placed in a directory called <i>components</i>, which is in turn placed within the <i>src</i> directory. The convention is to name the file after the component.
 
-Now, we'll create a directory called <i>components</i> for our application and place a file named <i>Note.js</i> inside.
-The contents of the Note.js file are as follows:
+Now, we'll create a directory called <i>components</i> for our application and place a file named <i>Note.jsx</i> inside. The contents of the file are as follows:
 
 ```js
 const Note = ({ note }) => {
@@ -435,7 +434,7 @@ export default Note
 
 The last line of the module [exports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) the declared module, the variable <i>Note</i>.
 
-Now the file that is using the component - <i>App.js</i> - can [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) the module:
+Now the file that is using the component - <i>App.jsx</i> - can [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) the module:
 
 ```js
 import Note from './components/Note' // highlight-line
@@ -453,13 +452,13 @@ Note that when importing our own components, their location must be given <i>in 
 './components/Note'
 ```
 
-The period - <i>.</i> - in the beginning refers to the current directory, so the module's location is a file called <i>Note.js</i> in the <i>components</i> sub-directory of the current directory. The filename extension _.js_ can be omitted.
+The period - <i>.</i> - in the beginning refers to the current directory, so the module's location is a file called <i>Note.jsx</i> in the <i>components</i> sub-directory of the current directory. The filename extension _.jsx_ can be omitted.
 
 Modules have plenty of other uses other than enabling component declarations to be separated into their own files. We will get back to them later in this course.
 
-The current code of the application can be found on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1).
+The current code of the application can be found on [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part2-1).
 
-Note that the <i>main</i> branch of the repository contains the code for a later version of the application. The current code is in the branch [part2-1](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1):
+Note that the <i>main</i> branch of the repository contains the code for a later version of the application. The current code is in the branch [part2-1](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part2-1):
 
 ![GitHub branch screenshot](../../images/2/2e.png)
 
@@ -471,7 +470,7 @@ Early in your programming career (and even after 30 years of coding like yours t
 
 A "React explosion" can, for example, look like this:
 
-![react sample error](../../images/2/3b.png)
+![react sample error](../../images/2/3-vite.png)
 
 In these situations, your best way out is the <em>console.log</em> method.
 
@@ -584,14 +583,12 @@ The exercises are submitted **One part at a time**. When you have submitted the 
 
 Note that this part has more exercises than the ones before, so <i>do not submit</i> until you have done all exercises from this part you want to submit.
 
-**WARNING** create-react-app makes the project automatically into a git repository if the project is not created inside of an already existing repository. You probably **do not** want the project to become a repository, so run the command _rm -rf .git_ from its root. 
-
 <h4>2.1: Course information step6</h4>
 
 Let's finish the code for rendering course contents from exercises 1.1 - 1.5. You can start with the code from the model answers. The model answers for part 1 can be found by going to the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen), clicking on <i>my submissions</i> at the top, and in the row corresponding to part 1 under the <i>solutions</i> column clicking on <i>show</i>. To see the solution to the <i>course info</i> exercise, click on _index.js_ under <i>kurssitiedot</i> ("kurssitiedot" means "course info").
 
-
 **Note that if you copy a project from one place to another, you might have to delete the <i>node\_modules</i> directory and install the dependencies again with the command _npm install_ before you can start the application.**
+
 Generally, it's not recommended that you copy a project's whole contents and/or add the <i>node\_modules</i> directory to the version control system.
 
 Let's change the <i>App</i> component like so:
@@ -678,11 +675,7 @@ const total = parts.reduce((s, p) => {
 })
 ```
 
-**Not working? :** Use your search engine to look up how `reduce` is used in an **Object Array**.
-
-**Pro tip 2:** There is a [plugin for VS Code](https://marketplace.visualstudio.com/items?itemName=cmstead.js-codeformer) that automatically changes the short-form arrow functions into their longer form and vice versa.
-
-![vscode sample suggestion for arrow function](../../images/2/5b.png)
+**Not working? :** Use your search engine to look up how _reduce_ is used in an **Object Array**.
 
 <h4>2.4: Course information step9</h4>
 

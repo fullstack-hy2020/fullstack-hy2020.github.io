@@ -340,10 +340,7 @@ Despite changes <i>all the submitted exercises remain valid</i>, and the course 
 
 Recent major changes
 
-- Part 2 (18th Jan 2023): Exercise numbering changed, the old 2.11-13. moved to the end of the part
-- Part 6 (30th Jan 2023): A new section on React Query, useReducer and React context replaced the section on Redux connect
-- Part 8 (5th Feb 2023): Backend updated to use Apollo Server 4.0
-- Part 9 (12th Feb 2023): Content clarified, Patientor example app structure refactored to a much simpler form
+- Parts 1 and 2 (11-14th August): Create React app replaced with Vite
 
 ### Expanding on a previously completed course
 

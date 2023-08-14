@@ -98,7 +98,7 @@ Kun palvelimella oleva data alkaa vaikuttaa web-sovelluksen toimintalogiikkaan, 
 
 Palvelimen tilaa kannattaa tarkastella myös suoraan esim. selaimella:
 
-![](../../images/2/22e.png)
+![](../../images/2/22.png)
 
 Näin on mahdollista varmistua mm. siitä, siirtyykö kaikki oletettu data palvelimelle.
 
@@ -233,7 +233,7 @@ axios.put(url, note).then(response => {
   // ...
 ```
 
-Näin ei ole suositeltavaa tehdä, sillä muuttuja <em>note</em> on viite komponentin tilassa, eli <em>notes</em>-taulukossa olevaan olioon, ja kuten muistamme, Reactissa tilaa [ei saa muuttaa suoraan!](https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly) 
+Näin ei ole suositeltavaa tehdä, sillä muuttuja <em>note</em> on viite komponentin tilassa, eli <em>notes</em>-taulukossa olevaan olioon, ja kuten muistamme, Reactissa tilaa [ei saa muuttaa suoraan!](https://react.dev/learn/updating-objects-in-state#why-is-mutating-state-not-recommended-in-react) 
 
 Kannattaa huomata myös, että uusi olio _changedNote_ on ainoastaan ns. [shallow copy](https://en.wikipedia.org/wiki/Object_copying#Shallow_copy), eli uuden olion kenttien arvoina on vanhan olion kenttien arvot. Jos vanhan olion kentät olisivat itsessään olioita, viittaisivat uuden olion kentät samoihin olioihin.
 

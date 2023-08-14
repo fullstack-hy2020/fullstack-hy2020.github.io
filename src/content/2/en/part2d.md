@@ -100,7 +100,7 @@ Once the data returned by the server starts to have an effect on the behavior of
 
 It's beneficial to inspect the state of the backend server, e.g. through the browser:
 
-![JSON data output from backend](../../images/2/22e.png)
+![JSON data output from backend](../../images/2/22.png)
 
 This makes it possible to verify that all the data we intended to send was actually received by the server.
 
