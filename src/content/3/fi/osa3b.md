@@ -418,7 +418,7 @@ Tähänkin on useita erilaisia ratkaisuja (esim. sekä frontendin että backendi
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3), branchissa <i>part3-3</i>.
 
-Frontendin koodiin tehdyt muutokset ovat [frontendin repositorion](https://github.com/fullstack-hy2020/part2-notes/tree/part3-1) branchissa <i>part3-1</i>.
+Frontendin koodiin tehdyt muutokset ovat [frontendin repositorion](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part3-1) branchissa <i>part3-1</i>.
 
 </div>
 
