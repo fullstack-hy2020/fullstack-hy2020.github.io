@@ -511,7 +511,7 @@ useEffect(() => {
 
 We still have a problem with our application. When adding new notes, they are not stored on the server.
 
-The code for the application, as described so far, can be found in full on [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-4), on branch <i>part2-4</i>.
+The code for the application, as described so far, can be found in full on [github](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part2-4), on branch <i>part2-4</i>.
 
 ### The development runtime environment
 
