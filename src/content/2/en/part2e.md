@@ -290,7 +290,7 @@ Use the [improved error message](/en/part2/adding_styles_to_react_app#improved-e
 
 <h4>2.17*: Phonebook step12</h4>
 
-Open your application in two browsers. **If you delete a person in browser 1** a short while before attempting to <i>change the person's phone number</i> in browser 2, you will get the following error message:
+Open your application in two browsers. **If you delete a person in browser 1** a short while before attempting to <i>change the person's phone number</i> in browser 2, you will get the following 2 error messages:
 
 ![error message 404 not found when changing multiple browsers](../../images/2/29b.png)
 
@@ -298,7 +298,7 @@ Fix the issue according to the example shown in [promise and errors](/en/part2/a
 
 ![error message shown on screen instead of in console feature add-on](../../images/2/28e.png)
 
-**Note** that even if you handle the exception, the error message is printed to the console.
+**Note** that even if you handle the exception, the first "404" error message is still printed to the console. But you should not see "Uncaught (in promise) Error".
 
 </div>
 
