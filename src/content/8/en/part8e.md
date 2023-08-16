@@ -369,8 +369,6 @@ const http = require('http')
 
 const jwt = require('jsonwebtoken')
 
-const JWT_SECRET = 'NEED_HERE_A_SECRET_KEY'
-
 const mongoose = require('mongoose')
 
 const User = require('./models/user')
