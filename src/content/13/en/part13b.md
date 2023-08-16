@@ -629,7 +629,7 @@ Note.belongsTo(User)
 
 Sequelize will automatically create an attribute called <i>userId</i> on the <i>Note</i> model to which, when referenced gives access to the database column <i>user_id</i>.
 
-Keep in mind, that we could also create a note as follows using the [build](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-build) method:
+Keep in mind, that we could also create a note as follows using the [build](https://sequelize.org/api/v6/class/src/model.js~model#static-method-build) method:
 
 ```js
 const user = await User.findByPk(req.decodedToken.id)
