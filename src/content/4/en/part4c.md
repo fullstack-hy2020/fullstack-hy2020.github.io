@@ -442,11 +442,16 @@ The note scheme will also need to change as follows in our models/note.js file:
 const noteSchema = new mongoose.Schema({
   content: {
     type: String,
-    minLength: 5,
     required: true,
+    minlength: 5
   },
   important: Boolean,
-  user: String, //highlight-line
+  // highlight-start
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
+  //highlight-end
 })
 ```
 

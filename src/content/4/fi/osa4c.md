@@ -439,6 +439,25 @@ notesRouter.post('/', async (request, response) => {
 })
 ```
 
+Muistiinpanon skeema muuttuu myös hieman:
+
+```js
+const noteSchema = new mongoose.Schema({
+  content: {
+    type: String,
+    required: true,
+    minlength: 5
+  },
+  important: Boolean,
+  // highlight-start
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
+  //highlight-end
+})
+```
+
 Huomionarvoista on nyt se, että myös <i>user</i>-olio muuttuu. Sen kenttään <i>notes</i> talletetaan luodun muistiinpanon <i>id</i>:
 Koska tieto tallennetaan <i>user</i>-olioon tulee muistiinpanoa poistettaessa tieto poistaa myös <i>user</i>-olion listalta.
 

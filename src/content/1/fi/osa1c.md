@@ -178,7 +178,7 @@ const Hello = ({ name, age }) => {
 
 Toistaiseksi tekemämme sovellukset ovat olleet sellaisia, että kun niiden komponentit on kerran renderöity, niiden ulkoasua ei ole enää voinut muuttaa. Entä jos haluaisimme toteuttaa laskurin, jonka arvo kasvaa ajan kuluessa tai nappeja painettaessa?
 
-Aloitetaan seuraavasta rungosta. Tiedostoon <i>App.js</i> tulee:
+Aloitetaan seuraavasta rungosta. Tiedostoon <i>App.jsx</i> tulee:
 
 ```js
 const App = (props) => {
@@ -191,10 +191,9 @@ const App = (props) => {
 export default App
 ```
 
-Tiedoston <i>index.js</i> sisältö on:
+Tiedoston <i>main.jsx</i> sisältö on:
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App'
@@ -251,10 +250,9 @@ Tähänastiset komponenttimme ovat olleet siinä mielessä yksinkertaisia, että
 
 Määritellään nyt sovelluksemme komponentille <i>App</i> tila Reactin [state hookin](https://react.dev/learn/state-a-components-memory#meet-your-first-hook) avulla.
 
-Palautetaan <i>index.js</i> muotoon
+Palautetaan <i>main.jsx</i> muotoon
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App'
@@ -262,7 +260,7 @@ import App from './App'
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-ja muutetaan <i>App.js</i> muotoon:
+ja muutetaan <i>App.jsx</i> muotoon:
 
 ```js
 import { useState } from 'react' // highlight-line

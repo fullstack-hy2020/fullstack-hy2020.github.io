@@ -194,10 +194,10 @@ Let's look at the situation from the console. First, the _\d_ command, which tel
 
 ```sql
 postgres=# \d
-                 List of relations
- Schema | Name | Type | Owner
---------+--------------+----------+----------------
- public | notes | table | username
+            List of relations
+ Schema |     Name     |   Type   |  Owner
+--------+--------------+----------+----------
+ public | notes        | table    | username
  public | notes_id_seq | sequence | username
 (2 rows)
 ```
@@ -208,13 +208,13 @@ With the command _\d notes_, we can see how the <i>notes</i> table is defined:
 
 ```sql
 postgres=# \d notes;
-                                     Table "public.notes"
-  Column | Type | Collation | Nullable | Default
+                                 Table "public.notes"                                          
+ Column    |          Type          | Collation | Nullable |             Default               
 -----------+------------------------+-----------+----------+-----------------------------------
- id | integer | not null | nextval('notes_id_seq'::regclass)
- content | text | | not null |
- important | boolean | | | |
- date | time without time zone | | | |
+ id        | integer                |           | not null | nextval('notes_id_seq'::regclass) 
+ content   | text                   |           | not null |                                   
+ important | boolean                |           |          |                                   
+ date      | time without time zone |           |          |                                   
 Indexes:
     "notes_pkey" PRIMARY KEY, btree (id)
 ```
@@ -232,10 +232,10 @@ And let's see what the created content looks like:
 
 ```sql
 postgres=# select * from notes;
- id | content | important | date
+ id |               content               | important | date
 ----+-------------------------------------+-----------+------
-  1 | relational databases rule the world | t |
-  2 | MongoDB is webscale | f |
+  1 | relational databases rule the world | t         |      
+  2 | MongoDB is webscale                 | f         |      
 (2 rows)
 ```
 
