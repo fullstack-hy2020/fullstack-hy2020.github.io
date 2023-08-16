@@ -572,7 +572,7 @@ Teemme tämän osan tehtävissä [osan 4](/osa4) tehtävien kanssa samanlaisen b
 
 #### Tehtävä 13.1.
 
-Tee sovellukselle GitHub-repositorio ja luo sen sisällä sovellusta varten Heroku-sovellus sekä Postgres-tietokanta. Varmista, että saat luotua yhteyden sovelluksen tietokantaan.
+Tee sovellukselle GitHub-repositorio ja luo sen sisällä sovellusta varten Fly.io tai Heroku-sovellus sekä Postgres-tietokanta. Varmista, että saat luotua yhteyden sovelluksen tietokantaan. Kuten [täällä](/osa13/relaatiotietokannan_kaytto_sequelize_kirjastolla#sovelluksen-tietokanta) mainittiin, voit hoitaa tietokannan myös esim. Dockerin avulla, tällöin et tarvitse Fly.io- tai Heroku-sovellusta.
 
 #### Tehtävä 13.2.
 

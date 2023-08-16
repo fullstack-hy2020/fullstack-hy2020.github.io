@@ -38,7 +38,7 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-Notice that the <i>li</i> element has the [CSS](https://reactjs.org/docs/dom-elements.html#classname) classname <i>note</i>, that could be used to access the component in our tests.
+Notice that the <i>li</i> element has the [CSS](https://react.dev/learn#adding-styles) classname <i>note</i>, that could be used to access the component in our tests.
 
 ### Rendering the component for tests
 
@@ -720,7 +720,7 @@ The report will tell us the lines of untested code in each component:
 
 ![HTML report of the test coverage](../../images/5/19ea.png)
 
-You can find the code for our current application in its entirety in the <i>part5-8</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-8).
+You can find the code for our current application in its entirety in the <i>part5-8</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-8).
 </div>
 
 <div class="tasks">

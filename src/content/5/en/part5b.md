@@ -271,7 +271,7 @@ Next let's define the form component inside of a <i>Togglable</i> component:
 </Togglable>
 ```
 
-You can find the code for our current application in its entirety in the <i>part5-4</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-4).
+You can find the code for our current application in its entirety in the <i>part5-4</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-4).
 
 ### State of the forms
 
@@ -352,7 +352,7 @@ const App = () => {
 
 We could do the same for the log in form, but we'll leave that for an optional exercise.
 
-The application code can be found on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5),
+The application code can be found on [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-5),
 branch <i>part5-5</i>.
 
 ### References to components with ref
@@ -450,7 +450,7 @@ This trick works for changing the state of a component, but it looks a bit unple
 
 There are also [other use cases](https://react.dev/learn/manipulating-the-dom-with-refs) for refs than accessing React components.
 
-You can find the code for our current application in its entirety in the <i>part5-6</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-6).
+You can find the code for our current application in its entirety in the <i>part5-6</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-6).
 
 ### One point about components
 
@@ -705,9 +705,7 @@ If the type of a passed prop is wrong, e.g. if we try to define the <i>handleSub
 
 In part 3 we configured the [ESlint](/en/part3/validation_and_es_lint#lint) code style tool to the backend. Let's take ESlint to use in the frontend as well.
 
-Create-react-app has installed ESlint to the project by default, so all that's left for us to do is define our desired configuration in the <i>.eslintrc.js</i> file.
-
-*NB:* do not run the _eslint --init_ command. It will install the latest version of ESlint that is not compatible with the configuration file created by create-react-app!
+Vite has installed ESlint to the project by default, so all that's left for us to do is define our desired configuration in the <i>.eslintrc.cjs</i> file.
 
 Next, we will start testing the frontend and in order to avoid undesired and irrelevant linter errors we will install the [eslint-plugin-jest](https://www.npmjs.com/package/eslint-plugin-jest) package:
 
@@ -715,64 +713,57 @@ Next, we will start testing the frontend and in order to avoid undesired and irr
 npm install --save-dev eslint-plugin-jest
 ```
 
-Let's create a <i>.eslintrc.js</i> file with the following contents:
+Let's create a <i>.eslintrc.cjs</i> file with the following contents:
 
 ```js
-/* eslint-env node */
 module.exports = {
-  "env": {
-      "browser": true,
-      "es6": true,
-      "jest/globals": true 
+  root: true,
+  env: {
+    browser: true,
+    es2020: true,
+    "jest/globals": true
   },
-  "extends": [ 
-      "eslint:recommended",
-      "plugin:react/recommended"
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
+    'plugin:react-hooks/recommended',
   ],
-  "parserOptions": {
-      "ecmaFeatures": {
-          "jsx": true
-      },
-      "ecmaVersion": 2018,
-      "sourceType": "module"
+  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
+  settings: { react: { version: '18.2' } },
+  plugins: ['react-refresh', 'jest'],
+  rules: {
+    "indent": [
+        "error",
+        2  
+    ],
+    "linebreak-style": [
+        "error",
+        "unix"
+    ],
+    "quotes": [
+        "error",
+        "single"
+    ],
+    "semi": [
+        "error",
+        "never"
+    ],
+    "eqeqeq": "error",
+    "no-trailing-spaces": "error",
+    "object-curly-spacing": [
+        "error", "always"
+    ],
+    "arrow-spacing": [
+        "error", { "before": true, "after": true }
+    ],
+    "no-console": 0,
+    "react/prop-types": 0,
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": 0,
+    "no-unused-vars": 0    
   },
-  "plugins": [
-      "react", "jest"
-  ],
-  "rules": {
-      "indent": [
-          "error",
-          2  
-      ],
-      "linebreak-style": [
-          "error",
-          "unix"
-      ],
-      "quotes": [
-          "error",
-          "single"
-      ],
-      "semi": [
-          "error",
-          "never"
-      ],
-      "eqeqeq": "error",
-      "no-trailing-spaces": "error",
-      "object-curly-spacing": [
-          "error", "always"
-      ],
-      "arrow-spacing": [
-          "error", { "before": true, "after": true }
-      ],
-      "no-console": 0,
-      "react/prop-types": 0,
-      "react/react-in-jsx-scope": "off"
-  },
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
-  }
 }
 ```
 
@@ -782,28 +773,19 @@ Let's create [.eslintignore](https://eslint.org/docs/user-guide/configuring#igno
 
 ```bash
 node_modules
-build
-.eslintrc.js
+dist
+.eslintrc.cjs
 ```
 
-Now the directories <em>build</em> and <em>node_modules</em> will be skipped when linting.
+Now the directories <em>dist</em> and <em>node_modules</em> will be skipped when linting.
 
-Let us also create an npm script to run the lint:
+As usual, you can perform the linting either from the command line with the command
 
-```js
-{
-  // ...
-  {
-    "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "eslint": "eslint ." // highlight-line
-  },
-  // ...
-}
+```bash
+npm run Lint
 ```
+
+or using the editor's Eslint plugin.
 
 Component _Togglable_ causes a nasty-looking warning <i>Component definition is missing display name</i>:
 
@@ -828,10 +810,7 @@ Togglable.displayName = 'Togglable' // highlight-line
 export default Togglable
 ```
 
-You can find the code for our current application in its entirety in the <i>part5-7</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-7).
-
-Note that create-react-app has also a [default ESLint-configuration](https://www.npmjs.com/package/eslint-config-react-app), that we have now overridden. [The documentation](https://create-react-app.dev/docs/setting-up-your-editor/#extending-or-replacing-the-default-eslint-config) mentions that it is ok to replace the default but does not encourage us to do so:
- <i>We highly recommend extending the base config, as removing it could introduce hard-to-find issues</i>.
+You can find the code for our current application in its entirety in the <i>part5-7</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-7).
 
 </div>
 
@@ -843,8 +822,6 @@ Note that create-react-app has also a [default ESLint-configuration](https://www
 
 Define PropTypes for one of the components of your application, and add ESlint to the project. Define the configuration according to your liking. Fix all of the linter errors.
 
-Create-react-app has installed ESlint to the project by default, so all that's left for you to do is define your desired configuration in the <i>.eslintrc.js</i> file.
-
-*NB:* do not run the _eslint --init_ command. It will install the latest version of ESlint that is not compatible with the configuration file created by create-react-app!
+Vite has installed ESlint to the project by default, so all that's left for you to do is define your desired configuration in the <i>.eslintrc.cjs</i> file.
 
 </div>
