@@ -82,7 +82,7 @@ Jos taulukon funktionaalinen käsittely tuntuu vielä vieraalta, kannattaa katso
 
 Tehdään nyt Reactilla [osan 0](/osa0) alussa käytettyä esimerkkisovelluksen [Single page app ‑versiota](https://studies.cs.helsinki.fi/exampleapp/spa) vastaavan sovelluksen 'frontend' eli selainpuolen sovelluslogiikka.
 
-Aloitetaan seuraavasta (tiedosto <i>App.js</i>):
+Aloitetaan seuraavasta (tiedosto <i>App.jsx</i>):
 
 ```js
 const App = (props) => {
@@ -103,10 +103,9 @@ const App = (props) => {
 export default App
 ```
 
-Tiedosto <i>index.js</i> on muuten samanlainen kuin se on ollut toistaiseksi kaikissa ohjelmissa, mutta se määrittelee taulukon, jossa on näytettävä data.
+Tiedosto <i>main.jsx</i> on muuten samanlainen kuin se on ollut toistaiseksi kaikissa ohjelmissa, mutta se määrittelee taulukon, jossa on näytettävä data.
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App'
@@ -208,7 +207,7 @@ Vaikka sovellus näyttää toimivan, konsoliin tulee ikävä varoitus:
 
 ![](../../images/2/1a.png)
 
-Kuten virheilmoituksen linkittämä [sivu](https://reactjs.org/docs/lists-and-keys.html#keys) kertoo, tulee taulukossa olevilla, eli käytännössä _map_-metodilla muodostetuilla elementeillä olla uniikki avain, eli attribuutti nimeltään <i>key</i>.
+Kuten virheilmoituksen linkittämä [sivu](https://react.dev/learn/rendering-lists#keeping-list-items-in-order-with-key) kertoo, tulee taulukossa olevilla, eli käytännössä _map_-metodilla muodostetuilla elementeillä olla uniikki avain, eli attribuutti nimeltään <i>key</i>.
 
 Lisätään avaimet:
 
@@ -233,7 +232,7 @@ const App = (props) => {
 
 Virheilmoitus katoaa.
 
-React käyttää taulukossa olevien elementtien <i>key</i>-kenttiä päätellessään, miten sen tulee päivittää komponentin generoimaa näkymää silloin, kun komponentti uudelleenrenderöidään. Lisää aiheesta on [täällä](https://reactjs.org/docs/reconciliation.html#recursing-on-children).
+React käyttää taulukossa olevien elementtien <i>key</i>-kenttiä päätellessään miten sen tulee päivittää komponentin generoimaa näkymää silloin kun komponentti uudelleenrenderöidään. Lisää aiheesta on [täällä](https://react.dev/learn/preserving-and-resetting-state#option-2-resetting-state-with-a-key).
 
 ### Map
 
@@ -396,7 +395,7 @@ Huomaa, että <i>key</i>-attribuutti täytyy nyt määritellä <i>Note</i>-kompo
 
 Koko React-sovellus on mahdollista määritellä samassa tiedostossa, mutta se ei ole kovin järkevää. Usein käytäntönä on määritellä yksittäiset komponentit omassa tiedostossaan <i>ES6-moduuleina</i>.
 
-Koodissamme on käytetty koko ajan moduuleja. Tiedoston <i>index.js</i> ensimmäiset rivit
+Koodissamme on käytetty koko ajan moduuleja. Tiedoston <i>main.jsx</i> ensimmäiset rivit
 
 ```js
 import ReactDOM from "react-dom/client"
@@ -410,7 +409,7 @@ Siirretään nyt <i>Note</i>-komponentti omaan moduuliinsa.
 
 Pienissä sovelluksissa komponentit sijoitetaan yleensä <i>src</i>-hakemiston alle sijoitettavaan hakemistoon <i>components</i>. Konventiona on nimetä tiedosto komponentin mukaan. 
 
-Tehdään nyt sovellukseen hakemisto <i>components</i> ja sinne tiedosto <i>Note.js</i>, jonka sisältö on seuraava:
+Tehdään nyt sovellukseen hakemisto <i>components</i> ja sinne tiedosto <i>Note.jsx</i>, jonka sisältö on seuraava:
 
 ```js
 const Note = ({ note }) => {
@@ -424,7 +423,7 @@ export default Note
 
 Moduulin viimeisenä rivinä [eksportataan](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) määritelty komponentti, eli muuttuja <i>Note</i>.
 
-Nyt komponenttia käyttävä tiedosto <i>App.js</i> voi [importata](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) moduulin:
+Nyt komponenttia käyttävä tiedosto <i>App.jsx</i> voi [importata](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) moduulin:
 
 ```js
 import Note from './components/Note' // highlight-line
@@ -442,13 +441,13 @@ Huomaa, että itse määriteltyä komponenttia importatessa komponentin sijainti
 './components/Note'
 ```
 
-Piste alussa viittaa nykyiseen hakemistoon, eli kyseessä on nykyisen hakemiston alihakemisto <i>components</i> ja sen sisällä tiedosto <i>Note.js</i>. Tiedoston päätteen voi jättää pois.
+Piste alussa viittaa nykyiseen hakemistoon, eli kyseessä on nykyisen hakemiston alihakemisto <i>components</i> ja sen sisällä tiedosto <i>Note.jsx</i>. Tiedoston päätteen voi jättää pois.
 
 Moduuleilla on paljon muutakin käyttöä kuin mahdollistaa komponenttien määritteleminen omissa tiedostoissaan. Palaamme moduuleihin tarkemmin myöhemmin kurssilla.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1).
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part2-1).
 
-Huomaa, että repositorion main-haarassa on myöhemmän vaiheen koodi. Tämän hetken koodi on branchissa [part2-1](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1):
+Huomaa, että repositorion main-haarassa on myöhemmän vaiheen koodi. Tämän hetken koodi on branchissa [part2-1](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part2-1):
 
 ![](../../images/2/2b.png)
 
@@ -460,7 +459,7 @@ Kun aloitat ohjelmoijan uraasi (ja allekirjoittaneella edelleen 30 vuoden ohjelm
 
 Reactissa räjähdys näyttää esim. seuraavalta:
 
-![](../../images/2/3b.png)
+![](../../images/2/3-vite.png)
 
 Tilanteista pelastaa yleensä parhaiten <em>console.log</em>. Pala räjähdyksen aiheuttavaa koodia seuraavassa:
 
@@ -571,8 +570,6 @@ Tehtävät palautetaan **yksi osa kerrallaan**. Kun olet palauttanut osan tehtä
 
 Huomaa, että tässä osassa on muitakin tehtäviä kuin alla olevat, eli <i>älä tee palautusta</i> ennen kun olet tehnyt osan tehtävistä kaikki mitkä haluat palauttaa.
 
-**VAROITUS** create-react-app tekee projektista automaattisesti Git-repositorion, ellei sovellusta luoda jo olemassa olevan repositorion sisälle. Todennäköisesti **et halua** että projektista tulee repositorio, joten suorita projektin juuressa komento _rm -rf .git_.
-
 <h4>2.1: kurssitiedot step6</h4>
 
 Viimeistellään nyt tehtävien 1.1-1.5 kurssin sisältöjä renderöivän ohjelman koodi. Voit ottaa tarvittaessa pohjaksi mallivastauksen koodin.
@@ -667,17 +664,6 @@ const total = parts.reduce( (s, p) => {
   console.log('what is happening', s, p)
   return someMagicHere 
 })
-```
-
-**Pro tip 2:** VS Codeen on asennettavissa [laajennus](https://marketplace.visualstudio.com/items?itemName=cmstead.jsrefactor), jonka avulla nuolifunktion lyhyen muodon voi muuttaa automaattisesti pidemmäksi muodoksi ja päinvastoin:
-
-![](../../images/2/5b.png)
-
-**Pro tip 3:** Mikäli console.login haluaa vain pikaisesti ujuttaa koodiin nuolifunktiota muuttamatta, voi sen tehdä näppärästi myös tällä tapaa:
-
-```js
-const total = 
-  parts.reduce( (s, p) => console.log('what is happening', s, p) || someMagicHere )
 ```
 
 <h4>2.4: kurssitiedot step9</h4>

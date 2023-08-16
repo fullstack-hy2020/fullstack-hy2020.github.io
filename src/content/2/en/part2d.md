@@ -47,7 +47,7 @@ addNote = event => {
 }
 ```
 
-We create a new object for the note but omit the <i>id</i> property since it's better to let the server generate ids for our resources!
+We create a new object for the note but omit the <i>id</i> property since it's better to let the server generate ids for our resources.
 
 The object is sent to the server using the axios <em>post</em> method. The registered event handler logs the response that is sent back from the server to the console.
 
@@ -100,13 +100,13 @@ Once the data returned by the server starts to have an effect on the behavior of
 
 It's beneficial to inspect the state of the backend server, e.g. through the browser:
 
-![JSON data output from backend](../../images/2/22e.png)
+![JSON data output from backend](../../images/2/22.png)
 
 This makes it possible to verify that all the data we intended to send was actually received by the server.
 
 In the next part of the course, we will learn to implement our own logic in the backend. We will then take a closer look at tools like [Postman](https://www.postman.com/downloads/) that helps us to debug our server applications. However, inspecting the state of the json-server through the browser is sufficient for our current needs.
 
-The code for the current state of our application can be found in the  <i>part2-5</i> branch on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-5).
+The code for the current state of our application can be found in the  <i>part2-5</i> branch on [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part2-5).
 
 ### Changing the Importance of Notes
 
@@ -688,7 +688,7 @@ notes.filter(n => n.id !== id)
 
 It's probably not a good idea to use alert in more serious React applications. We will soon learn a more advanced way of displaying messages and notifications to users. There are situations, however, where a simple, battle-tested method like <em>alert</em> can function as a starting point. A more advanced method could always be added in later, given that there's time and energy for it.
 
-The code for the current state of our application can be found in the  <i>part2-6</i> branch on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-6).
+The code for the current state of our application can be found in the  <i>part2-6</i> branch on [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part2-6).
 
 ### Full stack developer's oath
 

@@ -179,7 +179,7 @@ const Hello = ({ name, age }) => {
 
 So far all of our applications have been such that their appearance remains the same after the initial rendering. What if we wanted to create a counter where the value increased as a function of time or at the click of a button?
 
-Let's start with the following. File <i>App.js</i> becomes:
+Let's start with the following. File <i>App.jsx</i> becomes:
 
 ```js
 const App = (props) => {
@@ -192,10 +192,9 @@ const App = (props) => {
 export default App
 ```
 
-And file <i>index.js</i> becomes:
+And file <i>main.jsx</i> becomes:
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App'
@@ -252,10 +251,9 @@ All of our components up till now have been simple in the sense that they have n
 
 Next, let's add state to our application's <i>App</i> component with the help of React's [state hook](https://react.dev/learn/state-a-components-memory).
 
-We will change the application as follows.  <i>index.js</i> goes back to
+We will change the application as follows.  <i>main.jsx</i> goes back to
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App'
@@ -263,7 +261,7 @@ import App from './App'
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-and <i>App.js</i> changes to the following:
+and <i>App.jsx</i> changes to the following:
 
 ```js
 import { useState } from 'react' // highlight-line

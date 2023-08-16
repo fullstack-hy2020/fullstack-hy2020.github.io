@@ -154,7 +154,7 @@ xhttp.onreadystatechange = function() {
       li.appendChild(document.createTextNode(note.content))
     })
 
-    document.getElementsByClassName('notes').appendChild(ul)
+    document.getElementsByClassName('notes')[0].appendChild(ul)
   }
 }
 
@@ -692,7 +692,7 @@ sequenceDiagram
     Note right of browser: The browser executes the callback function that renders the notes
 ```
 
-**Create a similar diagram** depicting the situation where the user creates a new note on the page <https://studies.cs.helsinki.fi/exampleapp/notes> by writing something into the text field and clicking the <i>submit</i> button.
+**Create a similar diagram** depicting the situation where the user creates a new note on the page <https://studies.cs.helsinki.fi/exampleapp/notes> by writing something into the text field and clicking the <i>Save</i> button.
 
 If necessary, show operations on the browser or on the server as comments on the diagram.
 

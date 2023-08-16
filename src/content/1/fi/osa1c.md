@@ -68,7 +68,7 @@ Syntymävuoden selvittävä funktio on määritelty komponentin toiminnan määr
 
 ### Destrukturointi
 
-Tarkastellaan erästä pientä, mutta käyttökelpoista ES6:n mukanaan tuomaa uutta piirrettä JavaScriptissa, eli muuttujaan sijoittamisen yhteydessä tapahtuvaa [destrukturointia](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment).
+Tarkastellaan erästä pientä mutta käyttökelpoista ES6:n mukanaan tuomaa uutta piirrettä JavaScriptissa, eli muuttujaan sijoittamisen yhteydessä tapahtuvaa [destrukturointia](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment).
 
 Jouduimme äskeisessä koodissa viittaamaan propseina välitettyyn dataan hieman ikävästi muodossa _props.name_ ja _props.age_. Näistä _props.age_ pitää toistaa komponentissa kahteen kertaan.
 
@@ -178,7 +178,7 @@ const Hello = ({ name, age }) => {
 
 Toistaiseksi tekemämme sovellukset ovat olleet sellaisia, että kun niiden komponentit on kerran renderöity, niiden ulkoasua ei ole enää voinut muuttaa. Entä jos haluaisimme toteuttaa laskurin, jonka arvo kasvaa ajan kuluessa tai nappeja painettaessa?
 
-Aloitetaan seuraavasta rungosta. Tiedostoon <i>App.js</i> tulee:
+Aloitetaan seuraavasta rungosta. Tiedostoon <i>App.jsx</i> tulee:
 
 ```js
 const App = (props) => {
@@ -191,10 +191,9 @@ const App = (props) => {
 export default App
 ```
 
-Tiedoston <i>index.js</i> sisältö on:
+Tiedoston <i>main.jsx</i> sisältö on:
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App'
@@ -230,7 +229,7 @@ counter += 1
 refresh()
 ```
 
-Copy-pasten vähentämisen takia komponentin renderöinti on refaktoroitu funktioon _refresh_.
+Copy-pasten vähentämiseksi komponentin renderöinti on refaktoroitu funktioon _refresh_.
 
 Nyt komponentti <i>renderöityy kolme kertaa</i>, saaden ensin arvon 1, sitten 2 ja lopulta 3. Luvut 1 ja 2 tosin ovat ruudulla niin vähän aikaa, että niitä ei ehdi havaita.
 
@@ -251,10 +250,9 @@ Tähänastiset komponenttimme ovat olleet siinä mielessä yksinkertaisia, että
 
 Määritellään nyt sovelluksemme komponentille <i>App</i> tila Reactin [state hookin](https://react.dev/learn/state-a-components-memory#meet-your-first-hook) avulla.
 
-Palautetaan <i>index.js</i> muotoon
+Palautetaan <i>main.jsx</i> muotoon
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App'
@@ -262,7 +260,7 @@ import App from './App'
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-ja muutetaan <i>App.js</i> muotoon:
+ja muutetaan <i>App.jsx</i> muotoon:
 
 ```js
 import { useState } from 'react' // highlight-line
@@ -534,7 +532,7 @@ Nytkin tapahtumankäsittelijät on määritelty oikein, sillä <i>onClick</i>-at
 
 ### Tilan vieminen alikomponenttiin
 
-Reactissa suositaan pieniä komponentteja, joita on mahdollista uusiokäyttää monessa osissa sovellusta ja jopa eri sovelluksissa. Refaktoroidaan koodiamme vielä siten, että yhden komponentin sijaan koostamme laskurin näytöstä ja kahdesta painikkeesta.
+Reactissa suositaan pieniä komponentteja, joita on mahdollista uusiokäyttää monissa osissa sovellusta ja jopa eri sovelluksissa. Refaktoroidaan koodiamme vielä siten, että yhden komponentin sijaan koostamme laskurin näytöstä ja kahdesta painikkeesta.
 
 Tehdään ensin laskurin tilan näyttämisestä vastaava komponentti <i>Display</i>.
 
@@ -629,7 +627,7 @@ Tapahtumankäsittelijä välitetään napeille propsin _handleClick_ välityksel
 
 Kerrataan vielä sovelluksen toiminnan pääperiaatteet.
 
-Kun sovellus käynnistyy, suoritetaan komponentin _App_-koodi, joka luo [useState](https://react.dev/reference/react/useState)-hookin avulla sovellukselle laskurin tilan _counter_. Komponentti renderöi laskimen alkuarvon 0 näyttävän komponentin _Display_ sekä kolme _Button_-komponenttia, joille se asettaa laskurin tilaa muuttavat tapahtumankäsittelijät.
+Kun sovellus käynnistyy, suoritetaan komponentin _App_ koodi, joka luo [useState](https://react.dev/reference/react/useState)-hookin avulla sovellukselle laskurin tilan _counter_. Komponentti renderöi laskimen alkuarvon 0 näyttävän komponentin _Display_ sekä kolme _Button_-komponenttia, joille se asettaa laskurin tilaa muuttavat tapahtumankäsittelijät.
 
 Kun jotain napeista painetaan, suoritetaan vastaava tapahtumankäsittelijä. Tapahtumankäsittelijä muuttaa komponentin _App_ tilaa funktion _setCounter_ avulla. **Tilaa muuttavan funktion kutsuminen aiheuttaa komponentin uudelleenrenderöitymisen.** 
 
