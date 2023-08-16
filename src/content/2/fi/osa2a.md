@@ -236,7 +236,7 @@ React käyttää taulukossa olevien elementtien <i>key</i>-kenttiä päätelless
 
 ### Map
 
-Taulukoiden [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)-metodin toiminnan sisäistäminen on jatkon kannalta äärimmäisen tärkeää.
+Taulukoiden [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)-metodin toiminnan sisäistäminen on jatkon kannalta äärimmäisen tärkeää. Sillä ei ole mitään tekemistä karttojen kanssa, vaan oikeampi suomenkielinen termi olisi matematiikan <i>kuvaus</i>.
 
 Sovellus siis sisältää taulukon _notes_:
 
@@ -269,7 +269,7 @@ const result = notes.map(note => note.id)
 console.log(result)
 ```
 
-Konsoliin tulostuu <i>[1, 2, 3]</i> eli _map_ muodostaa uuden taulukon, jonka jokainen alkio on saatu alkuperäisen taulukon _notes_ alkioista <i>mappaamalla</i> komennon parametrina olevan funktion avulla.
+Konsoliin tulostuu <i>[1, 2, 3]</i>, eli _map_ muodostaa uuden taulukon, jonka jokainen alkio on saatu alkuperäisen taulukon _notes_ alkioista <i>mappaamalla</i> se komennon parametrina olevan funktion avulla.
 
 Funktio on
 
@@ -315,7 +315,7 @@ note => <li key={note.id}>{note.content}</li>
 
 käyttötarkoitus on näkymäelementtien muodostaminen, tulee muuttujien <i>note.id</i> ja <i>note.content </i> arvo renderöidä aaltosulkeiden sisällä. Kokeile mitä koodi tekee, jos poistat aaltosulkeet.
 
-Aaltosulkeiden käyttö tulee varmaan aiheuttamaan alussa pientä päänvaivaa, mutta totut niihin pian. Reactin antama visuaalinen feedback on välitön.
+Aaltosulkeiden käyttö tulee varmaan aiheuttamaan alussa pientä päänvaivaa, mutta totut niihin pian. Reactin antama visuaalinen palaute on välitön.
 
 ### Antipattern: taulukon indeksit avaimina
 
@@ -443,7 +443,7 @@ Huomaa, että itse määriteltyä komponenttia importatessa komponentin sijainti
 
 Piste alussa viittaa nykyiseen hakemistoon, eli kyseessä on nykyisen hakemiston alihakemisto <i>components</i> ja sen sisällä tiedosto <i>Note.jsx</i>. Tiedoston päätteen voi jättää pois.
 
-Moduuleilla on paljon muutakin käyttöä kuin mahdollistaa komponenttien määritteleminen omissa tiedostoissaan, palaamme moduuleihin tarkemmin myöhemmin kurssilla.
+Moduuleilla on paljon muutakin käyttöä kuin mahdollistaa komponenttien määritteleminen omissa tiedostoissaan. Palaamme moduuleihin tarkemmin myöhemmin kurssilla.
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part2-1).
 
@@ -483,7 +483,7 @@ const App = () => {
 }
 ```
 
-Syy toimimattomuuteen alkaa selvitä lisäilemällä koodiin <em>console.log</em>-komentoja. Koska ensimmäinen renderöitävä asia on komponentti <i>App</i>, kannattaa sinne laittaa ensimmäisen tulostus:
+Syy toimimattomuuteen alkaa selvitä lisäilemällä koodiin <em>console.log</em>-komentoja. Koska ensimmäinen renderöitävä asia on komponentti <i>App</i>, kannattaa ensimmäinen tulostus laittaa sinne:
 
 ```js
 const App = () => {
@@ -542,7 +542,7 @@ const Course = (props) => { // highlight-line
 
 Jos ongelma ei vieläkään ratkea, ei auta kuin jatkaa vianjäljitystä eli kirjoittaa lisää console.logeja.
 
-Lisäsin tämän luvun materiaaliin, kun seuraavan tehtävän mallivastauksen koodi räjähti ihan totaalisesti (syynä väärässä muodossa ollut propsi), ja jouduin jälleen kerran debuggaamaan console.logaamalla.
+Lisäsin tämän luvun materiaaliin sen jälkeen, kun seuraavan tehtävän mallivastauksen koodi räjähti ihan totaalisesti (syynä väärässä muodossa ollut propsi), ja jouduin jälleen kerran debuggaamaan console.logaamalla.
 
 ### Websovelluskehittäjän vala
 
@@ -550,11 +550,11 @@ Ennen tehtävien pariin palaamista on hyvä muistaa, mitä lupasimme osan yksi l
 
 Ohjelmointi on hankalaa, ja sen takia lupaan hyödyntää kaikkia ohjelmointia helpottavia keinoja:
 
-- pidän selaimen konsolin koko ajan auki
+- pidän selaimeni konsolin koko ajan auki
 - etenen pienin askelin
-- käytän koodissa runsaasti _console.log_-komentoja varmistamaan sen, että varmasti ymmärrän jokaisen kirjoittamani koodirivin, sekä etsiessäni koodista mahdollisia bugin aiheuttajia
-- jos koodini ei toimi, en kirjoita enää yhtään lisää koodia, vaan alan poistamaan toiminnan rikkoneita rivejä tai palaan suosiolla tilanteeseen, missä koodi vielä toimi
-- kun kysyn apua kurssin Discord- tai Telegram-kanavalla, tai muualla internetissä, muotoilen kysymyksen järkevästi, esim. [täällä](/en/part0/general_info#how-to-ask-help-in-discord-telegam) esiteltyyn tapaan
+- käytän koodissani runsaasti _console.log_-komentoja sekä varmistamaan sen, että varmasti ymmärrän jokaisen kirjoittamani koodirivin, että etsiessäni koodistani mahdollisia bugin aiheuttajia
+- jos koodini ei toimi, en kirjoita enää yhtään lisää koodia, vaan alan poistaa toiminnan rikkoneita rivejä tai palaan suosiolla tilanteeseen, missä koodini vielä toimi
+- kun kysyn apua kurssin Discord- tai Telegram-kanavalla, tai muualla internetissä, muotoilen kysymyksen järkevästi, esim. [täällä](/en/part0/general_info#how-to-get-help-in-discord-telegram) esiteltyyn tapaan
 
 </div>
 
