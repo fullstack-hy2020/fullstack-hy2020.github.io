@@ -653,7 +653,7 @@ test('renders content', () => {
 
   render(<Note note={note} />)
 
-  const element = screen.getByText('Does not work anymore :(')
+  const element = screen.getByText('Does not work')
 
   expect(element).toBeDefined()
 })
@@ -663,14 +663,14 @@ Komento _getByText_ nimittäin etsii elementtiä missä on <i>ainoastaan paramet
 
 ```js 
 const element = screen.getByText(
-  'Does not work anymore :(', { exact: false }
+  'Does not work', { exact: false }
 )
 ```
 
 tai käyttää komentoa _findByText_:
 
 ```js 
-const element = await screen.findByText('Does not work anymore :(')
+const element = await screen.findByText('Does not work')
 ```
 
 On tärkeä huomata, että toisin kuin muut _ByText_-komennoista, _findByText_ palauttaa promisen!
