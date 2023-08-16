@@ -460,6 +460,8 @@ Refactor the application into separate modules as shown earlier in this part of 
 
 One best practice is to commit your code every time it is in a stable state. This makes it easy to rollback to a situation where the application still works.
 
+If you're having issues with <i>content.body</i> being <i>undefined</i> for seemingly no reason, make sure you didn't forget to add <i>app.use(express.json())</i> near the top of the file.
+
 </div>
 
 <div class="content">
