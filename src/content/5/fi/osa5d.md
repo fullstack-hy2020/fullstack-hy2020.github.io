@@ -31,17 +31,18 @@ Aloitetaan asentamalla Cypress <i>frontendin</i> kehitysaikaiseksi riippuvuudeks
 npm install --save-dev cypress
 ```
 
-ja määritellään npm-skripti käynnistämistä varten.
+ja määritellään npm-skripti käynnistämistä varten, ja tehdään myös pieni muutos sovelluksen käynnistävään skriptiin:
 
 ```js
 {
   // ...
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "eslint": "eslint .",
+    "dev": "vite --host", // highlight-line
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "server": "json-server -p3001 --watch db.json",
+    "test": "jest",
     "cypress:open": "cypress open"  // highlight-line
   },
   // ...
@@ -101,7 +102,7 @@ Muutetaan testin sisätö seuraavanlaiseksi
 ```js
 describe('Note ', function() {
   it('front page can be opened', function() {
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:5173')
     cy.contains('Notes')
     cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
   })
@@ -125,7 +126,7 @@ Olisimme voineet määritellä testin myös käyttäen nuolifunktioita
 ```js
 describe('Note app', () => { // highlight-line
   it('front page can be opened', () => { // highlight-line
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:5173')
     cy.contains('Notes')
     cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
   })
@@ -141,14 +142,14 @@ Jos komento <i>cy.contains</i> ei löydä sivulta etsimäänsä tekstiä, testi 
 ```js
 describe('Note app', function() {
   it('front page can be opened',  function() {
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:5173')
     cy.contains('Notes')
     cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
   })
 
 // highlight-start
   it('front page contains random text', function() {
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:5173')
     cy.contains('wtf is this app?')
   })
 // highlight-end
@@ -171,28 +172,28 @@ Siitä päästään eroon asentamalla [eslint-plugin-cypress](https://github.com
 npm install eslint-plugin-cypress --save-dev
 ```
 
-ja laajentamalla tiedostossa <i>.eslintrc.js</i> olevaa konfiguraatiota seuraavasti: 
+ja laajentamalla tiedostossa <i>.eslintrc.cjs</i> olevaa konfiguraatiota seuraavasti: 
 
 ```js
 module.exports = {
-    "env": {
-        "browser": true,
-        "es6": true,
-        "jest/globals": true,
-        "cypress/globals": true // highlight-line
-    },
-    "extends": [ 
-      // ...
-    ],
-    "parserOptions": {
-      // ...
-    },
-    "plugins": [
-        "react", "jest", "cypress" // highlight-line
-    ],
-    "rules": {
-      // ...
-    }
+  "env": {
+    browser: true,
+    es2020: true,
+    "jest/globals": true,
+    "cypress/globals": true // highlight-line
+  },
+  "extends": [ 
+    // ...
+  ],
+  "parserOptions": {
+    // ...
+  },
+  "plugins": [
+      "react", "jest", "cypress" // highlight-line
+  ],
+  "rules": {
+    // ...
+  }
 }
 ```
 
@@ -207,7 +208,7 @@ describe('Note app',  function() {
   // ...
 
   it('login form can be opened', function() {
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:5173')
     cy.contains('log in').click()
   })
 })
@@ -215,13 +216,13 @@ describe('Note app',  function() {
 
 Testi hakee ensin napin sen tekstin perusteella ja klikkaa nappia komennolla [cy.click](https://docs.cypress.io/api/commands/click.html#Syntax).
 
-Koska molemmat testit aloittavat samalla tavalla, eli avaamalla sivun <i>http://localhost:3000</i>, kannattaa yhteinen osa eristää ennen jokaista testiä suoritettavaan <i>beforeEach</i>-lohkoon:
+Koska molemmat testit aloittavat samalla tavalla, eli avaamalla sivun <i>http://localhost:5173</i>, kannattaa yhteinen osa eristää ennen jokaista testiä suoritettavaan <i>beforeEach</i>-lohkoon:
 
 ```js
 describe('Note app', function() {
   // highlight-start
   beforeEach(function() {
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:5173')
   })
   // highlight-end
 
@@ -451,7 +452,7 @@ describe('Note app', function() {
     }
     cy.request('POST', 'http://localhost:3001/api/users/', user) 
     // highlight-end
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:5173')
   })
   
   it('front page can be opened', function() {
@@ -687,7 +688,7 @@ Ensin siis testataan kirjautumistoimintoa. Tämän jälkeen omassa describe-lohk
 
 Kuten aiemmin jo todettiin, jokainen testi suoritetaan alkutilasta, eli vaikka testi on koodissa alempana, se ei aloita samasta tilasta mihin ylempänä koodissa olevat testit ovat jääneet!  
 
-Cypressin dokumentaatio neuvoo meitä seuraavasti: [Fully test the login flow – but only once!](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Logging-in). Eli sen sijaan että tekisimme <i>beforeEach</i>-lohkossa kirjaantumisen lomaketta käyttäen, suosittelee Cypress että kirjaantuminen tehdään [UI:n ohi](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Bypassing-your-UI), tekemällä suoraan backendiin kirjaantumista vastaava HTTP-operaatio. Syynä tälle on se, että suoraan backendiin tehtynä kirjautuminen on huomattavasti nopeampi kuin lomakkeen täyttämällä. 
+Cypressin dokumentaatio neuvoo meitä seuraavasti: [Fully test the login flow – but only once](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Logging-in). Eli sen sijaan että tekisimme <i>beforeEach</i>-lohkossa kirjaantumisen lomaketta käyttäen, suosittelee Cypress että kirjaantuminen tehdään [UI:n ohi](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Bypassing-your-UI), tekemällä suoraan backendiin kirjaantumista vastaava HTTP-operaatio. Syynä tälle on se, että suoraan backendiin tehtynä kirjautuminen on huomattavasti nopeampi kuin lomakkeen täyttämällä. 
 
 Tilanteemme on hieman monimutkaisempi kuin Cypressin dokumentaation esimerkissä, sillä kirjautumisen yhteydessä sovelluksemme tallettaa kirjautuneen käyttäjän tiedot localStorageen. Sekin toki onnistuu. Koodi on seuraavassa
 
@@ -699,7 +700,7 @@ describe('when logged in', function() {
       username: 'mluukkai', password: 'salainen'
     }).then(response => {
       localStorage.setItem('loggedNoteappUser', JSON.stringify(response.body))
-      cy.visit('http://localhost:3000')
+      cy.visit('http://localhost:5173')
     })
     // highlight-end
   })
@@ -724,7 +725,7 @@ Cypress.Commands.add('login', ({ username, password }) => {
     username, password
   }).then(({ body }) => {
     localStorage.setItem('loggedNoteappUser', JSON.stringify(body))
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:5173')
   })
 })
 ```
@@ -790,7 +791,7 @@ Cypress.Commands.add('createNote', ({ content, important }) => {
     }
   })
 
-  cy.visit('http://localhost:3000')
+  cy.visit('http://localhost:5173')
 })
 ```
 
@@ -825,7 +826,7 @@ describe('Note app', function() {
 })
 ```
 
-Testeissämme on vielä eräs ikävä piirre. Sovelluksen osoite <i>http:localhost:3000</i> on kovakoodattuna moneen kohtaan.
+Testeissämme on vielä eräs ikävä piirre. Sovelluksen osoite <i>http:localhost:5173</i> on kovakoodattuna moneen kohtaan.
 
 Määritellään sovellukselle <i>baseUrl</i> Cypressin valmiiksi generoimaan [konfiguraatiotiedostoon](https://docs.cypress.io/guides/references/configuration) <i>cypress.config.js</i>:
 
@@ -836,7 +837,7 @@ module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
     },
-    baseUrl: 'http://localhost:3000' // highlight-line
+    baseUrl: 'http://localhost:5173' // highlight-line
   },
 })
 ```
@@ -844,7 +845,7 @@ module.exports = defineConfig({
 Kaikki testeissä olevat sovelluksen osoitetta käyttävät komennot
 
 ```js
-cy.visit('http://localhost:3000')
+cy.visit('http://localhost:5173')
 ```
 
 voidaan muuttaa muotoon
@@ -864,7 +865,7 @@ module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
     },
-    baseUrl: 'http://localhost:3000',
+    baseUrl: 'http://localhost:5173',
   },
   // highlight-start
   env: {
@@ -1072,7 +1073,7 @@ Testin rungon tulee olla seuraavanlainen
 describe('Blog app', function() {
   beforeEach(function() {
     cy.request('POST', 'http://localhost:3003/api/testing/reset')
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:5173')
   })
 
   it('Login form is shown', function() {
@@ -1094,7 +1095,7 @@ describe('Blog app', function() {
   beforeEach(function() {
     cy.request('POST', 'http://localhost:3003/api/testing/reset')
     // create here a user to backend
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:5173')
   })
 
   it('Login form is shown', function() {
