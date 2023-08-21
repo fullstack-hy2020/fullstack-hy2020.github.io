@@ -585,7 +585,7 @@ const numbers = [1, 2, 3]
 ```
 
 
-<code>...numbers</code> divide el array en elementos individuales, que se pueden colocar, es decir, en otro array.
+<code>...numbers</code> divide el array en elementos individuales, que se pueden colocar en otro array.
 
 ```js
 [...numbers, 4, 5]
