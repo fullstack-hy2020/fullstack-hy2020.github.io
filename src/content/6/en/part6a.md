@@ -33,7 +33,7 @@ We will get to know Redux by implementing a counter application yet again:
 
 ![browser counter application](../../images/6/1.png)
 
-Create a new create-react-app-application and install </i>redux</i> with the command
+Create a new Vite application and install </i>redux</i> with the command
 
 ```bash
 npm install redux
@@ -175,7 +175,7 @@ would cause the following to be printed
 -1
 </pre>
 
-The code of our counter application is the following. All of the code has been written in the same file (_index.js_), so <i>store</i> is directly available for the React code. We will get to know better ways to structure React/Redux code later.
+The code of our counter application is the following. All of the code has been written in the same file (_main.jsx_), so <i>store</i> is directly available for the React code. We will get to know better ways to structure React/Redux code later.
 
 ```js
 import React from 'react'
@@ -374,8 +374,55 @@ Let's expand our reducer so that it can handle the change of a note's importance
 }
 ```
 
-Since we do not have any code which uses this functionality yet, we are expanding the reducer in the 'test-driven' way.
-Let's start by creating a test for handling the action <i>NEW\_NOTE</i>.
+Since we do not have any code which uses this functionality yet, we are expanding the reducer in the 'test-driven' way. Let's start by creating a test for handling the action <i>NEW\_NOTE</i>.
+
+We have to first configure the [Jest](https://jestjs.io/) testing library for the project. Let us install the following dependencies:
+
+```js
+npm install --save-dev jest @babel/preset-env @babel/preset-react eslint-plugin-jest
+```
+
+Next we'll create the file <i>.babelrc</i>, with the following content:
+
+```json
+{
+  "presets": [
+    "@babel/preset-env",
+    ["@babel/preset-react", { "runtime": "automatic" }]
+  ]
+}
+```
+
+Let us expand <i>package.json</i> with a script for running the tests:
+
+```json
+{
+  // ...
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "test": "jest" // highlight-line
+  },
+  // ...
+}
+```
+
+And finally, <i>.eslintrc.cjs</i> needs to be altered as follows:
+
+```js
+module.exports = {
+  root: true,
+  env: { 
+    browser: true,
+    es2020: true,
+    "jest/globals": true // highlight-line
+  },
+  // ...
+}
+```
+
 
 To make testing easier, we'll first move the reducer's code to its own module to file <i>src/reducers/noteReducer.js</i>. We'll also add the library [deep-freeze](https://www.npmjs.com/package/deep-freeze), which can be used to ensure that the reducer has been correctly defined as an immutable function.
 Let's install the library as a development dependency
@@ -854,9 +901,9 @@ First, we install react-redux
 npm install react-redux
 ```
 
-Next, we move the _App_ component into its own file _App.js_. Let's see how this affects the rest of the application files.
+Next, we move the _App_ component into its own file _App.jsx_. Let's see how this affects the rest of the application files.
 
-_index.js_ becomes:
+_main.jsx_ becomes:
 
 ```js
 import React from 'react'
@@ -1008,8 +1055,7 @@ const App = () => {
 }
 ```
 
-The <i>useDispatch</i> hook provides any React component access to the dispatch function of the Redux store defined in <i>index.js</i>.
-This allows all components to make changes to the state of the Redux store.
+The <i>useDispatch</i> hook provides any React component access to the dispatch function of the Redux store defined in <i>main.jsx</i>. This allows all components to make changes to the state of the Redux store.
 
 The component can access the notes stored in the store with the [useSelector](https://react-redux.js.org/api/hooks#useselector)-hook of the react-redux library.
 
@@ -1078,7 +1124,7 @@ export default NewNote
 
 Unlike in the React code we did without Redux, the event handler for changing the state of the app (which now lives in Redux) has been moved away from the <i>App</i> to a child component. The logic for changing the state in Redux is still neatly separated from the whole React part of the application.
 
-We'll also separate the list of notes and displaying a single note into their own components (which will both be placed in the <i>Notes.js</i> file ):
+We'll also separate the list of notes and displaying a single note into their own components (which will both be placed in the <i>Notes.jsx</i> file ):
 
 ```js
 import { useDispatch, useSelector } from 'react-redux' // highlight-line
