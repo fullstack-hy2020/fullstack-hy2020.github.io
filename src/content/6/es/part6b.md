@@ -712,7 +712,7 @@ El código actual de la aplicación estan en la rama <i>part6-3</i> de [este rep
 
 ### Ejercicios 6.10.-6.13.
 
-Continuemos trabajando en la aplicación de anécdotas usando redux la cual comenzamos en el ejercicio 6.3.
+Continuemos trabajando en la aplicación de anécdotas que comenzamos en el ejercicio 6.3, usando Redux Toolkit.
 
 #### 6.10 Mejores anécdotas, paso 8
 
