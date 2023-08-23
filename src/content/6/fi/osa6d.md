@@ -289,7 +289,7 @@ Tästä on toki seurauksena se, että sovellus tekee muistiinpanon muutoksen aih
 
 Jos sovelluksen hakema datamäärä ei ole suuri, ei asialla ole juurikaan merkitystä. Selainpuolen toiminnallisuuden kannaltahan ylimääräisen HTTP GET ‑pyynnön tekeminen ei juurikaan haittaa, mutta joissain tilanteissa se saattaa rasittaa palvelinta.
 
-Tarvittaessa on myös mahdollista optimoida suorituskykyä [päivittämällä itse](https://react-query-v3.tanstack.com/guides/updates-from-mutation-responses) React Queryn ylläpitämää kyselyn tilaa.
+Tarvittaessa on myös mahdollista optimoida suorituskykyä [päivittämällä itse](https://tanstack.com/query/latest/docs/react/guides/updates-from-mutation-responses) React Queryn ylläpitämää kyselyn tilaa.
 
 Muutos uuden muistiinpanon lisäävän mutaation osalta on seuraavassa:
 
@@ -320,14 +320,16 @@ Jos seuraamme tarkasti selaimen network-välilehteä, huomaamme että React Quer
 
 ![](../../images/6/62new.png)
 
-Mistä on kyse? Hieman [dokumentaatiota](https://react-query-v3.tanstack.com/reference/useQuery)
+Mistä on kyse? Hieman [dokumentaatiota](https://tanstack.com/query/latest/docs/react/reference/useQuery)
 tutkimalla huomataan, että React Queryn kyselyjen oletusarvoinen toiminnallisuus on se, että kyselyt (joiden tila on <i>stale</i>) päivitetään kun <i>window focus</i> eli sovelluksen käyttöliittymän aktiivinen elementti vaihtuu. Voimme halutessamme kytkeä toiminnallisuuden pois luomalla kyselyn seuraavasti:
 
 ```js
 const App = () => {
   // ...
-  const result = useQuery('notes', getNotes, {
-    refetchOnWindowFocus: false  // highlight-line
+  const result = useQuery({
+    queryKey: ['notes'],
+    queryFn: getNotes,
+    refetchOnWindowFocus: false // highlight-line
   })
 
   // ...
@@ -338,7 +340,7 @@ Konsoliin tehtävillä tulostuksilla voit tarkkailla sitä miten usein React Que
 
 Sovelluksen lopullinen koodi on [GitHubissa](https://github.com/fullstack-hy2020/query-notes/tree/part6-3) branchissa <i>part6-3</i>.
 
-React Query on monipuolinen kirjasto joka jo nyt nähdyn perusteella yksinkertaistaa sovellusta. Tekeekö React Query monimutkaisemmat tilanhallintaratkaisut kuten esim. Reduxin tarpeettomaksi? Ei. React Query voi joissain tapauksissa korvata osin sovelluksen tilan, mutta kuten [dokumentaatio](https://react-query-v3.tanstack.com/guides/does-this-replace-client-state) toteaa
+React Query on monipuolinen kirjasto joka jo nyt nähdyn perusteella yksinkertaistaa sovellusta. Tekeekö React Query monimutkaisemmat tilanhallintaratkaisut kuten esim. Reduxin tarpeettomaksi? Ei. React Query voi joissain tapauksissa korvata osin sovelluksen tilan, mutta kuten [dokumentaatio](https://tanstack.com/query/latest/docs/react/guides/does-this-replace-client-state) toteaa
 
 - React Query is a <i>server-state library</i>, responsible for managing asynchronous operations between your server and client
 - Redux, etc. are <i>client-state libraries</i> that can be used to store asynchronous data, albeit inefficiently when compared to a tool like React Query
@@ -362,14 +364,15 @@ Sovelluksen tulee toimia siten, että jos palvelimen kanssa kommunikoinnissa ilm
 
 ![](../../images/6/65new.png)
 
-Löydät ohjeen virhetilanteen havaitsemiseen [täältä](https://react-query-v3.tanstack.com/guides/queries). 
+Löydät ohjeen virhetilanteen havaitsemiseen [täältä](https://tanstack.com/query/latest/docs/react/guides/queries). 
 
 Voit simuloida palvelimen kanssa tapahtuvaa ongelmaa esim. sammuttamalla JSON Serverin. Huomaa, että kysely on ensin jonkin aikaa tilassa <i>isLoading</i> sillä epäonnistuessaan React Query yrittää pyyntöä muutaman kerran ennen kuin se toteaa, että pyyntö ei onnistu. Voit halutessasi määritellä, että uudelleenyrityksiä ei tehdä:
 
 ```js
 const result = useQuery(
-  'anecdotes', getAnecdotes, 
   {
+    queryKey: ['anecdotes'],
+    queryFn: getAnecdotes,
     retry: false
   }
 )
@@ -379,8 +382,9 @@ tai, että pyyntöä yritetään uudelleen esim. vain kerran:
 
 ```js
 const result = useQuery(
-  'anecdotes', getAnecdotes, 
   {
+    queryKey: ['anecdotes'],
+    queryFn: getAnecdotes,
     retry: 1
   }
 )
@@ -782,7 +786,7 @@ Kuten tehtävässä 6.20 todettiin, palvelin vaatii, että lisättävän anekdoo
 ![](../../images/6/67new.png)
 
 Virhetilanne kannattaa käsitellä sille rekisteröidyssä takaisinkutsufunktiossa, ks 
-[täältä](https://react-query-v3.tanstack.com/reference/useMutation) miten rekisteröit funktion.
+[täältä](https://tanstack.com/query/latest/docs/react/reference/useMutation) miten rekisteröit funktion.
 
 Tämä oli osan viimeinen tehtävä ja on aika pushata koodi GitHubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 

@@ -325,8 +325,10 @@ What is going on? By reading the [documentation](https://tanstack.com/query/late
 ```js
 const App = () => {
   // ...
-  const result = useQuery('notes', getNotes, {
-    refetchOnWindowFocus: false  // highlight-line
+  const result = useQuery({
+    queryKey: ['notes'],
+    queryFn: getNotes,
+    refetchOnWindowFocus: false // highlight-line
   })
 
   // ...
@@ -368,8 +370,9 @@ You can simulate a problem with the server by e.g. turning off the JSON Server. 
 
 ```js
 const result = useQuery(
-  'anecdotes', getAnecdotes, 
   {
+    queryKey: ['anecdotes'],
+    queryFn: getAnecdotes,
     retry: false
   }
 )
@@ -379,8 +382,9 @@ or that the request is retried e.g. only once:
 
 ```js
 const result = useQuery(
-  'anecdotes', getAnecdotes, 
   {
+    queryKey: ['anecdotes'],
+    queryFn: getAnecdotes,
     retry: 1
   }
 )
