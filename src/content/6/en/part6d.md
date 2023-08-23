@@ -50,20 +50,20 @@ The initial code is on GitHub in the repository [https://github.com/fullstack-hy
 
 ### Managing data on the server with the React Query library
 
-We shall now use the [React Query](https://react-query-v3.tanstack.com/) library to store and manage data retrieved from the server.
+We shall now use the [React Query](https://tanstack.com/query/latest) library to store and manage data retrieved from the server. The latest version of the library is also called TanStack Query, but we stick to the familiar name.
 
 Install the library with the command
 
 ```bash
-npm install react-query
+npm install @tanstack/react-query
 ```
 
-A few additions to the file  <i>index.js</i> are needed to pass the library functions to the entire application:
+A few additions to the file  <i>main.jsx</i> are needed to pass the library functions to the entire application:
 
 ```js
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { QueryClient, QueryClientProvider } from 'react-query' // highlight-line
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query' // highlight-line
 
 import App from './App'
 
@@ -79,19 +79,19 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 We can now retrieve the notes in the <i>App</i> component. The code expands as follows:
 
 ```js
-import { useQuery } from 'react-query'  // highlight-line
+import { useQuery } from '@tanstack/react-query'  // highlight-line
 import axios from 'axios'  // highlight-line
 
 const App = () => {
   // ...
 
    // highlight-start
-  const result = useQuery(
-    'notes',
-    () => axios.get('http://localhost:3001/notes').then(res => res.data)
-  )
+  const result = useQuery({
+    queryKey: ['notes'],
+    queryFn: () => axios.get('http://localhost:3001/notes').then(res => res.data)
+  })
 
-  console.log(result)
+  console.log(JSON.parse(JSON.stringify(result)))
   // highlight-end
 
   // highlight-start
@@ -142,7 +142,10 @@ import { getNotes } from './requests' // highlight-line
 const App = () => {
   // ...
 
-  const result = useQuery('notes', getNotes)  // highlight-line
+  const result = useQuery({
+    queryKey: ['notes'],
+    queryFn: () => getNotes // highlight-line
+  })
 
   // ...
 }
@@ -175,7 +178,7 @@ import { useQuery, useMutation } from 'react-query' // highlight-line
 import { getNotes, createNote } from './requests' // highlight-line
 
 const App = () => {
-  const newNoteMutation = useMutation(createNote) // highlight-line
+ const newNoteMutation = useMutation({ mutationFn: createNote }) // highlight-line
 
   const addNote = async (event) => {
     event.preventDefault()
@@ -192,7 +195,7 @@ const App = () => {
 To create a new note, a [mutation](https://tanstack.com/query/latest/docs/react/guides/mutations) is defined using the function [useMutation](https://tanstack.com/query/latest/docs/react/reference/useMutation):
 
 ```js
-const newNoteMutation = useMutation(createNote)
+const newNoteMutation = useMutation({ mutationFn: createNote })
 ```
 
 The parameter is the function we added to the file <i>requests.js</i>, which uses Axios to send a new note to the server.
@@ -218,7 +221,7 @@ const App = () => {
 
   const newNoteMutation = useMutation(createNote, {
     onSuccess: () => {  // highlight-line
-      queryClient.invalidateQueries('notes')  // highlight-line
+      queryClient.invalidateQueries({ queryKey: ['notes'] })  // highlight-line
     },
   })
 
@@ -252,7 +255,7 @@ const App = () => {
 
   const updateNoteMutation = useMutation(updateNote, {
     onSuccess: () => {
-      queryClient.invalidateQueries('notes')
+      queryClient.invalidateQueries({ queryKey: ['notes'] })
     },
   })
 
@@ -532,7 +535,7 @@ React's built-in [Context API](https://beta.reactjs.org/learn/passing-data-deepl
 
 Let us now create a context in the application that stores the state management of the counter.
 
-The context is created with React's hook [createContext](https://beta.reactjs.org/reference/react/createContext). Let's create a context in the file <i>CounterContext.js</i>:
+The context is created with React's hook [createContext](https://beta.reactjs.org/reference/react/createContext). Let's create a context in the file <i>CounterContext.jsx</i>:
 
 ```js
 import { createContext } from 'react'
@@ -594,7 +597,7 @@ The current code for the application is in [GitHub](https://github.com/fullstack
 
 ### Defining the counter context in a separate file
 
-Our application has an annoying feature, that the functionality of the counter state management is partly defined in the <i>App</i> component. Now let's move everything related to the counter to <i>CounterContext.js</i>:
+Our application has an annoying feature, that the functionality of the counter state management is partly defined in the <i>App</i> component. Now let's move everything related to the counter to <i>CounterContext.jsx</i>:
 
 ```js
 import { createContext, useReducer } from 'react'
@@ -629,7 +632,7 @@ export default CounterContext
 
 The file now exports, in addition to the <i>CounterContext</i> object corresponding to the context, the <i>CounterContextProvider</i> component, which is practically a context provider whose value is a counter and a dispatcher used for its state management.
 
-Let's enable the context provider by making a change in <i>index.js</i>:
+Let's enable the context provider by making a change in <i>main.jsx</i>:
 
 ```js
 import ReactDOM from 'react-dom/client'

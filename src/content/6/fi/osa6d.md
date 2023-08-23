@@ -50,18 +50,19 @@ Alkuvaiheen koodi on GitHubissa repositorion [https://github.com/fullstack-hy202
 
 ### Palvelimella olevan datan hallinta React Query ‑kirjaston avulla
 
-Hyödynnämme nyt [React Query](https://react-query-v3.tanstack.com/) ‑kirjastoa palvelimelta haettavan datan säilyttämiseen ja hallinnointiin. Asennetaan kirjasto komennolla
+Hyödynnämme nyt [React Query](https://tanstack.com/query/latest) ‑kirjastoa palvelimelta haettavan datan säilyttämiseen ja hallinnointiin. Kirjaston uusimmasta versiosta käytetään myös nimitystä TanStack Query mutta pitäydymme vanhassa tutussa nimessä.
+
+Asennetaan kirjasto komennolla
 
 ```bash
-npm install react-query
+npm install @tanstack/react-query
 ```
 
-Tiedostoon <i>index.js</i> tarvitaan muutama lisäys, jotta kirjaston funktiot saadaan välitettyä koko sovelluksen käyttöön:
+Tiedostoon <i>main.jsx</i> tarvitaan muutama lisäys, jotta kirjaston funktiot saadaan välitettyä koko sovelluksen käyttöön:
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { QueryClient, QueryClientProvider } from 'react-query' // highlight-line
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query' // highlight-line
 
 import App from './App'
 
@@ -77,19 +78,19 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 Voimme nyt hakea muistiinpanot komponentissa <i>App</i>. Koodi laajenee seuraavasti:
 
 ```js
-import { useQuery } from 'react-query'  // highlight-line
+import { useQuery } from '@tanstack/react-query'  // highlight-line
 import axios from 'axios'  // highlight-line
 
 const App = () => {
   // ...
 
    // highlight-start
-  const result = useQuery(
-    'notes',
-    () => axios.get('http://localhost:3001/notes').then(res => res.data)
-  )
+  const result = useQuery({
+    queryKey: ['notes'],
+    queryFn: () => axios.get('http://localhost:3001/notes').then(res => res.data)
+  })
 
-  console.log(result)
+  console.log(JSON.parse(JSON.stringify(result)))
   // highlight-end
 
   // highlight-start
@@ -106,7 +107,7 @@ const App = () => {
 }
 ```
 
-Datan hakeminen palvelimelta tapahtuu edelleen tuttuun tapaan Axiosin <i>get</i>-metodilla. Axiosin metodikutsu on kuitenkin nyt kääritty [useQuery](https://react-query-v3.tanstack.com/reference/useQuery)-funktiolla muodostetuksi [kyselyksi](https://react-query-v3.tanstack.com/guides/queries). Funktiokutsun ensimmäisenä parametrina on merkkijono <i>notes</i> joka toimii [avaimena](https://react-query-v3.tanstack.com/guides/query-keys) määriteltyyn kyselyyn, eli muistiinpanojen listaan.
+Datan hakeminen palvelimelta tapahtuu edelleen tuttuun tapaan Axiosin <i>get</i>-metodilla. Axiosin metodikutsu on kuitenkin nyt kääritty [useQuery](https://tanstack.com/query/latest/docs/react/reference/useQuery)-funktiolla muodostetuksi [kyselyksi](https://tanstack.com/query/latest/docs/react/guides/queries). Funktiokutsun ensimmäisenä parametrina on merkkijono <i>notes</i> joka toimii [avaimena](https://tanstack.com/query/latest/docs/react/guides/query-keys) määriteltyyn kyselyyn, eli muistiinpanojen listaan.
 
 Funktion <i>useQuery</i> paluuarvo on olio, joka kertoo kyselyn tilan. Konsoliin tehty tulostus havainnollistaa tilannetta: 
 
@@ -140,7 +141,10 @@ import { getNotes } from './requests' // highlight-line
 const App = () => {
   // ...
 
-  const result = useQuery('notes', getNotes)  // highlight-line
+  const result = useQuery({
+    queryKey: ['notes'],
+    queryFn: () => getNotes // highlight-line
+  })
 
   // ...
 }
@@ -173,7 +177,7 @@ import { useQuery, useMutation } from 'react-query' // highlight-line
 import { getNotes, createNote } from './requests' // highlight-line
 
 const App = () => {
-  const newNoteMutation = useMutation(createNote) // highlight-line
+  const newNoteMutation = useMutation({ mutationFn: createNote }) // highlight-line
 
   const addNote = async (event) => {
     event.preventDefault()
@@ -187,10 +191,10 @@ const App = () => {
 }
 ```
 
-Uuden muistiinpanon luomista varten määritellään [mutaatio](https://react-query-v3.tanstack.com/guides/mutations) funktion [useMutation](https://react-query-v3.tanstack.com/reference/useMutation) avulla:
+Uuden muistiinpanon luomista varten määritellään [mutaatio](https://tanstack.com/query/latest/docs/react/guides/mutations) funktion [useMutation](https://tanstack.com/query/latest/docs/react/reference/useMutatio) avulla:
 
 ```js
-const newNoteMutation = useMutation(createNote)
+const newNoteMutation = useMutation({ mutationFn: createNote })
 ```
 
 Parametrina on tiedostoon <i>requests.js</i> lisäämämme funktio, joka lähettää Axiosin avulla uuden muistiinpanon palvelille.
@@ -204,7 +208,7 @@ newNoteMutation.mutate({ content, important: true })
 Ratkaisumme on hyvä. Paitsi se ei toimi. Uusi muistiinpano kyllä tallettuu palvelimelle, mutta se ei päivity näytölle. 
 
 Jotta saamme renderöityä myös uuden muistiinpanon, meidän on kerrottava React Querylle, että kyselyn, jonka avaimena on merkkijono <i>notes</i> vanha tulos tulee mitätöidä eli
-[invalidoida](https://react-query-v3.tanstack.com/guides/invalidations-from-mutations). 
+[invalidoida](https://tanstack.com/query/latest/docs/react/guides/invalidations-from-mutations). 
 
 Invalidointi on onneksi helppoa, se voidaan tehdä kytkemällä mutaatioon sopiva <i>onSuccess</i>-takaisinkutsufunktio:
 
@@ -217,7 +221,7 @@ const App = () => {
 
   const newNoteMutation = useMutation(createNote, {
     onSuccess: () => {  // highlight-line
-      queryClient.invalidateQueries('notes')  // highlight-line
+      queryClient.invalidateQueries({ queryKey: ['notes'] }) // highlight-line
     },
   })
 
@@ -251,7 +255,7 @@ const App = () => {
 
   const updateNoteMutation = useMutation(updateNote, {
     onSuccess: () => {
-      queryClient.invalidateQueries('notes')
+      queryClient.invalidateQueries({ queryKey: ['notes'] })
     },
   })
 
@@ -532,7 +536,7 @@ Reactin sisäänrakennettu [Context API](https://beta.reactjs.org/learn/passing-
 
 Luodaan sovellukseen nyt konteksti, joka tallettaa laskurin tilanhallinnan.
 
-Konteksti luodaan Reactin hookilla [createContext](https://beta.reactjs.org/reference/react/createContext). Luodaan konteksti tiedostoon <i>CounterContext.js</i>:
+Konteksti luodaan Reactin hookilla [createContext](https://beta.reactjs.org/reference/react/createContext). Luodaan konteksti tiedostoon <i>CounterContext.jsx</i>:
 
 ```js
 import { createContext } from 'react'
@@ -596,7 +600,7 @@ Sovelluksen tämänhetkinen koodi on GitHubissa repositorion [https://github.com
 
 ### Laskurikontekstin määrittely omassa tiedostossa
 
-Sovelluksessamme on vielä sellainen ikävä piirre, että laskurin tilanhallinnan toiminnallisuus on määritelty osin komponentissa <i>App</i>. Siirretään nyt kaikki laskuriin liittyvä tiedostoon <i>CounterContext.js</i>:
+Sovelluksessamme on vielä sellainen ikävä piirre, että laskurin tilanhallinnan toiminnallisuus on määritelty osin komponentissa <i>App</i>. Siirretään nyt kaikki laskuriin liittyvä tiedostoon <i>CounterContext.jsx</i>:
 
 ```js
 import { createContext, useReducer } from 'react'
@@ -631,7 +635,7 @@ export default CounterContext
 
 Tiedosto exporttaa nyt kontekstia vastaavan olion <i>CounterContext</i> lisäksi komponentin <i>CounterContextProvider</i> joka on käytännössä kontekstin tarjoaja (context provider), jonka arvona on laskuri ja sen tilanhallintaan käytettävä dispatcheri.
 
-Otetaan kontekstin tarjoaja käyttöön tiedostossa <i>index.js</i>
+Otetaan kontekstin tarjoaja käyttöön tiedostossa <i>main.jsx</i>
 
 ```js
 import ReactDOM from 'react-dom/client'
