@@ -410,7 +410,7 @@ Let's look at a simple counter application. The application displays the counter
 
 ![browser showing + - 0 buttons and 7 above](../../images/6/63new.png)
 
-We shall now implement the counter state management using a Redux-like state management mechanism provided by React's built-in [useReducer](https://beta.reactjs.org/reference/react/useReducer) hook. Code looks like the following:
+We shall now implement the counter state management using a Redux-like state management mechanism provided by React's built-in [useReducer](https://react.dev/reference/react/useReducer) hook. Code looks like the following:
 
 ```js
 import { useReducer } from 'react'
@@ -446,7 +446,7 @@ const App = () => {
 export default App
 ```
 
-The hook [useReducer](https://beta.reactjs.org/reference/react/useReducer) provides a mechanism to create a state for an application. The parameter for creating a state is the reducer function that handles state changes, and the initial value of the state:
+The hook [useReducer](https://react.dev/reference/react/useReducer) provides a mechanism to create a state for an application. The parameter for creating a state is the reducer function that handles state changes, and the initial value of the state:
 
 ```js
 const [counter, counterDispatch] = useReducer(counterReducer, 0)
@@ -535,11 +535,11 @@ const App = () => {
 
 The solution works, but is not optimal. If the component structure gets complicated, e.g. the dispatcher should be forwarded using props through many components to the components that need it, even though the components in between in the component tree do not need the dispatcher. This phenomenon is called <i>prop drilling</i>.
 
-React's built-in [Context API](https://beta.reactjs.org/learn/passing-data-deeply-with-context) provides a solution for us. React's context is a kind of global state of the application, to which it is possible to give direct access to any component app.
+React's built-in [Context API](https://react.dev/learn/passing-data-deeply-with-context) provides a solution for us. React's context is a kind of global state of the application, to which it is possible to give direct access to any component app.
 
 Let us now create a context in the application that stores the state management of the counter.
 
-The context is created with React's hook [createContext](https://beta.reactjs.org/reference/react/createContext). Let's create a context in the file <i>CounterContext.jsx</i>:
+The context is created with React's hook [createContext](https://react.dev/reference/react/createContext). Let's create a context in the file <i>CounterContext.jsx</i>:
 
 ```js
 import { createContext } from 'react'
@@ -574,7 +574,7 @@ As can be seen, providing the context is done by wrapping the child components i
 
 The context value is now set to be an array containing the value of the counter, and the <i>dispatch</i> function.
 
-Other components now access the context using the [useContext](https://beta.reactjs.org/reference/react/useContext) hook:
+Other components now access the context using the [useContext](https://react.dev/reference/react/useContext) hook:
 
 ```js
 import { useContext } from 'react' // highlight-line
@@ -757,7 +757,7 @@ The solution is quite elegant. The entire state of the application, i.e. the val
 
 The final code for the application is in [GitHub](https://github.com/fullstack-hy2020/hook-counter/tree/part6-3) in the branch <i>part6-3</i>.
 
-As a technical detail, it should be noted that the helper functions <i>useCounterValue</i> and <i>useCounterDispatch</i> are defined as [custom hooks](https://reactjs.org/docs/hooks-custom.html), because calling the hook function <i>useContext</i> is [possible](https://reactjs.org/docs/hooks -rules.html) only from React components or custom hooks. Custom hooks are JavaScript functions whose name must start with the string _use_. We will return to custom hooks in a little more detail in [part 7](/en/part7/custom_hooks) of the course.
+As a technical detail, it should be noted that the helper functions <i>useCounterValue</i> and <i>useCounterDispatch</i> are defined as [custom hooks](https://react.dev/learn/reusing-logic-with-custom-hooks), because calling the hook function <i>useContext</i> is [possible](https://legacy.reactjs.org/docs/hooks-rules.html) only from React components or custom hooks. Custom hooks are JavaScript functions whose name must start with the string _use_. We will return to custom hooks in a little more detail in [part 7](/en/part7/custom_hooks) of the course.
 
 </div>
 

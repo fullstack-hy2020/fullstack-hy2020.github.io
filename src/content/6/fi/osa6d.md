@@ -410,7 +410,7 @@ Tarkastellaan yksinkertaista laskurisovellusta. Sovellus näyttää laskurin arv
 
 ![](../../images/6/63new.png)
 
-Toteutetaan laskurin tilan hallinta Reactin sisäänrakennetun [useReducer](https://beta.reactjs.org/reference/react/useReducer)-hookin tarjoamalla Reduxin kaltaisella tilanhallintamekanismilla:
+Toteutetaan laskurin tilan hallinta Reactin sisäänrakennetun [useReducer](https://react.dev/reference/react/useReducer)-hookin tarjoamalla Reduxin kaltaisella tilanhallintamekanismilla:
 
 
 ```js
@@ -536,11 +536,11 @@ const App = () => {
 
 Ratkaisu toimii, mutta ei ole optimaalinen. Jos komponenttirakenne monimutkaistuu, tulee esim dispatcheria välittää propsien avulla monen komponentin kautta sitä tarvitseville komponenteille siitäkin huolimatta, että komponenttipuussa välissä olevat komponentit eivät dispatcheria tarvitsisikaan. Tästä ilmiöstä käytetään nimitystä <i>prop drilling</i>. 
 
-Reactin sisäänrakennettu [Context API](https://beta.reactjs.org/learn/passing-data-deeply-with-context) tuo tilanteeseen ratkaisun. Reactin konteksti on eräänlainen sovelluksen globaali tila, johon on mahdollista antaa suora pääsy mille tahansa komponentille.
+Reactin sisäänrakennettu [Context API](https://react.dev/learn/passing-data-deeply-with-context) tuo tilanteeseen ratkaisun. Reactin konteksti on eräänlainen sovelluksen globaali tila, johon on mahdollista antaa suora pääsy mille tahansa komponentille.
 
 Luodaan sovellukseen nyt konteksti, joka tallettaa laskurin tilanhallinnan.
 
-Konteksti luodaan Reactin hookilla [createContext](https://beta.reactjs.org/reference/react/createContext). Luodaan konteksti tiedostoon <i>CounterContext.jsx</i>:
+Konteksti luodaan Reactin hookilla [createContext](https://react.dev/reference/react/createContext). Luodaan konteksti tiedostoon <i>CounterContext.jsx</i>:
 
 ```js
 import { createContext } from 'react'
@@ -575,7 +575,7 @@ Kontekstin tarjoaminen siis tapahtuu käärimällä lapsikomponentit komponentin
 
 Kontekstin arvoksi annetaan nyt taulukko, joka sisältää laskimen arvon, sekä arvon muuttamiseen käytettävän <i>dispatch</i>-funktion.
 
-Muut komponentit saavat nyt kontekstin käyttöön hookin [useContext](https://beta.reactjs.org/reference/react/useContext) avulla:
+Muut komponentit saavat nyt kontekstin käyttöön hookin [useContext](https://react.dev/reference/react/useContext) avulla:
 
 ```js
 import { useContext } from 'react' // highlight-line
@@ -760,7 +760,7 @@ Ratkaisu on varsin tyylikäs. Koko sovelluksen tila eli laskurin arvo ja sen hal
 
 Sovelluksen lopullinen koodi on GitHubissa repositorion [https://github.com/fullstack-hy2020/hook-counter](https://github.com/fullstack-hy2020/hook-counter/tree/part6-3) branchissa <i>part6-3</i>.
 
-Teknisenä yksityiskohtana todettakoon, että apufunktiot <i>useCounterValue</i> ja <i>useCounterDispatch</i> on määritelty ns. [custom hookeina](https://reactjs.org/docs/hooks-custom.html), sillä funktion <i>useContext</i> kutsuminen [ei ole mahdollista](https://reactjs.org/docs/hooks-rules.html) muualta kuin React-komponenteista tai custom hookeista käsin. Custom hookit taas ovat JavaScript-funktioita joiden nimen pitää alkaa merkkijonolla _use_. Palaamme custom hookeihin hieman tarkemmin kurssin [osassa 7](/osa7/custom_hookit).
+Teknisenä yksityiskohtana todettakoon, että apufunktiot <i>useCounterValue</i> ja <i>useCounterDispatch</i> on määritelty ns. [custom hookeina](https://react.dev/learn/reusing-logic-with-custom-hooks), sillä funktion <i>useContext</i> kutsuminen [ei ole mahdollista](https://legacy.reactjs.org/docs/hooks-rules.html) muualta kuin React-komponenteista tai custom hookeista käsin. Custom hookit taas ovat JavaScript-funktioita joiden nimen pitää alkaa merkkijonolla _use_. Palaamme custom hookeihin hieman tarkemmin kurssin [osassa 7](/osa7/custom_hookit).
 
 </div>
 
