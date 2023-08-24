@@ -585,7 +585,7 @@ const numbers = [1, 2, 3]
 ```
 
 
-<code>...numbers</code> divide el array en elementos individuales, que se pueden colocar, es decir, en otro array.
+<code>...numbers</code> divide el array en elementos individuales, que se pueden colocar en otro array.
 
 ```js
 [...numbers, 4, 5]
@@ -1243,7 +1243,7 @@ Implementar la funcionalidad para agregar nuevas anécdotas.
 
 Puede mantener el formulario no controlado, como hicimos [antes](/es/part6/flux_architecture_y_redux#formulario-no-controlado).
 
-#### 6.5*: anécdotas, paso 3
+#### 6.5: anécdotas, paso 3
 
 
 Asegúrese de que las anécdotas estén ordenadas por número de votos.
