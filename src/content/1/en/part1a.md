@@ -638,7 +638,7 @@ For each web application for a series of exercises, it is recommended to submit 
 
 <i>The application that we will start working on in this exercise will be further developed in a few of the following exercises. In this and other upcoming exercise sets in this course, it is enough to only submit the final state of the application. If desired, you may also create a commit for each exercise of the series, but this is entirely optional.</i>
 
-Use create-react-app to initialize a new application. Modify <i>main.jsx</i> to match the following
+Use vite to initialize a new application. Modify <i>main.jsx</i> to match the following
 
 ```js
 import ReactDOM from 'react-dom/client'
