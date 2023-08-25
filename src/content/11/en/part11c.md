@@ -252,7 +252,7 @@ Before moving to next exercise, fix your deployment and ensure that the applicat
 
 #### 11.12. Custom health check
 
-**NOTE:** at the moment the the custom health check feature in Fly.io does not work. You can mark this exercise done without doing anything. A replacement for this exercise will be developed later...
+**NOTE:** at the moment the custom health check feature in Fly.io does not work. You can mark this exercise done without doing anything. A replacement for this exercise will be developed later...
 
 Besides TCP and HTTP based health checks, Fly.io allows to use very flexible shell script based health checks. The feature is still undocumented but e.g. [this](https://community.fly.io/t/verifying-services-script-checks-is-supported/1464) shows you how to use it.
 
