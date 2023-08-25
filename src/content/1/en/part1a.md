@@ -66,11 +66,18 @@ The files <i>App.css</i> and <i>index.css</i>, and the directory <i>assets</i> m
 
 Instead of Vite you can also use the older generation tool [create-react-app](https://github.com/facebookincubator/create-react-app) in the course to set up the applications. The most visible difference to Vite is the name of the application startup file, which is <i>index.js</i>.
 
-The way to start the application is also different, it is started with a command
+The way to start the application is also different in CRA, it is started with a command
 
 ```
 npm start
 ```
+
+in contrast to Vite's
+
+```
+npm run dev 
+```
+
 
 The course is currently (11 August 2023) being updated to use Vite. Some brands may still use the application base created with create-react-app.
 
@@ -252,7 +259,9 @@ but when writing JSX, the tag needs to be closed:
 
 ### Multiple components
 
-Let's modify the file <i>App.jsx</i> as follows (NB: export at the bottom is left out in these <i>examples</i>, now and in the future. It is still needed for the code to work):
+Let's modify the file <i>App.jsx</i> as follows:
+
+
 
 ```js
 // highlight-start
@@ -291,6 +300,9 @@ const App = () => {
   )
 }
 ```
+
+**NB**: <em>export</em> at the bottom is left out in these <i>examples</i>, now and in the future. It is still needed for the code to work
+
 
 Writing components with React is easy, and by combining components, even a more complex application can be kept fairly maintainable. Indeed, a core philosophy of React is composing applications from many specialized reusable components.
 
@@ -412,7 +424,7 @@ React has been configured to generate quite clear error messages. Despite this, 
 
 As we already mentioned, when programming with React, it is possible and worthwhile to write <em>console.log()</em> commands (which print to the console) within your code.
 
-Also, keep in mind that **React component names must be capitalized**. If you try defining a component as follows:
+Also, keep in mind that **First letter of React component names must be capitalized**. If you try defining a component as follows:
 
 ```js
 const footer = () => {

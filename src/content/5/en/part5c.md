@@ -9,17 +9,41 @@ lang: en
 
 There are many different ways of testing React applications. Let's take a look at them next.
 
-Tests will be implemented with the same [Jest](http://jestjs.io/) testing library developed by Facebook that was used in the previous part. Jest is configured by default to applications created with create-react-app.
+Tests will be implemented with the same [Jest](http://jestjs.io/) testing library developed by Facebook that was used in the previous part.
 
 In addition to Jest, we also need another testing library that will help us render components for testing purposes. The current best option for this is [react-testing-library](https://github.com/testing-library/react-testing-library) which has seen rapid growth in popularity in recent times.
 
-Let's install the library with the command:
+Let's install libraries with the command:
 
-```bash
-npm install --save-dev @testing-library/react @testing-library/jest-dom
+```js
+npm install --save-dev @testing-library/react @testing-library/jest-dom jest-environment-jsdom @babel/preset-env @babel/preset-react
 ```
 
-We also installed [jest-dom](https://testing-library.com/docs/ecosystem-jest-dom/) which provides some nice Jest-related helper methods.
+The file <i>package.json</i> should be extended as follows:
+
+```js 
+{
+  "scripts": {
+    // ...
+    "test": "jest"
+  }
+  // ...
+  "jest": {
+    "testEnvironment": "jsdom"
+  }
+}
+```
+
+We also need the file <i>.babelrc</i> with following content:
+
+```js 
+{
+  "presets": [
+    "@babel/preset-env",
+    ["@babel/preset-react", { "runtime": "automatic" }]
+  ]
+}
+```
 
 Let's first write tests for the component that is responsible for rendering a note:
 
@@ -38,7 +62,7 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-Notice that the <i>li</i> element has the [CSS](https://reactjs.org/docs/dom-elements.html#classname) classname <i>note</i>, that could be used to access the component in our tests.
+Notice that the <i>li</i> element has the [CSS](https://react.dev/learn#adding-styles) classname <i>note</i>, that could be used to access the component in our tests.
 
 ### Rendering the component for tests
 
@@ -48,7 +72,7 @@ The first test verifies that the component renders the contents of the note:
 
 ```js
 import React from 'react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import Note from './Note'
 
@@ -80,21 +104,24 @@ We can use the object [screen](https://testing-library.com/docs/queries/about#sc
   expect(element).toBeDefined()
 ```
 
-### Running tests
-
-Create-react-app configures tests to be run in watch mode by default, which means that the _npm test_ command will not exit once the tests have finished, and will instead wait for changes to be made to the code. Once new changes to the code are saved, the tests are executed automatically after which Jest goes back to waiting for new changes to be made.
-
-If you want to run tests "normally", you can do so with the command:
+Run the test with command _npm test_:
 
 ```js
-CI=true npm test
+$ npm test
+
+> notes-frontend@0.0.0 test
+> jest
+
+ PASS  src/components/Note.test.js
+  ✓ renders content (15 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        1.152 s
 ```
 
-For Windows (PowerShell) users
-
-```js
-$env:CI=$true; npm test
-```
+As expected, the test passes.
 
 **NB:** the console may issue a warning if you have not installed Watchman. Watchman is an application developed by Facebook that watches for changes that are made to files. The program speeds up the execution of tests and at least starting from macOS Sierra, running tests in watch mode issues some warnings to the console, that can be removed by installing Watchman.
 
@@ -114,7 +141,7 @@ The react-testing-library package offers many different ways of investigating th
 
 ```js
 import React from 'react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import Note from './Note'
 
@@ -138,7 +165,7 @@ We could also use [CSS-selectors](https://developer.mozilla.org/en-US/docs/Web/C
 
 ```js
 import React from 'react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import Note from './Note'
 
@@ -169,7 +196,7 @@ Object _screen_ has method [debug](https://testing-library.com/docs/queries/abou
 
 ```js
 import React from 'react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import Note from './Note'
 
@@ -210,7 +237,7 @@ It is also possible to use the same method to print a wanted element to console:
 
 ```js
 import React from 'react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import Note from './Note'
 
@@ -257,7 +284,7 @@ Testing this functionality can be accomplished like this:
 
 ```js
 import React from 'react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event' // highlight-line
 import Note from './Note'
@@ -343,7 +370,7 @@ The tests are shown below:
 
 ```js
 import React from 'react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Togglable from './Togglable'
@@ -473,7 +500,7 @@ The test is as follows:
 ```js
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import NoteForm from './NoteForm'
 import userEvent from '@testing-library/user-event'
 
@@ -707,20 +734,20 @@ test('does not render this', () => {
 
 ### Test coverage
 
-We can easily find out the [coverage](https://github.com/facebookincubator/create-react-app/blob/ed5c48c81b2139b4414810e1efe917e04c96ee8d/packages/react-scripts/template/README.md#coverage-reporting) of our tests by running them with the command.
+We can easily find out the [coverage](https://jestjs.io/blog/2020/01/21/jest-25#v8-code-coverage) of our tests by running them with the command.
 
 ```js
-CI=true npm test -- --coverage
+npm test -- --coverage --collectCoverageFrom='src/**/*.{jsx,js}'
 ```
 
-![terminal output of test coverage](../../images/5/18ea.png)
+![terminal output of test coverage](../../images/5/18new.png)
 
 A quite primitive HTML report will be generated to the <i>coverage/lcov-report</i> directory.
 The report will tell us the lines of untested code in each component:
 
-![HTML report of the test coverage](../../images/5/19ea.png)
+![HTML report of the test coverage](../../images/5/19new.png)
 
-You can find the code for our current application in its entirety in the <i>part5-8</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-8).
+You can find the code for our current application in its entirety in the <i>part5-8</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-8).
 </div>
 
 <div class="tasks">

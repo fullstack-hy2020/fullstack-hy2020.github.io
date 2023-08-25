@@ -9,16 +9,46 @@ lang: fi
 
 Reactilla tehtyjen frontendien testaamiseen on monia tapoja. Aloitetaan niihin tutustuminen nyt.
 
-Testit tehdään samaan tapaan kuin edellisessä osassa eli Facebookin [Jest](http://jestjs.io/)-kirjastolla. Jest onkin valmiiksi konfiguroitu Create React App:lla luotuihin projekteihin.
+Testit tehdään samaan tapaan kuin edellisessä osassa eli Facebookin [Jest](http://jestjs.io/)-kirjastolla.
 
 Tarvitsemme Jestin lisäksi testaamiseen apukirjaston, jonka avulla React-komponentteja voidaan renderöidä testejä varten. 
 
 Tähän tarkoitukseen ehdottomasti paras vaihtoehto on [React Testing Library](https://github.com/testing-library/react-testing-library). Jestin ilmaisuvoimaa kannattaa laajentaa myös kirjastolla [jest-dom](https://github.com/testing-library/jest-dom).
 
-Asennetaan kirjastot:
+Asennetaan tarvittavat kirjastot:
 
 ```js
-npm install --save-dev @testing-library/react @testing-library/jest-dom
+npm install --save-dev @testing-library/react @testing-library/jest-dom jest-environment-jsdom @babel/preset-env @babel/preset-react
+```
+
+Lisätään tiedostoon <i>package.json</i> seuraavat:
+
+```js 
+{
+  "scripts": {
+    // ...
+    "test": "jest"
+  }
+  // ...
+  "jest": {
+    "testEnvironment": "jsdom",
+    "moduleNameMapper": {
+      "^.+\\.svg$": "jest-svg-transformer",
+      "^.+\\.(css|less|scss)$": "identity-obj-proxy"
+    }
+  }
+}
+```
+
+Luodaan tiedosto <i>.babelrc</i> jolla on seuraava sisältö:
+
+```js 
+{
+  "presets": [
+    "@babel/preset-env",
+    ["@babel/preset-react", { "runtime": "automatic" }]
+  ]
+}
 ```
 
 Testataan aluksi muistiinpanon renderöivää komponenttia:
@@ -38,7 +68,7 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-Huomaa, että muistiinpanon sisältävällä <i>li</i>-elementillä on [CSS](https://reactjs.org/docs/dom-elements.html#classname)-luokka <i>note</i>. Pääsemme sen avulla halutessamme muistiinpanoon käsiksi testistä. Emme kuitenkaan ensisijaisesti käytä CSS-luokkia testauksessa.
+Huomaa, että muistiinpanon sisältävällä <i>li</i>-elementillä on [CSS](https://react.dev/learn#adding-styles)-luokka <i>note</i>. Pääsemme sen avulla halutessamme muistiinpanoon käsiksi testistä. Emme kuitenkaan ensisijaisesti käytä CSS-luokkia testauksessa.
 
 ### Komponentin renderöinti testiä varten
 
@@ -48,7 +78,7 @@ Ensimmäinen testi varmistaa, että komponentti renderöi muistiinpanon sisäll�
 
 ```js
 import React from 'react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import Note from './Note'
 
@@ -80,18 +110,24 @@ Testin renderöimään näkymään päästään käsiksi olion [screen](https://
   expect(element).toBeDefined()
 ```
 
-### Testien suorittaminen
-
-Create React App:ssa on konfiguroitu testit oletusarvoisesti suoritettavaksi ns. watch-moodissa, eli jos suoritat testit komennolla _npm test_, jää konsoli odottamaan koodissa tapahtuvia muutoksia. Muutosten jälkeen testit suoritetaan automaattisesti ja Jest alkaa taas odottamaan uusia muutoksia koodiin.
-
-Jos haluat ajaa testit "normaalisti", se onnistuu komennolla
+Suoritetaan testi:
 
 ```js
-CI=true npm test
+$ npm test
+
+> notes-frontend@0.0.0 test
+> jest
+
+ PASS  src/components/Note.test.js
+  ✓ renders content (15 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        1.152 s
 ```
 
-**HUOM:** Ainakin macOS Sierrasta ylöspäin jatkuva testien vahtiminen voi aiheuttaa virheilmoituksia konsoliin. Watchman on Facebookin kehittämä tiedostojen muutoksia tarkkaileva ohjelma, jonka avulla näistä ilmoituksista pääsee eroon. Ohjelma myös nopeuttaa testien ajoa. Asennusohjeet löydät Watchmanin sivulta:
-https://facebook.github.io/watchman/
+Kuten olettaa saattaa, testi menee läpi.
 
 ### Testien sijainti
 
@@ -107,7 +143,7 @@ React Testing Library ‑kirjasto tarjoaa runsaasti tapoja testattavan komponent
 
 ```js
 import React from 'react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import Note from './Note'
 
@@ -131,7 +167,7 @@ Jos haluamme etsiä testattavia komponentteja [CSS-selektorien](https://develope
  
 ```js
 import React from 'react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import Note from './Note'
 
@@ -162,7 +198,7 @@ Olion _screen_ -olion metodilla [debug](https://testing-library.com/docs/queries
 
 ```js
 import React from 'react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import Note from './Note'
 
@@ -203,7 +239,7 @@ On myös mahdollista etsiä komponentista pienempi osa, ja tulostaa sen HTML-koo
 
 ```js
 import React from 'react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import Note from './Note'
 
@@ -250,7 +286,7 @@ Testaus onnistuu seuraavasti:
 
 ```js
 import React from 'react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event' // highlight-line
 import Note from './Note'
@@ -336,7 +372,7 @@ Testit ovat seuraavassa:
 
 ```js
 import React from 'react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Togglable from './Togglable'
@@ -466,7 +502,7 @@ Testi on seuraavassa:
 ```js
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import NoteForm from './NoteForm'
 import userEvent from '@testing-library/user-event'
 
@@ -695,19 +731,19 @@ test('does not render this', () => {
 
 ### Testauskattavuus
 
-[Testauskattavuus](https://github.com/facebookincubator/create-react-app/blob/ed5c48c81b2139b4414810e1efe917e04c96ee8d/packages/react-scripts/template/README.md#coverage-reporting) saadaan helposti selville suorittamalla testit komennolla
+[Testauskattavuus](https://jestjs.io/blog/2020/01/21/jest-25#v8-code-coverage) saadaan helposti selville suorittamalla testit komennolla
 
 ```js
-CI=true npm test -- --coverage
+npm test -- --coverage --collectCoverageFrom='src/**/*.{jsx,js}'
 ```
 
-![Konsoliin tulostuu taulukko joka näyttää kunkin tiedoston testien kattavuusraportin sekä mahdolliset testien kattamattomat rivit](../../images/5/18ea.png)
+![Konsoliin tulostuu taulukko joka näyttää kunkin tiedoston testien kattavuusraportin sekä mahdolliset testien kattamattomat rivit](../../images/5/18all.png)
 
 Melko primitiivinen HTML-muotoinen raportti generoituu hakemistoon <i>coverage/lcov-report</i>. HTML-muotoinen raportti kertoo mm. yksittäisten komponentin testaamattomat koodirivit:
 
-![Selaimeen renderöityy näkymä tiedostoista jossa värein merkattu ne rivit joita testit eivät kattaneet](../../images/5/19ea.png)
+![Selaimeen renderöityy näkymä tiedostoista jossa värein merkattu ne rivit joita testit eivät kattaneet](../../images/5/19new.png)
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-8), branchissa <i>part5-8</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-8), branchissa <i>part5-8</i>.
 
 </div>
 

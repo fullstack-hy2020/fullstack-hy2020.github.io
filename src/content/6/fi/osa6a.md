@@ -373,6 +373,53 @@ Laajennetaan reduceria siten, että se osaa käsitellä muistiinpanon tärkeytee
 
 Koska meillä ei ole vielä koodia joka käyttää ominaisuutta, laajennetaan reduceria testivetoisesti. Aloitetaan tekemällä testi actionin <i>NEW\_NOTE</i> käsittelylle.
 
+Konfiguroidaan sovellukseen [Jest](https://jestjs.io/). Aloitetaan asentamalla joukko kirjastoja:
+
+```js
+npm install --save-dev jest @babel/preset-env @babel/preset-react eslint-plugin-jest
+```
+
+Luodaan tiedosto <i>.babelrc</i>, jolla on seuraava sisältö:
+
+```json
+{
+  "presets": [
+    "@babel/preset-env",
+    ["@babel/preset-react", { "runtime": "automatic" }]
+  ]
+}
+```
+
+Lisätään tiedostoon <i>package.json</i> testit suorittava skripti:
+
+```json
+{
+  // ...
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "test": "jest" // highlight-line
+  },
+  // ...
+}
+```
+
+Tiedostoon <i>.eslintrc.cjs</i> tulee myös pieni lisäys:
+
+```js
+module.exports = {
+  root: true,
+  env: { 
+    browser: true,
+    es2020: true,
+    "jest/globals": true // highlight-line
+  },
+  // ...
+}
+```
+
 Jotta testaus olisi helpompaa, siirretään reducerin koodi ensin omaan moduuliinsa tiedostoon <i>src/reducers/noteReducer.js</i>. Otetaan lisäksi käyttöön kirjasto [deep-freeze](https://www.npmjs.com/package/deep-freeze), jonka avulla voimme varmistaa, että reducer on määritelty oikeaoppisesti puhtaana funktiona. Asennetaan kirjasto kehitysaikaiseksi riippuvuudeksi:
 
 ```js
@@ -832,7 +879,7 @@ const App = () => {
 
 Koko sovellus on toistaiseksi kirjoitettu yhteen tiedostoon minkä ansiosta joka puolelta sovellusta on päästy käsiksi Redux-storeen. Entä jos haluamme jakaa sovelluksen useisiin, omiin tiedostoihinsa sijoitettuihin komponentteihin? 
 
-Tapoja välittää Redux-store sovelluksen komponenteille on useita. Tutustutaan ensin ehkä uusimpaan ja helpoimpaan tapaan eli [react-redux](https://react-redux.js.org/)-kirjaston tarjoamaan [hooks](https://react-redux.js.org/api/hooks)-rajapintaan.
+Tapoja välittää Redux-store sovelluksen komponenteille on useita. Tutustutaan ensin ehkä uusimpaan ja helpoimpaan tapaan eli [React Redux](https://react-redux.js.org/)-kirjaston tarjoamaan [hooks](https://react-redux.js.org/api/hooks)-rajapintaan.
 
 Asennetaan react-redux:
 
@@ -840,9 +887,9 @@ Asennetaan react-redux:
 npm install react-redux
 ```
 
-Eriytetään komponentti _App_ tiedostoon _App.js_. Tarkastellaan kuitenkin ensin mitä sovelluksen muihin tiedostoihin tulee.
+Eriytetään komponentti _App_ tiedostoon _App.jsx_. Tarkastellaan kuitenkin ensin mitä sovelluksen muihin tiedostoihin tulee.
 
-Tiedosto _index.js_ näyttää seuraavalta:
+Tiedosto _main.jsx_ näyttää seuraavalta:
 
 ```js
 import React from 'react'
@@ -921,7 +968,7 @@ Normaalisti (eli ei defaultina) exportattujen funktioiden käyttöönotto tapaht
 import { createNote } from './../reducers/noteReducer'
 ```
 
-Tiedoston _App.js_ sisältö on seuraava:
+Tiedoston _App.jsx_ sisältö on seuraava:
 
 ```js
 import { createNote, toggleImportanceOf } from './reducers/noteReducer' // highlight-line
@@ -992,7 +1039,7 @@ const App = () => {
 }
 ```
 
-React Redux ‑kirjaston tarjoama <i>useDispatch</i>-hook siis tarjoaa mille tahansa React-komponentille pääsyn tiedostossa <i>index.js</i> määritellyn Redux-storen dispatch-funktioon, jonka avulla komponentti pääsee tekemään muutoksia Redux-storen tilaan.
+React Redux ‑kirjaston tarjoama <i>useDispatch</i>-hook siis tarjoaa mille tahansa React-komponentille pääsyn tiedostossa <i>main.jsx</i> määritellyn Redux-storen dispatch-funktioon, jonka avulla komponentti pääsee tekemään muutoksia Redux-storen tilaan.
 
 Storeen talletettuihin muistiinpanoihin komponentti pääsee käsiksi React Redux ‑kirjaston [useSelector](https://react-redux.js.org/api/hooks#useselector)-hookin kautta:
 
@@ -1061,7 +1108,7 @@ export default NewNote
 
 Toisin kuin aiemmin ilman Reduxia tekemässämme React-koodissa, sovelluksen tilaa (joka on nyt siis Reduxissa) muuttava tapahtumankäsittelijä on siirretty pois <i>App</i>-komponentista, alikomponentin vastuulle. Itse tilaa muuttava logiikka on kuitenkin siististi Reduxissa eristettynä koko sovelluksen React-osuudesta.
 
-Eriytetään vielä muistiinpanojen lista ja yksittäisen muistiinpanon esittäminen omiksi komponenteikseen (jotka molemmat sijoitetaan tiedostoon <i>Notes.js</i>):
+Eriytetään vielä muistiinpanojen lista ja yksittäisen muistiinpanon esittäminen omiksi komponenteikseen (jotka molemmat sijoitetaan tiedostoon <i>Notes.jsx</i>):
 
 ```js
 import { useDispatch, useSelector } from 'react-redux' // highlight-line
