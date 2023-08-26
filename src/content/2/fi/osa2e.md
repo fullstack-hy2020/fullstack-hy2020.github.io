@@ -438,7 +438,7 @@ Toinen huomiomme liittyy useEffectin toiseen parametriin:
   }, []) // highlight-line
 ```
 
-Funktion <em>useEffect</em> toista parametria käytetään [tarkentamaan sitä, miten usein efekti suoritetaan](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect). Periaate on se, että efekti suoritetaan aina ensimmäisen renderöinnin yhteydessä <i>ja</i> silloin kuin toisena parametrina olevan taulukon sisältö muuttuu.
+Funktion <em>useEffect</em> toista parametria käytetään [tarkentamaan sitä, miten usein efekti suoritetaan](https://react.dev/reference/react/useEffect#parameters). Periaate on se, että efekti suoritetaan aina ensimmäisen renderöinnin yhteydessä <i>ja</i> silloin kuin toisena parametrina olevan taulukon sisältö muuttuu.
 
 Kun toisena parametrina on tyhjä taulukko <em>[]</em>, sen sisältö ei koskaan muutu ja efekti suoritetaan ainoastaan komponentin ensimmäisen renderöinnin jälkeen. Tämä on juuri se mitä haluamme kun alustamme sovelluksen tilan.
 

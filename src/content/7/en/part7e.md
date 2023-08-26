@@ -200,11 +200,9 @@ In most applications, we followed the principle by which components were placed 
 
 ### Frontend and backend in the same repository
 
-During the course, we have created the frontend and backend into separate repositories. This is a very typical approach. However, we did the deployment by [copying](/en/part3/deploying_app_to_internet#serving-static-files-from-the-backend) the bundled frontend code into the backend repository. A possibly better approach would have been to deploy the frontend code separately. Especially with applications created using Create React App, it is very straightforward thanks to the included [buildpack](https://github.com/mars/create-react-app-buildpack).
+During the course, we have created the frontend and backend into separate repositories. This is a very typical approach. However, we did the deployment by [copying](/en/part3/deploying_app_to_internet#serving-static-files-from-the-backend) the bundled frontend code into the backend repository. A possibly better approach would have been to deploy the frontend code separately.
 
 Sometimes, there may be a situation where the entire application is to be put into a single repository. In this case, a common approach is to put the <i>package.json</i> and <i>webpack.config.js</i> in the root directory, as well as place the frontend and backend code into their own directories, e.g. <i>client</i> and <i>server</i>.
-
-[This repository](https://github.com/fullstack-hy2020/create-app) provides one possible starting point for the organization of "single repository code".
 
 ### Changes on the server
 
@@ -431,7 +429,7 @@ Finally, let's take a look at some technology of tomorrow (or, actually, already
 
 Sometimes, the [dynamic typing](https://developer.mozilla.org/en-US/docs/Glossary/Dynamic_typing) of JavaScript variables creates annoying bugs. In part 5, we talked briefly about [PropTypes](/en/part5/props_children_and_proptypes#prop-types): a mechanism which enables one to enforce type-checking for props passed to React components.
 
-Lately, there has been a notable uplift in the interest in [static type checking](https://en.wikipedia.org/wiki/Type_system#Static_type_checking). At the moment, the most popular typed version of Javascript is [Typescript](https://www.typescriptlang.org/) which has been developed by Microsoft. Typescript is covered in [part 9](/en/part9).
+Lately, there has been a notable uplift in the interest in [static type checking](https://en.wikipedia.org/wiki/Type_system#Static_type_checking). At the moment, the most popular typed version of Javascript is [TypeScript](https://www.typescriptlang.org/) which has been developed by Microsoft. Typescript is covered in [part 9](/en/part9).
 
 #### Server-side rendering, isomorphic applications and universal code
 
@@ -452,14 +450,6 @@ Writing universal code directly using React is currently still pretty cumbersome
 Lately, people have started using the term [progressive web app](https://developers.google.com/web/progressive-web-apps/) (PWA) launched by Google.
 
 In short, we are talking about web applications working as well as possible on every platform and taking advantage of the best parts of those platforms. The smaller screen of mobile devices must not hamper the usability of the application. PWAs should also work flawlessly in offline mode or with a slow internet connection. On mobile devices, they must be installable just like any other application. All the network traffic in a PWA should be encrypted.
-
-Applications created using Create React App are no longer [progressive](https://create-react-app.dev/docs/making-a-progressive-web-app/) by default since Create React App 4. If PWA is desired, you will have to create a new project using a PWA custom template.
-
-```js
-npx create-react-app my-app --template cra-template-pwa
-```
-  
-The offline functionality is usually implemented with the help of [service workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API).
 
 #### Microservice architecture
 

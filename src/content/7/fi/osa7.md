@@ -6,12 +6,11 @@ lang: fi
 
 <div class="intro">
 
-Kurssin seitsemäs osa käsittelee montaa teemaa. Ensin tutustutaan React routeriin, jonka avulla sovellus voidaan jakaa useiksi eri näkymiksi, joiden näkymistä hallitaan selaimen osoiterivillä olevalla URL:illa. Tämän jälkeen katsotaan vielä muutamaa tapaa miten CSS-tyylejä voi lisätä React-sovelluksille. Olemme koko kurssin käyttäneet create-react-app:ia sovellusten rungon luomiseen. Nyt katsomme miten konepellin alla oleva Webpack-toimii ja miten voimme sen avulla konfiguroida sovelluksen kokonaan itse. 
-Käymme myös katsauksen siitä miten voimme määritellä itse hook-funktiota.
+Kurssin seitsemäs osa käsittelee montaa teemaa. Ensin tutustutaan React routeriin, jonka avulla sovellus voidaan jakaa useiksi eri näkymiksi, joiden näkymistä hallitaan selaimen osoiterivillä olevalla URL:illa. Tämän jälkeen katsotaan vielä muutamaa tapaa miten CSS-tyylejä voi lisätä React-sovelluksille. Olemme koko kurssin käyttäneet Viteä sovellusten rungon luomiseen. Sovelluskehitykseen liittyvät työkalut on myös mahdollista konfiguroida itse, ja tässä osassa katsomme miten tämä onnistuu Webpack-nimisellä työkalulla. Käymme myös katsauksen siitä miten voimme määritellä itse hook-funktiota.
 
 Kurssin seitsemännen osan teemoihin liittyvät myös useat yhteistyökumppaniemme asiantuntijoiden vierailuluennoista, jotka löydät <a href='https://www.youtube.com/playlist?list=PLumQiZ25uijis31zaRL7rhzLalSwLqUtm'><span style='text-decoration: underline;'>täältä</span></span></a>.
   
-<i>Osa päivitetty 1.2.2023</i>
-- <i>Tehtäviin 7.10-7.13 lisätty vaihtoehtoinen React queryä ja contextia hyödyntävä versio</i>
+<i>Osa päivitetty 26.8.2023</i>
+- <i>Create React App korvattu Vitellä</i>
 
 </div>
