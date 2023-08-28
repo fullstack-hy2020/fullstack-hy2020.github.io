@@ -154,7 +154,7 @@ xhttp.onreadystatechange = function() {
       li.appendChild(document.createTextNode(note.content))
     })
 
-    document.getElementsByClassName('notes')[0].appendChild(ul)
+    document.getElementById('notes').appendChild(ul)
   }
 }
 
@@ -324,7 +324,7 @@ data.forEach(function(note) {
 Finally, the tree branch of the <em>ul</em> variable is connected to its proper place in the HTML tree of the whole page:
 
 ```js
-document.getElementsByClassName('notes').appendChild(ul)
+document.getElementById('notes').appendChild(ul)
 ```
 
 ### Manipulating the document object from console
