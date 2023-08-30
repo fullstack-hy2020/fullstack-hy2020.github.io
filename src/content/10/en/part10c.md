@@ -349,7 +349,7 @@ import createApolloClient from './src/utils/apolloClient';
 const apolloClient = createApolloClient();
 
 const App = () => {
-  console.log(Constants.manifest); // highlight-line
+  console.log(Constants.expoConfig); // highlight-line
 
   return (
     <NativeRouter>
