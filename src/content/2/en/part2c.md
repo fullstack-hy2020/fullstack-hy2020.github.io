@@ -473,7 +473,7 @@ Now we can see more clearly that the function [useEffect](https://react.dev/refe
 
 So by default, the effect is <i>always</i> run after the component has been rendered. In our case, however, we only want to execute the effect along with the first render.
 
-The second parameter of <em>useEffect</em> is used to [specify how often the effect is run]https://react.dev/reference/react/useEffect#parameters). If the second parameter is an empty array <em>[]</em>, then the effect is only run along with the first render of the component.
+The second parameter of <em>useEffect</em> is used to [specify how often the effect is run](https://react.dev/reference/react/useEffect#parameters). If the second parameter is an empty array <em>[]</em>, then the effect is only run along with the first render of the component.
 
 There are many possible use cases for an effect hook other than fetching data from the server. However, this use is sufficient for us, for now.
 
