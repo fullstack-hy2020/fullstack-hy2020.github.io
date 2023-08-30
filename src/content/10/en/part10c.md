@@ -336,7 +336,7 @@ Every application will most likely run in more than one environment. Two obvious
 
 We have previously learned that we can provide running programs with environment variables. These variables can be defined in the command line or using environment configuration files such as <i>.env</i> files and third-party libraries such as <i>Dotenv</i>. Unfortunately, React Native doesn't have direct support for environment variables. However, we can access the Expo configuration defined in the <i>app.json</i> file at runtime from our JavaScript code. This configuration can be used to define and access environment dependant variables.
 
-The configuration can be accessed by importing the <em>Constants</em> constant from the <i>expo-constants</i> module as we have done a few times before. Once imported, the <em>Constants.manifest</em> property will contain the configuration. Let's try this by logging <em>Constants.manifest</em> in the <em>App</em> component:
+The configuration can be accessed by importing the <em>Constants</em> constant from the <i>expo-constants</i> module as we have done a few times before. Once imported, the <em>Constants.expoConfig</em> property will contain the configuration. Let's try this by logging <em>Constants.expoConfig</em> in the <em>App</em> component:
 
 ```javascript
 import { NativeRouter } from 'react-router-native';
@@ -349,7 +349,7 @@ import createApolloClient from './src/utils/apolloClient';
 const apolloClient = createApolloClient();
 
 const App = () => {
-  console.log(Constants.manifest); // highlight-line
+  console.log(Constants.expoConfig); // highlight-line
 
   return (
     <NativeRouter>
@@ -385,7 +385,7 @@ export default {
 };
 ```
 
-Expo has reserved an [extra](https://docs.expo.dev/guides/environment-variables/#using-app-manifest--extra) property in the configuration for any application-specific configuration. To see how this works, let's add an <em>env</em> variable into our application's configuration:
+Expo has reserved an [extra](https://docs.expo.dev/guides/environment-variables/#using-app-expoConfig--extra) property in the configuration for any application-specific configuration. To see how this works, let's add an <em>env</em> variable into our application's configuration:
 
 ```javascript
 export default {
@@ -399,7 +399,7 @@ export default {
 };
 ```
 
-Restart Expo development tools to apply the changes and you should see that the value of <em>Constants.manifest</em> property has changed and now includes the <em>extra</em> property containing our application-specific configuration. Now the value of the <em>env</em> variable is accessible through the <em>Constants.manifest.extra.env</em> property.
+Restart Expo development tools to apply the changes and you should see that the value of <em>Constants.expoConfig</em> property has changed and now includes the <em>extra</em> property containing our application-specific configuration. Now the value of the <em>env</em> variable is accessible through the <em>Constants.expoConfig.extra.env</em> property.
 
 Because using hard coded configuration is a bit silly, let's use an environment variable instead:
 
@@ -421,7 +421,7 @@ As we have learned, we can set the value of an environment variable through the 
 ENV=test npm start
 ```
 
-If you take a look at the logs, you should see that the <em>Constants.manifest.extra.env</em> property has changed.
+If you take a look at the logs, you should see that the <em>Constants.expoConfig.extra.env</em> property has changed.
 
 We can also load environment variables from an <em>.env</em> file as we have learned in the previous parts. First, we need to install the [Dotenv](https://www.npmjs.com/package/dotenv) library:
 
@@ -463,7 +463,7 @@ Note that it is <i>never</i> a good idea to put sensitive data into the applicat
 
 Instead of the hardcoded Apollo Server's URL, use an environment variable defined in the <i>.env</i> file when initializing the Apollo Client. You can name the environment variable for example <em>APOLLO_URI</em>.
 
-<i>Do not</i> try to access environment variables like <em>process.env.APOLLO_URI</em> outside the <i>app.config.js</i> file. Instead use the <em>Constants.manifest.extra</em> object like in the previous example. In addition, do not import the dotenv library outside the <i>app.config.js</i> file or you will most likely face errors.
+<i>Do not</i> try to access environment variables like <em>process.env.APOLLO_URI</em> outside the <i>app.config.js</i> file. Instead use the <em>Constants.expoConfig.extra</em> object like in the previous example. In addition, do not import the dotenv library outside the <i>app.config.js</i> file or you will most likely face errors.
 
 </div>
 
@@ -660,7 +660,7 @@ import Constants from 'expo-constants';
 import { setContext } from '@apollo/client/link/context'; // highlight-line
 
 // You might need to change this depending on how you have configured the Apollo Server's URI
-const { apolloUri } = Constants.manifest.extra;
+const { apolloUri } = Constants.expoConfig.extra;
 
 const httpLink = createHttpLink({
   uri: apolloUri,
