@@ -493,6 +493,8 @@ const App = () => {
     </div>
   )
 }
+
+export default App
 ```
 
 The user interface of the application has a form, in the input field of which the name of the desired currency is written. If the currency exists, the application renders the exchange rates of the currency to other currencies:
