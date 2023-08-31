@@ -634,7 +634,7 @@ If you use *IntelliJ WebStorm* instead, you can use a similar procedure with its
 
 Next, let's make it possible to add new notes to the server. Adding a note happens by making an HTTP POST request to the address <http://localhost:3001/api/notes>, and by sending all the information for the new note in the request [body](https://www.w3.org/Protocols/rfc2616/rfc2616-sec7.html#sec7) in JSON format.
 
-To access the data easily, we need the help of the express [json-parser](https://expressjs.com/en/api.html) that is taken to use with command _app.use(express.json())_.
+To access the data easily, we need the help of the express [json-parser](https://expressjs.com/en/api.html) that we can use with the command _app.use(express.json())_.
 
 Let's activate the json-parser and implement an initial handler for dealing with the HTTP POST requests:
 
@@ -658,7 +658,7 @@ app.post('/api/notes', (request, response) => {
 
 The event handler function can access the data from the <i>body</i> property of the _request_ object.
 
-Without the json-parser, the <i>body</i> property would be undefined. The json-parser functions so that it takes the JSON data of a request, transforms it into a JavaScript object and then attaches it to the <i>body</i> property of the _request_ object before the route handler is called.
+Without the json-parser, the <i>body</i> property would be undefined. The json-parser takes the JSON data of a request, transforms it into a JavaScript object and then attaches it to the <i>body</i> property of the _request_ object before the route handler is called.
 
 For the time being, the application does not do anything with the received data besides printing it to the console and sending it back in the response.
 
