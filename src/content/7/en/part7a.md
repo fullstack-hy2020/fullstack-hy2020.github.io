@@ -508,7 +508,7 @@ The application starts the usual way, but first, you need to install the depende
 
 ```bash
 npm install
-npm start
+npm run dev
 ```
 
 #### 7.1: routed anecdotes, step1
