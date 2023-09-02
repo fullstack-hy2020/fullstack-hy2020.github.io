@@ -198,7 +198,7 @@ The exercises are submitted through GitHub and marking them as done on the "my s
 
 If you are submitting exercises from different parts to the same repository, use an appropriate system for naming your directories. You can of course create a new repository for each part. If you are using a private repository, add <i>mluukkai</i> as a collaborator.
 
-Exercises are submitted **one part at a time**. Once you have submitted exercises for a part, you can no longer submit any more exercises for that part.
+Exercises are submitted **one part at a time**. You will mark the number of exercises you have completed from that module. Once you have submitted exercises for a part, you can no longer submit any more exercises for that part. 
 
 A system for detecting plagiarism is used to check exercises submitted to GitHub. If code is found from model answers or multiple students hand in the same code, the situation is handled according to the [policy on plagiarism](https://guide.student.helsinki.fi/en/article/what-cheating-and-plagiarism) of the University of Helsinki.
 
