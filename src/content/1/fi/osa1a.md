@@ -624,7 +624,7 @@ code .
 
 <i>Tässä tehtävässä aloitettavaa ohjelmaa kehitellään eteenpäin muutamassa seuraavassa tehtävässä. Tässä ja kurssin aikana muissakin vastaan tulevissa tehtäväsarjoissa ohjelman lopullisen version palauttaminen riittää. Voit toki halutessasi tehdä commitin jokaisen tehtävän jälkeisestä tilanteesta, mutta se ei ole välttämätöntä.</i>
 
-Luo Vitellä uusi sovellus. Muuta <i>main.jsc</i> muotoon
+Luo Vitellä uusi sovellus. Muuta <i>main.jsx</i> muotoon
 
 ```js
 import ReactDOM from 'react-dom/client'
