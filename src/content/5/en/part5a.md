@@ -552,7 +552,7 @@ The application is started the usual way, but you have to install its dependenci
 
 ```bash
 npm install
-npm start
+npm run dev
 ```
 
 Implement login functionality to the frontend. The token returned with a successful login is saved to the application's state <i>user</i>.
