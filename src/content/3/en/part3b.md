@@ -459,7 +459,7 @@ const baseUrl = '/api/notes'
 
 Because in development mode the frontend is at the address <i>localhost:3000</i>, the requests to the backend go to the wrong address <i>localhost:3000/api/notes</i>. The backend is at <i>localhost:3001</i>.
 
-If the project was created with Vite, this problem is easy to solve. It is enough to add the following declaration to the <i>vite.config.json</i> file of the frontend repository.
+If the project was created with Vite, this problem is easy to solve. It is enough to add the following declaration to the <i>vite.config.js</i> file of the frontend repository.
 
 ```bash
 import { defineConfig } from 'vite'
