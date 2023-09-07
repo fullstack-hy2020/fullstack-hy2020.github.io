@@ -11,8 +11,7 @@ lang: en
 
 ### Main principle
 
-TypeScript is a typed superset of JavaScript, and eventually, it's compiled into plain JavaScript code. The programmer is even able to decide the version of the generated code, as long as it's ECMAScript 3 or newer. TypeScript being a superset of JavaScript means that it includes all the features of JavaScript and
-its additional features as well. In other words, all existing JavaScript code is valid TypeScript.
+TypeScript is a typed superset of JavaScript, and eventually, it's compiled into plain JavaScript code. The programmer is even able to decide the version of the generated code, as long as it's ECMAScript 3 or newer. TypeScript being a superset of JavaScript means that it includes all the features of JavaScript and its additional features as well. In other words, all existing JavaScript code is valid TypeScript.
 
 TypeScript consists of three separate, but mutually fulfilling parts:
 
@@ -34,8 +33,7 @@ The <i>language service</i> collects type information from the source code. Deve
 
 ### TypeScript key language features
 
-In this section, we will describe some of the key features of the TypeScript language. The intent is to provide you with a basic understanding of TypeScript's
-key features to help you understand more of what is to come during this course.
+In this section, we will describe some of the key features of the TypeScript language. The intent is to provide you with a basic understanding of TypeScript's key features to help you understand more of what is to come during this course.
 
 #### Type annotations
 
@@ -90,19 +88,19 @@ Output:
 let x;
 ```
 
-This means that no type information remains at runtime - nothing says that some variable x was declared as being of type *SomeType*.
+This means that no type information remains at runtime; nothing says that some variable x was declared as being of type *SomeType*.
 
 The lack of runtime type information can be surprising for programmers who are used to extensively using reflection or other metadata systems.
 
 ### Why should one use TypeScript?
 
-On different forums, you may stumble upon a lot of different arguments either for or against TypeScript. The truth is probably as vague as: it depends on your needs and use of the functions that TypeScript offers. Anyway, here are some of our reasons behind why we think that the use of TypeScript may have some advantages.
+On different forums, you may stumble upon a lot of different arguments either for or against TypeScript. The truth is probably as vague as: it depends on your needs and the use of the functions that TypeScript offers. Anyway, here are some of our reasons behind why we think that the use of TypeScript may have some advantages.
 
 First of all, TypeScript offers <i>type checking and static code analysis</i>. We can require values to be of a certain type, and have the compiler warn about using them incorrectly. This can reduce runtime errors, and you might even be able to reduce the number of required unit tests in a project, at least concerning pure-type tests.
 The static code analysis doesn't only warn about wrongful type usage, but also other mistakes such as misspelling a variable or function name or trying to use a variable beyond its scope.
 
-The second advantage of TypeScript is that the type annotations in the code can function as a type of <i>code-level documentation</i>.
-It's easy to check from a function signature what kind of arguments the function can consume and what type of data it will return. This form of type annotation-bound documentation will always be up to date and it makes it easier for new programmers to start working on an existing project. It is also helpful when returning to an old project.
+The second advantage of TypeScript is that the type annotations in the code can function as a kind of <i>code-level documentation</i>.
+It's easy to check from a function signature what kind of arguments the function can consume and what type of data it will return. This form of type annotation-bound documentation will always be up to date and it makes it easier for new programmers to start working on an existing project. It is also helpful when returning to work on an old project.
 
 Types can be reused all around the code base, and a change to a type definition will automatically be reflected everywhere the type is used. One might argue that you can achieve similar code-level documentation with e.g. [JSDoc](https://jsdoc.app/about-getting-started.html), but it is not connected to the code as tightly as TypeScript's types, and may thus get out of sync more easily, and is also more verbose.
 
@@ -113,14 +111,14 @@ With the help of TypeScript, it is also very easy to start using the newest Java
 
 ### What does TypeScript not fix?
 
-As mentioned above, TypeScript type annotations and type checking exist only at compile time and no longer at runtime. Even if the compiler does not throw any errors, runtime errors are still possible. These runtime errors are especially common when handling external input, such as data received from a network request.
+As mentioned above, TypeScript's type annotations and type checking exist only at compile time and no longer at runtime. Even if the compiler does not throw any errors, runtime errors are still possible. These runtime errors are especially common when handling external input, such as data received from a network request.
 
 Lastly, below, we list some issues many have with TypeScript, which might be good to be aware of:
 
 #### Incomplete, invalid or missing types in external libraries
 
-When using external libraries, you may find that some libraries have either missing or in some way invalid type declarations. Most often, this is due to the library not being written in TypeScript, and the person adding the type declarations manually not doing such a good job with it. In these cases, you might need to define the type declarations yourself.
-However, there is a good chance someone has already added typings for the package you are using. Always check the DefinitelyTyped [GitHub page](https://github.com/DefinitelyTyped/DefinitelyTyped) first. They are probably the most popular sources for type declaration files.
+When using external libraries, you may find that some have either missing or in some way invalid type declarations. Most often, this is due to the library not being written in TypeScript, and the person adding the type declarations manually not doing such a good job with it. In these cases, you might need to define the type declarations yourself.
+However, there is a good chance someone has already added typings for the package you are using. Always check the DefinitelyTyped [GitHub page](https://github.com/DefinitelyTyped/DefinitelyTyped) first. It is probably the most popular source for type declaration files.
 Otherwise, you might want to start by getting acquainted with TypeScript's [documentation](https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html) regarding type declarations.
 
 #### Sometimes, type inference needs assistance
