@@ -409,7 +409,7 @@ Una solución simple sería no usar la sintaxis de propagación y escribir todos
 
 Si hiciéramos esto, perderíamos gran parte del beneficio proporcionado por el hook <i>useField</i>. En su lugar, busque una solución que solucione el problema, pero que aún sea fácil de usar con la sintaxis de propagación.
 
-#### 7.7: hook de campo
+#### 7.7: Hook de País
 
 Volvamos a los ejercicios [2.12-14](/es/part2/obteniendo_datos_del_servidor#ejercicios-2-11-2-14).
 
