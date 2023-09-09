@@ -107,7 +107,7 @@ Cambiemos la aplicación anterior para usar React Router. Primero, instalemos Re
 npm install react-router-dom
 ```
 
-El routing proporcionado por React Router se habilita cambiando la aplicación de la siguiente manera:
+El routing proporcionado por React Router se habilita cambiando la aplicación de la siguiente manera
 
 ```js
 import {
@@ -328,7 +328,7 @@ Con el inicio de sesión del usuario, llamamos a _navigate('/')_, que hace cambi
 
 Tanto [useParams](https://reactrouter.com/en/main/hooks/use-params) como [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate) son hooks, al igual que useState y useEffect que ya hemos usado muchas veces. Como recordará de la parte 1, existen algunas [reglas](/es/part1/un_estado_mas_complejo_depurando_aplicaciones_react#reglas-de-los-hooks) para usar hooks. Create-react-app se ha configurado para advertirle si rompe estas reglas llamando a un hook desde una declaración condicional.
 
-### redireccionar
+### Redireccionar
 
 Hay un detalle más que es interesante, en la ruta de <i>Users</i>:
 
@@ -509,7 +509,7 @@ La aplicación se inicia de la forma habitual, pero primero debe instalar las de
 
 ```bash
 npm install
-npm start
+npm run dev
 ```
 
 #### 7.1: anécdotas enrutadas, paso 1
