@@ -232,7 +232,7 @@ Ahora que la mutación se ha ejecutado con éxito, se realiza una llamada a la f
 queryClient.invalidateQueries('notes')
 ```
 
-Esto en cambio hace que React Query actualice automáticamente la consulta con la clave <i>notes</i>, es decir, recupera/trae las notas del servidor. Como resultado, la aplicación renderiza el estado actualizado en el servidor, es decir, la nota agregada también se representa.
+Esto hace que React Query actualice automáticamente la consulta con la clave <i>notes</i>, es decir que recupera nuevamente las notas del servidor. Como resultado, la aplicación renderiza el estado actualizado en el servidor, por lo que la nota agregada también se representa.
 
 Implementemos también el cambio en la importancia de las notas. Se agrega una función para actualizar notas al archivo <i>requests.js</i>:
 
@@ -241,7 +241,7 @@ export const updateNote = updatedNote =>
   axios.put(`${baseUrl}/${updatedNote.id}`, updatedNote).then(res => res.data)
 ```
 
-Actualizanr la nota también se hace mediante mutación. El componente <i>App</i> se expande de la siguiente manera:
+Actualizar la nota también se hace mediante mutación. El componente <i>App</i> se expande de la siguiente manera:
 
 ```js
 import { useQuery, useMutation, useQueryClient } from 'react-query' 
@@ -264,7 +264,7 @@ const App = () => {
 }
 ```
 
-De nuevo, se creó una mutación que invalidó la consulta <i>notes</i> para que la nota actualizada se representara correctamente. Usar mutación es fácil, el método <i>mutate</i> recibe una nota como parámetro, la importancia de la cual se ha cambiado a la negación del valor antiguo.
+De nuevo, se creó una mutación que invalidó la consulta <i>notes</i> para que la nota actualizada se representará correctamente. Usar mutación es fácil, el método <i>mutate</i> recibe una nota como parámetro, cuya importancia se cambia a la negación del valor antiguo.
 
 El código actual de la aplicación está en [GitHub](https://github.com/fullstack-hy2020/query-notes/tree/part6-2) en la rama <i>part6-2</i>.
 
@@ -284,9 +284,9 @@ La consecuencia de esto, por supuesto, es que después de la solicitud PUT que c
 
 ![](../../images/6/61new.png)
 
-Si la cantidad de datos recuperados por la aplicación no es grande, realmente no importa. Después de todo, desde el punto de vista de la funcionalidad del lado del navegador, hacer una solicitud HTTP GET adicional realmente no importa, pero en algunas situaciones podría poner una carga en el servidor.
+Si la cantidad de datos recuperados por la aplicación no es grande, realmente no importa. Después de todo, desde el punto de vista de la funcionalidad del lado del navegador, hacer una solicitud HTTP GET adicional realmente no importa, pero en algunas situaciones podría generar una carga en el servidor.
 
-Si es necesario, también es posible [optimizar el rendimiento manualmente actualizando](https://react-query-v3.tanstack.com/guides/updates-from-mutation-responses) el estado de la consulta mantenido por React Query.
+Es posible [optimizar el rendimiento manualmente](https://react-query-v3.tanstack.com/guides/updates-from-mutation-responses) actualizando el estado de la consulta mantenido por React Query.
 
 El cambio para la mutación que agrega una nueva nota es el siguiente:
 
@@ -330,11 +330,11 @@ const App = () => {
 }
 ```
 
-Si colocas una instrucción <i>console.log</i> en el código, puede ver desde la consola del navegador cuántas veces React Query hace que la aplicación se vuelva a renderizar. La regla general es que el renderizado ocurre al menos cada vez que es necesario, es decir, cuando cambia el estado de la consulta. Puede leer más al respecto [aquí](https://tkdodo.eu/blog/react-query-render-optimizations).
+Si coloca una instrucción <i>console.log</i> en el código, puede ver desde la consola del navegador cuántas veces React Query hace que la aplicación se vuelva a renderizar. La regla general es que el renderizado ocurre cada vez que es necesario, es decir, cuando cambia el estado de la consulta. Puede leer más al respecto [aquí](https://tkdodo.eu/blog/react-query-render-optimizations).
 
 El código de la aplicación está en [GitHub](https://github.com/fullstack-hy2020/query-notes/tree/part6-3) en la rama <i>part6-3</i>.
 
-React Query es una biblioteca versátil que, basada en lo que ya hemos visto, simplifica la aplicación. ¿Hace React Query soluciones de gestión de estado más complejas como Redux innecesarias? No. React Query puede reemplazar parcialmente el estado de la aplicación en algunos casos, pero como lo indica la [documentación:](https://react-query-v3.tanstack.com/guides/does-this-replace-client-state)
+React Query es una biblioteca versátil que, basada en lo que ya hemos visto, simplifica la aplicación. ¿Hace React Query soluciones de gestión de estado tan complejas como Redux? No. React Query puede reemplazar parcialmente el estado de la aplicación en algunos casos, pero como lo indica la [documentación:](https://react-query-v3.tanstack.com/guides/does-this-replace-client-state):
 
 - React Query es una <i>librería de estado del servidor</i>, responsable de la gestión de operaciones asíncronas entre el servidor y el cliente
 - Redux, etc. son <i>librerías de estado del cliente</i> que se pueden usar para almacenar datos asíncronos, aunque de manera menos eficiente cuando se comparan con una herramienta como React Query
@@ -795,15 +795,14 @@ La situación puede confundir a un principiante e incluso a un desarrollador web
 
 Para una aplicación simple, <i>useState</i> es sin duda un buen punto de partida. Si la aplicación está comunicándose con el servidor, la comunicación se puede manejar de la misma manera que en los capítulos 1-5, utilizando el estado de la aplicación misma. Sin embargo, recientemente se ha vuelto más común mover la comunicación y la gestión asociada del estado al menos parcialmente bajo el control de React Query (o alguna otra biblioteca similar). Si está preocupado por useState y el prop drilling que conlleva, usar context puede ser una buena opción. También hay situaciones en las que puede tener sentido manejar parte del estado con useState y parte con contextos.
 
-La solución de gestión de estado más completa y robusta es Redux, que es una forma de implementar la llamada [Flux](https://facebook.github.io/flux/) arquitectura. Redux es ligeramente más antiguo que las soluciones presentadas en esta sección. La rigidez de Redux ha sido la motivación para muchas nuevas soluciones de gestión de estado, como el <i>useReducer</i> de React. Algunas de las críticas a la rigidez de Redux ya se han vuelto obsoletas gracias al [Redux Toolkit](https://redux-toolkit.js.org/).
+La solución de gestión de estado más completa y robusta es Redux, que es una forma de implementar la llamada arquitectura [Flux](https://facebook.github.io/flux/). Redux es ligeramente más antigua que las soluciones presentadas en esta sección. La rigidez de Redux ha sido la motivación para muchas nuevas soluciones de gestión de estado, como el <i>useReducer</i> de React. Algunas de las críticas a la rigidez de Redux ya se han vuelto obsoletas gracias al [Redux Toolkit](https://redux-toolkit.js.org/).
 
 A lo largo de los años, también se han desarrollado otras librería de gestión de estado que son similares a Redux, como el recién llegado [Recoil](https://recoiljs.org/) y el ligeramente más antiguo [MobX](https://mobx.js.org/). Sin embargo, según [Tendencias de Npm](https://npmtrends.com/mobx-vs-recoil-vs-redux), Redux todavía domina claramente, y de hecho parece estar aumentando su ventaja:
 
 ![](../../images/6/64new.png)
 
-También, Redux no tiene que usarse en su totalidad en una aplicación. Puede tener sentido gestionar el estado del formulario fuera de Redux, especialmente en situaciones en las que el estado de un formulario no afecta al resto de la aplicación. También es perfectamente posible usar Redux y React Query juntos en la misma aplicación.
+Redux no tiene que usarse en su totalidad en una aplicación. Puede tener sentido gestionar el estado del formulario fuera de Redux, especialmente en situaciones en las que el estado de un formulario no afecta al resto de la aplicación. También es perfectamente posible usar Redux y React Query juntos en la misma aplicación.
 
-La pregunta de qué solución de gestión de estado se debe usar no es para nada sencilla. No es posible dar una sola respuesta correcta. También es probable que la solución de gestión de estado seleccionada pueda resultar ser subóptima a medida que la aplicación crece hasta tal punto que la solución tenga que cambiar incluso si la aplicación ya se ha puesto en uso en producción.
-
+La pregunta de qué solución de gestión de estado se debe usar no es para nada sencilla. No es posible dar una sola respuesta correcta. También es probable que la solución de gestión de estado seleccionada pueda resultar ser subóptima a medida que la aplicación crece hasta tal punto que la solución tenga que cambiar incluso si ya se está usando la aplicación en producción.
 </div>
 
