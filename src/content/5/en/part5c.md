@@ -338,7 +338,7 @@ The expectation of the test verifies that the <i>mock function</i> has been call
 expect(mockHandler.mock.calls).toHaveLength(1)
 ```
 
-[Mock objects and functions](https://en.wikipedia.org/wiki/Mock_object) are commonly used stub components in testing that are used for replacing dependencies of the components being tested. Mocks make it possible to return hardcoded responses, and to verify the number of times the mock functions are called and with what parameters.
+[Mock objects and functions](https://en.wikipedia.org/wiki/Mock_object) are commonly used sub components in testing that are used for replacing dependencies of the components being tested. Mocks make it possible to return hardcoded responses, and to verify the number of times the mock functions are called and with what parameters.
 
 In our example, the mock function is a perfect choice since it can be easily used for verifying that the method gets called exactly once.
 
