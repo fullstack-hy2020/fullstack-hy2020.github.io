@@ -65,7 +65,7 @@ Refactorice la aplicación para usar React Query y Context para administrar los 
 
 Utilice React Query y Context para administrar el estado de las publicaciones de blog. En este ejercicio basta con que puedas ver los blogs en backend y crear un nuevo blog.
 
-Eres libre de administrar el estado para iniciar sesión y crear nuevas publicaciones de blog utilizando el estado interno de los componentes de React.
+Es libre de administrar el estado para iniciar sesión y crear nuevas publicaciones de blog utilizando el estado interno de los componentes de React.
 
 #### 7.12: React Query y Context, paso 3
 
