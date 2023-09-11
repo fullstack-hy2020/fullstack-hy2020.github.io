@@ -7,7 +7,7 @@ lang: es
 
 <div class="content">
 
-Además de los ocho ejercicios en las secciones [React router](/es/part7/react_router) y [custom hooks](/es/part7/custom_hooks) de esta séptima parte del material del curso, hay 13 ejercicios que continúan nuestro trabajo en la aplicación Bloglist en la que trabajamos en las partes cuatro y cinco del material del curso. Algunos de los siguientes ejercicios son "características" que son independientes entre sí, lo que significa que no es necesario terminar los ejercicios en ningún orden en particular. Si lo desea, puede omitir una parte de los ejercicios. Muchos de los ejercicios son aplicar la técnica de gestión avanzada de estado (Redux, React Query y context) cubierta en la [parte 6](/es/part6).
+Además de los ocho ejercicios en las secciones [React router](/es/part7/react_router) y [custom hooks](/es/part7/hooks_personalizados) de esta séptima parte del material del curso, hay 13 ejercicios que continúan nuestro trabajo en la aplicación Bloglist en la que trabajamos en las partes cuatro y cinco del material del curso. Algunos de los siguientes ejercicios son "características" que son independientes entre sí, lo que significa que no es necesario terminar los ejercicios en ningún orden en particular. Si lo desea, puede omitir una parte de los ejercicios. Muchos de los ejercicios son aplicar la técnica de gestión avanzada de estado (Redux, React Query y context) cubierta en la [parte 6](/es/part6).
 
 Si no desea utilizar su propia aplicación Bloglist, puede utilizar el código de la solución modelo como punto de partida para estos ejercicios.
 
@@ -43,7 +43,7 @@ _Tenga en cuenta_ que este y los dos ejercicios siguientes son bastante laborios
 
 Almacene la información sobre publicaciones de blog en el store de Redux. En este ejercicio basta con que puedas ver los blogs en backend y crear un nuevo blog.
 
-Eres libre de administrar el estado para iniciar sesión y crear nuevas publicaciones de blog utilizando el estado interno de los componentes de React.
+Es libre de administrar el estado para iniciar sesión y crear nuevas publicaciones de blog utilizando el estado interno de los componentes de React.
 
 #### 7.12: Redux, paso 3
 
