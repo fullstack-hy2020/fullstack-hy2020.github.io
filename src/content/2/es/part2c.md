@@ -309,7 +309,7 @@ promise.then(response => {
 ```
 Se imprime lo siguiente en la consola:
 
-![](../../images/2/17e.png)
+![](../../images/2/17new.png)
 
 El entorno de ejecución de JavaScript llama a la función de devolución de llamada registrada por el método <em>then</em> proporcionándole un objeto <em>response</em> como parámetro. El objeto <em>response</em> contiene todos los datos esenciales relacionados con la respuesta de una solicitud HTTP GET, que incluirían los <i>datos (data)</i>, el <i>código de estado (status code)</i> y <i>encabezados (headers)</i>.
 

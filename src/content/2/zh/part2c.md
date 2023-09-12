@@ -376,7 +376,7 @@ promise.then(response => {
 <!-- The following is printed to the console:-->
  以下内容将被打印到控制台。
 
-![](../../images/2/17e.png)
+![](../../images/2/17new.png)
 
 <!-- The JavaScript runtime environment calls the callback function registered by the <em>then</em> method providing it with a <em>response</em> object as a parameter. The <em>response</em> object contains all the essential data related to the response of an HTTP GET request, which would include the returned <i>data</i>, <i>status code</i>, and <i>headers</i>.-->
  JavaScript运行环境调用由<em>then</em>方法注册的回调函数，为其提供一个<em>response</em>对象作为参数。<em>response</em>对象包含与HTTP GET请求的响应相关的所有基本数据，其中包括返回的<i>数据</i>、<i>状态代码</i>和<i>头信息</i>。
