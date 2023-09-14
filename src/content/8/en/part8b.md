@@ -812,7 +812,7 @@ useEffect(() => {
 // highlight-end
 ```
 
-However, this solution does not work if the *notify* function is not wrapped to a [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback) function.  If it's not, this results in an endless loop. When the *App* component is rerendered after a notification is removed, a <i>new version</i> of *notify* gets created which causes the effect function to be executed, which causes a new notification, and so on, and so on...
+However, this solution does not work if the *notify* function is not wrapped to a [useCallback](https://react.dev/reference/react/useCallback) function.  If it's not, this results in an endless loop. When the *App* component is rerendered after a notification is removed, a <i>new version</i> of *notify* gets created which causes the effect function to be executed, which causes a new notification, and so on, and so on...
 
 The current code of the application can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4) branch <i>part8-4</i>.
 
@@ -869,7 +869,7 @@ Make sure that the Authors view is kept up to date after setting a birth year.
 
 #### 8.12: Authors birth year advanced
 
-Change the birth year form so that a birth year can be set only for an existing author. Use [select tag](https://reactjs.org/docs/forms.html#the-select-tag), [react select](https://github.com/JedWatson/react-select), or some other mechanism.
+Change the birth year form so that a birth year can be set only for an existing author. Use [select tag](https://react.dev/reference/react-dom/components/select), [react select](https://github.com/JedWatson/react-select), or some other mechanism.
 
 A solution using the react select library looks as follows:
 

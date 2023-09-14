@@ -341,7 +341,7 @@ const App = () =>
   )
 ```
 
-As we can see from the example above, the React elements that were written in JSX are now created with regular JavaScript by using React's [createElement](https://reactjs.org/docs/react-without-jsx.html) function.
+As we can see from the example above, the React elements that were written in JSX are now created with regular JavaScript by using React's [createElement](https://react.dev/reference/react/createElement) function.
 
 You can test the bundled application by opening the <i>build/index.html</i> file with the <i>open file</i> functionality of your browser:
 
