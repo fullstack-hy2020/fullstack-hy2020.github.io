@@ -72,7 +72,7 @@ Kurssia ollaan tällä hetkellä (11.8.2023) päivittämässä käyttämään Vi
 
 ### Komponentti
 
-Tiedosto <i>App.js</i> määrittelee nyt React-[komponentin](https://react.dev/learn/your-first-component) nimeltään <i>App</i>. Tiedoston <i>main.jsx</i> viimeisen rivin komento
+Tiedosto <i>App.jsx</i> määrittelee nyt React-[komponentin](https://react.dev/learn/your-first-component) nimeltään <i>App</i>. Tiedoston <i>main.jsx</i> viimeisen rivin komento
 
 ```js
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
@@ -624,7 +624,7 @@ code .
 
 <i>Tässä tehtävässä aloitettavaa ohjelmaa kehitellään eteenpäin muutamassa seuraavassa tehtävässä. Tässä ja kurssin aikana muissakin vastaan tulevissa tehtäväsarjoissa ohjelman lopullisen version palauttaminen riittää. Voit toki halutessasi tehdä commitin jokaisen tehtävän jälkeisestä tilanteesta, mutta se ei ole välttämätöntä.</i>
 
-Luo Vitellä uusi sovellus. Muuta <i>main.jsc</i> muotoon
+Luo Vitellä uusi sovellus. Muuta <i>main.jsx</i> muotoon
 
 ```js
 import ReactDOM from 'react-dom/client'
