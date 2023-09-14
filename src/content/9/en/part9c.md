@@ -796,7 +796,7 @@ Similarly to Ilari's flight service, we do not use a real database in our app bu
 
 #### 9.10: Patientor backend, step3
 
-Create a type *Diagnose* and use it to create endpoint */api/diagnoses* for fetching all diagnoses with HTTP GET.
+Create a type *Diagnosis* and use it to create endpoint */api/diagnoses* for fetching all diagnoses with HTTP GET.
 
 Structure your code properly by using meaningfully-named directories and files.
 
