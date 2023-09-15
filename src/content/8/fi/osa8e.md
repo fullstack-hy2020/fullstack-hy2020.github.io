@@ -136,7 +136,7 @@ Teknisesti ottaen HTTP-protokolla ei taivu hyvin palvelimelta selaimeen päin ta
 
 Apollo Server ei versiosta 3.0 alkaen enää ole tarjonnut suoraa tukea subscriptiolle ja joudummekin tekemään joukon muutoksia että saamme ne toimimaan. Siistitään samalla myös sovelluksen rakennetta hiukan. 
 
-Aloitetaan eriyttämällä skeeman määrittely omaan tiedostoon <i>schema.js</i>
+Aloitetaan eriyttämällä backendissä skeeman määrittely omaan tiedostoon <i>schema.js</i>
 
 ```js
 const typeDefs = `
