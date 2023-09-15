@@ -575,7 +575,7 @@ const Main = () => {
       <AppBar />
       // highlight-start
       <Routes>
-        <Route path="/" element={<RepositoryList />} exact />
+        <Route path="/" element={<RepositoryList />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       // highlight-end
