@@ -57,7 +57,7 @@ Una vez que haya completado suficientes ejercicios para aprobar, puede descargar
 
 #### 3 créditos
 
-Para tres créditos, debe enviar todos los ejercicios obligatorios (sin asteriscos) para las partes 0-3.
+Para tres créditos, debe enviar todos los ejercicios obligatorios (con asteriscos) para las partes 0-3.
 
 Para los créditos universitarios, el curso de tres créditos también requiere aprobar el examen del curso. El examen se realiza en Moodle, al que se puede acceder a través de la [página del curso de Open University](https://courses.helsinki.fi/en/aytkt21009en/131840261) una vez que se haya [registrado](/es/part0/informacion_general#registrate-para-el-examen) para el examen.
 
