@@ -11,7 +11,7 @@ Before we start programming, we will go through some principles of web developme
 
 The application exists only to demonstrate some basic concepts of the course, and is, by no means, an example of <i>how</i> a modern web application should be made. On the contrary, it demonstrates some old techniques of web development, which could even be considered <i>bad practices</i> nowadays.
 
-Code will conform to contemporary best practices from [part 1](/en/part1) onwards.
+Code will confirm to contemporary best practices from [part 1](/en/part1) onwards.
 
 Open the [example application](https://studies.cs.helsinki.fi/exampleapp) in your browser. Sometimes this takes a while.
 
