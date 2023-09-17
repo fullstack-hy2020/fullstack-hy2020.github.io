@@ -53,7 +53,7 @@ The main functionality of the code in the <i>state</i> folder is to keep our dat
 
 Let's study the state handling a bit closer as a lot of stuff seems to be happening under the hood and it differs a bit from the methods used in the course so far.
 
-The state management is built using the React Hooks [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext) and [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer). This is quite a good setup because we know the app will be rather small and we don't want to use <i>redux</i> or other similar libraries for state management.
+The state management is built using the React Hooks [useContext](https://react.dev/reference/react/useContext) and [useReducer](https://react.dev/reference/react/useReducer). This is quite a good setup because we know the app will be rather small and we don't want to use <i>redux</i> or other similar libraries for state management.
 There are a lot of good materials, like [this article](https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe), about this approach to state management.
 
 The approach taken in this app uses the React [context](https://reactjs.org/docs/context.html) that, according to its documentation:
@@ -157,8 +157,8 @@ export const reducer = (state: State, action: Action): State => {
 The main difference is that the state is now a dictionary (or an object), instead of the array that we used in [part 6](/en/part6/flux_architecture_and_redux#pure-functions-immutable).
 
 There are a lot of things happening in the file <i>state.tsx</i>, which takes care of setting up the context.
-The main ingredient is the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) hook
-used to create the state and the dispatch function, and pass them on to the [context provider](https://reactjs.org/docs/context.html#contextprovider):
+The main ingredient is the [useReducer](https://react.dev/reference/react/useReducer) hook
+used to create the state and the dispatch function, and pass them on to the [context provider](https://react.dev/reference/react/createContext#provider):
 
 ```js
 export const StateProvider = ({

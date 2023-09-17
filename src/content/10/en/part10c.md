@@ -699,7 +699,7 @@ export default createApolloClient;
 
 ### Using React Context for dependency injection
 
-The last piece of the sign-in puzzle is to integrate the storage to the <em>useSignIn</em> hook. To achieve this the hook must be able to access token storage instance we have initialized in the <em>App</em> component. React [Context](https://reactjs.org/docs/context.html) is just the tool we need for the job. Create a directory <i>contexts</i> in the <i>src</i> directory. In that directory create a file <i>AuthStorageContext.js</i> with the following content:
+The last piece of the sign-in puzzle is to integrate the storage to the <em>useSignIn</em> hook. To achieve this the hook must be able to access token storage instance we have initialized in the <em>App</em> component. React [Context](https://react.dev/learn/passing-data-deeply-with-context) is just the tool we need for the job. Create a directory <i>contexts</i> in the <i>src</i> directory. In that directory create a file <i>AuthStorageContext.js</i> with the following content:
 
 ```javascript
 import { createContext } from 'react';
@@ -738,7 +738,7 @@ const App = () => {
 export default App;
 ```
 
-Accessing the storage instance in the <em>useSignIn</em> hook is now possible using the React's [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext) hook like this:
+Accessing the storage instance in the <em>useSignIn</em> hook is now possible using the React's [useContext](https://react.dev/reference/react/useContext) hook like this:
 
 ```javascript
 // ...
@@ -752,7 +752,7 @@ const useSignIn = () => {
 };
 ```
 
-Note that accessing a context's value using the <em>useContext</em> hook only works if the <em>useContext</em> hook is used in a component that is a <i>descendant</i> of the [Context.Provider](https://reactjs.org/docs/context.html#contextprovider) component.
+Note that accessing a context's value using the <em>useContext</em> hook only works if the <em>useContext</em> hook is used in a component that is a <i>descendant</i> of the [Context.Provider](https://react.dev/reference/react/createContext#provider) component.
 
 Accessing the <em>AuthStorage</em> instance with <em>useContext(AuthStorageContext)</em> is quite verbose and reveals the details of the implementation. Let's improve this by implementing a <em>useAuthStorage</em> hook in a <i>useAuthStorage.js</i> file in the <i>hooks</i> directory:
 
@@ -781,7 +781,7 @@ const useSignIn = () => {
 
 The ability to provide data to component's descendants opens tons of use cases for React Context, as we already saw in the [last chapter](/en/part6/react_query_use_reducer_and_the_context) of part 6.
 
-To learn more about these use cases, read Kent C. Dodds' enlightening article [How to use React Context effectively](https://kentcdodds.com/blog/how-to-use-react-context-effectively) to find out how to combine the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) hook with the context to implement state management. You might find a way to use this knowledge in the upcoming exercises.
+To learn more about these use cases, read Kent C. Dodds' enlightening article [How to use React Context effectively](https://kentcdodds.com/blog/how-to-use-react-context-effectively) to find out how to combine the [useReducer](https://react.dev/reference/react/useReducer) hook with the context to implement state management. You might find a way to use this knowledge in the upcoming exercises.
 
 </div>
 
