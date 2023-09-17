@@ -607,7 +607,7 @@ If you use Open weather map, [here](https://openweathermap.org/weather-condition
 
 **NB:** You need an api-key to use almost every weather service. Do not save the api-key to source control! Nor hardcode the api-key to your source code. Instead use an [environment variable](https://vitejs.dev/guide/env-and-mode.html) to save the key.
 
-Assuming the api-key is <i>t0p53cr3t4p1k3yv4lu3</i>, when the application is started like so:
+Assuming the api-key is <i>54l41n3n4v41m34rv0</i>, when the application is started like so:
 
 ```bash
 VITE_SOME_KEY=54l41n3n4v41m34rv0 npm start3 npm start // For Linux/macOS Bash
