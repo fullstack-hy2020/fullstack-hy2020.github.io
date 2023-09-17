@@ -1181,8 +1181,6 @@ const App = () => {
 
 <i>Notes</i>, on the other hand, is a [container](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) component, as it contains some application logic: it defines what the event handlers of the <i>Note</i> components do and coordinates the configuration of <i>presentational</i> components, that is, the <i>Note</i>s.
 
-We will return to the presentational/container division later in this part.
-
 The code of the Redux application can be found on [GitHub](https://github.com/fullstack-hy2020/redux-notes/tree/part6-1), branch <i>part6-1</i>.
 
 </div>
