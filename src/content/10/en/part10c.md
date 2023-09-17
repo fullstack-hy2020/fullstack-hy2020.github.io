@@ -180,7 +180,7 @@ npm install @apollo/client graphql
 Before we can start using Apollo Client, we will need to slightly configure the Metro bundler so that it handles the <i>.cjs</i> file extensions used by the Apollo Client. First, let's install the <i>@expo/metro-config</i> package which has the default Metro configuration:
 
 ```shell
-npm install @expo/metro-config
+npm install @expo/metro-config@0.4.0
 ```
 
 Then, we can add the following configuration to a <i>metro.config.js</i> in the root directory of our project:
