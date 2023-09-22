@@ -15,7 +15,7 @@ The easiest way to get started by far is by using a tool called
 Let's create an application called <i>part1</i>, navigate to its directory and install the libraries:
 
 ```bash
-npm create vite@latest part1 -- --template react
+npm create vite@latest part1 --template react
 cd part1
 npm install
 ```
