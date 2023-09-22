@@ -534,7 +534,7 @@ describe('Note app', function() {
           .contains('make not important')
           .click()
 
-        cy.contains('show all').click() // by default 'show all' state is false
+        cy.contains('show all').click()  // by default 'show all' state is false
 
         cy.contains('another note cypress')
           .contains('make important')
