@@ -340,7 +340,7 @@ Despite changes <i>all the submitted exercises remain valid</i>, and the course 
 
 Recent major changes
 
-- Parts 1-7 (11th-26th August): Create React app replaced with Vite
+- Parts 1-8 (11th-25th September): Create React app replaced with Vite
 
 ### Expanding on a previously completed course
 

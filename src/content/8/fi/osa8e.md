@@ -627,12 +627,16 @@ Tilauksia on mahdollista testata Apollo Explorerin avulla seuraavasti:
 
 ![](../../images/8/31x.png)
 
+Tilaus siis on
+
+```js
 subscription Subscription {
   personAdded {
     phone
     name
   }
 }
+```
 
 Kun tilauksen suorittavaa sinistä PersonAdded-painiketta painetaan, jää Explorer odottamaan tilaukseen tulevia vastauksia. Aina kun sovellukseen lisätään uusia käyttäjiä (joudut tekemään lisäyksen frontendista tai toisesta selainikkunasta), tulee tieto niistä Explorerin oikeaan reunaan.
 
@@ -647,7 +651,7 @@ Tilausten toteuttamiseen liittyy paljon erilaista konfiguraatiota. Tämän kurss
 
 ### Tilaukset clientissä
 
-Jotta saamme tilaukset käyttöön React-sovelluksessa, tarvitaan jonkin verran muutoksia erityisesti [konfiguraatioiden osalta](https://www.apollographql.com/docs/react/data/subscriptions/). Tiedostossa <i>index.js</i> olevat konfiguraatiot on muokattava seuraavaan muotoon:
+Jotta saamme tilaukset käyttöön React-sovelluksessa, tarvitaan jonkin verran muutoksia erityisesti [konfiguraatioiden osalta](https://www.apollographql.com/docs/react/data/subscriptions/). Tiedostossa <i>main.jsx</i> olevat konfiguraatiot on muokattava seuraavaan muotoon:
 
 ```js
 import { 
@@ -856,7 +860,7 @@ const PersonForm = ({ setError }) => {
 } 
 ```
 
-Clientin lopullinen koodi [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-8), branchissa <i>part8-8</i>.
+Clientin lopullinen koodi [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-6), branchissa <i>part8-6</i>.
 
 ### n+1-ongelma
 

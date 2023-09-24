@@ -74,7 +74,7 @@ const LoginForm = ({ setError, setToken }) => {
       setToken(token)
       localStorage.setItem('phonenumbers-user-token', token)
     }
-  }, [result.data]) // eslint-disable-line
+  }, [result.data])
 // highlight-end
 
   const submit = async (event) => {
@@ -218,8 +218,6 @@ const PersonForm = ({ setError }) => {
 }
 ```
 
-Sovelluksen tämän vaiheen koodi [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-6), branchissa <i>part8-6</i>.
-
 ### Välimuistin päivitys revisited
 
 Uusien henkilöiden lisäyksen yhteydessä on siis 
@@ -232,8 +230,7 @@ const PersonForm = ({ setError }) => {
   const [ createPerson ] = useMutation(CREATE_PERSON, {
     refetchQueries: [  {query: ALL_PERSONS} ], // highlight-line
     onError: (error) => {
-      const errors = error.graphQLErrors[0].extensions.error.errors
-      const messages = Object.values(errors).map(e => e.message).join('\n')
+      const messages = error.graphQLErrors.map(e => e.message).join('\n')
       setError(messages)
     }
   })
@@ -250,7 +247,8 @@ const PersonForm = ({ setError }) => {
 
   const [ createPerson ] = useMutation(CREATE_PERSON, {
     onError: (error) => {
-      setError(error.graphQLErrors[0].message)
+      const messages = error.graphQLErrors.map(e => e.message).join('\n')
+      setError(messages)
     },
     // highlight-start
     update: (cache, response) => {
@@ -280,7 +278,7 @@ Välimuistin kanssa kannattaa olla tarkkana. Välimuistissa oleva epäajantasain
 > <i>There are only two hard things in Computer Science: cache invalidation and naming things.</i> Katso lisää [täältä](https://www.google.com/search?q=two+hard+things+in+Computer+Science&oq=two+hard+things+in+Computer+Science).
 
 
-Sovelluksen tämän vaiheen koodi [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-7), branchissa <i>part8-7</i>.
+Sovelluksen tämän vaiheen koodi [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-5), branchissa <i>part8-5</i>.
 
 </div>
 
