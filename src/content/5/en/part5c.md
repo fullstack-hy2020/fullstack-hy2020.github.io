@@ -192,7 +192,7 @@ There are also other methods, eg. [getByTestId](https://testing-library.com/docs
 
 We typically run into many different kinds of problems when writing our tests.
 
-Object _screen_ has method [debug](https://testing-library.com/docs/queries/about/#screendebug) that can be used to print the HTML of a component to the terminal. If we change the test as follows:
+Object _screen_ has method [debug](https://testing-library.com/docs/dom-testing-library/api-debugging#screendebug) that can be used to print the HTML of a component to the terminal. If we change the test as follows:
 
 ```js
 import React from 'react'
