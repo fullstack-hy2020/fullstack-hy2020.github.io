@@ -93,7 +93,7 @@ For a decade, [Heroku](http://heroku.com) was dominating the PaaS scene. Unfortu
 
 We are now introducing two services [Fly.io](https://fly.io/) and [Render](https://render.com/) that both have a (limited) free plan. Fly.io is our "official" hosting service since it can be for sure used also on the parts 11 and 13 of the course. Render will be fine at least for the other parts of this course.
 
-Note that despite using the free tier only, Fly.io <i>might</i> require one to enter the credit card details. At the moment Render can be used without a credit card.
+Note that despite using the free tier only, Fly.io <i>might</i> require one to enter their credit card details. At the moment Render can be used without a credit card.
 
 Render might be a bit easier to use since it does not require any software to be installed on your machine.
 
