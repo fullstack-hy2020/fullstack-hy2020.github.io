@@ -587,7 +587,7 @@ and exporting
 export const isNotNumber = (argument: any): boolean =>
   isNaN(Number(argument));
 
-default export "this is the default..."
+export default "this is the default..."
 ```
 
 Another note: somehow surprisingly TypeScript does not allow to define the same variable in many files at a "block-scope", that is, outside functions (or classes):
