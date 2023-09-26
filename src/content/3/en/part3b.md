@@ -392,7 +392,7 @@ The script looks like this
 {
   "scripts": {
     // ...
-    "build:ui": "rm -rf build && cd ../notes-frontend/ && npm run build && cp -r build ../notes-backend",
+    "build:ui": "rm -rf dist && cd ../notes-frontend/ && npm run build && cp -r dist ../notes-backend",
     "deploy": "fly deploy",
     "deploy:full": "npm run build:ui && npm run deploy",    
     "logs:prod": "fly logs"
@@ -427,7 +427,7 @@ In case of Render, the scripts look like the following
 {
   "scripts": {
     //...
-    "build:ui": "rm -rf build && cd ../frontend && npm run build && cp -r build ../backend",
+    "build:ui": "rm -rf dist && cd ../frontend && npm run build && cp -r dist ../backend",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push"
   }
 }
