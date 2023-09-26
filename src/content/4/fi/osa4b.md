@@ -974,7 +974,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://gith
 
 ### Testejä tekevän full stack ‑sovelluskehittäjän vala
 
-Testien tekeminen tuo ohjelmointiin jälleen uuden kerroksen haasteellisuutta. Joudumme päivittämään full stack ‑kehittäjän valaamme muistuttamaan siitä että sytemaattisuus on myös testejä kehitettäessä avainasemassa.
+Testien tekeminen tuo ohjelmointiin jälleen uuden kerroksen haasteellisuutta. Joudumme päivittämään full stack ‑kehittäjän valaamme muistuttamaan siitä että systemaattisuus on myös testejä kehitettäessä avainasemassa.
 
 Full stack ‑ohjelmointi on <i>todella</i> hankalaa, ja sen takia lupaan hyödyntää kaikkia ohjelmointia helpottavia keinoja:
 
