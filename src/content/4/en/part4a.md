@@ -173,7 +173,7 @@ module.exports = notesRouter
 
 The module exports the router to be available for all consumers of the module.
 
-All routes are now defined for the router object, similar to what did before with the object representing the entire application.
+All routes are now defined for the router object, similar to what I did before with the object representing the entire application.
 
 It's worth noting that the paths in the route handlers have shortened. In the previous version, we had:
 
