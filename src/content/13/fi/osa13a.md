@@ -430,7 +430,7 @@ const { Sequelize, Model, DataTypes } = require('sequelize') // highlight-line
 const express = require('express')
 const app = express()
 
-const sequelize = new Sequelize(process.env.DATABASE_UR)
+const sequelize = new Sequelize(process.env.DATABASE_URL)
 
 // highlight-start
 class Note extends Model {}
