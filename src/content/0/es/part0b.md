@@ -552,9 +552,9 @@ form.onsubmit = function(e) {
 }
 ```
 
-El comando <em>document.getElementById('notes_form')</em> le indica al código que busque el elemento form de la página, y para registrar un <i>controlador de eventos</i> para manejar el evento de envío del formulario. El controlador de eventos llama inmediatamente al método <em>e.preventDefault()</em> para evitar el manejo predeterminado del envío de formularios. El método predeterminado enviaría los datos al servidor y provocaría una nueva solicitud GET, lo que no queremos que suceda.
+El comando <em>document.getElementById('notes_form')</em> le indica al código que obtenga el elemento form de la página y que registre un <i>event handler</i> para manejar el evento de envío del formulario. El controlador de eventos llama inmediatamente al método <em>e.preventDefault()</em> para evitar el manejo por defecto del envío de formularios. El método por defecto enviaría los datos al servidor y causaría una nueva solicitud GET, lo cual no queremos que suceda.
 
-Luego, el controlador de eventos crea una nueva nota, la agrega a la lista de notas con el comando <em>notes.push(note)</em>, vuelve a representar la lista de notas en la página y envía la nueva nota al servidor.
+Luego el controlador de eventos crea una nueva nota, la agrega a la lista de notas con el comando <em>notes.push(note)</em>, vuelve a renderizar la lista de notas en la página y envía la nueva nota al servidor.
 
 El código para enviar la nota al servidor es el siguiente:
 
@@ -571,7 +571,7 @@ var sendToServer = function(note) {
 }
 ```
 
-El código determina que los datos se enviarán con una solicitud HTTP POST y el tipo de datos será JSON. El tipo de datos se determina con una cabecera <i>Content-type</i>. Luego, los datos se envían como JSON-string.
+El código determina que los datos se enviarán con una solicitud HTTP POST y el tipo de datos será JSON. El tipo de datos se determina con una cabecera <i>Content-type</i>. Luego los datos se envían como JSON-string.
 
 El código de la aplicación está disponible en <https://github.com/mluukkai/example_app>.
 Vale la pena recordar que la aplicación solo está destinada a demostrar los conceptos del curso. El código sigue un estilo de desarrollo deficiente en cierta medida y no debe usarse como ejemplo al crear sus propias aplicaciones. Lo mismo ocurre con las URL utilizadas. La URL <i>new_note_spa</i>, a la que se envían las nuevas notas, no cumple con las mejores prácticas actuales.
