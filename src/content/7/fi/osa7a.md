@@ -506,7 +506,7 @@ Sovellus käynnistyy normaaliin tapaan, mutta joudut ensin asentamaan sovellukse
 
 ```bash
 npm install
-npm start
+npm run dev
 ```
 
 #### 7.1: routed anecdotes, step1
