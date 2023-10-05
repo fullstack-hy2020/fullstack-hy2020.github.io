@@ -5,14 +5,6 @@ letter: e
 lang: en
 ---
 
-<div class="tasks">
-
-**NOTE**: this is the new section about Patientor frontend that has replaced 12th February 2023, [this chapter](/en/part9/legacy_patientor_the_old_material). In the change, the Patientor frontend structure was refactored to a simpler form that makes it much easier to focus on learning TypeScript.
-
-If you have started doing the exercises with the old Patientor, you may continue with [the old material](/en/part9/legacy_patientor_the_old_material). If not, then it is recommended to use the "new" patientor that is described in this section.
-
-</div>
-
 <div class="content">
 
 ### Working with an existing codebase
