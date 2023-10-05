@@ -13,119 +13,74 @@ Before we start delving into how you can use TypeScript with React, we should fi
 - Forgetting to pass a required prop to a component
 - Passing a prop with the wrong type to a component
 
-If we make any of these errors, TypeScript can help us catch them in our editor right away.
-If we didn't use TypeScript, we would have to catch these errors later during testing.
-We might be forced to do some tedious debugging to find the cause of the errors.
+If we make any of these errors, TypeScript can help us catch them in our editor right away. If we didn't use TypeScript, we would have to catch these errors later during testing. We might be forced to do some tedious debugging to find the cause of the errors.
 
 That's enough reasoning for now. Let's start getting our hands dirty!
 
-### Create React App with TypeScript
+### Vite with TypeScript
 
-We can use [create-react-app](https://create-react-app.dev) to create a TypeScript app by adding a
-<i>template</i> argument to the initialization script. So in order to create a TypeScript Create React App, run the following command:
+We can use [Vite](https://vitejs.dev/) to create a TypeScript app specifying a template <i>react-ts</i> in the initialization script. So to create a TypeScript app, run the following command:
 
 ```shell
-npx create-react-app my-app --template typescript
+npm create vite@latest my-app-name -- --template react-ts
 ```
 
-After running the command, you should have a complete basic React app that uses TypeScript.
-You can start the app by running *npm start* in the application's root.
+After running the command, you should have a complete basic React app that uses TypeScript. You can start the app by running *npm start* in the application's root.
 
-If you take a look at the files and folders, you'll notice that the app is not that different from
-one using pure JavaScript. The only differences are that the <i>.js</i> and <i>.jsx</i> files are now  <i>.ts</i> and <i>.tsx</i> files, they contain some type annotations, and the root directory contains a <i>tsconfig.json</i> file.
+If you take a look at the files and folders, you'll notice that the app is not that different from one using pure JavaScript. The only differences are that the <i>.jsx</i> files are now <i>.tsx</i> files, they contain some type annotations, and the root directory contains a <i>tsconfig.json</i> file.
 
 Now, let's take a look at the <i>tsconfig.json</i> file that has been created for us:
 
 ```js
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
     "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
 ```
 
-Notice *compilerOptions* now has the key [lib](https://www.typescriptlang.org/tsconfig#lib) that includes "type definitions for things found in browser environments (like *document*)."
+Notice *compilerOptions* now has the key [lib](https://www.typescriptlang.org/tsconfig#lib) that includes "type definitions for things found in browser environments (like *document*)." Everything else should be more or less fine.
 
-Everything else should be more or less fine except that, at the moment, the configuration allows compiling JavaScript files because *allowJs* is set to *true*.
-That would be fine if you need to mix TypeScript and JavaScript (e.g. if you are in the process of transforming a JavaScript project into TypeScript or something like that), but we want to create a pure TypeScript app, so let's change that configuration to *false*.
+In our previous project, we used ESlint to help us enforce a coding style, and we'll do the same with this app. We do not need to install any dependencies, since Vite has taken care of that already.
 
-In our previous project, we used ESlint to help us enforce a coding style, and we'll do the same with this app. We do not need to install any dependencies, since create-react-app has taken care of that already.
-
-We configure ESlint in <i>.eslintrc</i> with the following settings:
+When we look at the main.tsx that Vite has generated it looks familliar but there is a small but remarkable difference, there is a exclamation mark after the statement _document.getElementById('root')_:
 
 ```js
-{
-  "env": {
-    "browser": true,
-    "es6": true,
-    "jest": true
-  },
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended"
-  ],
-  "plugins": ["react", "@typescript-eslint"],
-  "settings": {
-    "react": {
-      "pragma": "React",
-      "version": "detect"
-    }
-  },
-  "rules": {
-    "@typescript-eslint/explicit-function-return-type": 0,
-    "@typescript-eslint/explicit-module-boundary-types": 0,
-    "react/react-in-jsx-scope": 0
-  }
-}
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.tsx'
+import './index.css'
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+)
 ```
 
-Since the return type of most React components is generally either *JSX.Element* or *null*, we have loosened up the default linting rules a bit by disabling the rules [explicit-function-return-type](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-function-return-type.md) and [explicit-module-boundary-types](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-module-boundary-types.md).
-Now we don't need to explicitly state our function return types everywhere. We will also disable [react/react-in-jsx-scope](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/react-in-jsx-scope.md) since importing React is [no longer needed](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html) in every file.
+The reason for this is that the statement might return value null but the _ReactDOM.createRoot_ does not accept null as parameter. With the [! operator](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#non-null-assertion-operator-postfix-), it is possible to assert the TypeScript compiler that the value is not null.
 
-Next, we need to get our linting script to parse <i>*.tsx </i> files, which are the TypeScript equivalent of React's JSX files.
-We can do that by altering our lint command in <i>package.json</i> to the following:
-
-```json
-{
-  // ...
-    "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "lint": "eslint './src/**/*.{ts,tsx}'" // highlight-line
-  },
-  // ...
-}
-```
-
-If you are using Windows, you may need to use double quotes for the linting path:
-
-```json
-"lint": "eslint \"./src/**/*.{ts,tsx}\""
-```
+Earlier in this part we [warned](https://fullstackopen.com/en/part9/first_steps_with_type_script#type-assertion) about the dangers of type assertions, but in our case the assertion is ok since we are sure that the file <i>index.html</i> indeed has this particular id and the function is always returning a HTMLElement.
 
 ### React components with TypeScript
 
@@ -163,7 +118,7 @@ const Welcome = (props: WelcomeProps): JSX.Element => {
   return <h1>Hello, {props.name}</h1>;
 };
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <Welcome name="Sarah" />
 )
 ```
@@ -191,32 +146,14 @@ interface WelcomeProps {
   name: string;
 }
 
-const Welcome = (props: WelcomeProps)  => { // highlight-line
+const Welcome = (props: WelcomeProps) => { // highlight-line
   return <h1>Hello, {props.name}</h1>;
 };
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <Welcome name="Sarah" />
 )
 ```
-
-You probably noticed that we used a [type assertion](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions) for the return value of the function *document.getElementById*
-
-```ts
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(  // highlight-line
-  <Welcome name="Sarah" />
-)
-```
-
-We need to do this since the *ReactDOM.createRoot* takes an HTMLElement as a parameter but the return value of function *document.getElementById* has the following type
-
-```js
-HTMLElement | null
-```
-
-since if the function does not find the searched element, it will return null.
-
-Earlier in this part we [warned](https://fullstackopen.com/en/part9/first_steps_with_type_script#type-assertion) about the dangers of type assertions, but in our case the assertion is ok since we are sure that the file <i>index.html</i> indeed has this particular id and the function is always returning a HTMLElement.
 
 </div>
 
@@ -226,15 +163,15 @@ Earlier in this part we [warned](https://fullstackopen.com/en/part9/first_steps_
 
 #### 9.14
 
-Create a new Create React App with TypeScript, and set up ESlint for the project similarly to how we just did.
+Create a new Vite app with TypeScript, and set up ESlint for the project similarly to how we just did.
 
-This exercise is similar to the one you have already done in [Part 1](/en/part1/java_script#exercises-1-3-1-5) of the course, but with TypeScript and some extra tweaks. Start off by modifying the contents of <i>index.tsx</i> to the following:
+This exercise is similar to the one you have already done in [Part 1](/en/part1/java_script#exercises-1-3-1-5) of the course but with TypeScript and some extra tweaks. Start off by modifying the contents of <i>main.tsx</i> to the following:
 
 ```jsx
 import ReactDOM from 'react-dom/client'
 import App from './App';
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <App />
 )
 ```
@@ -259,6 +196,8 @@ const App = () => {
     }
   ];
 
+  const totalExercises = courseParts.reduce((sum, part) => sum + part.exerciseCount, 0);
+
   return (
     <div>
       <h1>{courseName}</h1>
@@ -272,8 +211,7 @@ const App = () => {
         {courseParts[2].name} {courseParts[2].exerciseCount}
       </p>
       <p>
-        Number of exercises{" "}
-        {courseParts.reduce((carry, part) => carry + part.exerciseCount, 0)}
+        Number of exercises {totalExercises}
       </p>
     </div>
   );
@@ -667,7 +605,7 @@ functionName(parameters): return_value
 So we notice that TypeScript compiler has inferred that the initial state is either a string or a function that returns a string:
 
 ```ts
-initialState: string | (() => string)
+initialState: string | (() => string))
 ```
 
 The type of the returned array is the following:
@@ -689,9 +627,7 @@ useState<never[]>(initialState: never[] | (() => never[])):
 
 TypeScript can just infer that the state has type *never[]*, it is an array but it has no clue what are the elements stored to array, so we clearly need to help the compiler and provide the type explicitly.
 
-One of the best sources for information about typing React is the [React TypeScript Cheatsheet](https://react-typescript-cheatsheet.netlify.app/).
-
-The chapter about [useState](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/hooks#usestate) hook instructs to use a <i>type parameter</i> in situations where the compiler can not infer the type.
+One of the best sources for information about typing React is the [React TypeScript Cheatsheet](https://react-typescript-cheatsheet.netlify.app/). The Cheatsheet chapter about [useState](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/hooks#usestate) hook instructs to use a <i>type parameter</i> in situations where the compiler can not infer the type.
 
 Let us now define a type for notes:
 
@@ -715,7 +651,7 @@ useState<Note[]>(initialState: Note[] | (() => Note[])):
   [Note[], React.Dispatch<React.SetStateAction<Note[]>>]
 ```
 
-So in technical terms useState is [a generic function](https://www.typescriptlang.org/docs/handbook/2/generics.html#working-with-generic-type-variables), where the type has to be specified as a type parameter in those cases when the compiler can not infer the type.
+So in technical terms useState is [a generic function](https://www.typescriptlang.org/docs/handbook/2/generics.html#working-with-generic-type-variables), where the type has to be specified as a <i>type parameter</i> in those cases when the compiler can not infer the type.
 
 Rendering the notes is now easy. Let us just add some data to the state so that we can see that the code works:
 
@@ -777,7 +713,7 @@ const App = () => {
 }
 ```
 
-It just works! When we hover over the *event.target.value*, we see that it is indeed a string, just what is the expected parameter of the *setNewNote*:
+It just works, there are no complaints about types! When we hover over the *event.target.value*, we see that it is indeed a string, just what is the expected parameter of the *setNewNote*:
 
 ![vscode showing variable is a string](../../images/9/67new.png)
 
@@ -961,7 +897,7 @@ export type NewNote = Omit<Note, 'id'>
 
 We have added a new type for a <i>new note</i>, one that does not yet have the *id* field assigned.
 
-The code that communicates with the backend is also extracted to a module in the file *noteService.tsx*
+The code that communicates with the backend is also extracted to a module in the file *noteService.ts*
 
 ```js
 import axios from 'axios';

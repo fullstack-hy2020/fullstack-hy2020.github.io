@@ -74,7 +74,7 @@ The *target* configuration tells the compiler which *ECMAScript* version to use 
 
 *outDir* tells where the compiled code should be placed.
 
-*module* tells the compiler that we want to use *CommonJS* modules in the compiled code. This means we can use the old *require* syntax instead of the *import* one, which is not supported in older versions of *Node*, such as version 10.
+*module* tells the compiler that we want to use *CommonJS* modules in the compiled code. This means we can use the old *require* syntax instead of the *import* one, which is not supported in older versions of *Node*.
 
 *strict* is a shorthand for multiple separate options:
 <i>noImplicitAny, noImplicitThis, alwaysStrict, strictBindCallApply, strictNullChecks, strictFunctionTypes and strictPropertyInitialization</i>.
@@ -102,26 +102,26 @@ Now our <i>package.json</i> should look like this:
 
 ```json
 {
-  "name": "flight_diary",
+  "name": "flight-diary",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "tsc": "tsc"
   },
-  "author": "Jane Doe",
+  "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "@types/express": "^4.17.13",
-    "@typescript-eslint/eslint-plugin": "^5.12.1",
-    "@typescript-eslint/parser": "^5.12.1",
-    "eslint": "^8.9.0",
-    "typescript": "^4.5.5"
-  },
   "dependencies": {
-    "express": "^4.17.3"
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.18",
+    "@typescript-eslint/eslint-plugin": "^6.7.3",
+    "@typescript-eslint/parser": "^6.7.3",
+    "eslint": "^8.50.0"
   }
 }
+
 ```
 
 We also create a <i>.eslintrc</i> file with the following content:
@@ -759,7 +759,7 @@ we would get the following error:
 
 Again, the last line of the error message is the most helpful one. Let's undo this undesired modification.
 
-\* Note that if you make the comment field optional (using the *?* operator), everything will work fine.
+Note that if you make the comment field optional (using the *?* operator), everything will work fine.
 
 Utility types include many handy tools, and it is undoubtedly worth it to take some time to study [the documentation](https://www.typescriptlang.org/docs/handbook/utility-types.html).
 
@@ -776,7 +776,7 @@ router.get('/', (_req, res) => {
 });
 
 router.post('/', (_req, res) => {
-    res.send('Saving a diary!');
+  res.send('Saving a diary!');
 });
 
 export default router;
@@ -1116,9 +1116,9 @@ export default toNewDiaryEntry;
 
 ### Type guards
 
-Let us start creating the parsers for each of the fields of *object*.
+Let us start creating the parsers for each of the fields of the parameter *object: unknown*
 
-To validate the *comment* field, we need to check that it exists, and to ensure that it is of the type *string*.
+To validate the *comment* field, we need to check that it exists and to ensure that it is of the type *string*.
 
 The function should look something like this:
 
