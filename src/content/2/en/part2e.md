@@ -615,7 +615,7 @@ VITE_SOME_KEY=54l41n3n4v41m34rv0 npm start3 npm start // For Linux/macOS Bash
 set "VITE_SOME_KEY=54l41n3n4v41m34rv0" && npm start // For Windows cmd.exe
 ```
 
-you can access the value of the key from the _process.env_ object:
+you can access the value of the key from the _import.meta.env_ object:
 
 ```js
 const api_key = import.meta.env.VITE_SOME_KEY
