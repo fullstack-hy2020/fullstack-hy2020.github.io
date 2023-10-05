@@ -282,7 +282,7 @@ Kurssilla ei ole enää vuosittaisia versiota. Kurssi on siis käynnissä koko a
 Muutoksista huolimatta <i>kaikki jo tehdyt palautukset säilyvät voimassa</i>, eli voit jatkaa kurssia päivityksistä huolimatta normaaliin tapaan.
 
 Viimeaikaisia isompia muutoksia
-- Osat 1-8 (11-24.9.2023): Create React app korvattu Vitellä
+- Osat 1-9 (11.9-5.10.2023): Create React app korvattu Vitellä
 
 ### Aiemmin suoritetun kurssin täydentäminen
 
