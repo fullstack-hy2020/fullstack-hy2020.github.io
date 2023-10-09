@@ -331,10 +331,10 @@ const Login = (props) => {
       <h2>login</h2>
       <form onSubmit={onSubmit}>
         <div>
-          <TextField label="username" />
+          <TextField variant='standard' label="username" />
         </div>
         <div>
-          <TextField label="password" type='password' />
+          <TextField variant='standard' label="password" type='password' />
         </div>
         <div>
           <Button variant="contained" color="primary" type="submit">
