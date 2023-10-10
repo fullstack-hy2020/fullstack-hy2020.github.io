@@ -297,17 +297,17 @@ test('clicking the button calls event handler once', async () => {
     important: true
   }
 
-  const mockHandler = jest.fn()
+  const mockHandler = jest.fn()  // highlight-line
 
   render(
-    <Note note={note} toggleImportance={mockHandler} />
+    <Note note={note} toggleImportance={mockHandler} />  // highlight-line
   )
 
-  const user = userEvent.setup()
-  const button = screen.getByText('make not important')
-  await user.click(button)
+  const user = userEvent.setup()  // highlight-line
+  const button = screen.getByText('make not important')  // highlight-line
+  await user.click(button)  // highlight-line
 
-  expect(mockHandler.mock.calls).toHaveLength(1)
+  expect(mockHandler.mock.calls).toHaveLength(1)  // highlight-line
 })
 ```
 
