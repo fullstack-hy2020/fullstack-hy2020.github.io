@@ -45,7 +45,7 @@ The <i>index.html</i> file located at the root of the <i>dist</i> directory is t
 </html>
 ```
 
-As we can see from the example application that was created with Vite, the build script also bundles the application's CSS files into a single <i>/assets/index-d526a0c5.csss</i> file.
+As we can see from the example application that was created with Vite, the build script also bundles the application's CSS files into a single <i>/assets/index-d526a0c5.css</i> file.
 
 In practice, bundling is done so that we define an entry point for the application, which typically is the <i>index.js</i> file. When webpack bundles the code, it includes all of the code that the entry point imports, the code that its imports import, and so on.
 
