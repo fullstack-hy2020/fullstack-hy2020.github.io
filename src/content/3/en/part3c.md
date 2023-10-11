@@ -57,7 +57,7 @@ All of the application's <i>console.log</i> messages will appear in the <i>Conso
 
 Debugging Full Stack applications may seem tricky at first. Soon our application will also have a database in addition to the frontend and backend, and there will be many potential areas for bugs in the application.
 
-When the application "does not work", we have to first figure out where the problem actually occurs. It's very common for the problem to exist in a place where you didn't expect it to, and it can take minutes, hours, or even days before you find the source of the problem.
+When the application "does not work", we have to first figure out where the problem actually occurs. It's very common for the problem to exist in a place where you didn't expect it, and it can take minutes, hours, or even days before you find the source of the problem.
 
 The key is to be systematic. Since the problem can exist anywhere, <i>you must question everything</i>, and eliminate all possibilities one by one. Logging to the console, Postman, debuggers, and experience will help.
 
@@ -103,7 +103,7 @@ Finally, we are ready to connect to our database. Start by clicking <i>connect</
 
 ![mongodb database deployment connect](../../images/3/mongo5.png)
 
-and choose: <i>Connect your application</i>:
+and choose: <i>Connect to your application</i>:
 
 ![mongodb connect application](../../images/3/mongo6.png)
 
@@ -127,7 +127,7 @@ Let's install Mongoose in our notes project backend:
 npm install mongoose
 ```
 
-Let's not add any code dealing with Mongo to our backend just yet. Instead, let's make a practice application by creating a new file, <i>mongo.js</i>:
+Let's not add any code dealing with Mongo to our backend just yet. Instead, let's make a practice application by creating a new file, <i>mongo.js</i> in the root of the notes backend application:
 
 ```js
 const mongoose = require('mongoose')
@@ -171,7 +171,7 @@ The code also assumes that it will be passed the password from the credentials w
 const password = process.argv[2]
 ```
 
-When the code is run with the command <i>node mongo.js password</i>, Mongo will add a new document to the database.
+When the code is run with the command <i>node mongo.js yourPassword</i>, Mongo will add a new document to the database.
 
 **NB:** Please note the password is the password created for the database user, not your MongoDB Atlas password.  Also, if you created a password with special characters, then you'll need to [URL encode that password](https://docs.atlas.mongodb.com/troubleshoot-connection/#special-characters-in-connection-string-password).
 
