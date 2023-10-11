@@ -37,7 +37,7 @@ The course contains fourteen parts, the first of which is numbered 0 for consist
 
 Proceeding from part <i>n</i> to part <i>n+1</i> is not sensible before enough know-how of the topics in part <i>n</i> has been achieved. In pedagogic terms, the course uses [Mastery Learning](https://en.wikipedia.org/wiki/Mastery_learning), and you are only intended to proceed to the next part after doing enough of the exercises of the previous part.
 
-In parts 1-4 you are expected to do <i>at least</i> all of the exercises that are not marked with an asterisk(*). Exercises marked with an asterisk count towards your final grade, but skipping them does not prevent you from doing the compulsory exercises in the next parts. Parts 5-13 do not have asterisk marked exercises since there is no similar dependency on previous parts.
+In parts 1-4 you are expected to do <strong>all</strong> of the exercises that are marked with an asterisk(*). Exercises marked with an asterisk count towards your final grade, but skipping them does not prevent you from doing the compulsory exercises in the next parts. Parts 5-13 do not have asterisk marked exercises since there is no similar dependency on previous parts.
 
 The speed of completing the course is flexible.
 
