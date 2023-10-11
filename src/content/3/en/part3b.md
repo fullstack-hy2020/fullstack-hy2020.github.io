@@ -10,7 +10,7 @@ lang: en
 Next, let's connect the frontend we made in [part 2](/en/part2) to our own backend.
 
 In the previous part, the frontend could ask for the list of notes from the json-server we had as a backend, from the address <http://localhost:3001/notes>.
-Our backend has a slightly different URL structure now, as the notes can be found at <http://localhost:3001/api/notes>. Let's change the attribute __baseUrl__ in the <i>src/services/notes.js</i> like so:
+Our backend has a slightly different URL structure now, as the notes can be found at <http://localhost:3001/api/notes>. Let's change the attribute __baseUrl__ in the frontend notes app at <i>src/services/notes.js</i> like so:
 
 ```js
 import axios from 'axios'
@@ -44,7 +44,7 @@ host: example.com
 port: 80
 ```
 
-When you visit a website (i.e <http://catwebsites.com>), the browser issues a request to the server on which the website (catwebsites.com) is hosted. The response sent by the server is an HTML file that may contain one or more references to external assets/resources hosted either on the same server that <i>catwebsites.com</i> is hosted on or a different website. When the browser sees reference(s) to a URL in the source HTML, it issues a request. If the request is issued using the URL that the source HTML was fetched from, then the browser processes the response without any issues. However, if the resource is fetched using a URL that doesn't share the same origin(scheme, host, port) as the source HTML, the browser will have to check the _Access-Control-Allow-origin_ response header. If it contains _*_ or the URL of the source HTML, the browser will process the response, otherwise the browser will refuse to process it and throw an error.
+When you visit a website (i.e <http://catwebsites.com>), the browser issues a request to the server on which the website (catwebsites.com) is hosted. The response sent by the server is an HTML file that may contain one or more references to external assets/resources hosted either on the same server that <i>catwebsites.com</i> is hosted on or a different website. When the browser sees reference(s) to a URL in the source HTML, it issues a request. If the request is issued using the URL that the source HTML was fetched from, then the browser processes the response without any issues. However, if the resource is fetched using a URL that doesn't share the same origin(scheme, host, port) as the source HTML, the browser will have to check the _Access-Control-Allow-origin_ response header. If it contains _*_ or the URL of the source HTML, the browser will process the response, otherwise the browser will refuse to process it and throws an error.
   
 The <strong>same-origin policy</strong> is a security mechanism implemented by browsers in order to prevent session hijacking among other security vulnerabilities.
 
@@ -87,7 +87,7 @@ The react app running in the browser now fetches the data from node/express-serv
 
 Now that the whole stack is ready, let's move our application to the internet.
 
-There are an ever-growing number of services that can be used to host an app on the internet. The developer-friendly services like PaaS (i.e. Platform as a Service) take care of installing the execution environment (eg. Node.js) and could also provide various services such as databases.
+There is an ever-growing number of services that can be used to host an app on the internet. The developer-friendly services like PaaS (i.e. Platform as a Service) take care of installing the execution environment (eg. Node.js) and could also provide various services such as databases.
 
 For a decade, [Heroku](http://heroku.com) was dominating the PaaS scene. Unfortunately the free tier Heroku ended at 27th November 2022. This is very unfortunate for many developers, especially students. Heroku is still very much a viable option if you are willing to spend some money. They also have [a student program](https://www.heroku.com/students) that provides some free credits.
 
@@ -107,7 +107,7 @@ Some course participants have also used the following
 
 If you know some other good and easy-to-use services for hosting NodeJS, please let us know!
 
-For both Fly.io and Render, we need to change the definition of the port our application uses at the bottom of the <i>index.js</i> file like so:
+For both Fly.io and Render, we need to change the definition of the port our application uses at the bottom of the <i>index.js</i> file in the backend like so:
 
 ```js
 const PORT = process.env.PORT || 3001  // highlight-line
@@ -132,7 +132,7 @@ Start by [authenticating](https://fly.io/docs/hands-on/sign-in/) via the command
 fly auth login
 ```
 
-*Note* if the command _fly_ does not work on your machine, you can try the longer version _flyctl_. Eg. on MacOS, both forms of the command work.
+Note if the command _fly_ does not work on your machine, you can try the longer version _flyctl_. Eg. on MacOS, both forms of the command work.
 
 <i>If you do not get the flyctl to work in your machine, you could try Render (see next section), it does not require anything to be installed in your machine.</i>
 
@@ -163,7 +163,7 @@ Fly.io creates a file <i>fly.toml</i> in the root of your app where the app is c
   processes = ["app"]
 ```
 
-We have now defined in the part [env] that environment variable PORT will get the correct port (defined in part [services]) where the app should create the server. Note that the definition might be already there, but some times it has been missing.
+We have now defined in the part [env] that environment variable PORT will get the correct port (defined in part [http_service]) where the app should create the server. Note that the definition might be already there, but some times it has been missing.
 
 We are now ready to deploy the app to the Fly.io servers. That is done with the following command:
 
@@ -179,9 +179,9 @@ fly open
 
 A particularly important command is _fly logs_. This command can be used to view server logs. It is best to keep logs always visible!
 
-**Note:** If you are using Fly.io, Fly may create 2 machines for your app, if it does then the state of the data in your app will be inconsistent between requests, i.e. you would have two machines each with there own notes variable, you could POST to one machine then your next GET could go to another. you can check the number of machines by using the command "$ fly scale show", if the COUNT is greater than 1 then you can enforce it to be 1 with the command "$ fly scale count 1". The machine count can also be checked on the dashboard.
+**Note:** If you are using Fly.io, Fly may create 2 machines for your app, if it does then the state of the data in your app will be inconsistent between requests, i.e. you would have two machines each with its own notes variable, you could POST to one machine then your next GET could go to another machine. You can check the number of machines by using the command "$ fly scale show", if the COUNT is greater than 1 then you can enforce it to be 1 with the command "$ fly scale count 1". The machine count can also be checked on the dashboard.
 
-**Note:** In some cases (the cause is so far unknown) running Fly.io commands especially on Windows WSL has caused problems. If the following command just hangs
+**Note:** In some cases (the cause is so far unknown) running Fly.io commands especially on Windows WSL (Windows Subsystem for Linux) has caused problems. If the following command just hangs
 
 ```bash
 flyctl ping -o personal
@@ -220,7 +220,7 @@ The app repository is then connected to Render:
 
 ![Image showing the application repository on Render.](../../images/3/r2.png)
 
-The connecting seem to require that the app repository is public.
+The connection seems to require that the app repository is public.
 
 Next we will define the basic configurations. If the app is <i>not</i> at the root of the repository the <i>Root directory</i> needs to be given a proper value:
 
@@ -232,15 +232,15 @@ After this, the app starts up in the Render. The dashboard tells us the app stat
 
 According to the [documentation](https://render.com/docs/deploys) every commit to GitHub should redeploy the app. For some reason this is not always working.
 
-Fortunately it is also possible to manually redeploy the app:
+Fortunately, it is also possible to manually redeploy the app:
 
 ![Menu with the option to deploy latest commit highlighted](../../images/3/r5.png)
 
-Also the app logs can be seen in the dashboard:
+Also, the app logs can be seen in the dashboard:
 
 ![Image with the logs tab highlighted on the left corner. On the right side, the application logs](../../images/3/r7.png)
 
-We notice now from the logs that the app has been started in the port 10000. The app code gets the right port through the environment variable PORT so it is essential that the file <i>index.js</i> has been updated as follows:
+We notice now from the logs that the app has been started in the port 10000. The app code gets the right port through the environment variable PORT so it is essential that the file <i>index.js</i> has been updated in the backend as follows:
 
 ```js
 const PORT = process.env.PORT || 3001  // highlight-line
@@ -269,7 +269,7 @@ The minified code is not very readable. The beginning of the code looks like thi
 
 ### Serving static files from the backend
 
-One option for deploying the frontend is to copy the production build (the <i>build</i> directory) to the root of the backend repository and configure the backend to show the frontend's <i>main page</i> (the file <i>build/index.html</i>) as its main page.
+One option for deploying the frontend is to copy the production build (the <i>dist</i> directory) to the root of the backend repository and configure the backend to show the frontend's <i>main page</i> (the file <i>dist/index.html</i>) as its main page.
 
 We begin by copying the production build of the frontend to the root of the backend. With a Mac or Linux computer, the copying can be done from the frontend directory with the command
 
@@ -293,7 +293,7 @@ app.use(express.static('dist'))
 
 whenever express gets an HTTP GET request it will first check if the <i>dist</i> directory contains a file corresponding to the request's address. If a correct file is found, express will return it.
 
-Now HTTP GET requests to the address <i>www.serversaddress.com/index.html</i> or <i>www.serversaddress.com</i> will show the React frontend. GET requests to the address <i>www.serversaddress.com/api/notes</i> will be handled by the backend's code.
+Now HTTP GET requests to the address <i>www.serversaddress.com/index.html</i> or <i>www.serversaddress.com</i> will show the React frontend. GET requests to the address <i>www.serversaddress.com/api/notes</i> will be handled by the backend code.
 
 Because of our situation, both the frontend and the backend are at the same address, we can declare _baseUrl_ as a [relative](https://www.w3.org/TR/WD-html40-970917/htmlweb.html#h-5.1.2) URL. This means we can leave out the part declaring the server.
 
@@ -338,9 +338,9 @@ When we use a browser to go to the address <http://localhost:3001>, the server r
 
 ```
 
-The file contains instructions to fetch a CSS stylesheet defining the styles of the application, and two <i>script</i> tags that instruct the browser to fetch the JavaScript code of the application - the actual React application.
+The file contains instructions to fetch a CSS stylesheet defining the styles of the application, and one <i>script</i> tag that instructs the browser to fetch the JavaScript code of the application - the actual React application.
 
-The React code fetches notes from the server address <http://localhost:3001/api/notes> and renders them to the screen. The communications between the server and the browser can be seen in the <i>Network</i> tab of the developer console:
+The React code fetches notes from the server address <http://localhost:3001/api/notes> and renders them to the screen. The communication between the server and the browser can be seen in the <i>Network</i> tab of the developer console:
 
 ![Network tab of notes application on backend](../../images/3/29new.png)
 
@@ -374,7 +374,7 @@ Our application saves the notes to a variable. If the application crashes or is 
 
 The application needs a database. Before we introduce one, let's go through a few things.
 
-The setup looks like now as follows:
+The setup now looks like as follows:
 
 ![diagram of react app on heroku with a database](../../images/3/102.png)
 
@@ -386,7 +386,7 @@ To create a new production build of the frontend without extra manual work, let'
 
 #### Fly.io script
 
-The script looks like this
+The script looks like this:
 
 ```json
 {
@@ -409,9 +409,9 @@ Note that the standard shell commands in `build:ui` do not natively work in Wind
 If the script does not work on Windows, confirm that you are using Powershell and not Command Prompt. If you have installed Git Bash or another Linux-like terminal, you may be able to run Linux-like commands on Windows as well.
 
 
-The script _npm run build:ui_ builds the frontend and copies the production version under the backend repository.  _npm run deploy_ releases the current backend to Fly.io.
+The script _npm run build:ui_ builds the frontend and copies the production version under the backend repository. The script _npm run deploy_ releases the current backend to Fly.io.
 
-_npm run deploy:full_ combines these two scripts.
+_npm run deploy:full_ combines these two scripts, i.e., _npm run build:ui_ and _npm run deploy_.
 
 There is also a script _npm run logs:prod_ to show the Fly.io logs.
 
@@ -484,9 +484,9 @@ export default defineConfig({
 
 After a restart, the React development environment will work as a [proxy](https://vitejs.dev/config/server-options.html#server-proxy). If the React code does an HTTP request to a server address at <i><http://localhost:3000></i> not managed by the React application itself (i.e. when requests are not about fetching the CSS or JavaScript of the application), the request will be redirected to the server at <i><http://localhost:3001></i>.
 
-Now the frontend is also fine, working with the server both in development- and production mode.
+Now the frontend is also fine, working with the server both in development and production mode.
 
-A negative aspect of our approach is how complicated it is to deploy the frontend. Deploying a new version requires generating a new production build of the frontend and copying it to the backend repository. This makes creating an automated [deployment pipeline](https://martinfowler.com/bliki/DeploymentPipeline.html) more difficult. Deployment pipeline means an automated and controlled way to move the code from the computer of the developer through different tests and quality checks to the production environment. Building a deployment pipeline is the topic of [part 11](https://fullstackopen.com/en/part11) of this course. There are multiple ways to achieve this (for example placing both backend and frontend code in the same repository but we will not go into those now.
+A negative aspect of our approach is how complicated it is to deploy the frontend. Deploying a new version requires generating a new production build of the frontend and copying it to the backend repository. This makes creating an automated [deployment pipeline](https://martinfowler.com/bliki/DeploymentPipeline.html) more difficult. Deployment pipeline means an automated and controlled way to move the code from the computer of the developer through different tests and quality checks to the production environment. Building a deployment pipeline is the topic of [part 11](https://fullstackopen.com/en/part11) of this course. There are multiple ways to achieve this, for example, placing both backend and frontend code in the same repository but we will not go into those now.
 
 In some situations, it may be sensible to deploy the frontend code as its own application.
 
@@ -524,7 +524,7 @@ You shall NOT be deploying the frontend directly at any stage of this part. It i
 
 Generate a production build of your frontend, and add it to the internet application using the method introduced in this part.
 
-**NB** If you use Render, make sure the directory <i>build</i> is not gitignored
+**NB** If you use Render, make sure the directory <i>dist</i> is not gitignored
 
 Also, make sure that the frontend still works locally (in development mode when started with command _npm run dev_).
 
