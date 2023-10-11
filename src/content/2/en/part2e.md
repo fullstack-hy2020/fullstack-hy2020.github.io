@@ -610,9 +610,9 @@ If you use Open weather map, [here](https://openweathermap.org/weather-condition
 Assuming the api-key is <i>54l41n3n4v41m34rv0</i>, when the application is started like so:
 
 ```bash
-VITE_SOME_KEY=54l41n3n4v41m34rv0 npm start3 npm start // For Linux/macOS Bash
-($env:VITE_SOME_KEY="54l41n3n4v41m34rv0") -and (npm start) // For Windows PowerShell
-set "VITE_SOME_KEY=54l41n3n4v41m34rv0" && npm start // For Windows cmd.exe
+VITE_SOME_KEY=54l41n3n4v41m34rv0 && npm run dev// For Linux/macOS Bash
+($env:VITE_SOME_KEY="54l41n3n4v41m34rv0") -and (npm run dev) // For Windows PowerShell
+set "VITE_SOME_KEY=54l41n3n4v41m34rv0" && npm run dev // For Windows cmd.exe
 ```
 
 you can access the value of the key from the _import.meta.env_ object:
