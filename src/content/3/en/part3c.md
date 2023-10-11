@@ -789,7 +789,7 @@ The execution order of middleware is the same as the order that they are loaded 
 The correct order is the following:
 
 ```js
-app.use(express.static('build'))
+app.use(express.static('dist'))
 app.use(express.json())
 app.use(requestLogger)
 
