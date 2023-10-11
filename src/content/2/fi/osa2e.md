@@ -562,7 +562,7 @@ On kuitenkin tilanteita, missä vastaava tekniikka ei onnistu. Esim. eräs tapa 
 
 <h4>2.18* maiden tiedot, step1</h4>
 
-Siirrtyään osan lopuksi hieman toisenlaiseen teemaan.
+Siirrytään osan lopuksi hieman toisenlaiseen teemaan.
 
 Osoitteesta [https://studies.cs.helsinki.fi/restcountries/](https://studies.cs.helsinki.fi/restcountries/) löytyy palvelu, joka tarjoaa paljon eri maihin liittyvää tietoa koneluettavassa muodossa ns. REST API:n välityksellä. Tee sovellus, jonka avulla voit tarkastella eri maiden tietoja.
 
