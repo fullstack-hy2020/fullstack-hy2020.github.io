@@ -29,9 +29,9 @@ Konsoli kertoo että sovellus on käynnistynyt localhostin porttiin 5173, eli os
 
 ![](../../images/1/1-vite1.png)
 
-Vite käynnistää sovelluksen [oletusarvoisesti](https://vitejs.dev/config/server-options.html#server-port) porttiin 5173. Jos se ei ole vapaana, käyttä Vite seuraavaa vapaata porttinumeroa.
+Vite käynnistää sovelluksen [oletusarvoisesti](https://vitejs.dev/config/server-options.html#server-port) porttiin 5173. Jos se ei ole vapaana, käyttää Vite seuraavaa vapaata porttinumeroa.
 
-Avataan selan sekä tekstieditori siten, että näet koodin ja web-sivun samaan aikaan ruudulla:
+Avataan selain sekä tekstieditori siten, että näet koodin ja web-sivun samaan aikaan ruudulla:
 
 ![](../../images/1/1-vite4.png)
 
