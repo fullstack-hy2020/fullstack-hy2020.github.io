@@ -279,7 +279,7 @@ xhttp.onreadystatechange = function() {
 
 El mecanismo de invocación de controladores de eventos es muy común en JavaScript. Las funciones del controlador de eventos se denominan funciones [callback](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function). El código de la aplicación no invoca las funciones en sí, sino el entorno de ejecución -el navegador-, invoca la función en el momento adecuado, cuando se ha producido el <i>evento</i>.
 
-### Modelo de Objeto de Documento o DOM
+### Modelo de Objetos del Documento o DOM
 
 Podemos pensar en las páginas HTML como estructuras de árbol implícitas.
 
@@ -464,7 +464,7 @@ Los datos se envían como el [cuerpo](https://developer.mozilla.org/en-US/docs/W
 
 El servidor puede acceder a los datos accediendo al campo <em>req.body</em> del objeto de solicitud <em>req</em>.
 
-El servidor crea un nuevo objeto de nota y lo agrega a una matriz llamada <em>notes</em>.
+El servidor crea un nuevo objeto de nota y lo agrega a un arreglo llamado <em>notes</em>.
 
 ```js
 notes.push({ 
