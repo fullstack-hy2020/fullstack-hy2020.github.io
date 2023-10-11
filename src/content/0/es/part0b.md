@@ -599,7 +599,7 @@ El estado de React parece sólido, pero el mundo de JavaScript cambia constantem
 
 Prácticamente todas las aplicaciones web tienen (al menos) dos "capas": el navegador, al estar más cerca del usuario final, es la capa superior y el servidor, la inferior. A menudo también hay una capa de base de datos debajo del servidor. Por lo tanto, podemos pensar en la <i>arquitectura</i> de una aplicación web como una especie de <i>stack (pila)</i> de capas.
 
-A menudo, también hablamos sobre el [frontend](https://en.wikipedia.org/wiki/Front_and_back_ends) y el [backend](https://en.wikipedia.org/wiki/Front_and_back_ends). El navegador es la interfaz y JavaScript que se ejecuta en el navegador es el código de la interfaz. El servidor, por otro lado, es el backend.
+A menudo, también hablamos sobre el [frontend](https://en.wikipedia.org/wiki/Front_and_back_ends) y el [backend](https://en.wikipedia.org/wiki/Front_and_back_ends). El navegador es la interfaz y JavaScript que se ejecuta en el navegador es el código de frontend. El servidor, por otro lado, es el backend.
 
 En el contexto de este curso, el desarrollo web full stack significa que nos enfocamos en todas las partes de la aplicación: el frontend, el backend y la base de datos. A veces, el software del servidor y su sistema operativo se ven como parte del stack, pero no vamos a entrar en ellos.
 
