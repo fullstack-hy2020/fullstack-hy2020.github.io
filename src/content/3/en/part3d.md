@@ -292,13 +292,13 @@ It is recommended to create a separate _npm script_ for linting:
 
 Now the _npm run lint_ command will check every file in the project.
 
-Also the files in the <em>build</em> directory get checked when the command is run. We do not want this to happen, and we can accomplish this by creating an [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) file in the project's root with the following contents:
+Also the files in the <em>dist</em> directory get checked when the command is run. We do not want this to happen, and we can accomplish this by creating an [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) file in the project's root with the following contents:
 
 ```bash
-build
+dist
 ```
 
-This causes the entire <em>build</em> directory to not be checked by ESlint.
+This causes the entire <em>dist</em> directory to not be checked by ESlint.
 
 Lint has quite a lot to say about our code:
 
