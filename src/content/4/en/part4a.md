@@ -18,7 +18,7 @@ Once we make the changes to the directory structure of our project, we will end 
 ```bash
 ├── index.js
 ├── app.js
-├── build
+├── dist
 │   └── ...
 ├── controllers
 │   └── notes.js
@@ -227,7 +227,7 @@ mongoose.connect(config.MONGODB_URI)
   })
 
 app.use(cors())
-app.use(express.static('build'))
+app.use(express.static('dist'))
 app.use(express.json())
 app.use(middleware.requestLogger)
 
@@ -307,7 +307,7 @@ To recap, the directory structure looks like this after the changes have been ma
 ```bash
 ├── index.js
 ├── app.js
-├── build
+├── dist
 │   └── ...
 ├── controllers
 │   └── notes.js
