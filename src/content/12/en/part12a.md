@@ -392,7 +392,7 @@ hopeful_clarke
 
 Create a file <i>index.js</i> to your current directory and write _console.log('Hello, World')_ inside it. No need for containers yet.
 
-Next, let's skip installing Node altogether. There are plenty of useful Docker images in Docker Hub ready for our use. Let's use the image [https://hub.docker.com/_/Node](https://hub.docker.com/_/Node), which has Node already installed. We only need to pick a version.
+Next, let's skip installing Node altogether. There are plenty of useful Docker images in Docker Hub ready for our use. Let's use the image [https://hub.docker.com/_/node](https://hub.docker.com/_/node), which has Node already installed. We only need to pick a version.
 
 By the way, the _container run_ accepts _--name_ flag that we can use to give a name for the container.
 
