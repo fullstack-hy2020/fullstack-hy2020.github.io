@@ -1222,7 +1222,7 @@ La aplicación se puede iniciar como de costumbre, pero primero debe instalar la
 
 ```bash
 npm install
-npm start
+npm run dev
 ```
 
 
