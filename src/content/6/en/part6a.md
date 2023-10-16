@@ -1202,7 +1202,7 @@ The application can be started as usual, but you have to install the dependencie
 
 ```bash
 npm install
-npm start
+npm run dev
 ```
 
 After completing these exercises, your application should look like this:

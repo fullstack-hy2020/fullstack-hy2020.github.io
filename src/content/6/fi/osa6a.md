@@ -1188,7 +1188,7 @@ Sovellus käynnistyy normaaliin tapaan, mutta joudut ensin asentamaan sen riippu
 
 ```bash
 npm install
-npm start
+npm run dev
 ```
 
 Kun teet seuraavat tehtävät, tulisi sovelluksen näyttää seuraavalta:
