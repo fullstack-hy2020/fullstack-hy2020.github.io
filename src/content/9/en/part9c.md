@@ -651,10 +651,10 @@ For example, consider a page for listing some data, some of which is sensitive a
 We might want to be sure that no sensitive data is used or displayed. We could <i>pick</i> the fields of a type we allow to be used to enforce this.
 We can do that by using the utility type [Pick](https://www.typescriptlang.org/docs/handbook/utility-types.html#picktype-keys).
 
-In our project, we should consider that Ilari might want to create a listing of all his diary entries <i>excluding</i> the comment field since, during a very scary flight, he might end up writing something he wouldn't necessarily want to show anyone else.
+In our project, we should consider that Ilari might want to create a listing of all his diary entries <i>excluding</i> the comment field since, during a very scary flight, he might end up writing something he wouldn't necessarily want to show to anyone else.
 
 The [Pick](https://www.typescriptlang.org/docs/handbook/utility-types.html#picktype-keys) utility type allows us to choose which fields of an existing type we want to use.
-Pick can be used to either construct a completely new type or to inform a function that it should return on runtime.
+Pick can be used to either construct a completely new type or to inform a function of what it should return on runtime.
 Utility types are a special kind of type, but they can be used just like regular types.
 
 In our case, to create a "censored" version of the *DiaryEntry* for public displays, we can use *Pick* in the function declaration:
