@@ -433,7 +433,7 @@ The current code for the application is in its entirety on [GitHub](https://gith
 
 ### Connection between the tables
 
-Users can now be added to the application and users can log in, but this in itself this is not a very useful feature yet. We would like to add the features that only a logged-in user can add notes, and that each note is associated with the user who created it. To do this, we need to add a <i>foreign key</i> to the <i>notes</i> table.
+Users can now be added to the application and users can log in, but this in itself is not a very useful feature yet. We would like to add the features that only a logged-in user can add notes, and that each note is associated with the user who created it. To do this, we need to add a <i>foreign key</i> to the <i>notes</i> table.
 
 When using Sequelize, a foreign key can be defined by modifying the <i>models/index.js</i> file as follows
 
