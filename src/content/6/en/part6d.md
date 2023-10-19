@@ -149,7 +149,7 @@ const App = () => {
 
   const result = useQuery({
     queryKey: ['notes'],
-    queryFn: getNotes // highlight-line
+    queryFn: ()=>getNotes // highlight-line
   })
 
   // ...
