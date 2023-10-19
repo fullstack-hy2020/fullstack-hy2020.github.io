@@ -1003,13 +1003,17 @@ app.get('/api/notes', (request, response) => {
 
 <!-- Now the handling of unknown endpoints is ordered <i>before the HTTP request handler</i>. Since the unknown endpoint handler responds to all requests with <i>404 unknown endpoint</i>, no routes or middleware will be called after the response has been sent by unknown endpoint middleware. The only exception to this is the error handler which needs to come at the very end, after the unknown endpoints handler. -->
 
-现在，未知端点的处理被安排在 <i>HTTP请求处理程序之前</i> 。由于未知端点处理程序对所有请求都以 <i>404 未知端点</i> 做出响应，因此在未知端点中间件发送响应后，不会调用任何路由或中间件。唯一的例外是错误处理程序，它需要放在未知端点处理程序之后的最后位置。
+现在，未知端点的处理被安排在 <i>HTTP请求处理程序之前</i> 。由于未知端点处理程序对所有请求都以 <i>404 unknown endpoint</i> 做出响应，因此在未知端点中间件发送响应后，不会调用任何路由或中间件。唯一的例外是错误处理程序，它需要放在未知端点处理程序之后的最后位置。
 
 ### Other operations
 
-Let's add some missing functionality to our application, including deleting and updating an individual note.
+<!-- Let's add some missing functionality to our application, including deleting and updating an individual note. -->
 
-The easiest way to delete a note from the database is with the [findByIdAndRemove](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndRemove) method:
+让我们为我们的应用程序添加一些目前缺失的功能，包括删除和更新单个笔记。
+
+<!-- The easiest way to delete a note from the database is with the [findByIdAndRemove](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndRemove) method: -->
+
+删除笔记最简单的方法是使用 [findByIdAndRemove](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndRemove) ：
 
 ```js
 app.delete('/api/notes/:id', (request, response, next) => {
@@ -1021,9 +1025,14 @@ app.delete('/api/notes/:id', (request, response, next) => {
 })
 ```
 
-In both of the "successful" cases of deleting a resource, the backend responds with the status code <i>204 no content</i>. The two different cases are deleting a note that exists, and deleting a note that does not exist in the database. The _result_ callback parameter could be used for checking if a resource actually was deleted, and we could use that information for returning different status codes for the two cases if we deemed it necessary. Any exception that occurs is passed onto the error handler.
+<!-- In both of the "successful" cases of deleting a resource, the backend responds with the status code <i>204 no content</i>. The two different cases are deleting a note that exists, and deleting a note that does not exist in the database. The _result_ callback parameter could be used for checking if a resource actually was deleted, and we could use that information for returning different status codes for the two cases if we deemed it necessary. Any exception that occurs is passed onto the error handler. -->
 
-The toggling of the importance of a note can be easily accomplished with the [findByIdAndUpdate](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate) method.
+在删除资源的两种“成功”情况下，后端都会以状态码 <i>204 no content</i> 做出响应。这两种不同的情况分别是删除数据库中存在的笔记和删除数据库中不存在的笔记。可以使用_result_ 回调参数来检查资源是否确实已被删除，如果需要，我们可以使用这些信息来返回不同的状态码来区分这两种情况。发生的任何异常都将传递到错误处理程序。
+
+
+<!-- The toggling of the importance of a note can be easily accomplished with the [findByIdAndUpdate](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate) method. -->
+
+修改笔记重要性可以使用 [findByIdAndUpdate](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate) 方法来完成。
 
 ```js
 app.put('/api/notes/:id', (request, response, next) => {
@@ -1042,15 +1051,25 @@ app.put('/api/notes/:id', (request, response, next) => {
 })
 ```
 
-In the code above, we also allow the content of the note to be edited. However, we will not support changing the creation date for obvious reasons.
+<!-- In the code above, we also allow the content of the note to be edited. However, we will not support changing the creation date for obvious reasons. -->
 
-Notice that the <em>findByIdAndUpdate</em> method receives a regular JavaScript object as its parameter, and not a new note object created with the <em>Note</em> constructor function.
+在以上代码中，我们允许笔记内容的修改。然而，出于明显的原因，我们不允许修改笔记的创建日期。
 
-There is one important detail regarding the use of the <em>findByIdAndUpdate</em> method. By default, the <em>updatedNote</em> parameter of the event handler receives the original document [without the modifications](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate). We added the optional <code>{ new: true }</code> parameter, which will cause our event handler to be called with the new modified document instead of the original.
+<!-- Notice that the <em>findByIdAndUpdate</em> method receives a regular JavaScript object as its parameter, and not a new note object created with the <em>Note</em> constructor function. -->
 
-After testing the backend directly with Postman and the VS Code REST client, we can verify that it seems to work. The frontend also appears to work with the backend using the database.
+注意，<em>findByIdAndUpdate</em> 方法接受一个常规的 JavaScript 对象作为参数，而不是 <em>Note</em> 构造器生成的新 note 对象。
+
+<!-- There is one important detail regarding the use of the <em>findByIdAndUpdate</em> method. By default, the <em>updatedNote</em> parameter of the event handler receives the original document [without the modifications](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate). We added the optional <code>{ new: true }</code> parameter, which will cause our event handler to be called with the new modified document instead of the original. -->
+
+关于 <em>findByIdAndUpdate</em> 方法有一个很重要的细节。默认情况下，事件处理程序的 <em>updatedNote</em> 参数接受的是 [未经修改的](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate) 原始文档。 我们添加了可选的 <code>{ new: true }</code> 参数，这使得事件处理程序在调用时获得了修改后的文档而非原始文档。
+
+<!-- After testing the backend directly with Postman and the VS Code REST client, we can verify that it seems to work. The frontend also appears to work with the backend using the database. -->
+
+在使用 Postman 和 VS Code REST 客户端直接测试后端之后，我们可以确认它似乎可以正常工作。前端似乎也能够与使用数据库的后端正常工作。
 
 You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5).
+
+你可以在[这个Github仓库](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5) 的 <i>part3-5</i> 分支中找到我们当前应用的全部代码。
 
 </div>
 
