@@ -810,7 +810,7 @@ Body:   {}
 
 <!-- Given malformed id as an argument, the <em>findById</em> method will throw an error causing the returned promise to be rejected. This will cause the callback function defined in the <em>catch</em> block to be called. -->
 
-在给定了格式不正确的 id 作为参数时，<em>findById</em> 方法将抛出错误，导致返回的承诺被拒绝。这将导致在<em>catch</em>块中定义的回调函数被调用。
+在给定了格式不正确的 id 作为参数时，<em>findById</em> 方法将抛出错误，导致返回的承诺被拒绝。这将导致在 <em>catch</em> 块中定义的回调函数被调用。
 
 <!-- Let's make some small adjustments to the response in the <em>catch</em> block: -->
 让我们对<em>catch</em>块中的响应做一些调整：
@@ -872,9 +872,13 @@ app.get('/api/notes/:id', (request, response) => {
 
 ### Moving error handling into middleware
 
-We have written the code for the error handler among the rest of our code. This can be a reasonable solution at times, but there are cases where it is better to implement all error handling in a single place. This can be particularly useful if we later on want to report data related to errors to an external error tracking system like [Sentry](https://sentry.io/welcome/).
+<!-- We have written the code for the error handler among the rest of our code. This can be a reasonable solution at times, but there are cases where it is better to implement all error handling in a single place. This can be particularly useful if we later on want to report data related to errors to an external error tracking system like [Sentry](https://sentry.io/welcome/). -->
 
-Let's change the handler for the <i>/api/notes/:id</i> route, so that it passes the error forward with the <em>next</em> function. The next function is passed to the handler as the third parameter:
+我们已经在我们的代码中编写了错误处理程序。有时这可以是一个合理的解决方案，但也有一些情况，最好将所有错误处理实现在一个地方。如果以后我们想要报告与错误相关的数据到外部错误跟踪系统，比如 [Sentry](https://sentry.io/welcome/)，这会特别有用。
+
+<!-- Let's change the handler for the <i>/api/notes/:id</i> route, so that it passes the error forward with the <em>next</em> function. The next function is passed to the handler as the third parameter: -->
+
+让我们更改处理 <i>/api/notes/:id</i> 的部分，以便它通过 <em>next</em> 函数将错误传递到下一个中间件。<em>next</em> 函数作为第三个参数传递给处理程序：
 
 ```js
 app.get('/api/notes/:id', (request, response, next) => { // highlight-line
@@ -890,9 +894,13 @@ app.get('/api/notes/:id', (request, response, next) => { // highlight-line
 })
 ```
 
-The error that is passed forwards is given to the <em>next</em> function as a parameter. If <em>next</em> was called without a parameter, then the execution would simply move onto the next route or middleware. If the <em>next</em> function is called with a parameter, then the execution will continue to the <i>error handler middleware</i>.
+<!-- The error that is passed forwards is given to the <em>next</em> function as a parameter. If <em>next</em> was called without a parameter, then the execution would simply move onto the next route or middleware. If the <em>next</em> function is called with a parameter, then the execution will continue to the <i>error handler middleware</i>. -->
 
-Express [error handlers](https://expressjs.com/en/guide/error-handling.html) are middleware that are defined with a function that accepts <i>four parameters</i>. Our error handler looks like this:
+错误作为参数被传递给 <em>next</em> 函数。如果 <em>next</em> 被调用时没有参数，那么将简单地继续执行下一个路由或中间件。如果 <em>next</em> 函数有参数，那么将执行 <i>错误处理中间件</i>。
+
+<!-- Express [error handlers](https://expressjs.com/en/guide/error-handling.html) are middleware that are defined with a function that accepts <i>four parameters</i>. Our error handler looks like this: -->
+
+Express的 [错误处理程序](https://expressjs.com/en/guide/error-handling.html) 是使用一个接受 <i>四个参数</i> 的函数来定义的中间件。我们的错误处理程序如下所示：
 
 ```js
 const errorHandler = (error, request, response, next) => {
@@ -905,13 +913,17 @@ const errorHandler = (error, request, response, next) => {
   next(error)
 }
 
-// this has to be the last loaded middleware.
+// 这必须是最后一个载入的中间件。
 app.use(errorHandler)
 ```
 
-The error handler checks if the error is a <i>CastError</i> exception, in which case we know that the error was caused by an invalid object id for Mongo. In this situation the error handler will send a response to the browser with the response object passed as a parameter. In all other error situations, the middleware passes the error forward to the default Express error handler.
+<!-- The error handler checks if the error is a <i>CastError</i> exception, in which case we know that the error was caused by an invalid object id for Mongo. In this situation the error handler will send a response to the browser with the response object passed as a parameter. In all other error situations, the middleware passes the error forward to the default Express error handler. -->
 
-Note that the error handling middleware has to be the last loaded middleware!
+错误处理程序检查错误是否是 <i>CastError</i> 异常，如果是，那么我们知道错误是由于 Mongo 的无效对象 id 引起的。在这种情况下，错误处理程序将使用作为参数传递的响应对象向浏览器发送响应。在所有其他错误情况下，中间件将错误传递给默认的 Express 错误处理程序。
+
+<!-- Note that the error handling middleware has to be the last loaded middleware! -->
+
+注意错误处理中间件必须是最后一个载入的中间件！
 
 ### The order of middleware loading
 
