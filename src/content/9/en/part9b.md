@@ -25,7 +25,7 @@ Let's start writing our first TypeScript app. To keep things simple, let's start
 You can install both <i>ts-node</i> and the official <i>typescript</i> package globally by running:
 
 ```bash
-npm install -g ts-node typescript
+npm install --location=global ts-node typescript
 ```
 
 If you can't or don't want to install global packages, you can create an npm project which has the required dependencies and run your scripts in it.
@@ -61,7 +61,7 @@ It is worth mentioning that TypeScript also provides an online playground, where
 
 #### A note about the coding style
 
-JavaScript is a quite relaxed language in itself, and things can often be done in multiple different ways. For example, we have named vs anonymous functions, using const and let or var, and the use of <i>semicolons</i>. This part of the course differs from the rest by using semicolons. It is not a TypeScript-specific pattern but a general coding style decision taken when creating any kind of JavaScript project. Whether to use them or not is usually in the hands of the programmer, but since it is expected to adapt one's coding habits to the existing codebase, you are expected to use semicolons and adjust to the coding style in the exercises for this part. This part has some other coding style differences compared to the rest of the course as well, e.g. in the directory naming conventions.
+JavaScript is a quite relaxed language in itself, and things can often be done in multiple different ways. For example, we have named vs anonymous functions, using const and let or var, and the optional use of <i>semicolons</i>. This part of the course differs from the rest by using semicolons. It is not a TypeScript-specific pattern but a general coding style decision taken when creating any kind of JavaScript project. Whether to use them or not is usually in the hands of the programmer, but since it is expected to adapt one's coding habits to the existing codebase, you are expected to use semicolons and adjust to the coding style in the exercises for this part. This part has some other coding style differences compared to the rest of the course as well, e.g. in the directory naming conventions.
 
 Let us add a configuration file *tsconfig.json* to the project with the following content:
 
@@ -87,7 +87,7 @@ multiplicator(2, 4, 'Multiplied numbers 2 and 4, the result is:');
 ```
 
 As you can see, this is still ordinary basic JavaScript with no additional TS features. It compiles and runs nicely with *npm run ts-node -- multiplier.ts*, as it would with Node.
-  
+
 But what happens if we end up passing the wrong <i>types</i> of arguments to the multiplicator function?
 
 Let's try it out!
@@ -108,7 +108,7 @@ This is where we see the first benefits of TypeScript.  Let's add types to the p
 
 TypeScript natively supports multiple types including *number*, *string* and *Array*. See the comprehensive list [here](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html). More complex custom types can also be created.
 
-The first two parameters of our function are the number and the string [primitives](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#the-primitives-string-number-and-boolean), respectively:
+The first two parameters of our function are of type number and the last one is of type string, both types are [primitives](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#the-primitives-string-number-and-boolean):
 
 ```js
 const multiplicator = (a: number, b: number, printText: string) => {
@@ -123,7 +123,7 @@ Now the code is no longer valid JavaScript but in fact TypeScript. When we try t
 ![terminal output showing error assigning string to number](../../images/9/2a.png)
 
 One of the best things about TypeScript's editor support is that you don't necessarily need to even run the code to see the issues.
-The VSCode plugin is so efficient, that it informs you immediately when you are trying to use an incorrect type:
+VSCode is so efficient, that it informs you immediately when you are trying to use an incorrect type:
 
 ![vscode showing same error about string as number](../../images/9/2.png)
 
@@ -188,10 +188,12 @@ const calculator = (a: number, b: number, op: Operation): number => { // highlig
 }
 ```
 
-The compiler complains straight away because, in one case, the function returns a string. There are a couple of ways to fix this. We could extend the return type to allow string values, like so:
+The compiler complains straight away because, in one case, the function returns a string. There are a couple of ways to fix this:
+
+We could extend the return type to allow string values, like so:
 
 ```js
-const calculator = (a: number, b: number, op: Operation): number | string =>  { 
+const calculator = (a: number, b: number, op: Operation): number | string =>  {
   // ...
 }
 ```
@@ -285,7 +287,7 @@ Here the narrowing was done with the [instanceof](https://www.typescriptlang.org
 
 The programs we have written are alright, but it sure would be better if we could use command-line arguments instead of always having to change the code to calculate different things.
 
-Let's try it out, as we would in a regular Node application, by accessing *process.argv*. If you are using a recent npm-version (7.0 or later), there are no problems but with an older setup something is not right:
+Let's try it out, as we would in a regular Node application, by accessing *process.argv*. If you are using a recent npm-version (7.0 or later), there are no problems, but with an older setup something is not right:
 
 ![vs code error cannot find name process need to install type definitions](../../images/9/5.png)
 
@@ -297,7 +299,7 @@ Let's return to the basic idea of TypeScript. TypeScript expects all globally-us
 
 As with npm, the TypeScript world also celebrates open-source code. The community is active and continuously reacting to updates and changes in commonly-used npm packages. You can almost always find the typings for npm packages, so you don't have to create types for all of your thousands of dependencies alone.
 
-Usually, types for existing packages can be found from the <i>@types</i> organization within npm, and you can add the relevant types to your project by installing an npm package with the name of your package with a @types/ prefix. For example:
+Usually, types for existing packages can be found from the <i>@types</i> organization within npm, and you can add the relevant types to your project by installing an npm package with the name of your package with a *@types/* prefix. For example:
 
 ```bash
 npm install --save-dev @types/react @types/express @types/lodash @types/jest @types/mongoose
@@ -373,8 +375,7 @@ it "works" but gives us the answer:
 Multiplied 5 and NaN, the result is: NaN
 ```
 
-The reason for this is, that *Number('lol')* returns *NaN*,
-which is actually of type *number*, so TypeScript has no power to rescue us from this kind of situation.
+The reason for this is, that *Number('lol')* returns *NaN*, which is actually of type *number*, so TypeScript has no power to rescue us from this kind of situation.
 
 To prevent this kind of behavior, we have to validate the data given to us from the command line.
 
@@ -456,16 +457,16 @@ The definition utilizes TypeScript's [Interface](https://www.typescriptlang.org/
 Note that there is also an alternative syntax for [arrays](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#arrays) in TypeScript. Instead of writing
 
 ```js
-let values: number[]; 
+let values: number[];
 ```
 
 we could use the "generics syntax" and write
 
 ```js
-let values: Array<number>; 
+let values: Array<number>;
 ```
 
-In this course we shall mostly be following the convention enforced by the Eslint rule [array-simple](https://typescript-eslint.io/rules/array-type/#array-simple) that suggests to write the simple arrays with the [] syntax and use the the <> syntax for the more complex ones, see [here](https://typescript-eslint.io/rules/array-type/#array-simple) for examples.
+In this course we shall mostly be following the convention enforced by the Eslint rule [array-simple](https://typescript-eslint.io/rules/array-type/#array-simple) that suggests to write the simple arrays with the [] syntax and use the <> syntax for the more complex ones.
 
 </div>
 
@@ -538,7 +539,8 @@ If you call the function with parameters *[3, 0, 2, 4.5, 0, 3, 1]* and *2*, it s
   rating: 2,
   ratingDescription: 'not too bad but could be better',
   target: 2,
-  average: 1.9285714285714286 }
+  average: 1.9285714285714286
+}
 ```
 
 Create an npm script, *npm run calculateExercises*, to call the function with hard-coded values.
@@ -566,7 +568,8 @@ $ npm run calculateExercises 2 1 0 2 4.5 0 3 1 0 4
   rating: 2,
   ratingDescription: 'not too bad but could be better',
   target: 2,
-  average: 1.7222222222222223 }
+  average: 1.7222222222222223
+}
 ```
 
 In the example, the <i>first argument</i> is the target value.
@@ -592,7 +595,7 @@ default export "this is the default..."
 
 Another note: somehow surprisingly TypeScript does not allow to define the same variable in many files at a "block-scope", that is, outside functions (or classes):
 
-![browser showing pong from localhost:3000/ping](../../images/9/60new.png)
+![vs code showing error cannot redeclare block-scoped variable x](../../images/9/60new.png)
 
 This is actually not quite true. This rule applies only to files that are treated as "scripts". A file is a script if it does not contain any export or import statements. If a file has those, then the file is treated as a [module](https://www.typescriptlang.org/docs/handbook/modules.html), <i>and</i> the variables do not get defined in the block-scope.
 
@@ -654,7 +657,7 @@ and then add the *start* script to package.json:
 }
 ```
 
-Now we can create the file <i>index.ts</i>, and write the HTTP GET *ping</i> endpoint to it:
+Now we can create the file <i>index.ts</i>, and write the HTTP GET *ping* endpoint to it:
 
 ```js
 const express = require('express');
@@ -697,7 +700,7 @@ npm install --save-dev @types/express
 
 And no more errors! Let's take a look at what changed.
 
-When we hover over the *require* statement, we can see the compiler interprets everything express-related to be of type *any*.
+When we hover over the *require* statement, we can see that the compiler interprets everything express-related to be of type *any*.
 
 ![vscode showing problem of implicitly having any type](../../images/9/8a.png)
 
@@ -833,7 +836,7 @@ Do not copy the calculator code to file <i>index.ts</i>; instead, make it a [Typ
 
 ### The horrors of *any*
 
-Now that we have our first endpoints completed, you might notice we have used barely any TypeScript in these small examples. When examining the code a bit closer, we can see a few dangers lurking there.
+Now that we have our first endpoints completed, you might notice that we have used barely any TypeScript in these small examples. When examining the code a bit closer, we can see a few dangers lurking there.
 
 Let's add the HTTP POST endpoint *calculate* to our app:
 
