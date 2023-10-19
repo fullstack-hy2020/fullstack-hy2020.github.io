@@ -724,7 +724,7 @@ app.get('/api/notes/:id', (request, response) => {
 <!-- Once we introduce a database into the mix, it is useful to inspect the state persisted in the database, e.g. from the control panel in MongoDB Atlas. Quite often little Node helper programs like the <i>mongo.js</i> program we wrote earlier can be very helpful during development.-->
  一旦我们引入数据库，检查数据库中持久化的状态是很有用的，例如从MongoDB Atlas的控制面板中。很多时候，像我们之前写的<i>mongo.js</i>程序这样的小Node辅助程序在开发过程中会很有帮助。
 
-<!-- You can find the code for our current application in its entirety in the <i>part3-4</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4).-->
+<!-- You can find the code for our current application in its entirety in the <i>part3-4</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4). -->
  你可以在[这个Github仓库](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4)的<i>part3-4</i>分支中找到我们当前应用的全部代码。
 
 </div>
@@ -1067,7 +1067,7 @@ app.put('/api/notes/:id', (request, response, next) => {
 
 在使用 Postman 和 VS Code REST 客户端直接测试后端之后，我们可以确认它似乎可以正常工作。前端似乎也能够与使用数据库的后端正常工作。
 
-You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5).
+<!-- You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5). -->
 
 你可以在[这个Github仓库](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5) 的 <i>part3-5</i> 分支中找到我们当前应用的全部代码。
 
@@ -1079,27 +1079,43 @@ You can find the code for our current application in its entirety in the <i>part
 
 #### 3.15: Phonebook database, step3
 
-Change the backend so that deleting phonebook entries is reflected in the database.
+<!-- Change the backend so that deleting phonebook entries is reflected in the database. -->
 
-Verify that the frontend still works after making the changes.
+更改后端，使删除电话簿条目会让数据库做出响应改变。
+
+<!-- Verify that the frontend still works after making the changes. -->
+
+验证前台在修改后是否仍能工作。
 
 #### 3.16: Phonebook database, step4
 
-Move the error handling of the application to a new error handler middleware.
+<!-- Move the error handling of the application to a new error handler middleware. -->
+
+将应用程序的错误处理移动到一个新的错误处理中间件。
 
 #### 3.17*: Phonebook database, step5
 
-If the user tries to create a new phonebook entry for a person whose name is already in the phonebook, the frontend will try to update the phone number of the existing entry by making an HTTP PUT request to the entry's unique URL.
+<!-- If the user tries to create a new phonebook entry for a person whose name is already in the phonebook, the frontend will try to update the phone number of the existing entry by making an HTTP PUT request to the entry's unique URL. -->
 
-Modify the backend to support this request.
+如果用户尝试为已经在电话簿中的人创建一个新的电话簿条目，前端将尝试通过向条目的唯一 URL发出 HTTP PUT 请求来更新现有条目的电话号码。
 
-Verify that the frontend works after making your changes.
+<!--  Modify the backend to support this request. -->
+
+修改后端以支持这个请求。
+
+<!-- Verify that the frontend works after making your changes.  -->
+
+验证前端在修改后是否仍能工作。
 
 #### 3.18*: Phonebook database step6
 
-Also update the handling of the <i>api/persons/:id</i> and <i>info</i> routes to use the database, and verify that they work directly with the browser, Postman, or VS Code REST client.
+<!-- Also update the handling of the <i>api/persons/:id</i> and <i>info</i> routes to use the database, and verify that they work directly with the browser, Postman, or VS Code REST client. -->
 
-Inspecting an individual phonebook entry from the browser should look like this:
+同时更新 <i>api/persons/:id</i> 和 <i>info</i> 路由的处理，以使用数据库，并验证它们是否可以直接与浏览器、Postman 或 VS Code REST 客户端一起工作。
+
+<!-- Inspecting an individual phonebook entry from the browser should look like this:  -->
+
+用浏览器检查单独的电话条目应该像这样：
 
 ![](../../images/3/49.png)
 
