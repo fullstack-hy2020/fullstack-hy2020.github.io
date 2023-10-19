@@ -75,7 +75,7 @@ const LoginForm = ({ setError, setToken }) => {
       setToken(token)
       localStorage.setItem('phonenumbers-user-token', token)
     }
-  }, [result.data]) // eslint-disable-line
+  }, [result.data])
 // highlight-end
 
   const submit = async (event) => {
@@ -218,8 +218,6 @@ const PersonForm = ({ setError }) => {
 }
 ```
 
-Current application code can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-6), branch <i>part8-6</i>.
-
 ### Updating cache, revisited
 
 We have to [update](/en/part8/react_and_graph_ql#updating-the-cache) the cache of the Apollo client on creating new persons. We can update it using the mutation's *refetchQueries* option to define that the
@@ -232,8 +230,7 @@ const PersonForm = ({ setError }) => {
   const [ createPerson ] = useMutation(CREATE_PERSON, {
     refetchQueries: [  {query: ALL_PERSONS} ], // highlight-line
     onError: (error) => {
-      const errors = error.graphQLErrors[0].extensions.error.errors
-      const messages = Object.values(errors).map(e => e.message).join('\n')
+      const messages = error.graphQLErrors.map(e => e.message).join('\n')
       setError(messages)
     }
   })
@@ -249,7 +246,8 @@ const PersonForm = ({ setError }) => {
 
   const [ createPerson ] = useMutation(CREATE_PERSON, {
     onError: (error) => {
-      setError(error.graphQLErrors[0].message)
+      const messages = error.graphQLErrors.map(e => e.message).join('\n')
+      setError(messages)
     },
     // highlight-start
     update: (cache, response) => {
@@ -269,17 +267,17 @@ const PersonForm = ({ setError }) => {
 The callback function is given a reference to the cache and the data returned by the mutation as parameters. For example, in our case, this would be the created person.
 
 Using the function [updateQuery](https://www.apollographql.com/docs/react/caching/cache-interaction/#using-updatequery-and-updatefragment) the code updates the
-query <em>ALL\_PERSONS</em> in cache by adding the new person to the cached data.
+query ALLPERSONS in the cache by adding the new person to the cached data.
 
 In some situations, the only sensible way to keep the cache up to date is using the *update* callback.
 
 When necessary, it is possible to disable cache for the whole application or [single queries](https://www.apollographql.com/docs/react/api/react/hooks/#options) by setting the field managing the use of cache, [fetchPolicy](https://www.apollographql.com/docs/react/data/queries/#configuring-fetch-logic) as <em>no-cache</em>.
 
-Be diligent with the cache. Old data in cache can cause hard-to-find bugs. As we know, keeping the cache up to date is very challenging. According to a coder proverb:
+Be diligent with the cache. Old data in the cache can cause hard-to-find bugs. As we know, keeping the cache up to date is very challenging. According to a coder proverb:
 
 > <i>There are only two hard things in Computer Science: cache invalidation and naming things.</i> Read more [here](https://martinfowler.com/bliki/TwoHardThings.html).
 
-The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-7), branch <i>part8-7</i>.
+The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-5), branch <i>part8-5</i>.
 
 </div>
 

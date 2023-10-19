@@ -48,6 +48,11 @@ export default App
 
 The initial code is on GitHub in the repository [https://github.com/fullstack-hy2020/query-notes](https://github.com/fullstack-hy2020/query-notes/tree/part6-0) in branch <i>part6-0</i>.
 
+**Note**: By default, cloning the repo will only give you the main branch. To get the initial code from the part6-0 branch, use the following command:
+```
+git clone --branch part6-0 https://github.com/fullstack-hy2020/query-notes.git
+```
+
 ### Managing data on the server with the React Query library
 
 We shall now use the [React Query](https://tanstack.com/query/latest) library to store and manage data retrieved from the server. The latest version of the library is also called TanStack Query, but we stick to the familiar name.
@@ -299,8 +304,8 @@ const App = () => {
 
   const newNoteMutation = useMutation(createNote, {
     onSuccess: (newNote) => {
-      const notes = queryClient.getQueryData('notes') // highlight-line
-      queryClient.setQueryData('notes', notes.concat(newNote)) // highlight-line
+      const notes = queryClient.getQueryData(['notes']) // highlight-line
+      queryClient.setQueryData(['notes'], notes.concat(newNote)) // highlight-line
     }
   })
   // ...

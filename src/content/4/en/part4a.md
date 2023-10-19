@@ -18,7 +18,7 @@ Once we make the changes to the directory structure of our project, we will end 
 ```bash
 ├── index.js
 ├── app.js
-├── build
+├── dist
 │   └── ...
 ├── controllers
 │   └── notes.js
@@ -54,22 +54,6 @@ The logger has two functions, __info__ for printing normal log messages, and __e
 
 Extracting logging into its own module is a good idea in more ways than one. If we wanted to start writing logs to a file or send them to an external logging service like [graylog](https://www.graylog.org/) or [papertrail](https://papertrailapp.com) we would only have to make changes in one place.
 
-The contents of the <i>index.js</i> file used for starting the application gets simplified as follows:
-
-```js
-const app = require('./app') // the actual Express application
-const config = require('./utils/config')
-const logger = require('./utils/logger')
-
-app.listen(config.PORT, () => {
-  logger.info(`Server running on port ${config.PORT}`)
-})
-```
-
-The <i>index.js</i> file only imports the actual application from the <i>app.js</i> file and then starts the application. The function _info_ of the logger-module is used for the console printout telling that the application is running.
-
-Now the Express app and the code taking care of the web server are separated from each other following the [best](https://dev.to/nermineslimane/always-separate-app-and-server-files--1nc7) [practices](https://nodejsbestpractices.com/sections/projectstructre/separateexpress). One of the advantages of this method is that the application can now be tested at the level of HTTP API calls without actually making calls via HTTP over the network, this makes the execution of tests faster.
-
 The handling of environment variables is extracted into a separate <i>utils/config.js</i> file:
 
 ```js
@@ -91,6 +75,22 @@ const config = require('./utils/config')
 
 logger.info(`Server running on port ${config.PORT}`)
 ```
+
+The contents of the <i>index.js</i> file used for starting the application gets simplified as follows:
+
+```js
+const app = require('./app') // the actual Express application
+const config = require('./utils/config')
+const logger = require('./utils/logger')
+
+app.listen(config.PORT, () => {
+  logger.info(`Server running on port ${config.PORT}`)
+})
+```
+
+The <i>index.js</i> file only imports the actual application from the <i>app.js</i> file and then starts the application. The function _info_ of the logger-module is used for the console printout telling that the application is running.
+
+Now the Express app and the code taking care of the web server are separated from each other following the [best](https://dev.to/nermineslimane/always-separate-app-and-server-files--1nc7) [practices](https://nodejsbestpractices.com/sections/projectstructre/separateexpress). One of the advantages of this method is that the application can now be tested at the level of HTTP API calls without actually making calls via HTTP over the network, this makes the execution of tests faster.
 
 The route handlers have also been moved into a dedicated module. The event handlers of routes are commonly referred to as <i>controllers</i>, and for this reason we have created a new <i>controllers</i> directory. All of the routes related to notes are now in the <i>notes.js</i> module under the <i>controllers</i> directory.
 
@@ -173,7 +173,7 @@ module.exports = notesRouter
 
 The module exports the router to be available for all consumers of the module.
 
-All routes are now defined for the router object, similar to what did before with the object representing the entire application.
+All routes are now defined for the router object, similar to what I did before with the object representing the entire application.
 
 It's worth noting that the paths in the route handlers have shortened. In the previous version, we had:
 
@@ -227,7 +227,7 @@ mongoose.connect(config.MONGODB_URI)
   })
 
 app.use(cors())
-app.use(express.static('build'))
+app.use(express.static('dist'))
 app.use(express.json())
 app.use(middleware.requestLogger)
 
@@ -307,7 +307,7 @@ To recap, the directory structure looks like this after the changes have been ma
 ```bash
 ├── index.js
 ├── app.js
-├── build
+├── dist
 │   └── ...
 ├── controllers
 │   └── notes.js

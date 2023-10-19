@@ -257,7 +257,7 @@ There is a fine difference in the parameters. <i>axios</i> is installed as a run
 
 Now we are ready to use Axios. Going forward, json-server is assumed to be running on port 3001.
 
-NB: To run json-server and your react app simultaneously, you may need to use two terminal windows. One to keep json-server running and the other to run react-app.
+NB: To run json-server and your react app simultaneously, you may need to use two terminal windows. One to keep json-server running and the other to run our React application.
 
 The library can be brought into use the same way other libraries, e.g. React, are, i.e., by using an appropriate <em>import</em> statement.
 
@@ -473,7 +473,7 @@ Now we can see more clearly that the function [useEffect](https://react.dev/refe
 
 So by default, the effect is <i>always</i> run after the component has been rendered. In our case, however, we only want to execute the effect along with the first render.
 
-The second parameter of <em>useEffect</em> is used to [specify how often the effect is run]https://react.dev/reference/react/useEffect#parameters). If the second parameter is an empty array <em>[]</em>, then the effect is only run along with the first render of the component.
+The second parameter of <em>useEffect</em> is used to [specify how often the effect is run](https://react.dev/reference/react/useEffect#parameters). If the second parameter is an empty array <em>[]</em>, then the effect is only run along with the first render of the component.
 
 There are many possible use cases for an effect hook other than fetching data from the server. However, this use is sufficient for us, for now.
 
@@ -495,7 +495,7 @@ useEffect(() => {
 }, [])
 ```
 
-A reference to an event handler function is assigned to the variable <em>eventHandler</em>. The promise returned by the <em>get</em> method of Axios is stored in the variable <em>promise</em>. The registration of the callback happens by giving the <em>eventHandler</em> variable, referring to the event-handler function, as a parameter to the <em>then</em> method of the promise. It isn't usually necessary to assign functions and promises to variables, and a more compact way of representing things, as seen further above, is sufficient.
+A reference to an event handler function is assigned to the variable <em>eventHandler</em>. The promise returned by the <em>get</em> method of Axios is stored in the variable <em>promise</em>. The registration of the callback happens by giving the <em>eventHandler</em> variable, referring to the event-handler function, as a parameter to the <em>then</em> method of the promise. It isn't usually necessary to assign functions and promises to variables, and a more compact way of representing things, as seen below, is sufficient.
 
 ```js
 useEffect(() => {
@@ -519,7 +519,7 @@ The configuration for the whole application has steadily grown more complex. Let
 
 ![diagram of composition of react app](../../images/2/18e.png)
 
-The JavaScript code making up our React application is run in the browser. The browser gets the JavaScript from the <i>React dev server</i>, which is the application that runs after running the command <em>npm start</em>. The dev-server transforms the JavaScript into a format understood by the browser. Among other things, it stitches together JavaScript from different files into one file. We'll discuss the dev-server in more detail in part 7 of the course.
+The JavaScript code making up our React application is run in the browser. The browser gets the JavaScript from the <i>React dev server</i>, which is the application that runs after running the command <em>npm run dev</em>. The dev-server transforms the JavaScript into a format understood by the browser. Among other things, it stitches together JavaScript from different files into one file. We'll discuss the dev-server in more detail in part 7 of the course.
 
 The React application running in the browser fetches the JSON formatted data from <i>json-server</i> running on port 3001 on the machine. The server we query the data from - <i>json-server</i> - gets its data from the file <i>db.json</i>.
 

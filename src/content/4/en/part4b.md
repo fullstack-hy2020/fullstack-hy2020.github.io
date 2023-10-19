@@ -21,7 +21,7 @@ The convention in Node is to define the execution mode of the application with t
 
 It is common practice to define separate modes for development and testing.
 
-Next, let's change the scripts in our <i>package.json</i> so that when tests are run, <i>NODE\_ENV</i> gets the value <i>test</i>:
+Next, let's change the scripts in our notes application <i>package.json</i> file, so that when tests are run, <i>NODE\_ENV</i> gets the value <i>test</i>:
 
 ```json
 {

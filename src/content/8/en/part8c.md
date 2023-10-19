@@ -285,7 +285,7 @@ Mutation: {
         throw new GraphQLError('Creating the user failed', {
           extensions: {
             code: 'BAD_USER_INPUT',
-            invalidArgs: args.name,
+            invalidArgs: args.username,
             error
           }
         })

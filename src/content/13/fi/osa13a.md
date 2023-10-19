@@ -155,7 +155,7 @@ Näin määriteltynä tietokantaan talletettu data sailyy ainoastaan niin kauan 
 
 #### psql-konsolin käyttöä
 
-Erityisesti relaatiotietokantaa käytettäessä on oleellista päästä tietokantaan käsiksi myös suoraan. Tapoja tähän on monia, on olemassa mm. useita erilaisia graafisia käyttöliittymiä, kuten [pgAdmin](https://www.pgadmin.org/). Käytetää nnyt kuitenkin Postgresin [psql](https://www.postgresql.org/docs/current/app-psql.html)-komentorivityökalua.
+Erityisesti relaatiotietokantaa käytettäessä on oleellista päästä tietokantaan käsiksi myös suoraan. Tapoja tähän on monia, on olemassa mm. useita erilaisia graafisia käyttöliittymiä, kuten [pgAdmin](https://www.pgadmin.org/). Käytetään nyt kuitenkin Postgresin [psql](https://www.postgresql.org/docs/current/app-psql.html)-komentorivityökalua.
 
 Kun konsoli on avattu, kokeillan psql:n tärkeintä komentoa _\d_, joka kertoo tietokannan sisällön:
 
@@ -177,7 +177,7 @@ CREATE TABLE notes (
 );
 ```
 
-Muutama huomio: sarake  <i>id </i> on määritelty <i>pääavaimeksi</i> (engl. primary key), eli sarakkeen arvon tulee olla jokaisella taulun rivillä uniikki ja arvo ei saa olla tyhjä. Tyypiksi sarakkeelle on määritelty [SERIAL](https://www.postgresql.org/docs/9.1/datatype-numeric.html#DATATYPE-SERIAL), joka ei ole todellinen tyyppi vaan lyhennysmerkintä sille, että kyseessä on kokonaislukuarvoinen sarake, jolle Postgres antaa automaattisesti uniikin, kasvavan arvon rivejä luotaessa. Tekstiarvoinen sarakke <i>content</i> on määritelty siten, että sille on pakko antaa arvo.
+Muutama huomio: sarake  <i>id </i> on määritelty <i>pääavaimeksi</i> (engl. primary key), eli sarakkeen arvon tulee olla jokaisella taulun rivillä uniikki ja arvo ei saa olla tyhjä. Tyypiksi sarakkeelle on määritelty [SERIAL](https://www.postgresql.org/docs/9.1/datatype-numeric.html#DATATYPE-SERIAL), joka ei ole todellinen tyyppi vaan lyhennysmerkintä sille, että kyseessä on kokonaislukuarvoinen sarake, jolle Postgres antaa automaattisesti uniikin, kasvavan arvon rivejä luotaessa. Tekstiarvoinen sarake <i>content</i> on määritelty siten, että sille on pakko antaa arvo.
 
 Katsotaan tilannetta konsolista käsin. Ensin komento _\d_, joka kertoo mitä tauluja kannassa on:
 
@@ -430,7 +430,7 @@ const { Sequelize, Model, DataTypes } = require('sequelize') // highlight-line
 const express = require('express')
 const app = express()
 
-const sequelize = new Sequelize(process.env.DATABASE_UR)
+const sequelize = new Sequelize(process.env.DATABASE_URL)
 
 // highlight-start
 class Note extends Model {}

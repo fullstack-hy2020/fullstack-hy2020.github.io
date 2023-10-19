@@ -37,7 +37,7 @@ The course contains fourteen parts, the first of which is numbered 0 for consist
 
 Proceeding from part <i>n</i> to part <i>n+1</i> is not sensible before enough know-how of the topics in part <i>n</i> has been achieved. In pedagogic terms, the course uses [Mastery Learning](https://en.wikipedia.org/wiki/Mastery_learning), and you are only intended to proceed to the next part after doing enough of the exercises of the previous part.
 
-In parts 1-4 you are expected to do <i>at least</i> all of the exercises that are not marked with an asterisk(*). Exercises marked with an asterisk count towards your final grade, but skipping them does not prevent you from doing the compulsory exercises in the next parts. Parts 5-13 do not have asterisk marked exercises since there is no similar dependency on previous parts.
+In parts 1-4 you are expected to do <strong>all</strong> of the exercises that are marked with an asterisk(*). Exercises marked with an asterisk count towards your final grade, but skipping them does not prevent you from doing the compulsory exercises in the next parts. Parts 5-13 do not have asterisk marked exercises since there is no similar dependency on previous parts.
 
 The speed of completing the course is flexible.
 
@@ -198,7 +198,7 @@ The exercises are submitted through GitHub and marking them as done on the "my s
 
 If you are submitting exercises from different parts to the same repository, use an appropriate system for naming your directories. You can of course create a new repository for each part. If you are using a private repository, add <i>mluukkai</i> as a collaborator.
 
-Exercises are submitted **one part at a time**. Once you have submitted exercises for a part, you can no longer submit any more exercises for that part.
+Exercises are submitted **one part at a time**. You will mark the number of exercises you have completed from that module. Once you have submitted exercises for a part, you can no longer submit any more exercises for that part. 
 
 A system for detecting plagiarism is used to check exercises submitted to GitHub. If code is found from model answers or multiple students hand in the same code, the situation is handled according to the [policy on plagiarism](https://guide.student.helsinki.fi/en/article/what-cheating-and-plagiarism) of the University of Helsinki.
 
@@ -340,7 +340,7 @@ Despite changes <i>all the submitted exercises remain valid</i>, and the course 
 
 Recent major changes
 
-- Parts 1-7 (11th-26th August): Create React app replaced with Vite
+- Parts 1-9 (11th September - 5th October): Create React app replaced with Vite
 
 ### Expanding on a previously completed course
 

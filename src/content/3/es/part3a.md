@@ -1055,7 +1055,7 @@ Puede encontrar el código para nuestra aplicación actual en su totalidad en la
 
 #### 3.7: backend de la agenda telefónica, paso 7
 
-Agregue el middleware [morgan](https://github.com/expressjs/morgan) a su aplicación para iniciar sesión. Configúrelo para registrar mensajes en su consola según la <i>pequeña</i> configuración.
+Agregue el middleware [morgan](https://github.com/expressjs/morgan) a su aplicación para el registro de mensajes. Configúrelo para registrar mensajes en su consola según la configuración <i>tiny</i>.
 
 La documentación de Morgan no es la mejor y es posible que deba dedicar algún tiempo a averiguar cómo configurarla correctamente. Sin embargo, la mayor parte de la documentación del mundo cae en la misma categoría, por lo que es bueno aprender a descifrar e interpretar documentación críptica en cualquier caso.
 

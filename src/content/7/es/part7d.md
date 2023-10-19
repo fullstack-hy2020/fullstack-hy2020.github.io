@@ -6,11 +6,9 @@ lang: es
 ---
 <div class="content">
 
-Desarrollar con React fue conocido por requerir herramientas que eran muy difíciles de configurar. En estos días, comenzar con el desarrollo de React es casi indoloro gracias a [create-react-app](https://github.com/facebookincubator/create-react-app). Probablemente nunca haya existido un mejor flujo de trabajo de desarrollo para el desarrollo de JavaScript del lado del navegador.
+Desarrollar con React fue conocido por requerir herramientas que eran muy difíciles de configurar. Para facilitar la situación, se desarrolló [Create React App](https://github.com/facebookincubator/create-react-app), que eliminó los problemas relacionados con la configuración. [Vite](https://vitejs.dev/), que también se utiliza en el curso, ha reemplazado recientemente a Create React App en nuevas aplicaciones.
 
-
-No podemos confiar en la magia negra de create-react-app para siempre y es hora de que echemos un vistazo debajo del capó. Uno de los jugadores clave para hacer que las aplicaciones React sean funcionales es una herramienta llamada [webpack](https://webpack.js.org/).
-
+Ambos, Vite y Create React App, utilizan <i>empaquetadores</i> para realizar el trabajo. Ahora nos familiarizaremos con el empaquetador llamado [Webpack](https://webpack.js.org/) utilizado por Create React App. Webpack fue, con mucho, el empaquetador más popular durante años. Sin embargo, recientemente han surgido varios empaquetadores de nueva generación como [esbuild](https://esbuild.github.io/) utilizado por Vite, que son significativamente más rápidos y fáciles de usar que Webpack. Sin embargo, esbuild aún carece de algunas características útiles (como la recarga en caliente del código en el navegador), por lo que a continuación conoceremos al antiguo líder de los empaquetadores, Webpack.
 
 ### Empaquetamiento
 
@@ -60,7 +58,7 @@ El archivo <i>index.html</i> ubicado en la raíz del directorio de compilación 
 Como podemos ver en la aplicación de ejemplo que se creó con create-react-app, el script de compilación también agrupa los archivos CSS de la aplicación en un solo archivo <i>/static/css/main.1becb9f2.css</i>.
 
 
-En la práctica, la agrupación se realiza de modo que definamos un punto de entrada para la aplicación, que normalmente es el archivo <i>index.js</i>. Cuando webpack empaqueta el código, incluye todo el código que importa el punto de entrada y el código que importa, y así sucesivamente.
+En la práctica, la agrupación se realiza de modo que definamos un punto de entrada para la aplicación, que normalmente es el archivo <i>index.js</i>. Cuando webpack empaqueta el código, incluye todo el código que es importado por el punto de entrada, también realiza importaciones el código importado, y así sucesivamente.
 
 
 Dado que parte de los archivos importados son paquetes como React, Redux y Axios, el archivo JavaScript incluido también contendrá el contenido de cada una de estas librerías.
@@ -367,7 +365,7 @@ const App = () =>
 
 Como podemos ver en el ejemplo anterior, los elementos de React que se escribieron en JSX ahora se crean con JavaScript normal utilizando la función [createElement](https://reactjs.org/docs/react-without-jsx.html) de React .
 
-Puede probar la aplicación incluida abriendo el archivo <i>build/index.html</i> abriendo el archivo en su navegador:
+Puede probar la aplicación abriendo el archivo <i>build/index.html</i> con la opción "Abrir archivo" de su navegador:
 
 ![](../../images/7/22.png)
 
@@ -387,7 +385,7 @@ Nuestra configuración contiene casi todo lo que necesitamos para el desarrollo 
 
 ### Transpiladores
 
-El proceso de transformar código de una forma de JavaScript a otra se denomina [transpilación](https://en.wiktionary.org/wiki/transpile). La definición general del término es compilar código fuente transformándolo de un ilenguaje a otro.
+El proceso de transformar código de una forma de JavaScript a otra se denomina [transpilación](https://en.wiktionary.org/wiki/transpile). La definición general del término es compilar código fuente transformándolo de un lenguaje a otro.
 
 Al utilizar la configuración de la sección anterior, estamos <i>transpilando</i> el código que contiene JSX en JavaScript normal con la ayuda de [babel](https://babeljs.io/), que actualmente es la herramienta más popular para el trabajo.
 
@@ -917,27 +915,5 @@ Puede encontrar una lista exhaustiva de polyfills existentes [aquí](https://git
 
 
 La compatibilidad del navegador de diferentes APIs se puede verificar visitando [https://caniuse.com](https://caniuse.com) o [el sitio web de Mozilla](https://developer.mozilla.org/en-US/).
-
-
-### Eject
-
-
-La herramienta create-react-app usa webpack detrás de escena. Si la configuración predeterminada no es suficiente, es posible [expulsar](https://create-react-app.dev/docs/available-scripts/#npm-run-eject) el proyecto que eliminará toda la magia negra, y los archivos de configuración predeterminados se almacenarán en el directorio de <i>configuración</i> y en un archivo <i>package.json</i> modificado.
-
-
-Si expulsa una aplicación creada con create-react-app, no habrá retorno y toda la configuración deberá mantenerse manualmente. La configuración predeterminada no es trivial y, en lugar de expulsarla de una aplicación create-react-app, una mejor alternativa puede ser escribir su propia configuración de webpack desde el principio.
-
-
-Se recomienda revisar y leer los archivos de configuración de una aplicación expulsada y es extremadamente educativo.
-
-</div>
-
-<div class="tasks">
-
-
-### Ejercicios
-
-Un ejercicio relacionado con los temas presentados aquí, se puede encontrar al final de esta sección de material del curso en el conjunto de ejercicios [para extender la aplicación de lista de blogs](/es/part7/exercises_extending_the_bloglist).
-
 
 </div>

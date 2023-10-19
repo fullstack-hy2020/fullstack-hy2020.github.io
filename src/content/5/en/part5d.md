@@ -943,6 +943,7 @@ describe('when logged in', function() {
   describe('and several notes exist', function () {
     beforeEach(function () {
       // highlight-start
+      cy.login({ username: 'mluukkai', password: 'salainen' })
       cy.createNote({ content: 'first note', important: false })
       cy.createNote({ content: 'second note', important: false })
       cy.createNote({ content: 'third note', important: false })

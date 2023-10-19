@@ -192,7 +192,7 @@ There are also other methods, eg. [getByTestId](https://testing-library.com/docs
 
 We typically run into many different kinds of problems when writing our tests.
 
-Object _screen_ has method [debug](https://testing-library.com/docs/queries/about/#screendebug) that can be used to print the HTML of a component to the terminal. If we change the test as follows:
+Object _screen_ has method [debug](https://testing-library.com/docs/dom-testing-library/api-debugging#screendebug) that can be used to print the HTML of a component to the terminal. If we change the test as follows:
 
 ```js
 import React from 'react'
@@ -297,17 +297,17 @@ test('clicking the button calls event handler once', async () => {
     important: true
   }
 
-  const mockHandler = jest.fn()
+  const mockHandler = jest.fn()  // highlight-line
 
   render(
-    <Note note={note} toggleImportance={mockHandler} />
+    <Note note={note} toggleImportance={mockHandler} />  // highlight-line
   )
 
-  const user = userEvent.setup()
-  const button = screen.getByText('make not important')
-  await user.click(button)
+  const user = userEvent.setup()  // highlight-line
+  const button = screen.getByText('make not important')  // highlight-line
+  await user.click(button)  // highlight-line
 
-  expect(mockHandler.mock.calls).toHaveLength(1)
+  expect(mockHandler.mock.calls).toHaveLength(1)  // highlight-line
 })
 ```
 

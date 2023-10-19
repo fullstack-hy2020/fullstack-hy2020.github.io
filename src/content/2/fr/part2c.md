@@ -315,7 +315,7 @@ promise.then(response => {
 ```
 Ce qui suit est renvoyé sur la console :
 
-![](../../images/2/17e.png)
+![](../../images/2/17new.png)
 
 L'environnement d'exécution JavaScript appelle la fonction de rappel enregistrée par la méthode <em>then</em> en lui fournissant un objet <em>response</em> en tant que paramètre. L'objet <em>response</em> contient toutes les données essentielles liées à la réponse d'une requête HTTP GET, qui inclurait les <i>données</i> renvoyées, le <i>code d'état</i> et <i>en-têtes</i>.
 

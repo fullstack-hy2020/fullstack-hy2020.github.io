@@ -493,6 +493,8 @@ const App = () => {
     </div>
   )
 }
+
+export default App
 ```
 
 The user interface of the application has a form, in the input field of which the name of the desired currency is written. If the currency exists, the application renders the exchange rates of the currency to other currencies:
@@ -605,15 +607,15 @@ If you use Open weather map, [here](https://openweathermap.org/weather-condition
 
 **NB:** You need an api-key to use almost every weather service. Do not save the api-key to source control! Nor hardcode the api-key to your source code. Instead use an [environment variable](https://vitejs.dev/guide/env-and-mode.html) to save the key.
 
-Assuming the api-key is <i>t0p53cr3t4p1k3yv4lu3</i>, when the application is started like so:
+Assuming the api-key is <i>54l41n3n4v41m34rv0</i>, when the application is started like so:
 
 ```bash
-VITE_SOME_KEY=54l41n3n4v41m34rv0 npm start3 npm start // For Linux/macOS Bash
-($env:VITE_SOME_KEY="54l41n3n4v41m34rv0") -and (npm start) // For Windows PowerShell
-set "VITE_SOME_KEY=54l41n3n4v41m34rv0" && npm start // For Windows cmd.exe
+VITE_SOME_KEY=54l41n3n4v41m34rv0 && npm run dev// For Linux/macOS Bash
+($env:VITE_SOME_KEY="54l41n3n4v41m34rv0") -and (npm run dev) // For Windows PowerShell
+set "VITE_SOME_KEY=54l41n3n4v41m34rv0" && npm run dev // For Windows cmd.exe
 ```
 
-you can access the value of the key from the _process.env_ object:
+you can access the value of the key from the _import.meta.env_ object:
 
 ```js
 const api_key = import.meta.env.VITE_SOME_KEY

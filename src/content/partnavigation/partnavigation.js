@@ -129,7 +129,6 @@ module.exports = {
       c: 'Typing an Express app',
       d: 'React with types',
       e: 'Grande finale: Patientor',
-      f: 'Legacy patientor (the old material)',
     },
     '10': {
       a: 'Introduction to React Native',

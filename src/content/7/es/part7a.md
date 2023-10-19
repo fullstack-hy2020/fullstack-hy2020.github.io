@@ -95,19 +95,19 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 
 Cada vista se implementa como su propio componente. Almacenamos la información del componente de vista en el estado de la aplicación llamado <i>page</i>. Esta información nos dice qué componente, que representa una vista, debe mostrarse debajo de la barra de menú.
 
-Sin embargo, el método no es muy óptimo. Como podemos ver en las imágenes, la dirección permanece igual aunque a veces estemos en diferentes vistas. Cada vista debe tener preferiblemente su propia dirección, por ejemplo, para hacer posible la creación de marcadores. El botón de <i>retroceso</i> tampoco funciona como se esperaba para nuestra aplicación, lo que significa que el botón de retroceso no lo mueve a la vista mostrada anteriormente de la aplicación, sino a un lugar completamente diferente. Si la aplicación creciera aún más y quisiéramos, por ejemplo, agregar vistas separadas para cada usuario y nota, entonces este <i>routing</i>(enrutamiento) hecho por nosotros mismos se volvería demasiado complicado, ya que administraríamos la navegación de la aplicación.
+Sin embargo, el método no es muy óptimo. Como podemos ver en las imágenes, la dirección permanece igual aunque a veces estemos en diferentes vistas. Cada vista debe tener preferiblemente su propia dirección para hacer posible la creación de marcadores. El botón de <i>retroceso</i> tampoco funciona como se esperaba para nuestra aplicación, lo que significa que el botón de retroceso no lo mueve a la vista mostrada anteriormente de la aplicación, sino a un lugar completamente diferente. Si la aplicación creciera aún más y quisiéramos, agregar vistas separadas para cada usuario y nota, entonces este <i>routing</i>(enrutamiento) hecho por nosotros mismos se volvería demasiado complicado, ya que administraríamos la navegación de la aplicación.
 
 ### React Router
 
-Afortunadamente, React tiene la librería [React router](https://github.com/ReactTraining/react-router), que proporciona una excelente solución para administrar la navegación en una aplicación React.
+Afortunadamente, React tiene la librería [React Router](https://github.com/ReactTraining/react-router), que proporciona una excelente solución para administrar la navegación en una aplicación React.
 
-Cambiemos la aplicación anterior para usar React router. Primero, instalemos React router con el comando
+Cambiemos la aplicación anterior para usar React Router. Primero, instalemos React Router con el comando
 
 ```bash
 npm install react-router-dom
 ```
 
-El routing proporcionado por React Router se habilita cambiando la aplicación de la siguiente manera:
+El routing proporcionado por React Router se habilita cambiando la aplicación de la siguiente manera
 
 ```js
 import {
@@ -160,7 +160,7 @@ Según el [manual de la v5](https://v5.reactrouter.com/web/api/BrowserRouter):
 
 Normalmente, el navegador carga una nueva página cuando cambia la URL en la barra de direcciones. Sin embargo, con la ayuda de la [API de historial HTML5](https://css-tricks.com/using-the-html5-history-api/), <i>BrowserRouter</i> nos permite usar la URL en la barra de direcciones del navegador para el "routing" interno en una aplicación React. Por lo tanto, incluso si cambia la URL en la barra de direcciones, el contenido de la página solo se manipula mediante Javascript y el navegador no cargará contenido nuevo desde el servidor. Usar las acciones de avance y retroceso, así como crear marcadores, sigue siendo lógico como en una página web tradicional.
 
-Dentro del router definimos <i>enlaces</i> que modifican la barra de direcciones con la ayuda del componente [Link](https://reactrouter.com/en/main/components/link). Por ejemplo,
+Dentro del router definimos <i>enlaces</i> que modifican la barra de direcciones con la ayuda del componente [Link](https://reactrouter.com/en/main/components/link).
 
 ```js
 <Link to="/notes">notes</Link>
@@ -168,7 +168,7 @@ Dentro del router definimos <i>enlaces</i> que modifican la barra de direcciones
 
 crea un enlace en la aplicación con el texto <i>notes</i>, que cuando se clickea cambia la URL en la barra de direcciones a <i>/notes</i>.
 
-Los componentes renderizados según la URL del navegador se definen con la ayuda del componente [Route](https://reactrouter.com/en/main/route/route). Por ejemplo,
+Los componentes renderizados según la URL del navegador se definen con la ayuda del componente [Route](https://reactrouter.com/en/main/route/route).
 
 ```js
 <Route path="/notes" element={<Notes />} />
@@ -326,9 +326,9 @@ Lo interesante de este componente es el uso de la función [useNavigate](https:/
 
 Con el inicio de sesión del usuario, llamamos a _navigate('/')_, que hace cambiar la url del navegador a _/_ y la aplicación muestra el componente correspondiente, <i>Home</i>.
 
-Tanto [useParams](https://reactrouter.com/en/main/hooks/use-params) como [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate) son hooks, al igual que useState y useEffect que ya hemos usado muchas veces. Como recordará de la parte 1, existen algunas [reglas](/es/part1/un_estado_mas_complejo_depurando_aplicaciones_react#reglas-de-los-hooks) para usar hooks. Create-react-app se ha configurado para advertirle si rompe estas reglas, por ejemplo, llamando a un hook desde una declaración condicional.
+Tanto [useParams](https://reactrouter.com/en/main/hooks/use-params) como [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate) son hooks, al igual que useState y useEffect que ya hemos usado muchas veces. Como recordará de la parte 1, existen algunas [reglas](/es/part1/un_estado_mas_complejo_depurando_aplicaciones_react#reglas-de-los-hooks) para usar hooks. Create-react-app se ha configurado para advertirle si rompe estas reglas llamando a un hook desde una declaración condicional.
 
-### redireccionar
+### Redireccionar
 
 Hay un detalle más que es interesante, en la ruta de <i>Users</i>:
 
@@ -509,10 +509,10 @@ La aplicación se inicia de la forma habitual, pero primero debe instalar las de
 
 ```bash
 npm install
-npm start
+npm run dev
 ```
 
-### 7.1: anécdotas enrutadas, paso 1
+#### 7.1: anécdotas enrutadas, paso 1
 
 Agregue React Router a la aplicación para que al hacer clic en los enlaces del componente <i>Menu</i>, se pueda cambiar la vista.
 
@@ -522,7 +522,7 @@ En la raíz de la aplicación, es decir, la ruta _/_, muestra la lista de anécd
 
 El componente <i>Footer</i> siempre debe estar visible en la parte inferior.
 
-La creación de una nueva anécdota debería ocurrir, por ejemplo, en la ruta <i>create</i>:
+La creación de una nueva anécdota debería ocurrir en la ruta <i>create</i>:
 
 ![](../../assets/teht/41.png)
 

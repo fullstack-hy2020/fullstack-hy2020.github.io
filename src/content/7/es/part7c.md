@@ -195,7 +195,7 @@ Representaremos el mensaje como un componente [Alert](https://getbootstrap.com/d
 
 #### Estructura de navegación
 
-Por último, modifiquemos el menú de navegación de la aplicación para usar el componente [Navbar](https://getbootstrap.com/docs/4.1/components/navbar/) de Bootstrap. La librería React Bootstrap nos proporciona [componentes incorporados coincidentes](https://react-bootstrap.github.io/components/navbar/#navbars-mobile-friendly) . A través de prueba y error, terminamos con una solución que funciona a pesar de la documentación críptica:
+Por último, modifiquemos el menú de navegación de la aplicación para usar el componente [Navbar](https://getbootstrap.com/docs/4.1/components/navbar/) de Bootstrap. La librería React Bootstrap nos proporciona [componentes incorporados coincidentes](https://react-bootstrap.github.io/components/navbar/#navbars-mobile-friendly). A través de prueba y error, terminamos con una solución que funciona a pesar de la documentación críptica:
 
 ```js
 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">

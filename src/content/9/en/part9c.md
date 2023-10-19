@@ -74,7 +74,7 @@ The *target* configuration tells the compiler which *ECMAScript* version to use 
 
 *outDir* tells where the compiled code should be placed.
 
-*module* tells the compiler that we want to use *CommonJS* modules in the compiled code. This means we can use the old *require* syntax instead of the *import* one, which is not supported in older versions of *Node*, such as version 10.
+*module* tells the compiler that we want to use *CommonJS* modules in the compiled code. This means we can use the old *require* syntax instead of the *import* one, which is not supported in older versions of *Node*.
 
 *strict* is a shorthand for multiple separate options:
 <i>noImplicitAny, noImplicitThis, alwaysStrict, strictBindCallApply, strictNullChecks, strictFunctionTypes and strictPropertyInitialization</i>.
@@ -102,26 +102,26 @@ Now our <i>package.json</i> should look like this:
 
 ```json
 {
-  "name": "flight_diary",
+  "name": "flight-diary",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "tsc": "tsc"
   },
-  "author": "Jane Doe",
+  "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "@types/express": "^4.17.13",
-    "@typescript-eslint/eslint-plugin": "^5.12.1",
-    "@typescript-eslint/parser": "^5.12.1",
-    "eslint": "^8.9.0",
-    "typescript": "^4.5.5"
-  },
   "dependencies": {
-    "express": "^4.17.3"
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.18",
+    "@typescript-eslint/eslint-plugin": "^6.7.3",
+    "@typescript-eslint/parser": "^6.7.3",
+    "eslint": "^8.50.0"
   }
 }
+
 ```
 
 We also create a <i>.eslintrc</i> file with the following content:
@@ -272,7 +272,7 @@ The [frontend](https://github.com/fullstack-hy2020/patientor) has already been b
 
 #### WARNING
 
-Quite often VS code loses track what is really happening in the code and it shows type or style related warnings despite the code has been fixed. If this happens (to me it has happened quite often), just restart the editor. It is also good to doublecheck that everything really works by running the compiler and the eslint from the command line with commands:
+Quite often VS code loses track of what is really happening in the code and it shows type or style related warnings despite the code having been fixed. If this happens (to me it has happened quite often), just restart the editor. It is also good to doublecheck that everything really works by running the compiler and the eslint from the command line with commands:
 
 ```bash
 npm run tsc
@@ -651,10 +651,10 @@ For example, consider a page for listing some data, some of which is sensitive a
 We might want to be sure that no sensitive data is used or displayed. We could <i>pick</i> the fields of a type we allow to be used to enforce this.
 We can do that by using the utility type [Pick](https://www.typescriptlang.org/docs/handbook/utility-types.html#picktype-keys).
 
-In our project, we should consider that Ilari might want to create a listing of all his diary entries <i>excluding</i> the comment field since, during a very scary flight, he might end up writing something he wouldn't necessarily want to show anyone else.
+In our project, we should consider that Ilari might want to create a listing of all his diary entries <i>excluding</i> the comment field since, during a very scary flight, he might end up writing something he wouldn't necessarily want to show to anyone else.
 
 The [Pick](https://www.typescriptlang.org/docs/handbook/utility-types.html#picktype-keys) utility type allows us to choose which fields of an existing type we want to use.
-Pick can be used to either construct a completely new type or to inform a function that it should return on runtime.
+Pick can be used to either construct a completely new type or to inform a function of what it should return on runtime.
 Utility types are a special kind of type, but they can be used just like regular types.
 
 In our case, to create a "censored" version of the *DiaryEntry* for public displays, we can use *Pick* in the function declaration:
@@ -711,7 +711,7 @@ One thing in our application is a cause for concern. In *getNonSensitiveEntries*
 
 This happens because [TypeScript only checks](http://www.typescriptlang.org/docs/handbook/type-compatibility.html) whether we have all of the required fields or not, but excess fields are not prohibited. In our case, this means that it is <i>not prohibited</i> to return an object of type *DiaryEntry[]*, but if we were to try to access the *comment* field, it would not be possible because we would be accessing a field that TypeScript is unaware of even though it exists.
 
-Unfortunately, this can lead to unwanted behavior if you are not aware of what you are doing; the situation is valid as far as TypeScript is concerned, but you are most likely allowing use that is not wanted.
+Unfortunately, this can lead to unwanted behavior if you are not aware of what you are doing; the situation is valid as far as TypeScript is concerned, but you are most likely allowing a use that is not wanted.
 If we were now to return all of the diary entries from the *getNonSensitiveEntries* function to the frontend, we would be <i>leaking the unwanted fields to the requesting browser</i> - even though our types seem to imply otherwise!
 
 Because TypeScript doesn't modify the actual data but only its type, we need to exclude the fields ourselves:
@@ -759,7 +759,7 @@ we would get the following error:
 
 Again, the last line of the error message is the most helpful one. Let's undo this undesired modification.
 
-\* Note that if you make the comment field optional (using the *?* operator), everything will work fine.
+Note that if you make the comment field optional (using the *?* operator), everything will work fine.
 
 Utility types include many handy tools, and it is undoubtedly worth it to take some time to study [the documentation](https://www.typescriptlang.org/docs/handbook/utility-types.html).
 
@@ -776,7 +776,7 @@ router.get('/', (_req, res) => {
 });
 
 router.post('/', (_req, res) => {
-    res.send('Saving a diary!');
+  res.send('Saving a diary!');
 });
 
 export default router;
@@ -796,7 +796,7 @@ Similarly to Ilari's flight service, we do not use a real database in our app bu
 
 #### 9.10: Patientor backend, step3
 
-Create a type *Diagnose* and use it to create endpoint */api/diagnoses* for fetching all diagnoses with HTTP GET.
+Create a type *Diagnosis* and use it to create endpoint */api/diagnoses* for fetching all diagnoses with HTTP GET.
 
 Structure your code properly by using meaningfully-named directories and files.
 
@@ -1112,13 +1112,13 @@ export default toNewDiaryEntry;
 >};
 >```
 >
-> <i>So before the real data and types are ready to use, I am just returning here something that has for sure the right type. The code stays in an operational state all the time and my blood pressure remains in normal level. </i>
+> <i>So before the real data and types are ready to use, I am just returning here something that has for sure the right type. The code stays in an operational state all the time and my blood pressure remains at normal levels. </i>
 
 ### Type guards
 
-Let us start creating the parsers for each of the fields of *object*.
+Let us start creating the parsers for each of the fields of the parameter *object: unknown*
 
-To validate the *comment* field, we need to check that it exists, and to ensure that it is of the type *string*.
+To validate the *comment* field, we need to check that it exists and to ensure that it is of the type *string*.
 
 The function should look something like this:
 

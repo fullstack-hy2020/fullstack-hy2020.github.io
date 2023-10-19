@@ -314,7 +314,7 @@ notes.map(note =>
 )
 ```
 
-which generates a <i>li</i> tag containing the contents of the note from each note object.
+which generates an <i>li</i> tag containing the contents of the note from each note object.
 
 Because the function parameter passed to the _map_ method - 
 

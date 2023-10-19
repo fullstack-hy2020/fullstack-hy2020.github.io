@@ -48,6 +48,11 @@ export default App
 
 Alkuvaiheen koodi on GitHubissa repositorion [https://github.com/fullstack-hy2020/query-notes](https://github.com/fullstack-hy2020/query-notes/tree/part6-0) branchissa <i>part6-0</i>.
 
+**Huom:** Oletuksena repon kloonaus antaa sinulle ainoastaan main-branchin. Kloonaa siis yllä mainittu repo käyttämällä seuraavaa komentoa, jotta saat part6-0 branchin sisällön.
+```
+git clone --branch part6-0 https://github.com/fullstack-hy2020/query-notes.git
+```
+
 ### Palvelimella olevan datan hallinta React Query ‑kirjaston avulla
 
 Hyödynnämme nyt [React Query](https://tanstack.com/query/latest) ‑kirjastoa palvelimelta haettavan datan säilyttämiseen ja hallinnointiin. Kirjaston uusimmasta versiosta käytetään myös nimitystä TanStack Query mutta pitäydymme vanhassa tutussa nimessä.
@@ -143,7 +148,7 @@ const App = () => {
 
   const result = useQuery({
     queryKey: ['notes'],
-    queryFn: () => getNotes // highlight-line
+    queryFn: getNotes // highlight-line
   })
 
   // ...

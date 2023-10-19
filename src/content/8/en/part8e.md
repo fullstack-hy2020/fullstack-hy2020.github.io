@@ -277,7 +277,7 @@ const resolvers = {
           throw new GraphQLError('Creating the user failed', {
             extensions: {
               code: 'BAD_USER_INPUT',
-              invalidArgs: args.name,
+              invalidArgs: args.username,
               error
             }
           })
@@ -629,9 +629,9 @@ It's possible to test the subscriptions with the Apollo Explorer like this:
 
 ![apollo explorer showing subscriptions tab and response](../../images/8/31x.png)
 
-When the blue button <i>PersonAdded</i> is pressed, Explorer starts to wait for a new person to be added. On addition (that you need to do from another browser window), the info of the added person appears in the right side of the Explorer.
+When the blue button <i>PersonAdded</i> is pressed, Explorer starts to wait for a new person to be added. On addition (that you need to do from another browser window), the info of the added person appears on the right side of the Explorer.
 
-If the subscription does not work, check that you have correct connection settings:
+If the subscription does not work, check that you have the correct connection settings:
 
 ![apollo studio showing cog red arrow highlighting](../../images/8/35.png)
 
@@ -642,7 +642,7 @@ Implementing subscriptions involves a lot of configurations. You will be able to
 ### Subscriptions on the client
 
 In order to use subscriptions in our React application, we have to do some changes, especially to its [configuration](https://www.apollographql.com/docs/react/data/subscriptions/).
-The configuration in <i>index.js</i> has to be modified like so:
+The configuration in <i>main.jsx</i> has to be modified like so:
 
 ```js
 import { 
@@ -852,7 +852,7 @@ const PersonForm = ({ setError }) => {
 } 
 ```
 
-The final code of the client can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-9), branch <i>part8-9</i>.
+The final code of the client can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-6), branch <i>part8-6</i>.
 
 ### n+1 problem
 

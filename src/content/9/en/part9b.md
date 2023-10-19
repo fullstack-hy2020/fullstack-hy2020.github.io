@@ -18,7 +18,7 @@ Install TypeScript support to your editor of choice. [Visual Studio Code](https:
 As mentioned earlier, TypeScript code is not executable by itself. It has to be first compiled into executable JavaScript.
 When TypeScript is compiled into JavaScript, the code becomes subject to type erasure. This means that type annotations, interfaces, type aliases, and other type system constructs are removed and the result is pure ready-to-run JavaScript.
 
-In a production environment, the need for compilation often means that you have to set up a "build step." During the build step, all TypeScript code is compiled into JavaScript in a separate folder, and the production environment then runs the code from that folder. In a development environment, it is often handier to make use of real-time compilation and auto-reloading so one can see the resulting changes more quickly.
+In a production environment, the need for compilation often means that you have to set up a "build step." During the build step, all TypeScript code is compiled into JavaScript in a separate folder, and the production environment then runs the code from that folder. In a development environment, it is often easier to make use of real-time compilation and auto-reloading so one can see the resulting changes more quickly.
 
 Let's start writing our first TypeScript app. To keep things simple, let's start by using the npm package [ts-node](https://github.com/TypeStrong/ts-node). It compiles and executes the specified TypeScript file immediately so that there is no need for a separate compilation step.
 
@@ -49,7 +49,7 @@ and setting up <i>scripts</i> within the package.json:
 }
 ```
 
-You can now use <i>ts-node</i> within this directory by running *npm run ts-node*. Note that if you are using ts-node through package.json, command-line arguments that include short or long form options for the *npm run script* need to be prefixed with *--*. So if you want to run file.ts with <i>ts-node</i> and options *-s* and *--someoption*, the whole command is:
+You can now use <i>ts-node</i> within this directory by running *npm run ts-node*. Note that if you are using ts-node through package.json, command-line arguments that include short or long-form options for the *npm run script* need to be prefixed with *--*. So if you want to run file.ts with <i>ts-node</i> and options *-s* and *--someoption*, the whole command is:
 
 ```shell
 npm run ts-node file.ts -- -s --someoption
@@ -210,8 +210,7 @@ const calculator = (a: number, b: number, op: Operation): Result =>  {
 
 But now the question is if it's <i>really</i> okay for the function to return a string?
 
-When your code can end up in a situation where something is divided by 0, something has probably gone terribly wrong and an error should be thrown and handled where the function was called.
-When you are deciding to return values you weren't originally expecting, the warnings you see from TypeScript prevent you from making rushed decisions and help you to keep your code working as expected.
+When your code can end up in a situation where something is divided by 0, something has probably gone terribly wrong and an error should be thrown and handled where the function was called. When you are deciding to return values you weren't originally expecting, the warnings you see from TypeScript prevent you from making rushed decisions and help you to keep your code working as expected.
 
 One more thing to consider is, that even though we have defined types for our parameters, the generated JavaScript used at runtime does not contain the type checks.
 So if, for example, the *Operation* parameter's value comes from an external interface, there is no definite guarantee that it will be one of the allowed values. Therefore, it's still better to include error handling and be prepared for the unexpected to happen.
@@ -297,7 +296,7 @@ So what is the problem with older setups?
 
 Let's return to the basic idea of TypeScript. TypeScript expects all globally-used code to be typed, as it does for your code when your project has a reasonable configuration. The TypeScript library itself contains only typings for the code of the TypeScript package. It is possible to write your own typings for a library, but that is rarely needed - since the TypeScript community has done it for us!
 
-As with npm, the TypeScript world also celebrates open-source code. The community is active and continuously reacting to updates and changes in commonly-used npm packages. You can almost always find the typings for npm packages, so you don't have to create types for all of your thousands of dependencies alone.
+As with npm, the TypeScript world also celebrates open-source code. The community is active and continuously reacting to updates and changes in commonly used npm packages. You can almost always find the typings for npm packages, so you don't have to create types for all of your thousands of dependencies alone.
 
 Usually, types for existing packages can be found from the <i>@types</i> organization within npm, and you can add the relevant types to your project by installing an npm package with the name of your package with a *@types/* prefix. For example:
 
@@ -429,7 +428,7 @@ we get a proper error message:
 Something bad happened. Error: Provided values were not numbers!
 ```
 
-There is quite a lot going on in the code. The most important addition is the function *parseArguments* that ensures that the parameters given to *multiplicator* are of the right type. If not, an exception is thrown with a descriptive error message.
+There is quite a lot going on in the code. The most important addition is the function _parseArguments_ which ensures that the parameters given to *multiplicator* are of the right type. If not, an exception is thrown with a descriptive error message.
 
 The definition of the function has a couple of interesting things:
 
@@ -466,7 +465,7 @@ we could use the "generics syntax" and write
 let values: Array<number>;
 ```
 
-In this course we shall mostly be following the convention enforced by the Eslint rule [array-simple](https://typescript-eslint.io/rules/array-type/#array-simple) that suggests to write the simple arrays with the [] syntax and use the <> syntax for the more complex ones.
+In this course we shall mostly be following the convention enforced by the Eslint rule [array-simple](https://typescript-eslint.io/rules/array-type/#array-simple) that suggests writing the simple arrays with the [] syntax and using the the <> syntax for the more complex ones, see [here](https://typescript-eslint.io/rules/array-type/#array-simple) for examples.
 
 </div>
 
@@ -576,7 +575,7 @@ In the example, the <i>first argument</i> is the target value.
 
 Handle exceptions and errors appropriately. The exerciseCalculator should accept inputs of varied lengths. Determine by yourself how you manage to collect all needed input.
 
-Couple of things to notice:
+A couple of things to notice:
 
 If you define helper functions in other modules, you should use the [JavaScript module system](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), that is, the one we have used with React where importing is done with
 
@@ -590,14 +589,14 @@ and exporting
 export const isNotNumber = (argument: any): boolean =>
   isNaN(Number(argument));
 
-default export "this is the default..."
+export default "this is the default..."
 ```
 
 Another note: somehow surprisingly TypeScript does not allow to define the same variable in many files at a "block-scope", that is, outside functions (or classes):
 
 ![vs code showing error cannot redeclare block-scoped variable x](../../images/9/60new.png)
 
-This is actually not quite true. This rule applies only to files that are treated as "scripts". A file is a script if it does not contain any export or import statements. If a file has those, then the file is treated as a [module](https://www.typescriptlang.org/docs/handbook/modules.html), <i>and</i> the variables do not get defined in the block-scope.
+This is actually not quite true. This rule applies only to files that are treated as "scripts". A file is a script if it does not contain any export or import statements. If a file has those, then the file is treated as a [module](https://www.typescriptlang.org/docs/handbook/modules.html), <i>and</i> the variables do not get defined in the block scope.
 
 </div>
 
@@ -727,15 +726,17 @@ This is because we banned unused parameters in our <i>tsconfig.json</i>:
     "target": "ES2022",
     "strict": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true, // highlight-line
+    "noUnusedParameters": true,  // highlight-line
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "esModuleInterop": true
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node"
   }
 }
 ```
 
-This configuration might create problems if you have library-wide predefined functions which require declaring a variable even if it's not used at all, as is the case here.
+This configuration might create problems if you have library-wide predefined functions that require declaring a variable even if it's not used at all, as is the case here.
 Fortunately, this issue has already been solved on the configuration level.
 Once again hovering over the issue gives us a solution. This time we can just click the quick fix button:
 
@@ -806,7 +807,7 @@ Make sure there aren't any errors!
 
 #### 9.5 WebBMI
 
-Add an endpoint for the BMI calculator that can be used by doing an HTTP GET request to the endpoint *bmi* and specifying the input with [query string parameters](https://en.wikipedia.org/wiki/Query_string). For example, to get the BMI of a person with a height of 180 and a weight of 72, the URL is <http://localhost:3002/bmi?height=180&weight=72>.
+Add an endpoint for the BMI calculator that can be used by doing an HTTP GET request to the endpoint *bmi* and specifying the input with [query string parameters](https://en.wikipedia.org/wiki/Query_string). For example, to get the BMI of a person with a height of 180 and a weight of 72, the URL is <http://localhost:3003/bmi?height=180&weight=72>.
 
 The response is a JSON of the form:
 
@@ -877,7 +878,7 @@ Things become implicitly any type quite often when one forgets to type functions
 We can also explicitly type things *any*. The only difference between the implicit and explicit any type is how the code looks; the compiler does not care about the difference.
 
 Programmers however see the code differently when *any* is explicitly enforced than when it is implicitly inferred.
-Implicit *any* typings are usually considered problematic, since it is quite often due to the coder forgetting to assign types (or being too lazy to do it), and it also means that the full power of TypeScript is not properly exploited.
+Implicit *any* typings are usually considered problematic since it is quite often due to the coder forgetting to assign types (or being too lazy to do it), and it also means that the full power of TypeScript is not properly exploited.
 
 This is why the configuration rule [noImplicitAny](https://www.typescriptlang.org/tsconfig#noImplicitAny) exists on the compiler level, and it is highly recommended to keep it on at all times. In the rare occasions when you truly cannot know what the type of a variable is, you should explicitly state that in the code:
 
@@ -935,7 +936,7 @@ Now lint will complain if we try to define a variable of type *any*:
 [@typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) has a lot of TypeScript-specific ESlint rules, but you can also use all basic ESlint rules in TypeScript projects.
 For now, we should probably go with the recommended settings, and we will modify the rules as we go along whenever we find something we want to change the behavior of.
 
-On top of the recommended settings, we should try to get familiar with the coding style required in this part and <i>set the semicolon at the end of each line of code to required</i>.
+On top of the recommended settings, we should try to get familiar with the coding style required in this part and <i>set the semicolon at the end of each line of code to be required</i>.
 
 So we will use the following <i>.eslintrc</i>
 
@@ -1009,7 +1010,7 @@ app.post('/calculate', (req, res) => {
 });
 ```
 
-We now got ESlint silenced but we are totally at the mercy of the user. We most definitively should do some validation to the post data and give a proper error message if the data is invalid:
+We now have ESlint silenced but we are totally at the mercy of the user. We most definitively should do some validation to the post data and give a proper error message if the data is invalid:
 
 ```js
 app.post('/calculate', (req, res) => {
@@ -1079,7 +1080,7 @@ app.post('/calculate', (req, res) => {
 
 Using a type assertion (or quieting an Eslint rule) is always a bit risky thing. It leaves the TypeScript compiler off the hook, the compiler just trusts that we as developers know what we are doing. If the asserted type does <i>not</i> have the right kind of value, the result will be a runtime error, so one must be pretty careful when validating the data if a type assertion is used.
 
-In the next chapter we shall have a look at [type narrowing](https://www.typescriptlang.org/docs/handbook/2/narrowing.html) which will provide a much more safe way of giving a stricter type for data that is coming from an external source.
+In the next chapter, we shall have a look at [type narrowing](https://www.typescriptlang.org/docs/handbook/2/narrowing.html) which will provide a much more safe way of giving a stricter type for data that is coming from an external source.
 
 </div>
 
@@ -1093,7 +1094,7 @@ Configure your project to use the above ESlint settings and fix all the warnings
 
 #### 9.7 WebExercises
 
-Add an endpoint to your app for the exercise calculator. It should be used by doing an HTTP POST request to endpoint <http://localhost:3002/exercises> with the input in the request body:
+Add an endpoint to your app for the exercise calculator. It should be used by doing an HTTP POST request to the endpoint <http://localhost:3002/exercises> with the input in the request body:
 
 ```js
 {

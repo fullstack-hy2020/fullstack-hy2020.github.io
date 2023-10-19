@@ -279,7 +279,7 @@ xhttp.onreadystatechange = function() {
 
 El mecanismo de invocación de controladores de eventos es muy común en JavaScript. Las funciones del controlador de eventos se denominan funciones [callback](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function). El código de la aplicación no invoca las funciones en sí, sino el entorno de ejecución -el navegador-, invoca la función en el momento adecuado, cuando se ha producido el <i>evento</i>.
 
-### Modelo de Objeto de Documento o DOM
+### Modelo de Objetos del Documento o DOM
 
 Podemos pensar en las páginas HTML como estructuras de árbol implícitas.
 
@@ -464,7 +464,7 @@ Los datos se envían como el [cuerpo](https://developer.mozilla.org/en-US/docs/W
 
 El servidor puede acceder a los datos accediendo al campo <em>req.body</em> del objeto de solicitud <em>req</em>.
 
-El servidor crea un nuevo objeto de nota y lo agrega a una matriz llamada <em>notes</em>.
+El servidor crea un nuevo objeto de nota y lo agrega a un arreglo llamado <em>notes</em>.
 
 ```js
 notes.push({ 
@@ -552,9 +552,9 @@ form.onsubmit = function(e) {
 }
 ```
 
-El comando <em>document.getElementById('notes_form')</em> le indica al código que busque el elemento form de la página, y para registrar un <i>controlador de eventos</i> para manejar el evento de envío del formulario. El controlador de eventos llama inmediatamente al método <em>e.preventDefault()</em> para evitar el manejo predeterminado del envío de formularios. El método predeterminado enviaría los datos al servidor y provocaría una nueva solicitud GET, lo que no queremos que suceda.
+El comando <em>document.getElementById('notes_form')</em> le indica al código que obtenga el elemento form de la página y que registre un <i>event handler</i> para manejar el evento de envío del formulario. El controlador de eventos llama inmediatamente al método <em>e.preventDefault()</em> para evitar el manejo por defecto del envío de formularios. El método por defecto enviaría los datos al servidor y causaría una nueva solicitud GET, lo cual no queremos que suceda.
 
-Luego, el controlador de eventos crea una nueva nota, la agrega a la lista de notas con el comando <em>notes.push(note)</em>, vuelve a representar la lista de notas en la página y envía la nueva nota al servidor.
+Luego el controlador de eventos crea una nueva nota, la agrega a la lista de notas con el comando <em>notes.push(note)</em>, vuelve a renderizar la lista de notas en la página y envía la nueva nota al servidor.
 
 El código para enviar la nota al servidor es el siguiente:
 
@@ -571,7 +571,7 @@ var sendToServer = function(note) {
 }
 ```
 
-El código determina que los datos se enviarán con una solicitud HTTP POST y el tipo de datos será JSON. El tipo de datos se determina con una cabecera <i>Content-type</i>. Luego, los datos se envían como JSON-string.
+El código determina que los datos se enviarán con una solicitud HTTP POST y el tipo de datos será JSON. El tipo de datos se determina con una cabecera <i>Content-type</i>. Luego los datos se envían como JSON-string.
 
 El código de la aplicación está disponible en <https://github.com/mluukkai/example_app>.
 Vale la pena recordar que la aplicación solo está destinada a demostrar los conceptos del curso. El código sigue un estilo de desarrollo deficiente en cierta medida y no debe usarse como ejemplo al crear sus propias aplicaciones. Lo mismo ocurre con las URL utilizadas. La URL <i>new_note_spa</i>, a la que se envían las nuevas notas, no cumple con las mejores prácticas actuales.
@@ -599,7 +599,7 @@ El estado de React parece sólido, pero el mundo de JavaScript cambia constantem
 
 Prácticamente todas las aplicaciones web tienen (al menos) dos "capas": el navegador, al estar más cerca del usuario final, es la capa superior y el servidor, la inferior. A menudo también hay una capa de base de datos debajo del servidor. Por lo tanto, podemos pensar en la <i>arquitectura</i> de una aplicación web como una especie de <i>stack (pila)</i> de capas.
 
-A menudo, también hablamos sobre el [frontend](https://en.wikipedia.org/wiki/Front_and_back_ends) y el [backend](https://en.wikipedia.org/wiki/Front_and_back_ends). El navegador es la interfaz y JavaScript que se ejecuta en el navegador es el código de la interfaz. El servidor, por otro lado, es el backend.
+A menudo, también hablamos sobre el [frontend](https://en.wikipedia.org/wiki/Front_and_back_ends) y el [backend](https://en.wikipedia.org/wiki/Front_and_back_ends). El navegador es la interfaz y JavaScript que se ejecuta en el navegador es el código de frontend. El servidor, por otro lado, es el backend.
 
 En el contexto de este curso, el desarrollo web full stack significa que nos enfocamos en todas las partes de la aplicación: el frontend, el backend y la base de datos. A veces, el software del servidor y su sistema operativo se ven como parte del stack, pero no vamos a entrar en ellos.
 
