@@ -210,8 +210,7 @@ const calculator = (a: number, b: number, op: Operation): Result =>  {
 
 Pero ahora la pregunta es, ¿<i>realmente</i> está bien que la función devuelva un string?
 
-Cuando tu código puede terminar en una situación en la que algo se divide por 0, es probable que algo haya salido terriblemente mal y se debería generar un error y manejarlo desde donde se llamó a la función.
-Cuando decides devolver valores que no esperabas originalmente, las advertencias de TypeScript te impiden tomar decisiones apresuradas y te ayudan a mantener tu código funcionando como se esperaba.
+Cuando tu código puede terminar en una situación en la que algo se divide por 0, es probable que algo haya salido terriblemente mal y se debería generar un error y manejarlo desde donde se llamó a la función. Cuando decides devolver valores que no esperabas originalmente, las advertencias de TypeScript te impiden tomar decisiones apresuradas y te ayudan a mantener tu código funcionando como se esperaba.
 
 Una cosa más a considerar es que, aunque hemos definido tipos para nuestros parámetros, el JavaScript generado que se usa durante el tiempo de ejecución no contiene las verificaciones de tipos.
 Entonces, si, por ejemplo, el valor del parámetro de *operation* proviene de una interfaz externa, no hay garantía definitiva de que sea uno de los valores permitidos. Por lo tanto, es mejor incluir el manejo de errores y estar preparado para lo inesperado.
@@ -287,7 +286,7 @@ Aquí el estrechamiento fue hecho con la guardia de tipo [instanceof](https://ww
 
 Los programas que hemos escrito están bien, pero seguro que sería mejor si pudiéramos usar argumentos de línea de comandos en lugar de tener que cambiar siempre el código para calcular cosas diferentes.
 
-Vamos a probar, como lo haríamos en una aplicación normal de Node, accediendo a *process.argv*. Si estas utilizando una versión de npm reciente (7.0 o superior), no habra problemas, pero con una versión mas antigua algo no va bien:
+Vamos a probar, como lo haríamos en una aplicación normal de Node, accediendo a *process.argv*. Si estas utilizando una versión de npm reciente (7.0 o superior), no habrá problemas, pero con una versión mas antigua algo no va bien:
 
 ![error de vs code no puede encontrar nombre del proceso necesita instalar definiciones de tipo](../../images/9/5.png)
 
@@ -320,7 +319,6 @@ npm install --save-dev @types/node
 ```
 
 Después de instalar el paquete @types/node, nuestro compilador ya no se queja de la variable <i>process</i>. Ten en cuenta que no es necesario requerir los tipos para el código, ¡la instalación del paquete es suficiente!
-
 
 ## Mejorando el proyecto
 
@@ -357,6 +355,7 @@ const a: number = Number(process.argv[2])
 const b: number = Number(process.argv[3])
 multiplicator(a, b, `Multiplied ${a} and ${b}, the result is:`);
 ```
+
 Y podemos ejecutarlo con:
 
 ```shell
@@ -466,7 +465,7 @@ podríamos usar la "sintaxis de genéricos" y escribir
 let values: Array<number>;
 ```
 
-En este curso, normalmente, seguiremos la convención impuesta por la regla de Eslint [array-simple](https://typescript-eslint.io/rules/array-type/#array-simple) que sugiere escribir los arrays simples con la sintaxis [] y usar la sintaxis <> para los más complejos.
+En este curso, normalmente, seguiremos la convención impuesta por la regla de ESlint [array-simple](https://typescript-eslint.io/rules/array-type/#array-simple) que sugiere escribir los arrays simples con la sintaxis [] y usar la sintaxis <> para los más complejos, mira los ejemplos [aquí](https://typescript-eslint.io/rules/array-type/#array-simple).
 
 </div>
 
@@ -514,7 +513,7 @@ Crea el código de este ejercicio en el archivo *exerciseCalculator.ts*
 
 Escribe una función *calculateExercises* que calcule el tiempo promedio de las <i>horas diarias de ejercicio</i> y lo compare con la <i>cantidad objetivo</i> de horas diarias y devuelva un objeto que incluya los siguientes valores:
 
-- el numero de días
+- el número de días
 - el número de días de entrenamiento
 - el valor objetivo original
 - el tiempo promedio calculado
@@ -724,13 +723,15 @@ Esto se debe a que prohibimos los parámetros no utilizados en nuestro <i>tsconf
 ```js
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ES2022",
     "strict": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true, // highlight-line
+    "noUnusedParameters": true,  // highlight-line
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "esModuleInterop": true
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node"
   }
 }
 ```
@@ -836,61 +837,65 @@ No copies el código de la calculadora en el archivo <i>index.ts</i>, conviérte
 
 ### Los horrrores de *any*
 
-Ahora que hemos completado nuestros primeros endpoints, es posible que observe que apenas hemos usado TypeScript en estos pequeños ejemplos. 
-Al examinar el código un poco más de cerca, podemos ver algunos peligros acechando allí.
+Ahora que hemos completado nuestros primeros endpoints, es posible que observes que apenas hemos usado TypeScript en estos pequeños ejemplos. Al examinar el código un poco más de cerca, podemos ver algunos peligros acechándonos.
 
-
-Agreguemos un HTTP GET endpoint <i>calculate</i> a nuestra aplicación:
+Agreguemos un endpoint HTTP POST *calculate* a nuestra aplicación:
 
 ```js
-import { calculator } from './calculator'
+import { calculator } from './calculator';
+
+app.use(express.json());
 
 // ...
 
-app.get('/calculate', (req, res) => {
-  const { value1, value2, op } = req.query
+app.post('/calculate', (req, res) => {
+  const { value1, value2, op } = req.body;
 
-  const result = calculator(value1, value2, op)
-  res.send(result);
+  const result = calculator(value1, value2, op);
+  res.send({ result });
 });
 ```
 
-Cuando pasa el cursor sobre la función <i>calculate</i>, puede ver el tipeado de <i>calculator</i> aunque el código en sí no contiene ningun tipying:
+Para que esto funcione, debemos agregar un <i>export</i> a la función *calculator*:
 
-![](../../images/9/12a21.png)
+```js
+export const calculator = (a: number, b: number, op: Operation) : number => {
+```
 
-Pero si pasa el cursor sobre los valores del request, surge un problema:
+Cuando pasa el cursor sobre la función *calculate*, puede ver el tipeado de *calculator* aunque el código en sí no contiene ningún typing:
 
-![](../../images/9/13a21.png)
+![vscode mostrando los tipos de calculator cuando el cursor esta sobre la función](../../images/9/12a21.png)
 
-Todas las variables tienen el tipo <i>any</i>. No es tan sorprendente, ya que nadie les ha dado un tipo todavía. Hay un par de maneras de solucionar este problema, pero la primera que tenemos que considerar por qué esto es aceptado y de dónde el tipo <i>any</i> viene?
+Pero si pasas el cursor sobre los valores del request, surge un problema:
 
-En TypeScript, cada variable sin tipo cuyo tipo no se puede inferir, se convierte implícitamente en tipo [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any). Cualquiera es una especie de "comodín" que literalmente significa <i>cualquier tipo</i>. 
-Las cosas se convierten implícitamente de cualquier tipo con bastante frecuencia cuando uno se olvida de darle tipo a las funciones.
+![vscode problemáticamente mostrando any cuando el cursor esta sobre los argumentos de la función calculate](../../images/9/13a21.png)
 
-También podemos explicitar el tipo <i>any</i>. La única diferencia entre cualquier tipo implícito y explícito es cómo se ve el código, al compilador no le importa la diferencia.
+Todas las variables tienen el tipo *any*. No es tan sorprendente, ya que nadie les ha dado un tipo todavía. Hay un par de maneras de solucionar este problema, pero primero, tenemos que considerar por qué esto es aceptado y de dónde viene el tipo *any*.
 
-Sin embargo, los programadores ven el código de manera diferente cuando se aplica explícitamente <i>any</i> que cuando se infiere implícitamente. 
-<i>any</i> de manera implicita generalmente se considera problemático, ya que a menudo se debe a que el codificador se olvida de asignar tipos (o es demasiado perezoso para hacerlo), y también significa que no se aprovecha todo el poder de TypeScript.
+En TypeScript, cada variable sin tipo cuyo tipo no se puede inferir, se convierte implícitamente en tipo [any](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any). Any es una especie de tipo "comodín", que literalmente significa <i>cualquier</i> tipo.
+Las cosas se convierten implícitamente en tipo any con bastante frecuencia cuando uno se olvida de darle tipo a las funciones.
 
-Es por eso que la regla de configuración [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny) existe a nivel de compilador, y es muy recomendable mantenerla activada en todo momento. 
-En las raras ocasiones en que no pueda saber en serio cuál es el tipo de variable, debe indicarlo explícitamente en el código
+También podemos explicitar el tipo *any*. La única diferencia entre tipo any implícito y explícito es en cómo se ve el código; al compilador no le importa la diferencia.
+
+Sin embargo, los programadores ven el código de manera diferente cuando se aplica *any* explícitamente que cuando se infiere implícitamente.
+El *any* implícito generalmente se considera problemático, ya que a menudo se debe a que el desarrollador se olvido de asignar los tipos (o es demasiado perezoso para hacerlo), y también significa que no se aprovecha todo el poder de TypeScript.
+
+Es por esto que la regla de configuración [noImplicitAny](https://www.typescriptlang.org/tsconfig#noImplicitAny) existe a nivel de compilador, y es muy recomendable mantenerla activada en todo momento. En las raras ocasiones en las que no puedes saber cuál es el tipo de variable, debes indicarlo explícitamente en el código
 
 ```js
 const a : any = /* no clue what the type will be! */.
 ```
 
-Ya hemos configurado <i>noImplicitAny</i> en nuestro ejemplo, ¿por qué el compilador no se queja del tipo implicito <i>any</i>? 
-La razón es que el campo de consulta de un objeto Request de express es explícitamente tipado como <i>any</i>. Lo mismo ocurre con el campo <i>request.body</i> que usamos para publicar datos en una aplicación.
+Ya hemos configurado <i>noImplicitAny: true</i> en nuestro ejemplo, entonces, ¿por qué el compilador no se queja del tipo implícito *any*? La razón es que el campo *body* de un objeto [Request](https://expressjs.com/en/5x/api.html#req) de Express es explícitamente tipado como *any*. Lo mismo ocurre con el campo *request.query* que Express usa para los parámetros query.
 
-¿Y si quisiéramos evitar que los desarrolladores utilicen <i>any</i>? Afortunadamente, tenemos otros métodos además de <i>tsconfig.json</i> para hacer cumplir el estilo de codificación. Lo que podemos hacer es usar <i>eslint</i> para administrar nuestro código. 
-Instalemos eslint y sus extensiones de typescript:
+¿Y si quisiéramos evitar que los desarrolladores utilicen el tipo *any*? Afortunadamente, tenemos otros métodos además de <i>tsconfig.json</i> para hacer cumplir el estilo de codificación. Lo que podemos hacer es usar <i>ESlint</i> para administrar nuestro código.
+Instalemos ESlint y sus extensiones de Typescript:
 
 ```sh
 npm install --save-dev eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser
 ```
 
-Configuraremos eslint para [no permitir any explicito](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-explicit-any.md). Escriba las siguientes reglas en <i>.eslintrc</i>:
+Configuraremos ESlint para [no permitir any explicito](https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/docs/rules/no-explicit-any.md). Escribe las siguientes reglas en <i>.eslintrc</i>:
 
 ```json
 {
@@ -906,7 +911,9 @@ Configuraremos eslint para [no permitir any explicito](https://github.com/typesc
 }
 ```
 
-Configuremos también un script <i>lint</i> npm para inspeccionar los archivos con la extensión <i>.ts</i> modificando el archivo <i>package.json</i>:
+(Nuevas versiones de ESlint tienen esta regla por defecto, no es realmente necesario que la añadas por separado.)
+
+Configuremos también un script *lint* npm para inspeccionar los archivos con la extensión <i>.ts</i>, modificando el archivo <i>package.json</i>:
 
 ```json
 {
@@ -921,12 +928,12 @@ Configuremos también un script <i>lint</i> npm para inspeccionar los archivos c
 }
 ```
 
-Ahora lint se quejará si intentamos definir una variable de tipo <i>any</i>:
+Ahora lint se quejará si intentamos definir una variable de tipo *any*:
 
+![vscode mostrando ESlint quejándose acerca del uso del tipo any](../../images/9/13b.png)
 
-![](../../images/9/13b.png)
-
-El [@typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) tiene un montón de reglas específicas eslint de TypeScript, pero también se puede utilizar todas las reglas básicas eslint en proyectos de TypeScript. Por ahora, probablemente deberíamos ir con la configuración recomendada y modificar las reglas a medida que avanzamos cada vez que encontramos algo que queremos que se comporte de manera diferente.
+[@typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) tiene un montón de reglas específicas ESlint para TypeScript, pero también puedes utilizar todas las reglas básicas de ESlint en proyectos de TypeScript.
+Por ahora, probablemente deberíamos ir con la configuración recomendada, y modificaremos las reglas a medida que avanzamos cada vez que encontremos algo que queremos que se comporte de manera diferente.
 
 Además de la configuración recomendada, deberíamos intentar familiarizarnos con el estilo de codificación requerido en esta parte y <i>ubicar el punto y coma al final de cada línea de código como requerido<i>.
 
@@ -946,10 +953,15 @@ Entonces usaremos el siguiente <i>.eslintrc</i>
   },
   "rules": {
     "@typescript-eslint/semi": ["error"],
-    "@typescript-eslint/no-explicit-any": 2,
-    "@typescript-eslint/explicit-function-return-type": 0,
-    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
-    "no-case-declarations": 0
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/restrict-template-expressions": "off",
+    "@typescript-eslint/restrict-plus-operands": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { "argsIgnorePattern": "^_" }
+    ],
+    "no-case-declarations": "off"
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -958,9 +970,116 @@ Entonces usaremos el siguiente <i>.eslintrc</i>
 }
 ```
 
-Faltan algunos puntos y comas, pero son fáciles de agregar.
+Faltan algunos puntos y comas, pero son fáciles de agregar. También tenemos que arreglar problemas de ESlint acerca del tipo *any*:
 
-¡Y ahora arreglemos todo lo que hay que arreglar!
+![error de vscode: asignación insegura de valor any](../../images/9/50x.png)
+
+Podríamos y probablemente deberíamos deshabilitar algunas reglas de ESlint para obtener datos del request body.
+
+Deshabilitando *@typescript-eslint/no-unsafe-assignment* para la asignación de desestructuración y llamando al constructor [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/Number) a los valores casi que es suficiente:
+
+```js
+app.post('/calculate', (req, res) => {
+  // highlight-start
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  // highlight-end
+  const { value1, value2, op } = req.body;
+
+  const result = calculator(Number(value1), Number(value2), op); // highlight-line
+  res.send({ result });
+});
+```
+
+Sin embargo, esto aun nos deja con un problema con el que debemos lidiar, el último parámetro en la llamada a la función no es seguro:
+
+![vscode mostrando argumento no seguro de tipo any asignado a párametro de tipo Operation](../../images/9/51x.png)
+
+Podemos deshabilitar otra regla de ESlint para deshacernos de ello:
+
+```js
+app.post('/calculate', (req, res) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const { value1, value2, op } = req.body;
+
+  // highlight-start
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+  // highlight-end
+  const result = calculator(Number(value1), Number(value2), op);
+  res.send({ result });
+});
+```
+
+Ahora tenemos a ESlint silenciado pero estamos completamente a la merced del usuario. Definitivamente debemos hacer alguna validación a los datos del post y dar un mensaje de error apropiado si los datos son invalidos:
+
+```js
+app.post('/calculate', (req, res) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const { value1, value2, op } = req.body;
+
+// highlight-start
+  if ( !value1 || isNaN(Number(value1)) ) {
+    return res.status(400).send({ error: '...'});
+  }
+  // highlight-end
+
+  // more validations here...
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+  const result = calculator(Number(value1), Number(value2), op);
+  return res.send({ result });
+});
+```
+
+Veremos más tarde en esta parte algunas técnicas sobre como los datos de tipo *any* (por ejemplo, el input que una aplicación recibe del usuario) pueden ser *estrechados* a un tipo más especifico (como a un número). Con un estrechamiento de tipos apropiado, la necesidad de silenciar las reglas de ESlint desaparece.
+
+### Aserción de tipos
+
+Utilizar una [aserción de tipos](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions) es otro "truco sucio" que puede hacerse para mantener al compilador de TypeScript y a ESlint en silencio. Exportemos el tipo Operation en *calculator.ts*:
+
+```js
+export type Operation = 'multiply' | 'add' | 'divide';
+```
+
+Ahora podemos importar el tipo y usar una *aserción de tipo* para decirle al compilador de TypeScript cual es el tipo que una variable tiene:
+
+```js
+import { calculator, Operation } from './calculator'; // highlight-line
+
+app.post('/calculate', (req, res) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const { value1, value2, op } = req.body;
+
+  // validate the data here
+
+  // assert the type
+  const operation = op as Operation;  // highlight-line 
+
+  const result = calculator(Number(value1), Number(value2), operation); // highlight-line
+
+  return res.send({ result });
+});
+```
+
+La constante definida como *operation* ahora tiene el tipo *Operation* y el compilador esta perfectamente feliz, no silenciar la regla de ESlint es necesario en el siguiente llamado a la función. La nueva variable ya no es necesaria, la aserción de tipo puede ser hecha cuando un argumento es pasado a la función:
+
+```js
+app.post('/calculate', (req, res) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const { value1, value2, op } = req.body;
+
+  // validate the data here
+
+  const result = calculator(
+    Number(value1), Number(value2), op as Operation // highlight-line
+  );
+
+  return res.send({ result });
+});
+```
+
+Utilizar una aserción de tipo (o silenciar una regla de ESlint) siempre es una cosa un poco arriesgada. Deja al compilador de TypeScript fuera de la escena, el compilador simplemente confía en que nosotros como desarrolladores sabemos lo que estamos haciendo. Si el tipo afirmado *no* tiene el valor correcto, el resultado puede ser un error en tiempo de ejecución, entonces debemos tener mucho cuidado cuando validamos los datos si una aserción de tipos es utilizada.
+
+En el próximo capitulo, le echaremos un vistazo al [estrechamiento de tipos](https://www.typescriptlang.org/docs/handbook/2/narrowing.html), que nos proveerá de una forma mucho más segura de darle un tipo más estricto a los datos que provengan de una fuente externa.
 
 </div>
 
@@ -968,13 +1087,13 @@ Faltan algunos puntos y comas, pero son fáciles de agregar.
 
 ### Ejercicios 9.6.-9.7.
 
-#### 9.6 Eslint
+#### 9.6 ESlint
 
-Configure su proyecto para utilizar la configuración de eslint anterior y corrija todas las advertencias.
+Configura tu proyecto para utilizar la configuración de ESlint que vimos en la parte anterior y corrige todas las advertencias.
 
 #### 9.7 WebExercises
 
-Agregue un endpoint a su aplicación para la calculadora de ejercicio. Debe usarse haciendo una solicitud HTTP POST al endpoint <i>exercises</i> con la entrada en el cuerpo de la solicitud
+Agrega un endpoint a tu aplicación para la calculadora de ejercicio. Debe usarse haciendo una solicitud HTTP POST al endpoint <http://localhost:3002/exercises> con el siguiente input en el cuerpo de la solicitud:
 
 ```js
 {
@@ -983,7 +1102,7 @@ Agregue un endpoint a su aplicación para la calculadora de ejercicio. Debe usar
 }
 ```
 
-La respuesta es un json de la siguiente forma
+La respuesta es un json con la siguiente forma:
 
 ```js
 {
@@ -997,7 +1116,7 @@ La respuesta es un json de la siguiente forma
 }
 ```
 
-Si el cuerpo de la solicitud no tiene el formato correcto, se da una respuesta con el código de estado y el mensaje de error adecuados. El mensaje de error es
+Si el cuerpo de la solicitud no tiene el formato correcto, se da una respuesta con un código de estado y un mensaje de error adecuados. El mensaje de error es
 
 ```js
 {
@@ -1013,14 +1132,16 @@ o
 }
 ```
 
-dependiendo del error. Esto último ocurre si los valores de entrada no tienen el tipo correcto, es decir, no son números ni se pueden convertir en números.
+dependiendo del error. Esto último ocurre si los valores de entrada no tienen el tipo correcto, por ejemplo, no son números ni se pueden convertir en números.
 
-En este ejercicio, puede que le resulte beneficioso utilizar el tipo <i>any explícito</i> cuando maneje los datos en el cuerpo de la solicitud. Nuestra configuración de eslint evita esto, pero puede desarmar esta regla para una línea en particular insertando el siguiente comentario como la línea anterior:
+En este ejercicio, puede que te resulte beneficioso utilizar el tipo *any explícito* cuando manejes los datos en el body de la solicitud. Nuestra configuración de ESlint evita esto, pero puedes deshabilitar esta regla para una línea en particular insertando el siguiente comentario como la línea anterior:
 
 ```js
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ```
 
-Tenga en cuenta que debe tener una configuración correcta para poder acceder al cuerpo de la solicitud, consulte la [parte 3](/es/part3/node_js_and_express#receiving-data).
+También podrías meterte en problemas con las reglas *no-unsafe-member-access* y *no-unsafe-assignment*. Estas reglas pueden ser ignoradas en este ejercicio.
+
+Ten en cuenta que debes tener una configuración correcta para poder acceder al cuerpo de la solicitud, consulta la [parte 3](/es/part3/node_js_y_express#recibiendo-informacion).
 
 </div>

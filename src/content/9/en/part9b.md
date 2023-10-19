@@ -864,7 +864,7 @@ export const calculator = (a: number, b: number, op: Operation) : number => {
 
 When you hover over the *calculate* function, you can see the typing of the *calculator* even though the code itself does not contain any typings:
 
-![vscode showing calculator types when mouse over function](../../images/9/12a21.png)
+![vscode showing calculator types when hovering function](../../images/9/12a21.png)
 
 But if you hover over the values parsed from the request, an issue arises:
 
@@ -872,7 +872,7 @@ But if you hover over the values parsed from the request, an issue arises:
 
 All of the variables have the type *any*. It is not all that surprising, as no one has given them a type yet. There are a couple of ways to fix this, but first, we have to consider why this is accepted and where the type *any* came from.
 
-In TypeScript, every untyped variable whose type cannot be inferred implicitly becomes type [any](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any). Any is a kind of "wild card" type which stands for <i>whatever</i> type.
+In TypeScript, every untyped variable whose type cannot be inferred implicitly becomes of type [any](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any). Any is a kind of "wild card" type, which stands for <i>whatever</i> type.
 Things become implicitly any type quite often when one forgets to type functions.
 
 We can also explicitly type things *any*. The only difference between the implicit and explicit any type is how the code looks; the compiler does not care about the difference.
@@ -888,15 +888,14 @@ const a : any = /* no clue what the type will be! */.
 
 We already have <i>noImplicitAny: true</i> configured in our example, so why does the compiler not complain about the implicit *any* types? The reason is that the *body* field of an Express [Request](https://expressjs.com/en/5x/api.html#req) object is explicitly typed *any*. The same is true for the *request.query* field that Express uses for the query parameters.
 
-What if we would like to restrict developers from using the *any* type? Fortunately, we have methods other than <i>tsconfig.json</i> to enforce a coding style. What we can do is use <i>ESlint</i> to manage
-our code.
+What if we would like to restrict developers from using the *any* type? Fortunately, we have methods other than <i>tsconfig.json</i> to enforce a coding style. What we can do is use <i>ESlint</i> to manage our code.
 Let's install ESlint and its TypeScript extensions:
 
 ```shell
 npm install --save-dev eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser
 ```
 
-We will configure ESlint to [disallow explicit any]( https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-explicit-any.md). Write the following rules to <i>.eslintrc</i>:
+We will configure ESlint to [disallow explicit any]( https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/docs/rules/no-explicit-any.md). Write the following rules to <i>.eslintrc</i>:
 
 ```json
 {
@@ -982,7 +981,7 @@ Disabling *@typescript-eslint/no-unsafe-assignment* for the destructuring assign
 ```js
 app.post('/calculate', (req, res) => {
   // highlight-start
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   // highlight-end
   const { value1, value2, op } = req.body;
 
@@ -1031,11 +1030,11 @@ app.post('/calculate', (req, res) => {
 });
 ```
 
-We shall see later on in this part some techniques how the <i>any</i> typed data (eg. the input an app receives from the user) can be <i>narrowed</i> to a more specific type (such as number). With a proper narrowing of types, there is no more need to silence the eslint rules.
+We shall see later in this part some techniques on how the *any* typed data (eg. the input an app receives from the user) can be *narrowed* to a more specific type (such as number). With a proper narrowing of types, there is no more need to silence the ESlint rules.
 
 ### Type assertion
 
-Using a [type assertion](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions) is another "dirty trick" that can be done to keep TypeScript compiler and Eslint quiet. Let us export the type Operation in <i>calculator.ts</i>:
+Using a [type assertion](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions) is another "dirty trick" that can be done to keep TypeScript compiler and Eslint quiet. Let us export the type Operation in *calculator.ts*:
 
 ```js
 export type Operation = 'multiply' | 'add' | 'divide';
@@ -1072,13 +1071,13 @@ app.post('/calculate', (req, res) => {
 
   const result = calculator(
     Number(value1), Number(value2), op as Operation // highlight-line
-  ); 
+  );
 
   return res.send({ result });
 });
 ```
 
-Using a type assertion (or quieting an Eslint rule) is always a bit risky thing. It leaves the TypeScript compiler off the hook, the compiler just trusts that we as developers know what we are doing. If the asserted type does <i>not</i> have the right kind of value, the result will be a runtime error, so one must be pretty careful when validating the data if a type assertion is used.
+Using a type assertion (or quieting an Eslint rule) is always a bit risky thing. It leaves the TypeScript compiler off the hook, the compiler just trusts that we as developers know what we are doing. If the asserted type does *not* have the right kind of value, the result will be a runtime error, so one must be pretty careful when validating the data if a type assertion is used.
 
 In the next chapter, we shall have a look at [type narrowing](https://www.typescriptlang.org/docs/handbook/2/narrowing.html) which will provide a much more safe way of giving a stricter type for data that is coming from an external source.
 
@@ -1094,7 +1093,7 @@ Configure your project to use the above ESlint settings and fix all the warnings
 
 #### 9.7 WebExercises
 
-Add an endpoint to your app for the exercise calculator. It should be used by doing an HTTP POST request to the endpoint <http://localhost:3002/exercises> with the input in the request body:
+Add an endpoint to your app for the exercise calculator. It should be used by doing a HTTP POST request to the endpoint <http://localhost:3002/exercises> with the following input in the request body:
 
 ```js
 {
