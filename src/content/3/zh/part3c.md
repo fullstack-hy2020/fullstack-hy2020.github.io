@@ -808,9 +808,12 @@ Body:   {}
     ...
 </pre>
 
-Given malformed id as an argument, the <em>findById</em> method will throw an error causing the returned promise to be rejected. This will cause the callback function defined in the <em>catch</em> block to be called.
+<!-- Given malformed id as an argument, the <em>findById</em> method will throw an error causing the returned promise to be rejected. This will cause the callback function defined in the <em>catch</em> block to be called. -->
 
-Let's make some small adjustments to the response in the <em>catch</em> block:
+在给定了格式不正确的 id 作为参数时，<em>findById</em> 方法将抛出错误，导致返回的承诺被拒绝。这将导致在<em>catch</em>块中定义的回调函数被调用。
+
+<!-- Let's make some small adjustments to the response in the <em>catch</em> block: -->
+让我们对<em>catch</em>块中的响应做一些调整：
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
@@ -829,15 +832,26 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-If the format of the id is incorrect, then we will end up in the error handler defined in the _catch_ block. The appropriate status code for the situation is [400 Bad Request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1), because the situation fits the description perfectly:
+<!-- If the format of the id is incorrect, then we will end up in the error handler defined in the _catch_ block. The appropriate status code for the situation is [400 Bad Request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1), because the situation fits the description perfectly: -->
 
-> <i>The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications.</i>
+如果 id 的格式不正确，那么我们将进入在_catch_块中定义的错误处理程序。这种情况下，适合的状态码是 [400 Bad Request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1)，
+因为这种情形完美地符合其定义：
 
-We have also added some data to the response to shed some light on the cause of the error.
+<!-- > <i>The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications.</i> -->
 
-When dealing with Promises, it's almost always a good idea to add error and exception handling, because otherwise you will find yourself dealing with strange bugs.
+> <i>由于格式错误，服务器无法理解该请求。客户端不应在没有修改的情况下重复该请求。</i>
 
-It's never a bad idea to print the object that caused the exception to the console in the error handler:
+<!-- We have also added some data to the response to shed some light on the cause of the error. -->
+
+我们还在响应中添加了一些数据，以阐明错误的原因。
+
+<!-- When dealing with Promises, it's almost always a good idea to add error and exception handling, because otherwise you will find yourself dealing with strange bugs. -->
+
+在处理承诺时，添加错误和异常处理往往是一个好主意，否则你会发现自己在处理奇怪的错误时会陷入困境。
+
+<!-- It's never a bad idea to print the object that caused the exception to the console in the error handler: -->
+
+将引发异常的对象打印到控制台从来都不是一个坏主意：
 
 ```js
 .catch(error => {
@@ -846,9 +860,13 @@ It's never a bad idea to print the object that caused the exception to the conso
 })
 ```
 
-The reason the error handler gets called might be something completely different than what you had anticipated. If you log the error to the console, you may save yourself from long and frustrating debugging sessions. Moreover, most modern services to where you deploy your application support some form of logging system that you can use to check these logs. As mentioned, Heroku is one.
+<!-- The reason the error handler gets called might be something completely different than what you had anticipated. If you log the error to the console, you may save yourself from long and frustrating debugging sessions. Moreover, most modern services to where you deploy your application support some form of logging system that you can use to check these logs. As mentioned, Heroku is one. -->
 
-Every time you're working on a project with a backend, <i>it is critical to keep an eye on the console output of the backend</i>. If you are working on a small screen, it is enough to just see a tiny slice of the output in the background. Any error messages will catch your attention even when the console is far back in the background:
+导致错误处理程序被调用的原因可能完全不同于你所预期的情况。如果将错误记录到控制台，你或许可以避免迷失在冗长无聊的调试环节。此外，大多数部署应用程序的现代服务都支持某种形式的日志系统，你可以使用它来检查这些日志。如前所提，Heroku 是其中之一。 
+
+<!-- Every time you're working on a project with a backend, <i>it is critical to keep an eye on the console output of the backend</i>. If you are working on a small screen, it is enough to just see a tiny slice of the output in the background. Any error messages will catch your attention even when the console is far back in the background:  -->
+
+每当你在一个带有后端的项目上工作时，<i>关注后端的控制台输出非常重要</i>。如果你在小屏幕上工作，只需看到后台输出的一小部分就足够了。即使控制台在其他窗口下面，任何错误消息都会吸引你的注意：
 
 ![](../../images/3/15b.png)
 
