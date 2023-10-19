@@ -1112,7 +1112,7 @@ export default toNewDiaryEntry;
 >};
 >```
 >
-> <i>So before the real data and types are ready to use, I am just returning here something that has for sure the right type. The code stays in an operational state all the time and my blood pressure remains in normal level. </i>
+> <i>So before the real data and types are ready to use, I am just returning here something that has for sure the right type. The code stays in an operational state all the time and my blood pressure remains at normal levels. </i>
 
 ### Type guards
 
