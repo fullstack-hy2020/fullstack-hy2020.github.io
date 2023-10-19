@@ -22,7 +22,7 @@ En un entorno de producción, la necesidad de compilación a menudo significa qu
 
 Comencemos a escribir nuestra primera aplicación TypeScript. Para simplificar las cosas, comencemos usando el paquete [ts-node](https://github.com/TypeStrong/ts-node) de npm . El cual compila y ejecuta el archivo TypeScript especificado inmediatamente, por lo que no es necesario un paso de compilación por separado.
 
-Puedes instalar tanto <i>ts-node</i> como el paquete oficial <i>typescript</i> a nivel global ejecutando
+Puedes instalar tanto *ts-node* como el paquete oficial *typescript* a nivel global ejecutando
 
 ```bash
 npm install --location=global ts-node typescript
@@ -37,7 +37,7 @@ Como recordamos de la [parte 3](/es/part3), un proyecto npm se configura ejecuta
 npm install --save-dev ts-node typescript
 ```
 
-y configurando <i>scripts</i> dentro de package.json:
+y configurando *scripts* dentro de package.json:
 
 ```json
 {
@@ -49,7 +49,7 @@ y configurando <i>scripts</i> dentro de package.json:
 }
 ```
 
-Ahora, dentro de este directorio, puedes usar <i>ts-node</i> ejecutando * npm run ts-node*. Ten en cuenta que si estás utilizando ts-node a través de package.json, todos los argumentos de la línea de comandos para el script deben tener el prefijo  *--*. Entonces, si deseas ejecutar file.ts con <i>ts-node</i> y opciones *-s* y *--someoption*, el comando completo es: -->
+Ahora, dentro de este directorio, puedes usar *ts-node* ejecutando * npm run ts-node*. Ten en cuenta que si estás utilizando ts-node a través de package.json, todos los argumentos de la línea de comandos para el script deben tener el prefijo  *--*. Entonces, si deseas ejecutar file.ts con *ts-node* y opciones *-s* y *--someoption*, el comando completo es: -->
 
 ```shell
 npm run ts-node file.ts -- -s --someoption
@@ -61,7 +61,7 @@ Vale la pena mencionar que TypeScript también proporciona un área de juegos en
 
 #### Una nota sobre el estilo de código
 
-JavaScript en sí mismo es un lenguaje bastante relajado y, a menudo, las cosas se pueden hacer de múltiples formas diferentes. Por ejemplo, tenemos funciones anónimas y con nombre, podemos usar const y let o var, y podemos elegir si usar el <i>punto y coma</i> o no. Esta parte del curso se diferencia del resto por el uso de punto y coma. No es un patrón específico de TypeScript, sino una decisión de estilo de código general al crear cualquier tipo de proyecto de JavaScript. Utilizarlos o no suele estar en manos del programador, pero dado que se espera que podamos adaptar nuestros hábitos de código al código base existente, esperamos que uses punto y coma y que te adaptes a estilo del código en los ejercicios de esta parte. Esta parte también tiene otras diferencias de estilo de código en comparación con el resto del curso, por ejemplo, en las convenciones utilizadas para nombrar los directorios.
+JavaScript en sí mismo es un lenguaje bastante relajado y, a menudo, las cosas se pueden hacer de múltiples formas diferentes. Por ejemplo, tenemos funciones anónimas y con nombre, podemos usar const y let o var, y podemos elegir si usar el *punto y coma* o no. Esta parte del curso se diferencia del resto por el uso de punto y coma. No es un patrón específico de TypeScript, sino una decisión de estilo de código general al crear cualquier tipo de proyecto de JavaScript. Utilizarlos o no suele estar en manos del programador, pero dado que se espera que podamos adaptar nuestros hábitos de código al código base existente, esperamos que uses punto y coma y que te adaptes a estilo del código en los ejercicios de esta parte. Esta parte también tiene otras diferencias de estilo de código en comparación con el resto del curso, por ejemplo, en las convenciones utilizadas para nombrar los directorios.
 
 Agreguemos una configuración al archivo *tsconfig.json* al proyecto con el siguiente contenido:
 
@@ -73,7 +73,7 @@ Agreguemos una configuración al archivo *tsconfig.json* al proyecto con el sigu
 }
 ```
 
-El archivo <i>tsconfig.json</i> es utilizado para definir como el compilador de Typescript debe interpretar el código, cuan estrictamente el compilador debería funcionar, que archivos revisar o ignorar, y [mucho más](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html).
+El archivo *tsconfig.json* es utilizado para definir como el compilador de Typescript debe interpretar el código, cuan estrictamente el compilador debería funcionar, que archivos revisar o ignorar, y [mucho más](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html).
 Por ahora, solo utilizaremos la opción del compilador [noImplicitAny](https://www.typescriptlang.org/tsconfig#noImplicitAny), la cual no requiere tener tipos en todas las variables utilizadas.
 
 Comencemos creando un multiplicador simple. Se ve exactamente igual a como se haría en JavaScript.
@@ -88,7 +88,7 @@ multiplicator(2, 4, 'Multiplied numbers 2 and 4, the result is:');
 
 Como puedes ver, este sigue siendo JavaScript básico y ordinario sin características adicionales de TS. Se compila y se ejecuta muy bien con *npm run ts-node -- multiplier.ts*, como lo haría con Node.
 
-Pero, ¿qué sucede si terminamos pasando <i>tipos</i> incorrectos de argumentos a la función multiplicator?
+Pero, ¿qué sucede si terminamos pasando *tipos* incorrectos de argumentos a la función multiplicator?
 
 ¡Vamos a probarlo!
 
@@ -208,7 +208,7 @@ const calculator = (a: number, b: number, op: Operation): Result =>  {
 }
 ```
 
-Pero ahora la pregunta es, ¿<i>realmente</i> está bien que la función devuelva un string?
+Pero ahora la pregunta es, ¿*realmente* está bien que la función devuelva un string?
 
 Cuando tu código puede terminar en una situación en la que algo se divide por 0, es probable que algo haya salido terriblemente mal y se debería generar un error y manejarlo desde donde se llamó a la función. Cuando decides devolver valores que no esperabas originalmente, las advertencias de TypeScript te impiden tomar decisiones apresuradas y te ayudan a mantener tu código funcionando como se esperaba.
 
@@ -298,31 +298,31 @@ Volvamos a la idea básica de TypeScript. TypeScript espera que todo el código 
 
 Al igual que con npm, el mundo TypeScript también celebra el código fuente abierto. La comunidad está activa y reacciona continuamente a las actualizaciones y cambios en los paquetes npm de uso común. Casi siempre puedes encontrar las tipificaciones de paquetes npm, por lo que no tienes que crear tipificaciones para todas tus miles de dependencias por ti mismo.
 
-Por lo general, las tipificaciones de paquetes existentes se pueden encontrar en la organización <i>@types</i> dentro de npm, y puedes agregar los tipos relevantes a tu proyecto instalando un paquete npm con el nombre de tu paquete con el prefijo *@types/*. Por ejemplo:
+Por lo general, las tipificaciones de paquetes existentes se pueden encontrar en la organización *@types* dentro de npm, y puedes agregar los tipos relevantes a tu proyecto instalando un paquete npm con el nombre de tu paquete con el prefijo *@types/*. Por ejemplo:
 
 ```bash
 npm install --save-dev @types/react @types/express @types/lodash @types/jest @types/mongoose
 ```
 
-y así sucesivamente. Los <i>@types/*</i> son mantenidos por [Definitely typed](https://github.com/DefinitelyTyped/DefinitelyTyped), un proyecto comunitario con el objetivo de mantener todas las tipificaciones en un solo lugar.
+y así sucesivamente. Los *@types/** son mantenidos por [Definitely typed](https://github.com/DefinitelyTyped/DefinitelyTyped), un proyecto comunitario con el objetivo de mantener todas las tipificaciones en un solo lugar.
 
-A veces, un paquete npm también puede incluir sus tipificaciones dentro del código y, en ese caso, no es necesario instalar los correspondientes <i>@types/*</i>.
+A veces, un paquete npm también puede incluir sus tipificaciones dentro del código y, en ese caso, no es necesario instalar los correspondientes *@types/**.
 
 > **NB:** Dado que las tipificaciones solo se usan antes de la compilación, estas no son necesarias en la compilación de producción y siempre deben estar en devDependencies del package.json.
 
-Dado que la variable global <i>process</i> está definida por el propio Node, obtenemos sus tipificaciones del paquete <i>@types/node</i>.
+Dado que la variable global *process* está definida por el propio Node, obtenemos sus tipificaciones del paquete *@types/node*.
 
-Desde la version 10.0 <i>ts-node</i> ha definido <i>@types/node</i> como una [dependencia entre pares](https://docs.npmjs.com/cli/v8/configuring-npm/package-json#peerdependencies). Si la version de npm es al menos 7.0, las dependencias entre pares de un proyecto son automáticamente instaladas por npm. Si tienes una version mas antigua de npm, la dependencia entre pares debe ser instalada explícitamente:
+Desde la version 10.0 *ts-node* ha definido *@types/node* como una [dependencia entre pares](https://docs.npmjs.com/cli/v8/configuring-npm/package-json#peerdependencies). Si la version de npm es al menos 7.0, las dependencias entre pares de un proyecto son automáticamente instaladas por npm. Si tienes una version mas antigua de npm, la dependencia entre pares debe ser instalada explícitamente:
 
 ```shell
 npm install --save-dev @types/node
 ```
 
-Después de instalar el paquete @types/node, nuestro compilador ya no se queja de la variable <i>process</i>. Ten en cuenta que no es necesario requerir los tipos para el código, ¡la instalación del paquete es suficiente!
+Después de instalar el paquete @types/node, nuestro compilador ya no se queja de la variable *process*. Ten en cuenta que no es necesario requerir los tipos para el código, ¡la instalación del paquete es suficiente!
 
 ## Mejorando el proyecto
 
-A continuación, agreguemos scripts npm para ejecutar nuestros dos programas, <i>multiplier</i> y <i>calculator</i>:
+A continuación, agreguemos scripts npm para ejecutar nuestros dos programas, *multiplier* y *calculator*:
 
 ```json
 {
@@ -475,7 +475,7 @@ En este curso, normalmente, seguiremos la convención impuesta por la regla de E
 
 #### setup
 
-Los ejercicios 9.1.-9.7. se realizarán todos en el mismo proyecto de node. Crea el proyecto en un directorio vacío con *npm init* e instale los paquetes ts-node y typescript. Cree también el archivo <i>tsconfig.json</i> en el directorio con el siguiente contenido:
+Los ejercicios 9.1.-9.7. se realizarán todos en el mismo proyecto de node. Crea el proyecto en un directorio vacío con *npm init* e instale los paquetes ts-node y typescript. Cree también el archivo *tsconfig.json* en el directorio con el siguiente contenido:
 
 ```json
 {
@@ -489,7 +489,7 @@ La opción del compilador [noImplicitAny](https://www.typescriptlang.org/tsconfi
 
 #### 9.1 Índice de masa corporal
 
-Crea el código de este ejercicio en el archivo <i>bmiCalculator.ts</i>
+Crea el código de este ejercicio en el archivo *bmiCalculator.ts*
 
 Escribe una función *calculateBmi* que cuente el [IMC](https://es.wikipedia.org/wiki/%C3%8Dndice_de_masa_corporal) según la altura (en centímetros) y el peso (en kilogramos) y que luego devuelva un mensaje que se adapte a los resultados.
 
@@ -505,13 +505,13 @@ debe imprimir el siguiente mensaje
 Normal (healthy weight)
 ```
 
-Crea un script npm para ejecutar el programa con el comando <i>npm run calculateBmi</i>
+Crea un script npm para ejecutar el programa con el comando *npm run calculateBmi*
 
 #### 9.2 Calculadora de ejercicio
 
 Crea el código de este ejercicio en el archivo *exerciseCalculator.ts*
 
-Escribe una función *calculateExercises* que calcule el tiempo promedio de las <i>horas diarias de ejercicio</i> y lo compare con la <i>cantidad objetivo</i> de horas diarias y devuelva un objeto que incluya los siguientes valores:
+Escribe una función *calculateExercises* que calcule el tiempo promedio de las *horas diarias de ejercicio* y lo compare con la *cantidad objetivo* de horas diarias y devuelva un objeto que incluya los siguientes valores:
 
 - el número de días
 - el número de días de entrenamiento
@@ -571,7 +571,7 @@ $ npm run calculateExercises 2 1 0 2 4.5 0 3 1 0 4
 }
 ```
 
-En el ejemplo, el <i>primer argumento</i> es el valor objetivo.
+En el ejemplo, el *primer argumento* es el valor objetivo.
 
 Maneja las excepciones y los errores de manera adecuada. exerciseCalculator debe aceptar entradas de diferentes longitudes. Determina tú mismo cómo recopilar toda la información necesaria.
 
@@ -596,7 +596,7 @@ Otra nota: sorprendentemente, por algún motivo TypeScript no permite definir la
 
 ![vs code mostrando error no se puede re-declarar block-scoped variable x](../../images/9/60new.png)
 
-En realidad esto no es del todo cierto. Esta regla solamente aplica a archivos que son tratados como "scripts". Un archivo es un script si no contiene ninguna declaración de exportación o importación. Si un archivo las posee, entonces el archivo es tratado como un [modulo](https://www.typescriptlang.org/docs/handbook/modules.html), <i>y</i> las variables no son definidas en el scope de bloque.
+En realidad esto no es del todo cierto. Esta regla solamente aplica a archivos que son tratados como "scripts". Un archivo es un script si no contiene ninguna declaración de exportación o importación. Si un archivo las posee, entonces el archivo es tratado como un [modulo](https://www.typescriptlang.org/docs/handbook/modules.html), *y* las variables no son definidas en el scope de bloque.
 
 </div>
 
@@ -608,7 +608,7 @@ Hasta ahora solo hemos utilizado una regla en tsconfig, [noImplicitAny](https://
 
 Como ya mencionamos, el archivo [tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) contiene todas tus configuraciones principales sobre cómo deseas que TypeScript funcione en tu proyecto.
 
-Especifiquemos las siguientes configuraciones en nuestro archivo <i>tsconfig.json</i>:
+Especifiquemos las siguientes configuraciones en nuestro archivo *tsconfig.json*:
 
 ```json
 {
@@ -656,7 +656,7 @@ y luego agrega el script *start* a package.json:
 }
 ```
 
-Ahora podemos crear el archivo <i>index.ts</i> y escribir el endpoint *ping* de HTTP GET:
+Ahora podemos crear el archivo *index.ts* y escribir el endpoint *ping* de HTTP GET:
 
 ```js
 const express = require('express');
@@ -683,14 +683,14 @@ La queja es que la llamada *'require' puede convertirse en un import*. Sigamos l
 import express from 'express';
 ```
 
-**NB**: VSCode te ofrece una posibilidad para solucionar los problemas de forma automática haciendo clic en el botón <i>Quick fix...</i>. Mantén los ojos abiertos para estas ayudas/soluciones rápidas; escuchar a su editor generalmente hace que su código sea mejor y más fácil de leer. Las correcciones automáticas de problemas también pueden suponer un gran ahorro de tiempo.
+**NB**: VSCode te ofrece una posibilidad para solucionar los problemas de forma automática haciendo clic en el botón *Quick fix...*. Mantén los ojos abiertos para estas ayudas/soluciones rápidas; escuchar a su editor generalmente hace que su código sea mejor y más fácil de leer. Las correcciones automáticas de problemas también pueden suponer un gran ahorro de tiempo.
 
 Ahora nos encontramos con otro problema: el compilador se queja de la declaración de importación. 
 Una vez más, el editor es nuestro mejor amigo cuando tratamos de averiguar cuál es el problema:
 
 ![error de vscode acerca de no encontrar express](../../images/9/7.png)
 
-No hemos instalado tipos para <i>express</i>.
+No hemos instalado tipos para *express*.
 Hagamos lo que dice la sugerencia y ejecutemos:
 
 ```bash
@@ -709,7 +709,7 @@ Mientras que cuando usamos *import*, el editor conoce los tipos reales:
 
 La declaración de importación que se utilizará depende del método de exportación utilizado en el paquete importado.
 
-Una buena regla general es intentar importar un módulo utilizando primero la declaración *import*. Siempre usaremos este método en el <i>frontend</i>.
+Una buena regla general es intentar importar un módulo utilizando primero la declaración *import*. Siempre usaremos este método en el *frontend*.
 Si *import* no funciona, prueba con un método combinado: *import ... = require('...')*.
 
 Te recomendamos encarecidamente que leas más sobre los módulos de TypeScript [aquí](https://www.typescriptlang.org/docs/handbook/modules.html).
@@ -718,7 +718,7 @@ Hay un problema más con el código.
 
 ![vscode mostrando req declarado pero nunca leído](../../images/9/9b.png)
 
-Esto se debe a que prohibimos los parámetros no utilizados en nuestro <i>tsconfig.json</i>
+Esto se debe a que prohibimos los parámetros no utilizados en nuestro *tsconfig.json*
 
 ```js
 {
@@ -748,7 +748,7 @@ Cambiemos el nombre de la variable *req* a *_req*. Finalmente estamos listos par
 
 ![navegador mostrando resultado pong en /ping](../../images/9/11a.png)
 
-Para simplificar el desarrollo, deberíamos habilitar la <i>recarga automática</i> para mejorar nuestro flujo de trabajo. En este curso ya has utilizado <i>nodemon</i>, pero ts-node tiene una alternativa llamada <i>ts-node-dev</i>. Está hecho para ser utilizado solo en un entorno de desarrollo y se encarga de la re-compilación en cada cambio, por lo que no será necesario reiniciar la aplicación.
+Para simplificar el desarrollo, deberíamos habilitar la *recarga automática* para mejorar nuestro flujo de trabajo. En este curso ya has utilizado *nodemon*, pero ts-node tiene una alternativa llamada *ts-node-dev*. Está hecho para ser utilizado solo en un entorno de desarrollo y se encarga de la re-compilación en cada cambio, por lo que no será necesario reiniciar la aplicación.
 
 Instalemos *ts-node-dev* en nuestras dependencias de desarrollo:
 
@@ -756,7 +756,7 @@ Instalemos *ts-node-dev* en nuestras dependencias de desarrollo:
 npm install --save-dev ts-node-dev
 ```
 
-Agreguemos un script a <i>package.json</i>:
+Agreguemos un script a *package.json*:
 
 ```json
 {
@@ -783,7 +783,7 @@ Agrega Express a tus dependencias y crea un endpoint HTTP GET *hello* que respon
 
 La aplicación web debe iniciarse con los comandos *npm start* en modo de producción y con *npm run dev* en modo de desarrollo, este último debe usar *ts-node-dev* para ejecutar la aplicación.
 
-Reemplaza también tu archivo <i>tsconfig.json</i> existente con el siguiente contenido:
+Reemplaza también tu archivo *tsconfig.json* existente con el siguiente contenido:
 
 ```json
 {
@@ -829,7 +829,7 @@ Si los parámetros de consulta de la solicitud son del tipo incorrecto o faltan,
 }
 ```
 
-No copies el código de la calculadora en el archivo <i>index.ts</i>, conviértelo en un [módulo de Typescript](https://www.typescriptlang.org/docs/handbook/modules.html) que se pueda importar en <i>index.ts</i>.
+No copies el código de la calculadora en el archivo *index.ts*, conviértelo en un [módulo de Typescript](https://www.typescriptlang.org/docs/handbook/modules.html) que se pueda importar en *index.ts*.
 
 </div>
 
@@ -856,7 +856,7 @@ app.post('/calculate', (req, res) => {
 });
 ```
 
-Para que esto funcione, debemos agregar un <i>export</i> a la función *calculator*:
+Para que esto funcione, debemos agregar un *export* a la función *calculator*:
 
 ```js
 export const calculator = (a: number, b: number, op: Operation) : number => {
@@ -872,7 +872,7 @@ Pero si pasas el cursor sobre los valores del request, surge un problema:
 
 Todas las variables tienen el tipo *any*. No es tan sorprendente, ya que nadie les ha dado un tipo todavía. Hay un par de maneras de solucionar este problema, pero primero, tenemos que considerar por qué esto es aceptado y de dónde viene el tipo *any*.
 
-En TypeScript, cada variable sin tipo cuyo tipo no se puede inferir, se convierte implícitamente en tipo [any](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any). Any es una especie de tipo "comodín", que literalmente significa <i>cualquier</i> tipo.
+En TypeScript, cada variable sin tipo cuyo tipo no se puede inferir, se convierte implícitamente en tipo [any](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any). Any es una especie de tipo "comodín", que literalmente significa *cualquier* tipo.
 Las cosas se convierten implícitamente en tipo any con bastante frecuencia cuando uno se olvida de darle tipo a las funciones.
 
 También podemos explicitar el tipo *any*. La única diferencia entre tipo any implícito y explícito es en cómo se ve el código; al compilador no le importa la diferencia.
@@ -886,16 +886,16 @@ Es por esto que la regla de configuración [noImplicitAny](https://www.typescrip
 const a : any = /* no clue what the type will be! */.
 ```
 
-Ya hemos configurado <i>noImplicitAny: true</i> en nuestro ejemplo, entonces, ¿por qué el compilador no se queja del tipo implícito *any*? La razón es que el campo *body* de un objeto [Request](https://expressjs.com/en/5x/api.html#req) de Express es explícitamente tipado como *any*. Lo mismo ocurre con el campo *request.query* que Express usa para los parámetros query.
+Ya hemos configurado *noImplicitAny: true* en nuestro ejemplo, entonces, ¿por qué el compilador no se queja del tipo implícito *any*? La razón es que el campo *body* de un objeto [Request](https://expressjs.com/en/5x/api.html#req) de Express es explícitamente tipado como *any*. Lo mismo ocurre con el campo *request.query* que Express usa para los parámetros query.
 
-¿Y si quisiéramos evitar que los desarrolladores utilicen el tipo *any*? Afortunadamente, tenemos otros métodos además de <i>tsconfig.json</i> para hacer cumplir el estilo de codificación. Lo que podemos hacer es usar <i>ESlint</i> para administrar nuestro código.
+¿Y si quisiéramos evitar que los desarrolladores utilicen el tipo *any*? Afortunadamente, tenemos otros métodos además de *tsconfig.json* para hacer cumplir el estilo de codificación. Lo que podemos hacer es usar *ESlint* para administrar nuestro código.
 Instalemos ESlint y sus extensiones de Typescript:
 
 ```sh
 npm install --save-dev eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser
 ```
 
-Configuraremos ESlint para [no permitir any explicito](https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/docs/rules/no-explicit-any.md). Escribe las siguientes reglas en <i>.eslintrc</i>:
+Configuraremos ESlint para [no permitir any explicito](https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/docs/rules/no-explicit-any.md). Escribe las siguientes reglas en *.eslintrc*:
 
 ```json
 {
@@ -913,7 +913,7 @@ Configuraremos ESlint para [no permitir any explicito](https://github.com/typesc
 
 (Nuevas versiones de ESlint tienen esta regla por defecto, no es realmente necesario que la añadas por separado.)
 
-Configuremos también un script *lint* npm para inspeccionar los archivos con la extensión <i>.ts</i>, modificando el archivo <i>package.json</i>:
+Configuremos también un script *lint* npm para inspeccionar los archivos con la extensión *.ts*, modificando el archivo *package.json*:
 
 ```json
 {
@@ -935,9 +935,9 @@ Ahora lint se quejará si intentamos definir una variable de tipo *any*:
 [@typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) tiene un montón de reglas específicas ESlint para TypeScript, pero también puedes utilizar todas las reglas básicas de ESlint en proyectos de TypeScript.
 Por ahora, probablemente deberíamos ir con la configuración recomendada, y modificaremos las reglas a medida que avanzamos cada vez que encontremos algo que queremos que se comporte de manera diferente.
 
-Además de la configuración recomendada, deberíamos intentar familiarizarnos con el estilo de codificación requerido en esta parte y <i>ubicar el punto y coma al final de cada línea de código como requerido<i>.
+Además de la configuración recomendada, deberíamos intentar familiarizarnos con el estilo de codificación requerido en esta parte y *ubicar el punto y coma al final de cada línea de código como requerido*.
 
-Entonces usaremos el siguiente <i>.eslintrc</i>
+Entonces usaremos el siguiente *.eslintrc*
 
 ```json
 {
