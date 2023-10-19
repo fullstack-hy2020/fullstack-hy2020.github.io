@@ -927,9 +927,13 @@ app.use(errorHandler)
 
 ### The order of middleware loading
 
-The execution order of middleware is the same as the order that they are loaded into express with the _app.use_ function. For this reason it is important to be careful when defining middleware.
+<!-- The execution order of middleware is the same as the order that they are loaded into express with the _app.use_ function. For this reason it is important to be careful when defining middleware. -->
 
-The correct order is the following:
+中间件执行的顺序与他们使用 _app.use_ 函数加载到 express 的顺序相同。因此，在定义中间件时必须格外小心。
+
+<!-- The correct order is the following: -->
+
+正确顺序如下：
 
 ```js
 app.use(express.static('build'))
@@ -956,7 +960,9 @@ const errorHandler = (error, request, response, next) => {
 app.use(errorHandler)
 ```
 
-The json-parser middleware should be among the very first middleware loaded into Express. If the order was the following:
+<!-- The json-parser middleware should be among the very first middleware loaded into Express. If the order was the following: -->
+
+JSON解析中间件应该首先载入 Express 中。如果顺序如下的话：
 
 ```js
 app.use(requestLogger) // request.body is undefined!
@@ -970,11 +976,17 @@ app.post('/api/notes', (request, response) => {
 app.use(express.json())
 ```
 
-Then the JSON data sent with the HTTP requests would not be available for the logger middleware or the POST route handler, since the _request.body_ would be _undefined_ at that point.
+<!-- Then the JSON data sent with the HTTP requests would not be available for the logger middleware or the POST route handler, since the _request.body_ would be _undefined_ at that point. -->
 
-It's also important that the middleware for handling unsupported routes is next to the last middleware that is loaded into Express, just before the error handler.
+HTTP 请求中的 JSON 数据将无法被 logger 中间件或 POST 路由处理程序使用，因为此时的 _request.body_ 为 _undefined_ 。
 
-For example, the following loading order would cause an issue:
+<!-- It's also important that the middleware for handling unsupported routes is next to the last middleware that is loaded into Express, just before the error handler. -->
+
+还有一点很重要，处理不支持路由的程序应该放在倒数第二个加载入 Express，位置就在错误处理程序之前。
+
+<!-- For example, the following loading order would cause an issue: -->
+
+举个例子，以下加载顺序会产生问题：
 
 ```js
 const unknownEndpoint = (request, response) => {
@@ -989,7 +1001,9 @@ app.get('/api/notes', (request, response) => {
 })
 ```
 
-Now the handling of unknown endpoints is ordered <i>before the HTTP request handler</i>. Since the unknown endpoint handler responds to all requests with <i>404 unknown endpoint</i>, no routes or middleware will be called after the response has been sent by unknown endpoint middleware. The only exception to this is the error handler which needs to come at the very end, after the unknown endpoints handler.
+<!-- Now the handling of unknown endpoints is ordered <i>before the HTTP request handler</i>. Since the unknown endpoint handler responds to all requests with <i>404 unknown endpoint</i>, no routes or middleware will be called after the response has been sent by unknown endpoint middleware. The only exception to this is the error handler which needs to come at the very end, after the unknown endpoints handler. -->
+
+现在，未知端点的处理被安排在 <i>HTTP请求处理程序之前</i> 。由于未知端点处理程序对所有请求都以 <i>404 未知端点</i> 做出响应，因此在未知端点中间件发送响应后，不会调用任何路由或中间件。唯一的例外是错误处理程序，它需要放在未知端点处理程序之后的最后位置。
 
 ### Other operations
 
