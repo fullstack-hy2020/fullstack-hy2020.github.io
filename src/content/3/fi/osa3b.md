@@ -328,7 +328,7 @@ Fly.io:n tapauksessa skriptit näyttävät seuraavalta:
 {
   "scripts": {
     // ...
-    "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
+    "build:ui": "rm -rf dist && cd ../frontend/ && npm run build && cp -r dist ../backend",
     "deploy": "fly deploy",
     "deploy:full": "npm run build:ui && npm run deploy",    
     "logs:prod": "fly logs"
