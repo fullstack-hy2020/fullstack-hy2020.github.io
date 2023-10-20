@@ -9,20 +9,20 @@ lang: en
 
 Now that we have a basic understanding of how TypeScript works and how to create small projects with it, it's time to start creating something useful. We are now going to create a new project that will introduce use cases that are a little more realistic.
 
-One major change from the previous part is that <i>we're not going to use ts-node anymore</i>. It is a handy tool that helps you get started, but in the long run, it is advisable to use the official TypeScript compiler that comes with the <i>typescript</i> npm-package. The official compiler generates and packages JavaScript files from the .ts files so that the built <i>production version</i> won't contain any TypeScript code anymore. This is the exact outcome we are aiming for since TypeScript itself is not executable by browsers or Node.
+One major change from the previous part is that *we're not going to use ts-node anymore*. It is a handy tool that helps you get started, but in the long run, it is advisable to use the official TypeScript compiler that comes with the *typescript* npm-package. The official compiler generates and packages JavaScript files from the .ts files so that the built *production version* won't contain any TypeScript code anymore. This is the exact outcome we are aiming for since TypeScript itself is not executable by browsers or Node.
 
 ### Setting up the project
 
 We will create a project for Ilari, who loves flying small planes but has a difficult time managing his flight history. He is a coder himself, so he doesn't necessarily need a user interface, but he'd like to use some custom software with HTTP requests and retain the possibility of later adding a web-based user interface to the application.
 
-Let's start by creating our first real project: <i>Ilari's flight diaries</i>. As usual, run *npm init* and install the *typescript* package as a dev dependency.
+Let's start by creating our first real project: *Ilari's flight diaries*. As usual, run *npm init* and install the *typescript* package as a dev dependency.
 
 ```shell
  npm install typescript --save-dev
 ```
 
-TypeScript's Native Compiler (<i>tsc</i>) can help us initialize our project by generating our <i>tsconfig.json</i> file.
-First, we need to add the *tsc* command to the list of executable scripts in <i>package.json</i> (unless you have installed *typescript* globally). Even if you installed TypeScript globally, you should always add it as a dev dependency to your project.
+TypeScript's Native Compiler (*tsc*) can help us initialize our project by generating our *tsconfig.json* file.
+First, we need to add the *tsc* command to the list of executable scripts in *package.json* (unless you have installed *typescript* globally). Even if you installed TypeScript globally, you should always add it as a dev dependency to your project.
 
 The npm script for running *tsc* is set as follows:
 
@@ -46,7 +46,7 @@ We can now initialize our tsconfig.json settings by running:
 
  **Note** the extra *--* before the actual argument! Arguments before *--*  are interpreted as being for the *npm* command, while the ones after that are meant for the command that is run through the script (i.e. *tsc* in this case).
 
-The <i>tsconfig.json</i> file we just created contains a lengthy list of every configuration available to us. However, most of them are commented out.
+The *tsconfig.json* file we just created contains a lengthy list of every configuration available to us. However, most of them are commented out.
 Studying this file can help you find some configuration options you might need.
 It is also completely okay to keep the commented lines, in case you might need them someday.
 
@@ -77,7 +77,7 @@ The *target* configuration tells the compiler which *ECMAScript* version to use 
 *module* tells the compiler that we want to use *CommonJS* modules in the compiled code. This means we can use the old *require* syntax instead of the *import* one, which is not supported in older versions of *Node*.
 
 *strict* is a shorthand for multiple separate options:
-<i>noImplicitAny, noImplicitThis, alwaysStrict, strictBindCallApply, strictNullChecks, strictFunctionTypes and strictPropertyInitialization</i>.
+*noImplicitAny, noImplicitThis, alwaysStrict, strictBindCallApply, strictNullChecks, strictFunctionTypes and strictPropertyInitialization*.
 They guide our coding style to use the TypeScript features more strictly.
 For us, perhaps the most important is the already-familiar [noImplicitAny](https://www.staging-typescript.org/tsconfig#noImplicitAny). It prevents implicitly setting type *any*, which can for example happen if you don't type the parameters of a function.
 Details about the rest of the configurations can be found in the [tsconfig documentation](https://www.staging-typescript.org/tsconfig#strict).
@@ -91,14 +91,14 @@ Using *strict* is suggested by the official documentation.
 
 *esModuleInterop* allows interoperability between CommonJS and ES Modules; see more in the [documentation](https://www.staging-typescript.org/tsconfig#esModuleInterop).
 
-Now that we have set our configuration, we can continue by installing <i>express</i> and, of course, also <i>@types/express</i>. Also, since this is a real project, which is intended to be grown over time, we will use ESlint from the very beginning:
+Now that we have set our configuration, we can continue by installing *express* and, of course, also *@types/express*. Also, since this is a real project, which is intended to be grown over time, we will use ESlint from the very beginning:
 
 ```shell
 npm install express
 npm install --save-dev eslint @types/express @typescript-eslint/eslint-plugin @typescript-eslint/parser
 ```
 
-Now our <i>package.json</i> should look like this:
+Now our *package.json* should look like this:
 
 ```json
 {
@@ -118,13 +118,13 @@ Now our <i>package.json</i> should look like this:
     "@types/express": "^4.17.18",
     "@typescript-eslint/eslint-plugin": "^6.7.3",
     "@typescript-eslint/parser": "^6.7.3",
-    "eslint": "^8.50.0"
+    "eslint": "^8.50.0",
+    "typescript": "^5.2.2"
   }
 }
-
 ```
 
-We also create a <i>.eslintrc</i> file with the following content:
+We also create a *.eslintrc* file with the following content:
 
 ```json
 {
@@ -160,8 +160,8 @@ We also create a <i>.eslintrc</i> file with the following content:
 ```
 
 Now we just need to set up our development environment, and we are ready to start writing some serious code.
-There are many different options for this. One option could be to use the familiar <i>nodemon</i> with <i>ts-node</i>. However, as we saw earlier, <i>ts-node-dev</i> does the same thing, so we will use that instead.
-So, let's install <i>ts-node-dev</i>:
+There are many different options for this. One option could be to use the familiar *nodemon* with *ts-node*. However, as we saw earlier, *ts-node-dev* does the same thing, so we will use that instead.
+So, let's install *ts-node-dev*:
 
 ```shell
 npm install --save-dev ts-node-dev
@@ -187,7 +187,7 @@ As you can see, there is a lot of stuff to go through before beginning the actua
 
 Now we can finally start coding! As always, we start by creating a ping endpoint, just to make sure everything is working.
 
-The contents of the <i>index.ts</i> file:
+The contents of the *index.ts* file:
 
 ```js
 import express from 'express';
@@ -206,14 +206,14 @@ app.listen(PORT, () => {
 });
 ```
 
-Now, if we run the app with *npm run dev*, we can verify that a request to <http://localhost:3000/ping> gives the response <i>pong</i>, so our configuration is set!
+Now, if we run the app with *npm run dev*, we can verify that a request to <http://localhost:3000/ping> gives the response *pong*, so our configuration is set!
 
 When starting the app with *npm run dev*, it runs in development mode.
 The development mode is not suitable at all when we later operate the app in production.
 
-Let's try to create a <i>production build</i> by running the TypeScript compiler. Since we have defined the *outdir* in our tsconfig.json, nothing's left but to run the script *npm run tsc*.
+Let's try to create a *production build* by running the TypeScript compiler. Since we have defined the *outdir* in our tsconfig.json, nothing's left but to run the script *npm run tsc*.
 
-Just like magic, a native runnable JavaScript production build of the Express backend is created in file <i>index.js</i> inside the directory <i>build</i>. The compiled code looks like this
+Just like magic, a native runnable JavaScript production build of the Express backend is created in file *index.js* inside the directory *build*. The compiled code looks like this
 
 ```js
 "use strict";
@@ -234,7 +234,7 @@ app.listen(PORT, () => {
 });
 ```
 
-Currently, if we run ESlint it will also interpret the files in the <i>build</i> directory. We don't want that, since the code there is compiler-generated. We can prevent this by creating a  <i>.eslintignore</i> file that lists the content we want ESlint to ignore, just like we do with git and <i>.gitignore</i>.
+Currently, if we run ESlint it will also interpret the files in the *build* directory. We don't want that, since the code there is compiler-generated. We can prevent this by creating a  *.eslintignore* file that lists the content we want ESlint to ignore, just like we do with git and *.gitignore*.
 
 Let's add an npm script for running the application in production mode:
 
@@ -256,7 +256,7 @@ When we run the app with *npm start*, we can verify that the production build al
 ![browser showing pong from localhost:3000/ping](../../images/9/15a.png)
 
 Now we have a minimal working pipeline for developing our project.
-With the help of our compiler and ESlint, it also ensures that good code quality is maintained. With this base, we can start creating an app that we could, later on, deploy into a production environment.
+With the help of our compiler and ESlint, we ensure that good code quality is maintained. With this base, we can start creating an app that we could, later on, deploy into a production environment.
 
 </div>
 
@@ -272,7 +272,7 @@ The [frontend](https://github.com/fullstack-hy2020/patientor) has already been b
 
 #### WARNING
 
-Quite often VS code loses track of what is really happening in the code and it shows type or style related warnings despite the code having been fixed. If this happens (to me it has happened quite often), just restart the editor. It is also good to doublecheck that everything really works by running the compiler and the eslint from the command line with commands:
+Quite often VS code loses track of what is really happening in the code and it shows type or style related warnings despite the code having been fixed. If this happens (to me it has happened quite often), close and open the file that is giving you trouble or just restart the editor. It is also good to doublecheck that everything really works by running the compiler and the ESlint from the command line with commands:
 
 ```bash
 npm run tsc
@@ -283,7 +283,7 @@ When run in command line you get the "real result" for sure. So, never trust the
 
 #### 9.8: Patientor backend, step1
 
-Initialize a new backend project that will work with the frontend. Configure eslint and tsconfig with the same configurations as proposed in the material. Define an endpoint that answers HTTP GET requests for route */api/ping*.
+Initialize a new backend project that will work with the frontend. Configure ESlint and tsconfig with the same configurations as proposed in the material. Define an endpoint that answers HTTP GET requests for route */api/ping*.
 
 The project should be runnable with npm scripts, both in development mode and, as compiled code, in production mode.
 
@@ -303,7 +303,7 @@ Ensure that the backend answers the ping request that the <i>frontend</i> has ma
 
 ![dev tools showing ping failed](../../images/9/16a.png)
 
-You might also want to have a look at the <i>console</i> tab. If something fails, [part 3](/en/part3) of the course shows how the problem can be solved.
+You might also want to have a look at the *console* tab. If something fails, [part 3](/en/part3) of the course shows how the problem can be solved.
 
 </div>
 
