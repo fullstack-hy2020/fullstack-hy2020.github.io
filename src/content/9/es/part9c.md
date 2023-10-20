@@ -291,12 +291,6 @@ El proyecto debería poder ejecutarse con scripts npm, tanto en modo de desarrol
 
 Haz un fork y clona el proyecto [patientor](https://github.com/fullstack-hy2020/patientor). Inicia el proyecto con la ayuda del archivo README. 
 
-Puedes ejecutar este comando si obtienes un mensaje de error cuando intentas iniciar el frontend:
-
-```shell
-npm update chokidar
-```
-
 Deberías poder usar el frontend sin un backend que funcione.
 
 Asegúrate de que el backend responda a la solicitud de ping que el *frontend* ha realizado al inicio. Verifica la herramienta para desarrolladores para asegurarte de que realmente funciona:
@@ -315,15 +309,15 @@ Finalmente estamos listos para empezar a escribir código.
 
 Empecemos por lo básico. Ilari quiere poder realizar un seguimiento de sus experiencias en sus viajes aéreos.
 
-Quiere poder guardar las </i>entradas del diario</i> que contengan:
+Quiere poder guardar las *entradas del diario* que contienen:
 
 - La fecha de la entrada
-- Condiciones meteorológicas (good, windy, rainy or stormy)(bueno, ventoso, lluvioso o tormentoso)
-- Visibilidad (good, ok or poor)(buena, regular o mala)
+- Condiciones meteorológicas (sunny, windy, cloudy, rainy or stormy)(soleado, ventoso, nublado, lluvioso o tormentoso)
+- Visibilidad (great, good, ok or poor)(muy buena, buena, regular o mala)
 - Texto libre detallando la experiencia
 
-Hemos obtenido algunos datos de muestra, que utilizaremos como base para construir. 
-Los datos se guardan en formato json y se pueden encontrar [aquí](https://github.com/fullstack-hy2020/misc/blob/master/diaryentries.json).
+Hemos obtenido algunos datos de muestra, que utilizaremos como base para construir.
+Los datos se guardan en formato JSON y se pueden encontrar [aquí](https://github.com/fullstack-hy2020/misc/blob/master/diaryentries.json).
 
 Los datos tienen el siguiente aspecto
 
@@ -349,13 +343,13 @@ Los datos tienen el siguiente aspecto
 
 Comencemos por crear un endpoint que devuelva todas las entradas del diario de vuelo.
 
-Primero necesitamos tomar algunas decisiones sobre cómo estructurar nuestro código fuente. Es mejor colocar todo el código fuente en el directorio <i>src</i>, para que el código fuente no se mezcle con los archivos de configuración. 
-Nos trasladaremos <i>index.ts</i> allí y hacer los cambios necesarios a los scripts npm.
+Primero necesitamos tomar algunas decisiones sobre cómo estructurar nuestro código fuente. Es mejor colocar todo el código fuente en el directorio *src*, para que el código fuente no se mezcle con los archivos de configuración.
+Trasladaremos *index.ts* allí y haremos los cambios necesarios a los scripts npm.
 
-Colocaremos todos los [routers](/es/part4/structure_of_backend_application_introduction_to_testing), módulos que se encargan de manejar un conjunto de recursos específicos como <i>diaries</i>, bajo el directorio <i>src/routes</i>. 
-Esto es un poco diferente a lo que hicimos en la [parte 4](/es/part4), donde usamos el directorio <i>src/controllers</i>.
+Colocaremos todos los [routers](/es/part4/estructura_de_la_aplicacion_backend_introduccion_a_las_pruebas) y los módulos que se encargan de manejar un conjunto de recursos específicos como *diaries*, bajo el directorio *src/routes*.
+Esto es un poco diferente a lo que hicimos en la [parte 4](/es/part4), donde usamos el directorio *src/controllers*.
 
-El router que se encarga de todos los endpoints del diario está en <i>src/routes/diaries.ts</i> y tiene este aspecto:
+El router que se encarga de todos los endpoints del diario está en *src/routes/diaries.ts* y tiene este aspecto:
 
 ```js
 import express from 'express';
@@ -373,8 +367,7 @@ router.post('/', (_req, res) => {
 export default router;
 ```
 
-Enrutaremos todas las solicitudes al prefijo <i>/api/diaries</i> a ese router específico en _index.ts_
-
+Enrutaremos todas las solicitudes al prefijo */api/diaries* a ese router específico en *index.ts*
 
 ```js
 import express from 'express';
@@ -397,15 +390,16 @@ app.listen(PORT, () => {
 });
 ```
 
-Y ahora, si hacemos una solicitud HTTP GET a http://localhost:3000/api/diaries, deberíamos ver el mensaje <i>Fetching all diaries!</i>.
+Y ahora, si hacemos una solicitud HTTP GET a <http://localhost:3000/api/diaries>, deberíamos ver el mensaje *Fetching all diaries!*.
 
-A continuación, debemos comenzar a servir los datos (que se encuentran [aquí](https://github.com/fullstack-hy2020/misc/blob/master/diaryentries.json)) desde la aplicación. Obtendremos los datos y los guardaremos en <i>data/diaries.json</i>.
+A continuación, debemos comenzar a servir los datos (que se encuentran [aquí](https://github.com/fullstack-hy2020/misc/blob/master/diaryentries.json)) desde la aplicación. Obtendremos los datos y los guardaremos en *data/entries.json*.
 
-No escribiremos el código para las manipulaciones de datos reales en el router. En su lugar, crearemos un <i>service</i> que se encargue de la manipulación de datos. Es una práctica bastante común separar la "lógica empresarial" del código del router en sus propios módulos, que a menudo se denominan <i>service</i>. El servicio de nombres se origina en un [diseño impulsado por dominios](https://en.wikipedia.org/wiki/Domain-driven_design) y se hizo popularcon el framework [Spring](https://spring.io/).
+No escribiremos el código para las manipulaciones de datos en el router. En su lugar, crearemos un *service* que se encargue de la manipulación de datos.
+Es una práctica bastante común separar la "lógica de negocios" de el código del router en sus propios módulos, que a menudo se denominan *services*.
+El nombre service se origina en el [Diseño guiado por el dominio](https://es.wikipedia.org/wiki/Dise%C3%B1o_guiado_por_el_dominio) y se hizo popular con el framework [Spring](https://spring.io/).
 
-Vamos a crear un <i>src/services</i> de directorio y coloquemos el archivo <i>diaryService.ts</i> en él. 
+Vamos a crear un directorio *src/services* y coloquemos el archivo *diaryService.ts* en él.
 El archivo contiene dos funciones para buscar y guardar entradas del diario:
-
 
 ```js
 import diaryData from '../../data/diaries.json'
@@ -424,11 +418,11 @@ export default {
 };
 ```
 
-Pero algo no esta bien
+Pero algo no esta bien:
 
-![](../../images/9/17c.png)
+![vscode pidiendo considerar el uso de resolveJsonModule ya que no puede encontrar el módulo](../../images/9/17c.png)
 
-La sugerencia dice que podríamos querer usar <i>resolveJsonModule</i>. Agreguémoslo a nuestro tsconfig:
+La sugerencia dice que podríamos querer usar *resolveJsonModule*. Agreguémoslo a nuestro tsconfig:
 
 ```json
 {
@@ -449,17 +443,19 @@ La sugerencia dice que podríamos querer usar <i>resolveJsonModule</i>. Agregué
 
 Y nuestro problema está resuelto.
 
-> **NB**: Por alguna razón, VSCode tiende a quejarse de que no puede encontrar el archivo <i>../../data/diaries.json</i> del servicio a pesar de que el archivo existe. Eso es un error en el editor y desaparece cuando se reinicia el editor.
+> **NB**: Por alguna razón, VSCode tiende a quejarse de que no puede encontrar el archivo *../../data/entries.json* desde el servicio a pesar de que el archivo existe. Eso es un error en el editor y desaparece cuando se reinicia el editor.
 
-Anteriormente vimos cómo el compilador puede decidir el tipo de variable por el valor que se le asigna. De manera similar, el compilador puede interpretar grandes conjuntos de datos que constan de objetos y matrices. Debido a esto, el compilador puede advertirnos si intentamos hacer algo sospechoso con los datos json que estamos manejando. Por ejemplo, si estamos manejando un array que contiene objetos de un tipo específico, y tratamos de agregar un objeto que no tiene todos los campos que tienen los otros objetos, o tiene conflictos de tipos (por ejemplo, un número donde debería haber un string), el compilador puede darnos una advertencia.
+Anteriormente vimos cómo el compilador puede decidir el tipo de variable por el valor que se le asigna.
+De manera similar, el compilador puede interpretar grandes conjuntos de datos que constan de objetos y arrays.
+Debido a esto, el compilador puede advertirnos si intentamos hacer algo sospechoso con los datos JSON que estamos manejando. Por ejemplo, si estamos manejando un array que contiene objetos de un tipo específico, y tratamos de agregar un objeto que no tiene todos los campos que tienen los otros objetos, o tiene conflictos de tipos (por ejemplo, un número donde debería haber un string), el compilador puede darnos una advertencia.
 
 Aunque el compilador es bastante bueno para asegurarse de que no hagamos nada no deseado, es más seguro definir los tipos de datos nosotros mismos.
 
-Actualmente tenemos una aplicación básica de TypeScript express que funciona, pero apenas hay <i>typings</i> real en el código. Dado que sabemos qué tipo de datos deben aceptarse para los campos meteorológicos y de visibilidad, no hay razón para que no incluyamos sus tipos en el código.
+Actualmente tenemos una aplicación básica de Express con TypeScript que funciona, pero el código apenas esta *tipado*. Dado que sabemos qué tipo de datos deben aceptarse para los campos *weather* y *visibility*, no hay razón para que no incluyamos sus tipos en el código.
 
-Creemos un archivo para nuestros tipos, <i>types.ts</i>, donde definiremos todos nuestros tipos para este proyecto.
+Creemos un archivo para nuestros tipos, *types.ts*, donde definiremos todos nuestros tipos para este proyecto.
 
-Primero, escriba los valores de <i>Weather</i>(clima) y <i>Visibility</i>(visibilidad) utilizando un [union type](https://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types) de las strings permitidas:
+Primero, vamos a tipear los valores de de *Weather* y *Visibility* utilizando un [union type](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types) de las strings permitidas:
 
 ```js
 export type Weather = 'sunny' | 'rainy' | 'cloudy' | 'windy' | 'stormy';
@@ -467,7 +463,7 @@ export type Weather = 'sunny' | 'rainy' | 'cloudy' | 'windy' | 'stormy';
 export type Visibility = 'great' | 'good' | 'ok' | 'poor';
 ```
 
-Y a partir de ahí podemos continuar creando un tipo DiaryEntry, que será un [interface](http://www.typescriptlang.org/docs/handbook/interfaces.html):
+Y a partir de ahí podemos continuar creando un tipo DiaryEntry, que será un [interface](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#interfaces):
 
 ```js
 export interface DiaryEntry {
@@ -482,62 +478,67 @@ export interface DiaryEntry {
 Ahora podemos intentar escribir nuestro json importado:
 
 ```js
-import diaryData from '../../data/diaries.json';
+import diaryData from '../../data/entries.json';
 
 import { DiaryEntry } from '../types'; // highlight-line
 
-const diaries: Array<DiaryEntry> = diaryData; // highlight-line
+const diaries: DiaryEntry[] = diaryData; // highlight-line
 
-const getEntries = (): Array<DiaryEntry> => { // highlight-line
+const getEntries = (): DiaryEntry[] => { // highlight-line
   return diaries; // highlight-line
 };
 
-const addEntry = () => {
+const addDiary = () => {
   return null;
 };
 
 export default {
   getEntries,
-  addEntry
+  addDiary
 };
 ```
-Pero dado que el json ya tiene sus valores declarados, asignar un tipo para el conjunto de datos da como resultado un error:
 
-![](../../images/9/19b.png)
+Pero dado que el JSON ya tiene sus valores declarados, asignar un tipo para el conjunto de datos da como resultado un error:
 
-El final del mensaje de error revela el problema: los campos <i>weather</i> son incompatibles. En <i>DiaryEntry</i> especificamos que su tipo es <i>Weather</i>, pero el compilador de TypeScript había inferido que su tipo era string .
+![vscode mostrando error string no asignable a weather](../../images/9/19b.png)
 
-Podemos solucionar el problema haciendo una [afirmación de tipo](http://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions). Esto debe hacerse solo si estamos seguros de que sabemos lo que estamos haciendo. Si afirmamos que el tipo de la variable <i>diaryData</i> es <i>DiaryEntry</i> con la palabra clave <i>as</i>, todo debería funcionar:
+El final del mensaje de error revela el problema: los campos *weather* son incompatibles. En *DiaryEntry* especificamos que su tipo es *Weather*, pero el compilador de TypeScript había inferido que su tipo era *string*.
+
+Podemos solucionar el problema haciendo una [afirmación de tipo](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions). Como ya [mencionamos](/es/part9/primeros_pasos_con_type_script#asercion-de-tipos) ¡las aserciones de tipo solo deben hacerse si estamos seguro de lo que estamos haciendo!
+
+Si afirmamos que el tipo de la variable *diaryData* es *DiaryEntry* con la palabra clave *as*, todo debería funcionar:
 
 ```js
 import diaryData from '../../data/entries.json'
 
 import { Weather, Visibility, DiaryEntry } from '../types'
 
-const diaries: Array<DiaryEntry> = diaryData as Array<DiaryEntry>; // highlight-line
+const diaries: DiaryEntry[] = diaryData as DiaryEntry[]; // highlight-line
 
-const getEntries = (): Array<DiaryEntry> => {
+const getEntries = (): DiaryEntry[] => {
   return diaries;
 }
 
-const addEntry = () => {
-  return null
+const addDiary = () => {
+  return null;
 }
 
 export default {
   getEntries,
-  addEntry
+  addDiary
 };
 ```
 
-Nunca deberíamos usar la aserción de tipo a menos que no haya otra forma de proceder, ya que siempre existe el peligro de afirmar un tipo no apto para un objeto y causar un error de ejecución desagradable. Si bien el compilador confía en que sepa lo que está haciendo cuando usa <i>as</i>, al hacer esto, no estamos usando toda la potencia de TypeScript, sino que confiamos en el codificador para asegurar el código.
+Nunca deberíamos usar la aserción de tipo a menos que no haya otra forma de proceder, ya que siempre existe el peligro de afirmar un tipo no apto para un objeto y causar un desagradable error de ejecución.
+Si bien el compilador confía en que sepas lo que está haciendo cuando usas *as*, al hacer esto, no estamos usando todo el poder de TypeScript, sino que confiamos en el desarrollador para asegurar el código.
 
-En nuestro caso, podríamos cambiar la forma en que exportamos nuestros datos para poder escribirlos dentro del archivo de datos. Dado que no podemos usar typings en un archivo JSON, deberíamos convertir el archivo json en un archivo ts que exporta los datos escritos así:
+En nuestro caso, podríamos cambiar la forma en que exportamos nuestros datos para poder escribirlos dentro del archivo de datos.
+Dado que no podemos usar typings en un archivo JSON, deberíamos convertir el archivo JSON en un archivo ts llamado *diaries.ts* que exporta los datos tipados de la siguiente manera:
 
 ```js
-import { DiaryEntry } from "../src/types";
+import { DiaryEntry } from "../src/types"; // highlight-line
 
-const diaryEntries: Array<DiaryEntry> = [
+const diaryEntries: DiaryEntry[] = [ // highlight-line
   {
       "id": 1,
       "date": "2017-01-01",
@@ -548,32 +549,31 @@ const diaryEntries: Array<DiaryEntry> = [
   // ...
 ];
 
-export default diaryEntries;
+export default diaryEntries; // highlight-line
 ```
 
-Ahora, cuando importamos el array, el compilador la interpreta correctamente y los campos <i>weather</i> y <i>visibility</i> se entienden correctamente:
-
+Ahora, cuando importamos el array, el compilador lo interpreta correctamente y los campos *weather* y *visibility* se entienden correctamente:
 
 ```js
-import diaries from '../../data/diaries'; // highlight-line
+import diaries from '../../data/entries'; // highlight-line
 
 import { DiaryEntry } from '../types';
 
-const getEntries = (): Array<DiaryEntry> => {
+const getEntries = (): DiaryEntry[] => {
   return diaries;
 }
 
-const addEntry = () => {
+const addDiary = () => {
   return null;
 }
 
 export default {
   getEntries,
-  addEntry
+  addDiary
 };
 ```
 
-Tenga en cuenta que si queremos poder guardar entradas sin un campo determinado, por ejemplo, <i>comment</i>, podríamos establecer el tipo de campo como [opcional](http://www.typescriptlang.org/docs/handbook/interfaces.html#optional-properties) agregando <i>?</i> a la declaración de tipo:
+Ten en cuenta que si queremos poder guardar entradas sin un campo determinado, por ejemplo, *comment*, podríamos establecer el tipo del campo como [opcional](https://www.typescriptlang.org/docs/handbook/2/objects.html#optional-properties) agregando *?* a la declaración de tipo:
 
 ```js
 export interface DiaryEntry {
@@ -581,13 +581,13 @@ export interface DiaryEntry {
   date: string;
   weather: Weather;
   visibility: Visibility;
-  comment?: string;
+  comment?: string; // highlight-line
 }
 ```
 
 ### Módulos de Node y JSON
 
-Es importante tomar nota de un problema que puede surgir al usar la opción tsconfig [resolveJsonModule](https://www.typescriptlang.org/en/tsconfig#resolveJsonModule):
+Es importante tomar nota de un problema que puede surgir al usar la opción de tsconfig [resolveJsonModule](https://www.typescriptlang.org/tsconfig/#resolveJsonModule):
 
 ```json
 {
@@ -598,28 +598,28 @@ Es importante tomar nota de un problema que puede surgir al usar la opción tsco
 }
 ```
 
-De acuerdo con la documentación del nodo para los [módulos de archivo](https://nodejs.org/api/modules.html#modules_file_modules), node intentará resolver los módulos en orden de extensiones:
+De acuerdo con la documentación de node para los [módulos de archivo](https://nodejs.org/api/modules.html#modules_file_modules), node intentará resolver los módulos por orden de extensiones:
 
-```sh
+```shell
  ["js", "json", "node"]
 ```
 
-Además de eso, de forma predeterminada, <i>ts-node</i> y <i>ts-node-dev</i> amplían la lista de posibles extensiones de módulo de node a:
+Además de eso, de forma predeterminada, *ts-node* y *ts-node-dev* amplían la lista de posibles extensiones de módulo de node a:
 
-```sh
+```shell
  ["js", "json", "node", "ts", "tsx"]
 ```
 
-> **NB**: La validez de los archivos <i>.js</i>, <i>.json</i> y <i>.node</i> como módulos en Typescript depende de la configuración del entorno, incluidas las opciones <i>tsconfig</i> como <i>allowJs</i> y <i>resolveJsonModule</i>.
+> **NB**: La validez de los archivos *.js*, *.json* y *.node* como módulos en Typescript depende de la configuración del entorno, incluidas las opciones de *tsconfig* como *allowJs* y *resolveJsonModule*.
 
-Considere una estructura de carpeta plana que contiene archivos:
+Considera una estructura de directorios plana que contiene archivos:
 
-```sh
+```shell
   ├── myModule.json
   └── myModule.ts
 ```
 
-En typescript, con la opción <i>resolveJsonModule</i> establecida en true, el archivo <i>myModule.json</i> se convierte en un módulo de nodo válido. Ahora, imagine un escenario en el que deseamos utilizar el archivo <i>myModule.ts</i>:
+En TypeScript, con la opción *resolveJsonModule* establecida en true, el archivo *myModule.json* se convierte en un módulo de node válido. Ahora, imagina un escenario en el que deseamos utilizar el archivo *myModule.ts*:
 
 ```js
 import myModule from "./myModule";
@@ -631,30 +631,24 @@ Mirando de cerca el orden de las extensiones de módulo de node:
  ["js", "json", "node", "ts", "tsx"]
 ```
 
-Notamos que la extensión de archivo <i>.json</i> tiene prioridad sobre <i>.ts</i>, por lo que se importará <i>myModule.json</i> y no <i>myModule.ts</i>.
+Notamos que la extensión de archivo *.json* tiene prioridad sobre *.ts*, por lo que se importará *myModule.json* y no *myModule.ts*.
 
 Para evitar errores, se recomienda que dentro de un directorio plano, cada archivo con una extensión de módulo de node válida tenga un nombre de archivo único.
 
 ### Tipos de utilidad
 
-A veces, es posible que deseemos utilizar una modificación específica de un tipo. Por ejemplo, considere una página para enumerar algunos datos, algunos de los cuales son confidenciales y otros no. Es posible que deseemos estar seguros de que no se utilizan ni se muestran datos sensibles. Podríamos elegir los campos de un tipo que permitamos que se utilicen para hacer cumplir esto. Podemos hacer eso usando el tipo de utilidad [Pick](http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk).
+A veces, es posible que deseemos utilizar una modificación específica de un tipo.
+Por ejemplo, considera una página para enumerar algunos datos, algunos de los cuales son confidenciales y otros no.
+Es posible que deseemos estar seguros de que no se utilizan ni se muestran datos sensibles. Podríamos *elegir* los campos de un tipo que permitimos que se utilicen para hacer cumplir esto.
+Podemos hacer eso usando el tipo de utilidad [Pick](https://www.typescriptlang.org/docs/handbook/utility-types.html#picktype-keys).
 
-En nuestro proyecto, deberíamos considerar que Ilari podría querer crear una lista de todas las entradas de su diario excluyendo el campo de comentarios, ya que durante un vuelo muy aterrador podría terminar escribiendo algo que no necesariamente querría mostrarle a nadie más.
+En nuestro proyecto, deberíamos considerar que Ilari podría querer crear una lista de todas las entradas de su diario *excluyendo* el campo de comentarios, ya que durante un vuelo muy aterrador, podría terminar escribiendo algo que no necesariamente querría mostrarle a alguien más.
 
-El tipo de utilidad [Pick](http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk) nos permite elegir qué campos de un tipo existente queremos usar. Pick se puede utilizar para construir un tipo completamente nuevo o para informar a una función lo que debería devolver en tiempo de ejecución. Los tipos de utilidad son un tipo especial de herramientas de tipo, pero se pueden utilizar como los tipos normales.
+El tipo de utilidad [Pick](https://www.typescriptlang.org/docs/handbook/utility-types.html#picktype-keys) nos permite elegir qué campos de un tipo existente queremos usar.
+Pick se puede utilizar para construir un tipo completamente nuevo o para informar a una función lo que debería devolver en tiempo de ejecución.
+Los tipos de utilidad son un tipo especial, pero se pueden utilizar como los tipos normales.
 
-En nuestro caso, para crear una versión "censurada" de <i>DiaryEntry</i> para pantallas públicas, podemos usar Pick en la declaración de función:
-
-```js
-const getNonSensitiveEntries =
-  (): Array<Pick<DiaryEntry, 'id' | 'date' | 'weather' | 'visibility'>> => {
-    // ...
-  }
-```
-
-y el compilador esperaría que la función devolviera un array de valores del tipo DiaryEntry modificado, que incluye solo los cuatro campos seleccionados.
-
-Dado que [Pick](http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk) requiere que el tipo que modifica se proporcione como una [variable de tipo](http://www.typescriptlang.org/docs/handbook/generics.html#working-with-generic-type-variables), al igual que Array, ahora tenemos dos variables de tipo anidadas y la sintaxis está empezando a parecer un poco extraña. Podemos mejorar la legibilidad del código utilizando la sintaxis de array [alternativa](http://www.typescriptlang.org/docs/handbook/basic-types.html#array):
+En nuestro caso, para crear una versión "censurada" de *DiaryEntry* para pantallas públicas, podemos usar *Pick* en la declaración de la función:
 
 ```js
 const getNonSensitiveEntries =
@@ -663,7 +657,9 @@ const getNonSensitiveEntries =
   }
 ```
 
-En este caso, queremos excluir solo un campo, por lo que aún mejor sería usar el tipo de utilidad [Omit](http://www.typescriptlang.org/docs/handbook/utility-types.html#omittk), que podemos usar para declarar qué campos excluir:
+y el compilador esperaría que la función devuelva un array de valores del tipo *DiaryEntry* modificado, que incluye solo los cuatro campos seleccionados.
+
+En este caso, solo queremos excluir un campo, por lo que seria aún mejor utilizar el tipo de utilidad [Omit](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys), con el cual podemos declarar qué campos queremos excluir:
 
 ```js
 const getNonSensitiveEntries = (): Omit<DiaryEntry, 'comment'>[] => {
@@ -671,16 +667,16 @@ const getNonSensitiveEntries = (): Omit<DiaryEntry, 'comment'>[] => {
 }
 ```
 
-Otra forma sería declarar un tipo completamente nuevo para <i>NonSensitiveDiaryEntry</i>:
+Para mejorar la legibilidad, definitivamente deberiamos definir un [alias de tipo](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases) llamado *NonSensitiveDiaryEntry* en el archivo *types.ts*:
 
 ```js
 export type NonSensitiveDiaryEntry = Omit<DiaryEntry, 'comment'>;
 ```
 
-El código ahora se convierte en
+El código ahora es mucho más claro y más descriptivo:
 
 ```js
-import diaries from '../../data/diaries';
+import diaries from '../../data/entries';
 import { NonSensitiveDiaryEntry, DiaryEntry } from '../types'; // highlight-line
 
 const getEntries = (): DiaryEntry[] => {
@@ -691,27 +687,28 @@ const getNonSensitiveEntries = (): NonSensitiveDiaryEntry[] => { // highlight-li
   return diaries;
 };
 
-const addEntry = () => {
+const addDiary = () => {
   return null;
 };
 
 export default {
   getEntries,
-  addEntry,
+  addDiary,
   getNonSensitiveEntries // highlight-line
 };
 ```
 
-Una cosa en nuestra aplicación es motivo de preocupación. En <i>getNonSensitiveEntries</i> estamos devolviendo las entradas completas del diario, ¡y no se da ningún error a pesar de typing!
+Una cosa en nuestra aplicación es motivo de preocupación. En *getNonSensitiveEntries*, estamos devolviendo las entradas completas del diario, ¡y *no se da ningún error* a pesar del typing!
 
-Esto sucede porque [TypeScript solo verifica](http://www.typescriptlang.org/docs/handbook/type-compatibility.html) si tenemos todos los campos obligatorios o no, pero los campos en exceso no están prohibidos. En nuestro caso esto significa que <i>no está prohibido</i> devolver un objeto de tipo <i>DiaryEntry[]</i>, pero si intentáramos acceder al campo <i>comment</i>, no sería posible porque estaríamos accediendo a un campo que TypeScript desconoce incluso aunque existe.
+Esto sucede porque [TypeScript solo verifica](http://www.typescriptlang.org/docs/handbook/type-compatibility.html) si tenemos todos los campos obligatorios o no, pero los campos extra no están prohibidos. En nuestro caso esto significa que *no está prohibido* devolver un objeto de tipo *DiaryEntry[]*, pero si intentáramos acceder al campo *comment*, no sería posible porque estaríamos accediendo a un campo que TypeScript desconoce incluso aunque existe.
 
-Desafortunadamente, esto puede provocar un comportamiento no deseado si no es consciente de lo que está haciendo; la situación es válida en lo que respecta a TypeScript, pero lo más probable es que esté permitiendo un uso no deseado. Si ahora devolviéramos todos los diaryEntries de la función <i>getNonSensitiveEntries</i> al <i>frontend</i>, en realidad estaríamos filtrando los campos no deseados al navegador solicitante, ¡incluso aunque nuestros tipos parezcan implicar lo contrario!
+Desafortunadamente, esto puede provocar un comportamiento no deseado si no eres consciente de lo que estas haciendo; la situación es válida en lo que respecta a TypeScript, pero lo más probable es que estés permitiendo un uso no deseado.
+Si ahora devolviéramos todas las entradas del diario de la función *getNonSensitiveEntries* al frontend, estaríamos *filtrando los campos no deseados* al navegador solicitante, ¡incluso aunque nuestros tipos parezcan implicar lo contrario!
 
 Debido a que TypeScript no modifica los datos reales, sino solo su tipo, debemos excluir los campos nosotros mismos:
 
 ```js
-import diaries from '../../data/entries.js'
+import diaries from '../../data/entries.ts'
 
 import { NonSensitiveDiaryEntry, DiaryEntry } from '../types'
 
@@ -720,7 +717,7 @@ const getEntries = () : DiaryEntry[] => {
 }
 
 // highlight-start
-const getNonSensitiveEntries = (): NonSensitiveDiaryEntry [] => {
+const getNonSensitiveEntries = (): NonSensitiveDiaryEntry[] => {
   return diaries.map(({ id, date, weather, visibility }) => ({
     id,
     date,
@@ -731,7 +728,7 @@ const getNonSensitiveEntries = (): NonSensitiveDiaryEntry [] => {
 // highlight-end
 
 const addDiary = () => {
-  return []
+  return null;
 }
 
 export default {
@@ -741,18 +738,19 @@ export default {
 }
 ```
 
-Si ahora intentamos devolver estos datos con el tipo básico <i>DiaryEntry</i>, es decir, si escribiéramos la función de la siguiente manera
-
+Si ahora intentamos devolver estos datos con el tipo básico *DiaryEntry*, es decir, si escribiéramos la función de la siguiente manera:
 
 ```js
-const getNonSensitiveEntries = () : DiaryEntry[] => {
+const getNonSensitiveEntries = (): DiaryEntry[] => {
 ```
 
 obtendríamos el siguiente error:
 
-![](../../images/9/22b.png)
+![error de vscode - comment esta declarado aquí](../../images/9/22b.png)
 
 Nuevamente, la última línea del mensaje de error es la más útil. Deshagamos esta modificación no deseada.
+
+Ten en cuenta que si haces el campo comment opcional (usando el operador *?*), todo funciona bien.
 
 Los tipos de utilidades incluyen muchas herramientas útiles y definitivamente vale la pena tomarse un tiempo para estudiar [la documentación](https://www.typescriptlang.org/docs/handbook/utility-types.html).
 
@@ -769,7 +767,7 @@ router.get('/', (_req, res) => {
 });
 
 router.post('/', (_req, res) => {
-    res.send('Saving a diary!');
+  res.send('Saving a diary!');
 });
 
 export default router;
@@ -777,7 +775,7 @@ export default router;
 
 La respuesta es lo que esperamos que sea
 
-![](../../images/9/26.png)
+![navegador en api/diaries muestra tres objetos json](../../images/9/26.png)
 
 </div>
 
@@ -785,38 +783,39 @@ La respuesta es lo que esperamos que sea
 
 ###  Ejercicios 9.10.-9.11.
 
-De manera similar al servicio de vuelo de Ilari, no usamos una base de datos real en nuestra aplicación, sino que usamos datos codificados, es decir, en los archivos [diagnoses.json](https://github.com/fullstack-hy2020/misc/blob/master/diagnoses.json) y [patients.json](https://github.com/fullstack-hy2020/misc/blob/master/patients.json). Obtenga los archivos y guárdelos en un directorio llamado <i>data</i> en su proyecto. Toda la modificación de datos se puede realizar en la memoria de ejecución, por lo que durante esta parte <i>no es necesario escribir en un archivo</i>.
+De manera similar al servicio de vuelo de Ilari, no usamos una base de datos real en nuestra aplicación, sino que usamos datos codificados, es decir, en los archivos [diagnoses.ts](https://github.com/fullstack-hy2020/misc/blob/master/diagnoses.ts) y [patients.ts](https://github.com/fullstack-hy2020/misc/blob/master/patients.ts). Obten los archivos y guárdalos en un directorio llamado *data* en tu proyecto. Todas la modificaciones de datos se pueden realizar en la memoria de ejecución, por lo que durante esta parte *no es necesario escribir a un archivo*.
 
 #### 9.10: Patientor backend, paso 3
 
-Cree un tipo <i>Diagnose</i> y utilícelo para crear endpoint <i>/api/diagnoses</i> para obtener todos los diagnósticos con HTTP GET.
+Crea un tipo *Diagnose* y utilízalo para crear un endpoint */api/diagnoses* para obtener todos los diagnósticos con HTTP GET.
 
-Estructura tu código correctamente utilizando directorios y archivos con nombres significativos.
+Estructura tu código correctamente utilizando directorios y archivos con nombres apropiados.
 
-**Tenga en cuenta**  que los diagnósticos pueden contener o no el campo <i>latin</i>. Es posible que desee utilizar [propiedades opcionales](https://www.typescriptlang.org/docs/handbook/interfaces.html#optional-properties) en la definición de tipo.
+**Ten en cuenta** que *diagnoses* pueden contener o no el campo *latin*. Es posible que quieras utilizar [propiedades opcionales](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#optional-properties) en la definición de tipos.
 
-####  9.11: Patientor backend, paso 
-Cree el tipo de dato <i>Patient</i> y configure un endpoint GET <i>/api/patients</i> que devuelva todos los pacientes al frontend, excluyendo el campo <i>ssn</i>. Utilice un [tipo de utilidad](https://www.typescriptlang.org/docs/handbook/utility-types.html) para asegurarse de que está seleccionando y devolviendo solo los campos deseados.
+####  9.11: Patientor backend, paso 4
 
-En este ejercicio, puede asumir que el campo <i>gender</i> tiene el tipo <i>string</i>.
+Crea el tipo de datos *Patient* y configura un endpoint GET */api/patients* que devuelva todos los pacientes al frontend, excluyendo el campo *ssn*. Utiliza un [tipo de utilidad](https://www.typescriptlang.org/docs/handbook/utility-types.html) para asegurarte de que estas seleccionando y devolviendo solo los campos deseados.
 
-Pruebe el endpoint con el navegador y asegúrese de que <i>ssn</i> no esté incluido en la respuesta:
+En este ejercicio, puedes asumir que el campo *gender* tiene el tipo *string*.
 
-![](../../images/9/22g.png)
+Prueba el endpoint con el navegador y asegúrate de que *ssn* no esté incluido en la respuesta:
 
-Después de crear el endpoint, asegúrese de que el <i>frontend</i> muestre la lista de pacientes:
+![navegador en api/patients no muestra ssn en el json de pacientes](../../images/9/22g.png)
 
-![](../../images/9/22h.png)
+Después de crear el endpoint, asegúrate de que el *frontend* muestre la lista de pacientes:
+
+![navegador mostrando la lista de pacientes](../../images/9/22h.png)
 
 </div>
 
 <div class="content">
 
-###  Evitar un resultado undefined accidental
+###  Previniendo un resultado undefined accidental
 
-Extendamos el backend para admitir la obtención de una entrada específica con una solicitud HTTP GET para enrutar <i>api/diaries/:id</i>.
+Extendamos el backend para admitir la obtención de una entrada específica con una solicitud HTTP GET a la ruta *api/diaries/:id*.
 
-El DiaryService debe ampliarse con la función <i>findById</i>:
+El DiaryService debe ampliarse con la función *findById*:
 
 ```js
 // ...
@@ -838,11 +837,14 @@ export default {
 
 Pero una vez más, surge un nuevo problema:
 
-![](../../images/9/23e.png)
+![error de vscode no se puede asignar undefined a DiaryEntry](../../images/9/23e.png)
 
-El problema es que no hay garantía de que se pueda encontrar una entrada con la identificación especificada. Es bueno que seamos conscientes de este problema potencial ya en la fase de compilación. Sin TypeScript no se nos advertiría sobre este problema y, en el peor de los casos, podríamos haber terminado devolviendo un objeto <i>undefined</i> en lugar de informar al usuario que no se ha encontrado la entrada especificada.
+El problema es que no hay garantía de que se pueda encontrar una entrada con el id especificado.
+Es bueno que seamos conscientes de este problema potencial ya en la fase de compilación. Sin TypeScript no se nos advertiría sobre este problema y, en el peor de los casos, podríamos haber terminado devolviendo un objeto *undefined* en lugar de informar al usuario de que no se ha encontrado la entrada especificada.
 
-En primer lugar, en casos como este, debemos decidir cuál debe ser el <i>valor de retorno</i> si no se encuentra un objeto y cómo se debe manejar el caso. El método de búsqueda de una matriz devuelve indefinido si no se encuentra el objeto, y esto está bien para nosotros. Podemos resolver nuestro problema escribiendo el valor de retorno de la siguiente manera
+En primer lugar, en casos como este, debemos decidir cuál debe ser el *valor de retorno* si no se encuentra un objeto y cómo se debe manejar el caso.
+El método *find* de un array devuelve *undefined* si no se encuentra el objeto, y esto está bien.
+Podemos resolver nuestro problema tipeando el valor de retorno de la siguiente manera:
 
 ```js
 const findById = (id: number): DiaryEntry | undefined => { // highlight-line
@@ -852,7 +854,6 @@ const findById = (id: number): DiaryEntry | undefined => { // highlight-line
 ```
 
 El controlador de ruta es el siguiente
-
 
 ```js
 import express from 'express';
@@ -873,26 +874,27 @@ router.get('/:id', (req, res) => {
 export default router;
 ```
 
-### Agregar un nuevo diario
+### Agregando un nuevo diario
 
-Comencemos a construir el endpoint HTTP POST para agregar nuevas entradas al diario de vuelo. Las nuevas entradas deben tener el mismo tipo que los datos existentes.
+Comencemos a construir el endpoint HTTP POST para agregar nuevas entradas al diario de vuelo. 
+Las nuevas entradas deben tener el mismo tipo que los datos existentes.
 
-El manejo del código de la respuesta es el siguiente
+El manejo del código de la respuesta es el siguiente:
 
 ```js
 router.post('/', (req, res) => {
   const { date, weather, visibility, comment } = req.body;
-  const newDiaryEntry = diaryService.addEntry(
+  const addedEntry = diaryService.addDiary(
     date,
     weather,
     visibility,
     comment,
   );
-  res.json(newDiaryEntry);
+  res.json(addedEntry);
 });
 ```
 
-El método correspondiente en <i>diaryService</i> se ve así
+El método correspondiente en *diaryService* se ve así:
 
 ```js
 import {
@@ -920,29 +922,28 @@ const addEntry = (
 };
 ```
 
-Como puede ver, la función <i>addDiary</i> se está volviendo bastante difícil de leer ahora que tenemos todos los campos como parámetros separados. Podría ser mejor simplemente enviar los datos como un objeto a la función:
+Como puedes ver, la función *addDiary* se está volviendo bastante difícil de leer ahora que tenemos todos los campos como parámetros separados. Podría ser mejor enviar los datos como un objeto a la función:
 
 ```js
 router.post('/', (req, res) => {
   const { date, weather, visibility, comment } = req.body;
-  const newDiaryEntry = diaryService.addDiary({ // highlight-line
+  const addedEntry = diaryService.addDiary({ // highlight-line
     date,
     weather,
     visibility,
     comment,
   }); // highlight-line
-  res.json(newDiaryEntry);
+  res.json(addedEntry);
 })
 ```
 
-Pero espera, ¿cuál es el tipo de este objeto? No es exactamente una <i>DiaryEntry</i>, ya que todavía le falta el campo de <i>id</i>. Podría ser útil crear un nuevo tipo, <i>NewDiaryEntry</i>, para una entrada aún no guardada. Vamos a crearlo en <i>types.ts</i> usando el tipo <i>DiaryEntry</i> existente y el tipo de utilidad [Omit](http://www.typescriptlang.org/docs/handbook/utility-types.html#omittk):
+Pero espera, ¿cuál es el tipo de este objeto? No es exactamente una *DiaryEntry*, ya que todavía le falta el campo de *id*. Podría ser útil crear un nuevo tipo, *NewDiaryEntry*, para una entrada que aún no ha sido guardada. Vamos a crearlo en *types.ts* usando el tipo *DiaryEntry* existente y el tipo de utilidad [Omit](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys):
 
 ```js
 export type NewDiaryEntry = Omit<DiaryEntry, 'id'>;
 ```
 
-Ahora podemos usar el nuevo tipo en nuestro DiaryService y desestructurar el nuevo objeto de entrada al crear una entrada para guardar:
-
+Ahora podemos usar el nuevo tipo en nuestro DiaryService y desestructurar el nuevo objeto de entrada al crear una entrada para ser guardada:
 
 ```js
 import { NewDiaryEntry, NonSensitiveDiaryEntry, DiaryEntry } from '../types'; // highlight-line
@@ -962,8 +963,19 @@ const addDiary = ( entry: NewDiaryEntry ): DiaryEntry => {  // highlight-line
 
 ¡Ahora el código se ve mucho más limpio!
 
-Para parsear los datos entrantes debemos tener configurado el middleware <i>json</i>:
+Aún tenemos una queja en nuestro codigo:
 
+![error de vscode asignación insegura de un valor any](../../images/9/43.png)
+
+La causa es la regla de ESlint [@typescript-eslint/no-unsafe-assignment](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-unsafe-assignment.md) que nos previene de asignar los campos del body de una solicitud a las variables.
+
+Por el momento, simplemente ignoremos la regla de ESlint en todo el archivo, podemos hacerlo agregando lo siguiente a la primer linea del archivo:
+
+``` js
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+```
+
+Para procesar los datos entrantes debemos tener configurado el middleware *json*:
 
 ``` js
 import express from 'express';
@@ -980,21 +992,28 @@ app.listen(PORT, () => {
 });
 ```
 
-¡Ahora la aplicación está lista para recibir solicitudes HTTP POST para nuevas entradas del diario del tipo correcto!
+¡Ahora la aplicación está lista para recibir solicitudes HTTP POST para nuevas entradas del diario con el tipo correcto!
 
 ### Solicitudes de revisión
 
-Hay muchas cosas que pueden salir mal cuando aceptamos datos de fuentes externas. Las aplicaciones rara vez funcionan completamente por sí solas y nos vemos obligados a vivir con el hecho de que no se puede confiar plenamente en los datos de fuentes externas a nuestro sistema. Cuando recibimos datos de una fuente externa, no hay forma de que ya estén escritos cuando los recibimos. Necesitamos tomar decisiones sobre cómo manejar la incertidumbre que viene con esto.
+Hay muchas cosas que pueden malir sal cuando aceptamos datos de fuentes externas.
+Las aplicaciones rara vez funcionan completamente por sí solas y, nos vemos obligados a vivir con el hecho de que no se puede confiar plenamente en los datos de fuentes externas a nuestro sistema.
+Cuando recibimos datos de una fuente externa, no hay forma de que ya estén tipados cuando los recibimos. Necesitamos tomar decisiones sobre cómo manejar la incertidumbre que viene con esto.
 
-Express maneja el parsing del cuerpo de la solicitud afirmando el tipo [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) en todos los campos del cuerpo. En nuestro caso, esto no es evidente en el editor, pero si comenzamos a mirar las variables más de cerca y pasamos el cursor sobre cualquiera de ellas, podemos ver que cada una de ellas es de tipo [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any). El editor no se queja de ninguna manera cuando pasamos estos datos a la función <i>addDiary</i> como parámetros:
+La regla de ESlint deshabilitada nos indicaba que la siguiente asignación es riesgosa:
 
-![](../../images/9/27.png)
+```js
+const newDiaryEntry = diaryService.addDiary({
+  date,
+  weather,
+  visibility,
+  comment,
+});
+```
 
-El valor de tipo [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#an) puede asignarse a cualquier tipo de variable, ya que <i>podría ser</i> el tipo deseado. Definitivamente no es seguro confiar en esto, así que siempre verifique los valores entrantes (independientemente de si estamos usando TypeScript o no).
+Nos gustaría tener la certeza de que el objeto en una solicitud POST tiene el tipo correcto. Ahora definamos una función *toNewDiaryEntry* que reciba un request body como parámetro y que devuelva un objeto *NewDiaryEntry* apropiadamente tipado. La función será definida en el archivo *utils.ts*
 
-Podríamos simplemente agregar comprobaciones simples <i>exists</i> y <i>is-value-valid</i> a la función que define la ruta, es mejor escribir la lógica de parsing y validación en un archivo separado <i>utils.ts</i>.
-
-Necesitamos definir una función <i>toNewDiaryEntry</i> que reciba el cuerpo de la solicitud como parámetro y devuelva un objeto <i>NewDiaryEntry</i> debidamente tipado. La definición de ruta usa la función de la siguiente manera
+La definición de la ruta utiliza la función de la siguiente manera:
 
 ```js
 import toNewDiaryEntry from '../utils'; // highlight-line
@@ -1007,15 +1026,21 @@ router.post('/', (req, res) => {
 
     const addedEntry = diaryService.addDiary(newDiaryEntry); // highlight-line
     res.json(addedEntry);
-  } catch (e) {
-    res.status(400).send(e.message);
+  } catch (error: unknown) {
+    let errorMessage = 'Something went wrong.';
+    if (error instanceof Error) {
+      errorMessage += ' Error: ' + error.message;
+    }
+    res.status(400).send(errorMessage);
   }
 })
 ```
 
-Dado que ahora estamos creando un código seguro y tratando de asegurarnos de obtener exactamente los datos que queremos de las solicitudes, debemos comenzar a parsear y validar cada campo que esperamos recibir.
+Ahora, también podemos remover la primera linea que ignora la regla de ESlint *no-unsafe-assignment*.
 
-El esqueleto de la función <i>toNewDiaryEntry</i> se parece a lo siguiente:
+Dado que ahora estamos escribiendo código seguro y tratando de asegurarnos de obtener exactamente los datos que queremos de las solicitudes, debemos comenzar a procesar y validar cada campo que esperamos recibir.
+
+El esqueleto de la función *toNewDiaryEntry* se ve de la siguiente manera:
 
 ```js
 import { NewDiaryEntry } from './types';
@@ -1031,104 +1056,147 @@ const toNewDiaryEntry = (object): NewDiaryEntry => {
 export default toNewDiaryEntry;
 ```
 
-La función debe parsear cada campo y asegurarse de que el valor de retorno sea exactamente del tipo <i>NewDiaryEntry</i>. Esto significa que debemos verificar cada campo por separado.
+La función debe procesar cada campo y asegurarse de que el valor de retorno sea exactamente del tipo *NewDiaryEntry*. Esto significa que debemos verificar cada campo por separado.
 
-Una vez más tenemos un problema de tipo: ¿cuál es el tipo de <i>objeto</i>? Dado que el <i>objeto</i> es de hecho el cuerpo de una solicitud, Express lo ha escrito como <i>any</i>. Dado que la idea de esta función es mapear campos de tipo desconocido a campos del tipo correcto y verificar si están definidos como se espera, este podría ser el caso poco común en el que realmente <i>queramos permitir el tipo <i>any</i> </i>.
+Una vez más tenemos un problema de tipo: ¿cuál es el tipo del parámetro *objeto*? Dado que el *objeto* **es** el request body, Express lo ha escrito como *any*. Dado que la idea de esta función es mapear campos de tipo desconocido a campos del tipo correcto y verificar si están definidos como se espera, este podría ser el caso poco común en el que *queremos permitir el tipo **any** *.
 
-Sin embargo, si escribimos el objeto como <i>any</i>, eslint nos da una queja:
+Sin embargo, si escribimos el objeto como *any*, ESlint nos da una queja:
 
-![](../../images/9/24e.png)
+![vscode eslint mostrando objeto debe ser tipado non-any y que esta definido pero nunca usado](../../images/9/61new.png)
 
-Esto se debe a la regla de eslint [no-explicit-any](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-explicit-any.md) que nos impide establecer explícitamente el tipo en <i>any</i>. En general, esta es una buena regla y no es deseada solo en este archivo en particular. Podemos permitir el uso de <i>any</i> en este archivo deshabilitando la regla eslint en el archivo. Esto sucede agregando la siguiente línea al archivo:
+Podríamos ignorar la regla de ESlint pero una idea mejor es seguir uno de los consejos que el editor nos da en el *Quick Fix* y definir el tipo del parámetro como *unknown*
 
 ```js
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import { NewDiaryEntry } from './types';
+
+const toNewDiaryEntry = (object: unknown): NewDiaryEntry => { // highlight-line
+  const newEntry: NewDiaryEntry = {
+    // ...
+  }
+
+  return newEntry;
+}
+
+export default toNewDiaryEntry;
 ```
 
-Comencemos a crear los parsers para cada uno de los campos del <i>objecti</i>.
+[unknown](https://www.typescriptlang.org/docs/handbook/2/functions.html#unknown) es el tipo ideal para nuestra situación en la validación del input, ya que aún no tenemos que definir el tipo para que sea de tipo *any*, en cambio podemos verificar el tipo primero y luego confirmar que es del tipo que esperábamos.
+Con el uso de *unknown*, tampoco tenemos que preocuparnos por la regla de ESlint *@typescript-eslint/no-explicit-any*, ya que no estamos usando *any*. Sin embargo, quizás tengamos que usar *any* en algunos casos donde aun no estamos seguros acerca del tipo y necesitemos acceso a las propiedades de un objeto de tipo *any* para validar o controlar el tipo de los valores de las propiedades.
 
-Para validar el campo <i>comment</i>, debemos verificar que exista y asegurarnos de que sea del tipo <i>string</i>.
+>#### Una nota al margen de el editor
+>
+> *Si eres como yo y odias tener código que esté roto por un tiempo largo debido a tener un tipado incompleto, podrías comenzar por "falsificar" la función*
+>
+>
+>```js
+>const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
+>
+>  console.log(object); // now object is no longer unused
+>  const newEntry: NewDiaryEntry = {
+>    weather: 'cloudy', // fake the return value
+>    visibility: 'great',
+>    date: '2022-1-1',
+>    comment: 'fake news'
+>  };
+>
+>  return newEntry;
+>};
+>```
+>
+> *Entonces, antes de de que los datos reales y los tipos estén listos para ser usados, simplemente estoy retornando algo que se que tiene el tipo correcto. El código permanece operacional todo el tiempo y mi presión sanguínea vuelve a niveles normales*
 
-La función debería verse así:
+### Guardias de tipos
+
+Comencemos a crear los parsers para cada uno de los campos de *object: unknown*.
+
+Para validar el campo *comment*, debemos verificar que exista y asegurarnos de que sea del tipo *string*.
+
+La función debería verse más o menos así:
 
 ```js
-const parseComment = (comment: any): string => {
+const parseComment = (comment: unknown): string => {
   if (!comment || !isString(comment)) {
-    throw new Error('Incorrect or missing comment: ' + comment);
+    throw new Error('Incorrect or missing comment');
   }
 
   return comment;
-}
+};
 ```
 
-La función obtiene un parámetro de tipo <i>any</i> y lo devuelve como tipo <i>string</i> si existe y es del tipo correcto.
+La función obtiene un parámetro de tipo *unknown* y lo devuelve como tipo *string* si existe y es del tipo correcto.
 
-La función de validación de string se ve así
+La función de validación de string se ve así:
 
 ```js
-const isString = (text: any): text is string => {
+const isString = (text: unknown): text is string => {
   return typeof text === 'string' || text instanceof String;
 };
 ```
 
-La función es un [tipo de protección](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates). Eso significa que es una función que devuelve un booleano <i>y</i> que tiene un <i>predicado</i> de tipo como tipo de retorno. En nuestro caso, el tipo de predicado es
-
+La función es una [guardia de tipo](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates). Eso significa que es una función que devuelve un booleano *y* que tiene un *predicado de tipo* como tipo de retorno. En nuestro caso, el tipo de predicado es:
 
 ```js
 text is string
 ```
 
-La forma general de un predicado de tipo es _parameterName is Type_ donde el _parameterName_ es el nombre del parámetro de función y _Type_ es el tipo de destino.
+La forma general de un predicado de tipo es *parameterName is Type* donde el *parameterName* es el nombre del parámetro de función y *Type* es el tipo objetivo.
 
-Si la función de protección de tipos devuelve verdadero, el compilador de TypeScript sabe que la variable probada tiene el tipo que se definió en el predicado de tipo.
+Si la función de guardia de tipo devuelve true, el compilador de TypeScript sabe que la variable probada tiene el tipo que se definió en el predicado de tipo.
 
-Antes de que se llame al tipo de protección, el tipo real de la variable <i>comment</i> no se conoce:
+Antes de que se llame a la guardia de tipo, el tipo de la variable *comment* es desconocido:
 
-![](../../images/9/28e-21.png)
+![vscode cursor sobre isString(comment) muestra tipo unknown](../../images/9/28e-21.png)
 
-Pero después de la llamada, si el código pasa de la excepción (es decir, el tipo guard devuelto verdadero), el compilador sabe que <i>comment</i> es del tipo <i>string</i>:
+Pero después de la llamada, si el código pasa de la excepción (es decir, la guardia de tipo ha devuelto true), entonces el compilador sabe que *comment* es del tipo *string*:
 
-![](../../images/9/29e-21.png)
+![vscode cursor sobre return comment muestra tipo string](../../images/9/29e-21.png)
 
-¿Por qué tenemos dos condiciones en la protección de tipo de string?
+El uso de una guardia de tipo que devuelve un predicado de tipo es una forma de hacer el [estrechamiento de tipos](https://www.typescriptlang.org/docs/handbook/2/narrowing.html), eso es, darle a una variable un tipo más estricto o preciso. Como pronto veremos, también hay otras [guardias de tipo](https://www.typescriptlang.org/docs/handbook/2/narrowing.html) disponibles.
 
-```js
-const isString = (text: any): text is string => {
-  return typeof text === 'string' || text instanceof String; // highlight-line
-}
-```
+> #### Nota al margen: probando si algo es un string
+>
+> *¿Por qué tenemos dos condiciones en la guardia de tipo string?*
+>
+>```js
+>const isString = (text: unknown): text is string => {
+>  return typeof text === 'string' || text instanceof String; // highlight-line
+>}
+>```
+>
+>*¿No seria suficiente escribir la guardia así?*
+>
+>```js
+>const isString = (text: unknown): text is string => {
+>  return typeof text === 'string';
+>}
+>```
+>
+>*Probablemente, la forma más simple es suficientemente buena para todos los casos prácticos. Sin embargo, si queremos estar absolutamente seguros, ambas condiciones son necesarias. Hay dos formas diferentes de crear strings en JavaScript, una como primitivo y otra como objeto, los cuales funcionan un poco diferente cuando son comparadas con los operadores **typeof** y **instanceof**:*
+>
+>```js
+>const a = "I'm a string primitive";
+>const b = new String("I'm a String Object");
+>typeof a; --> returns 'string'
+>typeof b; --> returns 'object'
+>a instanceof String; --> returns false
+>b instanceof String; --> returns true
+>```
+>
+>*Sin embargo, es muy poco probable que alguien cree un string con una función constructora. Es más probable que la version más simple de la guardia de tipo sea suficiente*
 
-¿No sería suficiente escribir la protección así?
+A continuación, consideremos el campo *date*.
+Parsear y validar el objeto date es bastante similar a lo que hicimos con los comentarios.
+Dado que TypeScript realmente no conoce un tipo para una fecha, debemos tratarlo como un *string*.
+Sin embargo, deberíamos seguir utilizando la validación a nivel de JavaScript para comprobar si el formato de la fecha es aceptable.
 
-```js
-const isString = (text: any): text is string => {
-  return typeof text === 'string';
-}
-```
-
-Lo más probable es que la forma más simple sea lo suficientemente buena para todos los propósitos prácticos. Sin embargo, si queremos estar absolutamente seguros, se necesitan ambas condiciones. Hay dos formas diferentes de crear objetos de strings en JavaScript que funcionan de manera un poco diferente con respecto a los operadores <i>typeof</i> e <i>instanceof</i>:
-
-```js
-const a = "I'm a string primitive";
-const b = new String("I'm a String Object");
-typeof a; --> returns 'string'
-typeof b; --> returns 'object'
-a instanceof String; --> returns false
-b instanceof String; --> returns true
-```
-
-Sin embargo, es poco probable que alguien cree un string con una función de constructor. Lo más probable es que la versión más simple de la protección de tipos esté bien.
-
-A continuación, consideremos el campo <i>date</i>. Parsear y validar el objeto date es bastante similar a lo que hicimos con los comentarios. Dado que TypeScript realmente no conoce un tipo para una fecha, debemos tratarlo como un <i>string</i>. Sin embargo, deberíamos seguir utilizando la validación de nivel de JavaScript para comprobar si el formato de fecha es aceptable.
-
-Agregaremos las siguientes funciones
+Agregaremos las siguientes funciones:
 
 ```js
 const isDate = (date: string): boolean => {
   return Boolean(Date.parse(date));
 };
 
-const parseDate = (date: any): string => {
+const parseDate = (date: unknown): string => {
   if (!date || !isString(date) || !isDate(date)) {
       throw new Error('Incorrect or missing date: ' + date);
   }
@@ -1136,14 +1204,14 @@ const parseDate = (date: any): string => {
 };
 ```
 
-El código no es nada especial. Lo único es que no podemos usar un tipo de protección aquí ya que una fecha en este caso solo se considera un <i>string</i>. Tenga en cuenta que aunque la función <i>parseDate</i> acepta la variable <i>date</i> como any, después de verificar el tipo con <i>isString</i>, su tipo se establece como string, por lo que podemos dar la variable a la función <i>isDate</i> que requiere un string sin ningún problema.
+El código no es nada especial. Lo único para mencionar es que aquí no podemos usar una guardia de tipo basada en el predicado de tipos, ya que una fecha en este caso solo se considera como un *string*. Ten en cuenta que aunque la función *parseDate* acepta la variable *date* como *unknown*, después de verificar el tipo con *isString*, su tipo se establece como *string*, por lo que podemos pasar la variable a la función *isDate* que requiere un string sin ningún problema.
 
-Finalmente, estamos listos para pasar a los dos últimos tipos, Weather y Visibility.
+Finalmente, estamos listos para pasar a los dos últimos tipos, *Weather* y *Visibility*.
 
 Nos gustaría que la validación y el parsing funcionaran de la siguiente manera:
 
 ```js
-const parseWeather = (weather: any): Weather => {
+const parseWeather = (weather: unknown): Weather => {
   if (!weather || !isString(weather) || !isWeather(weather)) {
       throw new Error('Incorrect or missing weather: ' + weather)
   }
@@ -1151,7 +1219,8 @@ const parseWeather = (weather: any): Weather => {
 };
 ```
 
-La pregunta es, ¿cómo podemos validar que el string tiene una forma específica? Una forma posible de escribir el tipo de protección sería la siguiente:
+La pregunta es, ¿cómo podemos validar que el string tiene una forma específica?
+Una forma posible de escribir la guardia de tipo sería la siguiente:
 
 ```js
 const isWeather = (str: string): str is Weather => {
@@ -1159,11 +1228,14 @@ const isWeather = (str: string): str is Weather => {
 };
 ```
 
-Esto funcionaría bien, pero el problema es que la lista de posibles condiciones meteorológicas no se mantiene necesariamente sincronizada con las definiciones de tipo si el tipo se modifica. Ciertamente, esto no es bueno, ya que nos gustaría tener una sola fuente para todos los posibles tipos de clima.
+Esto funcionaría bien, pero el problema es que la lista de posibles condiciones meteorológicas no se mantiene necesariamente sincronizada con las definiciones de tipo si el tipo se modifica.
+Ciertamente, esto no es bueno, ya que nos gustaría tener una sola fuente para todos los posibles tipos de clima.
 
-En nuestro caso, una mejor solución sería mejorar el tipo Weather real. En lugar de un alias de tipo, deberíamos usar [enum](https://www.typescriptlang.org/docs/handbook/enums.html) de Typescript, que nos permite usar los valores reales en nuestro código en tiempo de ejecución, no solo en la fase de compilación.
+### Enum
 
-Redefinamos el tipo <i>Weather</i> de la siguiente manera:
+En nuestro caso, una mejor solución sería mejorar el tipo *Weather*. En lugar de un alias de tipo, deberíamos usar [enum](https://www.typescriptlang.org/docs/handbook/enums.html) de Typescript, que nos permite usar los valores reales en nuestro código en tiempo de ejecución, no solo en la fase de compilación.
+
+Redefinamos el tipo *Weather* de la siguiente manera:
 
 ```js
 export enum Weather {
@@ -1175,34 +1247,23 @@ export enum Weather {
 }
 ```
 
-Ahora podemos comprobar que un string es uno de los valores aceptados, y el tipo de protección se puede escribir así:
+Ahora podemos comprobar que un string es uno de los valores aceptados, y la guardia de tipo se puede escribir así:
 
 ```js
-const isWeather = (param: any): param is Weather => {
-  return Object.values(Weather).includes(param);
+const isWeather = (param: string): param is Weather => {
+  return Object.values(Weather).map(v => v.toString()).includes(param);
 };
 ```
 
-Una cosa a tener en cuenta aquí es que hemos cambiado el tipo de parámetro a <i>any</i>. Si sería string, la verificación <i>includes</i> no se compilará. Esto también tiene sentido si considera la posibilidad de reutilizar la función. Permitiendo <i>any</i> como parámetro, la función se puede usar con confianza sabiendo que, independientemente de lo que le demos, la función siempre nos dice si la variable es un clima válido o no.
+Ten en cuenta que necesitamos la representación en forma de string de los valores de enum para hacer la comparación, por eso es que hacemos el mapeo.
 
-La función <i>parseWeather</i> se puede simplificar un poco
+Un problema emerge luego de estos cambios. Nuestros datos en el archivo *data/entries.ts* ya no se corresponden con nuestros tipos:
 
-```js
-const parseWeather = (weather: any): Weather => {
-  if (!weather || !isWeather(weather)) { // highlight-line
-      throw new Error('Incorrect or missing weather: ' + weather);
-  }
-  return weather;
-};
-```
+![error de vscode rainy no es asignable al tipo Weather](../../images/9/30.png)
 
-Surge un problema después de estos cambios. Nuestros datos ya no se ajustan a nuestros tipos:
+Esto se debe a que no podemos simplemente asumir que un string es un enum.
 
-![](../../images/9/30.png)
-
-Esto se debe a que no podemos simplemente asumir que un stringes una enumeración.
-
-Podemos solucionar esto asignando los elementos de datos iniciales al tipo de <i>DiaryEntry</i> con la función <i>toNewDiaryEntry</i>:
+Podemos arreglar esto mapeando los elementos de los datos iniciales a el tipo *DiaryEntry* con la función *toNewDiaryEntry*:
 
 ```js
 import { DiaryEntry } from "../src/types";
@@ -1220,19 +1281,19 @@ const data = [
 ]
 
 const diaryEntries: DiaryEntry [] = data.map(obj => {
-  const object = toNewDiaryEntry(obj) as DiaryEntry
-  object.id = obj.id
-  return object
-})
+  const object = toNewDiaryEntry(obj) as DiaryEntry;
+  object.id = obj.id;
+  return object;
+});
 
-export default diaryEntries
+export default diaryEntries;
 ```
 
-Tenga en cuenta que, dado que <i>toNewDiaryEntry</i> devuelve un objeto del tipo <i>NewDiaryEntry</i>, debemos afirmar que sea <i>DiaryEntry</i> con el operador [as](http://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions).
+Ten en cuenta que dado que *toNewDiaryEntry* devuelve un objeto del tipo *NewDiaryEntry*, debemos afirmar que sea del tipo *DiaryEntry* con el operador [as](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions).
 
-Las enumeraciones se utilizan generalmente cuando hay un conjunto de valores predeterminados que no se espera que cambien en el futuro. Por lo general, las enumeraciones se usan para valoresmucho más estrictos que no cambian (por ejemplo, días de semana, meses, direcciones), pero dado que nos ofrecen una excelente manera de validar nuestros valores entrantes, también podríamos usarlos en nuestro caso.
+Enums son típicamente utilizados cuando hay un conjunto de valores predeterminados que no se espera que cambien el futuro. Usualmente, son utilizados para valores mucho más estrictos en cuanto a posibles cambios (por ejemplo, días de la semana, meses, direcciones cardinales), pero ya que nos ofrecen una gran forma de validar nuestros valores entrantes, también podríamos usarlos en nuestro caso.
 
-Todavía tenemos que darle el mismo tratamiento a <i>visibility</i>. La enumeración se ve a continuación:
+Aún debemos darle el mismo tratamiento a *Visibility*. El enum se ve de la siguiente forma:
 
 ```js
 export enum Visibility {
@@ -1243,39 +1304,82 @@ export enum Visibility {
 }
 ```
 
-El tipo de protección y el parser están debajo
+La guardia de tipo y el parser están debajo:
 
 ```js
-const isVisibility = (param: any): param is Visibility => {
-  return Object.values(Visibility).includes(param);
+const isVisibility = (param: string): param is Visibility => {
+  return Object.values(Visibility).map(v => v.toString()).includes(param);
 };
 
-const parseVisibility = (visibility: any): Visibility => {
-  if (!visibility || !isVisibility(visibility)) {
+const parseVisibility = (visibility: unknown): Visibility => {
+  if (!visibility || !isString(visibility) || !isVisibility(visibility)) {
       throw new Error('Incorrect or missing visibility: ' + visibility);
   }
   return visibility;
 };
 ```
 
-Y finalmente podemos finalizar la función <i>toNewDiaryEntry</i> que se encarga de validar y parsear los campos de los datos:
+Y finalmente, podemos finalizar la función *toNewDiaryEntry* que se ocupa de validar y parsear los campos del body de POST. Sin embargo, aún tenemos una cosa más de la que ocuparnos. Si intentamos acceder a los campos del parámetro *object* de la siguiente manera:
 
 ```js
-const toNewDiaryEntry = (object: any): NewDiaryEntry => {
-  return {
-    date: parseDate(object.date),
+const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
+  const newEntry: NewDiaryEntry = {
     comment: parseComment(object.comment),
+    date: parseDate(object.date),
     weather: parseWeather(object.weather),
     visibility: parseVisibility(object.visibility)
   };
+
+  return newEntry;
 };
 ```
 
-¡La primera versión de nuestra aplicación de diario de vuelo ya está completa!
+notamos que el código no compila. Esto es por qué el tipo [unknown](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type) no permite ninguna operación, por lo que acceder a los campos no es posible.
 
-Si ahora intentamos crear una nueva entrada en el diario con campos no válidos o faltantes, recibiremos un mensaje de error apropiado.
+Una vez mas, podemos solucionar el problema con estrechamiento de tipos. Ahora tenemos dos guardias de tipo, la primera controla que el parámetro object existe y tiene el tipo *object*. Luego de esto, la segunda guardia de tipo utiliza el operador [in](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#the-in-operator-narrowing) para asegurar que el objeto tiene todos los campos deseados:
 
-![](../../images/9/30b.png)
+```js
+const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
+  if ( !object || typeof object !== 'object' ) {
+    throw new Error('Incorrect or missing data');
+  }
+
+  if ('comment' in object && 'date' in object && 'weather' in object && 'visibility' in object)  {
+    const newEntry: NewDiaryEntry = {
+      weather: parseWeather(object.weather),
+      visibility: parseVisibility(object.visibility),
+      date: parseDate(object.date),
+      comment: parseComment(object.comment)
+    };
+
+    return newEntry;
+  }
+
+  throw new Error('Incorrect data: some fields are missing');
+};
+```
+
+Si la guardia no evalúa a true, una excepción es arrojada
+
+El uso del operador *in* ahora garantiza que los campos existen en el objeto. Por eso mismo, la comprobación de existencia en los ya no es necesaria:
+
+```js
+const parseVisibility = (visibility: unknown): Visibility => {
+  // check !visibility removed:
+  if (!isString(visibility) || !isVisibility(visibility)) {
+      throw new Error('Incorrect visibility: ' + visibility);
+  }
+  return visibility;
+};
+```
+
+Si un campo, p.ej. *comment* fuera opcional, el estrechamiento de tipo debería considerar esto y, el operador [in](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#the-in-operator-narrowing) no podría ser utilizado como lo hicimos aquí, ya que la evaluación de *in* requiere que el campo este presente.
+
+Si ahora intentamos crear una nueva entrada en el diario con campos inválidos o faltantes, obtendremos un mensaje de error apropiado:
+
+![postman mostrando 400 bad request con valor incorrecto o faltante - awesome](../../images/9/62new.png)
+
+El código fuente de nuestra aplicación puede ser encontrado en [GitHub](https://github.com/fullstack-hy2020/flight-diary).
 
 </div>
 
@@ -1284,12 +1388,18 @@ Si ahora intentamos crear una nueva entrada en el diario con campos no válidos 
 ### Ejercicios 9.12.-9.13.
 
 #### 9.12: Patientor backend, paso 5
-Cree un endpoint POST <i>/api/patients</i> para agregar pacientes. Asegúrese de que puede agregar pacientes también desde el frontend.
+
+Cree un endpoint POST */api/patients* para agregar pacientes. Asegúrate de que también puedas agregar pacientes desde el frontend. Puedes crear ids únicos de tipo *string* usando la librería [uuid](https://github.com/uuidjs/uuid):
+
+```js
+import { v1 as uuid } from 'uuid'
+const id = uuid()
+```
 
 #### 9.13: Patientor backend, paso 6
 
-Configurar protecciones de tipo, validación y parsing seguro en la solicitud de POST <i>/api/patients</i>.
+Configura parsing seguro, validación y predicado de tipos en la solicitud POST */api/patients*.
 
-Refactorice el campo <i>Gender</i> para usar un tipo [enum](http://www.typescriptlang.org/docs/handbook/enums.html).
+Refactoriza el campo *gender* para usar un [tipo enum](http://www.typescriptlang.org/docs/handbook/enums.html).
 
 </div>
