@@ -175,6 +175,8 @@ we assign the values of the properties directly to variables by destructuring th
 const Hello = ({ name, age }) => {
 ```
 
+*** This is not explained very well, as it does not tell you what is happening within the App component (the fukll code needs to be shown in your example). How is the props object being passed as a parameter? ***
+
 ### Page re-rendering
 
 So far all of our applications have been such that their appearance remains the same after the initial rendering. What if we wanted to create a counter where the value increased as a function of time or at the click of a button?
