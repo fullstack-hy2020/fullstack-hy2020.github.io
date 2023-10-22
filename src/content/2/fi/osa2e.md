@@ -609,7 +609,9 @@ Jos käytät Open weather mapia, [täällä](https://openweathermap.org/weather-
 Oletetaan että API-avaimen arvo on <i>54l41n3n4v41m34rv0</i>. Kun ohjelma käynnistetään seuraavasti
 
 ```bash
-VITE_SOME_KEY=54l41n3n4v41m34rv0 npm start
+VITE_SOME_KEY=54l41n3n4v41m34rv0 && npm run dev // Linux/macOS Bash
+($env:VITE_SOME_KEY="54l41n3n4v41m34rv0") -and (npm run dev) // Windows PowerShell
+set "VITE_SOME_KEY=54l41n3n4v41m34rv0" && npm run dev // Windows cmd.exe
 ```
 
 koodista päästään avaimen arvoon käsiksi olion _import.meta.env_ kautta:
