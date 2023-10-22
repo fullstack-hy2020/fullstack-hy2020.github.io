@@ -43,7 +43,7 @@ Globaali asennus ei ole kuitenkaan tarpeen, sillä voimme käynnistää JSON Ser
 npx json-server --port=3001 --watch db.json
 ```
 
-Oletusarvoisesti JSON Server käynnistyy porttiin 3000. Koska Vitellä luodut projektit varaavat jo portin 3000, käytämme nyt kuitenkin porttia 3001.
+Oletusarvoisesti JSON Server käynnistyy porttiin 3000. Käytämme nyt kuitenkin porttia 3001.
 
 Mennään selaimella osoitteeseen <http://localhost:3001/notes>. Kuten huomaamme, JSON Server tarjoaa osoitteessa tiedostoon tallentamamme muistiinpanot JSON-muodossa:
 

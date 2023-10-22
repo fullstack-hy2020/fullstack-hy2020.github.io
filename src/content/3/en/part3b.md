@@ -457,7 +457,7 @@ This is due to changing the backend address to a relative URL:
 const baseUrl = '/api/notes'
 ```
 
-Because in development mode the frontend is at the address <i>localhost:3000</i>, the requests to the backend go to the wrong address <i>localhost:3000/api/notes</i>. The backend is at <i>localhost:3001</i>.
+Because in development mode the frontend is at the address <i>localhost:5173</i>, the requests to the backend go to the wrong address <i>localhost:5173/api/notes</i>. The backend is at <i>localhost:3001</i>.
 
 If the project was created with Vite, this problem is easy to solve. It is enough to add the following declaration to the <i>vite.config.js</i> file of the frontend repository.
 
@@ -482,7 +482,9 @@ export default defineConfig({
 
 ```
 
-After a restart, the React development environment will work as a [proxy](https://vitejs.dev/config/server-options.html#server-proxy). If the React code does an HTTP request to a server address at <i><http://localhost:3000></i> not managed by the React application itself (i.e. when requests are not about fetching the CSS or JavaScript of the application), the request will be redirected to the server at <i><http://localhost:3001></i>.
+After a restart, the React development environment will work as a [proxy](https://vitejs.dev/config/server-options.html#server-proxy). If the React code does an HTTP request to a server address at <i><http://localhost:5173></i> not managed by the React application itself (i.e. when requests are not about fetching the CSS or JavaScript of the application), the request will be redirected to the server at <i><http://localhost:3001></i>.
+
+Note that with the vite-configuration shown above, only requests that are made to paths starting with <i>/api</i>-are redirected to the server.
 
 Now the frontend is also fine, working with the server both in development and production mode.
 
