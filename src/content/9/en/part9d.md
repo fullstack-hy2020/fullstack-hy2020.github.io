@@ -78,7 +78,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 )
 ```
 
-The reason for this is that the statement might return value null but the _ReactDOM.createRoot_ does not accept null as parameter. With the [! operator](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#non-null-assertion-operator-postfix-), it is possible to assert the TypeScript compiler that the value is not null.
+The reason for this is that the statement might return value null but the _ReactDOM.createRoot_ does not accept null as parameter. With the [! operator](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#non-null-assertion-operator-postfix-), it is possible to assert to the TypeScript compiler that the value is not null.
 
 Earlier in this part we [warned](https://fullstackopen.com/en/part9/first_steps_with_type_script#type-assertion) about the dangers of type assertions, but in our case the assertion is ok since we are sure that the file <i>index.html</i> indeed has this particular id and the function is always returning a HTMLElement.
 
