@@ -598,7 +598,7 @@ On olemassa useita backendin testaamista helpottavia työkaluja, eräs näistä 
 
 Asennetaan Postmanin desktop sovellus [täältä](https://www.postman.com/downloads/)  ja kokeillaan:
 
-![tehdään postmanilla operaatio DELETE http://localhost:3000/api/notes/1, huomataan että vastauksessa statuskoodi 204 no content](../../images/3/11x.png) 
+![tehdään postmanilla operaatio DELETE http://localhost:3001/api/notes/2, huomataan että vastauksessa statuskoodi 204 no content](../../images/3/11x.png) 
 
 Postmanin käyttö on tässä tilanteessa suhteellisen yksinkertaista, riittää määritellä url ja valita oikea pyyntötyyppi.
 
@@ -615,7 +615,7 @@ Kun plugin on asennettu, on sen käyttö erittäin helppoa. Tehdään projektin 
 
 Luodaan kaikki muistiinpanot hakevan pyynnön määrittelevä tiedosto <i>get\_all\_notes.rest</i>:
 
-![Luodaan tiedosto jonka sisältlö GET http://localhost:3000/api/notes](../../images/3/12ea.png)
+![Luodaan tiedosto jonka sisältlö GET http://localhost:3001/api/notes](../../images/3/12ea.png)
 
 Klikkaamalla tekstiä <i>Send Request</i>, REST client suorittaa määritellyn HTTP-pyynnön, ja palvelimen vastaus avautuu editoriin:
 

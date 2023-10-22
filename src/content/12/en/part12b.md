@@ -394,7 +394,7 @@ MongoError: command find requires authentication
 
 In the [MongoDB Docker Hub](https://hub.docker.com/_/mongo) page under "Initializing a fresh instance" is the info on how to execute JavaScript to initialize the database and an user for it.
 
-The exercise project has file <i>todo-app/todo-backend/mongo/mongo-init.js</i> with contents:
+The exercise project has a file <i>todo-app/todo-backend/mongo/mongo-init.js</i> with contents:
 
 ```js
 db.createUser({

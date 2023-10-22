@@ -12,4 +12,7 @@ En esta parte, utilizaremos las herramientas introducidas anteriormente para cre
 
 Esta parte fue creada por [Tuomo Torppa](https://www.linkedin.com/in/tuomotorppa), [Tuukka Peuraniemi](https://www.linkedin.com/in/tuukkapeuraniemi/) y [Jani Rapo](https://www.linkedin.com/in/jani-rapo-5520817b/), los increíbles desarrolladores de [Terveystalo](https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/), el proveedor de servicios de salud privado más grande de Finlandia. La red nacional de Terveystalo cubre 300 ubicaciones en Finlandia. La red de clínicas se complementa con servicios digitales 24/7.
 
+<i>Parte actualizada el 12 Feb 2023</i>
+- <i>Clarificación del contenido, la estructura de la app de ejemplo Patientor ha sido refactorizada a un formato mucho más simple</i>
+
 </div>

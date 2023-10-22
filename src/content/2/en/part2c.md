@@ -257,7 +257,7 @@ There is a fine difference in the parameters. <i>axios</i> is installed as a run
 
 Now we are ready to use Axios. Going forward, json-server is assumed to be running on port 3001.
 
-NB: To run json-server and your react app simultaneously, you may need to use two terminal windows. One to keep json-server running and the other to run react-app.
+NB: To run json-server and your react app simultaneously, you may need to use two terminal windows. One to keep json-server running and the other to run our React application.
 
 The library can be brought into use the same way other libraries, e.g. React, are, i.e., by using an appropriate <em>import</em> statement.
 
