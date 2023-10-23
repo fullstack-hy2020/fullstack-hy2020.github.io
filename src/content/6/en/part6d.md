@@ -224,7 +224,8 @@ import { getNotes, createNote } from './requests'
 const App = () => {
   const queryClient = useQueryClient() // highlight-line
 
-  const newNoteMutation = useMutation(createNote, {
+  const newNoteMutation = useMutation({
+    mutationFn: createNote, 
     onSuccess: () => {  // highlight-line
       queryClient.invalidateQueries({ queryKey: ['notes'] })  // highlight-line
     },
@@ -258,7 +259,8 @@ import { getNotes, createNote, updateNote } from './requests' // highlight-line
 const App = () => {
   // ...
 
-  const updateNoteMutation = useMutation(updateNote, {
+  const updateNoteMutation = useMutation({
+    mutationFn: updateNote,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notes'] })
     },
@@ -281,7 +283,8 @@ The current code for the application is in [GitHub](https://github.com/fullstack
 The application works well, and the code is relatively simple. The ease of making changes to the list of notes is particularly surprising. For example, when we change the importance of a note, invalidating the query <i>notes</i> is enough for the application data to be updated:
 
 ```js
-  const updateNoteMutation = useMutation(updateNote, {
+  const updateNoteMutation = useMutation({
+    mutationFn: updateNote,
     onSuccess: () => {
       queryClient.invalidateQueries('notes') // highlight-line
     },
@@ -302,7 +305,8 @@ The change for the mutation adding a new note is as follows:
 const App = () => {
   const queryClient =  useQueryClient() 
 
-  const newNoteMutation = useMutation(createNote, {
+  const newNoteMutation = useMutation({
+    mutationFn: createNote,
     onSuccess: (newNote) => {
       const notes = queryClient.getQueryData(['notes']) // highlight-line
       queryClient.setQueryData(['notes'], notes.concat(newNote)) // highlight-line
