@@ -153,10 +153,13 @@ const note = new Note({
   important: true,
 })
 
-note.save().then(result => {
-  console.log('note saved!')
-  mongoose.connection.close()
-})
+note.save().then(result => {})
+    .catch((e) => {
+      console.log('note saved! error:', e)
+    })
+    .finally(() => {
+    mongoose.connection.close()
+  })
 ```
 
 Koodi siis olettaa, että sille annetaan parametrina MongoDB Atlasissa luodulle käyttäjälle määritelty salasana. Komentoriviparametriin se pääsee käsiksi seuraavasti:
