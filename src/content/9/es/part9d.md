@@ -862,7 +862,7 @@ Entonces, nuestro código es esencialmente tan seguro como seria si utilizáramo
 
 Ya que los tipos de TypeScript ni siquiera existen durante el tiempo de ejecución, nuestro código no nos ofrece "seguridad" en situaciones en las que el body de la solicitud contenga datos con el formato erróneo.
 
-Darle una variable de tipo a *axios.get* podría estar bien si estamos *absolutamente seguros* de que el backend se comporta correctamente y siempre devuelve los datos en el formato correcto. Si queremos construir un sistema robusto deberíamos prepararnos para sorpresas y procesar los datos de la respuesta en el frontend similarmente a como lo hicimos [en la sección previa](/es/part9/escribiendo_una_aplicacion_express#solicitudes-de-revision) para las solicitudes al backend.
+Darle una variable de tipo a *axios.get* podría estar bien si estamos *absolutamente seguros* de que el backend se comporta correctamente y siempre devuelve los datos en el formato correcto. Si queremos construir un sistema robusto deberíamos prepararnos para sorpresas y procesar los datos de la respuesta en el frontend similarmente a como lo hicimos [en la sección previa](/es/part9/tipando_una_aplicacion_express#solicitudes-de-revision) para las solicitudes al backend.
 
 Concluyamos ahora nuestra aplicación implementando la nueva adición de notas:
 
@@ -1002,7 +1002,7 @@ La documentación de TypeScript [recomienda el uso de interfaces](https://www.ty
 
 ### Ejercicios 9.16-9.19
 
-Ahora construyamos un frontend para la aplicación de diarios de vuelo de Ilari que fue desarrollada [en la sección anterior](/es/part9/escribiendo_una_aplicacion_express). El código fuente del backend puede encontrarse en [este repositorio de GitHub](https://github.com/fullstack-hy2020/flight-diary).
+Ahora construyamos un frontend para la aplicación de diarios de vuelo de Ilari que fue desarrollada [en la sección anterior](/es/part9/tipando_una_aplicacion_express). El código fuente del backend puede encontrarse en [este repositorio de GitHub](https://github.com/fullstack-hy2020/flight-diary).
 
 #### Ejercicio 9.16
 

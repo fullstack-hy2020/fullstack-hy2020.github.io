@@ -10,13 +10,13 @@ lang: en
 
 ### Working with an existing codebase
 
-When diving into an existing codebase for the first time, it is good to get an overall view of the conventions and structure of the project. You can start your research by reading the <i>README.md</i> in the root of the repository. Usually, the README contains a brief description of the application and the requirements for using it, as well as how to start it for development.
-If the README is not available or someone has "saved time" and left it as a stub, you can take a peek at the <i>package.json</i>.
+When diving into an existing codebase for the first time, it is good to get an overall view of the conventions and structure of the project. You can start your research by reading the *README.md* in the root of the repository. Usually, the README contains a brief description of the application and the requirements for using it, as well as how to start it for development.
+If the README is not available or someone has "saved time" and left it as a stub, you can take a peek at the *package.json*.
 It is always a good idea to start the application and click around to verify you have a functional development environment.
 
 You can also browse the folder structure to get some insight into the application's functionality and/or the architecture used. These are not always clear, and the developers might have chosen a way to organize code that is not familiar to you. The [sample project](https://github.com/fullstack-hy2020/patientor) used in the rest of this part is organized, feature-wise. You can see what pages the application has, and some general components, e.g. modals and state. Keep in mind that the features may have different scopes. For example, modals are visible UI-level components whereas the state is comparable to business logic and keeps the data organized under the hood for the rest of the app to use.
 
-TypeScript provides types for what kind of data structures, functions, components, and state to expect.  You can try looking for <i>types.ts</i> or something similar to get started. VSCode is a big help and simply highlighting variables and parameters can provide quite a lot of insight. All this naturally depends on how types are used in the project.
+TypeScript provides types for what kind of data structures, functions, components, and state to expect.  You can try looking for *types.ts* or something similar to get started. VSCode is a big help and simply highlighting variables and parameters can provide quite a lot of insight. All this naturally depends on how types are used in the project.
 
 If the project has unit, integration or end-to-end tests, reading those is most likely beneficial. Test cases are your most important tool when refactoring or adding new features to the application. You want to make sure not to break any existing features when hammering around the code. TypeScript can also give you guidance with argument and return types when changing the code.
 
@@ -30,7 +30,7 @@ Before diving into the code, let us start both the frontend and the backend.
 
 If all goes well, you should see a patient listing page. It fetches a list of patients from our backend, and renders it to the screen as a simple table. There is also a button for creating new patients on the backend. As we are using mock data instead of a database, the data will not persist - closing the backend will delete all the data we have added. UI design has not been a strong point of the creators, so let's disregard the UI for now.
 
-After verifying that everything works, we can start studying the code. All the interesting stuff resides in the <i>src</i> folder. For your convenience, there is already a <i>types.ts</i> file for basic types used in the app, which you will have to extend or refactor in the exercises.
+After verifying that everything works, we can start studying the code. All the interesting stuff resides in the *src* folder. For your convenience, there is already a *types.ts* file for basic types used in the app, which you will have to extend or refactor in the exercises.
 
 In principle, we could use the same types for both backend and frontend, but usually, the frontend has different data structures and use cases for the data, which causes the types to be different.
 For example, the frontend has a state and may want to keep data in objects or maps whereas the backend uses an array. The frontend might also not need all the fields of a data object saved in the backend, and it may need to add some new fields to use for rendering.
@@ -139,7 +139,7 @@ const AddPatientModal = ({ modalOpen, onClose, onSubmit, error }: Props) => {
 }
 ```
 
-*onClose* is just a function that takes no parameters, and does not return anything, so the type is
+*onClose* is just a function that takes no parameters, and does not return anything, so the type is:
 
 ```js
 () => void
@@ -159,13 +159,13 @@ The return value of a *async* function is a [promise](https://developer.mozilla.
 
 ### Exercises 9.20-9.21
 
-We will soon add a new type for our app, *Entry*, which represents a lightweight patient journal entry. It consists of a journal text, i.e. a *description*, a creation date, information regarding the specialist who created it and possible diagnosis codes. Diagnosis codes map to the ICD-10 codes returned from the <i>/api/diagnoses</i> endpoint. Our naive implementation will be that a patient has an array of entries.
+We will soon add a new type for our app, *Entry*, which represents a lightweight patient journal entry. It consists of a journal text, i.e. a *description*, a creation date, information regarding the specialist who created it and possible diagnosis codes. Diagnosis codes map to the ICD-10 codes returned from the */api/diagnoses* endpoint. Our naive implementation will be that a patient has an array of entries.
 
 Before going into this, let us do some preparatory work.
 
 #### 9.20: Patientor, step1
 
-Create an endpoint <i>/api/patients/:id</i> to the backend that returns all of the patient information for one patient, including the array of patient entries that is still empty for all the patients. For the time being, expand the backend types as follows:
+Create an endpoint */api/patients/:id* to the backend that returns all of the patient information for one patient, including the array of patient entries that is still empty for all the patients. For the time being, expand the backend types as follows:
 
 ```js
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -260,8 +260,7 @@ All the entries seem to have some fields in common, but some fields are entry-sp
 When looking at the *type*, we can see that there are three kinds of entries: *OccupationalHealthcare*, *Hospital* and *HealthCheck*.
 This indicates we need three separate types. Since they all have some fields in common, we might just want to create a base entry interface that we can extend with the different fields in each type.
 
-When looking at the data, it seems that the fields *id*, *description*, *date* and *specialist* are something that can be found in each entry. On top of that, it seems that *diagnosisCodes* is only found in one *OccupationalHealthcare* and one *Hospital* type entry. Since it is not always used even in those types of entries, it is safe to assume that the field is optional. We could consider adding it to the *HealthCheck* type as well
-since it might just not be used in these specific entries.
+When looking at the data, it seems that the fields *id*, *description*, *date* and *specialist* are something that can be found in each entry. On top of that, it seems that *diagnosisCodes* is only found in one *OccupationalHealthcare* and one *Hospital* type entry. Since it is not always used, even in those types of entries, it is safe to assume that the field is optional. We could consider adding it to the *HealthCheck* type as well since it might just not be used in these specific entries.
 
 So our *BaseEntry* from which each type could be extended would be the following:
 
@@ -302,7 +301,7 @@ interface BaseEntry {
 
 Now that we have the *BaseEntry* defined, we can start creating the extended entry types we will actually be using. Let's start by creating the *HealthCheckEntry* type.
 
-Entries of type *HealthCheck* contain the field *HealthCheckRating*, which is an integer from 0 to 3, zero meaning *Healthy* and 3 meaning *CriticalRisk*. This is a perfect case for an enum definition.
+Entries of type *HealthCheck* contain the field *HealthCheckRating*, which is an integer from 0 to 3, zero meaning *Healthy* and three meaning *CriticalRisk*. This is a perfect case for an enum definition.
 With these specifications we could write a *HealthCheckEntry* type definition like so:
 
 ```js
@@ -330,7 +329,7 @@ export type Entry =
 
 ### Omit with unions
 
-An important point concerning unions is that, when you use them with *Omit* to exclude a property, it works in a possibly unexpected way. Suppose we want to remove the *id* from each *Entry*. We could think of using
+An important point concerning unions is that, when you use them with *Omit* to exclude a property, it works in a possibly unexpected way. Suppose that we want to remove the *id* from each *Entry*. We could think of using
 
 ```js
 Omit<Entry, 'id'>
@@ -353,15 +352,15 @@ type EntryWithoutId = UnionOmit<Entry, 'id'>;
 
 Now we are ready to put the finishing touches to the app!
 
-#### 9.22: Patientor, step3
+#### 9.22: Patientor, step 3
 
-Define the types *OccupationalHealthcareEntry* and *HospitalEntry* so that those conform with the example data. Ensure that your backend returns the entries properly when you go to an individual patient's route:
+Define the types *OccupationalHealthcareEntry* and *HospitalEntry* so that those conform with the new example data. Ensure that your backend returns the entries properly when you go to an individual patient's route:
 
-![browser shoiwing entries json data properly for patient](../../images/9/40.png)
+![browser showing entries json data properly for patient](../../images/9/40.png)
 
 Use types properly in the backend! For now, there is no need to do a proper validation for all the fields of the entries in the backend, it is enough e.g. to check that the field *type* has a correct value.
 
-#### 9.23: Patientor, step4
+#### 9.23: Patientor, step 4
 
 Extend a patient's page in the frontend to list the *date*, *description* and *diagnoseCodes* of the patient's entries.
 
@@ -371,33 +370,33 @@ Your solution could look like this:
 
 ![browser showing list of diagnosis codes for patient](../../images/9/41.png)
 
-#### 9.24: Patientor, step5
+#### 9.24: Patientor, step 5
 
-Fetch and add diagnoses to the application state from the <i>/api/diagnoses</i> endpoint. Use the new diagnosis data to show the descriptions for patient's diagnosis codes:
+Fetch and add diagnoses to the application state from the */api/diagnoses* endpoint. Use the new diagnosis data to show the descriptions for patient's diagnosis codes:
 
 ![browser showing list of codes and their descriptions for patient ](../../images/9/42.png)
 
-#### 9.25: Patientor, step6
+#### 9.25: Patientor, step 6
 
-Extend the entry listing on the patient's page to include the Entry's details with a new component that shows the rest of the information of the patient's entries distinguishing different types from each other.
+Extend the entry listing on the patient's page to include the Entry's details, with a new component that shows the rest of the information of the patient's entries, distinguishing different types from each other.
 
 You could use eg. [Icons](https://mui.com/components/material-icons/) or some other [Material UI](https://mui.com/) component to get appropriate visuals for your listing.
 
-You should use a *switch case*-based rendering and <i>exhaustive type checking</i> so that no cases can be forgotten.
+You should use a *switch case*-based rendering and *exhaustive type checking* so that no cases can be forgotten.
 
 Like this:
 
 ![vscode showing error for healthCheckEntry not being assignable to type never](../../images/9/35c.png)
 
-The resulting entries in the listing <i>could</i> look something like this:
+The resulting entries in the listing *could* look something like this:
 
 ![browser showing list of entries and their details in a nicer format](../../images/9/36x.png)
 
-#### 9.26: Patientor, step7
+#### 9.26: Patientor, step 7
 
 We have established that patients can have different kinds of entries. We don't yet have any way of adding entries to patients in our app, so, at the moment, it is pretty useless as an electronic medical record.
 
-Your next task is to add endpoint <i>/api/patients/:id/entries</i> to your backend, through which you can POST an entry for a patient.
+Your next task is to add endpoint */api/patients/:id/entries* to your backend, through which you can POST an entry for a patient.
 
 Remember that we have different kinds of entries in our app, so our backend should support all those types and check that at least all required fields are given for each type.
 
@@ -416,11 +415,11 @@ const parseDiagnosisCodes = (object: unknown): Array<Diagnosis['code']> =>  {
 };
 ```
 
-#### 9.27: Patientor, step8
+#### 9.27: Patientor, step 8
 
 Now that our backend supports adding entries, we want to add the corresponding functionality to the frontend. In this exercise, you should add a form for adding an entry to a patient. An intuitive place for accessing the form would be on a patient's page.
 
-In this exercise, it is enough to **support <i>one</i> entry type**. All the fields in the form can be just plain text inputs, so it is up to user to enter valid values.
+In this exercise, it is enough to **support *one* entry type**. All the fields in the form can be just plain text inputs, so it is up to user to enter valid values.
 
 Upon a successful submit, the new entry should be added to the correct patient and the patient's entries on the patient page should be updated to contain the new entry.
 
@@ -432,11 +431,11 @@ If user enters invalid values to the form and backend rejects the addition, show
 
 ![browser showing healthCheckRating incorrect 15 error](../../images/9/75new.png)
 
-#### 9.28: Patientor, step9
+#### 9.28: Patientor, step 9
 
-Extend your solution so that it supports <i>all the entry types</i>
+Extend your solution so that it supports *all the entry types*
 
-#### 9.29: Patientor, step10
+#### 9.29: Patientor, step 10
 
 Improve the entry creation forms so that it makes hard to enter incorrect dates, diagnosis codes and health rating.
 
