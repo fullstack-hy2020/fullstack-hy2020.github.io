@@ -340,8 +340,8 @@ curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dea
 NODE_MAJOR=18
 echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
 
-sudo apt-get update
-sudo apt-get install nodejs -y
+apt-get update
+apt-get install nodejs -y
 ```
 
 You will need to install the _curl_ into the container. It is installed in the same way as you did with _nano_.
