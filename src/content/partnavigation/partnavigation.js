@@ -302,13 +302,14 @@ module.exports = {
     '9': {
       a: 'Antecedentes e introducción',
       b: 'Primeros pasos con TypeScript',
-      c: 'Escribiendo una aplicación express',
+      c: 'Tipando una aplicación Express',
       d: 'React con tipos',
+      e: 'Grande finale: Patientor',
     },
     '10': {
       a: 'Introducción a React Native',
       b: 'Conceptos básicos de React Native',
-      c: 'Comunicandose con el servidor',
+      c: 'Comunicándose con el servidor',
       d: 'Probar y ampliar nuestra aplicación',
     },
     '11': {
