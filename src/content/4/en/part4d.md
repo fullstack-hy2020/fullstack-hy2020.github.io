@@ -17,7 +17,7 @@ The principles of token-based authentication are depicted in the following seque
 
 - User starts by logging in using a login form implemented with React
     - We will add the login form to the frontend in [part 5](/en/part5)
-- This causes the React code to send the username and the password to the server address <i>/api/login</i> as a HTTP POST request.
+- This causes the React code to send the username and the password to the server address <i>/api/login</i> as an HTTP POST request.
 - If the username and the password are correct, the server generates a <i>token</i> that somehow identifies the logged-in user.
     - The token is signed digitally, making it impossible to falsify (with cryptographic means)
 - The backend responds with a status code indicating the operation was successful and returns the token with the response.
@@ -31,7 +31,7 @@ Let's first implement the functionality for logging in. Install the [jsonwebtoke
 npm install jsonwebtoken
 ```
 
-The code for login functionality goes to the file controllers/login.js.
+The code for login functionality goes to the file <i>controllers/login.js</i>.
 
 ```js
 const jwt = require('jsonwebtoken')
@@ -69,14 +69,34 @@ module.exports = loginRouter
 ```
 
 The code starts by searching for the user from the database by the <i>username</i> attached to the request.
+
+```js
+const user = await User.findOne({ username })
+```
+
 Next, it checks the <i>password</i>, also attached to the request.
+
+```js
+const passwordCorrect = user === null
+  ? false
+  : await bcrypt.compare(password, user.passwordHash)
+```
+
 Because the passwords themselves are not saved to the database, but <i>hashes</i> calculated from the passwords, the _bcrypt.compare_ method is used to check if the password is correct:
 
 ```js
-await bcrypt.compare(body.password, user.passwordHash)
+await bcrypt.compare(password, user.passwordHash)
 ```
 
-If the user is not found, or the password is incorrect, the request is responded to with the status code [401 unauthorized](https://www.rfc-editor.org/rfc/rfc9110.html#name-401-unauthorized). The reason for the failure is explained in the response body.
+If the user is not found, or the password is incorrect, the request is responded with the status code [401 unauthorized](https://www.rfc-editor.org/rfc/rfc9110.html#name-401-unauthorized). The reason for the failure is explained in the response body.
+
+```js
+if (!(user && passwordCorrect)) {
+  return response.status(401).json({
+    error: 'invalid username or password'
+  })
+}
+```
 
 If the password is correct, a token is created with the method _jwt.sign_. The token contains the username and the user id in a digitally signed form.
 
@@ -94,6 +114,12 @@ The digital signature ensures that only parties who know the secret can generate
 The value for the environment variable must be set in the <i>.env</i> file.
 
 A successful request is responded to with the status code <i>200 OK</i>. The generated token and the username of the user are sent back in the response body.
+
+```js
+response
+  .status(200)
+  .send({ token, username: user.username, name: user.name })
+```
 
 Now the code for login just has to be added to the application by adding the new router to <i>app.js</i>.
 
@@ -143,7 +169,7 @@ In practice, this means that if the token is, for example, the string <i>eyJhbGc
 Bearer eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW
 </pre>
 
-Creating new notes will change like so:
+Creating new notes will change like so (<i>controllers/notes.js</i>):
 
 ```js
 const jwt = require('jsonwebtoken') //highlight-line
