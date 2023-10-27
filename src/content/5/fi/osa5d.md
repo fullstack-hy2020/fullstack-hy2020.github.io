@@ -623,7 +623,7 @@ it('login fails with wrong password', function() {
     .and('have.css', 'border-style', 'solid')
 })
 ```
-Viimeistellään testi vielä siten, että se varmistaa myös, että sovellus ei renderöi onnistuneesta kirjautumista kuvaavaa tekstiä <i>'Matti Luukkainen logged in'</i>:
+Viimeistellään testi vielä siten, että se varmistaa myös, että sovellus ei renderöi onnistunutta kirjautumista kuvaavaa tekstiä <i>'Matti Luukkainen logged in'</i>:
 
 ```js
 it('login fails with wrong password', function() {
