@@ -1361,7 +1361,7 @@ const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
 
 If the guard does not evaluate to true, an exception is thrown.
 
-The use of operator *in* actually now guarantees that the fields indeed exist in the object. Because of that, the existence check in parsers in no more needed:
+The use of the operator *in* actually now guarantees that the fields indeed exist in the object. Because of that, the existence check in parsers is no more needed:
 
 ```js
 const parseVisibility = (visibility: unknown): Visibility => {
