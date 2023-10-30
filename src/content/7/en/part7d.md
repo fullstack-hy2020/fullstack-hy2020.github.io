@@ -160,7 +160,7 @@ export default App
 Let's import and use the <i>App</i> module in the <i>index.js</i> file:
 
 ```js
-import App from './App';
+import App from './App'
 
 const hello = name => {
   console.log(`hello ${name}`)
@@ -407,7 +407,7 @@ When we transpile the code, it gets transformed into old-school JavaScript. The 
 ```js
 var App = function App() {
   return _react2.default.createElement('div', null, 'hello webpack')
-};
+}
 ```
 
 As we can see, variables are declared with the _var_ keyword as ES5 JavaScript does not understand the _const_ keyword. Arrow functions are also not used, which is why the function definition used the _function_ keyword.
@@ -463,7 +463,7 @@ When using CSS, we have to use [css](https://webpack.js.org/loaders/css-loader/)
       use: ['style-loader', 'css-loader'],
     },
     // highlight-end
-  ];
+  ],
 }
 ```
 
