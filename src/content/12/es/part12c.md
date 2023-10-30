@@ -655,7 +655,7 @@ Una vez que hayas completado los ejercicios y quieras obtener los créditos, inf
 ![Submissions](../../images/11/21.png)
 
 
-**Tenga en cuenta** que necesita registrarse en la parte del curso correspondiente para obtener los créditos registrados, consulte [aquí](/es/part0/informacion_general#calificacion) para obtener más información.
+**Tenga en cuenta** que necesita registrarse en la parte del curso correspondiente para obtener los créditos registrados, consulte [aquí](/es/part0/informacion_general#partes-y-finalizacion) para obtener más información.
 
 Puede descargar el certificado por completar esta parte haciendo clic en uno de los íconos de bandera. El ícono de la bandera corresponde al idioma del certificado.
 
