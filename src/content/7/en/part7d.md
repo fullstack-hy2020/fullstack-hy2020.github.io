@@ -463,7 +463,7 @@ When using CSS, we have to use [css](https://webpack.js.org/loaders/css-loader/)
       use: ['style-loader', 'css-loader'],
     },
     // highlight-end
-  ];
+  ],
 }
 ```
 
