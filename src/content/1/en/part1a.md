@@ -15,11 +15,12 @@ The easiest way to get started by far is by using a tool called
 Let's create an application called <i>part1</i>, navigate to its directory and install the libraries:
 
 ```bash
-# npm 6.x
+# npm 6.x (outdated, but still used by some):
 npm create vite@latest part1 --template react
 
 # npm 7+, extra double-dash is needed:
-npm create vite@latest part1 -- --template react```
+npm create vite@latest part1 -- --template react
+```
 
 ```bash
 cd part1
@@ -245,7 +246,7 @@ const App = () => {
 }
 ```
 
-The compilation is handled by [Babel](https://babeljs.io/repl/). Projects created with *create-react-app* are configured to compile automatically. We will learn more about this topic in [part 7](/en/part7) of this course.
+The compilation is handled by [Babel](https://babeljs.io/repl/). Projects created with *create-react-app* or *vite* are configured to compile automatically. We will learn more about this topic in [part 7](/en/part7) of this course.
 
 It is also possible to write React as "pure JavaScript" without using JSX. Although, nobody with a sound mind would do so.
 
@@ -266,9 +267,6 @@ but when writing JSX, the tag needs to be closed:
 ### Multiple components
 
 Let's modify the file <i>App.jsx</i> as follows:
-
-
-
 ```js
 // highlight-start
 const Hello = () => {
