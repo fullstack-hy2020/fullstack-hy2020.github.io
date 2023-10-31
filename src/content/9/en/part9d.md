@@ -587,7 +587,7 @@ const App = () => {
 }
 ```
 
-When we hover over the *useState* calls in the editor, we notice couple of interesting things.
+When we hover over the *useState* calls in the editor, we notice a couple of interesting things.
 
 The type of the first call *useState('')* looks like the following:
 
