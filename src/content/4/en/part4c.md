@@ -214,7 +214,7 @@ const usersRouter = require('./controllers/users')
 app.use('/api/users', usersRouter)
 ```
 
-The contents of the file that defines the router are as follows:
+The contents of the file, <i>controllers/users.js</i>, that defines the router are as follows:
 
 ```js
 const bcrypt = require('bcrypt')
@@ -350,7 +350,7 @@ Mongoose does not have a built-in validator for checking the uniqueness of a fie
 npm install mongoose-unique-validator
 ```
 
-and extend the code by following the library documentation:
+and extend the code by following the library documentation in <i>models/user.js</i>:
 
 ```js
 const mongoose = require('mongoose')
@@ -411,7 +411,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 The code for creating a new note has to be updated so that the note is assigned to the user who created it.
 
-Let's expand our current implementation so that the information about the user who created a note is sent in the <i>userId</i> field of the request body:
+Let's expand our current implementation in <i>controllers/notes.js</i> so that the information about the user who created a note is sent in the <i>userId</i> field of the request body:
 
 ```js
 const User = require('../models/user') //highlight-line
@@ -486,7 +486,7 @@ We would like our API to work in such a way, that when an HTTP GET request is ma
 
 As previously mentioned, document databases do not properly support join queries between collections, but the Mongoose library can do some of these joins for us. Mongoose accomplishes the join by doing multiple queries, which is different from join queries in relational databases which are <i>transactional</i>, meaning that the state of the database does not change during the time that the query is made. With join queries in Mongoose, nothing can guarantee that the state between the collections being joined is consistent, meaning that if we make a query that joins the user and notes collections, the state of the collections may change during the query.
 
-The Mongoose join is done with the [populate](http://mongoosejs.com/docs/populate.html) method. Let's update the route that returns all users first:
+The Mongoose join is done with the [populate](http://mongoosejs.com/docs/populate.html) method. Let's update the route that returns all users first in <i>controllers/users.js</i>:
 
 ```js
 usersRouter.get('/', async (request, response) => {
@@ -520,7 +520,7 @@ The result is now exactly like we want it to be:
 
 ![combined data showing no repetition](../../images/4/14new.png)
 
-Let's also add a suitable population of user information to notes:
+Let's also add a suitable population of user information to notes in <i>controllers/notes.js</i>:
 
 ```js
 notesRouter.get('/', async (request, response) => {
