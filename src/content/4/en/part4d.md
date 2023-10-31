@@ -347,6 +347,8 @@ Usernames, passwords and applications using token authentication must always be 
 
 We will implement login to the frontend in the [next part](/en/part5).
 
+NOTE: At this stage, in the deployed notes app, it is expected that the creating a note feature will stop working as the backend login feature is not yet linked to the frontend.
+
 </div>
 
 <div class="tasks">
