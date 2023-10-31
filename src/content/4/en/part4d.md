@@ -491,8 +491,11 @@ blogsRouter.delete('/:id', async (request, response) => {
 Note that it is possible to register a middleware only for a specific set of routes. So instead of using _userExtractor_ with all the routes,
 
 ```js
+const middleware = require('../utils/middleware');
+// ...
+
 // use the middleware in all routes
-app.use(userExtractor) // highlight-line
+app.use(middleware.userExtractor) // highlight-line
 
 app.use('/api/blogs', blogsRouter)  
 app.use('/api/users', usersRouter)
@@ -502,8 +505,11 @@ app.use('/api/login', loginRouter)
 we could register it to be only executed with path <i>/api/blogs</i> routes:
 
 ```js
+const middleware = require('../utils/middleware');
+// ...
+
 // use the middleware only in /api/blogs routes
-app.use('/api/blogs', userExtractor, blogsRouter) // highlight-line
+app.use('/api/blogs', middleware.userExtractor, blogsRouter) // highlight-line
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 ```
@@ -511,7 +517,10 @@ app.use('/api/login', loginRouter)
 As can be seen, this happens by chaining multiple middlewares as the parameter of function <i>use</i>. It would also be possible to register a middleware only for a specific operation:
 
 ```js
-router.post('/', userExtractor, async (request, response) => {
+const middleware = require('../utils/middleware');
+// ...
+
+router.post('/', middleware.userExtractor, async (request, response) => {
   // ...
 }
 ```
