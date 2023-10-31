@@ -56,9 +56,7 @@
   "en": [
     {
       "title": "What are the prerequisites of the course?",
-      "text": [
-        "See <a href='/en/part0/general_info#prerequisites'>here</a>."
-      ]
+      "text": ["See <a href='/en/part0/general_info#prerequisites'>here</a>."]
     },
     {
       "title": "How much does this course cost?",
@@ -143,19 +141,19 @@
     {
       "title": "¿Cuanto cuesta este curso?",
       "text": [
-        "El curso es completamente libre de cargo. Puedes obtener un certificado e incluso los créditos ECTS de la universidad de Helsinki. Puedes encontrar más información <a href='/es/part0/informacion_general#calificacion'>aquí</a>"
+        "El curso es completamente libre de cargo. Puedes obtener un certificado e incluso los créditos ECTS de la universidad de Helsinki. Puedes encontrar más información <a href='/es/part0/informacion_general#partes-y-finalizacion'>aquí</a>"
       ]
     },
     {
       "title": "¿Cómo me registro en el curso?",
       "text": [
-        "No tienes que registrarte hasta que quieras hacer el examen del curso. Puedes encontrar más información <a href='/en/part0/general_info#parts-and-completion '>aquí</a>. <br><br>Para el certificado del curso, no es necesario registrarse."
+        "No tienes que registrarte hasta que quieras hacer el examen del curso. Puedes encontrar más información <a href='/es/part0/informacion_general#partes-y-finalizacion '>aquí</a>. <br><br>Para el certificado del curso, no es necesario registrarse."
       ]
     },
     {
       "title": "¿Cuántos créditos tiene el curso?",
       "text": [
-        "El curso es de 5-14 créditos ECTS <a href='/en/part0/general_info#parts-and-completion'> dependiendo de la cantidad de ejercicios hechos</a>. Después de completar el curso, puedes continuar profundizando tus conocimientos sobre el tema haciendo el <a href='/es/part0/informacion_general#proyecto-full-stack'>proyecto Full Stack</a> por 1-10 créditos ECTS."
+        "El curso es de 5-14 créditos ECTS <a href='/es/part0/informacion_general#partes-y-finalizacion'> dependiendo de la cantidad de ejercicios hechos</a>. Después de completar el curso, puedes continuar profundizando tus conocimientos sobre el tema haciendo el <a href='/es/part0/informacion_general#proyecto-full-stack'>proyecto Full Stack</a> por 1-10 créditos ECTS."
       ]
     },
     {
