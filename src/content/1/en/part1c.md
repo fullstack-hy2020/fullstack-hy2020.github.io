@@ -391,7 +391,7 @@ const App = () => {
     <div>
       <div>{counter}</div>
       // highlight-start
-      <button onClick={onClick}>
+      <button onClick={handleClick}>
         plus
       </button>
       // highlight-end
