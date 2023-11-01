@@ -568,7 +568,7 @@ const App = () => {
 
   return (
     <CounterContext.Provider value={[counter, counterDispatch]}>  // highlight-line
-      <Display counter={counter}/>
+      <Display />
       <div>
         <Button type='INC' label='+' />
         <Button type='DEC' label='-' />
