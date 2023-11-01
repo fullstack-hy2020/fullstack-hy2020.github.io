@@ -204,17 +204,7 @@ npm install bcrypt
 
 Creating new users happens in compliance with the RESTful conventions discussed in [part 3](/en/part3/node_js_and_express#rest), by making an HTTP POST request to the <i>users</i> path.
 
-Let's define a separate <i>router</i> for dealing with users in a new <i>controllers/users.js</i> file. Let's take the router into use in our application in the <i>app.js</i> file, so that it handles requests made to the <i>/api/users</i> url:
-
-```js
-const usersRouter = require('./controllers/users')
-
-// ...
-
-app.use('/api/users', usersRouter)
-```
-
-The contents of the file, <i>controllers/users.js</i>, that defines the router are as follows:
+Let's define a separate <i>router</i> for dealing with users in a new <i>controllers/users.js</i> file.
 
 ```js
 const bcrypt = require('bcrypt')
@@ -241,7 +231,17 @@ usersRouter.post('/', async (request, response) => {
 module.exports = usersRouter
 ```
 
-The password sent in the request is <i>not</i> stored in the database. We store the <i>hash</i> of the password that is generated with the _bcrypt.hash_ function.
+Let's take the router into use in our application in the <i>app.js</i> file, so that it handles requests made to the <i>/api/users</i> url:
+
+```js
+const usersRouter = require('./controllers/users')
+
+// ...
+
+app.use('/api/users', usersRouter)
+```
+
+The password sent in the post request is <i>not</i> stored in the database. We store the <i>hash</i> of the password that is generated with the _bcrypt.hash_ function.
 
 The fundamentals of [storing passwords](https://codahale.com/how-to-safely-store-a-password/) are outside the scope of this course material. We will not discuss what the magic number 10 assigned to the [saltRounds](https://github.com/kelektiv/node.bcrypt.js/#a-note-on-rounds) variable means, but you can read more about it in the linked material.
 
@@ -342,9 +342,9 @@ describe('when there is initially one user in db', () => {
 })
 ```
 
-The test case obviously will not pass at this point. We are essentially practicing [test-driven development (TDD)](https://en.wikipedia.org/wiki/Test-driven_development), where tests for new functionality are written before the functionality is implemented.
+The test case obviously will not pass at this point. We are essentially practicing [test-driven development (TDD)](https://en.wikipedia.org/wiki/Test-driven_development), where tests for new functionality is written before the functionality is implemented.
 
-Mongoose does not have a built-in validator for checking the uniqueness of a field. Fortunately there is a ready-made solution for this, the [mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator) library. Let us install the library:
+Mongoose does not have a built-in validator for checking the uniqueness of a field. Fortunately, there is a ready-made solution for this, the [mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator) library. Let us install the library:
 
 ```bash
 npm install mongoose-unique-validator
