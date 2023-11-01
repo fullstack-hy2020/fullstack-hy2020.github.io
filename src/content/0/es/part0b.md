@@ -9,72 +9,72 @@ lang: es
 
 Antes de comenzar a programar, repasaremos algunos principios del desarrollo web al examinar una aplicación de ejemplo en <https://studies.cs.helsinki.fi/exampleapp>.
 
-Las aplicaciones existen solo para demostrar algunos conceptos básicos del curso, y de ninguna manera son ejemplos de <i>cómo</i> se deben hacer las aplicaciones web.
-Por el contrario, demuestran algunas técnicas antiguas de desarrollo web, que incluso pueden verse como <i>malas prácticas</i> en la actualidad.
+La aplicación existe solo para demostrar algunos conceptos básicos del curso, y de ninguna manera es un ejemplo de <i>cómo</i> se debe hacer una aplicaciones web moderna. Por el contrario, demuestra algunas técnicas antiguas de desarrollo web, que incluso pueden verse como <i>malas prácticas</i> en la actualidad.
 
-La codificación en el estilo recomendado comienza en la [parte 1](/es/part1).
+El código cumplirá con las mejores prácticas contemporáneas a partir de [parte 1](/es/part1) en adelante.
 
-Utilice el navegador Chrome <i>ahora y durante el resto del curso</i>
+Abre la [aplicación de ejemplo](https://studies.cs.helsinki.fi/exampleapp) en tu navegador. A veces, esto lleva un tiempo.
 
-Abra la [aplicación de ejemplo](https://studies.cs.helsinki.fi/exampleapp) en su navegador. A veces, esto lleva un tiempo.
+El material del curso utiliza el navegador Chrome.
 
-**La primera regla del desarrollo web**: Mantenga siempre abierta la Consola para desarrolladores en su navegador web. En macOS, abra la consola presionando `F12` u `option-cmd-i` simultáneamente.
-En Windows o Linux, abra la consola presionando `F12` o `ctrl-shift-i` simultáneamente.
+**La primera regla del desarrollo web**: Siempre mantén la Consola de Desarrollo abierta en tu navegador web. En macOS, abre la consola presionando _fn_-_F12_ o _option-cmd-i_ simultáneamente. En Windows o Linux, abre la consola presionando _Fn_-_F12_ o _ctrl-shift-i_ simultáneamente. La consola también se puede abrir a través del [menú contextual](https://en.wikipedia.org/wiki/Menu_key).
 
-Antes de continuar, averigüe cómo abrir Developer Console en su computadora (busque en Google si es necesario) y recuerde <i>siempre</i> mantenerla abierta cuando desarrolle aplicaciones web.
+Recuerda <i>siempre</i> mantener la Consola de Desarrollo abierta al desarrollar aplicaciones web.
 
 La consola se ve así:
 
-![](../../images/0/1e.png)
+![screenshot de la consola de desarrollo abierta en un navegador](../../images/0/1e.png)
 
-Asegúrese de que la pestaña <i>Network</i> esté abierta y marque la opción <i>Disable caché</i> como se muestra. <i>Preserve log</i> también puede ser útil: guarda los registros impresos por la aplicación cuando se recarga la página.
+Asegúrate de que la pestaña <i>Network</i> esté abierta y marca la opción <i>Disable caché</i> como se muestra. <i>Preserve log</i> también puede ser útil: guarda los registros impresos por la aplicación cuando se recarga la página.
 
-**NB:** La pestaña más importante es la <i>Console</i>. Sin embargo, en la introducción usaremos bastante la pestaña <i>Network</i>.
+**NB:** La pestaña más importante es la de <i>Console</i>. Sin embargo, en la introducción usaremos bastante la pestaña <i>Network</i>.
 
 ### HTTP GET
 
-El servidor y el navegador web se comunican entre sí mediante el protocolo [HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP). La pestaña Network muestra cómo se comunican el navegador y el servidor.
+El servidor y el navegador web se comunican entre sí mediante el protocolo [HTTP](https://developer.mozilla.org/es/docs/Web/HTTP). La pestaña *Network* muestra cómo se comunican el navegador y el servidor.
 
-Cuando recargas la página (presiona la tecla F5 o el símbolo &#8635; en tu navegador), la consola muestra que han ocurrido dos eventos:
+Cuando recargas la página (para refrescar una página web, en Windows, presiona las teclas _Fn_-_F5_. En macOS, presiona _command_-_R_. O presiona el símbolo &#8635; en tu navegador), la consola mostrará que han ocurrido dos eventos:
 
 - El navegador recupera el contenido de la página <i>studies.cs.helsinki.fi/exampleapp</i> del servidor
 - Y descarga la imagen <i>kuva.png</i>
 
-![](../../images/0/2e.png)
+![screenshot de la consola de desarrollo mostrando estos dos eventos](../../images/0/2e.png)
 
-En una pantalla pequeña, es posible que deba ampliar la ventana de la consola para verlos.
+En una pantalla pequeña, es posible que debas ampliar la ventana de la consola para verlos.
 
 Al hacer clic en el primer evento, se muestra más información sobre lo que está sucediendo:
 
-![](../../images/0/3e.png)
+![Vista detallada de un solo evento](../../images/0/3e.png)
 
-La parte superior, <i>General</i>, muestra que el navegador hizo una solicitud a la dirección <i>https://studies.cs.helsinki.fi/exampleapp</i> (aunque la dirección ha cambiado ligeramente desde que se tomó esta imagen) usando el método [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET), y que la solicitud fue exitosa, porque la respuesta del servidor tenía el [Código de estado](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) 200.
+La parte superior, <i>General</i>, muestra que el navegador hizo una solicitud a la dirección <i>https://studies.cs.helsinki.fi/exampleapp</i> (aunque la dirección ha cambiado ligeramente desde que se tomó esta imagen) usando el método [GET](https://developer.mozilla.org/es/docs/Web/HTTP/Methods/GET), y que la solicitud fue exitosa, porque la respuesta del servidor tenía el [Código de estado](https://es.wikipedia.org/wiki/Anexo:C%C3%B3digos_de_estado_HTTP) 200.
 
-La solicitud y la respuesta del servidor tienen varias [cabeceras](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields):
+La solicitud y la respuesta del servidor tienen varias [cabeceras](https://es.wikipedia.org/wiki/Anexo:Cabeceras_HTTP):
 
-![](../../images/0/4e.png)
+![screenshot de cabeceras de respuesta](../../images/0/4e.png)
 
-Las <i>Cabeceras de Respuesta (Response Headers)</i> en la parte superior nos dicen, por ejemplo, el tamaño de la respuesta en bytes y la hora exacta de la respuesta. Una cabecera importante [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) nos dice que la respuesta es un archivo de texto en formato [utf-8](https://en.wikipedia.org/wiki/UTF-8), cuyo contenido se ha formateado con HTML. De esta manera, el navegador sabe que la respuesta es una página [HTML](https://en.wikipedia.org/wiki/HTML) normal y la representa en el navegador "como una página web".
+Las <i>Cabeceras de Respuesta (Response Headers)</i> en la parte superior nos dicen, por ejemplo, el tamaño de la respuesta en bytes y la hora exacta de la respuesta. Una cabecera importante [Content-Type](https://developer.mozilla.org/es/docs/Web/HTTP/Headers/Content-Type) nos dice que la respuesta es un archivo de texto en formato [utf-8](https://es.wikipedia.org/wiki/UTF-8), cuyo contenido se ha formateado con HTML. De esta manera, el navegador sabe que la respuesta es una página [HTML](https://es.wikipedia.org/wiki/HTML) normal y la representa en el navegador "como una página web".
 
-La pestaña <i>Response</i> muestra los datos de la respuesta, una página HTML normal. La sección <i>body</i> determina la estructura de la página renderizada en la pantalla:
+La pestaña <i>Response</i> muestra los datos de la respuesta, una página HTML normal. La sección <i>body</i> determina la estructura de la página mostrada en la pantalla:
 
-![](../../images/0/5e.png)
+![screenshot de la pestaña de respuesta](../../images/0/5e.png)
 
-La página contiene un elemento [div](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div), que a su vez contiene un encabezado, un enlace a la página <i>notes</i> y una etiqueta [img](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img), y muestra el número de notas creadas.
+La página contiene un elemento [div](https://developer.mozilla.org/es/docs/Web/HTML/Element/div), que a su vez contiene un encabezado, un enlace a la página <i>notes</i> y una etiqueta [img](https://developer.mozilla.org/es/docs/Web/HTML/Element/img), y muestra el número de notas creadas.
 
 Debido a la etiqueta img, el navegador realiza una segunda <i>solicitud HTTP</i> para recuperar la imagen <i>kuva.png</i> del servidor. Los detalles de la solicitud son los siguientes:
 
-![](../../images/0/6e.png)
+![Vista detallada del segundo evento](../../images/0/6e.png)
 
-La solicitud se realizó a la dirección <https://studies.cs.helsinki.fi/exampleapp/kuva.png> y su tipo es HTTP GET. Las Cabeceras de Respuesta nos dicen que el tamaño de la respuesta es 89350 bytes y su [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) es <i>image/png</i>, por lo que es una imagen png. El navegador utiliza esta información para mostrar la imagen correctamente en la pantalla.
+La solicitud se realizó a la dirección <https://studies.cs.helsinki.fi/exampleapp/kuva.png> y su tipo es HTTP GET. Las Cabeceras de Respuesta nos dicen que el tamaño de la respuesta es 89350 bytes y su [Content-Type](https://developer.mozilla.org/es/docs/Web/HTTP/Headers/Content-Type) es <i>image/png</i>, por lo que es una imagen png. El navegador utiliza esta información para mostrar la imagen correctamente en la pantalla.
 
-La cadena de eventos causada por abrir la página https://studies.cs.helsinki.fi/exampleapp en un navegador forma el siguiente [diagrama de secuencia](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/):
+La cadena de eventos causada por abrir la página <https://studies.cs.helsinki.fi/exampleapp> en un navegador forma el siguiente [diagrama de secuencia](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/):
 
-![](../../images/0/7e.png)
+![diagrama de secuencia del flujo cubierto arriba](../../images/0/7e.png)
+
+El diagrama de secuencia visualiza cómo el navegador y el servidor se comunican a lo largo del tiempo. El tiempo fluye en el diagrama de arriba a abajo, por lo que el diagrama comienza con la primera solicitud que el navegador envía al servidor, seguida de la respuesta.
 
 Primero, el navegador realiza una solicitud HTTP GET al servidor para obtener el código HTML de la página. La etiqueta <i>img</i> en el HTML solicita al navegador que busque la imagen <i>kuva.png</i>. El navegador muestra la página HTML y la imagen en la pantalla.
 
-Aunque es difícil de notar, la página HTML comienza a renderizarse antes de que la imagen se haya obtenido del servidor.
+Aunque es difícil de notar, la página HTML comienza a mostrarse antes de que la imagen se haya obtenido del servidor.
 
 ### Aplicaciones web tradicionales
 
@@ -87,7 +87,7 @@ El código HTML de la página de inicio es el siguiente:
 
 ```js
 const getFrontPageHtml = noteCount => {
-  return(`
+  return`
     <! DOCTYPE html>
     <html>
       <head>
@@ -101,7 +101,7 @@ const getFrontPageHtml = noteCount => {
         </div>
       </body>
     </html>
-`)
+`
 }
 
 app.get('/', (req, res) => {
@@ -109,30 +109,30 @@ app.get('/', (req, res) => {
   res.send(page);
 });
 ```
-No tiene que entender el código todavía.
 
-El contenido de la página HTML se ha guardado como una template string, o una string que permite evaluar, por ejemplo, variables en medio de ella. La parte que cambia dinámicamente de la página de inicio, el número de notas guardadas (en el código <em>noteCount</em>), se reemplaza por el número actual de notas (en el código <em>notes.length</em>) en la template string.
+No tienes que entender el código todavía.
 
-Escribir HTML en medio del código, por supuesto, no es inteligente, pero para los programadores PHP de la vieja escuela era una práctica normal.
+El contenido de la página HTML se ha guardado como una template string o una string que permite la evaluación, por ejemplo, de variables, como <em>noteCount</em>, en medio de ella. La parte de la página de inicio que cambia dinámicamente, el número de notas guardadas (en el código <em>noteCount</em>), se reemplaza por el número actual de notas (en el código <em>notes.length</em>) en la cadena de plantilla.
 
-En las aplicaciones web tradicionales, el navegador es "tonto". Solo obtiene datos HTML del servidor y toda la lógica de la aplicación está en el servidor. Se puede crear un servidor, por ejemplo, usando Java Spring como en el curso de la Universidad de Helsinki [Web-palvelinohjelmointi](https://courses.helsinki.fi/fi/tkt21007/119558639), Python Flask (como en el curso [tietokantasovellus](https://materiaalit.github.io/tsoha-18/)) o con [Ruby on Rails](http://rubyonrails.org/).
+Escribir HTML en medio del código no es muy inteligente, pero para los programadores antiguos de PHP, era una práctica normal.
 
-El ejemplo usa [Express](https://expressjs.com/) de Node.js.
-Este curso utilizará Node.js y Express para crear servidores web.
+En las aplicaciones web tradicionales, el navegador es "tonto". Solo obtiene datos HTML del servidor, y toda la lógica de la aplicación reside en el servidor. Un servidor puede ser creado utilizando [Java Spring](https://spring.io/projects/spring-framework), [Python Flask](https://flask.palletsprojects.com/en/2.2.x/), o [Ruby on Rails](http://rubyonrails.org/), por mencionar solo algunos ejemplos.
+
+El ejemplo utiliza la biblioteca [Express](https://expressjs.com/) con Node.js. Este curso utilizará Node.js y Express para crear servidores web.
 
 ### Ejecución de la lógica de la aplicación en el navegador
 
-Mantenga abierta la Consola para desarrolladores. Vacíe la consola haciendo clic en el símbolo 🚫.
-Ahora, cuando vaya a la página [notes](https://studies.cs.helsinki.fi/exampleapp/notes), el navegador realiza 4 solicitudes HTTP:
+Mantén abierta la Consola para desarrolladores. Vacía la consola haciendo clic en el símbolo 🚫 o escribiendo clear() en la consola.
+Ahora, cuando vayas a la página [notes](https://studies.cs.helsinki.fi/exampleapp/notes), el navegador realiza 4 solicitudes HTTP:
 
-![](../../images/0/8e.png)
+![screenshot de la consola de desarrollador con 4 solicitudes visibles](../../images/0/8e.png)
 
 Todas las solicitudes tienen tipos <i>diferentes</i>. El tipo de la primera solicitud es <i>document</i>. Es el código HTML de la página y tiene el siguiente aspecto:
 
-![](../../images/0/9e.png)
+![Vista detallada de la primera solcitud](../../images/0/9e.png)
 
 Cuando comparamos la página que se muestra en el navegador y el código HTML devuelto por el servidor , notamos que el código no contiene la lista de notas.
-La sección [head](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head) del HTML contiene una etiqueta [script](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script), que hace que el navegador obtenga un archivo JavaScript llamado <i>main.js</i>.
+La sección [head](https://developer.mozilla.org/es/docs/Web/HTML/Element/head) del HTML contiene una etiqueta [script](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script), que hace que el navegador obtenga un archivo JavaScript llamado <i>main.js</i>.
 
 El código JavaScript tiene el siguiente aspecto:
 
@@ -164,13 +164,13 @@ xhttp.send ()
 
 Los detalles del código no son importantes en este momento, pero se ha incluido algún código para darle vida a las imágenes y el texto. Comenzaremos a codificar correctamente en la [parte 1](/es/part1). El código de muestra en esta parte en realidad no es relevante en absoluto para las técnicas de codificación de este curso.
 
-> Algunos podrían preguntarse por qué se usa xhttp-object en lugar de la moderna fetch. Esto se debe a que todavía no queremos entrar en promesas (promises), y el código tiene un papel secundario en esta parte. Volveremos a las formas modernas de realizar solicitudes al servidor en la parte 2.
+> Algunos podrían preguntarse por qué se usa xhttp-object en lugar de el moderno fetch. Esto se debe a que todavía no queremos entrar en promesas (promises), y el código tiene un papel secundario en esta parte. Volveremos a las formas modernas de realizar solicitudes al servidor en la [parte 2](/es/part2).
 
 Inmediatamente después de obtener la etiqueta <i>script</i>, el navegador comienza a ejecutar el código.
 
 Las dos últimas líneas definen que el navegador realiza una solicitud HTTP GET a la dirección del servidor <i>/data.json</i>:
 
-```js 
+```js
 xhttp.open('GET', '/data.json', true)
 xhttp.send()
 ```
@@ -179,12 +179,11 @@ Esta es la solicitud que se muestra más abajo en la pestaña Network.
 
 Podemos intentar ir a la dirección <https://studies.cs.helsinki.fi/exampleapp/data.json> directamente desde el navegador:
 
-![](../../images/0/10e.png)
+![Datos JSON sin procesar](../../images/0/10e.png)
 
-Allí encontramos las notas como "datos sin procesar" en [JSON](https://en.wikipedia.org/wiki/JSON) 
-De forma predeterminada, el navegador no es demasiado bueno para mostrar datos JSON. Se pueden usar complementos para manejar el formato. Instale, por ejemplo, [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) en Chrome y vuelva a cargar la página. Los datos ahora están bien formateados:
+Allí encontramos las notas como "datos sin procesar" en [JSON](https://es.wikipedia.org/wiki/JSON). De forma predeterminada, navegadores basados en Chromium no son demasiado buenos para mostrar datos JSON. Se pueden usar extensiones para manejar el formato. Instala, por ejemplo, [JSONVue](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) en Chrome y vuelve a cargar la página. Los datos ahora están bien formateados:
 
-![](../../images/0/11e.png)
+![Datos JSON formateados](../../images/0/11e.png)
 
 Entonces, el código JavaScript de la página de notas anterior descarga los datos JSON que contienen las notas y forma una lista de viñetas a partir del contenido de la nota:
 
@@ -207,14 +206,14 @@ data.forEach(function(note) {
 document.getElementById('notes').appendChild(ul)
 ```
 
-El código primero crea una lista desordenada con una etiqueta [ul](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul)...
+El código primero crea una lista desordenada con una etiqueta [ul](https://developer.mozilla.org/es/docs/Web/HTML/Element/ul)...
 
 ```js
-var ul = document.createElement('ul') 
-ul.setAttribute('class', 'notes') 
+var ul = document.createElement('ul')
+ul.setAttribute('class', 'notes')
 ```
 
-... y luego agrega una etiqueta [li](https://developer.mozilla.org/es-US/docs/Web/HTML/Element/li) para cada nota. Solo el campo <i>content</i> de cada nota se convierte en el contenido de la etiqueta li. Las marcas de tiempo que se encuentran en los datos sin procesar no se utilizan para nada aquí.
+... y luego agrega una etiqueta [li](https://developer.mozilla.org/es-US/docs/Web/HTML/Element/li) para cada nota. Solo el campo <i>content</i> de cada nota se convierte en el contenido de la etiqueta li. Los timestamps que se encuentran en los datos sin procesar no se utilizan para nada aquí.
 
 ```js
 data.forEach(function(note) {
@@ -225,13 +224,13 @@ data.forEach(function(note) {
 })
 ```
 
-Ahora abra la pestaña <i>Console</i> en su Consola de desarrollador:
+Ahora abre la pestaña <i>Console</i> en tu Consola de desarrollador:
 
-![](../../images/0/12e.png)
+![screenshot de la pestaña console en la consola de desarrollo](../../images/0/12e.png)
 
 Al hacer clic en el pequeño triángulo al principio de la línea, puede expandir el texto en la consola.
 
-![](../../images/0/13e.png)
+![screenshot de una de las entradas previamente colapsada, ahora expandida](../../images/0/13e.png)
 
 Esta salida en la consola es causada por el comando <em>console.log</em> en el código:
 
@@ -242,7 +241,7 @@ console.log(data)
 
 Entonces, después de recibir datos del servidor, el código los imprime en la consola.
 
-La pestaña <i>Console</i> y el comando <em>console.log</em> le resultarán muy familiares durante el curso.
+La pestaña <i>Console</i> y el comando <em>console.log</em> se volverán muy familiares para ti durante el curso.
 
 ### Controladores de eventos y funciones de devolución de llamada
 
@@ -261,13 +260,11 @@ xhttp.send()
 
 La solicitud al servidor se envía en la última línea, pero el código para manejar la respuesta se puede encontrar más arriba. ¿Que esta pasando?
 
-En esta línea,
-
 ```js
-xhttp.onreadystatechange = function() { 
+xhttp.onreadystatechange = function() {
 ```
 
-se define un <i>controlador de eventos</i> para el evento <i>onreadystatechange</i> para el objeto <em>xhttp</em> que realiza la solicitud. Cuando cambia el estado del objeto, el navegador llama a la función del controlador de eventos. El código de función verifica que [readyState](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState) sea igual a 4 (que describe la situación <i>La operación está completa</i>) y que el código de estado HTTP de la respuesta es 200.
+En esta linea, se define un <i>controlador de eventos (event handler)</i> para el objeto <em>xhttp</em> que realiza la solicitud. Cuando cambia el estado del objeto, el navegador llama a la función del controlador de eventos. El código de la función verifica que [readyState](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState) sea igual a 4 (que describe la situación <i>La operación está completa</i>) y que el código de estado HTTP de la respuesta es 200.
 
 ```js
 xhttp.onreadystatechange = function() { 
@@ -277,7 +274,7 @@ xhttp.onreadystatechange = function() {
 } 
 ```
 
-El mecanismo de invocación de controladores de eventos es muy común en JavaScript. Las funciones del controlador de eventos se denominan funciones [callback](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function). El código de la aplicación no invoca las funciones en sí, sino el entorno de ejecución -el navegador-, invoca la función en el momento adecuado, cuando se ha producido el <i>evento</i>.
+El mecanismo de invocación de controladores de eventos es muy común en JavaScript. Las funciones del controlador de eventos se denominan funciones [callback](https://developer.mozilla.org/es/docs/Glossary/Callback_function). El código de la aplicación no invoca las funciones en sí, sino el entorno de ejecución - el navegador -, invoca la función en el momento adecuado, cuando se ha producido el <i>evento</i>.
 
 ### Modelo de Objetos del Documento o DOM
 
@@ -303,11 +300,11 @@ html
 
 La misma estructura arbórea se puede ver en la pestaña de la consola <i>Elements</i>.
 
-![](../../images/0/14e.png)
+![screenshot de la pestaña Elements de la consola de desarrollo](../../images/0/14e.png)
 
 El funcionamiento del navegador se basa en la idea de representar los elementos HTML como un árbol.
 
-Document Object Model, o [DOM](https://en.wikipedia.org/wiki/Document_Object_Model) es una interfaz de programación de aplicaciones, (una <i>API</i>), que permite la modificación programática de <i>árboles de elementos</i> correspondientes a páginas web.
+Document Object Model, o [DOM](https://es.wikipedia.org/wiki/Document_Object_Model) es una interfaz de programación de aplicaciones, (una <i>API</i>), que permite la modificación programática de <i>árboles de elementos</i> correspondientes a páginas web.
 
 El código JavaScript introducido en el capítulo anterior utilizó DOM-API para agregar una lista de notas a la página.
 
@@ -332,21 +329,21 @@ document.getElementById('notes').appendChild(ul)
 
 ### Manipulando el objeto document desde la consola
 
-El nodo superior del árbol DOM de un documento HTML se denomina objeto <em>document</em>. Podemos realizar varias operaciones en una página web utilizando DOM-API. Puede acceder al objeto <em>document</em> escribiendo <em>document</em> en la pestaña Console:
+El nodo superior del árbol DOM de un documento HTML se denomina objeto <em>document</em>. Podemos realizar varias operaciones en una página web utilizando DOM-API. Puedes acceder al objeto <em>document</em> escribiendo <em>document</em> en la pestaña Console:
 
-![](../../images/0/15e.png)
+![document en la pestaña console de las herramientas de desarrollo](../../images/0/15e.png)
 
 Agreguemos una nueva nota a la página desde la consola.
 
 Primero, obtendremos la lista de notas de la página. La lista está en el primer elemento ul de la página:
 
-```js 
+```js
 list = document.getElementsByTagName('ul')[0]
 ```
 
 Luego crea un nuevo elemento li y agrégale contenido de texto:
 
-```js 
+```js
 newElement = document.createElement('li')
 newElement.textContent = 'Page manipulation from console is easy'
 ```
@@ -357,15 +354,15 @@ Y agregue el nuevo elemento li a la lista:
 list.appendChild(newElement)
 ```
 
-![](../../images/0/16e.png)
+![screenshot de la pagina con la nueva nota agregada a la lista](../../images/0/16e.png)
 
-Aunque la página se actualiza en su navegador, los cambios no son permanentes. Si se vuelve a cargar la página, la nueva nota desaparecerá porque los cambios no se enviaron al servidor. El código JavaScript que obtiene el navegador siempre creará la lista de notas basada en datos JSON de la dirección <https://studies.cs.helsinki.fi/exampleapp/data.json>.
+Aunque la página se actualiza en tu navegador, los cambios no son permanentes. Si se vuelve a cargar la página, la nueva nota desaparecerá porque los cambios no se enviaron al servidor. El código JavaScript que obtiene el navegador siempre creará la lista de notas basada en datos JSON de la dirección <https://studies.cs.helsinki.fi/exampleapp/data.json>.
 
 ### CSS
 
-El elemento <i>head</i> del código HTML de la página de Notes contiene un [enlace](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link), que determina que el navegador debe obtener una hoja de estilo [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) de la dirección [main.css](https://studies.cs.helsinki.fi/exampleapp/main.css).
+El elemento <i>head</i> del código HTML de la página de Notes contiene un [enlace](https://developer.mozilla.org/es/docs/Web/HTML/Element/link), que determina que el navegador debe obtener una hoja de estilo [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) de la dirección [main.css](https://studies.cs.helsinki.fi/exampleapp/main.css).
 
-Las hojas de estilo en cascada, o CSS, es un lenguaje de marcado que se utiliza para determinar la apariencia de las páginas web.
+Cascading Style Sheets, o CSS, es un lenguaje de hojas de estilo utilizado para determinar la apariencia de las páginas web.
 
 El archivo CSS obtenido tiene el siguiente aspecto:
 
@@ -380,35 +377,35 @@ El archivo CSS obtenido tiene el siguiente aspecto:
 }
 ```
 
-El archivo define dos [selectores de clase](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors). Se utilizan para seleccionar ciertas partes de la página y definir reglas de estilo para aplicarles estilo.
+El archivo define dos [selectores de clase](https://developer.mozilla.org/es/docs/Web/CSS/Class_selectors). Se utilizan para seleccionar ciertas partes de la página y definir reglas de estilo para aplicarles estilo.
 
 Una definición de selector de clase siempre comienza con un punto y contiene el nombre de la clase.
 
-Las clases son [atributos](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class), que se pueden agregar a elementos HTML.
+Las clases son [atributos](https://developer.mozilla.org/es/docs/Web/HTML/Global_attributes/class), que se pueden agregar a elementos HTML.
 
 Los atributos CSS se pueden examinar en la pestaña <i>Elements</i> de la consola:
 
-![](../../images/0/17e.png)
+![screenshot de la pestaña elements de las herramientas de desarrollo](../../images/0/17e.png)
 
 El elemento <i>div</i> más externo tiene la clase <i>container</i>. El elemento <i>ul</i> que contiene la lista de notas tiene la clase <i>notes</i>.
 
-La regla CSS define que los elementos con la clase <i>container</i> se delinearán con un [border](https://developer.mozilla.org/en-US/docs/Web/CSS/border) de un píxel de ancho. También establece un [padding](https://developer.mozilla.org/en-US/docs/Web/CSS/padding) de 10 píxeles en el elemento. Esto agrega un espacio vacío entre el contenido del elemento y el borde.
+La regla CSS define que los elementos con la clase <i>container</i> se delinearán con un [border](https://developer.mozilla.org/es/docs/Web/CSS/border) de un píxel de ancho. También establece un [padding](https://developer.mozilla.org/es/docs/Web/CSS/padding) de 10 píxeles en el elemento. Esto agrega un espacio vacío entre el contenido del elemento y el borde.
 
 La segunda regla CSS establece el color del texto de las notas en azul.
 
-Los elementos HTML también pueden tener otros atributos además de clases. El elemento <i>div</i> que contiene las notas tiene un atributo [id](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). El código JavaScript usa el id para encontrar el elemento.
+Los elementos HTML también pueden tener otros atributos además de clases. El elemento <i>div</i> que contiene las notas tiene un atributo [id](https://developer.mozilla.org/es/docs/Web/HTML/Global_attributes/id). El código JavaScript usa el id para encontrar el elemento.
 
 La pestaña <i>Elements</i> de la consola se puede utilizar para cambiar los estilos de los elementos.
 
-![](../../images/0/18e.png)
+![screenshot de pestaña elements de las herramientas de desarrolo mostrando reglas de CSS aplicadas a la clase container](../../images/0/18e.png)
 
 Los cambios realizados en la consola no serán permanentes. Si desea realizar cambios duraderos, debe guardarlos en la hoja de estilo CSS del servidor.
 
 ### Cargando una página que contiene JavaScript - revisada
 
-Revisemos lo que sucede cuando la página https://studies.cs.helsinki.fi/exampleapp/notes se abre en el navegador.
+Revisemos lo que sucede cuando la página <https://studies.cs.helsinki.fi/exampleapp/notes> se abre en el navegador.
 
-![](../../images/0/19e.png)
+![diagrama de secuencia de la interacción entre el navegador y el servidor](../../images/0/19e.png)
 
 - El navegador obtiene el código HTML que define el contenido y la estructura de la página del servidor mediante una solicitud HTTP GET.
 - Los enlaces en el código HTML hacen que el navegador también busque la hoja de estilo CSS <i>main.cs</i>...
@@ -420,32 +417,32 @@ Revisemos lo que sucede cuando la página https://studies.cs.helsinki.fi/example
 
 A continuación, examinemos cómo se realiza la adición de una nueva nota.
 
-La página de notas contiene un [elemento de formulario](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form)
+La página de notas contiene un [elemento de formulario](https://developer.mozilla.org/es/docs/Learn/Forms/Your_first_form)
 
-![](../../images/0/20e.png)
+![highlight de elemento de formulario y herramientas de desarrolladores](../../images/0/20e.png)
 
-Cuando se hace clic en el botón del formulario, el navegador enviará la entrada del usuario al servidor.
+Cuando se hace clic en el botón del formulario, el navegador enviará la entrada del usuario al servidor. Abramos la pestaña <i>Network</i> y veamos cómo se ve enviar el formulario:
 
-Abramos la pestaña <i>Network</i> y veamos cómo se ve enviar el formulario:
+![pestaña de network donde se muestran los eventos de enviar el formulario](../../images/0/21e.png)
 
-![](../../images/0/21e.png)
+Sorprendentemente, enviar el formulario causa no menos de <i>cinco</i> solicitudes HTTP.
+La primera es el evento de envío de formulario. Acerquémonos:
 
-Sorprendentemente, enviar el formulario causa en total <i>cinco</i> solicitudes HTTP.
-El primero es el evento de envío de formulario. Acerquémonos:
+![vista detallada de la primera solicitud](../../images/0/22e.png)
 
-![](../../images/0/22e.png)
-
-Es una solicitud [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) a la dirección del servidor <i>new_note</i>. El servidor responde con el código de estado HTTP 302. Se trata de una [redirección de URL](https://en.wikipedia.org/wiki/URL_redirection), con la que el servidor solicita al navegador que realice una nueva solicitud HTTP GET a la dirección definida en la <i>Ubicación (Location)</i> del encabezado: la dirección <i>notes</i>.
+Es una solicitud [HTTP POST](https://developer.mozilla.org/es/docs/Web/HTTP/Methods/POST) a la dirección del servidor <i>new_note</i>. El servidor responde con el código de estado HTTP 302. Se trata de una [redirección de URL](https://es.wikipedia.org/wiki/Redirecci%C3%B3n_de_URL), con la que el servidor solicita al navegador que realice una nueva solicitud HTTP GET a la dirección definida en la <i>Ubicación (Location)</i> del encabezado - la dirección <i>notes</i>.
 
 Entonces, el navegador vuelve a cargar la página de Notas. La recarga provoca tres solicitudes HTTP más: obtener la hoja de estilo (main.css), el código JavaScript (main.js) y los datos sin procesar de las notas (data.json).
 
 La pestaña network también muestra los datos enviados con el formulario:
 
-![](../../images/0/23e.png)
+NB: En las versiones más recientes de Chrome, el menú desplegable Form Data se encuentra dentro de la nueva pestaña Payload, ubicada a la derecha de la pestaña Headers
+
+![dropdown de datos del formulario](../../images/0/23e.png)
 
 La etiqueta Form tiene atributos <i>action</i> y <i>method</i>, que definen que el envío del formulario se realiza como una solicitud HTTP POST a la dirección <i>new_note</i>.
 
-![](../../images/0/24e.png)
+![highlight de action y method](../../images/0/24e.png)
 
 El código en el servidor responsable de la solicitud POST es bastante simple (NB: este código está en el servidor, y no en el código JavaScript obtenido por el browser):
 
@@ -460,14 +457,14 @@ app.post('/new_note', (req, res) => {
 })
 ```
 
-Los datos se envían como el [cuerpo](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) de la solicitud POST.
+Los datos se envían como el [cuerpo](https://developer.mozilla.org/es/docs/Web/HTTP/Methods/POST) de la solicitud POST.
 
 El servidor puede acceder a los datos accediendo al campo <em>req.body</em> del objeto de solicitud <em>req</em>.
 
 El servidor crea un nuevo objeto de nota y lo agrega a un arreglo llamado <em>notes</em>.
 
 ```js
-notes.push({ 
+notes.push({
   content: req.body.note,
   date: new Date(),
 })
@@ -481,15 +478,15 @@ El servidor no guarda nuevas notas en una base de datos, por lo que las nuevas n
 
 La página de Notas de la aplicación sigue un estilo de desarrollo web de principios de los noventa y "utiliza Ajax". Como tal, está en la cresta de la ola de tecnología web de principios de la década de 2000.
 
-[AJAX](https://en.wikipedia.org/wiki/Ajax_(programming)) (JavaScript Asincrónico y XML) es un término introducido en febrero de 2005 sobre la base de los avances en la tecnología de los navegadores para describir un nuevo enfoque revolucionario que permitió la obtención de contenido en páginas web utilizando JavaScript incluido dentro del HTML, sin la necesidad de volver a renderizar la página.
+[AJAX](https://es.wikipedia.org/wiki/AJAX) (JavaScript Asíncrono y XML) es un término introducido en febrero de 2005 sobre la base de los avances en la tecnología de los navegadores para describir un nuevo enfoque revolucionario que permitió la obtención de contenido en páginas web utilizando JavaScript incluido dentro del HTML, sin la necesidad de volver a renderizar la página.
 
-Antes de la era AJAX, todas las páginas web funcionaban como la [aplicación web tradicional](/es/part0/fundamentos_de_las_aplicaciones_web#aplicaciones_web_tradicionales) que vimos anteriormente en este capítulo.
+Antes de la era AJAX, todas las páginas web funcionaban como la [aplicación web tradicional](/es/part0/fundamentos_de_las_aplicaciones_web#aplicaciones-web-tradicionales) que vimos anteriormente en este capítulo.
 Todos los datos que se muestran en la página se obtuvieron con el código HTML generado por el servidor.
 
 La página Notes utiliza AJAX para obtener los datos de las notas. El envío del formulario todavía utiliza el mecanismo tradicional de envío de formularios web.
 
-Las URLs de la aplicación reflejan los viejos tiempos sin preocupaciones. Los datos JSON se obtienen de la URL <https://studies.cs.helsinki.fi/exampleapp/data.json> y se envían nuevas notas a la URL <https://studies.cs.helsinki.fi/exampleapp/new_note>.  
-Hoy en día, URL como estas no se considerarían aceptables, ya que no siguen las convenciones generalmente reconocidas de las API [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services), que analizaremos más en la [parte 3](/es/part3)
+Las URLs de la aplicación reflejan los viejos tiempos sin preocupaciones. Los datos JSON se obtienen de la URL <https://studies.cs.helsinki.fi/exampleapp/data.json> y se envían nuevas notas a la URL <https://studies.cs.helsinki.fi/exampleapp/new_note>.
+Hoy en día, URL como estas no se considerarían aceptables, ya que no siguen las convenciones generalmente reconocidas de las API [RESTful](https://es.wikipedia.org/wiki/Transferencia_de_Estado_Representacional), que analizaremos más en la [parte 3](/es/part3)
 
 La cosa denominada AJAX es ahora tan común que se da por sentado. El término se ha desvanecido en el olvido, y la nueva generación ni siquiera ha oído hablar de él.
 
@@ -499,34 +496,34 @@ En nuestra aplicación de ejemplo, la página de inicio funciona como una págin
 
 La página Notes da parte de la responsabilidad al navegador, la generación del código HTML para las notas existentes. El navegador aborda esta tarea ejecutando el código JavaScript que obtuvo del servidor. El código obtiene las notas del servidor como datos JSON y agrega elementos HTML para mostrar las notas en la página usando la [DOM-API](/es/part0/fundamentos_de_las_aplicaciones_web#modelo-de-objeto-de-documento-o-dom).
 
-En los últimos años, ha surgido el estilo de [Aplicación de una sola página](https://en.wikipedia.org/wiki/Single-page_application) (SPA) para crear aplicaciones web. Los sitios web de estilo SPA no obtienen todas sus páginas por separado del servidor como lo hace nuestra aplicación de muestra, sino que comprenden solo una página HTML obtenida del servidor, cuyo contenido se manipula con JavaScript que se ejecuta en el navegador.
+En los últimos años, ha surgido el estilo de [Aplicación de una sola página](https://es.wikipedia.org/wiki/Single-page_application) (SPA) para crear aplicaciones web. Los sitios web de estilo SPA no obtienen todas sus páginas por separado del servidor como lo hace nuestra aplicación de muestra, sino que comprenden solo una página HTML obtenida del servidor, cuyo contenido se manipula con JavaScript que se ejecuta en el navegador.
 
 La página Notes de nuestra aplicación tiene cierto parecido con las aplicaciones de estilo SPA, pero aún no está del todo lista. Aunque la lógica para representar las notas se ejecuta en el navegador, la página sigue utilizando la forma tradicional de agregar nuevas notas. Los datos se envían al servidor con el envío del formulario, y el servidor indica al navegador que vuelva a cargar la página Notes con un <i>redireccionamiento</i>.
 
 Puede encontrar una versión de la aplicación de una sola página de nuestra aplicación de ejemplo en <https://studies.cs.helsinki.fi/exampleapp/spa>.
 A primera vista, la aplicación se ve exactamente igual que la anterior.
-El código HTML es casi idéntico, pero el archivo JavaScript es diferente (<i>spa.js</i>) y hay un pequeño cambio en cómo se define la etiqueta de formulario:
+El código HTML es casi idéntico, pero el archivo JavaScript es diferente (<i>spa.js</i>) y hay un pequeño cambio en cómo se define la etiqueta form:
 
-![](../../images/0/25e.png)
+![form sin action ni method](../../images/0/25e.png)
 
 El formulario no tiene atributos de <i>action</i> o <i>method</i> para definir cómo y dónde enviar los datos de entrada.
 
-Abra la pestaña <i>Network</i> y vacíela haciendo clic en el símbolo 🚫. Cuando ahora cree una nueva nota, notará que el navegador envía solo una solicitud al servidor.
+Abre la pestaña <i>Network</i> y vacíala. Cuando ahora crees una nueva nota, notaras que el navegador envía solo una solicitud al servidor.
 
-![](../../images/0/26e.png)
+![pestaña network mostrando una solicitud POST a new_note_spa](../../images/0/26e.png)
 
 La solicitud POST a la dirección <i>new_note_spa</i> contiene la nueva nota como datos JSON que contienen tanto el contenido de la nota (<i>content</i>) como la marca de tiempo (<i>date</i>):
 
 ```js
 {
   content: "single page app does not reload the whole page",
-  date:" 2019-05-25T15: 15: 59.905Z "
+  date: "2019-05-25T15:15:59.905Z"
 }
 ```
 
 La cabecera <i>Content-Type</i> de la solicitud le dice al servidor que los datos incluidos están representados en formato JSON.
 
-![](../../images/0/27e.png)
+![highlight de Cabecera Content-type con valor application/json](../../images/0/27e.png)
 
 Sin esta cabecera, el servidor no sabría cómo analizar correctamente los datos.
 
@@ -564,9 +561,7 @@ var sendToServer = function(note) {
   // ...
 
   xhttpForPost.open('POST', '/new_note_spa', true)
-  xhttpForPost.setRequestHeader(
-    'Content-type', 'application/json'
-  )
+  xhttpForPost.setRequestHeader('Content-type', 'application/json')
   xhttpForPost.send(JSON.stringify(note))
 }
 ```
@@ -584,11 +579,11 @@ En lugar de utilizar JavaScript y DOM-API únicamente, a menudo se utilizan dife
 
 jQuery se desarrolló cuando las aplicaciones web seguían principalmente el estilo tradicional del servidor que genera páginas HTML, cuya funcionalidad se mejoró en el lado del navegador usando JavaScript escrito con jQuery. Una de las razones del éxito de jQuery fue la llamada compatibilidad entre navegadores. La librería funcionó independientemente del navegador o de la empresa que la hizo, por lo que no hubo necesidad de soluciones específicas para el navegador. Hoy en día, el uso de jQuery no está tan justificado dado el avance de VanillaJS, y los navegadores más populares generalmente soportan bien las funcionalidades básicas.
 
-El auge de la aplicación de una sola página trajo varias formas más "modernas" de desarrollo web que jQuery. El favorito de la primera ola de desarrolladores fue [BackboneJS](http://backbonejs.org/). Después de su [lanzamiento](https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13) en 2012, [AngularJS](https://angularjs.org/) de Google rápidamente se convirtió casi en el estándar de facto del desarrollo web moderno.
+El auge de la aplicación de una sola página trajo varias formas más "modernas" de desarrollo web que jQuery. El favorito de la primera ola de desarrolladores fue [BackboneJS](http://backbonejs.org/). Después de su [lanzamiento](https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100rc1-moir%C3%A9-vision-2012-03-13) en 2012, [AngularJS](https://angularjs.org/) de Google rápidamente se convirtió casi en el estándar de facto del desarrollo web moderno.
 
-Sin embargo, la popularidad de Angular se desplomó después de que el equipo de Angular [anunció](https://jaxenter.com/angular-2-0-announcement-backfires-112127.html) en octubre de 2014 que el soporte para la versión 1 terminará, y Angular 2 no será retrocompatible con la primera versión. Angular 2 y las versiones más nuevas no han recibido una bienvenida muy cálida.
+Sin embargo, la popularidad de Angular se desplomó después de que el [equipo de Angular anunció que el soporte para la versión 1 terminará](https://web.archive.org/web/20151208002550/https://jaxenter.com/angular-2-0-announcement-backfires-112127.html), y que Angular 2 no será retrocompatible con la primera versión. Angular 2 y las versiones más nuevas no han recibido una bienvenida muy cálida.
 
-Actualmente, la herramienta más popular para implementar la lógica del lado del navegador de las aplicaciones web es la biblioteca [React](https://reactjs.org/) de Facebook.
+Actualmente, la herramienta más popular para implementar la lógica del lado del navegador de las aplicaciones web es la biblioteca [React](https://react.dev/) de Facebook.
 Durante este curso, nos familiarizaremos con React y la biblioteca [Redux](https://github.com/reactjs/redux), que se usan juntos con frecuencia.
 
 El estado de React parece sólido, pero el mundo de JavaScript cambia constantemente. Por ejemplo, recientemente un recién llegado -[VueJS](https://vuejs.org/)- ha estado captando cierto interés.
@@ -599,7 +594,7 @@ El estado de React parece sólido, pero el mundo de JavaScript cambia constantem
 
 Prácticamente todas las aplicaciones web tienen (al menos) dos "capas": el navegador, al estar más cerca del usuario final, es la capa superior y el servidor, la inferior. A menudo también hay una capa de base de datos debajo del servidor. Por lo tanto, podemos pensar en la <i>arquitectura</i> de una aplicación web como una especie de <i>stack (pila)</i> de capas.
 
-A menudo, también hablamos sobre el [frontend](https://en.wikipedia.org/wiki/Front_and_back_ends) y el [backend](https://en.wikipedia.org/wiki/Front_and_back_ends). El navegador es la interfaz y JavaScript que se ejecuta en el navegador es el código de frontend. El servidor, por otro lado, es el backend.
+A menudo, también hablamos sobre el [frontend y el backend](https://es.wikipedia.org/wiki/Front_end_y_back_end). El navegador es el frontend y el JavaScript que se ejecuta en el navegador es el código del frontend. El servidor, por otro lado, es el backend.
 
 En el contexto de este curso, el desarrollo web full stack significa que nos enfocamos en todas las partes de la aplicación: el frontend, el backend y la base de datos. A veces, el software del servidor y su sistema operativo se ven como parte del stack, pero no vamos a entrar en ellos.
 
@@ -609,101 +604,112 @@ Solía ser más común que los desarrolladores se especializaran en una capa del
 
 ### Fatiga de JavaScript
 
-El desarrollo web full stack es un desafío de muchas maneras. Suceden cosas en muchos lugares a la vez y la depuración es un poco más difícil que con las aplicaciones de escritorio normales. JavaScript no siempre funciona como cabría esperar (en comparación con muchos otros lenguajes), y la forma asincrónica en que funcionan sus entornos de ejecución genera todo tipo de desafíos. Comunicarse en la web requiere conocimientos del protocolo HTTP. También se deben manejar las bases de datos y la administración y configuración del servidor. También sería bueno saber suficiente CSS para hacer las aplicaciones al menos algo presentables.
+El desarrollo web full stack es un desafío en muchos aspectos. Suceden cosas en muchos lugares a la vez y la depuración es un poco más difícil que con las aplicaciones de escritorio normales. JavaScript no siempre funciona como cabría esperar (en comparación con muchos otros lenguajes), y la forma asíncrona en que funcionan sus entornos de ejecución genera todo tipo de desafíos. Comunicarse en la web requiere conocimientos del protocolo HTTP. También se deben manejar las bases de datos y la administración y configuración del servidor. También sería bueno saber suficiente CSS para hacer las aplicaciones al menos algo presentables.
 
-El mundo de JavaScript se desarrolla rápidamente, lo que conlleva sus propios desafíos. Las herramientas, las librerías y el propio lenguaje están en constante desarrollo. Algunos están empezando a cansarse del cambio constante y han acuñado un término para ello: [fatiga](https://auth0.com/blog/how-to-manage-javascript-fatigue/) de [JavaScript](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4).
+El mundo de JavaScript se desarrolla rápidamente, lo que conlleva sus propios desafíos. Las herramientas, las librerías y el propio lenguaje están en constante desarrollo. Algunos están empezando a cansarse del cambio constante y han acuñado un término para ello: *fatiga de JavaScript*. Ve [como manejar la fatiga de JavaScript con auth0](https://auth0.com/blog/how-to-manage-javascript-fatigue/) o [fatiga de JavaScript en Medium](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4).
 
-Usted mismo sufrirá fatiga de JavaScript durante este curso. Afortunadamente para nosotros, hay algunas formas de suavizar la curva de aprendizaje y podemos comenzar con la codificación en lugar de la configuración. No podemos evitar la configuración por completo, pero podemos seguir adelante alegremente en las próximas semanas mientras evitamos los peores infiernos de configuración.
+Tú mismo sufrirás fatiga de JavaScript durante este curso. Afortunadamente para nosotros, hay algunas formas de suavizar la curva de aprendizaje y podemos comenzar con la codificación en lugar de la configuración. No podemos evitar la configuración por completo, pero podemos seguir adelante alegremente en las próximas semanas mientras evitamos los peores infiernos de configuración.
 
 </div>
 
-<div class="tasks"> 
+<div class="tasks">
   <h3> Ejercicios 0.1.-0.6.</h3>
 
-Los ejercicios se envían a través de GitHub y marcando los ejercicios como realizados en el [sistema de envío](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Los ejercicios se envían a través de GitHub y marcando los ejercicios como realizados en el [sistema de envío ejercicios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
-Puede enviar todos los ejercicios al mismo repositorio o utilizar varios repositorios diferentes. Si envía ejercicios de diferentes partes al mismo repositorio, nombre bien sus directorios. Si utiliza un repositorio privado para enviar los ejercicios, agregue a _mluukkai_ como colaborador.
+Puedes enviar todos los ejercicios al mismo repositorio o utilizar varios repositorios diferentes. Si envías ejercicios de diferentes partes al mismo repositorio, nombra bien sus directorios. Si utilizas un repositorio privado para enviar los ejercicios, agrega a _mluukkai_ como colaborador.
 
-Una buena manera de nombrar los directorios en su repositorio de presentación es el siguiente:
+Una buena forma de nombrar los directorios en tu repositorio de entrega es la siguiente:
 
-```
+```text
 part0
-part1 
-  CourseInfo
+part1
+  courseinfo
   unicafe
   anecdotes
 part2
+  courseinfo
   phonebook
   countries
 ```
 
 Entonces, cada parte tiene su propio directorio, que contiene un directorio para cada conjunto de ejercicios (como los ejercicios unicafe en la parte 1).
 
-Los ejercicios se envían **una parte a la vez**. Cuando haya enviado los ejercicios de una parte, ya no podrá enviar los ejercicios perdidos de esa parte.
+Los ejercicios se envían **una parte a la vez**. Cuando hayas enviado los ejercicios de una parte, ya no podrás enviar ningún ejercicio omitido de esa parte.
 
-<h4> 0.1: HTML</h4>
+  <h4>0.1: HTML</h4>
 
-Revise los conceptos básicos de HTML leyendo este tutorial de Mozilla: [tutorial HTML](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics).
+Revisa los conceptos básicos de HTML leyendo este tutorial de Mozilla: [tutorial HTML](https://developer.mozilla.org/es/docs/Learn/Getting_started_with_the_web/HTML_basics).
 
-<i>Este ejercicio no se envía a GitHub, basta con leer el tutorial</i>
+<i>Este ejercicio no se envía a GitHub, leer el tutorial es suficiente</i>
 
-<h4>0.2: CSS</h4>
+  <h4>0.2: CSS</h4>
 
-Revise los conceptos básicos de CSS leyendo este tutorial de Mozilla: [tutorial CSS](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics).
+Revisa los conceptos básicos de CSS leyendo este tutorial de Mozilla: [tutorial CSS](https://developer.mozilla.org/es/docs/Learn/Getting_started_with_the_web/CSS_basics).
 
-<i>Este ejercicio no se envía a GitHub, basta con leer el tutorial</i>
+<i>Este ejercicio no se envía a GitHub, leer el tutorial es suficiente</i>
 
-<h4>0.3: Formularios HTML</h4>
+  <h4>0.3: Formularios HTML</h4>
 
-Aprende sobre los conceptos básicos de los formularios HTML leyendo el tutorial de Mozilla [Tu primer formulario](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form).
+Aprende sobre los conceptos básicos de los formularios HTML leyendo el tutorial de Mozilla [Mi primer formulario HTML](https://developer.mozilla.org/es/docs/Learn/Forms/Your_first_form).
 
-<i>Este ejercicio no se envía a GitHub, basta con leer el tutorial</i>
+<i>Este ejercicio no se envía a GitHub, leer el tutorial es suficiente</i>
 
-<h4>0.4: nueva nota</h4>
+  <h4>0.4: Nuevo diagrama de nota</h4>
 
-En el capítulo [Cargando una página que contiene JavaScript - revisada](/es/part0/fundamentos-de-las-aplicaciones-web#cargando-una-página-que-contiene-java-script-revisado) la cadena de eventos causada al abrir la página <https://studies.cs.helsinki.fi/exampleapp/notes> se representa como un [diagrama de secuencia](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/)
+En el capítulo [Cargando una página que contiene JavaScript - revisada](/es/part0/fundamentos_de_las_aplicaciones_web#cargando-una-pagina-que-contiene-java-script-revisada) la cadena de eventos causada al abrir la página <https://studies.cs.helsinki.fi/exampleapp/notes> se representa como un [diagrama de secuencia](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/)
 
-El diagrama se hizo usando el servicio [websequencediagrams](https://www.websequencediagrams.com) de la siguiente manera:
+El diagrama se hizo como un archivo Markdown de Github usando la sintaxis [Mermaid](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams), de la siguiente manera:
 
+```text
+sequenceDiagram
+    participant browser
+    participant server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activate server
+    server-->>browser: HTML document
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate server
+    server-->>browser: the css file
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    activate server
+    server-->>browser: the JavaScript file
+    deactivate server
+
+    Note right of browser: The browser starts executing the JavaScript code that fetches the JSON from the server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server
+    server-->>browser: [{ "content": "HTML is easy", "date": "2023-1-1" }, ... ]
+    deactivate server
+
+    Note right of browser: The browser executes the callback function that renders the notes
 ```
-browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
-server-->browser: HTML-code
-browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
-server-->browser: main.css
-browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
-server-->browser: main.js
 
-note over browser:
-browser starts executing js-code
-that requests JSON data from server 
-end note
+**Crea un diagrama similar** que describa la situación en la que el usuario crea una nueva nota en la página <https://studies.cs.helsinki.fi/exampleapp/notes> escribiendo algo en el campo de texto y haciendo clic en el botón <i>Save</i>.
 
-browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
-server-->browser: [{ content: "HTML is easy", date: "2019-05-23" }, ...]
-
-note over browser:
-browser executes the event handler
-that renders notes to display
-end note
-```
-
-**Crear un diagrama similar** que describa la situación en la que el usuario crea una nueva nota en la página <https://studies.cs.helsinki.fi/exampleapp/notes> escribiendo algo en el campo de texto y haciendo clic en el botón <i>submit</i>.
-
-Si es necesario, muestre las operaciones en el navegador o en el servidor como comentarios en el diagrama.
+Si es necesario, muestra las operaciones en el navegador o en el servidor como comentarios en el diagrama.
 
 El diagrama no tiene por qué ser un diagrama de secuencia. Cualquier forma sensata de presentar los eventos está bien.
 
 Toda la información necesaria para hacer esto, y los dos ejercicios siguientes, se pueden encontrar en el texto de [esta parte](/es/part0/fundamentos_de_las_aplicaciones_web#formularios-y-http-post).
 La idea de estos ejercicios es leer el texto una vez más y pensar en lo que está sucediendo allí. No es necesario leer el [código](https://github.com/mluukkai/example_app) de la aplicación pero, por supuesto, es posible.
 
-<h4>0.5: Aplicación de una sola página</h4>
+Puedes crear los diagramas con cualquier programa, pero quizás la mejor y más fácil forma de hacer diagramas es utilizando la sintaxis de [Mermaid](https://github.com/mermaid-js/mermaid#sequence-diagram-docs---live-editor) que ahora está implementada en las páginas de Markdown de [GitHub](https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/).
 
-Cree un diagrama que describa la situación en la que el usuario accede a la versión de [aplicación de una sola página](/es/part0/fundamentos_de_las_aplicaciones_web#aplicacion-de-una-sola-pagina) de la aplicación de notas en <https://studies.cs.helsinki.fi/exampleapp/spa>.
+<h4>0.5: Diagrama de aplicación de una sola página</h4>
 
-<h4>0.6: Nueva nota</h4>
+Crea un diagrama que describa la situación en la que el usuario accede a la versión de [aplicación de una sola página](/es/part0/fundamentos_de_las_aplicaciones_web#aplicacion-de-una-sola-pagina) de la aplicación de notas en <https://studies.cs.helsinki.fi/exampleapp/spa>.
 
-Cree un diagrama que represente la situación en la que el usuario crea una nueva nota utilizando la versión de una sola página de la aplicación.
+<h4>0.6: Nueva nota en diagrama de aplicación de una sola pagina</h4>
 
-Este fue el último ejercicio, y es hora de enviar sus respuestas a GitHub y marcar los ejercicios como hechos en la [solicitud de envío](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Crea un diagrama que represente la situación en la que el usuario crea una nueva nota utilizando la versión de una sola página de la aplicación.
+
+Este fue el último ejercicio, y es hora de enviar tus respuestas a GitHub y marcar los ejercicios como hechos en el [sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>
