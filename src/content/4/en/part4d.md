@@ -347,6 +347,8 @@ Usernames, passwords and applications using token authentication must always be 
 
 We will implement login to the frontend in the [next part](/en/part5).
 
+NOTE: At this stage, in the deployed notes app, it is expected that the creating a note feature will stop working as the backend login feature is not yet linked to the frontend.
+
 </div>
 
 <div class="tasks">
@@ -412,7 +414,7 @@ Modify adding new blogs so that it is only possible if a valid token is sent wit
 
 #### 4.20*: bloglist expansion, step8
 
-[This example](/en/part4/token_authentication) from part 4 shows taking the token from the header with the _getTokenFrom_ helper function.
+[This example](/en/part4/token_authentication) from part 4 shows taking the token from the header with the _getTokenFrom_ helper function in <i>controllers/blogs.js</i>.
 
 If you used the same solution, refactor taking the token to a [middleware](/en/part3/node_js_and_express#middleware). The middleware should take the token from the <i>Authorization</i> header and place it into the <i>token</i> field of the <i>request</i> object.
 
@@ -489,8 +491,11 @@ blogsRouter.delete('/:id', async (request, response) => {
 Note that it is possible to register a middleware only for a specific set of routes. So instead of using _userExtractor_ with all the routes,
 
 ```js
+const middleware = require('../utils/middleware');
+// ...
+
 // use the middleware in all routes
-app.use(userExtractor) // highlight-line
+app.use(middleware.userExtractor) // highlight-line
 
 app.use('/api/blogs', blogsRouter)  
 app.use('/api/users', usersRouter)
@@ -500,8 +505,11 @@ app.use('/api/login', loginRouter)
 we could register it to be only executed with path <i>/api/blogs</i> routes:
 
 ```js
+const middleware = require('../utils/middleware');
+// ...
+
 // use the middleware only in /api/blogs routes
-app.use('/api/blogs', userExtractor, blogsRouter) // highlight-line
+app.use('/api/blogs', middleware.userExtractor, blogsRouter) // highlight-line
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 ```
@@ -509,7 +517,10 @@ app.use('/api/login', loginRouter)
 As can be seen, this happens by chaining multiple middlewares as the parameter of function <i>use</i>. It would also be possible to register a middleware only for a specific operation:
 
 ```js
-router.post('/', userExtractor, async (request, response) => {
+const middleware = require('../utils/middleware');
+// ...
+
+router.post('/', middleware.userExtractor, async (request, response) => {
   // ...
 }
 ```
