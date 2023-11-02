@@ -433,7 +433,7 @@ notesRouter.post('/', async (request, response) => {
   user.notes = user.notes.concat(savedNote._id) //highlight-line
   await user.save()  //highlight-line
   
-  response.json(savedNote)
+  response.status(201).json(savedNote)
 })
 ```
 The note scheme will also need to change as follows in our models/note.js file:
