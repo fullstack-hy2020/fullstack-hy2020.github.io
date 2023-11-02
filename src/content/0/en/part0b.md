@@ -397,7 +397,7 @@ HTML elements can also have other attributes apart from classes. The <i>div</i> 
 
 The <i>Elements</i> tab of the console can be used to change the styles of the elements.
 
-![developer tools elements tab](../../images/0/18e.png)
+![developer tools elements tab showing CSS rules applied to container class](../../images/0/18e.png)
 
 Changes made on the console will not be permanent. If you want to make lasting changes, they must be saved to the CSS style sheet on the server.
 
@@ -410,8 +410,7 @@ Let's review what happens when the page <https://studies.cs.helsinki.fi/examplea
 - The browser fetches the HTML code defining the content and the structure of the page from the server using an HTTP GET request.
 - Links in the HTML code cause the browser to also fetch the CSS style sheet <i>main.css</i>...
 - ...and the JavaScript code file <i>main.js</i>
-- The browser executes the JavaScript code. The code makes an HTTP GET request to the address <https://studies.cs.helsinki.fi/exampleapp/data.json>, which
-  returns the notes as JSON data.
+- The browser executes the JavaScript code. The code makes an HTTP GET request to the address <https://studies.cs.helsinki.fi/exampleapp/data.json>, which returns the notes as JSON data.
 - When the data has been fetched, the browser executes an <i>event handler</i>, which renders the notes to the page using the DOM-API.
 
 ### Forms and HTTP POST
@@ -511,7 +510,7 @@ The form has no <i>action</i> or <i>method</i> attributes to define how and wher
 
 Open the <i>Network</i> tab and empty it. When you now create a new note, you'll notice that the browser sends only one request to the server.
 
-![Network tab in developer tools](../../images/0/26e.png)
+![Network tab showing one POST request to new_note_spa](../../images/0/26e.png)
 
 The POST request to the address <i>new\_note\_spa</i> contains the new note as JSON data containing both the content of the note (<i>content</i>) and the timestamp (<i>date</i>):
 
@@ -524,7 +523,7 @@ The POST request to the address <i>new\_note\_spa</i> contains the new note as J
 
 The <i>Content-Type</i> header of the request tells the server that the included data is represented in JSON format.
 
-![Content-type header in developer tools](../../images/0/27e.png)
+![highlight of Content-type header with application/json value](../../images/0/27e.png)
 
 Without this header, the server would not know how to correctly parse the data.
 
@@ -580,11 +579,11 @@ Instead of using JavaScript and the DOM-API only, different libraries containing
 
 jQuery was developed back when web applications mainly followed the traditional style of the server generating HTML pages, the functionality of which was enhanced on the browser side using JavaScript written with jQuery. One of the reasons for the success of jQuery was its so-called cross-browser compatibility. The library worked regardless of the browser or the company that made it, so there was no need for browser-specific solutions. Nowadays using jQuery is not as justified given the advancement of JavaScript, and the most popular browsers generally support basic functionalities well.
 
-The rise of the single-page app brought several more "modern" ways of web development than jQuery. The favorite of the first wave of developers was [BackboneJS](http://backbonejs.org/). After its [launch](https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13) in 2012, Google's [AngularJS](https://angularjs.org/) quickly became almost the de facto standard of modern web development.
+The rise of the single-page app brought several more "modern" ways of web development than jQuery. The favorite of the first wave of developers was [BackboneJS](http://backbonejs.org/). After its [launch](https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100rc1-moir%C3%A9-vision-2012-03-13) in 2012, Google's [AngularJS](https://angularjs.org/) quickly became almost the de facto standard of modern web development.
 
-However, the popularity of Angular plummeted in October 2014 after the [Angular team announced that support for version 1 will end](https://web.archive.org/web/20151208002550/https://jaxenter.com/angular-2-0-announcement-backfires-112127.html), and Angular 2 will not be backwards compatible with the first version. Angular 2 and the newer versions have not gotten too warm of a welcome.
+However, the popularity of Angular plummeted in October 2014 after the [Angular team announced that support for version 1 will end](https://web.archive.org/web/20151208002550/https://jaxenter.com/angular-2-0-announcement-backfires-112127.html), and that Angular 2 will not be backwards compatible with the first version. Angular 2 and the newer versions have not gotten too warm of a welcome.
 
-Currently, the most popular tool for implementing the browser-side logic of web applications is Facebook's [React](https://reactjs.org/) library.
+Currently, the most popular tool for implementing the browser-side logic of web applications is Facebook's [React](https://react.dev/) library.
 During this course, we will get familiar with React and the [Redux](https://github.com/reactjs/redux) library, which are frequently used together.
 
 The status of React seems strong, but the world of JavaScript is ever-changing. For example, recently a newcomer - [VueJS](https://vuejs.org/) - has been capturing some interest.
@@ -595,7 +594,7 @@ What does the name of the course, <i>Full stack web development</i>, mean? Full 
 
 Practically all web applications have (at least) two "layers": the browser, being closer to the end-user, is the top layer, and the server the bottom one. There is often also a database layer below the server. We can therefore think of the <i>architecture</i> of a web application as a <i>stack</i> of layers.
 
-Often, we also talk about the [frontend and the backend](https://en.wikipedia.org/wiki/Front_and_back_ends). The browser is the frontend, and JavaScript that runs on the browser is frontend code. The server on the other hand is the backend.
+Often, we also talk about the [frontend and the backend](https://en.wikipedia.org/wiki/Front_and_back_ends). The browser is the frontend, and the JavaScript that runs on the browser is the frontend code. The server on the other hand is the backend.
 
 In the context of this course, full-stack web development means that we focus on all parts of the application: the frontend, the backend, and the database. Sometimes the software on the server and its operating system are seen as parts of the stack, but we won't go into those.
 
