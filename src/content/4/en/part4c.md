@@ -214,7 +214,7 @@ const usersRouter = require('./controllers/users')
 app.use('/api/users', usersRouter)
 ```
 
-The contents of the file, <i>controllers/users.js</i>, that defines the router are as follows:
+The contents of the file, <i>controllers/users.js</i>, that defines the router is as follows:
 
 ```js
 const bcrypt = require('bcrypt')
@@ -455,7 +455,7 @@ const noteSchema = new mongoose.Schema({
 })
 ```
 
-It's worth noting that the <i>user</i> object also changes. The <i>id</i> of the note is stored in the <i>notes</i> field:
+It's worth noting that the <i>user</i> object also changes. The <i>id</i> of the note is stored in the <i>notes</i> field of the <i>user</i> object:
 
 ```js
 const user = await User.findById(body.userId)
@@ -486,7 +486,7 @@ We would like our API to work in such a way, that when an HTTP GET request is ma
 
 As previously mentioned, document databases do not properly support join queries between collections, but the Mongoose library can do some of these joins for us. Mongoose accomplishes the join by doing multiple queries, which is different from join queries in relational databases which are <i>transactional</i>, meaning that the state of the database does not change during the time that the query is made. With join queries in Mongoose, nothing can guarantee that the state between the collections being joined is consistent, meaning that if we make a query that joins the user and notes collections, the state of the collections may change during the query.
 
-The Mongoose join is done with the [populate](http://mongoosejs.com/docs/populate.html) method. Let's update the route that returns all users first in <i>controllers/users.js</i>:
+The Mongoose join is done with the [populate](http://mongoosejs.com/docs/populate.html) method. Let's update the route that returns all users first in <i>controllers/users.js</i> file:
 
 ```js
 usersRouter.get('/', async (request, response) => {
@@ -503,7 +503,7 @@ The result is almost exactly what we wanted:
 
 ![JSON data showing populated notes and users data with repetition](../../images/4/13new.png)
 
-We can use the populate parameter for choosing the fields we want to include from the documents. In addition to the field id:n we are now only interested in <i>content</i> and <i>important</i>.
+We can use the populate parameter for choosing the fields we want to include from the documents. In addition to the field <i>id</i> we are now only interested in <i>content</i> and <i>important</i>.
 
 The selection of fields is done with the Mongo [syntax](https://docs.mongodb.com/manual/tutorial/project-fields-from-query-results/#return-the-specified-fields-and-the-id-field-only):
 
@@ -520,7 +520,7 @@ The result is now exactly like we want it to be:
 
 ![combined data showing no repetition](../../images/4/14new.png)
 
-Let's also add a suitable population of user information to notes in <i>controllers/notes.js</i>:
+Let's also add a suitable population of user information to notes in the <i>controllers/notes.js</i> file:
 
 ```js
 notesRouter.get('/', async (request, response) => {
@@ -535,7 +535,7 @@ Now the user's information is added to the <i>user</i> field of note objects.
 
 ![notes JSON now has user info embedded too](../../images/4/15new.png)
 
-It's important to understand that the database does not know that the ids stored in the <i>user</i> field of notes reference documents in the user collection.
+It's important to understand that the database does not know that the ids stored in the <i>user</i> field of the notes collection reference documents in the user collection.
 
 The functionality of the <i>populate</i> method of Mongoose is based on the fact that we have defined "types" to the references in the Mongoose schema with the <i>ref</i> option:
 
