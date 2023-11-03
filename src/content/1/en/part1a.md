@@ -428,7 +428,7 @@ React has been configured to generate quite clear error messages. Despite this, 
 
 As we already mentioned, when programming with React, it is possible and worthwhile to write <em>console.log()</em> commands (which print to the console) within your code.
 
-Also, keep in mind that **First letter of React component names must be capitalized**. If you try defining a component as follows:
+Also, keep in mind that **First letter of React component names must be capitalized**. (Keep the Hello component before adding the following block of code.) If you try defining a component as follows:
 
 ```js
 const footer = () => {
