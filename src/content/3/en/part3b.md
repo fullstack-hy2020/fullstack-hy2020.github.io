@@ -364,7 +364,13 @@ fly deploy
 
 The application works perfectly, except we haven't added the functionality for changing the importance of a note to the backend yet.
 
-<i>**NOTE:** If you are using Fly.io, there could be a .dockerignore file that specifies the exclusion of the "./build" directory during deployment. To ensure it gets deployed, consider renaming the ./build directory to ./static_build or an equivalent name.</i>
+
+> **NOTE:** If you are using Fly.io, there could be a `.dockerignore` file that specifies the exclusion of the `dist` directory during deployment. To ensure it gets deployed, consider one of the following options:
+> 
+> 1. Rename the `dist` directory to `./static_build` or an equivalent name. Make sure to use the new name in part 3b, [Streamlining deploying of the frontend](https://fullstackopen.com/en/part3/deploying_app_to_internet#streamlining-deploying-of-the-frontend)
+>
+> 2. Remove `dist` from the `.dockerignore` file and instead adding it to a [.gitignore](https://git-scm.com/docs/gitignore) file. This way the `dist` folder will be deployed to Docker but not pushed to your GitHub repository when using `git push`
+
 
 ![screenshot of notes application](../../images/3/30new.png)
 
