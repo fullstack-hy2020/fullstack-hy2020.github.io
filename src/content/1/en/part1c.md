@@ -755,7 +755,7 @@ const Button = ({ onSmash, text }) => (
 We can simplify the Button component once more by declaring the return statement in just one line:
 
 ```js
-const Button = ({ onSmash, text }) => <button onSmash={onSmash}>{text}</button>
+const Button = ({ onSmash, text }) => <button onClick={onSmash}>{text}</button>
 ```
 
 **NB**: However, be careful to not oversimplify your components, as this makes adding complexity a more tedious task down the road.
