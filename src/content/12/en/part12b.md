@@ -499,10 +499,10 @@ services:
       MONGO_INITDB_DATABASE: the_database
     volumes:
       - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
-      - mongo_data:/data/db # highlight-line
+      - mongo_data:/data/db
 
-volumes:
-  mongo_data:
+volumes: # highlight-line
+  mongo_data: # highlight-line
 ```
 
 Now the volume is created but managed by Docker. After starting the application (_docker compose -f docker-compose.dev.yml up_) you can list the volumes with _docker volume ls_, inspect one of them with _docker volume inspect_ and even delete them with _docker volume rm_: 
