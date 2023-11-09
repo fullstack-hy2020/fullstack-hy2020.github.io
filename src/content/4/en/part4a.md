@@ -391,8 +391,6 @@ app.use('/api/notes', notesRouter)
 
 Now the exported "thing" (in this case a router object) is assigned to a variable and used as such.
 
-</div>
-
 #### Finding the usages of your exports with VScode
 
 VScode has a handy feature that allows you to see where your modules have been exported.  This can be very helpfull for refactoring, say for example you decide to spilt a function in to 2 seperate functions, your code could break if you don't modify all the usages.  This is difficult if you dont know where they are.  However you need to define your exports in a particular way for this to work.
@@ -400,6 +398,10 @@ VScode has a handy feature that allows you to see where your modules have been e
 If you right click on a variable, in the location it is exported from and select find all references it will show you everywhere the variable is imported.  However if you assign an object directly to module.exports it will not work.  A work around is to assign the object you want to export to a named variable then export the named variable.  It also will not work if you destructure where you are importing, you have to import the named variable then destructure or just use dot notation to use the functions contained in the named variable.
 
 The nature of VS code bleeding into how you write your code is probably not ideal, so you need to decide yourself if the trade off is worthwhile.
+
+</div>
+
+
 
 <div class="tasks">
 
