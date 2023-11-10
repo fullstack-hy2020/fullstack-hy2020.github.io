@@ -516,12 +516,18 @@ Seuraavaksi poista kloonatun sovelluksen Git-konfiguraatio:
 cd bloglist-frontend   // mene kloonatun repositorion hakemistoon
 rm -rf .git
 ```
+Windows käyttäjille:
+
+```bash
+cd bloglist-frontend   // mene kloonatun repositorion hakemistoon
+Remove-Item -Path .git -Recurse -Force
+```
 
 Sovellus käynnistyy normaaliin tapaan, mutta joudut ensin asentamaan riippuvuudet:
 
 ```bash
 npm install
-npm start
+npm run dev
 ```
 
 **Toteuta frontendiin kirjautumisen mahdollistava toiminnallisuus.**
