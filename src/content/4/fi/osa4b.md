@@ -32,7 +32,6 @@ Määritellään nyt tiedostossa <i>package.json</i>, että testejä suoritettae
     "deploy:full": "npm run build:ui && npm run deploy",
     "logs:prod": "fly logs",
     "lint": "eslint .",
-    "lint": "eslint .",
     "test": "NODE_ENV=test jest --verbose --runInBand"// highlight-line
   },
   // ...
