@@ -522,7 +522,7 @@ The current application code can be found on [GitHub](https://github.com/fullsta
 
 ### Exercises 5.1.-5.4.
 
-We will now create a frontend for the bloglist backend we created in the last part. You can use [this application](https://github.com/fullstack-hy2020/bloglist-frontend) from GitHub as the base of your solution. The application expects your backend to be running on port 3003.
+We will now create a frontend for the bloglist backend we created in the last part. You can use [this application](https://github.com/fullstack-hy2020/bloglist-frontend) from GitHub as the base of your solution. You need to connect your backend with proxy as shown in [part 3](https://fullstackopen.com/en/part3/deploying_app_to_internet#proxy).
 
 It is enough to submit your finished solution. You can do a commit after each exercise, but that is not necessary.
 
