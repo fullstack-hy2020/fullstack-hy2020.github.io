@@ -409,6 +409,14 @@ The nature of VS code bleeding into how you write your code is probably not idea
 
 In the exercises for this part, we will be building a <i>blog list application</i>, that allows users to save information about interesting blogs they have stumbled across on the internet. For each listed blog we will save the author, title, URL, and amount of upvotes from users of the application.
 
+**Note** You should install Mongoose version 6.12.2 with the command
+
+```bash
+npm install mongoose@6.12.2
+```
+
+since the most recent Mongoose version does not support a library that we will be using in a later part of the course!
+
 #### 4.1 Blog list, step1
 
 Let's imagine a situation, where you receive an email that contains the following application body:
