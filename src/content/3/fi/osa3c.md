@@ -866,11 +866,11 @@ Nyt olemattomien osoitteiden käsittely on sijoitettu <i>ennen HTTP GET ‑pyynn
 
 Toteutetaan vielä jäljellä olevat operaatiot, eli yksittäisen muistiinpanon poisto ja muokkaus.
 
-Poisto onnistuu helpoiten metodilla [findByIdAndRemove](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndRemove):
+Poisto onnistuu helpoiten metodilla [findByIdAndDelete]([findByIdAndDelete](https://mongoosejs.com/docs/api/model.html#Model.findByIdAndDelete):
 
 ```js
 app.delete('/api/notes/:id', (request, response, next) => {
-  Note.findByIdAndRemove(request.params.id)
+  Note.findByIdAndDelete(request.params.id)
     .then(result => {
       response.status(204).end()
     })
