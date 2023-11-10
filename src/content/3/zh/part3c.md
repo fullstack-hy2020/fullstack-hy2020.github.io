@@ -1011,13 +1011,13 @@ app.get('/api/notes', (request, response) => {
 
 让我们为我们的应用程序添加一些目前缺失的功能，包括删除和更新单个笔记。
 
-<!-- The easiest way to delete a note from the database is with the [findByIdAndRemove](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndRemove) method: -->
+<!-- The easiest way to delete a note from the database is with the [findByIdAndDelete](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndDelete) method: -->
 
-删除笔记最简单的方法是使用 [findByIdAndRemove](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndRemove) ：
+删除笔记最简单的方法是使用 [findByIdAndDelete](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndDelete) ：
 
 ```js
 app.delete('/api/notes/:id', (request, response, next) => {
-  Note.findByIdAndRemove(request.params.id)
+  Note.findByIdAndDelete(request.params.id)
     .then(result => {
       response.status(204).end()
     })

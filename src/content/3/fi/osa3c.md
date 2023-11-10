@@ -866,7 +866,7 @@ Nyt olemattomien osoitteiden käsittely on sijoitettu <i>ennen HTTP GET ‑pyynn
 
 Toteutetaan vielä jäljellä olevat operaatiot, eli yksittäisen muistiinpanon poisto ja muokkaus.
 
-Poisto onnistuu helpoiten metodilla [findByIdAndDelete]([findByIdAndDelete](https://mongoosejs.com/docs/api/model.html#Model.findByIdAndDelete):
+Poisto onnistuu helpoiten metodilla [findByIdAndDelete](https://mongoosejs.com/docs/api/model.html#Model.findByIdAndDelete):
 
 ```js
 app.delete('/api/notes/:id', (request, response, next) => {

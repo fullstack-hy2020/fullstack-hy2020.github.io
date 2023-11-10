@@ -854,11 +854,11 @@ Dessa forma, o gerenciamento de endpoints desconhecidos é posto em ordem <i>ant
 
 Vamos adicionar algumas funcionalidades restantes à nossa aplicação, incluindo a exclusão e a atualização de uma nota individual.
 
-A maneira mais fácil de excluir uma nota do banco de dados é com o método [findByIdAndRemove](https://mongoosejs.com/docs/api/model.html#model_Model-findByIdAndRemove) (grosso modo, "acharPorIdERemover"):
+A maneira mais fácil de excluir uma nota do banco de dados é com o método [findByIdAndDelete](https://mongoosejs.com/docs/api/model.html#model_Model-findByIdAndDelete) (grosso modo, "acharPorIdERemover"):
 
 ```js
 app.delete('/api/notes/:id', (request, response, next) => {
-  Note.findByIdAndRemove(request.params.id)
+  Note.findByIdAndDelete(request.params.id)
     .then(result => {
       response.status(204).end()
     })

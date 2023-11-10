@@ -795,7 +795,7 @@ notesRouter.get('/:id', async (request, response, next) => {
 
 notesRouter.delete('/:id', async (request, response, next) => {
   try {
-    await Note.findByIdAndRemove(request.params.id)
+    await Note.findByIdAndDelete(request.params.id)
     response.status(204).end()
   } catch(exception) {
     next(exception)
@@ -852,7 +852,7 @@ A 'mágica' aqui é eliminar completamente os blocos try-catch. Por exemplo, a r
 ```js
 notesRouter.delete('/:id', async (request, response, next) => {
   try {
-    await Note.findByIdAndRemove(request.params.id)
+    await Note.findByIdAndDelete(request.params.id)
     response.status(204).end()
   } catch (exception) {
     next(exception)
@@ -864,7 +864,7 @@ fica assim:
 
 ```js
 notesRouter.delete('/:id', async (request, response) => {
-  await Note.findByIdAndRemove(request.params.id)
+  await Note.findByIdAndDelete(request.params.id)
   response.status(204).end()
 })
 ```

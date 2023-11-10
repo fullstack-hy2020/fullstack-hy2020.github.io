@@ -844,11 +844,11 @@ Maintenant, le traitement des points de terminaison inconnus est ordonné <i>ava
 
 Ajoutons quelques fonctionnalités manquantes à notre application, notamment la suppression et la mise à jour d'une note individuelle.
 
-La façon la plus simple de supprimer une note de la base de données est d'utiliser la méthode [findByIdAndRemove](https://mongoosejs.com/docs/api/model.html#model_Model-findByIdAndRemove) :
+La façon la plus simple de supprimer une note de la base de données est d'utiliser la méthode [findByIdAndDelete](https://mongoosejs.com/docs/api/model.html#model_Model-findByIdAndDelete) :
 
 ```js
 app.delete('/api/notes/:id', (request, response, next) => {
-  Note.findByIdAndRemove(request.params.id)
+  Note.findByIdAndDelete(request.params.id)
     .then(result => {
       response.status(204).end()
     })
