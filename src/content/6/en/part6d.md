@@ -141,7 +141,7 @@ export const getNotes = () =>
 The <i>App</i> component is now slightly simplified
 
 ```js
-import { useQuery } from 'react-query' 
+import { useQuery } from '@tanstack/react-query' 
 import { getNotes } from './requests' // highlight-line
 
 const App = () => {
@@ -179,7 +179,7 @@ export const createNote = newNote => // highlight-line
 The <i>App</i> component will change as follows
 
 ```js
-import { useQuery, useMutation } from 'react-query' // highlight-line
+import { useQuery, useMutation } from '@tanstack/react-query' // highlight-line
 import { getNotes, createNote } from './requests' // highlight-line
 
 const App = () => {
@@ -218,7 +218,7 @@ In order to render a new note as well, we need to tell React Query that the old 
 Fortunately, invalidation is easy, it can be done by defining the appropriate <i>onSuccess</i> callback function to the mutation:
 
 ```js
-import { useQuery, useMutation, useQueryClient } from 'react-query' // highlight-line
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query' // highlight-line
 import { getNotes, createNote } from './requests'
 
 const App = () => {
@@ -253,7 +253,7 @@ export const updateNote = updatedNote =>
 Updating the note is also done by mutation. The <i>App</i> component expands as follows:
 
 ```js
-import { useQuery, useMutation, useQueryClient } from 'react-query' 
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query' 
 import { getNotes, createNote, updateNote } from './requests' // highlight-line
 
 const App = () => {
