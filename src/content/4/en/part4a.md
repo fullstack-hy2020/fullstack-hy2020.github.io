@@ -391,13 +391,13 @@ app.use('/api/notes', notesRouter)
 
 Now the exported "thing" (in this case a router object) is assigned to a variable and used as such.
 
-#### Finding the usages of your exports with VScode
+#### Finding the usages of your exports with VS Code
 
-VScode has a handy feature that allows you to see where your modules have been exported.  This can be very helpfull for refactoring, say for example you decide to spilt a function in to 2 seperate functions, your code could break if you don't modify all the usages.  This is difficult if you dont know where they are.  However you need to define your exports in a particular way for this to work.
+VS Code has a handy feature that allows you to see where your modules have been exported. This can be very helpful for refactoring. For example, if you decide to split a function into two separate functions, your code could break if you don't modify all the usages. This is difficult if you don't know where they are. However, you need to define your exports in a particular way for this to work.
 
-If you right click on a variable, in the location it is exported from and select find all references it will show you everywhere the variable is imported.  However if you assign an object directly to module.exports it will not work.  A work around is to assign the object you want to export to a named variable then export the named variable.  It also will not work if you destructure where you are importing, you have to import the named variable then destructure or just use dot notation to use the functions contained in the named variable.
+If you right-click on a variable in the location it is exported from and select "Find All References", it will show you everywhere the variable is imported. However, if you assign an object directly to module.exports, it will not work. A workaround is to assign the object you want to export to a named variable and then export the named variable. It also will not work if you destructure where you are importing; you have to import the named variable and then destructure, or just use dot notation to use the functions contained in the named variable.
 
-The nature of VS code bleeding into how you write your code is probably not ideal, so you need to decide yourself if the trade off is worthwhile.
+The nature of VS Code bleeding into how you write your code is probably not ideal, so you need to decide for yourself if the trade-off is worthwhile.
 
 </div>
 
