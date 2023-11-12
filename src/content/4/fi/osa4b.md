@@ -771,7 +771,7 @@ notesRouter.get('/:id', async (request, response, next) => {
 
 notesRouter.delete('/:id', async (request, response, next) => {
   try {
-    await Note.findByIdAndDelete(request.params.id)
+    await Note.findByIdAndRemove(request.params.id)
     response.status(204).end()
   } catch (exception) {
     next(exception)
@@ -826,7 +826,7 @@ Kirjaston koodiin sisällyttämän "magian" ansiosta pääsemme kokonaan eroon t
 ```js
 notesRouter.delete('/:id', async (request, response, next) => {
   try {
-    await Note.findByIdAndDelete(request.params.id)
+    await Note.findByIdAndRemove(request.params.id)
     response.status(204).end()
   } catch (exception) {
     next(exception)
@@ -838,7 +838,7 @@ muuttuu muotoon
 
 ```js
 notesRouter.delete('/:id', async (request, response) => {
-  await Note.findByIdAndDelete(request.params.id)
+  await Note.findByIdAndRemove(request.params.id)
   response.status(204).end()
 })
 ```
