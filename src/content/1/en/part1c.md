@@ -729,7 +729,7 @@ const Button = (props) => {
 
 We can use destructuring to get only the required fields from <i>props</i>, and use the more compact form of arrow functions:
 
-**NB**: While building your own components, you can name their event handler props anyway you like, for this you can refer to the react's documnetion on [Naming event handler props](https://react.dev/learn/responding-to-events#naming-event-handler-props). It goes as following:
+**NB**: While building your own components, you can name their event handler props anyway you like, for this you can refer to the react's documentation on [Naming event handler props](https://react.dev/learn/responding-to-events#naming-event-handler-props). It goes as following:
 
 > By convention, event handler props should start with `on`, followed by a capital letter.
 For example, the Button component’s `onClick` prop could have been called `onSmash`:
