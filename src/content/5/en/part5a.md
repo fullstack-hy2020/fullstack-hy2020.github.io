@@ -357,8 +357,8 @@ const getAll = () => {
   return request.then(response => response.data)
 }
 
+// highlight-start
 const create = async newObject => {
-  // highlight-start
   const config = {
     headers: { Authorization: token },
   }
