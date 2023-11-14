@@ -456,7 +456,7 @@ mongoose.connect(url)
   .then(result => {
     console.log('connected to MongoDB')
   })
-  .catch((error) => {
+  .catch(error => {
     console.log('error connecting to MongoDB:', error.message)
   })
 // highlight-end
@@ -500,7 +500,7 @@ mongoose.connect(url)
   .then(result => {
     console.log('connected to MongoDB')
   })
-  .catch((error) => {
+  .catch(error => {
     console.log('error connecting to MongoDB:', error.message)
   })
 ```
