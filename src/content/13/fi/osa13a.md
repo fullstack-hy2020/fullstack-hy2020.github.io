@@ -23,16 +23,18 @@ Muistiinpanoja tallettava kokoelma <i>notes</i> näyttää seuraavanlaiselta
 [
   {
     "_id": "600c0e410d10256466898a6c",
-    "content": "HTML is easy"
+    "content": "HTML is easy",
     "date": 2021-01-23T11:53:37.292+00:00,
-    "important": false
+    "important": false,
+    "user": "600c0e410d10256466883a6a",
     "__v": 0
   },
   {
     "_id": "600c0edde86c7264ace9bb78",
-    "content": "CSS is hard"
+    "content": "CSS is hard",
     "date": 2021-01-23T11:56:13.912+00:00,
-    "important": true
+    "important": true,
+    "user": "600c0e410d10256466883a6a",
     "__v": 0
   },
 ]
