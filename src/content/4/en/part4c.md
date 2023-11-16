@@ -386,7 +386,7 @@ Note: when installing the _mongoose-unique-validator_ library, you may encounter
 The reason for this is that at the time of writing (10.11.2023) the library is not yet compatible with Mongoose version 8. If you encounter this error, you can revert to an older version of Mongoose by running the command
 
 ```
-npm install mongoose@6.12.2
+npm install mongoose@7.6.5
 ```
 
 We could also implement other validations into the user creation. We could check that the username is long enough, that the username only consists of permitted characters, or that the password is strong enough. Implementing these functionalities is left as an optional exercise.
