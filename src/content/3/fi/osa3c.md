@@ -117,13 +117,11 @@ Voisimme käyttää kantaa JavaScript-koodista suoraan Mongon virallisen [MongoD
 
 Mongoosesta voisi käyttää luonnehdintaa <i>object document mapper</i> (ODM), ja sen avulla JavaScript-olioiden tallettaminen MongoDB:n dokumenteiksi on suoraviivaista.
 
-Asennetaan Mongoosen versio 6.12.2:
+Asennetaan Mongoose:
 
 ```bash
-npm install mongoose@6.12.2
+npm install mongoose
 ```
-
-Joudumme käyttämään hieman vanhempaa versiota uusin Mongoose-versio (8.0) ei tue kirjastoa, jota tulemme käyttämään kurssin myöhemmässä osassa!
 
 Ei lisätä MongoDB:tä käsittelevää koodia heti backendin koodin sekaan, vaan tehdään erillinen kokeilusovellus tiedostoon <i>mongo.js</i>:
 
@@ -275,14 +273,6 @@ Note.find({ important: true }).then(result => {
 <div class="tasks">
 
 ### Tehtävä 3.12
-
-**HUOM** Asenna Mongoosesta versio 6.12.2 komennolla
-
-```bash
-npm install mongoose@6.12.2
-```
-
-Joudumme käyttämään hieman vanhempaa versiota uusin Mongoose-versio ei tue kirjastoa, jota tulemme käyttämään kurssin myöhemmässä osassa!
 
 #### 3.12: tietokanta komentoriviltä
 

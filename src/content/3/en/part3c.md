@@ -121,13 +121,11 @@ We could use the database directly from our JavaScript code with the [official M
 
 Mongoose could be described as an <i>object document mapper</i> (ODM), and saving JavaScript objects as Mongo documents is straightforward with this library.
 
-Let's install Mongoose (version 6.12.2) in our notes project backend:
+Let's install Mongoose in our notes project backend:
 
 ```bash
-npm install mongoose@6.12.2
+npm install mongoose
 ```
-
-At the moment we need to use a bit older version of Mongoose since the most recent (version 8.0) is not supported by a library that we will be using during the course.
 
 Let's not add any code dealing with Mongo to our backend just yet. Instead, let's make a practice application by creating a new file, <i>mongo.js</i> in the root of the notes backend application:
 
@@ -283,14 +281,6 @@ Note.find({ important: true }).then(result => {
 <div class="tasks">
 
 ### Exercise 3.12.
-
-**Note** You should install Mongoose version 6.12.2 with the command
-
-```bash
-npm install mongoose@6.12.2
-```
-
-since the most recent Mongoose version does not support a library that we will be using in a later part of the course!
 
 #### 3.12: Command-line database
 

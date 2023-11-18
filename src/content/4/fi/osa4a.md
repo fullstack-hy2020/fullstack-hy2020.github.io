@@ -397,10 +397,10 @@ Eli eksportoitava asia (tässä tilanteessa router-olio) sijoitetaan muuttujaan 
 
 Rakennamme tämän osan tehtävissä <i>blogilistasovellusta</i>, jonka avulla käyttäjien on mahdollista tallettaa tietoja Internetistä löytämistään mielenkiintoisista blogeista. Kustakin blogista talletetaan sen kirjoittaja (author), aihe (title), url sekä blogilistasovelluksen käyttäjien antamien äänien määrä.
 
-**HUOM** Asenna Mongoosesta versio 6.12.2 komennolla
+**HUOM** Asenna Mongoosesta versio 7.6.5 komennolla
 
 ```bash
-npm install mongoose@6.12.2
+npm install mongoose@7.6.5
 ```
 
 Joudumme käyttämään hieman vanhempaa versiota uusin Mongoose-versio ei tue kirjastoa, jota tulemme käyttämään kurssin myöhemmässä osassa!

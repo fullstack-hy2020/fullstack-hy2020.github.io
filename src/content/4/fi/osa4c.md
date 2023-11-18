@@ -387,7 +387,7 @@ Huom: asentaessasi kirjastoa _mongoose-unique-validator_ saatat törmätä seura
 Syynä tälle on se, että kirjasto ei ole kirjoitushetkellä (10.11.2023) vielä yhteensopiva Mongoosen version 8 kanssa. Jos törmäät virheeseen, voit ottaa käyttöösi Mongoosen vanhemman version suorittamalla komennon
 
 ```
-npm install mongoose@6.12.2
+npm install mongoose@7.6.5
 ```
 
 This will install the _mongoose-unique-validator_ library.

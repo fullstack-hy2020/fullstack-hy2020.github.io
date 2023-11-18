@@ -386,7 +386,7 @@ Nota: ao instalar a biblioteca mongoose-unique-validator, você pode encontrar a
 A razão para isso é que a biblioteca ainda não é compatível com a versão 7 do Mongoose no momento da redação (13 de março de 2023). Se você encontrar um erro, poderá fazer o downgrade para uma versão mais antiga do Mongoose executando o comando
 
 ```js
-npm install mongoose@6
+npm install mongoose@7.6.5
 ```
 
 Depois disso, você pode instalar a biblioteca mongoose-unique-validator sem problemas.
