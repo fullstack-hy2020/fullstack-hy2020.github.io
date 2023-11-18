@@ -41,6 +41,12 @@ Debugging is also possible with the Chrome developer console by starting your ap
 node --inspect index.js
 ```
 
+You can also pass the `--inspect` flag to `nodemon`:
+
+```bash
+nodemon --inspect index.js
+```
+
 You can access the debugger by clicking the green icon - the node logo - that appears in the Chrome developer console:
 
 ![dev tools with green node logo icon](../../images/3/37.png)
