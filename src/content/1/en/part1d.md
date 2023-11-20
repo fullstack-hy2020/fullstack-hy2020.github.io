@@ -1239,7 +1239,7 @@ Change your application to display statistics only once feedback has been gather
 
 Let's continue refactoring the application. Extract the following two components:
 
-- <i>Button</i> Handles the functionality of each feedback submission button.
+- <i>Button</i> handles the functionality of each feedback submission button.
 
 - <i>StatisticLine</i> for displaying a single statistic, e.g. the average score.
 
