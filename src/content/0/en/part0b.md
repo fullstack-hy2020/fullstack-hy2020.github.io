@@ -25,7 +25,7 @@ The console looks like this:
 
 ![A screenshot of the developer tools open in a browser](../../images/0/1e.png)
 
-Make sure that the <i>Network</i> tab is open, and check the <i>Disable cache</i> option as shown. <i>Preserve log</i> can also be useful: it saves the logs printed by the application when the page is reloaded.
+Make sure that the <i>Network</i> tab is open, and check the <i>Disable cache</i> option as shown. <i>Preserve log</i> can also be useful (it saves the logs printed by the application when the page is reloaded) as well as "Hide extension URLs"(hides requests of any extensions installed in the browser, not shown in the picture above).
 
 **NB:** The most important tab is the <i>Console</i> tab. However, in this introduction, we will be using the <i>Network</i> tab quite a bit.
 
