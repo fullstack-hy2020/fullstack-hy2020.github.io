@@ -16,7 +16,7 @@ In addition to Jest, we also need another testing library that will help us rend
 Let's install libraries with the command:
 
 ```js
-npm install --save-dev @testing-library/react @testing-library/jest-dom jest-environment-jsdom @babel/preset-env @babel/preset-react
+npm install --save-dev @testing-library/react @testing-library/jest-dom jest jest-environment-jsdom @babel/preset-env @babel/preset-react
 ```
 
 The file <i>package.json</i> should be extended as follows:
