@@ -627,10 +627,10 @@ const App = () => {
 
 Since we now have an easily reusable <i>Button</i> component, we've also implemented new functionality into our application by adding a button that can be used to decrement the counter.
 
-The event handler is passed to the <i>Button</i> component through the _handleClick_ prop. The name of the prop itself is not that significant, but our naming choice wasn't completely random. 
+The event handler is passed to the <i>Button</i> component through the _onClick_ prop. The name of the prop itself is not that significant, but our naming choice wasn't completely random. 
 
 React's own official [tutorial](https://react.dev/learn/tutorial-tic-tac-toe) suggests:
-"In React, it’s conventional to use onSomething names for props which represent events and handleSomething for the function definitions which handle those events."
+"In React, it’s conventional to use onSomething names for props which take functions which handle events and handleSomething for the actual function definitions which handle those events."
 
 ### Changes in state cause rerendering
 
