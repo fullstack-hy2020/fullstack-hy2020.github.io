@@ -186,7 +186,7 @@ test('renders content', () => {
 })
 ```
 
-There are also other methods, eg. [getByTestId](https://testing-library.com/docs/queries/bytestid/), that look for elements based on id-attributes that are inserted into the code specifically for testing purposes.
+**NB:** A better method of selecting elements for testing, is setting id-attributes that are inserted into the code specifically for testing purposes. We can then use a selector like [getByTestId](https://testing-library.com/docs/queries/bytestid/), that looks for elements based on the specified id-attribute (named `data-testid` in this case).
 
 ### Debugging tests
 
