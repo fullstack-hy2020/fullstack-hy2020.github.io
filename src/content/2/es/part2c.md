@@ -647,7 +647,7 @@ Agregue a la vista que muestra los datos de un país, el informe meteorológico 
 Suponiendo que la clave api es <i>t0p53cr3t4p1k3yv4lu3</i>, cuando la aplicación se inicia así:
 
 ```bash
-REACT_APP_API_KEY='t0p53cr3t4p1k3yv4lu3' npm start // For Linux/macOS Bash
+export REACT_APP_API_KEY='t0p53cr3t4p1k3yv4lu3' && npm start // For Linux/macOS Bash
 ($env:REACT_APP_API_KEY='t0p53cr3t4p1k3yv4lu3') -and (npm start) // For Windows PowerShell
 set REACT_APP_API_KEY='t0p53cr3t4p1k3yv4lu3' && npm start // For Windows cmd.exe
 ```
