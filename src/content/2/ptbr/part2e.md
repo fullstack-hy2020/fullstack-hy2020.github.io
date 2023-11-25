@@ -618,7 +618,7 @@ Se você usar o Open Weather map, a descrição de como obter os ícones climát
 Supondo que a chave de API seja <i>t0p53cr3t4p1k3yv4lu3</i>, quando a aplicação é iniciada desta forma:
 
 ```bash
-REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 npm start // Para o Bash do Linux/macOS
+export REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 npm start // Para o Bash do Linux/macOS
 ($env:REACT_APP_API_KEY="t0p53cr3t4p1k3yv4lu3") -and (npm start) // Para o PowerShell do Windows
 set "REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3" && npm start // Para o cmd.exe do Windows
 ```
