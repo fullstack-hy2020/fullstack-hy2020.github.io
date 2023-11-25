@@ -766,7 +766,7 @@ Error: listen EADDRINUSE 0.0.0.0:3001
  假设api-key是<i>t0p53cr3t4p1k3yv4lu3</i>，当应用像这样启动时。
 
 ```bash
-REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 npm start // For Linux/macOS Bash
+export REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 && npm start // For Linux/macOS Bash
 ($env:REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3) -and (npm start) // For Windows PowerShell
 set REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 && npm start // For Windows cmd.exe
 ```
