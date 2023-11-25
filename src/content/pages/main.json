@@ -97,7 +97,7 @@
     "mainTitle": "Dê um mergulho profundo em desenvolvimento web moderno",
     "intro": "Aprenda React, Redux, Node.js, MongoDB, GraphQL e TypeScript em único lugar! Este curso irá introduzi-lo ao desenvolvimento de aplicações web modernas em JavaScript. O objetivo principal é construir aplicações SPA (Aplicações de Página Única) com ReactJS que utilizam APIs REST construídas em Node.js.",
     "current": [
-      "<em>Têm dúvidas sobre o curso? Leia cuidadosamente a <a href='/ptbr/part0/informacoes_gerais'>Parte 0</a>, pois lá é possível encontrar a resposta para a maioria delas...</em>",
+      "<em>Dúvidas sobre o curso? Leia cuidadosamente a <a href='/ptbr/part0/informacoes_gerais'>Parte 0</a>, pois lá é possível encontrar a resposta para a maioria delas...</em>",
       "O ano de 2022 acabou, mas o curso continua! Veja <a href='/ptbr/part0/informacoes_gerais#continuando-o-curso-no-ano-de-2023'>aqui</a> para mais detalhes.",
       "Você pode discutir o curso e tópicos relacionados em nosso grupo dedicado no Discord <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> e no Telegram: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. Vem conversar com a gente! <ul><li>Entre <a href='/ptbr/part0/informacoes_gerais#como-pedir-ajuda-no-discord-telegam'>aqui</a> para aprender a como pedir ajuda de forma adequada.</li><ul>"
     ],
