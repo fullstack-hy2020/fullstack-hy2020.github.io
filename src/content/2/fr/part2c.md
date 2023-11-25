@@ -642,7 +642,7 @@ Si vous utilisez Open weather map, trouvez [ici](https://openweathermap.org/weat
 En supposant que la clé API est <i>t0p53cr3t4p1k3yv4lu3</i>, lorsque l'application est démarrée comme suit :
 
 ```bash
-REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 npm start // For Linux/macOS Bash
+export REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 && npm start // For Linux/macOS Bash
 ($env:REACT_APP_API_KEY="t0p53cr3t4p1k3yv4lu3") -and (npm start) // For Windows PowerShell
 set "REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3" && npm start // For Windows cmd.exe
 ```
