@@ -90,7 +90,9 @@ Cambiemos un poco el código. Es habitual usar el comando [switch](https://devel
 Definamos también un [valor predeterminado](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters) de 0 para el <i>estado</i> del parámetro . Ahora el reducer funciona incluso si el estado del store aún no se ha indicado.
 
 ```js
+// highlight-start
 const counterReducer = (state = 0, action) => {
+  // highlight-end
   switch (action.type) {
     case 'INCREMENT':
       return state + 1
@@ -108,13 +110,17 @@ const counterReducer = (state = 0, action) => {
 No se supone que Reducer se llame directamente desde el código de la aplicación. Reducer solo se proporciona como parámetro a la función _createStore_ que crea el store:
 
 ```js
+// highlight-start
 import { createStore } from 'redux'
+// highlight-end
 
 const counterReducer = (state = 0, action) => {
   // ...
 }
 
+// highlight-start
 const store = createStore(counterReducer)
+// highlight-end
 ```
 
 
@@ -383,7 +389,9 @@ Agregamos una nueva nota al estado con el método _state.push(action.data)_ que 
 ```js
 const noteReducer = (state = [], action) => {
   if (action.type === 'NEW_NOTE') {
+    // highlight-start
     return state.concat(action.data)
+    // highlight-stop
   }
 
   return state
@@ -568,7 +576,9 @@ Agregar una nueva nota crea el estado que devuelve con la función de Arrays _co
 const noteReducer = (state = [], action) => {
   switch(action.type) {
     case 'NEW_NOTE':
+      // highlight-start
       return [...state, action.data]
+      // highlight-stop
     case 'TOGGLE_IMPORTANCE':
       // ...
     default:
@@ -754,42 +764,50 @@ Tu aplicación puede tener una apariencia modesta, nada más se necesitan 3 boto
 Agreguemos la funcionalidad para agregar nuevas notas y cambiar su importancia:
 
 ```js
+// highlight-start
 const generateId = () =>
   Number((Math.random() * 1000000).toFixed(0))
+// highlight-stop
 
 const App = () => {
+  // highlight-start
   const addNote = (event) => {
     event.preventDefault()
     const content = event.target.note.value
     event.target.note.value = ''
     store.dispatch({
       type: 'NEW_NOTE',
-      data: {
+      payload: {
         content,
         important: false,
         id: generateId()
       }
     })
   }
+    // highlight-end
 
+  // highlight-start
   const toggleImportance = (id) => {
     store.dispatch({
       type: 'TOGGLE_IMPORTANCE',
-      data: { id }
+      payload: { id }
     })
   }
+    // highlight-end
 
   return (
     <div>
+      // highlight-start
       <form onSubmit={addNote}>
         <input name="note" /> 
         <button type="submit">add</button>
       </form>
+        // highlight-end
       <ul>
         {store.getState().map(note =>
           <li
             key={note.id} 
-            onClick={() => toggleImportance(note.id)}
+            onClick={() => toggleImportance(note.id)}   // highlight-line
           >
             {note.content} <strong>{note.important ? 'important' : ''}</strong>
           </li>
@@ -799,7 +817,6 @@ const App = () => {
   )
 }
 ```
-
 
 La implementación de ambas funcionalidades es sencilla. Cabe señalar que <i>no hemos</i> vinculado el estado de los campos del formulario al estado del componente <i>App</i> como lo hicimos anteriormente. React llama a este tipo de formulario [no controlado](https://reactjs.org/docs/uncontrolled-components.html).
 
