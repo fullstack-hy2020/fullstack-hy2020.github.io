@@ -186,7 +186,7 @@ test('renders content', () => {
 })
 ```
 
-**NB:** A better method of selecting elements for testing, is setting id-attributes that are inserted into the code specifically for testing purposes. We can then use a selector like [getByTestId](https://testing-library.com/docs/queries/bytestid/), that looks for elements based on the specified id-attribute (named `data-testid` in this case).
+**NB:** A more consistent way of selecting elements is using a [data attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*) that is specifically defined for testing purposes. Using _react-testing-library_, we can leverage the [getByTestId](https://testing-library.com/docs/queries/bytestid/) method to select elements with their specified _data-testid_ attribute.
 
 ### Debugging tests
 
