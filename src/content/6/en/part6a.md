@@ -79,7 +79,9 @@ Let's change the code a bit. We have used if-else statements to respond to an ac
 Let's also define a [default value](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters) of 0 for the parameter <i>state</i>. Now the reducer works even if the store state has not been primed yet.
 
 ```js
+// highlight-start
 const counterReducer = (state = 0, action) => {
+  // highlight-end
   switch (action.type) {
     case 'INCREMENT':
       return state + 1
@@ -96,13 +98,17 @@ const counterReducer = (state = 0, action) => {
 Reducer is never supposed to be called directly from the application's code. Reducer is only given as a parameter to the _createStore_-function which creates the store:
 
 ```js
+// highlight-start
 import { createStore } from 'redux'
+// highlight-end
 
 const counterReducer = (state = 0, action) => {
   // ...
 }
 
+// highlight-start
 const store = createStore(counterReducer)
+// highlight-end
 ```
 
 The store now uses the reducer to handle <i>actions</i>, which are <i>dispatched</i> or 'sent' to the store with its [dispatch](https://redux.js.org/api/store#dispatchaction) method.
@@ -354,7 +360,9 @@ We added a new note to the state with the method _state.push(action.payload)_ wh
 ```js
 const noteReducer = (state = [], action) => {
   if (action.type === 'NEW_NOTE') {
+    // highlight-start
     return state.concat(action.payload)
+    // highlight-stop
   }
 
   return state
@@ -572,7 +580,9 @@ Adding a new note creates the state it returns with Array's _concat_ function. L
 const noteReducer = (state = [], action) => {
   switch(action.type) {
     case 'NEW_NOTE':
+      // highlight-start
       return [...state, action.payload]
+      // highlight-stop
     case 'TOGGLE_IMPORTANCE':
       // ...
     default:
@@ -743,8 +753,10 @@ Your application can have a modest appearance, nothing else is needed but button
 Let's add the functionality for adding new notes and changing their importance:
 
 ```js
+// highlight-start
 const generateId = () =>
   Number((Math.random() * 1000000).toFixed(0))
+// highlight-stop
 
 const App = () => {
   // highlight-start
