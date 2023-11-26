@@ -413,9 +413,9 @@ Hay un pequeño defecto cosmético en nuestra aplicación. Aunque el filtro est�
 
 #### 6.9 Mejores anécdotas, paso 7
 
-Implementa filtros para las anecdotas que se muestran al usuario. Se recomienda crear un nuevo reducer, action creators y un reducer commbinado para la store usando la función <i>combineReducers</i>.
+Implementa filtros para las anécdotas que se muestran al usuario. Se recomienda crear un nuevo reducer, action creators y un reducer combinado para la store usando la función <i>combineReducers</i>.
 
-Crea un nuevo componente <i>Filter</i> para mostrar los filtros. Puedes utilizar el suigiente código como punto de partida:
+Crea un nuevo componente <i>Filter</i> para mostrar los filtros. Puedes utilizar el siguiente código como punto de partida:
 
 ```js
 const Filter = () => {
@@ -716,11 +716,11 @@ Continuemos trabajando en la aplicación de anécdotas que comenzamos en el ejer
 
 #### 6.10 Mejores anécdotas, paso 8
 
-Instale Redux Toolkit en el proyecto. Mueva la creacion de la store de redux a su propio archivo <i>store.js</i> y use la función <em>configureStore</em> para crear la store.
+Instale Redux Toolkit en el proyecto. Mueva la creación de la store de redux a su propio archivo <i>store.js</i> y use la función <em>configureStore</em> para crear la store.
 
 Cambie la definición del <i>Filter reducer y creación de acciones</i> para usar la función <em>createSlice</em> de Redux Toolkit.
 
-Tambien, empiece a usar los Redux DevTools para depurar el estado de la aplicación facilmente.
+También, empiece a usar los Redux DevTools para depurar el estado de la aplicación fácilmente.
 
 #### 6.11 Mejores anécdotas, paso 9
 
