@@ -255,7 +255,7 @@ const App = () => {
 export default App
 ```
 
-El uso del hoook useEffect genera una advertencia eslint:
+El uso del hook useEffect genera una advertencia eslint:
 
 ![vscode warnig useEffect missing dispatch dependency](../../images/6/26ea.png)
 
@@ -318,7 +318,7 @@ const createNew = async (content) => {
 
 export default {
   getAll,
-  createNew,
+  createNew, // highlight-line
 }
 ```
 
