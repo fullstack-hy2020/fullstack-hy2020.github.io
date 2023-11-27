@@ -1,4 +1,4 @@
----
+ ---
 mainImage: ../../../images/part-0.svg
 part: 0
 letter: a
