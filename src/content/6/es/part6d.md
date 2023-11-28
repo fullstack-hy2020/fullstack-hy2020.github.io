@@ -205,7 +205,7 @@ newNoteMutation.mutate({ content, important: true })
 
 Nuestra solución es buena. Excepto que no funciona. La nueva nota se guarda en el servidor, pero no se actualiza en la pantalla.
 
-Para renderizar una nueva nota, debemos decirle a React Query que el resultado antiguo de la consulta cuya clave es el sring <i>notes</i> debe ser [invalidado](https://react-query-v3.tanstack.com/guides/invalidations-from-mutations).
+Para renderizar una nueva nota, debemos decirle a React Query que el resultado antiguo de la consulta cuya clave es el string <i>notes</i> debe ser [invalidado](https://react-query-v3.tanstack.com/guides/invalidations-from-mutations).
 
 Afortunadamente, la invalidación es fácil, se puede hacer definiendo la función de devolución de llamada <i>onSuccess</i> apropiada para la mutación:
 
@@ -256,9 +256,11 @@ const App = () => {
     },
   })
 
+  // highlight-start
   const toggleImportance = (note) => {
     updateNoteMutation.mutate({...note, important: !note.important })
   }
+  // highlight-end
 
   // ...
 }
@@ -359,7 +361,7 @@ La aplicación debe funcionar de tal manera que si hay problemas para comunicars
 
 ![](../../images/6/65new.png)
 
-Puede encontra [aquí](https://react-query-v3.tanstack.com/guides/queries) información sobre cómo detectar posibles errores.
+Puede encontrar [aquí](https://react-query-v3.tanstack.com/guides/queries) información sobre cómo detectar posibles errores.
 
 Puede simular un problema con el servidor apagando el servidor JSON. Tenga en cuenta que en una situación problemática, la consulta primero está en el estado <i>isLoading</i> durante un tiempo, porque si una solicitud falla, React Query intenta la solicitud varias veces antes de que indique que la solicitud no es exitosa. Opcionalmente, puede especificar que no se realizan reintentos:
 
