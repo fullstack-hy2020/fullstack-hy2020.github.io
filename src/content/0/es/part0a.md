@@ -140,7 +140,7 @@ Al enviar al menos 24/29 de los ejercicios de la parte 9 del curso, TypeScript, 
 
 #### Part 10 - Desarrollo Web Full Stack: React Native (2 cr, CSM14111)
 
-Al enviar ejercicios 25 ejercicios para la parte 10 del curso, React Native, puedes obtener dos créditos adicionales. Puedes encontrar más información sobre los requisitos previos de esta parte, el envío de ejercicios y los créditos en la [parte 10](/es/part10/introduccion_a_react_native).
+Al enviar 25 ejercicios para la parte 10 del curso, React Native, puedes obtener dos créditos adicionales. Puedes encontrar más información sobre los requisitos previos de esta parte, el envío de ejercicios y los créditos en la [parte 10](/es/part10/introduccion_a_react_native).
 
 - Envía al menos 25 ejercicios para la parte 10.
 - [Inscríbete en la parte 10 a través de la Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-ec172afe-bc01-46ab-af23-694311f1950a).
@@ -336,7 +336,7 @@ La transcripción te será entregada electrónicamente por correo electrónico. 
 
 No hay más "versiones anuales" del curso, el curso está abierto todo el tiempo. Cada parte se actualiza una o dos veces al año. Las actualizaciones son en su mayoría menores: se actualizan las versiones de las bibliotecas y se mejora la claridad del texto. Sin embargo, también puede haber algunos cambios más significativos.
 
-A pesar de los cambios *todos los ejercicios enviados siguen siendo válidos*, y puedes continuar el curso sin preocuparse por las actualizaciones. Además, la política para obtener certificados, créditos universitarios, etc., seguirá siendo la misma, sin importar lo que suceda.
+A pesar de los cambios *todos los ejercicios enviados siguen siendo válidos,* y puedes continuar el curso sin preocuparse por las actualizaciones. Además, la política para obtener certificados, créditos universitarios, etc., seguirá siendo la misma, sin importar lo que suceda.
 
 Cambios importantes recientes
 
