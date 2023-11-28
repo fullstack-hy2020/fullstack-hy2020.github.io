@@ -266,9 +266,11 @@ const App = () => {
     },
   })
 
+  // highlight-start
   const toggleImportance = (note) => {
     updateNoteMutation.mutate({...note, important: !note.important })
   }
+  // highlight-end
 
   // ...
 }
