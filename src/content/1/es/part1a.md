@@ -5,65 +5,121 @@ letter: a
 lang: es
 --- 
 
-<div class="content"> 
+<div class="content">
 
-Ahora comenzaremos a familiarizarnos con probablemente el tema más importante de este curso, es decir, la biblioteca [React](https://reactjs.org/). Comencemos con la creación de una aplicación React simple y con el conocimiento de los conceptos básicos de React. 
+Ahora comenzaremos a familiarizarnos con probablemente el tema más importante de este curso, es decir, la biblioteca [React](https://es.react.dev/). Comencemos con la creación de una aplicación React simple y con el conocimiento de los conceptos básicos de React.
 
-La forma más fácil de empezar es utilizando una herramienta llamada [create-react-app](https://github.com/facebook/create-react-app). Es posible (pero no necesario) instalar <i>create-react-app</i> en su máquina si la herramienta <i>npm</i> que se instaló junto con Node tiene un número de versión de al menos <i>5.3</i>.
+La forma más fácil de empezar es utilizando una herramienta llamada [Vite](https://es.vitejs.dev/).
 
-> <i>Tu también puedes usar la nueva herramienta de generación frontend [Vite](https://vitejs.dev/) en este curso si lo deseas. La herramienta create-react-app sigue siendo la herramienta recomendada por el equipo de React y es por eso que sigue siendo la herramienta predeterminada para configurar un proyecto React en este curso. Lee [aquí](https://github.com/reactjs/reactjs.org/pull/5487#issuecomment-1409720741) cómo el equipo de React ve el futuro de las herramientas de React.</i>
+Comencemos creando una aplización llamada <i>part1</i>, navegar a este direcctorio e instalando las librerias:
+
+```bash
+# npm 6.x (desactualizado, pero aun en uso por algunos):
+npm create vite@latest part1 --template react
+
+# npm 7+, el doble guión adicional es necesario:
+npm create vite@latest part1 -- --template react
+```
+
+```bash
+cd part1
+npm install
+```
+
+La aplicación se inicia de la siguiente manera
+
+```bash
+npm run dev
+```
+
+La consola indica que la aplicación ha iniciado en localhost, puerto 5173, es decir la dirección <http://localhost:5173/>:
+
+![](../../images/1/1-vite1.png)
+
+Vite inicia la aplicación [por defecto](https://es.vitejs.dev/config/server-options.html#server-port) en el puerto 5173. Si este no está libre, Vite utiliza el siguiente numero de puerto libre.
+
+Abre el navegador y un editor de código para que puedas ver el código y el navegador al mismo tiempo en la pantalla:
+
+![](../../images/1/1-vite4.png)
+
+El código de la aplicación se encuentra en la carpeta <i>src</i>. Simplifiquemos el código predeterminado de tal modo que el archivo main.jsx se vea así:
+
+```js
+import ReactDOM from 'react-dom/client'
+
+import App from './App'
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+```
+
+y el archivo <i>App.jsx</i> se vea así:
+
+```js
+const App = () => {
+  return (
+    <div>
+      <p>Hello world</p>
+    </div>
+  )
+}
+
+export default App
+```
+
+Los archivos <i>App.css</i> y <i>index.css</i>, y el directorio <i>assets</i> pueden eliminarse ya que nos son necesarios en nuestra aplicación por ahora.
+
+### create-react-app
+
+En lugar de Vite, tu puedes usar la vieja herramienta de generación [create-react-app](https://github.com/facebookincubator/create-react-app) en el curso para inicializar aplicaciones. La diferencia más visible es el nombre del archivo de arranque de la aplicación, el cual es <i>index.js</i>.
+
+La manera de iniciar la aplicacieon también es diferente en CRA, en esta se inicia con el comando
 
 Creemos una aplicación llamada <i>part1</i> y naveguemos hasta su directorio.
 
 ```bash
-$ npx create-react-app part1 
-$ cd part1
+npm start
 ```
 
-Cada comando, aquí y en el futuro, comenzando con el carácter <em>$</em> se escribe en una terminal prompt, también conocido como interfaz de línea de comandos. El carácter <em>$</em> no se debe escribir porque representa el mensaje. 
-
-La aplicación se ejecuta de la siguiente manera:
+en contraste con Vite
 
 ```bash
-$ npm start
+npm run dev
 ```
 
-De forma predeterminada, la aplicación se ejecuta en el puerto localhost 3000 con la dirección <http://localhost:3000> 
-
-Chrome debería iniciarse automáticamente. Abra la consola del navegador **inmediatamente**. También abra un editor de texto para que pueda ver el código y la página web al mismo tiempo en la pantalla:
-
-![](../../images/1/1e.png) 
-
-El código de la aplicación reside en la carpeta <i>src</i>. Simplifiquemos el código predeterminado de modo que el contenido del archivo <i>index.js</i> se vea así: 
-
-```js
-import React from 'react'
-import ReactDOM from 'react-dom'
-
-const App = () => ( 
-  <div>
-    <p>Hello world</p> 
-  </div>
-)
-
-ReactDOM.render(<App />, document.getElementById('root')) 
-```
-
-Los archivos <i>App.js</i>, <i>App.css</i>, <i>App.test.js</i>, <i>logo.svg</i>, <i>setupTests.js</i> y <i>reportWebVitals.js</i> pueden eliminarse ya que no son necesarios en nuestra aplicación en este momento.
+El curso actualmente (11 de agosto de 2023) está siendo actualizado para usar Vite. Algunas marcas aun usan la aplicación base creada con create-react-app.
 
 ### Componente
 
-El archivo <i>index.js</i> ahora define un [componente](https://reactjs.org/docs/components-and-props.html) de React con el nombre <i>App</i> y el comando en la línea final
+El archivo <i>App.js</i> ahora define un [componente](https://es.legacy.reactjs.org/docs/components-and-props.html) de React con el nombre <i>App</i>. El comando en la línea final del archivo <i>main.jsx</i>
 
 ```js
-ReactDOM.render(<App />, document.getElementById('root')) 
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-renderiza su contenido en el elemento <i>div</i>, definido en el archivo <i>public/index.html</i>, que tiene el valor de <i>id</i> 'root'.
+renderiza su contenido dentro del elemento <i>div</i>, definido en el archivo <i>index.html</i>, que tiene el valor 'root' en el atributo <i>id</i>.
 
-De forma predeterminada, el archivo <i>public/index.html</i> no contiene ningún marcado HTML que sea visible para nosotros en el navegador. Puede intentar agregar algo de HTML al archivo. Sin embargo, cuando se usa React, todo el contenido que debe procesarse generalmente se define como componentes de React.
+De forma predeterminada, el archivo <i>index.html</i> no contiene ningún marcado HTML que sea visible para nosotros en el navegador. 
 
-Echemos un vistazo más de cerca al código que define el componente:
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+
+```
+
+Puedes intentar agregar algo de HTML al archivo. Sin embargo, cuando se usa React, todo el contenido que necesita ser renderizado es generalmente definido como componentes de React.
+
+Echemos un vistazo mas de cerca al código que define el componente:
 
 ```js
 const App = () => (
@@ -73,9 +129,9 @@ const App = () => (
 )
 ```
 
-Como probablemente adivinaste, el componente se representará como una etiqueta <i>div</i>, que envuelve una etiqueta <i>p</i> que contiene el texto <i>Hello world</i>.
+Como probablemente adivinaste, el componente se rendizará como una etiqueta <i>div</i>, que envuelve una etiqueta <i>p</i> que contiene el texto <i>Hello world</i>.
 
-Técnicamente, el componente se define como una función de JavaScript. La siguiente es una función (que no recibe ningún parámetro): 
+Técnicamente, el componente se define como una función de JavaScript. La siguiente es una función (que no recibe ningún parámetro):
 
 ```js
 () => (
@@ -85,13 +141,13 @@ Técnicamente, el componente se define como una función de JavaScript. La sigui
 )
 ```
 
-La función luego se asigna a un variable constante <i>App</i>: 
+La función luego se asigna a un variable constante <i>App</i>:
 
 ```js
 const App = ...
 ```
 
-Hay algunas formas de definir funciones en JavaScript. Aquí utilizaremos [funciones de flecha](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions), que se describen en una versión más reciente de JavaScript conocida como [ECMAScript 6](http://es6-features.org/#Constants), también llamada ES6.
+Hay algunas formas de definir funciones en JavaScript. Aquí utilizaremos [funciones de flecha](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Functions/Arrow_functions), que se describen en una versión más reciente de JavaScript conocida como [ECMAScript 6](http://es6-features.org/#Constants), también llamada ES6.
 
 Debido a que la función consta de una sola expresión, hemos utilizado una abreviatura, que representa este fragmento de código:
 
@@ -107,7 +163,7 @@ const App = () => {
 
 En otras palabras, la función devuelve el valor de la expresión.
 
-La función que define el componente puede contener cualquier tipo de código JavaScript. Modifique su componente para que sea de la siguiente manera y observe lo que sucede en la consola:
+La función que define el componente puede contener cualquier tipo de código JavaScript. Modifica tu componente para que sea de la siguiente manera:
 
 ```js
 const App = () => {
@@ -118,17 +174,30 @@ const App = () => {
     </div>
   )
 }
+
+export default App
 ```
+
+y observa lo que sucede en la consola:
+
+![Consola del navegador mostrando un registro en consola con flecha a "Hello from component"](../../images/1/30.png)
+
+La primera regla del desarrollo web frontend:
+
+> <i>deja la consola abierta todo el tiempo</i>
+
+Repitados esto juntos: <i>Prometo dejar la consola abierta todo el tiempo</i> durante este curso, y por el resto de mi vida mientras esté haciendo desarrollo web.
 
 También es posible renderizar contenido dinámico dentro de un componente.
 
-Modifique el componente de la siguiente manera: 
+Modifiqua el componente de la siguiente manera:
 
 ```js
 const App = () => {
   const now = new Date()
   const a = 10
   const b = 20
+  console.log(now, a+b)
 
   return (
     <div>
@@ -141,18 +210,25 @@ const App = () => {
 }
 ```
 
-Se evalúa cualquier código JavaScript entre llaves y el resultado de esta evaluación se incrusta en el lugar definido en el HTML producido por el componente. 
+Cualquier código de JavaScript entre llaves es evaluado y el resultado de esta evaluación se incrusta en el lugar definido en el HTML producido por el componente.
+
+Recuerda que no deberías eliminar la línea al final del componente
+
+```js
+export default App
+```
+
+El export no se muestra en la mayoría de los ejemplos del material de este curso. Sin este export el componente y la aplicación completa se romperían.
+
+¿Reduerdas que prometiste dejar la consola abierta? ¿Qué se imprimió allí?
 
 ### JSX
 
-Parece que los componentes de React están devolviendo marcado HTML. Sin embargo, éste no es el caso. El diseño de los componentes de React se escribe principalmente usando [JSX](https://reactjs.org/docs/introducing-jsx.html). Aunque JSX se parece a HTML, en realidad estamos tratando con una forma de escribir JavaScript. Bajo el capó, el JSX devuelto por los componentes de React se compila en JavaScript. 
+Parece que los componentes de React están devolviendo marcado HTML. Sin embargo, éste no es el caso. El diseño de los componentes de React se escribe principalmente usando [JSX](https://es.legacy.reactjs.org/docs/introducing-jsx.html). Aunque JSX se parece a HTML, en realidad estamos tratando con una forma de escribir JavaScript. Bajo el capó, el JSX devuelto por los componentes de React se compila en JavaScript. 
 
 Después de compilar, nuestra aplicación se ve así: 
 
 ```js
-import React from 'react'
-import ReactDOM from 'react-dom'
-
 const App = () => {
   const now = new Date()
   const a = 10
@@ -168,20 +244,15 @@ const App = () => {
     )
   )
 }
-
-ReactDOM.render(
-  React.createElement(App, null),
-  document.getElementById('root')
-)
 ```
 
-La compilación está a cargo de [Babel](https://babeljs.io/repl/). Los proyectos creados con *create-react-app* están configurados para compilarse automáticamente. Aprenderemos más sobre este tema en la [parte 7](/es/part7) de este curso.
+La compilación está a cargo de [Babel](https://babeljs.io/repl/). Los proyectos creados con *create-react-app* o *vite* están configurados para compilarse automáticamente. Aprenderemos más sobre este tema en la [parte 7](/es/part7) de este curso.
 
 También es posible escribir React como "JavaScript puro" sin usar JSX. Aunque, nadie con una mente sana lo haría realmente.
 
 En la práctica, JSX se parece mucho a HTML con la distinción de que con JSX puede incrustar fácilmente contenido dinámico escribiendo JavaScript apropiado entre llaves. La idea de JSX es bastante similar a muchos lenguajes de plantillas, como Thymeleaf, que se utiliza junto con Java Spring, que se utiliza en servidores.
 
-JSX es similar a [XML](https://developer.mozilla.org/en-US/docs/Web/XML/XML_introduction), lo que significa que todas las etiquetas deben cerrarse. Por ejemplo, una nueva línea es un elemento vacío, que en HTML se puede escribir de la siguiente manera: 
+JSX es similar a [XML](https://developer.mozilla.org/es/docs/Web/XML/XML_introduction), lo que significa que todas las etiquetas deben cerrarse. Por ejemplo, una nueva línea es un elemento vacío, que en HTML se puede escribir de la siguiente manera: 
 
 ```html
 <br>
@@ -195,7 +266,7 @@ pero al escribir JSX, la etiqueta debe estar cerrada:
 
 ### Componentes múltiples
 
-Modifiquemos la aplicación de la siguiente manera (NB: las importaciones en la parte superior del archivo se omiten en estos <i>ejemplos</i>, ahora y en el futuro. Todavía son necesarias para que el código funcione):
+Modifiquemos el archivo <i>App.jsx</i> de la siguiente manera:
 
 ```js
 // highlight-start
@@ -216,8 +287,6 @@ const App = () => {
     </div>
   )
 }
-
-ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
 Hemos definido un nuevo componente <i>Hello</i> y lo usamos dentro del componente <i>App</i>. Naturalmente, un componente se puede usar múltiples veces:
@@ -237,13 +306,15 @@ const App = () => {
 }
 ```
 
-Escribir componentes con React es fácil, y al combinar componentes, incluso una aplicación más compleja puede conservarse bastante fácil de mantener. De hecho, una filosofía central de React es componer aplicaciones a partir de muchos componentes reutilizables especializados.
+**Nota:** El <em>export</em> al final se omite en estos ejemplos ahora y en el futuro. Todavía será necesario para que el código funcione.
 
-Otra fuerte convención es la idea de un <i>componente raíz</i> llamado <i>App</i> en la parte superior del árbol de componentes de la aplicación. Sin embargo, como aprenderemos en la [parte 6](/es/part6), hay situaciones en las que el componente <i>App</i> no es exactamente la raíz, sino que está incluido en un componente de utilidad apropiado. 
+Escribir componentes con React es fácil, y al combinar componentes, incluso una aplicación más compleja puede ser bastante fácil de mantener. De hecho, una filosofía central de React es componer aplicaciones a partir de muchos componentes reutilizables especializados.
+
+Otra fuerte convención es la idea de un <i>componente raíz</i> llamado <i>App</i> en la parte superior del árbol de componentes de la aplicación. Sin embargo, como aprenderemos en la [parte 6](/es/part6), hay situaciones en las que el componente <i>App</i> no es exactamente la raíz, sino que está incluido en un componente de utilidad apropiado.
 
 ### props: pasar datos a componentes 
 
-Es posible pasar datos a componentes usando los llamados [props](https://reactjs.org/docs/components-and-props.html).
+Es posible pasar datos a componentes usando los llamados [props](https://es.legacy.reactjs.org/docs/components-and-props.html).
 
 Modifiquemos el componente <i>Hello</i> de la siguiente manera:
 
@@ -266,8 +337,8 @@ const App = () => {
   return (
     <div>
       <h1>Greetings</h1>
-      <Hello name="George" /> // highlight-line
-      <Hello name="Daisy" /> // highlight-line
+      <Hello name='George' /> // highlight-line
+      <Hello name='Daisy' /> // highlight-line
     </div>
   )
 }
@@ -279,6 +350,7 @@ Modifiquemos el código para que el componente <i>Hello</i> use dos props:
 
 ```js
 const Hello = (props) => {
+  console.log(props) // highlight-line
   return (
     <div>
       <p>
@@ -295,60 +367,102 @@ const App = () => {
   return (
     <div>
       <h1>Greetings</h1>
-      <Hello name="Maya" age={26 + 10} /> // highlight-line
-      <Hello name={name} age={age} />     // highlight-line
+      <Hello name='Maya' age={26 + 10} /> // highlight-line
+      <Hello name={name} age={age} /> // highlight-line
     </div>
   )
 }
 ```
 
-Los props enviados por el componente <i>App</i> son los valores de las variables, el resultado de la evaluación de la expresión suma y un string regular. 
+Los props enviados por el componente <i>App</i> son los valores de las variables, el resultado de la evaluación de la expresión de suma y un string regular.
+
+El componente <i>Hello</i> tambien imprime en consola el valor del objeto props.
+
+Yo realmente espero que tu consola esté abierta. Si no es asi, recuerda tu promesa:
+
+> <i>Prometo dejar la consola abierta todo el tiempo</i> durante este curso, y por el resto de mi vida mientras esté haciendo desarrollo web.
+
+EL desarrollo de software es dificil. Este se vuelve aun más dificil si uno no está usando todas las herramientas disponibles como la consola de desarrollo e imprimiendo la depuración con _console.log_. Los profesionales usan amnas <i>todo el tiempo</i> y no hay una sola razón de porque un principiante no debería adoptar estos maravillosos métodos de ayuda que hacen la vida más fácil.
+
+### Posible mensaje de error
+
+Dependiendo del editor que estés usando, podrias recibir un mensaje de error en este punto:
+
+![](../../images/1/1-vite5.png)
+
+Este realmente no es un error, es una advertencia causada por la herramienta [ESLint](https://es.eslint.org/). Tu puedes silenciar la advertencia [react/prop-types](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md) añadiendo la siguiente línea al archivo <i>.eslintrc.cjs</i>
+
+```js
+module.exports = {
+   root: true,
+   env: { browser: true, es2020: true },
+   extends: [
+     'eslint:recommended',
+     'plugin:react/recommended',
+     'plugin:react/jsx-runtime',
+     'plugin:react-hooks/recommended',
+   ],
+   ignorePatterns: ['dist', '.eslintrc.cjs'],
+   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
+   settings: { react: { version: '18.2' } },
+   plugins: ['react-refresh'],
+   rules: {
+     'react-refresh/only-export-components': [
+       'warn',
+       { allowConstantExport: true },
+     ],
+     'react/prop-types': 0 // highlight-line
+   },
+}
+```
+
+Aprenderemos sobre ESLint más en detalle en la [parte 3](/es/part3/validacion_y_es_lint#lint).
 
 ### Algunas notas
 
-React se ha configurado para generar mensajes de error bastante claros. A pesar de esto, debe, al menos al principio, avanzar en **pasos muy pequeños** y asegurarse de que cada cambio funcione como se desea.
+React se ha configurado para generar mensajes de error bastante claros. A pesar de esto, debes, al menos al principio, avanzar en **pasos muy pequeños** y asegurarte de que cada cambio funcione como se desea.
 
-**La consola siempre debe estar abierta**. Si el navegador reporta errores, no es recomendable seguir escribiendo más código, esperando milagros. En su lugar, debe intentar comprender la causa del error y, por ejemplo, volver al estado de trabajo anterior:
+**La consola siempre debe estar abierta**. Si el navegador reporta errores, no es recomendable seguir escribiendo más código, esperando milagros. En su lugar, debes intentar comprender la causa del error y, por ejemplo, volver al estado funcional anterior:
 
 ![](../../images/1/2a.png)
 
-Es bueno recordar que en React es posible y vale la pena escribir comandos <em>console.log()</em> (que se imprimen en la consola) dentro de tu código. 
+Es bueno recordar que en React es posible y vale la pena escribir comandos <em>console.log()</em> (que se imprimen en la consola) dentro de tu código.
 
-También tenga en cuenta que **los nombres de los componentes de React deben estar en mayúscula**. Si intenta definir un componente de la siguiente manera 
+También ten en cuenta que **los nombres de los componentes de React deben iniciar con mayúscula**. Si intentas definir un componente de la siguiente manera:
 
 ```js
 const footer = () => {
   return (
     <div>
-      greeting app created by <a href="https://github.com/mluukkai">mluukkai</a>
+      greeting app created by <a href='https://github.com/mluukkai'>mluukkai</a>
     </div>
   )
 }
 ```
 
-y usada de esta manera
+y lo usas de esta manera:
 
 ```js
 const App = () => {
   return (
     <div>
       <h1>Greetings</h1>
-      <Hello name="Maya" age={26 + 10} />
+      <Hello name='Maya' age={26 + 10} />
       <footer /> // highlight-line
     </div>
   )
 }
 ```
 
-la página no mostrará el contenido definido dentro del componente Footer, y en su lugar React solo crea un elemento <i>footer</i> vacío. Si cambia la primera letra del nombre del componente a una letra mayúscula, React crea un elemento <i>div</i> definido en el componente Footer, que se representa en la página.
+la página no mostrará el contenido definido dentro del componente Footer, y en su lugar React solo crea un elemento <i>footer</i> vacío. Si cambias la primera letra del nombre del componente a una letra mayúscula, React crea el elemento <i>div</i> definido en el componente Footer, que se representa en la página.
 
-Tenga en cuenta que el contenido de un componente de React (normalmente) debe contener **un elemento raíz**. Si, por ejemplo, intentamos definir el componente <i>App</i> sin el elemento <i>div</i> más externo: 
+Ten en cuenta que el contenido de un componente de React (normalmente) debe contener **un elemento raíz**. Si, por ejemplo, intentamos definir el componente <i>App</i> sin el elemento <i>div</i> más externo:
 
 ```js
 const App = () => {
   return (
     <h1>Greetings</h1>
-    <Hello name="Maya" age={26 + 10} />
+    <Hello name='Maya' age={26 + 10} />
     <Footer />
   )
 }
@@ -356,23 +470,23 @@ const App = () => {
 
 el resultado es un mensaje de error. 
 
-![](../../images/1/3e.png)
+![Captura de pantalla del error multiples elementos de raíz](../../images/1/1-vite7.png)
 
-Usar un elemento raíz no es la única opción de trabajo. Un <i>array</i> de componentes también es una solución válida: 
+Usar un elemento raíz no es la única opción que funciona. Un <i>array</i> de componentes también es una solución válida: 
 
 ```js
 const App = () => {
   return [
     <h1>Greetings</h1>,
-    <Hello name="Maya" age={26 + 10} />,
+    <Hello name='Maya' age={26 + 10} />,
     <Footer />
   ]
 }
 ```
 
-Sin embargo, al definir el componente raíz de la aplicación, esto no es algo particularmente inteligente y hace que el código se vea un poco desagradable. 
+Sin embargo cuando se define el componente raíz de la aplicación esto no es algo particularmente inteligente de hacer, y hace que el código se vea un poco desagradable.
 
-Debido a que el elemento raíz está estipulado, tenemos elementos div "extra" en el árbol DOM. Esto se puede evitar usando [fragments](https://reactjs.org/docs/fragments.html#short-syntax), es decir, envolviendo los elementos que el componente devolverá con un elemento vacío: 
+Debido a que el elemento raíz está estipulado, tenemos elementos div "extra" en el árbol DOM. Esto se puede evitar usando [fragments](https://es.legacy.reactjs.org/docs/fragments.html#short-syntax), es decir, envolviendo los elementos que el componente devolverá con un elemento vacío: 
 
 ```js
 const App = () => {
@@ -382,7 +496,7 @@ const App = () => {
   return (
     <>
       <h1>Greetings</h1>
-      <Hello name="Maya" age={26 + 10} />
+      <Hello name='Maya' age={26 + 10} />
       <Hello name={name} age={age} />
       <Footer />
     </>
@@ -390,20 +504,121 @@ const App = () => {
 }
 ```
 
-Ahora se compila con éxito y el DOM generado por React ya no contiene el elemento div adicional.
+Ahora este se compila con éxito y el DOM generado por React ya no contiene el elemento div adicional.
+
+### No renderizar objetos
+
+Considera una aplicación que imprime en pantalla los nombres y edades de nuestros amigos:
+
+```js
+const App = () => {
+  const friends = [
+    { name: 'Peter', age: 4 },
+    { name: 'Maya', age: 10 },
+  ]
+
+  return (
+    <div>
+      <p>{friends[0]}</p>
+      <p>{friends[1]}</p>
+    </div>
+  )
+}
+
+export default App
+```
+
+Sin embargo, nada aparece en la pantalla. He tratado de buscar el problema en el código por 15 minutos, pero no he podido encontrar cual puede ser el problema.
+
+Finalmente recordé la promesa que hice
+
+> <i>Prometo dejar la consola abierta todo el tiempo</i> durante este curso, y por el resto de mi vida mientras esté haciendo desarrollo web.
+
+La consola grita en rojo:
+
+![Consola mostrando error resaltado acerca de "Objects are not valid as a React child"](../../images/1/34new.png)
+
+La raíz del problema es <i>Objects are not valid as a React child (Los objetos no son válidos como elementos hijos de React)</i>, es decir, la aplicación intentó renderizar <i>objetos</i> y falló nuevamente.
+
+El código trató de renderizar la información de un amigo de la siguiente manera:
+
+```js
+<p>{friends[0]}</p>
+```
+
+y esto causó un problema porque el item a ser renderizado en las llaves es un objeto.
+
+```js
+{ name: 'Peter', age: 4 }
+```
+
+En React, las cosas individuales a ser renderizadas dentro de llaves deben ser valores primitivos, como números o cadenas.
+
+La solución es la siguiente:
+
+```js
+const App = () => {
+  const friends = [
+    { name: 'Peter', age: 4 },
+    { name: 'Maya', age: 10 },
+  ]
+
+  return (
+    <div>
+      <p>{friends[0].name} {friends[0].age}</p>
+      <p>{friends[1].name} {friends[1].age}</p>
+    </div>
+  )
+}
+
+export default App
+```
+
+Ahora el nombre del amigo es renderizado dentro de las llaves de manera separada.
+
+```js
+{friends[0].name}
+```
+
+y la edad
+
+```js
+{friends[0].age}
+```
+Después de corregir el error, tu deberías limpiar los mensajes de la consola presionando el botón 🚫 y luego recargando el contenido de la página, y asegurarte de que no se están mostrando mensajes de error.
+
+Una pequeña nota adicional a la anterior. React también permite renderizar arreglos <i>si</i> el arreglo contiene valores que son elegibles para renderizar (como números y cadenas). Así que el siguiente programa funcionaría, aunque el resultado no ser el que queremos:
+
+```js
+const App = () => {
+  const friends = [ 'Peter', 'Maya']
+
+  return (
+    <div>
+      <p>{friends}</p>
+    </div>
+  )
+}
+```
+
+En esta parte, ni siquiera vale la pena intentar utilizar la renderización directa de las tablas; volveremos a ello en la siguiente parte.
 
 </div>
 
 <div class="tasks"> 
   <h3>Ejercicios 1.1.-1.2.</h3> 
 
-Los ejercicios se envían a través de GitHub y marcando los ejercicios completados en la [solicitud de envío](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). 
+Los ejercicios se envían a través de GitHub y marcando los ejercicios completados en el [sistema de envío ejercicios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). 
 
-Puede enviar todos los ejercicios de este curso al mismo repositorio o utilizar varios repositorios. Si envía ejercicios de diferentes partes en el mismo repositorio, utilice un esquema de nomenclatura razonable para los directorios. 
+Los ejercicios se envían **una parte a la vez**. Cuando hayas enviado los ejercicios para una parte del curso, ya no podrás enviar ejercicios incompletos para la misma parte.
+
+Ten en cuenta que en esta parte hay [más ejercicios](/es/part1/un_estado_mas_complejo_depurando_aplicaciones_react#exercises-1-6-1-14) además de los que se encuentran a continuación. <i>No envíes tu trabajo</i> hasta que hayas completado todos los ejercicios que deseas enviar para la parte.
+
+Puedes enviar todos los ejercicios de este curso al mismo repositorio o utilizar varios repositorios. Si envías ejercicios de diferentes partes en el mismo repositorio, utiliza un esquema de nomenclatura razonable para los directorios.
 
 Una estructura de archivos muy funcional para el repositorio de envíos es la siguiente:
 
-```
+```text
 part0
 part1
   courseinfo
@@ -414,26 +629,30 @@ part2
   countries
 ```
 
-Vea [esto](https://github.com/fullstack-hy2020/example-submission-repository)! 
+Mira este [repositorio de ejemplo para el envio de ejercicios](https://github.com/fullstack-hy2020/example-submission-repository)! 
 
-Para cada parte del curso hay un directorio, que se ramifica en directorios que contienen una serie de ejercicios, como "unicafe" para la parte 1. 
+Para cada parte del curso hay un directorio, que se ramifica en directorios que contienen una serie de ejercicios, como "unicafe" para la parte 1.
 
-Por cada aplicación web para una serie de ejercicios, se recomienda enviar todos los archivos relacionados con ese aplicación, excepto para el directorio <i>node_modules</i>.
+La mayoría de los ejercicios del curso construyen una aplicación más grande, por ejemplo: courseinfo, unicafe y anecdotes en esta parte, poco a poco. Es suficiente con enviar la aplicación terminada. Puedes hacer un commit después de cada ejercicio, pero no es obligatorio. Por ejemplo, la aplicación de información del curso se construye en los ejercicios 1.1.-1.5. En este caso solo necesitas enviarel resultado final del ejercicio 1.5.
 
-Los ejercicios se envían **una parte a la vez**. Cuando haya enviado los ejercicios para una parte del curso, ya no podrá enviar ejercicios incompletos para la misma parte.
-
-Tenga en cuenta que en esta parte, hay más ejercicios además de los que se encuentran a continuación. <i>No envíe su trabajo</i> hasta que haya completado todos los ejercicios que desea enviar para la parte.
+Por cada aplicación web para una serie de ejercicios, se recomienda enviar todos los archivos relacionados con esa aplicación, excepto para el directorio <i>node\_modules</i>.
 
   <h4>1.1: información del curso, paso 1</h4> 
 
-<i>La aplicación en la que comenzaremos a trabajar en este ejercicio se desarrollará más a fondo en algunos de los siguientes ejercicios. En este y otros conjuntos de ejercicios futuros de este curso, es suficiente enviar solo el estado final de la aplicación. Si lo desea, también puede crear un commit para cada ejercicio de la serie, pero esto es completamente opcional.</i>
+<i>La aplicación en la que comenzaremos a trabajar en este ejercicio se desarrollará más a fondo en algunos de los siguientes ejercicios. En este y otros conjuntos de ejercicios futuros de este curso, es suficiente enviar solo el estado final de la aplicación. Si lo desea, también puedes crear un commit para cada ejercicio de la serie, pero esto es completamente opcional.</i>
 
-Use create-react-app para inicializar una nueva aplicación. Modifique <i>index.js</i> para que coincida con lo siguiente 
+Usa Vite para inicializar una nueva aplicación. Modifica <i>main.jsx</i> para que coincida con lo siguiente
 
 ```js
-import React from 'react'
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom/client'
 
+import App from './App'
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+```
+y <i>App.jsx</i> para que conincida con lo siguiente
+
+```js
 const App = () => {
   const course = 'Half Stack application development'
   const part1 = 'Fundamentals of React'
@@ -460,14 +679,16 @@ const App = () => {
   )
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))
+export default App
 ```
 
-y elimine archivos adicionales (App.js, App.css, App.test.js, logo.svg, setupTests.js, reportWebVitals.js). 
+y elimina los archivos adicionales App.css, y index.css, y el directorio assets. 
 
-Desafortunadamente, toda la aplicación está en el mismo componente. Refactorice el código para que conste de tres componentes nuevos: <i>Header</i>, <i>Content</i> y <i>Total</i>. Todos los datos aún residen en el componente <i>App</i>, que pasa los datos necesarios a cada componente mediante <i>props</i>. <i>Header</i> se encarga de representar el nombre del curso, <i>Content</i> representa las partes y su número de ejercicios y <i>Total</i> representa el número total de ejercicios. 
+Desafortunadamente, toda la aplicación está en el mismo componente. Refactoriza el código para que conste de tres componentes nuevos: <i>Header</i>, <i>Content</i> y <i>Total</i>. Todos los datos aún residen en el componente <i>App</i>, que pasa los datos necesarios a cada componente mediante <i>props</i>. <i>Header</i> se encarga de representar el nombre del curso, <i>Content</i> representa las partes y su número de ejercicios y <i>Total</i> representa el número total de ejercicios.
 
-El cuerpo del componente <i>App</i> será aproximadamente como sigue:
+Define los nuevos componentes en el archivo <i>App.jsx</i>.
+
+El cuerpo del componente <i>App</i> será aproximadamente como lo siguiente:
 
 ```js
 const App = () => {
@@ -483,11 +704,17 @@ const App = () => {
 }
 ```
 
-**ADVERTENCIA** create-react-app convierte automáticamente el proyecto en un repositorio de git a menos que la aplicación se cree dentro de un repositorio ya existente. Lo más probable es que **no quieras** que el proyecto se convierta en un repositorio, así que ejecuta el comando _rm -rf .git_ en la raíz del proyecto. 
+**ADVERTENCIA** No trates de programar todos los componentes de corrido, porque esto podría ciertamente romper toda la aplicación. Procede en pequeños pasos, pprimero haz por ejemplo: el componente <i>Header</i> y solo cuando confirmes que funciona, podrás continuar con el siguiente componente.
+
+El progreso cuidadoso y en pequeños pasos puede parecer lento, pero en realidad es <i>con diferencia la forma más rápida</i> de progresar. El famoso desarrollador de software Robert "Uncle Bob" Martin ha declarado
+
+> <i>"La única manera de ir rápido, es hacerlo bien"</i>
+
+es decir, según Martin, avanzar con cuidado y con pequeños pasos es incluso la única manera de ser rápido.
 
 <h4>1.2: información del curso, paso 2</h4>
 
-Refactorice el componente <i>Content</i> para que no represente ningún nombre de partes o su número de ejercicios por sí mismo. En su lugar, solo representa tres componentes <i>Part</i> de los cuales cada uno representa el nombre y el número de ejercicios de una parte. 
+Refactoriza el componente <i>Content</i> para que no renderice ningún nombre de partes o su número de ejercicios por sí mismo. En su lugar, solo representa tres componentes <i>Part</i> de los cuales cada uno representa el nombre y el número de ejercicios de una parte.
 
 ```js
 const Content = ... {
@@ -501,6 +728,6 @@ const Content = ... {
 }
 ```
 
-Nuestra aplicación pasa información de una manera bastante primitiva en este momento, ya que se basa en variables individuales. Esta situación mejorará pronto.
+Nuestra aplicación pasa información de una manera bastante primitiva en este momento, ya que se basa en variables individuales. Esta situación mejorará pronto en la [parte 2](/es/part2), pero antes de eso, vamos a la [parte 1b](/es/part1/java_script) para aprender acerca de JavaScript.
 
 </div>
