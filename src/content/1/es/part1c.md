@@ -244,7 +244,7 @@ Hacer llamadas repetidas al método _ReactDOM.render_ no es la forma recomendada
 
 Todos nuestros componentes hasta ahora han sido simples en el sentido de que no contienen ningún estado que pueda cambiar durante el ciclo de vida del componente.
 
-A continuación, agreguemos estado al componente <i>App</i> de nuestra aplicación con la ayuda del [hook de estado](https://reactjs.org/docs/hooks-state.html) de React.
+A continuación, agreguemos estado al componente <i>App</i> de nuestra aplicación con la ayuda del [hook de estado](https://react.dev/reference/react/useState) de React.
 Cambiaremos la aplicación a lo siguiente:
 
 ```js
@@ -614,7 +614,7 @@ El controlador de eventos se pasa al componente <i>Button</i> a través de la pr
 
 Repasemos los principios fundamentales de cómo funciona una aplicación una vez más.
 
-Cuando se inicia la aplicación, se ejecuta el código en _App_. Este código usa un hook [useState](https://reactjs.org/docs/hooks-reference.html#usestate) para crear el estado de la aplicación, estableciendo un valor inicial de la variable _counter_.
+Cuando se inicia la aplicación, se ejecuta el código en _App_. Este código usa un hook [useState](https://react.dev/reference/react/useState) para crear el estado de la aplicación, estableciendo un valor inicial de la variable _counter_.
 Este componente contiene el componente _Display_, que muestra el valor del contador, 0, y tres componentes _Button_. Todos los botones tienen controladores de eventos, que se utilizan para cambiar el estado del contador.
 
 Cuando se hace clic en uno de los botones, se ejecuta el controlador de eventos. El controlador de eventos cambia el estado del componente _App_ con la función _setCounter_. 
