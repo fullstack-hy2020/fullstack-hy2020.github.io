@@ -124,7 +124,7 @@ const handleRightClick = () => {
 }
 ```
 
-La sintaxis puede parecer un poco extraña al principio. En la práctica, <em>{...clicks}</em> crea un nuevo objeto que tiene copias de todas las propiedades del objeto _clicks_. Cuando especificamos una propiedad en particular, por ejemplo, <i>right</i> en <em>{...clics, right: 1}</em>, el valor de la propiedad _right_ en el nuevo objeto será 1.
+La sintaxis puede parecer un poco extraña al principio. En la práctica, <em>{...clicks}</em> crea un nuevo objeto que tiene copias de todas las propiedades del objeto _clicks_. Cuando especificamos una propiedad en particular, por ejemplo, <i>right</i> en <em>{...clicks, right: 1}</em>, el valor de la propiedad _right_ en el nuevo objeto será 1.
 
 En el ejemplo anterior, esto:
 
