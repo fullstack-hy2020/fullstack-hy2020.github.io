@@ -125,14 +125,16 @@ let Login = (props) => {
             type="text"
             name="username"
           />
+        </Form.Group>
+        <Form.Group>
           <Form.Label>password:</Form.Label>
           <Form.Control
             type="password"
           />
-          <Button variant="primary" type="submit">
-            login
-          </Button>
         </Form.Group>
+        <Button variant="primary" type="submit">
+          login
+        </Button>
       </Form>
     </div>
 )}
