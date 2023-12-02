@@ -14,13 +14,18 @@
     "aboutCourse": "Acerca",
     "courseContents": "Contenido",
     "faq": "Preguntas frecuentes",
-    "partners": "Partners",
-    "challenge": "Challenge",
+    "partners": "Socios",
+    "challenge": "Desafío",
     "searchLinkSrLabel": "Buscar en el material",
     "ThemeSwitcherSrLabel": "Alternar tema oscuro",
     "LanguagePickerSrLabel": "Seleccione el idioma"
   },
+  "aboutPage": {
+    "generalTitle": "General"
+  },
   "challengePage": {
+    "aboutTitle": "Este es el desafío Full Stack",
+    "joinTitle": "Empresas, ¡Presten atención al llamado!",
     "registerButton": "Registre su empresa en el desafío Full Stack",
     "nameLabel": "Nombre",
     "namePlaceholder": "Jane Doe",
@@ -35,5 +40,20 @@
     "participantsTitle": "Estas empresas se han unido al desafío Full Stack",
     "coOperationTitle": "En cooperación con",
     "infoButton": "Más sobre el desafío"
+  },
+  "homePage": {
+    "startCourseButton": "Iniciar curso",
+    "announcementsTitle": "Anuncios",
+    "authorsTitle": "Autores y Licencias",
+    "courseNameTitle": "Full Stack Open"
+  },
+  "companiesPage": {
+    "storiesTitle": "Historias de desarrolladores de nuestros socios"
+  },
+  "faqPage": {
+    "faqTitle": "Preguntas frecuentes"
+  },
+  "notFoundPage": {
+    "title": "Página no encontrada"
   }
 }

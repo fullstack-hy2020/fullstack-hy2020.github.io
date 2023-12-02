@@ -132,6 +132,11 @@
     padding-left: 30%;
     padding-right: 5%;
   }
+
+  blockquote {
+    padding-left: 0.5rem;
+    border-left: 2px #888 solid;
+  }
 }
 
 .tasks {

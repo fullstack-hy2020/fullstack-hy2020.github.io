@@ -1,11 +1,11 @@
---- 
+---
 mainImage: ../../../images/part-1.svg
 part: 1
 letter: c
 lang: es
---- 
+---
 
-<div class="content"> 
+<div class="content">
 
 Volvamos a trabajar con React.
 
@@ -36,7 +36,7 @@ const App = () => {
 }
 ```
 
-### Funciones auxiliares del componente 
+### Funciones auxiliares del componente
 
 Vamos a expandir nuestro componente <i>Hello</i> para que adivine el año de nacimiento de la persona que recibe la bienvenida:
 
@@ -60,7 +60,7 @@ const Hello = (props) => {
 }
 ```
 
-La lógica para adivinar el año de nacimiento se divide en su propia función que se llama cuando se representa el componente. 
+La lógica para adivinar el año de nacimiento se divide en su propia función que se llama cuando se representa el componente.
 
 La edad de la persona no tiene que pasarse como parámetro a la función, ya que puede acceder directamente a todos los props que se pasan al componente.
 
@@ -68,7 +68,7 @@ Si examinamos nuestro código actual de cerca, notaremos que la función auxilia
 
 ### Desestructuración
 
-Antes de seguir adelante, veremos una característica pequeña pero útil del lenguaje JavaScript que se agregó en la especificación ES6, que nos permite [desestructurar](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) valores de objetos y matrices en la asignación.
+Antes de seguir adelante, veremos una característica pequeña pero útil del lenguaje JavaScript que se agregó en la especificación ES6, que nos permite [desestructurar](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) valores de objetos y matrices en la asignación.
 
 En nuestro código anterior, teníamos que hacer referencia a los datos pasados ​​a nuestro componente como _props.name_ y _props.age_. De estas dos expresiones, tuvimos que repetir _props.age_ dos veces en nuestro código.
 
@@ -81,7 +81,7 @@ props = {
 }
 ```
 
-podemos optimizar nuestro componente asignando los valores de las propiedades directamente en dos variables _name_ y _age_ que luego podemos usar en nuestro código: 
+podemos optimizar nuestro componente asignando los valores de las propiedades directamente en dos variables _name_ y _age_ que luego podemos usar en nuestro código:
 
 ```js
 const Hello = (props) => {
@@ -90,20 +90,21 @@ const Hello = (props) => {
   const age = props.age
   // highlight-end
 
-  const bornYear = () => new Date().getFullYear() - age
+  const bornYear = () => new Date().getFullYear() - age // highlight-line
 
   return (
     <div>
-      <p>Hello {name}, you are {age} years old</p>
+      <p>Hello {name}, you are {age} years old</p> // highlight-line
       <p>So you were probably born in {bornYear()}</p>
     </div>
   )
 }
 ```
 
-Tenga en cuenta que también hemos utilizado la sintaxis más compacta para las funciones de flecha al definir la función _bornYear_. Como se mencionó anteriormente, si una función de flecha consta de una sola expresión, entonces no es necesario escribir el cuerpo de la función entre llaves. En esta forma más compacta, la función simplemente devuelve el resultado de la expresión única.
+Ten en cuenta que también hemos utilizado la sintaxis más compacta para las funciones de flecha al definir la función _bornYear_. Como se mencionó anteriormente, si una función de flecha consta de una sola expresión, entonces no es necesario escribir el cuerpo de la función entre llaves. En esta forma más compacta, la función simplemente devuelve el resultado de la expresión única.
 
-En resumen, las dos definiciones de función que se muestran a continuación son equivalentes: 
+En resumen, las dos definiciones de función que se muestran a continuación son equivalentes:
+
 ```js
 const bornYear = () => new Date().getFullYear() - age
 
@@ -158,16 +159,16 @@ const Hello = ({ name, age }) => { // highlight-line
 }
 ```
 
-Los props que se pasan al componente ahora se desestructuran directamente en las variables _name_ y _age_. 
+Los props que se pasan al componente ahora se desestructuran directamente en las variables _name_ y _age_.
 
-Esto significa que en lugar de asignar todo el objeto props a una variable llamada <i>props</i> y luego asignar sus propiedades a las variables _name_ y _age_ 
+Esto significa que en lugar de asignar todo el objeto props a una variable llamada <i>props</i> y luego asignar sus propiedades a las variables _name_ y _age_
 
 ```js
 const Hello = (props) => {
   const { name, age } = props
 ```
 
-asignamos los valores de las propiedades directamente a las variables al desestructurar el objeto props que se pasa a la función del componente como parámetro: 
+asignamos los valores de las propiedades directamente a las variables al desestructurar el objeto props que se pasa a la función del componente como parámetro:
 
 ```js
 const Hello = ({ name, age }) => {
@@ -175,9 +176,9 @@ const Hello = ({ name, age }) => {
 
 ### Re-renderizado de la página
 
-Hasta ahora, todas nuestras aplicaciones han sido tales que su apariencia sigue siendo la misma después de la renderización inicial. ¿Qué pasaría si quisiéramos crear un contador donde el valor aumentara en función del tiempo o con el clic de un botón? 
+Hasta ahora, todas nuestras aplicaciones han sido tales que su apariencia sigue siendo la misma después de la renderización inicial. ¿Qué pasaría si quisiéramos crear un contador donde el valor aumentara en función del tiempo o con el clic de un botón?
 
-Comencemos con lo siguiente: 
+Comencemos con lo siguiente. El archivo <i>App.jsx</i> se convierte en:
 
 ```js
 const App = (props) => {
@@ -187,35 +188,39 @@ const App = (props) => {
   )
 }
 
+export default App
+```
+
+Y el archivo <i>main.jsx</i> se convierte en:
+
+
+```js
+import ReactDOM from 'react-dom/client'
+
+import App from './App'
+
 let counter = 1
 
-ReactDOM.render(
-  <App counter={counter} />, 
-  document.getElementById('root')
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <App counter={counter} />
 )
 ```
 
-El componente de la aplicación recibe el valor del contador a través del prop _counter_. Este componente muestra el valor en la pantalla. ¿Qué sucede cuando cambia el valor de _counter_? Incluso si tuviéramos que agregar lo siguiente
+El componente de la aplicación recibe el valor del contador a través de la prop _counter_. Este componente muestra el valor en la pantalla. ¿Qué sucede cuando cambia el valor de _counter_? Incluso si tuviéramos que agregar lo siguiente
 
 ```js
 counter += 1
 ```
 
-el componente no volverá a renderizarse. Podemos hacer que el componente se vuelva a renderizar llamando al método _ReactDOM.render_ por segunda vez, por ejemplo, de la siguiente manera: 
+el componente no volverá a renderizarse. Podemos hacer que el componente se vuelva a renderizar llamando al método _ReactDOM.render_ por segunda vez, por ejemplo, de la siguiente manera:
 
 ```js
-const App = (props) => {
-  const { counter } = props
-  return (
-    <div>{counter}</div>
-  )
-}
-
 let counter = 1
 
 const refresh = () => {
-  ReactDOM.render(<App counter={counter} />, 
-  document.getElementById('root'))
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    <App counter={counter} />
+  )
 }
 
 refresh()
@@ -225,11 +230,11 @@ counter += 1
 refresh()
 ```
 
-El comando de re-renderizado se ha envuelto dentro de la función _refresh_ para reducir la cantidad de código copiado y pegado. 
+El comando de re-renderizado se ha envuelto dentro de la función _refresh_ para reducir la cantidad de código copiado y pegado.
 
 Ahora el componente <i>se renderiza tres veces</i>, primero con el valor 1, luego 2 y finalmente 3. Sin embargo, los valores 1 y 2 se muestran en la pantalla durante un período de tiempo tan corto que pueden no ser notados.
 
-Podemos implementar una funcionalidad un poco más interesante volviendo a renderizar e incrementando el contador cada segundo usando [setInterval](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval):
+Podemos implementar una funcionalidad un poco más interesante volviendo a renderizar e incrementando el contador cada segundo usando [setInterval](https://developer.mozilla.org/es/docs/Web/API/WindowOrWorkerGlobalScope/setInterval):
 
 ```js
 setInterval(() => {
@@ -244,12 +249,22 @@ Hacer llamadas repetidas al método _ReactDOM.render_ no es la forma recomendada
 
 Todos nuestros componentes hasta ahora han sido simples en el sentido de que no contienen ningún estado que pueda cambiar durante el ciclo de vida del componente.
 
-A continuación, agreguemos estado al componente <i>App</i> de nuestra aplicación con la ayuda del [hook de estado](https://react.dev/reference/react/useState) de React.
+A continuación, agreguemos estado al componente <i>App</i> de nuestra aplicación con la ayuda del [hook de estado](https://es.react.dev/reference/react/useState) de React.
+
 Cambiaremos la aplicación a lo siguiente:
 
 ```js
-import React, { useState } from 'react' // highlight-line
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom/client'
+
+import App from './App'
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+```
+
+y <i>App.jsx</i> cambia a lo siguiente:
+
+```js
+import { useState } from 'react' // highlight-line
 
 const App = () => {
   const [ counter, setCounter ] = useState(0) // highlight-line
@@ -266,16 +281,13 @@ const App = () => {
   )
 }
 
-ReactDOM.render(
-  <App />, 
-  document.getElementById('root')
-)
+export default App
 ```
 
 En la primera fila, la aplicación importa la función _useState_:
 
 ```js
-import React, { useState } from 'react'
+import { useState } from 'react'
 ```
 
 El cuerpo de la función que define el componente comienza con la llamada a la función:
@@ -284,11 +296,11 @@ El cuerpo de la función que define el componente comienza con la llamada a la f
 const [ counter, setCounter ] = useState(0)
 ```
 
-La llamada a la función agrega <i>state</i> al componente y lo hace inicializado con el valor de cero. La función devuelve una matriz que contiene dos elementos. Asignamos los elementos a las variables _counter_ y _setCounter_ usando la sintaxis de asignación de desestructuración mostrada anteriormente.
+La llamada a la función agrega <i>state</i> al componente y lo hace inicializado con el valor de cero. La función devuelve una matriz que contiene dos elementos. Asignamos los elementos a las variables _counter_ y _setCounter_ usando la sintaxis de asignación por desestructuración mostrada anteriormente.
 
 A la variable _counter_ se le asigna el valor inicial de <i>state</i> que es cero. La variable _setCounter_ se asigna a una función que se utilizará para <i>modificar el estado</i>.
 
-La aplicación llama a la función [setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) y le pasa dos parámetros: una función para incrementar el estado del contador y un tiempo de espera de un segundo:
+La aplicación llama a la función [setTimeout](https://developer.mozilla.org/es/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) y le pasa dos parámetros: una función para incrementar el estado del contador y un tiempo de espera de un segundo:
 
 ```js
 setTimeout(
@@ -327,9 +339,9 @@ La segunda vez que la función del componente es ejecutado, llama a la función 
 ```
 Mientras tanto, el antiguo valor de _counter_ - "1" - se muestra en la pantalla.
 
-Cada vez que _setCounter_ modifica el estado, hace que el componente se vuelva a renderizar. El valor del estado se incrementará nuevamente después de un segundo y esto continuará repitiéndose mientras la aplicación esté en ejecución. 
+Cada vez que _setCounter_ modifica el estado, hace que el componente se vuelva a renderizar. El valor del estado se incrementará nuevamente después de un segundo y esto continuará repitiéndose mientras la aplicación esté en ejecución.
 
-Si el componente no se procesa cuando usted cree que debería, o si se procesa en el "momento incorrecto", puede depurar la aplicación registrando los valores de las variables del componente en la consola. Si hacemos las siguientes adiciones a nuestro código: 
+Si el componente no se procesa cuando tu crees que debería, o si se procesa en el "momento incorrecto", puedes depurar la aplicación registrando los valores de las variables del componente en la consola. Si hacemos las siguientes adiciones a nuestro código:
 
 ```js
 const App = () => {
@@ -352,15 +364,15 @@ Es fácil de seguir y rastrear las llamadas realizadas a la <i>App</i> función 
 
 ![](../../images/1/4e.png)
 
-### Manejo de eventos 
+### Manejo de eventos
 
 Ya hemos mencionado <i>controladores de eventos</i> algunas veces en la [parte 0](/es/part0), que están registrados para ser llamados cuando ocurren eventos específicos. Por ejemplo, la interacción de un usuario con los diferentes elementos de una página web puede provocar que se active una colección de diferentes tipos de eventos.
 
-Cambiemos la aplicación para que aumente el contador cuando un usuario haga clic en un botón, que se implementa con el elemento [botón](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button).
+Cambiemos la aplicación para que aumente el contador cuando un usuario haga clic en un botón, que se implementa con el elemento [botón](https://developer.mozilla.org/es/docs/Web/HTML/Element/button).
 
-Los elementos de botón admiten los llamados [eventos de mouse](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent), de los cuales [click](https://developer.mozilla.org/en-US/docs/Web/Events/click) es el evento más común.
+Los elementos de botón admiten los llamados [eventos de mouse](https://developer.mozilla.org/es/docs/Web/API/MouseEvent), de los cuales [click](https://developer.mozilla.org/es/docs/Web/Events/click) es el evento más común.
 
-En React, registrar una función de controlador de eventos en el evento <i>click</i> [ocurre](https://reactjs.org/docs/handling-events.html) así:
+En React, [registrar una función de controlador de eventos](https://es.legacy.reactjs.org/docs/handling-events.html) en el evento <i>click</i> ocurre así:
 
 ```js
 const App = () => {
@@ -407,6 +419,7 @@ const App = () => {
 ```
 
 Al cambiar el controlador de eventos a la siguiente forma
+
 ```js
 <button onClick={() => setCounter(counter + 1)}>
   plus
@@ -428,7 +441,7 @@ const App = () => {
         plus
       </button>
       // highlight-start
-      <button onClick={() => setCounter(0)}> 
+      <button onClick={() => setCounter(0)}>
         zero
       </button>
       // highlight-end
@@ -439,7 +452,7 @@ const App = () => {
 
 Nuestra aplicación ya está lista!
 
-### El controlador de eventos es una función
+### Un controlador de eventos es una función
 
 Definimos los controladores de eventos para nuestros botones donde declaramos sus atributos <i>onClick</i>:
 
@@ -449,42 +462,42 @@ Definimos los controladores de eventos para nuestros botones donde declaramos su
 </button>
 ```
 
-¿Qué pasaría si intentáramos definir los controladores de eventos de una forma más simple? 
+¿Qué pasaría si intentáramos definir los controladores de eventos de una forma más simple?
 
 ```js
-<button onClick={setCounter(counter + 1)}> 
+<button onClick={setCounter(counter + 1)}>
   plus
 </button>
 ```
 
 Esto rompería completamente nuestra aplicación:
 
-![](../../images/1/5b.png)
- 
+![Captura de pantalla de un error de re-renderizado](../../images/1/5b.png)
+
 ¿Qué está pasando? Se supone que un controlador de eventos es una <i>función</i> o una <i>referencia de función</i>, y cuando escribimos
 
 ```js
 <button onClick={setCounter(counter + 1)}>
 ```
 
-el controlador de eventos es en realidad una <i>llamada a función</i>. En muchas situaciones esto está bien, pero no en esta situación particular. Al principio, el valor de la variable <i>counter</i> es 0. Cuando React renderiza el componente por primera vez, ejecuta la llamada de función <em>setCounter(0 + 1)</em> y cambia el valor del estado del componente en 1. 
+el controlador de eventos es en realidad una <i>llamada a la función</i>. En muchas situaciones esto está bien, pero no en esta situación particular. Al principio, el valor de la variable <i>counter</i> es 0. Cuando React renderiza el componente por primera vez, ejecuta la llamada de función <em>setCounter(0 + 1)</em> y cambia el valor del estado del componente en 1.
 Esto hará que el componente se vuelva a renderizar, react ejecutará la llamada a la función setCounter nuevamente, y el estado cambiará dando lugar a otra repetición...
 
 Definamos los controladores de eventos como lo hicimos antes
 
 ```js
-<button onClick={() => setCounter(counter + 1)}> 
+<button onClick={() => setCounter(counter + 1)}>
   plus
 </button>
 ```
 
-Ahora el atributo del botón que define lo que sucede cuando se hace clic en el botón - <i>onClick</i> - tiene el valor _() => setCounter (counter + 1)_. 
-La función setCounter se llama solo cuando un usuario hace clic en el botón. 
+Ahora el atributo del botón que define lo que sucede cuando se hace clic en el botón - <i>onClick</i> - tiene el valor _() => setCounter (counter + 1)_.
+La función setCounter se llama solo cuando un usuario hace clic en el botón.
 
 Por lo general, definir controladores de eventos dentro de las plantillas JSX no es una buena idea.
 Aquí está bien, porque nuestros controladores de eventos son muy simples.
 
-Vamos a separar a los controladores de eventos en funciones separadas de todas formas: 
+Vamos a separar a los controladores de eventos en funciones separadas de todas formas:
 
 ```js
 const App = () => {
@@ -492,7 +505,7 @@ const App = () => {
 
 // highlight-start
   const increaseByOne = () => setCounter(counter + 1)
-  
+
   const setToZero = () => setCounter(0)
   // highlight-end
 
@@ -512,7 +525,7 @@ const App = () => {
 Aquí los controladores de eventos se han definido correctamente. El valor del atributo <i>onClick</i> es una variable que contiene una referencia a una función:
 
 ```js
-<button onClick={increaseByOne}> 
+<button onClick={increaseByOne}>
   plus
 </button>
 ```
@@ -521,11 +534,11 @@ Aquí los controladores de eventos se han definido correctamente. El valor del a
 
 Se recomienda escribir componentes de React que sean pequeños y reutilizables en toda la aplicación e incluso en proyectos. Refactoricemos nuestra aplicación para que esté compuesta por tres componentes más pequeños, un componente para mostrar el contador y dos componentes para los botones.
 
-Primero implementemos un componente <i>Display</i> que es responsable de mostrar el valor del contador. 
+Primero implementemos un componente <i>Display</i> que es responsable de mostrar el valor del contador.
 
-Una de las mejores prácticas en React es [levantar el estado](https://reactjs.org/docs/lifting-state-up.html) en la jerarquía de componentes. La documentación dice:
+Una de las mejores prácticas en React es [levantar el estado](https://es.legacy.reactjs.org/docs/lifting-state-up.html) en la jerarquía de componentes. La documentación dice:
 
-> <i>A menudo, varios componentes deben reflejar los mismos datos cambiantes. Recomendamos elevar el estado compartido a su ancestro común más cercano.</i> 
+> <i>A menudo, varios componentes deben reflejar los mismos datos cambiantes. Recomendamos elevar el estado compartido a su ancestro común más cercano.</i>
 
 Así que coloquemos el estado de la aplicación en el componente <i>App</i> y pasémoslo al componente <i>Display</i> a través de <i>props</i>:
 
@@ -537,7 +550,7 @@ const Display = (props) => {
 }
 ```
 
-Usar el componente es sencillo, ya que solo necesitamos pasarle el estado del _counter_: 
+Usar el componente es sencillo, ya que solo necesitamos pasarle el estado del _counter_:
 
 ```js
 const App = () => {
@@ -552,7 +565,7 @@ const App = () => {
       <button onClick={increaseByOne}>
         plus
       </button>
-      <button onClick={setToZero}> 
+      <button onClick={setToZero}>
         zero
       </button>
     </div>
@@ -560,9 +573,9 @@ const App = () => {
 }
 ```
 
-Todo sigue funcionando. Cuando se hace clic en los botones y la <i>App</i> se vuelve a renderizar, todos sus elementos secundarios, incluido el componente <i>Display</i>, también se vuelven a renderizar.
+Todo sigue funcionando. Cuando se hace clic en los botones y <i>App</i> se vuelve a renderizar, todos sus elementos secundarios, incluido el componente <i>Display</i>, también se vuelven a renderizar.
 
-A continuación, creemos un componente <i>Button</i> para los botones de nuestra aplicación. Tenemos que pasar el controlador de eventos, así como el título del botón a través de los props del componente:
+A continuación, creemos un componente <i>Button</i> para los botones de nuestra aplicación. Tenemos que pasar el controlador de eventos, así como el título del botón a través de las props del componente:
 
 ```js
 const Button = (props) => {
@@ -595,11 +608,11 @@ const App = () => {
       <Button
         handleClick={setToZero}
         text='zero'
-      />     
+      />
       <Button
         handleClick={decreaseByOne}
         text='minus'
-      />           
+      />
       // highlight-end
     </div>
   )
@@ -608,25 +621,64 @@ const App = () => {
 
 Dado que ahora tenemos un componente <i>Button</i> fácilmente reutilizable, también hemos implementado una nueva funcionalidad en nuestra aplicación agregando un botón que se puede usar para disminuir el contador.
 
-El controlador de eventos se pasa al componente <i>Button</i> a través de la propiedad _handleClick_. El nombre del prop en sí no es tan significativo, pero nuestra elección de nombre no fue completamente aleatoria. El propio [tutorial](https://reactjs.org/tutorial/tutorial.html) oficial de React sugiere esta convención.
+El controlador de eventos se pasa al componente <i>Button</i> a través de la propiedad _handleClick_. El nombre de ls prop en sí no es tan significativo, pero nuestra elección de nombre no fue completamente aleatoria. El propio [tutorial](https://es.react.dev/learn/tutorial-tic-tac-toe) oficial de React sugiere esta convención.
 
 ### Los cambios en el estado provocan re-renderizado
 
 Repasemos los principios fundamentales de cómo funciona una aplicación una vez más.
 
-Cuando se inicia la aplicación, se ejecuta el código en _App_. Este código usa un hook [useState](https://react.dev/reference/react/useState) para crear el estado de la aplicación, estableciendo un valor inicial de la variable _counter_.
+Cuando se inicia la aplicación, se ejecuta el código en _App_. Este código usa un hook [useState](https://es.react.dev/reference/react/useState) para crear el estado de la aplicación, estableciendo un valor inicial de la variable _counter_.
 Este componente contiene el componente _Display_, que muestra el valor del contador, 0, y tres componentes _Button_. Todos los botones tienen controladores de eventos, que se utilizan para cambiar el estado del contador.
 
-Cuando se hace clic en uno de los botones, se ejecuta el controlador de eventos. El controlador de eventos cambia el estado del componente _App_ con la función _setCounter_. 
+Cuando se hace clic en uno de los botones, se ejecuta el controlador de eventos. El controlador de eventos cambia el estado del componente _App_ con la función _setCounter_.
 **Llamar a una función que cambia el estado hace que el componente se vuelva a procesar.**
 
 Entonces, si un usuario hace clic en el botón <i>plus</i>, el controlador de eventos del botón cambia el valor de _counter_ a 1, y el componente _App_ se vuelve a generar.
 Esto hace que sus subcomponentes _Display_ y _Button_ también se vuelvan a renderizar.
 _Display_ recibe el nuevo valor del contador, 1, como prop. Los componentes _Button_ reciben controladores de eventos que pueden usarse para cambiar el estado del contador.
 
-### Refactorización de los componentes 
+Para asegurarnos de entender como funciona el programa, dejanos agregarle algunos _console.log_
 
-El componente que muestra el valor del contador es el siguiente: 
+```js
+const App = () => {
+  const [counter, setCounter] = useState(0)
+  console.log('rendering with counter value', counter) // highlight-line
+
+  const increaseByOne = () => {
+    console.log('increasing, value before', counter) // highlight-line
+    setCounter(counter + 1)
+  }
+
+  const decreaseByOne = () => { 
+    console.log('decreasing, value before', counter) // highlight-line
+    setCounter(counter - 1)
+  }
+
+  const setToZero = () => {
+    console.log('resetting to zero, value before', counter) // highlight-line
+    setCounter(0)
+  }
+
+  return (
+    <div>
+      <Display counter={counter} />
+      <Button onClick={increaseByOne} text="plus" />
+      <Button onClick={setToZero} text="zero" />
+      <Button onClick={decreaseByOne} text="minus" />
+    </div>
+  )
+}
+```
+
+Dejanos ahora ver que se imprime en la consola cuando se hace clic en los botones plus, zero y minus:
+
+![Navegador mostrando la consola con los valores impresos resaltados](../../images/1/31.png)
+
+No intentes siempre adivinar lo que tu código hace. Justamente lo mejor es usar _console.log_ y <i>ver con tus propios ojos</i> lo que este hace.
+
+### Refactorización de los componentes
+
+El componente que muestra el valor del contador es el siguiente:
 
 ```js
 const Display = (props) => {
@@ -667,6 +719,11 @@ const Button = (props) => {
 
 Podemos usar la desestructuración para obtener solo los campos requeridos de <i>props</i>, y usar la forma más compacta de funciones de flecha:
 
+**Nota:** Cuando estas construyendo tus propios componentes, puedes nombrar sus controladores de eventos de la manera que quieras, para esto puedes referirte a la documentación de React en [Nombrar props de controladores de eventos](https://es.react.dev/learn/responding-to-events#naming-event-handler-props). Dice lo siguiente:
+
+> Por convención, las props de los controladores de eventos deberían iniciar con `on`, seguido de una letra mayúscula.
+Por ejemplo, la prop `onClick` del componente Button debería ser llamada `onSmash`:
+
 ```js
 const Button = ({ handleClick, text }) => (
   <button onClick={handleClick}>
@@ -674,4 +731,23 @@ const Button = ({ handleClick, text }) => (
   </button>
 )
 ```
+
+podría también ser llamada de la siguiente forma:
+
+```js
+const Button = ({ onSmash, text }) => (
+  <button onClick={onSmash}>
+    {text}
+  </button>
+)
+```
+
+Podriamos tambien simplificar el componente Button un poco más definiendo la declaración return en una sola línea:
+
+```js
+const Button = ({ onSmash, text }) => <button onClick={onSmash}>{text}</button>
+```
+
+**Nota:** Sin embargo, debes ser cuidadoso de no sobresimplificar tus componente, ya que esto hace que agregar complejidad sea una tarea más tediosa en el futuro.
+
 </div>

@@ -104,13 +104,18 @@ const partNameTranslations = {
   ],
 };
 
+const partName = {
+  en: 'Part',
+  es: 'Parte',
+  fi: 'Osa',
+  fr: 'Partie',
+  ptbr: 'Parte',
+  zh: '部分',
+};
+
 export const PartBanner = ({ lang }) => {
   // TODO change on release
   const parts = Object.keys(navigation[lang]);
-
-  function partName(lang) {
-    return lang === 'fi' ? 'Osa' : lang === 'ptbr' ? 'Parte' : 'Part';
-  }
 
   return (
     <Banner
@@ -135,7 +140,7 @@ export const PartBanner = ({ lang }) => {
                 alt: partNames[part],
               }}
               hoverImageSrc={require(`../../images/thumbnails/part-${part}_ovr.svg`)}
-              name={`${partName(lang)} ${part}`}
+              name={`${partName[lang]} ${part}`}
               summary={summary}
               path={getPartTranslationPath(lang, part)}
             />
