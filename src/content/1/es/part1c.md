@@ -1,11 +1,11 @@
---- 
+---
 mainImage: ../../../images/part-1.svg
 part: 1
 letter: c
 lang: es
---- 
+---
 
-<div class="content"> 
+<div class="content">
 
 Volvamos a trabajar con React.
 
@@ -212,7 +212,7 @@ El componente de la aplicación recibe el valor del contador a través de la pro
 counter += 1
 ```
 
-el componente no volverá a renderizarse. Podemos hacer que el componente se vuelva a renderizar llamando al método _ReactDOM.render_ por segunda vez, por ejemplo, de la siguiente manera: 
+el componente no volverá a renderizarse. Podemos hacer que el componente se vuelva a renderizar llamando al método _ReactDOM.render_ por segunda vez, por ejemplo, de la siguiente manera:
 
 ```js
 let counter = 1
@@ -230,7 +230,7 @@ counter += 1
 refresh()
 ```
 
-El comando de re-renderizado se ha envuelto dentro de la función _refresh_ para reducir la cantidad de código copiado y pegado. 
+El comando de re-renderizado se ha envuelto dentro de la función _refresh_ para reducir la cantidad de código copiado y pegado.
 
 Ahora el componente <i>se renderiza tres veces</i>, primero con el valor 1, luego 2 y finalmente 3. Sin embargo, los valores 1 y 2 se muestran en la pantalla durante un período de tiempo tan corto que pueden no ser notados.
 
@@ -249,9 +249,9 @@ Hacer llamadas repetidas al método _ReactDOM.render_ no es la forma recomendada
 
 Todos nuestros componentes hasta ahora han sido simples en el sentido de que no contienen ningún estado que pueda cambiar durante el ciclo de vida del componente.
 
-A continuación, agregaremos estado al componente <i>App</i> con la ayuda del [hook de estado](https://es.legacy.reactjs.org/docs/hooks-state.html) de React.
+A continuación, agreguemos estado al componente <i>App</i> de nuestra aplicación con la ayuda del [hook de estado](https://es.react.dev/reference/react/useState) de React.
 
-Cambiaremos la aplicación a lo siguiente. <i>main.jsx</i> regresa a
+Cambiaremos la aplicación a lo siguiente:
 
 ```js
 import ReactDOM from 'react-dom/client'
@@ -364,7 +364,7 @@ Es fácil de seguir y rastrear las llamadas realizadas a la <i>App</i> función 
 
 ![](../../images/1/4e.png)
 
-### Manejo de eventos 
+### Manejo de eventos
 
 Ya hemos mencionado <i>controladores de eventos</i> algunas veces en la [parte 0](/es/part0), que están registrados para ser llamados cuando ocurren eventos específicos. Por ejemplo, la interacción de un usuario con los diferentes elementos de una página web puede provocar que se active una colección de diferentes tipos de eventos.
 
@@ -441,7 +441,7 @@ const App = () => {
         plus
       </button>
       // highlight-start
-      <button onClick={() => setCounter(0)}> 
+      <button onClick={() => setCounter(0)}>
         zero
       </button>
       // highlight-end
@@ -462,10 +462,10 @@ Definimos los controladores de eventos para nuestros botones donde declaramos su
 </button>
 ```
 
-¿Qué pasaría si intentáramos definir los controladores de eventos de una forma más simple? 
+¿Qué pasaría si intentáramos definir los controladores de eventos de una forma más simple?
 
 ```js
-<button onClick={setCounter(counter + 1)}> 
+<button onClick={setCounter(counter + 1)}>
   plus
 </button>
 ```
@@ -473,31 +473,31 @@ Definimos los controladores de eventos para nuestros botones donde declaramos su
 Esto rompería completamente nuestra aplicación:
 
 ![Captura de pantalla de un error de re-renderizado](../../images/1/5b.png)
- 
+
 ¿Qué está pasando? Se supone que un controlador de eventos es una <i>función</i> o una <i>referencia de función</i>, y cuando escribimos
 
 ```js
 <button onClick={setCounter(counter + 1)}>
 ```
 
-el controlador de eventos es en realidad una <i>llamada a la función</i>. En muchas situaciones esto está bien, pero no en esta situación particular. Al principio, el valor de la variable <i>counter</i> es 0. Cuando React renderiza el componente por primera vez, ejecuta la llamada de función <em>setCounter(0 + 1)</em> y cambia el valor del estado del componente en 1. 
+el controlador de eventos es en realidad una <i>llamada a la función</i>. En muchas situaciones esto está bien, pero no en esta situación particular. Al principio, el valor de la variable <i>counter</i> es 0. Cuando React renderiza el componente por primera vez, ejecuta la llamada de función <em>setCounter(0 + 1)</em> y cambia el valor del estado del componente en 1.
 Esto hará que el componente se vuelva a renderizar, react ejecutará la llamada a la función setCounter nuevamente, y el estado cambiará dando lugar a otra repetición...
 
 Definamos los controladores de eventos como lo hicimos antes
 
 ```js
-<button onClick={() => setCounter(counter + 1)}> 
+<button onClick={() => setCounter(counter + 1)}>
   plus
 </button>
 ```
 
-Ahora el atributo del botón que define lo que sucede cuando se hace clic en el botón - <i>onClick</i> - tiene el valor _() => setCounter (counter + 1)_. 
-La función setCounter se llama solo cuando un usuario hace clic en el botón. 
+Ahora el atributo del botón que define lo que sucede cuando se hace clic en el botón - <i>onClick</i> - tiene el valor _() => setCounter (counter + 1)_.
+La función setCounter se llama solo cuando un usuario hace clic en el botón.
 
 Por lo general, definir controladores de eventos dentro de las plantillas JSX no es una buena idea.
 Aquí está bien, porque nuestros controladores de eventos son muy simples.
 
-Vamos a separar a los controladores de eventos en funciones separadas de todas formas: 
+Vamos a separar a los controladores de eventos en funciones separadas de todas formas:
 
 ```js
 const App = () => {
@@ -505,7 +505,7 @@ const App = () => {
 
 // highlight-start
   const increaseByOne = () => setCounter(counter + 1)
-  
+
   const setToZero = () => setCounter(0)
   // highlight-end
 
@@ -525,7 +525,7 @@ const App = () => {
 Aquí los controladores de eventos se han definido correctamente. El valor del atributo <i>onClick</i> es una variable que contiene una referencia a una función:
 
 ```js
-<button onClick={increaseByOne}> 
+<button onClick={increaseByOne}>
   plus
 </button>
 ```
@@ -534,11 +534,11 @@ Aquí los controladores de eventos se han definido correctamente. El valor del a
 
 Se recomienda escribir componentes de React que sean pequeños y reutilizables en toda la aplicación e incluso en proyectos. Refactoricemos nuestra aplicación para que esté compuesta por tres componentes más pequeños, un componente para mostrar el contador y dos componentes para los botones.
 
-Primero implementemos un componente <i>Display</i> que es responsable de mostrar el valor del contador. 
+Primero implementemos un componente <i>Display</i> que es responsable de mostrar el valor del contador.
 
 Una de las mejores prácticas en React es [levantar el estado](https://es.legacy.reactjs.org/docs/lifting-state-up.html) en la jerarquía de componentes. La documentación dice:
 
-> <i>A menudo, varios componentes deben reflejar los mismos datos cambiantes. Recomendamos elevar el estado compartido a su ancestro común más cercano.</i> 
+> <i>A menudo, varios componentes deben reflejar los mismos datos cambiantes. Recomendamos elevar el estado compartido a su ancestro común más cercano.</i>
 
 Así que coloquemos el estado de la aplicación en el componente <i>App</i> y pasémoslo al componente <i>Display</i> a través de <i>props</i>:
 
@@ -550,7 +550,7 @@ const Display = (props) => {
 }
 ```
 
-Usar el componente es sencillo, ya que solo necesitamos pasarle el estado del _counter_: 
+Usar el componente es sencillo, ya que solo necesitamos pasarle el estado del _counter_:
 
 ```js
 const App = () => {
@@ -565,7 +565,7 @@ const App = () => {
       <button onClick={increaseByOne}>
         plus
       </button>
-      <button onClick={setToZero}> 
+      <button onClick={setToZero}>
         zero
       </button>
     </div>
@@ -608,11 +608,11 @@ const App = () => {
       <Button
         handleClick={setToZero}
         text='zero'
-      />     
+      />
       <Button
         handleClick={decreaseByOne}
         text='minus'
-      />           
+      />
       // highlight-end
     </div>
   )
@@ -627,10 +627,10 @@ El controlador de eventos se pasa al componente <i>Button</i> a través de la pr
 
 Repasemos los principios fundamentales de cómo funciona una aplicación una vez más.
 
-Cuando se inicia la aplicación, se ejecuta el código en _App_. Este código usa un hook [useState](https://es.legacy.reactjs.org/docs/hooks-reference.html#usestate) para crear el estado de la aplicación, estableciendo un valor inicial de la variable _counter_.
-Este componente contiene el componente _Display_, – que muestra el valor del contador, 0 – y tres componentes _Button_. Todos los botones tienen controladores de eventos, que se utilizan para cambiar el estado del contador.
+Cuando se inicia la aplicación, se ejecuta el código en _App_. Este código usa un hook [useState](https://es.react.dev/reference/react/useState) para crear el estado de la aplicación, estableciendo un valor inicial de la variable _counter_.
+Este componente contiene el componente _Display_, que muestra el valor del contador, 0, y tres componentes _Button_. Todos los botones tienen controladores de eventos, que se utilizan para cambiar el estado del contador.
 
-Cuando se hace clic en uno de los botones, se ejecuta el controlador de eventos. El controlador de eventos cambia el estado del componente _App_ con la función _setCounter_. 
+Cuando se hace clic en uno de los botones, se ejecuta el controlador de eventos. El controlador de eventos cambia el estado del componente _App_ con la función _setCounter_.
 **Llamar a una función que cambia el estado hace que el componente se vuelva a procesar.**
 
 Entonces, si un usuario hace clic en el botón <i>plus</i>, el controlador de eventos del botón cambia el valor de _counter_ a 1, y el componente _App_ se vuelve a generar.
@@ -667,7 +667,7 @@ const App = () => {
       <Button onClick={decreaseByOne} text="minus" />
     </div>
   )
-} 
+}
 ```
 
 Dejanos ahora ver que se imprime en la consola cuando se hace clic en los botones plus, zero y minus:

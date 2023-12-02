@@ -266,9 +266,11 @@ const App = () => {
     },
   })
 
+  // highlight-start
   const toggleImportance = (note) => {
     updateNoteMutation.mutate({...note, important: !note.important })
   }
+  // highlight-end
 
   // ...
 }
@@ -363,7 +365,7 @@ Most React applications need not only a way to temporarily store the served data
 
 ### Exercises 6.20.-6.22.
 
-Now let's make a new version of the anecdote application that uses the React Query library. Take [this project](https://github.com/fullstack-hy2020/query-anecdotes) as your starting point. The project has a ready-installed JSON Server, the operation of which has been slightly modified. Start the server with <i>npm run server</i>.
+Now let's make a new version of the anecdote application that uses the React Query library. Take [this project](https://github.com/fullstack-hy2020/query-anecdotes) as your starting point. The project has a ready-installed JSON Server, the operation of which has been slightly modified (Review the _server.js_ file for more details. Make sure you're connecting to the correct _PORT_). Start the server with <i>npm run server</i>.
 
 #### Exercise 6.20
 

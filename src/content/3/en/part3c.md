@@ -371,6 +371,8 @@ Let's get a quick start by copy-pasting the Mongoose definitions to the <i>index
 ```js
 const mongoose = require('mongoose')
 
+const password = process.argv[2]
+
 // DO NOT SAVE YOUR PASSWORD TO GITHUB!!
 const url =
   `mongodb+srv://fullstack:${password}@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority`
