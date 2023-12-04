@@ -90,9 +90,7 @@ Cambiemos un poco el código. Es habitual usar el comando [switch](https://devel
 Definamos también un [valor predeterminado](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters) de 0 para el <i>estado</i> del parámetro . Ahora el reducer funciona incluso si el estado del store aún no se ha indicado.
 
 ```js
-// highlight-start
-const counterReducer = (state = 0, action) => {
-  // highlight-end
+const counterReducer = (state = 0, action) => { // highlight-line
   switch (action.type) {
     case 'INCREMENT':
       return state + 1
@@ -110,9 +108,7 @@ const counterReducer = (state = 0, action) => {
 No se supone que Reducer se llame directamente desde el código de la aplicación. Reducer solo se proporciona como parámetro a la función _createStore_ que crea el store:
 
 ```js
-// highlight-start
-import { createStore } from 'redux'
-// highlight-end
+import { createStore } from 'redux' // highlight-line
 
 const counterReducer = (state = 0, action) => {
   // ...
@@ -764,10 +760,8 @@ Tu aplicación puede tener una apariencia modesta, nada más se necesitan 3 boto
 Agreguemos la funcionalidad para agregar nuevas notas y cambiar su importancia:
 
 ```js
-// highlight-start
-const generateId = () =>
-  Number((Math.random() * 1000000).toFixed(0))
-// highlight-stop
+const generateId = () => // highlight-line
+  Number((Math.random() * 1000000).toFixed(0)) // highlight-line
 
 const App = () => {
   // highlight-start
