@@ -768,7 +768,9 @@ const App = () => {
   // ...
 
   useSubscription(PERSON_ADDED, {
-    onData: ({ data }) => {
+    // highlight-start
+    onData: ({ data, client }) => {
+    // highlight-end
       const addedPerson = data.data.personAdded
       notify(`${addedPerson.name} added`)
 
