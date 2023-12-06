@@ -362,7 +362,7 @@ const noteReducer = (state = [], action) => {
   if (action.type === 'NEW_NOTE') {
     // highlight-start
     return state.concat(action.payload)
-    // highlight-stop
+    // highlight-end
   }
 
   return state
@@ -582,7 +582,7 @@ const noteReducer = (state = [], action) => {
     case 'NEW_NOTE':
       // highlight-start
       return [...state, action.payload]
-      // highlight-stop
+      // highlight-end
     case 'TOGGLE_IMPORTANCE':
       // ...
     default:
@@ -756,7 +756,7 @@ Let's add the functionality for adding new notes and changing their importance:
 // highlight-start
 const generateId = () =>
   Number((Math.random() * 1000000).toFixed(0))
-// highlight-stop
+// highlight-end
 
 const App = () => {
   // highlight-start

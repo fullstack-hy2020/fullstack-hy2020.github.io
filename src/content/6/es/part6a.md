@@ -389,9 +389,7 @@ Agregamos una nueva nota al estado con el método _state.push(action.data)_ que 
 ```js
 const noteReducer = (state = [], action) => {
   if (action.type === 'NEW_NOTE') {
-    // highlight-start
     return state.concat(action.data)
-    // highlight-stop
   }
 
   return state
@@ -576,9 +574,7 @@ Agregar una nueva nota crea el estado que devuelve con la función de Arrays _co
 const noteReducer = (state = [], action) => {
   switch(action.type) {
     case 'NEW_NOTE':
-      // highlight-start
       return [...state, action.data]
-      // highlight-stop
     case 'TOGGLE_IMPORTANCE':
       // ...
     default:
@@ -764,50 +760,42 @@ Tu aplicación puede tener una apariencia modesta, nada más se necesitan 3 boto
 Agreguemos la funcionalidad para agregar nuevas notas y cambiar su importancia:
 
 ```js
-// highlight-start
 const generateId = () =>
   Number((Math.random() * 1000000).toFixed(0))
-// highlight-stop
 
 const App = () => {
-  // highlight-start
   const addNote = (event) => {
     event.preventDefault()
     const content = event.target.note.value
     event.target.note.value = ''
     store.dispatch({
       type: 'NEW_NOTE',
-      payload: {
+      data: {
         content,
         important: false,
         id: generateId()
       }
     })
   }
-    // highlight-end
 
-  // highlight-start
   const toggleImportance = (id) => {
     store.dispatch({
       type: 'TOGGLE_IMPORTANCE',
-      payload: { id }
+      data: { id }
     })
   }
-    // highlight-end
 
   return (
     <div>
-      // highlight-start
       <form onSubmit={addNote}>
         <input name="note" /> 
         <button type="submit">add</button>
       </form>
-        // highlight-end
       <ul>
         {store.getState().map(note =>
           <li
             key={note.id} 
-            onClick={() => toggleImportance(note.id)}   // highlight-line
+            onClick={() => toggleImportance(note.id)}
           >
             {note.content} <strong>{note.important ? 'important' : ''}</strong>
           </li>
@@ -817,6 +805,7 @@ const App = () => {
   )
 }
 ```
+
 
 La implementación de ambas funcionalidades es sencilla. Cabe señalar que <i>no hemos</i> vinculado el estado de los campos del formulario al estado del componente <i>App</i> como lo hicimos anteriormente. React llama a este tipo de formulario [no controlado](https://reactjs.org/docs/uncontrolled-components.html).
 
