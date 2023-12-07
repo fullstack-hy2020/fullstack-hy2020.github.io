@@ -259,7 +259,7 @@ A production build of applications created with Vite can be created with the com
 
 Let's run this command from the <i>root of the notes frontend project</i> that we developed in [Part 2](/en/part2).
 
-This creates a directory called <i>dist</i> (which contains the only HTML file of our application, <i>index.html</i> ) which contains the directory <i>assets</i>. [Minified](<https://en.wikipedia.org/wiki/Minification_(programming)>) version of our application's JavaScript code will be generated in the <i>dist</i> directory. Even though the application code is in multiple files, all of the JavaScript will be minified into one file. All of the code from all of the application's dependencies will also be minified into this single file.
+This creates a directory called <i>dist</i> which contains the only HTML file of our application (<i>index.html</i>) and the directory <i>assets</i>. [Minified](<https://en.wikipedia.org/wiki/Minification_(programming)>) version of our application's JavaScript code will be generated in the <i>dist</i> directory. Even though the application code is in multiple files, all of the JavaScript will be minified into one file. All of the code from all of the application's dependencies will also be minified into this single file.
 
 The minified code is not very readable. The beginning of the code looks like this:
 
