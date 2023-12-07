@@ -1082,8 +1082,29 @@ The application still appears to work, but **don't implement components like thi
 Let's instead move the <i>Display</i> component function to its correct place, which is outside of the <i>App</i> component function:
 
 ```js
+
+// here in this code you forgot to make return statment the code need to be like this
+const Display =(props) =>{
+  return(
+
+  
+  <div>
+    {props.value}
+  </div>
+  )
+}
+
+// the code fix of this is below
 const Display = props => <div>{props.value}</div>
 
+// and also here you forgot to make return statement the code need to be like this
+const Button =(props)=>{
+  return(
+  <button onClick={props.handleClick}>{props.text}</button>
+  )
+}
+
+// the code fix of this is below
 const Button = (props) => (
   <button onClick={props.handleClick}>
     {props.text}
