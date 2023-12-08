@@ -752,6 +752,19 @@ const Button = ({ onSmash, text }) => (
 )
 ```
 
+Don't forget that you would need to change the prop name also in the App component:
+
+```js
+return (
+    <div>
+      <Display counter={counter} />
+      <Button onSmash={increaseByOne} text="plus" />
+      <Button onSmash={setToZero} text="zero" />
+      <Button onSmash={decreaseByOne} text="minus" />
+    </div>
+);
+```
+
 We can simplify the Button component once more by declaring the return statement in just one line:
 
 ```js
