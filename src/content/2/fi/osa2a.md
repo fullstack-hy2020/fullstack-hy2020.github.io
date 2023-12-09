@@ -451,7 +451,7 @@ Huomaa, että repositorion main-haarassa on myöhemmän vaiheen koodi. Tämän h
 
 ![](../../images/2/2b.png)
 
-Jos kloonaat projektin itsellesi, suorita komento _npm install_ ennen käynnistämistä eli komentoa _npm start_.
+Jos kloonaat projektin itsellesi, suorita komento _npm install_ ennen käynnistämistä eli komentoa _npm run dev_.
 
 ### Kun sovellus hajoaa
 
