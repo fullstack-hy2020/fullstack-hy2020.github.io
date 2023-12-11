@@ -565,8 +565,8 @@ Programming is hard, that is why I will use all the possible means to make it ea
 
 - I will have my browser developer console open all the time
 - I progress with small steps
-- I will write lots of _console.log_ statements to make sure I understand how the code behaves and to help pinpointing problems
-- If my code does not work, I will not write more code. Instead, I start deleting the code until it works or just return to a state when everything still was still working
+- I will write lots of _console.log_ statements to make sure I understand how the code behaves and to help pinpoint problems
+- If my code does not work, I will not write more code. Instead, I start deleting the code until it works or just return to a state when everything was still working
 - When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](/en/part0/general_info#how-to-get-help-in-discord-telegram) how to ask for help
 
 </div>
@@ -581,7 +581,7 @@ You can submit all of the exercises into the same repository, or use multiple di
 
 The exercises are submitted **One part at a time**. When you have submitted the exercises for a part, you can no longer submit any missed exercises for that part.
 
-Note that this part has more exercises than the ones before, so <i>do not submit</i> until you have done all exercises from this part you want to submit.
+Note that this part has more exercises than the ones before, so <i>do not submit</i> until you have done all the exercises from this part you want to submit.
 
 <h4>2.1: Course information step6</h4>
 
