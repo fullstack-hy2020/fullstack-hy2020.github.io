@@ -151,7 +151,7 @@ El tipo de *onSubmit* es un poco más interesante, tiene un parámetro que tiene
 (values: PatientFormValues) => Promise<void>
 ```
 
-El valor de retorno de una función *async* es una [promesa](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Statements/async_function) con el valor que la función devuelve. Nuestra función no devuelve nada asi que el tipo de retorno apropiado es simplemente _Promise&#60;void&#62;_.
+El valor de retorno de una función *async* es una [promesa](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Statements/async_function) con el valor que la función devuelve. Nuestra función no devuelve nada así que el tipo de retorno apropiado es simplemente _Promise&#60;void&#62;_.
 
 </div>
 
@@ -260,7 +260,7 @@ Todas las entradas parecen tener algunos campos en común, pero algunos campos s
 Al observar a *type*, podemos ver que en realidad hay tres tipos de entradas: *OccupationalHealthcare*, *Hospital* y *HealthCheck*.
 Esto indica que necesitamos tres tipos diferentes. Dado que todos tienen algunos campos en común, es posible que deseemos crear una interfaz de entrada base que podamos ampliar con los diferentes campos de cada tipo.
 
-Al mirar los datos, parece que los campos *id*, *description*, *date* y *specialist* son algo que se puede encontrar en cada entrada. Además de eso, parece que *diagnosisCodes* solo se encuentran en una entrada de tipo *OccupationalHealthCare* y una de tipo *Hospital*. Dado que no siempre se usa, incluso en esos tipos de entradas, es seguro asumir que el campo es opcional. También podríamos considerar agregarlo al tipo *HealthCheck*, ya que es posible que simplemente no se use en estas entradas específicas.
+Al mirar los datos, parece que los campos *id*, *description*, *date* y *specialist* son algo que se puede encontrar en cada entrada. Además de eso, parece que *diagnosisCodes* solo se encuentra en una entrada de tipo *OccupationalHealthCare* y una de tipo *Hospital*. Dado que no siempre se usa, incluso en esos tipos de entradas, es seguro asumir que el campo es opcional. También podríamos considerar agregarlo al tipo *HealthCheck*, ya que es posible que simplemente no se use en estas entradas específicas.
 
 Entonces, nuestra *BaseEntry* desde la que se podría extender cada tipo sería la siguiente:
 
@@ -301,7 +301,7 @@ interface BaseEntry {
 
 Ahora que tenemos *BaseEntry* definido, podemos comenzar a crear los tipos de entrada extendidos que usaremos. Comencemos por crear el tipo *HealthCheckEntry*.
 
-Las entradas de tipo *HealthCheck* contienen el campo *HealthCheckRating*, que es un número entero de 0 a 3, cero significa *Healthy* (saludable) y tres significa *CriticalRisk* (riesgo critico). Este es un caso perfecto para una definición de enum.
+Las entradas de tipo *HealthCheck* contienen el campo *HealthCheckRating*, que es un número entero de 0 a 3, cero significa *Healthy* (saludable) y tres significa *CriticalRisk* (riesgo crítico). Este es un caso perfecto para una definición de enum.
 Con estas especificaciones podríamos escribir una definición de tipo *HealthCheckEntry* así:
 
 ```js
@@ -372,7 +372,7 @@ Tu solución podría verse así:
 
 #### 9.24: Patientor, paso 5
 
-Obtén y agrega diagnósticos al estado de la aplicación desde el endpoint */api/diagnosis*. Utiliza los nuevos datos de diagnóstico para mostrar las descripciones de los códigos de diagnóstico del paciente:
+Obtén y agrega diagnósticos al estado de la aplicación desde el endpoint */api/diagnoses*. Utiliza los nuevos datos de diagnóstico para mostrar las descripciones de los códigos de diagnóstico del paciente:
 
 ![navegador mostrando lista de códigos y sus respectivas descripciones para el paciente](../../images/9/42.png)
 
@@ -402,7 +402,7 @@ Recuerda que tenemos diferentes tipos de entradas en nuestra aplicación, por lo
 
 En este ejercicio probablemente tengas que recordar [este truco](/es/part9/grande_finale_patientor#omit-con-uniones)
 
-Podrías asumir que los códigos de diagnostico son enviados en el formato correcto y utilizar, por ejemplo, el siguiente tipo de parser para extraerlos del body de la solicitud:
+Podrías asumir que los códigos de diagnóstico son enviados en el formato correcto y utilizar, por ejemplo, el siguiente tipo de parser para extraerlos del body de la solicitud:
 
 ```js
 const parseDiagnosisCodes = (object: unknown): Array<Diagnosis['code']> =>  {
@@ -419,7 +419,7 @@ const parseDiagnosisCodes = (object: unknown): Array<Diagnosis['code']> =>  {
 
 Ahora que nuestro backend permite agregar entradas, queremos agregar la funcionalidad correspondiente al frontend. En este ejercicio, debes agregar un formulario para agregarle una entrada a un paciente. Un lugar intuitivo para acceder al formulario sería la página del paciente.
 
-En este ejercicio es suficiente **admitir *un* tipo de entrada**. Todos los campos del formulario pueden ser simples inputs de texto, por lo que depende del usuario ingresar valores validos.
+En este ejercicio es suficiente **admitir un tipo de entrada**. Todos los campos del formulario pueden ser simples inputs de texto, por lo que depende del usuario ingresar valores validos.
 
 Tras un envío exitoso, la nueva entrada debe agregarse al paciente correcto y las entradas del paciente en la página del paciente deben actualizarse para contener la nueva entrada.
 
@@ -437,13 +437,13 @@ Amplía tu solución para que admita *todos los tipos de entrada*
 
 #### 9.29: Patientor, paso 10
 
-Mejora el formulario de creación de entradas para que sea más difícil entrar fechas incorrectas, códigos de diagnostico y ratings de salud.
+Mejora el formulario de creación de entradas para que sea más difícil entrar fechas incorrectas, códigos de diagnóstico y ratings de salud.
 
 Tu formulario mejorado podría verse de esta manera:
 
 ![patientor mostrando ui de calendario elegante](../../images/9/76new.png)
 
-Los códigos de diagnostico ahora se configuran con el elemento de Material UI [multiple select](https://mui.com/material-ui/react-select/#multiple-select) y las fechas con el elemento [Input](https://mui.com/material-ui/api/input/) con el tipo [date](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date).
+Los códigos de diagnóstico ahora se configuran con el elemento de Material UI [multiple select](https://mui.com/material-ui/react-select/#multiple-select) y las fechas con el elemento [Input](https://mui.com/material-ui/api/input/) con el tipo [date](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date).
 
 ### Envío de ejercicios y obtención de créditos
 
