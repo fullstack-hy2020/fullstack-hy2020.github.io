@@ -245,7 +245,7 @@ const BigBlueText = () => {
     <View style={styles.container}> // highlight-line
       <Text style={styles.text}> // highlight-line
         Big blue text
-      <Text>
+      </Text>
     </View>
   );
 };
