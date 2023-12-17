@@ -690,7 +690,7 @@ L'idée de ces exercices est de lire le texte une fois de plus et de réfléchir
 
   <h4>0.5 : Application à page unique</h4>
 
-Créez un diagramme illustrant la situation dans laquelle l'utilisateur accède à la version [application à page unique](/fr/part0/introduction_aux_applications_web#application-a-page-unique) de l'application de notes sur <https://studies.cs.helsinki.fi/exempleapp/spa>.
+Créez un diagramme illustrant la situation dans laquelle l'utilisateur accède à la version [application à page unique](/fr/part0/introduction_aux_applications_web#application-a-page-unique) de l'application de notes sur <https://studies.cs.helsinki.fi/exampleapp/spa>.
 
   <h4>0.6 : Nouvelle note</h4>
 
