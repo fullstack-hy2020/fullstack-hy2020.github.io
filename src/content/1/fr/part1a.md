@@ -65,7 +65,7 @@ export default App
 
 Les fichiers <i>App.css</i> et <i>index.css</i>, ainsi que le répertoire <i>assets</i>, peuvent être supprimés car ils ne sont pas nécessaires dans notre application pour le moment.
 
-create-react-app
+### create-react-app
 Au lieu de Vite, vous pouvez également utiliser l'outil de la génération précédente create-react-app dans le cours pour configurer les applications. La différence la plus visible par rapport à Vite est le nom du fichier de démarrage de l'application, qui est <i>index.js</i>.
 
 La manière de démarrer l'application est également différente dans CRA, elle est lancée avec la commande
