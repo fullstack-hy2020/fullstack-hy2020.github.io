@@ -93,7 +93,7 @@ echo "Error: no test specified" && exit 1
 
 ### Simple web server
 
-Let's change the application into a web server by editing the _index.js_ files as follow:
+Let's change the application into a web server by editing the _index.js_ file as follow:
 
 ```js
 const http = require('http')
