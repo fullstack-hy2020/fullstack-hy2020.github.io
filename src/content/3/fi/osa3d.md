@@ -287,13 +287,13 @@ Kannattaa ehkä tehdä linttaustakin varten _npm-skripti_:
 
 Nyt komento _npm run lint_ suorittaa tarkastukset koko projektille.
 
-Myös hakemistossa <em>build</em> oleva frontendin tuotantoversio tulee näin tarkastettua. Sitä emme kuitenkaan halua, eli tehdään projektin juureen tiedosto [.eslintignore](https://eslint.org/docs/user-guide/configuring/ignoring-code#the-eslintignore-file) ja sille seuraava sisältö:
+Myös hakemistossa <em>dist</em> oleva frontendin tuotantoversio tulee näin tarkastettua. Sitä emme kuitenkaan halua, eli tehdään projektin juureen tiedosto [.eslintignore](https://eslint.org/docs/user-guide/configuring/ignoring-code#the-eslintignore-file) ja sille seuraava sisältö:
 
 ```bash
-build
+dist
 ```
 
-Näin koko hakemiston <em>build</em> sisältö jätetään huomioimatta linttauksessa.
+Näin koko hakemiston <em>dist</em> sisältö jätetään huomioimatta linttauksessa.
 
 Lintillä on jonkin verran huomautettavaa koodistamme:
 
