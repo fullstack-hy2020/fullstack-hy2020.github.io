@@ -283,7 +283,7 @@ The backend directory should now look as follows:
 
 ![bash screenshot of ls showing build directory](../../images/3/27v.png)
 
-To make express show <i>static content</i>, the page <i>index.html</i> and the JavaScript, etc., it fetches, we need a built-in middleware from Express called [static](http://expressjs.com/en/starter/static-files.html).
+To make express show <i>static content</i>—the page <i>index.html</i> and the JavaScript, etc.—it fetches, we need a built-in middleware from Express called [static](http://expressjs.com/en/starter/static-files.html).
 
 When we add the following amidst the declarations of middlewares
 
