@@ -11,7 +11,7 @@ Ahora comenzaremos a familiarizarnos con probablemente el tema más importante d
 
 La forma más fácil de empezar es utilizando una herramienta llamada [Vite](https://es.vitejs.dev/).
 
-Comencemos creando una aplización llamada <i>part1</i>, navegar a este direcctorio e instalando las librerias:
+Comencemos creando una aplicación llamada <i>part1</i>, navegar a este directorio e instalando las librerias:
 
 ```bash
 # npm 6.x (desactualizado, pero aun en uso por algunos):
@@ -186,7 +186,7 @@ La primera regla del desarrollo web frontend:
 
 > <i>deja la consola abierta todo el tiempo</i>
 
-Repitados esto juntos: <i>Prometo dejar la consola abierta todo el tiempo</i> durante este curso, y por el resto de mi vida mientras esté haciendo desarrollo web.
+Repitamos esto juntos: <i>Prometo dejar la consola abierta todo el tiempo</i> durante este curso, y por el resto de mi vida mientras esté haciendo desarrollo web.
 
 También es posible renderizar contenido dinámico dentro de un componente.
 
@@ -344,7 +344,7 @@ const App = () => {
 }
 ```
 
-Puede haber un número arbitrario de props y sus valores pueden ser strings "incrustados en el código" ("hard coded") o resultados de expresiones JavaScript. Si el valor del prop se logra usando JavaScript, debe estar envuelto con llaves. 
+Puede haber un número arbitrario de props y sus valores pueden ser strings "incrustados en el código" ("hard coded") o resultados de expresiones JavaScript. Si el valor del prop se obtiene usando JavaScript, debe estar envuelto con llaves. 
 
 Modifiquemos el código para que el componente <i>Hello</i> use dos props: 
 
@@ -382,7 +382,7 @@ Yo realmente espero que tu consola esté abierta. Si no es asi, recuerda tu prom
 
 > <i>Prometo dejar la consola abierta todo el tiempo</i> durante este curso, y por el resto de mi vida mientras esté haciendo desarrollo web.
 
-EL desarrollo de software es dificil. Este se vuelve aun más dificil si uno no está usando todas las herramientas disponibles como la consola de desarrollo e imprimiendo la depuración con _console.log_. Los profesionales usan amnas <i>todo el tiempo</i> y no hay una sola razón de porque un principiante no debería adoptar estos maravillosos métodos de ayuda que hacen la vida más fácil.
+El desarrollo de software es dificil. Este se vuelve aun más dificil si uno no está usando todas las herramientas disponibles como la consola de desarrollo e imprimiendo la depuración con _console.log_. Los profesionales usan ambas <i>todo el tiempo</i> y no hay una sola razón de porque un principiante no debería adoptar estos maravillosos métodos de ayuda que hacen la vida más fácil.
 
 ### Posible mensaje de error
 
@@ -633,7 +633,7 @@ Mira este [repositorio de ejemplo para el envio de ejercicios](https://github.co
 
 Para cada parte del curso hay un directorio, que se ramifica en directorios que contienen una serie de ejercicios, como "unicafe" para la parte 1.
 
-La mayoría de los ejercicios del curso construyen una aplicación más grande, por ejemplo: courseinfo, unicafe y anecdotes en esta parte, poco a poco. Es suficiente con enviar la aplicación terminada. Puedes hacer un commit después de cada ejercicio, pero no es obligatorio. Por ejemplo, la aplicación de información del curso se construye en los ejercicios 1.1.-1.5. En este caso solo necesitas enviarel resultado final del ejercicio 1.5.
+La mayoría de los ejercicios del curso construyen una aplicación más grande, por ejemplo: courseinfo, unicafe y anecdotes en esta parte, poco a poco. Es suficiente con enviar la aplicación terminada. Puedes hacer un commit después de cada ejercicio, pero no es obligatorio. Por ejemplo, la aplicación de información del curso se construye en los ejercicios 1.1.-1.5. En este caso solo necesitas enviar el resultado final del ejercicio 1.5.
 
 Por cada aplicación web para una serie de ejercicios, se recomienda enviar todos los archivos relacionados con esa aplicación, excepto para el directorio <i>node\_modules</i>.
 
@@ -704,7 +704,7 @@ const App = () => {
 }
 ```
 
-**ADVERTENCIA** No trates de programar todos los componentes de corrido, porque esto podría ciertamente romper toda la aplicación. Procede en pequeños pasos, pprimero haz por ejemplo: el componente <i>Header</i> y solo cuando confirmes que funciona, podrás continuar con el siguiente componente.
+**ADVERTENCIA** No trates de programar todos los componentes de corrido, porque esto podría ciertamente romper toda la aplicación. Procede en pequeños pasos, primero haz por ejemplo: el componente <i>Header</i> y solo cuando confirmes que funciona, podrás continuar con el siguiente componente.
 
 El progreso cuidadoso y en pequeños pasos puede parecer lento, pero en realidad es <i>con diferencia la forma más rápida</i> de progresar. El famoso desarrollador de software Robert "Uncle Bob" Martin ha declarado
 
