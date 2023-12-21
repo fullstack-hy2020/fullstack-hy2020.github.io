@@ -11,7 +11,7 @@ Ahora comenzaremos a familiarizarnos con probablemente el tema más importante d
 
 La forma más fácil de empezar es utilizando una herramienta llamada [Vite](https://es.vitejs.dev/).
 
-Comencemos creando una aplización llamada <i>part1</i>, navegar a este direcctorio e instalando las librerias:
+Comencemos creando una aplicación llamada <i>part1</i>, navegar a este direcctorio e instalando las librerias:
 
 ```bash
 # npm 6.x (desactualizado, pero aun en uso por algunos):
