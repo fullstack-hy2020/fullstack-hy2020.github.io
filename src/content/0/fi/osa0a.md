@@ -164,7 +164,7 @@ Koe tehdään tehtävien palautusjärjestelmässä. Pääset tekemään kokeen s
 
 ![](../../images/0/enroll1.png)
 
-Tallettaa Helsingin Yliopiston opiskelijanumerosi [palautussovellukseen](https://studies.cs.helsinki.fi/stats/myinfo) ilmoittautumisen jälkeen:
+Tallenna Helsingin Yliopiston opiskelijanumerosi [palautussovellukseen](https://studies.cs.helsinki.fi/stats/myinfo) ilmoittautumisen jälkeen:
 
 ![](../../images/0/28b.png)
 
