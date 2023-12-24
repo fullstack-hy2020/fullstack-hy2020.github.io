@@ -392,7 +392,7 @@ Tenga en cuenta que el atributo <i>key</i> ahora debe definirse para los compone
 
 Se puede escribir una aplicación React completa en un solo archivo. Aunque eso, por supuesto, no es muy práctico. La práctica común es declarar cada componente en su propio archivo como un <i>módulo ES6</i>.
 
-Hemos estado usando módulos todo el tiempo. Las primeras líneas del archivo:
+Hemos estado usando módulos todo el tiempo. Las primeras líneas del archivo <i>main.jsx</i>:
 
 ```js
 import React from 'react'
@@ -405,8 +405,8 @@ Movamos nuestro componente <i>Note</i> a su propio módulo.
 
 En aplicaciones más pequeñas, los componentes generalmente se colocan en un directorio llamado <i>components</i>, que a su vez se ubica dentro del directorio <i>src</i>. La convención es nombrar el archivo después del componente.
 
-Ahora crearemos un directorio llamado <i>components</i> para nuestra aplicación y colocaremos un archivo llamado <i>Note.js</i> dentro.
-El contenido del archivo Note.js es el siguiente:
+Ahora crearemos un directorio llamado <i>components</i> para nuestra aplicación y colocaremos un archivo llamado <i>Note.jsx</i> dentro.
+El contenido del archivo es el siguiente:
 
 ```js
 import React from 'react'
@@ -426,7 +426,7 @@ Toma en cuenta que en versiones recientes de React ya no es necesario importar R
 
 Si necesitamos importar React para usar Hooks y otras funciones exportadas que React provee. Lea más sobre esto [aquí](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html).
 
-Ahora el archivo que está usando el componente - <i>index.js</i> - puede [importar](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) el módulo:
+Ahora el archivo que está usando el componente - <i>index.jsx</i> - puede [importar](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) el módulo:
 
 ```js
 import React from 'react'
@@ -446,7 +446,7 @@ Tenga en cuenta que al importar nuestros propios componentes, se debe dar su ubi
 './components/Note'
 ```
 
-El punto - <i>.</i> - al principio se refiere al directorio actual, por lo que la ubicación del módulo es un archivo llamado <i>Note.js</i> en el subdirectorio <i>components</i> del directorio actual. La extensión del nombre de archivo - _.js_ - se puede omitir.
+El punto - <i>.</i> - al principio se refiere al directorio actual, por lo que la ubicación del módulo es un archivo llamado <i>Note.jsx</i> en el subdirectorio <i>components</i> del directorio actual. La extensión del nombre de archivo - _.jsx_ - se puede omitir.
 
 <i>App</i> también es un componente, así que vamos a declararlo también en su propio módulo. Dado que es el componente raíz de la aplicación, lo colocaremos en el directorio <i>src</i>. El contenido del archivo es el siguiente:
 
@@ -470,7 +470,7 @@ const App = ({ notes }) => {
 export default App // highlight-line
 ```
 
-Lo que queda en el archivo <i>index.js</i> es:
+Lo que queda en el archivo <i>index.jsx</i> es:
 
 ```js
 import React from 'react'
