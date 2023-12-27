@@ -905,7 +905,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 ### A true full stack developer's oath
 
-It is again time for the exercises. The complexity of our app is now taken another step since besides frontend and backend we also have a database. 
+It is again time for the exercises. The complexity of our app has now taken another step since besides frontend and backend we also have a database. 
 There are indeed really many potential sources of error.
 
 So we should once more extend our oath:
