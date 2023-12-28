@@ -76,8 +76,8 @@ npm install --global expo-cli
 expo init rate-repository-app --template expo-template-blank@sdk-44 --npm
 ```
 
-<!-- Note, that the <em>@sdk-44</em> sets the project's <i>Expo SDK version to 44</i>, which supports <i>React Native version 0.64</i>. Using other Expo SDK version might cause you trouble while following this material. Also, Expo has few limitations when compared to plain React Native CLI, more on them [here](https://docs.expo.io/introduction/why-not-expo/). However, these limitations have no effect on the application implemented in the material.-->
- 注意，<em>@sdk-44</em>设置项目的<i>Expo SDK版本为44</i>，它支持<i>React Native版本0.64</i>。使用其他Expo SDK版本可能会给你带来麻烦，因为你要遵循本材料。另外，与普通的React Native CLI相比，Expo有一些限制，更多关于这些限制[这里](https://docs.expo.io/introduction/why-not-expo/)。然而，这些限制对材料中实现的应用没有影响。
+<!-- Note, that the <em>@sdk-44</em> sets the project's <i>Expo SDK version to 44</i>, which supports <i>React Native version 0.64</i>. Using other Expo SDK version might cause you trouble while following this material. Also, Expo has few limitations when compared to plain React Native CLI, more on them [here](https://docs.expo.dev/faq/#limitations). However, these limitations have no effect on the application implemented in the material.-->
+ 注意，<em>@sdk-44</em>设置项目的<i>Expo SDK版本为44</i>，它支持<i>React Native版本0.64</i>。使用其他Expo SDK版本可能会给你带来麻烦，因为你要遵循本材料。另外，与普通的React Native CLI相比，Expo有一些限制，更多关于这些限制[这里](https://docs.expo.dev/faq/#limitations)。然而，这些限制对材料中实现的应用没有影响。
 
 <!-- Now that our application has been initialized, open the created <i>rate-repository-app</i> directory with an editor such as [Visual Studio Code](https://code.visualstudio.com/). The structure should be more or less the following:-->
  现在我们的应用已经被初始化了，用一个编辑器如[Visual Studio Code](https://code.visualstudio.com/)打开创建的<i>rate-repository-app</i>目录。其结构应该大致如下。
