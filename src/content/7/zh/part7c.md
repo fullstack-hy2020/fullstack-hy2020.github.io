@@ -78,8 +78,8 @@ const App = () => {
 
 ![](../../images/7/6ea.png)
 
-<!-- Next, let's make some changes to the <i>Notes</i> component, so that it renders the list of notes as a [table](https://getbootstrap.com/docs/4.1/content/tables/). React Bootstrap provides a built-in [Table](https://react-bootstrap.github.io/components/table/) component for this purpose, so there is no need to define CSS classes separately.-->
- 接下来，让我们对<i>Notes</i>组件做一些修改，使其将笔记列表渲染成一个[表格](https://getbootstrap.com/docs/4.1/content/tables/)。React Bootstrap为此提供了一个内置的[Table](https://react-bootstrap.github.io/components/table/)组件，所以不需要再单独定义CSS类。
+<!-- Next, let's make some changes to the <i>Notes</i> component, so that it renders the list of notes as a [table](https://getbootstrap.com/docs/4.1/content/tables/). React Bootstrap provides a built-in [Table](https://react-bootstrap.github.io/docs/components/table/) component for this purpose, so there is no need to define CSS classes separately.-->
+ 接下来，让我们对<i>Notes</i>组件做一些修改，使其将笔记列表渲染成一个[表格](https://getbootstrap.com/docs/4.1/content/tables/)。React Bootstrap为此提供了一个内置的[Table](https://react-bootstrap.github.io/docs/components/table/)组件，所以不需要再单独定义CSS类。
 
 ```js
 const Notes = ({ notes }) => (
@@ -122,8 +122,8 @@ import { Table } from 'react-bootstrap'
 <!-- Let's improve the form in the <i>Login</i> view with the help of Bootstrap [forms](https://getbootstrap.com/docs/4.1/components/forms/).-->
  让我们在Bootstrap[表单](https://getbootstrap.com/docs/4.1/components/forms/)的帮助下改进<i>Login</i>视图中的表单。
 
-<!-- React Bootstrap provides built-in [components](https://react-bootstrap.github.io/forms/overview/) for creating forms (although the documentation for them is slightly lacking):-->
- React Bootstrap为创建表单提供了内置的[组件](https://react-bootstrap.github.io/forms/overview/)(尽管它们的文档略显不足)。
+<!-- React Bootstrap provides built-in [components](https://react-bootstrap.github.io/docs/forms/overview/) for creating forms (although the documentation for them is slightly lacking):-->
+ React Bootstrap为创建表单提供了内置的[组件](https://react-bootstrap.github.io/docs/forms/overview/)(尽管它们的文档略显不足)。
 
 ```js
 let Login = (props) => {
@@ -198,8 +198,8 @@ const App = () => {
 ```
 
 
-<!-- We will render the message as a Bootstrap [Alert](https://getbootstrap.com/docs/4.1/components/alerts/) component. Once again, the React Bootstrap library provides us with a matching [React component](https://react-bootstrap.github.io/components/alerts/):-->
- 我们将把消息渲染成一个Bootstrap [Alert](https://getbootstrap.com/docs/4.1/components/alerts/)组件。再一次，React Bootstrap库为我们提供了一个匹配的[React组件](https://react-bootstrap.github.io/components/alerts/)。
+<!-- We will render the message as a Bootstrap [Alert](https://getbootstrap.com/docs/4.1/components/alerts/) component. Once again, the React Bootstrap library provides us with a matching [React component](https://react-bootstrap.github.io/docs/components/alerts/):-->
+ 我们将把消息渲染成一个Bootstrap [Alert](https://getbootstrap.com/docs/4.1/components/alerts/)组件。再一次，React Bootstrap库为我们提供了一个匹配的[React组件](https://react-bootstrap.github.io/docs/components/alerts/)。
 
 ```js
 <div className="container">
@@ -216,8 +216,8 @@ const App = () => {
 
 #### Navigation structure
 
-<!-- Lastly, let's alter the application's navigation menu to use Bootstrap's [Navbar](https://getbootstrap.com/docs/4.1/components/navbar/) component. The React Bootstrap library provides us with [matching built-in components](https://react-bootstrap.github.io/components/navbar/#navbars-mobile-friendly). Through trial and error, we end up with a working solution in spite of the cryptic documentation:-->
- 最后，让我们改变应用的导航菜单，使用Bootstrap的[Navbar](https://getbootstrap.com/docs/4.1/components/navbar/) 组件。React Bootstrap库为我们提供了[匹配的内置组件](https://react-bootstrap.github.io/components/navbar/#navbars-mobile-friendly)。通过试验和错误，我们最终得到了一个可行的解决方案，尽管文档中的内容很隐晦。
+<!-- Lastly, let's alter the application's navigation menu to use Bootstrap's [Navbar](https://getbootstrap.com/docs/4.1/components/navbar/) component. The React Bootstrap library provides us with [matching built-in components](https://react-bootstrap.github.io/docs/components/navbar/#responsive-behaviors). Through trial and error, we end up with a working solution in spite of the cryptic documentation:-->
+ 最后，让我们改变应用的导航菜单，使用Bootstrap的[Navbar](https://getbootstrap.com/docs/4.1/components/navbar/) 组件。React Bootstrap库为我们提供了[匹配的内置组件](https://react-bootstrap.github.io/docs/components/navbar/#responsive-behaviors)。通过试验和错误，我们最终得到了一个可行的解决方案，尽管文档中的内容很隐晦。
 
 ```js
 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">

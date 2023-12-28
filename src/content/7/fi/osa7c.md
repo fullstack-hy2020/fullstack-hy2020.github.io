@@ -31,7 +31,7 @@ Asennetaan kirjasto:
 npm install react-bootstrap
 ```
 
-Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> tagin <i>head</i> sisään [Bootstrapin CSS-määrittelyt](https://react-bootstrap.github.io/getting-started/introduction#stylesheets) lataava rivi:
+Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> tagin <i>head</i> sisään [Bootstrapin CSS-määrittelyt](https://react-bootstrap.github.io/docs/getting-started/introduction#stylesheets) lataava rivi:
 
 ```js
 <head>
@@ -69,7 +69,7 @@ Sovelluksen ulkoasu muuttuu siten, että sisältö ei ole enää yhtä kiinni se
 
 #### Taulukko
 
-Muutetaan seuraavaksi komponenttia <i>Notes</i> siten, että se renderöi muistiinpanojen listan [taulukkona](https://getbootstrap.com/docs/4.1/content/tables/). React-Bootstrap tarjoaa valmiin komponentin [Table](https://react-bootstrap.github.io/components/table/), joten CSS-luokan käyttöön ei ole tarvetta.
+Muutetaan seuraavaksi komponenttia <i>Notes</i> siten, että se renderöi muistiinpanojen listan [taulukkona](https://getbootstrap.com/docs/4.1/content/tables/). React-Bootstrap tarjoaa valmiin komponentin [Table](https://react-bootstrap.github.io/docs/components/table/), joten CSS-luokan käyttöön ei ole tarvetta.
 
 ```js
 const Notes = ({ notes }) => (
@@ -109,7 +109,7 @@ import { Table } from 'react-bootstrap'
 
 Parannellaan seuraavaksi näkymän <i>Login</i> kirjautumislomaketta Bootstrapin [lomakkeiden](https://getbootstrap.com/docs/4.1/components/forms/) avulla.
 
-React-Bootstrap tarjoaa valmiit [komponentit](https://react-bootstrap.github.io/forms/overview/) myös lomakkeiden muodostamiseen (dokumentaatio tosin ei ole paras mahdollinen):
+React-Bootstrap tarjoaa valmiit [komponentit](https://react-bootstrap.github.io/docs/forms/overview/) myös lomakkeiden muodostamiseen (dokumentaatio tosin ei ole paras mahdollinen):
 
 ```js
 let Login = (props) => {
@@ -180,7 +180,7 @@ const App = () => {
 }
 ```
 
-ja renderöidään viesti Bootstrapin [Alert](https://getbootstrap.com/docs/4.1/components/alerts/)-komponentin avulla. React-Bootstrap tarjoaa tähän jälleen valmiin [React-komponentin](https://react-bootstrap.github.io/components/alerts/):
+ja renderöidään viesti Bootstrapin [Alert](https://getbootstrap.com/docs/4.1/components/alerts/)-komponentin avulla. React-Bootstrap tarjoaa tähän jälleen valmiin [React-komponentin](https://react-bootstrap.github.io/docs/components/alerts/):
 
 ```js
 <div className="container">
@@ -197,7 +197,7 @@ ja renderöidään viesti Bootstrapin [Alert](https://getbootstrap.com/docs/4.1/
 
 #### Navigaatiomenu
 
-Muutetaan vielä lopuksi sovelluksen navigaatiomenu käyttämään Bootstrapin [Navbaria](https://getbootstrap.com/docs/4.1/components/navbar/). Tähänkin React-Bootstrap tarjoaa [valmiit komponentit](https://react-bootstrap.github.io/components/navbar/#navbars-mobile-friendly). Dokumentaatio on hieman kryptistä, mutta trial and error johtaa lopulta toimivaan ratkaisuun:
+Muutetaan vielä lopuksi sovelluksen navigaatiomenu käyttämään Bootstrapin [Navbaria](https://getbootstrap.com/docs/4.1/components/navbar/). Tähänkin React-Bootstrap tarjoaa [valmiit komponentit](https://react-bootstrap.github.io/docs/components/navbar/#responsive-behaviors). Dokumentaatio on hieman kryptistä, mutta trial and error johtaa lopulta toimivaan ratkaisuun:
 
 ```js
 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
