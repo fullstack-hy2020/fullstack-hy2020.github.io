@@ -1041,8 +1041,8 @@ query {
 
 <!-- The application we created in this part is not optimally structured: we did some cleanups but much would still need to be done. Examples for better structuring of GraphQL applications can be found on the internet. For example, for the server-->
  我们在这部分创建的应用的结构并不理想：我们做了一些清理工作，但仍需要做很多事情。在互联网上可以找到更好的GraphQL应用结构的例子。例如，对于服务器
-<!-- [here](https://blog.apollographql.com/modularizing-your-graphql-schema-code-d7f71d5ed5f2) and the client [here](https://medium.com/@peterpme/thoughts-on-structuring-your-apollo-queries-mutations-939ba4746cd8).-->
- [这里](https://blog.apollographql.com/modularizing-your-graphql-schema-code-d7f71d5ed5f2)和客户端[这里](https://medium.com/@peterpme/thoughts-onstructuring-your-apollo-queries-mutations-939ba4746cd8) 。
+<!-- [here](https://www.apollographql.com/blog/modularizing-your-graphql-schema-code) and the client [here](https://medium.com/@peterpme/thoughts-on-structuring-your-apollo-queries-mutations-939ba4746cd8).-->
+ [这里](https://www.apollographql.com/blog/modularizing-your-graphql-schema-code)和客户端[这里](https://medium.com/@peterpme/thoughts-onstructuring-your-apollo-queries-mutations-939ba4746cd8) 。
 
 <!-- GraphQL is already a pretty old technology, having been used by Facebook since 2012, so we can see it as "battle-tested" already. Since Facebook published GraphQL in 2015, it has slowly gotten more and more attention, and might in the near future threaten the dominance of REST. The death of REST has also already been [predicted](https://www.stridenyc.com/podcasts/52-is-2018-the-year-graphql-kills-rest). Even though that will not happen quite yet, GraphQL is absolutely worth [learning](https://blog.graphqleditor.com/javascript-predictions-for-2019-by-npm/).-->
  GraphQL已经是一个相当古老的技术，从2012年开始被Facebook使用，所以我们可以看到它已经是 "经过战斗考验的"。自从Facebook在2015年发布GraphQL以来，它慢慢得到了越来越多的关注，并可能在不久的将来威胁到REST的统治地位。REST的死亡也已经被[预测](https://www.stridenyc.com/podcasts/52-is-2018-the-year-graphql-kills-rest了)。即使这还不会发生，GraphQL也绝对值得[学习](https://blog.graphqleditor.com/javascript-predictions-for-2019-by-npm/)。
