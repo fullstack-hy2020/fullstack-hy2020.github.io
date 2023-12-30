@@ -359,7 +359,7 @@ Muuttuja _notesToShow_ saa arvokseen tilan _notes_ arvon ja koodi yrittää kuts
 
 Mistä tämä johtuu?
 
-Efektohookki asettaa tilaan _notes_ palvelimen palauttamat muistiinpanot funktiolla _setNotes_:
+Effect-hook asettaa tilaan _notes_ palvelimen palauttamat muistiinpanot funktiolla _setNotes_:
 
 ```js
   useEffect(() => {
