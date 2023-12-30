@@ -308,7 +308,7 @@ Osan lopussa on vielä muutama hieman haastavampi tehtävä. Voit tässä vaihee
 
 Eräs sovelluksessamme tekemä ratkaisu piilottaa yhden hyvin tyypillisen virhetilanteen, mihin tulet varmasti törmäämään monta kertaa.
 
-Alustimme muistiinpanot muistavan tilan alkuarvoksi tyhjän tauluon:
+Alustimme muistiinpanot muistavan tilan alkuarvoksi tyhjän taulukon:
 
 ```js
 const App = () => {
