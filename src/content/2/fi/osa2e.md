@@ -308,7 +308,7 @@ Osan lopussa on vielä muutama hieman haastavampi tehtävä. Voit tässä vaihee
 
 Eräs sovelluksessamme tekemä ratkaisu piilottaa yhden hyvin tyypillisen virhetilanteen, mihin tulet varmasti törmäämään monta kertaa.
 
-Alustimme muistiinpanot muistavan tilan alkuarvoksi tyhjän tauluon:
+Alustimme muistiinpanot muistavan tilan alkuarvoksi tyhjän taulukon:
 
 ```js
 const App = () => {
@@ -359,7 +359,7 @@ Muuttuja _notesToShow_ saa arvokseen tilan _notes_ arvon ja koodi yrittää kuts
 
 Mistä tämä johtuu?
 
-Efektohookki asettaa tilaan _notes_ palvelimen palauttamat muistiinpanot funktiolla _setNotes_:
+Effect-hook asettaa tilaan _notes_ palvelimen palauttamat muistiinpanot funktiolla _setNotes_:
 
 ```js
   useEffect(() => {
@@ -532,7 +532,7 @@ if (currency) {
 }
 ```
 
-joka estää valuuttakurssien hakemisen ensimmäisen renderöininin yhteydessä, eli siinä vaiheessa kuin muuttujalla _currency_ on vasta alkuarvo eli tyhjää merkkijono.
+joka estää valuuttakurssien hakemisen ensimmäisen renderöininin yhteydessä, eli siinä vaiheessa kuin muuttujalla _currency_ on vasta alkuarvo eli _null_.
 
 Jos käyttäjä siis kirjoittaa hakukenttään esim. <i>eur</i>, suorittaa sovellus Axiosin avulla HTTP GET ‑pyynnön osoitteeseen https://open.er-api.com/v6/latest/eur ja tallentaa vastauksen tilaaan _rates_. 
 
