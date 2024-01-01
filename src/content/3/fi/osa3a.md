@@ -284,11 +284,11 @@ let notes = [
   ...
 ]
 
-app.get('/', (req, res) => {
+app.get('/', (request, response) => {
   res.send('<h1>Hello World!</h1>')
 })
 
-app.get('/api/notes', (req, res) => {
+app.get('/api/notes', (request, response) => {
   res.json(notes)
 })
 
