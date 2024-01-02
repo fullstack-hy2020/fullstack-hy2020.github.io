@@ -77,7 +77,7 @@ Kymmenen vuoden ajan PaaS-ratkaisujen ykkönen on ollut [Heroku](http://heroku.c
 
 Esittelemme seuraavassa kaksi hieman uudempaa palvelua [Fly.io:n](https://fly.io/):n sekä [Renderin](https://render.com/). Molemmilla on tarjolla jonkin verran ilmaista laskenta-aikaa.
 
-Hienoinen ikävä puoli Fly.io:ssa on se, että <i>saatat</i> joutua kertomaan palvelulle luottokorttitietosi vaikka <i>et käytä</i> palvelun maksullista osaa. Renderin käyttöönotto saattaa olla jossain tapauksissa helpompaa, sillä Render ei edellytä mitään asenuksia omalle koneelle.
+Hienoinen ikävä puoli Fly.io:ssa on se, että <i>saatat</i> joutua kertomaan palvelulle luottokorttitietosi vaikka <i>et käytä</i> palvelun maksullista osaa. Renderin käyttöönotto saattaa olla jossain tapauksissa helpompaa, sillä Render ei edellytä mitään asennuksia omalle koneelle.
 
 Molempia ratkaisuja varten muutetaan tiedoston <i>index.js</i> lopussa olevaa sovelluksen käyttämän portin määrittelyä seuraavasti:
 
