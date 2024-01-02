@@ -367,7 +367,7 @@ Renderin tapauksessa skriptit näyttävät seuraavalta:
 
 Skripteistä _npm run build:ui_ kääntää ui:n tuotantoversioksi ja kopioi sen.
 
-_npm run deploy:full_ sisältää edellisen lisää vaadittavat <i>git</i>-komennot versionhallinnan päivittämistä varten.
+_npm run deploy:full_ sisältää edellisen lisäksi vaadittavat <i>git</i>-komennot versionhallinnan päivittämistä varten.
 
 Huomaa, että skriptissä <i>build:ui</i> olevat polut riippuvat repositorioiden sijainnista.
 
