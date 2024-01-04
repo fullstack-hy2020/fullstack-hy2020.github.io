@@ -511,7 +511,7 @@ Abra a guia <i>Rede (Network)</i> e esvazie-a. Quando você criar uma nova nota,
 
 ![Guia Rede nas Ferramentas do Desenvolvedor](../../images/0/26e.png)
 
-A requisição POST para o endereço <i>new_note_spa</i> contém a nova nota como dados JSON, contendo tanto o conteúdo da nota (<i>content</i>) quanto o timestamp (<i>date</i>):
+A requisição POST para o endereço <i>new\_note\_spa</i> contém a nova nota como dados JSON, contendo tanto o conteúdo da nota (<i>content</i>) quanto o timestamp (<i>date</i>):
 
 ```js
 {
