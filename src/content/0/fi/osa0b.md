@@ -506,7 +506,7 @@ Avaa nyt <i>Network</i>-välilehti ja tyhjennä se &#x29B8;-symbolilla. Kun luot
 
 ![](../../images/0/26e.png)
 
-Pyyntö kohdistuu osoitteeseen <i>new_note_spa</i>, on tyypiltään POST ja se sisältää JSON-muodossa olevan uuden muistiinpanon, johon kuuluu sekä sisältö (<i>content</i>) että aikaleima (<i>date</i>):
+Pyyntö kohdistuu osoitteeseen <i>new\_note\_spa</i>, on tyypiltään POST ja se sisältää JSON-muodossa olevan uuden muistiinpanon, johon kuuluu sekä sisältö (<i>content</i>) että aikaleima (<i>date</i>):
 
 ```js
 {
