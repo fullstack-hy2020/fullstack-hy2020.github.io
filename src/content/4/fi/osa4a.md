@@ -403,7 +403,7 @@ Rakennamme tämän osan tehtävissä <i>blogilistasovellusta</i>, jonka avulla k
 npm install mongoose@7.6.5
 ```
 
-Joudumme käyttämään hieman vanhempaa versiota uusin Mongoose-versio ei tue kirjastoa, jota tulemme käyttämään kurssin myöhemmässä osassa!
+Joudumme käyttämään hieman vanhempaa versiota, sillä uusin Mongoose-versio ei tue kirjastoa, jota tulemme käyttämään kurssin myöhemmässä osassa!
 
 
 #### 4.1 blogilista, step1
