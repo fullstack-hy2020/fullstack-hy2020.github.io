@@ -567,7 +567,7 @@ However, a [better option](https://community.fly.io/t/clarification-on-environme
 and set the env value from the command line with the command:
 
 ```bash
-fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
+fly secrets set MONGODB_URI="mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority"
 ```
 
 Since the PORT also is defined in our .env it is actually essential to ignore the file in Fly.io since otherwise the app starts in the wrong port.
