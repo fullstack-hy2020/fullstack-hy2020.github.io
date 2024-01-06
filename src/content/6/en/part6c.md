@@ -531,7 +531,7 @@ const store = configureStore({
 export default store
 ```
 
-After the changes, the content of the <i>index.js</i> is the following:
+After the changes, the content of the <i>main.jsx</i> is the following:
 
 ```js
 import React from 'react'
