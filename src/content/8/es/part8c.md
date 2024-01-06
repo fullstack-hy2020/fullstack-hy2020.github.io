@@ -333,8 +333,6 @@ En el explorador de Apollo, el header se puede agregar de la siguiente manera:
 
 ![apollo explorer con énfasis en los headers](../../images/8/24x.png)
 
-Modify the startup of the backend by giving the function that handles the startup [startStandaloneServer](https://www.apollographql.com/docs/apollo-server/api/standalone/) another parameter [context](https://www.apollographql.com /docs/apollo-server/data/context/)
-
 Modifica el inicio del backend dando a la función que maneja el inicio [startStandaloneServer](https://www.apollographql.com/docs/apollo-server/api/standalone/) otro parámetro [context](https://www.apollographql.com/docs/apollo-server/data/context/)
 
 ```js
