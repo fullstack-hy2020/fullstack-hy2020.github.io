@@ -80,7 +80,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 
 El motivo es que la declaración podría devolver null pero _ReactDOM.createRoot_ no acepta null como parámetro. Con el [operador !](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#non-null-assertion-operator-postfix-), es posible afirmarle al compilador de TypeScript que el valor no es null.
 
-Anteriormente en esta parte [advertimos](/es/part9/primeros_pasos_con_type_script#asercion-de-tipos) acerca de los peligros de las aserciones de tipo, pero en nuestro caso la aserción esta bien ya que estamos seguros de que el archivo *index.html* tiene este id y la función siempre devuelve un HTMLElement.
+Anteriormente en esta parte [advertimos](/es/part9/primeros_pasos_con_type_script#asercion-de-tipos) acerca de los peligros de las aserciones de tipo, pero en nuestro caso la aserción está bien ya que estamos seguros de que el archivo *index.html* tiene este id y la función siempre devuelve un HTMLElement.
 
 ### Componentes de React con TypeScript
 
@@ -103,7 +103,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 )
 ```
 
-En este ejemplo tenemos un componente llamado *Welcome* al que pasamos un *name* como prop.Luego muestra el nombre en la pantalla. Sabemos que *name* debe ser un string, y usamos el paquete [prop-types](https://www.npmjs.com/package/prop-types) presentado en la [parte 5](/es/part5/props_children_y_proptypes#prop-types) para recibir sugerencias sobre los tipos deseados de props en el componente y advertencias sobre tipos de props no válidos.
+En este ejemplo tenemos un componente llamado *Welcome* al que pasamos un *name* como prop. Luego muestra el nombre en la pantalla. Sabemos que *name* debe ser un string, y usamos el paquete [prop-types](https://www.npmjs.com/package/prop-types) presentado en la [parte 5](/es/part5/props_children_y_proptypes#prop-types) para recibir sugerencias sobre los tipos deseados de props en el componente y advertencias sobre tipos de props no válidos.
 
 Con TypeScript ya no necesitamos el paquete *prop-types*. Podemos definir los tipos con la ayuda de TypeScript, de la misma forma en que definimos los tipos de una función regular, ya que los componentes de React no son más que meras funciones. Utilizaremos una interface para los tipos de los parámetros (p.ej. props) y *JSX.Element* como en valor de retorno para cualquier componente de React:
 
@@ -129,7 +129,7 @@ Hemos definido un nuevo tipo, *WelcomeProps*, y lo hemos pasado como tipo de los
 const Welcome = (props: WelcomeProps): JSX.Element => {
 ```
 
-Podrías escribir la misma cosa usando una sintaxis mas verbosa:
+Podrías escribir la misma cosa usando una sintaxis más verbosa:
 
 ```jsx
 const Welcome = ({ name }: { name: string }): JSX.Element => (
@@ -248,7 +248,7 @@ const App = () => {
 
 ### Uso de tipos en profundidad
 
-En el ejercicio anterior teníamos tres partes de un curso, y todas las partes tenían los mismos atributos *name* y *exerciseCount*. Pero, ¿qué pasaría si necesitáramos atributos adicionales para una parte especifica? ¿Cómo se vería esto en el código? Consideremos el siguiente ejemplo:
+En el ejercicio anterior teníamos tres partes de un curso, y todas las partes tenían los mismos atributos *name* y *exerciseCount*. Pero, ¿qué pasaría si necesitáramos atributos adicionales para una parte específica? ¿Cómo se vería esto en el código? Consideremos el siguiente ejemplo:
 
 ```js
 const courseParts = [
@@ -370,7 +370,7 @@ Inmediatamente recibiremos un error en el editor:
 
 ![vscode exerciseCount no es asignable a tipo CoursePart - falta la descripción](../../images/9/63new.png)
 
-Ya que nuestra nueva entrada tiene el atributo *kind* con valor *"basic"*, Typescript sabe que la entrada no tiene solo el tipo *CoursePart* pero en realidad esta destinado a ser un *CoursePartBasic*. Entonces, aquí el atributo *kind* "estrecha" el tipo de la entrada desde un tipo más general a un tipo más especifico que contiene un cierto conjunto de atributos. ¡Pronto veremos esta clase de estrechamiento de tipos en acción en nuestro código!
+Ya que nuestra nueva entrada tiene el atributo *kind* con valor *"basic"*, Typescript sabe que la entrada no tiene solo el tipo *CoursePart* pero en realidad está destinado a ser un *CoursePartBasic*. Entonces, aquí el atributo *kind* "estrecha" el tipo de la entrada desde un tipo más general a un tipo más específico que contiene un cierto conjunto de atributos. ¡Pronto veremos esta clase de estrechamiento de tipos en acción en nuestro código!
 
 ¡Pero todavía no estamos satisfechos! Todavía hay mucha duplicación en nuestros tipos y queremos evitar eso. Comenzamos identificando los atributos que todas las partes del curso tienen en común y definiendo un tipo base que los contenga. Luego, [extenderemos](https://www.typescriptlang.org/docs/handbook/2/objects.html#extending-types) ese tipo base para crear nuestros tipos específicos:
 
@@ -409,11 +409,11 @@ Si intentamos acceder a los objetos del array *courseParts: CoursePart[]* notamo
 
 Y por supuesto, la [documentación de TypeScript](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#working-with-union-types) dice esto:
 
-> *Typescript solo permitirá una operación (o acceso a atributos) si es valida para cada miembro de la unión*
+> *Typescript solo permitirá una operación (o acceso a atributos) si es válida para cada miembro de la unión*
 
 La documentación también menciona lo siguiente:
 
-> *La solución es estrechar la unión con código... El estrechamiento ocurre cuando TypeScript puede deducir un tipo más especifico para un valor basado en la estructura del código.*
+> *La solución es estrechar la unión con código... El estrechamiento ocurre cuando TypeScript puede deducir un tipo más específico para un valor basado en la estructura del código.*
 
 Entonces, una vez más, ¡el [estrechamiento de tipos](https://www.typescriptlang.org/docs/handbook/2/narrowing.html) viene al rescate!
 
@@ -423,9 +423,9 @@ Una forma práctica de estrechar esta clase de tipos en TypeScript es mediante e
 
 En el ejemplo anterior, TypeScript sabe que un *part* tiene el tipo *CoursePart* y, entonces puede inferir que *part* es de tipo *CoursePartBasic*, *CoursePartGroup* o *CoursePartBackground* basado en el valor del atributo *kind*.
 
-La técnica especifica de estrechamiento de tipos en donde una unión de tipos es estrechada basada en el atributo literal de un valor se llama [unión discriminada](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#discriminated-unions).
+La técnica específica de estrechamiento de tipos en donde una unión de tipos es estrechada basada en el atributo literal de un valor se llama [unión discriminada](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#discriminated-unions).
 
-Ten en cuenta que naturalmente, el estrechamiento puede también hacerse con la clausula *if*. Podríamos, por ejemplo, hacer lo siguiente:
+Ten en cuenta que naturalmente, el estrechamiento puede también hacerse con la cláusula *if*. Podríamos, por ejemplo, hacer lo siguiente:
 
 ```js
   courseParts.forEach(part => {
@@ -461,7 +461,7 @@ default:
   return assertNever(part);
 ```
 
-y también removieramos el case que maneja al tipo *CoursePartBackground*, veríamos el siguiente error:
+y también removiéramos el case que maneja al tipo *CoursePartBackground*, veríamos el siguiente error:
 
 ![error de vscode: Argumento de tipo CoursePart no es asignable al tipo never](../../images/9/66new.png)
 
@@ -572,7 +572,7 @@ El resultado podría verse así:
 
 ### Aplicación de React con estado
 
-Hasta ahora, solo hemos mirado a una aplicación que mantiene todos sus datos en una variable tipada pero no tiene ningún estado. Volvamos una vez más a la aplicación de notas, y construyamos una version tipada.
+Hasta ahora, solo hemos mirado a una aplicación que mantiene todos sus datos en una variable tipada pero no tiene ningún estado. Volvamos una vez más a la aplicación de notas, y construyamos una versión tipada.
 
 Comenzamos con el siguiente código:
 
@@ -616,7 +616,7 @@ El tipo del array devuelto es el siguiente:
 
 Entonces, el primer elemento, asignado a *newNote* es un string y, el segundo elemento que asignamos a *setNewNote* tiene un tipo un poco más complejo. Notamos que allí se menciona a un string, entonces sabemos que debe ser el tipo de una función que establece un valor de datos. Mira [esto](https://codewithstyle.info/Using-React-useState-hook-with-TypeScript/) si quieres aprender más acerca de los tipos de la función useState.
 
-De todo esto, hemos visto que TypeScript ha [inferido](https://www.typescriptlang.org/docs/handbook/type-inference.html#handbook-content) el tipo del primer useState bastante bien, esta creando un estado con tipo string.
+De todo esto, hemos visto que TypeScript ha [inferido](https://www.typescriptlang.org/docs/handbook/type-inference.html#handbook-content) el tipo del primer useState bastante bien, está creando un estado con tipo string.
 
 Cuando miramos al segundo useState que tiene el valor inicial *[]* el tipo se ve bastante diferente.
 
@@ -627,7 +627,7 @@ useState<never[]>(initialState: never[] | (() => never[])):
 
 TypeScript solo puede inferir que el estado tiene el tipo *never[]*, es un array, pero no tiene ni idea de cuales son los elementos guardados en el array. Entonces, claramente necesitamos ayudar al compilador y proveerle el tipo explícitamente.
 
-Una de las mejores fuentes de información sobre como tipar React es [React TypeScript Cheatsheet](https://react-typescript-cheatsheet.netlify.app/). El capitulo del Cheatsheet sobre el hook [useState](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/hooks#usestate) nos instruye en usar un *parámetro de tipo* en situaciones en las que el compilador no puede inferir el tipo.
+Una de las mejores fuentes de información sobre como tipar React es [React TypeScript Cheatsheet](https://react-typescript-cheatsheet.netlify.app/). El capítulo del Cheatsheet sobre el hook [useState](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/hooks#usestate) nos instruye en usar un *parámetro de tipo* en situaciones en las que el compilador no puede inferir el tipo.
 
 Ahora definamos un tipo para notes:
 
@@ -749,7 +749,7 @@ No funciona del todo bien, hay un error de ESlint quejándose acerca de any impl
 
 ![error de vscode event implícitamente tiene tipo any](../../images/9/68new.png)
 
-El compilador de TypeScript ahora no tiene ni idea de cual es el tipo del parámetro, por eso el tipo es el famoso any implícito que queremos [evitar](/es/part9/primeros_pasos_con_type_script#los-horrrores-de-any) a toda costa. React TypeScript cheatsheet viene otra vez al rescate, el capitulo sobre
+El compilador de TypeScript ahora no tiene ni idea de cual es el tipo del parámetro, por eso el tipo es el famoso any implícito que queremos [evitar](/es/part9/primeros_pasos_con_type_script#los-horrrores-de-any) a toda costa. React TypeScript cheatsheet viene otra vez al rescate, el capítulo sobre
 [formularios y eventos](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/forms_and_events) revela que el tipo correcto para el event handler es *React.SyntheticEvent*.
 
 El código se vuelve
@@ -793,7 +793,7 @@ const App = () => {
 }
 ```
 
-Y eso es todo, ¡nuestra aplicación esta lista y perfectamente tipada!
+Y eso es todo, ¡nuestra aplicación está lista y perfectamente tipada!
 
 ### Comunicándose con el servidor
 
@@ -845,11 +845,11 @@ Ahora podemos establecer los datos en el estado *notes* para tener al código fu
   }, [])
 ```
 
-Entonces, justo como con *useState*, le damos un tipo de parámetro a *axios.get* para instruirle como debe ser hecho el tipado. Al igual que *useState*, *axios.get* es una [función genérica](https://www.typescriptlang.org/docs/handbook/2/generics.html#working-with-generic-type-variables). A diferencia de algunas funciones genéricas, el tipo de parámetro de *axios.get* tiene un valor *any* por defecto, entonces, si la función es usada sin definir el tipo de parámetro, el tipo de los datos de la respuesta sera any.
+Entonces, justo como con *useState*, le damos un tipo de parámetro a *axios.get* para instruirle como debe ser hecho el tipado. Al igual que *useState*, *axios.get* es una [función genérica](https://www.typescriptlang.org/docs/handbook/2/generics.html#working-with-generic-type-variables). A diferencia de algunas funciones genéricas, el tipo de parámetro de *axios.get* tiene un valor *any* por defecto, entonces, si la función es usada sin definir el tipo de parámetro, el tipo de los datos de la respuesta será any.
 
 El código funciona, el compilador y ESlint están felices y permanecen quietos. Sin embargo, darle un parámetro de tipo a *axios.get* es una cosa potencialmente peligrosa. El body de la respuesta puede contener datos en una forma arbitraria, y cuando le damos un parámetro de tipo, esencialmente estamos diciéndole al compilador de TypeScript que confié en que los datos tienen el tipo *Note[]*.
 
-Entonces, nuestro código es esencialmente tan seguro como seria si utilizáramos una [aserción de tipo](/es/part9/primeros_pasos_con_type_script#asercion-de-tipos):
+Entonces, nuestro código es esencialmente tan seguro como sería si utilizáramos una [aserción de tipo](/es/part9/primeros_pasos_con_type_script#asercion-de-tipos):
 
 ```js
   useEffect(() => {
@@ -895,7 +895,7 @@ export type NewNote = Omit<Note, 'id'>
 
 Hemos agregado un nuevo tipo para la *nueva nota*, uno que todavía no tiene el campo *id* asignado.
 
-El código que se comunica con el backend también es extraído a un modulo en el archivo llamado *noteService.ts*
+El código que se comunica con el backend también es extraído a un módulo en el archivo llamado *noteService.ts*
 
 ```js
 import axios from 'axios';
@@ -916,7 +916,7 @@ export const createNote = (object: NewNote) => {
 }
 ```
 
-El componente *App* ahora es mucho mas claro:
+El componente *App* ahora es mucho más claro:
 
 ```js
 import { useState, useEffect } from "react";
@@ -952,7 +952,7 @@ const App = () => {
 }
 ```
 
-¡La aplicación ahora esta bien tipada y lista para ser más desarrollada!
+¡La aplicación ahora está bien tipada y lista para ser más desarrollada!
 
 El código de las notas tipadas puede ser encontrado [aquí](https://github.com/fullstack-hy2020/typed-notes)
 
