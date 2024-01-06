@@ -72,9 +72,7 @@ Los archivos <i>App.css</i> y <i>index.css</i>, y el directorio <i>assets</i> pu
 
 En lugar de Vite, tu puedes usar la vieja herramienta de generación [create-react-app](https://github.com/facebookincubator/create-react-app) en el curso para inicializar aplicaciones. La diferencia más visible es el nombre del archivo de arranque de la aplicación, el cual es <i>index.js</i>.
 
-La manera de iniciar la aplicacieon también es diferente en CRA, en esta se inicia con el comando
-
-Creemos una aplicación llamada <i>part1</i> y naveguemos hasta su directorio.
+La manera de iniciar la aplicación también es diferente en CRA, en esta se inicia con el comando
 
 ```bash
 npm start
@@ -87,6 +85,8 @@ npm run dev
 ```
 
 El curso actualmente (11 de agosto de 2023) está siendo actualizado para usar Vite. Algunas marcas aun usan la aplicación base creada con create-react-app.
+
+Creemos una aplicación llamada <i>part1</i> y naveguemos hasta su directorio.
 
 ### Componente
 
@@ -186,11 +186,11 @@ La primera regla del desarrollo web frontend:
 
 > <i>deja la consola abierta todo el tiempo</i>
 
-Repitados esto juntos: <i>Prometo dejar la consola abierta todo el tiempo</i> durante este curso, y por el resto de mi vida mientras esté haciendo desarrollo web.
+Repitamos esto juntos: <i>Prometo dejar la consola abierta todo el tiempo</i> durante este curso, y por el resto de mi vida mientras esté haciendo desarrollo web.
 
 También es posible renderizar contenido dinámico dentro de un componente.
 
-Modifiqua el componente de la siguiente manera:
+Modifica el componente de la siguiente manera:
 
 ```js
 const App = () => {
@@ -382,7 +382,7 @@ Yo realmente espero que tu consola esté abierta. Si no es asi, recuerda tu prom
 
 > <i>Prometo dejar la consola abierta todo el tiempo</i> durante este curso, y por el resto de mi vida mientras esté haciendo desarrollo web.
 
-EL desarrollo de software es dificil. Este se vuelve aun más dificil si uno no está usando todas las herramientas disponibles como la consola de desarrollo e imprimiendo la depuración con _console.log_. Los profesionales usan amnas <i>todo el tiempo</i> y no hay una sola razón de porque un principiante no debería adoptar estos maravillosos métodos de ayuda que hacen la vida más fácil.
+EL desarrollo de software es dificil. Este se vuelve aun más dificil si uno no está usando todas las herramientas disponibles como la consola de desarrollo e imprimiendo la depuración con _console.log_. Los profesionales usan ambas <i>todo el tiempo</i> y no hay una sola razón de porque un principiante no debería adoptar estos maravillosos métodos de ayuda que hacen la vida más fácil.
 
 ### Posible mensaje de error
 
@@ -633,7 +633,7 @@ Mira este [repositorio de ejemplo para el envio de ejercicios](https://github.co
 
 Para cada parte del curso hay un directorio, que se ramifica en directorios que contienen una serie de ejercicios, como "unicafe" para la parte 1.
 
-La mayoría de los ejercicios del curso construyen una aplicación más grande, por ejemplo: courseinfo, unicafe y anecdotes en esta parte, poco a poco. Es suficiente con enviar la aplicación terminada. Puedes hacer un commit después de cada ejercicio, pero no es obligatorio. Por ejemplo, la aplicación de información del curso se construye en los ejercicios 1.1.-1.5. En este caso solo necesitas enviarel resultado final del ejercicio 1.5.
+La mayoría de los ejercicios del curso construyen una aplicación más grande, por ejemplo: courseinfo, unicafe y anecdotes en esta parte, poco a poco. Es suficiente con enviar la aplicación terminada. Puedes hacer un commit después de cada ejercicio, pero no es obligatorio. Por ejemplo, la aplicación de información del curso se construye en los ejercicios 1.1.-1.5. En este caso solo necesitas enviar el resultado final del ejercicio 1.5.
 
 Por cada aplicación web para una serie de ejercicios, se recomienda enviar todos los archivos relacionados con esa aplicación, excepto para el directorio <i>node\_modules</i>.
 
