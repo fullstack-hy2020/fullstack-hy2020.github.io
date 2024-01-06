@@ -719,7 +719,7 @@ app.get('/api/notes/:id', (request, response) => {
     })
     .catch(error => {
       console.log(error)
-      response.status(400).send({ error: 'malformatted id' }) // highlight-line
+      response.status(400).json({ error: 'malformatted id' }) // highlight-line
     })
 })
 ```
@@ -737,7 +737,7 @@ It's never a bad idea to print the object that caused the exception to the conso
 ```js
 .catch(error => {
   console.log(error)  // highlight-line
-  response.status(400).send({ error: 'malformatted id' })
+  response.status(400).json({ error: 'malformatted id' })
 })
 ```
 
