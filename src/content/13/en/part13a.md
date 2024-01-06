@@ -615,11 +615,11 @@ On the command-line, create a <i>blogs</i> table for the application with the fo
 
 Add at least two blogs to the database.
 
-Save the SQL-commands you used at the root of the application repository in the file called <i>commands.sql</i>
+Save the SQL-commands you used at the root of the application repository in a file called <i>commands.sql</i>
 
 #### Exercise 13.3.
 
-Create functionality in your application, which prints the blogs in the database on the command-line, e.g. as follows:
+Create a functionality in your application which prints the blogs in the database on the command-line, e.g. as follows:
 
 ```bash
 $ node cli.js
