@@ -562,7 +562,7 @@ La méthode _find_ des tableaux, désormais bien connue, est utilisée pour trou
 Lorsque nous testons notre application en allant sur <http://localhost:3001/api/notes/1> dans notre navigateur, nous remarquons qu'elle ne semble pas fonctionner, car le navigateur affiche une page vide. Ce n'est pas une surprise pour nous, développeurs de logiciels, et il est temps de déboguer.
 
 
-Adding _console.log_ commands into our code is a time-proven trick:
+L'ajout de commandes console.log dans notre code est une astuce éprouvée:
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
