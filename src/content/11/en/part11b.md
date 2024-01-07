@@ -373,8 +373,6 @@ Once you are sure that the pipeline works, <i>write another test</i> that ensure
 
 **Note** the Pokemon abilities are written with lower case letters in the source code (the capitalization is done in CSS), so <i>do not</i> test for <i>Chlorophyll</i> but rather <i>chlorophyll</i>.
 
-**Note2** that you should not try <i>bulbasaur</i>, for some reason the page of that particular Pokemon does not work properly...
-
 The end result should be something like this
 
 ![e2e tests](../../images/11/9.png)
