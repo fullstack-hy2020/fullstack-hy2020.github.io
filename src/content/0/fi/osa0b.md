@@ -687,7 +687,7 @@ Kirjoita tarvittaessa palvelimella tai selaimessa tapahtuvat operaatiot sopivina
 
 Kaavion ei ole pakko olla sekvenssikaavio. Mikä tahansa järkevä kuvaustapa käy.
 
-Voit tehdä kaaviot, millä ohjelmistolla haluat, mutta suositeltava tapa on tehdä ne suoraan GitHubiin Markdown- eli md-päätteisiksi tiedostoiksi käyttäen [Mermaid](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams)-syntaksia.
+Voit tehdä kaaviot millä ohjelmistolla haluat, mutta suositeltava tapa on tehdä ne suoraan GitHubiin Markdown- eli md-päätteisiksi tiedostoiksi käyttäen [Mermaid](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams)-syntaksia.
 
 Kaikki oleellinen tieto tämän ja seuraavien kahden tehtävän tekemiseen on [tässä osassa](../osa0). Näiden tehtävien ideana on, että luet tekstin vielä kerran ja mietit tarkkaan, mitä missäkin tapahtuu. Ohjelman [koodin](https://github.com/mluukkai/example_app) lukemista ei näissä tehtävissä edellytetä, vaikka sekin on toki mahdollista.
 
