@@ -285,11 +285,11 @@ let notes = [
 ]
 
 app.get('/', (request, response) => {
-  res.send('<h1>Hello World!</h1>')
+  response.send('<h1>Hello World!</h1>')
 })
 
 app.get('/api/notes', (request, response) => {
-  res.json(notes)
+  response.json(notes)
 })
 
 const PORT = 3001
