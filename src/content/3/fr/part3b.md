@@ -81,7 +81,7 @@ Maintenant que toute la pile est prête, déplaçons notre application sur Inter
 Ajoutez un fichier appelé <i>Procfile</i> à la racine du projet backend pour indiquer à Heroku comment démarrer l'application. 
 
 ```bash
-web : node index.js
+web: node index.js
 ```
 
 Changez la définition du port que notre application utilise en bas du fichier <i>index.js</i> comme suit : 
