@@ -295,7 +295,7 @@ Ratkaisu toimii melkein:
 
 ![](../../images/1/33.png)
 
-Jostain syystä napien painellusten yhteenlaskettu määrä näyttää koko ajan yhtä liian vähän.
+Jostain syystä nappien painallusten yhteenlaskettu määrä näyttää koko ajan yhtä liian vähän.
 
 Lisätään tapahtumankäsittelijään muutama console.log:
 
