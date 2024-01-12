@@ -52,89 +52,86 @@ Let's define some things we **want** in this hypothetical deployment system too:
  - We would like it to be fast
  - We'd like to have no downtime during the deployment (this is distinct from the requirement we have for handling user requests just before/during the deployment).
 
-Next we will have three sets of exercises for automazing the deployment with GitHub Actions, one for [Fly.io](https://fly.io/), another one for [Render](https://render.com/) and finally the good old [Heroku](https://heroku.com). The process of deployment is always specific to the particular cloud provider, so you can also do both the exercise sets if you want to see the differences how these services work with respect to deployments.
+Next we will have three sets of exercises for automazing the deployment with GitHub Actions, one for [Fly.io](https://fly.io/), another one for [Render](https://render.com/). The process of deployment is always specific to the particular cloud provider, so you can also do both the exercise sets if you want to see the differences how these services work with respect to deployments.
+
+### Has the app been deployed?
+
+Since we are not making any real changes to the app, it might be a bit hard to see if the app deployment relly works.
+Let us create a dummy endpoint in the app that makes it possible to do some code changes and to ensure that the deployed version has really changed:
+
+```js
+app.get('/version', (req, res) => {
+  res.send('1') // change this string to ensure a new version deployed
+})
+```
 
 </div>
 
 <div class="tasks">
 
-### Exercises 11.10-11.12. (Fly.io)
+### Exercises 11.10-11.11. (Fly.io)
 
-Before going to the below exercises, you should setup your application in [Fly.io](https://fly.io/) hosting service like the one we did in [part 3](/en/part3/deploying_app_to_internet#application-to-the-internet).
+If you rather want to use other hosting options, there is an alternative set of exercises for [Render](/en/part11/deployment#exercises-11-10-11-12-render).
 
-If you rather want to use other hosting options, there is an alternative set of exercises for [Render](/en/part11/deployment#exercises-11-10-11-12-render) and for [Heroku](/en/part11/deployment#exercises-11-10-11-12-heroku).
+#### 11.10 Deploying your application to Fly.io
 
-In contrast to part 3 now we <i>do not deploy the code</i> to Fly.io ourselves (with the command <i>flyctl deploy</i>), we let the GitHub Actions workflow do that for us!
+Setup your application in [Fly.io](https://fly.io/) hosting service like the one we did in [part 3](/en/part3/deploying_app_to_internet#application-to-the-internet).
 
-Create a new app in Fly.io and after that generate a Fly.io API token with command
+In contrast to part 3, in this part we <i>do not deploy the code</i> to Fly.io ourselves (with the command <i>flyctl deploy</i>), we let the GitHub Actions workflow do that for us. 
+
+Before going to the automated deployment, we shall ensure in this exercise that the app can be deployed manually.
+
+So, create a new app in Fly.io. After that generate a Fly.io API token with the command
 
 ```bash
 flyctl auth token
 ```
 
-You'll need the token soon for your deployment workflow!
+You'll need the token soon for your deployment workflow so save it somewhere (but do not commit that to GitHub)!
 
-Before setting up the deployment pipeline let us ensure that a manual deployment with the command <i>flyctl deploy</i> works.
+As said, before setting up the deployment pipeline in the next exercise we will now ensure that a manual deployment with the command <i>flyctl deploy</i> works.
 
-You most likely need to do at least three changes. Firstly, define the Node version to use in the file <i>package.json</i> to match one used in your machine. For me it is 16.19.1:
+A couple of changes are needed.
 
-```json
-{
-  // highlight-start
-  "engines": { 
-    "node": "16.19.1" 
-  },
-  // highlight-end
-  "name": "fullstackopen-cicd",
-  "version": "1.0.0",
-  "description": "Full Stack Open",
-  // ...
-}
-```
-
-The configuration file <i>fly.toml</i> should also be modified to include the following:
+The configuration file <i>fly.toml</i> should be modified to include the following:
 
 ```yml
-[deploy]
-  release_command = "npm run build"
+[env]
+  PORT = "3000" # add this where PORT matches the internal_port below
 
 [processes]
-  app = "node app.js"
+  app = "node app.js" # add this
 
-[build]
-  [build.args]
-    NODE_VERSION = "16.19.1"
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
 ```
 
-Besides these, we should also move _webpack_ from _devDependencies_ to _dependencies_ since our build step requires it to be installed:
+In [processes](https://fly.io/docs/reference/configuration/#the-processes-section) we define the command that starts the application. Without this change Fly.io just starts the React dev server and that causes it to shut down since the app itself does not start up. We will also set up the PORT to be passed to the app as an environment variable.
 
-```json
-{
-  // ...
-  "dependencies": {
-    "webpack": "^4.43.0",
-  }
-}
+We also need to alter the file _.dockerignore_ a bit, the next line should be removed:
+
+```
+dist
 ```
 
-The <i>release\_command</i> under [deploy](https://fly.io/docs/reference/configuration/) now ensures that the production built will be done before starting up the app. In [processes](https://fly.io/docs/reference/configuration/#the-processes-section) we define the command that starts the application. Without these changes Fly.io just starts the React dev server and that causes it to shut down since the app itself does not start up.
+If the line is not removed, the product build of the frontend does not get downloaded to the Fly.io server.
 
-Here the <i>app</i> refers to the application process that is started up in the [services](https://fly.io/docs/reference/configuration/#the-services-sections) section:
+Deployment should now work _if_ the production build exists in the local machine, that is, the command _npm build_ is run.
 
-```yml
-[[services]]
-  http_checks = []
-  internal_port = 8080
-  processes = ["app"]  # highlight-line
-```
+Before moving to the next exercise, make sure that the manual deployment with the command <i>flyctl deploy</i> works!
 
-#### 11.10 Deploying your application to Fly.io
-
-Before starting this exercise, make sure that the manual deployment with the command <i>flyctl deploy</i> works!
+#### 11.11 Automatic deployments
 
 Extend the workflow with a step to deploy your application to Fly.io by following the advice given [here](https://fly.io/docs/app-guides/continuous-deployment-with-github-actions/).
 
-You need the authorization token that you just created for the deployment. The proper way to pass it's value to GitHub Actions is to use repository secrets:
+Note that the GitHub Action should create the production build (with _npm run build_) before the deployment step!
+
+You need the authorization token that you just created for the deployment. The proper way to pass it's value to GitHub Actions is to use _Repository secrets_:
 
 ![repo secret](../../images/11/10f.png)
 
@@ -146,53 +143,64 @@ ${{secrets.FLY_API_TOKEN}}
 
 If all goes well, your workflow log should look a bit like this:
 
-![](../../images/11/11.png)
+![](../../images/11/fly-good.png)
 
 **Remember** that it is always essential to keep an eye on what is happening in server logs when playing around with product deployments, so use <code>flyctl logs</code> early and use it often. No, use it all the time!
 
-#### 11.11 Health check and rollback
+#### 11.12 Health check
 
 Each deployment in Fly.io creates a [release](https://fly.io/docs/flyctl/releases/). Releases can be checked from the command line:
 
 ```bash
 $ flyctl releases
-VERSION	STABLE	TYPE    	STATUS   	DESCRIPTION            	USER           	DATE
-v13    	true  	release 	succeeded	Deploy image           	mluukkai@iki.fi	30m6s ago
-v12    	true  	release 	succeeded	Deploy image           	mluukkai@iki.fi	51m30s ago
-v11    	true  	release 	succeeded	Deploy image           	mluukkai@iki.fi	59m25s ago
-v10    	true  	release 	succeeded	Deploy image           	mluukkai@iki.fi	1h6m ago
+VERSION	STATUS  	DESCRIPTION	USER           	DATE
+v18    	complete	Release    	mluukkai@iki.fi	16h56m ago
+v17    	complete	Release    	mluukkai@iki.fi	17h3m ago
+v16    	complete	Release    	mluukkai@iki.fi	21h22m ago
+v15    	complete	Release    	mluukkai@iki.fi	21h25m ago
+v14    	complete	Release    	mluukkai@iki.fi	21h34m ago
 ```
 
-It is essential to ensure that a deployment ends up to a <i>succeeding</i> release, where the app is in healthy functional state. Fortunately Fly.io has several configuration options that take care of the application health check.
+It is essential to ensure that a deployment ends up in a <i>succeeding</i> release, where the app is in healthy functional state. Fortunately, Fly.io has several configuration options that take care of the application health check.
 
-The default fly.toml has already a section [
-services.tcp_checks](https://fly.io/docs/reference/configuration/#services-tcp_checks) 
+If we change the app as follows, it fails to start:
 
-```yml
-  [[services.tcp_checks]]
-    grace_period = "1s"
-    interval = "15s"
-    restart_limit = 0
-    timeout = "2s"
+```js
+app.listen(PORT, () => {
+  this_causes_error
+  // eslint-disable-next-line no-console
+  console.log(`server started on port ${PORT}`)
+})
 ```
 
-This section defines a basic health check of the deployment. The TCP check ensures that the virtual machine where the app resides is up and running and reachable from outside, by opening a [TCP](https://en.wikipedia.org/wiki/Transmission_Control_Protocol) connection to the virtual machine. 
-
-This check notices if something is fundamentally broken in the configurations. E.g. in my case for the app of this part, it took several trials until I got the app up and running:
+In this case, the deployment fails:
 
 ```bash
-$ fly releases
-VERSION	STABLE	TYPE    	STATUS   	DESCRIPTION            	USER           	DATE
-v4     	true  	release 	succeeded	Deploy image           	mluukkai@iki.fi	5h39m ago
-v3     	false 	release 	failed   	Deploy image           	mluukkai@iki.fi	5h50m ago
-v2     	false 	release 	failed   	Deploy image           	mluukkai@iki.fi	5h57m ago
-v1     	false 	release 	failed   	Deploy image           	mluukkai@iki.fi	6h12m ago
-v0     	false 	release 	failed   	Deploy image           	mluukkai@iki.fi	6h19m ago
+$ flyctl releases
+VERSION	STATUS  	DESCRIPTION	USER           	DATE
+v19    	failed  	Release    	mluukkai@iki.fi	3m52s ago
+v18    	complete	Release    	mluukkai@iki.fi	16h56m ago
+v17    	complete	Release    	mluukkai@iki.fi	17h3m ago
+v16    	complete	Release    	mluukkai@iki.fi	21h22m ago
+v15    	complete	Release    	mluukkai@iki.fi	21h25m ago
+v14    	complete	Release    	mluukkai@iki.fi	21h34m ago
 ```
 
-So finally in the 5th deployment (version v4) I got the configuration right and that ended in a succeeding release.
+The app however stays up and running, Fly.io does not replace the functioning version  (v18) with the broken one (v19).
 
-Besides the rudimentary TCP health check, it is extremely beneficial to have also some "application level" health checks ensuring that the app for real is in functional state. One possibility for this is a HTTP-level check defined in section [services.http_checks](https://fly.io/docs/reference/configuration/#services-tcp_checks) that can be used to ensure that the app is responding to the HTTP requests.
+Let us consider the following change
+
+```js
+// start app in a wrong port
+app.listen(PORT + 1, () => {
+  // eslint-disable-next-line no-console
+  console.log(`server started on port ${PORT}`)
+})
+```
+
+Now the app starts but it is connected to the wrong port, so the service will not be functional. Fly.io thinks this is a successful deployment, so it deploys the app in a broken state.
+
+One possibility to prevent broken deployments is to use an HTTP-level check defined in section [services.http_checks](https://fly.io/docs/reference/configuration/#services-tcp_checks). This type of check can be used to ensure that the app for real is in a functional state. 
 
 Add a simple endpoint for doing an application health check to the backend. You may e.g. copy this code:
 
@@ -202,26 +210,50 @@ app.get('/health', (req, res) => {
 })
 ```
 
-Configure then a [HTTP-check](https://fly.io/docs/reference/configuration/#services-http_checks) that ensures the health of the deployments based on the HTTP request to the defined health check endpoint.
+In order to use an HTTP check, the configuration in _fly.toml_ must be changed to use [services](https://fly.io/docs/reference/configuration/#the-services-sections) instead of the simpler [http_services](https://fly.io/docs/reference/configuration/#the-http_service-section) configuration. The change looks like the following:
 
-Note that the default fly.toml has defined that <i>http\_checks</i> is an empty array. You need to remove this line when you are adding a manually defined HTTP-check:
 
-```yml
+```
+[env]
+  PORT = "3000"
+
+[processes]
+  app = "node app.js"
+
 [[services]]
-  http_checks = [] # highlight-line
+  internal_port = 3000
+  processes = ["app"]
+  protocol = "tcp"
+
+  [services.concurrency]
+    hard_limit = 25
+    soft_limit = 20
+    type = "connections"
+
+  [[services.ports]]
+    force_https = true
+    handlers = ["http"]
+    port = 80
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
+
+
+[[vm]]
+  cpu_kind = "shared"
+  cpus = 1
+  memory_mb = 1024
+  processes = ["app"] # this needs to be added
 ```
 
-It might also be a good idea to have a dummy endpoint in the app that makes it possible to do some code changes and to ensure that the deployed version has really changed:
+Ensure that the deployment works with the new definition.
 
-```js
-app.get('/version', (req, res) => {
-  res.send('1') // change this string to ensure a new version deployed
-})
-```
+Configure then an [HTTP check](https://fly.io/docs/reference/configuration/#services-http_checks) that ensures the health of the deployments based on the HTTP request to the defined health check endpoint.
 
-Ensure that Actions notices if a deployment breaks your application:
+Ensure that GitHub Actions notices if a deployment breaks your application:
 
-![](../../images/11/12f.png)
+![](../../images/11/fly-fail.png)
 
 You may simulate this e.g. as follows:
 
@@ -233,102 +265,13 @@ app.get('/health', (req, res) => {
 })
 ```
 
-As can be seen in the command line, when a deployment fails, Fly.io rolls back to the previous working release:
-
-```bash
-$ fly releases
-VERSION	STABLE	TYPE    	STATUS   	DESCRIPTION            	USER           	DATE
-v15    	true  	rollback	succeeded	Reverting to version 13	               	16m48s ago
-v14    	false 	release 	failed   	Deploy image           	mluukkai@iki.fi	21m53s ago
-v13    	true  	release 	succeeded	Deploy image           	mluukkai@iki.fi	30m6s ago
-v12    	true  	release 	succeeded	Deploy image           	mluukkai@iki.fi	51m30s ago
-v11    	true  	release 	succeeded	Deploy image           	mluukkai@iki.fi	59m25s ago
-v10    	true  	release 	succeeded	Deploy image           	mluukkai@iki.fi	1h6m ago
-```
-
-So despite the problems in the release, the app stays functional!
-
-Before moving to next exercise, fix your deployment and ensure that the application works again as intended.
-
-#### 11.12. Custom health check
-
-**NOTE:** at the moment the custom health check feature in Fly.io does not work. You can mark this exercise done without doing anything. A replacement for this exercise will be developed later...
-
-Besides TCP and HTTP based health checks, Fly.io allows to use very flexible shell script based health checks. The feature is still undocumented but e.g. [this](https://community.fly.io/t/verifying-services-script-checks-is-supported/1464) shows you how to use it.
-
-Create a file <i>health\_check.sh</i> with the following content:
-
-```bash
-#!/bin/bash
-
-echo "Hello from shell script"
-
-exit 1 # exit status 1 means that the script "fails"
-```
-
-Give it execution permissions (Google or see e.g. [this](https://www.guru99.com/file-permissions.html) to find out how) and ensure that you can run it from the command line:
-
-```bash
-$ ./health_check.sh
-Hello from shell script
-```
-
-Define a health check to your app that runs the script in the file <i>health\_check.sh</i>. Ensure that this health check and deployment fails. After that, change the script as follows:
-
-```bash
-#!/bin/bash
-
-echo "Hello from shell script"
-
-exit 0  # exit status 0 means that the script "succeeds"
-```
-
-Ensure now that the deployment works. Note that to get the path to the script file right, it may be beneficial to log in to your virtual machine console to see where the files reside. Logging in is done with the command
-
-```bash
-flyctl ssh console -t YOUR_AUTH_TOKEN
-```
-
-Now when you know that the script based health check works, it is time to define the real health check.
-
-<i>Write a script ensuring the health check endpoint (that is, the GET request to '/health') not only works, but also returns the correct string 'ok'.</i>
-
-You probably should use [curl](https://curl.se/) in the script to do the HTTP request. You most likely need to Google how to get hold to the returned string and compare it with the expected value 'ok'.
-
-By default _curl_ does not exist in the Fly.io virtual machine. You can install it by adding the following line in the file _Dockerfile_ that gets created in your project root directory when Fly.io app is set up:
-
-```bash
-# ...
-
-FROM debian:bullseye
-
-RUN apt-get update; apt install -y curl // highlight-line
-
-LABEL fly_launch_runtime="nodejs"
-
-COPY --from=builder /root/.volta /root/.volta
-COPY --from=builder /app /app
-
-WORKDIR /app
-ENV NODE_ENV production
-ENV PATH /root/.volta/bin:$PATH
-
-CMD [ "npm", "run", "start" ]
-```
-
-It is <strong>strongly advisable</strong> to check first locally that the script works since so many things can go wrong in it, and when run in GitHub Action, you can not do any debug printing. If and <i> when</i> things do not work as intended, it is also a very good idea to log in to the virtual machine (with <i>flyctl ssh console</i>) and check that the script works when ran manually there.
-
-*Note* that in order to test the script in the virtual machine, you should have the script in your local directory when you make a successful deployment. So if your deployment fails, the script will not be uploaded to the Fly.io server. So in case of problems, comment out the script based health check from fly.toml and do a deployment to get your script to the virtual machine.
-
-Our script based health check is hardly meaningful in real life since it does essentially the same that is achievable with the simple HTTP check. The example here is just to show that the mechanism exists. Unlike with HTTP checks, with script based health checks you can in principle write an arbitrarily compiled and many sided health check to your app, should you need one.
-
 </div>
 
 <div class="tasks">
 
 ### Exercises 11.10-11.12. (Render)
 
-If you rather want to use other hosting options, there is an alternative set of exercises for [Fly.io](/en/part11/deployment/#exercises-11-10-11-12-fly-io) and for [Heroku](/en/part11/deployment#exercises-11-10-11-12-heroku).
+If you rather want to use other hosting options, there is an alternative set of exercises for [Fly.io](/en/part11/deployment/#exercises-11-10-11-12-fly-io).
 
 #### 11.10 Deploying your application to Render
 
@@ -389,14 +332,6 @@ The deployment takes some time. See the events tab of the Render dashboard to se
 
 ![](../../images/11/render3.png)
 
-It might be a good idea to have a dummy endpoint in the app that makes it possible to do some code changes and to ensure that the deployed version has really changed:
-
-```js
-app.get('/version', (req, res) => {
-  res.send('1') // change this string to ensure a new version deployed
-})
-```
-
 #### 11.12 Health check
 
 All tests pass and the new version of the app gets automatically deployed to Render so everything seems to be in order. But does the app really work? Besides the checks done in the deployment pipeline, it is extremely beneficial to have also some "application level" health checks ensuring that the app for real is in a functional state.
@@ -430,113 +365,5 @@ app.get('/health', (req, res) => {
 Push the code to GitHub and ensure that a broken version does not get deployed and the previous version of the app keeps running.
 
 Before moving on, fix your deployment and ensure that the application works again as intended.
-
-</div>
-
-<div class="tasks">
-
-### Exercises 11.10-11.12. (Heroku)
-
-Before going to the below exercises, you should setup your application in [Heroku](heroku.com) hosting service like the one we did in [part 3](/en/part3/deploying_app_to_internet#application-to-the-internet).
-
-If you rather want to use other hosting options, there is an alternative set of exercises for [Fly.io](/en/part11/deployment/#exercises-11-10-11-12-fly-io) and for [Render](/en/part11/deployment#exercises-11-10-11-12-render).
-
-In contrast to part 3 now we <i>do not push the code</i> to Heroku ourselves, we let the Github Actions workflow do that for us!
-
-Ensure now that you have [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install) installed and login to Heroku using the CLI with <code>heroku login</code>.
-
-Create a new app in Heroku using the  CLI: <code>heroku create --region eu {your-app-name}</code>, pick a [region](https://devcenter.heroku.com/articles/regions) close to your own location! (You can also leave the app blank and Heroku will create an app name for you.)
-
-Generate an API token for your Heroku profile using command <code>heroku authorizations:create</code>, and save the credentials to a local file but <i>**do not push those to GitHub**</i>!
-
-You'll need the token soon for your deployment workflow. See more information at about Heroku tokens [here](https://devcenter.heroku.com/articles/platform-api-quickstart).
-
-#### 11.10 Deploying your application to Heroku
-
-Extend the workflow with a step to deploy your application to Heroku.
-
-The below assumes that you use the ready-made Heroku deploy action [AkhileshNS/heroku-deploy](https://github.com/AkhileshNS/heroku-deploy) that has been developed by the community.
-
-You need the authorization token that you just created for the deployment. The proper way to pass it's value to GitHub Actions is to use repository secrets:
-
-![repo secret](../../images/11/10x.png)
-
-Now the workflow can access the token value as follows:
-
-```
-${{secrets.HEROKU_API_KEY}}
-```
-
-If all goes well, your workflow log should look a bit like this:
-
-![](../../images/11/11.png)
-
-You can then try the app with a browser, but most likely you run into a problem. If we read carefully [the section 'Application to the Internet' in part 3](/en/part3/deploying_app_to_internet#application-to-the-internet) we notice that Heroku assumes that the repository has a file called <i>Procfile</i> that tells Heroku how to start the application. 
-
-So, add a proper Procfile and ensure that the application starts properly. 
-
-**Remember** that it is always essential to keep an eye on what is happening in server logs when playing around with product deployments, so use <code>heroku logs</code> early and use it often. No, use it all the time!
-
-#### 11.11 Health check
-
-Before moving on let us expand the workflow with one more step, a check that ensures that the application is up and running after the deployment. 
-
-Actually a separate workflow step is not needed, since the action
-[deploy-to-heroku](https://github.com/marketplace/actions/deploy-to-heroku) contains an option that takes care of it.
-
-Add a simple endpoint for doing an application health check to the backend. You may e.g. copy this code:
-
-```js
-app.get('/health', (req, res) => {
-  res.send('ok')
-})
-```
-
-It might also be a good idea to have a dummy endpoint in the app that makes it possible to do some code changes and to ensure that the deployed version has really changed:
-
-```js
-app.get('/version', (req, res) => {
-  res.send('1') // change this string to ensure a new version deployed
-})
-```
-
-Look now from the [documentation](https://github.com/marketplace/actions/deploy-to-heroku) how to include the health check in the deployment step. Use the created endpoint for the health check url. You most likely need also the <i>checkstring</i> option to get the check working.
-
-Ensure that Actions notices if a deployment breaks your application. You may simulate this e.g. by writing a wrong startup command to Procfile:
-
-![](../../images/11/12x.png)
-
-Before moving to next exercise, fix your deployment and ensure that the application works again as intended.
-
-#### 11.12. Rollback
-
-If the deployment results in a broken application, the best thing to do is to <i>roll back</i> to the previous release. Luckily Heroku makes this pretty easy. Every deployment to Heroku results in a [release](https://blog.heroku.com/releases-and-rollbacks#releases). You can see your application's releases with the command <code>heroku releases</code>:
-
-```js
-$ heroku releases
-=== calm-wildwood-40210 Releases - Current: v8
-v8  Deploy de15fc2b  mluukkai@iki.fi  2022/03/02 19:14:22 +0200 (~ 8m ago)
-v7  Deploy 8748a04e  mluukkai@iki.fi  2022/03/02 19:06:28 +0200 (~ 16m ago)
-v6  Deploy a617a93d  mluukkai@iki.fi  2022/03/02 19:00:02 +0200 (~ 23m ago)
-v5  Deploy 70f9b219  mluukkai@iki.fi  2022/03/02 18:48:47 +0200 (~ 34m ago)
-v4  Deploy 0b2db00d  mluukkai@iki.fi  2022/03/02 17:53:24 +0200 (~ 1h ago)
-v3  Deploy f1cd250b  mluukkai@iki.fi  2022/03/02 17:44:32 +0200 (~ 1h ago)
-v2  Enable Logplex   mluukkai@iki.fi  2022/03/02 17:00:26 +0200 (~ 2h ago)
-v1  Initial release  mluukkai@iki.fi  2022/03/02 17:00:25 +0200 (~ 2h ago)
-```
-
-One can quickly do a [rollback](https://blog.heroku.com/releases-and-rollbacks#rollbacks) to a release with just a single command from commandline. 
-
-What is even better, is that the action [deploy-to-heroku](https://github.com/marketplace/actions/deploy-to-heroku) can take care of the rollback for us!
-
-So read again the [documentation](https://github.com/marketplace/actions/deploy-to-heroku) and modify the workflow to prevent a broken deployment altogether. You can again simulate a broken deployment with breaking the Procfile:
-
-![](../../images/11/13x.png)
-
-Ensure that the application stays still operational despite a broken deployment. 
-
-Note that despite the automatic rollback operation, the build fails and when this happens in real life it is <i> essential</i> to find what caused the problem and fix it quickly. As usual, the best place to start finding out the cause of the problem is to study Heroku logs:
-
-![](../../images/11/14.png)
 
 </div>

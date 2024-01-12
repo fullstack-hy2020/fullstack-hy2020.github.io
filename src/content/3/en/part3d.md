@@ -226,7 +226,7 @@ We will answer all of the questions:
 
 ![terminal output from ESlint init](../../images/3/52new.png)
 
-The configuration will be saved in the _.eslintrc.js_ file.  We will change `browser` to `node` in the `env` configuration:
+The configuration will be saved in the _.eslintrc.js_ file.  We will change _browser_ to _node_ in the _env_ configuration:
 
 ```js
 module.exports = {
