@@ -138,35 +138,40 @@ Let's not add any code dealing with Mongo to our backend just yet. Instead, let'
 ```js
 const mongoose = require('mongoose')
 
-if (process.argv.length<3) {
-  console.log('give password as argument')
-  process.exit(1)
+if (process.argv.length < 3) {
+    console.log('give password as argument')
+    process.exit(1)
 }
 
 const password = process.argv[2]
 
 const url =
-  `mongodb+srv://fullstack:${password}@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority`
+    `mongodb+srv://fullstack:${password}@cluster0
+    .30c1sly.mongodb.net/?retryWrites=true&w=majority`
 
-mongoose.set('strictQuery',false)
-mongoose.connect(url)
+const main = async () => {
+    mongoose.set('strictQuery', false)
+    await mongoose.connect(url, { dbName: 'notesApp' })
 
-const noteSchema = new mongoose.Schema({
-  content: String,
-  important: Boolean,
-})
+    const noteSchema = new mongoose.Schema({
+        content: String,
+        important: Boolean,
+    })
 
-const Note = mongoose.model('Note', noteSchema)
+    const Note = mongoose.model('Note', noteSchema)
 
-const note = new Note({
-  content: 'HTML is Easy',
-  important: true,
-})
+    const note = new Note({
+        content: 'HTML is Easy',
+        important: true,
+    })
 
-note.save().then(result => {
-  console.log('note saved!')
-  mongoose.connection.close()
-})
+    await note.save().then((result) => {
+        console.log('note saved!')
+        mongoose.connection.close()
+    })
+}
+
+main().catch(err => console.log(err))
 ```
 
 **NB:** Depending on which region you selected when building your cluster, the <i>MongoDB URI</i> may be different from the example provided above. You should verify and use the correct URI that was generated from MongoDB Atlas.
