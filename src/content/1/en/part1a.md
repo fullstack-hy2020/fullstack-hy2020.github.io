@@ -123,9 +123,11 @@ Let's take a closer look at the code defining the component:
 
 ```js
 const App = () => (
-  <div>
-    <p>Hello world</p>
-  </div>
+  return (
+    <div>
+      <p>Hello world</p>
+    </div>
+  )
 )
 ```
 
