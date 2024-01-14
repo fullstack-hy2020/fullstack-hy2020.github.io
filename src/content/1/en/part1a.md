@@ -137,9 +137,11 @@ Technically the component is defined as a JavaScript function. The following is 
 
 ```js
 () => (
-  <div>
-    <p>Hello world</p>
-  </div>
+  return (
+    <div>
+      <p>Hello world</p>
+    </div>
+  )
 )
 ```
 
