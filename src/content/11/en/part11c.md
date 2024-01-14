@@ -200,7 +200,7 @@ app.listen(PORT + 1, () => {
 
 Now the app starts but it is connected to the wrong port, so the service will not be functional. Fly.io thinks this is a successful deployment, so it deploys the app in a broken state.
 
-One possibility to prevent broken deployments is to use an HTTP-level check defined in section [services.http_checks](https://fly.io/docs/reference/configuration/#services-tcp_checks). This type of check can be used to ensure that the app for real is in a functional state. 
+One possibility to prevent broken deployments is to use an HTTP-level check defined in section [http_service.http_checks](https://fly.io/docs/reference/configuration/#http_service-checks). This type of check can be used to ensure that the app for real is in a functional state. 
 
 Add a simple endpoint for doing an application health check to the backend. You may e.g. copy this code:
 
@@ -210,46 +210,7 @@ app.get('/health', (req, res) => {
 })
 ```
 
-In order to use an HTTP check, the configuration in _fly.toml_ must be changed to use [services](https://fly.io/docs/reference/configuration/#the-services-sections) instead of the simpler [http_services](https://fly.io/docs/reference/configuration/#the-http_service-section) configuration. The change looks like the following:
-
-
-```
-[env]
-  PORT = "3000"
-
-[processes]
-  app = "node app.js"
-
-[[services]]
-  internal_port = 3000
-  processes = ["app"]
-  protocol = "tcp"
-
-  [services.concurrency]
-    hard_limit = 25
-    soft_limit = 20
-    type = "connections"
-
-  [[services.ports]]
-    force_https = true
-    handlers = ["http"]
-    port = 80
-
-  [[services.ports]]
-    handlers = ["tls", "http"]
-    port = 443
-
-
-[[vm]]
-  cpu_kind = "shared"
-  cpus = 1
-  memory_mb = 1024
-  processes = ["app"] # this needs to be added
-```
-
-Ensure that the deployment works with the new definition.
-
-Configure then an [HTTP check](https://fly.io/docs/reference/configuration/#services-http_checks) that ensures the health of the deployments based on the HTTP request to the defined health check endpoint.
+Configure then an [HTTP check](https://fly.io/docs/reference/configuration/#http_service-checks) that ensures the health of the deployments based on the HTTP request to the defined health check endpoint.
 
 Ensure that GitHub Actions notices if a deployment breaks your application:
 
@@ -259,8 +220,8 @@ You may simulate this e.g. as follows:
 
 ```js
 app.get('/health', (req, res) => {
-  throw 'error...'
-  // eslint-disable-next-line no-unreachable
+  // eslint-disable-next-line no-constant-condition
+  if (true) throw('error...  ')
   res.send('ok')
 })
 ```

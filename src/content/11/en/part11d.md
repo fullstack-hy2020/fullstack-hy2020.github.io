@@ -25,11 +25,11 @@ There are several reasons why using pull requests and getting your code reviewed
 
 You can configure your GitHub repository in such a way that pull requests cannot be merged until they are approved.
 
-![Compare & pull request](../../images/11/part11d_00.png)
+![Compare & pull request](../../images/11/pr1a.png)
 
 To open a new pull request, open your branch in GitHub and click on the green "Compare & pull request" button at the top. You will be presented with a form where you can fill in the pull request description.
 
-![Open a new pull request](../../images/11/part11d_01.png)
+![Open a new pull request](../../images/11/pr2.png)
 
 GitHub's pull request interface presents a description and the discussion interface. At the bottom, it displays all the CI checks (in our case each of our Github Actions) that are configured to run for each PR and the statuses of these checks. A green board is what you aim for! You can click on Details of each check to view details and run logs.
 
@@ -65,13 +65,13 @@ Create a new branch, commit your changes, and open a pull request to your main b
 
 If you have not worked with branches before, check [e.g. this tutorial](https://www.atlassian.com/git/tutorials/using-branches) to get started.
 
-Note that when you open the pull request, make sure that you select here your <i>own</i> repository as the destination <i>base repository</i>. By default, the selection is the original repository by smartly and you **do not want** to do that:
+Note that when you open the pull request, make sure that you select here your <i>own</i> repository as the destination <i>base repository</i>. By default, the selection is the original repository by <https://github.com/fullstack-hy2020> and you **do not want** to do that:
 
-![](../../images/11/15a.png)
+![](../../images/11/pr3.png)
 
 In the "Conversation" tab of the pull request you should see your latest commit(s) and the yellow status for checks in progress:
 
-![](../../images/11/16.png)
+![](../../images/11/pr4.png)
 
 Once the checks have been run, the status should turn to green. Make sure all the checks pass. Do not merge your branch yet, there's still one more thing we need to improve on our pipeline.
 
@@ -161,7 +161,7 @@ In the case above, the software we release is tested because the CI system makes
 
 ### Exercises 11.15-11.16.
 
-Let's extend our workflow so that it will automatically increase (bump) the version when a pull request is merged into the main branch and [tag](https://www.atlassian.com/git/tutorials/inspecting-a-repository/git-tag) the release with the version number. We will use an open source action developed by a third-party: [anothrNick/github-tag-action](https://github.com/anothrNick/github-tag-action). 
+Let's extend our workflow so that it will automatically increase (bump) the version when a pull request is merged into the main branch and [tag](https://www.atlassian.com/git/tutorials/inspecting-a-repository/git-tag) the release with the version number. We will use an open source action developed by a third party: [anothrNick/github-tag-action](https://github.com/anothrNick/github-tag-action). 
 
 #### 11.15 Adding versioning
 
@@ -169,20 +169,20 @@ We will extend our workflow with one more step:
 
 ```js
 - name: Bump version and push tag
-  uses: anothrNick/github-tag-action@1.55.0
+  uses: anothrNick/github-tag-action@1.64.0
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 Note: you should use the most recent version of the action, see [here](https://github.com/anothrNick/github-tag-action) if a more recent version is available. 
 
-We're passing an environmental variable <code>secrets.GITHUB\_TOKEN</code> to the action. As it is third-party action, it needs the token for authentication in your repository. You can read more [here](https://docs.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token) about authentication in GitHub Actions.
+We're passing an environmental variable <code>secrets.GITHUB\_TOKEN</code> to the action. As it is third party action, it needs the token for authentication in your repository. You can read more [here](https://docs.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token) about authentication in GitHub Actions.
 
 You may end up having this error message
 
 ![Submissions](../../images/11/tag-error.png)
 
-The most likely cause for this is that your token has no write access to your repo. Go to your repository settings, and select actions/general, and ensure that your token has <i>read and write permissions</i>:
+The most likely cause for this is that your token has no write access to your repo. Go to your repository settings, select actions/general, and ensure that your token has <i>read and write permissions</i>:
 
 ![Submissions](../../images/11/tag-permissions.png)
 
@@ -231,11 +231,11 @@ By clicking <i>view all tags</i>, you can see all the tags listed:
 
 ![Releases](../../images/11/18-new.png)
 
-And if needed, you can navigate to the view of a single tag that shows eg. what is the GitHub commit corresponding to the tag.
+If needed, you can navigate to the view of a single tag that shows eg. what is the GitHub commit corresponding to the tag.
 
 #### 11.16 Skipping a commit for tagging and deployment
 
-In general the more often you deploy the main branch to production, the better. However, there might be some valid reasons sometimes to skip a particular commit or a merged pull request to becoming tagged and released to production.
+In general, the more often you deploy the main branch to production, the better. However, there might be some valid reasons sometimes to skip a particular commit or a merged pull request to become tagged and released to production.
 
 Modify your setup so that if a commit message in a pull request contains _#skip_, the merge will not be deployed to production and it is not tagged with a version number.
 
@@ -257,7 +257,7 @@ jobs:
   a_test_job:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: github context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
@@ -280,19 +280,19 @@ You most likely need functions [contains](https://docs.github.com/en/actions/lea
 
 Developing workflows is not easy, and quite often the only option is trial and error. It might actually be advisable to have a separate repository for getting the configuration right, and when it is done, to copy the right configurations to the actual repository.
 
-It would also be possible to install a tool such as [act](https://github.com/nektos/act) that makes it possible to run your workflows locally. Unless you end using more involved use cases like creating your [own custom actions](https://docs.github.com/en/free-pro-team@latest/actions/creating-actions), going through the burden of setting up a tool such as act is most likely not worth the trouble. 
+It would also be possible to install a tool such as [act](https://github.com/nektos/act) that makes it possible to run your workflows locally. Unless you end up using more involved use cases like creating your [own custom actions](https://docs.github.com/en/free-pro-team@latest/actions/creating-actions), going through the burden of setting up a tool such as act is most likely not worth the trouble. 
 
 </div>
 
 <div class="content">
 
-### A note about using third party actions
+### A note about using third-party actions
 
-When using a third party action such that <i>github-tag-action</i> it might be a good idea to specify the used version with hash instead of using a version number. The reason for this is that the version number, that is implemented with a Git tag can in principle be <i>moved</i>. So today's version 1.61.0 might be a different code that is at the next week the version 1.61.0! 
+When using a third-party action such that <i>github-tag-action</i> it might be a good idea to specify the used version with hash instead of using a version number. The reason for this is that the version number, that is implemented with a Git tag can in principle be <i>moved</i>. So today's version 1.61.0 might be a different code that is at next week the version 1.61.0! 
 
-However, the code in commit with a particular hash does not change in any circumstances, so if we want to be 100% sure about the code we use, it is safest to use the hash. 
+However, the code in a commit with a particular hash does not change in any circumstances, so if we want to be 100% sure about the code we use, it is safest to use the hash. 
 
-The version [1.61.0](https://github.com/anothrNick/github-tag-action/releases/tag/1.61.0) of the action corresponds to commit with hash <code>8c8163ef62cf9c4677c8e800f36270af27930f42</code>, so we might want to change our configuration as follows:
+V  ersion [1.61.0](https://github.com/anothrNick/github-tag-action/releases/tag/1.61.0) of the action corresponds to a commit with hash <code>8c8163ef62cf9c4677c8e800f36270af27930f42</code>, so we might want to change our configuration as follows:
 
 ```js
     - name: Bump version and push tag
