@@ -7,7 +7,7 @@ lang: en
 
 <div class="content">
 
-This part has focus on building a simple, effective, and robust CI system that helps developers to work together, maintain code quality, and deploy safely. What more could one possibly want? In the real world, there are more fingers in the pie than just developers and users. Even if that weren't true, even for developers, there's a lot more value to be gained from CI systems than just the things above.
+This part focuses on building a simple, effective, and robust CI system that helps developers to work together, maintain code quality, and deploy safely. What more could one possibly want? In the real world, there are more fingers in the pie than just developers and users. Even if that weren't true, even for developers, there's a lot more value to be gained from CI systems than just the things above.
 
 ### Visibility and Understanding
 
@@ -39,19 +39,19 @@ Register now to Discord if you have not already done that. You will also need a 
 
 #### 11.18 Build success/failure notification action
 
-You can find quite a few of third party actions from [GitHub Action Marketplace](https://github.com/marketplace?type=actions) by using the search phrase [discord](https://github.com/marketplace?type=actions&query=discord). Pick one for this exercise. My choice was [discord-webhook-notify](https://github.com/marketplace/actions/discord-webhook-notify) since it has quite many stars and a decent documentation.
+You can find quite a few third-party actions from [GitHub Action Marketplace](https://github.com/marketplace?type=actions) by using the search phrase [discord](https://github.com/marketplace?type=actions&query=discord). Pick one for this exercise. My choice was [discord-webhook-notify](https://github.com/marketplace/actions/discord-webhook-notify) since it has quite many stars and decent documentation.
 
 Setup the action so that it gives two types of notifications:
 - A success indication if a new version gets deployed
 - An error indication if a build fails
 
-In the case of an error, the notification should be a bit more verbose to help developers finding quickly which is the commit that caused it.
+In the case of an error, the notification should be a bit more verbose to help developers find quickly which is the commit that caused it.
 
 See [here](https://docs.github.com/en/actions/learn-github-actions/expressions#status-check-functions) how to check the job status!
 
 Your notifications may look like the following:
 
-![Releases](../../images/11/20x.png)
+![Releases](../../images/11/gha-notify.png)
 
 </div>
 

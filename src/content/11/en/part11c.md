@@ -200,7 +200,7 @@ app.listen(PORT + 1, () => {
 
 Now the app starts but it is connected to the wrong port, so the service will not be functional. Fly.io thinks this is a successful deployment, so it deploys the app in a broken state.
 
-One possibility to prevent broken deployments is to use an HTTP-level check defined in section [http_service.http_checks](https://fly.io/docs/reference/configuration/#http_service-checks). This type of check can be used to ensure that the app for real is in a functional state. 
+One possibility to prevent broken deployments is to use an HTTP-level check defined in section [http\_service.http_checks](https://fly.io/docs/reference/configuration/#http_service-checks). This type of check can be used to ensure that the app for real is in a functional state. 
 
 Add a simple endpoint for doing an application health check to the backend. You may e.g. copy this code:
 
@@ -211,6 +211,8 @@ app.get('/health', (req, res) => {
 ```
 
 Configure then an [HTTP check](https://fly.io/docs/reference/configuration/#http_service-checks) that ensures the health of the deployments based on the HTTP request to the defined health check endpoint.
+
+You also need to set the [deployment strategy](https://fly.io/docs/reference/configuration/#picking-a-deployment-strategy) (in the file _fly.toml_) of the app to be either <i>canary</i> or <i>bluegreen</i>. These strategies ensure that only an app with a healthy state gets deployed.
 
 Ensure that GitHub Actions notices if a deployment breaks your application:
 
@@ -259,6 +261,8 @@ $ ./build_step.sh
 Build script
 ```
 
+Other option is to use a [Pre deploy command](https://docs.render.com/deploys#deploy-steps), with that you may run one additional command before the deployment starts.
+
 You also need to open the <i>Advanced settings</i> and turn the auto-deploy off since we want to control the deployment in the GitHub Actions:
 
 ![](../../images/11/render2.png)
@@ -269,25 +273,32 @@ Most likely things will fail at the start, so remember to keep the <i>Logs</i> o
 
 #### 11.11 Automatic deployments
 
-Go now to GitHub Actions [marketplace](https://github.com/marketplace) and search for action for our purposes. You might search with <i>render deploy</i>. There are several actions to choose from. You can pick any. Quite often the best choice is the one with the most stars. It is also a good idea to look if the action is actively maintained (time of the last release) and does it have many open issues or pull requests.
+Next step is to automate the deployment. There are two options, a ready-made custom action or the use of the Render deploy hook.
 
-Set up the action to your workflow and ensure that every commit that pass all the checks results in a new deployment. Note that you need Render API key and the app service id for the deployment. See [here](https://render.com/docs/api) how the API key is generated. You can get the service id from the URL of the Render dashboard of your app. The end of the URL (starting with _srv-_) is the id:
+<strong>Deployment with custom action</strong>
+
+Go to GitHub Actions [marketplace](https://github.com/marketplace) and search for action for our purposes. You might search with <i>render deploy</i>. There are several actions to choose from. You can pick any. Quite often the best choice is the one with the most stars. It is also a good idea to look if the action is actively maintained (time of the last release) and does it has many open issues or pull requests. 
+
+Warning: for some reason, the most starred option [render-action](https://github.com/Bounceapp/render-action) was very unreliable when the part was updated (16th Jan 2024)! If you end up with problems, the deploy hook might be a better option!
+
+Set up the action to your workflow and ensure that every commit that passes all the checks results in a new deployment. Note that you need Render API key and the app service id for the deployment. See [here](https://render.com/docs/api) how the API key is generated. You can get the service id from the URL of the Render dashboard of your app. The end of the URL (starting with _srv-_) is the id:
 
 ```bash
-https://dashboard.render.com/web/srv-crandomcharachtershere
-```
-Alternatively you could just use [Render Deploy Hook](https://render.com/docs/deploy-hooks) which is a private url to trigger the deployment. You can get it from your app settings ![fsorender1](https://user-images.githubusercontent.com/47830671/230722899-1ebb414e-ae1e-4a5e-a7b8-f376c4f1ca4d.png). 
-DON'T USE the plain url in your pipeline. Instead create github secrets for your key and service id: ![fsorender2](https://user-images.githubusercontent.com/47830671/230723138-77d027be-3162-4697-987e-b654bc710187.png)
-Then you can use them like this: 
-``` bash
-    main:
-    name: Deploy to Render
-    runs-on: ubuntu-latest
-    steps:
-      - name: Trigger deployment
-        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
+https://dashboard.render.com/web/srv-randomcharachtershere
 ```
 
+<strong>Deployment with deploy hook</strong>
+
+Alternative, and perhaps a more reliable option is to use [Render Deploy Hook](https://render.com/docs/deploy-hooks) which is a private URL to trigger the deployment. You can get it from your app settings:
+
+![fsorender1](https://user-images.githubusercontent.com/47830671/230722899-1ebb414e-ae1e-4a5e-a7b8-f376c4f1ca4d.png)
+
+DON'T USE the plain URL in your pipeline. Instead create GitHub secrets for your key and service id: ![fsorender2](https://user-images.githubusercontent.com/47830671/230723138-77d027be-3162-4697-987e-b654bc710187.png)
+Then you can use them like this: 
+``` bash
+- name: Trigger deployment
+  run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
+```
 
 The deployment takes some time. See the events tab of the Render dashboard to see when the new deployment is ready:
 
@@ -296,6 +307,8 @@ The deployment takes some time. See the events tab of the Render dashboard to se
 #### 11.12 Health check
 
 All tests pass and the new version of the app gets automatically deployed to Render so everything seems to be in order. But does the app really work? Besides the checks done in the deployment pipeline, it is extremely beneficial to have also some "application level" health checks ensuring that the app for real is in a functional state.
+
+The [zero downtime deploys](https://docs.render.com/deploys#zero-downtime-deploys) in Render should ensure that your app stays functional all the time! For some reason, this property did not always work as promised when this part was updated (16th Jan 2024). The reason might be the use of a free account.
 
 Add a simple endpoint for doing an application health check to the backend. You may e.g. copy this code:
 
@@ -317,8 +330,8 @@ When you are set up with the health check, simulate a broken deployment by chang
 
 ```js
 app.get('/health', (req, res) => {
-  throw 'error...'
-  // eslint-disable-next-line no-unreachable
+  // eslint-disable-next-line no-constant-condition
+  if (true) throw('error...  ')
   res.send('ok')
 })
 ```
