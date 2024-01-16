@@ -283,6 +283,7 @@ Muutoksista huolimatta <i>kaikki jo tehdyt palautukset säilyvät voimassa</i>, 
 
 Viimeaikaisia isompia muutoksia
 - Osat 1-9 (11.9-5.10.2023): Create React app korvattu Vitellä
+- Osa 11 (16.1.2024): Esimerkkiprojektin riippuvuudet päivitetty
 
 ### Aiemmin suoritetun kurssin täydentäminen
 
