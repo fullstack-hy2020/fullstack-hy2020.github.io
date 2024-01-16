@@ -286,7 +286,7 @@ Note.find({ important: true }).then(result => {
 
 </div>
 
-<div class="tâches">
+<div class="tasks">
 
 ### Exercice 3.12.
 
