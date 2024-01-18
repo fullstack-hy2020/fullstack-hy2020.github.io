@@ -113,7 +113,7 @@ There are other advantages to extending this setup:
  - If we use CI/CD with deployment every time there is a merge to the main branch, then we know that it will always work in production
  - If we only allow merges when the branch is up to date with the main branch, then we can be sure that different developers don't overwrite each other's changes
 
-Note that in this part we are assuming that the <i>main</> branch contains the code that is running in production. There are numerous different [workflows](https://www.atlassian.com/git/tutorials/comparing-workflows) one can use with Git, e.g. in some cases, it may be a specific <i>release branch</i> that contains the code that is running in production.
+Note that in this part we are assuming that the <i>main</i> branch contains the code that is running in production. There are numerous different [workflows](https://www.atlassian.com/git/tutorials/comparing-workflows) one can use with Git, e.g. in some cases, it may be a specific <i>release branch</i> that contains the code that is running in production.
 
 ### Important principles
 
