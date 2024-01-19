@@ -771,7 +771,7 @@ The hook's implementation is quite simple but it improves the readability and ma
 
 ```javascript
 // ...
-import { useAuthStorage } from '../hooks/useAuthStorage'; // highlight-line
+import useAuthStorage from '../hooks/useAuthStorage'; // highlight-line
 
 const useSignIn = () => {
   const authStorage = useAuthStorage(); //highlight-line
