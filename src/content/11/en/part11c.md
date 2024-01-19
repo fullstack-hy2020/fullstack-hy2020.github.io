@@ -56,7 +56,7 @@ Next we will have three sets of exercises for automazing the deployment with Git
 
 ### Has the app been deployed?
 
-Since we are not making any real changes to the app, it might be a bit hard to see if the app deployment relly works.
+Since we are not making any real changes to the app, it might be a bit hard to see if the app deployment really works.
 Let us create a dummy endpoint in the app that makes it possible to do some code changes and to ensure that the deployed version has really changed:
 
 ```js
@@ -69,7 +69,7 @@ app.get('/version', (req, res) => {
 
 <div class="tasks">
 
-### Exercises 11.10-11.11. (Fly.io)
+### Exercises 11.10-11.12. (Fly.io)
 
 If you rather want to use other hosting options, there is an alternative set of exercises for [Render](/en/part11/deployment#exercises-11-10-11-12-render).
 
