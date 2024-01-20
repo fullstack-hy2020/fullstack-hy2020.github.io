@@ -373,6 +373,9 @@ Commençons rapidement en copiant-collant les définitions de Mongoose dans le f
 ```js
 const mongoose = require('mongoose')
 
+// Assigns the second command line argument to 'password'
+ const password = process.argv[2];
+
 // DO NOT SAVE YOUR PASSWORD TO GITHUB!!
 const url =
   `mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority`
