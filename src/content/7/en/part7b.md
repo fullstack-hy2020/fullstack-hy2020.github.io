@@ -26,9 +26,7 @@ As mentioned in [part 1](/en/part1/a_more_complex_state_debugging_react_apps#rul
 - Call Hooks from React function components.
 - Call Hooks from custom Hooks
 
-There's an existing [ESlint](https://www.npmjs.com/package/eslint-plugin-react-hooks) rule that can be used to verify that the application uses hooks correctly.
-
-Create-react-app has the readily-configured rule [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks) that complains if hooks are used in an illegal manner:
+There's an existing [ESlint plugin](https://www.npmjs.com/package/eslint-plugin-react-hooks) that can be used to verify that the application uses hooks correctly:
 
 ![vscode error useState being called conditionally](../../images/7/60ea.png)
 
