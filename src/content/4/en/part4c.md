@@ -457,7 +457,7 @@ const noteSchema = new mongoose.Schema({
   },
   important: Boolean,
   // highlight-start
-  user: {
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   }
