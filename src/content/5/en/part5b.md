@@ -359,7 +359,7 @@ branch <i>part5-5</i>.
 
 Our current implementation is quite good; it has one aspect that could be improved.
 
-After a new note is created, it would make sense to hide the new note form. Currently, the form stays visible. There is a slight problem with hiding the form. The visibility is controlled with the <i>visible</i> variable inside of the <i>Togglable</i> component. How can we access it outside of the component?
+After a new note is created, it would make sense to hide the new note form. Currently, the form stays visible. There is a slight problem with hiding the form. The visibility is controlled with the <i>visible</i> state variable inside of the <i>Togglable</i> component. How can we access it outside of the component?
 
 There are many ways to implement closing the form from the parent component, but let's use the [ref](https://react.dev/learn/referencing-values-with-refs) mechanism of React, which offers a reference to the component.
 
