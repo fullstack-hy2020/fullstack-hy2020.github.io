@@ -3,7 +3,7 @@ mainImage: ../../../images/part-1.svg
 part: 1
 letter: b
 lang: es
---- 
+---
 
 <div class="content">
 
@@ -486,7 +486,7 @@ Al llamar a <em>arto.greet.bind(arto)</em> se crea una nueva función donde _thi
 
 Usando [funciones de flecha](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Functions/Arrow_functions) es posible resolver algunos de los problemas relacionados con _this_. Sin embargo, no deben usarse como métodos para objetos porque entonces _this_ no funciona en absoluto. Más adelante volveremos al comportamiento de _this_ en relación con las funciones de flecha. 
 
-Si deseas obtener una mejor comprensión de cómo funciona _this_ en JavaScript, Internet está lleno de material sobre el tema, por ejemplo, la serie de screencasts [Comprender la palabra clave this de JavaScript en profundidad](https://egghead.io/courses/understand-javascript-s-this-keyword-in-depth) de [egghead.io](https://egghead.io) es muy recomendado.
+Si deseas obtener una mejor comprensión de cómo funciona _this_ en JavaScript, Internet está lleno de material sobre el tema, por ejemplo, la serie de screencasts [Comprender la palabra clave this de JavaScript en profundidad](https://egghead.io/courses/understand-javascript-s-this-keyword-in-depth) de [egghead.io](https://egghead.io) es muy recomendable.
 
 ### Clases
 
