@@ -84,8 +84,6 @@ in contrast to Vite's
 npm run dev 
 ```
 
-The course is currently (11 August 2023) being updated to use Vite. Some parts may still use the application base created with create-react-app.
-
 ### Component
 
 The file <i>App.jsx</i> now defines a [React component](https://react.dev/learn/your-first-component) with the name <i>App</i>. The command on the final line of file <i>main.jsx</i>

@@ -68,8 +68,6 @@ Voit halutessasi käyttä kurssilla Viten sijaan myös [create-react-app](https:
 npm start
 ```
 
-Kurssia ollaan tällä hetkellä (11.8.2023) päivittämässä käyttämään Viteä. Joissain erimerkeissä voi vielä olla käytössä create-react-app:illa luotu sovelluspohja.
-
 ### Komponentti
 
 Tiedosto <i>App.jsx</i> määrittelee nyt React-[komponentin](https://react.dev/learn/your-first-component) nimeltään <i>App</i>. Tiedoston <i>main.jsx</i> viimeisen rivin komento
