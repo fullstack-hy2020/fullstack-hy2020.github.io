@@ -443,7 +443,7 @@ The other thing that we still need to have a closer look is the second parameter
 
 The second parameter of <em>useEffect</em> is used to [specify how often the effect is run](https://react.dev/reference/react/useEffect#parameters). The principle is that the effect is always executed after the first render of the component <i>and</i> when the value of the second parameter changes.
 
-If the second parameter is an empty array <em>[]</em>, it's content never changes and the effect is only run after the first render of the component. This is exactly what we want when we are initializing the app state from the server.
+If the second parameter is an empty array <em>[]</em>, its content never changes and the effect is only run after the first render of the component. This is exactly what we want when we are initializing the app state from the server.
 
 However, there are situations where we want to perform the effect at other times, e.g. when the state of the component changes in a particular way.
 
