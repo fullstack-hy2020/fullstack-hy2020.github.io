@@ -530,6 +530,10 @@ Si deseas conocer JavaScript en profundidad, hay una gran serie de libros gratui
 
 Otro gran recurso para aprender JavaScript es [javascript.info](https://es.javascript.info/).
 
+El libro gratuito [Eloquent JavaScript](https://eloquentjavascript.net) te lleva desde los conceptos básicos hasta temas interesantes rápidamente. Es una mezcla de teoría, proyectos y ejercicios, y abarca tanto la teoría general de programación como el lenguaje JavaScript.
+
+[Namaste 🙏 JavaScript](https://www.youtube.com/playlist?list=PLlasXeu85E9cQ32gLCvAvr9vNaUccPVNP) es otro excelente y altamente recomendado tutorial gratuito de JavaScript para entender cómo funciona JS bajo el capó. Namaste JavaScript es un curso puro y en profundidad de JavaScript lanzado de forma gratuita en YouTube. Cubrirá en detalle los conceptos fundamentales de JavaScript y todo acerca de cómo JS funciona detrás de escena dentro del motor de JavaScript.
+
 [egghead.io](https://egghead.io) tiene muchos screencasts de calidad sobre JavaScript, React y otros temas interesantes. Desafortunadamente, parte del material está detrás de un muro de pago.
 
 </div>
