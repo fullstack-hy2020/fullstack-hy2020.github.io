@@ -212,7 +212,7 @@ El componente de la aplicación recibe el valor del contador a través de la pro
 counter += 1
 ```
 
-el componente no volverá a renderizarse. Podemos hacer que el componente se vuelva a renderizar llamando al método _ReactDOM.render_ por segunda vez, por ejemplo, de la siguiente manera:
+el componente no volverá a renderizar. Podemos hacer que el componente se vuelva a renderizar llamando al método _ReactDOM.render_ por segunda vez, por ejemplo, de la siguiente manera:
 
 ```js
 let counter = 1
@@ -337,6 +337,7 @@ La segunda vez que la función del componente es ejecutado, llama a la función 
 ```js
 () => setCounter(2)
 ```
+
 Mientras tanto, el antiguo valor de _counter_ - "1" - se muestra en la pantalla.
 
 Cada vez que _setCounter_ modifica el estado, hace que el componente se vuelva a renderizar. El valor del estado se incrementará nuevamente después de un segundo y esto continuará repitiéndose mientras la aplicación esté en ejecución.
@@ -362,7 +363,9 @@ const App = () => {
 
 Es fácil de seguir y rastrear las llamadas realizadas a la <i>App</i> función de renderizado del componente:
 
-![](../../images/1/4e.png)
+![Captura de pantalla de rendering log en herramientas de desarrollo](../../images/1/4e.png)
+
+¿Estaba la consola de tu navegador abierta? Si no lo estaba, entonces promete que esta sera la ultima vez que necesitas que te lo recuerden.
 
 ### Manejo de eventos
 
@@ -522,6 +525,7 @@ const App = () => {
   )
 }
 ```
+
 Aquí los controladores de eventos se han definido correctamente. El valor del atributo <i>onClick</i> es una variable que contiene una referencia a una función:
 
 ```js
@@ -532,7 +536,7 @@ Aquí los controladores de eventos se han definido correctamente. El valor del a
 
 ### Pasando el estado a componentes hijos
 
-Se recomienda escribir componentes de React que sean pequeños y reutilizables en toda la aplicación e incluso en proyectos. Refactoricemos nuestra aplicación para que esté compuesta por tres componentes más pequeños, un componente para mostrar el contador y dos componentes para los botones.
+Se recomienda escribir componentes de React que sean pequeños y reutilizables en toda la aplicación e incluso en proyectos. Refactorizemos nuestra aplicación para que esté compuesta por tres componentes más pequeños, un componente para mostrar el contador y dos componentes para los botones.
 
 Primero implementemos un componente <i>Display</i> que es responsable de mostrar el valor del contador.
 
@@ -594,7 +598,9 @@ const App = () => {
   const [ counter, setCounter ] = useState(0)
 
   const increaseByOne = () => setCounter(counter + 1)
+  //highlight-start
   const decreaseByOne = () => setCounter(counter - 1)
+  //highlight-end
   const setToZero = () => setCounter(0)
 
   return (
@@ -602,17 +608,17 @@ const App = () => {
       <Display counter={counter}/>
       // highlight-start
       <Button
-        handleClick={increaseByOne}
+        onClick={increaseByOne}
         text='plus'
       />
       <Button
-        handleClick={setToZero}
+        onClick={setToZero}
         text='zero'
-      />
+      />     
       <Button
-        handleClick={decreaseByOne}
+        onClick={decreaseByOne}
         text='minus'
-      />
+      />           
       // highlight-end
     </div>
   )
@@ -621,7 +627,10 @@ const App = () => {
 
 Dado que ahora tenemos un componente <i>Button</i> fácilmente reutilizable, también hemos implementado una nueva funcionalidad en nuestra aplicación agregando un botón que se puede usar para disminuir el contador.
 
-El controlador de eventos se pasa al componente <i>Button</i> a través de la propiedad _handleClick_. El nombre de ls prop en sí no es tan significativo, pero nuestra elección de nombre no fue completamente aleatoria. El propio [tutorial](https://es.react.dev/learn/tutorial-tic-tac-toe) oficial de React sugiere esta convención.
+El controlador de eventos se pasa al componente <i>Button</i> a través de la propiedad _handleClick_. El nombre de ls prop en sí no es tan significativo, pero nuestra elección de nombre no fue completamente aleatoria.
+
+El propio [tutorial](https://es.react.dev/learn/tutorial-tic-tac-toe) oficial de React sugiere:
+"En React, es convencional usar nombres onSomething para props que representan eventos y handleSomething para las definiciones de funciones que controlan los eventos."
 
 ### Los cambios en el estado provocan re-renderizado
 
@@ -637,7 +646,7 @@ Entonces, si un usuario hace clic en el botón <i>plus</i>, el controlador de ev
 Esto hace que sus subcomponentes _Display_ y _Button_ también se vuelvan a renderizar.
 _Display_ recibe el nuevo valor del contador, 1, como prop. Los componentes _Button_ reciben controladores de eventos que pueden usarse para cambiar el estado del contador.
 
-Para asegurarnos de entender como funciona el programa, dejanos agregarle algunos _console.log_
+Para asegurarnos de entender como funciona el programa, vamos a agregarle algunos _console.log_
 
 ```js
 const App = () => {
