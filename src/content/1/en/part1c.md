@@ -363,7 +363,7 @@ const App = () => {
 
 It's easy to follow and track the calls made to the <i>App</i> component's render function:
 
-![screenshot of render function with dev tools](../../images/1/4e.png)
+![screenshot of rendering log on dev tools](../../images/1/4e.png)
 
 Was your browser console open? If it wasn't, then promise that this was the last time you need to be reminded about it.
 
@@ -708,8 +708,7 @@ const Display = ({ counter }) => {
 }
 ```
 
-The function defining the component contains only the return statement, so
-we can define the function using the more compact form of arrow functions:
+The function defining the component contains only the return statement, so we can define the function using the more compact form of arrow functions:
 
 ```js
 const Display = ({ counter }) => <div>{counter}</div>
