@@ -679,7 +679,7 @@ const App = () => {
 }
 ```
 
-Dejanos ahora ver que se imprime en la consola cuando se hace clic en los botones plus, zero y minus:
+Déjanos ahora ver que se imprime en la consola cuando se hace clic en los botones plus, zero y minus:
 
 ![Navegador mostrando la consola con los valores impresos resaltados](../../images/1/31.png)
 
@@ -751,12 +751,12 @@ const Button = ({ onSmash, text }) => (
 )
 ```
 
-Podriamos tambien simplificar el componente Button un poco más definiendo la declaración return en una sola línea:
+Podríamos también simplificar el componente Button un poco más definiendo la declaración return en una sola línea:
 
 ```js
 const Button = ({ onSmash, text }) => <button onClick={onSmash}>{text}</button>
 ```
 
-**Nota:** Sin embargo, debes ser cuidadoso de no sobresimplificar tus componente, ya que esto hace que agregar complejidad sea una tarea más tediosa en el futuro.
+**Nota:** Sin embargo, debes ser cuidadoso de no sobresimplificar tus componentes, ya que esto hace que agregar complejidad sea una tarea más tediosa en el futuro.
 
 </div>
