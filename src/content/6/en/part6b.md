@@ -118,6 +118,7 @@ Let's also create a new _action creator_ function. We will write the code for th
 ```js
 const filterReducer = (state = 'ALL', action) => {
   // ...
+  return state;
 }
 
 export const filterChange = filter => {
