@@ -361,7 +361,7 @@ const App = () => {
 }
 ```
 
-Es fácil de seguir y rastrear las llamadas realizadas a la <i>App</i> función de renderizado del componente:
+Es fácil de seguir y rastrear las llamadas realizadas a la función de renderizado del componente <i>App</i>:
 
 ![Captura de pantalla de rendering log en herramientas de desarrollo](../../images/1/4e.png)
 
