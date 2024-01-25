@@ -738,7 +738,7 @@ La aplicación puede, por ejemplo, verse así:
 
 ![característica adicional de número arbitrario de cursos](../../images/teht/10e.png)
 
-#### 2.5: Módulo separado paso 10
+<h4>2.5: Módulo separado paso 10</h4>
 
 Declara el componente <i>Course</i> como un módulo separado, que se importa en el componente <i>App</i>. Puedes incluir todos los subcomponentes del curso en el mismo módulo.
 
