@@ -401,7 +401,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 In the first exercise, we will start working on an application that will be further developed in the later exercises. In related sets of exercises, it is sufficient to return the final version of your application. You may also make a separate commit after you have finished each part of the exercise set, but doing so is not required.
 
-<h4>2.6: The Phonebook Step1</h4>
+<h4>2.6: The Phonebook Step 1</h4>
 
 Let's create a simple phonebook. <i>**In this part, we will only be adding names to the phonebook.**</i>
 
@@ -459,13 +459,13 @@ Note the use of the React developer tools extension in the picture above!
 - you can use the person's name as a value of the <i>key</i> property
 - remember to prevent the default action of submitting HTML forms!
 
-<h4>2.7: The Phonebook Step2</h4>
+<h4>2.7: The Phonebook Step 2</h4>
 
 Prevent the user from being able to add names that already exist in the phonebook. JavaScript arrays have numerous suitable [methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) for accomplishing this task. Keep in mind [how object equality works](https://www.joshbritz.co/posts/why-its-so-hard-to-check-object-equality/) in Javascript.
 
 Issue a warning with the [alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) command when such an action is attempted:
 
-![2.7 sample screenshot](../../images/2/11e.png)
+![browser alert: "user already exists in the phonebook"](../../images/2/11e.png)
 
 **Hint:** when you are forming strings that contain values from variables, it is recommended to use a [template string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals):
 
@@ -487,7 +487,7 @@ newName + ' is already added to phonebook'
 
 Using template strings is the more idiomatic option and the sign of a true JavaScript professional.
 
-<h4>2.8: The Phonebook Step3</h4>
+<h4>2.8: The Phonebook Step 3</h4>
 
 Expand your application by allowing users to add phone numbers to the phone book. You will need to add a second <i>input</i> element to the form (along with its own event handler):
 
@@ -503,11 +503,11 @@ At this point, the application could look something like this. The image also di
 
 ![2.8 sample screenshot](../../images/2/12e.png)
 
-<h4>2.9*: The Phonebook Step4</h4>
+<h4>2.9*: The Phonebook Step 4</h4>
 
 Implement a search field that can be used to filter the list of people by name:
 
-![2.9 sample screenshot](../../images/2/13e.png)
+![2.9 search field](../../images/2/13e.png)
 
 You can implement the search field as an <i>input</i> element that is placed outside the HTML form. The filtering logic shown in the image is <i>case insensitive</i>, meaning that the search term <i>arto</i> also returns results that contain Arto with an uppercase A.
 
@@ -528,7 +528,7 @@ const App = () => {
 
 This saves you from having to manually input data into your application for testing out your new functionality.
 
-<h4>2.10: The Phonebook Step5</h4>
+<h4>2.10: The Phonebook Step 5</h4>
 
 If you have implemented your application in a single component, refactor it by extracting suitable parts into new components. Maintain the application's state and all event handlers in the <i>App</i> root component.
 
@@ -560,8 +560,6 @@ const App = () => {
 }
 ```
 
-**NB**: You might run into problems in this exercise if you define your components "in the wrong place". Now would be a good time to rehearse
-the chapter [do not define a component in another component](/en/part1/a_more_complex_state_debugging_react_apps#do-not-define-components-within-components)
-from the last part.
+**NB**: You might run into problems in this exercise if you define your components "in the wrong place". Now would be a good time to rehearse the chapter [do not define a component in another component](/en/part1/a_more_complex_state_debugging_react_apps#do-not-define-components-within-components) from the last part.
 
 </div>
