@@ -174,7 +174,7 @@ fly deploy
 If all goes well, the app should now be up and running. You can open it in the browser with the command
 
 ```bash
-fly open
+fly apps open
 ```
 
 A particularly important command is _fly logs_. This command can be used to view server logs. It is best to keep logs always visible!

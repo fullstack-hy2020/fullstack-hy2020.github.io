@@ -142,7 +142,7 @@ fly deploy
 Jos kaikki menee hyvin, sovellus käynnistyy ja saat sen avattua selaimeen komennolla 
 
 ```bash
-fly open
+fly apps open
 ```
 
 Tämän jälkeen aina kun teet muutoksia sovellukseen, saat vietyä uuden version tuotantoon komennolla 
