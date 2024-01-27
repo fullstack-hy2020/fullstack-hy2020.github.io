@@ -57,20 +57,20 @@ const App = () => {
       // highlight-start
       <form onSubmit={handleLogin}>
         <div>
-          username
-            <input
+          <label htmlFor="username">username</label>
+          <input
             type="text"
             value={username}
-            name="Username"
+            id="username"
             onChange={({ target }) => setUsername(target.value)}
           />
         </div>
         <div>
-          password
-            <input
+          <label htmlFor="password">password</label>
+          <input
             type="password"
             value={password}
-            name="Password"
+            id="password"
             onChange={({ target }) => setPassword(target.value)}
           />
         </div>
@@ -170,20 +170,20 @@ const App = () => {
   const loginForm = () => (
     <form onSubmit={handleLogin}>
       <div>
-        username
+          <label htmlFor="username">username</label>
           <input
           type="text"
           value={username}
-          name="Username"
+          id="username"
           onChange={({ target }) => setUsername(target.value)}
         />
       </div>
       <div>
-        password
+          <label htmlFor="password">password</label>
           <input
           type="password"
           value={password}
-          name="Password"
+          id="password"
           onChange={({ target }) => setPassword(target.value)}
         />
       </div>
