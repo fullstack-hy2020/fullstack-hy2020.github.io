@@ -43,7 +43,7 @@ After installing run the following command to run the json-server. The <i>json-s
 json-server --port 3001 --watch db.json
 ```
 
-However, a global installation is not necessary.  From the root directory of your app, we can run the <i>json-server</i> using the command _npx_:
+However, a global installation is not necessary. From the root directory of your app, we can run the <i>json-server</i> using the command _npx_:
 
 ```js
 npx json-server --port 3001 --watch db.json
@@ -51,7 +51,7 @@ npx json-server --port 3001 --watch db.json
 
 Let's navigate to the address <http://localhost:3001/notes> in the browser. We can see that <i>json-server</i> serves the notes we previously wrote to the file in JSON format:
 
-![](../../images/2/14new.png)
+![notes on json format in the browser at localhost:3001/notes](../../images/2/14new.png)
 
 If your browser doesn't have a way to format the display of JSON-data, then install an appropriate plugin, e.g. [JSONVue](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) to make your life easier.
 
@@ -139,7 +139,7 @@ We could use the previously mentioned promise-based function [fetch](https://dev
 
 That being said, we will be using the [axios](https://github.com/axios/axios) library instead for communication between the browser and server. It functions like fetch but is somewhat more pleasant to use. Another good reason to use axios is our getting familiar with adding external libraries, so-called <i>npm packages</i>, to React projects.
 
-Nowadays, practically all JavaScript projects are defined using the node package manager, aka [npm](https://docs.npmjs.com/getting-started/what-is-npm). The projects created using Vite also follow the npm format. A clear indicator that a project uses npm is the <i>package.json</i> file located at the root of the project:
+Nowadays, practically all JavaScript projects are defined using the node package manager, aka [npm](https://docs.npmjs.com/about-npm). The projects created using Vite also follow the npm format. A clear indicator that a project uses npm is the <i>package.json</i> file located at the root of the project:
 
 ```json
 {
@@ -352,10 +352,10 @@ What's not immediately obvious, however, is where the command <em>axios.get</em>
 
 ### Effect-hooks
 
-We have already used [state hooks](https://react.dev/learn/state-a-components-memory) that were introduced along with React version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0), which provide state to React components defined as functions - the so-called <i>functional components</i>. Version 16.8.0 also introduces [effect hooks](https://react.dev/reference/react#effect-hooks) as a new feature. As per the official docs:
+We have already used [state hooks](https://react.dev/learn/state-a-components-memory) that were introduced along with React version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0), which provide state to React components defined as functions - the so-called <i>functional components</i>. Version 16.8.0 also introduces [effect hooks](https://react.dev/reference/react/hooks#effect-hooks) as a new feature. As per the official docs:
 
-> <i>The Effect Hook lets you perform side effects on function components.</i>
-> <i>Data fetching, setting up a subscription, and manually changing the DOM in React components are all examples of side effects.</i>
+> <i>Effects let a component connect to and synchronize with external systems.</i>
+> <i>This includes dealing with network, browser DOM, animations, widgets written using a different UI library, and other non-React code.</i>
 
 As such, effect hooks are precisely the right tool to use when fetching data from a server.
 
@@ -531,7 +531,7 @@ At this point in development, all the parts of the application happen to reside 
 
 <h3>Exercise 2.11.</h3>
 
-<h4>2.11: The Phonebook Step6</h4>
+<h4>2.11: The Phonebook Step 6</h4>
 
 We continue with developing the phonebook. Store the initial state of the application in the file <i>db.json</i>, which should be placed in the root of the project.
 
