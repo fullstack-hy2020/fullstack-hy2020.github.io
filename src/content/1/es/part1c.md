@@ -584,7 +584,7 @@ A continuación, creemos un componente <i>Button</i> para los botones de nuestra
 ```js
 const Button = (props) => {
   return (
-    <button onClick={props.handleClick}>
+    <button onClick={props.onClick}>
       {props.text}
     </button>
   )
@@ -719,7 +719,7 @@ También podemos simplificar el componente Button.
 ```js
 const Button = (props) => {
   return (
-    <button onClick={props.handleClick}>
+    <button onClick={props.onClick}>
       {props.text}
     </button>
   )
@@ -734,8 +734,8 @@ Podemos usar la desestructuración para obtener solo los campos requeridos de <i
 Por ejemplo, la prop `onClick` del componente Button debería ser llamada `onSmash`:
 
 ```js
-const Button = ({ handleClick, text }) => (
-  <button onClick={handleClick}>
+const Button = ({ onClick, text }) => (
+  <button onClick={onClick}>
     {text}
   </button>
 )
