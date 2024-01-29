@@ -13,7 +13,7 @@ When creating notes in our application, we would naturally want to store them in
 
 The json-server does not exactly match the description provided by the textbook [definition](https://en.wikipedia.org/wiki/Representational_state_transfer) of a REST API, but neither do most other APIs claiming to be RESTful.
 
-We will take a closer look at REST in the [next part](/en/part3) of the course. But it's important to familiarize ourselves at this point with some of the [conventions](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) used by json-server and REST APIs in general. In particular, we will be taking a look at the conventional use of [routes](https://github.com/typicode/json-server#routes), aka URLs and HTTP request types, in REST.
+We will take a closer look at REST in the [next part](/en/part3) of the course. But it's important to familiarize ourselves at this point with some of the [conventions](https://en.wikipedia.org/wiki/REST#Applied_to_web_services) used by json-server and REST APIs in general. In particular, we will be taking a look at the conventional use of [routes](https://github.com/typicode/json-server#routes), aka URLs and HTTP request types, in REST.
 
 ### REST
 
@@ -73,7 +73,7 @@ Also the tab <i>response</i> is useful, it shows what was the data the server re
 
 ![devtools response tab shows same content as payload but with id field too](../../images/2/21new3.png)
 
-The new note is not rendered to the screen yet. This is because we did not update the state of the <i>App</i> component when we created the new note. Let's fix this:
+The new note is not rendered to the screen yet. This is because we did not update the state of the <i>App</i> component when we created it. Let's fix this:
 
 ```js
 addNote = event => {
@@ -706,7 +706,7 @@ Full stack development is <i> extremely hard</i>, that is why I will use all the
 - I will progress with small steps
 - I will write lots of _console.log_ statements to make sure I understand how the code behaves and to help pinpoint problems
 - If my code does not work, I will not write more code. Instead, I start deleting the code until it works or just return to a state when everything was still working
-- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](https://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord-telegram) how to ask for help
+- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](/en/part0/general_info#how-to-get-help-in-discord-telegram) how to ask for help
 
 </div>
 
@@ -714,17 +714,17 @@ Full stack development is <i> extremely hard</i>, that is why I will use all the
 
 <h3>Exercises 2.12.-2.15.</h3>
 
-<h4>2.12: The Phonebook step7</h4>
+<h4>2.12: The Phonebook step 7</h4>
 
 Let's return to our phonebook application.
 
 Currently, the numbers that are added to the phonebook are not saved to a backend server. Fix this situation.
 
-<h4>2.13: The Phonebook step8</h4>
+<h4>2.13: The Phonebook step 8</h4>
 
 Extract the code that handles the communication with the backend into its own module by following the example shown earlier in this part of the course material.
 
-<h4>2.14: The Phonebook step9</h4>
+<h4>2.14: The Phonebook step 9</h4>
 
 Make it possible for users to delete entries from the phonebook. The deletion can be done through a dedicated button for each person in the phonebook list. You can confirm the action from the user by using the [window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm) method:
 
@@ -743,7 +743,7 @@ const delete = (id) => {
 }
 ```
 
-<h4>2.15*: The Phonebook step10</h4>
+<h4>2.15*: The Phonebook step 10</h4>
 
 <i>Why is there a star in the exercise? See [here](/en/part0/general_info#taking-the-course) for the explanation.</i>
 
