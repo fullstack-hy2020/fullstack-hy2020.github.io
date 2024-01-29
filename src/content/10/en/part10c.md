@@ -349,7 +349,8 @@ import createApolloClient from './src/utils/apolloClient';
 const apolloClient = createApolloClient();
 
 const App = () => {
-  console.log(Constants.manifest); // highlight-line
+  console.log(Constants.expoConfig.extra); // highlight-line
+  // 'manifest' is deprecated.' @deprecated Use Constants.expoConfig instead, which behaves more consistently across EAS Build and EAS Update.
 
   return (
     <NativeRouter>
