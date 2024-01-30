@@ -146,7 +146,7 @@ Let's take a closer look at the first line of the code:
 const http = require('http')
 ```
 
-In the first row, the application imports Node's built-in [web server](https://nodejs.org/docs/latest-v8.x/api/http.html) module. This is practically what we have already been doing in our browser-side code, but with a slightly different syntax:
+In the first row, the application imports Node's built-in [web server](https://nodejs.org/docs/latest-v18.x/api/http.html) module. This is practically what we have already been doing in our browser-side code, but with a slightly different syntax:
 
 ```js
 import http from 'http'
@@ -167,7 +167,7 @@ const app = http.createServer((request, response) => {
 })
 ```
 
-The code uses the _createServer_ method of the [http](https://nodejs.org/docs/latest-v8.x/api/http.html) module to create a new web server. An <i>event handler</i> is registered to the server that is called <i>every time</i> an HTTP request is made to the server's address <http://localhost:3001>.
+The code uses the _createServer_ method of the [http](https://nodejs.org/docs/latest-v18.x/api/http.html) module to create a new web server. An <i>event handler</i> is registered to the server that is called <i>every time</i> an HTTP request is made to the server's address <http://localhost:3001>.
 
 The request is responded to with the status code 200, with the <i>Content-Type</i> header set to <i>text/plain</i>, and the content of the site to be returned set to <i>Hello World</i>.
 
@@ -224,7 +224,7 @@ When we open the browser, the displayed format is exactly the same as in [part 2
 
 ### Express
 
-Implementing our server code directly with Node's built-in [http](https://nodejs.org/docs/latest-v8.x/api/http.html) web server is possible. However, it is cumbersome, especially once the application grows in size.
+Implementing our server code directly with Node's built-in [http](https://nodejs.org/docs/latest-v18.x/api/http.html) web server is possible. However, it is cumbersome, especially once the application grows in size.
 
 Many libraries have been developed to ease server-side development with Node, by offering a more pleasing interface to work with the built-in http module. These libraries aim to provide a better abstraction for general use cases we usually require to build a backend server. By far the most popular library intended for this purpose is [express](http://expressjs.com).
 
@@ -247,7 +247,7 @@ The dependency is also added to our <i>package.json</i> file:
 
 The source code for the dependency is installed in the <i>node\_modules</i> directory located at the root of the project. In addition to express, you can find a great number of other dependencies in the directory:
 
-![ls listing of dependencies in directory](../../images/3/4.png)
+![ls command listing of dependencies in directory](../../images/3/4.png)
 
 These are the dependencies of the express library and the dependencies of all of its dependencies, and so forth. These are called the [transitive dependencies](https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/) of our project.
 
@@ -257,7 +257,7 @@ The version 4.18.2 of express was installed in our project. What does the caret 
 "express": "^4.18.2"
 ```
 
-The versioning model used in npm is called [semantic versioning](https://docs.npmjs.com/getting-started/semantic-versioning).
+The versioning model used in npm is called [semantic versioning](https://docs.npmjs.com/about-semantic-versioning).
 
 The caret in the front of <i>^4.18.2</i> means that if and when the dependencies of a project are updated, the version of express that is installed will be at least <i>4.18.2</i>. However, the installed version of express can also have a larger <i>patch</i> number (the last number), or a larger <i>minor</i> number (the middle number). The major version of the library indicated by the first <i>major</i> number must be the same.
 
@@ -301,7 +301,7 @@ app.listen(PORT, () => {
 })
 ```
 
-To get the new version of our application into use, we have to restart the application.
+To get the new version of our application into use, first we have to restart it.
 
 The application did not change a whole lot. Right at the beginning of our code, we're importing _express_, which this time is a <i>function</i> that is used to create an express application stored in the _app_ variable:
 
@@ -354,7 +354,7 @@ The experiment shown below illustrates this point:
 
 ![node terminal demonstrating json is of type string](../../assets/3/5.png)
 
-The experiment above was done in the interactive [node-repl](https://nodejs.org/docs/latest-v8.x/api/repl.html). You can start the interactive node-repl by typing in _node_ in the command line. The repl is particularly useful for testing how commands work while you're writing application code. I highly recommend this!
+The experiment above was done in the interactive [node-repl](https://nodejs.org/docs/latest-v18.x/api/repl.html). You can start the interactive node-repl by typing in _node_ in the command line. The repl is particularly useful for testing how commands work while you're writing application code. I highly recommend this!
 
 ### nodemon
 
@@ -632,7 +632,7 @@ If you use *IntelliJ WebStorm* instead, you can use a similar procedure with its
 
 ### Receiving data
 
-Next, let's make it possible to add new notes to the server. Adding a note happens by making an HTTP POST request to the address <http://localhost:3001/api/notes>, and by sending all the information for the new note in the request [body](https://www.w3.org/Protocols/rfc2616/rfc2616-sec7.html#sec7) in JSON format.
+Next, let's make it possible to add new notes to the server. Adding a note happens by making an HTTP POST request to the address <http://localhost:3001/api/notes>, and by sending all the information for the new note in the request [body](https://www.rfc-editor.org/rfc/rfc9112#name-message-body) in JSON format.
 
 To access the data easily, we need the help of the express [json-parser](https://expressjs.com/en/api.html) that we can use with the command _app.use(express.json())_.
 
@@ -799,8 +799,6 @@ If the data saved in the _body_ variable has the <i>important</i> property, the 
 
 You can find the code for our current application in its entirety in the <i>part3-1</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1).
 
-The code for the current state of the application is specified in branch [part3-1](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1).
-
 ![GitHub screenshot of branch 3-1](../../images/3/21.png)
 
 If you clone the project, run the _npm install_ command before starting the application with _npm start_ or _npm run dev_.
@@ -828,7 +826,6 @@ What exactly is happening in that line of code? <em>notes.map(n => n.id)</em> cr
 
 <div class="tasks">
 
-
 ### Exercises 3.1.-3.6.
 
 **NB:** It's recommended to do all of the exercises from this part into a new dedicated git repository, and place your source code right at the root of the repository. Otherwise, you will run into problems in exercise 3.10.
@@ -837,7 +834,7 @@ What exactly is happening in that line of code? <em>notes.map(n => n.id)</em> cr
 
 **Strong recommendation:** When you are working on backend code, always keep an eye on what's going on in the terminal that is running your application.
 
-#### 3.1: Phonebook backend step1
+#### 3.1: Phonebook backend step 1
 
 Implement a Node application that returns a hardcoded list of phonebook entries from the address <http://localhost:3001/api/persons>.
   
@@ -878,7 +875,7 @@ The application must be started with the command _npm start_.
 
 The application must also offer an _npm run dev_ command that will run the application and restart the server whenever changes are made and saved to a file in the source code.
 
-#### 3.2: Phonebook backend step2
+#### 3.2: Phonebook backend step 2
 
 Implement a page at the address <http://localhost:3001/info> that looks roughly like this:
 
@@ -890,25 +887,25 @@ There can only be one response.send() statement in an Express app route. Once yo
   
 To include a line space in the output, use `<br/>` tag, or wrap the statements in `<p>` tags.
 
-#### 3.3: Phonebook backend step3
+#### 3.3: Phonebook backend step 3
 
 Implement the functionality for displaying the information for a single phonebook entry. The url for getting the data for a person with the id 5 should be <http://localhost:3001/api/persons/5>
 
 If an entry for the given id is not found, the server has to respond with the appropriate status code.
 
-#### 3.4: Phonebook backend step4
+#### 3.4: Phonebook backend step 4
 
 Implement functionality that makes it possible to delete a single phonebook entry by making an HTTP DELETE request to the unique URL of that phonebook entry.
 
 Test that your functionality works with either Postman or the Visual Studio Code REST client.
 
-#### 3.5: Phonebook backend step5
+#### 3.5: Phonebook backend step 5
 
 Expand the backend so that new phonebook entries can be added by making HTTP POST requests to the address <http://localhost:3001/api/persons>.
 
 Generate a new id for the phonebook entry with the [Math.random](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random) function. Use a big enough range for your random values so that the likelihood of creating duplicate ids is small.
 
-#### 3.6: Phonebook backend step6
+#### 3.6: Phonebook backend step 6
 
 Implement error handling for creating new entries. The request is not allowed to succeed, if:
 
@@ -1005,7 +1002,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 ### Exercises 3.7.-3.8.
 
-#### 3.7: Phonebook backend step7
+#### 3.7: Phonebook backend step 7
 
 Add the [morgan](https://github.com/expressjs/morgan) middleware to your application for logging. Configure it to log messages to your console based on the <i>tiny</i> configuration.
 
@@ -1013,7 +1010,7 @@ The documentation for Morgan is not the best, and you may have to spend some tim
 
 Morgan is installed just like all other libraries with the _npm install_ command. Taking morgan into use happens the same way as configuring any other middleware by using the _app.use_ command.
 
-#### 3.8*: Phonebook backend step8
+#### 3.8*: Phonebook backend step 8
 
 Configure morgan so that it also shows the data sent in HTTP POST requests:
 
