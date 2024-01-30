@@ -1194,7 +1194,7 @@ export default App
 
 <h4>1.7: unicafe step2</h4>
 
-Expand your application so that it shows more statistics about the gathered feedback: the total number of collected feedback, the average score (good: 1, neutral: 0, bad: -1) and the percentage of positive feedback.
+Expand your application so that it shows more statistics about the gathered feedback: the total number of collected feedback, the average score (good: 1, neutral: 0, bad: 1) and the percentage of positive feedback.
 
 ![average and percentage positive screenshot feedback](../../images/1/14e.png)
 
