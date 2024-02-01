@@ -306,7 +306,7 @@ Korjaa ongelma osan 2 esimerkin [promise ja virheet](/osa2/palvelimella_olevan_d
 
 Osan lopussa on vielä muutama hieman haastavampi tehtävä. Voit tässä vaiheessa jättää tehtävät tekemättä jos ne tuottavat liian paljon päänvaivaa, palaamme samoihin teemoihin uudelleen myöhemmin. Materiaali kannattanee jokatapauksessa lukea läpi.
 
-Eräs sovelluksessamme tekemä ratkaisu piilottaa yhden hyvin tyypillisen virhetilanteen, mihin tulet varmasti törmäämään monta kertaa.
+Eräs sovelluksessa tekemämme ratkaisu piilottaa yhden hyvin tyypillisen virhetilanteen, mihin tulet varmasti törmäämään monta kertaa.
 
 Alustimme muistiinpanot muistavan tilan alkuarvoksi tyhjän taulukon:
 
