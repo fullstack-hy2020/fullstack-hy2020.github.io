@@ -67,13 +67,13 @@ When the application "does not work", we have to first figure out where the prob
 
 The key is to be systematic. Since the problem can exist anywhere, <i>you must question everything</i>, and eliminate all possibilities one by one. Logging to the console, Postman, debuggers, and experience will help.
 
-When bugs occur, <i>the worst of all possible strategies</i> is to continue writing code. It will guarantee that your code will soon have even more bugs, and debugging them will be even more difficult. The [stop and fix](https://leanscape.io/principles-of-lean-13-jidoka/) principle from Toyota Production Systems is very effective in this situation as well.
+When bugs occur, <i>the worst of all possible strategies</i> is to continue writing code. It will guarantee that your code will soon have even more bugs, and debugging them will be even more difficult. The [Jidoka](https://leanscape.io/principles-of-lean-13-jidoka/) (stop and fix) principle from Toyota Production Systems is very effective in this situation as well.
 
 ### MongoDB
 
 To store our saved notes indefinitely, we need a database. Most of the courses taught at the University of Helsinki use relational databases. In most parts of this course, we will use [MongoDB](https://www.mongodb.com/) which is a so-called [document database](https://en.wikipedia.org/wiki/Document-oriented_database).
 
-The reason for using Mongo as the database is its lower complexity compared to a relational database. [Part 13](https://fullstackopen.com/en/part13) of the course shows how to build node.js backends that use a relational database.
+The reason for using Mongo as the database is its lower complexity compared to a relational database. [Part 13](/en/part13) of the course shows how to build Node.js backends that use a relational database.
 
 Document databases differ from relational databases in how they organize data as well as in the query languages they support. Document databases are usually categorized under the [NoSQL](https://en.wikipedia.org/wiki/NoSQL) umbrella term.
 
@@ -270,7 +270,7 @@ When the code is executed, the program prints all the notes stored in the databa
 
 ![node mongo.js outputs notes as JSON](../../images/3/70new.png)
 
-The objects are retrieved from the database with the [find](https://mongoosejs.com/docs/api/model.html#model_Model-find) method of the _Note_ model. The parameter of the method is an object expressing search conditions. Since the parameter is an empty object<code>{}</code>, we get all of the notes stored in the  _notes_ collection.
+The objects are retrieved from the database with the [find](https://mongoosejs.com/docs/api/model.html#model_Model-find) method of the _Note_ model. The parameter of the method is an object expressing search conditions. Since the parameter is an empty object<code>{}</code>, we get all of the notes stored in the _notes_ collection.
 
 The search conditions adhere to the Mongo search query [syntax](https://docs.mongodb.com/manual/reference/operator/).
 
@@ -329,7 +329,7 @@ Arto Vihavainen 045-1232456
 Ada Lovelace 040-1231236
 </pre>
 
-You can get the command-line parameters from the [process.argv](https://nodejs.org/docs/latest-v8.x/api/process.html#process_process_argv) variable.
+You can get the command-line parameters from the [process.argv](https://nodejs.org/docs/latest-v18.x/api/process.html#process_process_argv) variable.
 
 **NB: do not close the connection in the wrong place**. E.g. the following code will not work:
 
@@ -475,7 +475,7 @@ noteSchema.set('toJSON', {
 module.exports = mongoose.model('Note', noteSchema) // highlight-line
 ```
 
-Defining Node [modules](https://nodejs.org/docs/latest-v8.x/api/modules.html) differs slightly from the way of defining [ES6 modules](/en/part2/rendering_a_collection_modules#refactoring-modules) in part 2.
+Defining Node [modules](https://nodejs.org/docs/latest-v18.x/api/modules.html) differs slightly from the way of defining [ES6 modules](/en/part2/rendering_a_collection_modules#refactoring-modules) in part 2.
 
 The public interface of the module is defined by setting a value to the _module.exports_ variable. We will set the value to be the <i>Note</i> model. The other things defined inside of the module, like the variables _mongoose_ and _url_ will not be accessible or visible to users of the module.
 
@@ -534,7 +534,7 @@ We also added the hardcoded port of the server into the <em>PORT</em> environmen
 
 ![.gitignore in vscode with .env line added](../../images/3/45ae.png)
 
-The environment variables defined in the <i>.env</i> file can be taken into use with the expression <em>require('dotenv').config()</em> and you can reference them in your code just like you would reference normal environment variables, with the familiar <em>process.env.MONGODB_URI</em> syntax.
+The environment variables defined in the <i>.env</i> file can be taken into use with the expression <em>require('dotenv').config()</em> and you can reference them in your code just like you would reference normal environment variables, with the <em>process.env.MONGODB_URI</em> syntax.
 
 Let's change the <i>index.js</i> file in the following way:
 
@@ -641,7 +641,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 The following exercises are pretty straightforward, but if your frontend stops working with the backend, then finding and fixing the bugs can be quite interesting.
 
-#### 3.13: Phonebook database, step1
+#### 3.13: Phonebook database, step 1
 
 Change the fetching of all phonebook entries so that the data is <i>fetched from the database</i>.
 
@@ -649,7 +649,7 @@ Verify that the frontend works after the changes have been made.
 
 In the following exercises, write all Mongoose-specific code into its own module, just like we did in the chapter [Database configuration into its own module](/en/part3/saving_data_to_mongo_db#database-configuration-into-its-own-module).
 
-#### 3.14: Phonebook database, step2
+#### 3.14: Phonebook database, step 2
 
 Change the backend so that new numbers are <i>saved to the database</i>. Verify that your frontend still works after the changes.
 
@@ -724,9 +724,9 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-If the format of the id is incorrect, then we will end up in the error handler defined in the _catch_ block. The appropriate status code for the situation is [400 Bad Request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1) because the situation fits the description perfectly:
+If the format of the id is incorrect, then we will end up in the error handler defined in the _catch_ block. The appropriate status code for the situation is [400 Bad Request](https://www.rfc-editor.org/rfc/rfc9110.html#name-400-bad-request) because the situation fits the description perfectly:
 
-> <i>The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications.</i>
+> <i>The 400 (Bad Request) status code indicates that the server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).</i>
 
 We have also added some data to the response to shed some light on the cause of the error.
 
@@ -741,7 +741,7 @@ It's never a bad idea to print the object that caused the exception to the conso
 })
 ```
 
-The reason the error handler gets called might be something completely different than what you had anticipated. If you log the error to the console, you may save yourself from long and frustrating debugging sessions. Moreover, most modern services where you deploy your application support some form of logging system that you can use to check these logs. As mentioned, Heroku is one.
+The reason the error handler gets called might be something completely different than what you had anticipated. If you log the error to the console, you may save yourself from long and frustrating debugging sessions. Moreover, most modern services where you deploy your application support some form of logging system that you can use to check these logs. As mentioned, Fly.io is one.
 
 Every time you're working on a project with a backend, <i>it is critical to keep an eye on the console output of the backend</i>. If you are working on a small screen, it is enough to just see a tiny slice of the output in the background. Any error messages will catch your attention even when the console is far back in the background:
 
@@ -899,7 +899,7 @@ Notice that the <em>findByIdAndUpdate</em> method receives a regular JavaScript 
 
 There is one important detail regarding the use of the <em>findByIdAndUpdate</em> method. By default, the <em>updatedNote</em> parameter of the event handler receives the original document [without the modifications](https://mongoosejs.com/docs/api/model.html#model_Model-findByIdAndUpdate). We added the optional <code>{ new: true }</code> parameter, which will cause our event handler to be called with the new modified document instead of the original.
 
-After testing the backend directly with Postman and the VS Code REST client, we can verify that it seems to work. The frontend also appears to work with the backend using the database.
+After testing the backend directly with Postman or the VS Code REST client, we can verify that it seems to work. The frontend also appears to work with the backend using the database.
 
 You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5).
 
@@ -927,17 +927,17 @@ Full stack development is <i> extremely hard</i>, that is why I will use all the
 
 ### Exercises 3.15.-3.18.
 
-#### 3.15: Phonebook database, step3
+#### 3.15: Phonebook database, step 3
 
 Change the backend so that deleting phonebook entries is reflected in the database.
 
 Verify that the frontend still works after making the changes.
 
-#### 3.16: Phonebook database, step4
+#### 3.16: Phonebook database, step 4
 
 Move the error handling of the application to a new error handler middleware.
 
-#### 3.17*: Phonebook database, step5
+#### 3.17*: Phonebook database, step 5
 
 If the user tries to create a new phonebook entry for a person whose name is already in the phonebook, the frontend will try to update the phone number of the existing entry by making an HTTP PUT request to the entry's unique URL.
 
@@ -945,7 +945,7 @@ Modify the backend to support this request.
 
 Verify that the frontend works after making your changes.
 
-#### 3.18*: Phonebook database step6
+#### 3.18*: Phonebook database step 6
 
 Also update the handling of the <i>api/persons/:id</i> and <i>info</i> routes to use the database, and verify that they work directly with the browser, Postman, or VS Code REST client.
 

@@ -1132,7 +1132,7 @@ Programar es difícil, por eso usaré todos los medios posibles para hacerlo má
 
 <h3> Ejercicios 1.6.-1.14.</h3>
 
-Envía tus soluciones a los ejercicios enviando primero su código a GitHub y luego marcando los ejercicios completados en el [sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Envía tus soluciones a los ejercicios enviando primero tu código a GitHub y luego marcando los ejercicios completados en el [sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 Recuerda, envía **todos** los ejercicios de una parte **en una sola presentación**. Una vez que hayas enviado tus soluciones para una parte, **ya no podrás enviar más ejercicios a esa parte**.
 
@@ -1277,7 +1277,7 @@ Entonces realiza las acciones necesarias para que la advertencia desaparezca. In
 
 <h4>1.12*: anecdotes, paso 1</h4>
 
-El mundo de la ingeniería de software está lleno con [anécdotas](http://www.comp.nus.edu.sg/~damithch/pages/SE-quotes.htm) que destilan verdades atemporales de nuestro campo en breves frases.
+El mundo de la ingeniería de software está lleno de [anécdotas](http://www.comp.nus.edu.sg/~damithch/pages/SE-quotes.htm) que destilan verdades atemporales de nuestro campo en breves frases.
 
 Expande la siguiente aplicación agregando un botón en el que se pueda hacer clic para mostrar una anécdota <i>aleatoria</i> del campo de la ingeniería de software:
 
