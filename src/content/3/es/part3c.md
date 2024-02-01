@@ -937,7 +937,7 @@ Verifica que el frontend aún funcione después de realizar los cambios.
 
 Mueve el manejo de errores de la aplicación a un nuevo middleware de manejo de errores.
 
-#### 3.17 *: Base de datos de la Agenda Telefónica, paso 5
+#### 3.17*: Base de datos de la Agenda Telefónica, paso 5
 
 Si el usuario intenta crear una nueva entrada en la agenda para una persona cuyo nombre ya está en la agenda, el frontend intentará actualizar el número de teléfono de la entrada existente realizando una solicitud HTTP PUT a la URL única de la entrada.
 
@@ -945,7 +945,7 @@ Modifica el backend para admitir esta solicitud.
 
 Verifica que el frontend funcione después de realizar los cambios.
 
-#### 3.18 *: Base de datos de la Agenda Telefónica, paso 6
+#### 3.18*: Base de datos de la Agenda Telefónica, paso 6
 
 También actualiza el manejo de las rutas <i>api/persons/:id</i> e <i>info</i> para usar la base de datos, y verifica que funcionen directamente con el navegador, Postman o el cliente REST de VS Code.
 

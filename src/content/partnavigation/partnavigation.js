@@ -261,7 +261,7 @@ module.exports = {
     },
     '3': {
       a: 'Node.js y Express',
-      b: 'Implementación de la aplicación en Internet',
+      b: 'Despliegue de la aplicación a Internet',
       c: 'Guardando datos en MongoDB',
       d: 'Validación y ESLint',
     },

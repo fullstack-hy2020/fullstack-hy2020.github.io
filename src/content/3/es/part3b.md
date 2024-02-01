@@ -379,7 +379,7 @@ La configuración ahora se ve así:
 
 El backend de node/express ahora reside en el servidor de Fly.io/Render. Cuando se accede a la dirección raíz, el navegador carga y ejecuta la aplicación React que obtiene los datos JSON del servidor de Fly.io/Render.
 
-###  Optimización de la implementación del frontend
+### Optimizando el despliegue del frontend
 
 Para crear una nueva compilación de producción del frontend sin trabajo manual adicional, agreguemos algunos scripts npm al <i>package.json</i> del repositorio de backend.
 
