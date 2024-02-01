@@ -1029,6 +1029,7 @@ app.post('/calculate', (req, res) => {
   return res.send({ result });
 });
 ```
+We also added a 'return' keyword to the 'res.send({ result })' line to quiet the warning 'Not all code paths return a value'
 
 We shall see later in this part some techniques on how the *any* typed data (eg. the input an app receives from the user) can be *narrowed* to a more specific type (such as number). With a proper narrowing of types, there is no more need to silence the ESlint rules.
 
