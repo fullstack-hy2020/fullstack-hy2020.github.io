@@ -17,7 +17,7 @@ Avataan selaimella [esimerkkisovellus](https://studies.cs.helsinki.fi/exampleapp
 
 Kurssimateriaali olettaa, että käytössä on Chrome-selain.
 
-**Web-sovelluskehityksen sääntö numero yksi**: pidä selaimen Developer-konsoli koko ajan auki. Konsoli avautuu Macilla painamalla yhtä aikaa _alt_ _cmd_ ja _i_. Windowsilla konsolin saa auki painamalla _F12_ tai yhtä aikaa _ctrl_ _shift_ ja _i_.
+**Web-sovelluskehityksen sääntö numero yksi**: pidä selaimen Developer-konsoli koko ajan auki. Konsoli avautuu Macilla painamalla yhtä aikaa _option_ _cmd_ ja _i_. Windowsilla konsolin saa auki painamalla _F12_ tai yhtä aikaa _ctrl_ _shift_ ja _i_.
 
 Ennen kuin jatkat eteenpäin, selvitä, miten saat koneellasi konsolin auki (googlaa tarvittaessa), ja muista pitää se auki <i>aina</i>, kun teet web-sovelluksia.
 
