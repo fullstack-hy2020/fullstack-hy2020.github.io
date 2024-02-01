@@ -1132,7 +1132,7 @@ Programar es difícil, por eso usaré todos los medios posibles para hacerlo má
 
 <h3> Ejercicios 1.6.-1.14.</h3>
 
-Envía tus soluciones a los ejercicios enviando primero st código a GitHub y luego marcando los ejercicios completados en el [sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Envía tus soluciones a los ejercicios enviando primero su código a GitHub y luego marcando los ejercicios completados en el [sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 Recuerda, envía **todos** los ejercicios de una parte **en una sola presentación**. Una vez que hayas enviado tus soluciones para una parte, **ya no podrás enviar más ejercicios a esa parte**.
 
@@ -1324,7 +1324,7 @@ Expande tu aplicación para que puedas votar por la anécdota mostrada.
 
 **Nota:** almacena los votos de cada anécdota en una matriz u objeto en el estado del componente. Recuerda que la forma correcta de actualizar el estado almacenado en estructuras de datos complejas como objetos y matrices es hacer una copia del estado.
 
-Puedes crear una copia de un objeto como este:
+Puedes crear una copia de un objeto de esta forma:
 
 ```js
 const points = { 0: 1, 1: 3, 2: 4, 3: 2 }
@@ -1334,7 +1334,7 @@ const copy = { ...points }
 copy[2] += 1
 ```
 
-O una copia de una matriz como esta:
+O una copia de una matriz de esta forma:
 
 ```js
 const points = [1, 4, 6, 3]
@@ -1344,7 +1344,7 @@ const copy = [...points]
 copy[2] += 1
 ```
 
-El uso de una matriz podría ser la opción más sencilla en este caso. Buscar en internet te proporcionará muchos consejos sobre cómo [crear una matriz llena de ceros de la longitud deseada, como ](https://stackoverflow.com/questions/20222501/how-to-create-a-zero-filled-javascript-array-of-arbitrary-length/22209781).
+El uso de una matriz podría ser la opción más sencilla en este caso. Buscar en internet te proporcionará muchos consejos sobre cómo [crear una matriz llena de ceros de la longitud deseada](https://stackoverflow.com/questions/20222501/how-to-create-a-zero-filled-javascript-array-of-arbitrary-length/22209781).
 
 <h4>1.14*: anecdotes, paso 3</h4>
 
