@@ -47,7 +47,7 @@ addNote = event => {
 }
 ```
 
-We create a new object for the note but omit the <i>id</i> property since it's better to let the server generate ids for our resources.
+~We create a new object for the note but omit the <i>id</i> property since it's better to let the server generate ids for our resources.~
 
 The object is sent to the server using the axios <em>post</em> method. The registered event handler logs the response that is sent back from the server to the console.
 
