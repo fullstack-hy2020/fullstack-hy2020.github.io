@@ -13,6 +13,7 @@ Dans certaines situations, il peut être bénéfique d'implémenter certains tes
 
 Comme le backend de notre application est encore relativement simple, nous déciderons de tester l'ensemble de l'application via son API REST, de sorte que la base de données soit également incluse. Ce type de test, où plusieurs composants du système sont testés en groupe, est appelé [test d'intégration](https://en.wikipedia.org/wiki/Integration_testing).
 
+
 ## Environnement de test
 
 Dans l'un des chapitres précédents du matériel de cours, nous avons mentionné que lorsque votre serveur backend fonctionne sur Fly.io ou Render, il est en mode <i>production</i>.
