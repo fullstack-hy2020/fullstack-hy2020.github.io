@@ -13,7 +13,7 @@ Commençons par ajouter des informations sur les utilisateurs dans la base de do
 
 ![diagramme liant user et notes](https://yuml.me/a187045b.png)
 
-Si nous travaillions avec une base de données relationnelle, la mise en œuvre serait simple. Les deux ressources auraient leurs propres tables de base de données séparées, et l'identifiant de l'utilisateur qui a créé une note serait stocké dans la table des notes comme une clé étrangère.
+Si nous travaillions avec une base de données relationnelle, la mise en oeuvre serait simple. Les deux ressources auraient leurs propres tables de base de données séparées, et l'identifiant de l'utilisateur qui a créé une note serait stocké dans la table des notes comme une clé étrangère.
 
 Lorsqu'on travaille avec des bases de données de documents, la situation est un peu différente, car il existe de nombreuses manières différentes de modéliser la situation.
 
@@ -247,7 +247,7 @@ Les principes fondamentaux de [stockage des mots de passe](https://codahale.com/
 
 Notre code actuel ne contient aucune gestion des erreurs ou validation des entrées pour vérifier que le nom d'utilisateur et le mot de passe sont dans le format souhaité.
 
-La nouvelle fonctionnalité peut et doit initialement être testée manuellement avec un outil comme Postman. Cependant, tester les choses manuellement deviendra rapidement trop fastidieux, en particulier une fois que nous aurons mis en œuvre une fonctionnalité qui impose l'unicité des noms d'utilisateur.
+La nouvelle fonctionnalité peut et doit initialement être testée manuellement avec un outil comme Postman. Cependant, tester les choses manuellement deviendra rapidement trop fastidieux, en particulier une fois que nous aurons mis en oeuvre une fonctionnalité qui impose l'unicité des noms d'utilisateur.
 
 Il demande beaucoup moins d'effort d'écrire des tests automatisés, et cela rendra le développement de notre application beaucoup plus facile.
 
@@ -493,7 +493,7 @@ De même, les identifiants des utilisateurs qui ont créé les notes peuvent êt
 
 ### Populate
 
-Nous aimerions que notre API fonctionne de telle manière que lorsqu'une requête HTTP GET est faite à la route <i>/api/users</i>, les objets utilisateur contiennent également le contenu des notes de l'utilisateur et pas seulement leur id. Dans une base de données relationnelle, cette fonctionnalité serait mise en œuvre avec une <i>requête jointe</i>.
+Nous aimerions que notre API fonctionne de telle manière que lorsqu'une requête HTTP GET est faite à la route <i>/api/users</i>, les objets utilisateur contiennent également le contenu des notes de l'utilisateur et pas seulement leur id. Dans une base de données relationnelle, cette fonctionnalité serait mise en oeuvre avec une <i>requête jointe</i>.
 
 Comme mentionné précédemment, les bases de données de documents ne prennent pas correctement en charge les requêtes jointes entre collections, mais la bibliothèque Mongoose peut faire certaines de ces jointures pour nous. Mongoose réalise la jointure en effectuant plusieurs requêtes, ce qui est différent des requêtes jointes dans les bases de données relationnelles qui sont <i>transactionnelles</i>, ce qui signifie que l'état de la base de données ne change pas pendant le temps de la requête. Avec les requêtes jointes dans Mongoose, rien ne peut garantir que l'état entre les collections jointes est cohérent, ce qui signifie que si nous faisons une requête qui joint les collections utilisateur et notes, l'état des collections peut changer pendant la requête.
 

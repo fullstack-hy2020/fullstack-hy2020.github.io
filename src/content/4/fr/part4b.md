@@ -443,7 +443,7 @@ console.log('operation returned the following notes', notes)
 
 Le code ressemble exactement à du code synchrone. L'exécution du code s'arrête à <em>const notes = await Note.find({})</em> et attend jusqu'à ce que la promesse associée soit <i>remplie</i>, puis continue son exécution jusqu'à la ligne suivante. Lorsque l'exécution se poursuit, le résultat de l'opération qui a renvoyé une promesse est attribué à la variable _notes_.
 
-L'exemple légèrement compliqué présenté ci-dessus pourrait être mis en œuvre en utilisant await de cette façon: 
+L'exemple légèrement compliqué présenté ci-dessus pourrait être mis en oeuvre en utilisant await de cette façon: 
 
 ```js
 const notes = await Note.find({})
@@ -1003,7 +1003,7 @@ Le développement full stack est <i>extrêmement difficile</i>, c'est pourquoi j
 
 - J'aurai toujours ma console de développement du navigateur ouverte
 - J'utiliserai l'onglet réseau des outils de développement du navigateur pour m'assurer que le frontend et le backend communiquent comme prévu
-- Je garderai constamment un œil sur l'état du serveur pour m'assurer que les données envoyées par le frontend sont enregistrées conformément à mes attentes
+- Je garderai constamment un oeil sur l'état du serveur pour m'assurer que les données envoyées par le frontend sont enregistrées conformément à mes attentes
 - Je surveillerai la base de données : est-ce que le backend enregistre les données au bon format?
 - J'avancerai par petites étapes
 - <i>J'écrirai de nombreuses instructions console.log pour m'assurer de comprendre le comportement du code et des tests, et pour m'aider à repérer les problèmes</i>
@@ -1241,7 +1241,7 @@ Vous pouvez trouver le code de notre application actuelle dans sa totalité dans
 
 #### 4.13 Blog list expansions, step1
 
-Mettez en œuvre la fonctionnalité permettant de supprimer une seule ressource de billet de blog.
+Mettez en oeuvre la fonctionnalité permettant de supprimer une seule ressource de billet de blog.
 
 Utilisez la syntaxe async/await. Suivez les conventions [RESTful](/en/part3/node_js_and_express#rest) lors de la définition de l'API HTTP.
 
@@ -1249,11 +1249,11 @@ Implémentez des tests pour la fonctionnalité.
 
 #### 4.14 Blog list expansions, step2
 
-Mettez en œuvre la fonctionnalité permettant de mettre à jour les informations d'un billet de blog individuel.
+Mettez en oeuvre la fonctionnalité permettant de mettre à jour les informations d'un billet de blog individuel.
 
 Utilisez async/await.
 
-L'application a principalement besoin de mettre à jour le nombre de <i>likes</i> pour un billet de blog. Vous pouvez mettre en œuvre cette fonctionnalité de la même manière que nous avons mis en œuvre la mise à jour des notes dans la [partie 3](/en/part3/saving_data_to_mongo_db#other-operations).
+L'application a principalement besoin de mettre à jour le nombre de <i>likes</i> pour un billet de blog. Vous pouvez mettre en oeuvre cette fonctionnalité de la même manière que nous avons mis en oeuvre la mise à jour des notes dans la [partie 3](/en/part3/saving_data_to_mongo_db#other-operations).
 
 Implémentez des tests pour la fonctionnalité.
 

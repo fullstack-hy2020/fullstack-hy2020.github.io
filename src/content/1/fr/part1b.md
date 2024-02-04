@@ -486,7 +486,7 @@ Si vous souhaitez mieux comprendre comment _this_ fonctionne en JavaScript, Inte
 
 Comme mentionné précédemment, il n'y a pas de mécanisme de classe en JavaScript comme ceux des langages de programmation orientés objet. Il existe cependant des fonctionnalités permettant de "simuler" des [classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) orientées objet.
 
-Jetons un coup d'œil à la <i>syntaxe de classe</i> qui a été introduite dans JavaScript avec ES6, qui simplifie considérablement la définition des classes (ou des choses semblables à des classes) en JavaScript.
+Jetons un coup d'oeil à la <i>syntaxe de classe</i> qui a été introduite dans JavaScript avec ES6, qui simplifie considérablement la définition des classes (ou des choses semblables à des classes) en JavaScript.
 
 Dans l'exemple suivant, nous définissons une "classe" appelée Person et deux objets Person :
 
@@ -508,7 +508,7 @@ const janja = new Person('Janja Garnbret', 22)
 janja.greet()
 ```
 
-En ce qui concerne la syntaxe, les classes et les objets créés à partir de celles-ci rappellent beaucoup les classes et objets Java. Leur comportement est également assez similaire aux objets Java. Au cœur, ce sont toujours des objets basés sur [l'héritage prototypal](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance) de JavaScript . Le type des deux objets est en fait _Object_, puisque JavaScript ne définit essentiellement que les types [Boolean, Null, Undefined, Number, String, Symbol, BigInt et Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures).
+En ce qui concerne la syntaxe, les classes et les objets créés à partir de celles-ci rappellent beaucoup les classes et objets Java. Leur comportement est également assez similaire aux objets Java. Au coeur, ce sont toujours des objets basés sur [l'héritage prototypal](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance) de JavaScript . Le type des deux objets est en fait _Object_, puisque JavaScript ne définit essentiellement que les types [Boolean, Null, Undefined, Number, String, Symbol, BigInt et Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures).
 
 L'introduction de la syntaxe de classe était un ajout controversé. Découvrez [Not Awesome: ES6 Classes](https://github.com/petsel/not-awesome-es6-classes) ou [Is "Class" In ES6 The New "Bad" Part ? sur Medium](https://medium.com/@rajaraodv/is-class-in-es6-the-new-bad-part-6c4e6fe1ee65) pour plus de détails.
 

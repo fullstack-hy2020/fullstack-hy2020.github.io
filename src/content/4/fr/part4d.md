@@ -263,7 +263,7 @@ Si l'application a plusieurs interfaces nécessitant une identification, la vali
 
 ### Problèmes de l'authentification basée sur des jetons
 
-L'authentification par jeton est assez facile à mettre en œuvre, mais elle contient un problème. Une fois que l'utilisateur de l'API, par exemple une application React, obtient un jeton, l'API fait entièrement confiance au détenteur du jeton. Que faire si les droits d'accès du détenteur du jeton doivent être révoqués?
+L'authentification par jeton est assez facile à mettre en oeuvre, mais elle contient un problème. Une fois que l'utilisateur de l'API, par exemple une application React, obtient un jeton, l'API fait entièrement confiance au détenteur du jeton. Que faire si les droits d'accès du détenteur du jeton doivent être révoqués?
 
 Il existe deux solutions à ce problème. La plus simple consiste à limiter la période de validité d'un jeton:
 
@@ -345,7 +345,7 @@ Il y a eu de nombreux changements dans le code qui ont causé un problème typiq
 
 Les noms d'utilisateur, les mots de passe et les applications utilisant l'authentification par jeton doivent toujours être utilisés via [HTTPS](https://en.wikipedia.org/wiki/HTTPS). Nous pourrions utiliser un serveur [HTTPS](https://nodejs.org/api/https.html) de Node dans notre application au lieu du serveur [HTTP](https://nodejs.org/docs/latest-v8.x/api/http.html) (cela nécessite plus de configuration). D'autre part, la version de production de notre application est sur Fly.io, donc notre application reste sécurisée : Fly.io achemine tout le trafic entre un navigateur et le serveur Fly.io via HTTPS.
 
-Nous mettrons en œuvre la connexion au frontend dans la [partie suivante](/fr/part5).
+Nous mettrons en oeuvre la connexion au frontend dans la [partie suivante](/fr/part5).
 
 REMARQUE: À ce stade, dans l'application de prise de notes déployée, il est prévu que la fonctionnalité de création d'une note cesse de fonctionner car la fonction de connexion du backend n'est pas encore liée au frontend.
 
@@ -361,7 +361,7 @@ Dans les exercices suivants, les bases de la gestion des utilisateurs seront imp
 
 #### 4.15 : expansion de bloglist, étape3
 
-Mettez en œuvre un moyen de créer de nouveaux utilisateurs en effectuant une requête HTTP POST à l'adresse <i>api/users</i>. Les utilisateurs ont un <i>nom d'utilisateur, un mot de passe et un nom</i>.
+Mettez en oeuvre un moyen de créer de nouveaux utilisateurs en effectuant une requête HTTP POST à l'adresse <i>api/users</i>. Les utilisateurs ont un <i>nom d'utilisateur, un mot de passe et un nom</i>.
 
 Ne sauvegardez pas les mots de passe dans la base de données en texte clair, mais utilisez la bibliothèque <i>bcrypt</i> comme nous l'avons fait dans la partie 4 du chapitre [Créer de nouveaux utilisateurs](/en/part4/user_administration#creating-users).
 
@@ -373,7 +373,7 @@ npm uninstall bcrypt
 
 et installez [bcryptjs](https://www.npmjs.com/package/bcryptjs) à la place.
 
-Mettez en œuvre un moyen de voir les détails de tous les utilisateurs en effectuant une requête HTTP appropriée.
+Mettez en oeuvre un moyen de voir les détails de tous les utilisateurs en effectuant une requête HTTP appropriée.
 
 La liste des utilisateurs peut, par exemple, ressembler à ceci:
 
@@ -406,7 +406,7 @@ et que la liste de tous les utilisateurs affiche également les blogs créés pa
 
 #### 4.18 : expansion de bloglist, étape6
 
-Mettez en œuvre l'authentification basée sur les jetons selon le chapitre [Authentification par jeton](/en/part4/token_authentication) de la partie 4.
+Mettez en oeuvre l'authentification basée sur les jetons selon le chapitre [Authentification par jeton](/en/part4/token_authentication) de la partie 4.
 
 #### 4.19 : expansion de bloglist, étape7
 

@@ -7,11 +7,11 @@ lang: fr
 
 <div class="content">
 
-Dans les deux dernières parties, nous nous sommes principalement concentrés sur le backend. Le frontend que nous avons développé dans la [partie 2](/fr/part2) ne prend pas encore en charge la gestion des utilisateurs que nous avons mise en œuvre dans le backend de la partie 4.
+Dans les deux dernières parties, nous nous sommes principalement concentrés sur le backend. Le frontend que nous avons développé dans la [partie 2](/fr/part2) ne prend pas encore en charge la gestion des utilisateurs que nous avons mise en oeuvre dans le backend de la partie 4.
 
 Pour le moment, le frontend affiche les notes existantes et permet aux utilisateurs de changer l'état d'une note de important à non important et vice versa. Il n'est plus possible d'ajouter de nouvelles notes en raison des changements apportés au backend dans la partie 4: le backend attend désormais qu'un jeton vérifiant l'identité d'un utilisateur soit envoyé avec la nouvelle note.
 
-Nous allons maintenant mettre en œuvre une partie de la fonctionnalité de gestion des utilisateurs requise dans le frontend. Commençons par la connexion des utilisateurs. Tout au long de cette partie, nous supposerons que de nouveaux utilisateurs ne seront pas ajoutés depuis le frontend.
+Nous allons maintenant mettre en oeuvre une partie de la fonctionnalité de gestion des utilisateurs requise dans le frontend. Commençons par la connexion des utilisateurs. Tout au long de cette partie, nous supposerons que de nouveaux utilisateurs ne seront pas ajoutés depuis le frontend.
 
 ### Gestion de la connexion
 
@@ -530,7 +530,7 @@ Il suffit de soumettre votre solution terminée. Vous pouvez faire un commit apr
 Les premiers exercices révisent tout ce que nous avons appris sur React jusqu'à présent. Ils peuvent être difficiles, surtout si votre backend est incomplet.
 Il pourrait être préférable d'utiliser le backend que nous avons marqué comme réponse pour la partie 4.
 
-Pendant que vous faites les exercices, rappelez-vous toutes les méthodes de débogage dont nous avons parlé, en gardant particulièrement un œil sur la console.
+Pendant que vous faites les exercices, rappelez-vous toutes les méthodes de débogage dont nous avons parlé, en gardant particulièrement un oeil sur la console.
 
 **Attention:** Si vous remarquez que vous mélangez les fonctions _async/await_ et les commandes _then_, il est à 99,9 % certain que vous faites quelque chose de mal. Utilisez l'un ou l'autre, jamais les deux.
 
@@ -633,7 +633,7 @@ Peu importe comment la validité des jetons est vérifiée et assurée, sauvegar
 
 Si l'on veut jouer la sécurité, la meilleure option est de ne pas stocker un jeton dans le stockage local. Cela pourrait être une option dans des situations où la fuite d'un jeton pourrait avoir des conséquences tragiques.
 
-Il a été suggéré que l'identité d'un utilisateur connecté devrait être sauvegardée sous forme de [cookies httpOnly](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#restrict_access_to_cookies), de sorte que le code JavaScript ne puisse avoir aucun accès au jeton. L'inconvénient de cette solution est qu'elle rendrait la mise en œuvre d'applications SPA un peu plus complexe. Il serait nécessaire au moins de mettre en œuvre une page séparée pour la connexion.
+Il a été suggéré que l'identité d'un utilisateur connecté devrait être sauvegardée sous forme de [cookies httpOnly](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#restrict_access_to_cookies), de sorte que le code JavaScript ne puisse avoir aucun accès au jeton. L'inconvénient de cette solution est qu'elle rendrait la mise en oeuvre d'applications SPA un peu plus complexe. Il serait nécessaire au moins de mettre en oeuvre une page séparée pour la connexion.
 
 Cependant, il est bon de noter que même l'utilisation de cookies httpOnly ne garantit rien. Il a même été suggéré que les cookies httpOnly [ne sont pas plus sûrs que](https://academind.com/tutorials/localstorage-vs-cookies-xss/) l'utilisation du stockage local.
 

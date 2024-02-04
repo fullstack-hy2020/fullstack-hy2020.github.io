@@ -182,7 +182,7 @@ Ajoutez la validation à votre application de répertoire téléphonique, qui s'
   - par exemple, 09-1234556 et 040-22334455 sont des numéros de téléphone valides 
   - par exemple, 1234556, 1-22334455 et 10-22-334455 ne sont pas valides.
 
-Utilisez un [validateur personnalisé](https://mongoosejs.com/docs/validation.html#custom-validators) pour mettre en œuvre la deuxième partie de la validation.
+Utilisez un [validateur personnalisé](https://mongoosejs.com/docs/validation.html#custom-validators) pour mettre en oeuvre la deuxième partie de la validation.
 
 Si une requête HTTP POST tente d'ajouter un nom qui se trouve déjà dans le répertoire, le serveur doit répondre avec un code d'état et un message d'erreur appropriés.
 
@@ -198,7 +198,7 @@ Poussez la dernière version vers Heroku et vérifiez que tout fonctionne là au
 
 ### Lint
 
-Avant de passer à la partie suivante, nous allons jeter un coup d'œil à un outil important appelé [lint](<https://en.wikipedia.org/wiki/Lint_(software)>). Wikipedia dit ce qui suit à propos de lint :
+Avant de passer à la partie suivante, nous allons jeter un coup d'oeil à un outil important appelé [lint](<https://en.wikipedia.org/wiki/Lint_(software)>). Wikipedia dit ce qui suit à propos de lint :
 
 > <i>Généralement, lint ou un linter est tout outil qui détecte et signale les erreurs dans les langages de programmation, y compris les erreurs stylistiques. Le terme de comportement de type lint est parfois appliqué au processus de signalisation de l'utilisation suspecte du langage. Les outils de type linter effectuent généralement une analyse statique du code source.</i>
 
@@ -315,7 +315,7 @@ Le plugin VS Code ESlint soulignera les violations de style par une ligne rouge 
 Cela permet de repérer facilement les erreurs et de les corriger immédiatement.
 
 
-ESlint dispose d'une vaste gamme de [règles](https://eslint.org/docs/rules/) qu'il est facile de mettre en œuvre en modifiant le fichier <i>.eslintrc.js</i>.
+ESlint dispose d'une vaste gamme de [règles](https://eslint.org/docs/rules/) qu'il est facile de mettre en oeuvre en modifiant le fichier <i>.eslintrc.js</i>.
 
 
 Ajoutons la règle [eqeqeq](https://eslint.org/docs/rules/eqeqeq) qui nous avertit, si l'égalité est vérifiée avec autre chose que l'opérateur triple égal. La règle est ajoutée sous le champ <i>rules</i> dans le fichier de configuration.

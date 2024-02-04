@@ -68,7 +68,7 @@ Si nous examinons attentivement notre code actuel, nous remarquerons que la fonc
 
 ### Déstructuration
 
-Avant d'aller plus loin, nous allons jeter un œil à une petite fonctionnalité mais utile du langage JavaScript qui a été ajoutée dans la spécification ES6, qui nous permet de [déstructurer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) des valeurs des objets et des tableaux lors de l'affectation.
+Avant d'aller plus loin, nous allons jeter un oeil à une petite fonctionnalité mais utile du langage JavaScript qui a été ajoutée dans la spécification ES6, qui nous permet de [déstructurer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) des valeurs des objets et des tableaux lors de l'affectation.
 
 Dans notre code précédent, nous devions référencer les données transmises à notre composant en tant que _props.name_ et _props.age_. De ces deux expressions, nous avons dû répéter _props.age_ deux fois dans notre code.
 

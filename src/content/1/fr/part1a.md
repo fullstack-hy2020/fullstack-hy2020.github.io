@@ -110,7 +110,7 @@ Par défaut, le fichier <i>index.html</i> ne contient aucune balise HTML visible
 ```
 Vous pouvez essayer d'ajouter du HTML dans le fichier. Cependant, lors de l'utilisation de React, tout le contenu qui doit être rendu est généralement défini sous forme de composants React.
 
-Jetons un coup d'œil plus attentif au code qui définit le composant :
+Jetons un coup d'oeil plus attentif au code qui définit le composant :
 
 ```js
 const App = () => (
@@ -527,7 +527,7 @@ La console s'affiche en rouge :
 
 ![Outils de développement affichant une erreur avec une mise en évidence autour de "Les objets ne sont pas valides en tant qu'enfant React"](../../images/1/34new.png)
 
-Le cœur du problème est que <i>les objets ne sont pas valides en tant qu'enfant React</i>, c'est-à-dire que l'application tente de rendre des <i>objets</i> et échoue.
+Le coeur du problème est que <i>les objets ne sont pas valides en tant qu'enfant React</i>, c'est-à-dire que l'application tente de rendre des <i>objets</i> et échoue.
 
 Le code tente de rendre les informations d'un ami comme suit
 
