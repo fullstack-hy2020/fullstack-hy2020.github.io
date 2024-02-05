@@ -318,7 +318,7 @@ const App = () => {
 }
 ```
 
-Tämä on onkin luonnollinen tapa alustaa tila, muistiinpanot muodostavat joukon, joten tyhjä taulukko on luonteva alkuarvo muuttujalle.
+Tämä onkin luonnollinen tapa alustaa tila, muistiinpanot muodostavat joukon, joten tyhjä taulukko on luonteva alkuarvo muuttujalle.
 
 Niissä tilanteissa, missä tilaan talletetaan "yksi asia" tilan luonteva alkuarvo on usein _null_, joka kertoo että tilassa ei ole vielä mitään. Kokeillaan miten käy jos alustamme nyt tilan nulliksi: 
 
