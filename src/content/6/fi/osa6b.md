@@ -392,7 +392,7 @@ Jatketaan tehtävässä 6.3 aloitetun Reduxia käyttävän anekdoottisovelluksen
 
 #### 6.9 paremmat anekdootit, step7
 
-Toteuta sovellukseen näytettävien muistiinpanojen filtteröiminen:
+Toteuta sovellukseen näytettävien anekdoottien filtteröiminen:
 
 ![Yläosaan lisätään tekstikenttä, johon kirjoittamalla voidaan rajoittaa näytettävät anekdootit niihin joihin sisältyy "filtterikenttään" kirjoitettu merkkijono](../../images/6/9ea.png)
 
