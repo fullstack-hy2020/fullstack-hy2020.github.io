@@ -594,17 +594,17 @@ app.post('/api/notes', async (req, res) => {
 
 <div class="tasks">
 
-### Tasks 13.1.-13.3.
+### Exercises 13.1.-13.3.
 
 In the tasks of this section, we will build a blog application backend similar to the tasks in [section 4](/en/part4), which should be compatible with the frontend in [section 5](/en/part5) except for error handling. We will also add various features to the backend that the frontend in section 5 will not know how to use.
 
-#### Task 13.1.
+#### Exercise 13.1.
 
 Create a GitHub repository for the application and create a new Fly.io or Heroku application for it, as well as a Postgres database. As mentioned [here](/en/part13/using_relational_databases_with_sequelize#application-database) you might set up your database also somewhere else, and in that case the Fly.io of Heroku app is not needed.
 
 Make sure you are able to establish a connection to the application database.
 
-#### Task 13.2.
+#### Exercise 13.2.
 
 On the command-line, create a <i>blogs</i> table for the application with the following columns:
 - id (unique, incrementing id)
@@ -846,9 +846,9 @@ The print looks like the following:
 
 <div class="tasks">
 
-### Task 13.4.
+### Exercise 13.4.
 
-#### Task 13.4.
+#### Exercise 13.4.
 
 Transform your application into a web application that supports the following operations
 
