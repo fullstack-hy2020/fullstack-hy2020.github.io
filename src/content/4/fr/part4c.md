@@ -379,15 +379,6 @@ userSchema.plugin(uniqueValidator) // highlight-line
 // ...
 ```
 
-Remarque : lors de l'installation de la bibliothèque mongoose-unique-validator, vous pourriez rencontrer le message d'erreur suivant:
-
-![](../../images/4/uniq.png)
-
-La raison en est qu'au moment de la rédaction (10.11.2023), la bibliothèque n'est pas encore compatible avec la version 8 de Mongoose. Si vous rencontrez cette erreur, vous pouvez revenir à une version antérieure de Mongoose en exécutant la commande
-
-```
-npm install mongoose@7.6.5
-```
 
 Nous pourrions également implémenter d'autres validations dans la création de l'utilisateur. Nous pourrions vérifier que le nom d'utilisateur est assez long, que le nom d'utilisateur ne se compose que de caractères autorisés, ou que le mot de passe est suffisamment fort. L'implémentation de ces fonctionnalités est laissée comme un exercice optionnel.
 

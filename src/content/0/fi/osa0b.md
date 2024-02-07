@@ -585,7 +585,7 @@ Reactin asema näyttää tällä hetkellä vahvalta, mutta JavaScript-maailma ei
 
 Mitä tarkoitetaan kurssin nimellä <i>Full stack ‑web-sovelluskehitys</i>? Full stack on hypenomainen termi – kaikki puhuvat siitä, mutta kukaan ei oikein tiedä, mitä se tarkoittaa, tai ainakaan mitään yhteneväistä määritelmää termille ei ole.
 
-Käytännössä kaikki web-sovellukset sisältävät (ainakin) kaksi "kerrosta" ylempänä eli lähempänä loppukäyttäjää olevan selaimen ja alla olevan palvelimen. Palvelimen alapuolella on usein vielä tietokanta. Näin websovelluksen <i>arkkitehtuurin</i> voi ajatella muodostavan pinon, englanniksi <i>stack</i>.
+Käytännössä kaikki web-sovellukset sisältävät (ainakin) kaksi "kerrosta". Ylin kerros on lähempänä loppukäyttäjää oleva selain, joka suorittaa JaveScript-koodin ja renderöi sovelluksen HTML:n. Alempi kerros taas on sivuston tiedostot sisältämä palvelin. Palvelimen alapuolella on usein vielä tietokanta. Näin websovelluksen <i>arkkitehtuurin</i> voi ajatella muodostavan pinon, englanniksi <i>stack</i>.
 
 Web-sovelluskehityksen yhteydessä puhutaan usein myös "frontista" ([frontend](https://en.wikipedia.org/wiki/Front_and_back_ends)) ja "backistä" ([backend](https://en.wikipedia.org/wiki/Front_and_back_ends)). Selain on frontend, ja selaimessa suoritettava JavaScript on frontend-koodia. Palvelimella taas pyörii backend-koodi.
 
