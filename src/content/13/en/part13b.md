@@ -231,13 +231,13 @@ The current code for the application is in its entirety on [GitHub](https://gith
 
 <div class="tasks">
 
-### Tasks 13.5.-13.7.
+### Exercises 13.5.-13.7.
 
-#### Task 13.5.
+#### Exercise 13.5.
 
 Change the structure of your application to match the example above, or to follow some other similar clear convention.
 
-#### Task 13.6.
+#### Exercise 13.6.
 
 Also, implement support for changing the number of a blog's likes in the application, i.e. the operation
 
@@ -251,7 +251,7 @@ The updated number of likes will be relayed with the request:
 }
 ```
 
-#### Task 13.7.
+#### Exercise 13.7.
 
 Centralize the application error handling in middleware as in [part 3](/en/part3/saving_data_to_mongo_db#moving-error-handling-into-middleware). You can also enable middleware [express-async-errors](https://github.com/davidbanham/express-async-errors) as we did in [part 4](/en/part4/testing_the_backend#eliminating-the-try-catch).
 
@@ -693,9 +693,9 @@ Instead we can achieve the same with this. Using one of the two methods is neces
 
 <div class="tasks">
 
-### Tasks 13.8.-13.12.
+### Exercises 13.8.-13.12.
 
-#### Task 13.8.
+#### Exercise 13.8.
 
 Add support for users to the application. In addition to ID, users have the following fields:
 
@@ -738,7 +738,7 @@ Expand the application so that the current logged-in user identified by a token 
 
 Make deletion of a blog only possible for the user who added the blog.
 
-#### Task 13.12.
+#### Exercise 13.12.
 
 Modify the routes for retrieving all blogs and all users so that each blog shows the user who added it and each user shows the blogs they have added.
 
@@ -963,9 +963,9 @@ The current code for the application is in its entirety on [GitHub](https://gith
 
 <div class="tasks">
 
-### Tasks 13.13.-13.16
+### Exercises 13.13.-13.16
 
-#### Task 13.13.
+#### Exercise 13.13.
 
 Implement filtering by keyword in the application for the route returning all blogs. The filtering should work as follows
 - _GET /api/blogs?search=react_ returns all blogs with the search word <i>react</i> in the <i>title</i> field, the search word is case-insensitive
@@ -982,7 +982,7 @@ _GET /api/blogs?search=jami_ returns blogs with the search word <i>jami</i> in t
 
 Modify the blogs route so that it returns blogs based on likes in descending order. Search the [documentation](https://sequelize.org/master/manual/model-querying-basics.html) for instructions on ordering,
 
-#### Task 13.16.
+#### Exercise 13.16.
 
 Make a route for the application _/api/authors_ that returns the number of blogs for each author and the total number of likes. Implement the operation directly at the database level. You will most likely need the [group by](https://sequelize.org/master/manual/model-querying-basics.html#grouping) functionality, and the [sequelize.fn](https://sequelize.org/master/manual/model-querying-basics.html#specifying-attributes-for-select-queries) aggregator function.
 
