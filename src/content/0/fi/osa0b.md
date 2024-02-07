@@ -521,7 +521,7 @@ Pyyntöön liitetty headeri <i>Content-Type</i> kertoo palvelimelle, että pyynn
 
 Ilman headeria palvelin ei osaisi parsia pyynnön mukana tulevaa dataa oikein.
 
-Palvelin vastaa kyselyyn statuskoodilla [201 created](https://httpstatuses.com/201). Tällä kertaa palvelin ei pyydä uudelleenohjausta kuten aiemmassa versiossamme. Selain pysyy samalla sivulla, ja muita HTTP-pyyntöjä ei suoriteta.
+Palvelin vastaa kyselyyn statuskoodilla [201 created](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201). Tällä kertaa palvelin ei pyydä uudelleenohjausta kuten aiemmassa versiossamme. Selain pysyy samalla sivulla, ja muita HTTP-pyyntöjä ei suoriteta.
 
 Ohjelman Single Page App ‑versiossa lomakkeen tietoja ei lähetetä selaimen normaalin lomakkeiden lähetysmekanismin avulla. Lähettämisen hoitaa selaimen lataamassa JavaScript-tiedostossa määritelty koodi. Katsotaan hieman koodia, vaikka yksityiskohdista ei tarvitse nytkään välittää liikaa.
 
