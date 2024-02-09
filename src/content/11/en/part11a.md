@@ -33,7 +33,7 @@ In this part we'll be using some terms you may not be familiar with or you may n
 
 #### Branches
 
-Git allows multiple copies, streams, or versions of the code to co-exist without overwriting each other. When you first create a repository, you will be looking at the main branch (usually in Git, we call this <i>main</i> or <i>main</i>, but that does vary in older projects). This is fine if there's only one developer for a project and that developer only works on one feature at a time.
+Git allows multiple copies, streams, or versions of the code to co-exist without overwriting each other. When you first create a repository, you will be looking at the main branch (usually in Git, we call this <i>main</i> or <i>master</i>, but that does vary in older projects). This is fine if there's only one developer for a project and that developer only works on one feature at a time.
 
 Branches are useful when this environment becomes more complex. In this context, each developer can have one or more branches. Each branch is effectively a copy of the main branch with some changes that make it diverge from it. Once the feature or change in the branch is ready it can be <i>merged</i> back into the main branch, effectively making that feature or change part of the main software. In this way, each developer can work on their own set of changes and not affect any other developer until the changes are ready. 
 
