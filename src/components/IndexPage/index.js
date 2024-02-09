@@ -14,7 +14,7 @@ import { SubHeader } from '../SubHeader/SubHeader';
 import { TripleBorder } from '../TripleBorder/TripleBorder';
 import cc from '../../images/cc.svg';
 import content from '../../content/pages/main.json';
-import houstonLogo from '../../images/Houston_big.svg';
+import houstonLogo from '../../images/Houston_big2.svg';
 import landingImage from '../../images/landing.svg';
 import licenceIcon from '../../images/cc-logo.png';
 import mainSEOdescription from '../../content/seo/mainSEOdescription';

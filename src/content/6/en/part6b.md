@@ -7,7 +7,7 @@ lang: en
 
 <div class="content">
 
-Let's continue our work with the simplified [redux version](/en/part6/flux_architecture_and_redux#redux-notes) of our notes application.
+Let's continue our work with the simplified [Redux version](/en/part6/flux_architecture_and_redux#redux-notes) of our notes application.
 
 To ease our development, let's change our reducer so that the store gets initialized with a state that contains a couple of notes:
 
@@ -132,7 +132,7 @@ export default filterReducer
 
 We can create the actual reducer for our application by combining the two existing reducers with the [combineReducers](https://redux.js.org/api/combinereducers) function.
 
-Let's define the combined reducer in the <i>index.js</i> file:
+Let's define the combined reducer in the <i>main.jsx</i> file:
 
 ```js
 import React from 'react'
@@ -188,7 +188,7 @@ const reducer = combineReducers({
 
 The state of the store defined by the reducer above is an object with two properties: <i>notes</i> and <i>filter</i>. The value of the <i>notes</i> property is defined by the <i>noteReducer</i>, which does not have to deal with the other properties of the state. Likewise, the <i>filter</i> property is managed by the <i>filterReducer</i>.
 
-Before we make more changes to the code, let's take a look at how different actions change the state of the store defined by the combined reducer. Let's add the following to the <i>index.js</i> file:
+Before we make more changes to the code, let's take a look at how different actions change the state of the store defined by the combined reducer. Let's add the following to the <i>main.jsx</i> file:
 
 ```js
 import { createNote } from './reducers/noteReducer'
@@ -220,7 +220,7 @@ Is there a bug in our code? No. The combined reducer works in such a way that ev
 
 ### Finishing the filters
 
-Let's finish the application so that it uses the combined reducer. We start by changing the rendering of the application and hooking up the store to the application in the <i>index.js</i> file:
+Let's finish the application so that it uses the combined reducer. We start by changing the rendering of the application and hooking up the store to the application in the <i>main.jsx</i> file:
 
 ```js
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -232,7 +232,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 Next, let's fix a bug that is caused by the code expecting the application store to be an array of notes:
 
-![browser TypeError: notes.map is not a function](../../images/6/7ea.png)
+![browser TypeError: notes.map is not a function](../../images/6/7v.png)
 
 It's an easy fix. Because the notes are in the store's field <i>notes</i>, we only have to make a little change to the selector function:
 
@@ -269,7 +269,7 @@ And now it returns only its field <i>notes</i>
 const notes = useSelector(state => state.notes)
 ```
 
-Let's extract the visibility filter into its own <i>src/components/VisibilityFilter.js</i> component:
+Let's extract the visibility filter into its own <i>src/components/VisibilityFilter.jsx</i> component:
 
 ```js
 import { filterChange } from '../reducers/filterReducer'
@@ -430,7 +430,7 @@ Let's start using Redux Toolkit in our application by refactoring the existing c
 npm install @reduxjs/toolkit
 ```
 
-Next, open the <i>index.js</i> file which currently creates the Redux store. Instead of Redux's <em>createStore</em> function, let's create the store using Redux Toolkit's [configureStore](https://redux-toolkit.js.org/api/configureStore) function:
+Next, open the <i>main.jsx</i> file which currently creates the Redux store. Instead of Redux's <em>createStore</em> function, let's create the store using Redux Toolkit's [configureStore](https://redux-toolkit.js.org/api/configureStore) function:
 
 ```js
 import React from 'react'
@@ -516,7 +516,7 @@ const noteSlice = createSlice({
 // highlight-end
 ```
 
-The <em>createSlice</em> function's <em>name</em> parameter defines the prefix which is used in the action's type values. For example, the <em>createNote</em> action defined later will have the type value of <em>notes/createNote</em>. It is a good practice to give the parameter a value, which is unique among the reducers. This way there won't be unexpected collisions between the application's action type values. The <em>initialState</em> parameter defines the reducer's initial state. The <em>reducers</em> parameter takes the reducer itself as an object, of which functions handle state changes caused by certain actions. Note that the <em>action.payload</em> in the function contains the argument provided by calling the action creator:
+The <em>createSlice</em> function's <em>name</em> parameter defines the prefix which is used in the action's type values. For example, the <em>createNote</em> action defined later will have the type value of <em>notes/createNote</em>. It is a good practice to give the parameter a value which is unique among the reducers. This way there won't be unexpected collisions between the application's action type values. The <em>initialState</em> parameter defines the reducer's initial state. The <em>reducers</em> parameter takes the reducer itself as an object, of which functions handle state changes caused by certain actions. Note that the <em>action.payload</em> in the function contains the argument provided by calling the action creator:
 
 ```js
 dispatch(createNote('Redux Toolkit is awesome!'))
@@ -621,7 +621,7 @@ describe('noteReducer', () => {
 
 ### Redux Toolkit and console.log
 
-As we have learned, console.log is an extremely powerful tool, it usually always saves us from trouble.
+As we have learned, console.log is an extremely powerful tool; it often saves us from trouble.
 
 Let's try to print the state of the Redux Store to the console in the middle of the reducer created with the function createSlice:
 

@@ -11,13 +11,13 @@ Siirrämme tässä osassa fokuksen backendiin eli palvelimella olevaan toiminnal
 
 Backendin toteutusympäristönä käytämme [Node.js](https://nodejs.org/en/):ää, joka on melkein missä vaan, erityisesti palvelimilla ja omalla koneellasikin toimiva Googlen [V8](https://developers.google.com/v8/)-JavaScript-moottoriin perustuva JavaScriptin suoritusympäristö.
 
-Kurssimateriaalia tehtäessä on ollut käytössä Node.js:n versio <i>v18.13.02</i>. Suosittelen, että omasi on vähintään yhtä tuore (ks. komentoriviltä _node -v_).
+Kurssimateriaalia tehtäessä on ollut käytössä Node.js:n versio <i>v20.11.0</i>. Suosittelen, että omasi on vähintään yhtä tuore (ks. komentoriviltä _node -v_).
 
 Kuten [osassa 1](/osa1/java_scriptia) todettiin, selaimet eivät vielä osaa kaikkia uusimpia JavaScriptin ominaisuuksia, ja siksi selainpuolen koodi täytyy kääntää eli <i>transpiloida</i> esim [Babel](https://babeljs.io/):illa. Backendissa tilanne on kuitenkin toinen, koska uusin Node hallitsee riittävissä määrin myös JavaScriptin uusia versioita, joten suoritamme Nodella kirjoittamaamme koodia suoraan ilman transpilointivaihetta.
 
-Tavoitteenamme on tehdä [osan 2](/osa2) muistiinpanosovellukseen sopiva backend. Aloitetaan kuitenkin ensin perusteiden läpikäyminen toteuttamalla perinteinen "hello world" -sovellus.
+Tavoitteenamme on tehdä [osan 2](/osa2) muistiinpanosovellukseen sopiva backend. Aloitetaan kuitenkin ensin perusteiden läpikäyminen toteuttamalla perinteinen "hello world" ‑sovellus.
 
-**Huomaa**, että tässä osassa ja sen tehtävissä luotavat sovellukset eivät ole Reactia, eli emme käytä <i>create-react-app</i>-sovellusta tämän osan sovellusten rungon alustamiseen.
+**Huomaa**, että tässä osassa ja sen tehtävissä luotavat sovellukset eivät ole Reactia, eli emme käytä xwviteä tämän osan sovellusten rungon alustamiseen.
 
 Osassa 2 oli jo puhe [npm](/osa2/palvelimella_olevan_datan_hakeminen#npm):stä, eli JavaScript-projektien hallintaan liittyvästä, alun perin Node-ekosysteemistä kotoisin olevasta työkalusta. 
 
@@ -150,9 +150,9 @@ ottaa käyttöön Noden sisäänrakennetun [web-palvelimen](https://nodejs.org/d
 import http from 'http'
 ```
 
-Selaimen puolella käytetään (nykyään) ES6:n moduuleita, eli moduulit määritellään [exportilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) ja otetaan käyttöön [importilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import).
+Selaimen puolella käytetään nykyään ES6:n moduuleita, eli moduulit määritellään [exportilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) ja otetaan käyttöön [importilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import).
 
-Node.js kuitenkin käyttää ns. [CommonJS](https://en.wikipedia.org/wiki/CommonJS)-moduuleja. Syy tälle on siinä, että Node-ekosysteemillä oli tarve moduuleihin jo kauan ennen kuin JavaScript tuki moduuleja kielen tasolla. Node tukee myös ES-moduuleja, mutta koska tuki ei ole vielä kaikilta osin [täydellinen](https://nodejs.org/api/esm.html#modules-ecmascript-modules), pitäydymme CommonJS-moduuleissa.
+Node.js kuitenkin käyttää ns. [CommonJS](https://en.wikipedia.org/wiki/CommonJS)-moduuleja. Syy tälle on siinä, että Node-ekosysteemillä oli tarve moduuleihin jo kauan ennen kuin JavaScript tuki moduuleja kielen tasolla. Node tukee myös ES-moduuleja, mutta koska tuki ei ole vielä kaikilta osin täydellinen, pitäydymme CommonJS-moduuleissa.
 
 CommonJS-moduulit toimivat melko samaan tapaan kuin ES6-moduulit, ainakin tämän kurssin tarpeiden puitteissa.
 
@@ -284,12 +284,12 @@ let notes = [
   ...
 ]
 
-app.get('/', (req, res) => {
-  res.send('<h1>Hello World!</h1>')
+app.get('/', (request, response) => {
+  response.send('<h1>Hello World!</h1>')
 })
 
-app.get('/api/notes', (req, res) => {
-  res.json(notes)
+app.get('/api/notes', (request, response) => {
+  response.json(notes)
 })
 
 const PORT = 3001
@@ -307,7 +307,7 @@ const express = require('express')
 const app = express()
 ```
 
-Seuraavaksi määritellään sovellukselle kaksi <i>routea</i>. Näistä ensimmäinen määrittelee tapahtumankäsittelijän, joka hoitaa sovelluksen juureen eli polkuun <i>/</i> tulevia HTTP GET -pyyntöjä:
+Seuraavaksi määritellään sovellukselle kaksi <i>routea</i>. Näistä ensimmäinen määrittelee tapahtumankäsittelijän, joka hoitaa sovelluksen juureen eli polkuun <i>/</i> tulevia HTTP GET ‑pyyntöjä:
 
 ```js
 app.get('/', (request, response) => {
@@ -323,7 +323,7 @@ Asian voi varmistaa konsolin välilehdeltä <i>Network</i>:
 
 ![Avattu network-tabi näyttää että palvelin vastaa statuskoodilla 200](../../images/3/5.png)
 
-Routeista toinen määrittelee tapahtumankäsittelijän, joka hoitaa sovelluksen polkuun <i>/api/notes</i> tulevia HTTP GET -pyyntöjä:
+Routeista toinen määrittelee tapahtumankäsittelijän, joka hoitaa sovelluksen polkuun <i>/api/notes</i> tulevia HTTP GET ‑pyyntöjä:
 
 ```js
 app.get('/api/notes', (request, response) => {
@@ -395,7 +395,7 @@ node_modules/.bin/nodemon index.js
 
 Huom: komennon tämä muoto ei välttämättä toimi Windowsilla. Se ei kuitenkaan haittaa sillä 5 sentin päästä kerrotaan komennosta parempi muoto.
 
-Sovelluksen koodin muutokset aiheuttavat nyt automaattisen palvelimen uudelleenkäynnistymisen. Kannattaa huomata, että vaikka palvelin uudelleenkäynnistyy automaattisesti, selain täytyy kuitenkin refreshata, sillä toisin kuin Reactin yhteydessä, meillä ei nyt ole eikä tässä skenaariossa (jossa palautamme JSON-muotoista dataa) edes voisikaan olla selainta päivittävää [hot reload](https://gaearon.github.io/react-hot-loader/getstarted/) -toiminnallisuutta.
+Sovelluksen koodin muutokset aiheuttavat nyt automaattisen palvelimen uudelleenkäynnistymisen. Kannattaa huomata, että vaikka palvelin uudelleenkäynnistyy automaattisesti, selain täytyy kuitenkin refreshata, sillä toisin kuin Reactin yhteydessä, meillä ei nyt ole eikä tässä skenaariossa (jossa palautamme JSON-muotoista dataa) edes voisikaan olla selainta päivittävää [hot reload](https://gaearon.github.io/react-hot-loader/getstarted/) ‑toiminnallisuutta.
 
 
 Komento on ikävä, joten määritellään sitä varten <i>npm-skripti</i> tiedostoon <i>package.json</i>:
@@ -454,7 +454,7 @@ Resursseille voi suorittaa erilaisia operaatiota. Suoritettavan operaation mää
 
 Näin määrittyy suurin piirtein asia, jota REST kutsuu nimellä [uniform interface](https://en.wikipedia.org/wiki/Representational_state_transfer#Architectural_constraints), eli jossain määrin yhtenäinen tapa määritellä rajapintoja, jotka mahdollistavat (tietyin tarkennuksin) järjestelmien yhteiskäytön.
 
-Tämänkaltaista tapaa tulkita REST:iä on nimitetty kolmiportaisella asteikolla [kypsyystason 2](https://martinfowler.com/articles/richardsonMaturityModel.html) REST:iksi. REST:in kehittäjän Roy Fieldingin mukaan tällöin kyseessä ei vielä ole ollenkaan asia, jota tulisi kutsua [REST API:ksi](http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven). Valtaosa maailman "REST" API -rajapinnoista ei täytäkään puhdasverisen fieldingiläisen REST API:n määritelmää.
+Tämänkaltaista tapaa tulkita REST:iä on nimitetty kolmiportaisella asteikolla [kypsyystason 2](https://martinfowler.com/articles/richardsonMaturityModel.html) REST:iksi. REST:in kehittäjän Roy Fieldingin mukaan tällöin kyseessä ei vielä ole ollenkaan asia, jota tulisi kutsua [REST API:ksi](http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven). Valtaosa maailman "REST" API ‑rajapinnoista ei täytäkään puhdasverisen fieldingiläisen REST API:n määritelmää.
 
 Joissain yhteyksissä (ks. esim. [Richardson, Ruby: RESTful Web Services](http://shop.oreilly.com/product/9780596529260.do)) edellä esitellyn kaltaista suoraviivaisehkoa resurssien [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete)-tyylisen manipuloinnin mahdollistavaa API:a nimitetään REST:in sijaan [resurssipohjaiseksi](https://en.wikipedia.org/wiki/Resource-oriented_architecture) arkkitehtuurityyliksi. Emme nyt kuitenkaan takerru liian tarkasti määritelmällisiin asioihin vaan jatkamme sovelluksen parissa.
 
@@ -474,7 +474,7 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-Nyt <code>app.get('/api/notes/:id', ...)</code> käsittelee kaikki HTTP GET -pyynnöt, jotka ovat muotoa <i>/api/notes/JOTAIN</i>, jossa <i>JOTAIN</i> on mielivaltainen merkkijono.
+Nyt <code>app.get('/api/notes/:id', ...)</code> käsittelee kaikki HTTP GET ‑pyynnöt, jotka ovat muotoa <i>/api/notes/JOTAIN</i>, jossa <i>JOTAIN</i> on mielivaltainen merkkijono.
 
 Polun parametrin <i>id</i> arvoon päästään käsiksi pyynnön tiedot kertovan olion [request](http://expressjs.com/en/api.html#req) kautta:
 
@@ -575,7 +575,7 @@ Nyt sovellus palauttaa oikean virhekoodin. Sovellus ei kuitenkaan palauta mitä�
 
 ### Resurssin poisto
 
-Toteutetaan seuraavaksi resurssin poistava route. Poisto tapahtuu tekemällä HTTP DELETE -pyyntö resurssin urliin:
+Toteutetaan seuraavaksi resurssin poistava route. Poisto tapahtuu tekemällä HTTP DELETE ‑pyyntö resurssin urliin:
 
 ```js
 app.delete('/api/notes/:id', (request, response) => {
@@ -592,13 +592,13 @@ Ei ole täyttä yksimielisyyttä siitä, mikä statuskoodi DELETE-pyynnöstä pi
 
 ### Postman
 
-HTTP GET -pyyntöjä on helppo testata selaimessa, mutta miten voimme testata poisto-operaatioita? Voisimme toki kirjoittaa JavaScript-koodin, joka testaa deletointia, mutta jokaiseen mahdolliseen tilanteeseen testikoodinkaan tekeminen ei ole aina paras ratkaisu.
+HTTP GET ‑pyyntöjä on helppo testata selaimessa, mutta miten voimme testata poisto-operaatioita? Voisimme toki kirjoittaa JavaScript-koodin, joka testaa deletointia, mutta jokaiseen mahdolliseen tilanteeseen testikoodinkaan tekeminen ei ole aina paras ratkaisu.
 
 On olemassa useita backendin testaamista helpottavia työkaluja, eräs näistä on [Postman](https://www.postman.com/), jota käytämme tällä kurssilla.
 
 Asennetaan Postmanin desktop sovellus [täältä](https://www.postman.com/downloads/)  ja kokeillaan:
 
-![tehdään postmanilla operaatio DELETE http://localhost:3000/api/notes/1, huomataan että vastauksessa statuskoodi 204 no content](../../images/3/11x.png) 
+![tehdään postmanilla operaatio DELETE http://localhost:3001/api/notes/2, huomataan että vastauksessa statuskoodi 204 no content](../../images/3/11x.png) 
 
 Postmanin käyttö on tässä tilanteessa suhteellisen yksinkertaista, riittää määritellä url ja valita oikea pyyntötyyppi.
 
@@ -609,13 +609,13 @@ Koska muistiinpanot on talletettu palvelimen muistiin, uudelleenkäynnistys pala
 ### Visual Studio Coden REST client
 
 Jos käytät Visual Studio Codea, voit Postmanin sijaan käyttää VS Coden
-[REST client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) -pluginia.
+[REST client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) ‑pluginia.
 
-Kun plugin on asennettu, on sen käyttö erittäin helppoa. Tehdään projektin juureen hakemisto <i>requests</i>, jonka sisään talletetaan REST Client -pyynnöt <i>.rest</i>-päätteisinä tiedostoina.
+Kun plugin on asennettu, on sen käyttö erittäin helppoa. Tehdään projektin juureen hakemisto <i>requests</i>, jonka sisään talletetaan REST Client ‑pyynnöt <i>.rest</i>-päätteisinä tiedostoina.
 
 Luodaan kaikki muistiinpanot hakevan pyynnön määrittelevä tiedosto <i>get\_all\_notes.rest</i>:
 
-![Luodaan tiedosto jonka sisältlö GET http://localhost:3000/api/notes](../../images/3/12ea.png)
+![Luodaan tiedosto jonka sisältlö GET http://localhost:3001/api/notes](../../images/3/12ea.png)
 
 Klikkaamalla tekstiä <i>Send Request</i>, REST client suorittaa määritellyn HTTP-pyynnön, ja palvelimen vastaus avautuu editoriin:
 
@@ -623,11 +623,11 @@ Klikkaamalla tekstiä <i>Send Request</i>, REST client suorittaa määritellyn H
 
 ### Datan vastaanottaminen
 
-Toteutetaan seuraavana uusien muistiinpanojen lisäys, joka siis tapahtuu tekemällä HTTP POST -pyyntö osoitteeseen http://localhost:3001/api/notes ja liittämällä pyynnön [bodyyn](https://www.w3.org/Protocols/rfc2616/rfc2616-sec7.html#sec7) luotavan muistiinpanon tiedot JSON-muodossa.
+Toteutetaan seuraavana uusien muistiinpanojen lisäys, joka siis tapahtuu tekemällä HTTP POST ‑pyyntö osoitteeseen http://localhost:3001/api/notes ja liittämällä pyynnön [bodyyn](https://www.w3.org/Protocols/rfc2616/rfc2616-sec7.html#sec7) luotavan muistiinpanon tiedot JSON-muodossa.
 
 Jotta pääsisimme pyynnön mukana lähetettyyn dataan helposti käsiksi, tarvitsemme Expressin tarjoaman [json-parserin](https://expressjs.com/en/api.html) apua. Tämä tapahtuu lisäämällä koodiin komento _app.use(express.json())_.
 
-Otetaan json-parseri käyttöön ja luodaan alustava määrittely HTTP POST -pyynnön käsittelyyn:
+Otetaan json-parseri käyttöön ja luodaan alustava määrittely HTTP POST ‑pyynnön käsittelyyn:
 
 ```js
 const express = require('express')
@@ -663,7 +663,7 @@ Sovellus tulostaa lähetetyn vastaanottamansa datan terminaaliin:
 
 **HUOM:** Kun ohjelmoit backendia, <i>pidä sovellusta suorittava konsoli koko ajan näkyvillä</i>. Nodemonin ansiosta sovellus käynnistyy uudelleen jos koodiin tehdään muutoksia. Jos seuraat konsolia, huomaat välittömästi jos sovelluksen koodiin tulee virhe:
 
-![konsoliin tulostuu epävalidista javascriptistä johtuva parse error -virheilmoitus](../../images/3/16.png)
+![konsoliin tulostuu epävalidista javascriptistä johtuva parse error ‑virheilmoitus](../../images/3/16.png)
 
 Konsolista kannattaa seurata myös, reagoiko backend odotetulla tavalla esim. kun sovellukselle lähetetään dataa metodilla HTTP POST. Backendiin kannattaa luonnollisesti lisäillä runsaat määrät <em>console.log</em>-komentoja kun sovellus on kehitysvaiheessa. 
 
@@ -716,7 +716,7 @@ app.post('/api/notes', (request, response) => {
 
 Uudelle muistiinpanolle tarvitaan uniikki id. Ensin selvitetään olemassa olevista id:istä suurin muuttujaan _maxId_. Uuden muistiinpanon id:ksi asetetaan sitten _maxId + 1_. Tämä tapa ei ole kovin hyvä, mutta emme nyt välitä siitä, sillä tulemme pian korvaamaan tavan, jolla muistiinpanot talletetaan.
 
-Tämänhetkisessä versiossa on vielä se ongelma, että voimme HTTP POST -pyynnöllä lisätä mitä tahansa kenttiä sisältäviä olioita. Parannellaan sovellusta siten, että kenttä <i>content</i> ei saa olla tyhjä. Kentälle <i>important</i> asetetaan oletusarvo false jos sen arvoa ei ole määritelty. Kaikki muut kentät hylätään:
+Tämänhetkisessä versiossa on vielä se ongelma, että voimme HTTP POST ‑pyynnöllä lisätä mitä tahansa kenttiä sisältäviä olioita. Parannellaan sovellusta siten, että kenttä <i>content</i> ei saa olla tyhjä. Kentälle <i>important</i> asetetaan oletusarvo false jos sen arvoa ei ole määritelty. Kaikki muut kentät hylätään:
 
 ```js
 const generateId = () => {
@@ -837,13 +837,13 @@ Jos id:tä vastaavaa puhelinnumerotietoa ei ole, tulee palvelimen vastata asianm
 
 #### 3.4: puhelinluettelon backend step4
 
-Toteuta toiminnallisuus, jonka avulla puhelinnumerotieto on mahdollista poistaa numerotiedon yksilöivään URL:iin tehtävällä HTTP DELETE -pyynnöllä.
+Toteuta toiminnallisuus, jonka avulla puhelinnumerotieto on mahdollista poistaa numerotiedon yksilöivään URL:iin tehtävällä HTTP DELETE ‑pyynnöllä.
 
 Testaa toiminnallisuus Postmanilla tai Visual Studio Coden REST clientillä.
 
 #### 3.5: puhelinluettelon backend step5
 
-Laajenna backendia siten, että uusia puhelintietoja on mahdollista lisätä osoitteeseen <http://localhost:3001/api/persons> tapahtuvalla HTTP POST -pyynnöllä.
+Laajenna backendia siten, että uusia puhelintietoja on mahdollista lisätä osoitteeseen <http://localhost:3001/api/persons> tapahtuvalla HTTP POST ‑pyynnöllä.
 
 Generoi uuden puhelintiedon tunniste funktiolla [Math.random](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random). Käytä riittävän isoa arvoväliä, jotta arvottu id on riittävän suurella todennäköisyydellä sellainen, joka ei ole jo käytössä.
 
@@ -883,11 +883,11 @@ HTTP-pyynnöistä muiden paitsi POST:in tulisi olla <i>idempotentteja</i>:
 
 Eli jos pyynnöllä on sivuvaikutuksia, lopputulos on sama suoritettaessa pyyntö yhden tai useamman kerran.
 
-Esim. jos tehdään HTTP PUT -pyyntö osoitteeseen <i>/api/notes/10</i> ja pyynnön mukana on <em>{ content: "ei sivuvaikutuksia", important: true }</em>, on lopputulos sama riippumatta siitä, kuinka monta kertaa pyyntö suoritetaan.
+Esim. jos tehdään HTTP PUT ‑pyyntö osoitteeseen <i>/api/notes/10</i> ja pyynnön mukana on <em>{ content: "ei sivuvaikutuksia", important: true }</em>, on lopputulos sama riippumatta siitä, kuinka monta kertaa pyyntö suoritetaan.
 
 Kuten metodin GET <i>safety</i> myös <i>idempotence</i> on HTTP-standardin suositus palvelimien toteuttajille. RESTful-periaatetta noudattaessa GET-, HEAD-, PUT- ja DELETE-pyyntöjä käytetäänkin aina siten, että ne ovat idempotentteja.
 
-HTTP-pyyntötyypeistä POST on ainoa, joka ei ole <i>safe</i> eikä <i>idempotent</i>. Jos tehdään viisi kertaa HTTP POST -pyyntö osoitteeseen <i>/api/notes</i> siten että pyynnön mukana on <em>{ content: "monta samaa", important: true }</em>, tulee palvelimelle viisi saman sisältöistä muistiinpanoa.
+HTTP-pyyntötyypeistä POST on ainoa, joka ei ole <i>safe</i> eikä <i>idempotent</i>. Jos tehdään viisi kertaa HTTP POST ‑pyyntö osoitteeseen <i>/api/notes</i> siten että pyynnön mukana on <em>{ content: "monta samaa", important: true }</em>, tulee palvelimelle viisi saman sisältöistä muistiinpanoa.
 
 ### Middlewaret
 
@@ -953,7 +953,7 @@ Morgan asennetaan kuten muutkin kirjastot, eli komennolla _npm install_ ja sen k
 
 #### 3.8*: puhelinluettelon backend step8
 
-Konfiguroi morgania siten, että se näyttää myös HTTP POST -pyyntöjen mukana tulevan datan:
+Konfiguroi morgania siten, että se näyttää myös HTTP POST ‑pyyntöjen mukana tulevan datan:
 
 ![Konsoliin tulostuu HTTP-pyntötyyppi, kutsuttu polku, paluuarvon statuskoodi, operaation viemä aika millisekunteina (tämä on morganin defaultina näyttämä) sekä pyynnön mukana mahdollisesti lähetetty data](../../images/3/24.png)
 

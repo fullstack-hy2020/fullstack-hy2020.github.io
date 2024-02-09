@@ -117,7 +117,7 @@ Cooking metaphor:
 
 [Docker](https://www.docker.com/) is the most popular containerization technology and pioneered the standards most containerization technologies use today. In practice, Docker is a set of products that help us to manage images and containers. This set of products will enable us to leverage all of the benefits of containers. For example, the Docker engine will take care of turning the immutable files called images into containers.
 
-For managing the Docker containers, there is also a tool called [Docker Compose](https://docs.docker.com/compose/) that allows one to **orchestrate** (control) multiple containers at the same time. In this part we shall use Docker Compose to set up a complex local development environment. In the final version of the development environment that we set up, even installing the Node to our machine is not a requirement anymore.
+For managing the Docker containers, there is also a tool called [Docker Compose](https://docs.docker.com/compose/) that allows one to **orchestrate** (control) multiple containers at the same time. In this part we shall use Docker Compose to set up a complex local development environment. In the final version of the development environment that we set up, even installing Node to our machine is not a requirement anymore.
 
 There are several concepts we need to go over. But we will skip those for now and learn about Docker first! 
 
@@ -188,7 +188,7 @@ The output contains a few new things for us to learn. <i>Docker daemon</i> is a 
 ### Exercise 12.2
 
 Some of these exercises do not require you to write any code or configurations to a file.
-In these exercises you should use [script](https://man7.org/linux/man-pages/man1/script.1.html) command to record the commands you have used; try it yourself with _script_ to start recording, _echo "hello"_ to generate some output, and _exit_ to stop recording. It saves your actions into a file names "typescript" (that has nothing to do with the TypeScript programming language, the name is just a coincidence).
+In these exercises you should use [script](https://man7.org/linux/man-pages/man1/script.1.html) command to record the commands you have used; try it yourself with _script_ to start recording, _echo "hello"_ to generate some output, and _exit_ to stop recording. It saves your actions into a file named "typescript" (that has nothing to do with the TypeScript programming language, the name is just a coincidence).
 
 If _script_ does not work, you can just copy-paste all commands you used into a text file.
 
@@ -243,7 +243,7 @@ CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS                      
 b8548b9faec3   ubuntu    "bash"    3 minutes ago    Exited (0) 6 seconds ago          hopeful_clarke
 ```
 
-> <i>Editor's note: that the command _docker container ls_ has also a shorter form _docker ps_</i>, I prefer the shorer one.
+> <i>Editor's note: that the command _docker container ls_ has also a shorter form _docker ps_</i>, I prefer the shorter one.
 
 We have two options when addressing a container. The identifier in the first column can be used to interact with the container almost always. Plus, most commands accept the container name as a more human-friendly method of working with them. The name of the container was automatically generated to be **"hopeful_clarke"** in my case.
 
@@ -392,7 +392,7 @@ hopeful_clarke
 
 Create a file <i>index.js</i> to your current directory and write _console.log('Hello, World')_ inside it. No need for containers yet.
 
-Next, let's skip installing Node altogether. There are plenty of useful Docker images in Docker Hub ready for our use. Let's use the image [https://hub.docker.com/_/Node](https://hub.docker.com/_/Node), which has Node already installed. We only need to pick a version.
+Next, let's skip installing Node altogether. There are plenty of useful Docker images in Docker Hub ready for our use. Let's use the image [https://hub.docker.com/_/node](https://hub.docker.com/_/node), which has Node already installed. We only need to pick a version.
 
 By the way, the _container run_ accepts _--name_ flag that we can use to give a name for the container.
 

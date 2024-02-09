@@ -25,15 +25,15 @@ There are several reasons why using pull requests and getting your code reviewed
 
 You can configure your GitHub repository in such a way that pull requests cannot be merged until they are approved.
 
-![Compare & pull request](../../images/11/part11d_00.png)
+![Compare & pull request](../../images/11/pr1a.png)
 
 To open a new pull request, open your branch in GitHub and click on the green "Compare & pull request" button at the top. You will be presented with a form where you can fill in the pull request description.
 
-![Open a new pull request](../../images/11/part11d_01.png)
+![Open a new pull request](../../images/11/pr2.png)
 
 GitHub's pull request interface presents a description and the discussion interface. At the bottom, it displays all the CI checks (in our case each of our Github Actions) that are configured to run for each PR and the statuses of these checks. A green board is what you aim for! You can click on Details of each check to view details and run logs.
 
-All the workflows we looked at so far were triggered by commits to the main branch. To make the workflow run for each pull request we would have to update the trigger part of the workflow. We use the "pull_request" trigger for branch "master" (our main branch) and limit the trigger to events "opened" and "synchronize". Basically, this means, that the workflow will run when a PR into the main branch is opened or updated.
+All the workflows we looked at so far were triggered by commits to the main branch. To make the workflow run for each pull request we would have to update the trigger part of the workflow. We use the "pull_request" trigger for branch "main" (our main branch) and limit the trigger to events "opened" and "synchronize". Basically, this means, that the workflow will run when a PR into the main branch is opened or updated.
 
 So let us change events that [trigger](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows) of the workflow as follows:
 
@@ -41,12 +41,10 @@ So let us change events that [trigger](https://docs.github.com/en/free-pro-team@
 on:
   push:
     branches:
-      - master
-  pull_request: // highlight-line
-    branches: [master] // highlight-line
-    types: [opened, synchronize] // highlight-line
-    
-# note that your "main" branch might be called main instead of master
+      - main
+  pull_request: # highlight-line
+    branches: [main] # highlight-line
+    types: [opened, synchronize] # highlight-line
 ```
 
 We shall soon make it impossible to push the code directly to the main branch, but in the meantime, let us still run the workflow also for all the possible direct pushes to the main branch.
@@ -67,13 +65,13 @@ Create a new branch, commit your changes, and open a pull request to your main b
 
 If you have not worked with branches before, check [e.g. this tutorial](https://www.atlassian.com/git/tutorials/using-branches) to get started.
 
-Note that when you open the pull request, make sure that you select here your <i>own</i> repository as the destination <i>base repository</i>. By default, the selection is the original repository by smartly and you **do not want** to do that:
+Note that when you open the pull request, make sure that you select here your <i>own</i> repository as the destination <i>base repository</i>. By default, the selection is the original repository by <https://github.com/fullstack-hy2020> and you **do not want** to do that:
 
-![](../../images/11/15a.png)
+![](../../images/11/pr3.png)
 
 In the "Conversation" tab of the pull request you should see your latest commit(s) and the yellow status for checks in progress:
 
-![](../../images/11/16.png)
+![](../../images/11/pr4.png)
 
 Once the checks have been run, the status should turn to green. Make sure all the checks pass. Do not merge your branch yet, there's still one more thing we need to improve on our pipeline.
 
@@ -163,7 +161,7 @@ In the case above, the software we release is tested because the CI system makes
 
 ### Exercises 11.15-11.16.
 
-Let's extend our workflow so that it will automatically increase (bump) the version when a pull request is merged into the main branch and [tag](https://www.atlassian.com/git/tutorials/inspecting-a-repository/git-tag) the release with the version number. We will use an open source action developed by a third-party: [anothrNick/github-tag-action](https://github.com/anothrNick/github-tag-action). 
+Let's extend our workflow so that it will automatically increase (bump) the version when a pull request is merged into the main branch and [tag](https://www.atlassian.com/git/tutorials/inspecting-a-repository/git-tag) the release with the version number. We will use an open source action developed by a third party: [anothrNick/github-tag-action](https://github.com/anothrNick/github-tag-action). 
 
 #### 11.15 Adding versioning
 
@@ -171,20 +169,20 @@ We will extend our workflow with one more step:
 
 ```js
 - name: Bump version and push tag
-  uses: anothrNick/github-tag-action@1.55.0
+  uses: anothrNick/github-tag-action@1.64.0
   env:
-    GITHUB_TOKEN: ${{ secrets.GHUB_TOKEN }}
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 Note: you should use the most recent version of the action, see [here](https://github.com/anothrNick/github-tag-action) if a more recent version is available. 
 
-We're passing an environmental variable <code>secrets.GITHUB\_TOKEN</code> to the action. As it is third-party action, it needs the token for authentication in your repository. You can read more [here](https://docs.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token) about authentication in GitHub Actions.
+We're passing an environmental variable <code>secrets.GITHUB\_TOKEN</code> to the action. As it is third party action, it needs the token for authentication in your repository. You can read more [here](https://docs.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token) about authentication in GitHub Actions.
 
 You may end up having this error message
 
 ![Submissions](../../images/11/tag-error.png)
 
-The most likely cause for this is that your token has no write access to your repo. Go to your repository settings, and select actions/general, and ensure that your token has <i>read and write permissions</i>:
+The most likely cause for this is that your token has no write access to your repo. Go to your repository settings, select actions/general, and ensure that your token has <i>read and write permissions</i>:
 
 ![Submissions](../../images/11/tag-permissions.png)
 
@@ -204,9 +202,9 @@ name: Deployment pipeline
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
-    branches: [master]
+    branches: [main]
     types: [opened, synchronize]
 
 jobs:
@@ -233,11 +231,11 @@ By clicking <i>view all tags</i>, you can see all the tags listed:
 
 ![Releases](../../images/11/18-new.png)
 
-And if needed, you can navigate to the view of a single tag that shows eg. what is the GitHub commit corresponding to the tag.
+If needed, you can navigate to the view of a single tag that shows eg. what is the GitHub commit corresponding to the tag.
 
 #### 11.16 Skipping a commit for tagging and deployment
 
-In general the more often you deploy the main branch to production, the better. However, there might be some valid reasons sometimes to skip a particular commit or a merged pull request to becoming tagged and released to production.
+In general, the more often you deploy the main branch to production, the better. However, there might be some valid reasons sometimes to skip a particular commit or a merged pull request to become tagged and released to production.
 
 Modify your setup so that if a commit message in a pull request contains _#skip_, the merge will not be deployed to production and it is not tagged with a version number.
 
@@ -259,7 +257,7 @@ jobs:
   a_test_job:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: github context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
@@ -282,19 +280,19 @@ You most likely need functions [contains](https://docs.github.com/en/actions/lea
 
 Developing workflows is not easy, and quite often the only option is trial and error. It might actually be advisable to have a separate repository for getting the configuration right, and when it is done, to copy the right configurations to the actual repository.
 
-It would also be possible to install a tool such as [act](https://github.com/nektos/act) that makes it possible to run your workflows locally. Unless you end using more involved use cases like creating your [own custom actions](https://docs.github.com/en/free-pro-team@latest/actions/creating-actions), going through the burden of setting up a tool such as act is most likely not worth the trouble. 
+It would also be possible to install a tool such as [act](https://github.com/nektos/act) that makes it possible to run your workflows locally. Unless you end up using more involved use cases like creating your [own custom actions](https://docs.github.com/en/free-pro-team@latest/actions/creating-actions), going through the burden of setting up a tool such as act is most likely not worth the trouble. 
 
 </div>
 
 <div class="content">
 
-### A note about using third party actions
+### A note about using third-party actions
 
-When using a third party action such that <i>github-tag-action</i> it might be a good idea to specify the used version with hash instead of using a version number. The reason for this is that the version number, that is implemented with a Git tag can in principle be <i>moved</i>. So today's version 1.61.0 might be a different code that is at the next week the version 1.61.0! 
+When using a third-party action such that <i>github-tag-action</i> it might be a good idea to specify the used version with hash instead of using a version number. The reason for this is that the version number, that is implemented with a Git tag can in principle be <i>moved</i>. So today's version 1.61.0 might be a different code that is at next week the version 1.61.0! 
 
-However, the code in commit with a particular hash does not change in any circumstances, so if we want to be 100% sure about the code we use, it is safest to use the hash. 
+However, the code in a commit with a particular hash does not change in any circumstances, so if we want to be 100% sure about the code we use, it is safest to use the hash. 
 
-The version [1.61.0](https://github.com/anothrNick/github-tag-action/releases/tag/1.61.0) of the action corresponds to commit with hash <code>8c8163ef62cf9c4677c8e800f36270af27930f42</code>, so we might want to change our configuration as follows:
+V  ersion [1.61.0](https://github.com/anothrNick/github-tag-action/releases/tag/1.61.0) of the action corresponds to a commit with hash <code>8c8163ef62cf9c4677c8e800f36270af27930f42</code>, so we might want to change our configuration as follows:
 
 ```js
     - name: Bump version and push tag
@@ -311,13 +309,13 @@ By pointing to the hash of a specific commit we can be sure that the code we use
 
 ### Keep the main branch protected
 
-GitHub allows you to set up protected branches. It is important to protect your most important branch that should never be broken: <i>master</i>/<i>main</i>. In repository settings, you can choose between several levels of protection. We will not go over all of the protection options, you can learn more about them in GitHub documentation. Requiring pull request approval when merging into the main branch is one of the options we mentioned earlier.
+GitHub allows you to set up protected branches. It is important to protect your most important branch that should never be broken: <i>main</i>. In repository settings, you can choose between several levels of protection. We will not go over all of the protection options, you can learn more about them in GitHub documentation. Requiring pull request approval when merging into the main branch is one of the options we mentioned earlier.
 
-From CI point of view, the most important protection is requiring status checks to pass before a PR can be merged into the main branch. This means that if you have set up GitHub Actions to run e.g. linting and testing tasks, then until all the lint errors are fixed and all the tests pass the PR cannot be merged. Because you are the administrator for your repository, you will see an option to override the restriction. However, non-administrators will not have this option.
+From CI point of view, the most important protection is requiring status checks to pass before a PR can be merged into the main branch. This means that if you have set up GitHub Actions to run e.g. linting and testing tasks, then until all the lint errors are fixed and all the tests pass the PR cannot be merged. Because you are the administrator of your repository, you will see an option to override the restriction. However, non-administrators will not have this option.
 
 ![Unmergeable PR](../../images/11/part11d_03.png)
 
-To set up protection for your main branch, navigate to repository "Settings" from the top menu inside the repository. In the left-side menu select "Branches". Click "Add rule" button next to "Branch protection rules". Type a branch name pattern ("master" or "main" will do nicely) and select the protection you would want to set up. At least "Require status checks to pass before merging" is necessary for you to fully utilize the power of GitHub Actions. Under it, you should also check "Require branches to be up to date before merging" and select all of the status checks that should pass before a PR can be merged. 
+To set up protection for your main branch, navigate to repository "Settings" from the top menu inside the repository. In the left-side menu select "Branches". Click "Add rule" button next to "Branch protection rules". Type a branch name pattern ("main" will do nicely) and select the protection you would want to set up. At least "Require status checks to pass before merging" is necessary for you to fully utilize the power of GitHub Actions. Under it, you should also check "Require branches to be up to date before merging" and select all of the status checks that should pass before a PR can be merged. 
 
 ![Branch protection rule](../../images/11/part11d_04.png)
 
@@ -329,7 +327,7 @@ To set up protection for your main branch, navigate to repository "Settings" fro
 
 #### 11.17 Adding protection to your main branch
 
-Add protection to your <i>master</i> (or <i>main</i>) branch.
+Add protection to your <i>main</i> branch.
 
 You should protect it to:
 - Require all pull request to be approved before merging

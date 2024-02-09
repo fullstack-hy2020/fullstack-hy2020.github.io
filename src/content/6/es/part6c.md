@@ -219,7 +219,7 @@ noteService.getAll().then(notes =>
 )
 ```
 
-> **NB:**  ¿por qué no usamos await en lugar de promesas y controladores de eventos (registrados en _then_ métodos)?
+> **NB:**  ¿por qué no usamos await en lugar de promesas y controladores de eventos?
 >
 >Await solo funciona dentro de funciones <i>async</i>, y el código en <i>index.js</i> no está dentro de una función, por lo que debido a la naturaleza simple de la operación, esta vez nos abstendremos de usar  <i>async</i>.
 
@@ -255,7 +255,7 @@ const App = () => {
 export default App
 ```
 
-El uso del hoook useEffect genera una advertencia eslint:
+El uso del hook useEffect genera una advertencia eslint:
 
 ![vscode warnig useEffect missing dispatch dependency](../../images/6/26ea.png)
 
@@ -294,7 +294,7 @@ const App = () => {
 
 Generalmente, deshabilitar eslint cuando genera una advertencia no es una buena idea. Aunque la regla eslint en cuestión ha causado algunos [argumentos](https://github.com/facebook/create-react-app/issues/6880), usaremos la primera solución.
 
-Más sobre la necesidad de definir las dependencias de los hooks en la [documentación de react](https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies).
+Se encuentra más información sobre la necesidad de definir las dependencias de los hooks en la [documentación de react](https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies).
 
 ### Enviando datos al backend
 
@@ -318,7 +318,7 @@ const createNew = async (content) => {
 
 export default {
   getAll,
-  createNew,
+  createNew, // highlight-line
 }
 ```
 
@@ -351,7 +351,7 @@ const NewNote = (props) => {
 export default NewNote
 ```
 
-Debido a que el backend genera ids para las notas, cambiaremos el creador de la acción <em>createNote</em> en el archoivo <i>noteReducer.js</i> de la siguiente manera:
+Debido a que el backend genera ids para las notas, cambiaremos el creador de la acción <em>createNote</em> en el archivo <i>noteReducer.js</i> de la siguiente manera:
 
 ```js
 const noteSlice = createSlice({

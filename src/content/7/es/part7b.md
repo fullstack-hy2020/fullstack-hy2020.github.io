@@ -7,29 +7,23 @@ lang: es
 
 <div class="content">
 
-
-Los ejercicios de esta parte son un poco diferentes a los ejercicios de las partes anteriores. Los ejercicios de la parte anterior y los ejercicios de esta parte [tratan sobre la teoría presentada en esta parte](/es/part7/custom_hooks#exercises-7-4-7-8).
-
-
-Esta parte también contiene una [serie de ejercicios](/es/part7/exercises_extending_the_bloglist) en los que modificamos la aplicación Bloglist de las partes 4 y 5 para ensayar y aplicar las habilidades que hemos aprendido.
-
 ### Hooks
 
 React ofrece 10 [hooks incorporados](https://reactjs.org/docs/hooks-reference.html) diferentes, de los cuales los más populares son los hooks [useState](https://reactjs.org/docs/hooks-reference.html#usestate) y [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect), que ya hemos estado usando ampliamente.
 
-En la [parte 5](/es/part5/props_children_and_proptypes#references-to-components-with-ref) usamos el hhok [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) que permite que los componentes proporcionen sus funciones a otros componentes.
+En la [parte 5](/es/part5/props_children_y_proptypes#referencias-a-componentes-con-ref) usamos el hook [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) que permite que los componentes proporcionen sus funciones a otros componentes.
 
-Durante el último año, muchas librerías React han comenzado a ofrecer apis basadas en hooks. En la [parte 6](/es/part6/flux_architecture_and_redux) usamos los hooks [useSelector](https://react-redux.js.org/api/hooks#useselector) y [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) de la librería react-redux para compartir nuestra función redux-store y dispatch a nuestros componentes. La api basada en hooks de Redux es mucho más fácil de usar que la más antigua, aún disponible, [connect](/es/part6/connect) -api.
+Durante el último año, muchas librerías React han comenzado a ofrecer apis basadas en hooks. En la [parte 6](/es/part6/flux_architecture_y_redux) usamos los hooks [useSelector](https://react-redux.js.org/api/hooks#useselector) y [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) de la librería react-redux para compartir nuestra función redux-store y dispatch a nuestros componentes.
 
-La api de [React-router](https://reactrouter.com/en/main/start/tutorial) que presentamos en la [parte anterior](/es/part7/react_router) también se basa parcialmente en [hooks](https://reacttraining.com/react-router/web/api/Hooks). Sus hooks se pueden usar para acceder a los parámetros de la URL y al objeto history, lo que permite manipular la URL del navegador mediante programación.
+La API de [React-Router](https://reactrouter.com/en/main/start/tutorial) que presentamos en la [parte anterior](/es/part7/react_router) también se basa parcialmente en [hooks](https://reacttraining.com/react-router/web/api/Hooks). Sus hooks se pueden usar para acceder a los parámetros de la URL y al objeto history, lo que permite manipular la URL del navegador mediante programación.
 
-Como se mencionó en la [parte 1](/es/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks), los hooks no son funciones normales y cuando los usamos tenemos que cumplir con ciertas [reglas o limitaciones](https://reactjs.org/docs/hooks-rules.html). Recapitulemos las reglas del uso de hooks, copiadas literalmente de la documentación oficial de React:
+Como se mencionó en la [parte 1](/es/part1/un_estado_mas_complejo_depurando_aplicaciones_react#reglas-de-los-hooks), los hooks no son funciones normales y cuando los usamos tenemos que cumplir con ciertas [reglas o limitaciones](https://reactjs.org/docs/hooks-rules.html). Recapitulemos las reglas del uso de hooks, copiadas literalmente de la documentación oficial de React:
 
 **No llame a Hooks dentro de bucles, condiciones o funciones anidadas.** En su lugar, utilice siempre Hooks en el nivel superior de su función React. 
 
 **No llame a Hooks desde funciones regulares de JavaScript.** En su lugar, puede:
 
-- Llame a Hooks desde los componentes funcionales de React.
+- Llamar a Hooks desde los componentes funcionales de React.
 - Llamar a Hooks desde Hooks personalizados
 
 Existe una regla de [ESlint](https://www.npmjs.com/package/eslint-plugin-react-hooks) que se puede usar para verificar que la aplicación usa los hooks correctamente.
@@ -124,7 +118,7 @@ const App = (props) => {
 ```
 
 
-Al hacer esto, podemos extraer el estado del componente _App_ y su manipulación por completo en el hook _useCounter_ . La gestión del estado y la lógica del contador ahora es responsabilidad del hook personalizado.
+Al hacer esto, podemos extraer el estado del componente _App_ y su manipulación por completo en el hook _useCounter_. La gestión del estado y la lógica del contador ahora es responsabilidad del hook personalizado.
 
 El mismo hook podría <i>reutilizarse</i> en la aplicación que realizaba un seguimiento de la cantidad de clics realizados en los botones izquierdo y derecho:
 
@@ -313,7 +307,7 @@ Internet está comenzando a llenarse con más y más material útil relacionado 
 
 ### Ejercicios 7.4.-7.8.
 
-Continuaremos con la aplicación de los [ejercicios](/es/part7/react_router#exercises-7-1-7-3) del capítulo [react router](/es/part7/react_router).
+Continuaremos con la aplicación de los [ejercicios](/es/part7/react_router#ejercicios-7-1-7-3) del capítulo [react router](/es/part7/react_router).
 
 #### 7.4: anécdotas y hooks paso 1
 
@@ -415,14 +409,13 @@ Una solución simple sería no usar la sintaxis de propagación y escribir todos
 
 Si hiciéramos esto, perderíamos gran parte del beneficio proporcionado por el hook <i>useField</i>. En su lugar, busque una solución que solucione el problema, pero que aún sea fácil de usar con la sintaxis de propagación.
 
-### 7.7: hook de campo
+#### 7.7: Hook de País
 
-Let's return to the exercises [2.12-14](/es/part2/getting_data_from_server#exercises-2-11-2-14).
-Volvamos a los ejercicios [2.12-14].
+Volvamos a los ejercicios [2.12-14](/es/part2/obteniendo_datos_del_servidor#ejercicios-2-11-2-14).
 
 Utilice el código de https://github.com/fullstack-hy2020/country-hook como punto de partida.
 
-La aplicación se puede utilizar para buscar detalles de países desde la interfaz https://restcountries.com/. Si se encuentra el país, se muestran los detalles del país
+La aplicación se puede utilizar para buscar detalles de países desde la interfaz https://studies.cs.helsinki.fi/restcountries/. Si se encuentra el país, se muestran los detalles del país
 
 ![](../../images/7/69ea.png)
 
@@ -432,11 +425,11 @@ Si no se encuentra el país, se muestra un mensaje al usuario
 
 Por lo demás, la aplicación está completa, pero en este ejercicio debe implementar un hook personalizado _useCountry_, que se puede usar para buscar los detalles del país dado al hook como parámetro.
 
-Use el endpoint [full name](https://restcountries.com/#api-endpoints-v2-full-name) de la api  para obtener los detalles del país en un hook _useEffect_ dentro de su hook personalizado.
+Use el endpoint [name](https://studies.cs.helsinki.fi/restcountries/) de la API para obtener los detalles del país en un hook _useEffect_ dentro de su hook personalizado.
 
 Tenga en cuenta que en este ejercicio es esencial utilizar el [segundo parámetro](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) de useEffect para controlar cuándo se ejecuta la función de efecto.
 
-### 7.8: hooks definitivos
+#### 7.8: hooks definitivos
 
 El código de la aplicación responsable de comunicarse con el backend de la aplicación de notas de las partes anteriores se ve así:
 
@@ -472,7 +465,7 @@ const update = (id, newObject) => {
 export default { getAll, create, update, setToken }
 ```
 
-Notamos que el código no es específico del hecho de que nuestra aplicación se ocupa de notas. Excluyendo el valor de la variable _baseUrl_, el mismo código podría reutilizarse en la aplicación de publicación de blog para tratar la comunicación con el backend.
+Notamos que el código no especifica que nuestra aplicación gestiona notas. Excluyendo el valor de la variable _baseUrl_, el mismo código podría reutilizarse en la aplicación de publicación de blog para tratar la comunicación con el backend.
 
 Extraiga el código para comunicarse con el backend en su propio hook _useResource_. Es suficiente implementar la búsqueda de todos los recursos y la creación de un nuevo recurso.
 
@@ -518,7 +511,7 @@ const App = () => {
 }
 ```
 
-El hook personalizado _useResource_ devuelve un array de dos elementos al igual que los hooks de estado. El primer elemento del array contiene todos los recursos individuales y el segundo elemento del array es un objeto que se puede usar para manipular la colección de recursos, como crear nuevos.
+El hook personalizado _useResource_ devuelve un array de dos elementos al igual que los hooks de estado. El primer elemento del array contiene todos los recursos individuales y el segundo elemento del array es un objeto que se puede usar para manipular la colección de recursos y crear nuevos.
 
 Si implementa el hook correctamente, se puede usar tanto para notas como para números de teléfono (inicie el servidor con el comando _npm run server_ en el puerto 3005).
 

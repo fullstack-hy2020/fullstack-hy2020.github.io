@@ -7,21 +7,17 @@ lang: en
 
 <div class="content">
 
-The exercises in this part are a bit different than the exercises in the previous parts. The exercises in the previous part and the exercises in this part [are about the theory presented in this part](/en/part7/custom_hooks#exercises-7-4-7-8).
-
-This part also contains a [series of exercises](/en/part7/exercises_extending_the_bloglist) in which we modify the Bloglist application from parts 4 and 5 to rehearse and apply the skills we have learned.
-
 ### Hooks
 
-React offers 15 different [built-in hooks](https://reactjs.org/docs/hooks-reference.html), of which the most popular ones are the [useState](https://reactjs.org/docs/hooks-reference.html#usestate) and [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect) hooks that we have already been using extensively.
+React offers 15 different [built-in hooks](https://react.dev/reference/react), of which the most popular ones are the [useState](https://react.dev/reference/react/useState) and [useEffect](https://react.dev/reference/react/useEffect) hooks that we have already been using extensively.
 
-In [part 5](/en/part5/props_children_and_proptypes#references-to-components-with-ref) we used the [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) hook which allows components to provide their functions to other components. In [part 6](/en/part6/react_query_use_reducer_and_the_contex) we used [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) and [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext) to implement a Redux like state management.
+In [part 5](/en/part5/props_children_and_proptypes#references-to-components-with-ref) we used the [useImperativeHandle](https://react.dev/reference/react/useImperativeHandle) hook which allows components to provide their functions to other components. In [part 6](/en/part6/react_query_use_reducer_and_the_contex) we used [useReducer](https://react.dev/reference/react/useReducer) and [useContext](https://react.dev/reference/react/useContext) to implement a Redux like state management.
 
 Within the last couple of years, many React libraries have begun to offer hook-based APIs. [In part 6](/en/part6/flux_architecture_and_redux) we used the [useSelector](https://react-redux.js.org/api/hooks#useselector) and [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) hooks from the react-redux library to share our redux-store and dispatch function to our components.
 
 The [React Router's](https://reactrouter.com/en/main/start/tutorial) API we introduced in the [previous part](/en/part7/react_router) is also partially hook-based. Its hooks can be used to access URL parameters and the <i>navigation</i> object, which allows for manipulating the browser URL programmatically.
 
-As mentioned in [part 1](/en/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks), hooks are not normal functions, and when using those we have to adhere to certain [rules or limitations](https://reactjs.org/docs/hooks-rules.html). Let's recap the rules of using hooks, copied verbatim from the official React documentation:
+As mentioned in [part 1](/en/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks), hooks are not normal functions, and when using those we have to adhere to certain [rules or limitations](https://legacy.reactjs.org/docs/hooks-rules.html). Let's recap the rules of using hooks, copied verbatim from the official React documentation:
 
 **Don’t call Hooks inside loops, conditions, or nested functions.** Instead, always use Hooks at the top level of your React function.
 
@@ -30,15 +26,13 @@ As mentioned in [part 1](/en/part1/a_more_complex_state_debugging_react_apps#rul
 - Call Hooks from React function components.
 - Call Hooks from custom Hooks
 
-There's an existing [ESlint](https://www.npmjs.com/package/eslint-plugin-react-hooks) rule that can be used to verify that the application uses hooks correctly.
-
-Create-react-app has the readily-configured rule [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks) that complains if hooks are used in an illegal manner:
+There's an existing [ESlint plugin](https://www.npmjs.com/package/eslint-plugin-react-hooks) that can be used to verify that the application uses hooks correctly:
 
 ![vscode error useState being called conditionally](../../images/7/60ea.png)
 
 ### Custom hooks
 
-React offers the option to create [custom](https://reactjs.org/docs/hooks-custom.html) hooks. According to React, the primary purpose of custom hooks is to facilitate the reuse of the logic used in components.
+React offers the option to create [custom](https://react.dev/learn/reusing-logic-with-custom-hooks) hooks. According to React, the primary purpose of custom hooks is to facilitate the reuse of the logic used in components.
 
 > <i>Building your own Hooks lets you extract component logic into reusable functions.</i>
 
@@ -233,13 +227,13 @@ const App = () => {
 
 ### Spread attributes
 
-We could simplify things a bit further. Since the _name_ object has exactly all of the attributes that the <i>input</i> element expects to receive as props, we can pass the props to the element using the [spread syntax](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes) in the following way:
+We could simplify things a bit further. Since the _name_ object has exactly all of the attributes that the <i>input</i> element expects to receive as props, we can pass the props to the element using the [spread syntax](https://react.dev/learn/updating-objects-in-state#copying-objects-with-the-spread-syntax) in the following way:
 
 ```js
 <input {...name} /> 
 ```
 
-As the [example](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes) in the React documentation states, the following two ways of passing props to a component achieve the exact same result:
+As the [example](https://react.dev/learn/updating-objects-in-state#copying-objects-with-the-spread-syntax) in the React documentation states, the following two ways of passing props to a component achieve the exact same result:
 
 ```js
 <Greeting firstName='Arto' lastName='Hellas' />
@@ -400,7 +394,7 @@ Let's return to exercises [2.18-2.20](/en/part2/adding_styles_to_react_app#exerc
 
 Use the code from <https://github.com/fullstack-hy2020/country-hook> as your starting point.
 
-The application can be used to search for a country's details from the <https://restcountries.com/> interface. If a country is found, the details of the country are displayed:
+The application can be used to search for a country's details from the service in <https://studies.cs.helsinki.fi/restcountries/>. If a country is found, the details of the country are displayed:
 
 ![browser displaying country details](../../images/7/69ea.png)
 
@@ -410,9 +404,9 @@ If no country is found, a message is displayed to the user:
 
 The application is otherwise complete, but in this exercise, you have to implement a custom hook _useCountry_, which can be used to search for the details of the country given to the hook as a parameter.
 
-Use the API endpoint [full name](https://restcountries.com/#api-endpoints-v2-full-name) to fetch a country's details in a _useEffect_ hook within your custom hook.
+Use the API endpoint [name](https://studies.cs.helsinki.fi/restcountries/) to fetch a country's details in a _useEffect_ hook within your custom hook.
 
-Note that in this exercise it is essential to use useEffect's [second parameter](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) array to control when the effect function is executed. See the course [part 2](/en/part2/adding_styles_to_react_app#couple-of-important-remarks) for more info how the second parameter could be used.
+Note that in this exercise it is essential to use useEffect's [second parameter](https://react.dev/reference/react/useEffect#parameters) array to control when the effect function is executed. See the course [part 2](/en/part2/adding_styles_to_react_app#couple-of-important-remarks) for more info how the second parameter could be used.
 
 #### 7.8: ultimate hooks
 

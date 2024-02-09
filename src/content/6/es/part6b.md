@@ -413,9 +413,9 @@ Hay un pequeño defecto cosmético en nuestra aplicación. Aunque el filtro est�
 
 #### 6.9 Mejores anécdotas, paso 7
 
-Implementa filtros para las anecdotas que se muestran al usuario. Se recomienda crear un nuevo reducer, action creators y un reducer commbinado para la store usando la función <i>combineReducers</i>.
+Implementa filtros para las anécdotas que se muestran al usuario. Se recomienda crear un nuevo reducer, action creators y un reducer combinado para la store usando la función <i>combineReducers</i>.
 
-Crea un nuevo componente <i>Filter</i> para mostrar los filtros. Puedes utilizar el suigiente código como punto de partida:
+Crea un nuevo componente <i>Filter</i> para mostrar los filtros. Puedes utilizar el siguiente código como punto de partida:
 
 ```js
 const Filter = () => {
@@ -442,7 +442,7 @@ export default Filter
 
 ### Redux Toolkit
 
-Como hemos visto hasta ahora, la implementación de la gestión del estado y la configuración de Redux requiere bastante esfuerzo. Esto se manifiesta, por ejemplo, en el código relacionado con el reducer y el creador de acciones, que tiene un código repetitivo un tanto repetitivo. [Redux Toolkit](https://redux-toolkit.js.org/) es una librería que resuelve estos problemas comunes relacionados con Redux. La librería, por ejemplo, simplifica enormemente la configuración de la store de Redux y ofrece una gran variedad de herramientas para facilitar la gestión del estado.
+Como hemos visto hasta ahora, la implementación de la gestión del estado y la configuración de Redux requiere bastante esfuerzo. Esto se manifiesta, por ejemplo, en el código relacionado con el reducer y el creador de acciones, que tiene un código un tanto repetitivo. [Redux Toolkit](https://redux-toolkit.js.org/) es una librería que resuelve estos problemas comunes relacionados con Redux. La librería, por ejemplo, simplifica enormemente la configuración de la store de Redux y ofrece una gran variedad de herramientas para facilitar la gestión del estado.
 
 Comencemos a usar Redux Toolkit en nuestra aplicación refactorizando el código existente. Primero, necesitaremos instalar la biblioteca:
 
@@ -703,8 +703,6 @@ También es posible enviar acciones (dispatch) a la store utilizando las herrami
 
 ![devtools redux dispatching createNote with payload](../../images/6/44new.png)
 
-You can find the code for our current application in its entirety in the <i>part6-3</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3).
-
 El código actual de la aplicación estan en la rama <i>part6-3</i> de [este repositorio de Github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3).
 
 </div>
@@ -714,19 +712,19 @@ El código actual de la aplicación estan en la rama <i>part6-3</i> de [este rep
 
 ### Ejercicios 6.10.-6.13.
 
-Continuemos trabajando en la aplicación de anécdotas usando redux la cual comenzamos en el ejercicio 6.3.
+Continuemos trabajando en la aplicación de anécdotas que comenzamos en el ejercicio 6.3, usando Redux Toolkit.
 
 #### 6.10 Mejores anécdotas, paso 8
 
-Instala Redux Toolkit en el proyecto. Mueve la creacion de la store de redux a su propio archivo <i>store.js</i> y usa la función <em>configureStore</em> para crear la store.
+Instale Redux Toolkit en el proyecto. Mueva la creación de la store de redux a su propio archivo <i>store.js</i> y use la función <em>configureStore</em> para crear la store.
 
-Cambia la definición del <i>Filter reducer y creación de acciones</i> para usar la función <em>createSlice</em> de Redux Toolkit.
+Cambie la definición del <i>Filter reducer y creación de acciones</i> para usar la función <em>createSlice</em> de Redux Toolkit.
 
-Tambien, empieza a usar los Redux DevTools para depurar el estado de la aplicación facilmente.
+También, empiece a usar los Redux DevTools para depurar el estado de la aplicación fácilmente.
 
-### 6.11 Mejores anécdotas, paso 9
+#### 6.11 Mejores anécdotas, paso 9
 
-Cambia también la definición de <i>Anecdote reducer y creación de acciones</i> para usar la función <em>createSlice</em> de Redux Toolkit.
+Cambie también la definición de <i>Anecdote reducer y creación de acciones</i> para usar la función <em>createSlice</em> de Redux Toolkit.
 
 #### 6.12 Mejores anécdotas, paso 10
 
@@ -771,7 +769,7 @@ const Notification = () => {
 
 Tendrá que realizar cambios en el reducer existente de la aplicación. Cree un reducer separado para la nueva funcionalidad usando la función <em>createSlice</em> de Redux Toolkit.
 
-La aplicación no tiene que utilizar el componente <i>Notification</i> de forma inteligente en este punto de los ejercicios. Es suficiente que la aplicación muestre el valor inicial establecido para el mensaje en el <i>notificationReducer</i>.
+La aplicación no tiene que utilizar el componente <i>Notification</i> completamente en este punto de los ejercicios. Es suficiente con que la aplicación muestre el valor inicial establecido para el mensaje en el <i>notificationReducer</i>.
 
 #### 6.13 Mejores anécdotas, paso 11
 

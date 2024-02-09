@@ -7,7 +7,7 @@ lang: fi
 
 <div class="content">
 
-Kurssilla tutustutaan JavaScriptilla tapahtuvaan moderniin web-sovelluskehitykseen. Pääpaino on React-kirjaston avulla toteutettavissa single page -sovelluksissa, ja niitä tukevissa Node.js:llä toteutetuissa REST- ja GraphQL-rajapinnoissa. Kurssi sisältää myös osat, joissa tutustutaan TypeScriptiin, React Nativeen ja jatkuvaan integraatioon.
+Kurssilla tutustutaan JavaScriptilla tapahtuvaan moderniin web-sovelluskehitykseen. Pääpaino on React-kirjaston avulla toteutettavissa single page ‑sovelluksissa ja niitä tukevissa Node.js:llä toteutetuissa REST- ja GraphQL-rajapinnoissa. Kurssi sisältää myös osat, joissa tutustutaan TypeScriptiin, React Nativeen ja jatkuvaan integraatioon.
 
 Kurssilla käsitellään myös sovellusten testaamista, konttiteknologiaa, konfigurointia ja suoritusympäristöjen hallintaa sekä tietokantoja.
 
@@ -19,7 +19,7 @@ Osallistuminen ei kuitenkaan edellytä kurssilla käsiteltävien tekniikoiden ta
 
 ### Kurssimateriaali
 
-Kurssimateriaali on tarkoitettu luettavaksi osa kerrallaan "alusta loppuun". Materiaalin seassa on tehtäviä, jotka on sijoiteltu siten, että kunkin tehtävän tekemiseen pitäisi olla riittävät tekniset valmiudet sitä edeltävässä materiaalissa. Voit siis tehdä tehtäviä sitä mukaan kun niitä tulee materiaalissa vastaan. Voi myös olla, että koko osan tehtävät kannattaa tehdä vasta sen jälkeen, kun olet ensin lukenut osan alusta loppuun kertaalleen. Useissa osissa tehtävät ovat samaa ohjelmaa laajentavia pienistä osista koostuvia kokonaisuuksia. Muutamia tehtävien ohjelmia kehitetään eteenpäin useamman osan aikana.
+Kurssimateriaali on tarkoitettu luettavaksi osa kerrallaan "alusta loppuun". Materiaalin seassa on tehtäviä, jotka ovat sijoiteltu siten, että kunkin tehtävän tekemiseen pitäisi olla riittävät tekniset valmiudet sitä edeltävässä materiaalissa. Voit siis tehdä tehtäviä sitä mukaa, kun niitä tulee materiaalissa vastaan. Voi myös olla, että koko osan tehtävät kannattaa tehdä vasta sen jälkeen, kun olet ensin lukenut osan alusta loppuun kertaalleen. Useissa osissa tehtävät ovat samaa ohjelmaa laajentavia pienistä osista koostuvia kokonaisuuksia. Muutamia tehtävien ohjelmia kehitetään eteenpäin useamman osan aikana.
 
 Materiaali perustuu muutamien osasta osaan vaihtuvien esimerkkiohjelmien asteittaiseen laajentamiseen. Materiaali toiminee parhaiten, jos kirjoitat samalla koodin myös itse ja teet koodiin myös pieniä modifikaatioita. Materiaalin käyttämien ohjelmien koodin eri vaiheiden tilanteita on tallennettu GitHubiin.
 
@@ -29,7 +29,7 @@ Kurssi koostuu neljästätoista osasta, joista ensimmäinen on historiallisista 
 
 Materiaalissa osasta <i>n</i> osaan <i>n+1</i> eteneminen ei ole mielekästä ennen kuin riittävä osaaminen osan <i>n</i> asioista on saavutettu. Kurssilla sovelletaankin pedagogisin termein <i>tavoiteoppimista</i>, [engl. mastery learning](https://en.wikipedia.org/wiki/Mastery_learning) ja on tarkoitus, että etenet seuraavaan osaan vasta, kun riittävä määrä edellisen osan tehtävistä on tehty.
 
-Oletuksena on, että teet osien 1-4 tehtävistä <i>ainakin ne</i>, joita ei ole merkattu tähdellä. Myös tähdellä merkatut tehtävät vaikuttavat arvosteluun, mutta niiden tekemättä jättäminen ei aiheuta liian suuria esteitä seuraavan osan (tähdellä merkkaamattomien) tehtävien tekemiseen. Osissa 5- ei tähtiä ole, sillä osien tehtävillä ei ole suurta riippuvuutta aiempiin osiin. 
+Oletuksena on, että teet osien 1–4 tehtävistä <i>ainakin ne</i>, joita ei ole merkattu tähdellä. Myös tähdellä merkatut tehtävät vaikuttavat arvosteluun, mutta niiden tekemättä jättäminen ei aiheuta liian suuria esteitä seuraavan osan (tähdellä merkkaamattomien) tehtävien tekemiseen. Osissa 5- ei tähtiä ole, sillä osien tehtävillä ei ole suurta riippuvuutta aiempiin osiin. 
 
 Etenemisnopeus kurssilla on vapaa.
 
@@ -37,17 +37,17 @@ Tämän kurssin eri osiin jo tehtyjen palautusten ajankäyttöstatistiikan näet
 
 ### Apua tehtävien tekoon?
 
-Kurssilla ei tällä hetkellä ole varsinaista opetusta, mutta tehtäviin voi yrittää kysyä apua kurssin keskustelukanavalla Discordissa <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> sekä Telegramissa, kanavalla <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. Discordissa kurssiin liittyvää keskustelua varten on kanava fullstack_general ja osa-kohtaiset kanavat (muut fullstack-alkuiset kanavat). Huomaa, että Discordin <i>chat-kanava ei ole kurssiin liittyvää keskustelua varten</i>.
+Kurssilla ei tällä hetkellä ole varsinaista opetusta, mutta tehtäviin voi yrittää kysyä apua kurssin keskustelukanavalla Discordissa <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> sekä Telegramissa kanavalla <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. Discordissa kurssiin liittyvää keskustelua varten on kanava fullstack_general ja osa-kohtaiset kanavat (muut fullstack-alkuiset kanavat). Huomaa, että Discordin <i>chat-kanava ei ole kurssiin liittyvää keskustelua varten</i>.
 
-Huom: kaikki epäasialliset, halventavat ja jotain ihmisryhmää syrjivät kommentit kanavalla ovat kiellettyjä ja tällaisten kommenttien esittäjät poistetaan kanavalta.
+Huom: kaikki epäasialliset, halventavat ja jotain ihmisryhmää syrjivät kommentit kanavalla ovat kiellettyjä, ja tällaisten kommenttien esittäjät poistetaan kanavalta.
 
 ### Osat ja suorittaminen
 
-Full Stack –opinnot koostuvat ydinkurssista, sekä useista lisäosista.  Voit suorittaa opinnot 5-14 opintopisteen laajuisena. 
+Full Stack –opinnot koostuvat ydinkurssista sekä useista lisäosista.  Voit suorittaa opinnot 5-14 opintopisteen laajuisena. 
 
-#### Osat 0-5 (ydinkurssi) - Full Stack -websovelluskehitys (5 op, CSM141081)
+#### Osat 0-5 (ydinkurssi) - Full Stack ‑websovelluskehitys (5 op, CSM141081)
 
-Suorituksen opintopistemäärä ja arvosana määräytyvät kurssin osien 0-7 kaikkien tehtyjen tehtävien (myös tähdellä merkittyjen) perusteella.
+Suorituksen opintopistemäärä ja arvosana määräytyvät kurssin osien 0–7 kaikkien tehtyjen tehtävien (myös tähdellä merkittyjen) perusteella.
 
 Arvosana/opintopisterajat:
 
@@ -63,37 +63,37 @@ Arvosana/opintopisterajat:
 
 Jos haluat kurssista virallisen suoritusmerkinnän, kuuluu kurssiin myös koe. Hyväksytty suoritus edellyttää kokeen läpäisemistä, koe ei kuitenkaan vaikuta arvosanaan. Lisää tietoa kurssikokeesta [täällä](/osa0/yleista/#kurssikoe).
 
-Voit osallistua kokeeseen vasta siinä vaiheessa kun olet tehnyt riittävästi tehtäviä 5 opintopisteen suoritukseen. Käytännössä kokeeseen ei kuitenkaan kannata osallistua heti kun riittävä tehtäväpistemäärä on suoritettu. Koe on sisällöltään sama riippumatta siitä, onko suorituksesi laajuus 5-14 opintopistettä. Koe ei vaikuta kurssilta saamaasi arvosanaan. Kokeen läpipääsyyn riittää 75 % kokeen tarjolla olevista pisteistä.
+Voit osallistua kokeeseen vasta siinä vaiheessa, kun olet tehnyt riittävästi tehtäviä 5 opintopisteen suoritukseen. Käytännössä kokeeseen ei kuitenkaan kannata osallistua heti, kun riittävä tehtäväpistemäärä on suoritettu. Koe on sisällöltään sama riippumatta siitä, onko suorituksesi laajuus 5–14 opintopistettä. Koe ei vaikuta kurssilta saamaasi arvosanaan. Kokeen läpipääsyyn riittää 75 % kokeen tarjolla olevista pisteistä.
 
-#### Osa 6 - Full Stack -websovelluskehitys, lisäosa 1 (1 op, CSM141082)
-Suorittamalla vähintään 127 tehtävää kurssin osista 0-7 ydinkurssin suorittamisen yhteydessä, voit laajentaa suoritustasi yhdellä opintopisteellä. 
--	Tee vähintään 127 tehtävää osista 0-7. 
+#### Osa 6 - Full Stack ‑websovelluskehitys, lisäosa 1 (1 op, CSM141082)
+Suorittamalla vähintään 127 tehtävää kurssin osista 0–7 ydinkurssin suorittamisen yhteydessä, voit laajentaa suoritustasi yhdellä opintopisteellä. 
+-	Tee vähintään 127 tehtävää osista 0–7. 
 -	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-de83e85f-a06e-4258-ad8c-30326d76228e)
 -	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
 
-#### Osa 7 - Full Stack -websovelluskehitys, lisäosa 2 (1 op, CSM141083)
+#### Osa 7 - Full Stack ‑websovelluskehitys, lisäosa 2 (1 op, CSM141083)
 
-Suorittamalla vähintään 138 tehtävää kurssin osista 0-7 ydinkurssin suorittamisen yhteydessä, voit laajentaa suoritustasi yhdellä opintopisteellä. 
--	Tee vähintään 138 tehtävää osista 0-7. 
+Suorittamalla vähintään 138 tehtävää kurssin osista 0–7 ydinkurssin suorittamisen yhteydessä, voit laajentaa suoritustasi yhdellä opintopisteellä. 
+-	Tee vähintään 138 tehtävää osista 0–7. 
 -	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-53ccca2f-8e77-47e3-931a-63f9d5c8cc2e)
 -	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
 
-#### Osa 8 - Full Stack -websovelluskehitys: GraphQL (1 op, CSM14113)
+#### Osa 8 - Full Stack ‑websovelluskehitys: GraphQL (1 op, CSM14113)
 
-Suorittamalla vähintään 22/26 tehtävää kurssin kahdeksannesta, GraphQL:ää käsittelevästä osasta, voit laajentaa suoritustasi yhdellä opintopisteellä. Voit tehdä GraphQL:ää käsittelevän osuuden periaatteessa jo osan 5 jälkeen sillä sen sisältö ei riipu osista 6 ja 7.
+Suorittamalla vähintään 22/26 tehtävää kurssin kahdeksannesta, GraphQL:ää käsittelevästä osasta, voit laajentaa suoritustasi yhdellä opintopisteellä. Voit tehdä GraphQL:ää käsittelevän osuuden periaatteessa jo osan 5 jälkeen, sillä sen sisältö ei riipu osista 6 ja 7.
 -	Tee vähintään 22/26 tehtävää osasta 8. 
 -	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-b7f5ef26-b780-45f2-962d-f8d3432cae78)
 -	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
 
-#### Osa 9 - Full Stack -websovelluskehitys: TypeScript (1 op, CSM14110, englanniksi)
+#### Osa 9 - Full Stack ‑websovelluskehitys: TypeScript (1 op, CSM14110, englanniksi)
 
-Suorittamalla vähintään 24/29 tehtävää kurssin yhdeksännestä, TypeScriptiä käsittelevästä osasta, voit laajentaa suoritustasi yhdellä opintopisteellä. Osa kannattaa suorittaa vasta sen jälkeen kun olet tehnyt osat 0-7.
+Suorittamalla vähintään 24/29 tehtävää kurssin yhdeksännestä, TypeScriptiä käsittelevästä osasta, voit laajentaa suoritustasi yhdellä opintopisteellä. Osa kannattaa suorittaa vasta sen jälkeen, kun olet tehnyt osat 0–7.
 
 -	Tee vähintään 24/29 tehtävää osasta 9.
 -	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-e45a36b7-24d7-424b-9dc5-1c9b59a52a23)
 -	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
 
-#### Osa 10 - Full Stack -websovelluskehitys: React Native (2 op, CSM14111, englanniksi)
+#### Osa 10 - Full Stack ‑websovelluskehitys: React Native (2 op, CSM14111, englanniksi)
 
 Suorittamalla 25 tehtävää kurssin kymmenennestä, React Nativea käsittelevästä osasta, voit laajentaa suoritustasi kahdella opintopisteellä. Lisätietoja osan esitietovaatimuksista, tehtävien palauttamisesta ja opintopisteistä löydät [osasta 10](/en/part10/introduction_to_react_native).
 
@@ -101,7 +101,7 @@ Suorittamalla 25 tehtävää kurssin kymmenennestä, React Nativea käsittelevä
 -	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-ec172afe-bc01-46ab-af23-694311f1950a)
 -	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
 
-#### Osa 11 - Full Stack -websovelluskehitys: jatkuva integraatio (1 op, CSM14112, englanniksi)
+#### Osa 11 - Full Stack ‑websovelluskehitys: jatkuva integraatio (1 op, CSM14112, englanniksi)
 
 Suorittamalla kaikki kurssin yhdennentoista, jatkuvaa integraatiota käsittelevän osan tehtävät, voit laajentaa suoritustasi yhdellä opintopisteellä.
 Lisätietoja osan esitietovaatimuksista ja tehtävien palauttamisesta löydät [osasta 11](/en/part11).
@@ -109,7 +109,7 @@ Lisätietoja osan esitietovaatimuksista ja tehtävien palauttamisesta löydät [
 -	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-23e79dc2-64e4-4f7e-86a4-8923a411443c)
 -	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
 
-#### Osa 12 - Full Stack  -websovelluskehitys: konttiteknologia (1 op, CSM141084, englanniksi)
+#### Osa 12 - Full Stack  ‑websovelluskehitys: konttiteknologia (1 op, CSM141084, englanniksi)
 
 Suorittamalla kaikki kurssin kahdennentoista, konttiteknologiaa käsittelevän osan tehtävät, voit laajentaa suoritustasi yhdellä opintopisteellä.
 Lisätietoja osan esitietovaatimuksista ja tehtävien palauttamisesta löydät [osasta 12](/en/part12).
@@ -117,7 +117,7 @@ Lisätietoja osan esitietovaatimuksista ja tehtävien palauttamisesta löydät [
 -	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-bb07e139-3de0-4cb3-843d-414b1bb992cc)
 -	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
 
-#### Osa 13 - Full Stack  -websovelluskehitys: relaatiotietokannat (1 op, CSM14114)
+#### Osa 13 - Full Stack  ‑websovelluskehitys: relaatiotietokannat (1 op, CSM14114)
 
 Suorittamalla kaikki kurssin kolmannentoista, relaatiotietokantojen käyttöä käsittelevän osan tehtävät, voit laajentaa suoritustasi yhdellä opintopisteellä.
 Lisätietoja osan esitietovaatimuksista ja tehtävien palauttamisesta löydät [osasta 13](/osa13).
@@ -135,9 +135,9 @@ Kurssin suoritusohjeet pähkinänkuoressa (5 op ydinkurssi CSM141081)
 - Tee kurssikoe palautusjärjestelmässä, lue lisää [täältä](/osa0/yleista#kurssikoe).
 - Pyydä suoritusmerkintää palautussovelluksessa. Lue lisää [täältä](/osa0/yleista#suoritusmerkinnan-pyytaminen)
 
-Kurssin suoritusohjeet pähkinänkuoressa (Osat 6-13) 
+Kurssin suoritusohjeet pähkinänkuoressa (Osat 6–13) 
 
-- Tee tehtävät. Palauta vastauksesi palautussovelluksen kautta. Huomaa, että osat 8-13 palautetaan palautussovelluksessa erillisiin kurssi-instansseihin.
+- Tee tehtävät. Palauta vastauksesi palautussovelluksen kautta. Huomaa, että osat 8–13 palautetaan palautussovelluksessa erillisiin kurssi-instansseihin.
 - Ilmoittaudu kurssille. Pääset ilmoittautumaan kurssimateriaalista (ks. [Osat ja suorittaminen](/osa0/yleista#osat-ja-suorittaminen)) löytyvän ilmoittautumislinkin kautta.  Ilmoittaudu erikseen kuhunkin osaan. 
 - Pyydä suoritusmerkintää palautussovelluksessa. Lue lisää [täältä](/osa0/yleista#suoritusmerkinnan-pyytaminen)
 
@@ -151,20 +151,20 @@ Tehtävät palautetaan **yksi osa kerrallaan**. Kun olet palauttanut osan tehtä
 
 GitHubiin palautettuja tehtäviä tarkastetaan plagiaattitunnistusjärjestelmän avulla. Jos GitHubista löytyy kurssin mallivastausten koodia tai useammalta opiskelijalta löytyy samaa koodia, käsitellään tilanne yliopiston [vilppikäytäntöjen](https://guide.student.helsinki.fi/fi/artikkeli/mita-ovat-vilppi-ja-plagiointi) mukaan.
 
-Suurin osa tehtävistä on moniosaisia, samaa ohjelmaa pala palalta rakentavia kokonaisuuksia. Tällaisissa tehtäväsarjoissa ohjelman lopullisen version palauttaminen riittää, voit toki halutessasi tehdä commitin jokaisen tehtävän jälkeisestä tilanteesta, mutta se ei ole välttämätöntä.
+Suurin osa tehtävistä on moniosaisia, samaa ohjelmaa pala palalta rakentavia kokonaisuuksia. Tällaisissa tehtäväsarjoissa ohjelman lopullisen version palauttaminen riittää. Voit toki halutessasi tehdä commitin jokaisen tehtävän jälkeisestä tilanteesta, mutta se ei ole välttämätöntä.
 
 ### Kurssikoe
 
-Virallinen kurssisuoritus edellyttää että teet hyväksyttävästi kurssin osia 1-5 käsittelevän kokeen. 
+Virallinen kurssisuoritus edellyttää, että teet hyväksyttävästi kurssin osia 1–5 käsittelevän kokeen. 
 
 Koe tehdään tehtävien palautusjärjestelmässä. Pääset tekemään kokeen seuraavia ohjeita seuraamalla:
 
 - Tee Avoimen yliopiston kurssi-ilmoittautuminen
-- Pääset ilmoittautumaan [palautussovelluksesta](https://studies.cs.helsinki.fi/stats/courses/fullstackopen/submissions) löytyvän linkin kautta sen jälkeen kun olet palauttanut riittävän määrän tehtäviä:
+- Pääset ilmoittautumaan [palautussovelluksesta](https://studies.cs.helsinki.fi/stats/courses/fullstackopen/submissions) löytyvän linkin kautta sen jälkeen, kun olet palauttanut riittävän määrän tehtäviä:
 
 ![](../../images/0/enroll1.png)
 
-Tallettaa Helsingin Yliopiston opiskelijanumerosi [palautussovellukseen](https://studies.cs.helsinki.fi/stats/myinfo) ilmoittautumisen jälkeen:
+Tallenna Helsingin Yliopiston opiskelijanumerosi [palautussovellukseen](https://studies.cs.helsinki.fi/stats/myinfo) ilmoittautumisen jälkeen:
 
 ![](../../images/0/28b.png)
 
@@ -180,17 +180,17 @@ Koeaika on 120 minuuttia. Jos koesuoritus hyväksytään, saat seuraavan vahvist
 
 Jos et pääse kokeesta läpi, voit yrittää uudelleen viikon kuluttua.
 
-Jos pääset kokeesta läpi, ja et halua tehdä enempää tehtäviä, voit mennä palautussovelluksen my submissions -välilehdelle ja pyytää suorituksen rekisteröintiä:
+Jos pääset kokeesta läpi ja et halua tehdä enempää tehtäviä, voit mennä palautussovelluksen my submissions ‑välilehdelle ja pyytää suorituksen rekisteröintiä:
 
 ![](../../images/0/enroll5a.png)
 
-Muista painaa isoa sinistä nappia jotta suorituksesi rekisteröidään!
+Muista painaa isoa, sinistä nappia, jotta suorituksesi rekisteröidään!
 
 Huomaa, että joudut painamaan nappia vielä toisen kerran:
 
 ![](../../images/0/button2.png)
 
-Kun nappia on painettu tarpeeksi monta kertaa näet seuraavan tekstin:
+Kun nappia on painettu tarpeeksi monta kertaa, näet seuraavan tekstin:
 
 > <i>University credit registration in progress...</i>
 
@@ -208,17 +208,17 @@ Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suorituk
 
 ![](../../images/0/enroll5a.png)
 
-Paina siis sinistä nappia "I have completed the course ..."!
+Paina siis sinistä nappia: "I have completed the course ..."!
 
 Huomaa, että joudut painamaan nappia vielä toisen kerran:
 
 ![](../../images/0/button2.png)
 
-Kun nappia on painettu tarpeeksi monta kertaa näet seuraavan tekstin:
+Kun nappia on painettu tarpeeksi monta kertaa, näet seuraavan tekstin:
 
 > <i>University credit registration in progress...</i>
 
-**Huomaa**, että suoritusmerkintää ei voida kirjata jos et ole ilmoittautunut kaikkiin suorittamiisi osiin, katso [täältä](/osa0/yleista#osat-ja-suorittaminen) ohjeet ilmoittautumiseen.
+**Huomaa**, että suoritusmerkintää ei voida kirjata, jos et ole ilmoittautunut kaikkiin suorittamiisi osiin, katso [täältä](/osa0/yleista#osat-ja-suorittaminen) ohjeet ilmoittautumiseen.
 
 Arvosana siirtyy Helsingin yliopiston opintorekisteriin Sisuun ja [Opintopolkuun](https://opintopolku.fi/oma-opintopolku/) neljän viikon sisällä suoritusmerkintäpyynnön jälkeen. Heinäkuu saattaa aiheuttaa viiveen suorituksen kirjaamiseen.
 
@@ -227,7 +227,7 @@ Kun suoritusmerkintä on kirjattu, näet palautussovelluksessa tekstin
 > <i>University credits registered, see the course page how to get a transcript if you need one</i>
 ### Miten saan selville Helsingin yliopiston opiskelijanumeroni?
 
-Kun ilmoittaudut ensimmäistä kertaa Avoimen yliopiston kautta jollekin kurssille, sinulle luodaan Helsingin yliopiston opiskelijanumero. <i>**Varmista siis että olet ilmoittautunut kurssille ennen kuin alat selvittää opiskelijanumeroasi.**</i>
+Kun ilmoittaudut ensimmäistä kertaa Avoimen yliopiston kautta jollekin kurssille, sinulle luodaan Helsingin yliopiston opiskelijanumero. <i>**Varmista siis että olet ilmoittautunut kurssille, ennen kuin alat selvittää opiskelijanumeroasi.**</i>
 
 Voit selvittää oman opiskelijanumerosi seuraavilla tavoilla: 
 
@@ -236,7 +236,7 @@ Voit selvittää oman opiskelijanumerosi seuraavilla tavoilla:
   - Jos sinulla on Helsingin yliopiston käyttäjätunnus, löydät opiskelijanumerosi Helsingin yliopiston opintotietojärjestelmä Sisusta omien tietojesi yhteydestä:
      
   - Kirjaudu Sisuun Helsingin yliopiston käyttäjätunnuksellasi.  
-  - Valitse: Omat tiedot 
+  - Valitse Omat tiedot 
   - Valitse välilehti: Henkilötiedot 
 
 #### B) Ilmoittautumisen vahvistusviesti 
@@ -254,58 +254,56 @@ Kerro sähköpostissa
 
 Opiskelijaneuvonnan sähköpostiosoite: avoin-student@helsinki.fi  
  
-Ja vielä muistutus: <i>**varmista että olet ilmoittautunut kurssille Avoimen yliopiston kautta ennen yhteydenottoa!**</i>
+Ja vielä muistutus: <i>**varmista, että olet ilmoittautunut kurssille Avoimen yliopiston kautta ennen yhteydenottoa!**</i>
 
 ### Kurssitodistus
 
-Riippumatta siitä, ilmoittaudutko Avoimen yliopiston kurssille ja teetkö kurssikokeen, saat ladattua kurssitodistuksen palautussovelluksesta siinä vaiheessa kun tekemiesi tehtävien lukumäärä oikeuttaisi kurssisuoritukseen.
+Riippumatta siitä, ilmoittaudutko Avoimen yliopiston kurssille ja teetkö kurssikokeen, saat ladattua kurssitodistuksen palautussovelluksesta siinä vaiheessa, kun tekemiesi tehtävien lukumäärä oikeuttaa kurssisuoritukseen.
 
 ![](../../images/0/29.png)
 
 ### Virallisen opintosuoritusotteen tilaaminen
 
-Voit tilata virallisen opintosuoritusotteen heti kun kurssisuorituksesi on rekisteröity (tiedot näkyvät esimerkiksi valtakunnallisessa [Oma Opintopolku](https://opintopolku.fi/oma-opintopolku/) –palvelussa). 
+Voit tilata virallisen opintosuoritusotteen heti, kun kurssisuorituksesi on rekisteröity (tiedot näkyvät esimerkiksi valtakunnallisessa [Oma Opintopolku](https://opintopolku.fi/oma-opintopolku/) –palvelussa). 
 
 Ohjeet opintosuoritusotteen tilaamiseen:
 - Kun opintopisteet on rekisteröity sinulle, lähetä opintosuoritteen tilauspyyntö opiskelijaneuvontaan sähköpostiosoitteeseen avoin-student@helsinki.fi.
 - Muistathan opintosuoritusotetta tilatessasi ilmoittaa
   - kurssin nimen,
-  - syntymäaikasi, sekä
+  - syntymäaikasi sekä
   - kielen, jolla haluat opintosuoritusotteen.
 - Sähköisesti varmennettu opintosuoritusote toimitetaan sinulle sähköpostitse.
-- Toimittamalla virallisen opintosuoritusotteen omaan korkeakouluusi, saat opintopisteet rekisteröityä sinne. Huomaa että jokainen korkeakoulu päättää itse toisessa korkeakoulussa suoritettujen opintojen hyväksiluvusta tutkintoon.
+- Toimittamalla virallisen opintosuoritusotteen omaan korkeakouluusi, saat opintopisteet rekisteröityä sinne. Huomaa, että jokainen korkeakoulu päättää itse toisessa korkeakoulussa suoritettujen opintojen hyväksiluvusta tutkintoon.
 
 ### Ei enää vuosittaisia versioita
 
-Kurssilla ei ole enää vuosittaisia versiota, kurssi on siis käynnissä koko ajan. Jokaista kurssin osaa päivitetään vähintään kerran vuodessa. Päivitykset ovat useimmiten pieniä, kirjastoversiot nostetaan ajan tasalle ja tekstiä parannellaan. Myös isompia päivityksiä tapahtuu välillä.
+Kurssilla ei ole enää vuosittaisia versiota. Kurssi on siis käynnissä koko ajan. Jokaista kurssin osaa päivitetään vähintään kerran vuodessa. Päivitykset ovat useimmiten pieniä, kirjastoversiot nostetaan ajan tasalle ja tekstiä parannellaan. Myös isompia päivityksiä tapahtuu välillä.
 
 Muutoksista huolimatta <i>kaikki jo tehdyt palautukset säilyvät voimassa</i>, eli voit jatkaa kurssia päivityksistä huolimatta normaaliin tapaan.
 
 Viimeaikaisia isompia muutoksia
-- Osa 2 (18.1.2023): Muutos tehtävien numeroinnissa, tehtävät 2.11-13. siirretty osan loppuun
-- Osa 6 (30.1.2023): Uusi luku, aiheenaan React Query, useReducer ja React context korvasi Redux connect -luvun
-- Osa 8 (5.2.2023): Backend muutettu käyttämään Apollo Server -kirjaston versiota 4.0
-- Osa 9 (12.2.2023): Sisältöä tarkennettu, Patientor-esimerkkisovelluksen rakennetta yksinkertaistettu
+- Osat 1-9 (11.9-5.10.2023): Create React app korvattu Vitellä
+- Osa 11 (16.1.2024): Esimerkkiprojektin riippuvuudet päivitetty
 
 ### Aiemmin suoritetun kurssin täydentäminen
 
 Jos olet jo suorittanut kurssin joko MOOC:ina tai yliopiston kurssina, voit täydentää suoritustasi.
 
-#### Full Stack Open -kurssin aiempien vuosien suorituksen täydentäminen
+#### Full Stack Open ‑kurssin aiempien vuosien suorituksen täydentäminen
 
-Voit jatkaa siitä mihin jäit! Jos haluat tehdä kokonaan uudelleen jonkin osan tehtävät, ota yhteyttä email matti.luukkainen@helsinki.fi tai Discord <i>mluukkai</i>. Kerro GitHub-tunnuksesi sekä mitkä osat palautuksista haluat poistettavan.
+Voit jatkaa siitä, mihin jäit! Jos haluat tehdä kokonaan uudelleen jonkin osan tehtävät, ota yhteyttä email matti.luukkainen@helsinki.fi tai Discord <i>mluukkai</i>. Kerro GitHub-tunnuksesi sekä mitkä osat palautuksista haluat poistettavan.
 
 #### Helsingin yliopiston kurssin täydentäminen
 
 Jos haluat jatkaa Helsingin yliopiston kurssiversion suoritustasi, ota yhteyttä email matti.luukkainen@helsinki.fi tai Discord <i>mluukkai</i>. 
 
-### Full stack -harjoitustyö
+### Full stack ‑harjoitustyö
 
-Avoimen yliopiston tarjonnassa on 5, 7 tai 10 opintopisteen laajuinen Full Stack -harjoitustyö, johon voit halutessasi osallistua suoritettuasi tämän kurssin vähintään 5 opintopisteen laajuisena.
+Avoimen yliopiston tarjonnassa on 5, 7 tai 10 opintopisteen laajuinen Full Stack ‑harjoitustyö, johon voit halutessasi osallistua suoritettuasi tämän kurssin vähintään 5 opintopisteen laajuisena.
 
 Harjoitustyössä toteutetaan vapaavalintainen sovellus Reactilla ja/tai Nodella. Myös React Nativella toteutettu mobiilisovellus on mahdollinen.
 
-Harjoitustyön opintopistemäärä määrittyy käytettyjen työtuntien mukaan, yksi opintopiste vastaa 17,5 tuntia. Työ arvostellaan skaalalla hyväksytty/hylätty.
+Harjoitustyön opintopistemäärä määrittyy käytettyjen työtuntien mukaan – yksi opintopiste vastaa 17,5 tuntia. Työ arvostellaan skaalalla hyväksytty/hylätty.
 
 Harjoitustyö on mahdollista tehdä myös pari- tai ryhmätyönä.
 
@@ -313,9 +311,9 @@ Harjoitustyöstä on lisää tietoa [täällä](https://github.com/fullstack-hy2
 
 ### Haastattelulupaus
 
-Kurssin yhteistyökumppaneista[Houston Inc](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) ja [Smartly.io](https://www.smartly.io/) ovat antaneet <i>haastattelulupauksen</i> kaikille kurssin sekä projektin täydessä laajuudessa (14+10 op) suorittaville.
+Kurssin yhteistyökumppaneista[Houston Inc](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) ja [Smartly.io](https://www.smartly.io/) ovat antaneet <i>haastattelulupauksen</i> kaikille kurssin sekä projektin täydessä laajuudessa (14+10 op) suorittaneille.
 
-Haastattelulupaus tarkoittaa, että opiskelija voi niin halutessaan ilmoittautua työhaastatteluun haastattelulupauksen antaneelle yritykselle. 
+Haastattelulupaus tarkoittaa, että opiskelija voi halutessaan ilmoittautua työhaastatteluun haastattelulupauksen antaneelle yritykselle. 
 
 Kun olet suorittanut haastattelulupaukseen oikeuttavan määrän kurssia, ota yhteyttä matti.luukkainen@helsinki.fi ja pyydä ohjeita haastattelulupaukseen osallistumiseen.
 
@@ -325,13 +323,13 @@ Tällä kurssilla suositellaan Chrome-selaimen käyttöä, sillä se tarjoaa par
 
 Kurssin tehtävät palautetaan GitHubiin, joten Git tulee olla asennettuna ja sitä on syytä osata käyttää. Ohjeita Gitin käyttämiseen löytyy muun muassa [täältä](https://github.com/mluukkai/ohjelmistotekniikka-kevat2019/blob/master/tehtavat/viikko1.md#gitin-alkeet).
 
-Asenna myös joku järkevä web-devausta tukeva tekstieditori, enemmän kuin suositeltava valinta on [Visual Studio Code](https://code.visualstudio.com/).
+Asenna myös joku järkevä web-devausta tukeva tekstieditori. Enemmän kuin suositeltava valinta on [Visual Studio Code](https://code.visualstudio.com/).
 
-Älä koodaa nanolla, Notepadilla tai Geditillä. Myöskään NetBeans ei ole omimmillaan web-devauksessa ja se on myös turhan raskas verrattuna esim. Visual Studio Codeen.
+Älä koodaa nanolla, Notepadilla tai Geditillä. Myöskään NetBeans ei ole omimmillaan web-devauksessa, ja se on myös turhan raskas verrattuna esim. Visual Studio Codeen.
 
 Asenna koneeseesi heti myös [Node.js](https://nodejs.org/en/). Materiaali on tehty versiolla 16.13.2, älä asenna sitä vanhempaa versiota. Asennusohjeita on [Node.js:n sivuilla](https://nodejs.org/en/download/package-manager/).
 
-Noden myötä koneelle asentuu myös [npm](https://www.npmjs.com/get-npm) (alunperin lyhennelmä <i>Node Package Manager</i> -nimelle), jota tulemme tarvitsemaan kurssin aikana aktiivisesti. Tuoreen Noden kera asentuu myös [npx](https://www.npmjs.com/package/npx), jota tarvitaan myös muutaman kerran.
+Noden myötä koneelle asentuu myös [npm](https://www.npmjs.com/get-npm) (alunperin lyhennelmä <i>Node Package Manager</i> ‑nimelle), jota tulemme tarvitsemaan kurssin aikana aktiivisesti. Tuoreen Noden kera asentuu myös [npx](https://www.npmjs.com/package/npx), jota tarvitaan myös muutaman kerran.
 
 ### Typoja materiaalissa
 

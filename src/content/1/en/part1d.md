@@ -106,8 +106,7 @@ The following object is set as the new state of the application:
 
 The new value of the <i>left</i> property is now the same as the value of <i>left + 1</i> from the previous state, and the value of the <i>right</i> property is the same as the value of the <i>right</i> property from the previous state.
 
-We can define the new state object a bit more neatly by using the [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)
-syntax that was added to the language specification in the summer of 2018:
+We can define the new state object a bit more neatly by using the [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) syntax that was added to the language specification in the summer of 2018:
 
 ```js
 const handleLeftClick = () => {
@@ -160,7 +159,7 @@ The application appears to work. However, <i>it is forbidden in React to mutate 
 
 Storing all of the state in a single state object is a bad choice for this particular application; there's no apparent benefit and the resulting application is a lot more complex. In this case, storing the click counters into separate pieces of state is a far more suitable choice.
 
-There are situations where it can be beneficial to store a piece of application state in a more complex data structure. [The official React documentation](https://reactjs.org/docs/hooks-faq.html#should-i-use-one-or-many-state-variables) contains some helpful guidance on the topic.
+There are situations where it can be beneficial to store a piece of application state in a more complex data structure. [The official React documentation](https://react.dev/learn/choosing-the-state-structure) contains some helpful guidance on the topic.
 
 ### Handling arrays
 
@@ -227,8 +226,7 @@ const handleLeftClick = () => {
 
 However, __don't__ do this. As mentioned previously, the state of React components like _allClicks_ must not be mutated directly. Even if mutating state appears to work in some cases, it can lead to problems that are very hard to debug.
 
-Let's take a closer look at how the clicking
-is rendered to the page:
+Let's take a closer look at how the clicking is rendered to the page:
 
 ```js
 const App = () => {
@@ -317,7 +315,7 @@ Even though a new value was set for _left_ by calling _setLeft(left + 1)_, the o
 setTotal(left + right) 
 ```
 
-The reason for this is that a state update in React happens [asynchronously](https://reactjs.org/docs/state-and-lifecycle.html#state-updates-may-be-asynchronous), i.e. not immediately but "at some point" before the component is rendered again.
+The reason for this is that a state update in React happens [asynchronously](https://react.dev/learn/queueing-a-series-of-state-updates), i.e. not immediately but "at some point" before the component is rendered again.
 
 We can fix the app as follows:
 
@@ -391,7 +389,7 @@ And in all other cases, the component renders the clicking history:
 
 The <i>History</i> component renders completely different React elements depending on the state of the application. This is called <i>conditional rendering</i>.
 
-React also offers many other ways of doing [conditional rendering](https://reactjs.org/docs/conditional-rendering.html). We will take a closer look at this in [part 2](/en/part2).
+React also offers many other ways of doing [conditional rendering](https://react.dev/learn/conditional-rendering). We will take a closer look at this in [part 2](/en/part2).
 
 Let's make one last modification to our application by refactoring it to use the _Button_ component that we defined earlier on:
 
@@ -451,7 +449,7 @@ const App = () => {
 
 ### Old React
 
-In this course, we use the [state hook](https://reactjs.org/docs/hooks-state.html) to add state to our React components, which is part of the newer versions of React and is available from version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) onwards. Before the addition of hooks, there was no way to add state to functional components. Components that required state had to be defined as [class](https://reactjs.org/docs/react-component.html) components, using the JavaScript class syntax.
+In this course, we use the [state hook](https://react.dev/learn/state-a-components-memory) to add state to our React components, which is part of the newer versions of React and is available from version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) onwards. Before the addition of hooks, there was no way to add state to functional components. Components that required state had to be defined as [class](https://react.dev/reference/react/Component) components, using the JavaScript class syntax.
 
 In this course, we have made the slightly radical decision to use hooks exclusively from day one, to ensure that we are learning the current and future variations of React. Even though functional components are the future of React, it is still important to learn the class syntax, as there are billions of lines of legacy React code that you might end up maintaining someday. The same applies to documentation and examples of React that you may stumble across on the internet.
 
@@ -475,7 +473,7 @@ Keep both your code and the web page open together **at the same time, all the t
 
 If and when your code fails to compile and your browser lights up like a Christmas tree:
 
-![screenshot of code](../../images/1/6x.png)
+![screenshot of error pointing at the code line where it has been generated](../../images/1/6x.png)
 
 don't write more code but rather find and fix the problem **immediately**. There has yet to be a moment in the history of coding where code that fails to compile would miraculously start working after writing large amounts of additional code. I highly doubt that such an event will transpire during this course either.
   
@@ -1115,7 +1113,7 @@ The internet is full of React-related material. However, we use the new style of
 
 You may find the following links useful:
 
-- The [official React documentation](https://reactjs.org/docs/hello-world.html) is worth checking out at some point, although most of it will become relevant only later on in the course. Also, everything related to class-based components is irrelevant to us;
+- The [official React documentation](https://react.dev/learn) is worth checking out at some point, although most of it will become relevant only later on in the course. Also, everything related to class-based components is irrelevant to us;
 - Some courses on [Egghead.io](https://egghead.io) like [Start learning React](https://egghead.io/courses/start-learning-react) are of high quality, and the recently updated [Beginner's Guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) is also relatively good; both courses introduce concepts that will also be introduced later on in this course. **NB** The first one uses class components but the latter uses the new functional ones.
 
 ### Web programmers oath
@@ -1134,14 +1132,11 @@ Programming is hard, that is why I will use all the possible means to make it ea
 
 <h3>Exercises 1.6.-1.14.</h3>
 
-Submit your solutions to the exercises by first pushing your code to GitHub and then marking the completed exercises into
-the "my submissions" tab of the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Submit your solutions to the exercises by first pushing your code to GitHub and then marking the completed exercises into the "my submissions" tab of the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 Remember, submit **all** the exercises of one part **in a single submission**. Once you have submitted your solutions for one part, **you cannot submit more exercises to that part anymore**.
 
 <i>Some of the exercises work on the same application. In these cases, it is sufficient to submit just the final version of the application. If you wish, you can make a commit after every finished exercise, but it is not mandatory.</i>
-
-**WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your projects to be a separate repository**, so simply run the _rm -rf .git_ command at the root of your application.
 
 In some situations you may also have to run the command below from the root of the project:
 
@@ -1165,7 +1160,7 @@ The application must display the total number of collected feedback for each cat
 
 Note that your application needs to work only during a single browser session. Once you refresh the page, the collected feedback is allowed to disappear.
 
-It is advisable to use the same structure that is used in the material and previous exercise. File <i>index.js</i> is as follows:
+It is advisable to use the same structure that is used in the material and previous exercise. File <i>main.jsx</i> is as follows:
 
 ```js
 import React from 'react'
@@ -1176,7 +1171,7 @@ import App from './App'
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-You can use the code below as a starting point for the <i>App.js</i> file:
+You can use the code below as a starting point for the <i>App.jsx</i> file:
 
 ```js
 import { useState } from 'react'
@@ -1241,7 +1236,8 @@ Change your application to display statistics only once feedback has been gather
 
 Let's continue refactoring the application. Extract the following two components:
 
-- <i>Button</i> for defining the buttons used for submitting feedback
+- <i>Button</i> handles the functionality of each feedback submission button.
+
 - <i>StatisticLine</i> for displaying a single statistic, e.g. the average score.
 
 To be clear: the <i>StatisticLine</i> component always displays a single statistic, meaning that the application uses multiple components for rendering all of the statistics:
@@ -1292,7 +1288,7 @@ const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
     'Adding manpower to a late software project makes it later!',
-    'The first 90 percent of the code accounts for the first 10 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
+    'The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
     'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
     'Premature optimization is the root of all evil.',
     'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
@@ -1312,15 +1308,13 @@ const App = () => {
 export default App
 ```
 
-Content of the file <i>index.js</i> is the same as in previous exercises.
+Content of the file <i>main.jsx</i> is the same as in previous exercises.
 
 Find out how to generate random numbers in JavaScript, eg. via a search engine or on [Mozilla Developer Network](https://developer.mozilla.org). Remember that you can test generating random numbers e.g. straight in the console of your browser.
 
 Your finished application could look something like this:
 
 ![random anecdote with next button](../../images/1/18a.png)
-
-**WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your projects to be a separate repository**, so simply run the _rm -rf .git_ command at the root of your application.
 
 <h4>1.13*: anecdotes step2</h4>
 

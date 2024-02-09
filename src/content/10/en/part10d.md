@@ -106,7 +106,7 @@ src/
   ...
 ```
 
-In this example, the component's code is in the <i>index.jsx</i> file and the test in the <i>AppBar.test.jsx</i> file. Note that in order to Jest finding your test files you either have to put them into a <i>\_\_tests\_\_</i> directory, use the <i>.test</i> or <i>.spec</i> suffix, or [manually configure](https://jestjs.io/docs/en/configuration#testmatch-arraystring) the global patterns.
+In this example, the component's code is in the <i>index.jsx</i> file and the test in the <i>AppBar.test.jsx</i> file. Note that in order for Jest to find your test files you either have to put them into a <i>\_\_tests\_\_</i> directory, use the <i>.test</i> or <i>.spec</i> suffix, or [manually configure](https://jestjs.io/docs/en/configuration#testmatch-arraystring) the global patterns.
 
 ### Testing components
 
@@ -174,11 +174,11 @@ describe('Greeting', () => {
 
 Tests use the object [screen](https://callstack.github.io/react-native-testing-library/docs/api#screen) to do the queries to the rendered component.
 
-We acquire the <em>Text</em> node containing certain text by using the <em>getByText</em> function. The Jest matcher [toBeDefined](https://jestjs.io/docs/expect#tobedefined) is used to to ensure that the query has found the element.
+We acquire the <em>Text</em> node containing certain text by using the <em>getByText</em> function. The Jest matcher [toBeDefined](https://jestjs.io/docs/expect#tobedefined) is used to ensure that the query has found the element.
 
 React Native Testing Library's documentation has some good hints on [how to query different kinds of elements](https://callstack.github.io/react-native-testing-library/docs/how-should-i-query). Another guide worth reading is Kent C. Dodds article [Making your UI tests resilient to change](https://kentcdodds.com/blog/making-your-ui-tests-resilient-to-change).
 
-The object [screen](https://callstack.github.io/react-native-testing-library/docs/api#screen) has also a helper method [debug](https://callstack.github.io/react-native-testing-library/docs/api#debug) that prints the rendered React tree in a user-friendly format. Use it if you are unsure what the React tree rendered by the <em>render</em> function looks like.
+The object [screen](https://callstack.github.io/react-native-testing-library/docs/api#screen) also has  a helper method [debug](https://callstack.github.io/react-native-testing-library/docs/api#debug) that prints the rendered React tree in a user-friendly format. Use it if you are unsure what the React tree rendered by the <em>render</em> function looks like.
 
 For all available queries, check the React Native Testing Library's [documentation](https://callstack.github.io/react-native-testing-library/docs/api-queries). The full list of available React Native specific matchers can be found in the [documentation](https://github.com/testing-library/jest-native#matchers) of the jest-native library. Jest's [documentation](https://jestjs.io/docs/en/expect) contains every universal Jest matcher.
 
@@ -447,7 +447,7 @@ As always, test your queries in the Apollo Sandbox first before using them in yo
 
 To learn how to open a URL in a browser, read the Expo's [Linking API documentation](https://docs.expo.dev/versions/latest/sdk/linking/). You will need this feature while implementing the button for opening the repository in GitHub. Hint: [Linking.openURL](https://docs.expo.dev/versions/latest/sdk/linking/#linkingopenurlurl) method will come in handy.
 
-The view should have its own route. It would be a good idea to define the repository's id in the route's path as a path parameter, which you can access by using the [useParams](https://reactrouter.com/docs/en/v6/api#useparams) hook. The user should be able to access the view by pressing a repository in the reviewed repositories list. You can achieve this by for example wrapping the <em>RepositoryItem</em> with a [Pressable](https://reactnative.dev/docs/pressable) component in the <em>RepositoryList</em> component and using <em>navigate</em> function to change the route in an <em>onPress</em> event handler. You can access the <em>navigate</em> function with the [useNavigate](https://reactrouter.com/docs/en/v6/api#usenavigate) hook.
+The view should have its own route. It would be a good idea to define the repository's id in the route's path as a path parameter, which you can access by using the [useParams](https://reactrouter.com/en/6.14.2/hooks/use-params) hook. The user should be able to access the view by pressing a repository in the reviewed repositories list. You can achieve this by for example wrapping the <em>RepositoryItem</em> with a [Pressable](https://reactnative.dev/docs/pressable) component in the <em>RepositoryList</em> component and using <em>navigate</em> function to change the route in an <em>onPress</em> event handler. You can access the <em>navigate</em> function with the [useNavigate](https://reactrouter.com/en/6.14.2/hooks/use-navigate) hook.
 
 The final version of the single repository view should look something like this:
 
@@ -562,7 +562,7 @@ This screenshot has been taken after invalid form submission to present what the
 
 Implement a sign up form for registering a user using Formik. The form should have three fields: username, password, and password confirmation. Validate the form using Yup schema so that it contains the following validations:
 
-- Username is a required string with a length between 1 and 30
+- Username is a required string with a length between 5 and 30
 - Password is a required string with a length between 5 and 50
 - Password confirmation matches the password
 
@@ -588,9 +588,9 @@ At the moment repositories in the reviewed repositories list are ordered by the 
 
 The <em>repositories</em> query used to fetch the reviewed repositories has an argument called <em>orderBy</em>, which you can use to define the ordering principle. The argument has two allowed values: CREATED\_AT (order by the date of repository's first review) and RATING\_AVERAGE, (order by the repository's average rating). The query also has an argument called <em>orderDirection</em> which can be used to change the order direction. The argument has two allowed values: <em>ASC</em> (ascending, smallest value first) and <em>DESC</em> (descending, biggest value first).
 
-The selected ordering principle state can be maintained for example using the React's [useState](https://reactjs.org/docs/hooks-reference.html#usestate) hook. The variables used in the <em>repositories</em> query can be given to the <em>useRepositories</em> hook as an argument.
+The selected ordering principle state can be maintained for example using the React's [useState](https://react.dev/reference/react/useState) hook. The variables used in the <em>repositories</em> query can be given to the <em>useRepositories</em> hook as an argument.
 
-You can use for example [@react-native-picker/picker](https://docs.expo.io/versions/latest/sdk/picker/) library, or [React Native Paper](https://callstack.github.io/react-native-paper/) library's [Menu](https://callstack.github.io/react-native-paper/menu.html) component to implement the ordering principle's selection. You can use the <em>FlatList</em> component's [ListHeaderComponent](https://reactnative.dev/docs/flatlist#listheadercomponent) prop to provide the list with a header containing the selection component.
+You can use for example [@react-native-picker/picker](https://docs.expo.io/versions/latest/sdk/picker/) library, or [React Native Paper](https://callstack.github.io/react-native-paper/) library's [Menu](https://callstack.github.io/react-native-paper/docs/components/Menu/) component to implement the ordering principle's selection. You can use the <em>FlatList</em> component's [ListHeaderComponent](https://reactnative.dev/docs/flatlist#listheadercomponent) prop to provide the list with a header containing the selection component.
 
 The final version of the feature, depending on the selection component in use, should look something like this:
 
@@ -613,7 +613,7 @@ The Apollo Server allows filtering repositories using the repository's name or t
 }
 ```
 
-Implement a feature for filtering the reviewed repositories list based on a keyword. Users should be able to type in a keyword into a text input and the list should be filtered as the user types. You can use a simple <em>TextInput</em> component or something a bit fancier such as React Native Paper's [Searchbar](https://callstack.github.io/react-native-paper/searchbar.html) component as the text input. Put the text input component in the <em>FlatList</em> component's header.
+Implement a feature for filtering the reviewed repositories list based on a keyword. Users should be able to type in a keyword into a text input and the list should be filtered as the user types. You can use a simple <em>TextInput</em> component or something a bit fancier such as React Native Paper's [Searchbar](https://callstack.github.io/react-native-paper/docs/components/Searchbar/) component as the text input. Put the text input component in the <em>FlatList</em> component's header.
 
 To avoid a multitude of unnecessary requests while the user types the keyword fast, only pick the latest input after a short delay. This technique is often referred to as [debouncing](https://lodash.com/docs/4.17.15#debounce). [use-debounce](https://www.npmjs.com/package/use-debounce) library is a handy hook for debouncing a state variable. Use it with a sensible delay time, such as 500 milliseconds. Store the text input's value by using the <em>useState</em> hook and then pass the debounced value to the query as the value of the <em>searchKeyword</em> argument.
 
@@ -853,7 +853,7 @@ export default RepositoryList;
 
 Try scrolling to the end of the reviewed repositories list and you should see the message in the logs.
 
-Next, we need to fetch more repositories once the end of the list is reached. This can be achieved using the [fetchMore](https://www.apollographql.com/docs/react/pagination/core-api/#the-fetchmore-function) function provided by the <em>useQuery</em> hook. To describe Apollo Client, how to merge the existing repositories in the cache with the next set of repositories, we can use a [field policy](https://www.apollographql.com/docs/react/caching/cache-field-behavior/). In general, field policies can be used to customize the cache behavior during read and write operations with [read](https://www.apollographql.com/docs/react/caching/cache-field-behavior/#the-read-function) and [merge](https://www.apollographql.com/docs/react/caching/cache-field-behavior/#the-merge-function) functions.
+Next, we need to fetch more repositories once the end of the list is reached. This can be achieved using the [fetchMore](https://www.apollographql.com/docs/react/pagination/core-api/#the-fetchmore-function) function provided by the <em>useQuery</em> hook. To describe to Apollo Client how to merge the existing repositories in the cache with the next set of repositories, we can use a [field policy](https://www.apollographql.com/docs/react/caching/cache-field-behavior/). In general, field policies can be used to customize the cache behavior during read and write operations with [read](https://www.apollographql.com/docs/react/caching/cache-field-behavior/#the-read-function) and [merge](https://www.apollographql.com/docs/react/caching/cache-field-behavior/#the-merge-function) functions.
 
 Let's add a field policy for the <em>repositories</em> query in the <i>apolloClient.js</i> file:
 

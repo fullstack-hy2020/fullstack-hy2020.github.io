@@ -51,7 +51,7 @@ Myös tapahtumankäsittelijöiden välittäminen komponentin <i>App</i> alikompo
 
 Visual Studio Codeen on helppo määritellä "snippettejä", eli Netbeansin "sout":in tapaisia oikoteitä yleisesti käytettyjen koodinpätkien generointiin. Ohje snippetien luomiseen [täällä](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_creating-your-own-snippets).
 
-VS Code -plugineina löytyy myös hyödyllisiä valmiiksi määriteltyjä snippettejä, esim.
+VS Code ‑plugineina löytyy myös hyödyllisiä valmiiksi määriteltyjä snippettejä, esim.
 [tämä](https://marketplace.visualstudio.com/items?itemName=xabikos.ReactSnippets).
 
 Ehkä kätevin kaikista snippeteistä on komennon <em>console.log()</em> nopeasti ruudulle tekevä snippet, esim. <em>clog</em>, jonka voi määritellä seuraavasti:
@@ -80,9 +80,9 @@ Jos taulukon funktionaalinen käsittely tuntuu vielä vieraalta, kannattaa katso
 
 ### Kokoelmien renderöiminen
 
-Tehdään nyt Reactilla [osan 0](/osa0) alussa käytettyä esimerkkisovelluksen [Single page app -versiota](https://studies.cs.helsinki.fi/exampleapp/spa) vastaavan sovelluksen 'frontend' eli selainpuolen sovelluslogiikka.
+Tehdään nyt Reactilla [osan 0](/osa0) alussa käytettyä esimerkkisovelluksen [Single page app ‑versiota](https://studies.cs.helsinki.fi/exampleapp/spa) vastaavan sovelluksen 'frontend' eli selainpuolen sovelluslogiikka.
 
-Aloitetaan seuraavasta (tiedosto <i>App.js</i>):
+Aloitetaan seuraavasta (tiedosto <i>App.jsx</i>):
 
 ```js
 const App = (props) => {
@@ -103,10 +103,9 @@ const App = (props) => {
 export default App
 ```
 
-Tiedosto <i>index.js</i> on muuten samanlainen kuin se on ollut toistaiseksi kaikissa ohjelmissa, mutta se määrittelee taulukon, jossa on näytettävä data.
+Tiedosto <i>main.jsx</i> on muuten samanlainen kuin se on ollut toistaiseksi kaikissa ohjelmissa, mutta se määrittelee taulukon, jossa on näytettävä data.
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App'
@@ -179,7 +178,7 @@ const App = (props) => {
 
 Koska <i>li</i>-tagit generoiva koodi on JavaScriptia, se tulee sijoittaa JSX-templatessa aaltosulkujen sisälle muun JavaScript-koodin tapaan.
 
-Parannetaan koodin luetteloa vielä jakamalla nuolifunktion määrittely useammalle riville:
+Parannetaan koodin luettavuutta vielä jakamalla nuolifunktion määrittely useammalle riville:
 
 ```js
 const App = (props) => {
@@ -208,7 +207,7 @@ Vaikka sovellus näyttää toimivan, konsoliin tulee ikävä varoitus:
 
 ![](../../images/2/1a.png)
 
-Kuten virheilmoituksen linkittämä [sivu](https://reactjs.org/docs/lists-and-keys.html#keys) kertoo, tulee taulukossa olevilla, eli käytännössä _map_-metodilla muodostetuilla elementeillä olla uniikki avain, eli attribuutti nimeltään <i>key</i>.
+Kuten virheilmoituksen linkittämä [sivu](https://react.dev/learn/rendering-lists#keeping-list-items-in-order-with-key) kertoo, tulee taulukossa olevilla, eli käytännössä _map_-metodilla muodostetuilla elementeillä olla uniikki avain, eli attribuutti nimeltään <i>key</i>.
 
 Lisätään avaimet:
 
@@ -233,11 +232,11 @@ const App = (props) => {
 
 Virheilmoitus katoaa.
 
-React käyttää taulukossa olevien elementtien <i>key</i>-kenttiä päätellessään miten sen tulee päivittää komponentin generoimaa näkymää silloin kun komponentti uudelleenrenderöidään. Lisää aiheesta on [täällä](https://reactjs.org/docs/reconciliation.html#recursing-on-children).
+React käyttää taulukossa olevien elementtien <i>key</i>-kenttiä päätellessään miten sen tulee päivittää komponentin generoimaa näkymää silloin kun komponentti uudelleenrenderöidään. Lisää aiheesta on [täällä](https://react.dev/learn/preserving-and-resetting-state#option-2-resetting-state-with-a-key).
 
 ### Map
 
-Taulukoiden [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)-metodin toiminnan sisäistäminen on jatkon kannalta äärimmäisen tärkeää.
+Taulukoiden [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)-metodin toiminnan sisäistäminen on jatkon kannalta äärimmäisen tärkeää. Sillä ei ole mitään tekemistä karttojen kanssa, vaan oikeampi suomenkielinen termi olisi matematiikan <i>kuvaus</i>.
 
 Sovellus siis sisältää taulukon _notes_:
 
@@ -270,7 +269,7 @@ const result = notes.map(note => note.id)
 console.log(result)
 ```
 
-Konsoliin tulostuu <i>[1, 2, 3]</i> eli _map_ muodostaa uuden taulukon, jonka jokainen alkio on saatu alkuperäisen taulukon _notes_ alkioista <i>mappaamalla</i> komennon parametrina olevan funktion avulla.
+Konsoliin tulostuu <i>[1, 2, 3]</i>, eli _map_ muodostaa uuden taulukon, jonka jokainen alkio on saatu alkuperäisen taulukon _notes_ alkioista <i>mappaamalla</i> se komennon parametrina olevan funktion avulla.
 
 Funktio on
 
@@ -316,7 +315,7 @@ note => <li key={note.id}>{note.content}</li>
 
 käyttötarkoitus on näkymäelementtien muodostaminen, tulee muuttujien <i>note.id</i> ja <i>note.content </i> arvo renderöidä aaltosulkeiden sisällä. Kokeile mitä koodi tekee, jos poistat aaltosulkeet.
 
-Aaltosulkeiden käyttö tulee varmaan aiheuttamaan alussa pientä päänvaivaa, mutta totut niihin pian. Reactin antama visuaalinen feedback on välitön.
+Aaltosulkeiden käyttö tulee varmaan aiheuttamaan alussa pientä päänvaivaa, mutta totut niihin pian. Reactin antama visuaalinen palaute on välitön.
 
 ### Antipattern: taulukon indeksit avaimina
 
@@ -396,7 +395,7 @@ Huomaa, että <i>key</i>-attribuutti täytyy nyt määritellä <i>Note</i>-kompo
 
 Koko React-sovellus on mahdollista määritellä samassa tiedostossa, mutta se ei ole kovin järkevää. Usein käytäntönä on määritellä yksittäiset komponentit omassa tiedostossaan <i>ES6-moduuleina</i>.
 
-Koodissamme on käytetty koko ajan moduuleja. Tiedoston <i>index.js</i> ensimmäiset rivit
+Koodissamme on käytetty koko ajan moduuleja. Tiedoston <i>main.jsx</i> ensimmäiset rivit
 
 ```js
 import ReactDOM from "react-dom/client"
@@ -410,7 +409,7 @@ Siirretään nyt <i>Note</i>-komponentti omaan moduuliinsa.
 
 Pienissä sovelluksissa komponentit sijoitetaan yleensä <i>src</i>-hakemiston alle sijoitettavaan hakemistoon <i>components</i>. Konventiona on nimetä tiedosto komponentin mukaan. 
 
-Tehdään nyt sovellukseen hakemisto <i>components</i> ja sinne tiedosto <i>Note.js</i>, jonka sisältö on seuraava:
+Tehdään nyt sovellukseen hakemisto <i>components</i> ja sinne tiedosto <i>Note.jsx</i>, jonka sisältö on seuraava:
 
 ```js
 const Note = ({ note }) => {
@@ -424,7 +423,7 @@ export default Note
 
 Moduulin viimeisenä rivinä [eksportataan](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) määritelty komponentti, eli muuttuja <i>Note</i>.
 
-Nyt komponenttia käyttävä tiedosto <i>App.js</i> voi [importata](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) moduulin:
+Nyt komponenttia käyttävä tiedosto <i>App.jsx</i> voi [importata](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) moduulin:
 
 ```js
 import Note from './components/Note' // highlight-line
@@ -442,17 +441,17 @@ Huomaa, että itse määriteltyä komponenttia importatessa komponentin sijainti
 './components/Note'
 ```
 
-Piste alussa viittaa nykyiseen hakemistoon, eli kyseessä on nykyisen hakemiston alihakemisto <i>components</i> ja sen sisällä tiedosto <i>Note.js</i>. Tiedoston päätteen voi jättää pois.
+Piste alussa viittaa nykyiseen hakemistoon, eli kyseessä on nykyisen hakemiston alihakemisto <i>components</i> ja sen sisällä tiedosto <i>Note.jsx</i>. Tiedoston päätteen voi jättää pois.
 
-Moduuleilla on paljon muutakin käyttöä kuin mahdollistaa komponenttien määritteleminen omissa tiedostoissaan, palaamme moduuleihin tarkemmin myöhemmin kurssilla.
+Moduuleilla on paljon muutakin käyttöä kuin mahdollistaa komponenttien määritteleminen omissa tiedostoissaan. Palaamme moduuleihin tarkemmin myöhemmin kurssilla.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1).
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part2-1).
 
-Huomaa, että repositorion main-haarassa on myöhemmän vaiheen koodi. Tämän hetken koodi on branchissa [part2-1](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1):
+Huomaa, että repositorion main-haarassa on myöhemmän vaiheen koodi. Tämän hetken koodi on branchissa [part2-1](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part2-1):
 
 ![](../../images/2/2b.png)
 
-Jos kloonaat projektin itsellesi, suorita komento _npm install_ ennen käynnistämistä eli komentoa _npm start_.
+Jos kloonaat projektin itsellesi, suorita komento _npm install_ ennen käynnistämistä eli komentoa _npm run dev_.
 
 ### Kun sovellus hajoaa
 
@@ -460,7 +459,7 @@ Kun aloitat ohjelmoijan uraasi (ja allekirjoittaneella edelleen 30 vuoden ohjelm
 
 Reactissa räjähdys näyttää esim. seuraavalta:
 
-![](../../images/2/3b.png)
+![](../../images/2/3-vite.png)
 
 Tilanteista pelastaa yleensä parhaiten <em>console.log</em>. Pala räjähdyksen aiheuttavaa koodia seuraavassa:
 
@@ -484,7 +483,7 @@ const App = () => {
 }
 ```
 
-Syy toimimattomuuteen alkaa selvitä lisäilemällä koodiin <em>console.log</em>-komentoja. Koska ensimmäinen renderöitävä asia on komponentti <i>App</i>, kannattaa sinne laittaa ensimmäisen tulostus:
+Syy toimimattomuuteen alkaa selvitä lisäilemällä koodiin <em>console.log</em>-komentoja. Koska ensimmäinen renderöitävä asia on komponentti <i>App</i>, kannattaa ensimmäinen tulostus laittaa sinne:
 
 ```js
 const App = () => {
@@ -543,7 +542,7 @@ const Course = (props) => { // highlight-line
 
 Jos ongelma ei vieläkään ratkea, ei auta kuin jatkaa vianjäljitystä eli kirjoittaa lisää console.logeja.
 
-Lisäsin tämän luvun materiaaliin, kun seuraavan tehtävän mallivastauksen koodi räjähti ihan totaalisesti (syynä väärässä muodossa ollut propsi), ja jouduin jälleen kerran debuggaamaan console.logaamalla.
+Lisäsin tämän luvun materiaaliin sen jälkeen, kun seuraavan tehtävän mallivastauksen koodi räjähti ihan totaalisesti (syynä väärässä muodossa ollut propsi), ja jouduin jälleen kerran debuggaamaan console.logaamalla.
 
 ### Websovelluskehittäjän vala
 
@@ -551,11 +550,11 @@ Ennen tehtävien pariin palaamista on hyvä muistaa, mitä lupasimme osan yksi l
 
 Ohjelmointi on hankalaa, ja sen takia lupaan hyödyntää kaikkia ohjelmointia helpottavia keinoja:
 
-- pidän selaimen konsolin koko ajan auki
+- pidän selaimeni konsolin koko ajan auki
 - etenen pienin askelin
-- käytän koodissa runsaasti _console.log_-komentoja varmistamaan sen, että varmasti ymmärrän jokaisen kirjoittamani koodirivin, sekä etsiessäni koodista mahdollisia bugin aiheuttajia
-- jos koodini ei toimi, en kirjoita enää yhtään lisää koodia, vaan alan poistamaan toiminnan rikkoneita rivejä tai palaan suosiolla tilanteeseen, missä koodi vielä toimi
-- kun kysyn apua kurssin Discord- tai Telegram-kanavalla, tai muualla internetissä, muotoilen kysymyksen järkevästi, esim. [täällä](/en/part0/general_info#how-to-ask-help-in-discord-telegam) esiteltyyn tapaan
+- käytän koodissani runsaasti _console.log_-komentoja sekä varmistamaan sen, että varmasti ymmärrän jokaisen kirjoittamani koodirivin, että etsiessäni koodistani mahdollisia bugin aiheuttajia
+- jos koodini ei toimi, en kirjoita enää yhtään lisää koodia, vaan alan poistaa toiminnan rikkoneita rivejä tai palaan suosiolla tilanteeseen, missä koodini vielä toimi
+- kun kysyn apua kurssin Discord- tai Telegram-kanavalla, tai muualla internetissä, muotoilen kysymyksen järkevästi, esim. [täällä](/en/part0/general_info#how-to-get-help-in-discord-telegram) esiteltyyn tapaan
 
 </div>
 
@@ -563,15 +562,13 @@ Ohjelmointi on hankalaa, ja sen takia lupaan hyödyntää kaikkia ohjelmointia h
 
 <h3>Tehtävät 2.1.-2.5.</h3>
 
-Tehtävät palautetaan GitHubin kautta ja merkitsemällä tehdyt tehtävät [palautussovellukseen]https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Tehtävät palautetaan GitHubin kautta ja merkitsemällä tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 Voit palauttaa kurssin kaikki tehtävät samaan repositorioon, tai käyttää useita repositorioita. Jos palautat eri osien tehtäviä samaan repositorioon, käytä järkevää hakemistojen nimentää.
 
 Tehtävät palautetaan **yksi osa kerrallaan**. Kun olet palauttanut osan tehtävät, et voi enää palauttaa saman osan tekemättä jättämiäsi tehtäviä.
 
 Huomaa, että tässä osassa on muitakin tehtäviä kuin alla olevat, eli <i>älä tee palautusta</i> ennen kun olet tehnyt osan tehtävistä kaikki mitkä haluat palauttaa.
-
-**VAROITUS** create-react-app tekee projektista automaattisesti Git-repositorion, ellei sovellusta luoda jo olemassa olevan repositorion sisälle. Todennäköisesti **et halua** että projektista tulee repositorio, joten suorita projektin juuressa komento _rm -rf .git_.
 
 <h4>2.1: kurssitiedot step6</h4>
 
@@ -667,17 +664,6 @@ const total = parts.reduce( (s, p) => {
   console.log('what is happening', s, p)
   return someMagicHere 
 })
-```
-
-**Pro tip 2:** VS Codeen on asennettavissa [laajennus](https://marketplace.visualstudio.com/items?itemName=cmstead.jsrefactor), jonka avulla nuolifunktion lyhyen muodon voi muuttaa automaattisesti pidemmäksi muodoksi ja päinvastoin:
-
-![](../../images/2/5b.png)
-
-**Pro tip 3:** Mikäli console.login haluaa vain pikaisesti ujuttaa koodiin nuolifunktiota muuttamatta, voi sen tehdä näppärästi myös tällä tapaa:
-
-```js
-const total = 
-  parts.reduce( (s, p) => console.log('what is happening', s, p) || someMagicHere )
 ```
 
 <h4>2.4: kurssitiedot step9</h4>

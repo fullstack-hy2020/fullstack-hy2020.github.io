@@ -11,7 +11,7 @@ Now that we have set up our development environment we can get into React Native
 
 ### Core components
 
-In the previous parts, we have learned that we can use React to define components as functions, which receive props as an argument and returns a tree of React elements. This tree is usually represented with JSX syntax. In the browser environment, we have used the [ReactDOM](https://reactjs.org/docs/react-dom.html) library to turn these components into a DOM tree that can be rendered by a browser. Here is a concrete example of a very simple component:
+In the previous parts, we have learned that we can use React to define components as functions, which receive props as an argument and returns a tree of React elements. This tree is usually represented with JSX syntax. In the browser environment, we have used the [ReactDOM](https://react.dev/reference/react-dom) library to turn these components into a DOM tree that can be rendered by a browser. Here is a concrete example of a very simple component:
 
 ```javascript
 const HelloWorld = props => {
@@ -245,7 +245,7 @@ const BigBlueText = () => {
     <View style={styles.container}> // highlight-line
       <Text style={styles.text}> // highlight-line
         Big blue text
-      <Text>
+      </Text>
     </View>
   );
 };
@@ -575,7 +575,7 @@ const Main = () => {
       <AppBar />
       // highlight-start
       <Routes>
-        <Route path="/" element={<RepositoryList />} exact />
+        <Route path="/" element={<RepositoryList />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       // highlight-end

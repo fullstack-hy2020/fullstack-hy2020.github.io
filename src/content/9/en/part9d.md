@@ -13,119 +13,74 @@ Before we start delving into how you can use TypeScript with React, we should fi
 - Forgetting to pass a required prop to a component
 - Passing a prop with the wrong type to a component
 
-If we make any of these errors, TypeScript can help us catch them in our editor right away.
-If we didn't use TypeScript, we would have to catch these errors later during testing.
-We might be forced to do some tedious debugging to find the cause of the errors.
+If we make any of these errors, TypeScript can help us catch them in our editor right away. If we didn't use TypeScript, we would have to catch these errors later during testing. We might be forced to do some tedious debugging to find the cause of the errors.
 
 That's enough reasoning for now. Let's start getting our hands dirty!
 
-### Create React App with TypeScript
+### Vite with TypeScript
 
-We can use [create-react-app](https://create-react-app.dev) to create a TypeScript app by adding a
-<i>template</i> argument to the initialization script. So in order to create a TypeScript Create React App, run the following command:
+We can use [Vite](https://vitejs.dev/) to create a TypeScript app specifying a template *react-ts* in the initialization script. So to create a TypeScript app, run the following command:
 
 ```shell
-npx create-react-app my-app --template typescript
+npm create vite@latest my-app-name -- --template react-ts
 ```
 
-After running the command, you should have a complete basic React app that uses TypeScript.
-You can start the app by running *npm start* in the application's root.
+After running the command, you should have a complete basic React app that uses TypeScript. You can start the app by running *npm run dev* in the application's root.
 
-If you take a look at the files and folders, you'll notice that the app is not that different from
-one using pure JavaScript. The only differences are that the <i>.js</i> and <i>.jsx</i> files are now  <i>.ts</i> and <i>.tsx</i> files, they contain some type annotations, and the root directory contains a <i>tsconfig.json</i> file.
+If you take a look at the files and folders, you'll notice that the app is not that different from one using pure JavaScript. The only differences are that the *.jsx* files are now *.tsx* files, they contain some type annotations, and the root directory contains a *tsconfig.json* file.
 
-Now, let's take a look at the <i>tsconfig.json</i> file that has been created for us:
+Now, let's take a look at the *tsconfig.json* file that has been created for us:
 
 ```js
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
     "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
 ```
 
-Notice *compilerOptions* now has the key [lib](https://www.typescriptlang.org/tsconfig#lib) that includes "type definitions for things found in browser environments (like *document*)."
+Notice *compilerOptions* now has the key [lib](https://www.typescriptlang.org/tsconfig#lib) that includes "type definitions for things found in browser environments (like *document*)". Everything else should be more or less fine.
 
-Everything else should be more or less fine except that, at the moment, the configuration allows compiling JavaScript files because *allowJs* is set to *true*.
-That would be fine if you need to mix TypeScript and JavaScript (e.g. if you are in the process of transforming a JavaScript project into TypeScript or something like that), but we want to create a pure TypeScript app, so let's change that configuration to *false*.
+In our previous project, we used ESlint to help us enforce a coding style, and we'll do the same with this app. We do not need to install any dependencies, since Vite has taken care of that already.
 
-In our previous project, we used ESlint to help us enforce a coding style, and we'll do the same with this app. We do not need to install any dependencies, since create-react-app has taken care of that already.
-
-We configure ESlint in <i>.eslintrc</i> with the following settings:
+When we look at the *main.tsx* file that Vite has generated, it looks familiar but there is a small but remarkable difference, there is a exclamation mark after the statement _document.getElementById('root')_:
 
 ```js
-{
-  "env": {
-    "browser": true,
-    "es6": true,
-    "jest": true
-  },
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended"
-  ],
-  "plugins": ["react", "@typescript-eslint"],
-  "settings": {
-    "react": {
-      "pragma": "React",
-      "version": "detect"
-    }
-  },
-  "rules": {
-    "@typescript-eslint/explicit-function-return-type": 0,
-    "@typescript-eslint/explicit-module-boundary-types": 0,
-    "react/react-in-jsx-scope": 0
-  }
-}
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.tsx'
+import './index.css'
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+)
 ```
 
-Since the return type of most React components is generally either *JSX.Element* or *null*, we have loosened up the default linting rules a bit by disabling the rules [explicit-function-return-type](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-function-return-type.md) and [explicit-module-boundary-types](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-module-boundary-types.md).
-Now we don't need to explicitly state our function return types everywhere. We will also disable [react/react-in-jsx-scope](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/react-in-jsx-scope.md) since importing React is [no longer needed](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html) in every file.
+The reason for this is that the statement might return value null but the _ReactDOM.createRoot_ does not accept null as parameter. With the [! operator](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#non-null-assertion-operator-postfix-), it is possible to assert to the TypeScript compiler that the value is not null.
 
-Next, we need to get our linting script to parse <i>*.tsx </i> files, which are the TypeScript equivalent of React's JSX files.
-We can do that by altering our lint command in <i>.package.json</i> to the following:
-
-```json
-{
-  // ...
-    "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "lint": "eslint './src/**/*.{ts,tsx}'" // highlight-line
-  },
-  // ...
-}
-```
-
-If you are using Windows, you may need to use double quotes for the linting path:
-
-```json
-"lint": "eslint \"./src/**/*.{ts,tsx}\""
-```
+Earlier in this part we [warned](/en/part9/first_steps_with_type_script#type-assertion) about the dangers of type assertions, but in our case the assertion is ok since we are sure that the file *index.html* indeed has this particular id and the function is always returning a HTMLElement.
 
 ### React components with TypeScript
 
@@ -148,9 +103,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 )
 ```
 
-In this example, we have a component called *Welcome* to which we pass a *name* as a prop. It then renders the name to the screen.  We know that the *name* should be a string, and we use the [prop-types](https://www.npmjs.com/package/prop-types) package introduced in [part 5](/en/part5/props_children_and_proptypes#prop-types) to receive hints about the desired types of a component's props and warnings about invalid prop types.
+In this example, we have a component called *Welcome* to which we pass a *name* as a prop. It then renders the name to the screen. We know that the *name* should be a string, and we use the [prop-types](https://www.npmjs.com/package/prop-types) package introduced in [part 5](/en/part5/props_children_and_proptypes#prop-types) to receive hints about the desired types of a component's props and warnings about invalid prop types.
 
-With TypeScript, we don't need the <i>prop-types</i> package anymore. We can define the types with the help of TypeScript just like we define types for a regular function as React components are nothing but mere functions. We will use an interface for the parameter types (i.e., props) and *JSX.Element* as the return type for any react component:
+With TypeScript, we don't need the *prop-types* package anymore. We can define the types with the help of TypeScript, just like we define types for a regular function as React components are nothing but mere functions. We will use an interface for the parameter types (i.e. props) and *JSX.Element* as the return type for any React component:
 
 ```jsx
 import ReactDOM from 'react-dom/client'
@@ -163,7 +118,7 @@ const Welcome = (props: WelcomeProps): JSX.Element => {
   return <h1>Hello, {props.name}</h1>;
 };
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <Welcome name="Sarah" />
 )
 ```
@@ -184,39 +139,21 @@ const Welcome = ({ name }: { name: string }): JSX.Element => (
 
 Now our editor knows that the *name* prop is a string.
 
-There is actually no need to define the return type of a React component since the TypeScript compiler infers the type automatically, and we can just write
+There is actually no need to define the return type of a React component since the TypeScript compiler infers the type automatically, so we can just write:
 
 ```jsx
 interface WelcomeProps {
   name: string;
 }
 
-const Welcome = (props: WelcomeProps)  => { // highlight-line
+const Welcome = (props: WelcomeProps) => { // highlight-line
   return <h1>Hello, {props.name}</h1>;
 };
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <Welcome name="Sarah" />
 )
 ```
-
-You probably noticed that we used a [type assertion](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions) for the return value of the function *document.getElementById*
-
-```ts
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(  // highlight-line
-  <Welcome name="Sarah" />
-)
-```
-
-We need to do this since the *ReactDOM.createRoot* takes an HTMLElement as a parameter but the return value of function *document.getElementById* has the following type
-
-```js
-HTMLElement | null
-```
-
-since if the function does not find the searched element, it will return null.
-
-Earlier in this part we [warned](https://fullstackopen.com/en/part9/first_steps_with_type_script#type-assertion) about the dangers of type assertions, but in our case the assertion is ok since we are sure that the file <i>index.html</i> indeed has this particular id and the function is always returning a HTMLElement.
 
 </div>
 
@@ -226,20 +163,20 @@ Earlier in this part we [warned](https://fullstackopen.com/en/part9/first_steps_
 
 #### 9.14
 
-Create a new Create React App with TypeScript, and set up ESlint for the project similarly to how we just did.
+Create a new Vite app with TypeScript.
 
-This exercise is similar to the one you have already done in [Part 1](/en/part1/java_script#exercises-1-3-1-5) of the course, but with TypeScript and some extra tweaks. Start off by modifying the contents of <i>index.tsx</i> to the following:
+This exercise is similar to the one you have already done in [Part 1](/en/part1/java_script#exercises-1-3-1-5) of the course, but with TypeScript and some extra tweaks. Start off by modifying the contents of *main.tsx* to the following:
 
 ```jsx
 import ReactDOM from 'react-dom/client'
 import App from './App';
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <App />
 )
 ```
 
-and <i>App.tsx</i> to the following:
+and *App.tsx*:
 
 ```jsx
 const App = () => {
@@ -259,6 +196,8 @@ const App = () => {
     }
   ];
 
+  const totalExercises = courseParts.reduce((sum, part) => sum + part.exerciseCount, 0);
+
   return (
     <div>
       <h1>{courseName}</h1>
@@ -272,8 +211,7 @@ const App = () => {
         {courseParts[2].name} {courseParts[2].exerciseCount}
       </p>
       <p>
-        Number of exercises{" "}
-        {courseParts.reduce((carry, part) => carry + part.exerciseCount, 0)}
+        Number of exercises {totalExercises}
       </p>
     </div>
   );
@@ -284,7 +222,7 @@ export default App;
 
 and remove the unnecessary files.
 
-The whole app is now in one component. That is not what we want, so refactor the code so that it consists of three components: *Header*,  *Content* and *Total*. All data is still kept in the *App* component, which passes all necessary data to each component as props. <i>Be sure to add type declarations for each component's props!</i>
+The whole app is now in one component. That is not what we want, so refactor the code so that it consists of three components: *Header*,  *Content* and *Total*. All data is still kept in the *App* component, which passes all necessary data to each component as props. *Be sure to add type declarations for each component's props!*
 
 The *Header* component should take care of rendering the name of the course. *Content* should render the names of the different parts and the number of exercises in each part, and *Total* should render the total sum of exercises in all parts.
 
@@ -310,7 +248,7 @@ const App = () => {
 
 ### Deeper type usage
 
-In the previous exercise, we had three parts of a course, and all parts had the same attributes *name* and *exerciseCount*. But what if we needed additional attributes for the parts where all parts do not have the same attributes? How would this look, codewise? Let's consider the following example:
+In the previous exercise, we had three parts of a course, and all parts had the same attributes *name* and *exerciseCount*. But what if we need additional attributes for a specific part? How would this look, codewise? Let's consider the following example:
 
 ```js
 const courseParts = [
@@ -339,7 +277,7 @@ const courseParts = [
 ```
 
 In the above example, we have added some additional attributes to each course part.
-Each part has the *name* and *exerciseCount* attributes, but the first, the third  and fourth also have an attribute called *description*, and the second and fourth parts also have some distinct additional attributes.
+Each part has the *name* and *exerciseCount* attributes, but the first, the third and fourth also have an attribute called *description*. The second and fourth parts also have some distinct additional attributes.
 
 Let's imagine that our application just keeps on growing, and we need to pass the different course parts around in our code. On top of that, there are also additional attributes and course parts added to the mix. How can we know that our code is capable of handling all the different types of data correctly, and we are not for example forgetting to render a new course part on some page? This is where TypeScript comes in handy!
 
@@ -371,12 +309,12 @@ interface CoursePartBackground {
 }
 ```
 
-Besides the attributes that are found in the various course parts, we have now introduced an additional attribute called <i>kind</i> that has a [literal](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types) type, it is a "hard coded" string, distinct for each course part. We shall soon see where the attribute kind is used!
+Besides the attributes that are found in the various course parts, we have now introduced an additional attribute called *kind* that has a [literal](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types) type, it is a "hard coded" string, distinct for each course part. We shall soon see where the attribute kind is used!
 
 Next, we will create a type [union](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types) of all these types. We can then use it to define a type for our array, which should accept any of these course part types:
 
 ```js
-type CoursePart = CoursePartBasic | CoursePartGroup | CoursePartBackround;
+type CoursePart = CoursePartBasic | CoursePartGroup | CoursePartBackground;
 ```
 
 Now we can set the type for our *courseParts* variable:
@@ -430,9 +368,9 @@ Our editor will automatically warn us if we use the wrong type for an attribute,
 
 We will immediately see an error in the editor:
 
-![vscode exerciseCoutn not assignable to type CoursePart - description missing](../../images/9/63new.png)
+![vscode exerciseCount not assignable to type CoursePart - description missing](../../images/9/63new.png)
 
-Since our new entry has the attribute *kind* with value *"basic"* TypeScript knows that the entry does not only have the type *CoursePart* but it is actually meant to be a *CoursePartBasic*. So here the attribute *kind* "narrows" the type of the entry from a more general to a more specific type that has a certain set of attributes. We shall soon see this style of type narrowing in action in the code!
+Since our new entry has the attribute *kind* with value *"basic"*, TypeScript knows that the entry does not only have the type *CoursePart* but it is actually meant to be a *CoursePartBasic*. So here the attribute *kind* "narrows" the type of the entry from a more general to a more specific type that has a certain set of attributes. We shall soon see this style of type narrowing in action in the code!
 
 But we're not satisfied yet! There is still a lot of duplication in our types, and we want to avoid that. We start by identifying the attributes all course parts have in common, and defining a base type that contains them. Then we will [extend](https://www.typescriptlang.org/docs/handbook/2/objects.html#extending-types) that base type to create our kind-specific types:
 
@@ -471,11 +409,11 @@ If we try to access the objects in the array *courseParts: CoursePart[]* we noti
 
 And indeed, the TypeScript [documentation](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#working-with-union-types) says this:
 
-> <i>TypeScript will only allow an operation (or attribute access) if it is valid for every member of the union.</i>
+> *TypeScript will only allow an operation (or attribute access) if it is valid for every member of the union.*
 
 The documentation also mentions the following:
 
-> <i>The solution is to narrow the union with code... Narrowing occurs when TypeScript can deduce a more specific type for a value based on the structure of the code.</i>
+> *The solution is to narrow the union with code... Narrowing occurs when TypeScript can deduce a more specific type for a value based on the structure of the code.*
 
 So once again the [type narrowing](https://www.typescriptlang.org/docs/handbook/2/narrowing.html) is the rescue!
 
@@ -622,7 +560,7 @@ Lastly, add another course part interface with the following attributes: *name*,
 }
 ```
 
-Then add that interface to the type union *CoursePart* and add corresponding data to the *courseParts* variable. Now, if you have not modified your *Content* component correctly, you should get an error, because you have not yet added support for the fourth course part type. Do the necessary changes to *Content*, so that all attributes for the new course part also get rendered and that the compiler doesn't produce any errors.
+Then add that interface to the type union *CoursePart* and add the corresponding data to the *courseParts* variable. Now, if you have not modified your *Content* component correctly, you should get an error, because you have not yet added support for the fourth course part type. Do the necessary changes to *Content*, so that all attributes for the new course part also get rendered and that the compiler doesn't produce any errors.
 
 The result might look like the following:
 
@@ -649,13 +587,13 @@ const App = () => {
 }
 ```
 
-When we hover over the *useState* calls in the editor, we notice couple of interesting things.
+When we hover over the *useState* calls in the editor, we notice a couple of interesting things.
 
 The type of the first call *useState('')* looks like the following:
 
 ```ts
-useState<string>(initialState: string | (() => string)): 
-  [string, React.Dispatch<React.SetStateAction<string>>] 
+useState<string>(initialState: string | (() => string)):
+  [string, React.Dispatch<React.SetStateAction<string>>]
 ```
 
 The type is somewhat challenging to decipher. It has the following "form":
@@ -667,7 +605,7 @@ functionName(parameters): return_value
 So we notice that TypeScript compiler has inferred that the initial state is either a string or a function that returns a string:
 
 ```ts
-initialState: string | (() => string)
+initialState: string | (() => string))
 ```
 
 The type of the returned array is the following:
@@ -689,9 +627,7 @@ useState<never[]>(initialState: never[] | (() => never[])):
 
 TypeScript can just infer that the state has type *never[]*, it is an array but it has no clue what are the elements stored to array, so we clearly need to help the compiler and provide the type explicitly.
 
-One of the best sources for information about typing React is the [React TypeScript Cheatsheet](https://react-typescript-cheatsheet.netlify.app/).
-
-The chapter about [useState](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/hooks#usestate) hook instructs to use a <i>type parameter</i> in situations where the compiler can not infer the type.
+One of the best sources for information about typing React is the [React TypeScript Cheatsheet](https://react-typescript-cheatsheet.netlify.app/). The Cheatsheet chapter about [useState](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/hooks#usestate) hook instructs to use a *type parameter* in situations where the compiler can not infer the type.
 
 Let us now define a type for notes:
 
@@ -715,7 +651,7 @@ useState<Note[]>(initialState: Note[] | (() => Note[])):
   [Note[], React.Dispatch<React.SetStateAction<Note[]>>]
 ```
 
-So in technical terms useState is [a generic function](https://www.typescriptlang.org/docs/handbook/2/generics.html#working-with-generic-type-variables), where the type has to be specified as a type parameter in those cases when the compiler can not infer the type.
+So in technical terms useState is [a generic function](https://www.typescriptlang.org/docs/handbook/2/generics.html#working-with-generic-type-variables), where the type has to be specified as a *type parameter* in those cases when the compiler can not infer the type.
 
 Rendering the notes is now easy. Let us just add some data to the state so that we can see that the code works:
 
@@ -777,7 +713,7 @@ const App = () => {
 }
 ```
 
-It just works! When we hover over the *event.target.value*, we see that it is indeed a string, just what is the expected parameter of the *setNewNote*:
+It just works, there are no complaints about types! When we hover over the *event.target.value*, we see that it is indeed a string, just what is the expected parameter of the *setNewNote*:
 
 ![vscode showing variable is a string](../../images/9/67new.png)
 
@@ -813,7 +749,7 @@ It does not quite work, there is an Eslint error complaining about implicit any:
 
 ![vscode error event implicitly has any type](../../images/9/68new.png)
 
-TypeScript compiler has now no clue what is the type of the parameter, so that is why the type is the infamous implicit any that we wan to [avoid](/en/part9/first_steps_with_type_script#the-horrors-of-any) at all costs. The React TypeScript cheatsheet comes again to rescue, the chapter about
+TypeScript compiler has now no clue what is the type of the parameter, so that is why the type is the infamous implicit any that we want to [avoid](/en/part9/first_steps_with_type_script#the-horrors-of-any) at all costs. The React TypeScript cheatsheet comes again to rescue, the chapter about
 [forms and events](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/forms_and_events) reveals that the right type of event handler is *React.SyntheticEvent*.
 
 The code becomes
@@ -865,7 +801,7 @@ Let us modify the app so that the notes are saved in a JSON server backend in ur
 
 As usual, we shall use Axios and the useEffect hook to fetch the initial state from the server.
 
-Let us try the following
+Let us try the following:
 
 ```js
 const App = () => {
@@ -877,11 +813,9 @@ const App = () => {
   }, [])
   // ...
 }
-
-
 ```
 
-When we hover over the *response.data* we see that is has the type *any*
+When we hover over the *response.data* we see that it has the type *any*
 
 ![vscode response.data showing the any type](../../images/9/69new.png)
 
@@ -911,9 +845,9 @@ We can now set the data in the state *notes* to get the code working:
   }, [])
 ```
 
-So just like with *useState*, we gave a type  parameter to *axios.get* to instruct it how the typing should be done. Just like *useState* also *axios.get* is a [generic function](https://www.typescriptlang.org/docs/handbook/2/generics.html#working-with-generic-type-variables). Unlike some generic functions, the type parameter of *axios.get* has a default value *any* so, if the function is used without defining the type parameter, the type of the response data will be any.
+So just like with *useState*, we gave a type parameter to *axios.get* to instruct it on how the typing should be done. Just like *useState* also *axios.get* is a [generic function](https://www.typescriptlang.org/docs/handbook/2/generics.html#working-with-generic-type-variables). Unlike some generic functions, the type parameter of *axios.get* has a default value of *any* so, if the function is used without defining the type parameter, the type of the response data will be any.
 
-The code works, compiler and Eslint are happy and remain quiet. However, giving a type parameter to *axios.get* is a potentially dangerous thing to do. The request body can contain data in an arbitrary form, and when giving a type parameter we are essentially just telling to TypeScript compiler to trust us that the data has type *Note[]*.
+The code works, compiler and Eslint are happy and remain quiet. However, giving a type parameter to *axios.get* is a potentially dangerous thing to do. The response body can contain data in an arbitrary form, and when giving a type parameter we are essentially just telling to TypeScript compiler to trust us that the data has type *Note[]*.
 
 So our code is essentially as safe as it would be if a [type assertion](/en/part9/first_steps_with_type_script#type-assertion) would be used:
 
@@ -928,7 +862,7 @@ So our code is essentially as safe as it would be if a [type assertion](/en/part
 
 Since the TypeScript types do not even exist in runtime, our code does not give us any "safety" against situations where the request body contains data in a wrong form.
 
-Giving type variable to *axios.get* might be ok if we are <i>absolutely sure</i> that the backend behaves correctly and returns always the data in correct form. If we want to build a robust system we should prepare for surprises and parse the response data in the frontend similarly that we did [in the previous section](/en/part9/typing_an_express_app#proofing-requests) for the requests to the backend.
+Giving a type parameter to *axios.get* might be ok if we are *absolutely sure* that the backend behaves correctly and returns always the data in the correct form. If we want to build a robust system we should prepare for surprises and parse the response data in the frontend, similarly to what we did [in the previous section](/en/part9/typing_an_express_app#proofing-requests) for the requests to the backend.
 
 Let us now wrap up our app by implementing the new note addition:
 
@@ -946,7 +880,7 @@ Let us now wrap up our app by implementing the new note addition:
   };
 ```
 
-We are again giving *axios.post* a type parameter. We know that the server response is added note so the proper type parameter is *Note*.
+We are again giving *axios.post* a type parameter. We know that the server response is the added note, so the proper type parameter is *Note*.
 
 Let us clean up the code a bit. For the type definitions, we create a file *types.ts* with the following content:
 
@@ -959,9 +893,9 @@ export interface Note {
 export type NewNote = Omit<Note, 'id'>
 ```
 
-We have added a new type for a <i>new note</i>, one that does not yet have the *id* field assigned.
+We have added a new type for a *new note*, one that does not yet have the *id* field assigned.
 
-The code that communicates with the backend is also extracted to a module in the file *noteService.tsx*
+The code that communicates with the backend is also extracted to a module in the file *noteService.ts*
 
 ```js
 import axios from 'axios';
@@ -1076,7 +1010,7 @@ Create a TypeScript React app with similar configurations as the apps of this se
 
 Remember to keep the network tab open. It might give you a valuable hint...
 
-You can decide how the diary entries are rendered. If you wish, you may take inspiration form the figure below. Note that the backend API does not return the diary comments, you may modify it to return also those on a GET request.
+You can decide how the diary entries are rendered. If you wish, you may take inspiration from the figure below. Note that the backend API does not return the diary comments, you may modify it to return also those on a GET request.
 
 #### Exercise 9.17
 
@@ -1086,7 +1020,7 @@ Make it possible to add new diary entries from the frontend. In this exercise yo
 
 Notify the user if the the creation of a diary entry fails in the backend, show also the reason for the failure.
 
-See eg. [this](https://dev.to/mdmostafizurrahaman/handle-axios-error-in-typescript-4mf9) how you can narrow the Axios error so that you can get hold of the error message.
+See eg. [this](https://dev.to/mdmostafizurrahaman/handle-axios-error-in-typescript-4mf9) to see how you can narrow the Axios error so that you can get hold of the error message.
 
 Your solution may look like this:
 

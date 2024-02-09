@@ -23,7 +23,7 @@ Jos kyseessä olisi usein käytetty toiminnallisuus, voitaisiin sitä varten tot
 
 GraphQL:n avulla toteutettu rajapinta sopii tämänkaltaisiin tilanteisiin hyvin.
 
-GraphQL:ssä periaatteena on, että selaimen koodi muodostaa <i>kyselyn</i>, joka kuvailee halutun datan ja lähettää sen API:lle HTTP POST -pyynnöllä. Toisin kuin REST:issä, GraphQL:ssä kaikki kyselyt kohdistetaan samaan osoitteeseen ja ovat POST-tyyppisiä.
+GraphQL:ssä periaatteena on, että selaimen koodi muodostaa <i>kyselyn</i>, joka kuvailee halutun datan ja lähettää sen API:lle HTTP POST ‑pyynnöllä. Toisin kuin REST:issä, GraphQL:ssä kaikki kyselyt kohdistetaan samaan osoitteeseen ja ovat POST-tyyppisiä.
 
 Edellä kuvatun skenaarion data saataisiin haettua (suurinpiirtein) seuraavan kaltaisella kyselyllä:
 
@@ -545,7 +545,7 @@ let persons = [
 ]
 ```
 
-Nyt siis palvelimen tallettamat henkilö-oliot eivät ole muodoltaan täysin samanlaisia kuin GraphQL-skeeman määrittelemät tyypin <i>Person</i> -oliot. 
+Nyt siis palvelimen tallettamat henkilö-oliot eivät ole muodoltaan täysin samanlaisia kuin GraphQL-skeeman määrittelemät tyypin <i>Person</i>-oliot. 
 
 Toisin kuin tyypille <i>Person</i> ei tyypille <i>Address</i> ole määritelty <i>id</i>-kenttää, sillä osoitteita ei ole talletettu palvelimella omaan tietorakenteeseensa.
 
@@ -699,7 +699,7 @@ Jos yritämme luoda uuden henkilön, mutta parametrit eivät vastaa skeemassa m�
 
 GraphQL:n [validoinnin](https://graphql.org/learn/validation/) avulla pystytään siis jo automaattisesti hoitamaan osa virheenkäsittelyä. 
 
-Kaikkea GraphQL ei kuitenkaan pysty hoitamaan automaattisesti. Esimerkiksi tarkemmat säännöt mutaatiolla lisättävän datan kenttien muodolle on lisättävä itse. Niistä aiheutuvat virheet tulee hoitaa itse heittämällä sopivalla [virhekoodilla](https://www.apollographql.com/docs/apollo-server/data/errors/#built-in-error-codes) varustetu [GraphQLError](https://www.apollographql.com/docs/apollo-server/data/errors/#custom-errors).
+Kaikkea GraphQL ei kuitenkaan pysty hoitamaan automaattisesti. Esimerkiksi tarkemmat säännöt mutaatiolla lisättävän datan kenttien muodolle on lisättävä itse. Niistä aiheutuvat virheet tulee hoitaa itse heittämällä sopivalla [virhekoodilla](https://www.apollographql.com/docs/apollo-server/data/errors/#built-in-error-codes) varustettu [GraphQLError](https://www.apollographql.com/docs/apollo-server/data/errors/#custom-errors).
 
 Estetään saman nimen lisääminen puhelinluetteloon useampaan kertaan:
 

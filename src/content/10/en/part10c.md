@@ -180,7 +180,7 @@ npm install @apollo/client graphql
 Before we can start using Apollo Client, we will need to slightly configure the Metro bundler so that it handles the <i>.cjs</i> file extensions used by the Apollo Client. First, let's install the <i>@expo/metro-config</i> package which has the default Metro configuration:
 
 ```shell
-npm install @expo/metro-config
+npm install @expo/metro-config@0.4.0
 ```
 
 Then, we can add the following configuration to a <i>metro.config.js</i> in the root directory of our project:
@@ -217,7 +217,7 @@ const createApolloClient = () => {
 export default createApolloClient;
 ```
 
-The URL used to connect to the Apollo Server is otherwise the same as the one you used with the Fetch API expect the port is <i>4000</i> and the path is <i>/graphql</i>. Lastly, we need to provide the Apollo Client using the [ApolloProvider](https://www.apollographql.com/docs/react/api/react/hooks/#the-apolloprovider-component) context. We will add it to the <em>App</em> component in the <i>App.js</i> file:
+The URL used to connect to the Apollo Server is otherwise the same as the one you used with the Fetch API except the port is <i>4000</i> and the path is <i>/graphql</i>. Lastly, we need to provide the Apollo Client using the [ApolloProvider](https://www.apollographql.com/docs/react/api/react/hooks/#the-apolloprovider-component) context. We will add it to the <em>App</em> component in the <i>App.js</i> file:
 
 ```javascript
 import { NativeRouter } from 'react-router-native';
@@ -699,7 +699,7 @@ export default createApolloClient;
 
 ### Using React Context for dependency injection
 
-The last piece of the sign-in puzzle is to integrate the storage to the <em>useSignIn</em> hook. To achieve this the hook must be able to access token storage instance we have initialized in the <em>App</em> component. React [Context](https://reactjs.org/docs/context.html) is just the tool we need for the job. Create a directory <i>contexts</i> in the <i>src</i> directory. In that directory create a file <i>AuthStorageContext.js</i> with the following content:
+The last piece of the sign-in puzzle is to integrate the storage to the <em>useSignIn</em> hook. To achieve this the hook must be able to access token storage instance we have initialized in the <em>App</em> component. React [Context](https://react.dev/learn/passing-data-deeply-with-context) is just the tool we need for the job. Create a directory <i>contexts</i> in the <i>src</i> directory. In that directory create a file <i>AuthStorageContext.js</i> with the following content:
 
 ```javascript
 import { createContext } from 'react';
@@ -738,7 +738,7 @@ const App = () => {
 export default App;
 ```
 
-Accessing the storage instance in the <em>useSignIn</em> hook is now possible using the React's [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext) hook like this:
+Accessing the storage instance in the <em>useSignIn</em> hook is now possible using the React's [useContext](https://react.dev/reference/react/useContext) hook like this:
 
 ```javascript
 // ...
@@ -752,28 +752,26 @@ const useSignIn = () => {
 };
 ```
 
-Note that accessing a context's value using the <em>useContext</em> hook only works if the <em>useContext</em> hook is used in a component that is a <i>descendant</i> of the [Context.Provider](https://reactjs.org/docs/context.html#contextprovider) component.
+Note that accessing a context's value using the <em>useContext</em> hook only works if the <em>useContext</em> hook is used in a component that is a <i>descendant</i> of the [Context.Provider](https://react.dev/reference/react/createContext#provider) component.
 
 Accessing the <em>AuthStorage</em> instance with <em>useContext(AuthStorageContext)</em> is quite verbose and reveals the details of the implementation. Let's improve this by implementing a <em>useAuthStorage</em> hook in a <i>useAuthStorage.js</i> file in the <i>hooks</i> directory:
 
 ```javascript
-import { createContext } from 'react';
-import { useContext } from 'react'; 
+import { useContext } from 'react';
+import AuthStorageContext from '../contexts/AuthStorageContext';
 
-const AuthStorageContext = createContext();
-
-export const useAuthStorage = () => {
+const useAuthStorage = () => {
   return useContext(AuthStorageContext);
 };
 
-export default AuthStorageContext;
+export default useAuthStorage;
 ```
 
 The hook's implementation is quite simple but it improves the readability and maintainability of the hooks and components using it. We can use the hook to refactor the <em>useSignIn</em> hook like this:
 
 ```javascript
 // ...
-import { useAuthStorage } from '../hooks/useAuthStorage'; // highlight-line
+import useAuthStorage from '../hooks/useAuthStorage'; // highlight-line
 
 const useSignIn = () => {
   const authStorage = useAuthStorage(); //highlight-line
@@ -783,7 +781,7 @@ const useSignIn = () => {
 
 The ability to provide data to component's descendants opens tons of use cases for React Context, as we already saw in the [last chapter](/en/part6/react_query_use_reducer_and_the_context) of part 6.
 
-To learn more about these use cases, read Kent C. Dodds' enlightening article [How to use React Context effectively](https://kentcdodds.com/blog/how-to-use-react-context-effectively) to find out how to combine the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) hook with the context to implement state management. You might find a way to use this knowledge in the upcoming exercises.
+To learn more about these use cases, read Kent C. Dodds' enlightening article [How to use React Context effectively](https://kentcdodds.com/blog/how-to-use-react-context-effectively) to find out how to combine the [useReducer](https://react.dev/reference/react/useReducer) hook with the context to implement state management. You might find a way to use this knowledge in the upcoming exercises.
 
 </div>
 
@@ -793,7 +791,7 @@ To learn more about these use cases, read Kent C. Dodds' enlightening article [H
 
 #### Exercise 10.15: storing the access token step2
 
-Improve the <em>useSignIn</em> hook so that it stores the user's access token retrieved from the <i>authenticate</i> mutation. The return value of the hook should not change. The only change you should make to the <em>SignIn</em> component is that you should redirect the user to the reviewed repositories list view after a successful sign in. You can achieve this by using the [useNavigate](https://reactrouter.com/docs/en/v6/api#usenavigate) hook.
+Improve the <em>useSignIn</em> hook so that it stores the user's access token retrieved from the <i>authenticate</i> mutation. The return value of the hook should not change. The only change you should make to the <em>SignIn</em> component is that you should redirect the user to the reviewed repositories list view after a successful sign in. You can achieve this by using the [useNavigate](https://reactrouter.com/en/6.14.2/hooks/use-navigate) hook.
 
 After the <i>authenticate</i> mutation has been executed and you have stored the user's access token to the storage, you should reset the Apollo Client's store. This will clear the Apollo Client's cache and re-execute all active queries. You can do this by using the Apollo Client's [resetStore](https://www.apollographql.com/docs/react/api/core/ApolloClient/#ApolloClient.resetStore) method. You can access the Apollo Client in the <em>useSignIn</em> hook using the [useApolloClient](https://www.apollographql.com/docs/react/api/react/hooks/#useapolloclient) hook. Note that the order of the execution is crucial and should be the following:
 

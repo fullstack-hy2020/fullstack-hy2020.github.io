@@ -19,9 +19,9 @@ Tutustumme REST:iin tarkemmin kurssin [seuraavassa osassa](/osa3), mutta jo nyt 
 
 REST:issä yksittäisiä asioita, esim. meidän tapauksessamme muistiinpanoja, kutsutaan <i>resursseiksi</i>. Jokaisella resurssilla on yksilöivä osoite eli URL. JSON Serverin noudattaman yleisen konvention mukaan yksittäistä muistiinpanoa kuvaavan resurssin URL on muotoa <i>notes/3</i>, missä 3 on resurssin tunniste. Osoite <i>notes</i> taas vastaa kaikkien yksittäisten muistiinpanojen kokoelmaa.
 
-Resursseja haetaan palvelimelta HTTP GET -pyynnöillä. Esim. HTTP GET osoitteeseen <i>notes/3</i> palauttaa muistiinpanon, jonka id-kentän arvo on 3. HTTP GET -pyyntö osoitteeseen <i>notes</i> palauttaa kaikki muistiinpanot.
+Resursseja haetaan palvelimelta HTTP GET ‑pyynnöillä. Esim. HTTP GET osoitteeseen <i>notes/3</i> palauttaa muistiinpanon, jonka id-kentän arvo on 3. HTTP GET ‑pyyntö osoitteeseen <i>notes</i> palauttaa kaikki muistiinpanot.
 
-Uuden muistiinpanoa vastaavan resurssin luominen tapahtuu JSON Serverin noudattamassa REST-konventiossa tekemällä HTTP POST -pyyntö, joka kohdistuu myös samaan osoitteeseen <i>notes</i>. Pyynnön mukana sen runkona eli <i>bodynä</i> lähetetään luotavan muistiinpanon tiedot.
+Uuden muistiinpanoa vastaavan resurssin luominen tapahtuu JSON Serverin noudattamassa REST-konventiossa tekemällä HTTP POST ‑pyyntö, joka kohdistuu myös samaan osoitteeseen <i>notes</i>. Pyynnön mukana sen runkona eli <i>bodynä</i> lähetetään luotavan muistiinpanon tiedot.
 
 JSON Server vaatii, että tiedot lähetetään JSON-muodossa eli käytännössä sopivasti muotoiltuna merkkijonona ja asettamalla headerille <i>Content-Type</i>:ksi arvo <i>application/json</i>.
 
@@ -98,13 +98,13 @@ Kun palvelimella oleva data alkaa vaikuttaa web-sovelluksen toimintalogiikkaan, 
 
 Palvelimen tilaa kannattaa tarkastella myös suoraan esim. selaimella:
 
-![](../../images/2/22e.png)
+![](../../images/2/22.png)
 
 Näin on mahdollista varmistua mm. siitä, siirtyykö kaikki oletettu data palvelimelle.
 
-Kurssin seuraavassa osassa alamme toteuttaa itse myös palvelimella olevan sovelluslogiikan. Tutustumme silloin tarkemmin palvelimen debuggausta auttaviin työkaluihin kuten [Postmaniin](https://www.postman.com/). Tässä vaiheessa JSON Server -palvelimen tilan tarkkailuun riittänee selain.
+Kurssin seuraavassa osassa alamme toteuttaa itse myös palvelimella olevan sovelluslogiikan. Tutustumme silloin tarkemmin palvelimen debuggausta auttaviin työkaluihin kuten [Postmaniin](https://www.postman.com/). Tässä vaiheessa JSON Server ‑palvelimen tilan tarkkailuun riittänee selain.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part2-5), branchissa <i>part2-5</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part2-5), branchissa <i>part2-5</i>.
 
 ### Muistiinpanon tärkeyden muutos
 
@@ -183,7 +183,7 @@ Pieni muistutus tähän väliin. Tapahtumankäsittelijän koodin tulostuksessa m
 console.log('importance of ' + id + ' needs to be toggled')
 ```
 
-ES6:n [template string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) -ominaisuuden ansiosta JavaScriptissa vastaavat merkkijonot voidaan kirjoittaa hieman mukavammin:
+ES6:n [template string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) ‑ominaisuuden ansiosta JavaScriptissa vastaavat merkkijonot voidaan kirjoittaa hieman mukavammin:
 
 ```js
 console.log(`importance of ${id} needs to be toggled`)
@@ -191,7 +191,7 @@ console.log(`importance of ${id} needs to be toggled`)
 
 Merkkijonon sisälle voi nyt määritellä "dollari-aaltosulku"-syntaksilla kohtia, joiden sisälle evaluoidaan JavaScript-lausekkeita, esim. muuttujan arvo. Huomaa, että template stringien hipsutyyppi poikkeaa JavaScriptin normaalien merkkijonojen käyttämistä hipsuista.
 
-Yksittäistä JSON Serverillä olevaa muistiinpanoa voi muuttaa kahdella tavalla: joko <i>korvaamalla</i> sen tekemällä HTTP PUT -pyynnön muistiinpanon yksilöivään osoitteeseen tai muuttamalla ainoastaan joidenkin muistiinpanon kenttien arvoja HTTP PATCH -pyynnöllä.
+Yksittäistä JSON Serverillä olevaa muistiinpanoa voi muuttaa kahdella tavalla: joko <i>korvaamalla</i> sen tekemällä HTTP PUT ‑pyynnön muistiinpanon yksilöivään osoitteeseen tai muuttamalla ainoastaan joidenkin muistiinpanon kenttien arvoja HTTP PATCH ‑pyynnöllä.
 
 Korvaamme nyt muistiinpanon kokonaan, sillä samalla tulee esille muutama tärkeä Reactiin ja JavaScriptiin liittyvä seikka.
 
@@ -215,7 +215,7 @@ Taulukon metodilla [find](https://developer.mozilla.org/en-US/docs/Web/JavaScrip
 
 Sen jälkeen luodaan <i>uusi olio</i>, jonka sisältö on sama kuin vanhan olion sisältö pois lukien kenttä important jonka arvo vaihtuu päinvastaiseksi. 
 
-Niin sanottua [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) -syntaksia hyödyntävä uuden olion luominen näyttää hieman erikoiselta:
+Niin sanottua [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) ‑syntaksia hyödyntävä uuden olion luominen näyttää hieman erikoiselta:
 
 ```js
 const changedNote = { ...note, important: !note.important }
@@ -233,7 +233,7 @@ axios.put(url, note).then(response => {
   // ...
 ```
 
-Näin ei ole suositeltavaa tehdä, sillä muuttuja <em>note</em> on viite komponentin tilassa, eli <em>notes</em>-taulukossa olevaan olioon, ja kuten muistamme, Reactissa tilaa [ei saa muuttaa suoraan!](https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly) 
+Näin ei ole suositeltavaa tehdä, sillä muuttuja <em>note</em> on viite komponentin tilassa, eli <em>notes</em>-taulukossa olevaan olioon, ja kuten muistamme, Reactissa tilaa [ei saa muuttaa suoraan!](https://react.dev/learn/updating-objects-in-state#why-is-mutating-state-not-recommended-in-react) 
 
 Kannattaa huomata myös, että uusi olio _changedNote_ on ainoastaan ns. [shallow copy](https://en.wikipedia.org/wiki/Object_copying#Shallow_copy), eli uuden olion kenttien arvoina on vanhan olion kenttien arvot. Jos vanhan olion kentät olisivat itsessään olioita, viittaisivat uuden olion kentät samoihin olioihin.
 
@@ -259,7 +259,7 @@ Käytetty <em>map</em>-kikka saattaa olla aluksi hieman hämmentävä. Asiaa kan
 
 ### Palvelimen kanssa tapahtuvan kommunikoinnin eristäminen omaan moduuliin
 
-<i>App</i>-komponentti alkaa kasvaa uhkaavasti kun myös palvelimen kanssa kommunikointi tapahtuu komponentissa. [Single responsibility](https://en.wikipedia.org/wiki/Single_responsibility_principle) -periaatteen hengessä kommunikointi onkin viisainta eristää omaan [moduuliinsa](/osa2/kokoelmien_renderointi_ja_moduulit#refaktorointia-moduulit).
+<i>App</i>-komponentti alkaa kasvaa uhkaavasti kun myös palvelimen kanssa kommunikointi tapahtuu komponentissa. [Single responsibility](https://en.wikipedia.org/wiki/Single_responsibility_principle) ‑periaatteen hengessä kommunikointi onkin viisainta eristää omaan [moduuliinsa](/osa2/kokoelmien_renderointi_ja_moduulit#refaktorointia-moduulit).
 
 Luodaan hakemisto <i>src/services</i> ja sinne tiedosto <i>notes.js</i>:
 
@@ -602,7 +602,7 @@ const getAll = () => {
 }
 ```
 
-Kun valemuistiinpanon tärkeyttä yritetään muuttaa, konsoliin tulee virheilmoitus, joka kertoo palvelimen vastanneen urliin <i>/notes/10000</i> tehtyyn HTTP PUT -pyyntöön statuskoodilla 404 <i>not found</i>:
+Kun valemuistiinpanon tärkeyttä yritetään muuttaa, konsoliin tulee virheilmoitus, joka kertoo palvelimen vastanneen urliin <i>/notes/10000</i> tehtyyn HTTP PUT ‑pyyntöön statuskoodilla 404 <i>not found</i>:
 
 ![](../../images/2/23e.png)
 
@@ -686,17 +686,17 @@ Olemattoman muistiinpanon poistaminen tapahtuu siis metodilla [filter](https://d
 notes.filter(n => n.id !== id)
 ```
 
-Alertia tuskin kannattaa käyttää todellisissa React-sovelluksissa. Opimme kohta kehittyneemmän menetelmän käyttäjille tarkoitettujen tiedotteiden antamiseen. Toisaalta on tilanteita, joissa simppeli battle tested -menetelmä kuten <em>alert</em> riittää aluksi aivan hyvin. Hienomman tavan voi sitten tehdä myöhemmin jos aikaa ja intoa riittää.
+Alertia tuskin kannattaa käyttää todellisissa React-sovelluksissa. Opimme kohta kehittyneemmän menetelmän käyttäjille tarkoitettujen tiedotteiden antamiseen. Toisaalta on tilanteita, joissa simppeli battle tested ‑menetelmä kuten <em>alert</em> riittää aluksi aivan hyvin. Hienomman tavan voi sitten tehdä myöhemmin jos aikaa ja intoa riittää.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part2-6), branchissa <i>part2-6</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part2-6), branchissa <i>part2-6</i>.
 
-### Full stack -sovelluskehittäjän vala
+### Full stack ‑sovelluskehittäjän vala
 
 On taas tehtävien aika. Tehtävien haastavuus alkaa nousta, sillä koodin toimivuuteen vaikuttaa myös se, kommunikoiko React-koodi oikein JSON Serverin kanssa.
 
-Meidän onkin syytä päivittää websovelluskehittäjän vala <i>Full stack -sovelluskehittäjän valaksi</i>, eli muistuttaa itseämme siitä, että frontendin koodin lisäksi seuraamme koko ajan sitä, miten frontend ja backend kommunikoivat.
+Meidän onkin syytä päivittää websovelluskehittäjän vala <i>Full stack ‑sovelluskehittäjän valaksi</i>, eli muistuttaa itseämme siitä, että frontendin koodin lisäksi seuraamme koko ajan sitä, miten frontend ja backend kommunikoivat.
 
-Full stack -ohjelmointi on <i>todella</i> hankalaa, ja sen takia lupaan hyödyntää kaikkia ohjelmointia helpottavia keinoja:
+Full stack ‑ohjelmointi on <i>todella</i> hankalaa, ja sen takia lupaan hyödyntää kaikkia ohjelmointia helpottavia keinoja:
 
 - pidän selaimen konsolin koko ajan auki
 - <i>tarkkailen säännöllisesti selaimen network-välilehdeltä, että frontendin ja backendin välinen kommunikaatio tapahtuu oletusteni mukaan</i>
@@ -729,9 +729,9 @@ Tee ohjelmaan mahdollisuus yhteystietojen poistamiseen. Poistaminen voi tapahtua
 
 ![](../../images/2/24e.png)
 
-Tiettyä henkilöä vastaava resurssi tuhotaan palvelimelta tekemällä HTTP DELETE -pyyntö resurssia vastaavaan <i>URL</i>:iin. Eli jos poistaisimme esim. käyttäjän, jonka <i>id</i> on 2, tulisi tapauksessamme tehdä HTTP DELETE osoitteeseen <i>localhost:3001/persons/2</i>. Pyynnön mukana ei lähetetä mitään dataa.
+Tiettyä henkilöä vastaava resurssi tuhotaan palvelimelta tekemällä HTTP DELETE ‑pyyntö resurssia vastaavaan <i>URL</i>:iin. Eli jos poistaisimme esim. käyttäjän, jonka <i>id</i> on 2, tulisi tapauksessamme tehdä HTTP DELETE osoitteeseen <i>localhost:3001/persons/2</i>. Pyynnön mukana ei lähetetä mitään dataa.
 
-[Axios](https://github.com/axios/axios)-kirjaston avulla HTTP DELETE -pyyntö tehdään samaan tapaan kuin muutkin pyynnöt.
+[Axios](https://github.com/axios/axios)-kirjaston avulla HTTP DELETE ‑pyyntö tehdään samaan tapaan kuin muutkin pyynnöt.
 
 **Huom:** et voi käyttää JavaScriptissa muuttujan nimeä <em>delete</em>, sillä kyseessä on kielen varattu sana. Eli seuraava ei onnistu:
 
@@ -746,7 +746,7 @@ const delete = (id) => {
 
 <i>Miksi tehtävä on merkattu tähdellä? Selitys asiaan [täällä](/osa0/yleista#suoritustapa).</i>
 
-Muuta toiminnallisuutta siten, että jos jo olemassa olevalle henkilölle lisätään numero, korvaa lisätty numero aiemman numeron. Korvaaminen kannattaa tehdä HTTP PUT -pyynnöllä.
+Muuta toiminnallisuutta siten, että jos jo olemassa olevalle henkilölle lisätään numero, korvaa lisätty numero aiemman numeron. Korvaaminen kannattaa tehdä HTTP PUT ‑pyynnöllä.
 
 Jos henkilön tiedot löytyvät jo luettelosta, voi ohjelma kysyä käyttäjältä varmistuksen:
 

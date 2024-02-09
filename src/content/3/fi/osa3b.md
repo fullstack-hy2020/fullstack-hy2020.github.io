@@ -37,7 +37,7 @@ Kyse on asiasta nimeltään CORS eli Cross-origin resource sharing. [Wikipedian]
 
 > <i>Cross-origin resource sharing (CORS) is a mechanism that allows restricted resources (e.g. fonts) on a web page to be requested from another domain outside the domain from which the first resource was served. A web page may freely embed cross-origin images, stylesheets, scripts, iframes, and videos. Certain "cross-domain" requests, notably Ajax requests, are forbidden by default by the same-origin security policy.</i>
 
-Lyhyesti sanottuna meidän kontekstissa kyse on seuraavasta: web-sovelluksen selaimessa suoritettava JavaScript-koodi saa oletusarvoisesti kommunikoida vain samassa [originissa](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy) olevan palvelimen kanssa. Koska palvelin on localhostin portissa 3001 ja frontend localhostin portissa 3000, niiden origin ei ole sama.
+Lyhyesti sanottuna meidän kontekstissa kyse on seuraavasta: web-sovelluksen selaimessa suoritettava JavaScript-koodi saa oletusarvoisesti kommunikoida vain samassa [originissa](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy) olevan palvelimen kanssa. Koska palvelin on localhostin portissa 3001 ja frontend localhostin portissa 5173, niiden origin ei ole sama.
 
 Korostetaan vielä, että [same origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy) ja CORS eivät ole mitenkään React- tai Node-spesifisiä asioita, vaan yleismaailmallisia periaatteita web-sovellusten toiminnasta.
 
@@ -71,13 +71,13 @@ Selaimessa toimiva frontendin koodi siis hakee datan osoitteessa localhost:3001 
 
 Kun koko "stäkki" on saatu vihdoin kuntoon, siirretään sovellus Internetiin.
 
-Sovellusten hostaamiseen, eli "internettiin laittamiseen" on olemassa lukematon määrä erilaisia ratkaisuja. Helpoimpia näistä sovelluskehittäjän kannalta ovat ns PaaS (eli Platform as a Service) -palvelut, jotka huolehtivat sovelluskehittäjän puolesta tietokannan ja suoritusympäristön asentamisen.
+Sovellusten hostaamiseen, eli "internettiin laittamiseen" on olemassa lukematon määrä erilaisia ratkaisuja. Helpoimpia näistä sovelluskehittäjän kannalta ovat ns PaaS (eli Platform as a Service) ‑palvelut, jotka huolehtivat sovelluskehittäjän puolesta tietokannan ja suoritusympäristön asentamisen.
 
 Kymmenen vuoden ajan PaaS-ratkaisujen ykkönen on ollut [Heroku](http://heroku.com). Elokuun 2022 lopussa Heroku ilmoitti että 27.11.2022 alkaen alustan maksuttomat palvelut loppuvat. Jos olet valmis maksamaan hiukan, on Heroku edelleen varteenotettava vaihtoehto.
 
 Esittelemme seuraavassa kaksi hieman uudempaa palvelua [Fly.io:n](https://fly.io/):n sekä [Renderin](https://render.com/). Molemmilla on tarjolla jonkin verran ilmaista laskenta-aikaa.
 
-Hienoinen ikävä puoli Fly.io:ssa on se, että <i>saatat</i> joutua kertomaan palvelulle luottokorttitietosi vaikka <i>et käytä</i> palvelun maksullista osaa. Renderin käyttöönotto saattaa olla jossain tapauksissa helpompaa, sillä Render ei edellytä mitään asenuksia omalle koneelle.
+Hienoinen ikävä puoli Fly.io:ssa on se, että <i>saatat</i> joutua kertomaan palvelulle luottokorttitietosi vaikka <i>et käytä</i> palvelun maksullista osaa. Renderin käyttöönotto saattaa olla jossain tapauksissa helpompaa, sillä Render ei edellytä mitään asennuksia omalle koneelle.
 
 Molempia ratkaisuja varten muutetaan tiedoston <i>index.js</i> lopussa olevaa sovelluksen käyttämän portin määrittelyä seuraavasti:
 
@@ -114,18 +114,20 @@ Anna sovellukselle nimi, tai anna Fly.io:n generoida automaattinen nimi, valitse
 
 Fly.io luo hakemistoosi tiedoston <i>fly.toml</i>, joka sisältää sovelluksen tuotantoympäristön konfiguraation.
 
-Jotta sovellus saadaan konfiguroitua oikein, tulee tiedostoon konfiguraatioon ehkä tehdä pieni lisäys osiin [env]
+Jotta sovellus saadaan konfiguroitua oikein, tulee tiedostoon konfiguraatioon tehdä pieni lisäys osiin [env]
 
 ```bash
+[build]
+
 [env]
-  PORT = "8080" # lisätään tämä
+  PORT = "3000" # add this
 
-[experimental]
-  auto_rollback = true
-
-[[services]]
-  http_checks = []
-  internal_port = 8080 
+[http_service]
+  internal_port = 3000 # ensure that this is same as PORT
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
   processes = ["app"]
 ```
 
@@ -196,13 +198,13 @@ app.listen(PORT, () => {
 
 Olemme toistaiseksi suorittaneet React-koodia <i>sovelluskehitysmoodissa</i>, jossa sovellus on konfiguroitu antamaan havainnollisia virheilmoituksia, päivittämään koodiin tehdyt muutokset automaattisesti selaimeen ym.
 
-Kun sovellus viedään tuotantoon, täytyy siitä tehdä [production build](https://reactjs.org/docs/optimizing-performance.html#use-the-production-build) eli tuotantoa varten optimoitu versio.
+Kun sovellus viedään tuotantoon, täytyy siitä tehdä [production build](https://vitejs.dev/guide/build.html) eli tuotantoa varten optimoitu versio.
 
-<i>create-react-app</i>:in avulla tehdyistä sovelluksista saadaan tehtyä tuotantoversio komennolla [_npm run build_](https://github.com/facebookincubator/create-react-app#npm-run-build-or-yarn-build).
+Viten avulla tehdyistä sovelluksista saadaan tehtyä tuotantoversio komennolla [_npm run build_](https://vitejs.dev/guide/build.html).
 
 Suoritetaan nyt komento <i>frontendin projektin juuressa</i>.
 
-Komennon seurauksena syntyy hakemiston <i>build</i> (joka sisältää jo sovelluksen ainoan html-tiedoston <i>index.html</i>) sisään hakemisto <i>static</i>, jonka alle generoituu sovelluksen JavaScript-koodin [minifioitu](<https://en.wikipedia.org/wiki/Minification_(programming)>) versio. Vaikka sovelluksen koodi on kirjoitettu useaan tiedostoon, generoituu kaikki JavaScript yhteen tiedostoon. Samaan tiedostoon tulee  myös kaikkien sovelluksen koodin tarvitsemien riippuvuuksien koodi.
+Komennon seurauksena syntyy hakemiston <i>dist</i> (joka sisältää jo sovelluksen ainoan html-tiedoston <i>index.html</i>) sisään hakemisto <i>assets</i>, jonka alle generoituu sovelluksen JavaScript-koodin [minifioitu](<https://en.wikipedia.org/wiki/Minification_(programming)>) versio. Vaikka sovelluksen koodi on kirjoitettu useaan tiedostoon, generoituu kaikki JavaScript yhteen tiedostoon. Samaan tiedostoon tulee  myös kaikkien sovelluksen koodin tarvitsemien riippuvuuksien koodi.
 
 Minifioitu koodi ei ole miellyttävää luettavaa. Koodin alku näyttää seuraavalta:
 
@@ -212,29 +214,29 @@ Minifioitu koodi ei ole miellyttävää luettavaa. Koodin alku näyttää seuraa
 
 ### Staattisten tiedostojen tarjoaminen backendistä
 
-Eräs mahdollisuus frontendin tuotantoon viemiseen on kopioida tuotantokoodi eli hakemisto <i>build</i> backendin repositorion juureen ja määritellä backend näyttämään pääsivunaan frontendin <i>pääsivu</i> eli tiedosto <i>build/index.html</i>.
+Eräs mahdollisuus frontendin tuotantoon viemiseen on kopioida tuotantokoodi eli hakemisto <i>dist</i> backendin repositorion juureen ja määritellä backend näyttämään pääsivunaan frontendin <i>pääsivu</i> eli tiedosto <i>dist/index.html</i>.
 
 Aloitetaan kopioimalla frontendin tuotantokoodi backendin alle, projektin juureen. Omalla koneellani kopiointi tapahtuu frontendin hakemistosta käsin komennolla
 
 ```bash
-cp -r build ../backend
+cp -r dist ../backend
 ```
 
 Backendin sisältävän hakemiston tulee nyt näyttää seuraavalta:
 
-![ls-komento näyttää tiedostot index.js, Procfile, package.json, package-lock.json sekä hakemistot build ja node_modules](../../images/3/27new.png)
+![ls-komento näyttää tiedostot index.js, Procfile, package.json, package-lock.json sekä hakemistot dist ja node_modules](../../images/3/27v.png)
 
 Jotta saamme Expressin näyttämään <i>staattista sisältöä</i> eli sivun <i>index.html</i> ja sen lataaman JavaScriptin ym. tarvitsemme Expressiin sisäänrakennettua middlewarea [static](http://expressjs.com/en/starter/static-files.html).
 
 Kun lisäämme muiden middlewarejen määrittelyn yhteyteen seuraavan
 
 ```js
-app.use(express.static('build'))
+app.use(express.static('dist'))
 ```
 
-tarkastaa Express GET-tyyppisten HTTP-pyyntöjen yhteydessä ensin löytyykö pyynnön polkua vastaavan nimistä tiedostoa hakemistosta <i>build</i>. Jos löytyy, palauttaa Express tiedoston.
+tarkastaa Express GET-tyyppisten HTTP-pyyntöjen yhteydessä ensin löytyykö pyynnön polkua vastaavan nimistä tiedostoa hakemistosta <i>dist</i>. Jos löytyy, palauttaa Express tiedoston.
 
-Nyt HTTP GET -pyyntö osoitteeseen <i>www.palvelimenosoite.com/index.html</i> tai <i>www.palvelimenosoite.com</i> näyttää Reactilla tehdyn frontendin. GET-pyynnön esim. osoitteeseen <i>www.palvelimenosoite.com/api/notes</i> hoitaa backendin koodi.
+Nyt HTTP GET ‑pyyntö osoitteeseen <i>www.palvelimenosoite.com/index.html</i> tai <i>www.palvelimenosoite.com</i> näyttää Reactilla tehdyn frontendin. GET-pyynnön esim. osoitteeseen <i>www.palvelimenosoite.com/api/notes</i> hoitaa backendin koodi.
 
 Koska tässä tapauksessa sekä frontend että backend toimivat samassa osoitteessa, voidaan React-sovelluksessa eli frontendin koodissa oleva palvelimen _baseUrl_ määritellä [suhteellisena](https://www.w3.org/TR/WD-html40-970917/htmlweb.html#h-5.1.2) URL:ina eli ilman palvelinta yksilöivää osaa:
 
@@ -258,19 +260,23 @@ Sovellusta voidaan käyttää nyt <i>backendin</i> osoitteesta <http://localhost
 
 Sovelluksemme toiminta vastaa nyt täysin osan 0 luvussa [Single page app](/osa0/web_sovelluksen_toimintaperiaatteita#single-page-app) läpikäydyn esimerkkisovelluksen toimintaa.
 
-Kun mennään selaimella osoitteeseen <http://localhost:3001> palauttaa palvelin hakemistossa <i>build</i> olevan tiedoston <i>index.html</i>, jonka sisältö hieman tiivistettynä on seuraava:
+Kun mennään selaimella osoitteeseen <http://localhost:3001> palauttaa palvelin hakemistossa <i>dist</i> olevan tiedoston <i>index.html</i>, jonka sisältö on seuraava:
 
 ```html
-<head>
-  <meta charset="utf-8"/>
-  <title>React App</title>
-  <link href="/static/css/main.f9a47af2.chunk.css" rel="stylesheet">
-</head>
-<body>
-  <div id="root"></div>
-  <script src="/static/js/1.578f4ea1.chunk.js"></script>
-  <script src="/static/js/main.104ca08d.chunk.js"></script>
-</body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
+    <script type="module" crossorigin src="/assets/index-5f6faa37.js"></script>
+    <link rel="stylesheet" href="/assets/index-198af077.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    
+  </body>
 </html>
 ```
 
@@ -288,7 +294,7 @@ Toisin kuin sovelluskehitysympäristössä, kaikki sovelluksen tarvitsema löyty
 
 ### Koko sovellus Internetiin
 
-Kun sovelluksen "Internetiin vietävä" tuotantoversio todetaan toimivaksi paikallisesti, commitoidaan frontendin tuotantoversio backendin repositorioon ja pushataan koodi GtHubiin. Jos käytät Renderiä, saattaa automaattinen uudelleenkäynnistys toimia. Jos näin ei ole, käynnistä uusi versio itse dashboardin kautta tekemällä "manual deployment".
+Kun sovelluksen "Internetiin vietävä" tuotantoversio todetaan toimivaksi paikallisesti, commitoidaan frontendin tuotantoversio backendin repositorioon ja pushataan koodi GitHubiin. Jos käytät Renderiä, saattaa automaattinen uudelleenkäynnistys toimia. Jos näin ei ole, käynnistä uusi versio itse dashboardin kautta tekemällä "manual deployment".
 
 Fly.io:n tapauksessa sovelluksen uusi versio käynnistyy komennolla
 
@@ -322,13 +328,22 @@ Fly.io:n tapauksessa skriptit näyttävät seuraavalta:
 {
   "scripts": {
     // ...
-    "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
+    "build:ui": "rm -rf dist && cd ../frontend/ && npm run build && cp -r dist ../backend",
     "deploy": "fly deploy",
     "deploy:full": "npm run build:ui && npm run deploy",    
     "logs:prod": "fly logs"
   }
 }
 ```
+  
+##### Huomautus Windows-käyttäjille
+Huomaa, että näistä _build:ui_:n käyttämät shell-komennot eivät toimi natiivisti Windowsilla, jonka powershell käyttää eri komentoja. Tällöin skripti olisi
+```json
+"build:ui": "@powershell Remove-Item -Recurse -Force dist && cd ../frontend && npm run build && @powershell Copy-Item dist -Recurse ../backend",
+```
+  
+Mikäli skripti ei toimi Windowsilla, tarkista, että terminaalisi sovelluskehitysympäristössäsi on Powershell eikä esimerkiksi Command Prompt. Jos olet asentanut Git Bash ‑terminaalin, tai muun Linuxia matkivan terminaalin tai ympäristön, saatat pystyä ajamaan Linuxin kaltaisia komentoja myös Windowsilla.
+
 
 Skripteistä _npm run build:ui_ kääntää ui:n tuotantoversioksi ja kopioi sen. _npm run deploy_ julkaisee Fly.io:n.
 
@@ -344,7 +359,7 @@ Renderin tapauksessa skriptit näyttävät seuraavalta:
 {
   "scripts": {
     // ...
-    "build:ui": "rm -rf build && cd ../frontend && npm run build && cp -r build ../backend",
+    "build:ui": "rm -rf dist && cd ../frontend && npm run build && cp -r dist ../backend",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push"
   }
 }
@@ -352,13 +367,13 @@ Renderin tapauksessa skriptit näyttävät seuraavalta:
 
 Skripteistä _npm run build:ui_ kääntää ui:n tuotantoversioksi ja kopioi sen.
 
-_npm run deploy:full_ sisältää edellisen lisää vaadittavat <i>git</i>-komennot versionhallinnan päivittämistä varten.
+_npm run deploy:full_ sisältää edellisen lisäksi vaadittavat <i>git</i>-komennot versionhallinnan päivittämistä varten.
 
 Huomaa, että skriptissä <i>build:ui</i> olevat polut riippuvat repositorioiden sijainnista.
 
 ### Proxy
 
-Frontendiin tehtyjen muutosten seurauksena on nyt se, että kun suoritamme frontendiä sovelluskehitysmoodissa eli käynnistämällä sen komennolla _npm start_, yhteys backendiin ei toimi:
+Frontendiin tehtyjen muutosten seurauksena on nyt se, että kun suoritamme frontendiä sovelluskehitysmoodissa eli käynnistämällä sen komennolla _npm run dev_, yhteys backendiin ei toimi:
 
 ![Network-tabi kertoo että pyyntöön localhost:3000/api/notes vastataan statuskoodilla 404](../../images/3/32new.png)
 
@@ -368,33 +383,44 @@ Syynä tälle on se, että backendin osoite muutettiin suhteellisesti määritel
 const baseUrl = '/api/notes'
 ```
 
-Koska frontend toimii osoitteessa <i>localhost:3000</i>, menevät backendiin tehtävät pyynnöt väärään osoitteeseen <i>localhost:3000/api/notes</i>. Backend toimii kuitenkin osoitteessa <i>localhost:3001</i>.
+Koska frontend toimii osoitteessa <i>localhost:5173</i>, menevät backendiin tehtävät pyynnöt väärään osoitteeseen <i>localhost:5173/api/notes</i>. Backend toimii kuitenkin osoitteessa <i>localhost:3001</i>.
 
-create-react-app:illa luoduissa projekteissa ongelma on helppo ratkaista. Riittää, että frontendin repositorion tiedostoon <i>package.json</i> lisätään seuraava määritelmä:
+Vitellä luoduissa projekteissa ongelma on helppo ratkaista. Riittää, että frontendin repositorion tiedostoon <i>vite.config.json</i> lisätään seuraava määritelmä:
 
 ```bash
-{
-  "dependencies": {
-    // ...
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [react()],
+  // highlight-start
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+      },
+    }
   },
-  "scripts": {
-    // ...
-  },
-  "proxy": "http://localhost:3001"  // highlight-line
-}
+  // highlight-end
+})
+
 ```
 
-Uudelleenkäynnistyksen jälkeen Reactin sovelluskehitysympäristö toimii [proxynä](https://create-react-app.dev/docs/proxying-api-requests-in-development). Jos React-koodi tekee HTTP-pyynnön palvelimen <i>http://localhost:3000</i> johonkin osoitteeseen, joka ei ole React-sovelluksen vastuulla (eli kyse ei ole esim. sovelluksen JavaScript-koodin tai CSS:n lataamisesta), lähetetään pyyntö edelleen osoitteessa <i>http://localhost:3001</i> olevalle palvelimelle.
+Uudelleenkäynnistyksen jälkeen Reactin sovelluskehitysympäristö toimii [proxynä](https://vitejs.dev/config/server-options.html#server-proxy). Jos React-koodi tekee HTTP-pyynnön palvelimen <i>http://localhost:5173</i> johonkin osoitteeseen, joka ei ole React-sovelluksen vastuulla (eli kyse ei ole esim. sovelluksen JavaScript-koodin tai CSS:n lataamisesta), lähetetään pyyntö edelleen osoitteessa <i>http://localhost:3001</i> olevalle palvelimelle. 
+
+Huomaa, että yllä olevassa esimerkkimääritelmässä vain polulla <i>/api</i>-alkuiset pyynnöt välitetään palvelimelle.
 
 Nyt myös frontend on kunnossa. Se toimii sekä sovelluskehitysmoodissa että tuotannossa yhdessä palvelimen kanssa.
 
 Eräs negatiivinen puoli käyttämässämme lähestymistavassa on, että sovelluksen uuden version tuotantoon vieminen edellyttää erillisessä repositoriossa olevan frontendin koodin tuotantoversion generoimista. Tämä taas hankaloittaa automatisoidun [deployment pipelinen](https://martinfowler.com/bliki/DeploymentPipeline.html) toteuttamista. Deployment pipelinellä tarkoitetaan automatisoitua ja hallittua tapaa viedä koodi sovelluskehittäjän koneelta erilaisten testien ja laadunhallinnallisten vaiheiden kautta tuotantoympäristöön. Aiheeseen tutustutaan kurssin [osassa 11](https://fullstackopen.com/osa11).
 
-Tähänkin on useita erilaisia ratkaisuja (esim. sekä frontendin että backendin [sijoittaminen samaan repositorioon](https://github.com/mars/heroku-cra-node)), emme kuitenkaan nyt mene niihin. Myös frontendin koodin deployaaminen omana sovelluksenaan voi joissain tilanteissa olla järkevää. _create-react-app_:in avulla luotujen sovellusten osalta se on [suoraviivaista](https://github.com/mars/create-react-app-buildpack).
+Tähänkin on useita erilaisia ratkaisuja (esim. sekä frontendin että backendin [sijoittaminen samaan repositorioon](https://github.com/mars/heroku-cra-node)), emme kuitenkaan nyt mene niihin. Myös frontendin koodin deployaaminen omana sovelluksenaan voi joissain tilanteissa olla järkevää.
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3), branchissa <i>part3-3</i>.
 
-Frontendin koodiin tehdyt muutokset ovat [frontendin repositorion](https://github.com/fullstack-hy2020/part2-notes/tree/part3-1) branchissa <i>part3-1</i>.
+Frontendin koodiin tehdyt muutokset ovat [frontendin repositorion](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part3-1) branchissa <i>part3-1</i>.
 
 </div>
 
@@ -424,7 +450,7 @@ Tee repositorion juureen tiedosto README.md ja lisää siihen linkki Internetiss
 
 Generoi frontendistä tuotantoversio ja lisää se Internetissä olevaan sovellukseesi tässä osassa esiteltyä menetelmää noudattaen.
 
-**HUOM:** eihän hakemisto <i>build</i> ole gitignoroituna projektissasi jos käytät Renderiä?
+**HUOM:** eihän hakemisto <i>dist</i> ole gitignoroituna projektissasi jos käytät Renderiä?
 
 Huolehdi myös, että frontend toimii edelleen myös paikallisesti.
 

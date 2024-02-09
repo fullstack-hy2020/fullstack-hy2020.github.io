@@ -7,51 +7,46 @@ lang: fi
 
 <div class="content">
 
-React oli aiemmin jossain määrin kuuluisa siitä, että sovelluskehityksen edellyttämien työkalujen konfigurointi oli hyvin hankalaa. Kiitos [Create React App](https://github.com/facebookincubator/create-react-app):in, sovelluskehitys Reactilla on kuitenkin nykyään tuskatonta. Parempaa työskentelyflow'ta on tuskin ollut koskaan JavaScriptilla tehtävässä selainpuolen sovelluskehityksessä.
+React oli alkuaikoina jossain määrin kuuluisa siitä, että sovelluskehityksen edellyttämien työkalujen konfigurointi oli hyvin hankalaa. Tilannetta helpottamaan kehitettiin [Create React App](https://github.com/facebookincubator/create-react-app):in, joka poisti konfigurointiin liittyvät ongelmat. Kurssillakin käytettävä [Vite](https://vitejs.dev/) on viime aikoina korvannut Create React Appin uusissa sovelluksissa.
 
-Emme voi kuitenkaan turvautua ikuisesti Create React App:in magiaan, ja nyt onkin aika selvittää mitä kaikkea taustalla on. Avainasemassa React-sovelluksen toimintakuntoon saattamisessa on [webpack](https://webpack.js.org/)-niminen työkalu.
+Sekä Vite että Create React App hyödyntävät varsinaisen työn tekemiseen <i>bundlereita</i>. Tutustumme nyt Create React Appin käyttämään [Webpack](https://webpack.js.org/)-nimiseen bundleriin. Webpack oli vuosia ylivoimaisesti suosituin bundler-ohjelmisto. Viime aikoina on kuitenkin syntynyt useita uuden sukupolven bundlereita kuten Viten käyttämä [esbuild](https://esbuild.github.io/), jotka ovat Webpackia huomattavasti nopeampia ja helppokäyttöisempiä. Esim. esbuildista kuitenkin puuttuu vielä eräitä hyödyllisiä ominaisuuksia (kuten selaimessa olevan koodin hotreload), joten tutustumme seuraavassa bundlereiden vanhaan hallitsijaan Webpackiin.
 
 ### Bundlaus
 
 Olemme toteuttaneet sovelluksia jakamalla koodin moduuleihin, joita on <i>importattu</i> niitä tarvitseviin paikkoihin. Vaikka ES6-moduulit ovatkin JavaScript-standardissa määriteltyjä, eivät vanhemmat selaimet vielä osaa käsitellä moduuleihin jaettua koodia.
 
-Selainta varten moduuleissa oleva koodi <i>bundlataan</i>, eli siitä muodostetaan yksittäinen, kaiken koodin sisältävä tiedosto. Kun veimme Reactilla toteutetun frontendin tuotantoon osan 3 luvussa [Frontendin tuotantoversio](/osa3/sovellus_internetiin#frontendin-tuotantoversio), suoritimme bundlauksen komennolla _npm run build_. Konepellin alla kyseinen npm-skripti suorittaa bundlauksen webpackia hyväksi käyttäen. Tuloksena on joukko hakemistoon <i>build</i> sijoitettavia tiedostoja:
+Selainta varten moduuleissa oleva koodi <i>bundlataan</i>, eli siitä muodostetaan yksittäinen, kaiken koodin sisältävä tiedosto. Kun veimme Reactilla toteutetun frontendin tuotantoon osan 3 luvussa [Frontendin tuotantoversio](/osa3/sovellus_internetiin#frontendin-tuotantoversio), suoritimme bundlauksen komennolla _npm run build_. Konepellin alla kyseinen npm-skripti suorittaa bundlauksen, ja tuloksena on joukko hakemistoon <i>dist</i> sijoitettavia tiedostoja:
 
 <pre>
-├── asset-manifest.json
-├── favicon.ico
+├── assets
+│   ├── index-d526a0c5.css
+│   ├── index-e92ae01e.js
+│   └── react-35ef61ed.svg
 ├── index.html
-├── logo192.png
-├── logo512.png
-├── manifest.json
-├── robots.txt
-└── static
-    ├── css
-    │   ├── main.1becb9f2.css
-    │   └── main.1becb9f2.css.map
-    └── js
-        ├── main.88d3369d.js
-        ├── main.88d3369d.js.LICENSE.txt
-        └── main.88d3369d.js.map
+└── vite.svg
 </pre>
 
-Hakemiston juuressa oleva sovelluksen "päätiedosto" <i>index.html</i> lataa <i>script</i>-tagin avulla bundlatun JavaScript-tiedoston:
+Hakemiston dist juuressa oleva sovelluksen "päätiedosto" <i>index.html</i> lataa <i>script</i>-tagin avulla bundlatun JavaScript-tiedoston:
 
 ```html
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8"/>
-    <title>React App</title>
-    <script defer="defer" src="/static/js/main.88d3369d.js"></script> 
-    <link href="/static/css/main.1becb9f2.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
+    <script type="module" crossorigin src="/assets/index-e92ae01e.js"></script>
+    <link rel="stylesheet" href="/assets/index-d526a0c5.css">
   </head>
+  <body>
     <div id="root"></div>
+    
   </body>
 </html>
 ```
 
-Kuten esimerkistä näemme, Create React App:illa tehdyssä sovelluksessa bundlataan JavaScriptin lisäksi sovelluksen CSS-määrittelyt tiedostoon <i>/static/css/main.1becb9f2.css</i>.
+Kuten esimerkistä näemme, Vitellä tehdyssä sovelluksessa bundlataan JavaScriptin lisäksi sovelluksen CSS-määrittelyt tiedostoon <i>/assets/index-d526a0c5.csss</i>.
 
 Käytännössä bundlaus tapahtuu siten, että sovelluksen JavaScriptille määritellään alkupiste, usein tiedosto <i>index.js</i>, ja bundlauksen yhteydessä webpack ottaa mukaan kaiken koodin mitä alkupiste importtaa, importattujen koodien importtaamat koodit jne.
 
@@ -349,7 +344,7 @@ const App = () =>
 
 Eli JSX-syntaksin sijaan komponentit luodaan pelkällä JavaScriptilla käyttäen Reactin funktiota [createElement](https://reactjs.org/docs/react-without-jsx.html).
 
-Sovellusta voi nyt kokeilla avaamalla tiedoston <i>build/index.html</i> selaimen <i>open file</i> -toiminnolla:
+Sovellusta voi nyt kokeilla avaamalla tiedoston <i>build/index.html</i> selaimen <i>open file</i> ‑toiminnolla:
 
 ![](../../images/7/22.png)
 
@@ -879,11 +874,4 @@ Kattavahko lista olemassaolevista polyfilleistä löytyy [täältä](https://git
 
 Selaimien yhteensopivuus käytettävien API:en suhteen kannattaakin tarkistaa esim. [https://caniuse.com](https://caniuse.com)-sivustolta tai [Mozillan sivuilta](https://developer.mozilla.org/en-US/).
 
-### Eject
-
-Create React App käyttää taustalla webpackia. Jos peruskonfiguraatio ei riitä, on projektit mahdollista [ejektoida](https://create-react-app.dev/docs/available-scripts/#npm-run-eject), jolloin kaikki konepellin alla oleva magia häviää, ja konfiguraatiot tallettuvat hakemistoon <i>config</i> ja muokattuun <i>package.json</i>-tiedostoon.
-
-Jos Create React App:illa tehdyn sovelluksen ejektoi, paluuta ei ole, vaan sen jälkeen kaikesta konfiguroinnista on huolehdittava itse. Konfiguraatiot eivät ole triviaaleimmasta päästä, ja Create React Appin ja ejektoinnin sijaan parempi vaihtoehto saattaa joskus olla tehdä koko webpack-konfiguraatio itse.
-
-Ejektoidun sovelluksen konfiguraatioiden lukeminen on suositeltavaa ja sangen opettavaista!
 </div>

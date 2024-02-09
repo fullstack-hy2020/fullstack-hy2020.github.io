@@ -24,8 +24,8 @@ lang: zh
 <!-- The code is written into files ending with <i>.js</i> that are run by issuing the command <em>node name\_of\_file.js</em>-->
 代码被写入以<i>.js</i>结尾的文件中，通过键入<em>node name_of_file.js</em>命令来运行。
 
-<!-- It is also possible to write JavaScript code into the Node.js console, which is opened by typing _node_ in the command-line, as well as into the browser's developer tool console. [The newest revisions of Chrome handle the newer features of JavaScript pretty well](http://kangax.github.io/compat-table/es2016plus/) without transpiling the code. Alternatively you can use a tool like [JS Bin](https://jsbin.com/?js,console).-->
-也可以将JavaScript代码写入Node.js控制台，该控制台可以通过在命令行中输入_node_打开，也可以写入浏览器的开发者工具控制台。[Chrome浏览器的最新版本可以很好地处理JavaScript的新功能](http://kangax.github.io/compat-table/es2016plus/)，而无需转写代码。另外，你可以使用[JS Bin](https://jsbin.com/?js,console)这样的工具。
+<!-- It is also possible to write JavaScript code into the Node.js console, which is opened by typing _node_ in the command-line, as well as into the browser's developer tool console. [The newest revisions of Chrome handle the newer features of JavaScript pretty well](https://compat-table.github.io/compat-table/es2016plus/) without transpiling the code. Alternatively you can use a tool like [JS Bin](https://jsbin.com/?js,console).-->
+也可以将JavaScript代码写入Node.js控制台，该控制台可以通过在命令行中输入_node_打开，也可以写入浏览器的开发者工具控制台。[Chrome浏览器的最新版本可以很好地处理JavaScript的新功能](https://compat-table.github.io/compat-table/es2016plus/)，而无需转写代码。另外，你可以使用[JS Bin](https://jsbin.com/?js,console)这样的工具。
 
 <!-- JavaScript is sort of reminiscent, both in name and syntax, to Java. But when it comes to the core mechanism of the language they could not be more different. Coming from a Java background, the behavior of JavaScript can seem a bit alien, especially if one does not make the effort to look up its features.-->
  JavaScript在名字和语法上都有点让人想起了Java。但是当涉及到语言的核心机制时，它们是非常不同的。来自Java背景的人，对JavaScript的行为可能会感到有点陌生，尤其是当你没有努力去研究它的特性时。

@@ -63,19 +63,21 @@ Agreguemos un script npm al <i>backend </i> que lo inicia en modo de prueba, o p
 {
   // ...
   "scripts": {
-    "start": "cross-env NODE_ENV=production node index.js",
-    "dev": "cross-env NODE_ENV=development nodemon index.js",
+    "start": "NODE_ENV=production node index.js",
+    "dev": "NODE_ENV=development nodemon index.js",
     "build:ui": "rm -rf build && cd ../../../2/luento/notes && npm run build && cp -r build ../../../3/luento/notes-backend",
     "deploy": "git push heroku master",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",
     "logs:prod": "heroku logs --tail",
     "lint": "eslint .",
-    "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
-    "start:test": "cross-env NODE_ENV=test node index.js" // highlight-line
+    "test": "NODE_ENV=test jest --verbose --runInBand",
+    "start:test": "NODE_ENV=test node index.js" // highlight-line
   },
   // ...
 }
 ```
+
+**NB** Para conseguir que Cypress funcione con WSL2 se debe realizar una configuración preliminar. Estos dos [enlaces](https://docs.cypress.io/guides/getting-started/installing-cypress#Windows-Subsystem-for-Linux) son buenos lugares para [iniciar](https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress).
 
 Cuando tanto el backend como el frontend están ejecutándose, podemos iniciar Cypress con el comando
 
@@ -83,7 +85,25 @@ Cuando tanto el backend como el frontend están ejecutándose, podemos iniciar C
 npm run cypress:open
 ```
 
-Cuando ejecutamos Cypress por primera vez, crea un directorio <i>cypress</i>. Contiene un subdirectorio <i> integration </i>, donde colocaremos nuestras pruebas. Cypress crea un montón de pruebas de ejemplo para nosotros en el directorio <i>integration/examples</i>. Podemos eliminar el directorio <i>examples</i> y hacer nuestra propia prueba en el archivo <i>note\\_app.spec.js</i>:
+Cypress nos pregunta qué tipo de test realizaremos. Debemos elegir "E2E Testing":
+
+![cypress arrow towards e2e testing option](../../images/5/51new.png)
+
+A continuación debemos elegir un navegador (por ejemplo Chrome) y luego debemos hacer click en "Create new spec":
+
+![create new spec with arrow pointing towards it](../../images/5/52new.png)
+
+Creemos el archivo de test <i>cypress/e2e/note\_app.cy.js</i>:
+
+![cypress with path cypress/e2e/note_app.cy.js](../../images/5/53new.png)
+
+Podemos editar el test en Cypress, pero usemos en cambio VS Code:
+
+![vscode showing edits of test and cypress showing spec added](../../images/5/54new.png)
+
+Ahora podemos cerrar la vista de edición de Cypress.
+
+Cambiemos el contenido del test como se muestra a continuación:
 
 ```js
 describe('Note app', function() {
@@ -298,8 +318,6 @@ La última fila asegura que el inicio de sesión fue exitoso.
 
 Tenga en cuenta que el CSS [id-selector](https://developer.mozilla.org/en-US/docs/Web/CSS/ID_selectors) es #, así que si queremos buscar un elemento con el id <i>username</i> el selector de CSS es <i>#username</i>.
 
-### Algunas cosas a tener en cuenta
-
 La prueba primero hace clic en el botón que abre el formulario de inicio de sesión como
 
 ```js
@@ -319,40 +337,6 @@ Si buscamos un botón por su texto, [cy.contains](https://docs.cypress.io/api/co
 Esto sucederá incluso si el botón no está visible.
 Para evitar conflictos de nombres, le dimos al botón de enviar la identificación <i>login-button</i> que podemos usar para acceder a él.
 
-Ahora notamos que la variable _cy_ que usan nuestras pruebas nos da un desagradable error de Eslint
-
-![](../../images/5/30ea.png)
-
-Podemos deshacernos de él instalando [eslint-plugin-cypress](https://github.com/cypress-io/eslint-plugin-cypress) como una dependencia de desarrollo
-
-```js
-npm install eslint-plugin-cypress --save-dev
-```
-
-y cambiando la configuración en <i>.eslintrc.js</i> así:
-
-```js
-module.exports = {
-    "env": {
-        "browser": true,
-        "es6": true,
-        "jest/globals": true,
-        "cypress/globals": true // highlight-line
-    },
-    "extends": [ 
-      // ...
-    ],
-    "parserOptions": {
-      // ...
-    },
-    "plugins": [
-        "react", "jest", "cypress" // highlight-line
-    ],
-    "rules": {
-      // ...
-    }
-}
-```
 
 ### Probando un nuevo formulario de nota
 
@@ -441,7 +425,7 @@ Si las pruebas necesitan poder modificar la base de datos del servidor, la situa
 Al igual que con las pruebas unitarias y de integración, con las pruebas E2E es mejor vaciar la base de datos y posiblemente formatearla antes de ejecutar las pruebas. El desafío con las pruebas E2E es que no tienen acceso a la base de datos.
 
 La solución es crear endpoints de API en el backend para la prueba.
-Creemos un nuevo <i>enrutador</i> para las pruebas
+Creemos un nuevo enrutador para las pruebas dentro de la carpeta <i>controllers</i>, en el archivo <i>testing.js</i>
 
 ```js
 const router = require('express').Router()
@@ -933,13 +917,13 @@ Reemplazemos todas las direcciones del backend en los tests de la siguiente mane
 describe('Note ', function() {
   beforeEach(function() {
     cy.visit('')
-    cy.request('POST', `${Cypress.env('EXTERNAL_API')}/testing/reset`) // highlight-line
+    cy.request('POST', `${Cypress.env('BACKEND')}/testing/reset`) // highlight-line
     const user = {
       name: 'Matti Luukkainen',
       username: 'mluukkai',
       password: 'secret'
     }
-    cy.request('POST', `${Cypress.env('EXTERNAL_API')}/users`, user) // highlight-line
+    cy.request('POST', `${Cypress.env('BACKEND')}/users`, user) // highlight-line
   })
   // ...
 })
@@ -1116,7 +1100,7 @@ El frontend y los tests/pruebas se pueden encontrar en [github](https://github.c
 
 En los últimos ejercicios de esta parte haremos algunas pruebas E2E para nuestra aplicación de blog.
 El material de esta parte debería ser suficiente para completar los ejercicios.
-Absolutamente también debería consultar la [documentación](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell) de Cypress (https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell). Probablemente sea la mejor documentación que he visto para un proyecto de código abierto.
+También debería consultar la [documentación](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell) de Cypress. Probablemente sea la mejor documentación que he visto para un proyecto de código abierto.
 
 Recomiendo especialmente leer [Introducción a Cypress](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Cypress-Can-Be-Simple-Sometimes), que afirma que
 
@@ -1142,7 +1126,7 @@ describe('Blog app', function() {
 })
 ```
 
-El blog de formateo <i>beforeEach</i> debe vaciar la base de datos utilizando, por ejemplo, el método que usamos en el [material](/es​​/part5/end_to_end_testing#controlando-el-estado-de-la-base-de-datos).
+El blog de formateo <i>beforeEach</i> debe vaciar la base de datos utilizando, por ejemplo, el método que usamos en el [material](/es/part5/pruebas_de_extremo_a_extremo#controlar-el-estado-de-la-base-de-datos).
 
 #### 5.18: prueba de extremo a extremo de la lista de blogs, paso 2
 
@@ -1208,15 +1192,24 @@ Hacer una prueba que compruebe que al usuario le puede gustar ("like") un blog.
 #### 5.21: prueba de extremo a extremo de la lista de blogs, paso 5
 
 Realice una prueba para asegurarse de que el usuario que creó un blog pueda eliminarlo.
-
-<i>Ejercicio adicional opcional:</i> también verifique que otros usuarios no puedan eliminar el blog.
-
+	
 #### 5.22: prueba de extremo a extremo de la lista de blogs , paso 6
+
+Realice una prueba para asegurarse de que otros usuarios no puedan eliminar el blog.
+
+#### 5.23: prueba de extremo a extremo de la lista de blogs , paso 7
 
 Realice una prueba que verifique que los blogs estén ordenados de acuerdo con los likes con el blog con más likes en primer lugar.
 
-Este ejercicio puede ser un poco más complicado. Una solución es encontrar todos los blogs y luego compararlos en la función de devolución de llamada de un comando [then](https://docs.cypress.io/api/commands/then.html#DOM-element).
+<i>Este ejercicio puede ser un poco más complicado que los anteriores</i>. Una posible solución es adicionar cierta clase para el elemento que cubre el contenido del blog y luego usar el método [eq](https://docs.cypress.io/api/commands/eq#Syntax) para obtener el elemento en un índice específico:
+  
+```js
+cy.get('.blog').eq(0).should('contain', 'The title with the most likes')
+cy.get('.blog').eq(1).should('contain', 'The title with the second most likes')
+```
 
-Este fue el último ejercicio de esta parte, y es hora de enviar su código a github y marcar los ejercicios que completó en el [sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) .
+Tenga en cuenta que podría terminar teniendo problemas si hace clic en el botón "Like" muchas veces seguidas. Puede ser que Cypress haga clic tan rápido que no tenga tiempo de actualizar el estado de la aplicación entre los clics. Una solución para esto es esperar a que se actualice la cantidad de Likes entre todos los clics.
+
+Este fue el último ejercicio de esta parte, y es hora de enviar su código a github y marcar los ejercicios que completó en el [sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>

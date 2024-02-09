@@ -90,7 +90,7 @@ Migraatiotiedostossa on [määriteltynä](https://sequelize.org/master/manual/mi
 
 Migraatiomme sisältää kolme operaatiota, ensimmäinen luo taulun <i>notes</i>, toinen taulun <i>users</i> ja kolmas lisää tauluun <i>notes</i> viiteavaimen muistiinpanon luojaan. Skeeman muutokset määritellään [queryInterface](https://sequelize.org/master/manual/query-interface.html)-olion metodeja kutsumalla.
 
-Migraatioiden määrittelyssä on oleellista muistaa, että toisin kuin modeleissa, sarakkeiden ja taulujen nimet kirjoitetaan snake case -muodossa:
+Migraatioiden määrittelyssä on oleellista muistaa, että toisin kuin modeleissa, sarakkeiden ja taulujen nimet kirjoitetaan snake case ‑muodossa:
 
 ```js
 await queryInterface.addColumn('notes', 'user_id', { // highlight-line
@@ -522,7 +522,7 @@ Laajenna sovellusta (migraation avulla) siten, että blogeille tulee kirjoitusvu
 
 <div class="content">
 
-### Monen suhde moneen -yhteydet
+### Monen suhde moneen ‑yhteydet
 
 Jatketaan sovelluksen laajentamista siten, että jokainen käyttäjä voidaan lisätä yhteen tai useampaan <i>tiimiin</i>.
 
@@ -662,7 +662,7 @@ module.exports = {
 }
 ```
 
-Huomaa eroavaisuus liitostaulun migraation ja modelin välillä viiteavainkenttien määrittelyssä. Migraatiossa kentät määritellään snake case -muodossa:
+Huomaa eroavaisuus liitostaulun migraation ja modelin välillä viiteavainkenttien määrittelyssä. Migraatiossa kentät määritellään snake case ‑muodossa:
 
 ```js
 await queryInterface.createTable('memberships', {
@@ -858,7 +858,7 @@ router.get('/:id', async (req, res) => {
 ```
 ### Monen suhde moneen uudelleen
 
-Tehdään sovellukseen vielä toinen monesta moneen -yhteys. Jokaiseen muistiinpanoon liittyy sen luonut käyttäjä viiteavaimen kautta. Päätetään, että sovellus tukee myös sitä, että muistiinpanoon voidaan liittää muitakin käyttäjiä, ja että käyttäjään voi liittyä mielivaltainen määrä jonkun muun käyttäjän tekemiä muistiinpanoja. Ajatellaan että nämä muistiinpanot ovat sellaisia, jotka käyttäjä on <i>merkinnyt</i> itselleen.
+Tehdään sovellukseen vielä toinen monesta moneen ‑yhteys. Jokaiseen muistiinpanoon liittyy sen luonut käyttäjä viiteavaimen kautta. Päätetään, että sovellus tukee myös sitä, että muistiinpanoon voidaan liittää muitakin käyttäjiä, ja että käyttäjään voi liittyä mielivaltainen määrä jonkun muun käyttäjän tekemiä muistiinpanoja. Ajatellaan että nämä muistiinpanot ovat sellaisia, jotka käyttäjä on <i>merkinnyt</i> itselleen.
 
 Tehdään tilannetta varten liitostaulu <i>user\_notes</i>. Migraatio, joka tallennetaan tiedostoon <i>20211209\_03\_add\_user\_notes.js</i> on suoraviivainen:
 

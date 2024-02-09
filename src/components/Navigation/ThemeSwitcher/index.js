@@ -18,13 +18,10 @@ const ThemeSwitcher = () => {
 
   const [theme, setTheme] = useState(getInitialTheme);
 
-  useEffect(
-    () => {
-      document.documentElement.dataset.theme = theme;
-      localStorage.setItem('selected_theme', theme);
-    },
-    [theme]
-  );
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem('selected_theme', theme);
+  }, [theme]);
 
   const handleThemeSwitchClick = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');

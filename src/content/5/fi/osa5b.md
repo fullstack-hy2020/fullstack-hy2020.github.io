@@ -214,7 +214,7 @@ const Togglable = (props) => {
 export default Togglable
 ```
 
-Mielenkiintoista ja meille uutta on [props.children](https://reactjs.org/docs/glossary.html#propschildren), jonka avulla koodi viittaa komponentin lapsiin eli avaavan ja sulkevan tagin sisällä määriteltyihin React-elementteihin.
+Mielenkiintoista ja meille uutta on [props.children](https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children), jonka avulla koodi viittaa komponentin lapsiin eli avaavan ja sulkevan tagin sisällä määriteltyihin React-elementteihin.
 
 Tällä kertaa lapset ainoastaan renderöidään komponentin oman renderöivän koodin seassa:
 
@@ -273,13 +273,13 @@ ja määritellään lomakkeen näyttävä koodi komponentin <i>Togglable</i> sis
 </Togglable>
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-4), branchissa <i>part5-4</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-4), branchissa <i>part5-4</i>.
 
 ### Lomakkeiden tila
 
 Koko sovelluksen tila on nyt sijoitettu komponenttiin _App_. 
 
-Reactin dokumentaatio antaa seuraavan [ohjeen](https://reactjs.org/docs/lifting-state-up.html) tilan sijoittamisesta:
+Reactin dokumentaatio antaa seuraavan [ohjeen](https://react.dev/learn/sharing-state-between-components) tilan sijoittamisesta:
 
 > <i>Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor.</i>
 
@@ -358,13 +358,13 @@ const App = () => {
 
 Vastaava muutos voitaisiin tehdä myös kirjautumislomakkeelle, mutta jätämme sen vapaaehtoiseksi harjoitustehtäväksi.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5), branchissa <i>part5-5</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-5), branchissa <i>part5-5</i>.
 
 ### ref eli viite komponenttiin
 
 Ratkaisu on melko hyvä, mutta haluamme kuitenkin parantaa sitä. Kun uusi muistiinpano luodaan, olisi loogista jos luomislomake menisi piiloon. Nyt lomake pysyy näkyvillä. Lomakkeen piilottamiseen sisältyy kuitenkin pieni ongelma, sillä näkyvyyttä kontrolloidaan <i>Togglable</i>-komponentin tilassa olevalla muuttujalla <i>visible</i>. Miten pääsemme tilaan käsiksi komponentin ulkopuolelta?
 
-On useita erilaisia tapoja toteuttaa pääsy komponentin funktioihin sen ulkopuolelta. Käytetään nyt Reactin [ref](https://reactjs.org/docs/refs-and-the-dom.html)-mekanismia, joka tarjoaa eräänlaisen viitteen komponenttiin.
+On useita erilaisia tapoja toteuttaa pääsy komponentin funktioihin sen ulkopuolelta. Käytetään nyt Reactin [ref](https://react.dev/learn/referencing-values-with-refs)-mekanismia, joka tarjoaa eräänlaisen viitteen komponenttiin.
 
 Tehdään komponenttiin <i>App</i> seuraavat muutokset:
 
@@ -385,7 +385,7 @@ const App = () => {
 }
 ```
 
-[useRef](https://reactjs.org/docs/hooks-reference.html#useref) hookilla luodaan ref <i>noteFormRef</i>, joka kiinnitetään muistiinpanojen luomislomakkeen sisältävälle <i>Togglable</i>-komponentille. Nyt siis muuttuja <i>noteFormRef</i> toimii viitteenä komponenttiin.
+[useRef](https://react.dev/reference/react/useRef) hookilla luodaan ref <i>noteFormRef</i>, joka kiinnitetään muistiinpanojen luomislomakkeen sisältävälle <i>Togglable</i>-komponentille. Nyt siis muuttuja <i>noteFormRef</i> toimii viitteenä komponenttiin.
 
 Komponenttia <i>Togglable</i> laajennetaan seuraavasti
 
@@ -426,9 +426,9 @@ const Togglable = forwardRef((props, ref) => { // highlight-line
 export default Togglable
 ```
 
-Komponentin luova funktio on kääritty funktiokutsun [forwardRef](https://reactjs.org/docs/react-api.html#reactforwardref) sisälle, jolloin komponentti pääsee käsiksi sille määriteltyyn refiin.
+Komponentin luova funktio on kääritty funktiokutsun [forwardRef](https://react.dev/reference/react/forwardRef) sisälle, jolloin komponentti pääsee käsiksi sille määriteltyyn refiin.
 
-Komponentti tarjoaa [useImperativeHandle ](https://reactjs.org/docs/hooks-reference.html#useimperativehandle)-hookin avulla sisäisesti määritellyn funktionsa <i>toggleVisibility</i> ulkopuolelta kutsuttavaksi.
+Komponentti tarjoaa [useImperativeHandle](https://react.dev/reference/react/useImperativeHandle)-hookin avulla sisäisesti määritellyn funktionsa <i>toggleVisibility</i> ulkopuolelta kutsuttavaksi.
 
 Voimme nyt piilottaa lomakkeen kutsumalla <i>noteFormRef.current.toggleVisibility()</i> samalla kun uuden muistiinpanon luominen tapahtuu:
 
@@ -447,13 +447,13 @@ const App = () => {
 }
 ```
 
-Käyttämämme [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) on siis React hook, jonka avulla komponentille voidaan määrittää funktioita, joita on mahdollista kutsua sen ulkopuolelta.
+Käyttämämme [useImperativeHandle](https://react.dev/reference/react/useImperativeHandle) on siis React hook, jonka avulla komponentille voidaan määrittää funktioita, joita on mahdollista kutsua sen ulkopuolelta.
 
 Käyttämämme kikka komponentin tilan muuttamiseksi toimii, mutta se vaikuttaa hieman ikävältä. Saman olisi saanut aavistuksen siistimmin toteutettua "vanhan Reactin" class-komponenteilla, joihin tutustumme osassa 7. Tämä on toistaiseksi ainoa tapaus, jossa Reactin hook-syntaksiin nojaava ratkaisu on aavistuksen likaisemman oloinen kuin class-komponenttien tarjoama ratkaisu.
 
-Refeille on myös [muita käyttötarkoituksia](https://reactjs.org/docs/refs-and-the-dom.html) kuin React-komponentteihin käsiksi pääseminen.
+Refeille on myös [muita käyttötarkoituksia](https://react.dev/learn/manipulating-the-dom-with-refs) kuin React-komponentteihin käsiksi pääseminen.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-6), branchissa <i>part5-6</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-6), branchissa <i>part5-6</i>.
 
 ### Huomio komponenteista
 
@@ -489,11 +489,11 @@ syntyy <i>kolme erillistä komponenttiolioa</i>, joilla on kaikilla oma tilansa:
 
 <i>ref</i>-attribuutin avulla on talletettu viite jokaiseen komponentin muuttujaan <i>togglable1</i>, <i>togglable2</i> ja <i>togglable3</i>.
 
-### Full stack -sovelluskehittäjän päivitetty vala
+### Full stack ‑sovelluskehittäjän päivitetty vala
 
 Liikkuvien osien määrä nousee. Samalla kasvaa myös todennäköisyys sille, että päädymme tilanteeseen, missä etsimme vikaa täysin väärästä paikasta. Systemaattisuutta on siis lisättävä vielä pykälän verran. 
 
-Full stack -ohjelmointi on <i>todella</i> hankalaa, ja sen takia lupaan hyödyntää kaikkia ohjelmointia helpottavia keinoja:
+Full stack ‑ohjelmointi on <i>todella</i> hankalaa, ja sen takia lupaan hyödyntää kaikkia ohjelmointia helpottavia keinoja:
 
 - pidän selaimen konsolin koko ajan auki
 - tarkkailen säännöllisesti selaimen network-välilehdeltä, että frontendin ja backendin välinen kommunikaatio tapahtuu oletusteni mukaan
@@ -706,9 +706,7 @@ Jos propsin tyyppi on väärä, eli jos esimerkiksi yritetään määritellä pr
 
 Konfiguroimme osassa 3 koodin tyylistä huolehtivan [ESLintin](/osa3/validointi_ja_es_lint) backendiin. Otetaan nyt ESLint käyttöön myös frontendissa.
 
-Create-react-app on asentanut projektille ESLintin valmiiksi, joten ei tarvita muuta kuin sopiva konfiguraatio tiedostoon <i>.eslintrc.js</i>.
-
-**HUOM:** Älä suorita komentoa _eslint --init_. Se asentaa ESLintistä uuden version, joka on epäsopiva create-react-app:in konfiguraatioiden kanssa!
+Vite on asentanut projektille ESLintin valmiiksi, joten ei tarvita muuta kuin muokata tiedostossa <i>.eslintrc.cjs</i> oleva konfiguraatio halutun kaltaiseksi.
 
 Aloitamme seuraavaksi testaamisen, ja jotta pääsemme eroon testeissä olevista turhista huomautuksista asennetaan plugin [eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest):
 
@@ -716,63 +714,57 @@ Aloitamme seuraavaksi testaamisen, ja jotta pääsemme eroon testeissä olevista
 npm install --save-dev eslint-plugin-jest
 ```
 
-Luodaan tiedosto <i>.eslintrc.js</i> ja kopioidaan sinne seuraava sisältö:
+Muutetaan tiedoston <i>.eslintrc.cjs</i> sisältöä seuraavasti:
 
 ```js
 module.exports = {
-  "env": {
-      "browser": true,
-      "es6": true,
-      "jest/globals": true 
+  root: true,
+  env: {
+    browser: true,
+    es2020: true,
+    "jest/globals": true
   },
-  "extends": [ 
-      "eslint:recommended",
-      "plugin:react/recommended"
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
+    'plugin:react-hooks/recommended',
   ],
-  "parserOptions": {
-      "ecmaFeatures": {
-          "jsx": true
-      },
-      "ecmaVersion": 2018,
-      "sourceType": "module"
+  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
+  settings: { react: { version: '18.2' } },
+  plugins: ['react-refresh', 'jest'],
+  rules: {
+    "indent": [
+        "error",
+        2  
+    ],
+    "linebreak-style": [
+        "error",
+        "unix"
+    ],
+    "quotes": [
+        "error",
+        "single"
+    ],
+    "semi": [
+        "error",
+        "never"
+    ],
+    "eqeqeq": "error",
+    "no-trailing-spaces": "error",
+    "object-curly-spacing": [
+        "error", "always"
+    ],
+    "arrow-spacing": [
+        "error", { "before": true, "after": true }
+    ],
+    "no-console": 0,
+    "react/prop-types": 0,
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": 0,
+    "no-unused-vars": 0
   },
-  "plugins": [
-      "react", "jest"
-  ],
-  "rules": {
-      "indent": [
-          "error",
-          2  
-      ],
-      "linebreak-style": [
-          "error",
-          "unix"
-      ],
-      "quotes": [
-          "error",
-          "single"
-      ],
-      "semi": [
-          "error",
-          "never"
-      ],
-      "eqeqeq": "error",
-      "no-trailing-spaces": "error",
-      "object-curly-spacing": [
-          "error", "always"
-      ],
-      "arrow-spacing": [
-          "error", { "before": true, "after": true }
-      ],
-      "no-console": 0,
-      "react/prop-types": 0,
-      "react/react-in-jsx-scope": "off"
-  },
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
-  }
 }
 ```
 
@@ -781,27 +773,18 @@ Tehdään projektin juureen tiedosto [.eslintignore](https://eslint.org/docs/use
 ```bash
 node_modules
 build
-.eslintrc.js
+.eslintrc.cjs
 ```
 
 Näin ainoastaan sovelluksessa oleva itse kirjoitettu koodi huomioidaan linttauksessa. 
 
-Tehdään lintausta varten npm-skripti:
+Tuttuun tapaan voit suorittaa linttauksen joko komentoriviltä komennolla 
 
-```js
-{
-  // ...
-  {
-    "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "eslint": "eslint ." // highlight-line
-  },
-  // ...
-}
+```bash 
+npm run lint
 ```
+
+tai editorin Eslint-pluginia hyväksikäyttäen.
 
 Komponentti _Togglable_ aiheuttaa ikävän näköisen varoituksen <i>Component definition is missing display name</i>: 
 
@@ -826,9 +809,7 @@ Togglable.displayName = 'Togglable' // highlight-line
 export default Togglable
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-7), branchissa <i>part5-7</i>.
-
-Kannattaa huomata, että create-react-appilla on myös [oletusarvoinen ESLint-konfiguraatio](https://www.npmjs.com/package/eslint-config-react-app), jonka korvasimme nyt kokonaan omalla konfiguraatiolla. [Dokumentaatio](https://create-react-app.dev/docs/setting-up-your-editor/#extending-or-replacing-the-default-eslint-config) toteaa, että oletusarvoisen konfiguraation korvaaminen on ok, mutta suosittelee mielummin <i>laajentamaan</i> oletusarvoista konfiguraatiota: <i>We highly recommend extending the base config, as removing it could introduce hard-to-find issues</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-7), branchissa <i>part5-7</i>.
 
 </div>
 
@@ -840,8 +821,6 @@ Kannattaa huomata, että create-react-appilla on myös [oletusarvoinen ESLint-ko
 
 Määrittele joillekin sovelluksesi komponenteille PropTypet, ja ota projektiin käyttöön ESLint. Määrittele haluamasi kaltainen konfiguraatio. Korjaa kaikki lint-virheet.
 
-Create-react-app on asentanut projektille ESLintin valmiiksi, joten ei tarvita muuta kun sopiva konfiguraatio tiedostoon <i>.eslintrc.js</i>.
-
-**HUOM:** Älä suorita komentoa _eslint --init_. Se asentaa ESLintistä uuden version, joka on epäsopiva create-react-app:in konfiguraatioiden kanssa!
+Vite on asentanut projektille ESLintin valmiiksi, joten ei tarvita muuta kun sopiva konfiguraatio tiedostoon <i>.eslintrc.cjs</i>.
 
 </div>

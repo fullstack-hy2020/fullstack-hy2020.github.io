@@ -68,7 +68,7 @@ Si nous examinons attentivement notre code actuel, nous remarquerons que la fonc
 
 ### Déstructuration
 
-Avant d'aller plus loin, nous allons jeter un œil à une petite fonctionnalité mais utile du langage JavaScript qui a été ajoutée dans la spécification ES6, qui nous permet de [déstructurer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) des valeurs des objets et des tableaux lors de l'affectation.
+Avant d'aller plus loin, nous allons jeter un oeil à une petite fonctionnalité mais utile du langage JavaScript qui a été ajoutée dans la spécification ES6, qui nous permet de [déstructurer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) des valeurs des objets et des tableaux lors de l'affectation.
 
 Dans notre code précédent, nous devions référencer les données transmises à notre composant en tant que _props.name_ et _props.age_. De ces deux expressions, nous avons dû répéter _props.age_ deux fois dans notre code.
 
@@ -191,7 +191,7 @@ const App = (props) => {
 export default App
 ```
 
-Et le fichier <in>index.js</it> devient :
+Et le fichier <in>main.js</it> devient :
 
 ```js
 import React from 'react'
@@ -251,7 +251,7 @@ Jusqu'à présent, tous nos composants étaient simples dans le sens où ils ne 
 
 Ensuite, ajoutons un état au composant <i>App</i> de notre application à l'aide du [state hook](https://reactjs.org/docs/hooks-state.html) de React.
 
-Nous allons modifier l'application comme suit. <i>index.js</i> revient à
+Nous allons modifier l'application comme suit. <i>main.js</i> revient à
 
 ```js
 import React from 'react'
@@ -364,7 +364,10 @@ const App = () => {
 
 Il est facile de suivre les appels effectués à la fonction de rendu du composant <i>App</i> :
 
-![](../../images/1/4e.png)
+![Capture d'écran de la fonction de rendu avec les outils de développement.x](../../images/1/4e.png)
+
+Votre console de navigateur était-elle ouverte ? Si ce n'était pas le cas, promettez que ce sera la dernière fois qu'on vous le rappellera.
+
 
 ### Gestion des événements
 
@@ -624,9 +627,11 @@ const App = () => {
 }
 ```
 
-Puisque nous avons maintenant un composant <i>Button</i> facilement réutilisable, nous avons également implémenté de nouvelles fonctionnalités dans notre application en ajoutant un bouton qui peut être utilisé pour décrémenter le compteur.
+Étant donné que nous avons maintenant un composant <i>Button</i> facilement réutilisable, nous avons également implémenté une nouvelle fonctionnalité dans notre application en ajoutant un bouton qui peut être utilisé pour décrémenter le compteur.
 
-Le gestionnaire d'événements est transmis au composant <i>Button</i> via la prop _onClick_. Le nom de la prop lui-même n'est pas assez significatif, mais notre choix de nom n'était pas complètement aléatoire. Le [tutoriel](https://reactjs.org/tutorial/tutorial.html) officiel de React suggère cette convention.
+Le gestionnaire d'événements est passé au composant <i>Button</i> via la prop _handleClick_. Le nom de la prop en lui-même n'est pas très significatif, mais notre choix de nom n'était pas complètement aléatoire.
+
+Le [tutoriel](https://react.dev/learn/tutorial-tic-tac-toe) officiel de React suggère : "En React, il est conventionnel d'utiliser des noms de type onSomething pour les props qui représentent des événements et handleSomething pour les définitions de fonctions qui gèrent ces événements."
 
 ### Les changements d'état entraînent un nouveau rendu
 
@@ -656,7 +661,7 @@ const Display = (props) => {
 ```
 
 Le composant utilise uniquement le champ _counter_ de ses <i>props</i>.
-Cela signifie que nous pouvons simplifier le composant en utilisant la [déstructuration](/fr/part1/etat_des_composants_gestionnaires_devenements#destructuration), comme ceci :
+Cela signifie que nous pouvons simplifier le composant en utilisant [la destructuration](/fr/part1/etat_des_composants_gestionnaires_devenements#destructuration), comme ceci :
 
 ```js
 const Display = ({ counter }) => {
@@ -666,8 +671,7 @@ const Display = ({ counter }) => {
 }
 ```
 
-La fonction définissant le composant ne contient que l'instruction return, donc
-nous pouvons définir la fonction en utilisant la forme plus compacte des fonctions fléchées :
+La fonction qui définit le composant ne contient que l'instruction de retour, nous pouvons donc définir la fonction en utilisant la forme plus compacte des fonctions fléchées :
 
 ```js
 const Display = ({ counter }) => <div>{counter}</div>
@@ -685,7 +689,12 @@ const Button = (props) => {
 }
 ```
 
-Nous pouvons utiliser la déstructuration pour obtenir uniquement les champs requis à partir de <i>props</i>, et utiliser la forme plus compacte des fonctions fléchées :
+Nous pouvons utiliser la destructuration pour obtenir uniquement les champs requis des <i>props</i> et utiliser la forme plus compacte des fonctions fléchées :
+
+**NB** : Lors de la création de vos propres composants, vous pouvez nommer les props des gestionnaires d'événements comme bon vous semble, pour cela, vous pouvez vous référer à la documentation de React sur [Naming event handler props](https://react.dev/learn/responding-to-events#naming-event-handler-props). Cela se présente comme suit :
+
+> Par convention, les props des gestionnaires d'événements doivent commencer par `on`, suivi d'une lettre majuscule.
+Par exemple, la prop `onClick` du composant Button aurait pu s'appeler `onSmash` :
 
 ```js
 const Button = ({ onClick, text }) => (
@@ -695,12 +704,21 @@ const Button = ({ onClick, text }) => (
 )
 ```
 
-Nous pouvons simplifier une fois de plus le composant Button en déclarant l'instruction return sur une seule ligne :
+ou encore comme suit :
 
 ```js
-const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
+const Button = ({ onSmash, text }) => (
+  <button onClick={onSmash}>
+    {text}
+  </button>
 ```
 
-Cependant, veillez à ne pas trop simplifier vos composants, car cela pourrait rendre la lecture du code plus fastidieuse.
+Nous pouvons simplifier une fois de plus le composant Button en déclarant l'instruction de retour en une seule ligne :
+
+```js
+const Button = ({ onSmash, text }) => <button onClick={onSmash}>{text}</button>
+```
+
+**NB** : Cependant, veillez à ne pas trop simplifier vos composants, car cela rend l'ajout de complexité plus fastidieux par la suite.
 
 </div>

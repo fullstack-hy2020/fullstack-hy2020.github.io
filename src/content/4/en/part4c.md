@@ -214,7 +214,7 @@ const usersRouter = require('./controllers/users')
 app.use('/api/users', usersRouter)
 ```
 
-The contents of the file that defines the router are as follows:
+The contents of the file, <i>controllers/users.js</i>, that defines the router is as follows:
 
 ```js
 const bcrypt = require('bcrypt')
@@ -350,7 +350,7 @@ Mongoose does not have a built-in validator for checking the uniqueness of a fie
 npm install mongoose-unique-validator
 ```
 
-and extend the code by following the library documentation:
+and extend the code by following the library documentation in <i>models/user.js</i>:
 
 ```js
 const mongoose = require('mongoose')
@@ -381,15 +381,13 @@ userSchema.plugin(uniqueValidator) // highlight-line
 
 Note: when installing the _mongoose-unique-validator_ library, you may encounter the following error message:
 
-![](../../images/4/uniq.png)
+![unresolved dependency error for mongoose unique validator](../../images/4/uniq.png)
 
-The reason for this is that the library is not yet compatible with Mongoose version 7 at the time of writing (March 13, 2023). If you encounter an error, you can downgrade to an older version of Mongoose by running the command
+The reason for this is that at the time of writing (10.11.2023) the library is not yet compatible with Mongoose version 8. If you encounter this error, you can revert to an older version of Mongoose by running the command
 
 ```
-npm install mongoose@6
+npm install mongoose@7.6.5
 ```
-
-After this, you can install the library _mongoose-unique-validator_ without problems.
 
 We could also implement other validations into the user creation. We could check that the username is long enough, that the username only consists of permitted characters, or that the password is strong enough. Implementing these functionalities is left as an optional exercise.
 
@@ -410,7 +408,6 @@ For making new users in a production or development environment, you may send a 
     "name": "Superuser",
     "password": "salainen"
 }
-
 ```
 
 The list looks like this:
@@ -423,7 +420,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 The code for creating a new note has to be updated so that the note is assigned to the user who created it.
 
-Let's expand our current implementation so that the information about the user who created a note is sent in the <i>userId</i> field of the request body:
+Let's expand our current implementation in <i>controllers/notes.js</i> so that the information about the user who created a note is sent in the <i>userId</i> field of the request body:
 
 ```js
 const User = require('../models/user') //highlight-line
@@ -445,11 +442,30 @@ notesRouter.post('/', async (request, response) => {
   user.notes = user.notes.concat(savedNote._id) //highlight-line
   await user.save()  //highlight-line
   
-  response.json(savedNote)
+  response.status(201).json(savedNote)
 })
 ```
 
-It's worth noting that the <i>user</i> object also changes. The <i>id</i> of the note is stored in the <i>notes</i> field:
+The note scheme will also need to change as follows in our models/note.js file:
+
+```js
+const noteSchema = new mongoose.Schema({
+  content: {
+    type: String,
+    required: true,
+    minlength: 5
+  },
+  important: Boolean,
+  // highlight-start
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
+  //highlight-end
+})
+```
+
+It's worth noting that the <i>user</i> object also changes. The <i>id</i> of the note is stored in the <i>notes</i> field of the <i>user</i> object:
 
 ```js
 const user = await User.findById(body.userId)
@@ -472,7 +488,7 @@ We can see that the user has two notes.
 
 Likewise, the ids of the users who created the notes can be seen when we visit the route for fetching all notes:
 
-![api/notes shows ids of numbers in JSON](../../images/4/12e.png)
+![api/notes shows ids of users in JSON](../../images/4/12e.png)
 
 ### Populate
 
@@ -480,7 +496,7 @@ We would like our API to work in such a way, that when an HTTP GET request is ma
 
 As previously mentioned, document databases do not properly support join queries between collections, but the Mongoose library can do some of these joins for us. Mongoose accomplishes the join by doing multiple queries, which is different from join queries in relational databases which are <i>transactional</i>, meaning that the state of the database does not change during the time that the query is made. With join queries in Mongoose, nothing can guarantee that the state between the collections being joined is consistent, meaning that if we make a query that joins the user and notes collections, the state of the collections may change during the query.
 
-The Mongoose join is done with the [populate](http://mongoosejs.com/docs/populate.html) method. Let's update the route that returns all users first:
+The Mongoose join is done with the [populate](http://mongoosejs.com/docs/populate.html) method. Let's update the route that returns all users first in <i>controllers/users.js</i> file:
 
 ```js
 usersRouter.get('/', async (request, response) => {
@@ -497,9 +513,9 @@ The result is almost exactly what we wanted:
 
 ![JSON data showing populated notes and users data with repetition](../../images/4/13new.png)
 
-We can use the populate parameter for choosing the fields we want to include from the documents. In addition to the field id:n we are now only interested in <i>content</i> and <i>important</i>.
+We can use the populate parameter for choosing the fields we want to include from the documents. In addition to the field <i>id</i> we are now only interested in <i>content</i> and <i>important</i>.
 
-The selection of fields is done with the Mongo [syntax](https://docs.mongodb.com/manual/tutorial/project-fields-from-query-results/#return-the-specified-fields-and-the-id-field-only):
+The selection of fields is done with the Mongo [syntax](https://www.mongodb.com/docs/manual/tutorial/project-fields-from-query-results/#return-the-specified-fields-and-the-_id-field-only):
 
 ```js
 usersRouter.get('/', async (request, response) => {
@@ -514,7 +530,7 @@ The result is now exactly like we want it to be:
 
 ![combined data showing no repetition](../../images/4/14new.png)
 
-Let's also add a suitable population of user information to notes:
+Let's also add a suitable population of user information to notes in the <i>controllers/notes.js</i> file:
 
 ```js
 notesRouter.get('/', async (request, response) => {
@@ -529,7 +545,7 @@ Now the user's information is added to the <i>user</i> field of note objects.
 
 ![notes JSON now has user info embedded too](../../images/4/15new.png)
 
-It's important to understand that the database does not know that the ids stored in the <i>user</i> field of notes reference documents in the user collection.
+It's important to understand that the database does not know that the ids stored in the <i>user</i> field of the notes collection reference documents in the user collection.
 
 The functionality of the <i>populate</i> method of Mongoose is based on the fact that we have defined "types" to the references in the Mongoose schema with the <i>ref</i> option:
 
@@ -549,5 +565,7 @@ const noteSchema = new mongoose.Schema({
 ```
 
 You can find the code for our current application in its entirety in the <i>part4-8</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-8).
+
+NOTE: At this stage, firstly, some tests will fail. We will leave fixing the tests to a non-compulsory exercise. Secondly, in the deployed notes app, the creating a note feature will stop working as user is not yet linked to the frontend.
 
 </div>

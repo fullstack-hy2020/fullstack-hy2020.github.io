@@ -113,7 +113,7 @@ Filtterin arvon asettavat actionit ovat siis muotoa:
 }
 ```
 
-Määritellään samalla myös sopiva _action creator_ -funktio. Sijoitetaan koodi moduuliin <i>src/reducers/filterReducer.js</i>:
+Määritellään samalla myös sopiva _action creator_ ‑funktio. Sijoitetaan koodi moduuliin <i>src/reducers/filterReducer.js</i>:
 
 ```js
 const filterReducer = (state = 'ALL', action) => {
@@ -132,7 +132,7 @@ export default filterReducer
 
 Saamme nyt muodostettua varsinaisen reducerin yhdistämällä kaksi olemassaolevaa reduceria funktion [combineReducers](https://redux.js.org/api/combinereducers) avulla.
 
-Määritellään yhdistetty reducer tiedostossa <i>index.js</i>:
+Määritellään yhdistetty reducer tiedostossa <i>main.jsx</i>:
 
 ```js
 import React from 'react'
@@ -188,7 +188,7 @@ const reducer = combineReducers({
 
 Näin tehdyn reducerin määrittelemän storen tila on olio, jossa on kaksi kenttää: <i>notes</i> ja <i>filter</i>. Tilan kentän <i>notes</i> arvon määrittelee <i>noteReducer</i>, jonka ei tarvitse välittää mitään tilan muista kentistä. Vastaavasti <i>filter</i> kentän käsittely tapahtuu <i>filterReducer</i>:in avulla.
 
-Ennen muun koodin muutoksia kokeillaan vielä konsolista, miten actionit muuttavat yhdistetyn reducerin muodostamaa staten tilaa. Lisätään seuraavat tiedostoon <i>index.js</i>:
+Ennen muun koodin muutoksia kokeillaan vielä konsolista, miten actionit muuttavat yhdistetyn reducerin muodostamaa staten tilaa. Lisätään seuraavat tiedostoon <i>main.jsx</i>:
 
 ```js
 import { createNote } from './reducers/noteReducer'
@@ -220,20 +220,20 @@ Onko koodissa bugi? Ei. Yhdistetty reducer toimii siten, että jokainen <i>actio
 
 ### Filtteröinnin viimeistely
 
-Viimeistellään nyt sovellus käyttämään yhdistettyä reduceria, eli palautetaan tiedostossa <i>index.js</i> suoritettava renderöinti seuravaan muotoon:
+Viimeistellään nyt sovellus käyttämään yhdistettyä reduceria, eli palautetaan tiedostossa <i>main.jsx</i> suoritettava renderöinti seuravaan muotoon:
 
 ```js
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById('root')
+  
 )
 ```
 
 Korjataan sitten bugi, joka johtuu siitä, että koodi olettaa storen tilan olevan mustiinpanot tallettava taulukko:
 
-![komennon notes.map(note => ...) suoritus aiheuttaa virheen TypeError notes.map is not a function)](../../images/6/7ea.png)
+![komennon notes.map(note => ...) suoritus aiheuttaa virheen TypeError notes.map is not a function)](../../images/6/7v.png)
 
 Korjaus on helppo. Koska muistiinpanot ovat nyt storen kentässä <i>notes</i>, riittää pieni muutos selektorifunktioon:
 
@@ -392,7 +392,7 @@ Jatketaan tehtävässä 6.3 aloitetun Reduxia käyttävän anekdoottisovelluksen
 
 #### 6.9 paremmat anekdootit, step7
 
-Toteuta sovellukseen näytettävien muistiinpanojen filtteröiminen:
+Toteuta sovellukseen näytettävien anekdoottien filtteröiminen:
 
 ![Yläosaan lisätään tekstikenttä, johon kirjoittamalla voidaan rajoittaa näytettävät anekdootit niihin joihin sisältyy "filtterikenttään" kirjoitettu merkkijono](../../images/6/9ea.png)
 
@@ -433,7 +433,7 @@ Otetaan Redux Toolkit käyttöön sovelluksessamme refaktoroimalla nykyistä koo
 npm install @reduxjs/toolkit
 ```
 
-Avataan sen jälkeen <i>index.js</i>-tiedosto, jossa nykyinen Redux-store luodaan. Käytetään storen luonnissa Reduxin <em>createStore</em>-funktion sijaan Redux Toolkitin [configureStore](https://redux-toolkit.js.org/api/configureStore)-funktiota:
+Avataan sen jälkeen <i>main.jsx</i>-tiedosto, jossa nykyinen Redux-store luodaan. Käytetään storen luonnissa Reduxin <em>createStore</em>-funktion sijaan Redux Toolkitin [configureStore](https://redux-toolkit.js.org/api/configureStore)-funktiota:
 
 ```js
 import React from 'react'
@@ -550,7 +550,7 @@ Mutatoimme <em>state</em>-argumentin taulukkoa kutsumalla <em>push</em>-metodia 
 
 Redux Toolkit hyödyntää <em>createSlice</em>-funktion avulla määritellyissä reducereissa [Immer](https://immerjs.github.io/immer/)-kirjastoa, joka mahdollistaa <em>state</em>-argumentin mutatoinnin reducerin sisällä. Immer muodostaa mutatoidun tilan perusteella uuden, immutablen tilan ja näin tilamuutosten immutabiliteetti säilyy.
 
-Huomaa, että tilaa voi muuttaa myös "mutatoimatta" kuten esimerkiksi <em>toggleImportanceOf</em> -actionin kohdalla on tehty. Tällöin funktio palauttaa uuden tilan. Mutatointi osoittautuu kuitenkin usein hyödylliseksi etenkin rakenteeltaan monimutkaisen tilan päivittämisessä.
+Huomaa, että tilaa voi muuttaa myös "mutatoimatta" kuten esimerkiksi <em>toggleImportanceOf</em> ‑actionin kohdalla on tehty. Tällöin funktio palauttaa uuden tilan. Mutatointi osoittautuu kuitenkin usein hyödylliseksi etenkin rakenteeltaan monimutkaisen tilan päivittämisessä.
 
 Funktio <em>createSlice</em> palauttaa objektin, joka sisältää sekä reducerin että <em>reducers</em>-parametrin actioneiden mukaiset action creatorit. Reducer on palautetussa objektissa <em>noteSlice.reducer</em>-kentässä kun taas action creatorit ovat <em>noteSlice.actions</em>-kentässä. Voimme muodostaa tiedoston exportit kätevästi:
 
@@ -661,7 +661,7 @@ Konsoliin tulostuu seuraava
 
 ![](../../images/6/40new.png)
 
-Tulostus on mielenkiintoinen mutta ei kovin hyödyllinen. Kyse tässä jo edell mainitusta Redux toolkitin käyttämästä Immer-kirjastosta, mitä käytetään nyt sisäisesti storen tilan tallentamiseen. 
+Tulostus on mielenkiintoinen mutta ei kovin hyödyllinen. Kyse tässä jo edellä mainitusta Redux toolkitin käyttämästä Immer-kirjastosta, mitä käytetään nyt sisäisesti storen tilan tallentamiseen. 
 
 Tilan saa tulostettua ihmisluettavassa muodossa, esim. muuttamalla se merkkijonoksi ja takaisin JavaScript-olioksi seuraavasti: 
 
@@ -675,7 +675,7 @@ Konsolitulostus on nyt ihmisluettava
 
 ### Redux DevTools
 
-Chromeen on asennettavissa [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=fi) -lisäosa, jonka avulla Redux-storen tilaa ja sitä muuttavia actioneja on mahdollisuus seurata selaimen konsolista. Redux Toolkitin <em>configureStore</em>-funktion avulla luodussa storessa Redux DevTools on käytössä automaattisesti ilman ylimääräistä konfigurointia.
+Chromeen on asennettavissa [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=fi) ‑lisäosa, jonka avulla Redux-storen tilaa ja sitä muuttavia actioneja on mahdollisuus seurata selaimen konsolista. Redux Toolkitin <em>configureStore</em>-funktion avulla luodussa storessa Redux DevTools on käytössä automaattisesti ilman ylimääräistä konfigurointia.
 
 Kun lisäosa on asennettu Chromeen, konsolin <i>Redux</i>-välilehti pitäisi näyttää seuraavalta:
 

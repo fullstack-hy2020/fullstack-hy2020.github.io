@@ -81,7 +81,7 @@ Maintenant que toute la pile est prête, déplaçons notre application sur Inter
 Ajoutez un fichier appelé <i>Procfile</i> à la racine du projet backend pour indiquer à Heroku comment démarrer l'application. 
 
 ```bash
-web : node index.js
+web: node index.js
 ```
 
 Changez la définition du port que notre application utilise en bas du fichier <i>index.js</i> comme suit : 
@@ -111,7 +111,7 @@ Si tout s'est bien passé, l'application fonctionne :
 
 Si ce n'est pas le cas, le problème peut être trouvé en lisant les logs de heroku avec la commande <i>heroku logs</i>.
 
-> **NB** Au moins au début, il est bon de garder un œil sur les logs heroku à tout moment. La meilleure façon de le faire est avec la commande <i>heroku logs -t</i> qui imprime les logs à la console chaque fois que quelque chose se passe sur le serveur. 
+> **NB** Au moins au début, il est bon de garder un oeil sur les logs heroku à tout moment. La meilleure façon de le faire est avec la commande <i>heroku logs -t</i> qui imprime les logs à la console chaque fois que quelque chose se passe sur le serveur. 
 
 > **NB** Si vous déployez depuis un dépôt git où votre code n'est pas sur la branche principale (c'est-à-dire si vous modifiez le [dépôt notes](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2) de la dernière leçon), vous devrez exécuter _git push heroku HEAD:master_. Si vous avez déjà effectué un push sur heroku, vous devrez peut-être exécuter _git push heroku HEAD:main --force_.
 
@@ -340,7 +340,7 @@ Les exercices suivants ne nécessitent pas beaucoup de lignes de code. Ils peuve
 
 Faites fonctionner le backend avec le frontend phonebook des exercices de la partie précédente. N'implémentez pas encore la fonctionnalité permettant de modifier les numéros de téléphone, qui sera implémentée dans l'exercice 3.17. 
 
-Vous devrez probablement faire quelques petits changements au frontend, au moins aux URLs pour le backend. N'oubliez pas de garder la console de développement ouverte dans votre navigateur. Si certaines requêtes HTTP échouent, vous devriez vérifier à partir de l'onglet <i>Réseau</i> ce qui se passe. Gardez également un œil sur la console du backend. Si vous n'avez pas fait l'exercice précédent, il vaut la peine d'imprimer les données de la requête ou <i>request.body</i> à la console dans le gestionnaire d'événements responsable des requêtes POST. 
+Vous devrez probablement faire quelques petits changements au frontend, au moins aux URLs pour le backend. N'oubliez pas de garder la console de développement ouverte dans votre navigateur. Si certaines requêtes HTTP échouent, vous devriez vérifier à partir de l'onglet <i>Réseau</i> ce qui se passe. Gardez également un oeil sur la console du backend. Si vous n'avez pas fait l'exercice précédent, il vaut la peine d'imprimer les données de la requête ou <i>request.body</i> à la console dans le gestionnaire d'événements responsable des requêtes POST. 
 
 #### 3.10 backend répertoire téléphonique étape10
 
@@ -350,7 +350,7 @@ Déployez le backend sur internet, par exemple sur Heroku.
 
 Testez le backend déployé avec un navigateur et le client REST Postman ou VS Code pour vous assurer qu'il fonctionne. 
 
-**PRO TIP:** Lorsque vous déployez votre application sur Heroku, il vaut la peine, au moins au début, de garder un œil sur les logs de l'application heroku **TOUT LE TEMPS** avec la commande <em>heroku logs -t</em>.
+**PRO TIP:** Lorsque vous déployez votre application sur Heroku, il vaut la peine, au moins au début, de garder un oeil sur les logs de l'application heroku **TOUT LE TEMPS** avec la commande <em>heroku logs -t</em>.
 
 Ce qui suit est un log concernant un problème typique. Heroku ne peut pas trouver la dépendance d'application <i>express</i> :
 

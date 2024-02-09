@@ -85,7 +85,7 @@ When validating an object fails, we return the following default error message f
 ![postman showing error message](../../images/3/50.png)
 
 We notice that the backend has now a problem: validations are not done when editing a note.
-The [documentation](https://github.com/blakehaswell/mongoose-unique-validator#find--updates) explains what is the problem, validations are not run by default when <i>findOneAndUpdate</i> is executed.
+The [documentation](https://github.com/blakehaswell/mongoose-unique-validator#find--updates) addresses the issue by explaining that validations are not run by default when <i>findOneAndUpdate</i> and related methods are executed.
 
 The fix is easy. Let us also reformulate the route code a bit:
 
@@ -123,7 +123,7 @@ When the app is being developed, it is more than likely that something fails. Eg
 
 ![browser showing no notes appearing](../../images/3/fly-problem1.png)
 
-The network tab of the browser console revealed that fetching the notes did not succeed, the request just remained for a long time in the _pending_ state until it failed with statuscode 502.
+The network tab of the browser console revealed that fetching the notes did not succeed, the request just remained for a long time in the _pending_ state until it failed with status code 502.
 
 The browser console has to be open <i>all the time!</i>
 
@@ -133,15 +133,15 @@ It is also vital to follow continuously the server logs. The problem became obvi
 
 The database url was _undefined_, so the command *fly secrets set MONGODB\_URI* was forgotten.
 
-When using Render, the database url is given by definig the proper env in the dashboard:
+When using Render, the database url is given by defining the proper env in the dashboard:
 
-![browser render showing the MONGODB_URI env variable](../../images/3/render-env.png)
+![render dashboard showing the MONGODB_URI env variable](../../images/3/render-env.png)
 
 The Render Dashboard shows the server logs:
 
-![render dashboard with arrow pointting to server running on port 10000](../../images/3/r7.png)
+![render dashboard with arrow pointing to server running on port 10000](../../images/3/r7.png)
 
-You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-5).
+You can find the code for our current application in its entirety in the <i>part3-6</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-6).
 
 </div>
 
@@ -149,7 +149,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 ### Exercises 3.19.-3.21.
 
-#### 3.19*: Phonebook database, step7
+#### 3.19*: Phonebook database, step 7
 
 Expand the validation so that the name stored in the database has to be at least three characters long.
 
@@ -173,12 +173,12 @@ You can display the default error message returned by Mongoose, even though they
 
 **NB:** On update operations, mongoose validators are off by default. [Read the documentation](https://mongoosejs.com/docs/validation.html) to determine how to enable them.
 
-#### 3.20*: Phonebook database, step8
+#### 3.20*: Phonebook database, step 8
 
-Add validation to your phonebook application, which will make sure that phone numbers are of the correct form. A phone number must
+Add validation to your phonebook application, which will make sure that phone numbers are of the correct form. A phone number must:
 
-- has length of 8 or more
-- if formed of two parts that are separated by -, the first part has two or three numbers and the second part also consists of numbers
+- have length of 8 or more
+- be formed of two parts that are separated by -, the first part has two or three numbers and the second part also consists of numbers
     - eg. 09-1234556 and 040-22334455 are valid phone numbers
     - eg. 1234556, 1-22334455 and 10-22-334455 are invalid
 
@@ -208,9 +208,9 @@ Before we move on to the next part, we will take a look at an important tool cal
 
 In compiled statically typed languages like Java, IDEs like NetBeans can point out errors in the code, even ones that are more than just compile errors. Additional tools for performing [static analysis](https://en.wikipedia.org/wiki/Static_program_analysis) like [checkstyle](https://checkstyle.sourceforge.io), can be used for expanding the capabilities of the IDE to also point out problems related to style, like indentation.
 
-In the JavaScript universe, the current leading tool for static analysis aka. "linting" is [ESlint](https://eslint.org/).
+In the JavaScript universe, the current leading tool for static analysis (aka "linting") is [ESlint](https://eslint.org/).
 
-Let's install ESlint as a development dependency to the backend project with the command:
+Let's install ESlint as a development dependency to the notes backend project with the command:
 
 ```bash
 npm install eslint --save-dev
@@ -226,7 +226,7 @@ We will answer all of the questions:
 
 ![terminal output from ESlint init](../../images/3/52new.png)
 
-The configuration will be saved in the _.eslintrc.js_ file:
+The configuration will be saved in the _.eslintrc.js_ file.  We will change _browser_ to _node_ in the _env_ configuration:
 
 ```js
 module.exports = {
@@ -292,13 +292,13 @@ It is recommended to create a separate _npm script_ for linting:
 
 Now the _npm run lint_ command will check every file in the project.
 
-Also the files in the <em>build</em> directory get checked when the command is run. We do not want this to happen, and we can accomplish this by creating an [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) file in the project's root with the following contents:
+Also the files in the <em>dist</em> directory get checked when the command is run. We do not want this to happen, and we can accomplish this by creating an [.eslintignore](https://eslint.org/docs/latest/use/configure/ignore#the-eslintignore-file) file in the project's root with the following contents:
 
 ```bash
-build
+dist
 ```
 
-This causes the entire <em>build</em> directory to not be checked by ESlint.
+This causes the entire <em>dist</em> directory to not be checked by ESlint.
 
 Lint has quite a lot to say about our code:
 
@@ -306,7 +306,7 @@ Lint has quite a lot to say about our code:
 
 Let's not fix these issues just yet.
 
-A better alternative to executing the linter from the command line is to configure a <i>eslint-plugin</i> to the editor, that runs the linter continuously. By using the plugin you will see errors in your code immediately. You can find more information about the Visual Studio ESLint plugin [here](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
+A better alternative to executing the linter from the command line is to configure an <i>eslint-plugin</i> to the editor, that runs the linter continuously. By using the plugin you will see errors in your code immediately. You can find more information about the Visual Studio ESLint plugin [here](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
 
 The VS Code ESlint plugin will underline style violations with a red line:
 
@@ -355,7 +355,7 @@ Our default configuration takes a bunch of predetermined rules into use from <i>
 'extends': 'eslint:recommended',
 ```
 
-This includes a rule that warns about _console.log_ commands. [Disabling](https://eslint.org/docs/user-guide/configuring#configuring-rules) a rule can be accomplished by defining its "value" as 0 in the configuration file. Let's do this for the <i>no-console</i> rule in the meantime.
+This includes a rule that warns about _console.log_ commands. [Disabling](https://eslint.org/docs/latest/use/configure/rules) a rule can be accomplished by defining its "value" as 0 in the configuration file. Let's do this for the <i>no-console</i> rule in the meantime.
 
 ```js
 {
@@ -383,7 +383,8 @@ If there is something wrong in your configuration file, the lint plugin can beha
 
 Many companies define coding standards that are enforced throughout the organization through the ESlint configuration file. It is not recommended to keep reinventing the wheel over and over again, and it can be a good idea to adopt a ready-made configuration from someone else's project into yours. Recently many projects have adopted the Airbnb [Javascript style guide](https://github.com/airbnb/javascript) by taking Airbnb's [ESlint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) configuration into use.
 
-You can find the code for our current application in its entirety in the <i>part3-6</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-6).
+You can find the code for our current application in its entirety in the <i>part3-7</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-7).
+
 </div>
 
 <div class="tasks">

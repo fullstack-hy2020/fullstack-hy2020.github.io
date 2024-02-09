@@ -553,7 +553,7 @@ http {
 
 #### Exercise 12.17: Set up an Nginx reverse proxy server in front of todo-frontend
 
-We are going to put the Nginx server in front of both todo-frontend and todo-backend. Let's start by creating a new docker-compose file <i>todo-app/docker-compose.dev.yml</i> and <i>todo-app/nginx.conf</i>.
+We are going to put the Nginx server in front of both todo-frontend and todo-backend. Let's start by creating a new docker-compose file <i>todo-app/docker-compose.dev.yml</i> and <i>todo-app/nginx.dev.conf</i>.
 
 ```bash
 todo-app
@@ -619,7 +619,7 @@ This illustrates what we are looking for and may be helpful if you are having tr
 
 Finally, it is time to put all the pieces together. Before starting, it is essential to understand <i>where</i> the React app is actually run. The above figure might give the impression that React app is run in the container but it is totally wrong. 
 
-It is just the <i>React app source code</i> that is in the container. When the browser hits the address http://loclhost:8080 (assuming that you set up Nginx to be accessed in port 8080), the React source code gets downloaded from the container to the browser:
+It is just the <i>React app source code</i> that is in the container. When the browser hits the address http://localhost:8080 (assuming that you set up Nginx to be accessed in port 8080), the React source code gets downloaded from the container to the browser:
 
 ![](../../images/12/nginx-setup.png)
 
@@ -629,7 +629,7 @@ Next, the browser starts executing the React app, and all the requests it makes 
 
 The frontend container is actually no more accessed beyond the first request that gets the React app source code to the browser.
 
-Set up now your app to work as in the abovefigure. Make sure that the todo-frontend works with todo-backend. It will require changes to the *REACT\_APP\_BACKEND\_URL* environmental variable in the frontend.
+Now set up your app to work as depicted in the above figure. Make sure that the todo-frontend works with todo-backend. It will require changes to the *REACT\_APP\_BACKEND\_URL* environmental variable in the frontend.
 
 Make sure that the development environment is now fully functional, that is:
 - all features of the todo app work

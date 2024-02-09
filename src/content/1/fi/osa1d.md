@@ -110,7 +110,7 @@ ja uudeksi tilaksi asetetaan siis seuraava olio
 
 jolloin kentän <i>left</i> arvo on sama kuin alkuperäisen tilan kentän <i>left + 1</i> ja kentän <i>right</i> arvo on sama kuin alkuperäisen tilan kentän <i>right</i>.
 
-Uuden tilan määrittelevän olion muodostaminen onnistuu hieman tyylikkäämmin hyödyntämällä kesällä 2018 kieleen tuotua [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) -syntaksia:
+Uuden tilan määrittelevän olion muodostaminen onnistuu hieman tyylikkäämmin hyödyntämällä kesällä 2018 kieleen tuotua [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) ‑syntaksia:
 
 ```js
 const handleLeftClick = () => {
@@ -150,7 +150,7 @@ const handleRightClick = () =>
   setClicks({ ...clicks, right: clicks.right + 1 })
 ```
 
-Miksi emme hoitaneet tilan päivitystä seuraavasti:
+Miksi emme hoitaneet tilan päivitystä seuraavasti?
 
 ```js
 const handleLeftClick = () => {
@@ -163,7 +163,7 @@ Sovellus näyttää toimivan. Reactissa <i>ei kuitenkaan ole sallittua muuttaa t
 
 Kaiken tilan pitäminen yhdessä oliossa on tämän sovelluksen kannalta huono ratkaisu; etuja siinä ei juuri ole, mutta sovellus monimutkaistuu merkittävästi. Onkin ehdottomasti parempi ratkaisu tallettaa nappien klikkaukset erillisiin tilan paloihin.
 
-On kuitenkin tilanteita, joissa jokin osa tilaa kannattaa pitää monimutkaisemman tietorakenteen sisällä. [Reactin dokumentaatiossa](https://reactjs.org/docs/hooks-faq.html#should-i-use-one-or-many-state-variables) on hieman ohjeistusta aiheeseen liittyen.
+On kuitenkin tilanteita, joissa jokin osa tilaa kannattaa pitää monimutkaisemman tietorakenteen sisällä. [Reactin dokumentaatiossa](https://react.dev/learn/choosing-the-state-structure) on hieman ohjeistusta aiheeseen liittyen.
 
 ### Taulukon käsittelyä
 
@@ -218,9 +218,9 @@ const handleLeftClick = () => {
 }
 ```
 
-Tila _allClicks_ saa nyt arvokseen taulukon, jossa on entisen taulukon alkiot ja <i>L</i>. Uuden alkion liittäminen on tehty metodilla [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), joka toimii siten, että se ei muuta olemassa olevaa taulukkoa vaan luo <i>uuden taulukon</i>, johon uusi alkio on lisätty.
+Tila _allClicks_ saa nyt arvokseen taulukon, jossa ovat entisen taulukon alkiot ja <i>L</i>. Uuden alkion liittäminen on tehty metodilla [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), joka toimii siten, että se ei muuta olemassa olevaa taulukkoa vaan luo <i>uuden taulukon</i>, johon uusi alkio on lisätty.
 
-Kuten jo aiemmin mainittiin, JavaScriptissa on mahdollista lisätä taulukkoon myös metodilla [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) ja sovellus näyttäisi tässä tilanteessa toimivan myös jos lisäys hoidettaisiin siten, että _allClicks_-tilaa muutetaan pushaamalla siihen alkio ja sitten päivitetään tila:
+Kuten jo aiemmin mainittiin, JavaScriptissa on mahdollista lisätä taulukkoon myös metodilla [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push). Sovelluksemme näyttäisikin toimivan myös silloin, kun lisäys hoidetaan muuttamalla _allClicks_-tilaa pushaamalla siihen alkio ja päivittämällä sitten tila:
 
 ```js
 const handleLeftClick = () => {
@@ -295,7 +295,7 @@ Ratkaisu toimii melkein:
 
 ![](../../images/1/33.png)
 
-Jostain syystä napien painellusten yhteenlaskettu määrä näyttää koko ajan yhtä liian vähän.
+Jostain syystä nappien painallusten yhteenlaskettu määrä näyttää koko ajan yhtä liian vähän.
 
 Lisätään tapahtumankäsittelijään muutama console.log:
 
@@ -318,13 +318,13 @@ Konsoli paljastaa ongelman
 
 ![](../../images/1/32.png)
 
-Vaikka tilalle _left_ asetettiin uusi arvo kutsumalla _setLeft(left + 1)_ on tilalla siis tapahtumankäsittelijän sisällä edelleen vanha arvo päivityksestä huolimatta! Tämän takia seuraava takia nappien painallusten laskuyritys tuottaa aina yhtä liian pienen tuloksen:
+Vaikka tilalle _left_ asetettiin uusi arvo kutsumalla _setLeft(left + 1)_ on tilalla siis tapahtumankäsittelijän sisällä edelleen vanha arvo päivityksestä huolimatta! Tämän takia seuraava nappien painallusten laskuyritys tuottaa aina yhtä liian pienen tuloksen:
 
 ```js
 setTotal(left + right) 
 ```
 
-Syynä ilmiöön on se, että tilan päivitys tapahtuu Reactissa [asynkronisesti](https://reactjs.org/docs/state-and-lifecycle.html#state-updates-may-be-asynchronous), eli "jossain vaiheessa" ennen kuin komponentti renderöidään uudelleen, ei kuitenkaan välittömästi.
+Syynä ilmiöön on se, että tilan päivitys tapahtuu Reactissa [asynkronisesti](https://react.dev/learn/queueing-a-series-of-state-updates#react-batches-state-updates), eli "jossain vaiheessa" ennen kuin komponentti renderöidään uudelleen, ei kuitenkaan välittömästi.
 
 Saamme korjattua sovelluksen seuraavasti:
 
@@ -398,9 +398,9 @@ ja muussa tapauksessa näppäilyhistorian:
 </div>
 ```
 
-Komponentin _History_ ulkoasun muodostamat React-elementit riippuvat siis sovelluksen tilasta, eli komponentissa on <i>ehdollista renderöintiä</i>.
+Komponentti _History_ renderöi siis eri React-elementit riippuen sovelluksen tilasta, eli komponentissa on <i>ehdollista renderöintiä</i>.
 
-Reactissa on monia muitakin tapoja [ehdolliseen renderöintiin](https://reactjs.org/docs/conditional-rendering.html). Katsotaan niitä tarkemmin [seuraavassa osassa](/osa2).
+Reactissa on monia muitakin tapoja [ehdolliseen renderöintiin](https://react.dev/learn/conditional-rendering). Katsotaan niitä tarkemmin [seuraavassa osassa](/osa2).
 
 Muutetaan vielä sovellusta siten, että se käyttää aiemmin määrittelemäämme komponenttia _Button_ painikkeiden muodostamiseen:
 
@@ -462,7 +462,7 @@ const App = () => {
 
 ### Vanha React
 
-Tällä kurssilla käyttämämme tapa React-komponenttien tilan määrittelyyn, eli [state hook](https://reactjs.org/docs/hooks-state.html) on siis "uutta" Reactia ja käytettävissä alkuvuodesta 2019 ilmestyneestä versiosta [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) lähtien. Ennen hookeja JavaScript-funktioina määriteltyihin React-komponentteihin ei ollut mahdollista saada tilaa ollenkaan, ja tilaa edellyttävät komponentit oli pakko määritellä [class](https://reactjs.org/docs/react-component.html)-komponentteina JavaScriptin luokkasyntaksia hyödyntäen.
+Tällä kurssilla käyttämämme tapa React-komponenttien tilan määrittelyyn, eli [state hook](https://react.dev/learn/state-a-components-memory), on siis "uutta" Reactia ja käytettävissä alkuvuodesta 2019 ilmestyneestä versiosta [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) lähtien. Ennen hookeja JavaScript-funktioina määriteltyihin React-komponentteihin ei ollut mahdollista saada tilaa ollenkaan, ja tilaa edellyttävät komponentit oli pakko määritellä [class](https://react.dev/reference/react/Component)-komponentteina JavaScriptin luokkasyntaksia hyödyntäen.
 
 Olemme tällä kurssilla tehneet hieman radikaalinkin ratkaisun käyttää pelkästään hookeja ja näin ollen opetella heti alusta asti ohjelmoimaan modernia Reactia. Luokkasyntaksin hallitseminen on kuitenkin sikäli tärkeää, että vaikka funktiona määriteltävät komponentit ovat modernia Reactia, maailmassa on miljardeja rivejä vanhaa Reactia, jota kenties sinäkin joudut jonain päivänä ylläpitämään. Dokumentaation ja Internetistä löytyvien esimerkkien suhteen tilanne on sama; tulet törmäämään myös class-komponentteihin.
 
@@ -470,7 +470,7 @@ Tutustummekin riittävällä tasolla class-komponentteihin kurssin [seitsemänne
 
 ### React-sovellusten debuggaus
 
-Ohjelmistokehittäjän työ sisältää monesti debuggaamista ja olemassa olevan koodin lukemista. Silloin tällöin syntyy toki muutama rivi uuttakin koodia, mutta suuri osa ajasta ihmetellään, miksi joku on rikki tai miksi joku asia ylipäätään toimii. Hyvät debuggauskäytännöt ja -työkalut ovatkin todella tärkeitä.
+Ohjelmistokehittäjän työ sisältää monesti debuggaamista ja olemassa olevan koodin lukemista. Silloin tällöin syntyy toki muutama rivi uuttakin koodia, mutta suuri osa ajasta ihmetellään, miksi joku on rikki tai miksi joku asia ylipäätään toimii. Hyvät debuggauskäytännöt ja ‑työkalut ovatkin todella tärkeitä.
 
 Onneksi React on debuggauksen suhteen jopa harvinaisen kehittäjäystävällinen kirjasto.
 
@@ -528,15 +528,15 @@ erottele tulostettavat asiat pilkulla:
 console.log('props value is', props)
 ```
 
-Jos yhdistät merkkijonoon olion, tuloksena on suhteellisen hyödytön tulostusmuoto
+Jos yhdistät plussaa käyttäen merkkijonoon olion, tuloksena on suhteellisen hyödytön tulostusmuoto
 
 ```js
 props value is [Object object]
 ```
 
-kun taas pilkulla tulostettavat asiat erotellessa saat developer-konsoliin olion, jonka sisältöä on mahdollista tarkastella.
+kun taas erotellessasi tulostettavat asiat pilkulla saat developer-konsoliin olion, jonka sisältöä on mahdollista tarkastella.
 
-Konsoliin tulostus ei ole suinkaan ainoa keino debuggaamiseen. Koodin suorituksen voi pysäyttää Chromen developer-konsolin <i>debuggeriin</i> kirjoittamalla omassa tekstieditorissasi olevaan lähdekoodiin mihin tahansa kohtaan koodia komennon [debugger](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger).
+Konsoliin tulostus ei ole suinkaan ainoa keino debuggaamiseen. Voit pysäyttää koodin suorituksen Chromen developer-konsolin <i>debuggeriin</i> kirjoittamalla omassa tekstieditorissasi olevaan lähdekoodiin mihin tahansa kohtaan koodia komennon [debugger](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger).
 
 Koodi pysähtyy, kun suoritus etenee sellaiseen pisteeseen, jossa komento _debugger_ suoritetaan:
 
@@ -554,7 +554,7 @@ Debuggeriin pääsee myös ilman komentoa _debugger_ lisäämällä <i>Sources</
 
 ![](../../images/1/9a.png)
 
-Chromeen kannattaa ehdottomasti asentaa [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) -lisäosa, joka tuo konsoliin uuden välilehden _Components_. Uuden välilehden avulla voidaan tarkkailla sovelluksen React-komponentteja ja niiden tilaa ja propseja:
+Chromeen kannattaa ehdottomasti asentaa [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) ‑lisäosa, joka tuo konsoliin uuden välilehden _Components_. Uuden välilehden avulla voidaan tarkkailla sovelluksen React-komponentteja ja niiden tilaa ja propseja:
 
 ![](../../images/1/10ea.png)
 
@@ -576,9 +576,9 @@ Chromella tapahtuvaan JavaScriptin debuggaukseen voi tutustua myös esim. [täm�
 
 ### Hookien säännöt
 
-Jotta hookeilla muodostettu sovelluksen tila toimisi oikein, on hookeja käytettävä tiettyjä [rajoituksia](https://reactjs.org/docs/hooks-rules.html) noudattaen.
+Jotta hookeilla muodostettu sovelluksen tila toimisi oikein, on hookeja käytettävä tiettyjä [rajoituksia](https://react.dev/learn/state-a-components-memory#meet-your-first-hook) noudattaen.
 
-Funktiota _useState_ <i>ei saa kutsua</i> loopissa (sama koskee  seuraavassa osassa esiteltävää funktiota _useEffect_), ehtolausekkeiden sisältä tai muista kuin komponentin määrittelevästä funktiosta. Tämä takaa sen, että hookeja kutsutaan aina samassa järjestyksessä. Jos näin ei ole, sovellus saattaa toimia miten sattuu.
+Funktiota _useState_ <i>ei saa kutsua</i> silmukassa (sama koskee  seuraavassa osassa esiteltävää funktiota _useEffect_), ehtolausekkeiden sisältä tai muista kuin komponentin määrittelevästä funktiosta. Tämä takaa sen, että hookeja kutsutaan aina samassa järjestyksessä. Jos näin ei ole, sovellus saattaa toimia miten sattuu.
 
 Hookeja siis kuuluu kutsua ainoastaan React-komponentin määrittelevän funktion rungosta:
 
@@ -630,7 +630,7 @@ const App = (props) => {
 }
 ```
 
-Haluamme, että napin avulla tilan tallettava muuttuja _value_ saadaan nollattua.
+Haluamme, että napin avulla saadaan nollattua tilan tallettava muuttuja _value_.
 
 Jotta saamme napin reagoimaan, on napille lisättävä <i>tapahtumankäsittelijä</i>.
 
@@ -691,9 +691,9 @@ Myös seuraava yritys on virheellinen:
 <button onClick={setValue(0)}>button</button>
 ```
 
-Jälleen olemme yrittäneet laittaa tapahtumankäsittelijäksi funktiokutsun. Ei toimi. Tämä yritys aiheuttaa myös toisen ongelman: kun komponenttia renderöidään, suoritetaan tapahtumankäsittelijänä oleva funktiokutsu _setValue(0)_ mikä taas saa aikaan komponentin uudelleenrenderöinnin. Ja uudelleenrenderöinnin yhteydessä funktiota kutsutaan uudelleen käynnistäen jälleen uusi uudelleenrenderöinti ja joudutaan päättymättömään rekursioon.
+Jälleen olemme yrittäneet laittaa tapahtumankäsittelijäksi funktiokutsun. Ei toimi. Tämä yritys aiheuttaa myös toisen ongelman: kun komponenttia renderöidään, suoritetaan tapahtumankäsittelijänä oleva funktiokutsu _setValue(0)_ mikä taas saa aikaan komponentin uudelleenrenderöinnin. Ja uudelleenrenderöinnin yhteydessä funktiota kutsutaan uudelleen, mikä käynnistää jälleen uuden uudelleenrenderöinnin, ja näin joudutaan päättymättömään rekursioon.
 
-Jos haluamme suorittaa tietyn funktiokutsun tapahtuvan nappia painettaessa, seuraava toimii:
+Jos haluamme suorittaa tietyn funktiokutsun nappia painettaessa, seuraava toimii:
 
 ```js
 <button onClick={() => console.log('clicked the button')}>
@@ -701,7 +701,7 @@ Jos haluamme suorittaa tietyn funktiokutsun tapahtuvan nappia painettaessa, seur
 </button>
 ```
 
-Nyt tapahtumankäsittelijä on nuolisyntaksilla määritelty funktio _() => console.log('clicked the button')_. Kun komponentti renderöidään, ei suoriteta mitään, ainoastaan talletetaan funktioviite tapahtumankäsittelijäksi. Itse funktion suoritus tapahtuu vasta napin painallusten yhteydessä.
+Nyt tapahtumankäsittelijä on nuolisyntaksilla määritelty funktio _() => console.log('clicked the button')_. Kun komponentti renderöidään, ei suoriteta mitään, ainoastaan talletetaan funktioviite tapahtumankäsittelijäksi. Itse funktion suoritus tapahtuu vasta napin painalluksen yhteydessä.
 
 Saamme myös nollauksen toimimaan samalla tekniikalla
 
@@ -888,7 +888,7 @@ Tapahtumankäsittelijän määrittelevä funktiokutsu _hello('react')_ palauttaa
 
 eli molemmat napit saavat omat, yksilölliset tapahtumankäsittelijänsä.
 
-Funktioita palauttavia funktioita voikin hyödyntää määrittelemään geneeristä toiminnallisuutta, jota voi tarkentaa parametrien avulla. Tapahtumankäsittelijöitä luovan funktion _hello_ voikin ajatella olevan eräänlainen tehdas, jota voi pyytää valmistamaan sopivia tervehtimiseen sopivia tapahtumankäsittelijäfunktioita.
+Funktioita palauttavia funktioita voikin hyödyntää määrittelemään geneeristä toiminnallisuutta, jota voi tarkentaa parametrien avulla. Tapahtumankäsittelijöitä luovan funktion _hello_ voikin ajatella olevan eräänlainen tehdas, jota voi pyytää valmistamaan sopivia tervehtimiseen käytettäviä tapahtumankäsittelijäfunktioita.
 
 Käyttämämme määrittelytapa
 
@@ -1036,9 +1036,9 @@ const App = (props) => {
   return (
     <div>
       {value}
-      <Button handleClick={setToValue(1000)} text="thousand" /> // highlight-line
-      <Button handleClick={setToValue(0)} text="reset" /> // highlight-line
-      <Button handleClick={setToValue(value + 1)} text="increment" /> // highlight-line
+      <Button handleClick={() => setToValue(1000)} text="thousand" /> // highlight-line
+      <Button handleClick={() => setToValue(0)} text="reset" /> // highlight-line
+      <Button handleClick={() => setToValue(value + 1)} text="increment" /> // highlight-line
     </div>
   )
 }
@@ -1050,7 +1050,7 @@ Komponentin <i>Button</i> käyttö on helppoa, mutta on toki pidettävä huolta 
 
 ### Älä määrittele komponenttia komponentin sisällä
 
-Eriytetään vielä sovelluksestamme luvun näyttäminen omaan komponenttiin <i>Display</i>.
+Eriytetään vielä sovelluksestamme luvun näyttäminen omaan komponenttiinsa <i>Display</i>.
 
 Määritellään uusi komponentti <i>App</i>-komponentin sisällä:
 
@@ -1122,19 +1122,19 @@ Internetissä on todella paljon Reactiin liittyvää materiaalia. Välillä onge
 
 Linkkejä:
 
-- Reactin [dokumentaatio](https://reactjs.org/docs/getting-started.html) kannattaa ehdottomasti käydä jossain vaiheessa läpi, ei välttämättä kaikkea nyt, osa on ajankohtaista vasta kurssin myöhemmissä osissa ja kaikki Class-komponentteihin liittyvä on kurssin kannalta epärelevanttia.
-- Reactin sivuilla oleva [tutoriaali](https://reactjs.org/tutorial/tutorial.html) sen sijaan on aika huono.
+- Reactin [dokumentaatio](https://react.dev/learn) kannattaa ehdottomasti käydä jossain vaiheessa läpi, ei välttämättä kaikkea nyt, osa on ajankohtaista vasta kurssin myöhemmissä osissa ja kaikki Class-komponentteihin liittyvä on kurssin kannalta epärelevanttia.
+- Reactin sivuilla oleva [tutoriaali](https://react.dev/learn/tutorial-tic-tac-toe) sen sijaan on aika huono.
 - [Egghead.io](https://egghead.io):n kursseista [Start learning React](https://egghead.io/courses/start-learning-react) on laadukas, ja hieman uudempi [The Beginner's guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) on myös kohtuullisen hyvä; molemmat sisältävät myös asioita, jotka tulevat tällä kurssilla vasta myöhemmissä osissa. Molemmissa on toki se ongelma, että ne käyttävät Class-komponentteja.
 
 ### Webohjelmoijan vala
 
 Ohjelmointi on hankalaa, ja sen takia lupaan hyödyntää kaikkia ohjelmointia helpottavia keinoja:
 
-- pidän selaimen konsolin koko ajan auki
+- pidän selaimeni konsolin koko ajan auki
 - etenen pienin askelin
-- käytän koodissa runsaasti _console.log_-komentoja varmistamaan sen, että varmasti ymmärrän jokaisen kirjoittamani koodirivin, sekä etsiessäni koodista mahdollisia bugin aiheuttajia
-- jos koodini ei toimi, en kirjoita enää yhtään lisää koodia, vaan alan poistamaan toiminnan rikkoneita rivejä tai palaan suosiolla tilanteeseen, missä koodi vielä toimi
-- kun kysyn apua kurssin Discord- tai Telegram-kanavalla, tai muualla internetissä, muotoilen kysymyksen järkevästi, esim. [täällä](/en/part0/general_info#how-to-ask-help-in-discord-telegam) esiteltyyn tapaan
+- käytän koodissani runsaasti _console.log_-komentoja sekä varmistamaan sen, että varmasti ymmärrän jokaisen kirjoittamani koodirivin, että etsiessäni koodistani mahdollisia bugin aiheuttajia
+- jos koodini ei toimi, en kirjoita enää yhtään lisää koodia, vaan alan poistaa toiminnan rikkoneita rivejä tai palaan suosiolla tilanteeseen, missä koodini vielä toimi
+- kun kysyn apua kurssin Discord- tai Telegram-kanavalla, tai muualla internetissä, muotoilen kysymyksen järkevästi, esim. [täällä](/en/part0/general_info#how-to-get-help-in-discord-telegram) esiteltyyn tapaan
 
 
 </div>
@@ -1148,14 +1148,11 @@ Tehtävät palautetaan **yksi osa kerrallaan**. Kun olet palauttanut osan tehtä
 
 <i>Samaa ohjelmaa kehittelevissä tehtäväsarjoissa ohjelman lopullisen version palauttaminen riittää, voit toki halutessasi tehdä commitin jokaisen tehtävän jälkeisestä tilanteesta, mutta se ei ole välttämätöntä.</i>
 
-**VAROITUS** create-react-app tekee projektista automaattisesti Git-repositorion, ellei sovellusta luoda jo olemassa olevan repositorion sisälle. Todennäköisesti **et halua** että projektista tulee repositorio, joten suorita projektin juuressa komento _rm -rf .git_.
-
 Jos, ja kun törmäät virheilmoitukseen
 
 > <i>Objects are not valid as a React child</i>
 
 pidä mielessä [täällä](/osa1/reactin_alkeet#ala-renderoi-olioita) kerrotut asiat.
-
 
 <h4> 1.6: unicafe step1</h4>
 
@@ -1167,7 +1164,7 @@ Sovelluksen tulee näyttää jokaisen palautteen lukumäärä. Sovellus voi näy
 
 Huomaa, että sovelluksen tarvitsee toimia vain yhden selaimen käyttökerran ajan. Esim. kun sivu refreshataan, tilastot saavat hävitä.
 
-Kannattaa noudattaa samaa rakennetta kuin materiaalissa ja edellisessä tehtävässä, eli tiedoston <i>index.js</i> sisältö on seuraava:
+Kannattaa noudattaa samaa rakennetta kuin materiaalissa ja edellisessä tehtävässä, eli tiedoston <i>main.jsx</i> sisältö on seuraava:
 
 ```js
 import ReactDOM from 'react-dom/client'
@@ -1176,7 +1173,7 @@ import App from './App'
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-Muun sovelluksen voi tehdä tiedostoon <i>App.js</i>. Tiedoston sisältö voi olla aluksi seuraava:
+Muun sovelluksen voi tehdä tiedostoon <i>App.jsx</i>. Tiedoston sisältö voi olla aluksi seuraava:
 
 ```js
 import { useState } from 'react'
@@ -1245,7 +1242,7 @@ Jatketaan sovelluksen refaktorointia. Eriytä seuraavat <i>kaksi</i> komponentti
 - <i>Button</i> vastaa yksittäistä palautteenantonappia
 - <i>StatisticLine</i> huolehtii tilastorivien, esim. keskiarvon näyttämisestä
 
-Tarkennuksena: komponentti <i>StatisticLine</i> näyttää aina yhden tilastorivin, joten sovellus käyttää montaa komponenttia kaikkien tilastorivien renderöintiin 
+Tarkennuksena: komponentti <i>StatisticLine</i> näyttää aina yhden tilastorivin, joten sovellus käyttää komponenttia useaan kertaan renderöidäkseen kaikki tilastorivit 
 
 ```js
 const Statistics = (props) => {
@@ -1310,15 +1307,13 @@ const App = () => {
 export default App
 ```
 
-Tiedoston <i>index.js</i> sisältö on sama kuin edellisissä tehtävissä.
+Tiedoston <i>main.jsx</i> sisältö on sama kuin edellisissä tehtävissä.
 
 Google kertoo, miten voit generoida JavaScriptilla sopivia satunnaisia lukuja. Muista, että voit testata esim. satunnaislukujen generointia konsolissa.
 
 Sovellus voi näyttää esim. seuraavalta:
 
 ![](../../images/1/18a.png)
-
-**VAROITUS** create-react-app tekee projektista automaattisesti Git-repositorion, ellei sovellusta luoda jo olemassa olevan repositorion sisälle. Todennäköisesti **et halua** että projektista tulee repositorio, joten suorita projektin juuressa komento _rm -rf .git_.
 
 <h4>1.13*: anekdootit step2</h4>
 

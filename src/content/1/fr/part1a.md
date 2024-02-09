@@ -7,30 +7,40 @@ lang: fr
 
 <div class="content">
 
-Nous allons maintenant commencer à nous familiariser avec le sujet probablement le plus important de ce cours, à savoir la bibliothèque [React](https://reactjs.org/). Commençons par créer une application React simple et apprenons à connaître les concepts de base de React.
+Nous allons maintenant commencer à nous familiariser avec probablement le sujet le plus important de ce cours, à savoir la bibliothèque [React](https://react.dev/). Commençons par créer une application React simple et découvrir les concepts de base de React.
 
-Le moyen le plus simple de démarrer est de loin d'utiliser un outil appelé [create-react-app](https://github.com/facebook/create-react-app). Il est possible (mais pas nécessaire) d'installer <i>create-react-app</i> sur votre machine si l'outil <i>npm</i> qui a été installé avec Node a un numéro de version d'au moins <i>5.3</i>.
+Le moyen le plus simple de commencer de loin est d'utiliser un outil appelé [Vite](https://vitejs.dev/).
 
-Créons une application appelée <i>part1</i> et naviguons jusqu'à son répertoire.
+Nous allons créer une application appelée <i>part1</i>, accédons à son répertoire et installons les bibliothèques :
 
 ```bash
-npx create-react-app part1
-cd part1
-```
+# npm 6.x (obsolète, mais encore utilisé par certains) :
+npm create vite@latest part1 --template react
 
+# npm 7+, un double tiret supplémentaire est nécessaire :
+npm create vite@latest part1 -- --template react
+```
+```bash
+cd part1
+npm install
+```
 L'application est exécutée comme suit
 
 ```bash
-npm start
+npm run dev
 ```
 
-Par défaut, l'application s'exécute sur le port 3000 avec l'adresse <http://localhost:3000>
+Le terminal affiche que l'application a démarré sur le port localhost 5173, c'est-à-dire à l'adresse <http://localhost:5173/> :
 
-Votre navigateur par défaut devrait se lancer automatiquement. Ouvrez la console du navigateur **immédiatement**. Ouvrez également un éditeur de texte afin de pouvoir visualiser le code ainsi que la page Web en même temps à l'écran :
+![Image](../../images/1/1-vite1.png)
 
-![](../../images/1/1e.png)
+Par défaut, Vite démarre l'application sur le port 5173. Si ce port n'est pas disponible, Vite utilisera le numéro de port suivant disponible.
 
-Le code de l'application réside dans le dossier <i>src</i>. Simplifions le code par défaut de sorte que le contenu du fichier <i>index.js</i> ressemble à :
+Ouvrez le navigateur et un éditeur de texte pour pouvoir afficher le code ainsi que la page Web en même temps à l'écran :
+
+![Image](../../images/1/1-vite4.png)
+
+Le code de l'application se trouve dans le dossier <i>src</i>. Simplifions le code par défaut de telle sorte que le contenu du fichier <i>main.jsx</i> ressemble à ceci :
 
 ```js
 import React from 'react'
@@ -53,26 +63,22 @@ const App = () => (
 export default App
 ```
 
-Les fichiers <i>App.css</i>, <i>App.test.js</i>, <i>index.css</i>, <i>logo.svg</i>, <i >setupTests.js</i> et <i>reportWebVitals.js</i> peuvent être supprimés car ils ne sont pas nécessaires dans notre application pour le moment.
+Les fichiers <i>App.css</i> et <i>index.css</i>, ainsi que le répertoire <i>assets</i>, peuvent être supprimés car ils ne sont pas nécessaires dans notre application pour le moment.
 
-Si vous vous retrouvez avec l'erreur suivante :
+### create-react-app
+Au lieu de Vite, vous pouvez également utiliser l'outil de la génération précédente create-react-app dans le cours pour configurer les applications. La différence la plus visible par rapport à Vite est le nom du fichier de démarrage de l'application, qui est <i>index.js</i>.
 
-![](../../images/1/r18-error.png)
+La manière de démarrer l'application est également différente dans CRA, elle est lancée avec la commande
 
-Ensuite, pour une raison quelconque, vous utilisez une version de React antérieure à la version actuelle 18.
-
-Le correctif consiste à modifier <i>index.js</i> comme suit
-
-```js
-import ReactDOM from "react-dom"
-import App from "./App"
-
-ReactDOM.render(<App />, document.getElementById("root"))
+```bash
+npm start
 ```
+contrairement à Vite qui utilise
 
-Vous devrez très probablement faire de même pour vos autres projets.
-
-Voir [ici](/fr/part1/plongez_dans_le_debogage_dapplications_react#une-note-sur-la-version-react) pour en savoir plus sur les différences de version.
+```bash
+npm run dev
+```
+Le cours est actuellement (11 août 2023) en cours de mise à jour pour utiliser Vite. Certaines marques peuvent toujours utiliser la base d'application créée avec create-react-app.
 
 ### Composant
 
@@ -84,9 +90,27 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 
 rend son contenu dans l'élément <i>div</i>, défini dans le fichier <i>public/index.html</i>, ayant la valeur <i>id</i> 'root'.
 
-Par défaut, le fichier <i>public/index.html</i> ne contient aucun balisage HTML qui nous soit visible dans le navigateur. Vous pouvez essayer d'ajouter du HTML dans le fichier. Cependant, lors de l'utilisation de React, tout le contenu qui doit être rendu est généralement défini en tant que composants React.
+Par défaut, le fichier <i>index.html</i> ne contient aucune balise HTML visible pour nous dans le navigateur :
 
-Examinons de plus près le code définissant le composant :
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+
+```
+Vous pouvez essayer d'ajouter du HTML dans le fichier. Cependant, lors de l'utilisation de React, tout le contenu qui doit être rendu est généralement défini sous forme de composants React.
+
+Jetons un coup d'oeil plus attentif au code qui définit le composant :
 
 ```js
 const App = () => (
@@ -130,7 +154,7 @@ const App = () => {
 
 En d'autres termes, la fonction renvoie la valeur de l'expression.
 
-La fonction définissant le composant peut contenir n'importe quel type de code JavaScript. Modifiez votre composant pour qu'il soit comme suit et observez ce qui se passe dans la console :
+La fonction définissant le composant peut contenir n'importe quel type de code JavaScript. Modifiez votre composant pour qu'il soit comme suit
 
 ```js
 const App = () => {
@@ -141,7 +165,18 @@ const App = () => {
     </div>
   )
 }
+export default App
 ```
+
+et observez ce qui se passe dans la console :
+
+![console du navigateur affichant la console avec une flèche pointant vers "Hello from component"](../../images/1/30.png)
+
+La première règle du développement web côté client :
+
+> <i>gardez la console ouverte en permanence</i>
+
+Répétons ceci ensemble : <i>je promets de garder la console ouverte en permanence</i> pendant ce cours, et pour le reste de ma vie lorsque je fais du développement web.
 
 Il est également possible de rendre du contenu dynamique à l'intérieur d'un composant.
 
@@ -166,7 +201,17 @@ const App = () => {
 
 Tout code JavaScript à l'intérieur des accolades est évalué et le résultat de cette évaluation est intégré à l'emplacement défini dans le code HTML produit par le composant.
 
-### JSX
+Notez que vous ne devez pas supprimer la ligne en bas du composant
+
+```js
+export default App
+```
+
+L'exportation n'est pas affichée dans la plupart des exemples du matériel du cours. Sans l'exportation, le composant et toute l'application ne fonctionnent pas.
+
+Vous souvenez-vous de votre promesse de garder la console ouverte ? Qu'y a-t-il été imprimé ?
+
+### JSX
 
 Il semble que les composants React renvoient le balisage HTML. Cependant, ce n'est pas le cas. La disposition des composants React est principalement écrite à l'aide de [JSX](https://reactjs.org/docs/introducing-jsx.html). Bien que JSX ressemble à du HTML, nous avons en fait affaire à un moyen d'écrire du JavaScript. Sous le capot, le JSX renvoyé par les composants React est compilé en JavaScript.
 
@@ -190,7 +235,7 @@ const App = () => {
 }
 ```
 
-La compilation est gérée par [Babel](https://babeljs.io/repl/). Les projets créés avec *create-react-app* sont configurés pour se compiler automatiquement. Nous en apprendrons plus sur ce sujet dans la [partie 7](/en/part7) de ce cours.
+La compilation est gérée par [Babel](https://babeljs.io/repl/). Les projets créés avec *create-react-app* ou *vite* sont configurés pour se compiler automatiquement. Nous en apprendrons plus sur ce sujet dans la [partie 7](/en/part7) de ce cours.
 
 Il est également possible d'écrire React en "pur JavaScript" sans utiliser JSX. Bien que personne avec un esprit sain ne le ferait réellement.
 
@@ -210,7 +255,7 @@ mais lors de l'écriture de JSX, la balise doit être fermée :
 
 ### Composants multiples
 
-Modifions le fichier <i>App.js</i> comme suit (NB : l'exportation en bas est omise dans ces <i>exemples</i>, maintenant et dans le futur. Elle est toujours nécessaire pour faire fonctionner le code):
+Modifions le fichier <i>App.jsx</i> comme suit :
 
 ```js
 // highlight-start
@@ -250,9 +295,11 @@ const App = () => {
 }
 ```
 
-L'écriture de composants avec React est facile, et en combinant des composants, même une application plus complexe peut rester assez maintenable. En effet, une philosophie de base de React consiste à composer des applications à partir de nombreux composants réutilisables spécialisés.
+**NB**: L'exportation (<em>export</em>) à la fin est omise dans ces <i>exemples</i>, maintenant et à l'avenir. Elle est toujours nécessaire pour que le code fonctionne.
 
-Une autre convention forte est l'idée d'un <i>composant racine</i> appelé <i>App</i> en haut de l'arborescence des composants de l'application. Néanmoins, comme nous l'apprendrons dans la [partie 6](/en/part6), il existe des situations où le composant <i>App</i> n'est pas exactement la racine, mais est encapsulé dans un composant utilitaire approprié.
+Écrire des composants avec React est facile, et en combinant des composants, même une application plus complexe peut rester assez maintenable. En effet, une philosophie centrale de React est de composer des applications à partir de nombreux composants spécialisés réutilisables.
+
+Une autre forte convention est l'idée d'un composant racine appelé <i>App</i> en haut de l'arborescence de composants de l'application. Néanmoins, comme nous le verrons dans [partie 6](/en/part6), il y a des situations où le composant <i>App</i> n'est pas exactement la racine, mais il est enveloppé dans un composant utilitaire approprié.
 
 ### props : transmission de données aux composants
 
@@ -317,17 +364,60 @@ const App = () => {
 
 Les props envoyées par le composant <i>App</i> sont les valeurs des variables, le résultat de l'évaluation de l'expression sum et une chaîne régulière.
 
+Le composant <i>Hello</i> enregistre également la valeur de l'objet props dans la console.
+
+J'espère vraiment que votre console était ouverte. Si ce n'était pas le cas, souvenez-vous de ce que vous avez promis :
+
+> <i>Je promets de garder la console ouverte en permanence pendant ce cours, et pour le reste de ma vie lorsque je fais du développement web.</i>
+
+Le développement de logiciels est difficile. Cela devient encore plus difficile si l'on n'utilise pas tous les outils disponibles, tels que la console web et l'impression de débogage avec _console.log_. Les professionnels utilisent les deux <i>tout le temps</i>, et il n'y a aucune raison pour qu'un débutant n'adopte pas l'utilisation de ces merveilleuses méthodes d'aide qui faciliteront grandement la vie.
+
+### Message d'erreur possible
+
+Selon l'éditeur que vous utilisez, vous pouvez recevoir le message d'erreur suivant à ce stade :
+
+![Capture d'écran de l'erreur eslint](../../images/1/1-vite5.png)
+
+Il ne s'agit pas réellement d'une erreur, mais d'un avertissement généré par l'outil [ESLint](https://eslint.org/). Vous pouvez supprimer l'avertissement [react/prop-types](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md) en ajoutant à votre fichier <i>.eslintrc .cjs</i> la ligne suivante :
+
+```js
+module.exports = {
+   root: true,
+   env: { browser: true, es2020: true },
+   extends: [
+     'eslint:recommended',
+     'plugin:react/recommended',
+     'plugin:react/jsx-runtime',
+     'plugin:react-hooks/recommended',
+   ],
+   ignorePatterns: ['dist', '.eslintrc.cjs'],
+   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
+   settings: { react: { version: '18.2' } },
+   plugins: ['react-refresh'],
+   rules: {
+     'react-refresh/only-export-components': [
+       'warn',
+       { allowConstantExport: true },
+     ],
+     'react/prop-types': 0 // highlight-line
+   },
+}
+```
+
+Nous en apprendrons davantage sur ESLint en détail dans [la partie 3](/osa3/validointi_ja_es_lint#lint).
+
+
 ### Quelques notes
 
-React a été configuré pour générer des messages d'erreur assez clairs. Malgré cela, vous devriez, au moins au début, avancer par **très petites étapes** et vous assurer que chaque changement fonctionne comme vous le souhaitez.
+React a été configuré pour générer des messages d'erreur assez clairs. Malgré cela, vous devriez, du moins au début, avancer par **de très petits pas** et vous assurer que chaque modification fonctionne comme prévu.
 
-**La console doit toujours être ouverte**. Si le navigateur signale des erreurs, il n'est pas conseillé de continuer à écrire plus de code, en espérant des miracles. Vous devriez plutôt essayer de comprendre la cause de l'erreur et, par exemple, revenir à l'état de fonctionnement précédent :
+**La console doit toujours être ouverte**. Si le navigateur signale des erreurs, il n'est pas recommandé de continuer à écrire du code en espérant des miracles. Vous devriez plutôt essayer de comprendre la cause de l'erreur et, par exemple, revenir à l'état précédent qui fonctionnait :
 
-![](../../images/1/2a.png)
+![Capture d'écran de l'erreur de propriété non définie](../../images/1/1-vite6.png)
 
-Il est bon de se rappeler que dans React, il est possible et utile d'écrire des commandes <em>console.log()</em> (qui s'impriment sur la console) dans votre code.
+Comme nous l'avons déjà mentionné, lors de la programmation avec React, il est possible et utile d'écrire des commandes <em>console.log()</em> (qui affichent des messages dans la console) dans votre code.
 
-Gardez également à l'esprit que **les noms de composants React doivent être en majuscules**. Si vous essayez de définir un composant comme suit
+De plus, gardez à l'esprit que **la première lettre des noms de composants React doit être en majuscule**. Si vous essayez de définir un composant comme suit :
 
 ```js
 const footer = () => {
@@ -367,11 +457,11 @@ const App = () => {
 }
 ```
 
-le résultat est un message d'erreur.
+Le résultat est un message d'erreur.
 
-![](../../images/1/3c.png)
+![Capture d'écran de l'erreur de plusieurs éléments racine](../../images/1/1-vite7.png)
 
-L'utilisation d'un élément racine n'est pas la seule option. Un <i>tableau</i> de composants est également une solution valide :
+L'utilisation d'un élément racine n'est pas la seule option de travail. Un <i>tableau</i> de composants est également une solution valide :
 
 ```js
 const App = () => {
@@ -404,6 +494,104 @@ const App = () => {
 ```
 
 Ca compile maintenant avec succès et le DOM généré par React ne contient plus l'élément div supplémentaire.
+
+### Ne pas rendre d'objets
+
+Considérez une application qui affiche les noms et les âges de nos amis à l'écran :
+
+```js
+const App = () => {
+  const friends = [
+    { name: 'Peter', age: 4 },
+    { name: 'Maya', age: 10 },
+  ]
+
+  return (
+    <div>
+      <p>{friends[0]}</p>
+      <p>{friends[1]}</p>
+    </div>
+  )
+}
+
+export default App
+```
+
+Cependant, rien n'apparaît à l'écran. J'ai essayé de trouver un problème dans le code pendant 15 minutes, mais je n'arrive pas à comprendre où pourrait se trouver le problème.
+
+Je me souviens enfin de la promesse que nous avons faite :
+
+> <i>Je promets de laisser la console ouverte en permanence pendant ce cours, et pour le reste de ma vie lorsque je fais du développement web</i>
+
+La console s'affiche en rouge :
+
+![Outils de développement affichant une erreur avec une mise en évidence autour de "Les objets ne sont pas valides en tant qu'enfant React"](../../images/1/34new.png)
+
+Le coeur du problème est que <i>les objets ne sont pas valides en tant qu'enfant React</i>, c'est-à-dire que l'application tente de rendre des <i>objets</i> et échoue.
+
+Le code tente de rendre les informations d'un ami comme suit
+
+```js
+<p>{friends[0]}</p>
+```
+
+et cela pose problème car l'élément à rendre entre les accolades est un objet.
+
+```js
+{ name: 'Peter', age: 4 }
+```
+
+En React, les éléments individuels rendus entre accolades doivent être des valeurs primitives, telles que des nombres ou des chaînes.
+
+La correction est la suivante
+
+```js
+const App = () => {
+  const friends = [
+    { name: 'Peter', age: 4 },
+    { name: 'Maya', age: 10 },
+  ]
+
+  return (
+    <div>
+      <p>{friends[0].name} {friends[0].age}</p>
+      <p>{friends[1].name} {friends[1].age}</p>
+    </div>
+  )
+}
+
+export default App
+```
+
+Maintenant, le nom de l'ami est rendu séparément entre les accolades
+
+```js
+{friends[0].name}
+```
+
+et l'âge
+
+```js
+{friends[0].age}
+```
+
+Après avoir corrigé l'erreur, vous devriez effacer les messages d'erreur de la console en appuyant sur 🚫, puis recharger le contenu de la page et vous assurer qu'aucun message d'erreur n'apparaît.
+
+Une petite note supplémentaire par rapport à la précédente. React permet également de rendre des tableaux <i>si</i> le tableau contient des valeurs éligibles pour le rendu (telles que des nombres ou des chaînes). Ainsi, le programme suivant fonctionnerait, bien que le résultat ne soit peut-être pas celui que nous souhaitons :
+
+```js
+const App = () => {
+  const friends = [ 'Peter', 'Maya']
+
+  return (
+    <div>
+      <p>{friends}</p>
+    </div>
+  )
+}
+```
+
+Dans cette partie, il n'est même pas utile d'essayer d'utiliser le rendu direct des tableaux, nous y reviendrons dans la prochaine partie.
 
 </div>
 

@@ -40,7 +40,6 @@ module.exports = {
       b: 'Monta reduseria',
       c: 'Redux-sovelluksen kommunikointi palvelimen kanssa',
       d: 'React Query, useReducer ja context',
-      e: 'connect (vanha osa)',
     },
     '7': {
       a: 'React Router',
@@ -108,7 +107,6 @@ module.exports = {
       b: 'Many reducers',
       c: 'Communicating with server in a redux application',
       d: 'React Query, useReducer and the context',
-      e: 'connect (the old part)',
     },
     '7': {
       a: 'React Router',
@@ -131,7 +129,6 @@ module.exports = {
       c: 'Typing an Express app',
       d: 'React with types',
       e: 'Grande finale: Patientor',
-      f: 'Legacy patientor (the old material)',
     },
     '10': {
       a: 'Introduction to React Native',
@@ -264,7 +261,7 @@ module.exports = {
     },
     '3': {
       a: 'Node.js y Express',
-      b: 'Implementación de la aplicación en Internet',
+      b: 'Despliegue de la aplicación a Internet',
       c: 'Guardando datos en MongoDB',
       d: 'Validación y ESLint',
     },
@@ -272,7 +269,7 @@ module.exports = {
       a: 'Estructura de la aplicación backend, introducción a las pruebas',
       b: 'Probando el backend',
       c: 'Administración de usuarios',
-      d: 'Autenticación de token',
+      d: 'Autenticación basada en token',
     },
     '5': {
       a: 'Iniciar sesión en la interfaz',
@@ -305,13 +302,14 @@ module.exports = {
     '9': {
       a: 'Antecedentes e introducción',
       b: 'Primeros pasos con TypeScript',
-      c: 'Escribiendo una aplicación express',
+      c: 'Tipando una aplicación Express',
       d: 'React con tipos',
+      e: 'Grande finale: Patientor',
     },
     '10': {
       a: 'Introducción a React Native',
       b: 'Conceptos básicos de React Native',
-      c: 'Comunicandose con el servidor',
+      c: 'Comunicándose con el servidor',
       d: 'Probar y ampliar nuestra aplicación',
     },
     '11': {
@@ -340,8 +338,8 @@ module.exports = {
     '1': {
       a: 'Premiers pas avec React',
       b: 'JavaScript',
-      c: 'État des composants, gestionnaires d\'événements',
-      d: 'Plongez dans le débogage d\'applications React',
+      c: "État des composants, gestionnaires d'événements",
+      d: "Plongez dans le débogage d'applications React",
     },
     '2': {
       a: 'Rendu de collections, modules',
@@ -357,10 +355,10 @@ module.exports = {
       d: 'Validation et ESLint',
     },
     '4': {
-      a: 'Structure de l\'application backend, introduction aux tests',
+      a: "Structure de l'application backend, introduction aux tests",
       b: 'Tester le backend',
       c: 'Gestion des utilisateurs',
-      d: 'Jeton d\'authentification',
+      d: "Jeton d'authentification",
     },
     '5': {
       a: 'Connexion front-end',
@@ -371,7 +369,7 @@ module.exports = {
     '6': {
       a: 'Architecture de flux et Redux',
       b: 'Quelques reducers',
-      c: 'Communiquer avec le backend dans l\'application Redux',
+      c: "Communiquer avec le backend dans l'application Redux",
       d: 'Connect',
     },
     '7': {
@@ -392,7 +390,7 @@ module.exports = {
     '9': {
       a: 'Contexte et introduction',
       b: 'Premiers pas avec TypeScript',
-      c: 'De l\'application express à TypeScript',
+      c: "De l'application express à TypeScript",
       d: 'Écrire des applications React avec TypeScript',
     },
     '10': {
@@ -411,7 +409,7 @@ module.exports = {
     '12': {
       a: 'Introduction aux Conteneurs',
       b: 'Construire et configurer des environnements',
-      c: 'Bases de l\'Orchestration',
+      c: "Bases de l'Orchestration",
     },
     '13': {
       a: 'Bases de données relationnelles avec Sequelize',
@@ -453,7 +451,7 @@ module.exports = {
       a: 'Login no front-end',
       b: 'props.children e proptypes',
       c: 'Testando aplicações React',
-      d: 'Teste de ponta a ponta',
+      d: 'Testes end-to-end',
     },
     '6': {
       a: 'Arquitetura Flux e Redux',

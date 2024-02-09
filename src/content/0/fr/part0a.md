@@ -13,9 +13,11 @@ Les autres sujets incluent le débogage des applications, la technologie des con
 
 ### Prérequis
 
-Les participants doivent avoir de bonnes compétences en programmation, des connaissances de base en programmation Web et en bases de données, et maîtriser le système de gestion de versions Git. On attend également de vous que vous ayez de la persévérance et une capacité à résoudre des problèmes et à rechercher des informations de manière autonome.
+On s'attend des participants qu'ils aient de bonnes compétences en programmation, des connaissances de base en programmation Web et en bases de données, et qu'ils maîtrisent le système de gestion de versions Git. On attend également de vous que vous ayez de la persévérance et une capacité à résoudre des problèmes et à rechercher des informations de manière autonome.
 
 Une connaissance préalable de JavaScript ou d'autres sujets de cours n'est pas requise.
+
+Quelle est la quantié d'experience en programmation nécessaire?  Difficile à dire avec précision, néanmoins, on s'attend à un niveau de maîtrise suffisante avec <i>votre</i> language, qui équivaut approximativement à 100-200 heures de pratique.
 
 ### Matériel de cours
 
@@ -29,7 +31,7 @@ Le matériel de cours est basé sur des exemples d'applications en expansion pro
 
 ### Suivre le cours
 
-Le cours contient quatorze parties, dont la première est numérotée 0 par souci de cohérence avec les itérations passées. Une partie correspond à peu près à une semaine (15 à 20 heures en moyenne) d'études, mais la vitesse de réalisation du cours est flexible.
+Le cours contient quatorze parties, dont la première est numérotée 0 par souci de cohérence avec les itérations passées. Une partie correspond environ à une semaine (15 à 20 heures en moyenne) d'études, mais la vitesse de réalisation du cours est flexible.
 
 Passer de la partie <i>n</i> à la partie <i>n+1</i> n'est pas judicieux avant d'avoir acquis une connaissance suffisante des sujets de la partie <i>n</i>. En termes pédagogiques, le cours utilise [Mastery Learning](https://en.wikipedia.org/wiki/Mastery_learning), et vous n'êtes censé passer à la partie suivante qu'après avoir fait suffisamment d'exercices de la partie précédente.
 
@@ -44,7 +46,43 @@ Les statistiques de temps d'exécution des exercices peuvent être trouvées via
 
 ### Chaîne de cours dans Discord et Telegram
 
-Vous pouvez discuter du cours et des sujets connexes dans notre groupe dédié sur <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>Discord</a> et sur <a target='_blank' href='https://t.me/fullstackcourse'>Telegram</a>. Rejoignez la conversation !
+Vous pouvez discuter du cours et des sujets connexes dans notre groupe dédié sur <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>Discord</a> et sur <a target='_blank' href='https://t.me/fullstackcourse'>Telegram</a>. 
+
+Le serveur Discord possède une chaîne fullstack_general et d'autres chaînes spécifiques à chaque partie.  Prenez note que <i>l'utilisation de la chaîne de clavardage principale n'est pas appropriée aux discussions dédiées au matériel du cours.</i>
+
+Rejoignez la conversation !
+
+### Comment recevoir de l'aide par Discord/Telegram
+
+Lorsque vous demandez de l'aide pour un problème par Discord/Telegram, votre question se doit d'être aussi claire et informative que possible.  Si votre question ressemble à ceci:
+
+> <i>Ajouter une nouvelle personne ne fonctionne pas, pouvez vous m'aider?</i>
+
+il est for probable que personne ne répondra.  Le problème pourrait être <i>n'importe où</i>.
+
+Une meilleure question pourrait être:
+
+> <i> Dans l'exercice 2.15, lorsque j'essaie d'ajouter une nouvelle personne à l'application, le serveur répond à 403, bien que la demande me semble correcte.
+>
+> Le code ressemble à ceci
+>
+> ```js
+> // la partie de code pertinente est collée ici
+> // le code doit contenir plusieurs instructions console.log pour faciliter le débogage
+> ```
+>
+> Ce qui suit est imprimé sur la console
+>
+> ```bash
+> // données imprimées sur la console
+> ```
+>
+> L'onglet réseau ressemble à ceci</i>
+>
+> [capture d'écran de la console réseau]
+>
+> Tout le code se trouve ici (un lien vers GitHub)
+
 
 ### Parties et complétion
 
@@ -69,8 +107,6 @@ Les crédits et les notes sont calculés comme suit :
 Une fois que vous avez terminé suffisamment d'exercices pour obtenir une note de passage, vous pouvez télécharger le certificat de cours à partir du [système de soumission](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 Si vous souhaitez recevoir des crédits universitaires, vous devez réussir l'examen du cours. L'examen ne compte pas dans votre note finale, mais vous devez le réussir. Plus d'infos sur l'examen [ici](/fr/part0/informations_generales#lexamen-du-cours).
-
-La dernière date possible pour passer l'examen est le 10 janvier 2023. **Notez que vous devez vous inscrire à l'examen au plus tard le 9 janvier 2023.**
 
 Vous ne pouvez passer l'examen qu'après avoir soumis suffisamment d'exercices pour cinq crédits. En pratique, il n'est pas judicieux de passer l'examen immédiatement après avoir soumis le nombre critique d'exercices. L'examen est le même pour 5 à 14 crédits et ne compte pas dans votre note.
 
@@ -304,7 +340,7 @@ Ne codez pas avec nano, Notepad ou Gedit. NetBeans n'est pas non plus très bon 
 
 Installez également [Node.js](https://nodejs.org/en/). Le matériel a été réalisé avec la version 16.13.2, n'installez donc aucune version antérieure à celle-ci. Voir [Instructions d'installation de Node.js](https://nodejs.org/en/download/package-manager/).
 
-Le gestionnaire de packages de nœuds [npm](https://www.npmjs.com/get-npm) sera automatiquement installé avec Node.js. Nous utiliserons activement npm tout au long du cours. Node est également fourni avec [npx](https://www.npmjs.com/package/npx), dont nous aurons besoin plusieurs fois.
+Le gestionnaire de packages de noeuds [npm](https://www.npmjs.com/get-npm) sera automatiquement installé avec Node.js. Nous utiliserons activement npm tout au long du cours. Node est également fourni avec [npx](https://www.npmjs.com/package/npx), dont nous aurons besoin plusieurs fois.
 
 ### Fautes de frappe dans le matériel
 

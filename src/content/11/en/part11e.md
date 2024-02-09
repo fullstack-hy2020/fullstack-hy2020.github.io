@@ -7,7 +7,7 @@ lang: en
 
 <div class="content">
 
-This part has focus on building a simple, effective, and robust CI system that helps developers to work together, maintain code quality, and deploy safely. What more could one possibly want? In the real world, there are more fingers in the pie than just developers and users. Even if that weren't true, even for developers, there's a lot more value to be gained from CI systems than just the things above.
+This part focuses on building a simple, effective, and robust CI system that helps developers to work together, maintain code quality, and deploy safely. What more could one possibly want? In the real world, there are more fingers in the pie than just developers and users. Even if that weren't true, even for developers, there's a lot more value to be gained from CI systems than just the things above.
 
 ### Visibility and Understanding
 
@@ -19,7 +19,7 @@ A common use of this is to have some reference to the tracking system in Git pul
 
 When the CI process finishes quickly, it can be convenient to just watch it execute and wait for the result. As projects become more complex, so too does the process of building and testing the code. This can quickly lead to a situation where it takes long enough to generate the build result that a developer may want to begin working on another task. This in turn leads to a forgotten build. 
 
-This is especially problematic if we're talking about merging PRs that may affect another developer's work, either causing problems or delays for them. This can also lead to a situation where you think you've deployed something but haven't actually finished a deployment, this can lead to mis-communication with teammates and customers (e.g. "Go ahead and try that again, the bug should be fixed").
+This is especially problematic if we're talking about merging PRs that may affect another developer's work, either causing problems or delays for them. This can also lead to a situation where you think you've deployed something but haven't actually finished a deployment, this can lead to miscommunication with teammates and customers (e.g. "Go ahead and try that again, the bug should be fixed").
 
 There are several solutions to this problem ranging from simple notifications to more complicated processes that simply merge passing code if certain conditions are met. We're going to discuss notifications as a simple solution since it's the one that interferes with the team workflow the least.
 
@@ -39,19 +39,19 @@ Register now to Discord if you have not already done that. You will also need a 
 
 #### 11.18 Build success/failure notification action
 
-You can find quite a few of third party actions from [GitHub Action Marketplace](https://github.com/marketplace?type=actions) by using the search phrase [discord](https://github.com/marketplace?type=actions&query=discord). Pick one for this exercise. My choice was [discord-webhook-notify](https://github.com/marketplace/actions/discord-webhook-notify) since it has quite many stars and a decent documentation.
+You can find quite a few third-party actions from [GitHub Action Marketplace](https://github.com/marketplace?type=actions) by using the search phrase [discord](https://github.com/marketplace?type=actions&query=discord). Pick one for this exercise. My choice was [discord-webhook-notify](https://github.com/marketplace/actions/discord-webhook-notify) since it has quite many stars and decent documentation.
 
 Setup the action so that it gives two types of notifications:
 - A success indication if a new version gets deployed
 - An error indication if a build fails
 
-In the case of an error, the notification should be a bit more verbose to help developers finding quickly which is the commit that caused it.
+In the case of an error, the notification should be a bit more verbose to help developers find quickly which is the commit that caused it.
 
 See [here](https://docs.github.com/en/actions/learn-github-actions/expressions#status-check-functions) how to check the job status!
 
 Your notifications may look like the following:
 
-![Releases](../../images/11/20x.png)
+![Releases](../../images/11/gha-notify.png)
 
 </div>
 

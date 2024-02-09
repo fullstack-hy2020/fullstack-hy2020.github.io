@@ -8,6 +8,6 @@ lang: es
 
 Continuemos nuestra introducción a React. Primero, veremos cómo representar una colección de datos, como una lista de nombres, en la pantalla. Después de esto, inspeccionaremos cómo un usuario puede enviar datos a una aplicación React utilizando formularios HTML. A continuación, nuestro enfoque se centra en ver cómo el código JavaScript en el navegador puede obtener y manejar los datos almacenados en un servidor backend remoto. Por último, echaremos un vistazo rápido a algunas formas sencillas de agregar estilos CSS a nuestras aplicaciones React.
 
-<i>Parte actualizada el 18 de enero de 2023</i>
-- <i>Numeración de ejercicios actualizada, los ejercicios 2.11-13 fueron movidos al final de la parte</i>
+<i>Parte actualizada el 14 de Agosto de 2023</i>
+- <i>Create React App reemplazado con Vite</i>
 </div>

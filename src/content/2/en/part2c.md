@@ -37,13 +37,13 @@ Create a file named <i>db.json</i> in the root directory of the previous <i>note
 
 You can [install](https://github.com/typicode/json-server#getting-started) a JSON server globally on your machine using the command _npm install -g json-server_. A global installation requires administrative privileges, which means that it is not possible on faculty computers or freshman laptops.
 
-After installing run the following command to run the json-server. The <i>json-server</i> starts running on port 3000 by default; but since projects created using create-react-app reserve port 3000, we must define an alternate port, such as port 3001, for the json-server. The --watch option automatically looks for any saved changes to db.json
+After installing run the following command to run the json-server. The <i>json-server</i> starts running on port 3000 by default; we will now define an alternate port 3001, for the json-server. The --watch option automatically looks for any saved changes to db.json
   
 ```js
 json-server --port 3001 --watch db.json
 ```
 
-However, a global installation is not necessary.  From the root directory of your app, we can run the <i>json-server</i> using the command _npx_:
+However, a global installation is not necessary. From the root directory of your app, we can run the <i>json-server</i> using the command _npx_:
 
 ```js
 npx json-server --port 3001 --watch db.json
@@ -51,7 +51,7 @@ npx json-server --port 3001 --watch db.json
 
 Let's navigate to the address <http://localhost:3001/notes> in the browser. We can see that <i>json-server</i> serves the notes we previously wrote to the file in JSON format:
 
-![](../../images/2/14new.png)
+![notes on json format in the browser at localhost:3001/notes](../../images/2/14new.png)
 
 If your browser doesn't have a way to format the display of JSON-data, then install an appropriate plugin, e.g. [JSONVue](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) to make your life easier.
 
@@ -139,45 +139,33 @@ We could use the previously mentioned promise-based function [fetch](https://dev
 
 That being said, we will be using the [axios](https://github.com/axios/axios) library instead for communication between the browser and server. It functions like fetch but is somewhat more pleasant to use. Another good reason to use axios is our getting familiar with adding external libraries, so-called <i>npm packages</i>, to React projects.
 
-Nowadays, practically all JavaScript projects are defined using the node package manager, aka [npm](https://docs.npmjs.com/getting-started/what-is-npm). The projects created using create-react-app also follow the npm format. A clear indicator that a project uses npm is the <i>package.json</i> file located at the root of the project:
+Nowadays, practically all JavaScript projects are defined using the node package manager, aka [npm](https://docs.npmjs.com/about-npm). The projects created using Vite also follow the npm format. A clear indicator that a project uses npm is the <i>package.json</i> file located at the root of the project:
 
 ```json
 {
   "name": "notes-frontend",
-  "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
-  },
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "devDependencies": {
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@vitejs/plugin-react": "^4.0.3",
+    "eslint": "^8.45.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "vite": "^4.4.5"
   }
 }
 ```
@@ -197,17 +185,19 @@ Axios is now included among the other dependencies:
 ```json
 {
   "name": "notes-frontend",
-  "version": "0.1.0",
   "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "axios": "^1.2.2", // highlight-line
+    "axios": "^1.4.0", // highlight-line
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "react-dom": "^18.2.0"
   },
   // ...
 }
@@ -227,10 +217,10 @@ and making a small addition to the <i>scripts</i> part of the <i>package.json</i
 {
   // ... 
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
     "server": "json-server -p3001 --watch db.json" // highlight-line
   },
 }
@@ -265,13 +255,13 @@ There is a fine difference in the parameters. <i>axios</i> is installed as a run
 
 ### Axios and promises
 
-Now we are ready to use axios. Going forward, json-server is assumed to be running on port 3001.
+Now we are ready to use Axios. Going forward, json-server is assumed to be running on port 3001.
 
-NB: To run json-server and your react app simultaneously, you may need to use two terminal windows. One to keep json-server running and the other to run react-app.
+NB: To run json-server and your react app simultaneously, you may need to use two terminal windows. One to keep json-server running and the other to run our React application.
 
 The library can be brought into use the same way other libraries, e.g. React, are, i.e., by using an appropriate <em>import</em> statement.
 
-Add the following to the file <i>index.js</i>:
+Add the following to the file <i>main.jsx</i>:
 
 ```js
 import axios from 'axios'
@@ -283,7 +273,7 @@ const promise2 = axios.get('http://localhost:3001/foobar')
 console.log(promise2)
 ```
 
-If you open <http://localhost:3000> in the browser, this should be printed to the console
+If you open <http://localhost:5173/> in the browser, this should be printed to the console
 
 ![promises printed to console](../../images/2/16new.png)
 
@@ -295,9 +285,9 @@ The documentation on Mozilla's site states the following about promises:
 
 In other words, a promise is an object that represents an asynchronous operation. A promise can have three distinct states:
 
-1. The promise is <i>pending</i>: It means that the final value (one of the following two) is not available yet.
-2. The promise is <i>fulfilled</i>: It means that the operation has been completed and the final value is available, which generally is a successful operation. This state is sometimes also called <i>resolved</i>.
-3. The promise is <i>rejected</i>: It means that an error prevented the final value from being determined, which generally represents a failed operation.
+- The promise is <i>pending</i>: It means that the final value (one of the following two) is not available yet.
+- The promise is <i>fulfilled</i>: It means that the operation has been completed and the final value is available, which generally is a successful operation. This state is sometimes also called <i>resolved</i>.
+- The promise is <i>rejected</i>: It means that an error prevented the final value from being determined, which generally represents a failed operation.
 
 The first promise in our example is <i>fulfilled</i>, representing a successful _axios.get('http://localhost:3001/notes')_ request. The second one, however, is <i>rejected</i>, and the console tells us the reason. It looks like we were trying to make an HTTP GET request to a non-existent address.
 
@@ -362,17 +352,20 @@ What's not immediately obvious, however, is where the command <em>axios.get</em>
 
 ### Effect-hooks
 
-We have already used [state hooks](https://reactjs.org/docs/hooks-state.html) that were introduced along with React version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0), which provide state to React components defined as functions - the so-called <i>functional components</i>. Version 16.8.0 also introduces [effect hooks](https://reactjs.org/docs/hooks-effect.html) as a new feature. As per the official docs:
+We have already used [state hooks](https://react.dev/learn/state-a-components-memory) that were introduced along with React version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0), which provide state to React components defined as functions - the so-called <i>functional components</i>. Version 16.8.0 also introduces [effect hooks](https://react.dev/reference/react/hooks#effect-hooks) as a new feature. As per the official docs:
 
-> <i>The Effect Hook lets you perform side effects on function components.</i>
-> <i>Data fetching, setting up a subscription, and manually changing the DOM in React components are all examples of side effects.</i>
+> <i>Effects let a component connect to and synchronize with external systems.</i>
+> <i>This includes dealing with network, browser DOM, animations, widgets written using a different UI library, and other non-React code.</i>
 
 As such, effect hooks are precisely the right tool to use when fetching data from a server.
 
-Let's remove the fetching of data from <i>index.js</i>. Since we're going to be retrieving the notes from the server, there is no longer a need to pass data as props to the <i>App</i> component. So <i>index.js</i> can be simplified to:
+Let's remove the fetching of data from <i>main.jsx</i>. Since we're going to be retrieving the notes from the server, there is no longer a need to pass data as props to the <i>App</i> component. So <i>main.jsx</i> can be simplified to:
 
 ```js
-ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+import ReactDOM from "react-dom/client";
+import App from "./App";
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 ```
 
 The <i>App</i> component changes as follows:
@@ -474,13 +467,13 @@ const hook = () => {
 useEffect(hook, [])
 ```
 
-Now we can see more clearly that the function [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect) takes <i>two parameters</i>. The first is a function, the <i>effect</i> itself. According to the documentation:
+Now we can see more clearly that the function [useEffect](https://react.dev/reference/react/useEffect) takes <i>two parameters</i>. The first is a function, the <i>effect</i> itself. According to the documentation:
 
 > <i>By default, effects run after every completed render, but you can choose to fire it only when certain values have changed.</i>
 
 So by default, the effect is <i>always</i> run after the component has been rendered. In our case, however, we only want to execute the effect along with the first render.
 
-The second parameter of <em>useEffect</em> is used to [specify how often the effect is run](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect). If the second parameter is an empty array <em>[]</em>, then the effect is only run along with the first render of the component.
+The second parameter of <em>useEffect</em> is used to [specify how often the effect is run](https://react.dev/reference/react/useEffect#parameters). If the second parameter is an empty array <em>[]</em>, then the effect is only run along with the first render of the component.
 
 There are many possible use cases for an effect hook other than fetching data from the server. However, this use is sufficient for us, for now.
 
@@ -502,7 +495,7 @@ useEffect(() => {
 }, [])
 ```
 
-A reference to an event handler function is assigned to the variable <em>eventHandler</em>. The promise returned by the <em>get</em> method of Axios is stored in the variable <em>promise</em>. The registration of the callback happens by giving the <em>eventHandler</em> variable, referring to the event-handler function, as a parameter to the <em>then</em> method of the promise. It isn't usually necessary to assign functions and promises to variables, and a more compact way of representing things, as seen further above, is sufficient.
+A reference to an event handler function is assigned to the variable <em>eventHandler</em>. The promise returned by the <em>get</em> method of Axios is stored in the variable <em>promise</em>. The registration of the callback happens by giving the <em>eventHandler</em> variable, referring to the event-handler function, as a parameter to the <em>then</em> method of the promise. It isn't usually necessary to assign functions and promises to variables, and a more compact way of representing things, as seen below, is sufficient.
 
 ```js
 useEffect(() => {
@@ -518,7 +511,7 @@ useEffect(() => {
 
 We still have a problem with our application. When adding new notes, they are not stored on the server.
 
-The code for the application, as described so far, can be found in full on [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-4), on branch <i>part2-4</i>.
+The code for the application, as described so far, can be found in full on [github](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part2-4), on branch <i>part2-4</i>.
 
 ### The development runtime environment
 
@@ -526,7 +519,7 @@ The configuration for the whole application has steadily grown more complex. Let
 
 ![diagram of composition of react app](../../images/2/18e.png)
 
-The JavaScript code making up our React application is run in the browser. The browser gets the JavaScript from the <i>React dev server</i>, which is the application that runs after running the command <em>npm start</em>. The dev-server transforms the JavaScript into a format understood by the browser. Among other things, it stitches together JavaScript from different files into one file. We'll discuss the dev-server in more detail in part 7 of the course.
+The JavaScript code making up our React application is run in the browser. The browser gets the JavaScript from the <i>React dev server</i>, which is the application that runs after running the command <em>npm run dev</em>. The dev-server transforms the JavaScript into a format understood by the browser. Among other things, it stitches together JavaScript from different files into one file. We'll discuss the dev-server in more detail in part 7 of the course.
 
 The React application running in the browser fetches the JSON formatted data from <i>json-server</i> running on port 3001 on the machine. The server we query the data from - <i>json-server</i> - gets its data from the file <i>db.json</i>.
 
@@ -538,7 +531,7 @@ At this point in development, all the parts of the application happen to reside 
 
 <h3>Exercise 2.11.</h3>
 
-<h4>2.11: The Phonebook Step6</h4>
+<h4>2.11: The Phonebook Step 6</h4>
 
 We continue with developing the phonebook. Store the initial state of the application in the file <i>db.json</i>, which should be placed in the root of the project.
 
@@ -585,6 +578,6 @@ Error: listen EADDRINUSE 0.0.0.0:3001
 
 it means that port 3001 is already in use by another application, e.g. in use by an already running json-server. Close the other application, or change the port in case that doesn't work.
 
-Modify the application such that the initial state of the data is fetched from the server using the <i>axios</i>-library. Complete the fetching with an [Effect hook](https://reactjs.org/docs/hooks-effect.html).
+Modify the application such that the initial state of the data is fetched from the server using the <i>axios</i>-library. Complete the fetching with an [Effect hook](https://react.dev/reference/react/useEffect).
 
 </div>

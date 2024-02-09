@@ -7,11 +7,11 @@ lang: en
 
 <div class="content">
 
-So far, we have followed the state management conventions recommended by React. We have placed the state and the functions for handling it in [higher level](https://reactjs.org/docs/lifting-state-up.html) of the component structure of the application. Quite often most of the app state and state altering functions reside directly in the root component. The state and its handler methods have then been passed to other components with props. This works up to a certain point, but when applications grow larger, state management becomes challenging.
+So far, we have followed the state management conventions recommended by React. We have placed the state and the functions for handling it in [higher level](https://react.dev/learn/sharing-state-between-components) of the component structure of the application. Quite often most of the app state and state altering functions reside directly in the root component. The state and its handler methods have then been passed to other components with props. This works up to a certain point, but when applications grow larger, state management becomes challenging.
 
 ### Flux-architecture
 
-Already years ago Facebook developed the [Flux](https://facebook.github.io/flux/docs/in-depth-overview/)-architecture to make state management of React apps easier. In Flux, the state is separated from the React components and into its own <i>stores</i>.
+Already years ago Facebook developed the [Flux](https://facebookarchive.github.io/flux/docs/in-depth-overview)-architecture to make state management of React apps easier. In Flux, the state is separated from the React components and into its own <i>stores</i>.
 State in the store is not changed directly, but with different <i>actions</i>.
 
 When an action changes the state of the store, the views are rerendered:
@@ -33,7 +33,7 @@ We will get to know Redux by implementing a counter application yet again:
 
 ![browser counter application](../../images/6/1.png)
 
-Create a new create-react-app-application and install </i>redux</i> with the command
+Create a new Vite application and install </i>redux</i> with the command
 
 ```bash
 npm install redux
@@ -79,7 +79,9 @@ Let's change the code a bit. We have used if-else statements to respond to an ac
 Let's also define a [default value](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters) of 0 for the parameter <i>state</i>. Now the reducer works even if the store state has not been primed yet.
 
 ```js
+// highlight-start
 const counterReducer = (state = 0, action) => {
+  // highlight-end
   switch (action.type) {
     case 'INCREMENT':
       return state + 1
@@ -96,13 +98,17 @@ const counterReducer = (state = 0, action) => {
 Reducer is never supposed to be called directly from the application's code. Reducer is only given as a parameter to the _createStore_-function which creates the store:
 
 ```js
+// highlight-start
 import { createStore } from 'redux'
+// highlight-end
 
 const counterReducer = (state = 0, action) => {
   // ...
 }
 
+// highlight-start
 const store = createStore(counterReducer)
+// highlight-end
 ```
 
 The store now uses the reducer to handle <i>actions</i>, which are <i>dispatched</i> or 'sent' to the store with its [dispatch](https://redux.js.org/api/store#dispatchaction) method.
@@ -175,7 +181,7 @@ would cause the following to be printed
 -1
 </pre>
 
-The code of our counter application is the following. All of the code has been written in the same file (_index.js_), so <i>store</i> is straight available for the React code. We will get to know better ways to structure React/Redux code later.
+The code of our counter application is the following. All of the code has been written in the same file (_main.jsx_), so <i>store</i> is directly available for the React code. We will get to know better ways to structure React/Redux code later.
 
 ```js
 import React from 'react'
@@ -256,7 +262,7 @@ The full explanation is as follows
 >
 ><i>You should not be using the redux core package by itself today, except for learning purposes. The createStore method from the core redux package will not be removed, but we encourage all users to migrate to using Redux Toolkit for all Redux code.</i>
 
-So, instead of the function <i>createStore</i>, it is recommended to use the slightly more "advanced" function <i>configureStore</i>, and we will also use it when we have taken over the basic functionality of Redux.
+So, instead of the function <i>createStore</i>, it is recommended to use the slightly more "advanced" function <i>configureStore</i>, and we will also use it when we have achieved the basic functionality of Redux.
 
 Side note: <i>createStore</i> is defined as "deprecated", which usually means that the feature will be removed in some newer version of the library. The explanation above and the discussion of [this one](https://stackoverflow.com/questions/71944111/redux-createstore-is-deprecated-cannot-get-state-from-getstate-in-redux-ac) reveal that <i> createStore</i> will not be removed, and it has been given the status <i>deprecated</i>, perhaps with slightly incorrect reasons. So the function is not obsolete, but today there is a more preferable, new way to do almost the same thing.
 
@@ -354,7 +360,9 @@ We added a new note to the state with the method _state.push(action.payload)_ wh
 ```js
 const noteReducer = (state = [], action) => {
   if (action.type === 'NEW_NOTE') {
+    // highlight-start
     return state.concat(action.payload)
+    // highlight-end
   }
 
   return state
@@ -374,8 +382,55 @@ Let's expand our reducer so that it can handle the change of a note's importance
 }
 ```
 
-Since we do not have any code which uses this functionality yet, we are expanding the reducer in the 'test-driven' way.
-Let's start by creating a test for handling the action <i>NEW\_NOTE</i>.
+Since we do not have any code which uses this functionality yet, we are expanding the reducer in the 'test-driven' way. Let's start by creating a test for handling the action <i>NEW\_NOTE</i>.
+
+We have to first configure the [Jest](https://jestjs.io/) testing library for the project. Let us install the following dependencies:
+
+```js
+npm install --save-dev jest @babel/preset-env @babel/preset-react eslint-plugin-jest
+```
+
+Next we'll create the file <i>.babelrc</i>, with the following content:
+
+```json
+{
+  "presets": [
+    "@babel/preset-env",
+    ["@babel/preset-react", { "runtime": "automatic" }]
+  ]
+}
+```
+
+Let us expand <i>package.json</i> with a script for running the tests:
+
+```json
+{
+  // ...
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "test": "jest" // highlight-line
+  },
+  // ...
+}
+```
+
+And finally, <i>.eslintrc.cjs</i> needs to be altered as follows:
+
+```js
+module.exports = {
+  root: true,
+  env: { 
+    browser: true,
+    es2020: true,
+    "jest/globals": true // highlight-line
+  },
+  // ...
+}
+```
+
 
 To make testing easier, we'll first move the reducer's code to its own module to file <i>src/reducers/noteReducer.js</i>. We'll also add the library [deep-freeze](https://www.npmjs.com/package/deep-freeze), which can be used to ensure that the reducer has been correctly defined as an immutable function.
 Let's install the library as a development dependency
@@ -525,7 +580,9 @@ Adding a new note creates the state it returns with Array's _concat_ function. L
 const noteReducer = (state = [], action) => {
   switch(action.type) {
     case 'NEW_NOTE':
+      // highlight-start
       return [...state, action.payload]
+      // highlight-end
     case 'TOGGLE_IMPORTANCE':
       // ...
     default:
@@ -696,8 +753,10 @@ Your application can have a modest appearance, nothing else is needed but button
 Let's add the functionality for adding new notes and changing their importance:
 
 ```js
+// highlight-start
 const generateId = () =>
   Number((Math.random() * 1000000).toFixed(0))
+// highlight-end
 
 const App = () => {
   // highlight-start
@@ -748,7 +807,7 @@ const App = () => {
 }
 ```
 
-The implementation of both functionalities is straightforward. It is noteworthy that we <i>have not</i> bound the state of the form fields to the state of the <i>App</i> component like we have previously done. React calls this kind of form [uncontrolled](https://reactjs.org/docs/uncontrolled-components.html).
+The implementation of both functionalities is straightforward. It is noteworthy that we <i>have not</i> bound the state of the form fields to the state of the <i>App</i> component like we have previously done. React calls this kind of form [uncontrolled](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable).
 
 >Uncontrolled forms have certain limitations (for example, dynamic error messages or disabling the submit button based on input are not possible). However they are suitable for our current needs.
 
@@ -819,7 +878,7 @@ const toggleImportanceOf = (id) => {
 }
 ```
 
-Functions that create actions are called [action creators](https://redux.js.org/advanced/async-actions#synchronous-action-creators).
+Functions that create actions are called [action creators](https://redux.js.org/tutorials/fundamentals/part-7-standard-patterns#action-creators).
 
 The <i>App</i> component does not have to know anything about the inner representation of the actions anymore, it just gets the right action by calling the creator function:
 
@@ -846,7 +905,7 @@ const App = () => {
 Aside from the reducer, our application is in one file. This is of course not sensible, and we should separate <i>App</i> into its module.
 
 Now the question is, how can the <i>App</i> access the store after the move? And more broadly, when a component is composed of many smaller components, there must be a way for all of the components to access the store.
-There are multiple ways to share the Redux store with components. First, we will look into the newest, and possibly the easiest way is using the [hooks](https://react-redux.js.org/api/hooks) API of the [react-redux](https://react-redux.js.org/) library.
+There are multiple ways to share the Redux store with components. First, we will look into the newest, and possibly the easiest way, which is using the [hooks](https://react-redux.js.org/api/hooks) API of the [react-redux](https://react-redux.js.org/) library.
 
 First, we install react-redux
 
@@ -854,9 +913,9 @@ First, we install react-redux
 npm install react-redux
 ```
 
-Next, we move the _App_ component into its own file _App.js_. Let's see how this affects the rest of the application files.
+Next, we move the _App_ component into its own file _App.jsx_. Let's see how this affects the rest of the application files.
 
-_index.js_ becomes:
+_main.jsx_ becomes:
 
 ```js
 import React from 'react'
@@ -1008,8 +1067,7 @@ const App = () => {
 }
 ```
 
-The <i>useDispatch</i> hook provides any React component access to the dispatch function of the Redux store defined in <i>index.js</i>.
-This allows all components to make changes to the state of the Redux store.
+The <i>useDispatch</i> hook provides any React component access to the dispatch function of the Redux store defined in <i>main.jsx</i>. This allows all components to make changes to the state of the Redux store.
 
 The component can access the notes stored in the store with the [useSelector](https://react-redux.js.org/api/hooks#useselector)-hook of the react-redux library.
 
@@ -1078,7 +1136,7 @@ export default NewNote
 
 Unlike in the React code we did without Redux, the event handler for changing the state of the app (which now lives in Redux) has been moved away from the <i>App</i> to a child component. The logic for changing the state in Redux is still neatly separated from the whole React part of the application.
 
-We'll also separate the list of notes and displaying a single note into their own components (which will both be placed in the <i>Notes.js</i> file ):
+We'll also separate the list of notes and displaying a single note into their own components (which will both be placed in the <i>Notes.jsx</i> file ):
 
 ```js
 import { useDispatch, useSelector } from 'react-redux' // highlight-line
@@ -1135,8 +1193,6 @@ const App = () => {
 
 <i>Notes</i>, on the other hand, is a [container](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) component, as it contains some application logic: it defines what the event handlers of the <i>Note</i> components do and coordinates the configuration of <i>presentational</i> components, that is, the <i>Note</i>s.
 
-We will return to the presentational/container division later in this part.
-
 The code of the Redux application can be found on [GitHub](https://github.com/fullstack-hy2020/redux-notes/tree/part6-1), branch <i>part6-1</i>.
 
 </div>
@@ -1158,7 +1214,7 @@ The application can be started as usual, but you have to install the dependencie
 
 ```bash
 npm install
-npm start
+npm run dev
 ```
 
 After completing these exercises, your application should look like this:

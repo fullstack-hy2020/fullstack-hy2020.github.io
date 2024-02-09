@@ -7,43 +7,46 @@ lang: fi
 
 <div class="content">
 
-Alamme nyt tutustua kurssin ehkä tärkeimpään teemaan, [React](https://reactjs.org/)-kirjastoon. Tehdään heti yksinkertainen React-sovellus ja tutustutaan samalla Reactin peruskäsitteistöön.
+Alamme nyt tutustua kurssin ehkä tärkeimpään teemaan, [React](https://react.dev/)-kirjastoon. Tehdään heti yksinkertainen React-sovellus ja tutustutaan samalla Reactin peruskäsitteistöön.
 
-Ehdottomasti helpoin tapa päästä alkuun on [create-react-app](https://github.com/facebookincubator/create-react-app)-nimisen työkalun käyttö. <i>create-react-app</i> on mahdollista asentaa omalle koneelle, mutta asennukseen ei ole tarvetta jos Noden mukana asentunut <i>npm</i>-työkalu on versioltaan vähintään <i>5.3</i>. Tällöin npm:n mukana asentuu komento </i>npx</i>, joka mahdollistaa create-react-app:in käytön asentamatta sitä erikseen. Npm:n version saa selville komennolla <em>npm -v</em>.
+Helpoin tapa päästä alkuun on [Vite](https://vitejs.dev/)-nimisen työkalun käyttö.
 
-> <i>Voit halutessasi käyttää kurssilla React-projektien luomiseen myös "uuden generaation" [Vite](https://vitejs.dev/)-kirjastoa. Koska create-react-app on edelleen Reactin kehitystiimin suositus, on se myös tämän kurssin oletusarvoinen työkalu React-projektien luomiseen. Voit lukea [täältä](https://github.com/reactjs/reactjs.org/pull/5487#issuecomment-1409720741) React-tiimin ajatuksista frontendin "bootstrappaus"-työkalujen tulevaisuudesta.</i>
-
-Luodaan sovellus nimeltään <i>part1</i> ja mennään sovelluksen sisältämään hakemistoon:
+Luodaan sovellus nimeltään <i>part1</i>, mennään sovelluksen sisältämään hakemistoon ja asennetaan sovelluksen käyttämät kirjastot:
 
 ```bash
-npx create-react-app part1
+npm create vite@latest part1 -- --template react
 cd part1
+npm install
 ```
 
 Sovellus käynnistetään seuraavasti:
 
 ```bash
-npm start
+npm run dev
 ```
 
-Sovellus käynnistyy oletusarvoisesti localhostin porttiin 3000, eli osoitteeseen <http://localhost:3000>.
+Konsoli kertoo että sovellus on käynnistynyt localhostin porttiin 5173, eli osoitteeseen <http://localhost:5173/>:
 
-Chromen pitäisi aueta automaattisesti. Avaa konsoli **välittömästi**. Avaa myös tekstieditori siten, että näet koodin ja web-sivun samaan aikaan ruudulla:
+![](../../images/1/1-vite1.png)
 
-![](../../images/1/1e.png)
+Vite käynnistää sovelluksen [oletusarvoisesti](https://vitejs.dev/config/server-options.html#server-port) porttiin 5173. Jos se ei ole vapaana, käyttää Vite seuraavaa vapaata porttinumeroa.
 
-Sovelluksen koodi on hakemistossa <i>src</i>. Yksinkertaistetaan valmiina olevaa koodia siten, että tiedoston <i>index.js</i> sisällöksi tulee:
+Avataan selain sekä tekstieditori siten, että näet koodin ja web-sivun samaan aikaan ruudulla:
+
+![](../../images/1/1-vite4.png)
+
+Sovelluksen koodi on hakemistossa <i>src</i>. Yksinkertaistetaan valmiina olevaa koodia siten, että tiedoston <i>main.jsx</i> sisällöksi tulee:
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App'
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+
 ```
 
-ja tiedoston <i>App.js</i> sisällöksi
+ja tiedoston <i>App.jsx</i> sisällöksi
 
 ```js
 const App = () => (
@@ -55,31 +58,43 @@ const App = () => (
 export default App
 ```
 
-Tiedostot <i>App.css</i>, <i>App.test.js</i>, <i>index.css</i>, <i>logo.svg</i>, <i>reportWebVitals.js</i> ja <i>setupTests.js</i> voi poistaa, sillä emme tarvitse niitä.
+Tiedostot <i>App.css</i> ja <i>index.css</i> sekä hakemiston <i>assets</i> voi poistaa, sillä emme tarvitse niitä.
+
+### create-react-app
+
+Voit halutessasi käyttää kurssilla Viten sijaan myös [create-react-app](https://github.com/facebookincubator/create-react-app)-nimistä sovellusta. Näkyvin ero Viteen on sovelluksen aloitustiedoston nimi, joka on <i>index.js</i>. Myös sovelluksen käynnistämistapa eroaa, käynnistäminen tapahtuu komennolla 
+
+```
+npm start
+```
 
 ### Komponentti
 
-Tiedosto <i>App.js</i> määrittelee nyt React-[komponentin](https://reactjs.org/docs/components-and-props.html) nimeltään <i>App</i>. Tiedoston <i>index.js</i> viimeisen rivin komento
+Tiedosto <i>App.jsx</i> määrittelee nyt React-[komponentin](https://react.dev/learn/your-first-component) nimeltään <i>App</i>. Tiedoston <i>main.jsx</i> viimeisen rivin komento
 
 ```js
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-renderöi komponentin sisällön tiedoston <i>public/index.html</i> määrittelemään <i>div</i>-elementtiin, jonka <i>id:n</i> arvona on 'root'.
+renderöi komponentin sisällön tiedoston <i>index.html</i> määrittelemään <i>div</i>-elementtiin, jonka <i>id:n</i> arvona on 'root'.
 
-Tiedosto <i>public/index.html</i> on headerin määrittelyjä lukuun ottamatta oleellisesti ottaen tyhjä:
+Tiedosto <i>index.html</i> on headerin määrittelyjä lukuun ottamatta oleellisesti ottaen tyhjä:
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-      content not shown ...
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
+
 ```
 
 Voit kokeilla lisätä tiedostoon HTML:ää. Reactilla ohjelmoitaessa yleensä kuitenkin kaikki renderöitävä sisältö määritellään Reactin komponenttien avulla.
@@ -189,7 +204,7 @@ Muistitko pitää konsolin auki? Mitä sinne tulostui?
 
 ### JSX
 
-Näyttää siltä, että React-komponentti palauttaa HTML-koodia. Näin ei kuitenkaan ole. React-komponenttien ulkoasu kirjoitetaan yleensä [JSX](https://reactjs.org/docs/introducing-jsx.html):ää käyttäen. Vaikka JSX näyttää HTML:ltä, kyseessä on kuitenkin tapa kirjoittaa JavaScriptia. React-komponenttien palauttama JSX käännetään konepellin alla JavaScriptiksi.
+Näyttää siltä, että React-komponentti palauttaa HTML-koodia. Näin ei kuitenkaan ole. React-komponenttien ulkoasu kirjoitetaan yleensä [JSX](https://react.dev/learn/writing-markup-with-jsx):ää käyttäen. Vaikka JSX näyttää HTML:ltä, kyseessä on kuitenkin tapa kirjoittaa JavaScriptia. React-komponenttien palauttama JSX käännetään konepellin alla JavaScriptiksi.
 
 Käännösvaiheen jälkeen komponentin määrittelevä koodi näyttää seuraavalta:
 
@@ -231,7 +246,7 @@ mutta JSX:ää kirjoittaessa tagi on pakko sulkea:
 
 ### Monta komponenttia
 
-Muutetaan tiedostoa <i>App.js</i> seuraavasti (muista, että alimman rivin export jätetään <i>esimerkeistä</i> nyt ja jatkossa pois, niiden on kuitenkin oltava koodissa jotta ohjelma toimisi):
+Muutetaan tiedostoa <i>App.jsx</i> seuraavasti (muista, että alimman rivin export jätetään <i>esimerkeistä</i> nyt ja jatkossa pois, niiden on kuitenkin oltava koodissa jotta ohjelma toimisi):
 
 ```js
 // highlight-start
@@ -277,7 +292,7 @@ Vahva konventio on myös se, että sovelluksen ylimpänä oleva <i>juurikomponen
 
 ### props: tiedonvälitys komponenttien välillä
 
-Komponenteille on mahdollista välittää dataa [propsien](https://reactjs.org/docs/components-and-props.html) avulla.
+Komponenteille on mahdollista välittää dataa [propsien](https://react.dev/learn/passing-props-to-a-component) avulla.
 
 Muutetaan komponenttia <i>Hello</i> seuraavasti:
 
@@ -345,7 +360,42 @@ Toivottavasti konsolisi on auki, jos ei ole, muista yhteinen lupauksemme:
 
 > <i>pidän konsolin koko ajan auki tämän kurssin ja koko loppuelämäni ajan tehdessäni web-sovelluskehitystä</i>
 
-Ohjemistokehitys on haastavaa, ja erityisen haastavaksi se muuttuu, jos jokainen mahdollinen apukeino kuten web-konsoli sekä komennolla _console.log_ tahtävät aputulostukset eivät ole käytössä. Ammattilaiset käyttävät näitä <i>aina</i>. Ei ole yhtään syytä miksi aloittelijan pitäisi jättää nämä fantastiset apuvälineet hyödyntämättä.
+Ohjemistokehitys on haastavaa, ja erityisen haastavaksi se muuttuu, jos jokainen mahdollinen apukeino kuten web-konsoli sekä komennolla _console.log_ tehtävät aputulostukset eivät ole käytössä. Ammattilaiset käyttävät näitä <i>aina</i>. Ei ole yhtään syytä miksi aloittelijan pitäisi jättää nämä fantastiset apuvälineet hyödyntämättä.
+
+### Mahdollinen virheilmoitus
+
+Käyttämästäsi editorista riippuen saatat saada tässä vaiheessa seuraavan virheilmoituksen:
+
+![](../../images/1/1-vite5.png)
+
+Kyse ei ole varsinaisesta virheestä vaan [ESLint](https://eslint.org/)-työkalun aiheuttamasta varoituksesta. Saat hiljennettyä varoituksen [react/prop-types](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md) lisäämällä tiedostoon <i>.eslintrc.cjs</i> seuraavan rivin
+
+```js
+module.exports = {
+  root: true,
+  env: { browser: true, es2020: true },
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
+    'plugin:react-hooks/recommended',
+  ],
+  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
+  settings: { react: { version: '18.2' } },
+  plugins: ['react-refresh'],
+  rules: {
+    'react-refresh/only-export-components': [
+      'warn',
+      { allowConstantExport: true },
+    ],
+    'react/prop-types': 0 // highlight-line
+  },
+}
+```
+
+Tutustumme ESLintiin tarkemmin [osassa 3](/osa3/validointi_ja_es_lint#lint).
+
 
 ### Muutamia huomioita
 
@@ -353,9 +403,9 @@ React on konfiguroitu antamaan varsin hyviä virheilmoituksia. Kannattaa kuitenk
 
 <i>**Konsolin tulee olla koko ajan auki**.</i> Jos selain ilmoittaa virheestä, ei kannata kirjoittaa sokeasti lisää koodia ja toivoa ihmettä tapahtuvaksi, vaan tulee yrittää ymmärtää virheen syy ja esim. palata edelliseen toimivaan tilaan:
 
-![](../../images/1/2c.png)
+![](../../images/1/1-vite6.png)
 
-Kuten jo todettiin, myös React-koodissakin on mahdollista ja kannattavaa lisätä koodin sekaan sopivia konsoliin tulostavia <em>console.log()</em>-komentoja. Tulemme hieman [myöhemmin](#react-sovellusten-debuggaus) tutustumaan muutamiin muihinkin tapoihin debugata Reactia.
+Kuten jo todettiin, myös React-koodissa on mahdollista ja kannattavaa lisätä koodin sekaan sopivia konsoliin tulostavia <em>console.log()</em>-komentoja. Tulemme hieman [myöhemmin](#react-sovellusten-debuggaus) tutustumaan muutamiin muihinkin tapoihin debugata Reactia.
 
 Kannattaa pitää mielessä, että **React-komponenttien nimien tulee alkaa isolla kirjaimella**. Jos yrität määritellä komponentin seuraavasti:
 
@@ -384,7 +434,7 @@ const App = () => {
 }
 ```
 
-sivulle ei kuitenkaan ilmesty näkyviin Footer-komponentissa määriteltyä sisältöä, vaan React luo sivulle ainoastaan tyhjän <i>footer</i>-elementin. Jos muutat komponentin nimen alkamaan isolla kirjaimella, React luo sivulle <i>div</i>-elementin, joka määriteltiin Footer-komponentissa.
+sivulle ei ilmestykään näkyviin Footer-komponentissa määriteltyä sisältöä, vaan React luo sivulle ainoastaan tyhjän <i>footer</i>-elementin. Jos muutat komponentin nimen alkamaan isolla kirjaimella, React luo sivulle <i>div</i>-elementin, joka määriteltiin Footer-komponentissa.
 
 Kannattaa pitää mielessä myös, että React-komponentin sisällön tulee (yleensä) sisältää **yksi juurielementti**. Eli jos yrittäisimme määritellä komponentin <i>App</i> ilman uloimmaista <i>div</i>-elementtiä
 
@@ -400,7 +450,7 @@ const App = () => {
 
 seurauksena on virheilmoitus:
 
-![](../../images/1/3c.png)
+![](../../images/1/1-vite7.png)
 
 Juurielementin käyttö ei ole ainoa toimiva vaihtoehto, myös <i>taulukollinen</i> komponentteja on validi tapa:
 
@@ -414,9 +464,9 @@ const App = () => {
 }
 ```
 
-Määritellessä sovelluksen juurikomponenttia, tämä ei kuitenkaan ole järkevää ja näyttää koodissakin pahalta.
+Määriteltäessä sovelluksen juurikomponenttia tämä ei kuitenkaan ole järkevää, ja taulukko näyttää koodissakin pahalta.
 
-Juurielementin pakollisesta käytöstä on se seuraus, että sovelluksen DOM-puuhun tulee "ylimääräisiä" div-elementtejä. Tämä on mahdollista välttää käyttämällä [fragmentteja](https://reactjs.org/docs/fragments.html#short-syntax), eli ympäröimällä komponentin palauttamat elementit tyhjällä elementillä:
+Juurielementin pakollisesta käytöstä on se seuraus, että sovelluksen DOM-puuhun tulee "ylimääräisiä" div-elementtejä. Tämä on mahdollista välttää käyttämällä [fragmentteja](https://react.dev/reference/react/Fragment), eli ympäröimällä komponentin palauttamat elementit tyhjällä elementillä:
 
 ```js
 const App = () => {
@@ -516,7 +566,7 @@ ja ikä
 {friends[0].age}
 ```
 
-Virheen korjauksen jälkeen kannattaa konsolin virheilmoitukset tyhjentää painamalla Ø ja tämän jälkeen uudelleenladata sivun sisältö ja varmistua että virheilmoituksia ei näy.
+Virheen korjauksen jälkeen kannattaa konsolin virheilmoitukset tyhjentää painamalla Ø, uudelleenladata tämän jälkeen sivun sisältö ja varmistua että virheilmoituksia ei näy.
 
 Pieni lisähuomio edelliseen. React sallii myös taulukoiden renderöimisen <i>jos</i> taulukko sisältää arvoja, jotka kelpaavat renderöitäviksi (kuten numeroita tai merkkijonoja). Eli seuraava ohjelma kyllä toimisi, vaikka tulos ei ole kenties se mitä haluamme: 
 
@@ -532,7 +582,7 @@ const App = () => {
 }
 ```
 
-Tässä osassa ei kannata edes yrittää hyödyntää taulukkojen suoraa renderöintiä, palaamme siihen seuraavassa osassa.
+Tässä osassa ei kannata edes yrittää hyödyntää taulukoiden suoraa renderöintiä. Palaamme siihen seuraavassa osassa.
 
 </div>
 
@@ -541,7 +591,7 @@ Tässä osassa ei kannata edes yrittää hyödyntää taulukkojen suoraa render�
 
 Tehtävät palautetaan GitHubin kautta ja merkitsemällä tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
-Voit palauttaa kurssin kaikki tehtävät samaan repositorioon tai käyttää useita repositorioita. Jos palautat eri osien tehtäviä samaan repositorioon, nimeä hakemistot järkevästi. Jos käytät privaattirepositorioa tehtävien palautukseen, liitä repositoriolle collaboratoriksi <i>mluukkai</i>.
+Voit palauttaa kurssin kaikki tehtävät samaan repositorioon tai käyttää useita repositorioita. Jos palautat eri osien tehtäviä samaan repositorioon, nimeä hakemistot järkevästi. Jos käytät yksityistä (private) repositoriota tehtävien palautukseen, liitä repositoriolle collaboratoriksi <i>mluukkai</i>.
 
 Eräs varsin toimiva hakemistorakenne palautusrepositoriolle on [tässä esimerkkirepositoriossa käytetty tapa](https://github.com/FullStack-HY2020/palauitusrepositorio), jossa kutakin osaa kohti on oma hakemistonsa, joka vielä jakautuu tehtäväsarjat (esim. osan 1 <i>kurssitiedot</i>) sisältäviin hakemistoihin:
 
@@ -572,10 +622,9 @@ code .
 
 <i>Tässä tehtävässä aloitettavaa ohjelmaa kehitellään eteenpäin muutamassa seuraavassa tehtävässä. Tässä ja kurssin aikana muissakin vastaan tulevissa tehtäväsarjoissa ohjelman lopullisen version palauttaminen riittää. Voit toki halutessasi tehdä commitin jokaisen tehtävän jälkeisestä tilanteesta, mutta se ei ole välttämätöntä.</i>
 
-Luo create-react-app:illa uusi sovellus. Muuta <i>index.js</i> muotoon
+Luo Vitellä uusi sovellus. Muuta <i>main.jsx</i> muotoon
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App'
@@ -583,7 +632,7 @@ import App from './App'
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-ja tiedosto <i>App.js</i> muotoon
+ja tiedosto <i>App.jsx</i> muotoon
 
 ```js
 const App = () => {
@@ -615,11 +664,11 @@ const App = () => {
 export default App
 ```
 
-ja poista ylimääräiset tiedostot (App.css, App.test.js, index.css, logo.svg, reportWebVitals.js, setupTests.js).
+ja poista ylimääräiset tiedostot <i>App.css</i> ja <i>index.css</i> ja hakemisto <i>assets</i>.
 
 Koko sovellus on nyt ikävästi yhdessä komponentissa. Refaktoroi sovelluksen koodi siten, että se koostuu kolmesta uudesta komponentista: <i>Header</i>, <i>Content</i> ja <i>Total</i>. Kaikki data pidetään edelleen komponentissa <i>App</i>, joka välittää tarpeelliset tiedot kullekin komponentille <i>props:ien</i> avulla. <i>Header</i> huolehtii kurssin nimen renderöimisestä, <i>Content</i> osista ja niiden tehtävämääristä ja <i>Total</i> tehtävien yhteismäärästä.
 
-Tee uudet komponentit tiedostoon <i>App.js</i>.
+Tee uudet komponentit tiedostoon <i>App.jsx</i>.
 
 Komponentin <i>App</i> runko tulee olemaan suunnilleen seuraavanlainen:
 
@@ -644,8 +693,6 @@ Huolellinen, pienin askelin eteneminen saattaa tuntua hitaalta, mutta se on itse
 > <i>"The only way to go fast, is to go well"</i>
 
 eli Martinin mukaan pienin askelin tapahtuva huolellinen eteneminen on jopa ainoa tapa olla nopea.
-
-**VAROITUS2** create-react-app tekee projektista automaattisesti Git-repositorion, ellei sovellusta luoda jo olemassa olevan repositorion sisälle. Todennäköisesti **et halua**, että projektista tulee repositorio, joten suorita projektin juuressa komento _rm -rf .git_.
 
 <h4>1.2: kurssitiedot, step2</h4>
 

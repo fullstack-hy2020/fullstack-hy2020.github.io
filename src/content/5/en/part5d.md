@@ -42,15 +42,19 @@ and by adding an npm-script to run it:
 {
   // ...
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "dev": "vite --host",  // highlight-line
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "server": "json-server -p3001 --watch db.json",
+    "test": "jest",
     "cypress:open": "cypress open"  // highlight-line
   },
   // ...
 }
 ```
+
+We also made a small change to the script that starts the application, without the change Cypress can not access the app.
 
 Unlike the frontend's unit tests, Cypress tests can be in the frontend or the backend repository, or even in their separate repository.
 
@@ -76,10 +80,7 @@ Let's add an npm script to <i>the backend</i> which starts it in test mode, or s
 }
 ```
 
-NB! To get Cypress working with WSL2 one might need to do some additional configuring first. These two [links](https://docs.cypress.io/guides/getting-started/installing-cypress#Windows-Subsystem-for-Linux) are great places to [start](https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress).
-  
-./node_modules/.bin/cypress install -------- needed on windows.
-//https://github.com/cypress-io/cypress/issues/2610
+**NB** To get Cypress working with WSL2 one might need to do some additional configuring first. These two [links](https://docs.cypress.io/guides/getting-started/installing-cypress#Windows-Subsystem-for-Linux) are great places to [start](https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress).
   
 When both the backend and frontend are running, we can start Cypress with the command
 
@@ -110,7 +111,7 @@ Let us change the test content as follows:
 ```js
 describe('Note app', function() {
   it('front page can be opened', function() {
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:5173')
     cy.contains('Notes')
     cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
   })
@@ -133,7 +134,7 @@ We could have declared the test using an arrow function
 ```js
 describe('Note app', () => { // highlight-line
   it('front page can be opened', () => { // highlight-line
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:5173')
     cy.contains('Notes')
     cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
   })
@@ -147,14 +148,14 @@ If <i>cy.contains</i> does not find the text it is searching for, the test does 
 ```js
 describe('Note app', function() {
   it('front page can be opened',  function() {
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:5173')
     cy.contains('Notes')
     cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
   })
 
 // highlight-start
   it('front page contains random text', function() {
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:5173')
     cy.contains('wtf is this app?')
   })
 // highlight-end
@@ -177,28 +178,28 @@ We can get rid of it by installing [eslint-plugin-cypress](https://github.com/cy
 npm install eslint-plugin-cypress --save-dev
 ```
 
-and changing the configuration in <i>.eslintrc.js</i> like so:
+and changing the configuration in <i>.eslintrc.cjs</i> like so:
 
 ```js
 module.exports = {
-    "env": {
-        "browser": true,
-        "es6": true,
-        "jest/globals": true,
-        "cypress/globals": true // highlight-line
-    },
-    "extends": [ 
-      // ...
-    ],
-    "parserOptions": {
-      // ...
-    },
-    "plugins": [
-        "react", "jest", "cypress" // highlight-line
-    ],
-    "rules": {
-      // ...
-    }
+  "env": {
+    browser: true,
+    es2020: true,
+    "jest/globals": true,
+    "cypress/globals": true // highlight-line
+  },
+  "extends": [ 
+    // ...
+  ],
+  "parserOptions": {
+    // ...
+  },
+  "plugins": [
+      "react", "jest", "cypress" // highlight-line
+  ],
+  "rules": {
+    // ...
+  }
 }
 ```
 
@@ -214,7 +215,7 @@ describe('Note app',  function() {
   // ...
 
   it('login form can be opened', function() {
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:5173')
     cy.contains('log in').click()
   })
 })
@@ -222,14 +223,14 @@ describe('Note app',  function() {
 
 The test first searches for the login button by its text and clicks the button with the command [cy.click](https://docs.cypress.io/api/commands/click.html#Syntax).
 
-Both of our tests begin the same way, by opening the page <i><http://localhost:3000></i>, so we should
+Both of our tests begin the same way, by opening the page <i><http://localhost:5173></i>, so we should
 separate the shared part into a <i>beforeEach</i> block run before each test:
 
 ```js
 describe('Note app', function() {
   // highlight-start
   beforeEach(function() {
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:5173')
   })
   // highlight-end
 
@@ -407,7 +408,7 @@ As with unit and integration tests, with E2E tests it is best to empty the datab
 
 The solution is to create API endpoints for the backend tests.
 We can empty the database using these endpoints.
-Let's create a new <i>router</i> for the tests
+Let's create a new router for the tests inside the <i>controllers</i> folder, in the <i>testing.js</i> file
 
 ```js
 const testingRouter = require('express').Router()
@@ -470,7 +471,7 @@ describe('Note app', function() {
     }
     cy.request('POST', 'http://localhost:3001/api/users/', user) 
     // highlight-end
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:5173')
   })
   
   it('front page can be opened', function() {
@@ -545,7 +546,7 @@ The first command searches for a component containing the text <i>another note c
 
 The second command checks that the text on the button has changed to <i>make important</i>.
 
-The tests and the current frontend code can be found on the [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-9) branch <i>part5-9</i>.
+The tests and the current frontend code can be found on the [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-9) branch <i>part5-9</i>.
 
 ### Failed login test
 
@@ -719,7 +720,7 @@ First, we test logging in. Then, in their own describe block, we have a bunch of
 
 As we said above, each test starts from zero! Tests do not start from the state where the previous tests ended.
 
-The Cypress documentation gives us the following advice: [Fully test the login flow – but only once!](https://docs.cypress.io/guides/end-to-end-testing/testing-your-app#Fully-test-the-login-flow-but-only-once).
+The Cypress documentation gives us the following advice: [Fully test the login flow – but only once](https://docs.cypress.io/guides/end-to-end-testing/testing-your-app#Fully-test-the-login-flow-but-only-once).
 So instead of logging in a user using the form in the <i>beforeEach</i> block, Cypress recommends that we [bypass the UI](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Bypassing-your-UI) and do an HTTP request to the backend to log in. The reason for this is that logging in with an HTTP request is much faster than filling out a form.
 
 Our situation is a bit more complicated than in the example in the Cypress documentation because when a user logs in, our application saves their details to the localStorage.
@@ -734,7 +735,7 @@ describe('when logged in', function() {
       username: 'mluukkai', password: 'salainen'
     }).then(response => {
       localStorage.setItem('loggedNoteappUser', JSON.stringify(response.body))
-      cy.visit('http://localhost:3000')
+      cy.visit('http://localhost:5173')
     })
     // highlight-end
   })
@@ -763,7 +764,7 @@ Cypress.Commands.add('login', ({ username, password }) => {
     username, password
   }).then(({ body }) => {
     localStorage.setItem('loggedNoteappUser', JSON.stringify(body))
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:5173')
   })
 })
 ```
@@ -829,7 +830,7 @@ Cypress.Commands.add('createNote', ({ content, important }) => {
     }
   })
 
-  cy.visit('http://localhost:3000')
+  cy.visit('http://localhost:5173')
 })
 ```
 
@@ -864,7 +865,7 @@ describe('Note app', function() {
 })
 ```
 
-There is one more annoying feature in our tests. The application address <i>http:localhost:3000</i> is hardcoded in many places.
+There is one more annoying feature in our tests. The application address <i>http:localhost:5173</i> is hardcoded in many places.
 
 Let's define the <i>baseUrl</i> for the application in the Cypress pre-generated [configuration file](https://docs.cypress.io/guides/references/configuration) <i>cypress.config.js</i>:
 
@@ -875,7 +876,7 @@ module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
     },
-    baseUrl: 'http://localhost:3000' // highlight-line
+    baseUrl: 'http://localhost:5173' // highlight-line
   },
 })
 ```
@@ -883,7 +884,7 @@ module.exports = defineConfig({
 All the commands in the tests use the address of the application
 
 ```js
-cy.visit('http://localhost:3000' )
+cy.visit('http://localhost:5173' )
 ```
 
 can be transformed into
@@ -903,11 +904,11 @@ module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
     },
-    baseUrl: 'http://localhost:3000',
+    baseUrl: 'http://localhost:5173',
+    env: {
+      BACKEND: 'http://localhost:3001/api' // highlight-line
+    }
   },
-  env: {
-    BACKEND: 'http://localhost:3001/api' // highlight-line
-  }
 })
 ```
 
@@ -930,7 +931,7 @@ describe('Note ', function() {
 })
 ```
 
-The tests and the frontend code can be found on the [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-10) branch <i>part5-10</i>.
+The tests and the frontend code can be found on the [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-10) branch <i>part5-10</i>.
 
 ### Changing the importance of a note
 
@@ -942,6 +943,7 @@ describe('when logged in', function() {
   describe('and several notes exist', function () {
     beforeEach(function () {
       // highlight-start
+      cy.login({ username: 'mluukkai', password: 'salainen' })
       cy.createNote({ content: 'first note', important: false })
       cy.createNote({ content: 'second note', important: false })
       cy.createNote({ content: 'third note', important: false })
@@ -1093,7 +1095,7 @@ Now we can run our tests from the command line with the command <i>npm run test:
 
 Note that videos of the test execution will be saved to <i>cypress/videos/</i>, so you should probably git ignore this directory. It is also possible to [turn off](https://docs.cypress.io/guides/guides/screenshots-and-videos#Videos) the making of videos.
 
-The frontend and the test code can be found on the [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-11) branch <i>part5-11</i>.
+The frontend and the test code can be found on the [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-11) branch <i>part5-11</i>.
 
 </div>
 
@@ -1119,7 +1121,7 @@ The structure of the test must be as follows:
 describe('Blog app', function() {
   beforeEach(function() {
     cy.request('POST', 'http://localhost:3003/api/testing/reset')
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:5173')
   })
 
   it('Login form is shown', function() {
@@ -1142,7 +1144,7 @@ describe('Blog app', function() {
   beforeEach(function() {
     cy.request('POST', 'http://localhost:3003/api/testing/reset')
     // create here a user to backend
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:5173')
   })
 
   it('Login form is shown', function() {

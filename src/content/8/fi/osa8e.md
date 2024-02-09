@@ -136,7 +136,7 @@ Teknisesti ottaen HTTP-protokolla ei taivu hyvin palvelimelta selaimeen päin ta
 
 Apollo Server ei versiosta 3.0 alkaen enää ole tarjonnut suoraa tukea subscriptiolle ja joudummekin tekemään joukon muutoksia että saamme ne toimimaan. Siistitään samalla myös sovelluksen rakennetta hiukan. 
 
-Aloitetaan eriyttämällä skeeman määrittely omaan tiedostoon <i>schema.js</i>
+Aloitetaan eriyttämällä backendissä skeeman määrittely omaan tiedostoon <i>schema.js</i>
 
 ```js
 const typeDefs = `
@@ -345,7 +345,7 @@ startStandaloneServer(server, {
 }) 
 ```
 
-startStandaloneServer ei kuitenkaan mahdollsita subscriptioiden lisäämistä sovellukseen, joten siirtymään järeämmän [expressMiddleware](https://www.apollographql.com/docs/apollo-server/api/express-middleware/) funktion käyttöön. Kuten funktion nimi jo vihjaa, kyseessä on Expressin middleware, eli sovellukseen on konfiguroitava myös Express jonka middlewarena GraphQL-server tulee toimimaan.
+startStandaloneServer ei kuitenkaan mahdollista subscriptioiden lisäämistä sovellukseen, joten siirrytään järeämmän [expressMiddleware](https://www.apollographql.com/docs/apollo-server/api/express-middleware/) funktion käyttöön. Kuten funktion nimi jo vihjaa, kyseessä on Expressin middleware, eli sovellukseen on konfiguroitava myös Express jonka middlewarena GraphQL-server tulee toimimaan.
 
 Asennetaan Express:
 
@@ -457,13 +457,13 @@ type Subscription {
 
 Eli kun uusi henkilö luodaan, palautetaan henkilön tiedot kaikille tilaajille.
 
-Asennetaan tarvittavast kirjastot:
+Asennetaan tarvittavat kirjastot:
 
 ```
 npm install graphql-ws ws @graphql-tools/schema
 ```
 
-Tiedosto <i>index.js</i> muuttuu seraavasti
+Tiedosto <i>index.js</i> muuttuu seuraavasti
 
 ```js
 // highlight-start
@@ -537,11 +537,11 @@ const start = async () => {
 start()
 ```
 
-GraphQL:n Queryt ja mutaatiot hoidetaan HTTP-protokollaa käyttäen. Tilausten osalta kommunikaatio tapahuu [WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API)-yhteydellä.
+GraphQL:n Queryt ja mutaatiot hoidetaan HTTP-protokollaa käyttäen. Tilausten osalta kommunikaatio tapahtuu [WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API)-yhteydellä.
 
 Yllä oleva konfio luo palvelimeen HTTP-pyyntöjen kuuntelun rinnalle WebSocketeja kuuntelevan palvelun, jonka se sitoo palvelimen GraphQL-skeemaan. Määrittelyn toinen osa rekisteröi funktion, joka sulkee WebSocket-yhteyden palvelimen sulkemisen yhteydessä. Jos olet kiinnostunut tarkemmin konfiguraatioista, selittää Apollon [dokumentaatio](https://www.apollographql.com/docs/apollo-server/data/subscriptions) suhteellisen tarkasti mitä kukin koodirivi tekee.
 
-Toisin kuin HTTP:n yhteydessä, WebSocketteja käyttäessä myös palvelin voi olla datan lähettämisessä aloitteellinen osapuoli. Näinollen WebSocketit sopivat hyvin GraphQL:n tilauksiin, missä palvelimen on pystyttävä kertomaan kaikille tietyn tilauksen tehneille tilausta vastaavan tapahtuman (esim. henkilön luominen) tapahtumisesta.
+Toisin kuin HTTP:n yhteydessä, WebSocketteja käyttäessä myös palvelin voi olla datan lähettämisessä aloitteellinen osapuoli. Näin ollen WebSocketit sopivat hyvin GraphQL:n tilauksiin, missä palvelimen on pystyttävä kertomaan kaikille tietyn tilauksen tehneille tilausta vastaavan tapahtuman (esim. henkilön luominen) tapahtumisesta.
 
 Määritellylle tilaukselle _personAdded_ tarvitaan resolveri. Myös lisäyksen tekevää resolveria _addPerson_ on muutettava siten, että uuden henkilön lisäys aiheuttaa ilmoituksen tilauksen tehneille.
 
@@ -623,20 +623,24 @@ pubsub.publish('PERSON_ADDED', { personAdded: person })
 
 Koodirivin suoritus saa siis aikaan sen, että kaikille iteraattoriin <i>PERSON\_ADDED</i> rekisteröidyille clienteille lähtee WebSocketin avulla tieto luodusta käyttäjästä.
 
-Tilauksia on mahdollista testata Apollo Exploreilla avulla seuraavasti:
+Tilauksia on mahdollista testata Apollo Explorerin avulla seuraavasti:
 
 ![](../../images/8/31x.png)
 
+Tilaus siis on
+
+```js
 subscription Subscription {
   personAdded {
     phone
     name
   }
 }
+```
 
 Kun tilauksen suorittavaa sinistä PersonAdded-painiketta painetaan, jää Explorer odottamaan tilaukseen tulevia vastauksia. Aina kun sovellukseen lisätään uusia käyttäjiä (joudut tekemään lisäyksen frontendista tai toisesta selainikkunasta), tulee tieto niistä Explorerin oikeaan reunaan.
 
-Jos tilaus ei toimi, saatat tarkasta, että yhteysasetukset on määritelty oikein:
+Jos tilaus ei toimi, tarkasta, että yhteysasetukset on määritelty oikein:
 
 ![](../../images/8/35.png)
 
@@ -647,7 +651,7 @@ Tilausten toteuttamiseen liittyy paljon erilaista konfiguraatiota. Tämän kurss
 
 ### Tilaukset clientissä
 
-Jotta saamme tilaukset käyttöön React-sovelluksessa, tarvitaan jonkin verran muutoksia erityisesti [konfiguraatioiden osalta](https://www.apollographql.com/docs/react/data/subscriptions/). Tiedostossa <i>index.js</i> olevat konfiguraatiot on muokattava seuraavaan muotoon:
+Jotta saamme tilaukset käyttöön React-sovelluksessa, tarvitaan jonkin verran muutoksia erityisesti [konfiguraatioiden osalta](https://www.apollographql.com/docs/react/data/subscriptions/). Tiedostossa <i>main.jsx</i> olevat konfiguraatiot on muokattava seuraavaan muotoon:
 
 ```js
 import { 
@@ -788,7 +792,7 @@ const App = () => {
 }
 ```
 
-Ratkaisussa on kuitenkin pieni ongelma. Itse lisätty henkilö tulee nyt välimuistiin sekä renderöityy ruudulle kahteen kertaan, sillä myös komponentti PersonForm lisää uuden henkilön välimuistin.
+Ratkaisussa on kuitenkin pieni ongelma. Itse lisätty henkilö tulee nyt välimuistiin sekä renderöityy ruudulle kahteen kertaan, sillä myös komponentti PersonForm lisää uuden henkilön välimuistiin.
 
 Ratkaistaan ongelma varmistamalla, että sama henkilö ei päädy välimuistiin kahteen kertaan:
 
@@ -833,7 +837,7 @@ const App = () => {
 }
 ```
 
-Funktio _updateCache_ lisää uuden henkilön tiedot välimuistin queryn <i>allPersons</i> tallentamiin henkilöihin, mutta varmistaa kuitenkin funktion _uniqByName_ avulla, että yhden henkilön tiedot eivät tallennu välimuitiin useampaan kertaan. 
+Funktio _updateCache_ lisää uuden henkilön tiedot välimuistin queryn <i>allPersons</i> tallentamiin henkilöihin, mutta varmistaa kuitenkin funktion _uniqByName_ avulla, että yhden henkilön tiedot eivät tallennu välimuistiin useampaan kertaan. 
 
 Funktiota _updateCache_ voidaan hyödyntää myös uuden henkilön lisäyksen yhteydessä tapahtuvassa välimuistin päivityksessä:
 
@@ -856,7 +860,7 @@ const PersonForm = ({ setError }) => {
 } 
 ```
 
-Clientin lopullinen koodi [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-8), branchissa <i>part8-8</i>.
+Clientin lopullinen koodi [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-6), branchissa <i>part8-6</i>.
 
 ### n+1-ongelma
 
@@ -1030,7 +1034,7 @@ Facebookin kehittämä [dataloader](https://github.com/facebook/dataloader)-kirj
 ### Loppusanat
 
 Tässä osassa rakentamamme sovellus ei ole optimaalisella tavalla strukturoitu, teimme pientä siivousta siirtämällä skeeman ja resolverit omiin tiedostoihin mutta parantamisen varaa jäi edelleen paljon. Esimerkkejä GraphQL-sovellusten parempaan strukturointiin löytyy internetistä, esim. serveriin
-[täältä](https://blog.apollographql.com/modularizing-your-graphql-schema-code-d7f71d5ed5f2) ja clientiin [täältä](https://medium.com/@peterpme/thoughts-on-structuring-your-apollo-queries-mutations-939ba4746cd8).
+[täältä](https://www.apollographql.com/blog/modularizing-your-graphql-schema-code) ja clientiin [täältä](https://medium.com/@peterpme/thoughts-on-structuring-your-apollo-queries-mutations-939ba4746cd8).
 
 GraphQL on jo melko iäkäs teknologia, se on ollut Facebookin sisäisessä käytössä jo vuodesta 2012 lähtien, teknologian voi siis todeta olevan "battle tested". Facebook julkaisi GraphQL:n vuonna 2015 ja se on pikkuhiljaa saanut enenevissä määrin huomiota ja nousee ehkä lähivuosina uhmaamaan REST:in valta-asemaa. REST:in [kuolemaakin](https://www.stridenyc.com/podcasts/52-is-2018-the-year-graphql-kills-rest) on jo ennusteltu. Vaikka se ei tulekaan ihan heti tapahtumaan, on GraphQL ehdottomasti [tutustumisen arvoinen](https://blog.graphqleditor.com/javascript-predictions-for-2019-by-npm/).
 
@@ -1067,7 +1071,7 @@ query {
 
 ### Tehtävien palautus ja suoritusmerkinnän pyytäminen
 
-Tämän osat palautetaan edellisistä osista poiketen [palautussovelluksessa](https://studies.cs.helsinki.fi/stats/courses/fs-graphql) omaan kurssi-instanasiinsa. Huomaa, että tarviset suoritukseen vähintään 22 tehtävää!
+Tämän osat palautetaan edellisistä osista poiketen [palautussovelluksessa](https://studies.cs.helsinki.fi/stats/courses/fs-graphql) omaan kurssi-instanssiinsa. Huomaa, että tarviset suoritukseen vähintään 22 tehtävää!
 
 Jos haluat suoritusmerkinnän, merkitse kurssi suoritetuksi:
 

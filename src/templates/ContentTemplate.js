@@ -23,6 +23,9 @@ import { partColors } from './partColors';
 import path from 'path';
 import snakeCase from 'lodash/fp/snakeCase';
 import getPartTranslationPath from '../utils/getPartTranslationPath';
+import { createCopyButton } from './copy-code-button/create-copy-buttons';
+
+
 
 export default class ContentTemplate extends Component {
   constructor(props) {
@@ -36,7 +39,9 @@ export default class ContentTemplate extends Component {
   }
 
   componentDidMount() {
-    const links = Array.from(document.querySelectorAll('a:not(.skip-to-content'));
+    const links = Array.from(
+      document.querySelectorAll('a:not(.skip-to-content')
+    );
     const h1 = document.querySelector('h1');
     const h3 = document.querySelectorAll('h3');
     const h3Arr = Array.from(h3).map(t => t.innerText);
@@ -67,6 +72,7 @@ export default class ContentTemplate extends Component {
     });
 
     window.addEventListener('scroll', this.handleScroll);
+    createCopyButton();
   }
 
   componentWillUnmount() {

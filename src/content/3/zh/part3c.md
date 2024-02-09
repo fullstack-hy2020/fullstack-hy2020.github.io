@@ -724,7 +724,7 @@ app.get('/api/notes/:id', (request, response) => {
 <!-- Once we introduce a database into the mix, it is useful to inspect the state persisted in the database, e.g. from the control panel in MongoDB Atlas. Quite often little Node helper programs like the <i>mongo.js</i> program we wrote earlier can be very helpful during development.-->
  一旦我们引入数据库，检查数据库中持久化的状态是很有用的，例如从MongoDB Atlas的控制面板中。很多时候，像我们之前写的<i>mongo.js</i>程序这样的小Node辅助程序在开发过程中会很有帮助。
 
-<!-- You can find the code for our current application in its entirety in the <i>part3-4</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4).-->
+<!-- You can find the code for our current application in its entirety in the <i>part3-4</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4). -->
  你可以在[这个Github仓库](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4)的<i>part3-4</i>分支中找到我们当前应用的全部代码。
 
 </div>
@@ -808,9 +808,12 @@ Body:   {}
     ...
 </pre>
 
-Given malformed id as an argument, the <em>findById</em> method will throw an error causing the returned promise to be rejected. This will cause the callback function defined in the <em>catch</em> block to be called.
+<!-- Given malformed id as an argument, the <em>findById</em> method will throw an error causing the returned promise to be rejected. This will cause the callback function defined in the <em>catch</em> block to be called. -->
 
-Let's make some small adjustments to the response in the <em>catch</em> block:
+在给定了格式不正确的 id 作为参数时，<em>findById</em> 方法将抛出错误，导致返回的承诺被拒绝。这将导致在 <em>catch</em> 块中定义的回调函数被调用。
+
+<!-- Let's make some small adjustments to the response in the <em>catch</em> block: -->
+让我们对<em>catch</em>块中的响应做一些调整：
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
@@ -829,15 +832,26 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-If the format of the id is incorrect, then we will end up in the error handler defined in the _catch_ block. The appropriate status code for the situation is [400 Bad Request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1), because the situation fits the description perfectly:
+<!-- If the format of the id is incorrect, then we will end up in the error handler defined in the _catch_ block. The appropriate status code for the situation is [400 Bad Request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1), because the situation fits the description perfectly: -->
 
-> <i>The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications.</i>
+如果 id 的格式不正确，那么我们将进入在_catch_块中定义的错误处理程序。这种情况下，适合的状态码是 [400 Bad Request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1)，
+因为这种情形完美地符合其定义：
 
-We have also added some data to the response to shed some light on the cause of the error.
+<!-- > <i>The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications.</i> -->
 
-When dealing with Promises, it's almost always a good idea to add error and exception handling, because otherwise you will find yourself dealing with strange bugs.
+> <i>由于格式错误，服务器无法理解该请求。客户端不应在没有修改的情况下重复该请求。</i>
 
-It's never a bad idea to print the object that caused the exception to the console in the error handler:
+<!-- We have also added some data to the response to shed some light on the cause of the error. -->
+
+我们还在响应中添加了一些数据，以阐明错误的原因。
+
+<!-- When dealing with Promises, it's almost always a good idea to add error and exception handling, because otherwise you will find yourself dealing with strange bugs. -->
+
+在处理承诺时，添加错误和异常处理往往是一个好主意，否则你会发现自己在处理奇怪的错误时会陷入困境。
+
+<!-- It's never a bad idea to print the object that caused the exception to the console in the error handler: -->
+
+将引发异常的对象打印到控制台从来都不是一个坏主意：
 
 ```js
 .catch(error => {
@@ -846,17 +860,25 @@ It's never a bad idea to print the object that caused the exception to the conso
 })
 ```
 
-The reason the error handler gets called might be something completely different than what you had anticipated. If you log the error to the console, you may save yourself from long and frustrating debugging sessions. Moreover, most modern services to where you deploy your application support some form of logging system that you can use to check these logs. As mentioned, Heroku is one.
+<!-- The reason the error handler gets called might be something completely different than what you had anticipated. If you log the error to the console, you may save yourself from long and frustrating debugging sessions. Moreover, most modern services to where you deploy your application support some form of logging system that you can use to check these logs. As mentioned, Heroku is one. -->
 
-Every time you're working on a project with a backend, <i>it is critical to keep an eye on the console output of the backend</i>. If you are working on a small screen, it is enough to just see a tiny slice of the output in the background. Any error messages will catch your attention even when the console is far back in the background:
+导致错误处理程序被调用的原因可能完全不同于你所预期的情况。如果将错误记录到控制台，你或许可以避免迷失在冗长无聊的调试环节。此外，大多数部署应用程序的现代服务都支持某种形式的日志系统，你可以使用它来检查这些日志。如前所提，Heroku 是其中之一。 
+
+<!-- Every time you're working on a project with a backend, <i>it is critical to keep an eye on the console output of the backend</i>. If you are working on a small screen, it is enough to just see a tiny slice of the output in the background. Any error messages will catch your attention even when the console is far back in the background:  -->
+
+每当你在一个带有后端的项目上工作时，<i>关注后端的控制台输出非常重要</i>。如果你在小屏幕上工作，只需看到后台输出的一小部分就足够了。即使控制台在其他窗口下面，任何错误消息都会吸引你的注意：
 
 ![](../../images/3/15b.png)
 
 ### Moving error handling into middleware
 
-We have written the code for the error handler among the rest of our code. This can be a reasonable solution at times, but there are cases where it is better to implement all error handling in a single place. This can be particularly useful if we later on want to report data related to errors to an external error tracking system like [Sentry](https://sentry.io/welcome/).
+<!-- We have written the code for the error handler among the rest of our code. This can be a reasonable solution at times, but there are cases where it is better to implement all error handling in a single place. This can be particularly useful if we later on want to report data related to errors to an external error tracking system like [Sentry](https://sentry.io/welcome/). -->
 
-Let's change the handler for the <i>/api/notes/:id</i> route, so that it passes the error forward with the <em>next</em> function. The next function is passed to the handler as the third parameter:
+我们已经在我们的代码中编写了错误处理程序。有时这可以是一个合理的解决方案，但也有一些情况，最好将所有错误处理实现在一个地方。如果以后我们想要报告与错误相关的数据到外部错误跟踪系统，比如 [Sentry](https://sentry.io/welcome/)，这会特别有用。
+
+<!-- Let's change the handler for the <i>/api/notes/:id</i> route, so that it passes the error forward with the <em>next</em> function. The next function is passed to the handler as the third parameter: -->
+
+让我们更改处理 <i>/api/notes/:id</i> 的部分，以便它通过 <em>next</em> 函数将错误传递到下一个中间件。<em>next</em> 函数作为第三个参数传递给处理程序：
 
 ```js
 app.get('/api/notes/:id', (request, response, next) => { // highlight-line
@@ -872,9 +894,13 @@ app.get('/api/notes/:id', (request, response, next) => { // highlight-line
 })
 ```
 
-The error that is passed forwards is given to the <em>next</em> function as a parameter. If <em>next</em> was called without a parameter, then the execution would simply move onto the next route or middleware. If the <em>next</em> function is called with a parameter, then the execution will continue to the <i>error handler middleware</i>.
+<!-- The error that is passed forwards is given to the <em>next</em> function as a parameter. If <em>next</em> was called without a parameter, then the execution would simply move onto the next route or middleware. If the <em>next</em> function is called with a parameter, then the execution will continue to the <i>error handler middleware</i>. -->
 
-Express [error handlers](https://expressjs.com/en/guide/error-handling.html) are middleware that are defined with a function that accepts <i>four parameters</i>. Our error handler looks like this:
+错误作为参数被传递给 <em>next</em> 函数。如果 <em>next</em> 被调用时没有参数，那么将简单地继续执行下一个路由或中间件。如果 <em>next</em> 函数有参数，那么将执行 <i>错误处理中间件</i>。
+
+<!-- Express [error handlers](https://expressjs.com/en/guide/error-handling.html) are middleware that are defined with a function that accepts <i>four parameters</i>. Our error handler looks like this: -->
+
+Express的 [错误处理程序](https://expressjs.com/en/guide/error-handling.html) 是使用一个接受 <i>四个参数</i> 的函数来定义的中间件。我们的错误处理程序如下所示：
 
 ```js
 const errorHandler = (error, request, response, next) => {
@@ -887,19 +913,27 @@ const errorHandler = (error, request, response, next) => {
   next(error)
 }
 
-// this has to be the last loaded middleware.
+// 这必须是最后一个载入的中间件。
 app.use(errorHandler)
 ```
 
-The error handler checks if the error is a <i>CastError</i> exception, in which case we know that the error was caused by an invalid object id for Mongo. In this situation the error handler will send a response to the browser with the response object passed as a parameter. In all other error situations, the middleware passes the error forward to the default Express error handler.
+<!-- The error handler checks if the error is a <i>CastError</i> exception, in which case we know that the error was caused by an invalid object id for Mongo. In this situation the error handler will send a response to the browser with the response object passed as a parameter. In all other error situations, the middleware passes the error forward to the default Express error handler. -->
 
-Note that the error handling middleware has to be the last loaded middleware!
+错误处理程序检查错误是否是 <i>CastError</i> 异常，如果是，那么我们知道错误是由于 Mongo 的无效对象 id 引起的。在这种情况下，错误处理程序将使用作为参数传递的响应对象向浏览器发送响应。在所有其他错误情况下，中间件将错误传递给默认的 Express 错误处理程序。
+
+<!-- Note that the error handling middleware has to be the last loaded middleware! -->
+
+注意错误处理中间件必须是最后一个载入的中间件！
 
 ### The order of middleware loading
 
-The execution order of middleware is the same as the order that they are loaded into express with the _app.use_ function. For this reason it is important to be careful when defining middleware.
+<!-- The execution order of middleware is the same as the order that they are loaded into express with the _app.use_ function. For this reason it is important to be careful when defining middleware. -->
 
-The correct order is the following:
+中间件执行的顺序与他们使用 _app.use_ 函数加载到 express 的顺序相同。因此，在定义中间件时必须格外小心。
+
+<!-- The correct order is the following: -->
+
+正确顺序如下：
 
 ```js
 app.use(express.static('build'))
@@ -926,7 +960,9 @@ const errorHandler = (error, request, response, next) => {
 app.use(errorHandler)
 ```
 
-The json-parser middleware should be among the very first middleware loaded into Express. If the order was the following:
+<!-- The json-parser middleware should be among the very first middleware loaded into Express. If the order was the following: -->
+
+JSON解析中间件应该首先载入 Express 中。如果顺序如下的话：
 
 ```js
 app.use(requestLogger) // request.body is undefined!
@@ -940,11 +976,17 @@ app.post('/api/notes', (request, response) => {
 app.use(express.json())
 ```
 
-Then the JSON data sent with the HTTP requests would not be available for the logger middleware or the POST route handler, since the _request.body_ would be _undefined_ at that point.
+<!-- Then the JSON data sent with the HTTP requests would not be available for the logger middleware or the POST route handler, since the _request.body_ would be _undefined_ at that point. -->
 
-It's also important that the middleware for handling unsupported routes is next to the last middleware that is loaded into Express, just before the error handler.
+HTTP 请求中的 JSON 数据将无法被 logger 中间件或 POST 路由处理程序使用，因为此时的 _request.body_ 为 _undefined_ 。
 
-For example, the following loading order would cause an issue:
+<!-- It's also important that the middleware for handling unsupported routes is next to the last middleware that is loaded into Express, just before the error handler. -->
+
+还有一点很重要，处理不支持路由的程序应该放在倒数第二个加载入 Express，位置就在错误处理程序之前。
+
+<!-- For example, the following loading order would cause an issue: -->
+
+举个例子，以下加载顺序会产生问题：
 
 ```js
 const unknownEndpoint = (request, response) => {
@@ -959,17 +1001,23 @@ app.get('/api/notes', (request, response) => {
 })
 ```
 
-Now the handling of unknown endpoints is ordered <i>before the HTTP request handler</i>. Since the unknown endpoint handler responds to all requests with <i>404 unknown endpoint</i>, no routes or middleware will be called after the response has been sent by unknown endpoint middleware. The only exception to this is the error handler which needs to come at the very end, after the unknown endpoints handler.
+<!-- Now the handling of unknown endpoints is ordered <i>before the HTTP request handler</i>. Since the unknown endpoint handler responds to all requests with <i>404 unknown endpoint</i>, no routes or middleware will be called after the response has been sent by unknown endpoint middleware. The only exception to this is the error handler which needs to come at the very end, after the unknown endpoints handler. -->
+
+现在，未知端点的处理被安排在 <i>HTTP请求处理程序之前</i> 。由于未知端点处理程序对所有请求都以 <i>404 unknown endpoint</i> 做出响应，因此在未知端点中间件发送响应后，不会调用任何路由或中间件。唯一的例外是错误处理程序，它需要放在未知端点处理程序之后的最后位置。
 
 ### Other operations
 
-Let's add some missing functionality to our application, including deleting and updating an individual note.
+<!-- Let's add some missing functionality to our application, including deleting and updating an individual note. -->
 
-The easiest way to delete a note from the database is with the [findByIdAndRemove](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndRemove) method:
+让我们为我们的应用程序添加一些目前缺失的功能，包括删除和更新单个笔记。
+
+<!-- The easiest way to delete a note from the database is with the [findByIdAndDelete](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndDelete) method: -->
+
+删除笔记最简单的方法是使用 [findByIdAndDelete](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndDelete) ：
 
 ```js
 app.delete('/api/notes/:id', (request, response, next) => {
-  Note.findByIdAndRemove(request.params.id)
+  Note.findByIdAndDelete(request.params.id)
     .then(result => {
       response.status(204).end()
     })
@@ -977,9 +1025,14 @@ app.delete('/api/notes/:id', (request, response, next) => {
 })
 ```
 
-In both of the "successful" cases of deleting a resource, the backend responds with the status code <i>204 no content</i>. The two different cases are deleting a note that exists, and deleting a note that does not exist in the database. The _result_ callback parameter could be used for checking if a resource actually was deleted, and we could use that information for returning different status codes for the two cases if we deemed it necessary. Any exception that occurs is passed onto the error handler.
+<!-- In both of the "successful" cases of deleting a resource, the backend responds with the status code <i>204 no content</i>. The two different cases are deleting a note that exists, and deleting a note that does not exist in the database. The _result_ callback parameter could be used for checking if a resource actually was deleted, and we could use that information for returning different status codes for the two cases if we deemed it necessary. Any exception that occurs is passed onto the error handler. -->
 
-The toggling of the importance of a note can be easily accomplished with the [findByIdAndUpdate](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate) method.
+在删除资源的两种“成功”情况下，后端都会以状态码 <i>204 no content</i> 做出响应。这两种不同的情况分别是删除数据库中存在的笔记和删除数据库中不存在的笔记。可以使用_result_ 回调参数来检查资源是否确实已被删除，如果需要，我们可以使用这些信息来返回不同的状态码来区分这两种情况。发生的任何异常都将传递到错误处理程序。
+
+
+<!-- The toggling of the importance of a note can be easily accomplished with the [findByIdAndUpdate](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate) method. -->
+
+修改笔记重要性可以使用 [findByIdAndUpdate](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate) 方法来完成。
 
 ```js
 app.put('/api/notes/:id', (request, response, next) => {
@@ -998,15 +1051,25 @@ app.put('/api/notes/:id', (request, response, next) => {
 })
 ```
 
-In the code above, we also allow the content of the note to be edited. However, we will not support changing the creation date for obvious reasons.
+<!-- In the code above, we also allow the content of the note to be edited. However, we will not support changing the creation date for obvious reasons. -->
 
-Notice that the <em>findByIdAndUpdate</em> method receives a regular JavaScript object as its parameter, and not a new note object created with the <em>Note</em> constructor function.
+在以上代码中，我们允许笔记内容的修改。然而，出于明显的原因，我们不允许修改笔记的创建日期。
 
-There is one important detail regarding the use of the <em>findByIdAndUpdate</em> method. By default, the <em>updatedNote</em> parameter of the event handler receives the original document [without the modifications](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate). We added the optional <code>{ new: true }</code> parameter, which will cause our event handler to be called with the new modified document instead of the original.
+<!-- Notice that the <em>findByIdAndUpdate</em> method receives a regular JavaScript object as its parameter, and not a new note object created with the <em>Note</em> constructor function. -->
 
-After testing the backend directly with Postman and the VS Code REST client, we can verify that it seems to work. The frontend also appears to work with the backend using the database.
+注意，<em>findByIdAndUpdate</em> 方法接受一个常规的 JavaScript 对象作为参数，而不是 <em>Note</em> 构造器生成的新 note 对象。
 
-You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5).
+<!-- There is one important detail regarding the use of the <em>findByIdAndUpdate</em> method. By default, the <em>updatedNote</em> parameter of the event handler receives the original document [without the modifications](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate). We added the optional <code>{ new: true }</code> parameter, which will cause our event handler to be called with the new modified document instead of the original. -->
+
+关于 <em>findByIdAndUpdate</em> 方法有一个很重要的细节。默认情况下，事件处理程序的 <em>updatedNote</em> 参数接受的是 [未经修改的](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate) 原始文档。 我们添加了可选的 <code>{ new: true }</code> 参数，这使得事件处理程序在调用时获得了修改后的文档而非原始文档。
+
+<!-- After testing the backend directly with Postman and the VS Code REST client, we can verify that it seems to work. The frontend also appears to work with the backend using the database. -->
+
+在使用 Postman 和 VS Code REST 客户端直接测试后端之后，我们可以确认它似乎可以正常工作。前端似乎也能够与使用数据库的后端正常工作。
+
+<!-- You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5). -->
+
+你可以在[这个Github仓库](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5) 的 <i>part3-5</i> 分支中找到我们当前应用的全部代码。
 
 </div>
 
@@ -1016,27 +1079,43 @@ You can find the code for our current application in its entirety in the <i>part
 
 #### 3.15: Phonebook database, step3
 
-Change the backend so that deleting phonebook entries is reflected in the database.
+<!-- Change the backend so that deleting phonebook entries is reflected in the database. -->
 
-Verify that the frontend still works after making the changes.
+更改后端，使删除电话簿条目会让数据库做出响应改变。
+
+<!-- Verify that the frontend still works after making the changes. -->
+
+验证前台在修改后是否仍能工作。
 
 #### 3.16: Phonebook database, step4
 
-Move the error handling of the application to a new error handler middleware.
+<!-- Move the error handling of the application to a new error handler middleware. -->
+
+将应用程序的错误处理移动到一个新的错误处理中间件。
 
 #### 3.17*: Phonebook database, step5
 
-If the user tries to create a new phonebook entry for a person whose name is already in the phonebook, the frontend will try to update the phone number of the existing entry by making an HTTP PUT request to the entry's unique URL.
+<!-- If the user tries to create a new phonebook entry for a person whose name is already in the phonebook, the frontend will try to update the phone number of the existing entry by making an HTTP PUT request to the entry's unique URL. -->
 
-Modify the backend to support this request.
+如果用户尝试为已经在电话簿中的人创建一个新的电话簿条目，前端将尝试通过向条目的唯一 URL发出 HTTP PUT 请求来更新现有条目的电话号码。
 
-Verify that the frontend works after making your changes.
+<!--  Modify the backend to support this request. -->
+
+修改后端以支持这个请求。
+
+<!-- Verify that the frontend works after making your changes.  -->
+
+验证前端在修改后是否仍能工作。
 
 #### 3.18*: Phonebook database step6
 
-Also update the handling of the <i>api/persons/:id</i> and <i>info</i> routes to use the database, and verify that they work directly with the browser, Postman, or VS Code REST client.
+<!-- Also update the handling of the <i>api/persons/:id</i> and <i>info</i> routes to use the database, and verify that they work directly with the browser, Postman, or VS Code REST client. -->
 
-Inspecting an individual phonebook entry from the browser should look like this:
+同时更新 <i>api/persons/:id</i> 和 <i>info</i> 路由的处理，以使用数据库，并验证它们是否可以直接与浏览器、Postman 或 VS Code REST 客户端一起工作。
+
+<!-- Inspecting an individual phonebook entry from the browser should look like this:  -->
+
+用浏览器检查单独的电话条目应该像这样：
 
 ![](../../images/3/49.png)
 

@@ -86,7 +86,7 @@ const App = () => {
 export default App
 ```
 
-The current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-1), branch <i>part5-1</i>. If you clone the repo, don't forget to run _npm install_ before attempting to run the frontend.
+The current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-1), branch <i>part5-1</i>. If you clone the repo, don't forget to run _npm install_ before attempting to run the frontend.
 
 The frontend will not display any notes if it's not connected to the backend. You can start the backend with _npm run dev_ in its folder from Part 4. This will run the backend on port 3001. While that is active, in a separate terminal window you can start the frontend with _npm start_, and now you can see the notes that are saved in your MongoDB database from Part 4.
 
@@ -114,17 +114,6 @@ const login = async credentials => {
   return response.data
 }
 
-export default { login }
-```
-
-If you have installed the eslint plugin in VS Code, you may now see the following warning:
-
-![vs code warning - assign object to a variable before exporting as module default](../../images/5/50new.png)
-
-We'll get back to configuring eslint in a moment. You can ignore the error for the time being or suppress it by adding the following to the line before the warning:
-
-```js
-// eslint-disable-next-line import/no-anonymous-default-export
 export default { login }
 ```
 
@@ -262,7 +251,7 @@ const App = () => {
 }
 ```
 
-A slightly odd looking, but commonly used [React trick](https://reactjs.org/docs/conditional-rendering.html#inline-if-with-logical--operator) is used to render the forms conditionally:
+A slightly odd looking, but commonly used [React trick](https://react.dev/learn/conditional-rendering#logical-and-operator-) is used to render the forms conditionally:
 
 ```js
 {
@@ -324,7 +313,7 @@ The solution isn't perfect, but we'll leave it for now.
 
 Our main component <i>App</i> is at the moment way too large. The changes we did now are a clear sign that the forms should be refactored into their own components. However, we will leave that for an optional exercise.
 
-The current application code can be found on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-2), branch <i>part5-2</i>.
+The current application code can be found on [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-2), branch <i>part5-2</i>.
 
 ### Creating new notes
 
@@ -368,8 +357,8 @@ const getAll = () => {
   return request.then(response => response.data)
 }
 
+// highlight-start
 const create = async newObject => {
-  // highlight-start
   const config = {
     headers: { Authorization: token },
   }
@@ -384,7 +373,6 @@ const update = (id, newObject) => {
   return request.then(response => response.data)
 }
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default { getAll, create, update, setToken } // highlight-line
 ```
 
@@ -473,7 +461,7 @@ You can also inspect the local storage using the developer tools. On Chrome, go 
 
 We still have to modify our application so that when we enter the page, the application checks if user details of a logged-in user can already be found on the local storage. If they can, the details are saved to the state of the application and to <i>noteService</i>.
 
-The right way to do this is with an [effect hook](https://reactjs.org/docs/hooks-effect.html): a mechanism we first encountered in [part 2](/en/part2/getting_data_from_server#effect-hooks), and used to fetch notes from the server.
+The right way to do this is with an [effect hook](https://react.dev/reference/react/useEffect): a mechanism we first encountered in [part 2](/en/part2/getting_data_from_server#effect-hooks), and used to fetch notes from the server.
 
 We can have multiple effect hooks, so let's create a second one to handle the first loading of the page:
 
@@ -509,7 +497,7 @@ const App = () => {
 }
 ```
 
-The empty array as the parameter of the effect ensures that the effect is executed only when the component is rendered [for the first time](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect).
+The empty array as the parameter of the effect ensures that the effect is executed only when the component is rendered [for the first time](https://react.dev/reference/react/useEffect#parameters).
 
 Now a user stays logged in to the application forever. We should probably add a <i>logout</i> functionality, which removes the login details from the local storage. We will however leave it as an exercise.
 
@@ -526,7 +514,7 @@ or with the command which empties <i>localstorage</i> completely:
 window.localStorage.clear()
 ```
 
-The current application code can be found on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-3), branch <i>part5-3</i>.
+The current application code can be found on [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-3), branch <i>part5-3</i>.
 
 </div>
 
@@ -534,7 +522,7 @@ The current application code can be found on [GitHub](https://github.com/fullsta
 
 ### Exercises 5.1.-5.4.
 
-We will now create a frontend for the bloglist backend we created in the last part. You can use [this application](https://github.com/fullstack-hy2020/bloglist-frontend) from GitHub as the base of your solution. The application expects your backend to be running on port 3003.
+We will now create a frontend for the bloglist backend we created in the last part. You can use [this application](https://github.com/fullstack-hy2020/bloglist-frontend) from GitHub as the base of your solution. You need to connect your backend with proxy as shown in [part 3](https://fullstackopen.com/en/part3/deploying_app_to_internet#proxy).
 
 It is enough to submit your finished solution. You can do a commit after each exercise, but that is not necessary.
 
@@ -564,7 +552,7 @@ The application is started the usual way, but you have to install its dependenci
 
 ```bash
 npm install
-npm start
+npm run dev
 ```
 
 Implement login functionality to the frontend. The token returned with a successful login is saved to the application's state <i>user</i>.
@@ -640,7 +628,7 @@ At the [end](/en/part4/token_authentication#problems-of-token-based-authenticati
 
 There are two solutions to the problem. The first one is to limit the validity period of a token. This forces the user to re-login to the app once the token has expired. The other approach is to save the validity information of each token to the backend database. This solution is often called a <i>server-side session</i>.
 
-No matter how the validity of tokens is checked and ensured, saving a token in the local storage might contain a security risk if the application has a security vulnerability that allows [Cross Site Scripting (XSS)](https://owasp.org/www-community/attacks/xss/) attacks. An XSS attack is possible if the application would allow a user to inject arbitrary JavaScript code (e.g. using a form) that the app would then execute. When using React sensibly it should not be possible since [React sanitizes](https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks) all text that it renders, meaning that it is not executing the rendered content as JavaScript.
+No matter how the validity of tokens is checked and ensured, saving a token in the local storage might contain a security risk if the application has a security vulnerability that allows [Cross Site Scripting (XSS)](https://owasp.org/www-community/attacks/xss/) attacks. An XSS attack is possible if the application would allow a user to inject arbitrary JavaScript code (e.g. using a form) that the app would then execute. When using React sensibly it should not be possible since [React sanitizes](https://legacy.reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks) all text that it renders, meaning that it is not executing the rendered content as JavaScript.
 
 If one wants to play safe, the best option is to not store a token in local storage. This might be an option in situations where leaking a token might have tragic consequences.
 

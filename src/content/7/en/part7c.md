@@ -31,14 +31,14 @@ Let's install the package with the command:
 npm install react-bootstrap
 ```
 
-Then let's add a [link for loading the CSS stylesheet](https://react-bootstrap.github.io/getting-started/introduction#stylesheets) for Bootstrap inside of the <i>head</i> tag in the <i>public/index.html</i> file of the application:
+Then let's add a [link for loading the CSS stylesheet](https://react-bootstrap.github.io/docs/getting-started/introduction#stylesheets) for Bootstrap inside of the <i>head</i> tag in the <i>public/index.html</i> file of the application:
 
 ```js
 <head>
   <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
     crossorigin="anonymous"
   />
   // ...
@@ -69,7 +69,7 @@ We notice that this already affected the appearance of the application. The cont
 
 #### Tables
 
-Next, let's make some changes to the <i>Notes</i> component so that it renders the list of notes as a [table](https://getbootstrap.com/docs/4.1/content/tables/). React Bootstrap provides a built-in [Table](https://react-bootstrap.github.io/components/table/) component for this purpose, so there is no need to define CSS classes separately.
+Next, let's make some changes to the <i>Notes</i> component so that it renders the list of notes as a [table](https://getbootstrap.com/docs/4.1/content/tables/). React Bootstrap provides a built-in [Table](https://react-bootstrap.github.io/docs/components/table/) component for this purpose, so there is no need to define CSS classes separately.
 
 ```js
 const Notes = ({ notes }) => (
@@ -109,7 +109,7 @@ import { Table } from 'react-bootstrap'
 
 Let's improve the form in the <i>Login</i> view with the help of Bootstrap [forms](https://getbootstrap.com/docs/4.1/components/forms/).
 
-React Bootstrap provides built-in [components](https://react-bootstrap.github.io/forms/overview/) for creating forms (although the documentation for them is slightly lacking):
+React Bootstrap provides built-in [components](https://react-bootstrap.github.io/docs/forms/overview/) for creating forms (although the documentation for them is slightly lacking):
 
 ```js
 let Login = (props) => {
@@ -124,14 +124,16 @@ let Login = (props) => {
             type="text"
             name="username"
           />
+        </Form.Group>
+        <Form.Group>
           <Form.Label>password:</Form.Label>
           <Form.Control
             type="password"
           />
-          <Button variant="primary" type="submit">
-            login
-          </Button>
         </Form.Group>
+        <Button variant="primary" type="submit">
+          login
+        </Button>
       </Form>
     </div>
   )
@@ -178,7 +180,7 @@ const App = () => {
 }
 ```
 
-We will render the message as a Bootstrap [Alert](https://getbootstrap.com/docs/4.1/components/alerts/) component. Once again, the React Bootstrap library provides us with a matching [React component](https://react-bootstrap.github.io/components/alerts/):
+We will render the message as a Bootstrap [Alert](https://getbootstrap.com/docs/4.1/components/alerts/) component. Once again, the React Bootstrap library provides us with a matching [React component](https://react-bootstrap.github.io/docs/components/alerts/):
 
 ```js
 <div className="container">
@@ -195,7 +197,7 @@ We will render the message as a Bootstrap [Alert](https://getbootstrap.com/docs/
 
 #### Navigation structure
 
-Lastly, let's alter the application's navigation menu to use Bootstrap's [Navbar](https://getbootstrap.com/docs/4.1/components/navbar/) component. The React Bootstrap library provides us with [matching built-in components](https://react-bootstrap.github.io/components/navbar/#navbars-mobile-friendly). Through trial and error, we end up with a working solution despite the cryptic documentation:
+Lastly, let's alter the application's navigation menu to use Bootstrap's [Navbar](https://getbootstrap.com/docs/4.1/components/navbar/) component. The React Bootstrap library provides us with [matching built-in components](https://react-bootstrap.github.io/docs/components/navbar/#responsive-behaviors). Through trial and error, we end up with a working solution despite the cryptic documentation:
 
 ```js
 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -507,6 +509,10 @@ Here are some other UI frameworks for your consideration. If you do not see your
 - <https://master.co/>
 - <https://www.radix-ui.com/>
 - <https://nextui.org/>
+- <https://daisyui.com/>
+- <https://ui.shadcn.com/>
+- <https://www.tremor.so/>
+- <https://headlessui.com/>
 
 ### Styled components
 

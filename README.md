@@ -1,6 +1,6 @@
 # Full stack open
 
-Despite the repo name this IS the current course repository
+Despite the repo name this is the current course repository.
 
 <https://fullstackopen.com/>
 

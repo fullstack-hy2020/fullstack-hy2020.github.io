@@ -9,7 +9,7 @@ lang: fi
 
 Haluamme toteuttaa sovellukseemme käyttäjien hallinnan. Käyttäjät tulee tallettaa tietokantaan, ja jokaisesta muistiinpanosta tulee tietää sen luonut käyttäjä. Muistiinpanojen poiston ja editoinnin tulee olla sallittua ainoastaan muistiinpanot tehneelle käyttäjälle.
 
-Aloitetaan lisäämällä tietokantaan tieto käyttäjistä. Käyttäjän <i>User</i> ja muistiinpanojen <i>Note</i> välillä on yhden suhde moneen -yhteys:
+Aloitetaan lisäämällä tietokantaan tieto käyttäjistä. Käyttäjän <i>User</i> ja muistiinpanojen <i>Note</i> välillä on yhden suhde moneen ‑yhteys:
 
 ![Yhteen käyttäjään liittyy monta muistiinpanoa eli UML:nä User 1 --- * Note](https://yuml.me/a187045b.png)
 
@@ -203,7 +203,7 @@ Asennetaan salasanojen hashaamiseen käyttämämme [bcrypt](https://github.com/k
 npm install bcrypt
 ```
 
-Käyttäjien luominen tapahtuu osassa 3 läpikäytyjä [RESTful](/osa3/node_js_ja_express#rest)-periaatteita seuraten tekemällä HTTP POST -pyyntö polkuun <i>users</i>.
+Käyttäjien luominen tapahtuu osassa 3 läpikäytyjä [RESTful](/osa3/node_js_ja_express#rest)-periaatteita seuraten tekemällä HTTP POST ‑pyyntö polkuun <i>users</i>.
 
 Määritellään käyttäjienhallintaa varten oma <i>router</i> tiedostoon <i>controllers/users.js</i>, ja liitetään se <i>app.js</i>-tiedostossa huolehtimaan polulle <i>/api/users/</i> tulevista pyynnöistä:
 
@@ -380,18 +380,6 @@ userSchema.plugin(uniqueValidator) // highlight-line
 // ...
 ```
 
-Huom: asentaessasi kirjastoa _mongoose-unique-validator_ saatat törmätä seuraavaan virheilmoitukseen:
-
-![](../../images/4/uniq.png)
-
-Syynä tälle on se, että kirjasto ei ole kirjoitushetkellä (13.3.2023) vielä yhteensopiva Mongoosen version 7 kanssa. Jos törmäät virheeseen, voit ottaa käyttöösi Mongoosen vanhemman version suorittamalla komennon
-
-```
-npm install mongoose@6
-```
-
-Tämän jälkeen kirjaston _mongoose-unique-validator_ asentaminen onnistuu.
-
 Voisimme toteuttaa käyttäjien luomisen yhteyteen myös muita tarkistuksia, esim. onko käyttäjätunnus tarpeeksi pitkä, koostuuko se sallituista merkeistä ja onko salasana tarpeeksi hyvä. Jätämme ne kuitenkin vapaaehtoiseksi harjoitustehtäväksi.
 
 Ennen kuin menemme eteenpäin, lisätään sovellukseen alustava versio kaikki käyttäjät palauttavasta käsittelijäfunktiosta:
@@ -439,7 +427,27 @@ notesRouter.post('/', async (request, response) => {
 })
 ```
 
+Muistiinpanon skeema muuttuu myös hieman:
+
+```js
+const noteSchema = new mongoose.Schema({
+  content: {
+    type: String,
+    required: true,
+    minlength: 5
+  },
+  important: Boolean,
+  // highlight-start
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
+  //highlight-end
+})
+```
+
 Huomionarvoista on nyt se, että myös <i>user</i>-olio muuttuu. Sen kenttään <i>notes</i> talletetaan luodun muistiinpanon <i>id</i>:
+Koska tieto tallennetaan <i>user</i>-olioon tulee muistiinpanoa poistettaessa tieto poistaa myös <i>user</i>-olion listalta.
 
 ```js
 const user = User.findById(body.userId)
@@ -466,7 +474,7 @@ Muistiinpanon luoneen käyttäjän id tulee näkyviin muistiinpanon yhteyteen:
 
 ### populate
 
-Haluaisimme API:n toimivan siten, että haettaessa esim. käyttäjien tiedot polulle <i>/api/users</i> tehtävällä HTTP GET -pyynnöllä tulisi käyttäjien tekemien muistiinpanojen id:iden lisäksi näyttää niiden sisältö. Relaatiotietokannoilla toiminnallisuus toteutettaisiin <i>liitoskyselyn</i> avulla.
+Haluaisimme API:n toimivan siten, että haettaessa esim. käyttäjien tiedot polulle <i>/api/users</i> tehtävällä HTTP GET ‑pyynnöllä tulisi käyttäjien tekemien muistiinpanojen id:iden lisäksi näyttää niiden sisältö. Relaatiotietokannoilla toiminnallisuus toteutettaisiin <i>liitoskyselyn</i> avulla.
 
 Kuten aiemmin mainittiin, eivät dokumenttitietokannat tue (kunnolla) eri kokoelmien välisiä liitoskyselyitä. Mongoose-kirjasto osaa kuitenkin tehdä liitoksen puolestamme. Mongoose toteuttaa liitoksen tekemällä useampia tietokantakyselyitä, joten siinä mielessä kyseessä on täysin erilainen tapa kuin relaatiotietokantojen liitoskyselyt, jotka ovat <i>transaktionaalisia</i>, eli liitoskyselyä tehdessä tietokannan tila ei muutu. Mongoosella tehtävä liitos taas on sellainen, että mikään ei takaa sitä, että liitettävien kokoelmien tila on konsistentti, toisin sanoen jos tehdään users- ja notes-kokoelmat liittävä kysely, kokoelmien tila saattaa muuttua kesken Mongoosen liitosoperaation.
 
@@ -487,7 +495,7 @@ Lopputulos on jo melkein haluamamme kaltainen:
 
 ![Selain renderöi osoitteessa localhost:3001/api/users taulukollisen JSON:eja joilla kentät username, name, id ja notes. Kenttä notes on nyt olio jolla on kentät content, important, id ja user](../../images/4/13new.png)
 
-Populaten yhteydessä on myös mahdollista rajata mitä kenttiä sisällytettävistä dokumenteista otetaan mukaan. Haluamme id:n lisäksi nyt ainoastaan kentätä <i>content</i> ja <i>important</i>. Rajaus tapahtuu Mongon [syntaksilla](https://docs.mongodb.com/manual/tutorial/project-fields-from-query-results/#return-the-specified-fields-and-the-id-field-only):
+Populaten yhteydessä on myös mahdollista rajata mitä kenttiä sisällytettävistä dokumenteista otetaan mukaan. Haluamme id:n lisäksi nyt ainoastaan kentät <i>content</i> ja <i>important</i>. Rajaus tapahtuu Mongon [syntaksilla](https://docs.mongodb.com/manual/tutorial/project-fields-from-query-results/#return-the-specified-fields-and-the-id-field-only):
 
 ```js
 usersRouter.get('/', async (request, response) => {

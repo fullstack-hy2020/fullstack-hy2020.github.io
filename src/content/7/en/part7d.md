@@ -6,54 +6,48 @@ lang: en
 ---
 <div class="content">
 
-Developing with React was notorious for requiring tools that were very difficult to configure. These days, getting started with React development is almost painless thanks to [create-react-app](https://github.com/facebookincubator/create-react-app). A better development workflow has probably never existed for browser-side JavaScript development.
+In the early days, React was somewhat famous for being very difficult to configure the tools required for application development. To make the situation easier, [Create React App](https://github.com/facebookincubator/create-react-app) was developed, which eliminated configuration-related problems. [Vite](https://vitejs.dev/), which is also used in the course, has recently replaced Create React App in new applications.
 
-We cannot rely on the black magic of create-react-app forever and it's time for us to take a look under the hood. One of the key players in making React applications functional is a tool called [webpack](https://webpack.js.org/).
+Both Vite and Create React App use <i>bundlers</i> to do the actual work. We will now familiarize ourselves with the bundler called [Webpack](https://webpack.js.org/) used by Create React App. Webpack was by far the most popular bundler for years. Recently, however, there have been several new generation bundlers such as [esbuild](https://esbuild.github.io/) used by Vite, which are significantly faster and easier to use than Webpack. However, e.g. esbuild still lacks some useful features (such as hot reload of the code in the browser), so next we will get to know the old ruler of bundlers, Webpack.
 
 ### Bundling
 
 We have implemented our applications by dividing our code into separate modules that have been <i>imported</i> to places that require them. Even though ES6 modules are defined in the ECMAScript standard, the older browsers do not know how to handle code that is divided into modules.
 
-For this reason, code that is divided into modules must be <i>bundled</i> for browsers, meaning that all of the source code files are transformed into a single file that contains all of the application code. When we deployed our React frontend to production in [part 3](/en/part3/deploying_app_to_internet), we performed the bundling of our application with the _npm run build_ command. Under the hood, the npm script bundles the source code using webpack, which produces the following collection of files in the <i>build</i> directory:
+For this reason, code that is divided into modules must be <i>bundled</i> for browsers, meaning that all of the source code files are transformed into a single file that contains all of the application code. When we deployed our React frontend to production in [part 3](/en/part3/deploying_app_to_internet), we performed the bundling of our application with the _npm run build_ command. Under the hood, the npm script bundles the source, and this produces the following collection of files in the <i>dist</i> directory:
 
 <pre>
-.
-├── asset-manifest.json
-├── favicon.ico
+├── assets
+│   ├── index-d526a0c5.css
+│   ├── index-e92ae01e.js
+│   └── react-35ef61ed.svg
 ├── index.html
-├── logo192.png
-├── logo512.png
-├── manifest.json
-├── robots.txt
-└── static
-    ├── css
-    │   ├── main.1becb9f2.css
-    │   └── main.1becb9f2.css.map
-    └── js
-        ├── main.88d3369d.js
-        ├── main.88d3369d.js.LICENSE.txt
-        └── main.88d3369d.js.map
+└── vite.svg
 </pre>
 
-The <i>index.html</i> file located at the root of the build directory is the "main file" of the application which loads the bundled JavaScript file with a <i>script</i> tag:
+The <i>index.html</i> file located at the root of the <i>dist</i> directory is the "main file" of the application which loads the bundled JavaScript file with a <i>script</i> tag:
 
 ```html
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8"/>
-    <title>React App</title>
-    <script defer="defer" src="/static/js/main.88d3369d.js"></script> 
-    <link href="/static/css/main.1becb9f2.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
+    <script type="module" crossorigin src="/assets/index-e92ae01e.js"></script>
+    <link rel="stylesheet" href="/assets/index-d526a0c5.css">
   </head>
+  <body>
     <div id="root"></div>
+    
   </body>
 </html>
 ```
 
-As we can see from the example application that was created with create-react-app, the build script also bundles the application's CSS files into a single <i>/static/css/main.1becb9f2.css</i> file.
+As we can see from the example application that was created with Vite, the build script also bundles the application's CSS files into a single <i>/assets/index-d526a0c5.css</i> file.
 
-In practice, bundling is done so that we define an entry point for the application, which typically is the <i>index.js</i> file. When webpack bundles the code, it includes all of the code that the entry point imports, the code that its imports import, and so on.
+In practice, bundling is done so that we define an entry point for the application, which typically is the <i>index.js</i> file. When webpack bundles the code, it includes not only the code from the entry point but also the code that is imported by the entry point, as well as the code imported by its import statements, and so on.
 
 Since part of the imported files are packages like React, Redux, and Axios, the bundled JavaScript file will also contain the contents of each of these libraries.
 
@@ -207,7 +201,7 @@ The configuration file has been written in JavaScript and the function returning
 
 Our minimal configuration definition almost explains itself. The [entry](https://webpack.js.org/concepts/#entry) property of the configuration object specifies the file that will serve as the entry point for bundling the application.
 
-The [output](https://webpack.js.org/concepts/#output) property defines the location where the bundled code will be stored. The target directory must be defined as an <i>absolute path</i>, which is easy to create with the [path.resolve](https://nodejs.org/docs/latest-v8.x/api/path.html#path_path_resolve_paths) method. We also use [\_\_dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname) which is a global variable in Node that stores the path to the current directory.
+The [output](https://webpack.js.org/concepts/#output) property defines the location where the bundled code will be stored. The target directory must be defined as an <i>absolute path</i>, which is easy to create with the [path.resolve](https://nodejs.org/docs/latest-v8.x/api/path.html#path_path_resolve_paths) method. We also use [\_\_dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname) which is a variable in Node that stores the path to the current directory.
 
 ### Bundling React
 
@@ -347,7 +341,7 @@ const App = () =>
   )
 ```
 
-As we can see from the example above, the React elements that were written in JSX are now created with regular JavaScript by using React's [createElement](https://reactjs.org/docs/react-without-jsx.html) function.
+As we can see from the example above, the React elements that were written in JSX are now created with regular JavaScript by using React's [createElement](https://react.dev/reference/react/createElement) function.
 
 You can test the bundled application by opening the <i>build/index.html</i> file with the <i>open file</i> functionality of your browser:
 
@@ -469,7 +463,7 @@ When using CSS, we have to use [css](https://webpack.js.org/loaders/css-loader/)
       use: ['style-loader', 'css-loader'],
     },
     // highlight-end
-  ];
+  ],
 }
 ```
 
@@ -880,13 +874,5 @@ If the global _Promise_ object does not exist, meaning that the browser does not
 One exhaustive list of existing polyfills can be found [here](https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills).
 
 The browser compatibility of different APIs can be checked by visiting [https://caniuse.com](https://caniuse.com) or [Mozilla's website](https://developer.mozilla.org/en-US/).
-
-### Eject
-
-The create-react-app tool uses webpack behind the scenes. If the default configuration is not enough, it is possible to [eject](https://create-react-app.dev/docs/available-scripts/#npm-run-eject) the project which will get rid of all of the black magic, and the default configuration files will be stored in the <i>config</i> directory and in a modified <i>package.json</i> file.
-
-If you eject an application created with create-react-app, there is no return and all of the configurations will have to be maintained manually. The default configuration is not trivial, and instead of ejecting from a create-react-app application, a better alternative may be to write your own webpack configuration from the get-go.
-
-Going through and reading the configuration files of an ejected application is still recommended and extremely educational.
 
 </div>

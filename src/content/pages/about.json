@@ -60,7 +60,7 @@
   "en": {
     "name": "General",
     "intro": [
-      "<em>Questions about the course? Read carefully <a href='/en/part0/general_info'>Part 0</a>, that has an answer to most of them...</em>",
+      "<em>Questions about the course? Read <a href='/en/part0/general_info'>Part 0</a> carefully, that has an answer to most of them...</em>",
       "This course serves as an introduction to modern web application development with JavaScript. The main focus is on building single page applications with ReactJS that use REST APIs built with Node.js. The course also contains a section on GraphQL, a modern alternative to REST APIs.",
       "The course covers testing, configuration and environment management, the use of databases for storing the application’s data amongst other things.",
       "The course is totally free of charge. You can get a certificate and even the University of Helsinki ECTS credits for free.",
@@ -108,11 +108,15 @@
   "es": {
     "name": "General",
     "intro": [
-      "Este curso sirve como una introducción al desarrollo de aplicaciones web modernas con JavaScript. El enfoque principal es crear aplicaciones de una sola página con ReactJS que utilizan API REST creadas con Node.js. El curso también contiene una sección sobre GraphQL, una alternativa moderna a REST API.",
-      "El curso cubre las pruebas, la configuración y la gestión del entorno, y el uso de MongoDB para almacenar los datos de la aplicación",
-      "La edición del curso de este año contiene una parte nueva sobre <a href='/en/part9'>TypeScript</a>. El contenido de esta parte lo proporciona <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>",
-      "El curso tiene un valor de entre 3 y 9 créditos y el contenido es el mismo que el del <a href='https://fullstack-hy2020.github.io/'> curso de full stack </a> que se lleva a cabo en el <a href='https://www.helsinki.fi/en/computer-science'>Departamento de Ciencias de la Computación</a> en la Universidad de Helsinki en la primavera de 2020. También hay un <a href='/es/part0/informacion_general#proyecto-full-stack'>proyecto</a> asociado que vale entre 1 y 10 créditos.",
-      "Los socios y afiliados del curso incluyen <a href='https://www.houston-inc.com/'>HoustonInc </a>, <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>, <a href='https://elisa.fi/'>Elisa</a>, <a href='https://www.instagram.com/unitytechnologies/?hl=en'>Unity Technologies</a> y <a href='https://careers.konecranes.com/Konecranes/'>Konecranes</a>. Consulta <a href='https://www.youtube.com/watch?v=BZexOyQZMMc&list=PLumQiZ25uijis31zaRL7rhzLalSwLqUtm'>aquí para las conferencias de los invitados</a> sobre temas relacionados con el curso impartidos por varios expertos de nuestros socios y afiliados."
+      "<em>¿Preguntas sobre el curso? Lee <a href='/es/part0/informacion_general'>Parte 0</a> cuidadosamente, aquí encontraras una respuesta a la mayoría de ellas...</em>",
+      "Este curso sirve como una introducción al desarrollo de aplicaciones web modernas con JavaScript. El enfoque principal es crear aplicaciones de una sola página con ReactJS que utilizan API REST creadas con Node.js. El curso también contiene una sección sobre GraphQL, una alternativa moderna a REST APIs.",
+      "El curso cubre las pruebas, la configuración y gestión del entorno, y el uso de bases de datos para almacenar los datos de la aplicación entre otras cosas",
+      "El curso es completamente libre de cargo. Puedes obtener un certificado e incluso los créditos ECTS de la Universidad de Helsinki gratuitamente",
+      "El curso tiene un valor de entre 5 y 14 créditos y el contenido es el mismo que el del <a href='https://fullstack-hy2020.github.io/'>curso de Full Stack</a> que se lleva a cabo en el <a href='https://www.helsinki.fi/en/computer-science'>Departamento de Ciencias de la Computación</a> en la Universidad de Helsinki en la primavera de 2023. También hay un <a href='/es/part0/informacion_general#proyecto-full-stack'>proyecto</a> asociado que vale entre 1 y 10 créditos.",
+      "Los socios y afiliados del curso incluyen <a href='https://www.houston-inc.com/'>Houston Inc</a>, <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>, <a href='https://elisa.fi/'>Elisa</a>, <a href='https://www.instagram.com/unitytechnologies/?hl=en'>Unity Technologies</a> y <a href='https://careers.konecranes.com/Konecranes/'>Konecranes</a>. Consulta <a href='https://www.youtube.com/watch?v=BZexOyQZMMc&list=PLumQiZ25uijis31zaRL7rhzLalSwLqUtm'>aquí para las conferencias de los invitados</a> sobre temas relacionados con el curso impartidos por varios expertos de nuestros socios y afiliados.",
+      "Se espera que los participantes tengan buenas habilidades de programación, conocimiento básico de programación web y bases de datos, y que conozcan las bases de trabajar con el sistema de control de versiones Git. También se espera que tengas la perseverancia y la habilidad para resolver problemas independientemente y para buscar información.",
+      "La <a href='/es/part0/informacion_general'>Parte 0</a> del material del curso analiza el contenido y la realización del curso con más detalle. Asegúrate de leer detenidamente el material y las instrucciones.",
+      "Puedes hablar sobre el curso y temas relacionados en nuestro grupo dedicado de Discord <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> y en Telegram: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. ¡Únete a la conversación!"
     ],
     "information": [
       {

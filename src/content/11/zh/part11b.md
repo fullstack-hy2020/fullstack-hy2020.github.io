@@ -55,8 +55,8 @@ lang: zh
 
 ### Exercise 11.2.
 
-<!-- In most exercises of this part, we are building a CI/CD pipeline for a small project found in [this example project repository](https://github.com/smartlyio/fullstackopen-cicd).-->
- 在这部分的大部分练习中，我们正在为[这个例子的项目库](https://github.com/smartlyio/fullstackopen-cicd)中的一个小项目建立一个CI/CD管道。
+<!-- In most exercises of this part, we are building a CI/CD pipeline for a small project found in [this example project repository](https://github.com/fullstack-hy2020/full-stack-open-pokedex).-->
+ 在这部分的大部分练习中，我们正在为[这个例子的项目库](https://github.com/fullstack-hy2020/full-stack-open-pokedex)中的一个小项目建立一个CI/CD管道。
 
 #### 11.2 The example project
 
@@ -290,14 +290,14 @@ jobs:
   simple_deployment_pipeline: // highlight-line
     runs-on: ubuntu-20.04 // highlight-line
     steps: // highlight-line
-      - uses: actions/checkout@v3  // highlight-line
+      - uses: actions/checkout@v4  // highlight-line
 ```
 
 <!-- The [uses](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsuses) keyword tells the workflow to run a specific <i>action</i>. An action is a reusable piece of code, like a function. Actions can be defined in your repository in a separate file or you can use the ones available in public repositories.-->
  [uses](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsuses)关键词告诉工作流要运行一个特定的<i>动作</i>。行动是一段可重复使用的代码，就像一个函数。行动可以在你的版本库中定义为一个单独的文件，也可以使用公共版本库中的行动。
 
-<!-- Here we're using a public action [actions/checkout](https://github.com/actions/checkout) and we specify a version (<code>@v3</code>) to avoid potential breaking changes if the action gets updated. The <code>checkout</code> action does what the name implies: it checkouts the project source code from git.-->
- 这里我们使用一个公共动作[actions/checkout](https://github.com/actions/checkout)，我们指定了一个版本(<code>@v3</code>)，以避免在动作被更新时可能出现的破坏性变化。<code>checkout</code>动作就像它的名字所暗示的那样：它从git检查项目的源代码。
+<!-- Here we're using a public action [actions/checkout](https://github.com/actions/checkout) and we specify a version (<code>@v4</code>) to avoid potential breaking changes if the action gets updated. The <code>checkout</code> action does what the name implies: it checkouts the project source code from git.-->
+ 这里我们使用一个公共动作[actions/checkout](https://github.com/actions/checkout)，我们指定了一个版本(<code>@v4</code>)，以避免在动作被更新时可能出现的破坏性变化。<code>checkout</code>动作就像它的名字所暗示的那样：它从git检查项目的源代码。
 
 <!-- Secondly, as the application is written in JavaScript, Node.js must be set up to be able to utilize the commands that are specified in <code>package.json</code>. To set up Node.js, [actions/setup-node](https://github.com/actions/setup-node) action can be used. Version <code>16</code> is selected because it is the version the application is using in the production environment.-->
  其次，由于应用是用JavaScript编写的，Node.js必须被设置为能够利用<code>package.json</code>中指定的命令。要设置Node.js，可以使用[actions/setup-node](https://github.com/actions/setup-node) 动作。版本<code>16</code>被选中，因为它是应用在生产环境中使用的版本。
@@ -309,10 +309,10 @@ jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v2 // highlight-line
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4 // highlight-line
         with: // highlight-line
-          node-version: '16' // highlight-line
+          node-version: '20' // highlight-line
 ```
 
 <!-- As we can see, the [with](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepswith) keyword is used to give a "parameter" to the action. Here the parameter specifies the version of Node.js we want to use.-->
@@ -327,10 +327,10 @@ jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: '20'
       - name: npm install  // highlight-line
         run: npm install  // highlight-line
 ```
@@ -348,10 +348,10 @@ jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: '20'
       - name: npm install
         run: npm install
       - name: lint  // highlight-line

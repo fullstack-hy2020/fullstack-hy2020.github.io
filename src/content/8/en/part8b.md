@@ -7,7 +7,7 @@ lang: en
 
 <div class="content">
 
-We will next implement a React app which uses the GraphQL server we created.
+We will next implement a React app that uses the GraphQL server we created.
 
 The current code of the server can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3), branch <i>part8-3</i>.
 
@@ -23,7 +23,7 @@ At the moment, there are two good options: [Relay](https://facebook.github.io/re
 
 ### Apollo client
 
-Let us create a new React-app, and can continue installing dependencies required by [Apollo client](https://www.apollographql.com/docs/react/get-started/).
+Let us create a new React app, and can continue installing dependencies required by [Apollo client](https://www.apollographql.com/docs/react/get-started/).
 
 ```bash
 npm install @apollo/client graphql
@@ -152,7 +152,7 @@ if (result.loading) {
 }
 ```
 
-When a response is received, the result of the <i>allPersons</i> query can be found from the <i>data</i> field, and we can render the list of names to the screen.
+When a response is received, the result of the <i>allPersons</i> query can be found in the data</i> field, and we can render the list of names to the screen.
 
 ```js
 <div>
@@ -233,7 +233,7 @@ The name of the query is <i>findPersonByName</i>, and it is given a string <i>$n
 
 It is also possible to do queries with parameters with the Apollo Explorer. The parameters are given in <i>Variables</i>:
 
-![apollostudio findPersonByName highlighting nameToSEarch Arto Hellas](../../images/8/10x.png)
+![apollostudio findPersonByName highlighting nameToSearch Arto Hellas](../../images/8/10x.png)
 
 The *useQuery* hook is well-suited for situations where the query is done when the component is rendered.  However, we now want to make the query only when a user wants to see the details of a specific person, so the query is done only [as required](https://www.apollographql.com/docs/react/data/queries/#executing-queries-manually).
 
@@ -331,7 +331,7 @@ const result = useQuery(FIND_PERSON, {
 })
 ```
 
-When user is not interested in seeing the detailed info of any person, the state variable <i>nameToSearch</i> is null and the query is not executed.
+When the user is not interested in seeing the detailed info of any person, the state variable <i>nameToSearch</i> is null and the query is not executed.
 
 If the state <i>nameToSearch</i> has a value and the query result is ready, the component <i>Person</i> renders the detailed info of a person:
 
@@ -346,11 +346,11 @@ if (nameToSearch && result.data) {
 }
 ```
 
-A single person view looks like this:
+A single-person view looks like this:
 
-![browser showing single person](../../images/8/11.png)
+![browser showing single-person](../../images/8/11.png)
 
-When a user wants to return to the persons list, the *nameToSearch* state is set to *null*.
+When a user wants to return to the person list, the *nameToSearch* state is set to *null*.
 
 The current code of the application can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-1) branch <i>part8-1</i>.
 
@@ -461,7 +461,6 @@ const PersonForm = () => {
 export default PersonForm
 ```
 
-<!-- Lomakkeen koodi on suoraviivainen, mielenkiintoiset rivit on korostettu. Mutaation suorittava funktio saadaan luotua _useMutation_-hookin avulla. Hook palauttaa kyselyfunktion <i>taulukon</i> ensimmäisenä alkiona: -->
 The code of the form is straightforward and the interesting lines have been highlighted.
 We can define mutation functions using the *useMutation* hook.
 The hook returns an <i>array</i>, the first element of which contains the function to cause the mutation.
@@ -470,7 +469,6 @@ The hook returns an <i>array</i>, the first element of which contains the functi
 const [ createPerson ] = useMutation(CREATE_PERSON)
 ```
 
-<!-- Kyselyä tehtäessä määritellään kyselyn muuttujille arvot: -->
 The query variables receive values when the query is made:
 
 ```js
@@ -532,7 +530,7 @@ const PersonForm = (props) => {
   })
 ```
 
-The pros and cons of this solution are almost opposite of the previous one's. There is no extra web traffic, because queries are not done just in case.  However, if one user now updates the state of the server, the changes do not show to other users immediately.
+The pros and cons of this solution are almost opposite of the previous one. There is no extra web traffic because queries are not done just in case.  However, if one user now updates the state of the server, the changes do not show to other users immediately.
 
 If you want to do multiple queries, you can pass multiple objects inside refetchQueries. This will allow you to update different parts of your app at the same time. Here is an example:
 
@@ -589,7 +587,7 @@ Trying to create a person with invalid data causes an error:
 
 We should handle the exception. We can register an error handler function to the mutation using the *useMutation* hook's *onError* [option](https://www.apollographql.com/docs/react/api/react/hooks/#params-2).
 
-Let's register the mutation with an error handler which uses the *setError*
+Let's register the mutation with an error handler that uses the _setError_*
 function it receives as a parameter to set an error message:
 
 ```js
@@ -600,8 +598,7 @@ const PersonForm = ({ setError }) => {
     refetchQueries: [  {query: ALL_PERSONS } ],
     // highlight-start
     onError: (error) => {
-      const errors = error.graphQLErrors[0].extensions.error.errors
-      const messages = Object.values(errors).map(e => e.message).join('\n')
+      const messages = error.graphQLErrors.map(e => e.message).join('\n')
       setError(messages)
     }
     // highlight-end
@@ -610,8 +607,6 @@ const PersonForm = ({ setError }) => {
   // ...
 }
 ```
-
-We have to dig quite deep to the error object until we find the proper error messages...
 
 We can then render the error message on the screen as necessary:
 
@@ -785,36 +780,6 @@ If a person cannot be found, or the *result.data.editNumber* is *null*, the comp
 We want to set the error message only when the result of the mutation
 *result.data* changes, so we use the useEffect hook to control setting the error message.
 
-Using useEffect causes an ESLint warning:
-
-![vscode useEffect has a missing dependency setError](../../images/8/41x.png)
-
-The warning is pointless, and the easiest solution is to ignore the ESLint rule on the line:
-
-```js
-useEffect(() => {
-  if (result.data && !result.data.editNumber) {
-    setError('name not found')
-  }
-// highlight-start  
-}, [result.data])  // eslint-disable-line 
-// highlight-end
-```
-
-We could try to get rid of the warning by adding the *setError* function to useEffect's second parameter array:
-
-```js
-useEffect(() => {
-  if (result.data && !result.data.editNumber) {
-    setError('name not found')
-  }
-// highlight-start  
-}, [result.data, setError])
-// highlight-end
-```
-
-However, this solution does not work if the *notify* function is not wrapped to a [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback) function.  If it's not, this results in an endless loop. When the *App* component is rerendered after a notification is removed, a <i>new version</i> of *notify* gets created which causes the effect function to be executed, which causes a new notification, and so on, and so on...
-
 The current code of the application can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4) branch <i>part8-4</i>.
 
 ### Apollo Client and the applications state
@@ -870,7 +835,7 @@ Make sure that the Authors view is kept up to date after setting a birth year.
 
 #### 8.12: Authors birth year advanced
 
-Change the birth year form so that a birth year can be set only for an existing author. Use [select tag](https://reactjs.org/docs/forms.html#the-select-tag), [react select](https://github.com/JedWatson/react-select), or some other mechanism.
+Change the birth year form so that a birth year can be set only for an existing author. Use [select tag](https://react.dev/reference/react-dom/components/select), [react select](https://github.com/JedWatson/react-select), or some other mechanism.
 
 A solution using the react select library looks as follows:
 

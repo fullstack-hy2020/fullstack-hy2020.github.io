@@ -379,7 +379,7 @@ La requête est traitée avec la méthode [json](http://expressjs.com/en/4x/api.
 
 ![](../../images/3/6ea.png)
 
-Ensuite, jetons un coup d'œil rapide aux données envoyées au format JSON.
+Ensuite, jetons un coup d'oeil rapide aux données envoyées au format JSON.
 
 Dans la version précédente où nous utilisions uniquement Node, nous devions transformer les données au format JSON avec la méthode _JSON.stringify_ :
 
@@ -562,7 +562,7 @@ La méthode _find_ des tableaux, désormais bien connue, est utilisée pour trou
 Lorsque nous testons notre application en allant sur <http://localhost:3001/api/notes/1> dans notre navigateur, nous remarquons qu'elle ne semble pas fonctionner, car le navigateur affiche une page vide. Ce n'est pas une surprise pour nous, développeurs de logiciels, et il est temps de déboguer.
 
 
-Adding _console.log_ commands into our code is a time-proven trick:
+L'ajout de commandes console.log dans notre code est une astuce éprouvée:
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
@@ -948,13 +948,13 @@ Que se passe-t-il exactement dans cette ligne de code ? <em>notes.map(n => n.id)
 **NB:** Comme il ne s'agit pas d'un projet frontend et que nous ne travaillons pas avec React, l'application <strong> n'est pas créée</strong>  avec create-react-app. Vous initialisez ce projet avec la commande <em>npm init</em> qui a été démontrée plus tôt dans cette partie du matériel.
 
 
-**Forte recommandation:** Lorsque vous travaillez sur du code backend, gardez toujours un œil sur ce qui se passe dans le terminal qui exécute votre application.
+**Forte recommandation:** Lorsque vous travaillez sur du code backend, gardez toujours un oeil sur ce qui se passe dans le terminal qui exécute votre application.
 
 
 #### 3.1: Backend du répertoire téléphonique étape 1
 
 
-Mettez en œuvre une application Node qui renvoie une liste codée en dur d'entrées de répertoire téléphonique à partir de l'adresse <http://localhost:3001/api/persons>.
+Mettez en oeuvre une application Node qui renvoie une liste codée en dur d'entrées de répertoire téléphonique à partir de l'adresse <http://localhost:3001/api/persons>.
 
 
 Données:
@@ -1033,7 +1033,7 @@ Générez un nouvel identifiant pour l'entrée du répertoire téléphonique ave
 
 
 
-Mettre en œuvre la gestion des erreurs pour la création de nouvelles entrées. La demande n'est pas autorisée à aboutir, si :
+Mettre en oeuvre la gestion des erreurs pour la création de nouvelles entrées. La demande n'est pas autorisée à aboutir, si :
 - Le nom ou le numéro est manquant
 - Le nom existe déjà dans le répertoire.
 

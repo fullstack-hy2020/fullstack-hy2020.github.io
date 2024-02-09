@@ -67,11 +67,13 @@ The reason why the the previous sections of the course used MongoDB is precisely
 
 ### Application database
 
-For our application we need a relational database. There are many options, but we will be using the currently most popular Open Source solution [PostgreSQL](https://www.postgresql.org/). You can install Postgres (as the database is often called) on your machine, if you wish to do so. An easier option would be using Postgres as a cloud service, e.g. [ElephantSQL](https://www.elephantsql.com/). You could also take advantage of the course [part 12](/en/part12) lessons and use Postgres locally using Docker.
+For our application we need a relational database. There are many options, but we will be using the currently most popular Open Source solution [PostgreSQL](https://www.postgresql.org/). You can install Postgres (as the database is often called) on your machine, if you wish to do so. An easier option would be using Postgres as a cloud service, e.g. [ElephantSQL](https://www.elephantsql.com/).
 
 However, we will be taking advantage of the fact that it is possible to create a Postgres database for the application on the Fly.io and Heroku cloud service platforms, which are familiar from the parts 3 and 4.
 
 In the theory material of this section, we will be building a Postgres-enabled version from the backend of the notes-storage application, which was built in sections 3 and 4.
+
+Since we don't need any database in the cloud in this part (we only use the application locally), there is a possibility to use the lessons of the course [part 12](/en/part12) and use Postgres locally with Docker. After the Postgres instructions for cloud services, we also give a short instruction on how to easily get Postgres up and running with Docker.
 
 #### Fly.io
 
@@ -130,6 +132,33 @@ Type "help" for help.
 postgres=#
 ```
 
+#### Docker
+
+This instruction assumes that you master the basic use of Docker to the extent taught by e.g. [part 12](/en/part12).
+
+Start Postgres [Docker image](https://hub.docker.com/_/postgres) with the command
+
+```bash
+docker run -e POSTGRES_PASSWORD=mysecretpassword -p 5432:5432 postgres
+```
+
+A psql console connection to the database can be opened using the _docker exec_ command. First you need to find out the id of the container:
+
+```bash
+$ docker ps
+CONTAINER ID   IMAGE      COMMAND                  CREATED          STATUS          PORTS                    NAMES
+ff3f49eadf27   postgres   "docker-entrypoint.s…"   31 minutes ago   Up 31 minutes   0.0.0.0:5432->5432/tcp   great_raman
+docker exec -it ff3f49eadf27 psql -U postgres postgres
+psql (15.2 (Debian 15.2-1.pgdg110+1))
+Type "help" for help.
+
+postgres=#
+```
+
+Defined in this way, the data stored in the database is persisted only as long as the container exists. The data can be preserved by defining a
+[volume](/en/part12/building_and_configuring_environments#persisting-data-with-volumes) for the data, see more
+[here](https://github.com/docker-library/docs/blob/master/postgres/README.md#pgdata).
+
 #### Using the psql console
 
 Particularly when using a relational database, it is essential to access the database directly as well. There are many ways to do this, there are several different graphical user interfaces, such as [pgAdmin](https://www.pgadmin.org/). However, we will be using Postgres [psql](https://www.postgresql.org/docs/current/app-psql.html) command-line tool.
@@ -165,10 +194,10 @@ Let's look at the situation from the console. First, the _\d_ command, which tel
 
 ```sql
 postgres=# \d
-                 List of relations
- Schema | Name | Type | Owner
---------+--------------+----------+----------------
- public | notes | table | username
+            List of relations
+ Schema |     Name     |   Type   |  Owner
+--------+--------------+----------+----------
+ public | notes        | table    | username
  public | notes_id_seq | sequence | username
 (2 rows)
 ```
@@ -179,13 +208,13 @@ With the command _\d notes_, we can see how the <i>notes</i> table is defined:
 
 ```sql
 postgres=# \d notes;
-                                     Table "public.notes"
-  Column | Type | Collation | Nullable | Default
+                                 Table "public.notes"                                          
+ Column    |          Type          | Collation | Nullable |             Default               
 -----------+------------------------+-----------+----------+-----------------------------------
- id | integer | not null | nextval('notes_id_seq'::regclass)
- content | text | | not null |
- important | boolean | | | |
- date | time without time zone | | | |
+ id        | integer                |           | not null | nextval('notes_id_seq'::regclass) 
+ content   | text                   |           | not null |                                   
+ important | boolean                |           |          |                                   
+ date      | time without time zone |           |          |                                   
 Indexes:
     "notes_pkey" PRIMARY KEY, btree (id)
 ```
@@ -203,10 +232,10 @@ And let's see what the created content looks like:
 
 ```sql
 postgres=# select * from notes;
- id | content | important | date
+ id |               content               | important | date
 ----+-------------------------------------+-----------+------
-  1 | relational databases rule the world | t |
-  2 | MongoDB is webscale | f |
+  1 | relational databases rule the world | t         |      
+  2 | MongoDB is webscale                 | f         |      
 (2 rows)
 ```
 
@@ -291,8 +320,7 @@ $ cat .env
 DATABASE_URL=postgres://<username>:<password>@ec2-54-83-137-206.compute-1.amazonaws.com:5432/<databasename>
 ```
 
-When using Fly.io, the local connection to the database should first be enabled by 
-[tunneling](https://fly.io/docs/reference/postgres/#connecting-to-postgres-from-outside-fly) 
+When using Fly.io, the local connection to the database should first be enabled by [tunneling](https://fly.io/docs/reference/postgres/#connecting-to-postgres-from-outside-fly) 
 the localhost port 5432 to the Fly.io database port using the following command
 
 ```bash
@@ -317,6 +345,12 @@ DATABASE_URL=postgres://postgres:<password>@127.0.0.1:5432/postgres
 Password was shown when the database was created, so hopefully you have not lost it!
 
 The last part of the connect string, <i>postgres</i> refers to the database name. The name could be any string but we use here <i>postgres</i> since it is the default database that is automatically created within a Postgres database. If needed, new databases can be created with the command [CREATE DATABASE](https://www.postgresql.org/docs/14/sql-createdatabase.html).
+
+If you use Docker, the connect string is:
+
+```bash
+DATABASE_URL=postgres://postgres:mysecretpassword@localhost:5432/postgres
+```
 
 Once the connect string has been set up in the file <i>.env</i> we can test for a connection:
 
@@ -487,7 +521,7 @@ The name of the corresponding column in the database would be <i>creation_year</
 
 We have also defined <i>modelName: 'note'</i>, the default "model name" would be capitalized <i>Note</i>. However we want to have a lowercase initial, it will make a few things a bit more convenient going forward.
 
-The database operation is easy to do using the [query interface](https://sequelize.org/master/manual/model-querying-basics.html) provided by models, the method [findAll](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findAll) works exactly as it is assumed by it's name to work:
+The database operation is easy to do using the [query interface](https://sequelize.org/master/manual/model-querying-basics.html) provided by models, the method [findAll](https://sequelize.org/api/v6/class/src/model.js~model#static-method-findAll) works exactly as it is assumed by it's name to work:
 
 ```js
 app.get('/api/notes', async (req, res) => {
@@ -560,15 +594,17 @@ app.post('/api/notes', async (req, res) => {
 
 <div class="tasks">
 
-### Tasks 13.1.-13.3.
+### Exercises 13.1.-13.3.
 
 In the tasks of this section, we will build a blog application backend similar to the tasks in [section 4](/en/part4), which should be compatible with the frontend in [section 5](/en/part5) except for error handling. We will also add various features to the backend that the frontend in section 5 will not know how to use.
 
-#### Task 13.1.
+#### Exercise 13.1.
 
-Create a GitHub repository for the application and create a new Heroku or Fly.io application for it, as well as a Postgres database. Make sure you are able to establish a connection to the application database.
+Create a GitHub repository for the application and create a new Fly.io or Heroku application for it, as well as a Postgres database. As mentioned [here](/en/part13/using_relational_databases_with_sequelize#application-database) you might set up your database also somewhere else, and in that case the Fly.io of Heroku app is not needed.
 
-#### Task 13.2.
+Make sure you are able to establish a connection to the application database.
+
+#### Exercise 13.2.
 
 On the command-line, create a <i>blogs</i> table for the application with the following columns:
 - id (unique, incrementing id)
@@ -579,11 +615,11 @@ On the command-line, create a <i>blogs</i> table for the application with the fo
 
 Add at least two blogs to the database.
 
-Save the SQL-commands you used at the root of the application repository in the file called <i>commands.sql</i>
+Save the SQL-commands you used at the root of the application repository in a file called <i>commands.sql</i>
 
 #### Exercise 13.3.
 
-Create functionality in your application, which prints the blogs in the database on the command-line, e.g. as follows:
+Create a functionality in your application which prints the blogs in the database on the command-line, e.g. as follows:
 
 ```bash
 $ node cli.js
@@ -747,7 +783,7 @@ Now the result is exactly what we want:
 In the case of a collection of objects, the method toJSON does not work directly, the method must be called separately for each object in the collection:
 
 ```js
-router.get('/', async (req, res) => {
+app.get('/api/notes', async (req, res) => {
   const notes = await Note.findAll()
 
   console.log(notes.map(n=>n.toJSON())) // highlight-line
@@ -772,7 +808,7 @@ The print looks like the following:
 However, perhaps a better solution is to turn the collection into JSON for printing by using the method [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify):
 
 ```js
-router.get('/', async (req, res) => {
+app.get('/api/notes', async (req, res) => {
   const notes = await Note.findAll()
 
   console.log(JSON.stringify(notes)) // highlight-line
@@ -810,9 +846,9 @@ The print looks like the following:
 
 <div class="tasks">
 
-### Task 13.4.
+### Exercise 13.4.
 
-#### Task 13.4.
+#### Exercise 13.4.
 
 Transform your application into a web application that supports the following operations
 

@@ -68,7 +68,7 @@ Syntymävuoden selvittävä funktio on määritelty komponentin toiminnan määr
 
 ### Destrukturointi
 
-Tarkastellaan erästä pientä, mutta käyttökelpoista ES6:n mukanaan tuomaa uutta piirrettä JavaScriptissa, eli muuttujaan sijoittamisen yhteydessä tapahtuvaa [destrukturointia](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment).
+Tarkastellaan erästä pientä mutta käyttökelpoista ES6:n mukanaan tuomaa uutta piirrettä JavaScriptissa, eli muuttujaan sijoittamisen yhteydessä tapahtuvaa [destrukturointia](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment).
 
 Jouduimme äskeisessä koodissa viittaamaan propseina välitettyyn dataan hieman ikävästi muodossa _props.name_ ja _props.age_. Näistä _props.age_ pitää toistaa komponentissa kahteen kertaan.
 
@@ -178,7 +178,7 @@ const Hello = ({ name, age }) => {
 
 Toistaiseksi tekemämme sovellukset ovat olleet sellaisia, että kun niiden komponentit on kerran renderöity, niiden ulkoasua ei ole enää voinut muuttaa. Entä jos haluaisimme toteuttaa laskurin, jonka arvo kasvaa ajan kuluessa tai nappeja painettaessa?
 
-Aloitetaan seuraavasta rungosta. Tiedostoon <i>App.js</i> tulee:
+Aloitetaan seuraavasta rungosta. Tiedostoon <i>App.jsx</i> tulee:
 
 ```js
 const App = (props) => {
@@ -191,10 +191,9 @@ const App = (props) => {
 export default App
 ```
 
-Tiedoston <i>index.js</i> sisältö on:
+Tiedoston <i>main.jsx</i> sisältö on:
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App'
@@ -230,7 +229,7 @@ counter += 1
 refresh()
 ```
 
-Copy-pasten vähentämisen takia komponentin renderöinti on refaktoroitu funktioon _refresh_.
+Copy-pasten vähentämiseksi komponentin renderöinti on refaktoroitu funktioon _refresh_.
 
 Nyt komponentti <i>renderöityy kolme kertaa</i>, saaden ensin arvon 1, sitten 2 ja lopulta 3. Luvut 1 ja 2 tosin ovat ruudulla niin vähän aikaa, että niitä ei ehdi havaita.
 
@@ -249,12 +248,11 @@ _render_-funktion toistuva kutsuminen ei kuitenkaan ole hyvä tapa päivittää 
 
 Tähänastiset komponenttimme ovat olleet siinä mielessä yksinkertaisia, että niillä ei ole ollut ollenkaan omaa tilaa, joka voisi muuttua komponentin elinaikana.
 
-Määritellään nyt sovelluksemme komponentille <i>App</i> tila Reactin [state hookin](https://reactjs.org/docs/hooks-state.html) avulla.
+Määritellään nyt sovelluksemme komponentille <i>App</i> tila Reactin [state hookin](https://react.dev/learn/state-a-components-memory#meet-your-first-hook) avulla.
 
-Palautetaan <i>index.js</i> muotoon
+Palautetaan <i>main.jsx</i> muotoon
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App'
@@ -262,7 +260,7 @@ import App from './App'
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-ja muutetaan <i>App.js</i> muotoon:
+ja muutetaan <i>App.jsx</i> muotoon:
 
 ```js
 import { useState } from 'react' // highlight-line
@@ -376,7 +374,7 @@ Muutetaan sovellusta siten, että laskurin kasvaminen tapahtuukin käyttäjän p
 
 Button-elementit tukevat mm. [hiiritapahtumia](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent) (mouse events), joista yleisin on [click](https://developer.mozilla.org/en-US/docs/Web/Events/click).
 
-Reactissa funktion rekisteröiminen tapahtumankäsittelijäksi tapahtumalle <i>click</i> [tapahtuu](https://reactjs.org/docs/handling-events.html) seuraavasti:
+Reactissa funktion rekisteröiminen tapahtumankäsittelijäksi tapahtumalle <i>click</i> [tapahtuu](https://react.dev/learn/responding-to-events) seuraavasti:
 
 ```js
 const App = () => {
@@ -534,13 +532,13 @@ Nytkin tapahtumankäsittelijät on määritelty oikein, sillä <i>onClick</i>-at
 
 ### Tilan vieminen alikomponenttiin
 
-Reactissa suositaan pieniä komponentteja, joita on mahdollista uusiokäyttää monessa osissa sovellusta ja jopa eri sovelluksissa. Refaktoroidaan koodiamme vielä siten, että yhden komponentin sijaan koostamme laskurin näytöstä ja kahdesta painikkeesta.
+Reactissa suositaan pieniä komponentteja, joita on mahdollista uusiokäyttää monissa osissa sovellusta ja jopa eri sovelluksissa. Refaktoroidaan koodiamme vielä siten, että yhden komponentin sijaan koostamme laskurin näytöstä ja kahdesta painikkeesta.
 
 Tehdään ensin laskurin tilan näyttämisestä vastaava komponentti <i>Display</i>.
 
-Tilan sijoittaminen [riittävän ylös](https://reactjs.org/docs/lifting-state-up.html) komponenttihierarkiassa on hyvä käytäntö. Reactin dokumentaatio toteaa seuraavasti:
+Tilan sijoittaminen [riittävän ylös](https://react.dev/learn/sharing-state-between-components) komponenttihierarkiassa on hyvä käytäntö. Reactin dokumentaatio toteaa seuraavasti:
 
-> <i>Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor.</i> 
+> <i>Sometimes, you want the state of two components to always change together. To do it, remove state from both of them, move it to their closest common parent, and then pass it down to them via props. This is known as lifting state up, and it’s one of the most common things you will do writing React code.</i> 
 
 Jätetään tätä neuvoa seuraten sovelluksen tila eli laskimen arvo komponenttiin <i>App</i> ja välitetään tila eli laskurin arvo <i>propsien</i> avulla komponentille <i>Display</i>:
 
@@ -623,13 +621,13 @@ const App = () => {
 
 Koska meillä on nyt uudelleenkäytettävä komponentti <i>Button</i>, sovellukselle on lisätty uutena toiminnallisuutena nappi, jolla laskurin arvoa voi vähentää.
 
-Tapahtumankäsittelijä välitetään napeille propsin _handleClick_ välityksellä. Propsin nimellä ei ole sinänsä merkitystä, mutta valinta ei ollut sattumanvarainen, sillä esim. Reactin [tutoriaali](https://reactjs.org/tutorial/tutorial.html) suosittelee tätä konventiota.
+Tapahtumankäsittelijä välitetään napeille propsin _handleClick_ välityksellä. Propsin nimellä ei ole sinänsä merkitystä, mutta valinta ei ollut sattumanvarainen, sillä esim. Reactin [tutoriaali](https://react.dev/learn/tutorial-tic-tac-toe) suosittelee tätä konventiota.
 
 ### Tilan muutos aiheuttaa uudelleenrenderöitymisen
 
 Kerrataan vielä sovelluksen toiminnan pääperiaatteet.
 
-Kun sovellus käynnistyy, suoritetaan komponentin _App_-koodi, joka luo [useState](https://reactjs.org/docs/hooks-reference.html#usestate)-hookin avulla sovellukselle laskurin tilan _counter_. Komponentti renderöi laskimen alkuarvon 0 näyttävän komponentin _Display_ sekä kolme _Button_-komponenttia, joille se asettaa laskurin tilaa muuttavat tapahtumankäsittelijät.
+Kun sovellus käynnistyy, suoritetaan komponentin _App_ koodi, joka luo [useState](https://react.dev/reference/react/useState)-hookin avulla sovellukselle laskurin tilan _counter_. Komponentti renderöi laskimen alkuarvon 0 näyttävän komponentin _Display_ sekä kolme _Button_-komponenttia, joille se asettaa laskurin tilaa muuttavat tapahtumankäsittelijät.
 
 Kun jotain napeista painetaan, suoritetaan vastaava tapahtumankäsittelijä. Tapahtumankäsittelijä muuttaa komponentin _App_ tilaa funktion _setCounter_ avulla. **Tilaa muuttavan funktion kutsuminen aiheuttaa komponentin uudelleenrenderöitymisen.** 
 

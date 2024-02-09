@@ -9,7 +9,7 @@ lang: fi
 
 Olemme tehneet backendille sitä apin tasolla kokonaisuutena testaavia integraatiotestejä ja frontendille yksittäisiä komponentteja testaavia yksikkötestejä. 
 
-Katsotaan nyt erästä tapaa tehdä [järjestelmää kokonaisuutena](https://en.wikipedia.org/wiki/System_testing) tutkivia <i>End to End (E2E) -testejä</i>.
+Katsotaan nyt erästä tapaa tehdä [järjestelmää kokonaisuutena](https://en.wikipedia.org/wiki/System_testing) tutkivia <i>End to End (E2E) ‑testejä</i>.
 
 Web-sovellusten E2E-testaus tapahtuu käyttäen selainta jonkin kirjaston avulla. Ratkaisuja on tarjolla useita, esimerkiksi [Selenium](http://www.seleniumhq.org/), joka mahdollistaa testien automatisoinnin lähes millä tahansa selaimella. Toinen vaihtoehto on käyttää ns. [headless browseria](https://en.wikipedia.org/wiki/Headless_browser) eli selainta, jolla ei ole ollenkaan graafista käyttöliittymää. Esim. Chromea on mahdollista suorittaa Headless-moodissa.
 
@@ -23,7 +23,7 @@ Ongelmana on  usein myös se, että käyttöliittymän kautta tehtävät testit 
 
 [Cypress](https://www.cypress.io/)-niminen E2E-testaukseen soveltuva kirjasto on kasvattanut nopeasti suosiotaan viimeisen reilun vuoden aikana. Cypress on poikkeuksellisen helppokäyttöinen, kaikenlaisen säätämisen ja tunkkaamisen määrä esim. Seleniumin käyttöön verrattuna on lähes olematon. Cypressin toimintaperiaate poikkeaa radikaalisti useimmista E2E-testaukseen sopivista kirjastoista, sillä Cypress-testit ajetaan kokonaisuudessaan selaimen sisällä. Muissa lähestymistavoissa testit suoritetaan Node-prosessissa, joka on yhteydessä selaimeen  ohjelmointirajapintojen kautta.
 
-Tehdään tämän osan lopuksi muutamia end to end -testejä muistiinpanosovellukselle. 
+Tehdään tämän osan lopuksi muutamia end to end ‑testejä muistiinpanosovellukselle. 
 
 Aloitetaan asentamalla Cypress <i>frontendin</i> kehitysaikaiseksi riippuvuudeksi
 
@@ -31,17 +31,18 @@ Aloitetaan asentamalla Cypress <i>frontendin</i> kehitysaikaiseksi riippuvuudeks
 npm install --save-dev cypress
 ```
 
-ja määritellään npm-skripti käynnistämistä varten.
+ja määritellään npm-skripti käynnistämistä varten, ja tehdään myös pieni muutos sovelluksen käynnistävään skriptiin:
 
 ```js
 {
   // ...
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "eslint": "eslint .",
+    "dev": "vite --host", // highlight-line
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "server": "json-server -p3001 --watch db.json",
+    "test": "jest",
     "cypress:open": "cypress open"  // highlight-line
   },
   // ...
@@ -101,7 +102,7 @@ Muutetaan testin sisätö seuraavanlaiseksi
 ```js
 describe('Note ', function() {
   it('front page can be opened', function() {
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:5173')
     cy.contains('Notes')
     cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
   })
@@ -125,7 +126,7 @@ Olisimme voineet määritellä testin myös käyttäen nuolifunktioita
 ```js
 describe('Note app', () => { // highlight-line
   it('front page can be opened', () => { // highlight-line
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:5173')
     cy.contains('Notes')
     cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
   })
@@ -141,14 +142,14 @@ Jos komento <i>cy.contains</i> ei löydä sivulta etsimäänsä tekstiä, testi 
 ```js
 describe('Note app', function() {
   it('front page can be opened',  function() {
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:5173')
     cy.contains('Notes')
     cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
   })
 
 // highlight-start
   it('front page contains random text', function() {
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:5173')
     cy.contains('wtf is this app?')
   })
 // highlight-end
@@ -171,28 +172,28 @@ Siitä päästään eroon asentamalla [eslint-plugin-cypress](https://github.com
 npm install eslint-plugin-cypress --save-dev
 ```
 
-ja laajentamalla tiedostossa <i>.eslintrc.js</i> olevaa konfiguraatiota seuraavasti: 
+ja laajentamalla tiedostossa <i>.eslintrc.cjs</i> olevaa konfiguraatiota seuraavasti: 
 
 ```js
 module.exports = {
-    "env": {
-        "browser": true,
-        "es6": true,
-        "jest/globals": true,
-        "cypress/globals": true // highlight-line
-    },
-    "extends": [ 
-      // ...
-    ],
-    "parserOptions": {
-      // ...
-    },
-    "plugins": [
-        "react", "jest", "cypress" // highlight-line
-    ],
-    "rules": {
-      // ...
-    }
+  "env": {
+    browser: true,
+    es2020: true,
+    "jest/globals": true,
+    "cypress/globals": true // highlight-line
+  },
+  "extends": [ 
+    // ...
+  ],
+  "parserOptions": {
+    // ...
+  },
+  "plugins": [
+      "react", "jest", "cypress" // highlight-line
+  ],
+  "rules": {
+    // ...
+  }
 }
 ```
 
@@ -207,7 +208,7 @@ describe('Note app',  function() {
   // ...
 
   it('login form can be opened', function() {
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:5173')
     cy.contains('log in').click()
   })
 })
@@ -215,13 +216,13 @@ describe('Note app',  function() {
 
 Testi hakee ensin napin sen tekstin perusteella ja klikkaa nappia komennolla [cy.click](https://docs.cypress.io/api/commands/click.html#Syntax).
 
-Koska molemmat testit aloittavat samalla tavalla, eli avaamalla sivun <i>http://localhost:3000</i>, kannattaa yhteinen osa eristää ennen jokaista testiä suoritettavaan <i>beforeEach</i>-lohkoon:
+Koska molemmat testit aloittavat samalla tavalla, eli avaamalla sivun <i>http://localhost:5173</i>, kannattaa yhteinen osa eristää ennen jokaista testiä suoritettavaan <i>beforeEach</i>-lohkoon:
 
 ```js
 describe('Note app', function() {
   // highlight-start
   beforeEach(function() {
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:5173')
   })
   // highlight-end
 
@@ -431,7 +432,7 @@ app.use(middleware.errorHandler)
 module.exports = app
 ```
 
-eli lisäyksen jälkeen HTTP POST -operaatio backendin endpointiin <i>/api/testing/reset</i> tyhjentää tietokannan.
+eli lisäyksen jälkeen HTTP POST ‑operaatio backendin endpointiin <i>/api/testing/reset</i> tyhjentää tietokannan.
 
 Backendin testejä varten muokattu koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1), branchissä <i>part5-1</i>.
 
@@ -451,7 +452,7 @@ describe('Note app', function() {
     }
     cy.request('POST', 'http://localhost:3001/api/users/', user) 
     // highlight-end
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:5173')
   })
   
   it('front page can be opened', function() {
@@ -524,7 +525,7 @@ Ensimmäinen komento etsii ensin komponentin, missä on teksti <i>another note c
 
 Toinen komento varmistaa, että saman napin teksti on vaihtunut muotoon <i>make important</i>.
 
-Testit ja frontendin tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-9), branchissa <i>part5-9</i>.
+Testit ja frontendin tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-9), branchissa <i>part5-9</i>.
 
 ### Epäonnistuneen kirjautumisen testi
 
@@ -622,7 +623,7 @@ it('login fails with wrong password', function() {
     .and('have.css', 'border-style', 'solid')
 })
 ```
-Viimeistellään testi vielä siten, että se varmistaa myös, että sovellus ei renderöi onnistuneesta kirjautumista kuvaavaa tekstiä <i>'Matti Luukkainen logged in'</i>:
+Viimeistellään testi vielä siten, että se varmistaa myös, että sovellus ei renderöi onnistunutta kirjautumista kuvaavaa tekstiä <i>'Matti Luukkainen logged in'</i>:
 
 ```js
 it('login fails with wrong password', function() {
@@ -687,7 +688,7 @@ Ensin siis testataan kirjautumistoimintoa. Tämän jälkeen omassa describe-lohk
 
 Kuten aiemmin jo todettiin, jokainen testi suoritetaan alkutilasta, eli vaikka testi on koodissa alempana, se ei aloita samasta tilasta mihin ylempänä koodissa olevat testit ovat jääneet!  
 
-Cypressin dokumentaatio neuvoo meitä seuraavasti: [Fully test the login flow – but only once!](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Logging-in). Eli sen sijaan että tekisimme <i>beforeEach</i>-lohkossa kirjaantumisen lomaketta käyttäen, suosittelee Cypress että kirjaantuminen tehdään [UI:n ohi](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Bypassing-your-UI), tekemällä suoraan backendiin kirjaantumista vastaava HTTP-operaatio. Syynä tälle on se, että suoraan backendiin tehtynä kirjautuminen on huomattavasti nopeampi kuin lomakkeen täyttämällä. 
+Cypressin dokumentaatio neuvoo meitä seuraavasti: [Fully test the login flow – but only once](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Logging-in). Eli sen sijaan että tekisimme <i>beforeEach</i>-lohkossa kirjaantumisen lomaketta käyttäen, suosittelee Cypress että kirjaantuminen tehdään [UI:n ohi](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Bypassing-your-UI), tekemällä suoraan backendiin kirjaantumista vastaava HTTP-operaatio. Syynä tälle on se, että suoraan backendiin tehtynä kirjautuminen on huomattavasti nopeampi kuin lomakkeen täyttämällä. 
 
 Tilanteemme on hieman monimutkaisempi kuin Cypressin dokumentaation esimerkissä, sillä kirjautumisen yhteydessä sovelluksemme tallettaa kirjautuneen käyttäjän tiedot localStorageen. Sekin toki onnistuu. Koodi on seuraavassa
 
@@ -699,7 +700,7 @@ describe('when logged in', function() {
       username: 'mluukkai', password: 'salainen'
     }).then(response => {
       localStorage.setItem('loggedNoteappUser', JSON.stringify(response.body))
-      cy.visit('http://localhost:3000')
+      cy.visit('http://localhost:5173')
     })
     // highlight-end
   })
@@ -724,7 +725,7 @@ Cypress.Commands.add('login', ({ username, password }) => {
     username, password
   }).then(({ body }) => {
     localStorage.setItem('loggedNoteappUser', JSON.stringify(body))
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:5173')
   })
 })
 ```
@@ -790,7 +791,7 @@ Cypress.Commands.add('createNote', ({ content, important }) => {
     }
   })
 
-  cy.visit('http://localhost:3000')
+  cy.visit('http://localhost:5173')
 })
 ```
 
@@ -825,7 +826,7 @@ describe('Note app', function() {
 })
 ```
 
-Testeissämme on vielä eräs ikävä piirre. Sovelluksen osoite <i>http:localhost:3000</i> on kovakoodattuna moneen kohtaan.
+Testeissämme on vielä eräs ikävä piirre. Sovelluksen osoite <i>http:localhost:5173</i> on kovakoodattuna moneen kohtaan.
 
 Määritellään sovellukselle <i>baseUrl</i> Cypressin valmiiksi generoimaan [konfiguraatiotiedostoon](https://docs.cypress.io/guides/references/configuration) <i>cypress.config.js</i>:
 
@@ -836,7 +837,7 @@ module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
     },
-    baseUrl: 'http://localhost:3000' // highlight-line
+    baseUrl: 'http://localhost:5173' // highlight-line
   },
 })
 ```
@@ -844,7 +845,7 @@ module.exports = defineConfig({
 Kaikki testeissä olevat sovelluksen osoitetta käyttävät komennot
 
 ```js
-cy.visit('http://localhost:3000')
+cy.visit('http://localhost:5173')
 ```
 
 voidaan muuttaa muotoon
@@ -864,7 +865,7 @@ module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
     },
-    baseUrl: 'http://localhost:3000',
+    baseUrl: 'http://localhost:5173',
   },
   // highlight-start
   env: {
@@ -892,7 +893,7 @@ describe('Note ', function() {
 })
 ```
 
-Testit ja frontendin koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-10), branchissa <i>part5-10</i>.
+Testit ja frontendin koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-10), branchissa <i>part5-10</i>.
 
 ### Muistiinpanon tärkeyden muutos
 
@@ -1048,7 +1049,7 @@ Nyt siis voimme suorittaa Cypress-testit komentoriviltä komennolla <i>npm run t
 
 Huomaa, että testien suorituksesta tallentuu video hakemistoon <i>cypress/videos/</i>, hakemisto lienee syytä gitignoroida. Videoiden teko on myös mahdollista ottaa [pois päältä](https://docs.cypress.io/guides/guides/screenshots-and-videos#Videos).
 
-Testien ja frontendin koodin lopullinen versio on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-11), branchissa <i>part5-11</i>.
+Testien ja frontendin koodin lopullinen versio on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-11), branchissa <i>part5-11</i>.
 
 </div>
 
@@ -1056,13 +1057,13 @@ Testien ja frontendin koodin lopullinen versio on kokonaisuudessaan [GitHubissa]
 
 ### Tehtävät 5.17.-5.23.
 
-Tehdään osan lopuksi muutamia E2E-testejä blogisovellukseen. Yllä olevan materiaalin pitäisi riittää ainakin suurimmaksi osaksi tehtävien tekemiseen. Cypressin [dokumentaatiota](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell) kannattaa ehdottomasti myös lueskella, kyseessä on ehkä paras dokumentaatio, mitä olen koskaan open source -projektissa nähnyt.
+Tehdään osan lopuksi muutamia E2E-testejä blogisovellukseen. Yllä olevan materiaalin pitäisi riittää ainakin suurimmaksi osaksi tehtävien tekemiseen. Cypressin [dokumentaatiota](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell) kannattaa ehdottomasti myös lueskella, kyseessä on ehkä paras dokumentaatio, mitä olen koskaan open source ‑projektissa nähnyt.
 
 Erityisesti kannattaa lukea luku [Introduction to Cypress](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Cypress-Can-Be-Simple-Sometimes), joka toteaa
 
 > <i>This is the single most important guide for understanding how to test with Cypress. Read it. Understand it.</i>
 
-#### 5.17: blogilistan end to end -testit, step1
+#### 5.17: blogilistan end to end ‑testit, step1
 
 Konfiguroi Cypress projektiisi. Tee testi, joka varmistaa, että sovellus näyttää oletusarvoisesti kirjautumislomakkeen.
 
@@ -1072,7 +1073,7 @@ Testin rungon tulee olla seuraavanlainen
 describe('Blog app', function() {
   beforeEach(function() {
     cy.request('POST', 'http://localhost:3003/api/testing/reset')
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:5173')
   })
 
   it('Login form is shown', function() {
@@ -1083,7 +1084,7 @@ describe('Blog app', function() {
 
 Testin <i>beforeEach</i>-alustuslohkon tulee nollata tietokannan tilanne esim. [materiaalissa](/osa5/end_to_end_testaus#tietokannan-tilan-kontrollointi) näytetyllä tavalla.
 
-#### 5.18: blogilistan end to end -testit, step2
+#### 5.18: blogilistan end to end ‑testit, step2
 
 Tee testit kirjautumiselle, testaa sekä onnistunut että epäonnistunut kirjautuminen. Luo testejä varten käyttäjä <i>beforeEach</i>-lohkossa. 
 
@@ -1094,7 +1095,7 @@ describe('Blog app', function() {
   beforeEach(function() {
     cy.request('POST', 'http://localhost:3003/api/testing/reset')
     // create here a user to backend
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:5173')
   })
 
   it('Login form is shown', function() {
@@ -1113,9 +1114,9 @@ describe('Blog app', function() {
 })
 ```
 
-#### 5.19: blogilistan end to end -testit, step3
+#### 5.19: blogilistan end to end ‑testit, step3
 
-Tee testi, joka varmistaa, että kirjaantunut käyttäjä pystyy luomaan blogin. Testin runko voi näyttää seuraavalta
+Tee testi, joka varmistaa, että kirjautunut käyttäjä pystyy luomaan blogin. Testin runko voi näyttää seuraavalta
 
 ```js 
 describe('Blog app', function() {
@@ -1136,19 +1137,19 @@ describe('Blog app', function() {
 
 Testin tulee varmistaa, että luotu blogi tulee näkyville blogien listalle.
 
-#### 5.20: blogilistan end to end -testit, step4
+#### 5.20: blogilistan end to end ‑testit, step4
 
 Tee testi, joka varmistaa, että blogia voi likettää.
 
-#### 5.21: blogilistan end to end -testit, step5
+#### 5.21: blogilistan end to end ‑testit, step5
 
 Tee testi, joka varmistaa, että blogin lisännyt käyttäjä voi poistaa blogin.
 
-#### 5.22: blogilistan end to end -testit, step6
+#### 5.22: blogilistan end to end ‑testit, step6
 
 Tee testi, joka varmista, että vain blogin lisännyt käyttäjä näkee blogin poistonapin.
 
-#### 5.23: blogilistan end to end -testit, step6
+#### 5.23: blogilistan end to end ‑testit, step6
 
 Tee testi, joka varmistaa, että blogit järjestetään likejen mukaiseen järjestykseen, eniten likejä saanut blogi ensin.
 

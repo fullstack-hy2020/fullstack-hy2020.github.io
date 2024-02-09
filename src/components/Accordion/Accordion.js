@@ -98,7 +98,7 @@ Accordion.propTypes = {
   containerClassName: PropTypes.string,
   initiallyOpened: PropTypes.bool,
   titleStyle: PropTypes.object,
-  selectedItem: PropTypes.string
+  selectedItem: PropTypes.string,
 };
 
 Accordion.defaultProps = {

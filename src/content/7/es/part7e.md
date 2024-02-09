@@ -114,7 +114,7 @@ class App extends React.Component {
 La función callback de la solicitud HTTP actualiza el estado del componente mediante el método [setState](https://reactjs.org/docs/react-component.html#setstate). El método solo toca las keys que se han definido en el objeto pasado al método como argumento. El valor de la key <i>current</i> permanece sin cambios.
 
 
-Llamar al método setState siempre desencadena la rerenderización del componente de clase, es decir, llamar al método _render_.
+Llamar al método setState siempre desencadena la re-renderización del componente de clase, es decir que realiza nuevamente un llamado al método _render_.
 
 
 Terminaremos el componente con la posibilidad de cambiar la anécdota mostrada. El siguiente es el código para todo el componente con la adición resaltada:
@@ -198,29 +198,27 @@ En el caso de nuestro ejemplo, las diferencias fueron menores. La mayor diferenc
 
 En algunos casos de uso más avanzados, el hook effect ofrece un mecanismo considerablemente mejor para controlar los efectos secundarios en comparación con los métodos de ciclo de vida de los componentes de clase.
 
-Un beneficio notable de usar componentes funcionales es no tener que lidiar con la autorreferencia _this_ -referencia de la clase Javascript.
+Un beneficio notable de usar componentes funcionales es no tener que lidiar con la autorreferencia _this_ de la clase Javascript.
 
-En mi opinión, y la opinión de muchos otros, los componentes de clase básicamente no ofrecen beneficios sobre los componentes funcionales mejorados con hooks, con la excepción del llamado mecanismo de [error boundary](https://reactjs.org/docs/error-boundaries.html), que actualmente (16 de febrero de 2020) aún no está en uso por componentes funcionales.
+En mi opinión, y la opinión de muchos otros, los componentes de clase básicamente no ofrecen beneficios sobre los componentes funcionales mejorados con hooks, con la excepción del llamado mecanismo de [error boundary](https://reactjs.org/docs/error-boundaries.html), que actualmente (15 de febrero de 2021) aún no está en uso por componentes funcionales.
 
 Al escribir código nuevo, [no hay ninguna razón racional para usar Componentes de Clase](https://reactjs.org/docs/hooks-faq.html#should-i-use-hooks-classes-or-a-mix-of-both) si el proyecto usa React con un número de versión 16.8 o superior. Por otro lado, actualmente [no hay necesidad de reescribir todo el código React antiguo](https://reactjs.org/docs/hooks-faq.html#do-i-need-to-rewrite-all-my-class-components) como componentes funcionales.
 
 ### Organización del código en la aplicación de React
 
-En la mayoría de las aplicaciones seguimos el principio según el cual los componentes se colocaban en los <i>componentes</i> del directorio, los <i>reducers</i> se colocaban en el directorio reductores y el código responsable de comunicarse con el servidor se colocaba en los <i>servicios</i> de directorio. Esta forma de organización se adapta perfectamente a una aplicación más pequeña, pero a medida que aumenta la cantidad de componentes, se necesitan mejores soluciones. No existe una forma correcta de organizar un proyecto. El artículo [La forma 100% correcta de estructurar una aplicación React (o por qué no existe tal cosa)](https://medium.com/hackernoon/the-100-correct-way-to-structure-a-react-app-or-why-theres-no-such-thing-3ede534ef1ed) proporciona una perspectiva sobre el problema.
+En la mayoría de las aplicaciones seguimos el principio según el cual los componentes se colocaban en el directorio <i>components</i>, los reducers se colocan en el directorio <i>reducers</i> y el código responsable de comunicarse con el servidor se colocaba en el directorio <i>services</i>. Esta forma de organización se adapta perfectamente a una aplicación más pequeña, pero a medida que aumenta la cantidad de componentes, se necesitan mejores soluciones. No existe una forma correcta de organizar un proyecto. El artículo [La forma 100% correcta de estructurar una aplicación React (o por qué no existe tal cosa)](https://medium.com/hackernoon/the-100-correct-way-to-structure-a-react-app-or-why-theres-no-such-thing-3ede534ef1ed) proporciona una perspectiva sobre el problema.
 
 ### Frontend y backend en el mismo repositorio
 
 Durante el curso, hemos creado el frontend y el backend en repositorios separados. Este es un enfoque muy típico. Sin embargo, hicimos la implementación [copiando](/part3/implementacion_de_la_aplicacion_en_internet#sirviendo-archivos-estaticos-desde-el-backend) el código de frontend incluido en el repositorio de backend. Un enfoque posiblemente mejor habría sido implementar el código del frontend por separado. Especialmente con las aplicaciones creadas con create-react-app, es muy sencillo gracias al [buildpack](https://github.com/mars/create-react-app-buildpack) incluido.
 
-A veces, puede haber una situación en la que la aplicación completa se coloque en un solo repositorio. En este caso, un enfoque común es colocar <i>package.json</i> y <i>webpack.config.js</i> en el directorio raíz, así como colocar el código de frontend y backend en sus propios directorios, por ejemplo, <i>cliente</i> y <i>servidor</i>.
-
-[Este repositorio](https://github.com/fullstack-hy2020/create-app) proporciona un posible punto de partida para la organización de "código de repositorio único".
+A veces, puede haber una situación en la que la aplicación completa se coloque en un solo repositorio. En este caso, un enfoque común es colocar <i>package.json</i> y <i>webpack.config.js</i> en el directorio raíz, así como colocar el código de frontend y backend en sus propios directorios, por ejemplo, <i>client</i> y <i>server</i>.
 
 ### Cambios en el servidor
 
 Si hay cambios en el estado del servidor, por ejemplo, cuando otros usuarios agregan nuevos blogs al servicio de lista de blogs, el frontend de React que implementamos durante este curso no notará estos cambios hasta que la página se vuelva a cargar. Una situación similar surge cuando el frontend desencadena un cálculo lento en el backend. ¿Cómo reflejamos los resultados del cálculo en el frontend?
 
-Una forma es ejecutar el [polling](<https://en.wikipedia.org/wiki/Polling_(computer_science)>) en el frontend, es decir, solicitudes repetidas a la API de backend, por ejemplo, utilizando el comando [setInterval](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval).
+Una forma es ejecutar [polling](<https://en.wikipedia.org/wiki/Polling_(computer_science)>) en el frontend, es decir, solicitudes repetidas a la API de backend, por ejemplo, utilizando el comando [setInterval](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval).
 
 Una forma más sofisticada es utilizar [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API), mediante el cual es posible establecer un canal de comunicación bidireccional entre el navegador y el servidor. En este caso, el navegador no necesita sondear el backend y, en su lugar, solo tiene que definir funciones callbacks para situaciones en las que el servidor envía datos sobre el estado de actualización mediante un WebSocket.
 
@@ -235,7 +233,7 @@ En la [parte 8](/es/part8), nuestro tema es GraphQL, que proporciona un buen mec
 
 ### Virtual DOM
 
-El concepto de virtual DOM a menudo surge cuando se habla de React. ¿Que es todo esto? Como se mencionó en la [parte 0](/es/part0/fundamentals_of_web_apps#document-object-model-or-dom), los navegadores proporcionan una [API DOM](https://developer.mozilla.org/fi/docs/DOM), mediante la cual el JavaScript que se ejecuta en el navegador puede modificar los elementos que definen la apariencia de la página.
+El concepto de virtual DOM a menudo surge cuando se habla de React. ¿Que es todo esto? Como se mencionó en la [parte 0](/es/part0/fundamentos_de_las_aplicaciones_web#modelo-de-objeto-de-documento-o-dom), los navegadores proporcionan una [API DOM](https://developer.mozilla.org/fi/docs/DOM), mediante la cual el JavaScript que se ejecuta en el navegador puede modificar los elementos que definen la apariencia de la página.
 
 Cuando un desarrollador de software usa React, rara vez o nunca manipula directamente el DOM. La función que define el componente React devuelve un conjunto de [elementos React](https://reactjs.org/docs/glossary.html#elements). Aunque algunos de los elementos parecen elementos HTML normales
 
@@ -264,7 +262,7 @@ Es posible que en el material no hayamos puesto suficiente énfasis en el hecho 
 
 En aplicaciones pequeñas, los datos manejados por la aplicación se almacenan en el estado de los componentes de React, por lo que en este escenario el estado de los componentes se puede considerar como <i>modelos</i> de una arquitectura MVC.
 
-Sin embargo, la arquitectura MVC no se suele mencionar cuando se habla de aplicaciones React. Además, si usamos Redux, las aplicaciones siguen la arquitectura [Flux](https://facebook.github.io/flux/docs/in-depth-overview) y el papel de React se centra aún más en la creación de vistas. La lógica empresarial de la aplicación se maneja utilizando los creadores de acciones y estados de Redux. Si usamos [redux thunk](/es/part6/communicating_with_server_in_a_redux_application#asynchronous-actions-and-redux-thunk) que vimos en la parte 6, entonces la lógica empresarial puede separarse casi por completo del código de React.
+Sin embargo, la arquitectura MVC no se suele mencionar cuando se habla de aplicaciones React. Además, si usamos Redux, las aplicaciones siguen la arquitectura [Flux](https://facebook.github.io/flux/docs/in-depth-overview) y el papel de React se centra aún más en la creación de vistas. La lógica empresarial de la aplicación se maneja utilizando los creadores de acciones y estados de Redux. Si usamos [redux thunk](/es/part6/comunicarse_con_el_servidor_en_una_aplicacion_redux#acciones-asincronicas-y-redux-thunk) que vimos en la parte 6, entonces la lógica empresarial puede separarse casi por completo del código de React.
 
 Debido a que tanto React como [Flux](https://facebook.github.io/flux/docs/in-depth-overview) se crearon en Facebook, se podría decir que usar React solo como una librería de UI es el caso de uso previsto. Seguir la arquitectura Flux agrega algunos gastos generales a la aplicación, y si estamos hablando de una pequeña aplicación o prototipo, podría ser una buena idea usar React "incorrectamente", ya que la [ingeniería excesiva](https://en.wikipedia.org/wiki/Overengineering) rara vez produce un resultado óptimo.
 
@@ -309,7 +307,7 @@ Las inyecciones de SQL se evitan [desinfectando](https://security.stackexchange.
 Los ataques de inyección también son posibles en bases de datos NoSQL. Sin embargo, mongoose los previene [desinfectando](https://zanon.io/posts/nosql-injection-in-mongodb) las consultas. Puede encontrar más información sobre el tema, por ejemplo, [aquí](https://web.archive.org/web/20220901024441/https://blog.websecurify.com/2014/08/hacking-nodejs-and-mongodb.html).
 
 
-La <i>secuencia de comandos entre sitios (XSS)</i> es un ataque en el que es posible inyectar código JavaScript malicioso en una aplicación web legítima. Luego, el código malicioso se ejecutaría en el navegador de la víctima. Si intentamos inyectar lo siguiente en, por ejemplo, la aplicación de notas
+<i>Cross-site scripting (XSS)</i> es un ataque en el que es posible inyectar código JavaScript malicioso en una aplicación web legítima. Luego, el código malicioso se ejecutaría en el navegador de la víctima. Si intentamos inyectar lo siguiente en, por ejemplo, la aplicación de notas
 
 ```html
 <script>
@@ -321,7 +319,7 @@ el código no se ejecuta, sino que solo se renderiza como 'texto' en la página:
 
 ![](../../images/7/32e.png)
 
-ya que React [se encarga de desinfectar los datos en variables](https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks). Algunas versiones de React [han sido vulnerables](https://medium.com/dailyjs/exploiting-script-injection-flaws-in-reactjs-883fb1fe36c1) a los ataques XSS. Los agujeros de seguridad, por supuesto, han sido reparados, pero no hay garantía de que pueda haber más.
+ya que React [se encarga de desinfectar los datos en variables](https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks). Algunas versiones de React [han sido vulnerables](https://medium.com/dailyjs/exploiting-script-injection-flaws-in-reactjs-883fb1fe36c1) a los ataques XSS. Los agujeros de seguridad, por supuesto, han sido reparados, pero no hay garantía de que no vuelvan a suceder.
 
 Es necesario permanecer alerta cuando se utilizan librerías; si hay actualizaciones de seguridad para esas librerías, se recomienda actualizarlas en las propias aplicaciones. Las actualizaciones de seguridad para Express se encuentran en la [documentación de la librería](https://expressjs.com/en/advanced/security-updates.html) y las de Node se encuentran en [este blog](https://nodejs.org/en/blog/).
 
@@ -335,7 +333,7 @@ La respuesta del modelo del año pasado para los ejercicios de la [parte 4](/es/
 
 ![](../../images/7/33x.png)
 
-Las dependencias se pueden actualizar actualizando el archivo <i>package.json</i> y ejecutando el comando _npm-check-updates.
+Las dependencias se pueden actualizar actualizando el archivo <i>package.json</i> y ejecutando el comando
 
 ```bash
 npm install -g npm-check-updates
@@ -373,7 +371,6 @@ Ahora es el momento de actualizar las dependencias ejecutando el comando _npm in
 
 El comando npm [audit](https://docs.npmjs.com/cli/audit) se puede utilizar para verificar la seguridad de las dependencias. Compara los números de versión de las dependencias de su aplicación con una lista de los números de versión de las dependencias que contienen amenazas de seguridad conocidas en una base de datos de errores centralizada.
 
-Below is a part of the report:
 Ejecutando _npm audit_ en el mismo proyecto imprime una larga lista de quejas y sugerencias de solución. A continuación se muestra una parte del informe:
 
 ```js
@@ -430,7 +427,7 @@ Will install react-scripts@5.0.0, which is a breaking change
 
 Ejecutando _npm audit fix --force_ actualizaría la versión de la librería, pero también actualizaría la librería _react-scripts_ y eso podría potencialmente colapsar el entorno de desarrollo. Así que dejaremos las actualizaciones de librerías para más tarde ...
 
-Una de las amenazas mencionadas en la lista de OWASP es <i>Broken Authentication</i> y <i>Broken Access Control</i> relacionado. La autenticación basada en tokens que hemos estado usando es bastante sólida, si la aplicación se usa en el protocolo HTTPS de cifrado de tráfico. Al implementar el control de acceso, por ejemplo, se debe recordar no solo verificar la identidad de un usuario en el navegador, sino también en el servidor. La mala seguridad sería evitar que se tomen algunas acciones solo ocultando las opciones de ejecución en el código del navegador.
+Una de las amenazas mencionadas en la lista de OWASP es <i>Broken Authentication</i> y <i>Broken Access Control</i>. La autenticación basada en tokens que hemos estado usando es bastante sólida, si la aplicación se usa en el protocolo HTTPS de cifrado de tráfico. Al implementar el control de acceso, por ejemplo, se debe recordar no solo verificar la identidad de un usuario en el navegador, sino también en el servidor. La mala seguridad sería evitar que se tomen algunas acciones solo ocultando las opciones de ejecución en el código del navegador.
 
 En MDN de Mozilla hay una muy buena [guía de seguridad de sitios web](https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Website_security), que trae a colación este tema tan importante:
 
@@ -452,25 +449,23 @@ A veces, el [tipado dinámico](https://developer.mozilla.org/en-US/docs/Glossary
 
 #### Renderización del lado del servidor, aplicaciones isomórficas y código universal
 
-El navegador no es el único dominio donde se pueden renderizar los componentes definidos usando React. La renderización también se puede realizar en el [servidor](https://reactjs.org/docs/react-dom-server.html). Este tipo de enfoque se utiliza cada vez más, de modo que cuando se accede a la aplicación por primera vez, el servidor muestra una página renderizada previamente creada con React. A partir de aquí, el funcionamiento de la aplicación continúa como de costumbre, es decir, el navegador ejecuta React, que manipula el DOM que muestra el navegador. La representación que se realiza en el servidor se conoce con el nombre: <i>renderización del lado del servidor</i>.
+El navegador no es el único dominio donde se pueden renderizar los componentes definidos usando React. La renderización también se puede realizar en el [servidor](https://reactjs.org/docs/react-dom-server.html). Este tipo de enfoque se utiliza cada vez más, de modo que cuando se accede a la aplicación por primera vez, el servidor muestra una página renderizada previamente creada con React. A partir de aquí, el funcionamiento de la aplicación continúa como de costumbre, es decir, el navegador ejecuta React, que manipula el DOM que muestra el navegador. La representación que se realiza en el servidor se conoce con el nombre: <i>server-side rendering</i>.
 
 Una motivación para la representación del lado del servidor es la optimización de motores de búsqueda (SEO). Los motores de búsqueda tradicionalmente han sido muy malos para reconocer el contenido renderizado en JavaScript, sin embargo, la marea podría estar cambiando, por ejemplo, eche un vistazo a [esto](https://www.javascriptstuff.com/react-seo/) y [esto](https://medium.freecodecamp.org/seo-vs-react-is-it-neccessary-to-render-react-pages-in-the-backend-74ce5015c0c9).
 
-Por supuesto, la renderización del lado del servidor no es algo específico de React o incluso de JavaScript. Usar el mismo lenguaje de programación en toda la pila en teoría simplifica la ejecución del concepto, porque el mismo código se puede ejecutar tanto en el frontend como en el backend.
+Por supuesto, la renderización del lado del servidor no es algo específico de React o incluso de JavaScript. Usar el mismo lenguaje de programación en toda el stack en teoría simplifica la ejecución del concepto, porque el mismo código se puede ejecutar tanto en el frontend como en el backend.
 
 Junto con la renderización del lado del servidor se ha hablado de las llamadas <i>aplicaciones isomórficas</i> y <i>código universal</i>, aunque ha habido cierto debate sobre sus definiciones. Según algunas [definiciones](https://medium.com/@ghengeveld/isomorphism-vs-universal-javascript-4b47fb481beb), una aplicación web isomórfica es aquella que realiza la renderización tanto en el frontend como en el backend. Por otro lado, el código universal es código que se puede ejecutar en la mayoría de los entornos, es decir, tanto el frontend como el backend.
 
-React y Node proporcionan una opción deseable para implementar una aplicación isomorfa como código universal.
+React y Node proporcionan una opción deseable para implementar tanto una aplicación isomorfa como código universal.
 
 Escribir código universal directamente usando React todavía es bastante engorroso. Últimamente, una librería llamada [Next.js](https://github.com/vercel/next.js), que se implementa sobre React, ha atraído mucha atención y es una buena opción para hacer aplicaciones universales.
 
 #### Aplicaciones web progresivas
 
-Últimamente, la gente ha comenzado a usar el término [aplicación web progresiva](https://developers.google.com/web/progressive-web-apps/) (PWA) lanzada por Google.
+Recientemente, la gente ha comenzado a usar el término [aplicación web progresiva](https://developers.google.com/web/progressive-web-apps/) (PWA) lanzada por Google.
 
-En resumen, estamos hablando de aplicaciones web, funcionando lo mejor posible en todas las plataformas aprovechando las mejores partes de esas plataformas. La pantalla más pequeña de los dispositivos móviles no debe obstaculizar la usabilidad de la aplicación. Las PWA también deberían funcionar sin problemas en modo fuera de línea o con una conexión a Internet lenta. En dispositivos móviles, deben ser instalables como cualquier otra aplicación. Todo el tráfico de red en una PWA debe estar cifrado.
-
-Las aplicaciones creadas con create-react-app son [progresivas](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#making-a-progressive-web-app) de forma predeterminada. Si la aplicación usa datos de un servidor, hacerla progresiva requiere trabajo. La funcionalidad fuera de línea generalmente se implementa con la ayuda de los [service workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API).
+En resumen, estamos hablando de aplicaciones web funcionando lo mejor posible en todas las plataformas, aprovechando las mejores partes de esas plataformas. La pantalla más pequeña de los dispositivos móviles no debe obstaculizar la usabilidad de la aplicación. Las PWA también deberían funcionar sin problemas en sin Internet o con una conexión a Internet lenta. En dispositivos móviles, deben ser instalables como cualquier otra aplicación. Todo el tráfico de red en una PWA debe estar cifrado.
 
 #### Arquitectura de microservicio
 
@@ -478,11 +473,11 @@ Durante este curso solo hemos arañado la superficie del extremo del servidor. E
 
 A medida que la aplicación crece, el enfoque de backend monolítico comienza a tornarse problemático tanto en términos de rendimiento como de mantenibilidad.
 
-Una [arquitectura de microservicios](https://martinfowler.com/articles/microservices.html) (microservicios) es una forma de componer el backend de una aplicación a partir de muchos servicios independientes que se comunican entre sí a través de la red. El propósito de un microservicio individual es cuidar de un todo funcional lógico particular. En una arquitectura de microservicio pura, los servicios no utilizan una base de datos compartida.
+Una [arquitectura de microservicios](https://martinfowler.com/articles/microservices.html) es una forma de componer el backend de una aplicación a partir de muchos servicios independientes que se comunican entre sí a través de la red. El propósito de un microservicio individual es cuidar de un todo funcional lógico particular. En una arquitectura de microservicio pura, los servicios no utilizan una base de datos compartida.
 
 Por ejemplo, la aplicación de lista de blogs podría constar de dos servicios: uno que maneja al usuario y otro que se ocupa de los blogs. La responsabilidad del servicio de usuario sería el registro y la autenticación del usuario, mientras que el servicio de blogs se haría cargo de las operaciones relacionadas con los blogs.
 
-La siguiente imagen visualiza la diferencia entre la estructura de una aplicación basada en una arquitectura de microservicio y una basada en una estructura monolítica más tradicional:
+La siguiente imagen muestra la diferencia entre la estructura de una aplicación basada en una arquitectura de microservicio y una basada en una estructura monolítica más tradicional:
 
 ![](../../images/7/36.png)
 
@@ -510,29 +505,29 @@ El uso de microservicios ha ido ganando popularidad hasta convertirse en una esp
 
 Desafortunadamente, no podemos profundizar en este importante tema durante este curso. Incluso una mirada superficial al tema requeriría al menos 5 semanas más.
 
-#### Sin servidor
+#### Serverless (Sin servidor)
 
 Después del lanzamiento del servicio [lambda](https://aws.amazon.com/lambda/) de Amazon a fines de 2014, comenzó a surgir una nueva tendencia en el desarrollo de aplicaciones web: [sin servidor](https://serverless.com/).
 
-Lo principal de lambda, y hoy en día también las [funciones Cloud](https://cloud.google.com/functions/) de Google, así como una [funcionalidad similar en Azure](https://azure.microsoft.com/en-us/services/functions/), es que permite <i>la ejecución de funciones individuales</i> en la nube. Antes, la unidad ejecutable más pequeña en la nube era un <i>proceso único</i>, por ejemplo, un entorno de ejecución que ejecuta un backend de Node.
+Lo principal de lambda, y otras [funciones Cloud](https://cloud.google.com/functions/) de Google, así como una [funcionalidad similar en Azure](https://azure.microsoft.com/en-us/services/functions/), es que permite <i>la ejecución de funciones individuales</i> en la nube. Antes, la unidad ejecutable más pequeña en la nube era un <i>proceso único</i>, por ejemplo, un entorno de ejecución que ejecuta un backend de Node.
 
-Por ejemplo, utilizando la [puerta de enlace API](https://aws.amazon.com/api-gateway/) de Amazon es posible crear aplicaciones sin servidor donde las solicitudes a la API HTTP definida obtienen respuestas directamente de las funciones de la nube. Por lo general, las funciones ya operan utilizando datos almacenados en las bases de datos del servicio en la nube.
+Utilizando la [puerta de enlace API](https://aws.amazon.com/api-gateway/) de Amazon es posible crear aplicaciones sin servidor donde las solicitudes a la API HTTP definida obtienen respuestas directamente de las funciones de la nube. Por lo general, las funciones ya operan utilizando datos almacenados en las bases de datos del servicio en la nube.
 
-Sin servidor no se trata de que no haya un servidor en las aplicaciones, sino de cómo se define el servidor. El desarrollador de software puede cambiar sus esfuerzos de programación a un mayor nivel de abstracción, ya que ya no es necesario definir mediante programación el enrutamiento de solicitudes HTTP, relaciones de bases de datos, etc., ya que la infraestructura de la nube proporciona todo esto. Las funciones en la nube también se prestan para crear un buen sistema de escalado, por ejemplo, Lambda de Amazon puede ejecutar una gran cantidad de funciones en la nube por segundo. Todo esto ocurre automáticamente a través de la infraestructura y no es necesario iniciar nuevos servidores, etc.
+Serverless no se trata de que no haya un servidor en las aplicaciones, sino de cómo se define el servidor. El desarrollador de software puede cambiar sus esfuerzos de programación a un mayor nivel de abstracción, pues ya no es necesario definir mediante programación el enrutamiento de solicitudes HTTP, relaciones de bases de datos, etc., debido a que la infraestructura de la nube proporciona todo esto. Las funciones en la nube también se prestan para crear un buen sistema de escalado, por ejemplo, Lambda de Amazon puede ejecutar una gran cantidad de funciones en la nube por segundo. Todo esto ocurre automáticamente a través de la infraestructura y no es necesario iniciar nuevos servidores, etc.
 
 ### Librerías útiles y enlaces interesantes
 
-a comunidad de desarrolladores de JavaScript ha producido una gran variedad de librerías útiles. Si está desarrollando algo más sustancial, vale la pena comprobar si las soluciones existentes ya están disponibles. A continuación se enumeran algunas librerías recomendadas por partes confiables.
+La comunidad de desarrolladores de JavaScript ha producido una gran variedad de librerías útiles. Si está desarrollando algo más sustancial, vale la pena comprobar si las soluciones existentes ya están disponibles. A continuación se enumeran algunas librerías recomendadas por partes confiables.
 
-Si su aplicación tiene que manejar datos complicados, [lodash](https://www.npmjs.com/package/lodash), que recomendamos en la [parte 4](/es/part4/structure_of_backend_application_introduction_to_testing#exercises-4-3-4-7), es una buena librería para usar. Si prefiere un estilo de programación funcional, podría considerar usar [ramda](https://ramdajs.com/).
+Si su aplicación tiene que manejar datos complicados, [lodash](https://www.npmjs.com/package/lodash), que recomendamos en la [parte 4](/es/part4/estructura_de_la_aplicacion_backend_introduccion_a_las_pruebas#ejercicios-4-3-4-7), es una buena librería para usar. Si prefiere un estilo de programación funcional, podría considerar usar [ramda](https://ramdajs.com/).
 
 Si maneja horas y fechas, [date-fns](https://github.com/date-fns/date-fns) ofrece buenas herramientas para eso.
 
 [Formik](https://www.npmjs.com/package/formik) y [redux-form](https://redux-form.com/8.3.0/) se pueden utilizar para manipular formularios más fácilmente. Si su aplicación muestra gráficos, hay varias opciones para elegir. Se recomiendan tanto [recharts](http://recharts.org/en-US/) como [highcharts](https://github.com/highcharts/highcharts-react) .
 
-La librería [immutable.js](https://github.com/facebook/immutable-js/) mantenida por Facebook proporciona, como su nombre indica, implementaciones inmutables de algunas estructuras de datos. La librería podría ser útil cuando se usa Redux, ya que como recordamos de la [parte 6](/es/part6/flux_architecture_and_redux#pure-functions-immutable): los reducers deben ser funciones puras, lo que significa que no deben modificar el estado del store, sino que deben reemplazarlo por uno nuevo cuando se produce un cambio. Durante el año pasado, [Immer](https://github.com/mweststrate/immer) se hizo cargo de parte de la popularidad de Immutable.js, que proporciona una funcionalidad similar pero en un paquete algo más sencillo.
+La librería [immutable.js](https://github.com/facebook/immutable-js/) mantenida por Facebook proporciona, como su nombre indica, implementaciones inmutables de algunas estructuras de datos. La librería podría ser útil cuando se usa Redux, ya que como recordamos de la [parte 6](/es/part6/flux_architecture_y_redux#funciones-puras-inmutables): los reducers deben ser funciones puras, lo que significa que no deben modificar el estado del store, sino que deben reemplazarlo por uno nuevo cuando se produce un cambio. Durante el año pasado, [Immer](https://github.com/mweststrate/immer) se hizo cargo de parte de la popularidad de Immutable.js, que proporciona una funcionalidad similar pero en un paquete algo más sencillo.
 
-[Redux-saga](https://redux-saga.js.org/) proporciona una forma alternativa de hacer las acciones asincrónicas para [redux thunk](/es/part6/communicating_with_server_in_a_redux_application#asynchronous-actions-and-redux-thunk) que vimos en la parte 6. Algunos abrazan el hype y les gusta. Yo no.
+[Redux-saga](https://redux-saga.js.org/) proporciona una forma alternativa de hacer las acciones asincrónicas para [redux thunk](/es/part6/comunicarse_con_el_servidor_en_una_aplicacion_redux#acciones-asincronicas-y-redux-thunk) que vimos en la parte 6. Algunos abrazan el hype y les gusta. Yo no.
 
 Para las aplicaciones de una sola página, la recopilación de datos analíticos sobre la interacción entre los usuarios y la página es [más desafiante](https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications) que para las aplicaciones web tradicionales donde se carga toda la página. La librería [React Google Analytics](https://github.com/react-ga/react-ga) ofrece una solución.
 
@@ -546,14 +541,12 @@ En lo que respecta a las herramientas utilizadas para la gestión y empaquetamie
 - 2012-14 [Browserify](https://www.npmjs.com/package/browserify)
 - 2015- [Webpack](https://www.npmjs.com/package/webpack)
 
-Los hipsters parecen haber perdido su interés en el desarrollo de herramientas después de que webpack comenzara a dominar los mercados. Hace unos años, [Parcel](https://parceljs.org) comenzó a hacer rondas de marketing en sí mismo como simple (que Webpack no lo es) y más rápido que Webpack. Sin embargo, después de un comienzo prometedor, Parcel no ha cobrado fuerza y ​​parece que no será el final de Webpack.
+Los hipsters parecen haber perdido su interés en el desarrollo de herramientas después de que webpack comenzara a dominar los mercados. Hace unos años, [Parcel](https://parceljs.org) comenzó a hacer rondas de marketing en sí mismo como simple (que Webpack no lo es) y más rápido que Webpack. Sin embargo, después de un comienzo prometedor, Parcel no ha cobrado fuerza y ​​parece que no será el final de Webpack. Recientemente, [esbuild](https://esbuild.github.io/) ha ido en incremento y ya está desafiando seriamente a Webpack.
 
-Otra digna de mención es la biblioteca [Rome](https://rome.tools/), que aspira a ser una cadena de herramientas integral para unificar el linter, el compilador, el empaquetador y más. Actualmente está en desarrollo intensivo desde el primer commit a principios de este año el 27 de febrero, pero la perspectiva parece prometedora.
+El sitio [https://reactpatterns.com/](https://reactpatterns.com/) ofrece una lista concisa de las mejores prácticas para React, algunas de las cuales ya le resultarán familiares de este curso. Otra lista similar es [react bits](https://vasanthk.gitbooks.io/react-bits/).
 
-El sitio <https://reactpatterns.com/> proporciona una lista concisa de las mejores prácticas para React, algunas de las cuales ya están familiarizadas con este curso. Otra lista similar es [react bits](https://vasanthk.gitbooks.io/react-bits/).
+[Reactiflux](https://www.reactiflux.com/) es una gran comunidad de chat de desarrolladores de React en Discord. Podría ser un posible lugar para obtener apoyo después de que el curso haya concluido. Numerosas bibliotecas tienen sus propios canales.
 
-[Reactiflux](https://www.reactiflux.com/) es una gran comunidad de chat de desarrolladores de React en Discord. Podría ser un posible lugar para obtener apoyo una vez finalizado el curso. Por ejemplo, numerosas librerías tienen sus propios canales.
-
-Si conoce algunos enlaces o librerías recomendables, ¡haga un pull request!
+Si conoce algunos enlaces o bibliotecas recomendables, ¡haga pull request!
 
 </div>

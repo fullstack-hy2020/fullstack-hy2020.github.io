@@ -17,7 +17,7 @@ Token-autentikaation periaatetta kuvaa seuraava sekvenssikaavio:
 
 - Alussa käyttäjä kirjautuu Reactilla toteutettua kirjautumislomaketta käyttäen
   - lisäämme kirjautumislomakkeen frontendiin [osassa 5](/osa5)
-- Tämän seurauksena selaimen React-koodi lähettää käyttäjätunnuksen ja salasanan HTTP POST -pyynnöllä palvelimen osoitteeseen <i>/api/login</i>
+- Tämän seurauksena selaimen React-koodi lähettää käyttäjätunnuksen ja salasanan HTTP POST ‑pyynnöllä palvelimen osoitteeseen <i>/api/login</i>
 - Jos käyttäjätunnus ja salasana ovat oikein, generoi palvelin <i>tokenin</i>, joka yksilöi jollain tavalla kirjautumisen tehneen käyttäjän
   - token on digitaalisesti allekirjoitettu, joten sen väärentäminen on (kryptografisesti) mahdotonta
 - Backend vastaa selaimelle onnistumisesta kertovalla statuskoodilla ja palauttaa tokenin vastauksen mukana
@@ -25,7 +25,7 @@ Token-autentikaation periaatetta kuvaa seuraava sekvenssikaavio:
 - Kun käyttäjä luo uuden muistiinpanon (tai tekee jonkin operaation, joka edellyttää tunnistautumista), lähettää React-koodi tokenin pyynnön mukana palvelimelle
 - Palvelin tunnistaa pyynnön tekijän tokenin perusteella
 
-Tehdään ensin kirjautumistoiminto. Asennetaan [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)-kirjasto, jonka avulla koodimme pystyy generoimaan [JSON web token](https://jwt.io/) -muotoisia tokeneja.
+Tehdään ensin kirjautumistoiminto. Asennetaan [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)-kirjasto, jonka avulla koodimme pystyy generoimaan [JSON web token](https://jwt.io/) ‑muotoisia tokeneja.
 
 ```bash
 npm install jsonwebtoken
@@ -325,7 +325,7 @@ Seuraavien tehtävien myötä Blogilistalle luodaan käyttäjienhallinnan perust
 
 #### 4.15: blogilistan laajennus, step3
 
-Tee sovellukseen mahdollisuus luoda käyttäjiä tekemällä HTTP POST -pyyntö osoitteeseen <i>api/users</i>. Käyttäjillä on <i>käyttäjätunnus, salasana ja nimi</i>.
+Tee sovellukseen mahdollisuus luoda käyttäjiä tekemällä HTTP POST ‑pyyntö osoitteeseen <i>api/users</i>. Käyttäjillä on <i>käyttäjätunnus, salasana ja nimi</i>.
 
 Älä talleta tietokantaan salasanoja selväkielisenä vaan käytä osan 4 luvun [Käyttäjien luominen](/osa4/kayttajien_hallinta#kayttajien-luominen) tapaan <i>bcrypt</i>-kirjastoa.
 
@@ -373,7 +373,7 @@ Toteuta osan 4 luvun [Token-perustainen kirjautuminen](/osa4/token_perustainen_k
 
 #### 4.19: blogilistan laajennus, step7
 
-Muuta blogien lisäämistä siten, että se on mahdollista vain, jos lisäyksen tekevässä HTTP POST -pyynnössä on mukana validi token. Tokenin haltija määritellään blogin lisääjäksi.
+Muuta blogien lisäämistä siten, että se on mahdollista vain, jos lisäyksen tekevässä HTTP POST ‑pyynnössä on mukana validi token. Tokenin haltija määritellään blogin lisääjäksi.
 
 #### 4.20*: blogilistan laajennus, step8
 

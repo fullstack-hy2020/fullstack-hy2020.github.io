@@ -214,7 +214,7 @@ const Togglable = (props) => {
 export default Togglable
 ```
 
-The new and interesting part of the code is [props.children](https://reactjs.org/docs/glossary.html#propschildren), which is used for referencing the child components of the component. The child components are the React elements that we define between the opening and closing tags of a component.
+The new and interesting part of the code is [props.children](https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children), which is used for referencing the child components of the component. The child components are the React elements that we define between the opening and closing tags of a component.
 
 This time the children are rendered in the code that is used for rendering the component itself:
 
@@ -271,15 +271,15 @@ Next let's define the form component inside of a <i>Togglable</i> component:
 </Togglable>
 ```
 
-You can find the code for our current application in its entirety in the <i>part5-4</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-4).
+You can find the code for our current application in its entirety in the <i>part5-4</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-4).
 
 ### State of the forms
 
 The state of the application currently is in the _App_ component.
 
-React documentation says the [following](https://reactjs.org/docs/lifting-state-up.html) about where to place the state:
+React documentation says the [following](https://react.dev/learn/sharing-state-between-components) about where to place the state:
 
-<i>Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor.</i>
+<i>Sometimes, you want the state of two components to always change together. To do it, remove state from both of them, move it to their closest common parent, and then pass it down to them via props. This is known as lifting state up, and it’s one of the most common things you will do writing React code.</i>
 
 If we think about the state of the forms, so for example the contents of a new note before it has been created, the _App_ component does not need it for anything.
 We could just as well move the state of the forms to the corresponding components.
@@ -352,16 +352,16 @@ const App = () => {
 
 We could do the same for the log in form, but we'll leave that for an optional exercise.
 
-The application code can be found on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5),
+The application code can be found on [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-5),
 branch <i>part5-5</i>.
 
 ### References to components with ref
 
 Our current implementation is quite good; it has one aspect that could be improved.
 
-After a new note is created, it would make sense to hide the new note form. Currently, the form stays visible. There is a slight problem with hiding the form. The visibility is controlled with the <i>visible</i> variable inside of the <i>Togglable</i> component. How can we access it outside of the component?
+After a new note is created, it would make sense to hide the new note form. Currently, the form stays visible. There is a slight problem with hiding the form. The visibility is controlled with the <i>visible</i> state variable inside of the <i>Togglable</i> component. How can we access it outside of the component?
 
-There are many ways to implement closing the form from the parent component, but let's use the [ref](https://reactjs.org/docs/refs-and-the-dom.html) mechanism of React, which offers a reference to the component.
+There are many ways to implement closing the form from the parent component, but let's use the [ref](https://react.dev/learn/referencing-values-with-refs) mechanism of React, which offers a reference to the component.
 
 Let's make the following changes to the <i>App</i> component:
 
@@ -382,7 +382,7 @@ const App = () => {
 }
 ```
 
-The [useRef](https://reactjs.org/docs/hooks-reference.html#useref) hook is used to create a <i>noteFormRef</i> ref, that is assigned to the <i>Togglable</i> component containing the creation note form. The <i>noteFormRef</i> variable acts as a reference to the component. This hook ensures the same reference (ref) that is kept throughout re-renders of the component.
+The [useRef](https://react.dev/reference/react/useRef) hook is used to create a <i>noteFormRef</i> ref, that is assigned to the <i>Togglable</i> component containing the creation note form. The <i>noteFormRef</i> variable acts as a reference to the component. This hook ensures the same reference (ref) that is kept throughout re-renders of the component.
 
 We also make the following changes to the <i>Togglable</i> component:
 
@@ -423,9 +423,9 @@ const Togglable = forwardRef((props, refs) => { // highlight-line
 export default Togglable
 ```
 
-The function that creates the component is wrapped inside of a [forwardRef](https://reactjs.org/docs/react-api.html#reactforwardref) function call. This way the component can access the ref that is assigned to it.
+The function that creates the component is wrapped inside of a [forwardRef](https://react.dev/reference/react/forwardRef) function call. This way the component can access the ref that is assigned to it.
 
-The component uses the [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) hook to make its <i>toggleVisibility</i> function available outside of the component.
+The component uses the [useImperativeHandle](https://react.dev/reference/react/useImperativeHandle) hook to make its <i>toggleVisibility</i> function available outside of the component.
 
 We can now hide the form by calling <i>noteFormRef.current.toggleVisibility()</i> after a new note has been created:
 
@@ -444,13 +444,13 @@ const App = () => {
 }
 ```
 
-To recap, the [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) function is a React hook, that is used for defining functions in a component, which can be invoked from outside of the component.
+To recap, the [useImperativeHandle](https://react.dev/reference/react/useImperativeHandle) function is a React hook, that is used for defining functions in a component, which can be invoked from outside of the component.
 
 This trick works for changing the state of a component, but it looks a bit unpleasant. We could have accomplished the same functionality with slightly cleaner code using "old React" class-based components. We will take a look at these class components during part 7 of the course material. So far this is the only situation where using React hooks leads to code that is not cleaner than with class components.
 
-There are also [other use cases](https://reactjs.org/docs/refs-and-the-dom.html) for refs than accessing React components.
+There are also [other use cases](https://react.dev/learn/manipulating-the-dom-with-refs) for refs than accessing React components.
 
-You can find the code for our current application in its entirety in the <i>part5-6</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-6).
+You can find the code for our current application in its entirety in the <i>part5-6</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-6).
 
 ### One point about components
 
@@ -502,7 +502,7 @@ Full stack development is <i> extremely hard</i>, that is why I will use all the
 - <i>when I suspect that there is a bug in the frontend, I make sure that the backend works for sure</i>
 - <i>when I suspect that there is a bug in the backend, I make sure that the frontend works for sure</i>
 - I will write lots of _console.log_ statements to make sure I understand how the code and the tests behave and to help pinpoint problems
-- If my code does not work, I will not write more code. Instead, I start deleting the code until it works or just return to a state when everything still was still working
+- If my code does not work, I will not write more code. Instead, I start deleting the code until it works or just return to a state when everything was still working
 - If a test does not pass, I make sure that the tested functionality for sure works in the application
 - When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](https://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord-telegram) how to ask for help
 
@@ -530,7 +530,7 @@ The form closes when a new blog is created.
 
 Separate the form for creating a new blog into its own component (if you have not already done so), and move all the states required for creating a new blog to this component.
 
-The component must work like the <i>NoteForm</i> component from the [material](/en/part5/props_children_and_proptypes) of this part.
+The component must work like the <i>NoteForm</i> component from the [material](/en/part5/props_children_and_proptypes#state-of-the-forms) of this part.
 
 #### 5.7 Blog list frontend, step7
 
@@ -705,9 +705,7 @@ If the type of a passed prop is wrong, e.g. if we try to define the <i>handleSub
 
 In part 3 we configured the [ESlint](/en/part3/validation_and_es_lint#lint) code style tool to the backend. Let's take ESlint to use in the frontend as well.
 
-Create-react-app has installed ESlint to the project by default, so all that's left for us to do is define our desired configuration in the <i>.eslintrc.js</i> file.
-
-*NB:* do not run the _eslint --init_ command. It will install the latest version of ESlint that is not compatible with the configuration file created by create-react-app!
+Vite has installed ESlint to the project by default, so all that's left for us to do is define our desired configuration in the <i>.eslintrc.cjs</i> file.
 
 Next, we will start testing the frontend and in order to avoid undesired and irrelevant linter errors we will install the [eslint-plugin-jest](https://www.npmjs.com/package/eslint-plugin-jest) package:
 
@@ -715,64 +713,56 @@ Next, we will start testing the frontend and in order to avoid undesired and irr
 npm install --save-dev eslint-plugin-jest
 ```
 
-Let's create a <i>.eslintrc.js</i> file with the following contents:
+Let's create a <i>.eslintrc.cjs</i> file with the following contents:
 
 ```js
-/* eslint-env node */
 module.exports = {
-  "env": {
-      "browser": true,
-      "es6": true,
-      "jest/globals": true 
+  root: true,
+  env: {
+    browser: true,
+    es2020: true,
+    "jest/globals": true
   },
-  "extends": [ 
-      "eslint:recommended",
-      "plugin:react/recommended"
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
+    'plugin:react-hooks/recommended',
   ],
-  "parserOptions": {
-      "ecmaFeatures": {
-          "jsx": true
-      },
-      "ecmaVersion": 2018,
-      "sourceType": "module"
+  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
+  settings: { react: { version: '18.2' } },
+  plugins: ['react-refresh', 'jest'],
+  rules: {
+    "indent": [
+        "error",
+        2  
+    ],
+    "linebreak-style": [
+        "error",
+        "unix"
+    ],
+    "quotes": [
+        "error",
+        "single"
+    ],
+    "semi": [
+        "error",
+        "never"
+    ],
+    "eqeqeq": "error",
+    "no-trailing-spaces": "error",
+    "object-curly-spacing": [
+        "error", "always"
+    ],
+    "arrow-spacing": [
+        "error", { "before": true, "after": true }
+    ],
+    "no-console": 0,
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": 0,
+    "no-unused-vars": 0    
   },
-  "plugins": [
-      "react", "jest"
-  ],
-  "rules": {
-      "indent": [
-          "error",
-          2  
-      ],
-      "linebreak-style": [
-          "error",
-          "unix"
-      ],
-      "quotes": [
-          "error",
-          "single"
-      ],
-      "semi": [
-          "error",
-          "never"
-      ],
-      "eqeqeq": "error",
-      "no-trailing-spaces": "error",
-      "object-curly-spacing": [
-          "error", "always"
-      ],
-      "arrow-spacing": [
-          "error", { "before": true, "after": true }
-      ],
-      "no-console": 0,
-      "react/prop-types": 0,
-      "react/react-in-jsx-scope": "off"
-  },
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
-  }
 }
 ```
 
@@ -782,28 +772,19 @@ Let's create [.eslintignore](https://eslint.org/docs/user-guide/configuring#igno
 
 ```bash
 node_modules
-build
-.eslintrc.js
+dist
+.eslintrc.cjs
 ```
 
-Now the directories <em>build</em> and <em>node_modules</em> will be skipped when linting.
+Now the directories <em>dist</em> and <em>node_modules</em> will be skipped when linting.
 
-Let us also create an npm script to run the lint:
+As usual, you can perform the linting either from the command line with the command
 
-```js
-{
-  // ...
-  {
-    "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "eslint": "eslint ." // highlight-line
-  },
-  // ...
-}
+```bash
+npm run lint
 ```
+
+or using the editor's Eslint plugin.
 
 Component _Togglable_ causes a nasty-looking warning <i>Component definition is missing display name</i>:
 
@@ -828,10 +809,7 @@ Togglable.displayName = 'Togglable' // highlight-line
 export default Togglable
 ```
 
-You can find the code for our current application in its entirety in the <i>part5-7</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-7).
-
-Note that create-react-app has also a [default ESLint-configuration](https://www.npmjs.com/package/eslint-config-react-app), that we have now overridden. [The documentation](https://create-react-app.dev/docs/setting-up-your-editor/#extending-or-replacing-the-default-eslint-config) mentions that it is ok to replace the default but does not encourage us to do so:
- <i>We highly recommend extending the base config, as removing it could introduce hard-to-find issues</i>.
+You can find the code for our current application in its entirety in the <i>part5-7</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-7).
 
 </div>
 
@@ -843,8 +821,6 @@ Note that create-react-app has also a [default ESLint-configuration](https://www
 
 Define PropTypes for one of the components of your application, and add ESlint to the project. Define the configuration according to your liking. Fix all of the linter errors.
 
-Create-react-app has installed ESlint to the project by default, so all that's left for you to do is define your desired configuration in the <i>.eslintrc.js</i> file.
-
-*NB:* do not run the _eslint --init_ command. It will install the latest version of ESlint that is not compatible with the configuration file created by create-react-app!
+Vite has installed ESlint to the project by default, so all that's left for you to do is define your desired configuration in the <i>.eslintrc.cjs</i> file.
 
 </div>

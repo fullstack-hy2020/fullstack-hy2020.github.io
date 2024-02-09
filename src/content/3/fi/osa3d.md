@@ -43,7 +43,7 @@ const noteSchema = new mongoose.Schema({
 
 Kentän <i>content</i> pituuden vaaditaan nyt olevan vähintään viisi merkkiä ja kentän arvo ei saa olla tyhjä. Kentälle <i>important</i> ei ole asetettu mitään ehtoa, joten se on määritelty edelleen yksinkertaisemmassa muodossa.
 
-Esimerkissä käytetyt validaattorit <i>minlength</i> ja <i>required</i> ovat Mongooseen [sisäänrakennettuja](https://mongoosejs.com/docs/validation.html#built-in-validators) validointisääntöjä. Mongoosen [custom validator](https://mongoosejs.com/docs/validation.html#custom-validators) -ominaisuus mahdollistaa mielivaltaisten validaattorien toteuttamisen, jos valmiiden joukosta ei löydy tarkoitukseen sopivaa.
+Esimerkissä käytetyt validaattorit <i>minlength</i> ja <i>required</i> ovat Mongooseen [sisäänrakennettuja](https://mongoosejs.com/docs/validation.html#built-in-validators) validointisääntöjä. Mongoosen [custom validator](https://mongoosejs.com/docs/validation.html#custom-validators) ‑ominaisuus mahdollistaa mielivaltaisten validaattorien toteuttamisen, jos valmiiden joukosta ei löydy tarkoitukseen sopivaa.
 
 Jos tietokantaan yritetään tallettaa validointisäännön rikkova olio, heittää tallennusoperaatio poikkeuksen. Muutetaan uuden muistiinpanon luomisesta huolehtivaa käsittelijää siten, että se välittää mahdollisen poikkeuksen virheenkäsittelijämiddlewaren huolehdittavaksi:  
 
@@ -180,11 +180,11 @@ Toteuta sovelluksellesi validaatio, joka huolehtii, että backendiin voi tallett
 
 Toteuta validoinnin toinen osa [Custom validationina](https://mongoosejs.com/docs/validation.html#custom-validators).
 
-Jos HTTP POST -pyyntö yrittää lisätä virheellistä numeroa, tulee vastata sopivalla statuskoodilla ja lisätä vastaukseen asianmukainen virheilmoitus.
+Jos HTTP POST ‑pyyntö yrittää lisätä virheellistä numeroa, tulee vastata sopivalla statuskoodilla ja lisätä vastaukseen asianmukainen virheilmoitus.
 
 #### 3.21 tietokantaa käyttävä versio Internetiin
 
-Generoi päivitetystä sovelluksesta "full stack" -versio, eli tee frontendista uusi production build ja kopioi se backendin repositorioon. Varmista, että kaikki toimii paikallisesti käyttämällä koko sovellusta backendin osoitteesta <http://localhost:3001>.
+Generoi päivitetystä sovelluksesta "full stack" ‑versio, eli tee frontendista uusi production build ja kopioi se backendin repositorioon. Varmista, että kaikki toimii paikallisesti käyttämällä koko sovellusta backendin osoitteesta <http://localhost:3001>.
 
 Pushaa uusi versio Fly.io:n tai Renderiin ja varmista, että kaikki toimii myös siellä.
 
@@ -287,13 +287,13 @@ Kannattaa ehkä tehdä linttaustakin varten _npm-skripti_:
 
 Nyt komento _npm run lint_ suorittaa tarkastukset koko projektille.
 
-Myös hakemistossa <em>build</em> oleva frontendin tuotantoversio tulee näin tarkastettua. Sitä emme kuitenkaan halua, eli tehdään projektin juureen tiedosto [.eslintignore](https://eslint.org/docs/user-guide/configuring/ignoring-code#the-eslintignore-file) ja sille seuraava sisältö:
+Myös hakemistossa <em>dist</em> oleva frontendin tuotantoversio tulee näin tarkastettua. Sitä emme kuitenkaan halua, eli tehdään projektin juureen tiedosto [.eslintignore](https://eslint.org/docs/user-guide/configuring/ignoring-code#the-eslintignore-file) ja sille seuraava sisältö:
 
 ```bash
-build
+dist
 ```
 
-Näin koko hakemiston <em>build</em> sisältö jätetään huomioimatta linttauksessa.
+Näin koko hakemiston <em>dist</em> sisältö jätetään huomioimatta linttauksessa.
 
 Lintillä on jonkin verran huomautettavaa koodistamme:
 
@@ -313,7 +313,7 @@ Komento _npm run lint -- --fix_ voi olla avuksi, jos koodissa on esim. useampia 
 
 ESLintille on määritelty suuri määrä [sääntöjä](https://eslint.org/docs/rules/), joita on helppo ottaa käyttöön muokkaamalla tiedostoa <i>.eslintrc.js</i>.
 
-Otetaan käyttöön sääntö [eqeqeq](https://eslint.org/docs/rules/eqeqeq) joka varoittaa, jos koodissa yhtäsuuruutta verrataan muuten kuin käyttämällä kolmea = -merkkiä. Sääntö lisätään konfiguraatiotiedostoon kentän <i>rules</i> alle.
+Otetaan käyttöön sääntö [eqeqeq](https://eslint.org/docs/rules/eqeqeq) joka varoittaa, jos koodissa yhtäsuuruutta verrataan muuten kuin käyttämällä kolmea = ‑merkkiä. Sääntö lisätään konfiguraatiotiedostoon kentän <i>rules</i> alle.
 
 ```js
 {

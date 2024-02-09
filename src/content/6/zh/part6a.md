@@ -1261,7 +1261,7 @@ rm -rf .git
 
 ```bash
 npm install
-npm start
+npm run dev
 ```
 
 <!-- After completing these exercises, your application should look like this:-->

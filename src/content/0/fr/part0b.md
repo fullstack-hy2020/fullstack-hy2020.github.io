@@ -303,7 +303,7 @@ Document Object Model, ou [DOM](https://en.wikipedia.org/wiki/Document_Object_Mo
 
 Le code JavaScript introduit dans le chapitre précédent utilisait l'API DOM pour ajouter une liste de notes à la page.
 
-Le code suivant crée un nouveau nœud pour la variable <em>ul</em> et y ajoute des nœuds enfants :
+Le code suivant crée un nouveau noeud pour la variable <em>ul</em> et y ajoute des noeuds enfants :
 
 ```js
 var ul = document.createElement('ul')
@@ -323,7 +323,7 @@ document.getElementById('notes').appendChild(ul)
 
 ### Manipulation du l'objet document depuis la console
 
-Le nœud le plus haut de l'arborescence DOM d'un document HTML est appelé l'objet <em>document</em>. Nous pouvons effectuer diverses opérations sur une page Web à l'aide de l'API DOM. Vous pouvez accéder à l'objet <em>document</em> en tapant <em>document</em> dans l'onglet Console :
+Le noeud le plus haut de l'arborescence DOM d'un document HTML est appelé l'objet <em>document</em>. Nous pouvons effectuer diverses opérations sur une page Web à l'aide de l'API DOM. Vous pouvez accéder à l'objet <em>document</em> en tapant <em>document</em> dans l'onglet Console :
 
 ![](../../images/0/15e.png)
 
@@ -690,7 +690,7 @@ L'idée de ces exercices est de lire le texte une fois de plus et de réfléchir
 
   <h4>0.5 : Application à page unique</h4>
 
-Créez un diagramme illustrant la situation dans laquelle l'utilisateur accède à la version [application à page unique](/fr/part0/introduction_aux_applications_web#application-a-page-unique) de l'application de notes sur <https://studies.cs.helsinki.fi/exempleapp/spa>.
+Créez un diagramme illustrant la situation dans laquelle l'utilisateur accède à la version [application à page unique](/fr/part0/introduction_aux_applications_web#application-a-page-unique) de l'application de notes sur <https://studies.cs.helsinki.fi/exampleapp/spa>.
 
   <h4>0.6 : Nouvelle note</h4>
 

@@ -51,7 +51,7 @@ For the development of our application, we will be using [Expo](https://docs.exp
 npx create-expo-app rate-repository-app --template expo-template-blank@sdk-46
 ```
   
-Note, that the <em>@sdk-46</em> sets the project's <i>Expo SDK version to 46</i>, which supports <i>React Native version 0.69</i>. Using other Expo SDK versions might cause you trouble while following this material. Also, Expo has a [few limitations](https://docs.expo.io/introduction/why-not-expo/) when compared to plain React Native CLI. However, these limitations do not affect the application implemented in the material.
+Note, that the <em>@sdk-46</em> sets the project's <i>Expo SDK version to 46</i>, which supports <i>React Native version 0.69</i>. Using other Expo SDK versions might cause you trouble while following this material. Also, Expo has a [few limitations](https://docs.expo.dev/faq/#limitations) when compared to plain React Native CLI. However, these limitations do not affect the application implemented in the material.
 
 Next, let's navigate to the created <i>rate-repository-app</i> directory with the terminal and install a few dependencies we'll be needing soon:
 
@@ -138,7 +138,7 @@ Now that we are somewhat familiar with the development environment let's enhance
 npm install --save-dev eslint @babel/eslint-parser eslint-plugin-react eslint-plugin-react-native
 ```
 
-Next, let's add the ESLint configuration into a <i>.eslintrc</i> file in the <i>rate-repository-app</i> directory with the following content:
+Next, let's add the ESLint configuration into a <i>.eslintrc.json</i> file in the <i>rate-repository-app</i> directory with the following content:
 
 ```javascript
 {
@@ -210,7 +210,7 @@ That might actually be enough in most cases, but sometimes we need more.
 
 **NB:** If the debugger can't connect to the application and you see the error message "Another debugger is already connected", make sure that <i><http://localhost:19000/debugger-ui></i> is not open in some browser tab.
   
-Next, we need to start our application and connect to the debugger. Start the application by running <em>npm start</em>. Once the application is running, open it with either an emulator or the Expo mobile app. Inside the emulator or the Expo mobile app, open the developer menu by following the [instructions](https://docs.expo.io/workflow/debugging/#developer-menu) in the Expo's documentation. From the developer menu, select <i>Debug remote JS</i> to connect to the debugger. Now, you should be able to see the application's component tree in the debugger:
+Next, we need to start our application and connect to the debugger. Start the application by running <em>npm start</em>. Once the application is running, open it with either an emulator or the Expo mobile app. Inside the emulator or the Expo mobile app, open the developer menu by following the [instructions](https://docs.expo.dev/debugging/tools/) in the Expo's documentation. From the developer menu, select <i>Debug remote JS</i> to connect to the debugger. Now, you should be able to see the application's component tree in the debugger:
 
 ![React Native Debugger](../../images/10/24.png)
 

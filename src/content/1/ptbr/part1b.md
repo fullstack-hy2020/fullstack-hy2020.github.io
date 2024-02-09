@@ -19,7 +19,7 @@ Hoje em dia, a maneira mais popular de fazer a transpilação é usando o transc
 
 O código é escrito em arquivos com extensão <i>.js</i> que são executados ao emitir o comando <em>node nome\_do\_arquivo.js</em>
 
-Também é possível escrever código JavaScript na console do Node.js, que pode ser aberta digitando "node" na linha de comando, bem como na aba Console nas Ferramentas do Desenvolvedor do navegador. [As revisões mais recentes do Chrome lidam bem com as novas funcionalidades de JavaScript](http://kangax.github.io/compat-table/es2016plus/) sem precisar transpilar o código. Alternativamente, você pode usar uma ferramenta como [JS Bin](https://jsbin.com/?js,console).
+Também é possível escrever código JavaScript na console do Node.js, que pode ser aberta digitando "node" na linha de comando, bem como na aba Console nas Ferramentas do Desenvolvedor do navegador. [As revisões mais recentes do Chrome lidam bem com as novas funcionalidades de JavaScript](https://compat-table.github.io/compat-table/es2016plus/) sem precisar transpilar o código. Alternativamente, você pode usar uma ferramenta como [JS Bin](https://jsbin.com/?js,console).
 
 JavaScript lembra mais ou menos o Java, tanto no nome quanto na sintaxe. Porém, quando se trata do mecanismo central da linguagem, eles não poderiam ser mais diferentes. Da perspectiva de alguém que vem de um background em Java, a forma como JavaScript se comporta pode parecer um pouco estranho, principalmente se não for feito algum esforço para entender suas características.
 

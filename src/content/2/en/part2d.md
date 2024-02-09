@@ -13,7 +13,7 @@ When creating notes in our application, we would naturally want to store them in
 
 The json-server does not exactly match the description provided by the textbook [definition](https://en.wikipedia.org/wiki/Representational_state_transfer) of a REST API, but neither do most other APIs claiming to be RESTful.
 
-We will take a closer look at REST in the [next part](/en/part3) of the course. But it's important to familiarize ourselves at this point with some of the [conventions](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) used by json-server and REST APIs in general. In particular, we will be taking a look at the conventional use of [routes](https://github.com/typicode/json-server#routes), aka URLs and HTTP request types, in REST.
+We will take a closer look at REST in the [next part](/en/part3) of the course. But it's important to familiarize ourselves at this point with some of the [conventions](https://en.wikipedia.org/wiki/REST#Applied_to_web_services) used by json-server and REST APIs in general. In particular, we will be taking a look at the conventional use of [routes](https://github.com/typicode/json-server#routes), aka URLs and HTTP request types, in REST.
 
 ### REST
 
@@ -47,7 +47,7 @@ addNote = event => {
 }
 ```
 
-We create a new object for the note but omit the <i>id</i> property since it's better to let the server generate ids for our resources!
+We create a new object for the note but omit the <i>id</i> property since it's better to let the server generate ids for our resources.
 
 The object is sent to the server using the axios <em>post</em> method. The registered event handler logs the response that is sent back from the server to the console.
 
@@ -73,7 +73,7 @@ Also the tab <i>response</i> is useful, it shows what was the data the server re
 
 ![devtools response tab shows same content as payload but with id field too](../../images/2/21new3.png)
 
-The new note is not rendered to the screen yet. This is because we did not update the state of the <i>App</i> component when we created the new note. Let's fix this:
+The new note is not rendered to the screen yet. This is because we did not update the state of the <i>App</i> component when we created it. Let's fix this:
 
 ```js
 addNote = event => {
@@ -100,13 +100,13 @@ Once the data returned by the server starts to have an effect on the behavior of
 
 It's beneficial to inspect the state of the backend server, e.g. through the browser:
 
-![JSON data output from backend](../../images/2/22e.png)
+![JSON data output from backend](../../images/2/22.png)
 
 This makes it possible to verify that all the data we intended to send was actually received by the server.
 
 In the next part of the course, we will learn to implement our own logic in the backend. We will then take a closer look at tools like [Postman](https://www.postman.com/downloads/) that helps us to debug our server applications. However, inspecting the state of the json-server through the browser is sufficient for our current needs.
 
-The code for the current state of our application can be found in the  <i>part2-5</i> branch on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-5).
+The code for the current state of our application can be found in the  <i>part2-5</i> branch on [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part2-5).
 
 ### Changing the Importance of Notes
 
@@ -233,7 +233,7 @@ axios.put(url, note).then(response => {
   // ...
 ```
 
-This is not recommended because the variable <em>note</em> is a reference to an item in the <em>notes</em> array in the component's state, and as we recall we must [never mutate state directly](https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly) in React.
+This is not recommended because the variable <em>note</em> is a reference to an item in the <em>notes</em> array in the component's state, and as we recall we must [never mutate state directly](https://react.dev/learn/updating-objects-in-state#why-is-mutating-state-not-recommended-in-react) in React.
 
 It's also worth noting that the new object _changedNote_ is only a so-called [shallow copy](https://en.wikipedia.org/wiki/Object_copying#Shallow_copy), meaning that the values of the new object are the same as the values of the old object. If the values of the old object were objects themselves, then the copied values in the new object would reference the same objects that were in the old object.
 
@@ -688,7 +688,7 @@ notes.filter(n => n.id !== id)
 
 It's probably not a good idea to use alert in more serious React applications. We will soon learn a more advanced way of displaying messages and notifications to users. There are situations, however, where a simple, battle-tested method like <em>alert</em> can function as a starting point. A more advanced method could always be added in later, given that there's time and energy for it.
 
-The code for the current state of our application can be found in the  <i>part2-6</i> branch on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-6).
+The code for the current state of our application can be found in the  <i>part2-6</i> branch on [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part2-6).
 
 ### Full stack developer's oath
 
@@ -703,10 +703,10 @@ Full stack development is <i> extremely hard</i>, that is why I will use all the
 - I will have my browser developer console open all the time
 - <i>I will use the network tab of the browser dev tools to ensure that frontend and backend are communicating as I expect</i>
 - <i>I will constantly keep an eye on the state of the server to make sure that the data sent there by the frontend is saved there as I expect</i>
-- I progress with small steps
+- I will progress with small steps
 - I will write lots of _console.log_ statements to make sure I understand how the code behaves and to help pinpoint problems
 - If my code does not work, I will not write more code. Instead, I start deleting the code until it works or just return to a state when everything was still working
-- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](https://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord-telegram) how to ask for help
+- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](/en/part0/general_info#how-to-get-help-in-discord-telegram) how to ask for help
 
 </div>
 
@@ -714,17 +714,17 @@ Full stack development is <i> extremely hard</i>, that is why I will use all the
 
 <h3>Exercises 2.12.-2.15.</h3>
 
-<h4>2.12: The Phonebook step7</h4>
+<h4>2.12: The Phonebook step 7</h4>
 
 Let's return to our phonebook application.
 
 Currently, the numbers that are added to the phonebook are not saved to a backend server. Fix this situation.
 
-<h4>2.13: The Phonebook step8</h4>
+<h4>2.13: The Phonebook step 8</h4>
 
 Extract the code that handles the communication with the backend into its own module by following the example shown earlier in this part of the course material.
 
-<h4>2.14: The Phonebook step9</h4>
+<h4>2.14: The Phonebook step 9</h4>
 
 Make it possible for users to delete entries from the phonebook. The deletion can be done through a dedicated button for each person in the phonebook list. You can confirm the action from the user by using the [window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm) method:
 
@@ -743,7 +743,7 @@ const delete = (id) => {
 }
 ```
 
-<h4>2.15*: The Phonebook step10</h4>
+<h4>2.15*: The Phonebook step 10</h4>
 
 <i>Why is there a star in the exercise? See [here](/en/part0/general_info#taking-the-course) for the explanation.</i>
 

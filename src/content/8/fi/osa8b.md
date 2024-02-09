@@ -9,7 +9,7 @@ lang: fi
 
 Toteutetaan seuraavaksi React-sovellus, joka käyttää toteuttamaamme GraphQL-palvelinta. Palvelimen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3), branchissa <i>part8-3</i>.
 
-GraphQL:ää on periaatteessa mahdollista käyttää HTTP POST -pyyntöjen avulla. Seuraavassa esimerkki Postmanilla tehdystä kyselystä.
+GraphQL:ää on periaatteessa mahdollista käyttää HTTP POST ‑pyyntöjen avulla. Seuraavassa esimerkki Postmanilla tehdystä kyselystä.
 
 ![](../../images/8/8x.png)
 
@@ -577,8 +577,7 @@ const PersonForm = ({ setError }) => {
     refetchQueries: [  {query: ALL_PERSONS } ],
     // highlight-start
     onError: (error) => {
-      const errors = error.graphQLErrors[0].extensions.error.errors
-      const messages = Object.values(errors).map(e => e.message).join('\n')
+      const messages = error.graphQLErrors.map(e => e.message).join('\n')
       setError(messages)
     }
     // highlight-end
@@ -587,8 +586,6 @@ const PersonForm = ({ setError }) => {
   // ...
 }
 ```
-
-Joudumme kaivautumaan syvälle olion <i>error</i> sisälle, ennen kuin oikea virheilmoitus löytyy...
 
 Renderöidään mahdollinen virheilmoitus näytölle
 
@@ -755,36 +752,6 @@ const PhoneForm = ({ setError }) => {
 ```
 
 Jos henkilöä ei löytynyt, eli kyselyn tulos _result.data.editNumber_ on _null_, asettaa komponentti propseina saamansa callback-funktion avulla sopivan virheilmoituksen. Virheilmoituksen asettamista kontrolloidaan useEffect-hookin avulla, eli virheviesti halutaan asettaa ainoastaan jos mutaation tulos _result.data_ muuttuu.
-
-useEffect aiheuttaa ESLint-virheilmoituksen:
-
-![](../../images/8/41x.png)
-
-Varoitus on aiheeton, ja pääsemme helpoimmalla ignoroimalla ESLint-säännön riviltä:
-
-```js
-useEffect(() => {
-  if ( result.data && !result.data.editNumber) {
-    setError('name not found')
-  }
-// highlight-start  
-}, [result.data])  // eslint-disable-line 
-// highlight-end
-```
-
-Voisimme yrittää päästä varoituksesta eroon lisäämällä funktion _setError_ useEffectin toisena parametrina olevaan taulukkoon:
-
-```js
-useEffect(() => {
-  if ( result.data && !result.data.editNumber) {
-    setError('name not found')
-  }
-// highlight-start  
-}, [result.data, setError])
-// highlight-end
-```
-
-Tämä ratkaisu ei kuitenkaan toimi, ellei _setError_-funktiota ole määritelty [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback)-funktioon käärittynä. Jos näin ei tehdä, seurauksena on ikuinen luuppi, sillä aina kun komponentti _App_ renderöidään uudelleen notifikaation poistamisen jälkeen, syntyy <i>uusi versio</i> funktiosta _setError_ ja se taas aiheuttaa efektifunktion uudelleensuorituksen ja taas uuden notifikaation...
 
 Sovelluksen tämänhetkinen koodi on [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4), branchissa <i>part8-4</i>.
 

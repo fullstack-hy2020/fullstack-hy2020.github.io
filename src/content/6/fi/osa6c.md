@@ -47,7 +47,7 @@ Käynnistetään JSON Server komennolla _npm run server_.
 
 ### Datan hakeminen palvelimelta
 
-Tehdään sitten tuttuun tapaan <i>axiosia</i> hyödyntävä backendistä dataa hakeva metodi tiedostoon <i>services/notes.js</i>:
+Tehdään sitten tuttuun tapaan [Axiosia](https://axios-http.com/docs/intro) hyödyntävä backendistä dataa hakeva metodi tiedostoon <i>services/notes.js</i>:
 
 ```js
 import axios from 'axios'
@@ -121,7 +121,7 @@ export const { createNote, toggleImportanceOf, appendNote } = noteSlice.actions 
 export default noteSlice.reducer
 ```
 
-Nopea tapa saada storen tila alustettua palvelimella olevan datan perusteella on hakea muistiinpanot tiedostossa <i>index.js</i> ja dispatchata niille yksitellen <em>appendNote</em> -action creatorin avulla:
+Nopea tapa saada storen tila alustettua palvelimella olevan datan perusteella on hakea muistiinpanot tiedostossa <i>main.jsx</i> ja dispatchata niille yksitellen <em>appendNote</em>- action creatorin avulla:
 
 ```js
 // ...
@@ -194,7 +194,7 @@ export const { createNote, toggleImportanceOf, appendNote, setNotes } = noteSlic
 export default noteSlice.reducer
 ```
 
-Nyt <i>index.js</i> yksinkertaistuu:
+Nyt <i>main.jsx</i> yksinkertaistuu:
 
 ```js
 // ...
@@ -215,7 +215,7 @@ noteService.getAll().then(notes =>
 
 > **HUOM:** Miksi emme käyttäneet koodissa promisejen ja _then_-metodilla rekisteröidyn tapahtumankäsittelijän sijaan awaitia?
 >
-> await toimii ainoastaan <i>async</i>-funktioiden sisällä, ja <i>index.js</i>:ssä oleva koodi ei ole funktiossa, joten päädyimme tilanteen yksinkertaisuuden takia tällä kertaa jättämään <i>async</i>:in käyttämättä.
+> await toimii ainoastaan <i>async</i>-funktioiden sisällä, ja <i>main.jsx</i>:ssä oleva koodi ei ole funktiossa, joten päädyimme tilanteen yksinkertaisuuden takia tällä kertaa jättämään <i>async</i>:in käyttämättä.
 
 Päätetään kuitenkin siirtää muistiinpanojen alustus <i>App</i>-komponentiin, eli kuten yleensä dataa palvelimelta haettaessa, käytetään <i>effect hookia</i>:
 
@@ -248,46 +248,6 @@ const App = () => {
 
 export default App
 ```
-
-Hookin useEffect käyttö aiheuttaa ESLint-varoituksen:
-
-![Virheilmoitus React Hook useEffect has missing dependency: 'dispatch'](../../images/6/26ea.png)
-
-Pääsemme varoituksesta eroon seuraavasti:
-
-```js
-const App = () => {
-  const dispatch = useDispatch()
-  useEffect(() => {
-    noteService
-      .getAll().then(notes => dispatch(setNotes(notes)))
-  }, [dispatch]) // highlight-line
-
-  // ...
-}
-```
-
-Nyt komponentin _App_ sisällä määritelty muuttuja <i>dispatch</i> eli käytännössä Redux-storen dispatch-funktio on lisätty useEffectille parametrina annettuun taulukkoon. **Jos** dispatch-muuttujan sisältö muuttuisi ohjelman suoritusaikana, suoritettaisiin efekti uudelleen. Näin ei kuitenkaan ole, eli varoitus on tässä tilanteessa oikeastaan aiheeton.
-
-Toinen tapa päästä eroon varoituksesta olisi disabloida se kyseisen rivin kohdalta:
-
-```js
-const App = () => {
-  const dispatch = useDispatch()
-  useEffect(() => {
-    noteService
-      .getAll().then(notes => dispatch(setNotes(notes)))   
-      // highlight-start
-  },[]) // eslint-disable-line react-hooks/exhaustive-deps  
-  // highlight-end
-
-  // ...
-}
-```
-
-Yleisesti ottaen ESLint-virheiden disabloiminen ei ole hyvä idea, joten vaikka kyseisen ESLint-säännön tarpeellisuus onkin aiheuttanut [kiistelyä](https://github.com/facebook/create-react-app/issues/6880), pitäydytään ylemmässä ratkaisussa. 
-
-Lisää hookien riippuvuuksien määrittelyn tarpeesta on [Reactin dokumentaatiossa](https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies).
 
 ### Datan lähettäminen palvelimelle
 
@@ -393,7 +353,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(initializeNotes())
-  }, [dispatch]) 
+  }, []) 
   
   // ...
 }
@@ -457,7 +417,7 @@ const App = () => {
   // highlight-start
   useEffect(() => {
     dispatch(initializeNotes()) 
-  }, [dispatch]) 
+  }, []) 
   // highlight-end
 
   return (
@@ -472,7 +432,7 @@ const App = () => {
 
 Ratkaisu on elegantti, sillä muistiinpanojen alustuslogiikka on eriytetty kokonaan React-komponenttien ulkopuolelle.
 
-Korvataan seuraavaksi <em>createSlice</em>-funktion avulla toteutettu <em>createNote</em> -action creator saman nimisellä asynkronisella action creatorilla:  
+Korvataan seuraavaksi <em>createSlice</em>-funktion avulla toteutettu <em>createNote</em>- action creator saman nimisellä asynkronisella action creatorilla:  
 
 ```js
 // ...
@@ -551,7 +511,7 @@ const NewNote = () => {
 }
 ```
 
-Siistitään lopuksi vielä hieman <i>index.js</i>-tiedostoa siirtämällä Redux-storen luontiin liittyvä koodi erilliseen <i>store.js</i>-tiedostoon:
+Siistitään lopuksi vielä hieman <i>main.jsx</i>-tiedostoa siirtämällä Redux-storen luontiin liittyvä koodi erilliseen <i>store.js</i>-tiedostoon:
 
 ```js
 import { configureStore } from '@reduxjs/toolkit'
@@ -569,7 +529,7 @@ const store = configureStore({
 export default store
 ```
 
-Muutosten jälkeen <i>index.js</i>-tiedosto näyttää seuraavalta:
+Muutosten jälkeen <i>main.jsx</i>-tiedosto näyttää seuraavalta:
 
 ```js
 import ReactDOM from 'react-dom'
@@ -587,7 +547,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 Sovelluksen tämänhetkinen koodi on [GitHubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5) branchissa <i>part6-5</i>.
 
-Redux Toolkit tarjoaa myös hieman kehittyneempiä työkaluja asynkronisen tilanhallinnan helpottamiseksi, esim mm. [createAsyncThunk](https://redux-toolkit.js.org/api/createAsyncThunk)-funktion ja [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) -API:n. Yksinkertaisissa sovelluksissa näiden tuoma hyöty lienee kuitenkin vähäinen.
+Redux Toolkit tarjoaa myös hieman kehittyneempiä työkaluja asynkronisen tilanhallinnan helpottamiseksi, esim mm. [createAsyncThunk](https://redux-toolkit.js.org/api/createAsyncThunk)-funktion ja [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) ‑API:n. Yksinkertaisissa sovelluksissa näiden tuoma hyöty lienee kuitenkin vähäinen.
 
 </div>
 
@@ -597,15 +557,15 @@ Redux Toolkit tarjoaa myös hieman kehittyneempiä työkaluja asynkronisen tilan
 
 #### 6.16 anekdootit ja backend, step3
 
-Muuta Redux-storen alustus tapahtumaan Redux Thunk -kirjaston avulla toteutettuun asynkroniseen actioniin.
+Muuta Redux-storen alustus tapahtumaan Redux Thunk ‑kirjaston avulla toteutettuun asynkroniseen actioniin.
 
 #### 6.17 anekdootit ja backend, step4
 
-Muuta myös uuden anekdootin luominen tapahtumaan Redux Thunk -kirjaston avulla toteutettuihin asynkronisiin actioneihin.
+Muuta myös uuden anekdootin luominen tapahtumaan Redux Thunk ‑kirjaston avulla toteutettuihin asynkronisiin actioneihin.
 
 #### 6.18 anekdootit ja backend, step5
 
-Äänestäminen ei vielä talleta muutoksia backendiin. Korjaa tilanne Redux Thunk -kirjastoa hyödyntäen.
+Äänestäminen ei vielä talleta muutoksia backendiin. Korjaa tilanne Redux Thunk ‑kirjastoa hyödyntäen.
 
 #### 6.19 anekdootit ja backend, step6
 

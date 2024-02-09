@@ -11,7 +11,7 @@ Ennen kuin siirrymme osan varsinaiseen aiheeseen eli tiedon tallettamiseen tieto
 
 ### Node-sovellusten debuggaaminen
 
-Nodella tehtyjen sovellusten debuggaaminen on jossain määrin hankalampaa kuin selaimessa toimivan JavaScriptin. Vanha hyvä keino on tietysti konsoliin tulostelu. Se kannattaa aina. On mielipiteitä, joiden mukaan konsoliin tulostelun sijaan olisi syytä suosia jotain kehittyneempää menetelmää, mutta se ei ole koko totuus. Jopa maailman aivan eliittiin kuuluvat open source -kehittäjät [käyttävät](https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html) tätä [menetelmää](https://swizec.com/blog/javascript-debugging-slightly-beyond-consolelog/).
+Nodella tehtyjen sovellusten debuggaaminen on jossain määrin hankalampaa kuin selaimessa toimivan JavaScriptin. Vanha hyvä keino on tietysti konsoliin tulostelu. Se kannattaa aina. On mielipiteitä, joiden mukaan konsoliin tulostelun sijaan olisi syytä suosia jotain kehittyneempää menetelmää, mutta se ei ole koko totuus. Jopa maailman aivan eliittiin kuuluvat open source ‑kehittäjät [käyttävät](https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html) tätä [menetelmää](https://swizec.com/blog/javascript-debugging-slightly-beyond-consolelog/).
 
 #### Visual Studio Code
 
@@ -55,13 +55,13 @@ Kaikki sovelluksen console.log-tulostukset tulevat debuggerin <i>Console</i>-vä
 
 #### Epäile kaikkea
 
-Full Stack -sovellusten debuggaaminen vaikuttaa alussa erittäin hankalalta. Kun kohta kuvaan tulee myös tietokanta, ja frontend on yhdistetty backendiin, on potentiaalisia virhelähteitä todella paljon.
+Full Stack ‑sovellusten debuggaaminen vaikuttaa alussa erittäin hankalalta. Kun kohta kuvaan tulee myös tietokanta, ja frontend on yhdistetty backendiin, on potentiaalisia virhelähteitä todella paljon.
 
 Kun sovellus "ei toimi", onkin selvitettävä missä vika on. On erittäin yleistä, että vika on sellaisessa paikassa, jota ei osaa ollenkaan epäillä, ja menee minuutti-, tunti- tai jopa päiväkausia ennen kuin oikea ongelmien lähde löytyy.
 
 Avainasemassa onkin systemaattisuus. Koska virhe voi olla melkein missä vain, <i>kaikkea pitää epäillä</i>, ja tulee pyrkiä poissulkemaan ne osat, joissa virhe ei ainakaan ole. Konsoliin kirjoitus, Postman, debuggeri ja kokemus auttavat.
 
-Virheiden ilmaantuessa <i>ylivoimaisesti huonoin strategia</i> on jatkaa koodin kirjoittamista. Se on tae siitä, että koodissa on pian kymmenen ongelmaa lisää ja niiden syyn selvittäminen on entistäkin vaikeampaa. Toyota Production Systemin periaate [Stop and fix](http://gettingtolean.com/toyota-principle-5-build-culture-stopping-fix/) toimii tässäkin yhteydessä paremmin kuin hyvin.
+Virheiden ilmaantuessa <i>ylivoimaisesti huonoin strategia</i> on jatkaa koodin kirjoittamista. Se on tae siitä, että koodissa on pian kymmenen ongelmaa lisää ja niiden syyn selvittäminen on entistäkin vaikeampaa. Toyota Production Systemin periaate [Stop and fix](https://leanscape.io/principles-of-lean-13-jidoka/) toimii tässäkin yhteydessä paremmin kuin hyvin.
 
 ### MongoDB
 
@@ -95,7 +95,7 @@ Luodaan <i>security</i>-välilehdeltä tietokantakäyttäjätunnus joka on siis 
 
 Seuraavaksi tulee määritellä ne IP-osoitteet, joista tietokantaan pääsee käsiksi ja sallitaan yksinkertaisuuden vuoksi yhteydet kaikkialta:
 
-![Valitaan Network access -välilehdeltä 'Allow access from anywhere'](../../images/3/mongo4.png)
+![Valitaan Network access ‑välilehdeltä 'Allow access from anywhere'](../../images/3/mongo4.png)
 
 Lopulta ollaan valmiina ottamaan tietokantayhteys. Valitaan <i>connect</i> ja sen jälkeisestä näkymästä <i>connect your application</i>:
 
@@ -113,7 +113,7 @@ mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/?retryWrites=true&
 
 Olemme nyt valmiina kannan käyttöön.
 
-Voisimme käyttää kantaa JavaScript-koodista suoraan Mongon virallisen [MongoDB Node.js driver](https://mongodb.github.io/node-mongodb-native/) -kirjaston avulla, mutta se on ikävän työlästä. Käytämmekin hieman korkeammalla tasolla toimivaa [Mongoose](http://mongoosejs.com/index.html)-kirjastoa.
+Voisimme käyttää kantaa JavaScript-koodista suoraan Mongon virallisen [MongoDB Node.js driver](https://mongodb.github.io/node-mongodb-native/) ‑kirjaston avulla, mutta se on ikävän työlästä. Käytämmekin hieman korkeammalla tasolla toimivaa [Mongoose](http://mongoosejs.com/index.html)-kirjastoa.
 
 Mongoosesta voisi käyttää luonnehdintaa <i>object document mapper</i> (ODM), ja sen avulla JavaScript-olioiden tallettaminen MongoDB:n dokumenteiksi on suoraviivaista.
 
@@ -359,7 +359,7 @@ const mongoose = require('mongoose')
 
 // ÄLÄ KOSKAAN TALLETA SALASANOJA GitHubiin!
 const url =
-  `mongodb+srv://fullstack:${fullstack@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority`
+  `mongodb+srv://fullstack:${password}@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority`
 
 mongoose.set('strictQuery',false)
 mongoose.connect(url)
@@ -614,11 +614,11 @@ Kun kuvioissa on mukana tietokanta, on tietokannan tilan tarkastelu MongoDB Atla
 
 Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4), branchissa <i>part3-4</i>.
 
-### Todellisen full stack -sovelluskehittäjän vala
+### Todellisen full stack ‑sovelluskehittäjän vala
 
-Sovelluksemme koostuu nyt frontendin ja backendin lisäksi myös tietokannasta. Virhelähteiden määrä siis kasvaa ja päivitämme full stack -kehittäjän valaa seuraavasti:
+Sovelluksemme koostuu nyt frontendin ja backendin lisäksi myös tietokannasta. Virhelähteiden määrä siis kasvaa ja päivitämme full stack ‑kehittäjän valaa seuraavasti:
 
-Full stack -ohjelmointi on <i>todella</i> hankalaa, ja sen takia lupaan hyödyntää kaikkia ohjelmointia helpottavia keinoja:
+Full stack ‑ohjelmointi on <i>todella</i> hankalaa, ja sen takia lupaan hyödyntää kaikkia ohjelmointia helpottavia keinoja:
 
 - pidän selaimen konsolin koko ajan auki
 - tarkkailen säännöllisesti selaimen network-välilehdeltä, että frontendin ja backendin välinen kommunikaatio tapahtuu oletusteni mukaan
@@ -850,17 +850,17 @@ app.get('/api/notes', (request, response) => {
 })
 ```
 
-Nyt olemattomien osoitteiden käsittely on sijoitettu <i>ennen HTTP GET -pyynnön käsittelyä</i>. Koska olemattomien osoitteiden käsittelijä vastaa kaikkiin pyyntöihin <i>404 Unknown Endpoint</i>, ei mihinkään sen jälkeen määriteltyyn reittiin tai middlewareen (poikkeuksena virheenkäsittelijä) enää mennä.
+Nyt olemattomien osoitteiden käsittely on sijoitettu <i>ennen HTTP GET ‑pyynnön käsittelyä</i>. Koska olemattomien osoitteiden käsittelijä vastaa kaikkiin pyyntöihin <i>404 Unknown Endpoint</i>, ei mihinkään sen jälkeen määriteltyyn reittiin tai middlewareen (poikkeuksena virheenkäsittelijä) enää mennä.
 
 ### Muut operaatiot
 
 Toteutetaan vielä jäljellä olevat operaatiot, eli yksittäisen muistiinpanon poisto ja muokkaus.
 
-Poisto onnistuu helpoiten metodilla [findByIdAndRemove](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndRemove):
+Poisto onnistuu helpoiten metodilla [findByIdAndDelete](https://mongoosejs.com/docs/api/model.html#Model.findByIdAndDelete):
 
 ```js
 app.delete('/api/notes/:id', (request, response, next) => {
-  Note.findByIdAndRemove(request.params.id)
+  Note.findByIdAndDelete(request.params.id)
     .then(result => {
       response.status(204).end()
     })
@@ -919,7 +919,7 @@ Muista, että virheitä heittävät routejen metodit tarvitsevat myös kolmannen
 
 #### 3.17*: puhelinluettelo ja tietokanta, step5
 
-Jos frontendissä annetaan numero henkilölle, joka on jo olemassa, päivittää frontend tehtävässä 2.18 tehdyn toteutuksen ansiosta tiedot uudella numerolla tekemällä HTTP PUT -pyynnön henkilön tietoja vastaavaan url:iin.
+Jos frontendissä annetaan numero henkilölle, joka on jo olemassa, päivittää frontend tehtävässä 2.18 tehdyn toteutuksen ansiosta tiedot uudella numerolla tekemällä HTTP PUT ‑pyynnön henkilön tietoja vastaavaan url:iin.
 
 Laajenna backendisi käsittelemään tämä tilanne.
 

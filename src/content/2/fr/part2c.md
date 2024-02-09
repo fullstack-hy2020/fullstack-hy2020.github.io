@@ -139,7 +139,7 @@ Nous pourrions utiliser la fonction basée sur la promise mentionnée précédem
 
 Cela étant dit, nous utiliserons plutôt la bibliothèque [axios](https://github.com/axios/axios) pour la communication entre le navigateur et le serveur. Axios fonctionne comme fetch, mais est un peu plus agréable à utiliser. Une autre bonne raison d'utiliser axios est que nous nous familiarisons avec l'ajout de bibliothèques externes, appelées <i>packages npm</i>, aux projets React.
 
-De nos jours, pratiquement tous les projets JavaScript sont définis à l'aide du gestionnaire de packages de nœuds, alias [npm](https://docs.npmjs.com/getting-started/what-is-npm). Les projets créés à l'aide de create-react-app suivent également le format npm. Un indicateur clair qu'un projet utilise npm est le fichier <i>package.json</i> situé à la racine du projet :
+De nos jours, pratiquement tous les projets JavaScript sont définis à l'aide du gestionnaire de packages de noeuds, alias [npm](https://docs.npmjs.com/getting-started/what-is-npm). Les projets créés à l'aide de create-react-app suivent également le format npm. Un indicateur clair qu'un projet utilise npm est le fichier <i>package.json</i> situé à la racine du projet :
 
 ```json
 {
@@ -315,7 +315,7 @@ promise.then(response => {
 ```
 Ce qui suit est renvoyé sur la console :
 
-![](../../images/2/17e.png)
+![](../../images/2/17new.png)
 
 L'environnement d'exécution JavaScript appelle la fonction de rappel enregistrée par la méthode <em>then</em> en lui fournissant un objet <em>response</em> en tant que paramètre. L'objet <em>response</em> contient toutes les données essentielles liées à la réponse d'une requête HTTP GET, qui inclurait les <i>données</i> renvoyées, le <i>code d'état</i> et <i>en-têtes</i>.
 
@@ -642,7 +642,7 @@ Si vous utilisez Open weather map, trouvez [ici](https://openweathermap.org/weat
 En supposant que la clé API est <i>t0p53cr3t4p1k3yv4lu3</i>, lorsque l'application est démarrée comme suit :
 
 ```bash
-REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 npm start // For Linux/macOS Bash
+export REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 && npm start // For Linux/macOS Bash
 ($env:REACT_APP_API_KEY="t0p53cr3t4p1k3yv4lu3") -and (npm start) // For Windows PowerShell
 set "REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3" && npm start // For Windows cmd.exe
 ```

@@ -7,7 +7,7 @@ lang: es
 
 <div class = "content">
 
-Tradicionalmente, el desarrollo de aplicaciones nativas de iOS y Android ha requirió que el desarrollador utilizara lenguajes de programación y entornos de desarrollo específicos de la plataforma. Para el desarrollo de iOS, esto significa usar Objective C o Swift y para el desarrollo de Android usando lenguajes basados ​​en JVM como Java, Scala o Kotlin. El lanzamiento de una aplicación para ambas plataformas requiere técnicamente desarrollar dos aplicaciones separadas con diferentes lenguajes de programación. Esto requiere muchos recursos de desarrollo.
+Tradicionalmente, el desarrollo de aplicaciones nativas de iOS y Android ha requirido que el desarrollador utilizara lenguajes de programación y entornos de desarrollo específicos de la plataforma. Para el desarrollo de iOS, esto significa usar Objective C o Swift y para el desarrollo de Android usando lenguajes basados ​​en JVM como Java, Scala o Kotlin. El lanzamiento de una aplicación para ambas plataformas requiere técnicamente desarrollar dos aplicaciones separadas con diferentes lenguajes de programación. Esto requiere muchos recursos de desarrollo.
 
 Uno de los enfoques populares para unificar el desarrollo específico de la plataforma ha sido utilizar el navegador como motor de renderizado. [Cordova](https://cordova.apache.org/) es una de las plataformas más populares para crear aplicaciones multiplataforma. Permite desarrollar aplicaciones multiplataforma utilizando tecnologías web estándar: HTML5, CSS3 y JavaScript. Sin embargo, las aplicaciones de Cordova se ejecutan dentro de una ventana de navegador integrada en el dispositivo del usuario. Es por eso que estas aplicaciones no pueden lograr el rendimiento ni la apariencia de las aplicaciones nativas que utilizan componentes de interfaz de usuario nativos reales.
 
@@ -59,7 +59,7 @@ A continuación, podemos inicializar nuestro proyecto en un directorio <i>rate-r
 expo init rate-repository-app --template expo-template-blank@sdk-38
 ```
 
-Tenga en cuenta que <em>@sdk-38</em> establece la versión <i>Expo SDK del proyecto en 38</i>, que admite <i>React Native versión 0.62</i>. El uso de otra versión de Expo SDK puede causarle problemas al seguir este material. Además, Expo tiene pocas limitaciones en comparación con React Native CLI, más sobre ellas [aquí](https://docs.expo.io/introduction/why-not-expo/). Sin embargo, estas limitaciones no tienen ningún efecto sobre la aplicación implementada en el material.
+Tenga en cuenta que <em>@sdk-38</em> establece la versión <i>Expo SDK del proyecto en 38</i>, que admite <i>React Native versión 0.62</i>. El uso de otra versión de Expo SDK puede causarle problemas al seguir este material. Además, Expo tiene pocas limitaciones en comparación con React Native CLI, más sobre ellas [aquí](https://docs.expo.dev/faq/#limitations). Sin embargo, estas limitaciones no tienen ningún efecto sobre la aplicación implementada en el material.
 
 Ahora que nuestra aplicación se ha inicializado, abra el directorio <i>rate-repository-app</i> creado con un editor como [Visual Studio Code](https://code.visualstudio.com/). La estructura debería ser más o menos la siguiente:
 
@@ -91,7 +91,7 @@ Después de hacer clic en el enlace, pronto deberíamos ver el texto definido en
 
 ### Configuración del entorno de desarrollo
 
-Hemos visto por primera vez nuestra aplicación usando la vista del navegador de la Expo. Aunque la vista del navegador es bastante utilizable, sigue siendo una simulación bastante pobre del entorno nativo. Echemos un vistazo a las alternativas que tenemos con respecto al entorno de desarrollo.
+Hemos visto por primera vez nuestra aplicación usando la vista del navegador de Expo. Aunque la vista del navegador es bastante utilizable, sigue siendo una simulación bastante pobre del entorno nativo. Echemos un vistazo a las alternativas que tenemos con respecto al entorno de desarrollo.
 
 Los dispositivos Android e iOS, como tabletas y teléfonos, se pueden emular en computadoras mediante <i>emuladores</i> específicos. Esto es muy útil para desarrollar aplicaciones nativas. Los usuarios de macOS pueden usar emuladores de Android e iOS con sus computadoras. Los usuarios de otros sistemas operativos como Linux o Windows tienen que conformarse con emuladores de Android. A continuación, dependiendo de su sistema operativo, siga una de estas instrucciones para configurar un emulador:
 
@@ -100,9 +100,9 @@ Los dispositivos Android e iOS, como tabletas y teléfonos, se pueden emular en 
 
 Una vez que haya configurado el emulador y se esté ejecutando, inicie las herramientas de desarrollo de Expo como lo hicimos antes, ejecutando <em>npm start</em>. Dependiendo del emulador que esté ejecutando, haga clic en el enlace <i>Ejecutar en dispositivo/emulador Android</i> o <i>Ejecutar en simulador de iOS</i>. Después de hacer clic en el enlace, Expo debería conectarse al emulador y eventualmente debería ver la aplicación en su emulador. Tenga paciencia, esto puede llevar un tiempo.
 
-Además de los emuladores, existe una forma extremadamente útil de desarrollar aplicaciones React Native con Expo, la aplicación móvil Expo. Con la aplicación móvil Expo, puede obtener una vista previa de su aplicación utilizando su dispositivo móvil real, lo que proporciona una experiencia de desarrollo un poco más concreta en comparación con los emuladores. Para comenzar, instale la aplicación móvil Expo siguiendo las instrucciones en la [documentación de la Expo](https://docs.expo.io/versions/latest/get-started/installation/#2-mobile-app-expo-client-para-ios). Tenga en cuenta que la aplicación móvil Expo solo puede abrir su aplicación si su dispositivo móvil está conectado a <i>la misma red local</i> (por ejemplo, conectado a la misma red Wi-Fi) que la computadora que está utilizando para el desarrollo.
+Además de los emuladores, existe una forma extremadamente útil de desarrollar aplicaciones React Native con Expo, la aplicación móvil Expo. Con la aplicación móvil Expo, puede obtener una vista previa de su aplicación utilizando su dispositivo móvil real, lo que proporciona una experiencia de desarrollo un poco más concreta en comparación con los emuladores. Para comenzar, instale la aplicación móvil Expo siguiendo las instrucciones en la [documentación de Expo](https://docs.expo.io/versions/latest/get-started/installation/#2-mobile-app-expo-client-para-ios). Tenga en cuenta que la aplicación móvil Expo solo puede abrir su aplicación si su dispositivo móvil está conectado a <i>la misma red local</i> (por ejemplo, conectado a la misma red Wi-Fi) que la computadora que está utilizando para el desarrollo.
 
-Cuando la aplicación móvil Expo haya terminado de instalarse, ábrala. A continuación, si las herramientas de desarrollo de la Expo aún no se están ejecutando, inícielo ejecutando <em>npm start</em>. En la esquina inferior izquierda de las herramientas de desarrollo, debería poder ver un código QR. Dentro de la aplicación móvil Expo, presione <i>Escanear código QR</i> y escanee el código QR que se muestra en las herramientas de desarrollo. La aplicación móvil de la Expo debería comenzar a crear el paquete de JavaScript y, una vez finalizado, debería poder ver su aplicación. Ahora, cada vez que desee volver a abrir su aplicación en la aplicación móvil de la Expo, debería poder acceder a la aplicación sin escanear el código QR presionándolo en la lista <i>Recientemente abiertos</i> en la vista <i>Proyectos.</i>.
+Cuando la aplicación móvil Expo haya terminado de instalarse, ábrala. A continuación, si las herramientas de desarrollo de Expo aún no se están ejecutando, inícielo ejecutando <em>npm start</em>. En la esquina inferior izquierda de las herramientas de desarrollo, debería poder ver un código QR. Dentro de la aplicación móvil Expo, presione <i>Escanear código QR</i> y escanee el código QR que se muestra en las herramientas de desarrollo. La aplicación móvil de Expo debería comenzar a crear el paquete de JavaScript y, una vez finalizado, debería poder ver su aplicación. Ahora, cada vez que desee volver a abrir su aplicación en la aplicación móvil de Expo, debería poder acceder a la aplicación sin escanear el código QR presionándolo en la lista <i>Recientemente abiertos</i> en la vista <i>Proyectos.</i>.
 
 </div>
 
@@ -193,9 +193,9 @@ Este fue el último ejercicio de esta sección. Es hora de enviar tu código a G
 
 ### Visualización de registros
 
-Las herramientas de desarrollo de la exposición se pueden utilizar para mostrar los mensajes de registro de la aplicación en ejecución. Los mensajes de nivel de error y advertencia también son visibles en el emulador y en la interfaz de la aplicación móvil. Los mensajes de error aparecerán como una superposición roja, mientras que los mensajes de advertencia se pueden expandir presionando el cuadro de diálogo de alerta amarillo en la parte inferior de la pantalla. Para propósitos de depuración, podemos usar el conocido método <em>console.log</em> para escribir mensajes de depuración en el registro.
+Las herramientas de desarrollo de Exposición se pueden utilizar para mostrar los mensajes de registro de la aplicación en ejecución. Los mensajes de nivel de error y advertencia también son visibles en el emulador y en la interfaz de la aplicación móvil. Los mensajes de error aparecerán como una superposición roja, mientras que los mensajes de advertencia se pueden expandir presionando el cuadro de diálogo de alerta amarillo en la parte inferior de la pantalla. Para propósitos de depuración, podemos usar el conocido método <em>console.log</em> para escribir mensajes de depuración en el registro.
 
-Probemos esto en la práctica. Inicie las herramientas de desarrollo de la Expo ejecutando <em> npm start </em> y abra la aplicación con el emulador o la aplicación móvil. Cuando se ejecuta la aplicación debe ser capaz de ver los dispositivos conectados en el marco del "Metro Bündler" en la esquina superior izquierda de las herramientas de desarrollos:
+Probemos esto en la práctica. Inicie las herramientas de desarrollo de Expo ejecutando <em> npm start </em> y abra la aplicación con el emulador o la aplicación móvil. Cuando se ejecuta la aplicación debe ser capaz de ver los dispositivos conectados en el marco del "Metro Bundler" en la esquina superior izquierda de las herramientas de desarrollos:
 
 ![Expo development tools](../../images/10/9.png)
 
@@ -207,12 +207,12 @@ La inspección de los mensajes registrados desde el código con el método <em>c
 
 Comencemos instalando React Native Debugger con la ayuda de las [instrucciones de instalación](https://github.com/jhen0409/react-native-debugger#installation). Una vez que se complete la instalación, inicie React Native Debugger, abra una nueva ventana del depurador (accesos directos: <em>Command + T</em> en macOS, <em>Ctrl + T</em> en Linux / Windows) y configure el puerto del empaquetador React Native a <em>19001</em>.
 
-A continuación, debemos iniciar nuestra aplicación y conectarnos al depurador. Inicie la aplicación ejecutando <em>npm start</em>. Una vez que la aplicación se esté ejecutando, ábrala con un emulador o la aplicación móvil Expo. Dentro del emulador o la aplicación móvil de la Expo, abra el menú del desarrollador siguiendo las [instrucciones](https://docs.expo.io/workflow/debugging/#developer-menu) en la documentación de la Expo. En el menú del desarrollador, seleccione <i>Depurar JS remoto</i> para conectarse al depurador. Ahora, debería poder ver el árbol de componentes de la aplicación en el depurador:
+A continuación, debemos iniciar nuestra aplicación y conectarnos al depurador. Inicie la aplicación ejecutando <em>npm start</em>. Una vez que la aplicación se esté ejecutando, ábrala con un emulador o la aplicación móvil Expo. Dentro del emulador o la aplicación móvil de Expo, abra el menú del desarrollador siguiendo las [instrucciones](https://docs.expo.io/workflow/debugging/#developer-menu) en la documentación de Expo. En el menú del desarrollador, seleccione <i>Depurar JS remoto</i> para conectarse al depurador. Ahora, debería poder ver el árbol de componentes de la aplicación en el depurador:
 
 ![React Native Debugger](../../images/10/24.png)
 
 Puede utilizar el depurador para inspeccionar el estado y los accesorios del componente, así como para <i>cambiarlos</i>. Intente encontrar el componente <em>Text</em> representado por el componente <em>App</em> utilizando el depurador. Puede utilizar la búsqueda o recorrer el árbol de componentes. Una vez que haya encontrado el componente <em>Text</em> en el árbol, haga clic en él y cambie el valor del prop <em>children</em>. El cambio debería ser visible automáticamente en la vista previa de la aplicación.
 
-Para obtener herramientas de depuración de aplicaciones React Native más útiles, diríjase a la [documentación de depuración](https://docs.expo.io/workflow/debugging) de la Expo.
+Para obtener herramientas de depuración de aplicaciones React Native más útiles, diríjase a la [documentación de depuración](https://docs.expo.io/workflow/debugging) de Expo.
 
 </div>

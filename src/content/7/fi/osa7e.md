@@ -186,7 +186,7 @@ Hieman edistyneemmissä käyttöskenaarioissa effect hookit tarjoavat huomattava
 
 Merkittävä etu funktionaalisten komponenttien käytössä on se, että paljon harmia tuottavaa JavaScriptin olioon itseensä viittaavaa _this_-viitettä ei tarvitse käsitellä ollenkaan.
 
-Oman ja suuren enemmistön mielestä luokkakomponenteilla ei ole oikeastaan mitään etuja hookeilla rikastettuihin funktionaalisiin komponentteihin verrattuna, poikkeuksen tähän muodostaa ns. [error boundary](https://reactjs.org/docs/error-boundaries.html) -mekanismi, joka ei ole toistaiseksi funktionaalisten komponenttien käytössä.
+Oman ja suuren enemmistön mielestä luokkakomponenteilla ei ole oikeastaan mitään etuja hookeilla rikastettuihin funktionaalisiin komponentteihin verrattuna, poikkeuksen tähän muodostaa ns. [error boundary](https://reactjs.org/docs/error-boundaries.html) ‑mekanismi, joka ei ole toistaiseksi funktionaalisten komponenttien käytössä.
 
 Kun kirjoitat uutta koodia, [ei siis ole mitään rationaalista syytä käyttää luokkakomponentteja](https://reactjs.org/docs/hooks-faq.html#should-i-use-hooks-classes-or-a-mix-of-both) jos projektissa on käytössä Reactista vähintään versio 16.8. Toisaalta kaikkea vanhaa Reactia [ei ole toistaiseksi mitään syytä uudelleenkirjoittaa](https://reactjs.org/docs/hooks-faq.html#do-i-need-to-rewrite-all-my-class-components) funktionaalisina komponentteina.
 
@@ -197,11 +197,9 @@ tarjoaa näkökulmia aiheeseen.
 
 ### Frontti ja backend samassa repositoriossa
 
-Olemme kurssilla tehneet frontendin ja backendin omiin repositorioihinsa. Kyseessä on varsin tyypillinen ratkaisu. Teimme tosin deploymentin [kopioimalla](/osa3/sovellus_internetiin#staattisten-tiedostojen-tarjoaminen-backendista) frontin bundlatun koodin backendin repositorion sisälle. Toinen, ehkä järkevämpi tilanne olisi ollut deployata frontin koodi erikseen, Create React App:illa tehtyjen sovellusten osalta se on todella helppoa oman [buildpackin](https://github.com/mars/create-react-app-buildpack) ansiosta.
+Olemme kurssilla tehneet frontendin ja backendin omiin repositorioihinsa. Kyseessä on varsin tyypillinen ratkaisu. Teimme tosin deploymentin [kopioimalla](/osa3/sovellus_internetiin#staattisten-tiedostojen-tarjoaminen-backendista) frontin bundlatun koodin backendin repositorion sisälle. Toinen, ehkä järkevämpi tilanne olisi ollut deployata frontin koodi erikseen.
 
 Joskus voi kuitenkin olla tilanteita, missä koko sovellus halutaan samaan repositorioon. Tällöin yleinen ratkaisu on sijoittaa <i>package.json</i> ja <i>webpack.config.js</i> hakemiston juureen ja frontin sekä backendin koodi omiin hakemistoihinsa, esim. <i>client</i> ja <i>server</i>.
-
-Erään hyvän lähtökohdan yksirepositorioisen koodin organisoinnille antaa [täällä](https://github.com/fullstack-hy2020/create-app) oleva repositorio.
 
 ### Palvelimella tapahtuvat muutokset
 
@@ -243,7 +241,7 @@ Kun sovelluksen tila muuttuu, määrittyy komponenttien renderöinnin takia <i>u
 
 ### Reactin roolista sovelluksissa
 
-Materiaalissa ei ole tuotu ehkä riittävän selkeästi esille sitä, että React on ensisijaisesti tarkoitettu näkymien luomisesta huolehtivaksi kirjastoksi. Jos ajatellaan perinteistä [Model View Controller](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) -jaottelua, on Reactin toimialaa juurikin <i>View</i>. React on siis sovellusalueeltaan suppeampi kuin esim. [Angular](https://angular.io/), joka on kaiken tarjoava Frontendin MVC-sovelluskehys. Reactia ei kutsutakaan sovelluskehykseksi (framework) vaan <i>kirjastoksi</i> (library).
+Materiaalissa ei ole tuotu ehkä riittävän selkeästi esille sitä, että React on ensisijaisesti tarkoitettu näkymien luomisesta huolehtivaksi kirjastoksi. Jos ajatellaan perinteistä [Model View Controller](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) ‑jaottelua, on Reactin toimialaa juurikin <i>View</i>. React on siis sovellusalueeltaan suppeampi kuin esim. [Angular](https://angular.io/), joka on kaiken tarjoava Frontendin MVC-sovelluskehys. Reactia ei kutsutakaan sovelluskehykseksi (framework) vaan <i>kirjastoksi</i> (library).
 
 Pienissä sovelluksissa React-komponenttien tilaan talletetaan sovelluksen käsittelemää dataa, eli komponenttien tilan voi näissä tapauksissa ajatella vastaavan MVC:n <i>modeleita</i>.
 
@@ -410,7 +408,7 @@ Komento _npm audit fix --force_ päivittäisi käytetyn kirjastoversion, mutta e
 
 Eräs OWASP:in listan mainitsemista uhista on <i>Broken Authentication</i> ja siihen liittyvä <i>Broken Access Control</i>. Käyttämämme token-perustainen autentikointi on kohtuullisen robusti, jos sovellusta käytetään tietoliikenteen salaavalla HTTPS-protokollalla. Access Controlin eli pääsynhallinnan toteuttamisessa on aina syytä muistaa tehdä esim. käyttäjän identiteetin tarkastus selaimen lisäksi myös palvelimella. Huonoa tietoturvaa olisi estää jotkut toimenpiteet ainoastaan piilottamalla niiden suoritusmahdollisuus selaimessa olevasta koodista.
 
-Mozillan MDN:n erittäin hyvä [Website security -guide](https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Website_security) nostaakin esiin tämän tärkeän seikan:
+Mozillan MDN:n erittäin hyvä [Website security ‑guide](https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Website_security) nostaakin esiin tämän tärkeän seikan:
 
 ![](../../images/7/34.png)
 
@@ -447,8 +445,6 @@ Universaalin koodin kirjoittaminen suoraan Reactin avulla on vielä toistaiseksi
 Viime aikona on myös ruvettu käyttämään Googlen lanseeraamaa termiä [progressive web app](https://developers.google.com/web/progressive-web-apps/) (PWA). Googlen sivuilla oleva määritelmä kuulostaa markkinapuheelta ja sen perusteella on hankala saada selkeää käsitystä mistä on kyse. [Checklista](https://developers.google.com/web/progressive-web-apps/checklist) tuo mukaan konkretiaa.
 
 Tiivistäen kyse on web-sovelluksista, jotka toimivat mahdollisimman hyvin kaikilla alustoilla ottaen jokaisesta alustasta irti sen parhaat puolet. Mobiililaitteiden pienempi näyttö ei saa heikentää sovellusten käytettävyyttä. PWA-sovellusten tulee myös toimia offline-tilassa tai hitaalla verkkoyhteydellä moitteettomasti. Mobiililaitteilla ne tulee pystyä asentamaan normaalien sovellusten tavoin. Kaiken PWA-sovellusten käyttämän verkkoliikenteen tulee olla salattua.
-
-Create React App:illa luodut sovellukset ovat oletusarvoisesti [progressiivisia](https://create-react-app.dev/docs/making-a-progressive-web-app). Jos sovellus käyttää palvelimella olevaa dataa, edellyttää sovelluksen progressiiviseksi tekeminen vaivan näkemistä. Offline-toiminnallisuus toteutetaan yleensä [service workerien](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) avulla.
 
 #### Mikropalveluarkkitehtuuri
 
@@ -513,9 +509,9 @@ Jos sovelluksessa käsitellään aikaa, esimerkiksi [date-fns](https://github.co
 
 [Redux-saga](https://redux-saga.js.org/) tarjoaa osassa 6 käsitellylle [redux thunkille](/osa6/redux_sovelluksen_kommunikointi_palvelimen_kanssa#asynkroniset-actionit-ja-redux-thunk) vaihtoehtoisen tavan tehdä asynkronisia actioneja. Jotkut hypettää ja tykkää, itse en.
 
-Single page -sovelluksissa analytiikkatietojen kerääminen käyttäjien sivuston kanssa käymästä vuorovaikutuksesta on [haastavampaa](https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications) kuin perinteisissä, kokonaiseen sivun lataamiseen perustuvissa web-sovelluksissa. [React Google Analytics](https://github.com/react-ga/react-ga) -kirjasto tuo tähän avun.
+Single page ‑sovelluksissa analytiikkatietojen kerääminen käyttäjien sivuston kanssa käymästä vuorovaikutuksesta on [haastavampaa](https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications) kuin perinteisissä, kokonaiseen sivun lataamiseen perustuvissa web-sovelluksissa. [React Google Analytics](https://github.com/react-ga/react-ga) ‑kirjasto tuo tähän avun.
 
-Voit hyödyntää React-osaamistasi myös mobiilisovellusten toteuttamiseen Facebookin erittäin suositun [React Native](https://facebook.github.io/react-native/) -kirjaston avulla. Kurssin [osa 10](/osa10) käsittelee React Nativea.
+Voit hyödyntää React-osaamistasi myös mobiilisovellusten toteuttamiseen Facebookin erittäin suositun [React Native](https://facebook.github.io/react-native/) ‑kirjaston avulla. Kurssin [osa 10](/osa10) käsittelee React Nativea.
 
 JavaScript-projektien projektinhallintaan ja bundlaamiseen käytettyjen työkalujen rintamalla on ollut tuulista, best practicet ovat vaihdelleet nopeasti (vuosiluvut ovat suuntaa-antavia, kukaan ei enää muista noin kauas menneisyyteen):
 
@@ -523,9 +519,10 @@ JavaScript-projektien projektinhallintaan ja bundlaamiseen käytettyjen työkalu
 - 2012 [Grunt](https://www.npmjs.com/package/grunt)
 - 2013-14 [Gulp](https://www.npmjs.com/package/gulp)
 - 2012-14 [Browserify](https://www.npmjs.com/package/browserify)
-- 2015- [Webpack](https://www.npmjs.com/package/webpack)
+- 2015-2021 [Webpack](https://www.npmjs.com/package/webpack)
+- 2022- ?
 
-Hipsterien suurin into työkalukehitykseen näytti pysähtyneen webpackin vallattua markkinat. Pari vuotta sitten markkinoille ilmestyi uusi tulokas [Parcel](https://parceljs.org), joka markkinoi olevansa yksinkertainen, sitähän Webpack ei missään nimessä ole, ja paljon nopeampi kuin Webpack. Lupaavan alun jälkeen Parcel ei kuitenkaan ole jatkanut nostettaan, ja vaikuttaa että siitä ei kuitenkaan ole Webpackin tappajaksi.
+Hipsterien suurin into työkalukehitykseen näytti pysähtyneen Webpackin vallattua markkinat. Muutama vuosi sitten markkinoille ilmestyi uusi tulokas [Parcel](https://parceljs.org), joka markkinoi olevansa yksinkertainen, sitähän Webpack ei missään nimessä ole, ja paljon nopeampi kuin Webpack. Lupaavan alun jälkeen Parcel ei kuitenkaan ole jatkanut nostettaan, ja siitä ei ollut Webpackin tappajaksi. Viime aikoina [esbuild](https://esbuild.github.io/) on ollut suhteellisen kovassa nosteessa ja haastaa jo tosissaan Webpackia.
 
 Sivu <https://reactpatterns.com/> tarjoaa tiiviissä muodossa listan parhaita react-käytänteitä, joista osa on jo tältäkin kurssilta tuttuja. Toinen samankaltainen lista on [react bits](https://vasanthk.gitbooks.io/react-bits/).
 

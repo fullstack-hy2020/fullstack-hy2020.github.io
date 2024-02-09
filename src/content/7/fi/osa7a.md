@@ -23,7 +23,7 @@ ja omat sivunsa muistiinpanojen ja käyttäjien tietojen näyttämiseen:
 
 ![](../../images/7/2ea.png)
 
-[Vanhan koulukunnan web-sovelluksessa](/osa0#perinteinen-web-sovellus) sovelluksen näyttämän sivun vaihto tapahtui siten, että selain teki palvelimelle uuden HTTP GET -pyynnön ja renderöi sitten palvelimen palauttaman, uutta näkymää vastaavan HTML-koodin.
+[Vanhan koulukunnan web-sovelluksessa](/osa0#perinteinen-web-sovellus) sovelluksen näyttämän sivun vaihto tapahtui siten, että selain teki palvelimelle uuden HTTP GET ‑pyynnön ja renderöi sitten palvelimen palauttaman, uutta näkymää vastaavan HTML-koodin.
 
 Single page appeissa taas ollaan todellisuudessa koko ajan samalla sivulla, ja selaimessa suoritettava JavaScript-koodi luo illuusion eri "sivuista". Jos näkymää vaihdettaessa tehdään HTTP-kutsuja, niiden avulla haetaan ainoastaan JSON-muotoista dataa, jota uuden näkymän näyttäminen ehkä edellyttää.
 
@@ -323,7 +323,7 @@ Mielenkiintoista komponentissa on React Routerin funktion [useNavigate](https://
 
 Kirjautumisen yhteydessä suoritettava komento _navigate('/')_ saa aikaan sen, että selaimen osoiteriville tulee osoitteeksi _/_ ja sovellus renderöi osoitetta vastaavan komponentin <i>Home</i>.
 
-Käyttämämme React Router -kirjaston funktiot [useParams](https://reactrouter.com/en/main/hooks/use-params) ja [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate) ovat molemmat hook-funktiota samaan tapaan kuin esim. moneen kertaan käyttämämme useState ja useEffect. Kuten muistamme osasta 1, hook-funktioiden käyttöön liittyy tiettyjä [sääntöjä](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot). Create React App on konfiguroitu varoittamaan, jos hookien säännöt rikkoutuvat, esim. jos hook-funktiota yritetään kutsua ehtolauseen sisältä. 
+Käyttämämme React Router ‑kirjaston funktiot [useParams](https://reactrouter.com/en/main/hooks/use-params) ja [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate) ovat molemmat hook-funktiota samaan tapaan kuin esim. moneen kertaan käyttämämme useState ja useEffect. Kuten muistamme osasta 1, hook-funktioiden käyttöön liittyy tiettyjä [sääntöjä](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot).
 
 ### Uudelleenohjaus
 
@@ -506,7 +506,7 @@ Sovellus käynnistyy normaaliin tapaan, mutta joudut ensin asentamaan sovellukse
 
 ```bash
 npm install
-npm start
+npm run dev
 ```
 
 #### 7.1: routed anecdotes, step1

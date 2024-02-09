@@ -18,11 +18,11 @@ Facebook desarrolló la arquitectura [Flux](https://facebook.github.io/flux/docs
 
 Cuando una acción cambia el estado de un store, las vistas se vuelven a generar:
 
-![](https://facebook.github.io/flux/img/overview/flux-simple-f8-diagram-1300w.png)
+![diagram action->dispatcher->store->view](../../images/6/flux1.png)
 
 Si alguna acción en la aplicación, por ejemplo presionar un botón, provoca la necesidad de cambiar el estado, el cambio se realiza con una acción. Esto hace que vuelva a renderizar la vista:
 
-![](https://facebook.github.io/flux/img/overview/flux-simple-f8-diagram-with-client-action-1300w.png)
+![same diagram as above but with action looping back](../../images/6/flux2.png)
 
 Flux ofrece una forma estándar de cómo y dónde se mantiene el estado de la aplicación y cómo se modifica.
 
@@ -90,7 +90,9 @@ Cambiemos un poco el código. Es habitual usar el comando [switch](https://devel
 Definamos también un [valor predeterminado](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters) de 0 para el <i>estado</i> del parámetro . Ahora el reducer funciona incluso si el estado del store aún no se ha indicado.
 
 ```js
+// highlight-start
 const counterReducer = (state = 0, action) => {
+  // highlight-end
   switch (action.type) {
     case 'INCREMENT':
       return state + 1
@@ -108,17 +110,21 @@ const counterReducer = (state = 0, action) => {
 No se supone que Reducer se llame directamente desde el código de la aplicación. Reducer solo se proporciona como parámetro a la función _createStore_ que crea el store:
 
 ```js
+// highlight-start
 import { createStore } from 'redux'
+// highlight-end
 
 const counterReducer = (state = 0, action) => {
   // ...
 }
 
+// highlight-start
 const store = createStore(counterReducer)
+// highlight-end
 ```
 
 
-El store ahora usa el reducer para manejar <i>acciones</i>, que son <i>dispatched</i> o 'envían' al store con su método de [dispatch](https://redux.js.org/api/store#dispatchaction)(envío).
+El store ahora usa el reducer para manejar <i>acciones</i>, que son <i>dispatched</i> o 'envíadas' al store con su método de [dispatch](https://redux.js.org/api/store#dispatchaction)(envío).
 
 ```js
 store.dispatch({type: 'INCREMENT'})
@@ -369,7 +375,7 @@ const noteReducer = (state = [], action) => {
 ```
 
 
-El estado ahora es una Array. <i>NEW\_NOTE</i>- las acciones de tipo hacen que se agregue una nueva nota al estado con el método [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push).
+El estado ahora es una Array. Las acciones de tipo <i>NEW\_NOTE</i> hacen que se agregue una nueva nota al estado con el método [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push).
 
 
 La aplicación parece estar funcionando, pero el reducer que hemos declarado es malo. Rompe el [supuesto básico](https://github.com/reactjs/redux/blob/master/docs/basics/Reducers.md#handling-actions) del reducer Redux de que los reducers deben ser [funciones puras](https://en.wikipedia.org/wiki/Pure_function).
@@ -378,7 +384,7 @@ La aplicación parece estar funcionando, pero el reducer que hemos declarado es 
 Las funciones puras son tales que <i>no causan ningún efecto secundario</i>  y siempre deben devolver la misma respuesta cuando se invocan con los mismos parámetros.
 
 
-Agregamos una nueva nota al estado con el método _state.push(action.data)_ que <i>cambia</i> el estado del objeto de estado. Esto no esta permitido. El problema se resuelve fácilmente utilizando el método [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), que crea un <i>nuevo array</i>, que contiene todos los elementos del array anterior y el nuevo elemento:
+Agregamos una nueva nota al estado con el método _state.push(action.data)_ que <i>cambia</i> el estado del objeto. Esto no está permitido. El problema se resuelve fácilmente utilizando el método [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), que crea un <i>nuevo array</i>, que contiene todos los elementos del array anterior y el nuevo elemento:
  
 ```js
 const noteReducer = (state = [], action) => {
@@ -391,7 +397,7 @@ const noteReducer = (state = [], action) => {
 ```
 
 
-Un estado reducer debe estar compuesto por objetos [inmutables](https://en.wikipedia.org/wiki/Immutable_object). Si hay un cambio en el estado, el objeto antiguo no se cambia, sino que se <i>reemplaza por un objeto nuevo modificado</i>. Esto es exactamente lo que hicimos con el nuevo reducer: el array anterior se reemplaza por la nueva.
+Un estado reducer debe estar compuesto por objetos [inmutables](https://en.wikipedia.org/wiki/Immutable_object). Si hay un cambio en el estado, el objeto antiguo no se cambia, sino que se <i>reemplaza por un objeto nuevo modificado</i>. Esto es exactamente lo que hicimos con el nuevo reducer: el array anterior se reemplaza por el nuevo.
 
 
 Ampliemos nuestro reducer para que pueda manejar el cambio de importancia de una nota:
@@ -585,7 +591,7 @@ const numbers = [1, 2, 3]
 ```
 
 
-<code>...numbers</code> divide el array en elementos individuales, que se pueden colocar, es decir, en otro array.
+<code>...numbers</code> divide el array en elementos individuales, que se pueden colocar en otro array.
 
 ```js
 [...numbers, 4, 5]
@@ -734,7 +740,7 @@ En las pruebas, asegúrese de que el reducer sea una <i>función inmutable</i> c
 Comience expandiendo el reducer para que pasen ambas pruebas. Luego agregue el resto de las pruebas y finalmente la funcionalidad que están probando.
 
 
-Un buen modelo para el reducer es el ejemplo anterior de [redux-notas](/es/part6/flux_architecture_and_redux#pure-functions-immutable).
+Un buen modelo para el reducer es el ejemplo anterior de [redux-notas](/es/part6/flux_architecture_y_redux#redux-notas).
 
 
 #### 6.2: unicafe revisitado, paso 2
@@ -1222,7 +1228,7 @@ La aplicación se puede iniciar como de costumbre, pero primero debe instalar la
 
 ```bash
 npm install
-npm start
+npm run dev
 ```
 
 
@@ -1241,9 +1247,9 @@ Implementar la funcionalidad para votar anécdotas. La cantidad de votos debe gu
 Implementar la funcionalidad para agregar nuevas anécdotas.
 
 
-Puede mantener el formulario no controlado, como hicimos [antes](es/part6/flux_architecture_and_redux#uncontrolled-form).
+Puede mantener el formulario no controlado, como hicimos [antes](/es/part6/flux_architecture_y_redux#formulario-no-controlado).
 
-#### 6.5*: anécdotas, paso 3
+#### 6.5: anécdotas, paso 3
 
 
 Asegúrese de que las anécdotas estén ordenadas por número de votos.
@@ -1251,7 +1257,7 @@ Asegúrese de que las anécdotas estén ordenadas por número de votos.
 #### 6.6: anécdotas, paso 4
 
 
-Si aún no lo ha hecho, separe la creación de objetos de acción en funciones de [creador de acciones](https://redux.js.org/basics/actions#action-creators) y colóquelos en el archivo <i>src/reducers/anecdoteReducer.js</i>, así que haga lo que hemos estado haciendo desde el capítulo [creadores de acciones](/es/part6/flux_architecture_and_redux#action-creators).
+Si aún no lo ha hecho, separe la creación de objetos de acción en funciones de [creador de acciones](https://redux.js.org/basics/actions#action-creators) y colóquelos en el archivo <i>src/reducers/anecdoteReducer.js</i>, así que haga lo que hemos estado haciendo desde el capítulo [creadores de acciones](/es/part6/flux_architecture_y_redux#creadores-de-acciones).
 
 #### 6.7: anécdotas, paso 5
 

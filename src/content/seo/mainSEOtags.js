@@ -31,5 +31,5 @@ module.exports = [
   'web',
   'web application',
   'single page app',
-  'programming'
+  'programming',
 ];

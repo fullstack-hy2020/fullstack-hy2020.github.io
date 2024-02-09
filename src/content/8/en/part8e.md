@@ -6,7 +6,7 @@ lang: en
 ---
 <div class="content">
 
-We are approaching the end of this part. Let's finish by having a look at a few more details of GraphQL.
+We are approaching the end of this part. Let's finish by having a look at a few more details about GraphQL.
 
 ### Fragments
 
@@ -135,10 +135,9 @@ Technically speaking, the HTTP protocol is not well-suited for communication fro
 
 ### Refactoring the backend
 
-Since version 3.0 Apollo Server does not support subscriptions out of the box so we need to do some changes before we set up subscriptions. Let us also clean the app structure a bit.
+Since version 3.0 Apollo Server does not support subscriptions out of the box, we need to do some changes before we set up subscriptions. Let us also clean the app structure a bit.
 
-Let us start by extracting the schema definition to file
-<i>schema.js</i>
+Let's start by extracting the schema definition to the file <i>schema.js</i>
 
 ```js
 const typeDefs = `
@@ -278,7 +277,7 @@ const resolvers = {
           throw new GraphQLError('Creating the user failed', {
             extensions: {
               code: 'BAD_USER_INPUT',
-              invalidArgs: args.name,
+              invalidArgs: args.username,
               error
             }
           })
@@ -325,7 +324,7 @@ const resolvers = {
 module.exports = resolvers
 ```
 
-So far, we have started the application with the easy-to-use function [startStandaloneServer](https://www.apollographql.com/docs/apollo-server/api/standalone/#startstandaloneserver), thanks to which the application has not had to be configured at much:
+So far, we have started the application with the easy-to-use function [startStandaloneServer](https://www.apollographql.com/docs/apollo-server/api/standalone/#startstandaloneserver), thanks to which the application has not had to be configured that much:
 
 ```js
 const { startStandaloneServer } = require('@apollo/server/standalone')
@@ -347,7 +346,7 @@ startStandaloneServer(server, {
 }) 
 ```
 
-Unfortunately startStandaloneServer does not allow adding subscriptions to the application, so let's switch to the more robust [expressMiddleware](https://www.apollographql.com/docs/apollo-server/api/express-middleware/) function. As the name of the function already suggests, it is an Express middleware, which means that Express must also be configured for the application, with the GraphQL server acting as middleware.
+Unfortunately, startStandaloneServer does not allow adding subscriptions to the application, so let's switch to the more robust [expressMiddleware](https://www.apollographql.com/docs/apollo-server/api/express-middleware/) function. As the name of the function already suggests, it is an Express middleware, which means that Express must also be configured for the application, with the GraphQL server acting as middleware.
 
 Let us install Express
 
@@ -369,8 +368,6 @@ const http = require('http')
 // highlight-end
 
 const jwt = require('jsonwebtoken')
-
-const JWT_SECRET = 'NEED_HERE_A_SECRET_KEY'
 
 const mongoose = require('mongoose')
 
@@ -438,7 +435,7 @@ There are several changes to the code. [ApolloServerPluginDrainHttpServer](https
 
 The GraphQL server in the *server* variable is now connected to listen to the root of the server, i.e. to the */* route, using the *expressMiddleware* object. Information about the logged-in user is set in the context using the function we defined earlier. Since it is an Express server, the middlewares express-json and cors are also needed so that the data included in the requests is correctly parsed and so that CORS problems do not appear.
 
-Since the GraphQL server must be started before the Express application can start listening to the specified port, the entire initialization has had to be placed in an <i>async function</i>, which allows waiting for the GraphQL server to start:
+Since the GraphQL server must be started before the Express application can start listening to the specified port, the entire initialization has had to be placed in an <i>async function</i>, which allows waiting for the GraphQL server to start.
 
 The backend code can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-6), branch <i>part8-6</i>.
 
@@ -462,7 +459,7 @@ First, we have to install two packages for adding subscriptions to GraphQL and a
 npm install graphql-ws ws @graphql-tools/schema
 ```
 
-The file <i>index.js</i> is changed to
+The file <i>index.js</i> is changed to:
 
 ```js
 // highlight-start
@@ -538,7 +535,7 @@ start()
 
 When queries and mutations are used, GraphQL uses the HTTP protocol in the communication. In case of subscriptions, the communication between client and server happens with [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API).
 
-The above code registers a WebSocketServer object to listen the WebSocket connections, besides the usual HTTP connections that the server listens. The second part of the definition registers a function that closes the WebSocket connection on server shutdown.
+The above code registers a WebSocketServer object to listen the WebSocket connections, besides the usual HTTP connections that the server listens to. The second part of the definition registers a function that closes the WebSocket connection on server shutdown.
 If you're interested in more details about configurations, Apollo's [documentation](https://www.apollographql.com/docs/apollo-server/data/subscriptions) explains in relative detail what each line of code does.
 
 WebSockets are a perfect match for communication in the case of GraphQL subscriptions since when WebSockets are used, also the server can initiate the communication.
@@ -599,7 +596,7 @@ const resolvers = {
 }
 ```
 
-The following library needs to be installed
+The following library needs to be installed:
 
 ```bash
 npm install graphql-subscriptions
@@ -607,7 +604,7 @@ npm install graphql-subscriptions
 
 With subscriptions, the communication happens using the [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) principle utilizing the object [PubSub](https://www.apollographql.com/docs/apollo-server/data/subscriptions#the-pubsub-class).
 
-There is only few lines of code added, but quite much is happening under the hood. The resolver of the *personAdded* subscription registers and saves info about all the clients that do the subscription. The clients are saved to an
+There are only a few lines of code added, but quite a lot is happening under the hood. The resolver of the *personAdded* subscription registers and saves info about all the clients that do the subscription. The clients are saved to an
 ["iterator object"](https://www.apollographql.com/docs/apollo-server/data/subscriptions/#listening-for-events) called <i>PERSON\_ADDED</i>  thanks to the following code:
 
 ```js
@@ -618,7 +615,7 @@ Subscription: {
 },
 ```
 
-The iterator name is an arbitrary string, now the name follows the convention, it is the subscription name written in capital letters.
+The iterator name is an arbitrary string, but to follow the convention, it is the subscription name written in capital letters.
 
 Adding a new person <i>publishes</i> a notification about the operation to all subscribers with PubSub's method *publish*:
 
@@ -632,20 +629,20 @@ It's possible to test the subscriptions with the Apollo Explorer like this:
 
 ![apollo explorer showing subscriptions tab and response](../../images/8/31x.png)
 
-When the blue button <i>PersonAdded</i> is pressed Explorer starts to wait for a new person to be added. On addition (that you need to do from another browser window) the info of the added person appears in the right side of the Explorer.
+When the blue button <i>PersonAdded</i> is pressed, Explorer starts to wait for a new person to be added. On addition (that you need to do from another browser window), the info of the added person appears on the right side of the Explorer.
 
-If the subscription does not work, check that you have correct connection settings:
+If the subscription does not work, check that you have the correct connection settings:
 
 ![apollo studio showing cog red arrow highlighting](../../images/8/35.png)
 
 The backend code can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-7), branch <i>part8-7</i>.
 
-Implementing subscriptions involves a lot of configurations. You will be able to cope with the few exercises of this course without worrying much about the details. If you planning to use subsctiptions in an production use application, you should definitely read carefully Apollo's [documentation on subscriptions](https://www.apollographql.com/docs/apollo-server/data/subscriptions).
+Implementing subscriptions involves a lot of configurations. You will be able to cope with the few exercises of this course without worrying much about the details. If you are planning to use subscriptions in an production use application, you should definitely read Apollo's [documentation on subscriptions](https://www.apollographql.com/docs/apollo-server/data/subscriptions) carefully.
 
 ### Subscriptions on the client
 
-In order to use subscriptions in our React application, we have to do some changes, especially on its [configuration](https://www.apollographql.com/docs/react/data/subscriptions/).
-The configuration in <i>index.js</i> has to be modified like so:
+In order to use subscriptions in our React application, we have to do some changes, especially to its [configuration](https://www.apollographql.com/docs/react/data/subscriptions/).
+The configuration in <i>main.jsx</i> has to be modified like so:
 
 ```js
 import { 
@@ -724,7 +721,7 @@ const wsLink = new GraphQLWsLink(
 
 The subscriptions are done using the [useSubscription](https://www.apollographql.com/docs/react/api/react/hooks/#usesubscription) hook function.
 
-Let's make the following changes to the code. Add the code defining the order to the file <i>queries.js</i>:
+Let's make the following changes to the code. Add the code defining the subscription to the file <i>queries.js</i>:
 
 ```js
 // highlight-start
@@ -771,7 +768,9 @@ const App = () => {
   // ...
 
   useSubscription(PERSON_ADDED, {
-    onData: ({ data }) => {
+    // highlight-start
+    onData: ({ data, client }) => {
+    // highlight-end
       const addedPerson = data.data.personAdded
       notify(`${addedPerson.name} added`)
 
@@ -789,7 +788,7 @@ const App = () => {
 }
 ```
 
-Our solution has a small problem: a person is added to the cache and also rendered twice since the component *PersonForm* is also adding it to the cache.
+Our solution has a small problem: a person is added to the cache and also rendered twice since the component *PersonForm* is adding it to the cache as well.
 
 Let us now fix the problem by ensuring that a person is not added twice in the cache:
 
@@ -855,7 +854,7 @@ const PersonForm = ({ setError }) => {
 } 
 ```
 
-The final code of the client can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-9), branch <i>part8-9</i>.
+The final code of the client can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-6), branch <i>part8-6</i>.
 
 ### n+1 problem
 
@@ -1072,7 +1071,7 @@ GraphQL Foundation's [DataLoader](https://github.com/graphql/dataloader) library
 ### Epilogue
 
 The application we created in this part is not optimally structured: we did some cleanups but much would still need to be done. Examples for better structuring of GraphQL applications can be found on the internet. For example, for the server
-[here](https://blog.apollographql.com/modularizing-your-graphql-schema-code-d7f71d5ed5f2) and the client [here](https://medium.com/@peterpme/thoughts-on-structuring-your-apollo-queries-mutations-939ba4746cd8).
+[here](https://www.apollographql.com/blog/modularizing-your-graphql-schema-code) and the client [here](https://medium.com/@peterpme/thoughts-on-structuring-your-apollo-queries-mutations-939ba4746cd8).
 
 GraphQL is already a pretty old technology, having been used by Facebook since 2012, so we can see it as "battle-tested" already. Since Facebook published GraphQL in 2015, it has slowly gotten more and more attention, and might in the near future threaten the dominance of REST. The death of REST has also already been [predicted](https://www.stridenyc.com/podcasts/52-is-2018-the-year-graphql-kills-rest). Even though that will not happen quite yet, GraphQL is absolutely worth [learning](https://blog.graphqleditor.com/javascript-predictions-for-2019-by-npm/).
 

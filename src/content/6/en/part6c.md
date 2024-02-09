@@ -28,7 +28,7 @@ The initial state of the database is stored in the file <i>db.json</i>, which is
 }
 ```
 
-We'll install json-server for the project...
+We'll install json-server for the project:
 
 ```js
 npm install json-server --save-dev
@@ -121,7 +121,7 @@ export const { createNote, toggleImportanceOf, appendNote } = noteSlice.actions 
 export default noteSlice.reducer
 ```
 
-A quick way to initialize the notes state based on the data received from the server is to fetch the notes in the <i>index.js</i> file and dispatch an action using the <em>appendNote</em> action creator for each individual note object:
+A quick way to initialize the notes state based on the data received from the server is to fetch the notes in the <i>main.jsx</i> file and dispatch an action using the <em>appendNote</em> action creator for each individual note object:
 
 ```js
 // ...
@@ -194,7 +194,7 @@ export const { createNote, toggleImportanceOf, appendNote, setNotes } = noteSlic
 export default noteSlice.reducer
 ```
 
-Now, the code in the <i>index.js</i> file looks a lot better:
+Now, the code in the <i>main.jsx</i> file looks a lot better:
 
 ```js
 // ...
@@ -213,9 +213,9 @@ noteService.getAll().then(notes =>
 )
 ```
 
-> **NB:** why didn't we use await in place of promises and event handlers (registered to _then_-methods)?
+> **NB:** Why didn't we use await in place of promises and event handlers (registered to _then_-methods)?
 >
-> Await only works inside <i>async</i> functions, and the code in <i>index.js</i> is not inside a function, so due to the simple nature of the operation, we'll abstain from using <i>async</i> this time.
+> Await only works inside <i>async</i> functions, and the code in <i>main.jsx</i> is not inside a function, so due to the simple nature of the operation, we'll abstain from using <i>async</i> this time.
 
 We do, however, decide to move the initialization of the notes into the <i>App</i> component, and, as usual, when fetching data from a server, we'll use the <i>effect hook</i>.
 
@@ -248,48 +248,6 @@ const App = () => {
 
 export default App
 ```
-
-Using the useEffect hook causes an eslint warning:
-
-![vscode warning useEffect missing dispatch dependency](../../images/6/26ea.png)
-
-We can get rid of it by doing the following:
-
-```js
-const App = () => {
-  const dispatch = useDispatch()
-  useEffect(() => {
-    noteService
-      .getAll().then(notes => dispatch(setNotes(notes)))
-  }, [dispatch]) // highlight-line
-
-  // ...
-}
-```
-
-Now the variable <i>dispatch</i> we define in the _App_ component, which practically is the dispatch function of the redux store, has been added to the array useEffect receives as a parameter.
-**If** the value of the dispatch variable would change during runtime,
-the effect would be executed again. This however cannot happen in our application, so the warning is unnecessary.
-
-Another way to get rid of the warning would be to disable ESlint on that line:
-
-```js
-const App = () => {
-  const dispatch = useDispatch()
-  useEffect(() => {
-    noteService
-      .getAll().then(notes => dispatch(setNotes(notes)))   
-      // highlight-start
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps  
-  // highlight-end
-
-  // ...
-}
-```
-
-Generally disabling ESlint when it throws a warning is not a good idea. Even though the ESlint rule in question has caused some [arguments](https://github.com/facebook/create-react-app/issues/6880), we will use the first solution.
-
-More about the need to define the hooks dependencies in [the react documentation](https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies).
 
 ### Sending data to the backend
 
@@ -395,7 +353,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(initializeNotes())  
-  }, [dispatch]) 
+  }, []) 
 
   // ...
 }
@@ -458,7 +416,7 @@ const App = () => {
   // highlight-start
   useEffect(() => {
     dispatch(initializeNotes()) 
-  }, [dispatch]) 
+  }, []) 
   // highlight-end
 
   return (
@@ -555,7 +513,7 @@ const NewNote = () => {
 }
 ```
 
-Finally, let's clean up the <i>index.js</i> file a bit by moving the code related to the creation of the Redux store into its own, <i>store.js</i> file:
+Finally, let's clean up the <i>main.jsx</i> file a bit by moving the code related to the creation of the Redux store into its own, <i>store.js</i> file:
 
 ```js
 import { configureStore } from '@reduxjs/toolkit'
@@ -573,7 +531,7 @@ const store = configureStore({
 export default store
 ```
 
-After the changes, the content of the <i>index.js</i> is the following:
+After the changes, the content of the <i>main.jsx</i> is the following:
 
 ```js
 import React from 'react'

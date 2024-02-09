@@ -86,7 +86,7 @@ const App = () => {
 export default App
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-1), branchissa <i>part5-1</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-1), branchissa <i>part5-1</i>.
 
 Kirjautumislomakkeen käsittely noudattaa samaa periaatetta kuin [osassa 2](/osa2#lomakkeet). Lomakkeen kenttiä varten on lisätty komponentin tilaan <i>username</i> ja <i>password</i>. Molemmille kentille on määritelty muutoksenkäsittelijä, joka synkronoi kenttään tehdyt muutokset komponentin <i>App</i> tilaan. Muutoksenkäsittelijä on yksinkertainen, se destrukturoi parametrina tulevasta oliosta kentän <i>target</i> ja asettaa sen arvon vastaavaan tilaan:
 
@@ -96,7 +96,7 @@ Kirjautumislomakkeen käsittely noudattaa samaa periaatetta kuin [osassa 2](/osa
 
 Kirjautumislomakkeen lähettämisestä vastaava metodi _handleLogin_ ei tee vielä mitään.
 
-Kirjautuminen tapahtuu tekemällä HTTP POST -pyyntö palvelimen osoitteeseen <i>api/login</i>. Eristetään pyynnön tekevä koodi omaan moduuliinsa, tiedostoon <i>services/login.js</i>.
+Kirjautuminen tapahtuu tekemällä HTTP POST ‑pyyntö palvelimen osoitteeseen <i>api/login</i>. Eristetään pyynnön tekevä koodi omaan moduuliinsa, tiedostoon <i>services/login.js</i>.
 
 Käytetään HTTP-pyynnön tekemiseen nyt promisejen sijaan <i>async/await</i>-syntaksia:
 
@@ -112,17 +112,6 @@ const login = async credentials => {
 export default { login }
 ```
 
-Jos olet asentanut VS Codeen eslint-pluginin, saatat nähdä nyt seuraavan varoituksen
-
-![](../../images/5/50new.png)
-
-Palaamme eslintin konfigurointiin hetken kuluttua. Voit olla toistaiseksi välittämättä virheestä tai vaimentaa sen lisäämällä varoitusta edeltävälle riville seuraavan
-
-```js
-
-// eslint-disable-next-line import/no-anonymous-default-export
-export default { login }
-```
 Kirjautumisen käsittelystä huolehtiva metodi voidaan toteuttaa seuraavasti:
 
 ```js
@@ -257,7 +246,7 @@ const App = () => {
 }
 ```
 
-Lomakkeiden ehdolliseen renderöintiin käytetään hyväksi aluksi hieman erikoiselta näyttävää, mutta Reactin yhteydessä [yleisesti käytettyä kikkaa](https://reactjs.org/docs/conditional-rendering.html#inline-if-with-logical--operator):
+Lomakkeiden ehdolliseen renderöintiin käytetään hyväksi aluksi hieman erikoiselta näyttävää, mutta Reactin yhteydessä [yleisesti käytettyä kikkaa](https://react.dev/learn/conditional-rendering#logical-and-operator-):
 
 ```js
 {!user && loginForm()}
@@ -294,7 +283,7 @@ Ratkaisu näyttää hieman rumalta, mutta jätämme sen koodiin toistaiseksi.
 Sovelluksemme pääkomponentti <i>App</i> on tällä hetkellä jo aivan liian laaja ja nyt tekemämme muutokset ovat ilmeinen signaali siitä, että lomakkeet olisi syytä refaktoroida omiksi komponenteikseen. Jätämme sen kuitenkin vapaaehtoiseksi harjoitustehtäväksi.
 
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-2), branchissa <i>part5-2</i>. 
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-2), branchissa <i>part5-2</i>. 
 
 
 ### Muistiinpanojen luominen
@@ -355,7 +344,6 @@ const update = (id, newObject) => {
   return request.then(response => response.data)
 }
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default { getAll, create, update, setToken } // highlight-line
 ```
 
@@ -442,7 +430,7 @@ Kirjautuneen käyttäjän tiedot tallentuvat nyt local storageen ja niitä voida
 
 Sovellusta on vielä laajennettava siten, että kun sivulle tullaan uudelleen, esim. selaimen uudelleenlataamisen yhteydessä, tulee sovelluksen tarkistaa löytyykö local storagesta tiedot kirjautuneesta käyttäjästä. Jos löytyy, asetetaan ne sovelluksen tilaan ja <i>noteServicelle</i>.
 
-Oikea paikka asian hoitamiselle on [effect hook](https://reactjs.org/docs/hooks-effect.html) eli [osasta 2](/osa2/palvelimella_olevan_datan_hakeminen#effect-hookit) tuttu mekanismi, jonka avulla haemme palvelimelle talletetut muistiinpanot frontendiin. 
+Oikea paikka asian hoitamiselle on [effect hook](https://react.dev/reference/react/useEffect) eli [osasta 2](/osa2/palvelimella_olevan_datan_hakeminen#effect-hookit) tuttu mekanismi, jonka avulla haemme palvelimelle talletetut muistiinpanot frontendiin. 
 
 Effect hookeja voi olla useita, joten tehdään oma hoitamaan kirjautuneen käyttäjän ensimmäinen sivun lataus:
 
@@ -478,7 +466,7 @@ const App = () => {
 }
 ```
 
-Efektin parametrina oleva tyhjä taulukko varmistaa sen, että efekti suoritetaan ainoastaan kun komponentti renderöidään [ensimmäistä kertaa](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect).
+Efektin parametrina oleva tyhjä taulukko varmistaa sen, että efekti suoritetaan ainoastaan kun komponentti renderöidään [ensimmäistä kertaa](https://react.dev/reference/react/useEffect#parameters).
 
 Nyt käyttäjä pysyy kirjautuneena sovellukseen ikuisesti. Sovellukseen olisikin kenties syytä lisätä <i>logout</i>-toiminnallisuus, joka poistaisi kirjautumistiedot local storagesta. Jätämme kuitenkin uloskirjautumisen harjoitustehtäväksi.
 
@@ -494,7 +482,7 @@ Toinen tapa on käyttää local storagen tilan kokonaan nollaavaa komentoa:
 window.localStorage.clear()
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-3), branchissa <i>part5-3</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-3), branchissa <i>part5-3</i>.
 
 </div>
 
@@ -528,12 +516,18 @@ Seuraavaksi poista kloonatun sovelluksen Git-konfiguraatio:
 cd bloglist-frontend   // mene kloonatun repositorion hakemistoon
 rm -rf .git
 ```
+Windows käyttäjille:
+
+```bash
+cd bloglist-frontend   // mene kloonatun repositorion hakemistoon
+Remove-Item -Path .git -Recurse -Force
+```
 
 Sovellus käynnistyy normaaliin tapaan, mutta joudut ensin asentamaan riippuvuudet:
 
 ```bash
 npm install
-npm start
+npm run dev
 ```
 
 **Toteuta frontendiin kirjautumisen mahdollistava toiminnallisuus.**
@@ -611,7 +605,7 @@ Edellisen osan [lopussa](/osa4/token_perustainen_kirjautuminen#token-perustaisen
 
 Ratkaisuja ongelmaan on kaksi. Tokenille voidaan asettaa voimassaoloaika, jonka päätyttyä käyttäjä pakotetaan kirjautumaan järjestelmään uudelleen. Toinen ratkaisu on tallentaa tokeniin liittyvät tiedot palvelimen tietokantaan ja tarkastaa jokaisen API-kutsun yhteydessä, onko tokeniin liittyvä käyttöoikeus tai "sessio" edelleen voimassa. Jälkimmäistä tapaa kutsutaan usein palvelinpuolen sessioksi.
 
-Riippumatta siitä miten palvelin hoitaa tokenin voimassaolon tarkastuksen, saattaa tokenin tallentaminen local storageen olla pienimuotoinen turvallisuusriski jos sovelluksessa on ns. [Cross Site Scripting (XSS)](https://owasp.org/www-community/attacks/xss/) -hyökkäyksen mahdollistava tietoturva-aukko. XSS-hyökkäys mahdollistuu, jos sovelluksen suoritettavaksi on mahdollista ujuttaa mielivaltaista JavaScript-koodia, minkä taas ei pitäisi olla "normaalisti" Reactia käyttäen mahdollista sillä [React sanitoi](https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks) renderöimänsä sisällön, eli ei suorita sitä koodina. 
+Riippumatta siitä miten palvelin hoitaa tokenin voimassaolon tarkastuksen, saattaa tokenin tallentaminen local storageen olla pienimuotoinen turvallisuusriski jos sovelluksessa on ns. [Cross Site Scripting (XSS)](https://owasp.org/www-community/attacks/xss/) ‑hyökkäyksen mahdollistava tietoturva-aukko. XSS-hyökkäys mahdollistuu, jos sovelluksen suoritettavaksi on mahdollista ujuttaa mielivaltaista JavaScript-koodia, minkä taas ei pitäisi olla "normaalisti" Reactia käyttäen mahdollista sillä [React sanitoi](https://legacy.reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks) renderöimänsä sisällön, eli ei suorita sitä koodina. 
 
 Toki jos haluaa pelata varman päälle, ei tokenia kannata tallettaa local storageen ainakaan niissä tapauksissa, joissa potentiaalisella tokenin vääriin käsiin joutumisella olisi traagisia seurauksia. 
 
