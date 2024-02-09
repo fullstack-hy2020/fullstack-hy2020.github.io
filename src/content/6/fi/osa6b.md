@@ -392,7 +392,7 @@ Jatketaan tehtävässä 6.3 aloitetun Reduxia käyttävän anekdoottisovelluksen
 
 #### 6.9 paremmat anekdootit, step7
 
-Toteuta sovellukseen näytettävien muistiinpanojen filtteröiminen:
+Toteuta sovellukseen näytettävien anekdoottien filtteröiminen:
 
 ![Yläosaan lisätään tekstikenttä, johon kirjoittamalla voidaan rajoittaa näytettävät anekdootit niihin joihin sisältyy "filtterikenttään" kirjoitettu merkkijono](../../images/6/9ea.png)
 
@@ -661,7 +661,7 @@ Konsoliin tulostuu seuraava
 
 ![](../../images/6/40new.png)
 
-Tulostus on mielenkiintoinen mutta ei kovin hyödyllinen. Kyse tässä jo edell mainitusta Redux toolkitin käyttämästä Immer-kirjastosta, mitä käytetään nyt sisäisesti storen tilan tallentamiseen. 
+Tulostus on mielenkiintoinen mutta ei kovin hyödyllinen. Kyse tässä jo edellä mainitusta Redux toolkitin käyttämästä Immer-kirjastosta, mitä käytetään nyt sisäisesti storen tilan tallentamiseen. 
 
 Tilan saa tulostettua ihmisluettavassa muodossa, esim. muuttamalla se merkkijonoksi ja takaisin JavaScript-olioksi seuraavasti: 
 

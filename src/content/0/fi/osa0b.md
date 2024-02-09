@@ -479,7 +479,7 @@ Ennen AJAX:in aikakautta jokainen sivu toimi aiemmassa luvussa olevan [perinteis
 
 Muistiinpanojen sivu siis lataa näytettävän datan AJAX:illa. Lomakkeen lähetys sen sijaan tapahtuu perinteisen web-lomakkeen lähetysmekanismin kautta.
 
-Sovelluksen urlit heijastavat vanhaa, huoletonta aikaa. JSON-muotoinen data haetaan urlista <https://studies.cs.helsinki.fi/exampleapp/data.json>, ja uuden muistiinpanon tiedot lähetetään urliin <https://studies.cs.helsinki.fi/exampleapp/new_note>. Nykyään näin valittuja urleja ei pidetä ollenkaan hyvinä – ne eivät noudata ns. [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services)-apien yleisesti hyväksyttyjä konventioita. Käsittelemme asiaa tarkemmin [osassa 3](/osa3).
+Sovelluksen urlit heijastavat vanhaa, huoletonta aikaa. JSON-muotoinen data haetaan urlista <https://studies.cs.helsinki.fi/exampleapp/data.json>, ja uuden muistiinpanon tiedot lähetetään urliin <https://studies.cs.helsinki.fi/exampleapp/new_note>. Nykyään näin valittuja urleja ei pidetä ollenkaan hyvinä – ne eivät noudata ns. [RESTful](https://en.wikipedia.org/wiki/REST#Applied_to_web_services)-apien yleisesti hyväksyttyjä konventioita. Käsittelemme asiaa tarkemmin [osassa 3](/osa3).
 
 AJAXiksi kutsuttu asia on arkipäiväistynyt ja muuttunut itsestäänselvyydeksi. Koko termi on hiipunut unholaan, ja nuori polvi ei ole sitä edes ikinä kuullut.
 
@@ -521,7 +521,7 @@ Pyyntöön liitetty headeri <i>Content-Type</i> kertoo palvelimelle, että pyynn
 
 Ilman headeria palvelin ei osaisi parsia pyynnön mukana tulevaa dataa oikein.
 
-Palvelin vastaa kyselyyn statuskoodilla [201 created](https://httpstatuses.com/201). Tällä kertaa palvelin ei pyydä uudelleenohjausta kuten aiemmassa versiossamme. Selain pysyy samalla sivulla, ja muita HTTP-pyyntöjä ei suoriteta.
+Palvelin vastaa kyselyyn statuskoodilla [201 created](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201). Tällä kertaa palvelin ei pyydä uudelleenohjausta kuten aiemmassa versiossamme. Selain pysyy samalla sivulla, ja muita HTTP-pyyntöjä ei suoriteta.
 
 Ohjelman Single Page App ‑versiossa lomakkeen tietoja ei lähetetä selaimen normaalin lomakkeiden lähetysmekanismin avulla. Lähettämisen hoitaa selaimen lataamassa JavaScript-tiedostossa määritelty koodi. Katsotaan hieman koodia, vaikka yksityiskohdista ei tarvitse nytkään välittää liikaa.
 
@@ -585,7 +585,7 @@ Reactin asema näyttää tällä hetkellä vahvalta, mutta JavaScript-maailma ei
 
 Mitä tarkoitetaan kurssin nimellä <i>Full stack ‑web-sovelluskehitys</i>? Full stack on hypenomainen termi – kaikki puhuvat siitä, mutta kukaan ei oikein tiedä, mitä se tarkoittaa, tai ainakaan mitään yhteneväistä määritelmää termille ei ole.
 
-Käytännössä kaikki web-sovellukset sisältävät (ainakin) kaksi "kerrosta" ylempänä eli lähempänä loppukäyttäjää olevan selaimen ja alla olevan palvelimen. Palvelimen alapuolella on usein vielä tietokanta. Näin websovelluksen <i>arkkitehtuurin</i> voi ajatella muodostavan pinon, englanniksi <i>stack</i>.
+Käytännössä kaikki web-sovellukset sisältävät (ainakin) kaksi "kerrosta". Ylin kerros on lähempänä loppukäyttäjää oleva selain, joka suorittaa JavaScript-koodin ja renderöi sovelluksen HTML:n. Alempi kerros taas on sivuston tiedostot sisältämä palvelin. Palvelimen alapuolella on usein vielä tietokanta. Näin websovelluksen <i>arkkitehtuurin</i> voi ajatella muodostavan pinon, englanniksi <i>stack</i>.
 
 Web-sovelluskehityksen yhteydessä puhutaan usein myös "frontista" ([frontend](https://en.wikipedia.org/wiki/Front_and_back_ends)) ja "backistä" ([backend](https://en.wikipedia.org/wiki/Front_and_back_ends)). Selain on frontend, ja selaimessa suoritettava JavaScript on frontend-koodia. Palvelimella taas pyörii backend-koodi.
 
