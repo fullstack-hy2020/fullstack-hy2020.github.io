@@ -334,7 +334,7 @@ La transcripción te será entregada electrónicamente por correo electrónico. 
 
 ### No hay más versiones anuales
 
-No hay más "versiones anuales" del curso, el curso está abierto todo el tiempo. Cada parte se actualiza una o dos veces al año. Las actualizaciones son en su mayoría menores: se actualizan las versiones de las bibliotecas y se mejora la claridad del texto. Sin embargo, también puede haber algunos cambios más significativos.
+No hay más "versiones anuales" del curso, el curso está abierto todo el tiempo. Cada parte se actualiza una o dos veces al año. Las actualizaciones son en su mayoría menores: se actualizan las versiones de las librerías y se mejora la claridad del texto. Sin embargo, también puede haber algunos cambios más significativos.
 
 A pesar de los cambios *todos los ejercicios enviados siguen siendo válidos*, y puedes continuar el curso sin preocuparte por las actualizaciones. Además, la política para obtener certificados, créditos universitarios, etc., seguirá siendo la misma, sin importar lo que suceda.
 

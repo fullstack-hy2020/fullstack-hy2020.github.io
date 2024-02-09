@@ -7,7 +7,7 @@ lang: es
 
 <div class="content">
 
-Ahora comenzaremos a familiarizarnos con probablemente el tema más importante de este curso, es decir, la biblioteca [React](https://es.react.dev/). Comencemos con la creación de una aplicación React simple y con el conocimiento de los conceptos básicos de React.
+Ahora comenzaremos a familiarizarnos con probablemente el tema más importante de este curso, es decir, la librería [React](https://es.react.dev/). Comencemos con la creación de una aplicación React simple y con el conocimiento de los conceptos básicos de React.
 
 La forma más fácil de empezar es utilizando una herramienta llamada [Vite](https://es.vitejs.dev/).
 

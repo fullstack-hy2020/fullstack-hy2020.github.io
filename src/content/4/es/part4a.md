@@ -791,7 +791,7 @@ Escribe las pruebas para este ejercicio dentro de un nuevo bloque <i>describe</i
 
 Este y el siguiente ejercicio son un poco más desafiantes. No es necesario completar estos dos ejercicios para avanzar en el material del curso, por lo que puede ser una buena idea volver a estos una vez que haya terminado de leer el material de esta parte en su totalidad.
 
-Se puede terminar este ejercicio sin el uso de librerías adicionales. Sin embargo, este ejercicio es una gran oportunidad para aprender a usar la biblioteca [Lodash](https://lodash.com/).
+Se puede terminar este ejercicio sin el uso de librerías adicionales. Sin embargo, este ejercicio es una gran oportunidad para aprender a usar la librería [Lodash](https://lodash.com/).
 
 Define una función llamada _mostBlogs_ que reciba una lista de blogs como parámetro. La función devuelve el <i>author</i> que tiene la mayor cantidad de blogs. El valor de retorno también contiene el número de blogs que tiene el autor principal:
 

@@ -137,7 +137,7 @@ Volvamos al tema de la obtención de datos del servidor.
 
 Podríamos usar la función basada en promesas [fetch](https://developer.mozilla.org/es/docs/Web/API/fetch) mencionada anteriormente para extraer los datos del servidor. Fetch es una gran herramienta. Está estandarizado y es compatible con todos los navegadores modernos (excepto IE).
 
-Dicho esto, usaremos la biblioteca [axios](https://github.com/axios/axios) en su lugar para la comunicación entre el navegador y el servidor. Funciona como fetch, pero es algo más agradable de usar. Otra buena razón para usar axios es que nos familiarizamos con la adición de bibliotecas externas, los llamados <i>paquetes npm</i>, a los proyectos de React.
+Dicho esto, usaremos la librería [axios](https://github.com/axios/axios) en su lugar para la comunicación entre el navegador y el servidor. Funciona como fetch, pero es algo más agradable de usar. Otra buena razón para usar axios es que nos familiarizamos con la adición de librerías externas, los llamados <i>paquetes npm</i>, a los proyectos de React.
 
 Hoy en día, prácticamente todos los proyectos de JavaScript se definen utilizando el administrador de paquetes de node, también conocido como [npm](https://docs.npmjs.com/about-npm). Los proyectos creados con Vite también siguen el formato npm. Un indicador claro de que un proyecto usa npm es el archivo <i>package.json</i> ubicado en la raíz del proyecto:
 
@@ -331,7 +331,7 @@ axios
   })
 ```
 
-Los datos devueltos por el servidor son texto sin formato, básicamente solo una cadena larga. La biblioteca axios aún puede analizar los datos en una matriz de JavaScript, ya que el servidor ha especificado que el formato de datos es <i>application/json; charset=utf-8</i> (ver imagen anterior) usando el encabezado <i>content-type</i>.
+Los datos devueltos por el servidor son texto sin formato, básicamente solo una cadena larga. La librería axios aún puede analizar los datos en una matriz de JavaScript, ya que el servidor ha especificado que el formato de datos es <i>application/json; charset=utf-8</i> (ver imagen anterior) usando el encabezado <i>content-type</i>.
 
 Finalmente podemos comenzar a utilizar los datos obtenidos del servidor.
 
@@ -357,7 +357,7 @@ Sin embargo, lo que no es inmediatamente obvio es dónde se debe colocar el coma
 Ya hemos utilizado [state hooks](https://es.react.dev/learn/state-a-components-memory) que se introdujeron junto con la versión de React [16.8.0](https://www.npmjs.com/package/react/v/16.8.0), que proporciona el estado de los componentes de React definidos como funciones, los llamados <i>componentes funcionales</i>. La versión 16.8.0 también presenta los [hooks de efectos](https://es.react.dev/reference/react/hooks#effect-hooks) como una nueva característica. Según los documentos oficiales:
 
 > <i>Los efectos permiten que un componente se conecte y se sincronice con sistemas externos.</i>
-> <i>Esto incluye manejar la red, el DOM del navegador, animaciones, widgets escritos usando una biblioteca de interfaz de usuario diferente, y otro código que no es de React.</i>
+> <i>Esto incluye manejar la red, el DOM del navegador, animaciones, widgets escritos usando una librería de interfaz de usuario diferente, y otro código que no es de React.</i>
 
 Como tal, los hooks de efectos son precisamente la herramienta adecuada para usar cuando se obtienen datos de un servidor.
 

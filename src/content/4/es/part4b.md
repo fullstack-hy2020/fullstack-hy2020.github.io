@@ -9,7 +9,7 @@ lang: es
 
 Ahora comenzaremos a escribir pruebas para el backend. Dado que el backend no contiene ninguna lógica complicada, no tiene sentido escribir [pruebas unitarias](https://es.wikipedia.org/wiki/Prueba_unitaria) para él. Lo único que podríamos probar unitariamente es el método _toJSON_ que se utiliza para formatear notas.
 
-En algunas situaciones, puede ser beneficioso implementar algunas de las pruebas de backend simulando la base de datos en lugar de usar una base de datos real. Una biblioteca que podría usarse para esto es [mongo-mock](https://github.com/williamkapke/mongo-mock).
+En algunas situaciones, puede ser beneficioso implementar algunas de las pruebas de backend simulando la base de datos en lugar de usar una base de datos real. Una librería que podría usarse para esto es [mongo-mock](https://github.com/williamkapke/mongo-mock).
 
 Dado que el backend de nuestra aplicación todavía es relativamente simple, tomaremos la decisión de probar toda la aplicación a través de su API REST, de modo que la base de datos también esté incluida. Este tipo de prueba, en la que se prueban varios componentes del sistema como un grupo, se denomina [prueba de integración](https://en.wikipedia.org/wiki/Integration_testing).
 
@@ -50,7 +50,7 @@ Hay un pequeño problema en la forma en que hemos especificado el modo de la apl
 npm install --save-dev cross-env
 ```
 
-Entonces podemos lograr la compatibilidad multiplataforma utilizando la biblioteca cross-env en nuestros scripts npm definidos en <i>package.json</i>:
+Entonces podemos lograr la compatibilidad multiplataforma utilizando la librería cross-env en nuestros scripts npm definidos en <i>package.json</i>:
 
 ```json
 {
@@ -822,16 +822,16 @@ try {
 
 Uno comienza a preguntarse, ¿sería posible refactorizar el código para eliminar el <i>catch</i> de los métodos?
 
-La biblioteca [express-async-errors](https://github.com/davidbanham/express-async-errors) tiene una solución para esto.
+La librería [express-async-errors](https://github.com/davidbanham/express-async-errors) tiene una solución para esto.
 
-Instalemos la biblioteca
+Vamos a instalarla
 
 ```bash
 npm install express-async-errors
 ```
 
-Usar la biblioteca es <i>muy</i> fácil.
-Introduce la biblioteca en <i>app.js</i>, _antes_ de que importes tus rutas:
+Usarla es <i>muy</i> fácil.
+Introduce la librería en <i>app.js</i>, _antes_ de que importes tus rutas:
 
 ```js
 const config = require('./utils/config')
@@ -849,7 +849,7 @@ const mongoose = require('mongoose')
 module.exports = app
 ```
 
-La 'magia' de la biblioteca nos permite eliminar por completo los bloques try-catch.
+La 'magia' de esta librería nos permite eliminar por completo los bloques try-catch.
 Por ejemplo, la ruta para eliminar una nota
 
 ```js
@@ -872,8 +872,8 @@ notesRouter.delete('/:id', async (request, response) => {
 })
 ```
 
-Debido a la biblioteca, ya no necesitamos la llamada a _next(exception)_.
-La biblioteca se encarga de todo lo que hay debajo del capó. Si ocurre una excepción en una ruta <i>async</i>, la ejecución se pasa automáticamente al middleware de manejo de errores.
+Debido a express-async-errors, ya no necesitamos la llamada a _next(exception)_.
+La librería se encarga de todo lo que hay debajo del capó. Si ocurre una excepción en una ruta <i>async</i>, la ejecución se pasa automáticamente al middleware de manejo de errores.
 
 Las otras rutas se convierten en:
 

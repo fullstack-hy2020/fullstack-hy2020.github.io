@@ -85,7 +85,7 @@ El script npm <i>start</i> funciona porque lo definimos en el archivo <i>package
 
 Aunque la ejecución del proyecto funciona cuando se inicia llamando a _node index.js_ desde la línea de comando, es habitual que los proyectos npm ejecuten estas tareas como scripts npm.
 
-De forma predeterminada, el archivo <i>package.json</i> también define otro script npm de uso común llamado <i>npm test</i>. Dado que nuestro proyecto aún no tiene una biblioteca de testing, el comando _npm test_ simplemente ejecuta el siguiente comando:
+De forma predeterminada, el archivo <i>package.json</i> también define otro script npm de uso común llamado <i>npm test</i>. Dado que nuestro proyecto aún no tiene una librería de testing, el comando _npm test_ simplemente ejecuta el siguiente comando:
 
 ```bash
 echo "Error: no test specified" && exit 1
@@ -226,7 +226,7 @@ Cuando abrimos el navegador, el formato que se muestra es exactamente el mismo q
 
 Es posible implementar nuestro código de servidor directamente con el servidor web [http](https://nodejs.org/docs/latest-v18.x/api/http.html) integrado de Node. Sin embargo, es engorroso, especialmente una vez que la aplicación aumenta de tamaño.
 
-Se han desarrollado muchas librerías para facilitar el desarrollo del lado del servidor con Node, al ofrecer una interfaz más agradable para trabajar con el módulo http integrado. Estas librerías tienen como objetivo proporcionar una mejor abstracción para los casos de uso general que generalmente requerimos para construir un servidor backend. Por lejos, la biblioteca más popular destinada a este propósito es [express](http://expressjs.com).
+Se han desarrollado muchas librerías para facilitar el desarrollo del lado del servidor con Node, al ofrecer una interfaz más agradable para trabajar con el módulo http integrado. Estas librerías tienen como objetivo proporcionar una mejor abstracción para los casos de uso general que generalmente requerimos para construir un servidor backend. Por lejos, la librería más popular destinada a este propósito es [express](http://expressjs.com).
 
 Usemos express definiéndolo como una dependencia del proyecto con el comando:
 
@@ -249,7 +249,7 @@ El código fuente de la dependencia se instala en el directorio <i>node\_modules
 
 ![comando ls listando las dependencias en directorio](../../images/3/4.png)
 
-Estas son, de hecho, las dependencias de la biblioteca express y las dependencias de todas sus dependencias, etc. Estas son las [dependencias transitivas](https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/) de nuestro proyecto.
+Estas son, de hecho, las dependencias de la librería express y las dependencias de todas sus dependencias, etc. Estas son las [dependencias transitivas](https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/) de nuestro proyecto.
 
 La versión 4.18.2 de express se instaló en nuestro proyecto. ¿Qué significa el signo de intercalación delante del número de versión en <i>package.json</i>?
 
@@ -259,7 +259,7 @@ La versión 4.18.2 de express se instaló en nuestro proyecto. ¿Qué significa 
 
 El modelo de control de versiones utilizado en npm se denomina control de [versiones semántico](https://docs.npmjs.com/about-semantic-versioning).
 
-El signo de intercalación al frente de <i>^4.18.2</i> significa que si y cuando se actualizan las dependencias de un proyecto, la versión de express que se instala será al menos <i>4.18.2</i>. Sin embargo, la versión instalada de express también puede ser una que tenga un número de <i>parche</i> más grande (el último número) o un número <i>menor</i> más grande (el número del medio). La versión principal de la biblioteca indicada por el primer número <i>mayor</i> debe ser la misma.
+El signo de intercalación al frente de <i>^4.18.2</i> significa que si y cuando se actualizan las dependencias de un proyecto, la versión de express que se instala será al menos <i>4.18.2</i>. Sin embargo, la versión instalada de express también puede ser una que tenga un número de <i>parche</i> más grande (el último número) o un número <i>menor</i> más grande (el número del medio). La versión principal de la librería indicada por el primer número <i>mayor</i> debe ser la misma.
 
 Podemos actualizar las dependencias del proyecto con el comando:
 
