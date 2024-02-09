@@ -407,14 +407,6 @@ Esta característica de VS Code afectando la forma en que escribes tu código pr
 
 En los ejercicios de esta parte, crearemos una <i>aplicación de lista de blogs</i>, que permite a los usuarios guardar información sobre blogs interesantes con los que se han encontrado en Internet. Para cada blog listado, guardaremos el autor, el título, la URL y la cantidad de votos positivos de los usuarios de la aplicación.
 
-**Nota:** Deberías instalar la version 7.6.5 de Mongoose con el comando:
-
-```bash
-npm install mongoose@7.6.5
-```
-
-¡ya que la version más reciente de Mongoose no soporta una librería que utilizaremos más adelante en el curso!
-
 #### 4.1 Lista de Blogs, paso 1
 
 Imaginemos una situación en la que recibes un correo electrónico que contiene el siguiente cuerpo de la aplicación e instrucciones:
