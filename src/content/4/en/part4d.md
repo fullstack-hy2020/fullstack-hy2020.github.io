@@ -236,7 +236,7 @@ const errorHandler = (error, request, response, next) => {
 
 The object decoded from the token contains the <i>username</i> and <i>id</i> fields, which tell the server who made the request.
 
-If the object decoded from the token does not contain the user's identity (_decodedToken.id_ is undefined), error status code [401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2) is returned and the reason for the failure is explained in the response body.
+If the object decoded from the token does not contain the user's identity (_decodedToken.id_ is undefined), error status code [401 unauthorized](https://www.rfc-editor.org/rfc/rfc9110.html#name-401-unauthorized) is returned and the reason for the failure is explained in the response body.
 
 ```js
 if (!decodedToken.id) {
@@ -343,11 +343,11 @@ When server-side sessions are used, the token is quite often just a random strin
 
 There have been many changes to the code which have caused a typical problem for a fast-paced software project: most of the tests have broken. Because this part of the course is already jammed with new information, we will leave fixing the tests to a non-compulsory exercise.
 
-Usernames, passwords and applications using token authentication must always be used over [HTTPS](https://en.wikipedia.org/wiki/HTTPS). We could use a Node [HTTPS](https://nodejs.org/api/https.html) server in our application instead of the [HTTP](https://nodejs.org/docs/latest-v8.x/api/http.html) server (it requires more configuration). On the other hand, the production version of our application is in Fly.io, so our application stays secure: Fly.io routes all traffic between a browser and the Fly.io server over HTTPS.
+Usernames, passwords and applications using token authentication must always be used over [HTTPS](https://en.wikipedia.org/wiki/HTTPS). We could use a Node [HTTPS](https://nodejs.org/docs/latest-v18.x/api/https.html) server in our application instead of the [HTTP](https://nodejs.org/docs/latest-v18.x/api/http.html) server (it requires more configuration). On the other hand, the production version of our application is in Fly.io, so our application stays secure: Fly.io routes all traffic between a browser and the Fly.io server over HTTPS.
 
 We will implement login to the frontend in the [next part](/en/part5).
 
-NOTE: At this stage, in the deployed notes app, it is expected that the creating a note feature will stop working as the backend login feature is not yet linked to the frontend.
+**NOTE:** At this stage, in the deployed notes app, it is expected that the creating a note feature will stop working as the backend login feature is not yet linked to the frontend.
 
 </div>
 
@@ -355,15 +355,15 @@ NOTE: At this stage, in the deployed notes app, it is expected that the creating
 
 ### Exercises 4.15.-4.23.
 
-In the next exercises, the basics of user management will be implemented for the Bloglist application. The safest way is to follow the story from part 4 chapter [User administration](/en/part4/user_administration) to the chapter [Token authentication](/en/part4/token_authentication). You can of course also use your creativity.
+In the next exercises, the basics of user management will be implemented for the Bloglist application. The safest way is to follow the course material from part 4 chapter [User administration](/en/part4/user_administration) to the chapter [Token authentication](/en/part4/token_authentication). You can of course also use your creativity.
 
 **One more warning:** If you notice you are mixing async/await and _then_ calls, it is 99% certain you are doing something wrong. Use either or, never both.
 
-#### 4.15: bloglist expansion, step3
+#### 4.15: Blog List Expansion, step 3
 
 Implement a way to create new users by doing an HTTP POST request to address <i>api/users</i>. Users have a <i>username, password and name</i>.
 
-Do not save passwords to the database as clear text, but use the <i>bcrypt</i> library like we did in part 4 chapter [Creating new users](/en/part4/user_administration#creating-users).
+Do not save passwords to the database as clear text, but use the <i>bcrypt</i> library like we did in part 4 chapter [Creating users](/en/part4/user_administration#creating-users).
 
 **NB** Some Windows users have had problems with <i>bcrypt</i>. If you run into problems, remove the library with command
 
@@ -379,21 +379,21 @@ The list of users can, for example, look as follows:
 
 ![browser api/users shows JSON data of two users](../../images/4/22.png)
 
-#### 4.16*: bloglist expansion, step4
+#### 4.16*: Blog List Expansion, step 4
 
-Add a feature which adds the following restrictions to creating new users: Both username and password must be given. Both username and password must be at least 3 characters long. The username must be unique.
+Add a feature which adds the following restrictions to creating new users: Both username and password must be given and both must be at least 3 characters long. The username must be unique.
 
 The operation must respond with a suitable status code and some kind of an error message if an invalid user is created.
 
-**NB** Do not test password restrictions with Mongoose validations. It is not a good idea because the password received by the backend and the password hash saved to the database are not the same thing. The password length should be validated in the controller as we did in [part 3](/en/part3/node_js_and_express) before using Mongoose validation.
+**NB** Do not test password restrictions with Mongoose validations. It is not a good idea because the password received by the backend and the password hash saved to the database are not the same thing. The password length should be validated in the controller as we did in [part 3](/en/part3/validation_and_es_lint) before using Mongoose validation.
 
 Also, implement tests that ensure invalid users are not created and that an invalid add user operation returns a suitable status code and error message.
 
-#### 4.17: bloglist expansion, step5
+#### 4.17: Blog List Expansion, step 5
 
 Expand blogs so that each blog contains information on the creator of the blog.
 
-Modify adding new blogs so that when a new blog is created,  <i>any</i> user from the database is designated as its creator (for example the one found first). Implement this according to part 4 chapter [populate](/en/part4/user_administration#populate).
+Modify adding new blogs so that when a new blog is created, <i>any</i> user from the database is designated as its creator (for example the one found first). Implement this according to part 4 chapter [populate](/en/part4/user_administration#populate).
 Which user is designated as the creator does not matter just yet. The functionality is finished in exercise 4.19.
 
 Modify listing all blogs so that the creator's user information is displayed with the blog:
@@ -404,17 +404,17 @@ and listing all users also displays the blogs created by each user:
 
 ![api/users embeds blogs in JSON data](../../images/4/24e.png)
 
-#### 4.18: bloglist expansion, step6
+#### 4.18: Blog List Expansion, step 6
 
 Implement token-based authentication according to part 4 chapter [Token authentication](/en/part4/token_authentication).
 
-#### 4.19: bloglist expansion, step7
+#### 4.19: Blog List Expansion, step 7
 
 Modify adding new blogs so that it is only possible if a valid token is sent with the HTTP POST request. The user identified by the token is designated as the creator of the blog.
 
-#### 4.20*: bloglist expansion, step8
+#### 4.20*: Blog List Expansion, step 8
 
-[This example](/en/part4/token_authentication) from part 4 shows taking the token from the header with the _getTokenFrom_ helper function in <i>controllers/blogs.js</i>.
+[This example](/en/part4/token_authentication#limiting-creating-new-notes-to-logged-in-users) from part 4 shows taking the token from the header with the _getTokenFrom_ helper function in <i>controllers/blogs.js</i>.
 
 If you used the same solution, refactor taking the token to a [middleware](/en/part3/node_js_and_express#middleware). The middleware should take the token from the <i>Authorization</i> header and place it into the <i>token</i> field of the <i>request</i> object.
 
@@ -444,9 +444,9 @@ const tokenExtractor = (request, response, next) => {
 }
 ```
 
-#### 4.21*: bloglist expansion, step9
+#### 4.21*: Blog List Expansion, step 9
 
-Change the delete blog operation so that a blog can be deleted only by the user who added the blog. Therefore, deleting a blog is possible only if the token sent with the request is the same as that of the blog's creator.
+Change the delete blog operation so that a blog can be deleted only by the user who added it. Therefore, deleting a blog is possible only if the token sent with the request is the same as that of the blog's creator.
 
 If deleting a blog is attempted without a token or by an invalid user, the operation should return a suitable status code.
 
@@ -456,13 +456,13 @@ Note that if you fetch a blog from the database,
 const blog = await Blog.findById(...)
 ```
 
-the field <i>blog.user</i> does not contain a string, but an Object. So if you want to compare the id of the object fetched from the database and a string id, a normal comparison operation does not work. The id fetched from the database must be parsed into a string first.
+the field <i>blog.user</i> does not contain a string, but an object. So if you want to compare the ID of the object fetched from the database and a string ID, a normal comparison operation does not work. The ID fetched from the database must be parsed into a string first.
 
 ```js
 if ( blog.user.toString() === userid.toString() ) ...
 ```
 
-#### 4.22*:  bloglist expansion, step10
+#### 4.22*: Blog List Expansion, step 10
 
 Both the new blog creation and blog deletion need to find out the identity of the user who is doing the operation. The middleware _tokenExtractor_ that we did in exercise 4.20 helps but still both the handlers of <i>post</i> and <i>delete</i> operations need to find out who the user holding a specific token is.
 
@@ -525,9 +525,9 @@ router.post('/', middleware.userExtractor, async (request, response) => {
 }
 ```
 
-#### 4.23*:  bloglist expansion, step11
+#### 4.23*: Blog List Expansion, step 11
 
-After adding token-based authentication the tests for adding a new blog broke down. Fix the tests. Also, write a new test to ensure adding a blog fails with the proper status code <i>401 Unauthorized</i> if a token is not provided.
+After adding token-based authentication the tests for adding a new blog broke down. Fix them. Also, write a new test to ensure adding a blog fails with the proper status code <i>401 Unauthorized</i> if a token is not provided.
 
 [This](https://github.com/visionmedia/supertest/issues/398) is most likely useful when doing the fix.
 

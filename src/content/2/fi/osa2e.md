@@ -306,9 +306,9 @@ Korjaa ongelma osan 2 esimerkin [promise ja virheet](/osa2/palvelimella_olevan_d
 
 Osan lopussa on vielä muutama hieman haastavampi tehtävä. Voit tässä vaiheessa jättää tehtävät tekemättä jos ne tuottavat liian paljon päänvaivaa, palaamme samoihin teemoihin uudelleen myöhemmin. Materiaali kannattanee jokatapauksessa lukea läpi.
 
-Eräs sovelluksessamme tekemä ratkaisu piilottaa yhden hyvin tyypillisen virhetilanteen, mihin tulet varmasti törmäämään monta kertaa.
+Eräs sovelluksessa tekemämme ratkaisu piilottaa yhden hyvin tyypillisen virhetilanteen, mihin tulet varmasti törmäämään monta kertaa.
 
-Alustimme muistiinpanot muistavan tilan alkuarvoksi tyhjän tauluon:
+Alustimme muistiinpanot muistavan tilan alkuarvoksi tyhjän taulukon:
 
 ```js
 const App = () => {
@@ -318,7 +318,7 @@ const App = () => {
 }
 ```
 
-Tämä on onkin luonnollinen tapa alustaa tila, muistiinpanot muodostavat joukon, joten tyhjä taulukko on luonteva alkuarvo muuttujalle.
+Tämä onkin luonnollinen tapa alustaa tila, muistiinpanot muodostavat joukon, joten tyhjä taulukko on luonteva alkuarvo muuttujalle.
 
 Niissä tilanteissa, missä tilaan talletetaan "yksi asia" tilan luonteva alkuarvo on usein _null_, joka kertoo että tilassa ei ole vielä mitään. Kokeillaan miten käy jos alustamme nyt tilan nulliksi: 
 
@@ -359,7 +359,7 @@ Muuttuja _notesToShow_ saa arvokseen tilan _notes_ arvon ja koodi yrittää kuts
 
 Mistä tämä johtuu?
 
-Efektohookki asettaa tilaan _notes_ palvelimen palauttamat muistiinpanot funktiolla _setNotes_:
+Effect-hook asettaa tilaan _notes_ palvelimen palauttamat muistiinpanot funktiolla _setNotes_:
 
 ```js
   useEffect(() => {
@@ -532,7 +532,7 @@ if (currency) {
 }
 ```
 
-joka estää valuuttakurssien hakemisen ensimmäisen renderöininin yhteydessä, eli siinä vaiheessa kuin muuttujalla _currency_ on vasta alkuarvo eli tyhjää merkkijono.
+joka estää valuuttakurssien hakemisen ensimmäisen renderöininin yhteydessä, eli siinä vaiheessa kuin muuttujalla _currency_ on vasta alkuarvo eli _null_.
 
 Jos käyttäjä siis kirjoittaa hakukenttään esim. <i>eur</i>, suorittaa sovellus Axiosin avulla HTTP GET ‑pyynnön osoitteeseen https://open.er-api.com/v6/latest/eur ja tallentaa vastauksen tilaaan _rates_. 
 
@@ -620,6 +620,8 @@ koodista päästään avaimen arvoon käsiksi olion _import.meta.env_ kautta:
 const api_key = import.meta.env.VITE_SOME_KEY
 // muuttujassa api_key on nyt käynnistyksessä annettu API-avaimen arvo
 ```
+
+Huomaa, että ympäristömuuttujan nimen täytyy alkaa merkkijonolla _VITE\__.
 
 Tämä oli osan viimeinen tehtävä ja on aika sekä puskea koodi GitHubiin että merkitä tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 

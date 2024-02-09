@@ -62,13 +62,11 @@ Tiedostot <i>App.css</i> ja <i>index.css</i> sekä hakemiston <i>assets</i> voi 
 
 ### create-react-app
 
-Voit halutessasi käyttä kurssilla Viten sijaan myös [create-react-app](https://github.com/facebookincubator/create-react-app)-nimistä sovellusta. Näkyvin ero Viteen on sovelluksen aloitustiedoston nimi, joka on <i>index.js</i>. Myös sovelluksen käynnistämistapa eroaa, käynnistäminen tapahtuu komennolla 
+Voit halutessasi käyttää kurssilla Viten sijaan myös [create-react-app](https://github.com/facebookincubator/create-react-app)-nimistä sovellusta. Näkyvin ero Viteen on sovelluksen aloitustiedoston nimi, joka on <i>index.js</i>. Myös sovelluksen käynnistämistapa eroaa, käynnistäminen tapahtuu komennolla 
 
 ```
 npm start
 ```
-
-Kurssia ollaan tällä hetkellä (11.8.2023) päivittämässä käyttämään Viteä. Joissain erimerkeissä voi vielä olla käytössä create-react-app:illa luotu sovelluspohja.
 
 ### Komponentti
 
@@ -391,7 +389,7 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
-    'react/prop-types': false // highlight-line
+    'react/prop-types': 0 // highlight-line
   },
 }
 ```

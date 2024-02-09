@@ -246,9 +246,9 @@ const App = () => {
 
 Llamamos al método [join](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/join) en el array _allClicks_ que une todos los elementos en una sola cadena, separados por la cadena pasada como parámetro de la función, que en nuestro caso es un espacio vacío.
 
-### La actualización del estado es asincrónica
+### La actualización del estado es asíncrona
 
-Ampliemos la aplicación para que realice un seguimiento del número _total_ de veces que los botones son presionados, cuyo valor siempre se actualiza cuendo se presionan los botones:
+Ampliemos la aplicación para que realice un seguimiento del número _total_ de veces que los botones son presionados, cuyo valor siempre se actualiza cuando se presionan los botones:
 
 ```js
 const App = () => {
@@ -307,7 +307,7 @@ const App = () => {
 
 La consola revela el problema
 
-![La consola mostrandos left before 4 y left after 4](../../images/1/32.png)
+![La consola mostrándonos left before 4 y left after 4](../../images/1/32.png)
 
 Aunque se estableció un nuevo valor para _left_ llamando a _setLeft(left + 1)_, el valor anterior persiste a pesar de la actualización. Como resultado, el intento de contar las pulsaciones de botones produce un resultado demasiado pequeño:
 
@@ -465,7 +465,7 @@ Antes de continuar, recordemos una de las reglas más importantes del desarrollo
 
 <h4>La primera regla de desarrollo web</h4>
 
-> **Manten la consola de desarrollador del navegador abierta en todo momento.**
+> **Mantén la consola de desarrollador del navegador abierta en todo momento.**
 >
 > La <i>Consola</i>, en particular, debería estar siempre abierta, a menos que haya una razón específica para ver otra pestaña.
 
@@ -473,7 +473,7 @@ Mantén tu código y la página web abiertos juntos **al mismo tiempo, todo el t
 
 Si tu código falla al compilarse y tu navegador se ilumina como un árbol de Navidad:
 
-![](../../images/1/6e.png)
+![Captura de pantalla de un error, apuntando a la linea de código en donde se ha generado ](../../images/1/6e.png)
 
 no escriba más código, sino busca y soluciona el problema **inmediatamente**. Aún no ha habido un momento en la historia de la codificación en el que el código que no se compila comience a funcionar milagrosamente después de escribir grandes cantidades de código adicional. Dudo mucho que tal evento ocurra durante este curso tampoco.
 
@@ -509,7 +509,7 @@ Esto revelará inmediatamente si, por ejemplo, uno de los atributos se ha escrit
 console.log('props value is ' + props)
 ```
 
-Si usas la forma similar a Java de concatenar una cadena con un objeto, terminará mostrandote un mensaje poco informativo:
+Si haces eso, terminará mostrándote un mensaje poco informativo:
 
 ```js
 props value is [Object object]
@@ -569,7 +569,7 @@ En resumen, los hooks solo se pueden llamar desde el interior de un cuerpo de la
 
 ```js
 const App = () => {
-  // estos estan bien
+  // estos están bien
   const [age, setAge] = useState(0)
   const [name, setName] = useState('Juha Tauriainen')
 
@@ -579,7 +579,7 @@ const App = () => {
   }
 
   for ( let i = 0; i < age; i++ ) {
-    // también esto no está bien
+    // esto tampoco está bien
     const [rightWay, setRightWay] = useState(false)
   }
 
@@ -621,7 +621,7 @@ Para que el botón reaccione a un evento de clic, tenemos que agregarle un <i>co
 
 Los controladores de eventos siempre deben ser una función o una referencia a una función. El botón no funcionará si el controlador de eventos se establece en una variable de cualquier otro tipo.
 
-Si definieramos el controlador de eventos como una cadena:
+Si definiéramos el controlador de eventos como una cadena:
 
 ```js
 <button onClick="crap...">button</button>
@@ -649,6 +649,7 @@ index.js:2178 Warning: Expected `onClick` listener to be a function, instead got
 ```
 
 Este intento tampoco funcionaría:
+
 ```js
 <button onClick={value = 0}>button</button>
 ```
@@ -1128,9 +1129,10 @@ Programar es difícil, por eso usaré todos los medios posibles para hacerlo má
 </div>
 
 <div class="tasks">
-  <h3> Ejercicios 1.6.-1.14.</h3>
 
-Envía tus soluciones a los ejercicios enviando primero st código a GitHub y luego marcando los ejercicios completados en el [sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+<h3> Ejercicios 1.6.-1.14.</h3>
+
+Envía tus soluciones a los ejercicios enviando primero tu código a GitHub y luego marcando los ejercicios completados en el [sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 Recuerda, envía **todos** los ejercicios de una parte **en una sola presentación**. Una vez que hayas enviado tus soluciones para una parte, **ya no podrás enviar más ejercicios a esa parte**.
 
@@ -1150,7 +1152,7 @@ ten en cuenta las cosas que se cuentan [aquí](/en/part1/introduction_to_react#d
 
   <h4>1.6: unicafe, paso 1</h4>
 
-Como la mayoría de las empresas, [Unicafe](https://www.unicafe.fi/#/9/4) recopila comentarios de sus clientes. Tu tarea es implementar una aplicación web para recopilar comentarios de los clientes. Solo hay tres opciones para los comentarios: <i>good (bueno)</i>, <i>neutral</i> y <i>bad(malo)</i>.
+Como la mayoría de las empresas, [Unicafe](https://www.unicafe.fi) recopila comentarios de sus clientes. Tu tarea es implementar una aplicación web para recopilar comentarios de los clientes. Solo hay tres opciones para los comentarios: <i>good (bueno)</i>, <i>neutral</i> y <i>bad(malo)</i>.
 
 La aplicación debe mostrar el número total de comentarios recopilados para cada categoría. Tu aplicación final podría verse así:
 
@@ -1169,7 +1171,7 @@ import App from './App'
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-Podrias usar el siguiente código como punto de partida para el archivo <i>App.jsx</i>:
+Podrías usar el siguiente código como punto de partida para el archivo <i>App.jsx</i>:
 
 ```js
 import { useState } from 'react'
@@ -1235,6 +1237,7 @@ Cambia tu aplicación para mostrar estadísticas solo una vez que se hayan recop
 Continuemos refactorizando la aplicación. Extrae los siguiente dos componentes:
 
 - <i>Button</i> para definir los botones utilizados para enviar comentarios
+
 - <i>StatisticLine</i> para mostrar una única estadística, por ejemplo, la puntuación media.
 
 Para ser claros: el componente <i>StatisticLine</i> siempre muestra una única estadística, lo que significa que la aplicación utiliza varios componentes para representar todas las estadísticas:
@@ -1260,7 +1263,7 @@ El estado de la aplicación aún debe mantenerse en el componente raíz <i>App</
 
 Muestra las estadísticas en una [tabla](https://developer.mozilla.org/es/docs/Learn/HTML/Tables/Basics) HTML, de modo que tu la aplicación se ve más o menos así:
 
-![Captura de pantalla de la tabla de estatisticas](../../images/1/16e.png)
+![Captura de pantalla de la tabla de estadísticas](../../images/1/16e.png)
 
 Recuerda mantener la consola abierta en todo momento. Si ves esta advertencia en tu consola:
 
@@ -1274,7 +1277,7 @@ Entonces realiza las acciones necesarias para que la advertencia desaparezca. In
 
 <h4>1.12*: anecdotes, paso 1</h4>
 
-El mundo de la ingeniería de software está lleno con [anécdotas](http://www.comp.nus.edu.sg/~damithch/pages/SE-quotes.htm) que destilan verdades atemporales de nuestro campo en breves frases.
+El mundo de la ingeniería de software está lleno de [anécdotas](http://www.comp.nus.edu.sg/~damithch/pages/SE-quotes.htm) que destilan verdades atemporales de nuestro campo en breves frases.
 
 Expande la siguiente aplicación agregando un botón en el que se pueda hacer clic para mostrar una anécdota <i>aleatoria</i> del campo de la ingeniería de software:
 
@@ -1307,7 +1310,7 @@ export default App
 
 El contenido del archivo <i>main.jsx</i> es el mismo de los ejercicios anteriores.
 
-Busca como generar números aleactorios en JavaScript, por ejemplo, en un buscador o en  [Mozilla Developer Network](https://developer.mozilla.org). Recuerda que puedes probar la generación de números aleatorios, por ejemplo, directamente en la consola de tu navegador.
+Busca como generar números aleatorios en JavaScript, por ejemplo, en un buscador o en [Mozilla Developer Network](https://developer.mozilla.org). Recuerda que puedes probar la generación de números aleatorios, por ejemplo, directamente en la consola de tu navegador.
 
 Tu aplicación finalizada podría verse así
 
@@ -1317,11 +1320,11 @@ Tu aplicación finalizada podría verse así
 
 Expande tu aplicación para que puedas votar por la anécdota mostrada.
 
-![Aplicación de anecdoras con un botón para votar](../../images/1/19a.png)
+![Aplicación de anécdotas con un botón para votar](../../images/1/19a.png)
 
 **Nota:** almacena los votos de cada anécdota en una matriz u objeto en el estado del componente. Recuerda que la forma correcta de actualizar el estado almacenado en estructuras de datos complejas como objetos y matrices es hacer una copia del estado.
 
-Puedes crear una copia de un objeto como este:
+Puedes crear una copia de un objeto de esta forma:
 
 ```js
 const points = { 0: 1, 1: 3, 2: 4, 3: 2 }
@@ -1331,7 +1334,7 @@ const copy = { ...points }
 copy[2] += 1
 ```
 
-O una copia de una matriz como esta:
+O una copia de una matriz de esta forma:
 
 ```js
 const points = [1, 4, 6, 3]
@@ -1341,7 +1344,7 @@ const copy = [...points]
 copy[2] += 1
 ```
 
-El uso de una matriz podría ser la opción más sencilla en este caso. Buscar en internet te proporcionará muchos consejos sobre cómo [crear una matriz llena de ceros de la longitud deseada, como ](https://stackoverflow.com/questions/20222501/how-to-create-a-zero-filled-javascript-array-of-arbitrary-length/22209781).
+El uso de una matriz podría ser la opción más sencilla en este caso. Buscar en internet te proporcionará muchos consejos sobre cómo [crear una matriz llena de ceros de la longitud deseada](https://stackoverflow.com/questions/20222501/how-to-create-a-zero-filled-javascript-array-of-arbitrary-length/22209781).
 
 <h4>1.14*: anecdotes, paso 3</h4>
 

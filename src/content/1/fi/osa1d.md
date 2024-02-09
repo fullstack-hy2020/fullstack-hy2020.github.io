@@ -295,7 +295,7 @@ Ratkaisu toimii melkein:
 
 ![](../../images/1/33.png)
 
-Jostain syystä napien painellusten yhteenlaskettu määrä näyttää koko ajan yhtä liian vähän.
+Jostain syystä nappien painallusten yhteenlaskettu määrä näyttää koko ajan yhtä liian vähän.
 
 Lisätään tapahtumankäsittelijään muutama console.log:
 
@@ -1036,9 +1036,9 @@ const App = (props) => {
   return (
     <div>
       {value}
-      <Button handleClick={setToValue(1000)} text="thousand" /> // highlight-line
-      <Button handleClick={setToValue(0)} text="reset" /> // highlight-line
-      <Button handleClick={setToValue(value + 1)} text="increment" /> // highlight-line
+      <Button handleClick={() => setToValue(1000)} text="thousand" /> // highlight-line
+      <Button handleClick={() => setToValue(0)} text="reset" /> // highlight-line
+      <Button handleClick={() => setToValue(value + 1)} text="increment" /> // highlight-line
     </div>
   )
 }

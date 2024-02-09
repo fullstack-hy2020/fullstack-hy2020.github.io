@@ -453,7 +453,7 @@ const button = screen.getByText('show...')
 await user.click(button)
 ```
 
-Käytännössä siis loimme metodin avulla <i>click</i>-tapahtuman metodin argumenttina annatulle komponentille. Voimme simuloida myös lomakkeelle kirjoittamista <i>userEventin</i>-olion avulla.
+Käytännössä siis loimme metodin avulla <i>click</i>-tapahtuman metodin argumenttina annetulle komponentille. Voimme simuloida myös lomakkeelle kirjoittamista <i>userEventin</i>-olion avulla.
 
 Tehdään testi komponentille <i>NoteForm</i>. Lomakkeen koodi näyttää seuraavalta:
 
@@ -765,7 +765,7 @@ Tee testi, joka varmistaa, että jos komponentin <i>like</i>-nappia painetaan ka
 
 #### 5.16: blogilistan testit, step4
 
-Tee uuden blogin luomisesta huolehtivalle lomakkelle testi, joka varmistaa, että lomake kutsuu propsina saamaansa takaisinkutsufunktiota oikeilla tiedoilla siinä vaiheessa kun blogi luodaan.
+Tee uuden blogin luomisesta huolehtivalle lomakkeelle testi, joka varmistaa, että lomake kutsuu propsina saamaansa takaisinkutsufunktiota oikeilla tiedoilla siinä vaiheessa kun blogi luodaan.
 
 </div>
 

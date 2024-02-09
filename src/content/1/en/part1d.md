@@ -106,8 +106,7 @@ The following object is set as the new state of the application:
 
 The new value of the <i>left</i> property is now the same as the value of <i>left + 1</i> from the previous state, and the value of the <i>right</i> property is the same as the value of the <i>right</i> property from the previous state.
 
-We can define the new state object a bit more neatly by using the [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)
-syntax that was added to the language specification in the summer of 2018:
+We can define the new state object a bit more neatly by using the [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) syntax that was added to the language specification in the summer of 2018:
 
 ```js
 const handleLeftClick = () => {
@@ -227,8 +226,7 @@ const handleLeftClick = () => {
 
 However, __don't__ do this. As mentioned previously, the state of React components like _allClicks_ must not be mutated directly. Even if mutating state appears to work in some cases, it can lead to problems that are very hard to debug.
 
-Let's take a closer look at how the clicking
-is rendered to the page:
+Let's take a closer look at how the clicking is rendered to the page:
 
 ```js
 const App = () => {
@@ -475,7 +473,7 @@ Keep both your code and the web page open together **at the same time, all the t
 
 If and when your code fails to compile and your browser lights up like a Christmas tree:
 
-![screenshot of code](../../images/1/6x.png)
+![screenshot of error pointing at the code line where it has been generated](../../images/1/6x.png)
 
 don't write more code but rather find and fix the problem **immediately**. There has yet to be a moment in the history of coding where code that fails to compile would miraculously start working after writing large amounts of additional code. I highly doubt that such an event will transpire during this course either.
   
@@ -1134,8 +1132,7 @@ Programming is hard, that is why I will use all the possible means to make it ea
 
 <h3>Exercises 1.6.-1.14.</h3>
 
-Submit your solutions to the exercises by first pushing your code to GitHub and then marking the completed exercises into
-the "my submissions" tab of the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Submit your solutions to the exercises by first pushing your code to GitHub and then marking the completed exercises into the "my submissions" tab of the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 Remember, submit **all** the exercises of one part **in a single submission**. Once you have submitted your solutions for one part, **you cannot submit more exercises to that part anymore**.
 
@@ -1239,7 +1236,7 @@ Change your application to display statistics only once feedback has been gather
 
 Let's continue refactoring the application. Extract the following two components:
 
-- <i>Button</i> Handles the functionality of each feedback submission button.
+- <i>Button</i> handles the functionality of each feedback submission button.
 
 - <i>StatisticLine</i> for displaying a single statistic, e.g. the average score.
 
@@ -1291,7 +1288,7 @@ const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
     'Adding manpower to a late software project makes it later!',
-    'The first 90 percent of the code accounts for the first 10 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
+    'The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
     'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
     'Premature optimization is the root of all evil.',
     'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',

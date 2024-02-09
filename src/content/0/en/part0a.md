@@ -341,6 +341,7 @@ Despite changes *all the submitted exercises remain valid*, and the course can b
 Recent major changes
 
 - Parts 1-9 (11th September - 5th October): Create React app replaced with Vite
+- Part 11 (16th January 2024): Example project dependencies updated
 
 ### Expanding on a previously completed course
 

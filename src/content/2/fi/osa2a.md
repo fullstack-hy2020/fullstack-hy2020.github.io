@@ -178,7 +178,7 @@ const App = (props) => {
 
 Koska <i>li</i>-tagit generoiva koodi on JavaScriptia, se tulee sijoittaa JSX-templatessa aaltosulkujen sisälle muun JavaScript-koodin tapaan.
 
-Parannetaan koodin luetteloa vielä jakamalla nuolifunktion määrittely useammalle riville:
+Parannetaan koodin luettavuutta vielä jakamalla nuolifunktion määrittely useammalle riville:
 
 ```js
 const App = (props) => {
@@ -451,7 +451,7 @@ Huomaa, että repositorion main-haarassa on myöhemmän vaiheen koodi. Tämän h
 
 ![](../../images/2/2b.png)
 
-Jos kloonaat projektin itsellesi, suorita komento _npm install_ ennen käynnistämistä eli komentoa _npm start_.
+Jos kloonaat projektin itsellesi, suorita komento _npm install_ ennen käynnistämistä eli komentoa _npm run dev_.
 
 ### Kun sovellus hajoaa
 

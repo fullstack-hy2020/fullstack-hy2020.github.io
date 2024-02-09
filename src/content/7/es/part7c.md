@@ -31,7 +31,7 @@ Instalemos el paquete con el comando:
 npm install react-bootstrap
 ```
 
-Luego agreguemos un [link para cargar la hoja de estilo CSS](https://react-bootstrap.github.io/getting-started/introduction#stylesheets) para Bootstrap dentro de la etiqueta <i>head</i> en el archivo <i>public/index.html</i> de la aplicación:
+Luego agreguemos un [link para cargar la hoja de estilo CSS](https://react-bootstrap.github.io/docs/getting-started/introduction#stylesheets) para Bootstrap dentro de la etiqueta <i>head</i> en el archivo <i>public/index.html</i> de la aplicación:
 
 ```js
 <head>
@@ -70,7 +70,7 @@ Notamos que esto ya tiene un efecto en la apariencia de la aplicación. El conte
 
 #### Tablas
 
-A continuación, hagamos algunos cambios en el componente <i>Notes</i>, para que muestre la lista de notas como una [tabla](https://getbootstrap.com/docs/4.1/content/tables/). React Bootstrap proporciona un componente [Table](https://react-bootstrap.github.io/components/table/) integrado para este propósito, por lo que no es necesario definir clases CSS por separado.
+A continuación, hagamos algunos cambios en el componente <i>Notes</i>, para que muestre la lista de notas como una [tabla](https://getbootstrap.com/docs/4.1/content/tables/). React Bootstrap proporciona un componente [Table](https://react-bootstrap.github.io/docs/components/table/) integrado para este propósito, por lo que no es necesario definir clases CSS por separado.
 
 ```js
 const Notes = (props) => (
@@ -110,7 +110,7 @@ import { Table } from 'react-bootstrap'
 
 Mejoremos el formulario en la vista de inicio de sesión con la ayuda de [formularios](https://getbootstrap.com/docs/4.1/components/forms/) Bootstrap.
 
-React Bootstrap proporciona [componentes](https://react-bootstrap.github.io/forms/overview/) integrados para crear formularios (aunque falta un poco la documentación para ellos):
+React Bootstrap proporciona [componentes](https://react-bootstrap.github.io/docs/forms/overview/) integrados para crear formularios (aunque falta un poco la documentación para ellos):
 
 ```js
 let Login = (props) => {
@@ -180,7 +180,7 @@ const App = () => {
 }
 ```
 
-Representaremos el mensaje como un componente [Alert](https://getbootstrap.com/docs/4.1/components/alerts/) de Bootstrap . Una vez más, la librería React Bootstrap nos proporciona un [componente React](https://react-bootstrap.github.io/components/alerts/) correspondiente:
+Representaremos el mensaje como un componente [Alert](https://getbootstrap.com/docs/4.1/components/alerts/) de Bootstrap . Una vez más, la librería React Bootstrap nos proporciona un [componente React](https://react-bootstrap.github.io/docs/components/alerts/) correspondiente:
 
 ```js
 <div className="container">
@@ -197,7 +197,7 @@ Representaremos el mensaje como un componente [Alert](https://getbootstrap.com/d
 
 #### Estructura de navegación
 
-Por último, modifiquemos el menú de navegación de la aplicación para usar el componente [Navbar](https://getbootstrap.com/docs/4.1/components/navbar/) de Bootstrap. La librería React Bootstrap nos proporciona [componentes incorporados coincidentes](https://react-bootstrap.github.io/components/navbar/#navbars-mobile-friendly). A través de prueba y error, terminamos con una solución que funciona a pesar de la documentación críptica:
+Por último, modifiquemos el menú de navegación de la aplicación para usar el componente [Navbar](https://getbootstrap.com/docs/4.1/components/navbar/) de Bootstrap. La librería React Bootstrap nos proporciona [componentes incorporados coincidentes](https://react-bootstrap.github.io/docs/components/navbar/#responsive-behaviors). A través de prueba y error, terminamos con una solución que funciona a pesar de la documentación críptica:
 
 ```js
 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">

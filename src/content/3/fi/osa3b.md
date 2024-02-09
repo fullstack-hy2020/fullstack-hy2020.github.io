@@ -77,7 +77,7 @@ Kymmenen vuoden ajan PaaS-ratkaisujen ykkönen on ollut [Heroku](http://heroku.c
 
 Esittelemme seuraavassa kaksi hieman uudempaa palvelua [Fly.io:n](https://fly.io/):n sekä [Renderin](https://render.com/). Molemmilla on tarjolla jonkin verran ilmaista laskenta-aikaa.
 
-Hienoinen ikävä puoli Fly.io:ssa on se, että <i>saatat</i> joutua kertomaan palvelulle luottokorttitietosi vaikka <i>et käytä</i> palvelun maksullista osaa. Renderin käyttöönotto saattaa olla jossain tapauksissa helpompaa, sillä Render ei edellytä mitään asenuksia omalle koneelle.
+Hienoinen ikävä puoli Fly.io:ssa on se, että <i>saatat</i> joutua kertomaan palvelulle luottokorttitietosi vaikka <i>et käytä</i> palvelun maksullista osaa. Renderin käyttöönotto saattaa olla jossain tapauksissa helpompaa, sillä Render ei edellytä mitään asennuksia omalle koneelle.
 
 Molempia ratkaisuja varten muutetaan tiedoston <i>index.js</i> lopussa olevaa sovelluksen käyttämän portin määrittelyä seuraavasti:
 
@@ -214,7 +214,7 @@ Minifioitu koodi ei ole miellyttävää luettavaa. Koodin alku näyttää seuraa
 
 ### Staattisten tiedostojen tarjoaminen backendistä
 
-Eräs mahdollisuus frontendin tuotantoon viemiseen on kopioida tuotantokoodi eli hakemisto <i>build</i> backendin repositorion juureen ja määritellä backend näyttämään pääsivunaan frontendin <i>pääsivu</i> eli tiedosto <i>build/index.html</i>.
+Eräs mahdollisuus frontendin tuotantoon viemiseen on kopioida tuotantokoodi eli hakemisto <i>dist</i> backendin repositorion juureen ja määritellä backend näyttämään pääsivunaan frontendin <i>pääsivu</i> eli tiedosto <i>dist/index.html</i>.
 
 Aloitetaan kopioimalla frontendin tuotantokoodi backendin alle, projektin juureen. Omalla koneellani kopiointi tapahtuu frontendin hakemistosta käsin komennolla
 
@@ -339,7 +339,7 @@ Fly.io:n tapauksessa skriptit näyttävät seuraavalta:
 ##### Huomautus Windows-käyttäjille
 Huomaa, että näistä _build:ui_:n käyttämät shell-komennot eivät toimi natiivisti Windowsilla, jonka powershell käyttää eri komentoja. Tällöin skripti olisi
 ```json
-"build:ui": "@powershell Remove-Item -Recurse -Force build && cd ../frontend && npm run build && @powershell Copy-Item build -Recurse ../backend",
+"build:ui": "@powershell Remove-Item -Recurse -Force dist && cd ../frontend && npm run build && @powershell Copy-Item dist -Recurse ../backend",
 ```
   
 Mikäli skripti ei toimi Windowsilla, tarkista, että terminaalisi sovelluskehitysympäristössäsi on Powershell eikä esimerkiksi Command Prompt. Jos olet asentanut Git Bash ‑terminaalin, tai muun Linuxia matkivan terminaalin tai ympäristön, saatat pystyä ajamaan Linuxin kaltaisia komentoja myös Windowsilla.
@@ -359,7 +359,7 @@ Renderin tapauksessa skriptit näyttävät seuraavalta:
 {
   "scripts": {
     // ...
-    "build:ui": "rm -rf build && cd ../frontend && npm run build && cp -r build ../backend",
+    "build:ui": "rm -rf dist && cd ../frontend && npm run build && cp -r dist ../backend",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push"
   }
 }
@@ -367,7 +367,7 @@ Renderin tapauksessa skriptit näyttävät seuraavalta:
 
 Skripteistä _npm run build:ui_ kääntää ui:n tuotantoversioksi ja kopioi sen.
 
-_npm run deploy:full_ sisältää edellisen lisää vaadittavat <i>git</i>-komennot versionhallinnan päivittämistä varten.
+_npm run deploy:full_ sisältää edellisen lisäksi vaadittavat <i>git</i>-komennot versionhallinnan päivittämistä varten.
 
 Huomaa, että skriptissä <i>build:ui</i> olevat polut riippuvat repositorioiden sijainnista.
 
@@ -450,7 +450,7 @@ Tee repositorion juureen tiedosto README.md ja lisää siihen linkki Internetiss
 
 Generoi frontendistä tuotantoversio ja lisää se Internetissä olevaan sovellukseesi tässä osassa esiteltyä menetelmää noudattaen.
 
-**HUOM:** eihän hakemisto <i>build</i> ole gitignoroituna projektissasi jos käytät Renderiä?
+**HUOM:** eihän hakemisto <i>dist</i> ole gitignoroituna projektissasi jos käytät Renderiä?
 
 Huolehdi myös, että frontend toimii edelleen myös paikallisesti.
 

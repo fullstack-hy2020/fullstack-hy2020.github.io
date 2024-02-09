@@ -33,7 +33,7 @@ In this part we'll be using some terms you may not be familiar with or you may n
 
 #### Branches
 
-Git allows multiple copies, streams, or versions of the code to co-exist without overwriting each other. When you first create a repository, you will be looking at the main branch (usually in Git, we call this <i>master</i> or <i>main</i>, but that does vary in older projects). This is fine if there's only one developer for a project and that developer only works on one feature at a time.
+Git allows multiple copies, streams, or versions of the code to co-exist without overwriting each other. When you first create a repository, you will be looking at the main branch (usually in Git, we call this <i>main</i> or <i>master</i>, but that does vary in older projects). This is fine if there's only one developer for a project and that developer only works on one feature at a time.
 
 Branches are useful when this environment becomes more complex. In this context, each developer can have one or more branches. Each branch is effectively a copy of the main branch with some changes that make it diverge from it. Once the feature or change in the branch is ready it can be <i>merged</i> back into the main branch, effectively making that feature or change part of the main software. In this way, each developer can work on their own set of changes and not affect any other developer until the changes are ready. 
 
@@ -113,7 +113,7 @@ There are other advantages to extending this setup:
  - If we use CI/CD with deployment every time there is a merge to the main branch, then we know that it will always work in production
  - If we only allow merges when the branch is up to date with the main branch, then we can be sure that different developers don't overwrite each other's changes
 
-Note that in this part we are assuming that the main branch (named <i>master</i> or <i>main</i>) contains the code that is running in production. There are numerous different [workflows](https://www.atlassian.com/git/tutorials/comparing-workflows) one can use with Git, e.g. in some cases, it may be a specific <i>release branch</i> that contains the code which is running in production.
+Note that in this part we are assuming that the <i>main</i> branch contains the code that is running in production. There are numerous different [workflows](https://www.atlassian.com/git/tutorials/comparing-workflows) one can use with Git, e.g. in some cases, it may be a specific <i>release branch</i> that contains the code that is running in production.
 
 ### Important principles
 

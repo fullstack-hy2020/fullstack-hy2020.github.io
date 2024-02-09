@@ -11,13 +11,13 @@ Siirrämme tässä osassa fokuksen backendiin eli palvelimella olevaan toiminnal
 
 Backendin toteutusympäristönä käytämme [Node.js](https://nodejs.org/en/):ää, joka on melkein missä vaan, erityisesti palvelimilla ja omalla koneellasikin toimiva Googlen [V8](https://developers.google.com/v8/)-JavaScript-moottoriin perustuva JavaScriptin suoritusympäristö.
 
-Kurssimateriaalia tehtäessä on ollut käytössä Node.js:n versio <i>v18.13.02</i>. Suosittelen, että omasi on vähintään yhtä tuore (ks. komentoriviltä _node -v_).
+Kurssimateriaalia tehtäessä on ollut käytössä Node.js:n versio <i>v20.11.0</i>. Suosittelen, että omasi on vähintään yhtä tuore (ks. komentoriviltä _node -v_).
 
 Kuten [osassa 1](/osa1/java_scriptia) todettiin, selaimet eivät vielä osaa kaikkia uusimpia JavaScriptin ominaisuuksia, ja siksi selainpuolen koodi täytyy kääntää eli <i>transpiloida</i> esim [Babel](https://babeljs.io/):illa. Backendissa tilanne on kuitenkin toinen, koska uusin Node hallitsee riittävissä määrin myös JavaScriptin uusia versioita, joten suoritamme Nodella kirjoittamaamme koodia suoraan ilman transpilointivaihetta.
 
 Tavoitteenamme on tehdä [osan 2](/osa2) muistiinpanosovellukseen sopiva backend. Aloitetaan kuitenkin ensin perusteiden läpikäyminen toteuttamalla perinteinen "hello world" ‑sovellus.
 
-**Huomaa**, että tässä osassa ja sen tehtävissä luotavat sovellukset eivät ole Reactia, eli emme käytä <i>create-react-app</i>-sovellusta tämän osan sovellusten rungon alustamiseen.
+**Huomaa**, että tässä osassa ja sen tehtävissä luotavat sovellukset eivät ole Reactia, eli emme käytä xwviteä tämän osan sovellusten rungon alustamiseen.
 
 Osassa 2 oli jo puhe [npm](/osa2/palvelimella_olevan_datan_hakeminen#npm):stä, eli JavaScript-projektien hallintaan liittyvästä, alun perin Node-ekosysteemistä kotoisin olevasta työkalusta. 
 
@@ -150,9 +150,9 @@ ottaa käyttöön Noden sisäänrakennetun [web-palvelimen](https://nodejs.org/d
 import http from 'http'
 ```
 
-Selaimen puolella käytetään (nykyään) ES6:n moduuleita, eli moduulit määritellään [exportilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) ja otetaan käyttöön [importilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import).
+Selaimen puolella käytetään nykyään ES6:n moduuleita, eli moduulit määritellään [exportilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) ja otetaan käyttöön [importilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import).
 
-Node.js kuitenkin käyttää ns. [CommonJS](https://en.wikipedia.org/wiki/CommonJS)-moduuleja. Syy tälle on siinä, että Node-ekosysteemillä oli tarve moduuleihin jo kauan ennen kuin JavaScript tuki moduuleja kielen tasolla. Node tukee myös ES-moduuleja, mutta koska tuki ei ole vielä kaikilta osin [täydellinen](https://nodejs.org/api/esm.html#modules-ecmascript-modules), pitäydymme CommonJS-moduuleissa.
+Node.js kuitenkin käyttää ns. [CommonJS](https://en.wikipedia.org/wiki/CommonJS)-moduuleja. Syy tälle on siinä, että Node-ekosysteemillä oli tarve moduuleihin jo kauan ennen kuin JavaScript tuki moduuleja kielen tasolla. Node tukee myös ES-moduuleja, mutta koska tuki ei ole vielä kaikilta osin täydellinen, pitäydymme CommonJS-moduuleissa.
 
 CommonJS-moduulit toimivat melko samaan tapaan kuin ES6-moduulit, ainakin tämän kurssin tarpeiden puitteissa.
 
@@ -284,12 +284,12 @@ let notes = [
   ...
 ]
 
-app.get('/', (req, res) => {
-  res.send('<h1>Hello World!</h1>')
+app.get('/', (request, response) => {
+  response.send('<h1>Hello World!</h1>')
 })
 
-app.get('/api/notes', (req, res) => {
-  res.json(notes)
+app.get('/api/notes', (request, response) => {
+  response.json(notes)
 })
 
 const PORT = 3001

@@ -17,7 +17,7 @@ Avataan selaimella [esimerkkisovellus](https://studies.cs.helsinki.fi/exampleapp
 
 Kurssimateriaali olettaa, että käytössä on Chrome-selain.
 
-**Web-sovelluskehityksen sääntö numero yksi**: pidä selaimen Developer-konsoli koko ajan auki. Konsoli avautuu Macilla painamalla yhtä aikaa _alt_ _cmd_ ja _i_. Windowsilla konsolin saa auki painamalla _F12_ tai yhtä aikaa _ctrl_ _shift_ ja _i_.
+**Web-sovelluskehityksen sääntö numero yksi**: pidä selaimen Developer-konsoli koko ajan auki. Konsoli avautuu Macilla painamalla yhtä aikaa _option_ _cmd_ ja _i_. Windowsilla konsolin saa auki painamalla _F12_ tai yhtä aikaa _ctrl_ _shift_ ja _i_.
 
 Ennen kuin jatkat eteenpäin, selvitä, miten saat koneellasi konsolin auki (googlaa tarvittaessa), ja muista pitää se auki <i>aina</i>, kun teet web-sovelluksia.
 
@@ -479,7 +479,7 @@ Ennen AJAX:in aikakautta jokainen sivu toimi aiemmassa luvussa olevan [perinteis
 
 Muistiinpanojen sivu siis lataa näytettävän datan AJAX:illa. Lomakkeen lähetys sen sijaan tapahtuu perinteisen web-lomakkeen lähetysmekanismin kautta.
 
-Sovelluksen urlit heijastavat vanhaa, huoletonta aikaa. JSON-muotoinen data haetaan urlista <https://studies.cs.helsinki.fi/exampleapp/data.json>, ja uuden muistiinpanon tiedot lähetetään urliin <https://studies.cs.helsinki.fi/exampleapp/new_note>. Nykyään näin valittuja urleja ei pidetä ollenkaan hyvinä – ne eivät noudata ns. [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services)-apien yleisesti hyväksyttyjä konventioita. Käsittelemme asiaa tarkemmin [osassa 3](/osa3).
+Sovelluksen urlit heijastavat vanhaa, huoletonta aikaa. JSON-muotoinen data haetaan urlista <https://studies.cs.helsinki.fi/exampleapp/data.json>, ja uuden muistiinpanon tiedot lähetetään urliin <https://studies.cs.helsinki.fi/exampleapp/new_note>. Nykyään näin valittuja urleja ei pidetä ollenkaan hyvinä – ne eivät noudata ns. [RESTful](https://en.wikipedia.org/wiki/REST#Applied_to_web_services)-apien yleisesti hyväksyttyjä konventioita. Käsittelemme asiaa tarkemmin [osassa 3](/osa3).
 
 AJAXiksi kutsuttu asia on arkipäiväistynyt ja muuttunut itsestäänselvyydeksi. Koko termi on hiipunut unholaan, ja nuori polvi ei ole sitä edes ikinä kuullut.
 
@@ -506,7 +506,7 @@ Avaa nyt <i>Network</i>-välilehti ja tyhjennä se &#x29B8;-symbolilla. Kun luot
 
 ![](../../images/0/26e.png)
 
-Pyyntö kohdistuu osoitteeseen <i>new_note_spa</i>, on tyypiltään POST ja se sisältää JSON-muodossa olevan uuden muistiinpanon, johon kuuluu sekä sisältö (<i>content</i>) että aikaleima (<i>date</i>):
+Pyyntö kohdistuu osoitteeseen <i>new\_note\_spa</i>, on tyypiltään POST ja se sisältää JSON-muodossa olevan uuden muistiinpanon, johon kuuluu sekä sisältö (<i>content</i>) että aikaleima (<i>date</i>):
 
 ```js
 {
@@ -521,7 +521,7 @@ Pyyntöön liitetty headeri <i>Content-Type</i> kertoo palvelimelle, että pyynn
 
 Ilman headeria palvelin ei osaisi parsia pyynnön mukana tulevaa dataa oikein.
 
-Palvelin vastaa kyselyyn statuskoodilla [201 created](https://httpstatuses.com/201). Tällä kertaa palvelin ei pyydä uudelleenohjausta kuten aiemmassa versiossamme. Selain pysyy samalla sivulla, ja muita HTTP-pyyntöjä ei suoriteta.
+Palvelin vastaa kyselyyn statuskoodilla [201 created](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201). Tällä kertaa palvelin ei pyydä uudelleenohjausta kuten aiemmassa versiossamme. Selain pysyy samalla sivulla, ja muita HTTP-pyyntöjä ei suoriteta.
 
 Ohjelman Single Page App ‑versiossa lomakkeen tietoja ei lähetetä selaimen normaalin lomakkeiden lähetysmekanismin avulla. Lähettämisen hoitaa selaimen lataamassa JavaScript-tiedostossa määritelty koodi. Katsotaan hieman koodia, vaikka yksityiskohdista ei tarvitse nytkään välittää liikaa.
 
@@ -563,7 +563,7 @@ var sendToServer = function(note) {
 
 Koodissa siis määritellään, että kyse on HTTP POST ‑pyynnöstä, että headerin <i>Content-type</i> avulla lähetettävän datan tyyppi on JSON ja että data lähetetään JSON-merkkijonona.
 
-Sovelluksen koodi on osoitteessa <https://github.com/mluukkai/example_app>. Kannattaa huomata, että sovellus on tarkoitettu ainoastaan kurssin käsitteistöä demonstroivaksi esimerkiksi. Koodi on osin tyyliltään huonoa, ja siitä ei tule ottaa mallia omia sovelluksia tehdessä. Sama koskee käytettyjä urleja, Single Page App ‑tyyliä noudattavan sivun käyttämä uusien muistiinpanojen kohdeosoite <i>new_note_spa</i> ei noudata nykyisin suositeltavia käytäntöjä.
+Sovelluksen koodi on osoitteessa <https://github.com/mluukkai/example_app>. Kannattaa huomata, että sovellus on tarkoitettu ainoastaan kurssin käsitteistöä demonstroivaksi esimerkiksi. Koodi on osin tyyliltään huonoa, ja siitä ei tule ottaa mallia omia sovelluksia tehdessä. Sama koskee käytettyjä urleja, Single Page App ‑tyyliä noudattavan sivun käyttämä uusien muistiinpanojen kohdeosoite <i>new\_note\_spa</i> ei noudata nykyisin suositeltavia käytäntöjä.
 
 ### JavaScript-kirjastot
 
@@ -585,7 +585,7 @@ Reactin asema näyttää tällä hetkellä vahvalta, mutta JavaScript-maailma ei
 
 Mitä tarkoitetaan kurssin nimellä <i>Full stack ‑web-sovelluskehitys</i>? Full stack on hypenomainen termi – kaikki puhuvat siitä, mutta kukaan ei oikein tiedä, mitä se tarkoittaa, tai ainakaan mitään yhteneväistä määritelmää termille ei ole.
 
-Käytännössä kaikki web-sovellukset sisältävät (ainakin) kaksi "kerrosta" ylempänä eli lähempänä loppukäyttäjää olevan selaimen ja alla olevan palvelimen. Palvelimen alapuolella on usein vielä tietokanta. Näin websovelluksen <i>arkkitehtuurin</i> voi ajatella muodostavan pinon, englanniksi <i>stack</i>.
+Käytännössä kaikki web-sovellukset sisältävät (ainakin) kaksi "kerrosta". Ylin kerros on lähempänä loppukäyttäjää oleva selain, joka suorittaa JavaScript-koodin ja renderöi sovelluksen HTML:n. Alempi kerros taas on sivuston tiedostot sisältämä palvelin. Palvelimen alapuolella on usein vielä tietokanta. Näin websovelluksen <i>arkkitehtuurin</i> voi ajatella muodostavan pinon, englanniksi <i>stack</i>.
 
 Web-sovelluskehityksen yhteydessä puhutaan usein myös "frontista" ([frontend](https://en.wikipedia.org/wiki/Front_and_back_ends)) ja "backistä" ([backend](https://en.wikipedia.org/wiki/Front_and_back_ends)). Selain on frontend, ja selaimessa suoritettava JavaScript on frontend-koodia. Palvelimella taas pyörii backend-koodi.
 
@@ -687,7 +687,7 @@ Kirjoita tarvittaessa palvelimella tai selaimessa tapahtuvat operaatiot sopivina
 
 Kaavion ei ole pakko olla sekvenssikaavio. Mikä tahansa järkevä kuvaustapa käy.
 
-Voit tehdä kaaviot, millä ohjelmistolla haluat, mutta suositeltava tapa on tehdä ne suoraan GitHubiin Markdown- eli md-päätteisiksi tiedostoiksi käyttäen [Mermaid](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams)-syntaksia.
+Voit tehdä kaaviot millä ohjelmistolla haluat, mutta suositeltava tapa on tehdä ne suoraan GitHubiin Markdown- eli md-päätteisiksi tiedostoiksi käyttäen [Mermaid](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams)-syntaksia.
 
 Kaikki oleellinen tieto tämän ja seuraavien kahden tehtävän tekemiseen on [tässä osassa](../osa0). Näiden tehtävien ideana on, että luet tekstin vielä kerran ja mietit tarkkaan, mitä missäkin tapahtuu. Ohjelman [koodin](https://github.com/mluukkai/example_app) lukemista ei näissä tehtävissä edellytetä, vaikka sekin on toki mahdollista.
 

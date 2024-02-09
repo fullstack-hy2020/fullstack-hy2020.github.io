@@ -254,7 +254,7 @@ Selitys on kokonaisuudessaan seuraava
 
 Funktion <i>createStore</i> sijaan siis suositellaan käytettäväksi hieman "kehittyneempää" funktiota <i>configureStore</i>, ja mekin tulemme ottamaan sen käyttöömme kun olemme ottaneet Reduxin perustoiminnallisuuden haltuun.
 
-Sivuhuomio: <i>createStore</i> on määritelty olevan "deprecated", joka yleensä tarkoittaa sitä, että ominaisuus tulee poistumaan kirjaston jossain uudemmassa versiossa. Yllä oleva selitys ja [tämäkin](https://stackoverflow.com/questions/71944111/redux-createstore-is-deprecated-cannot-get-state-from-getstate-in-redux-ac) keskustelu paljastavat, että <i>createStore</i> ei tule poistumaan, ja sille onkin annettu ehkä hieman virheellisin perustein status <i>deprecated</i>. Funktio ei siis ole vanhentunut, mutta nykyään on olemassa suositeltavampi, uusi tapa tehdä suunilleen sama asia.
+Sivuhuomio: <i>createStore</i> on määritelty olevan "deprecated", joka yleensä tarkoittaa sitä, että ominaisuus tulee poistumaan kirjaston jossain uudemmassa versiossa. Yllä oleva selitys ja [tämäkin](https://stackoverflow.com/questions/71944111/redux-createstore-is-deprecated-cannot-get-state-from-getstate-in-redux-ac) keskustelu paljastavat, että <i>createStore</i> ei tule poistumaan, ja sille onkin annettu ehkä hieman virheellisin perustein status <i>deprecated</i>. Funktio ei siis ole vanhentunut, mutta nykyään on olemassa suositeltavampi, uusi tapa tehdä suunnilleen sama asia.
 
 ### Redux-muistiinpanot
 

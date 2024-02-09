@@ -379,18 +379,6 @@ userSchema.plugin(uniqueValidator) // highlight-line
 // ...
 ```
 
-Nota: ao instalar a biblioteca mongoose-unique-validator, você pode encontrar a seguinte mensagem de erro:
-
-![mensagem erro instalacao biblioteca](../../images/4/uniq.png)
-
-A razão para isso é que a biblioteca ainda não é compatível com a versão 7 do Mongoose no momento da redação (13 de março de 2023). Se você encontrar um erro, poderá fazer o downgrade para uma versão mais antiga do Mongoose executando o comando
-
-```js
-npm install mongoose@7.6.5
-```
-
-Depois disso, você pode instalar a biblioteca mongoose-unique-validator sem problemas.
-
 Também poderíamos implementar outras validações na criação do usuário. Poderíamos verificar se o nome de usuário é longo o suficiente, se o nome de usuário consiste apenas em caracteres permitidos ou se a senha é forte o suficiente. A implementação dessas funcionalidades é deixada como um exercício opcional.
 
 Antes de prosseguirmos, vamos adicionar uma implementação inicial de um manipulador de rota que retorna todos os usuários do banco de dados:

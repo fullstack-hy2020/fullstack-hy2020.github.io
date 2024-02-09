@@ -349,7 +349,7 @@ const App = () => {
 export default App
 ```
 
-Nous pourrions aller plus loin dans notre mise en œuvre. Lorsque le composant <i>App</i> utilise les fonctions, il reçoit un objet contenant la réponse complète à la requête HTTP :
+Nous pourrions aller plus loin dans notre mise en oeuvre. Lorsque le composant <i>App</i> utilise les fonctions, il reçoit un objet contenant la réponse complète à la requête HTTP :
 
 ```js
 noteService
@@ -481,7 +481,7 @@ Tout cela est assez compliqué et tenter de l'expliquer peut simplement rendre l
 
 Le livre "Async et performance" de la série de livres [Vous ne connaissez pas JS](https://github.com/getify/You-Dont-Know-JS/tree/1st-ed) [explique bien le sujet](https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/async%20%26%20performance/ch3.md), mais l'explication fait plusieurs pages.
 
-Les promises sont au cœur du développement JavaScript moderne et il est fortement recommandé d'investir un temps raisonnable pour les comprendre.
+Les promises sont au coeur du développement JavaScript moderne et il est fortement recommandé d'investir un temps raisonnable pour les comprendre.
 
 ### Syntaxe plus propre pour la définition des Object Literals
 

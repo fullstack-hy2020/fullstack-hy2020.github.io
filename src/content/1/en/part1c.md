@@ -363,7 +363,7 @@ const App = () => {
 
 It's easy to follow and track the calls made to the <i>App</i> component's render function:
 
-![screenshot of render function with dev tools](../../images/1/4e.png)
+![screenshot of rendering log on dev tools](../../images/1/4e.png)
 
 Was your browser console open? If it wasn't, then promise that this was the last time you need to be reminded about it.
 
@@ -484,7 +484,7 @@ What's going on? An event handler is supposed to be either a <i>function</i> or 
 ```
 
 the event handler is actually a <i>function call</i>. In many situations this is ok, but not in this particular situation. In the beginning, the value of the <i>counter</i> variable is 0. When React renders the component for the first time, it executes the function call <em>setCounter(0+1)</em>, and changes the value of the component's state to 1.
-This will cause the component to be re-rendered, React will execute the setCounter function call again, and the state will change leading to another rerender...
+This will cause the component to be re-rendered, React will execute the setCounter function call again, and the state will change leading to another re-render...
 
 Let's define the event handlers like we did before:
 
@@ -632,7 +632,7 @@ The event handler is passed to the <i>Button</i> component through the _onClick_
 React's own official [tutorial](https://react.dev/learn/tutorial-tic-tac-toe) suggests:
 "In React, it’s conventional to use onSomething names for props which take functions which handle events and handleSomething for the actual function definitions which handle those events."
 
-### Changes in state cause rerendering
+### Changes in state cause re-rendering
 
 Let's go over the main principles of how an application works once more.
 
@@ -640,9 +640,9 @@ When the application starts, the code in _App_ is executed. This code uses a [us
 This component contains the _Display_ component - which displays the counter's value, 0 - and three _Button_ components. The buttons all have event handlers, which are used to change the state of the counter.
 
 When one of the buttons is clicked, the event handler is executed. The event handler changes the state of the _App_ component with the _setCounter_ function.
-**Calling a function that changes the state causes the component to rerender.**
+**Calling a function that changes the state causes the component to re-render.**
 
-So, if a user clicks the <i>plus</i> button, the button's event handler changes the value of _counter_ to 1, and the _App_ component is rerendered.
+So, if a user clicks the <i>plus</i> button, the button's event handler changes the value of _counter_ to 1, and the _App_ component is re-rendered.
 This causes its subcomponents _Display_ and _Button_ to also be re-rendered.
 _Display_ receives the new value of the counter, 1, as props. The _Button_ components receive event handlers which can be used to change the state of the counter.
 
@@ -708,8 +708,7 @@ const Display = ({ counter }) => {
 }
 ```
 
-The function defining the component contains only the return statement, so
-we can define the function using the more compact form of arrow functions:
+The function defining the component contains only the return statement, so we can define the function using the more compact form of arrow functions:
 
 ```js
 const Display = ({ counter }) => <div>{counter}</div>

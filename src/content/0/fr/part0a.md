@@ -340,7 +340,7 @@ Ne codez pas avec nano, Notepad ou Gedit. NetBeans n'est pas non plus très bon 
 
 Installez également [Node.js](https://nodejs.org/en/). Le matériel a été réalisé avec la version 16.13.2, n'installez donc aucune version antérieure à celle-ci. Voir [Instructions d'installation de Node.js](https://nodejs.org/en/download/package-manager/).
 
-Le gestionnaire de packages de nœuds [npm](https://www.npmjs.com/get-npm) sera automatiquement installé avec Node.js. Nous utiliserons activement npm tout au long du cours. Node est également fourni avec [npx](https://www.npmjs.com/package/npx), dont nous aurons besoin plusieurs fois.
+Le gestionnaire de packages de noeuds [npm](https://www.npmjs.com/get-npm) sera automatiquement installé avec Node.js. Nous utiliserons activement npm tout au long du cours. Node est également fourni avec [npx](https://www.npmjs.com/package/npx), dont nous aurons besoin plusieurs fois.
 
 ### Fautes de frappe dans le matériel
 

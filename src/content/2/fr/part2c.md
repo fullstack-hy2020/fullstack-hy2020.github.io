@@ -139,7 +139,7 @@ Nous pourrions utiliser la fonction basée sur la promise mentionnée précédem
 
 Cela étant dit, nous utiliserons plutôt la bibliothèque [axios](https://github.com/axios/axios) pour la communication entre le navigateur et le serveur. Axios fonctionne comme fetch, mais est un peu plus agréable à utiliser. Une autre bonne raison d'utiliser axios est que nous nous familiarisons avec l'ajout de bibliothèques externes, appelées <i>packages npm</i>, aux projets React.
 
-De nos jours, pratiquement tous les projets JavaScript sont définis à l'aide du gestionnaire de packages de nœuds, alias [npm](https://docs.npmjs.com/getting-started/what-is-npm). Les projets créés à l'aide de create-react-app suivent également le format npm. Un indicateur clair qu'un projet utilise npm est le fichier <i>package.json</i> situé à la racine du projet :
+De nos jours, pratiquement tous les projets JavaScript sont définis à l'aide du gestionnaire de packages de noeuds, alias [npm](https://docs.npmjs.com/getting-started/what-is-npm). Les projets créés à l'aide de create-react-app suivent également le format npm. Un indicateur clair qu'un projet utilise npm est le fichier <i>package.json</i> situé à la racine du projet :
 
 ```json
 {

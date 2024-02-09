@@ -16,7 +16,7 @@ const createSearchConfig = (indexName, language) => {
                 letter
                 part
               }
-              id      
+              id
               rawMarkdownBody
             }
           }
@@ -43,6 +43,7 @@ const createSearchConfig = (indexName, language) => {
 const plugins = [
   createSearchConfig('finnish', 'fi'),
   createSearchConfig('english', 'en'),
+  createSearchConfig('spanish', 'es'),
   createSearchConfig('chinese', 'zh'),
   createSearchConfig('portuguese', 'ptbr'),
   {

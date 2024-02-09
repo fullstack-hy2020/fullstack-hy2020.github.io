@@ -59,7 +59,7 @@ A continuación, podemos inicializar nuestro proyecto en un directorio <i>rate-r
 expo init rate-repository-app --template expo-template-blank@sdk-38
 ```
 
-Tenga en cuenta que <em>@sdk-38</em> establece la versión <i>Expo SDK del proyecto en 38</i>, que admite <i>React Native versión 0.62</i>. El uso de otra versión de Expo SDK puede causarle problemas al seguir este material. Además, Expo tiene pocas limitaciones en comparación con React Native CLI, más sobre ellas [aquí](https://docs.expo.io/introduction/why-not-expo/). Sin embargo, estas limitaciones no tienen ningún efecto sobre la aplicación implementada en el material.
+Tenga en cuenta que <em>@sdk-38</em> establece la versión <i>Expo SDK del proyecto en 38</i>, que admite <i>React Native versión 0.62</i>. El uso de otra versión de Expo SDK puede causarle problemas al seguir este material. Además, Expo tiene pocas limitaciones en comparación con React Native CLI, más sobre ellas [aquí](https://docs.expo.dev/faq/#limitations). Sin embargo, estas limitaciones no tienen ningún efecto sobre la aplicación implementada en el material.
 
 Ahora que nuestra aplicación se ha inicializado, abra el directorio <i>rate-repository-app</i> creado con un editor como [Visual Studio Code](https://code.visualstudio.com/). La estructura debería ser más o menos la siguiente:
 

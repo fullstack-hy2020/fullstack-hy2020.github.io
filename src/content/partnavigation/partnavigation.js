@@ -261,7 +261,7 @@ module.exports = {
     },
     '3': {
       a: 'Node.js y Express',
-      b: 'Implementación de la aplicación en Internet',
+      b: 'Despliegue de la aplicación a Internet',
       c: 'Guardando datos en MongoDB',
       d: 'Validación y ESLint',
     },
@@ -269,7 +269,7 @@ module.exports = {
       a: 'Estructura de la aplicación backend, introducción a las pruebas',
       b: 'Probando el backend',
       c: 'Administración de usuarios',
-      d: 'Autenticación de token',
+      d: 'Autenticación basada en token',
     },
     '5': {
       a: 'Iniciar sesión en la interfaz',

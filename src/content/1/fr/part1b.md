@@ -20,7 +20,7 @@ Aujourd'hui, la façon la plus populaire de transpiler est d'utiliser [Babel](ht
 
 Le code est écrit dans des fichiers se terminant par <i>.js</i> qui sont exécutés en émettant la commande <em>node name\_of\_file.js</em>
 
-Il est également possible d'écrire du code JavaScript dans la console Node.js, qui s'ouvre en tapant _node_ dans la ligne de commande, ainsi que dans la console de l'outil de développement du navigateur. [Les dernières révisions de Chrome gèrent assez bien les nouvelles fonctionnalités de JavaScript](http://kangax.github.io/compat-table/es2016plus/) sans transpiler le code. Vous pouvez également utiliser un outil tel que [JS Bin](https://jsbin.com/?js,console).
+Il est également possible d'écrire du code JavaScript dans la console Node.js, qui s'ouvre en tapant _node_ dans la ligne de commande, ainsi que dans la console de l'outil de développement du navigateur. [Les dernières révisions de Chrome gèrent assez bien les nouvelles fonctionnalités de JavaScript](https://compat-table.github.io/compat-table/es2016plus/) sans transpiler le code. Vous pouvez également utiliser un outil tel que [JS Bin](https://jsbin.com/?js,console).
 
 JavaScript rappelle en quelque sorte, à la fois par son nom et sa syntaxe, Java. Mais en ce qui concerne le mécanisme de base du langage, ils ne pourraient pas être plus différents. Venant d'un arrière-plan Java, le comportement de JavaScript peut sembler un peu étranger, surtout si l'on ne fait pas l'effort de rechercher ses fonctionnalités.
 
@@ -486,7 +486,7 @@ Si vous souhaitez mieux comprendre comment _this_ fonctionne en JavaScript, Inte
 
 Comme mentionné précédemment, il n'y a pas de mécanisme de classe en JavaScript comme ceux des langages de programmation orientés objet. Il existe cependant des fonctionnalités permettant de "simuler" des [classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) orientées objet.
 
-Jetons un coup d'œil à la <i>syntaxe de classe</i> qui a été introduite dans JavaScript avec ES6, qui simplifie considérablement la définition des classes (ou des choses semblables à des classes) en JavaScript.
+Jetons un coup d'oeil à la <i>syntaxe de classe</i> qui a été introduite dans JavaScript avec ES6, qui simplifie considérablement la définition des classes (ou des choses semblables à des classes) en JavaScript.
 
 Dans l'exemple suivant, nous définissons une "classe" appelée Person et deux objets Person :
 
@@ -508,7 +508,7 @@ const janja = new Person('Janja Garnbret', 22)
 janja.greet()
 ```
 
-En ce qui concerne la syntaxe, les classes et les objets créés à partir de celles-ci rappellent beaucoup les classes et objets Java. Leur comportement est également assez similaire aux objets Java. Au cœur, ce sont toujours des objets basés sur [l'héritage prototypal](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance) de JavaScript . Le type des deux objets est en fait _Object_, puisque JavaScript ne définit essentiellement que les types [Boolean, Null, Undefined, Number, String, Symbol, BigInt et Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures).
+En ce qui concerne la syntaxe, les classes et les objets créés à partir de celles-ci rappellent beaucoup les classes et objets Java. Leur comportement est également assez similaire aux objets Java. Au coeur, ce sont toujours des objets basés sur [l'héritage prototypal](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance) de JavaScript . Le type des deux objets est en fait _Object_, puisque JavaScript ne définit essentiellement que les types [Boolean, Null, Undefined, Number, String, Symbol, BigInt et Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures).
 
 L'introduction de la syntaxe de classe était un ajout controversé. Découvrez [Not Awesome: ES6 Classes](https://github.com/petsel/not-awesome-es6-classes) ou [Is "Class" In ES6 The New "Bad" Part ? sur Medium](https://medium.com/@rajaraodv/is-class-in-es6-the-new-bad-part-6c4e6fe1ee65) pour plus de détails.
 

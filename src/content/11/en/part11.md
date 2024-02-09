@@ -12,7 +12,7 @@ Doing all the above manually is a pain and doesn’t scale well for a larger tea
 
 This module was crafted by the Engineering Team at Smartly.io. At Smartly.io, we automate every step of social advertising to unlock greater performance and creativity. We make every day of advertising easy, effective, and enjoyable for more than 650 brands worldwide, including eBay, Uber, and Zalando. We are one of the early adopters of GitHub Actions in wide-scale production use. Contributors: [Anna Osipova](https://www.linkedin.com/in/a-osipova/), [Anton Rautio](https://www.linkedin.com/in/anton-rautio-768190145/), [Mircea Halmagiu](https://www.linkedin.com/in/mhalmagiu/), [Tomi Hiltunen](https://www.linkedin.com/in/tomihiltunen/).
 
-<i>Part updated 26th March 2023</i>
-- <i>Added instructions for [https://render.com/](https://render.com/) hosting platform</i>
+<i>Part updated 16th January 2024</i>
+- <i>Example project dependencies updated</i>
 
 </div>

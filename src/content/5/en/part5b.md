@@ -359,7 +359,7 @@ branch <i>part5-5</i>.
 
 Our current implementation is quite good; it has one aspect that could be improved.
 
-After a new note is created, it would make sense to hide the new note form. Currently, the form stays visible. There is a slight problem with hiding the form. The visibility is controlled with the <i>visible</i> variable inside of the <i>Togglable</i> component. How can we access it outside of the component?
+After a new note is created, it would make sense to hide the new note form. Currently, the form stays visible. There is a slight problem with hiding the form. The visibility is controlled with the <i>visible</i> state variable inside of the <i>Togglable</i> component. How can we access it outside of the component?
 
 There are many ways to implement closing the form from the parent component, but let's use the [ref](https://react.dev/learn/referencing-values-with-refs) mechanism of React, which offers a reference to the component.
 
@@ -530,7 +530,7 @@ The form closes when a new blog is created.
 
 Separate the form for creating a new blog into its own component (if you have not already done so), and move all the states required for creating a new blog to this component.
 
-The component must work like the <i>NoteForm</i> component from the [material](/en/part5/props_children_and_proptypes) of this part.
+The component must work like the <i>NoteForm</i> component from the [material](/en/part5/props_children_and_proptypes#state-of-the-forms) of this part.
 
 #### 5.7 Blog list frontend, step7
 
@@ -781,7 +781,7 @@ Now the directories <em>dist</em> and <em>node_modules</em> will be skipped when
 As usual, you can perform the linting either from the command line with the command
 
 ```bash
-npm run Lint
+npm run lint
 ```
 
 or using the editor's Eslint plugin.

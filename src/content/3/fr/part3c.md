@@ -7,7 +7,7 @@ lang: fr
 
 <div class="content">
 
-Avant de passer au sujet principal de la persistance des données dans une base de données, nous allons jeter un coup d'œil à quelques façons différentes de déboguer les applications Node.
+Avant de passer au sujet principal de la persistance des données dans une base de données, nous allons jeter un coup d'oeil à quelques façons différentes de déboguer les applications Node.
 
 ### Débogage des applications Node
 
@@ -249,7 +249,7 @@ note.save().then(result => {
 
 Lorsque l'objet est enregistré dans la base de données, le gestionnaire d'événements fourni à _then_ est appelé. Le gestionnaire d'événements ferme la connexion à la base de données avec la commande <code>mongoose.connection.close()</code>. Si la connexion n'est pas fermée, le programme ne terminera jamais son exécution.
 
-Le résultat de l'opération de sauvegarde se trouve dans le paramètre _result_ du gestionnaire d'événements. Le résultat n'est pas très intéressant lorsque nous stockons un seul objet dans la base de données. Vous pouvez imprimer l'objet sur la console si vous souhaitez l'examiner de plus près lors de la mise en œuvre de votre application ou pendant le débogage.
+Le résultat de l'opération de sauvegarde se trouve dans le paramètre _result_ du gestionnaire d'événements. Le résultat n'est pas très intéressant lorsque nous stockons un seul objet dans la base de données. Vous pouvez imprimer l'objet sur la console si vous souhaitez l'examiner de plus près lors de la mise en oeuvre de votre application ou pendant le débogage.
 
 Prenons également quelques notes supplémentaires en modifiant les données dans le code et en exécutant à nouveau le programme.
 
@@ -286,7 +286,7 @@ Note.find({ important: true }).then(result => {
 
 </div>
 
-<div class="tâches">
+<div class="tasks">
 
 ### Exercice 3.12.
 
@@ -372,6 +372,9 @@ Commençons rapidement en copiant-collant les définitions de Mongoose dans le f
 
 ```js
 const mongoose = require('mongoose')
+
+// Assigns the second command line argument to 'password'
+ const password = process.argv[2];
 
 // DO NOT SAVE YOUR PASSWORD TO GITHUB!!
 const url =
@@ -727,7 +730,7 @@ Ce n'est jamais une mauvaise idée d'imprimer l'objet qui a causé l'exception s
 
 La raison pour laquelle le gestionnaire d'erreurs est appelé peut être complètement différente de ce que vous aviez prévu. Si vous consignez l'erreur dans la console, vous vous épargnerez de longues et frustrantes sessions de débogage. En outre, la plupart des services modernes sur lesquels vous déployez votre application prennent en charge une certaine forme de système de journalisation que vous pouvez utiliser pour vérifier ces journaux. Comme nous l'avons mentionné, Heroku en est un.
 
-Chaque fois que vous travaillez sur un projet avec un backend, <i>il est essentiel de garder un œil sur la sortie console du backend</i>. Si vous travaillez sur un petit écran, il suffit de voir une toute petite tranche de la sortie en arrière-plan. Tout message d'erreur attirera votre attention même si la console est loin en arrière-plan :
+Chaque fois que vous travaillez sur un projet avec un backend, <i>il est essentiel de garder un oeil sur la sortie console du backend</i>. Si vous travaillez sur un petit écran, il suffit de voir une toute petite tranche de la sortie en arrière-plan. Tout message d'erreur attirera votre attention même si la console est loin en arrière-plan :
 
 ![](../../images/3/15b.png)
 

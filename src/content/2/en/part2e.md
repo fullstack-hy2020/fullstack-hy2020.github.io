@@ -243,7 +243,7 @@ const Footer = () => {
   return (
     <div style={footerStyle}>
       <br />
-      <em>Note app, Department of Computer Science, University of Helsinki 2023</em>
+      <em>Note app, Department of Computer Science, University of Helsinki 2024</em>
     </div>
   )
 }
@@ -282,15 +282,15 @@ The code of the final version of our application can be found in the  <i>part2-8
 
 <h3>Exercises 2.16.-2.17.</h3>
 
-<h4>2.16: Phonebook step11</h4>
+<h4>2.16: Phonebook step 11</h4>
 
 Use the [improved error message](/en/part2/adding_styles_to_react_app#improved-error-message) example from part 2 as a guide to show a notification that lasts for a few seconds after a successful operation is executed (a person is added or a number is changed):
 
 ![successful green added screenshot](../../images/2/27e.png)
 
-<h4>2.17*: Phonebook step12</h4>
+<h4>2.17*: Phonebook step 12</h4>
 
-Open your application in two browsers. **If you delete a person in browser 1** a short while before attempting to <i>change the person's phone number</i> in browser 2, you will get the following 2 error messages:
+Open your application in two browsers. **If you delete a person in browser 1** a short while before attempting to <i>change the person's phone number</i> in browser 2, you will get the following error messages:
 
 ![error message 404 not found when changing multiple browsers](../../images/2/29b.png)
 
@@ -383,7 +383,7 @@ const App = () => {
   // ...
 ```
 
-on the first render the following code gets executed
+on the first render the following code gets executed:
 
 ```js
 notesToShow = notes
@@ -443,7 +443,7 @@ The other thing that we still need to have a closer look is the second parameter
 
 The second parameter of <em>useEffect</em> is used to [specify how often the effect is run](https://react.dev/reference/react/useEffect#parameters). The principle is that the effect is always executed after the first render of the component <i>and</i> when the value of the second parameter changes.
 
-If the second parameter is an empty array <em>[]</em>, it's content never changes and the effect is only run after the first render of the component. This is exactly what we want when we are initializing the app state from the server.
+If the second parameter is an empty array <em>[]</em>, its content never changes and the effect is only run after the first render of the component. This is exactly what we want when we are initializing the app state from the server.
 
 However, there are situations where we want to perform the effect at other times, e.g. when the state of the component changes in a particular way.
 
@@ -565,7 +565,7 @@ However, there are situations where that technique would not work. For example, 
 
 <h3>Exercises 2.18.-2.20.</h3>
 
-<h4>2.18* Data for countries, step1</h4>
+<h4>2.18* Data for countries, step 1</h4>
 
 At [https://studies.cs.helsinki.fi/restcountries/](https://studies.cs.helsinki.fi/restcountries/) you can find a service that offers a lot of information related to different countries in a so-called machine-readable format via the REST API. Make an application that allows you to view information from different countries.
 
@@ -585,7 +585,7 @@ When there is only one country matching the query, then the basic data of the co
 
 **NB**: It is enough that your application works for most countries. Some countries, like <i>Sudan</i>, can be hard to support since the name of the country is part of the name of another country, <i>South Sudan</i>. You don't need to worry about these edge cases.
 
-<h4>2.19*: Data for countries, step2</h4>
+<h4>2.19*: Data for countries, step 2</h4>
 
 **There is still a lot to do in this part, so don't get stuck on this exercise!**
 

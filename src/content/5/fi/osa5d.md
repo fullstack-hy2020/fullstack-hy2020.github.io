@@ -1116,7 +1116,7 @@ describe('Blog app', function() {
 
 #### 5.19: blogilistan end to end ‑testit, step3
 
-Tee testi, joka varmistaa, että kirjaantunut käyttäjä pystyy luomaan blogin. Testin runko voi näyttää seuraavalta
+Tee testi, joka varmistaa, että kirjautunut käyttäjä pystyy luomaan blogin. Testin runko voi näyttää seuraavalta
 
 ```js 
 describe('Blog app', function() {

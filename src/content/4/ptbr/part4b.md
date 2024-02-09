@@ -580,7 +580,7 @@ const initialNotes = [
 const nonExistingId = async () => {
   const note = new Note({ content: 'willremovethissoon' })
   await note.save()
-  await note.remove()
+  await note.deleteOne()
 
   return note._id.toString()
 }

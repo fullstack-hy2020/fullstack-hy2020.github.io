@@ -9,8 +9,7 @@ lang: en
 
 We will now start getting familiar with probably the most important topic of this course, namely the [React](https://react.dev/) library. Let's start by making a simple React application as well as getting to know the core concepts of React.
 
-The easiest way to get started by far is by using a tool called 
-[Vite](https://vitejs.dev/).
+The easiest way to get started by far is by using a tool called [Vite](https://vitejs.dev/).
 
 Let's create an application called <i>part1</i>, navigate to its directory and install the libraries:
 
@@ -35,13 +34,13 @@ npm run dev
 
 The console says that the application has started on localhost port 5173, i.e. the address <http://localhost:5173/>:
 
-![](../../images/1/1-vite1.png)
+![screenshot of the console running vite on localhost 5173](../../images/1/1-vite1.png)
 
 Vite starts the application [by default](https://vitejs.dev/config/server-options.html#server-port) on port 5173. If it is not free, Vite uses the next free port number.
 
 Open the browser and a text editor so that you can view the code as well as the webpage at the same time on the screen:
 
-![](../../images/1/1-vite4.png)
+![screenshot of vite initial webpage and file structure on vs code](../../images/1/1-vite4.png)
 
 The code of the application resides in the <i>src</i> folder. Let's simplify the default code such that the contents of the file main.jsx looks like this:
 
@@ -84,9 +83,6 @@ in contrast to Vite's
 ```
 npm run dev 
 ```
-
-
-The course is currently (11 August 2023) being updated to use Vite. Some brands may still use the application base created with create-react-app.
 
 ### Component
 
@@ -388,7 +384,7 @@ Software development is hard. It gets even harder if one is not using all the po
 
 Depending on the editor you are using, you may receive the following error message at this point:
 
-![](../../images/1/1-vite5.png)
+![screenshot of vs code showing eslint error: "name is missing in props validation"](../../images/1/1-vite5.png)
 
 It's not an actual error, but a warning caused by the [ESLint](https://eslint.org/) tool. You can silence the warning [react/prop-types](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md) by adding to the file <i>.eslintrc .cjs</i> the next line
 
