@@ -269,7 +269,7 @@ module.exports = {
       a: 'Estructura de la aplicación backend, introducción a las pruebas',
       b: 'Probando el backend',
       c: 'Administración de usuarios',
-      d: 'Autenticación de token',
+      d: 'Autenticación basada en token',
     },
     '5': {
       a: 'Iniciar sesión en la interfaz',

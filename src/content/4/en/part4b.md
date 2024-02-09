@@ -77,7 +77,7 @@ We can create our separate test database in MongoDB Atlas. This is not an optima
 
 It would be better to run our tests using a database that is installed and running on the developer's local machine. The optimal solution would be to have every test execution use a separate database. This is "relatively simple" to achieve by [running Mongo in-memory](https://docs.mongodb.com/manual/core/inmemory/) or by using [Docker](https://www.docker.com) containers. We will not complicate things and will instead continue to use the MongoDB Atlas database.
 
-Let's make some changes to the module that defines the application's configuration:
+Let's make some changes to the module that defines the application's configuration in _utils/config.js_:
 
 ```js
 require('dotenv').config()
@@ -176,12 +176,11 @@ afterAll(async () => {
 
 When running your tests you may run across the following console warning:
 
-![jest console warning about not exiting](../../images/4/8.png)
+![jest console warning about not exiting after test execution](../../images/4/8.png)
 
 The problem is quite likely caused by the Mongoose version 6.x, the problem does not appear when version 5.x or 7.x is used. [Mongoose documentation](https://mongoosejs.com/docs/jest.html) does not recommend testing Mongoose applications with Jest.
 
-[One way](https://stackoverflow.com/questions/50687592/jest-and-mongoose-jest-has-detected-opened-handles) to get rid of this is to
-add to the directory <i>tests</i> a file <i>teardown.js</i> with the following content
+[One way](https://stackoverflow.com/questions/50687592/jest-and-mongoose-jest-has-detected-opened-handles) to get rid of this is to add to the directory <i>tests</i> a file <i>teardown.js</i> with the following content
 
 ```js
 module.exports = () => {
@@ -209,7 +208,7 @@ test('notes are returned as json', async () => {
     .get('/api/notes')
     .expect(200)
     .expect('Content-Type', /application\/json/)
-}, 100000)
+}, 100000) // highlight-line
 ```
   
 This third parameter sets the timeout to 100000 ms. A long timeout ensures that our test won't fail due to the time it takes to run. (A long timeout may not be what you want for tests based on performance or speed, but this is fine for our example tests).
@@ -302,7 +301,7 @@ module.exports = {
 
 ### Initializing the database before tests
 
-Testing appears to be easy and our tests are currently passing. However, our tests are bad as they are dependent on the state of the database, that now  happens to have two notes. To make our tests more robust, we have to reset the database and generate the needed test data in a controlled manner before we run the tests.
+Testing appears to be easy and our tests are currently passing. However, our tests are bad as they are dependent on the state of the database, that now  happens to have two notes. To make them more robust, we have to reset the database and generate the needed test data in a controlled manner before we run the tests.
 
 Our tests are already using the [afterAll](https://jestjs.io/docs/api#afterallfn-timeout) function of Jest to close the connection to the database after the tests are finished executing. Jest offers many other [functions](https://jestjs.io/docs/setup-teardown) that can be used for executing operations once before any test is run or every time before a test is run.
 
@@ -1002,13 +1001,13 @@ Full stack development is <i> extremely hard</i>, that is why I will use all the
 
 - I will have my browser developer console open all the time
 - I will use the network tab of the browser dev tools to ensure that frontend and backend are communicating as I expect
-- I will constantly keep an eye on the state of the server to make sure that the data sent there by the frontend is saved there as I expect
+- I will constantly keep an eye on the state of the server to make sure that the data sent there by the frontend is saved as I expect
 - I will keep an eye on the database: does the backend save data there in the right format
 - I will progress in small steps
 - <i>I will write lots of _console.log_ statements to make sure I understand how the code and the tests behave and to help pinpoint problems</i>
 - If my code does not work, I will not write more code. Instead, I start deleting the code until it works or just return to a state when everything was still working
 - <i>If a test does not pass, I make sure that the tested functionality for sure works in the application</i>
-- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](https://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord-telegram) how to ask for help
+- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](/en/part0/general_info#how-to-get-help-in-discord-telegram) how to ask for help
 
 </div>
 
@@ -1020,7 +1019,7 @@ Full stack development is <i> extremely hard</i>, that is why I will use all the
 
 **Warning:** If you find yourself using async/await and <i>then</i> methods in the same code, it is almost guaranteed that you are doing something wrong. Use one or the other and don't mix the two.
 
-#### 4.8: Blog list tests, step1
+#### 4.8: Blog List Tests, step 1
 
 Use the supertest package for writing a test that makes an HTTP GET request to the <i>/api/blogs</i> URL. Verify that the blog list application returns the correct amount of blog posts in the JSON format.
 
@@ -1032,8 +1031,7 @@ Notice that you will have to make similar changes to the code that were made [in
 
 ![Warning to read docs on connecting mongoose to jest](../../images/4/8a.png)
 
-[One way](https://stackoverflow.com/questions/50687592/jest-and-mongoose-jest-has-detected-opened-handles) to get rid of this is to
-add to the <i>tests</i> directory a file <i>teardown.js</i> with the following content
+[One way](https://stackoverflow.com/questions/50687592/jest-and-mongoose-jest-has-detected-opened-handles) to get rid of this is to add to the <i>tests</i> directory a file <i>teardown.js</i> with the following content
 
 ```js
 module.exports = () => {
@@ -1053,27 +1051,27 @@ and by extending the Jest definitions in the <i>package.json</i> as follows
 }
 ```
 
-**NB:** when you are writing your tests **<i>it is better to not execute all of your tests</i>**, only execute the ones you are working on. Read more about this [here](/en/part4/testing_the_backend#running-tests-one-by-one).
+**NB:** when you are writing your tests **<i>it is better to not execute them all</i>**, only execute the ones you are working on. Read more about this [here](/en/part4/testing_the_backend#running-tests-one-by-one).
 
-#### 4.9: Blog list tests, step2
+#### 4.9: Blog List Tests, step 2
 
 Write a test that verifies that the unique identifier property of the blog posts is named <i>id</i>, by default the database names the property <i>_id</i>. Verifying the existence of a property is easily done with Jest's [toBeDefined](https://jestjs.io/docs/en/expect#tobedefined) matcher.
 
 Make the required changes to the code so that it passes the test. The [toJSON](/en/part3/saving_data_to_mongo_db#connecting-the-backend-to-a-database) method discussed in part 3 is an appropriate place for defining the <i>id</i> parameter.
 
-#### 4.10: Blog list tests, step3
+#### 4.10: Blog List Tests, step 3
 
 Write a test that verifies that making an HTTP POST request to the <i>/api/blogs</i> URL successfully creates a new blog post. At the very least, verify that the total number of blogs in the system is increased by one. You can also verify that the content of the blog post is saved correctly to the database.
 
 Once the test is finished, refactor the operation to use async/await instead of promises.
 
-#### 4.11*: Blog list tests, step4
+#### 4.11*: Blog List Tests, step 4
 
 Write a test that verifies that if the <i>likes</i> property is missing from the request, it will default to the value 0. Do not test the other properties of the created blogs yet.
 
 Make the required changes to the code so that it passes the test.
 
-#### 4.12*: Blog list tests, step5
+#### 4.12*: Blog List tests, step 5
 
 Write tests related to creating new blogs via the <i>/api/blogs</i> endpoint, that verify that if the <i>title</i> or <i>url</i> properties are missing from the request data, the backend responds to the request with the status code <i>400 Bad Request</i>.
 
@@ -1223,7 +1221,7 @@ afterAll(async () => {
 })
 ```
 
-The test output is grouped according to the <i>describe</i> blocks:
+The test output in the console is grouped according to the <i>describe</i> blocks:
 
 ![jest output showing grouped describe blocks](../../images/4/7.png)
 
@@ -1239,7 +1237,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 ### Exercises 4.13.-4.14.
 
-#### 4.13 Blog list expansions, step1
+#### 4.13 Blog List Expansions, step 1
 
 Implement functionality for deleting a single blog post resource.
 
@@ -1247,7 +1245,7 @@ Use the async/await syntax. Follow [RESTful](/en/part3/node_js_and_express#rest)
 
 Implement tests for the functionality.
 
-#### 4.14 Blog list expansions, step2
+#### 4.14 Blog List Expansions, step 2
 
 Implement functionality for updating the information of an individual blog post.
 

@@ -417,7 +417,7 @@ Ahora, un administrador puede volver a habilitar al usuario <i>jakousa</i> reali
 }
 ```
 
-Como se señaló en [el final de la Parte 4](/es/part4/autenticacion_de_token#limitacion-de-la-creacion-de-nuevas-notas-a-los-usuarios-registrados), la forma en que implementamos la desactivación de usuarios aquí es problemática. Si el usuario está deshabilitado o no, solo se verifica en _login_, si el usuario tiene un token en el momento en que se deshabilita, el usuario puede continuar usando el mismo token, ya que no se ha establecido una vida útil para el token y el estado deshabilitado. El usuario no se comprueba al crear notas.
+Como se señaló en [el final de la Parte 4](/es/part4/autenticacion_basada_en_token#limitacion-de-la-creacion-de-nuevas-notas-a-los-usuarios-registrados), la forma en que implementamos la desactivación de usuarios aquí es problemática. Si el usuario está deshabilitado o no, solo se verifica en _login_, si el usuario tiene un token en el momento en que se deshabilita, el usuario puede continuar usando el mismo token, ya que no se ha establecido una vida útil para el token y el estado deshabilitado. El usuario no se comprueba al crear notas.
 
 Antes de continuar, hagamos un script npm para la aplicación, que nos permita deshacer la migración anterior. Después de todo, no todo sale bien la primera vez cuando se desarrollan migraciones.
 
@@ -1488,7 +1488,7 @@ Desde la línea de comandos, también puede ejecutar reversiones, es decir, desh
 
 #### Ejercicio 13.24.
 
-Gran final: [hacia el final de la parte 4](/es/part4/autenticacion_de_token#limitacion-de-la-creacion-de-nuevas-notas-a-los-usuarios-registrados) se mencionó un problema crítico del token: si se decide que el acceso de un usuario al sistema revocado, el usuario aún puede usar el token en posesión para usar el sistema.
+Gran final: [hacia el final de la parte 4](/es/part4/autenticacion_basada_en_token#limitacion-de-la-creacion-de-nuevas-notas-a-los-usuarios-registrados) se mencionó un problema crítico del token: si se decide que el acceso de un usuario al sistema revocado, el usuario aún puede usar el token en posesión para usar el sistema.
 
 La solución habitual a esto es almacenar un registro de cada token emitido al cliente en la base de datos del servidor y comprobar con cada solicitud si el acceso sigue siendo válido. En este caso, la validez del token se puede eliminar de inmediato si es necesario. Esta solución a menudo se denomina <i>sesión del lado del servidor</i>.
 

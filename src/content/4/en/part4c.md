@@ -381,7 +381,7 @@ userSchema.plugin(uniqueValidator) // highlight-line
 
 Note: when installing the _mongoose-unique-validator_ library, you may encounter the following error message:
 
-![](../../images/4/uniq.png)
+![unresolved dependency error for mongoose unique validator](../../images/4/uniq.png)
 
 The reason for this is that at the time of writing (10.11.2023) the library is not yet compatible with Mongoose version 8. If you encounter this error, you can revert to an older version of Mongoose by running the command
 
@@ -408,7 +408,6 @@ For making new users in a production or development environment, you may send a 
     "name": "Superuser",
     "password": "salainen"
 }
-
 ```
 
 The list looks like this:
@@ -446,6 +445,7 @@ notesRouter.post('/', async (request, response) => {
   response.status(201).json(savedNote)
 })
 ```
+
 The note scheme will also need to change as follows in our models/note.js file:
 
 ```js
@@ -488,7 +488,7 @@ We can see that the user has two notes.
 
 Likewise, the ids of the users who created the notes can be seen when we visit the route for fetching all notes:
 
-![api/notes shows ids of numbers in JSON](../../images/4/12e.png)
+![api/notes shows ids of users in JSON](../../images/4/12e.png)
 
 ### Populate
 
@@ -515,7 +515,7 @@ The result is almost exactly what we wanted:
 
 We can use the populate parameter for choosing the fields we want to include from the documents. In addition to the field <i>id</i> we are now only interested in <i>content</i> and <i>important</i>.
 
-The selection of fields is done with the Mongo [syntax](https://docs.mongodb.com/manual/tutorial/project-fields-from-query-results/#return-the-specified-fields-and-the-id-field-only):
+The selection of fields is done with the Mongo [syntax](https://www.mongodb.com/docs/manual/tutorial/project-fields-from-query-results/#return-the-specified-fields-and-the-_id-field-only):
 
 ```js
 usersRouter.get('/', async (request, response) => {

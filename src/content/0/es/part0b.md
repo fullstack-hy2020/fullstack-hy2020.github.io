@@ -118,7 +118,7 @@ Escribir HTML en medio del código no es muy inteligente, pero para los programa
 
 En las aplicaciones web tradicionales, el navegador es "tonto". Solo obtiene datos HTML del servidor, y toda la lógica de la aplicación reside en el servidor. Un servidor puede ser creado utilizando [Java Spring](https://spring.io/projects/spring-framework), [Python Flask](https://flask.palletsprojects.com/en/2.2.x/), o [Ruby on Rails](http://rubyonrails.org/), por mencionar solo algunos ejemplos.
 
-El ejemplo utiliza la biblioteca [Express](https://expressjs.com/) con Node.js. Este curso utilizará Node.js y Express para crear servidores web.
+El ejemplo utiliza la librería [Express](https://expressjs.com/) con Node.js. Este curso utilizará Node.js y Express para crear servidores web.
 
 ### Ejecución de la lógica de la aplicación en el navegador
 
@@ -584,8 +584,8 @@ El auge de las aplicaciones de una sola página trajo varias formas más "modern
 
 Sin embargo, la popularidad de Angular se desplomó después de que el [equipo de Angular anunció que el soporte para la versión 1 terminaría](https://web.archive.org/web/20151208002550/https://jaxenter.com/angular-2-0-announcement-backfires-112127.html), y que Angular 2 no sería retrocompatible con la primera versión. Angular 2 y las versiones más nuevas no recibieron una bienvenida muy cálida.
 
-Actualmente, la herramienta más popular para implementar la lógica del lado del navegador en las aplicaciones web es la biblioteca [React](https://react.dev/) de Facebook.
-Durante este curso, nos familiarizaremos con React y la biblioteca [Redux](https://github.com/reactjs/redux), que se usan juntos con frecuencia.
+Actualmente, la herramienta más popular para implementar la lógica del lado del navegador en las aplicaciones web es la librería [React](https://react.dev/) de Facebook.
+Durante este curso, nos familiarizaremos con React y la librería [Redux](https://github.com/reactjs/redux), que se usan juntos con frecuencia.
 
 El estado de React parece sólido, pero el mundo de JavaScript cambia constantemente. Por ejemplo, recientemente un recién llegado -[VueJS](https://vuejs.org/)- ha estado captando cierto interés.
 

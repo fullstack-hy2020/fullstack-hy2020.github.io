@@ -52,7 +52,7 @@ module.exports = {
 
 The logger has two functions, __info__ for printing normal log messages, and __error__ for all error messages. 
 
-Extracting logging into its own module is a good idea in more ways than one. If we wanted to start writing logs to a file or send them to an external logging service like [graylog](https://www.graylog.org/) or [papertrail](https://papertrailapp.com) we would only have to make changes in one place.
+Extracting logging into its own module is a good idea in several ways. If we wanted to start writing logs to a file or send them to an external logging service like [graylog](https://www.graylog.org/) or [papertrail](https://papertrailapp.com) we would only have to make changes in one place.
 
 The handling of environment variables is extracted into a separate <i>utils/config.js</i> file:
 
@@ -178,13 +178,13 @@ All routes are now defined for the router object, similar to what I did before w
 It's worth noting that the paths in the route handlers have shortened. In the previous version, we had:
 
 ```js
-app.delete('/api/notes/:id', (request, response) => {
+app.delete('/api/notes/:id', (request, response, next) => {
 ```
 
 And in the current version, we have:
 
 ```js
-notesRouter.delete('/:id', (request, response) => {
+notesRouter.delete('/:id', (request, response, next) => {
 ```
 
 So what are these router objects exactly? The Express manual provides the following explanation:
@@ -323,7 +323,7 @@ To recap, the directory structure looks like this after the changes have been ma
 
 For smaller applications, the structure does not matter that much. Once the application starts to grow in size, you are going to have to establish some kind of structure and separate the different responsibilities of the application into separate modules. This will make developing the application much easier.
 
-There is no strict directory structure or file naming convention that is required for Express applications. In contrast, Ruby on Rails does require a specific structure. Our current structure simply follows some of the best practices you can come across on the internet.
+There is no strict directory structure or file naming convention that is required for Express applications. In contrast, Ruby on Rails does require a specific structure. Our current structure simply follows some of the best practices that you can come across on the internet.
 
 You can find the code for our current application in its entirety in the <i>part4-1</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-1).
 
@@ -401,17 +401,15 @@ The nature of VS Code bleeding into how you write your code is probably not idea
 
 </div>
 
-
-
 <div class="tasks">
 
 ### Exercises 4.1.-4.2.
 
 In the exercises for this part, we will be building a <i>blog list application</i>, that allows users to save information about interesting blogs they have stumbled across on the internet. For each listed blog we will save the author, title, URL, and amount of upvotes from users of the application.
 
-#### 4.1 Blog list, step1
+#### 4.1 Blog List, step 1
 
-Let's imagine a situation, where you receive an email that contains the following application body:
+Let's imagine a situation, where you receive an email that contains the following application body and instructions:
 
 ```js
 const express = require('express')
@@ -462,11 +460,11 @@ Turn the application into a functioning <i>npm</i> project. To keep your develop
 
 Verify that it is possible to add blogs to the list with Postman or the VS Code REST client and that the application returns the added blogs at the correct endpoint.
 
-#### 4.2 Blog list, step2
+#### 4.2 Blog List, step 2
 
 Refactor the application into separate modules as shown earlier in this part of the course material.
 
-**NB** refactor your application in baby steps and verify that the application works after every change you make. If you try to take a "shortcut" by refactoring many things at once, then [Murphy's law](https://en.wikipedia.org/wiki/Murphy%27s_law) will kick in and it is almost certain that something will break in your application. The "shortcut" will end up taking more time than moving forward slowly and systematically.
+**NB** refactor your application in baby steps and verify that it works after every change you make. If you try to take a "shortcut" by refactoring many things at once, then [Murphy's law](https://en.wikipedia.org/wiki/Murphy%27s_law) will kick in and it is almost certain that something will break in your application. The "shortcut" will end up taking more time than moving forward slowly and systematically.
 
 One best practice is to commit your code every time it is in a stable state. This makes it easy to rollback to a situation where the application still works.
 
@@ -606,21 +604,21 @@ First, we execute the code to be tested, meaning that we generate a reverse for 
 
 As expected, all of the tests pass:
 
-![terminal output from npm test](../../images/4/1x.png)
+![terminal output from npm test with all tests passing](../../images/4/1x.png)
 
 Jest expects by default that the names of test files contain <i>.test</i>. In this course, we will follow the convention of naming our tests files with the extension <i>.test.js</i>.
 
 Jest has excellent error messages, let's break the test to demonstrate this:
 
 ```js
-test('palindrome of react', () => {
+test('reverse of react', () => {
   const result = reverse('react')
 
   expect(result).toBe('tkaer')
 })
 ```
 
-Running the tests above results in the following error message:
+Running this test results in the following error message:
 
 ![terminal output shows failure from npm test](../../images/4/2x.png)
 
@@ -694,7 +692,7 @@ test('of empty array is zero', () => {
 
 Let's create a collection of helper functions that are meant to assist in dealing with the blog list. Create the functions into a file called <i>utils/list_helper.js</i>. Write your tests into an appropriately named test file under the <i>tests</i> directory.
 
-#### 4.3: helper functions and unit tests, step1
+#### 4.3: Helper Functions and Unit Tests, step 1
 
 First, define a _dummy_ function that receives an array of blog posts as a parameter and always returns the value 1. The contents of the <i>list_helper.js</i> file at this point should be the following:
 
@@ -721,7 +719,7 @@ test('dummy returns one', () => {
 })
 ```
 
-#### 4.4: helper functions and unit tests, step2
+#### 4.4: Helper Functions and Unit Tests, step 2
 
 Define a new _totalLikes_ function that receives a list of blog posts as a parameter. The function returns the total sum of <i>likes</i> in all of the blog posts.
 
@@ -738,7 +736,7 @@ describe('total likes', () => {
       _id: '5a422aa71b54a676234d17f8',
       title: 'Go To Statement Considered Harmful',
       author: 'Edsger W. Dijkstra',
-      url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
+      url: 'https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf',
       likes: 5,
       __v: 0
     }
@@ -763,7 +761,7 @@ Another way of running a single test (or describe block) is to specify the name 
 npm test -- -t 'when list has only one blog, equals the likes of that'
 ```
 
-#### 4.5*: helper functions and unit tests, step3
+#### 4.5*: Helper Functions and Unit Tests, step 3
 
 Define a new _favoriteBlog_ function that receives a list of blogs as a parameter. The function finds out which blog has the most likes. If there are many top favorites, it is enough to return one of them.
 
@@ -781,7 +779,7 @@ The value returned by the function could be in the following format:
 
 Write the tests for this exercise inside of a new <i>describe</i> block. Do the same for the remaining exercises as well.
 
-#### 4.6*: helper functions and unit tests, step4
+#### 4.6*: Helper Functions and Unit Tests, step 4
 
 This and the next exercise are a little bit more challenging. Finishing these two exercises is not required to advance in the course material, so it may be a good idea to return to these once you're done going through the material for this part in its entirety.
 
@@ -798,7 +796,7 @@ Define a function called _mostBlogs_ that receives an array of blogs as a parame
 
 If there are many top bloggers, then it is enough to return any one of them.
 
-#### 4.7*: helper functions and unit tests, step5
+#### 4.7*: Helper Functions and Unit Tests, step 5
 
 Define a function called _mostLikes_ that receives an array of blogs as its parameter. The function returns the author, whose blog posts have the largest amount of likes. The return value also contains the total number of likes that the author has received:
 
