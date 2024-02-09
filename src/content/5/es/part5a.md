@@ -625,7 +625,7 @@ Las notificaciones deben estar visibles durante unos segundos. No es obligatorio
 
 ### Nota sobre el uso de local storage
 
-Al final de la última [parte](/es/part4/autenticacion_de_token#problemas-de-la-autenticacion-basada-en-tokens) mencionamos que el desafío de la autenticación basada en tokens es cómo afrontar la situación en la cual el acceso a la API del poseedor del token necesita ser revocado.
+Al final de la última [parte](/es/part4/autenticacion_basada_en_token#problemas-de-la-autenticacion-basada-en-tokens) mencionamos que el desafío de la autenticación basada en tokens es cómo afrontar la situación en la cual el acceso a la API del poseedor del token necesita ser revocado.
 
 Hay dos soluciones para este problema. La primera es limitar el periodo de validez de un token. Esto fuerza al usuario a iniciar sesión otra vez una vez que el token ha expirado. El otro enfoque es guardar la información de validez de cada token en la base de datos del backend. Esta solución es llamada frecuentemente <i>server side session</i>.
 

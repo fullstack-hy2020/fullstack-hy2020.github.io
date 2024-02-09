@@ -7,11 +7,11 @@ lang: es
 
 <div class="content">
 
-Ahora comenzaremos a familiarizarnos con probablemente el tema más importante de este curso, es decir, la biblioteca [React](https://es.react.dev/). Comencemos con la creación de una aplicación React simple y con el conocimiento de los conceptos básicos de React.
+Ahora comenzaremos a familiarizarnos con probablemente el tema más importante de este curso, es decir, la librería [React](https://es.react.dev/). Comencemos con la creación de una aplicación React simple y con el conocimiento de los conceptos básicos de React.
 
 La forma más fácil de empezar es utilizando una herramienta llamada [Vite](https://es.vitejs.dev/).
 
-Comencemos creando una aplicación llamada <i>part1</i>, navega a este directorio e instala las librerías:
+Comencemos creando una aplicación llamada <i>part1</i>, navegar a este directorio e instalando las librerias:
 
 ```bash
 # npm 6.x (desactualizado, pero aun en uso por algunos):
@@ -342,7 +342,7 @@ const App = () => {
 }
 ```
 
-Puede haber un número arbitrario de props y sus valores pueden ser strings "incrustados en el código" ("hard coded") o resultados de expresiones JavaScript. Si el valor del prop se logra usando JavaScript, debe estar envuelto con llaves. 
+Puede haber un número arbitrario de props y sus valores pueden ser strings "incrustados en el código" ("hard coded") o resultados de expresiones JavaScript. Si el valor del prop se obtiene usando JavaScript, debe estar envuelto con llaves. 
 
 Modifiquemos el código para que el componente <i>Hello</i> use dos props: 
 
@@ -380,7 +380,7 @@ Yo realmente espero que tu consola esté abierta. Si no es asi, recuerda tu prom
 
 > <i>Prometo dejar la consola abierta todo el tiempo</i> durante este curso, y por el resto de mi vida mientras esté haciendo desarrollo web.
 
-EL desarrollo de software es difícil. Este se vuelve aun más difícil si uno no está usando todas las herramientas disponibles como la consola de desarrollo e imprimiendo la depuración con _console.log_. Los profesionales usan ambas <i>todo el tiempo</i> y no hay una sola razón de porque un principiante no debería adoptar estos maravillosos métodos de ayuda que hacen la vida más fácil.
+El desarrollo de software es dificil. Este se vuelve aun más dificil si uno no está usando todas las herramientas disponibles como la consola de desarrollo e imprimiendo la depuración con _console.log_. Los profesionales usan ambas <i>todo el tiempo</i> y no hay una sola razón de porque un principiante no debería adoptar estos maravillosos métodos de ayuda que hacen la vida más fácil.
 
 ### Posible mensaje de error
 
