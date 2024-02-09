@@ -118,7 +118,7 @@ La vista muestra el <i>MongoDB URI</i>, que es la dirección de la base de datos
 La dirección se ve así:
 
 ```js
-mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority
+mongodb+srv://fullstack:thepasswordishere@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority
 ```
 
 Ahora estamos listos para usar la base de datos.
@@ -524,7 +524,7 @@ npm install dotenv
 Para usar la librería, creamos un archivo <i>.env</i> en la raíz del proyecto. Las variables de entorno se definen dentro del archivo y pueden verse así:
 
 ```bash
-MONGODB_URI=mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority
+MONGODB_URI=mongodb+srv://fullstack:thepasswordishere@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority
 PORT=3001
 ```
 
@@ -567,7 +567,7 @@ Sin embargo, una [mejor opción](https://community.fly.io/t/clarification-on-env
 y estableciendo el valor de la variable de entorno desde la línea de comandos con el comando:
 
 ```bash
-fly secrets set MONGODB_URI="mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority"
+fly secrets set MONGODB_URI="mongodb+srv://fullstack:thepasswordishere@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority"
 ```
 
 Dado que PORT también está definido en nuestro archivo .env, es esencial ignorar el archivo en Fly.io, ya que de lo contrario, la aplicación se inicia en el puerto incorrecto.

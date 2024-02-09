@@ -118,7 +118,7 @@ The view displays the <i>MongoDB URI</i>, which is the address of the database t
 The address looks like this:
 
 ```js
-mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority
+mongodb+srv://fullstack:thepasswordishere@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority
 ```
 
 We are now ready to use the database.
@@ -149,6 +149,7 @@ const url =
   `mongodb+srv://fullstack:${password}@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority`
 
 mongoose.set('strictQuery',false)
+
 mongoose.connect(url)
 
 const noteSchema = new mongoose.Schema({
@@ -159,7 +160,7 @@ const noteSchema = new mongoose.Schema({
 const Note = mongoose.model('Note', noteSchema)
 
 const note = new Note({
-  content: 'HTML is Easy',
+  content: 'HTML is easy',
   important: true,
 })
 
@@ -524,7 +525,7 @@ npm install dotenv
 To use the library, we create a <i>.env</i> file at the root of the project. The environment variables are defined inside of the file, and it can look like this:
 
 ```bash
-MONGODB_URI=mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority
+MONGODB_URI=mongodb+srv://fullstack:thepasswordishere@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority
 PORT=3001
 ```
 
@@ -567,7 +568,7 @@ However, a [better option](https://community.fly.io/t/clarification-on-environme
 and set the env value from the command line with the command:
 
 ```bash
-fly secrets set MONGODB_URI="mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority"
+fly secrets set MONGODB_URI="mongodb+srv://fullstack:thepasswordishere@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority"
 ```
 
 Since the PORT also is defined in our .env it is actually essential to ignore the file in Fly.io since otherwise the app starts in the wrong port.
@@ -575,6 +576,8 @@ Since the PORT also is defined in our .env it is actually essential to ignore th
 When using Render, the database url is given by defining the proper env in the dashboard:
 
 ![browser showing render environment variables](../../images/3/render-env.png)
+
+Set just the URL starting with <i>mongodb+srv://</i> to the _value_ field.
 
 ### Using database in route handlers
 

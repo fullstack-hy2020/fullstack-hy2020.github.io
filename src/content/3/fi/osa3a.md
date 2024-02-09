@@ -152,7 +152,7 @@ import http from 'http'
 
 Selaimen puolella käytetään nykyään ES6:n moduuleita, eli moduulit määritellään [exportilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) ja otetaan käyttöön [importilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import).
 
-Node.js kuitenkin käyttää ns. [CommonJS](https://en.wikipedia.org/wiki/CommonJS)-moduuleja. Syy tälle on siinä, että Node-ekosysteemillä oli tarve moduuleihin jo kauan ennen kuin JavaScript tuki moduuleja kielen tasolla. Node tukee myös ES-moduuleja, mutta koska tuki ei ole vielä kaikilta osin täydellinen, pitäydymme CommonJS-moduuleissa.
+Node.js käyttää oletusarvoisesti ns. [CommonJS](https://en.wikipedia.org/wiki/CommonJS)-moduuleja. Syy tälle on siinä, että Node-ekosysteemillä oli tarve moduuleihin jo kauan ennen kuin JavaScript tuki moduuleja kielen tasolla. Nykyään Node tukee myös ES-moduuleja, mutta koska tuki ei ole vielä kaikilta osin täydellinen, pitäydymme CommonJS-moduuleissa.
 
 CommonJS-moduulit toimivat melko samaan tapaan kuin ES6-moduulit, ainakin tämän kurssin tarpeiden puitteissa.
 
@@ -376,7 +376,7 @@ Tiedoston <i>package.json</i> sisältö muuttuu seuraavasti:
     "express": "^4.18.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.20"
+    "nodemon": "^3.0.3"
   }
 }
 ```
@@ -663,7 +663,7 @@ Sovellus tulostaa lähetetyn vastaanottamansa datan terminaaliin:
 
 **HUOM:** Kun ohjelmoit backendia, <i>pidä sovellusta suorittava konsoli koko ajan näkyvillä</i>. Nodemonin ansiosta sovellus käynnistyy uudelleen jos koodiin tehdään muutoksia. Jos seuraat konsolia, huomaat välittömästi jos sovelluksen koodiin tulee virhe:
 
-![konsoliin tulostuu epävalidista javascriptistä johtuva parse error ‑virheilmoitus](../../images/3/16.png)
+![konsoliin tulostuu epävalidista javascriptistä johtuva parse error ‑virheilmoitus](../../images/3/16e.png)
 
 Konsolista kannattaa seurata myös, reagoiko backend odotetulla tavalla esim. kun sovellukselle lähetetään dataa metodilla HTTP POST. Backendiin kannattaa luonnollisesti lisäillä runsaat määrät <em>console.log</em>-komentoja kun sovellus on kehitysvaiheessa. 
 

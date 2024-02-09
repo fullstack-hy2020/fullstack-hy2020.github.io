@@ -57,7 +57,7 @@ const cors = require('cors')
 app.use(cors())
 ```
 
-Nyt frontend toimii! Tosin muistiinpanojen tärkeäksi muuttavaa toiminnallisuutta backendissa ei vielä ole.
+Nyt frontend toimii muuten, mutta muistiinpanojen tärkeäksi muuttaminen ei vielä onnistu, sillä toiminnallisuutta backendissa ei vielä ole.
 
 CORS:ista voi lukea tarkemmin esim. [Mozillan sivuilta](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
 
@@ -142,7 +142,7 @@ fly deploy
 Jos kaikki menee hyvin, sovellus käynnistyy ja saat sen avattua selaimeen komennolla 
 
 ```bash
-fly open
+fly apps open
 ```
 
 Tämän jälkeen aina kun teet muutoksia sovellukseen, saat vietyä uuden version tuotantoon komennolla 

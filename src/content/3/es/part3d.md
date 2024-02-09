@@ -116,7 +116,7 @@ Para producción, debemos establecer la URL de la base de datos en el servicio q
 En Fly.io se hace con _fly secrets set_:
 
 ```bash
-fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
+fly secrets set MONGODB_URI='mongodb+srv://fullstack:thepasswordishere@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
 ```
 
 Cuando la aplicación está en desarrollo, es muy probable que algo falle. Por ejemplo, cuando desplegué mi aplicación por primera vez con la base de datos, no se veía ni una sola nota:

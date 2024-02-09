@@ -112,7 +112,7 @@ We can use the _heroku config_ command to get the <i>connect string</i>, which i
 ```bash
 heroku config -a <app-name>
 === cryptic-everglades-76708 Config Vars
-DATABASE_URL: postgres://<username>:<password>@<host-of-postgres-addon>:5432/<db-name>
+DATABASE_URL: postgres://<username>:thepasswordishere@<host-of-postgres-addon>:5432/<db-name>
 ```
 
 The database can be accessed by running _psql_ command on the Heroku server as follows (note that the command parameters depend on the connection url of the Heroku database):
@@ -317,7 +317,7 @@ If Heroku is used, the connect string can be seen by using the command _heroku c
 
 ```bash
 $ cat .env
-DATABASE_URL=postgres://<username>:<password>@ec2-54-83-137-206.compute-1.amazonaws.com:5432/<databasename>
+DATABASE_URL=postgres://<username>:thepasswordishere@ec2-54-83-137-206.compute-1.amazonaws.com:5432/<databasename>
 ```
 
 When using Fly.io, the local connection to the database should first be enabled by [tunneling](https://fly.io/docs/reference/postgres/#connecting-to-postgres-from-outside-fly) 
@@ -339,7 +339,7 @@ The Fly.io connect-string is of the form
 
 ```bash
 $ cat .env
-DATABASE_URL=postgres://postgres:<password>@127.0.0.1:5432/postgres
+DATABASE_URL=postgres://postgres:thepasswordishere@127.0.0.1:5432/postgres
 ```
 
 Password was shown when the database was created, so hopefully you have not lost it!

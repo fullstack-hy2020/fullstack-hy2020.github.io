@@ -116,7 +116,7 @@ Para colocar em produção, temos que definir a URL do banco de dados no serviç
 Isso é feito no Fly.io com _fly secrets set_:
 
 ```
-fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
+fly secrets set MONGODB_URI='mongodb+srv://fullstack:thepasswordishere@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
 ```
 
 Quando a aplicação está sendo desenvolvida, é mais do que provável que algo falhe. Por exemplo, quando implantei minha aplicação pela primeira vez com o banco de dados, não foi exibida uma única nota sequer:

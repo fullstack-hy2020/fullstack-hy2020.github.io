@@ -73,7 +73,7 @@ const cors = require('cors')
 app.use(cors())
 ```
 
-And the frontend works! However, the functionality for changing the importance of notes has not yet been implemented on the backend.
+Now most of the features in the frontend work! The functionality for changing the importance of notes has not yet been implemented on the backend so naturally that does not yet work in the frontend. We shall fix that later.
 
 You can read more about CORS from [Mozilla's page](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
 
@@ -85,19 +85,19 @@ The react app running in the browser now fetches the data from node/express-serv
 
 ### Application to the Internet
 
-Now that the whole stack is ready, let's move our application to the internet.
+Now that the whole stack is ready, let's move our application to Internet.
 
 There is an ever-growing number of services that can be used to host an app on the internet. The developer-friendly services like PaaS (i.e. Platform as a Service) take care of installing the execution environment (eg. Node.js) and could also provide various services such as databases.
 
 For a decade, [Heroku](http://heroku.com) was dominating the PaaS scene. Unfortunately the free tier Heroku ended at 27th November 2022. This is very unfortunate for many developers, especially students. Heroku is still very much a viable option if you are willing to spend some money. They also have [a student program](https://www.heroku.com/students) that provides some free credits.
 
-We are now introducing two services [Fly.io](https://fly.io/) and [Render](https://render.com/) that both have a (limited) free plan. Fly.io is our "official" hosting service since it can be for sure used also on the parts 11 and 13 of the course. Render will be fine at least for the other parts of this course.
+We are now introducing two services [Fly.io](https://fly.io/) and [Render](https://render.com/) that both have a (limited) free plan. Fly.io is our "official" hosting service since it can be for sure used also on parts 11 and 13 of the course. Render will be fine at least for the other parts of this course.
 
 Note that despite using the free tier only, Fly.io <i>might</i> require one to enter their credit card details. At the moment Render can be used without a credit card.
 
 Render might be a bit easier to use since it does not require any software to be installed on your machine.
 
-There are also some other free hosting options that work well for this course, at least for all parts other than part 11 (CI/CD) that might have one tricky exercise for other platforms.
+There are also some other free hosting options that work well for this course, at least for all parts other than part 11 (CI/CD) which might have one tricky exercise for other platforms.
 
 Some course participants have also used the following services:
 
@@ -163,7 +163,7 @@ Fly.io creates a file <i>fly.toml</i> in the root of your app where we can confi
   processes = ["app"]
 ```
 
-We have now defined in the part [env] that environment variable PORT will get the correct port (defined in part [http_service]) where the app should create the server. Note that the definition might be already there, but some times it has been missing.
+We have now defined in the part [env] that environment variable PORT will get the correct port (defined in part [http_service]) where the app should create the server. 
 
 We are now ready to deploy the app to the Fly.io servers. That is done with the following command:
 
@@ -174,12 +174,12 @@ fly deploy
 If all goes well, the app should now be up and running. You can open it in the browser with the command
 
 ```bash
-fly open
+fly apps open
 ```
 
 A particularly important command is _fly logs_. This command can be used to view server logs. It is best to keep logs always visible!
 
-**Note:** If you are using Fly.io, Fly may create 2 machines for your app, if it does then the state of the data in your app will be inconsistent between requests, i.e. you would have two machines each with its own notes variable, you could POST to one machine then your next GET could go to another machine. You can check the number of machines by using the command "$ fly scale show", if the COUNT is greater than 1 then you can enforce it to be 1 with the command "$ fly scale count 1". The machine count can also be checked on the dashboard.
+**Note:** Fly may create 2 machines for your app, if it does then the state of the data in your app will be inconsistent between requests, i.e. you would have two machines each with its own notes variable, you could POST to one machine then your next GET could go to another machine. You can check the number of machines by using the command "$ fly scale show", if the COUNT is greater than 1 then you can enforce it to be 1 with the command "$ fly scale count 1". The machine count can also be checked on the dashboard.
 
 **Note:** In some cases (the cause is so far unknown) running Fly.io commands especially on Windows WSL (Windows Subsystem for Linux) has caused problems. If the following command just hangs
 
@@ -252,7 +252,7 @@ app.listen(PORT, () => {
 
 So far we have been running React code in <i>development mode</i>. In development mode the application is configured to give clear error messages, immediately render code changes to the browser, and so on.
 
-When the application is deployed, we must create a [production build](https://vitejs.dev/guide/build.html) or a version of the application which is optimized for production.
+When the application is deployed, we must create a [production build](https://vitejs.dev/guide/build.html) or a version of the application that is optimized for production.
 
 A production build for applications created with Vite can be created with the command [npm run build](https://vitejs.dev/guide/build.html).
 
@@ -363,11 +363,11 @@ fly deploy
 
 The application works perfectly, except we haven't added the functionality for changing the importance of a note to the backend yet.
 
-<i>**NOTE:** If you are using Fly.io, there could be a .dockerignore file that specifies the exclusion of the "./build" directory during deployment. To ensure it gets deployed, consider renaming the ./build directory to ./static_build or an equivalent name.</i>
+<strong>NOTE:</strong> When using Fly.io, be aware that the _.dockerignore_ file in your project directory lists files not uploaded during deployment. The dist directory is included by default. To deploy this directory, remove its reference from the .dockerignore file, ensuring your app is get properly deployed.
 
 ![screenshot of notes application](../../images/3/30new.png)
 
-<i>**NOTE:** changing of the importance DOES NOT work yet since the backend has no implementation for it yet.</i>
+<i>**NOTE:** changing the importance DOES NOT work yet since the backend has no implementation for it yet.</i>
 
 Our application saves the notes to a variable. If the application crashes or is restarted, all of the data will disappear.
 

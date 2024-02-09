@@ -97,7 +97,7 @@ heroku create
 heroku addons:create heroku-postgresql:hobby-dev -a <app-name>
 heroku config -a <app-name>
 === cryptic-everglades-76708 Config Vars
-DATABASE_URL: postgres://<username>:<password>@<host-of-postgres-addon>:5432/<db-name>
+DATABASE_URL: postgres://<username>:thepasswordishere@<host-of-postgres-addon>:5432/<db-name>
 ```
 
 <!-- Particularly when using a relational database, it is essential to access the database directly as well. There are many ways to do this, there are several different graphical user interfaces, such as [pgAdmin](https://www.pgadmin.org/). However, we will be using Postgres [psql](https://www.postgresql.org/docs/current/app-psql.html) command-line tool.-->
@@ -262,7 +262,7 @@ The database <i>connect string</i>, which is revealed by the _heroku config_ com
 
 ```bash
 $ cat .env
-DATABASE_URL=postgres://<username>:<password>@ec2-54-83-137-206.compute-1.amazonaws.com:5432/<databasename>
+DATABASE_URL=postgres://<username>:thepasswordishere@ec2-54-83-137-206.compute-1.amazonaws.com:5432/<databasename>
 ```
 
 Let's test for a successful connection:

@@ -108,7 +108,7 @@ heroku create
 heroku addons:create heroku-postgresql:hobby-dev
 heroku config
 === cryptic-everglades-76708 Config Vars
-DATABASE_URL: postgres://<username>:<password>@ec2-44-199-83-229.compute-1.amazonaws.com:5432/<db-name>
+DATABASE_URL: postgres://<username>:thepasswordishere@ec2-44-199-83-229.compute-1.amazonaws.com:5432/<db-name>
 ```
 
 Tietokantaan saadaan psql-konsoliyhteys suorittamalla _psql_ Herokun palvelimella seuraavasti (huomaa, että komennon parametrit riippuvat Heroku-sovelluksen connect urlista):
@@ -308,7 +308,7 @@ Herokua käyttäessäsi saat connect stringin selville komennolla _heroku config
 
 ```bash
 $ cat .env
-DATABASE_URL=postgres://<username>:<password>@ec2-54-83-137-206.compute-1.amazonaws.com:5432/<databasename>
+DATABASE_URL=postgres://<username>:thepasswordishere@ec2-54-83-137-206.compute-1.amazonaws.com:5432/<databasename>
 ```
 
 Fly.io:a käyttäessä paikallinen tietokantayhteys taytyy ensin tehdä mahdolliseksi [tunneloimalla](https://fly.io/docs/reference/postgres/#connecting-to-postgres-from-outside-fly) paikallisen koneen portti 5432 Fly.io:n tietokannan porttiin komennolla
@@ -329,7 +329,7 @@ Fly.io:n connect-string on seuraavaa muotoa:
 
 ```bash
 $ cat .env
-DATABASE_URL=postgres://postgres:<password>@localhost:5432/postgres
+DATABASE_URL=postgres://postgres:thepasswordishere@localhost:5432/postgres
 ```
 
 Salasana on se, jonka on otettu talteen tietokantaa luodessa.

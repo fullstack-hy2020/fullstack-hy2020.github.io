@@ -173,7 +173,7 @@ fly deploy
 Se tudo correr bem, a aplicação deverá estar em funcionamento. Você pode abri-la no navegador com o comando
 
 ```bash
-fly open
+fly apps open
 ```
 
 Depois da configuração inicial, quando o código da aplicação for atualizado, poderá ser implantada na produção com o comando:
