@@ -1065,13 +1065,13 @@ Write a test that verifies that making an HTTP POST request to the <i>/api/blogs
 
 Once the test is finished, refactor the operation to use async/await instead of promises.
 
-#### 4.11*: Blog List Tests, step4
+#### 4.11*: Blog List Tests, step 4
 
 Write a test that verifies that if the <i>likes</i> property is missing from the request, it will default to the value 0. Do not test the other properties of the created blogs yet.
 
 Make the required changes to the code so that it passes the test.
 
-#### 4.12*: Blog list tests, step5
+#### 4.12*: Blog List tests, step 5
 
 Write tests related to creating new blogs via the <i>/api/blogs</i> endpoint, that verify that if the <i>title</i> or <i>url</i> properties are missing from the request data, the backend responds to the request with the status code <i>400 Bad Request</i>.
 
@@ -1237,7 +1237,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 ### Exercises 4.13.-4.14.
 
-#### 4.13 Blog list Expansions, step 1
+#### 4.13 Blog List Expansions, step 1
 
 Implement functionality for deleting a single blog post resource.
 
@@ -1245,7 +1245,7 @@ Use the async/await syntax. Follow [RESTful](/en/part3/node_js_and_express#rest)
 
 Implement tests for the functionality.
 
-#### 4.14 Blog List Expansions, step2
+#### 4.14 Blog List Expansions, step 2
 
 Implement functionality for updating the information of an individual blog post.
 
