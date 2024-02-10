@@ -252,11 +252,11 @@ A new note can now be created using Postman if the <i>authorization</i> header i
 
 Using Postman this looks as follows:
 
-![postman adding bearer token](../../images/4/20e.png)
+![postman adding bearer token](../../images/4/20ea.png)
 
 and with Visual Studio Code REST client
 
-![vscode adding bearer token example](../../images/4/21e.png)
+![vscode adding bearer token example](../../images/4/21eb.png)
 
 Current application code can be found on [Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-9), branch <i>part4-9</i>.
 
