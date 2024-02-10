@@ -86,8 +86,7 @@ const App = () => {
 export default App
 ```
 
-
-El código de aplicación actual se puede encontrar en [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-1), en la rama <i>part5-1</i>. Si clonas el repositorio, no olvides ejecutar el comando _npm install_ antes de intentar ejecutar el frontend.
+El código de aplicación actual se puede encontrar en [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-1), en la rama <i>part5-1</i>. Si clonas el repositorio, no olvides ejecutar el comando _npm install_ antes de intentar ejecutar el frontend.
 
 El frontend no mostrara ninguna nota si no se conecta al backend. Puedes iniciar el backend con el comando _npm run dev_ en su directorio de la Parte 4. Esto ejecutara el backend en el puerto 3001. Mientras esté activo, en una ventana diferente del terminal puedes ejecutar el frontend con _npm start_, y ahora veras las notas que están guardadas en tu base de datos MongoDB de la Parte 4.
 
@@ -314,7 +313,7 @@ La solución no es perfecta, pero la dejaremos así por ahora.
 
 Nuestro componente principal <i>App</i> es demasiado grande en este momento. Los cambios que hicimos ahora son una clara señal de que los formularios deben ser refactorizados en sus propios componentes. Sin embargo, lo dejaremos para un ejercicio opcional.
 
-El código de la aplicación actual se puede encontrar en [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-2), en la rama <i>part5-2</i>.
+El código de la aplicación actual se puede encontrar en [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-2), en la rama <i>part5-2</i>.
 
 ### Creando nuevas notas
 
@@ -515,7 +514,7 @@ o con el comando que vacía el <i>localstorage</i> por completo:
 window.localStorage.clear()
 ```
 
-El código de la aplicación actual se puede encontrar en [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-3), en la rama <i>part5-3</i>.
+El código de la aplicación actual se puede encontrar en [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-3), en la rama <i>part5-3</i>.
 
 </div>
 
