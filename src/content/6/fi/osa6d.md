@@ -202,7 +202,7 @@ Uuden muistiinpanon luomista varten määritellään [mutaatio](https://tanstack
 const newNoteMutation = useMutation({ mutationFn: createNote })
 ```
 
-Parametrina on tiedostoon <i>requests.js</i> lisäämämme funktio, joka lähettää Axiosin avulla uuden muistiinpanon palvelille.
+Parametrina on tiedostoon <i>requests.js</i> lisäämämme funktio, joka lähettää Axiosin avulla uuden muistiinpanon palvelimelle.
 
 Tapahtumakäsittelijä <i>addNote</i> suorittaa mutaation kutsumalla mutaatio-olion funktiota <i>mutate</i> ja antamalla uuden muistiinpanon parametrina:
 
