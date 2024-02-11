@@ -874,7 +874,7 @@ Definamos la URL de nuestra aplicación <i> baseUrl </i> en el [archivo de confi
     e2e: {
       setupNodeEvents(on, config){
       },
-        baseUrl: 'http://localhost:3000' // highlight-line
+      baseUrl: 'http://localhost:3000' // highlight-line
     },
   })
 }
@@ -905,8 +905,10 @@ Expandamos el archivo de configuracion <i>cypress.config.js_:</i>
 	  setupNodeEvents(on, config){
 	  },
 	  baseUrl: 'http://localhost:3000',
-	  BACKEND: 'http://localhost:3001/api' // highlight-line
 	},
+        env: { // highlight-line
+	  BACKEND: 'http://localhost:3001/api' // highlight-line
+	} // highlight-line
   })
 }
 ```
