@@ -13,7 +13,7 @@ Tests will be implemented with the same [Jest](http://jestjs.io/) testing librar
 
 In addition to Jest, we also need another testing library that will help us render components for testing purposes. The current best option for this is [react-testing-library](https://github.com/testing-library/react-testing-library) which has seen rapid growth in popularity in recent times.
 
-Let's install libraries with the command:
+Let's install the libraries with the command:
 
 ```js
 npm install --save-dev @testing-library/react @testing-library/jest-dom jest jest-environment-jsdom @babel/preset-env @babel/preset-react
@@ -62,7 +62,7 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-Notice that the <i>li</i> element has the [CSS](https://react.dev/learn#adding-styles) classname <i>note</i>, that could be used to access the component in our tests.
+Notice that the <i>li</i> element has the value <i>note</i> for the [CSS](https://react.dev/learn#adding-styles) attribute className, that could be used to access the component in our tests.
 
 ### Rendering the component for tests
 
@@ -95,7 +95,7 @@ After the initial configuration, the test renders the component with the [render
 render(<Note note={note} />)
 ```
 
-Normally React components are rendered to the <i>DOM</i>. The render method we used renders the components in a format that is suitable for tests without rendering them to the DOM.
+Normally React components are rendered to the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model). The render method we used renders the components in a format that is suitable for tests without rendering them to the DOM.
 
 We can use the object [screen](https://testing-library.com/docs/queries/about#screen) to access the rendered component. We use screen's method [getByText](https://testing-library.com/docs/queries/bytext) to search for an element that has the note content and ensure that it exists:
 
@@ -137,7 +137,7 @@ I do not like this way of storing tests and application code in the same directo
 
 ### Searching for content in a component
 
-The react-testing-library package offers many different ways of investigating the content of the component being tested. In reality, the _expect_ in our test is not needed at all
+The react-testing-library package offers many different ways of investigating the content of the component being tested. In reality, the _expect_ in our test is not needed at all:
 
 ```js
 import React from 'react'
@@ -311,7 +311,7 @@ test('clicking the button calls event handler once', async () => {
 })
 ```
 
-There are a few interesting things related to this test. The event handler is a [mock](https://facebook.github.io/jest/docs/en/mock-functions.html) function defined with Jest:
+There are a few interesting things related to this test. The event handler is a [mock](https://jestjs.io/docs/mock-functions) function defined with Jest:
 
 ```js
 const mockHandler = jest.fn()
@@ -338,7 +338,7 @@ The expectation of the test verifies that the <i>mock function</i> has been call
 expect(mockHandler.mock.calls).toHaveLength(1)
 ```
 
-[Mock objects and functions](https://en.wikipedia.org/wiki/Mock_object) are commonly used stub components in testing that are used for replacing dependencies of the components being tested. Mocks make it possible to return hardcoded responses, and to verify the number of times the mock functions are called and with what parameters.
+[Mock objects and functions](https://en.wikipedia.org/wiki/Mock_object) are commonly used [stub](https://en.wikipedia.org/wiki/Method_stub) components in testing that are used for replacing dependencies of the components being tested. Mocks make it possible to return hardcoded responses, and to verify the number of times the mock functions are called and with what parameters.
 
 In our example, the mock function is a perfect choice since it can be easily used for verifying that the method gets called exactly once.
 
@@ -408,7 +408,7 @@ describe('<Togglable />', () => {
 })
 ```
 
-The _beforeEach_ function gets called before each test, which then renders the <i>Togglable</i> component and saves the field _container_ of the return value.
+The _beforeEach_ function gets called before each test, which then renders the <i>Togglable</i> component and saves the field _container_ of the returned value.
 
 The first test verifies that the <i>Togglable</i> component renders its child component
 
@@ -418,7 +418,7 @@ The first test verifies that the <i>Togglable</i> component renders its child co
 </div>
 ```
 
-The remaining tests use the [toHaveStyle](https://www.npmjs.com/package/@testing-library/jest-dom#tohavestyle) method to verify that the child component of the <i>Togglable</i> component is not visible initially, by checking that the style of the <i>div</i> element contains _{ display: 'none' }_. Another test verifies that when the button is pressed the component is visible, meaning that the style for hiding the component <i>is no longer</i> assigned to the component.
+The remaining tests use the [toHaveStyle](https://www.npmjs.com/package/@testing-library/jest-dom#tohavestyle) method to verify that the child component of the <i>Togglable</i> component is not visible initially, by checking that the style of the <i>div</i> element contains _{ display: 'none' }_. Another test verifies that when the button is pressed the component is visible, meaning that the style for hiding it <i>is no longer</i> assigned to the component.
 
 Let's also add a test that can be used to verify that the visible content can be hidden by clicking the second button of the component:
 
@@ -493,7 +493,7 @@ const NoteForm = ({ createNote }) => {
 export default NoteForm
 ```
 
-The form works by calling the _createNote_ function it received as props with the details of the new note.
+The form works by calling the function received as props _createNote_, with the details of the new note.
 
 The test is as follows:
 
@@ -681,7 +681,7 @@ const Note = ({ note, toggleImportance }) => {
 export default Note
 ```
 
-the _getByText_ command that the test uses does <i>not</i> find the element
+the _getByText_ method that the test uses does <i>not</i> find the element
 
 ```js
 test('renders content', () => {
@@ -698,7 +698,7 @@ test('renders content', () => {
 })
 ```
 
-Command _getByText_ looks for an element that has the **same text** that it has as a parameter, and nothing more. If we want to look for an element that <i>contains</i> the text, we could use an extra option:
+The _getByText_ method looks for an element that has the **same text** that it has as a parameter, and nothing more. If we want to look for an element that <i>contains</i> the text, we could use an extra option:
 
 ```js
 const element = screen.getByText(
@@ -706,17 +706,17 @@ const element = screen.getByText(
 )
 ```
 
-or we could use the command _findByText_:
+or we could use the _findByText_ method:
 
 ```js
 const element = await screen.findByText('Does not work anymore :(')
 ```
 
-It is important to notice that, unlike the other _ByText_ commands, _findByText_ returns a promise!
+It is important to notice that, unlike the other _ByText_ methods, _findByText_ returns a promise!
 
-There are situations where yet another form of the command _queryByText_ is useful. The command returns the element but <i>it does not cause an exception</i> if the element is not found.
+There are situations where yet another form of the _queryByText_ method is useful. The method returns the element but <i>it does not cause an exception</i> if it is not found.
 
-We could eg. use the command to ensure that something <i>is not rendered</i> to the component:
+We could eg. use the method to ensure that something <i>is not rendered</i> to the component:
 
 ```js
 test('does not render this', () => {
@@ -748,27 +748,28 @@ The report will tell us the lines of untested code in each component:
 ![HTML report of the test coverage](../../images/5/19new.png)
 
 You can find the code for our current application in its entirety in the <i>part5-8</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-8).
+
 </div>
 
 <div class="tasks">
 
 ### Exercises 5.13.-5.16.
 
-#### 5.13: Blog list tests, step1
+#### 5.13: Blog List Tests, step 1
 
 Make a test, which checks that the component displaying a blog renders the blog's title and author, but does not render its URL or number of likes by default.
 
 Add CSS classes to the component to help the testing as necessary.
 
-#### 5.14: Blog list tests, step2
+#### 5.14: Blog List Tests, step 2
 
 Make a test, which checks that the blog's URL and number of likes are shown when the button controlling the shown details has been clicked.
 
-#### 5.15: Blog list tests, step3
+#### 5.15: Blog List Tests, step 3
 
 Make a test, which ensures that if the <i>like</i> button is clicked twice, the event handler the component received as props is called twice.
 
-#### 5.16: Blog list tests, step4
+#### 5.16: Blog List Tests, step 4
 
 Make a test for the new blog form. The test should check, that the form calls the event handler it received as props with the right details when a new blog is created.
 
@@ -787,7 +788,7 @@ We chose to concentrate on making end-to-end tests to test the whole application
 
 ### Snapshot testing
 
-Jest offers a completely different alternative to "traditional" testing called [snapshot](https://facebook.github.io/jest/docs/en/snapshot-testing.html) testing. The interesting feature of snapshot testing is that developers do not need to define any tests themselves, it is simple enough to adopt snapshot testing.
+Jest offers a completely different alternative to "traditional" testing called [snapshot](https://jestjs.io/docs/snapshot-testing) testing. The interesting feature of snapshot testing is that developers do not need to define any tests themselves, it is simple enough to adopt snapshot testing.
 
 The fundamental principle is to compare the HTML code defined by the component after it has changed to the HTML code that existed before it was changed.
 
