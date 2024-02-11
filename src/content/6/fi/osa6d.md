@@ -237,7 +237,7 @@ const App = () => {
 Kun mutaatio on nyt suoritettu onnistuneesti, suoritetaan funktiokutsu
 
 ```js
-queryClient.invalidateQueries('notes')
+queryClient.invalidateQueries({ queryKey: ['notes'] })
 ```
 
 Tämä taas saa aikaan sen, että React Query päivittää automaattisesti kyselyn, jonka avain on  <i>notes</i> eli hakee muistiinpanot palvelimelta. Tämän seurauksena sovellus renderöi ajantasaisen palvelimella olevan tilan, eli myös lisätty muistiinpano renderöityy.
