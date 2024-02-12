@@ -749,7 +749,7 @@ describe('total likes', () => {
 })
 ```
 
-If defining your own test input list of blogs is too much work, you can use the ready-made list [here](https://raw.githubusercontent.com/fullstack-hy2020/misc/master/blogs_for_test.md).
+If defining your own test input list of blogs is too much work, you can use the ready-made list [here](https://github.com/fullstack-hy2020/misc/blob/master/blogs_for_test.md).
 
 You are bound to run into problems while writing tests. Remember the things that we learned about [debugging](/en/part3/saving_data_to_mongo_db#debugging-node-applications) in part 3. You can print things to the console with _console.log_ even during test execution. It is even possible to use the debugger while running tests, you can find instructions for that [here](https://jestjs.io/docs/en/troubleshooting).
 
