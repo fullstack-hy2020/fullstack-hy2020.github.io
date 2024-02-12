@@ -202,7 +202,7 @@ Uuden muistiinpanon luomista varten määritellään [mutaatio](https://tanstack
 const newNoteMutation = useMutation({ mutationFn: createNote })
 ```
 
-Parametrina on tiedostoon <i>requests.js</i> lisäämämme funktio, joka lähettää Axiosin avulla uuden muistiinpanon palvelille.
+Parametrina on tiedostoon <i>requests.js</i> lisäämämme funktio, joka lähettää Axiosin avulla uuden muistiinpanon palvelimelle.
 
 Tapahtumakäsittelijä <i>addNote</i> suorittaa mutaation kutsumalla mutaatio-olion funktiota <i>mutate</i> ja antamalla uuden muistiinpanon parametrina:
 
@@ -237,7 +237,7 @@ const App = () => {
 Kun mutaatio on nyt suoritettu onnistuneesti, suoritetaan funktiokutsu
 
 ```js
-queryClient.invalidateQueries('notes')
+queryClient.invalidateQueries({ queryKey: ['notes'] })
 ```
 
 Tämä taas saa aikaan sen, että React Query päivittää automaattisesti kyselyn, jonka avain on  <i>notes</i> eli hakee muistiinpanot palvelimelta. Tämän seurauksena sovellus renderöi ajantasaisen palvelimella olevan tilan, eli myös lisätty muistiinpano renderöityy.
