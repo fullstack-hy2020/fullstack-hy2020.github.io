@@ -159,7 +159,7 @@ module.exports = { connectToDatabase, sequelize }
 
 The <i>runMigrations</i> function that performs migrations is now executed every time the application opens a database connection when it starts. Sequelize keeps track of which migrations have already been completed, so if there are no new migrations, running the <i>runMigrations</i> function does nothing.
 
-Now let's start with a clean slate and remove all existing database tables from the application:
+Now let's start with a clean state and remove all existing database tables from the application:
 
 ```sql
 username => drop table notes;
