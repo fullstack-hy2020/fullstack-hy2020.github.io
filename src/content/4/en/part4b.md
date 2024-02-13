@@ -27,20 +27,18 @@ Next, let's change the scripts in our notes application <i>package.json</i> file
 {
   // ...
   "scripts": {
-    "start": "NODE_ENV=production node index.js",// highlight-line
-    "dev": "NODE_ENV=development nodemon index.js",// highlight-line
+    "start": "NODE_ENV=production node index.js", // highlight-line
+    "dev": "NODE_ENV=development nodemon index.js", // highlight-line
+    "test": "NODE_ENV=test node --test", // highlight-line
     "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
     "deploy": "fly deploy",
     "deploy:full": "npm run build:ui && npm run deploy",
     "logs:prod": "fly logs",
     "lint": "eslint .",
-    "test": "NODE_ENV=test jest --verbose --runInBand"// highlight-line
   },
   // ...
 }
 ```
-
-We also added the [runInBand](https://jestjs.io/docs/cli#--runinband) option to the npm script that executes the tests. This option will prevent Jest from running tests in parallel; we will discuss its significance once our tests start using the database.
 
 We specified the mode of the application to be <i>development</i> in the _npm run dev_ script that uses nodemon. We also specified that the default _npm start_ command will define the mode as <i>production</i>.
 
@@ -58,8 +56,8 @@ We can then achieve cross-platform compatibility by using the cross-env library 
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
     "dev": "cross-env NODE_ENV=development nodemon index.js",
+    "test": "cross-env  NODE_ENV=test node --test",
     // ...
-    "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
   },
   // ...
 }
@@ -126,6 +124,7 @@ npm install --save-dev supertest
 Let's write our first test in the <i>tests/note_api.test.js</i> file:
 
 ```js
+const { test, after } = require('node:test')
 const mongoose = require('mongoose')
 const supertest = require('supertest')
 const app = require('../app')
@@ -139,7 +138,7 @@ test('notes are returned as json', async () => {
     .expect('Content-Type', /application\/json/)
 })
 
-afterAll(async () => {
+after(async () => {
   await mongoose.connection.close()
 })
 ```
@@ -164,58 +163,17 @@ In principle, the test could also have been defined as a string
 
 The problem here, however, is that when using a string, the value of the header must be exactly the same. For the regex we defined, it is acceptable that the header <i>contains</i> the string in question. The actual value of the header is <i>application/json; charset=utf-8</i>, i.e. it also contains information about character encoding. However, our test is not interested in this and therefore it is better to define the test as a regex instead of an exact string.
 
-The test contains some details that we will explore [a bit later on](/en/part4/testing_the_backend#async-await). The arrow function that defines the test is preceded by the <i>async</i> keyword and the method call for the <i>api</i> object is preceded by the <i>await</i> keyword. We will write a few tests and then take a closer look at this async/await magic. Do not concern yourself with them for now, just be assured that the example tests work correctly. The async/await syntax is related to the fact that making a request to the API is an <i>asynchronous</i> operation. The [async/await syntax](https://jestjs.io/docs/asynchronous) can be used for writing asynchronous code with the appearance of synchronous code.
+The test contains some details that we will explore [a bit later on](/en/part4/testing_the_backend#async-await). The arrow function that defines the test is preceded by the <i>async</i> keyword and the method call for the <i>api</i> object is preceded by the <i>await</i> keyword. We will write a few tests and then take a closer look at this async/await magic. Do not concern yourself with them for now, just be assured that the example tests work correctly. The async/await syntax is related to the fact that making a request to the API is an <i>asynchronous</i> operation. The async/await syntax can be used for writing asynchronous code with the appearance of synchronous code.
 
-Once all the tests (there is currently only one) have finished running we have to close the database connection used by Mongoose. This can be easily achieved with the [afterAll](https://jestjs.io/docs/api#afterallfn-timeout) method:
+Once all the tests (there is currently only one) have finished running we have to close the database connection used by Mongoose. This can be easily achieved with the [after](https://nodejs.org/api/test.html#afterfn-options) method:
 
 ```js
-afterAll(async () => {
+after(async () => {
   await mongoose.connection.close()
 })
 ```
 
-When running your tests you may run across the following console warning:
-
-![jest console warning about not exiting after test execution](../../images/4/8.png)
-
-The problem is quite likely caused by the Mongoose version 6.x, the problem does not appear when version 5.x or 7.x is used. [Mongoose documentation](https://mongoosejs.com/docs/jest.html) does not recommend testing Mongoose applications with Jest.
-
-[One way](https://stackoverflow.com/questions/50687592/jest-and-mongoose-jest-has-detected-opened-handles) to get rid of this is to add to the directory <i>tests</i> a file <i>teardown.js</i> with the following content
-
-```js
-module.exports = () => {
-  process.exit(0)
-}
-```
-
-and by extending the Jest definitions in the <i>package.json</i> as follows
-
-```js
-{
- //...
- "jest": {
-   "testEnvironment": "node",
-   "globalTeardown": "./tests/teardown.js" // highlight-line
- }
-}
-```
-
-Another error you may come across is your test takes longer than the default Jest test timeout of 5000 ms. This can be solved by adding a third parameter to the test function:
-  
-```js
-test('notes are returned as json', async () => {
-  await api
-    .get('/api/notes')
-    .expect(200)
-    .expect('Content-Type', /application\/json/)
-}, 100000) // highlight-line
-```
-  
-This third parameter sets the timeout to 100000 ms. A long timeout ensures that our test won't fail due to the time it takes to run. (A long timeout may not be what you want for tests based on performance or speed, but this is fine for our example tests).
-
-If you still encounter issues with mongoose timeouts, set `bufferTimeoutMS` variable to a value significantly higher than 10000 (10 seconds). You could set it like this at the top, right after the `require` statements. `mongoose.set("bufferTimeoutMS", 30000)`  
-  
-One tiny but important detail: at the [beginning](/en/part4/structure_of_backend_application_introduction_to_testing#project-structure) of this part we extracted the Express application into the <i>app.js</i> file, and the role of the <i>index.js</i> file was changed to launch the application at the specified port via `app.listen`:
+One tiny but important detail: at the [beginning](/en/part4/structure_of_backend_application_introduction_to_testing#project-structure) of this part we extracted the Express application into the <i>app.js</i> file, and the role of the <i>index.js</i> file was changed to launch the application at the specified port via _app.listen_:
 
 ```js
 const app = require('./app') // the actual Express app
@@ -253,17 +211,31 @@ Let's write a few more tests:
 test('there are two notes', async () => {
   const response = await api.get('/api/notes')
 
-  expect(response.body).toHaveLength(2)
+  assert.strictEqual(response.body.length, 2)
 })
 
 test('the first note is about HTTP methods', async () => {
   const response = await api.get('/api/notes')
 
-  expect(response.body[0].content).toBe('HTML is easy')
+  const contents = response.body.map(e => e.content)
+  assert.strictEqual(contents.includes('HTML is easy'), true)
 })
 ```
 
-Both tests store the response of the request to the _response_ variable, and unlike the previous test that used the methods provided by _supertest_ for verifying the status code and headers, this time we are inspecting the response data stored in <i>response.body</i> property. Our tests verify the format and content of the response data with the [expect](https://jestjs.io/docs/expect#expectvalue) method of Jest.
+Both tests store the response of the request to the _response_ variable, and unlike the previous test that used the methods provided by _supertest_ for verifying the status code and headers, this time we are inspecting the response data stored in <i>response.body</i> property. Our tests verify the format and content of the response data with the method [strictEqual](https://nodejs.org/docs/latest/api/assert.html#assertstrictequalactual-expected-message) of the assert-library.
+
+We could simplify the second test a bit, and use the [assert](https://nodejs.org/docs/latest/api/assert.html#assertokvalue-message) itself to verify that the note is among the returned ones:
+
+```js
+test('the first note is about HTTP methods', async () => {
+  const response = await api.get('/api/notes')
+
+  const contents = response.body.map(e => e.content)
+  // is the parameter truthy
+  assert(contents.includes('HTML is easy'))
+})
+```
+
 
 The benefit of using the async/await syntax is starting to become evident. Normally we would have to use callback functions to access the data returned by promises, but with the new syntax things are a lot more comfortable:
 
@@ -272,7 +244,7 @@ const response = await api.get('/api/notes')
 
 // execution gets here only after the HTTP request is complete
 // the result of HTTP request is saved in variable response
-expect(response.body).toHaveLength(2)
+assert.strictEqual(response.body.length, 2)
 ```
 
 The middleware that outputs information about the HTTP requests is obstructing the test execution output. Let us modify the logger so that it does not print to the console in test mode:
@@ -303,16 +275,13 @@ module.exports = {
 
 Testing appears to be easy and our tests are currently passing. However, our tests are bad as they are dependent on the state of the database, that now  happens to have two notes. To make them more robust, we have to reset the database and generate the needed test data in a controlled manner before we run the tests.
 
-Our tests are already using the [afterAll](https://jestjs.io/docs/api#afterallfn-timeout) function of Jest to close the connection to the database after the tests are finished executing. Jest offers many other [functions](https://jestjs.io/docs/setup-teardown) that can be used for executing operations once before any test is run or every time before a test is run.
+Our tests are already using the[after](https://nodejs.org/api/test.html#afterfn-options) function of to close the connection to the database after the tests are finished executing. The library Node:test offers many other functions that can be used for executing operations once before any test is run or every time before a test is run.
 
-Let's initialize the database <i>before every test</i> with the [beforeEach](https://jestjs.io/docs/en/api.html#beforeeachfn-timeout) function:
+Let's initialize the database <i>before every test</i> with the [beforeEach](https://nodejs.org/api/test.html#beforeeachfn-options) function:
 
 ```js
-const mongoose = require('mongoose')
-const supertest = require('supertest')
-const app = require('../app')
-const api = supertest(app)
 // highlight-start
+const { test, after, beforeEach } = require('node:test')
 const Note = require('../models/note')
 // highlight-end
 
@@ -328,6 +297,8 @@ const initialNotes = [
   },
 ]
 // highlight-end
+
+// ...
 
 // highlight-start
 beforeEach(async () => {
@@ -348,32 +319,52 @@ The database is cleared out at the beginning, and after that, we save the two no
 Let's also make the following changes to the last two tests:
 
 ```js
-test('all notes are returned', async () => { // highlight-line
+test('there are two notes', async () => {
   const response = await api.get('/api/notes')
 
-  expect(response.body).toHaveLength(initialNotes.length) // highlight-line
+  assert.strictEqual(response.body.length, initialNotes.length)
 })
 
-test('a specific note is within the returned notes', async () => { // highlight-line
+test('the first note is about HTTP methods', async () => {
   const response = await api.get('/api/notes')
 
-  // highlight-start
-  const contents = response.body.map(r => r.content)
-
-  expect(contents).toContain(
-    'Browser can execute only JavaScript'
-  )
-  // highlight-end
+  const contents = response.body.map(e => e.content)
+  assert(contents.includes('HTML is easy'))
 })
 ```
 
-Pay special attention to the expect in the latter test. The <code>response.body.map(r => r.content)</code> command is used to create an array containing the content of every note returned by the API. The [toContain](https://jestjs.io/docs/expect#tocontainitem) method is used for checking that the note given to it as a parameter is in the list of notes returned by the API.
-
 ### Running tests one by one
 
-The _npm test_ command executes all of the tests for the application. When we are writing tests, it is usually wise to only execute one or two tests. Jest offers a few different ways of accomplishing this, one of which is the [only](https://jestjs.io/docs/en/api#testonlyname-fn-timeout) method. If tests are written across many files, this method is not great.
+The _npm test_ command executes all of the tests for the application. When we are writing tests, it is usually wise to only execute one or two tests. 
 
-A better option is to specify the tests that need to be run as parameters of the <i>npm test</i> command.
+There are a few different ways of accomplishing this, one of which is the [only](https://nodejs.org/api/test.html#testonlyname-options-fn) method. With the method we can define in the code what tests should be executed:
+
+```js
+test.only('notes are returned as json', async () => {
+  await api
+    .get('/api/notes')
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+})
+
+test.only('there are two notes', async () => {
+  const response = await api.get('/api/notes')
+
+  assert.strictEqual(response.body.length, 2)
+})
+```
+
+When tests are run with option _--test-only_, that is, with the command
+
+```
+npm test -- --test-only
+```
+
+only the _only_ marked tests are executed.
+
+The danger of the _only_ is that one forgets to remove those from the code.
+
+Another option is to specify the tests that need to be run as parameters of the <i>npm test</i> command.
 
 The following command only runs the tests found in the <i>tests/note_api.test.js</i> file:
 
@@ -381,20 +372,17 @@ The following command only runs the tests found in the <i>tests/note_api.test.js
 npm test -- tests/note_api.test.js
 ```
 
-The <i>-t</i> option can be used for running tests with a specific name:
+The [--tests-by-name-pattern](https://nodejs.org/api/test.html#filtering-tests-by-name)  option can be used for running tests with a specific name:
 
 ```js
-npm test -- -t "a specific note is within the returned notes"
+npm test -- --test-name-pattern="the first note is about HTTP methods"
 ```
 
 The provided parameter can refer to the name of the test or the describe block. The parameter can also contain just a part of the name. The following command will run all of the tests that contain <i>notes</i> in their name:
 
 ```js
-npm test -- -t 'notes'
+npm run test -- --test-name-pattern="notes"
 ```
-
-**NB**: When running a single test, the mongoose connection might stay open if no tests using the connection are run.
-The problem might be because supertest primes the connection, but Jest does not run the afterAll portion of the code.
 
 ### async/await
 
@@ -496,7 +484,7 @@ When code gets refactored, there is always the risk of [regression](https://en.w
 Let's start with the operation for adding a new note. Let's write a test that adds a new note and verifies that the number of notes returned by the API increases and that the newly added note is in the list.
 
 ```js
-test('a valid note can be added', async () => {
+test('a valid note can be added ', async () => {
   const newNote = {
     content: 'async/await simplifies making async calls',
     important: true,
@@ -512,10 +500,9 @@ test('a valid note can be added', async () => {
 
   const contents = response.body.map(r => r.content)
 
-  expect(response.body).toHaveLength(initialNotes.length + 1)
-  expect(contents).toContain(
-    'async/await simplifies making async calls'
-  )
+  assert.strictEqual(response.body.length, initialNotes.length + 1)
+
+  assert(contents.includes('async/await simplifies making async calls'))
 })
 ```
 
@@ -553,7 +540,7 @@ test('note without content is not added', async () => {
 
   const response = await api.get('/api/notes')
 
-  expect(response.body).toHaveLength(initialNotes.length)
+  assert.strictEqual(response.body.length, initialNotes.length)
 })
 ```
 
@@ -679,7 +666,7 @@ test('note without content is not added', async () => {
   expect(notesAtEnd).toHaveLength(helper.initialNotes.length) // highlight-line
 })
 
-afterAll(async () => {
+after(async () => {
   await mongoose.connection.close()
 })
 ```
@@ -752,7 +739,7 @@ test('a specific note can be viewed', async () => {
     .expect('Content-Type', /application\/json/)
 // highlight-end
 
-  expect(resultNote.body).toEqual(noteToView)
+  assert.deepStrictEqual(resultNote.body, noteToView)
 })
 
 test('a note can be deleted', async () => {
@@ -767,17 +754,22 @@ test('a note can be deleted', async () => {
 
   const notesAtEnd = await helper.notesInDb()
 
-  expect(notesAtEnd).toHaveLength(
-    helper.initialNotes.length - 1
-  )
-
   const contents = notesAtEnd.map(r => r.content)
+  assert(!contents.includes(noteToDelete.content))
 
-  expect(contents).not.toContain(noteToDelete.content)
+  assert.strictEqual(notesAtEnd.length, helper.initialNotes.length - 1)
 })
 ```
 
 Both tests share a similar structure. In the initialization phase, they fetch a note from the database. After this, the tests call the actual operation being tested, which is highlighted in the code block. Lastly, the tests verify that the outcome of the operation is as expected.
+
+There is one point worth noting in the first test. Instead of the previously used method [strictEqual](https://nodejs.org/api/assert.html#assertstrictequalactual-expected-message), the method [deepStrictEqual](https://nodejs.org/api/assert.html#assertdeepstrictequalactual-expected-message) is used:
+
+```js
+assert.deepStrictEqual(resultNote.body, noteToView)
+```
+
+The reason for this is that _strictEqual_ uses the method [Object.is](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) to compare similarity, i.e. it compares whether the objects are the same. In our case, it is enough to check that the contents of the objects, i.e. the values of their fields, are the same. For this purpose _deepStrictEqual_ is suitable.
 
 The tests pass and we can safely refactor the tested routes to use async/await:
 
@@ -873,7 +865,7 @@ notesRouter.delete('/:id', async (request, response) => {
 ```
 
 Because of the library, we do not need the _next(exception)_ call anymore.
-The library handles everything under the hood. If an exception occurs in an <i>async</i> route, the execution is automatically passed to the error handling middleware.
+The library handles everything under the hood. If an exception occurs in an <i>async</i> route, the execution is automatically passed to the error-handling middleware.
 
 The other routes become:
 
@@ -1088,20 +1080,23 @@ Our test coverage is currently lacking. Some requests like <i>GET /api/notes/:id
 Below is an example of the test file after making some minor improvements:
 
 ```js
-const supertest = require('supertest')
+const { test, after, beforeEach, describe } = require('node:test')
+const assert = require('node:assert')
 const mongoose = require('mongoose')
-const helper = require('./test_helper')
+const supertest = require('supertest')
 const app = require('../app')
 const api = supertest(app)
 
+const helper = require('./test_helper')
+
 const Note = require('../models/note')
 
-beforeEach(async () => {
-  await Note.deleteMany({})
-  await Note.insertMany(helper.initialNotes)
-})
-
 describe('when there is initially some notes saved', () => {
+  beforeEach(async () => {
+    await Note.deleteMany({})
+    await Note.insertMany(helper.initialNotes)
+  })
+
   test('notes are returned as json', async () => {
     await api
       .get('/api/notes')
@@ -1112,118 +1107,111 @@ describe('when there is initially some notes saved', () => {
   test('all notes are returned', async () => {
     const response = await api.get('/api/notes')
 
-    expect(response.body).toHaveLength(helper.initialNotes.length)
+    assert.strictEqual(response.body.length, helper.initialNotes.length)
   })
 
   test('a specific note is within the returned notes', async () => {
     const response = await api.get('/api/notes')
 
     const contents = response.body.map(r => r.content)
+    assert(contents.includes('Browser can execute only JavaScript'))
+  })
 
-    expect(contents).toContain(
-      'Browser can execute only JavaScript'
-    )
+  describe('viewing a specific note', () => {
+
+    test('succeeds with a valid id', async () => {
+      const notesAtStart = await helper.notesInDb()
+
+      const noteToView = notesAtStart[0]
+
+      const resultNote = await api
+        .get(`/api/notes/${noteToView.id}`)
+        .expect(200)
+        .expect('Content-Type', /application\/json/)
+
+      assert.deepStrictEqual(resultNote.body, noteToView)
+    })
+
+    test('fails with statuscode 404 if note does not exist', async () => {
+      const validNonexistingId = await helper.nonExistingId()
+
+      await api
+        .get(`/api/notes/${validNonexistingId}`)
+        .expect(404)
+    })
+
+    test('fails with statuscode 400 id is invalid', async () => {
+      const invalidId = '5a3d5da59070081a82a3445'
+
+      await api
+        .get(`/api/notes/${invalidId}`)
+        .expect(400)
+    })
+  })
+
+  describe('addition of a new note', () => {
+    test('succeeds with valid data', async () => {
+      const newNote = {
+        content: 'async/await simplifies making async calls',
+        important: true,
+      }
+
+      await api
+        .post('/api/notes')
+        .send(newNote)
+        .expect(201)
+        .expect('Content-Type', /application\/json/)
+
+      const notesAtEnd = await helper.notesInDb()
+      assert.strictEqual(notesAtEnd.length, helper.initialNotes.length + 1)
+
+      const contents = notesAtEnd.map(n => n.content)
+      assert(contents.includes('async/await simplifies making async calls'))
+    })
+
+    test('fails with status code 400 if data invalid', async () => {
+      const newNote = {
+        important: true
+      }
+
+      await api
+        .post('/api/notes')
+        .send(newNote)
+        .expect(400)
+
+      const notesAtEnd = await helper.notesInDb()
+
+      assert.strictEqual(notesAtEnd.length, helper.initialNotes.length)
+    })
+  })
+
+  describe('deletion of a note', () => {
+    test('succeeds with status code 204 if id is valid', async () => {
+      const notesAtStart = await helper.notesInDb()
+      const noteToDelete = notesAtStart[0]
+
+      await api
+        .delete(`/api/notes/${noteToDelete.id}`)
+        .expect(204)
+
+      const notesAtEnd = await helper.notesInDb()
+
+      assert.strictEqual(notesAtEnd.length, helper.initialNotes.length - 1)
+
+      const contents = notesAtEnd.map(r => r.content)
+      assert(!contents.includes(noteToDelete.content))
+    })
   })
 })
 
-describe('viewing a specific note', () => {
-  test('succeeds with a valid id', async () => {
-    const notesAtStart = await helper.notesInDb()
-
-    const noteToView = notesAtStart[0]
-
-    const resultNote = await api
-      .get(`/api/notes/${noteToView.id}`)
-      .expect(200)
-      .expect('Content-Type', /application\/json/)
-
-    expect(resultNote.body).toEqual(noteToView)
-  })
-
-  test('fails with statuscode 404 if note does not exist', async () => {
-    const validNonexistingId = await helper.nonExistingId()
-
-    await api
-      .get(`/api/notes/${validNonexistingId}`)
-      .expect(404)
-  })
-
-  test('fails with statuscode 400 if id is invalid', async () => {
-    const invalidId = '5a3d5da59070081a82a3445'
-
-    await api
-      .get(`/api/notes/${invalidId}`)
-      .expect(400)
-  })
-})
-
-describe('addition of a new note', () => {
-  test('succeeds with valid data', async () => {
-    const newNote = {
-      content: 'async/await simplifies making async calls',
-      important: true,
-    }
-
-    await api
-      .post('/api/notes')
-      .send(newNote)
-      .expect(201)
-      .expect('Content-Type', /application\/json/)
-
-    const notesAtEnd = await helper.notesInDb()
-    expect(notesAtEnd).toHaveLength(helper.initialNotes.length + 1)
-
-    const contents = notesAtEnd.map(n => n.content)
-    expect(contents).toContain(
-      'async/await simplifies making async calls'
-    )
-  })
-
-  test('fails with status code 400 if data invalid', async () => {
-    const newNote = {
-      important: true
-    }
-
-    await api
-      .post('/api/notes')
-      .send(newNote)
-      .expect(400)
-
-    const notesAtEnd = await helper.notesInDb()
-
-    expect(notesAtEnd).toHaveLength(helper.initialNotes.length)
-  })
-})
-
-describe('deletion of a note', () => {
-  test('succeeds with status code 204 if id is valid', async () => {
-    const notesAtStart = await helper.notesInDb()
-    const noteToDelete = notesAtStart[0]
-
-    await api
-      .delete(`/api/notes/${noteToDelete.id}`)
-      .expect(204)
-
-    const notesAtEnd = await helper.notesInDb()
-
-    expect(notesAtEnd).toHaveLength(
-      helper.initialNotes.length - 1
-    )
-
-    const contents = notesAtEnd.map(r => r.content)
-
-    expect(contents).not.toContain(noteToDelete.content)
-  })
-})
-
-afterAll(async () => {
+after(async () => {
   await mongoose.connection.close()
 })
 ```
 
 The test output in the console is grouped according to the <i>describe</i> blocks:
 
-![jest output showing grouped describe blocks](../../images/4/7.png)
+![jest output showing grouped describe blocks](../../images/4/7new.png)
 
 There is still room for improvement, but it is time to move forward.
 

@@ -504,19 +504,13 @@ module.exports = {
 
 > The _average_ function uses the array [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) method. If the method is not familiar to you yet, then now is a good time to watch the first three videos from the [Functional Javascript](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84) series on YouTube.
 
-There are many different testing libraries or <i>test runners</i> available for JavaScript. In this course we will be using a testing library developed and used internally by Facebook called [jest](https://jestjs.io/), which resembles the previous king of JavaScript testing libraries [Mocha](https://mochajs.org/).
+There are a large number of test libraries, or <i>test runners</i>, available for JavaScript.
+The old king of test libraries is [Mocha](https://mochajs.org/), which was replaced a few years ago by [Jest](https://jestjs.io/). A newcomer to the libraries is [Vitest](https://vitest.dev/), which bills itself as a new generation of test libraries.
 
-Jest is a natural choice for this course, as it works well for testing backends, and it shines when it comes to testing React applications.
+Nowadays, Node also has a built-in test library [node:test](https://nodejs.org/docs/latest/api/test.html), which is well suited to the needs of the course.
 
-> <i>**Windows users:**</i> Jest may not work if the path of the project directory contains a directory that has spaces in its name.
 
-Since tests are only executed during the development of our application, we will install <i>jest</i> as a development dependency with the command:
-
-```bash
-npm install --save-dev jest
-```
-
-Let's define the <i>npm script _test_</i> to execute tests with Jest and to report about the test execution with the <i>verbose</i> style:
+Let's define the <i>npm script _test_</i> for the test execution:
 
 ```bash
 {
@@ -529,62 +523,43 @@ Let's define the <i>npm script _test_</i> to execute tests with Jest and to repo
     "deploy:full": "npm run build:ui && npm run deploy",
     "logs:prod": "fly logs",
     "lint": "eslint .",
-    "test": "jest --verbose" // highlight-line
+    "test": "node --test" // highlight-line
   },
   //...
 }
 ```
 
-Jest requires one to specify that the execution environment is Node. This can be done by adding the following to the end of <i>package.json</i>:
-
-```js
-{
- //...
- "jest": {
-   "testEnvironment": "node"
- }
-}
-```
 
 Let's create a separate directory for our tests called <i>tests</i> and create a new file called <i>reverse.test.js</i> with the following contents:
 
 ```js
+const { test } = require('node:test')
+const assert = require('node:assert')
+
 const reverse = require('../utils/for_testing').reverse
 
 test('reverse of a', () => {
   const result = reverse('a')
 
-  expect(result).toBe('a')
+  assert.strictEqual(result, 'a')
 })
 
 test('reverse of react', () => {
   const result = reverse('react')
 
-  expect(result).toBe('tcaer')
+  assert.strictEqual(result, 'tcaer')
 })
 
-test('reverse of releveler', () => {
-  const result = reverse('releveler')
+test('reverse of saippuakauppias', () => {
+  const result = reverse('saippuakauppias')
 
-  expect(result).toBe('releveler')
+  assert.strictEqual(result, 'saippuakauppias')
 })
 ```
 
-The ESLint configuration we added to the project in the previous part complains about the _test_ and _expect_ commands in our test file since the configuration does not allow <i>globals</i>. Let's get rid of the complaints by adding <i>"jest": true</i> to the <i>env</i> property in the <i>.eslintrc.js</i> file.
+The test defines the keyword _test_ and the library [assert](https://nodejs.org/docs/latest/api/assert.html), which is used by the tests to check the results of the functions under test.
 
-```js
-module.exports = {
-  'env': {
-    'commonjs': true,
-    'es2021': true,
-    'node': true,
-    'jest': true, // highlight-line
-  },
-  // ...
-}
-```
-
-In the first row, the test file imports the function to be tested and assigns it to a variable called _reverse_:
+In the next row, the test file imports the function to be tested and assigns it to a variable called _reverse_:
 
 ```js
 const reverse = require('../utils/for_testing').reverse
@@ -596,55 +571,59 @@ Individual test cases are defined with the _test_ function. The first parameter 
 () => {
   const result = reverse('react')
 
-  expect(result).toBe('tcaer')
+  assert.strictEqual(result, 'tcaer')
 }
 ```
 
-First, we execute the code to be tested, meaning that we generate a reverse for the string <i>react</i>. Next, we verify the results with the [expect](https://jestjs.io/docs/expect#expectvalue) function. Expect wraps the resulting value into an object that offers a collection of <i>matcher</i> functions, that can be used for verifying the correctness of the result. Since in this test case we are comparing two strings, we can use the [toBe](https://jestjs.io/docs/expect#tobevalue) matcher.
+First, we execute the code to be tested, meaning that we generate a reverse for the string <i>react</i>. Next, we verify the results with the the method [strictEqual](https://nodejs.org/docs/latest/api/assert.html#assertstrictequalactual-expected-message) of the [assert](https://nodejs.org/docs/latest/api/assert.html) library.
 
 As expected, all of the tests pass:
 
-![terminal output from npm test with all tests passing](../../images/4/1x.png)
+![terminal output from npm test with all tests passing](../../images/4/1new.png)
 
-Jest expects by default that the names of test files contain <i>.test</i>. In this course, we will follow the convention of naming our tests files with the extension <i>.test.js</i>.
+The library node:test expects by default that the names of test files contain <i>.test</i>. In this course, we will follow the convention of naming our tests files with the extension <i>.test.js</i>.
 
-Jest has excellent error messages, let's break the test to demonstrate this:
+Let's break the test:
 
 ```js
 test('reverse of react', () => {
   const result = reverse('react')
 
-  expect(result).toBe('tkaer')
+  assert.strictEqual(result, 'tkaer')
 })
 ```
 
 Running this test results in the following error message:
 
-![terminal output shows failure from npm test](../../images/4/2x.png)
+![terminal output shows failure from npm test](../../images/4/2new.png)
 
-Let's add a few tests for the _average_ function, into a new file <i>tests/average.test.js</i>.
+Let output from the npm test with _average_ function, into a new file <i>tests/average.test.js</i>.
 
 ```js
+const { test, describe } = require('node:test')
+
+// ...
+
 const average = require('../utils/for_testing').average
 
 describe('average', () => {
   test('of one value is the value itself', () => {
-    expect(average([1])).toBe(1)
+    assert.strictEqual(average([1]), 1)
   })
 
   test('of many is calculated right', () => {
-    expect(average([1, 2, 3, 4, 5, 6])).toBe(3.5)
+    assert.strictEqual(average([1, 2, 3, 4, 5, 6]), 3.5)
   })
 
   test('of empty array is zero', () => {
-    expect(average([])).toBe(0)
+    assert.strictEqual(average([]), 0)
   })
 })
 ```
 
 The test reveals that the function does not work correctly with an empty array (this is because in JavaScript dividing by zero results in <i>NaN</i>):
 
-![terminal output showing empty array fails with jest](../../images/4/3.png)
+![terminal output showing empty array fails](../../images/4/3new.png)
 
 Fixing the function is quite easy:
 
@@ -670,9 +649,9 @@ describe('average', () => {
 })
 ```
 
-Describe blocks can be used for grouping tests into logical collections. The test output of Jest also uses the name of the describe block:
+Describe blocks can be used for grouping tests into logical collections. The test output also uses the name of the describe block:
 
-![screenshot of npm test showing describe blocks](../../images/4/4x.png)
+![screenshot of npm test showing describe blocks](../../images/4/4new.png)
 
 As we will see later on <i>describe</i> blocks are necessary when we want to run some shared setup or teardown operations for a group of tests.
 
@@ -680,7 +659,7 @@ Another thing to notice is that we wrote the tests in quite a compact way, witho
 
 ```js
 test('of empty array is zero', () => {
-  expect(average([])).toBe(0)
+  assert.strictEqual(average([]), 0)
 })
 ```
 
@@ -690,7 +669,7 @@ test('of empty array is zero', () => {
 
 ### Exercises 4.3.-4.7.
 
-Let's create a collection of helper functions that are meant to assist in dealing with the blog list. Create the functions into a file called <i>utils/list_helper.js</i>. Write your tests into an appropriately named test file under the <i>tests</i> directory.
+Let's create a collection of helper functions that are metest showing described blocksh the blog list. Create the functions into a file called <i>utils/list_helper.js</i>. Write your tests into an appropriately named test file under the <i>tests</i> directory.
 
 #### 4.3: Helper Functions and Unit Tests, step 1
 
@@ -709,13 +688,15 @@ module.exports = {
 Verify that your test configuration works with the following test:
 
 ```js
+const { test, describe } = require('node:test')
+const assert = require('node:assert')
 const listHelper = require('../utils/list_helper')
 
 test('dummy returns one', () => {
   const blogs = []
 
   const result = listHelper.dummy(blogs)
-  expect(result).toBe(1)
+  assert.strictEqual(result), 1)
 })
 ```
 
@@ -744,22 +725,14 @@ describe('total likes', () => {
 
   test('when list has only one blog, equals the likes of that', () => {
     const result = listHelper.totalLikes(listWithOneBlog)
-    expect(result).toBe(5)
+    assert.strictEqual(result), 5)
   })
 })
 ```
 
 If defining your own test input list of blogs is too much work, you can use the ready-made list [here](https://github.com/fullstack-hy2020/misc/blob/master/blogs_for_test.md).
 
-You are bound to run into problems while writing tests. Remember the things that we learned about [debugging](/en/part3/saving_data_to_mongo_db#debugging-node-applications) in part 3. You can print things to the console with _console.log_ even during test execution. It is even possible to use the debugger while running tests, you can find instructions for that [here](https://jestjs.io/docs/en/troubleshooting).
-
-**NB:** if some test is failing, then it is recommended to only run that test while you are fixing the issue. You can run a single test with the [only](https://jestjs.io/docs/api#testonlyname-fn-timeout) method.
-
-Another way of running a single test (or describe block) is to specify the name of the test to be run with the [-t](https://jestjs.io/docs/en/cli.html) flag:
-
-```js
-npm test -- -t 'when list has only one blog, equals the likes of that'
-```
+You are bound to run into problems while writing tests. Remember the things that we learned about [debugging](/en/part3/saving_data_to_mongo_db#debugging-node-applications) in part 3. You can print things to the console with _console.log_ even during test execution.
 
 #### 4.5*: Helper Functions and Unit Tests, step 3
 
@@ -774,8 +747,6 @@ The value returned by the function could be in the following format:
   likes: 12
 }
 ```
-
-**NB** when you are comparing objects, the [toEqual](https://jestjs.io/docs/en/expect#toequalvalue) method is probably what you want to use, since the [toBe](https://jestjs.io/docs/en/expect#tobevalue) tries to verify that the two values are the same value, and not just that they contain the same properties.
 
 Write the tests for this exercise inside of a new <i>describe</i> block. Do the same for the remaining exercises as well.
 

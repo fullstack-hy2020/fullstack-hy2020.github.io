@@ -286,10 +286,10 @@ describe('when there is initially one user at db', () => {
       .expect('Content-Type', /application\/json/)
 
     const usersAtEnd = await helper.usersInDb()
-    expect(usersAtEnd).toHaveLength(usersAtStart.length + 1)
+    assert.strictEqual(usersAtEnd.length, usersAtStart.length + 1)
 
     const usernames = usersAtEnd.map(u => u.username)
-    expect(usernames).toContain(newUser.username)
+    assert(usernames.includes(newUser.username))
   })
 })
 ```
@@ -335,34 +335,26 @@ describe('when there is initially one user at db', () => {
       .expect(400)
       .expect('Content-Type', /application\/json/)
 
-    expect(result.body.error).toContain('expected `username` to be unique')
-
     const usersAtEnd = await helper.usersInDb()
-    expect(usersAtEnd).toHaveLength(usersAtStart.length)
+    assert(result.body.error.includes('expected `username` to be unique'))
+
+    assert.strictEqual(usersAtEnd.length, usersAtStart.length)
   })
 })
 ```
 
 Testi ei tietenkään mene läpi tässä vaiheessa. Toimimme nyt [TDD:n eli test driven developmentin](https://en.wikipedia.org/wiki/Test-driven_development) hengessä, eli uuden ominaisuuden testi kirjoitetaan ennen ominaisuuden ohjelmointia.
 
-Mongoosen validoinnit eivät tarjoa valmista mahdollisuutta kentän arvon uniikkiuden tarkastamiseen.  Ongelmaan tuo ratkaisun npm-pakettina asennettava [mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator). Asennetaan kirjasto tuttuun tapaan komennolla
+Mongoosen validoinnit eivät tarjoa täysin suoraa tapaa kentän arvon uniikkiuden tarkastamiseen. Uniikkius on kuitenkin mahdollista saada aikaan määrittelemällä tietokannan kokoelmaan kentän arvon [yksikäsitteisyyden takaava indeksi](https://mongoosejs.com/docs/schematypes.html). Määrittely tapahtuu seuraavasti:
 
-```
-npm install mongoose-unique-validator
-```
-
-ja laajennetaan koodia kirjaston dokumentaatiota noudattaen:
 
 ```js
-const mongoose = require('mongoose')
-const uniqueValidator = require('mongoose-unique-validator') // highlight-line
-
 const userSchema = mongoose.Schema({
   // highlight-start
   username: {
     type: String,
     required: true,
-    unique: true
+    unique: true // username oltava yksikäsitteinen
   },
   // highlight-end
   name: String,
@@ -375,10 +367,31 @@ const userSchema = mongoose.Schema({
   ],
 })
 
-userSchema.plugin(uniqueValidator) // highlight-line
 
 // ...
 ```
+
+Yksikäsitteisyyden takaavan indeksin kanssa on kuitenkin oltava tarkkana. Jos tietokannassa on jo dokumentteja jotka rikkovat yksikäsitteisyysehdon, [ei indeksiä muodosteta](https://dev.to/akshatsinghania/mongoose-unique-not-working-16bf). Eli lisätessäsi yksikäsitteisyysindeksin, varmista että tietokanta on eheässä tilassa! Yllä oleva testi lisäsi tietokantaan kahteen kertaan käyttäjän käyttäjänimellä _root_, ja nämä on poistettava jotta indeksi muodostuu ja koodi toimii.
+
+Mongoosen validaatiot eivät huomaa indeksin rikkoutumista, ja niistä seuraa virheen _ValidationError_ sijaan  virhe, jonka tyyppi on _MongoServerError_. Joudummekin laajentamaan virheenkäsittelijää, jotta virhe saadaan asianmukaisesti hoidettua:
+
+```js
+const errorHandler = (error, request, response, next) => {
+  if (error.name === 'CastError') {
+    return response.status(400).send({ error: 'malformatted id' })
+  } else if (error.name === 'ValidationError') {
+    return response.status(400).json({ error: error.message })
+// highlight-start
+  } else if (error.name === 'MongoServerError' && error.message.includes('E11000 duplicate key error')) {
+    return response.status(400).json({ error: 'expected `username` to be unique' })
+  }
+  // highlight-end
+
+  next(error)
+}
+```
+
+Näiden muutosten jälkeen testit menevät läpi.
 
 Voisimme toteuttaa käyttäjien luomisen yhteyteen myös muita tarkistuksia, esim. onko käyttäjätunnus tarpeeksi pitkä, koostuuko se sallituista merkeistä ja onko salasana tarpeeksi hyvä. Jätämme ne kuitenkin vapaaehtoiseksi harjoitustehtäväksi.
 
@@ -427,27 +440,7 @@ notesRouter.post('/', async (request, response) => {
 })
 ```
 
-Muistiinpanon skeema muuttuu myös hieman:
-
-```js
-const noteSchema = new mongoose.Schema({
-  content: {
-    type: String,
-    required: true,
-    minlength: 5
-  },
-  important: Boolean,
-  // highlight-start
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  }
-  //highlight-end
-})
-```
-
 Huomionarvoista on nyt se, että myös <i>user</i>-olio muuttuu. Sen kenttään <i>notes</i> talletetaan luodun muistiinpanon <i>id</i>:
-Koska tieto tallennetaan <i>user</i>-olioon tulee muistiinpanoa poistettaessa tieto poistaa myös <i>user</i>-olion listalta.
 
 ```js
 const user = User.findById(body.userId)
