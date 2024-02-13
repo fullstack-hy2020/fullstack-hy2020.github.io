@@ -1,7 +1,9 @@
 import React from 'react';
 
 const InfoBanner = ({ visible, onHide }) => {
-  if (!visible) return null;
+  const relevant = window.location.href.includes('osa4') || window.location.href.includes('en/part4')
+
+  if (!relevant || !visible) return null;
 
   const style = {
     padding: 10,
@@ -46,21 +48,9 @@ const InfoBanner = ({ visible, onHide }) => {
     <div style={style}>
       <div style={textStyle}>
         <p>
-          There are some changes in part 9. The <i>Patientor</i> example app
-          structure has been refactored to a less complex form to make it easier
-          to concentrate on learning TypeScript.
+          The testing library used in part 4 was changed 13th February 2024 from Jest to Node:test.
+          If you have started with Jest, you may continue. The relevant material is still available, see the "Legacy: testing with Jest"
         </p>
-        <div style={{ marginTop: 10 }}>
-          If you are just working with the old Patientor, no worries, the old
-          material shall stay online for a couple of weeks.
-        </div>
-
-        <div style={{ marginTop: 10 }}>
-          <i>
-            If you have already completed the part 9, this change has absolutely
-            no effect on your progress.
-          </i>
-        </div>
       </div>
       <div style={buttonDiv}>
         <button style={buttonStyle} onClick={onHide}>
