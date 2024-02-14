@@ -806,7 +806,7 @@ Mitä rivillä tapahtuu? <em>notes.map(n => n.id)</em> muodostaa taulukon, joka 
 
 **HUOM:** tämän osan tehtäväsarja kannattaa tehdä omaan Git-repositorioon ja suoraan repositorion juureen! Jos et tee näin, joudut ongelmiin tehtävässä 3.10
 
-**HUOM2:** Koska nyt ei ole kyse frontendista ja Reactista, sovellusta <strong>ei luoda</strong> create-react-app:illa vaan komennolla <em>npm init</em>, kuten ylempänä tämän osan materiaalissa.
+**HUOM2:** Koska nyt ei ole kyse frontendista ja Reactista, sovellusta <strong>ei luoda</strong> Vitellä vaan komennolla <em>npm init</em>, kuten ylempänä tämän osan materiaalissa.
 
 
 **Vahva suositus:** kun teet backendin koodia, pidä koko ajan silmällä, mitä palvelimen koodia suorittavassa konsolissa tapahtuu.
