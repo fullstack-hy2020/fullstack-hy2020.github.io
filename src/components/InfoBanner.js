@@ -1,9 +1,7 @@
 import React from 'react';
 
 const InfoBanner = ({ visible, onHide }) => {
-  const relevant = window.location.href.includes('osa4') || window.location.href.includes('en/part4')
-
-  if (!relevant || !visible) return null;
+  if (!visible) return null;
 
   const style = {
     padding: 10,

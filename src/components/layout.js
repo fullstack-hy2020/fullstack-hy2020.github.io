@@ -23,7 +23,8 @@ const Layout = props => {
   useEffect(() => {
     const key = localStorage.getItem(BANNER_TO_KEY)
     if (!key) {
-      setVisible(true);
+      const relevant = window.location.href.includes('osa4') || window.location.href.includes('en/part4')
+      setVisible(relevant);
     }
   }, []);
 
