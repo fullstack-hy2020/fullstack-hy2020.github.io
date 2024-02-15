@@ -39,6 +39,78 @@ Créez une nouvelle application Vite et installez </i>redux</i> avec la commande
 npm install redux
 ```
 
+Comme dans Flux, dans Redux, l'état est également stocké dans un [store](https://redux.js.org/basics/store).
+
+L'ensemble de l'état de l'application est stocké dans <i>un</i> objet JavaScript dans le store. Étant donné que notre application n'a besoin que de la valeur du compteur, nous la sauvegarderons directement dans le store. Si l'état était plus compliqué, différentes choses dans l'état seraient sauvegardées comme champs séparés de l'objet.
+
+L'état du store est modifié avec des [actions](https://redux.js.org/basics/actions). Les actions sont des objets, qui ont au moins un champ déterminant le <i>type</i> de l'action.
+Notre application a besoin par exemple de l'action suivante:
+
+```js
+{
+  type: 'INCREMENT'
+}
+```
+
+Si l'action implique des données, d'autres champs peuvent être déclarés selon les besoins. Cependant, notre application de comptage est si simple que les actions sont suffisantes avec juste le champ de type.
+
+L'impact de l'action sur l'état de l'application est défini à l'aide d'un [reducer](https://redux.js.org/basics/reducers). En pratique, un réducteur est une fonction à laquelle sont donnés l'état actuel et une action comme paramètres. Elle <i>retourne</i> un nouvel état.
+
+Définissons maintenant un réducteur pour notre application:
+
+```js
+const counterReducer = (state, action) => {
+  if (action.type === 'INCREMENT') {
+    return state + 1
+  } else if (action.type === 'DECREMENT') {
+    return state - 1
+  } else if (action.type === 'ZERO') {
+    return 0
+  }
+
+  return state
+}
+```
+
+Le premier paramètre est l'<i>état</i> dans le store. Le réducteur retourne un <i>nouvel état</i> basé sur le type de _l'action_. Ainsi, par exemple, lorsque le type de l'Action est <i>INCREMENT</i>, l'état obtient l'ancienne valeur plus un. Si le type de l'Action est <i>ZERO</i>, la nouvelle valeur de l'état est zéro.
+
+Changeons un peu le code. Nous avons utilisé des instructions if-else pour répondre à une action et changer l'état. Cependant, l'instruction [switch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) est l'approche la plus courante pour écrire un réducteur.
+
+Définissons également une [valeur par défaut](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters) de 0 pour le paramètre <i>état</i>. Maintenant, le réducteur fonctionne même si l'état du store n'a pas encore été initialisé.
+
+```js
+// highlight-start
+const counterReducer = (state = 0, action) => {
+  // highlight-end
+  switch (action.type) {
+    case 'INCREMENT':
+      return state + 1
+    case 'DECREMENT':
+      return state - 1
+    case 'ZERO':
+      return 0
+    default: // if none of the above matches, code comes here
+      return state
+  }
+}
+```
+
+Reducer n'est jamais supposé être appelé directement depuis le code de l'application. Reducer est uniquement donné en paramètre à la fonction _createStore_ qui crée le store:
+
+```js
+// highlight-start
+import { createStore } from 'redux'
+// highlight-end
+
+const counterReducer = (state = 0, action) => {
+  // ...
+}
+
+// highlight-start
+const store = createStore(counterReducer)
+// highlight-end
+```
+
 
 
 </div>
