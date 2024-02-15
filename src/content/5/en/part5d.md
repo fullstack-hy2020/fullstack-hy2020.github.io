@@ -24,7 +24,7 @@ Some tests might pass one time and fail another, even if the code does not chang
 
 ### Cypress
 
-E2E library [Cypress](https://www.cypress.io/) has become popular within the last year. Cypress is exceptionally easy to use, and when compared to Selenium, for example, it requires a lot less hassle and headache.
+E2E library [Cypress](https://www.cypress.io/) has become popular within the last years. Cypress is exceptionally easy to use, and when compared to Selenium, for example, it requires a lot less hassle and headache.
 Its operating principle is radically different than most E2E testing libraries because Cypress tests are run completely within the browser.
 Other libraries run the tests in a Node process, which is connected to the browser through an API.
 
@@ -58,7 +58,7 @@ We also made a small change to the script that starts the application, without t
 
 Unlike the frontend's unit tests, Cypress tests can be in the frontend or the backend repository, or even in their separate repository.
 
-The tests require the tested system to be running. Unlike our backend integration tests, Cypress tests <i>do not start</i> the system when they are run.
+The tests require that the system being tested is running. Unlike our backend integration tests, Cypress tests <i>do not start</i> the system when they are run.
 
 Let's add an npm script to <i>the backend</i> which starts it in test mode, or so that <i>NODE\_ENV</i> is <i>test</i>.
 
@@ -80,7 +80,7 @@ Let's add an npm script to <i>the backend</i> which starts it in test mode, or s
 }
 ```
 
-**NB** To get Cypress working with WSL2 one might need to do some additional configuring first. These two [links](https://docs.cypress.io/guides/getting-started/installing-cypress#Windows-Subsystem-for-Linux) are great places to [start](https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress).
+**NB** To get Cypress working with WSL2 one might need to do some additional configuring first. These two [links](https://docs.cypress.io/guides/references/advanced-installation#Windows-Subsystem-for-Linux) are great places to [start](https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress).
   
 When both the backend and frontend are running, we can start Cypress with the command
 
@@ -118,16 +118,16 @@ describe('Note app', function() {
 })
 ```
 
-The test is run by clicking the test in the Cypress:
+The test is run by clicking on the test in Cypress:
 
 Running the test shows how the application behaves as the test is run:
 
 ![cypress showing automation of note test](../../images/5/56new.png)
 
-The structure of the test should look familiar. They use <i>describe</i> blocks to group different test cases, just like Jest. The test cases have been defined with the <i>it</i> method. Cypress borrowed these parts from the [Mocha](https://mochajs.org/) testing library it uses under the hood.
+The structure of the test should look familiar. They use <i>describe</i> blocks to group different test cases, just like Jest. The test cases have been defined with the <i>it</i> method. Cypress borrowed these parts from the [Mocha](https://mochajs.org/) testing library that it uses under the hood.
 
 [cy.visit](https://docs.cypress.io/api/commands/visit.html) and [cy.contains](https://docs.cypress.io/api/commands/contains.html) are Cypress commands, and their purpose is quite obvious.
-[cy.visit](https://docs.cypress.io/api/commands/visit.html) opens the web address given to it as a parameter in the browser used by the test. [cy.contains](https://docs.cypress.io/api/commands/contains.html) searches for the string it received as a parameter from the page.
+[cy.visit](https://docs.cypress.io/api/commands/visit.html) opens the web address given to it as a parameter in the browser used by the test. [cy.contains](https://docs.cypress.io/api/commands/contains.html) searches for the string it received as a parameter in the page.
 
 We could have declared the test using an arrow function
 
@@ -205,7 +205,7 @@ module.exports = {
 
 ### Writing to a form
 
-Let's extend our tests so that the test tries to log in to our application.
+Let's extend our tests so that our new test tries to log in to our application.
 We assume our backend contains a user with the username <i>mluukkai</i> and password <i>salainen</i>.
 
 The test begins by opening the login form.
@@ -223,8 +223,7 @@ describe('Note app',  function() {
 
 The test first searches for the login button by its text and clicks the button with the command [cy.click](https://docs.cypress.io/api/commands/click.html#Syntax).
 
-Both of our tests begin the same way, by opening the page <i><http://localhost:5173></i>, so we should
-separate the shared part into a <i>beforeEach</i> block run before each test:
+Both of our tests begin the same way, by opening the page <i><http://localhost:5173></i>, so we should extract the shared code into a <i>beforeEach</i> block run before each test:
 
 ```js
 describe('Note app', function() {
@@ -261,7 +260,7 @@ it('user can login', function () {
 
 The test works. The problem is if we later add more input fields, the test will break because it expects the fields it needs to be the first and the last on the page.
 
-It would be better to give our inputs unique <i>ids</i> and use those to find them.
+It would be better to give our inputs unique <i>IDs</i> and use those to find them.
 We change our login form like so:
 
 ```js
@@ -296,7 +295,7 @@ const LoginForm = ({ ... }) => {
 }
 ```
 
-We also added an id to our submit button so we can access it in our tests.
+We also added an ID to our submit button so we can access it in our tests.
 
 The test becomes:
 
@@ -316,13 +315,13 @@ describe('Note app',  function() {
 
 The last row ensures that the login was successful.
 
-Note that the CSS [id-selector](https://developer.mozilla.org/en-US/docs/Web/CSS/ID_selectors) is #, so if we want to search for an element with the id <i>username</i> the CSS selector is <i>#username</i>.
+Note that the CSS's [ID selector](https://developer.mozilla.org/en-US/docs/Web/CSS/ID_selectors) is #, so if we want to search for an element with the ID <i>username</i> the CSS selector is <i>#username</i>.
 
-Please note that passing the test at this stage requires that there is a user in the test database of the backend environment whose username is <i>mluukkai</i> and the password is <i>salainen</i>. Create a user if needed!
+Please note that passing the test at this stage requires that there is a user in the test database of the backend test environment, whose username is <i>mluukkai</i> and the password is <i>salainen</i>. Create a user if needed!
 
 ### Testing new note form
 
-Let's next add test methods to test the "new note" functionality:
+Next, let's add tests to test the "new note" functionality:
 
 ```js
 describe('Note app', function() {
@@ -363,7 +362,7 @@ If the page contained more inputs, the test would break
 
 ![cypress error - cy.type can only be called on a single element](../../images/5/31x.png)
 
-Due to this problem, it would again be better to give the input an <i>id</i> and search for the element by its id.
+Due to this problem, it would again be better to give the input an <i>ID</i> and search for the element by its ID.
 
 The structure of the tests looks like so:
 
@@ -494,7 +493,7 @@ Unlike earlier, now the testing starts with the backend in the same state every 
 
 Let's add one more test for checking that we can change the importance of notes.
 
-A while ago we changed the frontend so that a new note is important by default, or the <i>important</i> field is <i>true</i>:
+A while ago we changed the frontend so that a new note is important by default, so the <i>important</i> field is <i>true</i>:
 
 ```js
 const NoteForm = ({ createNote }) => {
@@ -603,8 +602,8 @@ it('login fails with wrong password', function() {
 })
 ```
 
-First, we use [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax) to search for a component with the CSS class <i>error</i>. Then we check that the error message can be found from this component.
-Note that the [CSS class selector](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors) starts with a full stop, so the selector for the class <i>error</i> is <i>.error</i>.
+First, we use [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax) to search for a component with the CSS class <i>error</i>. Then we check that the error message can be found in this component.
+Note that the [CSS class selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors) start with a full stop, so the selector for the class <i>error</i> is <i>.error</i>.
 
 We could do the same using the [should](https://docs.cypress.io/api/commands/should.html) syntax:
 
@@ -720,7 +719,11 @@ First, we test logging in. Then, in their own describe block, we have a bunch of
 
 As we said above, each test starts from zero! Tests do not start from the state where the previous tests ended.
 
-The Cypress documentation gives us the following advice: [Fully test the login flow – but only once](https://docs.cypress.io/guides/end-to-end-testing/testing-your-app#Fully-test-the-login-flow-but-only-once).
+The Cypress documentation gives us the following advice: [Fully test the login flow – but only once](https://docs.cypress.io/guides/end-to-end-testing/testing-your-app#Fully-test-the-login-flow----but-only-once).
+<!---
+!!! TODO NEXT: Remove mention to cypress recommendation or update content to use cy.session (would also need to update example repo)
+!!!!
+--->
 So instead of logging in a user using the form in the <i>beforeEach</i> block, Cypress recommends that we [bypass the UI](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Bypassing-your-UI) and do an HTTP request to the backend to log in. The reason for this is that logging in with an HTTP request is much faster than filling out a form.
 
 Our situation is a bit more complicated than in the example in the Cypress documentation because when a user logs in, our application saves their details to the localStorage.
