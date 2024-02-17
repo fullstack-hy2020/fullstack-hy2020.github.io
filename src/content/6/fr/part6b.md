@@ -186,4 +186,123 @@ const reducer = combineReducers({
 })
 ```
 
+L'état du store défini par le reducer ci-dessus est un objet avec deux propriétés: <i>notes</i> et <i>filter</i>. La valeur de la propriété <i>notes</i> est définie par le <i>noteReducer</i>, qui n'a pas à gérer les autres propriétés de l'état. De même, la propriété <i>filter</i> est gérée par le <i>filterReducer</i>.
+
+Avant de faire plus de changements dans le code, examinons comment différentes actions changent l'état du store défini par le reducer combiné. Ajoutons ce qui suit au fichier <i>main.jsx</i>:
+
+```js
+import { createNote } from './reducers/noteReducer'
+import { filterChange } from './reducers/filterReducer'
+//...
+store.subscribe(() => console.log(store.getState()))
+store.dispatch(filterChange('IMPORTANT'))
+store.dispatch(createNote('combineReducers forms one reducer from many simple reducers'))
+```
+
+En simulant la création d'une note et en changeant l'état du filtre de cette manière, l'état du store est enregistré dans la console après chaque changement effectué dans le store:
+
+![sortie console devtools montrant le filtre de notes et la nouvelle note](../../images/6/5e.png)
+
+À ce stade, il est bon de prendre conscience d'un petit mais important détail. Si nous ajoutons une instruction de log console <i>au début des deux reducers</i>:
+
+```js
+const filterReducer = (state = 'ALL', action) => {
+  console.log('ACTION: ', action)
+  // ...
+}
+```
+
+D'après la sortie console, on pourrait avoir l'impression que chaque action est dupliquée:
+
+![sortie console devtools montrant des actions dupliquées dans les reducers de note et de filtre](../../images/6/6.png)
+
+Y a-t-il un bug dans notre code ? Non. Le reducer combiné fonctionne de telle manière que chaque <i>action</i> est gérée dans <i>chaque</i> partie du reducer combiné. Typiquement, un seul reducer est intéressé par une action donnée, mais il y a des situations où plusieurs reducers changent leurs parties respectives de l'état basées sur la même action.
+
+### Finaliser les filtres
+
+Terminons l'application de sorte qu'elle utilise le reducer combiné. Nous commençons par changer le rendu de l'application et en connectant le store à l'application dans le fichier <i>main.jsx</i>:
+
+```js
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+)
+```
+
+Ensuite, corrigeons un bug causé par le code qui s'attend à ce que le store de l'application soit un tableau de notes:
+
+![TypeError dans le navigateur: notes.map n'est pas une fonction](../../images/6/7v.png)
+
+C'est une correction facile. Étant donné que les notes se trouvent dans le champ <i>notes</i> du store, nous devons juste apporter un petit changement à la fonction de sélection:
+
+```js
+const Notes = () => {
+  const dispatch = useDispatch()
+  const notes = useSelector(state => state.notes) // highlight-line
+
+  return(
+    <ul>
+      {notes.map(note =>
+        <Note
+          key={note.id}
+          note={note}
+          handleClick={() => 
+            dispatch(toggleImportanceOf(note.id))
+          }
+        />
+      )}
+    </ul>
+  )
+}
+```
+
+Auparavant, la fonction sélecteur retournait l'intégralité de l'état du store:
+
+```js
+const notes = useSelector(state => state)
+```
+
+Et maintenant, elle retourne seulement son champ <i>notes</i>
+
+```js
+const notes = useSelector(state => state.notes)
+```
+
+Extrayons le filtre de visibilité dans son propre composant <i>src/components/VisibilityFilter.jsx</i> :
+
+```js
+import { filterChange } from '../reducers/filterReducer'
+import { useDispatch } from 'react-redux'
+
+const VisibilityFilter = (props) => {
+  const dispatch = useDispatch()
+
+  return (
+    <div>
+      all    
+      <input 
+        type="radio" 
+        name="filter" 
+        onChange={() => dispatch(filterChange('ALL'))}
+      />
+      important   
+      <input
+        type="radio"
+        name="filter"
+        onChange={() => dispatch(filterChange('IMPORTANT'))}
+      />
+      nonimportant 
+      <input
+        type="radio"
+        name="filter"
+        onChange={() => dispatch(filterChange('NONIMPORTANT'))}
+      />
+    </div>
+  )
+}
+
+export default VisibilityFilter
+```
+
 </div>
