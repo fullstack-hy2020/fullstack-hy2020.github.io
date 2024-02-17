@@ -502,7 +502,7 @@ module.exports = {
 }
 ```
 
-> The _average_ function uses the array [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) method. If the method is not familiar to you yet, then now is a good time to watch the first three videos from the [Functional Javascript](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84) series on YouTube.
+> The _average_ function uses the array [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) method. If the method is not familiar to you yet, then now is a good time to watch the first three videos from the [Functional JavaScript](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84) series on YouTube.
 
 There are a large number of test libraries, or <i>test runners</i>, available for JavaScript.
 The old king of test libraries is [Mocha](https://mochajs.org/), which was replaced a few years ago by [Jest](https://jestjs.io/). A newcomer to the libraries is [Vitest](https://vitest.dev/), which bills itself as a new generation of test libraries.
@@ -696,7 +696,7 @@ test('dummy returns one', () => {
   const blogs = []
 
   const result = listHelper.dummy(blogs)
-  assert.strictEqual(result), 1)
+  assert.strictEqual(result, 1)
 })
 ```
 
@@ -725,7 +725,7 @@ describe('total likes', () => {
 
   test('when list has only one blog, equals the likes of that', () => {
     const result = listHelper.totalLikes(listWithOneBlog)
-    assert.strictEqual(result), 5)
+    assert.strictEqual(result, 5)
   })
 })
 ```

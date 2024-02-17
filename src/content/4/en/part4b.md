@@ -997,7 +997,7 @@ Full stack development is <i> extremely hard</i>, that is why I will use all the
 - I will keep an eye on the database: does the backend save data there in the right format
 - I will progress in small steps
 - <i>I will write lots of _console.log_ statements to make sure I understand how the code and the tests behave and to help pinpoint problems</i>
-- If my code does not work, I will not write more code. Instead, I start deleting the code until it works or just return to a state when everything was still working
+- If my code does not work, I will not write more code. Instead, I start deleting the code until it works or just return to a state when everything is still working
 - <i>If a test does not pass, I make sure that the tested functionality for sure works in the application</i>
 - When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](/en/part0/general_info#how-to-get-help-in-discord-telegram) how to ask for help
 
@@ -1007,47 +1007,21 @@ Full stack development is <i> extremely hard</i>, that is why I will use all the
 
 ### Exercises 4.8.-4.12.
 
-**NB:** the material uses the [toContain](https://jestjs.io/docs/expect#tocontainitem) matcher in several places to verify that an array contains a specific element. It's worth noting that the method uses the === operator for comparing and matching elements, which means that it is often not well-suited for matching objects. In most cases, the appropriate method for verifying objects in arrays is the [toContainEqual](https://jestjs.io/docs/expect#tocontainequalitem) matcher. However, the model solutions don't check for objects in arrays with matchers, so using the method is not required for solving the exercises.
-
 **Warning:** If you find yourself using async/await and <i>then</i> methods in the same code, it is almost guaranteed that you are doing something wrong. Use one or the other and don't mix the two.
 
 #### 4.8: Blog List Tests, step 1
 
-Use the supertest package for writing a test that makes an HTTP GET request to the <i>/api/blogs</i> URL. Verify that the blog list application returns the correct amount of blog posts in the JSON format.
+Use the SuperTest library for writing a test that makes an HTTP GET request to the <i>/api/blogs</i> URL. Verify that the blog list application returns the correct amount of blog posts in the JSON format.
 
 Once the test is finished, refactor the route handler to use the async/await syntax instead of promises.
 
 Notice that you will have to make similar changes to the code that were made [in the material](/en/part4/testing_the_backend#test-environment), like defining the test environment so that you can write tests that use separate databases.
 
-**NB:** When running the tests, you may run into the following warning:
-
-![Warning to read docs on connecting mongoose to jest](../../images/4/8a.png)
-
-[One way](https://stackoverflow.com/questions/50687592/jest-and-mongoose-jest-has-detected-opened-handles) to get rid of this is to add to the <i>tests</i> directory a file <i>teardown.js</i> with the following content
-
-```js
-module.exports = () => {
-  process.exit(0)
-}
-```
-
-and by extending the Jest definitions in the <i>package.json</i> as follows
-
-```js
-{
- //...
- "jest": {
-   "testEnvironment": "node",
-   "globalTeardown": "./tests/teardown.js" // highlight-line
- }
-}
-```
-
 **NB:** when you are writing your tests **<i>it is better to not execute them all</i>**, only execute the ones you are working on. Read more about this [here](/en/part4/testing_the_backend#running-tests-one-by-one).
 
 #### 4.9: Blog List Tests, step 2
 
-Write a test that verifies that the unique identifier property of the blog posts is named <i>id</i>, by default the database names the property <i>_id</i>. Verifying the existence of a property is easily done with Jest's [toBeDefined](https://jestjs.io/docs/en/expect#tobedefined) matcher.
+Write a test that verifies that the unique identifier property of the blog posts is named <i>id</i>, by default the database names the property <i>_id</i>.
 
 Make the required changes to the code so that it passes the test. The [toJSON](/en/part3/saving_data_to_mongo_db#connecting-the-backend-to-a-database) method discussed in part 3 is an appropriate place for defining the <i>id</i> parameter.
 

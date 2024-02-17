@@ -402,7 +402,6 @@ Rakennamme tämän osan tehtävissä <i>blogilistasovellusta</i>, jonka avulla k
 Kuvitellaan tilanne, jossa saat sähköpostitse seuraavan, yhteen tiedostoon koodatun sovellusrungon:
 
 ```js
-const http = require('http')
 const express = require('express')
 const app = express()
 const cors = require('cors')
@@ -683,7 +682,7 @@ test('dummy returns one', () => {
   const blogs = []
 
   const result = listHelper.dummy(blogs)
-  assert.strictEqual(result), 1)
+  assert.strictEqual(result, 1)
 })
 ```
 
@@ -712,7 +711,7 @@ describe('total likes', () => {
 
   test('when list has only one blog equals the likes of that', () => {
     const result = listHelper.totalLikes(listWithOneBlog)
-    assert.strictEqual(result), 5)
+    assert.strictEqual(result, 5)
   })
 })
 ```

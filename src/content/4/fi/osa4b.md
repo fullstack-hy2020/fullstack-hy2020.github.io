@@ -1000,8 +1000,6 @@ Full stack ‑ohjelmointi on <i>todella</i> hankalaa, ja sen takia lupaan hyödy
 
 ### Tehtävät 4.8.-4.12.
 
-**HUOM:** Materiaalissa käytetään muutamaan kertaan matcheria [toContain](https://jestjs.io/docs/expect#tocontainitem) kun tarkastetaan, onko jokin arvo taulukossa. Kannattaa huomata, että metodi käyttää samuuden vertailuun ===-operaattoria ja olioiden kohdalla tämä ei ole useinkaan se mitä halutaan. Parempi vaihtoehto onkin [toContainEqual](https://jestjs.io/docs/expect#tocontainequalitem). Tosin mallivastauksissa ei vertailla kertaakaan olioita matcherien avulla, joten ilmankin selviää varsin hyvin.
-
 **Varoitus:** Jos huomaat kirjoittavasi sekaisin async/awaitia ja <i>then</i>-kutsuja, on 99-prosenttisen varmaa, että teet jotain väärin. Käytä siis jompaakumpaa tapaa, älä missään tapauksessa "varalta" molempia.
 
 #### 4.8: blogilistan testit, step 1
@@ -1012,35 +1010,11 @@ Kun testi on valmis, refaktoroi operaatio käyttämään promisejen sijaan async
 
 Huomaa, että joudut tekemään koodiin [materiaalin tapaan](/osa4/backendin_testaaminen#test-ymparisto) hieman muutoksia (mm. testausympäristön määrittely), jotta saat järkevästi tehtyä omaa tietokantaa käyttäviä API-tason testejä.
 
-**HUOM 1:** Testejä suorittaessa törmäät ehkä seuraavaan varoitukseen:
-
-![Virheilmotus Mongoose: looks like you're trying to test Mongoose app with Jest's default jsdomain environment.](../../images/4/8a.png)
-
-Virheilmoituksesta pääsee eroon muutamallakin tavalla. [Esimerkiksi](https://stackoverflow.com/questions/50687592/jest-and-mongoose-jest-has-detected-opened-handles) lisäämällä hakemistoon <i>tests</i> tiedosto <i>teardown.js</i> jolla on seuraava sisältö
-
-```js
-module.exports = () => {
-  process.exit(0)
-}
-```
-
-ja lajentamalla tiedoston <i>package.json</i> Jestiä koskevaa määrittelyä seuraavasti
-
-```js
-{
- //...
- "jest": {
-   "testEnvironment": "node"
-   "globalTeardown": ".test/teardown.js" // highlight-line
- }
-}
-```
-
-**HUOM 2:** Testien kehitysvaiheessa yleensä **<i>ei kannata suorittaa joka kerta kaikkia testejä</i>**, vaan keskittyä yhteen testiin kerrallaan. Katso lisää [täältä](/osa4/backendin_testaaminen#testien-suorittaminen-yksitellen).
+**HUOM:** Testien kehitysvaiheessa yleensä **<i>ei kannata suorittaa joka kerta kaikkia testejä</i>**, vaan keskittyä yhteen testiin kerrallaan. Katso lisää [täältä](/osa4/backendin_testaaminen#testien-suorittaminen-yksitellen).
 
 #### 4.9: blogilistan testit, step2
 
-Tee testi, joka varmistaa että palautettujen blogien identifioivan kentän tulee olla nimeltään <i>id</i>. Oletusarvoisestihan tietokantaan talletettujen olioiden tunnistekenttä on <i>_id</i>. Olion kentän olemassaolon tarkastaminen onnistuu Jestin matcherillä [toBeDefined](https://jestjs.io/docs/en/expect#tobedefined).
+Tee testi, joka varmistaa että palautettujen blogien identifioivan kentän tulee olla nimeltään <i>id</i>. Oletusarvoisestihan tietokantaan talletettujen olioiden tunnistekenttä on <i>_id</i>.
 
 Muuta koodia siten, että testi menee läpi. Osassa 3 käsitelty [toJSON](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan#tietokantaa-kayttava-backend) on sopiva paikka parametrin <i>id</i> määrittelyyn. 
 
