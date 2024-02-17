@@ -720,12 +720,13 @@ Primero probamos el inicio de sesión. Luego, en su propio bloque de descripció
 Como dijimos anteriormente, ¡cada prueba comienza desde cero! Las pruebas no comienzan en el estado donde terminaron las pruebas anteriores.
 
 La documentación de Cypress nos da el siguiente consejo: [Prueba completamente el flujo de inicio de sesión, ¡pero solo una vez!](https://docs.cypress.io/guides/end-to-end-testing/testing-your-app#Fully-test-the-login-flow----but-only-once).
-Por lo tanto, en lugar de iniciar sesión como usuario mediante el formulario en el bloque <i>beforeEach</i>, Cypress recomienda que [omitamos la interfaz de usuario](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Bypassing-your-UI) y realiza una solicitud HTTP al backend para iniciar sesión. La razón de esto es que iniciar sesión con una solicitud HTTP es mucho más rápido que completar un formulario.
+Por lo tanto, en lugar de iniciar sesión como usuario mediante el formulario en el bloque <i>beforeEach</i>, vamos a omitir la interfaz de usuario y realizaremos una solicitud HTTP al backend para iniciar sesión. La razón de esto es que iniciar sesión con una solicitud HTTP es mucho más rápido que completar un formulario.
 
 Nuestra situación es un poco más complicada que en el ejemplo de la documentación de Cypress, porque cuando un usuario inicia sesión, nuestra aplicación guarda sus detalles en localStorage.
-El código es el siguiente
+Sin embargo, Cypress también puede manejar esto.
+El código es el siguiente:
 
-```js 
+```js
 describe('when logged in', function() {
   beforeEach(function() {
     // highlight-start
@@ -733,7 +734,7 @@ describe('when logged in', function() {
       username: 'mluukkai', password: 'salainen'
     }).then(response => {
       localStorage.setItem('loggedNoteappUser', JSON.stringify(response.body))
-      cy.visit('http://localhost:3000')
+      cy.visit('http://localhost:5173')
     })
     // highlight-end
   })
@@ -746,30 +747,29 @@ describe('when logged in', function() {
 })
 ```
 
-Podemos acceder a la respuesta a un [cy.request](https://docs.cypress.io/api/commands/request.html) con el método _then_. Debajo del capó <i>cy.request</i>, como todos los comandos de Cypress, están [Promises](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Commands-Are-Promises).
-La función de devolución de llamada guarda los detalles de un usuario que inició sesión en localStorage y vuelve a cargar la página.
-Ahora no hay diferencia en el inicio de sesión del usuario con el formulario de inicio de sesión.
+Podemos acceder a la respuesta de un [cy.request](https://docs.cypress.io/api/commands/request.html) con el método [_then_](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress#The-Cypress-Command-Queue). Debajo del capó, <i>cy.request</i>, al igual que todos los comandos de Cypress, son [asíncronos](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress#Commands-Are-Asynchronous).
+La función de callback guarda los detalles de un usuario conectado en localStorage y recarga la página.
+Ahora no hay diferencia con un usuario que inicia sesión a través del formulario de inicio de sesión.
 
-Si y cuando escribimos nuevas pruebas en nuestra aplicación, tenemos que usar el código de inicio de sesión en varios lugares.
-Deberíamos convertirlo en un [comando personalizado](https://docs.cypress.io/api/cypress-api/custom-commands.html).
+Si cuando escribimos nuevas pruebas en nuestra aplicación, tenemos que usar el código de inicio de sesión en varios lugares, deberíamos convertirlo en un [comando personalizado](https://docs.cypress.io/api/cypress-api/custom-commands.html).
 
 Los comandos personalizados se declaran en <i>cypress/support/commands.js</i>.
 El código para iniciar sesión es el siguiente:
 
-```js 
+```js
 Cypress.Commands.add('login', ({ username, password }) => {
   cy.request('POST', 'http://localhost:3001/api/login', {
     username, password
   }).then(({ body }) => {
     localStorage.setItem('loggedNoteappUser', JSON.stringify(body))
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:5173')
   })
 })
 ```
 
 Usar nuestro comando personalizado es fácil y nuestra prueba se vuelve más limpia:
 
-```js 
+```js
 describe('when logged in', function() {
   beforeEach(function() {
     // highlight-start
@@ -785,7 +785,7 @@ describe('when logged in', function() {
 })
 ```
 
-Lo mismo se aplica a la creación de una nueva nota ahora que lo pensamos. Tenemos una prueba que hace una nueva nota usando el formulario. También hacemos una nueva nota en el bloque <i>beforeEach</i> de la prueba de prueba que cambia la importancia de una nota:
+Lo mismo se aplica a la creación de una nueva nota ahora que pensamos sobre ello. Tenemos una prueba que hace una nueva nota usando el formulario. También hacemos una nueva nota en el bloque <i>beforeEach</i> de la prueba que cambia la importancia de una nota:
 
 ```js
 describe('Note app', function() {
@@ -824,17 +824,17 @@ Cypress.Commands.add('createNote', ({ content, important }) => {
     method: 'POST',
     body: { content, important },
     headers: {
-      'Authorization': `bearer ${JSON.parse(localStorage.getItem('loggedNoteappUser')).token}`
+      'Authorization': `Bearer ${JSON.parse(localStorage.getItem('loggedNoteappUser')).token}`
     }
   })
 
-  cy.visit('http://localhost:3000')
+  cy.visit('http://localhost:5173')
 })
 ```
 
-El comando espera que el usuario inicie sesión y que los detalles del usuario se guarden en localStorage.
+El comando espera que el usuario haya iniciado sesión y que los detalles del usuario estén guardados en localStorage.
 
-Ahora el bloque de formato se convierte en:
+Ahora el bloque beforeEach de la nota se convierte en:
 
 ```js
 describe('Note app', function() {
@@ -850,7 +850,7 @@ describe('Note app', function() {
         // highlight-start
         cy.createNote({
           content: 'another note cypress',
-          important: false
+          important: true
         })
         // highlight-end
       })
@@ -863,28 +863,26 @@ describe('Note app', function() {
 })
 ```
 
-Hay una característica más molesta en nuestras pruebas. La URL de nuestra aplicacion  <i> http://localhost:3000 </i> esta esta incustrada directamente en varios lugares.
+Hay otra cosa en nuestras pruebas que es molesta. La URL de nuestra aplicación <i> http://localhost:5173 </i> esta codificada literalmente en varios lugares.
 
-Definamos la URL de nuestra aplicación <i> baseUrl </i> en el [archivo de configuracion](https://docs.cypress.io/guides/references/configuration) pre-generado de Cypress <i>cypress.config.js</i>:
+Definamos la URL de nuestra aplicación <i>baseUrl</i> en el [archivo de configuración](https://docs.cypress.io/guides/references/configuration) pre-generado de Cypress <i>cypress.config.js</i>:
 
 ```js
-{
-  const { defineConfig } = require('cypress')
+const { defineConfig } = require("cypress")
 
-  module.exports = defineConfig({
-    e2e: {
-      setupNodeEvents(on, config){
-      },
-        baseUrl: 'http://localhost:3000' // highlight-line
+module.exports = defineConfig({
+  e2e: {
+    setupNodeEvents(on, config) {
     },
-  })
-}
+    baseUrl: 'http://localhost:5173' // highlight-line
+  },
+})
 ```
 
-Todos los comandos en los tests que usan la dirección de la aplicación
+Todos los comandos en las pruebas que usan la dirección de la aplicación
 
 ```js
-cy.visit('http://localhost:3000')
+cy.visit('http://localhost:5173')
 ```
 
 se pueden cambiar a
@@ -893,31 +891,31 @@ se pueden cambiar a
 cy.visit('')
 ```
 
-Tambien la direccion del backend esta en los tests incrustada directamente. La documentacion de Cypress recomienda definir otras direcciones usadas en los tets como variables de entorno.
+La dirección codificada del backend, <i>http://localhost:3001</i>, todavía está en las pruebas. La [documentación](https://docs.cypress.io/guides/guides/environment-variables) de Cypress recomienda definir otras direcciones utilizadas por las pruebas como variables de entorno.
 
-Expandamos el archivo de configuracion <i>cypress.config.js_:</i>
+Expandamos el archivo de configuración <i>cypress.config.js</i> de la siguiente manera:
 
 ```js
-{
-  const { defineConfig } = require('cypress')
+const { defineConfig } = require("cypress")
 
-  module.exports = defineConfig({
-	e2e: {
-	  setupNodeEvents(on, config){
-	  },
-	  baseUrl: 'http://localhost:3000',
-	  BACKEND: 'http://localhost:3001/api' // highlight-line
-	},
-  })
-}
+module.exports = defineConfig({
+  e2e: {
+    setupNodeEvents(on, config) {
+    },
+    baseUrl: 'http://localhost:5173',
+    env: {
+      BACKEND: 'http://localhost:3001/api' // highlight-line
+    }
+  },
+})
 ```
 
-Reemplazemos todas las direcciones del backend en los tests de la siguiente manera:
+Reemplacemos todas las direcciones del backend en las pruebas de la siguiente manera:
 
 ```js
 describe('Note ', function() {
   beforeEach(function() {
-    cy.visit('')
+
     cy.request('POST', `${Cypress.env('BACKEND')}/testing/reset`) // highlight-line
     const user = {
       name: 'Matti Luukkainen',
@@ -925,23 +923,25 @@ describe('Note ', function() {
       password: 'secret'
     }
     cy.request('POST', `${Cypress.env('BACKEND')}/users`, user) // highlight-line
+    cy.visit('')
   })
   // ...
 })
 ```
 
-Las pruebas y el código de la interfaz se pueden encontrar en [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-10), rama <i>part5-10</i>.
+Las pruebas y el código del frontend se pueden encontrar en [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-10), rama <i>part5-10</i>.
 
-### Cambiar la importancia de una nota
+### Cambiando la importancia de una nota
 
 Por último, echemos un vistazo a la prueba que hicimos para cambiar la importancia de una nota.
-Primero cambiaremos el bloque de formato para que cree tres notas en lugar de una:
+Primero cambiaremos el bloque beforeEach para que cree tres notas en lugar de una:
 
 ```js
 describe('when logged in', function() {
   describe('and several notes exist', function () {
     beforeEach(function () {
       // highlight-start
+      cy.login({ username: 'mluukkai', password: 'salainen' })
       cy.createNote({ content: 'first note', important: false })
       cy.createNote({ content: 'second note', important: false })
       cy.createNote({ content: 'third note', important: false })
@@ -962,13 +962,13 @@ describe('when logged in', function() {
 
 ¿Cómo funciona realmente el comando [cy.contains](https://docs.cypress.io/api/commands/contains.html)?
 
-Cuando hacemos clic en el comando _cy.contains('second note')_ en Cypress [Test Runner](https://docs.cypress.io/guides/core-concepts/test-runner.html), vemos ese comando busca el elemento que contiene el texto <i>second note</i>:
+Cuando hacemos clic en el comando _cy.contains('second note')_ en Cypress [Test Runner](https://docs.cypress.io/guides/core-concepts/cypress-app#Test-Runner), vemos que ese comando busca el elemento que contiene el texto <i>second note</i>:
 
-![](../../images/5/34x.png)
+![cypress test runner haciendo clic en la segunda nota](../../images/5/34new.png)
 
-Al hacer clic en la siguiente línea <i>.contains('make important')</i> vemos que la prueba usa el botón 'make important' correspondiente a la <i> segunda nota </i>:
+Al hacer clic en la línea siguiente _.contains('make important')_ vemos que la prueba utiliza el botón 'make important' correspondiente a la <i>segunda nota</i>:
 
-![](../../images/5/35x.png)
+![cypress test runner haciendo clic en make important](../../images/5/35new.png)
 
 Cuando está encadenado, el segundo comando <i>contains</i> <i>continúa</i> la búsqueda desde dentro del componente encontrado por el primer comando.
 
@@ -981,9 +981,9 @@ cy.contains('make important').click()
 
 el resultado habría sido totalmente diferente. La segunda línea de la prueba haría clic en el botón de una nota incorrecta:
 
-![](../../images/5/36x.png)
+![cypress mostrando error e intentando hacer clic incorrectamente en el primer botón](../../images/5/36new.png)
 
-¡Al codificar pruebas, debe verificar en el corredor de pruebas que las pruebas utilizan los componentes correctos!
+Al escribir pruebas, ¡debes verificar en el ejecutor de pruebas que las pruebas utilicen los componentes correctos!
 
 Cambiemos el componente _Note_ para que el texto de la nota se renderice en un <i>span </i>.
 
@@ -1001,30 +1001,31 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-¡Nuestras pruebas se rompen! Como revela el corredor de pruebas, _cy.contains('second note')_ ahora devuelve el componente que contiene el texto y el botón no está en él.
+¡Nuestras pruebas se rompen! Como revela el test runner, _cy.contains('second note')_ ahora devuelve el componente que contiene el texto y el botón no está en él.
 
-![](../../images/5/37x.png)
+![cypress mostrando que la prueba está rota intentando hacer clic en "make important"](../../images/5/37new.png)
 
 Una forma de solucionarlo es la siguiente:
 
 ```js
-it('other of those can be made important', function () {
+it('one of those can be made important', function () {
   cy.contains('second note').parent().find('button').click()
   cy.contains('second note').parent().find('button')
     .should('contain', 'make not important')
 })
 ```
 
-En la primera línea, usamos el comando [parent](https://docs.cypress.io/api/commands/parent.html) para acceder al elemento padre del elemento que contiene <i>second note</i> y busque el botón dentro de él.
+En la primera línea, usamos el comando [parent](https://docs.cypress.io/api/commands/parent.html) para acceder al elemento padre del elemento que contiene <i>second note</i> y buscamos el botón dentro de él.
 Luego hacemos clic en el botón y verificamos que el texto cambie.
 
-Tenga en cuenta que usamos el comando [find](https://docs.cypress.io/api/commands/find.html#Syntax) para buscar el botón. No podemos usar [cy.get](https://docs.cypress.io/api/commands/get.html) aquí, porque siempre busca desde la página <i>completa</i> y devolvería los 5 botones en la pagina.
+Ten en cuenta que usamos el comando [find](https://docs.cypress.io/api/commands/find.html#Syntax) para buscar el botón. No podemos usar [cy.get](https://docs.cypress.io/api/commands/get.html) aquí, porque siempre busca desde la página <i>completa</i> y devolvería los 5 botones en la pagina.
 
-Desafortunadamente, ahora tenemos algo de copypaste en las pruebas, porque el código para buscar el botón correcto es siempre el mismo.
+Desafortunadamente, ahora tenemos algo de copia-pega en las pruebas, porque el código para buscar el botón correcto es siempre el mismo.
+
 En este tipo de situaciones, es posible usar el comando [as](https://docs.cypress.io/api/commands/as.html):
 
 ```js
-it.only('other of those can be made important', function () {
+it('one of those can be made important', function () {
   cy.contains('second note').parent().find('button').as('theButton')
   cy.get('@theButton').click()
   cy.get('@theButton').should('contain', 'make not important')
@@ -1035,23 +1036,23 @@ Ahora la primera línea encuentra el botón correcto y usa <i>as</i> para guarda
 
 ### Ejecutando y depurando tus pruebas
 
-Finalmente, algunas notas sobre cómo funciona Cypress y depurando tus pruebas.
+Finalmente, algunas notas sobre cómo funciona Cypress y la depuración de tus pruebas.
 
-La forma de las pruebas de Cypress da la impresión de que las pruebas son código JavaScript normal y, por ejemplo, podríamos intentar esto:
+Debido a la forma de las pruebas de Cypress, da la impresión de que son código JavaScript normal y, por ejemplo, podríamos intentar esto:
 
 ```js
-const button = cy.contains('login')
+const button = cy.contains('log in')
 button.click()
-debugger() 
+debugger
 cy.contains('logout').click()
 ```
 
 Sin embargo, esto no funcionará. Cuando Cypress ejecuta una prueba, agrega cada comando _cy_ a una cola de ejecución.
 Cuando se haya ejecutado el código del método de prueba, Cypress ejecutará cada comando en la cola uno por uno.
 
-Los comandos de Cypress siempre devuelven _undefined_, por lo que _button.click()_ en el código anterior causaría un error. Un intento de iniciar el depurador no detendría el código entre la ejecución de los comandos, sino antes de que se hayan ejecutado los comandos.
+Los comandos de Cypress siempre devuelven _undefined_, por lo que _button.click()_ en el código anterior causaría un error. Un intento de iniciar el depurador no detendría el código entre la ejecución de los comandos, sino antes de que se haya ejecutado algún comando.
 
-Los comandos de Cypress son <i>como promesas</i>, así que si queremos acceder a sus valores de retorno, tenemos que hágalo usando el comando [then](https://docs.cypress.io/api/commands/then.html).
+Los comandos de Cypress son <i>como promesas</i>, así que si queremos acceder a sus valores de retorno, tenemos que hacerlo usando el comando [then](https://docs.cypress.io/api/commands/then.html).
 Por ejemplo, la siguiente prueba imprime el número de botones en la aplicación y hace clic en el primer botón:
 
 ```js
@@ -1063,15 +1064,15 @@ it('then example', function() {
 })
 ```
 
-Detener la ejecución de la prueba con el depurador es [posible](https://docs.cypress.io/api/commands/debug.html). El depurador se inicia solo si la Consola del desarrollador del ejecutor de pruebas de Cypress está abierta.
+Detener la ejecución de la prueba con el depurador es [posible](https://docs.cypress.io/api/commands/debug.html). El depurador se inicia solo si la consola para desarrolladores del test runner de Cypress está abierta.
 
 La Consola para desarrolladores es muy útil para depurar tus pruebas.
-Puede ver las solicitudes HTTP realizadas por las pruebas en la pestaña Network, y la pestaña Console le mostrará información sobre sus pruebas:
+Puedes ver las solicitudes HTTP realizadas por las pruebas en la pestaña Network, y la pestaña Console te mostrará información sobre tus pruebas:
 
-![](../../images/5/38ea.png)
+![consola para desarrolladores mientras se ejecuta Cypress](../../images/5/38new.png)
 
-Hasta ahora hemos ejecutado nuestras pruebas Cypress usando el corredor de pruebas gráfico.
-También es posible ejecutarlos [desde la línea de comandos](https://docs.cypress.io/guides/guides/command-line.html). Solo tenemos que agregarle un script npm:
+Hasta ahora hemos ejecutado nuestras pruebas Cypress usando el test runner gráfico.
+También es posible ejecutarlas [desde la línea de comandos](https://docs.cypress.io/guides/guides/command-line.html). Solo tenemos que agregarle un script npm:
 
 ```js
   "scripts": {
@@ -1085,40 +1086,39 @@ También es posible ejecutarlos [desde la línea de comandos](https://docs.cypre
   },
 ```
 
-Ahora podemos ejecutar nuestras pruebas desde la línea de comandos con el comando <i>npm run test: e2e</i>
+Ahora podemos ejecutar nuestras pruebas desde la línea de comandos con el comando <i>npm run test:e2e</i>
 
-![](../../images/5/39ea.png)
+![Salida de terminal al ejecutar las pruebas npm e2e mostrando aprobadas](../../images/5/39new.png)
 
-Tenga en cuenta que el video de la ejecución de la prueba se guardará en <i>cypress/videos/</i>, por lo que probablemente debería ignorar este directorio. También es posible [deshabilitar](https://docs.cypress.io/guides/guides/screenshots-and-videos#Videos) la grabación de videos.
+Ten en cuenta que los videos de la ejecución de las pruebas se guardarán en <i>cypress/videos/</i>, por lo que probablemente deberías ignorar este directorio en git. También es posible [desactivar](https://docs.cypress.io/guides/guides/screenshots-and-videos#Videos) la creación de videos.
 
-El frontend y los tests/pruebas se pueden encontrar en [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-11), rama <i>part5-11</i>.
+El código frontend y las pruebas se pueden encontrar en [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-11) en la rama <i>part5-11</i>.
 
 </div>
 
 <div class="tasks">
 
-### Ejercicios 5.17.-5.22.
+### Ejercicios 5.17.-5.23.
 
 En los últimos ejercicios de esta parte haremos algunas pruebas E2E para nuestra aplicación de blog.
 El material de esta parte debería ser suficiente para completar los ejercicios.
-También debería consultar la [documentación](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell) de Cypress. Probablemente sea la mejor documentación que he visto para un proyecto de código abierto.
+También deberías consultar la [documentación](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell) de Cypress. Probablemente sea la mejor documentación que he visto para un proyecto de código abierto.
 
 Recomiendo especialmente leer [Introducción a Cypress](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Cypress-Can-Be-Simple-Sometimes), que afirma que
 
-> <i>Esta es la guía más importante para comprender cómo realizar pruebas con Cypress. Léelo. Entiéndalo.</i>
+> <i>Esta es la guía más importante para comprender cómo realizar pruebas con Cypress. Léela. Entiéndela.</i>
 
-#### 5.17: prueba de extremo a extremo de la lista de blogs, paso 1
+#### 5.17: Pruebas de End To End de la Lista de Blogs, paso 1
 
-Configure Cypress para su proyecto. Realice una prueba para comprobar que la aplicación muestra el formulario de inicio de sesión de forma predeterminada.
+Configura Cypress para tu proyecto. Realiza una prueba para comprobar que la aplicación muestra el formulario de inicio de sesión de forma predeterminada.
 
 La estructura de la prueba debe ser la siguiente
 
-
-```js 
+```js
 describe('Blog app', function() {
   beforeEach(function() {
-    cy.request('POST', 'http://localhost:3001/api/testing/reset')
-    cy.visit('http://localhost:3000')
+    cy.request('POST', 'http://localhost:3003/api/testing/reset')
+    cy.visit('http://localhost:5173')
   })
 
   it('Login form is shown', function() {
@@ -1129,19 +1129,19 @@ describe('Blog app', function() {
 
 El blog de formateo <i>beforeEach</i> debe vaciar la base de datos utilizando, por ejemplo, el método que usamos en el [material](/es/part5/pruebas_de_extremo_a_extremo#controlando-el-estado-de-la-base-de-datos).
 
-#### 5.18: prueba de extremo a extremo de la lista de blogs, paso 2
+#### 5.18: Pruebas de End To End de la Lista de Blogs, paso 2
 
-Realizar pruebas para iniciar sesión. Pruebe los intentos de inicio de sesión exitosos y no exitosos.
-Crear un nuevo usuario en el bloque <i>beforeEach</i> para las pruebas.
+Realiza pruebas para iniciar sesión. Prueba tanto los intentos de inicio de sesión exitosos y los no exitosos.
+Crea un nuevo usuario en el bloque <i>beforeEach</i> para las pruebas.
 
-El cuerpo de las pruebas se expande de la siguiente manera
+El cuerpo de las pruebas se extiende de la siguiente manera
 
-```js 
+```js
 describe('Blog app', function() {
   beforeEach(function() {
     cy.request('POST', 'http://localhost:3001/api/testing/reset')
     // create here a user to backend
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:5173')
   })
 
   it('Login form is shown', function() {
@@ -1160,18 +1160,18 @@ describe('Blog app', function() {
 })
 ```
 
-<i>Ejercicio adicional opcional</i>: compruebe que la notificación que se muestra con el inicio de sesión fallido se muestra en rojo.
+<i>Ejercicio adicional opcional</i>: comprueba que la notificación que se muestra con el inicio de sesión fallido se muestra en rojo.
 
-#### 5.19: prueba de extremo a extremo de la lista de blogs, paso 3
+#### 5.19: Pruebas de End To End de la Lista de Blogs, paso 3
 
-Realice una prueba que compruebe que un usuario que ha iniciado sesión puede crear un nuevo blog.
+Realiza una prueba que compruebe que un usuario que ha iniciado sesión puede crear un nuevo blog.
 La estructura de la prueba podría ser la siguiente
 
-```js 
+```js
 describe('Blog app', function() {
   // ...
 
-  describe.only('When logged in', function() {
+  describe('When logged in', function() {
     beforeEach(function() {
       // log in user here
     })
@@ -1186,31 +1186,31 @@ describe('Blog app', function() {
 
 La prueba debe garantizar que se agregue un nuevo blog a la lista de todos los blogs.
 
-#### 5.20: prueba de extremo a extremo de la lista de blogs, paso 4
+#### 5.20: Pruebas de End To End de la Lista de Blogs, paso 4
 
-Hacer una prueba que compruebe que al usuario le puede gustar ("like") un blog.
+Haz una prueba que compruebe que al usuario le puede gustar ("like") un blog.
 
-#### 5.21: prueba de extremo a extremo de la lista de blogs, paso 5
+#### 5.21: Pruebas de End To End de la Lista de Blogs, paso 5
 
-Realice una prueba para asegurarse de que el usuario que creó un blog pueda eliminarlo.
-	
-#### 5.22: prueba de extremo a extremo de la lista de blogs , paso 6
+Realiza una prueba para asegurarte de que el usuario que creó un blog pueda eliminarlo.
 
-Realice una prueba para asegurarse de que otros usuarios no puedan eliminar el blog.
+#### 5.22: Pruebas de End To End de la Lista de Blogs, paso 6
 
-#### 5.23: prueba de extremo a extremo de la lista de blogs , paso 7
+Realiza una prueba para asegurarte de que solo el creador puede ver el botón delete de un blog, nadie más.
 
-Realice una prueba que verifique que los blogs estén ordenados de acuerdo con los likes con el blog con más likes en primer lugar.
+#### 5.23: Pruebas de End To End de la Lista de Blogs, paso 7
 
-<i>Este ejercicio puede ser un poco más complicado que los anteriores</i>. Una posible solución es adicionar cierta clase para el elemento que cubre el contenido del blog y luego usar el método [eq](https://docs.cypress.io/api/commands/eq#Syntax) para obtener el elemento en un índice específico:
-  
+Realiza una prueba que verifique que los blogs estén ordenados de acuerdo con los likes, con el blog con más likes en primer lugar.
+
+<i>Este ejercicio puede ser un poco más complicado que los anteriores</i>. Una posible solución es agregar cierta clase para el elemento que cubre el contenido del blog y luego usar el método [eq](https://docs.cypress.io/api/commands/eq#Syntax) para obtener el elemento en un índice específico:
+
 ```js
 cy.get('.blog').eq(0).should('contain', 'The title with the most likes')
 cy.get('.blog').eq(1).should('contain', 'The title with the second most likes')
 ```
 
-Tenga en cuenta que podría terminar teniendo problemas si hace clic en el botón "Like" muchas veces seguidas. Puede ser que Cypress haga clic tan rápido que no tenga tiempo de actualizar el estado de la aplicación entre los clics. Una solución para esto es esperar a que se actualice la cantidad de Likes entre todos los clics.
+Ten en cuenta que podrías terminar teniendo problemas si haces clic en el botón "Like" muchas veces seguidas. Puede ser que Cypress haga clic tan rápido que no tenga tiempo de actualizar el estado de la aplicación entre los clics. Una solución para esto es esperar a que se actualice la cantidad de Likes entre todos los clics.
 
-Este fue el último ejercicio de esta parte, y es hora de enviar su código a github y marcar los ejercicios que completó en el [sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Este fue el último ejercicio de esta parte, y es hora de enviar tu código a GitHub y marcar los ejercicios que has completado en el [sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>

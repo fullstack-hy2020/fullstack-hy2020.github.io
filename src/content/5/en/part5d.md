@@ -720,15 +720,11 @@ First, we test logging in. Then, in their own describe block, we have a bunch of
 As we said above, each test starts from zero! Tests do not start from the state where the previous tests ended.
 
 The Cypress documentation gives us the following advice: [Fully test the login flow – but only once](https://docs.cypress.io/guides/end-to-end-testing/testing-your-app#Fully-test-the-login-flow----but-only-once).
-<!---
-!!! TODO NEXT: Remove mention to cypress recommendation or update content to use cy.session (would also need to update example repo)
-!!!!
---->
-So instead of logging in a user using the form in the <i>beforeEach</i> block, Cypress recommends that we [bypass the UI](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Bypassing-your-UI) and do an HTTP request to the backend to log in. The reason for this is that logging in with an HTTP request is much faster than filling out a form.
+So instead of logging in a user using the form in the <i>beforeEach</i> block, we are going to bypass the UI and do a HTTP request to the backend to log in. The reason for this is that logging in with a HTTP request is much faster than filling out a form.
 
 Our situation is a bit more complicated than in the example in the Cypress documentation because when a user logs in, our application saves their details to the localStorage.
 However, Cypress can handle that as well.
-The code is the following
+The code is the following:
 
 ```js
 describe('when logged in', function() {
@@ -751,12 +747,11 @@ describe('when logged in', function() {
 })
 ```
 
-We can access the response to a [cy.request](https://docs.cypress.io/api/commands/request.html) with the _then_ method.  Under the hood <i>cy.request</i>, like all Cypress commands, are [promises](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Commands-Are-Promises).
+We can access to the response of a [cy.request](https://docs.cypress.io/api/commands/request.html) with the [_then_](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress#The-Cypress-Command-Queue) method.  Under the hood <i>cy.request</i>, like all Cypress commands, are [asynchronous](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress#Commands-Are-Asynchronous).
 The callback function saves the details of a logged-in user to localStorage, and reloads the page.
 Now there is no difference to a user logging in with the login form.
 
-If and when we write new tests to our application, we have to use the login code in multiple places.
-We should make it a [custom command](https://docs.cypress.io/api/cypress-api/custom-commands.html).
+If and when we write new tests to our application, we have to use the login code in multiple places, we should make it a [custom command](https://docs.cypress.io/api/cypress-api/custom-commands.html).
 
 Custom commands are declared in <i>cypress/support/commands.js</i>.
 The code for logging in is as follows:
@@ -790,7 +785,7 @@ describe('when logged in', function() {
 })
 ```
 
-The same applies to creating a new note now that we think about it. We have a test, which makes a new note using the form. We also make a new note in the <i>beforeEach</i> block of the test testing changing the importance of a note:
+The same applies to creating a new note now that we think about it. We have a test, which makes a new note using the form. We also make a new note in the <i>beforeEach</i> block of the test that changes the importance of a note:
 
 ```js
 describe('Note app', function() {
@@ -839,7 +834,7 @@ Cypress.Commands.add('createNote', ({ content, important }) => {
 
 The command expects the user to be logged in and the user's details to be saved to localStorage.
 
-Now the formatting block becomes:
+Now the note beforeEach block becomes:
 
 ```js
 describe('Note app', function() {
@@ -939,7 +934,7 @@ The tests and the frontend code can be found on the [GitHub](https://github.com/
 ### Changing the importance of a note
 
 Lastly, let's take a look at the test we did for changing the importance of a note.
-First, we'll change the formatting block so that it creates three notes instead of one:
+First, we'll change the beforeEach block so that it creates three notes instead of one:
 
 ```js
 describe('when logged in', function() {
@@ -967,12 +962,11 @@ describe('when logged in', function() {
 
 How does the [cy.contains](https://docs.cypress.io/api/commands/contains.html) command actually work?
 
-When we click the _cy.contains('second note')_ command in Cypress [Test Runner](https://docs.cypress.io/guides/core-concepts/test-runner.html), we see that the command searches for the element containing the text <i>second note</i>:
+When we click the _cy.contains('second note')_ command in Cypress [Test Runner](https://docs.cypress.io/guides/core-concepts/cypress-app#Test-Runner), we see that the command searches for the element containing the text <i>second note</i>:
 
-![cypress test runner clicking testbody and second note](../../images/5/34new.png)
+![cypress test runner clicking second note](../../images/5/34new.png)
 
-By clicking the next line _.contains('make important')_ we see that the test uses
-the 'make important' button corresponding to the <i>second note</i>:
+By clicking the next line _.contains('make important')_ we see that the test uses the 'make important' button corresponding to the <i>second note</i>:
 
 ![cypress test runner clicking make important](../../images/5/35new.png)
 
@@ -1007,7 +1001,7 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-Our tests break! As the test runner reveals,  _cy.contains('second note')_ now returns the component containing the text, and the button is not in it.
+Our tests break! As the test runner reveals, _cy.contains('second note')_ now returns the component containing the text, and the button is not in it.
 
 ![cypress showing test is broken trying to click make important](../../images/5/37new.png)
 
@@ -1044,7 +1038,7 @@ Now the first line finds the right button and uses <i>as</i> to save it as <i>th
 
 Finally, some notes on how Cypress works and debugging your tests.
 
-The form of the Cypress tests gives the impression that the tests are normal JavaScript code, and we could for example try this:
+Because of the form of the Cypress tests, it gives the impression that they are normal JavaScript code, and we could for example try this:
 
 ```js
 const button = cy.contains('log in')
@@ -1114,7 +1108,7 @@ I especially recommend reading [Introduction to Cypress](https://docs.cypress.io
 
 > <i>This is the single most important guide for understanding how to test with Cypress. Read it. Understand it.</i>
 
-#### 5.17: bloglist end to end testing, step1
+#### 5.17: Blog List End To End Testing, step 1
 
 Configure Cypress for your project. Make a test for checking that the application displays the login form by default.
 
@@ -1135,7 +1129,7 @@ describe('Blog app', function() {
 
 The <i>beforeEach</i> formatting blog must empty the database using for example the method we used in the [material](/en/part5/end_to_end_testing#controlling-the-state-of-the-database).
 
-#### 5.18: bloglist end to end testing, step2
+#### 5.18: Blog List End To End Testing, step 2
 
 Make tests for logging in. Test both successful and unsuccessful login attempts.
 Make a new user in the <i>beforeEach</i> block for the tests.
@@ -1168,7 +1162,7 @@ describe('Blog app', function() {
 
 <i>Optional bonus exercise</i>: Check that the notification shown with unsuccessful login is displayed red.
 
-#### 5.19: bloglist end to end testing, step3
+#### 5.19: Blog List End To End Testing, step 3
 
 Make a test that verifies a logged-in user can create a new blog.
 The structure of the test could be as follows:
@@ -1192,24 +1186,24 @@ describe('Blog app', function() {
 
 The test has to ensure that a new blog is added to the list of all blogs.
 
-#### 5.20: bloglist end to end testing, step4
+#### 5.20: Blog List End To End Testing, step 4
 
 Make a test that confirms users can like a blog.
 
-#### 5.21: bloglist end to end testing, step5
+#### 5.21: Blog List End To End Testing, step 5
 
 Make a test for ensuring that the user who created a blog can delete it.
 
-#### 5.22: bloglist end to end testing, step6
+#### 5.22: Blog List End To End Testing, step 6
 
 Make a test for ensuring that only the creator can see the delete button of a blog, not anyone else.
 
-#### 5.23: bloglist end to end testing, step7
+#### 5.23: Blog List End To End Testing, step 7
 
-Make a test that checks that the blogs are ordered according to likes with the blog with the most likes being first.
+Make a test that checks that the blogs are ordered by likes, with the most liked blog being first.
 
 <i>This exercise is quite a bit trickier than the previous ones.</i> One solution is to add a certain class for the element which wraps the blog's content and use the [eq](https://docs.cypress.io/api/commands/eq#Syntax) method to get the blog element in a specific index:
-  
+
 ```js
 cy.get('.blog').eq(0).should('contain', 'The title with the most likes')
 cy.get('.blog').eq(1).should('contain', 'The title with the second most likes')
