@@ -347,7 +347,7 @@ module.exports = {
       a: 'Rendu de collections, modules',
       b: 'Formulaires',
       c: 'Obtenir des données du serveur',
-      d: 'Modification des donées côté serveur',
+      d: 'Modification des données côté serveur',
       e: 'Styliser vos applications React',
     },
     '3': {
