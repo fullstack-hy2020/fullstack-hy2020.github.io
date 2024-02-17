@@ -691,7 +691,7 @@ app.get('/api/notes/:id', (request, response) => {
 
 If no matching object is found in the database, the value of _note_ will be _null_ and the _else_ block is executed. This results in a response with the status code <i>404 not found</i>. If a promise returned by the <em>findById</em> method is rejected, the response will have the status code <i>500 internal server error</i>. The console displays more detailed information about the error.
 
-On top of the non-existing note, there's one more error situation that needs to be handled. In this situation, we are trying to fetch a note with the wrong kind of _id_, meaning an _id_ that doesn't match the mongo identifier format.
+On top of the non-existing note, there's one more error situation that needs to be handled. In this situation, we are trying to fetch a note with the wrong kind of _id_, meaning an _id_ that doesn't match the Mongo identifier format.
 
 If we make the following request, we will get the error message shown below:
 
@@ -785,13 +785,13 @@ const errorHandler = (error, request, response, next) => {
   next(error)
 }
 
-// this has to be the last loaded middleware.
+// this has to be the last loaded middleware, also all the routes should be registered before this!
 app.use(errorHandler)
 ```
 
 The error handler checks if the error is a <i>CastError</i> exception, in which case we know that the error was caused by an invalid object id for Mongo. In this situation, the error handler will send a response to the browser with the response object passed as a parameter. In all other error situations, the middleware passes the error forward to the default Express error handler.
 
-Note that the error-handling middleware has to be the last loaded middleware!
+Note that the error-handling middleware has to be the last loaded middleware, also all the routes should be registered before the error-handler!
 
 ### The order of middleware loading
 
@@ -875,7 +875,7 @@ app.delete('/api/notes/:id', (request, response, next) => {
 })
 ```
 
-In both of the "successful" cases of deleting a resource, the backend responds with the status code <i>204 no content</i>. The two different cases are deleting a note that exists, and deleting a note that does not exist in the database. The _result_ callback parameter could be used for checking if a resource was actually deleted, and we could use that information for returning different status codes for the two cases if we deemed it necessary. Any exception that occurs is passed onto the error handler.
+In both of the "successful" cases of deleting a resource, the backend responds with the status code <i>204 no content</i>. The two different cases are deleting a note that exists, and deleting a note that does not exist in the database. The _result_ callback parameter could be used for checking if a resource was actually deleted, and we could use that information for returning different status codes for the two cases if we deem it necessary. Any exception that occurs is passed onto the error handler.
 
 The toggling of the importance of a note can be easily accomplished with the [findByIdAndUpdate](https://mongoosejs.com/docs/api/model.html#model_Model-findByIdAndUpdate) method.
 

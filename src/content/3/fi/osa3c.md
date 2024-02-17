@@ -778,13 +778,13 @@ const errorHandler = (error, request, response, next) => {
   next(error)
 }
 
-// tämä tulee kaikkien muiden middlewarejen rekisteröinnin jälkeen!
+// tämä tulee kaikkien muiden middlewarejen ja routejen rekisteröinnin jälkeen!
 app.use(errorHandler)
 ```
 
 Virheenkäsittelijä tarkastaa, onko kyse <i>CastError</i>-poikkeuksesta eli virheellisestä olio-id:stä. Jos on, käsittelijä lähettää pyynnön tehneelle selaimelle vastauksen käsittelijän parametrina olevan response-olion avulla. Muussa tapauksessa se siirtää funktiolla <em>next</em> virheen käsittelyn Expressin oletusarvoisen virheidenkäsittelijän hoidettavaksi.
 
-Huomaa, että virheidenkäsittelijämiddleware tulee rekisteröidä muiden middlewarejen rekisteröinnin jälkeen.
+Huomaa, että virheidenkäsittelijämiddleware tulee rekisteröidä muiden middlewarejen sekä routejen rekisteröinnin jälkeen.
 
 ### Middlewarejen käyttöönottojärjestys
 
