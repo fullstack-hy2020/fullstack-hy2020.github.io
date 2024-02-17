@@ -190,12 +190,12 @@ Jos tokenia ei ole tai se on epävalidi, syntyy poikkeus <i>JsonWebTokenError</i
 
 ```js
 const errorHandler = (error, request, response, next) => {
-  logger.error(error.message)
-
   if (error.name === 'CastError') {
     return response.status(400).send({ error: 'malformatted id' })
   } else if (error.name === 'ValidationError') {
     return response.status(400).json({ error: error.message })
+  } else if (error.name === 'MongoServerError' && error.message.includes('E11000 duplicate key error')) {
+    return response.status(400).json({ error: 'expected `username` to be unique' })
   } else if (error.name ===  'JsonWebTokenError') { // highlight-line
     return response.status(400).json({ error: 'token missing or invalid' }) // highlight-line
   }
@@ -218,13 +218,13 @@ Uuden muistiinpanon luominen onnistuu nyt Postmanilla jos <i>Authorization</i>-h
 
 Postmanilla luominen näyttää seuraavalta
 
-![Postmanin näkymä, joka kertoo että POST localhost:3001/api/notes pyyntöön mukaan on liitetty Authorization-headeri jonka arvo on bearer tokeninarvo](../../images/4/20e.png)
+![Postmanin näkymä, joka kertoo että POST localhost:3001/api/notes pyyntöön mukaan on liitetty Authorization-headeri jonka arvo on bearer tokeninarvo](../../images/4/20new.png)
 
 ja Visual Studio Coden REST clientillä
 
-![VS coden näkymä, joka kertoo että POST localhost:3001/api/notes pyyntöön mukaan on liitetty Authorization-headeri jonka arvo on bearer tokeninarvo](../../images/4/21ea.png)
+![VS coden näkymä, joka kertoo että POST localhost:3001/api/notes pyyntöön mukaan on liitetty Authorization-headeri jonka arvo on bearer tokeninarvo](../../images/4/21new.png)
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-9), branchissä <i>part4-9</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-9), branchissä <i>part4-9</i>.
 
 Jos sovelluksessa on useampia rajapintoja jotka vaativat kirjautumisen, kannattaa JWT:n validointi eriyttää omaksi middlewarekseen, tai käyttää jotain jo olemassa olevaa kirjastoa kuten [express-jwt](https://github.com/auth0/express-jwt).
 
@@ -281,10 +281,12 @@ const errorHandler = (error, request, response, next) => {
     return response.status(400).send({ error: 'malformatted id' })
   } else if (error.name === 'ValidationError') {
     return response.status(400).json({ error: error.message })
-  } else if (error.name === 'JsonWebTokenError') {
-    return response.status(401).json({
-      error: 'invalid token'
+  } else if (error.name === 'MongoServerError' && error.message.includes('E11000 duplicate key error')) {
+    return response.status(400).json({ 
+      error: 'expected `username` to be unique' 
     })
+  } else if (error.name === 'JsonWebTokenError') {
+    return response.status(401).json({ error: 'invalid token' })
   // highlight-start  
   } else if (error.name === 'TokenExpiredError') {
     return response.status(401).json({
@@ -309,7 +311,7 @@ Käytettäessä palvelinpuolen sessioita, token ei useinkaan sisällä jwt-token
 
 Koodissa on tapahtunut paljon muutoksia ja matkan varrella on tapahtunut tyypillinen kiivaasti etenevän ohjelmistoprojektin ilmiö: suuri osa testeistä on hajonnut. Koska kurssin tämä osa on jo muutenkin täynnä uutta asiaa, jätämme testien korjailun vapaaehtoiseksi harjoitustehtäväksi.
 
-Käyttäjätunnuksia, salasanoja ja tokenautentikaatiota hyödyntäviä sovelluksia tulee aina käyttää salatun [HTTPS](https://en.wikipedia.org/wiki/HTTPS)-yhteyden yli. Voimme käyttää sovelluksissamme Noden [HTTP](https://nodejs.org/docs/latest-v8.x/api/http.html)-serverin sijaan [HTTPS](https://nodejs.org/api/https.html)-serveriä (se vaatii lisää konfiguraatiota). Toisaalta koska sovelluksemme tuotantoversio on Herokussa, sovelluksemme pysyy käyttäjien kannalta suojattuna sen ansiosta, että Heroku reitittää kaiken liikenteen selaimen ja Herokun palvelimien välillä HTTPS:n yli.
+Käyttäjätunnuksia, salasanoja ja tokenautentikaatiota hyödyntäviä sovelluksia tulee aina käyttää salatun [HTTPS](https://en.wikipedia.org/wiki/HTTPS)-yhteyden yli. Voimme käyttää sovelluksissamme Noden [HTTP](https://nodejs.org/docs/latest-v8.x/api/http.html)-serverin sijaan [HTTPS](https://nodejs.org/api/https.html)-serveriä (se vaatii lisää konfiguraatiota). Toisaalta koska sovelluksemme tuotantoversio on Fly.io:ssa tai Renderissä, sovelluksemme pysyy käyttäjien kannalta suojattuna sen ansiosta, että käyttämämme pilvipalvelu reitittää kaiken liikenteen selaimen ja Herokun palvelimien välillä HTTPS:n yli.
 
 Toteutamme kirjautumisen frontendin puolelle kurssin [seuraavassa osassa](/osa5).
 
@@ -397,7 +399,7 @@ blogsRouter.post('/', async (request, response) => {
 })
 ```
 
-Muista, että normaali  [middleware](/osa3/node_js_ja_express#middlewaret) on funktio, jolla on kolme parametria, ja joka kutsuu lopuksi parametrina next olevaa funktiota:
+Muista, että normaali [middleware](/osa3/node_js_ja_express#middlewaret) on funktio, jolla on kolme parametria, ja joka kutsuu lopuksi parametrina next olevaa funktiota:
 
 ```js
 const tokenExtractor = (request, response, next) => {

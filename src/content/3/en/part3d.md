@@ -85,7 +85,7 @@ When validating an object fails, we return the following default error message f
 ![postman showing error message](../../images/3/50.png)
 
 We notice that the backend has now a problem: validations are not done when editing a note.
-The [documentation](https://github.com/blakehaswell/mongoose-unique-validator#find--updates) addresses the issue by explaining that validations are not run by default when <i>findOneAndUpdate</i> and related methods are executed.
+The [documentation](https://mongoosejs.com/docs/validation.html#update-validators) addresses the issue by explaining that validations are not run by default when <i>findOneAndUpdate</i> and related methods are executed.
 
 The fix is easy. Let us also reformulate the route code a bit:
 
@@ -116,7 +116,7 @@ For production, we have to set the database URL in the service that is hosting o
 In Fly.io that is done _fly secrets set_:
 
 ```bash
-fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
+fly secrets set MONGODB_URI='mongodb+srv://fullstack:thepasswordishere@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
 ```
 
 When the app is being developed, it is more than likely that something fails. Eg. when I deployed my app for the first time with the database, not a single note was seen:
@@ -230,44 +230,69 @@ The configuration will be saved in the _.eslintrc.js_ file.  We will change _bro
 
 ```js
 module.exports = {
-    'env': {
-        'commonjs': true,
-        'es2021': true,
-        'node': true // highlight-line
+    "env": {
+        "commonjs": true,
+        "es2021": true,
+        "node": true // highlight-line
     },
-    'extends': 'eslint:recommended',
-    'parserOptions': {
-        'ecmaVersion': 'latest'
+    "overrides": [
+        {
+            "env": {
+                "node": true
+            },
+            "files": [
+                ".eslintrc.{js,cjs}"
+            ],
+            "parserOptions": {
+                "sourceType": "script"
+            }
+        }
+    ],
+    "parserOptions": {
+        "ecmaVersion": "latest"
     },
-    'rules': {
-        'indent': [
-            'error',
-            4
-        ],
-        'linebreak-style': [
-            'error',
-            'unix'
-        ],
-        'quotes': [
-            'error',
-            'single'
-        ],
-        'semi': [
-            'error',
-            'never'
-        ]
+    "rules": {
     }
 }
 ```
 
-Let's immediately change the rule concerning indentation, so that the indentation level is two spaces.
+Let's change the configuration a bit. Install a [plugin](https://eslint.style/packages/js) that defines a set of code style-related rules:
+
+```
+npm install --save-dev @stylistic/eslint-plugin-js
+```
+
+Enable the plugin and add an extends definiton and four code style rules:
 
 ```js
-"indent": [
-    "error",
-    2
-],
+module.exports = {
+    // ...
+    'plugins': [
+        '@stylistic/js'
+    ],
+    'extends': 'eslint:recommended',
+    'rules': {
+        '@stylistic/js/indent': [
+            'error',
+            2
+        ],
+        '@stylistic/js/linebreak-style': [
+            'error',
+            'unix'
+        ],
+        '@stylistic/js/quotes': [
+            'error',
+            'single'
+        ],
+        '@stylistic/js/semi': [
+            'error',
+            'never'
+        ],
+    }
+}
 ```
+
+Extends _eslint:recommended_ adds a [set](https://eslint.org/docs/latest/rules/) of recommended rules to the project. In addition, rules for indentation, line breaks, hyphens and semicolons have been added. These four rules are all defined in the [Eslint styles plugin](https://eslint.style/packages/js).
 
 Inspecting and validating a file like _index.js_ can be done with the following command:
 

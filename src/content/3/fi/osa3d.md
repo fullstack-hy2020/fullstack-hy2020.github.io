@@ -84,7 +84,7 @@ Validoinnin epäonnistuessa palautetaan validaattorin oletusarvoinen virheviesti
 
 ![Luotaessa muistiinpano jonka kenttä content on liian lyhyt, seurauksena on virheilmoituksen sisältävä JSON](../../images/3/50.png)
 
-Huomaamme kuitenkin että sovelluksessa on pieni ongelma, validaatiota ei suoriteta muistiinpanojen päivityksen yhteydessä. [Dokumentaatio](https://github.com/blakehaswell/mongoose-unique-validator#find--updates) kertoo mistä on kyse, validaatiota ei suoriteta oletusarvoisesti metodin <i>findOneAndUpdate</i> suorituksen yhteydessä.
+Huomaamme kuitenkin että sovelluksessa on pieni ongelma, validaatiota ei suoriteta muistiinpanojen päivityksen yhteydessä. [Dokumentaatio](https://mongoosejs.com/docs/validation.html#update-validators) kertoo mistä on kyse, validaatiota ei suoriteta oletusarvoisesti metodin <i>findOneAndUpdate</i> suorituksen yhteydessä.
 
 Korjaus on onneksi helppo. Muotoillaan routea muutenkin hieman siistimmäksi:
 
@@ -113,7 +113,7 @@ Huomaa, että vaikka määrittelimme sovelluskehitystä varten ympäristömuuttu
 Fly.io:ssa komennolla _fly secrets set_:
 
 ```
-fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
+fly secrets set MONGODB_URI='mongodb+srv://fullstack:thepasswordishere@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
 ```
 
 Kun sovellus viedään tuotantoon, on hyvin tavanomaista että kaikki ei toimi odotusten mukaan. Esim. ensimmäinen tuotantoonvientiyritykseni päätyi seuraavaan:
@@ -222,47 +222,71 @@ Konfiguraatiot tallentuvat tiedostoon _.eslintrc.js_:
 
 ```js
 module.exports = {
-    'env': {
-        'commonjs': true,
-        'es2021': true,
-        'node': true // highlight-line
+    "env": {
+        "commonjs": true,
+        "es2021": true,
+        "node": true // highlight-line
     },
+    "overrides": [
+        {
+            "env": {
+                "node": true
+            },
+            "files": [
+                ".eslintrc.{js,cjs}"
+            ],
+            "parserOptions": {
+                "sourceType": "script"
+            }
+        }
+    ],
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "rules": {
+    }
+}
+```
+
+Tarkista, että tiedostossa on rivi _'node': true_ kuten kuvassa ja lisää se tarvittaessa.
+  
+Muutetaan konfiguraatiota hieman. Asennetaan [joukon koodin tyylisääntöjä](https://eslint.style/packages/js) määrittelevä Eslint plugin:
+
+```
+npm install --save-dev @stylistic/eslint-plugin-js
+```
+
+Otetaan plugin käyttöön ja lisätään extends-määre sekä neljä koodin tyyliä määrittelevää sääntöä:
+
+```js
+module.exports = {
+    // ...
+    'plugins': [
+        '@stylistic/js'
+    ],
     'extends': 'eslint:recommended',
-    'parserOptions': {
-        'ecmaVersion': 'latest'
-    },
     'rules': {
-        'indent': [
+        '@stylistic/js/indent': [
             'error',
-            4
+            2
         ],
-        'linebreak-style': [
+        '@stylistic/js/linebreak-style': [
             'error',
             'unix'
         ],
-        'quotes': [
+        '@stylistic/js/quotes': [
             'error',
             'single'
         ],
-        'semi': [
+        '@stylistic/js/semi': [
             'error',
             'never'
-        ]
+        ],
     }
 }
-
 ```
-Tarkista, että tiedostossa on rivi 'node': true kuvanmukaisesti ja lisää se tarvittaessa.
-  
-Muutetaan heti konfiguraatioista sisennystä määrittelevä sääntö siten, että sisennystaso on kaksi välilyöntiä:
 
-
-```js
-"indent": [
-    "error",
-    2
-],
-```
+Extends _eslint:recommended_ lisää projektille [joukon](https://eslint.org/docs/latest/rules/) suositeltuja sääntöjä. Näiden lisäksi on lisätty sisennystä, rivinvaihtojen muotoa, hipsuja sekä puolipisteiden käyttöä valvovat säännöt. Nämä säännöt ovat määritelty Eslintin [styles-pluginissa](https://eslint.style/packages/js).
 
 Esim tiedoston _index.js_ tarkastus tapahtuu komennolla:
 

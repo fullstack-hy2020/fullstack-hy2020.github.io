@@ -81,7 +81,7 @@ heroku create
 heroku addons:create heroku-postgresql:hobby-dev -a <app-name>
 heroku config -a <app-name>
 === cryptic-everglades-76708 Config Vars
-DATABASE_URL: postgres://<username>:<password>@<host-of-postgres-addon>:5432/<db-name>
+DATABASE_URL: postgres://<username>:thepasswordishere@<host-of-postgres-addon>:5432/<db-name>
 ```
 
 Particularmente cuando se utiliza una base de datos relacional, también es esencial acceder a la base de datos directamente. Hay muchas maneras de hacer esto, hay varias interfaces gráficas de usuario diferentes, como [pgAdmin](https://www.pgadmin.org/). Sin embargo, utilizaremos la herramienta de línea de comandos de Postgres [psql](https://www.postgresql.org/docs/current/app-psql.html).
@@ -236,7 +236,7 @@ La <i>cadena de conexión</i> de la base de datos, que es revelada por el comand
 
 ```bash
 $ cat .env
-DATABASE_URL=postgres://<username>:<password>@ec2-54-83-137-206.compute-1.amazonaws.com:5432/<databasename>
+DATABASE_URL=postgres://<username>:thepasswordishere@ec2-54-83-137-206.compute-1.amazonaws.com:5432/<databasename>
 ```
 
 Probemos una conexión exitosa:

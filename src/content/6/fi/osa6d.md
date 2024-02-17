@@ -202,7 +202,7 @@ Uuden muistiinpanon luomista varten määritellään [mutaatio](https://tanstack
 const newNoteMutation = useMutation({ mutationFn: createNote })
 ```
 
-Parametrina on tiedostoon <i>requests.js</i> lisäämämme funktio, joka lähettää Axiosin avulla uuden muistiinpanon palvelille.
+Parametrina on tiedostoon <i>requests.js</i> lisäämämme funktio, joka lähettää Axiosin avulla uuden muistiinpanon palvelimelle.
 
 Tapahtumakäsittelijä <i>addNote</i> suorittaa mutaation kutsumalla mutaatio-olion funktiota <i>mutate</i> ja antamalla uuden muistiinpanon parametrina:
 
@@ -237,7 +237,7 @@ const App = () => {
 Kun mutaatio on nyt suoritettu onnistuneesti, suoritetaan funktiokutsu
 
 ```js
-queryClient.invalidateQueries('notes')
+queryClient.invalidateQueries({ queryKey: ['notes'] })
 ```
 
 Tämä taas saa aikaan sen, että React Query päivittää automaattisesti kyselyn, jonka avain on  <i>notes</i> eli hakee muistiinpanot palvelimelta. Tämän seurauksena sovellus renderöi ajantasaisen palvelimella olevan tilan, eli myös lisätty muistiinpano renderöityy.
@@ -817,7 +817,7 @@ Vuosien saatossa on myös kehitelty muita Reduxia vastaavia tilantahallintakirja
 
 ![](../../images/6/64new.png)
 
-Myöskään Reduxia ei ole pakko käyttää sovelluksessa kokonaisvaltaisesti. Saattaa olla mielekästä hoitaa esim. sovellusten lomakkeiden datan tallentaminen Reduxin ulkopuolella, erityisesti niissä tilanteissa, missä lomakkeen tila ei vaikuta muuhun sovellukseen. Myös Reduxin ja React Queryn yhteiskäyttö samassa sovellukssa on täysin mahdollista. 
+Myöskään Reduxia ei ole pakko käyttää sovelluksessa kokonaisvaltaisesti. Saattaa olla mielekästä hoitaa esim. sovellusten lomakkeiden datan tallentaminen Reduxin ulkopuolella, erityisesti niissä tilanteissa, missä lomakkeen tila ei vaikuta muuhun sovellukseen. Myös Reduxin ja React Queryn yhteiskäyttö samassa sovelluksessa on täysin mahdollista. 
 
 Kysymys siitä mitä tilanhallintarkatkaisua tulisi käyttää ei ole ollenkaan suoraviivainen. Yhtä oikeaa vastausta on mahdotonta antaa, ja on myös todennäköistä, että valittu tilanhallintaratkaisu saattaa sovelluksen kasvaessa osoittautua siinä määrin epäoptimaaliseksi, että tilanhallinnan ratkaisuja täytyy vaihtaa vaikka sovellus olisi jo ehditty viedä tuotantokäyttöön.
 

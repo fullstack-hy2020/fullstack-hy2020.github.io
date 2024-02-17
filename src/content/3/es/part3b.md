@@ -174,7 +174,7 @@ fly deploy
 Si todo va bien, la aplicación debería estar ahora activa y funcionando. Puedes abrirla en el navegador con el siguiente comando
 
 ```bash
-fly open
+fly apps open
 ```
 
 Un comando especialmente importante es _fly logs_. Este comando se puede utilizar para ver los registros del servidor. Es mejor mantener siempre visibles los registros.

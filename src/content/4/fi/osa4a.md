@@ -18,7 +18,7 @@ Seuraavassa läpikäytävien muutosten jälkeen sovelluksemme hakemistorakenne n
 ```bash
 ├── index.js
 ├── app.js
-├── build
+├── dist
 │   ├── ...
 ├── controllers
 │   └── notes.js
@@ -223,7 +223,7 @@ mongoose.connect(config.MONGODB_URI)
   })
 
 app.use(cors())
-app.use(express.static('build'))
+app.use(express.static('dist'))
 app.use(express.json())
 app.use(middleware.requestLogger)
 
@@ -303,7 +303,7 @@ Sovelluksen hakemistorakenne näyttää siis refaktoroinnin jälkeen seuraavalta
 ```bash
 ├── index.js
 ├── app.js
-├── build
+├── dist
 │   ├── ...
 ├── controllers
 │   └── notes.js
@@ -493,19 +493,12 @@ module.exports = {
 
 > Metodi _average_ käyttää taulukoiden metodia [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce). Jos metodi ei ole vieläkään tuttu, on korkea aika katsoa YouTubesta [Functional JavaScript](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84) ‑sarjasta ainakin kolme ensimmäistä videoa.
 
-JavaScriptiin on tarjolla runsaasti erilaisia testikirjastoja eli <i>test runnereita</i>. Käytämme tällä kurssilla Facebookin kehittämää ja sisäisesti käyttämää [Jest](https://jestjs.io/):iä, joka on toiminnaltaan ja syntaksiltaankin hyvin samankaltainen kuin testikirjastojen entinen kuningas [Mocha](https://mochajs.org/).
+JavaScriptiin on tarjolla runsaasti erilaisia testikirjastoja eli <i>test runnereita</i>.
+Testikirjastojen vanha kuningas on [Mocha](https://mochajs.org/), jolta kruunun muutamia vuosia sitten peri [Jest](https://jestjs.io/). Uusi tulokas kirjastojen joukossa on uuden generaation testikirjastoksi itseään mainostava [Vitest](https://vitest.dev/).
 
-Jest on tälle kurssille luonteva valinta, sillä se sopii hyvin backendien testaamiseen, mutta suorastaan loistaa Reactilla tehtyjen frontendien testauksessa.
+Nykyään myös Nodessa on sisäänrakennettu testikirjasto [node:test](https://nodejs.org/docs/latest/api/test.html), ja se sopii oikein mainiosti kurssin tarpeisiin.
 
-> <i>**Huomio Windows-käyttäjille:**</i> Jest ei välttämättä toimi, jos projektin hakemistopolulla on hakemisto, jonka nimessä on välilyöntejä.
-
-Koska testejä on tarkoitus suorittaa ainoastaan sovellusta kehitettäessä, asennetaan Jest <i>kehitysaikaiseksi riippuvuudeksi</i> komennolla
-
-```bash
-npm install --save-dev jest
-```
-
-Määritellään npm-skripti <i>test</i> suorittamaan testaus Jestillä ja raportoimaan testien suorituksesta <i>verbose</i>-tyylillä:
+Määritellään npm-skripti <i>test</i> testien suorittamiseen: 
 
 ```bash
 {
@@ -518,62 +511,43 @@ Määritellään npm-skripti <i>test</i> suorittamaan testaus Jestillä ja rapor
     "deploy:full": "npm run build:ui && npm run deploy",
     "logs:prod": "fly logs",
     "lint": "eslint .",
-    "test": "jest --verbose" // highlight-line
+    "test": "node --test" // highlight-line
   },
   //...
 }
 ```
 
-Jestille pitää vielä kertoa, että suoritusympäristönä on käytössä Node. Tämä tapahtuu esim. lisäämällä <i>package.json</i> tiedoston loppuun seuraavaa:
-
-```js
-{
- //...
- "jest": {
-   "testEnvironment": "node"
- }
-}
-```
 
 Tehdään testejä varten hakemisto <i>tests</i> ja sinne tiedosto <i>reverse.test.js</i>, jonka sisältö on seuraava:
 
 ```js
+const { test } = require('node:test')
+const assert = require('node:assert')
+
 const reverse = require('../utils/for_testing').reverse
 
 test('reverse of a', () => {
   const result = reverse('a')
 
-  expect(result).toBe('a')
+  assert.strictEqual(result, 'a')
 })
 
 test('reverse of react', () => {
   const result = reverse('react')
 
-  expect(result).toBe('tcaer')
+  assert.strictEqual(result, 'tcaer')
 })
 
 test('reverse of saippuakauppias', () => {
   const result = reverse('saippuakauppias')
 
-  expect(result).toBe('saippuakauppias')
+  assert.strictEqual(result, 'saippuakauppias')
 })
 ```
 
-Edellisessä osassa käyttöön ottamamme ESLint valittaa testien käyttämistä komennoista _test_ ja _expect_ sillä käyttämämme konfiguraatio kieltää <i>globaalina</i> määriteltyjen asioiden käytön. Poistetaan valitus lisäämällä <i>.eslintrc.js</i>-tiedoston kenttään <i>env</i> arvo <i>"jest": true</i>. Näin kerromme ESLintille, että käytämme projektissamme Jestiä ja sen globaaleja muuttujia.
+Testi ottaa käyttöönsä avainsanan _test_ sekä kirjaston [assert](https://nodejs.org/docs/latest/api/assert.html), jonka avulla testit suorittavat testattavien funktioiden tulosten tarkitamisen.
 
-```js
-module.exports = {
-  'env': {
-    'commonjs': true,
-    'es2021': true,
-    'node': true,
-    'jest': true, // highlight-line
-  },
-  // ...
-}
-```
-
-Testi ottaa ensimmäisellä rivillä käyttöön testattavan funktion sijoittaen sen muuttujaan _reverse_:
+Seuraavaksi testi ottaa käyttöön testattavan funktion sijoittaen sen muuttujaan _reverse_:
 
 ```js
 const reverse = require('../utils/for_testing').reverse
@@ -585,15 +559,15 @@ Yksittäiset testitapaukset määritellään funktion _test_ avulla. Ensimmäise
 () => {
   const result = reverse('react')
 
-  expect(result).toBe('tcaer')
+  assert.strictEqual(result, 'tcaer')
 }
 ```
 
-Ensin suoritetaan testattava koodi eli generoidaan merkkijonon <i>react</i> palindromi. Seuraavaksi varmistetaan tulos metodin [expect](https://jestjs.io/docs/expect#expectvalue) avulla. Expect käärii tuloksena olevan arvon olioon, joka tarjoaa joukon <i>matcher</i>-funktioita, joiden avulla tuloksen oikeellisuutta voidaan tarkastella. Koska kyse on kahden merkkijonon samuuden vertailusta, sopii tilanteeseen matcheri [toBe](https://jestjs.io/docs/expect#tobevalue).
+Ensin suoritetaan testattava koodi eli generoidaan merkkijonon <i>react</i> palindromi. Seuraavaksi varmistetaan tulos [assert](https://nodejs.org/docs/latest/api/assert.html) kirjaston metodin [strictEqual](https://nodejs.org/docs/latest/api/assert.html#assertstrictequalactual-expected-message) avulla. 
 
 Kuten odotettua, testit menevät läpi:
 
-![Jest kertoo että 3 testiä kolmesta meni läpi](../../images/4/1x.png)
+![Jest kertoo että 3 testiä kolmesta meni läpi](../../images/4/1new.png)
 
 Jest olettaa oletusarvoisesti, että testitiedoston nimessä on merkkijono <i>.test</i>. Käytetään kurssilla konventiota, jossa testitiedostojen nimen loppu on <i>.test.js</i>.
 
@@ -603,37 +577,41 @@ Jestin antamat virheilmoitukset ovat hyviä. Rikotaan testi:
 test('reverse of react', () => {
   const result = reverse('react')
 
-  expect(result).toBe('tkaer')
+  assert.strictEqual(result, 'tkaer')
 })
 ```
 
 Seurauksena on seuraava virheilmoitus:
 
-![Jest kertoo että testin odottama merkkijono poikkesi tuloksena olevasta merkkijonosta](../../images/4/2x.png)
+![Jest kertoo että testin odottama merkkijono poikkesi tuloksena olevasta merkkijonosta](../../images/4/2new.png)
 
 Lisätään tiedostoon <i>tests/average.test.js</i> muutama testi metodille _average_:
 
 ```js
+const { test, describe } = require('node:test')
+
+// ...
+
 const average = require('../utils/for_testing').average
 
 describe('average', () => {
   test('of one value is the value itself', () => {
-    expect(average([1])).toBe(1)
+    assert.strictEqual(average([1]), 1)
   })
 
   test('of many is calculated right', () => {
-    expect(average([1, 2, 3, 4, 5, 6])).toBe(3.5)
+    assert.strictEqual(average([1, 2, 3, 4, 5, 6]), 3.5)
   })
 
   test('of empty array is zero', () => {
-    expect(average([])).toBe(0)
+    assert.strictEqual(average([]), 0)
   })
 })
 ```
 
 Testi paljastaa, että metodi toimii väärin tyhjällä taulukolla (sillä nollalla jaon tulos on JavaScriptissä <i>NaN</i>):
 
-![Jest kertoo että odoteutun arvon 0 sijaan tuloksena on NaN](../../images/4/3.png)
+![Jest kertoo että odoteutun arvon 0 sijaan tuloksena on NaN](../../images/4/3new.png)
 
 Metodi on helppo korjata:
 
@@ -660,7 +638,7 @@ describe('average', () => {
 
 Describejen avulla yksittäisessä tiedostossa olevat testit voidaan jaotella loogisiin kokonaisuuksiin. Testituloste hyödyntää myös describe-lohkon nimeä:
 
-![Testitapausten tulokset on Jestin näkymässä ryhmitelty describe-lohkojen mukaan](../../images/4/4x.png)
+![Testitapausten tulokset on ryhmitelty describe-lohkojen mukaan](../../images/4/4new.png)
 
 Kuten myöhemmin tulemme näkemään, <i>describe</i>-lohkot ovat tarpeellisia, jos haluamme osalle yksittäisen testitiedoston testitapauksista joitain yhteisiä alustus- tai lopetustoimenpiteitä.
 
@@ -668,7 +646,7 @@ Toisena huomiona se, että kirjoitimme testit aavistuksen tiiviimmässä muodoss
 
 ```js
 test('of empty array is zero', () => {
-  expect(average([])).toBe(0)
+  assert.strictEqual(average([]), 0)
 })
 ```
 
@@ -697,13 +675,15 @@ module.exports = {
 Varmista testikonfiguraatiosi toimivuus seuraavalla testillä:
 
 ```js
+const { test, describe } = require('node:test')
+const assert = require('node:assert')
 const listHelper = require('../utils/list_helper')
 
 test('dummy returns one', () => {
   const blogs = []
 
   const result = listHelper.dummy(blogs)
-  expect(result).toBe(1)
+  assert.strictEqual(result), 1)
 })
 ```
 
@@ -732,22 +712,14 @@ describe('total likes', () => {
 
   test('when list has only one blog equals the likes of that', () => {
     const result = listHelper.totalLikes(listWithOneBlog)
-    expect(result).toBe(5)
+    assert.strictEqual(result), 5)
   })
 })
 ```
 
 Jos et viitsi itse määritellä testisyötteenä käytettäviä blogeja, saat valmiin listan [täältä](https://raw.githubusercontent.com/fullstack-hy2020/misc/master/blogs_for_test.md).
 
-Törmäät testien tekemisen yhteydessä varmasti erinäisiin ongelmiin. Pidä mielessä osassa 3 käsitellyt [debuggaukseen](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan#node-sovellusten-debuggaaminen) liittyvät asiat. Voit testejäkin suorittaessasi printtailla konsoliin komennolla _console.log_. Myös debuggerin käyttö testejä suorittaessa on mahdollista, ohje on [täällä](https://jestjs.io/docs/troubleshooting).
-
-**HUOM:** Jos jokin testi ei mene läpi, ei ongelmaa korjatessa kannata suorittaa kaikkia testejä, vaan ainoastaan rikkinäistä testiä hyödyntäen [only](https://jestjs.io/docs/api#testonlyname-fn-timeout)-metodia. 
-
-Toinen tapa suorittaa yksittäinen testi (tai describe-lohko) on määritellä suoritettava testi argumentin [-t](https://jestjs.io/docs/en/cli.html) avulla:
-
-```js
-npm test -- -t 'when list has only one blog, equals the likes of that'
-```
+Törmäät testien tekemisen yhteydessä varmasti erinäisiin ongelmiin. Pidä mielessä osassa 3 käsitellyt [debuggaukseen](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan#node-sovellusten-debuggaaminen) liittyvät asiat. 
 
 #### 4.5*: apufunktioita ja yksikkötestejä, step3
 
@@ -762,8 +734,6 @@ Paluuarvo voi olla esim. seuraavassa muodossa:
   likes: 12
 }
 ```
-
-**Huomaa**, että kun vertailet olioita, metodi [toEqual](https://jestjs.io/docs/expect#toequalvalue) on todennäköisesti se mitä haluat käyttää. [toBe](https://jestjs.io/docs/expect#tobevalue)-vertailu, joka sopii esim. lukujen ja merkkijonojen vertailuun, vaatisi olioiden vertailussa, että oliot ovat samat, pelkkä sama sisältö ei riitä.
 
 Tee myös tämän ja seuraavien kohtien testit kukin oman <i>describe</i>-lohkonsa sisälle.
 

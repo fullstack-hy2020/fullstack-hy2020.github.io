@@ -113,7 +113,7 @@ La vue affiche l'<i>URI MongoDB</i>, qui est l'adresse de la base de données qu
 L'adresse ressemble à ceci :
 
 ```bash
-mongodb+srv://fullstack:$<password>@cluster0.o1opl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+mongodb+srv://fullstack:$thepasswordishere@cluster0.o1opl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 ```
 
 Nous sommes maintenant prêts à utiliser la base de données.
@@ -193,7 +193,7 @@ Comme l'indique la vue, le <i>document</i> correspondant à la note a été ajou
 Détruisons la base de données par défaut <i>myFirstDatabase</i> et changeons le nom de la base de données référencée dans notre chaîne de connexion en <i>noteApp</i> à la place, en modifiant l'URI :
 
 ```bash
-mongodb+srv://fullstack:$<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority
+mongodb+srv://fullstack:$thepasswordishere@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority
 ```
 
 Exécutons à nouveau notre code :
@@ -378,7 +378,7 @@ const mongoose = require('mongoose')
 
 // DO NOT SAVE YOUR PASSWORD TO GITHUB!!
 const url =
-  `mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority`
+  `mongodb+srv://fullstack:thepasswordishere@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority`
 
 mongoose.connect(url)
 
@@ -522,7 +522,7 @@ npm install dotenv
 Pour utiliser la bibliothèque, nous créons un fichier <i>.env</i> à la racine du projet. Les variables d'environnement sont définies à l'intérieur du fichier, et il peut ressembler à ceci :
 
 ```bash
-MONGODB_URI=mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority
+MONGODB_URI=mongodb+srv://fullstack:thepasswordishere@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority
 PORT=3001
 ```
 
@@ -559,7 +559,7 @@ Une fois que le fichier .env a été gitignoré, Heroku ne récupère pas l'url 
 ou depuis la ligne de commande avec la commande :
 
 ```
-heroku config:set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
+heroku config:set MONGODB_URI='mongodb+srv://fullstack:thepasswordishere@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
 ```
 
 ### Utilisation de la base de données dans les gestionnaires de route

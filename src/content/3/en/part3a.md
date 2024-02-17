@@ -93,7 +93,7 @@ echo "Error: no test specified" && exit 1
 
 ### Simple web server
 
-Let's change the application into a web server by editing the _index.js_ file as follow:
+Let's change the application into a web server by editing the _index.js_ file as follows:
 
 ```js
 const http = require('http')
@@ -120,7 +120,7 @@ We can open our humble application in the browser by visiting the address <http:
 
 The server works the same way regardless of the latter part of the URL. Also the address <http://localhost:3001/foo/bar> will display the same content.
 
-**NB** if port 3001 is already in use by some other application, then starting the server will result in the following error message:
+**NB** If port 3001 is already in use by some other application, then starting the server will result in the following error message:
 
 ```bash
 ➜  hello npm start
@@ -138,7 +138,7 @@ Error: listen EADDRINUSE :::3001
     at listenInCluster (net.js:1378:12)
 ```
 
-You have two options. Either shut down the application using port 3001 (the json-server in the last part of the material was using port 3001), or use a different port for this application.
+You have two options. Either shut down the application using port 3001 (the JSON Server in the last part of the material was using port 3001), or use a different port for this application.
 
 Let's take a closer look at the first line of the code:
 
@@ -154,7 +154,7 @@ import http from 'http'
 
 These days, code that runs in the browser uses ES6 modules. Modules are defined with an [export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) and taken into use with an [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import).
 
-However, Node.js uses so-called [CommonJS](https://en.wikipedia.org/wiki/CommonJS) modules. The reason for this is that the Node ecosystem needed modules long before JavaScript supported them in the language specification. Node supports now also the use of ES6 modules, but since the support is not quite perfect yet, we'll stick to CommonJS modules.
+Node.js uses by default so-called [CommonJS](https://en.wikipedia.org/wiki/CommonJS) modules. The reason for this is that the Node ecosystem needed modules long before JavaScript supported them in the language specification. Currently, Node also supports the use of ES6 modules, but since the support is not quite perfect yet, we'll stick to CommonJS modules.
 
 CommonJS modules function almost exactly like ES6 modules, at least as far as our needs in this course are concerned.
 
@@ -251,7 +251,7 @@ The source code for the dependency is installed in the <i>node\_modules</i> dire
 
 These are the dependencies of the express library and the dependencies of all of its dependencies, and so forth. These are called the [transitive dependencies](https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/) of our project.
 
-The version 4.18.2 of express was installed in our project. What does the caret in front of the version number in <i>package.json</i> mean?
+Version 4.18.2 of Express was installed in our project. What does the caret in front of the version number in <i>package.json</i> mean?
 
 ```json
 "express": "^4.18.2"
@@ -273,7 +273,7 @@ Likewise, if we start working on the project on another computer, we can install
 npm install
 ```
 
-If the <i>major</i> number of a dependency does not change, then the newer versions should be [backwards compatible](https://en.wikipedia.org/wiki/Backward_compatibility). This means that if our application happened to use version 4.99.175 of express in the future, then all the code implemented in this part would still have to work without making changes to the code. In contrast, the future 5.0.0 version of express [may contain](https://expressjs.com/en/guide/migrating-5.html) changes that would cause our application to no longer work.
+If the <i>major</i> number of a dependency does not change, then the newer versions should be [backwards compatible](https://en.wikipedia.org/wiki/Backward_compatibility). This means that if our application happened to use version 4.99.175 of Express in the future, then all the code implemented in this part would still have to work without making changes to the code. In contrast, the future 5.0.0 version of Express [may contain](https://expressjs.com/en/guide/migrating-5.html) changes that would cause our application to no longer work.
 
 ### Web and express
 
@@ -379,7 +379,7 @@ The contents of <i>package.json</i> have also changed:
     "express": "^4.18.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.20"
+    "nodemon": "^3.0.3"
   }
 }
 ```
@@ -603,8 +603,8 @@ Many tools exist for making the testing of backends easier. One of these is a co
 Let's install the Postman desktop client [from here](https://www.postman.com/downloads/)  and try it out:
 
 ![postman screenshot on api/notes/2](../../images/3/11x.png)
-NB: Postman is also available on VS Code which can be dowloaded from the Extension tab on the left -> search for Postman -> First result (Verified Publisher) -> Install
-You will then see an extra icon added on the activity bar below the extensions tab. Once you login, you can follow from the steps below 
+NB: Postman is also available on VS Code which can be downloaded from the Extension tab on the left -> search for Postman -> First result (Verified Publisher) -> Install
+You will then see an extra icon added on the activity bar below the extensions tab. Once you log in, you can follow the steps below 
 
 Using Postman is quite easy in this situation. It's enough to define the URL and then select the correct request type (DELETE).
 
@@ -672,9 +672,9 @@ The application prints the data that we sent in the request to the console:
 
 **NB** <i>Keep the terminal running the application visible at all times</i> when you are working on the backend. Thanks to Nodemon any changes we make to the code will restart the application. If you pay attention to the console, you will immediately be able to pick up on errors that occur in the application:
 
-![nodemon error as typing requre not defined](../../images/3/16.png)
+![nodemon error as typing requre not defined](../../images/3/16e.png)
 
-Similarly, it is useful to check the console for making sure that the backend behaves as we expect it to in different situations, like when we send data with an HTTP POST request. Naturally, it's a good idea to add lots of <em>console.log</em> commands to the code while the application is still being developed.
+Similarly, it is useful to check the console to make sure that the backend behaves as we expect it to in different situations, like when we send data with an HTTP POST request. Naturally, it's a good idea to add lots of <em>console.log</em> commands to the code while the application is still being developed.
 
 A potential cause for issues is an incorrectly set <i>Content-Type</i> header in requests. This can happen with Postman if the type of body is not defined correctly:
 

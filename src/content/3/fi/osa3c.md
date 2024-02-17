@@ -108,7 +108,7 @@ Näkymä kertoo <i>MongoDB URI:n</i> eli osoitteen, jonka avulla sovelluksemme k
 Osoite näyttää seuraavalta:
 
 ```bash
-mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority
+mongodb+srv://fullstack:thepasswordishere@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority
 ```
 
 Olemme nyt valmiina kannan käyttöön.
@@ -149,7 +149,7 @@ const noteSchema = new mongoose.Schema({
 const Note = mongoose.model('Note', noteSchema)
 
 const note = new Note({
-  content: 'HTML is Easy',
+  content: 'HTML is easy',
   important: true,
 })
 
@@ -503,11 +503,11 @@ npm install dotenv
 Sovelluksen juurihakemistoon tehdään sitten tiedosto nimeltään <i>.env</i>, jonne tarvittavien ympäristömuuttujien arvot määritellään. Tiedosto näyttää seuraavalta:
 
 ```bash
-MONGODB_URI=mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority
+MONGODB_URI=mongodb+srv://fullstack:thepasswordishere@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority
 PORT=3001
 ```
 
-Huomaa, että sinun tulee sisällyttää salasanasi osaksi url:ia, &lt;password&gt; kohtaan.
+Huomaa, että sinun tulee sisällyttää salasanasi osaksi url:ia, <i>thepasswordishere</i> tilalle.
 
 Määrittelimme samalla aiemmin kovakoodaamamme sovelluksen käyttämän portin eli ympäristömuuttujan <em>PORT</em>.
 
@@ -548,7 +548,7 @@ Koska Fly.io ei hyödynnä gitiä, menee myös .env-tiedosto Fly.io:n palvelimel
 ja asettaa ympäristömuuttujan arvo komennolla:
 
 ```
-fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
+fly secrets set MONGODB_URI='mongodb+srv://fullstack:thepasswordishere@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
 ```
 
 Koska .env-tiedosto määrittelee myös ympäristömuuttujan PORT arvon, on .env:in ignorointi oikeastaan välttämätöntä jotta sovellus ei yritä käynnistää itseään väärään portiin.
@@ -582,7 +582,7 @@ app.post('/api/notes', (request, response) => {
 })
 ```
 
-Muistiinpano-oliot siis luodaan _Note_-konstruktorifunktiolla. Pyyntöön vastataan _save_-operaation takaisinkutsufunktion sisällä. Näin varmistutaan, että operaation vastaus tapahtuu vain, jos operaatio on onnistunut. Palaamme virheiden käsittelyyn myöhemmin.
+Muistiinpano-oliot siis luodaan _Note_-konstruktorifunktiolla. Pyyntöön vastataan metodin  _save_ takaisinkutsufunktion sisällä. Näin varmistutaan, että operaation vastaus tapahtuu vain, jos operaatio on onnistunut. Palaamme virheiden käsittelyyn myöhemmin.
 
 Takaisinkutsufunktion parametrina oleva _savedNote_ on talletettu muistiinpano. HTTP-pyyntöön palautetaan kuitenkin automaattisesti siitä metodilla _toJSON_ formatoitu muoto:
 

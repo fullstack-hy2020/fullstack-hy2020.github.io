@@ -146,7 +146,7 @@ node --inspect index.js
 这个地址如下所示：
 
 ```bash
-mongodb+srv://fullstack:$<password>@cluster0.o1opl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+mongodb+srv://fullstack:$thepasswordishere@cluster0.o1opl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 ```
 
 <!-- We are now ready to use the database.-->
@@ -233,7 +233,7 @@ const password = process.argv[2]
  让我们销毁默认的数据库<i>myFirstDatabase</i>，通过修改URI，将连接字符串中引用的数据库名称改为<i>noteApp</i>。
 
 ```bash
-mongodb+srv://fullstack:$<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority
+mongodb+srv://fullstack:$thepasswordishere@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority
 ```
 
 <!-- Let's run our code again:-->
@@ -449,7 +449,7 @@ const mongoose = require('mongoose')
 
 // DO NOT SAVE YOUR PASSWORD TO GITHUB!!
 const url =
-  `mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority`
+  `mongodb+srv://fullstack:thepasswordishere@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority`
 
 mongoose.connect(url)
 
@@ -612,7 +612,7 @@ npm install dotenv
  为了使用这个库，我们在项目的根部创建一个<i>.env</i>文件。环境变量被定义在该文件中，它如下所示：
 
 ```bash
-MONGODB_URI=mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority
+MONGODB_URI=mongodb+srv://fullstack:thepasswordishere@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority
 PORT=3001
 ```
 
@@ -656,7 +656,7 @@ app.listen(PORT, () => {
  或者在命令行中使用命令。
 
 ```
-heroku config:set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
+heroku config:set MONGODB_URI='mongodb+srv://fullstack:thepasswordishere@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
 ```
 
 ### Using database in route handlers

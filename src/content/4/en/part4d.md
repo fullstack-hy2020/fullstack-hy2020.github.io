@@ -220,14 +220,14 @@ If the token is missing or it is invalid, the exception <i>JsonWebTokenError</i>
 
 ```js
 const errorHandler = (error, request, response, next) => {
-  logger.error(error.message)
-
   if (error.name === 'CastError') {
     return response.status(400).send({ error: 'malformatted id' })
   } else if (error.name === 'ValidationError') {
     return response.status(400).json({ error: error.message })
+  } else if (error.name === 'MongoServerError' && error.message.includes('E11000 duplicate key error')) {
+    return response.status(400).json({ error: 'expected `username` to be unique' })
   } else if (error.name ===  'JsonWebTokenError') { // highlight-line
-    return response.status(401).json({ error: error.message }) // highlight-line
+    return response.status(400).json({ error: 'token missing or invalid' }) // highlight-line
   }
 
   next(error)
@@ -252,13 +252,13 @@ A new note can now be created using Postman if the <i>authorization</i> header i
 
 Using Postman this looks as follows:
 
-![postman adding bearer token](../../images/4/20e.png)
+![postman adding bearer token](../../images/4/20new.png)
 
 and with Visual Studio Code REST client
 
-![vscode adding bearer token example](../../images/4/21e.png)
+![vscode adding bearer token example](../../images/4/21new.png)
 
-Current application code can be found on [Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-9), branch <i>part4-9</i>.
+Current application code can be found on [GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-9), branch <i>part4-9</i>.
 
 If the application has multiple interfaces requiring identification, JWT's validation should be separated into its own middleware. An existing library like [express-jwt](https://www.npmjs.com/package/express-jwt) could also be used.
 
@@ -315,6 +315,10 @@ const errorHandler = (error, request, response, next) => {
     return response.status(400).send({ error: 'malformatted id' })
   } else if (error.name === 'ValidationError') {
     return response.status(400).json({ error: error.message })
+  } else if (error.name === 'MongoServerError' && error.message.includes('E11000 duplicate key error')) {
+    return response.status(400).json({
+      error: 'expected `username` to be unique'
+    })
   } else if (error.name === 'JsonWebTokenError') {
     return response.status(401).json({
       error: 'invalid token'

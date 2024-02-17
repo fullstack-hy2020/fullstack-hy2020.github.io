@@ -28,6 +28,7 @@ module.exports = {
       b: 'Backendin testaaminen',
       c: 'Käyttäjien hallinta',
       d: 'Token-perustainen kirjautuminen',
+      e: 'Legacy: testaaminen Jestiä käyttäen',
     },
     '5': {
       a: 'Kirjautuminen frontendissä',
@@ -95,6 +96,7 @@ module.exports = {
       b: 'Testing the backend',
       c: 'User administration',
       d: 'Token authentication',
+      e: 'Legacy: Testing with Jest',
     },
     '5': {
       a: 'Login in frontend',
@@ -345,7 +347,7 @@ module.exports = {
       a: 'Rendu de collections, modules',
       b: 'Formulaires',
       c: 'Obtenir des données du serveur',
-      d: 'Modification des donées côté serveur',
+      d: 'Modification des données côté serveur',
       e: 'Styliser vos applications React',
     },
     '3': {

@@ -1,9 +1,353 @@
 ---
 mainImage: ../../../images/part-4.svg
 part: 4
-letter: b
+letter: e
 lang: fi
 ---
+
+<div class="tasks">
+
+**Tämä on osan vanha (13.2.2024 muutettu) materiaali, missä testit tehdään Jest-kirjastolla.** Jos ehdit aloittaa testien tekemisen Jestillä, seuraa tätä materiaalia. Muussa tapauksessa tämä sivu kannattaa jättää huomioimatta.
+
+</div>
+
+<div class="content">
+
+### Node-sovellusten testaaminen
+
+Olemme laiminlyöneet ikävästi yhtä oleellista ohjelmistokehityksen osa-aluetta, automatisoitua testaamista.
+
+Aloitamme yksikkötestauksesta. Sovelluksemme logiikka on sen verran yksinkertaista, että siinä ei ole juurikaan mielekästä yksikkötestattavaa. Luodaan tiedosto <i>utils/for_testing.js</i> ja määritellään sinne pari yksinkertaista funktiota testattavaksi:
+
+```js
+const reverse = (string) => {
+  return string
+    .split('')
+    .reverse()
+    .join('')
+}
+
+const average = (array) => {
+  const reducer = (sum, item) => {
+    return sum + item
+  }
+
+  return array.reduce(reducer, 0) / array.length
+}
+
+module.exports = {
+  reverse,
+  average,
+}
+```
+
+> Metodi _average_ käyttää taulukoiden metodia [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce). Jos metodi ei ole vieläkään tuttu, on korkea aika katsoa YouTubesta [Functional JavaScript](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84) ‑sarjasta ainakin kolme ensimmäistä videoa.
+
+JavaScriptiin on tarjolla runsaasti erilaisia testikirjastoja eli <i>test runnereita</i>. Käytämme tällä kurssilla Facebookin kehittämää ja sisäisesti käyttämää [Jest](https://jestjs.io/):iä, joka on toiminnaltaan ja syntaksiltaankin hyvin samankaltainen kuin testikirjastojen entinen kuningas [Mocha](https://mochajs.org/).
+
+Jest on tälle kurssille luonteva valinta, sillä se sopii hyvin backendien testaamiseen, mutta suorastaan loistaa Reactilla tehtyjen frontendien testauksessa.
+
+> <i>**Huomio Windows-käyttäjille:**</i> Jest ei välttämättä toimi, jos projektin hakemistopolulla on hakemisto, jonka nimessä on välilyöntejä.
+
+Koska testejä on tarkoitus suorittaa ainoastaan sovellusta kehitettäessä, asennetaan Jest <i>kehitysaikaiseksi riippuvuudeksi</i> komennolla
+
+```bash
+npm install --save-dev jest
+```
+
+Määritellään npm-skripti <i>test</i> suorittamaan testaus Jestillä ja raportoimaan testien suorituksesta <i>verbose</i>-tyylillä:
+
+```bash
+{
+  //...
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
+    "deploy": "fly deploy",
+    "deploy:full": "npm run build:ui && npm run deploy",
+    "logs:prod": "fly logs",
+    "lint": "eslint .",
+    "test": "jest --verbose" // highlight-line
+  },
+  //...
+}
+```
+
+Jestille pitää vielä kertoa, että suoritusympäristönä on käytössä Node. Tämä tapahtuu esim. lisäämällä <i>package.json</i> tiedoston loppuun seuraavaa:
+
+```js
+{
+ //...
+ "jest": {
+   "testEnvironment": "node"
+ }
+}
+```
+
+Tehdään testejä varten hakemisto <i>tests</i> ja sinne tiedosto <i>reverse.test.js</i>, jonka sisältö on seuraava:
+
+```js
+const reverse = require('../utils/for_testing').reverse
+
+test('reverse of a', () => {
+  const result = reverse('a')
+
+  expect(result).toBe('a')
+})
+
+test('reverse of react', () => {
+  const result = reverse('react')
+
+  expect(result).toBe('tcaer')
+})
+
+test('reverse of saippuakauppias', () => {
+  const result = reverse('saippuakauppias')
+
+  expect(result).toBe('saippuakauppias')
+})
+```
+
+Edellisessä osassa käyttöön ottamamme ESLint valittaa testien käyttämistä komennoista _test_ ja _expect_ sillä käyttämämme konfiguraatio kieltää <i>globaalina</i> määriteltyjen asioiden käytön. Poistetaan valitus lisäämällä <i>.eslintrc.js</i>-tiedoston kenttään <i>env</i> arvo <i>"jest": true</i>. Näin kerromme ESLintille, että käytämme projektissamme Jestiä ja sen globaaleja muuttujia.
+
+```js
+module.exports = {
+  'env': {
+    'commonjs': true,
+    'es2021': true,
+    'node': true,
+    'jest': true, // highlight-line
+  },
+  // ...
+}
+```
+
+Testi ottaa ensimmäisellä rivillä käyttöön testattavan funktion sijoittaen sen muuttujaan _reverse_:
+
+```js
+const reverse = require('../utils/for_testing').reverse
+```
+
+Yksittäiset testitapaukset määritellään funktion _test_ avulla. Ensimmäisenä parametrina on merkkijonomuotoinen testin kuvaus. Toisena parametrina on <i>funktio</i>, joka määrittelee testitapauksen toiminnallisuuden. Esim. toisen testitapauksen toiminnallisuus näyttää seuraavalta:
+
+```js
+() => {
+  const result = reverse('react')
+
+  expect(result).toBe('tcaer')
+}
+```
+
+Ensin suoritetaan testattava koodi eli generoidaan merkkijonon <i>react</i> palindromi. Seuraavaksi varmistetaan tulos metodin [expect](https://jestjs.io/docs/expect#expectvalue) avulla. Expect käärii tuloksena olevan arvon olioon, joka tarjoaa joukon <i>matcher</i>-funktioita, joiden avulla tuloksen oikeellisuutta voidaan tarkastella. Koska kyse on kahden merkkijonon samuuden vertailusta, sopii tilanteeseen matcheri [toBe](https://jestjs.io/docs/expect#tobevalue).
+
+Kuten odotettua, testit menevät läpi:
+
+![Jest kertoo että 3 testiä kolmesta meni läpi](../../images/4/1x.png)
+
+Jest olettaa oletusarvoisesti, että testitiedoston nimessä on merkkijono <i>.test</i>. Käytetään kurssilla konventiota, jossa testitiedostojen nimen loppu on <i>.test.js</i>.
+
+Jestin antamat virheilmoitukset ovat hyviä. Rikotaan testi:
+
+```js
+test('reverse of react', () => {
+  const result = reverse('react')
+
+  expect(result).toBe('tkaer')
+})
+```
+
+Seurauksena on seuraava virheilmoitus:
+
+![Jest kertoo että testin odottama merkkijono poikkesi tuloksena olevasta merkkijonosta](../../images/4/2x.png)
+
+Lisätään tiedostoon <i>tests/average.test.js</i> muutama testi metodille _average_:
+
+```js
+const average = require('../utils/for_testing').average
+
+describe('average', () => {
+  test('of one value is the value itself', () => {
+    expect(average([1])).toBe(1)
+  })
+
+  test('of many is calculated right', () => {
+    expect(average([1, 2, 3, 4, 5, 6])).toBe(3.5)
+  })
+
+  test('of empty array is zero', () => {
+    expect(average([])).toBe(0)
+  })
+})
+```
+
+Testi paljastaa, että metodi toimii väärin tyhjällä taulukolla (sillä nollalla jaon tulos on JavaScriptissä <i>NaN</i>):
+
+![Jest kertoo että odoteutun arvon 0 sijaan tuloksena on NaN](../../images/4/3.png)
+
+Metodi on helppo korjata:
+
+```js
+const average = array => {
+  const reducer = (sum, item) => {
+    return sum + item
+  }
+  return array.length === 0
+    ? 0 
+    : array.reduce(reducer, 0) / array.length
+}
+```
+
+Eli jos taulukon pituus on 0, palautetaan 0 ja muussa tapauksessa palautetaan metodin _reduce_ avulla laskettu keskiarvo.
+
+Pari huomiota keskiarvon testeistä. Määrittelimme testien ympärille nimellä _average_ varustetun <i>describe</i>-lohkon:
+
+```js
+describe('average', () => {
+  // tests
+})
+```
+
+Describejen avulla yksittäisessä tiedostossa olevat testit voidaan jaotella loogisiin kokonaisuuksiin. Testituloste hyödyntää myös describe-lohkon nimeä:
+
+![Testitapausten tulokset on Jestin näkymässä ryhmitelty describe-lohkojen mukaan](../../images/4/4x.png)
+
+Kuten myöhemmin tulemme näkemään, <i>describe</i>-lohkot ovat tarpeellisia, jos haluamme osalle yksittäisen testitiedoston testitapauksista joitain yhteisiä alustus- tai lopetustoimenpiteitä.
+
+Toisena huomiona se, että kirjoitimme testit aavistuksen tiiviimmässä muodossa, ottamatta testattavan metodin tulosta erikseen apumuuttujaan:
+
+```js
+test('of empty array is zero', () => {
+  expect(average([])).toBe(0)
+})
+```
+
+</div>
+
+<div class="tasks">
+
+### Tehtävät 4.3.-4.7.
+
+Tehdään joukko blogilistan käsittelyyn tarkoitettuja apufunktioita. Tee funktiot esim. tiedostoon <i>utils/list_helper.js</i>. Tee testit sopivasti nimettyyn tiedostoon hakemistoon <i>tests</i>.
+
+#### 4.3: apufunktioita ja yksikkötestejä, step1
+
+Määrittele ensin funktio _dummy_, joka saa parametrikseen taulukollisen blogeja ja palauttaa aina luvun 1. Tiedoston <i>list_helper.js</i> sisällöksi siis tulee tässä vaiheessa:
+
+```js
+const dummy = (blogs) => {
+  // ...
+}
+
+module.exports = {
+  dummy
+}
+```
+
+Varmista testikonfiguraatiosi toimivuus seuraavalla testillä:
+
+```js
+const listHelper = require('../utils/list_helper')
+
+test('dummy returns one', () => {
+  const blogs = []
+
+  const result = listHelper.dummy(blogs)
+  expect(result).toBe(1)
+})
+```
+
+#### 4.4: apufunktioita ja yksikkötestejä, step2
+
+Määrittele funktio _totalLikes_, joka saa parametrikseen taulukollisen blogeja. Funktio palauttaa blogien yhteenlaskettujen tykkäysten eli <i>likejen</i> määrän.
+
+Määrittele funktiolle sopivat testit. Funktion testit kannattaa laittaa <i>describe</i>-lohkoon jolloin testien tulostus ryhmittyy miellyttävästi:
+
+![](../../images/4/5.png)
+
+Testisyötteiden määrittely onnistuu esim. seuraavaan tapaan:
+
+```js
+describe('total likes', () => {
+  const listWithOneBlog = [
+    {
+      _id: '5a422aa71b54a676234d17f8',
+      title: 'Go To Statement Considered Harmful',
+      author: 'Edsger W. Dijkstra',
+      url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
+      likes: 5,
+      __v: 0
+    }
+  ]
+
+  test('when list has only one blog equals the likes of that', () => {
+    const result = listHelper.totalLikes(listWithOneBlog)
+    expect(result).toBe(5)
+  })
+})
+```
+
+Jos et viitsi itse määritellä testisyötteenä käytettäviä blogeja, saat valmiin listan [täältä](https://raw.githubusercontent.com/fullstack-hy2020/misc/master/blogs_for_test.md).
+
+Törmäät testien tekemisen yhteydessä varmasti erinäisiin ongelmiin. Pidä mielessä osassa 3 käsitellyt [debuggaukseen](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan#node-sovellusten-debuggaaminen) liittyvät asiat. Voit testejäkin suorittaessasi printtailla konsoliin komennolla _console.log_. Myös debuggerin käyttö testejä suorittaessa on mahdollista, ohje on [täällä](https://jestjs.io/docs/troubleshooting).
+
+**HUOM:** Jos jokin testi ei mene läpi, ei ongelmaa korjatessa kannata suorittaa kaikkia testejä, vaan ainoastaan rikkinäistä testiä hyödyntäen [only](https://jestjs.io/docs/api#testonlyname-fn-timeout)-metodia. 
+
+Toinen tapa suorittaa yksittäinen testi (tai describe-lohko) on määritellä suoritettava testi argumentin [-t](https://jestjs.io/docs/en/cli.html) avulla:
+
+```js
+npm test -- -t 'when list has only one blog, equals the likes of that'
+```
+
+#### 4.5*: apufunktioita ja yksikkötestejä, step3
+
+Määrittele funktio _favoriteBlog_, joka saa parametrikseen taulukollisen blogeja. Funktio selvittää millä blogilla on eniten tykkäyksiä. Jos suosikkeja on monta, riittää että funktio palauttaa niistä jonkun.
+
+Paluuarvo voi olla esim. seuraavassa muodossa:
+
+```js
+{
+  title: "Canonical string reduction",
+  author: "Edsger W. Dijkstra",
+  likes: 12
+}
+```
+
+**Huomaa**, että kun vertailet olioita, metodi [toEqual](https://jestjs.io/docs/expect#toequalvalue) on todennäköisesti se mitä haluat käyttää. [toBe](https://jestjs.io/docs/expect#tobevalue)-vertailu, joka sopii esim. lukujen ja merkkijonojen vertailuun, vaatisi olioiden vertailussa, että oliot ovat samat, pelkkä sama sisältö ei riitä.
+
+Tee myös tämän ja seuraavien kohtien testit kukin oman <i>describe</i>-lohkonsa sisälle.
+
+#### 4.6*: apufunktioita ja yksikkötestejä, step4
+
+Tämä ja seuraava tehtävä ovat jo hieman haastavampia. Tehtävien tekeminen ei ole osan jatkon kannalta oleellista, eli voi olla hyvä idea palata näihin vasta kun muu osa on kahlattu läpi.
+
+Tehtävän tekeminen onnistuu hyvin ilman mitään kirjastojakin, mutta tämä saattaa olla hyvä paikka tutustua kokoelmien käsittelyä suuresti helpottavaan [Lodash](https://lodash.com/)-kirjastoon.
+
+Määrittele funktio _mostBlogs_, joka saa parametrikseen taulukollisen blogeja. Funktio selvittää <i>kirjoittajan</i>, jolla on eniten blogeja. Funktion paluuarvo kertoo myös ennätysbloggaajan blogien määrän:
+
+```js
+{
+  author: "Robert C. Martin",
+  blogs: 3
+}
+```
+
+Jos ennätysbloggaajia on monta, riittää että funktio palauttaa niistä jonkun.
+
+#### 4.7*: apufunktioita ja yksikkötestejä, step5
+
+Määrittele funktio _mostLikes_, joka saa parametrikseen taulukollisen blogeja. Funktio selvittää kirjoittajan, jonka blogeilla on eniten tykkäyksiä. Funktion paluuarvo kertoo myös suosikkibloggaajan likejen yhteenlasketun määrän:
+
+```js
+{
+  author: "Edsger W. Dijkstra",
+  likes: 17
+}
+```
+
+Jos suosikkibloggaajia on monta, riittää että funktio palauttaa niistä jonkun.
+
+</div>
 
 <div class="content">
 
@@ -25,18 +369,20 @@ Määritellään nyt tiedostossa <i>package.json</i>, että testejä suoritettae
 {
   // ...
   "scripts": {
-    "start": "NODE_ENV=production node index.js", // highlight-line
-    "dev": "NODE_ENV=development nodemon index.js", // highlight-line
-    "test": "NODE_ENV=test node --test", // highlight-line
+    "start": "NODE_ENV=production node index.js",// highlight-line
+    "dev": "NODE_ENV=development nodemon index.js",// highlight-line
     "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
     "deploy": "fly deploy",
     "deploy:full": "npm run build:ui && npm run deploy",
     "logs:prod": "fly logs",
     "lint": "eslint .",
+    "test": "NODE_ENV=test jest --verbose --runInBand"// highlight-line
   },
   // ...
 }
 ```
+
+Lisäsimme testit suorittavaan npm-skriptiin myös määreen [runInBand](https://jestjs.io/docs/en/cli.html#runinband), joka estää testien rinnakkaisen suorituksen. Tämä tarkennus on viisainta tehdä sitten, kun testimme tulevat käyttämään tietokantaa.
 
 Samalla määriteltiin, että suoritettaessa sovellusta komennolla _npm run dev_ eli nodemonin avulla, on sovelluksen moodi <i>development</i>. Jos sovellusta suoritetaan normaalisti Nodella, on moodiksi määritelty <i>production</i>.
 
@@ -54,7 +400,8 @@ ja muuttamalla <i>package.json</i> kaikilla käyttöjärjestelmillä toimivaan m
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
     "dev": "cross-env NODE_ENV=development nodemon index.js",
-    "test": "cross-env  NODE_ENV=test node --test",
+    // ...
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
   },
   // ...
 }
@@ -115,7 +462,6 @@ npm install --save-dev supertest
 Luodaan heti ensimmäinen testi tiedostoon <i>tests/note_api.test.js</i>:
 
 ```js
-const { test, after } = require('node:test')
 const mongoose = require('mongoose')
 const supertest = require('supertest')
 const app = require('../app')
@@ -129,7 +475,7 @@ test('notes are returned as json', async () => {
     .expect('Content-Type', /application\/json/)
 })
 
-after(async () => {
+afterAll(async () => {
   await mongoose.connection.close()
 })
 ```
@@ -154,14 +500,40 @@ Periaatteessa testi olisi voitu määritellä myös normaalina merkkijonona
 
 Tässä ongelmana on kuitenkin se, että käytettäessä merkkijonoa, tulee headerin arvon olla täsmälleen sama. Määrittelemällemme regexille kelpaa että header <i>sisältää</i> kyseisen merkkijonon. Headerin todellinen arvo on <i>application/json; charset=utf-8</i>, eli se sisältää myös tiedon merkistökoodauksesta. Testimme ei kuitenkaan ole tästä kiinnostunut ja siksi testi on parempi määritellä tarkan merkkijonon sijaan regexinä.
 
-Testissä on muutama detalji joihin tutustumme vasta [hieman myöhemmin](/osa4/backendin_testaaminen#async-await) tässä osassa. Testikoodin määrittelevä nuolifunktio alkaa sanalla <i>async</i>, ja <i>api</i>-oliolle tehtyä metodikutsua edeltää sana <i>await</i>. Teemme ensin muutamia testejä ja tutustumme sen jälkeen async/await-magiaan. Tällä hetkellä niistä ei tarvitse välittää, sillä kaikki toimii kunhan kirjoitat testimetodit esimerkin mukaan. Async/await-syntaksin käyttö liittyy siihen, että palvelimelle tehtävät pyynnöt ovat <i>asynkronisia</i> operaatioita. Async/await-syntaksia käyttämällä saamme pyynnön näyttämään koodin tasolla synkronisesti toimivalta.
+Testissä on muutama detalji joihin tutustumme vasta [hieman myöhemmin](/osa4/backendin_testaaminen#async-await) tässä osassa. Testikoodin määrittelevä nuolifunktio alkaa sanalla <i>async</i>, ja <i>api</i>-oliolle tehtyä metodikutsua edeltää sana <i>await</i>. Teemme ensin muutamia testejä ja tutustumme sen jälkeen async/await-magiaan. Tällä hetkellä niistä ei tarvitse välittää, sillä kaikki toimii kunhan kirjoitat testimetodit esimerkin mukaan. Async/await-syntaksin käyttö liittyy siihen, että palvelimelle tehtävät pyynnöt ovat <i>asynkronisia</i> operaatioita. [Async/await-kikalla](https://jestjs.io/docs/asynchronous) saamme pyynnön näyttämään koodin tasolla synkronisesti toimivalta.
 
-Kaikkien testien (joita siis tällä kertaa on vain yksi) päätteeksi on vielä lopputoimenpiteenä katkaistava Mongoosen käyttämä tietokantayhteys. Tämä onnistuu helposti metodissa [after](https://nodejs.org/api/test.html#afterfn-options):
+Kaikkien testien (joita siis tällä kertaa on vain yksi) päätteeksi on vielä lopputoimenpiteenä katkaistava Mongoosen käyttämä tietokantayhteys. Tämä onnistuu helposti metodissa [afterAll](https://jestjs.io/docs/api#afterallfn-timeout):
 
 ```js
-after(async () => {
+afterAll(async () => {
   await mongoose.connection.close()
 })
+```
+
+Testejä suorittaessa tulee seuraava ilmoitus:
+
+![Virheilmoitus Jest did not exit one second after the test run has completed](../../images/4/8.png)
+
+Kyse lienee Mongoosen version 6.x aiheuttamasta ongelmasta, versiossa 5.x ei samaa virhettä esiinny. Itseasiassa [Mongoosen dokumentaatio](https://mongoosejs.com/docs/jest.html) ei välttämättä suosittele Mongoosea käyttävien sovellusten testaamista Jestillä.
+
+Virheilmoituksesta pääsee eroon muutamallakin tavalla. [Esimerkiksi](https://stackoverflow.com/questions/50687592/jest-and-mongoose-jest-has-detected-opened-handles) lisäämällä hakemistoon <i>tests</i> tiedosto <i>teardown.js</i> jolla on seuraava sisältö
+
+```js
+module.exports = () => {
+  process.exit(0)
+}
+```
+
+ja lajentamalla tiedoston <i>package.json</i> Jestiä koskevaa määrittelyä seuraavasti
+
+```js
+{
+ //...
+ "jest": {
+   "testEnvironment": "node"
+   "globalTeardown": "./tests/teardown.js" // highlight-line
+ }
+}
 ```
 
 Pieni mutta tärkeä huomio: eristimme tämän osan [alussa](/osa4/sovelluksen_rakenne_ja_testauksen_alkeet#sovelluksen-rakenne) Express-sovelluksen tiedostoon <i>app.js</i>, ja tiedoston <i>index.js</i> rooliksi jäi sovelluksen käynnistäminen määriteltyyn porttiin <i>http</i>-olion avulla:
@@ -170,6 +542,8 @@ Pieni mutta tärkeä huomio: eristimme tämän osan [alussa](/osa4/sovelluksen_r
 const app = require('./app') // varsinainen Express-sovellus
 const config = require('./utils/config')
 const logger = require('./utils/logger')
+
+
 
 app.listen(config.PORT, () => {
   logger.info(`Server running on port ${config.PORT}`)
@@ -202,31 +576,17 @@ Tehdään pari testiä lisää:
 test('there are two notes', async () => {
   const response = await api.get('/api/notes')
 
-  assert.strictEqual(response.body.length, 2)
+  expect(response.body).toHaveLength(2)
 })
 
 test('the first note is about HTTP methods', async () => {
   const response = await api.get('/api/notes')
 
-  const contents = response.body.map(e => e.content)
-  assert.strictEqual(contents.includes('HTML is easy'), true)
+  expect(response.body[0].content).toBe('HTML is easy')
 })
 ```
 
-Molemmat testit sijoittavat pyynnön vastauksen muuttujaan _response_. Toisin kuin edellisessä testissä (joka käytti SuperTestin mekanismeja statuskoodin ja vastauksen headereiden oikeellisuuden varmistamiseen), tällä kertaa tutkitaan vastauksessa olevan datan eli <i>response.body</i>:n oikeellisuutta _assert_-kirjaston [strictEqual](https://nodejs.org/docs/latest/api/assert.html#assertstrictequalactual-expected-message) metodilla.
-
-Jälkimmäistä testiä on vielä mahdollista yksinkertaistaa hiukan tekemällä vertailu suoraan [assert](https://nodejs.org/docs/latest/api/assert.html#assertokvalue-message):illa:
-
-```js
-test('the first note is about HTTP methods', async () => {
-  const response = await api.get('/api/notes')
-
-  const contents = response.body.map(e => e.content)
-  // is the parameter truthy
-  assert(contents.includes('HTML is easy'))
-})
-```
-
+Molemmat testit sijoittavat pyynnön vastauksen muuttujaan _response_. Toisin kuin edellisessä testissä (joka käytti SuperTestin mekanismeja statuskoodin ja vastauksen headereiden oikeellisuuden varmistamiseen), tällä kertaa tutkitaan vastauksessa olevan datan eli <i>response.body</i>:n oikeellisuutta Jestin [expect](https://jestjs.io/docs/expect#expectvalue):in avulla.
 
 Async/await-kikan hyödyt tulevat nyt selkeästi esiin. Normaalisti tarvitsisimme asynkronisten pyyntöjen vastauksiin käsille pääsemiseen promiseja ja takaisinkutsuja, mutta nyt kaikki menee mukavasti:
 
@@ -235,7 +595,7 @@ const response = await api.get('/api/notes')
 
 // tänne tullaan vasta kun edellinen komento eli HTTP-pyyntö on suoritettu
 // muuttujassa response on nyt HTTP-pyynnön tulos
-assert.strictEqual(response.body.length, 2)
+expect(response.body).toHaveLength(2)
 ```
 
 HTTP-pyyntöjen tiedot konsoliin kirjoittava middleware häiritsee hiukan testien tulostusta. Muutetaan loggeria siten, että testausmoodissa lokiviestit eivät tulostu konsoliin:
@@ -266,18 +626,18 @@ module.exports = {
 
 Testaus vaikuttaa helpolta ja testit menevät läpi. Testimme ovat kuitenkin huonoja, sillä niiden läpimeno riippuu tietokannan tilasta, jossa nyt sattuu olemaan kaksi muistiinpanoa. Jotta saisimme robustimmat testit, tulee tietokannan tila nollata testien alussa ja sen jälkeen laittaa kantaan hallitusti testien tarvitsema data.
 
-Testimme käyttää jo nyt funktiota [after](https://nodejs.org/api/test.html#afterfn-options) sulkemaan tietokannan testien suoritusten jälkeen. Kirjasto Node:test tarjoaa joukon muitakin metodeja joiden avulla voidaan suorittaa operaatioita ennen yhdenkään testin suorittamista tai ennen jokaisen testin suoritusta.
+Testimme käyttää jo nyt Jestin metodia [afterAll](https://jestjs.io/docs/api#afterallfn-timeout) sulkemaan tietokannan testien suoritusten jälkeen. Jest tarjoaa joukon muitakin [funktioita](https://jestjs.io/docs/setup-teardown), joiden avulla voidaan suorittaa operaatioita ennen yhdenkään testin suorittamista tai ennen jokaisen testin suoritusta.
 
-Päätetään alustaa tietokanta ennen <i>jokaisen testin suoritusta</i>, eli funktiossa [beforeEach](https://nodejs.org/api/test.html#beforeeachfn-options):
+Päätetään alustaa tietokanta ennen <i>jokaisen testin suoritusta</i>, eli funktiossa [beforeEach](https://jestjs.io/docs/en/api.html#beforeeachfn-timeout):
 
 ```js
-
+const mongoose = require('mongoose')
+const supertest = require('supertest')
+const app = require('../app')
+const api = supertest(app)
 // highlight-start
-const { test, after, beforeEach } = require('node:test')
 const Note = require('../models/note')
 // highlight-end
-
-// ...
 
 // highlight-start
 const initialNotes = [
@@ -311,69 +671,48 @@ Tietokanta siis tyhjennetään aluksi, ja sen jälkeen kantaan lisätään kaksi
 Muutetaan kahta jälkimmäistä testiä vielä seuraavasti:
 
 ```js
-test('there are two notes', async () => {
+test('all notes are returned', async () => {
   const response = await api.get('/api/notes')
 
-  assert.strictEqual(response.body.length, initialNotes.length)
+  expect(response.body).toHaveLength(initialNotes.length) // highlight-line
 })
 
-test('the first note is about HTTP methods', async () => {
+test('a specific note is within the returned notes', async () => {
   const response = await api.get('/api/notes')
 
-  const contents = response.body.map(e => e.content)
-  assert(contents.includes('HTML is easy'))
-})
+  const contents = response.body.map(r => r.content) // highlight-line
 
+  expect(contents).toContain(
+    'Browser can execute only JavaScript' // highlight-line
+  )
+})
 ```
+
+Huomaa jälkimmäisen testin ekspektaatio. Komennolla <code>response.body.map(r => r.content)</code> muodostetaan taulukko API:n palauttamien muistiinpanojen sisällöistä. Jestin [toContain](https://jestjs.io/docs/expect#tocontainitem)-ekspektaatiometodilla tarkistetaan, että parametrina oleva muistiinpano on kaikkien API:n palauttamien muistiinpanojen joukossa.
 
 ### Testien suorittaminen yksitellen
 
-Komento _npm test_ suorittaa projektin kaikki testit. Kun olemme vasta tekemässä testejä, on useimmiten järkevämpää suorittaa kerrallaan ainoastaan yhtä tai muutamaa testiä. Jest tarjoaa tähän muutamia vaihtoehtoja.
+Komento _npm test_ suorittaa projektin kaikki testit. Kun olemme vasta tekemässä testejä, on useimmiten järkevämpää suorittaa kerrallaan ainoastaan yhtä tai muutamaa testiä. Jest tarjoaa tähän muutamia vaihtoehtoja. Eräs näistä on komennon [only](https://jestjs.io/docs/en/api#testonlyname-fn-timeout) käyttö. Jos testit on kirjoitettu useaan tiedostoon, ei menetelmä ole kovin hyvä.
 
-Eräs näistä on komennon [only](https://nodejs.org/api/test.html#testonlyname-options-fn) käyttö. Komennon avulla voidaan merkitä vain osa testeistä suoritettavaksi:
-
-```js
-test.only('notes are returned as json', async () => {
-  await api
-    .get('/api/notes')
-    .expect(200)
-    .expect('Content-Type', /application\/json/)
-})
-
-test.only('there are two notes', async () => {
-  const response = await api.get('/api/notes')
-
-  assert.strictEqual(response.body.length, 2)
-})
-```
-
-Kun testit nyt suoritetaan lisäparametrilla _--test-only_, eli komennolla
-
-```
-npm test -- --test-only
-```
-
-tulevat ainoastaan merkityt suoritetuksi.
-
-Komennon _only_ käytön riskinä on se, että ohjelmoija unohtaa poistaa komennot testeistä...
-
-On myös mahdollista suorittaa ainoastaan yhdessä tiedostossa määritellyt testit. Seuraava komento suorittaa ainoastaan tiedostossa <i>tests/note_api.test.js</i> olevat testit:
+Parempi vaihtoehto on määritellä komennon <i>npm test</i> yhteydessä minkä tiedoston testit halutaan suorittaa. Seuraava komento suorittaa ainoastaan tiedostossa <i>tests/note_api.test.js</i> olevat testit:
 
 ```js
 npm test -- tests/note_api.test.js
 ```
 
-Parametrin [--tests-by-name-pattern](https://nodejs.org/api/test.html#filtering-tests-by-name) avulla voidaan suorittaa testejä nimen perusteella:
+Parametrin <i>-t</i> avulla voidaan suorittaa testejä nimen perusteella:
 
 ```js
-npm test -- --test-name-pattern="the first note is about HTTP methods"
+npm test -- -t 'a specific note is within the returned notes'
 ```
 
 Parametri voi viitata testin tai describe-lohkon nimeen. Parametrina voidaan antaa myös nimen osa. Seuraava komento suorittaisi kaikki testit, joiden nimessä on sana <i>notes</i>:
 
 ```js
-npm run test -- --test-name-pattern="notes"
+npm test -- -t 'notes'
 ```
+
+**HUOM**: yksittäisiä testejä suoritettaessa saattaa Mongoose-yhteys jäädä auki, mikäli yhtään yhteyttä hyödyntävää testiä ei ajeta. Ongelma seurannee siitä, että SuperTest alustaa yhteyden, mutta Jest ei suorita afterAll-osiota.
 
 ### async/await
 
@@ -491,9 +830,10 @@ test('a valid note can be added ', async () => {
 
   const contents = response.body.map(r => r.content)
 
-  assert.strictEqual(response.body.length, initialNotes.length + 1)
-
-  assert(contents.includes('async/await simplifies making async calls'))
+  expect(response.body).toHaveLength(initialNotes.length + 1)
+  expect(contents).toContain(
+    'async/await simplifies making async calls'
+  )
 })
 ```
 
@@ -531,7 +871,7 @@ test('note without content is not added', async () => {
 
   const response = await api.get('/api/notes')
 
-  assert.strictEqual(response.body.length, initialNotes.length)
+  expect(response.body).toHaveLength(initialNotes.length)
 })
 ```
 
@@ -580,13 +920,12 @@ Moduuli määrittelee funktion _notesInDb_, jonka avulla voidaan tarkastaa sovel
 Testit muuttuvat muotoon
 
 ```js
-const { test, after, beforeEach } = require('node:test')
-const assert = require('node:assert')
-const mongoose = require('mongoose')
 const supertest = require('supertest')
+const mongoose = require('mongoose')
+const helper = require('./test_helper') // highlight-line
 const app = require('../app')
 const api = supertest(app)
-const helper = require('./test_helper') // highlight-line
+
 const Note = require('../models/note')
 
 beforeEach(async () => {
@@ -606,17 +945,19 @@ test('notes are returned as json', async () => {
     .expect('Content-Type', /application\/json/)
 })
 
-test('there are two notes', async () => {
+test('all notes are returned', async () => {
   const response = await api.get('/api/notes')
 
-  assert.strictEqual(response.body.length, 2)
+  expect(response.body).toHaveLength(helper.initialNotes.length) // highlight-line
 })
 
-test('the first note is about HTTP methods', async () => {
+test('a specific note is within the returned notes', async () => {
   const response = await api.get('/api/notes')
 
-  const contents = response.body.map(e => e.content)
-  assert(contents.includes('HTML is easy'))
+  const contents = response.body.map(r => r.content)
+  expect(contents).toContain(
+    'Browser can execute only JavaScript'
+  )
 })
 
 test('a valid note can be added ', async () => {
@@ -631,13 +972,14 @@ test('a valid note can be added ', async () => {
     .expect(201)
     .expect('Content-Type', /application\/json/)
 
-  const response = await api.get('/api/notes')
 
-  const contents = response.body.map(r => r.content)
+  const notesAtEnd = await helper.notesInDb() // highlight-line
+  expect(notesAtEnd).toHaveLength(helper.initialNotes.length + 1) // highlight-line
 
-  assert.strictEqual(response.body.length, helper.initialNotes.length + 1) // highlight-line
-
-  assert(contents.includes('async/await simplifies making async calls'))
+  const contents = notesAtEnd.map(n => n.content) // highlight-line
+  expect(contents).toContain(
+    'async/await simplifies making async calls'
+  )
 })
 
 test('note without content is not added', async () => {
@@ -650,12 +992,12 @@ test('note without content is not added', async () => {
     .send(newNote)
     .expect(400)
 
-  const response = await api.get('/api/notes')
+  const notesAtEnd = await helper.notesInDb() // highlight-line
 
-  assert.strictEqual(response.body.length, helper.initialNotes.length) // highlight-line
+  expect(notesAtEnd).toHaveLength(helper.initialNotes.length) // highlight-line
 })
 
-after(async () => {
+afterAll(async () => {
   await mongoose.connection.close()
 })
 ```
@@ -728,7 +1070,7 @@ test('a specific note can be viewed', async () => {
     .expect('Content-Type', /application\/json/)
 // highlight-end
 
-  assert.deepStrictEqual(resultNote.body, noteToView)
+  expect(resultNote.body).toEqual(noteToView)
 })
 
 test('a note can be deleted', async () => {
@@ -743,22 +1085,17 @@ test('a note can be deleted', async () => {
 
   const notesAtEnd = await helper.notesInDb()
 
-  const contents = notesAtEnd.map(r => r.content)
-  assert(!contents.includes(noteToDelete.content))
+  expect(notesAtEnd).toHaveLength(
+    helper.initialNotes.length - 1
+  )
 
-  assert.strictEqual(notesAtEnd.length, helper.initialNotes.length - 1)
+  const contents = notesAtEnd.map(r => r.content)
+
+  expect(contents).not.toContain(noteToDelete.content)
 })
 ```
 
-Molemmat testit ovat rakenteeltaan samankaltaisia. Alustusvaiheessa ne hakevat kannasta yksittäisen muistiinpanon. Tämän jälkeen on itse testattava operaatio, joka on koodissa korostettuna. Lopussa tarkastetaan, että operaation tulos on haluttu.
-
-Ensimmäisessä testissä on eräs huomionarvoinen seikka. Sen sijaan, että vertailu tehtäisiin aiemmin käytetyn metodin [strictEqual](https://nodejs.org/api/assert.html#assertstrictequalactual-expected-message), käytössä on metodi [deepStrictEqual](https://nodejs.org/api/assert.html#assertdeepstrictequalactual-expected-message):
-
-```js
-assert.deepStrictEqual(resultNote.body, noteToView)
-```
-
-Syynä tälle on se, että _strictEqual_ käyttää metodia [Object.is](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) samuuden vertailuun, eli se vertaa ovatko kyseessä samat olioit. Meidän tapauksessamme taas riittää tarkistaa että olioiden sisältö, eli niiden kenttien arvot olisivat samat. Tähän tarkoitukseen sopii _deepStrictEqual_.
+Molemmat testit ovat rakenteeltaan samankaltaisia. Alustusvaiheessa ne hakevat kannasta yksittäisen muistiinpanon. Tämän jälkeen on itse testattava operaatio, joka on koodissa korostettuna. Lopussa tarkastetaan, että operaation tulos on haluttu. 
 
 Testit menevät läpi, joten voimme turvallisesti refaktoroida testatut routet käyttämään async/awaitia:
 
@@ -1073,14 +1410,11 @@ Testit ovat tällä hetkellä osittain epätäydelliset, sillä esim. reittejä 
 Jossain määrin parannellut testit ovat seuraavassa:
 
 ```js
-const { test, after, beforeEach, describe } = require('node:test')
-const assert = require('node:assert')
-const mongoose = require('mongoose')
 const supertest = require('supertest')
+const mongoose = require('mongoose')
+const helper = require('./test_helper')
 const app = require('../app')
 const api = supertest(app)
-
-const helper = require('./test_helper')
 
 const Note = require('../models/note')
 
@@ -1100,14 +1434,16 @@ describe('when there is initially some notes saved', () => {
   test('all notes are returned', async () => {
     const response = await api.get('/api/notes')
 
-    assert.strictEqual(response.body.length, helper.initialNotes.length)
+    expect(response.body).toHaveLength(helper.initialNotes.length)
   })
 
   test('a specific note is within the returned notes', async () => {
     const response = await api.get('/api/notes')
 
     const contents = response.body.map(r => r.content)
-    assert(contents.includes('Browser can execute only JavaScript'))
+    expect(contents).toContain(
+      'Browser can execute only JavaScript'
+    )
   })
 
   describe('viewing a specific note', () => {
@@ -1121,8 +1457,8 @@ describe('when there is initially some notes saved', () => {
         .get(`/api/notes/${noteToView.id}`)
         .expect(200)
         .expect('Content-Type', /application\/json/)
-
-      assert.deepStrictEqual(resultNote.body, noteToView)
+      
+      expect(resultNote.body).toEqual(noteToView)
     })
 
     test('fails with statuscode 404 if note does not exist', async () => {
@@ -1156,10 +1492,12 @@ describe('when there is initially some notes saved', () => {
         .expect('Content-Type', /application\/json/)
 
       const notesAtEnd = await helper.notesInDb()
-      assert.strictEqual(notesAtEnd.length, helper.initialNotes.length + 1)
+      expect(notesAtEnd).toHaveLength(helper.initialNotes.length + 1)
 
       const contents = notesAtEnd.map(n => n.content)
-      assert(contents.includes('async/await simplifies making async calls'))
+      expect(contents).toContain(
+        'async/await simplifies making async calls'
+      )
     })
 
     test('fails with status code 400 if data invalid', async () => {
@@ -1174,7 +1512,7 @@ describe('when there is initially some notes saved', () => {
 
       const notesAtEnd = await helper.notesInDb()
 
-      assert.strictEqual(notesAtEnd.length, helper.initialNotes.length)
+      expect(notesAtEnd).toHaveLength(helper.initialNotes.length)
     })
   })
 
@@ -1189,22 +1527,25 @@ describe('when there is initially some notes saved', () => {
 
       const notesAtEnd = await helper.notesInDb()
 
-      assert.strictEqual(notesAtEnd.length, helper.initialNotes.length - 1)
+      expect(notesAtEnd).toHaveLength(
+        helper.initialNotes.length - 1
+      )
 
       const contents = notesAtEnd.map(r => r.content)
-      assert(!contents.includes(noteToDelete.content))
+
+      expect(contents).not.toContain(noteToDelete.content)
     })
   })
 })
 
-after(async () => {
+afterAll(async () => {
   await mongoose.connection.close()
 })
 ```
 
 Testien raportointi tapahtuu <i>describe</i>-lohkojen ryhmittelyn mukaan:
 
-![Jest ryhmittelee testitulokset describe-lohkoittain](../../images/4/7new.png)
+![Jest ryhmittelee testitulokset describe-lohkoittain](../../images/4/7.png)
 
 Testeihin jää vielä parannettavaa, mutta on jo aika siirtyä eteenpäin.
 
