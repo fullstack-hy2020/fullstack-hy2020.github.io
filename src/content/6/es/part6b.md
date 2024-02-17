@@ -450,7 +450,7 @@ Comencemos a usar Redux Toolkit en nuestra aplicación refactorizando el código
 npm install @reduxjs/toolkit
 ```
 
-A continuación, abra el archivo <i>index.js</i> que actualmente crea la store de Redux. En lugar de la función <em>createStore</em> de Redux, creemos la tienda usando la función [configureStore](https://redux-toolkit.js.org/api/configureStore) de Redux Toolkit:
+A continuación, abra el archivo <i>index.js</i> que actualmente crea la store de Redux. En lugar de la función <em>createStore</em> de Redux, creemos el Store usando la función [configureStore](https://redux-toolkit.js.org/api/configureStore) de Redux Toolkit:
 
 ```js
 import React from 'react'
