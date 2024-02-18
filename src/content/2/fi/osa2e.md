@@ -606,20 +606,48 @@ Jos käytät Open weather mapia, [täällä](https://openweathermap.org/weather-
 
 **Huom:** Tarvitset melkein kaikkia säätietoja tarjoavia palveluja käyttääksesi API-avaimen. Älä talleta avainta versionhallintaan eli älä kirjoita avainta suoraan koodiin. Avaimen arvo kannattaa määritellä ns. [ympäristömuuttujana](https://vitejs.dev/guide/env-and-mode.html).
 
+
+Eikö tässä ole virhe ympäristömuuttujiin liittyen? Luin Viten "Env Variables and Modes" dokumentaatiota ja ainakin itse sain sen käsityksen, että muuttujia ei ole pakko aloittaa "VITE_" muotoisesti vaan näin aloittamalla ympäristömuuttuja paljastetaan myös client-side koodille.
+
+Esimerkki Viten dokumentaatiosta:  
+Ympäristömuuttujat ".env" tiedostossa
+```
+VITE_SOME_KEY=123
+DB_PASSWORD=foobar
+```
+
+```js
+console.log(import.meta.env.VITE_SOME_KEY) // "123"
+console.log(import.meta.env.DB_PASSWORD) // undefined
+```
+
+Eli "VITE_" alkuiset arvot voidaan logata konsoliin ja muita ei. Ymmärrykseni mukaan siis API avaimien tyylistä sensitiivistä dataa ei saisi siis ikinä aloittaa "VITE_" merkkijonolla.
+
 Oletetaan että API-avaimen arvo on <i>54l41n3n4v41m34rv0</i>. Kun ohjelma käynnistetään seuraavasti
 
+Ei näin:
 ```bash
 export VITE_SOME_KEY=54l41n3n4v41m34rv0 && npm run dev // Linux/macOS Bash
 ($env:VITE_SOME_KEY="54l41n3n4v41m34rv0") -and (npm run dev) // Windows PowerShell
 set "VITE_SOME_KEY=54l41n3n4v41m34rv0" && npm run dev // Windows cmd.exe
 ```
 
+Vaan näin:
+```bash
+export SECRET_KEY=54l41n3n4v41m34rv0 && npm run dev // Linux/macOS Bash
+($env:SECRET_KEY="54l41n3n4v41m34rv0") -and (npm run dev) // Windows PowerShell
+set "SECRET_KEY=54l41n3n4v41m34rv0" && npm run dev // Windows cmd.exe
+```
+
 koodista päästään avaimen arvoon käsiksi olion _import.meta.env_ kautta:
 
+Tähän pääsee edelleen käsiksi myös "SECRET_KEY" nimellä
 ```js
-const api_key = import.meta.env.VITE_SOME_KEY
+const api_key = import.meta.env.SECRET_KEY
 // muuttujassa api_key on nyt käynnistyksessä annettu API-avaimen arvo
 ```
+
+Ympäristömuuttujan voi aloittaa "VITE_" merkkijonolla, mutta se saattaa vahingossa paljastaa muuttujan myös client-side koodille.
 
 Huomaa, että ympäristömuuttujan nimen täytyy alkaa merkkijonolla _VITE\__.
 
