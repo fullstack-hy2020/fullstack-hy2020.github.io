@@ -86,7 +86,7 @@ const App = () => {
 export default App
 ```
 
-The current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-1), branch <i>part5-1</i>. If you clone the repo, don't forget to run _npm install_ before attempting to run the frontend.
+The current application code can be found on [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-1), in the branch <i>part5-1</i>. If you clone the repo, don't forget to run _npm install_ before attempting to run the frontend.
 
 The frontend will not display any notes if it's not connected to the backend. You can start the backend with _npm run dev_ in its folder from Part 4. This will run the backend on port 3001. While that is active, in a separate terminal window you can start the frontend with _npm start_, and now you can see the notes that are saved in your MongoDB database from Part 4.
 
@@ -294,10 +294,11 @@ return (
 
     <Notification message={errorMessage} />
 
-    {!user && loginForm()} 
-    {user && <div>
-       <p>{user.name} logged in</p>
-         {noteForm()}
+    {user === null ?
+      loginForm() :
+      <div>
+        <p>{user.name} logged-in</p>
+        {noteForm()}
       </div>
     }
 
@@ -309,11 +310,11 @@ return (
 )
 ```
 
-The solution isn't perfect, but we'll leave it for now.
+The solution isn't perfect, but we'll leave it like this for now.
 
 Our main component <i>App</i> is at the moment way too large. The changes we did now are a clear sign that the forms should be refactored into their own components. However, we will leave that for an optional exercise.
 
-The current application code can be found on [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-2), branch <i>part5-2</i>.
+The current application code can be found on [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-2), in the branch <i>part5-2</i>.
 
 ### Creating new notes
 
@@ -376,7 +377,7 @@ const update = (id, newObject) => {
 export default { getAll, create, update, setToken } // highlight-line
 ```
 
-The noteService module contains a private variable _token_. Its value can be changed with a function _setToken_, which is exported by the module. _create_, now with async/await syntax, sets the token to the <i>Authorization</i> header. The header is given to axios as the third parameter of the <i>post</i> method.
+The noteService module contains a private variable called _token_. Its value can be changed with the _setToken_ function, which is exported by the module. _create_, now with async/await syntax, sets the token to the <i>Authorization</i> header. The header is given to axios as the third parameter of the <i>post</i> method.
 
 The event handler responsible for login must be changed to call the method <code>noteService.setToken(user.token)</code> with a successful login:
 
@@ -420,7 +421,7 @@ The value of a key can be found with the method [getItem](https://developer.mozi
 window.localStorage.getItem('name')
 ```
 
-and [removeItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/removeItem) removes a key.
+while [removeItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/removeItem) removes a key.
 
 Values in the local storage are persisted even when the page is re-rendered. The storage is [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin)-specific so each web application has its own storage.
 
@@ -453,13 +454,13 @@ Changes to the login method are as follows:
   }
 ```
 
-The details of a logged-in user are now saved to the local storage, and they can be viewed on the console (by typing _window.localStorage_ to the console):
+The details of a logged-in user are now saved to the local storage, and they can be viewed on the console (by typing _window.localStorage_ in it):
 
-![browser showing someone logged into notes](../../images/5/3e.png)
+![browser showing user data in console saved in local storage](../../images/5/3e.png)
 
-You can also inspect the local storage using the developer tools. On Chrome, go to the <i>Application</i> tab and select <i>Local Storage</i> (more details [here](https://developers.google.com/web/tools/chrome-devtools/storage/localstorage)). On Firefox go to the <i>Storage</i> tab and select <i>Local Storage</i> (details [here](https://developer.mozilla.org/en-US/docs/Tools/Storage_Inspector)).
+You can also inspect the local storage using the developer tools. On Chrome, go to the <i>Application</i> tab and select <i>Local Storage</i> (more details [here](https://developer.chrome.com/docs/devtools/storage/localstorage)). On Firefox go to the <i>Storage</i> tab and select <i>Local Storage</i> (details [here](https://firefox-source-docs.mozilla.org/devtools-user/storage_inspector/index.html)).
 
-We still have to modify our application so that when we enter the page, the application checks if user details of a logged-in user can already be found on the local storage. If they can, the details are saved to the state of the application and to <i>noteService</i>.
+We still have to modify our application so that when we enter the page, the application checks if user details of a logged-in user can already be found on the local storage. If they are there, the details are saved to the state of the application and to <i>noteService</i>.
 
 The right way to do this is with an [effect hook](https://react.dev/reference/react/useEffect): a mechanism we first encountered in [part 2](/en/part2/getting_data_from_server#effect-hooks), and used to fetch notes from the server.
 
@@ -514,7 +515,7 @@ or with the command which empties <i>localstorage</i> completely:
 window.localStorage.clear()
 ```
 
-The current application code can be found on [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-3), branch <i>part5-3</i>.
+The current application code can be found on [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-3), in the branch <i>part5-3</i>.
 
 </div>
 
@@ -522,18 +523,18 @@ The current application code can be found on [GitHub](https://github.com/fullsta
 
 ### Exercises 5.1.-5.4.
 
-We will now create a frontend for the bloglist backend we created in the last part. You can use [this application](https://github.com/fullstack-hy2020/bloglist-frontend) from GitHub as the base of your solution. You need to connect your backend with proxy as shown in [part 3](https://fullstackopen.com/en/part3/deploying_app_to_internet#proxy).
+We will now create a frontend for the blog list backend we created in the last part. You can use [this application](https://github.com/fullstack-hy2020/bloglist-frontend) from GitHub as the base of your solution. You need to connect your backend with a proxy as shown in [part 3](/en/part3/deploying_app_to_internet#proxy).
 
-It is enough to submit your finished solution. You can do a commit after each exercise, but that is not necessary.
+It is enough to submit your finished solution. You can commit after each exercise, but that is not necessary.
 
 The first few exercises revise everything we have learned about React so far. They can be challenging, especially if your backend is incomplete.
 It might be best to use the backend that we marked as the answer for part 4.
 
 While doing the exercises, remember all of the debugging methods we have talked about, especially keeping an eye on the console.
 
-**Warning:** If you notice you are mixing in the functions _async/await_ and _then_ commands, it's 99.9%  certain you are doing something wrong. Use either or, never both.
+**Warning:** If you notice you are mixing in the _async/await_ and _then_ commands, it's 99.9%  certain you are doing something wrong. Use either or, never both.
 
-#### 5.1: bloglist frontend, step1
+#### 5.1: Blog List Frontend, step 1
 
 Clone the application from [GitHub](https://github.com/fullstack-hy2020/bloglist-frontend) with the command:
 
@@ -541,7 +542,7 @@ Clone the application from [GitHub](https://github.com/fullstack-hy2020/bloglist
 git clone https://github.com/fullstack-hy2020/bloglist-frontend
 ```
 
-<i>remove the git configuration of the cloned application</i>
+<i>Remove the git configuration of the cloned application</i>
 
 ```bash
 cd bloglist-frontend   // go to cloned repository
@@ -563,7 +564,7 @@ If a user is not logged in, <i>only</i> the login form is visible.
 
 If the user is logged-in, the name of the user and a list of blogs is shown.
 
-![browser showing notes and who is logged in](../../images/5/5e.png)
+![browser showing blogs and who is logged in](../../images/5/5e.png)
 
 User details of the logged-in user do not have to be saved to the local storage yet.
 
@@ -592,7 +593,7 @@ User details of the logged-in user do not have to be saved to the local storage 
 }
 ```
 
-#### 5.2: bloglist frontend, step2
+#### 5.2: Blog List Frontend, step 2
 
 Make the login 'permanent' by using the local storage. Also, implement a way to log out.
 
@@ -600,21 +601,21 @@ Make the login 'permanent' by using the local storage. Also, implement a way to 
 
 Ensure the browser does not remember the details of the user after logging out.
 
-#### 5.3: bloglist frontend, step3
+#### 5.3: Blog List Frontend, step 3
 
 Expand your application to allow a logged-in user to add new blogs:
 
 ![browser showing new blog form](../../images/5/7e.png)
 
-#### 5.4: bloglist frontend, step4
+#### 5.4: Blog List Frontend, step 4
 
 Implement notifications that inform the user about successful and unsuccessful operations at the top of the page. For example, when a new blog is added, the following notification can be shown:
 
-![browser showing successful operation](../../images/5/8e.png)
+![browser showing successful operation notification](../../images/5/8e.png)
 
 Failed login can show the following notification:
 
-![browser showing failed login attempt](../../images/5/9e.png)
+![browser showing failed login attempt notification](../../images/5/9e.png)
 
 The notifications must be visible for a few seconds. It is not compulsory to add colors.
 

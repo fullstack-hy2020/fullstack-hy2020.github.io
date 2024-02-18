@@ -7,18 +7,17 @@ lang: es
 
 <div class="content">
 
-
-En las dos últimas partes, nos hemos concentrado principalmente en el backend, y el frontend, que desarrollamos en la [parte 2](/es/part2) aún no es compatible con la administración de usuarios que implementamos en el backend en la parte 4.
+En las dos últimas partes, nos hemos concentrado principalmente en el backend. El frontend, que desarrollamos en la [parte 2](/es/part2) aún no es compatible con la administración de usuarios que implementamos en el backend en la parte 4.
 
 Por el momento, el frontend muestra las notas existentes y permite a los usuarios cambiar el estado de una nota de importante a no importante y viceversa. Ya no se pueden agregar nuevas notas debido a los cambios realizados en el backend en la parte 4: el backend ahora espera que se envíe un token que verifique la identidad de un usuario con la nueva nota.
 
 Ahora implementaremos una parte de la funcionalidad de administración de usuarios requerida en el frontend. Comencemos con el inicio de sesión del usuario. A lo largo de esta parte, asumiremos que no se agregarán nuevos usuarios desde el frontend.
 
 ### Controlando el inicio de sesión
-Ahora se ha agregado un formulario de inicio de sesión en la parte superior de la página. El formulario para agregar nuevas notas se ha movido a la parte inferior de la lista de notas.
 
-![](../../images/5/1e.png)
+Ahora se ha agregado un formulario de inicio de sesión en la parte superior de la página.
 
+![navegador mostrando login de usuario para app de notas](../../images/5/1new.png)
 
 El código del componente <i>App</i> ahora tiene el siguiente aspecto:
 
@@ -87,10 +86,9 @@ const App = () => {
 export default App
 ```
 
+El código de aplicación actual se puede encontrar en [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-1), en la rama <i>part5-1</i>. Si clonas el repositorio, no olvides ejecutar el comando _npm install_ antes de intentar ejecutar el frontend.
 
-El código de aplicación actual se puede encontrar en [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-1), rama <i>part5-1</i>. Si clonas el repositorio, no olvides ejecutar el comando _npm install_ antes de intentar ejecutar el frontend.
-
-El frontend no mostrara ninguna nota si no se conecta al backend. Puedes iniciar el backend con el comando _npm run dev_ en su carpeta de la Parte 4. Esto ejecutara el backend en el puerto 3001. Mientras esté activo, en una ventana diferente del terminal puedes ejecutar el frontend con _npm start_, y ahora veras las notas que están guardadas en la base de datos MongoDB de la Parte 4.
+El frontend no mostrara ninguna nota si no se conecta al backend. Puedes iniciar el backend con el comando _npm run dev_ en su directorio de la Parte 4. Esto ejecutara el backend en el puerto 3001. Mientras esté activo, en una ventana diferente del terminal puedes ejecutar el frontend con _npm start_, y ahora veras las notas que están guardadas en tu base de datos MongoDB de la Parte 4.
 
 Recuerda esto de ahora en más.
 
@@ -118,21 +116,10 @@ const login = async credentials => {
 export default { login }
 ```
 
-Si tiene instalado el plugin eslint en VS Code, puede que aparezca el siguiente error:
-
-![vs code warning - assign object to a variable before exporting as module default](../../images/5/50new.png)
-
-Luego configuraremos eslint. Por ahora, puede ignorar el error o eliminarlo al adicionar la siguiente línea antes de la advertencia:
-
-```js
-// eslint-disable-next-line import/no-anonymous-default-export
-export default { login }
-```
-
 El método para manejar el inicio de sesión se puede implementar de la siguiente manera:
 
 ```js
-import loginService from './services/login' 
+import loginService from './services/login' // highlight-line
 
 const App = () => {
   // ...
@@ -141,11 +128,11 @@ const App = () => {
 // highlight-start
   const [user, setUser] = useState(null)
 // highlight-end
-
+  
+  // highlight-start
   const handleLogin = async (event) => {
     event.preventDefault()
     
-    // highlight-start
     try {
       const user = await loginService.login({
         username, password,
@@ -167,7 +154,7 @@ const App = () => {
 }
 ```
 
-Si la conexión es exitosa, los campos de formulario se vacían <i>y</i> la respuesta del servidor (incluyendo un <i>token</i> y los datos de usuario) se guardan en el campo <i>user</i> de estado de la aplicación.
+Si la conexión es exitosa, los campos de formulario se vacían <i>y</i> la respuesta del servidor (incluyendo un <i>token</i> y los datos del usuario) se guardan en el campo <i>user</i> del estado de la aplicación.
 
 Si el inicio de sesión falla, o la ejecución de la función _loginService.login_ da como resultado un error, se notifica al usuario.
 
@@ -219,7 +206,6 @@ const App = () => {
 }
 ```
 
-
 y renderizarlos condicionalmente:
 
 ```js
@@ -264,7 +250,7 @@ const App = () => {
 }
 ```
 
-Un [truco de React](https://reactjs.org/docs/conditional-rendering.html#inline-if-with-logical--operator) ligeramente extraño, pero de uso común, se usa para renderizar los formularios de forma condicional:
+Un [truco de React](https://es.react.dev/learn/conditional-rendering#logical-and-operator-) ligeramente extraño, pero de uso común, se usa para renderizar los formularios de forma condicional:
 
 ```js
 {
@@ -296,7 +282,7 @@ return (
 )
 ```
 
-Si _usuario === null_ es [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy)(verdadero), se ejecuta _loginForm()_. Si no es así, se ejecuta _noteForm()_.
+Si _user === null_ es [truthy](https://developer.mozilla.org/es/docs/Glossary/Truthy) (verdadero), se ejecuta _loginForm()_. Si no es así, se ejecuta _noteForm()_.
 
 Hagamos una modificación más. Si el usuario ha iniciado sesión, su nombre se muestra en la pantalla:
 
@@ -323,15 +309,15 @@ return (
 )
 ```
 
-La solución no es perfecta, pero la dejamos por ahora.
+La solución no es perfecta, pero la dejaremos así por ahora.
 
-Nuestro componente principal <i>App</i> es demasiado grande en este momento. Los cambios que hicimos ahora son una clara señal de que los formularios deben refactorizarse en sus propios componentes. Sin embargo, lo dejaremos para un ejercicio opcional.
+Nuestro componente principal <i>App</i> es demasiado grande en este momento. Los cambios que hicimos ahora son una clara señal de que los formularios deben ser refactorizados en sus propios componentes. Sin embargo, lo dejaremos para un ejercicio opcional.
 
-El código de aplicación actual se puede encontrar en [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-2), rama <i>part5-2</i>.
+El código de la aplicación actual se puede encontrar en [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-2), en la rama <i>part5-2</i>.
 
 ### Creando nuevas notas
 
-El token devuelto con un inicio de sesión exitoso se guarda en el estado de la aplicación, el campo <i>token</i> de <i>user</i>:
+El token devuelto con un inicio de sesión exitoso se guarda en el estado de la aplicación, en el campo <i>token</i> de <i>user</i>:
 
 ```js
 const handleLogin = async (event) => {
@@ -350,7 +336,7 @@ const handleLogin = async (event) => {
 }
 ```
 
-Arreglemos la creación de nuevas notas para que funcione con el backend. Esto significa agregar el token del usuario que inició sesión en el header de Autorización de la solicitud HTTP.
+Arreglemos la creación de nuevas notas para que funcione con el backend. Esto significa agregar el token del usuario que inició sesión en el encabezado de Autorización de la solicitud HTTP.
 
 El módulo <i>noteService</i> cambia así:
 
@@ -362,7 +348,7 @@ let token = null // highlight-line
 
 // highlight-start
 const setToken = newToken => {
-  token = `bearer ${newToken}`
+  token = `Bearer ${newToken}`
 }
 // highlight-end
 
@@ -373,7 +359,6 @@ const getAll = () => {
 
 // highlight-start
 const create = async newObject => {
-  
   const config = {
     headers: { Authorization: token },
   }
@@ -391,7 +376,7 @@ const update = (id, newObject) => {
 export default { getAll, create, update, setToken } // highlight-line
 ```
 
-El módulo noteService contiene una variable privada _token_. Su valor se puede cambiar con una función _setToken_, que es exportada por el módulo. _create_, ahora con la sintaxis async/await, establece el token en el header <i>Authorization</i>. El header se le da a axios como el tercer parámetro del método <i>post</i>.
+El módulo noteService contiene una variable privada llamada _token_. Su valor se puede cambiar con la función _setToken_, que es exportada por el módulo. _create_, ahora con la sintaxis async/await, establece el token en el encabezado <i>Authorization</i>. El header se le da a axios como el tercer parámetro del método <i>post</i>.
 
 El controlador de eventos responsable del inicio de sesión debe cambiarse para llamar al método <code>noteService.setToken(user.token)</code> con un inicio de sesión exitoso:
 
@@ -413,11 +398,11 @@ const handleLogin = async (event) => {
 }
 ```
 
-¡Y ahora, la funcionalidad agregar nuevas notas funciona!
+Y ahora, ¡agregar nuevas notas funciona otra vez!
 
-### Guardar el token en el almacenamiento local del navegador
+### Guardando el token en el local storage del navegador
 
-Nuestra aplicación tiene un defecto: cuando se vuelve a renderizar la página, la información del inicio de sesión del usuario desaparece. Esto también ralentiza el desarrollo. Por ejemplo, cuando probamos la creación de nuevas notas, tenemos que volver a iniciar sesión cada vez.
+Nuestra aplicación tiene un pequeño defecto: si el navegador es refrescado (por ejemplo, al apretar F5), la información de login del usuario desaparece.
 
 Este problema se resuelve fácilmente guardando los datos de inicio de sesión en el [local storage](https://developer.mozilla.org/es/docs/Web/API/Storage)(almacenamiento local). Local Storage es una base de datos de [clave-valor](https://es.wikipedia.org/wiki/Base_de_datos_clave-valor) en el navegador.
 
@@ -427,23 +412,21 @@ Es muy fácil de usar. Un <i>valor</i> correspondiente a una determinada <i>clav
 window.localStorage.setItem('name', 'juha tauriainen')
 ```
 
-
 guarda el string dado como segundo parámetro como el valor de la clave <i>name</i>.
 
-El valor de una clave se puede encontrar con el método [getItem](https://developer.mozilla.org/es/docs/Web/API/Storage/getItem):
+El valor de una clave se puede obtener con el método [getItem](https://developer.mozilla.org/es/docs/Web/API/Storage/getItem):
 
 ```js
 window.localStorage.getItem('name')
 ```
 
+mientras que [removeItem](https://developer.mozilla.org/es/docs/Web/API/Storage/removeItem) elimina una clave.
 
-y [removeItem](https://developer.mozilla.org/es/docs/Web/API/Storage/removeItem) elimina una clave.
+Los valores del local storage se conservan incluso cuando se vuelve a renderizar la página. El almacenamiento es específico de [origen](https://developer.mozilla.org/en-US/docs/Glossary/Origin), por lo que cada aplicación web tiene su propio almacenamiento.
 
-Los valores del almacenamiento local se conservan incluso cuando se vuelve a renderizar la página. El almacenamiento es específico de [origen](https://developer.mozilla.org/en-US/docs/Glossary/Origin), por lo que cada aplicación web tiene su propio almacenamiento.
+Extendamos nuestra aplicación para que guarde los detalles de un usuario que inició sesión en local storage.
 
-Extendamos nuestra aplicación para que guarde los detalles de un usuario que inició sesión en el almacenamiento local.
-
-Los valores guardados en el almacenamiento son [DOMstrings](https://docs.w3cub.com/dom/domstring), por lo que no podemos guardar un objeto JavaScript tal cual. El objeto debe analizarse primero en JSON, con el método _JSON.stringify_. En consecuencia, cuando se lee un objeto JSON del almacenamiento local, debe parsearse de nuevo a JavaScript con _JSON.parse_.
+Los valores guardados en el storage son [DOMstrings](https://docs.w3cub.com/dom/domstring), por lo que no podemos guardar un objeto JavaScript tal cual. El objeto debe formatearse primero como JSON, con el método _JSON.stringify_. En consecuencia, cuando se lee un objeto JSON del almacenamiento local, debe formatearse de nuevo a JavaScript con _JSON.parse_.
 
 Los cambios en el método de inicio de sesión son los siguientes:
 
@@ -470,15 +453,15 @@ Los cambios en el método de inicio de sesión son los siguientes:
   }
 ```
 
-Los detalles de un usuario que inició sesión ahora se guardan en el almacenamiento local y se pueden ver en la consola:
+Los detalles de un usuario que inició sesión ahora se guardan en local storage y se pueden ver en la consola (al escribir _window.localStorage_ en ella):
 
-![](../../images/5/3e.png)
+![consola del navegador mostrando datos de usuario guardados en local storage](../../images/5/3e.png)
 
-También puede inspeccionar el almacenamiento local con las herramientas de desarrollo. En Chrome, vaya a la pestaña <i>Application</i> y seleccione <i>Local Storage</i> (más detalles [aquí](https://developers.google.com/web/tools/chrome-devtools/storage/localstorage)). En Firefox, vaya a la pestaña <i>Storage</i> y seleccione <i>Local Storage</i> (detalles [aquí](https://developer.mozilla.org/en-US/docs/Tools/Storage_Inspector)).
+También puedes inspeccionar el local storage con las herramientas de desarrollo. En Chrome, ve a la pestaña <i>Application</i> y selecciona <i>Local Storage</i> (más detalles [aquí](https://developer.chrome.com/docs/devtools/storage/localstorage?hl=es-419)). En Firefox, ve a la pestaña <i>Storage</i> y selecciona <i>Local Storage</i> (detalles [aquí](https://firefox-source-docs.mozilla.org/devtools-user/storage_inspector/index.html)).
 
-Aún tenemos que modificar nuestra aplicación para que cuando ingresemos a la página, la aplicación verifique si los detalles de un usuario que inició sesión ya se pueden encontrar en el almacenamiento local. Si pueden, los detalles se guardan en el estado de la aplicación y en <i>noteService</i>.
+Aún tenemos que modificar nuestra aplicación para que cuando ingresemos a la página, la aplicación verifique si los detalles de un usuario que inició sesión ya se pueden encontrar en el local storage. Si se encuentran allí, los detalles se guardan en el estado de la aplicación y en <i>noteService</i>.
 
-La forma correcta de hacer esto es con un [effect hook](https://reactjs.org/docs/hooks-effect.html): un mecanismo que encontramos por primera vez en la [parte 2](/es/part2/obteniendo_datos_del_servidor#effect-hooks) y que usamos para obtener notas desde el servidor.
+La forma correcta de hacer esto es con un [effect hook](https://es.react.dev/reference/react/useEffect): un mecanismo que encontramos por primera vez en la [parte 2](/es/part2/obteniendo_datos_del_servidor#effect-hooks) y que usamos para obtener notas desde el servidor.
 
 Podemos tener múltiples effect hooks, así que creemos otro para manejar la primera carga de la página:
 
@@ -514,22 +497,24 @@ const App = () => {
 }
 ```
 
-El array vacío como parámetro del effect hook asegura que el hook se ejecute solo cuando el componente es renderizado [por primera vez](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect).
+El array vacío como parámetro del effect hook asegura que el hook se ejecute solo cuando el componente es renderizado [por primera vez](https://es.react.dev/reference/react/useEffect#parameters).
 
-Ahora un usuario permanece conectado a la aplicación para siempre. Probablemente deberíamos agregar funcionalidad para <i>cerrar sesión</i> que elimine los detalles de inicio de sesión del almacenamiento local. Sin embargo, lo dejaremos como un ejercicio posterior.
+Ahora un usuario permanece conectado a la aplicación para siempre. Probablemente deberíamos agregar funcionalidad para <i>cerrar sesión</i> que elimine los detalles de inicio de sesión del almacenamiento local. Sin embargo, lo dejaremos para un ejercicio.
 
-Es posible cerrar la sesión de un usuario usando la consola, y eso es suficiente por ahora. Puede cerrar sesión con el comando:
+Es posible cerrar la sesión de un usuario usando la consola, y eso es suficiente por ahora.
+Puedes cerrar sesión con el comando:
 
 ```js
 window.localStorage.removeItem('loggedNoteappUser')
 ```
+
 o con el comando que vacía el <i>localstorage</i> por completo:
 
 ```js
 window.localStorage.clear()
 ```
 
-El código de la aplicación actual se puede encontrar en [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-3), rama <i>part5-3</i>.
+El código de la aplicación actual se puede encontrar en [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-3), en la rama <i>part5-3</i>.
 
 </div>
 
@@ -537,52 +522,52 @@ El código de la aplicación actual se puede encontrar en [Github](https://githu
 
 ### Ejercicios 5.1.-5.4.
 
-Ahora crearemos un frontend para el backend de la lista de blogs que creamos en la última parte. Puede utilizar [esta aplicación](https://github.com/fullstack-hy2020/bloglist-frontend) de GitHub como base de su solución. La aplicación espera que su backend se ejecute en el puerto 3003.
+Ahora crearemos un frontend para el backend de la lista de blogs que creamos en la última parte. Puedes usar [esta aplicación](https://github.com/fullstack-hy2020/bloglist-frontend) de GitHub como base para tu solución. Debes conectar tu backend con un proxy como se muestra en [la parte 3](/es/part3/despliegue_de_la_aplicacion_a_internet#proxy).
 
-Es suficiente enviar su solución terminada. Puedes hacer un commit después de cada ejercicio, pero eso no es necesario.
+Es suficiente con enviar tu solución terminada. Puedes hacer un commit después de cada ejercicio, pero eso no es necesario.
 
-Los primeros ejercicios revisan todo lo que hemos aprendido sobre React hasta ahora. Pueden ser un desafío, especialmente si su backend está incompleto.
-Podría ser mejor usar el backend de las respuestas modelo de la parte 4.
+Los primeros ejercicios revisan todo lo que hemos aprendido sobre React hasta ahora. Pueden ser un desafío, especialmente si tu backend está incompleto.
+Podría ser mejor usar el backend de la respuesta modelo de la parte 4.
 
-Mientras realiza los ejercicios, recuerde todos los métodos de debugging de los que hemos hablado, especialmente mirar a la consola.
+Mientras realizas los ejercicios, recuerda todos los métodos de depuración de los que hemos hablado, especialmente mirar a la consola.
 
-**Advertencia:** Si nota que está mezclando async/await y comandos _then_ en la misma función, hay un 99.9% de probabilidades de que esta haciendo algo mal. Utilice uno u otro, nunca ambos.
+**Advertencia:** Si notas que estás mezclando los comandos _async/await_ y _then_, hay un 99.9% de probabilidades de que estés haciendo algo mal. Utiliza uno u otro, nunca ambos.
 
-#### 5.1: frontend de la lista de blogs, paso 1
+#### 5.1: Frontend de la Lista de Blogs, paso 1
 
-Clone la aplicación de [Github](https://github.com/fullstack-hy2020/bloglist-frontend) con el comando:
+Clona la aplicación de [GitHub](https://github.com/fullstack-hy2020/bloglist-frontend) con el comando:
 
 ```bash
 git clone https://github.com/fullstack-hy2020/bloglist-frontend
 ```
 
-<i>Elimine la configuración de git de la aplicación clonada</i>
+<i>Elimina la configuración de git de la aplicación clonada</i>
 
 ```bash
-cd bloglist-frontend   // go to cloned repository
+cd bloglist-frontend   // ve al repositorio clonado
 rm -rf .git
 ```
 
-La aplicación se inicia de la forma habitual, pero primero debe instalar sus dependencias: 
+La aplicación se inicia de la forma habitual, pero primero debes instalar sus dependencias:
 
 ```bash
 npm install
-npm start
+npm run dev
 ```
 
-Implemente la funcionalidad de inicio de sesión en el frontend. El token retornado con un inicio de sesión exitoso se guarda en el estado <i>user</i> de la aplicación.
+Implementa la funcionalidad de inicio de sesión en el frontend. El token devuelto con un inicio de sesión exitoso se guarda en el estado <i>user</i> de la aplicación.
 
 Si un usuario no ha iniciado sesión, <i>solo</i> se verá el formulario de inicio de sesión.
 
-![](../../images/5/4e.png)
+![navegador mostrando solamente el formulario de login](../../images/5/4e.png)
 
 Si el usuario ha iniciado sesión, se muestra el nombre del usuario y una lista de blogs. 
 
-![](../../images/5/5e.png)
+![navegador mostrando blogs y a quien ha iniciado sesión](../../images/5/5e.png)
 
-Los detalles de usuario del usuario que inició sesión no tienen que guardarse todavía en el almacenamiento local.
+Los detalles de usuario del usuario que inició sesión no tienen que guardarse todavía en el local storage.
 
-**NB** Puede implementar el rendering condicional del formulario de inicio de sesión así, por ejemplo:
+**NB** Puedes implementar el rendering condicional del formulario de inicio de sesión así, por ejemplo:
 
 ```js
   if (user === null) {
@@ -607,31 +592,29 @@ Los detalles de usuario del usuario que inició sesión no tienen que guardarse 
 }
 ```
 
-#### 5.2: frontend de la lista de blogs, paso 2
+#### 5.2: Frontend de la Lista de Blogs, paso 2
 
-Haga que el inicio de sesión sea "permanente" mediante el almacenamiento local. También implemente una forma de cerrar sesión.
+Haz que el inicio de sesión sea "permanente" mediante el use de local storage. También implementa una forma de cerrar sesión.
 
-![](../../images/5/6e.png)
+![navegador mostrando botón de logout luego de iniciar sesión](../../images/5/6e.png)
 
-Asegúrese de que el navegador no recuerde los detalles del usuario después de cerrar la sesión.
+Asegúrate de que el navegador no recuerde los detalles del usuario después de cerrar la sesión.
 
-#### 5.3: frontend de la lista de blogs, paso 3
+#### 5.3: Frontend de la Lista de Blogs, paso 3
 
-Expanda su aplicación para permitir que un usuario que haya iniciado sesión agregue nuevos blogs:
+Expande tu aplicación para permitir que un usuario que haya iniciado sesión agregue nuevos blogs:
 
-![](../../images/5/7e.png)
+![navegador mostrando formulario de nuevo blog](../../images/5/7e.png)
 
-#### 5.4 *: frontend de la lista de blogs, paso 4
+#### 5.4: Frontend de la Lista de Blogs, paso 4
 
-Implemente notificaciones que informen al usuario sobre operaciones exitosas y no exitosas en la parte superior de la página. Por ejemplo, cuando se agrega un nuevo blog, se puede mostrar la siguiente notificación:
+Implementa notificaciones que informen al usuario sobre operaciones exitosas y no exitosas en la parte superior de la página. Por ejemplo, cuando se agrega un nuevo blog, se puede mostrar la siguiente notificación:
 
-![](../../images/5/8e.png)
+![navegador mostrando notificación de operación exitosa](../../images/5/8e.png)
 
+Un inicio de sesión fallido puede mostrar la siguiente notificación:
 
-El inicio de sesión fallido puede mostrar la siguiente notificación:
-
-![](../../images/5/9e.png)
-
+![navegador mostrando notificación de intento de login fallido](../../images/5/9e.png)
 
 Las notificaciones deben estar visibles durante unos segundos. No es obligatorio agregar colores.
 
@@ -639,19 +622,19 @@ Las notificaciones deben estar visibles durante unos segundos. No es obligatorio
 
 <div class="content">
 
-### Nota sobre el uso del almacenamiento local
+### Nota sobre el uso de local storage
 
 Al final de la última [parte](/es/part4/autenticacion_basada_en_token#problemas-de-la-autenticacion-basada-en-tokens) mencionamos que el desafío de la autenticación basada en tokens es cómo afrontar la situación en la cual el acceso a la API del poseedor del token necesita ser revocado.
 
-Hay dos soluciones para este problema. La primera es limitar el periodo de validez de un token. Esto fuerza al usuario a iniciar sesión otra vez una vez que el token ha expirado. El otro enfoque es guardar la información de validez de cada token en la base de datos del backend. Esta solución es llamada frecuentemente <i>server side session</i>.
+Hay dos soluciones para este problema. La primera es limitar el periodo de validez de un token. Esto fuerza al usuario a iniciar sesión nuevamente cuando el token ha expirado. El otro enfoque es guardar la información de validez de cada token en la base de datos del backend. Esta solución es llamada frecuentemente <i>server side session</i>.
 
-No importa cómo la validez de los tokens es revisada y asegurada, guardar un token en el almacenamiento local puede significar un riesgo de seguridad si la aplicación tiene una vulnerabilidad que permite un ataque de [Cross Site Scripting (XSS)](https://owasp.org/www-community/attacks/xss/). Un ataque XSS es posible si la aplicación permite al usuario inyectar arbitrariamente código de JavaScript (ej. usar un formulario), que la aplicación luego puede ejecutar. Si usamos React correctamente, esto no debería ser posible, ya que [React desinfecta](https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks) todo el texto que renderiza, lo que significa que no está ejecutando el contenido renderizado como JavaScript.
+No importa cómo la validez de los tokens es revisada y asegurada, guardar un token en el almacenamiento local puede significar un riesgo de seguridad si la aplicación tiene una vulnerabilidad que permite un ataque de [Cross Site Scripting (XSS)](https://owasp.org/www-community/attacks/xss/). Un ataque XSS es posible si la aplicación permite al usuario inyectar arbitrariamente código de JavaScript (ej. usando un formulario), que la aplicación luego puede ejecutar. Si usamos React correctamente, esto no debería ser posible, ya que [React desinfecta](https://es.legacy.reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks) todo el texto que renderiza, lo que significa que no está ejecutando el contenido renderizado como JavaScript.
 
 Si uno quiere estar seguro, la mejor opción es no almacenar un token en el almacenamiento local. Esta puede ser una opción en situaciones en las que filtrar un token puede tener consecuencias trágicas.
 
-Ha sido sugerido que la identidad de un usuario que ha iniciado sesión debería guardarse como [httpOnly cookies](https://developer.mozilla.org/es/docs/Web/HTTP/Cookies#cookies_secure_y_httponly), para que código de JavaScript no pueda tener ningún acceso al token. El inconveniente de esta solución es que haría la implementación de aplicaciones SPA un poco mas compleja. Necesitaríamos implementar al menos una pagina separada para el inicio de sesión.
+Ha sido sugerido que la identidad de un usuario que ha iniciado sesión debería guardarse como [httpOnly cookies](https://developer.mozilla.org/es/docs/Web/HTTP/Cookies#cookies_secure_y_httponly), para que el código de JavaScript no pueda tener ningún acceso al token. El inconveniente de esta solución es que haría la implementación de aplicaciones SPA un poco mas compleja. Necesitaríamos implementar al menos una pagina separada para el inicio de sesión.
 
-Sin embargo, es importante notar que incluso el uso de cookies httpOnly no garantiza nada. Incluso se ha sugerido que las cookies httpOnly [no son mas seguras](https://academind.com/tutorials/localstorage-vs-cookies-xss/) que el uso del almacenamiento local. 
+Sin embargo, es importante notar que incluso el uso de cookies httpOnly no garantiza nada. Incluso se ha sugerido que las cookies httpOnly [no son mas seguras](https://academind.com/tutorials/localstorage-vs-cookies-xss/) que el uso del almacenamiento local.
 
 Al fin y al cabo, no importa la solución utilizada, lo mas importante es [minimizar el riesgo](https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html) de ataques XSS por completo.
 
