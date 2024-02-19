@@ -398,7 +398,7 @@ Kaikki operaation suorituksen jälkeinen koodi kirjoitetaan tapahtumankäsitteli
 ```js
 Note.find({})
   .then(notes => {
-    return notes[0].remove()
+    return notes[0].deleteOne()
   })
   .then(response => {
     console.log('the first note is removed')
@@ -424,7 +424,7 @@ Ylempänä oleva monimutkaisempi esimerkki suoritettaisiin awaitin avulla seuraa
 
 ```js
 const notes = await Note.find({})
-const response = await notes[0].remove()
+const response = await notes[0].deleteOne()
 
 console.log('the first note is removed')
 ```
@@ -442,7 +442,7 @@ const main = async () => { // highlight-line
   const notes = await Note.find({})
   console.log('operaatio palautti seuraavat muistiinpanot', notes)
 
-  const response = await notes[0].remove()
+  const response = await notes[0].deleteOne()
   console.log('the first note is removed')
 }
 
