@@ -589,6 +589,8 @@ The module defines the _notesInDb_ function that can be used for checking the no
 Our tests can now use the helper module and be changed like this:
 
 ```js
+const { test, after, beforeEach } = require('node:test')
+const assert = require('node:assert')
 const supertest = require('supertest')
 const mongoose = require('mongoose')
 const helper = require('./test_helper') // highlight-line
@@ -617,7 +619,7 @@ test('notes are returned as json', async () => {
 test('all notes are returned', async () => {
   const response = await api.get('/api/notes')
 
-  expect(response.body).toHaveLength(helper.initialNotes.length) // highlight-line
+   assert.strictEqual(response.body.length, helper.initialNotes.length) // highlight-line
 })
 
 test('a specific note is within the returned notes', async () => {
@@ -625,9 +627,7 @@ test('a specific note is within the returned notes', async () => {
 
   const contents = response.body.map(r => r.content)
 
-  expect(contents).toContain(
-    'Browser can execute only JavaScript'
-  )
+  assert(contents.includes('Browser can execute only JavaScript'))
 })
 
 test('a valid note can be added ', async () => {
@@ -643,12 +643,10 @@ test('a valid note can be added ', async () => {
     .expect('Content-Type', /application\/json/)
 
   const notesAtEnd = await helper.notesInDb() // highlight-line
-  expect(notesAtEnd).toHaveLength(helper.initialNotes.length + 1) // highlight-line
+  assert.strictEqual(notesAtEnd.length, helper.initialNotes.length + 1) // highlight-line
 
   const contents = notesAtEnd.map(n => n.content) // highlight-line
-  expect(contents).toContain(
-    'async/await simplifies making async calls'
-  )
+  assert(contents.includes('async/await simplifies making async calls'))
 })
 
 test('note without content is not added', async () => {
@@ -663,7 +661,7 @@ test('note without content is not added', async () => {
 
   const notesAtEnd = await helper.notesInDb() // highlight-line
 
-  expect(notesAtEnd).toHaveLength(helper.initialNotes.length) // highlight-line
+  assert.strictEqual(notesAtEnd.length, helper.initialNotes.length) // highlight-line
 })
 
 after(async () => {
