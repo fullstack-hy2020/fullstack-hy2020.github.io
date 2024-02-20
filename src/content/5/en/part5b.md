@@ -358,9 +358,11 @@ The application code can be found on [GitHub](https://github.com/fullstack-hy202
 
 Our current implementation is quite good; it has one aspect that could be improved.
 
-After a new note is created, it would make sense to hide the new note form. Currently, the form stays visible. There is a slight problem with hiding the form. The visibility is controlled with the <i>visible</i> state variable inside of the <i>Togglable</i> component. How can we access it outside of the component?
+After a new note is created, it would make sense to hide the new note form. Currently, the form stays visible. There is a slight problem with hiding the form. The visibility is controlled with the <i>visible</i> state variable inside of the <i>Togglable</i> component. 
 
-There are many ways to implement closing the form from the parent component, but let's use the [ref](https://react.dev/learn/referencing-values-with-refs) mechanism of React, which offers a reference to the component.
+One solution to this would be to move control of the Togglable component's state outside the component. However, we won't do that now, because we want the component to be responsible for its own state. So we have to find another solution, and find a mechanism to change the state of the component externally.
+
+There are several different ways to implement access to a component's functions from outside the component, but let's use the [ref](https://react.dev/learn/referencing-values-with-refs) mechanism of React, which offers a reference to the component.
 
 Let's make the following changes to the <i>App</i> component:
 
@@ -706,12 +708,6 @@ In part 3 we configured the [ESlint](/en/part3/validation_and_es_lint#lint) code
 
 Vite has installed ESlint to the project by default, so all that's left for us to do is define our desired configuration in the <i>.eslintrc.cjs</i> file.
 
-Next, we will start testing the frontend and in order to avoid undesired and irrelevant linter errors we will install the [eslint-plugin-jest](https://www.npmjs.com/package/eslint-plugin-jest) package:
-
-```bash
-npm install --save-dev eslint-plugin-jest
-```
-
 Let's create a <i>.eslintrc.cjs</i> file with the following contents:
 
 ```js
@@ -720,7 +716,6 @@ module.exports = {
   env: {
     browser: true,
     es2020: true,
-    "jest/globals": true
   },
   extends: [
     'eslint:recommended',
@@ -731,7 +726,7 @@ module.exports = {
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
   settings: { react: { version: '18.2' } },
-  plugins: ['react-refresh', 'jest'],
+  plugins: ['react-refresh'],
   rules: {
     "indent": [
         "error",
