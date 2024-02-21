@@ -1,40 +1,15 @@
 ---
 mainImage: ../../../images/part-5.svg
 part: 5
-letter: d
+letter: e
 lang: en
 ---
 
 <div class="content">
 
-So far we have tested the backend as a whole on an API level using integration tests and tested some frontend components using unit tests.
+### Playwright
 
-Next, we will look into one way to test the [system as a whole](https://en.wikipedia.org/wiki/System_testing) using <i>End to End</i> (E2E) tests.
-
-We can do E2E testing of a web application using a browser and a testing library. There are multiple libraries available. One example is [Selenium](http://www.seleniumhq.org/), which can be used with almost any browser.
-Another browser option is so-called [headless browsers](https://en.wikipedia.org/wiki/Headless_browser), which are browsers with no graphical user interface.
-For example, Chrome can be used in headless mode.
-
-E2E tests are potentially the most useful category of tests because they test the system through the same interface as real users use.
-
-They do have some drawbacks too. Configuring E2E tests is more challenging than unit or integration tests. They also tend to be quite slow, and with a large system, their execution time can be minutes or even hours. This is bad for development because during coding it is beneficial to be able to run tests as often as possible in case of code [regressions](https://en.wikipedia.org/wiki/Regression_testing).
-
-E2E tests can also be [flaky](https://hackernoon.com/flaky-tests-a-war-that-never-ends-9aa32fdef359).
-Some tests might pass one time and fail another, even if the code does not change at all.
-
-Perhaps the two easiest libraries for End to End testing at the moment are [Cypress](https://www.cypress.io/) and [Playwright](https://playwright.dev/).
-
-From the statistics on [npmtrends.com](https://npmtrends.com/cypress-vs-playwright) we see that Cypress, which dominated the market for the last five years, is still the clear number one, but Playwright is on a rapid rise:
-
-![cypress vs playwright in npm trends](../../images/5/cvsp.png)
-
-Cypress has been used on this course for years. Now Playwright has been added as a new feature. It is up to you to choose whether to run the E2E testing part of the course on Cypress or Playwright. Both libraries have very similar policies, so your choice is not very important. 
-
-If your choice is Playwright, go [here](/part5/end_to_end_testing_playwright), if Cypress, go ahead.
-
-### Cypress
-
-As mentioned, [Cypress](https://www.cypress.io/) has been the most popular E2E testing library for the past few years. Cypress is exceptionally easy to use, and when compared to Selenium, for example, it requires a lot less hassle and headache. Its operating principle is radically different than most E2E testing libraries because Cypress tests are run completely within the browser. Other libraries run the tests in a Node process, which is connected to the browser through an API.
+E2E library [Cypress](https://www.cypress.io/) has become popular within the last years. Cypress is exceptionally easy to use, and when compared to Selenium, for example, it requires a lot less hassle and headache. Its operating principle is radically different than most E2E testing libraries because Cypress tests are run completely within the browser. Other libraries run the tests in a Node process, which is connected to the browser through an API.
 
 Let's make some end-to-end tests for our note application.
 

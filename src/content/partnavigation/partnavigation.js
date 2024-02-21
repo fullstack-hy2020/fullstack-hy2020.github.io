@@ -34,7 +34,8 @@ module.exports = {
       a: 'Kirjautuminen frontendissä',
       b: 'props.children ja proptypet',
       c: 'React-sovellusten testaaminen',
-      d: 'End to end -testaus',
+      d: 'End to end -testaus: Cypress',
+      e: 'End to end -testaus: Playwright',
     },
     '6': {
       a: 'Flux-arkkitehtuuri ja Redux',
@@ -102,7 +103,8 @@ module.exports = {
       a: 'Login in frontend',
       b: 'props.children and proptypes',
       c: 'Testing React apps',
-      d: 'End to end testing',
+      d: 'End to end testing: Cypress',
+      e: 'End to end testing: Playwright',
     },
     '6': {
       a: 'Flux-architecture and Redux',

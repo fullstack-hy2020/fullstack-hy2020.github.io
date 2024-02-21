@@ -1,67 +1,117 @@
 ---
 mainImage: ../../../images/part-5.svg
 part: 5
-letter: d
+letter: e
 lang: fi
 ---
 
 <div class="content">
 
-Olemme tehneet backendille sitä apin tasolla kokonaisuutena testaavia integraatiotestejä ja frontendille yksittäisiä komponentteja testaavia yksikkötestejä. 
+[Playwright](https://playwright.dev/)... ero Cypressiin
 
-Katsotaan nyt erästä tapaa tehdä [järjestelmää kokonaisuutena](https://en.wikipedia.org/wiki/System_testing) tutkivia <i>End to End (E2E) ‑testejä</i>.
+TODO: [Cypress](https://www.cypress.io/)-niminen E2E-testaukseen soveltuva kirjasto on kasvattanut nopeasti suosiotaan viimeisten vuosien aikana. Cypress on poikkeuksellisen helppokäyttöinen, kaikenlaisen säätämisen ja tunkkaamisen määrä esim. Seleniumin käyttöön verrattuna on lähes olematon. Cypressin toimintaperiaate poikkeaa radikaalisti useimmista E2E-testaukseen sopivista kirjastoista, sillä Cypress-testit ajetaan kokonaisuudessaan selaimen sisällä. Muissa lähestymistavoissa testit suoritetaan Node-prosessissa, joka on yhteydessä selaimeen  ohjelmointirajapintojen kautta.
 
-Web-sovellusten E2E-testaus tapahtuu käyttäen selainta jonkin kirjaston avulla. Ratkaisuja on tarjolla useita, esimerkiksi [Selenium](http://www.seleniumhq.org/), joka mahdollistaa testien automatisoinnin lähes millä tahansa selaimella. Toinen vaihtoehto on käyttää ns. [headless browseria](https://en.wikipedia.org/wiki/Headless_browser) eli selainta, jolla ei ole ollenkaan graafista käyttöliittymää. Esim. Chromea on mahdollista suorittaa Headless-moodissa.
 
-E2E testit ovat potentiaalisesti kaikkein hyödyllisin testikategoria, sillä ne tutkivat järjestelmää saman rajapinnan kautta kuin todelliset käyttäjät.
+### Testien alustaminen
 
-E2E-testeihin liittyy myös ikäviä puolia. Niiden konfigurointi on haastavampaa kuin yksikkö- ja integraatiotestien. E2E-testit ovat tyypillisesti myös melko hitaita ja isommassa ohjelmistossa niiden suoritusaika voi helposti nousta minuutteihin, tai jopa tunteihin. Tämä on ikävää sovelluskehityksen kannalta, sillä sovellusta koodatessa on erittäin hyödyllistä pystyä suorittamaan testejä mahdollisimman usein koodin [regressioiden](https://en.wikipedia.org/wiki/Regression_testing) varalta. 
-
-Ongelmana on  usein myös se, että käyttöliittymän kautta tehtävät testit saattavat olla epäluotettavia eli englanniksi [flaky](https://hackernoon.com/flaky-tests-a-war-that-never-ends-9aa32fdef359), osa testeistä menee välillä läpi ja välillä ei, vaikka koodissa ei muuttuisi mikään.
-
-Tämän hetken kaksi ehkä helppokäyttöisintä kirjastoa End to End -testaukseen ovat [Cypress](https://www.cypress.io/) ja [Playwright](https://playwright.dev/).
-
-Sivun [npmtrends.com](https://npmtrends.com/cypress-vs-playwright) statistiikasta näemme, että vimeiset viisi vuotta markkinaa hallinnut Cypress on edelleen selvä ykkönen, mutta Playwright on lähtenyt nopeaan nousuun:
-
-![cypress vs playwright in npm trends](../../images/5/cvsp.png)
-
-Tällä kurssilla on jo vuosia käytetty Cypresiä. Nyt mukana on uutena myös Playwright. Saat itse valita suoritatko kurssin E2E-testausta käsittelevän osan Cypressillä vai Playrwightillä. Molempien kirjastojen toimintaperiaatteet ovat hyvin samankaltaisia, joten kovin suurta merkitystä valinnallasi ei ole. 
-
-Jos valintasi on Playwright, mene [tänne](/osa5/end_to_end_testaus_playwright), jos taas Cypress, jatka eteenpäin.
-
-### Cypress
-
-[Cypress](https://www.cypress.io/) on siis ollut edellisten vuosien ajan suosituin E2E-testauskirjasto. Cypress on ainakin edeltäjiinsä nähden poikkeuksellisen helppokäyttöinen, kaikenlaisen säätämisen ja tunkkaamisen määrä esim. Seleniumin käyttöön verrattuna on lähes olematon. Cypressin toimintaperiaate poikkeaa radikaalisti useimmista E2E-testaukseen sopivista kirjastoista, sillä Cypress-testit ajetaan kokonaisuudessaan selaimen sisällä. Muissa lähestymistavoissa testit suoritetaan Node-prosessissa, joka on yhteydessä selaimeen  ohjelmointirajapintojen kautta.
-
-Tehdään tämän osan lopuksi muutamia end to end ‑testejä muistiinpanosovellukselle. 
-
-Aloitetaan asentamalla Cypress <i>frontendin</i> kehitysaikaiseksi riippuvuudeksi
+Toisin kuin React-frontille tehdyt yksikkötestit tai backendin tekstit, nyt tehtävien End to End -testien ei ei tarvitse sijaita samassa npm-projektissa missä koodi on. Tehdään nyt E2E-testeille kokonaan oma projekti komennolla _npm init_.  Asennetaan sitten Playwright suorittamalla suorittamalla uuden projektin hakemisstossa komento
 
 ```js
-npm install --save-dev cypress
+npm init playwright@latest
 ```
 
-ja määritellään npm-skripti käynnistämistä varten, ja tehdään myös pieni muutos sovelluksen käynnistävään skriptiin:
+Asennusskripti kysyy muutamaa kysymystä, vastataan niihin seuraavasti:
 
+```
+$ npm init playwright@latest
+Getting started with writing end-to-end tests with Playwright:
+Initializing project in '.'
+✔ Do you want to use TypeScript or JavaScript? · JavaScript
+✔ Where to put your end-to-end tests? · tests
+✔ Add a GitHub Actions workflow? (y/N) · false
+✔ Install Playwright browsers (can be done manually via 'npx playwright install')? (Y/n) · true
+```
+
+Määritellään npm-skripti testien suorittamista sekä testiraportteja varten
 ```js
 {
   // ...
   "scripts": {
-    "dev": "vite --host", // highlight-line
-    "build": "vite build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "server": "json-server -p3001 --watch db.json",
-    "test": "jest",
-    "cypress:open": "cypress open"  // highlight-line
+    "test": "playwright test",
+    "test:report": "playwright show-report"
   },
   // ...
 }
 ```
 
-Toisin kuin esim. frontendin yksikkötestit, Cypress-testit voidaan sijoittaa joko frontendin tai backendin repositorioon, tai vaikka kokonaan omaan repositorioonsa. 
+Asennuksen yhteydessä konsoliin tulostui
 
-Cypress-testit olettavat että testattava järjestelmä on käynnissä kun testit suoritetaan, eli toisin kuin esim. backendin integraatiotestit, Cypress-testit <i>eivät käynnistä</i> testattavaa järjestelmää testauksen yhteydessä.
+```
+And check out the following files:
+  - ./tests/example.spec.js - Example end-to-end test
+  - ./tests-examples/demo-todo-app.spec.js - Demo Todo App end-to-end tests
+  - ./playwright.config.js - Playwright Test configuration
+```
+
+eli asennus valmiiksi muutaman esimerkkitestin. Suoritetaan testit:
+
+```
+$ npm test
+
+> notes-e2e@1.0.0 test
+> playwright test
+
+
+Running 6 tests using 5 workers
+  6 passed (3.9s)
+
+To open last HTML report run:
+
+  npx playwright show-report
+```
+
+Testit menevät läpi. Tarkempi testiraportti voidaa avata joko tulostuksen ehdottamalla komennolla, tai äsken määrittelemällämme npm-skriptillä:
+
+```
+npm run test:report
+```
+
+Testit voidaan myös suorittaa graafisen UI:n kautta komennolla
+
+```
+npm run test -- --ui
+```
+
+Esimerkkitestit näyttävät seuraavanlaisilta:
+
+```
+const { test, expect } = require('@playwright/test');
+
+test('has title', async ({ page }) => {
+  await page.goto('https://playwright.dev/');
+
+  // Expect a title "to contain" a substring.
+  await expect(page).toHaveTitle(/Playwright/);
+});
+
+test('get started link', async ({ page }) => {
+  await page.goto('https://playwright.dev/');
+
+  // Click the get started link.
+  await page.getByRole('link', { name: 'Get started' }).click();
+
+  // Expects page to have a heading with the name of Installation.
+  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+});
+```
+
+Testit siis testaavat osoitteessa https://playwright.dev/ olevaa sivua.
+
+### Oman koodin testaaminen
+
+Poistetaan nyt esimerkkitestit ja aloitetaan oman sovelluksemme testaaminen.
+
+Playwright-testit olettavat että testattava järjestelmä on käynnissä kun testit suoritetaan, eli toisin kuin esim. backendin integraatiotestit, Playwright-testit <i>eivät käynnistä</i> testattavaa järjestelmää testauksen yhteydessä.
 
 Tehdään <i>backendille</i> npm-skripti, jonka avulla se saadaan käynnistettyä testausmoodissa, eli siten, että <i>NODE\_ENV</i> saa arvon <i>test</i>.
 
@@ -76,135 +126,77 @@ Tehdään <i>backendille</i> npm-skripti, jonka avulla se saadaan käynnistetty�
     "deploy:full": "npm run build:ui && npm run deploy",
     "logs:prod": "fly logs",
     "lint": "eslint .",
-    "test": "jest --verbose --runInBand",
+    "test": "NODE_ENV=test node --test",
     "start:test": "NODE_ENV=test node index.js" // highlight-line
   },
   // ...
 }
 ```
 
-Kun backend ja frontend ovat käynnissä, voidaan käynnistää Cypress komennolla
+Käynnistetään frontend ja backend, ja luodaan sovellukselle ensimmäinen testi tiedotoon _tests/note_app.spec.js_:
 
 ```js
-npm run cypress:open
-```
+const { test, expect } = require('@playwright/test')
 
-Cypress kysyy minkä tyyppisiä testejä haluamme tehdä. Valitaan "E2E Testing":
+test('front page can be opened', async ({ page }) => {
+  await page.goto('http://localhost:5173')
 
-![](../../images/5/51new.png)
-
-Valitaan sopiva selain (esim. Chrome) ja "Create new spec":
-
-![](../../images/5/52new.png)
-
-Annetaan testille nimeksi <i>note\_app.cy.js</i> ja sijoitetaan se ehdotettuun hakemistoon <i>cypress/e2e:</i>
-
-![](../../images/5/53new.png)
-
-Voisimme tehdä testejä Cypressin kautta, mutta käytetään kuitenkin VS Codea testien editointiin:
-
-![](../../images/5/54new.png)
-
-Suljetaan Cypressin testin editointinäkymä.
-
-Muutetaan testin sisätö seuraavanlaiseksi
-
-```js
-describe('Note ', function() {
-  it('front page can be opened', function() {
-    cy.visit('http://localhost:5173')
-    cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
-  })
+  const locator = await page.locator('body')
+  await expect(locator).toContainText('Notes')
+  await expect(locator).toContainText('Note app, Department of Computer Science, University of Helsinki 2023')
 })
 ```
 
-Testin suoritus käynnistetään klikkaamalla testin nimeä Cypressin näkymästä:
+Ensin testi avaa sovelluksen metodilla [page.goto](https://playwright.dev/docs/writing-tests#navigation).
 
-![](../../images/5/55new.png)
+Tämän jälkeen testi hakee koko sovelluksen renderöimää DOM:ia vastaavan [lokaattorin](https://playwright.dev/docs/api/class-locator) metodilla [page.locator](https://playwright.dev/docs/api/class-locator#locator-locator). Metodille on annettu parametriksi koko renderöityä näkymää vastaava selektori _body_.
 
-Testin suoritus näyttää, miten sovellus käyttäytyy testin edetessä:
+Lokaattorille, joka siis vastaa nyt koko sovelluksen renderöimää näkymää, tehdään lopuksi kaksi  [toContainText](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-contain-text) kaksi ekspekaatiota, jotka varmistavat että sovellus on renderöinyt halutut tekstit.
 
-![Selain renderöi näkymän, jossa vasemmalla testit ja niiden askeleet ja oikealla testin alla oleva sovellus.](../../images/5/56new.png)
-
-Testi näyttää rakenteeltaan melko tutulta. <i>describe</i>-lohkoja käytetään samaan tapaan kuin Jestissä ryhmittelemään yksittäisiä testitapauksia, jotka on määritelty <i>it</i>-metodin avulla. Nämä osat Cypress on lainannut sisäisesti käyttämältään [Mocha](https://mochajs.org/)-testikirjastolta.  
-
-[cy.visit](https://docs.cypress.io/api/commands/visit.html) ja [cy.contains](https://docs.cypress.io/api/commands/contains.html) taas ovat Cypressin komentoja, joiden merkitys on aika ilmeinen. [cy.visit](https://docs.cypress.io/api/commands/visit.html) avaa testin käyttämään selaimeen parametrina määritellyn osoitteen ja [cy.contains](https://docs.cypress.io/api/commands/contains.html) etsii sivun sisältä parametrina annetun tekstin. 
-
-Olisimme voineet määritellä testin myös käyttäen nuolifunktioita
+Huomaamme, että vuosi on vaihtunut. Muutetaankin testiä seuraavasti:
 
 ```js
-describe('Note app', () => { // highlight-line
-  it('front page can be opened', () => { // highlight-line
-    cy.visit('http://localhost:5173')
-    cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
-  })
+const { test, expect } = require('@playwright/test')
+
+test('front page can be opened', async ({ page }) => {
+  await page.goto('http://localhost:5173')
+
+  const locator = await page.locator('body')
+  await expect(locator).toContainText('Notes')
+  await expect(locator).toContainText('Note app, Department of Computer Science, University of Helsinki 2024') // highlight-line
 })
 ```
 
-Mochan dokumentaatio kuitenkin [suosittelee](https://mochajs.org/#arrow-functions) että nuolifunktioita ei käytetä, ne saattavat aiheuttaa ongelmia joissain tilanteissa.
+Kuten arvata saattaa, testi ei mene läpi. Playwright avaa testiraportin selaimeen ja siitä käy selväksi, että Playwright on itseasiassa suorittanut testit kolmella eri selaimella Chromella, yhden Firefoxilla sekä Webkitillä eli esim. Safarin käyttämällä selaimoottorilla:
 
-HUOM: tässä materiaalissa suoritetaan Cypress-testejä pääasiassa graafisen test runnerin kautta. Testit on luonnollisesti mahdollista suorittaa myös [komentoriviltä](https://docs.cypress.io/guides/guides/command-line.html), komennolla <em>cypress run</em>, joka kannattaa halutessa lisätä npm-skriptiksi.
+![](../../images/5/play2.png)
 
-Jos komento <i>cy.contains</i> ei löydä sivulta etsimäänsä tekstiä, testi ei mene läpi. Eli jos laajennamme testiä seuraavasti
+Klikkaamalla jonkin selaimen raporttia näemme tarkemman virheilmoituksen:
+
+![](../../images/5/play3.png)
+
+Isossa kuvassa on tietysti oikein hyvä asia että testaus tapahtuu kaikilla kolmella selainmoottorilla, mutta tämä on hidasta, ja testejä kehittäessä kannattaa ehkä suorittaa pääosin vain yhdellä selaimella. Käytettävän selainmoottorin määrittely onnistuu komenentoriviparametrilla:
 
 ```js
-describe('Note app', function() {
-  it('front page can be opened',  function() {
-    cy.visit('http://localhost:5173')
-    cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
-  })
+npm test -- --project chromium
+```
 
-// highlight-start
-  it('front page contains random text', function() {
-    cy.visit('http://localhost:5173')
-    cy.contains('wtf is this app?')
+Korjataan nyt koodista virheen aiheuttanut vanhentunut vuosiluku.
+
+Ennen kuin jatkamme, lisätään vielä testeihin _describe_-lohko:
+
+```js
+const { test, describe, expect } = require('@playwright/test')
+
+describe('Note app', () => {
+  test('front page can be opened', async ({ page }) => {
+    await page.goto('http://localhost:5173')
+
+    const locator = await page.locator('body')
+    await expect(locator).toContainText('Notes')
+    await expect(locator).toContainText('Note app, Department of Computer Science, University of Helsinki 2024')
   })
-// highlight-end
 })
-```
-
-havaitsee Cypress ongelman
-
-![Vasemmalla oleva testin suoritusta kuvaava näkymä paljastaa, että "contains"-askel epäonnistuu ja aiheuttaa virheen AssertionError, timed out... Expected to find content 'wtf is this app?' but never did.](../../images/5/57new.png)
-
-Poistetaan virheeseen johtanut testi koodista.
-
-Testeissä käytetty muuttuja _cy_ aiheuttaa ikävän ESlint-virheen
-
-![VS code paljastaa ESlint-virheen 'cy' is not defined](../../images/5/58new.png)
-
-Siitä päästään eroon asentamalla [eslint-plugin-cypress](https://github.com/cypress-io/eslint-plugin-cypress) kehitysaikaiseksi riippuvuudeksi
-
-```js
-npm install eslint-plugin-cypress --save-dev
-```
-
-ja laajentamalla tiedostossa <i>.eslintrc.cjs</i> olevaa konfiguraatiota seuraavasti: 
-
-```js
-module.exports = {
-  "env": {
-    browser: true,
-    es2020: true,
-    "jest/globals": true,
-    "cypress/globals": true // highlight-line
-  },
-  "extends": [ 
-    // ...
-  ],
-  "parserOptions": {
-    // ...
-  },
-  "plugins": [
-      "react", "jest", "cypress" // highlight-line
-  ],
-  "rules": {
-    // ...
-  }
-}
 ```
 
 ### Lomakkeelle kirjoittaminen
