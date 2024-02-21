@@ -9,41 +9,64 @@ lang: en
 
 There are many different ways of testing React applications. Let's take a look at them next.
 
-Tests will be implemented with the same [Jest](http://jestjs.io/) testing library developed by Facebook that was used in the previous part.
+The course previously used the [Jest](http://jestjs.io/) library developed by Facebook to test React components. We are now using the new generation of testing tools from Vite developers called [Vitest](https://vitest.dev/). Apart from the configurations, the libraries provide the same programming interface, so there is virtually no difference in the test code.
 
-In addition to Jest, we also need another testing library that will help us render components for testing purposes. The current best option for this is [react-testing-library](https://github.com/testing-library/react-testing-library) which has seen rapid growth in popularity in recent times.
+Let's start by installing Vitest and the [jsdom](https://github.com/jsdom/jsdom) library simulating a web browser:
+
+```
+npm install --save-vitest vitest jsdom
+```
+
+In addition to Vitest, we also need another testing library that will help us render components for testing purposes. The current best option for this is [react-testing-library](https://github.com/testing-library/react-testing-library) which has seen rapid growth in popularity in recent times. It is also worth extending the expressive power of the tests with the library [jest-dom](https://github.com/testing-library/jest-dom).
 
 Let's install the libraries with the command:
 
 ```js
-npm install --save-dev @testing-library/react @testing-library/jest-dom jest jest-environment-jsdom @babel/preset-env @babel/preset-react
+npm install --save-dev @testing-library/react @testing-library/jest-dom
 ```
 
-The file <i>package.json</i> should be extended as follows:
+Before we can do the first test, we need some configurations.
+
+We add a script to the <i>package.json</i> file to run the tests:
 
 ```js 
 {
   "scripts": {
     // ...
-    "test": "jest"
+    "test": "vitest run"
   }
   // ...
-  "jest": {
-    "testEnvironment": "jsdom"
+}
+```
+
+Let's create a file _testSetup.js_ in the project root with the following content
+
+```js
+import { afterEach } from 'vitest'
+import { cleanup } from '@testing-library/react'
+import '@testing-library/jest-dom/vitest'
+
+afterEach(() => {
+  cleanup()
+})
+```
+
+Now, after each test, the function _cleanup_ is performed that resets the jsdom that is simulating the browser.
+
+Expand the _vite.config.js_ file as follows
+
+```js
+export default defineConfig({
+  // ...
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: './testSetup.js', 
   }
-}
+})
 ```
 
-We also need the file <i>.babelrc</i> with following content:
-
-```js 
-{
-  "presets": [
-    "@babel/preset-env",
-    ["@babel/preset-react", { "runtime": "automatic" }]
-  ]
-}
-```
+With _globals: true_, there is no need to import keywords such as _describe_, _test_ and _expect_ into the tests.
 
 Let's first write tests for the component that is responsible for rendering a note:
 
@@ -71,8 +94,6 @@ We will write our test in the <i>src/components/Note.test.js</i> file, which is 
 The first test verifies that the component renders the contents of the note:
 
 ```js
-import React from 'react'
-import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import Note from './Note'
 
@@ -104,28 +125,57 @@ We can use the object [screen](https://testing-library.com/docs/queries/about#sc
   expect(element).toBeDefined()
 ```
 
+The existence of an element is checked using Vitest's [expect](https://vitest.dev/api/expect.html#expect) command. Expect generates an assertion from its parameter, the validity of which can be tested using various condition functions. Now we used [toBeDefined](https://vitest.dev/api/expect.html#tobedefined) which tests whether the _element_ parameter of expect exists.
+
 Run the test with command _npm test_:
 
 ```js
 $ npm test
 
 > notes-frontend@0.0.0 test
-> jest
+> vitest
 
- PASS  src/components/Note.test.js
-  ✓ renders content (15 ms)
 
-Test Suites: 1 passed, 1 total
-Tests:       1 passed, 1 total
-Snapshots:   0 total
-Time:        1.152 s
+ DEV  v1.3.1 /Users/mluukkai/opetus/2024-fs/part3/notes-frontend
+
+ ✓ src/components/Note.test.jsx (1)
+   ✓ renders content
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  17:05:37
+   Duration  812ms (transform 31ms, setup 220ms, collect 11ms, tests 14ms, environment 395ms, prepare 70ms)
+
+
+ PASS  Waiting for file changes...
 ```
 
-As expected, the test passes.
+Eslint complains about the keywords _test_ and _expect_ in the tests. The problem can be solved by installing [eslint-plugin-vitest-globals](https://www.npmjs.com/package/eslint-plugin-vitest-globals):
 
-**NB:** the console may issue a warning if you have not installed Watchman. Watchman is an application developed by Facebook that watches for changes that are made to files. The program speeds up the execution of tests and at least starting from macOS Sierra, running tests in watch mode issues some warnings to the console, that can be removed by installing Watchman.
+```
+npm install --save-dev eslint-plugin-vitest-globals
+```
 
-Instructions for installing Watchman on different operating systems can be found on the official Watchman website: <https://facebook.github.io/watchman/>
+and enable the plugin by editing the _.eslint.cjs_ file as follows: 
+
+```js
+module.exports = {
+  root: true,
+  env: {
+    browser: true,
+    es2020: true,
+    "vitest-globals/env": true // highlight-line
+  },
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
+    'plugin:react-hooks/recommended',
+    'plugin:vitest-globals/recommended', // highlight-line
+  ],
+  // ...
+}
+```
 
 ### Test file location
 
@@ -140,8 +190,6 @@ I do not like this way of storing tests and application code in the same directo
 The react-testing-library package offers many different ways of investigating the content of the component being tested. In reality, the _expect_ in our test is not needed at all:
 
 ```js
-import React from 'react'
-import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import Note from './Note'
 
@@ -164,8 +212,6 @@ Test fails if _getByText_ does not find the element it is looking for.
 We could also use [CSS-selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors) to find rendered elements by using the method [querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) of the object [container](https://testing-library.com/docs/react-testing-library/api/#container-1) that is one of the fields returned by the render:
 
 ```js
-import React from 'react'
-import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import Note from './Note'
 
@@ -195,8 +241,6 @@ We typically run into many different kinds of problems when writing our tests.
 Object _screen_ has method [debug](https://testing-library.com/docs/dom-testing-library/api-debugging#screendebug) that can be used to print the HTML of a component to the terminal. If we change the test as follows:
 
 ```js
-import React from 'react'
-import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import Note from './Note'
 
@@ -236,8 +280,6 @@ console.log
 It is also possible to use the same method to print a wanted element to console:
 
 ```js
-import React from 'react'
-import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import Note from './Note'
 
@@ -283,8 +325,6 @@ npm install --save-dev @testing-library/user-event
 Testing this functionality can be accomplished like this:
 
 ```js
-import React from 'react'
-import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event' // highlight-line
 import Note from './Note'
@@ -296,8 +336,8 @@ test('clicking the button calls event handler once', async () => {
     content: 'Component testing is done with react-testing-library',
     important: true
   }
-
-  const mockHandler = jest.fn()  // highlight-line
+  
+  const mockHandler = vi.fn()  // highlight-line
 
   render(
     <Note note={note} toggleImportance={mockHandler} />  // highlight-line
@@ -311,10 +351,10 @@ test('clicking the button calls event handler once', async () => {
 })
 ```
 
-There are a few interesting things related to this test. The event handler is a [mock](https://jestjs.io/docs/mock-functions) function defined with Jest:
+There are a few interesting things related to this test. The event handler is a [mock](https://vitest.dev/api/mock) function defined with Vitest:
 
 ```js
-const mockHandler = jest.fn()
+const mockHandler = vi.fn()
 ```
 
 A [session](https://testing-library.com/docs/user-event/setup/) is started to interact with the rendered component:
@@ -332,11 +372,13 @@ await user.click(button)
 
 Clicking happens with the method [click](https://testing-library.com/docs/user-event/convenience/#click) of the userEvent-library.
 
-The expectation of the test verifies that the <i>mock function</i> has been called exactly once.
+The expectation of the test uses [toHaveLength](https://vitest.dev/api/expect.html#tohavelength) to verify that the <i>mock function</i> has been called exactly once:
 
 ```js
 expect(mockHandler.mock.calls).toHaveLength(1)
 ```
+
+The calls of the mock function are saved to the array [mock.calls](https://vitest.dev/api/mock#mock-calls) within the mock function object.
 
 [Mock objects and functions](https://en.wikipedia.org/wiki/Mock_object) are commonly used [stub](https://en.wikipedia.org/wiki/Method_stub) components in testing that are used for replacing dependencies of the components being tested. Mocks make it possible to return hardcoded responses, and to verify the number of times the mock functions are called and with what parameters.
 
@@ -369,8 +411,7 @@ const Togglable = forwardRef((props, ref) => {
 The tests are shown below:
 
 ```js
-import React from 'react'
-import '@testing-library/jest-dom'
+
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Togglable from './Togglable'
@@ -498,14 +539,12 @@ The form works by calling the function received as props _createNote_, with the 
 The test is as follows:
 
 ```js
-import React from 'react'
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom'
 import NoteForm from './NoteForm'
 import userEvent from '@testing-library/user-event'
 
 test('<NoteForm /> updates parent state and calls onSubmit', async () => {
-  const createNote = jest.fn()
+  const createNote = vi.fn()
   const user = userEvent.setup()
 
   render(<NoteForm createNote={createNote} />)
@@ -527,6 +566,31 @@ The method [type](https://testing-library.com/docs/user-event/utility#type) of t
 
 The first test expectation ensures that submitting the form calls the _createNote_ method.
 The second expectation checks that the event handler is called with the right parameters - that a note with the correct content is created when the form is filled.
+
+It's worth noting that the good old _console.log_ works as usual in the tests. For example, if you want to see what the calls stored by the mock-object look like, you can do the following
+
+````js
+test('<NoteForm /> updates parent state and calls onSubmit', async() => {
+  const user = userEvent.setup()
+  const createNote = vi.fn()
+
+  render(<NoteForm createNote={createNote} />)
+
+  const input = screen.getByRole('textbox')
+  const sendButton = screen.getByText('save')
+
+  await user.type(input, 'testing a form...')
+  await user.click(sendButton)
+
+  console.log(createNote.mock.calls) // highlight-line
+})
+```
+
+In the middle of running the tests, the following is printed
+
+```
+[ [ { content: 'testing a form...', important: true } ] ]
+```
 
 ### About finding the elements
 
@@ -609,7 +673,7 @@ Now finding the right input field is easy with the method [getByPlaceholderText]
 
 ```js
 test('<NoteForm /> updates parent state and calls onSubmit', () => {
-  const createNote = jest.fn()
+  const createNote = vi.fn()
 
   render(<NoteForm createNote={createNote} />) 
 
@@ -734,18 +798,20 @@ test('does not render this', () => {
 
 ### Test coverage
 
-We can easily find out the [coverage](https://jestjs.io/blog/2020/01/21/jest-25#v8-code-coverage) of our tests by running them with the command.
+We can easily find out the [coverage](https://vitest.dev/guide/coverage.html#coverage) of our tests by running them with the command.
 
 ```js
-npm test -- --coverage --collectCoverageFrom='src/**/*.{jsx,js}'
+npm test -- --coverage
 ```
+
+The first time you run the command, Vitest will ask you if you want to install the required library _@vitest/coverage-v8_. Install it, and run the command again:
 
 ![terminal output of test coverage](../../images/5/18new.png)
 
-A quite primitive HTML report will be generated to the <i>coverage/lcov-report</i> directory.
+A HTML report will be generated to the <i>coverage</i> directory.
 The report will tell us the lines of untested code in each component:
 
-![HTML report of the test coverage](../../images/5/19new.png)
+![HTML report of the test coverage](../../images/5/19newer.png)
 
 You can find the code for our current application in its entirety in the <i>part5-8</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-8).
 
@@ -788,7 +854,7 @@ We chose to concentrate on making end-to-end tests to test the whole application
 
 ### Snapshot testing
 
-Jest offers a completely different alternative to "traditional" testing called [snapshot](https://jestjs.io/docs/snapshot-testing) testing. The interesting feature of snapshot testing is that developers do not need to define any tests themselves, it is simple enough to adopt snapshot testing.
+Vitest offers a completely different alternative to "traditional" testing called [snapshot](https://vitest.dev/guide/snapshot) testing. The interesting feature of snapshot testing is that developers do not need to define any tests themselves, it is simple enough to adopt snapshot testing.
 
 The fundamental principle is to compare the HTML code defined by the component after it has changed to the HTML code that existed before it was changed.
 
