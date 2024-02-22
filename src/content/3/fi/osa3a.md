@@ -947,7 +947,7 @@ Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [GitHubissa](https://git
 
 Lisää sovellukseesi loggausta tekevä middleware [morgan](https://github.com/expressjs/morgan). Konfiguroi se logaamaan konsoliin <i>tiny</i>-konfiguraation mukaisesti.
 
-Morganin ohjeet eivät ole ehkä kaikkein selvimmät, ja joudut kenties miettimään hiukan. Toisaalta juuri koskaan dokumentaatio ei ole aivan itsestäänselvää, joten kryptisempiäkin asioita on hyvä oppia tulkitsemaan.
+Morganin ohjeet eivät ole ehkä kaikkein selvimmät, ja joudut kenties miettimään hiukan. Toisaalta dokumentaatio ei ole juuri koskaan aivan itsestäänselvää, joten kryptisempiäkin asioita on hyvä oppia tulkitsemaan.
 
 Morgan asennetaan kuten muutkin kirjastot, eli komennolla _npm install_ ja sen käyttöönotto tapahtuu kaikkien middlewarejen tapaan komennolla _app.use_
 
