@@ -583,28 +583,34 @@ Testit ja frontendin tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](htt
 
 Tehdään nyt testi joka varmistaa, että kirjautumisyritys epäonnistuu jos salasana on väärä.
 
-Cypress suorittaa oletusarvoisesti aina kaikki testit, ja testien määrän kasvaessa se alkaa olla aikaavievää. Uutta testiä kehitellessä tai rikkinäistä testiä debugatessa voidaan määritellä testi komennon <i>it</i> sijaan komennolla <i>it.only</i>, jolloin Cypress suorittaa ainoastaan sen testin. Kun testi on valmiina, voidaan <i>only</i> poistaa.
+Playwright suorittaa oletusarvoisesti aina kaikki testit, ja testien määrän kasvaessa se alkaa olla aikaavievää. Uutta testiä kehitellessä tai rikkinäistä testiä debugatessa voidaan määritellä testi komennon <i>test</i> sijaan komennolla <i>test.only</i>, jolloin Playwright suorittaa ainoastaan sen testin. Kun testi on valmiina, voidaan <i>only</i> poistaa.
+
+Toinen vaihtoehto suorittaa yksittäinen testi, on käyttää komentoriviparametria
+
+```
+npm test -- -g "login fails with wrong password"
+```
 
 Testin ensimmäinen versio näyttää seuraavalta:
 
 ```js
-describe('Note app', function() {
+describe('Note app', () => {
   // ...
 
-  it.only('login fails with wrong password', function() {
-    cy.contains('log in').click()
-    cy.get('#username').type('mluukkai')
-    cy.get('#password').type('wrong')
-    cy.get('#login-button').click()
+  test('login fails with wrong password', async ({ page }) => {
+    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByTestId('username').fill('mluukkai')
+    await page.getByTestId('password').fill('wrong')
+    await page.getByRole('button', { name: 'login' }).click()
 
-    cy.contains('wrong credentials')
+    await expect(await page.getByText('wrong credentials')).toBeVisible()
   })
 
   // ...
 )}
 ```
 
-Testi siis varmistaa komennon [cy.contains](https://docs.cypress.io/api/commands/contains.html#Syntax) avulla, että sovellus tulostaa virheilmoituksen.
+Testi siis varmistaa komennon [getByText](https://playwright.dev/docs/api/class-page#page-get-by-text) avulla, että sovellus tulostaa virheilmoituksen.
 
 Sovellus renderöi virheilmoituksen CSS-luokan <i>error</i> sisältävään elementtiin:
 
@@ -626,79 +632,48 @@ Voisimmekin tarkentaa testiä varmistamaan, että virheilmoitus tulostuu nimenom
 
 
 ```js
-it('login fails with wrong password', function() {
+  test('login fails with wrong password', async ({ page }) => {
   // ...
 
-  cy.get('.error').contains('wrong credentials') // highlight-line
+  const errorDiv = await page.locator('.error')
+  await expect(errorDiv).toContainText('wrong credentials')
 })
 ```
 
-Eli ensin etsitään komennolla [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax) CSS-luokan <i>error</i> sisältävä komponentti ja sen jälkeen varmistetaan että virheilmoitus löytyy sen sisältä. Huomaa, että [luokan CSS-selektori](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors) alkaa pisteellä, eli luokan <i>error</i> selektori on <i>.error</i>.
+Testi siis etsitään metodilla [page.locator](https://playwright.dev/docs/api/class-page#page-locator) CSS-luokan <i>error</i> sisältävän komponentin ja tallennetaan sen muuttujaan muuttujaan. Komponenttiin liittyvän teksstin oikeellisuus voidaan varmistaa ekspektaatiolla [toContainText](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-contain-text). Huomaa, että [luokan CSS-selektori](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors) alkaa pisteellä, eli luokan <i>error</i> selektori on <i>.error</i>.
 
-Voisimme tehdä saman myös käyttäen [should](https://docs.cypress.io/api/commands/should.html)-syntaksia:
+Ekspekaatiolla [toHaveCSS](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-have-css) on mahdollista testata tyylejä. Voimme esim. varmistaa, että virheilmoituksen väri on punainen, ja että sen ympärillä on border:
 
 ```js
-it('login fails with wrong password', function() {
+  test('login fails with wrong password', async ({ page }) =>{
   // ...
 
-  cy.get('.error').should('contain', 'wrong credentials') // highlight-line
+    const errorDiv = await page.locator('.error')
+    await expect(errorDiv).toContainText('wrong credentials')
+    await expect(errorDiv).toHaveCSS('border-style', 'solid')
+    await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)')
 })
 ```
 
-Shouldin käyttö on jonkin verran "hankalampaa" kuin komennon <i>contains</i>, mutta se mahdollistaa huomattavasti monipuolisemmat testit kuin pelkän tekstisisällön perusteella toimiva <i>contains</i>. 
+Värit on määriteltävä Playwrightille [rgb](https://rgbcolorcode.com/color/red)-koodeina.
 
-Lista yleisimmistä shouldin kanssa käytettävistä assertioista on [täällä](https://docs.cypress.io/guides/references/assertions.html#Common-Assertions).
 
-Voimme esim. varmistaa, että virheilmoituksen väri on punainen, ja että sen ympärillä on border:
-
-```js
-it('login fails with wrong password', function() {
-  // ...
-
-  cy.get('.error').should('contain', 'wrong credentials') 
-  cy.get('.error').should('have.css', 'color', 'rgb(255, 0, 0)')
-  cy.get('.error').should('have.css', 'border-style', 'solid')
-})
-```
-
-Värit on määriteltävä Cypressille [rgb](https://rgbcolorcode.com/color/red)-koodeina.
-
-Koska kaikki tarkastukset kohdistuvat samaan komennolla [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax) haettuun elementtiin, ne voidaan ketjuttaa komennon [and](https://docs.cypress.io/api/commands/and.html) avulla:
-
-```js
-it('login fails with wrong password', function() {
-  // ...
-
-  cy.get('.error')
-    .should('contain', 'wrong credentials')
-    .and('have.css', 'color', 'rgb(255, 0, 0)')
-    .and('have.css', 'border-style', 'solid')
-})
-```
 Viimeistellään testi vielä siten, että se varmistaa myös, että sovellus ei renderöi onnistunutta kirjautumista kuvaavaa tekstiä <i>'Matti Luukkainen logged in'</i>:
 
 ```js
-it('login fails with wrong password', function() {
-  cy.contains('log in').click()
-  cy.get('#username').type('mluukkai')
-  cy.get('#password').type('wrong')
-  cy.get('#login-button').click()
+test('login fails with wrong password', async ({ page }) =>{
+  await page.getByRole('button', { name: 'log in' }).click()
+  await page.getByTestId('username').fill('mluukkai')
+  await page.getByTestId('password').fill('wrong')
+  await page.getByRole('button', { name: 'login' }).click()
 
-  cy.get('.error')
-    .should('contain', 'wrong credentials')
-    .and('have.css', 'color', 'rgb(255, 0, 0)')
-    .and('have.css', 'border-style', 'solid')
+  const errorDiv = await page.locator('.error')
+  await expect(errorDiv).toContainText('wrong credentials')
+  await expect(errorDiv).toHaveCSS('border-style', 'solid')
+  await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)')
 
-  cy.get('html').should('not.contain', 'Matti Luukkainen logged in') // highlight-line
+  await expect(await page.getByText('Matti Luukkainen logged in')).not.toBeVisible() // highlight-line
 })
-```
-
-Komentoa <i>should</i> käytetään useimmiten ketjutettuna komennon <i>get</i> (tai muun vastaavan ketjutettavissa olevan komennon) perään. Testissä käytetty <i>cy.get('html')</i> tarkoittaa käytännössä koko sovelluksen näkyvillä olevaa sisältöä.
-
-Saman asian olisi myös voinut tarkastaa ketjuttamalla komennon <i>contains</i> perään komento <i>should</i> hieman toisenlaisella parametrilla:
-
-```js
-cy.contains('Matti Luukkainen logged in').should('not.exist')
 ```
 
 ### Operaatioiden tekeminen käyttöliittymän "ohi"
@@ -706,58 +681,75 @@ cy.contains('Matti Luukkainen logged in').should('not.exist')
 Sovelluksemme testit näyttävät tällä hetkellä seuraavalta:
 
 ```js 
-describe('Note app', function() {
-  it('user can login', function() {
-    cy.contains('log in').click()
-    cy.get('#username').type('mluukkai')
-    cy.get('#password').type('salainen')
-    cy.get('#login-button').click()
+const { test, describe, expect, beforeEach } = require('@playwright/test')
 
-    cy.contains('Matti Luukkainen logged in')
+describe('Note app', () => {
+  // ...
+
+  test('user can log in', async ({ page }) => {
+    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByTestId('username').fill('mluukkai')
+    await page.getByTestId('password').fill('salainen')
+    await page.getByRole('button', { name: 'login' }).click()
+    await expect(await page.getByText('Matti Luukkainen logged in')).toBeVisible()
   })
 
-  it('login fails with wrong password', function() {
+  test('login fails with wrong password', async ({ page }) =>{
     // ...
   })
 
-  describe('when logged in', function() {
-    beforeEach(function() {
-      cy.contains('log in').click()
-      cy.get('#username').type('mluukkai')
-      cy.get('#password').type('salainen')
-      cy.get('#login-button').click()
+  describe('when logged in', () => {
+    beforeEach(async ({ page, request }) => {
+      await page.getByRole('button', { name: 'log in' }).click()
+      await page.getByTestId('username').fill('mluukkai')
+      await page.getByTestId('password').fill('salainen')
+      await page.getByRole('button', { name: 'login' }).click()
     })
 
-    it('a new note can be created', function() {
-      // ... 
+    test('a new note can be created', async ({ page }) => {
+      // ...
     })
-   
-  })
+  
+    // ...
+  })  
 })
+
 ```
 
 Ensin siis testataan kirjautumistoimintoa. Tämän jälkeen omassa describe-lohkossa on joukko testejä, jotka olettavat että käyttäjä on kirjaantuneena, kirjaantuminen hoidetaan alustuksen tekevän <i>beforeEach</i>-lohkon sisällä. 
 
 Kuten aiemmin jo todettiin, jokainen testi suoritetaan alkutilasta, eli vaikka testi on koodissa alempana, se ei aloita samasta tilasta mihin ylempänä koodissa olevat testit ovat jääneet!  
 
-Cypressin dokumentaatio neuvoo meitä seuraavasti: [Fully test the login flow – but only once](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Logging-in). Eli sen sijaan että tekisimme <i>beforeEach</i>-lohkossa kirjaantumisen lomaketta käyttäen, suosittelee Cypress että kirjaantuminen tehdään [UI:n ohi](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Bypassing-your-UI), tekemällä suoraan backendiin kirjaantumista vastaava HTTP-operaatio. Syynä tälle on se, että suoraan backendiin tehtynä kirjautuminen on huomattavasti nopeampi kuin lomakkeen täyttämällä. 
+Vanha E2E-testaajan viisausu kuuluu _Fully test the login flow – but only once_. Eli sen sijaan että tekisimme <i>beforeEach</i>-lohkossa kirjaantumisen lomaketta käyttäen, on parempi idea että kirjaantuminen tehdään UI:n ohi, tekemällä suoraan backendiin kirjaantumista vastaava HTTP-operaatio. Syynä tälle on se, että suoraan backendiin tehtynä kirjautuminen on huomattavasti nopeampi kuin lomakkeen täyttämällä. 
 
-Tilanteemme on hieman monimutkaisempi kuin Cypressin dokumentaation esimerkissä, sillä kirjautumisen yhteydessä sovelluksemme tallettaa kirjautuneen käyttäjän tiedot localStorageen. Sekin toki onnistuu. Koodi on seuraavassa
+Muutetaan _beforeEach_-lohkossa tapahtuvaa kirjautumista seuraavasti: 
 
 ```js 
-describe('when logged in', function() {
-  beforeEach(function() {
-    // highlight-start
-    cy.request('POST', 'http://localhost:3001/api/login', {
-      username: 'mluukkai', password: 'salainen'
-    }).then(response => {
-      localStorage.setItem('loggedNoteappUser', JSON.stringify(response.body))
-      cy.visit('http://localhost:5173')
-    })
-    // highlight-end
-  })
+describe('Note app', () => {
+  // ...
 
-  it('a new note can be created', function() {
+  describe('when logged in', () => {
+    beforeEach(async ({ page, request }) => {
+      // highlight-start 
+      const response = await request.post('http://localhost:3001/api/login', {
+        data: {
+          name: 'Matti Luukkainen',
+          username: 'mluukkai',
+          password: 'salainen'
+        }
+      })
+
+      await page.evaluate((body) => {
+        localStorage.setItem('loggedNoteappUser', JSON.stringify(body));
+      }, await response.json())
+      page.reload()
+      // highlight-end
+    })
+
+    it('a new note can be created', function() {
+      // ...
+    })
+
     // ...
   })
 
@@ -765,34 +757,40 @@ describe('when logged in', function() {
 })
 ```
 
-Komennon [cy.request](https://docs.cypress.io/api/commands/request.html) tulokseen päästään käsiksi _then_-metodin avulla sillä sisäiseltä toteutukseltaan <i>cy.request</i> kuten muutkin Cypressin komennot ovat [eräänlaisia promiseja](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Commands-Are-Promises). Käsittelijäfunktio tallettaa kirjautuneen käyttäjän tiedot localStorageen ja lataa sivun uudelleen. Tämän jälkeen käyttäjä on kirjautuneena sovellukseen samalla tavalla kuin jos kirjautuminen olisi tapahtunut kirjautumislomakkeen täyttämällä.
+API:n läpi tapahtuva kirjautuminen tehdään tuttuun tapaan parametrina saatavan olion _request_ metodilla [post](https://playwright.dev/docs/api/class-apirequestcontext#api-request-context-post). Vastauksena saatu token talletetaan localStorageen testattavaa sovellusta vastaavan olion _page_ metodilla [evaluate](https://playwright.dev/docs/api/class-page#page-evaluate). Sivu uudelleenladataan metodilla [reload](https://playwright.dev/docs/api/class-page#page-reload) tokenin tallennuksen jäleen.
 
-Jos ja kun sovellukselle kirjoitetaan lisää testejä, joudutaan kirjautumisen hoitavaa koodia soveltamaan useassa paikassa. Koodi kannattaakin eristää itse määritellyksi [komennoksi](https://docs.cypress.io/api/cypress-api/custom-commands.html).
+Jos ja kun sovellukselle kirjoitetaan lisää testejä, joudutaan kirjautumisen hoitavaa koodia soveltamaan useassa paikassa. Koodi kannattaakin eristää apufunktioksi, joka sijoitetaan esim. tiedostoon _tests/helper.js_: 
 
 Komennot määritellään tiedostoon <i>cypress/support/commands.js</i>. Kirjautumisen tekevä komento näyttää seuraavalta:
 
 ```js 
-Cypress.Commands.add('login', ({ username, password }) => {
-  cy.request('POST', 'http://localhost:3001/api/login', {
-    username, password
-  }).then(({ body }) => {
-    localStorage.setItem('loggedNoteappUser', JSON.stringify(body))
-    cy.visit('http://localhost:5173')
+const loginWith = async (page, request, username, password) => {
+  const response = await request.post('http://localhost:3001/api/login', {
+    data: { username, password, }
   })
-})
+
+  await page.evaluate((body) => {
+    localStorage.setItem('loggedNoteappUser', JSON.stringify(body));
+  }, await response.json())
+  
+  page.reload()
+}
+
+export { loginWith }
 ```
 
-Komennon käyttö on helppoa, testi yksinkertaistuu ja selkeytyy:
+Testi yksinkertaistuu ja selkeytyy:
 
-```js 
-describe('when logged in', function() {
-  beforeEach(function() {
-    // highlight-start
-    cy.login({ username: 'mluukkai', password: 'salainen' })
-    // highlight-end
-  })
+```js
+describe('Note app', () => {
+  // ...
 
-  it('a new note can be created', function() {
+  describe('when logged in', () => {
+    beforeEach(async ({ page, request }) => {
+      await loginWith(page, request, 'mluukkai', 'salainen')
+    })
+
+  test('a new note can be created', () => {
     // ...
   })
 
