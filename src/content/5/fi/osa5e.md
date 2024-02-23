@@ -562,7 +562,6 @@ describe('Note app', () => {
         await page.getByRole('button', { name: 'new note' }).click()
         await page.getByRole('textbox').fill('another note by playwright')
         await page.getByRole('button', { name: 'save' }).click()
-        await expect(await page.getByText('another note by playwright')).toBeVisible()
       })
   
       test('it can be made important', async ({ page }) => {
@@ -761,18 +760,18 @@ API:n läpi tapahtuva kirjautuminen tehdään tuttuun tapaan parametrina saatava
 
 Jos ja kun sovellukselle kirjoitetaan lisää testejä, joudutaan kirjautumisen hoitavaa koodia soveltamaan useassa paikassa. Koodi kannattaakin eristää apufunktioksi, joka sijoitetaan esim. tiedostoon _tests/helper.js_: 
 
-Komennot määritellään tiedostoon <i>cypress/support/commands.js</i>. Kirjautumisen tekevä komento näyttää seuraavalta:
-
 ```js 
 const loginWith = async (page, request, username, password) => {
   const response = await request.post('http://localhost:3001/api/login', {
     data: { username, password, }
   })
 
+  const jsonResponse = await response.json()
+
   await page.evaluate((body) => {
     localStorage.setItem('loggedNoteappUser', JSON.stringify(body));
-  }, await response.json())
-  
+  }, jsonResponse)
+
   page.reload()
 }
 
@@ -804,23 +803,22 @@ Sama koskee oikeastaan myös uuden muistiinpanon luomista. Sitä varten on olema
 describe('Note app', function() {
   // ...
 
-  describe('when logged in', function() {
-    it('a new note can be created', function() {
-      cy.contains('new note').click()
-      cy.get('input').type('a note created by cypress')
-      cy.contains('save').click()
-
-      cy.contains('a note created by cypress')
+  describe('when logged in', () => {
+    test('a new note can be created', async ({ page }) => {
+      await page.getByRole('button', { name: 'new note' }).click()
+      await page.getByRole('textbox').fill('a note created by playwright')
+      await page.getByRole('button', { name: 'save' }).click()
+      await expect(page.getByText('a note created by playwright')).toBeVisible()
     })
-
-    describe('and a note exists', function () {
-      beforeEach(function () {
-        cy.contains('new note').click()
-        cy.get('input').type('another note cypress')
-        cy.contains('save').click()
+  
+    describe('and a note exists', () => {
+      beforeEach(async ({ page }) => {
+        await page.getByRole('button', { name: 'new note' }).click()
+        await page.getByRole('textbox').fill('another note by playwright')
+        await page.getByRole('button', { name: 'save' }).click()
       })
-
-      it('it can be made important', function () {
+  
+      test('it can be made important', async ({ page }) => {
         // ...
       })
     })
@@ -828,47 +826,60 @@ describe('Note app', function() {
 })
 ```
 
-Eristetään myös muistiinpanon lisääminen omaksi komennoksi, joka tekee lisäämisen suoraan HTTP POST:lla:
+Eristetään myös muistiinpanon lisääminen omaksi komennoksi, joka tekee lisäämisen suoraan HTTP POST:lla. Tiedosto _tests/helper.js_ laajenee seuraavasti:
 
 ```js
-Cypress.Commands.add('createNote', ({ content, important }) => {
-  cy.request({
-    url: 'http://localhost:3001/api/notes',
-    method: 'POST',
-    body: { content, important },
+let jsonResponse = null // highlight-line
+
+const loginWith = async (page, request, username, password) => {
+  const response = await request.post('http://localhost:3001/api/login', {
+    data: { username, password, }
+  })
+
+  jsonResponse = await response.json()
+
+  await page.evaluate((jsonResponse) => {
+    localStorage.setItem('loggedNoteappUser', JSON.stringify(jsonResponse));
+  }, jsonResponse)
+
+  page.reload()
+}
+
+// highlight-start
+const createNote = async (page, request, content, important) => {
+  await request.post('http://localhost:3001/api/notes', {
+    data: { content, important, },
     headers: {
-      'Authorization': `Bearer ${JSON.parse(localStorage.getItem('loggedNoteappUser')).token}`
+      'Authorization': `Bearer ${jsonResponse.token}`
     }
   })
 
-  cy.visit('http://localhost:5173')
-})
+  page.reload()
+}
+// highlight-end
+
+export { loginWith, createNote }
 ```
 
-Komennon suoritus edellyttää, että käyttäjä on kirjaantuneena sovelluksessa ja käyttäjän tiedot talletettuna sovelluksen localStorageen.
+Komennon suoritus edellyttää, että käyttäjä on kirjaantunut sovellukseen API:n kautta.
 
 Testin alustuslohko yksinkertaistuu seuraavasti:
 
 ```js
-describe('Note app', function() {
+describe('Note app', () => {
   // ...
 
-  describe('when logged in', function() {
-    it('a new note can be created', function() {
+  describe('when logged in',  () => {
+    test('a new note can be created', ({ page }) => {
       // ...
     })
 
-    describe('and a note exists', function () {
-      beforeEach(function () {
-        // highlight-start
-        cy.createNote({
-          content: 'another note cypress',
-          important: true
-        })
-        // highlight-end
+    describe('and a note exists', () => {
+      beforeEach(async ({ page, request }) => {
+        await createNote(page, request, 'another note by playwright', true) // highlight-line
       })
 
-      it('it can be made important', function () {
+      test('it can be made important', ({ page }) => {
         // ...
       })
     })
@@ -876,71 +887,48 @@ describe('Note app', function() {
 })
 ```
 
-Testeissämme on vielä eräs ikävä piirre. Sovelluksen osoite <i>http:localhost:5173</i> on kovakoodattuna moneen kohtaan.
-
-Määritellään sovellukselle <i>baseUrl</i> Cypressin valmiiksi generoimaan [konfiguraatiotiedostoon](https://docs.cypress.io/guides/references/configuration) <i>cypress.config.js</i>:
+Testeissämme on vielä eräs ikävä piirre. Sovelluksen frontendin osoite <i>http:localhost:5173</i> sekä backendin osoite <i>http:localhost:3001</i> on kovakoodattuna testeihin. Näistä oikeastaan backendin osoite on turha, sillä frontendin Vite-konfiguraatioon on määritelty proxy, joka forwardoi kaikki osoitteeseen <i>http:localhost:5173/api</i> menevät frontendin tekemät pyynnöt backendiin:
 
 ```js
-const { defineConfig } = require("cypress")
-
-module.exports = defineConfig({
-  e2e: {
-    setupNodeEvents(on, config) {
-    },
-    baseUrl: 'http://localhost:5173' // highlight-line
+export default defineConfig({
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+      },
+    }
   },
+  // ...
 })
 ```
 
-Kaikki testeissä olevat sovelluksen osoitetta käyttävät komennot
+Voimme siis korvata testeissä kaikki osoitteet _http://localhost:3001/api/..._ osoitteella _http://localhost:5173/api/..._
+
+Määrittellään sovellukselle <i>baseUrl</i>:in testien konfiguraatiotiedostoon <i>playwright.config.js</i>: 
 
 ```js
-cy.visit('http://localhost:5173')
+module.exports = defineConfig({
+  // ...
+  use: {
+    baseURL: 'http://localhost:5173',
+  },
+  // ...
+}
+```
+
+Kaikki testeissä olevat sovelluksen urlia käyttävät komennot esim.
+
+```js
+await page.goto('http://localhost:5173')
+await page.post('http://localhost:5173/api/tests/reset')
 ```
 
 voidaan muuttaa muotoon
 
 ```js
-cy.visit('')
-```
-
-Testeihin jää edelleen backendin kovakoodattu osoite <i>http://localhost:3001</i>. Muut testien käyttämät osoitteet Cypressin [dokumentaatio](https://docs.cypress.io/guides/guides/environment-variables) kehoittaa määrittelemään ympäristömuutujina.
-
-Laajennetaan konfiguraatiotiedostoa <i>cypress.config.js</i> seuraavasti:
-
-```js
-const { defineConfig } = require("cypress")
-
-module.exports = defineConfig({
-  e2e: {
-    setupNodeEvents(on, config) {
-    },
-    baseUrl: 'http://localhost:5173',
-  },
-  // highlight-start
-  env: {
-    BACKEND: 'http://localhost:3001/api'
-  }
-  // highlight-end
-})
-```
-
-Korvataan testeistä kaikki backendin osoitteet seuraavaan tapaan
-
-```js
-describe('Note ', function() {
-  beforeEach(function() {
-    cy.visit('')
-    cy.request('POST', `${Cypress.env('BACKEND')}/testing/reset`) // highlight-line
-    const user = {
-      name: 'Matti Luukkainen',
-      username: 'mluukkai',
-      password: 'salainen'
-    }
-    cy.request('POST', `${Cypress.env('BACKEND')}/users`, user) // highlight-line
-  })
-  // ...
-})
+await page.goto('/')
+await page.post('/api/tests/reset')
 ```
 
 Testit ja frontendin koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-10), branchissa <i>part5-10</i>.
