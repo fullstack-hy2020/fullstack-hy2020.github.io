@@ -411,11 +411,12 @@ const History = (props) => {
 }
 
 // highlight-start
-const Button = ({ handleClick, text }) => (
+const Button = ({ handleClick, text }) => {
+return (
   <button onClick={handleClick}>
     {text}
   </button>
-)
+)}
 // highlight-end
 
 const App = () => {
