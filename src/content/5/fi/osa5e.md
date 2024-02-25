@@ -675,7 +675,7 @@ test('login fails with wrong password', async ({ page }) =>{
 })
 ```
 
-### Operaatioiden tekeminen käyttöliittymän "ohi"
+### Testien apufunktiot
 
 Sovelluksemme testit näyttävät tällä hetkellä seuraavalta:
 
@@ -719,60 +719,14 @@ Ensin siis testataan kirjautumistoimintoa. Tämän jälkeen omassa describe-lohk
 
 Kuten aiemmin jo todettiin, jokainen testi suoritetaan alkutilasta, eli vaikka testi on koodissa alempana, se ei aloita samasta tilasta mihin ylempänä koodissa olevat testit ovat jääneet!  
 
-Vanha E2E-testaajan viisausu kuuluu _Fully test the login flow – but only once_. Eli sen sijaan että tekisimme <i>beforeEach</i>-lohkossa kirjaantumisen lomaketta käyttäen, on parempi idea että kirjaantuminen tehdään UI:n ohi, tekemällä suoraan backendiin kirjaantumista vastaava HTTP-operaatio. Syynä tälle on se, että suoraan backendiin tehtynä kirjautuminen on huomattavasti nopeampi kuin lomakkeen täyttämällä. 
-
-Muutetaan _beforeEach_-lohkossa tapahtuvaa kirjautumista seuraavasti: 
+Myös testeissä kannattaa pyrkiä toisteettomaan koodiin. Eristetään kirjautumisen hoitava koodi apufunktioksi, joka sijoitetaan esim. tiedostoon _tests/helper.js_: 
 
 ```js 
-describe('Note app', () => {
-  // ...
-
-  describe('when logged in', () => {
-    beforeEach(async ({ page, request }) => {
-      // highlight-start 
-      const response = await request.post('http://localhost:3001/api/login', {
-        data: {
-          name: 'Matti Luukkainen',
-          username: 'mluukkai',
-          password: 'salainen'
-        }
-      })
-
-      await page.evaluate((body) => {
-        localStorage.setItem('loggedNoteappUser', JSON.stringify(body));
-      }, await response.json())
-      page.reload()
-      // highlight-end
-    })
-
-    it('a new note can be created', function() {
-      // ...
-    })
-
-    // ...
-  })
-
-  // ...
-})
-```
-
-API:n läpi tapahtuva kirjautuminen tehdään tuttuun tapaan parametrina saatavan olion _request_ metodilla [post](https://playwright.dev/docs/api/class-apirequestcontext#api-request-context-post). Vastauksena saatu token talletetaan localStorageen testattavaa sovellusta vastaavan olion _page_ metodilla [evaluate](https://playwright.dev/docs/api/class-page#page-evaluate). Sivu uudelleenladataan metodilla [reload](https://playwright.dev/docs/api/class-page#page-reload) tokenin tallennuksen jäleen.
-
-Jos ja kun sovellukselle kirjoitetaan lisää testejä, joudutaan kirjautumisen hoitavaa koodia soveltamaan useassa paikassa. Koodi kannattaakin eristää apufunktioksi, joka sijoitetaan esim. tiedostoon _tests/helper.js_: 
-
-```js 
-const loginWith = async (page, request, username, password) => {
-  const response = await request.post('http://localhost:3001/api/login', {
-    data: { username, password, }
-  })
-
-  const jsonResponse = await response.json()
-
-  await page.evaluate((body) => {
-    localStorage.setItem('loggedNoteappUser', JSON.stringify(body));
-  }, jsonResponse)
-
-  page.reload()
+const loginWith = async (page, username, password)  => {
+  await page.getByRole('button', { name: 'log in' }).click()
+  await page.getByTestId('username').fill(username)
+  await page.getByTestId('password').fill(password)
+  await page.getByRole('button', { name: 'login' }).click()
 }
 
 export { loginWith }
@@ -782,11 +736,14 @@ Testi yksinkertaistuu ja selkeytyy:
 
 ```js
 describe('Note app', () => {
-  // ...
+  test('user can log in', async ({ page }) => {
+    await loginWith(page, 'mluukkai', 'salainen')
+    await expect(await page.getByText('Matti Luukkainen logged in')).toBeVisible()
+  })
 
   describe('when logged in', () => {
-    beforeEach(async ({ page, request }) => {
-      await loginWith(page, request, 'mluukkai', 'salainen')
+    beforeEach(async ({ page }) => {
+      await loginWith(page, 'mluukkai', 'salainen')
     })
 
   test('a new note can be created', () => {
@@ -826,35 +783,23 @@ describe('Note app', function() {
 })
 ```
 
+Playwright tarjoaa myös [ratkaisun](https://playwright.dev/docs/auth) missä kirjaantuminen suoritetaan kertaalleen ennen testejä, ja jokainen testi aloittaa tilanteeasta missä sovellukseen ollaan jo kirjaantuneena. Jotta voisimme hyödyntää tätä tapaa, tulisi sovelluksen testidata alustaminen tehdä hienojakoisemmin kuin nyt. Nykyisessä ratkaisussahan tietokanta nollataan ennen jokaista testiä, ja tämän takia kirjaantuminen ennen testejä on mahdotonta. Jotta voisimme käyttää Plywrightin tarjoamaa ennen testejä tehtävää kirjautumista, tulisi käyttäjä alustaa vain kertaalleen ennen testejä. Pitäydymme yksinkertaisuuden vuoksi nykyisessä ratkaisussamme.
+
 Eristetään myös muistiinpanon lisääminen omaksi komennoksi, joka tekee lisäämisen suoraan HTTP POST:lla. Tiedosto _tests/helper.js_ laajenee seuraavasti:
 
 ```js
-let jsonResponse = null // highlight-line
-
-const loginWith = async (page, request, username, password) => {
-  const response = await request.post('http://localhost:3001/api/login', {
-    data: { username, password, }
-  })
-
-  jsonResponse = await response.json()
-
-  await page.evaluate((jsonResponse) => {
-    localStorage.setItem('loggedNoteappUser', JSON.stringify(jsonResponse));
-  }, jsonResponse)
-
-  page.reload()
+const loginWith = async (page, username, password)  => {
+  await page.getByRole('button', { name: 'log in' }).click()
+  await page.getByTestId('username').fill(username)
+  await page.getByTestId('password').fill(password)
+  await page.getByRole('button', { name: 'login' }).click()
 }
 
 // highlight-start
-const createNote = async (page, request, content, important) => {
-  await request.post('http://localhost:3001/api/notes', {
-    data: { content, important, },
-    headers: {
-      'Authorization': `Bearer ${jsonResponse.token}`
-    }
-  })
-
-  page.reload()
+const createNote = async (page, content) => {
+  await page.getByRole('button', { name: 'new note' }).click()
+  await page.getByRole('textbox').fill(content)
+  await page.getByRole('button', { name: 'save' }).click()
 }
 // highlight-end
 
@@ -875,8 +820,8 @@ describe('Note app', () => {
     })
 
     describe('and a note exists', () => {
-      beforeEach(async ({ page, request }) => {
-        await createNote(page, request, 'another note by playwright', true) // highlight-line
+      beforeEach(async ({ page }) => {
+        await createNote(page, 'another note by playwright', true)
       })
 
       test('it can be made important', ({ page }) => {
@@ -938,53 +883,38 @@ Testit ja frontendin koodi on kokonaisuudessaan [GitHubissa](https://github.com/
 Tarkastellaan vielä aiemmin tekemäämme testiä, joka varmistaa että muistiinpanon tärkeyttä on mahdollista muuttaa. Muutetaan testin alustuslohkoa siten, että se luo yhden sijaan kolme muistiinpanoa:
 
 ```js
-describe('when logged in', function() {
-  describe('and several notes exist', function () {
-    beforeEach(function () {
+describe('when logged in', () => {
+  // ...
+  describe('and several notes exists', () => {
+    beforeEach(async ({ page, request }) => {
       // highlight-start
-      cy.createNote({ content: 'first note', important: false })
-      cy.createNote({ content: 'second note', important: false })
-      cy.createNote({ content: 'third note', important: false })
+      await createNote(page, request, 'first note', true)
+      await createNote(page, request, 'second note', true)
+      await createNote(page, request, 'third note', true)
       // highlight-end
     })
 
-    it('one of those can be made important', function () {
-      cy.contains('second note')
-        .contains('make important')
-        .click()
+    test('one of those can be made important', async ({ page }) => {
+      const secondNoteElement = await page.getByText('second note')
 
-      cy.contains('second note')
-        .contains('make not important')
+      await secondNoteElement.getByRole('button', { name: 'make not important' }).click()
+      await expect(secondNoteElement.getByText('make important')).toBeVisible()
     })
   })
 })
 ```
 
-Miten komento [cy.contains](https://docs.cypress.io/api/commands/contains.html) tarkalleen ottaen toimii?
+Testi etsii nyt metodin _getByRole_ avulla toisena luodun muistiinpanoa vastaavan elementin ja tallettaa sen muuttujaan. Tämän jälkeen elementin sisältä etsitään nappi missä on teksti _make not important_ ja painetaan sitä. Lopuksi teksi varmistaa että napin teksiksi on muuttunut _make important_.
 
-Kun klikkaamme komentoa _cy.contains('second note')_ Cypressin [test runnerista](https://docs.cypress.io/guides/core-concepts/test-runner.html) nähdään, että komento löytää elementin, jonka sisällä on teksti <i>second note</i>:
-
-![Klikatessa vasemmalla olevasta testisteppien listasta komentoa, renderöityy oikealle sovelluksen sen hetkinen tila, missä löydetty elementti on merkattuna korostettuna.](../../images/5/34new.png)
-
-Klikkaamalla seuraavaa riviä _.contains('make important')_, nähdään että löydetään nimenomaan 
-<i>second note</i>:a vastaava tärkeyden muutoksen tekevä nappi:
-
-![Klikatessa vasemmalla olevasta testisteppien listasta komentoa, korostuu oikealle valintaa vastaava nappi](../../images/5/35new.png)
-
-Peräkkäin ketjutettuna toisena oleva <i>contains</i>-komento siis <i>jatkaa</i> hakua ensimmäisen komennon löytämän komponentin sisältä.
-
-Jos emme ketjuttaisi komentoja, eli olisimme kirjoittaneet 
+Testi olisi voitu kirjoittaa myös ilman apumuuttujaa:
 
 ```js
-cy.contains('second note')
-cy.contains('make important').click()
+test('one of those can be made important', async ({ page }) => {
+  await page.getByText('second note').getByRole('button', { name: 'make not important' }).click()
+
+  await expect(wait page.getByText('second note').getByText('make important')).toBeVisible()
+})
 ```
-
-tulos olisi ollut aivan erilainen, toinen rivi painaisi väärän muistiinpanon nappia: 
-
-![Renderöityy virhe AssertionError: Timed out retrying after 4000ms: Expected to find content 'make not important'.](../../images/5/36new.png)
-
-Testejä tehdessä kannattaa siis ehdottomasti varmistaa test runnerista, että testit etsivät niitä elementtejä, joita niiden on tarkoitus tutkia!
 
 Muutetaan komponenttia _Note_ siten, että muistiinpanon teksti renderöitään <i>span</i>-komponentin sisälle
 
@@ -1002,92 +932,42 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-Testit hajoavat! Kuten test runner paljastaa, komento _cy.contains('second note')_ palauttaakin nyt ainoastaan tekstin sisältävän komponentin, ja nappi on sen ulkopuolella:
+Testit hajoavat! Kuten test runner paljastaa, komento _await page.getByText('second note')_ palauttaakin nyt ainoastaan tekstin sisältävän komponentin, ja nappi on sen ulkopuolella.
 
-![Oikealle puolelle havainnollistuu, että fokus osuu napin sijaan pelkkään tekstiin](../../images/5/37new.png)
 
 Eräs tapa korjata ongelma on seuraavassa:
 
 ```js
-it('other of those can be made important', function () {
-  cy.contains('second note').parent().find('button').click()
-  cy.contains('second note').parent().find('button')
-    .should('contain', 'make not important')
+test('one of those can be made important', async ({ page }) => {
+  const secondNoteText = await page.getByText('second note') // highlight-line
+  const secondNoteElement = await secondNoteText.locator('..') // highlight-line
+
+  await secondNoteElement.getByRole('button', { name: 'make not important' }).click()
+  await expect(secondNoteElement.getByText('make important')).toBeVisible()
 })
 ```
 
-Ensimmäisellä rivillä etsitään komennon [parent](https://docs.cypress.io/api/commands/parent.htm) tekstin <i>second note</i> sisältävän elementin vanhemman alla oleva nappi ja painetaan sitä. Toinen rivi varmistaa, että napin teksti muuttuu.
+Ensimmäinen rivi etsii nyt toiseen muistiinpanoon liittyvän tekstin sisältävän _span_-elementin. Toisella rivillä käytetään funktiota _locator_ ja annetaan parametriksi _.._, joka hakee elementin vanhempielementin. Funktio locator on hyvin joustava, ja hyödynnämme tässä sitä että se hyväksyy [parametrikseen](https://playwright.dev/docs/locators#locate-by-css-or-xpath) CSS-selektorien lisäksi myös [XPath](https://developer.mozilla.org/en-US/docs/Web/XPath)-muotoisen selektorin. Sama olisi mahdollista ilmaista myös CSS:n avulla, mutta tässä tapauksessa XPath tarjoaa yksinkertaisimman tavan elementin vanhemman etsimiseen.
 
-Huomaa, että napin etsimiseen käytetään komentoa [find](https://docs.cypress.io/api/commands/find.html#Syntax). Komento [cy.get](https://docs.cypress.io/api/commands/get.html) ei sovellu tähän tilanteeseen, sillä se etsii elementtejä aina <i>koko</i> sivulta ja palauttaisi nyt kaikki sovelluksen viisi nappia.
-
-Testissä on ikävästi copypastea, rivien alku eli napin etsivä koodi on sama. 
-Tälläisissä tilanteissa on mahdollista hyödyntää komentoa [as](https://docs.cypress.io/api/commands/as.html): 
+Testi voidaan toki kirjoittaa myös ainoastaan yhtä apumuuttujaa käyttäen:
 
 ```js
-it('other of those can be made important', function () {
-  cy.contains('second note').parent().find('button').as('theButton')
-  cy.get('@theButton').click()
-  cy.get('@theButton').should('contain', 'make not important')
+test('one of those can be made important', async ({ page }) => {
+  const secondNoteElement = await page.getByText('second note').locator('..')
+  await secondNoteElement.getByRole('button', { name: 'make not important' }).click()
+  await expect(secondNoteElement.getByText('make important')).toBeVisible()
 })
 ```
-
-Nyt ensimmäinen rivi etsii oikean napin, ja tallentaa sen komennon <i>as</i> avulla nimellä <i>theButton</i>. Seuraavat rivit pääsevät nimettyyn elementtiin käsiksi komennolla <i>cy.get('@theButton')</i>.
 
 ### Testien suoritus ja debuggaaminen
 
-Vielä osan lopuksi muutamia huomioita Cypressin toimintaperiaatteesta sekä testien debuggaamisesta.
+Lokaattorien etsiminen
 
-Cypressissä testien kirjoitusasu antaa vaikutelman, että testit ovat normaalia JavaScript-koodia, ja että voisimme esim. yrittää seuraavaa:
+VSCode
 
-```js
-const button = cy.contains('log in')
-button.click()
-debugger
-cy.contains('logout').click()
-```
 
-Näin kirjoitettu koodi ei kuitenkaan toimi. Kun Cypress suorittaa testin, se lisää jokaisen _cy_-komennon suoritusjonoon. Kun testimetodin koodi on suoritettu loppuun, suorittaa Cypress yksi kerrallaan suoritusjonoon lisätyt _cy_-komennot.
 
-Cypressin komennot palauttavat aina _undefined_, eli yllä olevassa koodissa komento _button.click()_ aiheuttaisi virheen ja yritys käynnistää debuggeri ei pysäyttäisi koodia Cypress-komentojen suorituksen välissä, vaan jo ennen kuin yhtään Cypress-komentoa olisi suoritettu.
-
-Cypress-komennot ovat <i>promisen kaltaisia</i>, joten jos niiden palauttamia arvoja halutaan käsitellä, se tulee tehdä komennon [then](https://docs.cypress.io/api/commands/then.html) avulla. Esim. seuraava testi tulostaisi sovelluksen <i>kaikkien</i> nappien lukumäärän ja klikkaisi napeista ensimmäistä:
-
-```js
-it('then example', function() {
-  cy.get('button').then( buttons => {
-    console.log('number of buttons', buttons.length)
-    cy.wrap(buttons[0]).click()
-  })
-})
-```
-
-Myös testien suorituksen pysäyttäminen debuggeriin on [mahdollista](https://docs.cypress.io/api/commands/debug.html). Debuggeri käynnistyy vain jos Cypress test runnerin developer-konsoli on auki. 
-
-Developer-konsoli on monin tavoin hyödyllinen testejä debugatessa. Network-tabilla näkyvät testattavan sovelluksen tekemät HTTP-pyynnöt, ja console-välilehti kertoo testin komentoihin liittyviä tietoja:
-
-![Console-välilehti havainnollistaa testien löytämiä elementtejä.](../../images/5/38new.png)
-
-Olemme toistaiseksi suorittaneet Cypress-testejä ainoastaan graafisen test runnerin kautta. Testit on luonnollisesti mahdollista suorittaa myös [komentoriviltä](https://docs.cypress.io/guides/guides/command-line.html). Lisätään vielä sovellukselle npm-skripti tätä tarkoitusta varten
-
-```js
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "eslint": "eslint .",
-    "cypress:open": "cypress open",
-    "test:e2e": "cypress run" // highlight-line
-  },
-```
-
-Nyt siis voimme suorittaa Cypress-testit komentoriviltä komennolla <i>npm run test:e2e</i>
-
-![Komennon suoritus tulostaa konsoliin tekstuaalisen raportin joka kertoo 5 läpimenneestä testistä.](../../images/5/39new.png)
-
-Huomaa, että testien suorituksesta tallentuu video hakemistoon <i>cypress/videos/</i>, hakemisto lienee syytä gitignoroida. Videoiden teko on myös mahdollista ottaa [pois päältä](https://docs.cypress.io/guides/guides/screenshots-and-videos#Videos).
-
-Testien ja frontendin koodin lopullinen versio on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-11), branchissa <i>part5-11</i>.
+Testien lopullinen versio on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-11), branchissa <i>part5-11</i>.
 
 </div>
 
