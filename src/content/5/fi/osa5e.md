@@ -959,13 +959,126 @@ test('one of those can be made important', async ({ page }) => {
 })
 ```
 
-### Testien suoritus ja debuggaaminen
+### Testien kehittäminen ja debuggaaminen
 
-Lokaattorien etsiminen
+Playwright tarjoaa muutamia melki hyviä testin kehittämistä ja debuggaamista auttavia työkaluja. [Dokumentaatiota](https://playwright.dev/docs/intro) kannattaa ehdottomasti selailla, eritysen tärkeitä ovat
+-  [lokaattoreita](https://playwright.dev/docs/locators) kertova osa antaa hyviä vihjeitä testattavien elementtien etsimiseen
+- osa [actions](https://playwright.dev/docs/input) kertoo miten selaimen kanssa käytävää vuorovaikutusta on mahdollista simuloida testeissä
+- [assertioista](https://playwright.dev/docs/test-assertions) kertova osa demonstroi mitä erilaisia testauksessa käytettäviä ekspektaatioita Playwright tarjoaa
 
-VSCode
+Tarkemmat detaljit löytyvät [API](https://playwright.dev/docs/api/class-playwright)-kuvauksesta, erityisen hyödyllisiä ovat testattavan sovelluksen selainikkunaa vastaavan komponentin [Page](https://playwright.dev/docs/api/class-page) kuvaus, sekä testeissä etsittyjä elementtejä vastaavan komponentin [Locator](https://playwright.dev/docs/api/class-locator)-kuvaus.
+
+Jos/kun testit eivät mene läpi ja herää epäilys, että vika on koodin sijaan testeissä, kannattaa testejä suorittaa [debug](https://playwright.dev/docs/debug#run-in-debug-mode-1)-moodissa.
+
+Seuraava komento suorittaa yksittäisen testin debug-moodissa:
+
+```
+npm test -- --debug -g 'a new note can be created'
+```
+
+Playwright-inspector näyttää testien etenemisen askel askeleelta. Yläreunan nuoli-piste-painike vie testejä yhden askeleen eteenpäin. Lokaattorien löytämät elementit sekä selaimen kanssa käyty interaktio visualisoituvat selaimeen:
+
+![](../../images/5/play6.png)
+
+Oletusarvoisesti debugatessa askelletaan testi läpi komento komennolta. Jos on kyse monimutkaisesta testistä, voi olla melko vaivalloista askeltaa testissä kiinnostavaan kohtaan asti. Liialta askellukselta voidaan välttyä lisäämällä juuri kiinnostavaa kohtaa ennen komento _await page.pause()_:
+
+```js
+describe('Note app', () => {
+  beforeEach(async ({ page, request }) => {
+    // ...
+  }
+
+  describe('when logged in', () => {
+    beforeEach(async ({ page }) => {
+      // ...
+    })
+
+    describe('and several notes exists', () => {
+      beforeEach(async ({ page }) => {
+        await createNote(page, 'first note')
+        await createNote(page, 'second note')
+        await createNote(page, 'third note')
+      })
+  
+      test('one of those can be made important', async ({ page }) => {
+        await page.pause() // highlight-line
+        const secondNoteElement = await page.getByText('second note').locator('..')
+        await secondNoteElement.getByRole('button', { name: 'make not important' }).click()
+        await expect(secondNoteElement.getByText('make important')).toBeVisible()
+      })
+    })
+  })
+})
+```
+
+Nyt testissä voidaan siirtyä kiinnostavaan kohtaan yhdellä askelella, painamalla inspectorissa vihreää nuolisymbolia.
+
+Debuggausmoodin sijaan tai rinnalla voi testien suorittaminen UI-moodissa olla hyödyllistä. 
+
+```
+npm run test -- --ui
+```
+
+Kun suoritamme testit, huomamme UI:ta tarkastelemalla mielenkiintoisen ilmiön:
+
+![](../../images/5/play7.png)
+
+Kyse on seuraavasta testistä:
+
+```js
+describe('and several notes exists', () => {
+  beforeEach(async ({ page }) => {
+    await createNote(page, 'first note')
+    await createNote(page, 'second note')
+    await createNote(page, 'third note')
+  })
+
+  test('one of those can be made important', async ({ page }) => {
+    const secondNoteElement = await page.getByText('second note').locator('..')
+    await secondNoteElement.getByRole('button', { name: 'make not important' }).click()
+    await expect(secondNoteElement.getByText('make important')).toBeVisible()
+  })
+})
+```
+
+Testi menee kyllä läpi, mutta näyttää siltä, että selain ei renderöi kaikkia lohkossa _beforeEach_ luotuja muistiinpanoja. Mistä on kyse?
+
+Syynä ongelmaan on se, että kun testi luo yhden muistiinpanon, se aloittaa seuraavan luomisen jo ennen kuin palvelin on vastannut, ja lisätty muistiinpano on renderöidään ruudulle. Tämä taas saattaa aiheuttaa sen, että jotain muistiinpanoja katoaa, sillä selain päivitetään palvelimen vastatessa perustuen siihen muistiinpanojen tilaan mikä kyseisen lisäysoperaation alussa oli.
+
+Ongelma korjaantuu "hidastamalla" lisäysoperaatioita siten, että lisäyksen jälkeen odotetaan komennolla [waitFor](https://playwright.dev/docs/api/class-locator#locator-wait-for), että lisätty muistinpano ehditään renderöidä:
+
+```js
+const createNote = async (page, content) => {
+  await page.getByRole('button', { name: 'new note' }).click()
+  await page.getByRole('textbox').fill(content)
+  await page.getByRole('button', { name: 'save' }).click()
+  await page.getByText(content).waitFor() // hightlight-line
+}
+```
+
+Lähes samaan tapaan kuin UI-moodi, toimii Playwrightin [Trace Viewer](https://playwright.dev/docs/trace-viewer-intro). Ideana siinä on, se että testeistä tallennetaan "visuaalinen jälki", jota voidaan tarkastella tarvittaessa testien suorituksen jälkeen. Trace tallennetaan suorittamalla testit seuraavasti:
+
+```
+npm run test -- --trace on
+```
+
+Tracen pääsee tarvittaessa katsomaan komennolla 
+
+```
+npx playwright show-report
+```
+
+tai määrittelemällämme npm-skriptillä _npm run test:report_
+
+Trace näyttää lähes samalta kuin testien suoritus UI-moodissa:
 
 
+Locator
+
+
+Testien nauhoitus
+
+Komentorivin sijaan Playwrightiä voi käyttää myös [VS Code](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright)-pluginin kautta. Plugin tarjoaa monia käteviä ominaisuuksia, mm. breakpointien käytön testejä debugatessa.
 
 Testien lopullinen versio on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-11), branchissa <i>part5-11</i>.
 
