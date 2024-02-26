@@ -7,6 +7,9 @@ lang: en
 
 <div class="content">
 
+Note: This course material was updated in Feb 2024. Some updates are not compatible anymore with older material.
+We recommend a fresh start with this new Part 10 material. However, if you´re returning to this course after a break, and you want to continue the exercises in your older project, please use [Part 10 material before the upgrade](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/tree/e9784f36de8a0badc28fabde49e33e2959479177/src/content/10/en).
+
 So far we have implemented features to our application without any actual server communication. For example, the reviewed repositories list we have implemented uses mock data and the sign in form doesn't send the user's credentials to any authentication endpoint. In this section, we will learn how to communicate with a server using HTTP requests, how to use Apollo Client in a React Native application, and how to store data in the user's device.
 
 Soon we will learn how to communicate with a server in our application. Before we get to that, we need a server to communicate with. For this purpose, we have a completed server implementation in the [rate-repository-api](https://github.com/fullstack-hy2020/rate-repository-api) repository. The rate-repository-api server fulfills all our application's API needs during this part. It uses [SQLite](https://www.sqlite.org/index.html) database which doesn't need any setup and provides an Apollo GraphQL API along with a few REST API endpoints.
@@ -58,7 +61,7 @@ For a more detailed introduction to the Fetch API, read the [Using Fetch](https:
 
 Next, let's try the Fetch API in practice. The rate-repository-api server provides an endpoint for returning a paginated list of reviewed repositories. Once the server is running, you should be able to access the endpoint at [http://localhost:5000/api/repositories](http://localhost:5000/api/repositories) (unless you have changed the port). The data is paginated in a common [cursor based pagination format](https://graphql.org/learn/pagination/). The actual repository data is behind the <i>node</i> key in the <i>edges</i> array.
 
-Unfortunately, we can't access the server directly in our application by using the <i>http://localhost:5000/api/repositories</i> URL. To make a request to this endpoint in our application we need to access the server using its IP address in its local network. To find out what it is, open the Expo development tools by running <em>npm start</em>. In the console you should be able to see an URL starting with <i>exp://</i> below the QR code, after the "Metro waiting on" text:
+Unfortunately, if we´re using external device, we can't access the server directly in our application by using the <i>http://localhost:5000/api/repositories</i> URL. To make a request to this endpoint in our application we need to access the server using its IP address in its local network. To find out what it is, open the Expo development tools by running <em>npm start</em>. In the console you should be able to see an URL starting with <i>exp://</i> below the QR code, after the "Metro waiting on" text:
 
 ![metro console output with highlight over exp://<ip> url](../../images/10/26new.png)
 
@@ -180,7 +183,7 @@ npm install @apollo/client graphql
 Before we can start using Apollo Client, we will need to slightly configure the Metro bundler so that it handles the <i>.cjs</i> file extensions used by the Apollo Client. First, let's install the <i>@expo/metro-config</i> package which has the default Metro configuration:
 
 ```shell
-npm install @expo/metro-config@0.4.0
+npm install @expo/metro-config@0.17.4
 ```
 
 Then, we can add the following configuration to a <i>metro.config.js</i> in the root directory of our project:
@@ -200,16 +203,12 @@ Restart the Expo development tools so that changes in the configuration are appl
 Now that the Metro configuration is in order, let's create a utility function for creating the Apollo Client with the required configuration. Create a <i>utils</i> directory in the <i>src</i> directory and in that <i>utils</i> directory create a file <i>apolloClient.js</i>. In that file configure the Apollo Client to connect to the Apollo Server:
 
 ```javascript
-import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+import { ApolloClient, InMemoryCache } from '@apollo/client';
 
-const httpLink = createHttpLink({
-  // Replace the IP address part with your own IP address!
-  uri: 'http://192.168.1.33:4000/graphql',
-});
 
 const createApolloClient = () => {
   return new ApolloClient({
-    link: httpLink,
+    uri: 'http://192.168.1.100:4000/graphql',
     cache: new InMemoryCache(),
   });
 };
@@ -336,7 +335,7 @@ Every application will most likely run in more than one environment. Two obvious
 
 We have previously learned that we can provide running programs with environment variables. These variables can be defined in the command line or using environment configuration files such as <i>.env</i> files and third-party libraries such as <i>Dotenv</i>. Unfortunately, React Native doesn't have direct support for environment variables. However, we can access the Expo configuration defined in the <i>app.json</i> file at runtime from our JavaScript code. This configuration can be used to define and access environment dependant variables.
 
-The configuration can be accessed by importing the <em>Constants</em> constant from the <i>expo-constants</i> module as we have done a few times before. Once imported, the <em>Constants.manifest</em> property will contain the configuration. Let's try this by logging <em>Constants.manifest</em> in the <em>App</em> component:
+The configuration can be accessed by importing the <em>Constants</em> constant from the <i>expo-constants</i> module as we have done a few times before. Once imported, the <em>Constants.expoConfig</em> property will contain the configuration. Let's try this by logging <em>Constants.expoConfig</em> in the <em>App</em> component:
 
 ```javascript
 import { NativeRouter } from 'react-router-native';
@@ -349,7 +348,7 @@ import createApolloClient from './src/utils/apolloClient';
 const apolloClient = createApolloClient();
 
 const App = () => {
-  console.log(Constants.manifest); // highlight-line
+  console.log(Constants.expoConfig); // highlight-line
 
   return (
     <NativeRouter>
@@ -385,7 +384,8 @@ export default {
 };
 ```
 
-Expo has reserved an [extra](https://docs.expo.dev/guides/environment-variables/#using-app-manifest--extra) property in the configuration for any application-specific configuration. To see how this works, let's add an <em>env</em> variable into our application's configuration:
+Expo has reserved an [extra](https://docs.expo.dev/guides/environment-variables/#using-app-manifest--extra) property in the configuration for any application-specific configuration. 
+ To see how this works, let's add an <em>env</em> variable into our application's configuration. Note, that the older versions used (now deprecated) manifest instead of expoConfig.
 
 ```javascript
 export default {
@@ -399,7 +399,15 @@ export default {
 };
 ```
 
-Restart Expo development tools to apply the changes and you should see that the value of <em>Constants.manifest</em> property has changed and now includes the <em>extra</em> property containing our application-specific configuration. Now the value of the <em>env</em> variable is accessible through the <em>Constants.manifest.extra.env</em> property.
+
+
+If you make changes in configuration, the restart may not be enough. You may need to start the application with cache cleared by command:
+
+```javascript
+npx expo start --clear
+```
+
+Now, restart Expo development tools to apply the changes and you should see that the value of <em>Constants.expoConfig</em> property has changed and now includes the <em>extra</em> property containing our application-specific configuration. Now the value of the <em>env</em> variable is accessible through the <em>Constants.expoConfig.extra.env</em> property.
 
 Because using hard coded configuration is a bit silly, let's use an environment variable instead:
 
@@ -421,7 +429,7 @@ As we have learned, we can set the value of an environment variable through the 
 ENV=test npm start
 ```
 
-If you take a look at the logs, you should see that the <em>Constants.manifest.extra.env</em> property has changed.
+If you take a look at the logs, you should see that the <em>Constants.expoConfig.extra.env</em> property has changed.
 
 We can also load environment variables from an <em>.env</em> file as we have learned in the previous parts. First, we need to install the [Dotenv](https://www.npmjs.com/package/dotenv) library:
 
@@ -660,7 +668,7 @@ import Constants from 'expo-constants';
 import { setContext } from '@apollo/client/link/context'; // highlight-line
 
 // You might need to change this depending on how you have configured the Apollo Server's URI
-const { apolloUri } = Constants.manifest.extra;
+const { apolloUri } = Constants.expoConfig.extra;
 
 const httpLink = createHttpLink({
   uri: apolloUri,
