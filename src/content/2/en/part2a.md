@@ -460,7 +460,7 @@ Note that the <i>main</i> branch of the repository contains the code for a later
 
 ![GitHub branch screenshot](../../images/2/2e.png)
 
-If you clone the project, run the command _npm install_ before starting the application with _npm start_.
+If you clone the project, run the command _npm install_ before starting the application with _npm run dev_.
 
 ### When the Application Breaks
 

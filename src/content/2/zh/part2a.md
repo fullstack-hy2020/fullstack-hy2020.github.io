@@ -551,8 +551,8 @@ const App = ({ notes }) => {
 
 ![](../../images/2/2e.png)
 
-<!-- If you clone the project, run the command _npm install_ before starting the application with _npm start_.-->
- 如果你克隆了这个项目，在用_npm start_启动应用之前，运行_npm install_命令。
+<!-- If you clone the project, run the command _npm install_ before starting the application with _npm run dev_.-->
+ 如果你克隆了这个项目，在用_npm run dev_启动应用之前，运行_npm install_命令。
 
 ### When the Application Breaks
 

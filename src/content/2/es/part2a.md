@@ -460,7 +460,7 @@ Ten en cuenta que la rama _main_ del repositorio contiene el código de una vers
 
 ![Captura de pantalla de la rama de GitHub](../../images/2/2e.png)
 
-Si clonas el proyecto, ejecuta el comando _npm install_ antes de iniciar la aplicación con _npm start_.
+Si clonas el proyecto, ejecuta el comando _npm install_ antes de iniciar la aplicación con _npm run dev_.
 
 ### Cuando la aplicación se rompe
 
