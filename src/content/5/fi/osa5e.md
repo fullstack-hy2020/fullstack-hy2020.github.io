@@ -7,10 +7,11 @@ lang: fi
 
 <div class="content">
 
-[Playwright](https://playwright.dev/)... ero Cypressiin
+[Playwright](https://playwright.dev/) on siis End to end -testien uusi tulokas, jonka suosio lähti vuoden 2023 loppupuolella räjähdysmäiseen nousuun. Playwright on käytön helppoudessa suurin piirtein Cypressin tasolla. Toimintaperiaatteeltaan kirjastot poikkeavat hieman toisistaan.  Cypressin toimintaperiaate poikkeaa radikaalisti useimmista E2E-testaukseen sopivista kirjastoista, sillä Cypress-testit ajetaan kokonaisuudessaan selaimen sisällä. Playwrightin testit suoritetaan Node-prosessissa, joka on yhteydessä selaimeen ohjelmointirajapintojen kautta.
 
-TODO: [Cypress](https://www.cypress.io/)-niminen E2E-testaukseen soveltuva kirjasto on kasvattanut nopeasti suosiotaan viimeisten vuosien aikana. Cypress on poikkeuksellisen helppokäyttöinen, kaikenlaisen säätämisen ja tunkkaamisen määrä esim. Seleniumin käyttöön verrattuna on lähes olematon. Cypressin toimintaperiaate poikkeaa radikaalisti useimmista E2E-testaukseen sopivista kirjastoista, sillä Cypress-testit ajetaan kokonaisuudessaan selaimen sisällä. Muissa lähestymistavoissa testit suoritetaan Node-prosessissa, joka on yhteydessä selaimeen  ohjelmointirajapintojen kautta.
+Kirjastojen vertailuista on kirjoitettu monia blojeja, esim. [tämä](https://www.lambdatest.com/blog/cypress-vs-playwright/) ja [tämä](https://www.browserstack.com/guide/playwright-vs-cypress).
 
+Tutustutaan nyt Playwrightin käyttöön.
 
 ### Testien alustaminen
 
@@ -1070,13 +1071,35 @@ npx playwright show-report
 
 tai määrittelemällämme npm-skriptillä _npm run test:report_
 
-Trace näyttää lähes samalta kuin testien suoritus UI-moodissa:
+Trace näyttää käytännöss samalta kuin testien suoritus UI-moodissa.
 
+UI-moodi tarjoaa myös mahdollisuuden avustettuun lokaattorien etsimiseen. Tämä tapahtuu painamalla alapalkin vasemmanpuoleista tuplaympyrää, ja sen jälkeen klikkaamalla haluttua käyttöliittymäelmenttiä. Playwright näyttää elementin lokaattorin:
 
-Locator
+![](../../images/5/play8.png)
 
+Playwright ehdottaa siis kolmannen muistiinpanon lokaattoriksi seuraavaa
 
-Testien nauhoitus
+```js
+page.locator('li').filter({ hasText: 'third notemake not important' }).getByRole('button')
+```
+
+Tämä poikkeaa jossain määrin testien käyttämästä lokaattorista, joka oli
+
+```js
+page.getByText('second note').locator('..').getByRole('button', { name: 'make not important' })
+```
+
+Lienee makuasia kumpi lokaattoreista on parempi. 
+
+Playwright sisältää myös [testigeneraattorin](https://playwright.dev/docs/codegen-intro), jonka avulla on mahdollista "nauhottaa" käyttöliittymän kautta klikkailemalla testejä. Testigeneraattori käynnistyy komennolla
+
+```
+npx playwright codegen http://localhost:5173/
+```
+
+Testigeneraattori _Record_-tilan päälläollessa käyttäjän interaktion Playwright inspectoriin, mistä koodin käyttämät lokaattorit ja actionit voi sitten kopioida testeihin:
+
+![](../../images/5/play9.png)
 
 Komentorivin sijaan Playwrightiä voi käyttää myös [VS Code](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright)-pluginin kautta. Plugin tarjoaa monia käteviä ominaisuuksia, mm. breakpointien käytön testejä debugatessa.
 
