@@ -11,4 +11,13 @@ In this part, we will learn how to build native Android and iOS mobile applicati
 <i>Part updated 17th Feb 2023</i>
 - <i>The last three exercises reordered: the old exercise 10.25 is now the last exercise of the part</i>
 
+<i>Part updated 26th Feb 2024</i>
+- <i>New Node 20 version of rate-repository-api</i>
+- <i>Material updated in parts 10a, 10b and 10c</i>
+
+
+Note: Some updates are not compatible anymore with material before Feb 2024.
+We recommend a fresh start with this new Part 10 material you're reading now. However, if you´re returning to this course after a break, and you want to continue the exercises in your older project, please use [Part 10 material before the upgrade](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/tree/e9784f36de8a0badc28fabde49e33e2959479177/src/content/10/en).
+
+
 </div>
