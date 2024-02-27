@@ -899,7 +899,7 @@ const App = () => {
 
 ### Transmettre le Store Redux à divers composants
 
-À part le réducteur, notre application est dans un seul fichier. Cela n'est bien sûr pas sensé, et nous devrions séparer <i>App</i> dans son propre module.
+À part le reducer, notre application est dans un seul fichier. Cela n'est bien sûr pas sensé, et nous devrions séparer <i>App</i> dans son propre module.
 
 La question est maintenant, comment <i>App</i> peut-il accéder au store après le déménagement? Et plus largement, lorsqu'un composant est composé de nombreux petits composants, il doit y avoir un moyen pour tous les composants d'accéder au store.
 Il existe plusieurs façons de partager le store Redux avec les composants. D'abord, nous examinerons la manière la plus récente, et peut-être la plus facile, qui est d'utiliser l'API [hooks](https://react-redux.js.org/api/hooks) de la bibliothèque [react-redux](https://react-redux.js.org/).
@@ -935,7 +935,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 Notez que l'application est maintenant définie comme un enfant d'un composant [Provider](https://react-redux.js.org/api/provider) fourni par la bibliothèque react-redux.
 Le store de l'application est donné au Provider en tant qu'attribut <i>store</i>.
 
-La définition des créateurs d'actions a été déplacée dans le fichier <i>reducers/noteReducer.js</i> où le réducteur est défini. Ce fichier ressemble à ceci:
+La définition des créateurs d'actions a été déplacée dans le fichier <i>reducers/noteReducer.js</i> où le reducer est défini. Ce fichier ressemble à ceci:
 
 ```js
 const noteReducer = (state = [], action) => {
@@ -970,7 +970,7 @@ Si l'application a de nombreux composants qui ont besoin du store, le composant 
 
 Le module a maintenant plusieurs commandes [export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export).
 
-La fonction réducteur est toujours retournée avec la commande <i>export default</i>, donc le réducteur peut être importé de la manière habituelle:
+La fonction reducer est toujours retournée avec la commande <i>export default</i>, donc le reducer peut être importé de la manière habituelle:
 
 ```js
 import noteReducer from './reducers/noteReducer'
