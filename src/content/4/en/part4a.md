@@ -11,6 +11,8 @@ Let's continue our work on the backend of the notes application we started in [p
 
 ### Project structure
 
+**Note** this course material was written with version v20.11.0 of Node.js. Please make sure that your version of Node is at least as new as the version used in the material (you can check the version by running node -v in the command line).
+
 Before we move into the topic of testing, we will modify the structure of our project to adhere to Node.js best practices.
 
 Once we make the changes to the directory structure of our project, we will end up with the following structure:
@@ -404,6 +406,8 @@ The nature of VS Code bleeding into how you write your code is probably not idea
 <div class="tasks">
 
 ### Exercises 4.1.-4.2.
+
+**Note** this course material was written with version v20.11.0 of Node.js. Please make sure that your version of Node is at least as new as the version used in the material (you can check the version by running node -v in the command line).
 
 In the exercises for this part, we will be building a <i>blog list application</i>, that allows users to save information about interesting blogs they have stumbled across on the internet. For each listed blog we will save the author, title, URL, and amount of upvotes from users of the application.
 
