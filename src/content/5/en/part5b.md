@@ -573,14 +573,6 @@ const Blog = ({ blog }) => {
 
 #### 5.8: Blog List Frontend, step 8
 
-We notice that something is wrong. When a new blog is created in the app, the name of the user that added the blog is not shown in its details:
-
-![browser showing missing name underneath like button](../../images/5/59new.png)
-
-When the browser is reloaded, the information of the person is displayed. This is not acceptable, find out where the problem is and make the necessary correction.
-
-#### 5.9: Blog List Frontend, step 9
-
 Implement the functionality for the like button. Likes are increased by making an HTTP _PUT_ request to the unique address of the blog post in the backend.
 
 Since the backend operation replaces the entire blog post, you will have to send all of its fields in the request body. If you wanted to add a like to the following blog post:
@@ -614,7 +606,15 @@ You would have to make an HTTP PUT request to the address <i>/api/blogs/5a43fde2
 
 The backend has to be updated too to handle the user reference.
 
-**One last warning:** if you notice that you are using async/await and the _then_-method in the same code, it is almost certain that you are doing something wrong. Stick to using one or the other, and never use both at the same time "just in case".
+#### 5.9: Blog List Frontend, step 9
+
+We notice that something is wrong. When a blog is liked in the app, the name of the user that added the blog is not shown in its details:
+
+![browser showing missing name underneath like button](../../images/5/59put.png)
+
+When the browser is reloaded, the information of the person is displayed. This is not acceptable, find out where the problem is and make the necessary correction.
+
+Of course, it is possible that you have already done everything correctly and the problem does not occur in your code. In that case, you can move on.
 
 #### 5.10: Blog List Frontend, step 10
 
@@ -768,6 +768,7 @@ Let's create [.eslintignore](https://eslint.org/docs/latest/use/configure/ignore
 node_modules
 dist
 .eslintrc.cjs
+vite.config.js
 ```
 
 Now the directories <em>dist</em> and <em>node_modules</em> will be skipped when linting.

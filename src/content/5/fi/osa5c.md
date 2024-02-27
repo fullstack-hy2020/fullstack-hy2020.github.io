@@ -514,7 +514,7 @@ const NoteForm = ({ createNote }) => {
     event.preventDefault()
     createNote({
       content: newNote,
-      important: Math.random() > 0.5,
+      important: true,
     })
 
     setNewNote('')
@@ -726,7 +726,7 @@ const input = container.querySelector('#note-input')
 
 Jätämme koodiin placeholderiin perustuvan ratkaisun.
   
-Vielä muutama tärkeä huomio. Jos komponentti renderöisi samaan HTML-elementtiin tekstiä seuraavasti:
+Vielä muutama tärkeä huomio. Oletetaan että komponentti renderöisi samaan HTML-elementtiin tekstiä seuraavasti:
 
 ```js
 const Note = ({ note, toggleImportance }) => {
@@ -744,7 +744,7 @@ const Note = ({ note, toggleImportance }) => {
 export default Note
 ```
 
-Ei testissä käyttämämme _getByText_ löydä elementtiä:
+Nyt testissä käyttämämme _getByText_ ei löydä elementtiä:
 
 ```js 
 test('renders content', () => {
