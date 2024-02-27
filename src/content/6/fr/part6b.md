@@ -393,7 +393,7 @@ Implémentez un filtrage pour les anecdotes qui sont affichées à l'utilisateur
 
 ![navigateur montrant le filtrage des anecdotes](../../images/6/9ea.png)
 
-Stockez l'état du filtre dans le store redux. Il est recommandé de créer un nouveau réducteur, des créateurs d'actions, et un réducteur combiné pour le store en utilisant la fonction <i>combineReducers</i>.
+Stockez l'état du filtre dans le store redux. Il est recommandé de créer un nouveau reducer, des créateurs d'actions, et un reducer combiné pour le store en utilisant la fonction <i>combineReducers</i>.
 
 Créez un nouveau composant <i>Filter</i> pour afficher le filtre. Vous pouvez utiliser le code suivant comme modèle pour le composant:
 
@@ -422,7 +422,7 @@ export default Filter
 
 ### Redux Toolkit
 
-Comme nous l'avons vu jusqu'à présent, la configuration de Redux et la mise en oeuvre de la gestion de l'état nécessitent pas mal d'efforts. Cela se manifeste, par exemple, dans le code lié aux réducteurs et aux créateurs d'actions, qui comprend un code modèle (boilerplate) quelque peu répétitif. [Redux Toolkit](https://redux-toolkit.js.org/) est une bibliothèque qui résout ces problèmes communs liés à Redux. La bibliothèque simplifie grandement, par exemple, la configuration du store Redux et offre une grande variété d'outils pour faciliter la gestion de l'état.
+Comme nous l'avons vu jusqu'à présent, la configuration de Redux et la mise en oeuvre de la gestion de l'état nécessitent pas mal d'efforts. Cela se manifeste, par exemple, dans le code lié aux reducers et aux créateurs d'actions, qui comprend un code modèle (boilerplate) quelque peu répétitif. [Redux Toolkit](https://redux-toolkit.js.org/) est une bibliothèque qui résout ces problèmes communs liés à Redux. La bibliothèque simplifie grandement, par exemple, la configuration du store Redux et offre une grande variété d'outils pour faciliter la gestion de l'état.
 
 Commençons à utiliser Redux Toolkit dans notre application en refactorisant le code existant. Tout d'abord, nous devrons installer la bibliothèque:
 
@@ -460,9 +460,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 )
 ```
 
-Nous avons déjà éliminé quelques lignes de code maintenant que nous n'avons pas besoin de la fonction <em>combineReducers</em> pour créer le réducteur pour le store. Nous verrons bientôt que la fonction <em>configureStore</em> offre de nombreux avantages supplémentaires, tels que l'intégration sans effort d'outils de développement et de nombreuses bibliothèques couramment utilisées sans avoir besoin de configuration supplémentaire.
+Nous avons déjà éliminé quelques lignes de code maintenant que nous n'avons pas besoin de la fonction <em>combineReducers</em> pour créer le reducer pour le store. Nous verrons bientôt que la fonction <em>configureStore</em> offre de nombreux avantages supplémentaires, tels que l'intégration sans effort d'outils de développement et de nombreuses bibliothèques couramment utilisées sans avoir besoin de configuration supplémentaire.
 
-Passons à la refonte des réducteurs, ce qui met en avant les avantages de Redux Toolkit. Avec Redux Toolkit, nous pouvons facilement créer des réducteurs et des créateurs d'actions associés en utilisant la fonction [createSlice](https://redux-toolkit.js.org/api/createSlice) . Nous pouvons utiliser la fonction <em>createSlice</em> pour refondre le réducteur et les créateurs d'actions dans le fichier <i>reducers/noteReducer.js</i> de la manière suivante:
+Passons à la refonte des reducers, ce qui met en avant les avantages de Redux Toolkit. Avec Redux Toolkit, nous pouvons facilement créer des reducers et des créateurs d'actions associés en utilisant la fonction [createSlice](https://redux-toolkit.js.org/api/createSlice) . Nous pouvons utiliser la fonction <em>createSlice</em> pour refondre le reducer et les créateurs d'actions dans le fichier <i>reducers/noteReducer.js</i> de la manière suivante:
 
 ```js
 import { createSlice } from '@reduxjs/toolkit' // highlight-line
@@ -516,7 +516,7 @@ const noteSlice = createSlice({
 // highlight-end
 ```
 
-La fonction <em>createSlice</em> utilise le paramètre <em>name</em> pour définir le préfixe utilisé dans les valeurs de type des actions. Par exemple, l'action <em>createNote</em> définie plus tard aura une valeur de type <em>notes/createNote</em>. Il est de bonne pratique de donner à ce paramètre une valeur qui est unique parmi les réducteurs. De cette façon, il n'y aura pas de collisions inattendues entre les valeurs de type d'action de l'application. Le paramètre <em>initialState</em> définit l'état initial du réducteur. Le paramètre <em>reducers</em> prend le réducteur lui-même comme un objet, dont les fonctions gèrent les changements d'état provoqués par certaines actions. Notez que l'<em>action.payload</em> dans la fonction contient l'argument fourni en appelant le créateur d'action:
+La fonction <em>createSlice</em> utilise le paramètre <em>name</em> pour définir le préfixe utilisé dans les valeurs de type des actions. Par exemple, l'action <em>createNote</em> définie plus tard aura une valeur de type <em>notes/createNote</em>. Il est de bonne pratique de donner à ce paramètre une valeur qui est unique parmi les reducers. De cette façon, il n'y aura pas de collisions inattendues entre les valeurs de type d'action de l'application. Le paramètre <em>initialState</em> définit l'état initial du reducer. Le paramètre <em>reducers</em> prend le reducer lui-même comme un objet, dont les fonctions gèrent les changements d'état provoqués par certaines actions. Notez que l'<em>action.payload</em> dans la fonction contient l'argument fourni en appelant le créateur d'action:
 
 ```js
 dispatch(createNote('Redux Toolkit is awesome!'))
@@ -528,7 +528,7 @@ Cet appel de dispatch réagit à la diffusion de l'objet suivant:
 dispatch({ type: 'notes/createNote', payload: 'Redux Toolkit is awesome!' })
 ```
 
-Si vous avez suivi attentivement, vous avez peut-être remarqué que, à l'intérieur de l'action <em>createNote</em>, il semble se produire quelque chose qui enfreint le principe d'immutabilité des réducteurs mentionné précédemment:
+Si vous avez suivi attentivement, vous avez peut-être remarqué que, à l'intérieur de l'action <em>createNote</em>, il semble se produire quelque chose qui enfreint le principe d'immutabilité des reducers mentionné précédemment:
 
 ```js
 createNote(state, action) {
@@ -544,9 +544,9 @@ createNote(state, action) {
 
 Nous modifions le tableau de l'argument <em>state</em> en appelant la méthode <em>push</em> au lieu de retourner une nouvelle instance du tableau. De quoi s'agit-il?
 
-Redux Toolkit utilise la bibliothèque [Immer](https://immerjs.github.io/immer/) avec les réducteurs créés par la fonction <em>createSlice</em>, ce qui rend possible la mutation de l'argument <em>state</em> à l'intérieur du réducteur. Immer utilise l'état muté pour produire un nouvel état immuable et ainsi les changements d'état restent immuables. Notez que l'<em>state</em> peut être changé sans être "muté", comme nous l'avons fait avec l'action <em>toggleImportanceOf</em>. Dans ce cas, la fonction <i>retourne</i> le nouvel état. Néanmoins, muter l'état sera souvent pratique, en particulier lorsqu'un état complexe doit être mis à jour.
+Redux Toolkit utilise la bibliothèque [Immer](https://immerjs.github.io/immer/) avec les reducers créés par la fonction <em>createSlice</em>, ce qui rend possible la mutation de l'argument <em>state</em> à l'intérieur du reducer. Immer utilise l'état muté pour produire un nouvel état immuable et ainsi les changements d'état restent immuables. Notez que l'<em>state</em> peut être changé sans être "muté", comme nous l'avons fait avec l'action <em>toggleImportanceOf</em>. Dans ce cas, la fonction <i>retourne</i> le nouvel état. Néanmoins, muter l'état sera souvent pratique, en particulier lorsqu'un état complexe doit être mis à jour.
 
-La fonction <em>createSlice</em> retourne un objet contenant le réducteur ainsi que les créateurs d'actions définis par le paramètre <em>reducers</em>. Le réducteur peut être accédé par la propriété <em>noteSlice.reducer</em>, tandis que les créateurs d'actions par la propriété <em>noteSlice.actions</em>. Nous pouvons produire les exports du fichier de la manière suivante:
+La fonction <em>createSlice</em> retourne un objet contenant le reducer ainsi que les créateurs d'actions définis par le paramètre <em>reducers</em>. Le reducer peut être accédé par la propriété <em>noteSlice.reducer</em>, tandis que les créateurs d'actions par la propriété <em>noteSlice.actions</em>. Nous pouvons produire les exports du fichier de la manière suivante:
 
 ```js
 const noteSlice = createSlice(/* ... */)
@@ -623,7 +623,7 @@ describe('noteReducer', () => {
 
 Comme nous l'avons appris, console.log est un outil extrêmement puissant; il nous sauve souvent des ennuis.
 
-Essayons d'imprimer l'état du Store Redux dans la console au milieu du réducteur créé avec la fonction createSlice:
+Essayons d'imprimer l'état du Store Redux dans la console au milieu du reducer créé avec la fonction createSlice:
 
 ```js
 const noteSlice = createSlice({
@@ -697,13 +697,13 @@ Continuons à travailler sur l'application d'anecdotes utilisant Redux que nous 
 
 Installez Redux Toolkit pour le projet. Déplacez la création du store Redux dans le fichier <i>store.js</i> et utilisez la fonction <em>configureStore</em> de Redux Toolkit pour créer le store.
 
-Changez la définition du <i>réducteur de filtre et des créateurs d'actions</i> pour utiliser la fonction <em>createSlice</em> de Redux Toolkit.
+Changez la définition du <i>reducer de filtre et des créateurs d'actions</i> pour utiliser la fonction <em>createSlice</em> de Redux Toolkit.
 
 Commencez également à utiliser Redux DevTools pour déboguer plus facilement l'état de l'application.
 
 #### 6.11 Meilleures anecdotes, étape 9
 
-Changez également la définition du <i>réducteur d'anecdotes et des créateurs d'actions</i> pour utiliser la fonction <em>createSlice</em> de Redux Toolkit.
+Changez également la définition du <i>reducer d'anecdotes et des créateurs d'actions</i> pour utiliser la fonction <em>createSlice</em> de Redux Toolkit.
 
 #### 6.12 Meilleures anecdotes, étape 10
 
@@ -746,7 +746,7 @@ const Notification = () => {
 }
 ```
 
-Vous devrez apporter des modifications au réducteur existant de l'application. Créez un réducteur séparé pour la nouvelle fonctionnalité en utilisant la fonction <em>createSlice</em> de Redux Toolkit.
+Vous devrez apporter des modifications au reducer existant de l'application. Créez un reducer séparé pour la nouvelle fonctionnalité en utilisant la fonction <em>createSlice</em> de Redux Toolkit.
 
 À ce stade des exercices, il n'est pas nécessaire que l'application utilise le composant <i>Notification</i> de manière intelligente. Il suffit que l'application affiche la valeur initiale définie pour le message dans le <i>notificationReducer</i>.
 
