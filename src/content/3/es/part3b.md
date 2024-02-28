@@ -353,6 +353,8 @@ A diferencia de cuando se ejecuta la aplicación en un entorno de desarrollo, to
 
 Después de asegurarte de que la versión de producción de la aplicación funcione localmente, haz un commit de la compilación de producción del frontend en el repositorio de backend y envía el código a GitHub nuevamente.
 
+**NB:** Si usas Render, asegúrate de que el directorio <i>dist</i> no esté ignorado por Git en el backend.
+
 Si estás utilizando Render, un envío a GitHub <i>podría</i> ser suficiente. Si el despliegue automático no funciona, selecciona "manual deploy (despliegue manual)" desde el panel de Render.
 
 En el caso de Fly.io, el nuevo despliegue se realiza con el comando
@@ -526,7 +528,7 @@ NO deberás desplegar el frontend directamente en ninguna etapa de esta parte. S
 
 Genera un build de producción de tu frontend y agrégalo a la aplicación en Internet utilizando el método introducido en esta parte.
 
-**NB:** Si usas Render, asegúrate de que el directorio <i>dist</i> no esté ignorado por Git.
+**NB:** Si usas Render, asegúrate de que el directorio <i>dist</i> no esté ignorado por Git en el backend.
 
 También, asegúrate de que el frontend aún funcione localmente (en modo de desarrollo cuando se inicia con el comando _npm run dev_).
 
