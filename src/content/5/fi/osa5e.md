@@ -25,15 +25,7 @@ npm init playwright@latest
 
 Asennusskripti kysyy muutamaa kysymystä, vastataan niihin seuraavasti:
 
-```
-$ npm init playwright@latest
-Getting started with writing end-to-end tests with Playwright:
-Initializing project in '.'
-✔ Do you want to use TypeScript or JavaScript? · JavaScript
-✔ Where to put your end-to-end tests? · tests
-✔ Add a GitHub Actions workflow? (y/N) · false
-✔ Install Playwright browsers (can be done manually via 'npx playwright install')? (Y/n) · true
-```
+![vastataan: javascript, tests, false, true](../../images/5/play0.png)
 
 Määritellään npm-skripti testien suorittamista sekä testiraportteja varten
 ```js
@@ -1113,32 +1105,41 @@ Testien lopullinen versio on kokonaisuudessaan [GitHubissa](https://github.com/f
 
 ### Tehtävät 5.17.-5.23.
 
-Tehdään osan lopuksi muutamia E2E-testejä blogisovellukseen. Yllä olevan materiaalin pitäisi riittää ainakin suurimmaksi osaksi tehtävien tekemiseen. Cypressin [dokumentaatiota](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell) kannattaa ehdottomasti myös lueskella, kyseessä on ehkä paras dokumentaatio, mitä olen koskaan open source ‑projektissa nähnyt.
-
-Erityisesti kannattaa lukea luku [Introduction to Cypress](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Cypress-Can-Be-Simple-Sometimes), joka toteaa
-
-> <i>This is the single most important guide for understanding how to test with Cypress. Read it. Understand it.</i>
+Tehdään osan lopuksi muutamia E2E-testejä blogisovellukseen. Yllä olevan materiaalin pitäisi riittää suurimman osan tehtävien tekemiseen. Playwrightin [dokumentaatiota]https://playwright.dev/docs/intro) ja [API-kuvausta](https://playwright.dev/docs/api/class-playwright) kannattaa ehdottomasti lukea, ainakin edellisessä luvussa mainitut osat.
 
 #### 5.17: blogilistan end to end ‑testit, step1
 
-Konfiguroi Cypress projektiisi. Tee testi, joka varmistaa, että sovellus näyttää oletusarvoisesti kirjautumislomakkeen.
+Tee uusi npm-projekti testejä varten ja konfiguroi sinne Playwright.
+
+Tee testi, joka varmistaa, että sovellus näyttää oletusarvoisesti kirjautumislomakkeen.
 
 Testin rungon tulee olla seuraavanlainen
 
 ```js 
-describe('Blog app', function() {
-  beforeEach(function() {
-    cy.request('POST', 'http://localhost:3003/api/testing/reset')
-    cy.visit('http://localhost:5173')
+const { test, expect, beforeEach, describe } = require('@playwright/test')
+
+describe('Note app', () => {
+  beforeEach(async ({ page, request }) => {
+    await request.post('http:localhost:3003/api/testing/reset')
+    await request.post('http://localhost:3003/api/users', {
+      data: {
+        name: 'Matti Luukkainen',
+        username: 'mluukkai',
+        password: 'salainen'
+      }
+    })
+
+    await page.goto('http://localhost:5173')
   })
 
-  it('Login form is shown', function() {
+  test('Login form is shown', async ({ page }) => {
     // ...
   })
 })
+
 ```
 
-Testin <i>beforeEach</i>-alustuslohkon tulee nollata tietokannan tilanne esim. [materiaalissa](/osa5/end_to_end_testaus#tietokannan-tilan-kontrollointi) näytetyllä tavalla.
+Testin <i>beforeEach</i>-alustuslohkon tulee nollata tietokannan tilanne esim. [materiaalissa](/osa5/end_to_end_testaus_playwright#testien-alustus) näytetyllä tavalla.
 
 #### 5.18: blogilistan end to end ‑testit, step2
 
@@ -1147,23 +1148,23 @@ Tee testit kirjautumiselle, testaa sekä onnistunut että epäonnistunut kirjaut
 Testien runko laajenee seuraavasti
 
 ```js 
-describe('Blog app', function() {
-  beforeEach(function() {
-    cy.request('POST', 'http://localhost:3003/api/testing/reset')
-    // create here a user to backend
-    cy.visit('http://localhost:5173')
-  })
+const { test, expect, beforeEach, describe } = require('@playwright/test')
 
-  it('Login form is shown', function() {
+describe('Note app', () => {
+  beforeEach(async ({ page, request }) => {
     // ...
   })
 
-  describe('Login',function() {
-    it('succeeds with correct credentials', function() {
+  test('Login form is shown', async ({ page }) => {
+    // ...
+  })
+
+  describe('Login', () => {
+    test('succeeds with correct credentials', async ({ page }) => {
       // ...
     })
 
-    it('fails with wrong credentials', function() {
+    test('fails with wrong credentials', async ({ page }) => {
       // ...
     })
   })
@@ -1175,19 +1176,14 @@ describe('Blog app', function() {
 Tee testi, joka varmistaa, että kirjautunut käyttäjä pystyy luomaan blogin. Testin runko voi näyttää seuraavalta
 
 ```js 
-describe('Blog app', function() {
-  // ...
-
-  describe('When logged in', function() {
-    beforeEach(function() {
-      // log in user here
-    })
-
-    it('A blog can be created', function() {
-      // ...
-    })
+describe('When logged in', () => {
+  beforeEach(async ({ page }) => {
+    // ...
   })
 
+  test('a new blog can be created', async ({ page }) => {
+    // ...
+  })
 })
 ```
 
@@ -1199,7 +1195,7 @@ Tee testi, joka varmistaa, että blogia voi likettää.
 
 #### 5.21: blogilistan end to end ‑testit, step5
 
-Tee testi, joka varmistaa, että blogin lisännyt käyttäjä voi poistaa blogin.
+Tee testi, joka varmistaa, että blogin lisännyt käyttäjä voi poistaa blogin. Jos käytät poisto-operaation yhteydessä _window.confirm_-dialogia, saatat joutua hieman etsimään miten dialogin käyttö tapahtuu Playwright-testeistä käsin.
 
 #### 5.22: blogilistan end to end ‑testit, step6
 
@@ -1209,14 +1205,7 @@ Tee testi, joka varmista, että vain blogin lisännyt käyttäjä näkee blogin 
 
 Tee testi, joka varmistaa, että blogit järjestetään likejen mukaiseen järjestykseen, eniten likejä saanut blogi ensin.
 
-<i>Tämä tehtävä on edellisiä huomattavasti haastavampi.</i> Eräs ratkaisutapa on lisätä tietty luokka elementille, joka sisältää blogin sisällön ja käyttää [eq](https://docs.cypress.io/api/commands/eq#Syntax)-metodia tietyssä indeksissä olevan elementin hakemiseen:
-  
-```js
-cy.get('.blog').eq(0).should('contain', 'The title with the most likes')
-cy.get('.blog').eq(1).should('contain', 'The title with the second most likes')
-``` 
-  
-Saatat törmätä tässä tehtävässä ongelmaan jos klikkaat monta kertaa peräkkäin <i>like</i>-nappia. Saattaa olla, että näin tehdessä liketykset tehdään samalle oliolle, eli Cypress ei "ehdi" välissä päivittää sovelluksen tilaa. Eräs tapa korjata ongelma on odottaa jokaisen klikkauksen jälkeen että likejen lukumäärä päivittyy ja tehdä uusi liketys vasta tämän jälkeen.
+<i>Tämä tehtävä on edellisiä huomattavasti haastavampi.</i>
 
 Tämä oli osan viimeinen tehtävä ja on aika pushata koodi GitHubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
