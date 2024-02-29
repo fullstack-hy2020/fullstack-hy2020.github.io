@@ -533,7 +533,7 @@ We should never use type assertion unless there is no other way to proceed, as t
 While the compiler trusts you to know what you are doing when using *as*, by doing this, we are not using the full power of TypeScript but relying on the coder to secure the code.
 
 In our case, we could change how we export our data so we can type it within the data file.
-Since we cannot use typings in a JSON file, we should convert the JSON file to a ts file *diaries.ts* which exports the typed data like so:
+Since we cannot use typings in a JSON file, we should convert the JSON file to a ts file *entries.ts* which exports the typed data like so:
 
 ```js
 import { DiaryEntry } from "../src/types"; // highlight-line
