@@ -442,10 +442,10 @@ axios.get('http://localhost:3001/notes').then(response => {
 <!-- We have already used [state hooks](https://reactjs.org/docs/hooks-state.html) that were introduced along with React version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0), which provide state to React components defined as functions - the so-called <i>functional components</i>. Version 16.8.0 also introduces [effect hooks](https://reactjs.org/docs/hooks-effect.html) as a new feature. As per the official docs:-->
  我们已经使用了与React版本[16.8.0](https://www.npmjs.com/package/react/v/16.8.0)一起引入的[状态钩子](https://reactjs.org/docs/hooks-state.html)，它为定义为函数的React组件--所谓的<i>功能组件</i>提供状态。16.8.0版本还引入了[效果钩子](https://reactjs.org/docs/hooks-effect.html)这个新功能。按照官方文档的说法。
 
-<!-- > <i>The Effect Hook lets you perform side effects on function components.</i>-->
- > <i>效果钩可以让你对函数组件执行副作用。</i>。
-<!-- > <i>Data fetching, setting up a subscription, and manually changing the DOM in React components are all examples of side effects.</i>-->
- > <i>获取数据、设置订阅、以及手动改变React组件中的DOM都是副作用的例子。</i>
+<!-- > <i>Effects let a component connect to and synchronize with external systems.</i>-->
+ > <i>Effect 允许组件连接到外部系统并与之同步。</i>
+<!-- > <i>This includes dealing with network, browser DOM, animations, widgets written using a different UI library, and other non-React code.</i>-->
+ > <i>这包括处理网络、浏览器、DOM、动画、使用不同 UI 库编写的小部件以及其他非 React 代码。</i>
 
 <!-- As such, effect hooks are precisely the right tool to use when fetching data from a server.-->
  因此，当从服务器获取数据时，效果钩子正是正确的工具。
