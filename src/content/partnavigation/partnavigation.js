@@ -370,7 +370,7 @@ module.exports = {
       a: 'Architecture de flux et Redux',
       b: 'Quelques reducers',
       c: "Communiquer avec le backend dans l'application Redux",
-      d: 'Connect',
+      d: 'React Query, useReducer et le contexte',
     },
     '7': {
       a: 'React-router',
