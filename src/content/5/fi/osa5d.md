@@ -21,47 +21,118 @@ Ongelmana on  usein myös se, että käyttöliittymän kautta tehtävät testit 
 
 Tämän hetken kaksi ehkä helppokäyttöisintä kirjastoa End to End -testaukseen ovat [Cypress](https://www.cypress.io/) ja [Playwright](https://playwright.dev/).
 
-Sivun [npmtrends.com](https://npmtrends.com/cypress-vs-playwright) statistiikasta näemme, että vimeiset viisi vuotta markkinaa hallinnut Cypress on edelleen selvä ykkönen, mutta Playwright on lähtenyt nopeaan nousuun:
+Sivun [npmtrends.com](https://npmtrends.com/cypress-vs-playwright) statistiikasta näemme, että viimeiset viisi vuotta markkinaa hallinnut Cypress on edelleen selvä ykkönen, mutta Playwright on lähtenyt nopeaan nousuun vuoden 2023 toisella puolikkaalla:
 
 ![cypress vs playwright in npm trends](../../images/5/cvsp.png)
 
-Tällä kurssilla on jo vuosia käytetty Cypresiä. Nyt mukana on uutena myös Playwright. Saat itse valita suoritatko kurssin E2E-testausta käsittelevän osan Cypressillä vai Playrwightillä. Molempien kirjastojen toimintaperiaatteet ovat hyvin samankaltaisia, joten kovin suurta merkitystä valinnallasi ei ole. 
+Tällä kurssilla on jo vuosia käytetty Cypresiä. Nyt mukana on uutena myös Playwright. Saat itse valita suoritatko kurssin E2E-testausta käsittelevän osan Cypressillä vai Playrwightillä. Molempien kirjastojen toimintaperiaatteet ovat hyvin samankaltaisia, joten kovin suurta merkitystä valinnallasi ei ole. Playwright on kuitenkin nyt kurssin ensisijaisesti suosittelema E2E-kirjasto.
 
-Jos valintasi on Playwright, mene [tänne](/osa5/end_to_end_testaus_playwright), jos taas Cypress, jatka eteenpäin.
+Jos valintasi on Playwright, jatka eteenpäin. Jos päädyt käyttämään Cypressiä, mene [tänne](/osa5/end_to_end_testaus_cypress).
 
-### Cypress
+### Playwright
 
-[Cypress](https://www.cypress.io/) on siis ollut edellisten vuosien ajan suosituin E2E-testauskirjasto. Cypress on ainakin edeltäjiinsä nähden poikkeuksellisen helppokäyttöinen, kaikenlaisen säätämisen ja tunkkaamisen määrä esim. Seleniumin käyttöön verrattuna on lähes olematon. Cypressin toimintaperiaate poikkeaa radikaalisti useimmista E2E-testaukseen sopivista kirjastoista, sillä Cypress-testit ajetaan kokonaisuudessaan selaimen sisällä. Muissa lähestymistavoissa testit suoritetaan Node-prosessissa, joka on yhteydessä selaimeen  ohjelmointirajapintojen kautta.
+[Playwright](https://playwright.dev/) on siis End to end -testien uusi tulokas, jonka suosio lähti vuoden 2023 loppupuolella räjähdysmäiseen nousuun. Playwright on käytön helppoudessa suurin piirtein Cypressin tasolla. Toimintaperiaatteeltaan kirjastot poikkeavat hieman toisistaan.  Cypressin toimintaperiaate poikkeaa radikaalisti useimmista E2E-testaukseen sopivista kirjastoista, sillä Cypress-testit ajetaan kokonaisuudessaan selaimen sisällä. Playwrightin testit taas suoritetaan Node-prosessissa, joka on yhteydessä selaimeen ohjelmointirajapintojen kautta.
 
-Tehdään tämän osan lopuksi muutamia end to end ‑testejä muistiinpanosovellukselle. 
+Kirjastojen vertailuista on kirjoitettu monia blojeja, esim. [tämä](https://www.lambdatest.com/blog/cypress-vs-playwright/) ja [tämä](https://www.browserstack.com/guide/playwright-vs-cypress).
 
-Aloitetaan asentamalla Cypress <i>frontendin</i> kehitysaikaiseksi riippuvuudeksi
+On vaikea sanoa kumpi kirjastoista on parempi. Eräs Playwrightin etu on sen selaintuki, Playwright tukee Chromea, Firefoxia ja Webkit-pohjaisia selaimia kuten Safaria. Nykyisin Cypress sisältää tuen kaikkiin näihin selaimiin, Webkit-tuki on tosin vasta kokeellinen ja ei tue kaikkia Cypressin ominaisuuksia. Oma preferenssini kallisuu kirjoitushetkellö (29.2.2024) hieman Playwrightin puolelle.
+
+Tutustutaan nyt Playwrightin käyttöön.
+
+### Testien alustaminen
+
+Toisin kuin React-frontille tehdyt yksikkötestit tai backendin tekstit, nyt tehtävien End to End -testien ei ei tarvitse sijaita samassa npm-projektissa missä koodi on. Tehdään E2E-testeille kokonaan oma projekti komennolla _npm init_. Asennetaan sitten Playwright suorittamalla suorittamalla uuden projektin hakemistossa komento
 
 ```js
-npm install --save-dev cypress
+npm init playwright@latest
 ```
 
-ja määritellään npm-skripti käynnistämistä varten, ja tehdään myös pieni muutos sovelluksen käynnistävään skriptiin:
+Asennusskripti kysyy muutamaa kysymystä, vastataan niihin seuraavasti:
 
+![vastataan: javascript, tests, false, true](../../images/5/play0.png)
+
+Määritellään npm-skripti testien suorittamista sekä testiraportteja varten tiedostoon _package.json_:
 ```js
 {
   // ...
   "scripts": {
-    "dev": "vite --host", // highlight-line
-    "build": "vite build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "server": "json-server -p3001 --watch db.json",
-    "test": "jest",
-    "cypress:open": "cypress open"  // highlight-line
+    "test": "playwright test",
+    "test:report": "playwright show-report"
   },
   // ...
 }
 ```
 
-Toisin kuin esim. frontendin yksikkötestit, Cypress-testit voidaan sijoittaa joko frontendin tai backendin repositorioon, tai vaikka kokonaan omaan repositorioonsa. 
+Asennuksen yhteydessä konsoliin tulostui
 
-Cypress-testit olettavat että testattava järjestelmä on käynnissä kun testit suoritetaan, eli toisin kuin esim. backendin integraatiotestit, Cypress-testit <i>eivät käynnistä</i> testattavaa järjestelmää testauksen yhteydessä.
+```
+And check out the following files:
+  - ./tests/example.spec.js - Example end-to-end test
+  - ./tests-examples/demo-todo-app.spec.js - Demo Todo App end-to-end tests
+  - ./playwright.config.js - Playwright Test configuration
+```
+
+eli asennus loi projektiin valmiiksi muutaman esimerkkitestin.
+
+Suoritetaan testit:
+
+```bash
+$ npm test
+
+> notes-e2e@1.0.0 test
+> playwright test
+
+
+Running 6 tests using 5 workers
+  6 passed (3.9s)
+
+To open last HTML report run:
+
+  npx playwright show-report
+```
+
+Testit menevät läpi. Tarkempi testiraportti voidaa avata joko tulostuksen ehdottamalla komennolla, tai äsken määrittelemällämme npm-skriptillä:
+
+```
+npm run test:report
+```
+
+Testit voidaan myös suorittaa graafisen UI:n kautta komennolla
+
+```
+npm run test -- --ui
+```
+
+Esimerkkitestit näyttävät seuraavanlaisilta:
+
+```js
+const { test, expect } = require('@playwright/test');
+
+test('has title', async ({ page }) => {
+  await page.goto('https://playwright.dev/'); // highlight-line
+
+  // Expect a title "to contain" a substring.
+  await expect(page).toHaveTitle(/Playwright/);
+});
+
+test('get started link', async ({ page }) => {
+  await page.goto('https://playwright.dev/');
+
+  // Click the get started link.
+  await page.getByRole('link', { name: 'Get started' }).click();
+
+  // Expects page to have a heading with the name of Installation.
+  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+});
+```
+
+Testifunktion ensimmäinen rivi kertoo, että testit testaavat osoitteessa https://playwright.dev/ olevaa sivua.
+
+### Oman koodin testaaminen
+
+Poistetaan nyt esimerkkitestit ja aloitetaan oman sovelluksemme testaaminen.
+
+Playwright-testit olettavat että testattava järjestelmä on käynnissä kun testit suoritetaan, eli toisin kuin esim. backendin integraatiotestit, Playwright-testit <i>eivät käynnistä</i> testattavaa järjestelmää testauksen yhteydessä.
 
 Tehdään <i>backendille</i> npm-skripti, jonka avulla se saadaan käynnistettyä testausmoodissa, eli siten, että <i>NODE\_ENV</i> saa arvon <i>test</i>.
 
@@ -76,136 +147,94 @@ Tehdään <i>backendille</i> npm-skripti, jonka avulla se saadaan käynnistetty�
     "deploy:full": "npm run build:ui && npm run deploy",
     "logs:prod": "fly logs",
     "lint": "eslint .",
-    "test": "jest --verbose --runInBand",
+    "test": "NODE_ENV=test node --test",
     "start:test": "NODE_ENV=test node index.js" // highlight-line
   },
   // ...
 }
 ```
 
-Kun backend ja frontend ovat käynnissä, voidaan käynnistää Cypress komennolla
+Käynnistetään frontend ja backend, ja luodaan sovellukselle ensimmäinen testi tiedotoon <code>tests/note\_app.spec.js</code>:
 
 ```js
-npm run cypress:open
+const { test, expect } = require('@playwright/test')
+
+test('front page can be opened', async ({ page }) => {
+  await page.goto('http://localhost:5173')
+
+  const locator = await page.getByText('Notes')
+  await expect(locator).toBeVisible()
+  await expect(await page.getByText('Note app, Department of Computer Science, University of Helsinki 2023')).toBeVisible()
+})
 ```
 
-Cypress kysyy minkä tyyppisiä testejä haluamme tehdä. Valitaan "E2E Testing":
+Ensin testi avaa sovelluksen metodilla [page.goto](https://playwright.dev/docs/writing-tests#navigation).
+Tämän jälkeen testi etsii metodilla [page.getByText](https://playwright.dev/docs/api/class-page#page-get-by-text) [lokaattorin](https://playwright.dev/docs/api/class-locator) joka vastaa elementtiä missä esiintyy teksti <i>Notes</i>. 
 
-![](../../images/5/51new.png)
+Metodilla [toBeVisible](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-be-visible) varmistetaan, että lokaattoria vastaava elementti on renderöitynä näkyville.
 
-Valitaan sopiva selain (esim. Chrome) ja "Create new spec":
+Toinen tarkistus tehdään ilman apumuuttujan käyttöä.
 
-![](../../images/5/52new.png)
-
-Annetaan testille nimeksi <i>note\_app.cy.js</i> ja sijoitetaan se ehdotettuun hakemistoon <i>cypress/e2e:</i>
-
-![](../../images/5/53new.png)
-
-Voisimme tehdä testejä Cypressin kautta, mutta käytetään kuitenkin VS Codea testien editointiin:
-
-![](../../images/5/54new.png)
-
-Suljetaan Cypressin testin editointinäkymä.
-
-Muutetaan testin sisätö seuraavanlaiseksi
+Huomaamme, että vuosi on vaihtunut. Muutetaankin testiä seuraavasti:
 
 ```js
-describe('Note ', function() {
-  it('front page can be opened', function() {
-    cy.visit('http://localhost:5173')
-    cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
+const { test, expect } = require('@playwright/test')
+
+test('front page can be opened', async ({ page }) => {
+  await page.goto('http://localhost:5173')
+
+  const locator = await page.getByText('Notes')
+  await expect(locator).toBeVisible()
+  await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible() // highlight-line
+})
+```
+
+Kuten arvata saattaa, testi ei mene läpi. Playwright avaa testiraportin selaimeen ja siitä käy selväksi, että Playwright on itseasiassa suorittanut testit kolmella eri selaimella Chromella, yhden Firefoxilla sekä Webkitillä eli esim. Safarin käyttämällä selaimoottorilla:
+
+![](../../images/5/play2.png)
+
+Klikkaamalla jonkin selaimen raporttia näemme tarkemman virheilmoituksen:
+
+![](../../images/5/play3a.png)
+
+Isossa kuvassa on tietysti oikein hyvä asia että testaus tapahtuu kaikilla kolmella yleisesti käytetyllä selainmoottorilla, mutta tämä on hidasta, ja testejä kehittäessä kannattaa ehkä suorittaa pääosin vain yhdellä selaimella. Käytettävän selainmoottorin määrittely onnistuu komenentoriviparametrilla:
+
+```js
+npm test -- --project chromium
+```
+
+Korjataan nyt koodista virheen aiheuttanut vanhentunut vuosiluku.
+
+Ennen kuin jatkamme, lisätään vielä testeihin _describe_-lohko:
+
+```js
+const { test, describe, expect } = require('@playwright/test')
+
+describe('Note app', () => {
+  test('front page can be opened', async ({ page }) => {
+    await page.goto('http://localhost:5173')
+
+    const locator = await page.getByText('Notes')
+    await expect(locator).toBeVisible()
+    await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible()
   })
 })
 ```
 
-Testin suoritus käynnistetään klikkaamalla testin nimeä Cypressin näkymästä:
+Ennen kuin mennään eteenpäin, rikotaan testit vielä kertaalleen. Huomaamme, että testien suoritus on melko nopeaa kuin testit menevät läpi, mutta paljon hitaampaa jos testit eivät mene läpi. Syynä tälle on se, että Playwrightin toimintaperiaatteena on odottaa etsittyjä elementtejä kunnes [ne ovat renderöityjä ja toimintaan valmiita](https://playwright.dev/docs/actionability). Jos elementtiä ei löydy, seurauksena on _TimeoutError_ ja testi ei mene läpi. Playwright odottaa elementtejä oletusarvoisesti 5 tai 30 sekunnin ajan testauksessa käytetyistä funktioista [riippuen](https://playwright.dev/docs/test-timeouts#introduction).
 
-![](../../images/5/55new.png)
-
-Testin suoritus näyttää, miten sovellus käyttäytyy testin edetessä:
-
-![Selain renderöi näkymän, jossa vasemmalla testit ja niiden askeleet ja oikealla testin alla oleva sovellus.](../../images/5/56new.png)
-
-Testi näyttää rakenteeltaan melko tutulta. <i>describe</i>-lohkoja käytetään samaan tapaan kuin Jestissä ryhmittelemään yksittäisiä testitapauksia, jotka on määritelty <i>it</i>-metodin avulla. Nämä osat Cypress on lainannut sisäisesti käyttämältään [Mocha](https://mochajs.org/)-testikirjastolta.  
-
-[cy.visit](https://docs.cypress.io/api/commands/visit.html) ja [cy.contains](https://docs.cypress.io/api/commands/contains.html) taas ovat Cypressin komentoja, joiden merkitys on aika ilmeinen. [cy.visit](https://docs.cypress.io/api/commands/visit.html) avaa testin käyttämään selaimeen parametrina määritellyn osoitteen ja [cy.contains](https://docs.cypress.io/api/commands/contains.html) etsii sivun sisältä parametrina annetun tekstin. 
-
-Olisimme voineet määritellä testin myös käyttäen nuolifunktioita
+Testejä kehitettäessä voi olla viisaampaa pienentää odotettavaa aikaa muutamaan sekuntiin. [Dokumentaation](https://playwright.dev/docs/test-timeouts) mukaan tämä onnistuu muuttamalla tiedostoa _playwright.config.js_ seuraavasti:
 
 ```js
-describe('Note app', () => { // highlight-line
-  it('front page can be opened', () => { // highlight-line
-    cy.visit('http://localhost:5173')
-    cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
-  })
+module.exports = defineConfig({
+  timeout: 3000,
+  fullyParallel: false, // highlight-line
+  workers: 1, // highlight-line
+  // ...
 })
 ```
 
-Mochan dokumentaatio kuitenkin [suosittelee](https://mochajs.org/#arrow-functions) että nuolifunktioita ei käytetä, ne saattavat aiheuttaa ongelmia joissain tilanteissa.
-
-HUOM: tässä materiaalissa suoritetaan Cypress-testejä pääasiassa graafisen test runnerin kautta. Testit on luonnollisesti mahdollista suorittaa myös [komentoriviltä](https://docs.cypress.io/guides/guides/command-line.html), komennolla <em>cypress run</em>, joka kannattaa halutessa lisätä npm-skriptiksi.
-
-Jos komento <i>cy.contains</i> ei löydä sivulta etsimäänsä tekstiä, testi ei mene läpi. Eli jos laajennamme testiä seuraavasti
-
-```js
-describe('Note app', function() {
-  it('front page can be opened',  function() {
-    cy.visit('http://localhost:5173')
-    cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
-  })
-
-// highlight-start
-  it('front page contains random text', function() {
-    cy.visit('http://localhost:5173')
-    cy.contains('wtf is this app?')
-  })
-// highlight-end
-})
-```
-
-havaitsee Cypress ongelman
-
-![Vasemmalla oleva testin suoritusta kuvaava näkymä paljastaa, että "contains"-askel epäonnistuu ja aiheuttaa virheen AssertionError, timed out... Expected to find content 'wtf is this app?' but never did.](../../images/5/57new.png)
-
-Poistetaan virheeseen johtanut testi koodista.
-
-Testeissä käytetty muuttuja _cy_ aiheuttaa ikävän ESlint-virheen
-
-![VS code paljastaa ESlint-virheen 'cy' is not defined](../../images/5/58new.png)
-
-Siitä päästään eroon asentamalla [eslint-plugin-cypress](https://github.com/cypress-io/eslint-plugin-cypress) kehitysaikaiseksi riippuvuudeksi
-
-```js
-npm install eslint-plugin-cypress --save-dev
-```
-
-ja laajentamalla tiedostossa <i>.eslintrc.cjs</i> olevaa konfiguraatiota seuraavasti: 
-
-```js
-module.exports = {
-  "env": {
-    browser: true,
-    es2020: true,
-    "jest/globals": true,
-    "cypress/globals": true // highlight-line
-  },
-  "extends": [ 
-    // ...
-  ],
-  "parserOptions": {
-    // ...
-  },
-  "plugins": [
-      "react", "jest", "cypress" // highlight-line
-  ],
-  "rules": {
-    // ...
-  }
-}
-```
+Teimme tiedostoon kaksi muutakin muutosta, ja määrittelimme että kaikki testit [suoritetaan yksi kerrallaan](https://playwright.dev/docs/test-parallel). Oletusarvoisella konfiguraatiolla suoritus tapahtuu rinnakkain, ja koska testimme käyttävät yhteistä tietokantaa, rinnakkainen suoritus aiheuttaa ongelmia.
 
 ### Lomakkeelle kirjoittaminen
 
@@ -214,56 +243,104 @@ Laajennetaan testejä siten, että testi yrittää kirjautua sovellukseen. Olete
 Aloitetaan kirjautumislomakkeen avaamisella.
 
 ```js
-describe('Note app',  function() {
+describe('Note app', () => {
   // ...
 
-  it('login form can be opened', function() {
-    cy.visit('http://localhost:5173')
-    cy.contains('log in').click()
+  test('login form can be opened', async ({ page }) => {
+    await page.goto('http://localhost:5173')
+
+    await page.getByRole('button', { name: 'log in' }).click()
   })
 })
 ```
 
-Testi hakee ensin napin sen tekstin perusteella ja klikkaa nappia komennolla [cy.click](https://docs.cypress.io/api/commands/click.html#Syntax).
+Testi hakee ensin funktion [getByRole](https://playwright.dev/docs/api/class-page#page-get-by-role) avulla napin sen tekstin perusteella. Funktio palauttaa Button-elementtiä vastaavan [Locatorin](https://playwright.dev/docs/api/class-locator). Napin painaminen suoritetaan Locatorin metodilla [click](https://playwright.dev/docs/api/class-locator#locator-click).
 
-Koska molemmat testit aloittavat samalla tavalla, eli avaamalla sivun <i>http://localhost:5173</i>, kannattaa yhteinen osa eristää ennen jokaista testiä suoritettavaan <i>beforeEach</i>-lohkoon:
+Testejä kehitettäessä kannattaa käyttää Playwrightin [UI-moodia](https://playwright.dev/docs/test-ui-mode), eli käyttöliittymällistä versiota. Käynnistetään testit UI-moodissa seuraavasti:
+
+```
+npm test -- --ui
+```
+
+Näeme nyt että testi löytää napin 
+
+![](../../images/5/play4.png)
+
+Klikkauksen jälkeen lomake tulee näkyviin
+
+![](../../images/5/play5.png)
+
+Kun lomake on avattu, testin tulisi etsiä siitä teksikentät ja kirjoittaa niihin käyttäjätunnus sekä salasana. Tehdään ensimmäinen yritys funktiota [page.getByRole](https://playwright.dev/docs/api/class-page#page-get-by-role) käyttäen:
 
 ```js
-describe('Note app', function() {
-  // highlight-start
-  beforeEach(function() {
-    cy.visit('http://localhost:5173')
-  })
-  // highlight-end
+describe('Note app', () => {
+  // ...
 
-  it('front page can be opened', function() {
-    cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
-  })
+  test('login form can be opened', async ({ page }) => {
+    await page.goto('http://localhost:5173')
 
-  it('login form can be opened', function() {
-    cy.contains('log in').click()
+    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('textbox').fill('mluukkai')
   })
 })
 ```
 
-Ilmoittautumislomake sisältää kaksi <i>input</i>-kenttää, joihin testin tulisi kirjoittaa.
+Seurauksena on virheilmoitus:
 
-Komento [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax) mahdollistaa elementtien etsimisen CSS-selektorien avulla.
-
-Voimme hakea lomakkeen ensimmäisen ja viimeisen input-kentän ja kirjoittaa niihin komennolla [cy.type](https://docs.cypress.io/api/commands/type.html#Syntax) seuraavasti:
-
-```js
-it('user can login', function () {
-  cy.contains('log in').click()
-  cy.get('input:first').type('mluukkai')
-  cy.get('input:last').type('salainen')
-})  
+```
+Error: locator.fill: Error: strict mode violation: getByRole('textbox') resolved to 2 elements:
+  1) <input value=""/> aka locator('div').filter({ hasText: /^username$/ }).getByRole('textbox')
+  2) <input value="" type="password"/> aka locator('input[type="password"]')
 ```
 
-Testi toimii mutta on kuitenkin sikäli ongelmallinen, että jos sovellukseen tulee jossain vaiheessa lisää input-kenttiä, testi saattaa hajota, sillä se luottaa tarvitsemiensa kenttien olevan sivulla ensimmäisenä ja viimeisenä.
+Ongelmana on nyt se, että _getByRole_ löytää kaksi tekstikenttää, ja metodin [fill](https://playwright.dev/docs/api/class-locator#locator-fill) ei onnistu. Eräs tapa kiertää ongelma on käyttää metodeja [first](https://playwright.dev/docs/api/class-locator#locator-first) ja [last](https://playwright.dev/docs/api/class-locator#locator-last):
 
-Parempi ratkaisu on määritellä kentille yksilöivät <i>id</i>-attribuutit ja hakea kentät testeissä niiden perusteella. Eli laajennetaan kirjautumislomaketta seuraavasti
+```js
+describe('Note app', () => {
+  // ...
+
+  test('login form can be opened', async ({ page }) => {
+    await page.goto('http://localhost:5173')
+
+    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('textbox').first().fill('mluukkai')
+    await page.getByRole('textbox').last().fill('salainen')
+    await page.getByRole('button', { name: 'login' }).click()
+  
+    await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
+  })
+})
+```
+
+Kirjoitettuaan tekstikenttiin, testi painaa nappia _login_ ja tarkastaa, että sovellus renderöi kirjaantuneen käyttäjän tiedot ruudulle. 
+
+Jos tekstikenttiä olisi enemmän kuin kaksi, ei metodien _first_ ja _last_ käyttö riittäisi. Eräs mahdollisuus olisi käyttää metodia [all](https://playwright.dev/docs/api/class-locator#locator-all), joka muuttaa löydetyt locatorit taulukoksi, jota on mahdollista indeksoida:
+
+```js
+describe('Note app', () => {
+  // ...
+  test('login form can be opened', async ({ page }) => {
+    await page.goto('http://localhost:5173')
+
+    await page.getByRole('button', { name: 'log in' }).click()
+    const textboxes = await page.getByRole('textbox').all()
+
+    await textboxes[0].fill('mluukkai')
+    await textboxes[1].fill('salainen')
+
+   // await page.getByRole('textbox').last().fill('salainen')
+    await page.getByRole('button', { name: 'login' }).click()
+  
+    await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
+  })  
+})
+```
+
+Sekä tämä että edellinen versio testistä toimivat. Molemmat ovat kuitenkin sikäli ongelmallisia, että jos kirjaantumislomaketta muutetaan, testit saattavat hajota, sillä ne luottavat tarvitsemiensa kenttien olevan sivulla tietyssä järjestyksessä.
+
+Parempi ratkaisu on määritellä kentille yksilöivät, testausta varten generoidut id-attribuutit ja hakea kentät testeissä niiden perusteella hyväksikäytten metodia [getByTestId](https://playwright.dev/docs/api/class-page#page-get-by-test-id).
+
+Laajennetaan kirjautumislomaketta seuraavasti
 
 ```js
 const LoginForm = ({ ... }) => {
@@ -274,7 +351,7 @@ const LoginForm = ({ ... }) => {
         <div>
           username
           <input
-            id='username'  // highlight-line
+            data-testid='username'  // highlight-line
             value={username}
             onChange={handleUsernameChange}
           />
@@ -282,13 +359,13 @@ const LoginForm = ({ ... }) => {
         <div>
           password
           <input
-            id='password' // highlight-line
+            data-testid='password' // highlight-line
             type="password"
             value={password}
             onChange={handlePasswordChange}
           />
         </div>
-        <button id="login-button" type="submit"> // highlight-line
+        <button type="submit">
           login
         </button>
       </form>
@@ -297,58 +374,86 @@ const LoginForm = ({ ... }) => {
 }
 ```
 
-Myös lomakkeen napille on lisätty id, jonka perusteella se voidaan hakea testissä.
-
 Testi muuttuu muotoon
 
 ```js
-describe('Note app',  function() {
-  // ..
-  it('user can log in', function() {
-    cy.contains('log in').click()
-    cy.get('#username').type('mluukkai')  // highlight-line    
-    cy.get('#password').type('salainen')  // highlight-line
-    cy.get('#login-button').click()  // highlight-line
+describe('Note app', () => {
+  // ...
 
-    cy.contains('Matti Luukkainen logged in') // highlight-line
+  test('login form can be opened', async ({ page }) => {
+    await page.goto('http://localhost:5173')
+
+    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByTestId('username').fill('mluukkai') // highlight-line
+    await page.getByTestId('password').fill('salainen')  // highlight-line
+  
+    await page.getByRole('button', { name: 'login' }).click() 
+  
+    await expect(await page.getByText('Matti Luukkainen logged in')).toBeVisible()
   })
 })
 ```
 
-Viimeinen rivi varmistaa, että kirjautuminen on onnistunut. 
-
-Huomaa, että CSS:n [id-selektori](https://developer.mozilla.org/en-US/docs/Web/CSS/ID_selectors) on risuaita, eli jos koodista etsitään elementtiä, jolla on id <i>username</i> on sitä vastaava CSS-selektori <i>#username</i>.
-
 Huomaa, että testin läpimeno tässä vaiheessa edellyttää, että backendin ympäristön <i>test</i> tietokannassa on käyttäjä, jonka username on <i>mluukkai</i> ja salasana <i>salainen</i>. Luo käyttäjä tarvittaessa!
+
+### Testien alustus
+
+Koska molemmat testit aloittavat samalla tavalla, eli avaamalla sivun <i>http://localhost:5173</i>, kannattaa yhteinen osa eristää ennen jokaista testiä suoritettavaan <i>beforeEach</i>-lohkoon:
+
+```js
+const { test, describe, expect, beforeEach } = require('@playwright/test')
+
+describe('Note app', () => {
+  // highlight-start
+  beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5173')
+  })
+  // highlight-end
+
+  test('front page can be opened', async ({ page }) => {
+    const locator = await page.getByText('Notes')
+    await expect(locator).toBeVisible()
+    await expect(await page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible()
+  })
+
+  test('login form can be opened', async ({ page }) => {
+    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByTestId('username').fill('mluukkai')
+    await page.getByTestId('password').fill('salainen')
+    await page.getByRole('button', { name: 'login' }).click()
+    await expect(await page.getByText('Matti Luukkainen logged in')).toBeVisible()
+  })
+})
+
+```
 
 ### Muistiinpanojen luomisen testaus
 
 Luodaan seuraavaksi testi, joka lisää sovellukseen uuden muistiinpanon:
 
 ```js
-describe('Note app', function() {
-  // ..
-  // highlight-start
-  describe('when logged in', function() {
-    beforeEach(function() {
-      cy.contains('log in').click()
-      cy.get('#username').type('mluukkai')
-      cy.get('#password').type('salainen')
-      cy.get('#login-button').click()
-    })
-    // highlight-end
+const { test, describe, expect, beforeEach } = require('@playwright/test')
 
-    // highlight-start
-    it('a new note can be created', function() {
-      cy.contains('new note').click()
-      cy.get('input').type('a note created by cypress')
-      cy.contains('save').click()
+describe('Note app', () => {
+  // ...
 
-      cy.contains('a note created by cypress')
+  describe('when logged in', () => {
+    beforeEach(async ({ page }) => {
+      await page.getByRole('button', { name: 'log in' }).click()
+      await page.getByTestId('username').fill('mluukkai')
+      await page.getByTestId('password').fill('salainen')
+      await page.getByRole('button', { name: 'login' }).click()
     })
-  })
-  // highlight-end
+
+    test('a new note can be created', async ({ page }) => {
+      await page.getByRole('button', { name: 'new note' }).click()
+      await page.getByRole('textbox').fill('a note created by playwright')
+      await page.getByRole('button', { name: 'save' }).click()
+      await expect(await page.getByText('a note created by playwright')).toBeVisible()
+    })
+  })  
 })
+
 ```
 
 Testi on määritelty omana <i>describe</i>-lohkonaan. Muistiinpanon luominen edellyttää että käyttäjä on kirjaantuneena, ja kirjautuminen hoidetaan <i>beforeEach</i>-lohkossa. 
@@ -356,46 +461,55 @@ Testi on määritelty omana <i>describe</i>-lohkonaan. Muistiinpanon luominen ed
 Testi luottaa siihen, että uutta muistiinpanoa luotaessa sivulla on ainoastaan yksi input-kenttä, eli se hakee kentän seuraavasti
 
 ```js
-cy.get('input')
+page.getByRole('textbox')
 ```
 
-Jos kenttiä olisi useampia, testi hajoaisi
+Jos kenttiä olisi useampia, testi hajoaisi Tämän takia olisi jälleen parempi lisätä lomakkeen kentälle testi-id ja hakea kenttä testissä id:n perusteella.
 
-![Aiheutuu virhe cy.type() cam only be called on a single element. Your subject contained 2 elements.](../../images/5/31x.png)
+**Huom:** testi ei mene läpi kuin ensimmäisellä kerralla suoritettaessa. Syynä tälle on se, että ekspektaatio
 
-Tämän takia olisi jälleen parempi lisätä lomakkeen kentälle <i>id</i> ja hakea kenttä testissä id:n perusteella.
+```js
+await expect(await page.getByText('a note created by playwright')).toBeVisible()
+```
+
+aiheuttaa ongelmia siinä vaiheessa kun sovellukseen luodaan sama muistiinpano useammin kuin kertaalleen. Ongelmasta päästään eroon seuraavassa luvussa.
 
 Testien rakenne näyttää seuraavalta:
 
 ```js
-describe('Note app', function() {
-  // ...
+const { test, describe, expect, beforeEach } = require('@playwright/test')
 
-  it('user can log in', function() {
-    cy.contains('log in').click()
-    cy.get('#username').type('mluukkai')
-    cy.get('#password').type('salainen')
-    cy.get('#login-button').click()
+describe('Note app', () => {
+  // ....
 
-    cy.contains('Matti Luukkainen logged in')
+  test('user can log in', async ({ page }) => {
+    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByTestId('username').fill('mluukkai')
+    await page.getByTestId('password').fill('salainen')
+    await page.getByRole('button', { name: 'login' }).click()
+    await expect(await page.getByText('Matti Luukkainen logged in')).toBeVisible()
   })
 
-  describe('when logged in', function() {
-    beforeEach(function() {
-      cy.contains('log in').click()
-      cy.get('#username').type('mluukkai')
-      cy.get('#password').type('salainen')
-      cy.get('#login-button').click()
+  describe('when logged in', () => {
+    beforeEach(async ({ page }) => {
+      await page.getByRole('button', { name: 'log in' }).click()
+      await page.getByTestId('username').fill('mluukkai')
+      await page.getByTestId('password').fill('salainen')
+      await page.getByRole('button', { name: 'login' }).click()
     })
 
-    it('a new note can be created', function() {
-      // ...
+    test('a new note can be created', async ({ page }) => {
+      await page.getByRole('button', { name: 'new note' }).click()
+      await page.getByRole('textbox').fill('a note created by playwright')
+      await page.getByRole('button', { name: 'save' }).click()
+      await expect(await page.getByText('a note created by playwright')).toBeVisible()
     })
-  })
+  })  
 })
+
 ```
 
-Cypress suorittaa testit siinä järjestyksessä, missä ne ovat testikoodissa. Eli ensin suoritetaan testi <i>user can log in</i>, missä käyttäjä kirjautuu sovellukseen, ja tämän jälkeen suoritetaan testi <i>a new note can be created</i>, jonka <i>beforeEach</i>-lohkossa myös suoritetaan kirjautuminen. Miksi näin tehdään, eikö käyttäjä jo ole kirjaantuneena aiemman testin ansiosta? Ei, sillä <i>jokaisen</i> testin suoritus alkaa selaimen kannalta "nollatilanteesta", kaikki edellisten testien selaimen tilaan tekemät muutokset nollaantuvat.
+Playwright suorittaa testit siinä järjestyksessä, missä ne ovat testikoodissa. Eli ensin suoritetaan testi <i>user can log in</i>, missä käyttäjä kirjautuu sovellukseen, ja tämän jälkeen suoritetaan testi <i>a new note can be created</i>, jonka <i>beforeEach</i>-lohkossa myös suoritetaan kirjautuminen. Miksi näin tehdään, eikö käyttäjä jo ole kirjaantuneena aiemman testin ansiosta? Ei, sillä <i>jokaisen</i> testin suoritus alkaa selaimen kannalta "nollatilanteesta", kaikki edellisten testien selaimen tilaan tekemät muutokset nollaantuvat.
 
 ### Tietokannan tilan kontrollointi
 
@@ -448,83 +562,64 @@ Backendin testejä varten muokattu koodi on kokonaisuudessaan [GitHubissa](https
 
 Muutetaan nyt testien <i>beforeEach</i>-alustuslohkoa siten, että se nollaa palvelimen tietokannan aina ennen testien suorittamista.
 
-Tällä hetkellä sovelluksen käyttöliittymän kautta ei ole mahdollista luoda käyttäjiä, luodaankin testien alustuksessa testikäyttäjä suoraan backendiin.
+Tällä hetkellä sovelluksen käyttöliittymän kautta ei ole mahdollista luoda käyttäjiä, luodaankin testien alustuksessa testikäyttäjä suoraan backendiin:
 
 ```js
-describe('Note app', function() {
-   beforeEach(function() {
-    // highlight-start
-    cy.request('POST', 'http://localhost:3001/api/testing/reset')
-    const user = {
-      name: 'Matti Luukkainen',
-      username: 'mluukkai',
-      password: 'salainen'
-    }
-    cy.request('POST', 'http://localhost:3001/api/users/', user) 
-    // highlight-end
-    cy.visit('http://localhost:5173')
+describe('Note app', () => {
+  beforeEach(async ({ page, request }) => {
+    await request.post('http:localhost:3001/api/testing/reset')
+    await request.post('http://localhost:3001/api/users', {
+      data: {
+        name: 'Matti Luukkainen',
+        username: 'mluukkai',
+        password: 'salainen'
+      }
+    })
+
+    await page.goto('http://localhost:5173')
   })
   
-  it('front page can be opened', function() {
+  test('front page can be opened',  () => {
     // ...
   })
 
-  it('user can login', function() {
+  test('user can login', () => {
     // ...
   })
 
-  describe('when logged in', function() {
+  describe('when logged in', () => {
     // ...
   })
 })
 ```
 
-Testi tekee alustuksen aikana HTTP-pyyntöjä backendiin komennolla [cy.request](https://docs.cypress.io/api/commands/request.html). 
+Testi tekee alustuksen aikana HTTP-pyyntöjä backendiin parametrin _request_ metodilla [post](https://playwright.dev/docs/api/class-apirequestcontext#api-request-context-post). 
 
 Toisin kuin aiemmin, nyt testaus alkaa nyt myös backendin suhteen aina hallitusti samasta tilanteesta, eli tietokannassa on yksi käyttäjä ja ei yhtään muistiinpanoa.
 
-Tehdään vielä testi, joka tarkastaa että muistiinpanojen tärkeyttä voi muuttaa. Muutimme sovellusta hieman aiemmin jo siten, että <i>important</i> saa aluksi arvon <i>true</i>:
+Tehdään vielä testi, joka tarkastaa että muistiinpanojen tärkeyttä voi muuttaa.
+
+Testin tekemiseen on muutamiakin erilaisia lähestymistapoja.
+
+Seuraavassa etsitään ensin muistiinpano ja klikataan sen nappia <i>make not important</i>. Tämän jälkeen tarkistetaan että muistiinpano sisältää napin <i>make important</i>.
 
 ```js
-const NoteForm = ({ createNote }) => {
+describe('Note app', () => {
   // ...
 
-  const addNote = (event) => {
-    event.preventDefault()
-    createNote({
-      content: newNote,
-      important: true // highlight-line
-    })
-
-    setNewNote('')
-  }
-  // ...
-} 
-```
-
-On useita eri tapoja testata asia. Seuraavassa etsitään ensin muistiinpano ja klikataan sen nappia <i>make important</i>. Tämän jälkeen tarkistetaan että muistiinpano sisältää napin <i>make not important</i>.
-
-```js
-describe('Note app', function() {
-  // ...
-
-  describe('when logged in', function() {
+  describe('when logged in', () => {
     // ...
 
-    describe('and a note exists', function () {
-      beforeEach(function () {
-        cy.contains('new note').click()
-        cy.get('input').type('another note cypress')
-        cy.contains('save').click()
+    describe('and a note exists', () => {
+      beforeEach(async ({ page }) => {
+        await page.getByRole('button', { name: 'new note' }).click()
+        await page.getByRole('textbox').fill('another note by playwright')
+        await page.getByRole('button', { name: 'save' }).click()
       })
-
-      it('it can be made important', function () {
-        cy.contains('another note cypress')
-          .contains('make not important')
-          .click()
-
-        cy.contains('another note cypress')
-          .contains('make important')
+  
+      test('importance can be changed', async ({ page }) => {
+        await page.getByRole('button', { name: 'make not important' }).click()
+        await expect(await page.getByText('make important')).toBeVisible()
       })
     })
   })
@@ -535,34 +630,42 @@ Ensimmäinen komento etsii ensin komponentin, missä on teksti <i>another note c
 
 Toinen komento varmistaa, että saman napin teksti on vaihtunut muotoon <i>make important</i>.
 
-Testit ja frontendin tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-9), branchissa <i>part5-9</i>.
+Frontendin tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-9), branchissa <i>part5-9</i>.
+
+Testien tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/notes-e2e/tree/part5-1), branchissa <i>part5-1</i>.
 
 ### Epäonnistuneen kirjautumisen testi
 
 Tehdään nyt testi joka varmistaa, että kirjautumisyritys epäonnistuu jos salasana on väärä.
 
-Cypress suorittaa oletusarvoisesti aina kaikki testit, ja testien määrän kasvaessa se alkaa olla aikaavievää. Uutta testiä kehitellessä tai rikkinäistä testiä debugatessa voidaan määritellä testi komennon <i>it</i> sijaan komennolla <i>it.only</i>, jolloin Cypress suorittaa ainoastaan sen testin. Kun testi on valmiina, voidaan <i>only</i> poistaa.
+Playwright suorittaa oletusarvoisesti aina kaikki testit, ja testien määrän kasvaessa se alkaa olla aikaavievää. Uutta testiä kehitellessä tai rikkinäistä testiä debugatessa voidaan määritellä testi komennon <i>test</i> sijaan komennolla <i>test.only</i>, jolloin Playwright suorittaa ainoastaan sen testin. Kun testi on valmiina, voidaan <i>only</i> poistaa.
+
+Toinen vaihtoehto suorittaa yksittäinen testi, on käyttää komentoriviparametria
+
+```
+npm test -- -g "login fails with wrong password"
+```
 
 Testin ensimmäinen versio näyttää seuraavalta:
 
 ```js
-describe('Note app', function() {
+describe('Note app', () => {
   // ...
 
-  it.only('login fails with wrong password', function() {
-    cy.contains('log in').click()
-    cy.get('#username').type('mluukkai')
-    cy.get('#password').type('wrong')
-    cy.get('#login-button').click()
+  test('login fails with wrong password', async ({ page }) => {
+    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByTestId('username').fill('mluukkai')
+    await page.getByTestId('password').fill('wrong')
+    await page.getByRole('button', { name: 'login' }).click()
 
-    cy.contains('wrong credentials')
+    await expect(await page.getByText('wrong credentials')).toBeVisible()
   })
 
   // ...
 )}
 ```
 
-Testi siis varmistaa komennon [cy.contains](https://docs.cypress.io/api/commands/contains.html#Syntax) avulla, että sovellus tulostaa virheilmoituksen.
+Testi siis varmistaa komennon [getByText](https://playwright.dev/docs/api/class-page#page-get-by-text) avulla, että sovellus tulostaa virheilmoituksen.
 
 Sovellus renderöi virheilmoituksen CSS-luokan <i>error</i> sisältävään elementtiin:
 
@@ -584,173 +687,122 @@ Voisimmekin tarkentaa testiä varmistamaan, että virheilmoitus tulostuu nimenom
 
 
 ```js
-it('login fails with wrong password', function() {
+  test('login fails with wrong password', async ({ page }) => {
   // ...
 
-  cy.get('.error').contains('wrong credentials') // highlight-line
+  const errorDiv = await page.locator('.error')
+  await expect(errorDiv).toContainText('wrong credentials')
 })
 ```
 
-Eli ensin etsitään komennolla [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax) CSS-luokan <i>error</i> sisältävä komponentti ja sen jälkeen varmistetaan että virheilmoitus löytyy sen sisältä. Huomaa, että [luokan CSS-selektori](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors) alkaa pisteellä, eli luokan <i>error</i> selektori on <i>.error</i>.
+Testi siis etsitään metodilla [page.locator](https://playwright.dev/docs/api/class-page#page-locator) CSS-luokan <i>error</i> sisältävän komponentin ja tallennetaan sen muuttujaan muuttujaan. Komponenttiin liittyvän teksstin oikeellisuus voidaan varmistaa ekspektaatiolla [toContainText](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-contain-text). Huomaa, että [luokan CSS-selektori](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors) alkaa pisteellä, eli luokan <i>error</i> selektori on <i>.error</i>.
 
-Voisimme tehdä saman myös käyttäen [should](https://docs.cypress.io/api/commands/should.html)-syntaksia:
+Ekspekaatiolla [toHaveCSS](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-have-css) on mahdollista testata tyylejä. Voimme esim. varmistaa, että virheilmoituksen väri on punainen, ja että sen ympärillä on border:
 
 ```js
-it('login fails with wrong password', function() {
+  test('login fails with wrong password', async ({ page }) =>{
   // ...
 
-  cy.get('.error').should('contain', 'wrong credentials') // highlight-line
+    const errorDiv = await page.locator('.error')
+    await expect(errorDiv).toContainText('wrong credentials')
+    await expect(errorDiv).toHaveCSS('border-style', 'solid')
+    await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)')
 })
 ```
 
-Shouldin käyttö on jonkin verran "hankalampaa" kuin komennon <i>contains</i>, mutta se mahdollistaa huomattavasti monipuolisemmat testit kuin pelkän tekstisisällön perusteella toimiva <i>contains</i>. 
+Värit on määriteltävä Playwrightille [rgb](https://rgbcolorcode.com/color/red)-koodeina.
 
-Lista yleisimmistä shouldin kanssa käytettävistä assertioista on [täällä](https://docs.cypress.io/guides/references/assertions.html#Common-Assertions).
 
-Voimme esim. varmistaa, että virheilmoituksen väri on punainen, ja että sen ympärillä on border:
-
-```js
-it('login fails with wrong password', function() {
-  // ...
-
-  cy.get('.error').should('contain', 'wrong credentials') 
-  cy.get('.error').should('have.css', 'color', 'rgb(255, 0, 0)')
-  cy.get('.error').should('have.css', 'border-style', 'solid')
-})
-```
-
-Värit on määriteltävä Cypressille [rgb](https://rgbcolorcode.com/color/red)-koodeina.
-
-Koska kaikki tarkastukset kohdistuvat samaan komennolla [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax) haettuun elementtiin, ne voidaan ketjuttaa komennon [and](https://docs.cypress.io/api/commands/and.html) avulla:
-
-```js
-it('login fails with wrong password', function() {
-  // ...
-
-  cy.get('.error')
-    .should('contain', 'wrong credentials')
-    .and('have.css', 'color', 'rgb(255, 0, 0)')
-    .and('have.css', 'border-style', 'solid')
-})
-```
 Viimeistellään testi vielä siten, että se varmistaa myös, että sovellus ei renderöi onnistunutta kirjautumista kuvaavaa tekstiä <i>'Matti Luukkainen logged in'</i>:
 
 ```js
-it('login fails with wrong password', function() {
-  cy.contains('log in').click()
-  cy.get('#username').type('mluukkai')
-  cy.get('#password').type('wrong')
-  cy.get('#login-button').click()
+test('login fails with wrong password', async ({ page }) =>{
+  await page.getByRole('button', { name: 'log in' }).click()
+  await page.getByTestId('username').fill('mluukkai')
+  await page.getByTestId('password').fill('wrong')
+  await page.getByRole('button', { name: 'login' }).click()
 
-  cy.get('.error')
-    .should('contain', 'wrong credentials')
-    .and('have.css', 'color', 'rgb(255, 0, 0)')
-    .and('have.css', 'border-style', 'solid')
+  const errorDiv = await page.locator('.error')
+  await expect(errorDiv).toContainText('wrong credentials')
+  await expect(errorDiv).toHaveCSS('border-style', 'solid')
+  await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)')
 
-  cy.get('html').should('not.contain', 'Matti Luukkainen logged in') // highlight-line
+  await expect(await page.getByText('Matti Luukkainen logged in')).not.toBeVisible() // highlight-line
 })
 ```
 
-Komentoa <i>should</i> käytetään useimmiten ketjutettuna komennon <i>get</i> (tai muun vastaavan ketjutettavissa olevan komennon) perään. Testissä käytetty <i>cy.get('html')</i> tarkoittaa käytännössä koko sovelluksen näkyvillä olevaa sisältöä.
-
-Saman asian olisi myös voinut tarkastaa ketjuttamalla komennon <i>contains</i> perään komento <i>should</i> hieman toisenlaisella parametrilla:
-
-```js
-cy.contains('Matti Luukkainen logged in').should('not.exist')
-```
-
-### Operaatioiden tekeminen käyttöliittymän "ohi"
+### Testien apufunktiot
 
 Sovelluksemme testit näyttävät tällä hetkellä seuraavalta:
 
 ```js 
-describe('Note app', function() {
-  it('user can login', function() {
-    cy.contains('log in').click()
-    cy.get('#username').type('mluukkai')
-    cy.get('#password').type('salainen')
-    cy.get('#login-button').click()
+const { test, describe, expect, beforeEach } = require('@playwright/test')
 
-    cy.contains('Matti Luukkainen logged in')
+describe('Note app', () => {
+  // ...
+
+  test('user can log in', async ({ page }) => {
+    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByTestId('username').fill('mluukkai')
+    await page.getByTestId('password').fill('salainen')
+    await page.getByRole('button', { name: 'login' }).click()
+    await expect(await page.getByText('Matti Luukkainen logged in')).toBeVisible()
   })
 
-  it('login fails with wrong password', function() {
+  test('login fails with wrong password', async ({ page }) =>{
     // ...
   })
 
-  describe('when logged in', function() {
-    beforeEach(function() {
-      cy.contains('log in').click()
-      cy.get('#username').type('mluukkai')
-      cy.get('#password').type('salainen')
-      cy.get('#login-button').click()
+  describe('when logged in', () => {
+    beforeEach(async ({ page, request }) => {
+      await page.getByRole('button', { name: 'log in' }).click()
+      await page.getByTestId('username').fill('mluukkai')
+      await page.getByTestId('password').fill('salainen')
+      await page.getByRole('button', { name: 'login' }).click()
     })
 
-    it('a new note can be created', function() {
-      // ... 
+    test('a new note can be created', async ({ page }) => {
+      // ...
     })
-   
-  })
+  
+    // ...
+  })  
 })
+
 ```
 
 Ensin siis testataan kirjautumistoimintoa. Tämän jälkeen omassa describe-lohkossa on joukko testejä, jotka olettavat että käyttäjä on kirjaantuneena, kirjaantuminen hoidetaan alustuksen tekevän <i>beforeEach</i>-lohkon sisällä. 
 
 Kuten aiemmin jo todettiin, jokainen testi suoritetaan alkutilasta, eli vaikka testi on koodissa alempana, se ei aloita samasta tilasta mihin ylempänä koodissa olevat testit ovat jääneet!  
 
-Cypressin dokumentaatio neuvoo meitä seuraavasti: [Fully test the login flow – but only once](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Logging-in). Eli sen sijaan että tekisimme <i>beforeEach</i>-lohkossa kirjaantumisen lomaketta käyttäen, suosittelee Cypress että kirjaantuminen tehdään [UI:n ohi](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Bypassing-your-UI), tekemällä suoraan backendiin kirjaantumista vastaava HTTP-operaatio. Syynä tälle on se, että suoraan backendiin tehtynä kirjautuminen on huomattavasti nopeampi kuin lomakkeen täyttämällä. 
-
-Tilanteemme on hieman monimutkaisempi kuin Cypressin dokumentaation esimerkissä, sillä kirjautumisen yhteydessä sovelluksemme tallettaa kirjautuneen käyttäjän tiedot localStorageen. Sekin toki onnistuu. Koodi on seuraavassa
+Myös testeissä kannattaa pyrkiä toisteettomaan koodiin. Eristetään kirjautumisen hoitava koodi apufunktioksi, joka sijoitetaan esim. tiedostoon _tests/helper.js_: 
 
 ```js 
-describe('when logged in', function() {
-  beforeEach(function() {
-    // highlight-start
-    cy.request('POST', 'http://localhost:3001/api/login', {
-      username: 'mluukkai', password: 'salainen'
-    }).then(response => {
-      localStorage.setItem('loggedNoteappUser', JSON.stringify(response.body))
-      cy.visit('http://localhost:5173')
+const loginWith = async (page, username, password)  => {
+  await page.getByRole('button', { name: 'log in' }).click()
+  await page.getByTestId('username').fill(username)
+  await page.getByTestId('password').fill(password)
+  await page.getByRole('button', { name: 'login' }).click()
+}
+
+export { loginWith }
+```
+
+Testi yksinkertaistuu ja selkeytyy:
+
+```js
+describe('Note app', () => {
+  test('user can log in', async ({ page }) => {
+    await loginWith(page, 'mluukkai', 'salainen')
+    await expect(await page.getByText('Matti Luukkainen logged in')).toBeVisible()
+  })
+
+  describe('when logged in', () => {
+    beforeEach(async ({ page }) => {
+      await loginWith(page, 'mluukkai', 'salainen')
     })
-    // highlight-end
-  })
 
-  it('a new note can be created', function() {
-    // ...
-  })
-
-  // ...
-})
-```
-
-Komennon [cy.request](https://docs.cypress.io/api/commands/request.html) tulokseen päästään käsiksi _then_-metodin avulla sillä sisäiseltä toteutukseltaan <i>cy.request</i> kuten muutkin Cypressin komennot ovat [eräänlaisia promiseja](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Commands-Are-Promises). Käsittelijäfunktio tallettaa kirjautuneen käyttäjän tiedot localStorageen ja lataa sivun uudelleen. Tämän jälkeen käyttäjä on kirjautuneena sovellukseen samalla tavalla kuin jos kirjautuminen olisi tapahtunut kirjautumislomakkeen täyttämällä.
-
-Jos ja kun sovellukselle kirjoitetaan lisää testejä, joudutaan kirjautumisen hoitavaa koodia soveltamaan useassa paikassa. Koodi kannattaakin eristää itse määritellyksi [komennoksi](https://docs.cypress.io/api/cypress-api/custom-commands.html).
-
-Komennot määritellään tiedostoon <i>cypress/support/commands.js</i>. Kirjautumisen tekevä komento näyttää seuraavalta:
-
-```js 
-Cypress.Commands.add('login', ({ username, password }) => {
-  cy.request('POST', 'http://localhost:3001/api/login', {
-    username, password
-  }).then(({ body }) => {
-    localStorage.setItem('loggedNoteappUser', JSON.stringify(body))
-    cy.visit('http://localhost:5173')
-  })
-})
-```
-
-Komennon käyttö on helppoa, testi yksinkertaistuu ja selkeytyy:
-
-```js 
-describe('when logged in', function() {
-  beforeEach(function() {
-    // highlight-start
-    cy.login({ username: 'mluukkai', password: 'salainen' })
-    // highlight-end
-  })
-
-  it('a new note can be created', function() {
+  test('a new note can be created', () => {
     // ...
   })
 
@@ -764,23 +816,22 @@ Sama koskee oikeastaan myös uuden muistiinpanon luomista. Sitä varten on olema
 describe('Note app', function() {
   // ...
 
-  describe('when logged in', function() {
-    it('a new note can be created', function() {
-      cy.contains('new note').click()
-      cy.get('input').type('a note created by cypress')
-      cy.contains('save').click()
-
-      cy.contains('a note created by cypress')
+  describe('when logged in', () => {
+    test('a new note can be created', async ({ page }) => {
+      await page.getByRole('button', { name: 'new note' }).click()
+      await page.getByRole('textbox').fill('a note created by playwright')
+      await page.getByRole('button', { name: 'save' }).click()
+      await expect(page.getByText('a note created by playwright')).toBeVisible()
     })
-
-    describe('and a note exists', function () {
-      beforeEach(function () {
-        cy.contains('new note').click()
-        cy.get('input').type('another note cypress')
-        cy.contains('save').click()
+  
+    describe('and a note exists', () => {
+      beforeEach(async ({ page }) => {
+        await page.getByRole('button', { name: 'new note' }).click()
+        await page.getByRole('textbox').fill('another note by playwright')
+        await page.getByRole('button', { name: 'save' }).click()
       })
-
-      it('it can be made important', function () {
+  
+      test('it can be made important', async ({ page }) => {
         // ...
       })
     })
@@ -788,47 +839,48 @@ describe('Note app', function() {
 })
 ```
 
-Eristetään myös muistiinpanon lisääminen omaksi komennoksi, joka tekee lisäämisen suoraan HTTP POST:lla:
+Playwright tarjoaa myös [ratkaisun](https://playwright.dev/docs/auth) missä kirjaantuminen suoritetaan kertaalleen ennen testejä, ja jokainen testi aloittaa tilanteeasta missä sovellukseen ollaan jo kirjaantuneena. Jotta voisimme hyödyntää tätä tapaa, tulisi sovelluksen testidata alustaminen tehdä hienojakoisemmin kuin nyt. Nykyisessä ratkaisussahan tietokanta nollataan ennen jokaista testiä, ja tämän takia kirjaantuminen ennen testejä on mahdotonta. Jotta voisimme käyttää Plywrightin tarjoamaa ennen testejä tehtävää kirjautumista, tulisi käyttäjä alustaa vain kertaalleen ennen testejä. Pitäydymme yksinkertaisuuden vuoksi nykyisessä ratkaisussamme.
+
+Eristetään myös muistiinpanon lisääminen omaksi komennoksi, joka tekee lisäämisen suoraan HTTP POST:lla. Tiedosto _tests/helper.js_ laajenee seuraavasti:
 
 ```js
-Cypress.Commands.add('createNote', ({ content, important }) => {
-  cy.request({
-    url: 'http://localhost:3001/api/notes',
-    method: 'POST',
-    body: { content, important },
-    headers: {
-      'Authorization': `Bearer ${JSON.parse(localStorage.getItem('loggedNoteappUser')).token}`
-    }
-  })
+const loginWith = async (page, username, password)  => {
+  await page.getByRole('button', { name: 'log in' }).click()
+  await page.getByTestId('username').fill(username)
+  await page.getByTestId('password').fill(password)
+  await page.getByRole('button', { name: 'login' }).click()
+}
 
-  cy.visit('http://localhost:5173')
-})
+// highlight-start
+const createNote = async (page, content) => {
+  await page.getByRole('button', { name: 'new note' }).click()
+  await page.getByRole('textbox').fill(content)
+  await page.getByRole('button', { name: 'save' }).click()
+}
+// highlight-end
+
+export { loginWith, createNote }
 ```
 
-Komennon suoritus edellyttää, että käyttäjä on kirjaantuneena sovelluksessa ja käyttäjän tiedot talletettuna sovelluksen localStorageen.
+Komennon suoritus edellyttää, että käyttäjä on kirjaantunut sovellukseen API:n kautta.
 
 Testin alustuslohko yksinkertaistuu seuraavasti:
 
 ```js
-describe('Note app', function() {
+describe('Note app', () => {
   // ...
 
-  describe('when logged in', function() {
-    it('a new note can be created', function() {
+  describe('when logged in',  () => {
+    test('a new note can be created', ({ page }) => {
       // ...
     })
 
-    describe('and a note exists', function () {
-      beforeEach(function () {
-        // highlight-start
-        cy.createNote({
-          content: 'another note cypress',
-          important: true
-        })
-        // highlight-end
+    describe('and a note exists', () => {
+      beforeEach(async ({ page }) => {
+        await createNote(page, 'another note by playwright', true)
       })
 
-      it('it can be made important', function () {
+      test('it can be made important', ({ page }) => {
         // ...
       })
     })
@@ -836,71 +888,48 @@ describe('Note app', function() {
 })
 ```
 
-Testeissämme on vielä eräs ikävä piirre. Sovelluksen osoite <i>http:localhost:5173</i> on kovakoodattuna moneen kohtaan.
-
-Määritellään sovellukselle <i>baseUrl</i> Cypressin valmiiksi generoimaan [konfiguraatiotiedostoon](https://docs.cypress.io/guides/references/configuration) <i>cypress.config.js</i>:
+Testeissämme on vielä eräs ikävä piirre. Sovelluksen frontendin osoite <i>http:localhost:5173</i> sekä backendin osoite <i>http:localhost:3001</i> on kovakoodattuna testeihin. Näistä oikeastaan backendin osoite on turha, sillä frontendin Vite-konfiguraatioon on määritelty proxy, joka forwardoi kaikki osoitteeseen <i>http:localhost:5173/api</i> menevät frontendin tekemät pyynnöt backendiin:
 
 ```js
-const { defineConfig } = require("cypress")
-
-module.exports = defineConfig({
-  e2e: {
-    setupNodeEvents(on, config) {
-    },
-    baseUrl: 'http://localhost:5173' // highlight-line
+export default defineConfig({
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+      },
+    }
   },
+  // ...
 })
 ```
 
-Kaikki testeissä olevat sovelluksen osoitetta käyttävät komennot
+Voimme siis korvata testeissä kaikki osoitteet _http://localhost:3001/api/..._ osoitteella _http://localhost:5173/api/..._
+
+Määrittellään sovellukselle <i>baseUrl</i>:in testien konfiguraatiotiedostoon <i>playwright.config.js</i>: 
 
 ```js
-cy.visit('http://localhost:5173')
+module.exports = defineConfig({
+  // ...
+  use: {
+    baseURL: 'http://localhost:5173',
+  },
+  // ...
+}
+```
+
+Kaikki testeissä olevat sovelluksen urlia käyttävät komennot esim.
+
+```js
+await page.goto('http://localhost:5173')
+await page.post('http://localhost:5173/api/tests/reset')
 ```
 
 voidaan muuttaa muotoon
 
 ```js
-cy.visit('')
-```
-
-Testeihin jää edelleen backendin kovakoodattu osoite <i>http://localhost:3001</i>. Muut testien käyttämät osoitteet Cypressin [dokumentaatio](https://docs.cypress.io/guides/guides/environment-variables) kehoittaa määrittelemään ympäristömuutujina.
-
-Laajennetaan konfiguraatiotiedostoa <i>cypress.config.js</i> seuraavasti:
-
-```js
-const { defineConfig } = require("cypress")
-
-module.exports = defineConfig({
-  e2e: {
-    setupNodeEvents(on, config) {
-    },
-    baseUrl: 'http://localhost:5173',
-  },
-  // highlight-start
-  env: {
-    BACKEND: 'http://localhost:3001/api'
-  }
-  // highlight-end
-})
-```
-
-Korvataan testeistä kaikki backendin osoitteet seuraavaan tapaan
-
-```js
-describe('Note ', function() {
-  beforeEach(function() {
-    cy.visit('')
-    cy.request('POST', `${Cypress.env('BACKEND')}/testing/reset`) // highlight-line
-    const user = {
-      name: 'Matti Luukkainen',
-      username: 'mluukkai',
-      password: 'salainen'
-    }
-    cy.request('POST', `${Cypress.env('BACKEND')}/users`, user) // highlight-line
-  })
-  // ...
-})
+await page.goto('/')
+await page.post('/api/tests/reset')
 ```
 
 Testit ja frontendin koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-10), branchissa <i>part5-10</i>.
@@ -910,53 +939,38 @@ Testit ja frontendin koodi on kokonaisuudessaan [GitHubissa](https://github.com/
 Tarkastellaan vielä aiemmin tekemäämme testiä, joka varmistaa että muistiinpanon tärkeyttä on mahdollista muuttaa. Muutetaan testin alustuslohkoa siten, että se luo yhden sijaan kolme muistiinpanoa:
 
 ```js
-describe('when logged in', function() {
-  describe('and several notes exist', function () {
-    beforeEach(function () {
+describe('when logged in', () => {
+  // ...
+  describe('and several notes exists', () => {
+    beforeEach(async ({ page, request }) => {
       // highlight-start
-      cy.createNote({ content: 'first note', important: false })
-      cy.createNote({ content: 'second note', important: false })
-      cy.createNote({ content: 'third note', important: false })
+      await createNote(page, request, 'first note', true)
+      await createNote(page, request, 'second note', true)
+      await createNote(page, request, 'third note', true)
       // highlight-end
     })
 
-    it('one of those can be made important', function () {
-      cy.contains('second note')
-        .contains('make important')
-        .click()
+    test('one of those can be made important', async ({ page }) => {
+      const secondNoteElement = await page.getByText('second note')
 
-      cy.contains('second note')
-        .contains('make not important')
+      await secondNoteElement.getByRole('button', { name: 'make not important' }).click()
+      await expect(secondNoteElement.getByText('make important')).toBeVisible()
     })
   })
 })
 ```
 
-Miten komento [cy.contains](https://docs.cypress.io/api/commands/contains.html) tarkalleen ottaen toimii?
+Testi etsii nyt metodin _getByRole_ avulla toisena luodun muistiinpanoa vastaavan elementin ja tallettaa sen muuttujaan. Tämän jälkeen elementin sisältä etsitään nappi missä on teksti _make not important_ ja painetaan sitä. Lopuksi teksi varmistaa että napin teksiksi on muuttunut _make important_.
 
-Kun klikkaamme komentoa _cy.contains('second note')_ Cypressin [test runnerista](https://docs.cypress.io/guides/core-concepts/test-runner.html) nähdään, että komento löytää elementin, jonka sisällä on teksti <i>second note</i>:
-
-![Klikatessa vasemmalla olevasta testisteppien listasta komentoa, renderöityy oikealle sovelluksen sen hetkinen tila, missä löydetty elementti on merkattuna korostettuna.](../../images/5/34new.png)
-
-Klikkaamalla seuraavaa riviä _.contains('make important')_, nähdään että löydetään nimenomaan 
-<i>second note</i>:a vastaava tärkeyden muutoksen tekevä nappi:
-
-![Klikatessa vasemmalla olevasta testisteppien listasta komentoa, korostuu oikealle valintaa vastaava nappi](../../images/5/35new.png)
-
-Peräkkäin ketjutettuna toisena oleva <i>contains</i>-komento siis <i>jatkaa</i> hakua ensimmäisen komennon löytämän komponentin sisältä.
-
-Jos emme ketjuttaisi komentoja, eli olisimme kirjoittaneet 
+Testi olisi voitu kirjoittaa myös ilman apumuuttujaa:
 
 ```js
-cy.contains('second note')
-cy.contains('make important').click()
+test('one of those can be made important', async ({ page }) => {
+  await page.getByText('second note').getByRole('button', { name: 'make not important' }).click()
+
+  await expect(wait page.getByText('second note').getByText('make important')).toBeVisible()
+})
 ```
-
-tulos olisi ollut aivan erilainen, toinen rivi painaisi väärän muistiinpanon nappia: 
-
-![Renderöityy virhe AssertionError: Timed out retrying after 4000ms: Expected to find content 'make not important'.](../../images/5/36new.png)
-
-Testejä tehdessä kannattaa siis ehdottomasti varmistaa test runnerista, että testit etsivät niitä elementtejä, joita niiden on tarkoitus tutkia!
 
 Muutetaan komponenttia _Note_ siten, että muistiinpanon teksti renderöitään <i>span</i>-komponentin sisälle
 
@@ -974,92 +988,177 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-Testit hajoavat! Kuten test runner paljastaa, komento _cy.contains('second note')_ palauttaakin nyt ainoastaan tekstin sisältävän komponentin, ja nappi on sen ulkopuolella:
+Testit hajoavat! Kuten test runner paljastaa, komento _await page.getByText('second note')_ palauttaakin nyt ainoastaan tekstin sisältävän komponentin, ja nappi on sen ulkopuolella.
 
-![Oikealle puolelle havainnollistuu, että fokus osuu napin sijaan pelkkään tekstiin](../../images/5/37new.png)
 
 Eräs tapa korjata ongelma on seuraavassa:
 
 ```js
-it('other of those can be made important', function () {
-  cy.contains('second note').parent().find('button').click()
-  cy.contains('second note').parent().find('button')
-    .should('contain', 'make not important')
+test('one of those can be made important', async ({ page }) => {
+  const secondNoteText = await page.getByText('second note') // highlight-line
+  const secondNoteElement = await secondNoteText.locator('..') // highlight-line
+
+  await secondNoteElement.getByRole('button', { name: 'make not important' }).click()
+  await expect(secondNoteElement.getByText('make important')).toBeVisible()
 })
 ```
 
-Ensimmäisellä rivillä etsitään komennon [parent](https://docs.cypress.io/api/commands/parent.htm) tekstin <i>second note</i> sisältävän elementin vanhemman alla oleva nappi ja painetaan sitä. Toinen rivi varmistaa, että napin teksti muuttuu.
+Ensimmäinen rivi etsii nyt toiseen muistiinpanoon liittyvän tekstin sisältävän _span_-elementin. Toisella rivillä käytetään funktiota _locator_ ja annetaan parametriksi _.._, joka hakee elementin vanhempielementin. Funktio locator on hyvin joustava, ja hyödynnämme tässä sitä että se hyväksyy [parametrikseen](https://playwright.dev/docs/locators#locate-by-css-or-xpath) CSS-selektorien lisäksi myös [XPath](https://developer.mozilla.org/en-US/docs/Web/XPath)-muotoisen selektorin. Sama olisi mahdollista ilmaista myös CSS:n avulla, mutta tässä tapauksessa XPath tarjoaa yksinkertaisimman tavan elementin vanhemman etsimiseen.
 
-Huomaa, että napin etsimiseen käytetään komentoa [find](https://docs.cypress.io/api/commands/find.html#Syntax). Komento [cy.get](https://docs.cypress.io/api/commands/get.html) ei sovellu tähän tilanteeseen, sillä se etsii elementtejä aina <i>koko</i> sivulta ja palauttaisi nyt kaikki sovelluksen viisi nappia.
-
-Testissä on ikävästi copypastea, rivien alku eli napin etsivä koodi on sama. 
-Tälläisissä tilanteissa on mahdollista hyödyntää komentoa [as](https://docs.cypress.io/api/commands/as.html): 
+Testi voidaan toki kirjoittaa myös ainoastaan yhtä apumuuttujaa käyttäen:
 
 ```js
-it('other of those can be made important', function () {
-  cy.contains('second note').parent().find('button').as('theButton')
-  cy.get('@theButton').click()
-  cy.get('@theButton').should('contain', 'make not important')
+test('one of those can be made important', async ({ page }) => {
+  const secondNoteElement = await page.getByText('second note').locator('..')
+  await secondNoteElement.getByRole('button', { name: 'make not important' }).click()
+  await expect(secondNoteElement.getByText('make important')).toBeVisible()
 })
 ```
 
-Nyt ensimmäinen rivi etsii oikean napin, ja tallentaa sen komennon <i>as</i> avulla nimellä <i>theButton</i>. Seuraavat rivit pääsevät nimettyyn elementtiin käsiksi komennolla <i>cy.get('@theButton')</i>.
+### Testien kehittäminen ja debuggaaminen
 
-### Testien suoritus ja debuggaaminen
+Playwright tarjoaa muutamia melki hyviä testin kehittämistä ja debuggaamista auttavia työkaluja. [Dokumentaatiota](https://playwright.dev/docs/intro) kannattaa ehdottomasti selailla, eritysen tärkeitä ovat
+-  [lokaattoreita](https://playwright.dev/docs/locators) kertova osa antaa hyviä vihjeitä testattavien elementtien etsimiseen
+- osa [actions](https://playwright.dev/docs/input) kertoo miten selaimen kanssa käytävää vuorovaikutusta on mahdollista simuloida testeissä
+- [assertioista](https://playwright.dev/docs/test-assertions) kertova osa demonstroi mitä erilaisia testauksessa käytettäviä ekspektaatioita Playwright tarjoaa
 
-Vielä osan lopuksi muutamia huomioita Cypressin toimintaperiaatteesta sekä testien debuggaamisesta.
+Tarkemmat detaljit löytyvät [API](https://playwright.dev/docs/api/class-playwright)-kuvauksesta, erityisen hyödyllisiä ovat testattavan sovelluksen selainikkunaa vastaavan komponentin [Page](https://playwright.dev/docs/api/class-page) kuvaus, sekä testeissä etsittyjä elementtejä vastaavan komponentin [Locator](https://playwright.dev/docs/api/class-locator)-kuvaus.
 
-Cypressissä testien kirjoitusasu antaa vaikutelman, että testit ovat normaalia JavaScript-koodia, ja että voisimme esim. yrittää seuraavaa:
+Jos/kun testit eivät mene läpi ja herää epäilys, että vika on koodin sijaan testeissä, kannattaa testejä suorittaa [debug](https://playwright.dev/docs/debug#run-in-debug-mode-1)-moodissa.
 
-```js
-const button = cy.contains('log in')
-button.click()
-debugger
-cy.contains('logout').click()
+Seuraava komento suorittaa yksittäisen testin debug-moodissa:
+
+```
+npm test -- --debug -g 'a new note can be created'
 ```
 
-Näin kirjoitettu koodi ei kuitenkaan toimi. Kun Cypress suorittaa testin, se lisää jokaisen _cy_-komennon suoritusjonoon. Kun testimetodin koodi on suoritettu loppuun, suorittaa Cypress yksi kerrallaan suoritusjonoon lisätyt _cy_-komennot.
+Playwright-inspector näyttää testien etenemisen askel askeleelta. Yläreunan nuoli-piste-painike vie testejä yhden askeleen eteenpäin. Lokaattorien löytämät elementit sekä selaimen kanssa käyty interaktio visualisoituvat selaimeen:
 
-Cypressin komennot palauttavat aina _undefined_, eli yllä olevassa koodissa komento _button.click()_ aiheuttaisi virheen ja yritys käynnistää debuggeri ei pysäyttäisi koodia Cypress-komentojen suorituksen välissä, vaan jo ennen kuin yhtään Cypress-komentoa olisi suoritettu.
+![](../../images/5/play6.png)
 
-Cypress-komennot ovat <i>promisen kaltaisia</i>, joten jos niiden palauttamia arvoja halutaan käsitellä, se tulee tehdä komennon [then](https://docs.cypress.io/api/commands/then.html) avulla. Esim. seuraava testi tulostaisi sovelluksen <i>kaikkien</i> nappien lukumäärän ja klikkaisi napeista ensimmäistä:
+Oletusarvoisesti debugatessa askelletaan testi läpi komento komennolta. Jos on kyse monimutkaisesta testistä, voi olla melko vaivalloista askeltaa testissä kiinnostavaan kohtaan asti. Liialta askellukselta voidaan välttyä lisäämällä juuri kiinnostavaa kohtaa ennen komento _await page.pause()_:
 
 ```js
-it('then example', function() {
-  cy.get('button').then( buttons => {
-    console.log('number of buttons', buttons.length)
-    cy.wrap(buttons[0]).click()
+describe('Note app', () => {
+  beforeEach(async ({ page, request }) => {
+    // ...
+  }
+
+  describe('when logged in', () => {
+    beforeEach(async ({ page }) => {
+      // ...
+    })
+
+    describe('and several notes exists', () => {
+      beforeEach(async ({ page }) => {
+        await createNote(page, 'first note')
+        await createNote(page, 'second note')
+        await createNote(page, 'third note')
+      })
+  
+      test('one of those can be made important', async ({ page }) => {
+        await page.pause() // highlight-line
+        const secondNoteElement = await page.getByText('second note').locator('..')
+        await secondNoteElement.getByRole('button', { name: 'make not important' }).click()
+        await expect(secondNoteElement.getByText('make important')).toBeVisible()
+      })
+    })
   })
 })
 ```
 
-Myös testien suorituksen pysäyttäminen debuggeriin on [mahdollista](https://docs.cypress.io/api/commands/debug.html). Debuggeri käynnistyy vain jos Cypress test runnerin developer-konsoli on auki. 
+Nyt testissä voidaan siirtyä kiinnostavaan kohtaan yhdellä askelella, painamalla inspectorissa vihreää nuolisymbolia.
 
-Developer-konsoli on monin tavoin hyödyllinen testejä debugatessa. Network-tabilla näkyvät testattavan sovelluksen tekemät HTTP-pyynnöt, ja console-välilehti kertoo testin komentoihin liittyviä tietoja:
+Debuggausmoodin sijaan tai rinnalla voi testien suorittaminen UI-moodissa olla hyödyllistä. 
 
-![Console-välilehti havainnollistaa testien löytämiä elementtejä.](../../images/5/38new.png)
-
-Olemme toistaiseksi suorittaneet Cypress-testejä ainoastaan graafisen test runnerin kautta. Testit on luonnollisesti mahdollista suorittaa myös [komentoriviltä](https://docs.cypress.io/guides/guides/command-line.html). Lisätään vielä sovellukselle npm-skripti tätä tarkoitusta varten
-
-```js
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "eslint": "eslint .",
-    "cypress:open": "cypress open",
-    "test:e2e": "cypress run" // highlight-line
-  },
+```
+npm run test -- --ui
 ```
 
-Nyt siis voimme suorittaa Cypress-testit komentoriviltä komennolla <i>npm run test:e2e</i>
+Kun suoritamme testit, huomamme UI:ta tarkastelemalla mielenkiintoisen ilmiön:
 
-![Komennon suoritus tulostaa konsoliin tekstuaalisen raportin joka kertoo 5 läpimenneestä testistä.](../../images/5/39new.png)
+![](../../images/5/play7.png)
 
-Huomaa, että testien suorituksesta tallentuu video hakemistoon <i>cypress/videos/</i>, hakemisto lienee syytä gitignoroida. Videoiden teko on myös mahdollista ottaa [pois päältä](https://docs.cypress.io/guides/guides/screenshots-and-videos#Videos).
+Kyse on seuraavasta testistä:
 
-Testien ja frontendin koodin lopullinen versio on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-11), branchissa <i>part5-11</i>.
+```js
+describe('and several notes exists', () => {
+  beforeEach(async ({ page }) => {
+    await createNote(page, 'first note')
+    await createNote(page, 'second note')
+    await createNote(page, 'third note')
+  })
+
+  test('one of those can be made important', async ({ page }) => {
+    const secondNoteElement = await page.getByText('second note').locator('..')
+    await secondNoteElement.getByRole('button', { name: 'make not important' }).click()
+    await expect(secondNoteElement.getByText('make important')).toBeVisible()
+  })
+})
+```
+
+Testi menee kyllä läpi, mutta näyttää siltä, että selain ei renderöi kaikkia lohkossa _beforeEach_ luotuja muistiinpanoja. Mistä on kyse?
+
+Syynä ongelmaan on se, että kun testi luo yhden muistiinpanon, se aloittaa seuraavan luomisen jo ennen kuin palvelin on vastannut, ja lisätty muistiinpano on renderöidään ruudulle. Tämä taas saattaa aiheuttaa sen, että jotain muistiinpanoja katoaa, sillä selain päivitetään palvelimen vastatessa perustuen siihen muistiinpanojen tilaan mikä kyseisen lisäysoperaation alussa oli.
+
+Ongelma korjaantuu "hidastamalla" lisäysoperaatioita siten, että lisäyksen jälkeen odotetaan komennolla [waitFor](https://playwright.dev/docs/api/class-locator#locator-wait-for), että lisätty muistinpano ehditään renderöidä:
+
+```js
+const createNote = async (page, content) => {
+  await page.getByRole('button', { name: 'new note' }).click()
+  await page.getByRole('textbox').fill(content)
+  await page.getByRole('button', { name: 'save' }).click()
+  await page.getByText(content).waitFor() // hightlight-line
+}
+```
+
+Lähes samaan tapaan kuin UI-moodi, toimii Playwrightin [Trace Viewer](https://playwright.dev/docs/trace-viewer-intro). Ideana siinä on, se että testeistä tallennetaan "visuaalinen jälki", jota voidaan tarkastella tarvittaessa testien suorituksen jälkeen. Trace tallennetaan suorittamalla testit seuraavasti:
+
+```
+npm run test -- --trace on
+```
+
+Tracen pääsee tarvittaessa katsomaan komennolla 
+
+```
+npx playwright show-report
+```
+
+tai määrittelemällämme npm-skriptillä _npm run test:report_
+
+Trace näyttää käytännöss samalta kuin testien suoritus UI-moodissa.
+
+UI-moodi tarjoaa myös mahdollisuuden avustettuun lokaattorien etsimiseen. Tämä tapahtuu painamalla alapalkin vasemmanpuoleista tuplaympyrää, ja sen jälkeen klikkaamalla haluttua käyttöliittymäelmenttiä. Playwright näyttää elementin lokaattorin:
+
+![](../../images/5/play8.png)
+
+Playwright ehdottaa siis kolmannen muistiinpanon lokaattoriksi seuraavaa
+
+```js
+page.locator('li').filter({ hasText: 'third notemake not important' }).getByRole('button')
+```
+
+Tämä poikkeaa jossain määrin testien käyttämästä lokaattorista, joka oli
+
+```js
+page.getByText('second note').locator('..').getByRole('button', { name: 'make not important' })
+```
+
+Lienee makuasia kumpi lokaattoreista on parempi. 
+
+Playwright sisältää myös [testigeneraattorin](https://playwright.dev/docs/codegen-intro), jonka avulla on mahdollista "nauhottaa" käyttöliittymän kautta klikkailemalla testejä. Testigeneraattori käynnistyy komennolla
+
+```
+npx playwright codegen http://localhost:5173/
+```
+
+Testigeneraattori _Record_-tilan päälläollessa käyttäjän interaktion Playwright inspectoriin, mistä koodin käyttämät lokaattorit ja actionit voi sitten kopioida testeihin:
+
+![](../../images/5/play9.png)
+
+Komentorivin sijaan Playwrightiä voi käyttää myös [VS Code](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright)-pluginin kautta. Plugin tarjoaa monia käteviä ominaisuuksia, mm. breakpointien käytön testejä debugatessa.
+
+Testien lopullinen versio on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-11), branchissa <i>part5-11</i>.
 
 </div>
 
@@ -1067,32 +1166,41 @@ Testien ja frontendin koodin lopullinen versio on kokonaisuudessaan [GitHubissa]
 
 ### Tehtävät 5.17.-5.23.
 
-Tehdään osan lopuksi muutamia E2E-testejä blogisovellukseen. Yllä olevan materiaalin pitäisi riittää ainakin suurimmaksi osaksi tehtävien tekemiseen. Cypressin [dokumentaatiota](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell) kannattaa ehdottomasti myös lueskella, kyseessä on ehkä paras dokumentaatio, mitä olen koskaan open source ‑projektissa nähnyt.
-
-Erityisesti kannattaa lukea luku [Introduction to Cypress](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Cypress-Can-Be-Simple-Sometimes), joka toteaa
-
-> <i>This is the single most important guide for understanding how to test with Cypress. Read it. Understand it.</i>
+Tehdään osan lopuksi muutamia E2E-testejä blogisovellukseen. Yllä olevan materiaalin pitäisi riittää suurimman osan tehtävien tekemiseen. Playwrightin [dokumentaatiota]https://playwright.dev/docs/intro) ja [API-kuvausta](https://playwright.dev/docs/api/class-playwright) kannattaa ehdottomasti lukea, ainakin edellisessä luvussa mainitut osat.
 
 #### 5.17: blogilistan end to end ‑testit, step1
 
-Konfiguroi Cypress projektiisi. Tee testi, joka varmistaa, että sovellus näyttää oletusarvoisesti kirjautumislomakkeen.
+Tee uusi npm-projekti testejä varten ja konfiguroi sinne Playwright.
+
+Tee testi, joka varmistaa, että sovellus näyttää oletusarvoisesti kirjautumislomakkeen.
 
 Testin rungon tulee olla seuraavanlainen
 
 ```js 
-describe('Blog app', function() {
-  beforeEach(function() {
-    cy.request('POST', 'http://localhost:3003/api/testing/reset')
-    cy.visit('http://localhost:5173')
+const { test, expect, beforeEach, describe } = require('@playwright/test')
+
+describe('Note app', () => {
+  beforeEach(async ({ page, request }) => {
+    await request.post('http:localhost:3003/api/testing/reset')
+    await request.post('http://localhost:3003/api/users', {
+      data: {
+        name: 'Matti Luukkainen',
+        username: 'mluukkai',
+        password: 'salainen'
+      }
+    })
+
+    await page.goto('http://localhost:5173')
   })
 
-  it('Login form is shown', function() {
+  test('Login form is shown', async ({ page }) => {
     // ...
   })
 })
+
 ```
 
-Testin <i>beforeEach</i>-alustuslohkon tulee nollata tietokannan tilanne esim. [materiaalissa](/osa5/end_to_end_testaus#tietokannan-tilan-kontrollointi) näytetyllä tavalla.
+Testin <i>beforeEach</i>-alustuslohkon tulee nollata tietokannan tilanne esim. [materiaalissa](/osa5/end_to_end_testaus_playwright#testien-alustus) näytetyllä tavalla.
 
 #### 5.18: blogilistan end to end ‑testit, step2
 
@@ -1101,23 +1209,23 @@ Tee testit kirjautumiselle, testaa sekä onnistunut että epäonnistunut kirjaut
 Testien runko laajenee seuraavasti
 
 ```js 
-describe('Blog app', function() {
-  beforeEach(function() {
-    cy.request('POST', 'http://localhost:3003/api/testing/reset')
-    // create here a user to backend
-    cy.visit('http://localhost:5173')
-  })
+const { test, expect, beforeEach, describe } = require('@playwright/test')
 
-  it('Login form is shown', function() {
+describe('Note app', () => {
+  beforeEach(async ({ page, request }) => {
     // ...
   })
 
-  describe('Login',function() {
-    it('succeeds with correct credentials', function() {
+  test('Login form is shown', async ({ page }) => {
+    // ...
+  })
+
+  describe('Login', () => {
+    test('succeeds with correct credentials', async ({ page }) => {
       // ...
     })
 
-    it('fails with wrong credentials', function() {
+    test('fails with wrong credentials', async ({ page }) => {
       // ...
     })
   })
@@ -1129,19 +1237,14 @@ describe('Blog app', function() {
 Tee testi, joka varmistaa, että kirjautunut käyttäjä pystyy luomaan blogin. Testin runko voi näyttää seuraavalta
 
 ```js 
-describe('Blog app', function() {
-  // ...
-
-  describe('When logged in', function() {
-    beforeEach(function() {
-      // log in user here
-    })
-
-    it('A blog can be created', function() {
-      // ...
-    })
+describe('When logged in', () => {
+  beforeEach(async ({ page }) => {
+    // ...
   })
 
+  test('a new blog can be created', async ({ page }) => {
+    // ...
+  })
 })
 ```
 
@@ -1153,7 +1256,7 @@ Tee testi, joka varmistaa, että blogia voi likettää.
 
 #### 5.21: blogilistan end to end ‑testit, step5
 
-Tee testi, joka varmistaa, että blogin lisännyt käyttäjä voi poistaa blogin.
+Tee testi, joka varmistaa, että blogin lisännyt käyttäjä voi poistaa blogin. Jos käytät poisto-operaation yhteydessä _window.confirm_-dialogia, saatat joutua hieman etsimään miten dialogin käyttö tapahtuu Playwright-testeistä käsin.
 
 #### 5.22: blogilistan end to end ‑testit, step6
 
@@ -1163,14 +1266,7 @@ Tee testi, joka varmista, että vain blogin lisännyt käyttäjä näkee blogin 
 
 Tee testi, joka varmistaa, että blogit järjestetään likejen mukaiseen järjestykseen, eniten likejä saanut blogi ensin.
 
-<i>Tämä tehtävä on edellisiä huomattavasti haastavampi.</i> Eräs ratkaisutapa on lisätä tietty luokka elementille, joka sisältää blogin sisällön ja käyttää [eq](https://docs.cypress.io/api/commands/eq#Syntax)-metodia tietyssä indeksissä olevan elementin hakemiseen:
-  
-```js
-cy.get('.blog').eq(0).should('contain', 'The title with the most likes')
-cy.get('.blog').eq(1).should('contain', 'The title with the second most likes')
-``` 
-  
-Saatat törmätä tässä tehtävässä ongelmaan jos klikkaat monta kertaa peräkkäin <i>like</i>-nappia. Saattaa olla, että näin tehdessä liketykset tehdään samalle oliolle, eli Cypress ei "ehdi" välissä päivittää sovelluksen tilaa. Eräs tapa korjata ongelma on odottaa jokaisen klikkauksen jälkeen että likejen lukumäärä päivittyy ja tehdä uusi liketys vasta tämän jälkeen.
+<i>Tämä tehtävä on edellisiä huomattavasti haastavampi.</i>
 
 Tämä oli osan viimeinen tehtävä ja on aika pushata koodi GitHubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
