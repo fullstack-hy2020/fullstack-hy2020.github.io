@@ -290,7 +290,7 @@ When we add the following amidst the declarations of middlewares
 app.use(express.static('dist'))
 ```
 
-whenever express gets an HTTP GET request it will first check if the <i>dist</i> directory contains a file corresponding to the request's address. If a correct file is found, express will return it.
+whenever express gets an HTTP GET request it will first check if the <i>dist</i> directory contains a file corresponding to the request's address. If a correct file is found, express will return it. However, if there is no dedicated file is found, but the requested URL is matched, ```app.use(express.static()) ``` middleware will return "index.html" as a default file. 
 
 Now HTTP GET requests to the address <i>www.serversaddress.com/index.html</i> or <i>www.serversaddress.com</i> will show the React frontend. GET requests to the address <i>www.serversaddress.com/api/notes</i> will be handled by the backend code.
 
