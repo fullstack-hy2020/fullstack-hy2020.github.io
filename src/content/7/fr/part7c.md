@@ -373,6 +373,102 @@ La notification affichée lors de la connexion peut être réalisée à l'aide d
 </div>
 ```
 
+L'alerte est assez stylée:
 
+![notifications de l'application de notes MaterialUI dans le navigateur](../../images/7/65ea.png)
+
+#### Structure de navigation
+
+Nous pouvons implémenter la navigation en utilisant le composant [AppBar](https://mui.com/material-ui/react-app-bar/).
+
+Si nous utilisons le code d'exemple de la documentation
+
+```js
+<AppBar position="static">
+  <Toolbar>
+    <IconButton edge="start" color="inherit" aria-label="menu">
+    </IconButton>
+    <Button color="inherit">
+      <Link to="/">home</Link>
+    </Button>
+    <Button color="inherit">
+      <Link to="/notes">notes</Link>
+    </Button>
+    <Button color="inherit">
+      <Link to="/users">users</Link>
+    </Button>  
+    <Button color="inherit">
+      {user
+        ? <em>{user} logged in</em>
+        : <Link to="/login">login</Link>
+      }
+    </Button>                
+  </Toolbar>
+</AppBar>
+```
+
+nous obtenons une navigation fonctionnelle, mais cela pourrait être mieux
+
+![barre de navigation bleue de l'application de notes MaterialUI dans le navigateur](../../images/7/66ea.png)
+
+Nous pouvons trouver une meilleure manière dans la [documentation](https://mui.com/material-ui/guides/composition/#routing-libraries). Nous pouvons utiliser les [props de composant](https://mui.com/material-ui/guides/composition/#component-prop) pour définir comment l'élément racine d'un composant MaterialUI est rendu.
+
+En définissant
+
+```js
+<Button color="inherit" component={Link} to="/">
+  home
+</Button>
+```
+
+le composant _Button_ est rendu de sorte que son composant racine soit le _Link_ de react-router-dom, qui reçoit son chemin comme champ de prop _to_.
+
+Le code pour la barre de navigation est le suivant:
+
+```js
+<AppBar position="static">
+  <Toolbar>
+    <Button color="inherit" component={Link} to="/">
+      home
+    </Button>
+    <Button color="inherit" component={Link} to="/notes">
+      notes
+    </Button>
+    <Button color="inherit" component={Link} to="/users">
+      users
+    </Button>   
+    {user
+      ? <em>{user} logged in</em>
+      : <Button color="inherit" component={Link} to="/login">
+          login
+        </Button>
+    }                              
+  </Toolbar>
+</AppBar>
+```
+
+et cela ressemble à ce que nous voulons:
+
+![barre de navigation bleue de l'application de notes MaterialUI avec texte blanc dans le navigateur](../../images/7/67ea.png)
+
+Le code de l'application peut être trouvé [ici](https://github.com/fullstack-hy2020/misc/blob/master/notes-materialui.js).
+
+### Réflexions finales
+
+La différence entre react-bootstrap et MaterialUI n'est pas grande. C'est à vous de décider lequel vous trouvez le plus attrayant.
+Je n'ai pas beaucoup utilisé MaterialUI, mais mes premières impressions sont positives. Sa documentation est un peu meilleure que celle de react-bootstrap.
+Selon <https://www.npmtrends.com/> qui suit la popularité des différentes bibliothèques npm, MaterialUI a dépassé react-bootstrap en popularité à la fin de 2018 :
+
+![tendances npm de MaterialUI vs Bootstrap](../../images/7/68ea.png)
+
+Dans les deux exemples précédents, nous avons utilisé les frameworks UI avec l'aide de bibliothèques d'intégration React.
+
+Au lieu d'utiliser la bibliothèque [React Bootstrap](https://react-bootstrap.github.io/), nous aurions tout aussi bien pu utiliser Bootstrap directement en définissant des classes CSS pour les éléments HTML de notre application. Au lieu de définir la table avec le composant <i>Table</i>:
+
+```js
+<Table striped>
+  // ...
+</Table>
+```
 
 </div>
