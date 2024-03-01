@@ -925,7 +925,7 @@ app.post('/api/notes', (request, response) => {
 如果头中没有正确的值，服务器将不能正确地解析数据。它甚至不会尝试猜测数据的格式，因为有 [大量](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types) 潜在的 <i>Content-Types</i>。
 
 <!-- If you are using VS Code, then you should install the REST client from the previous chapter <i>now, if you haven't already</i>. The POST request can be sent with the REST client like this:-->
- 如果你使用的是 VS Code，那么你应该安装上一章的 REST 客户端 <i>，如果你还没有的话 </i>。可以用 REST 客户端发送 POST 请求，就像这样。
+ 如果你使用的是 VS Code，那么你应该安装上一章中的 REST 客户端，<i> 如果你还没有安装的话 </i>。POST请求可以像这样使用REST客户端发送：
 
 ![](../../images/3/20eb.png)
 
