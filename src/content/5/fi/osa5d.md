@@ -35,7 +35,7 @@ Jos valintasi on Playwright, jatka eteenpäin. Jos päädyt käyttämään Cypre
 
 Kirjastojen vertailuista on kirjoitettu monia blojeja, esim. [tämä](https://www.lambdatest.com/blog/cypress-vs-playwright/) ja [tämä](https://www.browserstack.com/guide/playwright-vs-cypress).
 
-On vaikea sanoa kumpi kirjastoista on parempi. Eräs Playwrightin etu on sen selaintuki, Playwright tukee Chromea, Firefoxia ja Webkit-pohjaisia selaimia kuten Safaria. Nykyisin Cypress sisältää tuen kaikkiin näihin selaimiin, Webkit-tuki on tosin vasta kokeellinen ja ei tue kaikkia Cypressin ominaisuuksia. Oma preferenssini kallisuu kirjoitushetkellö (29.2.2024) hieman Playwrightin puolelle.
+On vaikea sanoa kumpi kirjastoista on parempi. Eräs Playwrightin etu on sen selaintuki, Playwright tukee Chromea, Firefoxia ja Webkit-pohjaisia selaimia kuten Safaria. Nykyisin Cypress sisältää tuen kaikkiin näihin selaimiin, Webkit-tuki on tosin vasta kokeellinen ja ei tue kaikkia Cypressin ominaisuuksia. Oma preferenssini kallisuu kirjoitushetkellö (1.3.2024) hieman Playwrightin puolelle.
 
 Tutustutaan nyt Playwrightin käyttöön.
 
@@ -164,7 +164,7 @@ test('front page can be opened', async ({ page }) => {
 
   const locator = await page.getByText('Notes')
   await expect(locator).toBeVisible()
-  await expect(await page.getByText('Note app, Department of Computer Science, University of Helsinki 2023')).toBeVisible()
+  await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2023')).toBeVisible()
 })
 ```
 
@@ -389,7 +389,7 @@ describe('Note app', () => {
   
     await page.getByRole('button', { name: 'login' }).click() 
   
-    await expect(await page.getByText('Matti Luukkainen logged in')).toBeVisible()
+    await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
   })
 })
 ```
@@ -413,7 +413,7 @@ describe('Note app', () => {
   test('front page can be opened', async ({ page }) => {
     const locator = await page.getByText('Notes')
     await expect(locator).toBeVisible()
-    await expect(await page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible()
+    await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible()
   })
 
   test('login form can be opened', async ({ page }) => {
@@ -421,7 +421,7 @@ describe('Note app', () => {
     await page.getByTestId('username').fill('mluukkai')
     await page.getByTestId('password').fill('salainen')
     await page.getByRole('button', { name: 'login' }).click()
-    await expect(await page.getByText('Matti Luukkainen logged in')).toBeVisible()
+    await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
   })
 })
 
@@ -449,7 +449,7 @@ describe('Note app', () => {
       await page.getByRole('button', { name: 'new note' }).click()
       await page.getByRole('textbox').fill('a note created by playwright')
       await page.getByRole('button', { name: 'save' }).click()
-      await expect(await page.getByText('a note created by playwright')).toBeVisible()
+      await expect(page.getByText('a note created by playwright')).toBeVisible()
     })
   })  
 })
@@ -469,7 +469,7 @@ Jos kenttiä olisi useampia, testi hajoaisi Tämän takia olisi jälleen parempi
 **Huom:** testi ei mene läpi kuin ensimmäisellä kerralla suoritettaessa. Syynä tälle on se, että ekspektaatio
 
 ```js
-await expect(await page.getByText('a note created by playwright')).toBeVisible()
+await expect(page.getByText('a note created by playwright')).toBeVisible()
 ```
 
 aiheuttaa ongelmia siinä vaiheessa kun sovellukseen luodaan sama muistiinpano useammin kuin kertaalleen. Ongelmasta päästään eroon seuraavassa luvussa.
@@ -487,7 +487,7 @@ describe('Note app', () => {
     await page.getByTestId('username').fill('mluukkai')
     await page.getByTestId('password').fill('salainen')
     await page.getByRole('button', { name: 'login' }).click()
-    await expect(await page.getByText('Matti Luukkainen logged in')).toBeVisible()
+    await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
   })
 
   describe('when logged in', () => {
@@ -502,7 +502,7 @@ describe('Note app', () => {
       await page.getByRole('button', { name: 'new note' }).click()
       await page.getByRole('textbox').fill('a note created by playwright')
       await page.getByRole('button', { name: 'save' }).click()
-      await expect(await page.getByText('a note created by playwright')).toBeVisible()
+      await expect(page.getByText('a note created by playwright')).toBeVisible()
     })
   })  
 })
@@ -619,14 +619,14 @@ describe('Note app', () => {
   
       test('importance can be changed', async ({ page }) => {
         await page.getByRole('button', { name: 'make not important' }).click()
-        await expect(await page.getByText('make important')).toBeVisible()
+        await expect(page.getByText('make important')).toBeVisible()
       })
     })
   })
 })
 ```
 
-Ensimmäinen komento etsii ensin komponentin, missä on teksti <i>another note cypress</i> ja sen sisältä painikkeen <i>make not important</i> ja klikkaa sitä. 
+Ensimmäinen komento etsii ensin komponentin, missä on teksti <i>another note by playwright</i> ja sen sisältä painikkeen <i>make not important</i> ja klikkaa sitä. 
 
 Toinen komento varmistaa, että saman napin teksti on vaihtunut muotoon <i>make important</i>.
 
@@ -650,7 +650,7 @@ describe('Note app', () => {
     await page.getByTestId('password').fill('wrong')
     await page.getByRole('button', { name: 'login' }).click()
 
-    await expect(await page.getByText('wrong credentials')).toBeVisible()
+    await expect(page.getByText('wrong credentials')).toBeVisible()
   })
 
   // ...
@@ -718,7 +718,7 @@ test('login fails with wrong password', async ({ page }) =>{
   await expect(errorDiv).toHaveCSS('border-style', 'solid')
   await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)')
 
-  await expect(await page.getByText('Matti Luukkainen logged in')).not.toBeVisible() // highlight-line
+  await expect(page.getByText('Matti Luukkainen logged in')).not.toBeVisible() // highlight-line
 })
 ```
 
@@ -765,7 +765,7 @@ describe('Note app', () => {
     await page.getByTestId('username').fill('mluukkai')
     await page.getByTestId('password').fill('salainen')
     await page.getByRole('button', { name: 'login' }).click()
-    await expect(await page.getByText('Matti Luukkainen logged in')).toBeVisible()
+    await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
   })
 
   test('login fails with wrong password', async ({ page }) =>{
@@ -815,7 +815,7 @@ const { loginWith } = require('./helper')
 describe('Note app', () => {
   test('user can log in', async ({ page }) => {
     await loginWith(page, 'mluukkai', 'salainen')
-    await expect(await page.getByText('Matti Luukkainen logged in')).toBeVisible()
+    await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
   })
 
   describe('when logged in', () => {
@@ -896,7 +896,7 @@ describe('Note app', () => {
 
     test('a new note can be created', async ({ page }) => {
       await createNote(page, 'a note created by playwright', true)
-      await expect(await page.getByText('a note created by playwright')).toBeVisible()
+      await expect(page.getByText('a note created by playwright')).toBeVisible()
     })
 
     describe('and a note exists', () => {
@@ -906,7 +906,7 @@ describe('Note app', () => {
   
       test('importance can be changed', async ({ page }) => {
         await page.getByRole('button', { name: 'make not important' }).click()
-        await expect(await page.getByText('make important')).toBeVisible()
+        await expect(page.getByText('make important')).toBeVisible()
       })
     })
   })
@@ -959,45 +959,49 @@ await page.post('/api/tests/reset')
 
 Testien tämänhetkinen koodi on [GitHubissa](https://github.com/fullstack-hy2020/notes-e2e/tree/part5-2), branchissa <i>part5-2</i>.
 
-### Muistiinpanon tärkeyden muutos
+### Muistiinpanon tärkeyden muutos revisited
 
-Tarkastellaan vielä aiemmin tekemäämme testiä, joka varmistaa että muistiinpanon tärkeyttä on mahdollista muuttaa. Muutetaan testin alustuslohkoa siten, että se luo yhden sijaan kolme muistiinpanoa:
+Tarkastellaan vielä aiemmin tekemäämme testiä, joka varmistaa että muistiinpanon tärkeyttä on mahdollista muuttaa.
+
+Muutetaan testin alustuslohkoa siten, että se luo yhden sijaan kaksi muistiinpanoa:
 
 ```js
 describe('when logged in', () => {
   // ...
   describe('and several notes exists', () => {
-    beforeEach(async ({ page, request }) => {
+    beforeEach(async ({ page }) => {
       // highlight-start
-      await createNote(page, request, 'first note', true)
-      await createNote(page, request, 'second note', true)
-      await createNote(page, request, 'third note', true)
+      await createNote(page, 'first note', true)
+      await createNote(page, 'second note', true)
       // highlight-end
     })
 
-    test('one of those can be made important', async ({ page }) => {
-      const secondNoteElement = await page.getByText('second note')
+    test('one of those can be made nonimportant', async ({ page }) => {
+      const otherNoteElement = await page.getByText('first note')
 
-      await secondNoteElement.getByRole('button', { name: 'make not important' }).click()
-      await expect(secondNoteElement.getByText('make important')).toBeVisible()
+      await otherNoteElement
+        .getByRole('button', { name: 'make not important' }).click()
+      await expect(otherNoteElement.getByText('make important')).toBeVisible()
     })
   })
 })
 ```
 
-Testi etsii nyt metodin _getByRole_ avulla toisena luodun muistiinpanoa vastaavan elementin ja tallettaa sen muuttujaan. Tämän jälkeen elementin sisältä etsitään nappi missä on teksti _make not important_ ja painetaan sitä. Lopuksi teksi varmistaa että napin teksiksi on muuttunut _make important_.
+Testi etsii ensin metodin _getByRole_ avulla ensimmäisenä luotua muistiinpanoa vastaavan elementin ja tallettaa sen muuttujaan. Tämän jälkeen elementin sisältä etsitään nappi, missä on teksti _make not important_ ja painetaan nappia. Lopuksi teksi varmistaa että napin teksiksi on muuttunut _make important_.
 
 Testi olisi voitu kirjoittaa myös ilman apumuuttujaa:
 
 ```js
-test('one of those can be made important', async ({ page }) => {
-  await page.getByText('second note').getByRole('button', { name: 'make not important' }).click()
+test('one of those can be made nonimportant', async ({ page }) => {
+  await page.getByText('first note')
+    .getByRole('button', { name: 'make not important' }).click()
 
-  await expect(wait page.getByText('second note').getByText('make important')).toBeVisible()
+  await expect(page.getByText('first note').getByText('make important'))
+    .toBeVisible()
 })
 ```
 
-Muutetaan komponenttia _Note_ siten, että muistiinpanon teksti renderöitään <i>span</i>-komponentin sisälle
+Muutetaan komponenttia _Note_ siten, että muistiinpanon teksti renderöitään _span_-elementin sisälle
 
 ```js
 const Note = ({ note, toggleImportance }) => {
@@ -1013,36 +1017,68 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-Testit hajoavat! Kuten test runner paljastaa, komento _await page.getByText('second note')_ palauttaakin nyt ainoastaan tekstin sisältävän komponentin, ja nappi on sen ulkopuolella.
-
+Testit hajoavat! Syynä ongelmalle on se, komento _await page.getByText('second note')_ palauttaakin nyt ainoastaan tekstin sisältävän _span_-elementin, ja nappi on sen ulkopuolella.
 
 Eräs tapa korjata ongelma on seuraavassa:
 
 ```js
-test('one of those can be made important', async ({ page }) => {
-  const secondNoteText = await page.getByText('second note') // highlight-line
-  const secondNoteElement = await secondNoteText.locator('..') // highlight-line
+test('one of those can be made nonimportant', async ({ page }) => {
+  const otherNoteText = await page.getByText('first note') // highlight-line
+  const otherdNoteElement = await otherNoteText.locator('..') // highlight-line
 
-  await secondNoteElement.getByRole('button', { name: 'make not important' }).click()
-  await expect(secondNoteElement.getByText('make important')).toBeVisible()
+  await otherdNoteElement.getByRole('button', { name: 'make not important' }).click()
+  await expect(otherdNoteElement.getByText('make important')).toBeVisible()
 })
 ```
 
-Ensimmäinen rivi etsii nyt toiseen muistiinpanoon liittyvän tekstin sisältävän _span_-elementin. Toisella rivillä käytetään funktiota _locator_ ja annetaan parametriksi _.._, joka hakee elementin vanhempielementin. Funktio locator on hyvin joustava, ja hyödynnämme tässä sitä että se hyväksyy [parametrikseen](https://playwright.dev/docs/locators#locate-by-css-or-xpath) CSS-selektorien lisäksi myös [XPath](https://developer.mozilla.org/en-US/docs/Web/XPath)-muotoisen selektorin. Sama olisi mahdollista ilmaista myös CSS:n avulla, mutta tässä tapauksessa XPath tarjoaa yksinkertaisimman tavan elementin vanhemman etsimiseen.
+Ensimmäinen rivi etsii nyt ensimmäisenä luotuun muistiinpanoon liittyvän tekstin sisältävän _span_-elementin. Toisella rivillä käytetään funktiota _locator_ ja annetaan parametriksi _.._, joka hakee elementin vanhempielementin. Funktio locator on hyvin joustava, ja hyödynnämme tässä sitä että funktio hyväksyy [parametrikseen](https://playwright.dev/docs/locators#locate-by-css-or-xpath) CSS-selektorien lisäksi myös [XPath](https://developer.mozilla.org/en-US/docs/Web/XPath)-muotoisen selektorin. Sama olisi mahdollista ilmaista myös CSS:n avulla, mutta tässä tapauksessa XPath tarjoaa yksinkertaisimman tavan elementin vanhemman etsimiseen.
 
 Testi voidaan toki kirjoittaa myös ainoastaan yhtä apumuuttujaa käyttäen:
 
 ```js
-test('one of those can be made important', async ({ page }) => {
+test('one of those can be made nonimportant', async ({ page }) => {
   const secondNoteElement = await page.getByText('second note').locator('..')
   await secondNoteElement.getByRole('button', { name: 'make not important' }).click()
   await expect(secondNoteElement.getByText('make important')).toBeVisible()
 })
 ```
 
+Muutentaan testiä vielä siten, että muistiinpanoja luodaankin kolme, ja tärkeyttä vaihdetaan toisena luodulta muistiinpanolta:
+
+```js
+describe('when logged in', () => {
+  beforeEach(async ({ page }) => {
+    await loginWith(page, 'mluukkai', 'salainen')
+  })
+
+  test('a new note can be created', async ({ page }) => {
+    await createNote(page, 'a note created by playwright', true)
+    await expect(page.getByText('a note created by playwright')).toBeVisible()
+  })
+
+  describe('and a note exists', () => {
+    beforeEach(async ({ page }) => {
+      await createNote(page, 'first note', true)
+      await createNote(page, 'second note', true)
+      await createNote(page, 'third note', true) // highlight-line
+    })
+
+    test('importance can be changed', async ({ page }) => {
+      const otherNoteText = await page.getByText('second note') // highlight-line
+      const otherdNoteElement = await otherNoteText.locator('..')
+    
+      await otherdNoteElement.getByRole('button', { name: 'make not important' }).click()
+      await expect(otherdNoteElement.getByText('make important')).toBeVisible()
+    })
+  })
+}) 
+```
+
+Jostain syystä testi alkaa toimia epäluotettavaksi, se menee välillä läpi ja välillä ei. On aika kääriä hihat ja opetella debuggaamaan testejä.
+
 ### Testien kehittäminen ja debuggaaminen
 
-Playwright tarjoaa muutamia melki hyviä testin kehittämistä ja debuggaamista auttavia työkaluja. [Dokumentaatiota](https://playwright.dev/docs/intro) kannattaa ehdottomasti selailla, eritysen tärkeitä ovat
+Playwright tarjoaa muutamia melko hyviä testin kehittämistä ja debuggaamista auttavia työkaluja. [Dokumentaatiota](https://playwright.dev/docs/intro) kannattaa ehdottomasti selailla, eritysen tärkeitä ovat
 -  [lokaattoreita](https://playwright.dev/docs/locators) kertova osa antaa hyviä vihjeitä testattavien elementtien etsimiseen
 - osa [actions](https://playwright.dev/docs/input) kertoo miten selaimen kanssa käytävää vuorovaikutusta on mahdollista simuloida testeissä
 - [assertioista](https://playwright.dev/docs/test-assertions) kertova osa demonstroi mitä erilaisia testauksessa käytettäviä ekspektaatioita Playwright tarjoaa
@@ -1081,7 +1117,7 @@ describe('Note app', () => {
         await createNote(page, 'third note')
       })
   
-      test('one of those can be made important', async ({ page }) => {
+      test('one of those can be made nonimportant', async ({ page }) => {
         await page.pause() // highlight-line
         const secondNoteElement = await page.getByText('second note').locator('..')
         await secondNoteElement.getByRole('button', { name: 'make not important' }).click()
@@ -1114,7 +1150,7 @@ describe('and several notes exists', () => {
     await createNote(page, 'third note')
   })
 
-  test('one of those can be made important', async ({ page }) => {
+  test('one of those can be made nonimportant', async ({ page }) => {
     const secondNoteElement = await page.getByText('second note').locator('..')
     await secondNoteElement.getByRole('button', { name: 'make not important' }).click()
     await expect(secondNoteElement.getByText('make important')).toBeVisible()
@@ -1183,7 +1219,7 @@ Testigeneraattori _Record_-tilan päälläollessa käyttäjän interaktion Playw
 
 Komentorivin sijaan Playwrightiä voi käyttää myös [VS Code](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright)-pluginin kautta. Plugin tarjoaa monia käteviä ominaisuuksia, mm. breakpointien käytön testejä debugatessa.
 
-Testien lopullinen versio on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-11), branchissa <i>part5-11</i>.
+Testien lopullinen versio on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/notes-e2e/tree/part5-3), branchissa <i>part5-3</i>.
 
 </div>
 
