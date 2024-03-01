@@ -78,4 +78,76 @@ Le contenu du fichier <i>package.json</i> peut par exemple être le suivant:
 }
 ```
 
+Installons webpack avec la commande:
+
+```bash
+npm install --save-dev webpack webpack-cli
+```
+
+Nous définissons la fonctionnalité de webpack dans le fichier <i>webpack.config.js</i>, que nous initialisons avec le contenu suivant:
+
+```js
+const path = require('path')
+
+const config = () => {
+  return {
+    entry: './src/index.js',
+    output: {
+      path: path.resolve(__dirname, 'build'),
+      filename: 'main.js'
+    }
+  }
+}
+
+module.exports = config
+```
+
+**Remarque:** il serait possible de faire la définition directement comme un objet au lieu d'une fonction:
+
+```js
+const path = require('path')
+
+const config = {
+  entry: './src/index.js',
+  output: {
+    path: path.resolve(__dirname, 'build'),
+    filename: 'main.js'
+  }
+}
+
+module.exports = config
+```
+
+Un objet suffira dans de nombreuses situations, mais nous aurons plus tard besoin de certaines fonctionnalités qui exigent que la définition soit faite sous forme de fonction.
+
+Nous allons ensuite définir un nouveau script npm appelé <i>build</i> qui exécutera l'empaquetage avec webpack:
+
+```js
+// ...
+"scripts": {
+  "build": "webpack --mode=development"
+},
+// ...
+```
+
+Ajoutons un peu plus de code au fichier <i>src/index.js</i>:
+
+```js
+const hello = name => {
+  console.log(`hello ${name}`)
+}
+```
+
+Lorsque nous exécutons la commande _npm run build_, notre code d'application sera empaqueté par webpack. L'opération produira un nouveau fichier <i>main.js</i> qui est ajouté sous le répertoire <i>build</i>:
+
+![sortie du terminal webpack npm run build](../../images/7/19x.png)
+
+Le fichier contient beaucoup de choses qui semblent assez intéressantes. Nous pouvons également voir le code que nous avons écrit précédemment à la fin du fichier:
+
+```js
+eval("const hello = name => {\n  console.log(`hello ${name}`)\n}\n\n//# sourceURL=webpack://webpack-osa7/./src/index.js?");
+```
+
+
+
 </div>
