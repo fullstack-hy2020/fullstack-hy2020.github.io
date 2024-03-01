@@ -638,14 +638,6 @@ Testien tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.c
 
 Tehdään nyt testi joka varmistaa, että kirjautumisyritys epäonnistuu jos salasana on väärä.
 
-Playwright suorittaa oletusarvoisesti aina kaikki testit, ja testien määrän kasvaessa se alkaa olla aikaavievää. Uutta testiä kehitellessä tai rikkinäistä testiä debugatessa voidaan määritellä testi komennon <i>test</i> sijaan komennolla <i>test.only</i>, jolloin Playwright suorittaa ainoastaan sen testin. Kun testi on valmiina, voidaan <i>only</i> poistaa.
-
-Toinen vaihtoehto suorittaa yksittäinen testi, on käyttää komentoriviparametria
-
-```
-npm test -- -g "login fails with wrong password"
-```
-
 Testin ensimmäinen versio näyttää seuraavalta:
 
 ```js
@@ -695,12 +687,12 @@ Voisimmekin tarkentaa testiä varmistamaan, että virheilmoitus tulostuu nimenom
 })
 ```
 
-Testi siis etsitään metodilla [page.locator](https://playwright.dev/docs/api/class-page#page-locator) CSS-luokan <i>error</i> sisältävän komponentin ja tallennetaan sen muuttujaan muuttujaan. Komponenttiin liittyvän teksstin oikeellisuus voidaan varmistaa ekspektaatiolla [toContainText](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-contain-text). Huomaa, että [luokan CSS-selektori](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors) alkaa pisteellä, eli luokan <i>error</i> selektori on <i>.error</i>.
+Testi siis etsii metodilla [page.locator](https://playwright.dev/docs/api/class-page#page-locator) CSS-luokan <i>error</i> sisältävän komponentin ja tallennetaan sen muuttujaan. Komponenttiin liittyvän teksstin oikeellisuus voidaan varmistaa ekspektaatiolla [toContainText](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-contain-text). Huomaa, että [luokan CSS-selektori](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors) alkaa pisteellä, eli luokan <i>error</i> selektori on <i>.error</i>.
 
-Ekspekaatiolla [toHaveCSS](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-have-css) on mahdollista testata tyylejä. Voimme esim. varmistaa, että virheilmoituksen väri on punainen, ja että sen ympärillä on border:
+Ekspekaatiolla [toHaveCSS](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-have-css) on mahdollista testata sovelluksen CSS-tyylejä. Voimme esim. varmistaa, että virheilmoituksen väri on punainen, ja että sen ympärillä on border:
 
 ```js
-  test('login fails with wrong password', async ({ page }) =>{
+  test('login fails with wrong password', async ({ page }) => {
   // ...
 
     const errorDiv = await page.locator('.error')
@@ -712,8 +704,7 @@ Ekspekaatiolla [toHaveCSS](https://playwright.dev/docs/api/class-locatorassertio
 
 Värit on määriteltävä Playwrightille [rgb](https://rgbcolorcode.com/color/red)-koodeina.
 
-
-Viimeistellään testi vielä siten, että se varmistaa myös, että sovellus ei renderöi onnistunutta kirjautumista kuvaavaa tekstiä <i>'Matti Luukkainen logged in'</i>:
+Viimeistellään testi vielä siten, että se varmistaa myös, että sovellus **ei renderöi** onnistunutta kirjautumista kuvaavaa tekstiä <i>'Matti Luukkainen logged in'</i>:
 
 ```js
 test('login fails with wrong password', async ({ page }) =>{
@@ -731,6 +722,34 @@ test('login fails with wrong password', async ({ page }) =>{
 })
 ```
 
+### Testien suorittaminen yksitellen
+
+Playwright suorittaa oletusarvoisesti aina kaikki testit, ja testien määrän kasvaessa se alkaa olla aikaavievää. Uutta testiä kehitellessä tai rikkinäistä testiä debugatessa voidaan määritellä testi komennon <i>test</i> sijaan komennolla <i>test.only</i>, jolloin Playwright suorittaa ainoastaan sen testin: 
+
+```js
+describre(() => {
+  // this is the only test executed!
+  test.only('login fails with wrong password', async ({ page }) => {  // highlight-line
+    // ...
+  })
+
+  // this test is skipped...
+  test('user can login with correct credentials', async ({ page }) => {
+    // ...
+  }
+
+  // ...
+})
+```
+
+Kun testi on valmiina, voidaan <i>only</i> poistaa. 
+
+Toinen vaihtoehto suorittaa yksittäinen testi, on käyttää komentoriviparametria:
+
+```
+npm test -- -g "login fails with wrong password"
+```
+
 ### Testien apufunktiot
 
 Sovelluksemme testit näyttävät tällä hetkellä seuraavalta:
@@ -741,7 +760,7 @@ const { test, describe, expect, beforeEach } = require('@playwright/test')
 describe('Note app', () => {
   // ...
 
-  test('user can log in', async ({ page }) => {
+  test('user can login with correct credentials', async ({ page }) => {
     await page.getByRole('button', { name: 'log in' }).click()
     await page.getByTestId('username').fill('mluukkai')
     await page.getByTestId('password').fill('salainen')
@@ -771,9 +790,9 @@ describe('Note app', () => {
 
 ```
 
-Ensin siis testataan kirjautumistoimintoa. Tämän jälkeen omassa describe-lohkossa on joukko testejä, jotka olettavat että käyttäjä on kirjaantuneena, kirjaantuminen hoidetaan alustuksen tekevän <i>beforeEach</i>-lohkon sisällä. 
+Ensin siis testataan kirjautumistoimintoa. Tämän jälkeen omassa _describe_-lohkossa on joukko testejä, jotka olettavat että käyttäjä on kirjaantuneena, kirjaantuminen hoidetaan alustuksen tekevän _beforeEach_-lohkon sisällä. 
 
-Kuten aiemmin jo todettiin, jokainen testi suoritetaan alkutilasta, eli vaikka testi on koodissa alempana, se ei aloita samasta tilasta mihin ylempänä koodissa olevat testit ovat jääneet!  
+Kuten aiemmin jo todettiin, jokainen testi suoritetaan alkutilasta (missä tietokanta tyhjennetään ja sinne luodaan yksi käyttäjä) alkaen, eli vaikka testi on koodissa alempana, se ei aloita samasta tilasta mihin ylempänä koodissa olevat testit ovat jääneet!
 
 Myös testeissä kannattaa pyrkiä toisteettomaan koodiin. Eristetään kirjautumisen hoitava koodi apufunktioksi, joka sijoitetaan esim. tiedostoon _tests/helper.js_: 
 
@@ -791,6 +810,8 @@ export { loginWith }
 Testi yksinkertaistuu ja selkeytyy:
 
 ```js
+const { loginWith } = require('./helper')
+
 describe('Note app', () => {
   test('user can log in', async ({ page }) => {
     await loginWith(page, 'mluukkai', 'salainen')
@@ -810,7 +831,9 @@ describe('Note app', () => {
 })
 ```
 
-Sama koskee oikeastaan myös uuden muistiinpanon luomista. Sitä varten on olemassa testi, joka luo muistiinpanon lomakkeen avulla. Myös muistiinpanon tärkeyden muuttamista testaavan testin <i>beforeEach</i>-alustuslohkossa luodaan muistiinpano lomakkeen avulla: 
+Playwright tarjoaa myös [ratkaisun](https://playwright.dev/docs/auth) missä kirjaantuminen suoritetaan kertaalleen ennen testejä, ja jokainen testi aloittaa tilanteeasta missä sovellukseen ollaan jo kirjaantuneena. Jotta voisimme hyödyntää tätä tapaa, tulisi sovelluksen testidata alustaminen tehdä hienojakoisemmin kuin nyt. Nykyisessä ratkaisussahan tietokanta nollataan ennen jokaista testiä, ja tämän takia kirjaantuminen ennen testejä on mahdotonta. Jotta voisimme käyttää Plywrightin tarjoamaa ennen testejä tehtävää kirjautumista, tulisi käyttäjä alustaa vain kertaalleen ennen testejä. Pitäydymme yksinkertaisuuden vuoksi nykyisessä ratkaisussamme.
+
+Vastaava toistuva koodi koskee oikeastaan myös uuden muistiinpanon luomista. Sitä varten on olemassa testi, joka luo muistiinpanon lomakkeen avulla. Myös muistiinpanon tärkeyden muuttamista testaavan testin <i>beforeEach</i>-alustuslohkossa luodaan muistiinpano lomakkeen avulla: 
 
 ```js
 describe('Note app', function() {
@@ -839,9 +862,7 @@ describe('Note app', function() {
 })
 ```
 
-Playwright tarjoaa myös [ratkaisun](https://playwright.dev/docs/auth) missä kirjaantuminen suoritetaan kertaalleen ennen testejä, ja jokainen testi aloittaa tilanteeasta missä sovellukseen ollaan jo kirjaantuneena. Jotta voisimme hyödyntää tätä tapaa, tulisi sovelluksen testidata alustaminen tehdä hienojakoisemmin kuin nyt. Nykyisessä ratkaisussahan tietokanta nollataan ennen jokaista testiä, ja tämän takia kirjaantuminen ennen testejä on mahdotonta. Jotta voisimme käyttää Plywrightin tarjoamaa ennen testejä tehtävää kirjautumista, tulisi käyttäjä alustaa vain kertaalleen ennen testejä. Pitäydymme yksinkertaisuuden vuoksi nykyisessä ratkaisussamme.
-
-Eristetään myös muistiinpanon lisääminen omaksi komennoksi, joka tekee lisäämisen suoraan HTTP POST:lla. Tiedosto _tests/helper.js_ laajenee seuraavasti:
+Eristetään myös muistiinpanon lisääminen omaksi apufunktioksi. Tiedosto _tests/helper.js_ laajenee seuraavasti:
 
 ```js
 const loginWith = async (page, username, password)  => {
@@ -862,26 +883,30 @@ const createNote = async (page, content) => {
 export { loginWith, createNote }
 ```
 
-Komennon suoritus edellyttää, että käyttäjä on kirjaantunut sovellukseen API:n kautta.
-
-Testin alustuslohko yksinkertaistuu seuraavasti:
+Testi yksinkertaistuu seuraavasti:
 
 ```js
 describe('Note app', () => {
   // ...
 
-  describe('when logged in',  () => {
-    test('a new note can be created', ({ page }) => {
-      // ...
+  describe('when logged in', () => {
+    beforeEach(async ({ page }) => {
+      await loginWith(page, 'mluukkai', 'salainen')
+    })
+
+    test('a new note can be created', async ({ page }) => {
+      await createNote(page, 'a note created by playwright', true)
+      await expect(await page.getByText('a note created by playwright')).toBeVisible()
     })
 
     describe('and a note exists', () => {
       beforeEach(async ({ page }) => {
         await createNote(page, 'another note by playwright', true)
       })
-
-      test('it can be made important', ({ page }) => {
-        // ...
+  
+      test('importance can be changed', async ({ page }) => {
+        await page.getByRole('button', { name: 'make not important' }).click()
+        await expect(await page.getByText('make important')).toBeVisible()
       })
     })
   })
@@ -906,7 +931,7 @@ export default defineConfig({
 
 Voimme siis korvata testeissä kaikki osoitteet _http://localhost:3001/api/..._ osoitteella _http://localhost:5173/api/..._
 
-Määrittellään sovellukselle <i>baseUrl</i>:in testien konfiguraatiotiedostoon <i>playwright.config.js</i>: 
+Voimme nyt määrittellä sovellukselle _baseUrl_:in testien konfiguraatiotiedostoon <i>playwright.config.js</i>: 
 
 ```js
 module.exports = defineConfig({
@@ -932,7 +957,7 @@ await page.goto('/')
 await page.post('/api/tests/reset')
 ```
 
-Testit ja frontendin koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-10), branchissa <i>part5-10</i>.
+Testien tämänhetkinen koodi on [GitHubissa](https://github.com/fullstack-hy2020/notes-e2e/tree/part5-2), branchissa <i>part5-2</i>.
 
 ### Muistiinpanon tärkeyden muutos
 
