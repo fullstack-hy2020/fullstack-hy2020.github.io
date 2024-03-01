@@ -1,0 +1,253 @@
+---
+mainImage: ../../../images/part-7.svg
+part: 7
+letter: c
+lang: fr
+---
+
+<div class="content">
+
+Dans la partie 2, nous avons examiné deux manières différentes d'ajouter des styles à notre application: le vieux fichier [CSS unique](/fr/part2/styliser_vos_applications_react) et les [styles inline](/fr/part2/styliser_vos_applications_react#styles-en-ligne). Dans cette partie, nous allons examiner quelques autres méthodes.
+
+### Bibliothèques UI prêtes à l'emploi
+
+Une approche pour définir les styles d'une application consiste à utiliser un "framework UI" prêt à l'emploi.
+
+L'un des premiers frameworks UI largement populaires était la boîte à outils [Bootstrap](https://getbootstrap.com/) créée par Twitter, qui peut encore être le framework le plus populaire. Récemment, il y a eu une explosion dans le nombre de nouveaux frameworks UI qui ont fait leur apparition sur la scène. La sélection est si vaste qu'il y a peu d'espoir de créer une liste exhaustive des options.
+
+De nombreux frameworks UI fournissent aux développeurs d'applications web des thèmes prêts à l'emploi et des "composants" comme des boutons, des menus et des tables. Nous mettons des composants entre guillemets parce que, dans ce contexte, nous ne parlons pas de composants React. Généralement, les frameworks UI sont utilisés en incluant les feuilles de style CSS et le code JavaScript du framework dans l'application.
+
+De nombreux frameworks UI ont des versions adaptées à React où les "composants" du framework ont été transformés en composants React. Il existe quelques versions React différentes de Bootstrap comme [reactstrap](http://reactstrap.github.io/) et [react-bootstrap](https://react-bootstrap.github.io/).
+
+Ensuite, nous examinerons de plus près deux frameworks UI, Bootstrap et [MaterialUI](https://mui.com/). Nous utiliserons les deux frameworks pour ajouter des styles similaires à l'application que nous avons réalisée dans la section [React Router](/en/part7/react_router) du matériel de cours.
+
+### React Bootstrap
+
+Commençons par examiner Bootstrap avec l'aide du package [react-bootstrap](https://react-bootstrap.github.io/).
+
+Installons le package avec la commande:
+
+```bash
+npm install react-bootstrap
+```
+
+Ensuite, ajoutons un [lien pour charger la feuille de style CSS](https://react-bootstrap.github.io/docs/getting-started/introduction#stylesheets) pour Bootstrap à l'intérieur de la balise <i>head</i> dans le fichier <i>public/index.html</i> de l'application:
+
+```js
+<head>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+    crossorigin="anonymous"
+  />
+  // ...
+</head>
+```
+
+Lorsque nous rechargeons l'application, nous remarquons qu'elle a déjà l'air un peu plus stylée:
+
+![application de notes dans le navigateur avec bootstrap](../../images/7/5ea.png)
+
+Dans Bootstrap, tout le contenu de l'application est généralement rendu à l'intérieur d'un [conteneur](https://getbootstrap.com/docs/4.1/layout/overview/#containers). En pratique, cela est accompli en donnant à l'élément div racine de l'application l'attribut de classe _container_:
+
+```js
+const App = () => {
+  // ...
+
+  return (
+    <div className="container"> // highlight-line
+      // ...
+    </div>
+  )
+}
+```
+
+Nous remarquons que cela a déjà affecté l'apparence de l'application. Le contenu n'est plus aussi proche des bords du navigateur qu'il l'était auparavant:
+
+![application de notes dans le navigateur avec espacement de marge](../../images/7/6ea.png)
+
+#### Tables
+
+Ensuite, apportons quelques modifications au composant <i>Notes</i> pour qu'il rende la liste des notes sous forme de [table](https://getbootstrap.com/docs/4.1/content/tables/). React Bootstrap fournit un composant [Table](https://react-bootstrap.github.io/docs/components/table/) intégré à cet effet, il n'est donc pas nécessaire de définir séparément les classes CSS.
+
+```js
+const Notes = ({ notes }) => (
+  <div>
+    <h2>Notes</h2>
+    <Table striped> // highlight-line
+      <tbody>
+        {notes.map(note =>
+          <tr key={note.id}>
+            <td>
+              <Link to={`/notes/${note.id}`}>
+                {note.content}
+              </Link>
+            </td>
+            <td>
+              {note.user}
+            </td>
+          </tr>
+        )}
+      </tbody>
+    </Table>
+  </div>
+)
+```
+
+L'apparence de l'application est assez élégante:
+
+![onglet de notes du navigateur avec table intégrée](../../images/7/7e.png)
+
+Notez que les composants React Bootstrap doivent être importés séparément de la bibliothèque comme montré ci-dessous :
+
+```js
+import { Table } from 'react-bootstrap'
+```
+
+#### Formulaires
+
+Améliorons le formulaire dans la vue <i>Login</i> avec l'aide des [formulaires](https://getbootstrap.com/docs/4.1/components/forms/) Bootstrap.
+
+React Bootstrap fournit des [composants](https://react-bootstrap.github.io/docs/forms/overview/) intégrés pour créer des formulaires (bien que la documentation à leur sujet soit légèrement insuffisante):
+
+```js
+let Login = (props) => {
+  // ...
+  return (
+    <div>
+      <h2>login</h2>
+      <Form onSubmit={onSubmit}>
+        <Form.Group>
+          <Form.Label>username:</Form.Label>
+          <Form.Control
+            type="text"
+            name="username"
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>password:</Form.Label>
+          <Form.Control
+            type="password"
+          />
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          login
+        </Button>
+      </Form>
+    </div>
+  )
+}
+```
+
+Le nombre de composants que nous devons importer augmente:
+
+```js
+import { Table, Form, Button } from 'react-bootstrap'
+```
+
+Après être passés au formulaire Bootstrap, notre application améliorée ressemble à ceci:
+
+![application de notes dans le navigateur avec connexion bootstrap](../../images/7/8ea.png)
+
+#### Notification
+
+Maintenant que le formulaire de connexion est en meilleure forme, examinons comment améliorer les notifications de notre application:
+
+![application de notes dans le navigateur avec notification bootstrap](../../images/7/9ea.png)
+
+Ajoutons un message pour la notification lorsqu'un utilisateur se connecte à l'application. Nous le stockerons dans la variable _message_ dans l'état du composant <i>App</i>:
+
+```js
+const App = () => {
+  const [notes, setNotes] = useState([
+    // ...
+  ])
+
+  const [user, setUser] = useState(null)
+  const [message, setMessage] = useState(null) // highlight-line
+
+  const login = (user) => {
+    setUser(user)
+    // highlight-start
+    setMessage(`welcome ${user}`)
+    setTimeout(() => {
+      setMessage(null)
+    }, 10000)
+    // highlight-end
+  }
+  // ...
+}
+```
+
+Nous allons rendre le message sous forme de composant [Alert](https://getbootstrap.com/docs/4.1/components/alerts/) Bootstrap. Encore une fois, la bibliothèque React Bootstrap nous fournit un [composant React](https://react-bootstrap.github.io/docs/components/alerts/) correspondant:
+
+```js
+<div className="container">
+// highlight-start
+  {(message &&
+    <Alert variant="success">
+      {message}
+    </Alert>
+  )}
+// highlight-end
+  // ...
+</div>
+```
+
+#### Structure de navigation
+
+Enfin, modifions le menu de navigation de l'application pour utiliser le composant [Navbar](https://getbootstrap.com/docs/4.1/components/navbar/) de Bootstrap. La bibliothèque React Bootstrap nous fournit des [composants intégrés correspondants](https://react-bootstrap.github.io/docs/components/navbar/#responsive-behaviors). À force d'essais et d'erreurs, nous arrivons à une solution fonctionnelle malgré la documentation énigmatique:
+
+```js
+<Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+  <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+  <Navbar.Collapse id="responsive-navbar-nav">
+    <Nav className="me-auto">
+      <Nav.Link href="#" as="span">
+        <Link style={padding} to="/">home</Link>
+      </Nav.Link>
+      <Nav.Link href="#" as="span">
+        <Link style={padding} to="/notes">notes</Link>
+      </Nav.Link>
+      <Nav.Link href="#" as="span">
+        <Link style={padding} to="/users">users</Link>
+      </Nav.Link>
+      <Nav.Link href="#" as="span">
+        {user
+          ? <em style={padding}>{user} logged in</em>
+          : <Link style={padding} to="/login">login</Link>
+        }
+      </Nav.Link>
+    </Nav>
+  </Navbar.Collapse>
+</Navbar>
+```
+
+La mise en page résultante a une apparence très propre et agréable:
+
+![application de notes dans le navigateur avec barre de navigation noire bootstrap](../../images/7/10ea.png)
+
+Si le viewport du navigateur est réduit, nous remarquons que le menu "se replie" et il peut être déployé en cliquant sur le bouton "hamburger":
+
+![application de notes dans le navigateur avec menu hamburger](../../images/7/11ea.png)
+
+Bootstrap et une grande majorité des frameworks UI existants produisent des conceptions [réactives](https://en.wikipedia.org/wiki/Responsive_web_design), signifiant que les applications résultantes se rendent bien sur une variété de tailles d'écran différentes.
+
+Les outils de développement de Chrome permettent de simuler l'utilisation de notre application dans le navigateur de différents clients mobiles :
+
+![outils de développement Chrome avec aperçu du navigateur mobile de l'application de notes](../../images/7/12ea.png)
+
+Vous pouvez trouver le code complet de l'application [ici](https://github.com/fullstack-hy2020/misc/blob/master/notes-bootstrap.js).
+
+### Material UI
+
+Comme deuxième exemple, nous examinerons la bibliothèque React [MaterialUI](https://mui.com/), qui implémente le langage visuel [Material Design](https://material.io/) développé par Google.
+
+Installez la bibliothèque avec la commande
+
+```bash
+npm install @mui/material @emotion/react @emotion/styled
+```
+
+</div>
