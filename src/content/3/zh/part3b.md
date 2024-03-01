@@ -11,9 +11,9 @@ lang: zh
  接下来让我们把我们在[第二章节](/en/part2)中制作的前端连接到我们自己的后端。
 
 <!-- In the previous part, the frontend could ask for the list of notes from the json-server we had as a backend, from the address http://localhost:3001/notes.-->
- 在上一部分中，前端可以从我们作为后端的json-server中询问笔记列表，地址是http://localhost:3001/notes。
+ 在上一部分中，前端可以从我们作为后端的json-server中询问笔记列表，地址是http://localhost:3001/notes 。
 <!-- Our backend has a slightly different url structure now, as the notes can be found at http://localhost:3001/api/notes. Let's change the attribute __baseUrl__ in the <i>src/services/notes.js</i> like so:-->
- 我们的后端现在有一个稍微不同的url结构，因为笔记可以在http://localhost:3001/api/notes。让我们改变<i>src/services/notes.js</i>中的属性__baseUrl__，像这样。
+ 我们的后端现在有一个稍微不同的url结构，因为笔记可以在http://localhost:3001/api/notes 。让我们改变<i>src/services/notes.js</i>中的属性__baseUrl__，像这样。
 
 ```js
 import axios from 'axios'
@@ -44,7 +44,7 @@ export default { getAll, create, update }
 
 <!-- Frontendin tekemä GET-pyyntö osoitteeseen <http://localhost:3001/api/notes> ei jostain syystä toimi: -->
 <!-- Now frontend's GET request to <http://localhost:3001/api/notes> does not work for some reason:-->
- 现在 frontend's GET request to <http://localhost:3001/api/notes> 由于某些原因不能工作。
+ 现在到 <http://localhost:3001/api/notes> 前端的GET请求由于某些原因不能工作。
 
 ![](../../images/3/3ae.png)
 
@@ -140,7 +140,7 @@ Heroku根据环境变量来配置应用的端口。
 node_modules
 ```
 <!-- Create Heroku account in https://devcenter.heroku.com/-->
-在https://devcenter.heroku.com/，创建Heroku账户
+在 https://devcenter.heroku.com/ ，创建Heroku账户
 <!-- Install Heroku package using the command: npm install -g heroku-->
  使用命令安装Heroku包：npm install -g heroku
 <!-- Create a Heroku application with the command <i>heroku create</i>, commit your code to the repository and move it to Heroku with command <i>git push heroku main</i>.-->
@@ -178,7 +178,7 @@ node_modules
  用<i>create-react-app</i>创建的应用的生产构建可以用[npm run build](https://github.com/facebookincubator/create-react-app#npm-run-build-or-yarn-build)命令创建。
 
 <!-- **NOTE:** at the time of writing (20th January 2022) create-react-app had a bug that causes the following error _TypeError: MiniCssExtractPlugin is not a constructor_-->
- **注意：**在撰写本文时（2022年1月20日）create-react-app有一个错误，导致以下错误_TypeError。MiniCssExtractPlugin不是一个构造函数。
+ **注意：**在撰写本文时（2022年1月20日）create-react-app有一个错误，导致以下错误 _TypeError: MiniCssExtractPlugin不是一个构造函数_ 。
 
 <!-- A possible fix is found from [here](https://github.com/facebook/create-react-app/issues/11930). Add the following to the file <i>package.json</i>-->
  从[这里](https://github.com/facebook/create-react-app/issues/11930)可以找到一个可能的修正。在文件<i>package.json</i>中添加以下内容
