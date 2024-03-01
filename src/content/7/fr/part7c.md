@@ -471,4 +471,174 @@ Au lieu d'utiliser la bibliothèque [React Bootstrap](https://react-bootstrap.gi
 </Table>
 ```
 
+Nous aurions pu utiliser une <i>table</i> HTML régulière et ajouter la classe CSS requise:
+
+```js
+<table className="table striped">
+  // ...
+</table>
+```
+
+L'avantage d'utiliser la bibliothèque React Bootstrap n'est pas évident à partir de cet exemple.
+
+En plus de rendre le code frontend plus compact et lisible, un autre avantage d'utiliser les bibliothèques de frameworks UI React est qu'elles incluent le JavaScript nécessaire pour faire fonctionner certains composants. Certains composants Bootstrap nécessitent quelques [dépendances JavaScript](https://getbootstrap.com/docs/4.1/getting-started/introduction/#js) désagréables que nous préférerions ne pas inclure dans nos applications React.
+
+Certains inconvénients potentiels de l'utilisation de frameworks UI via des bibliothèques d'intégration au lieu de les utiliser "directement" sont que les bibliothèques d'intégration peuvent avoir des API instables et une documentation pauvre. La situation avec [Semantic UI React](https://react.semantic-ui.com) est beaucoup mieux que celle de nombreux autres frameworks UI, car il s'agit d'une bibliothèque d'intégration React officielle.
+
+Il y a aussi la question de savoir si les bibliothèques de frameworks UI devraient être utilisées en premier lieu. C'est à chacun de se forger sa propre opinion, mais pour les personnes manquant de connaissances en CSS et en design web, elles sont des outils très utiles.
+
+### Autres frameworks UI
+
+Voici quelques autres frameworks UI pour votre considération. Si vous ne voyez pas votre framework UI préféré dans la liste, veuillez faire une demande de modification (pull request) au matériel du cours.
+
+<https://bulma.io/>
+<https://ant.design/>
+<https://get.foundation/>
+<https://chakra-ui.com/>
+<https://tailwindcss.com/>
+<https://semantic-ui.com/>
+<https://mantine.dev/>
+<https://react.fluentui.dev/>
+<https://storybook.js.org>
+<https://www.primefaces.org/primereact/>
+<https://v2.grommet.io>
+<https://blueprintjs.com>
+<https://evergreen.segment.com>
+<https://www.radix-ui.com/>
+<https://react-spectrum.adobe.com/react-aria/index.html>
+<https://master.co/>
+<https://www.radix-ui.com/>
+<https://nextui.org/>
+<https://daisyui.com/>
+<https://ui.shadcn.com/>
+<https://www.tremor.so/>
+<https://headlessui.com/>
+
+### Composants stylisés
+
+Il existe également [d'autres manières](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b) de styliser les applications React que nous n'avons pas encore examinées.
+
+La bibliothèque [styled components](https://www.styled-components.com/) propose une approche intéressante pour définir des styles en utilisant des [littéraux de template étiquetés](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates), introduits dans ES6.
+
+Faisons quelques changements aux styles de notre application avec l'aide de styled components. Tout d'abord, installez le paquet avec la commande:
+
+```bash
+npm install styled-components
+```
+
+Ensuite, définissons deux composants avec des styles:
+
+```js
+import styled from 'styled-components'
+
+const Button = styled.button`
+  background: Bisque;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid Chocolate;
+  border-radius: 3px;
+`
+
+const Input = styled.input`
+  margin: 0.25em;
+`
+```
+
+Le code ci-dessus crée des versions stylisées des éléments HTML <i>button</i> et <i>input</i>, puis les assigne aux variables <i>Button</i> et <i>Input</i>.
+
+La syntaxe pour définir les styles est assez intéressante, car les règles CSS sont définies à l'intérieur des accents graves (backticks).
+
+Les composants stylisés que nous avons définis fonctionnent exactement comme les éléments <i>button</i> et <i>input</i> habituels, et ils peuvent être utilisés de la même manière:
+
+```js
+const Login = (props) => {
+  // ...
+  return (
+    <div>
+      <h2>login</h2>
+      <form onSubmit={onSubmit}>
+        <div>
+          username:
+          <Input /> // highlight-line
+        </div>
+        <div>
+          password:
+          <Input type='password' /> // highlight-line
+        </div>
+        <Button type="submit" primary=''>login</Button> // highlight-line
+      </form>
+    </div>
+  )
+}
+```
+
+Créons quelques composants supplémentaires pour styliser cette application, qui seront des versions stylisées d'éléments <i>div</i>:
+
+```js
+const Page = styled.div`
+  padding: 1em;
+  background: papayawhip;
+`
+
+const Navigation = styled.div`
+  background: BurlyWood;
+  padding: 1em;
+`
+
+const Footer = styled.div`
+  background: Chocolate;
+  padding: 1em;
+  margin-top: 1em;
+`
+```
+
+Utilisons les composants dans notre application:
+
+```js
+const App = () => {
+  // ...
+
+  return (
+     <Page> // highlight-line
+      <Navigation> // highlight-line
+        <Link style={padding} to="/">home</Link>
+        <Link style={padding} to="/notes">notes</Link>
+        <Link style={padding} to="/users">users</Link>
+        {user
+          ? <em>{user} logged in</em>
+          : <Link style={padding} to="/login">login</Link>
+        }
+      </Navigation> // highlight-line
+      
+      <Routes>
+        <Route path="/notes/:id" element={<Note note={note} />} />  
+        <Route path="/notes" element={<Notes notes={notes} />} />   
+        <Route path="/users" element={user ? <Users /> : <Navigate replace to="/login" />} />
+        <Route path="/login" element={<Login onLogin={login} />} />
+        <Route path="/" element={<Home />} />      
+      </Routes>
+
+      <Footer> // highlight-line
+        <em>Note app, Department of Computer Science 2022</em>
+      </Footer> // highlight-line
+    </Page> // highlight-line
+  )
+}
+```
+
+L'apparence de l'application résultante est illustrée ci-dessous:
+
+![application de notes dans le navigateur avec composants stylisés](../../images/7/18ea.png)
+
+Les composants stylisés ont connu une croissance constante en popularité récemment, et un assez grand nombre de personnes les considèrent comme la meilleure manière de définir des styles dans les applications React.
+
+</div>
+
+<div class="tasks">
+
+### Exercices
+
+Les exercices liés aux sujets présentés ici se trouvent à la fin de cette section du matériel de cours, dans l'ensemble d'exercices [pour étendre l'application de liste de blogs](/en/part7/exercises_extending_the_bloglist).
+
 </div>
