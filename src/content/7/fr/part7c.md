@@ -250,4 +250,129 @@ Installez la bibliothèque avec la commande
 npm install @mui/material @emotion/react @emotion/styled
 ```
 
+Maintenant, utilisons MaterialUI pour apporter les mêmes modifications au code que nous avons faites précédemment avec Bootstrap.
+
+Rendez le contenu de toute l'application dans un [Container](https://mui.com/components/container/):
+
+```js
+import { Container } from '@mui/material'
+
+const App = () => {
+  // ...
+  return (
+    <Container>
+      // ...
+    </Container>
+  )
+}
+```
+
+#### Table
+
+Commençons par le composant <i>Notes</i>. Nous allons rendre la liste des notes sous forme de [table](https://mui.com/material-ui/react-table/#simple-table):
+
+```js
+const Notes = ({ notes }) => (
+  <div>
+    <h2>Notes</h2>
+
+    <TableContainer component={Paper}>
+      <Table>
+        <TableBody>
+          {notes.map(note => (
+            <TableRow key={note.id}>
+              <TableCell>
+                <Link to={`/notes/${note.id}`}>{note.content}</Link>
+              </TableCell>
+              <TableCell>
+                {note.user}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  </div>
+)
+```
+
+La table ressemble à cela:
+
+![table de notes du navigateur MaterialUI](../../images/7/63eb.png)
+
+Une caractéristique moins agréable de Material UI est que chaque composant doit être importé séparément. La liste des importations pour la page des notes est assez longue:
+
+```js
+import {
+  Container,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+  Paper,
+} from '@mui/material'
+```
+
+#### Formulaire
+
+Ensuite, améliorons le formulaire de connexion dans la vue <i>Login</i> en utilisant les composants [TextField](https://mui.com/material-ui/react-text-field/) et [Button](https://mui.com/material-ui/api/button/):
+
+```js
+const Login = (props) => {
+  const navigate = useNavigate()
+
+  const onSubmit = (event) => {
+    event.preventDefault()
+    props.onLogin('mluukkai')
+    navigate('/')
+  }
+
+  return (
+    <div>
+      <h2>login</h2>
+      <form onSubmit={onSubmit}>
+        <div>
+          <TextField label="username" />
+        </div>
+        <div>
+          <TextField label="password" type='password' />
+        </div>
+        <div>
+          <Button variant="contained" color="primary" type="submit">
+            login
+          </Button>
+        </div>
+      </form>
+    </div>
+  )
+}
+```
+
+Le résultat est:
+
+![formulaire de connexion de l'application de notes MaterialUI dans le navigateur](../../images/7/64ea.png)
+
+MaterialUI, contrairement à Bootstrap, ne fournit pas de composant pour le formulaire lui-même. Le formulaire ici est un élément HTML [form](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) ordinaire.
+
+N'oubliez pas d'importer tous les composants utilisés dans le formulaire.
+
+#### Notification
+
+La notification affichée lors de la connexion peut être réalisée à l'aide du composant [Alert](https://mui.com/material-ui/react-alert/)  qui est assez similaire au composant équivalent de Bootstrap:
+
+```js
+<div>
+// highlight-start
+  {(message &&
+    <Alert severity="success">
+      {message}
+    </Alert>
+  )}
+// highlight-end
+</div>
+```
+
+
+
 </div>
