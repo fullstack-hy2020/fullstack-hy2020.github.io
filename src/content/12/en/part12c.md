@@ -615,7 +615,7 @@ This illustrates what we are looking for and may be helpful if you are having tr
 
 #### Exercise 12.19: Connect the services, todo-frontend with todo-backend
 
-> In this exercise, submit the entire development environment, including both Express and React applications, Dockerfiles and docker-compose.yml.
+> In this exercise, submit the entire development environment, including both Express and React applications, dev.Dockerfiles and docker-compose.dev.yml.
 
 Finally, it is time to put all the pieces together. Before starting, it is essential to understand <i>where</i> the React app is actually run. The above figure might give the impression that React app is run in the container but it is totally wrong. 
 
