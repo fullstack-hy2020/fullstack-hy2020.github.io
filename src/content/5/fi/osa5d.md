@@ -35,13 +35,13 @@ Jos valintasi on Playwright, jatka eteenpäin. Jos päädyt käyttämään Cypre
 
 Kirjastojen vertailuista on kirjoitettu monia blojeja, esim. [tämä](https://www.lambdatest.com/blog/cypress-vs-playwright/) ja [tämä](https://www.browserstack.com/guide/playwright-vs-cypress).
 
-On vaikea sanoa kumpi kirjastoista on parempi. Eräs Playwrightin etu on sen selaintuki, Playwright tukee Chromea, Firefoxia ja Webkit-pohjaisia selaimia kuten Safaria. Nykyisin Cypress sisältää tuen kaikkiin näihin selaimiin, Webkit-tuki on tosin vasta kokeellinen ja ei tue kaikkia Cypressin ominaisuuksia. Oma preferenssini kallisuu kirjoitushetkellö (1.3.2024) hieman Playwrightin puolelle.
+On vaikea sanoa kumpi kirjastoista on parempi. Eräs Playwrightin etu on sen selaintuki, Playwright tukee Chromea, Firefoxia ja Webkit-pohjaisia selaimia kuten Safaria. Nykyisin Cypress sisältää tuen kaikkiin näihin selaimiin, Webkit-tuki on tosin vasta kokeellinen ja ei tue kaikkia Cypressin ominaisuuksia. Oma preferenssini kallisuu kirjoitushetkellä (1.3.2024) hieman Playwrightin puolelle.
 
 Tutustutaan nyt Playwrightin käyttöön.
 
 ### Testien alustaminen
 
-Toisin kuin React-frontille tehdyt yksikkötestit tai backendin tekstit, nyt tehtävien End to End -testien ei ei tarvitse sijaita samassa npm-projektissa missä koodi on. Tehdään E2E-testeille kokonaan oma projekti komennolla _npm init_. Asennetaan sitten Playwright suorittamalla suorittamalla uuden projektin hakemistossa komento
+Toisin kuin React-frontille tehdyt yksikkötestit tai backendin tekstit, nyt tehtävien End to End -testien ei tarvitse sijaita samassa npm-projektissa missä koodi on. Tehdään E2E-testeille kokonaan oma projekti komennolla _npm init_. Asennetaan sitten Playwright suorittamalla uuden projektin hakemistossa komento
 
 ```js
 npm init playwright@latest
@@ -154,7 +154,7 @@ Tehdään <i>backendille</i> npm-skripti, jonka avulla se saadaan käynnistetty�
 }
 ```
 
-Käynnistetään frontend ja backend, ja luodaan sovellukselle ensimmäinen testi tiedotoon <code>tests/note\_app.spec.js</code>:
+Käynnistetään frontend ja backend, ja luodaan sovellukselle ensimmäinen testi tiedostoon <code>tests/note\_app.spec.js</code>:
 
 ```js
 const { test, expect } = require('@playwright/test')
@@ -169,7 +169,7 @@ test('front page can be opened', async ({ page }) => {
 ```
 
 Ensin testi avaa sovelluksen metodilla [page.goto](https://playwright.dev/docs/writing-tests#navigation).
-Tämän jälkeen testi etsii metodilla [page.getByText](https://playwright.dev/docs/api/class-page#page-get-by-text) [lokaattorin](https://playwright.dev/docs/api/class-locator) joka vastaa elementtiä missä esiintyy teksti <i>Notes</i>. 
+Tämän jälkeen testi etsii metodilla [page.getByText](https://playwright.dev/docs/api/class-page#page-get-by-text) [lokaattorin](https://playwright.dev/docs/api/class-locator) joka vastaa elementtiä, missä esiintyy teksti <i>Notes</i>. 
 
 Metodilla [toBeVisible](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-be-visible) varmistetaan, että lokaattoria vastaava elementti on renderöitynä näkyville.
 
@@ -189,7 +189,7 @@ test('front page can be opened', async ({ page }) => {
 })
 ```
 
-Kuten arvata saattaa, testi ei mene läpi. Playwright avaa testiraportin selaimeen ja siitä käy selväksi, että Playwright on itseasiassa suorittanut testit kolmella eri selaimella Chromella, yhden Firefoxilla sekä Webkitillä eli esim. Safarin käyttämällä selaimoottorilla:
+Kuten arvata saattaa, testi ei mene läpi. Playwright avaa testiraportin selaimeen ja siitä käy selväksi, että Playwright on itseasiassa suorittanut testit kolmella eri selaimella Chromella, yhden Firefoxilla sekä Webkitillä eli esim. Safarin käyttämällä selainmoottorilla:
 
 ![](../../images/5/play2.png)
 
@@ -221,7 +221,7 @@ describe('Note app', () => {
 })
 ```
 
-Ennen kuin mennään eteenpäin, rikotaan testit vielä kertaalleen. Huomaamme, että testien suoritus on melko nopeaa kuin testit menevät läpi, mutta paljon hitaampaa jos testit eivät mene läpi. Syynä tälle on se, että Playwrightin toimintaperiaatteena on odottaa etsittyjä elementtejä kunnes [ne ovat renderöityjä ja toimintaan valmiita](https://playwright.dev/docs/actionability). Jos elementtiä ei löydy, seurauksena on _TimeoutError_ ja testi ei mene läpi. Playwright odottaa elementtejä oletusarvoisesti 5 tai 30 sekunnin ajan testauksessa käytetyistä funktioista [riippuen](https://playwright.dev/docs/test-timeouts#introduction).
+Ennen kuin mennään eteenpäin, rikotaan testit vielä kertaalleen. Huomaamme, että testien suoritus on melko nopeaa kun testit menevät läpi, mutta paljon hitaampaa jos testit eivät mene läpi. Syynä tälle on se, että Playwrightin toimintaperiaatteena on odottaa etsittyjä elementtejä kunnes [ne ovat renderöityjä ja toimintaan valmiita](https://playwright.dev/docs/actionability). Jos elementtiä ei löydy, seurauksena on _TimeoutError_ ja testi ei mene läpi. Playwright odottaa elementtejä oletusarvoisesti 5 tai 30 sekunnin ajan testauksessa käytetyistä funktioista [riippuen](https://playwright.dev/docs/test-timeouts#introduction).
 
 Testejä kehitettäessä voi olla viisaampaa pienentää odotettavaa aikaa muutamaan sekuntiin. [Dokumentaation](https://playwright.dev/docs/test-timeouts) mukaan tämä onnistuu muuttamalla tiedostoa _playwright.config.js_ seuraavasti:
 
@@ -270,7 +270,7 @@ Klikkauksen jälkeen lomake tulee näkyviin
 
 ![](../../images/5/play5.png)
 
-Kun lomake on avattu, testin tulisi etsiä siitä teksikentät ja kirjoittaa niihin käyttäjätunnus sekä salasana. Tehdään ensimmäinen yritys funktiota [page.getByRole](https://playwright.dev/docs/api/class-page#page-get-by-role) käyttäen:
+Kun lomake on avattu, testin tulisi etsiä siitä tekstikentät ja kirjoittaa niihin käyttäjätunnus sekä salasana. Tehdään ensimmäinen yritys funktiota [page.getByRole](https://playwright.dev/docs/api/class-page#page-get-by-role) käyttäen:
 
 ```js
 describe('Note app', () => {
@@ -293,7 +293,7 @@ Error: locator.fill: Error: strict mode violation: getByRole('textbox') resolved
   2) <input value="" type="password"/> aka locator('input[type="password"]')
 ```
 
-Ongelmana on nyt se, että _getByRole_ löytää kaksi tekstikenttää, ja metodin [fill](https://playwright.dev/docs/api/class-locator#locator-fill) ei onnistu. Eräs tapa kiertää ongelma on käyttää metodeja [first](https://playwright.dev/docs/api/class-locator#locator-first) ja [last](https://playwright.dev/docs/api/class-locator#locator-last):
+Ongelmana on nyt se, että _getByRole_ löytää kaksi tekstikenttää, ja metodin [fill](https://playwright.dev/docs/api/class-locator#locator-fill) kutsuminen ei onnistu, sillä se olettaa että löydettyjä tekstikenttiä on vain yksi. Eräs tapa kiertää ongelma on käyttää metodeja [first](https://playwright.dev/docs/api/class-locator#locator-first) ja [last](https://playwright.dev/docs/api/class-locator#locator-last):
 
 ```js
 describe('Note app', () => {
@@ -1078,24 +1078,17 @@ Jostain syystä testi alkaa toimia epäluotettavaksi, se menee välillä läpi j
 
 ### Testien kehittäminen ja debuggaaminen
 
-Playwright tarjoaa muutamia melko hyviä testin kehittämistä ja debuggaamista auttavia työkaluja. [Dokumentaatiota](https://playwright.dev/docs/intro) kannattaa ehdottomasti selailla, eritysen tärkeitä ovat
--  [lokaattoreita](https://playwright.dev/docs/locators) kertova osa antaa hyviä vihjeitä testattavien elementtien etsimiseen
-- osa [actions](https://playwright.dev/docs/input) kertoo miten selaimen kanssa käytävää vuorovaikutusta on mahdollista simuloida testeissä
-- [assertioista](https://playwright.dev/docs/test-assertions) kertova osa demonstroi mitä erilaisia testauksessa käytettäviä ekspektaatioita Playwright tarjoaa
-
-Tarkemmat detaljit löytyvät [API](https://playwright.dev/docs/api/class-playwright)-kuvauksesta, erityisen hyödyllisiä ovat testattavan sovelluksen selainikkunaa vastaavan komponentin [Page](https://playwright.dev/docs/api/class-page) kuvaus, sekä testeissä etsittyjä elementtejä vastaavan komponentin [Locator](https://playwright.dev/docs/api/class-locator)-kuvaus.
-
 Jos/kun testit eivät mene läpi ja herää epäilys, että vika on koodin sijaan testeissä, kannattaa testejä suorittaa [debug](https://playwright.dev/docs/debug#run-in-debug-mode-1)-moodissa.
 
-Seuraava komento suorittaa yksittäisen testin debug-moodissa:
+Seuraava komento suorittaa ongelmallisen testin debug-moodissa:
 
 ```
-npm test -- --debug -g 'a new note can be created'
+npm test -- -g'importance can be changed' --debug
 ```
 
 Playwright-inspector näyttää testien etenemisen askel askeleelta. Yläreunan nuoli-piste-painike vie testejä yhden askeleen eteenpäin. Lokaattorien löytämät elementit sekä selaimen kanssa käyty interaktio visualisoituvat selaimeen:
 
-![](../../images/5/play6.png)
+![](../../images/5/play6a.png)
 
 Oletusarvoisesti debugatessa askelletaan testi läpi komento komennolta. Jos on kyse monimutkaisesta testistä, voi olla melko vaivalloista askeltaa testissä kiinnostavaan kohtaan asti. Liialta askellukselta voidaan välttyä lisäämällä juuri kiinnostavaa kohtaa ennen komento _await page.pause()_:
 
@@ -1119,9 +1112,11 @@ describe('Note app', () => {
   
       test('one of those can be made nonimportant', async ({ page }) => {
         await page.pause() // highlight-line
-        const secondNoteElement = await page.getByText('second note').locator('..')
-        await secondNoteElement.getByRole('button', { name: 'make not important' }).click()
-        await expect(secondNoteElement.getByText('make important')).toBeVisible()
+        const otherNoteText = await page.getByText('second note')
+        const otherdNoteElement = await otherNoteText.locator('..')
+      
+        await otherdNoteElement.getByRole('button', { name: 'make not important' }).click()
+        await expect(otherdNoteElement.getByText('make important')).toBeVisible()
       })
     })
   })
@@ -1130,37 +1125,13 @@ describe('Note app', () => {
 
 Nyt testissä voidaan siirtyä kiinnostavaan kohtaan yhdellä askelella, painamalla inspectorissa vihreää nuolisymbolia.
 
-Debuggausmoodin sijaan tai rinnalla voi testien suorittaminen UI-moodissa olla hyödyllistä. 
+Kun suoritamme nyt testin ja hyppäämme suorituksessa komenon _page.pause()_ kohdalle, havaitsemme mielenkiintoisen seikan:
 
-```
-npm run test -- --ui
-```
+![](../../images/5/play6b.png)
 
-Kun suoritamme testit, huomamme UI:ta tarkastelemalla mielenkiintoisen ilmiön:
+Näyttää siltä, että selain ei renderöi kaikkia lohkossa _beforeEach_ luotuja muistiinpanoja. Mistä on kyse?
 
-![](../../images/5/play7.png)
-
-Kyse on seuraavasta testistä:
-
-```js
-describe('and several notes exists', () => {
-  beforeEach(async ({ page }) => {
-    await createNote(page, 'first note')
-    await createNote(page, 'second note')
-    await createNote(page, 'third note')
-  })
-
-  test('one of those can be made nonimportant', async ({ page }) => {
-    const secondNoteElement = await page.getByText('second note').locator('..')
-    await secondNoteElement.getByRole('button', { name: 'make not important' }).click()
-    await expect(secondNoteElement.getByText('make important')).toBeVisible()
-  })
-})
-```
-
-Testi menee kyllä läpi, mutta näyttää siltä, että selain ei renderöi kaikkia lohkossa _beforeEach_ luotuja muistiinpanoja. Mistä on kyse?
-
-Syynä ongelmaan on se, että kun testi luo yhden muistiinpanon, se aloittaa seuraavan luomisen jo ennen kuin palvelin on vastannut, ja lisätty muistiinpano on renderöidään ruudulle. Tämä taas saattaa aiheuttaa sen, että jotain muistiinpanoja katoaa, sillä selain päivitetään palvelimen vastatessa perustuen siihen muistiinpanojen tilaan mikä kyseisen lisäysoperaation alussa oli.
+Syynä ongelmaan on se, että kun testi luo yhden muistiinpanon, se aloittaa seuraavan luomisen jo ennen kuin palvelin on vastannut, ja lisätty muistiinpano renderöidään ruudulle. Tämä taas saattaa aiheuttaa sen, että jotain muistiinpanoja katoaa (kuvassa näin kävi toisena luodulle muistiinpanolle), sillä selain uudelleenrenderöidään palvelimen vastatessa perustuen siihen muistiinpanojen tilaan mikä kyseisen lisäysoperaation alussa oli.
 
 Ongelma korjaantuu "hidastamalla" lisäysoperaatioita siten, että lisäyksen jälkeen odotetaan komennolla [waitFor](https://playwright.dev/docs/api/class-locator#locator-wait-for), että lisätty muistinpano ehditään renderöidä:
 
@@ -1171,6 +1142,12 @@ const createNote = async (page, content) => {
   await page.getByRole('button', { name: 'save' }).click()
   await page.getByText(content).waitFor() // hightlight-line
 }
+```
+
+Debuggausmoodin sijaan tai rinnalla voi testien suorittaminen UI-moodissa olla hyödyllistä. Tämä tapahtuu seuraavasti:
+
+```
+npm run test -- --ui
 ```
 
 Lähes samaan tapaan kuin UI-moodi, toimii Playwrightin [Trace Viewer](https://playwright.dev/docs/trace-viewer-intro). Ideana siinä on, se että testeistä tallennetaan "visuaalinen jälki", jota voidaan tarkastella tarvittaessa testien suorituksen jälkeen. Trace tallennetaan suorittamalla testit seuraavasti:
@@ -1187,37 +1164,46 @@ npx playwright show-report
 
 tai määrittelemällämme npm-skriptillä _npm run test:report_
 
-Trace näyttää käytännöss samalta kuin testien suoritus UI-moodissa.
+Trace näyttää käytännössä samalta kuin testien suoritus UI-moodissa.
 
-UI-moodi tarjoaa myös mahdollisuuden avustettuun lokaattorien etsimiseen. Tämä tapahtuu painamalla alapalkin vasemmanpuoleista tuplaympyrää, ja sen jälkeen klikkaamalla haluttua käyttöliittymäelmenttiä. Playwright näyttää elementin lokaattorin:
+UI-moodi sekä Trace viewer tarjoavat myös mahdollisuuden avustettuun lokaattorien etsimiseen. Tämä tapahtuu painamalla alapalkin vasemmanpuoleista tuplaympyrää, ja sen jälkeen klikkaamalla haluttua käyttöliittymäelmenttiä. Playwright näyttää elementin lokaattorin:
 
 ![](../../images/5/play8.png)
 
 Playwright ehdottaa siis kolmannen muistiinpanon lokaattoriksi seuraavaa
 
 ```js
-page.locator('li').filter({ hasText: 'third notemake not important' }).getByRole('button')
+page.locator('li').filter({ hasText: 'third note' }).getByRole('button')
 ```
 
-Tämä poikkeaa jossain määrin testien käyttämästä lokaattorista, joka oli
+Metodia [page.locator](https://playwright.dev/docs/api/class-page#page-locator) kutsutaan parametrilla _li_ eli etsitään sivulta kaikki li-elementit, joita sivulla on yhteensä kolme. Tämän jälkeen rajaudutaan metodia [locator.filter](https://playwright.dev/docs/api/class-locator#locator-filter) käyttäen siihen li-elementtiin, joka sisältää tekstin <i>third notemake not important</i> ja otetaan sen sisällä oleva button-elementti metodia [locator.getByRole](https://playwright.dev/docs/api/class-locator#locator-get-by-role) käyttäen.
+
+Playwrightin generoima lokaattori poikkeaa jossain määrin testien käyttämästä lokaattorista, joka oli
 
 ```js
-page.getByText('second note').locator('..').getByRole('button', { name: 'make not important' })
+page.getByText('first note').locator('..').getByRole('button', { name: 'make not important' })
 ```
 
 Lienee makuasia kumpi lokaattoreista on parempi. 
 
-Playwright sisältää myös [testigeneraattorin](https://playwright.dev/docs/codegen-intro), jonka avulla on mahdollista "nauhottaa" käyttöliittymän kautta klikkailemalla testejä. Testigeneraattori käynnistyy komennolla
+Playwright sisältää myös [testigeneraattorin](https://playwright.dev/docs/codegen-intro), jonka avulla on mahdollista "nauhottaa" käyttöliittymän kautta klikkailemalla testien käyttämiä lokaattoreita. Testigeneraattori käynnistyy komennolla
 
 ```
 npx playwright codegen http://localhost:5173/
 ```
 
-Testigeneraattori _Record_-tilan päälläollessa käyttäjän interaktion Playwright inspectoriin, mistä koodin käyttämät lokaattorit ja actionit voi sitten kopioida testeihin:
+_Record_-tilan päälläollessa testigeneraattori "tallentaa" käyttäjän interaktion Playwright inspectoriin, mistä lokaattorit ja actionit on mahdollista kopioida testeihin:
 
 ![](../../images/5/play9.png)
 
 Komentorivin sijaan Playwrightiä voi käyttää myös [VS Code](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright)-pluginin kautta. Plugin tarjoaa monia käteviä ominaisuuksia, mm. breakpointien käytön testejä debugatessa.
+
+Ongelmatilanteiden välttämiseksi ja ymmärryksen lisäämiseksi kannattaa ehdottomasti selailla Playwrightin laadukasta [dokumentaatiota](https://playwright.dev/docs/intro). Seuraavassa on listattu tärkeimmät:
+-  [lokaattoreista](https://playwright.dev/docs/locators) kertova osa antaa hyviä vihjeitä testattavien elementtien etsimiseen
+- osa [actions](https://playwright.dev/docs/input) kertoo miten selaimen kanssa käytävää vuorovaikutusta on mahdollista simuloida testeissä
+- [assertioista](https://playwright.dev/docs/test-assertions) kertova osa demonstroi mitä erilaisia testauksessa käytettäviä ekspektaatioita Playwright tarjoaa
+
+Tarkemmat detaljit löytyvät [API](https://playwright.dev/docs/api/class-playwright)-kuvauksesta, erityisen hyödyllisiä ovat testattavan sovelluksen selainikkunaa vastaavan luokan [Page](https://playwright.dev/docs/api/class-page) kuvaus, sekä testeissä etsittyjä elementtejä vastaavan luokan [Locator](https://playwright.dev/docs/api/class-locator)-kuvaus.
 
 Testien lopullinen versio on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/notes-e2e/tree/part5-3), branchissa <i>part5-3</i>.
 
@@ -1227,7 +1213,7 @@ Testien lopullinen versio on kokonaisuudessaan [GitHubissa](https://github.com/f
 
 ### Tehtävät 5.17.-5.23.
 
-Tehdään osan lopuksi muutamia E2E-testejä blogisovellukseen. Yllä olevan materiaalin pitäisi riittää suurimman osan tehtävien tekemiseen. Playwrightin [dokumentaatiota]https://playwright.dev/docs/intro) ja [API-kuvausta](https://playwright.dev/docs/api/class-playwright) kannattaa ehdottomasti lukea, ainakin edellisessä luvussa mainitut osat.
+Tehdään osan lopuksi muutamia E2E-testejä blogisovellukseen. Yllä olevan materiaalin pitäisi riittää suurimman osan tehtävien tekemiseen. Playwrightin [dokumentaatiota](https://playwright.dev/docs/intro) ja [API-kuvausta](https://playwright.dev/docs/api/class-playwright) kannattaa kuitenkin ehdottomasti lukea, ainakin edellisen luvun lopussa mainitut osat.
 
 #### 5.17: blogilistan end to end ‑testit, step1
 
@@ -1265,7 +1251,7 @@ Testin <i>beforeEach</i>-alustuslohkon tulee nollata tietokannan tilanne esim. [
 
 #### 5.18: blogilistan end to end ‑testit, step2
 
-Tee testit kirjautumiselle, testaa sekä onnistunut että epäonnistunut kirjautuminen. Luo testejä varten käyttäjä <i>beforeEach</i>-lohkossa. 
+Tee testit kirjautumiselle. Testaa sekä onnistunut että epäonnistunut kirjautuminen. Luo testejä varten käyttäjä <i>beforeEach</i>-lohkossa. 
 
 Testien runko laajenee seuraavasti
 
