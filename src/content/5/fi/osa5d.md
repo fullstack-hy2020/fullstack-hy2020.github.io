@@ -287,7 +287,7 @@ describe('Note app', () => {
 
 Seurauksena on virheilmoitus:
 
-```
+```bash
 Error: locator.fill: Error: strict mode violation: getByRole('textbox') resolved to 2 elements:
   1) <input value=""/> aka locator('div').filter({ hasText: /^username$/ }).getByRole('textbox')
   2) <input value="" type="password"/> aka locator('input[type="password"]')
