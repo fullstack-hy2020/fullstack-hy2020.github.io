@@ -45,9 +45,11 @@ const InfoBanner = ({ visible, onHide }) => {
   return (
     <div style={style}>
       <div style={textStyle}>
+        <p style={{ marginBottom: 20}}>
+          The testing libraries used in part 5 were changed 3rd March 2024. In frontend Vite replaced Jest. For End to end-tests Playwright is the new preferred library.
+        </p>  
         <p>
-          The testing library used in part 4 was changed 13th February 2024 from Jest to Node:test.
-          If you have started with Jest, you may continue. The relevant material is still available, see the "Legacy: testing with Jest"
+          If you have started with Jest or Cypress, you may continue. The relevant material is still available, for Jest, the link is at the top of part 5c and for the Cypress, the link is at the menu at the left.
         </p>
       </div>
       <div style={buttonDiv}>

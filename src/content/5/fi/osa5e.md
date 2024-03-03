@@ -13,7 +13,9 @@ Jos valintasi on Cypress, jatka eteenpäin. Jos päädyt käyttämään Playwrig
 
 ### Cypress
 
-Aloitetaan asentamalla Cypress <i>frontendin</i> kehitysaikaiseksi riippuvuudeksi
+Toisin kuin React-frontille tehdyt yksikkötestit tai backendin testit, nyt tehtävien End to End -testien ei tarvitse sijaita samassa npm-projektissa missä koodi on. Tehdään E2E-testeille kokonaan oma projekti komennolla _npm init_.
+
+Asennetaan sitten Cypress suorittamalla uuden projektin kehitysaikaiseksi riippuvuudeksi
 
 ```js
 npm install --save-dev cypress
@@ -25,19 +27,11 @@ ja määritellään npm-skripti käynnistämistä varten, ja tehdään myös pie
 {
   // ...
   "scripts": {
-    "dev": "vite --host", // highlight-line
-    "build": "vite build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "server": "json-server -p3001 --watch db.json",
-    "test": "jest",
     "cypress:open": "cypress open"  // highlight-line
   },
   // ...
 }
 ```
-
-Toisin kuin esim. frontendin yksikkötestit, Cypress-testit voidaan sijoittaa joko frontendin tai backendin repositorioon, tai vaikka kokonaan omaan repositorioonsa. 
 
 Cypress-testit olettavat että testattava järjestelmä on käynnissä kun testit suoritetaan, eli toisin kuin esim. backendin integraatiotestit, Cypress-testit <i>eivät käynnistä</i> testattavaa järjestelmää testauksen yhteydessä.
 
@@ -1013,15 +1007,10 @@ Developer-konsoli on monin tavoin hyödyllinen testejä debugatessa. Network-tab
 
 ![Console-välilehti havainnollistaa testien löytämiä elementtejä.](../../images/5/38new.png)
 
-Olemme toistaiseksi suorittaneet Cypress-testejä ainoastaan graafisen test runnerin kautta. Testit on luonnollisesti mahdollista suorittaa myös [komentoriviltä](https://docs.cypress.io/guides/guides/command-line.html). Lisätään vielä sovellukselle npm-skripti tätä tarkoitusta varten
+Olemme toistaiseksi suorittaneet Cypress-testejä ainoastaan graafisen test runnerin kautta. Testit on luonnollisesti mahdollista suorittaa myös [komentoriviltä](https://docs.cypress.io/guides/guides/command-line.html). Lisätään vielä projektiin npm-skripti tätä tarkoitusta varten
 
 ```js
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "eslint": "eslint .",
     "cypress:open": "cypress open",
     "test:e2e": "cypress run" // highlight-line
   },

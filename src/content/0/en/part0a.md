@@ -340,8 +340,10 @@ Despite changes *all the submitted exercises remain valid*, and the course can b
 
 Recent major changes
 
-- Parts 1-9 (11th September - 5th October): Create React app replaced with Vite
+- Parts 3-5 (February-March 2024): Libraries used for testing changed
+- Part 10 (February 26, 2024): Library versions updated
 - Part 11 (16th January 2024): Example project dependencies updated
+- Parts 1-2, 6-9 (11th September - 5th October): Create React app replaced with Vite
 
 ### Expanding on a previously completed course
 

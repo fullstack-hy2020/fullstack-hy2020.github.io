@@ -7,27 +7,27 @@ lang: fi
 
 <div class="content">
 
-We have done integration tests for the backend that test it as a whole at the app level, and unit tests for the frontend that test individual components.
+Olemme tehneet backendille sitä apin tasolla kokonaisuutena testaavia integraatiotestejä ja frontendille yksittäisiä komponentteja testaavia yksikkötestejä. 
 
-Now let's look at one way of doing <i>End to End (E2E) tests</i> on [the system as a whole](https://en.wikipedia.org/wiki/System_testing).
+Katsotaan nyt erästä tapaa tehdä [järjestelmää kokonaisuutena](https://en.wikipedia.org/wiki/System_testing) tutkivia <i>End to End (E2E) ‑testejä</i>.
 
-E2E testing of web applications takes place using a browser with the help of a library. There are several solutions available, for example [Selenium](http://www.seleniumhq.org/), which enables the automation of tests with almost any browser. Another option is to use the so-called [headless browser](https://en.wikipedia.org/wiki/Headless_browser) i.e. a browser that has no graphical user interface at all. For example, it is possible to run Chrome in Headless mode.
+Web-sovellusten E2E-testaus tapahtuu käyttäen selainta jonkin kirjaston avulla. Ratkaisuja on tarjolla useita, esimerkiksi [Selenium](http://www.seleniumhq.org/), joka mahdollistaa testien automatisoinnin lähes millä tahansa selaimella. Toinen vaihtoehto on käyttää ns. [headless browseria](https://en.wikipedia.org/wiki/Headless_browser) eli selainta, jolla ei ole ollenkaan graafista käyttöliittymää. Esim. Chromea on mahdollista suorittaa Headless-moodissa.
 
-E2E tests are potentially the most useful test category, as they examine the system through the same interface as real users.
+E2E testit ovat potentiaalisesti kaikkein hyödyllisin testikategoria, sillä ne tutkivat järjestelmää saman rajapinnan kautta kuin todelliset käyttäjät.
 
-There are also unpleasant aspects to E2E tests. They are more challenging to configure than unit and integration tests. E2E tests are also typically quite slow, and in larger software their execution time can easily reach minutes or even hours. This is unfortunate for application development, because when coding an application it is very useful to be able to run tests as often as possible for [regressions](https://en.wikipedia.org/wiki/Regression_testing) in the code.
+E2E-testeihin liittyy myös ikäviä puolia. Niiden konfigurointi on haastavampaa kuin yksikkö- ja integraatiotestien. E2E-testit ovat tyypillisesti myös melko hitaita ja isommassa ohjelmistossa niiden suoritusaika voi helposti nousta minuutteihin, tai jopa tunteihin. Tämä on ikävää sovelluskehityksen kannalta, sillä sovellusta koodatessa on erittäin hyödyllistä pystyä suorittamaan testejä mahdollisimman usein koodin [regressioiden](https://en.wikipedia.org/wiki/Regression_testing) varalta. 
 
-The problem is also that the tests performed via the user interface may be unreliable, i.e. in English [flaky](https://hackernoon.com/flaky-tests-a-war-that-never-ends-9aa32fdef359), some of the tests sometimes pass and sometimes not, even if nothing changes in the code.
+Ongelmana on  usein myös se, että käyttöliittymän kautta tehtävät testit saattavat olla epäluotettavia eli englanniksi [flaky](https://hackernoon.com/flaky-tests-a-war-that-never-ends-9aa32fdef359), osa testeistä menee välillä läpi ja välillä ei, vaikka koodissa ei muuttuisi mikään.
 
-At the moment, perhaps the two easiest to use libraries for End to End testing are [Cypress](https://www.cypress.io/) and [Playwright](https://playwright.dev/).
+Tämän hetken kaksi ehkä helppokäyttöisintä kirjastoa End to End -testaukseen ovat [Cypress](https://www.cypress.io/) ja [Playwright](https://playwright.dev/).
 
-From the statistics on the page [npmtrends.com](https://npmtrends.com/cypress-vs-playwright), we see that Cypress, which dominated the market for the last five years, is still the clear number one, but Playwright has started a rapid rise in the second half of 2023:
+Sivun [npmtrends.com](https://npmtrends.com/cypress-vs-playwright) statistiikasta näemme, että viimeiset viisi vuotta markkinaa hallinnut Cypress on edelleen selvä ykkönen, mutta Playwright on lähtenyt nopeaan nousuun vuoden 2023 toisella puolikkaalla:
 
 ![cypress vs playwright in npm trends](../../images/5/cvsp.png)
 
-Cypres has been used on this course for years. Now Playwright is also included as a new addition. You can choose whether to complete the E2E testing part of the course with Cypress or Playrwight. The operating principles of both libraries are very similar, so your choice is not very important. However, Playwright is now the primary recommended E2E library for the course.
+Tällä kurssilla on jo vuosia käytetty Cypresiä. Nyt mukana on uutena myös Playwright. Saat itse valita suoritatko kurssin E2E-testausta käsittelevän osan Cypressillä vai Playrwightillä. Molempien kirjastojen toimintaperiaatteet ovat hyvin samankaltaisia, joten kovin suurta merkitystä valinnallasi ei ole. Playwright on kuitenkin nyt kurssin ensisijaisesti suosittelema E2E-kirjasto.
 
-If your choice is Playwright, go ahead. If you end up using Cypress, go [here](/osa5/end_to_end_testaus_cypress).
+Jos valintasi on Playwright, jatka eteenpäin. Jos päädyt käyttämään Cypressiä, mene [tänne](/osa5/end_to_end_testaus_cypress).
 
 ### Playwright
 

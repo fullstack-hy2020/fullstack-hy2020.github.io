@@ -17,7 +17,7 @@ E2E library [Cypress](https://www.cypress.io/) has become popular within the las
 
 Let's make some end-to-end tests for our note application.
 
-We begin by installing Cypress to <i>the frontend</i> as a development dependency
+Unlike the backend tests or unit tests done on the React front-end, End to End tests do not need to be located in the same npm project where the code is. Let's make a completely separate project for the E2E tests with the _npm init_ command. Then install Cypress to <i>the new project</i> as a development dependency
 
 ```js
 npm install --save-dev cypress
@@ -29,12 +29,6 @@ and by adding an npm-script to run it:
 {
   // ...
   "scripts": {
-    "dev": "vite --host",  // highlight-line
-    "build": "vite build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "server": "json-server -p3001 --watch db.json",
-    "test": "jest",
     "cypress:open": "cypress open"  // highlight-line
   },
   // ...
@@ -531,8 +525,6 @@ describe('Note app', function() {
 The first command searches for a component containing the text <i>another note cypress</i>, and then for a <i>make not important</i> button within it. It then clicks the button.
 
 The second command checks that the text on the button has changed to <i>make important</i>.
-
-The tests and the current frontend code can be found on the [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-9) branch <i>part5-9</i>.
 
 ### Failed login test
 
@@ -1056,8 +1048,7 @@ You can see the HTTP requests done by the tests on the Network tab, and the cons
 
 ![developer console while running cypress](../../images/5/38new.png)
 
-So far we have run our Cypress tests using the graphical test runner.
-It is also possible to run them [from the command line](https://docs.cypress.io/guides/guides/command-line.html). We just have to add an npm script for it:
+So far we have run our Cypress tests using the graphical test runner. It is also possible to run them [from the command line](https://docs.cypress.io/guides/guides/command-line.html). We just have to add an npm script for it:
 
 ```js
   "scripts": {
@@ -1072,7 +1063,7 @@ Now we can run our tests from the command line with the command <i>npm run test:
 
 Note that videos of the test execution will be saved to <i>cypress/videos/</i>, so you should probably git ignore this directory. It is also possible to [turn off](https://docs.cypress.io/guides/guides/screenshots-and-videos#Videos) the making of videos.
 
-Tests are found in [GitHubissa](https://github.com/fullstack-hy2020/notes-e2e-cypress/).
+Tests are found in [GitHub](https://github.com/fullstack-hy2020/notes-e2e-cypress/).
 
 Final version of the frontend code can be found on the [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-9) branch <i>part5-9</i>.
 
