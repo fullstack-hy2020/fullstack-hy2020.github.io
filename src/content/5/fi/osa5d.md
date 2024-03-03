@@ -630,8 +630,6 @@ Ensimmäinen komento etsii ensin komponentin, missä on teksti <i>another note b
 
 Toinen komento varmistaa, että saman napin teksti on vaihtunut muotoon <i>make important</i>.
 
-Frontendin tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-9), branchissa <i>part5-9</i>.
-
 Testien tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/notes-e2e/tree/part5-1), branchissa <i>part5-1</i>.
 
 ### Epäonnistuneen kirjautumisen testi
@@ -657,7 +655,7 @@ describe('Note app', () => {
 )}
 ```
 
-Testi siis varmistaa komennon [getByText](https://playwright.dev/docs/api/class-page#page-get-by-text) avulla, että sovellus tulostaa virheilmoituksen.
+Testi siis varmistaa metodin [page.getByText](https://playwright.dev/docs/api/class-page#page-get-by-text) avulla, että sovellus tulostaa virheilmoituksen.
 
 Sovellus renderöi virheilmoituksen CSS-luokan <i>error</i> sisältävään elementtiin:
 
@@ -1206,6 +1204,8 @@ Ongelmatilanteiden välttämiseksi ja ymmärryksen lisäämiseksi kannattaa ehdo
 Tarkemmat detaljit löytyvät [API](https://playwright.dev/docs/api/class-playwright)-kuvauksesta, erityisen hyödyllisiä ovat testattavan sovelluksen selainikkunaa vastaavan luokan [Page](https://playwright.dev/docs/api/class-page) kuvaus, sekä testeissä etsittyjä elementtejä vastaavan luokan [Locator](https://playwright.dev/docs/api/class-locator)-kuvaus.
 
 Testien lopullinen versio on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/notes-e2e/tree/part5-3), branchissa <i>part5-3</i>.
+
+Frontendin lopullinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-9), branchissa <i>part5-9</i>.
 
 </div>
 

@@ -240,11 +240,11 @@ module.exports = defineConfig({
 
 We also made two other changes to the file, and specified that all tests [be executed one at a time](https://playwright.dev/docs/test-parallel). With the default configuration, the execution happens in parallel, and since our tests use a database, parallel execution causes problems.
 
-### Lomakkeelle kirjoittaminen
+### Writing on the form
 
-Laajennetaan testejä siten, että testi yrittää kirjautua sovellukseen. Oletetaan että backendin tietokantaan on tallennettu käyttäjä, jonka käyttäjätunnus on <i>mluukkai</i> ja salasana <i>salainen</i>. 
+Let's expand the tests so that the test tries to log into the application. Let's assume that a user is stored in the database, with username <i>mluukkai</i> and password <i>salainen</i>.
 
-Aloitetaan kirjautumislomakkeen avaamisella.
+Let's start by opening the login form.
 
 ```js
 describe('Note app', () => {
@@ -258,23 +258,23 @@ describe('Note app', () => {
 })
 ```
 
-Testi hakee ensin funktion [getByRole](https://playwright.dev/docs/api/class-page#page-get-by-role) avulla napin sen tekstin perusteella. Funktio palauttaa Button-elementtiä vastaavan [Locatorin](https://playwright.dev/docs/api/class-locator). Napin painaminen suoritetaan Locatorin metodilla [click](https://playwright.dev/docs/api/class-locator#locator-click).
+The test first uses the method [page.getByRole](https://playwright.dev/docs/api/class-page#page-get-by-role) to retrieve the button based on its text. The method returns the [Locator](https://playwright.dev/docs/api/class-locator) corresponding to the Button element. Pressing the button is performed using the Locator method [click](https://playwright.dev/docs/api/class-locator#locator-click).
 
-Testejä kehitettäessä kannattaa käyttää Playwrightin [UI-moodia](https://playwright.dev/docs/test-ui-mode), eli käyttöliittymällistä versiota. Käynnistetään testit UI-moodissa seuraavasti:
+When developing tests, you could use Playwright's [UI mode](https://playwright.dev/docs/test-ui-mode), i.e. the user interface version. Let's start the tests in UI mode as follows:
 
 ```
 npm test -- --ui
 ```
 
-Näeme nyt että testi löytää napin 
+We now see that the test finds the button
 
 ![](../../images/5/play4.png)
 
-Klikkauksen jälkeen lomake tulee näkyviin
+After clicking, the form will appear
 
 ![](../../images/5/play5.png)
 
-Kun lomake on avattu, testin tulisi etsiä siitä tekstikentät ja kirjoittaa niihin käyttäjätunnus sekä salasana. Tehdään ensimmäinen yritys funktiota [page.getByRole](https://playwright.dev/docs/api/class-page#page-get-by-role) käyttäen:
+When the form is opened, the test should look for the text fields and enter the username and password in them. Let's make the first attempt using the method [page.getByRole](https://playwright.dev/docs/api/class-page#page-get-by-role):
 
 ```js
 describe('Note app', () => {
@@ -289,7 +289,7 @@ describe('Note app', () => {
 })
 ```
 
-Seurauksena on virheilmoitus:
+This results to an error:
 
 ```bash
 Error: locator.fill: Error: strict mode violation: getByRole('textbox') resolved to 2 elements:
@@ -297,7 +297,7 @@ Error: locator.fill: Error: strict mode violation: getByRole('textbox') resolved
   2) <input value="" type="password"/> aka locator('input[type="password"]')
 ```
 
-Ongelmana on nyt se, että _getByRole_ löytää kaksi tekstikenttää, ja metodin [fill](https://playwright.dev/docs/api/class-locator#locator-fill) kutsuminen ei onnistu, sillä se olettaa että löydettyjä tekstikenttiä on vain yksi. Eräs tapa kiertää ongelma on käyttää metodeja [first](https://playwright.dev/docs/api/class-locator#locator-first) ja [last](https://playwright.dev/docs/api/class-locator#locator-last):
+The problem now is that _getByRole_ finds two text fields, and calling the [fill](https://playwright.dev/docs/api/class-locator#locator-fill) method fails, because it assumes that there is only one text field found. One way around the problem is to use the methods [first](https://playwright.dev/docs/api/class-locator#locator-first) and [last](https://playwright.dev/docs/api/class-locator#locator-last):
 
 ```js
 describe('Note app', () => {
@@ -316,9 +316,9 @@ describe('Note app', () => {
 })
 ```
 
-Kirjoitettuaan tekstikenttiin, testi painaa nappia _login_ ja tarkastaa, että sovellus renderöi kirjaantuneen käyttäjän tiedot ruudulle. 
+After writing in the text fields, the test presses the _login_ button and checks that the application renders the logged-in user's information on the screen.
 
-Jos tekstikenttiä olisi enemmän kuin kaksi, ei metodien _first_ ja _last_ käyttö riittäisi. Eräs mahdollisuus olisi käyttää metodia [all](https://playwright.dev/docs/api/class-locator#locator-all), joka muuttaa löydetyt locatorit taulukoksi, jota on mahdollista indeksoida:
+If there were more than two text fields, using the methods _first_ and _last_ would not be enough. One possibility would be to use the [all](https://playwright.dev/docs/api/class-locator#locator-all) method, which turns the found locators into an array that can be indexed:
 
 ```js
 describe('Note app', () => {
@@ -340,11 +340,11 @@ describe('Note app', () => {
 })
 ```
 
-Sekä tämä että edellinen versio testistä toimivat. Molemmat ovat kuitenkin sikäli ongelmallisia, että jos kirjaantumislomaketta muutetaan, testit saattavat hajota, sillä ne luottavat tarvitsemiensa kenttien olevan sivulla tietyssä järjestyksessä.
+Both this and the previous version of the test work. However, both are problematic to the extent that if the registration form is changed, the tests may break, as they rely on the fields to be on the page in a certain order.
 
-Parempi ratkaisu on määritellä kentille yksilöivät, testausta varten generoidut id-attribuutit ja hakea kentät testeissä niiden perusteella hyväksikäytten metodia [getByTestId](https://playwright.dev/docs/api/class-page#page-get-by-test-id).
+A better solution is to define unique test id attributes for the fields, and search the fields in the tests based on them using the method [getByTestId](https://playwright.dev/docs/api/class-page#page-get-by-test-id ).
 
-Laajennetaan kirjautumislomaketta seuraavasti
+Let's expand the login form as follows
 
 ```js
 const LoginForm = ({ ... }) => {
@@ -378,7 +378,7 @@ const LoginForm = ({ ... }) => {
 }
 ```
 
-Testi muuttuu muotoon
+Test changes as follows
 
 ```js
 describe('Note app', () => {
@@ -398,11 +398,11 @@ describe('Note app', () => {
 })
 ```
 
-Huomaa, että testin läpimeno tässä vaiheessa edellyttää, että backendin ympäristön <i>test</i> tietokannassa on käyttäjä, jonka username on <i>mluukkai</i> ja salasana <i>salainen</i>. Luo käyttäjä tarvittaessa!
+Note that passing the test at this stage requires that there is a user in the <i>test</i> database of the backend with username <i>mluukkai</i> and password <i>salainen</i>. Create a user if needed!
 
-### Testien alustus
+Initialization of tests
 
-Koska molemmat testit aloittavat samalla tavalla, eli avaamalla sivun <i>http://localhost:5173</i>, kannattaa yhteinen osa eristää ennen jokaista testiä suoritettavaan <i>beforeEach</i>-lohkoon:
+Since both tests start in the same way, i.e. by opening the page <i>http://localhost:5173</i>, it is recommended to isolate the common part in the <i>beforeEach</i> block that is executed before each test:
 
 ```js
 const { test, describe, expect, beforeEach } = require('@playwright/test')
@@ -431,9 +431,9 @@ describe('Note app', () => {
 
 ```
 
-### Muistiinpanojen luomisen testaus
+### Testing note creation
 
-Luodaan seuraavaksi testi, joka lisää sovellukseen uuden muistiinpanon:
+Next, let's create a test that adds a new note to the application:
 
 ```js
 const { test, describe, expect, beforeEach } = require('@playwright/test')
@@ -460,25 +460,25 @@ describe('Note app', () => {
 
 ```
 
-Testi on määritelty omana <i>describe</i>-lohkonaan. Muistiinpanon luominen edellyttää että käyttäjä on kirjaantuneena, ja kirjautuminen hoidetaan <i>beforeEach</i>-lohkossa. 
+The test is defined in its own _describe_ block. Creating a note requires that the user is logged in, and the login is handled in the _beforeEach_ block.
 
-Testi luottaa siihen, että uutta muistiinpanoa luotaessa sivulla on ainoastaan yksi input-kenttä, eli se hakee kentän seuraavasti
+The test trusts that when creating a new note there is only one input field on the page, i.e. it searches for the field as follows
 
 ```js
 page.getByRole('textbox')
 ```
 
-Jos kenttiä olisi useampia, testi hajoaisi. Tämän takia olisi jälleen parempi lisätä lomakkeen kentälle testi-id ja hakea kenttä testissä id:n perusteella.
+If there were more fields, the test would break. Because of this, it would be better to add a test-id to the field of the form and search for the field in the test based on the id.
 
-**Huom:** testi ei mene läpi kuin ensimmäisellä kerralla suoritettaessa. Syynä tälle on se, että ekspektaatio
+**Note:** the test will only pass the first time. The reason for this is that expectation
 
 ```js
 await expect(page.getByText('a note created by playwright')).toBeVisible()
 ```
 
-aiheuttaa ongelmia siinä vaiheessa kun sovellukseen luodaan sama muistiinpano useammin kuin kertaalleen. Ongelmasta päästään eroon seuraavassa luvussa.
+causes problems when the same note is created in the application more than once. The problem will be solved in the next chapter.
 
-Testien rakenne näyttää seuraavalta:
+The structure of the tests looks like this:
 
 ```js
 const { test, describe, expect, beforeEach } = require('@playwright/test')
@@ -515,13 +515,15 @@ describe('Note app', () => {
 
 Playwright suorittaa testit siinä järjestyksessä, missä ne ovat testikoodissa. Eli ensin suoritetaan testi <i>user can log in</i>, missä käyttäjä kirjautuu sovellukseen, ja tämän jälkeen suoritetaan testi <i>a new note can be created</i>, jonka <i>beforeEach</i>-lohkossa myös suoritetaan kirjautuminen. Miksi näin tehdään, eikö käyttäjä jo ole kirjaantuneena aiemman testin ansiosta? Ei, sillä <i>jokaisen</i> testin suoritus alkaa selaimen kannalta "nollatilanteesta", kaikki edellisten testien selaimen tilaan tekemät muutokset nollaantuvat.
 
-### Tietokannan tilan kontrollointi
+### Controlling the state of the database
 
-Jos testatessa on tarvetta muokata palvelimen tietokantaa, muuttuu tilanne heti haastavammaksi. Ideaalitilanteessa testauksen tulee aina lähteä liikkeelle palvelimen tietokannan suhteen samasta alkutilanteesta, jotta testeistä saadaan luotettavia ja helposti toistettavia.
+If the tests need to be able to modify the server's database, the situation immediately becomes more complicated. Ideally, the server's database should be the same each time we run the tests, so our tests can be reliably and easily repeatable.
 
-Kuten yksikkö- integraatiotesteissä, on myös E2E-testeissä paras ratkaisu nollata tietokanta ja mahdollisesti alustaa se sopivasti aina ennen testien suorittamista. E2E-testauksessa lisähaasteen tuo se, että testeistä ei ole mahdollista päästä suoraan käsiksi tietokantaan.
+As with unit and integration tests, with E2E tests it is best to empty the database and possibly format it before the tests are run. The challenge with E2E tests is that they do not have access to the database.
 
-Ratkaistaan ongelma luomalla backendiin testejä varten API-endpoint, jonka avulla testit voivat tarvittaessa nollata kannan. Tehdään testejä varten oma <i>router</i>
+The solution is to create API endpoints for the backend tests.
+We can empty the database using these endpoints.
+Let's create a new router for the tests inside the <i>controllers</i> folder, in the <i>testing.js</i> file
 
 ```js
 const router = require('express').Router()
@@ -538,7 +540,7 @@ router.post('/reset', async (request, response) => {
 module.exports = router
 ```
 
-ja lisätään se backendiin ainoastaan <i>jos sovellusta suoritetaan test-moodissa</i>:
+and add it to the backend only <i>if the application is run in test-mode</i>:
 
 ```js
 // ...
@@ -560,13 +562,17 @@ app.use(middleware.errorHandler)
 module.exports = app
 ```
 
-eli lisäyksen jälkeen HTTP POST ‑operaatio backendin endpointiin <i>/api/testing/reset</i> tyhjentää tietokannan.
+After the changes, an HTTP POST request to the <i>/api/testing/reset</i> endpoint empties the database. Make sure your backend is running in test mode by starting it with this command (previously configured in the package.json file):
 
-Backendin testejä varten muokattu koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1), branchissä <i>part5-1</i>.
+```js
+  npm run start:test
+```
 
-Muutetaan nyt testien <i>beforeEach</i>-alustuslohkoa siten, että se nollaa palvelimen tietokannan aina ennen testien suorittamista.
+The modified backend code can be found on the [GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1) branch <i>part5-1</i>.
 
-Tällä hetkellä sovelluksen käyttöliittymän kautta ei ole mahdollista luoda käyttäjiä, luodaankin testien alustuksessa testikäyttäjä suoraan backendiin:
+Next, we will change the _beforeEach_ block so that it empties the server's database before tests are run.
+
+Currently, it is not possible to add new users through the frontend's UI, so we add a new user to the backend from the beforeEach block.
 
 ```js
 describe('Note app', () => {
@@ -597,15 +603,15 @@ describe('Note app', () => {
 })
 ```
 
-Testi tekee alustuksen aikana HTTP-pyyntöjä backendiin parametrin _request_ metodilla [post](https://playwright.dev/docs/api/class-apirequestcontext#api-request-context-post). 
+During initialization, the test makes HTTP requests to the backend with the method [post](https://playwright.dev/docs/api/class-apirequestcontext#api-request-context-post) of the parameter _request_.
 
-Toisin kuin aiemmin, nyt testaus alkaa myös backendin suhteen aina hallitusti samasta tilanteesta, eli tietokannassa on yksi käyttäjä ja ei yhtään muistiinpanoa.
+Unlike before, now the testing of the backend always starts from the same state, i.e. there is one user and no notes in the database.
 
-Tehdään vielä testi, joka tarkastaa että muistiinpanojen tärkeyttä voi muuttaa.
+Let's make a test that checks that the importance of the notes can be changed.
 
-Testin tekemiseen on muutamiakin erilaisia lähestymistapoja.
+There are a few different approaches to taking the test.
 
-Seuraavassa etsitään ensin muistiinpano ja klikataan sen nappia <i>make not important</i>. Tämän jälkeen tarkistetaan että muistiinpano sisältää napin <i>make important</i>.
+In the following, we first look for a note and click on its button that has text <i>make not important</i>. After this, we check that the note contains the button with <i>make important</i>.
 
 ```js
 describe('Note app', () => {
@@ -630,19 +636,17 @@ describe('Note app', () => {
 })
 ```
 
-Ensimmäinen komento etsii ensin komponentin, missä on teksti <i>another note by playwright</i> ja sen sisältä painikkeen <i>make not important</i> ja klikkaa sitä. 
+The first command first searches for the component where there is the text <i>another note by playwright</i> and inside it the button <i>make not important</i> and clicks on it.
 
-Toinen komento varmistaa, että saman napin teksti on vaihtunut muotoon <i>make important</i>.
+The second command ensures that the text of the same button has changed to <i>make important</i>.
 
-Frontendin tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-9), branchissa <i>part5-9</i>.
+The current code for the tests is on [GitHub](https://github.com/fullstack-hy2020/notes-e2e/tree/part5-1), in branch <i>part5-1</i>.
 
-Testien tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/notes-e2e/tree/part5-1), branchissa <i>part5-1</i>.
+### Test for failed login 
 
-### Epäonnistuneen kirjautumisen testi
+Now let's do a test that ensures that the login attempt fails if the password is wrong.
 
-Tehdään nyt testi joka varmistaa, että kirjautumisyritys epäonnistuu jos salasana on väärä.
-
-Testin ensimmäinen versio näyttää seuraavalta:
+The first version of the test looks like this:
 
 ```js
 describe('Note app', () => {
@@ -661,9 +665,9 @@ describe('Note app', () => {
 )}
 ```
 
-Testi siis varmistaa komennon [getByText](https://playwright.dev/docs/api/class-page#page-get-by-text) avulla, että sovellus tulostaa virheilmoituksen.
+The test therefore verifies with the method [page.getByText](https://playwright.dev/docs/api/class-page#page-get-by-text) that the application prints an error message.
 
-Sovellus renderöi virheilmoituksen CSS-luokan <i>error</i> sisältävään elementtiin:
+The application renders the error message to an element containing the CSS class <i>error</i>:
 
 ```js
 const Notification = ({ message }) => {
@@ -679,8 +683,7 @@ const Notification = ({ message }) => {
 }
 ```
 
-Voisimmekin tarkentaa testiä varmistamaan, että virheilmoitus tulostuu nimenomaan oikeaan paikkaan, eli CSS-luokan <i>error</i> sisältävään elementtiin:
-
+We could refine the test to ensure that the error message is printed exactly in the right place, i.e. in the element containing the CSS class <i>error</i>:
 
 ```js
   test('login fails with wrong password', async ({ page }) => {
@@ -691,9 +694,9 @@ Voisimmekin tarkentaa testiä varmistamaan, että virheilmoitus tulostuu nimenom
 })
 ```
 
-Testi siis etsii metodilla [page.locator](https://playwright.dev/docs/api/class-page#page-locator) CSS-luokan <i>error</i> sisältävän komponentin ja tallentaa sen muuttujaan. Komponenttiin liittyvän tekstin oikeellisuus voidaan varmistaa ekspektaatiolla [toContainText](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-contain-text). Huomaa, että [luokan CSS-selektori](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors) alkaa pisteellä, eli luokan <i>error</i> selektori on <i>.error</i>.
+So the test uses the [page.locator](https://playwright.dev/docs/api/class-page#page-locator) method to find the component containing the CSS class <i>error</i> and stores it in a variable. The correctness of the text associated with the component can be verified with the expectation [toContainText](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-contain-text). Note that the [CSS class selector](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors) starts with a dot, so the <i>error</i> class selector is <i> .error</i>.
 
-Ekspekaatiolla [toHaveCSS](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-have-css) on mahdollista testata sovelluksen CSS-tyylejä. Voimme esim. varmistaa, että virheilmoituksen väri on punainen, ja että sen ympärillä on border:
+It is possible to test the application's CSS styles with matcher [toHaveCSS](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-have-css). We can, for example, make sure that the color of the error message is red, and that there is a border around it:
 
 ```js
   test('login fails with wrong password', async ({ page }) => {
@@ -706,9 +709,9 @@ Ekspekaatiolla [toHaveCSS](https://playwright.dev/docs/api/class-locatorassertio
 })
 ```
 
-Värit on määriteltävä Playwrightille [rgb](https://rgbcolorcode.com/color/red)-koodeina.
+Colors must be defined to Playwright as [rgb](https://rgbcolorcode.com/color/red) codes.
 
-Viimeistellään testi vielä siten, että se varmistaa myös, että sovellus **ei renderöi** onnistunutta kirjautumista kuvaavaa tekstiä <i>'Matti Luukkainen logged in'</i>:
+Let's finalize the test so that it also ensures that the application **does not render** the text describing a successful login <i>'Matti Luukkainen logged in'</i>:
 
 ```js
 test('login fails with wrong password', async ({ page }) =>{
@@ -726,9 +729,9 @@ test('login fails with wrong password', async ({ page }) =>{
 })
 ```
 
-### Testien suorittaminen yksitellen
+### Running tests one by one
 
-Playwright suorittaa oletusarvoisesti aina kaikki testit, ja testien määrän kasvaessa se alkaa olla aikaavievää. Uutta testiä kehitellessä tai rikkinäistä testiä debugatessa voidaan määritellä testi komennon <i>test</i> sijaan komennolla <i>test.only</i>, jolloin Playwright suorittaa ainoastaan sen testin: 
+By default, Playwright always runs all tests, and as the number of tests increases, it becomes time-consuming. When developing a new test or debugging a broken one, the test can be defined instead of the command <i>test</i> with the command <i>test.only</i>, in which case Playwright will run only that test:
 
 ```js
 describre(() => {
@@ -746,17 +749,17 @@ describre(() => {
 })
 ```
 
-Kun testi on valmiina, voidaan <i>only</i> poistaa. 
+When the test is ready, <i>only</i> can and **should** be deleted.
 
-Toinen vaihtoehto suorittaa yksittäinen testi, on käyttää komentoriviparametria:
+Another option to run a single test is to use a command line parameter:
 
 ```
 npm test -- -g "login fails with wrong password"
 ```
 
-### Testien apufunktiot
+### Helper functions for tests
 
-Sovelluksemme testit näyttävät tällä hetkellä seuraavalta:
+Our application tests currently look like this:
 
 ```js 
 const { test, describe, expect, beforeEach } = require('@playwright/test')
@@ -791,14 +794,13 @@ describe('Note app', () => {
     // ...
   })  
 })
-
 ```
 
-Ensin siis testataan kirjautumistoimintoa. Tämän jälkeen omassa _describe_-lohkossa on joukko testejä, jotka olettavat että käyttäjä on kirjaantuneena, kirjaantuminen hoidetaan alustuksen tekevän _beforeEach_-lohkon sisällä. 
+First, the login function is tested. After this, another _describe_ block contains a set of tests that assume that the user is logged in, the login is handled inside the initializing _beforeEach_ block.
 
-Kuten aiemmin jo todettiin, jokainen testi suoritetaan alkutilasta (missä tietokanta tyhjennetään ja sinne luodaan yksi käyttäjä) alkaen, eli vaikka testi on koodissa alempana, se ei aloita samasta tilasta mihin ylempänä koodissa olevat testit ovat jääneet!
+As already stated earlier, each test is executed starting from the initial state (where the database is cleared and one user is created there), so even though the test is defined after another testi in the code, it does not start from the same state where the tests in the code executed earlier have left!
 
-Myös testeissä kannattaa pyrkiä toisteettomaan koodiin. Eristetään kirjautumisen hoitava koodi apufunktioksi, joka sijoitetaan esim. tiedostoon _tests/helper.js_: 
+It is also worth striving for non-repetitive code in tests. Let's isolate the code that handles the login as a helper function, which is placed e.g. in the file _tests/helper.js_:
 
 ```js 
 const loginWith = async (page, username, password)  => {
@@ -811,7 +813,7 @@ const loginWith = async (page, username, password)  => {
 export { loginWith }
 ```
 
-Testi yksinkertaistuu ja selkeytyy:
+The test becomes simpler and clearer:
 
 ```js
 const { loginWith } = require('./helper')
@@ -835,9 +837,9 @@ describe('Note app', () => {
 })
 ```
 
-Playwright tarjoaa myös [ratkaisun](https://playwright.dev/docs/auth) missä kirjaantuminen suoritetaan kertaalleen ennen testejä, ja jokainen testi aloittaa tilanteesta missä sovellukseen ollaan jo kirjaantuneena. Jotta voisimme hyödyntää tätä tapaa, tulisi sovelluksen testidatan alustaminen tehdä hienojakoisemmin kuin nyt. Nykyisessä ratkaisussahan tietokanta nollataan ennen jokaista testiä, ja tämän takia kirjaantuminen ennen testejä on mahdotonta. Jotta voisimme käyttää Plywrightin tarjoamaa ennen testejä tehtävää kirjautumista, tulisi käyttäjä alustaa vain kertaalleen ennen testejä. Pitäydymme yksinkertaisuuden vuoksi nykyisessä ratkaisussamme.
+Playwright also offers a [solution](https://playwright.dev/docs/auth) where the login is performed once before the tests, and each test starts from a state where the application is already logged in. In order for us to take advantage of this method, the initialization of the application's test data should be done a bit differently than now. In the current solution, the database is reset before each test, and because of this, logging in just once before the tests is impossible. In order for us to use the pre-test login provided by Plywright, the user should be initialized only once before the tests. We stick to our current solution for the sake of simplicity.
 
-Vastaava toistuva koodi koskee oikeastaan myös uuden muistiinpanon luomista. Sitä varten on olemassa testi, joka luo muistiinpanon lomakkeen avulla. Myös muistiinpanon tärkeyden muuttamista testaavan testin <i>beforeEach</i>-alustuslohkossa luodaan muistiinpano lomakkeen avulla: 
+The corresponding repeating code actually also applies to creating a new note. For that, there is a test that creates a note using a form. Also in the _beforeEach_ initialization block of the test that tests changing the importance of the note, a note is created using the form:
 
 ```js
 describe('Note app', function() {
@@ -866,7 +868,7 @@ describe('Note app', function() {
 })
 ```
 
-Eristetään myös muistiinpanon lisääminen omaksi apufunktioksi. Tiedosto _tests/helper.js_ laajenee seuraavasti:
+Creation of a note is also isolated as its helper function. The file _tests/helper.js_ expands as follows:
 
 ```js
 const loginWith = async (page, username, password)  => {
@@ -887,7 +889,7 @@ const createNote = async (page, content) => {
 export { loginWith, createNote }
 ```
 
-Testi yksinkertaistuu seuraavasti:
+The test is simplified as follows:
 
 ```js
 describe('Note app', () => {
@@ -917,7 +919,7 @@ describe('Note app', () => {
 })
 ```
 
-Testeissämme on vielä eräs ikävä piirre. Sovelluksen frontendin osoite <i>http:localhost:5173</i> sekä backendin osoite <i>http:localhost:3001</i> on kovakoodattuna testeihin. Näistä oikeastaan backendin osoite on turha, sillä frontendin Vite-konfiguraatioon on määritelty proxy, joka forwardoi kaikki osoitteeseen <i>http:localhost:5173/api</i> menevät frontendin tekemät pyynnöt backendiin:
+There is one more annoying feature in our tests. The frontend address <i>http:localhost:5173</i> and the backend address <i>http:localhost:3001</i> are hardcoded for tests. Of these, the address of the backend is actually useless, because a proxy has been defined in the Vite configuration of the frontend, which forwards all requests made by the frontend to the address <i>http:localhost:5173/api</i> to the backend:
 
 ```js
 export default defineConfig({
@@ -933,9 +935,9 @@ export default defineConfig({
 })
 ```
 
-Voimme siis korvata testeissä kaikki osoitteet _http://localhost:3001/api/..._ osoitteella _http://localhost:5173/api/..._
+So we can replace all addresses in tests with _http://localhost:3001/api/..._ with _http://localhost:5173/api/..._
 
-Voimme nyt määrittellä sovellukselle _baseUrl_:in testien konfiguraatiotiedostoon <i>playwright.config.js</i>: 
+We can now define the _baseUrl_ for the application in the tests configuration file <i>playwright.config.js</i>:
 
 ```js
 module.exports = defineConfig({
@@ -947,27 +949,27 @@ module.exports = defineConfig({
 }
 ```
 
-Kaikki testeissä olevat sovelluksen urlia käyttävät komennot esim.
+All commands in the tests that use the application url, e.g.
 
 ```js
 await page.goto('http://localhost:5173')
 await page.post('http://localhost:5173/api/tests/reset')
 ```
 
-voidaan muuttaa muotoon
+can be transformed into
 
 ```js
 await page.goto('/')
 await page.post('/api/tests/reset')
 ```
 
-Testien tämänhetkinen koodi on [GitHubissa](https://github.com/fullstack-hy2020/notes-e2e/tree/part5-2), branchissa <i>part5-2</i>.
+The current code for the tests is on [GitHub](https://github.com/fullstack-hy2020/notes-e2e/tree/part5-2), branch <i>part5-2</i>.
 
-### Muistiinpanon tärkeyden muutos revisited
+### Note importance change revisited
 
-Tarkastellaan vielä aiemmin tekemäämme testiä, joka varmistaa että muistiinpanon tärkeyttä on mahdollista muuttaa.
+Let's take a look at the test we did earlier, which verifies that it is possible to change the importance of a note.
 
-Muutetaan testin alustuslohkoa siten, että se luo yhden sijaan kaksi muistiinpanoa:
+Let's change the initialization block of the test so that it creates two notes instead of one:
 
 ```js
 describe('when logged in', () => {
@@ -991,9 +993,9 @@ describe('when logged in', () => {
 })
 ```
 
-Testi etsii ensin metodin _getByRole_ avulla ensimmäisenä luotua muistiinpanoa vastaavan elementin ja tallettaa sen muuttujaan. Tämän jälkeen elementin sisältä etsitään nappi, missä on teksti _make not important_ ja painetaan nappia. Lopuksi testi varmistaa että napin tekstiksi on muuttunut _make important_.
+The test first searches for the element corresponding to the first created note using the method _page.getByRole_ and stores it in a variable. After this, a button with the text _make not important_ is searched inside the element and the button is pressed. Finally, the test verifies that the button's text has changed to _make important_.
 
-Testi olisi voitu kirjoittaa myös ilman apumuuttujaa:
+The test could also have been written without the auxiliary variable:
 
 ```js
 test('one of those can be made nonimportant', async ({ page }) => {
@@ -1005,7 +1007,7 @@ test('one of those can be made nonimportant', async ({ page }) => {
 })
 ```
 
-Muutetaan komponenttia _Note_ siten, että muistiinpanon teksti renderöidään _span_-elementin sisälle
+Let's change the _Note_ component so that the note text is rendered inside a _span_ element
 
 ```js
 const Note = ({ note, toggleImportance }) => {
@@ -1021,9 +1023,9 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-Testit hajoavat! Syynä ongelmalle on se, komento _await page.getByText('second note')_ palauttaakin nyt ainoastaan tekstin sisältävän _span_-elementin, ja nappi on sen ulkopuolella.
+Tests break! The reason for the problem is that the command _await page.getByText('second note')_ now returns a _span_ element containing only text, and the button is outside of it.
 
-Eräs tapa korjata ongelma on seuraavassa:
+One way to fix the problem is as follows:
 
 ```js
 test('one of those can be made nonimportant', async ({ page }) => {
@@ -1035,9 +1037,9 @@ test('one of those can be made nonimportant', async ({ page }) => {
 })
 ```
 
-Ensimmäinen rivi etsii nyt ensimmäisenä luotuun muistiinpanoon liittyvän tekstin sisältävän _span_-elementin. Toisella rivillä käytetään funktiota _locator_ ja annetaan parametriksi _.._, joka hakee elementin vanhempielementin. Funktio locator on hyvin joustava, ja hyödynnämme tässä sitä että funktio hyväksyy [parametrikseen](https://playwright.dev/docs/locators#locate-by-css-or-xpath) CSS-selektorien lisäksi myös [XPath](https://developer.mozilla.org/en-US/docs/Web/XPath)-muotoisen selektorin. Sama olisi mahdollista ilmaista myös CSS:n avulla, mutta tässä tapauksessa XPath tarjoaa yksinkertaisimman tavan elementin vanhemman etsimiseen.
+The first line now looks for the _span_ element containing the text associated with the first created note. In the second line, the function _locator_ is used and _.._ is given as a parameter, which retrieves the element's parent element. The locator function is very flexible, and we take advantage of the fact that the function accepts [as parameter](https://playwright.dev/docs/locators#locate-by-css-or-xpath) not only CSS selectors but also [XPath](https: //developer.mozilla.org/en-US/docs/Web/XPath) selector. It would be possible to express the same with CSS, but in this case XPath provides the simplest way to find the parent of an element.
 
-Testi voidaan toki kirjoittaa myös ainoastaan yhtä apumuuttujaa käyttäen:
+Of course, the test can also be written using only one auxiliary variable:
 
 ```js
 test('one of those can be made nonimportant', async ({ page }) => {
@@ -1047,7 +1049,7 @@ test('one of those can be made nonimportant', async ({ page }) => {
 })
 ```
 
-Muutetaan testiä vielä siten, että muistiinpanoja luodaankin kolme, ja tärkeyttä vaihdetaan toisena luodulta muistiinpanolta:
+Let's change the test so that three notes are created, and the importance is changed from the second created note:
 
 ```js
 describe('when logged in', () => {
@@ -1078,23 +1080,23 @@ describe('when logged in', () => {
 }) 
 ```
 
-Jostain syystä testi alkaa toimia epäluotettavasti, se menee välillä läpi ja välillä ei. On aika kääriä hihat ja opetella debuggaamaan testejä.
+For some reason the test starts working unreliably, sometimes it passes and sometimes it doesn't. It's time to roll up your sleeves and learn how to debug tests.
 
-### Testien kehittäminen ja debuggaaminen
+### Test development and debugging
 
-Jos/kun testit eivät mene läpi ja herää epäilys, että vika on koodin sijaan testeissä, kannattaa testejä suorittaa [debug](https://playwright.dev/docs/debug#run-in-debug-mode-1)-moodissa.
+If and when the tests don't pass and you suspect that the fault is in the tests instead of the code, you should run the tests in [debug](https://playwright.dev/docs/debug#run-in-debug-mode-1) mode.
 
-Seuraava komento suorittaa ongelmallisen testin debug-moodissa:
+The following command runs the problematic test in debug mode:
 
 ```
 npm test -- -g'importance can be changed' --debug
 ```
 
-Playwright-inspector näyttää testien etenemisen askel askeleelta. Yläreunan nuoli-piste-painike vie testejä yhden askeleen eteenpäin. Lokaattorien löytämät elementit sekä selaimen kanssa käyty interaktio visualisoituvat selaimeen:
+Playwright-inspector shows the progress of the tests step by step. The arrow-dot button at the top takes the tests one step further. The elements found by the locators and the interaction with the browser are visualized in the browser:
 
 ![](../../images/5/play6a.png)
 
-Oletusarvoisesti debugatessa askelletaan testi läpi komento komennolta. Jos on kyse monimutkaisesta testistä, voi olla melko vaivalloista askeltaa testissä kiinnostavaan kohtaan asti. Liialta askellukselta voidaan välttyä lisäämällä juuri kiinnostavaa kohtaa ennen komento _await page.pause()_:
+By default, debug steps through the test command by command. If it is a complex test, it can be quite a burden to step through the test to the point of interest. This can be avoided by using the command _await page.pause()_:
 
 ```js
 describe('Note app', () => {
@@ -1127,17 +1129,17 @@ describe('Note app', () => {
 })
 ```
 
-Nyt testissä voidaan siirtyä kiinnostavaan kohtaan yhdellä askelella, painamalla inspectorissa vihreää nuolisymbolia.
+Now in the test you can go to _page.pause()_ in one step, by pressing the green arrow symbol in the inspector.
 
-Kun suoritamme nyt testin ja hyppäämme suorituksessa komenon _page.pause()_ kohdalle, havaitsemme mielenkiintoisen seikan:
+When we now run the test and jump to the _page.pause()_ command, we find an interesting fact:
 
 ![](../../images/5/play6b.png)
 
-Näyttää siltä, että selain ei renderöi kaikkia lohkossa _beforeEach_ luotuja muistiinpanoja. Mistä on kyse?
+It seems that the browser <i>does not render</i> all the notes created in the block _beforeEach_. What is the problem?
 
-Syynä ongelmaan on se, että kun testi luo yhden muistiinpanon, se aloittaa seuraavan luomisen jo ennen kuin palvelin on vastannut, ja lisätty muistiinpano renderöidään ruudulle. Tämä taas saattaa aiheuttaa sen, että jotain muistiinpanoja katoaa (kuvassa näin kävi toisena luodulle muistiinpanolle), sillä selain uudelleenrenderöidään palvelimen vastatessa perustuen siihen muistiinpanojen tilaan mikä kyseisen lisäysoperaation alussa oli.
+The reason for the problem is that when the test creates one note, it starts creating the next one even before the server has responded, and the added note is rendered on the screen. This in turn can cause some notes to be lost (in the picture, this happened to the second note created), since the browser is re-rendered when the server responds, based on the state of the notes at the start of that insert operation.
 
-Ongelma korjaantuu "hidastamalla" lisäysoperaatioita siten, että lisäyksen jälkeen odotetaan komennolla [waitFor](https://playwright.dev/docs/api/class-locator#locator-wait-for), että lisätty muistinpano ehditään renderöidä:
+The problem can be solved by "slowing down" the insert operations by using the [waitFor](https://playwright.dev/docs/api/class-locator#locator-wait-for) command after the insert to wait for the inserted note to render:
 
 ```js
 const createNote = async (page, content) => {
@@ -1148,84 +1150,86 @@ const createNote = async (page, content) => {
 }
 ```
 
-Debuggausmoodin sijaan tai rinnalla voi testien suorittaminen UI-moodissa olla hyödyllistä. Tämä tapahtuu seuraavasti:
+Instead of or alongside debugging mode, running tests in UI mode can be useful. As already mentioned, tests are started in UI mode as follows:
 
 ```
 npm run test -- --ui
 ```
 
-Lähes samaan tapaan kuin UI-moodi, toimii Playwrightin [Trace Viewer](https://playwright.dev/docs/trace-viewer-intro). Ideana siinä on se että testeistä tallennetaan "visuaalinen jälki", jota voidaan tarkastella tarvittaessa testien suorituksen jälkeen. Trace tallennetaan suorittamalla testit seuraavasti:
+Almost the same as UI mode is use of the Playwright's [Trace Viewer](https://playwright.dev/docs/trace-viewer-intro). The idea is that a "visual trace" of the tests is saved, which can be viewed if necessary after the tests have been completed. A trace is saved by running the tests as follows:
 
 ```
 npm run test -- --trace on
 ```
 
-Tracen pääsee tarvittaessa katsomaan komennolla 
+If necessary, Trace can be viewed with the command
 
 ```
-npx playwright show-report
+npx playwright show report
 ```
 
-tai määrittelemällämme npm-skriptillä _npm run test:report_
+or with the npm script we defined _npm run test:report_
 
-Trace näyttää käytännössä samalta kuin testien suoritus UI-moodissa.
+Trace looks practically the same as running tests in UI mode.
 
-UI-moodi sekä Trace viewer tarjoavat myös mahdollisuuden avustettuun lokaattorien etsimiseen. Tämä tapahtuu painamalla alapalkin vasemmanpuoleista tuplaympyrää, ja sen jälkeen klikkaamalla haluttua käyttöliittymäelmenttiä. Playwright näyttää elementin lokaattorin:
+UI mode and Trace Viewer also offer the possibility of assisted search for locators. This is done by pressing the double circle on the left side of the lower bar, and then by clicking on the desired user interface element. Playwright displays the element locator:
 
 ![](../../images/5/play8.png)
 
-Playwright ehdottaa siis kolmannen muistiinpanon lokaattoriksi seuraavaa
+Playwright suggests the following as the locator for the third note
 
 ```js
 page.locator('li').filter({ hasText: 'third note' }).getByRole('button')
 ```
 
-Metodia [page.locator](https://playwright.dev/docs/api/class-page#page-locator) kutsutaan parametrilla _li_ eli etsitään sivulta kaikki li-elementit, joita sivulla on yhteensä kolme. Tämän jälkeen rajaudutaan metodia [locator.filter](https://playwright.dev/docs/api/class-locator#locator-filter) käyttäen siihen li-elementtiin, joka sisältää tekstin <i>third notemake not important</i> ja otetaan sen sisällä oleva button-elementti metodia [locator.getByRole](https://playwright.dev/docs/api/class-locator#locator-get-by-role) käyttäen.
+The method [page.locator](https://playwright.dev/docs/api/class-page#page-locator) is called with the parameter _li_, i.e. we search for all li elements on the page, of which there are three in total. After this, using the [locator.filter](https://playwright.dev/docs/api/class-locator#locator-filter) method, we narrow down to the li element that contains the text <i>third notemake not important</i> and the button element inside it is taken using the [locator.getByRole](https://playwright.dev/docs/api/class-locator#locator-get-by-role) method.
 
-Playwrightin generoima lokaattori poikkeaa jossain määrin testien käyttämästä lokaattorista, joka oli
+The locator generated by Playwright is somewhat different from the locator used by our tests, which was
 
 ```js
 page.getByText('first note').locator('..').getByRole('button', { name: 'make not important' })
 ```
 
-Lienee makuasia kumpi lokaattoreista on parempi. 
+Which of the locators is better is probably a matter of taste.
 
-Playwright sisältää myös [testigeneraattorin](https://playwright.dev/docs/codegen-intro), jonka avulla on mahdollista "nauhoittaa" käyttöliittymän kautta klikkailemalla testien käyttämiä lokaattoreita. Testigeneraattori käynnistyy komennolla
+Playwright also includes a [test generator](https://playwright.dev/docs/codegen-intro) that makes it possible to "record" a test through the user interface. The test generator is started with the command
 
 ```
 npx playwright codegen http://localhost:5173/
 ```
 
-_Record_-tilan päälläollessa testigeneraattori "tallentaa" käyttäjän interaktion Playwright inspectoriin, mistä lokaattorit ja actionit on mahdollista kopioida testeihin:
+When the _Record_ mode is on, the test generator "records" the user's interaction in the Playwright inspector, from where it is possible to copy the locators and actions to the tests:
 
 ![](../../images/5/play9.png)
 
-Komentorivin sijaan Playwrightiä voi käyttää myös [VS Code](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright)-pluginin kautta. Plugin tarjoaa monia käteviä ominaisuuksia, mm. breakpointien käytön testejä debugatessa.
+Instead of the command line, Playwright can also be used via the [VS Code](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright) plugin. The plugin offers many convenient features, e.g. use of breakpoints when debugging tests.
 
-Ongelmatilanteiden välttämiseksi ja ymmärryksen lisäämiseksi kannattaa ehdottomasti selailla Playwrightin laadukasta [dokumentaatiota](https://playwright.dev/docs/intro). Seuraavassa on listattu tärkeimmät:
--  [lokaattoreista](https://playwright.dev/docs/locators) kertova osa antaa hyviä vihjeitä testattavien elementtien etsimiseen
-- osa [actions](https://playwright.dev/docs/input) kertoo miten selaimen kanssa käytävää vuorovaikutusta on mahdollista simuloida testeissä
-- [assertioista](https://playwright.dev/docs/test-assertions) kertova osa demonstroi mitä erilaisia testauksessa käytettäviä ekspektaatioita Playwright tarjoaa
+To avoid problem situations and increase understanding, it is definitely worth browsing Playwright's high-quality [documentation](https://playwright.dev/docs/intro). The most important ones are listed below:
+- the section about [locators](https://playwright.dev/docs/locators) gives good hints for finding elements in test
+- section [actions](https://playwright.dev/docs/input) tells how it is possible to simulate the interaction with the browser in tests
+- the section about [assertions](https://playwright.dev/docs/test-assertions) demonstrates the different expectations Playwright offers for testing
 
-Tarkemmat detaljit löytyvät [API](https://playwright.dev/docs/api/class-playwright)-kuvauksesta, erityisen hyödyllisiä ovat testattavan sovelluksen selainikkunaa vastaavan luokan [Page](https://playwright.dev/docs/api/class-page) kuvaus, sekä testeissä etsittyjä elementtejä vastaavan luokan [Locator](https://playwright.dev/docs/api/class-locator)-kuvaus.
+More detailed details can be found in the [API](https://playwright.dev/docs/api/class-playwright) description, particularly useful are the class [Page](https://playwright.dev/docs/api/class-page) corresponding to the browser window of the tested application, and the class [Locator](https://playwright.dev/docs/api/class-locator) corresponding to the elements searched for in the tests.
 
-Testien lopullinen versio on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/notes-e2e/tree/part5-3), branchissa <i>part5-3</i>.
+The final version of the tests is in full on [GitHub](https://github.com/fullstack-hy2020/notes-e2e/tree/part5-3), in branch <i>part5-3</i>.
+
+The final version of the frontend code is in its entirety on [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-9), in branch <i>part5-9</i>.
 
 </div>
 
 <div class="tasks">
 
-### Tehtävät 5.17.-5.23.
+### Exercises 5.17.-5.23.
 
-Tehdään osan lopuksi muutamia E2E-testejä blogisovellukseen. Yllä olevan materiaalin pitäisi riittää suurimman osan tehtävien tekemiseen. Playwrightin [dokumentaatiota](https://playwright.dev/docs/intro) ja [API-kuvausta](https://playwright.dev/docs/api/class-playwright) kannattaa kuitenkin ehdottomasti lukea, ainakin edellisen luvun lopussa mainitut osat.
+At the end of the section, let's do some E2E tests for the blog application. The material above should be enough to do most of the exercises. However, you should definitely read Playwright's [documentation](https://playwright.dev/docs/intro) and [API description](https://playwright.dev/docs/api/class-playwright), at least the ones mentioned at the end of the previous chapter.
 
-#### 5.17: blogilistan end to end ‑testit, step1
+#### Blog List End To End Testing, step1
 
-Tee uusi npm-projekti testejä varten ja konfiguroi sinne Playwright.
+Create a new npm project for tests and configure Playwright there.
 
-Tee testi, joka varmistaa, että sovellus näyttää oletusarvoisesti kirjautumislomakkeen.
+Make a test to ensure that the application displays the login form by default.
 
-Testin rungon tulee olla seuraavanlainen
+The body of the test should be as follows
 
 ```js 
 const { test, expect, beforeEach, describe } = require('@playwright/test')
@@ -1251,13 +1255,13 @@ describe('Note app', () => {
 
 ```
 
-Testin <i>beforeEach</i>-alustuslohkon tulee nollata tietokannan tilanne esim. [materiaalissa](/osa5/end_to_end_testaus_playwright#testien-alustus) näytetyllä tavalla.
+The _beforeEach_ formatting blog must reset the database using for example the method we used in the [material](/en/part5/end_to_end_testing_playwright#controlling-the-state-of-the-database).
 
-#### 5.18: blogilistan end to end ‑testit, step2
+#### 5.18: Blog List End To End Testing, step2
 
-Tee testit kirjautumiselle. Testaa sekä onnistunut että epäonnistunut kirjautuminen. Luo testejä varten käyttäjä <i>beforeEach</i>-lohkossa. 
+Do the tests for login. Test both successful and failed login. For tests, create a user in the _beforeEach_ block.
 
-Testien runko laajenee seuraavasti
+The body of the tests expands as follows
 
 ```js 
 const { test, expect, beforeEach, describe } = require('@playwright/test')
@@ -1283,9 +1287,9 @@ describe('Note app', () => {
 })
 ```
 
-#### 5.19: blogilistan end to end ‑testit, step3
+#### 5.19: Blog List End To End Testing, step3
 
-Tee testi, joka varmistaa, että kirjautunut käyttäjä pystyy luomaan blogin. Testin runko voi näyttää seuraavalta
+Create a test that verifies that a logged in user can create a blog. The body of the test may look like the following
 
 ```js 
 describe('When logged in', () => {
@@ -1299,26 +1303,26 @@ describe('When logged in', () => {
 })
 ```
 
-Testin tulee varmistaa, että luotu blogi tulee näkyville blogien listalle.
+The test should ensure that the created blog is visible in the list of blogs.
 
-#### 5.20: blogilistan end to end ‑testit, step4
+#### 5.20: Blog List End To End Testing, step4
 
-Tee testi, joka varmistaa, että blogia voi likettää.
+Do a test that makes sure the blog can be edited.
 
-#### 5.21: blogilistan end to end ‑testit, step5
+#### 5.21: Blog List End To End Testing, step5
 
-Tee testi, joka varmistaa, että blogin lisännyt käyttäjä voi poistaa blogin. Jos käytät poisto-operaation yhteydessä _window.confirm_-dialogia, saatat joutua hieman etsimään miten dialogin käyttö tapahtuu Playwright-testeistä käsin.
+Make a test that ensures that the user who added the blog can delete the blog. If you use the _window.confirm_ dialog in the delete operation, you may have to Google how to use the dialog from the Playwright tests.
 
-#### 5.22: blogilistan end to end ‑testit, step6
+#### 5.22: Blog List End To End Testing, step6
 
-Tee testi, joka varmistaa, että vain blogin lisännyt käyttäjä näkee blogin poistonapin.
+Make a test that ensures that only the user who added the blog sees the blog's delete button.
 
-#### 5.23: blogilistan end to end ‑testit, step6
+#### 5.23: Blog List End To End Testing, step6
 
-Tee testi, joka varmistaa, että blogit järjestetään likejen mukaiseen järjestykseen, eniten likejä saanut blogi ensin.
+Do a test that ensures that the blogs are arranged in the order according to the likes, the blog with the most likes first.
 
-<i>Tämä tehtävä on edellisiä huomattavasti haastavampi.</i>
+<i>This task is significantly more challenging than the previous ones.</i>
 
-Tämä oli osan viimeinen tehtävä ja on aika pushata koodi GitHubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+This was the last task of the section and it's time to push the code to GitHub and mark the completed tasks in the [return application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>

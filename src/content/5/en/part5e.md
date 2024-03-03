@@ -916,8 +916,6 @@ describe('Note ', function() {
 })
 ```
 
-The tests and the frontend code can be found on the [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-10) branch <i>part5-10</i>.
-
 ### Changing the importance of a note
 
 Lastly, let's take a look at the test we did for changing the importance of a note.
@@ -1063,11 +1061,6 @@ It is also possible to run them [from the command line](https://docs.cypress.io/
 
 ```js
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "server": "json-server -p3001 --watch db.json",
     "cypress:open": "cypress open",
     "test:e2e": "cypress run" // highlight-line
   },
@@ -1079,7 +1072,9 @@ Now we can run our tests from the command line with the command <i>npm run test:
 
 Note that videos of the test execution will be saved to <i>cypress/videos/</i>, so you should probably git ignore this directory. It is also possible to [turn off](https://docs.cypress.io/guides/guides/screenshots-and-videos#Videos) the making of videos.
 
-The frontend and the test code can be found on the [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-11) branch <i>part5-11</i>.
+Tests are found in [GitHubissa](https://github.com/fullstack-hy2020/notes-e2e-cypress/).
+
+Final version of the frontend code can be found on the [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-9) branch <i>part5-9</i>.
 
 </div>
 
