@@ -7,27 +7,27 @@ lang: fi
 
 <div class="content">
 
-Olemme tehneet backendille sitä apin tasolla kokonaisuutena testaavia integraatiotestejä ja frontendille yksittäisiä komponentteja testaavia yksikkötestejä. 
+We have done integration tests for the backend that test it as a whole at the app level, and unit tests for the frontend that test individual components.
 
-Katsotaan nyt erästä tapaa tehdä [järjestelmää kokonaisuutena](https://en.wikipedia.org/wiki/System_testing) tutkivia <i>End to End (E2E) ‑testejä</i>.
+Now let's look at one way of doing <i>End to End (E2E) tests</i> on [the system as a whole](https://en.wikipedia.org/wiki/System_testing).
 
-Web-sovellusten E2E-testaus tapahtuu käyttäen selainta jonkin kirjaston avulla. Ratkaisuja on tarjolla useita, esimerkiksi [Selenium](http://www.seleniumhq.org/), joka mahdollistaa testien automatisoinnin lähes millä tahansa selaimella. Toinen vaihtoehto on käyttää ns. [headless browseria](https://en.wikipedia.org/wiki/Headless_browser) eli selainta, jolla ei ole ollenkaan graafista käyttöliittymää. Esim. Chromea on mahdollista suorittaa Headless-moodissa.
+E2E testing of web applications takes place using a browser with the help of a library. There are several solutions available, for example [Selenium](http://www.seleniumhq.org/), which enables the automation of tests with almost any browser. Another option is to use the so-called [headless browser](https://en.wikipedia.org/wiki/Headless_browser) i.e. a browser that has no graphical user interface at all. For example, it is possible to run Chrome in Headless mode.
 
-E2E testit ovat potentiaalisesti kaikkein hyödyllisin testikategoria, sillä ne tutkivat järjestelmää saman rajapinnan kautta kuin todelliset käyttäjät.
+E2E tests are potentially the most useful test category, as they examine the system through the same interface as real users.
 
-E2E-testeihin liittyy myös ikäviä puolia. Niiden konfigurointi on haastavampaa kuin yksikkö- ja integraatiotestien. E2E-testit ovat tyypillisesti myös melko hitaita ja isommassa ohjelmistossa niiden suoritusaika voi helposti nousta minuutteihin, tai jopa tunteihin. Tämä on ikävää sovelluskehityksen kannalta, sillä sovellusta koodatessa on erittäin hyödyllistä pystyä suorittamaan testejä mahdollisimman usein koodin [regressioiden](https://en.wikipedia.org/wiki/Regression_testing) varalta. 
+There are also unpleasant aspects to E2E tests. They are more challenging to configure than unit and integration tests. E2E tests are also typically quite slow, and in larger software their execution time can easily reach minutes or even hours. This is unfortunate for application development, because when coding an application it is very useful to be able to run tests as often as possible for [regressions](https://en.wikipedia.org/wiki/Regression_testing) in the code.
 
-Ongelmana on  usein myös se, että käyttöliittymän kautta tehtävät testit saattavat olla epäluotettavia eli englanniksi [flaky](https://hackernoon.com/flaky-tests-a-war-that-never-ends-9aa32fdef359), osa testeistä menee välillä läpi ja välillä ei, vaikka koodissa ei muuttuisi mikään.
+The problem is also that the tests performed via the user interface may be unreliable, i.e. in English [flaky](https://hackernoon.com/flaky-tests-a-war-that-never-ends-9aa32fdef359), some of the tests sometimes pass and sometimes not, even if nothing changes in the code.
 
-Tämän hetken kaksi ehkä helppokäyttöisintä kirjastoa End to End -testaukseen ovat [Cypress](https://www.cypress.io/) ja [Playwright](https://playwright.dev/).
+At the moment, perhaps the two easiest to use libraries for End to End testing are [Cypress](https://www.cypress.io/) and [Playwright](https://playwright.dev/).
 
-Sivun [npmtrends.com](https://npmtrends.com/cypress-vs-playwright) statistiikasta näemme, että viimeiset viisi vuotta markkinaa hallinnut Cypress on edelleen selvä ykkönen, mutta Playwright on lähtenyt nopeaan nousuun vuoden 2023 toisella puolikkaalla:
+From the statistics on the page [npmtrends.com](https://npmtrends.com/cypress-vs-playwright), we see that Cypress, which dominated the market for the last five years, is still the clear number one, but Playwright has started a rapid rise in the second half of 2023:
 
 ![cypress vs playwright in npm trends](../../images/5/cvsp.png)
 
-Tällä kurssilla on jo vuosia käytetty Cypresiä. Nyt mukana on uutena myös Playwright. Saat itse valita suoritatko kurssin E2E-testausta käsittelevän osan Cypressillä vai Playrwightillä. Molempien kirjastojen toimintaperiaatteet ovat hyvin samankaltaisia, joten kovin suurta merkitystä valinnallasi ei ole. Playwright on kuitenkin nyt kurssin ensisijaisesti suosittelema E2E-kirjasto.
+Cypres has been used on this course for years. Now Playwright is also included as a new addition. You can choose whether to complete the E2E testing part of the course with Cypress or Playrwight. The operating principles of both libraries are very similar, so your choice is not very important. However, Playwright is now the primary recommended E2E library for the course.
 
-Jos valintasi on Playwright, jatka eteenpäin. Jos päädyt käyttämään Cypressiä, mene [tänne](/osa5/end_to_end_testaus_cypress).
+If your choice is Playwright, go ahead. If you end up using Cypress, go [here](/osa5/end_to_end_testaus_cypress).
 
 ### Playwright
 
@@ -41,7 +41,7 @@ Tutustutaan nyt Playwrightin käyttöön.
 
 ### Testien alustaminen
 
-Toisin kuin React-frontille tehdyt yksikkötestit tai backendin tekstit, nyt tehtävien End to End -testien ei tarvitse sijaita samassa npm-projektissa missä koodi on. Tehdään E2E-testeille kokonaan oma projekti komennolla _npm init_. Asennetaan sitten Playwright suorittamalla uuden projektin hakemistossa komento
+Toisin kuin React-frontille tehdyt yksikkötestit tai backendin testit, nyt tehtävien End to End -testien ei tarvitse sijaita samassa npm-projektissa missä koodi on. Tehdään E2E-testeille kokonaan oma projekti komennolla _npm init_. Asennetaan sitten Playwright suorittamalla uuden projektin hakemistossa komento
 
 ```js
 npm init playwright@latest
@@ -464,7 +464,7 @@ Testi luottaa siihen, että uutta muistiinpanoa luotaessa sivulla on ainoastaan 
 page.getByRole('textbox')
 ```
 
-Jos kenttiä olisi useampia, testi hajoaisi Tämän takia olisi jälleen parempi lisätä lomakkeen kentälle testi-id ja hakea kenttä testissä id:n perusteella.
+Jos kenttiä olisi useampia, testi hajoaisi. Tämän takia olisi jälleen parempi lisätä lomakkeen kentälle testi-id ja hakea kenttä testissä id:n perusteella.
 
 **Huom:** testi ei mene läpi kuin ensimmäisellä kerralla suoritettaessa. Syynä tälle on se, että ekspektaatio
 
@@ -595,7 +595,7 @@ describe('Note app', () => {
 
 Testi tekee alustuksen aikana HTTP-pyyntöjä backendiin parametrin _request_ metodilla [post](https://playwright.dev/docs/api/class-apirequestcontext#api-request-context-post). 
 
-Toisin kuin aiemmin, nyt testaus alkaa nyt myös backendin suhteen aina hallitusti samasta tilanteesta, eli tietokannassa on yksi käyttäjä ja ei yhtään muistiinpanoa.
+Toisin kuin aiemmin, nyt testaus alkaa myös backendin suhteen aina hallitusti samasta tilanteesta, eli tietokannassa on yksi käyttäjä ja ei yhtään muistiinpanoa.
 
 Tehdään vielä testi, joka tarkastaa että muistiinpanojen tärkeyttä voi muuttaa.
 
@@ -687,7 +687,7 @@ Voisimmekin tarkentaa testiä varmistamaan, että virheilmoitus tulostuu nimenom
 })
 ```
 
-Testi siis etsii metodilla [page.locator](https://playwright.dev/docs/api/class-page#page-locator) CSS-luokan <i>error</i> sisältävän komponentin ja tallennetaan sen muuttujaan. Komponenttiin liittyvän teksstin oikeellisuus voidaan varmistaa ekspektaatiolla [toContainText](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-contain-text). Huomaa, että [luokan CSS-selektori](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors) alkaa pisteellä, eli luokan <i>error</i> selektori on <i>.error</i>.
+Testi siis etsii metodilla [page.locator](https://playwright.dev/docs/api/class-page#page-locator) CSS-luokan <i>error</i> sisältävän komponentin ja tallentaa sen muuttujaan. Komponenttiin liittyvän tekstin oikeellisuus voidaan varmistaa ekspektaatiolla [toContainText](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-contain-text). Huomaa, että [luokan CSS-selektori](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors) alkaa pisteellä, eli luokan <i>error</i> selektori on <i>.error</i>.
 
 Ekspekaatiolla [toHaveCSS](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-have-css) on mahdollista testata sovelluksen CSS-tyylejä. Voimme esim. varmistaa, että virheilmoituksen väri on punainen, ja että sen ympärillä on border:
 
@@ -831,7 +831,7 @@ describe('Note app', () => {
 })
 ```
 
-Playwright tarjoaa myös [ratkaisun](https://playwright.dev/docs/auth) missä kirjaantuminen suoritetaan kertaalleen ennen testejä, ja jokainen testi aloittaa tilanteeasta missä sovellukseen ollaan jo kirjaantuneena. Jotta voisimme hyödyntää tätä tapaa, tulisi sovelluksen testidata alustaminen tehdä hienojakoisemmin kuin nyt. Nykyisessä ratkaisussahan tietokanta nollataan ennen jokaista testiä, ja tämän takia kirjaantuminen ennen testejä on mahdotonta. Jotta voisimme käyttää Plywrightin tarjoamaa ennen testejä tehtävää kirjautumista, tulisi käyttäjä alustaa vain kertaalleen ennen testejä. Pitäydymme yksinkertaisuuden vuoksi nykyisessä ratkaisussamme.
+Playwright tarjoaa myös [ratkaisun](https://playwright.dev/docs/auth) missä kirjaantuminen suoritetaan kertaalleen ennen testejä, ja jokainen testi aloittaa tilanteesta missä sovellukseen ollaan jo kirjaantuneena. Jotta voisimme hyödyntää tätä tapaa, tulisi sovelluksen testidatan alustaminen tehdä hienojakoisemmin kuin nyt. Nykyisessä ratkaisussahan tietokanta nollataan ennen jokaista testiä, ja tämän takia kirjaantuminen ennen testejä on mahdotonta. Jotta voisimme käyttää Plywrightin tarjoamaa ennen testejä tehtävää kirjautumista, tulisi käyttäjä alustaa vain kertaalleen ennen testejä. Pitäydymme yksinkertaisuuden vuoksi nykyisessä ratkaisussamme.
 
 Vastaava toistuva koodi koskee oikeastaan myös uuden muistiinpanon luomista. Sitä varten on olemassa testi, joka luo muistiinpanon lomakkeen avulla. Myös muistiinpanon tärkeyden muuttamista testaavan testin <i>beforeEach</i>-alustuslohkossa luodaan muistiinpano lomakkeen avulla: 
 
@@ -987,7 +987,7 @@ describe('when logged in', () => {
 })
 ```
 
-Testi etsii ensin metodin _getByRole_ avulla ensimmäisenä luotua muistiinpanoa vastaavan elementin ja tallettaa sen muuttujaan. Tämän jälkeen elementin sisältä etsitään nappi, missä on teksti _make not important_ ja painetaan nappia. Lopuksi teksi varmistaa että napin teksiksi on muuttunut _make important_.
+Testi etsii ensin metodin _getByRole_ avulla ensimmäisenä luotua muistiinpanoa vastaavan elementin ja tallettaa sen muuttujaan. Tämän jälkeen elementin sisältä etsitään nappi, missä on teksti _make not important_ ja painetaan nappia. Lopuksi testi varmistaa että napin tekstiksi on muuttunut _make important_.
 
 Testi olisi voitu kirjoittaa myös ilman apumuuttujaa:
 
@@ -1001,7 +1001,7 @@ test('one of those can be made nonimportant', async ({ page }) => {
 })
 ```
 
-Muutetaan komponenttia _Note_ siten, että muistiinpanon teksti renderöitään _span_-elementin sisälle
+Muutetaan komponenttia _Note_ siten, että muistiinpanon teksti renderöidään _span_-elementin sisälle
 
 ```js
 const Note = ({ note, toggleImportance }) => {
@@ -1043,7 +1043,7 @@ test('one of those can be made nonimportant', async ({ page }) => {
 })
 ```
 
-Muutentaan testiä vielä siten, että muistiinpanoja luodaankin kolme, ja tärkeyttä vaihdetaan toisena luodulta muistiinpanolta:
+Muutetaan testiä vielä siten, että muistiinpanoja luodaankin kolme, ja tärkeyttä vaihdetaan toisena luodulta muistiinpanolta:
 
 ```js
 describe('when logged in', () => {
@@ -1074,7 +1074,7 @@ describe('when logged in', () => {
 }) 
 ```
 
-Jostain syystä testi alkaa toimia epäluotettavaksi, se menee välillä läpi ja välillä ei. On aika kääriä hihat ja opetella debuggaamaan testejä.
+Jostain syystä testi alkaa toimia epäluotettavasti, se menee välillä läpi ja välillä ei. On aika kääriä hihat ja opetella debuggaamaan testejä.
 
 ### Testien kehittäminen ja debuggaaminen
 
@@ -1150,7 +1150,7 @@ Debuggausmoodin sijaan tai rinnalla voi testien suorittaminen UI-moodissa olla h
 npm run test -- --ui
 ```
 
-Lähes samaan tapaan kuin UI-moodi, toimii Playwrightin [Trace Viewer](https://playwright.dev/docs/trace-viewer-intro). Ideana siinä on, se että testeistä tallennetaan "visuaalinen jälki", jota voidaan tarkastella tarvittaessa testien suorituksen jälkeen. Trace tallennetaan suorittamalla testit seuraavasti:
+Lähes samaan tapaan kuin UI-moodi, toimii Playwrightin [Trace Viewer](https://playwright.dev/docs/trace-viewer-intro). Ideana siinä on se että testeistä tallennetaan "visuaalinen jälki", jota voidaan tarkastella tarvittaessa testien suorituksen jälkeen. Trace tallennetaan suorittamalla testit seuraavasti:
 
 ```
 npm run test -- --trace on
@@ -1186,7 +1186,7 @@ page.getByText('first note').locator('..').getByRole('button', { name: 'make not
 
 Lienee makuasia kumpi lokaattoreista on parempi. 
 
-Playwright sisältää myös [testigeneraattorin](https://playwright.dev/docs/codegen-intro), jonka avulla on mahdollista "nauhottaa" käyttöliittymän kautta klikkailemalla testien käyttämiä lokaattoreita. Testigeneraattori käynnistyy komennolla
+Playwright sisältää myös [testigeneraattorin](https://playwright.dev/docs/codegen-intro), jonka avulla on mahdollista "nauhoittaa" käyttöliittymän kautta klikkailemalla testien käyttämiä lokaattoreita. Testigeneraattori käynnistyy komennolla
 
 ```
 npx playwright codegen http://localhost:5173/
@@ -1307,7 +1307,7 @@ Tee testi, joka varmistaa, että blogin lisännyt käyttäjä voi poistaa blogin
 
 #### 5.22: blogilistan end to end ‑testit, step6
 
-Tee testi, joka varmista, että vain blogin lisännyt käyttäjä näkee blogin poistonapin.
+Tee testi, joka varmistaa, että vain blogin lisännyt käyttäjä näkee blogin poistonapin.
 
 #### 5.23: blogilistan end to end ‑testit, step6
 
