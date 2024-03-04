@@ -704,4 +704,176 @@ Stockons le contenu suivant dans le fichier <i>db.json</i>:
 }
 ```
 
+Notre objectif est de configurer l'application avec webpack de telle manière que, lorsqu'elle est utilisée localement, l'application utilise le json-server disponible sur le port 3001 comme backend.
+
+Le fichier empaqueté sera ensuite configuré pour utiliser le backend disponible à l'URL <https://notes2023.fly.dev/api/notes>.
+
+Nous installerons <i>axios</i>, démarrerons le json-server, puis apporterons les modifications nécessaires à l'application. Pour varier un peu les choses, nous récupérerons les notes du backend avec notre [hook personnalisé](/en/part7/custom_hooks) appelé _useNotes_:
+
+```js
+// highlight-start
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+
+const useNotes = (url) => {
+  const [notes, setNotes] = useState([])
+
+  useEffect(() => {
+    axios.get(url).then(response => {
+      setNotes(response.data)
+    })
+  }, [url])
+
+  return notes
+}
+// highlight-end
+
+const App = () => {
+  const [counter, setCounter] = useState(0)
+  const [values, setValues] = useState([])
+  const url = 'https://notes2023.fly.dev/api/notes' // highlight-line
+  const notes = useNotes(url) // highlight-line
+
+  const handleClick = () => {
+    setCounter(counter + 1)
+    setValues(values.concat(counter))
+  }
+
+  return (
+    <div className="container">
+      hello webpack {counter} clicks
+      <button onClick={handleClick}>press</button>
+      <div>{notes.length} notes on server {url}</div> // highlight-line
+    </div>
+  )
+}
+
+export default App
+```
+
+L'adresse du serveur backend est actuellement codée en dur dans le code de l'application. Comment pouvons-nous changer l'adresse de manière contrôlée pour qu'elle pointe vers le serveur backend de production lorsque le code est empaqueté pour la production ?
+
+La fonction de configuration de Webpack a deux paramètres, <i>env</i> et <i>argv</i>. Nous pouvons utiliser ce dernier pour connaître le <i>mode</i> défini dans le script npm:
+
+```js
+const path = require('path')
+
+const config = (env, argv) => { // highlight-line
+  console.log('argv.mode:', argv.mode)
+  return {
+    // ...
+  }
+}
+
+module.exports = config
+```
+
+Maintenant, si nous le souhaitons, nous pouvons configurer Webpack pour fonctionner différemment selon que l'environnement d'exploitation de l'application, ou <i>mode</i>, est défini sur production ou développement.
+
+Nous pouvons également utiliser le [DefinePlugin](https://webpack.js.org/plugins/define-plugin/) de webpack pour définir des <i>constantes globales par défaut</i> qui peuvent être utilisées dans le code empaqueté. Définissons une nouvelle constante globale <i>BACKEND\_URL</i> qui obtient une valeur différente selon l'environnement pour lequel le code est empaqueté:
+
+```js
+const path = require('path')
+const webpack = require('webpack') // highlight-line
+
+const config = (env, argv) => {
+  console.log('argv', argv.mode)
+
+  // highlight-start
+  const backend_url = argv.mode === 'production'
+    ? 'https://notes2023.fly.dev/api/notes'
+    : 'http://localhost:3001/notes'
+  // highlight-end
+
+  return {
+    entry: './src/index.js',
+    output: {
+      path: path.resolve(__dirname, 'build'),
+      filename: 'main.js'
+    },
+    devServer: {
+      static: path.resolve(__dirname, 'build'),
+      compress: true,
+      port: 3000,
+    },
+    devtool: 'source-map',
+    module: {
+      // ...
+    },
+    // highlight-start
+    plugins: [
+      new webpack.DefinePlugin({
+        BACKEND_URL: JSON.stringify(backend_url)
+      })
+    ]
+    // highlight-end
+  }
+}
+
+module.exports = config
+```
+
+La constante globale est utilisée de la manière suivante dans le code:
+
+```js
+const App = () => {
+  const [counter, setCounter] = useState(0)
+  const [values, setValues] = useState([])
+  const notes = useNotes(BACKEND_URL) // highlight-line
+
+  // ...
+  return (
+    <div className="container">
+      hello webpack {counter} clicks
+      <button onClick={handleClick} >press</button>
+      <div>{notes.length} notes on server {BACKEND_URL}</div> // highlight-line
+    </div>
+  )
+}
+```
+
+Si la configuration pour le développement et la production diffère beaucoup, il peut être judicieux de [séparer la configuration](https://webpack.js.org/guides/production/) des deux dans leurs propres fichiers.
+
+Maintenant, si l'application est lancée avec la commande npm start en mode développement, elle récupère les notes depuis l'adresse <http://localhost:3001/notes>. La version empaquetée avec la commande _npm run build_ utilise l'adresse <https://notes2023.fly.dev/api/notes> pour obtenir la liste des notes.
+
+Nous pouvons inspecter localement la version de production empaquetée de l'application en exécutant la commande suivante dans le répertoire <i>build</i>:
+
+```bash
+npx static-server
+```
+
+Par défaut, l'application empaquetée sera disponible à <http://localhost:9080>.
+
+### Polyfill
+
+Notre application est terminée et fonctionne avec toutes les versions relativement récentes des navigateurs modernes, à l'exception d'Internet Explorer. La raison en est que, à cause d'axios, notre code utilise les [Promesses](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), et aucune version existante d'IE ne les prend en charge:
+
+![tableau de compatibilité des navigateurs soulignant à quel point Internet Explorer est mauvais](../../images/7/29.png)
+
+Il y a beaucoup d'autres choses dans la norme qu'IE ne prend pas en charge. Quelque chose d'aussi inoffensif que la méthode [find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) des tableaux JavaScript dépasse les capacités d'IE:
+
+![tableau de compatibilité des navigateurs montrant qu'IE ne prend pas en charge la méthode find](../../images/7/30.png)
+
+Dans ces situations, il ne suffit pas de transpiler le code, car la transpilation transforme simplement le code d'une version plus récente de JavaScript en une version plus ancienne avec une prise en charge plus large par les navigateurs. IE comprend syntaxiquement les Promesses mais n'a tout simplement pas implémenté leur fonctionnalité. La propriété find des tableaux dans IE est simplement <i>undefined</i>.
+
+Si nous voulons que l'application soit compatible avec IE, nous devons ajouter un [polyfill](https://remysharp.com/2010/10/08/what-is-a-polyfill), qui est un code qui ajoute la fonctionnalité manquante aux navigateurs plus anciens.
+
+Les polyfills peuvent être ajoutés à l'aide de [webpack et Babel](https://babeljs.io/docs/usage/polyfill/) ou en installant l'une des nombreuses bibliothèques de polyfill existantes.
+
+Le polyfill fourni par la bibliothèque [promise-polyfill](https://www.npmjs.com/package/promise-polyfill) est facile à utiliser. Nous devons simplement ajouter ce qui suit à notre code d'application existant:
+
+```js
+import PromisePolyfill from 'promise-polyfill'
+
+if (!window.Promise) {
+  window.Promise = PromisePolyfill
+}
+```
+
+Si l'objet global _Promise_ n'existe pas, ce qui signifie que le navigateur ne prend pas en charge les Promesses, la Promise polyfillée est stockée dans la variable globale. Si la Promise polyfillée est suffisamment bien implémentée, le reste du code devrait fonctionner sans problèmes.
+
+Une liste exhaustive des polyfills existants peut être trouvée [ici](https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills).
+
+La compatibilité des différents API avec les navigateurs peut être vérifiée en visitant [https://caniuse.com](https://caniuse.com) ou le site web de [Mozilla](https://developer.mozilla.org/en-US/).
+
 </div>
