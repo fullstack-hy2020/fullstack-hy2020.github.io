@@ -254,6 +254,137 @@ Nous avons encore besoin du fichier <i>build/index.html</i> qui servira de "page
 </html>
 ```
 
+Lorsque nous empaquetons notre application, nous rencontrons le problème suivant:
+
+![terminal webpack échec chargeur nécessaire](../../images/7/21x.png)
+
+### Chargeurs (Loaders)
+
+Le message d'erreur de webpack indique que nous pourrions avoir besoin d'un <i>chargeur</i> approprié pour empaqueter correctement le fichier <i>App.js</i>. Par défaut, webpack ne sait traiter que le JavaScript pur. Bien que nous ne nous en rendions peut-être plus compte, nous utilisons [JSX](https://facebook.github.io/jsx/) pour rendre nos vues dans React. Pour illustrer cela, le code suivant n'est pas du JavaScript ordinaire:
+
+```js
+const App = () => {
+  return (
+    <div>
+      hello webpack
+    </div>
+  )
+}
+```
+
+La syntaxe utilisée ci-dessus provient de JSX et nous offre une manière alternative de définir un élément React pour une balise HTML <i>div</i>.
+
+Nous pouvons utiliser des [chargeurs (loaders)](https://webpack.js.org/concepts/loaders/) pour informer webpack des fichiers qui doivent être traités avant d'être empaquetés.
+
+Configurons un chargeur pour notre application qui transforme le code JSX en JavaScript ordinaire:
+
+```js
+const path = require('path')
+
+const config = () => {
+  return {
+    entry: './src/index.js',
+    output: {
+      path: path.resolve(__dirname, 'build'),
+      filename: 'main.js'
+    },
+      // highlight-start
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-react'],
+          },
+        },
+      ],
+    },
+      // highlight-end
+  }
+}
+
+module.exports = config
+```
+
+Les chargeurs sont définis sous la propriété <i>module</i> dans le tableau <i>rules</i> (règles).
+
+La définition d'un seul chargeur se compose de trois parties:
+
+```js
+{
+  test: /\.js$/,
+  loader: 'babel-loader',
+  options: {
+    presets: ['@babel/preset-react']
+  }
+}
+```
+
+La propriété <i>test</i> spécifie que le chargeur est destiné aux fichiers dont les noms se terminent par <i>.js</i>. La propriété <i>loader</i> spécifie que le traitement de ces fichiers sera effectué avec [babel-loader](https://github.com/babel/babel-loader). La propriété <i>options</i> est utilisée pour spécifier des paramètres pour le chargeur, qui configurent sa fonctionnalité.
+
+Installons le chargeur et ses paquets requis en tant que <i>dépendance de développement</i>:
+
+```bash
+npm install @babel/core babel-loader @babel/preset-react --save-dev
+```
+
+L'empaquetage de l'application réussira désormais.
+
+Si nous apportons des modifications au composant <i>App</i> et examinons le code empaqueté, nous remarquons que la version empaquetée du composant ressemble à ceci:
+
+```js
+const App = () =>
+  react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
+    'div',
+    null,
+    'hello webpack'
+  )
+```
+
+Comme nous pouvons le voir dans l'exemple ci-dessus, les éléments React qui ont été écrits en JSX sont maintenant créés avec du JavaScript ordinaire en utilisant la fonction [createElement](https://react.dev/reference/react/createElement) de React.
+
+Vous pouvez tester l'application empaquetée en ouvrant le fichier <i>build/index.html</i> avec la fonctionnalité <i>ouvrir le fichier</i> de votre navigateur:
+
+![navigateur hello webpack](../../images/7/22.png)
+
+Il convient de noter que si le code source de l'application empaquetée utilise <i>async/await</i>, le navigateur ne rendra rien sur certains navigateurs. [Rechercher le message d'erreur dans la console](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined) éclairera le problème. Avec la [solution précédente](https://babeljs.io/docs/en/babel-polyfill/) étant obsolète, nous devons maintenant installer deux dépendances manquantes, à savoir [core-js](https://www.npmjs.com/package/core-js) et [regenerator-runtime](https://www.npmjs.com/package/regenerator-runtime):
+
+```bash
+npm install core-js regenerator-runtime
+```
+
+Vous devez importer ces dépendances en haut du fichier <i>index.js</i>:
+
+```js
+import 'core-js/stable/index.js'
+import 'regenerator-runtime/runtime.js'
+```
+
+Notre configuration contient presque tout ce dont nous avons besoin pour le développement React.
+
+### Transpilers
+
+Le processus de transformation du code d'une forme de JavaScript à une autre est appelé [transpilation](https://en.wiktionary.org/wiki/transpile). La définition générale du terme est de compiler du code source en le transformant d'un langage à un autre.
+
+En utilisant la configuration de la section précédente, nous sommes en train de <i>transpiler</i> le code contenant JSX en JavaScript ordinaire avec l'aide de [babel](https://babeljs.io/), qui est actuellement l'outil le plus populaire pour ce travail.
+
+Comme mentionné dans la partie 1, la plupart des navigateurs ne prennent pas en charge les dernières fonctionnalités introduites dans ES6 et ES7, et pour cette raison, le code est généralement transpilé vers une version de JavaScript qui implémente la norme ES5.
+
+Le processus de transpilation exécuté par Babel est défini avec des <i>plugins</i>. En pratique, la plupart des développeurs utilisent des [presets](https://babeljs.io/docs/plugins/) prêts à l'emploi qui sont des groupes de plugins préconfigurés.
+
+Actuellement, nous utilisons le preset [@babel/preset-react](https://babeljs.io/docs/plugins/preset-react/) pour transpiler le code source de notre application:
+
+```js
+{
+  test: /\.js$/,
+  loader: 'babel-loader',
+  options: {
+    presets: ['@babel/preset-react'] // highlight-line
+  }
+}
+```
+
 
 
 </div>
