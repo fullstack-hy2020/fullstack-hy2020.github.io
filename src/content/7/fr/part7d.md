@@ -385,6 +385,323 @@ Actuellement, nous utilisons le preset [@babel/preset-react](https://babeljs.io/
 }
 ```
 
+Ajoutons le plugin [@babel/preset-env](https://babeljs.io/docs/plugins/preset-env/) qui contient tout ce dont nous avons besoin pour prendre le code utilisant toutes les dernières fonctionnalités et le transpiler en code compatible avec la norme ES5:
 
+```js
+{
+  test: /\.js$/,
+  loader: 'babel-loader',
+  options: {
+    presets: ['@babel/preset-env', '@babel/preset-react'] // highlight-line
+  }
+}
+```
+
+Installons le preset avec la commande:
+
+```bash
+npm install @babel/preset-env --save-dev
+```
+
+Lorsque nous transpilons le code, il est transformé en JavaScript à l'ancienne. La définition du composant <i>App</i> transformé ressemble à ceci:
+
+```js
+var App = function App() {
+  return _react2.default.createElement('div', null, 'hello webpack')
+};
+```
+
+Comme nous pouvons le voir, les variables sont déclarées avec le mot-clé _var_, car JavaScript ES5 ne comprend pas le mot-clé _const_. Les fonctions fléchées ne sont également pas utilisées, c'est pourquoi la définition de _fonction_ utilise le mot-clé function.
+
+### CSS
+
+Ajoutons du CSS à notre application. Créons un nouveau fichier <i>src/index.css</i>:
+
+```css
+.container {
+  margin: 10px;
+  background-color: #dee8e4;
+}
+```
+
+Ensuite, utilisons le style dans le composant <i>App</i>:
+
+```js
+const App = () => {
+  return (
+    <div className="container">
+      hello webpack
+    </div>
+  )
+}
+```
+
+Et nous importons le style dans le fichier <i>index.js</i>:
+
+```js
+import './index.css'
+```
+
+Cela provoquera l'échec du processus de transpilation:
+
+![échec de webpack manquant chargeur pour css/style](../../images/7/23x.png)
+
+Lors de l'utilisation de CSS, nous devons utiliser les chargeurs [css](https://webpack.js.org/loaders/css-loader/) et [style](https://webpack.js.org/loaders/style-loader/):
+
+```js
+{
+  rules: [
+    {
+      test: /\.js$/,
+      loader: 'babel-loader',
+      options: {
+        presets: ['@babel/preset-react', '@babel/preset-env'],
+      },
+    },
+    // highlight-start
+    {
+      test: /\.css$/,
+      use: ['style-loader', 'css-loader'],
+    },
+    // highlight-end
+  ],
+}
+```
+
+Le rôle du [css loader](https://webpack.js.org/loaders/css-loader/) est de charger les fichiers <i>CSS</i> et celui du [style loader](https://webpack.js.org/loaders/style-loader/) est de générer et d'injecter un élément <i>style</i> contenant tous les styles de l'application.
+
+Avec cette configuration, les définitions CSS sont incluses dans le fichier <i>main.js</i> de l'application. Pour cette raison, il n'est pas nécessaire d'importer séparément les styles <i>CSS</i> dans le fichier principal <i>index.html</i> de l'application.
+
+Si nécessaire, le CSS de l'application peut également être généré dans son propre fichier séparé en utilisant le [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin).
+
+Lorsque nous installons les chargeurs:
+
+```bash
+npm install style-loader css-loader --save-dev
+```
+
+L'empaquetage réussira à nouveau et l'application recevra de nouveaux styles.
+
+### Webpack-dev-server
+
+La configuration actuelle permet de développer notre application, mais le flux de travail est terrible (au point qu'il ressemble au flux de travail de développement avec Java). Chaque fois que nous apportons un changement au code, nous devons l'empaqueter et rafraîchir le navigateur pour tester le code.
+
+Le [webpack-dev-server](https://webpack.js.org/guides/development/#using-webpack-dev-server) offre une solution à nos problèmes. Installons-le avec la commande:
+
+```js
+npm install --save-dev webpack-dev-server
+```
+
+Définissons un script npm pour démarrer le serveur de développement:
+
+```js
+{
+  // ...
+  "scripts": {
+    "build": "webpack --mode=development",
+    "start": "webpack serve --mode=development" // highlight-line
+  },
+  // ...
+}
+```
+
+Ajoutons également une nouvelle propriété <i>devServer</i> à l'objet de configuration dans le fichier <i>webpack.config.js</i>:
+
+```js
+const config = {
+  entry: './src/index.js',
+  output: {
+    path: path.resolve(__dirname, 'build'),
+    filename: 'main.js',
+  },
+  // highlight-start
+  devServer: {
+    static: path.resolve(__dirname, 'build'),
+    compress: true,
+    port: 3000,
+  },
+  // highlight-end
+  // ...
+};
+```
+
+La commande _npm start_ va maintenant démarrer le serveur de développement sur le port 3000, ce qui signifie que notre application sera accessible en visitant <http://localhost:3000> dans le navigateur. Lorsque nous apportons des modifications au code, le navigateur rafraîchira automatiquement la page.
+
+Le processus de mise à jour du code est rapide. Lorsque nous utilisons le serveur de développement, le code n'est pas empaqueté de la manière habituelle dans le fichier <i>main.js</i>. Le résultat de l'empaquetage existe uniquement en mémoire.
+
+Étendons le code en changeant la définition du composant <i>App</i> comme indiqué ci-dessous:
+
+```js
+import React, { useState } from 'react'
+import './index.css'
+
+const App = () => {
+  const [counter, setCounter] = useState(0)
+
+  return (
+    <div className="container">
+      hello webpack {counter} clicks
+      <button onClick={() => setCounter(counter + 1)}>
+        press
+      </button>
+    </div>
+  )
+}
+
+export default App
+```
+
+L'application fonctionne bien et le flux de travail de développement est assez fluide.
+
+### Cartes sources (Source maps)
+
+Extrayons le gestionnaire de clic dans sa propre fonction et stockons la valeur précédente du compteur dans son propre état <i>values</i>:
+
+```js
+const App = () => {
+  const [counter, setCounter] = useState(0)
+  const [values, setValues] = useState() // highlight-line
+
+//highlight-start
+  const handleClick = () => {
+    setCounter(counter + 1)
+    setValues(values.concat(counter))
+  }
+//highlight-end
+
+  return (
+    <div className="container">
+      hello webpack {counter} clicks
+      <button onClick={handleClick}> // highlight-line
+        press
+      </button>
+    </div>
+  )
+}
+```
+
+L'application ne fonctionne plus et la console affichera l'erreur suivante :
+
+![console devtools ne peut pas concaténer sur undefined dans handleClick](../../images/7/25.png)
+
+Nous savons que l'erreur se trouve dans la méthode onClick, mais si l'application était plus grande, le message d'erreur serait assez difficile à localiser:
+
+<pre>
+App.js:27 Uncaught TypeError: Cannot read property 'concat' of undefined
+    at handleClick (App.js:27)
+</pre>
+
+L'emplacement de l'erreur indiqué dans le message ne correspond pas à l'emplacement réel de l'erreur dans notre code source. Si nous cliquons sur le message d'erreur, nous remarquons que le code source affiché ne ressemble pas à notre code d'application:
+
+![la source devtools n'affiche pas notre code source](../../images/7/26.png)
+
+Bien sûr, nous voulons voir notre véritable code source dans le message d'erreur.
+
+Heureusement, corriger le message d'erreur à cet égard est assez facile. Nous demanderons à webpack de générer une soi-disant [carte source](https://webpack.js.org/configuration/devtool/) pour le bundle, ce qui rend possible de <i>mapper les erreurs</i> qui surviennent pendant l'exécution du bundle à la partie correspondante dans le code source original.
+
+La carte source peut être générée en ajoutant une nouvelle propriété <i>devtool</i> à l'objet de configuration avec la valeur 'source-map':
+
+```js
+const config = {
+  entry: './src/index.js',
+  output: {
+    // ...
+  },
+  devServer: {
+    // ...
+  },
+  devtool: 'source-map', // highlight-line
+  // ..
+};
+```
+
+Webpack doit être redémarré lorsque nous apportons des modifications à sa configuration. Il est également possible de faire en sorte que webpack surveille les modifications apportées à lui-même, mais nous ne le ferons pas cette fois.
+
+Le message d'erreur est maintenant beaucoup mieux
+
+![console devtools montrant une erreur de concat à une ligne différente](../../images/7/27.png)
+
+puisqu'il se réfère au code que nous avons écrit:
+
+![source devtools montrant notre vrai code avec values.concat](../../images/7/27eb.png)
+
+Générer la carte source permet également d'utiliser le débogueur Chrome:
+
+![débogueur devtools en pause juste avant la ligne en cause](../../images/7/28.png)
+
+Corrigeons le bug en initialisant l'état de <i>values</i> comme un tableau vide:
+
+```js
+const App = () => {
+  const [counter, setCounter] = useState(0)
+  const [values, setValues] = useState([])
+  // ...
+}
+```
+
+### Minification du code
+
+Lorsque nous déployons l'application en production, nous utilisons le bundle de code <i>main.js</i> généré par webpack. La taille du fichier <i>main.js</i> est de 1009487 octets même si notre application ne contient que quelques lignes de notre code. La grande taille du fichier est due au fait que le bundle contient également le code source de toute la bibliothèque React. La taille du code empaqueté est importante car le navigateur doit charger le code lorsque l'application est utilisée pour la première fois. Avec des connexions internet à haute vitesse, 1009487 octets ne posent pas de problème, mais si nous continuons à ajouter plus de dépendances externes, la vitesse de chargement pourrait devenir un problème, en particulier pour les utilisateurs mobiles.
+
+Si nous inspectons le contenu du fichier bundle, nous remarquons qu'il pourrait être grandement optimisé en termes de taille de fichier en supprimant tous les commentaires. Il n'est pas utile d'optimiser manuellement ces fichiers, car il existe de nombreux outils pour cela.
+
+Le processus d'optimisation pour les fichiers JavaScript s'appelle la <i>minification</i>. L'un des outils principaux destinés à cet effet est [UglifyJS](http://lisperator.net/uglifyjs/).
+
+À partir de la version 4 de webpack, le plugin de minification ne nécessite pas de configuration supplémentaire pour être utilisé. Il suffit de modifier le script npm dans le fichier <i>package.json</i> pour spécifier que webpack exécutera l'empaquetage du code en mode <i>production</i>:
+
+```json
+{
+  "name": "webpack-part7",
+  "version": "0.0.1",
+  "description": "practising webpack",
+  "scripts": {
+    "build": "webpack --mode=production", // highlight-line
+    "start": "webpack serve --mode=development"
+  },
+  "license": "MIT",
+  "dependencies": {
+    // ...
+  },
+  "devDependencies": {
+    // ...
+  }
+}
+```
+
+Lorsque nous empaquetons à nouveau l'application, la taille du fichier <i>main.js</i> résultant diminue considérablement:
+
+```bash
+$ ls -l build/main.js
+-rw-r--r--  1 mluukkai  ATKK\hyad-all  227651 Feb  7 15:58 build/main.js
+```
+
+Le résultat du processus de minification ressemble à du code C à l'ancienne; tous les commentaires et même les espaces blancs inutiles et les caractères de nouvelle ligne ont été supprimés, et les noms de variables ont été remplacés par un seul caractère.
+
+```js
+function h(){if(!d){var e=u(p);d=!0;for(var t=c.length;t;){for(s=c,c=[];++f<t;)s&&s[f].run();f=-1,t=c.length}s=null,d=!1,function(e){if(o===clearTimeout)return clearTimeout(e);if((o===l||!o)&&clearTimeout)return o=clearTimeout,clearTimeout(e);try{o(e)}catch(t){try{return o.call(null,e)}catch(t){return o.call(this,e)}}}(e)}}a.nextTick=function(e){var t=new Array(arguments.length-1);if(arguments.length>1)
+```
+
+### Configuration de développement et de production
+
+Ensuite, ajoutons un backend à notre application en réutilisant le backend de l'application de notes désormais familier.
+
+Stockons le contenu suivant dans le fichier <i>db.json</i>:
+
+```json
+{
+  "notes": [
+    {
+      "important": true,
+      "content": "HTML is easy",
+      "id": "5a3b8481bb01f9cb00ccb4a9"
+    },
+    {
+      "important": false,
+      "content": "Mongo can save js objects",
+      "id": "5a3b920a61e8c8d3f484bdd0"
+    }
+  ]
+}
+```
 
 </div>
