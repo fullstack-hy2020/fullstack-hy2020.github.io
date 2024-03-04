@@ -148,6 +148,112 @@ Le fichier contient beaucoup de choses qui semblent assez intéressantes. Nous p
 eval("const hello = name => {\n  console.log(`hello ${name}`)\n}\n\n//# sourceURL=webpack://webpack-osa7/./src/index.js?");
 ```
 
+Ajoutons un fichier <i>App.js</i> sous le répertoire <i>src</i> avec le contenu suivant:
+
+```js
+const App = () => {
+  return null
+}
+
+export default App
+```
+
+Importons et utilisons le module <i>App</i> dans le fichier <i>index.js</i>:
+
+```js
+import App from './App';
+
+const hello = name => {
+  console.log(`hello ${name}`)
+}
+
+App()
+```
+
+Lorsque nous empaquetons à nouveau l'application avec la commande _npm run build_, nous remarquons que webpack a pris en compte les deux fichiers:
+
+![sortie du terminal montrant que webpack a généré deux fichiers](../../images/7/20x.png)
+
+Notre code d'application peut être trouvé à la fin du fichier bundle dans un format plutôt obscur:
+
+![sortie du terminal montrant notre code minifié](../../images/7/20z.png)
+
+### Fichier de configuration
+
+Examinons de plus près le contenu de notre fichier <i>webpack.config.js</i> actuel:
+
+```js
+const path = require('path')
+
+const config = () => {
+  return {
+    entry: './src/index.js',
+    output: {
+      path: path.resolve(__dirname, 'build'),
+      filename: 'main.js'
+    }
+  }
+}
+
+module.exports = config
+```
+
+Le fichier de configuration a été écrit en JavaScript et la fonction retournant l'objet de configuration est exportée en utilisant la syntaxe de module de Node.
+
+Notre définition de configuration minimale s'explique presque d'elle-même. La propriété [entry](https://webpack.js.org/concepts/#entry) de l'objet de configuration spécifie le fichier qui servira de point d'entrée pour l'empaquetage de l'application.
+
+La propriété [output](https://webpack.js.org/concepts/#output) définit l'emplacement où le code empaqueté sera stocké. Le répertoire cible doit être défini comme un <i>chemin absolu</i>, ce qui est facile à créer avec la méthode [path.resolve](https://nodejs.org/docs/latest-v8.x/api/path.html#path_path_resolve_paths). Nous utilisons aussi [\_\_dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname) qui est une variable dans Node qui stocke le chemin vers le répertoire courant.
+
+### Empaquetage de React
+
+Ensuite, transformons notre application en une application React minimale. Installons les bibliothèques requises:
+
+```bash
+npm install react react-dom
+```
+
+Et transformons notre application en une application React en ajoutant les définitions familières dans le fichier <i>index.js</i>:
+
+```js
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+```
+
+Nous apporterons également les modifications suivantes au fichier <i>App.js</i>:
+
+```js
+import React from 'react' // we need this now also in component files
+
+const App = () => {
+  return (
+    <div>
+      hello webpack
+    </div>
+  )
+}
+
+export default App
+```
+
+Nous avons encore besoin du fichier <i>build/index.html</i> qui servira de "page principale" de notre application et qui chargera notre code JavaScript empaqueté avec une balise <i>script</i>:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>React App</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/javascript" src="./main.js"></script>
+  </body>
+</html>
+```
+
 
 
 </div>
