@@ -327,7 +327,7 @@ No existe una estructura de directorio estricta o una convención de nomenclatur
 
 Puedes encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part4-1</i> de [este repositorio de GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-1).
 
-Si clonas el proyecto para ti mismo, ejecuta el comando _npm install_ antes de iniciar la aplicación con _npm start_.
+Si clonas el proyecto para ti mismo, ejecuta el comando _npm install_ antes de iniciar la aplicación con _npm run dev_.
 
 ### Nota sobre las exportaciones
 
