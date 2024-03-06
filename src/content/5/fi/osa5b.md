@@ -7,8 +7,6 @@ lang: fi
 
 <div class="content">
 
-### Kirjautumislomakkeen näyttäminen vain tarvittaessa
-
 Muutetaan sovellusta siten, että kirjautumislomaketta ei oletusarvoisesti näytetä:
 
 ![Oletusarvoisesti sovellus näytää ainoastaan muistiinpanojen listan sekä napin "log in"](../../images/5/10e.png)
@@ -362,7 +360,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://gith
 
 ### ref eli viite komponenttiin
 
-Ratkaisu on melko hyvä, mutta haluamme kuitenkin parantaa sitä. Kun uusi muistiinpano luodaan, olisi loogista jos luomislomake menisi piiloon. Nyt lomake pysyy näkyvillä. Lomakkeen piilottamiseen sisältyy kuitenkin pieni ongelma, sillä näkyvyyttä kontrolloidaan <i>Togglable</i>-komponentin tilassa olevalla muuttujalla <i>visible</i>. Miten pääsemme tilaan käsiksi komponentin ulkopuolelta?
+Ratkaisu on melko hyvä, mutta haluamme kuitenkin parantaa sitä. Kun uusi muistiinpano luodaan, olisi loogista jos luomislomake menisi piiloon. Nyt lomake pysyy näkyvillä. Lomakkeen piilottamiseen sisältyy kuitenkin pieni ongelma, sillä näkyvyyttä kontrolloidaan <i>Togglable</i>-komponentin tilassa olevalla muuttujalla <i>visible</i>. Eräs ratkaisu tähän olisi siirtää Togglable-komponentin tilan kontrollointi komponentin ulkopuolelle. Emme kuitenkaan nyt tee sitä, sillä haluamme että komponentti on itse vastuussa tilastaan. Meidän on siis etsittävä jokin muu ratkaisu, ja löydettävä mekanismi komponentin tilan muuttamiseen ulkopuolelta käsin.
 
 On useita erilaisia tapoja toteuttaa pääsy komponentin funktioihin sen ulkopuolelta. Käytetään nyt Reactin [ref](https://react.dev/learn/referencing-values-with-refs)-mekanismia, joka tarjoaa eräänlaisen viitteen komponenttiin.
 
@@ -569,19 +567,9 @@ const Blog = ({ blog }) => {
 )}
 ```
 
-**Huom 1:** Voit tehdä blogin nimestä klikattavan korostetun koodirivin tapaan.
+**Huom:** Vaikka tämän tehtävän toiminnallisuus on melkein samanlainen kuin komponentin <i>Togglable</i> tarjoama toiminnallisuus, ei Togglable kuitenkaan sovi tarkoitukseen sellaisenaan. Helpoin ratkaisu lienee lisätä blogille tila, joka kontrolloi sitä missä muodossa blogi näytetään.
 
-**Huom 2:** Vaikka tämän tehtävän toiminnallisuus on melkein samanlainen kuin komponentin <i>Togglable</i> tarjoama toiminnallisuus, ei Togglable kuitenkaan sovi tarkoitukseen sellaisenaan. Helpoin ratkaisu lienee lisätä blogille tila, joka kontrolloi sitä missä muodossa blogi näytetään.
-
-#### 5.8*: blogilistan frontend, step8
-
-Huomaamme, että jotain on pielessä. Kun sovellukseen lisätään uusi blogi, ei blogin lisääjän nimeä näytetä blogin tarkempien tietojen joukossa:
-
-![](../../images/5/59new.png)
-
-Kun selain uudelleenladataan, lisääjän tieto tulee näkyviin. Tämä ei ole hyväksyttävää, selvitä missä vika on ja tee tarvittava korjaus.
-
-#### 5.9: blogilistan frontend, step9
+#### 5.8: blogilistan frontend, step8
 
 Toteuta like-painikkeen toiminnallisuus. Like lisätään backendiin blogin yksilöivään urliin tapahtuvalla _PUT_-pyynnöllä.
 
@@ -614,7 +602,15 @@ tulee palvelimelle tehdä PUT-pyyntö osoitteeseen <i>/api/blogs/5a43fde2cbd20b1
 }
 ```
 
-**Varoitus vielä kerran:** Jos huomaat kirjoittavasi sekaisin async/awaitia ja _then_-kutsuja, on 99.9-prosenttisen varmaa, että teet jotain väärin. Käytä siis jompaa kumpaa tapaa, älä missään tapauksessa "varalta" molempia.
+#### 5.9*: blogilistan frontend, step9
+
+Huomaamme, että jotain on pielessä. Kun blogia liketetään, ei blogin lisääjän nimeä näytetä enää blogin tarkempien tietojen joukossa:
+
+![](../../images/5/59put.png)
+
+Kun selain uudelleenladataan, lisääjän tieto tulee näkyviin. Tämä ei ole hyväksyttävää, selvitä missä vika on ja tee tarvittava korjaus.
+
+On toki mahdollista, että olet jo tehnyt kaiken oikein, ja ongelmaa ei koodissasi ilmene. Tässä tapauksessa voit siirtyä eteenpäin.
 
 #### 5.10: blogilistan frontend, step10
 
@@ -708,11 +704,6 @@ Konfiguroimme osassa 3 koodin tyylistä huolehtivan [ESLintin](/osa3/validointi_
 
 Vite on asentanut projektille ESLintin valmiiksi, joten ei tarvita muuta kuin muokata tiedostossa <i>.eslintrc.cjs</i> oleva konfiguraatio halutun kaltaiseksi.
 
-Aloitamme seuraavaksi testaamisen, ja jotta pääsemme eroon testeissä olevista turhista huomautuksista asennetaan plugin [eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest):
-
-```js
-npm install --save-dev eslint-plugin-jest
-```
 
 Muutetaan tiedoston <i>.eslintrc.cjs</i> sisältöä seuraavasti:
 
@@ -722,7 +713,6 @@ module.exports = {
   env: {
     browser: true,
     es2020: true,
-    "jest/globals": true
   },
   extends: [
     'eslint:recommended',
@@ -733,7 +723,7 @@ module.exports = {
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
   settings: { react: { version: '18.2' } },
-  plugins: ['react-refresh', 'jest'],
+  plugins: ['react-refresh'],
   rules: {
     "indent": [
         "error",
@@ -772,8 +762,9 @@ Tehdään projektin juureen tiedosto [.eslintignore](https://eslint.org/docs/use
 
 ```bash
 node_modules
-build
+dist
 .eslintrc.cjs
+vite.config.js
 ```
 
 Näin ainoastaan sovelluksessa oleva itse kirjoitettu koodi huomioidaan linttauksessa. 

@@ -329,7 +329,7 @@ There is no strict directory structure or file naming convention that is require
 
 You can find the code for our current application in its entirety in the <i>part4-1</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-1).
 
-If you clone the project for yourself, run the _npm install_ command before starting the application with _npm start_.
+If you clone the project for yourself, run the _npm install_ command before starting the application with _npm run dev_.
 
 ### Note on exports
 

@@ -391,7 +391,9 @@ The operation must respond with a suitable status code and some kind of an error
 
 **NB** Do not test password restrictions with Mongoose validations. It is not a good idea because the password received by the backend and the password hash saved to the database are not the same thing. The password length should be validated in the controller as we did in [part 3](/en/part3/validation_and_es_lint) before using Mongoose validation.
 
-Also, implement tests that ensure invalid users are not created and that an invalid add user operation returns a suitable status code and error message.
+Also, **implement tests** that ensure invalid users are not created and that an invalid add user operation returns a suitable status code and error message.
+
+**NB** if you decide to define tests on multiple files, you should note that by default each test file is executed in its own process (see _Test execution model_ in the [documentation](https://nodejs.org/api/test.html)). The consequence of this is that different test files are executed at the same time. Since the tests share the same database, simultaneous execution may cause problems. Problems are avoided by executing the tests with the option _--test-concurrency=1_, i.e. defining them to be executed sequentially.
 
 #### 4.17: Blog List Expansion, step 5
 

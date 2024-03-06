@@ -353,7 +353,9 @@ Luomisoperaation tulee palauttaa sopiva statuskoodi ja jonkinlainen virheilmoitu
 
 **HUOM** älä testaa salasanaan liittyviä ehtoja Mongoosen validointien avulla, se ei ole hyvä idea, sillä backendin vastaanottama salasana ja kantaan tallennettu salasanan tiiviste eivät ole sama asia. Salasanan oikeellisuus kannattaa testata kontrollerissa samoin kun teimme [osassa 3](/osa3/validointi_ja_es_lint) ennen validointien käyttöönottoa.
 
-Tee myös testit, jotka varmistavat, että virheellisiä käyttäjiä ei luoda, ja että virheellisen käyttäjän luomisoperaatioon vastaus on järkevä statuskoodin ja virheilmoituksen osalta.
+**Tee myös testit**, jotka varmistavat, että virheellisiä käyttäjiä ei luoda, ja että virheellisen käyttäjän luomisoperaatioon vastaus on järkevä statuskoodin ja virheilmoituksen osalta.
+
+**HUOM** jos päätät tehdä testejä useaan eri tiedostoon, on syytä huomioida se, että oletusarvoisesti jokainen testitiedosto suoritetaan omassa prosessissaan (ks. kohta _Test execution model_ [dokumentaatiosta](https://nodejs.org/api/test.html)). Seurauksena tästä on se, että eri testitiedostoja suoritetaan yhtä aikaa. Koska testit käyttävät samaa tietokantaa, saattaa yhtäaikaisesta suorituksesta aiheutua ongelmia. Ongelmat vältetään kun testit suoritetaan optiolla _--test-concurrency=1_, eli määritellään ne suoritettavaksi peräkkäin.
 
 #### 4.17: blogilistan laajennus, step5
 
