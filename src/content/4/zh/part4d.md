@@ -11,7 +11,7 @@ lang: zh
  用户必须能够登录我们的应用，当用户登录后，他们的用户信息必须自动附加到他们创建的任何新笔记上。
 
 <!-- We will now implement support for [token based authentication](https://scotch.io/tutorials/the-ins-and-outs-of-token-based-authentication#toc-how-token-based-works) to the backend.-->
-我们现在将在后台实现对[基于令牌的认证](https://scotch.io/tutorials/the-ins-and-outs-of-token-based-authentication#toc-how-token-based-works)的支持。
+我们现在将在后端实现对[基于令牌的认证](https://scotch.io/tutorials/the-ins-and-outs-of-token-based-authentication#toc-how-token-based-works)的支持。
 
 <!-- The principles of token based authentication are depicted in the following sequence diagram:-->
  基于令牌的认证的原则在下面的顺序图中得到描述。
@@ -29,7 +29,7 @@ lang: zh
 <!--     - The token is signed digitally, making it impossible to falsify (with cryptographic means)-->
  - 令牌经过数字签名，使其不可能被伪造（用密码学手段）。
 <!-- - The backend responds with a status code indicating the operation was successful, and returns the token with the response.-->
- - 后台以一个状态代码响应，表明操作成功，并将令牌与响应一起返回。
+ - 后端以一个状态代码响应，表明操作成功，并将令牌与响应一起返回。
 <!-- - The browser saves the token, for example to the state of a React application.-->
  - 浏览器保存令牌，例如保存到React应用的状态中。
 <!-- - When the user creates a new note (or does some other operation requiring identification), the React code sends the token to the server with the request.-->
@@ -397,7 +397,7 @@ const errorHandler = (error, request, response, next) => {
  另一个解决方案是将每个令牌的信息保存在后端数据库中，并为每个API请求检查该令牌对应的访问权是否仍然有效。通过这种方案，访问权可以在任何时候被撤销。这种方案通常被称为<i>服务器端会话</i>。
 
 <!-- The negative aspect of server side sessions is the increased complexity in the backend and also the effect on performance since the token validity needs to be checked for each API request from database. A database access is considerably slower compared to checking the validity from the token itself. That is why it is a quite common to save the session corresponding to a token to a <i>key-value-database</i> such as [Redis](https://redis.io/) that is limited in functionality compared to eg. MongoDB or relational database but extremely fast in some usage scenarios.-->
- 服务器端会话的消极方面是增加了后台的复杂性，也影响了性能，因为需要对每个API请求到数据库的token有效性进行检查数据库访问相比检查token本身的有效性要慢得多。这就是为什么将一个token对应的会话保存到一个<i>键-值数据库</i>（如[Redis](https://redis.io/)）是很常见的，与MongoDB或关系型数据库相比，其功能有限，但在某些使用场景下速度极快。
+ 服务器端会话的消极方面是增加了后端的复杂性，也影响了性能，因为需要对每个API请求到数据库的token有效性进行检查数据库访问相比检查token本身的有效性要慢得多。这就是为什么将一个token对应的会话保存到一个<i>键-值数据库</i>（如[Redis](https://redis.io/)）是很常见的，与MongoDB或关系型数据库相比，其功能有限，但在某些使用场景下速度极快。
 
 <!-- When server side sessions are used, the token is quite often just a random string, that does not include any information about the user as it is quite often the case when jwt-tokens are used. For each API request the server fetches the relevant information about the identity of the user from the database. It is also quite usual that instead of using Authorization-header, <i>cookies</i> are used as the mechanism for transferring the token between the client and the server.-->
  当使用服务器端会话时，令牌通常只是一个随机字符串，不包括关于用户的任何信息，因为在使用jwt令牌时通常是这样的。对于每个API请求，服务器从数据库中获取有关用户身份的相关信息。另外，通常不使用授权头，而是使用<i>cookies</i>作为客户端和服务器之间传输令牌的机制。

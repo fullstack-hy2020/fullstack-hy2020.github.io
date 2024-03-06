@@ -307,7 +307,7 @@ app.listen(PORT, () => {
  **在你开始练习之前**。
 
 <!-- For this set of exercises you will be developing a backend for an existing project called **Patientor**, which is a simple medical record application for doctors who handle diagnoses and basic health information of their patients.-->
- 在这组练习中，你将为一个名为**Patientor**的现有项目开发一个后台，它是一个简单的医疗记录应用，供医生处理病人的诊断和基本健康信息。
+ 在这组练习中，你将为一个名为**Patientor**的现有项目开发一个后端，它是一个简单的医疗记录应用，供医生处理病人的诊断和基本健康信息。
 
 <!-- The [frontend](https://github.com/fullstack-hy2020/patientor) has already been built by outsider experts and your task is to create a backend to support the existing code.-->
  [前端](https://github.com/fullstack-hy2020/patientor)已经由外部专家构建，你的任务是创建一个后端来支持现有的代码。

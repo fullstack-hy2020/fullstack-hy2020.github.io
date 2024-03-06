@@ -889,7 +889,7 @@ app.get('/api/notes/:id', (request, response) => {
 错误处理程序被调用的原因可能完全不同于你预期的。如果你将错误记录到控制台，你可能会从长时间和令人沮丧的调试会话中解救出来。此外，大多数现代服务在你部署应用程序时都支持某种形式的日志系统，你可以用来检查这些日志。如前所述，Fly.io就是其中之一。
 
 <!-- Every time you're working on a project with a backend, <i>it is critical to keep an eye on the console output of the backend</i>. If you are working on a small screen, it is enough to just see a tiny slice of the output in the background. Any error messages will catch your attention even when the console is far back in the background: -->
-每次你在一个有后端的项目上工作时，<i>关注后端的控制台输出是至关重要的</i>。如果你在一个小屏幕上工作，只需要在背景中看到一小部分输出就足够了。任何错误消息都会引起你的注意，即使控制台在后台很远：
+每次你在一个有后端的项目上工作时，<i>关注后端的控制台输出是至关重要的</i>。如果你在一个小屏幕上工作，只需要在背景中看到一小部分输出就足够了。任何错误消息都会引起你的注意，即使控制台在后端很远：
 
 ![sample screenshot showing tiny slice of output](../../images/3/15b.png)
 

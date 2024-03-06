@@ -820,7 +820,7 @@ app.delete('/api/notes/:id', (request, response) => {
  在这种情况下，使用 Postman 是非常容易的。只需定义网址，然后选择正确的请求类型（DELETE）。
 
 <!-- The backend server appears to respond correctly. By making an HTTP GET request to <http://localhost:3001/api/notes> we see that the note with the id 2 is no longer in the list, which indicates that the deletion was successful.-->
- 后台服务器似乎反应正确。通过对 <http://localhost:3001/api/notes> 的 HTTP GET 请求，我们看到 id 为 2 的笔记已经不在列表中了，这表明删除成功了。
+ 后端服务器似乎反应正确。通过对 <http://localhost:3001/api/notes> 的 HTTP GET 请求，我们看到 id 为 2 的笔记已经不在列表中了，这表明删除成功了。
 
 <!-- Because the notes in the application are only saved to memory, the list of notes will return to its original state when we restart the application.-->
  因为应用中的笔记只保存在内存中，所以当我们重新启动应用时，笔记的列表将恢复到原来的状态。

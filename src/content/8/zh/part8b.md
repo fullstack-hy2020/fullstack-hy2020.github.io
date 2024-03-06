@@ -422,7 +422,7 @@ if (nameToSearch && result.data) {
 ### Cache
 
 <!-- When we do multiple queries, for example with the address details of Arto Hellas, we notice something interesting: the query to the backend is done only the first time around. After this, despite the same query being done again by the code, the query is not sent to the backend.-->
- 当我们进行多次查询时，例如查询Arto Hellas的详细地址，我们注意到一些有趣的事情：向后端查询只在第一次进行。在这之后，尽管代码再次进行相同的查询，但查询不会被发送到后台。
+ 当我们进行多次查询时，例如查询Arto Hellas的详细地址，我们注意到一些有趣的事情：向后端查询只在第一次进行。在这之后，尽管代码再次进行相同的查询，但查询不会被发送到后端。
 
 ![](../../images/8/12.png)
 

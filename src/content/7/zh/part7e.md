@@ -227,7 +227,7 @@ const App = () => {
 ### Changes on the server
 
 <!-- If there are changes in the state on the server, e.g. when new blogs are added by other users to the bloglist service, the React frontend we implemented during this course will not notice these changes until the page reloads. A similar situation arises when the frontend triggers a time-consuming computation in the backend. How do we reflect the results of the computation to the frontend?-->
- 如果服务器上的状态有变化，例如，当其他用户向博客列表服务添加新的博客时，我们在本课程中实现的React前端将不会注意到这些变化，直到页面重新加载。当前端触发了后台的一个耗时的计算时，也会出现类似的情况。我们如何将计算的结果反映到前端？
+ 如果服务器上的状态有变化，例如，当其他用户向博客列表服务添加新的博客时，我们在本课程中实现的React前端将不会注意到这些变化，直到页面重新加载。当前端触发了后端的一个耗时的计算时，也会出现类似的情况。我们如何将计算的结果反映到前端？
 
 <!-- One way is to execute [polling](<https://en.wikipedia.org/wiki/Polling_(computer_science)>) on the frontend, meaning repeated requests to the backend API e.g. using the [setInterval](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval) command.-->
  一种方法是在前端执行[轮询](<https://en.wikipedia.org/wiki/Polling_(computer_science)>)，也就是重复请求后端API，比如使用[setInterval](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval)命令。
@@ -244,7 +244,7 @@ const App = () => {
 与其直接使用WebSocket API，不如使用[Socket.io](https://socket.io/)库，它提供了各种<i>回落</i>选项，以防浏览器不完全支持WebSocket。
 
 <!-- In [part 8](/en/part8), our topic is GraphQL, which provides a nice mechanism for notifying clients when there are changes in the backend data.-->
- 在[第8章节](/en/part8)中，我们的主题是GraphQL，它提供了一个很好的机制，当后台数据有变化时，可以通知客户端。
+ 在[第8章节](/en/part8)中，我们的主题是GraphQL，它提供了一个很好的机制，当后端数据有变化时，可以通知客户端。
 
 ### Virtual DOM
 
@@ -547,7 +547,7 @@ Will install react-scripts@5.0.0, which is a breaking change
 ![](../../images/7/36.png)
 
 <!-- The role of the frontend (enclosed by a square in the picture) does not differ much between the two models. There is often a so-called [API gateway](http://microservices.io/patterns/apigateway) between the microservices and the frontend, which provides an illusion of a more traditional "everything on the same server" API. [Netflix](https://medium.com/netflix-techblog/optimizing-the-netflix-api-5c9ac715cf19), among others, uses this type of approach.-->
- 前台的作用（图片中用方块围起来）在这两种模式中没有太大的区别。在微服务和前端之间通常有一个所谓的[API网关](http://microservices.io/patterns/apigateway)，它提供了一个更传统的 "一切都在同一个服务器上 "的API的假象。[Netflix](https://medium.com/netflix-techblog/optimizing-the-netflix-api-5c9ac715cf19)，除其他外，采用了这种类型的方法。
+ 前端的作用（图片中用方块围起来）在这两种模式中没有太大的区别。在微服务和前端之间通常有一个所谓的[API网关](http://microservices.io/patterns/apigateway)，它提供了一个更传统的 "一切都在同一个服务器上 "的API的假象。[Netflix](https://medium.com/netflix-techblog/optimizing-the-netflix-api-5c9ac715cf19)，除其他外，采用了这种类型的方法。
 
 <!-- Microservice architectures emerged and evolved for the needs of large internet-scale applications. The trend was set by Amazon far before the appearance of the term microservice. The critical starting point was an email sent to all employees in 2002 by Amazon CEO Jeff Bezos:-->
  微服务架构的出现和发展是为了满足大型互联网规模应用的需要。在微服务这个词出现之前，亚马逊就已经确定了这个趋势。关键的起点是亚马逊CEO Jeff Bezos在2002年发给所有员工的一封电子邮件。

@@ -491,7 +491,7 @@ const App = () => {
 #### 7.8: ultimate hooks
 
 <!-- The code of the application responsible for communicating with the backend of the note application of the previous parts looks like this:-->
- 负责与前面部分的笔记应用的后台通信的应用的代码如下所示：
+ 负责与前面部分的笔记应用的后端通信的应用的代码如下所示：
 
 ```js
 import axios from 'axios'
@@ -526,7 +526,7 @@ export default { getAll, create, update, setToken }
 ```
 
 <!-- We notice that the code is in no way specific to the fact that our application deals with notes. Excluding the value of the _baseUrl_ variable, the same code could be reused in the blog post application for dealing with the communication with the backend.-->
- 我们注意到，这段代码绝不是针对我们的应用处理笔记的事实。除去_baseUrl_变量的值，同样的代码可以在博文程序中重复使用，用于处理与后台的通信。
+ 我们注意到，这段代码绝不是针对我们的应用处理笔记的事实。除去_baseUrl_变量的值，同样的代码可以在博文程序中重复使用，用于处理与后端的通信。
 
 <!-- Extract the code for communicating with the backend into its own _useResource_ hook. It is sufficient to implement fetching all resources and creating a new resource.-->
  将与后端通信的代码提取到它自己的_useResource_钩中。它足以实现获取所有资源和创建一个新的资源。

@@ -1604,7 +1604,7 @@ npx sequelize-cli model:generate --name User --attributes name:string,username:s
  大结局：[在第四章节的末尾](/en/part4/token_authentication#problems-of-token-based-authentication)提到了一个token-criticality问题：如果一个用户对系统的访问被决定撤销，该用户仍然可以使用手中的token来使用该系统。
 
 <!-- The usual solution to this is to store a record of each token issued to the client in the backend database, and to check with each request whether access is still valid. In this case, the validity of the token can be removed immediately if necessary. Such a solution is often referred to as a <i>server-side session</i>.-->
- 对此，通常的解决方案是在后台数据库中存储发给客户的每个令牌的记录，并在每次请求时检查访问是否仍然有效。在这种情况下，必要时可以立即删除令牌的有效性。这样的解决方案通常被称为<i>服务器端会话</i>。
+ 对此，通常的解决方案是在后端数据库中存储发给客户的每个令牌的记录，并在每次请求时检查访问是否仍然有效。在这种情况下，必要时可以立即删除令牌的有效性。这样的解决方案通常被称为<i>服务器端会话</i>。
 
 <!-- Now expand the system so that the user who has lost access will not be able to perform any actions that require login.-->
  现在扩展系统，使失去访问权的用户无法执行任何需要登录的操作。

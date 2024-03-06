@@ -36,7 +36,7 @@ lang: zh
 尽管应用在你的机器上运行得很好，但它就是不能在服务器上运行，这种情况并不罕见。这可能是由于某些依赖性的缺失或环境的其他差异。在这里，容器是一个很好的解决方案，因为你可以在你的机器和服务器上的同一执行环境中运行应用。这并不完美：不同的硬件可能是一个问题，但你可以限制环境之间的差异。
 
 <!-- Sometimes you may hear about the <i>"Works in my container"</i> issue. The phrase describes a situation in which the application works fine in a container running on your machine but breaks when the container is started on a server. The phrase is a play on the infamous <i>"Works on my machine"</i> issue, which containers are often promised to solve. The situation also is most likely a usage error.-->
- 有时你可能会听到<i>"在我的容器中工作"</i>问题。这句话描述了这样一种情况：应用在你的机器上运行的容器中工作正常，但当容器在服务器上启动时就会中断。这句话是对臭名昭著的<i>"在我的机器上工作"</i>问题的一种戏谑，容器通常被承诺解决这个问题。这种情况也很可能是一个使用错误。
+ 有时你可能会听到<i>"在我的容器中工作"</i>问题。这句话描述了这样一种情况：应用在你的机器上运行的容器中工作正常，但当容器在服务器上启动时就会中断。这句话是对臭名昭著的<i>"在我的机器上工作"</i>问题的一种戏谑，容器通常被 promise 解决这个问题。这种情况也很可能是一个使用错误。
 
 ### About this part ###
 
@@ -234,7 +234,7 @@ For more examples and ideas, visit:
 ```
 
 <!-- The output contains a few new things for us to learn. <i>Docker daemon</i> is a background service that makes sure the containers are running, and we use the <i>Docker client</i> to interact with the daemon. We now have interacted with the first image and created a container from the image. During the execution of that container, we received the output.-->
- 这个输出包含了一些新的东西供我们学习。<i>Docker daemon</i>是一个后台服务，它确保了容器的运行，我们使用<i>Docker client</i>来与daemon交互。现在我们已经与第一个镜像进行了交互，并从该镜像中创建了一个容器。在该容器的执行过程中，我们收到了这样的输出。
+ 这个输出包含了一些新的东西供我们学习。<i>Docker daemon</i>是一个后端服务，它确保了容器的运行，我们使用<i>Docker client</i>来与daemon交互。现在我们已经与第一个镜像进行了交互，并从该镜像中创建了一个容器。在该容器的执行过程中，我们收到了这样的输出。
 
 </div>
 

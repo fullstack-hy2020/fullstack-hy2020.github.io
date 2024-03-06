@@ -8,7 +8,7 @@ lang: zh
 <div class="content">
 
 <!-- The frontend of our application shows the phone directory just fine with the updated server. However, if we want to add new persons, we have to add login functionality to the frontend.-->
- 我们的应用的前端在更新了服务器后显示电话目录很好。然而，如果我们想添加新的人员，我们必须在前台添加登录功能。
+ 我们的应用的前端在更新了服务器后显示电话目录很好。然而，如果我们想添加新的人员，我们必须在前端添加登录功能。
 
 ### User login
 
@@ -175,7 +175,7 @@ const App = () => {
 ### Adding a token to a header
 
 <!-- After the backend changes, creating new persons requires that a valid user token is sent with the request. In order to send the token, we have to change the way we define the _ApolloClient_ object in <i>index.js</i> a little.-->
- 后台修改后，创建新的人需要在请求中发送一个有效的用户令牌。为了发送令牌，我们必须稍微改变一下<i>index.js</i>中定义_ApolloClient_对象的方式。
+ 后端修改后，创建新的人需要在请求中发送一个有效的用户令牌。为了发送令牌，我们必须稍微改变一下<i>index.js</i>中定义_ApolloClient_对象的方式。
 
 ```js
 import { setContext } from '@apollo/client/link/context' // highlight-line
@@ -315,7 +315,7 @@ const PersonForm = ({ setError }) => {
 #### 8.17 Listing books
 
 <!-- After the backend changes, the list of books does not work anymore. Fix it.-->
- 后台修改后，书籍列表不再起作用了。修复它。
+ 后端修改后，书籍列表不再起作用了。修复它。
 
 #### 8.18 Log in
 

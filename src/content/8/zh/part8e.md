@@ -408,7 +408,7 @@ start()
 ```
 
 <!-- The backend code can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-6), branch <i>part8-6</i>.-->
- 后台代码可以在[GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-6)找到，分支<i>part8-6</i>。
+ 后端代码可以在[GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-6)找到，分支<i>part8-6</i>。
 
 ### Subscriptions on the server
 
@@ -570,7 +570,7 @@ const pubsub = new PubSub() // highlight-line
  当蓝色按钮<i>PersonAdded</i>被按下时，资源管理器开始等待一个新的人被添加。一旦添加，添加的人的信息就会出现在资源管理器的右侧。
 
 <!-- The backend code can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-7), branch <i>part8-7</i>.-->
- 后台代码可以在[GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-7)找到，分支<i>part8-7</i>。
+ 后端代码可以在[GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-7)找到，分支<i>part8-7</i>。
 
 ### Subscriptions on the client
 
@@ -805,7 +805,7 @@ const PersonForm = ({ setError }) => {
 ### n+1 problem
 
 <!-- First of all, you'll need to enable a debugging option via _mongoose_ in your backend project directory, by adding a line of code as shown below:-->
- 首先，你需要在你的后台项目目录中通过_mongoose_启用一个调试选项，添加一行代码，如下所示。
+ 首先，你需要在你的后端项目目录中通过_mongoose_启用一个调试选项，添加一行代码，如下所示。
 
 ```js
 mongoose.connect(MONGODB_URI)

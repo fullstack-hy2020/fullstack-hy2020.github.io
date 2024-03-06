@@ -575,7 +575,7 @@ The second expectation checks that the event handler is called with the right pa
 
 It's worth noting that the good old _console.log_ works as usual in the tests. For example, if you want to see what the calls stored by the mock-object look like, you can do the following
 
-````js
+```js
 test('<NoteForm /> updates parent state and calls onSubmit', async() => {
   const user = userEvent.setup()
   const createNote = vi.fn()

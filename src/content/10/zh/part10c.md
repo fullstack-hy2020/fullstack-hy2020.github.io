@@ -52,7 +52,7 @@ fetch('https://my-api.com/post-end-point', {
  注意，这些URL是编造的，不会（很可能）对你的请求发出响应。与Axios相比，Fetch API的操作水平要低一些。例如，没有任何请求或响应体的序列化和解析。这意味着你必须自己设置<i>Content-Type</i>头并使用<em>JSON.stringify</em>方法来序列化请求体。
 
 <!-- The <em>fetch</em> function returns a promise which resolves a [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) object. Note that error status codes such as 400 and 500 <i>are not rejected</i> like for example in Axios. In case of a JSON formatted response we can parse the response body using the <em>Response.json</em> method:-->
- <em>fetch</em>函数返回一个承诺，它解决了一个[Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) 对象。请注意，错误状态代码如400和500 <i>不会被拒绝</i>，例如在Axios中。如果是JSON格式的响应，我们可以使用<em>Response.json</em>方法解析响应体。
+ <em>fetch</em>函数返回一个 promise ，它解决了一个[Response](https://developer.mozilla.org/en-US/docs/Web/API/Response) 对象。请注意，错误状态代码如400和500 <i>不会被拒绝</i>，例如在Axios中。如果是JSON格式的响应，我们可以使用<em>Response.json</em>方法解析响应体。
 
 ```javascript
 const fetchMovies = async () => {
