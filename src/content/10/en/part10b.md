@@ -846,7 +846,7 @@ Validate the sign-in form so that both username and password fields are required
 
 The current implementation of the <em>TextInput</em> component should display an error message if a touched field has an error. Emphasize this error message by giving it a red color.
 
-On top of the red error message, give an invalid field a visual indication of an error by giving it a red border color. Remember that if a field has an error, the <em>TextInput</em> component sets the <em>TextInput</em> component's <em>error</em> prop as <em>true</em>. You can use the value of the <em>error</em> prop to attach conditional styles to the <em>TextInput</em> component.
+On top of the red error message, give an invalid field a visual indication of an error by giving it a red border color. 
 
 Here's what the sign-in form should roughly look like with an invalid field:
 
