@@ -20,7 +20,7 @@ The course previously used the [Jest](http://jestjs.io/) library developed by Fa
 Let's start by installing Vitest and the [jsdom](https://github.com/jsdom/jsdom) library simulating a web browser:
 
 ```
-npm install --save-vitest vitest jsdom
+npm install --save-dev vitest jsdom
 ```
 
 In addition to Vitest, we also need another testing library that will help us render components for testing purposes. The current best option for this is [react-testing-library](https://github.com/testing-library/react-testing-library) which has seen rapid growth in popularity in recent times. It is also worth extending the expressive power of the tests with the library [jest-dom](https://github.com/testing-library/jest-dom).
@@ -95,7 +95,7 @@ Notice that the <i>li</i> element has the value <i>note</i> for the [CSS](https:
 
 ### Rendering the component for tests
 
-We will write our test in the <i>src/components/Note.test.js</i> file, which is in the same directory as the component itself.
+We will write our test in the <i>src/components/Note.test.jsx</i> file, which is in the same directory as the component itself.
 
 The first test verifies that the component renders the contents of the note:
 
