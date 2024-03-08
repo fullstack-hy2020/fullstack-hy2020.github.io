@@ -49,7 +49,7 @@ lang: zh
 <i>Note</i> that this and the next two exercises are quite laborious but incredibly educational.
 
 <!-- Store the information about blog posts in the Redux store. In this exercise, it is enough that you can see the blogs in the backend and create a new blog.-->
-将博客文章的信息存储在Redux商店中。在这个练习中，只要你能在后台看到博客并创建一个新的博客就足够了。
+将博客文章的信息存储在Redux商店中。在这个练习中，只要你能在后端看到博客并创建一个新的博客就足够了。
 
 <!-- You are free to manage the state for logging in and creating new blog posts by using the internal state of React components.-->
 你可以通过使用React组件的内部状态来自由管理登录和创建新博客文章的状态。
@@ -91,7 +91,7 @@ lang: zh
  如果你刷新单个用户的页面，会出现错误信息。
 
 <!-- The cause of the issue is that, when we navigate directly to the page of an individual user, the React application has not yet received the data from the backend. One solution for fixing the problem is to use conditional rendering:-->
- 这个问题的原因是，当我们直接导航到单个用户的页面时，React应用还没有从后台收到数据。解决这个问题的一个办法是使用条件渲染。
+ 这个问题的原因是，当我们直接导航到单个用户的页面时，React应用还没有从后端收到数据。解决这个问题的一个办法是使用条件渲染。
 
 ```js
 const User = () => {

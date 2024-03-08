@@ -85,7 +85,7 @@ lang: zh
  然而，我们将利用在Heroku云服务平台上为应用创建Postgres数据库的优势，这一点在第3和第4章节中已经很熟悉。
 
 <!-- In the theory material of this section, we will be building a Postgres-enabled version from the backend of the notes-storage application, which was built in sections 3 and 4.-->
- 在本节的理论材料中，我们将从第3和第4节中建立的笔记存储应用的后台建立一个支持Postgres的版本。
+ 在本节的理论材料中，我们将从第3和第4节中建立的笔记存储应用的后端建立一个支持Postgres的版本。
 
 <!-- Now let's create a suitable directory inside the Heroku application, add a database to it and use the _heroku config_ command to get the <i>connect string</i>, which is required to connect to the database:-->
  现在让我们在Heroku应用中创建一个合适的目录，在其中添加一个数据库，并使用_heroku config_命令来获得<i>连接字符串</i>，这是连接数据库所需要的。

@@ -577,12 +577,12 @@ describe('Note app', function() {
 在格式化过程中，测试用[cy.request](https://docs.cypress.io/api/commands/request.html)向后端做HTTP请求。
 
 <!-- Unlike earlier, now the testing starts with the backend in the same state every time. The backend will contain one user and no notes.-->
- 与先前不同，现在测试开始时，后端每次都处于相同的状态。后台将包含一个用户，没有注释。
+ 与先前不同，现在测试开始时，后端每次都处于相同的状态。后端将包含一个用户，没有注释。
 
 <!-- Let's add one more test for checking that we can change the importance of notes.-->
  让我们再增加一个测试，检查我们是否可以改变笔记的重要性。
 <!-- First we change the frontend so that a new note is unimportant by default, or the <i>important</i> field is <i>false</i>:-->
- 首先我们改变前台，使新的笔记默认为不重要，或者<i>重要</i>字段为<i>false</i>。
+ 首先我们改变前端，使新的笔记默认为不重要，或者<i>重要</i>字段为<i>false</i>。
 
 ```js
 const NoteForm = ({ createNote }) => {
@@ -1145,7 +1145,7 @@ cy.contains('logout').click()
 Cypress命令总是返回_undefined_，所以上述代码中的_button.click()_会导致一个错误。试图启动调试器不会在执行命令之间停止代码，而是在任何命令被执行之前。
 
 <!-- Cypress commands are <i>like promises</i>, so if we want to access their return values, we have to do it using the [then](https://docs.cypress.io/api/commands/then.html) command.-->
-Cypress命令<i>类似于承诺</i>，所以如果我们想访问它们的返回值，我们必须使用[then](https://docs.cypress.io/api/commands/then.html)命令来完成。
+Cypress命令<i>类似于 promise </i>，所以如果我们想访问它们的返回值，我们必须使用[then](https://docs.cypress.io/api/commands/then.html)命令来完成。
 <!-- For example, the following test would print the number of buttons in the application, and click the first button:-->
  例如，下面的测试将打印应用中的按钮数量，并点击第一个按钮。
 

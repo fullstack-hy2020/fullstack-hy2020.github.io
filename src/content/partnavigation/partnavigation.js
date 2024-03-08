@@ -189,7 +189,7 @@ module.exports = {
       d: '密钥认证',
     },
     '5': {
-      a: '完成前台的登录功能',
+      a: '完成前端的登录功能',
       b: 'props.children 与 proptypes',
       c: '测试React 应用',
       d: '端到端测试',

@@ -96,11 +96,10 @@ const errorHandler = (error, request, response, next) => {
 <!-- We notice that the backend has now a problem: validations are not done when editing a note.
 The [documentation](https://mongoosejs.com/docs/validation.html#update-validators) addresses the issue by explaining that validations are not run by default when <i>findOneAndUpdate</i> and related methods are executed. -->
 我们注意到后端现在有一个问题：在编辑笔记时没有进行验证。
-
-这个问题被解决了（[update-validators 文档](https://mongoosejs.com/docs/validation.html#update-validators)）：通过解释在执行<i>findOneAndUpdate</i>和相关方法时，默认不会运行验证。
+这个问题可以解决，[update-validators 文档](https://mongoosejs.com/docs/validation.html#update-validators)解释说，在执行<i>findOneAndUpdate</i>和相关方法时，默认不会运行验证。
 
 <!-- The fix is easy. Let us also reformulate the route code a bit: -->
-修复这个问题很简单。让我们也稍微改写一下路由代码：
+但是要修复这个问题很简单。让我们也稍微改写一下路由代码：
 
 ```js
 app.put('/api/notes/:id', (request, response, next) => {
@@ -243,13 +242,13 @@ Generate a new "full stack" version of the application by creating a new product
 ### Lint
 
 <!-- Before we move on to the next part, we will take a look at an important tool called [lint](<https://en.wikipedia.org/wiki/Lint_(software)>). Wikipedia says the following about lint: -->
-在我们进入下一部分之前，我们将看一下一个重要的工具，叫做[lint](<https://en.wikipedia.org/wiki/Lint_(software)>). 维基百科对lint的描述如下：
+在我们进入下一部分之前，我们介绍一个重要的工具，叫做[lint](<https://en.wikipedia.org/wiki/Lint_(software)>)。维基百科对lint的描述如下：
 
 <!-- > <i>Generically, lint or a linter is any tool that detects and flags errors in programming languages, including stylistic errors. The term lint-like behavior is sometimes applied to the process of flagging suspicious language usage. Lint-like tools generally perform static analysis of source code.</i> -->
 > <i>一般来说，lint或者linter是任何检测和标记编程语言中错误的工具，包括样式错误。术语 _lint-like behavior_ 有时用于标记可疑语言使用的过程。Lint类 的工具通常对源代码进行静态分析。</i>
 
 <!-- In compiled statically typed languages like Java, IDEs like NetBeans can point out errors in the code, even ones that are more than just compile errors. Additional tools for performing [static analysis](https://en.wikipedia.org/wiki/Static_program_analysis) like [checkstyle](https://checkstyle.sourceforge.io), can be used for expanding the capabilities of the IDE to also point out problems related to style, like indentation. -->
-在编译的静态类型语言如Java中，像NetBeans这样的IDE可以指出代码中的错误，甚至是编译错误之外的错误。像[checkstyle](https://checkstyle.sourceforge.io)这样的用于执行[静态分析](https://en.wikipedia.org/wiki/Static_program_analysis)的额外工具，可以用来扩展IDE的能力，也可以指出与样式相关的问题，如缩进。
+在编译的静态类型语言如Java中，像NetBeans这样的IDE可以指出代码中的错误，甚至是编译错误之外的错误。像[checkstyle](https://checkstyle.sourceforge.io)这样的用于执行[静态分析](https://en.wikipedia.org/wiki/Static_program_analysis)的附加工具，可以用来扩展IDE的能力，也可以指出与样式相关的问题，如缩进。
 
 <!-- In the JavaScript universe, the current leading tool for static analysis (aka "linting") is [ESlint](https://eslint.org/). -->
 在JavaScript领域，目前主导的静态分析（又名"linting"）工具是[ESlint](https://eslint.org/)。

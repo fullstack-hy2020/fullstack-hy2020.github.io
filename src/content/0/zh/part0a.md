@@ -396,7 +396,7 @@ lang: zh
 ### Interview promise
 
 <!-- Our collaborators, [Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) and [Smartly.io](https://www.smartly.io/), have given the <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (14 + 10). The parts 12 and 13 that were released during 2021 are not required if you finish the project by 15.3.2022.-->
-我们的合作者，[Houston Inc.](https://houston-inc.com/)，[Terveystalo](https://www.terveystalo.com/en/)和[Smartly.io](https://www.smartly.io/)，已经给了每个完成课程和项目工作并获得最高学分（14+10）的人一个工作面试的<i>承诺</i>。如果你在2022年3月15日之前完成项目，那么2021年发布的第12和13章节就不需要了。
+我们的合作者，[Houston Inc.](https://houston-inc.com/)，[Terveystalo](https://www.terveystalo.com/en/)和[Smartly.io](https://www.smartly.io/)，已经给了每个完成课程和项目工作并获得最高学分（14+10）的人一个工作面试的<i> promise </i>。如果你在2022年3月15日之前完成项目，那么2021年发布的第12和13章节就不需要了。
 
 <!-- This means that the student can, if they so choose, sign up for a job interview with a collaborator who has given the promise. The teacher of the course, Matti Luukkainen, will send instructions to the student after the courses have been completed with maximum credits.-->
 这意味着，如果学生选择，报名参加合作方的工作面试。课程的老师Matti Luukkainen会给课程完成后并获得最大的学分的学生发送指引。

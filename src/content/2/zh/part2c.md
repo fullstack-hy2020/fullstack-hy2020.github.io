@@ -164,7 +164,7 @@ setTimeout(() => {
  让我们回到从服务器获取数据的话题上来。
 
 <!-- We could use the previously mentioned promise based function [fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch) to pull the data from the server. Fetch is a great tool. It is standardized and supported by all modern browsers (excluding IE).-->
-我们可以使用之前提到的基于承诺的函数[fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch)来从服务器获取数据。Fetch是一个伟大的工具。它是标准化的，被所有现代浏览器支持（不包括IE）。
+我们可以使用之前提到的基于 promise 的函数[fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch)来从服务器获取数据。Fetch是一个伟大的工具。它是标准化的，被所有现代浏览器支持（不包括IE）。
 
 <!-- That being said, we will be using the [axios](https://github.com/axios/axios) library instead for communication between the browser and server. It functions like fetch, but is somewhat more pleasant to use. Another good reason to use axios is our getting familiar with adding external libraries, so-called <i>npm packages</i>, to React projects.-->
  也就是说，我们将使用[axios](https://github.com/axios/axios)库来代替浏览器和服务器之间的通信。它的功能类似于fetch，但使用起来更顺手一些。使用axios的另一个很好的理由是我们要熟悉在React项目中添加外部库，即所谓的npm包</i>。
@@ -342,29 +342,29 @@ console.log(promise2)
  **注意：**当文件<i>index.js</i>的内容发生变化时，React并不总是自动注意到这一点，所以你可能需要刷新浏览器来看到你的变化!一个简单的解决方法是在项目的根目录下创建一个名为<i>.env</i>的文件，并添加这一行<i>FAST_REFRESH=false</i>，使React自动注意到变化。重新启动应用以使应用的变化生效。
 
 <!-- Axios' method _get_ returns a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises).-->
- 'Axios' 方法 _get_ 返回一个[承诺](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises)。
+ 'Axios' 方法 _get_ 返回一个[ promise ](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises)。
 
 <!-- The documentation on Mozilla's site states the following about promises:-->
- Mozilla网站上的文档对承诺有如下说明。
+ Mozilla网站上的文档对 promise 有如下说明。
 
 <!-- > <i>A Promise is an object representing the eventual completion or failure of an asynchronous operation.</i>-->
  > <i>A Promise是一个代表异步操作最终完成或失败的对象。</i>
 
 <!-- In other words, a promise is an object that represents an asynchronous operation. A promise can have three distinct states:-->
- 换句话说，一个承诺是一个代表异步操作的对象。一个承诺可以有三种不同的状态。
+ 换句话说，一个 promise 是一个代表异步操作的对象。一个 promise 可以有三种不同的状态。
 
 <!-- 1. The promise is <i>pending</i>: It means that the final value (one of the following two) is not available yet.-->
  1.答应是<i>pending</i>：这意味着最终的值（以下两个中的一个）还不能用。
 <!-- 2. The promise is <i>fulfilled</i>: It means that the operation has been completed and the final value is available, which generally is a successful operation. This state is sometimes also called <i>resolved</i>.-->
- 2.承诺是<i>fulfilled</i>：它意味着操作已经完成，最终值可用，一般来说是一个成功的操作。这种状态有时也被称为<i>resolved</i>。
+ 2. promise 是<i>fulfilled</i>：它意味着操作已经完成，最终值可用，一般来说是一个成功的操作。这种状态有时也被称为<i>resolved</i>。
 <!-- 3. The promise is <i>rejected</i>: It means that an error prevented the final value from being determined, which generally represents a failed operation.-->
- 3.承诺被<i>拒绝</i>：这意味着一个错误阻止了最终值的确定，这一般代表一个失败的操作。
+ 3. promise 被<i>拒绝</i>：这意味着一个错误阻止了最终值的确定，这一般代表一个失败的操作。
 
 <!-- The first promise in our example is <i>fulfilled</i>, representing a successful _axios.get('http://localhost:3001/notes')_ request. The second one, however, is <i>rejected</i>, and the console tells us the reason. It looks like we were trying to make an HTTP GET request to a non-existent address.-->
- 我们例子中的第一个承诺是<i>fulfilled</i>，代表一个成功的_axios.get('http://localhost:3001/notes')_请求。然而，第二个承诺是<i>拒绝的</i>，并且控制台告诉我们原因。看起来我们试图向一个不存在的地址发出HTTP GET请求。
+ 我们例子中的第一个 promise 是<i>fulfilled</i>，代表一个成功的_axios.get('http://localhost:3001/notes')_请求。然而，第二个 promise 是<i>拒绝的</i>，并且控制台告诉我们原因。看起来我们试图向一个不存在的地址发出HTTP GET请求。
 
 <!-- If, and when, we want to access the result of the operation represented by the promise, we must register an event handler to the promise. This is achieved using the method <em>then</em>:-->
- 如果，以及何时，我们想访问承诺所代表的操作的结果，我们必须为承诺注册一个事件处理程序。这可以通过<em>then</em>方法实现。
+ 如果，以及何时，我们想访问 promise 所代表的操作的结果，我们必须为 promise 注册一个事件处理程序。这可以通过<em>then</em>方法实现。
 
 ```js
 const promise = axios.get('http://localhost:3001/notes')
@@ -382,7 +382,7 @@ promise.then(response => {
  JavaScript运行环境调用由<em>then</em>方法注册的回调函数，为其提供一个<em>response</em>对象作为参数。<em>response</em>对象包含与HTTP GET请求的响应相关的所有基本数据，其中包括返回的<i>数据</i>、<i>状态代码</i>和<i>头信息</i>。
 
 <!-- Storing the promise object in a variable is generally unnecessary, and it's instead common to chain the <em>then</em> method call to the axios method call, so that it follows it directly:-->
- 将承诺对象存储在一个变量中通常是不必要的，而通常是将<em>then</em>方法调用链到axios方法调用中，这样它就直接跟随它。
+ 将 promise 对象存储在一个变量中通常是不必要的，而通常是将<em>then</em>方法调用链到axios方法调用中，这样它就直接跟随它。
 
 ```js
 axios.get('http://localhost:3001/notes').then(response => {
@@ -529,7 +529,7 @@ response => {
 ```
 
 <!-- When data arrives from the server, the JavaScript runtime calls the function registered as the event handler, which prints <i>promise fulfilled</i> to the console and stores the notes received from the server into the state using the function <em>setNotes(response.data)</em>.-->
-当数据从服务器到达时，JavaScript运行时调用注册为事件处理程序的函数，该函数将<i>承诺兑现</i>打印到控制台，并使用函数<em>setNotes(response.data)</em>将从服务器收到的注释存储到状态中。
+当数据从服务器到达时，JavaScript运行时调用注册为事件处理程序的函数，该函数将<i> promise 兑现</i>打印到控制台，并使用函数<em>setNotes(response.data)</em>将从服务器收到的注释存储到状态中。
 
 <!-- As always, a call to a state-updating function triggers the re-rendering of the component. As a result, <i>render 3 notes</i> is printed to the console, and the notes fetched from the server are rendered to the screen.-->
  一如既往，对状态更新函数的调用会触发组件的重新渲染。结果，<i>render 3 notes</i>被打印到控制台，而从服务器上获取的笔记被渲染到屏幕上。
@@ -601,7 +601,7 @@ useEffect(() => {
 ```
 
 <!-- A reference to an event handler function is assigned to the variable <em>eventHandler</em>. The promise returned by the <em>get</em> method of Axios is stored in the variable <em>promise</em>. The registration of the callback happens by giving the <em>eventHandler</em> variable, referring to the event-handler function, as a parameter to the <em>then</em> method of the promise. It isn't usually necessary to assign functions and promises to variables, and a more compact way of representing things, as seen further above, is sufficient.-->
- 一个事件处理函数的引用被分配到变量<em>eventHandler</em>。由Axios的<em>get</em>方法返回的承诺被存储在变量<em>promise</em>中。回调的注册是通过给<em>eventHandler</em>变量，指的是事件处理函数，作为承诺的<em>then</em>方法的一个参数。通常没有必要把函数和承诺分配给变量，用更紧凑的方式来表示事情，如上面进一步看到的，就足够了。
+ 一个事件处理函数的引用被分配到变量<em>eventHandler</em>。由Axios的<em>get</em>方法返回的 promise 被存储在变量<em>promise</em>中。回调的注册是通过给<em>eventHandler</em>变量，指的是事件处理函数，作为 promise 的<em>then</em>方法的一个参数。通常没有必要把函数和 promise 分配给变量，用更紧凑的方式来表示事情，如上面进一步看到的，就足够了。
 
 ```js
 useEffect(() => {
