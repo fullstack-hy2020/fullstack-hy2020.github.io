@@ -513,7 +513,7 @@ describe('Note app', () => {
 
 ```
 
-Playwright suorittaa testit siinä järjestyksessä, missä ne ovat testikoodissa. Eli ensin suoritetaan testi <i>user can log in</i>, missä käyttäjä kirjautuu sovellukseen, ja tämän jälkeen suoritetaan testi <i>a new note can be created</i>, jonka <i>beforeEach</i>-lohkossa myös suoritetaan kirjautuminen. Miksi näin tehdään, eikö käyttäjä jo ole kirjaantuneena aiemman testin ansiosta? Ei, sillä <i>jokaisen</i> testin suoritus alkaa selaimen kannalta "nollatilanteesta", kaikki edellisten testien selaimen tilaan tekemät muutokset nollaantuvat.
+Since we have prevented the tests from running in parallel, Playwright runs the tests in the order they appear in the test code. That is, first the test <i>user can log in</i>, where the user logs into the application, is performed. After this the test <i>a new note can be created</i> gets executed, which also does a log in, in the <i>beforeEach</i> block. Why is this done, isn't the user already logged in thanks to the previous test? No, because the execution of <i>each</i> test starts from the browser's "zero state", all changes made to the browser's state by the previous tests are reset.
 
 ### Controlling the state of the database
 
