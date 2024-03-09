@@ -8,12 +8,12 @@ lang: zh
 <div class="content">
 
 <!-- Next let's connect the frontend we made in [part 2](/en/part2) to our own backend.-->
- 接下来让我们把我们在[第二章节](/en/part2)中制作的前端连接到我们自己的后端。
+ 接下来让我们把我们在[第二章节](/zh/part2)中制作的前端连接到我们自己的后端。
 
 <!-- In the previous part, the frontend could ask for the list of notes from the json-server we had as a backend, from the address http://localhost:3001/notes.-->
- 在上一部分中，前端可以从我们作为后端的json-server中询问笔记列表，地址是http://localhost:3001/notes。
+ 在上一部分中，前端可以从我们作为后端的json-server中询问笔记列表，地址是http://localhost:3001/notes 。
 <!-- Our backend has a slightly different url structure now, as the notes can be found at http://localhost:3001/api/notes. Let's change the attribute __baseUrl__ in the <i>src/services/notes.js</i> like so:-->
- 我们的后端现在有一个稍微不同的url结构，因为笔记可以在http://localhost:3001/api/notes。让我们改变<i>src/services/notes.js</i>中的属性__baseUrl__，像这样。
+ 我们的后端现在有一个稍微不同的url结构，因为笔记可以在http://localhost:3001/api/notes 。让我们改变<i>src/services/notes.js</i>中的属性__baseUrl__，像这样。
 
 ```js
 import axios from 'axios'
@@ -44,7 +44,7 @@ export default { getAll, create, update }
 
 <!-- Frontendin tekemä GET-pyyntö osoitteeseen <http://localhost:3001/api/notes> ei jostain syystä toimi: -->
 <!-- Now frontend's GET request to <http://localhost:3001/api/notes> does not work for some reason:-->
- 现在 frontend's GET request to <http://localhost:3001/api/notes> 由于某些原因不能工作。
+ 现在到 <http://localhost:3001/api/notes> 前端的GET请求由于某些原因不能工作。
 
 ![](../../images/3/3ae.png)
 
@@ -91,7 +91,7 @@ app.use(cors())
 ```
 
 <!-- And the frontend works! However, the functionality for changing the importance of notes has not yet been implemented to the backend.-->
- 前台就可以工作了!然而，改变笔记重要性的功能还没有在后端实现。
+ 前端就可以工作了!然而，改变笔记重要性的功能还没有在后端实现。
 
 <!-- You can read more about CORS from [Mozillas page](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).-->
  你可以从[Mozillas页面](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)上阅读更多关于CORS的信息。
@@ -140,7 +140,7 @@ Heroku根据环境变量来配置应用的端口。
 node_modules
 ```
 <!-- Create Heroku account in https://devcenter.heroku.com/-->
-在https://devcenter.heroku.com/，创建Heroku账户
+在 https://devcenter.heroku.com/ ，创建Heroku账户
 <!-- Install Heroku package using the command: npm install -g heroku-->
  使用命令安装Heroku包：npm install -g heroku
 <!-- Create a Heroku application with the command <i>heroku create</i>, commit your code to the repository and move it to Heroku with command <i>git push heroku main</i>.-->
@@ -161,7 +161,7 @@ node_modules
  > **NB** 如果你从一个git仓库部署，而你的代码不在主分支上（例如，如果你正在改变上一课的[notes repo](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2)），你将需要运行_git push heroku HEAD:master_。如果你已经做了推送到heroku，你可能需要运行_git push heroku HEAD:main --force_。
 
 <!-- The frontend also works with the backend on Heroku. You can check this by changing the backend's address on the frontend to be the backend's address in Heroku instead of <i>http://localhost:3001</i>.-->
- 前台也可以和Heroku的后台一起工作。你可以通过把前端的后端地址改为Heroku中的后端地址，而不是<i>http://localhost:3001</i>来检查。
+ 前端也可以和Heroku的后端一起工作。你可以通过把前端的后端地址改为Heroku中的后端地址，而不是<i>http://localhost:3001</i>来检查。
 
 <!-- The next question is, how do we deploy the frontend to the Internet? We have multiple options. Let's go through one of them next.-->
  接下来的问题是，我们如何将前端部署到互联网上？我们有多种选择。接下来让我们来看看其中的一个。
@@ -178,7 +178,7 @@ node_modules
  用<i>create-react-app</i>创建的应用的生产构建可以用[npm run build](https://github.com/facebookincubator/create-react-app#npm-run-build-or-yarn-build)命令创建。
 
 <!-- **NOTE:** at the time of writing (20th January 2022) create-react-app had a bug that causes the following error _TypeError: MiniCssExtractPlugin is not a constructor_-->
- **注意：**在撰写本文时（2022年1月20日）create-react-app有一个错误，导致以下错误_TypeError。MiniCssExtractPlugin不是一个构造函数。
+ **注意：**在撰写本文时（2022年1月20日）create-react-app有一个错误，导致以下错误 _TypeError: MiniCssExtractPlugin不是一个构造函数_ 。
 
 <!-- A possible fix is found from [here](https://github.com/facebook/create-react-app/issues/11930). Add the following to the file <i>package.json</i>-->
  从[这里](https://github.com/facebook/create-react-app/issues/11930)可以找到一个可能的修正。在文件<i>package.json</i>中添加以下内容
@@ -224,7 +224,7 @@ npm install
  部署前端的一个选择是将生产构建（<i>build</i>目录）复制到后端仓库的根目录，并配置后端以显示前端的<i>主页</i>（文件<i>build/index.html</i>）作为其主页面。
 
 <!-- We begin by copying the production build of the frontend to the root of the backend. With a Mac or Linux computer, the copying can be done from the frontend directory with the command-->
- 我们首先把前台的生产构建复制到后台的根目录下。在Mac或Linux电脑上，复制可以在前端目录下用命令完成
+ 我们首先把前端的生产构建复制到后端的根目录下。在Mac或Linux电脑上，复制可以在前端目录下用命令完成
 
 ```bash
 cp -r build ../notes-backend
@@ -234,7 +234,7 @@ cp -r build ../notes-backend
  如果你使用的是Windows电脑，你可以用[copy](https://www.windows-commandline.com/windows-copy-command-syntax-examples/)或[xcopy](https://www.windows-commandline.com/xcopy-command-syntax-examples/)命令代替。否则，只需进行复制和粘贴。
 
 <!-- The backend directory should now look as follows:-->
- 后台目录现在应该是这样的。
+ 后端目录现在应该是这样的。
 
 ![](../../images/3/27ea.png)
 
@@ -378,7 +378,7 @@ npm config set script-shell "C:\\Program Files\\git\\bin\\bash.exe"
 ### Proxy
 
 <!-- Changes on the frontend have caused it to no longer work in development mode (when started with command _npm start_), as the connection to the backend does not work.-->
- 前台的变化导致它在开发模式下不再工作（当用_npm start_命令启动时），因为与后台的连接不起作用。
+ 前端的变化导致它在开发模式下不再工作（当用_npm start_命令启动时），因为与后端的连接不起作用。
 
 ![](../../images/3/32ea.png)
 
@@ -390,7 +390,7 @@ const baseUrl = '/api/notes'
 ```
 
 <!-- Because in development mode the frontend is at the address <i>localhost:3000</i>, the requests to the backend go to the wrong address <i>localhost:3000/api/notes</i>. The backend is at <i>localhost:3001</i>.-->
- 因为在开发模式下，前端的地址是<i>localhost:3000</i>，对后端的请求会进入错误的地址<i>localhost:3000/api/notes</i>。后台是在<i>localhost:3001</i>。
+ 因为在开发模式下，前端的地址是<i>localhost:3000</i>，对后端的请求会进入错误的地址<i>localhost:3000/api/notes</i>。后端是在<i>localhost:3001</i>。
 
 <!-- If the project was created with create-react-app, this problem is easy to solve. It is enough to add the following declaration to the <i>package.json</i> file of the frontend repository.-->
  如果该项目是用create-react-app创建的，这个问题很容易解决。只需在前端仓库的<i>package.json</i>文件中添加以下声明。
@@ -423,7 +423,7 @@ const baseUrl = '/api/notes'
  在某些情况下，将前端代码部署为自己的应用可能是明智的。对于用create-react-app创建的应用，这是[直接的](https://github.com/mars/create-react-app-buildpack)。
 
 <!-- Current code of the backend can be found on [Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3), in the branch <i>part3-3</i>. The changes in frontend code are in <i>part3-1</i> branch of the [frontend repository](https://github.com/fullstack-hy2020/part2-notes/tree/part3-1).-->
- 后台的当前代码可以在[Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3)的分支<i>part3-3</i>中找到。前台代码的变化在[frontend repository](https://github.com/fullstack-hy2020/part2-notes/tree/part3-1)的<i>part3-1</i>分支中。
+ 后端的当前代码可以在[Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3)的分支<i>part3-3</i>中找到。前端代码的变化在[frontend repository](https://github.com/fullstack-hy2020/part2-notes/tree/part3-1)的<i>part3-1</i>分支中。
 
 </div>
 
@@ -440,7 +440,7 @@ const baseUrl = '/api/notes'
  使后端与上一部分练习中的电话簿前端一起工作。先不要实现对电话号码进行修改的功能，这将在练习3.17中实现。
 
 <!-- You will probably have to do some small changes to the frontend, at least to the URLs for the backend. Remember to keep the developer console open in your browser. If some HTTP requests fail, you should check from the <i>Network</i>-tab what is going on. Keep an eye on the backend's console as well. If you did not do the previous exercise, it is worth it to print the request data or <i>request.body</i> to the console in the event handler responsible for POST requests.-->
- 你可能需要对前台做一些小的改动，至少要对后台的URL做一些改动。记得在你的浏览器中保持开放的开发者控制台。如果一些HTTP请求失败了，你应该从<i>Network</i>-tab中检查发生了什么。也要注意后台的控制台。如果你没有做前面的练习，在负责POST请求的事件处理程序中把请求数据或<i>request.body</i>打印到控制台是值得的。
+ 你可能需要对前端做一些小的改动，至少要对后端的URL做一些改动。记得在你的浏览器中保持开放的开发者控制台。如果一些HTTP请求失败了，你应该从<i>Network</i>-tab中检查发生了什么。也要注意后端的控制台。如果你没有做前面的练习，在负责POST请求的事件处理程序中把请求数据或<i>request.body</i>打印到控制台是值得的。
 
 #### 3.10 phonebook backend step10
 

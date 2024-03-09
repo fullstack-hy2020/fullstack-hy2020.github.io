@@ -11,6 +11,8 @@ Jatketaan [osassa 3](/osa3) tehdyn muistiinpanosovelluksen backendin kehittämis
 
 ### Sovelluksen rakenne
 
+**HUOM**: Kurssimateriaalia tehtäessä on ollut käytössä Node.js:n versio <i>v20.11.0</i>. Suosittelen, että omasi on vähintään yhtä tuore (ks. komentoriviltä _node -v_).
+
 Ennen osan ensimmäistä isoa teemaa eli testaamista muutetaan sovelluksen rakennetta noudattamaan paremmin Noden yleisiä konventioita.
 
 Seuraavassa läpikäytävien muutosten jälkeen sovelluksemme hakemistorakenne näyttää seuraavalta:
@@ -323,7 +325,7 @@ Express-sovelluksien rakenteelle eli hakemistojen ja tiedostojen nimeämiselle e
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-1) branchissa <i>part4-1</i>.
 
-Jos kloonaat projektin itsellesi, suorita komento _npm install_ ennen käynnistämistä eli komentoa _npm start_.
+Jos kloonaat projektin itsellesi, suorita komento _npm install_ ennen käynnistämistä eli komentoa _npm run dev_.
 
 ### Huomio eksporteista
 
@@ -394,6 +396,8 @@ Eli eksportoitava asia (tässä tilanteessa router-olio) sijoitetaan muuttujaan 
 <div class="tasks">
 
 ### Tehtävät 4.1.-4.2.
+
+**HUOM**: Kurssimateriaalia tehtäessä on ollut käytössä Node.js:n versio <i>v20.11.0</i>. Suosittelen, että omasi on vähintään yhtä tuore (ks. komentoriviltä _node -v_).
 
 Rakennamme tämän osan tehtävissä <i>blogilistasovellusta</i>, jonka avulla käyttäjien on mahdollista tallettaa tietoja Internetistä löytämistään mielenkiintoisista blogeista. Kustakin blogista talletetaan sen kirjoittaja (author), aihe (title), url sekä blogilistasovelluksen käyttäjien antamien äänien määrä.
 

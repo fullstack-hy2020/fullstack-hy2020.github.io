@@ -464,7 +464,7 @@ Note que a branch <i>main</i> do repositório contém o código para uma versão
 
 ![captura de tela da branch do GitHub](../../images/2/2e.png)
 
-Caso deseje clonar o projeto, execute o comando _npm install_ antes de iniciar a aplicação com _npm start_.
+Caso deseje clonar o projeto, execute o comando _npm install_ antes de iniciar a aplicação com _npm run dev_.
 
 ### Quando a Aplicação Quebra
 

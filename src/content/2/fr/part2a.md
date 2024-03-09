@@ -469,7 +469,7 @@ Notez que la branche <i>main</i> du référentiel contient le code d'une version
 
 ![](../../images/2/2e.png)
 
-Si vous clonez le projet, exécutez la commande _npm install_ avant de démarrer l'application avec _npm start_.
+Si vous clonez le projet, exécutez la commande _npm install_ avant de démarrer l'application avec _npm run dev_.
 
 ### Lorsque l'application crashe
 

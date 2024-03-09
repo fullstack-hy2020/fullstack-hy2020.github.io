@@ -398,7 +398,7 @@ Kaikki operaation suorituksen jälkeinen koodi kirjoitetaan tapahtumankäsitteli
 ```js
 Note.find({})
   .then(notes => {
-    return notes[0].remove()
+    return notes[0].deleteOne()
   })
   .then(response => {
     console.log('the first note is removed')
@@ -424,7 +424,7 @@ Ylempänä oleva monimutkaisempi esimerkki suoritettaisiin awaitin avulla seuraa
 
 ```js
 const notes = await Note.find({})
-const response = await notes[0].remove()
+const response = await notes[0].deleteOne()
 
 console.log('the first note is removed')
 ```
@@ -442,7 +442,7 @@ const main = async () => { // highlight-line
   const notes = await Note.find({})
   console.log('operaatio palautti seuraavat muistiinpanot', notes)
 
-  const response = await notes[0].remove()
+  const response = await notes[0].deleteOne()
   console.log('the first note is removed')
 }
 
@@ -1014,7 +1014,7 @@ Huomaa, että joudut tekemään koodiin [materiaalin tapaan](/osa4/backendin_tes
 
 #### 4.9: blogilistan testit, step2
 
-Tee testi, joka varmistaa että palautettujen blogien identifioivan kentän tulee olla nimeltään <i>id</i>. Oletusarvoisestihan tietokantaan talletettujen olioiden tunnistekenttä on <i>_id</i>.
+Tee testi, joka varmistaa että palautettujen blogien identifioivan kentän tulee olla nimeltään <i>id</i>. Oletusarvoisestihan tietokantaan talletettujen olioiden tunnistekenttä on <i>_id</i>. 
 
 Muuta koodia siten, että testi menee läpi. Osassa 3 käsitelty [toJSON](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan#tietokantaa-kayttava-backend) on sopiva paikka parametrin <i>id</i> määrittelyyn. 
 

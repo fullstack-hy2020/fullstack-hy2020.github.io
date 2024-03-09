@@ -820,7 +820,7 @@ app.delete('/api/notes/:id', (request, response) => {
  在这种情况下，使用 Postman 是非常容易的。只需定义网址，然后选择正确的请求类型（DELETE）。
 
 <!-- The backend server appears to respond correctly. By making an HTTP GET request to <http://localhost:3001/api/notes> we see that the note with the id 2 is no longer in the list, which indicates that the deletion was successful.-->
- 后台服务器似乎反应正确。通过对 <http://localhost:3001/api/notes> 的 HTTP GET 请求，我们看到 id 为 2 的笔记已经不在列表中了，这表明删除成功了。
+ 后端服务器似乎反应正确。通过对 <http://localhost:3001/api/notes> 的 HTTP GET 请求，我们看到 id 为 2 的笔记已经不在列表中了，这表明删除成功了。
 
 <!-- Because the notes in the application are only saved to memory, the list of notes will return to its original state when we restart the application.-->
  因为应用中的笔记只保存在内存中，所以当我们重新启动应用时，笔记的列表将恢复到原来的状态。
@@ -834,7 +834,7 @@ app.delete('/api/notes/:id', (request, response) => {
  一旦插件安装完毕，使用它就非常简单。我们在应用的根部建立一个名为 <i>requests</i> 的目录。我们将所有的 REST 客户端请求保存在该目录中，作为以 <i>.rest</i> 扩展名结尾的文件。
 
 <!-- Let's create a new <i>get\_all\_notes.rest</i> file and define the request that fetches all notes.-->
- 让我们创建一个新的 <i>get_all\_notes.rest</i> 文件并定义获取所有笔记的请求。
+ 让我们创建一个新的 <i>get\_all\_notes.rest</i> 文件并定义获取所有笔记的请求。
 
 ![](../../images/3/12ea.png)
 
@@ -922,10 +922,10 @@ app.post('/api/notes', (request, response) => {
 ![](../../images/3/19.png)
 
 <!-- The server will not be able to parse the data correctly without the correct value in the header. It won't even try to guess the format of the data, since there's a [massive amount](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types) of potential <i>Content-Types</i>.-->
-如果头中没有正确的值，服务器将不能正确地解析数据。它甚至不会尝试猜测数据的格式，因为有 [大量](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types) 潜在的 <i>Content-Typees</i>。
+如果头中没有正确的值，服务器将不能正确地解析数据。它甚至不会尝试猜测数据的格式，因为有 [大量](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types) 潜在的 <i>Content-Types</i>。
 
 <!-- If you are using VS Code, then you should install the REST client from the previous chapter <i>now, if you haven't already</i>. The POST request can be sent with the REST client like this:-->
- 如果你使用的是 VS Code，那么你应该安装上一章的 REST 客户端 <i>，如果你还没有的话 </i>。可以用 REST 客户端发送 POST 请求，就像这样。
+ 如果你使用的是 VS Code，那么你应该安装上一章中的 REST 客户端，<i> 如果你还没有安装的话 </i>。POST请求可以像这样使用REST客户端发送：
 
 ![](../../images/3/20eb.png)
 
@@ -1130,7 +1130,7 @@ Math.max(...notes.map(n => n.id))
 
 
 <!-- Data:-->
-数据。
+数据:
 
 ```js
 [

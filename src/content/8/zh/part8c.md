@@ -116,7 +116,7 @@ const resolvers = {
  这些变化是非常直接的。然而，有几个值得注意的地方。我们记得，在Mongo中，一个对象的识别字段被称为<i>_id</i>，我们以前必须自己把字段的名称解析为<i>id</i>。现在GraphQL可以自动做到这一点。
 
 <!-- Another noteworthy thing is that the resolver functions now return a <i>promise</i>, when they previously returned normal objects. When a resolver returns a promise, Apollo server [sends back](https://www.apollographql.com/docs/apollo-server/data/data/#resolver-results) the value which the promise resolves to.-->
- 另一件值得注意的事情是，解析器函数现在会返回一个<i>承诺</i>，而以前它们会返回普通的对象。当一个解析器返回一个承诺时，Apollo服务器[送回](https://www.apollographql.com/docs/apollo-server/data/data/#resolver-results)承诺所解析的值。
+ 另一件值得注意的事情是，解析器函数现在会返回一个<i> promise </i>，而以前它们会返回普通的对象。当一个解析器返回一个 promise 时，Apollo服务器[送回](https://www.apollographql.com/docs/apollo-server/data/data/#resolver-results) promise 所解析的值。
 
 <!-- For example, if the following resolver function is executed,-->
  例如，如果执行了下面的解析器函数。
@@ -128,7 +128,7 @@ allPersons: async (root, args) => {
 ```
 
 <!-- Apollo server waits for the promise to resolve, and returns the result. So Apollo works roughly like this:-->
- Apollo服务器等待承诺的解析，并返回结果。所以Apollo的工作原理大致是这样的。
+ Apollo服务器等待 promise 的解析，并返回结果。所以Apollo的工作原理大致是这样的。
 
 ```js
 Person.find({}).then( result => {
@@ -202,7 +202,7 @@ Mutation: {
 ```
 
 <!-- The code of the backend can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-4), branch <i>part8-4</i>.-->
- 后台的代码可以在[Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-4)找到，分支<i>part8-4</i>。
+ 后端的代码可以在[Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-4)找到，分支<i>part8-4</i>。
 
 ### User and log in
 
@@ -469,7 +469,7 @@ query {
 ```
 
 <!-- The code of the backend can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-5) branch <i>part8-5</i>.-->
- 后台的代码可以在[Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-5)分支<i>part8-5</i>找到。
+ 后端的代码可以在[Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-5)分支<i>part8-5</i>找到。
 
 </div>
 
@@ -478,7 +478,7 @@ query {
 ### Exercises 8.13.-8.16.
 
 <!-- The following exercises are quite likely to break your frontend. Do not worry about it yet; the frontend shall be fixed and expanded in the next chapter.-->
- 下面的练习很可能会破坏你的前台。先不要担心，前端将在下一章进行修复和扩展。
+ 下面的练习很可能会破坏你的前端。先不要担心，前端将在下一章进行修复和扩展。
 #### 8.13: Database, part 1
 
 <!-- Change the library application so that it saves the data to a database. You can find the <i>mongoose schema</i> for books and authors from [here](https://github.com/fullstack-hy/misc/blob/main/library-schema.md).-->
@@ -587,6 +587,6 @@ type Mutation {
  只有当请求包括一个有效的令牌时，才能使_addBook_和_editAuthor_的改变成为可能。
 
 <!-- (Don't worry about fixing the frontend for the moment.)-->
- (暂时不要担心修复前台。)
+ (暂时不要担心修复前端。)
 
 </div>

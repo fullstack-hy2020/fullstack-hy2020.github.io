@@ -11,12 +11,12 @@ lang: zh
  用户必须能够登录我们的应用，当用户登录后，他们的用户信息必须自动附加到他们创建的任何新笔记上。
 
 <!-- We will now implement support for [token based authentication](https://scotch.io/tutorials/the-ins-and-outs-of-token-based-authentication#toc-how-token-based-works) to the backend.-->
-我们现在将在后台实现对[基于令牌的认证](https://scotch.io/tutorials/the-ins-and-outs-of-token-based-authentication#toc-how-token-based-works)的支持。
+我们现在将在后端实现对[基于令牌的认证](https://scotch.io/tutorials/the-ins-and-outs-of-token-based-authentication#toc-how-token-based-works)的支持。
 
 <!-- The principles of token based authentication are depicted in the following sequence diagram:-->
  基于令牌的认证的原则在下面的顺序图中得到描述。
 
-![](../../images/4/16e.png)
+![sequence diagram of token-based authentication](../../images/4/16new.png)
 
 <!-- - User starts by logging in using a login form implemented with React-->
  - 用户通过使用React实现的登录表单开始登录
@@ -29,7 +29,7 @@ lang: zh
 <!--     - The token is signed digitally, making it impossible to falsify (with cryptographic means)-->
  - 令牌经过数字签名，使其不可能被伪造（用密码学手段）。
 <!-- - The backend responds with a status code indicating the operation was successful, and returns the token with the response.-->
- - 后台以一个状态代码响应，表明操作成功，并将令牌与响应一起返回。
+ - 后端以一个状态代码响应，表明操作成功，并将令牌与响应一起返回。
 <!-- - The browser saves the token, for example to the state of a React application.-->
  - 浏览器保存令牌，例如保存到React应用的状态中。
 <!-- - When the user creates a new note (or does some other operation requiring identification), the React code sends the token to the server with the request.-->
@@ -46,7 +46,6 @@ npm install jsonwebtoken
 
 <!-- The code for login functionality goes to the file controllers/login.js.-->
  登录功能的代码在controllers/login.js文件中。
-
 
 ```js
 const jwt = require('jsonwebtoken')
@@ -83,22 +82,52 @@ loginRouter.post('/', async (request, response) => {
 module.exports = loginRouter
 ```
 
-<!-- The code starts by searching for the user from the database by the <i>username</i> attached to the request.-->
- 代码开始时，通过请求中附加的<i>用户名</i>从数据库中搜索用户。
-<!-- Next, it checks the <i>password</i>, also attached to the request.-->
- 接下来，它检查同样附在请求中的<i>密码</i>。
-<!-- Because the passwords themselves are not saved to the database, but <i>hashes</i> calculated from the passwords, the _bcrypt.compare_ method is used to check if the password is correct:-->
- 因为密码本身没有被保存到数据库中，而是从密码中计算出的<i>哈希</i>，_bcrypt.compare_方法被用来检查密码是否正确。
+- 用户开始通过使用React实现的登录表单进行登录
+    - 我们将在[第5部分](/en/part5)中将登录表单添加到前端
+- 这会导致React代码将用户名和密码作为HTTP POST请求发送到服务器地址<i>/api/login</i>。
+- 如果用户名和密码正确，服务器会生成一个以某种方式识别已登录用户的<i>token</i>。
+    - 该token被数字签名，使其无法伪造（通过密码学手段）
+- 后端以状态码响应，表示操作成功，并在响应中返回token。
+- 浏览器保存token，例如保存到React应用的状态中。
+- 当用户创建新的笔记（或进行其他需要身份验证的操作）时，React代码将请求一起将token发送到服务器。
+- 服务器使用token来识别用户
+
+<!-- The code starts by searching for the user from the database by the <i>username</i> attached to the request. -->
+代码首先通过请求中附带的<i>username</i>从数据库中搜索用户。
 
 ```js
-await bcrypt.compare(body.password, user.passwordHash)
+const user = await User.findOne({ username })
 ```
 
-<!-- If the user is not found, or the password is incorrect, the request is responded to with the status code [401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2). The reason for the failure is explained in the response body.-->
- 如果没有找到用户，或者密码不正确，请求将以状态代码[401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2)响应。失败的原因将在响应体中解释。
+<!-- Next, it checks the <i>password</i>, also attached to the request. -->
+接下来，它检查附加到请求的<i>password</i>。
 
-<!-- If the password is correct, a token is created with the method  _jwt.sign_. The token contains the username and the user id in a digitally signed form.-->
- 如果密码正确，会用_jwt.sign_方法创建一个令牌。该令牌以数字签名的形式包含用户名和用户ID。
+```js
+const passwordCorrect = user === null
+  ? false
+  : await bcrypt.compare(password, user.passwordHash)
+```
+
+<!-- Because the passwords themselves are not saved to the database, but <i>hashes</i> calculated from the passwords, the _bcrypt.compare_ method is used to check if the password is correct: -->
+因为密码本身并未保存到数据库，而是从密码计算出的<i>hashes</i>，所以使用_bcrypt.compare_方法来检查密码是否正确：
+
+```js
+await bcrypt.compare(password, user.passwordHash)
+```
+
+<!-- If the user is not found, or the password is incorrect, the request is responded with the status code [401 unauthorized](https://www.rfc-editor.org/rfc/rfc9110.html#name-401-unauthorized). The reason for the failure is explained in the response body. -->
+如果找不到用户，或者密码不正确，请求将以状态码[401 unauthorized](https://www.rfc-editor.org/rfc/rfc9110.html#name-401-unauthorized)进行响应。失败的原因在响应体中解释。
+
+```js
+if (!(user && passwordCorrect)) {
+  return response.status(401).json({
+    error: 'invalid username or password'
+  })
+}
+```
+
+<!-- If the password is correct, a token is created with the method _jwt.sign_. The token contains the username and the user id in a digitally signed form. -->
+如果密码正确，将使用方法 _jwt.sign_ 创建一个token。该 token 以数字签名的形式包含用户名和用户id。
 
 ```js
 const userForToken = {
@@ -109,18 +138,24 @@ const userForToken = {
 const token = jwt.sign(userForToken, process.env.SECRET)
 ```
 
-<!-- The token has been digitally signed using a string from the environment variable <i>SECRET</i> as the <i>secret</i>.-->
- 该令牌已经用环境变量<i>SECRET</i>中的一个字符串作为<i>secret</i>的数字签名。
-<!-- The digital signature ensures that only parties who know the secret can generate a valid token.-->
- 数字签名确保只有知道秘密的各方才能生成有效的令牌。
-<!-- The value for the environment variable must be set in the <i>.env</i> file.-->
+<!-- The token has been digitally signed using a string from the environment variable <i>SECRET</i> as the <i>secret</i>.
+The digital signature ensures that only parties who know the secret can generate a valid token.
+The value for the environment variable must be set in the <i>.env</i> file. -->
+该token已使用环境变量<i>SECRET</i>中的字符串作为<i>secret</i>进行数字签名。
+数字签名确保只有知道秘密的方可以生成有效的token。
 环境变量的值必须在<i>.env</i>文件中设置。
 
-<!-- A successful request is responded to with the status code <i>200 OK</i>. The generated token and the username of the user are sent back in the response body.-->
- 一个成功的请求会以状态代码<i>200 OK</i>得到响应。生成的令牌和用户的用户名会在响应体中被送回来。
+<!-- A successful request is responded to with the status code <i>200 OK</i>. The generated token and the username of the user are sent back in the response body. -->
+成功的请求将以状态码<i>200 OK</i>进行响应。生成的token和用户的用户名在响应体中返回。
 
-<!-- Now the code for login just has to be added to the application by adding the new router to <i>app.js</i>.-->
- 现在登录的代码只需要通过添加新的路由器到<i>app.js</i>来添加到应用中。
+```js
+response
+  .status(200)
+  .send({ token, username: user.username, name: user.name })
+```
+
+<!-- Now the code for login just has to be added to the application by adding the new router to <i>app.js</i>. -->
+现在只需要将登录代码添加到应用中，通过将新的路由器添加到<i>app.js</i>即可。
 
 ```js
 const loginRouter = require('./controllers/login')
@@ -130,10 +165,10 @@ const loginRouter = require('./controllers/login')
 app.use('/api/login', loginRouter)
 ```
 
-<!-- Let's try logging in using VS Code REST-client:-->
- 让我们试试用VS Code REST-客户端登录。
+<!-- Let's try logging in using VS Code REST-client: -->
+让我们试试用 VS Code REST-client 登录。
 
-![](../../images/4/17e.png)
+![vscode rest post with username/password](../../images/4/17e.png)
 
 <!-- It does not work. The following is printed to console:-->
  它不工作。下面的内容被打印到控制台。
@@ -146,7 +181,7 @@ app.use('/api/login', loginRouter)
 ```
 
 <!-- The command _jwt.sign(userForToken, process.env.SECRET)_ fails. We forgot to set a value to the environment variable <i>SECRET</i>. It can be any string. When we set the value in file <i>.env</i>, the login works.-->
- 命令_jwt.sign(userForToken, process.env.secret)_失败。我们忘记给环境变量<i>SECRET</i>设置一个值。它可以是任何字符串。当我们在文件<i>.env</i>中设置了这个值，登录就成功了。
+ 命令 _jwt.sign(userForToken, process.env.secret)_ 失败。我们忘记给环境变量<i>SECRET</i>设置一个值。它可以是任何字符串。当我们在文件<i>.env</i>中设置了这个值，登录就成功了。
 
 <!-- A successful login returns the user details and the token:-->
  一个成功的登录会返回用户的详细资料和令牌。
@@ -160,28 +195,26 @@ app.use('/api/login', loginRouter)
 
 ### Limiting creating new notes to logged in users
 
-<!-- Let's change creating new notes so that it is only possible if the post request has a valid token attached.-->
- 让我们改变创建新笔记的方式，以便只有在帖子请求附有有效的令牌时才有可能。
-<!-- The note is then saved to the notes list of the user identified by the token.-->
- 然后该笔记被保存到由令牌识别的用户的笔记列表中。
+<!-- Let's change creating new notes so that it is only possible if the post request has a valid token attached. The note is then saved to the notes list of the user identified by the token. -->
+让我们更改创建新的笔记，使其只有在post请求附带有效token时才可能。然后，将笔记保存到由token识别的用户的笔记列表中。
 
-<!-- There are several ways of sending the token from the browser to the server. We will use the [Authorization](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization) header. The header also tells which [authentication scheme](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#Authentication_schemes) is used. This can be necessary if the server offers multiple ways to authenticate.-->
- 有几种方法可以将令牌从浏览器发送到服务器。我们将使用[授权](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization)头。该标头还告诉我们使用哪种[认证方案](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#Authentication_schemes)。如果服务器提供多种认证方式，这可能是必要的。
-<!-- Identifying the scheme tells the server how the attached credentials should be interpreted.-->
- 识别方案告诉服务器应该如何解释所附凭证。
+<!-- There are several ways of sending the token from the browser to the server. We will use the [Authorization](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization) header. The header also tells which [authentication scheme](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#Authentication_schemes) is used. This can be necessary if the server offers multiple ways to authenticate.
+Identifying the scheme tells the server how the attached credentials should be interpreted. -->
+将token从浏览器发送到服务器有几种方法。我们将使用[Authorization](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Authorization)头。该头还告诉我们使用了哪种[认证方案](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Authentication#Authentication_schemes)。如果服务器提供了多种认证方式，这可能是必要的。
+识别方案告诉服务器应如何解释附加的凭据。
 
-<!-- The <i>Bearer</i> scheme is suitable to our needs.-->
- <i>Bearer</i>方案适合我们的需要。
+<!-- The <i>Bearer</i> scheme is suitable for our needs. -->
+<i>Bearer</i> 方案适合我们的需求。
 
-<!-- In practice, this means that if the token is for example, the string <i>eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW</i>, the Authorization header will have the value:-->
-在实践中，这意味着如果令牌是例如字符串<i>eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIwiaW</i>，授权头将有这个值。
+<!-- In practice, this means that if the token is, for example, the string <i>eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW</i>, the Authorization header will have the value: -->
+实际上，这意味着如果token是例如字符串 <i>eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW</i> ，那么Authorization头将具有以下值：
 
 <pre>
 Bearer eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW
 </pre>
 
-<!-- Creating new notes will change like so:-->
- 创建新的笔记会有这样的变化。
+<!-- Creating new notes will change like so (<i>controllers/notes.js</i>): -->
+创建新的笔记将如此改变（<i>controllers/notes.js</i>）：
 
 ```js
 const jwt = require('jsonwebtoken') //highlight-line
@@ -190,8 +223,8 @@ const jwt = require('jsonwebtoken') //highlight-line
   //highlight-start
 const getTokenFrom = request => {
   const authorization = request.get('authorization')
-  if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
-    return authorization.substring(7)
+  if (authorization && authorization.startsWith('Bearer ')) {
+    return authorization.replace('Bearer ', '')
   }
   return null
 }
@@ -200,11 +233,9 @@ const getTokenFrom = request => {
 notesRouter.post('/', async (request, response) => {
   const body = request.body
 //highlight-start
-  const token = getTokenFrom(request)
-
-  const decodedToken = jwt.verify(token, process.env.SECRET)
+  const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET)
   if (!decodedToken.id) {
-    return response.status(401).json({ error: 'token missing or invalid' })
+    return response.status(401).json({ error: 'token invalid' })
   }
 
   const user = await User.findById(decodedToken.id)
@@ -213,7 +244,6 @@ notesRouter.post('/', async (request, response) => {
   const note = new Note({
     content: body.content,
     important: body.important === undefined ? false : body.important,
-    date: new Date(),
     user: user._id
   })
 
@@ -225,90 +255,67 @@ notesRouter.post('/', async (request, response) => {
 })
 ```
 
-<!-- The helper function _getTokenFrom_ isolates the token from the <i>authorization</i> header. The validity of the token is checked with _jwt.verify_. The method also decodes the token, or returns the Object which the token was based on. If there is no token passed, it will return error <i>"jwt must be provided"</i>.-->
- 辅助函数_getTokenFrom_将令牌从<i>授权</i>头中分离出来。用_jwt.verify_检查令牌的有效性。该方法还对令牌进行解码，或返回令牌所基于的对象。如果没有传递令牌，它将返回错误<i>"必须提供jwt"</i>。
+<!-- The helper function _getTokenFrom_ isolates the token from the <i>authorization</i> header. The validity of the token is checked with _jwt.verify_. The method also decodes the token, or returns the Object which the token was based on. -->
+辅助函数_getTokenFrom_将token从<i>authorization</i>头部分离出来。使用_jwt.verify_检查token的有效性。该方法还解码token，或返回token基于的对象。
 
 ```js
 const decodedToken = jwt.verify(token, process.env.SECRET)
 ```
 
-<!-- The object decoded from the token contains the <i>username</i> and <i>id</i> fields, which tells the server who made the request.-->
- 从令牌解码的对象包含<i>用户名</i>和<i>id</i>字段，它告诉服务器谁提出了这个请求。
-
-<!-- If the object decoded from the token does not contain the user's identity (_decodedToken.id_ is undefined), error status code [401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2) is returned and the reason for the failure is explained in the response body.-->
- 如果从令牌解码出来的对象不包含用户的身份（_decodedToken.id_是未定义的），将返回错误状态代码[401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2)，并在响应体中解释失败的原因。
+<!-- If the token is missing or it is invalid, the exception <i>JsonWebTokenError</i> is raised. We need to extend the error handling middleware to take care of this particular case: -->
+如果token丢失或无效，将引发异常<i>JsonWebTokenError</i>。我们需要扩展错误处理中间件以处理这种特殊情况：
 
 ```js
-if (!decodedToken.id) {
-  return response.status(401).json({
-    error: 'token missing or invalid'
-  })
-}
-```
-
-<!-- When the identity of the maker of the request is resolved, the execution continues as before.-->
- 当请求者的身份被解决后，执行会像以前一样继续。
-
-<!-- A new note can now be created using Postman if the <i>authorization</i> header is given the correct value, the string <i>bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ</i>, where the second value is the token returned by the <i>login</i> operation.-->
- 如果<i>authorization</i>头被赋予正确的值，即字符串<i>bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ</i>，其中第二个值是由<i>login</i>操作返回的令牌，现在可以使用Postman创建一个新的笔记。
-
-<!-- Using Postman this looks as follows:-->
- 使用Postman，这看起来如下。
-
-![](../../images/4/20e.png)
-
-<!-- and with Visual Studio Code REST client-->
- 而用Visual Studio Code REST客户端
-
-![](../../images/4/21e.png)
-
-### Error handling
-
-<!-- Token verification can also cause a <i>JsonWebTokenError</i>. If we for example remove a few characters from the token and try creating a new note, this happens:-->
-令牌验证也会导致<i>JsonWebTokenError</i>。例如，如果我们从令牌中删除几个字符并尝试创建一个新的注释，就会发生这种情况。
-
-```bash
-JsonWebTokenError: invalid signature
-    at /Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/node_modules/jsonwebtoken/verify.js:126:19
-    at getSecret (/Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/node_modules/jsonwebtoken/verify.js:80:14)
-    at Object.module.exports [as verify] (/Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/node_modules/jsonwebtoken/verify.js:84:10)
-    at notesRouter.post (/Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/controllers/notes.js:40:30)
-```
-
-<!-- There are many possible reasons for a decoding error. The token can be faulty (like in our example), falsified, or expired. Let's extend our errorHandler middleware to take into account the different decoding errors.-->
- 解码错误有很多可能的原因。令牌可以是错误的（就像我们的例子），伪造的，或过期的。让我们扩展我们的errorHandler中间件以考虑到不同的解码错误。
-
-```js
-const unknownEndpoint = (request, response) => {
-  response.status(404).send({ error: 'unknown endpoint' })
-}
-
 const errorHandler = (error, request, response, next) => {
   if (error.name === 'CastError') {
-    return response.status(400).send({
-      error: 'malformatted id'
-    })
+    return response.status(400).send({ error: 'malformatted id' })
   } else if (error.name === 'ValidationError') {
-    return response.status(400).json({
-      error: error.message
-    })
-  } else if (error.name === 'JsonWebTokenError') {  // highlight-line
-    return response.status(401).json({ // highlight-line
-      error: 'invalid token' // highlight-line
-    }) // highlight-line
+    return response.status(400).json({ error: error.message })
+  } else if (error.name === 'MongoServerError' && error.message.includes('E11000 duplicate key error')) {
+    return response.status(400).json({ error: 'expected `username` to be unique' })
+  } else if (error.name ===  'JsonWebTokenError') { // highlight-line
+    return response.status(400).json({ error: 'token missing or invalid' }) // highlight-line
   }
-
-  logger.error(error.message)
 
   next(error)
 }
 ```
 
-<!-- Current application code can be found on [Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-9), branch <i>part4-9</i>.-->
- 目前的应用代码可以在[Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-9)上找到，分支<i>part4-9</i>。
+<!-- The object decoded from the token contains the <i>username</i> and <i>id</i> fields, which tell the server who made the request. -->
+从token解码的对象包含<i>username</i>和<i>id</i>字段，这些字段告诉服务器是谁发出的请求。
 
-<!-- If the application has multiple interfaces requiring identification, JWT's validation should be separated into its own middleware. Some existing library like [express-jwt](https://www.npmjs.com/package/express-jwt) could also be used.-->
- 如果应用有多个接口需要识别，JWT's验证应该被分离到自己的中间件中。也可以使用一些现有的库，如[express-jwt](https://www.npmjs.com/package/express-jwt)。
+<!-- If the object decoded from the token does not contain the user's identity (_decodedToken.id_ is undefined), error status code [401 unauthorized](https://www.rfc-editor.org/rfc/rfc9110.html#name-401-unauthorized) is returned and the reason for the failure is explained in the response body. -->
+如果从token解码的对象不包含用户的身份（_decodedToken.id_未定义），则返回错误状态码[401 unauthorized](https://www.rfc-editor.org/rfc/rfc9110.html#name-401-unauthorized)，并在响应体中解释失败的原因。
+
+```js
+if (!decodedToken.id) {
+  return response.status(401).json({
+    error: 'token invalid'
+  })
+}
+```
+
+<!-- When the identity of the maker of the request is resolved, the execution continues as before. -->
+当请求者的身份被解析后，执行将像以前一样继续。
+
+<!-- A new note can now be created using Postman if the <i>authorization</i> header is given the correct value, the string <i>Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ</i>, where the second value is the token returned by the <i>login</i> operation. -->
+现在，如果<i>authorization</i>头给出了正确的值，即字符串<i>Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ</i>，其中第二个值是<i>login</i>操作返回的token，那么就可以使用Postman创建新的笔记了。
+
+<!-- Using Postman this looks as follows: -->
+在Postman中，这看起来如下：
+
+![postman添加bearer token](../../images/4/20new.png)
+
+<!-- and with Visual Studio Code REST client -->
+和在Visual Studio Code REST客户端中
+
+![vscode添加bearer token示例](../../images/4/21new.png)
+
+<!-- Current application code can be found on [GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-9), branch <i>part4-9</i>. -->
+当前应用程序代码可以在[GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-9)上找到，分支是<i>part4-9</i>。
+
+<!-- If the application has multiple interfaces requiring identification, JWT's validation should be separated into its own middleware. An existing library like [express-jwt](https://www.npmjs.com/package/express-jwt) could also be used. -->
+如果应用程序有多个接口需要身份验证，JWT的验证应该分离到自己的中间件中。也可以使用现有的库，如[express-jwt](https://www.npmjs.com/package/express-jwt)。
 
 ### Problems of Token-based authentication
 
@@ -354,10 +361,10 @@ loginRouter.post('/', async (request, response) => {
 ```
 
 <!-- Once the token expires, the client app needs to get a new token. Usually this happens by forcing the user to relogin to the app.-->
- 一旦令牌过期，客户端应用需要获得一个新的令牌。通常情况下，这发生在强迫用户重新登录到应用。
+ 令牌过期后，客户端应用需要获取新令牌。通常，这是通过强制用户重新登录应用程序来实现的。
 
 <!-- The error handling middleware should be extended to give a proper error in the case of a expired token:-->
- 错误处理中间件应该被扩展，以便在令牌过期的情况下给出一个适当的错误。
+ 应扩展错误处理中间件，以便在令牌过期的情况下给出适当的错误：
 
 ```js
 const errorHandler = (error, request, response, next) => {
@@ -390,7 +397,7 @@ const errorHandler = (error, request, response, next) => {
  另一个解决方案是将每个令牌的信息保存在后端数据库中，并为每个API请求检查该令牌对应的访问权是否仍然有效。通过这种方案，访问权可以在任何时候被撤销。这种方案通常被称为<i>服务器端会话</i>。
 
 <!-- The negative aspect of server side sessions is the increased complexity in the backend and also the effect on performance since the token validity needs to be checked for each API request from database. A database access is considerably slower compared to checking the validity from the token itself. That is why it is a quite common to save the session corresponding to a token to a <i>key-value-database</i> such as [Redis](https://redis.io/) that is limited in functionality compared to eg. MongoDB or relational database but extremely fast in some usage scenarios.-->
- 服务器端会话的消极方面是增加了后台的复杂性，也影响了性能，因为每次从数据库请求API时，都需要检查令牌的有效性。与检查令牌本身的有效性相比，数据库访问的速度要慢得多。这就是为什么将令牌对应的会话保存到一个<i>key-value-database</i>的原因，例如[Redis](https://redis.io/)，与MongoDB或关系型数据库相比，其功能有限，但在某些使用场景下速度极快。
+ 服务器端会话的消极方面是增加了后端的复杂性，也影响了性能，因为需要对每个API请求到数据库的token有效性进行检查数据库访问相比检查token本身的有效性要慢得多。这就是为什么将一个token对应的会话保存到一个<i>键-值数据库</i>（如[Redis](https://redis.io/)）是很常见的，与MongoDB或关系型数据库相比，其功能有限，但在某些使用场景下速度极快。
 
 <!-- When server side sessions are used, the token is quite often just a random string, that does not include any information about the user as it is quite often the case when jwt-tokens are used. For each API request the server fetches the relevant information about the identity of the user from the database. It is also quite usual that instead of using Authorization-header, <i>cookies</i> are used as the mechanism for transferring the token between the client and the server.-->
  当使用服务器端会话时，令牌通常只是一个随机字符串，不包括关于用户的任何信息，因为在使用jwt令牌时通常是这样的。对于每个API请求，服务器从数据库中获取有关用户身份的相关信息。另外，通常不使用授权头，而是使用<i>cookies</i>作为客户端和服务器之间传输令牌的机制。
@@ -398,13 +405,16 @@ const errorHandler = (error, request, response, next) => {
 ### End notes
 
 <!-- There have been many changes to the code which have caused a typical problem for a fast-paced software project: most of the tests have broken. Because this part of the course is already jammed with new information, we will leave fixing the tests to a non compulsory exercise.-->
-代码有很多变化，这对一个快节奏的软件项目来说，造成了一个典型的问题：大多数测试都坏了。因为这部分课程已经被新的信息塞满了，我们将把修复测试留给一个非强制性的练习。
+代码有很多变化，这对一个快节奏的软件项目来说，造成了一个典型的问题：大多数测试都坏了。由于课程的这一部分已经充斥着新信息，我们将把修复测试留作一个非强制性的练习。
 
-<!-- Usernames, passwords and applications using token authentication must always be used over [HTTPS](https://en.wikipedia.org/wiki/HTTPS). We could use a Node [HTTPS](https://nodejs.org/api/https.html) server in our application instead of the [HTTP](https://nodejs.org/docs/latest-v8.x/api/http.html) server (it requires more configuration). On the other hand, the production version of our application is in Heroku, so our application stays secure: Heroku routes all traffic between a browser and the Heroku server over HTTPS.-->
- 用户名、密码和使用令牌认证的应用必须始终通过[HTTPS](https://en.wikipedia.org/wiki/HTTPS)使用。我们可以在我们的应用中使用一个Node [HTTPS](https://nodejs.org/api/https.html)服务器，而不是[HTTP](https://nodejs.org/docs/latest-v8.x/api/http.html)服务器（它需要更多的配置）。另一方面，我们的应用的生产版本是在Heroku中，所以我们的应用保持安全。Heroku将浏览器和Heroku服务器之间的所有流量通过HTTPS路由。
+<!-- Usernames, passwords and applications using token authentication must always be used over [HTTPS](https://en.wikipedia.org/wiki/HTTPS). We could use a Node [HTTPS](https://nodejs.org/docs/latest-v18.x/api/https.html) server in our application instead of the [HTTP](https://nodejs.org/docs/latest-v18.x/api/http.html) server (it requires more configuration). On the other hand, the production version of our application is in Fly.io, so our application stays secure: Fly.io routes all traffic between a browser and the Fly.io server over HTTPS. -->
+ 使用token认证的用户名、密码和应用程序必须始终通过[HTTPS](https://en.wikipedia.org/wiki/HTTPS)使用。我们可以在我们的应用程序中使用Node [HTTPS](https://nodejs.org/docs/latest-v18.x/api/https.html)服务器（它需要更多的配置），而不是[HTTP](https://nodejs.org/docs/latest-v18.x/api/http.html)服务器。另一方面，我们应用程序的生产版本在Fly.io上，所以我们的应用程序保持安全：Fly.io将浏览器和Fly.io服务器之间的所有流量通过HTTPS路由。
 
 <!-- We will implement login to the frontend in the [next part](/en/part5).-->
  我们将在[下一部分](/en/part5)中实现对前端的登录。
+
+<!-- **NOTE:** At this stage, in the deployed notes app, it is expected that the creating a note feature will stop working as the backend login feature is not yet linked to the frontend. -->
+**注意：**在这个阶段，在部署的笔记应用中，预计创建笔记的功能将停止工作，因为后端登录功能尚未与前端链接。
 
 </div>
 
@@ -616,57 +626,5 @@ router.post('/', userExtractor, async (request, response) => {
 
 <!-- This is the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
  这是这部分课程的最后一个练习，是时候把你的代码推送到GitHub，并把你所有完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)。
-
-<!---
-<!-- note left of user-->
-用户左侧的注释
-<!--   user fills in login form with-->
-用户填写登录表，填写内容为
-<!--   username and password-->
-用户名和密码
-<!-- end note-->
-结束说明
-<!-- user -> browser: login button pressed-->
-用户->浏览器：按了登录按钮
-
-<!-- browser -> backend: HTTP POST /api/login { username, password }-->
-浏览器 -> 后台。HTTP POST /api/login { username, password }。
-<!-- note left of backend-->
-后端左侧注释
-<!--   backend generates TOKEN that identifies user-->
-后端生成识别用户的TOKEN
-<!-- end note-->
-结束注释
-<!-- backend -> browser: TOKEN returned as message body-->
-后端->浏览器。TOKEN作为信息主体返回
-<!-- note left of browser-->
-浏览器左边的注释
-<!--   browser saves TOKEN-->
-浏览器保存TOKEN
-<!-- end note-->
-结束说明
-<!-- note left of user-->
-用户左边的注释
-<!--   user creates a note-->
-用户创建一个注释
-<!-- end note-->
-结束备注
-<!-- user -> browser: create note button pressed-->
-用户->浏览器：按了创建笔记的按钮
-<!-- browser -> backend: HTTP POST /api/notes { content } TOKEN in header-->
- 浏览器 -> 后台。HTTP POST /api/notes { content }TOKEN在标题中
-<!-- note left of backend-->
-后端左侧的注释
-<!--   backend identifies userfrom the TOKEN-->
-后端从TOKEN中识别用户
-<!-- end note-->
-结束注释
-
-<!-- backend -> browser: 201 created-->
-后端->浏览器。201创建
-
-<!-- user -> user:-->
-用户->用户。
- -->
 
 </div>

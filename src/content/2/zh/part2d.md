@@ -107,7 +107,7 @@ addNote = event => {
 ```
 
 <!-- The new note returned by the backend server is added to the list of notes in our application's state in the customary way of using the <em>setNotes</em> function and then resetting the note creation form. An [important detail](/en/part1/a_more_complex_state_debugging_react_apps#handling-arrays) to remember is that the <em>concat</em> method does not change the component's original state, but instead creates a new copy of the list.-->
- 后台服务器返回的新笔记被添加到我们应用的状态中的笔记列表中，习惯的方法是使用<em>setNotes</em>函数，然后重设笔记创建表单。一个需要记住的[重要细节](/en/part1/a_more_complex_state_debugging_react_apps#handling-arrays)是，<em>concat</em>方法并不改变组件的原始状态，而是创建一个新的列表副本。
+ 后端服务器返回的新笔记被添加到我们应用的状态中的笔记列表中，习惯的方法是使用<em>setNotes</em>函数，然后重设笔记创建表单。一个需要记住的[重要细节](/en/part1/a_more_complex_state_debugging_react_apps#handling-arrays)是，<em>concat</em>方法并不改变组件的原始状态，而是创建一个新的列表副本。
 
 <!-- Once the data returned by the server starts to have an effect on the behavior of our web applications, we are immediately faced with a whole new set of challenges arising from, for instance, the asynchronicity of communication. This necessitates new debugging strategies, console logging and other means of debugging become increasingly more important. We must also develop a sufficient understanding of the principles of both the JavaScript runtime and React components. Guessing won't be enough.-->
  一旦服务器返回的数据开始对我们的Web应用的行为产生影响，我们就会立即面临一系列新的挑战，例如，通信的非同步性。这就需要新的调试策略，控制台记录和其他调试手段变得越来越重要。我们还必须对JavaScript运行时和React组件的原理有足够的了解。猜测是不够的。
@@ -121,7 +121,7 @@ addNote = event => {
  这样就有可能验证我们打算发送的所有数据是否真的被服务器收到。
 
 <!-- In the next part of the course we will learn to implement our own logic in the backend. We will then take a closer look at tools like [Postman](https://www.postman.com/downloads/) that helps us to debug our server applications. However, inspecting the state of the json-server through the browser is sufficient for our current needs.-->
- 在课程的下一部分，我们将学习如何在后台实现我们自己的逻辑。然后我们将仔细研究像[Postman](https://www.postman.com/downloads/)这样的工具，它可以帮助我们调试我们的服务器应用。然而，通过浏览器检查json-server的状态已经足够满足我们目前的需要。
+ 在课程的下一部分，我们将学习如何在后端实现我们自己的逻辑。然后我们将仔细研究像[Postman](https://www.postman.com/downloads/)这样的工具，它可以帮助我们调试我们的服务器应用。然而，通过浏览器检查json-server的状态已经足够满足我们目前的需要。
 
 <!-- > **NB:** In the current version of our application, the browser adds the creation date property to the note. Since the clock of the machine running the browser can be wrongly configured, it's much wiser to let the backend server generate this timestamp for us. This is in fact what we will do in the next part of the course.-->
  > **NB:**在我们应用的当前版本中，浏览器将创建日期属性添加到注释中。由于运行浏览器的机器的时钟可能被错误地配置，让后端服务器为我们生成这个时间戳是非常明智的。事实上，这就是我们在课程的下一部分要做的。
@@ -225,7 +225,7 @@ console.log(`importance of ${id} needs to be toggled`)
  我们现在可以使用 "美元括号 "语法在字符串中添加将计算JavaScript表达式的部分，例如一个变量的值。注意，模板字符串中使用的引号与普通JavaScript字符串中使用的引号不同。
 
 <!-- Individual notes stored in the json-server backend can be modified in two different ways by making HTTP requests to the note's unique URL. We can either <i>replace</i> the entire note with an HTTP PUT request, or only change some of the note's properties with an HTTP PATCH request.-->
- 存储在json-server后台的单个笔记可以通过对笔记的唯一URL进行HTTP请求，以两种不同方式进行修改。我们可以用HTTP PUT请求来替换</i>整个笔记，或者用HTTP PATCH请求只改变笔记的某些属性。
+ 存储在json-server后端的单个笔记可以通过对笔记的唯一URL进行HTTP请求，以两种不同方式进行修改。我们可以用HTTP PUT请求来替换</i>整个笔记，或者用HTTP PATCH请求只改变笔记的某些属性。
 
 <!-- The final form of the event handler function is the following:-->
  事件处理函数的最终形式是这样的。
@@ -336,7 +336,7 @@ export default {
 ```
 
 <!-- The module returns an object that has three functions (<i>getAll</i>, <i>create</i>, and <i>update</i>) as its properties that deal with notes. The functions directly return the promises returned by the axios methods.-->
- 该模块返回一个对象，该对象有三个函数（<i>getAll</i>、<i>create</i>和<i>update</i>）作为其属性，处理笔记。这些函数直接返回axios方法所返回的承诺。
+ 该模块返回一个对象，该对象有三个函数（<i>getAll</i>、<i>create</i>和<i>update</i>）作为其属性，处理笔记。这些函数直接返回axios方法所返回的 promise 。
 
 <!-- The <i>App</i> component uses <em>import</em> to get access to the module:-->
  <i>App</i>组件使用<em>import</em>来获得对模块的访问。
@@ -457,7 +457,7 @@ export default {
 
 
 <!-- We no longer return the promise returned by axios directly. Instead, we assign the promise to the <em>request</em> variable and call its <em>then</em> method:-->
- 我们不再直接返回axios返回的承诺。相反，我们将承诺分配给<em>request</em>变量并调用其<em>then</em>方法。
+ 我们不再直接返回axios返回的 promise 。相反，我们将 promise 分配给<em>request</em>变量并调用其<em>then</em>方法。
 
 ```js
 const getAll = () => {
@@ -481,7 +481,7 @@ const getAll = () => {
 ```
 
 <!-- The modified <em>getAll</em> function still returns a promise, as the <em>then</em> method of a promise also [returns a promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then).-->
- 修改后的<em>getAll</em>函数仍然返回一个承诺，因为一个承诺的<em>then</em>方法也[返回一个承诺](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)。
+ 修改后的<em>getAll</em>函数仍然返回一个 promise ，因为一个 promise 的<em>then</em>方法也[返回一个 promise ](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then)。
 
 <!-- After defining the parameter of the <em>then</em> method to directly return <i>response.data</i>, we have gotten the <em>getAll</em> function to work like we wanted it to. When the HTTP request is successful, the promise returns the data sent back in the response from the backend.-->
  在定义了<em>then</em>方法的参数以直接返回<i>response.data</i>之后，我们已经让<em>getAll</em>函数像我们希望的那样工作。当HTTP请求成功时，promise会返回从后端响应中发回的数据。
@@ -545,7 +545,7 @@ const App = () => {
 [你不懂JS](https://github.com/getify/You-Dont-Know-JS/tree/1st-ed)系列书籍中的 "异步和性能 "一书[很好地解释了这个话题](https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/async%20%26%20performance/ch3.md)，但解释的篇幅很多。
 
 <!-- Promises are central to modern JavaScript development and it is highly recommended to invest a reasonable amount of time into understanding them.-->
- 承诺是现代JavaScript开发的核心，强烈建议投入合理的时间来理解它们。
+  promise 是现代JavaScript开发的核心，强烈建议投入合理的时间来理解它们。
 
 ### Cleaner Syntax for Defining Object Literals
 
@@ -692,16 +692,16 @@ const getAll = () => {
  应用应该能够优雅地处理这些类型的错误情况。除非用户碰巧打开了他们的控制台，否则他们无法知道错误确实发生了。在应用中可以看到错误的唯一方法是，点击按钮对注释的重要性没有影响。
 
 <!-- We had [previously](/en/part2/getting_data_from_server#axios-and-promises) mentioned that a promise can be in one of three different states. When an HTTP request fails, the associated promise is <i>rejected</i>. Our current code does not handle this rejection in any way.-->
- 我们[之前](/en/part2/getting_data_from_server#axios-and-promises)提到，一个承诺可以处于三种不同的状态之一。当一个HTTP请求失败时，相关的承诺会被<i>拒绝</i>。我们目前的代码没有以任何方式处理这种拒绝。
+ 我们[之前](/en/part2/getting_data_from_server#axios-and-promises)提到，一个 promise 可以处于三种不同的状态之一。当一个HTTP请求失败时，相关的 promise 会被<i>拒绝</i>。我们目前的代码没有以任何方式处理这种拒绝。
 
 <!-- The rejection of a promise is [handled](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) by providing the <em>then</em> method with a second callback function, which is called in the situation where the promise is rejected.-->
- 拒绝承诺是通过提供带有第二个回调函数的<em>then</em>方法来[处理](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises)的，该函数在承诺被拒绝的情况下被调用。
+ 拒绝 promise 是通过提供带有第二个回调函数的<em>then</em>方法来[处理](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises)的，该函数在 promise 被拒绝的情况下被调用。
 
 <!-- The more common way of adding a handler for rejected promises is to use the [catch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch) method.-->
- 为被拒绝的承诺添加处理程序的更常见方式是使用[catch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch)方法。
+ 为被拒绝的 promise 添加处理程序的更常见方式是使用[catch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch)方法。
 
 <!-- In practice, the error handler for rejected promises is defined like this:-->
- 在实践中，被拒绝的承诺的错误处理程序是这样定义的。
+ 在实践中，被拒绝的 promise 的错误处理程序是这样定义的。
 
 ```js
 axios
@@ -718,10 +718,10 @@ axios
  如果请求失败，与<em>catch</em>方法注册的事件处理程序被调用。
 
 <!-- The <em>catch</em> method is often utilized by placing it deeper within the promise chain.-->
- <em>catch</em>方法经常被利用，将其置于承诺链的更深处。
+ <em>catch</em>方法经常被利用，将其置于 promise 链的更深处。
 
 <!-- When our application makes an HTTP request, we are in fact creating a [promise chain](https://javascript.info/promise-chaining):-->
- 当我们的应用发出一个HTTP请求时，我们实际上是在创建一个[承诺链](https://javascript.info/promise-chaining)。
+ 当我们的应用发出一个HTTP请求时，我们实际上是在创建一个[ promise 链](https://javascript.info/promise-chaining)。
 
 ```js
 axios
@@ -733,7 +733,7 @@ axios
 ```
 
 <!-- The <em>catch</em> method can be used to define a handler function at the end of a promise chain, which is called once any promise in the chain throws an error and the promise becomes <i>rejected</i>.-->
- <em>catch</em>方法可以用来在承诺链的末端定义一个处理函数，一旦承诺链中的任何一个承诺抛出错误，承诺就会被调用，成为<i>拒绝</i>。
+ <em>catch</em>方法可以用来在 promise 链的末端定义一个处理函数，一旦 promise 链中的任何一个 promise 抛出错误， promise 就会被调用，成为<i>拒绝</i>。
 
 ```js
 axios
@@ -798,7 +798,7 @@ notes.filter(n => n.id !== id)
  让我们回到我们的电话簿应用。
 
 <!-- Currently, the numbers that are added to the phonebook are not saved to a backend server. Fix this situation.-->
- 目前，添加到电话簿的号码没有被保存到后台服务器。修复这种情况。
+ 目前，添加到电话簿的号码没有被保存到后端服务器。修复这种情况。
 
 <h4>2.16: Phonebook step8</h4>
 

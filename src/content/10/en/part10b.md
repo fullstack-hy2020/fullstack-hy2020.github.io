@@ -7,6 +7,10 @@ lang: en
 
 <div class="content">
 
+Note: This course material was updated in Feb 2024. Some updates are not compatible anymore with older material.
+We recommend a fresh start with this new Part 10 material. However, if you´re returning to this course after a break, and you want to continue the exercises in your older project, please use [Part 10 material before the upgrade](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/tree/e9784f36de8a0badc28fabde49e33e2959479177/src/content/10/en).
+
+
 Now that we have set up our development environment we can get into React Native basics and get started with the development of our application. In this section, we will learn how to build user interfaces with React Native's core components, how to add style properties to these core components, how to transition between views, and how to manage the form's state efficiently.
 
 ### Core components
@@ -462,7 +466,7 @@ const FlexboxExample = () => {
 
 One of the most commonly used properties of flex items is the [flexGrow](https://css-tricks.com/almanac/properties/f/flex-grow/) property. It accepts a unitless value which defines the ability for a flex item to grow if necessary. If all flex items have a <em>flexGrow</em> of <em>1</em>, they will share all the available space evenly. If a flex item has a <em>flexGrow</em> of <em>0</em>, it will only use the space its content requires and leave the rest of the space for other flex items.
 
-Here is a more interactive and concrete example of how to use flexbox to implement a simple card component with a header, body and footer: [Flexbox example](https://snack.expo.io/@kalleilv/3d045d).
+Here you can find how to simplify layouts with Flexbox gap: [Flexbox gap](https://reactnative.dev/blog/2023/01/12/version-071#simplifying-layouts-with-flexbox-gap).
 
 Next, read the article [A Complete Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/) which has comprehensive visual examples of flexbox. It is also a good idea to play around with the flexbox properties in the [Flexbox Playground](https://flexbox.tech/) to see how different flexbox properties affect the layout. Remember that in React Native the property names are the same as the ones in CSS except for the <i>camelCase</i> naming. However, the <i>property values</i> such as <em>flex-start</em> and <em>space-between</em> are exactly the same.
 
@@ -638,13 +642,16 @@ Now that we have a placeholder for the sign-in view the next step would be to im
 
 Implementation of forms relies heavily on state management. Using React's <em>useState</em> hook for state management might get the job done for smaller forms. However, it will quickly make state management for more complex forms quite tedious. Luckily there are many good libraries in the React ecosystem that ease the state management of forms. One of these libraries is [Formik](https://formik.org/).
 
-The main concepts of Formik are the <i>context</i> and the <i>field</i>. The Formik's context is provided by the [Formik](https://formik.org/docs/api/formik) component that contains the form's state. The state consists of information on a form's fields. This information includes for example the value and validation errors of each field. State's fields can be referenced by their name using the [useField](https://formik.org/docs/api/useField) hook or the [Field](https://formik.org/docs/api/field) component.
+The main concepts of Formik are the <i>context</i> and the <i>field</i>. However, the easiest way to do a simple form submit is by using useFormik(). It is a custom React hook that will return all Formik state and helpers directly.
+
+There are some restrictions concerning the use of UseFormik(). Read this to become familiar with [useFormik()](https://formik.org/docs/api/useFormik)
+
 
 Let's see how this works by creating a form for calculating the [body mass index](https://en.wikipedia.org/wiki/Body_mass_index):
 
 ```javascript
 import { Text, TextInput, Pressable, View } from 'react-native';
-import { Formik, useField } from 'formik';
+import { useFormik } from 'formik';
 
 const initialValues = {
   mass: '',
@@ -656,22 +663,24 @@ const getBodyMassIndex = (mass, height) => {
 };
 
 const BodyMassIndexForm = ({ onSubmit }) => {
-  const [massField, massMeta, massHelpers] = useField('mass');
-  const [heightField, heightMeta, heightHelpers] = useField('height');
+  const formik = useFormik({
+    initialValues,
+    onSubmit,
+  });
 
   return (
     <View>
       <TextInput
         placeholder="Weight (kg)"
-        value={massField.value}
-        onChangeText={text => massHelpers.setValue(text)}
+        value={formik.values.mass}
+        onChangeText={formik.handleChange('mass')}
       />
       <TextInput
         placeholder="Height (m)"
-        value={heightField.value}
-        onChangeText={text => heightHelpers.setValue(text)}
+        value={formik.values.height}
+        onChangeText={formik.handleChange('height')}
       />
-      <Pressable onPress={onSubmit}>
+      <Pressable onPress={formik.handleSubmit}>
         <Text>Calculate</Text>
       </Pressable>
     </View>
@@ -688,97 +697,18 @@ const BodyMassIndexCalculator = () => {
     }
   };
 
-  return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit}>
-      {({ handleSubmit }) => <BodyMassIndexForm onSubmit={handleSubmit} />}
-    </Formik>
-  );
+  return <BodyMassIndexForm onSubmit={onSubmit} />;
 };
+
+export default BodyMassIndexCalculator;
+
 ```
 
 This example is not part of our application, so you don't need to add this code to the application. You can however try it out for example in [Expo Snack](https://snack.expo.io/). Expo Snack is an online editor for React Native, similar to [JSFiddle](https://jsfiddle.net/) and [CodePen](https://codepen.io/). It is a useful platform for quickly trying out code. You can share Expo Snacks with others using a link or embedding them as a <i>Snack Player</i> on a website. You might have bumped into Snack Players for example in this material and React Native documentation.
 
-In the example, we define the <em>Formik</em> context in the <em>BodyMassIndexCalculator</em> component and provide it with initial values and a submit callback. Initial values are provided through the [initialValues](https://formik.org/docs/api/formik#initialvalues-values) prop as an object with field names as keys and the corresponding initial values as values. The submit callback is provided through the [onSubmit](https://formik.org/docs/api/formik#onsubmit-values-values-formikbag-formikbag--void--promiseany) prop and it is called when the <em>handleSubmit</em> function is called, with the condition that there aren't any validation errors. <em>children</em> of the <em>Formik</em> component is a function that is called with [props](https://formik.org/docs/api/formik#formik-render-methods-and-props) including state-related information and actions such as the <em>handleSubmit</em> function.
 
-The <em>BodyMassIndexForm</em> component contains the state bindings between the context and text inputs. We use the [useField](https://formik.org/docs/api/useField) hook to get the value of a field and to change it. <em>useField</em> hooks have one argument which is the name of the field and it returns an array with three values, <em>[field, meta, helpers]</em>. The [field object](https://formik.org/docs/api/useField#fieldinputpropsvalue) contains the value of the field, the [meta object](https://formik.org/docs/api/useField#fieldmetapropsvalue) contains field meta information such as a possible error message and the [helpers object](https://formik.org/docs/api/useField#fieldhelperprops) contains different actions for changing the state of the field such as the <em>setValue</em> function. Note that the component that uses the <em>useField</em> hook has to be <i>within Formik's context</i>. This means that the component has to be a descendant of the <em>Formik</em> component.
 
-Here is an interactive version of our previous example: [Formik example](https://snack.expo.io/@kalleilv/formik-example).
 
-In the previous example using the <em>useField</em> hook with the <em>TextInput</em> component causes repetitive code. Let's extract this repetitive code into a <em>FormikTextInput</em> component and create a custom <em>TextInput</em> component to make text inputs a bit more visually pleasing. First, let's install Formik:
-
-```shell
-npm install formik
-```
-
-Next, create a file <i>TextInput.jsx</i> in the <i>components</i> directory with the following content:
-
-```javascript
-import { TextInput as NativeTextInput, StyleSheet } from 'react-native';
-
-const styles = StyleSheet.create({});
-
-const TextInput = ({ style, error, ...props }) => {
-  const textInputStyle = [style];
-
-  return <NativeTextInput style={textInputStyle} {...props} />;
-};
-
-export default TextInput;
-```
-
-Let's move on to the <em>FormikTextInput</em> component that adds Formik's state bindings to the <em>TextInput</em> component. Create a file <i>FormikTextInput.jsx</i> in the <i>components</i> directory with the following content:
-
-```javascript
-import { StyleSheet } from 'react-native';
-import { useField } from 'formik';
-
-import TextInput from './TextInput';
-import Text from './Text';
-
-const styles = StyleSheet.create({
-  errorText: {
-    marginTop: 5,
-  },
-});
-
-const FormikTextInput = ({ name, ...props }) => {
-  const [field, meta, helpers] = useField(name);
-  const showError = meta.touched && meta.error;
-
-  return (
-    <>
-      <TextInput
-        onChangeText={value => helpers.setValue(value)}
-        onBlur={() => helpers.setTouched(true)}
-        value={field.value}
-        error={showError}
-        {...props}
-      />
-      {showError && <Text style={styles.errorText}>{meta.error}</Text>}
-    </>
-  );
-};
-
-export default FormikTextInput;
-```
-
-By using the <em>FormikTextInput</em> component we could refactor the <em>BodyMassIndexForm</em> component in the previous example like this:
-
-```javascript
-const BodyMassIndexForm = ({ onSubmit }) => {
-  return (
-    <View>
-      <FormikTextInput name="mass" placeholder="Weight (kg)" /> // highlight-line
-      <FormikTextInput name="height" placeholder="Height (m)" /> //highlight-line
-      <Pressable onPress={onSubmit}>
-        <Text>Calculate</Text>
-      </Pressable>
-    </View>
-  );
-};
-```
-
-As we can see, implementing the <em>FormikTextInput</em> component that handles the <em>TextInput</em> component's Formik bindings saves a lot of code. If your Formik forms use other input components, it is a good idea to implement similar abstractions for them as well.
 
 </div>
 
@@ -796,7 +726,14 @@ const onSubmit = (values) => {
 };
 ```
 
-Remember to utilize the <em>FormikTextInput</em> component we implemented earlier. You can use the [secureTextEntry](https://reactnative.dev/docs/textinput#securetextentry) prop in the <em>TextInput</em> component to obscure the password input.
+The first step is to install Formik:
+
+```shell
+npm install formik
+```
+
+
+You can use the [secureTextEntry](https://reactnative.dev/docs/textinput#securetextentry) prop in the <em>TextInput</em> component to obscure the password input.
 
 The sign-in form should look something like this:
 
@@ -818,6 +755,9 @@ npm install yup
 
 Next, as an example, let's create a validation schema for the body mass index form we implemented earlier. We want to validate that both <em>mass</em> and <em>height</em> fields are present and they are numeric. Also, the value of <em>mass</em> should be greater or equal to 1 and the value of <em>height</em> should be greater or equal to 0.5. Here is how we define the schema:
 
+
+
+
 ```javascript
 import * as yup from 'yup'; // highlight-line
 
@@ -836,47 +776,63 @@ const validationSchema = yup.object().shape({
 });
 // highlight-end
 
+const BodyMassIndexForm = ({ onSubmit }) => {
+  const formik = useFormik({
+    initialValues,
+    // highlight-start
+    validationSchema,
+    // highlight-end
+    onSubmit,
+  });
+
+  return (
+    <View>
+      <TextInput
+        placeholder="Weight (kg)"
+        value={formik.values.mass}
+        onChangeText={formik.handleChange('mass')}
+      />
+      {formik.touched.mass && formik.errors.mass && (
+        <Text style={{ color: 'red' }}>{formik.errors.mass}</Text>
+      )}
+      <TextInput
+        placeholder="Height (m)"
+        value={formik.values.height}
+        onChangeText={formik.handleChange('height')}
+      />
+      {formik.touched.height && formik.errors.height && (
+        <Text style={{ color: 'red' }}>{formik.errors.height}</Text>
+      )}
+      <Pressable onPress={formik.handleSubmit}>
+        <Text>Calculate</Text>
+      </Pressable>
+    </View>
+  );
+};
+
 const BodyMassIndexCalculator = () => {
   // ...
 
-  return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={onSubmit}
-      validationSchema={validationSchema} // highlight-line
-    >
-      {({ handleSubmit }) => <BodyMassIndexForm onSubmit={handleSubmit} />}
-    </Formik>
-  );
-};
+
+```
+
+Be aware that you need to include these Text components within the View returned by the form to display the validation errors:
+
+```
+ {formik.touched.mass && formik.errors.mass && (
+  <Text style={{ color: 'red' }}>{formik.errors.mass}</Text>
+ )}
+```
+
+```
+ {formik.touched.height && formik.errors.height && (
+  <Text style={{ color: 'red' }}>{formik.errors.height}</Text>
+ )}
 ```
 
 The validation is performed by default every time a field's value changes and when the <em>handleSubmit</em> function is called. If the validation fails, the function provided for the <em>onSubmit</em> prop of the <em>Formik</em> component is not called.
 
-The <em>FormikTextInput</em> component we previously implemented displays field's error message if it is present and the field is "touched", meaning that the field has received and lost focus:
 
-```javascript
-const FormikTextInput = ({ name, ...props }) => {
-  const [field, meta, helpers] = useField(name);
-
-  // Check if the field is touched and the error message is present
-  const showError = meta.touched && meta.error;
-
-  return (
-    <>
-      <TextInput
-        onChangeText={(value) => helpers.setValue(value)}
-        onBlur={() => helpers.setTouched(true)}
-        value={field.value}
-        error={showError}
-        {...props}
-      />
-      {/* Show the error message if the value of showError variable is true  */}
-      {showError && <Text style={styles.errorText}>{meta.error}</Text>}
-    </>
-  );
-};
-```
 
 </div>
 
@@ -888,9 +844,9 @@ const FormikTextInput = ({ name, ...props }) => {
 
 Validate the sign-in form so that both username and password fields are required. Note that the <em>onSubmit</em> callback implemented in the previous exercise, <i>should not be called</i> if the form validation fails.
 
-The current implementation of the <em>FormikTextInput</em> component should display an error message if a touched field has an error. Emphasize this error message by giving it a red color.
+The current implementation of the <em>TextInput</em> component should display an error message if a touched field has an error. Emphasize this error message by giving it a red color.
 
-On top of the red error message, give an invalid field a visual indication of an error by giving it a red border color. Remember that if a field has an error, the <em>FormikTextInput</em> component sets the <em>TextInput</em> component's <em>error</em> prop as <em>true</em>. You can use the value of the <em>error</em> prop to attach conditional styles to the <em>TextInput</em> component.
+On top of the red error message, give an invalid field a visual indication of an error by giving it a red border color. Remember that if a field has an error, the <em>TextInput</em> component sets the <em>TextInput</em> component's <em>error</em> prop as <em>true</em>. You can use the value of the <em>error</em> prop to attach conditional styles to the <em>TextInput</em> component.
 
 Here's what the sign-in form should roughly look like with an invalid field:
 

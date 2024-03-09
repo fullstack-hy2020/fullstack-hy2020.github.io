@@ -18,8 +18,8 @@ lang: zh
 
 ### Test environment
 
-<!-- In one of the previous chapters of the course material, we mentioned that when your backend server is running in Heroku, it is in <i>production</i> mode.-->
- 在教材的前一章中，我们提到当你的后端服务器在Heroku中运行时，它处于<i>生产</i>模式。
+<!-- In one of the previous chapters of the course material, we mentioned that when your backend server is running in Fly.io or Render, it is in <i>production</i> mode. -->
+在课程材料的前几章中，我们提到当后端服务器在 Fly.io 或 Render 中运行时，它处于<i>production(生产)</i>模式。
 
 <!-- The convention in Node is to define the execution mode of the application with the <i>NODE\_ENV</i> environment variable. In our current application, we only load the environment variables defined in the <i>.env</i> file if the application is <i>not</i> in production mode.-->
 Node中的惯例是用<i>NODE\_ENV</i>环境变量来定义应用的执行模式。在我们当前的应用中，如果应用<i>不是</i>在生产模式下，我们只加载<i>.env</i>文件中定义的环境变量。
@@ -34,21 +34,21 @@ Node中的惯例是用<i>NODE\_ENV</i>环境变量来定义应用的执行模式
 {
   // ...
   "scripts": {
-    "start": "NODE_ENV=production node index.js",// highlight-line
-    "dev": "NODE_ENV=development nodemon index.js",// highlight-line
-    "build:ui": "rm -rf build && cd ../../../2/luento/notes && npm run build && cp -r build ../../../3/luento/notes-backend",
-    "deploy": "git push heroku master",
-    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",
-    "logs:prod": "heroku logs --tail",
+    "start": "NODE_ENV=production node index.js", // highlight-line
+    "dev": "NODE_ENV=development nodemon index.js", // highlight-line
+    "test": "NODE_ENV=test node --test", // highlight-line
+    "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
+    "deploy": "fly deploy",
+    "deploy:full": "npm run build:ui && npm run deploy",
+    "logs:prod": "fly logs",
     "lint": "eslint .",
-    "test": "NODE_ENV=test jest --verbose --runInBand"// highlight-line
   },
   // ...
 }
 ```
 
 <!-- We also added the [runInBand](https://jestjs.io/docs/cli#--runinband) option to the npm script that executes the tests. This option will prevent Jest from running tests in parallel; we will discuss its significance once our tests start using the database.-->
- 我们还在执行测试的npm脚本中加入了[runInBand](https://jestjs.io/docs/cli#--runinband)选项。这个选项将阻止Jest并行运行测试；一旦我们的测试开始使用数据库，我们将讨论其意义。
+ 我们还在执行测试的npm脚本中加入了[runInBand](https://jestjs.io/zh-Hans/docs/cli#--runinband)选项。这个选项将阻止Jest并行运行测试；一旦我们的测试开始使用数据库，我们将讨论其意义。
 
 
 <!-- We specified the mode of the application to be <i>development</i> in the _npm run dev_ script that uses nodemon. We also specified that the default _npm start_ command will define the mode as <i>production</i>.-->
@@ -154,6 +154,7 @@ npm install --save-dev supertest
  让我们在<i>tests/note_api.test.js</i>文件中编写第一个测试。
 
 ```js
+const { test, after } = require('node:test')
 const mongoose = require('mongoose')
 const supertest = require('supertest')
 const app = require('../app')
@@ -167,80 +168,58 @@ test('notes are returned as json', async () => {
     .expect('Content-Type', /application\/json/)
 })
 
-afterAll(() => {
-  mongoose.connection.close()
+after(async () => {
+  await mongoose.connection.close()
 })
 ```
 
-<!-- The test imports the Express application from the <i>app.js</i> module and wraps it with the <i>supertest</i> function into a so-called [superagent](https://github.com/visionmedia/superagent) object. This object is assigned to the <i>api</i> variable and tests can use it for making HTTP requests to the backend.-->
- 该测试从<i>app.js</i>模块中导入Express应用，并将其与<i>supertest</i>函数包装成一个所谓的[superagent](https://github.com/visionmedia/superagent)对象。这个对象被分配给<i>api</i>变量，测试可以使用它来向后端发出HTTP请求。
 
-<!-- Our test makes an HTTP GET request to the <i>api/notes</i> url and verifies that the request is responded to with the status code 200. The test also verifies that the <i>Content-Type</i> header is set to <i>application/json</i>, indicating that the data is in the desired format. (If you're not familiar with the RegEx syntax of <i>/application\/json/</i>, you can learn more [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions).)-->
- 我们的测试向<i>api/notes</i>网址发出HTTP GET请求，并验证该请求被响应，状态代码为200。该测试还验证了<i>Content-Type</i>头被设置为<i>application/json</i>，表明数据为所需格式。(如果你不熟悉<i>/application/json/</i>的RegEx语法，你可以了解更多[这里](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)。)
+<!-- The test imports the Express application from the <i>app.js</i> module and wraps it with the <i>supertest</i> function into a so-called [superagent](https://github.com/visionmedia/superagent) object. This object is assigned to the <i>api</i> variable and tests can use it for making HTTP requests to the backend. -->
+该测试从 app.js 模块中导入 Express 应用程序，并用 supertest 函数将其封装到一个所谓的 [superagent](https://github.com/visionmedia/superagent) 对象中。该对象分配给 api 变量，测试可以使用它向后端发出 HTTP 请求。
 
-<!-- The test contains some details that we will explore [a bit later on](/en/part4/testing_the_backend#async-await). The arrow function that defines the test is preceded by the <i>async</i> keyword and the method call for the <i>api</i> object is preceded by the <i>await</i> keyword. We will write a few tests and then take a closer look at this async/await magic. Do not concern yourself with them for now, just be assured that the example tests work correctly. The async/await syntax is related to the fact that making a request to the API is an <i>asynchronous</i> operation. The [Async/await syntax](https://jestjs.io/docs/asynchronous) can be used for writing asynchronous code with the appearance of synchronous code.-->
- 该测试包含了一些细节，我们将[稍后](/en/part4/testing_the_backend#async-await)进行探讨。定义测试的箭头函数前面有<i>async</i>关键字，对<i>api</i>对象的方法调用前面有<i>await</i>关键字。我们将写一些测试，然后仔细看看这个async/await的魔法。暂时不要关注它们，只需保证示例测试的正常工作。async/await语法与向API发出请求是一个<i>异步</i>操作的事实有关。[Async/await语法](https://jestjs.io/docs/asynchronous)可用于编写具有同步代码外观的异步代码。
+<!-- Our test makes an HTTP GET request to the <i>api/notes</i> url and verifies that the request is responded to with the status code 200. The test also verifies that the <i>Content-Type</i> header is set to <i>application/json</i>, indicating that the data is in the desired format. -->
+我们的测试向 <i>api/notes url</i> 发出 HTTP GET 请求，并验证请求是否已使用状态代码 200 作出响应。测试还验证 <i>Content-Type</i> 标头是否设置为 <i>application/json</i>，表示数据采用所需格式。
 
-<!-- Once all the tests (there is currently only one) have finished running we have to close the database connection used by Mongoose. This can be easily achieved with the [afterAll](https://jestjs.io/docs/api#afterallfn-timeout) method:-->
- 一旦所有的测试（目前只有一个）都运行完毕，我们必须关闭Mongoose使用的数据库连接。这可以通过[afterAll](https://jestjs.io/docs/api#afterallfn-timeout)方法轻松实现。
+<!-- Checking the value of the header uses a bit strange looking syntax: -->
+检查标头值使用一个看起来有点奇怪的语法：
+```js
+.expect('Content-Type', /application\/json/)
+```
+
+<!-- The desired value is now defined as [regular expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) or in short regex. The regex starts and ends with a slash /, because the desired string <i>application/json</i> also contains the same slash, it is preceded by a \ so that it is not interpreted as a regex termination character. -->
+期望值现在定义为 [正则表达式](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)，简称 regex。regex 以斜杠 / 开始和结束，因为期望字符串 <i>application/json</i> 也包含相同的斜杠，因此在其之前添加一个 \，这样就不会将其解释为 regex 终止字符。
+
+<!-- In principle, the test could also have been defined as a string -->
+原则上，测试也可以定义为一个字符串：
 
 ```js
-afterAll(() => {
-  mongoose.connection.close()
+.expect('Content-Type', 'application/json')
+```
+
+<!-- The problem here, however, is that when using a string, the value of the header must be exactly the same. For the regex we defined, it is acceptable that the header <i>contains</i> the string in question. The actual value of the header is <i>application/json; charset=utf-8</i>, i.e. it also contains information about character encoding. However, our test is not interested in this and therefore it is better to define the test as a regex instead of an exact string. -->
+但是，此处的问题在于，在使用字符串时，标头的值必须完全相同。对于我们定义的正则表达式，标头 <i>包含</i> 相关字符串是可以接受的。标头的实际值为 <i>application/json; charset=utf-8</i>，即它还包含有关字符编码的信息。但是，我们的测试对此不感兴趣，因此最好将测试定义为正则表达式，而不是确切的字符串。
+
+<!-- The test contains some details that we will explore [a bit later on](/en/part4/testing_the_backend#async-await). The arrow function that defines the test is preceded by the <i>async</i> keyword and the method call for the <i>api</i> object is preceded by the <i>await</i> keyword. We will write a few tests and then take a closer look at this async/await magic. Do not concern yourself with them for now, just be assured that the example tests work correctly. The async/await syntax is related to the fact that making a request to the API is an <i>asynchronous</i> operation. The async/await syntax can be used for writing asynchronous code with the appearance of synchronous code. -->
+该测试包含一些我们将在 [稍后](/zh/part4/测试后端应用#async-await) 探讨的详细信息。定义测试的箭头函数前有<i>async</i>关键字，而<i>api</i>对象的函数调用前有<i>await</i>关键字。我们将编写一些测试，然后仔细了解此async/await的魔力。现在不必担心它们，只要确保示例测试正确工作即可。async/await语法与向API发出请求是<i>异步</i>操作的事实有关。async/await语法可用于编写异步代码，使其看起来像同步代码。
+
+<!-- Once all the tests (there is currently only one) have finished running we have to close the database connection used by Mongoose. This can be easily achieved with the [after](https://nodejs.org/api/test.html#afterfn-options) method: -->
+一旦所有测试（当前只有一个）运行完毕，我们必须关闭Mongoose使用的数据库连接。可以使用[after](https://nodejs.org/api/test.html#afterfn-options)方法轻松实现此目的：
+
+```js
+after(async () => {
+  await mongoose.connection.close()
 })
 ```
 
-<!-- When running your tests you may run across the following console warning:-->
- 当运行你的测试时，你可能会遇到以下控制台警告。
-
-![](../../images/4/8.png)
-
-<!-- The problem is quite likely caused by the Mongoose version 6.x, the problem does not appear when the version 5.x is used. Actually [Mongoose documentation](https://mongoosejs.com/docs/jest.html) does not recommend testing Mongoose applications with Jest.-->
- 这个问题很可能是由Mongoose 6.x版本引起的，当使用5.x版本时，这个问题不会出现。实际上[Mongoose文档](https://mongoosejs.com/docs/jest.html)并不推荐用Jest测试Mongoose应用。
-
-<!-- One way to get rid of this is to run tests with option <i>--forceExit</i>:-->
- 摆脱这个问题的一个方法是用选项<i>--forceExit</i>运行测试。
-
-```json
-{
-  // ..
-  "scripts": {
-    "start": "cross-env NODE_ENV=production node index.js",
-    "dev": "cross-env NODE_ENV=development nodemon index.js",
-    "lint": "eslint .",
-    "test": "cross-env NODE_ENV=test jest --verbose --runInBand --forceExit" // highlight-line
-  },
-  // ...
-}
-```
-
-<!-- Another error you may come across is your test takes longer than the default Jest test timeout of 5000 ms. This can be solved by adding a third parameter to the test function:-->
- 你可能遇到的另一个错误是你的测试时间超过了Jest默认的5000ms的测试超时。这可以通过在测试函数中添加第三个参数来解决。
-
-```js
-test('notes are returned as json', async () => {
-  await api
-    .get('/api/notes')
-    .expect(200)
-    .expect('Content-Type', /application\/json/)
-}, 100000)
-```
-
-<!-- This third parameter sets the timeout to be 100000 ms. A long timeout ensures that our test won't fail due to the time it takes to run. (A long timeout may not be what you want for tests based on performance or speed, but this is fine for our example tests).-->
- 这第三个参数将超时设置为100000毫秒。一个长的超时确保我们的测试不会因为运行时间而失败。(对于基于性能或速度的测试来说，一个长的超时可能不是你想要的，但对于我们的测试例子来说，这很好）。
-
-<!-- One tiny but important detail: at the [beginning](/en/part4/structure_of_backend_application_introduction_to_testing#project-structure) of this part we extracted the Express application into the <i>app.js</i> file, and the role of the <i>index.js</i> file was changed to launch the application at the specified port with Node's built-in <i>http</i> object:-->
- 一个微小但重要的细节：在这部分的[开头](/en/part4/structure_of_backend_application_introduction_to_testing#project-structure)，我们将Express应用提取到<i>app.js</i>文件中，<i>index.js</i>文件的作用被改变为在指定端口用Node的内置<i>http</i>对象启动该应用。
+<!-- One tiny but important detail: at the [beginning](/en/part4/structure_of_backend_application_introduction_to_testing#project-structure) of this part we extracted the Express application into the <i>app.js</i> file, and the role of the <i>index.js</i> file was changed to launch the application at the specified port via _app.listen_: -->
+一个微小但重要的细节：在本部分的 [开头](/zh/part4/从后端结构到测试入门#project-structure)，我们将Express应用程序提取到<i>app.js</i>文件中，而<i>index.js</i>文件的作用已更改为通过_app.listen_在指定端口启动应用程序：
 
 ```js
 const app = require('./app') // the actual Express app
-const http = require('http')
 const config = require('./utils/config')
 const logger = require('./utils/logger')
 
-const server = http.createServer(app)
-
-server.listen(config.PORT, () => {
+app.listen(config.PORT, () => {
   logger.info(`Server running on port ${config.PORT}`)
 })
 ```
@@ -260,7 +239,7 @@ const api = supertest(app) // highlight-line
 
 
 <!-- The documentation for supertest says the following:-->
- supertest的文档说如下。
+ supertest的文档说如下：
 
 <!-- > <i>if the server is not already listening for connections then it is bound to an ephemeral port for you so there is no need to keep track of ports.</i>-->
  > <i>如果服务器还没有监听连接，那么它就会为你绑定一个短暂的端口，所以不需要跟踪端口。</i>
@@ -271,35 +250,48 @@ const api = supertest(app) // highlight-line
 
 
 <!-- Let's write a few more tests:-->
- 让我们再写几个测试。
+ 让我们再写几个测试：
 
 ```js
 test('there are two notes', async () => {
   const response = await api.get('/api/notes')
 
-  expect(response.body).toHaveLength(2)
+  assert.strictEqual(response.body.length, 2)
 })
 
 test('the first note is about HTTP methods', async () => {
   const response = await api.get('/api/notes')
 
-  expect(response.body[0].content).toBe('HTML is easy')
+  const contents = response.body.map(e => e.content)
+  assert.strictEqual(contents.includes('HTML is easy'), true)
 })
 ```
 
-<!-- Both tests store the response of the request to the _response_ variable, and unlike the previous test that used the methods provided by _supertest_ for verifying the status code and headers, this time we are inspecting the response data stored in <i>response.body</i> property. Our tests verify the format and content of the response data with the [expect](https://jestjs.io/docs/expect#expectvalue) method of Jest.-->
- 两个测试都将请求的响应存储到_response_变量中，与之前使用_supertest_提供的方法来验证状态代码和头信息的测试不同，这次我们要检查存储在<i>response.body</i>属性中的响应数据。我们的测试用Jest的[expect](https://jestjs.io/docs/expect#expectvalue)方法验证响应数据的格式和内容。
+<!-- Both tests store the response of the request to the _response_ variable, and unlike the previous test that used the methods provided by _supertest_ for verifying the status code and headers, this time we are inspecting the response data stored in <i>response.body</i> property. Our tests verify the format and content of the response data with the method [strictEqual](https://nodejs.org/docs/latest/api/assert.html#assertstrictequalactual-expected-message) of the assert-library. -->
+这两个测试都将请求的响应存储在 _response_ 变量中，并且与使用 _supertest_ 提供的方法来验证状态代码和标头的前一个测试不同，这次我们正在检查存储在 <i>response.body</i> 属性中的响应数据。我们的测试使用 assert-library 的 [strictEqual](https://nodejs.org/docs/latest/api/assert.html#assertstrictequalactual-expected-message) 方法验证响应数据的格式和内容。
 
+<!-- We could simplify the second test a bit, and use the [assert](https://nodejs.org/docs/latest/api/assert.html#assertokvalue-message) itself to verify that the note is among the returned ones: -->
+我们可以稍微简化第二个测试，并使用 [assert](https://nodejs.org/docs/latest/api/assert.html#assertokvalue-message) 本身来验证该笔记属于返回的笔记之一：
+
+```js
+test('the first note is about HTTP methods', async () => {
+  const response = await api.get('/api/notes')
+
+  const contents = response.body.map(e => e.content)
+  // is the parameter truthy
+  assert(contents.includes('HTML is easy'))
+})
+```
 
 <!-- The benefit of using the async/await syntax is starting to become evident. Normally we would have to use callback functions to access the data returned by promises, but with the new syntax things are a lot more comfortable:-->
- 使用async/await语法的好处开始变得明显了。通常情况下，我们必须使用回调函数来访问由承诺返回的数据，但有了新的语法，事情就好办多了。
+ 使用async/await语法的好处开始变得明显了。通常情况下，我们必须使用回调函数来访问由 promise 返回的数据，但有了新的语法，事情就好办多了。
 
 ```js
 const response = await api.get('/api/notes')
 
 // execution gets here only after the HTTP request is complete
 // the result of HTTP request is saved in variable response
-expect(response.body).toHaveLength(2)
+assert.strictEqual(response.body.length, 2)
 ```
 
 <!-- The middleware that outputs information about the HTTP requests is obstructing the test execution output. Let us modify the logger so that it does not print to console in test mode:-->
@@ -329,21 +321,18 @@ module.exports = {
 
 ### Initializing the database before tests
 
-<!-- Testing appears to be easy and our tests are currently passing. However, our tests are bad as they are dependent on the state of the database (that happens to be correct in my test database). In order to make our tests more robust, we have to reset the database and generate the needed test data in a controlled manner before we run the tests.-->
- 测试似乎很容易，我们的测试目前正在通过。然而，我们的测试是糟糕的，因为它们依赖于数据库的状态（在我的测试数据库中刚好是正确的）。为了使我们的测试更加稳健，我们必须在运行测试之前以一种可控的方式重置数据库并生成所需的测试数据。
+<!-- Testing appears to be easy and our tests are currently passing. However, our tests are bad as they are dependent on the state of the database, that now  happens to have two notes. To make them more robust, we have to reset the database and generate the needed test data in a controlled manner before we run the tests. -->
+测试看起来很简单，我们的测试目前通过。但是，我们的测试很糟糕，因为它们依赖于数据库的状态，而现在恰好有两个笔记。为了使我们的测试更加稳健，我们必须在运行测试之前以一种可控的方式重置数据库并生成所需的测试数据。
 
-<!-- Our tests are already using the [afterAll](https://jestjs.io/docs/api#afterallfn-timeout) function of Jest to close the connection to the database after the tests are finished executing. Jest offers many other [functions](https://jestjs.io/docs/setup-teardown) that can be used for executing operations once before any test is run, or every time before a test is run.-->
- 我们的测试已经在使用Jest的[afterAll](https://jestjs.io/docs/api#afterallfn-timeout)函数，在测试执行完毕后关闭与数据库的连接。Jest提供了许多其他的[函数](https://jestjs.io/docs/setup-teardown)，可用于在任何测试运行前执行一次操作，或在每次测试运行前执行一次操作。
+<!-- Our tests are already using the[after](https://nodejs.org/api/test.html#afterfn-options) function of to close the connection to the database after the tests are finished executing. The library Node:test offers many other functions that can be used for executing operations once before any test is run or every time before a test is run. -->
+我们的测试已经使用了 [after](https://nodejs.org/zh-Hans/api/test.html#afterfn-options) 函数在测试执行完成后关闭与数据库的连接。Node:test 库提供了许多其他函数，可用于在任何测试运行之前或每次在测试运行之前执行操作。
 
-<!-- Let's initialize the database <i>before every test</i> with the [beforeEach](https://jestjs.io/docs/en/api.html#beforeeachfn-timeout) function:-->
- 让我们在每次测试之前用[beforeEach](https://jestjs.io/docs/en/api.html#beforeeachfn-timeout)函数初始化数据库<i></i>。
+<!-- Let's initialize the database <i>before every test</i> with the [beforeEach](https://nodejs.org/api/test.html#beforeeachfn-options) function: -->
+ 让我们使用 [beforeEach](https://nodejs.org/api/test.html#beforeeachfn-options) 函数<i>在每次测试之前</i>初始化数据库：
 
 ```js
-const mongoose = require('mongoose')
-const supertest = require('supertest')
-const app = require('../app')
-const api = supertest(app)
 // highlight-start
+const { test, after, beforeEach } = require('node:test')
 const Note = require('../models/note')
 // highlight-end
 
@@ -351,16 +340,16 @@ const Note = require('../models/note')
 const initialNotes = [
   {
     content: 'HTML is easy',
-    date: new Date(),
     important: false,
   },
   {
-    content: 'Browser can execute only Javascript',
-    date: new Date(),
+    content: 'Browser can execute only JavaScript',
     important: true,
   },
 ]
 // highlight-end
+
+// ...
 
 // highlight-start
 beforeEach(async () => {
@@ -377,67 +366,83 @@ beforeEach(async () => {
 ```
 
 <!-- The database is cleared out at the beginning, and after that we save the two notes stored in the _initialNotes_ array to the database. Doing this, we ensure that the database is in the same state before every test is run.-->
- 数据库在开始时被清空，之后我们将存储在_initialNotes_数组中的两个笔记保存到数据库中。这样做，我们确保数据库在每次测试运行前处于相同的状态。
+ 数据库在开始时被清空，之后我们将存储在 _initialNotes_ 数组中的两个笔记保存到数据库中。这样做，我们确保数据库在每次测试运行前处于相同的状态。
 
 <!-- Let's also make the following changes to the last two tests:-->
  让我们也对最后两个测试做如下修改。
 
 ```js
-test('all notes are returned', async () => {
+test('there are two notes', async () => {
   const response = await api.get('/api/notes')
 
-  expect(response.body).toHaveLength(initialNotes.length) // highlight-line
+  assert.strictEqual(response.body.length, initialNotes.length)
 })
 
-test('a specific note is within the returned notes', async () => {
+test('the first note is about HTTP methods', async () => {
   const response = await api.get('/api/notes')
 
-  // highlight-start
-  const contents = response.body.map(r => r.content)
-
-  expect(contents).toContain(
-    'Browser can execute only Javascript'
-  )
-  // highlight-end
+  const contents = response.body.map(e => e.content)
+  assert(contents.includes('HTML is easy'))
 })
 ```
 
-<!-- Pay special attention to the expect in the latter test. The <code>response.body.map(r => r.content)</code> command is used to create an array containing the content of every note returned by the API. The [toContain](https://jestjs.io/docs/expect#tocontainitem) method is used for checking that the note given to it as a parameter is in the list of notes returned by the API.-->
- 特别注意后一个测试中的期望。<code>response.body.map(r => r.content)</code>命令被用来创建一个包含API返回的每个笔记内容的数组。toContain](https://jestjs.io/docs/expect#tocontainitem)方法用于检查作为参数给它的笔记是否在API返回的笔记列表中。
-
 ### Running tests one by one
+<!-- The _npm test_ command executes all of the tests for the application. When we are writing tests, it is usually wise to only execute one or two tests.  -->
+_npm test_ 命令将执行应用程序的所有测试。当我们编写测试时，通常明智的做法是只执行一两个测试。
 
-<!-- The _npm test_ command executes all of the tests of the application. When we are writing tests, it is usually wise to only execute one or two tests. Jest offers a few different ways of accomplishing this, one of which is the [only](https://jestjs.io/docs/en/api#testonlyname-fn-timeout) method. If tests are written across many files, this method is not great.-->
- _npm test_命令执行了应用的所有测试。当我们编写测试时，通常只执行一到两个测试是明智的。Jest提供了一些不同的方法来实现这一点，其中之一是[only](https://jestjs.io/docs/en/api#testonlyname-fn-timeout)方法。如果测试是在许多文件中写的，这种方法不是很好。
+<!-- There are a few different ways of accomplishing this, one of which is the [only](https://nodejs.org/api/test.html#testonlyname-options-fn) method. With the method we can define in the code what tests should be executed: -->
+有几种不同的方法可以实现此目的，其中之一是 [only](https://nodejs.org/api/test.html#testonlyname-options-fn) 方法。使用该方法，我们可以在代码中定义应执行哪些测试：
 
-<!-- A better option is to specify the tests that need to be run as parameter of the  <i>npm test</i> command.-->
- 一个更好的选择是指定需要运行的测试，作为<i>npm test</i>命令的参数。
+```js
+test.only('notes are returned as json', async () => {
+  await api
+    .get('/api/notes')
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+})
 
-<!-- The following command only runs the tests found in the <i>tests/note_api.test.js</i> file:-->
- 下面的命令只运行在<i>tests/note_api.test.js</i>文件中的测试。
+test.only('there are two notes', async () => {
+  const response = await api.get('/api/notes')
+
+  assert.strictEqual(response.body.length, 2)
+})
+```
+<!-- When tests are run with option _--test-only_, that is, with the command -->
+当使用选项 _--test-only_ 运行测试时，即使用命令
+
+```
+npm test -- --test-only
+```
+
+<!-- only the _only_ marked tests are executed. -->
+只有标记为 _only_ 的测试才会被执行。
+
+<!-- The danger of the _only_ is that one forgets to remove those from the code. -->
+_only_ 的危险在于人们忘记从代码中删除它们。
+
+<!-- Another option is to specify the tests that need to be run as parameters of the <i>npm test</i> command. -->
+另一种选择是将需要运行的测试指定为 <i>npm test</i> 命令的参数。
+
+<!-- The following command only runs the tests found in the <i>tests/note_api.test.js</i> file: -->
+以下命令只运行 <i>tests/note_api.test.js</i> 文件中找到的测试：
 
 ```js
 npm test -- tests/note_api.test.js
 ```
 
-<!-- The <i>-t</i> option can be used for running tests with a specific name:-->
- <i>-t</i>选项可用于运行具有特定名称的测试。
+<!-- The [--tests-by-name-pattern](https://nodejs.org/api/test.html#filtering-tests-by-name)  option can be used for running tests with a specific name: -->
+[--tests-by-name-pattern](https://nodejs.org/api/test.html#filtering-tests-by-name) 选项可用于运行具有特定名称的测试：
 
 ```js
-npm test -- -t "a specific note is within the returned notes"
+npm test -- --test-name-pattern="the first note is about HTTP methods"
 ```
 
-<!-- The provided parameter can refer to the name of the test or the describe block. The parameter can also contain just a part of the name. The following command will run all of the tests that contain <i>notes</i> in their name:-->
- 提供的参数可以指测试的名称或描述块。该参数也可以只包含名称的一部分。下面的命令将运行所有名称中包含<i>notes</i>的测试。
+<!-- The provided parameter can refer to the name of the test or the describe block. The parameter can also contain just a part of the name. The following command will run all of the tests that contain <i>notes</i> in their name: -->
+提供的参数可以引用测试的名称或 describe 块。该参数也可以只包含名称的一部分。以下命令将运行所有名称中包含 <i>notes</i> 的测试：
 
 ```js
-npm test -- -t 'notes'
+npm run test -- --test-name-pattern="notes"
 ```
-
-<!-- **NB**: When running a single test, the mongoose connection might stay open if no tests using the connection are run.-->
- **nb*:当运行一个测试时，如果没有使用该连接的测试被运行，mongoose的连接可能会保持开放。
-<!-- The problem might be due to the fact that supertest primes the connection, but Jest does not run the afterAll portion of the code.-->
- 这个问题可能是由于supertest对连接进行了预处理，但是Jest并没有运行代码的afterAll部分。
 
 ### async/await
 
@@ -445,10 +450,10 @@ npm test -- -t 'notes'
  在我们写更多的测试之前，让我们看一下_async_和_await_关键字。
 
 <!-- The async/await syntax that was introduced in ES7 makes it possible to use <i>asynchronous functions that return a promise</i> in a way that makes the code look synchronous.-->
- ES7中引入的async/await语法使得使用返回承诺的<i>异步函数</i>的方式可以使代码看起来是同步的。
+ ES7中引入的async/await语法使得使用返回 promise 的<i>异步函数</i>的方式可以使代码看起来是同步的。
 
 <!-- As an example, the fetching of notes from the database with promises looks like this:-->
- 作为一个例子，用承诺从数据库中获取笔记的过程看起来是这样的。
+ 作为一个例子，用 promise 从数据库中获取笔记的过程看起来是这样的。
 
 ```js
 Note.find({}).then(notes => {
@@ -457,13 +462,13 @@ Note.find({}).then(notes => {
 ```
 
 <!-- The _Note.find()_ method returns a promise and we can access the result of the operation by registering a callback function with the _then_ method.-->
- _Note.find()_方法返回一个承诺，我们可以通过用_then_方法注册一个回调函数来访问操作的结果。
+ _Note.find()_方法返回一个 promise ，我们可以通过用_then_方法注册一个回调函数来访问操作的结果。
 
 <!-- All of the code we want to execute once the operation finishes is written in the callback function. If we wanted to make several asynchronous function calls in sequence, the situation would soon become painful. The asynchronous calls would have to be made in the callback. This would likely lead to complicated code and could potentially give birth to a so-called [callback hell](http://callbackhell.com/).-->
  一旦操作完成，我们想要执行的所有代码都写在回调函数中。如果我们想依次进行几个异步函数的调用，情况很快就会变得很痛苦。异步调用将不得不在回调中进行。这将可能导致复杂的代码，并有可能诞生所谓的[回调地狱](http://callbackhell.com/)。
 
 <!-- By [chaining promises](https://javascript.info/promise-chaining) we could keep the situation somewhat under control, and avoid callback hell by creating a fairly clean chain of _then_ method calls. We have seen a few of these during the course. To illustrate this, you can view an artificial example of a function that fetches all notes and then deletes the first one:-->
- 通过[链式承诺](https://javascript.info/promise-chaining)，我们可以在一定程度上控制局面，并通过创建一个相当干净的_then_方法调用链来避免回调地狱。我们在课程中已经看到了一些这样的情况。为了说明这一点，你可以查看一个人为的例子，这个函数获取了所有的笔记，然后删除了第一条。
+ 通过[链式 promise ](https://javascript.info/promise-chaining)，我们可以在一定程度上控制局面，并通过创建一个相当干净的_then_方法调用链来避免回调地狱。我们在课程中已经看到了一些这样的情况。为了说明这一点，你可以查看一个人为的例子，这个函数获取了所有的笔记，然后删除了第一条。
 
 ```js
 Note.find({})
@@ -492,7 +497,7 @@ console.log('operation returned the following notes', notes)
 ```
 
 <!-- The code looks exactly like synchronous code. The execution of code pauses at <em>const notes = await Note.find({})</em> and waits until the related promise is <i>fulfilled</i>, and then continues its execution to the next line. When the execution continues, the result of the operation that returned a promise is assigned to the _notes_ variable.-->
- 这段代码看起来和同步代码完全一样。代码的执行在<em>const notes = await Note.find({})</em>处暂停，等待相关的承诺被<i>满足</i>，然后继续执行到下一行。当继续执行时，返回承诺的操作结果被分配给_notes_变量。
+ 这段代码看起来和同步代码完全一样。代码的执行在<em>const notes = await Note.find({})</em>处暂停，等待相关的 promise 被<i>满足</i>，然后继续执行到下一行。当继续执行时，返回 promise 的操作结果被分配给_notes_变量。
 
 <!-- The slightly complicated example presented above could be implemented by using await like this:-->
  上面介绍的稍微复杂的例子可以通过使用await这样来实现。
@@ -508,7 +513,7 @@ console.log('the first note is removed')
  由于新的语法，代码比以前的then-chain简单多了。
 
 <!-- There are a few important details to pay attention to when using async/await syntax. In order to use the await operator with asynchronous operations, they have to return a promise. This is not a problem as such, as regular asynchronous functions using callbacks are easy to wrap around promises.-->
- 使用async/await语法时，有几个重要的细节需要注意。为了在异步操作中使用await操作符，它们必须返回一个承诺。这并不是一个问题，因为使用回调的常规异步函数很容易被承诺所包裹。
+ 使用async/await语法时，有几个重要的细节需要注意。为了在异步操作中使用await操作符，它们必须返回一个 promise 。这并不是一个问题，因为使用回调的常规异步函数很容易被 promise 所包裹。
 
 <!-- The await keyword can't be used just anywhere in JavaScript code. Using await is possible only inside of an [async](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) function.-->
  await关键字不能在JavaScript代码中随便使用。只有在[async](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)函数中才能使用await。
@@ -537,7 +542,7 @@ main() // highlight-line
  让我们开始把后端改成异步和await。由于目前所有的异步操作都是在一个函数内完成的，所以只需将路由处理函数改为异步函数即可。
 
 <!-- The route for fetching all notes gets changed to the following:-->
- 获取所有笔记的路由被改成如下。
+ 获取所有笔记的路由被改成如下：
 
 ```js
 notesRouter.get('/', async (request, response) => {
@@ -555,13 +560,13 @@ notesRouter.get('/', async (request, response) => {
 ### More tests and refactoring the backend
 
 <!-- When code gets refactored, there is always the risk of [regression](https://en.wikipedia.org/wiki/Regression_testing), meaning that existing functionality may break. Let's refactor the remaining operations by first writing a test for each route of the API.-->
-当代码被重构时，总是有[回归](https://en.wikipedia.org/wiki/Regression_testing)的风险，这意味着现有的功能可能被破坏。让我们先为API的每条路线写一个测试，来重构剩下的操作。
+当代码被重构时，总是有[(regression)回归](https://en.wikipedia.org/wiki/Regression_testing)的风险，这意味着现有的功能可能被破坏。让我们先为API的每条路线写一个测试，来重构剩下的操作。
 
 <!-- Let's start with the operation for adding a new note. Let's write a test that adds a new note and verifies that the amount of notes returned by the API increases, and that the newly added note is in the list.-->
  让我们从添加一个新笔记的操作开始。让我们写一个测试，添加一个新的笔记，并验证API返回的笔记数量是否增加，以及新添加的笔记是否在列表中。
 
 ```js
-test('a valid note can be added', async () => {
+test('a valid note can be added ', async () => {
   const newNote = {
     content: 'async/await simplifies making async calls',
     important: true,
@@ -577,10 +582,9 @@ test('a valid note can be added', async () => {
 
   const contents = response.body.map(r => r.content)
 
-  expect(response.body).toHaveLength(initialNotes.length + 1)
-  expect(contents).toContain(
-    'async/await simplifies making async calls'
-  )
+  assert.strictEqual(response.body.length, initialNotes.length + 1)
+
+  assert(contents.includes('async/await simplifies making async calls'))
 })
 ```
 
@@ -594,7 +598,6 @@ notesRouter.post('/', (request, response, next) => {
   const note = new Note({
     content: body.content,
     important: body.important || false,
-    date: new Date(),
   })
 
   note.save()
@@ -621,7 +624,7 @@ test('note without content is not added', async () => {
 
   const response = await api.get('/api/notes')
 
-  expect(response.body).toHaveLength(initialNotes.length)
+  assert.strictEqual(response.body.length, initialNotes.length)
 })
 ```
 
@@ -641,18 +644,16 @@ const Note = require('../models/note')
 const initialNotes = [
   {
     content: 'HTML is easy',
-    date: new Date(),
     important: false
   },
   {
-    content: 'Browser can execute only Javascript',
-    date: new Date(),
+    content: 'Browser can execute only JavaScript',
     important: true
   }
 ]
 
 const nonExistingId = async () => {
-  const note = new Note({ content: 'willremovethissoon', date: new Date() })
+  const note = new Note({ content: 'willremovethissoon' })
   await note.save()
   await note.deleteOne()
 
@@ -670,12 +671,14 @@ module.exports = {
 ```
 
 <!-- The module defines the _notesInDb_ function that can be used for checking the notes stored in the database. The _initialNotes_ array containing the initial database state is also in the module. We also define the _nonExistingId_ function ahead of time, that can be used for creating a database object ID that does not belong to any note object in the database.-->
- 该模块定义了_notesInDb_函数，可用于检查存储在数据库中的笔记。包含初始数据库状态的_initialNotes_数组也在该模块中。我们还提前定义了_nonExistingId_函数，它可以用来创建一个不属于数据库中任何笔记对象的数据库对象ID。
+ 该模块定义了 _notesInDb_ 函数，可用于检查存储在数据库中的笔记。包含初始数据库状态的 _initialNotes_ 数组也在该模块中。我们还提前定义了 _nonExistingId_ 函数，它可以用来创建一个不属于数据库中任何笔记对象的数据库对象ID。
 
 <!-- Our tests can now use helper module and be changed like this:-->
- 我们的测试现在可以使用辅助模块，并像这样改变。
+ 我们的测试现在可以使用helper模块，并进行如下更改：
 
 ```js
+const { test, after, beforeEach } = require('node:test')
+const assert = require('node:assert')
 const supertest = require('supertest')
 const mongoose = require('mongoose')
 const helper = require('./test_helper') // highlight-line
@@ -704,7 +707,7 @@ test('notes are returned as json', async () => {
 test('all notes are returned', async () => {
   const response = await api.get('/api/notes')
 
-  expect(response.body).toHaveLength(helper.initialNotes.length) // highlight-line
+   assert.strictEqual(response.body.length, helper.initialNotes.length) // highlight-line
 })
 
 test('a specific note is within the returned notes', async () => {
@@ -712,9 +715,7 @@ test('a specific note is within the returned notes', async () => {
 
   const contents = response.body.map(r => r.content)
 
-  expect(contents).toContain(
-    'Browser can execute only Javascript'
-  )
+  assert(contents.includes('Browser can execute only JavaScript'))
 })
 
 test('a valid note can be added ', async () => {
@@ -730,12 +731,10 @@ test('a valid note can be added ', async () => {
     .expect('Content-Type', /application\/json/)
 
   const notesAtEnd = await helper.notesInDb() // highlight-line
-  expect(notesAtEnd).toHaveLength(helper.initialNotes.length + 1) // highlight-line
+  assert.strictEqual(notesAtEnd.length, helper.initialNotes.length + 1) // highlight-line
 
   const contents = notesAtEnd.map(n => n.content) // highlight-line
-  expect(contents).toContain(
-    'async/await simplifies making async calls'
-  )
+  assert(contents.includes('async/await simplifies making async calls'))
 })
 
 test('note without content is not added', async () => {
@@ -750,19 +749,19 @@ test('note without content is not added', async () => {
 
   const notesAtEnd = await helper.notesInDb() // highlight-line
 
-  expect(notesAtEnd).toHaveLength(helper.initialNotes.length) // highlight-line
+  assert.strictEqual(notesAtEnd.length, helper.initialNotes.length) // highlight-line
 })
 
-afterAll(() => {
-  mongoose.connection.close()
+after(async () => {
+  await mongoose.connection.close()
 })
 ```
 
 <!-- The code using promises works and the tests pass. We are ready to refactor our code to use the async/await syntax.-->
- 使用承诺的代码工作了，测试通过了。我们准备重构我们的代码以使用async/await语法。
+ 使用 promise 的代码有效并测试通过。我们已准备好重构我们的代码以使用 async/await 语法。
 
 <!-- We make the following changes to the code that takes care of adding a new note(notice that the route handler definition is preceded by the _async_ keyword):-->
- 我们对处理添加新注释的代码做如下修改（注意路由处理程序的定义前面有_async_关键字）。
+ 我们对负责添加新note的代码进行了以下更改（注意路由处理程序的定义前面有 _async_ 关键字）。
 
 ```js
 notesRouter.post('/', async (request, response, next) => {
@@ -771,7 +770,6 @@ notesRouter.post('/', async (request, response, next) => {
   const note = new Note({
     content: body.content,
     important: body.important || false,
-    date: new Date(),
   })
 
   const savedNote = await note.save()
@@ -790,10 +788,10 @@ notesRouter.post('/', async (request, response, next) => {
 ![](../../images/4/6.png)
 
 <!-- In other words we end up with an unhandled promise rejection, and the request never receives a response.-->
- 换句话说，我们最终会出现一个未处理的拒绝承诺，而且请求永远不会收到响应。
+ 换句话说，我们最终会得到一个未经处理的 promise 拒绝，并且请求永远不会收到响应。
 
 <!-- With async/await the recommended way of dealing with exceptions is the old and familiar _try/catch_ mechanism:-->
- 在async/await中，处理异常的推荐方式是古老而熟悉的_try/catch_机制。
+ 使用 async/await 时，处理异常的推荐方式是古老而熟悉的 _try/catch_ 机制。
 
 ```js
 notesRouter.post('/', async (request, response, next) => {
@@ -802,7 +800,6 @@ notesRouter.post('/', async (request, response, next) => {
   const note = new Note({
     content: body.content,
     important: body.important || false,
-    date: new Date(),
   })
   // highlight-start
   try {
@@ -816,13 +813,13 @@ notesRouter.post('/', async (request, response, next) => {
 ```
 
 <!-- The catch block simply calls the _next_ function, which passes the request handling to the error handling middleware.-->
- catch块简单地调用_next_函数，它将请求处理传递给错误处理中间件。
+ catch 块简单地调用 _next_ 函数，它将请求处理传递给错误处理中间件。
 
 <!-- After making the change, all of our tests will pass once again.-->
  在做了这个改变之后，我们所有的测试将再次通过。
 
 <!-- Next, let's write tests for fetching and removing an individual note:-->
- 接下来，让我们编写获取和删除一个单独笔记的测试。
+ 接下来，让我们编写获取和删除单个笔记的测试。
 
 ```js
 test('a specific note can be viewed', async () => {
@@ -837,9 +834,7 @@ test('a specific note can be viewed', async () => {
     .expect('Content-Type', /application\/json/)
 // highlight-end
 
-  const processedNoteToView = JSON.parse(JSON.stringify(noteToView))
-
-  expect(resultNote.body).toEqual(processedNoteToView)
+  assert.deepStrictEqual(resultNote.body, noteToView)
 })
 
 test('a note can be deleted', async () => {
@@ -854,24 +849,29 @@ test('a note can be deleted', async () => {
 
   const notesAtEnd = await helper.notesInDb()
 
-  expect(notesAtEnd).toHaveLength(
-    helper.initialNotes.length - 1
-  )
-
   const contents = notesAtEnd.map(r => r.content)
+  assert(!contents.includes(noteToDelete.content))
 
-  expect(contents).not.toContain(noteToDelete.content)
+  assert.strictEqual(notesAtEnd.length, helper.initialNotes.length - 1)
 })
 ```
 
 <!-- Both tests share a similar structure. In the initialization phase they fetch a note from the database. After this, the tests call the actual operation being tested, which is highlighted in the code block. Lastly, the tests verify that the outcome of the operation is as expected.-->
  两个测试都有一个类似的结构。在初始化阶段，它们从数据库中获取一个笔记。之后，测试调用被测试的实际操作，这在代码块中被强调。最后，测试验证操作的结果是否符合预期。
 
-<!-- In the first test, the note object we receive as the response body goes through JSON serialization and parsing. This processing will turn the note object's <em>date</em> property value's type from <em>Date</em> object into a string. Because of this we can't directly compare equality of the <em>resultNote.body</em> and <em>noteToView</em> that is read from the database. Instead, we must first perform similar JSON serialization and parsing for the <em>noteToView</em> as the server is performing for the note object.-->
- 在第一个测试中，我们收到的笔记对象作为响应体要经过JSON序列化和解析。这个处理过程将把笔记对象的<em>date</em>属性值的类型从<em>Date</em>对象变成一个字符串。正因为如此，我们不能直接比较<em>resultNote.body</em>和<em>noteToView</em>从数据库中读取的平等性。相反，我们必须首先对<em>noteToView</em>进行类似的JSON序列化和解析，就像服务器对note对象所做的那样。
+<!-- There is one point worth noting in the first test. Instead of the previously used method [strictEqual](https://nodejs.org/api/assert.html#assertstrictequalactual-expected-message), the method [deepStrictEqual](https://nodejs.org/api/assert.html#assertdeepstrictequalactual-expected-message) is used: -->
+在第一个测试中有一点值得注意。它使用了方法 [deepStrictEqual](https://nodejs.org/api/assert.html#assertdeepstrictequalactual-expected-message)，而不是之前使用的方法 [strictEqual](https://nodejs.org/api/assert.html#assertstrictequalactual-expected-message)：
+
+
+```js
+assert.deepStrictEqual(resultNote.body, noteToView)
+```
+
+<!-- The reason for this is that _strictEqual_ uses the method [Object.is](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) to compare similarity, i.e. it compares whether the objects are the same. In our case, it is enough to check that the contents of the objects, i.e. the values of their fields, are the same. For this purpose _deepStrictEqual_ is suitable. -->
+这是因为 _strictEqual_ 使用方法 [Object.is](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/is) 来比较相似性，即它比较对象是否相同。在我们的例子中，检查对象的內容（即其字段的值）是否相同就足够了。为此，_deepStrictEqual_ 是合适的。
 
 <!-- The tests pass and we can safely refactor the tested routes to use async/await:-->
- 测试通过了，我们可以安全地重构已测试的路由以使用async/await。
+ 测试通过，我们可以安全地重构已测试的路由以使用 async/await。
 
 ```js
 notesRouter.get('/:id', async (request, response, next) => {
@@ -891,7 +891,7 @@ notesRouter.delete('/:id', async (request, response, next) => {
   try {
     await Note.findByIdAndDelete(request.params.id)
     response.status(204).end()
-  } catch (exception) {
+  } catch(exception) {
     next(exception)
   }
 })
@@ -902,7 +902,6 @@ notesRouter.delete('/:id', async (request, response, next) => {
 
 ### Eliminating the try-catch
 
-<!-- Async/await selkeyttää koodia jossain määrin, mutta sen 'hinta' on poikkeusten käsittelyn edellyttämä <i>try/catch</i>-rakenne. Kaikki routejen käsittelijät noudattavat samaa kaavaa -->
 <!-- Async/await unclutters the code a bit, but the 'price' is the <i>try/catch</i> structure required for catching exceptions.-->
  Async/await使代码更加简洁，但其代价是捕捉异常所需的<i>try/catch</i>结构。
 <!-- All of the route handlers follow the same structure-->
@@ -916,29 +915,23 @@ try {
 }
 ```
 
-<!-- Mieleen herää kysymys, olisiko koodia mahdollista refaktoroida siten, että <i>catch</i> saataisiin refaktoroitua ulos metodeista?  -->
 <!-- One starts to wonder, if it would be possible to refactor the code to eliminate the <i>catch</i> from the methods?-->
 人们开始怀疑，是否有可能重构代码以消除方法中的<i>catch</i>？
 
-<!-- Kirjasto [express-async-errors](https://github.com/davidbanham/express-async-errors) tuo tilanteeseen helpotuksen. -->
 <!-- The [express-async-errors](https://github.com/davidbanham/express-async-errors) library has a solution for this.-->
  [express-async-errors](https://github.com/davidbanham/express-async-errors)库对此有一个解决方案。
 
-<!-- Asennetaan kirjasto -->
 <!-- Let's install the library-->
- 我们来安装这个库吧
+ 让我们安装这个库
 
 ```bash
 npm install express-async-errors
 ```
 
-<!-- Kirjaston käyttö on <i>todella</i> helppoa.
-<!--  Kirjaston koodi otetaan käyttöön tiedostossa <i>src/app.js</i>: -->-->
-我们来安装这个库吧！<i>src/app.js</i>: -->
 <!-- Using the library is <i>very</i> easy.-->
-使用这个库是<i>非常</i>容易的。
+使用这个库 <i>非常</i> 容易。
 <!-- You introduce the library in <i>app.js</i>:-->
-你在<i>app.js</i>中引入该库。
+在<i>app.js</i>中引入该库。
 
 ```js
 const config = require('./utils/config')
@@ -955,12 +948,10 @@ const mongoose = require('mongoose')
 
 module.exports = app
 ```
-
-<!-- Kirjaston koodiin sisällyttämän "magian" ansiosta pääsemme kokonaan eroon try-catch-lauseista. Muistiinpanon poistamisesta huolehtiva route -->
 <!-- The 'magic' of the library allows us to eliminate the try-catch blocks completely.-->
- 该库的"魔力"使我们可以完全消除try-catch块。
+ 该库的"magic"使我们可以完全消除try-catch块。
 <!-- For example the route for deleting a note-->
- 例如，删除一个笔记的路线
+ 例如，删除一个笔记的路由
 
 ```js
 notesRouter.delete('/:id', async (request, response, next) => {
@@ -972,8 +963,6 @@ notesRouter.delete('/:id', async (request, response, next) => {
   }
 })
 ```
-
-<!-- muuttuu muotoon -->
 <!-- becomes-->
 变成
 
@@ -984,7 +973,6 @@ notesRouter.delete('/:id', async (request, response) => {
 })
 ```
 
-<!-- Kirjaston ansiosta kutsua _next(exception)_ ei siis enää tarvita, kirjasto hoitaa asian konepellin alla, eli jos <i>async</i>-funktiona määritellyn routen sisällä syntyy poikkeus, siirtyy suoritus automaattisesti virheenkäsittelijämiddlewareen. -->
 <!-- Because of the library, we do not need the _next(exception)_ call anymore.-->
  因为有了这个库，我们不再需要_next(exception)_的调用。
 <!-- The library handles everything under the hood. If an exception occurs in an <i>async</i> route, the execution is automatically passed to the error handling middleware.-->
@@ -992,7 +980,7 @@ notesRouter.delete('/:id', async (request, response) => {
 
 <!-- Muut routet yksinkertaistuvat seuraavasti: -->
 <!-- The other routes become:-->
-其他路由成为。
+其他路由成为：
 
 ```js
 notesRouter.post('/', async (request, response) => {
@@ -1001,11 +989,10 @@ notesRouter.post('/', async (request, response) => {
   const note = new Note({
     content: body.content,
     important: body.important || false,
-    date: new Date(),
   })
 
   const savedNote = await note.save()
-  response.json(savedNote)
+  response.status(201).json(savedNote)
 })
 
 notesRouter.get('/:id', async (request, response) => {
@@ -1021,7 +1008,7 @@ notesRouter.get('/:id', async (request, response) => {
 ### Optimizing the beforeEach function
 
 <!-- Let's return to writing our tests and take a closer look at the _beforeEach_ function that sets up the tests:-->
- 让我们回到编写我们的测试，仔细看看设置测试的_beforeEach_函数。
+ 让我们回到编写我们的测试，仔细看看设置测试的 _beforeEach_ 函数：
 
 ```js
 beforeEach(async () => {
@@ -1036,7 +1023,7 @@ beforeEach(async () => {
 ```
 
 <!-- The function saves the first two notes from the   _helper.initialNotes_ array into the database with two separate operations. The solution is alright, but there's a better way of saving multiple objects to the database:-->
- 该函数通过两个独立的操作将_helper.initialNotes_数组中的前两个笔记保存到数据库中。这个方案还不错，但有一个更好的方法来保存多个对象到数据库。
+ 该函数通过两个独立的操作将 _helper.initialNotes_ 数组中的前两个笔记保存到数据库中。这个方案还不错，但有一个更好的方法来保存多个对象到数据库：
 
 ```js
 beforeEach(async () => {
@@ -1075,10 +1062,10 @@ saved
  尽管我们使用了async/await语法，我们的解决方案并没有像我们预期的那样工作。测试执行在数据库初始化之前就开始了!
 
 <!-- The problem is that every iteration of the forEach loop generates its own asynchronous operation, and _beforeEach_ won't wait for them to finish executing. In other words, the _await_ commands defined inside of the _forEach_ loop are not in the _beforeEach_ function, but in separate functions that _beforeEach_ will not wait for.-->
- 问题是forEach循环的每个迭代都会产生自己的异步操作，而_beforeEach_不会等待它们执行完毕。换句话说，在_forEach_循环内部定义的_await_命令不在_beforeEach_函数中，而是在_beforeEach_不会等待的独立函数中。
+ 问题是forEach循环的每个迭代都会产生自己的异步操作，而 _beforeEach_ 不会等待它们执行完毕。换句话说，在  _forEach_ 循环内部定义的 _await_ 命令不在 _beforeEach_ 函数中，而是在 _beforeEach_ 不会等待的独立函数中。
 
 <!-- Since the execution of tests begins immediately after _beforeEach_ has finished executing, the execution of tests begins before the database state is initialized.-->
- 由于测试的执行是在_beforeEach_执行完毕后立即开始的，所以测试的执行是在数据库状态被初始化之前开始的。
+由于测试的执行是在 _beforeEach_ 完成执行之后立即开始的，因此测试的执行在初始化数据库状态之前就开始了。
 
 <!-- One way of fixing this is to wait for all of the asynchronous operations to finish executing with the [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) method:-->
  解决这个问题的一个方法是用[Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all)方法来等待所有的异步操作执行完毕。
@@ -1095,16 +1082,16 @@ beforeEach(async () => {
 ```
 
 <!-- The solution is quite advanced despite its compact appearance. The _noteObjects_ variable is assigned to an array of Mongoose objects that are created with the _Note_ constructor for each of the notes in the _helper.initialNotes_ array. The next line of code creates a new array that <i>consists of promises</i>, that are created by calling the _save_ method of each item in the _noteObjects_ array. In other words, it is an array of promises for saving each of the items to the database.-->
- 这个解决方案尽管看起来很紧凑，但却相当先进。_noteObjects_变量被分配给一个Mongoose对象数组，这些对象是用_Note_构造函数为_helper.initialNotes_数组中的每个笔记创建的。下一行代码创建了一个新的数组，<i>由承诺组成</i>，这些承诺是通过调用_noteObjects_数组中每个项目的_save_方法创建的。换句话说，它是一个承诺数组，用于将每个项目保存到数据库中。
+ 尽管外观紧凑，但该解决方案非常先进。 _noteObjects_变量被分配给一个Mongoose对象数组，这些对象是用_Note_构造函数为_helper.initialNotes_数组中的每个笔记创建的。下一行代码创建了一个新的数组，<i>由 promise 组成</i>，这些 promise 是通过调用_noteObjects_数组中每个项目的_save_方法创建的。换句话说，它是一个 promise 数组，用于将每个项目保存到数据库中。
 
 <!-- The [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) method can be used for transforming an array of promises into a single promise, that will be <i>fulfilled</i> once every promise in the array passed to it as a parameter is resolved. The last line of code <em>await Promise.all(promiseArray)</em> waits that every promise for saving a note is finished, meaning that the database has been initialized.-->
- [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all)方法可用于将一个承诺数组转化为一个承诺，一旦作为参数传递给它的数组中的每个承诺被解决，这个承诺就会被<i>履行</i>。最后一行代码<em>await Promise.all(promiseArray)</em>等待每个保存笔记的承诺完成，这意味着数据库已经被初始化了。
+ [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all)方法可用于将 promise 数组转换为单个 promise，一旦解析作为参数传递给它的数组中的每个 promise，该 promise 就会被 <i>fulfilled</i>。最后一行代码<em>await Promise.all(promiseArray)</em>等待每个保存笔记的 promise 完成，这意味着数据库已经初始化。
 
 <!-- > The returned values of each promise in the array can still be accessed when using the Promise.all method. If we wait for the promises to be resolved with the _await_ syntax <em>const results = await Promise.all(promiseArray)</em>, the operation will return an array that contains the resolved values for each promise in the _promiseArray_, and they appear in the same order as the promises in the array.-->
- > 使用Promise.all方法时，数组中每个承诺的返回值仍然可以被访问。如果我们用_await_语法<em>const results = await Promise.all(promiseArray)</em>来等待承诺的解析，该操作将返回一个数组，其中包含_promiseArray_中每个承诺的解析值，并且它们的出现顺序与数组中的承诺相同。
+ > 使用 Promise.all 方法时，数组中每个 promise 的返回值仍然可以被访问。如果我们用 _await_ 语法 <em>const results = await Promise.all(promiseArray)</em> 来等待 promise 的解析，该操作将返回一个数组，其中包含 _promiseArray_ 中每个 promise 的解析值，并且它们以与数组中 promise 相同的顺序显示。
 
 <!-- Promise.all executes the promises it receives in parallel. If the promises need to be executed in a particular order, this will be problematic. In situations like this, the operations can be executed inside of a [for...of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of) block, that guarantees a specific execution order.-->
- Promise.all以并行方式执行它收到的承诺。如果这些承诺需要以特定的顺序执行，这将是有问题的。在这样的情况下，可以在[for...of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of)块内执行操作，这样可以保证一个特定的执行顺序。
+ Promise.all以并行方式执行它收到的promise。如果这些promise需要以特定的顺序执行，这将是有问题的。在这样的情况下，可以在[for...of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of)块内执行操作，这样可以保证一个特定的执行顺序。
 
 ```js
 beforeEach(async () => {
@@ -1118,7 +1105,7 @@ beforeEach(async () => {
 ```
 
 <!-- The asynchronous nature of JavaScript can lead to surprising behavior, and for this reason, it is important to pay careful attention when using the async/await syntax. Even though the syntax makes it easier to deal with promises, it is still necessary to understand how promises work!-->
- JavaScript的异步性可能会导致令人惊讶的行为，为此，在使用async/await语法时，一定要仔细注意。即使该语法使处理承诺变得更容易，但仍然有必要了解承诺是如何工作的!
+ JavaScript的异步性可能会导致令人惊讶的行为，为此，在使用 async/await 语法时，一定要仔细注意。即使该语法使处理 promise 变得更容易，但仍然有必要了解 promise 是如何工作的!
 
 <!-- The code for our application can be found from [github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5), branch <i>part4-5</i>.-->
  我们应用的代码可以从[github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5)，分支<i>part4-5</i>找到。
@@ -1129,79 +1116,54 @@ beforeEach(async () => {
 
 ### Exercises 4.8.-4.12.
 
-<!-- **NB:** the material uses the [toContain](https://jestjs.io/docs/expect#tocontainitem) matcher in several places to verify that an array contains a specific element. It's worth noting that the method uses the === operator for comparing and matching elements, which means that it is often not well-suited for matching objects. In most cases, the appropriate method for verifying objects in arrays is the [toContainEqual](https://jestjs.io/docs/expect#tocontainequalitem) matcher. However, the model solutions don't check for objects in arrays with matchers, so using the method is not required for solving the exercises.-->
- **NB:**该材料在多个地方使用了[toContain](https://jestjs.io/docs/expect#tocontainitem)匹配器来验证一个数组是否包含特定元素。值得注意的是，该方法使用===操作符来比较和匹配元素，这意味着它通常不适合于匹配对象。在大多数情况下，验证数组中对象的合适方法是[toContainEqual](https://jestjs.io/docs/expect#tocontainequalitem)匹配器。然而，模型的解决方案并没有用匹配器来检查数组中的对象，所以使用该方法并不是解决练习的必要条件。
-
 <!-- **Warning:** If you find yourself using async/await and <i>then</i> methods in the same code, it is almost guaranteed that you are doing something wrong. Use one or the other and don't mix the two.-->
  **警告：**如果你发现自己在同一段代码中使用async/await和<i>then</i>方法，几乎可以肯定你做错了什么。请使用其中之一，不要将两者混用。
 
-#### 4.8: Blog list tests, step1
+### 4.8: Blog List Tests, step 1
 
-<!-- Use the supertest package for writing a test that makes an HTTP GET request to the <i>/api/blogs</i> url. Verify that the blog list application returns the correct amount of blog posts in the JSON format.-->
- 使用supertest包编写一个测试，向<i>/api/blogs</i>网址发出HTTP GET请求。验证博客列表应用以JSON格式返回正确数量的博客文章。
+<!-- Use the SuperTest library for writing a test that makes an HTTP GET request to the <i>/api/blogs</i> URL. Verify that the blog list application returns the correct amount of blog posts in the JSON format. -->
+使用 SuperTest 库编写一个测试，向 <i>/api/blogs</i> URL 发出 HTTP GET 请求。验证博客列表应用程序以 JSON 格式返回正确数量的博客文章。
 
-<!-- Once the test is finished, refactor the route handler to use the async/await syntax instead of promises.-->
- 一旦测试完成，重构路由处理程序，使用async/await语法而不是promises。
+<!-- Once the test is finished, refactor the route handler to use the async/await syntax instead of promises. -->
+测试完成后，重构路由处理程序以使用 async/await 语法而不是 promises。
 
-<!-- Notice that you will have to make similar changes to the code that were made [in the material](/en/part4/testing_the_backend#test-environment), like defining the test environment so that you can write tests that use their own separate database.-->
- 注意，你将不得不对[材料中](/en/part4/testing_the_backend#test-environment)的代码进行类似的修改，比如定义测试环境，以便你可以编写使用自己独立数据库的测试。
+<!-- Notice that you will have to make similar changes to the code that were made [in the material](/en/part4/testing_the_backend#test-environment), like defining the test environment so that you can write tests that use separate databases. -->
+请注意，您必须对代码进行类似的更改，这些更改在 [材料](/zh/part4/测试后端应用#test-environment) 中进行了，例如定义测试环境以便您可以编写使用单独数据库的测试。
 
-<!-- **NB:** When running the tests, you may run into the following warning:-->
- **NB:** 当运行测试时，你可能会遇到以下警告。
+<!-- **NB:** when you are writing your tests **<i>it is better to not execute them all</i>**, only execute the ones you are working on. Read more about this [here](/en/part4/testing_the_backend#running-tests-one-by-one). -->
+**注意：**在编写测试时**<i>最好不要全部执行</i>**，只执行您正在处理的测试。[此处](/zh/part4/测试后端应用#test-environment) 了解更多相关信息。
 
-![](../../images/4/8a.png)
+#### 4.9: Blog List Tests, step 2
 
-<!-- The problem is quite likely caused by the Mongoose version 6.x, the problem does not appear when the version 5.x is used. Actually [Mongoose documentation](https://mongoosejs.com/docs/jest.html) does not recommend testing Mongoose applications with Jest.-->
- 这个问题很可能是由Mongoose 6.x版本引起的，当使用5.x版本时，这个问题不会出现。实际上[Mongoose文档](https://mongoosejs.com/docs/jest.html)并不推荐用Jest测试Mongoose应用。
+<!-- Write a test that verifies that the unique identifier property of the blog posts is named <i>id</i>, by default the database names the property <i>_id</i>. -->
+编写一个测试来验证博客文章的唯一标识符属性名为 <i>id</i>，默认情况下，数据库将该属性命名为 <i>_id</i>。
 
-<!-- One way to get rid of this is to run tests with option <i>--forceExit</i>:-->
- 摆脱这个问题的一个方法是用选项<i>--forceExit</i>来运行测试。
+<!-- Make the required changes to the code so that it passes the test. The [toJSON](/en/part3/saving_data_to_mongo_db#connecting-the-backend-to-a-database) method discussed in part 3 is an appropriate place for defining the <i>id</i> parameter. -->
+对代码进行必要的更改，使其通过测试。第 3 部分中讨论的 [toJSON](/zh-cn/part3/saving_data_to_mongo_db#connecting-the-backend-to-a-database) 方法是定义 <i>id</i> 参数的合适位置。
 
-```json
-{
-  // ..
-  "scripts": {
-    "start": "cross-env NODE_ENV=production node index.js",
-    "dev": "cross-env NODE_ENV=development nodemon index.js",
-    "lint": "eslint .",
-    "test": "cross-env NODE_ENV=test jest --verbose --runInBand --forceExit" // highlight-line
-  },
-  // ...
-}
-```
+#### 4.10: Blog List Tests, step 3
 
-<!-- **NB:** when you are writing your tests **<i>it is better to not execute all of your tests</i>**, only execute the ones you are working on. Read more about this [here](/en/part4/testing_the_backend#running-tests-one-by-one).-->
- **NB:**当你写你的测试时，**<i>最好不要执行你所有的测试</i>**，只执行你正在进行的测试。阅读更多关于这个的信息[这里](/en/part4/testing_the_backend#running-tests one-by-one)。
+<!-- Write a test that verifies that making an HTTP POST request to the <i>/api/blogs</i> URL successfully creates a new blog post. At the very least, verify that the total number of blogs in the system is increased by one. You can also verify that the content of the blog post is saved correctly to the database. -->
+编写一个测试来验证向 <i>/api/blogs</i> URL 发出 HTTP POST 请求可以成功创建新的博客文章。至少验证系统中的博客总数增加了 1。您还可以验证博客文章的内容是否正确保存到数据库中。
 
-#### 4.9*: Blog list tests, step2
+<!-- Once the test is finished, refactor the operation to use async/await instead of promises. -->
+测试完成后，重构操作以使用 async/await 而不是 promises。
 
-<!-- Write a test that verifies that the unique identifier property of the blog posts is named <i>id</i>, by default the database names the property <i>_id</i>. Verifying the existence of a property is easily done with Jest's [toBeDefined](https://jestjs.io/docs/en/expect#tobedefined) matcher.-->
- 编写一个测试，验证博客文章的唯一标识符属性是否被命名为<i>id</i>，默认情况下，数据库将该属性命名为<i>_id</i>。使用Jest's [toBeDefined](https://jestjs.io/docs/en/expect#tobedefined)匹配器可以很容易地验证一个属性的存在。
+#### 4.11*: Blog List Tests, step 4
 
-<!-- Make the required changes to the code so that it passes the test. The [toJSON](/en/part3/saving_data_to_mongo_db#backend-connected-to-a-database) method discussed in part 3 is an appropriate place for defining the <i>id</i> parameter.-->
- 对代码进行必要的修改，使其通过测试。第3章节中讨论的[toJSON](/en/part3/saving_data_to_mongo_db#backend-connected-to-a-database)方法是定义<i>id</i>参数的一个合适位置。
-#### 4.10: Blog list tests, step3
+<!-- Write a test that verifies that if the <i>likes</i> property is missing from the request, it will default to the value 0. Do not test the other properties of the created blogs yet. -->
+编写一个测试来验证，如果请求中缺少 <i>likes</i> 属性，它将默认为值 0。不要测试已创建博客的其他属性。
 
-<!-- Write a test that verifies that making an HTTP POST request to the <i>/api/blogs</i> url successfully creates a new blog post. At the very least, verify that the total number of blogs in the system is increased by one. You can also verify that the content of the blog post is saved correctly to the database.-->
- 编写一个测试，验证向<i>/api/blogs</i>网址发出的HTTP POST请求是否成功创建了一个新的博客文章。至少要验证系统中的博客总数是否增加了一个。你也可以验证博文的内容是否被正确地保存到数据库中。
+<!-- Make the required changes to the code so that it passes the test. -->
+对代码进行必要的更改，使其通过测试。
 
-<!-- Once the test is finished, refactor the operation to use async/await instead of promises.-->
- 一旦测试完成，重构操作，使用async/await而不是promises。
-#### 4.11*: Blog list tests, step4
+#### 4.12*: Blog List tests, step 5
 
-<!-- Write a test that verifies that if the <i>likes</i> property is missing from the request, it will default to the value 0. Do not test the other properties of the created blogs yet.-->
- 写一个测试，验证如果请求中缺少<i>likes</i>属性，它将默认为0值。先不要测试创建的博客的其他属性。
+<!-- Write tests related to creating new blogs via the <i>/api/blogs</i> endpoint, that verify that if the <i>title</i> or <i>url</i> properties are missing from the request data, the backend responds to the request with the status code <i>400 Bad Request</i>. -->
+编写与通过 <i>/api/blogs</i> 端点创建新博客相关的测试，验证如果请求数据中缺少 <i>title</i> 或 <i>url</i> 属性，后端将以状态代码 <i>400 Bad Request</i> 响应请求。
 
-<!-- Make the required changes to the code so that it passes the test.-->
- 对代码进行必要的修改，使其通过测试。
-#### 4.12*: Blog list tests, step5
-
-<!-- Write a test related to creating new blogs via the <i>/api/blogs</i> endpoint, that verifies that if the <i>title</i> and <i>url</i> properties are missing from the request data, the backend responds to the request with the status code <i>400 Bad Request</i>.-->
- 写一个与通过<i>/api/blogs</i>端点创建新博客有关的测试，验证如果请求数据中缺少<i>title</i>和<i>url</i>属性，后端会以状态代码<i>400 Bad Request</i>响应请求。
-
-
-<!-- Make the required changes to the code so that it passes the test.-->
- 对代码进行必要的修改，使其通过测试。
+<!-- Make the required changes to the code so that it passes the test. -->
+对代码进行必要的更改，使其通过测试。
 
 </div>
 
@@ -1217,20 +1179,23 @@ beforeEach(async () => {
  下面是做了一些小改进后的测试文件的例子。
 
 ```js
-const supertest = require('supertest')
+const { test, after, beforeEach, describe } = require('node:test')
+const assert = require('node:assert')
 const mongoose = require('mongoose')
-const helper = require('./test_helper')
+const supertest = require('supertest')
 const app = require('../app')
 const api = supertest(app)
 
+const helper = require('./test_helper')
+
 const Note = require('../models/note')
 
-beforeEach(async () => {
-  await Note.deleteMany({})
-  await Note.insertMany(helper.initialNotes)
-})
-
 describe('when there is initially some notes saved', () => {
+  beforeEach(async () => {
+    await Note.deleteMany({})
+    await Note.insertMany(helper.initialNotes)
+  })
+
   test('notes are returned as json', async () => {
     await api
       .get('/api/notes')
@@ -1241,116 +1206,105 @@ describe('when there is initially some notes saved', () => {
   test('all notes are returned', async () => {
     const response = await api.get('/api/notes')
 
-    expect(response.body).toHaveLength(helper.initialNotes.length)
+    assert.strictEqual(response.body.length, helper.initialNotes.length)
   })
 
   test('a specific note is within the returned notes', async () => {
     const response = await api.get('/api/notes')
 
     const contents = response.body.map(r => r.content)
+    assert(contents.includes('Browser can execute only JavaScript'))
+  })
 
-    expect(contents).toContain(
-      'Browser can execute only Javascript'
-    )
+  describe('viewing a specific note', () => {
+
+    test('succeeds with a valid id', async () => {
+      const notesAtStart = await helper.notesInDb()
+
+      const noteToView = notesAtStart[0]
+
+      const resultNote = await api
+        .get(`/api/notes/${noteToView.id}`)
+        .expect(200)
+        .expect('Content-Type', /application\/json/)
+
+      assert.deepStrictEqual(resultNote.body, noteToView)
+    })
+
+    test('fails with statuscode 404 if note does not exist', async () => {
+      const validNonexistingId = await helper.nonExistingId()
+
+      await api
+        .get(`/api/notes/${validNonexistingId}`)
+        .expect(404)
+    })
+
+    test('fails with statuscode 400 id is invalid', async () => {
+      const invalidId = '5a3d5da59070081a82a3445'
+
+      await api
+        .get(`/api/notes/${invalidId}`)
+        .expect(400)
+    })
+  })
+
+  describe('addition of a new note', () => {
+    test('succeeds with valid data', async () => {
+      const newNote = {
+        content: 'async/await simplifies making async calls',
+        important: true,
+      }
+
+      await api
+        .post('/api/notes')
+        .send(newNote)
+        .expect(201)
+        .expect('Content-Type', /application\/json/)
+
+      const notesAtEnd = await helper.notesInDb()
+      assert.strictEqual(notesAtEnd.length, helper.initialNotes.length + 1)
+
+      const contents = notesAtEnd.map(n => n.content)
+      assert(contents.includes('async/await simplifies making async calls'))
+    })
+
+    test('fails with status code 400 if data invalid', async () => {
+      const newNote = {
+        important: true
+      }
+
+      await api
+        .post('/api/notes')
+        .send(newNote)
+        .expect(400)
+
+      const notesAtEnd = await helper.notesInDb()
+
+      assert.strictEqual(notesAtEnd.length, helper.initialNotes.length)
+    })
+  })
+
+  describe('deletion of a note', () => {
+    test('succeeds with status code 204 if id is valid', async () => {
+      const notesAtStart = await helper.notesInDb()
+      const noteToDelete = notesAtStart[0]
+
+      await api
+        .delete(`/api/notes/${noteToDelete.id}`)
+        .expect(204)
+
+      const notesAtEnd = await helper.notesInDb()
+
+      assert.strictEqual(notesAtEnd.length, helper.initialNotes.length - 1)
+
+      const contents = notesAtEnd.map(r => r.content)
+      assert(!contents.includes(noteToDelete.content))
+    })
   })
 })
 
-describe('viewing a specific note', () => {
-  test('succeeds with a valid id', async () => {
-    const notesAtStart = await helper.notesInDb()
-
-    const noteToView = notesAtStart[0]
-
-    const resultNote = await api
-      .get(`/api/notes/${noteToView.id}`)
-      .expect(200)
-      .expect('Content-Type', /application\/json/)
-
-    const processedNoteToView = JSON.parse(JSON.stringify(noteToView))
-
-    expect(resultNote.body).toEqual(processedNoteToView)
-  })
-
-  test('fails with statuscode 404 if note does not exist', async () => {
-    const validNonexistingId = await helper.nonExistingId()
-
-    console.log(validNonexistingId)
-
-    await api
-      .get(`/api/notes/${validNonexistingId}`)
-      .expect(404)
-  })
-
-  test('fails with statuscode 400 id is invalid', async () => {
-    const invalidId = '5a3d5da59070081a82a3445'
-
-    await api
-      .get(`/api/notes/${invalidId}`)
-      .expect(400)
-  })
-})
-
-describe('addition of a new note', () => {
-  test('succeeds with valid data', async () => {
-    const newNote = {
-      content: 'async/await simplifies making async calls',
-      important: true,
-    }
-
-    await api
-      .post('/api/notes')
-      .send(newNote)
-      .expect(201)
-      .expect('Content-Type', /application\/json/)
-
-    const notesAtEnd = await helper.notesInDb()
-    expect(notesAtEnd).toHaveLength(helper.initialNotes.length + 1)
-
-    const contents = notesAtEnd.map(n => n.content)
-    expect(contents).toContain(
-      'async/await simplifies making async calls'
-    )
-  })
-
-  test('fails with status code 400 if data invalid', async () => {
-    const newNote = {
-      important: true
-    }
-
-    await api
-      .post('/api/notes')
-      .send(newNote)
-      .expect(400)
-
-    const notesAtEnd = await helper.notesInDb()
-
-    expect(notesAtEnd).toHaveLength(helper.initialNotes.length)
-  })
-})
-
-describe('deletion of a note', () => {
-  test('succeeds with status code 204 if id is valid', async () => {
-    const notesAtStart = await helper.notesInDb()
-    const noteToDelete = notesAtStart[0]
-
-    await api
-      .delete(`/api/notes/${noteToDelete.id}`)
-      .expect(204)
-
-    const notesAtEnd = await helper.notesInDb()
-
-    expect(notesAtEnd).toHaveLength(
-      helper.initialNotes.length - 1
-    )
-
-    const contents = notesAtEnd.map(r => r.content)
-
-    expect(contents).not.toContain(noteToDelete.content)
-  })
-})
-
-afterAll(() => {
-  mongoose.connection.close()
+after(async () => {
+  await mongoose.connection.close()
 })
 ```
 

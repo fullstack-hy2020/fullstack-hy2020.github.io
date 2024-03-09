@@ -164,7 +164,7 @@ setTimeout(() => {
  让我们回到从服务器获取数据的话题上来。
 
 <!-- We could use the previously mentioned promise based function [fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch) to pull the data from the server. Fetch is a great tool. It is standardized and supported by all modern browsers (excluding IE).-->
-我们可以使用之前提到的基于承诺的函数[fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch)来从服务器获取数据。Fetch是一个伟大的工具。它是标准化的，被所有现代浏览器支持（不包括IE）。
+我们可以使用之前提到的基于 promise 的函数[fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch)来从服务器获取数据。Fetch是一个伟大的工具。它是标准化的，被所有现代浏览器支持（不包括IE）。
 
 <!-- That being said, we will be using the [axios](https://github.com/axios/axios) library instead for communication between the browser and server. It functions like fetch, but is somewhat more pleasant to use. Another good reason to use axios is our getting familiar with adding external libraries, so-called <i>npm packages</i>, to React projects.-->
  也就是说，我们将使用[axios](https://github.com/axios/axios)库来代替浏览器和服务器之间的通信。它的功能类似于fetch，但使用起来更顺手一些。使用axios的另一个很好的理由是我们要熟悉在React项目中添加外部库，即所谓的npm包</i>。
@@ -342,29 +342,29 @@ console.log(promise2)
  **注意：**当文件<i>index.js</i>的内容发生变化时，React并不总是自动注意到这一点，所以你可能需要刷新浏览器来看到你的变化!一个简单的解决方法是在项目的根目录下创建一个名为<i>.env</i>的文件，并添加这一行<i>FAST_REFRESH=false</i>，使React自动注意到变化。重新启动应用以使应用的变化生效。
 
 <!-- Axios' method _get_ returns a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises).-->
- 'Axios' 方法 _get_ 返回一个[承诺](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises)。
+ 'Axios' 方法 _get_ 返回一个[ promise ](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises)。
 
 <!-- The documentation on Mozilla's site states the following about promises:-->
- Mozilla网站上的文档对承诺有如下说明。
+ Mozilla网站上的文档对 promise 有如下说明。
 
 <!-- > <i>A Promise is an object representing the eventual completion or failure of an asynchronous operation.</i>-->
  > <i>A Promise是一个代表异步操作最终完成或失败的对象。</i>
 
 <!-- In other words, a promise is an object that represents an asynchronous operation. A promise can have three distinct states:-->
- 换句话说，一个承诺是一个代表异步操作的对象。一个承诺可以有三种不同的状态。
+ 换句话说，一个 promise 是一个代表异步操作的对象。一个 promise 可以有三种不同的状态。
 
 <!-- 1. The promise is <i>pending</i>: It means that the final value (one of the following two) is not available yet.-->
  1.答应是<i>pending</i>：这意味着最终的值（以下两个中的一个）还不能用。
 <!-- 2. The promise is <i>fulfilled</i>: It means that the operation has been completed and the final value is available, which generally is a successful operation. This state is sometimes also called <i>resolved</i>.-->
- 2.承诺是<i>fulfilled</i>：它意味着操作已经完成，最终值可用，一般来说是一个成功的操作。这种状态有时也被称为<i>resolved</i>。
+ 2. promise 是<i>fulfilled</i>：它意味着操作已经完成，最终值可用，一般来说是一个成功的操作。这种状态有时也被称为<i>resolved</i>。
 <!-- 3. The promise is <i>rejected</i>: It means that an error prevented the final value from being determined, which generally represents a failed operation.-->
- 3.承诺被<i>拒绝</i>：这意味着一个错误阻止了最终值的确定，这一般代表一个失败的操作。
+ 3. promise 被<i>拒绝</i>：这意味着一个错误阻止了最终值的确定，这一般代表一个失败的操作。
 
 <!-- The first promise in our example is <i>fulfilled</i>, representing a successful _axios.get('http://localhost:3001/notes')_ request. The second one, however, is <i>rejected</i>, and the console tells us the reason. It looks like we were trying to make an HTTP GET request to a non-existent address.-->
- 我们例子中的第一个承诺是<i>fulfilled</i>，代表一个成功的_axios.get('http://localhost:3001/notes')_请求。然而，第二个承诺是<i>拒绝的</i>，并且控制台告诉我们原因。看起来我们试图向一个不存在的地址发出HTTP GET请求。
+ 我们例子中的第一个 promise 是<i>fulfilled</i>，代表一个成功的_axios.get('http://localhost:3001/notes')_请求。然而，第二个 promise 是<i>拒绝的</i>，并且控制台告诉我们原因。看起来我们试图向一个不存在的地址发出HTTP GET请求。
 
 <!-- If, and when, we want to access the result of the operation represented by the promise, we must register an event handler to the promise. This is achieved using the method <em>then</em>:-->
- 如果，以及何时，我们想访问承诺所代表的操作的结果，我们必须为承诺注册一个事件处理程序。这可以通过<em>then</em>方法实现。
+ 如果，以及何时，我们想访问 promise 所代表的操作的结果，我们必须为 promise 注册一个事件处理程序。这可以通过<em>then</em>方法实现。
 
 ```js
 const promise = axios.get('http://localhost:3001/notes')
@@ -382,7 +382,7 @@ promise.then(response => {
  JavaScript运行环境调用由<em>then</em>方法注册的回调函数，为其提供一个<em>response</em>对象作为参数。<em>response</em>对象包含与HTTP GET请求的响应相关的所有基本数据，其中包括返回的<i>数据</i>、<i>状态代码</i>和<i>头信息</i>。
 
 <!-- Storing the promise object in a variable is generally unnecessary, and it's instead common to chain the <em>then</em> method call to the axios method call, so that it follows it directly:-->
- 将承诺对象存储在一个变量中通常是不必要的，而通常是将<em>then</em>方法调用链到axios方法调用中，这样它就直接跟随它。
+ 将 promise 对象存储在一个变量中通常是不必要的，而通常是将<em>then</em>方法调用链到axios方法调用中，这样它就直接跟随它。
 
 ```js
 axios.get('http://localhost:3001/notes').then(response => {
@@ -440,12 +440,12 @@ axios.get('http://localhost:3001/notes').then(response => {
 ### Effect-hooks
 
 <!-- We have already used [state hooks](https://reactjs.org/docs/hooks-state.html) that were introduced along with React version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0), which provide state to React components defined as functions - the so-called <i>functional components</i>. Version 16.8.0 also introduces [effect hooks](https://reactjs.org/docs/hooks-effect.html) as a new feature. As per the official docs:-->
- 我们已经使用了与React版本[16.8.0](https://www.npmjs.com/package/react/v/16.8.0)一起引入的[状态钩子](https://reactjs.org/docs/hooks-state.html)，它为定义为函数的React组件--所谓的<i>功能组件</i>提供状态。16.8.0版本还引入了[效果钩子](https://reactjs.org/docs/hooks-effect.html)这个新功能。按照官方文档的说法。
+ 我们已经使用了与React版本[16.8.0](https://www.npmjs.com/package/react/v/16.8.0)一起引入的[状态钩子](https://zh-hans.react.dev/reference/react/hooks#state-hooks)，它为定义为函数的React组件--所谓的<i>功能组件</i>提供状态。16.8.0版本还引入了[效果钩子](https://zh-hans.react.dev/reference/react/hooks#effect-hooks)这个新功能。按照官方文档的说法。
 
-<!-- > <i>The Effect Hook lets you perform side effects on function components.</i>-->
- > <i>效果钩可以让你对函数组件执行副作用。</i>。
-<!-- > <i>Data fetching, setting up a subscription, and manually changing the DOM in React components are all examples of side effects.</i>-->
- > <i>获取数据、设置订阅、以及手动改变React组件中的DOM都是副作用的例子。</i>
+<!-- > <i>Effects let a component connect to and synchronize with external systems.</i>-->
+ > <i>Effect 允许组件连接到外部系统并与之同步。</i>
+<!-- > <i>This includes dealing with network, browser DOM, animations, widgets written using a different UI library, and other non-React code.</i>-->
+ > <i>这包括处理网络、浏览器、DOM、动画、使用不同 UI 库编写的小部件以及其他非 React 代码。</i>
 
 <!-- As such, effect hooks are precisely the right tool to use when fetching data from a server.-->
  因此，当从服务器获取数据时，效果钩子正是正确的工具。
@@ -529,7 +529,7 @@ response => {
 ```
 
 <!-- When data arrives from the server, the JavaScript runtime calls the function registered as the event handler, which prints <i>promise fulfilled</i> to the console and stores the notes received from the server into the state using the function <em>setNotes(response.data)</em>.-->
-当数据从服务器到达时，JavaScript运行时调用注册为事件处理程序的函数，该函数将<i>承诺兑现</i>打印到控制台，并使用函数<em>setNotes(response.data)</em>将从服务器收到的注释存储到状态中。
+当数据从服务器到达时，JavaScript运行时调用注册为事件处理程序的函数，该函数将<i> promise 兑现</i>打印到控制台，并使用函数<em>setNotes(response.data)</em>将从服务器收到的注释存储到状态中。
 
 <!-- As always, a call to a state-updating function triggers the re-rendering of the component. As a result, <i>render 3 notes</i> is printed to the console, and the notes fetched from the server are rendered to the screen.-->
  一如既往，对状态更新函数的调用会触发组件的重新渲染。结果，<i>render 3 notes</i>被打印到控制台，而从服务器上获取的笔记被渲染到屏幕上。
@@ -565,8 +565,8 @@ const hook = () => {
 useEffect(hook, [])
 ```
 
-<!-- Now we can see more clearly that the function [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect) actually takes <i>two parameters</i>. The first is a function, the <i>effect</i> itself. According to the documentation:-->
- 现在我们可以更清楚地看到，函数[useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect)实际上需要<i>两个参数</i>。第一个是一个函数，即<i>effect</i>本身。根据文档的内容。
+<!-- Now we can see more clearly that the function [useEffect](https://react.dev/reference/react/useEffect) actually takes <i>two parameters</i>. The first is a function, the <i>effect</i> itself. According to the documentation:-->
+ 现在我们可以更清楚地看到，函数[useEffect](https://zh-hans.react.dev/reference/react/useEffect)实际上需要<i>两个参数</i>。第一个是一个函数，即<i>effect</i>本身。根据文档的内容。
 
 <!-- > <i>By default, effects run after every completed render, but you can choose to fire it only when certain values have changed.</i>-->
  > <i>默认情况下，效果会在每次完成渲染后运行，但你可以选择只在某些值发生变化时启动它。</i>
@@ -575,7 +575,7 @@ useEffect(hook, [])
  所以默认情况下，效果是<i>总是</i>在组件被渲染后运行。然而，在我们的例子中，我们只想在第一次渲染时执行效果。
 
 <!-- The second parameter of <em>useEffect</em> is used to [specify how often the effect is run](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect). If the second parameter is an empty array <em>[]</em>, then the effect is only run along with the first render of the component.-->
- <em>useEffect</em>的第二个参数用于[指定效果的运行频率](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect)。如果第二个参数是一个空的数组<em>[]</em>，那么效果就只在组件的第一次渲染时运行。
+ <em>useEffect</em>的第二个参数用于[指定效果的运行频率](https://zh-hans.react.dev/reference/react/useEffect#parameters)。如果第二个参数是一个空的数组<em>[]</em>，那么效果就只在组件的第一次渲染时运行。
 
 <!-- There are many possible use cases for an effect hook other than fetching data from the server. However, this use is sufficient for us, for now.-->
  除了从服务器上获取数据之外，效果钩子还有许多可能的使用情况。然而，目前这个用途对我们来说已经足够了。
@@ -601,7 +601,7 @@ useEffect(() => {
 ```
 
 <!-- A reference to an event handler function is assigned to the variable <em>eventHandler</em>. The promise returned by the <em>get</em> method of Axios is stored in the variable <em>promise</em>. The registration of the callback happens by giving the <em>eventHandler</em> variable, referring to the event-handler function, as a parameter to the <em>then</em> method of the promise. It isn't usually necessary to assign functions and promises to variables, and a more compact way of representing things, as seen further above, is sufficient.-->
- 一个事件处理函数的引用被分配到变量<em>eventHandler</em>。由Axios的<em>get</em>方法返回的承诺被存储在变量<em>promise</em>中。回调的注册是通过给<em>eventHandler</em>变量，指的是事件处理函数，作为承诺的<em>then</em>方法的一个参数。通常没有必要把函数和承诺分配给变量，用更紧凑的方式来表示事情，如上面进一步看到的，就足够了。
+ 一个事件处理函数的引用被分配到变量<em>eventHandler</em>。由Axios的<em>get</em>方法返回的 promise 被存储在变量<em>promise</em>中。回调的注册是通过给<em>eventHandler</em>变量，指的是事件处理函数，作为 promise 的<em>then</em>方法的一个参数。通常没有必要把函数和 promise 分配给变量，用更紧凑的方式来表示事情，如上面进一步看到的，就足够了。
 
 ```js
 useEffect(() => {
@@ -695,8 +695,8 @@ Error: listen EADDRINUSE 0.0.0.0:3001
 <!-- it means that port 3001 is already in use by another application, e.g. in use by an already running json-server. Close the other application, or change the port in case that doesn't work.-->
  这意味着3001端口已经被另一个应用使用，例如，被一个已经运行的json-server使用。关闭另一个应用，或者改变端口，如果这不起作用的话。
 
-<!-- Modify the application such that the initial state of the data is fetched from the server using the <i>axios</i>-library. Complete the fetching with an [Effect hook](https://reactjs.org/docs/hooks-effect.html). -->
- 修改应用，使数据的初始状态是使用<i>axios</i>-library从服务器获取的。用一个[效果钩子](https://reactjs.org/docs/hooks-effect.html)来完成获取。
+<!-- Modify the application such that the initial state of the data is fetched from the server using the <i>axios</i>-library. Complete the fetching with an [Effect hook](https://react.dev/reference/react/hooks#effect-hooks). -->
+ 修改应用，使数据的初始状态是使用<i>axios</i>-library从服务器获取的。用一个[效果钩子](https://zh-hans.react.dev/reference/react/hooks#effect-hooks)来完成获取。
 
 <h4>2.12* Data for countries, step1</h4>
 

@@ -348,7 +348,6 @@ Mongoose validations do not provide a direct way to check the uniqueness of a fi
 
 ```js
 const mongoose = require('mongoose')
-const uniqueValidator = require('mongoose-unique-validator') // highlight-line
 
 const userSchema = mongoose.Schema({
   // highlight-start

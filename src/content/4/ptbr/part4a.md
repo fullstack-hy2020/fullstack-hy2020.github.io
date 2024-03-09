@@ -325,7 +325,7 @@ As aplicações Express não requerem uma estrutura de diretórios pré-determin
 
 Você pode encontrar o código atual da nossa aplicação na branch <i>part4-1</i> [neste repositório GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-1).
 
-Se você fizer o clone do projeto, execute o comando _npm install_ antes de iniciar a aplicação com o comando _npm start_.
+Se você fizer o clone do projeto, execute o comando _npm install_ antes de iniciar a aplicação com o comando _npm run dev_.
 
 ### Observação sobre os exports
 

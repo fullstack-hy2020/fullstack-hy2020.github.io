@@ -688,21 +688,21 @@ type DiaryEntry = {
 ### Patientor frontend
 
 <!-- It's time to get our hands dirty finalizing the frontend for the backend we built in [exercises 9.8.-9.13](/en/part9/typing_the_express_app).-->
- 是时候动手为我们在[练习9.8.-9.13](/en/part9/typing_the_express_app)中建立的后台完成前端了。
+ 是时候动手为我们在[练习9.8.-9.13](/en/part9/typing_the_express_app)中建立的后端完成前端了。
 
 <!-- Before diving into the code, let us start both the frontend and the backend.-->
  在深入研究代码之前，让我们同时启动前端和后端。
 
 <!-- If all goes well, you should see a patient listing page. It fetches a list of patients from our backend, and renders it to the screen as a simple table. There is also a button for creating new patients to the backend. As we are using mock data instead of a database, the data will not persist - closing the backend will delete all the data we have added. UI design has clearly not been a strong point of the creators, so let's disregard the UI for now.-->
- 如果一切顺利，你应该看到一个病人列表页面。它从我们的后台获取一个病人列表，并以一个简单的表格形式渲染在屏幕上。还有一个按钮用于在后台创建新的病人。由于我们使用的是模拟数据而不是数据库，所以数据不会持续存在--关闭后台将删除我们添加的所有数据。UI设计显然不是创建者的强项，所以我们现在先不考虑UI。
+ 如果一切顺利，你应该看到一个病人列表页面。它从我们的后端获取一个病人列表，并以一个简单的表格形式渲染在屏幕上。还有一个按钮用于在后端创建新的病人。由于我们使用的是模拟数据而不是数据库，所以数据不会持续存在--关闭后端将删除我们添加的所有数据。UI设计显然不是创建者的强项，所以我们现在先不考虑UI。
 
 <!-- After verifying that everything works, we can start studying the code. All the interesting stuff resides in the <i>src</i> folder. For your convenience, there is already a <i>types.ts</i> file for basic types used in the app, which you will have to extend or refactor in the exercises.-->
  在验证了一切正常后，我们可以开始研究代码。所有有趣的东西都在<i>src</i>文件夹中。为了你的方便，已经有一个<i>types.ts</i>文件用于应用中使用的基本类型，你将不得不在练习中扩展或重构它。
 
 <!-- In principle, we could use the same types for both backend and frontend, but usually the frontend has different data structures and use cases for the data, which causes the types to be different.-->
- 原则上，我们可以在后台和前台使用相同的类型，但通常前台有不同的数据结构和数据用例，这导致类型不同。
+ 原则上，我们可以在后端和前端使用相同的类型，但通常前端有不同的数据结构和数据用例，这导致类型不同。
 <!-- For example, the frontend has a state, and may want to keep data in objects or maps whereas the backend uses an array. The frontend might also not need all the fields of a data object saved in the backend, and it may need to add some new fields to use for rendering.-->
- 例如，前端有一个状态，可能想把数据保存在对象或地图中，而后端使用数组。前台也可能不需要保存在后台的数据对象的所有字段，它可能需要添加一些新的字段来用于渲染。
+ 例如，前端有一个状态，可能想把数据保存在对象或地图中，而后端使用数组。前端也可能不需要保存在后端的数据对象的所有字段，它可能需要添加一些新的字段来用于渲染。
 
 <!-- The folder structure looks as follows:-->
  文件夹结构看起来如下。
@@ -710,7 +710,7 @@ type DiaryEntry = {
 ![](../../images/9/34a.png)
 
 <!-- As you would expect, there are currently two main components: <i>AddPatientModal</i> and <i>PatientListPage</i>. The <i>state</i> folder contains state handling for the frontend.-->
- 如你所料，目前有两个主要组件。<i>AddPatientModal</i>和<i>PatientListPage</i>。<i>state</i>文件夹包含前台的状态处理。
+ 如你所料，目前有两个主要组件。<i>AddPatientModal</i>和<i>PatientListPage</i>。<i>state</i>文件夹包含前端的状态处理。
 <!-- The main functionality of the code in the <i>state</i> folder is to keep our data in one place and offer simple actions to alter the state of our app.-->
  <i>state</i>文件夹中的代码的主要功能是将我们的数据保存在一个地方，并提供简单的操作来改变我们应用的状态。
 ### State handling
@@ -943,7 +943,7 @@ const closeModal = (): void => {
 ```
 
 <!-- The frontend's types are based on what you have created when developing the backend in the previous part.-->
- 前台的类型是基于你在前一部分开发后台时创建的。
+ 前端的类型是基于你在前一部分开发后端时创建的。
 
 <!-- When the component <i>App</i> mounts, it fetches patients from the backend using [Axios](https://github.com/axios/axios). Note how we are giving the <i>axios.get</i> function a type parameter to describe the type of the response data:-->
  当组件<i>App</i>挂载时，它使用[Axios](https://github.com/axios/axios)从后端获取病人。注意我们是如何给<i>axios.get</i>函数一个类型参数来描述响应数据的类型。
@@ -1168,7 +1168,7 @@ interface BaseEntry {
 ```
 
 <!-- If we want to finetune it a bit further, since we already have a <i>Diagnosis</i> type defined in the backend, we might just want to refer to the code field of the <i>Diagnosis</i> type directly in case its type ever changes.-->
- 如果我们想进一步调整，因为我们已经在后台定义了一个<i>诊断</i>类型，我们可能只想直接引用<i>诊断</i>类型的代码字段，以防其类型发生变化。
+ 如果我们想进一步调整，因为我们已经在后端定义了一个<i>诊断</i>类型，我们可能只想直接引用<i>诊断</i>类型的代码字段，以防其类型发生变化。
 <!-- We can do that like so:-->
  我们可以这样做。
 
@@ -1240,12 +1240,12 @@ type EntryWithoutId = UnionOmit<Entry, 'id'>;
 ![](../../images/9/40.png)
 
 <!-- Use types properly in the backend! For now, there is no need to do a proper validation for all the fields of the entries in the backend, it is enough e.g. to check that the field <i>type</i> has a correct value.-->
- 在后端正确使用类型!现在，没有必要对后台的所有条目字段进行适当的验证，只需检查字段<i>类型</i>是否有正确的值即可。
+ 在后端正确使用类型!现在，没有必要对后端的所有条目字段进行适当的验证，只需检查字段<i>类型</i>是否有正确的值即可。
 
 #### 9.20: patientor, step5
 
 <!-- Extend a patient's page in the frontend to list the <i>date</i>, <i>description</i> and <i>diagnose codes</i> of the patient's entries.-->
- 在前台扩展一个病人的页面，列出病人条目的<i>日期</i>、<i>描述</i>和<i>诊断代码</i>。
+ 在前端扩展一个病人的页面，列出病人条目的<i>日期</i>、<i>描述</i>和<i>诊断代码</i>。
 
 <!-- You can use the same type definition for an <i>Entry</i> in the frontend. For these exercises, it is enough to just copy/paste the definitions from the backend to the frontend.-->
  你可以在前端的<i>条目</i>中使用相同的类型定义。对于这些练习，只需将定义从后端复制/粘贴到前端即可。
@@ -1311,7 +1311,7 @@ type EntryWithoutId = UnionOmit<Entry, 'id'>;
  表单的代码可以从<i>src/AddPatientModal/AddPatientForm.tsx</i>中找到，一些表单字段的帮助器可以从<i>src/AddPatientModal/FormField.tsx</i>中找到。
 
 <!-- Looking at the top of the <i>AddPatientForm.tsx</i> you can see we have created a type for our form values, which we have simply called <i>PatientFormValues</i>. The type is a modified version of the <i>Patient</i> type with the <i>id</i> and <i>entries</i> properties omitted. We don't want the user to be able to submit those when creating a new patient. The <i>id</i> is created by the backend and <i>entries</i> can only be added for existing patients.-->
- 看看<i>AddPatientForm.tsx</i>的顶部，你可以看到我们已经为我们的表单值创建了一个类型，我们简单地称之为<i>PatientFormValues</i>。这个类型是<i>Patient</i>类型的修改版，省略了<i>id</i>和<i>entries</i>属性。我们不希望用户在创建一个新病人时能够提交这些属性。<i>id</i>是由后台创建的，<i>entries</i>只能为现有病人添加。
+ 看看<i>AddPatientForm.tsx</i>的顶部，你可以看到我们已经为我们的表单值创建了一个类型，我们简单地称之为<i>PatientFormValues</i>。这个类型是<i>Patient</i>类型的修改版，省略了<i>id</i>和<i>entries</i>属性。我们不希望用户在创建一个新病人时能够提交这些属性。<i>id</i>是由后端创建的，<i>entries</i>只能为现有病人添加。
 
 ```js
 export type PatientFormValues = Omit<Patient, "id" | "entries">;
@@ -1651,7 +1651,7 @@ const submitNewPatient = async (values: FormValues) => {
  我们已经确定病人可以有不同种类的条目。我们还没有办法在我们的应用中为病人添加条目，所以，目前，它作为一个电子医疗记录是非常没用的。
 
 <!-- Your next task is to add endpoint <i>/api/patients/:id/entries</i> to your backend, through which you can POST an entry for a patient.-->
- 你的下一个任务是在你的后台添加端点<i>/api/patients/:id/entries</i>，通过这个端点你可以为一个病人发布条目。
+ 你的下一个任务是在你的后端添加端点<i>/api/patients/:id/entries</i>，通过这个端点你可以为一个病人发布条目。
 
 <!-- Remember that we have different kinds of entries in our app, so our backend should support all those types and check that at least all required fields are given for each type.-->
  记住，我们的应用中有不同类型的条目，所以我们的后端应该支持所有这些类型，并检查每一种类型至少有所有必要的字段。

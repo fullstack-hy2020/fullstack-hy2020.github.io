@@ -34,7 +34,8 @@ module.exports = {
       a: 'Kirjautuminen frontendissä',
       b: 'props.children ja proptypet',
       c: 'React-sovellusten testaaminen',
-      d: 'End to end -testaus',
+      d: 'End to end -testaus: Playwright',
+      e: 'End to end -testaus: Cypress',
     },
     '6': {
       a: 'Flux-arkkitehtuuri ja Redux',
@@ -102,12 +103,13 @@ module.exports = {
       a: 'Login in frontend',
       b: 'props.children and proptypes',
       c: 'Testing React apps',
-      d: 'End to end testing',
+      d: 'End to end testing: Playwright',
+      e: 'End to end testing: Cypress',
     },
     '6': {
       a: 'Flux-architecture and Redux',
       b: 'Many reducers',
-      c: 'Communicating with server in a redux application',
+      c: 'Communicating with server in a Redux application',
       d: 'React Query, useReducer and the context',
     },
     '7': {
@@ -187,7 +189,7 @@ module.exports = {
       d: '密钥认证',
     },
     '5': {
-      a: '完成前台的登录功能',
+      a: '完成前端的登录功能',
       b: 'props.children 与 proptypes',
       c: '测试React 应用',
       d: '端到端测试',
@@ -372,7 +374,7 @@ module.exports = {
       a: 'Architecture de flux et Redux',
       b: 'Quelques reducers',
       c: "Communiquer avec le backend dans l'application Redux",
-      d: 'Connect',
+      d: 'React Query, useReducer et le contexte',
     },
     '7': {
       a: 'React-router',

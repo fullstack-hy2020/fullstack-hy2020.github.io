@@ -339,7 +339,7 @@ The shorter the expiration time, the more safe the solution is. So if the token 
 
 The other solution is to save info about each token to the backend database and to check for each API request if the access rights corresponding to the tokens are still valid. With this scheme, access rights can be revoked at any time. This kind of solution is often called a <i>server-side session</i>.
 
-The negative aspect of server-side sessions is the increased complexity in the backend and also the effect on performance since the token validity needs to be checked for each API request to the database. Database access is considerably slower compared to checking the validity of the token itself. That is why it is quite common to save the session corresponding to a token to a <i>key-value database</i> such as [Redis](https://redis.io/) that is limited in functionality compared to eg. MongoDB or relational database but extremely fast in some usage scenarios.
+The negative aspect of server-side sessions is the increased complexity in the backend and also the effect on performance since the token validity needs to be checked for each API request to the database. Database access is considerably slower compared to checking the validity of the token itself. That is why it is quite common to save the session corresponding to a token to a <i>key-value database</i> such as [Redis](https://redis.io/), that is limited in functionality compared to eg. MongoDB or a relational database, but extremely fast in some usage scenarios.
 
 When server-side sessions are used, the token is quite often just a random string, that does not include any information about the user as it is quite often the case when jwt-tokens are used. For each API request, the server fetches the relevant information about the identity of the user from the database. It is also quite usual that instead of using Authorization-header, <i>cookies</i> are used as the mechanism for transferring the token between the client and the server.
 
@@ -391,7 +391,9 @@ The operation must respond with a suitable status code and some kind of an error
 
 **NB** Do not test password restrictions with Mongoose validations. It is not a good idea because the password received by the backend and the password hash saved to the database are not the same thing. The password length should be validated in the controller as we did in [part 3](/en/part3/validation_and_es_lint) before using Mongoose validation.
 
-Also, implement tests that ensure invalid users are not created and that an invalid add user operation returns a suitable status code and error message.
+Also, **implement tests** that ensure invalid users are not created and that an invalid add user operation returns a suitable status code and error message.
+
+**NB** if you decide to define tests on multiple files, you should note that by default each test file is executed in its own process (see _Test execution model_ in the [documentation](https://nodejs.org/api/test.html)). The consequence of this is that different test files are executed at the same time. Since the tests share the same database, simultaneous execution may cause problems. Problems are avoided by executing the tests with the option _--test-concurrency=1_, i.e. defining them to be executed sequentially.
 
 #### 4.17: Blog List Expansion, step 5
 
