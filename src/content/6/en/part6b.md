@@ -87,7 +87,7 @@ We decide to implement the filter functionality by storing <i>the value of the f
 }
 ```
 
-Only the array of notes is stored in the state of the current implementation of our application. In the new implementation, the state object has two properties, <i>notes</i> that contains the array of notes and <i>filter</i> that contains a string indicating which notes should be displayed to the user.
+Only the array of notes was stored in the state of the previous implementation of our application. In the new implementation, the state object has two properties, <i>notes</i> that contains the array of notes and <i>filter</i> that contains a string indicating which notes should be displayed to the user.
 
 ### Combined reducers
 
@@ -113,7 +113,7 @@ The actions for changing the state of the filter look like this:
 }
 ```
 
-Let's also create a new _action creator_ function. We will write the code for the action creator in a new <i>src/reducers/filterReducer.js</i> module:
+Let's also create a new _action creator_ function. We will write its code in a new <i>src/reducers/filterReducer.js</i> module:
 
 ```js
 const filterReducer = (state = 'ALL', action) => {
@@ -135,7 +135,6 @@ We can create the actual reducer for our application by combining the two existi
 Let's define the combined reducer in the <i>main.jsx</i> file:
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createStore, combineReducers } from 'redux' // highlight-line
 import { Provider } from 'react-redux' 
@@ -214,9 +213,9 @@ const filterReducer = (state = 'ALL', action) => {
 
 Based on the console output one might get the impression that every action gets duplicated:
 
-![devtools console output showing dupblicated actions in note and filter reducers](../../images/6/6.png)
+![devtools console output showing duplicated actions in note and filter reducers](../../images/6/6.png)
 
-Is there a bug in our code? No. The combined reducer works in such a way that every <i>action</i> gets handled in <i>every</i> part of the combined reducer. Typically only one reducer is interested in any given action, but there are situations where multiple reducers change their respective parts of the state based on the same action.
+Is there a bug in our code? No. The combined reducer works in such a way that every <i>action</i> gets handled in <i>every</i> part of the combined reducer, or in other words, every reducer "listens" to all of the dispatched actions and does something with them if it has been instructed to do so. Typically only one reducer is interested in any given action, but there are situations where multiple reducers change their respective parts of the state based on the same action.
 
 ### Finishing the filters
 
@@ -305,7 +304,7 @@ const VisibilityFilter = (props) => {
 export default VisibilityFilter
 ```
 
-With the new component <i>App</i> can be simplified as follows:
+With the new component, <i>App</i> can be simplified as follows:
 
 ```js
 import Notes from './components/Notes'
@@ -387,7 +386,7 @@ The current version of the application can be found on [GitHub](https://github.c
 
 ### Exercise 6.9
 
-#### 6.9 Better anecdotes, step7
+#### 6.9 Better Anecdotes, step 7
 
 Implement filtering for the anecdotes that are displayed to the user.
 
@@ -433,7 +432,6 @@ npm install @reduxjs/toolkit
 Next, open the <i>main.jsx</i> file which currently creates the Redux store. Instead of Redux's <em>createStore</em> function, let's create the store using Redux Toolkit's [configureStore](https://redux-toolkit.js.org/api/configureStore) function:
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit' // highlight-line
@@ -460,7 +458,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 )
 ```
 
-We already got rid of a few lines of code now that we don't need the <em>combineReducers</em> function to create the reducer for the store. We will soon see that the <em>configureStore</em> function has many additional benefits such as the effortless integration of development tools and many commonly used libraries without the need for additional configuration.
+We already got rid of a few lines of code, now we don't need the <em>combineReducers</em> function to create the store's reducer. We will soon see that the <em>configureStore</em> function has many additional benefits such as the effortless integration of development tools and many commonly used libraries without the need for additional configuration.
 
 Let's move on to refactoring the reducers, which brings forth the benefits of the Redux Toolkit. With Redux Toolkit, we can easily create reducer and related action creators using the [createSlice](https://redux-toolkit.js.org/api/createSlice) function. We can use the <em>createSlice</em> function to refactor the reducer and action creators in the <i>reducers/noteReducer.js</i> file in the following manner:
 

@@ -76,7 +76,7 @@ El primer parámetro es el <i>estado</i> en el store. El reducer devuelve un <i>
 
 Cambiemos un poco el código. Hemos utilizado declaraciones if-else para responder a una acción y cambiar el estado. Sin embargo, la declaración [switch](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Statements/switch) es el enfoque más común para escribir un reducer.
 
-También definamos un [valor predeterminado](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Functions/Default_parameters) de 0 para el parámetro <i>state</i>. Ahora, el reducer funciona incluso si el estado del almacenamiento aún no se ha inicializado.
+También definamos un [valor predeterminado](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Functions/Default_parameters) de 0 para el parámetro <i>state</i>. Ahora, el reducer funciona incluso si el estado del store aún no se ha inicializado.
 
 ```js
 // highlight-start
@@ -935,7 +935,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 Ten en cuenta que la aplicación ahora se define como un elemento secundario de un componente [Provider](https://react-redux.js.org/api/provider) (proveedor) proporcionado por la librería react-redux.
 El store de la aplicación se entrega al Provider como su atributo store.
 
-La definición de los creadores de acciones se ha movido al archivo  <i>reducers/noteReducer.js</i> donde se define el reducer. El archivo se ve así:
+La definición de los action creators se ha movido al archivo  <i>reducers/noteReducer.js</i> donde se define el reducer. El archivo se ve así:
 
 ```js
 const noteReducer = (state = [], action) => {

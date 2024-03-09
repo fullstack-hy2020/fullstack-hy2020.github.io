@@ -7,9 +7,7 @@ lang: es
 
 <div class="content">
 
-
-Continuemos nuestro trabajo con la [versión redux](/es/part6/flux_architecture_y_redux#redux-notas) simplificada de nuestra aplicación de notas.
-
+Continuemos nuestro trabajo con la [versión Redux](/es/part6/flux_architecture_y_redux#redux-notas) simplificada de nuestra aplicación de notas.
 
 Para facilitar nuestro desarrollo, cambiemos nuestro reducer para que el store se inicialice con un estado que contenga un par de notas:
 
@@ -35,19 +33,15 @@ const noteReducer = (state = initialState, action) => {
 export default noteReducer
 ```
 
-
 ### Store con estado complejo
-
 
 Implementemos el filtrado de las notas que se muestran al usuario. La interfaz de usuario para los filtros se implementará con [botones de radio](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio):
 
-![](../../images/6/01e.png)
-
+![botones de radio con opciones important/not y listado](../../images/6/01e.png)
 
 Comencemos con una implementación muy simple y directa:
 
 ```js
-import React from 'react'
 import NewNote from './components/NewNote'
 import Notes from './components/Notes'
 
@@ -77,12 +71,9 @@ const App = () => {
 }
 ```
 
-
-Dado que el atributo <i>name</i> de todos los botones de radio es el mismo, forman un <i>button group</i> (grupo de botones) en el que solo se puede seleccionar una opción.
-
+Dado que el atributo <i>name</i> de todos los botones de radio es el mismo, estos forman un <i>button group</i> (grupo de botones) en el que solo se puede seleccionar una opción.
 
 Los botones tienen un controlador de cambios que actualmente solo imprime el string asociado con el botón en el que se hizo clic en la consola.
-
 
 Decidimos implementar la funcionalidad del filtro almacenando <i>el valor del filtro</i> en el store redux además de las notas mismas. El estado del store debería verse así después de realizar estos cambios:
 
@@ -96,11 +87,9 @@ Decidimos implementar la funcionalidad del filtro almacenando <i>el valor del fi
 }
 ```
 
-
-Solo el array de notas se almacena en el estado de la implementación actual de nuestra aplicación. En la nueva implementación, el objeto de estado tiene dos propiedades, <i>notes</i> que contienen el array de notas y <i>filter</i> que contiene un string que indica qué notas deben mostrarse al usuario.
+Solo el array de notas se almacenaba en el estado de la implementación anterior de nuestra aplicación. En la nueva implementación, el objeto de estado tiene dos propiedades, <i>notes</i> que contienen el array de notas y <i>filter</i> que contiene un string que indica qué notas deben mostrarse al usuario.
 
 ### Reducers combinados
-
 
 Podríamos modificar nuestro reducer actual para hacer frente a la nueva forma del estado. Sin embargo, una mejor solución en esta situación es definir un nuevo reducer separado para el estado del filtro:
 
@@ -108,25 +97,23 @@ Podríamos modificar nuestro reducer actual para hacer frente a la nueva forma d
 const filterReducer = (state = 'ALL', action) => {
   switch (action.type) {
     case 'SET_FILTER':
-      return action.filter
+      return action.payload
     default:
       return state
   }
 }
 ```
 
-
 Las acciones para cambiar el estado del filtro se ven así:
 
 ```js
 {
   type: 'SET_FILTER',
-  filter: 'IMPORTANT'
+  payload: 'IMPORTANT'
 }
 ```
 
-
-Creemos también una nueva función de _action creator_ . Escribiremos el código para el creador de la acción en un nuevo módulo <i>src/reducers/filterReducer.js</i>:
+Creemos también una nueva función de _action creator_. Escribiremos su código en un nuevo módulo <i>src/reducers/filterReducer.js</i>:
 
 ```js
 const filterReducer = (state = 'ALL', action) => {
@@ -136,21 +123,19 @@ const filterReducer = (state = 'ALL', action) => {
 export const filterChange = filter => {
   return {
     type: 'SET_FILTER',
-    filter,
+    payload: filter,
   }
 }
 
 export default filterReducer
 ```
 
+Podemos crear el reducer que nuestra aplicación realmente utilizara al combinar los dos reducers existentes con la función [combineReducers](https://redux.js.org/api/combinereducers).
 
-Podemos crear el reducer real para nuestra aplicación combinando los dos reducers existentes con la función [combineReducers](https://redux.js.org/api/combinereducers).
-
-Definamos el reducer combinado en el archivo <i>index.js</i>:
+Definamos el reducer combinado en el archivo <i>main.jsx</i>:
 
 ```js
-import React from 'react'
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom/client'
 import { createStore, combineReducers } from 'redux' // highlight-line
 import { Provider } from 'react-redux' 
 import App from './App'
@@ -165,31 +150,31 @@ const reducer = combineReducers({
 })
  // highlight-end
 
-const store = createStore(reducer)
+const store = createStore(reducer) // highlight-line
 
 console.log(store.getState())
 
-ReactDOM.render(
-  /*
+/*
+ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <App />
-  </Provider>,
-  */
-  <div />,
-  document.getElementById('root')
+  </Provider>
+)*/
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <Provider store={store}>
+    <div />
+  </Provider>
 )
 ```
 
-Dado que nuestra aplicación se rompe por completo en este punto, representamos un elemento <i>div</i> vacío en lugar del componente <i>App</i>.
-
+Dado que nuestra aplicación se rompe por completo en este punto, renderizamos un elemento <i>div</i> vacío en lugar del componente <i>App</i>.
 
 El estado del store se imprime en la consola:
 
-![](../../images/6/4e.png)
-
+![consola de desarrollo mostrando el array de notas](../../images/6/4e.png)
 
 Como podemos ver en el resultado, ¡el store tiene la forma exacta que queríamos!
-
 
 Echemos un vistazo más de cerca a cómo se crea el reducer combinado:
 
@@ -200,11 +185,9 @@ const reducer = combineReducers({
 })
 ```
 
+El estado del store definido por este reducer es un objeto con dos propiedades: <i>notes</i> y <i>filter</i>. El valor de la propiedad <i>notes</i> es definido por <i>noteReducer</i>, que no tiene que lidiar con las otras propiedades del estado. Asimismo, la propiedad <i>filter</i> es administrada por <i>filterReducer</i>.
 
-El estado del store definido por el reducer anterior es un objeto con dos propiedades: <i>notes</i> y <i>filter</i>. El valor de la propiedad <i>notes</i> está definido por el <i>noteReducer</i>, que no tiene que lidiar con las otras propiedades del estado. Asimismo, la propiedad <i>filter</i> es administrada por <i>filterReducer</i>.
-
-
-Antes de realizar más cambios en el código, echemos un vistazo a cómo las diferentes acciones cambian el estado del store definida por el reducer combinado. Agreguemos lo siguiente al archivo <i>index.js</i>:
+Antes de realizar más cambios en el código, echemos un vistazo a cómo las diferentes acciones cambian el estado del store definido por el reducer combinado. Agreguemos lo siguiente al archivo <i>main.jsx</i>:
 
 ```js
 import { createNote } from './reducers/noteReducer'
@@ -215,13 +198,11 @@ store.dispatch(filterChange('IMPORTANT'))
 store.dispatch(createNote('combineReducers forms one reducer from many simple reducers'))
 ```
 
+Al simular la creación de una nota y cambiar el estado del filtro de esta manera, el estado del store se muestra en la consola después de cada cambio que se realiza en el store:
 
-Al simular la creación de una nota y cambiar el estado del filtro de esta manera, el estado del store se registra en la consola después de cada cambio que se realiza en el store:
+![consola mostrando filtro de notas y nueva nota](../../images/6/5e.png)
 
-![](../../images/6/5e.png)
-
-
-En este punto es bueno darse cuenta de un pequeño pero importante detalle. Si agregamos una declaración de registro de la consola <i>al comienzo de ambos reduceres</i>:
+En este punto es bueno darse cuenta de un pequeño pero importante detalle. Si agregamos un console log <i>al comienzo de ambos reducers</i>:
 
 ```js
 const filterReducer = (state = 'ALL', action) => {
@@ -230,32 +211,27 @@ const filterReducer = (state = 'ALL', action) => {
 }
 ```
 
-
 Según el resultado de la consola, uno podría tener la impresión de que cada acción se duplica:
 
-![](../../images/6/6.png)
+![consola mostrando acciones duplicadas en los reducers note y filter](../../images/6/6.png)
 
-
-¿Hay algún error en nuestro código? No. El reducer combinado funciona de tal manera que cada <i>acción</i> se maneja en <i>cada</i> parte del reducer combinado. Normalmente, solo un reducer está interesado en una acción determinada, pero hay situaciones en las que varios reducers cambian sus respectivas partes del estado en función de la misma acción.
+¿Hay algún bug en nuestro código? No. El reducer combinado funciona de tal manera que cada <i>acción</i> es controlada en <i>cada</i> parte del reducer combinado, o en otras palabras, cada reducer "escucha" a todas las acciones despachadas y hace algo con ellas si así se lo hemos instruido. Normalmente, solo un reducer está interesado en una acción determinada, pero hay situaciones en las que varios reducers cambian sus respectivas partes del estado en función de la misma acción.
 
 ### Terminando los filtros
 
-
-Terminemos la aplicación para que utilice el reducer combinado. Comenzamos cambiando la representación de la aplicación y conectando el store a la aplicación en el archivo <i>index.js</i>:
+Terminemos la aplicación para que utilice el reducer combinado. Comenzamos cambiando la renderización de la aplicación y conectando el store a la aplicación en el archivo <i>main.jsx</i>:
 
 ```js
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <App />
-  </Provider>,
-  document.getElementById('root')
+  </Provider>
 )
 ```
 
 A continuación, solucionemos un error causado por el código que espera que la store de aplicaciones sea un array de notas:
 
-![](../../images/6/7ea.png)
-
+![error en el navegador, TypeError: notes.map no es una función](../../images/6/7ea.png)
 
 Es una solución fácil. Debido a que las notas están en el campo <i>notes</i> del store, solo tenemos que hacer un pequeño cambio en la función de selector:
 
@@ -280,7 +256,7 @@ const Notes = () => {
 }
 ```
 
-Anteriormente, la función de selector retornaba el estado completo del store:
+Anteriormente, la función de selector devolvía el estado completo del store:
 
 ```js
 const notes = useSelector(state => state)
@@ -292,11 +268,9 @@ Y ahora devuelve solo su campo <i>notes</i>
 const notes = useSelector(state => state.notes)
 ```
 
-
-Extraigamos el filtro de visibilidad en su propio componente <i>src/components/VisibilityFilter.js</i>:
+Extraigamos el filtro de visibilidad en su propio componente <i>src/components/VisibilityFilter.jsx</i>:
 
 ```js
-import React from 'react'
 import { filterChange } from '../reducers/filterReducer'
 import { useDispatch } from 'react-redux'
 
@@ -333,7 +307,6 @@ export default VisibilityFilter
 Con el nuevo componente, <i>App</i> se puede simplificar de la siguiente manera:
 
 ```js
-import React from 'react'
 import Notes from './components/Notes'
 import NewNote from './components/NewNote'
 import VisibilityFilter from './components/VisibilityFilter'
@@ -403,7 +376,9 @@ const notes = useSelector(({ filter, notes }) => {
 })
 ```
 
-Hay un pequeño defecto cosmético en nuestra aplicación. Aunque el filtro está configurado en <i>ALL</i> de forma predeterminada, el radio button asociado no está seleccionado. Naturalmente, este problema se puede solucionar, pero como se trata de un error desagradable pero, en última instancia, inofensivo, guardaremos la solución para más adelante.
+Hay un pequeño defecto cosmético en nuestra aplicación. Aunque el filtro está configurado en <i>ALL</i> de forma predeterminada, el radio button asociado no está seleccionado. Naturalmente, este problema se puede solucionar, pero como se trata de un error desagradable pero, en última instancia, inofensivo, dejaremos la solución para más adelante.
+
+La versión actual de la aplicación se puede encontrar en [GitHub](https://github.com/fullstack-hy2020/redux-notes/tree/part6-2), en la rama <i>part6-2</i>.
 
 </div>
 
@@ -411,9 +386,13 @@ Hay un pequeño defecto cosmético en nuestra aplicación. Aunque el filtro est�
 
 ### Ejercicio 6.9
 
-#### 6.9 Mejores anécdotas, paso 7
+#### 6.9 Mejores Anécdotas, paso 7
 
-Implementa filtros para las anécdotas que se muestran al usuario. Se recomienda crear un nuevo reducer, action creators y un reducer combinado para la store usando la función <i>combineReducers</i>.
+Implementa el filtrado para las anécdotas que se muestran al usuario.
+
+![navegador mostrando filtrado de anécdotas](../../images/6/9ea.png)
+
+Almacena el estado del filtro en el store de Redux. Se recomienda crear un nuevo reducer, action creators y un reducer combinado para el store utilizando la función <i>combineReducers</i>.
 
 Crea un nuevo componente <i>Filter</i> para mostrar los filtros. Puedes utilizar el siguiente código como punto de partida:
 
@@ -442,18 +421,17 @@ export default Filter
 
 ### Redux Toolkit
 
-Como hemos visto hasta ahora, la implementación de la gestión del estado y la configuración de Redux requiere bastante esfuerzo. Esto se manifiesta, por ejemplo, en el código relacionado con el reducer y el creador de acciones, que tiene un código un tanto repetitivo. [Redux Toolkit](https://redux-toolkit.js.org/) es una librería que resuelve estos problemas comunes relacionados con Redux. La librería, por ejemplo, simplifica enormemente la configuración de la store de Redux y ofrece una gran variedad de herramientas para facilitar la gestión del estado.
+Como hemos visto hasta ahora, la implementación de la gestión del estado y la configuración de Redux requiere bastante esfuerzo. Esto se manifiesta, por ejemplo, en el código relacionado con el reducer y el action creator, que tiene un código un tanto repetitivo. [Redux Toolkit](https://redux-toolkit.js.org/) es una librería que resuelve estos problemas comunes relacionados con Redux. La librería, por ejemplo, simplifica enormemente la configuración del store de Redux y ofrece una gran variedad de herramientas para facilitar la gestión del estado.
 
-Comencemos a usar Redux Toolkit en nuestra aplicación refactorizando el código existente. Primero, necesitaremos instalar la biblioteca:
+Comencemos a usar Redux Toolkit en nuestra aplicación refactorizando el código existente. Primero, necesitaremos instalar la librería:
 
-```
+```bash
 npm install @reduxjs/toolkit
 ```
 
-A continuación, abra el archivo <i>index.js</i> que actualmente crea la store de Redux. En lugar de la función <em>createStore</em> de Redux, creemos el Store usando la función [configureStore](https://redux-toolkit.js.org/api/configureStore) de Redux Toolkit:
+A continuación, abre el archivo <i>main.jsx</i> que actualmente crea la store de Redux. En lugar de la función <em>createStore</em> de Redux, creemos el Store usando la función [configureStore](https://redux-toolkit.js.org/api/configureStore) de Redux Toolkit:
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit' // highlight-line
@@ -480,9 +458,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 )
 ```
 
-Ya nos deshicimos de algunas líneas de código ahora que ya no necesitamos la función <em>combineReducers</em> para crear el reducer para la store de Redux. Pronto veremos que la función <em>configureStore</em> tiene muchos beneficios adicionales, como la integración sin esfuerzo de herramientas de desarrollo y muchas librerías de uso común sin necesidad de configuración adicional.
+Ya nos deshicimos de algunas líneas de código, ya no necesitamos la función <em>combineReducers</em> para crear el reducer del store. Pronto veremos que la función <em>configureStore</em> tiene muchos beneficios adicionales, como la integración sin esfuerzo de herramientas de desarrollo y muchas librerías de uso común sin necesidad de configuración adicional.
 
-Pasemos a refactorizar los reducers, que representa uno de los beneficios de Redux Toolkit. Con Redux Toolkit, podemos crear fácilmente reducers y creadores de acciones relacionados usando la función [createSlice](https://redux-toolkit.js.org/api/createSlice). Podemos usar la función <em>createSlice</em> para refactorizar el reducer y los creadores de acciones en el archivo <i>reducers/noteReducer.js</i> de la siguiente manera:
+Pasemos a refactorizar los reducers, lo que trae consigo los beneficios de Redux Toolkit. Con Redux Toolkit, podemos crear fácilmente reducers y action creators relacionados utilizando la función [createSlice](https://redux-toolkit.js.org/api/createSlice). Podemos usar la función <em>createSlice</em> para refactorizar el reducer y los action creators en el archivo <i>reducers/noteReducer.js</i> de la siguiente manera:
 
 ```js
 import { createSlice } from '@reduxjs/toolkit' // highlight-line
