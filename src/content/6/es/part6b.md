@@ -514,19 +514,21 @@ const noteSlice = createSlice({
 // highlight-end
 ```
 
-El parámetro <em>name</em> de la función <em>createSlice</em> define el prefijo que se utiliza en los valores de tipo de la acción. Por ejemplo, la acción <em>createNote</em> definida más adelante tendrá el valor de tipo <em>notes/createNote</em>. Es una buena práctica dar al parámetro un valor que sea único entre los reducers. De esta forma no habrá colisiones inesperadas entre los valores de tipo de acción de la aplicación. El parámetro <em>initialState</em> define el estado inicial del reducer. El parámetro <em>reducers</em> toma el propio reducer como un objeto, cuyas funciones manejan los cambios de estado causados por ciertas acciones. Tenga en cuenta que <em>action.payload</em> en la función contiene el argumento proporcionado al llamar al creador de la acción:
+El parámetro <em>name</em> de la función <em>createSlice</em> define el prefijo que se utiliza en los valores de tipo de la acción. Por ejemplo, la acción <em>createNote</em> definida más adelante tendrá el valor de tipo <em>notes/createNote</em>. Es una buena práctica dar al parámetro un valor que sea único entre los reducers. De esta forma no habrá colisiones inesperadas entre los valores de tipo de acción de la aplicación.
+El parámetro <em>initialState</em> define el estado inicial del reducer.
+El parámetro <em>reducers</em> toma al propio reducer como un objeto, cuyas funciones manejan los cambios de estado causados por ciertas acciones. Ten en cuenta que <em>action.payload</em> en la función contiene el argumento proporcionado al llamar al creador de la acción:
 
 ```js
 dispatch(createNote('Redux Toolkit is awesome!'))
 ```
 
-Esta llamada de <em>dispatch</em> responde al despacho del siguiente objeto:
+Esta llamada a dispatch equivale a enviar el siguiente objeto:
 
 ```js
 dispatch({ type: 'notes/createNote', payload: 'Redux Toolkit is awesome!' })
 ```
 
-Si has seguido todo de cerca, es posible que hayas notado que dentro de la acción <em>createNote</em>, parece suceder algo que viola el principio de inmutabilidad de los reducers mencionado anteriormente:
+Si has prestado atención, es posible que hayas notado que dentro de la acción <em>createNote</em>, parece suceder algo que viola el principio de inmutabilidad de los reducers mencionado anteriormente:
 
 ```js
 createNote(state, action) {
@@ -540,11 +542,11 @@ createNote(state, action) {
 }
 ```
 
-Estamos mutando el arreglo del parámetro <em>state</em> llamando al método <em>push</em> en lugar de devolver una nueva instancia del arreglo. ¿De qué se trata todo esto?
+Estamos mutando el array del argumento <em>state</em> al llamar al método <em>push</em> en lugar de devolver una nueva instancia del array. ¿De qué se trata todo esto?
 
-Redux Toolkit utiliza la librería [Immer](https://immerjs.github.io/immer/) con reducers creados por la función <em>createSlice</em>, que hace posible mutar el parámetro del <em>estado</em> dentro del reducer. Immer usa el estado mutado para producir un nuevo estado inmutable y, por lo tanto, los cambios de estado permanecen inmutables. Tenga en cuenta que el <em>estado</em> se puede cambiar sin "mutarlo", como hemos hecho con la acción <em>toggleImportanceOf</em>. En este caso, la función <i>retorna</i> el nuevo estado. Sin embargo, mutar el estado a menudo será útil, especialmente cuando se necesita actualizar un estado complejo.
+Redux Toolkit utiliza la librería [Immer](https://immerjs.github.io/immer/) con reducers creados por la función <em>createSlice</em>, lo que hace posible mutar el argumento <em>state</em> dentro del reducer. Immer usa el estado mutado para producir un nuevo estado inmutable y, por lo tanto, los cambios de estado permanecen inmutables. Ten en cuenta que <em>state</em> se puede cambiar sin "mutarlo", como hemos hecho con la acción <em>toggleImportanceOf</em>. En este caso, la función <i>devuelve</i> el nuevo estado directamente. Sin embargo, mutar el estado a menudo será útil, especialmente cuando se necesita actualizar un estado complejo.
 
-La función <em>createSlice</em> retorna un objeto que contiene el reducer así como los creadores de acciones definidos por el parámetro <em>reducers</em>. Se puede acceder al reducer mediante la propiedad <em>noteSlice.reducer</em>, mientras que a los creadores de acciones mediante la propiedad <em>noteSlice.actions</em>. Podemos producir las exportaciones del archivo de la siguiente manera:
+La función <em>createSlice</em> devuelve un objeto que contiene al reducer así como a los action creators definidos por el parámetro <em>reducers</em>. Se puede acceder al reducer mediante la propiedad <em>noteSlice.reducer</em>, mientras que a los action creators mediante la propiedad <em>noteSlice.actions</em>. Podemos producir las exportaciones del archivo de la siguiente manera:
 
 ```js
 const noteSlice = createSlice(/* ... */)
@@ -562,9 +564,9 @@ Las importaciones en otros archivos funcionarán igual que antes:
 import noteReducer, { createNote, toggleImportanceOf } from './reducers/noteReducer'
 ```
 
-Necesitamos modificar los nombres de los tipos de acción en las pruebas debido a las convenciones de ReduxToolkit:
+Necesitamos modificar los nombres de los tipos de las acciones en las pruebas debido a las convenciones de ReduxToolkit:
 
-```js 
+```js
 import noteReducer from './noteReducer'
 import deepFreeze from 'deep-freeze'
 
@@ -617,11 +619,11 @@ describe('noteReducer', () => {
 })
 ```
 
-### Redux Toolkit and console.log
+### Redux Toolkit y console.log
 
 Como hemos aprendido, console.log es una herramienta extremadamente poderosa, por lo general siempre nos salva de problemas.
 
-Intentemos imprimir el estado de la store de Redux en la consola en medio del reductor creado con la función createSlice:
+Intentemos imprimir el estado del store de Redux en la consola en medio del reducer creado con la función createSlice:
 
 ```js
 const noteSlice = createSlice({
@@ -651,62 +653,61 @@ const noteSlice = createSlice({
 
 Lo siguiente se imprime en la consola
 
-![](../../images/6/40new.png)
+![consola mostrando Handler y Target como null pero isRevoked como true](../../images/6/40new.png)
 
-La salida es interesante pero no muy útil. Esto trata de la librería Immer mencionada anteriormente utilizada por Redux Toolkit, que ahora se usa internamente para guardar el estado de la Tienda.
+Lo que vemos es interesante pero no muy útil. Esto tiene que ver con la librería Immer que mencionamos anteriormente y es utilizada por Redux Toolkit internamente para guardar el estado de la Tienda.
 
-El estado se puede convertir a un formato legible por humanos, e.j. convirtiéndolo en una cadena y de nuevo en un objeto JavaScript de la siguiente manera:
+El estado se puede convertir a un formato legible por humanos, por ejemplo, convirtiéndolo primero en un string y luego de nuevo en un objeto JavaScript de la siguiente manera:
 
 ```js
 console.log(JSON.parse(JSON.stringify(state))) // highlight-line
 ```
 
-La salida de la consola ahora es legible para humanos
+Ahora lo que imprime la consola es legible para humanos
 
-![](../../images/6/41new.png)
+![consola mostrando array de 2 notas](../../images/6/41new.png)
 
 ### Redux DevTools
 
 [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) es una extension de Chrome, que ofrece útiles herramientas de desarrollo para Redux. Se puede usar, por ejemplo, para inspeccionar el estado del store de Redux y enviar acciones (dispatch) a través de la consola del navegador. Cuando el store se crea usando la función <em>configureStore</em> de Redux Toolkit, no se necesita ninguna configuración adicional para que Redux DevTools funcione.
 
-Una vez instalado el complemento, al hacer clic en la pestaña de Redux en la consola del navegador deberia abrir las herramientas de desarrollo:
+Una vez instalada la extension, al hacer clic en la pestaña de <i>Redux</i> en las herramientas de desarrollo del navegador, Redux DevTools debería abrirse:
 
-![browser with redux addon in devtools](../../images/6/42new.png)
+![redux addon en herramientas de desarrollo](../../images/6/42new.png)
 
 Puedes inspeccionar cómo el envío de una determinada acción cambia el estado haciendo clic en la acción:
 
-![devtools inspecting notes tree in redux](../../images/6/43new.png)
+![devtools inspeccionando el árbol de state en redux](../../images/6/43new.png)
 
 También es posible enviar acciones (dispatch) a la store utilizando las herramientas de desarrollo:
 
-![devtools redux dispatching createNote with payload](../../images/6/44new.png)
+![devtools enviando createNote con payload](../../images/6/44new.png)
 
-El código actual de la aplicación estan en la rama <i>part6-3</i> de [este repositorio de Github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3).
+El código actual de la aplicación se puede encontrar en [GitHub](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3), en la rama <i>part6-3</i>.
 
 </div>
 
 <div class="tasks">
 
-
 ### Ejercicios 6.10.-6.13.
 
 Continuemos trabajando en la aplicación de anécdotas que comenzamos en el ejercicio 6.3, usando Redux Toolkit.
 
-#### 6.10 Mejores anécdotas, paso 8
+#### 6.10 Mejores Anécdotas, paso 8
 
-Instale Redux Toolkit en el proyecto. Mueva la creación de la store de redux a su propio archivo <i>store.js</i> y use la función <em>configureStore</em> para crear la store.
+Instala Redux Toolkit en el proyecto. Mueve la creación del store de Redux a su propio archivo <i>store.js</i> y utiliza la función <em>configureStore</em> para crear el store.
 
-Cambie la definición del <i>Filter reducer y creación de acciones</i> para usar la función <em>createSlice</em> de Redux Toolkit.
+Cambia la definición del <i>filter reducer y sus action creators</i> para usar la función <em>createSlice</em> de Redux Toolkit.
 
-También, empiece a usar los Redux DevTools para depurar el estado de la aplicación fácilmente.
+También, comienza a utilizar Redux DevTools para depurar el estado de la aplicación fácilmente.
 
-#### 6.11 Mejores anécdotas, paso 9
+#### 6.11 Mejores Anécdotas, paso 9
 
-Cambie también la definición de <i>Anecdote reducer y creación de acciones</i> para usar la función <em>createSlice</em> de Redux Toolkit.
+Cambia también la definición de <i>anecdote reducer y sus action creators</i> para usar la función <em>createSlice</em> de Redux Toolkit.
 
-#### 6.12 Mejores anécdotas, paso 10
+#### 6.12 Mejores Anécdotas, paso 10
 
-La aplicación tiene un cuerpo listo para usar el componente <i>Notification</i>:
+La aplicación tiene el esqueleto del componente <i>Notification</i> listo para utilizarlo:
 
 ```js
 const Notification = () => {
@@ -725,7 +726,7 @@ const Notification = () => {
 export default Notification
 ```
 
-Extienda el componente para que muestre el mensaje almacenado en el store de redux, haciendo que el componente tome la siguiente forma:
+Extiende el componente para que muestre el mensaje almacenado en el store de redux, haciendo que el componente tome la siguiente forma:
 
 ```js
 import { useSelector } from 'react-redux' // highlight-line
@@ -745,16 +746,16 @@ const Notification = () => {
 }
 ```
 
-Tendrá que realizar cambios en el reducer existente de la aplicación. Cree un reducer separado para la nueva funcionalidad usando la función <em>createSlice</em> de Redux Toolkit.
+Tendrás que realizar cambios en el reducer existente de la aplicación. Crea un reducer separado para la nueva funcionalidad usando la función <em>createSlice</em> de Redux Toolkit.
 
 La aplicación no tiene que utilizar el componente <i>Notification</i> completamente en este punto de los ejercicios. Es suficiente con que la aplicación muestre el valor inicial establecido para el mensaje en el <i>notificationReducer</i>.
 
-#### 6.13 Mejores anécdotas, paso 11
+#### 6.13 Mejores Anécdotas, paso 11
 
-Extienda la aplicación para que utilice el componente <i>Notification</i> para mostrar un mensaje durante cinco segundos cuando el usuario vote por una anécdota o cree una nueva anécdota:
+Extiende la aplicación para que utilice el componente <i>Notification</i> para mostrar un mensaje durante cinco segundos cuando el usuario vote por una anécdota o cree una nueva anécdota:
 
-![browser showing message of having voted](../../images/6/8ea.png)
+![navegador mostrando el mensaje de haber votado](../../images/6/8ea.png)
 
-Se recomienda crear [creadores de acciones](https://redux-toolkit.js.org/api/createSlice#reducers) independientes para configurar y eliminar notificaciones.
+Se recomienda crear [action creators](https://redux-toolkit.js.org/api/createSlice#reducers) independientes para configurar y eliminar notificaciones.
 
 </div>
