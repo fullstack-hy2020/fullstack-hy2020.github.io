@@ -464,7 +464,7 @@ const hook = () => {
     })
 }
 
-useEffect(hook, [])
+useEffect(hook(), [])
 ```
 
 Now we can see more clearly that the function [useEffect](https://react.dev/reference/react/useEffect) takes <i>two parameters</i>. The first is a function, the <i>effect</i> itself. According to the documentation:
