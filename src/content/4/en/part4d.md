@@ -422,7 +422,7 @@ Modify adding new blogs so that it is only possible if a valid token is sent wit
 
 [This example](/en/part4/token_authentication#limiting-creating-new-notes-to-logged-in-users) from part 4 shows taking the token from the header with the _getTokenFrom_ helper function in <i>controllers/blogs.js</i>.
 
-If you used the same solution, refactor taking the token to a [middleware](/en/part3/node_js_and_express#middleware). The middleware should take the token from the <i>Authorization</i> header and place it into the <i>token</i> field of the <i>request</i> object.
+If you used the same solution, refactor taking the token to a [middleware](/en/part3/node_js_and_express#middleware). The middleware should take the token from the <i>Authorization</i> header and place it into the <i>token</i> field of the <i>request</i> object (don't forget to use try/catch).
 
 In other words, if you register this middleware in the <i>app.js</i> file before all routes
 
@@ -472,7 +472,7 @@ if ( blog.user.toString() === userid.toString() ) ...
 
 Both the new blog creation and blog deletion need to find out the identity of the user who is doing the operation. The middleware _tokenExtractor_ that we did in exercise 4.20 helps but still both the handlers of <i>post</i> and <i>delete</i> operations need to find out who the user holding a specific token is.
 
-Now create a new middleware _userExtractor_, that finds out the user and sets it to the request object. When you register the middleware in <i>app.js</i>
+Now create a new middleware _userExtractor_, that finds out the user and sets it to the request object (don't forget to use try/catch). When you register the middleware in <i>app.js</i>
 
 ```js
 app.use(middleware.userExtractor)
