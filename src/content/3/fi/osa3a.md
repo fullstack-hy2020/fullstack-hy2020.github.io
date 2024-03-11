@@ -337,7 +337,7 @@ Pyyntöön vastataan _response_-olion metodilla [json](http://expressjs.com/en/4
 
 Pieni huomio JSON-muodossa palautettavasta datasta.
 
-Aiemmassa, pelkkää Nodea käyttämässä versiossa, jouduimme muuttamaan palautettavan datan JSON-muotoon metodilla _JSON.stringify_:
+Aiemmassa, pelkkää Nodea käyttävässä versiossa, jouduimme muuttamaan palautettavan datan JSON-muotoon metodilla _JSON.stringify_:
 
 ```js
 response.end(JSON.stringify(notes))
