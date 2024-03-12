@@ -39,7 +39,7 @@ Let's navigate to an appropriate directory, and create a new template for our ap
 
 The file defines, for instance, that the entry point of the application is the <i>index.js</i> file.
 
-Let's make a small change to the <i>scripts</i> object:
+Let's make a small change to the <i>scripts</i> object by adding a new script command.
 
 ```bash
 {
@@ -950,7 +950,7 @@ POST is the only HTTP request type that is neither <i>safe</i> nor <i>idempotent
 
 ### Middleware
 
-The express [json-parser](https://expressjs.com/en/api.html) we took into use earlier is a [middleware](http://expressjs.com/en/guide/using-middleware.html).
+The express [json-parser](https://expressjs.com/en/api.html) used earlier is a [middleware](http://expressjs.com/en/guide/using-middleware.html).
 
 Middleware are functions that can be used for handling _request_ and _response_ objects.
 
