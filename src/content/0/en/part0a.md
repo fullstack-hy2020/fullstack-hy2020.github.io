@@ -57,7 +57,7 @@ it is quite likely that nobody will respond. The bug can be *anywhere*.
 
 A better question could be
 
-> * In the exercise 2.15 when I try to add a new person to the app, server responds to 403, despite the request looks ok to me.
+> * In the exercise 2.15 when I try to add a new person to the app, server responds to 403, despite the request looking ok to me.
 >
 > The code looks like this
 >
