@@ -791,6 +791,7 @@ const BodyMassIndexForm = ({ onSubmit }) => {
         placeholder="Weight (kg)"
         value={formik.values.mass}
         onChangeText={formik.handleChange('mass')}
+        onBlur={formik.handleBlur('mass')}
       />
       {formik.touched.mass && formik.errors.mass && (
         <Text style={{ color: 'red' }}>{formik.errors.mass}</Text>
@@ -799,6 +800,7 @@ const BodyMassIndexForm = ({ onSubmit }) => {
         placeholder="Height (m)"
         value={formik.values.height}
         onChangeText={formik.handleChange('height')}
+        onBlur={formik.handleBlur('height')}
       />
       {formik.touched.height && formik.errors.height && (
         <Text style={{ color: 'red' }}>{formik.errors.height}</Text>
