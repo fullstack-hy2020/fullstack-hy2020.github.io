@@ -329,13 +329,13 @@ The current state of the code for the application can be found on [GitHub](https
 
 ### Exercises 6.14.-6.15.
 
-#### 6.14 Anecdotes and the backend, step1
+#### 6.14 Anecdotes and the Backend, step 1
 
 When the application launches, fetch the anecdotes from the backend implemented using json-server.
 
 As the initial backend data, you can use, e.g. [this](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json).
 
-#### 6.15 Anecdotes and the backend, step2
+#### 6.15 Anecdotes and the Backend, step 2
 
 Modify the creation of new anecdotes, so that the anecdotes are stored in the backend.
 
@@ -343,7 +343,7 @@ Modify the creation of new anecdotes, so that the anecdotes are stored in the ba
 
 <div class="content">
 
-### Asynchronous actions and Redux thunk
+### Asynchronous actions and Redux Thunk
 
 Our approach is quite good, but it is not great that the communication with the server happens inside the functions of the components. It would be better if the communication could be abstracted away from the components so that they don't have to do anything else but call the appropriate <i>action creator</i>. As an example, <i>App</i> would initialize the state of the application as follows:
 
@@ -376,7 +376,7 @@ const NewNote = () => {
 }
 ```
 
-In this implementation, both components would dispatch an action without the need to know about the communication between the server that happens behind the scenes. These kinds of <i>async actions</i> can be implemented using the [Redux Thunk](https://github.com/reduxjs/redux-thunk) library. The use of the library doesn't need any additional configuration or even installation when the Redux store is created using the Redux Toolkit's <em>configureStore</em> function.
+In this implementation, both components would dispatch an action without the need to know about the communication with the server that happens behind the scenes. These kinds of <i>async actions</i> can be implemented using the [Redux Thunk](https://github.com/reduxjs/redux-thunk) library. The use of the library doesn't need any additional configuration or even installation when the Redux store is created using the Redux Toolkit's <em>configureStore</em> function.
 
 With Redux Thunk it is possible to implement <i>action creators</i> which return a function instead of an object. The function receives Redux store's <em>dispatch</em> and <em>getState</em> methods as parameters. This allows for example implementations of asynchronous action creators, which first wait for the completion of a certain asynchronous operation and after that dispatch some action, which changes the store's state.
 
@@ -557,19 +557,19 @@ Redux Toolkit offers a multitude of tools to simplify asynchronous state managem
 
 ### Exercises 6.16.-6.19.
 
-#### 6.16 Anecdotes and the backend, step3
+#### 6.16 Anecdotes and the Backend, step 3
 
 Modify the initialization of the Redux store to happen using asynchronous action creators, which are made possible by the Redux Thunk library.
 
-#### 6.17 Anecdotes and the backend, step4
+#### 6.17 Anecdotes and the Backend, step 4
 
 Also modify the creation of a new anecdote to happen using asynchronous action creators, made possible by the Redux Thunk library.
 
-#### 6.18 Anecdotes and the backend, step5
+#### 6.18 Anecdotes and the Backend, step 5
 
 Voting does not yet save changes to the backend. Fix the situation with the help of the Redux Thunk library.
 
-#### 6.19 Anecdotes and the backend, step6
+#### 6.19 Anecdotes and the Backend, step 6
 
 The creation of notifications is still a bit tedious since one has to do two actions and use the _setTimeout_ function:
 

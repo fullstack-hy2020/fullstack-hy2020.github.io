@@ -7,9 +7,7 @@ lang: es
 
 <div class="content">
 
-
 Expandamos la aplicación, de modo que las notas se almacenen en el backend. Usaremos [json-server](/es/part2/obteniendo_datos_del_servidor), de la parte 2.
-
 
 El estado inicial de la base de datos se almacena en el archivo <i>db.json</i>, que se coloca en la raíz del proyecto:
 
@@ -30,17 +28,13 @@ El estado inicial de la base de datos se almacena en el archivo <i>db.json</i>, 
 }
 ```
 
-
-
-Instalaremos json-server para el proyecto...
+Instalaremos json-server en nuestro proyecto...
 
 ```js
 npm install json-server --save-dev
 ```
 
-
-
-y agregue la siguiente línea a la parte de <i>scripts</i> del archivo <i>package.json</i>
+y agregaremos la siguiente línea a la parte de <i>scripts</i> del archivo <i>package.json</i>
 
 ```js
 "scripts": {
@@ -127,7 +121,7 @@ export const { createNote, toggleImportanceOf, appendNote } = noteSlice.actions 
 export default noteSlice.reducer
 ```
 
-Una manera rápida para inicializar el estado de las notas basado en los datos recibidos del backend es extraer las notas en el archivo <i>index.js</i> y enviar (dispatch) una acción usando <em>appendNote</em> para cada nota individual: 
+Una manera rápida para inicializar el estado de las notas basado en los datos recibidos del backend es extraer las notas en el archivo <i>main.jsx</i> y enviar (dispatch) una acción usando el action creator <em>appendNote</em> para cada objeto de nota: 
 
 ```js
 // ...
@@ -152,7 +146,7 @@ noteService.getAll().then(notes =>
 // ...
 ```
 
-Enviar (dispatching) múltiples acciones no es práctico. Agreguemos un creador de acciones <em>setNotes</em> que se puede usar para reemplazar directamente el array de notas. Obtendremos el creador de acciones de la función <em>createSlice</em> implementando la acción <em>setNotes</em>:
+Enviar (dispatching) múltiples acciones no parece muy práctico. Agreguemos un action creator <em>setNotes</em> que se pueda usar para reemplazar directamente al array de notas. Obtendremos al action creator de la función <em>createSlice</em> implementando la acción <em>setNotes</em>:
 
 ```js
 // ...
@@ -200,7 +194,7 @@ export const { createNote, toggleImportanceOf, appendNote, setNotes } = noteSlic
 export default noteSlice.reducer
 ```
 
-Ahora, el código en el archivo <i>index.js</i> se ve mucho mejor:
+Ahora, el código en el archivo <i>main.jsx</i> se ve mucho mejor:
 
 ```js
 // ...
@@ -219,11 +213,11 @@ noteService.getAll().then(notes =>
 )
 ```
 
-> **NB:**  ¿por qué no usamos await en lugar de promesas y controladores de eventos?
+> **NB:** ¿Por qué no usamos await en lugar de promesas y controladores de eventos?
 >
->Await solo funciona dentro de funciones <i>async</i>, y el código en <i>index.js</i> no está dentro de una función, por lo que debido a la naturaleza simple de la operación, esta vez nos abstendremos de usar  <i>async</i>.
+>Await solo funciona dentro de funciones <i>async</i>, y el código en <i>main.jsx</i> no está dentro de una función, por lo que debido a la naturaleza simple de la operación, esta vez nos abstendremos de usar  <i>async</i>.
 
-Sin embargo, decidimos mover la inicialización de las notas al componente <i>App</i> y, como es habitual al obtener datos de un servidor, usaremos <i>effect hook</i>.
+Sin embargo, decidimos mover la inicialización de las notas al componente <i>App</i> y, como es habitual al obtener datos de un servidor, usaremos el <i>effect hook</i>.
 
 ```js
 import { useEffect } from 'react' // highlight-line
@@ -254,47 +248,6 @@ const App = () => {
 
 export default App
 ```
-
-El uso del hook useEffect genera una advertencia eslint:
-
-![vscode warnig useEffect missing dispatch dependency](../../images/6/26ea.png)
-
-Podemos deshacernos de él haciendo lo siguiente:
-
-```js
-const App = () => {
-  const dispatch = useDispatch()
-  useEffect(() => {
-    noteService
-      .getAll().then(notes => dispatch(setNotes(notes)))
-  }, [dispatch]) // highlight-line
-
-  // ...
-}
-```
-
-Ahora, la variable dispatch que definimos en el componente _App_, que prácticamente es la función de dispatch de redux-store, se ha agregado al array que recibe useEffect como parámetro. 
-**Si** el valor de la variable dispatch cambiara durante el tiempo de ejecución, el efecto se ejecutaría nuevamente. Sin embargo, esto no puede suceder en nuestra aplicación, por lo que la advertencia es innecesaria.
-
-Otra forma de deshacerse de la advertencia sería deshabilitar eslint en esa línea:
-
-```js
-const App = () => {
-  const dispatch = useDispatch()
-  useEffect(() => {
-    noteService
-      .getAll().then(notes => dispatch(setNotes(notes)))   
-      // highlight-start
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps  
-  // highlight-end
-
-  // ...
-}
-```
-
-Generalmente, deshabilitar eslint cuando genera una advertencia no es una buena idea. Aunque la regla eslint en cuestión ha causado algunos [argumentos](https://github.com/facebook/create-react-app/issues/6880), usaremos la primera solución.
-
-Se encuentra más información sobre la necesidad de definir las dependencias de los hooks en la [documentación de react](https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies).
 
 ### Enviando datos al backend
 
@@ -351,7 +304,7 @@ const NewNote = (props) => {
 export default NewNote
 ```
 
-Debido a que el backend genera ids para las notas, cambiaremos el creador de la acción <em>createNote</em> en el archivo <i>noteReducer.js</i> de la siguiente manera:
+Debido a que el backend genera ids para las notas, cambiaremos el action creator <em>createNote</em> en el archivo <i>noteReducer.js</i> de la siguiente manera:
 
 ```js
 const noteSlice = createSlice({
@@ -366,9 +319,9 @@ const noteSlice = createSlice({
 })
 ```
 
-El cambio de importancia de las notas podría implementarse utilizando el mismo principio, lo que significa realizar una llamada de método asincrónico al servidor y luego enviar una acción apropiada.
+El cambio de importancia de las notas podría implementarse utilizando el mismo principio, haciendo una llamada asíncrona al servidor y luego enviando una acción apropiada.
 
-El estado actual del código para la aplicación se puede encontrar en [Github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3) en la rama <i>part6-3</i>.
+El estado actual del código para la aplicación se puede encontrar en [GitHub](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3) en la rama <i>part6-3</i>.
 
 </div>
 
@@ -376,24 +329,23 @@ El estado actual del código para la aplicación se puede encontrar en [Github](
 
 ### Ejercicios 6.14.-6.15.
 
-#### 6.14 Anécdotas y el backend, paso 1
+#### 6.14 Anécdotas y el Backend, paso 1
 
-Cuando la aplicación se inicie, obtenga las anécdotas del backend implementado usando json-server.
+Cuando la aplicación se inicie, obtén las anécdotas del backend implementado usando json-server.
 
-Como datos de backend iniciales, puede usar, por ejemplo, [esto](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json).
+Como datos de backend iniciales, puedes usar, por ejemplo, [esto](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json).
 
+#### 6.15 Anécdotas y el Backend, paso 2
 
-#### 6.15 Anécdotas y el backend, paso 2
-
-Modificar la creación de nuevas anécdotas, de forma que las anécdotas se almacenen en el backend.
+Modifica la creación de nuevas anécdotas, de forma que las anécdotas se almacenen en el backend.
 
 </div>
 
 <div class="content">
 
-### Acciones asincrónicas y redux thunk
+### Acciones asíncronas y Redux Thunk
 
-Nuestro enfoque es bastante bueno, pero no es genial que la comunicación con el servidor suceda dentro de las funciones de los componentes. Sería mejor si la comunicación pudiera abstraerse de los componentes para que no tengan que hacer nada más que llamar al creador de acciones apropiado. Como ejemplo, <i>App</i> inicializaría el estado de la aplicación de la siguiente manera:
+Nuestro enfoque es bastante bueno, pero no es muy bueno que la comunicación con el servidor suceda dentro de las funciones de los componentes. Sería mejor si la comunicación pudiera abstraerse de los componentes para que no tengan que hacer nada más que llamar al action creator apropiado. Como ejemplo, <i>App</i> inicializaría el estado de la aplicación de la siguiente manera:
 
 ```js
 const App = () => {
@@ -401,7 +353,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(initializeNotes())  
-  }, [dispatch]) 
+  }, []) 
 
   // ...
 }
@@ -424,11 +376,11 @@ const NewNote = () => {
 }
 ```
 
-En esta implementación, ambos componentes enviarían una acción sin necesidad de saber sobre la comunicación entre el servidor que sucede detrás de escena. Estos tipos de <i>acciones asincrónicas</i> se pueden implementar utilizando la librería [Redux Thunk](https://github.com/reduxjs/redux-thunk). El uso de la librería no requiere ninguna configuración adicional o incluso instalación cuando el store de Redux se crea utilizando la función <em>configureStore</em> del kit de herramientas de Redux (Redux Toolkit).
+En esta implementación, ambos componentes enviarían una acción sin necesidad de saber sobre la comunicación con el servidor que sucede detrás de escena. Estos tipos de <i>acciones asíncronas</i> se pueden implementar utilizando la librería [Redux Thunk](https://github.com/reduxjs/redux-thunk). El uso de la librería no requiere ninguna configuración adicional o incluso instalación cuando el store de Redux se ha creado utilizando la función <em>configureStore</em> del kit de herramientas de Redux (Redux Toolkit).
 
-Con Redux Thunk, es posible implementar <i>action creators</i> que devuelven una función en lugar de un objeto. La función recibe los métodos <em>dispatch</em> y <em>getState</em> del store de Redux como parámetros. Esto permite, por ejemplo, implementaciones de creadores de acciones asincrónicas, que primero esperan la finalización de una cierta operación asincrónica y luego despachan alguna acción, que cambia el estado del store.
+Con Redux Thunk, es posible implementar <i>action creators</i> que devuelven una función en lugar de un objeto. La función recibe los métodos <em>dispatch</em> y <em>getState</em> del store de Redux como parámetros. Esto permite, por ejemplo, implementaciones de action creators asíncronos, que primero esperan la finalización de una cierta operación asíncrona y luego despachan alguna acción, que cambia el estado del store.
 
-Podemos implementar el <i>action creator</i> <em>initializeNotes</em> que inicializa las notas basadas en los datos recibidos del servidor de la siguiente manera:
+Podemos implementar un action creator <em>initializeNotes</em> que inicializa las notas basadas en los datos recibidos del servidor de la siguiente manera:
 
 ```js
 // ...
@@ -450,7 +402,7 @@ export const initializeNotes = () => {
 export default noteSlice.reducer
 ```
 
-En la función interna, es decir, la <i>acción asincrónica</i>, la operación primero obtiene todas las notas del servidor y luego <i>despacha</i> la acción <em>setNotes</em>, que las agrega al store.
+En la función interna, es decir, la <i>acción asíncrona</i>, la operación primero obtiene todas las notas del servidor y luego <i>despacha</i> la acción <em>setNotes</em>, que las agrega al store.
 
 El componente <i>App</i> puede inicializar las notas de la siguiente manera:
 
@@ -464,7 +416,7 @@ const App = () => {
   // highlight-start
   useEffect(() => {
     dispatch(initializeNotes()) 
-  }, [dispatch]) 
+  }, []) 
   // highlight-end
 
   return (
@@ -479,7 +431,7 @@ const App = () => {
 
 La solución es bastante elegante. La lógica de inicialización de las notas se ha separado completamente del componente React.
 
-Ahora, reemplacemos el creador de acciones <em>createNote</em> creado por la función <em>createSlice</em> con un creador de acciones asincrónico:
+Ahora, reemplacemos el action creator <em>createNote</em> creado por la función <em>createSlice</em> con un action creator asíncrono:
 
 ```js
 // ...
@@ -534,7 +486,7 @@ export const createNote = content => {
 export default noteSlice.reducer
 ```
 
-El principio aquí es el mismo: primero se ejecuta una operación asincrónica y luego se <i>despacha</i> la acción que cambia el estado del store.
+El principio aquí es el mismo: primero se ejecuta una operación asíncrona y luego se <i>despacha</i> la acción que cambia el estado del store.
 
 El componente <i>NewNote</i> cambia como se muestra a continuación:
 
@@ -561,7 +513,7 @@ const NewNote = () => {
 }
 ```
 
-Finalmente, limpiemos un poco el archivo <i>index.js</i> moviendo el código relacionado con la creación del store de Redux a su propio archivo <i>store.js</i>:
+Finalmente, limpiemos un poco el archivo <i>main.jsx</i> moviendo el código relacionado con la creación del store de Redux a su propio archivo <i>store.js</i>:
 
 ```js
 import { configureStore } from '@reduxjs/toolkit'
@@ -579,7 +531,7 @@ const store = configureStore({
 export default store
 ```
 
-Despues de los cambios, el contenido del archivo <i>index.js</i> es el siguiente:
+Luego de los cambios, el contenido del archivo <i>main.jsx</i> es el siguiente:
 
 ```js
 import React from 'react'
@@ -603,23 +555,21 @@ Redux Toolkit ofrece una gran cantidad de herramientas para simplificar la admin
 
 <div class="tasks">
 
-
 ### Ejercicios 6.16.-6.19.
 
-#### 6.16 Anécdotas y el backend, paso 3
+#### 6.16 Anécdotas y el Backend, paso 3
 
-Modifique la inicialización de la redux-store para que suceda utilizando creadores de acciones asincrónicas, que son posibles gracias a la librería <i>redux-thunk</i>.
+Modifica la inicialización de la store de Redux para que suceda utilizando action creators asíncronos, los cuales son posibles gracias a la librería Redux Thunk.
 
-#### 6.17 Anécdotas y el backend, paso 4
+#### 6.17 Anécdotas y el Backend, paso 4
 
-También modifique la creación de una nueva anécdota para que suceda usando creadores de acciones asincrónicas, hecho posible por la librería <i>redux-thunk</i>.
+También modifica la creación de una nueva anécdota para que suceda usando action creators asíncronos, hecho posible por la librería Redux Thunk.
 
+#### 6.18 Anécdotas y el Backend, paso 5
 
-#### 6.18 Anécdotas y el backend, paso 5
+La votación aún no guarda los cambios en el backend. Arregla la situación con la ayuda de la librería Redux Thunk.
 
-La votación aún no guarda los cambios en el backend. Arregle la situación con la ayuda de la librería <i>redux-thunk</i>.
-
-#### 6.19 Anécdotas y el backend, paso 6
+#### 6.19 Anécdotas y el Backend, paso 6
 
 La creación de notificaciones sigue siendo un poco tediosa, ya que hay que realizar dos acciones y utilizar la función _setTimeout_:
 
@@ -630,14 +580,14 @@ setTimeout(() => {
 }, 5000)
 ```
 
-Cree un creador de acciones asincrónicas, que le permite a uno proporcionar la notificación de la siguiente manera:
+Crea un action creator, que te permita proveer la notificación de la siguiente manera:
 
 ```js
 dispatch(setNotification(`you voted '${anecdote.content}'`, 10))
 ```
 
-el primer parámetro es el texto que se representará y el segundo parámetro es el tiempo para mostrar la notificación dada en segundos.
+El primer parámetro es el texto que sera renderizado y el segundo parámetro es el tiempo durante el cual se mostrara la notificación en segundos.
 
-Implemente el uso de esta notificación mejorada en su aplicación.
+Implementa el uso de esta notificación mejorada en tu aplicación.
 
 </div>
