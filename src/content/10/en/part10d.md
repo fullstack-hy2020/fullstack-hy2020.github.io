@@ -617,32 +617,13 @@ Implement a feature for filtering the reviewed repositories list based on a keyw
 
 To avoid a multitude of unnecessary requests while the user types the keyword fast, only pick the latest input after a short delay. This technique is often referred to as [debouncing](https://lodash.com/docs/4.17.15#debounce). [use-debounce](https://www.npmjs.com/package/use-debounce) library is a handy hook for debouncing a state variable. Use it with a sensible delay time, such as 500 milliseconds. Store the text input's value by using the <em>useState</em> hook and then pass the debounced value to the query as the value of the <em>searchKeyword</em> argument.
 
-You probably face an issue that the text input component loses focus after each keystroke. This is because the content provided by the <em>ListHeaderComponent</em> prop is constantly unmounted. This can be fixed by turning the component rendering the <em>FlatList</em> component into a class component and defining the header's render function as a class property like this:
+You probably face an issue that the text input component loses focus after each keystroke. This is because the content provided by the <em>ListHeaderComponent</em> prop is constantly unmounted. This can be fixed by passing the header component directly as the ListHeaderComponent prop, without using an arrow function. This way the header does not re-render when the list does:
 
 ```javascript
-export class RepositoryListContainer extends React.Component {
-  renderHeader = () => {
-    // this.props contains the component's props
-    const props = this.props;
-
-    // ...
-
-    return (
-      <RepositoryListHeader
-      // ...
-      />
-    );
-  };
-
-  render() {
-    return (
-      <FlatList
-        // ...
-        ListHeaderComponent={this.renderHeader}
-      />
-    );
-  }
-}
+<FlatList
+  ListHeaderComponent={<RepositoryListHeader />}
+  // ...
+/>
 ```
 
 The final version of the filtering feature should look something like this:
