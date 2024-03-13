@@ -1037,7 +1037,7 @@ test('one of those can be made nonimportant', async ({ page }) => {
 })
 ```
 
-The first line now looks for the _span_ element containing the text associated with the first created note. In the second line, the function _locator_ is used and _.._ is given as a parameter, which retrieves the element's parent element. The locator function is very flexible, and we take advantage of the fact that the function accepts [as parameter](https://playwright.dev/docs/locators#locate-by-css-or-xpath) not only CSS selectors but also [XPath](https: //developer.mozilla.org/en-US/docs/Web/XPath) selector. It would be possible to express the same with CSS, but in this case XPath provides the simplest way to find the parent of an element.
+The first line now looks for the _span_ element containing the text associated with the first created note. In the second line, the function _locator_ is used and _.._ is given as a parameter, which retrieves the element's parent element. The locator function is very flexible, and we take advantage of the fact that the function accepts [as parameter](https://playwright.dev/docs/locators#locate-by-css-or-xpath) not only CSS selectors but also [XPath](https://developer.mozilla.org/en-US/docs/Web/XPath) selector. It would be possible to express the same with CSS, but in this case XPath provides the simplest way to find the parent of an element.
 
 Of course, the test can also be written using only one auxiliary variable:
 
