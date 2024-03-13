@@ -39,7 +39,7 @@ Let's navigate to an appropriate directory, and create a new template for our ap
 
 The file defines, for instance, that the entry point of the application is the <i>index.js</i> file.
 
-Let's make a small change to the <i>scripts</i> object:
+Let's make a small change to the <i>scripts</i> object by adding a new script command.
 
 ```bash
 {
@@ -154,7 +154,7 @@ import http from 'http'
 
 These days, code that runs in the browser uses ES6 modules. Modules are defined with an [export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) and taken into use with an [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import).
 
-Node.js uses by default so-called [CommonJS](https://en.wikipedia.org/wiki/CommonJS) modules. The reason for this is that the Node ecosystem needed modules long before JavaScript supported them in the language specification. Currently, Node also supports the use of ES6 modules, but since the support is not quite perfect yet, we'll stick to CommonJS modules.
+Node.js uses [CommonJS](https://en.wikipedia.org/wiki/CommonJS) modules. The reason for this is that the Node ecosystem needed modules long before JavaScript supported them in the language specification. Currently, Node also supports the use of ES6 modules, but since the support is not quite perfect yet, we'll stick to CommonJS modules.
 
 CommonJS modules function almost exactly like ES6 modules, at least as far as our needs in this course are concerned.
 
@@ -950,7 +950,7 @@ POST is the only HTTP request type that is neither <i>safe</i> nor <i>idempotent
 
 ### Middleware
 
-The express [json-parser](https://expressjs.com/en/api.html) we took into use earlier is a so-called [middleware](http://expressjs.com/en/guide/using-middleware.html).
+The express [json-parser](https://expressjs.com/en/api.html) used earlier is a [middleware](http://expressjs.com/en/guide/using-middleware.html).
 
 Middleware are functions that can be used for handling _request_ and _response_ objects.
 
