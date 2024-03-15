@@ -1093,7 +1093,7 @@ Configure your project to use the above ESlint settings and fix all the warnings
 
 #### 9.7 WebExercises
 
-Add an endpoint to your app for the exercise calculator. It should be used by doing a HTTP POST request to the endpoint <http://localhost:3002/exercises> with the following input in the request body:
+Add an endpoint to your app for the exercise calculator. It should be used by doing a HTTP POST request to the endpoint <http://localhost:3003/exercises> with the following input in the request body:
 
 ```js
 {
