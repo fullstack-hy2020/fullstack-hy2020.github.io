@@ -46,9 +46,10 @@ const App = () => {
 export default App
 ```
 
-The initial code is on GitHub in the repository [https://github.com/fullstack-hy2020/query-notes](https://github.com/fullstack-hy2020/query-notes/tree/part6-0) in branch <i>part6-0</i>.
+The initial code is on GitHub in this [repository](https://github.com/fullstack-hy2020/query-notes/tree/part6-0), in the branch <i>part6-0</i>.
 
 **Note**: By default, cloning the repo will only give you the main branch. To get the initial code from the part6-0 branch, use the following command:
+
 ```
 git clone --branch part6-0 https://github.com/fullstack-hy2020/query-notes.git
 ```
@@ -113,7 +114,7 @@ const App = () => {
 }
 ```
 
-Retrieving data from the server is still done in the familiar way with the Axios <i>get</i> method. However, the Axios method call is now wrapped in a [query](https://tanstack.com/query/latest/docs/react/guides/queries) formed with the [useQuery](https://tanstack.com/query/latest/docs/react/reference/useQuery) function. The first parameter of the function call is a string <i>notes</i> which acts as a [key](https://tanstack.com/query/latest/docs/react/guides/query-keys)  to the query defined, i.e. the list of notes.
+Retrieving data from the server is still done in a familiar way with the Axios <i>get</i> method. However, the Axios method call is now wrapped in a [query](https://tanstack.com/query/latest/docs/react/guides/queries) formed with the [useQuery](https://tanstack.com/query/latest/docs/react/reference/useQuery) function. The first parameter of the function call is a string <i>notes</i> which acts as a [key](https://tanstack.com/query/latest/docs/react/guides/query-keys)  to the query defined, i.e. the list of notes.
 
 The return value of the <i>useQuery</i> function is an object that indicates the status of the query. The output to the console illustrates the situation:
 
@@ -125,7 +126,7 @@ That is, the first time the component is rendered, the query is still in <i>load
 <div>loading data...</div>
 ```
 
-However, the HTTP request is completed so quickly that even the most astute will not be able to see the text. When the request is completed, the component is rendered again. The query is in the state <i>success</i> on the second rendering, and the field <i>data</i> of the query object contains the data returned by the request, i.e. the list of notes that is rendered on the screen.
+However, the HTTP request is completed so quickly that not even Max Verstappen would be able to see the text. When the request is completed, the component is rendered again. The query is in the state <i>success</i> on the second rendering, and the field <i>data</i> of the query object contains the data returned by the request, i.e. the list of notes that is rendered on the screen.
 
 So the application retrieves data from the server and renders it on the screen without using the React hooks <i>useState</i> and <i>useEffect</i> used in chapters 2-5 at all. The data on the server is now entirely under the administration of the React Query library, and the application does not need the state defined with React's <i>useState</i> hook at all!
 
@@ -276,9 +277,9 @@ const App = () => {
 }
 ```
 
-So again, a mutation was created that invalidated the query <i>notes</i> so that the updated note is rendered correctly. Using mutation is easy, the method <i>mutate</i> receives a note as a parameter, the importance of which has been changed to the negation of the old value.
+So again, a mutation was created that invalidated the query <i>notes</i> so that the updated note is rendered correctly. Using mutations is easy, the method <i>mutate</i> receives a note as a parameter, the importance of which is been changed to the negation of the old value.
 
-The current code for the application is in [GitHub](https://github.com/fullstack-hy2020/query-notes/tree/part6-2) in the branch <i>part6-2</i>.
+The current code for the application is on [GitHub](https://github.com/fullstack-hy2020/query-notes/tree/part6-2) in the branch <i>part6-2</i>.
 
 ### Optimizing the performance
 
@@ -768,7 +769,7 @@ The solution is quite elegant. The entire state of the application, i.e. the val
 
 The final code for the application is in [GitHub](https://github.com/fullstack-hy2020/hook-counter/tree/part6-3) in the branch <i>part6-3</i>.
 
-As a technical detail, it should be noted that the helper functions <i>useCounterValue</i> and <i>useCounterDispatch</i> are defined as [custom hooks](https://react.dev/learn/reusing-logic-with-custom-hooks), because calling the hook function <i>useContext</i> is [possible](https://legacy.reactjs.org/docs/hooks-rules.html) only from React components or custom hooks. Custom hooks are JavaScript functions whose name must start with the string _use_. We will return to custom hooks in a little more detail in [part 7](/en/part7/custom_hooks) of the course.
+As a technical detail, it should be noted that the helper functions <i>useCounterValue</i> and <i>useCounterDispatch</i> are defined as [custom hooks](https://react.dev/learn/reusing-logic-with-custom-hooks), because calling the hook function <i>useContext</i> is [possible](https://legacy.reactjs.org/docs/hooks-rules.html) only from React components or custom hooks. Custom hooks are JavaScript functions whose name must start with the word _use_. We will return to custom hooks in a little more detail in [part 7](/en/part7/custom_hooks) of the course.
 
 </div>
 
@@ -792,8 +793,7 @@ As stated in exercise 6.21, the server requires that the content of the anecdote
 
 ![browser showing error notification for trying to add too short of an anecdoate](../../images/6/67new.png)
 
-The error condition should be handled in the callback function registered for it, see
-[here](https://tanstack.com/query/latest/docs/react/reference/useMutation) how to register a function.
+The error condition should be handled in the callback function registered for it, see [here](https://tanstack.com/query/latest/docs/react/reference/useMutation) how to register a function.
 
 This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your completed exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
@@ -813,7 +813,7 @@ The situation may confuse a beginner and even an experienced web developer. Whic
 
 For a simple application, <i>useState</i> is certainly a good starting point. If the application is communicating with the server, the communication can be handled in the same way as in chapters 1-5, using the state of the application itself. Recently, however, it has become more common to move the communication and associated state management at least partially under the control of React Query (or some other similar library). If you are concerned about useState and the prop drilling it entails, using context may be a good option. There are also situations where it may make sense to handle some of the state with useState and some with contexts.
 
-The most comprehensive and robust state management solution is Redux, which is a way to implement the so-called [Flux](https://facebookarchive.github.io/flux/) architecture. Redux is slightly older than the solutions presented in this section. The rigidity of Redux has been the motivation for many new state management solutions, such as React's <i>useReducer</i>. Some of the criticisms of Redux's rigidity have already become obsolete thanks to the [Redux Toolkit](https://redux-toolkit.js.org/).
+The most comprehensive and robust state management solution is Redux, which is a way to implement the so-called [Flux](https://facebookarchive.github.io/flux/docs/in-depth-overview/) architecture. Redux is slightly older than the solutions presented in this section. The rigidity of Redux has been the motivation for many new state management solutions, such as React's <i>useReducer</i>. Some of the criticisms of Redux's rigidity have already become obsolete thanks to the [Redux Toolkit](https://redux-toolkit.js.org/).
 
 Over the years, there have also been other state management libraries developed that are similar to Redux, such as the newer entrant [Recoil](https://recoiljs.org/) and the slightly older [MobX](https://mobx.js.org/). However, according to [Npm trends](https://npmtrends.com/mobx-vs-recoil-vs-redux), Redux still clearly dominates, and in fact seems to be increasing its lead:
 
