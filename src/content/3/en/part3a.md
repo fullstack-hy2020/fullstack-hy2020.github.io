@@ -39,7 +39,7 @@ Let's navigate to an appropriate directory, and create a new template for our ap
 
 The file defines, for instance, that the entry point of the application is the <i>index.js</i> file.
 
-Let's make a small change to the <i>scripts</i> object:
+Let's make a small change to the <i>scripts</i> object by adding a new script command.
 
 ```bash
 {
@@ -154,7 +154,7 @@ import http from 'http'
 
 These days, code that runs in the browser uses ES6 modules. Modules are defined with an [export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) and taken into use with an [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import).
 
-Node.js uses by default so-called [CommonJS](https://en.wikipedia.org/wiki/CommonJS) modules. The reason for this is that the Node ecosystem needed modules long before JavaScript supported them in the language specification. Currently, Node also supports the use of ES6 modules, but since the support is not quite perfect yet, we'll stick to CommonJS modules.
+Node.js uses [CommonJS](https://en.wikipedia.org/wiki/CommonJS) modules. The reason for this is that the Node ecosystem needed modules long before JavaScript supported them in the language specification. Currently, Node also supports the use of ES6 modules, but since the support is not quite perfect yet, we'll stick to CommonJS modules.
 
 CommonJS modules function almost exactly like ES6 modules, at least as far as our needs in this course are concerned.
 
@@ -216,7 +216,7 @@ console.log(`Server running on port ${PORT}`)
 
 Let's restart the server (you can shut the server down by pressing _Ctrl+C_ in the console) and let's refresh the browser.
 
-The <i>application/json</i> value in the <i>Content-Type</i> header informs the receiver that the data is in the JSON format. The _notes_ array gets transformed into JSON with the <em>JSON.stringify(notes)</em> method.
+The <i>application/json</i> value in the <i>Content-Type</i> header informs the receiver that the data is in the JSON format. The _notes_ array gets transformed into JSON formatted string with the <em>JSON.stringify(notes)</em> method. This is necessary because the response.end() method expects a string or a buffer to send as the response body.
 
 When we open the browser, the displayed format is exactly the same as in [part 2](/en/part2/getting_data_from_server/) where we used [json-server](https://github.com/typicode/json-server) to serve the list of notes:
 
@@ -340,7 +340,7 @@ The request is responded to with the [json](http://expressjs.com/en/4x/api.html#
 
 Next, let's take a quick look at the data sent in JSON format.
 
-In the earlier version where we were only using Node, we had to transform the data into the JSON format with the _JSON.stringify_ method:
+In the earlier version where we were only using Node, we had to transform the data into the JSON formatted string with the _JSON.stringify_ method:
 
 ```js
 response.end(JSON.stringify(notes))
@@ -950,7 +950,7 @@ POST is the only HTTP request type that is neither <i>safe</i> nor <i>idempotent
 
 ### Middleware
 
-The express [json-parser](https://expressjs.com/en/api.html) we took into use earlier is a so-called [middleware](http://expressjs.com/en/guide/using-middleware.html).
+The express [json-parser](https://expressjs.com/en/api.html) used earlier is a [middleware](http://expressjs.com/en/guide/using-middleware.html).
 
 Middleware are functions that can be used for handling _request_ and _response_ objects.
 

@@ -513,7 +513,7 @@ describe('Note app', () => {
 
 ```
 
-Playwright suorittaa testit siinä järjestyksessä, missä ne ovat testikoodissa. Eli ensin suoritetaan testi <i>user can log in</i>, missä käyttäjä kirjautuu sovellukseen, ja tämän jälkeen suoritetaan testi <i>a new note can be created</i>, jonka <i>beforeEach</i>-lohkossa myös suoritetaan kirjautuminen. Miksi näin tehdään, eikö käyttäjä jo ole kirjaantuneena aiemman testin ansiosta? Ei, sillä <i>jokaisen</i> testin suoritus alkaa selaimen kannalta "nollatilanteesta", kaikki edellisten testien selaimen tilaan tekemät muutokset nollaantuvat.
+Since we have prevented the tests from running in parallel, Playwright runs the tests in the order they appear in the test code. That is, first the test <i>user can log in</i>, where the user logs into the application, is performed. After this the test <i>a new note can be created</i> gets executed, which also does a log in, in the <i>beforeEach</i> block. Why is this done, isn't the user already logged in thanks to the previous test? No, because the execution of <i>each</i> test starts from the browser's "zero state", all changes made to the browser's state by the previous tests are reset.
 
 ### Controlling the state of the database
 
@@ -798,7 +798,7 @@ describe('Note app', () => {
 
 First, the login function is tested. After this, another _describe_ block contains a set of tests that assume that the user is logged in, the login is handled inside the initializing _beforeEach_ block.
 
-As already stated earlier, each test is executed starting from the initial state (where the database is cleared and one user is created there), so even though the test is defined after another testi in the code, it does not start from the same state where the tests in the code executed earlier have left!
+As already stated earlier, each test is executed starting from the initial state (where the database is cleared and one user is created there), so even though the test is defined after another test in the code, it does not start from the same state where the tests in the code executed earlier have left!
 
 It is also worth striving for non-repetitive code in tests. Let's isolate the code that handles the login as a helper function, which is placed e.g. in the file _tests/helper.js_:
 
@@ -1037,7 +1037,7 @@ test('one of those can be made nonimportant', async ({ page }) => {
 })
 ```
 
-The first line now looks for the _span_ element containing the text associated with the first created note. In the second line, the function _locator_ is used and _.._ is given as a parameter, which retrieves the element's parent element. The locator function is very flexible, and we take advantage of the fact that the function accepts [as parameter](https://playwright.dev/docs/locators#locate-by-css-or-xpath) not only CSS selectors but also [XPath](https: //developer.mozilla.org/en-US/docs/Web/XPath) selector. It would be possible to express the same with CSS, but in this case XPath provides the simplest way to find the parent of an element.
+The first line now looks for the _span_ element containing the text associated with the first created note. In the second line, the function _locator_ is used and _.._ is given as a parameter, which retrieves the element's parent element. The locator function is very flexible, and we take advantage of the fact that the function accepts [as parameter](https://playwright.dev/docs/locators#locate-by-css-or-xpath) not only CSS selectors but also [XPath](https://developer.mozilla.org/en-US/docs/Web/XPath) selector. It would be possible to express the same with CSS, but in this case XPath provides the simplest way to find the parent of an element.
 
 Of course, the test can also be written using only one auxiliary variable:
 
@@ -1146,7 +1146,7 @@ const createNote = async (page, content) => {
   await page.getByRole('button', { name: 'new note' }).click()
   await page.getByRole('textbox').fill(content)
   await page.getByRole('button', { name: 'save' }).click()
-  await page.getByText(content).waitFor() // hightlight-line
+  await page.getByText(content).waitFor() // highlight-line
 }
 ```
 

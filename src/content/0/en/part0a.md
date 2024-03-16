@@ -19,7 +19,7 @@ Participants are expected to have good programming skills, basic knowledge of we
 
 Previous knowledge of JavaScript or other course topics is not required.
 
-How much programming experience is needed? It is hard to say, but you should be pretty fluent with *your* language. This level of fluency takes usually at least 100-200 hours of practice to develop.
+How much programming experience is needed? It is hard to say, but you should be pretty fluent in *your* language. This level of fluency takes usually at least 100-200 hours of practice to develop.
 
 ### Course material
 
@@ -37,7 +37,7 @@ The course contains fourteen parts, the first of which is numbered 0 for consist
 
 Proceeding from part *n* to part *n+1* is not sensible before enough know-how of the topics in part *n* has been achieved. In pedagogic terms, the course uses [Mastery Learning](https://en.wikipedia.org/wiki/Mastery_learning), and you are only intended to proceed to the next part after doing enough of the exercises of the previous part.
 
-In parts 1-4 you are expected to do at least **all** of the exercises that are **not** marked with an asterisk(*). Exercises marked with an asterisk count towards your final grade, but skipping them does not prevent you from doing the compulsory exercises in the next parts. Parts 5-13 do not have asterisk marked exercises since there is no similar dependency on previous parts.
+In parts 1-4 you are expected to do at least **all** of the exercises that are **not** marked with an asterisk(*). Exercises marked with an asterisk count towards your final grade, but skipping them does not prevent you from doing the compulsory exercises in the next parts. Parts 5-13 do not have asterisk-marked exercises since there is no similar dependency on previous parts.
 
 The speed of completing the course is flexible.
 
@@ -57,7 +57,7 @@ it is quite likely that nobody will respond. The bug can be *anywhere*.
 
 A better question could be
 
-> * In the exercise 2.15 when I try to add a new person to the app, server responds to 403, despite the request looks ok to me.
+> * In exercise 2.15 when I try to add a new person to the app, the server responds to 403, despite the request looking ok to me.
 >
 > The code looks like this
 >
@@ -74,7 +74,7 @@ A better question could be
 >
 > The network tab looks like the following*
 >
-> [screen shot from the network console]
+> [screenshot from the network console]
 >
 > All the code can be found here (a link to GitHub)
 
@@ -194,7 +194,7 @@ How to study the course – instructions in a nutshell: other course parts
 
 ### Submitting exercises
 
-The exercises are submitted through GitHub and marking them as done on the "my submissions" tab of the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+The exercises are submitted through GitHub and marked as done on the "my submissions" tab of the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 If you are submitting exercises from different parts to the same repository, use an appropriate system for naming your directories. You can of course create a new repository for each part. If you are using a private repository, add *mluukkai* as a collaborator.
 
@@ -274,11 +274,11 @@ When pressed twice you should see the following text
 
 **Please note** that to get university credits you need a registration for each completed part. Please see [more information about registration](/en/part0/general_info#parts-and-completion).
 
-You can view your grade in University of Helsinki Sisu and [Opintopolku](https://opintopolku.fi/oma-opintopolku/) approximately four weeks after notifying us.
+You can view your grade in the University of Helsinki Sisu and [Opintopolku](https://opintopolku.fi/oma-opintopolku/) approximately four weeks after notifying us.
 
 When the registration is done, the following text appears in the submission system
 
-> *University credits registered, see the course page how to get a transcript if you need one*
+> *University credits registered, see the course page for how to get a transcript if you need one*
 
 ### Where do I get my University of Helsinki Student number
 
@@ -302,11 +302,11 @@ After course enrollment, you will receive a confirmation email to an email addre
 
 #### C) Contact Student Services
 
-If you have trouble finding your student number through the means listed above, you can send an email to University of Helsinki Student Services. ***Make sure you have enrolled in the course through the Open University before sending the email!***
+If you have trouble finding your student number through the means listed above, you can send an email to the University of Helsinki Student Services. ***Make sure you have enrolled in the course through the Open University before sending the email!***
 
 In your email, include the following information
 
-- name of the course you have enrolled in,
+- the name of the course you have enrolled in,
 - your name
 - your date of birth.
 

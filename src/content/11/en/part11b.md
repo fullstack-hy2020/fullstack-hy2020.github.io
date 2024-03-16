@@ -225,7 +225,7 @@ The [uses](https://docs.github.com/en/free-pro-team@latest/actions/reference/wor
 
 Here we're using a public action [actions/checkout](https://github.com/actions/checkout) and we specify a version (<code>@v4</code>) to avoid potential breaking changes if the action gets updated. The <code>checkout</code> action does what the name implies: it checkouts the project source code from Git.
 
-Secondly, as the application is written in JavaScript, Node.js must be set up to be able to utilize the commands that are specified in <code>package.json</code>. To set up Node.js, [actions/setup-node](https://github.com/actions/setup-node) action can be used. Version <code>16</code> is selected because it is the version the application is using in the production environment.
+Secondly, as the application is written in JavaScript, Node.js must be set up to be able to utilize the commands that are specified in <code>package.json</code>. To set up Node.js, [actions/setup-node](https://github.com/actions/setup-node) action can be used. Version <code>20</code> is selected because it is the version the application is using in the production environment.
 
 ```yml
 # name and trigger not shown anymore...

@@ -435,7 +435,8 @@ app.get('/api/notes', (request, response) => {
 
 The code automatically uses the defined _toJSON_ when formatting notes to the response.
 
-### Database configuration into its own module
+### Moving db configuration to its own module
+
 
 Before we refactor the rest of the backend to use the database, let's extract the Mongoose-specific code into its own module.
 

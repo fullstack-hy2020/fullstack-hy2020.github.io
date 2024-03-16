@@ -509,7 +509,7 @@ describe('Note app', () => {
 
 ```
 
-Playwright suorittaa testit siinä järjestyksessä, missä ne ovat testikoodissa. Eli ensin suoritetaan testi <i>user can log in</i>, missä käyttäjä kirjautuu sovellukseen, ja tämän jälkeen suoritetaan testi <i>a new note can be created</i>, jonka <i>beforeEach</i>-lohkossa myös suoritetaan kirjautuminen. Miksi näin tehdään, eikö käyttäjä jo ole kirjaantuneena aiemman testin ansiosta? Ei, sillä <i>jokaisen</i> testin suoritus alkaa selaimen kannalta "nollatilanteesta", kaikki edellisten testien selaimen tilaan tekemät muutokset nollaantuvat.
+Koska olemme estäneet testien rinnakkaisen suorittamisen, Playwright suorittaa testit siinä järjestyksessä, missä ne ovat testikoodissa. Eli ensin suoritetaan testi <i>user can log in</i>, missä käyttäjä kirjautuu sovellukseen, ja tämän jälkeen suoritetaan testi <i>a new note can be created</i>, jonka <i>beforeEach</i>-lohkossa myös suoritetaan kirjautuminen. Miksi näin tehdään, eikö käyttäjä jo ole kirjaantuneena aiemman testin ansiosta? Ei, sillä <i>jokaisen</i> testin suoritus alkaa selaimen kannalta "nollatilanteesta", kaikki edellisten testien selaimen tilaan tekemät muutokset nollaantuvat.
 
 ### Tietokannan tilan kontrollointi
 
@@ -1138,7 +1138,7 @@ const createNote = async (page, content) => {
   await page.getByRole('button', { name: 'new note' }).click()
   await page.getByRole('textbox').fill(content)
   await page.getByRole('button', { name: 'save' }).click()
-  await page.getByText(content).waitFor() // hightlight-line
+  await page.getByText(content).waitFor() // highlight-line
 }
 ```
 

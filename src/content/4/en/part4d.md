@@ -422,7 +422,7 @@ Modify adding new blogs so that it is only possible if a valid token is sent wit
 
 [This example](/en/part4/token_authentication#limiting-creating-new-notes-to-logged-in-users) from part 4 shows taking the token from the header with the _getTokenFrom_ helper function in <i>controllers/blogs.js</i>.
 
-If you used the same solution, refactor taking the token to a [middleware](/en/part3/node_js_and_express#middleware). The middleware should take the token from the <i>Authorization</i> header and place it into the <i>token</i> field of the <i>request</i> object.
+If you used the same solution, refactor taking the token to a [middleware](/en/part3/node_js_and_express#middleware). The middleware should take the token from the <i>Authorization</i> header and assign it to the <i>token</i> field of the <i>request</i> object.
 
 In other words, if you register this middleware in the <i>app.js</i> file before all routes
 
