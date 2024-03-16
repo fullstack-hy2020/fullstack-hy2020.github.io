@@ -87,7 +87,7 @@ We decide to implement the filter functionality by storing <i>the value of the f
 }
 ```
 
-Only the array of notes is stored in the state of the current implementation of our application. In the new implementation, the state object has two properties, <i>notes</i> that contains the array of notes and <i>filter</i> that contains a string indicating which notes should be displayed to the user.
+Only the array of notes was stored in the state of the previous implementation of our application. In the new implementation, the state object has two properties, <i>notes</i> that contains the array of notes and <i>filter</i> that contains a string indicating which notes should be displayed to the user.
 
 ### Combined reducers
 
@@ -113,7 +113,7 @@ The actions for changing the state of the filter look like this:
 }
 ```
 
-Let's also create a new _action creator_ function. We will write the code for the action creator in a new <i>src/reducers/filterReducer.js</i> module:
+Let's also create a new _action creator_ function. We will write its code in a new <i>src/reducers/filterReducer.js</i> module:
 
 ```js
 const filterReducer = (state = 'ALL', action) => {
@@ -135,7 +135,6 @@ We can create the actual reducer for our application by combining the two existi
 Let's define the combined reducer in the <i>main.jsx</i> file:
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createStore, combineReducers } from 'redux' // highlight-line
 import { Provider } from 'react-redux' 
@@ -214,9 +213,9 @@ const filterReducer = (state = 'ALL', action) => {
 
 Based on the console output one might get the impression that every action gets duplicated:
 
-![devtools console output showing dupblicated actions in note and filter reducers](../../images/6/6.png)
+![devtools console output showing duplicated actions in note and filter reducers](../../images/6/6.png)
 
-Is there a bug in our code? No. The combined reducer works in such a way that every <i>action</i> gets handled in <i>every</i> part of the combined reducer. Typically only one reducer is interested in any given action, but there are situations where multiple reducers change their respective parts of the state based on the same action.
+Is there a bug in our code? No. The combined reducer works in such a way that every <i>action</i> gets handled in <i>every</i> part of the combined reducer, or in other words, every reducer "listens" to all of the dispatched actions and does something with them if it has been instructed to do so. Typically only one reducer is interested in any given action, but there are situations where multiple reducers change their respective parts of the state based on the same action.
 
 ### Finishing the filters
 
@@ -305,7 +304,7 @@ const VisibilityFilter = (props) => {
 export default VisibilityFilter
 ```
 
-With the new component <i>App</i> can be simplified as follows:
+With the new component, <i>App</i> can be simplified as follows:
 
 ```js
 import Notes from './components/Notes'
@@ -387,7 +386,7 @@ The current version of the application can be found on [GitHub](https://github.c
 
 ### Exercise 6.9
 
-#### 6.9 Better anecdotes, step7
+#### 6.9 Better Anecdotes, step 7
 
 Implement filtering for the anecdotes that are displayed to the user.
 
@@ -433,7 +432,6 @@ npm install @reduxjs/toolkit
 Next, open the <i>main.jsx</i> file which currently creates the Redux store. Instead of Redux's <em>createStore</em> function, let's create the store using Redux Toolkit's [configureStore](https://redux-toolkit.js.org/api/configureStore) function:
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit' // highlight-line
@@ -460,7 +458,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 )
 ```
 
-We already got rid of a few lines of code now that we don't need the <em>combineReducers</em> function to create the reducer for the store. We will soon see that the <em>configureStore</em> function has many additional benefits such as the effortless integration of development tools and many commonly used libraries without the need for additional configuration.
+We already got rid of a few lines of code, now we don't need the <em>combineReducers</em> function to create the store's reducer. We will soon see that the <em>configureStore</em> function has many additional benefits such as the effortless integration of development tools and many commonly used libraries without the need for additional configuration.
 
 Let's move on to refactoring the reducers, which brings forth the benefits of the Redux Toolkit. With Redux Toolkit, we can easily create reducer and related action creators using the [createSlice](https://redux-toolkit.js.org/api/createSlice) function. We can use the <em>createSlice</em> function to refactor the reducer and action creators in the <i>reducers/noteReducer.js</i> file in the following manner:
 
@@ -516,13 +514,15 @@ const noteSlice = createSlice({
 // highlight-end
 ```
 
-The <em>createSlice</em> function's <em>name</em> parameter defines the prefix which is used in the action's type values. For example, the <em>createNote</em> action defined later will have the type value of <em>notes/createNote</em>. It is a good practice to give the parameter a value which is unique among the reducers. This way there won't be unexpected collisions between the application's action type values. The <em>initialState</em> parameter defines the reducer's initial state. The <em>reducers</em> parameter takes the reducer itself as an object, of which functions handle state changes caused by certain actions. Note that the <em>action.payload</em> in the function contains the argument provided by calling the action creator:
+The <em>createSlice</em> function's <em>name</em> parameter defines the prefix which is used in the action's type values. For example, the <em>createNote</em> action defined later will have the type value of <em>notes/createNote</em>. It is a good practice to give the parameter a value which is unique among the reducers. This way there won't be unexpected collisions between the application's action type values.
+The <em>initialState</em> parameter defines the reducer's initial state.
+The <em>reducers</em> parameter takes the reducer itself as an object, of which functions handle state changes caused by certain actions. Note that the <em>action.payload</em> in the function contains the argument provided by calling the action creator:
 
 ```js
 dispatch(createNote('Redux Toolkit is awesome!'))
 ```
 
-This dispatch call responds to dispatching the following object:
+This dispatch call is equivalent to dispatching the following object:
 
 ```js
 dispatch({ type: 'notes/createNote', payload: 'Redux Toolkit is awesome!' })
@@ -544,7 +544,7 @@ createNote(state, action) {
 
 We are mutating <em>state</em> argument's array by calling the <em>push</em> method instead of returning a new instance of the array. What's this all about?
 
-Redux Toolkit utilizes the [Immer](https://immerjs.github.io/immer/) library with reducers created by <em>createSlice</em> function, which makes it possible to mutate the <em>state</em> argument inside the reducer. Immer uses the mutated state to produce a new, immutable state and thus the state changes remain immutable. Note that <em>state</em> can be changed without "mutating" it, as we have done with the <em>toggleImportanceOf</em> action. In this case, the function <i>returns</i> the new state. Nevertheless mutating the state will often come in handy especially when a complex state needs to be updated.
+Redux Toolkit utilizes the [Immer](https://immerjs.github.io/immer/) library with reducers created by <em>createSlice</em> function, which makes it possible to mutate the <em>state</em> argument inside the reducer. Immer uses the mutated state to produce a new, immutable state and thus the state changes remain immutable. Note that <em>state</em> can be changed without "mutating" it, as we have done with the <em>toggleImportanceOf</em> action. In this case, the function directly <i>returns</i> the new state. Nevertheless mutating the state will often come in handy especially when a complex state needs to be updated.
 
 The <em>createSlice</em> function returns an object containing the reducer as well as the action creators defined by the <em>reducers</em> parameter. The reducer can be accessed by the <em>noteSlice.reducer</em> property, whereas the action creators by the <em>noteSlice.actions</em> property. We can produce the file's exports in the following way:
 
@@ -655,9 +655,9 @@ The following is printed to the console
 
 ![devtools console showing Handler,Target as null but IsRevoked as true](../../images/6/40new.png)
 
-The output is interesting but not very useful. This is about the previously mentioned Immer library used by the Redux Toolkit, which is now used internally to save the state of the Store.
+The output is interesting but not very useful. This is about the previously mentioned Immer library used by the Redux Toolkit internally to save the state of the Store.
 
-The status can be converted to a human-readable format, e.g. by converting it to a string and back to a JavaScript object as follows:
+The status can be converted to a human-readable format, e.g. by converting it first to a string and then back to a JavaScript object as follows:
 
 ```js
 console.log(JSON.parse(JSON.stringify(state))) // highlight-line
@@ -671,13 +671,13 @@ Console output is now human readable
 
 [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) is a Chrome addon that offers useful development tools for Redux. It can be used for example to inspect the Redux store's state and dispatch actions through the browser's console. When the store is created using Redux Toolkit's <em>configureStore</em> function, no additional configuration is needed for Redux DevTools to work.
 
-Once the addon is installed, clicking the <i>Redux</i> tab in the browser's console should open the development tools:
+Once the addon is installed, clicking the <i>Redux</i> tab in the browser's developer tools, the Redux DevTools should open:
 
 ![browser with redux addon in devtools](../../images/6/42new.png)
 
 You can inspect how dispatching a certain action changes the state by clicking the action:
 
-![devtools inspecting notes tree in redux](../../images/6/43new.png)
+![devtools inspecting state tree in redux](../../images/6/43new.png)
 
 It is also possible to dispatch actions to the store using the development tools:
 
@@ -693,7 +693,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 Let's continue working on the anecdote application using Redux that we started in exercise 6.3.
 
-#### 6.10 Better anecdotes, step8
+#### 6.10 Better Anecdotes, step 8
 
 Install Redux Toolkit for the project. Move the Redux store creation into the file <i>store.js</i> and use Redux Toolkit's <em>configureStore</em> to create the store.
 
@@ -701,11 +701,11 @@ Change the definition of the <i>filter reducer and action creators</i> to use th
 
 Also, start using Redux DevTools to debug the application's state easier.
 
-#### 6.11 Better anecdotes, step9
+#### 6.11 Better Anecdotes, step 9
 
 Change also the definition of the <i>anecdote reducer and action creators</i> to use the Redux Toolkit's <em>createSlice</em> function.
 
-#### 6.12 Better anecdotes, step10
+#### 6.12 Better Anecdotes, step 10
 
 The application has a ready-made body for the <i>Notification</i> component:
 
@@ -750,7 +750,7 @@ You will have to make changes to the application's existing reducer. Create a se
 
 The application does not have to use the <i>Notification</i> component intelligently at this point in the exercises. It is enough for the application to display the initial value set for the message in the <i>notificationReducer</i>.
 
-#### 6.13 Better anecdotes, step11
+#### 6.13 Better Anecdotes, step 11
 
 Extend the application so that it uses the <i>Notification</i> component to display a message for five seconds when the user votes for an anecdote or creates a new anecdote:
 
