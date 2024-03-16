@@ -286,7 +286,6 @@ module.exports = {
       b: 'Muchos reducers',
       c: 'Comunicarse con el servidor en una aplicación redux',
       d: 'React Query, useReducer y  el contexto',
-      e: 'connect (la parte antigua)',
     },
     '7': {
       a: 'React-router',
