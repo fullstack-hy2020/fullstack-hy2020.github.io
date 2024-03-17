@@ -86,7 +86,7 @@ npm run dev
 
 ### Component
 
-The file <i>App.jsx</i> now defines a [React component](https://react.dev/learn/your-first-component) with the name <i>App</i>. The command on the final line of file <i>main.jsx</i>
+The file <i>main.jsx</i> now defines a [React component](https://react.dev/learn/your-first-component) with the name <i>App</i>. The command on the final line of file <i>main.jsx</i>
 
 ```js
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
