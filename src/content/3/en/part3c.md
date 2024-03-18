@@ -771,7 +771,7 @@ app.get('/api/notes/:id', (request, response, next) => { // highlight-line
 })
 ```
 
-The error that is passed forward is given to the <em>next</em> function as a parameter. If <em>next</em> was called without a parameter, then the execution would simply move onto the next route or middleware. If the <em>next</em> function is called with a parameter, then the execution will continue to the <i>error handler middleware</i>.
+The error that is passed forward is given to the <em>next</em> function as a parameter. If <em>next</em> was called without an argument, then the execution would simply move onto the next route or middleware. If the <em>next</em> function is called with an argument, then the execution will continue to the <i>error handler middleware</i>.
 
 Express [error handlers](https://expressjs.com/en/guide/error-handling.html) are middleware that are defined with a function that accepts <i>four parameters</i>. Our error handler looks like this:
 
@@ -899,7 +899,7 @@ app.put('/api/notes/:id', (request, response, next) => {
 
 In the code above, we also allow the content of the note to be edited.
 
-Notice that the <em>findByIdAndUpdate</em> method receives a regular JavaScript object as its parameter, and not a new note object created with the <em>Note</em> constructor function.
+Notice that the <em>findByIdAndUpdate</em> method receives a regular JavaScript object as its argument, and not a new note object created with the <em>Note</em> constructor function.
 
 There is one important detail regarding the use of the <em>findByIdAndUpdate</em> method. By default, the <em>updatedNote</em> parameter of the event handler receives the original document [without the modifications](https://mongoosejs.com/docs/api/model.html#model_Model-findByIdAndUpdate). We added the optional <code>{ new: true }</code> parameter, which will cause our event handler to be called with the new modified document instead of the original.
 
