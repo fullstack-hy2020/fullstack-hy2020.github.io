@@ -23,7 +23,7 @@ If you did not already, create a directory on your machine and create a file cal
 
 inside that Dockerfile we will tell the image three things:
 
-- Use the node:16 as the base for our image
+- Use the [node:20](https://hub.docker.com/_/node) as the base for our image
 - Include the index.js inside the image, so we don't need to manually copy it into the container
 - When we run a container from the image, use Node to execute the index.js file.
 
@@ -32,7 +32,7 @@ The wishes above will translate into a basic Dockerfile. The best location to pl
 The resulting <i>Dockerfile</i> looks like this:
 
 ```Dockerfile
-FROM node:16
+FROM node:20
 
 WORKDIR /usr/src/app
 
@@ -41,11 +41,11 @@ COPY ./index.js ./index.js
 CMD node index.js
 ```
 
-FROM instruction will tell Docker that the base for the image should be node:16. COPY instruction will copy the file <i>index.js</i> from the host machine to the file with the same name in the image. CMD instruction tells what happens when _docker run_ is used. CMD is the default command that can then be overwritten with the parameter given after the image name. See _docker run --help_ if you forgot.
+FROM instruction will tell Docker that the base for the image should be node:20. COPY instruction will copy the file <i>index.js</i> from the host machine to the file with the same name in the image. CMD instruction tells what happens when _docker run_ is used. CMD is the default command that can then be overwritten with the parameter given after the image name. See _docker run --help_ if you forgot.
 
 The WORKDIR instruction was slipped in to ensure we don't interfere with the contents of the image. It will guarantee all of the following commands will have <i>/usr/src/app</i> set as the working directory. If the directory doesn't exist in the base image, it will be automatically created.
 
-If we do not specify a WORKDIR, we risk overwriting important files by accident. If you check the root (_/_) of the node:16 image with _docker run node:16 ls_, you can notice all of the directories and files that are already included in the image.
+If we do not specify a WORKDIR, we risk overwriting important files by accident. If you check the root (_/_) of the node:20 image with _docker run node:20 ls_, you can notice all of the directories and files that are already included in the image.
 
 Now we can use the command _docker build_ to build an image based on the Dockerfile. Let's spice up the command with one additional flag: _-t_, this will help us name the image:
 
@@ -55,7 +55,7 @@ $ docker build -t fs-hello-world .
 ...
 ```
 
-So the result is "Docker please build with tag (you may think the tag to be the name of the resulting image) fs-hello-world the Dockerfile in this directory". You can point to any Dockerfile, but in our case, a simple dot will mean the Dockerfile in <i>this</i> directory. That is why the command ends with a period. After the build is finished, you can run it with _docker run fs-hello-world_:
+So the result is "Docker please build with tag (you may think the tag to be the name of the resulting image) <i>fs-hello-world</i> the Dockerfile in this directory". You can point to any Dockerfile, but in our case, a simple dot will mean the Dockerfile in <i>this</i> directory. That is why the command ends with a period. After the build is finished, you can run it with _docker run fs-hello-world_:
 
 ```bash
 $ docker run fs-hello-world
@@ -109,7 +109,7 @@ Containerizing that should be relatively easy based on the previous example.
 Let's place the following Dockerfile at the root of the project:
 
 ```Dockerfile
-FROM node:16
+FROM node:20
 
 WORKDIR /usr/src/app
 
@@ -118,24 +118,22 @@ COPY . .
 CMD DEBUG=playground:* npm start
 ```
 
-Let's build the image from the Dockerfile with a command, _docker build -t express-server ._ and run it with _docker run -p 3123:3000 express-server_. The _-p_ flag will inform Docker that a port from the host machine should be opened and directed to a port in the container. The format for is _-p host-port:application-port_.
+Let's build the image from the Dockerfile and then run it:
 
 ```bash
-$ docker run -p 3123:3000 express-server
-
-> playground@0.0.0 start
-> node ./bin/www
-
-Tue, 29 Jun 2021 10:55:10 GMT playground:server Listening on port 3000
+docker build -t express-server .
+docker run -p 3123:3000 express-server
 ```
 
-> If yours doesn't work, skip to the next section. There is an explanation why it may not work even if you followed the steps correctly.
+The _-p_ flag in the run command will inform Docker that a port from the host machine should be opened and directed to a port in the container. The format for is _-p host-port:application-port_.
 
 The application is now running! Let's test it by sending a GET request to [http://localhost:3123/](http://localhost:3123/).
 
-Shutting it down is a headache at the moment. Use another terminal and _docker kill_ command to kill the application. The _docker kill_ will send a kill signal (SIGKILL) to the application to force it to shut down. It needs the name or id of the container as an argument.
+> If yours doesn't work, skip to the next section. There is an explanation why it may not work even if you followed the steps correctly.
 
-By the way, when using id as the argument, the beginning of the ID is enough for Docker to know which container we mean.
+Shutting the app down is a headache at the moment. Use another terminal and _docker kill_ command to kill the application. The _docker kill_ will send a kill signal (SIGKILL) to the application to force it to shut down. It needs the name or the id of the container as an argument.
+
+By the way, when using the id as the argument, the beginning of the ID is enough for Docker to know which container we mean.
 
 ```bash
 $ docker container ls
@@ -165,10 +163,10 @@ node_modules
 Dockerfile
 ```
 
-However, in our case the .dockerignore isn't the only thing required. We will need to install the dependencies during the build step. The _Dockerfile_ changes to:
+However, in our case, the .dockerignore isn't the only thing required. We will need to install the dependencies during the build step. The _Dockerfile_ changes to:
 
 ```Dockerfile
-FROM node:16
+FROM node:20
 
 WORKDIR /usr/src/app
 
@@ -194,7 +192,7 @@ So in short: _ci_ creates reliable builds, while _install_ is the one to use whe
 As we are not installing anything new during the build step, and we don't want the versions to suddenly change, we will use _ci_:
 
 ```Dockerfile
-FROM node:16
+FROM node:20
 
 WORKDIR /usr/src/app
 
@@ -216,7 +214,7 @@ Now the Dockerfile should work again, try it with _docker build -t express-serve
 We set an environment variable _DEBUG=playground:*_ during CMD for the npm start. However, with Dockerfiles we could also use the instruction ENV to set environment variables. Let's do that:
 
 ```Dockerfile
-FROM node:16
+FROM node:20
 
 WORKDIR /usr/src/app
 
@@ -245,7 +243,7 @@ Snyk has a great list of 10 best practices for Node/Express containerization. Re
 One big carelessness we have left is running the application as root instead of using a user with lower privileges. Let's do a final fix to the Dockerfile:
 
 ```Dockerfile
-FROM node:16
+FROM node:20
   
 WORKDIR /usr/src/app
 
@@ -270,9 +268,9 @@ CMD npm start
 
 The repository you cloned or copied in the [first exercise](/en/part12/introduction_to_containers#exercise-12-1) contains a todo-app. See the todo-app/todo-backend and read through the README. We will not touch the todo-frontend yet.
 
-Step 1. Containerize the todo-backend by creating a <i>todo-app/todo-backend/Dockerfile</i> and building an image.
+- Step 1. Containerize the todo-backend by creating a <i>todo-app/todo-backend/Dockerfile</i> and building an image.
 
-Step 2. Run the todo-backend image with the correct ports open. Make sure the visit counter increases when used through a browser in http://localhost:3000/ (or some other port if you configure so)
+- Step 2. Run the todo-backend image with the correct ports open. Make sure the visit counter increases when used through a browser in http://localhost:3000/ (or some other port if you configure so)
 
 Tip: Run the application outside of a container to examine it before starting to containerize.
 
@@ -363,7 +361,7 @@ You can use _-f_ flag to specify a <i>file</i> to run the Docker Compose command
 docker compose -f docker-compose.dev.yml up
 ```
 
-Now that we may have multiple it's useful.
+Now that we may have multiple compose files, it's useful.
 
 Now start the MongoDB with _docker compose -f docker-compose.dev.yml up -d_. With _-d_ it will run it in the background. You can view the output logs with _docker compose -f docker-compose.dev.yml logs -f_. There the _-f_ will ensure we <i>follow</i> the logs.
 
@@ -450,23 +448,71 @@ you may have a read permission problem. They are not uncommon when dealing with 
 
 Now starting the Express application with the correct environment variable should work:
 
+### Still problems?
+
+For some reason, the initialization of Mongo has caused problems for many.
+
+If the app does not work and you still end up with the following error
+
 ```bash
-$ MONGO_URL=mongodb://the_username:the_password@localhost:3456/the_database npm run dev
+/Users/mluukkai/dev/fs-ci-lokakuu/repo/todo-app/todo-backend/node_modules/mongodb/lib/cmap/connection.js:272
+          callback(new MongoError(document));
+                   ^
+MongoError: command find requires authentication
+    at MessageStream.messageHandler (/Users/mluukkai/dev/fs-ci-lokakuu/repo/todo-app/todo-backend/node_modules/mongodb/lib/cmap/connection.js:272:20)
 ```
 
-Let's check that the http://localhost:3000/todos returns all todos. It should return the two todos we initialized. We can and should use Postman to test the basic functionality of the app, such as adding or deleting a todo.
+run these commands:
+
+```bash
+docker compose -f docker-compose.dev.yml down --volumes
+docker image rm mongo
+```
+
+After these, try to start Mongo again.
+
+If the problem persists, let us drop the idea of a volume altogether and copy the initialization script to a custom image. Create the following <i>Dockerfile</i> to the directory <i>todo-app/todo-backend/mongo</i>
+
+```Dockerfile
+FROM mongo
+
+COPY ./mongo-init.js /docker-entrypoint-initdb.d/
+```
+
+Build it to an image with the command
+
+```bash
+docker build -t initialized-mongo .
+```
+
+Change now the <i>docker-compose.dev.yml</i> to use the new image:
+
+```yml
+  mongo:
+    image: initialized-mongo  # highlight-line
+    ports:
+     - 3456:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: the_database
+```
+
+Now the app should finally work.
 
 ### Persisting data with volumes
 
-By default, containers are not going to preserve our data. When you close the Mongo container you may or may not be able to get the data back.
+By default, database containers are not going to preserve our data. When you close the database container you <i>may or may not</i> be able to get the data back.
 
-This is a rare case in which it does preserve the data as the developers who made the Docker image for Mongo have defined a volume to be used: [https://github.com/docker-library/mongo/blob/cb8a419053858e510fc68ed2d69415b3e50011cb/4.4/Dockerfile#L113](https://github.com/docker-library/mongo/blob/cb8a419053858e510fc68ed2d69415b3e50011cb/4.4/Dockerfile#L113) This line will instruct Docker to preserve the data in those directories.
+> Mongo is actually a rare case in which the container indeed does preserve the data. This happens, since the developers who made the Docker image for Mongo have defined a volume to be used. [This line](https://github.com/docker-library/mongo/blob/cb8a419053858e510fc68ed2d69415b3e50011cb/4.4/Dockerfile#L113) in the Dockerfile will instruct Docker to preserve the data in a volume.
 
 There are two distinct methods to store the data: 
 - Declaring a location in your filesystem (called [bind mount](https://docs.docker.com/storage/bind-mounts/))
 - Letting Docker decide where to store the data ([volume](https://docs.docker.com/storage/volumes/))
 
-I prefer the first choice in most cases whenever you <i>really</i> need to avoid deleting the data. Let's see both in action with docker compose:
+The first choice is preferable in most cases whenever one <i>really</i> needs to avoid the data being deleted. 
+
+Let's see both in action with Docker compose. Let us start with <i>bind mount</i>:
 
 ```yml
 services:
@@ -485,7 +531,7 @@ services:
 
 The above will create a directory called *mongo\_data* to your local filesystem and map it into the container as _/data/db_. This means the data in _/data/db_ is stored outside of the container but still accessible by the container! Just remember to add the directory to .gitignore.
 
-A similar outcome can be achieved with a named volume:
+A similar outcome can be achieved with a <i>named volume</i>:
 
 ```yml
 services:
