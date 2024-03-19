@@ -561,9 +561,9 @@ El primer <i>State</i> contiene el valor del estado <i>left</i>, el siguiente co
 
 ### Reglas de los Hooks
 
-Hay algunas limitaciones y reglas que debemos seguir para asegurarnos de que nuestra aplicación utilice correctamente las funciones de estado basadas en hooks.
+Hay algunas limitaciones y [reglas](https://es.react.dev/warnings/invalid-hook-call-warning#breaking-rules-of-hooks) que debemos seguir para asegurarnos de que nuestra aplicación utilice correctamente las funciones de estado basadas en hooks.
 
-La función _useState_ (así como la función _useEffect_ presentada más adelante en el curso) <i>no se debe llamar</i> desde dentro de un ciclo, una expresión condicional o cualquier lugar que no sea una función que defina un componente. Esto debe hacerse para garantizar que los hooks siempre se llamen en el mismo orden o, si este no es el caso, la aplicación se comportará de manera errática.
+La función _useState_ (así como la función _useEffect_ presentada más adelante en el curso) <i>no se debe llamar</i> desde dentro de un loop, una expresión condicional o cualquier lugar que no sea una función que defina a un componente. Esto debe hacerse para garantizar que los hooks siempre se llamen en el mismo orden o, si este no es el caso, la aplicación se comportará de manera errática.
 
 En resumen, los hooks solo se pueden llamar desde el interior de un cuerpo de la función que define un componente de React:
 

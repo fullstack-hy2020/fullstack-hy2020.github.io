@@ -561,7 +561,7 @@ The first <i>State</i> contains the value of the <i>left</i> state, the next con
 
 ### Rules of Hooks
 
-There are a few limitations and rules we have to follow to ensure that our application uses hooks-based state functions correctly.
+There are a few limitations and [rules](https://react.dev/warnings/invalid-hook-call-warning#breaking-rules-of-hooks) that we have to follow to ensure that our application uses hooks-based state functions correctly.
 
 The _useState_ function (as well as the _useEffect_ function introduced later on in the course) <i>must not be called</i> from inside of a loop, a conditional expression, or any place that is not a function defining a component. This must be done to ensure that the hooks are always called in the same order, and if this isn't the case the application will behave erratically.
 

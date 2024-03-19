@@ -769,7 +769,7 @@ La solución es bastante elegante. Todo el estado de la aplicación, es decir, e
 
 El código de la aplicación final se encuentra en [GitHub](https://github.com/fullstack-hy2020/hook-counter/tree/part6-3) en la rama <i>part6-3</i>.
 
-Como detalle técnico, debe tenerse en cuenta que las funciones auxiliares <i>useCounterValue</i> y <i>useCounterDispatch</i> se definen como [hooks personalizados](https://es.react.dev/learn/reusing-logic-with-custom-hooks), porque llamar a la función de hook <i>useContext</i> es [posible]([https://es.reactjs.org/docs/hooks -reglas.html](https://es.legacy.reactjs.org/docs/hooks-rules.html)) solo desde componentes de React o hooks personalizados. Los hooks personalizados, por otro lado, son funciones JavaScript cuyo nombre debe comenzar con la palabra _use_. Volveremos a los hooks personalizados en un poco más de detalle en la [parte 7](/es/part7/hooks_personalizados) del curso.
+Como detalle técnico, debe tenerse en cuenta que las funciones auxiliares <i>useCounterValue</i> y <i>useCounterDispatch</i> se definen como [hooks personalizados](https://es.react.dev/learn/reusing-logic-with-custom-hooks), porque llamar a la función de hook <i>useContext</i> es [posible](https://es.react.dev/warnings/invalid-hook-call-warning#breaking-rules-of-hooks) solo desde componentes de React o hooks personalizados. Los hooks personalizados, por otro lado, son funciones JavaScript cuyo nombre debe comenzar con la palabra _use_. Volveremos a los hooks personalizados en un poco más de detalle en la [parte 7](/es/part7/hooks_personalizados) del curso.
 
 </div>
 
