@@ -621,7 +621,7 @@ const api_key = import.meta.env.VITE_SOME_KEY
 // muuttujassa api_key on nyt käynnistyksessä annettu API-avaimen arvo
 ```
 
-Huomaa, että ympäristömuuttujan nimen täytyy alkaa merkkijonolla _VITE\__.
+Huomaa, että ympäristömuuttujan nimen täytyy alkaa merkkijonolla <i>VITE_</i>.
 
 Tämä oli osan viimeinen tehtävä ja on aika sekä puskea koodi GitHubiin että merkitä tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
