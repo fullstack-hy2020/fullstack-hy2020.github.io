@@ -36,7 +36,7 @@ Itse en jostain syystä juurikaan käytä Visual Studio Coden debuggeria.
 Debuggaus onnistuu myös Chromen developer-konsolilla käynnistämällä sovellus komennolla:
 
 ```bash
-node --inspect index.js
+chromium --inspect index.js
 ```
 
 Debuggeriin pääsee käsiksi klikkaamalla Chromen developer-konsoliin ilmestyneestä vihreästä ikonista:
