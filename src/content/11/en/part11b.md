@@ -51,7 +51,7 @@ To fork the repository, you can click on the Fork button in the top-right area o
 
 Once you've clicked on the Fork button, GitHub will start the creation of a new repository called <code>{github_username}/full-stack-open-pokedex</code>.
 
-Once the process has been finished, you should be redirected to your brand new repository:
+Once the process has been finished, you should be redirected to your brand-new repository:
 
 ![](../../images/11/2.png)
 
@@ -66,6 +66,8 @@ Try now the following:
 - lint the code 
 
 You might notice that the project contains some broken tests and linting errors. **Just leave them as they are for now.** We will get around those later in the exercises.
+
+**NOTE** the tests of the project have been made with [Jest](https://jestjs.io/). The course material in [part 5](/en/part5/testing_react_apps) uses [Vitest](https://vitest.dev/guide/). From the usage point of view, the libraries have barely any difference. 
 
 As you might remember from [part 3](/en/part3/deploying_app_to_internet#frontend-production-build), the React code <i>should not</i> be run in development mode once it is deployed in production. Try now the following
 - create a production <i>build</i> of the project
@@ -327,13 +329,55 @@ Once you have fixed all the issues and the Pokedex is bug-free, the workflow run
 
 ![tests fixed](../../images/11/8.png)
 
-#### 11.9 Simple end to end tests
+#### 11.9 Simple end-to-end tests
 
-The current set of tests uses [Jest](https://jestjs.io/) to ensure that the React components work as intended. This is exactly the same thing that is done in the section [Testing React apps](/en/part5/testing_react_apps) of part 5. 
+The current set of tests uses [Jest](https://jestjs.io/) to ensure that the React components work as intended. This is essentially the same thing that is done in the section [Testing React apps](/en/part5/testing_react_apps) of part 5 with [Vitest](https://vitest.dev/). 
 
-Testing components in isolation is quite useful but that still does not ensure that the system as a whole works as we wish. To have more confidence about this, let us write a couple of really simple end to end tests with the [Cypress](https://www.cypress.io/) library similar what we do in section [End to end testing](/en/part5/end_to_end_testing) of part 5. 
+Testing components in isolation is quite useful but that still does not ensure that the system as a whole works as we wish. To have more confidence about this, let us write a couple of really simple end-to-end tests similarly we did in section [part 5](/en/part5/). You could use [Playwright](https://playwright.dev/) or [Cypress](https://www.cypress.io/) for the tests.
 
-So, set Cypress up (you'll find [here](/en/part5/end_to_end_testing/) all the info you need) and use this test at first:
+No matter which you choose, you should extend Jest-definition in package.json to prevent Jest from trying to run the e2e-tests. Assuming that directory _e2e-tests_ is used for e2e-tests, the definition is:
+
+```json
+{
+  // ...
+  "jest": {
+    "testEnvironment": "jsdom",
+    "testPathIgnorePatterns": ["e2e-tests"] // highlight-line
+  }
+}
+```
+
+**Playwright**
+
+Set Playwright up (you'll find [here](/en/part5/end_to_end_testing_playwright) all the info you need) to your repository. Note that in contrast to part 5, you should now install Playwright to the same project with the rest of the code!
+
+Use this test first:
+
+```js
+const { test, describe, expect, beforeEach } = require('@playwright/test')
+
+describe('Pokedex', () => {
+  test('front page can be opened', async ({ page }) => {
+     await page.goto('')
+    await expect(page.getByText('ivysaur')).toBeVisible()
+    await expect(page.getByText('Pokémon and Pokémon character names are trademarks of Nintendo.')).toBeVisible()
+  })
+})
+```
+
+**Note** is that although the page renders the Pokemon names with an initial capital letter, the names are actually written with lowercase letters in the source, so you should test for <code>ivysaur</code> instead of <code>Ivysaur</code>!
+
+Define a npm script <code>test:e2e</code> for running the e2e tests from the command line.
+
+Remember that the Playwright tests <i>assume that the application is up and running</i> when you run the test! Instead of starting the app manually, you should now configure a <i>Playwright development server</i> to start the app while tests are executed, see [here](https://playwright.dev/docs/next/api/class-testconfig#test-config-web-server) how that can be done.
+
+Ensure that the test passes locally. 
+
+Once the end-to-end test works in your machine, include it in the GitHub Action workflow. That should be pretty easy by following [this](https://playwright.dev/docs/ci-intro#on-pushpull_request).
+
+**Cypress**
+
+Set Cypress up (you'll find [here](/en/part5/end_to_end_testing_cypress) all the info you need) and use this test first:
 
 ```js
 describe('Pokedex', function() {
@@ -347,13 +391,11 @@ describe('Pokedex', function() {
 
 Define a npm script <code>test:e2e</code> for running the e2e tests from the command line.
 
-**Note** do not include the word <i>spec</i> in the Cypress test file name, that would cause also Jest to run it, and it might cause problems. 
+**Note** is that although the page renders the Pokemon names with an initial capital letter, the names are actually written with lowercase letters in the source, so you should test for <code>ivysaur</code> instead of <code>Ivysaur</code>!
 
-**Another thing to note** is that although the page renders the Pokemon names with an initial capital letter, the names are actually written with lowercase letters in the source, so you should test for <code>ivysaur</code> instead of <code>Ivysaur</code>!
+Ensure that the test passes locally. Remember that the Cypress tests _assume that the application is up and running_ when you run the test! If you have forgotten the details, please see [part 5](/en/part5/end_to_end_testing) how to get up and running with Cypress.
 
-Ensure that the test passes locally. Remember that the Cypress tests _assume that the application is up and running_ when you run the test! If you have forgotten the details (that happened to me too!), please see [part 5](/en/part5/end_to_end_testing) how to get up and running with Cypress.
-
-Once the end to end test works in your machine, include it in the GitHub Action workflow. By far the easiest way to do that is to use the ready-made action [cypress-io/github-action](https://github.com/cypress-io/github-action). The step that suits us is the following:
+Once the end-to-end test works in your machine, include it in the GitHub Action workflow. By far the easiest way to do that is to use the ready-made action [cypress-io/github-action](https://github.com/cypress-io/github-action). The step that suits us is the following:
 
 ```js
 - name: e2e tests
@@ -368,15 +410,16 @@ Three options are used: [command](https://github.com/cypress-io/github-action#cu
 
 Note that you need to build the app in GitHub Actions before it can be started in production mode!
 
+**Once the pipeline works...**
 
 Once you are sure that the pipeline works, <i>write another test</i> that ensures that one can navigate from the main page to the page of a particular Pokemon, e.g. <i>ivysaur</i>. The test does not need to be a complex one, just check that when you navigate to a link, the page has some proper content, such as the string <i>chlorophyll</i> in the case of <i>ivysaur</i>.
 
-**Note** the Pokemon abilities are written with lower case letters in the source code (the capitalization is done in CSS), so <i>do not</i> test for <i>Chlorophyll</i> but rather <i>chlorophyll</i>.
+**Note** the Pokemon abilities are written with lowercase letters in the source code (the capitalization is done in CSS), so <i>do not</i> test for <i>Chlorophyll</i> but rather <i>chlorophyll</i>.
 
 The end result should be something like this
 
 ![e2e tests](../../images/11/9.png)
 
-End to end tests are nice since they give us confidence that software works from the end user's perspective. The price we have to pay is the slower feedback time. Now executing the whole workflow takes quite much longer.
+End-to-end tests are nice since they give us confidence that software works from the end user's perspective. The price we have to pay is the slower feedback time. Now executing the whole workflow takes quite much longer.
 
 </div>
