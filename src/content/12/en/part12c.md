@@ -187,6 +187,8 @@ These all are great reasons. The tradeoff is that we may encounter some unconven
 
 Let's start with the frontend. Since the Dockerfile will be significantly different from the production Dockerfile let's create a new one called <i>dev.Dockerfile</i>.
 
+**Note** we shall use the name <i>dev.Dockerfile</i> for development configurations and <i>Dockerfile</i> othervise.
+
 Starting the Vite in development mode should be easy. Let's start with the following:
 
 ```Dockerfile
@@ -247,7 +249,7 @@ root@b83e9040b91d:/usr/src/app# npm install
 
 Now both versions of the library rollup are installed and the container works!  
 
-Next, let's move the config to file <i>docker-compose.dev.yml</i>. That file should be at the root of the project as well:
+Next, let's move the config to the file <i>docker-compose.dev.yml</i>. That file should be at the root of the project as well:
 
 ```yml
 services:
@@ -264,6 +266,8 @@ services:
 ```
 
 With this configuration, _docker compose up_ can run the application in development mode. You don't even need Node installed to develop it!
+
+**Note** we shall use the name <i>docker-compose.dev.yml</i> for development environment compose files, and the default name <i>docker-compose.yml</i> othervise.
 
 Installing new dependencies is a headache for a development setup like this. One of the better options is to install the new dependency **inside** the container. So instead of doing e.g. _npm install axios_, you have to do it in the running container e.g. _docker exec hello-front-dev npm install axios_, or add it to the package.json and run _docker build_ again.
 
@@ -420,7 +424,7 @@ Here is a possibly helpful image illustrating the connections within the docker 
 
 ### Communications between containers in a more ambitious environment
 
-Next, we will add a [reverse proxy](https://en.wikipedia.org/wiki/Reverse_proxy) to our docker-compose.yml. According to wikipedia
+Next, we will configure a [reverse proxy](https://en.wikipedia.org/wiki/Reverse_proxy) to our docker-compose.dev.yml. According to wikipedia
 
 > <i>A reverse proxy is a type of proxy server that retrieves resources on behalf of a client from one or more servers. These resources are then returned to the client, appearing as if they originated from the reverse proxy server itself.</i>
 
@@ -432,7 +436,7 @@ Our pick is [Nginx](https://hub.docker.com/_/nginx).
 
 Let us now put the <i>hello-frontend</i> behind the reverse proxy.
 
-Create a file <i>nginx.conf</i> in the project root and take the following template as a starting point. We will need to do minor edits to have our application running:
+Create a file <i>nginx.dev.conf</i> in the project root and take the following template as a starting point. We will need to do minor edits to have our application running:
 
 ```bash
 # events is required, but defaults are ok
@@ -450,14 +454,16 @@ http {
       proxy_set_header Upgrade $http_upgrade;
       proxy_set_header Connection 'upgrade';
       
-      # Requests are directed to http://localhost:3000
-      proxy_pass http://localhost:3000;
+      # Requests are directed to http://localhost:5173
+      proxy_pass http://localhost:5173;
     }
   }
 }
 ```
 
-Next, create an Nginx service in the <i>docker-compose.yml</i> file. Add a volume as instructed in the Docker Hub page where the right side is _:/etc/nginx/nginx.conf:ro_, the final ro declares that the volume will be <i>read-only</i>:
+**Note** we are using the familiar naming convention also for Nginx, <i>nginx.dev.conf</i> for development configurations, and the default name<i>nginx.conf</i> othervise.
+
+Next, create an Nginx service in the <i>docker-compose.dev.yml</i> file. Add a volume as instructed in the Docker Hub page where the right side is _:/etc/nginx/nginx.conf:ro_, the final ro declares that the volume will be <i>read-only</i>:
 
 ```yml
 services:
@@ -466,7 +472,7 @@ services:
   nginx:
     image: nginx:1.20.1
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx.dev.conf:/etc/nginx/nginx.conf:ro
     ports:
       - 8080:80
     container_name: reverse-proxy
@@ -474,18 +480,18 @@ services:
       - app # wait for the frontend container to be started
 ```
 
-with that added we can run _docker compose up_ and see what happens.
+with that added, we can run _docker compose -f docker-compose.dev.yml up_ and see what happens.
 
 ```bash
 $ docker container ls
-CONTAINER ID   IMAGE             COMMAND                  CREATED         STATUS         PORTS                                       NAMES
-a02ae58f3e8d   nginx:1.20.1      "/docker-entrypoint.…"   4 minutes ago   Up 4 minutes   0.0.0.0:8080->80/tcp, :::8080->80/tcp       reverse-proxy
-5ee0284566b4   hello-front-dev   "docker-entrypoint.s…"   4 minutes ago   Up 4 minutes   0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   hello-front-dev
+CONTAINER ID   IMAGE            COMMAND  PORTS                   NAMES
+a02ae58f3e8d   nginx:1.20.1     ...      0.0.0.0:8080->80/tcp    reverse-proxy
+5ee0284566b4   hello-front-dev  ...      0.0.0.0:5173->5173/tcp  hello-front-dev
 ```
 
 Connecting to http://localhost:8080 will lead to a familiar-looking page with 502 status. 
 
-This is because directing requests to http://localhost:3000 leads to nowhere as the Nginx container does not have an application running in port 3000. By definition, localhost refers to the current computer used to access it. With containers localhost is unique for each container, leading to the container itself.
+This is because directing requests to http://localhost:5173 leads to nowhere as the Nginx container does not have an application running in port 5173. By definition, localhost refers to the current computer used to access it. Since the localhost is unique for each container, it always points to the container itself.
 
 Let's test this by going inside the Nginx container and using curl to send a request to the application itself. In our usage curl is similar to wget, but won't need any flags.
 
@@ -498,26 +504,29 @@ root@374f9e62bfa8:/# curl http://localhost:80
   ...
 ```
 
-To help us, Docker Compose set up a network when we ran _docker compose up_. It also added all of the containers in the <i>docker-compose.yml</i> to the network. A DNS makes sure we can find the other container. The containers are each given two names: the service name and the container name.
+To help us, Docker Compose has set up a network when we ran _docker compose up_. It has also added all of the containers mentioned in the <i>docker-compose.dev.yml</i> to the network. A DNS makes sure we can find the other containers in the network. The containers are each given two names: the service name and the container name and both can be used to communicate with a container.
 
-Since we are inside the container, we can also test the DNS! Let's curl the service name (app) in port 3000
+Since we are inside the container, we can also test the DNS! Let's curl the service name (app) in port 5173
 
 ```html
-root@374f9e62bfa8:/# curl http://app:3000
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-    ...
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    ...
+root@374f9e62bfa8:/# curl http://app:5173
+<!doctype html>
+<html lang="en">
+  <head>
+    <script type="module" src="/@vite/client"></script>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
 ```
 
-That is it! Let's replace the proxy_pass address in nginx.conf with that one.
-
-If you are still encountering 502, make sure that the create-react-app has been built first. You can read the logs output from the _docker compose up_.
+That is it! Let's replace the proxy_pass address in nginx.dev.conf with that one.
 
 One more thing: we added an option [depends_on](https://docs.docker.com/compose/compose-file/compose-file-v3/#depends_on) to the configuration that ensures that the _nginx_ container is not started before the frontend container _app_ is started:
 
@@ -548,7 +557,7 @@ http {
       proxy_set_header Upgrade $http_upgrade;
       proxy_set_header Connection 'upgrade';
       
-      proxy_pass http://app:3000; // highlight-line
+      proxy_pass http://app:5173; // highlight-line
     }
   }
 }
@@ -579,7 +588,7 @@ Add the services Nginx and todo-frontend built with <i>todo-app/todo-frontend/de
 
 ![](../../images/12/ex_12_16_nginx_front.png)
 
-In this and the following exercises you do not need to support the the build option, that is, the command
+In this and the following exercises you **do not** need to support the the build option, that is, the command
 
 ```bash
 docker compose -f docker-compose.dev.yml up --build
@@ -591,7 +600,7 @@ It is enough to build the frontend and backend at their own repositories.
 
 Add the service todo-backend to the docker-compose file <i>todo-app/docker-compose.dev.yml</i> in development mode.
 
-Add a new location to the <i>nginx.conf</i> so that requests to _/api_ are proxied to the backend. Something like this should do the trick:
+Add a new location to the <i>nginx.dev.conf</i> so that requests to _/api_ are proxied to the backend. Something like this should do the trick:
 
 ```conf
   server {
@@ -599,18 +608,16 @@ Add a new location to the <i>nginx.conf</i> so that requests to _/api_ are proxi
 
     # Requests starting with root (/) are handled
     location / {
-      # The following 3 lines are required for the hot loading to work (websocket).
       proxy_http_version 1.1;
       proxy_set_header Upgrade $http_upgrade;
       proxy_set_header Connection 'upgrade';
       
-      # Requests are directed to http://localhost:3000
-      proxy_pass http://localhost:3000;
+      proxy_pass ...
     }
 
     # Requests starting with /api/ are handled
     location /api/ {
-      ...
+      proxy_pass ...
     }
   }
 ```
@@ -623,17 +630,17 @@ This is a [common issue](https://serverfault.com/questions/562756/how-to-remove-
 
 This illustrates what we are looking for and may be helpful if you are having trouble:
 
-![](../../images/12/ex_12_17_nginx_back.png)
+![](../../images/12/nginx-back-vite.png)
 
 #### Exercise 12.19: Connect the services, todo-frontend with todo-backend
 
-> In this exercise, submit the entire development environment, including both Express and React applications, Dockerfiles and docker-compose.yml.
+> In this exercise, submit the entire development environment, including both Express and React applications, dev.Dockerfiles and docker-compose.dev.yml.
 
 Finally, it is time to put all the pieces together. Before starting, it is essential to understand <i>where</i> the React app is actually run. The above figure might give the impression that React app is run in the container but it is totally wrong. 
 
 It is just the <i>React app source code</i> that is in the container. When the browser hits the address http://localhost:8080 (assuming that you set up Nginx to be accessed in port 8080), the React source code gets downloaded from the container to the browser:
 
-![](../../images/12/nginx-setup.png)
+![](../../images/12/nginx-setup-vite.png)
 
 Next, the browser starts executing the React app, and all the requests it makes to the backend should be done through the Nginx reverse proxy:
 
@@ -641,11 +648,11 @@ Next, the browser starts executing the React app, and all the requests it makes 
 
 The frontend container is actually no more accessed beyond the first request that gets the React app source code to the browser.
 
-Now set up your app to work as depicted in the above figure. Make sure that the todo-frontend works with todo-backend. It will require changes to the *REACT\_APP\_BACKEND\_URL* environmental variable in the frontend.
+Now set up your app to work as depicted in the above figure. Make sure that the todo-frontend works with todo-backend. It will require changes to the *VITE\_BACKEND\_URL* environmental variable in the frontend.
 
 Make sure that the development environment is now fully functional, that is:
 - all features of the todo app work
-- you can edit the source files <i>and</i> the changes take effect by reloading the app (the hot reloading may or may not work...)
+- you can edit the source files <i>and</i> the changes take effect by reloading the app
 - frontend should access the backend through Nginx, so the requests should be done to http://localhost:8080/api/todos:
 
 ![](../../images/12/todos-dev-right-2.png)
