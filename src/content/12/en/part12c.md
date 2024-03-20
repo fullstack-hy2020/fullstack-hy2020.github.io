@@ -235,6 +235,8 @@ You can now view hello-frontend in the browser.
 
 > <i>**Editor's note:** hot reload might work in your computer, but it is currently known to have some [issues](https://github.com/facebook/create-react-app/issues/11879). So if it does not work for you, just continue without the hot reload support, and reload the browser when you change the frontend code. You may also use use [The Visual Studio Code Containers extension](https://code.visualstudio.com/docs/remote/containers).</i>
 
+If changes made to the mounted files are not visible even after manually reloading the app in the browser, you might be able to fix this with [Watchpack API](https://github.com/webpack/watchpack) by enabling Watchpack Polling with environment variable "WATCHPACK_POLLING=true" either directly in the React project, or on the docker-compose file.
+
 Next, let's move the config to a <i>docker-compose.yml</i>. That file should be at the root of the project as well:
 
 ```yml
