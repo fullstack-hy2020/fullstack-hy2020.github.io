@@ -7,24 +7,22 @@ lang: en
 
 <div class="content">
 
-We have now a basic understanding of Docker and can use it to easily set up eg. a database for our app. Let us now move our focus in the frontend. 
+We have now a basic understanding of Docker and can use it to easily set up eg. a database for our app. Let us now move our focus to the frontend. 
 
 ### React in container
 
-Let's create and containerize a React application next.
+Let's create and containerize a React application next. We start with the usual steps
 
+```bash
+$ npm create vite@latest hello-front -- --template react
+$ cd hello-front
+$ npm install
 ```
-$ npx create-react-app hello-front
-  ...
 
-  Happy hacking!
-```
 
-The create-react-app already installed all dependencies for us, so we did not need to run npm install here.
+The next step is to turn the JavaScript code and CSS, into production-ready static files. Vite already has _build_ as an npm script so let's use that:
 
-The next step is to turn the JavaScript code and CSS, into production-ready static files. The create-react-app already has _build_ as an npm script so let's use that:
-
-```
+```bash
 $ npm run build
   ...
 
@@ -34,10 +32,10 @@ $ npm run build
   ...
 ```
 
-Great! The final step is figuring a way to use a server to serve the static files. As you may know, we could use our [express.static](https://expressjs.com/en/starter/static-files.html) with the Express server to serve the static files. I'll leave that as an exercise for you to do at home. Instead, we are going to go ahead and start writing our Dockerfile:
+Great! The final step is figuring out a way to use a server to serve the static files. As you may know, we could use our [express.static](https://expressjs.com/en/starter/static-files.html) with the Express server to serve the static files. I'll leave that as an exercise for you to do at home. Instead, we are going to go ahead and start writing our Dockerfile:
 
 ```Dockerfile
-FROM node:16
+FROM node:20
 
 WORKDIR /usr/src/app
 
@@ -52,15 +50,18 @@ That looks about right. Let's build it and see if we are on the right track. Our
 
 ```bash
 $ docker build . -t hello-front
-  [+] Building 172.4s (10/10) FINISHED 
+ => [4/5] RUN npm ci                  
+ => [5/5] RUN npm run 
+ ...             
+ => => naming to docker.io/library/hello-front
 
 $ docker run -it hello-front bash
 
 root@98fa9483ee85:/usr/src/app# ls
-  Dockerfile  README.md  build  node_modules  package-lock.json  package.json  public  src
+  Dockerfile  README.md  dist  index.html  node_modules  package-lock.json  package.json	public	src  vite.config.js
 
-root@98fa9483ee85:/usr/src/app# ls build/
-  asset-manifest.json  favicon.ico  index.html  logo192.png  logo512.png  manifest.json  robots.txt  static
+root@98fa9483ee85:/usr/src/app# ls dist
+  assets	index.html  vite.svg
 ```
 
 A valid option for serving static files now that we already have Node in the container is [serve](https://www.npmjs.com/package/serve). Let's try installing serve and serving the static files while we are inside the container.
@@ -68,9 +69,9 @@ A valid option for serving static files now that we already have Node in the con
 ```bash
 root@98fa9483ee85:/usr/src/app# npm install -g serve
 
-  added 88 packages, and audited 89 packages in 6s
+  added 89 packages in 2s
 
-root@98fa9483ee85:/usr/src/app# serve build
+root@98fa9483ee85:/usr/src/app# serve dist
 
    ┌────────────────────────────────────────┐
    │                                        │
@@ -85,10 +86,10 @@ root@98fa9483ee85:/usr/src/app# serve build
 
 Great! Let's ctrl+c and exit out and then add those to our Dockerfile.
 
-The installation of serve turns into a RUN in the Dockerfile. This way the dependency is installed during the build process. The command to serve build directory will become the command to start the container:
+The installation of serve turns into a RUN in the Dockerfile. This way the dependency is installed during the build process. The command to serve the <i>dist</i> directory will become the command to start the container:
 
 ```Dockerfile
-FROM node:16
+FROM node:20
 
 WORKDIR /usr/src/app
 
@@ -100,10 +101,10 @@ RUN npm run build
 
 RUN npm install -g serve # highlight-line
 
-CMD ["serve", "build"] # highlight-line
+CMD ["serve", "dist"] # highlight-line
 ```
 
-Our CMD now includes square brackets and as a result we now used the so called <i>exec form</i> of CMD. There are actually **three** different forms for the CMD out of which the exec form is preferred. Read the [documentation](https://docs.docker.com/engine/reference/builder/#cmd) for more info.
+Our CMD now includes square brackets and as a result, we now use the so-called <i>exec form</i> of CMD. There are actually **three** different forms for the CMD out of which the exec form is preferred. Read the [documentation](https://docs.docker.com/engine/reference/builder/#cmd) for more info.
 
 When we now build the image with _docker build . -t hello-front_ and run it with _docker run -p 5001:3000 hello-front_, the app will be available in http://localhost:5001.
 
@@ -111,7 +112,7 @@ When we now build the image with _docker build . -t hello-front_ and run it with
 
 While serve is a <i>valid</i> option we can do better. A good goal is to create Docker images so that they do not contain anything irrelevant. With a minimal number of dependencies, images are less likely to break or become vulnerable over time. 
 
-[Multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/) are designed for splitting the build process into many separate stages, where it is possible to limit what parts of the image files are moved between the stages. That opens possibilities for limiting the size of the image since not all by-products of the build are necessary for the resulting image. Smaller images are faster to upload and download and they help reduce the number of vulnerabilities your software may have.
+[Multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/) are designed to split the build process into many separate stages, where it is possible to limit what parts of the image files are moved between the stages. That opens possibilities for limiting the size of the image since not all by-products of the build are necessary for the resulting image. Smaller images are faster to upload and download and they help reduce the number of vulnerabilities your software may have.
 
 With multi-stage builds, a tried and true solution like [Nginx](https://en.wikipedia.org/wiki/Nginx) can be used to serve static files without a lot of headaches. The Docker Hub [page for Nginx](https://hub.docker.com/_/nginx) tells us the required info to open the ports and "Hosting some simple static content".
 
@@ -119,7 +120,7 @@ Let's use the previous Dockerfile but change the FROM to include the name of the
 
 ```Dockerfile
 # The first FROM is now a stage called build-stage
-FROM node:16 AS build-stage # highlight-line
+FROM node:20 AS build-stage # highlight-line
 
 WORKDIR /usr/src/app
 
@@ -130,14 +131,14 @@ RUN npm ci
 RUN npm run build
 
 # This is a new stage, everything before this is gone, except the files we want to COPY
-FROM nginx:1.20-alpine # highlight-line
+FROM nginx:1.25-alpine # highlight-line
 
 # COPY the directory build from build-stage to /usr/share/nginx/html
 # The target location here was found from the Docker hub page
-COPY --from=build-stage /usr/src/app/build /usr/share/nginx/html # highlight-line
+COPY --from=build-stage /usr/src/app/dist /usr/share/nginx/html # highlight-line
 ```
 
-We have declared also <i>another stage</i> where only the relevant files of the first stage (the <i>build</i> directory, that contains the static content) are moved.
+We have declared also <i>another stage</i> where only the relevant files of the first stage (the <i>dist</i> directory, that contains the static content) are copied.
 
 After we build it again, the image is ready to serve the static content. The default port will be 80 for Nginx, so something like _-p 8000:80_ will work, so the parameters of the run command need to be changed a bit.
 
@@ -155,17 +156,15 @@ Finally, we get to the todo-frontend. View the todo-app/todo-frontend and read t
 
 Start by running the frontend outside the container and ensure that it works with the backend.
 
-Containerize the application by creating <i>todo-app/todo-frontend/Dockerfile</i> and use [ENV](https://docs.docker.com/engine/reference/builder/#env) instruction to pass *REACT\_APP\_BACKEND\_URL* to the application and run it with the backend. The backend should still be running outside a container. 
+Containerize the application by creating <i>todo-app/todo-frontend/Dockerfile</i> and use [ENV](https://docs.docker.com/engine/reference/builder/#env) instruction to pass *VITE\_BACKEND\_URL* to the application and run it with the backend. The backend should still be running outside a container. 
 
-Note that you need to set *REACT\_APP\_BACKEND\_URL* before building the frontend, otherwise it does not get defined in the code!
+**Note** that you need to set *VITE\_BACKEND\_URL* before building the frontend, otherwise, it does not get defined in the code!
 
 #### Exercise 12.14: Testing during the build process
 
 One interesting possibility to utilize multi-stage builds is to use a separate build stage for [testing](https://docs.docker.com/language/nodejs/run-tests/). If the testing stage fails, the whole build process will also fail. Note that it may not be the best idea to move <i>all testing</i> to be done during the building of an image, but there may be <i>some</i> containerization-related tests where it might be worth considering. 
 
 Extract a component <i>Todo</i> that represents a single todo. Write a test for the new component and add running tests into the build process.
-
-Run the tests with _CI=true npm test_. Without the env _CI=true_ set, the create-react-app will start watching for changes and your pipeline will get stuck.
 
 You can add a new build stage for the test if you wish to do so. If you do so, remember to read the last paragraph before exercise 12.13 again!
 
@@ -186,12 +185,12 @@ These all are great reasons. The tradeoff is that we may encounter some unconven
 - Start the application in development mode
 - Access the files with VS Code
 
-Let's start with the frontend. Since the Dockerfile will be significantly different to the production Dockerfile let's create a new one called <i>dev.Dockerfile</i>.
+Let's start with the frontend. Since the Dockerfile will be significantly different from the production Dockerfile let's create a new one called <i>dev.Dockerfile</i>.
 
-Starting the create-react-app in development mode should be easy. Let's start with the following:
+Starting the Vite in development mode should be easy. Let's start with the following:
 
 ```Dockerfile
-FROM node:16
+FROM node:20
 
 WORKDIR /usr/src/app
 
@@ -201,8 +200,10 @@ COPY . .
 RUN npm install
 
 # npm start is the command to start the application in development mode
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev", "--", "--host"]
 ```
+
+> Note the extra parameters _-- --host_ in the _CMD_. Those are needed to expose the development server to be visible outside the Docker network. By default the development server is exposed only to localhost, and despite we access the frontend still using the localhost address, it is in reality attached to the Docker network.
  
 During build the flag _-f_ will be used to tell which file to use, it would otherwise default to Dockerfile, so the following command will build the image:
 
@@ -210,9 +211,9 @@ During build the flag _-f_ will be used to tell which file to use, it would othe
 docker build -f ./dev.Dockerfile -t hello-front-dev .
 ```
 
-The create-react-app will be served in port 3000, so you can test that it works by running a container with that port published.
+The Vite will be served in port 5173, so you can test that it works by running a container with that port published.
 
-The second task, accessing the files with VSCode, is not done yet. There are at least two ways of doing this: 
+The second task, accessing the files with VSCode, is not yet taken care of. There are at least two ways of doing this: 
 
 - [The Visual Studio Code Remote - Containers extension](https://code.visualstudio.com/docs/remote/containers) 
 - Volumes, the same thing we used to preserve data with the database
@@ -220,24 +221,33 @@ The second task, accessing the files with VSCode, is not done yet. There are at 
 Let's go over the latter since that will work with other editors as well. Let's do a trial run with the flag _-v_, and if that works, then we will move the configuration to a docker-compose file. To use the _-v_, we will need to tell it the current directory. The command _pwd_ should output the path to the current directory for you. Try this with _echo $(pwd)_ in your command line. We can use that as the left side for _-v_ to map the current directory to the inside of the container or you can use the full directory path.
 
 ```bash
-$ docker run -p 3000:3000 -v "$(pwd):/usr/src/app/" hello-front-dev
+$ docker run -p 5173:5173 -v "$(pwd):/usr/src/app/" hello-front-dev
+> todo-vite@0.0.0 dev
+> vite --host
 
-  Compiled successfully!
-
-  You can now view hello-front in the browser.
+  VITE v5.1.6  ready in 130 ms
 ```
 
 Now we can edit the file <i>src/App.js</i>, and the changes should be hot-loaded to the browser!
 
-Note that it takes some time (for me it took 50 seconds!) for the frontend to get started with _npm start_ in the development mode. The frontend has started when the following appears in the container log:
+If you have a Mac with M1/M2 processor, the above command fails. In the error message, we notice the following:
 
-```bash
-You can now view hello-frontend in the browser.
+```
+Error: Cannot find module @rollup/rollup-linux-arm64-gnu
 ```
 
-> <i>**Editor's note:** hot reload might work in your computer, but it is currently known to have some [issues](https://github.com/facebook/create-react-app/issues/11879). So if it does not work for you, just continue without the hot reload support, and reload the browser when you change the frontend code. You may also use use [The Visual Studio Code Containers extension](https://code.visualstudio.com/docs/remote/containers).</i>
+The problem is the library [rollup](https://www.npmjs.com/package/rollup) that has its own version for all operating systems and processor architectures. Due to the volume mapping, the container is now using the *node_modules* from the host machine directory where the _@rollup/rollup-darwin-arm64_ (the version suitable Mac M1/M2) is installed, so the right version of the library for the container _@rollup/rollup-linux-arm64-gnu_ is not found.
 
-Next, let's move the config to a <i>docker-compose.yml</i>. That file should be at the root of the project as well:
+There are several ways to fix the problem. Let's use the perhaps simplest one. Start the container with bash as the command, and run the _npm install_ inside the container:
+
+```bash
+$ docker run -it -v "$(pwd):/usr/src/app/" front-dev bash
+root@b83e9040b91d:/usr/src/app# npm install
+```
+
+Now both versions of the library rollup are installed and the container works!  
+
+Next, let's move the config to file <i>docker-compose.dev.yml</i>. That file should be at the root of the project as well:
 
 ```yml
 services:
@@ -249,7 +259,7 @@ services:
     volumes:
       - ./:/usr/src/app # The path can be relative, so ./ is enough to say "the same location as the docker-compose.yml"
     ports:
-      - 3000:3000
+      - 5173:5173
     container_name: hello-front-dev # This will name the container hello-front-dev
 ```
 
@@ -276,7 +286,7 @@ The Docker Compose tool sets up a network between the containers and includes a 
 
 [Busybox](https://www.busybox.net/) is a small executable with multiple tools you may need. It is called "The Swiss Army Knife of Embedded Linux", and we definitely can use it to our advantage.
 
-Busybox can help us to debug our configurations. So if you get lost in the later exercises of this section, you should use Busybox to find out what works and what doesn't. Let's use it to explore what was just said. That containers are inside a network and you can easily connect between them. Busybox can be added to the mix by changing <i>docker-compose.yml</i> to:
+Busybox can help us to debug our configurations. So if you get lost in the later exercises of this section, you should use Busybox to find out what works and what doesn't. Let's use it to explore what was just said. That containers are inside a network and you can easily connect between them. Busybox can be added to the mix by changing <i>docker-compose.dev.yml</i> to:
 
 ```yml
 services:
@@ -288,7 +298,7 @@ services:
     volumes:
       - ./:/usr/src/app
     ports:
-      - 3000:3000
+      - 5173:5173
     container_name: hello-front-dev
   debug-helper: # highlight-line
     image: busybox # highlight-line
@@ -297,20 +307,15 @@ services:
 The Busybox container won't have any process running inside so we can not _exec_ in there. Because of that, the output of _docker compose up_ will also look like this:
 
 ```bash
-$ docker compose up
-  Pulling debug-helper (busybox:)...
-  latest: Pulling from library/busybox
-  8ec32b265e94: Pull complete
-  Digest: sha256:b37dd066f59a4961024cf4bed74cae5e68ac26b48807292bd12198afa3ecb778
-  Status: Downloaded newer image for busybox:latest
-  Starting hello-front-dev          ... done
-  Creating react-app_debug-helper_1 ... done
-  Attaching to react-app_debug-helper_1, hello-front-dev
-  react-app_debug-helper_1 exited with code 0
-  
-  hello-front-dev | 
-  hello-front-dev | > react-app@0.1.0 start
-  hello-front-dev | > react-scripts start
+$ docker compose -f docker-compose.dev.yml up                                                                                    0.0s
+Attaching to front-dev, debug-helper-1
+debug-helper-1 exited with code 0
+front-dev       |
+front-dev       | > todo-vite@0.0.0 dev
+front-dev       | > vite --host
+front-dev       |
+front-dev       |
+front-dev       |   VITE v5.2.2  ready in 153 ms
 ```
 
 This is expected as it's just a toolbox. Let's use it to send a request to hello-front-dev and see how the DNS works. While the hello-front-dev is running, we can do the request with [wget](https://en.wikipedia.org/wiki/Wget) since it's a tool included in Busybox to send a request from the debug-helper to hello-front-dev.
@@ -318,23 +323,22 @@ This is expected as it's just a toolbox. Let's use it to send a request to hello
 With Docker Compose we can use _docker compose run SERVICE COMMAND_ to run a service with a specific command. Command wget requires the flag _-O_ with _-_ to output the response to the stdout:
 
 ```bash
-$ docker compose run debug-helper wget -O - http://app:3000
+$ docker compose -f docker-compose.dev.yml run debug-helper wget -O - http://app:5173
 
-  Creating react-app_debug-helper_run ... done
-  Connecting to hello-front-dev:3000 (172.26.0.2:3000)
-  writing to stdout
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="utf-8" />
+Connecting to app:5173 (192.168.240.3:5173)
+writing to stdout
+<!doctype html>
+<html lang="en">
+  <head>
+    <script type="module">
       ...
 ```
 
-The URL is the interesting part here. We simply said to connect to the port 3000 of the service <i>app</i>. The <i>app</i> is the name of the service specified in the <i>docker-compose.yml</i>: 
+The URL is the interesting part here. We simply said to connect to port 5173 of the service <i>app</i>. The <i>app</i> is the name of the service specified in the <i>docker-compose.dev.yml</i>:
 
-```bash
+```yml
 services:
-  app: // highlight-line
+  app: # highlight-line
     image: hello-front-dev
     build:
       context: .
@@ -342,13 +346,13 @@ services:
     volumes:
       - ./:/usr/src/app
     ports:
-      - 3000:3000 // highlight-line
+      - 5173:5173 # highlight-line
     container_name: hello-front-dev
 ```
 
-And the port used is the port from which the application is available in that container, also specified in the <i>docker-compose.yml</i>. The port does not need to be published for other services in the same network to be able to connect to it. The "ports" in the docker-compose file are only for external access.
+The port used is the port from which the application is available in that container, also specified in the <i>docker-compose.dev.yml</i>. The port does not need to be published for other services in the same network to be able to connect to it. The "ports" in the docker-compose file are only for external access.
 
-Let's change the port configuration in the <i>docker-compose.yml</i> to emphasize this:
+Let's change the port configuration in the <i>docker-compose.dev.yml</i> to emphasize this:
 
 ```yml
 services:
@@ -360,19 +364,25 @@ services:
     volumes:
       - ./:/usr/src/app
     ports:
-      - 3210:3000 # highlight-line
+      - 3210:5173 # highlight-line
     container_name: hello-front-dev
   debug-helper:
     image: busybox
 ```
 
-With _docker compose up_ the application is available in <http://localhost:3210> at the <i>host machine</i>, but still _docker compose run debug-helper wget -O - http://app:3000_ works since the port is still 3000 within the docker network.
+With _docker compose up_ the application is available in <http://localhost:3210> at the <i>host machine</i>, but the command 
+
+```bash
+docker compose  -f docker-compose.dev.yml run debug-helper wget -O - http://app:5173
+```
+
+works still since the port is still 5173 within the docker network.
+
+The below image illustrates what happens. The command _docker compose run_ asks debug-helper to send the request within the network. While the browser in the host machine sends the request from outside of the network.
 
 ![](../../images/12/busybox_networking_drawio.png)
 
-As the above image illustrates, _docker compose run_ asks debug-helper to send the request within the network. While the browser in host machine sends the request from outside of the network.
-
-Now that you know how easy it is to find other services in the <i>docker-compose.yml</i> and we have nothing to debug we can remove the debug-helper and revert the ports to 3000:3000 in our <i>docker-compose.yml</i>.
+Now that you know how easy it is to find other services in the <i>docker-compose.yml</i> and we have nothing to debug we can remove the debug-helper and revert the ports to 5173:5173 in our compose file.
 
 </div>
 <div class="tasks">

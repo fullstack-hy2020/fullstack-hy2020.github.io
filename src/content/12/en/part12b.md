@@ -448,6 +448,12 @@ you may have a read permission problem. They are not uncommon when dealing with 
 
 Now starting the Express application with the correct environment variable should work:
 
+```bash
+MONGO_URL=mongodb://the_username:the_password@localhost:3456/the_database npm run dev
+```
+
+Let's check that the http://localhost:3000/todos returns the two todos we inserted in the initialization. We can and <i>should</i> use Postman to test the basic functionality of the app, such as adding or deleting a todo.
+
 ### Still problems?
 
 For some reason, the initialization of Mongo has caused problems for many.

@@ -10,6 +10,6 @@ Tässä osassa palataan frontendin pariin, ensin tarkastellaan erilaisia tarjoll
 
 <i>Osa päivitetty 3.3.2024</i>
 - <i>Jest korvattu Vitest:illä</i>
-- <i>Cypressin rinnalle tuotuvaihtoehdoksi Playwright End to end -testaamiseen</i>
+- <i>Cypressin rinnalle tuotu vaihtoehdoksi Playwright End to end -testaamiseen</i>
 
 </div>
