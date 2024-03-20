@@ -7,6 +7,8 @@ lang: en
 
 <div class="content">
 
+We have now a basic understanding of Docker and can use it to easily set up eg. a database for our app. Let us now move our focus in the frontend. 
+
 ### React in container
 
 Let's create and containerize a React application next.
