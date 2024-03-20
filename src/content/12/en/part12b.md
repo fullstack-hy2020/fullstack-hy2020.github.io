@@ -512,7 +512,7 @@ There are two distinct methods to store the data:
 
 The first choice is preferable in most cases whenever one <i>really</i> needs to avoid the data being deleted. 
 
-Let's see both in action with Docker compose. Let us start with <i>bind mount</i>:
+Let's see both in action with Docker compose. Let us start with <i>bind mount:</i>
 
 ```yml
 services:
@@ -531,7 +531,7 @@ services:
 
 The above will create a directory called *mongo\_data* to your local filesystem and map it into the container as _/data/db_. This means the data in _/data/db_ is stored outside of the container but still accessible by the container! Just remember to add the directory to .gitignore.
 
-A similar outcome can be achieved with a <i>named volume</i>:
+A similar outcome can be achieved with a <i>named volume:</i>
 
 ```yml
 services:
@@ -560,7 +560,7 @@ local     todo-backend_mongo_data
 $ docker volume inspect todo-backend_mongo_data
 [
     {
-        "CreatedAt": "2022-10-04T12:52:11Z",
+        "CreatedAt": "2024-19-03T12:52:11Z",
         "Driver": "local",
         "Labels": {
             "com.docker.compose.project": "todo-backend",
@@ -626,8 +626,8 @@ We know how to answer the latter: by listing the running containers.
 
 ```bash
 $ docker container ls
-CONTAINER ID   IMAGE           COMMAND                  CREATED              STATUS                      PORTS     NAMES
-3f831a57b7cc   nginx           "/docker-entrypoint.…"   About a minute ago   Up About a minute           80/tcp    keen_darwin
+CONTAINER ID   IMAGE   COMMAND  CREATED     STATUS    PORTS     NAMES
+3f831a57b7cc   nginx   ...      3 sec ago   Up 2 sec  80/tcp    keen_darwin
 ```
 
 Yes! We got the first question answered as well. It seems to listen on port 80, as seen on the output above.
@@ -649,8 +649,8 @@ Let's look at the app by going to http://localhost:8080. It seems that the app i
 
 ```bash
 $ docker container ls
-CONTAINER ID   IMAGE     COMMAND                  CREATED              STATUS              PORTS                                   NAMES
-7edcb36aff08   nginx     "/docker-entrypoint.…"   About a minute ago   Up About a minute   0.0.0.0:8080->80/tcp, :::8080->80/tcp   wonderful_ramanujan
+CONTAINER ID   IMAGE     COMMAND  PORTS                  NAMES
+7edcb36aff08   nginx     ...      0.0.0.0:8080->80/tcp   wonderful_ramanujan
 
 $ docker exec -it wonderful_ramanujan bash
 root@7edcb36aff08:/#
@@ -683,7 +683,7 @@ Refresh the page, and our message is displayed! Now we know how exec can be used
 
 > Use _script_ to record what you do, save the file as script-answers/exercise12_8.txt
 
-While the MongoDB from the previous exercise is running, access the database with Mongo command-line interface (CLI). You can do that using docker exec. Then add a new todo using the CLI.
+While the MongoDB from the previous exercise is running, access the database with the Mongo command-line interface (CLI). You can do that using docker exec. Then add a new todo using the CLI.
 
 The command to open CLI when inside the container is _mongosh_
 
@@ -698,7 +698,7 @@ When you have connected to the Mongo cli you can ask it to show dbs inside:
 ```bash
 > show dbs
 admin         0.000GB
-config        0.000GB
+config         0.000GB
 local         0.000GB
 the_database  0.000GB
 ```
@@ -734,7 +734,7 @@ We can now access the data in those collections:
 ]
 ```
 
-Insert one new todo with the text: "Increase the number of tools in my toolbelt" with status done as false. Consult the [documentation](https://docs.mongodb.com/v4.4/reference/method/db.collection.insertOne/#mongodb-method-db.collection.insertOne) to see how the addition is done.
+Insert one new todo with the text: "Increase the number of tools in my toolbelt" with the status done as <i>false</i>. Consult the [documentation](https://docs.mongodb.com/v4.4/reference/method/db.collection.insertOne/#mongodb-method-db.collection.insertOne) to see how the addition is done.
 
 Ensure that you see the new todo both in the Express app and when querying from Mongo CLI.
 
@@ -744,13 +744,13 @@ Ensure that you see the new todo both in the Express app and when querying from 
 
 ### Redis
 
-[Redis](https://redis.io/) is a [key-value](https://redis.com/nosql/key-value-databases/) database. In contrast to eg. MongoDB, the data stored to a key-value storage has a bit less structure, there are eg. no collections or tables, it just contains junks of data that can be fetched based on the <i>key</i> that was attached to the data  (the <i>value</i>).
+[Redis](https://redis.io/) is a [key-value](https://redis.com/nosql/key-value-databases/) database. In contrast to eg. MongoDB, the data stored in key-value storage has a bit less structure, there are eg. no collections or tables, it just contains junks of data that can be fetched based on the <i>key</i> that was attached to the data  (the <i>value</i>).
 
-By default Redis works <i>in-memory</i>, which means that it does not store data persistently. 
+By default, Redis works <i>in-memory</i>, which means that it does not store data persistently. 
 
-An excellent use case for Redis is to use it as a <i>cache</i>. Caches are often used to store data that is otherwise slow to fetch and save the data until it's no longer valid. After the cache becomes invalid, you would then fetch the data again and store it in the cache.
+An excellent use case for Redis is to use it as a [cache](![alt text](image.png)). Caches are often used to store data that is otherwise slow to fetch and save the data until it's no longer valid. After the cache becomes invalid, you would then fetch the data again and store it in the cache.
 
-Redis has nothing to do with containers. But since we are already able to add <i>any</i> 3rd party service to your applications, why not learn about a new one.
+Redis has nothing to do with containers. But since we are already able to add <i>any</i> 3rd party service to your applications, why not learn about a new one?
 
 </div>
 
@@ -774,9 +774,9 @@ Since the Docker Hub page doesn't have all the info, we can use Google to aid us
 
 ![](../../images/12/redis_port_by_google.png)
 
-We won't have any idea if the configuration works unless we try it. The application will not start using Redis by itself, that shall happen in next exercise.
+We won't have any idea if the configuration works unless we try it. The application will not start using Redis by itself, that shall happen in the next exercise.
 
-Once Redis is configured and started, restart the backend and give it the <i>REDIS\_URL</i>, that has the form <i>redis://host:port</i>
+Once Redis is configured and started, restart the backend and give it the <i>REDIS\_URL</i>, which has the form <i>redis://host:port</i>
 
 ```bash
 $ REDIS_URL=insert-redis-url-here MONGO_URL=mongodb://the_username:the_password@localhost:3456/the_database npm run dev
@@ -819,12 +819,12 @@ The project already has [https://www.npmjs.com/package/redis](https://www.npmjs.
 
 - setAsync function takes in key and value, using the key to store the value.
 
-- getAsync function takes in key and returns the value in a promise.
+- getAsync function takes in a key and returns the value in a promise.
 
 Implement a todo counter that saves the number of created todos to Redis:
 
 - Step 1: Whenever a request is sent to add a todo, increment the counter by one.
-- Step 2: Create a GET /statistics endpoint where you can ask the usage metadata. The format should be the following JSON:
+- Step 2: Create a GET /statistics endpoint where you can ask for the usage metadata. The format should be the following JSON:
 
 ```json
 {
@@ -836,15 +836,15 @@ Implement a todo counter that saves the number of created todos to Redis:
 
 > Use _script_ to record what you do, save the file as script-answers/exercise12_11.txt
 
-If the application does not behave as expected, a direct access to the database may be beneficial in pinpointing problems. Let us try out how [redis-cli](https://redis.io/topics/rediscli) can be used to access the database.
+If the application does not behave as expected, direct access to the database may be beneficial in pinpointing problems. Let us try out how [redis-cli](https://redis.io/topics/rediscli) can be used to access the database.
 
 - Go to the Redis container with _docker exec_ and open the redis-cli.
 - Find the key you used with _[KEYS *](https://redis.io/commands/keys)_ 
-- Check the value of the key with command [GET](https://redis.io/commands/get)
+- Check the value of the key with the command [GET](https://redis.io/commands/get)
 - Set the value of the counter to 9001, find the right command from [here](https://redis.io/commands/) 
 - Make sure that the new value works by refreshing the page http://localhost:3000/statistics
 - Create a new todo with Postman and ensure from redis-cli that the counter has increased accordingly
-- Delete the key from cli and ensure that counter works when new todos are added
+- Delete the key from the cli and ensure that the counter works when new todos are added
 
 </div>
 
@@ -863,14 +863,14 @@ services:
       - ./redis_data:/data
 ```
 
-The data will now be persisted to directory <i>redis_data</i> of the host machine. 
+The data will now be persisted to the directory <i>redis_data</i> of the host machine. 
 Remember to add the directory to .gitignore!
 
 #### Other functionality of Redis
 
-In addition to the GET, SET and DEL operations on keys and values, Redis can do also a quite a lot more. It can for example automatically expire keys, that is a very useful feature when Redis is used as a cache.
+In addition to the GET, SET and DEL operations on keys and values, Redis can do also quite a lot more. It can for example automatically expire keys, which is a very useful feature when Redis is used as a cache.
 
-Redis can also be used to implement so called [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) (or PubSub) pattern that is a asynchronous communication mechanism for distributed software. In this scenario Redis works as a <i>message broker</i> between two or more services. Some of the services are <i>publishing</i> messages by sending those to Redis, that on arrival of a message, informs the parties that have <i>subscribed</i> to those messages. 
+Redis can also be used to implement the so-called [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) (or PubSub) pattern which is an asynchronous communication mechanism for distributed software. In this scenario, Redis works as a <i>message broker</i> between two or more services. Some of the services are <i>publishing</i> messages by sending those to Redis, which on arrival of a message, informs the parties that have <i>subscribed</i> to those messages. 
 
 </div>
 
@@ -880,8 +880,20 @@ Redis can also be used to implement so called [publish-subscribe](https://en.wik
   
 #### Exercise 12.12: Persisting data in Redis
 
-Check that the data is not persisted by default: after running _docker compose -f docker-compose.dev.yml down_ and _docker compose -f docker-compose.dev.yml up_ the counter value is reset to 0.
+Check that the data is not persisted by default: after running
 
-Then create a volume for Redis data (by modifying <i>todo-app/todo-backend/docker-compose.dev.yml </i>) and make sure that the data survives after running _docker compose -f docker-compose.dev.yml down_ and _docker compose -f docker-compose.dev.yml up_.
+```bash
+docker compose -f docker-compose.dev.yml down
+docker compose -f docker-compose.dev.yml up
+```
+
+the counter value is reset to 0.
+
+Then create a volume for Redis data (by modifying <i>todo-app/todo-backend/docker-compose.dev.yml </i>) and make sure that the data survives after running
+
+```bash
+docker compose -f docker-compose.dev.yml down
+docker compose -f docker-compose.dev.yml up
+```
 
 </div>
