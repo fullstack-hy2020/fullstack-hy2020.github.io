@@ -17,7 +17,7 @@ Kuten [osassa 1](/osa1/java_scriptia) todettiin, selaimet eivät vielä osaa kai
 
 Tavoitteenamme on tehdä [osan 2](/osa2) muistiinpanosovellukseen sopiva backend. Aloitetaan kuitenkin ensin perusteiden läpikäyminen toteuttamalla perinteinen "hello world" ‑sovellus.
 
-**Huomaa**, että tässä osassa ja sen tehtävissä luotavat sovellukset eivät ole Reactia, eli emme käytä xwviteä tämän osan sovellusten rungon alustamiseen.
+**Huomaa**, että tässä osassa ja sen tehtävissä luotavat sovellukset eivät ole Reactia, eli emme käytä viteä tämän osan sovellusten rungon alustamiseen.
 
 Osassa 2 oli jo puhe [npm](/osa2/palvelimella_olevan_datan_hakeminen#npm):stä, eli JavaScript-projektien hallintaan liittyvästä, alun perin Node-ekosysteemistä kotoisin olevasta työkalusta. 
 
