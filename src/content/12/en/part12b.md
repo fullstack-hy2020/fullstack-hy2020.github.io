@@ -6,7 +6,16 @@ lang: en
 ---
 
 <div class="content">
+</div>
 
+<div class="tasks">
+
+The part was updated 21th Mar 2024: Create react app was replaced with Vite in the todo-frontend.
+
+If you started the part before the update, you can see [here](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/tree/4015af9dddb61cb01f013456d8728e8f553be347/src/content/12) the old material. There are some changes in the frontend configurations.
+</div>
+
+<div class="content">
 
 In the previous section, we used two different base images: ubuntu and node and did some manual work to get a simple "Hello, World!" running. The tools and commands we learned during that process will be helpful. In this section, we will learn how to build images and configure environments for our applications. We will start with a regular Express/Node.js backend and build on top of that with other services, including a MongoDB database.
 
