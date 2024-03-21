@@ -732,6 +732,7 @@ Create a similar containerized development environment of one of <i>your own</i>
     |    └── dev.Dockerfile
     ├── backend
     |    └── dev.Dockerfile
+    ├── nginx.dev.conf
     └── docker-compose.dev.yml
 ```
 
@@ -748,6 +749,8 @@ Structure the app in your submission repository as follows:
     ├── backend
     |    └── dev.Dockerfile
     |    └── Dockerfile
+    ├── nginx.dev.conf
+    ├── nginx.conf
     ├── docker-compose.dev.yml
     └── docker-compose.yml
 ```
