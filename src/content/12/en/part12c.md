@@ -290,6 +290,7 @@ Installing new dependencies is a headache for a development setup like this. One
 
 Create <i>todo-frontend/docker-compose.dev.yml</i> and use volumes to enable the development of the todo-frontend while it is running <i>inside</i> a container.
 
+However, take note that in Widows system, hot update might still not work despite bind mounting - container needs to be restarted to see changes. The reason might be <a href="https://github.com/microsoft/WSL/issues/6255#issuecomment-730701001">this</a>. Even setting  environment: - WATCHPACK_POLLING=true does not help the situation.
 </div>
 
 <div class="content">
