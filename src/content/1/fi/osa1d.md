@@ -1172,17 +1172,17 @@ Copilotin ja muiden kielimallien antamien vihjeiden hyödyllisyyden aste vaihtel
 
 Toinen ongelma kielimallien soveltamisessa ohjelmistokehitykseen on se, että kielimallien on vaikea "hahmottaa" isompia projekteja, ja esim. generoida toiminnallisuutta, jotka edellyttäisivät muutoksia useisiin tiedostoihin. Kielimallit eivät myöskään nykyisellään osaa yleistää koodia, eli jos koodissa on esim. olemassaolevia funktioita tai komponentteja, jota kielimalli pystyisi pienin muutoksin hyödyntämään siltä pyydettyyn toiminnallisuuteen, ei kielimalli tähän taivu. Tästä voi olla seurauksena se, että koodikanta rapistuu sillä kielimallit generoivat koodiin paljon toisteisuutta, ks. lisää esim. [täältä](https://visualstudiomagazine.com/articles/2024/01/25/copilot-research.aspx).
 
-Kielimalleja käytettäessä vastuu siis jää aina käyttäjälle. 
+Kielimalleja käytettäessä vastuu siis jää aina ohjelmoijalle. 
 
 Kielimallien nopea kehitys asettaa ohjelmointia opiskelevan haastavaan asemaan: kannattaako ja tarvitseeko enää ylipäätään opetella ohjelmointia vanhan liiton tyyliin, kun lähes kaiken saa kielimalleilta valmiina? 
 
-Tässä kohtaa kannattaa muistaa C-kielen kehittäjän Brian Kerninghamin vanha viisaus:
+Tässä kohtaa kannattaa muistaa C-kielen kehittäjän [Brian Kerninghamin](https://en.wikipedia.org/wiki/Brian_Kernighan) vanha viisaus:
 
 ![](../../images/1/kerningham.png)
 
-Eli koska ongelmien selvittely on kaksi kertaa vaikeampaa kuin ohjelmointi, ei kannata ohjelmoida sellaista koodia minkä vain juuri ja juuri ymmärtää. Miten debuggaus mahtaakaan onnistua tilanteessa missä ohjelmointi on ulkoistettu kielimallille ja ohjelmistokehittäjä ei ymmärrä debugattavaa koodia ollenkaan?
+Eli koska ongelmien selvittely on kaksi kertaa vaikeampaa kuin ohjelmointi, ei kannata ohjelmoida sellaista koodia minkä vain juuri ja juuri itse ymmärtää. Miten debuggaus mahtaakaan onnistua tilanteessa missä ohjelmointi on ulkoistettu kielimallille ja ohjelmistokehittäjä ei ymmärrä debugattavaa koodia ollenkaan?
 
-Toistaiseksi kielimallien ja tekoälyn kehitys on vielä siinä vaiheessa, että ne eivät ole itseriittoisia, ja vaikeimmat ongelmat jäävät ihmisten selvitettäväksi. Tämän takia aloittelevienkin ohjelmistokehittäjien on kaiken varalta opeteltava ohjelmoimaan todella hyvin. Voi olla, että kielimallien kehityksestä huolimatta, tarvitaankin entistä syvällisempää osaamista. Tekoäly tekee ne helpot asiat, mutta ihmistä tarvitaan kaikkein kiperimpien tekoälyn aiheuttamien sotkujen selvittelyyn. GitHub Copilot onkin varsin hyvin nimetty tuote, kyseessä on Copilot eli lentoperämies/nainen. Ohjelmoija on edelleen kapteeni ja kantaa lopullisen vastuun.
+Toistaiseksi kielimallien ja tekoälyn kehitys on vielä siinä vaiheessa, että ne eivät ole itseriittoisia, ja vaikeimmat ongelmat jäävät ihmisten selvitettäväksi. Tämän takia aloittelevienkin ohjelmistokehittäjien on kaiken varalta opeteltava ohjelmoimaan todella hyvin. Voi olla, että kielimallien kehityksestä huolimatta tarvitaankin entistä syvällisempää osaamista. Tekoäly tekee ne helpot asiat, mutta ihmistä tarvitaan kaikkein kiperimpien tekoälyn aiheuttamien sotkujen selvittelyyn. GitHub Copilot onkin varsin hyvin nimetty tuote, kyseessä on Copilot eli lentoperämies/nainen. Ohjelmoija on edelleen kapteeni ja kantaa lopullisen vastuun.
 
 Voikin olla oman etusi mukaista, että kytket oletusarvoisesti Copilotin pois päältä kun teet tätä kurssia ja turvadut siihen ainoastaan todellisella hädän hetkellä.
 
