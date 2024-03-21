@@ -8,7 +8,7 @@ lang: fi
 
 Alamme tässä osassa tutustua React-kirjastoon, jolla siis teemme sovelluksen selaimessa suoritettavan koodin. Teemme samalla myös nopean katsauksen Javascriptin Reactin kannalta oleellisimpiin ominaisuuksiin.
 
-<i>Osa päivitetty 11.8.2023</i>
-- <i>Create React App korvattu Vitellä</i>
+<i>Osa päivitetty 21.3.2024</i>
+- <i>Kielimallien hyödyntäminen ohjelmistokehityksessä</i>
 
 </div>
