@@ -673,7 +673,7 @@ test('of empty array is zero', () => {
 
 ### Exercises 4.3.-4.7.
 
-Let's create a collection of helper functions that are metest showing described blocksh the blog list. Create the functions into a file called <i>utils/list_helper.js</i>. Write your tests into an appropriately named test file under the <i>tests</i> directory.
+Let's create a collection of helper functions that are best suited for working with the described sections of the blog list. Create the functions into a file called <i>utils/list_helper.js</i>. Write your tests into an appropriately named test file under the <i>tests</i> directory.
 
 #### 4.3: Helper Functions and Unit Tests, step 1
 
