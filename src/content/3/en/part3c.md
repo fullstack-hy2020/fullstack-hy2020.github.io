@@ -71,7 +71,7 @@ When bugs occur, <i>the worst of all possible strategies</i> is to continue writ
 
 ### MongoDB
 
-To store our saved notes indefinitely, we need a database. Most of the courses taught at the University of Helsinki use relational databases. In most parts of this course, we will use [MongoDB](https://www.mongodb.com/) which is a so-called [document database](https://en.wikipedia.org/wiki/Document-oriented_database).
+To store our saved notes indefinitely, we need a database. Most of the courses taught at the University of Helsinki use relational databases. In most parts of this course, we will use [MongoDB](https://www.mongodb.com/) which is [document database](https://en.wikipedia.org/wiki/Document-oriented_database).
 
 The reason for using Mongo as the database is its lower complexity compared to a relational database. [Part 13](/en/part13) of the course shows how to build Node.js backends that use a relational database.
 
@@ -235,7 +235,7 @@ const note = new Note({
 })
 ```
 
-Models are so-called <i>constructor functions</i> that create new JavaScript objects based on the provided parameters. Since the objects are created with the model's constructor function, they have all the properties of the model, which include methods for saving the object to the database.
+Models are <i>constructor functions</i> that create new JavaScript objects based on the provided parameters. Since the objects are created with the model's constructor function, they have all the properties of the model, which include methods for saving the object to the database.
 
 Saving the object to the database happens with the appropriately named _save_ method, which can be provided with an event handler with the _then_ method:
 
