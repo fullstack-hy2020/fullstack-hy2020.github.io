@@ -399,7 +399,7 @@ Puedes encontrar el código para nuestra aplicación actual en su totalidad en l
 
 <h3>Ejercicios 2.6.-2.10.</h3> 
 
-En el primer ejercicio, comenzaremos a trabajar en una aplicación que se continuara desarrollando en los ejercicios posteriores. En conjuntos de ejercicios relacionados, es suficiente con presentar la versión final de tu aplicación. También puedes realizar un commit por separado después de haber terminado cada parte del conjunto de ejercicios, pero no es necesario hacerlo.
+Este es un nuevo ejercicio que comenzaremos a trabajar en una aplicación que se continuará desarrollando en los ejercicios posteriores. En conjuntos de ejercicios relacionados, es suficiente con presentar la versión final de tu aplicación. También puedes realizar un commit por separado después de haber terminado cada parte del conjunto de ejercicios, pero no es necesario hacerlo.
 
 <h4>2.6: La Agenda Telefónica Paso 1</h4>
 
