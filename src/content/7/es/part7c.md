@@ -631,7 +631,7 @@ La apariencia de la aplicación resultante se muestra a continuación:
 
 ![aplicación de notas con styled components](../../images/7/18ea.png)
 
-Los Styled components han experimentado un crecimiento constante en popularidad en los últimos tiempos, y mucha gente considera que es la mejor forma de definir estilos para las aplicaciones React.
+Styled components ha experimentado un crecimiento constante en popularidad en los últimos tiempos, y mucha gente considera que es la mejor forma de definir estilos para las aplicaciones React.
 
 </div>
 
