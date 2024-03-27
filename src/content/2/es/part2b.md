@@ -505,7 +505,7 @@ En este punto, la aplicación podría verse así. La imagen también muestra el 
 
 <h4>2.9*: La Agenda Telefónica Paso 4</h4>
 
-Implemente¡a un campo de búsqueda que pueda usarse para filtrar la lista de personas por nombre:
+Implementa un campo de búsqueda que pueda usarse para filtrar la lista de personas por nombre:
 
 ![2.9 campo de busqueda](../../images/2/13e.png)
 
