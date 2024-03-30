@@ -76,7 +76,7 @@ As images are just files, they can be moved around, downloaded and deleted. You 
 One more thing: in above it was mentioned that the default command, defined by the CMD in the Dockerfile, can be overridden if needed. We could e.g. open a bash session to the container and observe it's content: 
 
 ```bash
-$ docker run -it fs-hello-world bash
+$ docker run -it -p 3000:3000 fs-hello-world bash
 root@2932e32dbc09:/usr/src/app# ls
 index.js
 root@2932e32dbc09:/usr/src/app#
