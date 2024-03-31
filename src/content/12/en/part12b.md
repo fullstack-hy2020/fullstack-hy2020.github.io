@@ -763,7 +763,7 @@ Ensure that you see the new todo both in the Express app and when querying from 
 
 By default, Redis works <i>in-memory</i>, which means that it does not store data persistently. 
 
-An excellent use case for Redis is to use it as a [cache](![alt text](image.png)). Caches are often used to store data that is otherwise slow to fetch and save the data until it's no longer valid. After the cache becomes invalid, you would then fetch the data again and store it in the cache.
+An excellent use case for Redis is to use it as a cache. Caches are often used to store data that is otherwise slow to fetch and save the data until it's no longer valid. After the cache becomes invalid, you would then fetch the data again and store it in the cache.
 
 Redis has nothing to do with containers. But since we are already able to add <i>any</i> 3rd party service to your applications, why not learn about a new one?
 
