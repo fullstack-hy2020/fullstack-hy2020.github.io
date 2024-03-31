@@ -506,7 +506,7 @@ test('a valid note can be added ', async () => {
 })
 ```
 
-Test fails since we are by accident returning the status code <i>200 OK</i> when a new note is created. Let us change that to <i>201 CREATED</i>:
+The test fails because we accidentally returned the status code <i>200 OK</i> when a new note is created. Let us change that to the status code <i>201 CREATED</i>:
 
 ```js
 notesRouter.post('/', (request, response, next) => {

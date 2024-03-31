@@ -6,6 +6,16 @@ lang: en
 ---
 
 <div class="content">
+</div>
+
+<div class="tasks">
+
+The part was updated 21th Mar 2024: Create react app was replaced with Vite in the todo-frontend.
+
+If you started the part before the update, you can see [here](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/tree/4015af9dddb61cb01f013456d8728e8f553be347/src/content/12) the old material. There are some changes in the frontend configurations.
+</div>
+
+<div class="content">
 
 Software development includes the whole lifecycle from envisioning the software to programming and to releasing it to the end-users and even maintaining it. This part will introduce containers, a modern tool utilized in the latter parts of the software lifecycle.
 
@@ -85,14 +95,13 @@ The material is built around [Docker](https://www.docker.com/), a set of product
 
 As the install instructions depend on your operating system, you will have to find the correct install instructions from the link below. Note that they may have multiple different options for your operating system. 
 
-
 - [Get Docker](https://docs.docker.com/get-docker/)
 
 Now that that headache is hopefully over, let's make sure that our versions match. Yours may have a bit higher numbers than here:
 
 ```bash
 $ docker -v
-Docker version 20.10.5, build 55c4c88
+Docker version 25.0.3, build 4debf41
 ```
 
 ### Containers and images
@@ -152,7 +161,7 @@ The second row shows the organisation name, "library" where it will get the imag
 
 The 3rd and 5th rows only show the status. But the 4th row may be interesting: each image has a unique digest based on the <i>layers</i> from which the image is built. In practice, each step or command that was used in building the image creates a unique layer. The digest is used by Docker to identify that an image is the same. This is done when you try to pull the same image again.
 
-So the result of using the command was a pull and then output information about the **image**. After that, the status told us that a new version of hello-world:latest was indeed downloaded. You can try pulling the image with _docker image pull hello-world_ and see what happens.
+So the result of using the command was a pull and then output information about the **image**. After that, the status told us that a new version of <i>hello-world:latest</i> was indeed downloaded. You can try pulling the image with _docker image pull hello-world_ and see what happens.
 
 The following output was from the container itself. It also explains what happened when we ran _docker container run hello-world_.
 
@@ -331,13 +340,13 @@ Install Node while inside the container and run the index file with _node /usr/s
 The instructions for installing Node are sometimes hard to find, so here is something you can copy-paste:
 
 ```bash
-curl -sL https://deb.nodesource.com/setup_16.x | bash
+curl -sL https://deb.nodesource.com/setup_20.x | bash
 apt install -y nodejs
 ```
 
 You will need to install the _curl_ into the container. It is installed in the same way as you did with _nano_.
 
-After the installation, ensure that you can run your code inside the container with command
+After the installation, ensure that you can run your code inside the container with the command
 
 ```
 root@b8548b9faec3:/# node /usr/src/app/index.js
@@ -397,7 +406,7 @@ Next, let's skip installing Node altogether. There are plenty of useful Docker i
 By the way, the _container run_ accepts _--name_ flag that we can use to give a name for the container.
 
 ```bash
-$ docker container run -it --name hello-node node:16 bash
+$ docker container run -it --name hello-node node:20 bash
 ```
 
 Let us create a directory for the code inside the container:

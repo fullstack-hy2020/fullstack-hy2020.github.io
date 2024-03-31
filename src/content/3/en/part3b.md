@@ -353,6 +353,8 @@ Unlike when running the app in a development environment, everything is now in t
 
 After ensuring that the production version of the application works locally, commit the production build of the frontend to the backend repository, and push the code to GitHub again.
 
+**NB** If you use Render, make sure the directory <i>dist</i> is not ignored by git on the backend.
+
 If you are using Render a push to GitHub <i>might</i> be enough. If the automatic deployment does not work, select the "manual deploy" from the Render dashboard.
 
 In the case of Fly.io the new deployment is done with the command
@@ -526,7 +528,7 @@ You shall NOT be deploying the frontend directly at any stage of this part. It i
 
 Generate a production build of your frontend, and add it to the Internet application using the method introduced in this part.
 
-**NB** If you use Render, make sure the directory <i>dist</i> is not ignored by git.
+**NB** If you use Render, make sure the directory <i>dist</i> is not ignored by git on the backend.
 
 Also, make sure that the frontend still works locally (in development mode when started with command _npm run dev_).
 
