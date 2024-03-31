@@ -292,7 +292,7 @@ module.exports = {
       b: 'Hooks personalizados',
       c: 'Más sobre estilos',
       d: 'Webpack',
-      e: 'Componentes de clases, varios',
+      e: 'Componentes de clase, misceláneos',
       f: 'Ejercicios: ampliar la lista de blogs',
     },
     '8': {
