@@ -1126,7 +1126,7 @@ Programming is hard, that is why I will use all the possible means to make it ea
 - If my code does not work, I will not write more code. Instead I start deleting the code until it works or just return to a state when everything was still working
 - When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](http://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord-telegram) how to ask for help
 
-### Utilization of language language models
+### Utilization of Large language models
 
 Large language models such as [ChatGPT](https://chat.openai.com/auth/login), [Claude](https://claude.ai/) and [GitHub Copilot](https://github.com/ features/copilot) have proven to be very useful in software development.
 
