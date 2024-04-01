@@ -75,7 +75,7 @@ Since the <i>name</i> attribute of all the radio buttons is the same, they form 
 
 The buttons have a change handler that currently only prints the string associated with the clicked button to the console.
 
-We decide to implement the filter functionality by storing <i>the value of the filter</i> in the redux store in addition to the notes themselves. The state of the store should look like this after making these changes:
+In the following section, we will implement filtering by storing both the notes as well as <i>the value of the filter</i> in the redux store. When we are finished, we would like the state of the store to look like this:
 
 ```js
 {
