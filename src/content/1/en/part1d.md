@@ -1166,7 +1166,7 @@ When using language models, the responsibility always stays with the programmer.
 
 The rapid development of language models puts the student of programming in a challenging position: is it worth and is it even necessary to learn programming in a detailed level, when you can get almost everything ready-made from language models?
 
-At this point, it is worth remembering the old wisdom of  [Brian Kerningham](https://en.wikipedia.org/wiki/Brian_Kernighan) the developer of the programming language C:
+At this point, it is worth remembering the old wisdom of  [Brian Kerningham](https://en.wikipedia.org/wiki/Brian_Kernighan), the developer of the programming language C:
 
 ![](../../images/1/kerningham.png)
 
