@@ -657,10 +657,18 @@ The following is printed to the console
 
 The output is interesting but not very useful. This is about the previously mentioned Immer library used by the Redux Toolkit internally to save the state of the Store.
 
-The status can be converted to a human-readable format, e.g. by converting it first to a string and then back to a JavaScript object as follows:
+The status can be converted to a human-readable format by using the [current](https://redux-toolkit.js.org/api/other-exports#current) function from the immer library.
+
+Update the imports to include the "current" function from the immer library:
 
 ```js
-console.log(JSON.parse(JSON.stringify(state))) // highlight-line
+import { createSlice, current } from '@reduxjs/toolkit' // highlight-line
+```
+
+Then update the console.log function call:
+
+```js
+console.log(current(state)) // highlight-line
 ```
 
 Console output is now human readable
