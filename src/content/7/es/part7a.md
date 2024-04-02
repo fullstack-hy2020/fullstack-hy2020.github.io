@@ -7,9 +7,9 @@ lang: es
 
 <div class="content">
 
-Los ejercicios de esta séptima parte del curso difieren un poco de los anteriores. En este capítulo y en el siguiente, como es habitual, hay [ejercicios relacionados con la teoría en el capítulo](/es/part7/react_router#ejercicios-7-1-7-3).
+Los ejercicios de esta séptima parte del curso difieren un poco de los anteriores. En este capítulo y en el siguiente, como es habitual, hay [ejercicios relacionados con la teoría del capítulo](/es/part7/react_router#ejercicios-7-1-7-3).
 
-Además de los ejercicios de este capítulo y del siguiente, hay una serie de ejercicios en los que repasaremos lo que hemos aprendido durante todo el curso ampliando la aplicación Bloglist, en la que trabajamos durante las partes 4 y 5.
+Además de los ejercicios de este capítulo y del siguiente, hay una serie de ejercicios en los que repasaremos lo que hemos aprendido durante todo el curso, ampliando la aplicación BlogList, en la que trabajamos durante las partes 4 y 5.
 
 ### Estructura de navegación de la aplicación
 
@@ -19,13 +19,13 @@ Es muy común que las aplicaciones web tengan una barra de navegación, que perm
 
 Nuestra aplicación podría tener una página principal
 
-![](../../images/7/1ea.png)
+![aplicación de notas con link de navegación a home](../../images/7/1ea.png)
 
 y páginas separadas para mostrar información sobre notas y usuarios:
 
-![](../../images/7/2ea.png)
+![aplicación de notas con link de navegación a notas](../../images/7/2ea.png)
 
-En una [aplicación web de la vieja escuela](/es/part0/fundamentos_de_las_aplicaciones_web#aplicaciones-web-tradicionales), el navegador lograría cambiar la página mostrada por la aplicación realizando una solicitud HTTP GET al servidor y renderizando el HTML que representa la vista que se devolvió.
+En una [aplicación web de la vieja escuela](/es/part0/fundamentos_de_las_aplicaciones_web#aplicaciones-web-tradicionales), cambiar la página mostrada por la aplicación se lograría mediante el navegador realizando una solicitud HTTP GET al servidor y renderizando el HTML que representa la vista que se devolvió.
 
 En las aplicaciones de una sola página, en realidad, siempre estamos en la misma página. El código Javascript ejecutado por el navegador crea una ilusión de diferentes "páginas". Si se realizan solicitudes HTTP al cambiar de vista, solo son para obtener datos con formato JSON, que la nueva vista podría requerir para que se muestren.
 
@@ -93,27 +93,27 @@ const App = () => {
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-Cada vista se implementa como su propio componente. Almacenamos la información del componente de vista en el estado de la aplicación llamado <i>page</i>. Esta información nos dice qué componente, que representa una vista, debe mostrarse debajo de la barra de menú.
+Cada vista se implementa como su propio componente. Almacenamos la información del componente de vista en el estado de la aplicación llamado *page*. Esta información nos indica qué componente, representando una vista, debería mostrarse debajo de la barra de menú.
 
-Sin embargo, el método no es muy óptimo. Como podemos ver en las imágenes, la dirección permanece igual aunque a veces estemos en diferentes vistas. Cada vista debe tener preferiblemente su propia dirección para hacer posible la creación de marcadores. El botón de <i>retroceso</i> tampoco funciona como se esperaba para nuestra aplicación, lo que significa que el botón de retroceso no lo mueve a la vista mostrada anteriormente de la aplicación, sino a un lugar completamente diferente. Si la aplicación creciera aún más y quisiéramos, agregar vistas separadas para cada usuario y nota, entonces este <i>routing</i>(enrutamiento) hecho por nosotros mismos se volvería demasiado complicado, ya que administraríamos la navegación de la aplicación.
+Sin embargo, el método no es muy óptimo. Como podemos ver en las imágenes, la dirección se mantiene igual aunque en ocasiones estemos en vistas diferentes. Preferiblemente, cada vista debería tener su propia dirección, por ejemplo, para hacer posible la creación de marcadores. El botón de *atrás* tampoco funciona como se espera para nuestra aplicación, lo que significa que *atrás* no te lleva a la vista previamente mostrada de la aplicación, sino a un lugar completamente diferente. Si la aplicación fuera a crecer aún más y quisiéramos, por ejemplo, agregar vistas separadas para cada usuario y nota, entonces este *routing* (enrutamiento) hecho por nosotros mismos, que significa la gestión de navegación de la aplicación, se volvería excesivamente complicado.
 
 ### React Router
 
-Afortunadamente, React tiene la librería [React Router](https://github.com/ReactTraining/react-router), que proporciona una excelente solución para administrar la navegación en una aplicación React.
+Afortunadamente, React tiene la librería [React Router](https://reactrouter.com/), que proporciona una excelente solución para administrar la navegación en una aplicación React.
 
-Cambiemos la aplicación anterior para usar React Router. Primero, instalemos React Router con el comando
+Cambiemos la aplicación anterior para que use React Router. Primero, instalemos React Router con el comando:
 
 ```bash
 npm install react-router-dom
 ```
 
-El routing proporcionado por React Router se habilita cambiando la aplicación de la siguiente manera
+El routing proporcionado por React Router se habilita cambiando la aplicación de la siguiente manera:
 
 ```js
 import {
   BrowserRouter as Router,
   Routes, Route, Link
-} from "react-router-dom"
+} from 'react-router-dom'
 
 const App = () => {
 
@@ -136,7 +136,7 @@ const App = () => {
       </Routes>
 
       <div>
-        <i>Note app, Department of Computer Science 2023</i>
+        <i>Note app, Department of Computer Science 2024</i>
       </div>
     </Router>
   )
@@ -145,7 +145,7 @@ const App = () => {
 
 Routing, o la representación condicional de componentes <i>basada en la URL</i> en el navegador, se utiliza colocando componentes como hijos del componente <i>Router</i>, es decir, dentro de las etiquetas del <i>Router</i>.
 
-Tenga en cuenta que, aunque se hace referencia al componente por el nombre <i>Router</i>, en realidad estamos hablando de [BrowserRouter](https://reactrouter.com/en/main/router-components/browser-router), porque aquí la importación ocurre al cambiar el nombre del objeto importado:
+Ten en cuenta que, aunque se hace referencia al componente por el nombre <i>Router</i>, en realidad estamos hablando de [BrowserRouter](https://reactrouter.com/en/main/router-components/browser-router), porque aquí la importación ocurre al cambiar el nombre del objeto importado:
 
 ```js
 import {
@@ -160,15 +160,15 @@ Según el [manual de la v5](https://v5.reactrouter.com/web/api/BrowserRouter):
 
 Normalmente, el navegador carga una nueva página cuando cambia la URL en la barra de direcciones. Sin embargo, con la ayuda de la [API de historial HTML5](https://css-tricks.com/using-the-html5-history-api/), <i>BrowserRouter</i> nos permite usar la URL en la barra de direcciones del navegador para el "routing" interno en una aplicación React. Por lo tanto, incluso si cambia la URL en la barra de direcciones, el contenido de la página solo se manipula mediante Javascript y el navegador no cargará contenido nuevo desde el servidor. Usar las acciones de avance y retroceso, así como crear marcadores, sigue siendo lógico como en una página web tradicional.
 
-Dentro del router definimos <i>enlaces</i> que modifican la barra de direcciones con la ayuda del componente [Link](https://reactrouter.com/en/main/components/link).
+Dentro del router definimos <i>enlaces</i> que modifican la barra de direcciones con la ayuda del componente [Link](https://reactrouter.com/en/main/components/link). Por ejemplo:
 
 ```js
 <Link to="/notes">notes</Link>
 ```
 
-crea un enlace en la aplicación con el texto <i>notes</i>, que cuando se clickea cambia la URL en la barra de direcciones a <i>/notes</i>.
+crea un enlace en la aplicación con el texto <i>notes</i>, que cuando se clica cambia la URL en la barra de direcciones a <i>/notes</i>.
 
-Los componentes renderizados según la URL del navegador se definen con la ayuda del componente [Route](https://reactrouter.com/en/main/route/route).
+Los componentes renderizados según la URL del navegador se definen con la ayuda del componente [Route](https://reactrouter.com/en/main/route/route). Por ejemplo,
 
 ```js
 <Route path="/notes" element={<Notes />} />
@@ -176,7 +176,7 @@ Los componentes renderizados según la URL del navegador se definen con la ayuda
 
 define, que si la dirección del navegador es <i>/notes</i>, renderizamos el componente <i>Notes</i>.
 
-Envolvemos los componentes que se renderizarán en función de la URL con un componente [Routes](https://reactrouter.com/en/main/components/routes)
+Envolvemos los componentes que serán renderizados basados en la URL con un componente [Routes](https://reactrouter.com/en/main/components/routes)
 
 ```js 
 <Routes>
@@ -186,11 +186,11 @@ Envolvemos los componentes que se renderizarán en función de la URL con un com
 </Routes>
 ```
 
-Las rutas funcionan representando el primer componente cuyo <i>path</i> (ruta) coincide con la URL en la barra de direcciones del navegador.
+Las rutas funcionan representando al primer componente cuya <i>path</i> (ruta) coincida con la URL en la barra de direcciones del navegador.
 
 ### Ruta parametrizada
 
-Examinemos la versión ligeramente modificada del ejemplo anterior. El código completo del ejemplo se puede encontrar [aquí](https://github.com/fullstack-hy2020/misc/blob/master/router-app-v1.js).
+Examinemos una versión ligeramente modificada del ejemplo anterior. El código completo del ejemplo se puede encontrar [aquí](https://github.com/fullstack-hy2020/misc/blob/master/router-app-v1.js).
 
 La aplicación ahora contiene cinco vistas diferentes cuya pantalla está controlada por el router. Además de los componentes del ejemplo anterior (<i>Home</i>, <i>Notes</i> y <i>Users</i>), tenemos <i>Login</i> que representa la vista de inicio de sesión y <i>Note</i> que representa la vista de una sola nota.
 
@@ -198,7 +198,7 @@ La aplicación ahora contiene cinco vistas diferentes cuya pantalla está contro
 
 ![notes app, mostrando que las notas se pueden clickear](../../images/7/3ea.png)
 
-La capacidad de hacer clic en un nombre se implementa con el componente <i>Link</i>, y hacer clic en el nombre de una nota cuya identificación es 3 desencadenaría un evento que cambia la dirección del navegador a <i>notes/3</i>:
+La capacidad de hacer clic en un nombre se implementa con el componente <i>Link</i>, hacer clic en el nombre de una nota cuyo id es 3 desencadenaría un evento que cambiaría la dirección del navegador a <i>notes/3</i>:
 
 ```js
 const Notes = ({notes}) => (
@@ -207,7 +207,7 @@ const Notes = ({notes}) => (
     <ul>
       {notes.map(note =>
         <li key={note.id}>
-          <Link to={`/notes/${note.id}`}>{note.content}</Link>
+          <Link to={`/notes/${note.id}`}>{note.content}</Link>  // highlight-line
         </li>
       )}
     </ul>
@@ -215,7 +215,7 @@ const Notes = ({notes}) => (
 )
 ```
 
-Definimos las URL parametrizadas en el routing en el componente <i>App</i> de la siguiente manera:
+Definimos las URL parametrizadas en el routing del componente <i>App</i> de la siguiente manera:
 
 ```js
 <Router>
@@ -231,7 +231,7 @@ Definimos las URL parametrizadas en el routing en el componente <i>App</i> de la
 </Router>
 ```
 
-Definimos la ruta renderizando una nota específica "estilo expreso" marcando el parámetro con dos puntos <i>:id</i>
+Definimos la ruta renderizando una nota específica "estilo express" marcando el parámetro con dos puntos <i>:id</i>
 
 ```js
 <Route path="/notes/:id" element={<Note notes={notes} />} />
@@ -243,7 +243,7 @@ Cuando un navegador navega a la URL de una nota específica, por ejemplo <i>/not
 import {
   // ...
   useParams  // highlight-line
-} from "react-router-dom"
+} from 'react-router-dom'
 
 const Note = ({ notes }) => {
   const id = useParams().id // highlight-line
@@ -258,13 +258,13 @@ const Note = ({ notes }) => {
 }
 ```
 
-El componente _Note_ recibe todas las notas como props <i>notes</i>, y se puede acceder al parámetro url (el ID de la nota que se mostrará) con la función [useParams](https://reactrouter.com/en/main/hooks/use-params) de react-router.
+El componente _Note_ recibe todas las notas como props <i>notes</i>, y se puede acceder al parámetro URL (el id de la nota que se mostrará) con la función [useParams](https://reactrouter.com/en/main/hooks/use-params) de React Router.
 
 ### useNavigate
 
-También hemos implementado una función de inicio de sesión simple en nuestra aplicación. Si un usuario ha iniciado sesión, la información sobre un usuario que ha iniciado sesión se guarda en el campo <i>user</i> del estado del componente <i>App</i>.
+También hemos implementado una función simple de inicio de sesión en nuestra aplicación. Si un usuario ha iniciado sesión, la información sobre un usuario que ha iniciado sesión se guarda en el campo <i>user</i> del estado del componente <i>App</i>.
 
-La opción para navegar a la vista de <i>Login</i> se representa de forma condicional en el menú.
+La opción para navegar a la vista de <i>Login</i> en el menú se renderiza condicionalmente.
 
 ```js
 <Router>
@@ -284,11 +284,11 @@ La opción para navegar a la vista de <i>Login</i> se representa de forma condic
 </Router>
 ```
 
-Entonces, si el usuario ya ha iniciado sesión, en lugar de mostrar el enlace <i>Login</i>, mostramos el nombre de usuario del usuario:
+Entonces, si el usuario ya ha iniciado sesión, en lugar de mostrar el enlace <i>Login</i>, mostramos su nombre de usuario:
 
-![app de notas mostrando usuario logeado](../../images/7/4a.png)
+![app de notas mostrando usuario logueado](../../images/7/4a.png)
 
-El código del componente que maneja la funcionalidad de inicio de sesión es el siguiente:
+El código del componente que controla la funcionalidad de inicio de sesión es el siguiente:
 
 ```js
 import {
@@ -324,13 +324,13 @@ const Login = (props) => {
 
 Lo interesante de este componente es el uso de la función [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate) de react-router. Con esta función, se puede modificar la URL del navegador programáticamente.
 
-Con el inicio de sesión del usuario, llamamos a _navigate('/')_, que hace cambiar la url del navegador a _/_ y la aplicación muestra el componente correspondiente, <i>Home</i>.
+Con el inicio de sesión, llamamos a _navigate('/')_, que cambia la URL del navegador a _/_ y la aplicación muestra el componente correspondiente, <i>Home</i>.
 
-Tanto [useParams](https://reactrouter.com/en/main/hooks/use-params) como [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate) son hooks, al igual que useState y useEffect que ya hemos usado muchas veces. Como recordará de la parte 1, existen algunas [reglas](/es/part1/un_estado_mas_complejo_depurando_aplicaciones_react#reglas-de-los-hooks) para usar hooks. Create-react-app se ha configurado para advertirle si rompe estas reglas llamando a un hook desde una declaración condicional.
+Tanto [useParams](https://reactrouter.com/en/main/hooks/use-params) como [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate) son hooks, al igual que useState y useEffect que ya hemos usado muchas veces. Como recordarás de la parte 1, existen algunas [reglas](/es/part1/un_estado_mas_complejo_depurando_aplicaciones_react#reglas-de-los-hooks) para usar hooks.
 
-### Redireccionar
+### Redirigir
 
-Hay un detalle más que es interesante, en la ruta de <i>Users</i>:
+Hay otro detalle interesante en la ruta de <i>Users</i>:
 
 ```js
 <Route path="/users" element={user ? <Users /> : <Navigate replace to="/login" />} />
@@ -385,19 +385,18 @@ const App = () => {
       </Router>      
       <footer>
         <br />
-        <em>Note app, Department of Computer Science 2022</em>
+        <em>Note app, Department of Computer Science 2024</em>
       </footer>
     </div>
   )
 }
 ```
 
-Definimos un elemento común para las aplicaciones web modernas llamado  <i>footer</i>, que define la parte en la parte inferior de la pantalla, fuera del <i>Router</i>, para que se muestre independientemente del componente que se muestra en la parte enrutada de la aplicación.
+Definimos un elemento común para las aplicaciones web modernas llamado  <i>footer</i>, que define a la parte inferior de la pantalla, fuera del <i>Router</i>, para que se muestre independientemente del componente que se muestra en la parte enrutada de la aplicación.
 
 ### Ruta parametrizada revisitada
 
-Nuestra aplicación tiene un defecto. El componente _Note_ recibe todas las notas, aunque solo muestra aquella cuya identificación coincide con el parámetro url:
-
+Nuestra aplicación tiene un defecto. El componente _Note_ recibe todas las notas, aunque solo muestra aquella cuyo id coincide con el parámetro URL:
 
 ```js
 const Note = ({ notes }) => {
@@ -421,7 +420,7 @@ const Note = ({ note }) => {
 }
 ```
 
-Una forma de hacer esto sería usar el hook [useMatch](https://reactrouter.com/en/v6.3.0/api#usematch) de React Router para averiguar la id de la nota que se mostrará en el componente _App_.
+Una forma de hacer esto sería usar el hook [useMatch](https://reactrouter.com/en/main/hooks/use-match) de React Router para encontrar la id de la nota que se mostrará en el componente _App_.
 
 No es posible utilizar el hook <i>useMatch</i> en el componente que define la parte enrutada de la aplicación. Movamos el uso de los componentes _Router_ fuera de _App_:
 
@@ -439,7 +438,7 @@ El componente _App_ se convierte en:
 import {
   // ...
   useMatch  // highlight-line
-} from "react-router-dom"
+} from 'react-router-dom'
 
 const App = () => {
   // ...
@@ -468,7 +467,7 @@ const App = () => {
       </Routes>   
 
       <div>
-        <em>Note app, Department of Computer Science 2022</em>
+        <em>Note app, Department of Computer Science 2024</em>
       </div>
     </div>
   )
@@ -481,7 +480,7 @@ Cada vez que se renderiza el componente, lo cual sucede cada vez que cambia la U
 const match = useMatch('/notes/:id')
 ```
 
-Si la url coincide con _/notes/:id_, la variable match contendrá un objeto desde el cual podemos acceder a la parte parametrizada de la ruta, el id de la nota que se mostrará, y luego podremos buscar la nota correcta para mostrar.
+Si la URL coincide con _/notes/:id_, la variable match contendrá un objeto desde el cual podemos acceder a la parte parametrizada de la ruta, el id de la nota que se mostrará, y luego podremos buscar la nota correcta para mostrar.
 
 ```js
 const note = match 
@@ -492,56 +491,57 @@ const note = match
 El código completo se puede encontrar [aquí](https://github.com/fullstack-hy2020/misc/blob/master/router-app-v2.js).
 
 </div>
+
 <div class="tasks">
 
 ### Ejercicios 7.1.-7.3.
 
-Volvamos a trabajar con anécdotas. Utilice la aplicación de anécdotas sin redux que se encuentra en el repositorio <https://github.com/fullstack-hy2020/routed-anecdotes> como punto de partida para los ejercicios.
+Volvamos a trabajar con anécdotas. Utiliza la aplicación de anécdotas sin redux que se encuentra en el repositorio <https://github.com/fullstack-hy2020/routed-anecdotes> como punto de partida para los ejercicios.
 
-Si clona el proyecto en un repositorio de git existente, recuerde <i>eliminar la configuración de git de la aplicación clonada</i>:
+Si clonas el proyecto en un repositorio de git existente, recuerda <i>eliminar la configuración de git de la aplicación clonada</i>:
 
 ```bash
-cd routed-anecdotes   // go first to directory of the cloned repository
+cd routed-anecdotes   // primero vé al directorio del repositorio clonado
 rm -rf .git
 ```
 
-La aplicación se inicia de la forma habitual, pero primero debe instalar las dependencias de la aplicación:
+La aplicación se inicia de la forma habitual, pero primero debes instalar sus dependencias:
 
 ```bash
 npm install
 npm run dev
 ```
 
-#### 7.1: anécdotas enrutadas, paso 1
+#### 7.1: Anécdotas Enrutadas, paso 1
 
-Agregue React Router a la aplicación para que al hacer clic en los enlaces del componente <i>Menu</i>, se pueda cambiar la vista.
+Agrega React Router a la aplicación para que al hacer clic en los enlaces del componente <i>Menu</i>, se pueda cambiar la vista.
 
 En la raíz de la aplicación, es decir, la ruta _/_, muestra la lista de anécdotas:
 
-![](../../assets/teht/40.png)
+![navegador en la URL base mostrando anécdotas y footer](../../assets/teht/40.png)
 
 El componente <i>Footer</i> siempre debe estar visible en la parte inferior.
 
 La creación de una nueva anécdota debería ocurrir en la ruta <i>create</i>:
 
-![](../../assets/teht/41.png)
+![url /create muestra formulario de creación de anécdotas](../../assets/teht/41.png)
 
-#### 7.2: anécdotas enrutadas, paso 2
+#### 7.2: Anécdotas Enrutadas, paso 2
 
-Implementar una vista para mostrar una sola anécdota:
+Implementa una vista para mostrar una sola anécdota:
 
-![](../../assets/teht/42.png)
+![navegador en /anecdotes/id mostrando una sola anécdota](../../assets/teht/42.png)
 
 La navegación a la página que muestra la anécdota única se realiza haciendo clic en el nombre de esa anécdota.
 
-![](../../assets/teht/43.png)
+![navegador mostrando enlace anterior que había sido clicado](../../assets/teht/43.png)
 
-#### 7.3: anécdotas enrutadas, paso 3
+#### 7.3: Anécdotas Enrutadas, paso 3
 
 La funcionalidad predeterminada del formulario de creación es bastante confusa, porque parece que no sucede nada después de crear una nueva anécdota utilizando el formulario.
 
-Mejorar la funcionalidad de tal manera que después de crear una nueva anécdota, la aplicación pasa automáticamente a mostrar la vista de todas las anécdotas <i>y</i> al usuario se le muestra una notificación informándole de esta creación exitosa durante los próximos 10 segundos:
+Mejora la funcionalidad de tal manera que después de crear una nueva anécdota la aplicación pasa automáticamente a mostrar la vista de todas las anécdotas <i>y</i> al usuario se le muestra una notificación informándole de esta creación exitosa durante los próximos cinco segundos:
 
-![](../../assets/teht/44.png)
+![navegador mostrando anécdotas y mensaje de creación exitosa](../../assets/teht/44.png)
 
 </div>

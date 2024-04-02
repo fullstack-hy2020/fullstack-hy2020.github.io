@@ -9,7 +9,7 @@ lang: en
 
 ### Hooks
 
-React offers 15 different [built-in hooks](https://react.dev/reference/react), of which the most popular ones are the [useState](https://react.dev/reference/react/useState) and [useEffect](https://react.dev/reference/react/useEffect) hooks that we have already been using extensively.
+React offers 15 different [built-in hooks](https://react.dev/reference/react/hooks), of which the most popular ones are the [useState](https://react.dev/reference/react/useState) and [useEffect](https://react.dev/reference/react/useEffect) hooks that we have already been using extensively.
 
 In [part 5](/en/part5/props_children_and_proptypes#references-to-components-with-ref) we used the [useImperativeHandle](https://react.dev/reference/react/useImperativeHandle) hook which allows components to provide their functions to other components. In [part 6](/en/part6/react_query_use_reducer_and_the_context) we used [useReducer](https://react.dev/reference/react/useReducer) and [useContext](https://react.dev/reference/react/useContext) to implement a Redux like state management.
 
@@ -17,14 +17,14 @@ Within the last couple of years, many React libraries have begun to offer hook-b
 
 The [React Router's](https://reactrouter.com/en/main/start/tutorial) API we introduced in the [previous part](/en/part7/react_router) is also partially hook-based. Its hooks can be used to access URL parameters and the <i>navigation</i> object, which allows for manipulating the browser URL programmatically.
 
-As mentioned in [part 1](/en/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks), hooks are not normal functions, and when using those we have to adhere to certain [rules or limitations](https://legacy.reactjs.org/docs/hooks-rules.html). Let's recap the rules of using hooks, copied verbatim from the official React documentation:
+As mentioned in [part 1](/en/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks), hooks are not normal functions, and when using those we have to adhere to certain [rules or limitations](https://react.dev/warnings/invalid-hook-call-warning#breaking-rules-of-hooks). Let's recap the rules of using hooks, copied verbatim from the official React documentation:
 
 **Don’t call Hooks inside loops, conditions, or nested functions.** Instead, always use Hooks at the top level of your React function.
 
-**Don’t call Hooks from regular JavaScript functions.** Instead, you can:
+**You can only call Hooks while React is rendering a function component:**
 
-- Call Hooks from React function components.
-- Call Hooks from custom Hooks
+- Call them at the top level in the body of a function component.
+- Call them at the top level in the body of a custom Hook.
 
 There's an existing [ESlint plugin](https://www.npmjs.com/package/eslint-plugin-react-hooks) that can be used to verify that the application uses hooks correctly:
 
@@ -141,7 +141,7 @@ const App = () => {
 
 The application creates <i>two</i> completely separate counters. The first one is assigned to the variable _left_ and the other to the variable _right_.
 
-Dealing with forms in React is somewhat tricky. The following application presents the user with a form that requests the user to input their name, birthday, and height:
+Dealing with forms in React is somewhat tricky. The following application presents the user with a form that requires him to input their name, birthday, and height:
 
 ```js
 const App = () => {
@@ -201,7 +201,7 @@ const useField = (type) => {
 }
 ```
 
-The hook function receives the type of the input field as a parameter. The function returns all of the attributes required by the <i>input</i>: its type, value and the onChange handler.
+The hook function receives the type of the input field as a parameter. It returns all of the attributes required by the <i>input</i>: its type, value and the onChange handler.
 
 The hook can be used in the following way:
 
@@ -227,7 +227,7 @@ const App = () => {
 
 ### Spread attributes
 
-We could simplify things a bit further. Since the _name_ object has exactly all of the attributes that the <i>input</i> element expects to receive as props, we can pass the props to the element using the [spread syntax](https://react.dev/learn/updating-objects-in-state#copying-objects-with-the-spread-syntax) in the following way:
+We could simplify things a bit further. Since the _name_ object has exactly all of the attributes that the <i>input</i> element expects to receive as props, we can pass the props to the element using the [spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) in the following way:
 
 ```js
 <input {...name} /> 
@@ -276,7 +276,7 @@ const App = () => {
 
 Dealing with forms is greatly simplified when the unpleasant nitty-gritty details related to synchronizing the state of the form are encapsulated inside our custom hook.
 
-Custom hooks are not only a tool for reuse; they also provide a better way for dividing our code into smaller modular parts.
+Custom hooks are not only a tool for reusing code; they also provide a better way for dividing it into smaller modular parts.
 
 ### More about hooks
 
@@ -292,9 +292,9 @@ The internet is starting to fill up with more and more helpful material related 
 
 ### Exercises 7.4.-7.8.
 
-We'll continue with the app from [exercises](/en/part7/react_router#exercises-7-1-7-3) of the chapter [react router](/en/part7/react_router).
+We'll continue with the app from the [exercises](/en/part7/react_router#exercises-7-1-7-3) of the [react router](/en/part7/react_router) chapter.
 
-#### 7.4: anecdotes and hooks step1
+#### 7.4: Anecdotes and Hooks step 1
 
 Simplify the anecdote creation form of your application with the _useField_ custom hook we defined earlier.
 
@@ -337,7 +337,7 @@ const App = () => {
 }
 ```
 
-#### 7.5: anecdotes and hooks step2
+#### 7.5: Anecdotes and Hooks step 2
 
 Add a button to the form that you can use to clear all the input fields:
 
@@ -351,11 +351,11 @@ Depending on your solution, you may see the following warning in your console:
 
 We will return to this warning in the next exercise.
 
-#### 7.6: anecdotes and hooks step3
+#### 7.6: Anecdotes and Hooks step 3
 
 If your solution did not cause a warning to appear in the console, you have already finished this exercise.
 
-If you see the warning in the console, make the necessary changes to get rid of the _Invalid value for prop \`reset\` on \<input\> tag_ console warning.
+If you see the _Invalid value for prop \`reset\` on \<input\> tag_ warning in the console, make the necessary changes to get rid of it.
 
 The reason for this warning is that after making the changes to your application, the following expression:
 
@@ -386,15 +386,15 @@ One simple fix would be to not use the spread syntax and write all of the forms 
 />
 ```
 
-If we were to do this, we would lose much of the benefit provided by the <i>useField</i> hook. Instead, come up with a solution that fixes the issue, but is still easy to use with spread syntax.
+If we were to do this, we would lose much of the benefit provided by the <i>useField</i> hook. Instead, come up with a solution that fixes the issue, but is still easy to use with the spread syntax.
 
-#### 7.7: country hook
+#### 7.7: Country hook
 
 Let's return to exercises [2.18-2.20](/en/part2/adding_styles_to_react_app#exercises-2-18-2-20).
 
 Use the code from <https://github.com/fullstack-hy2020/country-hook> as your starting point.
 
-The application can be used to search for a country's details from the service in <https://studies.cs.helsinki.fi/restcountries/>. If a country is found, the details of the country are displayed:
+The application can be used to search for a country's details from the service in <https://studies.cs.helsinki.fi/restcountries/>. If a country is found, its details are displayed:
 
 ![browser displaying country details](../../images/7/69ea.png)
 
@@ -408,7 +408,7 @@ Use the API endpoint [name](https://studies.cs.helsinki.fi/restcountries/) to fe
 
 Note that in this exercise it is essential to use useEffect's [second parameter](https://react.dev/reference/react/useEffect#parameters) array to control when the effect function is executed. See the course [part 2](/en/part2/adding_styles_to_react_app#couple-of-important-remarks) for more info how the second parameter could be used.
 
-#### 7.8: ultimate hooks
+#### 7.8: Ultimate Hooks
 
 The code of the application responsible for communicating with the backend of the note application of the previous parts looks like this:
 
@@ -448,7 +448,7 @@ We notice that the code is in no way specific to the fact that our application d
 
 Extract the code for communicating with the backend into its own _useResource_ hook. It is sufficient to implement fetching all resources and creating a new resource.
 
-You can do the exercise for the project found in the <https://github.com/fullstack-hy2020/ultimate-hooks> repository. The <i>App</i> component for the project is the following:
+You can do the exercise in the project found in the <https://github.com/fullstack-hy2020/ultimate-hooks> repository. The <i>App</i> component for the project is the following:
 
 ```js
 const App = () => {

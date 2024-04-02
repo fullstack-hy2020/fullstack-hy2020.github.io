@@ -12,8 +12,8 @@ lang: zh
 
 ### Flux-architecture
 
-<!-- Facebook developed the [Flux](https://facebook.github.io/flux/docs/in-depth-overview/)- architecture to make state management easier. In Flux, the state is separated completely from the React-components into its own <i>stores</i>.-->
- Facebook开发了[Flux](https://facebook.github.io/flux/docs/in-depth-overview/)-架构，使状态管理更容易。在Flux中，状态被完全从React组件中分离出来，进入它自己的<i>存储</i>。
+<!-- Facebook developed the [Flux](https://facebookarchive.github.io/flux/docs/in-depth-overview//)- architecture to make state management easier. In Flux, the state is separated completely from the React-components into its own <i>stores</i>.-->
+ Facebook开发了[Flux](https://facebookarchive.github.io/flux/docs/in-depth-overview//)-架构，使状态管理更容易。在Flux中，状态被完全从React组件中分离出来，进入它自己的<i>存储</i>。
 <!-- State in the store is not changed directly, but with different <i>actions</i>.-->
  存储器中的状态不是直接改变的，而是通过不同的<i>动作</i>改变的。
 

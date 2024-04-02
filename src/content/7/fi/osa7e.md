@@ -245,9 +245,9 @@ Materiaalissa ei ole tuotu ehkä riittävän selkeästi esille sitä, että Reac
 
 Pienissä sovelluksissa React-komponenttien tilaan talletetaan sovelluksen käsittelemää dataa, eli komponenttien tilan voi näissä tapauksissa ajatella vastaavan MVC:n <i>modeleita</i>.
 
-React-sovellusten yhteydessä ei kuitenkaan yleensä puhuta MVC-arkkitehtuurista ja jos käytössä on Redux niin silloin sovellukset noudattavat [Flux](https://facebook.github.io/flux/docs/in-depth-overview/)-arkkitehtuuria ja Reactin rooliksi jää entistä enemmän pelkkä näkymien muodostaminen. Varsinainen sovelluslogiikka hallitaan Reduxin tilan ja action creatorien avulla. Jos käytössä on osasta 6 tuttu [redux thunk](/osa6/redux_sovelluksen_kommunikointi_palvelimen_kanssa#asynkroniset-actionit-ja-redux-thunk), on sovelluslogiikka mahdollista eristää lähes täysin React-koodista.
+React-sovellusten yhteydessä ei kuitenkaan yleensä puhuta MVC-arkkitehtuurista ja jos käytössä on Redux niin silloin sovellukset noudattavat [Flux](https://facebookarchive.github.io/flux/docs/in-depth-overview//)-arkkitehtuuria ja Reactin rooliksi jää entistä enemmän pelkkä näkymien muodostaminen. Varsinainen sovelluslogiikka hallitaan Reduxin tilan ja action creatorien avulla. Jos käytössä on osasta 6 tuttu [redux thunk](/osa6/redux_sovelluksen_kommunikointi_palvelimen_kanssa#asynkroniset-actionit-ja-redux-thunk), on sovelluslogiikka mahdollista eristää lähes täysin React-koodista.
 
-Koska sekä React että [Flux](https://facebook.github.io/flux/docs/in-depth-overview/) ovat Facebookilla syntyneinä, voi ajatella, että Reactin pitäminen ainoastaan käyttöliittymästä huolehtivana kirjastona on sen oikeaoppista käyttöä. Flux-arkkitehtuurin noudattaminen tuo sovelluksiin tietyn overheadin ja jos on kyse pienestä sovelluksesta tai prototyypistä, saattaa Reactin "väärinkäyttäminen" olla järkevää, sillä myöskään [overengineering](https://en.wikipedia.org/wiki/Overengineering) ei yleensä johda optimaaliseen tulokseen.
+Koska sekä React että [Flux](https://facebookarchive.github.io/flux/docs/in-depth-overview//) ovat Facebookilla syntyneinä, voi ajatella, että Reactin pitäminen ainoastaan käyttöliittymästä huolehtivana kirjastona on sen oikeaoppista käyttöä. Flux-arkkitehtuurin noudattaminen tuo sovelluksiin tietyn overheadin ja jos on kyse pienestä sovelluksesta tai prototyypistä, saattaa Reactin "väärinkäyttäminen" olla järkevää, sillä myöskään [overengineering](https://en.wikipedia.org/wiki/Overengineering) ei yleensä johda optimaaliseen tulokseen.
 
 Osan 6 [viimeinen luku](/osa6/react_query_use_reducer_ja_contex) käsittelee Reactin tilanhallinnan uudempia virtauksia. Reactin suoraan tarjoamat hook-funktiot <i>useReducer</i> ja <i>useContext</i> tarjoavat eräänlaisen kevytversion Reduxille. <i>React Query</i> taas on kirjasto joka ratkaisee monia palvelimella olevan tilan käsittelyyn liittyviä pulmia, eliminoiden tarvetta sille, että React-sovelluksen tarvitsee tallettaa suoraan frontendin tilaan palvelimelta haettua dataa.
 
@@ -257,7 +257,7 @@ Emme ole vielä maininneet kurssilla kuin muutaman sanan tietoturvaan liittyen. 
 
 Katsotaan kuitenkin muutamaa kurssispesifistä seikkaa.
 
-The Open Web Application Security Project eli [OWASP](https://www.owasp.org) julkaisee vuosittain listan Websovellusten yleisimmistä turvallisuusuhista. Tuorein lista on [täällä](https://owasp.org/www-project-top-ten/). Samat uhat ovat listalla vuodesta toiseen.
+The Open Web Application Security Project eli [OWASP](https://www.owasp.org) julkaisee vuosittain listan Websovellusten yleisimmistä turvallisuusuhista. Tuorein lista on [täällä](https://owasp.org/Top10/). Samat uhat ovat listalla vuodesta toiseen.
 
 Listaykkösenä on <i>injection</i>, joka tarkoittaa sitä, että sovellukseen esim. lomakkeen avulla lähetettävä teksti tulkitaankin aivan eri tavalla kun sovelluskehittäjä on tarkoittanut. Kuuluisin injektioiden muoto lienevät [SQL-injektiot](https://stackoverflow.com/questions/332365/how-does-the-sql-injection-from-the-bobby-tables-xkcd-comic-work).
 
@@ -301,7 +301,7 @@ koodia ei suoriteta, vaan koodi renderöityy sivulle 'tekstinä':
 
 sillä React [huolehtii muuttujissa olevan datan sanitoinnista](https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks). Reactin jotkut versiot [ovat mahdollistaneet](https://medium.com/dailyjs/exploiting-script-injection-flaws-in-reactjs-883fb1fe36c1) XSS-hyökkäyksiä, aukot on toki korjattu, mutta mikään ei takaa etteikö niitä voisi vielä löytyä.
 
-Käytettyjen kirjastojen suhteen tuleekin olla tarkkana, jos niihin tulee tietoturvapäivityksiä, on kirjastot syytä päivittää omissa sovelluksissa. Expressin tietoturvapäivitykset löytyvät [kirjaston dokumentaatiosta](https://expressjs.com/en/advanced/security-updates.html) ja Nodeen liittyvät [blogista](https://nodejs.org/en/blog/).
+Käytettyjen kirjastojen suhteen tuleekin olla tarkkana, jos niihin tulee tietoturvapäivityksiä, on kirjastot syytä päivittää omissa sovelluksissa. Expressin tietoturvapäivitykset löytyvät [kirjaston dokumentaatiosta](https://expressjs.com/en/advanced/security-updates.html) ja Nodeen liittyvät [blogista](https://nodejs.org/en/blog/vulnerability/).
 
 Riippuvuuksien ajantasaisuuden voi testata komennolla
 
@@ -503,13 +503,13 @@ Javasciptin kehittäjäyhteisö on tuottanut valtavan määrän erilaisia hyödy
 
 Jos sovelluksessa on tarve operoida hieman monimutkaisemman datan kanssa, on jo [osassa 4](/osa4/sovelluksen_rakenne_ja_testauksen_alkeet#tehtavat-4-3-4-7) suositeltu kirjasto [lodash](https://www.npmjs.com/package/lodash) hyvä lisä. Jos olet mieltynyt funktionaaliseen ohjelmointityyliin, kannattaa harkita [ramda](https://ramdajs.com/):n käyttöä.
 
-Jos sovelluksessa käsitellään aikaa, esimerkiksi [date-fns](https://github.com/date-fns/date-fns)-kirjasto tarjoaa siihen hyvän välineistön.  Jos sovellus sisältää monimutkaisia lomakkeita, voi [React Hook Form](https://react-hook-form.com/) olla hyvä valinta. Jos sovelluksessa tulee piirtää graafeja, on vaihtoehtoja lukuisia, sekä [recharts](http://recharts.org/en-US/) että [highcharts](https://github.com/highcharts/highcharts-react) ovat hyviksi havaittuja.
+Jos sovelluksessa käsitellään aikaa, esimerkiksi [date-fns](https://github.com/date-fns/date-fns)-kirjasto tarjoaa siihen hyvän välineistön.  Jos sovellus sisältää monimutkaisia lomakkeita, voi [React Hook Form](https://react-hook-form.com/) olla hyvä valinta. Jos sovelluksessa tulee piirtää graafeja, on vaihtoehtoja lukuisia, sekä [recharts](https://recharts.org/en-US/) että [highcharts](https://github.com/highcharts/highcharts-react) ovat hyviksi havaittuja.
 
 [Immer](https://github.com/mweststrate/immer) tarjoaa muutamista tietorakenteista <i>muuttumattomia</i> toteutuksia. Kirjastosta voi olla hyötyä Reduxia käytettäessä, sillä kuten osasta 6 [muistamme](/osa6/flux_arkkitehtuuri_ja_redux#puhtaat-funktiot-immutable) reducerien on oltava puhtaita funktioita eli ne eivät saa muuttaa storen tilaa vaan niiden on korvattava se muutostilanteissa uudella. 
 
 [Redux-saga](https://redux-saga.js.org/) tarjoaa osassa 6 käsitellylle [redux thunkille](/osa6/redux_sovelluksen_kommunikointi_palvelimen_kanssa#asynkroniset-actionit-ja-redux-thunk) vaihtoehtoisen tavan tehdä asynkronisia actioneja. Jotkut hypettää ja tykkää, itse en.
 
-Single page ‑sovelluksissa analytiikkatietojen kerääminen käyttäjien sivuston kanssa käymästä vuorovaikutuksesta on [haastavampaa](https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications) kuin perinteisissä, kokonaiseen sivun lataamiseen perustuvissa web-sovelluksissa. [React Google Analytics](https://github.com/react-ga/react-ga) ‑kirjasto tuo tähän avun.
+Single page ‑sovelluksissa analytiikkatietojen kerääminen käyttäjien sivuston kanssa käymästä vuorovaikutuksesta on [haastavampaa](https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications) kuin perinteisissä, kokonaiseen sivun lataamiseen perustuvissa web-sovelluksissa. [React Google Analytics 4](https://github.com/codler/react-ga4) ‑kirjasto tuo tähän avun.
 
 Voit hyödyntää React-osaamistasi myös mobiilisovellusten toteuttamiseen Facebookin erittäin suositun [React Native](https://facebook.github.io/react-native/) ‑kirjaston avulla. Kurssin [osa 10](/osa10) käsittelee React Nativea.
 
