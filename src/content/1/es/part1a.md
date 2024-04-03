@@ -11,7 +11,7 @@ Ahora comenzaremos a familiarizarnos con probablemente el tema más importante d
 
 La forma más fácil de empezar es utilizando una herramienta llamada [Vite](https://es.vitejs.dev/).
 
-Comencemos creando una aplicación llamada <i>part1</i>, navegar a este directorio e instalando las librerias:
+Comencemos creando una aplicación llamada <i>part1</i>, naveguemos a su directorio e instalemos las librerías:
 
 ```bash
 # npm 6.x (desactualizado, pero aun en uso por algunos):
@@ -84,11 +84,9 @@ en contraste con Vite
 npm run dev
 ```
 
-El curso actualmente (11 de agosto de 2023) está siendo actualizado para usar Vite. Algunas partes aun usan la aplicación base creada con create-react-app.
-
 ### Componente
 
-El archivo <i>App.js</i> ahora define un [componente](https://es.legacy.reactjs.org/docs/components-and-props.html) de React con el nombre <i>App</i>. El comando en la línea final del archivo <i>main.jsx</i>
+El archivo <i>App.js</i> ahora define un [componente](https://es.react.dev/learn/your-first-component) de React con el nombre <i>App</i>. El comando en la línea final del archivo <i>main.jsx</i>
 
 ```js
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
@@ -96,7 +94,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 
 renderiza su contenido dentro del elemento <i>div</i>, definido en el archivo <i>index.html</i>, que tiene el valor 'root' en el atributo <i>id</i>.
 
-De forma predeterminada, el archivo <i>index.html</i> no contiene ningún marcado HTML que sea visible para nosotros en el navegador. 
+De forma predeterminada, el archivo <i>index.html</i> no contiene ningún marcado HTML que sea visible para nosotros en el navegador:
 
 ```html
 <!doctype html>
@@ -112,7 +110,6 @@ De forma predeterminada, el archivo <i>index.html</i> no contiene ningún marcad
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
-
 ```
 
 Puedes intentar agregar algo de HTML al archivo. Sin embargo, cuando se usa React, todo el contenido que necesita ser renderizado es generalmente definido como componentes de React.
@@ -139,7 +136,7 @@ Técnicamente, el componente se define como una función de JavaScript. La sigui
 )
 ```
 
-La función luego se asigna a un variable constante <i>App</i>:
+La función luego se asigna a una variable constante <i>App</i>:
 
 ```js
 const App = ...
@@ -161,7 +158,7 @@ const App = () => {
 
 En otras palabras, la función devuelve el valor de la expresión.
 
-La función que define el componente puede contener cualquier tipo de código JavaScript. Modifica tu componente para que sea de la siguiente manera:
+La función que define el componente puede contener cualquier tipo de código JavaScript. Modifica tu componente de la siguiente manera:
 
 ```js
 const App = () => {
@@ -246,17 +243,17 @@ const App = () => {
 
 La compilación está a cargo de [Babel](https://babeljs.io/repl/). Los proyectos creados con *create-react-app* o *vite* están configurados para compilarse automáticamente. Aprenderemos más sobre este tema en la [parte 7](/es/part7) de este curso.
 
-También es posible escribir React como "JavaScript puro" sin usar JSX. Aunque, nadie con una mente sana lo haría realmente.
+También es posible escribir React como "JavaScript puro" sin usar JSX. Aunque, nadie que este cuerdo lo haría.
 
-En la práctica, JSX se parece mucho a HTML con la distinción de que con JSX puede incrustar fácilmente contenido dinámico escribiendo JavaScript apropiado entre llaves. La idea de JSX es bastante similar a muchos lenguajes de plantillas, como Thymeleaf, que se utiliza junto con Java Spring, que se utiliza en servidores.
+En la práctica, JSX se parece mucho a HTML con la distinción de que con JSX puede incrustar fácilmente contenido dinámico escribiendo JavaScript entre llaves. La idea de JSX es bastante similar a muchos lenguajes de plantillas, como Thymeleaf, utilizado junto con Java Spring, que se utiliza en servidores.
 
-JSX es similar a [XML](https://developer.mozilla.org/es/docs/Web/XML/XML_introduction), lo que significa que todas las etiquetas deben cerrarse. Por ejemplo, una nueva línea es un elemento vacío, que en HTML se puede escribir de la siguiente manera: 
+JSX es similar a [XML](https://developer.mozilla.org/es/docs/Web/XML/XML_introduction), lo que significa que todas las etiquetas deben cerrarse. Por ejemplo, una nueva línea es un elemento vacío, que en HTML se puede escribir de la siguiente manera:
 
 ```html
 <br>
 ```
 
-pero al escribir JSX, la etiqueta debe estar cerrada: 
+pero al escribir JSX, la etiqueta debe estar cerrada:
 
 ```html
 <br />
@@ -304,15 +301,15 @@ const App = () => {
 }
 ```
 
-**Nota:** El <em>export</em> al final se omite en estos ejemplos ahora y en el futuro. Todavía será necesario para que el código funcione.
+**Nota:** El <em>export</em> al final se omite en estos ejemplos, ahora y en el futuro. Todavía será necesario para que el código funcione.
 
 Escribir componentes con React es fácil, y al combinar componentes, incluso una aplicación más compleja puede ser bastante fácil de mantener. De hecho, una filosofía central de React es componer aplicaciones a partir de muchos componentes reutilizables especializados.
 
 Otra fuerte convención es la idea de un <i>componente raíz</i> llamado <i>App</i> en la parte superior del árbol de componentes de la aplicación. Sin embargo, como aprenderemos en la [parte 6](/es/part6), hay situaciones en las que el componente <i>App</i> no es exactamente la raíz, sino que está incluido en un componente de utilidad apropiado.
 
-### props: pasar datos a componentes 
+### props: pasar datos a componentes
 
-Es posible pasar datos a componentes usando los llamados [props](https://es.legacy.reactjs.org/docs/components-and-props.html).
+Es posible pasar datos a componentes usando los llamados [props](https://es.react.dev/learn/passing-props-to-a-component).
 
 Modifiquemos el componente <i>Hello</i> de la siguiente manera:
 
@@ -342,9 +339,9 @@ const App = () => {
 }
 ```
 
-Puede haber un número arbitrario de props y sus valores pueden ser strings "incrustados en el código" ("hard coded") o resultados de expresiones JavaScript. Si el valor del prop se obtiene usando JavaScript, debe estar envuelto con llaves. 
+Puede haber un número arbitrario de props y sus valores pueden ser strings "incrustados en el código" ("hard coded") o resultados de expresiones JavaScript. Si el valor del prop se obtiene usando JavaScript, debe estar envuelto con llaves.
 
-Modifiquemos el código para que el componente <i>Hello</i> use dos props: 
+Modifiquemos el código para que el componente <i>Hello</i> use dos props:
 
 ```js
 const Hello = (props) => {
@@ -380,7 +377,7 @@ Yo realmente espero que tu consola esté abierta. Si no es asi, recuerda tu prom
 
 > <i>Prometo dejar la consola abierta todo el tiempo</i> durante este curso, y por el resto de mi vida mientras esté haciendo desarrollo web.
 
-El desarrollo de software es dificil. Este se vuelve aun más dificil si uno no está usando todas las herramientas disponibles como la consola de desarrollo e imprimiendo la depuración con _console.log_. Los profesionales usan ambas <i>todo el tiempo</i> y no hay una sola razón de porque un principiante no debería adoptar estos maravillosos métodos de ayuda que hacen la vida más fácil.
+El desarrollo de software es difícil. Este se vuelve aun más difícil si uno no está usando todas las herramientas disponibles como la consola de desarrollo e imprimiendo la depuración con _console.log_. Los profesionales usan ambas <i>todo el tiempo</i> y no hay una sola razón de porque un principiante no deberías adoptar estos maravillosos métodos de ayuda que le harán la vida mucho más fácil.
 
 ### Posible mensaje de error
 
@@ -388,7 +385,7 @@ Dependiendo del editor que estés usando, podrías recibir un mensaje de error e
 
 ![Captura de pantalla de vs code mostrando un error de eslint: "name is missing in props validation"](../../images/1/1-vite5.png)
 
-Este realmente no es un error, es una advertencia causada por la herramienta [ESLint](https://es.eslint.org/). Tu puedes silenciar la advertencia [react/prop-types](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md) añadiendo la siguiente línea al archivo <i>.eslintrc.cjs</i>
+Este realmente no es un error, es una advertencia causada por la herramienta [ESLint](https://es.eslint.org/). Puedes silenciar la advertencia [react/prop-types](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md) añadiendo la siguiente línea al archivo <i>.eslintrc.cjs</i>
 
 ```js
 module.exports = {
@@ -418,15 +415,15 @@ Aprenderemos sobre ESLint más en detalle en la [parte 3](/es/part3/validacion_y
 
 ### Algunas notas
 
-React se ha configurado para generar mensajes de error bastante claros. A pesar de esto, debes, al menos al principio, avanzar en **pasos muy pequeños** y asegurarte de que cada cambio funcione como se desea.
+React se ha configurado para generar mensajes de error bastante claros. A pesar de esto, debes, al menos al principio, avanzar en **pasos muy pequeños** y asegurarte de que cada cambio funcione como deseas.
 
 **La consola siempre debe estar abierta**. Si el navegador reporta errores, no es recomendable seguir escribiendo más código, esperando milagros. En su lugar, debes intentar comprender la causa del error y, por ejemplo, volver al estado funcional anterior:
 
-![Captura de pantalla de error de prop: undefined](../../images/1/2a.png)
+![Captura de pantalla de error de prop: undefined](../../images/1/1-vite6.png)
 
 Es bueno recordar que en React es posible y vale la pena escribir comandos <em>console.log()</em> (que se imprimen en la consola) dentro de tu código.
 
-También ten en cuenta que **los nombres de los componentes de React deben iniciar con mayúscula**. Si intentas definir un componente de la siguiente manera:
+También ten en cuenta que **los nombres de los componentes de React deben comenzar con mayúscula**. Si intentas definir un componente de la siguiente manera:
 
 ```js
 const footer = () => {
@@ -452,7 +449,7 @@ const App = () => {
 }
 ```
 
-la página no mostrará el contenido definido dentro del componente Footer, y en su lugar React solo crea un elemento <i>footer</i> vacío. Si cambias la primera letra del nombre del componente a una letra mayúscula, React crea el elemento <i>div</i> definido en el componente Footer, que se representa en la página.
+la página no mostrará el contenido definido dentro del componente footer, y en su lugar React solo crea un elemento <i>footer</i> vacío. Si cambias la primera letra del nombre del componente a una letra mayúscula, React crea el elemento <i>div</i> definido en el componente Footer, que se renderiza en la página.
 
 Ten en cuenta que el contenido de un componente de React (normalmente) debe contener **un elemento raíz**. Si, por ejemplo, intentamos definir el componente <i>App</i> sin el elemento <i>div</i> más externo:
 
@@ -466,11 +463,11 @@ const App = () => {
 }
 ```
 
-el resultado es un mensaje de error. 
+el resultado es un mensaje de error.
 
 ![Captura de pantalla del error multiples elementos de raíz](../../images/1/1-vite7.png)
 
-Usar un elemento raíz no es la única opción que funciona. Un <i>array</i> de componentes también es una solución válida: 
+Usar un elemento raíz no es la única opción que funciona. Un <i>array</i> de componentes también es una solución válida:
 
 ```js
 const App = () => {
@@ -482,9 +479,9 @@ const App = () => {
 }
 ```
 
-Sin embargo cuando se define el componente raíz de la aplicación esto no es algo particularmente inteligente de hacer, y hace que el código se vea un poco desagradable.
+Sin embargo cuando se define el componente raíz de la aplicación, hacer esto no es algo particularmente sabio, y hace que el código se vea un poco desagradable.
 
-Debido a que el elemento raíz está estipulado, tenemos elementos div "extra" en el árbol DOM. Esto se puede evitar usando [fragments](https://es.legacy.reactjs.org/docs/fragments.html#short-syntax), es decir, envolviendo los elementos que el componente devolverá con un elemento vacío: 
+Debido a que el elemento raíz está estipulado, tenemos elementos div "extra" en el árbol DOM. Esto se puede evitar usando [fragments](https://es.react.dev/reference/react/Fragment), es decir, envolviendo los elementos que el componente devolverá con un elemento vacío: 
 
 ```js
 const App = () => {
@@ -550,7 +547,7 @@ y esto causó un problema porque el item a ser renderizado en las llaves es un o
 { name: 'Peter', age: 4 }
 ```
 
-En React, las cosas individuales a ser renderizadas dentro de llaves deben ser valores primitivos, como números o cadenas.
+En React, las cosas individuales a ser renderizadas dentro de llaves deben ser valores primitivos, como números o strings.
 
 La solución es la siguiente:
 
@@ -586,7 +583,7 @@ y la edad
 
 Después de corregir el error, tu deberías limpiar los mensajes de la consola presionando el botón 🚫 y luego recargando el contenido de la página, y asegurarte de que no se están mostrando mensajes de error.
 
-Una pequeña nota adicional a la anterior. React también permite renderizar arreglos <i>si</i> el arreglo contiene valores que son elegibles para renderizar (como números y cadenas). Así que el siguiente programa funcionaría, aunque el resultado no ser el que queremos:
+Una pequeña nota adicional a la anterior. React también permite renderizar arreglos <i>si</i> el arreglo contiene valores que son elegibles para renderizar (como números y cadenas). Así que el siguiente programa funcionaría, aunque el resultado puede que no sea el que queremos:
 
 ```js
 const App = () => {
@@ -636,9 +633,9 @@ La mayoría de los ejercicios del curso construyen una aplicación más grande, 
 
 Por cada aplicación web para una serie de ejercicios, se recomienda enviar todos los archivos relacionados con esa aplicación, excepto para el directorio <i>node\_modules</i>.
 
-  <h4>1.1: información del curso, paso 1</h4> 
+  <h4>1.1: Información del Curso, paso 1</h4> 
 
-<i>La aplicación en la que comenzaremos a trabajar en este ejercicio se desarrollará más a fondo en algunos de los siguientes ejercicios. En este y otros conjuntos de ejercicios futuros de este curso, es suficiente enviar solo el estado final de la aplicación. Si lo desea, también puedes crear un commit para cada ejercicio de la serie, pero esto es completamente opcional.</i>
+<i>La aplicación en la que comenzaremos a trabajar en este ejercicio se continuara desarrollando en algunos de los siguientes ejercicios. En este y otros conjuntos de ejercicios futuros de este curso, es suficiente enviar solo el estado final de la aplicación. Si lo deseas, también puedes crear un commit para cada ejercicio de la serie, pero esto es completamente opcional.</i>
 
 Usa Vite para inicializar una nueva aplicación. Modifica <i>main.jsx</i> para que coincida con lo siguiente
 
@@ -682,13 +679,13 @@ const App = () => {
 export default App
 ```
 
-y elimina los archivos adicionales App.css, y index.css, y el directorio assets. 
+y elimina los archivos adicionales App.css, y index.css, también elimina el directorio assets.
 
-Desafortunadamente, toda la aplicación está en el mismo componente. Refactoriza el código para que conste de tres componentes nuevos: <i>Header</i>, <i>Content</i> y <i>Total</i>. Todos los datos aún residen en el componente <i>App</i>, que pasa los datos necesarios a cada componente mediante <i>props</i>. <i>Header</i> se encarga de representar el nombre del curso, <i>Content</i> representa las partes y su número de ejercicios y <i>Total</i> representa el número total de ejercicios.
+Desafortunadamente, toda la aplicación está en el mismo componente. Refactoriza el código para que conste de tres componentes nuevos: <i>Header</i>, <i>Content</i> y <i>Total</i>. Todos los datos aún residen en el componente <i>App</i>, que pasa los datos necesarios a cada componente mediante <i>props</i>. <i>Header</i> se encarga de mostrar el nombre del curso, <i>Content</i> muestra las partes y su número de ejercicios y <i>Total</i> muestra el número total de ejercicios.
 
 Define los nuevos componentes en el archivo <i>App.jsx</i>.
 
-El cuerpo del componente <i>App</i> será aproximadamente como lo siguiente:
+El cuerpo del componente <i>App</i> será aproximadamente como el siguiente:
 
 ```js
 const App = () => {
@@ -712,7 +709,7 @@ El progreso cuidadoso y en pequeños pasos puede parecer lento, pero en realidad
 
 es decir, según Martin, avanzar con cuidado y con pequeños pasos es incluso la única manera de ser rápido.
 
-<h4>1.2: información del curso, paso 2</h4>
+<h4>1.2: Información del Curso, paso 2</h4>
 
 Refactoriza el componente <i>Content</i> para que no muestre ningún nombre de partes o su número de ejercicios por sí mismo. En su lugar, solo representa tres componentes <i>Part</i> de los cuales cada uno representa el nombre y el número de ejercicios de una parte.
 
@@ -728,6 +725,6 @@ const Content = ... {
 }
 ```
 
-Nuestra aplicación pasa información de una manera bastante primitiva en este momento, ya que se basa en variables individuales. Esta situación mejorará pronto en la [parte 2](/es/part2), pero antes de eso, vamos a la [parte 1b](/es/part1/java_script) para aprender acerca de JavaScript.
+Nuestra aplicación pasa información de una manera bastante primitiva en este momento, ya que se basa en variables individuales. Esta situación mejorará pronto en la [parte 2](/es/part2), pero antes de eso, vamos a la parte 1b para aprender acerca de JavaScript.
 
 </div>
