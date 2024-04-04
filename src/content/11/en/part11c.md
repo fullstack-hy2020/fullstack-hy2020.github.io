@@ -212,7 +212,7 @@ app.get('/health', (req, res) => {
 
 Configure then an [HTTP check](https://fly.io/docs/reference/configuration/#http_service-checks) that ensures the health of the deployments based on the HTTP request to the defined health check endpoint.
 
-You also need to set the [deployment strategy](https://fly.io/docs/reference/configuration/#picking-a-deployment-strategy) (in the file _fly.toml_) of the app to be either <i>canary</i> or <i>bluegreen</i>. These strategies ensure that only an app with a healthy state gets deployed.
+You also need to set the [deployment strategy](https://fly.io/docs/reference/configuration/#picking-a-deployment-strategy) (in the file _fly.toml_) of the app to be <i>canary</i>. These strategies ensure that only an app with a healthy state gets deployed.
 
 Ensure that GitHub Actions notices if a deployment breaks your application:
 
