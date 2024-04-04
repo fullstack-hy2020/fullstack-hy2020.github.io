@@ -133,6 +133,10 @@ It is also vital to follow continuously the server logs. The problem became obvi
 
 The database url was _undefined_, so the command *fly secrets set MONGODB\_URI* was forgotten.
 
+You will also need to whitelist the the fly.io app's IP address in MongoDB Atlas. If you don't MongoDB will refuse the connection.
+
+Sadly, fly.io does not provide you a dedicated IPv4 address for your app, so you will need to allow all IP addresses in MongoDB Atlas.
+
 When using Render, the database url is given by defining the proper env in the dashboard:
 
 ![render dashboard showing the MONGODB_URI env variable](../../images/3/render-env.png)
