@@ -371,7 +371,7 @@ We'll route all requests to prefix */api/diaries* to that specific router in *in
 
 ```js
 import express from 'express';
-import diaryRouter from './routes/diaries'; // highlight-line
+import diaryRouter from '../routes/diaries'; // highlight-line
 const app = express();
 app.use(express.json());
 
@@ -979,7 +979,7 @@ To parse the incoming data we must have the *json* middleware configured:
 
 ``` js
 import express from 'express';
-import diaryRouter from './routes/diaries';
+import diaryRouter from '../routes/diaries';
 const app = express();
 app.use(express.json()); // highlight-line
 
