@@ -638,7 +638,7 @@ subscription Subscription {
 }
 ```
 
-Kun tilauksen suorittavaa sinistä PersonAdded-painiketta painetaan, jää Explorer odottamaan tilaukseen tulevia vastauksia. Aina kun sovellukseen lisätään uusia käyttäjiä (joudut tekemään lisäyksen frontendista tai toisesta selainikkunasta), tulee tieto niistä Explorerin oikeaan reunaan.
+Kun tilauksen suorittavaa sinistä PersonAdded-painiketta painetaan, jää Explorer odottamaan tilaukseen tulevia vastauksia. Aina kun sovellukseen lisätään uusia henkilöitä (joudut tekemään lisäyksen frontendista tai toisesta selainikkunasta), tulee tieto niistä Explorerin oikeaan reunaan.
 
 Jos tilaus ei toimi, tarkasta, että yhteysasetukset on määritelty oikein:
 
