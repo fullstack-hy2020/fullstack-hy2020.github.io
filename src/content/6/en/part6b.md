@@ -713,6 +713,22 @@ Also, start using Redux DevTools to debug the application's state easier.
 
 Change also the definition of the <i>anecdote reducer and action creators</i> to use the Redux Toolkit's <em>createSlice</em> function.
 
+Implementation note: when you use the Redux Toolkit to return the initial state of anecdotes, it will be immutable, so you will need to make a copy of it to sort it, or you will encounter "TypeError: Cannot assign to read only property '". You can use the spread syntax to make a copy of the array. Instead of:
+
+```js
+
+anecdotes.sort()
+
+```
+
+Write:
+
+```js
+
+[...anecdotes].sort()
+
+```
+
 #### 6.12 Better Anecdotes, step 10
 
 The application has a ready-made body for the <i>Notification</i> component:
