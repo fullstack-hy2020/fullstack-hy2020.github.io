@@ -605,6 +605,7 @@ Let output from the npm test with _average_ function, into a new file <i>tests/a
 
 ```js
 const { test, describe } = require('node:test')
+const assert = require("node:assert");
 
 // ...
 
