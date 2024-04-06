@@ -895,7 +895,7 @@ Let's install ESlint and its TypeScript extensions:
 npm install --save-dev eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser
 ```
 
-We will configure ESlint to [disallow explicit any]( https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/docs/rules/no-explicit-any.md). Write the following rules to *.eslintrc*:
+We will configure ESlint to [disallow explicit any]( https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/docs/rules/no-explicit-any.md). Write the following rules to *.eslintrc.json*:
 
 ```json
 {
@@ -937,7 +937,7 @@ For now, we should probably go with the recommended settings, and we will modify
 
 On top of the recommended settings, we should try to get familiar with the coding style required in this part and *set the semicolon at the end of each line of code to be required*.
 
-So we will use the following *.eslintrc*
+So we will use the following *.eslintrc.json*
 
 ```json
 {
