@@ -161,7 +161,7 @@ const App = () => {
 
 Backendin muutosten jälkeen uusien henkilöiden lisäys puhelinluetteloon vaatii sen, että käyttäjän token lähetetään pyynnön mukana. 
 
-Tämä edellyttää pientä muutosta tiedostossa <i>index.js</i> olevaan ApolloClient-olion konfiguraatioon
+Tämä edellyttää pientä muutosta tiedostossa <i>main.jsx</i> olevaan ApolloClient-olion konfiguraatioon
 
 ```js
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client'  // highlight-line
