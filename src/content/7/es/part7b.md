@@ -38,7 +38,7 @@ React ofrece la opción de crear nuestros propios hooks [personalizados](https:/
 
 Los hooks personalizados son funciones regulares de JavaScript que pueden utilizar cualquier otro hook, siempre que se adhieran a las [reglas de los hooks](/es/part1/un_estado_mas_complejo_depurando_aplicaciones_react#reglas-de-los-hooks). Además, el nombre de los hooks personalizados debe comenzar con la palabra _use_.
 
-Implementamos una aplicación de contador en la [parte 1](/es/part1/estado_del_componente_controladores_de_eventos#manejo-de-eventos), que puede tener su valor incrementado, reducido o reiniciado. El código de la aplicación es el siguiente:
+Implementamos una aplicación de contador en la [parte 1](/es/part1/estado_del_componente_controladores_de_eventos#control-de-eventos), que puede tener su valor incrementado, reducido o reiniciado. El código de la aplicación es el siguiente:
 
 ```js  
 import { useState } from 'react'
