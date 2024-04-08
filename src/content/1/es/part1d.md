@@ -11,7 +11,7 @@ lang: es
 
 En nuestro ejemplo anterior el estado de la aplicación era simple ya que estaba compuesto por un solo entero. ¿Y si nuestra aplicación requiere un estado más complejo?
 
-En la mayoría de los casos, la manera más fácil y mejor de lograr esto es usando la función _useState_ varias veces para crear "partes" de estado separadas.
+En la mayoría de los casos, la mejor, y más fácil, manera de lograr esto es usando la función _useState_ varias veces para crear "partes" de estado separadas.
 
 En el siguiente código creamos dos partes de estado para la aplicación llamada _left_ y _right_ que obtienen el valor inicial de 0:
 
@@ -126,7 +126,7 @@ const handleRightClick = () => {
 }
 ```
 
-La sintaxis puede parecer un poco extraña al principio. En la práctica, <em>{...clicks}</em> crea un nuevo objeto que tiene copias de todas las propiedades del objeto _clicks_. Cuando especificamos una propiedad en particular, por ejemplo, <i>right</i> en <em>{...clicks, right: 1}</em>, el valor de la propiedad _right_ en el nuevo objeto será 1.
+La sintaxis puede parecer un poco extraña al principio. En la práctica, <em>{ ...clicks }</em> crea un nuevo objeto que tiene copias de todas las propiedades del objeto _clicks_. Cuando especificamos una propiedad en particular, por ejemplo, <i>right</i> en <em>{ ...clicks, right: 1 }</em>, el valor de la propiedad _right_ en el nuevo objeto será 1.
 
 En el ejemplo anterior, esto:
 
@@ -159,9 +159,9 @@ La aplicación parece funcionar. Sin embargo, <i>está prohibido en React mutar 
 
 Almacenar todo el estado en un solo objeto de estado es una mala elección para esta aplicación en particular; no hay ningún beneficio aparente y la aplicación resultante es mucho más compleja. En este caso, almacenar los contadores de clics en estados separados es una opción mucho más adecuada.
 
-Hay situaciones en las que puede resultar beneficioso almacenar una parte del estado de la aplicación en una estructura de datos más compleja. [La documentación oficial de React](https://es.legacy.reactjs.org/docs/hooks-faq.html#should-i-use-one-or-many-state-variables) contiene una guía útil sobre el tema.
+Hay situaciones en las que puede resultar beneficioso almacenar una parte del estado de la aplicación en una estructura de datos más compleja. [La documentación oficial de React](https://es.react.dev/learn/choosing-the-state-structure) contiene una guía útil sobre el tema.
 
-### Manejo de matrices
+### Manejo de arrays
 
 Agreguemos un fragmento de estado a nuestra aplicación que contenga un array _allClicks_ que recuerda cada clic que ha ocurrido en la aplicación.
 
@@ -197,13 +197,13 @@ const App = () => {
 }
 ```
 
-Cada clic se almacena en una pieza de estado separada llamada _allClicks_ que se inicializa como una matriz vacía:
+Cada clic se almacena en una pieza de estado separada llamada _allClicks_ que se inicializa como un array vacío:
 
 ```js
 const [allClicks, setAll] = useState([])
 ```
 
-Cuando se hace clic en el botón <i>left</i>, agregamos la letra <i>L</i> a la matriz _allClicks_:
+Cuando se hace clic en el botón <i>left</i>, agregamos la letra <i>L</i> al array _allClicks_:
 
 ```js
 const handleLeftClick = () => {
@@ -224,7 +224,7 @@ const handleLeftClick = () => {
 }
 ```
 
-Sin embargo, __no__ haga esto. Como se mencionó anteriormente, el estado de los componentes de React como _allClicks_ no debe modificarse directamente. Incluso si el estado mutante parece funcionar en algunos casos, puede provocar problemas que son muy difíciles de depurar.
+Sin embargo, __no__ hagas esto. Como se mencionó anteriormente, el estado de los componentes de React, como _allClicks_, no debe modificarse directamente. Incluso si el estado mutado parece funcionar en algunos casos, puede provocar problemas que son muy difíciles de depurar.
 
 Echemos un vistazo más de cerca a cómo se muestra el historial de clics en la página:
 
@@ -244,7 +244,7 @@ const App = () => {
 }
 ```
 
-Llamamos al método [join](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/join) en el array _allClicks_ que une todos los elementos en una sola cadena, separados por la cadena pasada como parámetro de la función, que en nuestro caso es un espacio vacío.
+Llamamos al método [join](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/join) en el array _allClicks_, que une todos los elementos en un solo string, separados por el string pasado como parámetro de la función, que en nuestro caso es un espacio vacío.
 
 ### La actualización del estado es asíncrona
 
@@ -315,7 +315,7 @@ Aunque se estableció un nuevo valor para _left_ llamando a _setLeft(left + 1)_,
 setTotal(left + right)
 ```
 
-La razón de esto es que una actualización de estado en React ocurre [asincrónicamente](https://es.react.dev/learn/queueing-a-series-of-state-updates), es decir, no inmediatamente sino "en algún momento" antes de que el componente se renderice nuevamente.
+La razón de esto es que una actualización de estado en React ocurre [asíncronamente](https://es.react.dev/learn/queueing-a-series-of-state-updates), es decir, no inmediatamente sino "en algún momento" antes de que el componente se renderice nuevamente.
 
 Podemos arreglar la aplicación de la siguiente manera:
 
@@ -337,7 +337,7 @@ Así que ahora el número de pulsaciones de botones se basa definitivamente en e
 
 ### Renderizado condicional
 
-Modifiquemos nuestra aplicación para que el renderizado del historial de clics sea manejada por un nuevo componente <i>History</i>:
+Modifiquemos nuestra aplicación para que el renderizado del historial de clics sea manejado por un nuevo componente <i>History</i>:
 
 ```js
 // highlight-start
@@ -389,9 +389,9 @@ Y en todos los demás casos, el componente muestra el historial de clics:
 
 El componente <i>History</i> representa elementos React completamente diferentes según el estado de la aplicación. Esto se llama <i>renderizado condicional</i>.
 
-React también ofrece muchas otras formas de hacer [renderizado condicional](https://es.legacy.reactjs.org/docs/conditional-rendering.html). Veremos esto más de cerca en la [parte 2](/es/part2).
+React también ofrece muchas otras formas de hacer [renderizado condicional](https://es.react.dev/learn/conditional-rendering). Veremos esto más de cerca en la [parte 2](/es/part2).
 
-Hagamos una última modificación a nuestra aplicación refactorizándola para usar el componente _Button_ que definimos anteriormente:
+Hagamos una última modificación a nuestra aplicación, para usar el componente _Button_ que definimos anteriormente:
 
 ```js
 const History = (props) => {
@@ -449,7 +449,7 @@ const App = () => {
 
 ### React Antiguo
 
-En este curso usamos el [state hook](https://es.legacy.reactjs.org/docs/hooks-state.html) para agregar estado a nuestros componentes de React, que es parte de las versiones más nuevas de React y está disponible desde la versión [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) en adelante. Antes de la adición de hooks, no había forma de agregar estado a los componentes funcionales. Los componentes que requerían el estado tenían que definirse como componentes de [clase](https://es.legacy.reactjs.org/docs/react-component.html), utilizando la sintaxis de clase de JavaScript.
+En este curso usamos el [state hook](https://es.react.dev/learn/state-a-components-memory) para agregar estado a nuestros componentes de React, que es parte de las versiones más nuevas de React y está disponible desde la versión [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) en adelante. Antes de la adición de hooks, no había forma de agregar estado a los componentes funcionales. Los componentes que requerían el estado tenían que definirse como componentes de [clase](https://es.react.dev/reference/react/Component), utilizando la sintaxis de clase de JavaScript.
 
 En este curso hemos tomado la decisión un poco radical de utilizar hooks exclusivamente desde el primer día, para asegurarnos de que estamos aprendiendo las actuales y futuras versiones de React. Aunque los componentes funcionales son el futuro de React, sigue siendo importante aprender la sintaxis de clase, ya que hay miles de millones de líneas de código antiguo de React que podrías terminar manteniendo algún día. Lo mismo se aplica a la documentación y los ejemplos de React con los que puedes tropezar en Internet.
 
@@ -473,9 +473,9 @@ Mantén tu código y la página web abiertos juntos **al mismo tiempo, todo el t
 
 Si tu código falla al compilarse y tu navegador se ilumina como un árbol de Navidad:
 
-![Captura de pantalla de un error, apuntando a la linea de código en donde se ha generado ](../../images/1/6e.png)
+![Captura de pantalla de un error, apuntando a la linea de código en donde se ha generado ](../../images/1/6x.png)
 
-no escriba más código, sino busca y soluciona el problema **inmediatamente**. Aún no ha habido un momento en la historia de la codificación en el que el código que no se compila comience a funcionar milagrosamente después de escribir grandes cantidades de código adicional. Dudo mucho que tal evento ocurra durante este curso tampoco.
+no escribas más código, sino busca y soluciona el problema **inmediatamente**. Aún no ha habido un momento en la historia de la codificación en el que el código que no se compila comience a funcionar milagrosamente después de escribir grandes cantidades de código adicional. Dudo mucho que tal evento ocurra durante este curso.
 
 La depuración de la vieja escuela basada en impresión siempre es una buena idea. Si el componente
 
@@ -503,7 +503,7 @@ const Button = (props) => {
 
 Esto revelará inmediatamente si, por ejemplo, uno de los atributos se ha escrito mal al usar el componente.
 
-**Nota:** Cuando use _console.log_ para depurar, no combines _objetos_ como en Java utilizando el operador más. En lugar de escribir:
+**Nota:** Cuando use _console.log_ para depurar, no combines _objetos_ como en Java utilizando el operador de adición:
 
 ```js
 console.log('props value is ' + props)
@@ -527,11 +527,11 @@ Imprimir en la consola no es de ninguna manera la única forma de depurar nuestr
 
 La ejecución se detendrá una vez que llegue a un punto donde se ejecuta el comando _debugger_:
 
-![](../../images/1/7a.png)
+![debugger pausado en dev tools](../../images/1/7a.png)
 
 Al ir a la pestaña <i>Console (consola)</i>, Es fácil inspeccionar el estado actual de las variables:
 
-![](../../images/1/8a.png)
+![screenshot de la consola](../../images/1/8a.png)
 
 Una vez que se descubre la causa del error, puedes eliminar el comando _debugger_ y actualizar la página.
 
@@ -539,11 +539,11 @@ El depurador también nos permite ejecutar nuestro código línea por línea con
 
 También puedes acceder al depurador sin el comando _debugger_ agregando puntos de interrupción en la pestaña <i>Sources</i>. La inspección de los valores de las variables del componente se puede hacer en la sección _Scope_:
 
-![](../../images/1/9a.png)
+![ejemplo de breakpoint en devtools](../../images/1/9a.png)
 
-Es muy recomendable instalar la extensión [herramientas de desarrollo de React](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) para Chrome. Agregará una nueva pestaña _Components_ a las herramientas de desarrollo. La nueva pestaña de herramientas de desarrollador se puede usar para inspeccionar los diferentes elementos de React en la aplicación, junto con su estado y props:
+Es muy recomendable instalar la extensión [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) para Chrome. Agregará una nueva pestaña _Components_ a las herramientas de desarrollo. La nueva pestaña de herramientas de desarrollador se puede usar para inspeccionar los diferentes elementos de React en la aplicación, junto con su estado y props:
 
-![](../../images/1/10ea.png)
+![screenshot de herramientas de desarrollo de react](../../images/1/10ea.png)
 
 El estado del componente _App_ se define así:
 
@@ -555,7 +555,7 @@ const [allClicks, setAll] = useState([])
 
 Las herramientas de desarrollo muestran el estado de los hooks en el orden de su definición:
 
-![](../../images/1/11ea.png)
+![estado de hooks en react dev tools](../../images/1/11ea.png)
 
 El primer <i>State</i> contiene el valor del estado <i>left</i>, el siguiente contiene el valor del estado <i>right</i> y el último contiene el valor del estado <i>allClicks</i>.
 
@@ -594,9 +594,9 @@ const App = () => {
 }
 ```
 
-### Manejo de Eventos Revisado
+### Revision de los Controladores de Eventos
 
-El manejo de eventos ha demostrado ser un tema difícil en iteraciones anteriores de este curso.
+El control de eventos ha demostrado ser un tema difícil en iteraciones anteriores de este curso.
 
 Por esta razón volveremos a tratar el tema.
 
@@ -621,7 +621,7 @@ Para que el botón reaccione a un evento de clic, tenemos que agregarle un <i>co
 
 Los controladores de eventos siempre deben ser una función o una referencia a una función. El botón no funcionará si el controlador de eventos se establece en una variable de cualquier otro tipo.
 
-Si definiéramos el controlador de eventos como una cadena:
+Si definiéramos el controlador de eventos como un string:
 
 ```js
 <button onClick="crap...">button</button>
@@ -664,9 +664,9 @@ El controlador de eventos no es una función sino una asignación de variable, y
 </button>
 ```
 
-El mensaje se imprime en la consola una vez cuando se procesa el componente, pero no sucede nada cuando hacemos clic en el botón. ¿Por qué esto no funciona incluso cuando nuestro controlador de eventos contiene una función _console.log_?
+El mensaje se imprime en la consola una vez cuando se renderiza el componente, pero no sucede nada cuando hacemos clic en el botón. ¿Por qué esto no funciona incluso cuando nuestro controlador de eventos contiene una función _console.log_?
 
-El problema aquí es que nuestro controlador de eventos está definido como una <i>llamada a función</i>, lo que significa que al controlador de eventos se le asigna realmente el valor devuelto por la función, que en el caso de _console.log_ es <i>indefinido</i>.
+El problema aquí es que nuestro controlador de eventos está definido como una <i>llamada a una función</i>, lo que significa que al controlador de eventos se le asigna realmente el valor devuelto por la función, que en el caso de _console.log_ es <i>undefined</i>.
 
 La llamada a la función _console.log_ se ejecuta cuando se renderiza el componente y por esta razón se imprime una vez en la consola.
 
@@ -676,7 +676,7 @@ El siguiente intento también tiene fallas:
 <button onClick={setValue(0)}>button</button>
 ```
 
-Una vez más, hemos intentado establecer una llamada a una función como controlador de eventos. Esto no funciona. Este intento en particular también causa otro problema. Cuando se renderiza el componente, se ejecuta la función _setValue(0)_, lo que a su vez hace que el componente se vuelva a renderizar. La renderización a su vez llama a _setValue(0)_ de nuevo, lo que da como resultado una recursividad infinita.
+Una vez más, hemos intentado establecer una llamada a una función como controlador de eventos. Esto no funciona. Este intento en particular también causa otro problema. Cuando se renderiza el componente, se ejecuta la función _setValue(0)_, lo que a su vez hace que el componente se vuelva a renderizar. La renderización a su vez llama a _setValue(0)_ de nuevo, lo que da como resultado una recursion infinita.
 
 La ejecución de una llamada de función en particular cuando se hace clic en el botón se puede lograr así:
 
@@ -688,7 +688,7 @@ La ejecución de una llamada de función en particular cuando se hace clic en el
 
 Ahora el controlador de eventos es una función definida con la sintaxis de función de flecha _() => console.log('clicked the button')_. Cuando el componente se renderiza, no se llama a ninguna función y solo la referencia a la función de flecha se establece en el controlador de eventos. La llamada a la función ocurre solo una vez que se hace clic en el botón.
 
-Podemos implementar el restablecimiento del estado en nuestra aplicación con esta misma técnica:
+Podemos implementar el reseteo del estado en nuestra aplicación con esta misma técnica:
 
 ```js
 <button onClick={() => setValue(0)}>button</button>
@@ -716,7 +716,7 @@ const App = () => {
 }
 ```
 
-La variable _handleClick_ ahora está asignada a una referencia de de una función. La referencia se pasa al botón como el atributo <i>onClick</i>:
+La variable _handleClick_ ahora está asignada a una referencia de una función. La referencia se pasa al botón como el atributo <i>onClick</i>:
 
 ```js
 <button onClick={handleClick}>button</button>
@@ -748,7 +748,7 @@ const App = () => {
 
 Otra forma de definir un controlador de eventos es utilizar una <i>función que devuelve una función</i>.
 
-Probablemente no necesite utilizar funciones que devuelvan funciones en ninguno de los ejercicios de este curso. Si el tema parece particularmente confuso, puede omitir esta sección por ahora y volver a ella más tarde.
+Probablemente no necesites utilizar funciones que devuelvan funciones en ninguno de los ejercicios de este curso. Si el tema parece particularmente confuso, puedes omitir esta sección por ahora y volver a ella más tarde.
 
 Hagamos los siguientes cambios en nuestro código:
 
@@ -783,7 +783,7 @@ El controlador de eventos ahora está configurado para una llamada de función:
 
 Anteriormente dijimos que un controlador de eventos puede no ser una llamada a una función, y que tiene que ser una función o una referencia a una función. Entonces, ¿por qué funciona una llamada a función en este caso?
 
-Cuando se procesa el componente, se ejecuta la siguiente función:
+Cuando se renderiza el componente, se ejecuta la siguiente función:
 
 ```js
 const hello = () => {
@@ -876,7 +876,7 @@ Ambos botones tienen sus propios controladores de eventos individualizados.
 
 Las funciones que devuelven funciones se pueden utilizar para definir funciones genéricas que se pueden personalizar con parámetros. La función _hello_ que crea los controladores de eventos se puede considerar como una fábrica que produce controladores de eventos personalizados destinados a saludar a los usuarios.
 
-Nuestra definición actual es un poco detallada:
+Nuestra definición actual es un poco verbosa:
 
 ```js
 const hello = (who) => {
@@ -999,13 +999,13 @@ const App = () => {
 }
 ```
 
-Ahora podemos definir el controlador de eventos como una función que llama a la función _setToValue_ con un parámetro apropiado. El controlador de eventos para restablecer el estado de la aplicación sería:
+Ahora podemos definir el controlador de eventos como una función que llama a la función _setToValue_ con un parámetro apropiado. El controlador de eventos para resetear el estado de la aplicación sería:
 
 ```js
 <button onClick={() => setToValue(0)}>reset</button>
 ```
 
-Elegir entre las dos formas presentadas de definir sus controladores de eventos es sobre todo una cuestión de gustos.
+Elegir entre las dos formas presentadas de definir tus controladores de eventos es sobre todo una cuestión de gustos.
 
 ### Pasando controladores de eventos a componentes hijos
 
@@ -1035,7 +1035,7 @@ const App = (props) => {
 }
 ```
 
-Usar el componente <i>Button</i> es simple, aunque debemos asegurarnos de que usamos los nombres de atributos correctos al pasar accesorios al componente.
+Usar el componente <i>Button</i> es simple, aunque debemos asegurarnos de que usamos los nombres de atributos correctos al pasar props al componente.
 
 ![Captura de pantalla del uso correcto de los nombres de atributos](../../images/1/12e.png)
 
@@ -1061,7 +1061,7 @@ const App = () => {
     setValue(newValue)
   }
 
-  // No defina componentes adentro de otro componente
+  // No definas componentes adentro de otro componente
   const Display = props => <div>{props.value}</div> // highlight-line
 
   return (
@@ -1126,6 +1126,56 @@ Programar es difícil, por eso usaré todos los medios posibles para hacerlo má
 - Si mi código no funciona, no escribiré más código. En lugar de eso, empiezo a eliminar el código hasta que funcione o simplemente vuelvo a un estado en el que todo seguía funcionando.
 - Cuando pido ayuda en el canal de Discord o Telegram del curso o en otro lugar, formulo mis preguntas correctamente, consulta [aquí](http://fullstackopen.com/en/part0/general_info#how-to-get-help-in- discord-telegram) como pedir ayuda.
 
+### Utilización de grandes modelos de lenguaje (LLM)
+
+Modelos de lenguaje grandes como [ChatGPT](https://chat.openai.com/auth/login), [Claude](https://claude.ai/) y [GitHub Copilot](https://github.com/features/copilot) han demostrado ser muy útiles en el desarrollo de software.
+
+Personalmente, principalmente uso Copilot, el cual se integra a la perfección con VS Code gracias al [plugin](https://visualstudio.microsoft.com/github-copilot/).
+
+Copilot es útil en una amplia variedad de escenarios. A Copilot se le puede pedir que genere código para un archivo abierto describiendo la funcionalidad deseada en texto:
+
+![input de copilot en vscode](../../images/1/gpt1.png)
+
+Si el código parece bueno, Copilot lo añade al archivo:
+
+![código agregado por copilot](../../images/1/gpt2.png)
+
+En el caso de nuestro ejemplo, Copilot solo creó un botón, el controlador de eventos _handleResetClick_ no está definido.
+
+También se puede generar un controlador de eventos. Al escribir la primera línea de la función, Copilot ofrece la funcionalidad a generar:
+
+![sugerencia de código de copilot](../../images/1/gpt3.png)
+
+En la ventana de chat de Copilot, es posible pedir una explicación de la función del área de código seleccionada:
+
+![copilot explicando como funciona el código seleccionado en la ventana de chat](../../images/1/gpt4.png)
+
+Copilot también es útil en situaciones de error, copiando el mensaje de error en el chat de Copilot, obtendrás una explicación del problema y una solución sugerida:
+
+![copilot explicando el error y sugiriendo una solución](../../images/1/gpt5.png)
+
+El chat de Copilot también permite la creación de un conjunto más grande de funcionalidades
+
+![copilot creando un componente de login a demanda](../../images/1/gpt6.png)
+
+El grado de utilidad de las sugerencias proporcionadas por Copilot y otros modelos de lenguaje varía. Quizás el problema más grande con los modelos de lenguaje es la [alucinación](https://es.wikipedia.org/wiki/Alucinaci%C3%B3n_(inteligencia_artificial)), a veces generan respuestas que parecen completamente convincentes, pero que, sin embargo, son completamente incorrectas. Al programar, por supuesto, el código alucinado a menudo se detecta rápidamente si el código no funciona. Situaciones más problemáticas son aquellas donde el código generado por el modelo de lenguaje parece funcionar, pero contiene errores más difíciles de detectar o, por ejemplo, vulnerabilidades de seguridad.
+
+Otro problema al aplicar modelos de lenguaje al desarrollo de software es que es difícil para los modelos de lenguaje "entender" proyectos más grandes, y, por ejemplo, generar funcionalidad que requeriría cambios en varios archivos. Los modelos de lenguaje también son actualmente incapaces de generalizar código, es decir, si el código tiene, por ejemplo, funciones o componentes existentes que el modelo de lenguaje podría usar con cambios menores para la funcionalidad solicitada, el modelo de lenguaje no se adaptará a esto. El resultado de esto puede ser que la base de código se deteriore, ya que los modelos de lenguaje generan mucha repetición en el código, ver más por ejemplo [aquí](https://visualstudiomagazine.com/articles/2024/01/25/copilot-research.aspx).
+
+Al usar modelos de lenguaje, la responsabilidad siempre queda con el programador.
+
+El rápido desarrollo de los modelos de lenguaje pone al estudiante de programación en una posición desafiante: ¿vale la pena y es incluso necesario aprender a programar a un nivel detallado, cuando casi todo se puede obtener ya hecho de los modelos de lenguaje?
+
+En este punto, vale la pena recordar la antigua sabiduría de [Brian Kernighan](https://es.wikipedia.org/wiki/Brian_Kernighan), el desarrollador del lenguaje de programación C:
+
+![Todo el mundo sabe que depurar es dos veces más difícil que escribir un programa en primer lugar. Entonces, si eres tan inteligente como puedes ser cuando lo escribes, ¿cómo podrás depurarlo? - Brian Kernighan](../../images/1/kerningham.png)
+
+En otras palabras, dado que depurar es dos veces más difícil que programar, no vale la pena programar tal código que apenas puedes entender. ¿Cómo puede ser posible la depuración en una situación donde la programación se externaliza a un modelo de lenguaje y el desarrollador de software no entiende el código depurado en absoluto?
+
+Hasta ahora, el desarrollo de modelos de lenguaje e inteligencia artificial aún está en una etapa donde no son autosuficientes, y los problemas más difíciles quedan para que los humanos los resuelvan. Por esto, incluso los desarrolladores de software novatos deben aprender a programar realmente bien por si acaso. Puede ser que, a pesar del desarrollo de modelos de lenguaje, se necesite aún más conocimiento en profundidad. La inteligencia artificial hace las cosas fáciles, pero se necesita un humano para resolver los líos más complicados causados por la IA. GitHub Copilot es un producto muy bien nombrado, es Copilot, un segundo piloto que ayuda al piloto principal en una aeronave. El programador sigue siendo el piloto principal, el capitán y lleva la máxima responsabilidad.
+
+Puede ser de tu interés que desactives Copilot por defecto cuando hagas este curso y confíes en él solo en una emergencia real.
+
 </div>
 
 <div class="tasks">
@@ -1148,7 +1198,7 @@ Si y <i>cuándo</i> encuentras un mensaje de error
 
 > <i>Los objetos no son válidos como hijos de React</i>
 
-ten en cuenta las cosas que se cuentan [aquí](/en/part1/introduction_to_react#do-not-render-objects).
+ten en cuenta las cosas que se cuentan [aquí](/es/part1/introduccion_a_react#no-renderizar-objetos).
 
   <h4>1.6: unicafe, paso 1</h4>
 
@@ -1215,7 +1265,7 @@ const App = () => {
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
-  // no defina componentes adentro de otro componente
+  // no definas componentes adentro de otro componente
   const Statistics = (props) => {
     // ...
   }
@@ -1261,7 +1311,7 @@ El estado de la aplicación aún debe mantenerse en el componente raíz <i>App</
 
 <h4>1.11*: unicafe, paso 6</h4>
 
-Muestra las estadísticas en una [tabla](https://developer.mozilla.org/es/docs/Learn/HTML/Tables/Basics) HTML, de modo que tu la aplicación se ve más o menos así:
+Muestra las estadísticas en una [tabla](https://developer.mozilla.org/es/docs/Learn/HTML/Tables/Basics) HTML, de modo que tu aplicación se vea más o menos así:
 
 ![Captura de pantalla de la tabla de estadísticas](../../images/1/16e.png)
 
@@ -1271,7 +1321,7 @@ Recuerda mantener la consola abierta en todo momento. Si ves esta advertencia en
 
 Entonces realiza las acciones necesarias para que la advertencia desaparezca. Intenta buscar en Google el mensaje de error si te quedas atascado.
 
-<i>Una fuente típica de un error `Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.` es la extensión de Chrome. Intenta ir a _chrome://extensions_ y deshabilitarlos uno por uno y luego actualizar la página de la aplicación React; el error debería desaparecer eventualmente.</i>
+<i>Una fuente típica de un error `Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.` es la extensión de Chrome. Intenta ir a _chrome://extensions_ y deshabilitarlas una por una y luego actualizar la página de la aplicación React; el error debería desaparecer eventualmente.</i>
 
 **¡Asegúrate de que a partir de ahora no veas ninguna advertencia en tu consola!**
 
@@ -1322,7 +1372,7 @@ Expande tu aplicación para que puedas votar por la anécdota mostrada.
 
 ![Aplicación de anécdotas con un botón para votar](../../images/1/19a.png)
 
-**Nota:** almacena los votos de cada anécdota en una matriz u objeto en el estado del componente. Recuerda que la forma correcta de actualizar el estado almacenado en estructuras de datos complejas como objetos y matrices es hacer una copia del estado.
+**Nota:** almacena los votos de cada anécdota en un array u objeto en el estado del componente. Recuerda que la forma correcta de actualizar el estado almacenado en estructuras de datos complejas como objetos y arrays es hacer una copia del estado.
 
 Puedes crear una copia de un objeto de esta forma:
 
@@ -1334,7 +1384,7 @@ const copy = { ...points }
 copy[2] += 1
 ```
 
-O una copia de una matriz de esta forma:
+O una copia de un array de esta forma:
 
 ```js
 const points = [1, 4, 6, 3]
@@ -1344,7 +1394,7 @@ const copy = [...points]
 copy[2] += 1
 ```
 
-El uso de una matriz podría ser la opción más sencilla en este caso. Buscar en internet te proporcionará muchos consejos sobre cómo [crear una matriz llena de ceros de la longitud deseada](https://stackoverflow.com/questions/20222501/how-to-create-a-zero-filled-javascript-array-of-arbitrary-length/22209781).
+El uso de un array podría ser la opción más sencilla en este caso. Buscar en internet te proporcionará muchos consejos sobre cómo [crear un array lleno de ceros de la longitud deseada](https://stackoverflow.com/questions/20222501/how-to-create-a-zero-filled-javascript-array-of-arbitrary-length/22209781).
 
 <h4>1.14*: anecdotes, paso 3</h4>
 
@@ -1352,7 +1402,7 @@ Ahora implementa la versión final de la aplicación que muestra la anécdota co
 
 ![Anécdota con la mayor cantidad de votos](../../images/1/20a.png)
 
-Si se empatan varias anécdotas en el primer lugar, es suficiente con solo mostrar una de ellas.
+Si varias anécdotas empatan en el primer lugar, es suficiente con solo mostrar una de ellas.
 
 Este fue el último ejercicio de esta parte del curso y es hora de enviar tu código a GitHub y marcar todos tus ejercicios terminados en el [sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
