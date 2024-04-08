@@ -85,7 +85,7 @@ Cuando falla la validación de un objeto, devolvemos el siguiente mensaje de err
 ![postman mostrando mensaje de error](../../images/3/50.png)
 
 Notamos que el backend ahora tiene un problema: las validaciones no se realizan al editar una nota.
-La [documentación](https://github.com/blakehaswell/mongoose-unique-validator#find--updates) aborda el problema explicando que las validaciones no se ejecutan por defecto cuando se utilizan los métodos <i>findOneAndUpdate</i> y métodos relacionados.
+La [documentación](https://mongoosejs.com/docs/validation.html#update-validators) aborda el problema explicando que las validaciones no se ejecutan por defecto cuando se utilizan los métodos <i>findOneAndUpdate</i> y métodos relacionados.
 
 La solución es sencilla. También reformulemos un poco el código de la ruta:
 
@@ -132,6 +132,10 @@ También es vital seguir continuamente los registros del servidor. El problema s
 ![registro del servidor fly.io mostrando conexión a undefined](../../images/3/fly-problem3.png)
 
 La URL de la base de datos era _undefined_, por lo que el comando *fly secrets set MONGODB\_URI* no fue utilizado.
+
+También necesitarás agregar a la whitelist (lista blanca) la dirección IP de la aplicación de fly.io en MongoDB Atlas. Si no lo haces, MongoDB rechazará la conexión.
+
+Lamentablemente, fly.io no te proporciona una dirección IPv4 dedicada para tu aplicación, por lo que necesitarás permitir todas las direcciones IP en MongoDB Atlas.
 
 Cuando se utiliza Render, la URL de la base de datos se proporciona definiendo la variable de entorno adecuada en el panel de control:
 
@@ -226,56 +230,81 @@ Responderemos todas las preguntas:
 
 ![salida del terminal de ESlint init](../../images/3/52new.png)
 
-La configuración se guardará en el archivo _.eslintrc.js_:
+La configuración se guardará en el archivo _.eslintrc.js_. Cambiaremos _browser_ a _node_ en la configuración de _env_:
 
 ```js
 module.exports = {
-    'env': {
-        'commonjs': true,
-        'es2021': true,
-        'node': true // highlight-line
+    "env": {
+        "commonjs": true,
+        "es2021": true,
+        "node": true // highlight-line
     },
-    'extends': 'eslint:recommended',
-    'parserOptions': {
-        'ecmaVersion': 'latest'
+    "overrides": [
+        {
+            "env": {
+                "node": true
+            },
+            "files": [
+                ".eslintrc.{js,cjs}"
+            ],
+            "parserOptions": {
+                "sourceType": "script"
+            }
+        }
+    ],
+    "parserOptions": {
+        "ecmaVersion": "latest"
     },
-    'rules': {
-        'indent': [
-            'error',
-            4
-        ],
-        'linebreak-style': [
-            'error',
-            'unix'
-        ],
-        'quotes': [
-            'error',
-            'single'
-        ],
-        'semi': [
-            'error',
-            'never'
-        ]
+    "rules": {
     }
 }
 ```
 
-Cambiemos inmediatamente la regla relativa a la indentación, de modo que el nivel de indentación sea de dos espacios.
+Cambiemos un poco la configuración. Instala un [plugin](https://eslint.style/packages/js) que define un conjunto de reglas relacionadas al estilo:
 
-```js
-"indent": [
-    "error",
-    2
-],
+```
+npm install --save-dev @stylistic/eslint-plugin-js
 ```
 
-Se puede inspeccionar y validar un archivo como _index.js_ con el siguiente comando:
+Habilita el plugin y agrega una definición de "extends" y cuatro reglas de estilo:
+
+```js
+module.exports = {
+    // ...
+    'plugins': [
+        '@stylistic/js'
+    ],
+    'extends': 'eslint:recommended',
+    'rules': {
+        '@stylistic/js/indent': [
+            'error',
+            2
+        ],
+        '@stylistic/js/linebreak-style': [
+            'error',
+            'unix'
+        ],
+        '@stylistic/js/quotes': [
+            'error',
+            'single'
+        ],
+        '@stylistic/js/semi': [
+            'error',
+            'never'
+        ],
+    }
+}
+```
+
+Extends _eslint:recommended_ añade un [conjunto](https://eslint.org/docs/latest/rules/) de reglas recomendadas al proyecto. Además, se han añadido reglas para la indentación, saltos de línea, guiones y puntos y comas. Estas cuatro reglas están todas definidas en el [plugin de estilos de Eslint](https://eslint.style/packages/js).
+
+Inspeccionar y validar un archivo como _index.js_ se puede hacer con el siguiente comando:
 
 ```bash
 npx eslint index.js
 ```
 
-Se recomienda crear un _script npm_ separado para linting:
+Es recomendable crear un _script npm_ separado para linting:
 
 ```json
 {
@@ -388,7 +417,6 @@ Puedes encontrar el código para nuestra aplicación actual en su totalidad en l
 </div>
 
 <div class="tasks">
-
 
 ### Ejercicio 3.22.
 

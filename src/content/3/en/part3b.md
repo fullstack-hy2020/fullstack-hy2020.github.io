@@ -282,7 +282,7 @@ The backend directory should now look as follows:
 
 ![bash screenshot of ls showing dist directory](../../images/3/27v.png)
 
-To make express show <i>static content</i>, the page <i>index.html</i> and the JavaScript, etc., it fetches, we need a built-in middleware from Express called [static](http://expressjs.com/en/starter/static-files.html).
+To make Express show <i>static content</i>, the page <i>index.html</i> and the JavaScript, etc., it fetches, we need a built-in middleware from Express called [static](http://expressjs.com/en/starter/static-files.html).
 
 When we add the following amidst the declarations of middlewares
 
@@ -290,7 +290,7 @@ When we add the following amidst the declarations of middlewares
 app.use(express.static('dist'))
 ```
 
-whenever express gets an HTTP GET request it will first check if the <i>dist</i> directory contains a file corresponding to the request's address. If a correct file is found, express will return it.
+whenever Express gets an HTTP GET request it will first check if the <i>dist</i> directory contains a file corresponding to the request's address. If a correct file is found, Express will return it.
 
 Now HTTP GET requests to the address <i>www.serversaddress.com/index.html</i> or <i>www.serversaddress.com</i> will show the React frontend. GET requests to the address <i>www.serversaddress.com/api/notes</i> will be handled by the backend code.
 
