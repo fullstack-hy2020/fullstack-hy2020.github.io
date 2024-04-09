@@ -57,7 +57,7 @@ it is quite likely that nobody will respond. The bug can be *anywhere*.
 
 A better question could be
 
-> * In exercise 2.15 when I try to add a new person to the app, the server responds to 403, despite the request looking ok to me.
+> * In exercise 2.15 when I try to add a new person to the app, the server responds with a 403, despite the request looking ok to me.
 >
 > The code looks like this
 >
@@ -306,7 +306,7 @@ If you have trouble finding your student number through the means listed above, 
 
 In your email, include the following information
 
-- the name of the course you have enrolled in,
+- the name of the course that you have enrolled in,
 - your name
 - your date of birth.
 
@@ -344,7 +344,7 @@ Recent major changes
 - Parts 3-5 (February-March 2024): Libraries used for testing changed
 - Part 10 (February 26, 2024): Library versions updated
 - Part 11 (16th January 2024): Example project dependencies updated
-- Parts 1-2, 6-9 (11th September - 5th October): Create React app replaced with Vite
+- Parts 1-2, 5-9 (11th September - 5th October): Create React app replaced with Vite
 
 ### Expanding on a previously completed course
 

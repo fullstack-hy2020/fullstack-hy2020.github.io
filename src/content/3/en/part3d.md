@@ -230,7 +230,7 @@ We will answer all of the questions:
 
 ![terminal output from ESlint init](../../images/3/52new.png)
 
-The configuration will be saved in the _.eslintrc.js_ file.  We will change _browser_ to _node_ in the _env_ configuration:
+The configuration will be saved in the _.eslintrc.js_ file. We will change _browser_ to _node_ in the _env_ configuration:
 
 ```js
 module.exports = {
@@ -266,7 +266,7 @@ Let's change the configuration a bit. Install a [plugin](https://eslint.style/pa
 npm install --save-dev @stylistic/eslint-plugin-js
 ```
 
-Enable the plugin and add an extends definiton and four code style rules:
+Enable the plugin and add an "extends" definition and four code style rules:
 
 ```js
 module.exports = {

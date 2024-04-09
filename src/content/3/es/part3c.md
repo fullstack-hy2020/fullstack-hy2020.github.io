@@ -71,7 +71,7 @@ Cuando ocurren errores, <i>la peor de todas las estrategias posibles</i> es cont
 
 ### MongoDB
 
-Para almacenar nuestras notas guardadas indefinidamente, necesitamos una base de datos. La mayoría de los cursos que se imparten en la Universidad de Helsinki utilizan bases de datos relacionales. En este curso usaremos [MongoDB](https://www.mongodb.com/), que es la denominada [base de datos de documentos](https://es.wikipedia.org/wiki/Base_de_datos_documental).
+Para almacenar nuestras notas guardadas indefinidamente, necesitamos una base de datos. La mayoría de los cursos que se imparten en la Universidad de Helsinki utilizan bases de datos relacionales. En este curso usaremos [MongoDB](https://www.mongodb.com/), que es una [base de datos de documentos](https://es.wikipedia.org/wiki/Base_de_datos_documental).
 
 La razón para usar Mongo como la base de datos es su menor complejidad en comparación con una base de datos relacional. [La parte 13](/es/part13) del curso muestra cómo construir backends de Node.js que utilizan una base de datos relacional.
 
@@ -149,6 +149,7 @@ const url =
   `mongodb+srv://fullstack:${password}@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority`
 
 mongoose.set('strictQuery',false)
+
 mongoose.connect(url)
 
 const noteSchema = new mongoose.Schema({
@@ -159,7 +160,7 @@ const noteSchema = new mongoose.Schema({
 const Note = mongoose.model('Note', noteSchema)
 
 const note = new Note({
-  content: 'HTML is Easy',
+  content: 'HTML is easy',
   important: true,
 })
 
@@ -234,7 +235,7 @@ const note = new Note({
 })
 ```
 
-Los modelos son las llamadas <i>funciones constructoras</i> que crean nuevos objetos JavaScript basados ​​en los parámetros proporcionados. Dado que los objetos se crean con la función constructora del modelo, tienen todas las propiedades del modelo, que incluyen métodos para guardar el objeto en la base de datos.
+Los modelos son <i>funciones constructoras</i> que crean nuevos objetos JavaScript basados ​​en los parámetros proporcionados. Dado que los objetos se crean con la función constructora del modelo, tienen todas las propiedades del modelo, que incluyen métodos para guardar el objeto en la base de datos.
 
 Guardar el objeto en la base de datos ocurre con el método _save_, que se puede proporcionar con un controlador de eventos con el método _then_:
 
@@ -434,7 +435,7 @@ app.get('/api/notes', (request, response) => {
 
 El código utiliza automáticamente el _toJSON_ definido al formatear las notas para la respuesta.
 
-### Configuración de la base de datos en su propio módulo
+### Moviendo la configuración de la base de datos a su propio módulo
 
 Antes de refactorizar el resto del backend para usar la base de datos, extraigamos el código específico de Mongoose en su propio módulo.
 
@@ -454,7 +455,7 @@ mongoose.connect(url)
   .then(result => {
     console.log('connected to MongoDB')
   })
-  .catch((error) => {
+  .catch(error => {
     console.log('error connecting to MongoDB:', error.message)
   })
 // highlight-end
@@ -498,7 +499,7 @@ mongoose.connect(url)
   .then(result => {
     console.log('connected to MongoDB')
   })
-  .catch((error) => {
+  .catch(error => {
     console.log('error connecting to MongoDB:', error.message)
   })
 ```
@@ -576,6 +577,8 @@ Al utilizar Render, la URL de la base de datos se proporciona definiendo la vari
 
 ![navegador mostrando variables de entorno de Render](../../images/3/render-env.png)
 
+Solo establece a la URL comenzando con <i>mongodb+srv://...</i> al campo _value_.
+
 ### Usando la base de datos en los controladores de ruta
 
 A continuación, cambiemos el resto de la funcionalidad del backend para usar la base de datos.
@@ -647,7 +650,7 @@ Cambia la búsqueda de todas las entradas de la agenda telefónica para que los 
 
 Verifica que el frontend funcione después de que se hayan realizado los cambios.
 
-En los siguientes ejercicios, escribe todo el código específico de Mongoose en su propio módulo, como hicimos en el capítulo [Configuración de la base de datos en su propio módulo](/es/part3/guardando_datos_en_mongo_db#configuracion-de-la-base-de-datos-en-su-propio-modulo).
+En los siguientes ejercicios, escribe todo el código específico de Mongoose en su propio módulo, como hicimos en el capítulo [Configuración de la base de datos en su propio módulo](/es/part3/guardando_datos_en_mongo_db#moviendo-la-configuracion-de-la-base-de-datos-a-su-propio-modulo).
 
 #### 3.14: Base de datos de la Agenda Telefónica, paso 2
 
@@ -688,7 +691,7 @@ app.get('/api/notes/:id', (request, response) => {
 
 Si no se encuentra ningún objeto coincidente en la base de datos, el valor de _note_ será _null_ y se ejecutará el bloque _else_. Esto da como resultado una respuesta con el código de estado <i>404 not found</i>. Si se rechaza la promesa retornada por el método <em>findById</em>, la respuesta tendrá el código de estado <i>500 internal server error</i>. La consola muestra información más detallada sobre el error.
 
-Además de la nota que no existe, hay una situación de error más que debe manejarse. En esta situación, estamos intentando obtener una nota con un tipo de _id_ incorrecto , es decir, un _id_ que no coincide con el formato del identificador de mongo.
+Además de la nota que no existe, hay una situación de error más que debe manejarse. En esta situación, estamos intentando obtener una nota con un tipo de _id_ incorrecto , es decir, un _id_ que no coincide con el formato del identificador de Mongo.
 
 Si realizamos la siguiente solicitud, obtendremos el mensaje de error que se muestra a continuación:
 
@@ -767,7 +770,7 @@ app.get('/api/notes/:id', (request, response, next) => { // highlight-line
 })
 ```
 
-El error que se pasa hacia adelante es dado a la función <em>next</em> como parámetro. Si se llamó a next sin un parámetro, entonces la ejecución simplemente pasaría a la siguiente ruta o middleware. Si se llama a la función <em>next</em> con un parámetro, la ejecución continuará en el <i>middleware del controlador de errores</i>.
+El error que se pasa hacia adelante es dado a la función <em>next</em> como parámetro. Si se llamó a next sin un argumento, entonces la ejecución simplemente pasaría a la siguiente ruta o middleware. Si se llama a la función <em>next</em> con un argumento, la ejecución continuará en el <i>middleware del controlador de errores</i>.
 
 Los [controladores de errores](https://expressjs.com/en/guide/error-handling.html) de Express son middleware que se definen con una función que acepta <i>cuatro parámetros</i>. Nuestro controlador de errores se ve así:
 
@@ -782,17 +785,17 @@ const errorHandler = (error, request, response, next) => {
   next(error)
 }
 
-// este debe ser el último middleware cargado
+// este debe ser el último middleware cargado, ¡también todas las rutas deben ser registrada antes que esto!
 app.use(errorHandler)
 ```
 
 El controlador de errores comprueba si el error es una excepción <i>CastError</i>, en cuyo caso sabemos que el error fue causado por un ID de objeto no válido para Mongo. En esta situación, el controlador de errores enviará una respuesta al navegador con el objeto de respuesta pasado como parámetro. En todas las demás situaciones de error, el middleware pasa el error al controlador de errores Express predeterminado.
 
-¡Ten en cuenta que el middleware de manejo de errores debe ser el último middleware cargado!
+Ten en cuenta que el middleware de manejo de errores debe ser el último middleware cargado, también todas las rutas deben registrarse antes que el error-handler!
 
 ### El orden de carga del middleware
 
-El orden de ejecución del middleware es el mismo que el orden en el que se cargan en express con la función _app.use_. Por esta razón, es importante tener cuidado al definir el middleware.
+El orden de ejecución del middleware es el mismo que el orden en el que se cargan en Express con la función _app.use_. Por esta razón, es importante tener cuidado al definir el middleware.
 
 El orden correcto es el siguiente:
 
@@ -895,7 +898,7 @@ app.put('/api/notes/:id', (request, response, next) => {
 
 En el código anterior, también permitimos que se edite el contenido de la nota.
 
-Observa que el método <em>findByIdAndUpdate</em> recibe un objeto JavaScript normal como parámetro, y no un nuevo objeto de nota creado con la función constructora <em>Note</em>.
+Observa que el método <em>findByIdAndUpdate</em> recibe un objeto JavaScript normal como argumento, y no un nuevo objeto de nota creado con la función constructora <em>Note</em>.
 
 Hay un detalle importante con respecto al uso del método <em>findByIdAndUpdate</em>. De forma predeterminada, el parámetro <em>updatedNote</em> del controlador de eventos recibe el documento original [sin las modificaciones](https://mongoosejs.com/docs/api/model.html#model_Model-findByIdAndUpdate). Agregamos el parámetro opcional <code>{ new: true }</code>, que hará que nuestro controlador de eventos sea llamado con el nuevo documento modificado en lugar del original.
 

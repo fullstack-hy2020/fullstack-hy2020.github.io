@@ -11,7 +11,7 @@ En esta parte, nuestro enfoque se desplaza hacia el backend: es decir, hacia la 
 
 Construiremos nuestro backend sobre [NodeJS](https://nodejs.org/en/), que es un entorno de ejecución basado en JavaScript y en el motor [Chrome V8](https://developers.google.com/v8/) de Google.
 
-Este material del curso fue escrito con la versión <i>v18.13.0</i> de Node.js. Asegúrate de que tu versión de Node sea al menos tan nueva como la versión utilizada en el material (puedes verificar la versión ejecutando _node -v_ en la línea de comando).
+Este material del curso fue escrito con la versión <i>v20.11.0</i> de Node.js. Asegúrate de que tu versión de Node sea al menos tan nueva como la versión utilizada en el material (puedes verificar la versión ejecutando _node -v_ en la línea de comando).
 
 Como se mencionó en la [parte 1](/es/part1/java_script), los navegadores aún no son compatibles con las funciones más nuevas de JavaScript, y es por eso que el código que se ejecuta en el navegador debe <i>transpilarse</i> con, por ejemplo, [babel](https://babeljs.io/). La situación con JavaScript ejecutándose en el backend es diferente. La versión más reciente de Node es compatible con la gran mayoría de las funciones más recientes de JavaScript, por lo que podemos usar las funciones más recientes sin tener que transpilar nuestro código.
 
@@ -39,7 +39,7 @@ Naveguemos a un directorio apropiado y creemos una nueva plantilla para nuestra 
 
 El archivo define, por ejemplo, que el punto de entrada de la aplicación es el archivo <i>index.js</i>.
 
-Hagamos un pequeño cambio en el objeto <i>scripts</i>:
+Hagamos un pequeño cambio en el objeto <i>scripts</i> agregando un nuevo comando de script:
 
 ```bash
 {
@@ -120,7 +120,7 @@ Podemos abrir nuestra humilde aplicación en el navegador visitando la direcció
 
 De hecho, el servidor funciona de la misma manera independientemente de la última parte de la URL. Además, la dirección <http://localhost:3001/foo/bar> mostrará el mismo contenido.
 
-**NB** si el puerto 3001 ya está siendo utilizado por alguna otra aplicación, al iniciar el servidor aparecerá el siguiente mensaje de error:
+**NB** Si el puerto 3001 ya está siendo utilizado por alguna otra aplicación, al iniciar el servidor aparecerá el siguiente mensaje de error:
 
 ```bash
 ➜  hello npm start
@@ -138,7 +138,7 @@ Error: listen EADDRINUSE :::3001
     at listenInCluster (net.js:1378:12)
 ```
 
-Tienes dos opciones. Apaga la aplicación usando el puerto 3001 (el json-server en la última parte del material estaba usando el puerto 3001), o usa un puerto diferente para esta aplicación.
+Tienes dos opciones. Apaga la aplicación usando el puerto 3001 (el JSON Server en la última parte del material estaba usando el puerto 3001), o usa un puerto diferente para esta aplicación.
 
 Echemos un vistazo más de cerca a la primera línea del código:
 
@@ -154,7 +154,7 @@ import http from 'http'
 
 En estos días, el código que se ejecuta en el navegador utiliza módulos ES6. Los módulos se definen con un [export](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Statements/export) y se utilizan con un [import](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Statements/import).
 
-Sin embargo, Node.js usa los llamados módulos [CommonJS](https://es.wikipedia.org/wiki/CommonJS). La razón de esto es que el ecosistema de Node necesitaba módulos mucho antes de que JavaScript los admitiera en la especificación del lenguaje. Node ahora es compatible con los módulos ES6, pero ya que la compatibilidad aún [no es del todo perfecta](https://nodejs.org/api/esm.html#modules-ecmascript-modules) continuaremos con módulos CommonJS.
+Node.js usa módulos [CommonJS](https://es.wikipedia.org/wiki/CommonJS). La razón de esto es que el ecosistema de Node necesitaba módulos mucho antes de que JavaScript los admitiera en la especificación del lenguaje. Actualmente, Node es compatible con los módulos ES6, pero ya que la compatibilidad aún no es del todo perfecta continuaremos con módulos CommonJS.
 
 Los módulos de CommonJS funcionan casi exactamente como los módulos de ES6, al menos en lo que respecta a nuestras necesidades en este curso.
 
@@ -216,7 +216,7 @@ console.log(`Server running on port ${PORT}`)
 
 Reiniciemos el servidor (puedes apagar el servidor presionando _Ctrl+C_ en la consola) y refresquemos el navegador.
 
-El valor <i>application/json</i> en el cabecera <i>Content-Type</i> informa al receptor que los datos están en formato JSON. El array _notes_ se transforma en JSON con el método <em>JSON.stringify(notes)</em>.
+El valor <i>application/json</i> en la cabecera <i>Content-Type</i> informa al receptor que los datos están en formato JSON. El array _notes_ se transforma en un string con formato JSON con el método <em>JSON.stringify(notes)</em>. Esto es necesario ya que el metodo response.end() espera un string o un buffer para enviar como el cuerpo de la respuesta.
 
 Cuando abrimos el navegador, el formato que se muestra es exactamente el mismo que en la [parte 2](/es/part2/obteniendo_datos_del_servidor), donde usamos [json-server](https://github.com/typicode/json-server) para servir la lista de notas:
 
@@ -226,9 +226,9 @@ Cuando abrimos el navegador, el formato que se muestra es exactamente el mismo q
 
 Es posible implementar nuestro código de servidor directamente con el servidor web [http](https://nodejs.org/docs/latest-v18.x/api/http.html) integrado de Node. Sin embargo, es engorroso, especialmente una vez que la aplicación aumenta de tamaño.
 
-Se han desarrollado muchas librerías para facilitar el desarrollo del lado del servidor con Node, al ofrecer una interfaz más agradable para trabajar con el módulo http integrado. Estas librerías tienen como objetivo proporcionar una mejor abstracción para los casos de uso general que generalmente requerimos para construir un servidor backend. Por lejos, la librería más popular destinada a este propósito es [express](http://expressjs.com).
+Se han desarrollado muchas librerías para facilitar el desarrollo del lado del servidor con Node, al ofrecer una interfaz más agradable para trabajar con el módulo http integrado. Estas librerías tienen como objetivo proporcionar una mejor abstracción para los casos de uso general que generalmente requerimos para construir un servidor backend. Por lejos, la librería más popular destinada a este propósito es [Express](http://expressjs.com).
 
-Usemos express definiéndolo como una dependencia del proyecto con el comando:
+Usemos Express definiéndolo como una dependencia del proyecto con el comando:
 
 ```bash
 npm install express
@@ -245,13 +245,13 @@ La dependencia también se agrega a nuestro archivo <i>package.json</i>:
 }
 ```
 
-El código fuente de la dependencia se instala en el directorio <i>node\_modules</i> ubicado en la raíz del proyecto. Además de express, puedes encontrar una gran cantidad de otras dependencias en el directorio:
+El código fuente de la dependencia se instala en el directorio <i>node\_modules</i> ubicado en la raíz del proyecto. Además de Express, puedes encontrar una gran cantidad de otras dependencias en el directorio:
 
 ![comando ls listando las dependencias en directorio](../../images/3/4.png)
 
-Estas son, de hecho, las dependencias de la librería express y las dependencias de todas sus dependencias, etc. Estas son las [dependencias transitivas](https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/) de nuestro proyecto.
+Estas son, de hecho, las dependencias de la librería Express y las dependencias de todas sus dependencias, etc. Estas son las [dependencias transitivas](https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/) de nuestro proyecto.
 
-La versión 4.18.2 de express se instaló en nuestro proyecto. ¿Qué significa el signo de intercalación delante del número de versión en <i>package.json</i>?
+La versión 4.18.2 de Express se instaló en nuestro proyecto. ¿Qué significa el signo de intercalación delante del número de versión en <i>package.json</i>?
 
 ```json
 "express": "^4.18.2"
@@ -259,7 +259,7 @@ La versión 4.18.2 de express se instaló en nuestro proyecto. ¿Qué significa 
 
 El modelo de control de versiones utilizado en npm se denomina control de [versiones semántico](https://docs.npmjs.com/about-semantic-versioning).
 
-El signo de intercalación al frente de <i>^4.18.2</i> significa que si y cuando se actualizan las dependencias de un proyecto, la versión de express que se instala será al menos <i>4.18.2</i>. Sin embargo, la versión instalada de express también puede ser una que tenga un número de <i>parche</i> más grande (el último número) o un número <i>menor</i> más grande (el número del medio). La versión principal de la librería indicada por el primer número <i>mayor</i> debe ser la misma.
+El signo de intercalación al frente de <i>^4.18.2</i> significa que si y cuando se actualizan las dependencias de un proyecto, la versión de Express que se instala será al menos <i>4.18.2</i>. Sin embargo, la versión instalada de Express también puede ser una que tenga un número de <i>parche</i> más grande (el último número) o un número <i>menor</i> más grande (el número del medio). La versión principal de la librería indicada por el primer número <i>mayor</i> debe ser la misma.
 
 Podemos actualizar las dependencias del proyecto con el comando:
 
@@ -273,9 +273,9 @@ Asimismo, si empezamos a trabajar en el proyecto en otra computadora, podemos in
 npm install
 ```
 
-Si el número <i>mayor</i> de una dependencia no cambia, las versiones más nuevas deberían ser [compatibles con versiones anteriores](https://es.wikipedia.org/wiki/Retrocompatibilidad). Esto significa que si nuestra aplicación usara la versión 4.99.175 de express en el futuro, entonces todo el código implementado en esta parte aún tendría que funcionar sin realizar cambios en el código. Por el contrario, la futura versión 5.0.0. de express [puede contener](https://expressjs.com/en/guide/migrating-5.html) cambios que provocarían que nuestra aplicación dejara de funcionar.
+Si el número <i>mayor</i> de una dependencia no cambia, las versiones más nuevas deberían ser [compatibles con versiones anteriores](https://es.wikipedia.org/wiki/Retrocompatibilidad). Esto significa que si nuestra aplicación usara la versión 4.99.175 de Express en el futuro, entonces todo el código implementado en esta parte aún tendría que funcionar sin realizar cambios en el código. Por el contrario, la futura versión 5.0.0. de Express [puede contener](https://expressjs.com/en/guide/migrating-5.html) cambios que provocarían que nuestra aplicación dejara de funcionar.
 
-### Web y express
+### Web y Express
 
 Volvamos a nuestra aplicación y realicemos los siguientes cambios:
 
@@ -303,7 +303,7 @@ app.listen(PORT, () => {
 
 Para poder utilizar la nueva versión de nuestra aplicación, primero tenemos que reiniciarla.
 
-La aplicación no cambió mucho. Justo al comienzo de nuestro código estamos importando _express_, que esta vez es una <i>función</i> que se usa para crear una aplicación express almacenada en la variable _app_:
+La aplicación no cambió mucho. Justo al comienzo de nuestro código estamos importando _express_, que esta vez es una <i>función</i> que se usa para crear una aplicación Express almacenada en la variable _app_:
 
 ```js
 const express = require('express')
@@ -320,7 +320,7 @@ app.get('/', (request, response) => {
 
 La función del controlador de eventos acepta dos parámetros. El primer parámetro [request](http://expressjs.com/en/4x/api.html#req) contiene toda la información de la solicitud HTTP y el segundo parámetro [response](http://expressjs.com/en/4x/api.html#res) se utiliza para definir cómo se responde a la solicitud.
 
-En nuestro código, la solicitud se responde utilizando el método [send](http://expressjs.com/en/4x/api.html#res.send) del objeto _response_. Llamar al método hace que el servidor responda a la solicitud HTTP enviando una respuesta que contiene el string <code>\<h1>Hello World!\</h1></code>, que se pasó al método _send_. Dado que el parámetro es un string, express establece automáticamente el valor de la cabecera <i>Content-Type</i> en <i>text/html</i>. El código de estado de la respuesta predeterminado es 200.
+En nuestro código, la solicitud se responde utilizando el método [send](http://expressjs.com/en/4x/api.html#res.send) del objeto _response_. Llamar al método hace que el servidor responda a la solicitud HTTP enviando una respuesta que contiene el string <code>\<h1>Hello World!\</h1></code>, que se pasó al método _send_. Dado que el parámetro es un string, Express establece automáticamente el valor de la cabecera <i>Content-Type</i> en <i>text/html</i>. El código de estado de la respuesta predeterminado es 200.
 
 Podemos verificar esto desde la pestaña <i>Network</i> en las herramientas para desarrolladores:
 
@@ -340,13 +340,13 @@ La solicitud se responde con el método [json](http://expressjs.com/en/4x/api.ht
 
 A continuación, echemos un vistazo rápido a los datos enviados en formato JSON.
 
-En la versión anterior donde solo usábamos Node, teníamos que transformar los datos al formato JSON con el método _JSON.stringify_:
+En la versión anterior donde solo usábamos Node, teníamos que transformar los datos a un string conf formato JSON con el método _JSON.stringify_:
 
 ```js
 response.end(JSON.stringify(notes))
 ```
 
-Con express, esto ya no es necesario, porque esta transformación ocurre automáticamente.
+Con Express, esto ya no es necesario, porque esta transformación ocurre automáticamente.
 
 Vale la pena señalar que[JSON](https://es.wikipedia.org/wiki/JSON) es una cadena y no un objeto JavaScript como el valor asignado a  _notes_.
 
@@ -379,7 +379,7 @@ El contenido de <i>package.json</i> también ha cambiado:
     "express": "^4.18.2",
   },
   "devDependencies": {
-    "nodemon": "^2.0.20"
+    "nodemon": "^3.0.3"
   }
 }
 ```
@@ -464,7 +464,7 @@ Ampliemos nuestra aplicación para que ofrezca una interfaz REST para operar con
 
 La dirección única que usaremos para una nota individual es de la forma <i>notes/10</i>, donde el número al final se refiere al número de id único de la nota.
 
-Podemos definir [parámetros](http://expressjs.com/en/guide/routing.html#route-parameters) para rutas en express usando la sintaxis de dos puntos:
+Podemos definir [parámetros](http://expressjs.com/en/guide/routing.html#route-parameters) para rutas en Express usando la sintaxis de dos puntos:
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
@@ -634,7 +634,7 @@ Si usas *IntelliJ WebStorm* en cambio, puedes usar un procedimiento similar con 
 
 A continuación, hagamos posible agregar nuevas notas al servidor. La adición de una nota ocurre al hacer una solicitud HTTP POST a la dirección <http://localhost:3001/api/notes>, y al enviar toda la información de la nueva nota en el [body](https://www.rfc-editor.org/rfc/rfc9112#name-message-body) de la solicitud en formato JSON.
 
-Para acceder a los datos fácilmente, necesitamos la ayuda del [json-parser](https://expressjs.com/en/api.html) de express, que se usa con el comando _app.use(express.json())_.
+Para acceder a los datos fácilmente, necesitamos la ayuda del [json-parser](https://expressjs.com/en/api.html) de Express, que se usa con el comando _app.use(express.json())_.
 
 Activemos json-parser e implementemos un controlador inicial para manejar las solicitudes HTTP POST:
 
@@ -672,7 +672,7 @@ La aplicación imprime los datos que enviamos en la solicitud a la consola:
 
 **NB** <i>Mantén visible el terminal que ejecuta la aplicación en todo momento</i> cuando trabajes en el backend. Gracias a Nodemon, cualquier cambio que hagamos en el código reiniciará la aplicación. Si prestas atención a la consola, inmediatamente podrás detectar los errores que ocurren en la aplicación:
 
-![error de nodemon: requre no esta definido](../../images/3/16.png)
+![error de nodemon: require no esta definido](../../images/3/16e.png)
 
 De manera similar, es útil verificar la consola para asegurarnos de que el backend se comporte como esperamos en diferentes situaciones, como cuando enviamos datos con una solicitud HTTP POST. Naturalmente, es una buena idea agregar muchos comandos <em>console.log</em> al código mientras la aplicación aún se está desarrollando.
 
@@ -950,13 +950,13 @@ POST es el único tipo de solicitud HTTP que no es ni <i>seguro</i> ni <i>idempo
 
 ### Middleware
 
-El [json-parser](https://expressjs.com/en/api.html) de express que utilizamos anteriormente es el llamado [middleware](https://expressjs.com/es/guide/using-middleware.html).
+El [json-parser](https://expressjs.com/en/api.html) de Express que utilizamos anteriormente es un [middleware](https://expressjs.com/es/guide/using-middleware.html).
 
 Los middleware son funciones que se pueden utilizar para manejar objetos de _request_ y _response_.
 
 El json-parser que usamos anteriormente toma los datos sin procesar de las solicitudes que están almacenadas en el objeto _request_, los parsea en un objeto de JavaScript y lo asigna al objeto _request_ como una nueva propiedad <i>body</i>.
 
-En la práctica, puedes utilizar varios middleware al mismo tiempo. Cuando tienes más de uno, se ejecutan uno por uno en el orden en que se utilizaron en express.
+En la práctica, puedes utilizar varios middleware al mismo tiempo. Cuando tienes más de uno, se ejecutan uno por uno en el orden en el que se definieron en el código de la aplicación.
 
 Implementemos nuestro propio middleware que imprime información sobre cada solicitud que se envía al servidor.
 
@@ -980,9 +980,9 @@ El middleware se utiliza así:
 app.use(requestLogger)
 ```
 
-Las funciones middleware se llaman en el orden en que se utilizan con el método _use_ del objeto del servidor express. Ten en cuenta que json-parser se utiliza antes del middleware _requestLogger_, porque de lo contrario, ¡<i>request.body</i> no se inicializará cuando se ejecute el logger!
+Recuerda, las funciones middleware se llaman en el orden en el que son encontradas por el motor de JavaScript. Ten en cuenta que _json-parser_ se encuentra definido antes que _requestLogger_, porque de lo contrario, ¡<i>request.body</i> no se inicializará cuando se ejecute el logger!
 
-Las funciones de middleware deben utilizarse antes de las rutas si queremos que se ejecuten antes de llamar a los controladores de eventos de ruta. También hay situaciones en las que queremos definir funciones de middleware después de las rutas. En la práctica, esto significa que estamos definiendo funciones de middleware que solo se llaman si ninguna ruta maneja la solicitud HTTP.
+Las funciones de middleware deben utilizarse antes que las rutas cuando queremos que sean ejecutadas por los controladores de eventos de ruta. A veces, queremos usar funciones de middleware después que las rutas. Hacemos esto cuando las funciones de middleware solo son llamadas si ninguna ruta maneja la solicitud HTTP.
 
 Agreguemos el siguiente middleware después de nuestras rutas, que se usa para capturar solicitudes realizadas a rutas inexistentes. Para estas solicitudes, el middleware devolverá un mensaje de error en formato JSON.
 

@@ -83,7 +83,7 @@ La página de inicio de la aplicación de ejemplo funciona como una <i>aplicaci�
 El servidor ha formado este documento de alguna manera. El documento puede ser un archivo de texto <i>estático</i> guardado en el directorio del servidor. El servidor también puede formar los documentos HTML <i>dinámicamente</i> de acuerdo con el código de la aplicación, utilizando, por ejemplo, datos de una base de datos.
 El código HTML de la aplicación de ejemplo se ha formado de forma dinámica, porque contiene información sobre el número de notas creadas.
 
-El código HTML de la página de inicio es el siguiente:
+El código HTML de la página de inicio es formado dinámicamente en el servidor:
 
 ```js
 const getFrontPageHtml = noteCount => {

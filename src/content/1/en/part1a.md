@@ -74,13 +74,13 @@ Instead of Vite you can also use the older generation tool [create-react-app](ht
 
 The way to start the application is also different in CRA, it is started with a command
 
-```
+```bash
 npm start
 ```
 
 in contrast to Vite's
 
-```
+```bash
 npm run dev 
 ```
 
@@ -110,7 +110,6 @@ By default, the file <i>index.html</i> doesn't contain any HTML markup that is v
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
-
 ```
 
 You can try adding there some HTML to the file. However, when using React, all content that needs to be rendered is usually defined as React components.
@@ -263,6 +262,7 @@ but when writing JSX, the tag needs to be closed:
 ### Multiple components
 
 Let's modify the file <i>App.jsx</i> as follows:
+
 ```js
 // highlight-start
 const Hello = () => {
@@ -302,7 +302,6 @@ const App = () => {
 ```
 
 **NB**: <em>export</em> at the bottom is left out in these <i>examples</i>, now and in the future. It is still needed for the code to work
-
 
 Writing components with React is easy, and by combining components, even a more complex application can be kept fairly maintainable. Indeed, a core philosophy of React is composing applications from many specialized reusable components.
 
@@ -378,7 +377,7 @@ I really hope your console was open. If it was not, remember what you promised:
 
 > <i>I promise to keep the console open all the time during this course, and for the rest of my life when I'm doing web development</i>
 
-Software development is hard. It gets even harder if one is not using all the possible available tools such as the web-console and debug printing with _console.log_. Professionals use both <i>all the time</i> and there is no single reason why a beginner should not adopt the use of these wonderful helper methods that will make life so much easier.
+Software development is hard. It gets even harder if one is not using all the possible available tools such as the web-console and debug printing with _console.log_. Professionals use both <i>all the time</i> and there is no single reason why a beginner should not adopt the use of these wonderful helper methods that will make his life so much easier.
 
 ### Possible error message
 
@@ -412,7 +411,7 @@ module.exports = {
 }
 ```
 
-We will get to know ESLint in more detail [in part 3](/osa3/validointi_ja_es_lint#lint).
+We will get to know ESLint in more detail [in part 3](/en/part3/validation_and_es_lint#lint).
 
 ### Some notes
 
@@ -450,7 +449,7 @@ const App = () => {
 }
 ```
 
-the page is not going to display the content defined within the Footer component, and instead React only creates an empty [footer](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/footer) element, i.e. the built-in HTML element instead of the custom React element of the same name. If you change the first letter of the component name to a capital letter, then React creates a <i>div</i>-element defined in the Footer component, which is rendered on the page.
+the page is not going to display the content defined within the footer component, and instead React only creates an empty [footer](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/footer) element, i.e. the built-in HTML element instead of the custom React element of the same name. If you change the first letter of the component name to a capital letter, then React creates a <i>div</i>-element defined in the Footer component, which is rendered on the page.
 
 Note that the content of a React component (usually) needs to contain **one root element**. If we, for example, try to define the component <i>App</i> without the outermost <i>div</i>-element:
 
@@ -634,7 +633,7 @@ Most of the exercises of the course build a larger application, eg. courseinfo, 
 
 For each web application for a series of exercises, it is recommended to submit all files relating to that application, except for the directory <i>node\_modules</i>.
 
-  <h4>1.1: course information, step1</h4>
+  <h4>1.1: Course Information, step 1</h4>
 
 <i>The application that we will start working on in this exercise will be further developed in a few of the following exercises. In this and other upcoming exercise sets in this course, it is enough to only submit the final state of the application. If desired, you may also create a commit for each exercise of the series, but this is entirely optional.</i>
 
@@ -680,7 +679,7 @@ const App = () => {
 export default App
 ```
 
-and remove extra files App.css and index.css, and the directory assets.
+and remove the extra files App.css and index.css, also remove the directory assets.
 
 Unfortunately, the entire application is in the same component. Refactor the code so that it consists of three new components: <i>Header</i>, <i>Content</i>, and <i>Total</i>. All data still resides in the <i>App</i> component, which passes the necessary data to each component using <i>props</i>. <i>Header</i> takes care of rendering the name of the course, <i>Content</i> renders the parts and their number of exercises and <i>Total</i> renders the total number of exercises.
 
@@ -710,7 +709,7 @@ Careful, small-step progress may seem slow, but it is actually <i> by far the fa
 
 that is, according to Martin, careful progress with small steps is even the only way to be fast.
 
-<h4>1.2: course information, step2</h4>
+<h4>1.2: Course Information, step 2</h4>
 
 Refactor the <i>Content</i> component so that it does not render any names of parts or their number of exercises by itself. Instead, it only renders three <i>Part</i> components of which each renders the name and number of exercises of one part.
 

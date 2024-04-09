@@ -71,7 +71,7 @@ When bugs occur, <i>the worst of all possible strategies</i> is to continue writ
 
 ### MongoDB
 
-To store our saved notes indefinitely, we need a database. Most of the courses taught at the University of Helsinki use relational databases. In most parts of this course, we will use [MongoDB](https://www.mongodb.com/) which is [document database](https://en.wikipedia.org/wiki/Document-oriented_database).
+To store our saved notes indefinitely, we need a database. Most of the courses taught at the University of Helsinki use relational databases. In most parts of this course, we will use [MongoDB](https://www.mongodb.com/) which is a [document database](https://en.wikipedia.org/wiki/Document-oriented_database).
 
 The reason for using Mongo as the database is its lower complexity compared to a relational database. [Part 13](/en/part13) of the course shows how to build Node.js backends that use a relational database.
 
@@ -437,7 +437,6 @@ The code automatically uses the defined _toJSON_ when formatting notes to the re
 
 ### Moving db configuration to its own module
 
-
 Before we refactor the rest of the backend to use the database, let's extract the Mongoose-specific code into its own module.
 
 Let's create a new directory for the module called <i>models</i>, and add a file called <i>note.js</i>:
@@ -578,7 +577,7 @@ When using Render, the database url is given by defining the proper env in the d
 
 ![browser showing render environment variables](../../images/3/render-env.png)
 
-Set just the URL starting with <i>mongodb+srv://</i> to the _value_ field.
+Set just the URL starting with <i>mongodb+srv://...</i> to the _value_ field.
 
 ### Using database in route handlers
 
@@ -796,7 +795,7 @@ Note that the error-handling middleware has to be the last loaded middleware, al
 
 ### The order of middleware loading
 
-The execution order of middleware is the same as the order that they are loaded into express with the _app.use_ function. For this reason, it is important to be careful when defining middleware.
+The execution order of middleware is the same as the order that they are loaded into Express with the _app.use_ function. For this reason, it is important to be careful when defining middleware.
 
 The correct order is the following:
 

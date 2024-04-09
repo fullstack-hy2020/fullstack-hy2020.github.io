@@ -95,7 +95,7 @@ const App = (props) => {
 
 Hemos agregado la función _addNote_ como un controlador de eventos al elemento del formulario que se llamará cuando se envíe el formulario, haciendo clic en el botón submit.
 
-Usamos el método discutido en la [parte 1](/es/part1/estado_del_componente_controladores_de_eventos#manejo-de-eventos) para definir nuestro controlador de eventos:
+Usamos el método discutido en la [parte 1](/es/part1/estado_del_componente_controladores_de_eventos#control-de-eventos) para definir nuestro controlador de eventos:
 
 ```js
 const addNote = (event) => {
