@@ -197,7 +197,7 @@ These all are great reasons. The tradeoff is that we may encounter some unconven
 
 Let's start with the frontend. Since the Dockerfile will be significantly different from the production Dockerfile let's create a new one called <i>dev.Dockerfile</i>.
 
-**Note** we shall use the name <i>dev.Dockerfile</i> for development configurations and <i>Dockerfile</i> othervise.
+**Note** we shall use the name <i>dev.Dockerfile</i> for development configurations and <i>Dockerfile</i> otherwise.
 
 Starting the Vite in development mode should be easy. Let's start with the following:
 
@@ -277,7 +277,7 @@ services:
 
 With this configuration, _docker compose up_ can run the application in development mode. You don't even need Node installed to develop it!
 
-**Note** we shall use the name <i>docker-compose.dev.yml</i> for development environment compose files, and the default name <i>docker-compose.yml</i> othervise.
+**Note** we shall use the name <i>docker-compose.dev.yml</i> for development environment compose files, and the default name <i>docker-compose.yml</i> otherwise.
 
 Installing new dependencies is a headache for a development setup like this. One of the better options is to install the new dependency **inside** the container. So instead of doing e.g. _npm install axios_, you have to do it in the running container e.g. _docker exec hello-front-dev npm install axios_, or add it to the package.json and run _docker build_ again.
 
@@ -471,7 +471,7 @@ http {
 }
 ```
 
-**Note** we are using the familiar naming convention also for Nginx, <i>nginx.dev.conf</i> for development configurations, and the default name<i>nginx.conf</i> othervise.
+**Note** we are using the familiar naming convention also for Nginx, <i>nginx.dev.conf</i> for development configurations, and the default name<i>nginx.conf</i> otherwise.
 
 Next, create an Nginx service in the <i>docker-compose.dev.yml</i> file. Add a volume as instructed in the Docker Hub page where the right side is _:/etc/nginx/nginx.conf:ro_, the final ro declares that the volume will be <i>read-only</i>:
 
