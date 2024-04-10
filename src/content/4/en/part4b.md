@@ -231,7 +231,7 @@ test('the first note is about HTTP methods', async () => {
   const response = await api.get('/api/notes')
 
   const contents = response.body.map(e => e.content)
-  // is the parameter truthy
+  // is the argument truthy
   assert(contents.includes('HTML is easy'))
 })
 ```
@@ -275,7 +275,7 @@ module.exports = {
 
 Testing appears to be easy and our tests are currently passing. However, our tests are bad as they are dependent on the state of the database, that now  happens to have two notes. To make them more robust, we have to reset the database and generate the needed test data in a controlled manner before we run the tests.
 
-Our tests are already using the[after](https://nodejs.org/api/test.html#afterfn-options) function of to close the connection to the database after the tests are finished executing. The library Node:test offers many other functions that can be used for executing operations once before any test is run or every time before a test is run.
+Our tests are already using the [after](https://nodejs.org/api/test.html#afterfn-options) function of to close the connection to the database after the tests are finished executing. The library node:test offers many other functions that can be used for executing operations once before any test is run or every time before a test is run.
 
 Let's initialize the database <i>before every test</i> with the [beforeEach](https://nodejs.org/api/test.html#beforeeachfn-options) function:
 
@@ -337,7 +337,7 @@ test('the first note is about HTTP methods', async () => {
 
 The _npm test_ command executes all of the tests for the application. When we are writing tests, it is usually wise to only execute one or two tests. 
 
-There are a few different ways of accomplishing this, one of which is the [only](https://nodejs.org/api/test.html#testonlyname-options-fn) method. With the method we can define in the code what tests should be executed:
+There are a few different ways of accomplishing this, one of which is the [only](https://nodejs.org/api/test.html#testonlyname-options-fn) method. With this method we can define in the code what tests should be executed:
 
 ```js
 test.only('notes are returned as json', async () => {
@@ -354,7 +354,7 @@ test.only('there are two notes', async () => {
 })
 ```
 
-When tests are run with option _--test-only_, that is, with the command
+When tests are run with option _--test-only_, that is, with the command:
 
 ```
 npm test -- --test-only
@@ -362,9 +362,9 @@ npm test -- --test-only
 
 only the _only_ marked tests are executed.
 
-The danger of the _only_ is that one forgets to remove those from the code.
+The danger of _only_ is that one forgets to remove those from the code.
 
-Another option is to specify the tests that need to be run as parameters of the <i>npm test</i> command.
+Another option is to specify the tests that need to be run as arguments of the <i>npm test</i> command.
 
 The following command only runs the tests found in the <i>tests/note_api.test.js</i> file:
 
@@ -372,13 +372,13 @@ The following command only runs the tests found in the <i>tests/note_api.test.js
 npm test -- tests/note_api.test.js
 ```
 
-The [--tests-by-name-pattern](https://nodejs.org/api/test.html#filtering-tests-by-name)  option can be used for running tests with a specific name:
+The [--tests-by-name-pattern](https://nodejs.org/api/test.html#filtering-tests-by-name) option can be used for running tests with a specific name:
 
 ```js
 npm test -- --test-name-pattern="the first note is about HTTP methods"
 ```
 
-The provided parameter can refer to the name of the test or the describe block. The parameter can also contain just a part of the name. The following command will run all of the tests that contain <i>notes</i> in their name:
+The provided argument can refer to the name of the test or the describe block. It can also contain just a part of the name. The following command will run all of the tests that contain <i>notes</i> in their name:
 
 ```js
 npm run test -- --test-name-pattern="notes"
@@ -960,7 +960,7 @@ beforeEach(async () => {
 
 The solution is quite advanced despite its compact appearance. The _noteObjects_ variable is assigned to an array of Mongoose objects that are created with the _Note_ constructor for each of the notes in the _helper.initialNotes_ array. The next line of code creates a new array that <i>consists of promises</i>, that are created by calling the _save_ method of each item in the _noteObjects_ array. In other words, it is an array of promises for saving each of the items to the database.
 
-The [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) method can be used for transforming an array of promises into a single promise, that will be <i>fulfilled</i> once every promise in the array passed to it as a parameter is resolved. The last line of code <em>await Promise.all(promiseArray)</em> waits until every promise for saving a note is finished, meaning that the database has been initialized.
+The [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) method can be used for transforming an array of promises into a single promise, that will be <i>fulfilled</i> once every promise in the array passed to it as an argument is resolved. The last line of code <em>await Promise.all(promiseArray)</em> waits until every promise for saving a note is finished, meaning that the database has been initialized.
 
 > The returned values of each promise in the array can still be accessed when using the Promise.all method. If we wait for the promises to be resolved with the _await_ syntax <em>const results = await Promise.all(promiseArray)</em>, the operation will return an array that contains the resolved values for each promise in the _promiseArray_, and they appear in the same order as the promises in the array.
 
@@ -1183,7 +1183,7 @@ after(async () => {
 
 The test output in the console is grouped according to the <i>describe</i> blocks:
 
-![jest output showing grouped describe blocks](../../images/4/7new.png)
+![node:test output showing grouped describe blocks](../../images/4/7new.png)
 
 There is still room for improvement, but it is time to move forward.
 

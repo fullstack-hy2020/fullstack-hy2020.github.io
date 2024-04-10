@@ -569,7 +569,7 @@ En la siguiente fila, el archivo de prueba importa la función a ser probada y l
 const reverse = require('../utils/for_testing').reverse
 ```
 
-Los casos de prueba individual se definen con la función _test_. El primer parámetro de la función es la descripción de la prueba como una cadena. El segundo parámetro es una <i>función</i>, que define la funcionalidad para el caso de prueba. La funcionalidad para el segundo caso de prueba se ve así:
+Los casos de prueba individual se definen con la función _test_. El primer argumento de la función es la descripción de la prueba como una cadena. El segundo argumento es una <i>función</i>, que define la funcionalidad para el caso de prueba. La funcionalidad para el segundo caso de prueba se ve así:
 
 ```js
 () => {

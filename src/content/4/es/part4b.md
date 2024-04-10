@@ -27,20 +27,18 @@ A continuación, cambiemos los scripts en nuestro <i>package.json</i> para que c
 {
   // ...
   "scripts": {
-    "start": "NODE_ENV=production node index.js",// highlight-line
-    "dev": "NODE_ENV=development nodemon index.js",// highlight-line
+    "start": "NODE_ENV=production node index.js", // highlight-line
+    "dev": "NODE_ENV=development nodemon index.js", // highlight-line
+    "test": "NODE_ENV=test node --test", // highlight-line
     "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
     "deploy": "fly deploy",
     "deploy:full": "npm run build:ui && npm run deploy",
     "logs:prod": "fly logs",
     "lint": "eslint .",
-    "test": "NODE_ENV=test jest --verbose --runInBand"// highlight-line
   },
   // ...
 }
 ```
-
-También agregamos [runInBand](https://jestjs.io/es-ES/docs/cli#--runinband) al script npm que ejecuta las pruebas. Esta opción evitará que Jest ejecute pruebas en paralelo; discutiremos su importancia una vez que nuestras pruebas comiencen a usar la base de datos.
 
 Especificamos el modo de la aplicación para que sea <i>development</i> en el script _npm run dev_ que usa nodemon. También especificamos que el comando predeterminado _npm start_ definirá el modo como <i>production</i>.
 
@@ -59,7 +57,7 @@ Entonces podemos lograr la compatibilidad multiplataforma utilizando la librerí
     "start": "cross-env NODE_ENV=production node index.js",
     "dev": "cross-env NODE_ENV=development nodemon index.js",
     // ...
-    "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
+    "test": "cross-env  NODE_ENV=test node --test",
   },
   // ...
 }
@@ -99,11 +97,11 @@ module.exports = {
 El archivo <i>.env</i> tiene <i>variables independientes</i> para las direcciones de la base de datos de desarrollo y prueba:
 
 ```bash
-MONGODB_URI=mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority
+MONGODB_URI=mongodb+srv://fullstack:thepasswordishere@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority
 PORT=3001
 
 // highlight-start
-TEST_MONGODB_URI=mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/testNoteApp?retryWrites=true&w=majority
+TEST_MONGODB_URI=mongodb+srv://fullstack:thepasswordishere@cluster0.o1opl.mongodb.net/testNoteApp?retryWrites=true&w=majority
 // highlight-end
 ```
 
@@ -126,6 +124,7 @@ npm install --save-dev supertest
 Escribamos nuestra primera prueba en el archivo <i>tests/note_api.test.js</i>:
 
 ```js
+const { test, after } = require('node:test')
 const mongoose = require('mongoose')
 const supertest = require('supertest')
 const app = require('../app')
@@ -139,8 +138,8 @@ test('notes are returned as json', async () => {
     .expect('Content-Type', /application\/json/)
 })
 
-afterAll(() => {
-  mongoose.connection.close()
+after(async () => {
+  await mongoose.connection.close()
 })
 ```
 
@@ -164,56 +163,15 @@ En principio, el test podría también ser definido simplemente como una cadena:
 
 El problema, es que si usamos cadenas el valor del encabezado debe ser exactamente el mismo. Para la expresión que definimos, es suficiente que el encabezado <i>contenga</i> la cadena en cuestión. Por ejemplo, el valor actual del encabezado puede ser <i>application/json; charset=utf-8</i> ya que también tiene información de la codificación de caracteres (utf-8). Sin embargo, nuestra prueba no está interesada en esto y, por lo tanto, es mejor definir la prueba como una expresión regular en lugar verificar una cadena exacta.
 
-La prueba contiene algunos detalles que exploraremos [un poco más adelante](/es/part4/probando_el_backend#async-await). La función de flecha que define la prueba está precedida por la palabra clave <i>async</i> y la llamada al método para el objeto <i>api</i> está precedida por la palabra clave <i>await</i>. Escribiremos algunas pruebas y luego echaremos un vistazo más de cerca a esta magia de async/await. No te preocupes por esto por ahora, solo ten la seguridad de que las pruebas de ejemplo funcionan correctamente. La sintaxis async/await está relacionada con el hecho de que hacer una solicitud a la API es una operación <i>asíncrona</i>. La [sintaxis async/await](https://jestjs.io/es-ES/docs/asynchronous) se puede utilizar para escribir código asíncrono con la apariencia de código síncrono.
+La prueba contiene algunos detalles que exploraremos [un poco más adelante](/es/part4/probando_el_backend#async-await). La función de flecha que define la prueba está precedida por la palabra clave <i>async</i> y la llamada al método para el objeto <i>api</i> está precedida por la palabra clave <i>await</i>. Escribiremos algunas pruebas y luego echaremos un vistazo más de cerca a esta magia de async/await. No te preocupes por esto por ahora, solo ten la seguridad de que las pruebas de ejemplo funcionan correctamente. La sintaxis async/await está relacionada con el hecho de que hacer una solicitud a la API es una operación <i>asíncrona</i>. La sintaxis async/await se puede utilizar para escribir código asíncrono con la apariencia de código síncrono.
 
-Una vez que todas las pruebas (actualmente solo hay una) hayan terminado de ejecutarse, tenemos que cerrar la conexión a la base de datos utilizada por Mongoose. Esto se puede lograr fácilmente con el método [afterAll](https://jestjs.io/es-ES/docs/api#afterallfn-tiempo):
+Una vez que todas las pruebas (actualmente solo hay una) hayan terminado de ejecutarse, tenemos que cerrar la conexión a la base de datos utilizada por Mongoose. Esto se puede lograr fácilmente con el método [after](https://nodejs.org/api/test.html#afterfn-options):
 
 ```js
-afterAll(() => {
-  mongoose.connection.close()
+after(() => {
+  await mongoose.connection.close()
 })
 ```
-
-Al ejecutar las pruebas, es posible que te encuentres con la siguiente advertencia de consola:
-
-![consola de jest advirtiendo acerca de no haber salido luego de la ejecución de la prueba](../../images/4/8.png)
-
-Es muy probable que el problema sea causado por Mongoose versión 6.x, el problema no aparece cuando se usa la versión 5.x o 7.x. [La documentación de Mongo](https://mongoosejs.com/docs/jest.html) no recomienda probar nuestras aplicaciones Mongoose con Jest.
-
-[Una forma](https://stackoverflow.com/questions/50687592/jest-and-mongoose-jest-has-detected-opened-handles) de no tener este error es agregar dentro del directorio <i>tests</i> el archivo <i>teardown.js</i> con el siguiente contenido:
-
-```js
-module.exports = () => {
-  process.exit(0)
-}
-```
-
-Y extendiendo la definición de Jest en el archivo <i>package.json</i> como se muestra a continuación
-
-```js
-{
- //...
- "jest": {
-   "testEnvironment": "node",
-   "globalTeardown": "./tests/teardown.js" // highlight-line
- }
-}
-```
-
-Otro error que puedes encontrar, es que tu prueba tome más tiempo que el tiempo predeterminado de Jest de 5000 ms. Esto se puede resolver agregando un tercer parámetro a la función de prueba:
-  
-```js
-test('notes are returned as json', async () => {
-  await api
-    .get('/api/notes')
-    .expect(200)
-    .expect('Content-Type', /application\/json/)
-}, 100000) // highlight-line
-```
-  
-Este tercer parámetro establece el tiempo de espera en 100000 ms. Un tiempo de espera largo garantiza que nuestra prueba no falle debido al tiempo que tarda en ejecutarse. (Un tiempo de espera largo puede no ser adecuado para pruebas basadas en rendimiento o velocidad, pero está bien para nuestros ejemplos de prueba).
-
-Si aún encuentras problemas con los tiempos de espera de mongoose, establece la variable `bufferTimeoutMS` en un valor significativamente mayor que 10000 (10 segundos). Puedes establecerlo de la siguiente manera en la parte superior, justo después de las declaraciones `require`. `mongoose.set("bufferTimeoutMS", 30000)`
 
 Un pequeño pero importante detalle: al [principio](/es/part4/estructura_de_la_aplicacion_backend_introduccion_a_las_pruebas#estructura-del-proyecto) de esta parte extrajimos la aplicación Express en el archivo <i>app.js</i>, y el rol del archivo <i>index.js</i> se cambió para iniciar la aplicación en el puerto especificado a través de `app.listen`:
 
@@ -253,17 +211,30 @@ Escribamos algunas pruebas más:
 test('there are two notes', async () => {
   const response = await api.get('/api/notes')
 
-  expect(response.body).toHaveLength(2)
+  assert.strictEqual(response.body.length, 2)
 })
 
 test('the first note is about HTTP methods', async () => {
   const response = await api.get('/api/notes')
 
-  expect(response.body[0].content).toBe('HTML is easy')
+  const contents = response.body.map(e => e.content)
+  assert.strictEqual(contents.includes('HTML is easy'), true)
 })
 ```
 
-Ambas pruebas almacenan la respuesta de la solicitud en la variable _response_, y a diferencia de la prueba anterior que utilizó los métodos proporcionados por _supertest_ para verificar el código de estado y los encabezados, esta vez estamos inspeccionando los datos de respuesta almacenados en la propiedad <i>response.body</i>. Nuestras pruebas verifican el formato y el contenido de los datos de respuesta con el método [expect](https://jestjs.io/es-ES/docs/expect#expectvalue) de Jest.
+Ambas pruebas almacenan la respuesta de la solicitud en la variable _response_, y a diferencia de la prueba anterior que utilizó los métodos proporcionados por _supertest_ para verificar el código de estado y los encabezados, esta vez estamos inspeccionando los datos de respuesta almacenados en la propiedad <i>response.body</i>. Nuestras pruebas verifican el formato y el contenido de los datos de respuesta con el método [strictEqual](https://nodejs.org/docs/latest/api/assert.html#assertstrictequalactual-expected-message) de la librería assert.
+
+Podríamos simplificar un poco la segunda prueba, utilizando solo a [assert](https://nodejs.org/docs/latest/api/assert.html#assertokvalue-message) para verificar que la nota esta entre las que fueron devueltas por el backend:
+
+```js
+test('the first note is about HTTP methods', async () => {
+  const response = await api.get('/api/notes')
+
+  const contents = response.body.map(e => e.content)
+  // es el argumento truthy
+  assert(contents.includes('HTML is easy'))
+})
+```
 
 El beneficio de usar la sintaxis async/await está comenzando a ser evidente. Normalmente tendríamos que usar funciones callback para acceder a los datos devueltos por las promesas, pero con la nueva sintaxis las cosas son mucho más cómodas:
 
@@ -273,6 +244,7 @@ const response = await api.get('/api/notes')
 // la ejecución llega aquí solo después de que se completa la solicitud HTTP
 // el resultado de la solicitud HTTP se guarda en la variable response
 expect(response.body).toHaveLength(2)
+assert.strictEqual(response.body.length, 2)
 ```
 
 El middleware que genera información sobre las solicitudes HTTP está obstruyendo la salida de ejecución de la prueba. Modifiquemos el logger para que no imprima en la consola en modo de prueba:
@@ -303,16 +275,13 @@ module.exports = {
 
 Testing parece ser fácil y actualmente nuestras pruebas están pasando. Sin embargo, nuestras pruebas son malas ya que dependen del estado de la base de datos, que ahora tiene dos notas. Para hacerlas más robustas, debemos resetear la base de datos y generar los datos de prueba necesarios de manera controlada antes de ejecutar las pruebas.
 
-Nuestras pruebas ya están usando la función [afterAll](https://jestjs.io/es-ES/docs/api#afterallfn-tiempo) de Jest para cerrar la conexión a la base de datos después de que las pruebas hayan terminado de ejecutarse . Jest ofrece muchas otras [funciones](https://jestjs.io/es-ES/docs/setup-teardown) que se pueden usar para ejecutar operaciones una vez antes de que se ejecute cualquier prueba, o cada vez antes de que se ejecuta una prueba.
+Nuestras pruebas ya están usando la función [after](https://nodejs.org/api/test.html#afterfn-options) para cerrar la conexión a la base de datos después de que las pruebas hayan terminado de ejecutarse. La librería node:test ofrece muchas otras funciones que se pueden usar para ejecutar operaciones una vez antes de que se ejecute cualquier prueba, o cada vez antes de que se ejecuta una prueba.
 
-Inicialicemos la base de datos <i>antes de cada prueba</i> con la función [beforeEach](https://jestjs.io/es-ES/docs/api#beforeeachfn-tiempo):
+Inicialicemos la base de datos <i>antes de cada prueba</i> con la función [beforeEach](https://nodejs.org/api/test.html#beforeeachfn-options):
 
 ```js
-const mongoose = require('mongoose')
-const supertest = require('supertest')
-const app = require('../app')
-const api = supertest(app)
 // highlight-start
+const { test, after, beforeEach } = require('node:test')
 const Note = require('../models/note')
 // highlight-end
 
@@ -329,6 +298,8 @@ const initialNotes = [
 ]
 // highlight-end
 
+// ...
+
 // highlight-start
 beforeEach(async () => {
   await Note.deleteMany({})
@@ -343,58 +314,75 @@ beforeEach(async () => {
 // ...
 ```
 
-La base de datos se borra al principio, y luego guardamos las dos notas almacenadas en la matriz _initialNotes_ en la base de datos. Al hacer esto, nos aseguramos de que la base de datos esté en el mismo estado antes de ejecutar cada prueba.
+La base de datos se borra al principio, y luego guardamos las dos notas almacenadas en el array _initialNotes_ en la base de datos. Al hacer esto, nos aseguramos de que la base de datos esté en el mismo estado antes de ejecutar cada prueba.
 
 También hagamos los siguientes cambios en las dos últimas pruebas:
 
 ```js
-test('all notes are returned', async () => { // highlight-line
+test('there are two notes', async () => {
   const response = await api.get('/api/notes')
 
-  expect(response.body).toHaveLength(initialNotes.length) // highlight-line
+  assert.strictEqual(response.body.length, initialNotes.length)
 })
 
-test('a specific note is within the returned notes', async () => { // highlight-line
+test('the first note is about HTTP methods', async () => {
   const response = await api.get('/api/notes')
 
-  // highlight-start
-  const contents = response.body.map(r => r.content)
-
-  expect(contents).toContain(
-    'Browser can execute only JavaScript'
-  )
-  // highlight-end
+  const contents = response.body.map(e => e.content)
+  assert(contents.includes('HTML is easy'))
 })
 ```
 
-Presta atención especialmente al expect en la última prueba. El comando <code>response.body.map (r => r.content)</code> se usa para crear una matriz que contiene el contenido de cada nota devuelta por la API. El método [toContain](https://jestjs.io/es-ES/docs/expect#tocontainitem) se utiliza para comprobar que la nota que se le ha asignado como parámetro está en la lista de notas devueltas por la API.
-
 ### Ejecución de pruebas una por una
 
-El comando _npm test_ ejecuta todas las pruebas de la aplicación. Cuando escribimos pruebas, generalmente es aconsejable ejecutar solo una o dos pruebas. Jest ofrece algunas formas diferentes de lograr esto, una de las cuales es el método [only](https://jestjs.io/es-ES/docs/api#testonlyname-fn-tiempo). Si las pruebas se escriben en muchos archivos, este método no es el mejor.
+El comando _npm test_ ejecuta todas las pruebas de la aplicación. Cuando escribimos pruebas, generalmente es aconsejable ejecutar solo una o dos pruebas.
 
-Una mejor opción es especificar las pruebas que deben ejecutarse como parámetro del comando <i>npm test</i>.
+Hay diferentes formas de lograr esto, una de las cuales es el método [only](https://nodejs.org/api/test.html#testonlyname-options-fn). Con este método podemos definir en el código que pruebas deben ser ejecutadas:
 
-El siguiente comando solo ejecuta las pruebas que se encuentran en el archivo <i>tests/ note_api.test.js</i>:
+```js
+test.only('notes are returned as json', async () => {
+  await api
+    .get('/api/notes')
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+})
+
+test.only('there are two notes', async () => {
+  const response = await api.get('/api/notes')
+
+  assert.strictEqual(response.body.length, 2)
+})
+```
+
+Cuando las pruebas son ejecutadas con la opción _--test-only_, eso es, con el comando:
+
+```
+npm test -- --test-only
+```
+
+solo los tests marcados con _only_ son ejecutados.
+
+El peligro de _only_ es que uno olvida quitarlos del código.
+
+Otra opción es especificar las pruebas que necesitan ser ejecutadas como argumentos del comando <i>npm test</i>.
+
+El siguiente comando solo ejecuta los tests encontrados en el archivo <i>tests/note_api.test.js</i>:
 
 ```js
 npm test -- tests/note_api.test.js
 ```
 
-La opción <i>-t</i> se puede utilizar para ejecutar pruebas con un nombre específico:
+La opción [--tests-by-name-pattern](https://nodejs.org/api/test.html#filtering-tests-by-name) puede usarse para ejecutar pruebas con un nombre especifico:
 
 ```js
-npm test -- -t 'a specific note is within the returned notes'
+npm test -- --test-name-pattern="the first note is about HTTP methods"
 ```
 
-El parámetro proporcionado puede hacer referencia al nombre de la prueba o al bloque describe. El parámetro también puede contener solo una parte del nombre. El siguiente comando ejecutará todas las pruebas que contengan <i>notes</i> en su nombre:
+El argumento dado puede referirse al nombre del test o del bloque describe. También puede contener solo una parte del nombre. El siguiente comando va a ejecutar todos los tests que contengan <i>notes</i> en su nombre:
 
 ```js
-npm test -- -t 'notes'
+npm run test -- --test-name-pattern="notes"
 ```
-
-**NB**: Cuando se ejecuta una sola prueba, la conexión de mongoose puede permanecer abierta si no se ejecuta ninguna prueba que utilize la conexión.
-El problema puede deberse al hecho de que supertest prepara la conexión, pero jest no ejecuta la parte afterAll del código.
 
 ### async/await
 
@@ -496,7 +484,7 @@ Cuando el código se refactoriza, siempre existe el riesgo de [regresión](https
 Comencemos con la operación para agregar una nueva nota. Escribamos una prueba que agregue una nueva nota y verifique que la cantidad de notas devueltas por la API aumenta y que la nota recién agregada esté en la lista.
 
 ```js
-test('a valid note can be added', async () => {
+test('a valid note can be added ', async () => {
   const newNote = {
     content: 'async/await simplifies making async calls',
     important: true,
@@ -512,14 +500,13 @@ test('a valid note can be added', async () => {
 
   const contents = response.body.map(r => r.content)
 
-  expect(response.body).toHaveLength(initialNotes.length + 1)
-  expect(contents).toContain(
-    'async/await simplifies making async calls'
-  )
+  assert.strictEqual(response.body.length, initialNotes.length + 1)
+
+  assert(contents.includes('async/await simplifies making async calls'))
 })
 ```
 
-La prueba falla ya que por accidente estamos devolviendo el código de estado 200 OK cuando se crea una nueva nota. Cambiemos eso a 201 CREATED:
+La prueba falla porque accidentalmente estamos devolviendo el código de estado <i>200 OK</i> cuando se crea una nueva nota. Cambiémoslo para que devuelva <i>201 CREATED</i>:
 
 ```js
 notesRouter.post('/', (request, response, next) => {
@@ -553,7 +540,7 @@ test('note without content is not added', async () => {
 
   const response = await api.get('/api/notes')
 
-  expect(response.body).toHaveLength(initialNotes.length)
+  assert.strictEqual(response.body.length, initialNotes.length)
 })
 ```
 
@@ -597,11 +584,13 @@ module.exports = {
 }
 ```
 
-El módulo define la función _notesInDb_ que se puede usar para verificar las notas almacenadas en la base de datos. La matriz _initialNotes_ que contiene el estado inicial de la base de datos también está en el módulo. También definimos la función _nonExistingId_ con anticipación, que se puede usar para crear un ID de objeto de base de datos que no pertenezca a ningún objeto de nota en la base de datos.
+El módulo define la función _notesInDb_ que se puede usar para verificar las notas almacenadas en la base de datos. El array _initialNotes_ que contiene el estado inicial de la base de datos también está en el módulo. También definimos la función _nonExistingId_ con anticipación, que se puede usar para crear un ID de objeto de base de datos que no pertenezca a ningún objeto de nota en la base de datos.
 
 Nuestras pruebas ahora pueden usar el módulo auxiliar y cambiarse así: 
 
 ```js
+const { test, after, beforeEach } = require('node:test')
+const assert = require('node:assert')
 const supertest = require('supertest')
 const mongoose = require('mongoose')
 const helper = require('./test_helper') // highlight-line
@@ -630,7 +619,7 @@ test('notes are returned as json', async () => {
 test('all notes are returned', async () => {
   const response = await api.get('/api/notes')
 
-  expect(response.body).toHaveLength(helper.initialNotes.length) // highlight-line
+   assert.strictEqual(response.body.length, helper.initialNotes.length) // highlight-line
 })
 
 test('a specific note is within the returned notes', async () => {
@@ -638,9 +627,7 @@ test('a specific note is within the returned notes', async () => {
 
   const contents = response.body.map(r => r.content)
 
-  expect(contents).toContain(
-    'Browser can execute only JavaScript'
-  )
+  assert(contents.includes('Browser can execute only JavaScript'))
 })
 
 test('a valid note can be added ', async () => {
@@ -656,12 +643,10 @@ test('a valid note can be added ', async () => {
     .expect('Content-Type', /application\/json/)
 
   const notesAtEnd = await helper.notesInDb() // highlight-line
-  expect(notesAtEnd).toHaveLength(helper.initialNotes.length + 1) // highlight-line
+  assert.strictEqual(notesAtEnd.length, helper.initialNotes.length + 1) // highlight-line
 
   const contents = notesAtEnd.map(n => n.content) // highlight-line
-  expect(contents).toContain(
-    'async/await simplifies making async calls'
-  )
+  assert(contents.includes('async/await simplifies making async calls'))
 })
 
 test('note without content is not added', async () => {
@@ -676,10 +661,10 @@ test('note without content is not added', async () => {
 
   const notesAtEnd = await helper.notesInDb() // highlight-line
 
-  expect(notesAtEnd).toHaveLength(helper.initialNotes.length) // highlight-line
+  assert.strictEqual(notesAtEnd.length, helper.initialNotes.length) // highlight-line
 })
 
-afterAll(async () => {
+after(async () => {
   await mongoose.connection.close()
 })
 ```
@@ -752,7 +737,7 @@ test('a specific note can be viewed', async () => {
     .expect('Content-Type', /application\/json/)
 // highlight-end
 
-  expect(resultNote.body).toEqual(noteToView)
+  assert.deepStrictEqual(resultNote.body, noteToView)
 })
 
 test('a note can be deleted', async () => {
@@ -767,17 +752,22 @@ test('a note can be deleted', async () => {
 
   const notesAtEnd = await helper.notesInDb()
 
-  expect(notesAtEnd).toHaveLength(
-    helper.initialNotes.length - 1
-  )
-
   const contents = notesAtEnd.map(r => r.content)
+  assert(!contents.includes(noteToDelete.content))
 
-  expect(contents).not.toContain(noteToDelete.content)
+  assert.strictEqual(notesAtEnd.length, helper.initialNotes.length - 1)
 })
 ```
 
 Ambas pruebas comparten una estructura similar. En la fase de inicialización, obtienen una nota de la base de datos. Después de esto, las pruebas llaman a la operación que se está probando, que se resalta en el bloque de código. Por último, las pruebas verifican que el resultado de la operación sea el esperado.
+
+Hay un punto que vale la pena mencionar en la primera prueba. En lugar del método previamente utilizado [strictEqual](https://nodejs.org/api/assert.html#assertstrictequalactual-expected-message), se utiliza el método [deepStrictEqual](https://nodejs.org/api/assert.html#assertdeepstrictequalactual-expected-message):
+
+```js
+assert.deepStrictEqual(resultNote.body, noteToView)
+```
+
+La razón de esto es que _strictEqual_ utiliza el método [Object.is](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Object/is) para comparar similitud, es decir, compara si los objetos son los mismos. En nuestro caso, es suficiente comprobar que los contenidos de los objetos, es decir, los valores de sus campos, son iguales. Para este propósito, _deepStrictEqual_ es adecuado.
 
 Las pruebas pasan y podemos refactorizar con seguridad las rutas probadas para usar async/await:
 
@@ -872,7 +862,7 @@ notesRouter.delete('/:id', async (request, response) => {
 })
 ```
 
-Debido a express-async-errors, ya no necesitamos la llamada a _next(exception)_.
+Debido a la librería, ya no necesitamos la llamada a _next(exception)_.
 La librería se encarga de todo lo que hay debajo del capó. Si ocurre una excepción en una ruta <i>async</i>, la ejecución se pasa automáticamente al middleware de manejo de errores.
 
 Las otras rutas se convierten en:
@@ -916,7 +906,7 @@ beforeEach(async () => {
 })
 ```
 
-La función guarda las dos primeras notas de la matriz _helper.initialNotes_ en la base de datos con dos operaciones separadas. La solución está bien, pero hay una mejor manera de guardar varios objetos en la base de datos:
+La función guarda las dos primeras notas del array _helper.initialNotes_ en la base de datos con dos operaciones separadas. La solución está bien, pero hay una mejor manera de guardar varios objetos en la base de datos:
 
 ```js
 beforeEach(async () => {
@@ -937,7 +927,7 @@ test('notes are returned as json', async () => {
 }
 ```
 
-Guardamos las notas almacenadas en la matriz en la base de datos dentro de un loop _forEach_. Sin embargo, las pruebas no parecen funcionar del todo, por lo que hemos agregado algunos registros de la consola para ayudarnos a encontrar el problema.
+Guardamos las notas almacenadas dentro del array en la base de datos dentro de un loop _forEach_. Sin embargo, las pruebas no parecen funcionar del todo, por lo que hemos agregado algunos registros de la consola para ayudarnos a encontrar el problema.
 
 La consola muestra el siguiente resultado:
 
@@ -968,11 +958,11 @@ beforeEach(async () => {
 })
 ```
 
-La solución es bastante avanzada a pesar de su apariencia compacta. La variable _noteObjects_ se asigna a una matriz de objetos Mongoose que se crean con el constructor _Note_ para cada una de las notas en la matriz _helper.initialNotes_. La siguiente línea de código crea una nueva matriz que <i>consiste en promesas</i>, que se crean llamando al método _save_ de cada elemento en la matriz _noteObjects_. En otras palabras, es una serie de promesas para guardar cada uno de los elementos en la base de datos.
+La solución es bastante avanzada a pesar de su apariencia compacta. La variable _noteObjects_ se asigna a un array de objetos Mongoose que se crean con el constructor _Note_ para cada una de las notas en el array _helper.initialNotes_. La siguiente línea de código crea un nuevo array que <i>consiste en promesas</i>, que se crean llamando al método _save_ de cada elemento en el array _noteObjects_. En otras palabras, es una serie de promesas para guardar cada uno de los elementos en la base de datos.
 
-El método [Promise.all](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) se puede utilizar para transformar una serie de promesas en una única promesa, que se <i>cumplirá</i> una vez que se resuelva cada promesa en la matriz que se le pasa como parámetro. La última línea de código <em>await Promise.all(promiseArray)</em> espera a que finalice cada promesa de guardar una nota, lo que significa que la base de datos se ha inicializado.
+El método [Promise.all](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) se puede utilizar para transformar una serie de promesas en una única promesa, que se <i>cumplirá</i> una vez que se resuelva cada promesa en el array que se le pasa como argumento. La última línea de código <em>await Promise.all(promiseArray)</em> espera a que finalice cada promesa de guardar una nota, lo que significa que la base de datos se ha inicializado.
 
-> Aún se puede acceder a los valores devueltos de cada promesa en la matriz cuando se usa el método Promise.all. Si esperamos a que se resuelvan las promesas con la sintaxis _await_ <em>const results = await Promise.all(promiseArray)</em>, la operación devolverá una matriz que contiene los valores resueltos para cada promesa en _promiseArray_, y aparecen en el mismo orden que las promesas en la matriz.
+> Aún se puede acceder a los valores devueltos de cada promesa en el array cuando se usa el método Promise.all. Si esperamos a que se resuelvan las promesas con la sintaxis _await_ <em>const results = await Promise.all(promiseArray)</em>, la operación devolverá un array que contiene los valores resueltos para cada promesa en _promiseArray_, y aparecen en el mismo orden que las promesas en el array.
 
 Promise.all ejecuta las promesas que recibe en paralelo. Si las promesas deben ejecutarse en un orden particular, esto será problemático. En situaciones como esta, las operaciones se pueden ejecutar dentro de un [for...of](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Statements/for...of), que garantiza un orden de ejecución especifico.
 
@@ -1005,7 +995,7 @@ El desarrollo full stack es <i> extremadamente difícil </i>, por eso usaré tod
 - Vigilaré la base de datos para confirmar que los datos enviados por el backend se guarden en el formato correcto
 - Progresaré en pequeños pasos
 - <i>Escribiré muchos console.log para asegurarme de que entiendo cómo se comporta el código y las pruebas; y para ayudarme a identificar problemas</i>
-- Si mi código no funciona, no escribiré más código. En su lugar, comenzaré a eliminar código hasta que funcione o simplemente volveré a un estado en el que todo todavía funcionaba
+- Si mi código no funciona, no escribiré más código. En su lugar, comenzaré a eliminar código hasta que funcione o simplemente volveré a un estado en el que todo aún funciona
 - <i>Si una prueba no pasa, me aseguraré de que la funcionalidad probada funcione correctamente en la aplicación</i>
 - Cuando pido ayuda en el canal Discord o Telegram del curso, o en otro lugar, formularé mis preguntas correctamente, ve [aquí](/es/part0/informacion_general#como-obtener-ayuda-en-discord-telegram) cómo pedir ayuda
 
@@ -1015,47 +1005,21 @@ El desarrollo full stack es <i> extremadamente difícil </i>, por eso usaré tod
 
 ### Ejercicios 4.8.-4.12.
 
-**NB:** el material usa el comparador [toContain](https://jestjs.io/es-ES/docs/expect#tocontainitem) en varios lugares para verificar que una matriz contiene un elemento específico. Vale la pena señalar que el método utiliza el operador === para comparar y hacer coincidir elementos, lo que significa que a menudo no es adecuado para hacer coincidir objetos. En la mayoría de los casos, el método apropiado para verificar objetos en matrices es el comparador [toContainEqual](https://jestjs.io/es-ES/docs/expect#tocontainequalitem). Sin embargo, las soluciones del modelo no comprueban objetos en matrices con comparadores, por lo que no es necesario utilizar el método para resolver los ejercicios.
-
 **Advertencia:** Si te encuentras utilizando los métodos async/await y <i>then</i> en el mismo código, es casi seguro que estás haciendo algo mal. Usa uno u otro y no mezcles los dos.
 
 #### 4.8: Pruebas de Lista de Blogs, paso 1
 
-Utiliza el paquete supertest para escribir una prueba que realice una solicitud HTTP GET a la URL <i>/api/blogs</i>. Verifica que la aplicación de la lista de blogs devuelva la cantidad correcta de publicaciones de blog en formato JSON.
+Utiliza la librería SuperTest para escribir una prueba que realice una solicitud HTTP GET a la URL <i>/api/blogs</i>. Verifica que la aplicación de la lista de blogs devuelva la cantidad correcta de publicaciones de blog en formato JSON.
 
 Una vez finalizada la prueba, refactoriza el controlador de ruta para usar la sintaxis async/await en lugar de promesas.
 
 Ten en cuenta que tendrás que realizar cambios similares en el código a los que fueron hechos [en el material](/es/part4/probando_el_backend#entorno-de-prueba), como definir el entorno de prueba para que puedas escribir pruebas que usan una base de datos separada.
 
-**NB:** Al ejecutar las pruebas, es posible que te encuentres con la siguiente advertencia:
-
-![advertencia para leer la documentación acerca de conectar a mongoose con jest](../../images/4/8a.png)
-
-[Una forma](https://stackoverflow.com/questions/50687592/jest-and-mongoose-jest-has-detected-opened-handles) de no tener este error es agregar dentro del directorio <i>tests</i> el archivo <i>teardown.js</i> con el siguiente contenido:
-
-```js
-module.exports = () => {
-  process.exit(0)
-}
-```
-
-Y extender la definición de Jest en el archivo <i>package.json</i> como se muestra a continuación
-
-```js
-{
- //...
- "jest": {
-   "testEnvironment": "node",
-   "globalTeardown": "./tests/teardown.js" // highlight-line
- }
-}
-```
-
 **NB:** cuando estás escribiendo tus pruebas **<i>es mejor no ejecutarlas todas</i>**, solo ejecuta aquellas en las que estás trabajando. Lee más sobre esto [aquí](/es/part4/probando_el_backend#ejecucion-de-pruebas-una-por-una).
 
 #### 4.9: Pruebas de Lista de Blogs, paso 2
 
-Escribe una prueba que verifique que la propiedad de identificador único de las publicaciones del blog se llame <i>id</i>, de manera predeterminada, la base de datos nombra la propiedad <i>_id</i>. La verificación de la existencia de una propiedad se realiza fácilmente con el comparador [toBeDefined](https://jestjs.io/es-ES/docs/expect#tobedefined) de Jest.
+Escribe una prueba que verifique que la propiedad de identificador único de las publicaciones del blog se llame <i>id</i>, de manera predeterminada, la base de datos nombra la propiedad <i>_id</i>.
 
 Realiza los cambios necesarios en el código para que pase la prueba. El método [toJSON](/es/part3/guardando_datos_en_mongo_db#backend-conectado-a-una-base-de-datos) discutido en la parte 3 es un lugar apropiado para definir el parámetro <i>id</i>.
 
@@ -1088,20 +1052,23 @@ Actualmente, a nuestras pruebas les falta cobertura. Algunas solicitudes como <i
 A continuación se muestra un ejemplo del archivo de prueba después de realizar algunas mejoras menores:
 
 ```js
-const supertest = require('supertest')
+const { test, after, beforeEach, describe } = require('node:test')
+const assert = require('node:assert')
 const mongoose = require('mongoose')
-const helper = require('./test_helper')
+const supertest = require('supertest')
 const app = require('../app')
 const api = supertest(app)
 
+const helper = require('./test_helper')
+
 const Note = require('../models/note')
 
-beforeEach(async () => {
-  await Note.deleteMany({})
-  await Note.insertMany(helper.initialNotes)
-})
-
 describe('when there is initially some notes saved', () => {
+  beforeEach(async () => {
+    await Note.deleteMany({})
+    await Note.insertMany(helper.initialNotes)
+  })
+
   test('notes are returned as json', async () => {
     await api
       .get('/api/notes')
@@ -1112,118 +1079,111 @@ describe('when there is initially some notes saved', () => {
   test('all notes are returned', async () => {
     const response = await api.get('/api/notes')
 
-    expect(response.body).toHaveLength(helper.initialNotes.length)
+    assert.strictEqual(response.body.length, helper.initialNotes.length)
   })
 
   test('a specific note is within the returned notes', async () => {
     const response = await api.get('/api/notes')
 
     const contents = response.body.map(r => r.content)
+    assert(contents.includes('Browser can execute only JavaScript'))
+  })
 
-    expect(contents).toContain(
-      'Browser can execute only JavaScript'
-    )
+  describe('viewing a specific note', () => {
+
+    test('succeeds with a valid id', async () => {
+      const notesAtStart = await helper.notesInDb()
+
+      const noteToView = notesAtStart[0]
+
+      const resultNote = await api
+        .get(`/api/notes/${noteToView.id}`)
+        .expect(200)
+        .expect('Content-Type', /application\/json/)
+
+      assert.deepStrictEqual(resultNote.body, noteToView)
+    })
+
+    test('fails with statuscode 404 if note does not exist', async () => {
+      const validNonexistingId = await helper.nonExistingId()
+
+      await api
+        .get(`/api/notes/${validNonexistingId}`)
+        .expect(404)
+    })
+
+    test('fails with statuscode 400 id is invalid', async () => {
+      const invalidId = '5a3d5da59070081a82a3445'
+
+      await api
+        .get(`/api/notes/${invalidId}`)
+        .expect(400)
+    })
+  })
+
+  describe('addition of a new note', () => {
+    test('succeeds with valid data', async () => {
+      const newNote = {
+        content: 'async/await simplifies making async calls',
+        important: true,
+      }
+
+      await api
+        .post('/api/notes')
+        .send(newNote)
+        .expect(201)
+        .expect('Content-Type', /application\/json/)
+
+      const notesAtEnd = await helper.notesInDb()
+      assert.strictEqual(notesAtEnd.length, helper.initialNotes.length + 1)
+
+      const contents = notesAtEnd.map(n => n.content)
+      assert(contents.includes('async/await simplifies making async calls'))
+    })
+
+    test('fails with status code 400 if data invalid', async () => {
+      const newNote = {
+        important: true
+      }
+
+      await api
+        .post('/api/notes')
+        .send(newNote)
+        .expect(400)
+
+      const notesAtEnd = await helper.notesInDb()
+
+      assert.strictEqual(notesAtEnd.length, helper.initialNotes.length)
+    })
+  })
+
+  describe('deletion of a note', () => {
+    test('succeeds with status code 204 if id is valid', async () => {
+      const notesAtStart = await helper.notesInDb()
+      const noteToDelete = notesAtStart[0]
+
+      await api
+        .delete(`/api/notes/${noteToDelete.id}`)
+        .expect(204)
+
+      const notesAtEnd = await helper.notesInDb()
+
+      assert.strictEqual(notesAtEnd.length, helper.initialNotes.length - 1)
+
+      const contents = notesAtEnd.map(r => r.content)
+      assert(!contents.includes(noteToDelete.content))
+    })
   })
 })
 
-describe('viewing a specific note', () => {
-  test('succeeds with a valid id', async () => {
-    const notesAtStart = await helper.notesInDb()
-
-    const noteToView = notesAtStart[0]
-
-    const resultNote = await api
-      .get(`/api/notes/${noteToView.id}`)
-      .expect(200)
-      .expect('Content-Type', /application\/json/)
-
-    expect(resultNote.body).toEqual(noteToView)
-  })
-
-  test('fails with statuscode 404 if note does not exist', async () => {
-    const validNonexistingId = await helper.nonExistingId()
-
-    await api
-      .get(`/api/notes/${validNonexistingId}`)
-      .expect(404)
-  })
-
-  test('fails with statuscode 400 if id is invalid', async () => {
-    const invalidId = '5a3d5da59070081a82a3445'
-
-    await api
-      .get(`/api/notes/${invalidId}`)
-      .expect(400)
-  })
-})
-
-describe('addition of a new note', () => {
-  test('succeeds with valid data', async () => {
-    const newNote = {
-      content: 'async/await simplifies making async calls',
-      important: true,
-    }
-
-    await api
-      .post('/api/notes')
-      .send(newNote)
-      .expect(201)
-      .expect('Content-Type', /application\/json/)
-
-    const notesAtEnd = await helper.notesInDb()
-    expect(notesAtEnd).toHaveLength(helper.initialNotes.length + 1)
-
-    const contents = notesAtEnd.map(n => n.content)
-    expect(contents).toContain(
-      'async/await simplifies making async calls'
-    )
-  })
-
-  test('fails with status code 400 if data invalid', async () => {
-    const newNote = {
-      important: true
-    }
-
-    await api
-      .post('/api/notes')
-      .send(newNote)
-      .expect(400)
-
-    const notesAtEnd = await helper.notesInDb()
-
-    expect(notesAtEnd).toHaveLength(helper.initialNotes.length)
-  })
-})
-
-describe('deletion of a note', () => {
-  test('succeeds with status code 204 if id is valid', async () => {
-    const notesAtStart = await helper.notesInDb()
-    const noteToDelete = notesAtStart[0]
-
-    await api
-      .delete(`/api/notes/${noteToDelete.id}`)
-      .expect(204)
-
-    const notesAtEnd = await helper.notesInDb()
-
-    expect(notesAtEnd).toHaveLength(
-      helper.initialNotes.length - 1
-    )
-
-    const contents = notesAtEnd.map(r => r.content)
-
-    expect(contents).not.toContain(noteToDelete.content)
-  })
-})
-
-afterAll(async () => {
+after(async () => {
   await mongoose.connection.close()
 })
 ```
 
 La salida de las pruebas en la consola se agrupa de acuerdo con los bloques <i>describe</i>:
 
-![salida de jest mostrando bloques describe agrupados](../../images/4/7.png)
+![salida de node:test mostrando bloques describe agrupados](../../images/4/7new.png)
 
 Todavía hay margen de mejora, pero es hora de seguir adelante.
 

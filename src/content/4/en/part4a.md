@@ -569,7 +569,7 @@ In the next row, the test file imports the function to be tested and assigns it 
 const reverse = require('../utils/for_testing').reverse
 ```
 
-Individual test cases are defined with the _test_ function. The first parameter of the function is the test description as a string. The second parameter is a <i>function</i>, that defines the functionality for the test case. The functionality for the second test case looks like this:
+Individual test cases are defined with the _test_ function. The first argument of the function is the test description as a string. The second argument is a <i>function</i>, that defines the functionality for the test case. The functionality for the second test case looks like this:
 
 ```js
 () => {
