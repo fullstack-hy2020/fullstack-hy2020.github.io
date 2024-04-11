@@ -430,13 +430,13 @@ The first one is the form submit event. Let's zoom into it:
 
 ![Detailed view of the first request](../../images/0/22e.png)
 
-It is an [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request to the server address <i>new\_note</i>. The server responds with HTTP status code 302. This is a [URL redirect](https://en.wikipedia.org/wiki/URL\_redirection), with which the server asks the browser to do a new HTTP GET request to the address defined in the header's <i>Location</i> - the address <i>notes</i>.
+It is an [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request to the server address <i>new\_note</i>. The server responds with HTTP status code 302. This is a [URL redirect](https://en.wikipedia.org/wiki/URL\_redirection), with which the server asks the browser to perform a new HTTP GET request to the address defined in the header's <i>Location</i> - the address <i>notes</i>.
 
 So, the browser reloads the Notes page. The reload causes three more HTTP requests: fetching the style sheet (main.css), the JavaScript code (main.js), and the raw data of the notes (data.json).
 
 The network tab also shows the data submitted with the form:
 
-NB: On newer Chrome, the Form Data dropdown is within the new Payload tab, located to the right of the Headers tab.
+The Form Data dropdown is within the new Payload tab, located to the right of the Headers tab.
 
 ![form data dropdown in developer tools](../../images/0/23e.png)
 
@@ -581,7 +581,7 @@ jQuery was developed back when web applications mainly followed the traditional 
 
 The rise of the single-page app brought several more "modern" ways of web development than jQuery. The favorite of the first wave of developers was [BackboneJS](http://backbonejs.org/). After its [launch](https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100rc1-moir%C3%A9-vision-2012-03-13) in 2012, Google's [AngularJS](https://angularjs.org/) quickly became almost the de facto standard of modern web development.
 
-However, the popularity of Angular plummeted in October 2014 after the [Angular team announced that support for version 1 will end](https://web.archive.org/web/20151208002550/https://jaxenter.com/angular-2-0-announcement-backfires-112127.html), and that Angular 2 will not be backwards compatible with the first version. Angular 2 and the newer versions have not gotten too warm of a welcome.
+However, the popularity of Angular plummeted in October 2014 after the [Angular team announced that support for version 1 will end](https://web.archive.org/web/20151208002550/https://jaxenter.com/angular-2-0-announcement-backfires-112127.html), and that Angular 2 will not be backwards compatible with the first version. Angular 2 and the newer versions have not received too warm of a welcome.
 
 Currently, the most popular tool for implementing the browser-side logic of web applications is Facebook's [React](https://react.dev/) library.
 During this course, we will get familiar with React and the [Redux](https://github.com/reactjs/redux) library, which are frequently used together.
