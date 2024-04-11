@@ -734,7 +734,7 @@ test('login fails with wrong password', async ({ page }) =>{
 By default, Playwright always runs all tests, and as the number of tests increases, it becomes time-consuming. When developing a new test or debugging a broken one, the test can be defined instead of the command <i>test</i> with the command <i>test.only</i>, in which case Playwright will run only that test:
 
 ```js
-describre(() => {
+describe(() => {
   // this is the only test executed!
   test.only('login fails with wrong password', async ({ page }) => {  // highlight-line
     // ...
