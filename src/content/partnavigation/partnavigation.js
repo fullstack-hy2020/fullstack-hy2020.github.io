@@ -274,6 +274,7 @@ module.exports = {
       b: 'Probando el backend',
       c: 'Administración de usuarios',
       d: 'Autenticación basada en token',
+      e: 'Legacy: Testing con Jest',
     },
     '5': {
       a: 'Iniciar sesión en la interfaz',
