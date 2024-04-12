@@ -53,7 +53,7 @@ In order to enable legitimate cross-origin requests (requests to URLs that don't
 > <i>Cross-origin resource sharing (CORS) is a mechanism that allows restricted resources (e.g. fonts) on a web page to be requested from another domain outside the domain from which the first resource was served. A web page may freely embed cross-origin images, stylesheets, scripts, iframes, and videos. Certain "cross-domain" requests, notably Ajax requests, are forbidden by default by the same-origin security policy.</i>
 
 The problem is that, by default, the JavaScript code of an application that runs in a browser can only communicate with a server in the same [origin](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy).
-Because our server is in localhost port 3001, while our frontend is in localhost port 5173, they do not have the same origin.
+Because our server is in localhost port 3001, while our frontend is in localhost port 3000, they do not have the same origin.
 
 Keep in mind, that [same-origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy) and CORS are not specific to React or Node. They are universal principles regarding the safe operation of web applications.
 
@@ -225,7 +225,7 @@ Next we will define the basic configurations. If the app is <i>not</i> at the ro
 
 ![image showing the Root Directory field as optional](../../images/3/r3.png)
 
-After this, the app starts up in the Render. The dashboard tells us the app state and the url where the app is running:
+After this, the app starts up in Render. The dashboard tells us the app state and the URL where the app is running:
 
 ![The top left corner of the image shows the status of the application and its URL](../../images/3/r4.png)
 
@@ -365,7 +365,7 @@ fly deploy
 
 The application works perfectly, except we haven't added the functionality for changing the importance of a note to the backend yet.
 
-<strong>NOTE:</strong> When using Fly.io, be aware that the _.dockerignore_ file in your project directory lists files not uploaded during deployment. The dist directory is included by default. To deploy this directory, remove its reference from the .dockerignore file, ensuring your app is get properly deployed.
+<strong>NOTE:</strong> When using Fly.io, be aware that the _.dockerignore_ file in your project directory lists files not uploaded during deployment. The dist directory is included by default. To deploy this directory, remove its reference from the .dockerignore file, ensuring your app gets properly deployed.
 
 ![screenshot of notes application](../../images/3/30new.png)
 
@@ -375,7 +375,7 @@ Our application saves the notes to a variable. If the application crashes or is 
 
 The application needs a database. Before we introduce one, let's go through a few things.
 
-The setup now looks like as follows:
+The setup now looks as follows:
 
 ![diagram of react app on fly.io](../../images/3/102.png)
 
@@ -421,7 +421,7 @@ Note that the directory paths in the script <i>build:ui</i> depend on the locati
 
 #### Render
 
-Note: When you attempt to deploy your backend to Render, make sure you have a separate repository for the backend and deploy that github repo through Render, attempting to deploy through your Fullstackopen repository will often throw "ERR path ....package.json".
+Note: When you attempt to deploy your backend to Render, make sure you have a separate repository for the backend and deploy that GitHub repo through Render. Attempting to deploy through your Fullstackopen repository will often throw "ERR path ....package.json".
 
 In case of Render, the scripts look like the following
 
@@ -459,7 +459,7 @@ This is due to changing the backend address to a relative URL:
 const baseUrl = '/api/notes'
 ```
 
-Because in development mode the frontend is at the address <i>localhost:5173</i>, the requests to the backend go to the wrong address <i>localhost:5173/api/notes</i>. The backend is at <i>localhost:3001</i>.
+Because in development mode the frontend is at the address <i>localhost:3000</i>, the requests to the backend go to the wrong address <i>localhost:3000/api/notes</i>. The backend is at <i>localhost:3001</i>.
 
 If the project was created with Vite, this problem is easy to solve. It is enough to add the following declaration to the <i>vite.config.js</i> file of the frontend repository.
 
@@ -484,7 +484,7 @@ export default defineConfig({
 
 ```
 
-After a restart, the React development environment will work as a [proxy](https://vitejs.dev/config/server-options.html#server-proxy). If the React code does an HTTP request to a server address at <i><http://localhost:5173></i> not managed by the React application itself (i.e. when requests are not about fetching the CSS or JavaScript of the application), the request will be redirected to the server at <i><http://localhost:3001></i>.
+After a restart, the React development environment will work as a [proxy](https://vitejs.dev/config/server-options.html#server-proxy). If the React code does an HTTP request to a server address at <i><http://localhost:3000></i> not managed by the React application itself (i.e. when requests are not about fetching the CSS or JavaScript of the application), the request will be redirected to the server at <i><http://localhost:3001></i>.
 
 Note that with the vite-configuration shown above, only requests that are made to paths starting with <i>/api</i>-are redirected to the server.
 
