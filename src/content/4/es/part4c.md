@@ -285,10 +285,10 @@ describe('when there is initially one user in db', () => {
       .expect('Content-Type', /application\/json/)
 
     const usersAtEnd = await helper.usersInDb()
-    expect(usersAtEnd).toHaveLength(usersAtStart.length + 1)
+    assert.strictEqual(usersAtEnd.length, usersAtStart.length + 1)
 
     const usernames = usersAtEnd.map(u => u.username)
-    expect(usernames).toContain(newUser.username)
+    assert(usernames.includes(newUser.username))
   })
 })
 ```
@@ -334,34 +334,27 @@ describe('when there is initially one user in db', () => {
       .expect(400)
       .expect('Content-Type', /application\/json/)
 
-    expect(result.body.error).toContain('expected `username` to be unique')
-
     const usersAtEnd = await helper.usersInDb()
-    expect(usersAtEnd).toEqual(usersAtStart)
+    assert(result.body.error.includes('expected `username` to be unique'))
+
+    assert.strictEqual(usersAtEnd.length, usersAtStart.length)
   })
 })
 ```
 
 El caso de prueba obviamente no pasará en este punto. Básicamente, estamos practicando [desarrollo guiado por pruebas (TDD)](https://es.wikipedia.org/wiki/Desarrollo_guiado_por_pruebas), donde las pruebas para la nueva funcionalidad se escriben antes de implementar la funcionalidad.
 
-Mongoose no tiene un validador incorporado para verificar la unicidad de un campo. Podemos encontrar una solución lista para esto en el paquete npm [mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator). Vamos a instalarlo:
-
-```bash
-npm install mongoose-unique-validator
-```
-
-Debemos realizar los siguientes cambios en el esquema definido en el archivo <i>models/user.js</i>:
+Las validaciones de Mongoose no proporcionan una manera directa de verificar la unicidad del valor de un campo. Sin embargo, es posible lograr la unicidad definiendo un [índice de unicidad](https://mongoosejs.com/docs/schematypes.html) para un campo. La definición se realiza de la siguiente manera:
 
 ```js
 const mongoose = require('mongoose')
-const uniqueValidator = require('mongoose-unique-validator') // highlight-line
 
 const userSchema = mongoose.Schema({
   // highlight-start
   username: {
     type: String,
     required: true,
-    unique: true
+    unique: true // esto asegura la unicidad de username
   },
   // highlight-end
   name: String,
@@ -374,20 +367,30 @@ const userSchema = mongoose.Schema({
   ],
 })
 
-userSchema.plugin(uniqueValidator) // highlight-line
-
 // ...
 ```
 
-Nota: al instalar la librería _mongoose-unique-validator_, es posible que encuentres el siguiente mensaje de error:
+Sin embargo, queremos tener cuidado al usar el índice de unicidad. Si ya hay documentos en la base de datos que violan la condición de unicidad, [no se creará ningún índice](https://dev.to/akshatsinghania/mongoose-unique-not-working-16bf). Por lo tanto, al agregar un índice de unicidad, ¡asegúrate de que la base de datos esté en un estado saludable! La prueba anterior agregó al usuario con username _root_ a la base de datos dos veces, y estos deben ser eliminados para que el índice se forme y el código funcione.
 
-![error de dependencia sin resolver para mongoose unique validator](../../images/4/uniq.png)
+Las validaciones de Mongoose no detectan la violación del índice, y en lugar de _ValidationError_ devuelven un error del tipo _MongoServerError_. Por lo tanto, necesitamos extender el controlador de errores para ese caso:
 
-La razón de esto es que en el momento de la redacción (10.11.2023), la librería aún no es compatible con la versión 8 de Mongoose. Si encuentras este error, puedes retroceder a una versión anterior de Mongoose ejecutando el comando
+```js
+const errorHandler = (error, request, response, next) => {
+  if (error.name === 'CastError') {
+    return response.status(400).send({ error: 'malformatted id' })
+  } else if (error.name === 'ValidationError') {
+    return response.status(400).json({ error: error.message })
+// highlight-start
+  } else if (error.name === 'MongoServerError' && error.message.includes('E11000 duplicate key error')) {
+    return response.status(400).json({ error: 'expected `username` to be unique' })
+  }
+  // highlight-end
 
+  next(error)
+}
 ```
-npm install mongoose@7.6.5
-```
+
+Luego de estos cambios, las pruebas pasaran.
 
 También podríamos implementar otras validaciones en la creación de usuarios. Podríamos comprobar que el nombre de usuario es lo suficientemente largo, que el nombre de usuario solo consta de caracteres permitidos o que la contraseña es lo suficientemente segura. La implementación de estas funcionalidades se deja como ejercicio opcional.
 
@@ -446,25 +449,6 @@ notesRouter.post('/', async (request, response) => {
 })
 ```
 
-El esquema de las notas también deberá cambiar cómo a continuación, en nuestro archivo models/note.js:
-
-```js
-const noteSchema = new mongoose.Schema({
-  content: {
-    type: String,
-    required: true,
-    minlength: 5
-  },
-  important: Boolean,
-  // highlight-start
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  }
-  //highlight-end
-})
-```
-
 Vale la pena notar que el objeto <i>user</i> también cambia. El <i>id</i> de la nota se almacena en el campo <i>notes</i> del objeto <i>user</i>:
 
 ```js
@@ -507,13 +491,13 @@ usersRouter.get('/', async (request, response) => {
 })
 ```
 
-El método [populate](http://mongoosejs.com/docs/populate.html) se encadena después de que el método <i>find</i> realiza la consulta inicial. El parámetro dado al método populate define que los <i>ids</i> que hacen referencia a objetos <i>note</i> en el campo <i>notes</i> del documento <i>user</i> serán reemplazados por los documentos de <i>note</i> referenciados.
+El método [populate](http://mongoosejs.com/docs/populate.html) se encadena después de que el método <i>find</i> realiza la consulta inicial. El argumento dado al método populate define que los <i>ids</i> que hacen referencia a objetos <i>note</i> en el campo <i>notes</i> del documento <i>user</i> serán reemplazados por los documentos de <i>note</i> referenciados.
 
 El resultado es casi exactamente lo que queríamos:
 
 ![datos JSON en el navegador mostrando datos de notas y usuarios repetidos](../../images/4/13new.png)
 
-Podemos usar el parámetro populate para elegir los campos que queremos incluir de los documentos. Además del campo *id*, ahora solo nos interesan *content* e *important*.
+Podemos usar el método populate para elegir los campos que queremos incluir de los documentos. Además del campo *id*, ahora solo nos interesan *content* e *important*.
 
 La selección de campos se realiza con la [sintaxis](https://www.mongodb.com/docs/manual/tutorial/project-fields-from-query-results/#return-the-specified-fields-and-the-_id-field-only) de Mongo:
 

@@ -982,7 +982,7 @@ app.use(requestLogger)
 
 Recuerda, las funciones middleware se llaman en el orden en el que son encontradas por el motor de JavaScript. Ten en cuenta que _json-parser_ se encuentra definido antes que _requestLogger_, porque de lo contrario, ¡<i>request.body</i> no se inicializará cuando se ejecute el logger!
 
-Las funciones de middleware deben utilizarse antes que las rutas cuando queremos que sean ejecutadas por los controladores de eventos de ruta. A veces, queremos usar funciones de middleware después que las rutas. Hacemos esto cuando las funciones de middleware solo son llamadas si ninguna ruta maneja la solicitud HTTP.
+Las funciones de middleware deben utilizarse antes que las rutas cuando queremos que sean ejecutadas por los controladores de eventos de ruta. A veces, queremos usar funciones de middleware después que las rutas. Hacemos esto cuando las funciones de middleware solo son llamadas si ningún controlador de ruta se encarga de la solicitud HTTP.
 
 Agreguemos el siguiente middleware después de nuestras rutas, que se usa para capturar solicitudes realizadas a rutas inexistentes. Para estas solicitudes, el middleware devolverá un mensaje de error en formato JSON.
 
