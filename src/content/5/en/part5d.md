@@ -173,7 +173,7 @@ test('front page can be opened', async ({ page }) => {
 })
 ```
 
-First, the test opens the application with the method [page.goto](https://playwright.dev/docs/writing-tests#navigation). After this, the test uses the [page.getByText](https://playwright.dev/docs/api/class-page#page-get-by-text) to get a [locator](https://playwright.dev/docs/api /class-locator) that corresponds to the element where the text <i>Notes</i> is found.
+First, the test opens the application with the method [page.goto](https://playwright.dev/docs/writing-tests#navigation). After this, the test uses the [page.getByText](https://playwright.dev/docs/api/class-page#page-get-by-text) to get a [locator](https://playwright.dev/docs/locators) that corresponds to the element where the text <i>Notes</i> is found.
 
 The method [toBeVisible](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-be-visible) ensures that the element corresponding to the locator is visible at the page.
 
