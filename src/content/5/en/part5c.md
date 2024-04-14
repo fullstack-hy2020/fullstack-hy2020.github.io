@@ -57,7 +57,7 @@ afterEach(() => {
 })
 ```
 
-Now, after each test, the function _cleanup_ is performed that resets the jsdom that is simulating the browser.
+Now, after each test, the function _cleanup_ is executed to reset jsdom, which is simulating the browser.
 
 Expand the _vite.config.js_ file as follows
 
@@ -131,7 +131,7 @@ We can use the object [screen](https://testing-library.com/docs/queries/about#sc
   expect(element).toBeDefined()
 ```
 
-The existence of an element is checked using Vitest's [expect](https://vitest.dev/api/expect.html#expect) command. Expect generates an assertion from its parameter, the validity of which can be tested using various condition functions. Now we used [toBeDefined](https://vitest.dev/api/expect.html#tobedefined) which tests whether the _element_ parameter of expect exists.
+The existence of an element is checked using Vitest's [expect](https://vitest.dev/api/expect.html#expect) command. Expect generates an assertion for its argument, the validity of which can be tested using various condition functions. Now we used [toBeDefined](https://vitest.dev/api/expect.html#tobedefined) which tests whether the _element_ argument of expect exists.
 
 Run the test with command _npm test_:
 
@@ -384,7 +384,7 @@ The expectation of the test uses [toHaveLength](https://vitest.dev/api/expect.ht
 expect(mockHandler.mock.calls).toHaveLength(1)
 ```
 
-The calls of the mock function are saved to the array [mock.calls](https://vitest.dev/api/mock#mock-calls) within the mock function object.
+The calls to the mock function are saved to the array [mock.calls](https://vitest.dev/api/mock#mock-calls) within the mock function object.
 
 [Mock objects and functions](https://en.wikipedia.org/wiki/Mock_object) are commonly used [stub](https://en.wikipedia.org/wiki/Method_stub) components in testing that are used for replacing dependencies of the components being tested. Mocks make it possible to return hardcoded responses, and to verify the number of times the mock functions are called and with what parameters.
 
@@ -417,7 +417,6 @@ const Togglable = forwardRef((props, ref) => {
 The tests are shown below:
 
 ```js
-
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Togglable from './Togglable'
@@ -592,7 +591,7 @@ test('<NoteForm /> updates parent state and calls onSubmit', async() => {
 })
 ```
 
-In the middle of running the tests, the following is printed
+In the middle of running the tests, the following is printed in the console:
 
 ```
 [ [ { content: 'testing a form...', important: true } ] ]
