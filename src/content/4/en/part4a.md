@@ -413,7 +413,9 @@ In the exercises for this part, we will be building a <i>blog list application</
 
 #### 4.1 Blog List, step 1
 
-Let's imagine a situation, where you receive an email that contains the following application body and instructions:
+Change the code below into a functioning <i>npm</i> project. To keep your development productive, configure the application to be executed with <i>nodemon</i>. You can create a new database for your application with MongoDB Atlas, or use the same database from the previous part's exercises.
+
+Verify that it is possible to add blogs to the list with Postman or the VS Code REST client and that the application returns the added blogs at the correct endpoint.
 
 ```js
 const express = require('express')
@@ -459,10 +461,6 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
 ```
-
-Turn the application into a functioning <i>npm</i> project. To keep your development productive, configure the application to be executed with <i>nodemon</i>. You can create a new database for your application with MongoDB Atlas, or use the same database from the previous part's exercises.
-
-Verify that it is possible to add blogs to the list with Postman or the VS Code REST client and that the application returns the added blogs at the correct endpoint.
 
 #### 4.2 Blog List, step 2
 
