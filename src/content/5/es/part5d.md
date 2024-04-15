@@ -22,45 +22,123 @@ También tienen algunos inconvenientes. Configurar las pruebas E2E es más compl
 Las pruebas E2E también pueden ser [flaky](https://hackernoon.com/flaky-tests-a-war-that-never-ends-9aa32fdef359) (inestables).
 Algunas pruebas pueden pasar una vez y fallar en otra, incluso si el código no cambia en absoluto.
 
-### Cypress
+Quizás las dos librerías más fáciles para pruebas de extremo a extremo en este momento son [Cypress](https://www.cypress.io/) y [Playwright](https://playwright.dev/).
 
-La biblioteca E2E [Cypress](https://www.cypress.io/) se ha vuelto popular durante los últimos años. Cypress es excepcionalmente fácil de usar y, en comparación con Selenium, por ejemplo, requiere mucha menos molestia y dolor de cabeza.
-Su principio operativo es radicalmente diferente al de la mayoría de las librerías de prueba E2E, porque las pruebas Cypress se ejecutan completamente dentro del navegador.
-Otras librerías ejecutan las pruebas en un proceso de Node, que está conectado al navegador a través de una API.
+De las estadísticas en [npmtrends.com](https://npmtrends.com/cypress-vs-playwright) vemos que Cypress, que dominó el mercado durante los últimos cinco años, sigue siendo claramente el número uno, pero Playwright está en un rápido ascenso:
 
-Hagamos algunas pruebas de extremo a extremo para nuestra aplicación de notas.
+![cypress vs playwright en tendencias de npm](../../images/5/cvsp.png)
 
-Comenzamos instalando Cypress en el <i>frontend </i> como dependencia de desarrollo
+Este curso ha estado usando Cypress durante años. Ahora Playwright es una nueva adición. Puedes elegir si completar la parte de pruebas E2E del curso con Cypress o Playwright. Los principios operativos de ambas librerías son muy similares, así que tu elección no es muy importante. Sin embargo, ahora Playwright es la librería E2E preferida para el curso.
+
+Si tu elección es Playwright, por favor continúa. Si terminas usando Cypress, ve [aquí](/es/part5/pruebas_de_extremo_a_extremo_cypress).
+
+### Playwright
+
+[Playwright](https://playwright.dev/) es un recién llegado a las pruebas de extremo a extremo, que comenzó a explotar en popularidad hacia finales de 2023. Playwright está aproximadamente a la par con Cypress en términos de facilidad de uso. Las librerías son ligeramente diferentes en términos de cómo funcionan. Cypress es radicalmente diferente de la mayoría de las librerías de pruebas E2E, ya que las pruebas de Cypress se ejecutan completamente dentro del navegador. Las pruebas de Playwright, por otro lado, se ejecutan en el proceso de Node, que está conectado al navegador a través de interfaces de programación.
+
+Se han escrito muchos blogs sobre comparaciones de librerías, por ejemplo, [este](https://www.lambdatest.com/blog/cypress-vs-playwright/) y [este](https://www.browserstack.com/guide/playwright-vs-cypress).
+
+Es difícil decir qué librería es mejor. Una ventaja de Playwright es su soporte de navegadores; Playwright soporta Chrome, Firefox y navegadores basados en Webkit como Safari. Actualmente, Cypress incluye soporte para todos estos navegadores, aunque el soporte de Webkit es experimental y no soporta todas las funcionalidades de Cypress. Al momento de escribir (1.3.2024), mi preferencia personal se inclina ligeramente hacia Playwright.
+
+Ahora exploremos Playwright.
+
+### Inicializando pruebas
+
+A diferencia de las pruebas de backend o las pruebas unitarias realizadas en el front-end de React, las pruebas de extremo a extremo no necesitan estar ubicadas en el mismo proyecto npm donde está el código. Hagamos un proyecto completamente separado para las pruebas E2E con el comando _npm init_. Luego instala Playwright ejecutando en el directorio del nuevo proyecto el comando:
 
 ```js
-npm install --save-dev cypress
+npm init playwright@latest
 ```
 
-y agregando un script npm para ejecutarlo:
+El script de instalación hará algunas preguntas, responde de la siguiente manera:
+
+![respuesta: javascript, tests, false, true](../../images/5/play0.png)
+
+Definamos un script npm para ejecutar pruebas e informes de pruebas en _package.json_:
 
 ```js
 {
   // ...
   "scripts": {
-    "dev": "vite --host",  // highlight-line
-    "build": "vite build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "server": "json-server -p3001 --watch db.json",
-    "test": "jest",
-    "cypress:open": "cypress open"  // highlight-line
+    "test": "playwright test",
+    "test:report": "playwright show-report"
   },
   // ...
 }
 ```
 
-También le hacemos un pequeño cambio al script que inicia la aplicación, sin este cambio Cypress no puede acceder a ella.
+Durante la instalación, lo siguiente se imprime en la consola:
 
-A diferencia de las pruebas unitarias del frontend, las pruebas de Cypress pueden estar en el repositorio frontend o backend, o incluso en su propio repositorio separado.
+```
+And check out the following files:
+  - ./tests/example.spec.js - Example end-to-end test
+  - ./tests-examples/demo-todo-app.spec.js - Demo Todo App end-to-end tests
+  - ./playwright.config.js - Playwright Test configuration
+```
 
-Las pruebas requieren que el sistema bajo prueba esté funcionando. A diferencia de nuestras pruebas de integración de backend, las pruebas de Cypress <i>no inician</i> el sistema cuando se ejecutan.
+esto es, la ubicación de algunas pruebas de ejemplo para el proyecto que la instalación ha creado.
 
-Agreguemos un script npm al <i>backend </i> que lo inicia en modo de prueba, o para que <i>NODE\\_ENV </i> sea <i>test</i>.
+Ejecutemos algunas pruebas:
+
+```bash
+$ npm test
+
+> notes-e2e@1.0.0 test
+> playwright test
+
+
+Running 6 tests using 5 workers
+  6 passed (3.9s)
+
+To open last HTML report run:
+
+  npx playwright show-report
+```
+
+Las pruebas pasan. Un reporte más detallado puede abrirse tanto con el comando sugerido en la consola, como con el script de npm que acabamos de definir:
+
+```
+npm run test:report
+```
+
+Las pruebas también pueden ejecutarse a través de la interfaz gráfica con el comando:
+
+```
+npm run test -- --ui
+```
+
+Las pruebas de muestra se ven así:
+
+```js
+const { test, expect } = require('@playwright/test');
+
+test('has title', async ({ page }) => {
+  await page.goto('https://playwright.dev/'); // highlight-line
+
+  // Expect a title "to contain" a substring.
+  await expect(page).toHaveTitle(/Playwright/);
+});
+
+test('get started link', async ({ page }) => {
+  await page.goto('https://playwright.dev/');
+
+  // Click the get started link.
+  await page.getByRole('link', { name: 'Get started' }).click();
+
+  // Expects page to have a heading with the name of Installation.
+  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+});
+```
+
+La primera linea de las funciones test dicen que las pruebas están probando la pagina https://playwright.dev/.
+
+### Probando nuestro propio código
+
+Ahora eliminemos las pruebas de ejemplo y comencemos a probar nuestra propia aplicación.
+
+Las pruebas de Playwright asumen que el sistema bajo prueba está en funcionamiento cuando se ejecutan las pruebas. A diferencia de, por ejemplo, las pruebas de integración de backend, las pruebas de Playwright <i>no inician</i> el sistema bajo prueba durante las pruebas.
+
+Hagamos un script npm para el <i>backend</i>, que permitirá iniciarlo en modo de prueba, es decir, de modo que <i>NODE_ENV</i> obtenga el valor <i>test</i>.
 
 ```js
 {
@@ -73,195 +151,202 @@ Agreguemos un script npm al <i>backend </i> que lo inicia en modo de prueba, o p
     "deploy:full": "npm run build:ui && npm run deploy",
     "logs:prod": "fly logs",
     "lint": "eslint .",
-    "test": "jest --verbose --runInBand",
+    "test": "NODE_ENV=test node --test",
     "start:test": "NODE_ENV=test node index.js" // highlight-line
   },
   // ...
 }
 ```
 
-**NB** Para conseguir que Cypress funcione con WSL2 se debe realizar una configuración preliminar. Estos dos [enlaces](https://docs.cypress.io/guides/references/advanced-installation#Windows-Subsystem-for-Linux) son buenos lugares para [iniciar](https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress).
-
-Cuando tanto el backend como el frontend están ejecutándose, podemos iniciar Cypress con el comando
+Iniciemos el frontend y el backend, y creemos el primer archivo de prueba para la aplicación <code>tests/note\_app.spec.js</code>:
 
 ```js
-npm run cypress:open
+const { test, expect } = require('@playwright/test')
+
+test('front page can be opened', async ({ page }) => {
+  await page.goto('http://localhost:5173')
+
+  const locator = await page.getByText('Notes')
+  await expect(locator).toBeVisible()
+  await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2023')).toBeVisible()
+})
 ```
 
-Cypress nos pregunta qué tipo de prueba realizaremos. Debemos elegir "E2E Testing":
+Primero, la prueba abre la aplicación con el método [page.goto](https://playwright.dev/docs/writing-tests#navigation). Después de esto, utiliza el método [page.getByText](https://playwright.dev/docs/api/class-page#page-get-by-text) para obtener un [locator](https://playwright.dev/docs/locators) (localizador) que corresponde al elemento donde se encuentra el texto <i>Notes</i>.
 
-![flecha apuntando a opción e2e en menú de cypress](../../images/5/51new.png)
+El método [toBeVisible](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-be-visible) asegura que el elemento correspondiente al localizador sea visible en la página.
 
-A continuación debemos elegir un navegador (por ejemplo Chrome) y luego debemos hacer click en "Create new spec":
+La segunda comprobación se realiza sin usar la variable auxiliar.
 
-![flecha apuntando a crear nuevo spec en menú de cypress](../../images/5/52new.png)
-
-Creemos el archivo de prueba <i>cypress/e2e/note\_app.cy.js</i>:
-
-![ubicación de archivo de prueba de cypress en cypress/e2e/note_app.cy.js](../../images/5/53new.png)
-
-Podemos editar la prueba en Cypress, pero usemos en cambio VS Code:
-
-![vscode mostrando cambios en la prueba y cypress mostrando que la prueba fue agregada](../../images/5/54new.png)
-
-Ahora podemos cerrar la vista de edición de Cypress.
-
-Cambiemos el contenido de la prueba como se muestra a continuación:
+Nos damos cuenta de que el año ha cambiado. Cambiemos la prueba de la siguiente manera:
 
 ```js
-describe('Note app', function() {
-  it('front page can be opened', function() {
-    cy.visit('http://localhost:5173')
-    cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
+const { test, expect } = require('@playwright/test')
+
+test('front page can be opened', async ({ page }) => {
+  await page.goto('http://localhost:5173')
+
+  const locator = await page.getByText('Notes')
+  await expect(locator).toBeVisible()
+  await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible() // highlight-line
+})
+```
+
+Como se esperaba, la prueba falla. Playwright abre el informe de la prueba en el navegador y se hace evidente que Playwright ha realizado las pruebas con tres navegadores diferentes: Chrome, Firefox y Webkit, es decir, el motor de navegador utilizado por Safari:
+
+![informe de prueba mostrando la prueba fallida en tres navegadores diferentes](../../images/5/play2.png)
+
+Al hacer clic en el informe de uno de los navegadores, podemos ver un mensaje de error más detallado:
+
+![mensaje de error de la prueba](../../images/5/play3a.png)
+
+Generalmente, es por supuesto algo muy bueno que las pruebas se lleven a cabo con los tres motores de navegador más comúnmente utilizados, pero esto es lento, y al desarrollar las pruebas probablemente sea mejor realizarlas principalmente con solo un navegador. Puedes definir el motor de navegador a utilizar con el parámetro de línea de comando:
+
+```js
+npm test -- --project chromium
+```
+
+Ahora corrijamos el año desactualizado en el código del frontend que causó el error.
+
+Antes de continuar, agreguemos un bloque _describe_ a las pruebas:
+
+```js
+const { test, describe, expect } = require('@playwright/test')
+
+describe('Note app', () => {  // highlight-line
+  test('front page can be opened', async ({ page }) => {
+    await page.goto('http://localhost:5173')
+
+    const locator = await page.getByText('Notes')
+    await expect(locator).toBeVisible()
+    await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible()
   })
 })
 ```
 
-La prueba se ejecuta haciendo clic en ella en Cypress:
+Antes de continuar, rompamos las pruebas una vez más. Notamos que la ejecución de las pruebas es bastante rápida cuando pasan, pero mucho más lenta si no pasan. La razón de esto es que la política de Playwright es esperar a que los elementos buscados estén [renderizados y listos para la acción](https://playwright.dev/docs/actionability). Si el elemento no se encuentra, se genera un _TimeoutError_ y la prueba falla. Playwright espera por los elementos por defecto durante 5 o 30 segundos [dependiendo de las funciones utilizadas en la prueba](https://playwright.dev/docs/test-timeouts#introduction).
 
-Ejecutar la prueba muestra cómo se comporta la aplicación mientras esta se ejecuta:
-
-![cypress mostrando la automatización de la prueba de notas](../../images/5/56new.png)
-
-La estructura de la prueba debería resultar familiar. Utilizan bloques <i>describe</i> para agrupar diferentes casos de prueba, al igual que Jest. Los casos de prueba se han definido con el método <i>it</i>. Cypress tomó estas partes de la librería de pruebas [Mocha](https://mochajs.org/) a la que utiliza bajo el capó.
-
-[cy.visit](https://docs.cypress.io/api/commands/visit.html) y [cy.contains](https://docs.cypress.io/api/commands/contains.html) son comandos de Cypress, y su propósito es bastante obvio.
-[cy.visit](https://docs.cypress.io/api/commands/visit.html) abre la dirección web dada como parámetro en el navegador utilizado por la prueba. [cy.contains](https://docs.cypress.io/api/commands/contains.html) busca la cadena que recibió como parámetro en la página.
-
-Podríamos haber declarado la prueba usando una función de flecha
+Al desarrollar pruebas, puede ser más prudente reducir el tiempo de espera a unos pocos segundos. Según la [documentación](https://playwright.dev/docs/test-timeouts), esto se puede hacer cambiando el archivo _playwright.config.js_ de la siguiente manera:
 
 ```js
-describe('Note app', () => { // highlight-line
-  it('front page can be opened', () => { // highlight-line
-    cy.visit('http://localhost:5173')
-    cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
-  })
+module.exports = defineConfig({
+  timeout: 3000,
+  fullyParallel: false, // highlight-line
+  workers: 1, // highlight-line
+  // ...
 })
 ```
 
-Sin embargo, Mocha [recomienda](https://mochajs.org/#arrow-functions) que no se utilicen funciones de flecha, porque podrían causar algunos problemas en ciertas situaciones.
-
-Si <i>cy.contains</i> no encuentra el texto que está buscando, la prueba no pasa. Por lo tanto, si extendemos nuestra prueba de la siguiente manera
-
-```js
-describe('Note app', function() {
-  it('front page can be opened',  function() {
-    cy.visit('http://localhost:5173')
-    cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
-  })
-
-// highlight-start
-  it('front page contains random text', function() {
-    cy.visit('http://localhost:5173')
-    cy.contains('wtf is this app?')
-  })
-// highlight-end
-})
-```
-
-la prueba falla
-
-![cypress mostrando falla al esperar encontrar wtf pero no](../../images/5/57new.png)
-
-Eliminemos el código que falla de la prueba.
-
-La variable _cy_ que utilizan nuestras pruebas nos da un error Eslint molesto
-
-![captura de pantalla de vscode mostrando que cy no está definido](../../images/5/58new.png)
-
-Podemos deshacernos de él instalando [eslint-plugin-cypress](https://github.com/cypress-io/eslint-plugin-cypress) como una dependencia de desarrollo
-
-```js
-npm install eslint-plugin-cypress --save-dev
-```
-
-y cambiando la configuración en <i>.eslintrc.cjs</i> de la siguiente manera:
-
-```js
-module.exports = {
-  "env": {
-    browser: true,
-    es2020: true,
-    "jest/globals": true,
-    "cypress/globals": true // highlight-line
-  },
-  "extends": [ 
-    // ...
-  ],
-  "parserOptions": {
-    // ...
-  },
-  "plugins": [
-      "react", "jest", "cypress" // highlight-line
-  ],
-  "rules": {
-    // ...
-  }
-}
-```
+También hicimos dos cambios más en el archivo, y especificamos que todas las pruebas [se ejecuten una a una](https://playwright.dev/docs/test-parallel). Con la configuración predeterminada, la ejecución ocurre en paralelo, y dado que nuestras pruebas utilizan una base de datos, la ejecución en paralelo causa problemas.
 
 ### Escribiendo en un formulario
 
-Extendamos nuestras pruebas para que nuestra nueva prueba intente iniciar sesión en nuestra aplicación.
-Suponemos que nuestro backend contiene un usuario con el nombre de usuario <i>mluukkai</i> y la contraseña <i>salainen</i>.
+Escribamos una nueva prueba para intentar iniciar sesión en la aplicación. Supongamos que un usuario está guardado en la base de datos, con el nombre de usuario <i>mluukkai</i> y la contraseña <i>salainen</i>.
 
-La prueba comienza abriendo el formulario de inicio de sesión.
+Comencemos abriendo el formulario de inicio de sesión.
 
 ```js
-describe('Note app',  function() {
+describe('Note app', () => {
   // ...
 
-  it('login form can be opened', function() {
-    cy.visit('http://localhost:5173')
-    cy.contains('log in').click()
+  test('login form can be opened', async ({ page }) => {
+    await page.goto('http://localhost:5173')
+
+    await page.getByRole('button', { name: 'log in' }).click()
   })
 })
 ```
 
-La prueba primero busca el botón de inicio de sesión por su texto y hace clic en el botón con el comando [cy.click](https://docs.cypress.io/api/commands/click.html#Syntax).
+La prueba primero utiliza el método [page.getByRole](https://playwright.dev/docs/api/class-page#page-get-by-role) para encontrar el botón basado en su texto. El método devuelve el [Locator](https://playwright.dev/docs/api/class-locator) correspondiente al elemento Button. Presionar el botón se realiza utilizando el método [click](https://playwright.dev/docs/api/class-locator#locator-click) del Locator.
 
-Nuestras dos pruebas comienzan de la misma manera, abriendo la página <i>http://localhost:5173</i>, por lo que deberíamos extraer el código compartido en un bloque <i>beforeEach</i> que se ejecuta antes de cada prueba:
+Al desarrollar pruebas, podrías usar el [modo UI](https://playwright.dev/docs/test-ui-mode) de Playwright, es decir, la versión de la interfaz de usuario. Comencemos las pruebas en modo UI de la siguiente manera:
+
+```
+npm test -- --ui
+```
+
+Ahora vemos que la prueba encuentra el botón
+
+![UI de Playwright renderizando la aplicación de notas mientras la prueba](../../images/5/play4.png)
+
+Después de hacer clic, aparecerá el formulario
+
+![UI de Playwright renderizando el formulario de inicio de sesión de la aplicación de notas](../../images/5/play5.png)
+
+Cuando se abre el formulario, la prueba debe buscar los campos de texto e introducir el nombre de usuario y la contraseña en ellos. Hagamos el primer intento utilizando el método [page.getByRole](https://playwright.dev/docs/api/class-page#page-get-by-role):
 
 ```js
-describe('Note app', function() {
-  // highlight-start
-  beforeEach(function() {
-    cy.visit('http://localhost:5173')
-  })
-  // highlight-end
+describe('Note app', () => {
+  // ...
 
-  it('front page can be opened', function() {
-    cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
-  })
+  test('login form can be opened', async ({ page }) => {
+    await page.goto('http://localhost:5173')
 
-  it('login form can be opened', function() {
-    cy.contains('log in').click()
+    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('textbox').fill('mluukkai')  // highlight-line
   })
 })
 ```
 
-El campo de inicio de sesión contiene dos campos de <i>input</i>, en los que la prueba debe escribir.
+Esto resulta en un error:
 
-El comando [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax) permite buscar elementos mediante selectores CSS.
-
-Podemos acceda al primer y último campo de input de la página, y escribir en ellos con el comando [cy.type](https://docs.cypress.io/api/commands/type.html#Syntax) así:
-
-```js
-it('user can login', function () {
-  cy.contains('log in').click()
-  cy.get('input:first').type('mluukkai')
-  cy.get('input:last').type('salainen')
-})  
+```bash
+Error: locator.fill: Error: strict mode violation: getByRole('textbox') resolved to 2 elements:
+  1) <input value=""/> aka locator('div').filter({ hasText: /^username$/ }).getByRole('textbox')
+  2) <input value="" type="password"/> aka locator('input[type="password"]')
 ```
 
-La prueba funciona. El problema es que si luego agregamos más campos de input, la prueba se interrumpirá porque espera que los campos que necesita sean el primero y el último en la página.
+El problema ahora es que _getByRole_ encuentra dos campos de texto, y al llamar al método [fill](https://playwright.dev/docs/api/class-locator#locator-fill) falla, porque asume que solo se encontró un campo de texto. Una manera de solucionar el problema es utilizar los métodos [first](https://playwright.dev/docs/api/class-locator#locator-first) y [last](https://playwright.dev/docs/api/class-locator#locator-last):
 
-Sería mejor dar a nuestros inputs <i>IDs</i> únicos y usarlos para encontrarlos.
-Cambiamos nuestro formulario de inicio de sesión de la siguiente manera:
+```js
+describe('Note app', () => {
+  // ...
+
+  test('login form can be opened', async ({ page }) => {
+    await page.goto('http://localhost:5173')
+
+    await page.getByRole('button', { name: 'log in' }).click()
+    // highlight-start
+    await page.getByRole('textbox').first().fill('mluukkai')
+    await page.getByRole('textbox').last().fill('salainen')
+    await page.getByRole('button', { name: 'login' }).click()
+  
+    await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
+    // highlight-end
+  })
+})
+```
+
+Después de escribir en los campos de texto, la prueba presiona el botón _login_ y verifica que la aplicación muestre la información del usuario que ha iniciado sesión en la pantalla.
+
+Si hubiera más de dos campos de texto, utilizar los métodos _first_ y _last_ no sería suficiente. Una posibilidad sería usar el método [all](https://playwright.dev/docs/api/class-locator#locator-all), que convierte a los localizadores encontrados en un array que puede ser indexado:
+
+```js
+describe('Note app', () => {
+  // ...
+  test('login form can be opened', async ({ page }) => {
+    await page.goto('http://localhost:5173')
+
+    await page.getByRole('button', { name: 'log in' }).click()
+    // highlight-start
+    const textboxes = await page.getByRole('textbox').all()
+
+    await textboxes[0].fill('mluukkai')
+    await textboxes[1].fill('salainen')
+    // highlight-end
+
+    await page.getByRole('button', { name: 'login' }).click()
+  
+    await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
+  })  
+})
+```
+
+Ambas versiones de la prueba funcionan. Sin embargo, ambas son problemáticas en la medida en que si el formulario de registro cambia, las pruebas pueden fallar, ya que dependen de que los campos estén en la página en un cierto orden.
+
+Una mejor solución es definir atributos de id de prueba únicos para los campos, y buscarlos en las pruebas utilizando el método [getByTestId](https://playwright.dev/docs/api/class-page#page-get-by-test-id).
+
+Ampliemos el formulario de inicio de sesión de la siguiente manera
 
 ```js
 const LoginForm = ({ ... }) => {
@@ -272,7 +357,7 @@ const LoginForm = ({ ... }) => {
         <div>
           username
           <input
-            id='username'  // highlight-line
+            data-testid='username'  // highlight-line
             value={username}
             onChange={handleUsernameChange}
           />
@@ -280,13 +365,13 @@ const LoginForm = ({ ... }) => {
         <div>
           password
           <input
-            id='password' // highlight-line
+            data-testid='password' // highlight-line
             type="password"
             value={password}
             onChange={handlePasswordChange}
           />
         </div>
-        <button id="login-button" type="submit"> // highlight-line
+        <button type="submit">
           login
         </button>
       </form>
@@ -295,109 +380,137 @@ const LoginForm = ({ ... }) => {
 }
 ```
 
-También agregamos una ID a nuestro botón submit para que podamos acceder a él en nuestras pruebas.
-
-La prueba se convierte en:
+La prueba cambia de la siguiente manera:
 
 ```js
-describe('Note app',  function() {
-  // ..
-  it('user can log in', function() {
-    cy.contains('log in').click()
-    cy.get('#username').type('mluukkai')  // highlight-line    
-    cy.get('#password').type('salainen')  // highlight-line
-    cy.get('#login-button').click()  // highlight-line
+describe('Note app', () => {
+  // ...
 
-    cy.contains('Matti Luukkainen logged in') // highlight-line
+  test('login form can be opened', async ({ page }) => {
+    await page.goto('http://localhost:5173')
+
+    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByTestId('username').fill('mluukkai') // highlight-line
+    await page.getByTestId('password').fill('salainen')  // highlight-line
+  
+    await page.getByRole('button', { name: 'login' }).click() 
+  
+    await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
   })
 })
 ```
 
-La última línea asegura que el inicio de sesión fue exitoso.
+Ten en cuenta que para que la prueba pase en esta etapa, es necesario que haya un usuario en la base de datos de <i>test</i> del backend con el nombre de usuario <i>mluukkai</i> y la contraseña <i>salainen</i>. ¡Crea un usuario si es necesario!
 
-Ten en cuenta que el [selector de ID](https://developer.mozilla.org/es/docs/Web/CSS/ID_selectors) de CSS es #, así que si queremos buscar un elemento con el ID <i>username</i> el selector de CSS es <i>#username</i>.
+Dado que ambas pruebas comienzan de la misma manera, es decir, abriendo la página <i>http://localhost:5173</i>, se recomienda aislar la parte común en el bloque <i>beforeEach</i> que se ejecuta antes de cada prueba:
 
-Por favor, ten en cuenta que para que la prueba pase en esta etapa, es necesario que haya un usuario en la base de datos de pruebas del entorno de test del backend, cuyo nombre de usuario sea <i>mluukkai</i> y la contraseña sea <i>salainen</i>. ¡Crea un usuario si es necesario!
+```js
+const { test, describe, expect, beforeEach } = require('@playwright/test')
+
+describe('Note app', () => {
+  // highlight-start
+  beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5173')
+  })
+  // highlight-end
+
+  test('front page can be opened', async ({ page }) => {
+    const locator = await page.getByText('Notes')
+    await expect(locator).toBeVisible()
+    await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible()
+  })
+
+  test('login form can be opened', async ({ page }) => {
+    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByTestId('username').fill('mluukkai')
+    await page.getByTestId('password').fill('salainen')
+    await page.getByRole('button', { name: 'login' }).click()
+    await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
+  })
+})
+```
 
 ### Probando el formulario para agregar notas
 
 A continuación, agreguemos pruebas para probar la funcionalidad "new note":
 
 ```js
-describe('Note app', function() {
-  // ..
-  // highlight-start
-  describe('when logged in', function() {
-    beforeEach(function() {
-      cy.contains('log in').click()
-      cy.get('input:first').type('mluukkai')
-      cy.get('input:last').type('salainen')
-      cy.get('#login-button').click()
-    })
-    // highlight-end
+const { test, describe, expect, beforeEach } = require('@playwright/test')
 
-    // highlight-start
-    it('a new note can be created', function() {
-      cy.contains('new note').click()
-      cy.get('input').type('a note created by cypress')
-      cy.contains('save').click()
+describe('Note app', () => {
+  // ...
 
-      cy.contains('a note created by cypress')
+  describe('when logged in', () => {
+    beforeEach(async ({ page }) => {
+      await page.getByRole('button', { name: 'log in' }).click()
+      await page.getByTestId('username').fill('mluukkai')
+      await page.getByTestId('password').fill('salainen')
+      await page.getByRole('button', { name: 'login' }).click()
     })
-  })
-  // highlight-end
+
+    test('a new note can be created', async ({ page }) => {
+      await page.getByRole('button', { name: 'new note' }).click()
+      await page.getByRole('textbox').fill('a note created by playwright')
+      await page.getByRole('button', { name: 'save' }).click()
+      await expect(page.getByText('a note created by playwright')).toBeVisible()
+    })
+  })  
 })
 ```
 
-La prueba se ha definido en su propio bloque <i>describe</i>.
-Solo los usuarios registrados pueden crear nuevas notas, por lo que agregamos el inicio de sesión en la aplicación en un bloque <i>beforeEach</i>.
+La prueba se ha definido en su propio bloque _describe_. Crear una nota requiere que el usuario haya iniciado sesión, lo cual es controlado en el bloque _beforeEach_.
 
-La prueba confía en que al crear una nueva nota, la página contiene solo una entrada, por lo que la busca así:
+La prueba confía en que al crear una nueva nota, la página contiene solo un campo de texto, por lo que lo busca así:
 
 ```js
-cy.get('input')
+page.getByRole('textbox')
 ```
 
-Si la página tuviera más inputs, la prueba se rompería
+Si la página tuviera más campos, la prueba se rompería. Debido a esto, sería mejor agregarle un test-id a los inputs del formulario y buscarlo basado en su id.
 
-![error de cypress: cy.type solo puede ser llamado en un elemento individual](../../images/5/31x.png)
+**Nota:** la prueba solo pasara la primera vez. La razón de esto es que su aserción
 
-Debido a esto, nuevamente sería mejor darle al input un <i>ID</i> y buscar el elemento por su ID.
+```js
+await expect(page.getByText('a note created by playwright')).toBeVisible()
+```
+
+causa problemas cuando la misma nota es creada en la aplicación más de una vez. El problema será resuelto en el próximo capitulo.
 
 La estructura de las pruebas se ve así:
 
 ```js
-describe('Note app', function() {
-  // ...
+const { test, describe, expect, beforeEach } = require('@playwright/test')
 
-  it('user can log in', function() {
-    cy.contains('log in').click()
-    cy.get('#username').type('mluukkai')
-    cy.get('#password').type('salainen')
-    cy.get('#login-button').click()
+describe('Note app', () => {
+  // ....
 
-    cy.contains('Matti Luukkainen logged in')
+  test('user can log in', async ({ page }) => {
+    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByTestId('username').fill('mluukkai')
+    await page.getByTestId('password').fill('salainen')
+    await page.getByRole('button', { name: 'login' }).click()
+    await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
   })
 
-  describe('when logged in', function() {
-    beforeEach(function() {
-      cy.contains('log in').click()
-      cy.get('input:first').type('mluukkai')
-      cy.get('input:last').type('salainen')
-      cy.get('#login-button').click()
+  describe('when logged in', () => {
+    beforeEach(async ({ page }) => {
+      await page.getByRole('button', { name: 'log in' }).click()
+      await page.getByTestId('username').fill('mluukkai')
+      await page.getByTestId('password').fill('salainen')
+      await page.getByRole('button', { name: 'login' }).click()
     })
 
-    it('a new note can be created', function() {
-      // ...
+    test('a new note can be created', async ({ page }) => {
+      await page.getByRole('button', { name: 'new note' }).click()
+      await page.getByRole('textbox').fill('a note created by playwright')
+      await page.getByRole('button', { name: 'save' }).click()
+      await expect(page.getByText('a note created by playwright')).toBeVisible()
     })
-  })
+  })  
 })
 ```
 
-Cypress ejecuta las pruebas en el orden en que están en el código. Entonces, primero ejecuta <i>user can log in</i>, donde el usuario inicia sesión. Entonces cypress ejecutará <i>a new note can be created</i> para la cual el bloque <i>beforeEach</i> también inicia sesión.
-¿Por qué hacer esto? ¿No inició sesión el usuario después de la primera prueba?
-No, porque <i>cada</i> prueba comienza desde cero en lo que respecta al navegador.
-Todos los cambios en el estado del navegador se invierten después de cada prueba.
+Dado que hemos evitado que las pruebas se ejecuten en paralelo, Playwright ejecuta las pruebas en el orden en que aparecen en el código de prueba. Es decir, primero se realiza la prueba <i>user can log in</i>, donde el usuario inicia sesión en la aplicación. Después de esto se ejecuta la prueba <i>a new note can be created</i>, que también realiza un inicio de sesión, en el bloque <i>beforeEach</i>. ¿Por qué se hace esto, no está ya el usuario conectado gracias a la prueba anterior? No, porque la ejecución de <i>cada</i> prueba comienza desde el "estado cero" del navegador, todos los cambios realizados en el estado del navegador por las pruebas anteriores se resetean.
 
 ### Controlando el estado de la base de datos
 
@@ -407,7 +520,7 @@ Al igual que con las pruebas unitarias y de integración, con las pruebas E2E es
 
 La solución es crear endpoints de API en el backend para la prueba.
 Podemos vaciar la base de datos usando estos endpoints.
-Creemos un nuevo enrutador para las pruebas dentro de la carpeta <i>controllers</i>, en el archivo <i>testing.js</i>
+Creemos un nuevo enrutador para las pruebas dentro del directorio <i>controllers</i>, en el archivo <i>testing.js</i>
 
 ```js
 const testingRouter = require('express').Router()
@@ -454,98 +567,80 @@ Después de los cambios, una solicitud POST HTTP al endpoint <i>/api/testing/res
 
 El código de backend modificado se puede encontrar en [GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1), rama <i>part5-1</i>.
 
-A continuación, cambiaremos el bloque <i>beforeEach</i> para que vacíe la base de datos del servidor antes de ejecutar las pruebas.
+A continuación, cambiaremos el bloque _beforeEach_ para que vacíe la base de datos del servidor antes de ejecutar las pruebas.
 
 Actualmente no es posible agregar nuevos usuarios a través de la interfaz de usuario del frontend, por lo que agregamos un nuevo usuario al backend desde el bloque beforeEach.
 
 ```js
-describe('Note app', function() {
-   beforeEach(function() {
-    // highlight-start
-    cy.request('POST', 'http://localhost:3001/api/testing/reset')
-    const user = {
-      name: 'Matti Luukkainen',
-      username: 'mluukkai',
-      password: 'salainen'
-    }
-    cy.request('POST', 'http://localhost:3001/api/users/', user) 
-    // highlight-end
-    cy.visit('http://localhost:5173')
+describe('Note app', () => {
+  beforeEach(async ({ page, request }) => {
+    await request.post('http:localhost:3001/api/testing/reset')
+    await request.post('http://localhost:3001/api/users', {
+      data: {
+        name: 'Matti Luukkainen',
+        username: 'mluukkai',
+        password: 'salainen'
+      }
+    })
+
+    await page.goto('http://localhost:5173')
   })
   
-  it('front page can be opened', function() {
+  test('front page can be opened',  () => {
     // ...
   })
 
-  it('user can login', function() {
+  test('user can login', () => {
     // ...
   })
 
-  describe('when logged in', function() {
+  describe('when logged in', () => {
     // ...
   })
 })
 ```
 
-Durante el formateo, la prueba realiza solicitudes HTTP al backend con [cy.request](https://docs.cypress.io/api/commands/request.html).
+Durante la inicialización, la prueba realiza solicitudes HTTP al backend con el método [post](https://playwright.dev/docs/api/class-apirequestcontext#api-request-context-post) del parámetro _request_.
 
-A diferencia de antes, ahora la prueba comienza con el backend en el mismo estado cada vez. El backend contendrá un usuario y ninguna nota.
+A diferencia de antes, ahora la prueba del backend siempre comienza desde el mismo estado, es decir, hay un usuario y no hay notas en la base de datos.
 
-Agreguemos una prueba más para verificar que podemos cambiar la importancia de notas.
+Hagamos una prueba que verifique que la importancia de las notas pueda cambiarse.
 
-Anteriormente cambiamos el frontend para que una nueva nota se importante por defecto, por lo que el campo <i>important</i> es <i>true</i>:
+Hay algunos enfoques diferentes para realizar la prueba.
 
-```js
-const NoteForm = ({ createNote }) => {
-  // ...
+A continuación, primero buscamos una nota y hacemos clic en su botón que tiene el texto <i>make not important</i>. Después de esto, comprobamos que la nota contiene el botón con <i>make important</i>.
 
-  const addNote = (event) => {
-    event.preventDefault()
-    createNote({
-      content: newNote,
-      important: true // highlight-line
-    })
-
-    setNewNote('')
-  }
-  // ...
-} 
-```
-
-Hay varias formas de probar esto. En el siguiente ejemplo, primero buscamos una nota y hacemos clic en su botón <i>make not important</i>. Luego verificamos que la nota ahora contenga un botón <i>make important</i>.
 
 ```js
-describe('Note app', function() {
+describe('Note app', () => {
   // ...
 
-  describe('when logged in', function() {
+  describe('when logged in', () => {
     // ...
 
-    describe('and a note exists', function () {
-      beforeEach(function () {
-        cy.contains('new note').click()
-        cy.get('input').type('another note cypress')
-        cy.contains('save').click()
+    // highlight-start
+    describe('and a note exists', () => {
+      beforeEach(async ({ page }) => {
+        await page.getByRole('button', { name: 'new note' }).click()
+        await page.getByRole('textbox').fill('another note by playwright')
+        await page.getByRole('button', { name: 'save' }).click()
       })
-
-      it('it can be made not important', function () {
-        cy.contains('another note cypress')
-          .contains('make not important')
-          .click()
-
-        cy.contains('another note cypress')
-          .contains('make important')
+  
+      test('importance can be changed', async ({ page }) => {
+        await page.getByRole('button', { name: 'make not important' }).click()
+        await expect(page.getByText('make important')).toBeVisible()
       })
+    // highlight-end
     })
   })
 })
 ```
 
-El primer comando busca un componente que contenga el texto <i>another note cypress</i>, y luego busca un botón <i>make not important</i> dentro de él. Luego hace clic en el botón.
+El primer comando primero busca al componente donde está el texto <i>another note by playwright</i> y dentro de él al botón <i>make not important</i> y hace clic en él.
 
-El segundo comando comprueba que el texto del botón haya cambiado a <i>make important</i>.
+El segundo comando asegura que el texto del mismo botón haya cambiado a <i>make important</i>.
 
-Las pruebas y el código de interfaz actual se pueden encontrar en [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-9), rama <i>part5-9</i>.
+El código actual para las pruebas está en [GitHub](https://github.com/fullstack-hy2020/notes-e2e/tree/part5-1), en la rama <i>part5-1</i>.
 
 ### Prueba de inicio de sesión fallida
 
