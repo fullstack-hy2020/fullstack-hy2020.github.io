@@ -248,9 +248,9 @@ In the material, we may not have put enough emphasis on the fact that React is p
 
 In small applications, data handled by the application is stored in the state of the React components, so in this scenario, the state of the components can be thought of as <i>models</i> of an MVC architecture.
 
-However, MVC architecture is not usually mentioned when talking about React applications. Furthermore, if we are using Redux, then the applications follow the [Flux](https://facebook.github.io/flux/docs/in-depth-overview) architecture and the role of React is even more focused on creating the views. The business logic of the application is handled using the Redux state and action creators. If we're using [Redux Thunk](/en/part6/communicating_with_server_in_a_redux_application#asynchronous-actions-and-redux-thunk) familiar from part 6, then the business logic can be almost completely separated from the React code.
+However, MVC architecture is not usually mentioned when talking about React applications. Furthermore, if we are using Redux, then the applications follow the [Flux](https://facebookarchive.github.io/flux/docs/in-depth-overview/) architecture and the role of React is even more focused on creating the views. The business logic of the application is handled using the Redux state and action creators. If we're using [Redux Thunk](/en/part6/communicating_with_server_in_a_redux_application#asynchronous-actions-and-redux-thunk) familiar from part 6, then the business logic can be almost completely separated from the React code.
 
-Because both React and [Flux](https://facebook.github.io/flux/docs/in-depth-overview) were created at Facebook, one could say that using React only as a UI library is the intended use case. Following the Flux architecture adds some overhead to the application, and if we're talking about a small application or prototype, it might be a good idea to use React "wrong", since [over-engineering](https://en.wikipedia.org/wiki/Overengineering) rarely yields an optimal result.
+Because both React and [Flux](https://facebookarchive.github.io/flux/docs/in-depth-overview/) were created at Facebook, one could say that using React only as a UI library is the intended use case. Following the Flux architecture adds some overhead to the application, and if we're talking about a small application or prototype, it might be a good idea to use React "wrong", since [over-engineering](https://en.wikipedia.org/wiki/Overengineering) rarely yields an optimal result.
 
 Part 6 [last chapter](/en/part6/react_query_use_reducer_and_the_context) covers the newer trends of state management in React. React's hook functions <i>useReducer</i> and <i>useContext</i> provide a kind of lightweight version of Redux. <i>React Query</i>, on the other hand, is a library that solves many of the problems associated with handling state on the server, eliminating the need for a React application to store data retrieved from the server directly in frontend state.
 
@@ -260,7 +260,7 @@ So far during the course, we have not touched on information security much. We d
 
 We will, however, take a look at some things specific to this course.
 
-The Open Web Application Security Project, otherwise known as [OWASP](https://www.owasp.org), publishes an annual list of the most common security risks in Web applications. The most recent list can be found [here](https://owasp.org/www-project-top-ten/). The same risks can be found from one year to another.
+The Open Web Application Security Project, otherwise known as [OWASP](https://www.owasp.org), publishes an annual list of the most common security risks in Web applications. The most recent list can be found [here](https://owasp.org/Top10/). The same risks can be found from one year to another.
 
 At the top of the list, we find <i>injection</i>, which means that e.g. text sent using a form in an application is interpreted completely differently than the software developer had intended. The most famous type of injection is probably [SQL injection](https://stackoverflow.com/questions/332365/how-does-the-sql-injection-from-the-bobby-tables-xkcd-comic-work).
 
@@ -276,13 +276,13 @@ Now let's assume that a malicious user <i>Arto Hellas</i> would define their nam
 Arto Hell-as'; DROP TABLE Users; --
 </pre>
 
-so that the name would contain a single quote <code>'</code>, which is the beginning and end character of a SQL string. As a result of this, two SQL operations would be executed, the second of which would  destroy the database table <i>Users</i>:
+so that the name would contain a single quote <code>'</code>, which is the beginning and end character of a SQL string. As a result of this, two SQL operations would be executed, the second of which would destroy the database table <i>Users</i>:
 
 ```sql
 SELECT * FROM Users WHERE name = 'Arto Hell-as'; DROP TABLE Users; --'
 ```
 
-SQL injections are prevented using [parameterized queries](https://security.stackexchange.com/questions/230211/why-are-stored-procedures-and-prepared-statements-the-preferred-modern-methods-f). With them, user input isn't mixed with the SQL query, but the database itself inserts the input values at placeholders in the query (usually <code>?</code>).
+SQL injections are prevented using [parameterized queries](https://security.stackexchange.com/questions/230211/why-are-stored-procedures-and-prepared-statements-the-preferred-modern-methods-f). With them, user input isn't mixed with the SQL query, but the database itself inserts the input values at placeholders in the query (usually <code>?</code>):
 
 ```js
 execute("SELECT * FROM Users WHERE name = ?", [userName])
@@ -302,9 +302,9 @@ the code is not executed, but is only rendered as 'text' on the page:
 
 ![browser showing notes with XSS attempt](../../images/7/32e.png)
 
-since React [takes care of sanitizing data in variables](https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks). Some versions of React [have been vulnerable](https://medium.com/dailyjs/exploiting-script-injection-flaws-in-reactjs-883fb1fe36c1) to XSS attacks. The security holes have of course been patched, but there is no guarantee that there couldn't be any more.
+since React [takes care of sanitizing data in variables](https://legacy.reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks). Some versions of React [have been vulnerable](https://medium.com/dailyjs/exploiting-script-injection-flaws-in-reactjs-883fb1fe36c1) to XSS attacks. The security holes have of course been patched, but there is no guarantee that there couldn't be any more.
 
-One needs to remain vigilant when using libraries; if there are security updates to those libraries, it is advisable to update those libraries in one's applications. Security updates for Express are found in the [library's documentation](https://expressjs.com/en/advanced/security-updates.html) and the ones for Node are found in [this blog](https://nodejs.org/en/blog/).
+One needs to remain vigilant when using libraries; if there are security updates to those libraries, it is advisable to update those libraries in one's applications. Security updates for Express are found in the [library's documentation](https://expressjs.com/en/advanced/security-updates.html) and the ones for Node are found in [this blog](https://nodejs.org/en/blog/vulnerability/).
 
 You can check how up-to-date your dependencies are using the command
 
@@ -316,7 +316,7 @@ The one-year-old project that is used in [part 9](/en/part9) of this course alre
 
 ![npm outdated output of patientor](../../images/7/33x.png)
 
-The dependencies can be brought up to date by updating the file <i>package.json</i>. The best way to do that is by using a tool called _npm-check-updates_. It can be installed globally by running the command
+The dependencies can be brought up to date by updating the file <i>package.json</i>. The best way to do that is by using a tool called _npm-check-updates_. It can be installed globally by running the command:
 
 ```bash
 npm install -g npm-check-updates
@@ -354,7 +354,7 @@ Then it is time to update the dependencies by running the command _npm install_.
 
 The npm [audit](https://docs.npmjs.com/cli/audit) command can be used to check the security of dependencies. It compares the version numbers of the dependencies in your application to a list of the version numbers of dependencies containing known security threats in a centralized error database.
 
-Running _npm audit_ on the same project prints a long list of complaints and suggested fixes.
+Running _npm audit_ on the same project, it prints a long list of complaints and suggested fixes.
 Below is a part of the report:
 
 ```js
@@ -506,13 +506,17 @@ Below are listed some libraries recommended by trustworthy parties.
 
 If your application has to handle complicated data, [lodash](https://www.npmjs.com/package/lodash), which we recommended in [part 4](/en/part4/structure_of_backend_application_introduction_to_testing#exercises-4-3-4-7), is a good library to use. If you prefer the functional programming style, you might consider using [ramda](https://ramdajs.com/).
 
-If you are handling times and dates, [date-fns](https://github.com/date-fns/date-fns) offers good tools for that. If you have complex forms in your apps, have a look at whether [React Hook Form](https://react-hook-form.com/) would be a good fit. If your application displays graphs, there are multiple options to choose from. Both [recharts](http://recharts.org/en-US/) and [highcharts](https://github.com/highcharts/highcharts-react) are well-recommended.
+If you are handling times and dates, [date-fns](https://github.com/date-fns/date-fns) offers good tools for that.
 
-The [Immer](https://github.com/mweststrate/immer) provides immutable implementations of some data structures. The library could be of use when using Redux, since as we [remember](/en/part6/flux_architecture_and_redux#pure-functions-immutable) in part 6, reducers must be pure functions, meaning they must not modify the store's state but instead have to replace it with a new one when a change occurs.
+If you have complex forms in your apps, have a look at whether [React Hook Form](https://react-hook-form.com/) would be a good fit.
+
+If your application displays graphs, there are multiple options to choose from. Both [recharts](https://recharts.org/en-US/) and [highcharts](https://github.com/highcharts/highcharts-react) are well-recommended.
+
+The [Immer](https://github.com/mweststrate/immer) provides immutable implementations of some data structures. The library could be of use when using Redux, since as we [remember](/en/part6/flux_architecture_and_redux#pure-functions-immutable) from part 6, reducers must be pure functions, meaning they must not modify the store's state but instead have to replace it with a new one when a change occurs.
 
 [Redux-saga](https://redux-saga.js.org/) provides an alternative way to make asynchronous actions for [Redux Thunk](/en/part6/communicating_with_server_in_a_redux_application#asynchronous-actions-and-redux-thunk) familiar from part 6. Some embrace the hype and like it. I don't.
 
-For single-page applications, the gathering of analytics data on the interaction between the users and the page is [more challenging](https://developers.google.com/analytics/devguides/collection/gtagjs/single-page-applications) than for traditional web applications where the entire page is loaded. The [React Google Analytics](https://github.com/react-ga/react-ga) library offers a solution.
+For single-page applications, the gathering of analytics data on the interaction between the users and the page is [more challenging](https://developers.google.com/analytics/devguides/collection/ga4/single-page-applications?implementation=browser-history) than for traditional web applications where the entire page is loaded. The [React Google Analytics 4](https://github.com/codler/react-ga4) library offers a solution.
 
 You can take advantage of your React know-how when developing mobile applications using Facebook's extremely popular [React Native](https://facebook.github.io/react-native/) library, which is the topic of [part 10](/en/part10) of the course.
 
@@ -522,9 +526,10 @@ When it comes to the tools used for the management and bundling of JavaScript pr
 - 2012 [Grunt](https://www.npmjs.com/package/grunt)
 - 2013-14 [Gulp](https://www.npmjs.com/package/gulp)
 - 2012-14 [Browserify](https://www.npmjs.com/package/browserify)
-- 2015- [Webpack](https://www.npmjs.com/package/webpack)
+- 2015-2023 [Webpack](https://www.npmjs.com/package/webpack)
+- 2023- [esbuild](https://esbuild.github.io/)
 
-Hipsters seem to have lost their interest in tool development after webpack started to dominate the markets. A few years ago, [Parcel](https://parceljs.org) started to make the rounds marketing itself as simple (which Webpack is not) and faster than Webpack. However, after a promising start, Parcel has not gathered any steam, and it's beginning to look like it will not be the end of Webpack. Recently, [esbuild](https://esbuild.github.io/) has been on a relatively high rise and is already seriously challenging Webpack.
+Hipsters seemed to have lost their interest in tool development after webpack started to dominate the markets. A few years ago, [Parcel](https://parceljs.org) started to make the rounds marketing itself as simple (which Webpack is not) and faster than Webpack. However, after a promising start, Parcel has not gathered any steam. But recently, [esbuild](https://esbuild.github.io/) has been on a high rise and is already replacing Webpack.
 
 The site <https://reactpatterns.com/> provides a concise list of best practices for React, some of which are already familiar from this course. Another similar list is [react bits](https://vasanthk.gitbooks.io/react-bits/).
 

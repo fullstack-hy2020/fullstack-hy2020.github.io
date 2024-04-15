@@ -157,7 +157,7 @@ The properties of an object are referenced by using the "dot" notation, or by us
 
 ```js
 console.log(object1.name)         // Arto Hellas is printed
-const fieldName = 'age' 
+const fieldName = 'age'
 console.log(object1[fieldName])    // 35 is printed
 ```
 
@@ -172,7 +172,7 @@ The latter of the additions has to be done by using brackets because when using 
 
 Naturally, objects in JavaScript can also have methods. However, during this course, we do not need to define any objects with methods of their own. This is why they are only discussed briefly during the course.
 
-Objects can also be defined using so-called constructor functions, which results in a mechanism reminiscent of many other programming languages, e.g. Java's classes. Despite this similarity, JavaScript does not have classes in the same sense as object-oriented programming languages. There has been, however, an addition of the <i>class syntax</i> starting from version ES6, which in some cases helps structure object-oriented classes.
+Objects can also be defined using so-called constructor functions, which results in a mechanism reminiscent of many other programming languages, e.g. Java's classes. Despite this similarity, JavaScript does not have classes in the same sense as object-oriented programming languages. There has been, however, the addition of the <i>class syntax</i> starting from version ES6, which in some cases helps structure object-oriented classes.
 
 ### Functions
 
@@ -265,7 +265,7 @@ If and <i>when</i> you encounter an error message
 
 keep in mind the things told [here](/en/part1/introduction_to_react#do-not-render-objects).
 
-  <h4>1.3: course information step3</h4>
+  <h4>1.3: Course Information step 3</h4>
 
 Let's move forward to using objects in our application. Modify the variable definitions of the <i>App</i> component as follows and also refactor the application so that it still works:
 
@@ -293,9 +293,9 @@ const App = () => {
 }
 ```
 
-  <h4>1.4: course information step4</h4>
+  <h4>1.4: Course Information step 4</h4>
 
-And then place the objects into an array. Modify the variable definitions of <i>App</i> into the following form and modify the other parts of the application accordingly:
+Place the objects into an array. Modify the variable definitions of <i>App</i> into the following form and modify the other parts of the application accordingly:
 
 ```js
 const App = () => {
@@ -341,7 +341,7 @@ const App = () => {
 }
 ```
 
-  <h4>1.5: course information step5</h4>
+  <h4>1.5: Course Information step 5</h4>
 
 Let's take the changes one step further. Change the course and its parts into a single JavaScript object. Fix everything that breaks.
 

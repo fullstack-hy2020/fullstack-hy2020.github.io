@@ -19,7 +19,7 @@ Se espera que los participantes tengan buenas habilidades de programación, cono
 
 No se requieren conocimientos previos de JavaScript u otros temas del curso.
 
-¿Cuanta experiencia en programación es necesaria? Es difícil de decir, pero deberías ser bastante fluido con *tu* lenguaje. Este nivel de fluidez usualmente necesita de al menos 100-200 horas de practica para desarrollarlo.
+¿Cuanta experiencia en programación es necesaria? Es difícil de decir, pero deberías ser bastante fluido en *tu* lenguaje. Este nivel de fluidez usualmente necesita de al menos 100-200 horas de practica para desarrollarlo.
 
 ### Material del curso
 
@@ -37,7 +37,7 @@ El curso consta de catorce partes, la primera de las cuales tiene el número 0 p
 
 Pasar de la parte *n* a la parte *n + 1* no es sensato antes de que se haya alcanzado un conocimiento suficientemente bueno de los temas de la parte *n*. En términos pedagógicos, el curso utiliza [Aprendizaje para el dominio](https://es.wikipedia.org/wiki/Aprendizaje_para_el_dominio), y se espera que solo continues con la siguiente parte después de hacer suficientes ejercicios de la parte anterior.
 
-En las partes 1-4 se espera que hagas **todos** los ejercicios que están marcados con un asterisco(*). Los ejercicios marcados con un asterisco cuentan para tu calificación final, pero omitirlos no te impide realizar los ejercicios obligatorios de la siguiente parte. Las partes 5-13 no tienen ejercicios marcados con asteriscos ya que no existe una dependencia similar a la de las partes anteriores.
+En las partes 1-4 se espera que hagas al menos **todos** los ejercicios que **no** están marcados con un asterisco(*). Los ejercicios marcados con un asterisco cuentan para tu calificación final, pero omitirlos no te impide realizar los ejercicios obligatorios de la siguiente parte. Las partes 5-13 no tienen ejercicios marcados con asteriscos ya que no existe una dependencia similar a la de las partes anteriores.
 
 La velocidad para completar el curso es flexible.
 
@@ -57,7 +57,7 @@ es muy probable que nadie responda. El bug puede estar *en cualquier lado*.
 
 Una mejor pregunta sería
 
-> * En el ejercicio 2.15 cuando intento agregar una nueva persona a la aplicación, el servidor responde con 403, aunque la solicitud parece estar bien.
+> * En el ejercicio 2.15 cuando intento agregar una nueva persona a la aplicación, el servidor responde con un 403, aunque la solicitud parece estar bien.
 >
 > El código se ve así
 >
@@ -74,7 +74,7 @@ Una mejor pregunta sería
 >
 > La pestaña de network se ve de la siguiente manera*
 >
-> [screen shot de la pestaña network]
+> [screenshot de la pestaña network]
 >
 > Todo el código se puede encontrar aquí (un link a GitHub)
 
@@ -111,7 +111,7 @@ Solo puedes realizar el examen después de enviar suficientes ejercicios para ci
 Al enviar al menos 127 ejercicios de las partes 0 a 7 mientras trabajas en el curso base, puedes recibir un crédito adicional a través de esta extensión.
 
 - Envía al menos 127 ejercicios para las partes 0-7.
-- [Inscríbete en la parte 6 a través de la Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-de83e85f-a06e-4258-ad8c-30326d76228e).
+- [Inscríbete en la parte 6 a través de la Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-1d62f0e7-565b-4660-9c5a-7e7e449e352e).
 - [Solicita los créditos para la parte 6](/es/part0/informacion_general#como-obtener-tus-creditos).
 
 #### Part 7 - Desarrollo Web Full Stack, extension 2 (1 crédito, CSM141083)
@@ -119,7 +119,7 @@ Al enviar al menos 127 ejercicios de las partes 0 a 7 mientras trabajas en el cu
 Al enviar al menos 138 ejercicios para las partes 0-7 mientras trabajas en el curso base, puedes recibir un crédito adicional a través de esta extensión.
 
 - Envía al menos 138 ejercicios para las partes 0-7.
-- [Inscríbete en la parte 7 a través de la Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-53ccca2f-8e77-47e3-931a-63f9d5c8cc2e).
+- [Inscríbete en la parte 7 a través de la Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-6436f286-a8a6-441f-a688-228bcded5d72).
 - [Solicita los créditos para la parte 7](/es/part0/informacion_general#como-obtener-tus-creditos).
 
 #### Part 8 - Desarrollo Web Full Stack: GraphQL (1 crédito, CSM14113)
@@ -127,7 +127,7 @@ Al enviar al menos 138 ejercicios para las partes 0-7 mientras trabajas en el cu
 Al enviar al menos 22 de 26 ejercicios para la parte 8 del curso de, GraphQL, puedes obtener un crédito adicional. La parte 8 puede realizarse en cualquier momento después de la parte 5, porque su contenido es independiente de las partes 6 y 7.
 
 - Envía al menos 22 de 26 ejercicios para la parte 8.
-- [Inscríbete en la parte 8 a través de la Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-b7f5ef26-b780-45f2-962d-f8d3432cae78).
+- [Inscríbete en la parte 8 a través de la Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-7d0d6bd9-c940-4743-b69c-3f8577194b72).
 - [Solicita los créditos para la parte 8](/es/part0/informacion_general#como-obtener-tus-creditos).
 
 #### Part 9 - Desarrollo Web Full Stack: TypeScript (1 crédito, CSM14110)
@@ -135,7 +135,7 @@ Al enviar al menos 22 de 26 ejercicios para la parte 8 del curso de, GraphQL, pu
 Al enviar al menos 24 de 29 ejercicios de la parte 9 del curso, TypeScript, puedes obtener un crédito adicional. Se recomienda que completes las partes 0-7 antes de hacer la parte 9.
 
 - Envía al menos 24 de 29 ejercicios para la parte 9.
-- [Inscríbete en la parte 9 a través de la Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-e45a36b7-24d7-424b-9dc5-1c9b59a52a23).
+- [Inscríbete en la parte 9 a través de la Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-929a947d-6810-410d-b828-cc40f368dcc7).
 - [Solicita los créditos para la parte 9](/es/part0/informacion_general#como-obtener-tus-creditos).
 
 #### Part 10 - Desarrollo Web Full Stack: React Native (2 crédito, CSM14111)
@@ -143,7 +143,7 @@ Al enviar al menos 24 de 29 ejercicios de la parte 9 del curso, TypeScript, pued
 Al enviar 25 ejercicios para la parte 10 del curso, React Native, puedes obtener dos créditos adicionales. Puedes encontrar más información sobre los requisitos previos de esta parte, el envío de ejercicios y los créditos en la [parte 10](/es/part10/introduccion_a_react_native).
 
 - Envía al menos 25 ejercicios para la parte 10.
-- [Inscríbete en la parte 10 a través de la Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-ec172afe-bc01-46ab-af23-694311f1950a).
+- [Inscríbete en la parte 10 a través de la Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-a4b9100c-6c5b-4847-8ea7-b056be9cfba3).
 - [Solicita los créditos para la parte 10](/es/part0/informacion_general#como-obtener-tus-creditos).
 
 #### Part 11 - Desarrollo Web Full Stack: Integración Continua / Entrega Continua (1 crédito, CSM14112)
@@ -151,7 +151,7 @@ Al enviar 25 ejercicios para la parte 10 del curso, React Native, puedes obtener
 Al enviar todos los ejercicios para la parte 11 del curso, CI/CD (Integración Continua/Entrega Continua), puedes obtener un crédito adicional. Más información sobre los requisitos previos de esta parte y el envío de ejercicios en la [parte 11](/en/part11).
 
 - Envía todos los ejercicios para la parte 11.
-- [Inscríbete en la parte 11 a través de la Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-23e79dc2-64e4-4f7e-86a4-8923a411443c).
+- [Inscríbete en la parte 11 a través de la Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-4e4ca82e-21e1-4b06-aa01-b08f314b7974).
 - [Solicita los créditos para la parte 11](/es/part0/informacion_general#como-obtener-tus-creditos).
 
 #### Part 12 - Desarrollo Web Full Stack: Contenedores (1 crédito, CSM141084)
@@ -159,7 +159,7 @@ Al enviar todos los ejercicios para la parte 11 del curso, CI/CD (Integración C
 Al enviar todos los ejercicios para la parte 12 del curso, tecnología de contenedores, puedes obtener un crédito adicional. Más información sobre los requisitos previos de esta parte y el envío de ejercicios en la [parte 12](/es/part12).
 
 - Envía todos los ejercicios para la parte 12.
-- [Inscríbete en la parte 12 a través de la Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-bb07e139-3de0-4cb3-843d-414b1bb992cc).
+- [Inscríbete en la parte 12 a través de la Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-b8fada92-c284-4c33-822a-92ee9eb08632).
 - [Solicita los créditos para la parte 12](/es/part0/informacion_general#como-obtener-tus-creditos).
 
 #### Part 13 - Desarrollo Web Full Stack: Bases de datos relacionales (1 crédito, CSM14114)
@@ -167,7 +167,7 @@ Al enviar todos los ejercicios para la parte 12 del curso, tecnología de conten
 Al enviar todos los ejercicios para la parte 13 del curso, bases de datos relacionales, puedes obtener un crédito adicional. Más información sobre los requisitos previos de esta parte y el envío de ejercicios en la [parte 13](/es/part13).
 
 - Envía todos los ejercicios para la parte 13.
-- [Inscríbete en la parte 13 a través de la Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-a9204ed8-1346-4174-b27c-9e02c6136088).
+- [Inscríbete en la parte 13 a través de la Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-024c8a43-2d9a-411a-a543-ca3dadcdcab6).
 - [Solicita los créditos para la parte 13](/es/part0/informacion_general#como-obtener-tus-creditos).
 
 ### Estudiando el curso en pocas palabras
@@ -278,7 +278,7 @@ Puedes ver tu calificación en Sisu de la Universidad de Helsinki y en [Opintopo
 
 Cuando se complete el registro, aparecerá el siguiente texto en el sistema de envío
 
-> *University credits registered, see the course page how to get a transcript if you need one*
+> *University credits registered, see the course page for how to get a transcript if you need one*
 
 ### ¿Dónde obtengo mi número de estudiante de la Universidad de Helsinki?
 
@@ -306,7 +306,7 @@ Si tienes problemas para encontrar tu número de estudiante a través de los med
 
 En tu correo electrónico, incluye la siguiente información:
 
-- nombre del curso en el que te has inscrito,
+- el nombre del curso en el que te has inscrito,
 - tu nombre
 - tu fecha de nacimiento.
 
@@ -338,9 +338,9 @@ No hay más "versiones anuales" del curso, el curso está abierto todo el tiempo
 
 A pesar de los cambios *todos los ejercicios enviados siguen siendo válidos*, y puedes continuar el curso sin preocuparte por las actualizaciones. Además, la política para obtener certificados, créditos universitarios, etc., seguirá siendo la misma, sin importar lo que suceda.
 
-Cambios importantes recientes
+Cambios recientes importantes
 
-- Partes 1-9 (11 de septiembre - 5 de octubre): La aplicación Create React fue reemplazada por Vite
+- Partes 1-2, 5-7 (11 de septiembre - 5 de octubre): La aplicación Create React fue reemplazada por Vite
 
 ### Ampliación de un curso completado anteriormente
 

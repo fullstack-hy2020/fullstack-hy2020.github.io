@@ -13,33 +13,31 @@ Les autres sujets incluent le débogage des applications, la technologie des con
 
 ### Prérequis
 
-On s'attend des participants qu'ils aient de bonnes compétences en programmation, des connaissances de base en programmation Web et en bases de données, et qu'ils maîtrisent le système de gestion de versions Git. On attend également de vous que vous ayez de la persévérance et une capacité à résoudre des problèmes et à rechercher des informations de manière autonome.
+On attend des participants qu'ils aient de bonnes compétences en programmation, des connaissances de base en programmation Web et en bases de données, et qu'ils maîtrisent le système de gestion de versions Git. On attend également de vous que vous ayez de la persévérance et une capacité à résoudre des problèmes et à rechercher des informations de manière autonome.
 
-Une connaissance préalable de JavaScript ou d'autres sujets de cours n'est pas requise.
+Une connaissance préalable de JavaScript ou d'autres sujets abordés dans le cours n'est pas requise.
 
-Quelle est la quantié d'experience en programmation nécessaire?  Difficile à dire avec précision, néanmoins, on s'attend à un niveau de maîtrise suffisante avec <i>votre</i> language, qui équivaut approximativement à 100-200 heures de pratique.
+Quelle experience préalable en programmation est nécessaire?  Difficile à dire avec précision, néanmoins, on s'attend à un niveau de maîtrise suffisante avec <i>votre</i> language, qui équivaut approximativement à 100-200 heures de pratique.
 
 ### Matériel de cours
 
-Le matériel de cours est destiné à être lu une partie à la fois et dans l'ordre.
+Le contenu du cours est conçu pour être lu une partie à la fois et dans l'ordre.
 
-Le matériel contient des exercices, qui sont placés de manière à ce que le matériel précédent fournisse suffisamment d'informations pour résoudre chaque exercice. Vous pouvez faire les exercices au fur et à mesure que vous les rencontrez dans le matériel, mais il peut également être avantageux de lire tout le matériel de la partie avant de commencer les exercices.
+Le cours contient des exercices, qui sont placés de manière à ce que le contenu les précédant fournisse suffisamment d'informations pour résoudre chaque exercice. Vous pouvez faire les exercices au fur et à mesure que vous les rencontrez dans le cours, mais il peut également être bénéfique de lire tout le contenu de la partie avant de commencer les exercices.
 
-Dans de nombreuses parties du cours, les exercices construisent une application plus grande, un petit morceau à la fois. Certaines des applications d'exercice sont développées en plusieurs parties.
+Dans de nombreuses parties du cours, les exercices constituent des petits morceaux d'une une application plus grande que vous construirez un petit morceau à la fois. Certaines de ces applications seront même développées sur les exercices de plusieurs parties.
 
-Le matériel de cours est basé sur des exemples d'applications en expansion progressive, qui changent d'une partie à l'autre. Il est préférable de suivre le code tout en faisant de petites modifications indépendamment. Le code des exemples d'applications pour chaque étape de chaque partie peut être trouvé sur GitHub.
+Le contenu du cours est basé sur des exemples d'applications en expansion progressive, qui évoluent d'une partie à l'autre. Il est préférable de suivre le code tout en faisant de petites modifications indépendamment. Le code des exemples d'applications pour chaque étape de chaque partie peut être trouvé sur GitHub.
 
 ### Suivre le cours
 
-Le cours contient quatorze parties, dont la première est numérotée 0 par souci de cohérence avec les itérations passées. Une partie correspond environ à une semaine (15 à 20 heures en moyenne) d'études, mais la vitesse de réalisation du cours est flexible.
+Le cours contient quatorze parties, dont la première est numérotée 0 par souci de cohérence avec les itérations passées. Une partie correspond environ à une semaine (15 à 20 heures en moyenne) d'études, mais le rythme de complétion du cours est flexible.
 
 Passer de la partie <i>n</i> à la partie <i>n+1</i> n'est pas judicieux avant d'avoir acquis une connaissance suffisante des sujets de la partie <i>n</i>. En termes pédagogiques, le cours utilise [Mastery Learning](https://en.wikipedia.org/wiki/Mastery_learning), et vous n'êtes censé passer à la partie suivante qu'après avoir fait suffisamment d'exercices de la partie précédente.
 
-Dans les parties 1 à 4, vous devez faire <i>au moins</i> tous les exercices qui ne sont pas marqués d'un astérisque (*). Les exercices marqués d'un astérisque comptent pour votre note finale, mais les sauter ne vous empêche pas de faire les exercices obligatoires des parties suivantes. Les parties 5 - n'ont pas d'exercices marqués d'un astérisque car il n'y a pas de dépendance similaire sur les parties précédentes.
+Dans les parties 1 à 4, vous devez faire <i>au moins</i> tous les exercices qui ne sont pas marqués d'un astérisque (*). Les exercices marqués d'un astérisque comptent pour votre note finale, mais les sauter ne vous empêche pas de faire les exercices obligatoires des parties suivantes. Les parties 5 - 13 n'ont pas d'exercices marqués d'un astérisque car il n'y a pas de d'interdépendance entre exercices similaire à ce que l'on trouve sur les parties précédentes.
 
-La vitesse de réalisation du cours est flexible et les exercices peuvent être soumis jusqu'à 23h59 [EET](https://en.wikipedia.org/wiki/Eastern_European_Time) le 1er mars 2023.
-
-Cependant, notez que la date limite pour passer l'examen pour les crédits de l'Université d'Helsinki est le 10.1.2023.
+La vitesse de réalisation du cours est flexible.
 
 Les statistiques de temps d'exécution des exercices peuvent être trouvées via le [système de soumission](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
@@ -48,9 +46,9 @@ Les statistiques de temps d'exécution des exercices peuvent être trouvées via
 
 Vous pouvez discuter du cours et des sujets connexes dans notre groupe dédié sur <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>Discord</a> et sur <a target='_blank' href='https://t.me/fullstackcourse'>Telegram</a>. 
 
-Le serveur Discord possède une chaîne fullstack_general et d'autres chaînes spécifiques à chaque partie.  Prenez note que <i>l'utilisation de la chaîne de clavardage principale n'est pas appropriée aux discussions dédiées au matériel du cours.</i>
+Le serveur Discord possède une chaîne fullstack_general et d'autres chaînes spécifiques à chaque partie.  Prenez note que <i>la chaîne de clavardage principale n'est pas le lieu approprié pour les discussions dédiées au contenu du cours.</i>
 
-Rejoignez la conversation !
+N'hésitez pas à rejoindre la conversation !
 
 ### Comment recevoir de l'aide par Discord/Telegram
 
@@ -104,7 +102,7 @@ Les crédits et les notes sont calculés comme suit :
 | 83           |       5        | 2        |
 | 72           |       5        | 1        |
 
-Une fois que vous avez terminé suffisamment d'exercices pour obtenir une note de passage, vous pouvez télécharger le certificat de cours à partir du [système de soumission](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Une fois que vous avez terminé suffisamment d'exercices pour valider le cours, vous pouvez télécharger le certificat de cours à partir du [système de soumission](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 Si vous souhaitez recevoir des crédits universitaires, vous devez réussir l'examen du cours. L'examen ne compte pas dans votre note finale, mais vous devez le réussir. Plus d'infos sur l'examen [ici](/fr/part0/informations_generales#lexamen-du-cours).
 
@@ -167,7 +165,7 @@ En soumettant tous les exercices de la partie 13 du cours sur les bases de donn�
 
 Comment étudier le cours - instructions en bref: cours de base de 5 cr CSM141081
 
-- Faire les excerises. Les exercices sont soumis via GitHub et marqués comme effectués sur le [système de soumission](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+- Faites les exercices. Les exercices sont soumis via GitHub et marqués comme effectués sur le [système de soumission](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
   - [Le ​​certificat de cours](/fr/part0/informations_generales#certificat-de-cours) sera disponible dans le système de soumission
 - Si vous souhaitez obtenir des crédits de l'Université d'Helsinki
   - Inscrivez-vous au cours. Vous obtiendrez le lien d'inscription via le système de soumission une fois que vous aurez terminé suffisamment d'exercices. En savoir plus [ici](/fr/part0/informations_generales#lexamen-du-cours)
@@ -179,17 +177,17 @@ Veuillez noter que si vous faites le "cours de base" avec 6 ou 7 crédits, vous 
 
 Comment étudier le cours – instructions en bref : autres parties du cours
 
-- Faire les excerises. Les exercices sont soumis via GitHub et marqués comme terminés sur le système de soumission. Notez que chacune des parties 8- a une instance distincte dans le système de soumission
+- Faire les excerises. Les exercices sont soumis via GitHub et marqués comme terminés sur le système de soumission. Notez que chacune des parties 8-13 a une instance distincte dans le système de soumission
   - [Le ​​certificat de cours](/fr/part0/informations_generales#certificat-de-cours) sera disponible dans le système de soumission
 - Si vous souhaitez obtenir des crédits de l'Université d'Helsinki
   - Inscrivez-vous au cours. Vous pouvez vous inscrire à chaque partie via le lien dans le matériel de cours ([Parties et complétion](/fr/part0/informations_generales#parties-et-completion)). Inscrivez-vous à chaque partie séparément.
  - Marquez la partie terminée dans le système de soumission, lisez plus [ici](/fr/part0/informations_generales#comment-obtenir-vos-credits)
 
-### Envoi d'exercices
+### Envoyer des exercices
 
 Les exercices sont soumis via GitHub et marqués comme effectués sur le [système de soumission](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
-Si vous soumettez des exercices de différentes parties au même référentiel, utilisez un système approprié pour nommer vos répertoires. Vous pouvez bien sûr créer un nouveau référentiel pour chaque pièce. Si vous utilisez un référentiel privé, ajoutez <i>mluukkai</i> en tant que collaborateur.
+Si vous soumettez des exercices de différentes parties dans le même référentiel Git, utilisez un système approprié pour nommer vos répertoires. Vous pouvez bien sûr créer un nouveau référentiel pour chaque partie. Si vous utilisez un référentiel privé, ajoutez <i>mluukkai</i> en tant que collaborateur.
 
 Les exercices sont soumis **une partie à la fois**. Une fois que vous avez soumis des exercices pour une partie, vous ne pouvez plus soumettre d'autres exercices pour cette partie.
 
@@ -296,15 +294,29 @@ Vous pouvez demander un relevé de notes vérifié <i>après l'enregistrement de
 
 La transcription vous sera livrée par voie électronique par courrier électronique. Présentez ce document à votre établissement pour que les crédits soient inclus dans votre diplôme. La décision d'inclure les crédits sera prise par votre établissement d'origine.
 
+## Fin des versions annuelles
+
+Il n'existe plus de "versions annuelles" du cours, il est désormais ouvert en continu. Chaque partie est mise à jour une ou deux fois par an. La pluspart des changements sont mineurs : mise à jours des versions de bibliothèques utilisées, amélioration de la clarté du texte. Il peut cependant y avoir des changements plus conséquents.
+
+Malgré les changements, *tous les exercices déjà soumis restent valides* et le cours peut être suivi sans s'inquiéter des mises à jour. De même, les critères d'obtention des certificats, crédits académiques, etc. resteront valables en toutes circonstances.
+
+Changements majeurs récents :
+
+- Partie 10 (21 mars 2024): Create React app remplacé par Vite
+- Parties 3-5 (Février-Mars 2024): Changement des bibliothèques de test employées
+- Partie 10 (26 février 2024): Mise à jour des versions de bibliothèques
+- Partie 11 (16 janvier 2024): Mise à jour de dépendances pour les projets d'exemples
+- Parties 1-2, 6-9 (11 septembre - 5 octobre): Create React app remplacé par Vite
+
 ### Approfondir un cours déjà suivi
 
 Si vous avez déjà suivi le cursus en MOOC ou en cursus universitaire, vous pouvez désormais approfondir votre cursus.
 
-#### S'approfondir sur Full Stack open
+#### Approfondir Full Stack open
 
 Vous pouvez simplement reprendre là où vous vous étiez arrêté ! Si vous souhaitez soumettre à nouveau une partie entière, veuillez contacter le personnel du cours via [email](mailto:matti.luukkainen@helsinki.fi) ou Discord <i>mluukkai</i>, avec votre nom d'utilisateur GitHub et les parties que vous souhaitez avoir supprimé de vos soumissions.
 
-#### S'approfondir sur l'instance de ce cours à l'Université d'Helsinki
+#### Approfondir sur l'instance de ce cours à l'Université d'Helsinki
 
 C'est également possible, il suffit de contacter le personnel du cours via [email](mailto:matti.luukkainen@helsinki.fi) ou Discord <i>mluukkai</i>.
 
@@ -344,8 +356,10 @@ Le gestionnaire de packages de noeuds [npm](https://www.npmjs.com/get-npm) sera 
 
 ### Fautes de frappe dans le matériel
 
-Si vous trouvez une faute de frappe dans le matériel, ou si quelque chose n'a pas été clairement exprimé, ou est simplement une mauvaise grammaire, soumettez une <i>demande d'extraction</i> au matériel de cours dans le [référentiel](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io). Par exemple, le code source de démarque de cette page peut être trouvé dans le référentiel à <https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/edit/source/src/content/0/en/ part0a.md>
+Si vous trouvez une faute de frappe dans le matériel, ou si quelque chose n'a pas été clairement exprimé, ou constitue simplement une faute de syntaxe, soumettez une <i>demande d'extraction (Pull request)</i> au matériel de cours dans le [référentiel](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io). Par exemple, le code source de démarque de cette page peut être trouvé dans le référentiel à <https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/edit/source/src/content/0/en/ part0a.md>
 
 Au bas de chaque partie du matériel se trouve un lien pour <em>proposer des modifications au matériel</em>. Vous pourrez modifier le code source de la page en cliquant sur le lien.
+
+Le cours inclut aussi de nombreux liens vers des articles et contenus externes. Si vous constatez qu'un lien est brisé (ce qui azrrive trop souvent...), proposez une modification ou siglalez-le sur Discord si vous n'arrivez pas à trouver d'alternative à ce lien brisé.
 
 </div>

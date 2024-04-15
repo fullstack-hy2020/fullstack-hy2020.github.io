@@ -370,7 +370,7 @@ const userSchema = mongoose.Schema({
 // ...
 ```
 
-However, care must be taken with the uniqueness index. If there are already documents in the database that violate the uniqueness condition, [no index will be created](https://dev.to/akshatsinghania/mongoose-unique-not-working-16bf). So when adding a uniqueness index, make sure that the database is in a healthy state! The test above added the user with username _root_ to the database twice, and these must be removed for the index to be formed and the code to work.
+However, we want to be careful when using the uniqueness index. If there are already documents in the database that violate the uniqueness condition, [no index will be created](https://dev.to/akshatsinghania/mongoose-unique-not-working-16bf). So when adding a uniqueness index, make sure that the database is in a healthy state! The test above added the user with username _root_ to the database twice, and these must be removed for the index to be formed and the code to work.
 
 Mongoose validations do not detect the index violation, and instead of _ValidationError_ they return an error of type _MongoServerError_. We therefore need to extend the error handler for that case:
 
@@ -491,13 +491,13 @@ usersRouter.get('/', async (request, response) => {
 })
 ```
 
-The [populate](http://mongoosejs.com/docs/populate.html) method is chained after the <i>find</i> method making the initial query. The parameter given to the populate method defines that the <i>ids</i> referencing <i>note</i> objects in the <i>notes</i> field of the <i>user</i> document will be replaced by the referenced <i>note</i> documents.
+The [populate](http://mongoosejs.com/docs/populate.html) method is chained after the <i>find</i> method making the initial query. The argument given to the populate method defines that the <i>ids</i> referencing <i>note</i> objects in the <i>notes</i> field of the <i>user</i> document will be replaced by the referenced <i>note</i> documents.
 
 The result is almost exactly what we wanted:
 
 ![JSON data showing populated notes and users data with repetition](../../images/4/13new.png)
 
-We can use the populate parameter for choosing the fields we want to include from the documents. In addition to the field <i>id</i> we are now only interested in <i>content</i> and <i>important</i>.
+We can use the populate method for choosing the fields we want to include from the documents. In addition to the field <i>id</i> we are now only interested in <i>content</i> and <i>important</i>.
 
 The selection of fields is done with the Mongo [syntax](https://www.mongodb.com/docs/manual/tutorial/project-fields-from-query-results/#return-the-specified-fields-and-the-_id-field-only):
 

@@ -274,6 +274,7 @@ module.exports = {
       b: 'Probando el backend',
       c: 'Administración de usuarios',
       d: 'Autenticación basada en token',
+      e: 'Legacy: Testing con Jest',
     },
     '5': {
       a: 'Iniciar sesión en la interfaz',
@@ -292,7 +293,7 @@ module.exports = {
       b: 'Hooks personalizados',
       c: 'Más sobre estilos',
       d: 'Webpack',
-      e: 'Componentes de clases, varios',
+      e: 'Componentes de clase, misceláneos',
       f: 'Ejercicios: ampliar la lista de blogs',
     },
     '8': {

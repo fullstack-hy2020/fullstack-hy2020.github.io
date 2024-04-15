@@ -95,7 +95,7 @@ const App = (props) => {
 
 Hemos agregado la función _addNote_ como un controlador de eventos al elemento del formulario que se llamará cuando se envíe el formulario, haciendo clic en el botón submit.
 
-Usamos el método discutido en la [parte 1](/es/part1/estado_del_componente_controladores_de_eventos#manejo-de-eventos) para definir nuestro controlador de eventos:
+Usamos el método discutido en la [parte 1](/es/part1/estado_del_componente_controladores_de_eventos#control-de-eventos) para definir nuestro controlador de eventos:
 
 ```js
 const addNote = (event) => {
@@ -399,7 +399,7 @@ Puedes encontrar el código para nuestra aplicación actual en su totalidad en l
 
 <h3>Ejercicios 2.6.-2.10.</h3> 
 
-En el primer ejercicio, comenzaremos a trabajar en una aplicación que se continuara desarrollando en los ejercicios posteriores. En conjuntos de ejercicios relacionados, es suficiente con presentar la versión final de tu aplicación. También puedes realizar un commit por separado después de haber terminado cada parte del conjunto de ejercicios, pero no es necesario hacerlo.
+Este es un nuevo ejercicio que comenzaremos a trabajar en una aplicación que se continuará desarrollando en los ejercicios posteriores. En conjuntos de ejercicios relacionados, es suficiente con presentar la versión final de tu aplicación. También puedes realizar un commit por separado después de haber terminado cada parte del conjunto de ejercicios, pero no es necesario hacerlo.
 
 <h4>2.6: La Agenda Telefónica Paso 1</h4>
 
@@ -505,7 +505,7 @@ En este punto, la aplicación podría verse así. La imagen también muestra el 
 
 <h4>2.9*: La Agenda Telefónica Paso 4</h4>
 
-Implemente¡a un campo de búsqueda que pueda usarse para filtrar la lista de personas por nombre:
+Implementa un campo de búsqueda que pueda usarse para filtrar la lista de personas por nombre:
 
 ![2.9 campo de busqueda](../../images/2/13e.png)
 

@@ -7,9 +7,9 @@ lang: en
 
 <div class="content">
 
-The exercises in this seventh part of the course differ a bit from the ones before. In this and the next chapter, as usual, there are [exercises related to the theory in the chapter](/en/part7/react_router#exercises-7-1-7-3).
+The exercises in this seventh part of the course differ a bit from the ones before. In this and the next chapter, as usual, there are [exercises related to the theory of the chapter](/en/part7/react_router#exercises-7-1-7-3).
 
-In addition to the exercises in this and the next chapter, there are a series of exercises in which we'll be revising what we've learned during the whole course by expanding the Bloglist application which we worked on during parts 4 and 5.
+In addition to the exercises in this and the next chapter, there are a series of exercises in which we'll be revising what we've learned during the whole course, by expanding the BlogList application, in which we worked on during parts 4 and 5.
 
 ### Application navigation structure
 
@@ -101,7 +101,7 @@ However, the method is not very optimal. As we can see from the pictures, the ad
 
 Luckily, React has the [React Router](https://reactrouter.com/) library which provides an excellent solution for managing navigation in a React application.
 
-Let's change the above application to use React Router. First, we install React Router with the command
+Let's change the above application to use React Router. First, we install React Router with the command:
 
 ```bash
 npm install react-router-dom
@@ -136,7 +136,7 @@ const App = () => {
       </Routes>
 
       <div>
-        <i>Note app, Department of Computer Science 2023</i>
+        <i>Note app, Department of Computer Science 2024</i>
       </div>
     </Router>
   )
@@ -160,7 +160,7 @@ According to the [v5 docs](https://v5.reactrouter.com/web/api/BrowserRouter):
 
 Normally the browser loads a new page when the URL in the address bar changes. However, with the help of the [HTML5 history API](https://css-tricks.com/using-the-html5-history-api/), <i>BrowserRouter</i> enables us to use the URL in the address bar of the browser for internal "routing" in a React application. So, even if the URL in the address bar changes, the content of the page is only manipulated using Javascript, and the browser will not load new content from the server. Using the back and forward actions, as well as making bookmarks, is still logical like on a traditional web page.
 
-Inside the router, we define <i>links</i> that modify the address bar with the help of the [Link](https://reactrouter.com/en/main/components/link) component. For example,
+Inside the router, we define <i>links</i> that modify the address bar with the help of the [Link](https://reactrouter.com/en/main/components/link) component. For example:
 
 ```js
 <Link to="/notes">notes</Link>
@@ -215,7 +215,7 @@ const Notes = ({notes}) => (
 )
 ```
 
-We define parameterized URLs in the routing in <i>App</i> component as follows:
+We define parameterized URLs in the routing of the <i>App</i> component as follows:
 
 ```js
 <Router>
@@ -284,7 +284,7 @@ The option to navigate to the <i>Login</i> view is rendered conditionally in the
 </Router>
 ```
 
-So if the user is already logged in, instead of displaying the link <i>Login</i>, we show the username of the user:
+So if the user is already logged in, instead of displaying the link <i>Login</i>, we show its username:
 
 ![browser notes app showing username logged in](../../images/7/4a.png)
 
@@ -326,9 +326,9 @@ What is interesting about this component is the use of the [useNavigate](https:/
 
 With user login, we call _navigate('/')_ which causes the browser's URL to change to _/_ and the application renders the corresponding component <i>Home</i>.
 
-Both [useParams](https://reactrouter.com/en/main/hooks/use-params) and [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate) are hook functions, just like useState and useEffect which we have used many times now.  As you remember from part 1, there are some [rules](/en/part1/a_more_complex_state_debugging_react_apps/#rules-of-hooks) to using hook functions. Create-react-app has been configured to warn you if you break these rules, for example, by calling a hook function from a conditional statement.
+Both [useParams](https://reactrouter.com/en/main/hooks/use-params) and [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate) are hook functions, just like useState and useEffect which we have used many times now.  As you remember from part 1, there are some [rules](/en/part1/a_more_complex_state_debugging_react_apps/#rules-of-hooks) to using hook functions.
 
-### redirect
+### Redirect
 
 There is one more interesting detail about the <i>Users</i> route:
 
@@ -385,7 +385,7 @@ const App = () => {
       </Router>      
       <footer>
         <br />
-        <em>Note app, Department of Computer Science 2023</em>
+        <em>Note app, Department of Computer Science 2024</em>
       </footer>
     </div>
   )
@@ -396,7 +396,7 @@ We define an element common for modern web apps called <i>footer</i>, which defi
 
 ### Parameterized route revisited
 
-Our application has a flaw. The _Note_ component receives all of the notes, even though it only displays the one whose id matches the url parameter:
+Our application has a flaw. The _Note_ component receives all of the notes, even though it only displays the one whose id matches the URL parameter:
 
 ```js
 const Note = ({ notes }) => { 
@@ -420,7 +420,7 @@ const Note = ({ note }) => {
 }
 ```
 
-One way to do this would be to use React Router's [useMatch](https://reactrouter.com/en/v6.3.0/api#usematch) hook to figure out the id of the note to be displayed in the _App_ component.
+One way to do this would be to use React Router's [useMatch](https://reactrouter.com/en/main/hooks/use-match) hook to figure out the id of the note to be displayed in the _App_ component.
 
 It is not possible to use the <i>useMatch</i> hook in the component which defines the routed part of the application. Let's move the use of the _Router_ components from _App_:
 
@@ -467,7 +467,7 @@ const App = () => {
       </Routes>   
 
       <div>
-        <em>Note app, Department of Computer Science 2023</em>
+        <em>Note app, Department of Computer Science 2024</em>
       </div>
     </div>
   )
@@ -491,6 +491,7 @@ const note = match
 The completed code can be found [here](https://github.com/fullstack-hy2020/misc/blob/master/router-app-v2.js).
 
 </div>
+
 <div class="tasks">
 
 ### Exercises 7.1.-7.3.
@@ -504,14 +505,14 @@ cd routed-anecdotes   // go first to directory of the cloned repository
 rm -rf .git
 ```
 
-The application starts the usual way, but first, you need to install the dependencies of the application:
+The application starts the usual way, but first, you need to install its dependencies:
 
 ```bash
 npm install
 npm run dev
 ```
 
-#### 7.1: routed anecdotes, step1
+#### 7.1: Routed Anecdotes, step 1
 
 Add React Router to the application so that by clicking links in the <i>Menu</i> component the view can be changed.
 
@@ -525,7 +526,7 @@ The creation of a new anecdote should happen e.g. in the path <i>create</i>:
 
 ![browser anecdotes /create shows create form](../../assets/teht/41.png)
 
-#### 7.2: routed anecdotes, step2
+#### 7.2: Routed Anecdotes, step 2
 
 Implement a view for showing a single anecdote:
 
@@ -535,7 +536,7 @@ Navigating to the page showing the single anecdote is done by clicking the name 
 
 ![browser showing previous link that was clicked](../../assets/teht/43.png)
 
-#### 7.3: routed anecdotes, step3
+#### 7.3: Routed Anecdotes, step3
 
 The default functionality of the creation form is quite confusing because nothing seems to be happening after creating a new anecdote using the form.
 

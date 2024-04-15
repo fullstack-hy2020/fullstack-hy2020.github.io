@@ -83,7 +83,7 @@ La página de inicio de la aplicación de ejemplo funciona como una <i>aplicaci�
 El servidor ha formado este documento de alguna manera. El documento puede ser un archivo de texto <i>estático</i> guardado en el directorio del servidor. El servidor también puede formar los documentos HTML <i>dinámicamente</i> de acuerdo con el código de la aplicación, utilizando, por ejemplo, datos de una base de datos.
 El código HTML de la aplicación de ejemplo se ha formado de forma dinámica, porque contiene información sobre el número de notas creadas.
 
-El código HTML de la página de inicio es el siguiente:
+El código HTML de la página de inicio es formado dinámicamente en el servidor:
 
 ```js
 const getFrontPageHtml = noteCount => {
@@ -494,7 +494,7 @@ La cosa denominada AJAX es ahora tan común que se da por sentado. El término s
 
 En nuestra aplicación de ejemplo, la página de inicio funciona como una página web tradicional: toda la lógica está en el servidor y el navegador solo muestra el HTML como se indica.
 
-La página Notas da parte de la responsabilidad al navegador, la generación del código HTML para las notas existentes. El navegador aborda esta tarea ejecutando el código JavaScript que obtuvo del servidor. El código obtiene las notas del servidor como datos JSON y agrega elementos HTML para mostrar las notas en la página usando la [DOM-API](/es/part0/fundamentos_de_las_aplicaciones_web#modelo-de-objeto-de-documento-o-dom).
+La página Notas da parte de la responsabilidad al navegador, la generación del código HTML para las notas existentes. El navegador aborda esta tarea ejecutando el código JavaScript que obtuvo del servidor. El código obtiene las notas del servidor como datos JSON y agrega elementos HTML para mostrar las notas en la página usando la [DOM-API](/es/part0/fundamentos_de_las_aplicaciones_web#modelo-de-objetos-del-documento-o-dom).
 
 En los últimos años, ha surgido el estilo de [Aplicación de una sola página](https://es.wikipedia.org/wiki/Single-page_application) (SPA) para crear aplicaciones web. Los sitios web de estilo SPA no obtienen todas sus páginas por separado del servidor como lo hace nuestra aplicación de muestra, sino que comprenden solo una página HTML obtenida del servidor, cuyo contenido se manipula con JavaScript que se ejecuta en el navegador.
 

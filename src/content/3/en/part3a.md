@@ -226,9 +226,9 @@ When we open the browser, the displayed format is exactly the same as in [part 2
 
 Implementing our server code directly with Node's built-in [http](https://nodejs.org/docs/latest-v18.x/api/http.html) web server is possible. However, it is cumbersome, especially once the application grows in size.
 
-Many libraries have been developed to ease server-side development with Node, by offering a more pleasing interface to work with the built-in http module. These libraries aim to provide a better abstraction for general use cases we usually require to build a backend server. By far the most popular library intended for this purpose is [express](http://expressjs.com).
+Many libraries have been developed to ease server-side development with Node, by offering a more pleasing interface to work with the built-in http module. These libraries aim to provide a better abstraction for general use cases we usually require to build a backend server. By far the most popular library intended for this purpose is [Express](http://expressjs.com).
 
-Let's take express into use by defining it as a project dependency with the command:
+Let's take Express into use by defining it as a project dependency with the command:
 
 ```bash
 npm install express
@@ -245,11 +245,11 @@ The dependency is also added to our <i>package.json</i> file:
 }
 ```
 
-The source code for the dependency is installed in the <i>node\_modules</i> directory located at the root of the project. In addition to express, you can find a great number of other dependencies in the directory:
+The source code for the dependency is installed in the <i>node\_modules</i> directory located at the root of the project. In addition to Express, you can find a great number of other dependencies in the directory:
 
 ![ls command listing of dependencies in directory](../../images/3/4.png)
 
-These are the dependencies of the express library and the dependencies of all of its dependencies, and so forth. These are called the [transitive dependencies](https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/) of our project.
+These are the dependencies of the Express library and the dependencies of all of its dependencies, and so forth. These are called the [transitive dependencies](https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/) of our project.
 
 Version 4.18.2 of Express was installed in our project. What does the caret in front of the version number in <i>package.json</i> mean?
 
@@ -259,7 +259,7 @@ Version 4.18.2 of Express was installed in our project. What does the caret in f
 
 The versioning model used in npm is called [semantic versioning](https://docs.npmjs.com/about-semantic-versioning).
 
-The caret in the front of <i>^4.18.2</i> means that if and when the dependencies of a project are updated, the version of express that is installed will be at least <i>4.18.2</i>. However, the installed version of express can also have a larger <i>patch</i> number (the last number), or a larger <i>minor</i> number (the middle number). The major version of the library indicated by the first <i>major</i> number must be the same.
+The caret in the front of <i>^4.18.2</i> means that if and when the dependencies of a project are updated, the version of Express that is installed will be at least <i>4.18.2</i>. However, the installed version of Express can also have a larger <i>patch</i> number (the last number), or a larger <i>minor</i> number (the middle number). The major version of the library indicated by the first <i>major</i> number must be the same.
 
 We can update the dependencies of the project with the command:
 
@@ -275,7 +275,7 @@ npm install
 
 If the <i>major</i> number of a dependency does not change, then the newer versions should be [backwards compatible](https://en.wikipedia.org/wiki/Backward_compatibility). This means that if our application happened to use version 4.99.175 of Express in the future, then all the code implemented in this part would still have to work without making changes to the code. In contrast, the future 5.0.0 version of Express [may contain](https://expressjs.com/en/guide/migrating-5.html) changes that would cause our application to no longer work.
 
-### Web and express
+### Web and Express
 
 Let's get back to our application and make the following changes:
 
@@ -303,7 +303,7 @@ app.listen(PORT, () => {
 
 To get the new version of our application into use, first we have to restart it.
 
-The application did not change a whole lot. Right at the beginning of our code, we're importing _express_, which this time is a <i>function</i> that is used to create an express application stored in the _app_ variable:
+The application did not change a whole lot. Right at the beginning of our code, we're importing _express_, which this time is a <i>function</i> that is used to create an Express application stored in the _app_ variable:
 
 ```js
 const express = require('express')
@@ -320,7 +320,7 @@ app.get('/', (request, response) => {
 
 The event handler function accepts two parameters. The first [request](http://expressjs.com/en/4x/api.html#req) parameter contains all of the information of the HTTP request, and the second [response](http://expressjs.com/en/4x/api.html#res) parameter is used to define how the request is responded to.
 
-In our code, the request is answered by using the [send](http://expressjs.com/en/4x/api.html#res.send) method of the _response_ object. Calling the method makes the server respond to the HTTP request by sending a response containing the string <code>\<h1>Hello World!\</h1></code> that was passed to the _send_ method. Since the parameter is a string, express automatically sets the value of the <i>Content-Type</i> header to be <i>text/html</i>. The status code of the response defaults to 200.
+In our code, the request is answered by using the [send](http://expressjs.com/en/4x/api.html#res.send) method of the _response_ object. Calling the method makes the server respond to the HTTP request by sending a response containing the string <code>\<h1>Hello World!\</h1></code> that was passed to the _send_ method. Since the parameter is a string, Express automatically sets the value of the <i>Content-Type</i> header to be <i>text/html</i>. The status code of the response defaults to 200.
 
 We can verify this from the <i>Network</i> tab in developer tools:
 
@@ -346,7 +346,7 @@ In the earlier version where we were only using Node, we had to transform the da
 response.end(JSON.stringify(notes))
 ```
 
-With express, this is no longer required, because this transformation happens automatically.
+With Express, this is no longer required, because this transformation happens automatically.
 
 It's worth noting that [JSON](https://en.wikipedia.org/wiki/JSON) is a string and not a JavaScript object like the value assigned to _notes_.
 
@@ -464,7 +464,7 @@ Let's expand our application so that it offers a REST interface for operating on
 
 The unique address we will use for an individual note is of the form <i>notes/10</i>, where the number at the end refers to the note's unique id number.
 
-We can define [parameters](http://expressjs.com/en/guide/routing.html#route-parameters) for routes in express by using the colon syntax:
+We can define [parameters](http://expressjs.com/en/guide/routing.html#route-parameters) for routes in Express by using the colon syntax:
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
@@ -634,7 +634,7 @@ If you use *IntelliJ WebStorm* instead, you can use a similar procedure with its
 
 Next, let's make it possible to add new notes to the server. Adding a note happens by making an HTTP POST request to the address <http://localhost:3001/api/notes>, and by sending all the information for the new note in the request [body](https://www.rfc-editor.org/rfc/rfc9112#name-message-body) in JSON format.
 
-To access the data easily, we need the help of the express [json-parser](https://expressjs.com/en/api.html) that we can use with the command _app.use(express.json())_.
+To access the data easily, we need the help of the Express [json-parser](https://expressjs.com/en/api.html) that we can use with the command _app.use(express.json())_.
 
 Let's activate the json-parser and implement an initial handler for dealing with the HTTP POST requests:
 
@@ -950,7 +950,7 @@ POST is the only HTTP request type that is neither <i>safe</i> nor <i>idempotent
 
 ### Middleware
 
-The express [json-parser](https://expressjs.com/en/api.html) used earlier is a [middleware](http://expressjs.com/en/guide/using-middleware.html).
+The Express [json-parser](https://expressjs.com/en/api.html) used earlier is a [middleware](http://expressjs.com/en/guide/using-middleware.html).
 
 Middleware are functions that can be used for handling _request_ and _response_ objects.
 
@@ -982,7 +982,7 @@ app.use(requestLogger)
 
 Remember, middleware functions are called in the order that they're encountered by the JavaScript engine. Notice that _json-parser_ is listed before _requestLogger_ , because otherwise <i>request.body</i> will not be initialized when the logger is executed!
 
-Middleware functions have to be used before routes when we want them to be executed by the route event handlers. Sometimes, we want to use middleware functions after routes. We do this this when the middleware functions are only called if no route handles process the HTTP request.
+Middleware functions have to be used before routes when we want them to be executed by the route event handlers. Sometimes, we want to use middleware functions after routes. We do this when the middleware functions are only called if no route handler processes the HTTP request.
 
 Let's add the following middleware after our routes. This middleware will be used for catching requests made to non-existent routes. For these requests, the middleware will return an error message in the JSON format.
 

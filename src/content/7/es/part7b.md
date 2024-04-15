@@ -9,42 +9,40 @@ lang: es
 
 ### Hooks
 
-React ofrece 10 [hooks incorporados](https://reactjs.org/docs/hooks-reference.html) diferentes, de los cuales los más populares son los hooks [useState](https://reactjs.org/docs/hooks-reference.html#usestate) y [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect), que ya hemos estado usando ampliamente.
+React ofrece 15 [hooks incorporados](https://es.react.dev/reference/react/hooks) diferentes, de los cuales los más populares son [useState](https://es.react.dev/reference/react/useState) y [useEffect](https://es.react.dev/reference/react/useEffect), a los cuales ya hemos estado utilizando extensivamente.
 
-En la [parte 5](/es/part5/props_children_y_proptypes#referencias-a-componentes-con-ref) usamos el hook [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) que permite que los componentes proporcionen sus funciones a otros componentes.
+En la [parte 5](/es/part5/props_children_y_proptypes#referencias-a-componentes-con-ref) usamos el hook [useImperativeHandle](https://es.react.dev/reference/react/useImperativeHandle) que permite que los componentes proporcionen sus funciones a otros componentes. En la [parte 6](/es/part6/react_query_use_reducer_y_el_contexto) utilizamos [useReducer](https://es.react.dev/reference/react/useReducer) y [useContext](https://es.react.dev/reference/react/useContext) para implementar una gestión de estado similar a Redux.
 
-Durante el último año, muchas librerías React han comenzado a ofrecer apis basadas en hooks. En la [parte 6](/es/part6/flux_architecture_y_redux) usamos los hooks [useSelector](https://react-redux.js.org/api/hooks#useselector) y [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) de la librería react-redux para compartir nuestra función redux-store y dispatch a nuestros componentes.
+Durante el último año, muchas librerías de React han comenzado a ofrecer APIs basadas en hooks. En la [parte 6](/es/part6/flux_architecture_y_redux) usamos los hooks [useSelector](https://react-redux.js.org/api/hooks#useselector) y [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) de la librería react-redux para compartir nuestra redux-store y la función dispatch a nuestros componentes.
 
-La API de [React-Router](https://reactrouter.com/en/main/start/tutorial) que presentamos en la [parte anterior](/es/part7/react_router) también se basa parcialmente en [hooks](https://reacttraining.com/react-router/web/api/Hooks). Sus hooks se pueden usar para acceder a los parámetros de la URL y al objeto history, lo que permite manipular la URL del navegador mediante programación.
+La API de [React-Router](https://reactrouter.com/en/main/start/tutorial) que presentamos en la [parte anterior](/es/part7/react_router) también se basa parcialmente en hooks. Sus hooks se pueden usar para acceder a los parámetros de la URL y al objeto <i>navigation</i>, lo que permite manipular la URL del navegador programáticamente.
 
-Como se mencionó en la [parte 1](/es/part1/un_estado_mas_complejo_depurando_aplicaciones_react#reglas-de-los-hooks), los hooks no son funciones normales y cuando los usamos tenemos que cumplir con ciertas [reglas o limitaciones](https://reactjs.org/docs/hooks-rules.html). Recapitulemos las reglas del uso de hooks, copiadas literalmente de la documentación oficial de React:
+Como se mencionó en la [parte 1](/es/part1/un_estado_mas_complejo_depurando_aplicaciones_react#reglas-de-los-hooks), los hooks no son funciones normales y cuando los usamos tenemos que cumplir con ciertas [reglas o limitaciones](https://es.react.dev/warnings/invalid-hook-call-warning#breaking-rules-of-hooks). Recapitulemos las reglas del uso de hooks, copiadas literalmente de la documentación oficial de React:
 
-**No llame a Hooks dentro de bucles, condiciones o funciones anidadas.** En su lugar, utilice siempre Hooks en el nivel superior de su función React. 
+**Evita utilizar Hooks dentro de loops, condicionales o funciones anidadas.** En su lugar, utiliza los Hooks únicamente en el nivel superior de tu función de React.
 
-**No llame a Hooks desde funciones regulares de JavaScript.** En su lugar, puede:
+**Los Hooks sólo deben ser utilizados durante la renderización de un componente de función en React:**
 
-- Llamar a Hooks desde los componentes funcionales de React.
-- Llamar a Hooks desde Hooks personalizados
+- Utilízalos en el nivel superior del cuerpo de un componente de función.
+- Utilízalos en el nivel superior del cuerpo de un Hook personalizado.
 
-Existe una regla de [ESlint](https://www.npmjs.com/package/eslint-plugin-react-hooks) que se puede usar para verificar que la aplicación usa los hooks correctamente.
+Existe un plugin de [ESlint](https://www.npmjs.com/package/eslint-plugin-react-hooks) que se puede usar para verificar que la aplicación usa los hooks correctamente.
 
-Create-react-app ha configurado fácilmente la regla [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks) que se queja si los hooks se utilizan de manera ilegal:
-
-![](../../images/7/60ea.png)
+![error de vscode al llamar a useState condicionalmente](../../images/7/60ea.png)
 
 ### Hooks personalizados
 
-React ofrece la opción de crear nuestros propios hooks [personalizados](https://reactjs.org/docs/hooks-custom.html). Según React, el propósito principal de los hooks personalizados es facilitar la reutilización de la lógica utilizada en los componentes.
+React ofrece la opción de crear nuestros propios hooks [personalizados](https://es.react.dev/learn/reusing-logic-with-custom-hooks). Según React, el propósito principal de los hooks personalizados es facilitar la reutilización de la lógica utilizada en los componentes.
 
-> <i>Crear sus propios Hooks le permite extraer la lógica de los componentes en funciones reutilizables.</i>
+> <i>Crear tus propios Hooks te permite extraer la lógica de los componentes en funciones reutilizables.</i>
 
-Los hooks personalizados son funciones regulares de JavaScript que pueden utilizar cualquier otro hook, siempre que se adhieran a las [reglas de los hooks](/es/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks). Además, el nombre de los hooks personalizados debe comenzar con la palabra _use_.
+Los hooks personalizados son funciones regulares de JavaScript que pueden utilizar cualquier otro hook, siempre que se adhieran a las [reglas de los hooks](/es/part1/un_estado_mas_complejo_depurando_aplicaciones_react#reglas-de-los-hooks). Además, el nombre de los hooks personalizados debe comenzar con la palabra _use_.
 
-Implementamos una aplicación de contador en la [parte 1](/es/part1/component_state_event_handlers#event-handling), que puede tener su valor incrementado, decrementado o reiniciado. El código de la aplicación es el siguiente:
+Implementamos una aplicación de contador en la [parte 1](/es/part1/estado_del_componente_controladores_de_eventos#control-de-eventos), que puede tener su valor incrementado, reducido o reiniciado. El código de la aplicación es el siguiente:
 
 ```js  
-import React, { useState } from 'react'
-const App = (props) => {
+import { useState } from 'react'
+const App = () => {
   const [counter, setCounter] = useState(0)
 
   return (
@@ -93,8 +91,7 @@ const useCounter = () => {
 
 Nuestro hook personalizado utiliza el hook _useState_ internamente para crear su propio estado. El hook devuelve un objeto, cuyas propiedades incluyen el valor del contador, así como funciones para manipular el valor.
 
-
-Los componentes de React pueden usar el hook como se muestra a continuación:
+Los componentes de React pueden utilizar el hook como se muestra a continuación:
 
 ```js
 const App = (props) => {
@@ -116,7 +113,6 @@ const App = (props) => {
   )
 }
 ```
-
 
 Al hacer esto, podemos extraer el estado del componente _App_ y su manipulación por completo en el hook _useCounter_. La gestión del estado y la lógica del contador ahora es responsabilidad del hook personalizado.
 
@@ -145,8 +141,7 @@ const App = () => {
 
 La aplicación crea <i>dos</i> contadores completamente separados. El primero se asigna a la variable _left_ y el otro a la variable _right_.
 
-
-Tratar con formularios en React es algo complicado. La siguiente aplicación presenta al usuario un formulario que solicita al usuario que ingrese su nombre, fecha de nacimiento y altura:
+Tratar con formularios en React es algo complicado. La siguiente aplicación presenta al usuario un formulario que le solicita que ingrese su nombre, fecha de nacimiento y altura:
 
 ```js
 const App = () => {
@@ -186,9 +181,7 @@ const App = () => {
 }
 ```
 
-
 Cada campo del formulario tiene su propio estado. Para mantener el estado del formulario sincronizado con los datos proporcionados por el usuario, tenemos que registrar un controlador <i>onChange</i> apropiado para cada uno de los elementos <i>input</i>.
-
 
 Definamos nuestro propio hook personalizado _useField_, que simplifica la gestión del estado del formulario:
 
@@ -208,9 +201,7 @@ const useField = (type) => {
 }
 ```
 
-
-La función de hook recibe el tipo de campo de entrada como parámetro. La función devuelve todos los atributos requeridos por el <i>input</i>: su tipo, valor y el controlador onChange.
-
+La función de hook recibe el tipo de campo de entrada como parámetro. Devuelve todos los atributos requeridos por el <i>input</i>: su tipo, valor y el controlador onChange.
 
 El hook se puede utilizar de la siguiente manera:
 
@@ -234,17 +225,15 @@ const App = () => {
 }
 ```
 
+### Propagando atributos con Spread
 
-### Atributos de propagación
-
-Podríamos simplificar un poco más las cosas. Dado que el objeto _name_ tiene exactamente todos los atributos que el elemento <i>input</i> espera recibir como props, podemos pasar los props al elemento usando la [sintaxis de propagación](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes)(spread syntax) de la siguiente manera:
+Podríamos simplificar un poco más las cosas. Dado que el objeto _name_ tiene exactamente todos los atributos que el elemento <i>input</i> espera recibir como props, podemos pasar los props al elemento usando la [sintaxis spread](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Operators/Spread_syntax)(spread syntax) de la siguiente manera:
 
 ```js
 <input {...name} /> 
 ```
 
-
-Como indica el [ejemplo](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes)  en la documentación de React, las siguientes dos formas de pasar props a un componente logran exactamente el mismo resultado:
+Como indica el [ejemplo](https://es.react.dev/learn/updating-objects-in-state#copying-objects-with-the-spread-syntax) en la documentación de React, las siguientes dos formas de pasar props a un componente logran exactamente el mismo resultado:
 
 ```js
 <Greeting firstName='Arto' lastName='Hellas' />
@@ -256,7 +245,6 @@ const person = {
 
 <Greeting {...person} />
 ```
-
 
 La aplicación se simplifica en el siguiente formato:
 
@@ -286,11 +274,9 @@ const App = () => {
 }
 ```
 
-
 Tratar con formularios se simplifica enormemente cuando los desagradables detalles esenciales relacionados con la sincronización del estado del formulario se encapsulan dentro de nuestro hook personalizado.
 
-
-Claramente, los hooks personalizados no son solo una herramienta para reutilizar, sino que también brindan una mejor manera de dividir nuestro código en partes modulares más pequeñas.
+Los hooks personalizados no son solo una herramienta para reutilizar código; sino que también brindan una mejor manera de dividirlo en partes modulares más pequeñas.
 
 ### Más sobre hooks
 
@@ -304,19 +290,17 @@ Internet está comenzando a llenarse con más y más material útil relacionado 
 
 <div class="tasks">
 
-
 ### Ejercicios 7.4.-7.8.
 
-Continuaremos con la aplicación de los [ejercicios](/es/part7/react_router#ejercicios-7-1-7-3) del capítulo [react router](/es/part7/react_router).
+Continuaremos con la aplicación de los [ejercicios](/es/part7/react_router#ejercicios-7-1-7-3) del capítulo de [react router](/es/part7/react_router).
 
-#### 7.4: anécdotas y hooks paso 1
+#### 7.4: Anécdotas y Hooks paso 1
 
-Simplifique la forma de creación de anécdotas de su aplicación con el hook personalizado _useField_ que definimos anteriormente.
+Simplifica el formulario de creación de anécdotas de tu aplicación con el hook personalizado _useField_ que definimos anteriormente.
 
-Un lugar natural para guardar los hooks personalizados de su aplicación es el archivo <i>/src/hooks/index.js</i>.
+Un lugar natural para guardar los hooks personalizados en tu aplicación es el archivo <i>/src/hooks/index.js</i>.
 
-
-Si usa la [exportación nombrada](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export#Description) en lugar de la exportación predeterminada:
+Si utilizas la [exportación nombrada](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Statements/export#descripci%C3%B3n) en lugar de la exportación predeterminada:
 
 ```js
 import { useState } from 'react'
@@ -335,14 +319,13 @@ export const useField = (type) => { // highlight-line
   }
 }
 
-// modules can have several named exports
+// los módulos pueden tener muchas exportaciones nombradas
 export const useAnotherHook = () => { // highlight-line
   // ...
 }
 ```
 
-
-Luego, la [importación](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) ocurre de la siguiente manera:
+Luego, la [importación](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Statements/import) ocurre de la siguiente manera:
 
 ```js
 import  { useField } from './hooks'
@@ -354,28 +337,27 @@ const App = () => {
 }
 ```
 
+#### 7.5: Anécdotas y Hooks paso 2
 
-#### 7.5: anécdotas y hooks paso 2
+Agrega un botón al formulario que puedas usar para borrar todos los campos de entrada:
 
-Agregue un botón al formulario que puede usar para borrar todos los campos de entrada:
+![formulario de anécdotas con botón reset](../../images/7/61ea.png)
 
-![](../../images/7/61ea.png)
+Amplia la funcionalidad del hook <i>useField</i> para que ofrezca una nueva operación <i>reset</i> para limpiar el campo.
 
-Amplíe la funcionalidad del hook <i>useField</i> para que ofrezca una nueva operación <i>reset</i> para limpiar el campo.
+Dependiendo de tu solución, es posible que veas la siguiente advertencia en tu consola:
 
-Dependiendo de su solución, es posible que vea la siguiente advertencia en su consola:
-
-![](../../images/7/62ea.png)
+![consola con advertencia: valor invalido para prop reset](../../images/7/62ea.png)
 
 Volveremos a esta advertencia en el próximo ejercicio.
 
-#### 7.6: anécdotas y hooks paso 3
+#### 7.6: Anécdotas y Hooks paso 3
 
-Si su solución no provocó que apareciera una advertencia en la consola, ya ha terminado este ejercicio.
+Si tu solución no provocó que apareciera una advertencia en la consola, ya has terminado este ejercicio.
 
-Si ve la advertencia en la consola, realice los cambios necesarios para deshacerse de la advertencia en la consola _Invalid value for prop \`reset\` on \<input\> tag_.
+Si ves la advertencia _Invalid value for prop \`reset\` on \<input\> tag_ en la consola, realiza los cambios necesarios para deshacerte de ella.
 
-El motivo de esta advertencia es que después de realizar los cambios en su aplicación, aparece la siguiente expresión:
+El motivo de esta advertencia es que después de realizar los cambios en tu aplicación, la siguiente expresión:
 
 ```js
 <input {...content}/>
@@ -392,11 +374,9 @@ Esencialmente, es lo mismo que esto:
 />
 ```
 
+El elemento <i>input</i> no debe recibir un atributo <i>reset</i>.
 
-El elemento <i>input</i> no debe recibir un atributo de <i>reset</i>.
-
-
-Una solución simple sería no usar la sintaxis de propagación y escribir todos los formularios de esta manera:
+Una solución simple sería no usar la sintaxis de spread y escribir todos los formularios de esta manera:
 
 ```js
 <input
@@ -406,30 +386,29 @@ Una solución simple sería no usar la sintaxis de propagación y escribir todos
 />
 ```
 
-
-Si hiciéramos esto, perderíamos gran parte del beneficio proporcionado por el hook <i>useField</i>. En su lugar, busque una solución que solucione el problema, pero que aún sea fácil de usar con la sintaxis de propagación.
+Si hiciéramos esto, perderíamos gran parte del beneficio proporcionado por el hook <i>useField</i>. En su lugar, busca una solución al problema, pero que aún sea fácil de usar con la sintaxis de spread.
 
 #### 7.7: Hook de País
 
-Volvamos a los ejercicios [2.12-14](/es/part2/obteniendo_datos_del_servidor#ejercicios-2-11-2-14).
+Volvamos a los ejercicios [2.18-20](/es/part2/agregar_estilos_a_la_aplicacion_react#ejercicios-2-18-2-20).
 
-Utilice el código de https://github.com/fullstack-hy2020/country-hook como punto de partida.
+Utilza el código de <https://github.com/fullstack-hy2020/country-hook> como punto de partida.
 
-La aplicación se puede utilizar para buscar detalles de países desde la interfaz https://studies.cs.helsinki.fi/restcountries/. Si se encuentra el país, se muestran los detalles del país
+La aplicación se puede utilizar para buscar detalles de países desde la interfaz https://studies.cs.helsinki.fi/restcountries/. Si se encuentra a un país, se muestran sus detalles:
 
-![](../../images/7/69ea.png)
+![navegador mostrando detalles del país](../../images/7/69ea.png)
 
-Si no se encuentra el país, se muestra un mensaje al usuario
+Si no se encuentra ningún país, se le muestra un mensaje al usuario
 
-![](../../images/7/70ea.png)
+![navegador mostrando país no encontrado](../../images/7/70ea.png)
 
-Por lo demás, la aplicación está completa, pero en este ejercicio debe implementar un hook personalizado _useCountry_, que se puede usar para buscar los detalles del país dado al hook como parámetro.
+Por lo demás, la aplicación está completa, pero en este ejercicio debes implementar un hook personalizado _useCountry_, que se pueda utilizar para buscar los detalles del país dado al hook como parámetro.
 
-Use el endpoint [name](https://studies.cs.helsinki.fi/restcountries/) de la API para obtener los detalles del país en un hook _useEffect_ dentro de su hook personalizado.
+Usa el endpoint [name](https://studies.cs.helsinki.fi/restcountries/) de la API para obtener los detalles del país en un hook _useEffect_ dentro de su hook personalizado.
 
-Tenga en cuenta que en este ejercicio es esencial utilizar el [segundo parámetro](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) de useEffect para controlar cuándo se ejecuta la función de efecto.
+Ten en cuenta que en este ejercicio es esencial utilizar el [segundo parámetro](https://react.dev/reference/react/useEffect#parameters) de useEffect para controlar cuándo se ejecuta la función de efecto.
 
-#### 7.8: hooks definitivos
+#### 7.8: Hooks Definitivos
 
 El código de la aplicación responsable de comunicarse con el backend de la aplicación de notas de las partes anteriores se ve así:
 
@@ -443,9 +422,9 @@ const setToken = newToken => {
   token = `bearer ${newToken}`
 }
 
-const getAll = () => {
-  const request = axios.get(baseUrl)
-  return request.then(response => response.data)
+const getAll = async () => {
+  const response = await axios.get(baseUrl)
+  return response.data
 }
 
 const create = async newObject => {
@@ -457,19 +436,19 @@ const create = async newObject => {
   return response.data
 }
 
-const update = (id, newObject) => {
-  const request = axios.put(`${ baseUrl } /${id}`, newObject)
-  return request.then(response => response.data)
+const update = async (id, newObject) => {
+  const response = await axios.put(`${ baseUrl }/${id}`, newObject)
+  return response.data
 }
 
 export default { getAll, create, update, setToken }
 ```
 
-Notamos que el código no especifica que nuestra aplicación gestiona notas. Excluyendo el valor de la variable _baseUrl_, el mismo código podría reutilizarse en la aplicación de publicación de blog para tratar la comunicación con el backend.
+Notamos que el código de ninguna manera es especifico al hecho de que nuestra aplicación gestiona notas. Excluyendo el valor de la variable _baseUrl_, el mismo código podría reutilizarse en la aplicación de publicación de blogs para tratar la comunicación con el backend.
 
-Extraiga el código para comunicarse con el backend en su propio hook _useResource_. Es suficiente implementar la búsqueda de todos los recursos y la creación de un nuevo recurso.
+Extrae el código para comunicarse con el backend en su propio hook _useResource_. Es suficiente implementar la búsqueda de todos los recursos y la creación de un nuevo recurso.
 
-Puede hacer el ejercicio para el proyecto que se encuentra en el repositorio https://github.com/fullstack-hy2020/ultimate-hooks. El componente <i>App</i> para el proyecto es el siguiente:
+Puedes hacer el ejercicio en el proyecto que se encuentra en el repositorio https://github.com/fullstack-hy2020/ultimate-hooks. El componente <i>App</i> del proyecto es el siguiente:
 
 ```js
 const App = () => {
@@ -513,8 +492,8 @@ const App = () => {
 
 El hook personalizado _useResource_ devuelve un array de dos elementos al igual que los hooks de estado. El primer elemento del array contiene todos los recursos individuales y el segundo elemento del array es un objeto que se puede usar para manipular la colección de recursos y crear nuevos.
 
-Si implementa el hook correctamente, se puede usar tanto para notas como para números de teléfono (inicie el servidor con el comando _npm run server_ en el puerto 3005).
+Si implementas el hook correctamente, se puede usar tanto para notas como para números de teléfono (inicia el servidor con el comando _npm run server_ en el puerto 3005).
 
-![](../../images/5/21e.png)
+![navegador mostrando notas y personas](../../images/5/21e.png)
 
 </div>

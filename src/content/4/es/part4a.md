@@ -11,7 +11,9 @@ Continuemos nuestro trabajo en el backend de la aplicación de notas que comenza
 
 ### Estructura del proyecto
 
-Antes de pasar al tema de las pruebas, modificaremos la estructura de nuestro proyecto para cumplir con las mejores prácticas de Node.js. 
+**Nota**: el material de este curso fue escrito con la version v20.11.0. Por favor asegúrate de que tu version de Node es al menos tan nueva como la version utilizada en el material (puedes chequear la version al ejecutar _node -v_ en la linea de comandos).
+
+Antes de pasar al tema de las pruebas, modificaremos la estructura de nuestro proyecto para cumplir con las mejores prácticas de Node.js.
 
 Después de realizar los cambios que explicaremos a continuación, terminaremos con la siguiente estructura: 
 
@@ -83,7 +85,7 @@ const app = require('./app') // la aplicación Express real
 const config = require('./utils/config')
 const logger = require('./utils/logger')
 
-server.listen(config.PORT, () => {
+app.listen(config.PORT, () => {
   logger.info(`Server running on port ${config.PORT}`)
 })
 ```
@@ -405,6 +407,8 @@ Esta característica de VS Code afectando la forma en que escribes tu código pr
 
 ### Ejercicios 4.1.-4.2.
 
+**Nota**: el material de este curso fue escrito con la version v20.11.0. Por favor asegúrate de que tu version de Node es al menos tan nueva como la version utilizada en el material (puedes chequear la version al ejecutar _node -v_ en la linea de comandos).
+
 En los ejercicios de esta parte, crearemos una <i>aplicación de lista de blogs</i>, que permite a los usuarios guardar información sobre blogs interesantes con los que se han encontrado en Internet. Para cada blog listado, guardaremos el autor, el título, la URL y la cantidad de votos positivos de los usuarios de la aplicación.
 
 #### 4.1 Lista de Blogs, paso 1
@@ -504,19 +508,12 @@ module.exports = {
 
 > La función _average_ usa el método de array [reduce](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce). Si el método aún no te resulta familiar, ahora es un buen momento para ver los primeros tres videos de la serie [Functional Javascript](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84) en Youtube.
 
-Hay muchas librerías de prueba diferentes o <i>ejecutores de prueba</i> disponibles para JavaScript. En este curso utilizaremos una librería de pruebas desarrollada y utilizada internamente por Facebook llamada [jest](https://jestjs.io/), que se asemeja al rey anterior de las librerías de prueba de JavaScript [Mocha](https://mochajs.org/).
+Hay un gran número de librerías de pruebas, o <i>test runners</i>, disponibles para JavaScript.
+El antiguo rey de las librerías de pruebas es [Mocha](https://mochajs.org/), que fue reemplazado hace unos años por [Jest](https://jestjs.io/). Un recién llegado a las librerías es [Vitest](https://vitest.dev/), que se presenta como una nueva generación de librerías de pruebas.
 
-Jest es una opción natural para este curso, ya que funciona bien para probar backends y brilla cuando se trata de probar aplicaciones React.
+Hoy en día, Node también tiene una librería de pruebas integrada [node:test](https://nodejs.org/docs/latest/api/test.html), que se adapta bien a las necesidades del curso.
 
-> <i>**Usuarios de Windows:**</i> Jest puede no funcionar si la ruta del directorio del proyecto contiene un directorio que tiene espacios en su nombre.
-
-Dado que las pruebas solo se ejecutan durante el desarrollo de nuestra aplicación, instalaremos <i>jest</i> como una dependencia de desarrollo con el comando:
-
-```bash
-npm install --save-dev jest
-```
-
-Definamos el <i>script npm _test_</i> para ejecutar pruebas con Jest y para informar sobre la ejecución de la prueba con el estilo <i>verbose (detallado)</i>:
+Definamos el <i>script npm _test_</i> para ejecutar pruebas:
 
 ```bash
 {
@@ -529,122 +526,108 @@ Definamos el <i>script npm _test_</i> para ejecutar pruebas con Jest y para info
     "deploy:full": "npm run build:ui && npm run deploy",
     "logs:prod": "fly logs",
     "lint": "eslint .",
-    "test": "jest --verbose" // highlight-line
+    "test": "node --test" // highlight-line
   },
   //...
-}
-```
-
-Jest requiere que especifiquemos que el entorno de ejecución es Node. Esto se puede hacer agregando lo siguiente al final de <i>package.json</i>:
-
-```js
-{
- //...
- "jest": {
-   "testEnvironment": "node"
- }
 }
 ```
 
 Creemos un directorio separado para nuestras pruebas llamado <i>tests</i> y creemos un nuevo archivo llamado <i>reverse.test.js</i> con el siguiente contenido:
 
 ```js
+const { test } = require('node:test')
+const assert = require('node:assert')
+
 const reverse = require('../utils/for_testing').reverse
 
 test('reverse of a', () => {
   const result = reverse('a')
 
-  expect(result).toBe('a')
+  assert.strictEqual(result, 'a')
 })
 
 test('reverse of react', () => {
   const result = reverse('react')
 
-  expect(result).toBe('tcaer')
+  assert.strictEqual(result, 'tcaer')
 })
 
-test('reverse of releveler', () => {
-  const result = reverse('releveler')
+test('reverse of saippuakauppias', () => {
+  const result = reverse('saippuakauppias')
 
-  expect(result).toBe('releveler')
+  assert.strictEqual(result, 'saippuakauppias')
 })
-```
-
-La configuración de ESLint que agregamos al proyecto en la parte anterior se queja de los comandos _test_ y _expect_ en nuestro archivo de prueba, ya que la configuración no permite <i>globals</i>. Eliminemos las quejas agregando <i>"jest": true</i> a la propiedad <i>env</i> en el archivo <i>.eslintrc.js</i>.
-
-```js
-module.exports = {
-  'env': {
-    'commonjs': true,
-    'es2021': true,
-    'node': true,
-    'jest': true, // highlight-line
-  },
-  // ...
-}
 ```
 
 En la primera linea, el archivo de prueba importa la función a ser probada y la asigna a una variable llamada _reverse_:
+
+La prueba define la palabra clave _test_ y la librería [assert](https://nodejs.org/docs/latest/api/assert.html), que es utilizada por las pruebas para verificar los resultados de las funciones bajo prueba.
+
+En la siguiente fila, el archivo de prueba importa la función a ser probada y la asigna a una variable llamada _reverse_:
 
 ```js
 const reverse = require('../utils/for_testing').reverse
 ```
 
-Los casos de prueba individual se definen con la función _test_. El primer parámetro de la función es la descripción de la prueba como una cadena. El segundo parámetro es una <i>función</i>, que define la funcionalidad para el caso de prueba. La funcionalidad para el segundo caso de prueba se ve así:
+Los casos de prueba individual se definen con la función _test_. El primer argumento de la función es la descripción de la prueba como una cadena. El segundo argumento es una <i>función</i>, que define la funcionalidad para el caso de prueba. La funcionalidad para el segundo caso de prueba se ve así:
 
 ```js
 () => {
   const result = reverse('react')
 
-  expect(result).toBe('tcaer')
+  assert.strictEqual(result, 'tcaer')
 }
 ```
 
-Primero, ejecutamos el código que se va a probar, es decir, generamos un reverso para la cadena <i>react</i>. Luego, verificamos los resultados con la función [expect](https://jestjs.io/es-ES/docs/expect#expectvalue). Expect envuelve el valor resultante en un objeto que ofrece una colección de funciones <i>matcher</i>, que se pueden usar para verificar la corrección del resultado. Dado que en este caso de prueba estamos comparando dos cadenas, podemos usar el matcher [toBe](https://jestjs.io/es-ES/docs/expect#tobevalue).
+Primero, ejecutamos el código que se va a probar, es decir, generamos un reverso para el string <i>react</i>. Luego, verificamos los resultados con el método [strictEqual](https://nodejs.org/docs/latest/api/assert.html#assertstrictequalactual-expected-message) de la librería [assert](https://nodejs.org/docs/latest/api/assert.html).
 
 Como se esperaba, todas las pruebas pasan:
 
-![salida de terminal para npm test con todas las pruebas pasando](../../images/4/1x.png)
+![salida de terminal para npm test con todas las pruebas pasando](../../images/4/1new.png)
 
-Jest espera por defecto que los nombres de los archivos de prueba contengan <i>.test</i>. En este curso, seguiremos la convención de nombrar nuestros archivos de prueba con la extensión <i>.test.js</i>.
+La librería node:test espera por defecto que los nombres de los archivos de prueba contengan <i>.test</i>. En este curso, seguiremos la convención de nombrar nuestros archivos de prueba con la extensión <i>.test.js</i>.
 
-Jest tiene excelentes mensajes de error, rompamos la prueba para demostrar esto:
+Vamos a romper el test:
 
 ```js
 test('reverse of react', () => {
   const result = reverse('react')
 
-  expect(result).toBe('tkaer')
+  assert.strictEqual(result, 'tkaer')
 })
 ```
 
 Ejecutar esta prueba da como resultado el siguiente mensaje de error:
 
-![salida de terminal muestra error de npm test](../../images/4/2x.png)
+![salida de terminal muestra error de npm test](../../images/4/2new.png)
 
-Agreguemos algunas pruebas para la función _average_, en un nuevo archivo <i>tests/average.test.js</i>.
+Pongamos las pruebas para la función _average_, en un nuevo archivo llamado <i>tests/average.test.js</i>.
 
 ```js
+const { test, describe } = require('node:test')
+
+// ...
+
 const average = require('../utils/for_testing').average
 
 describe('average', () => {
   test('of one value is the value itself', () => {
-    expect(average([1])).toBe(1)
+    assert.strictEqual(average([1]), 1)
   })
 
   test('of many is calculated right', () => {
-    expect(average([1, 2, 3, 4, 5, 6])).toBe(3.5)
+    assert.strictEqual(average([1, 2, 3, 4, 5, 6]), 3.5)
   })
 
   test('of empty array is zero', () => {
-    expect(average([])).toBe(0)
+    assert.strictEqual(average([]), 0)
   })
 })
 ```
 
-La prueba revela que la función no funciona correctamente con una matriz vacía (esto se debe a que en JavaScript dividir por cero da como resultado <i>NaN</i>)
+La prueba revela que la función no funciona correctamente con un array vacío (esto se debe a que en JavaScript dividir por cero da como resultado <i>NaN</i>)
 
-![salida de terminal mostrando error de jest para prueba con matriz vacía](../../images/4/3.png)
+![salida de terminal mostrando array vacío falla](../../images/4/3new.png)
 
 Arreglar la función es bastante fácil: 
 
@@ -660,7 +643,7 @@ const average = array => {
 }
 ```
 
-Si la longitud de la matriz es 0, devolvemos 0, y en todos los demás casos usamos el método _reduce_ para calcular el promedio.
+Si la longitud del array es 0, devolvemos 0, y en todos los demás casos usamos el método _reduce_ para calcular el promedio.
 
 Hay algunas cosas a tener en cuenta sobre las pruebas que acabamos de escribir. Definimos un bloque <i>describe</i> alrededor de las pruebas al que se le dio el nombre _average_:
 
@@ -670,9 +653,9 @@ describe('average', () => {
 })
 ```
 
-Se pueden usar bloques de descripción para agrupar pruebas en colecciones lógicas. La salida de prueba de Jest también usa el nombre del bloque describe:
+Se pueden usar bloques de descripción para agrupar pruebas en colecciones lógicas. La salida de prueba también usa el nombre del bloque describe:
 
-![npm test mostrando bloques describe](../../images/4/4x.png)
+![npm test mostrando bloques describe](../../images/4/4new.png)
 
 Como veremos más adelante, los bloques <i>describe</i> son necesarios cuando queremos ejecutar algunas operaciones de instalación o desmontaje compartidas para un grupo de pruebas.
 
@@ -680,7 +663,7 @@ Otra cosa a tener en cuenta es que escribimos las pruebas de una manera bastante
 
 ```js
 test('of empty array is zero', () => {
-  expect(average([])).toBe(0)
+  assert.strictEqual(average([]), 0)
 })
 ```
 
@@ -690,11 +673,11 @@ test('of empty array is zero', () => {
 
 ### Ejercicios 4.3.-4.7.
 
-Creemos una colección de funciones auxiliares que están destinadas a ayudar a lidiar con la lista de blogs. Cree las funciones en un archivo llamado <i>utils/list_helper.js</i>. Escriba sus pruebas en un archivo de prueba con el nombre apropiado en el directorio <i>tests</i>.
+Creemos una colección de funciones auxiliares que estén destinadas a trabajar con las secciones describe de la lista de blogs. Crea las funciones en un archivo llamado <i>utils/list_helper.js</i>. Escribe tus pruebas en un archivo de prueba con el nombre apropiado en el directorio <i>tests</i>.
 
 #### 4.3: Funciones Auxiliares y Pruebas Unitarias, paso 1
 
-Primero define una función _dummy_ que reciba una matriz de publicaciones de blog como parámetro y siempre devuelva el valor 1. El contenido del archivo <i>list_helper.js</i> en este punto debe ser el siguiente:
+Primero define una función _dummy_ que reciba un array de publicaciones de blog como parámetro y siempre devuelva el valor 1. El contenido del archivo <i>list_helper.js</i> en este punto debe ser el siguiente:
 
 ```js
 const dummy = (blogs) => {
@@ -709,13 +692,15 @@ module.exports = {
 Verifica que tu configuración de prueba funcione con la siguiente prueba:
 
 ```js
+const { test, describe } = require('node:test')
+const assert = require('node:assert')
 const listHelper = require('../utils/list_helper')
 
 test('dummy returns one', () => {
   const blogs = []
 
   const result = listHelper.dummy(blogs)
-  expect(result).toBe(1)
+  assert.strictEqual(result, 1)
 })
 ```
 
@@ -744,22 +729,14 @@ describe('total likes', () => {
 
   test('when list has only one blog, equals the likes of that', () => {
     const result = listHelper.totalLikes(listWithOneBlog)
-    expect(result).toBe(5)
+    assert.strictEqual(result, 5)
   })
 })
 ```
 
-Si definir tu propia lista de datos de prueba de blogs es demasiado trabajo, puedes usar la lista ya hecha [aquí](https://raw.githubusercontent.com/fullstack-hy2020/misc/master/blogs_for_test.md).
+Si definir tu propia lista de datos de prueba de blogs es demasiado trabajo, puedes usar la lista ya hecha [aquí](https://github.com/fullstack-hy2020/misc/blob/master/blogs_for_test.md).
 
-Es probable que tenga problemas al escribir pruebas. Recuerda las cosas que aprendimos sobre [depuración](/es/part3/guardando_datos_en_mongo_db#depuracion-en-aplicaciones-de-node) en la parte 3. Puedes imprimir cosas en la consola con _console.log_ incluso durante la ejecución de la prueba. Incluso es posible usar el depurador mientras se ejecutan las pruebas, puedes encontrar instrucciones para eso [aquí](https://jestjs.io/es-ES/docs/troubleshooting).
-
-**NB:** si alguna prueba falla, entonces se recomienda ejecutar solo esa prueba mientras estás solucionando el problema. Puedes ejecutar una única prueba con el método [only](https://jestjs.io/es-ES/docs/api#testonlyname-fn-tiempo).
-
-Otra forma de ejecutar una sola prueba (o bloque de descripción) es especificar el nombre de la prueba que se ejecutará con la bandera [-t](https://jestjs.io/es-ES/docs/cli):
-
-```js
-npm test -- -t 'when list has only one blog, equals the likes of that'
-```
+Es probable que tengas problemas al escribir pruebas. Recuerda las cosas que aprendimos sobre [depuración](/es/part3/guardando_datos_en_mongo_db#depuracion-en-aplicaciones-de-node) en la parte 3. Puedes imprimir cosas en la consola con _console.log_ incluso durante la ejecución de la prueba.
 
 #### 4.5*: Funciones Auxiliares y Pruebas Unitarias, paso 3
 
@@ -775,7 +752,7 @@ El valor devuelto por la función podría tener el siguiente formato:
 }
 ```
 
-**NB** cuando estás comparando objetos, el método [toEqual](https://jestjs.io/es-ES/docs/expect#toequalvalue) es probablemente lo que debas usar, ya que el método [toBe](https://jestjs.io/es-ES/docs/expect#tobevalue) intenta verificar que los dos valores sean el mismo valor, y no solo que contengan las mismas propiedades.
+**NB** cuando estás comparando objetos, el método [deepStrictEqual](https://nodejs.org/api/assert.html#assertdeepstrictequalactual-expected-message) es probablemente lo que debas usar, [strictEqual](https://nodejs.org/api/assert.html#assertstrictequalactual-expected-message) intenta verificar que los dos valores sean el mismo valor, y no solo que contengan las mismas propiedades. Por diferencias entre varios módulos de aserción de funciones, puedes referirte a [esta respuesta Stack Overflow](https://stackoverflow.com/a/73937068/15291501).
 
 Escribe las pruebas para este ejercicio dentro de un nuevo bloque <i>describe</i>. Haz lo mismo con los ejercicios restantes también.
 

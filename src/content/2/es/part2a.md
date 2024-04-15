@@ -76,7 +76,7 @@ Si la programación funcional con matrices te parece ajena, vale la pena ver al 
 
 Según el curso del año pasado, el manejo de eventos ha demostrado ser difícil.
 
-Vale la pena leer el capítulo de revisión al final de la parte anterior [revisión de los controladores de eventos](/es/part1/un_estado_mas_complejo_depurando_aplicaciones_react#manejo-de-eventos-revisado), si cree que su propio conocimiento sobre el tema necesita algo de mejora.
+Vale la pena leer el capítulo de revisión al final de la parte anterior [revisión de los controladores de eventos](/es/part1/un_estado_mas_complejo_depurando_aplicaciones_react#revision-de-los-controladores-de-eventos), si cree que su propio conocimiento sobre el tema necesita algo de mejora.
 
 Pasar controladores de eventos a los componentes secundarios del componente <i>App</i> ha planteado algunas preguntas. Se puede encontrar una pequeña revisión sobre el tema [aquí](/es/part1/un_estado_mas_complejo_depurando_aplicaciones_react#pasando-controladores-de-eventos-a-componentes-hijos).
 

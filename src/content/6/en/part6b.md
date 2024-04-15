@@ -75,7 +75,7 @@ Since the <i>name</i> attribute of all the radio buttons is the same, they form 
 
 The buttons have a change handler that currently only prints the string associated with the clicked button to the console.
 
-We decide to implement the filter functionality by storing <i>the value of the filter</i> in the redux store in addition to the notes themselves. The state of the store should look like this after making these changes:
+In the following section, we will implement filtering by storing both the notes as well as <i>the value of the filter</i> in the redux store. When we are finished, we would like the state of the store to look like this:
 
 ```js
 {
@@ -657,10 +657,18 @@ The following is printed to the console
 
 The output is interesting but not very useful. This is about the previously mentioned Immer library used by the Redux Toolkit internally to save the state of the Store.
 
-The status can be converted to a human-readable format, e.g. by converting it first to a string and then back to a JavaScript object as follows:
+The status can be converted to a human-readable format by using the [current](https://redux-toolkit.js.org/api/other-exports#current) function from the immer library.
+
+Update the imports to include the "current" function from the immer library:
 
 ```js
-console.log(JSON.parse(JSON.stringify(state))) // highlight-line
+import { createSlice, current } from '@reduxjs/toolkit' // highlight-line
+```
+
+Then update the console.log function call:
+
+```js
+console.log(current(state)) // highlight-line
 ```
 
 Console output is now human readable
@@ -704,6 +712,22 @@ Also, start using Redux DevTools to debug the application's state easier.
 #### 6.11 Better Anecdotes, step 9
 
 Change also the definition of the <i>anecdote reducer and action creators</i> to use the Redux Toolkit's <em>createSlice</em> function.
+
+Implementation note: when you use the Redux Toolkit to return the initial state of anecdotes, it will be immutable, so you will need to make a copy of it to sort it, or you will encounter "TypeError: Cannot assign to read only property '". You can use the spread syntax to make a copy of the array. Instead of:
+
+```js
+
+anecdotes.sort()
+
+```
+
+Write:
+
+```js
+
+[...anecdotes].sort()
+
+```
 
 #### 6.12 Better Anecdotes, step 10
 

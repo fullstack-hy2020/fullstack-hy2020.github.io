@@ -227,7 +227,7 @@ const errorHandler = (error, request, response, next) => {
   } else if (error.name === 'MongoServerError' && error.message.includes('E11000 duplicate key error')) {
     return response.status(400).json({ error: 'expected `username` to be unique' })
   } else if (error.name ===  'JsonWebTokenError') { // highlight-line
-    return response.status(400).json({ error: 'token missing or invalid' }) // highlight-line
+    return response.status(401).json({ error: 'token invalid' }) // highlight-line
   }
 
   next(error)
@@ -393,7 +393,7 @@ The operation must respond with a suitable status code and some kind of an error
 
 Also, **implement tests** that ensure invalid users are not created and that an invalid add user operation returns a suitable status code and error message.
 
-**NB** if you decide to define tests on multiple files, you should note that by default each test file is executed in its own process (see _Test execution model_ in the [documentation](https://nodejs.org/api/test.html)). The consequence of this is that different test files are executed at the same time. Since the tests share the same database, simultaneous execution may cause problems. Problems are avoided by executing the tests with the option _--test-concurrency=1_, i.e. defining them to be executed sequentially.
+**NB** if you decide to define tests on multiple files, you should note that by default each test file is executed in its own process (see _Test execution model_ in the [documentation](https://nodejs.org/api/test.html#test-runner-execution-model)). The consequence of this is that different test files are executed at the same time. Since the tests share the same database, simultaneous execution may cause problems, which can be avoided by executing the tests with the option _--test-concurrency=1_, i.e. defining them to be executed sequentially.
 
 #### 4.17: Blog List Expansion, step 5
 
@@ -520,7 +520,7 @@ app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 ```
 
-As can be seen, this happens by chaining multiple middlewares as the parameter of function <i>use</i>. It would also be possible to register a middleware only for a specific operation:
+As can be seen, this happens by chaining multiple middlewares as the arguments of the function <i>use</i>. It would also be possible to register a middleware only for a specific operation:
 
 ```js
 const middleware = require('../utils/middleware');

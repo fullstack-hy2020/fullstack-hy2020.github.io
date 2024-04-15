@@ -9,7 +9,7 @@ lang: en
 
 [Cypress](https://www.cypress.io/) has been the most popular E2E testing library for the past few years, but Playwright is rapidly gaining ground. This course has been using Cypress for years. Now Playwright is a new addition. You can choose whether to complete the E2E testing part of the course with Cypress or Playwright. The operating principles of both libraries are very similar, so your choice is not very important. However, Playwright is now the preferred E2E library for the course.
 
-If your choice is Cypress, please proceed. If you end up using Playwright, go [here](/part5/end_to_end_testing_playwright).
+If your choice is Cypress, please proceed. If you end up using Playwright, go [here](/en/part5/end_to_end_testing_playwright).
 
 ### Cypress
 

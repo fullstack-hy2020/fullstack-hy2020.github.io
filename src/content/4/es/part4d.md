@@ -220,14 +220,14 @@ Si el token es invalido o está ausente, la excepción <i>JsonWebTokenError</i> 
 
 ```js
 const errorHandler = (error, request, response, next) => {
-  logger.error(error.message)
-
   if (error.name === 'CastError') {
     return response.status(400).send({ error: 'malformatted id' })
   } else if (error.name === 'ValidationError') {
     return response.status(400).json({ error: error.message })
+  } else if (error.name === 'MongoServerError' && error.message.includes('E11000 duplicate key error')) {
+    return response.status(400).json({ error: 'expected `username` to be unique' })
   } else if (error.name ===  'JsonWebTokenError') { // highlight-line
-    return response.status(401).json({ error: error.message }) // highlight-line
+    return response.status(401).json({ error: 'token invalid' }) // highlight-line
   }
 
   next(error)
@@ -252,13 +252,13 @@ Ahora se puede crear una nueva nota usando Postman si el encabezado <i>authoriza
 
 Usando Postman, esto se ve de la siguiente manera:
 
-![postman agregando bearer token](../../images/4/20e.png)
+![postman agregando bearer token](../../images/4/20new.png)
 
 y con el cliente REST de Visual Studio Code
 
-![vscode rest agregando bearer token](../../images/4/21e.png)
+![vscode rest agregando bearer token](../../images/4/21new.png)
   
-El código de la aplicación actual se puede encontrar en [Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-9), rama <i>part4-9</i>.
+El código de la aplicación actual se puede encontrar en [GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-9), rama <i>part4-9</i>.
   
 Si la aplicación tiene múltiples interfaces que requieren identificación, la validación de JWT debe separarse en su propio middleware. También se podría utilizar alguna librería existente como [express-jwt](https://www.npmjs.com/package/express-jwt).
 
@@ -315,6 +315,10 @@ const errorHandler = (error, request, response, next) => {
     return response.status(400).send({ error: 'malformatted id' })
   } else if (error.name === 'ValidationError') {
     return response.status(400).json({ error: error.message })
+  } else if (error.name === 'MongoServerError' && error.message.includes('E11000 duplicate key error')) {
+    return response.status(400).json({
+      error: 'expected `username` to be unique'
+    })
   } else if (error.name === 'JsonWebTokenError') {
     return response.status(401).json({
       error: 'invalid token'
@@ -335,7 +339,7 @@ Cuanto más corto sea el tiempo de caducidad, más segura será la solución. Po
 
 La otra solución es guardar información sobre cada token en la base de datos y verificar en cada solicitud de API si el derecho de acceso correspondiente al token sigue siendo válido. Con este esquema, los derechos de acceso pueden ser revocados en cualquier momento. Este tipo de solución a menudo se denomina <i>server-side session</i>.
 
-El aspecto negativo de las sesiones del lado del servidor es la mayor complejidad en el backend y también el efecto en el rendimiento, ya que se debe verificar la validez del token para cada solicitud de API a la base de datos. El acceso a la base de datos es considerablemente más lento en comparación con la verificación de la validez del token en sí. Es por eso que es bastante común guardar la sesión correspondiente a un token en una <i>base de datos de llave-valor</i> como [Redis](https://redis.io/) que tiene una funcionalidad limitada en comparación con MongoDB o bases de datos relacionales, pero es extremadamente rápida en algunos escenarios de uso.
+El aspecto negativo de las sesiones del lado del servidor es la mayor complejidad en el backend y también el efecto en el rendimiento, ya que se debe verificar la validez del token para cada solicitud de API a la base de datos. El acceso a la base de datos es considerablemente más lento en comparación con la verificación de la validez del token en sí. Es por eso que es bastante común guardar la sesión correspondiente a un token en una <i>base de datos de llave-valor</i> como [Redis](https://redis.io/), que tiene una funcionalidad limitada en comparación con MongoDB o una base de datos relacional, pero es extremadamente rápida en algunos escenarios de uso.
 
 Cuando se utilizan sesiones del lado del servidor, el token suele ser solo una cadena aleatoria, que no incluye ninguna información sobre el usuario, como suele ser el caso cuando se utilizan jwt-tokens. Para cada solicitud de API, el servidor obtiene la información relevante sobre la identidad del usuario de la base de datos. También es bastante habitual que, en lugar de utilizar el encabezado de autorización, se utilicen <i>cookies</i> como mecanismo para transferir el token entre el cliente y el servidor.
 
@@ -387,7 +391,9 @@ La operación debe responder con un código de estado adecuado y algún tipo de 
 
 **NB** No pruebes las restricciones de password con las validaciones de Mongoose. No es una buena idea porque la password recibida por el backend y el hash de password guardado en la base de datos no son lo mismo. La longitud de la contraseña debe validarse en el controlador como hicimos en la [parte 3](/es/part3/validacion_y_es_lint) antes de usar la validación de Mongoose.
 
-Además, implementa pruebas que verifiquen que no se creen usuarios no válidos y que una operación de agregar usuario que sea no válida devuelva un código de estado adecuado y un mensaje de error.
+Además, **implementa pruebas** que verifiquen que no se creen usuarios no válidos y que una operación de agregar usuario que sea no válida devuelva un código de estado adecuado y un mensaje de error.
+
+**NB** si decides definir pruebas en múltiples archivos, debes notar que por defecto cada archivo de prueba se ejecuta en su propio proceso (ver _Modelo de ejecución de pruebas_ en la [documentación](https://nodejs.org/api/test.html#test-runner-execution-model)). La consecuencia de esto es que diferentes archivos de prueba se ejecutan al mismo tiempo. Dado que las pruebas comparten la misma base de datos, la ejecución simultánea puede causar problemas, que pueden evitarse ejecutando las pruebas con la opción _--test-concurrency=1_, es decir, definiéndolas para que se ejecuten secuencialmente.
 
 #### 4.17: Expansión de la Lista de Blogs, paso 5
 
@@ -416,7 +422,7 @@ Modifica la adición de nuevos blogs para que solo sea posible si se envía un t
 
 [Este ejemplo](/es/part4/autenticacion_basada_en_token#limitacion-de-la-creacion-de-nuevas-notas-a-los-usuarios-registrados) de la parte 4 muestra cómo tomar el token del encabezado con la función auxiliar _getTokenFrom_.
 
-Si usaste la misma solución, refactoriza para llevar el token a un [middleware](/es/part3/node_js_y_express#middleware). El middleware debe tomar el token del encabezado <i>Authorization</i> y debe colocarlo en el campo <i>token</i> del objeto <i>request</i>.
+Si usaste la misma solución, refactoriza para llevar el token a un [middleware](/es/part3/node_js_y_express#middleware). El middleware debe tomar el token del encabezado <i>Authorization</i> y debe asignarlo al campo <i>token</i> del objeto <i>request</i>.
 
 En otras palabras, si registras este middleware en el archivo <i>app.js</i> antes de todas las rutas
 
@@ -514,7 +520,7 @@ app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 ```
 
-Como puede verse, esto sucede al encadenarse múltiples middlewares como parámetro de la función <i>use</i>. También sería posible registrar un middleware solo para una operación específica:
+Como puede verse, esto sucede al encadenarse múltiples middlewares como argumentos de la función <i>use</i>. También sería posible registrar un middleware solo para una operación específica:
 
 ```js
 const middleware = require('../utils/middleware');

@@ -30,7 +30,7 @@ From the statistics on [npmtrends.com](https://npmtrends.com/cypress-vs-playwrig
 
 This course has been using Cypress for years. Now Playwright is a new addition. You can choose whether to complete the E2E testing part of the course with Cypress or Playwright. The operating principles of both libraries are very similar, so your choice is not very important. However, Playwright is now the preferred E2E library for the course.
 
-If your choice is Playwright, please proceed. If you end up using Cypress, go [here](/part5/end_to_end_testing_cypress).
+If your choice is Playwright, please proceed. If you end up using Cypress, go [here](/en/part5/end_to_end_testing_cypress).
 
 
 ### Playwright
@@ -173,7 +173,7 @@ test('front page can be opened', async ({ page }) => {
 })
 ```
 
-First, the test opens the application with the method [page.goto](https://playwright.dev/docs/writing-tests#navigation). After this, the test uses the [page.getByText](https://playwright.dev/docs/api/class-page#page-get-by-text) to get a [locator](https://playwright.dev/docs/api /class-locator) that corresponds to the element where the text <i>Notes</i> is found.
+First, the test opens the application with the method [page.goto](https://playwright.dev/docs/writing-tests#navigation). After this, the test uses the [page.getByText](https://playwright.dev/docs/api/class-page#page-get-by-text) to get a [locator](https://playwright.dev/docs/locators) that corresponds to the element where the text <i>Notes</i> is found.
 
 The method [toBeVisible](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-be-visible) ensures that the element corresponding to the locator is visible at the page.
 
@@ -734,7 +734,7 @@ test('login fails with wrong password', async ({ page }) =>{
 By default, Playwright always runs all tests, and as the number of tests increases, it becomes time-consuming. When developing a new test or debugging a broken one, the test can be defined instead of the command <i>test</i> with the command <i>test.only</i>, in which case Playwright will run only that test:
 
 ```js
-describre(() => {
+describe(() => {
   // this is the only test executed!
   test.only('login fails with wrong password', async ({ page }) => {  // highlight-line
     // ...

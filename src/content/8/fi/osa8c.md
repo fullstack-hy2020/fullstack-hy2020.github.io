@@ -292,7 +292,7 @@ Mutation: {
         throw new GraphQLError('Creating the user failed', {
           extensions: {
             code: 'BAD_USER_INPUT',
-            invalidArgs: args.name,
+            invalidArgs: args.username,
             error
           }
         })
@@ -399,7 +399,7 @@ Jos headerissa on oikea arvo, palauttaa kysely headerin yksilöimän käyttäjä
 
 Viimeistellään sovelluksen backend siten, että henkilöiden luominen ja editointi edellyttää kirjautumista, ja että luodut henkilöt menevät automaattisesti kirjautuneen käyttäjän tuttavalistalle.
 
-Tyhjennetään ensin kannasta siellä ennestään olevat kenenkään tuttaviin kuulumattomat käyttäjät.
+Tyhjennetään ensin kannasta siellä ennestään olevat kenenkään tuttaviin kuulumattomat henkilöt.
 
 Mutaatio _addPerson_ muuttuu seuraavasti:
 

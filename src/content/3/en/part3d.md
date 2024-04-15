@@ -133,6 +133,10 @@ It is also vital to follow continuously the server logs. The problem became obvi
 
 The database url was _undefined_, so the command *fly secrets set MONGODB\_URI* was forgotten.
 
+You will also need to whitelist the the fly.io app's IP address in MongoDB Atlas. If you don't MongoDB will refuse the connection.
+
+Sadly, fly.io does not provide you a dedicated IPv4 address for your app, so you will need to allow all IP addresses in MongoDB Atlas.
+
 When using Render, the database url is given by defining the proper env in the dashboard:
 
 ![render dashboard showing the MONGODB_URI env variable](../../images/3/render-env.png)
@@ -226,7 +230,7 @@ We will answer all of the questions:
 
 ![terminal output from ESlint init](../../images/3/52new.png)
 
-The configuration will be saved in the _.eslintrc.js_ file.  We will change _browser_ to _node_ in the _env_ configuration:
+The configuration will be saved in the _.eslintrc.js_ file. We will change _browser_ to _node_ in the _env_ configuration:
 
 ```js
 module.exports = {
@@ -262,7 +266,7 @@ Let's change the configuration a bit. Install a [plugin](https://eslint.style/pa
 npm install --save-dev @stylistic/eslint-plugin-js
 ```
 
-Enable the plugin and add an extends definiton and four code style rules:
+Enable the plugin and add an "extends" definition and four code style rules:
 
 ```js
 module.exports = {

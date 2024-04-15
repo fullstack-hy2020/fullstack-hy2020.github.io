@@ -44,7 +44,7 @@ host: example.com
 port: 80
 ```
 
-Cuando visitas un sitio web (por ejemplo, <http://catwebsites.com>), el navegador emite una solicitud al servidor en el que está alojado el sitio web (catwebsites.com). La respuesta enviada por el servidor es un archivo HTML que puede contener una o más referencias a recursos externos alojados ya sea en el mismo servidor que catwebsites.com o en un sitio web diferente. Cuando el navegador ve referencia(s) a una URL en el HTML fuente, emite una solicitud. Si la solicitud se realiza utilizando la URL desde la cual se obtuvo el HTML fuente, entonces el navegador procesa la respuesta sin problemas. Sin embargo, si el recurso se obtiene utilizando una URL que no comparte el mismo origen (esquema, host, puerto) que el HTML fuente, el navegador tendrá que verificar el encabezado de respuesta _Access-Control-Allow-Origin_. Si contiene _*_ o la URL del HTML fuente, el navegador procesará la respuesta; de lo contrario, el navegador se negará a procesarla y generará un error.
+Cuando visitas un sitio web (por ejemplo, <http://catwebsites.com>), el navegador emite una solicitud al servidor en el que está alojado el sitio web (catwebsites.com). La respuesta enviada por el servidor es un archivo HTML que puede contener una o más referencias a recursos externos alojados ya sea en el mismo servidor que catwebsites.com o en un sitio web diferente. Cuando el navegador ve referencia(s) a una URL en el HTML fuente, emite una solicitud. Si la solicitud se realiza utilizando la URL desde la cual se obtuvo el HTML fuente, entonces el navegador procesa la respuesta sin problemas. Sin embargo, si el recurso se obtiene utilizando una URL que no comparte el mismo origen (esquema, host, puerto) que el HTML fuente, el navegador tendrá que verificar el encabezado de respuesta _Access-Control-Allow-Origin_. Si contiene _*_ en la URL del HTML fuente, el navegador procesará la respuesta; de lo contrario, el navegador se negará a procesarla y generará un error.
 
 La <strong>política de mismo origen</strong> es un mecanismo de seguridad implementado por los navegadores para prevenir el secuestro de sesiones, entre otras vulnerabilidades de seguridad.
 
@@ -73,7 +73,7 @@ const cors = require('cors')
 app.use(cors())
 ```
 
-¡Y el frontend funciona! Sin embargo, la funcionalidad para cambiar la importancia de las notas aún no se ha implementado en el backend.
+Ahora, ¡la mayoría de las funcionalidades del frontend funcionan! La funcionalidad para cambiar la importancia de las notas aún no se ha implementado en el backend, por lo que naturalmente, esto todavía no funciona en el frontend. Deberemos arreglarlo luego.
 
 Puedes leer más sobre CORS en la [página de Mozilla](https://developer.mozilla.org/es/docs/Web/HTTP/CORS).
 
@@ -97,7 +97,7 @@ Ten en cuenta que a pesar de utilizar solo el nivel gratuito, Fly.io <i>puede</i
 
 Render podría ser un poco más fácil de usar, ya que no requiere que se instale ningún software en tu máquina.
 
-También hay algunas otras opciones de alojamiento gratuitas que funcionan bien para este curso, al menos para todas las partes excepto la parte 11 (CI/CD) que podría tener un ejercicio complicado para otras plataformas.
+También hay algunas otras opciones de alojamiento gratuitas que funcionan bien para este curso, al menos para todas las partes excepto la parte 11 (CI/CD), la cual podría tener un ejercicio complicado para otras plataformas.
 
 Algunos participantes del curso también han utilizado los siguientes servicios:
 
@@ -163,7 +163,7 @@ Fly.io crea un archivo <i>fly.toml</i> en la raíz de tu aplicación donde podem
   processes = ["app"]
 ```
 
-Hemos definido ahora en la sección [env] que la variable de entorno PORT obtendrá el puerto correcto (definido en la sección [http_service]) donde la aplicación debe crear el servidor. Ten en cuenta que la definición podría estar allí, pero a veces ha estado ausente.
+Hemos definido ahora en la sección [env] que la variable de entorno PORT obtendrá el puerto correcto (definido en la sección [http_service]) donde la aplicación debe crear el servidor.
 
 Ahora estamos listos para implementar la aplicación en los servidores de Fly.io. Esto se hace con el siguiente comando:
 
@@ -179,7 +179,7 @@ fly apps open
 
 Un comando especialmente importante es _fly logs_. Este comando se puede utilizar para ver los registros del servidor. Es mejor mantener siempre visibles los registros.
 
-**Nota:** Si estás utilizando Fly.io, Fly puede crear 2 máquinas para tu aplicación. Si esto sucede, el estado de los datos en tu aplicación será inconsistente entre las solicitudes. Es decir, tendrías dos máquinas, cada una con su propia variable de notas. Podrías realizar un POST en una máquina y luego tu siguiente GET podría ir a otra máquina. Puedes verificar el número de máquinas usando el comando "$ fly scale show". Si el recuento es mayor que 1, puedes forzar que sea 1 con el comando "$ fly scale count 1". El recuento de máquinas también se puede verificar en el panel de control.
+**Nota:** Fly podría crear 2 máquinas para tu aplicación. Si esto sucede, el estado de los datos en tu aplicación será inconsistente entre las solicitudes. Es decir, tendrías dos máquinas, cada una con su propia variable de notas. Podrías realizar un POST en una máquina y luego tu siguiente GET podría ir a otra máquina. Puedes verificar el número de máquinas usando el comando "$ fly scale show". Si el recuento es mayor que 1, puedes forzar que sea 1 con el comando "$ fly scale count 1". El recuento de máquinas también se puede verificar en el panel de control.
 
 **Nota:** En algunos casos (la causa aún se desconoce), ejecutar comandos de Fly.io, especialmente en Windows WSL (Subsistema de Windows para Linux), ha causado problemas. Si el siguiente comando se cuelga
 
@@ -282,7 +282,7 @@ El directorio de backend ahora debería verse así:
 
 ![comando ls de bash mostrando directorio dist](../../images/3/27v.png)
 
-Para hacer que express muestre <i>contenido estático</i>, la página <i>index.html</i>  y el JavaScript, etc., necesitamos un middleware integrado de express llamado [static](http://expressjs.com/en/starter/static-files.html).
+Para hacer que Express muestre <i>contenido estático</i>, la página <i>index.html</i>  y el JavaScript, etc., necesitamos un middleware integrado de Express llamado [static](http://expressjs.com/en/starter/static-files.html).
 
 Cuando agregamos lo siguiente en medio de las declaraciones de middlewares
 
@@ -290,7 +290,7 @@ Cuando agregamos lo siguiente en medio de las declaraciones de middlewares
 app.use(express.static('dist'))
 ```
 
-siempre que express recibe una solicitud HTTP GET, primero verificará si el directorio <i>dist</i> contiene un archivo correspondiente a la dirección de la solicitud. Si se encuentra un archivo correcto, express lo devolverá.
+siempre que Express recibe una solicitud HTTP GET, primero verificará si el directorio <i>dist</i> contiene un archivo correspondiente a la dirección de la solicitud. Si se encuentra un archivo correcto, Express lo devolverá.
 
 Ahora las solicitudes HTTP GET a la dirección <i>www.serversaddress.com/index.html</i> o <i>www.serversaddress.com</i> mostrarán el frontend de React. Las solicitudes GET a la dirección <i>www.serversaddress.com/api/notes</i> serán manejadas por el código del backend.
 
@@ -365,7 +365,7 @@ fly deploy
 
 La aplicación funciona perfectamente, excepto que aún no hemos agregado la funcionalidad para cambiar la importancia de una nota en el backend.
 
-<i>**NOTA:** Si estás utilizando Fly.io, podría haber un archivo .dockerignore que especifique la exclusión del directorio "./build" durante el despliegue. Para asegurarte de que se despliegue, considera cambiar el nombre del directorio ./build a ./static_build o a un nombre equivalente.</i>
+<strong>NOTA:</strong> Al usar Fly.io, ten en cuenta que el archivo _.dockerignore_ en tu directorio de proyecto enumera los archivos que no se suben durante el despliegue. El directorio dist se incluye por defecto. Para desplegar este directorio, elimina su referencia del archivo .dockerignore, asegurando que tu aplicación se despliegue correctamente.
 
 ![captura de pantalla de la aplicación de notas](../../images/3/30new.png)
 

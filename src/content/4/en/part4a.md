@@ -11,7 +11,7 @@ Let's continue our work on the backend of the notes application we started in [p
 
 ### Project structure
 
-**Note** this course material was written with version v20.11.0 of Node.js. Please make sure that your version of Node is at least as new as the version used in the material (you can check the version by running node -v in the command line).
+**Note**: this course material was written with version v20.11.0 of Node.js. Please make sure that your version of Node is at least as new as the version used in the material (you can check the version by running _node -v_ in the command line).
 
 Before we move into the topic of testing, we will modify the structure of our project to adhere to Node.js best practices.
 
@@ -407,7 +407,7 @@ The nature of VS Code bleeding into how you write your code is probably not idea
 
 ### Exercises 4.1.-4.2.
 
-**Note** this course material was written with version v20.11.0 of Node.js. Please make sure that your version of Node is at least as new as the version used in the material (you can check the version by running node -v in the command line).
+**Note**: this course material was written with version v20.11.0 of Node.js. Please make sure that your version of Node is at least as new as the version used in the material (you can check the version by running _node -v_ in the command line).
 
 In the exercises for this part, we will be building a <i>blog list application</i>, that allows users to save information about interesting blogs they have stumbled across on the internet. For each listed blog we will save the author, title, URL, and amount of upvotes from users of the application.
 
@@ -567,7 +567,7 @@ In the next row, the test file imports the function to be tested and assigns it 
 const reverse = require('../utils/for_testing').reverse
 ```
 
-Individual test cases are defined with the _test_ function. The first parameter of the function is the test description as a string. The second parameter is a <i>function</i>, that defines the functionality for the test case. The functionality for the second test case looks like this:
+Individual test cases are defined with the _test_ function. The first argument of the function is the test description as a string. The second argument is a <i>function</i>, that defines the functionality for the test case. The functionality for the second test case looks like this:
 
 ```js
 () => {
@@ -599,7 +599,7 @@ Running this test results in the following error message:
 
 ![terminal output shows failure from npm test](../../images/4/2new.png)
 
-Let output from the npm test with _average_ function, into a new file <i>tests/average.test.js</i>.
+Let's put the tests for the _average_ function, into a new file called <i>tests/average.test.js</i>.
 
 ```js
 const { test, describe } = require('node:test')
@@ -671,7 +671,7 @@ test('of empty array is zero', () => {
 
 ### Exercises 4.3.-4.7.
 
-Let's create a collection of helper functions that are best suited for working with the described sections of the blog list. Create the functions into a file called <i>utils/list_helper.js</i>. Write your tests into an appropriately named test file under the <i>tests</i> directory.
+Let's create a collection of helper functions that are best suited for working with the describe sections of the blog list. Create the functions into a file called <i>utils/list_helper.js</i>. Write your tests into an appropriately named test file under the <i>tests</i> directory.
 
 #### 4.3: Helper Functions and Unit Tests, step 1
 
