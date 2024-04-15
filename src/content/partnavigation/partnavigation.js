@@ -280,7 +280,8 @@ module.exports = {
       a: 'Iniciar sesión en la interfaz',
       b: 'props.children y proptypes',
       c: 'Probando aplicaciones React',
-      d: 'Pruebas de extremo a extremo',
+      d: 'Pruebas de extremo a extremo: Playwright',
+      e: 'Pruebas de extremo a extremo: Cypress',
     },
     '6': {
       a: 'Flux-architecture y Redux',
