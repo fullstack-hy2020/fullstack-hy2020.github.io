@@ -1090,7 +1090,6 @@ La estructura de la prueba debe ser la siguiente
 ```js
 describe('Blog app', function() {
   beforeEach(function() {
-    cy.request('POST', 'http://localhost:3003/api/testing/reset')
     cy.visit('http://localhost:5173')
   })
 
@@ -1099,8 +1098,6 @@ describe('Blog app', function() {
   })
 })
 ```
-
-El blog de formateo <i>beforeEach</i> debe vaciar la base de datos utilizando, por ejemplo, el método que usamos en el [material](/es/part5/pruebas_de_extremo_a_extremo#controlando-el-estado-de-la-base-de-datos).
 
 #### 5.18: Pruebas de End To End de la Lista de Blogs, paso 2
 
@@ -1112,8 +1109,8 @@ El cuerpo de las pruebas se extiende de la siguiente manera
 ```js
 describe('Blog app', function() {
   beforeEach(function() {
-    cy.request('POST', 'http://localhost:3001/api/testing/reset')
-    // create here a user to backend
+    // vacía la base de datos aquí
+    // crea un usuario para el backend aquí
     cy.visit('http://localhost:5173')
   })
 
@@ -1133,6 +1130,8 @@ describe('Blog app', function() {
 })
 ```
 
+El bloque <i>beforeEach</i> debe vaciar la base de datos utilizando, por ejemplo, el método de formateo que usamos en el [material](/es/part5/pruebas_de_extremo_a_extremo_cypress#controlando-el-estado-de-la-base-de-datos).
+
 <i>Ejercicio adicional opcional</i>: comprueba que la notificación que se muestra con el inicio de sesión fallido se muestra en rojo.
 
 #### 5.19: Pruebas de End To End de la Lista de Blogs, paso 3
@@ -1146,7 +1145,7 @@ describe('Blog app', function() {
 
   describe('When logged in', function() {
     beforeEach(function() {
-      // log in user here
+      // ...
     })
 
     it('A blog can be created', function() {

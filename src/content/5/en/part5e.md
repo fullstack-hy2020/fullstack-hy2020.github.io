@@ -1090,7 +1090,6 @@ The structure of the test must be as follows:
 ```js
 describe('Blog app', function() {
   beforeEach(function() {
-    cy.request('POST', 'http://localhost:3003/api/testing/reset')
     cy.visit('http://localhost:5173')
   })
 
@@ -1099,8 +1098,6 @@ describe('Blog app', function() {
   })
 })
 ```
-
-The <i>beforeEach</i> formatting blog must empty the database using for example the method we used in the [material](/en/part5/end_to_end_testing#controlling-the-state-of-the-database).
 
 #### 5.18: Blog List End To End Testing, step 2
 
@@ -1112,8 +1109,8 @@ The test structure extends like so:
 ```js
 describe('Blog app', function() {
   beforeEach(function() {
-    cy.request('POST', 'http://localhost:3001/api/testing/reset')
-    // create here a user to backend
+    // empty the db here
+    // create a user for the backend here
     cy.visit('http://localhost:5173')
   })
 
@@ -1133,6 +1130,8 @@ describe('Blog app', function() {
 })
 ```
 
+The _beforeEach_ block must empty the database using, for example, the reset method we used in the [material](/en/part5/end_to_end_testing_cypress#controlling-the-state-of-the-database).
+
 <i>Optional bonus exercise</i>: Check that the notification shown with unsuccessful login is displayed red.
 
 #### 5.19: Blog List End To End Testing, step 3
@@ -1146,7 +1145,7 @@ describe('Blog app', function() {
 
   describe('When logged in', function() {
     beforeEach(function() {
-      // log in user here
+      // ...
     })
 
     it('A blog can be created', function() {
