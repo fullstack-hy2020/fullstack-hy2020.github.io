@@ -659,13 +659,13 @@ The output is interesting but not very useful. This is about the previously ment
 
 The status can be converted to a human-readable format by using the [current](https://redux-toolkit.js.org/api/other-exports#current) function from the immer library.
 
-Update the imports to include the "current" function from the immer library:
+Let's update the imports to include the "current" function from the immer library:
 
 ```js
 import { createSlice, current } from '@reduxjs/toolkit' // highlight-line
 ```
 
-Then update the console.log function call:
+Then we update the console.log function call:
 
 ```js
 console.log(current(state)) // highlight-line
@@ -713,7 +713,7 @@ Also, start using Redux DevTools to debug the application's state easier.
 
 Change also the definition of the <i>anecdote reducer and action creators</i> to use the Redux Toolkit's <em>createSlice</em> function.
 
-Implementation note: when you use the Redux Toolkit to return the initial state of anecdotes, it will be immutable, so you will need to make a copy of it to sort it, or you will encounter "TypeError: Cannot assign to read only property '". You can use the spread syntax to make a copy of the array. Instead of:
+Implementation note: when you use the Redux Toolkit to return the initial state of anecdotes, it will be immutable, so you will need to make a copy of it to sort the anecdotes, or you will encounter the error "TypeError: Cannot assign to read only property". You can use the spread syntax to make a copy of the array. Instead of:
 
 ```js
 
