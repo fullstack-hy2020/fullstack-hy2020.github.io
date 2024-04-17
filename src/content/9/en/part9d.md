@@ -356,7 +356,7 @@ const App = () => {
 
 Note that we have now added the attribute *kind* with a proper value to each element of the array.
 
-Our editor will automatically warn us if we use the wrong type for an attribute, use an extra attribute, or forget to set an expected attribute. If we eg. try to add the following to the array
+Our editor will automatically warn us if we use the wrong type for an attribute, use an extra attribute, or forget to set an expected attribute. If we e.g. try to add the following to the array
 
 ```js
 {
