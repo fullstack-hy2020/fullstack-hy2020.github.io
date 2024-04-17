@@ -351,7 +351,7 @@ Aivan kuten REST:in tapauksessa myös nyt ideana on, että kirjautunut käyttäj
 
 ![](../../images/8/24x.png)
 
-Muutetaan backendin käynnistämistä siten, että annetaan käynnistyksen huolehtivalle funktiolle [startStandaloneServer](https://www.apollographql.com/docs/apollo-server/api/standalone/) toinen parametri [context](https://www.apollographql.com/docs/apollo-server/data/context/):
+Muutetaan backendin käynnistämistä siten, että annetaan käynnistyksestä huolehtivalle funktiolle [startStandaloneServer](https://www.apollographql.com/docs/apollo-server/api/standalone/) toinen parametri [context](https://www.apollographql.com/docs/apollo-server/data/context/):
 
 ```js
 startStandaloneServer(server, {
