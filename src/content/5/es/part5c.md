@@ -5,45 +5,74 @@ letter: c
 lang: es
 ---
 
+<div class="tasks">
+
+La librería de pruebas utilizada en esta parte se cambió el 3 de marzo de 2024 de Jest a Vitest. Si ya comenzaste esta parte usando Jest, puedes ver [aquí](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/blob/02d8be28b1c9190f48976fbbd2435b63261282df/src/content/5/es/part5c.md) el contenido antiguo.
+
+</div>
+
 <div class="content">
 
 Hay muchas formas diferentes de probar aplicaciones React. Echemos un vistazo a ellas a continuación.
 
-Las pruebas se implementarán con la misma librería de pruebas [Jest](http://jestjs.io/) desarrollada por Facebook que se utilizó en la parte anterior.
+Anteriormente, el curso utilizaba la librería [Jest](http://jestjs.io/) desarrollada por Facebook para probar componentes de React. Ahora estamos utilizando la nueva generación de herramientas de prueba de los desarrolladores de Vite llamada [Vitest](https://vitest.dev/). Aparte de las configuraciones, las librerías proporcionan la misma interfaz de programación, por lo que prácticamente no hay diferencia en el código de prueba.
 
-Además de Jest, también necesitamos otra librería de pruebas que nos ayude a renderizar componentes para poder probarlos. Actualmente, la mejor opción para esto es [react-testing-library](https://github.com/testing-library/react-testing-library) que ha experimentado un rápido crecimiento en popularidad en los últimos tiempos.
+Comencemos instalando Vitest y la librería [jsdom](https://github.com/jsdom/jsdom) que simula un navegador web:
+
+```
+npm install --save-dev vitest jsdom
+```
+
+Además de Vitest, también necesitamos otra librería de pruebas que nos ayudará a renderizar componentes para fines de prueba. La mejor opción actual para esto es [react-testing-library](https://github.com/testing-library/react-testing-library), que ha visto un rápido crecimiento en popularidad recientemente. También vale la pena extender el poder expresivo de las pruebas con la librería [jest-dom](https://github.com/testing-library/jest-dom).
 
 Instalemos las librerías con el comando:
 
 ```js
-npm install --save-dev @testing-library/react @testing-library/jest-dom jest jest-environment-jsdom @babel/preset-env @babel/preset-react
+npm install --save-dev @testing-library/react @testing-library/jest-dom
 ```
 
-El archivo <i>package.json</i> debe extenderse de la siguiente manera:
+Antes de que podamos hacer la primera prueba, necesitamos algunas configuraciones.
+
+Agregamos un script al archivo <i>package.json</i> para ejecutar las pruebas:
 
 ```js 
 {
   "scripts": {
     // ...
-    "test": "jest"
+    "test": "vitest run"
   }
   // ...
-  "jest": {
-    "testEnvironment": "jsdom"
+}
+```
+
+Vamos a crear un archivo _testSetup.js_ en la raíz del proyecto con el siguiente contenido
+
+```js
+import { afterEach } from 'vitest'
+import { cleanup } from '@testing-library/react'
+import '@testing-library/jest-dom/vitest'
+
+afterEach(() => {
+  cleanup()
+})
+```
+
+Ahora, luego de cada prueba, la función _cleanup_ es ejecutada para resetear jsdom, que esta simulando al navegador.
+
+Expandamos el archivo _vite.config.js_ de la siguiente manera:
+
+```js
+export default defineConfig({
+  // ...
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: './testSetup.js', 
   }
-}
+})
 ```
 
-También necesitamos que el archivo <i>.babelrc</i> tenga el siguiente contenido:
-
-```js 
-{
-  "presets": [
-    "@babel/preset-env",
-    ["@babel/preset-react", { "runtime": "automatic" }]
-  ]
-}
-```
+Con _globals: true_, no es necesario importar palabras clave como _describe_, _test_ y _expect_ en las pruebas.
 
 Primero escribamos pruebas para el componente que es responsable de renderizar una nota:
 
@@ -66,13 +95,11 @@ Observa que el elemento <i>li</i> tiene el valor <i>note</i> para el atributo de
 
 ### Renderizando el componente para pruebas
 
-Escribiremos nuestra prueba en el archivo <i>src/components/Note.test.js</i>, que está en el mismo directorio que el componente Note.
+Escribiremos nuestra prueba en el archivo <i>src/components/Note.test.jsx</i>, que está en el mismo directorio que el componente Note.
 
 La primera prueba verifica que el componente muestra el contenido de la nota:
 
 ```js
-import React from 'react'
-import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import Note from './Note'
 
@@ -104,28 +131,57 @@ Podemos usar el objeto [screen](https://testing-library.com/docs/queries/about#s
   expect(element).toBeDefined()
 ```
 
+La existencia de un elemento se verifica utilizando el comando [expect](https://vitest.dev/api/expect.html#expect) de Vitest. Expect genera una aserción para su argumento, cuya validez se puede probar utilizando varias funciones de condición. Ahora utilizamos [toBeDefined](https://vitest.dev/api/expect.html#tobedefined) que prueba si el argumento _element_ de expect existe.
+
 Ejecuta el test con el comando _npm test_:
 
 ```js
 $ npm test
 
 > notes-frontend@0.0.0 test
-> jest
+> vitest
 
- PASS  src/components/Note.test.js
-  ✓ renders content (15 ms)
 
-Test Suites: 1 passed, 1 total
-Tests:       1 passed, 1 total
-Snapshots:   0 total
-Time:        1.152 s
+ DEV  v1.3.1 /Users/mluukkai/opetus/2024-fs/part3/notes-frontend
+
+ ✓ src/components/Note.test.jsx (1)
+   ✓ renders content
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  17:05:37
+   Duration  812ms (transform 31ms, setup 220ms, collect 11ms, tests 14ms, environment 395ms, prepare 70ms)
+
+
+ PASS  Waiting for file changes...
 ```
 
-Como lo esperábamos, la prueba pasa.
+Eslint se queja de las palabras clave _test_ y _expect_ en las pruebas. El problema se puede resolver instalando [eslint-plugin-vitest-globals](https://www.npmjs.com/package/eslint-plugin-vitest-globals):
 
-**NB:** es posible que la consola emita una advertencia si no has instalado Watchman. Watchman es una aplicación desarrollada por Facebook que vigila los cambios que se realizan en los archivos. El programa acelera la ejecución de las pruebas y, al menos a partir de macOS Sierra, ejecutar pruebas en modo de observación emite algunas advertencias a la consola, que pueden eliminarse instalando Watchman.
+```
+npm install --save-dev eslint-plugin-vitest-globals
+```
 
-Las instrucciones para instalar Watchman en diferentes sistemas operativos se pueden encontrar en el sitio web oficial de Watchman: <https://facebook.github.io/watchman/>
+y habilitando el plugin al editar el archivo _.eslint.cjs_ de la siguiente manera:
+
+```js
+module.exports = {
+  root: true,
+  env: {
+    browser: true,
+    es2020: true,
+    "vitest-globals/env": true // highlight-line
+  },
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
+    'plugin:react-hooks/recommended',
+    'plugin:vitest-globals/recommended', // highlight-line
+  ],
+  // ...
+}
+```
 
 ### Ubicación del archivo de prueba
 
@@ -140,8 +196,6 @@ Personalmente, no me gusta esta forma de almacenar pruebas y código de aplicaci
 El paquete react-testing-library ofrece muchas formas diferentes de investigar el contenido del componente que se está probando. En realidad, el _expect_ en nuestra prueba no es necesario en absoluto:
 
 ```js
-import React from 'react'
-import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import Note from './Note'
 
@@ -164,8 +218,6 @@ La prueba falla si _getByText_ no encuentra el elemento que está buscando.
 También podríamos usar [selectores CSS](https://developer.mozilla.org/es/docs/Web/CSS/Selectores_CSS) para encontrar elementos renderizados mediante el uso del método [querySelector](https://developer.mozilla.org/es/docs/Web/API/Document/querySelector) del objeto [container](https://testing-library.com/docs/react-testing-library/api/#container-1), que es uno de los campos devueltos por el renderizado:
 
 ```js
-import React from 'react'
-import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import Note from './Note'
 
@@ -195,8 +247,6 @@ Normalmente nos encontramos con muchos tipos diferentes de problemas al escribir
 El objeto _screen_ tiene el método [debug](https://testing-library.com/docs/dom-testing-library/api-debugging#screendebug) que se puede utilizar para imprimir el HTML de un componente en el terminal. Si cambiamos la prueba de la siguiente manera:
 
 ```js
-import React from 'react'
-import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import Note from './Note'
 
@@ -236,8 +286,6 @@ console.log
 También es posible utilizar el mismo método para imprimir el elemento que queramos en la consola:
 
 ```js
-import React from 'react'
-import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import Note from './Note'
 
@@ -283,8 +331,6 @@ npm install --save-dev @testing-library/user-event
 La prueba de esta funcionalidad se puede lograr así:
 
 ```js
-import React from 'react'
-import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event' // highlight-line
 import Note from './Note'
@@ -297,7 +343,7 @@ test('clicking the button calls event handler once', async () => {
     important: true
   }
 
-  const mockHandler = jest.fn()  // highlight-line
+  const mockHandler = vi.fn()  // highlight-line
 
   render(
     <Note note={note} toggleImportance={mockHandler} />  // highlight-line
@@ -311,10 +357,10 @@ test('clicking the button calls event handler once', async () => {
 })
 ```
 
-Hay algunas cosas interesantes relacionadas con esta prueba. El controlador de eventos es la función [mock](https://jestjs.io/es-ES/docs/mock-functions) definida con Jest:
+Hay algunas cosas interesantes relacionadas con esta prueba. El controlador de eventos es la función [mock](https://vitest.dev/api/mock) definida con Vitest:
 
 ```js
-const mockHandler = jest.fn()
+const mockHandler = vi.fn()
 ```
 
 Se inicia una [session](https://testing-library.com/docs/user-event/setup/) (sesión) para interactuar con el componente renderizado:
@@ -332,11 +378,13 @@ await user.click(button)
 
 El clic ocurre con el método [click](https://testing-library.com/docs/user-event/convenience/#click) de la librería userEvent.
 
-La expectativa de la prueba verifica que la <i>mock function (función simulada)</i> se haya llamado exactamente una vez.
+La expectativa de la prueba utiliza [toHaveLength](https://vitest.dev/api/expect.html#tohavelength) para verificar que la <i>mock function</i> (función simulada) se haya llamado exactamente una vez:
 
 ```js
 expect(mockHandler.mock.calls).toHaveLength(1)
 ```
+
+Las llamadas a la mock function son guardadas en el array [mock.calls](https://vitest.dev/api/mock#mock-calls) dentro del objeto de la mock function.
 
 [Mock objects and functions](https://es.wikipedia.org/wiki/Objeto_simulado) (Objetos y funciones simulados) son componentes [stub](https://es.wikipedia.org/wiki/Stub) (código auxiliar) comúnmente utilizados en pruebas que se utilizan para reemplazar las dependencias de los componentes que se están probando. Los simulacros permiten devolver respuestas codificadas de manera rígida y verificar cuántas veces se llaman las funciones simuladas y con qué parámetros.
 
@@ -369,8 +417,6 @@ const Togglable = forwardRef((props, ref) => {
 Las pruebas se muestran a continuación:
 
 ```js
-import React from 'react'
-import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Togglable from './Togglable'
@@ -469,7 +515,7 @@ const NoteForm = ({ createNote }) => {
     event.preventDefault()
     createNote({
       content: newNote,
-      important: Math.random() > 0.5,
+      important: true,
     })
 
     setNewNote('')
@@ -498,14 +544,12 @@ El formulario funciona llamando a la función recibida como props _createNote_, 
 La prueba es la siguiente:
 
 ```js
-import React from 'react'
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom'
 import NoteForm from './NoteForm'
 import userEvent from '@testing-library/user-event'
 
 test('<NoteForm /> updates parent state and calls onSubmit', async () => {
-  const createNote = jest.fn()
+  const createNote = vi.fn()
   const user = userEvent.setup()
 
   render(<NoteForm createNote={createNote} />)
@@ -528,6 +572,31 @@ El método [type](https://testing-library.com/docs/user-event/utility#type) de u
 La primera expectativa de la prueba asegura que al enviar el formulario el método _createNote_ es llamado.
 La segunda expectativa verifica que el controlador de eventos se llama con los parámetros correctos, es decir, que se crea una nota con el contenido correcto cuando se llena el formulario.
 
+Vale la pena mencionar que el buen viejo _console.log_ funciona como de costumbre en las pruebas. Por ejemplo, si quieres ver cómo se ven las llamadas almacenadas por el objeto simulado, puedes hacer lo siguiente:
+
+```js
+test('<NoteForm /> updates parent state and calls onSubmit', async() => {
+  const user = userEvent.setup()
+  const createNote = vi.fn()
+
+  render(<NoteForm createNote={createNote} />)
+
+  const input = screen.getByRole('textbox')
+  const sendButton = screen.getByText('save')
+
+  await user.type(input, 'testing a form...')
+  await user.click(sendButton)
+
+  console.log(createNote.mock.calls) // highlight-line
+})
+```
+
+En el medio de la ejecución de las pruebas, lo siguiente se imprime en la consola:
+
+```
+[ [ { content: 'testing a form...', important: true } ] ]
+```
+
 ### Sobre la búsqueda de elementos
 
 Supongamos que el formulario tiene dos campos de input.
@@ -537,7 +606,7 @@ const NoteForm = ({ createNote }) => {
   // ...
 
   return (
-    <div>
+    <div className="formDiv">
       <h2>Create a new note</h2>
 
       <form onSubmit={addNote}>
@@ -585,7 +654,7 @@ const NoteForm = ({ createNote }) => {
   // ...
 
   return (
-    <div>
+    <div className="formDiv">
       <h2>Create a new note</h2>
 
       <form onSubmit={addNote}>
@@ -609,7 +678,7 @@ Ahora encontrar el campo de input correcto es fácil con el método [getByPlaceh
 
 ```js
 test('<NoteForm /> updates parent state and calls onSubmit', () => {
-  const createNote = jest.fn()
+  const createNote = vi.fn()
 
   render(<NoteForm createNote={createNote} />) 
 
@@ -633,7 +702,7 @@ const NoteForm = ({ createNote }) => {
   // ...
 
   return (
-    <div>
+    <div className="formDiv">
       <h2>Create a new note</h2>
 
       <form onSubmit={addNote}>
@@ -734,18 +803,20 @@ test('does not render this', () => {
 
 ### Cobertura de las pruebas
 
-Podemos encontrar fácilmente la [cobertura](https://jestjs.io/es-ES/blog/2020/01/21/jest-25#v8-code-coverage) de nuestras pruebas ejecutándolas con el comando
+Podemos encontrar fácilmente la [cobertura](https://vitest.dev/guide/coverage.html#coverage) de nuestras pruebas ejecutándolas con el comando
 
 ```js
-npm test -- --coverage --collectCoverageFrom='src/**/*.{jsx,js}'
+npm test -- --coverage
 ```
+
+La primera vez que ejecutes el comando, Vitest te preguntará si quieres instalar la librería requerida _@vitest/coverage-v8_. Instálala y ejecuta el comando de nuevo:
 
 ![salida del terminal de cobertura de las pruebas](../../images/5/18new.png)
 
-Se generará un informe HTML bastante primitivo en el directorio <i>coverage/lcov-report</i>.
-El informe nos dirá, por ejemplo, las líneas de código no probado en cada componente:
+Se generará un informe HTML en el directorio <i>coverage</i>.
+El informe nos dirá las líneas de código no probado en cada componente:
 
-![reporte HTML de cobertura de las pruebas](../../images/5/19new.png)
+![reporte HTML de cobertura de las pruebas](../../images/5/19newer.png)
 
 Puedes encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part5-8 </i> de [este repositorio de GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-8).
 
@@ -788,7 +859,7 @@ Elegimos concentrarnos en hacer pruebas de extremo a extremo para probar toda la
 
 ### Pruebas de instantáneas
 
-Jest ofrece una alternativa completamente diferente a las pruebas "tradicionales" llamadas pruebas de [instantáneas](https://jestjs.io/es-ES/docs/snapshot-testing) o snapshot testing. La característica interesante de las pruebas de instantáneas es que los desarrolladores no necesitan definir ninguna prueba ellos mismos, simplemente es suficiente adoptar las pruebas de instantáneas.
+Vitest ofrece una alternativa completamente diferente a las pruebas "tradicionales" llamada pruebas de [instantáneas](https://vitest.dev/guide/snapshot) o snapshot testing. La característica interesante de las pruebas de instantáneas es que los desarrolladores no necesitan definir ninguna prueba ellos mismos, simplemente es suficiente adoptar las pruebas de instantáneas.
 
 El principio fundamental es comparar el código HTML definido por el componente después de que haya cambiado con el código HTML que existía antes de que se cambiara.
 

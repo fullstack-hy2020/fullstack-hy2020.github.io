@@ -24,7 +24,7 @@ Some tests might pass one time and fail another, even if the code does not chang
 
 Perhaps the two easiest libraries for End to End testing at the moment are [Cypress](https://www.cypress.io/) and [Playwright](https://playwright.dev/).
 
-From the statistics on [npmtrends.com](https://npmtrends.com/cypress-vs-playwright) we see that Cypress, which dominated the market for the last five years, is still the clear number one, but Playwright is on a rapid rise:
+From the statistics on [npmtrends.com](https://npmtrends.com/cypress-vs-playwright) we see that Cypress, which dominated the market for the last five years, is still clearly the number one, but Playwright is on a rapid rise:
 
 ![cypress vs playwright in npm trends](../../images/5/cvsp.png)
 
@@ -32,20 +32,19 @@ This course has been using Cypress for years. Now Playwright is a new addition. 
 
 If your choice is Playwright, please proceed. If you end up using Cypress, go [here](/en/part5/end_to_end_testing_cypress).
 
-
 ### Playwright
 
 So [Playwright](https://playwright.dev/) is a newcomer to the End to End tests, which started to explode in popularity towards the end of 2023. Playwright is roughly on a par with Cypress in terms of ease of use. The libraries are slightly different in terms of how they work.  Cypress is radically different from most libraries suitable for E2E testing, as Cypress tests are run entirely within the browser. Playwright's tests, on the other hand, are executed in the Node process, which is connected to the browser via programming interfaces.
 
 Many blogs have been written about library comparisons, e.g. [this](https://www.lambdatest.com/blog/cypress-vs-playwright/) and [this](https://www.browserstack.com/guide/playwright-vs-cypress).
 
-It is difficult to say which library is better. One advantage of Playwright is its browser support, Playwright supports Chrome, Firefox and Webkit-based browsers like Safari. Currently Cypress includes support for all these browsers, although Webkit support is experimental and does not support all Cypress features. At the time of writing (1.3.2024), my personal preference leans slightly towards Playwright.
+It is difficult to say which library is better. One advantage of Playwright is its browser support; Playwright supports Chrome, Firefox and Webkit-based browsers like Safari. Currently, Cypress includes support for all these browsers, although Webkit support is experimental and does not support all of Cypress features. At the time of writing (1.3.2024), my personal preference leans slightly towards Playwright.
 
 Now let's explore Playwright.
 
 ### Initializing tests
 
-Unlike the backend tests or unit tests done on the React front-end, End to End tests do not need to be located in the same npm project where the code is. Let's make a completely separate project for the E2E tests with the _npm init_ command. Then install Playwright by running in the new project directory the command
+Unlike the backend tests or unit tests done on the React front-end, End to End tests do not need to be located in the same npm project where the code is. Let's make a completely separate project for the E2E tests with the _npm init_ command. Then install Playwright by running in the new project directory the command:
 
 ```js
 npm init playwright@latest
@@ -68,7 +67,7 @@ Let's define an npm script for running tests and test reports in _package.json_:
 }
 ```
 
-During installation, the following is printed to the console
+During installation, the following is printed to the console:
 
 ```
 And check out the following files:
@@ -77,7 +76,7 @@ And check out the following files:
   - ./playwright.config.js - Playwright Test configuration
 ```
 
-that is, the installation created a few example tests for the project.
+that is, the location of a few example tests for the project that the installation has created.
 
 Let's run the tests:
 
@@ -102,7 +101,7 @@ The tests pass. A more detailed test report can be opened either with the comman
 npm run test:report
 ```
 
-Tests can also be run via the graphical UI with a command
+Tests can also be run via the graphical UI with the command:
 
 ```
 npm run test -- --ui
@@ -131,13 +130,13 @@ test('get started link', async ({ page }) => {
 });
 ```
 
-The first line of the test function says that the tests are testing the page at https://playwright.dev/.
+The first line of the test functions says that the tests are testing the page at https://playwright.dev/.
 
-### Testing own code
+### Testing our own code
 
 Now let's remove the sample tests and start testing our own application.
 
-Playwright tests assume that the system under test is running when the tests are executed, i.e. unlike e.g. backend integration tests, Playwright tests <i>do not start</i> the system under test during testing.
+Playwright tests assume that the system under test is running when the tests are executed. Unlike, for example, backend integration tests, Playwright tests <i>do not start</i> the system under test during testing.
 
 Let's make an npm script for the <i>backend</i>, which will enable it to be started in testing mode, i.e. so that <i>NODE\_ENV</i> gets the value <i>test</i>.
 
@@ -173,7 +172,7 @@ test('front page can be opened', async ({ page }) => {
 })
 ```
 
-First, the test opens the application with the method [page.goto](https://playwright.dev/docs/writing-tests#navigation). After this, the test uses the [page.getByText](https://playwright.dev/docs/api/class-page#page-get-by-text) to get a [locator](https://playwright.dev/docs/locators) that corresponds to the element where the text <i>Notes</i> is found.
+First, the test opens the application with the method [page.goto](https://playwright.dev/docs/writing-tests#navigation). After this, it uses the [page.getByText](https://playwright.dev/docs/api/class-page#page-get-by-text) to get a [locator](https://playwright.dev/docs/locators) that corresponds to the element where the text <i>Notes</i> is found.
 
 The method [toBeVisible](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-be-visible) ensures that the element corresponding to the locator is visible at the page.
 
@@ -193,28 +192,28 @@ test('front page can be opened', async ({ page }) => {
 })
 ```
 
-As expected, the test fails. Playwright opens the test report in the browser and it becomes clear that Playwright has actually performed the tests with three different browsers: Chrome, one Firefox and Webkit, i.e. the browser engine used by Safari:
+As expected, the test fails. Playwright opens the test report in the browser and it becomes clear that Playwright has actually performed the tests with three different browsers: Chrome, Firefox and Webkit, i.e. the browser engine used by Safari:
 
-![](../../images/5/play2.png)
+![test report showing the test failing in three different browsers](../../images/5/play2.png)
 
 By clicking on the report of one of the browsers, we can see a more detailed error message:
 
-![](../../images/5/play3a.png)
+![test error message](../../images/5/play3a.png)
 
-In the big picture, it is of course a very good thing that the testing takes place with all three commonly used browser engines, but this is slow, and when developing the tests it is probably best to carry out the tests mainly with only one browser. You can define the browser engine to be used with the command line parameter:
+In the big picture, it is of course a very good thing that the testing takes place with all three commonly used browser engines, but this is slow, and when developing the tests it is probably best to carry them out mainly with only one browser. You can define the browser engine to be used with the command line parameter:
 
 ```js
 npm test -- --project chromium
 ```
 
-Now let's correct the outdated year in the frontend code that caused the error in the code.
+Now let's correct the outdated year in the frontend code that caused the error.
 
 Before we continue, let's add a _describe_ block to the tests:
 
 ```js
 const { test, describe, expect } = require('@playwright/test')
 
-describe('Note app', () => {
+describe('Note app', () => {  // highlight-line
   test('front page can be opened', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
@@ -225,7 +224,7 @@ describe('Note app', () => {
 })
 ```
 
-Before we move on, let's break the tests one more time. We notice that the execution of the tests is quite fast when the tests pass, but much slower if the tests do not pass. The reason for this is that Playwright's policy is to wait for searched elements until [they are rendered and ready for action](https://playwright.dev/docs/actionability). If the element is not found, a _TimeoutError_ is raised and the test fails. Playwright waits for elements by default for 5 or 30 seconds [depending on the functions used in testing](https://playwright.dev/docs/test-timeouts#introduction).
+Before we move on, let's break the tests one more time. We notice that the execution of the tests is quite fast when they pass, but much slower if the they do not pass. The reason for this is that Playwright's policy is to wait for searched elements until [they are rendered and ready for action](https://playwright.dev/docs/actionability). If the element is not found, a _TimeoutError_ is raised and the test fails. Playwright waits for elements by default for 5 or 30 seconds [depending on the functions used in testing](https://playwright.dev/docs/test-timeouts#introduction).
 
 When developing tests, it may be wiser to reduce the waiting time to a few seconds. According to the [documentation](https://playwright.dev/docs/test-timeouts), this can be done by changing the file _playwright.config.js_ as follows:
 
@@ -242,7 +241,7 @@ We also made two other changes to the file, and specified that all tests [be exe
 
 ### Writing on the form
 
-Let's expand the tests so that the test tries to log into the application. Let's assume that a user is stored in the database, with username <i>mluukkai</i> and password <i>salainen</i>.
+Let's write a new test that tries to log into the application. Let's assume that a user is stored in the database, with username <i>mluukkai</i> and password <i>salainen</i>.
 
 Let's start by opening the login form.
 
@@ -268,11 +267,11 @@ npm test -- --ui
 
 We now see that the test finds the button
 
-![](../../images/5/play4.png)
+![playwright UI rendering the notes app while testing it](../../images/5/play4.png)
 
 After clicking, the form will appear
 
-![](../../images/5/play5.png)
+![playwright UI rendering the login form of the notes app](../../images/5/play5.png)
 
 When the form is opened, the test should look for the text fields and enter the username and password in them. Let's make the first attempt using the method [page.getByRole](https://playwright.dev/docs/api/class-page#page-get-by-role):
 
@@ -284,7 +283,7 @@ describe('Note app', () => {
     await page.goto('http://localhost:5173')
 
     await page.getByRole('button', { name: 'log in' }).click()
-    await page.getByRole('textbox').fill('mluukkai')
+    await page.getByRole('textbox').fill('mluukkai')  // highlight-line
   })
 })
 ```
@@ -307,11 +306,13 @@ describe('Note app', () => {
     await page.goto('http://localhost:5173')
 
     await page.getByRole('button', { name: 'log in' }).click()
+    // highlight-start
     await page.getByRole('textbox').first().fill('mluukkai')
     await page.getByRole('textbox').last().fill('salainen')
     await page.getByRole('button', { name: 'login' }).click()
   
     await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
+    // highlight-end
   })
 })
 ```
@@ -327,12 +328,13 @@ describe('Note app', () => {
     await page.goto('http://localhost:5173')
 
     await page.getByRole('button', { name: 'log in' }).click()
+    // highlight-start
     const textboxes = await page.getByRole('textbox').all()
 
     await textboxes[0].fill('mluukkai')
     await textboxes[1].fill('salainen')
+    // highlight-end
 
-   // await page.getByRole('textbox').last().fill('salainen')
     await page.getByRole('button', { name: 'login' }).click()
   
     await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
@@ -342,7 +344,7 @@ describe('Note app', () => {
 
 Both this and the previous version of the test work. However, both are problematic to the extent that if the registration form is changed, the tests may break, as they rely on the fields to be on the page in a certain order.
 
-A better solution is to define unique test id attributes for the fields, and search the fields in the tests based on them using the method [getByTestId](https://playwright.dev/docs/api/class-page#page-get-by-test-id ).
+A better solution is to define unique test id attributes for the fields, to search for them in the tests using the method [getByTestId](https://playwright.dev/docs/api/class-page#page-get-by-test-id ).
 
 Let's expand the login form as follows
 
@@ -378,7 +380,7 @@ const LoginForm = ({ ... }) => {
 }
 ```
 
-Test changes as follows
+Test changes as follows:
 
 ```js
 describe('Note app', () => {
@@ -399,8 +401,6 @@ describe('Note app', () => {
 ```
 
 Note that passing the test at this stage requires that there is a user in the <i>test</i> database of the backend with username <i>mluukkai</i> and password <i>salainen</i>. Create a user if needed!
-
-Initialization of tests
 
 Since both tests start in the same way, i.e. by opening the page <i>http://localhost:5173</i>, it is recommended to isolate the common part in the <i>beforeEach</i> block that is executed before each test:
 
@@ -428,7 +428,6 @@ describe('Note app', () => {
     await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
   })
 })
-
 ```
 
 ### Testing note creation
@@ -457,20 +456,19 @@ describe('Note app', () => {
     })
   })  
 })
-
 ```
 
-The test is defined in its own _describe_ block. Creating a note requires that the user is logged in, and the login is handled in the _beforeEach_ block.
+The test is defined in its own _describe_ block. Creating a note requires that the user is logged in, which is handled in the _beforeEach_ block.
 
-The test trusts that when creating a new note there is only one input field on the page, i.e. it searches for the field as follows
+The test trusts that when creating a new note, there is only one input field on the page, so it searches for it as follows:
 
 ```js
 page.getByRole('textbox')
 ```
 
-If there were more fields, the test would break. Because of this, it would be better to add a test-id to the field of the form and search for the field in the test based on the id.
+If there were more fields, the test would break. Because of this, it would be better to add a test-id to the form input and search for it in the test based on this id.
 
-**Note:** the test will only pass the first time. The reason for this is that expectation
+**Note:** the test will only pass the first time. The reason for this is that its expectation
 
 ```js
 await expect(page.getByText('a note created by playwright')).toBeVisible()
@@ -510,7 +508,6 @@ describe('Note app', () => {
     })
   })  
 })
-
 ```
 
 Since we have prevented the tests from running in parallel, Playwright runs the tests in the order they appear in the test code. That is, first the test <i>user can log in</i>, where the user logs into the application, is performed. After this the test <i>a new note can be created</i> gets executed, which also does a log in, in the <i>beforeEach</i> block. Why is this done, isn't the user already logged in thanks to the previous test? No, because the execution of <i>each</i> test starts from the browser's "zero state", all changes made to the browser's state by the previous tests are reset.
@@ -620,6 +617,7 @@ describe('Note app', () => {
   describe('when logged in', () => {
     // ...
 
+    // highlight-start
     describe('and a note exists', () => {
       beforeEach(async ({ page }) => {
         await page.getByRole('button', { name: 'new note' }).click()
@@ -631,6 +629,7 @@ describe('Note app', () => {
         await page.getByRole('button', { name: 'make not important' }).click()
         await expect(page.getByText('make important')).toBeVisible()
       })
+    // highlight-end
     })
   })
 })
@@ -665,7 +664,7 @@ describe('Note app', () => {
 )}
 ```
 
-The test therefore verifies with the method [page.getByText](https://playwright.dev/docs/api/class-page#page-get-by-text) that the application prints an error message.
+The test verifies with the method [page.getByText](https://playwright.dev/docs/api/class-page#page-get-by-text) that the application prints an error message.
 
 The application renders the error message to an element containing the CSS class <i>error</i>:
 
@@ -689,7 +688,7 @@ We could refine the test to ensure that the error message is printed exactly in 
   test('login fails with wrong password', async ({ page }) => {
   // ...
 
-  const errorDiv = await page.locator('.error')
+  const errorDiv = await page.locator('.error') // highlight-line
   await expect(errorDiv).toContainText('wrong credentials')
 })
 ```
@@ -704,8 +703,8 @@ It is possible to test the application's CSS styles with matcher [toHaveCSS](htt
 
     const errorDiv = await page.locator('.error')
     await expect(errorDiv).toContainText('wrong credentials')
-    await expect(errorDiv).toHaveCSS('border-style', 'solid')
-    await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)')
+    await expect(errorDiv).toHaveCSS('border-style', 'solid') // highlight-line
+    await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)') // highlight-line
 })
 ```
 
@@ -731,7 +730,7 @@ test('login fails with wrong password', async ({ page }) =>{
 
 ### Running tests one by one
 
-By default, Playwright always runs all tests, and as the number of tests increases, it becomes time-consuming. When developing a new test or debugging a broken one, the test can be defined instead of the command <i>test</i> with the command <i>test.only</i>, in which case Playwright will run only that test:
+By default, Playwright always runs all tests, and as the number of tests increases, it becomes time-consuming. When developing a new test or debugging a broken one, the test can be defined instead than with the command <i>test</i>, with the command <i>test.only</i>, in which case Playwright will run only that test:
 
 ```js
 describe(() => {
@@ -800,7 +799,7 @@ First, the login function is tested. After this, another _describe_ block contai
 
 As already stated earlier, each test is executed starting from the initial state (where the database is cleared and one user is created there), so even though the test is defined after another test in the code, it does not start from the same state where the tests in the code executed earlier have left!
 
-It is also worth striving for non-repetitive code in tests. Let's isolate the code that handles the login as a helper function, which is placed e.g. in the file _tests/helper.js_:
+It is also worth striving for having non-repetitive code in tests. Let's isolate the code that handles the login as a helper function, which is placed e.g. in the file _tests/helper.js_:
 
 ```js 
 const loginWith = async (page, username, password)  => {
@@ -820,13 +819,13 @@ const { loginWith } = require('./helper')
 
 describe('Note app', () => {
   test('user can log in', async ({ page }) => {
-    await loginWith(page, 'mluukkai', 'salainen')
+    await loginWith(page, 'mluukkai', 'salainen') // highlight-line
     await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
   })
 
   describe('when logged in', () => {
     beforeEach(async ({ page }) => {
-      await loginWith(page, 'mluukkai', 'salainen')
+      await loginWith(page, 'mluukkai', 'salainen') // highlight-line
     })
 
   test('a new note can be created', () => {
@@ -889,7 +888,7 @@ const createNote = async (page, content) => {
 export { loginWith, createNote }
 ```
 
-The test is simplified as follows:
+The tests are simplified as follows:
 
 ```js
 describe('Note app', () => {
@@ -901,13 +900,13 @@ describe('Note app', () => {
     })
 
     test('a new note can be created', async ({ page }) => {
-      await createNote(page, 'a note created by playwright', true)
+      await createNote(page, 'a note created by playwright', true) // highlight-line
       await expect(page.getByText('a note created by playwright')).toBeVisible()
     })
 
     describe('and a note exists', () => {
       beforeEach(async ({ page }) => {
-        await createNote(page, 'another note by playwright', true)
+        await createNote(page, 'another note by playwright', true) // highlight-line
       })
   
       test('importance can be changed', async ({ page }) => {
@@ -935,7 +934,7 @@ export default defineConfig({
 })
 ```
 
-So we can replace all addresses in tests with _http://localhost:3001/api/..._ with _http://localhost:5173/api/..._
+So we can replace all the addresses in the tests from _http://localhost:3001/api/..._ to _http://localhost:5173/api/..._
 
 We can now define the _baseUrl_ for the application in the tests configuration file <i>playwright.config.js</i>:
 
@@ -949,14 +948,14 @@ module.exports = defineConfig({
 }
 ```
 
-All commands in the tests that use the application url, e.g.
+All the commands in the tests that use the application url, e.g.
 
 ```js
 await page.goto('http://localhost:5173')
 await page.post('http://localhost:5173/api/tests/reset')
 ```
 
-can be transformed into
+can be transformed into:
 
 ```js
 await page.goto('/')
@@ -993,7 +992,7 @@ describe('when logged in', () => {
 })
 ```
 
-The test first searches for the element corresponding to the first created note using the method _page.getByRole_ and stores it in a variable. After this, a button with the text _make not important_ is searched inside the element and the button is pressed. Finally, the test verifies that the button's text has changed to _make important_.
+The test first searches for the element corresponding to the first created note using the method _page.getByText_ and stores it in a variable. After this, a button with the text _make not important_ is searched inside the element and the button is pressed. Finally, the test verifies that the button's text has changed to _make important_.
 
 The test could also have been written without the auxiliary variable:
 
@@ -1030,14 +1029,14 @@ One way to fix the problem is as follows:
 ```js
 test('one of those can be made nonimportant', async ({ page }) => {
   const otherNoteText = await page.getByText('first note') // highlight-line
-  const otherdNoteElement = await otherNoteText.locator('..') // highlight-line
+  const otherNoteElement = await otherNoteText.locator('..') // highlight-line
 
-  await otherdNoteElement.getByRole('button', { name: 'make not important' }).click()
-  await expect(otherdNoteElement.getByText('make important')).toBeVisible()
+  await otherNoteElement.getByRole('button', { name: 'make not important' }).click()
+  await expect(otherNoteElement.getByText('make important')).toBeVisible()
 })
 ```
 
-The first line now looks for the _span_ element containing the text associated with the first created note. In the second line, the function _locator_ is used and _.._ is given as a parameter, which retrieves the element's parent element. The locator function is very flexible, and we take advantage of the fact that the function accepts [as parameter](https://playwright.dev/docs/locators#locate-by-css-or-xpath) not only CSS selectors but also [XPath](https://developer.mozilla.org/en-US/docs/Web/XPath) selector. It would be possible to express the same with CSS, but in this case XPath provides the simplest way to find the parent of an element.
+The first line now looks for the _span_ element containing the text associated with the first created note. In the second line, the function _locator_ is used and _.._ is given as an argument, which retrieves the element's parent element. The locator function is very flexible, and we take advantage of the fact that accepts [as argument](https://playwright.dev/docs/locators#locate-by-css-or-xpath) not only CSS selectors but also [XPath](https://developer.mozilla.org/en-US/docs/Web/XPath) selector. It would be possible to express the same with CSS, but in this case XPath provides the simplest way to find the parent of an element.
 
 Of course, the test can also be written using only one auxiliary variable:
 
@@ -1049,7 +1048,7 @@ test('one of those can be made nonimportant', async ({ page }) => {
 })
 ```
 
-Let's change the test so that three notes are created, and the importance is changed from the second created note:
+Let's change the test so that three notes are created, the importance is changed in the second created note:
 
 ```js
 describe('when logged in', () => {
@@ -1084,7 +1083,7 @@ For some reason the test starts working unreliably, sometimes it passes and some
 
 ### Test development and debugging
 
-If and when the tests don't pass and you suspect that the fault is in the tests instead of the code, you should run the tests in [debug](https://playwright.dev/docs/debug#run-in-debug-mode-1) mode.
+If, and when the tests don't pass and you suspect that the fault is in the tests instead of in the code, you should run the tests in [debug](https://playwright.dev/docs/debug#run-in-debug-mode-1) mode.
 
 The following command runs the problematic test in debug mode:
 
@@ -1094,7 +1093,7 @@ npm test -- -g'importance can be changed' --debug
 
 Playwright-inspector shows the progress of the tests step by step. The arrow-dot button at the top takes the tests one step further. The elements found by the locators and the interaction with the browser are visualized in the browser:
 
-![](../../images/5/play6a.png)
+![playwright inspector highlighting element found by the selected locator in the application](../../images/5/play6a.png)
 
 By default, debug steps through the test command by command. If it is a complex test, it can be quite a burden to step through the test to the point of interest. This can be avoided by using the command _await page.pause()_:
 
@@ -1133,7 +1132,7 @@ Now in the test you can go to _page.pause()_ in one step, by pressing the green 
 
 When we now run the test and jump to the _page.pause()_ command, we find an interesting fact:
 
-![](../../images/5/play6b.png)
+![playwright inspector showing the state of the application at page.pause](../../images/5/play6b.png)
 
 It seems that the browser <i>does not render</i> all the notes created in the block _beforeEach_. What is the problem?
 
@@ -1150,7 +1149,7 @@ const createNote = async (page, content) => {
 }
 ```
 
-Instead of or alongside debugging mode, running tests in UI mode can be useful. As already mentioned, tests are started in UI mode as follows:
+Instead of, or alongside debugging mode, running tests in UI mode can be useful. As already mentioned, tests are started in UI mode as follows:
 
 ```
 npm run test -- --ui
@@ -1174,7 +1173,7 @@ Trace looks practically the same as running tests in UI mode.
 
 UI mode and Trace Viewer also offer the possibility of assisted search for locators. This is done by pressing the double circle on the left side of the lower bar, and then by clicking on the desired user interface element. Playwright displays the element locator:
 
-![](../../images/5/play8.png)
+![playwright's trace viewer with red arrows pointing at the locator assisted search location and to the element selected with it showing a suggested locator for the element](../../images/5/play8.png)
 
 Playwright suggests the following as the locator for the third note
 
@@ -1182,7 +1181,7 @@ Playwright suggests the following as the locator for the third note
 page.locator('li').filter({ hasText: 'third note' }).getByRole('button')
 ```
 
-The method [page.locator](https://playwright.dev/docs/api/class-page#page-locator) is called with the parameter _li_, i.e. we search for all li elements on the page, of which there are three in total. After this, using the [locator.filter](https://playwright.dev/docs/api/class-locator#locator-filter) method, we narrow down to the li element that contains the text <i>third notemake not important</i> and the button element inside it is taken using the [locator.getByRole](https://playwright.dev/docs/api/class-locator#locator-get-by-role) method.
+The method [page.locator](https://playwright.dev/docs/api/class-page#page-locator) is called with the argument _li_, i.e. we search for all li elements on the page, of which there are three in total. After this, using the [locator.filter](https://playwright.dev/docs/api/class-locator#locator-filter) method, we narrow down to the li element that contains the text <i>third note</i> and the button element inside it is taken using the [locator.getByRole](https://playwright.dev/docs/api/class-locator#locator-get-by-role) method.
 
 The locator generated by Playwright is somewhat different from the locator used by our tests, which was
 
@@ -1192,7 +1191,7 @@ page.getByText('first note').locator('..').getByRole('button', { name: 'make not
 
 Which of the locators is better is probably a matter of taste.
 
-Playwright also includes a [test generator](https://playwright.dev/docs/codegen-intro) that makes it possible to "record" a test through the user interface. The test generator is started with the command
+Playwright also includes a [test generator](https://playwright.dev/docs/codegen-intro) that makes it possible to "record" a test through the user interface. The test generator is started with the command:
 
 ```
 npx playwright codegen http://localhost:5173/
@@ -1200,16 +1199,16 @@ npx playwright codegen http://localhost:5173/
 
 When the _Record_ mode is on, the test generator "records" the user's interaction in the Playwright inspector, from where it is possible to copy the locators and actions to the tests:
 
-![](../../images/5/play9.png)
+![playwright's record mode enabled with its output in the inspector after user interaction](../../images/5/play9.png)
 
 Instead of the command line, Playwright can also be used via the [VS Code](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright) plugin. The plugin offers many convenient features, e.g. use of breakpoints when debugging tests.
 
-To avoid problem situations and increase understanding, it is definitely worth browsing Playwright's high-quality [documentation](https://playwright.dev/docs/intro). The most important ones are listed below:
+To avoid problem situations and increase understanding, it is definitely worth browsing Playwright's high-quality [documentation](https://playwright.dev/docs/intro). The most important sections are listed below:
 - the section about [locators](https://playwright.dev/docs/locators) gives good hints for finding elements in test
 - section [actions](https://playwright.dev/docs/input) tells how it is possible to simulate the interaction with the browser in tests
 - the section about [assertions](https://playwright.dev/docs/test-assertions) demonstrates the different expectations Playwright offers for testing
 
-More detailed details can be found in the [API](https://playwright.dev/docs/api/class-playwright) description, particularly useful are the class [Page](https://playwright.dev/docs/api/class-page) corresponding to the browser window of the tested application, and the class [Locator](https://playwright.dev/docs/api/class-locator) corresponding to the elements searched for in the tests.
+In-depth details can be found in the [API](https://playwright.dev/docs/api/class-playwright) description, particularly useful are the class [Page](https://playwright.dev/docs/api/class-page) corresponding to the browser window of the application under test, and the class [Locator](https://playwright.dev/docs/api/class-locator) corresponding to the elements searched for in the tests.
 
 The final version of the tests is in full on [GitHub](https://github.com/fullstack-hy2020/notes-e2e/tree/part5-3), in branch <i>part5-3</i>.
 
@@ -1221,30 +1220,21 @@ The final version of the frontend code is in its entirety on [GitHub](https://gi
 
 ### Exercises 5.17.-5.23.
 
-At the end of the section, let's do some E2E tests for the blog application. The material above should be enough to do most of the exercises. However, you should definitely read Playwright's [documentation](https://playwright.dev/docs/intro) and [API description](https://playwright.dev/docs/api/class-playwright), at least the ones mentioned at the end of the previous chapter.
+In the last exercises of this part, let's do some E2E tests for the blog application. The material above should be enough to do most of the exercises. However, you should definitely read Playwright's [documentation](https://playwright.dev/docs/intro) and [API description](https://playwright.dev/docs/api/class-playwright), at least the sections mentioned at the end of the previous chapter.
 
-#### Blog List End To End Testing, step1
+#### 5.17: Blog List End To End Testing, step 1
 
 Create a new npm project for tests and configure Playwright there.
 
 Make a test to ensure that the application displays the login form by default.
 
-The body of the test should be as follows
+The body of the test should be as follows:
 
 ```js 
 const { test, expect, beforeEach, describe } = require('@playwright/test')
 
-describe('Note app', () => {
-  beforeEach(async ({ page, request }) => {
-    await request.post('http:localhost:3003/api/testing/reset')
-    await request.post('http://localhost:3003/api/users', {
-      data: {
-        name: 'Matti Luukkainen',
-        username: 'mluukkai',
-        password: 'salainen'
-      }
-    })
-
+describe('Blog app', () => {
+  beforeEach(async ({ page }) => {
     await page.goto('http://localhost:5173')
   })
 
@@ -1255,9 +1245,7 @@ describe('Note app', () => {
 
 ```
 
-The _beforeEach_ formatting blog must reset the database using for example the method we used in the [material](/en/part5/end_to_end_testing_playwright#controlling-the-state-of-the-database).
-
-#### 5.18: Blog List End To End Testing, step2
+#### 5.18: Blog List End To End Testing, step 2
 
 Do the tests for login. Test both successful and failed login. For tests, create a user in the _beforeEach_ block.
 
@@ -1266,8 +1254,10 @@ The body of the tests expands as follows
 ```js 
 const { test, expect, beforeEach, describe } = require('@playwright/test')
 
-describe('Note app', () => {
+describe('Blog app', () => {
   beforeEach(async ({ page, request }) => {
+    // empty the db here
+    // create a user for the backend here
     // ...
   })
 
@@ -1287,7 +1277,9 @@ describe('Note app', () => {
 })
 ```
 
-#### 5.19: Blog List End To End Testing, step3
+The _beforeEach_ block must empty the database using, for example, the reset method we used in the [material](/en/part5/end_to_end_testing_playwright#controlling-the-state-of-the-database).
+
+#### 5.19: Blog List End To End Testing, step 3
 
 Create a test that verifies that a logged in user can create a blog. The body of the test may look like the following
 
@@ -1305,24 +1297,24 @@ describe('When logged in', () => {
 
 The test should ensure that the created blog is visible in the list of blogs.
 
-#### 5.20: Blog List End To End Testing, step4
+#### 5.20: Blog List End To End Testing, step 4
 
 Do a test that makes sure the blog can be edited.
 
-#### 5.21: Blog List End To End Testing, step5
+#### 5.21: Blog List End To End Testing, step 5
 
-Make a test that ensures that the user who added the blog can delete the blog. If you use the _window.confirm_ dialog in the delete operation, you may have to Google how to use the dialog from the Playwright tests.
+Make a test that ensures that the user who added the blog can delete the blog. If you use the _window.confirm_ dialog in the delete operation, you may have to Google how to use the dialog in the Playwright tests.
 
-#### 5.22: Blog List End To End Testing, step6
+#### 5.22: Blog List End To End Testing, step 6
 
 Make a test that ensures that only the user who added the blog sees the blog's delete button.
 
-#### 5.23: Blog List End To End Testing, step6
+#### 5.23: Blog List End To End Testing, step 7
 
 Do a test that ensures that the blogs are arranged in the order according to the likes, the blog with the most likes first.
 
 <i>This task is significantly more challenging than the previous ones.</i>
 
-This was the last task of the section and it's time to push the code to GitHub and mark the completed tasks in the [return application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+This was the last task of the section and it's time to push the code to GitHub and mark the completed tasks in the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>

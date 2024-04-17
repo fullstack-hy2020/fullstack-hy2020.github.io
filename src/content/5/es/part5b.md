@@ -358,9 +358,11 @@ El código de la aplicación se puede encontrar en [GitHub](https://github.com/f
 
 Nuestra implementación actual es bastante buena, pero tiene un aspecto que podría mejorarse.
 
-Después de crear una nueva nota, tendría sentido ocultar el nuevo formulario de nota. Actualmente, el formulario permanece visible. Hay un pequeño problema al ocultar el formulario. La visibilidad se controla con la variable <i>visible</i> dentro del componente <i>Togglable</i>. ¿Cómo podemos acceder a él fuera del componente?
+Después de crear una nueva nota, tendría sentido ocultar el formulario de nueva nota. Actualmente, el formulario permanece visible. Hay un pequeño problema al ocultarlo, la visibilidad se controla con la variable <i>visible</i> dentro del componente <i>Togglable</i>.
 
-Hay muchas formas de implementar el cierre del formulario desde el componente padre, pero usemos el mecanismo [ref](https://es.react.dev/learn/referencing-values-with-refs) de React, que ofrece una referencia al componente.
+Una solución a esto sería mover el control del estado del componente Togglable fuera del componente. Sin embargo, no lo haremos ahora, porque queremos que el componente sea responsable de su propio estado. Por lo tanto, tenemos que encontrar otra solución y hallar un mecanismo para cambiar el estado del componente externamente.
+
+Hay varias formas diferentes de implementar el acceso a las funciones de un componente desde fuera del componente, pero usemos el mecanismo de [ref](https://es.react.dev/learn/referencing-values-with-refs) de React, que ofrece una referencia al componente.
 
 Hagamos los siguientes cambios en el componente <i>App</i>:
 
@@ -571,14 +573,6 @@ const Blog = ({ blog }) => {
 
 #### 5.8: Frontend de la Lista de Blogs, paso 8
 
-Notamos que algo está mal. Cuando se crea un nuevo blog en la aplicación, no se muestra el nombre del usuario que agregó el blog en los detalles del mismo:
-
-![navegador mostrando nombre faltante debajo del botón Me gusta](../../images/5/59new.png)
-
-Cuando se recarga el navegador, se muestra la información de la persona. Esto no es aceptable, averigua dónde está el problema y realiza la corrección necesaria.
-
-#### 5.9: Frontend de la lista de blogs, paso 9
-
 Implementa la funcionalidad para el botón like. Los likes aumentan al hacer un solicitud HTTP _PUT_ a la dirección única de la publicación del blog en el backend.
 
 Dado que la operación de backend reemplaza toda la publicación del blog, deberás enviar todos sus campos en el cuerpo de la solicitud. Si deseas agregar un like a la siguiente publicación de blog:
@@ -612,7 +606,15 @@ Deberías realizar una solicitud HTTP PUT a la dirección <i>/api/blogs/5a43fde2
 
 El Backend también debe ser actualizado para manejar la referencia al usuario.
 
-**Una última advertencia:** si notas que estás usando async/await y el método _then_ en el mismo código, es casi seguro que estás haciendo algo mal. Usa uno u otro, y nunca uses ambos al mismo tiempo "por si acaso".
+#### 5.9: Frontend de la lista de Blogs, paso 9
+
+Nos damos cuenta de que algo está mal. Cuando se da "me gusta" a un blog en la app, el nombre del usuario que añadió el blog no se muestra en sus detalles:
+
+![navegador mostrando nombre faltante debajo del botón de me gusta](../../images/5/59put.png)
+
+Cuando se recarga el navegador, la información de la persona se muestra. Esto no es aceptable, averigua dónde está el problema y realiza la corrección necesaria.
+
+Por supuesto, es posible que ya hayas hecho todo correctamente y el problema no ocurra en tu código. En ese caso, puedes continuar.
 
 #### 5.10: Frontend de la Lista de Blogs, paso 10
 
@@ -706,12 +708,6 @@ En la parte 3 configuramos la herramienta de estilo de código para el backend [
 
 Vite ha instalado ESlint en el proyecto de forma predeterminada, por lo que todo lo que nos queda por hacer es definir nuestra configuración deseada en el archivo <i>.eslintrc.cjs</i>.
 
-A continuación, comenzaremos a probar el frontend y, para evitar errores de linter no deseados e irrelevantes instalaremos el paquete [eslint-plugin-jest](https://www.npmjs.com/package/eslint-plugin-jest):
-
-```bash
-npm install --save-dev eslint-plugin-jest
-```
-
 Creemos un archivo <i>.eslintrc.js</i>  con el siguiente contenido:
 
 ```js
@@ -720,7 +716,6 @@ module.exports = {
   env: {
     browser: true,
     es2020: true,
-    "jest/globals": true
   },
   extends: [
     'eslint:recommended',
@@ -731,7 +726,7 @@ module.exports = {
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
   settings: { react: { version: '18.2' } },
-  plugins: ['react-refresh', 'jest'],
+  plugins: ['react-refresh'],
   rules: {
     "indent": [
         "error",
@@ -773,6 +768,7 @@ Vamos a crear un archivo [.eslintignore](https://eslint.org/docs/latest/use/conf
 node_modules
 dist
 .eslintrc.cjs
+vite.config.js
 ```
 
 Ahora los directorios <em>dist</em> y <em>node_modules</em> se omitirán al realizar el linting.
