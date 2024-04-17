@@ -434,7 +434,8 @@ notesRouter.post('/', async (request, response) => {
   const body = request.body
 
   const user = await User.findById(body.userId) //highlight-line
-
+  const {username, name, passwordHash, blogs} = user;
+  
   const note = new Note({
     content: body.content,
     important: body.important === undefined ? false : body.important,
@@ -442,8 +443,7 @@ notesRouter.post('/', async (request, response) => {
   })
 
   const savedNote = await note.save()
-  user.notes = user.notes.concat(savedNote._id) //highlight-line
-  await user.save()  //highlight-line
+  await User.findByIdAndUpdate(body.userId, {username, name, passwordHash, blogs: blogs.concat(savedBlog._id)}) //highlight-line
   
   response.status(201).json(savedNote)
 })
