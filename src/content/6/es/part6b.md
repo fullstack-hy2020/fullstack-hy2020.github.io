@@ -75,7 +75,7 @@ Dado que el atributo <i>name</i> de todos los botones de radio es el mismo, esto
 
 Los botones tienen un controlador de cambios que actualmente solo imprime el string asociado con el botón en el que se hizo clic en la consola.
 
-Decidimos implementar la funcionalidad del filtro almacenando <i>el valor del filtro</i> en el store redux además de las notas mismas. El estado del store debería verse así después de realizar estos cambios:
+En la siguiente sección, vamos a implementar el filtrado almacenando las notas y <i>el valor del filtro</i> en el store de redux. Cuando terminemos, nos gustaría que el estado del store se viera así:
 
 ```js
 {
@@ -657,10 +657,18 @@ Lo siguiente se imprime en la consola
 
 Lo que vemos es interesante pero no muy útil. Esto tiene que ver con la librería Immer que mencionamos anteriormente y es utilizada por Redux Toolkit internamente para guardar el estado de la Tienda.
 
-El estado se puede convertir a un formato legible por humanos, por ejemplo, convirtiéndolo primero en un string y luego de nuevo en un objeto JavaScript de la siguiente manera:
+El estado se puede convertir a un formato legible por humanos utilizando la función [current](https://redux-toolkit.js.org/api/other-exports#current) de la librería immer.
+
+Actualicemos las importaciones para incluir a la función "current" de la librería immer:
 
 ```js
-console.log(JSON.parse(JSON.stringify(state))) // highlight-line
+import { createSlice, current } from '@reduxjs/toolkit' // highlight-line
+```
+
+Luego actualicemos el llamado a la función console.log:
+
+```js
+console.log(current(state)) // highlight-line
 ```
 
 Ahora lo que imprime la consola es legible para humanos
@@ -704,6 +712,22 @@ También, comienza a utilizar Redux DevTools para depurar el estado de la aplica
 #### 6.11 Mejores Anécdotas, paso 9
 
 Cambia también la definición de <i>anecdote reducer y sus action creators</i> para usar la función <em>createSlice</em> de Redux Toolkit.
+
+Nota de implementación: cuando utilices Redux Toolkit para devolver el estado inicial de las anécdotas, será inmutable, por lo que tendrás que copiarlo para ordenarlas, o te encontraras con el error "TypeError: Cannot assign to read only property". Puedes usar la sintaxis spread para hacer una copia del array. En vez de:
+
+```js
+
+anecdotes.sort()
+
+```
+
+Escribe:
+
+```js
+
+[...anecdotes].sort()
+
+```
 
 #### 6.12 Mejores Anécdotas, paso 10
 
