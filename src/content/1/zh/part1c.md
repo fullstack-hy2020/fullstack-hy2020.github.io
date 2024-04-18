@@ -789,6 +789,11 @@ const Button = (props) => {
 <!-- We can use destructuring to get only the required fields from <i>props</i>, and use the more compact form of arrow functions:-->
  我们可以使用解构来从<i>props</i>中只获得所需的字段，并使用更紧凑的箭头函数形式。
 
+**注意**: 在构建自己的组件时，你可以自由命名他们的事件处理器属性，对此你可以参考 react [命名事件处理器属性](https://react.dev/learn/responding-to-events#naming-event-handler-props) 的说明。具体如下：
+
+> 根据约定，事件处理程序属性应以 `on` 开头，后面跟着一个大写字母。
+例如，按钮组件的 `onClick` 属性可以称为 `onSmash` 。
+
 ```js
 const Button = ({ onClick, text }) => (
   <button onClick={onClick}>
@@ -796,5 +801,15 @@ const Button = ({ onClick, text }) => (
   </button>
 )
 ```
+
+<!-- We can simplify the Button component once more by declaring the return statement in just one line:-->
+ 定义该组件的函数只包含返回语句，所以我们可以进一步简化按钮组件，只需将返回语句声明在一行中。
+
+```js
+const Button = ({ onSmash, text }) => <button onClick={onSmash}>{text}</button>
+```
+
+<!--**NB**: However, be careful to not oversimplify your components, as this makes adding complexity a more tedious task down the road.-->
+**注意**: 然而，要小心不要过于简化您的组件，因为这会使日后增加复杂性变得更加繁琐。
 
 </div>
