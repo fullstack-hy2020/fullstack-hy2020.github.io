@@ -456,14 +456,14 @@ Mutaation toteuttava resolveri:
 
 ```js
   addAsFriend: async (root, args, { currentUser }) => {
-    const nonFriendAlready = (person) => 
-      !currentUser.friends.map(f => f._id.toString()).includes(person._id.toString())
-
     if (!currentUser) {
       throw new GraphQLError('wrong credentials', {
         extensions: { code: 'BAD_USER_INPUT' }
       }) 
     }
+
+    const nonFriendAlready = (person) => 
+      !currentUser.friends.map(f => f._id.toString()).includes(person._id.toString())
 
     const person = await Person.findOne({ name: args.name })
     if ( nonFriendAlready(person) ) {
