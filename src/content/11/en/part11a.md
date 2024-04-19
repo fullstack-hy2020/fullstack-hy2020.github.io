@@ -213,8 +213,8 @@ Let us assume that the application is coded with some other language than JavaSc
 Write a short text, say 200-300 words, where you answer or discuss some of the points below. You can check the length with https://wordcounter.net/. Save your answer to the file named <i>exercise1.md</i> in the root of the repository that you shall create in [exercise 11.2](/en/part11/getting_started_with_git_hub_actions#exercise-11-2).
 
 The points to discuss:
-- Some common steps in a CI setup include <i>linting</i>, <i>testing</i>, and <i>building</i>. What are the specific tools for taking care of these steps in the ecosystem of the language you picked? You can search for the answers by google.
-- What alternatives are there to set up the CI besides Jenkins and GitHub Actions? Again, you can ask google!
+- Some common steps in a CI setup include <i>linting</i>, <i>testing</i>, and <i>building</i>. What are the specific tools for taking care of these steps in the ecosystem of the language you picked? You can search for the answers by Google.
+- What alternatives are there to set up the CI besides Jenkins and GitHub Actions? Again, you can ask Google!
 - Would this setup be better in a self-hosted or a cloud-based environment? Why? What information would you need to make that decision?
 
 Remember that there are no 'right' answers to the above! 
