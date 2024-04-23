@@ -159,7 +159,7 @@ If the login is successful, the form fields are emptied <i>and</i> the server re
 
 If the login fails or running the function _loginService.login_ results in an error, the user is notified.
 
-The user is not notified about a successful login in any way. Let's modify the application to show the login form only <i>if the user is not logged-in</i> so when _user === null_. The form for adding new notes is shown only if the <i>user is logged-in</i>, so <i>user</i> contains the user details.
+The user is not notified about a successful login in any way. Let's modify the application to show the login form only <i>if the user is not logged-in</i>, so when _user === null_. The form for adding new notes is shown only if the <i>user is logged-in</i>, so when <i>user</i> contains the user's details.
 
 Let's add two helper functions to the <i>App</i> component for generating the forms:
 
