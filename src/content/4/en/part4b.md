@@ -913,11 +913,12 @@ beforeEach(async () => {
   await Note.deleteMany({})
   console.log('cleared')
 
-  helper.initialNotes.forEach(async (note) => {
+  for (const note of helper.initialNotes) {
     let noteObject = new Note(note)
     await noteObject.save()
     console.log('saved')
-  })
+  }
+
   console.log('done')
 })
 
