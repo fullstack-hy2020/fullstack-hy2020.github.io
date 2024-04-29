@@ -174,7 +174,7 @@ By submitting all exercises for part 13 of the course on Relational databases, y
 
 How to study the course – instructions in a nutshell: 5 cr core course CSM141081
 
-- Do the exercises. The exercises are submitted through GitHub and marking them is done on the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+- Do the exercises. The exercises are submitted through GitHub and marking them as done on the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
     - [The course certificate](/en/part0/general_info#course-certificate) will be available in the submission system.
 - If you want to get University of Helsinki credits
     - Enroll in the course. You will get the enrollment link through the submission system once you have completed enough exercises. Read more [here](/en/part0/general_info#submitting-exercises)

@@ -1164,7 +1164,7 @@ npm run test -- --trace on
 If necessary, Trace can be viewed with the command
 
 ```
-npx playwright show report
+npx playwright show-report
 ```
 
 or with the npm script we defined _npm run test:report_
