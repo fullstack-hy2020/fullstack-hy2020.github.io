@@ -214,13 +214,7 @@ In compiled statically typed languages like Java, IDEs like NetBeans can point o
 
 In the JavaScript universe, the current leading tool for static analysis (aka "linting") is [ESlint](https://eslint.org/).
 
-Let's install ESlint as a development dependency to the notes backend project with the command:
-
-```bash
-npm install eslint --save-dev
-```
-
-After this we can initialize a default ESlint configuration with the command:
+Let's install ESlint and initialize a default configuration in the notes backend project with the command:
 
 ```bash
 npx eslint --init
@@ -228,36 +222,19 @@ npx eslint --init
 
 We will answer all of the questions:
 
-![terminal output from ESlint init](../../images/3/52new.png)
+![terminal output from ESlint init](../../images/3/52new-config-file.png)
 
-The configuration will be saved in the _.eslintrc.js_ file. We will change _browser_ to _node_ in the _env_ configuration:
+The configuration will be saved in the _.eslint.config.mjs_ file. We will change _browser_ to _node_ in the _languageOptions.globals_ configuration:
 
 ```js
-module.exports = {
-    "env": {
-        "commonjs": true,
-        "es2021": true,
-        "node": true // highlight-line
-    },
-    "overrides": [
-        {
-            "env": {
-                "node": true
-            },
-            "files": [
-                ".eslintrc.{js,cjs}"
-            ],
-            "parserOptions": {
-                "sourceType": "script"
-            }
-        }
-    ],
-    "parserOptions": {
-        "ecmaVersion": "latest"
-    },
-    "rules": {
-    }
-}
+import globals from 'globals'
+import pluginJs from '@eslint/js'
+
+export default [
+  { files: ['**/*.js'], languageOptions: { sourceType: 'commonjs' } },
+  { languageOptions: { globals: globals.node } }, //highlight-line
+  pluginJs.configs.recommended,
+];
 ```
 
 Let's change the configuration a bit. Install a [plugin](https://eslint.style/packages/js) that defines a set of code style-related rules:
@@ -266,37 +243,31 @@ Let's change the configuration a bit. Install a [plugin](https://eslint.style/pa
 npm install --save-dev @stylistic/eslint-plugin-js
 ```
 
-Enable the plugin and add an "extends" definition and four code style rules:
+Enable the plugin, add a rules definition and four code style rules:
 
 ```js
-module.exports = {
-    // ...
-    'plugins': [
-        '@stylistic/js'
+import stylisticJs from '@stylistic/eslint-plugin-js' //highlight-line
+
+export default [
+  // ...
+  {
+    plugins: {
+      '@stylistic/js': stylisticJs
+    },
+  rules: {
+    '@stylistic/js/indent': [
+      'error',
+      2
     ],
-    'extends': 'eslint:recommended',
-    'rules': {
-        '@stylistic/js/indent': [
-            'error',
-            2
-        ],
-        '@stylistic/js/linebreak-style': [
-            'error',
-            'unix'
-        ],
-        '@stylistic/js/quotes': [
-            'error',
-            'single'
-        ],
-        '@stylistic/js/semi': [
-            'error',
-            'never'
-        ],
-    }
+    '@stylistic/js/linebreak-style': ['error', 'unix'],
+    '@stylistic/js/quotes': ['error', 'single'],
+    '@stylistic/js/semi': ['error', 'never'],
+  }
 }
+];
 ```
 
-Extends _eslint:recommended_ adds a [set](https://eslint.org/docs/latest/rules/) of recommended rules to the project. In addition, rules for indentation, line breaks, hyphens and semicolons have been added. These four rules are all defined in the [Eslint styles plugin](https://eslint.style/packages/js).
+_pluginJs.configs.recommended_ adds a [set](https://eslint.org/docs/latest/rules/) of recommended rules to the project. In addition, rules for indentation, line breaks, hyphens and semicolons have been added. These four rules are all defined in the [Eslint styles plugin](https://eslint.style/packages/js).
 
 Inspecting and validating a file like _index.js_ can be done with the following command:
 
@@ -321,10 +292,10 @@ It is recommended to create a separate _npm script_ for linting:
 
 Now the _npm run lint_ command will check every file in the project.
 
-Also the files in the <em>dist</em> directory get checked when the command is run. We do not want this to happen, and we can accomplish this by creating an [.eslintignore](https://eslint.org/docs/latest/use/configure/ignore#the-eslintignore-file) file in the project's root with the following contents:
+Also the files in the <em>dist</em> directory get checked when the command is run. We do not want this to happen, and we can accomplish this by adding an [ignores](https://eslint.org/docs/latest/use/configure/ignore) definition in the _eslint.config.mjs_ file with the following contents:
 
-```bash
-dist
+```js
+ignores: ['dist', 'node_modules'],
 ```
 
 This causes the entire <em>dist</em> directory to not be checked by ESlint.
@@ -367,24 +338,16 @@ Let's prevent unnecessary [trailing spaces](https://eslint.org/docs/rules/no-tra
   'rules': {
     // ...
     'eqeqeq': 'error',
-    'no-trailing-spaces': 'error',
-    'object-curly-spacing': [
+    '@stylistic/js/no-trailing-spaces': 'error',
+    '@stylistic/js/object-curly-spacing': [
         'error', 'always'
     ],
-    'arrow-spacing': [
-        'error', { 'before': true, 'after': true }
-    ]
+    '@stylistic/js/arrow-spacing': 'error',
   },
 }
 ```
 
-Our default configuration takes a bunch of predetermined rules into use from <i>eslint:recommended</i>:
-
-```bash
-'extends': 'eslint:recommended',
-```
-
-This includes a rule that warns about _console.log_ commands. [Disabling](https://eslint.org/docs/latest/use/configure/rules) a rule can be accomplished by defining its "value" as 0 in the configuration file. Let's do this for the <i>no-console</i> rule in the meantime.
+Our default configuration takes a bunch of predetermined rules into use from _pluginJs.configs.recommended_. This includes a rule that warns about _console.log_ commands. [Disabling](https://eslint.org/docs/latest/use/configure/rules) a rule can be accomplished by defining its "value" as 0 in the configuration file. Let's do this for the <i>no-console</i> rule in the meantime.
 
 ```js
 {
@@ -392,19 +355,17 @@ This includes a rule that warns about _console.log_ commands. [Disabling](https:
   'rules': {
     // ...
     'eqeqeq': 'error',
-    'no-trailing-spaces': 'error',
-    'object-curly-spacing': [
+    '@stylistic/js/no-trailing-spaces': 'error',
+    '@stylistic/js/object-curly-spacing': [
         'error', 'always'
     ],
-    'arrow-spacing': [
-        'error', { 'before': true, 'after': true }
-    ],
+    '@stylistic/js/arrow-spacing': 'error',
     'no-console': 0 // highlight-line
   },
 }
 ```
 
-**NB** when you make changes to the <i>.eslintrc.js</i> file, it is recommended to run the linter from the command line. This will verify that the configuration file is correctly formatted:
+**NB** when you make changes to the _eslint.config.mjs_ file, it is recommended to run the linter from the command line. This will verify that the configuration file is correctly formatted:
 
 ![terminal output from npm run lint](../../images/3/55.png)
 
