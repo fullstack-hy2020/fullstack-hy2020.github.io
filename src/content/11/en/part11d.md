@@ -280,6 +280,31 @@ You most likely need functions [contains](https://docs.github.com/en/actions/lea
 
 Developing workflows is not easy, and quite often the only option is trial and error. It might actually be advisable to have a separate repository for getting the configuration right, and when it is done, to copy the right configurations to the actual repository.
 
+It would also make sense to re-use longer conditions by moving them to commonly accessible variables and referring these variables on job/step levels:
+
+```yaml
+name: some workflow name
+
+env:
+  # the below will be 'true'
+  CONDITION: ${{ contains('kissa', 'ss') && contains('koira', 'ra') && contains('pretty long array of criteria to repeat in multiple places', 'crit') }}
+
+jobs:
+  job1:
+    # rest of the job
+    steps:
+      - if: ${{ env.CONDITION == 'true' }}
+        run: echo 'this step is executed'
+
+      - if: ${{ env.CONDITION == 'false' }}
+        run: echo 'this step will not be executed'
+
+  job2:
+    # this job will be dependent on the above env.CONDITION, not the `github.` prefix which seem to be required while referencing the variable on the job level, but not the step level
+    if: ${{ github.env.CONDITION == 'true' }}
+    # rest of the job
+```
+
 It would also be possible to install a tool such as [act](https://github.com/nektos/act) that makes it possible to run your workflows locally. Unless you end up using more involved use cases like creating your [own custom actions](https://docs.github.com/en/free-pro-team@latest/actions/creating-actions), going through the burden of setting up a tool such as act is most likely not worth the trouble. 
 
 </div>
