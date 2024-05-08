@@ -300,7 +300,7 @@ jobs:
         run: echo 'this step will not be executed'
 
   job2:
-    # this job will be dependent on the above env.CONDITION, not the `github.` prefix which seem to be required while referencing the variable on the job level, but not the step level
+    # this job will be dependent on the above env.CONDITION, note the `github.` prefix which seem to be required while referencing the variable on the job level, but not the step level
     if: ${{ github.env.CONDITION == 'true' }}
     # rest of the job
 ```
