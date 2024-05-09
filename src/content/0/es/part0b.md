@@ -264,7 +264,7 @@ La solicitud al servidor se envía en la última línea, pero el código para ma
 xhttp.onreadystatechange = function() {
 ```
 
-En esta linea, se define un <i>controlador de eventos (event handler)</i> para el objeto <em>xhttp</em> que realiza la solicitud. Cuando cambia el estado del objeto, el navegador llama a la función del controlador de eventos. El código de la función verifica que [readyState](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState) sea igual a 4 (que describe la situación <i>La operación está completa</i>) y que el código de estado HTTP de la respuesta es 200.
+En esta línea, se define un <i>controlador de eventos (event handler)</i> para el objeto <em>xhttp</em> que realiza la solicitud. Cuando cambia el estado del objeto, el navegador llama a la función del controlador de eventos. El código de la función verifica que [readyState](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState) sea igual a 4 (que describe la situación <i>La operación está completa</i>) y que el código de estado HTTP de la respuesta es 200.
 
 ```js
 xhttp.onreadystatechange = function() { 
