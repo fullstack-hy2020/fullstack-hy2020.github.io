@@ -1299,7 +1299,7 @@ The test should ensure that the created blog is visible in the list of blogs.
 
 #### 5.20: Blog List End To End Testing, step 4
 
-Do a test that makes sure the blog can be edited.
+Do a test that makes sure that users can like a blog.
 
 #### 5.21: Blog List End To End Testing, step 5
 
