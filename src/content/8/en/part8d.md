@@ -161,7 +161,7 @@ const App = () => {
 
 ### Adding a token to a header
 
-After the backend changes, creating new persons requires that a valid user token is sent with the request. In order to send the token, we have to change the way we define the *ApolloClient* object in <i>index.js</i> a little.
+After the backend changes, creating new persons requires that a valid user token is sent with the request. In order to send the token, we have to change the way we define the *ApolloClient* object in <i>main.jsx</i> a little.
 
 ```js
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client'  // highlight-line
