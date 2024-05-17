@@ -1325,17 +1325,17 @@ Then perform the necessary actions to make the warning disappear. Try pasting th
 
 **Make sure that from now on you don't see any warnings in your console!**
 
-<h4>1.12*: anecdotes step 1</h4>
+<h4>1.12*: quotes step 1</h4>
 
-The world of software engineering is filled with [anecdotes](http://www.comp.nus.edu.sg/~damithch/pages/SE-quotes.htm) that distill timeless truths from our field into short one-liners.
+The world of software engineering is filled with [quotes](http://www.comp.nus.edu.sg/~damithch/pages/SE-quotes.htm) that distill timeless truths from our field into short one-liners.
 
-Expand the following application by adding a button that can be clicked to display a <i>random</i> anecdote from the field of software engineering:
+Expand the following application by adding a button that can be clicked to display a <i>random</i> quote from the field of software engineering:
 
 ```js
 import { useState } from 'react'
 
 const App = () => {
-  const anecdotes = [
+  const quotes = [
     'If it hurts, do it more often.',
     'Adding manpower to a late software project makes it later!',
     'The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
@@ -1350,7 +1350,7 @@ const App = () => {
 
   return (
     <div>
-      {anecdotes[selected]}
+      {quotes[selected]}
     </div>
   )
 }
@@ -1364,15 +1364,15 @@ Find out how to generate random numbers in JavaScript, eg. via a search engine o
 
 Your finished application could look something like this:
 
-![random anecdote with next button](../../images/1/18a.png)
+![random quote with next button](../../images/1/18a.png)
 
-<h4>1.13*: anecdotes step 2</h4>
+<h4>1.13*: quotes step 2</h4>
 
-Expand your application so that you can vote for the displayed anecdote.
+Expand your application so that you can vote for the displayed quote.
 
-![anecdote app with votes button added](../../images/1/19a.png)
+![quote app with votes button added](../../images/1/19a.png)
 
-**NB** store the votes of each anecdote into an array or object in the component's state. Remember that the correct way of updating state stored in complex data structures like objects and arrays is to make a copy of the state.
+**NB** store the votes of each quote into an array or object in the component's state. Remember that the correct way of updating state stored in complex data structures like objects and arrays is to make a copy of the state.
 
 You can create a copy of an object like this:
 
@@ -1396,13 +1396,13 @@ copy[2] += 1
 
 Using an array might be the simpler choice in this case. Searching the Internet will provide you with lots of hints on how to [create a zero-filled array of the desired length](https://stackoverflow.com/questions/20222501/how-to-create-a-zero-filled-javascript-array-of-arbitrary-length/22209781).
 
-<h4>1.14*: anecdotes step 3</h4>
+<h4>1.14*: quotes step 3</h4>
 
-Now implement the final version of the application that displays the anecdote with the largest number of votes:
+Now implement the final version of the application that displays the quote with the largest number of votes:
 
-![anecdote with largest number of votes](../../images/1/20a.png)
+![quote with largest number of votes](../../images/1/20a.png)
 
-If multiple anecdotes are tied for first place it is sufficient to just show one of them.
+If multiple quotes are tied for first place it is sufficient to just show one of them.
 
 This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the "my submissions" tab of the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
