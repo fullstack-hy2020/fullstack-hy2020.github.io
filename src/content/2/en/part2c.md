@@ -534,6 +534,7 @@ At this point in development, all the parts of the application happen to reside 
 <h4>2.11: The Phonebook Step 6</h4>
 
 We continue with developing the phonebook. Store the initial state of the application in the file <i>db.json</i>, which should be placed in the root of the project.
+Note that the id's value must be in string datatype. Otherwise, when accessing an individual person by visiting the server, such as http://localhost:3001/persons/1, it would not work.
 
 ```json
 {
@@ -541,22 +542,23 @@ We continue with developing the phonebook. Store the initial state of the applic
     { 
       "name": "Arto Hellas", 
       "number": "040-123456",
-      "id": 1
+      "id": "1"
     },
     { 
       "name": "Ada Lovelace", 
       "number": "39-44-5323523",
-      "id": 2
+      "id": "2"
     },
     { 
       "name": "Dan Abramov", 
       "number": "12-43-234345",
-      "id": 3
+      "id": "3"
+
     },
     { 
       "name": "Mary Poppendieck", 
       "number": "39-23-6423122",
-      "id": 4
+      "id": "4"
     }
   ]
 }
