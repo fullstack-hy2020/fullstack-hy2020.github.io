@@ -287,7 +287,7 @@ Inicializa un nuevo proyecto de backend que será utilizado por el frontend. Con
 
 El proyecto debería poder ejecutarse con scripts npm, tanto en modo de desarrollo y como código compilado, en modo de producción.
 
-#### 9.8: Patientor backend, paso 2
+#### 9.9: Patientor backend, paso 2
 
 Haz un fork y clona el proyecto [patientor](https://github.com/fullstack-hy2020/patientor). Inicia el proyecto con la ayuda del archivo README. 
 
