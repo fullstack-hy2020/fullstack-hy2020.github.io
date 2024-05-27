@@ -1074,8 +1074,8 @@ Blogin lisääminen lukulistalle tapahtuu tekemällä HTTP POST reitille _/api/r
 
 ```js
 {
-  blog_id: 10,
-  user_id: 3
+  blogId: 10,
+  userId: 3
 }
 ```
 
