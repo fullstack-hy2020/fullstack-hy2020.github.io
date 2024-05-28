@@ -20,7 +20,7 @@ Kurssilla käytettiin aiemmin React-komponenttien testaamiseen Facebookin kehitt
 Aloitetaan asentamalla Vitest sekä Web-selainta simuloiva [jsdom](https://github.com/jsdom/jsdom)-kirjasto:
 
 ```
-npm install --save-vitest vitest jsdom
+npm install --save-dev vitest jsdom
 ```
 
 Tarvitsemme Vitestin lisäksi testaamiseen apukirjaston, jonka avulla React-komponentteja voidaan renderöidä testejä varten. 
@@ -74,7 +74,7 @@ export default defineConfig({
 })
 ```
 
-Määrittelyn _globals: true_ ansiosta testien käyttämät avainsanoja kuten _describe_, _test_ ja _expect_ ei ole tarvetta importata testeissä.
+Määrittelyn _globals: true_ ansiosta testien käyttämiä avainsanoja kuten _describe_, _test_ ja _expect_ ei ole tarvetta importata testeissä.
 
 Testataan aluksi muistiinpanon renderöivää komponenttia:
 
@@ -272,7 +272,6 @@ test('renders content', () => {
 konsoliin tulostuu komponentin generoima HTML:
 
 ```js
-console.log
   <body>
     <div>
       <li
