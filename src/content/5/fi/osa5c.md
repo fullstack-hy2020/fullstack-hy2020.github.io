@@ -272,7 +272,6 @@ test('renders content', () => {
 konsoliin tulostuu komponentin generoima HTML:
 
 ```js
-console.log
   <body>
     <div>
       <li
