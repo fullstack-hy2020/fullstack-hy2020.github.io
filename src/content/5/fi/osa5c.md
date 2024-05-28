@@ -20,7 +20,7 @@ Kurssilla käytettiin aiemmin React-komponenttien testaamiseen Facebookin kehitt
 Aloitetaan asentamalla Vitest sekä Web-selainta simuloiva [jsdom](https://github.com/jsdom/jsdom)-kirjasto:
 
 ```
-npm install --save-vitest vitest jsdom
+npm install --save-dev vitest jsdom
 ```
 
 Tarvitsemme Vitestin lisäksi testaamiseen apukirjaston, jonka avulla React-komponentteja voidaan renderöidä testejä varten. 
