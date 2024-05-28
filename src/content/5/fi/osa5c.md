@@ -74,7 +74,7 @@ export default defineConfig({
 })
 ```
 
-Määrittelyn _globals: true_ ansiosta testien käyttämät avainsanoja kuten _describe_, _test_ ja _expect_ ei ole tarvetta importata testeissä.
+Määrittelyn _globals: true_ ansiosta testien käyttämiä avainsanoja kuten _describe_, _test_ ja _expect_ ei ole tarvetta importata testeissä.
 
 Testataan aluksi muistiinpanon renderöivää komponenttia:
 
