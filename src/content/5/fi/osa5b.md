@@ -702,7 +702,7 @@ Jos propsin tyyppi on väärä, eli jos esimerkiksi yritetään määritellä pr
 
 Konfiguroimme osassa 3 koodin tyylistä huolehtivan [ESLintin](/osa3/validointi_ja_es_lint) backendiin. Otetaan nyt ESLint käyttöön myös frontendissa.
 
-Vite on asentanut projektille ESLintin valmiiksi, joten ei tarvita muuta kuin muokata tiedostossa <i>.eslintrc.cjs</i> oleva konfiguraatio halutun kaltaiseksi.
+Vite on asentanut projektille ESLintin valmiiksi, joten ei tarvitse muuta kuin muokata tiedostossa <i>.eslintrc.cjs</i> oleva konfiguraatio halutun kaltaiseksi.
 
 
 Muutetaan tiedoston <i>.eslintrc.cjs</i> sisältöä seuraavasti:
