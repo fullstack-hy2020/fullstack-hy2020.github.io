@@ -217,7 +217,7 @@ In the JavaScript universe, the current leading tool for static analysis (aka "l
 Let's install ESlint as a development dependency to the notes backend project with the command:
 
 ```bash
-npm install eslint --save-dev
+npm install eslint @eslint/js --save-dev
 ```
 
 After this we can initialize a default ESlint configuration with the command:
@@ -230,7 +230,7 @@ We will answer all of the questions:
 
 ![terminal output from ESlint init](../../images/3/52e_flat.png)
 
-The configuration will be saved in the generated _eslint.config.mjs_ file:
+The configuration will be saved in the generated <em>eslint.config.mjs</em> file:
 
 ```js
 import globals from 'globals'
@@ -251,23 +251,57 @@ export default [
     languageOptions: {
       sourceType: "commonjs",
       globals: {
-        ...globals.browser,
+        ...globals.node,
       },
       ecmaVersion: "latest",
     },
-  }
+  },
 ]
 ```
 
 So far, our ESLint configuration file defines the _files_ option with _["**/*.js"]_, which tells ESLint to look at all JavaScript files in our project folder. The _languageOptions_ property specifies options related to language features that ESLint should expect, in which we defined the _sourceType_ option as "commonjs". This indicates that the JavaScript code in our project uses the CommonJS module system (standard in Node.js), allowing ESLint to parse the code accordingly.  
 
-The _globals_ option specifies global variables that are predefined. The spread operator applied here tells ESLint to include all global variables defined in the _globals.browser_ settings. The environment we picked during the ESLint initialization phase indicates that our code will be running in a browser, which has its own specific global variables like _window_, and _document_. Here we've told ESLint to be aware of those browser-specific variables and settings.
+The _globals_ property specifies global variables that are predefined. The spread operator applied here tells ESLint to include all global variables defined in the _globals.browser_ settings. The environment we picked during the ESLint initialization phase indicates that our code will be running in the browser, which has its own specific global variables like _window_, and _document_. Here we've told ESLint to be aware of those browser and Node-specific variables, objects, and settings.
 
-Finally, the _ecmaVersion_ option is set to "latest". This sets the ECMAScript version to the latest available version, meaning ESLint will understand and properly lint the latest JavaScript syntax and features.
+Finally, the _ecmaVersion_ property is set to "latest". This sets the ECMAScript version to the latest available version, meaning ESLint will understand and properly lint the latest JavaScript syntax and features.
 
-Let's add on to the configuration file. Install a [plugin](https://eslint.style/packages/js) that defines a set of code style-related rules:
+Since we are building our backend with Node/Express, we need to make sure that ESLint also considers any Node specific variables and objects such as _process_, which we've come across whilst writing our backend code. Let's add on to the configuration file to ensure that these Node speficic variables and objects are respected by ESLint:
 
+```js
+// ...
+export default [
+  {
+    // ...
+    languageOptions: {
+      sourceType: "commonjs",
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
+      ecmaVersion: "latest",
+    },
+  },
+]
 ```
+
+We want to make use of [ESLint's recommended](https://eslint.org/docs/latest/use/configure/configuration-files#using-predefined-configurations) settings along with our own. The `@eslint/js` package we installed earlier provides us with predefined configurations for ESLint. We'll import it and and enable it in the configuration file:
+
+```js
+// ...
+import js from '@eslint/js'
+// ...
+
+export default [
+  js.configs.recommended
+  // ...
+]
+```
+
+We've added the _js.configs.recommended_ to the top of the configuration array, this ensures that ESLint's recommended settings are applied first before our own custom options.
+
+Let's continue building the configuration file. Install a [plugin](https://eslint.style/packages/js) that defines a set of code style-related rules:
+
+```bash
 npm install --save-dev @stylistic/eslint-plugin-js
 ```
 
@@ -301,11 +335,11 @@ export default [
         'never'
       ],
     },
-  }
+  },
 ]
 ```
 
-The [plugins](https://eslint.org/docs/latest/use/configure/plugins) option provides a way to extend ESLint's functionality by adding custom rules, configurations, and other capabilities that are not available in the core ESLint library. We've installed and enabled the `@stylistic/eslint-plugin-js`, which adds JavaScript stylistic rules for ESLint. In addition, rules for indentation, line breaks, quotes, and semicolons have been added. These four rules are all defined in the [Eslint styles plugin](https://eslint.style/packages/js).
+The [plugins](https://eslint.org/docs/latest/use/configure/plugins) property provides a way to extend ESLint's functionality by adding custom rules, configurations, and other capabilities that are not available in the core ESLint library. We've installed and enabled the `@stylistic/eslint-plugin-js`, which adds JavaScript stylistic rules for ESLint. In addition, rules for indentation, line breaks, quotes, and semicolons have been added. These four rules are all defined in the [Eslint styles plugin](https://eslint.style/packages/js).
 
 Inspecting and validating a file like _index.js_ can be done with the following command:
 
@@ -330,11 +364,12 @@ It is recommended to create a separate _npm script_ for linting:
 
 Now the _npm run lint_ command will check every file in the project.
 
-Files in the <em>dist</em> directory also get checked when the command is run. We do not want this to happen, and we can accomplish this by adding an object with the [ignores](https://eslint.org/docs/latest/use/configure/ignore) option that specifies an array of directories and files we want to ignore.
+Files in the <em>dist</em> directory also get checked when the command is run. We do not want this to happen, and we can accomplish this by adding an object with the [ignores](https://eslint.org/docs/latest/use/configure/ignore) property that specifies an array of directories and files we want to ignore.
 
 ```js
 // ...
 export default [
+  // ...
   { 
     ignores: ["dist/**"],
   },
@@ -350,7 +385,7 @@ Lint has quite a lot to say about our code:
 
 Let's not fix these issues just yet.
 
-A better alternative to executing the linter from the command line is to configure an <i>eslint-plugin</i> to the editor, that runs the linter continuously. By using the plugin you will see errors in your code immediately. You can find more information about the Visual Studio ESLint plugin [here](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
+A better alternative to executing the linter from the command line is to configure an _eslint-plugin_ to the editor, that runs the linter continuously. By using the plugin you will see errors in your code immediately. You can find more information about the Visual Studio ESLint plugin [here](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
 
 The VS Code ESlint plugin will underline style violations with a red line:
 
@@ -358,9 +393,9 @@ The VS Code ESlint plugin will underline style violations with a red line:
 
 This makes errors easy to spot and fix right away.
 
-ESlint has a vast array of [rules](https://eslint.org/docs/rules/) that are easy to take into use by editing the <i>eslint.config.mjs</i> file.
+ESlint has a vast array of [rules](https://eslint.org/docs/rules/) that are easy to take into use by editing the _eslint.config.mjs_ file.
 
-Let's add the [eqeqeq](https://eslint.org/docs/rules/eqeqeq) rule that warns us, if equality is checked with anything but the triple equals operator. The rule is added under the <i>rules</i> field in the configuration file.
+Let's add the [eqeqeq](https://eslint.org/docs/rules/eqeqeq) rule that warns us if equality is checked with anything but the triple equals operator. The rule is added under the rules field in the configuration file.
 
 ```js
 export default [
@@ -387,13 +422,103 @@ export default [
       'error', 'always'
     ],
     'arrow-spacing': [
-      'error', { 'before': true, 'after': true }
+      'error', { 'before': true, 'after': true },
     ],
   },
 ]
 ```
 
-**NB** when you make changes to the <i>eslint.config.mjs</i> file, it is recommended to run the linter from the command line. This will verify that the configuration file is correctly formatted:
+Our default configuration takes a bunch of predefined rules into use from:
+
+```js
+// ...
+
+export default [
+  js.configs.recommended,
+  // ...
+]
+```
+
+This includes a rule that warns about <em>console.log</em> commands. Disabling a rule can be accomplished by defining its "value" as 0 or "off" in the configuration file. Let's do this for the _no-console_ rule in the meantime.
+
+```js
+[
+  {
+    // ...
+    rules: {
+      // ...
+      'eqeqeq': 'error',
+      'no-trailing-spaces': 'error',
+      'object-curly-spacing': [
+        'error', 'always'
+      ],
+      'arrow-spacing': [
+        'error', { 'before': true, 'after': true },
+      ],
+      'no-console': 'off',
+    },
+  },
+]
+```
+
+Disabling the no-console rule will allow us to use console.log statements without ESLint flagging them as issues. This can be particularly useful during development when you need to debug your code. Here's the complete configuration file with all the changes we have made so far:
+
+```js
+import globals from 'globals'
+import js from '@eslint/js'
+import stylisticJs from '@stylistic/eslint-plugin-js'
+
+export default [
+  js.configs.recommended,
+  {
+    ignores: ['dist/**'],
+  },
+  {
+    files: ["**/*.js"],
+    languageOptions: {
+      sourceType: "commonjs",
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
+      ecmaVersion: "latest",
+    },
+    plugins: {
+      '@stylistic/js': stylisticJs
+    },
+    rules: {
+      '@stylistic/js/indent': [
+        'error', 
+        2
+      ],
+      '@stylistic/js/linebreak-style': [
+        'error',
+        'unix'
+      ],
+      '@stylistic/js/quotes': [
+        'error',
+        'single'
+      ],
+      '@stylistic/js/semi': [
+        'error',
+        'never'
+      ],
+      'eqeqeq': 'error',
+      'no-trailing-spaces': 'error',
+      'object-curly-spacing': [
+        'error', 'always'
+      ],
+      'arrow-spacing': [
+        'error', { 'before': true, 'after': true },
+      ],
+      'no-console': 'off',
+    },
+    ignores: ["dist/**"],
+  },
+]
+```
+
+**NB** when you make changes to the _eslint.config.mjs_ file, it is recommended to run the linter from the command line. This will verify that the configuration file is correctly formatted:
 
 ![terminal output from npm run lint](../../images/3/55.png)
 
