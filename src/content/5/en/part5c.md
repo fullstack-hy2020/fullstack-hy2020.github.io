@@ -778,7 +778,7 @@ const element = screen.getByText(
 or we could use the _findByText_ method:
 
 ```js
-const element = await screen.findByText('Does not work anymore :(')
+const element = await screen.findByText('Does not work anymore :(', { exact: false })
 ```
 
 It is important to notice that, unlike the other _ByText_ methods, _findByText_ returns a promise!
