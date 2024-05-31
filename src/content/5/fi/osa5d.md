@@ -262,7 +262,7 @@ Testejä kehitettäessä kannattaa käyttää Playwrightin [UI-moodia](https://p
 npm test -- --ui
 ```
 
-Näeme nyt että testi löytää napin 
+Näemme nyt että testi löytää napin 
 
 ![](../../images/5/play4.png)
 
