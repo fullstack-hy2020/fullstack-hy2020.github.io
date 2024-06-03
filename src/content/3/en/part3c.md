@@ -376,7 +376,7 @@ const password = process.argv[2]
 
 // DO NOT SAVE YOUR PASSWORD TO GITHUB!!
 const url =
-  `mongodb+srv://fullstack:${password}@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority`
+  `mongodb+srv://fullstack:${password}@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority`
 
 mongoose.set('strictQuery',false)
 mongoose.connect(url)
@@ -399,7 +399,7 @@ app.get('/api/notes', (request, response) => {
 })
 ```
 
-We can verify in the browser that the backend works for displaying all of the documents:
+After starting the backend with <code>node index.js yourpassword</code>, we can verify in the browser that the backend correctly displays all notes saved to the database:
 
 ![api/notes in browser shows notes in JSON](../../images/3/44ea.png)
 
