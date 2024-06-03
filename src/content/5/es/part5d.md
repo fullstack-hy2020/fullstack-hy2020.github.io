@@ -230,7 +230,7 @@ Al desarrollar pruebas, puede ser más prudente reducir el tiempo de espera a un
 
 ```js
 module.exports = defineConfig({
-  timeout: 3000,
+  timeout: 3000, // highlight-line
   fullyParallel: false, // highlight-line
   workers: 1, // highlight-line
   // ...
@@ -1079,7 +1079,7 @@ describe('when logged in', () => {
 }) 
 ```
 
-Por alguna razón, la prueba comienza a funcionar de manera poco confiable, a veces pasa y a veces no. Es hora de arremangarse y aprender cómo depurar pruebas.
+Por alguna razón, la prueba comienza a funcionar de manera poco confiable, a veces pasa y a veces no. Si la prueba te esta dando problemas, es hora de arremangarse y aprender cómo depurar pruebas.
 
 ### Ejecutando y depurando tus pruebas
 
