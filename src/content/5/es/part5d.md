@@ -1299,7 +1299,7 @@ La prueba debe garantizar que un nuevo blog es visible en la lista de todos los 
 
 #### 5.20: Pruebas de Extremo a Extremo de la Lista de Blogs, paso 4
 
-Haz una prueba que compruebe que el blog puede editarse.
+Haz una prueba que compruebe que el blog puede editarse. Si encuentras un error como 'Test timeout of 3000ms exceeded', te recomiendo comentar la línea 'timeout: 3000' en el archivo 'playwright.config.js'.
 
 #### 5.21: Pruebas de Extremo a Extremo de la Lista de Blogs, paso 5
 
@@ -1307,7 +1307,7 @@ Realiza una prueba para asegurarte de que el usuario que creó un blog pueda eli
 
 #### 5.22: Pruebas de Extremo a Extremo de la Lista de Blogs, paso 6
 
-Realiza una prueba para asegurarte de que solo el creador puede ver el botón delete de un blog, nadie más.
+Realiza una prueba para asegurarte de que solo el creador puede ver el botón delete de un blog, nadie más. 
 
 #### 5.23: Pruebas de Extremo a Extremo de la Lista de Blogs, paso 7
 
