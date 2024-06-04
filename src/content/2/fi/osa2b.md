@@ -11,7 +11,7 @@ Jatketaan sovelluksen laajentamista siten, että se mahdollistaa uusien muistiin
 
 ### Muistiinpanojen tallettaminen komponentin tilaan
 
-Jotta saisimme sivun päivittymään uusien muistiinpanojen lisäyksen yhteydessä, on parasta sijoittaa muistiinpanot komponentin <i>App</i> tilaan. Eli importataan funktio [useState](https://react.dev/reference/react/useStatel) ja määritellään sen avulla komponentille tila, joka saa aluksi arvokseen propsina välitettävän muistiinpanot alustavan taulukon: 
+Jotta saisimme sivun päivittymään uusien muistiinpanojen lisäyksen yhteydessä, on parasta sijoittaa muistiinpanot komponentin <i>App</i> tilaan. Eli importataan funktio [useState](https://react.dev/reference/react/useState) ja määritellään sen avulla komponentille tila, joka saa aluksi arvokseen propsina välitettävän muistiinpanot alustavan taulukon: 
 
 ```js
 import { useState } from 'react' // highlight-line
