@@ -105,9 +105,13 @@ RUN npm ci
 
 RUN npm run build
 
-RUN npm install -g serve # highlight-line
+#highlight-start
+RUN npm install -g serve
+#highlight-end
 
-CMD ["serve", "dist"] # highlight-line
+#highlight-start
+CMD ["serve", "dist"]
+#highlight-end
 ```
 
 Our CMD now includes square brackets and as a result, we now use the <i>exec form</i> of CMD. There are actually **three** different forms for CMD, out of which the exec form is preferred. Read the [documentation](https://docs.docker.com/reference/dockerfile/#cmd) for more info.
@@ -125,8 +129,10 @@ With multi-stage builds, a tried and true solution like [Nginx](https://en.wikip
 Let's use the previous Dockerfile but change the FROM to include the name of the stage:
 
 ```Dockerfile
-# The first FROM is now a stage called build-stage
-FROM node:20 AS build-stage # highlight-line
+# El primer FROM ahora es una etapa llamada build-stage
+# highlight-start
+FROM node:20 AS build-stage 
+# highlight-end
 
 WORKDIR /usr/src/app
 
@@ -136,12 +142,16 @@ RUN npm ci
 
 RUN npm run build
 
-# This is a new stage, everything before this is gone, except for the files that we want to COPY
-FROM nginx:1.25-alpine # highlight-line
+# Esta es una nueva etapa, todo lo anterior a esta linea ha desaparecido, excepto por los archivos que queremos COPIAR
+# highlight-start
+FROM nginx:1.25-alpine
+# highlight-end
 
-# COPY the directory dist from the build-stage to /usr/share/nginx/html
-# The target location here was found from the Docker hub page
-COPY --from=build-stage /usr/src/app/dist /usr/share/nginx/html # highlight-line
+# COPIA el directorio dist de build-stage a /usr/share/nginx/html
+# El destino fue encontrado en la pagina de Docker hub
+# highlight-start
+COPY --from=build-stage /usr/src/app/dist /usr/share/nginx/html
+# highlight-end
 ```
 
 We have declared also <i>another stage</i>, to where only the relevant files of the first stage (the <i>dist</i> directory, that contains the static content) are copied.

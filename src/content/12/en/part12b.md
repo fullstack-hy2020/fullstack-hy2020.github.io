@@ -227,9 +227,13 @@ COPY . .
 
 RUN npm ci 
 
-ENV DEBUG=playground:* # highlight-line
+#highlight-start
+ENV DEBUG=playground:*
+#highlight-end
 
-CMD npm start # highlight-line
+#highlight-start
+CMD npm start
+#highlight-end
 ```
 
 > <i>If you're wondering what the DEBUG environment variable does, read [here](http://expressjs.com/en/guide/debugging.html#debugging-express).</i>
@@ -252,13 +256,17 @@ FROM node:20
   
 WORKDIR /usr/src/app
 
-COPY --chown=node:node . .  # highlight-line
+#highlight-start
+COPY --chown=node:node . .
+#highlight-end
 
 RUN npm ci 
 
 ENV DEBUG=playground:*
   
-USER node # highlight-line
+#highlight-start
+USER node
+#highlight-end
 
 CMD npm start
 ```

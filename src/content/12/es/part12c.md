@@ -105,9 +105,13 @@ RUN npm ci
 
 RUN npm run build
 
-RUN npm install -g serve # highlight-line
+#highlight-start
+RUN npm install -g serve
+#highlight-end
 
-CMD ["serve", "dist"] # highlight-line
+#highlight-start
+CMD ["serve", "dist"]
+#highlight-end
 ```
 
 Nuestro CMD ahora incluye corchetes y, como resultado, usamos la <i> forma exec</i> de CMD. En realidad, hay **tres** formas diferentes para CMD, de las cuales se prefiere la forma exec. Lee la [documentación](https://docs.docker.com/reference/dockerfile/#cmd) para obtener más información.
@@ -126,7 +130,9 @@ Usemos el Dockerfile anterior pero cambiemos FROM para incluir el nombre de la e
 
 ```Dockerfile
 # El primer FROM ahora es una etapa llamada build-stage
-FROM node:20 AS build-stage # highlight-line
+# highlight-start
+FROM node:20 AS build-stage 
+# highlight-end
 
 WORKDIR /usr/src/app
 
@@ -137,11 +143,15 @@ RUN npm ci
 RUN npm run build
 
 # Esta es una nueva etapa, todo lo anterior a esta linea ha desaparecido, excepto por los archivos que queremos COPIAR
-FROM nginx:1.25-alpine # highlight-line
+# highlight-start
+FROM nginx:1.25-alpine
+# highlight-end
 
 # COPIA el directorio dist de build-stage a /usr/share/nginx/html
 # El destino fue encontrado en la pagina de Docker hub
-COPY --from=build-stage /usr/src/app/dist /usr/share/nginx/html # highlight-line
+# highlight-start
+COPY --from=build-stage /usr/src/app/dist /usr/share/nginx/html
+# highlight-end
 ```
 
 Hemos declarado también <i>otra etapa</i>, de donde solo se mueven los archivos relevantes de la primera etapa (el directorio <i>dist</i>, que contiene el contenido estático).
