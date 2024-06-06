@@ -154,7 +154,7 @@ COPY --from=build-stage /usr/src/app/dist /usr/share/nginx/html
 # highlight-end
 ```
 
-We have declared also <i>another stage</i>, to where only the relevant files of the first stage (the <i>dist</i> directory, that contains the static content) are copied.
+We have also declared <i>another stage</i>, where only the relevant files of the first stage (the <i>dist</i> directory, that contains the static content) are copied.
 
 After we build it again, the image is ready to serve the static content. The default port will be 80 for Nginx, so something like _-p 8000:80_ will work, so the parameters of the RUN command need to be changed a bit.
 

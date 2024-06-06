@@ -500,7 +500,7 @@ Build it to an image with the command:
 docker build -t initialized-mongo .
 ```
 
-Change now the <i>docker-compose.dev.yml</i> file to use the new image:
+Now change the <i>docker-compose.dev.yml</i> file to use the new image:
 
 ```yml
   mongo:
