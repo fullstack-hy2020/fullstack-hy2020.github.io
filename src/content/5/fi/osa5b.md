@@ -498,8 +498,8 @@ Full stack ‑ohjelmointi on <i>todella</i> hankalaa, ja sen takia lupaan hyödy
 - tarkkailen säännöllisesti palvelimella olevan datan tilaa, ja varmistan että frontendin lähettämä data siirtyy sinne kuten oletin
 - pidän silmällä tietokannan tilaa: varmistan että backend tallentaa datan sinne oikeaan muotoon
 - etenen pienin askelin
-- <i>kun epäinen että bugi on frontendissa, varmistan että backend toimii varmasti</i>
-- <i>kun epäinen että bugi on backendissa, varmistan että frontend toimii varmasti</i>
+- <i>kun epäilen että bugi on frontendissa, varmistan että backend toimii varmasti</i>
+- <i>kun epäilen että bugi on backendissa, varmistan että frontend toimii varmasti</i>
 - käytän koodissa ja testeissä runsaasti _console.log_-komentoja varmistamaan sen, että varmasti ymmärrän jokaisen kirjoittamani rivin, sekä etsiessäni koodista tai testeistä mahdollisia ongelman aiheuttajia
 - jos koodini ei toimi, en kirjoita enää yhtään lisää koodia, vaan alan poistamaan toiminnan rikkoneita rivejä tai palaan suosiolla tilanteeseen, missä koodi vielä toimi
 - jos testit eivät mene läpi, varmistan että testien testaama toiminnallisuus varmasti toimii sovelluksessa
@@ -702,7 +702,7 @@ Jos propsin tyyppi on väärä, eli jos esimerkiksi yritetään määritellä pr
 
 Konfiguroimme osassa 3 koodin tyylistä huolehtivan [ESLintin](/osa3/validointi_ja_es_lint) backendiin. Otetaan nyt ESLint käyttöön myös frontendissa.
 
-Vite on asentanut projektille ESLintin valmiiksi, joten ei tarvita muuta kuin muokata tiedostossa <i>.eslintrc.cjs</i> oleva konfiguraatio halutun kaltaiseksi.
+Vite on asentanut projektille ESLintin valmiiksi, joten ei tarvitse muuta kuin muokata tiedostossa <i>.eslintrc.cjs</i> oleva konfiguraatio halutun kaltaiseksi.
 
 
 Muutetaan tiedoston <i>.eslintrc.cjs</i> sisältöä seuraavasti:

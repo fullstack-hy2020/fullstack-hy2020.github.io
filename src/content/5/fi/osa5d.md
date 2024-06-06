@@ -262,7 +262,7 @@ Testejä kehitettäessä kannattaa käyttää Playwrightin [UI-moodia](https://p
 npm test -- --ui
 ```
 
-Näeme nyt että testi löytää napin 
+Näemme nyt että testi löytää napin 
 
 ![](../../images/5/play4.png)
 
@@ -1164,7 +1164,7 @@ tai määrittelemällämme npm-skriptillä _npm run test:report_
 
 Trace näyttää käytännössä samalta kuin testien suoritus UI-moodissa.
 
-UI-moodi sekä Trace viewer tarjoavat myös mahdollisuuden avustettuun lokaattorien etsimiseen. Tämä tapahtuu painamalla alapalkin vasemmanpuoleista tuplaympyrää, ja sen jälkeen klikkaamalla haluttua käyttöliittymäelmenttiä. Playwright näyttää elementin lokaattorin:
+UI-moodi sekä Trace viewer tarjoavat myös mahdollisuuden avustettuun lokaattorien etsimiseen. Tämä tapahtuu painamalla alapalkin vasemmanpuoleista tuplaympyrää, ja sen jälkeen klikkaamalla haluttua käyttöliittymäelementtiä. Playwright näyttää elementin lokaattorin:
 
 ![](../../images/5/play8.png)
 

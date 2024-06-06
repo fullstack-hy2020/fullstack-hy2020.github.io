@@ -70,7 +70,7 @@ Sivun https://studies.cs.helsinki.fi/exampleapp/ avaaminen selaimessa saa siis a
 
 ![](../../images/0/7m.png)
 
-Sekvenssikaavio kuvaa selaimen (browser) ja palvelimen (server) välisen kommunikaation aikajärjestyksessä "ylhäältä alaspäin", eli ylimpänä on ensin selaimen ensin lähettämä pyyntö, jonka jälkeen tulee palvelimen vastaus tähän pyyntöön ja tämän jälkeen selaimen seuraava pyyntö jne.
+Sekvenssikaavio kuvaa selaimen (browser) ja palvelimen (server) välisen kommunikaation aikajärjestyksessä "ylhäältä alaspäin", eli ylimpänä on ensin selaimen lähettämä pyyntö, jonka jälkeen tulee palvelimen vastaus tähän pyyntöön ja tämän jälkeen selaimen seuraava pyyntö jne.
 
 Ensin selain tekee palvelimelle HTTP GET ‑pyynnön, jonka avulla se hakee sivun HTML-koodin. HTML-koodissa olevan <i>img</i>-tagin ansiosta selain hakee palvelimelta kuvan <i>kuva.png</i>. Selain renderöi HTML-kielellä muotoillun sivun ja kuvan näytölle. Vaikka käyttäjä ei sitä helposti huomaa, alkaa sivu renderöityä näytölle jo ennen kuvan hakemista.
 

@@ -1335,14 +1335,14 @@ const adminUsers = await User.scope('admin').findAll()
 const disabledUsers = await User.scope('disabled').findAll()
 
 // users with the string jami in their name
-const jamiUsers = User.scope({ method: ['name', '%jami%'] }).findAll()
+const jamiUsers = await User.scope({ method: ['name', '%jami%'] }).findAll()
 ```
 
 It is also possible to chain scopes:
 
 ```js
 // admins with the string jami in their name
-const jamiUsers = User.scope('admin', { method: ['name', '%jami%'] }).findAll()
+const jamiUsers = await User.scope('admin', { method: ['name', '%jami%'] }).findAll()
 ```
 
 Since Sequelize models are normal [JavaScript classes](https://sequelize.org/master/manual/model-basics.html#taking-advantage-of-models-being-classes), it is possible to add new methods to them.

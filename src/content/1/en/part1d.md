@@ -1128,7 +1128,7 @@ Programming is hard, that is why I will use all the possible means to make it ea
 
 ### Utilization of Large language models
 
-Large language models such as [ChatGPT](https://chat.openai.com/auth/login), [Claude](https://claude.ai/) and [GitHub Copilot](https://github.com/ features/copilot) have proven to be very useful in software development.
+Large language models such as [ChatGPT](https://chat.openai.com/auth/login), [Claude](https://claude.ai/) and [GitHub Copilot](https://github.com/features/copilot) have proven to be very useful in software development.
 
 Personally, I mainly use Copilot, which integrates seamlessly with VS Code thanks to the [plugin](https://visualstudio.microsoft.com/github-copilot/).
 

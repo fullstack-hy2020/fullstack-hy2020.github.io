@@ -518,7 +518,7 @@ Cuando se trata de sintaxis, las clases y los objetos creados a partir de ellos 
 
 La introducción de la sintaxis de clases fue una adición controvertida. Consulta [No es impresionante: clases de ES6](https://github.com/petsel/not-awesome-es6-classes) o [¿Es la "clase" en ES6 la nueva parte "mala"?](Https://medium.com/@rajaraodv/is-class-in-es6-the-new-bad-part-6c4e6fe1ee65) para obtener más detalles.
 
-La sintaxis de la clase ES6 se usa mucho en React "antiguo" y también en Node.js, por lo que comprenderlo es beneficioso incluso en este curso. Sin embargo, dado que estamos usando la nueva función [Hooks](https://es.react.dev/reference/react) de React a lo largo de este curso, no tenemos un uso concreto para la sintaxis de clases de JavaScripts.
+La sintaxis de la clase ES6 se usa mucho en React "antiguo" y también en Node.js, por lo que comprenderlo es beneficioso incluso en este curso. Sin embargo, dado que estamos usando la nueva funcionalidad [Hooks](https://es.react.dev/reference/react) de React a lo largo de este curso, no tenemos un uso concreto para la sintaxis de clases de JavaScript.
 
 ### Materiales JavaScript
 
