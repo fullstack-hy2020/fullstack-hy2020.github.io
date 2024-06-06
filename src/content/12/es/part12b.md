@@ -425,7 +425,7 @@ Este archivo inicializará la base de datos con un usuario y algunas tareas. A c
 
 Podríamos crear una nueva imagen DESDE mongo y COPIAR el archivo, o podemos usar un <i>bind mount</i> para montar el archivo <i>mongo-init.js</i> en el contenedor. Hagamos esto último.
 
-Bind mount es el acto de vincular un archivo en la máquina host a un archivo en el contenedor. Podríamos agregar un indicador _-v_ con _container run_. La sintaxis es _-v ARCHIVO-EN-HOST:ARCHIVO-EN-CONTENEDOR_. Como ya aprendimos sobre Docker Compose, omitámoslo. El montaje de enlace se declara bajo la clave <i>volumes</i> en docker-compose. De lo contrario, el formato es el mismo, primero host y luego contenedor:
+Bind mount es el acto de vincular un archivo (o directorio) en la máquina host a un archivo (o directorio) en el contenedor. Podríamos agregar una bandera _-v_ con _container run_. La sintaxis es _-v ARCHIVO-EN-HOST:ARCHIVO-EN-CONTENEDOR_. Como ya aprendimos sobre Docker Compose, omitámoslo. El bind mount se declara bajo la clave <i>volumes</i> en _docker-compose.dev.yml_. De lo contrario, el formato es el mismo, primero host y luego contenedor:
 
 ```yml
   mongo:
