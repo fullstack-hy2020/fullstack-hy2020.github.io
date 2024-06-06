@@ -5,9 +5,6 @@ letter: c
 lang: en
 ---
 
-<div class="content">
-</div>
-
 <div class="tasks">
 
 The part was updated 21th Mar 2024: Create react app was replaced with Vite in the todo-frontend.
@@ -21,14 +18,13 @@ We have now a basic understanding of Docker and can use it to easily set up eg. 
 
 ### React in container
 
-Let's create and containerize a React application next. We start with the usual steps
+Let's create and containerize a React application next. We start with the usual steps:
 
 ```bash
 $ npm create vite@latest hello-front -- --template react
 $ cd hello-front
 $ npm install
 ```
-
 
 The next step is to turn the JavaScript code and CSS, into production-ready static files. Vite already has _build_ as an npm script so let's use that:
 
@@ -42,7 +38,7 @@ $ npm run build
   ...
 ```
 
-Great! The final step is figuring out a way to use a server to serve the static files. As you may know, we could use our [express.static](https://expressjs.com/en/starter/static-files.html) with the Express server to serve the static files. I'll leave that as an exercise for you to do at home. Instead, we are going to go ahead and start writing our Dockerfile:
+Great! The final step is figuring out a way to use a server to serve the static files. As you may know, we could use [express.static](https://expressjs.com/en/starter/static-files.html) with the Express server to serve the static files. I'll leave that as an exercise for you to do at home. Instead, we are going to go ahead and start writing our Dockerfile:
 
 ```Dockerfile
 FROM node:20
@@ -94,7 +90,7 @@ root@98fa9483ee85:/usr/src/app# serve dist
 
 ```
 
-Great! Let's ctrl+c and exit out and then add those to our Dockerfile.
+Great! Let's ctrl+c to exit out and then add those to our Dockerfile.
 
 The installation of serve turns into a RUN in the Dockerfile. This way the dependency is installed during the build process. The command to serve the <i>dist</i> directory will become the command to start the container:
 
@@ -114,15 +110,15 @@ RUN npm install -g serve # highlight-line
 CMD ["serve", "dist"] # highlight-line
 ```
 
-Our CMD now includes square brackets and as a result, we now use the so-called <i>exec form</i> of CMD. There are actually **three** different forms for the CMD out of which the exec form is preferred. Read the [documentation](https://docs.docker.com/engine/reference/builder/#cmd) for more info.
+Our CMD now includes square brackets and as a result, we now use the <i>exec form</i> of CMD. There are actually **three** different forms for CMD, out of which the exec form is preferred. Read the [documentation](https://docs.docker.com/reference/dockerfile/#cmd) for more info.
 
 When we now build the image with _docker build . -t hello-front_ and run it with _docker run -p 5001:3000 hello-front_, the app will be available in http://localhost:5001.
 
 ### Using multiple stages
 
-While serve is a <i>valid</i> option we can do better. A good goal is to create Docker images so that they do not contain anything irrelevant. With a minimal number of dependencies, images are less likely to break or become vulnerable over time. 
+While serve is a <i>valid</i> option, we can do better. A good goal is to create Docker images so that they do not contain anything irrelevant. With a minimal number of dependencies, images are less likely to break or become vulnerable over time.
 
-[Multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/) are designed to split the build process into many separate stages, where it is possible to limit what parts of the image files are moved between the stages. That opens possibilities for limiting the size of the image since not all by-products of the build are necessary for the resulting image. Smaller images are faster to upload and download and they help reduce the number of vulnerabilities your software may have.
+[Multi-stage builds](https://docs.docker.com/build/building/multi-stage/) are designed to split the build process into many separate stages, where it is possible to limit what parts of the image files are moved between the stages. That opens possibilities for limiting the size of the image since not all the by-products of the build are necessary for the resulting image. Smaller images are faster to upload and download and they help reduce the number of vulnerabilities that your software may have.
 
 With multi-stage builds, a tried and true solution like [Nginx](https://en.wikipedia.org/wiki/Nginx) can be used to serve static files without a lot of headaches. The Docker Hub [page for Nginx](https://hub.docker.com/_/nginx) tells us the required info to open the ports and "Hosting some simple static content".
 
@@ -140,17 +136,17 @@ RUN npm ci
 
 RUN npm run build
 
-# This is a new stage, everything before this is gone, except the files we want to COPY
+# This is a new stage, everything before this is gone, except for the files that we want to COPY
 FROM nginx:1.25-alpine # highlight-line
 
-# COPY the directory build from build-stage to /usr/share/nginx/html
+# COPY the directory dist from the build-stage to /usr/share/nginx/html
 # The target location here was found from the Docker hub page
 COPY --from=build-stage /usr/src/app/dist /usr/share/nginx/html # highlight-line
 ```
 
-We have declared also <i>another stage</i> where only the relevant files of the first stage (the <i>dist</i> directory, that contains the static content) are copied.
+We have declared also <i>another stage</i>, to where only the relevant files of the first stage (the <i>dist</i> directory, that contains the static content) are copied.
 
-After we build it again, the image is ready to serve the static content. The default port will be 80 for Nginx, so something like _-p 8000:80_ will work, so the parameters of the run command need to be changed a bit.
+After we build it again, the image is ready to serve the static content. The default port will be 80 for Nginx, so something like _-p 8000:80_ will work, so the parameters of the RUN command need to be changed a bit.
 
 Multi-stage builds also include some internal optimizations that may affect your builds. As an example, multi-stage builds skip stages that are not used. If we wish to use a stage to replace a part of a build pipeline, like testing or notifications, we must pass **some** data to the following stages. In some cases this is justified: copy the code from the testing stage to the build stage. This ensures that you are building the tested code.
 
@@ -166,15 +162,15 @@ Finally, we get to the todo-frontend. View the todo-app/todo-frontend and read t
 
 Start by running the frontend outside the container and ensure that it works with the backend.
 
-Containerize the application by creating <i>todo-app/todo-frontend/Dockerfile</i> and use [ENV](https://docs.docker.com/engine/reference/builder/#env) instruction to pass *VITE\_BACKEND\_URL* to the application and run it with the backend. The backend should still be running outside a container. 
+Containerize the application by creating <i>todo-app/todo-frontend/Dockerfile</i> and use the [ENV](https://docs.docker.com/engine/reference/builder/#env) instruction to pass *VITE\_BACKEND\_URL* to the application and run it with the backend. The backend should still be running outside a container. 
 
 **Note** that you need to set *VITE\_BACKEND\_URL* before building the frontend, otherwise, it does not get defined in the code!
 
 #### Exercise 12.14: Testing during the build process
 
-One interesting possibility to utilize multi-stage builds is to use a separate build stage for [testing](https://docs.docker.com/language/nodejs/run-tests/). If the testing stage fails, the whole build process will also fail. Note that it may not be the best idea to move <i>all testing</i> to be done during the building of an image, but there may be <i>some</i> containerization-related tests where it might be worth considering. 
+One interesting possibility that utilizing multi-stage builds gives us, is to use a separate build stage for [testing](https://docs.docker.com/language/nodejs/run-tests/). If the testing stage fails, the whole build process will also fail. Note that it may not be the best idea to move <i>all testing</i> to be done during the building of an image, but there may be <i>some</i> containerization-related tests where it might be worth considering. 
 
-Extract a component <i>Todo</i> that represents a single todo. Write a test for the new component and add running tests into the build process.
+Extract a component <i>Todo</i> that represents a single todo. Write a test for the new component and add running the tests into the build process.
 
 You can add a new build stage for the test if you wish to do so. If you do so, remember to read the last paragraph before exercise 12.13 again!
 
@@ -199,7 +195,7 @@ Let's start with the frontend. Since the Dockerfile will be significantly differ
 
 **Note** we shall use the name <i>dev.Dockerfile</i> for development configurations and <i>Dockerfile</i> otherwise.
 
-Starting the Vite in development mode should be easy. Let's start with the following:
+Starting Vite in development mode should be easy. Let's start with the following:
 
 ```Dockerfile
 FROM node:20
@@ -211,7 +207,7 @@ COPY . .
 # Change npm ci to npm install since we are going to be in development mode
 RUN npm install
 
-# npm start is the command to start the application in development mode
+# npm run dev is the command to start the application in development mode
 CMD ["npm", "run", "dev", "--", "--host"]
 ```
 
@@ -223,14 +219,14 @@ During build the flag _-f_ will be used to tell which file to use, it would othe
 docker build -f ./dev.Dockerfile -t hello-front-dev .
 ```
 
-The Vite will be served in port 5173, so you can test that it works by running a container with that port published.
+Vite will be served in port 5173, so you can test that it works by running a container with that port published.
 
 The second task, accessing the files with VSCode, is not yet taken care of. There are at least two ways of doing this: 
 
 - [The Visual Studio Code Remote - Containers extension](https://code.visualstudio.com/docs/remote/containers) 
 - Volumes, the same thing we used to preserve data with the database
 
-Let's go over the latter since that will work with other editors as well. Let's do a trial run with the flag _-v_, and if that works, then we will move the configuration to a docker-compose file. To use the _-v_, we will need to tell it the current directory. The command _pwd_ should output the path to the current directory for you. Try this with _echo $(pwd)_ in your command line. We can use that as the left side for _-v_ to map the current directory to the inside of the container or you can use the full directory path.
+Let's go over the latter since that will work with other editors as well. Let's do a trial run with the flag _-v_, and if that works, then we will move the configuration to a docker-compose file. To use the _-v_, we will need to tell it the current directory. The command _pwd_ should output the path to the current directory for us. Let's try this with _echo $(pwd)_ in the command line. We can use that as the left side for _-v_ to map the current directory to the inside of the container or we can use the full directory path.
 
 ```bash
 $ docker run -p 5173:5173 -v "$(pwd):/usr/src/app/" hello-front-dev
@@ -240,7 +236,7 @@ $ docker run -p 5173:5173 -v "$(pwd):/usr/src/app/" hello-front-dev
   VITE v5.1.6  ready in 130 ms
 ```
 
-Now we can edit the file <i>src/App.js</i>, and the changes should be hot-loaded to the browser!
+Now we can edit the file <i>src/App.jsx</i>, and the changes should be hot-loaded to the browser!
 
 If you have a Mac with M1/M2 processor, the above command fails. In the error message, we notice the following:
 
@@ -259,7 +255,7 @@ root@b83e9040b91d:/usr/src/app# npm install
 
 Now both versions of the library rollup are installed and the container works!  
 
-Next, let's move the config to the file <i>docker-compose.dev.yml</i>. That file should be at the root of the project as well:
+Next, let's move the config to the file <i>docker-compose.dev.yml</i>. This file should be at the root of the project as well:
 
 ```yml
 services:
@@ -275,7 +271,7 @@ services:
     container_name: hello-front-dev # This will name the container hello-front-dev
 ```
 
-With this configuration, _docker compose up_ can run the application in development mode. You don't even need Node installed to develop it!
+With this configuration, _docker compose -f docker-compose.dev.yml up_ can run the application in development mode. You don't even need Node installed to develop it!
 
 **Note** we shall use the name <i>docker-compose.dev.yml</i> for development environment compose files, and the default name <i>docker-compose.yml</i> otherwise.
 
@@ -298,9 +294,9 @@ Create <i>todo-frontend/docker-compose.dev.yml</i> and use volumes to enable the
 
 The Docker Compose tool sets up a network between the containers and includes a DNS to easily connect two containers. Let's add a new service to the Docker Compose and we shall see how the network and DNS work.
 
-[Busybox](https://www.busybox.net/) is a small executable with multiple tools you may need. It is called "The Swiss Army Knife of Embedded Linux", and we definitely can use it to our advantage.
+[Busybox](https://www.busybox.net/) is a small executable with multiple tools that you may need. It is called "The Swiss Army Knife of Embedded Linux", and we definitely can use it to our advantage.
 
-Busybox can help us to debug our configurations. So if you get lost in the later exercises of this section, you should use Busybox to find out what works and what doesn't. Let's use it to explore what was just said. That containers are inside a network and you can easily connect between them. Busybox can be added to the mix by changing <i>docker-compose.dev.yml</i> to:
+Busybox can help us to debug our configurations. So if you get lost in the later exercises of this section, you should use Busybox to find out what works and what doesn't. Let's use it to explore what was just said. That the containers are inside a network and you can easily connect between them. Busybox can be added to the mix by changing <i>docker-compose.dev.yml</i> to:
 
 ```yml
 services:
@@ -348,7 +344,7 @@ writing to stdout
       ...
 ```
 
-The URL is the interesting part here. We simply said to connect to port 5173 of the service <i>app</i>. The <i>app</i> is the name of the service specified in the <i>docker-compose.dev.yml</i>:
+The URL is the interesting part here. We simply said to connect to port 5173 of the service <i>app</i>. <i>app</i> is the name of the service specified in the <i>docker-compose.dev.yml</i> file:
 
 ```yml
 services:
@@ -422,11 +418,11 @@ services:
       - MONGO_URL=mongourl_here
 ```
 
-The URLs  are purposefully wrong, you will need to set the correct values. Remember to <i>look all the time what happens in console</i>. If and when things blow up, the error messages hint at what might be broken.
+The URLs are purposefully wrong, you will need to set the correct values. Remember to <i>look all the time what happens in the console</i>. If and when things blow up, the error messages hint at what might be broken.
 
 Here is a possibly helpful image illustrating the connections within the docker network:
 
-![](../../images/12/ex_12_15_backend_drawio.png)
+![diagram of connection between browser, backend, mongo and redis](../../images/12/ex_12_15_backend_drawio.png)
 
 </div>
 
@@ -471,7 +467,7 @@ http {
 }
 ```
 
-**Note** we are using the familiar naming convention also for Nginx, <i>nginx.dev.conf</i> for development configurations, and the default name<i>nginx.conf</i> otherwise.
+**Note** we are using the familiar naming convention also for Nginx, <i>nginx.dev.conf</i> for development configurations, and the default name <i>nginx.conf</i> otherwise.
 
 Next, create an Nginx service in the <i>docker-compose.dev.yml</i> file. Add a volume as instructed in the Docker Hub page where the right side is _:/etc/nginx/nginx.conf:ro_, the final ro declares that the volume will be <i>read-only</i>:
 
@@ -508,7 +504,7 @@ Let's test this by going inside the Nginx container and using curl to send a req
 ```bash
 $ docker exec -it reverse-proxy bash  
 
-root@374f9e62bfa8:/# curl http://localhost:80
+root@374f9e62bfa8:\# curl http://localhost:80
   <html>
   <head><title>502 Bad Gateway</title></head>
   ...
@@ -519,7 +515,7 @@ To help us, Docker Compose has set up a network when we ran _docker compose up_.
 Since we are inside the container, we can also test the DNS! Let's curl the service name (app) in port 5173
 
 ```html
-root@374f9e62bfa8:/# curl http://app:5173
+root@374f9e62bfa8:\# curl http://app:5173
 <!doctype html>
 <html lang="en">
   <head>
@@ -538,7 +534,7 @@ root@374f9e62bfa8:/# curl http://app:5173
 
 That is it! Let's replace the proxy_pass address in nginx.dev.conf with that one.
 
-One more thing: we added an option [depends_on](https://docs.docker.com/compose/compose-file/compose-file-v3/#depends_on) to the configuration that ensures that the _nginx_ container is not started before the frontend container _app_ is started:
+One more thing: we added an option [depends_on](https://docs.docker.com/compose/compose-file/05-services/#depends_on) to the configuration that ensures that the _nginx_ container is not started before the frontend container _app_ is started:
 
 ```bash
 services:
@@ -573,7 +569,6 @@ http {
 }
 ```
 
-
  Note that <i>depends\_on</i> does not guarantee that the service in the depended container is ready for action, it just ensures that the container has been started (and the corresponding entry is added to DNS). If a service needs to wait another service to become ready before the startup, [other solutions](https://docs.docker.com/compose/startup-order/) should be used.
 
 </div>
@@ -594,11 +589,11 @@ todo-app
 └── docker-compose.dev.yml // highlight-line
 ```
 
-Add the services Nginx and todo-frontend built with <i>todo-app/todo-frontend/dev.Dockerfile</i> into the <i>todo-app/docker-compose.dev.yml</i>.
+Add the services Nginx and the todo-frontend built with <i>todo-app/todo-frontend/dev.Dockerfile</i> into the <i>todo-app/docker-compose.dev.yml</i>.
 
-![](../../images/12/ex_12_16_nginx_front.png)
+![connection diagram between browser, nginx, express and frontend](../../images/12/ex_12_16_nginx_front.png)
 
-In this and the following exercises you **do not** need to support the the build option, that is, the command
+In this and the following exercises you **do not** need to support the build option, that is, the command:
 
 ```bash
 docker compose -f docker-compose.dev.yml up --build
@@ -610,7 +605,7 @@ It is enough to build the frontend and backend at their own repositories.
 
 Add the service todo-backend to the docker-compose file <i>todo-app/docker-compose.dev.yml</i> in development mode.
 
-Add a new location to the <i>nginx.dev.conf</i> so that requests to _/api_ are proxied to the backend. Something like this should do the trick:
+Add a new location to the <i>nginx.dev.conf</i> file, so that requests to _/api_ are proxied to the backend. Something like this should do the trick:
 
 ```conf
   server {
@@ -636,27 +631,27 @@ The *proxy\_pass* directive has an interesting feature with a trailing slash. As
 
 This is a [common issue](https://serverfault.com/questions/562756/how-to-remove-the-path-with-an-nginx-proxy-pass)
 
-![](../../images/12/nginx_trailing_slash_stackoverflow.png)
+![comments about forgetting to use the trailing slash](../../images/12/nginx_trailing_slash_stackoverflow.png)
 
 This illustrates what we are looking for and may be helpful if you are having trouble:
 
-![](../../images/12/nginx-back-vite.png)
+![diagram of calling / and /api in action](../../images/12/nginx-back-vite.png)
 
 #### Exercise 12.19: Connect the services, todo-frontend with todo-backend
 
 > In this exercise, submit the entire development environment, including both Express and React applications, dev.Dockerfiles and docker-compose.dev.yml.
 
-Finally, it is time to put all the pieces together. Before starting, it is essential to understand <i>where</i> the React app is actually run. The above figure might give the impression that React app is run in the container but it is totally wrong. 
+Finally, it is time to put all the pieces together. Before starting, it is essential to understand <i>where</i> the React app is actually run. The above diagram might give the impression that React app is run in the container but it is totally wrong. 
 
 It is just the <i>React app source code</i> that is in the container. When the browser hits the address http://localhost:8080 (assuming that you set up Nginx to be accessed in port 8080), the React source code gets downloaded from the container to the browser:
 
-![](../../images/12/nginx-setup-vite.png)
+![diagram showing that the react code is sent to the browser for its execution](../../images/12/nginx-setup-vite.png)
 
 Next, the browser starts executing the React app, and all the requests it makes to the backend should be done through the Nginx reverse proxy:
 
-![](../../images/12/nginx-setup2.png)
+![diagram showing requests made from the browser to /api of nginx and the proxy in action proxying the request to /todos](../../images/12/nginx-setup2.png)
 
-The frontend container is actually no more accessed beyond the first request that gets the React app source code to the browser.
+The frontend container is actually only accessed on the first request that gets the React app source code to the browser.
 
 Now set up your app to work as depicted in the above figure. Make sure that the todo-frontend works with todo-backend. It will require changes to the *VITE\_BACKEND\_URL* environmental variable in the frontend.
 
@@ -665,9 +660,9 @@ Make sure that the development environment is now fully functional, that is:
 - you can edit the source files <i>and</i> the changes take effect by reloading the app
 - frontend should access the backend through Nginx, so the requests should be done to http://localhost:8080/api/todos:
 
-![](../../images/12/todos-dev-right-2.png)
+![network tab of the browser developer tools showing that the url request includes 8080/api/todos](../../images/12/todos-dev-right-2.png)
 
-Note that your app should work even if no [exposed port](https://docs.docker.com/compose/compose-file/compose-file-v3/#ports) are defined for the backend and frontend in the docker compose file:
+Note that your app should work even if no [exposed port](https://docs.docker.com/network/#published-ports) are defined for the backend and frontend in the docker compose file:
 
 ```yml
 services:
@@ -696,7 +691,7 @@ services:
       - app
 ```
 
-We just need to expose the Nginx port to the host machine since the access to the backend and frontend is proxied to the right container port by Nginx. Because Nginx, frontend and backend are defined in the same Docker compose configuration, Docker puts those to the same [Docker network](https://docs.docker.com/compose/networking/) and thanks to that, Nginx has direct access to frontend and backend containers ports.
+We just need to expose the Nginx port to the host machine since the access to the backend and frontend is proxied to the right container port by Nginx. Because Nginx, frontend and backend are defined in the same Docker compose configuration, Docker puts those to the same [Docker network](https://docs.docker.com/network/) and thanks to that, Nginx has direct access to frontend and backend containers ports.
 
 </div>
 
@@ -718,7 +713,7 @@ If you are interested in learning more in-depth about containers come to the [De
 
 #### Exercise 12.20:
 
-Create a production <i>todo-app/docker-compose.yml</i> with all of the services, Nginx, todo-backend, todo-frontend, MongoDB and Redis. Use Dockerfiles instead of <i>dev.Dockerfiles</i> and make sure to start the applications in production mode.
+Create a production <i>todo-app/docker-compose.yml</i> file with all of the services, Nginx, todo-backend, todo-frontend, MongoDB and Redis. Use Dockerfiles instead of <i>dev.Dockerfiles</i> and make sure to start the applications in production mode.
 
 Please use the following structure for this exercise:
 
@@ -764,6 +759,7 @@ Structure the app in your submission repository as follows:
     ├── docker-compose.dev.yml
     └── docker-compose.yml
 ```
+
 ### Submitting exercises and getting the credits
 
 This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-containers).
@@ -773,7 +769,6 @@ Exercises of this part are submitted just like in the previous parts, but unlike
 Once you have completed the exercises and want to get the credits, let us know through the exercise submission system that you have completed the course:
 
 ![Submissions](../../images/11/21.png)
-
 
 **Note** that you need a registration to the corresponding course part for getting the credits registered, see [here](/en/part0/general_info#parts-and-completion) for more information.
 
