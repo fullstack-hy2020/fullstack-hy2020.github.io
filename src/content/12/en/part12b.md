@@ -5,9 +5,6 @@ letter: b
 lang: en
 ---
 
-<div class="content">
-</div>
-
 <div class="tasks">
 
 The part was updated 21th Mar 2024: Create react app was replaced with Vite in the todo-frontend.
@@ -17,7 +14,7 @@ If you started the part before the update, you can see [here](https://github.com
 
 <div class="content">
 
-In the previous section, we used two different base images: ubuntu and node and did some manual work to get a simple "Hello, World!" running. The tools and commands we learned during that process will be helpful. In this section, we will learn how to build images and configure environments for our applications. We will start with a regular Express/Node.js backend and build on top of that with other services, including a MongoDB database.
+In the previous section, we used two different base images: ubuntu and node, and did some manual work to get a simple "Hello, World!" running. The tools and commands we learned during that process will be helpful. In this section, we will learn how to build images and configure environments for our applications. We will start with a regular Express/Node.js backend and build on top of that with other services, including a MongoDB database.
 
 ### Dockerfile
 
@@ -33,7 +30,7 @@ If you did not already, create a directory on your machine and create a file cal
 inside that Dockerfile we will tell the image three things:
 
 - Use the [node:20](https://hub.docker.com/_/node) as the base for our image
-- Include the index.js inside the image, so we don't need to manually copy it into the container
+- Include the index.js file inside the image, so we don't need to manually copy it into the container
 - When we run a container from the image, use Node to execute the index.js file.
 
 The wishes above will translate into a basic Dockerfile. The best location to place this file is usually at the root of the project. 
@@ -50,7 +47,7 @@ COPY ./index.js ./index.js
 CMD node index.js
 ```
 
-FROM instruction will tell Docker that the base for the image should be node:20. COPY instruction will copy the file <i>index.js</i> from the host machine to the file with the same name in the image. CMD instruction tells what happens when _docker run_ is used. CMD is the default command that can then be overwritten with the parameter given after the image name. See _docker run --help_ if you forgot.
+FROM instruction will tell Docker that the base for the image should be node:20. COPY instruction will copy the file <i>index.js</i> from the host machine to the file with the same name in the image. CMD instruction tells what happens when _docker run_ is used. CMD is the default command that can then be overwritten with the argument given after the image name. See _docker run --help_ if you forgot.
 
 The WORKDIR instruction was slipped in to ensure we don't interfere with the contents of the image. It will guarantee all of the following commands will have <i>/usr/src/app</i> set as the working directory. If the directory doesn't exist in the base image, it will be automatically created.
 
@@ -64,7 +61,7 @@ $ docker build -t fs-hello-world .
 ...
 ```
 
-So the result is "Docker please build with tag (you may think the tag to be the name of the resulting image) <i>fs-hello-world</i> the Dockerfile in this directory". You can point to any Dockerfile, but in our case, a simple dot will mean the Dockerfile in <i>this</i> directory. That is why the command ends with a period. After the build is finished, you can run it with _docker run fs-hello-world_:
+So the result is "Docker please build with tag (you may think of the tag as the name of the resulting image.) <i>fs-hello-world</i> the Dockerfile in this directory". You can point to any Dockerfile, but in our case, a simple dot will mean the Dockerfile is in <i>this</i> directory. That is why the command ends with a period. After the build is finished, you can run it with _docker run fs-hello-world_:
 
 ```bash
 $ docker run fs-hello-world
@@ -73,7 +70,7 @@ Hello, World
 
 As images are just files, they can be moved around, downloaded and deleted. You can list the images you have locally with _docker image ls_, delete them with _docker image rm_. See what other command you have available with _docker image --help_.
 
-One more thing: in above it was mentioned that the default command, defined by the CMD in the Dockerfile, can be overridden if needed. We could e.g. open a bash session to the container and observe it's content: 
+One more thing: before it was mentioned that the default command, defined by the CMD in the Dockerfile, can be overwritten if needed. We could e.g. open a bash session to the container and observe it's content: 
 
 ```bash
 $ docker run -it fs-hello-world bash
@@ -114,7 +111,6 @@ Containerizing that should be relatively easy based on the previous example.
 - Copy ALL of the files in this directory to the image
 - Start with DEBUG=playground:* npm start
 
-
 Let's place the following Dockerfile at the root of the project:
 
 ```Dockerfile
@@ -134,7 +130,7 @@ docker build -t express-server .
 docker run -p 3123:3000 express-server
 ```
 
-The _-p_ flag in the run command will inform Docker that a port from the host machine should be opened and directed to a port in the container. The format for is _-p host-port:application-port_.
+The _-p_ flag in the run command will inform Docker that a port from the host machine should be opened and directed to a port in the container. The format is _-p host-port:application-port_.
 
 The application is now running! Let's test it by sending a GET request to [http://localhost:3123/](http://localhost:3123/).
 
@@ -161,7 +157,7 @@ There are a few steps we need to change to create a more comprehensive Dockerfil
 
 When we ran npm install on our machine, in some cases the **Node package manager** may install operating system specific dependencies during the install step. We may accidentally move non-functional parts to the image with the COPY instruction. This can easily happen if we copy the <i>node_modules</i> directory into the image.
 
-This is a critical thing to keep in mind when we build our images. It's best to do most things, such as to run _npm install_ during the build process <i>inside the container</i> rather than doing those prior to building. The easy rule of thumb is to only copy files that you would push to GitHub. Build artefacts or dependencies should not be copied since those can be installed during the build process.
+This is a critical thing to keep in mind when we build our images. It's best to do most things, such as to run _npm install_ during the build process <i>inside the container</i> rather than doing those prior to building. The easy rule of thumb is to only copy files that you would push to GitHub. Build artifacts or dependencies should not be copied since those can be installed during the build process.
 
 We can use <i>.dockerignore</i> to solve the problem. The file .dockerignore is very similar to .gitignore, you can use that to prevent unwanted files from being copied to your image. The file should be placed next to the Dockerfile. Here is a possible content of a <i>.dockerignore</i>
 
@@ -231,9 +227,13 @@ COPY . .
 
 RUN npm ci 
 
-ENV DEBUG=playground:* # highlight-line
+#highlight-start
+ENV DEBUG=playground:*
+#highlight-end
 
-CMD npm start # highlight-line
+#highlight-start
+CMD npm start
+#highlight-end
 ```
 
 > <i>If you're wondering what the DEBUG environment variable does, read [here](http://expressjs.com/en/guide/debugging.html#debugging-express).</i>
@@ -245,9 +245,9 @@ There are 2 rules of thumb you should follow when creating images:
 - Try to create as **secure** of an image as possible
 - Try to create as **small** of an image as possible
 
-Smaller images are more secure by having less attack surface area, and smaller images also move faster in deployment pipelines.
+Smaller images are more secure by having less attack surface area, and also move faster in deployment pipelines.
 
-Snyk has a great list of 10 best practices for Node/Express containerization. Read those [here](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker/).
+Snyk has a great list of the 10 best practices for Node/Express containerization. Read those [here](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker/).
 
 One big carelessness we have left is running the application as root instead of using a user with lower privileges. Let's do a final fix to the Dockerfile:
 
@@ -256,13 +256,17 @@ FROM node:20
   
 WORKDIR /usr/src/app
 
-COPY --chown=node:node . .  # highlight-line
+#highlight-start
+COPY --chown=node:node . .
+#highlight-end
 
 RUN npm ci 
 
 ENV DEBUG=playground:*
   
-USER node # highlight-line
+#highlight-start
+USER node
+#highlight-end
 
 CMD npm start
 ```
@@ -275,7 +279,7 @@ CMD npm start
 
 #### Exercise 12.5: Containerizing a Node application
 
-The repository you cloned or copied in the [first exercise](/en/part12/introduction_to_containers#exercise-12-1) contains a todo-app. See the todo-app/todo-backend and read through the README. We will not touch the todo-frontend yet.
+The repository that you cloned or copied in the [first exercise](/en/part12/introduction_to_containers#exercise-12-1) contains a todo-app. See the todo-app/todo-backend and read through the README. We will not touch the todo-frontend yet.
 
 - Step 1. Containerize the todo-backend by creating a <i>todo-app/todo-backend/Dockerfile</i> and building an image.
 
@@ -289,17 +293,15 @@ Tip: Run the application outside of a container to examine it before starting to
 
 ### Using Docker compose
 
-In the previous section, we created an Express server and knew that it runs in port 3000, and ran it with _docker build -t express-server . && docker run -p 3000:3000 express-server_. This already looks like something you would need to put into a script to remember. Fortunately, Docker offers us a better solution.
+In the previous section, we created an Express server, knowing that it will run in port 3123, and used the commands _docker build -t express-server . && docker run -p 3123:3000 express-server_ to ran it. This already looks like something you would need to put into a script to remember. Fortunately, Docker offers us a better solution.
 
 [Docker compose](https://docs.docker.com/compose/) is another fantastic tool, which can help us to manage containers. Let's start using compose as we learn more about containers as it will help us save some time with the configuration.
 
 Now we can turn the previous spell into a yaml file. The best part about yaml files is that you can save these to a Git repository!
 
-Create the file **docker-compose.yml** and place it at the root of the project, next to the Dockerfile. The file content is
+Create the file **docker-compose.yml** and place it at the root of the project, next to the Dockerfile. This time we will use the same port for host and container. The file content is:
 
 ```yaml
-version: '3.8'            # Version 3.8 is quite new and should work
-
 services:
   app:                    # The name of the service, can be anything
     image: express-server # Declares which image to use
@@ -308,13 +310,13 @@ services:
       - 3000:3000
 ```
 
-The meaning of each line is explained as a comment. If you want to see the full specification see the [documentation](https://docs.docker.com/compose/compose-file/compose-file-v3/).
+The meaning of each line is explained as a comment. If you want to see the full specification see the [documentation](https://docs.docker.com/compose/compose-file/).
 
 Now we can use _docker compose up_ to build and run the application. If we want to rebuild the images we can use _docker compose up --build_.
 
 You can also run the application in the background with _docker compose up -d_ (_-d_ for detached) and close it with _docker compose down_.
 
-> <i>Note that some older Docker versions (especially in Windows ) do not support the  command _docker compose_. One way to circumvent this problem is to [install](https://docs.docker.com/compose/install/) the stand alone command _docker-compose_ that works mostly similarly to _docker compose_. However, the preferable fix is to update the Docker to a more recent version.</i>
+> <i>Note that some older Docker versions (especially in Windows) do not support the  command _docker compose_. One way to circumvent this problem is to [install](https://docs.docker.com/compose/install/) the stand alone command _docker-compose_ that works mostly similarly to _docker compose_. However, the preferable fix is to update the Docker to a more recent version.</i>
 
 Creating files like _docker-compose.yml_ that <i>declare</i> what you want instead of script files that you need to run in a specific order / a specific number of times is often a great practice.
 
@@ -345,8 +347,6 @@ The application we met in the previous exercises uses MongoDB. Let's explore [Do
 Create a new yaml called <i>todo-app/todo-backend/docker-compose.dev.yml</i> that looks like following:
 
 ```yml
-version: '3.8'
-
 services:
   mongo:
     image: mongo
@@ -372,14 +372,14 @@ docker compose -f docker-compose.dev.yml up
 
 Now that we may have multiple compose files, it's useful.
 
-Now start the MongoDB with _docker compose -f docker-compose.dev.yml up -d_. With _-d_ it will run it in the background. You can view the output logs with _docker compose -f docker-compose.dev.yml logs -f_. There the _-f_ will ensure we <i>follow</i> the logs.
+Next, start the MongoDB with _docker compose -f docker-compose.dev.yml up -d_. With _-d_ it will run it in the background. You can view the output logs with _docker compose -f docker-compose.dev.yml logs -f_. There the _-f_ will ensure we <i>follow</i> the logs.
 
 As said previously, currently we <strong>do not</strong> want to run the Node application inside a container. Developing while the application itself is inside a container is a challenge. We will explore that option later in this part.
 
 Run the good old _npm install_ first on your machine to set up the Node application. Then start the application with the relevant environment variable. You can modify the code to set them as the defaults or use the .env file. There is no hurt in putting these keys to GitHub since they are only used in your local development environment. I'll just throw them in with the _npm run dev_ to help you copy-paste.
 
 ```bash
-$ MONGO_URL=mongodb://localhost:3456/the_database npm run dev
+MONGO_URL=mongodb://localhost:3456/the_database npm run dev
 ```
 
 This won't be enough; we need to create a user to be authorized inside of the container. The url http://localhost:3000/todos leads to an authentication error:
@@ -425,7 +425,7 @@ This file will initialize the database with a user and a few todos. Next, we nee
 
 We could create a new image FROM mongo and COPY the file inside, or we can use a [bind mount](https://docs.docker.com/storage/bind-mounts/) to mount the file <i>mongo-init.js</i> to the container. Let's do the latter.
 
-Bind mount is the act of binding a file (or directory) on the host machine to a file (or directory) in the container. A bind mount is done by adding a _-v_ flag with _container run_. The syntax is _-v FILE-IN-HOST:FILE-IN-CONTAINER_. Since we already learned about Docker Compose let's skip that. The bind mount is declared under key <i>volumes</i> in docker-compose.dev.yml. Otherwise the format is the same, first host and then container:
+Bind mount is the act of binding a file (or directory) on the host machine to a file (or directory) in the container. A bind mount is done by adding a _-v_ flag with _container run_. The syntax is _-v FILE-IN-HOST:FILE-IN-CONTAINER_. Since we already learned about Docker Compose let's skip that. The bind mount is declared under key <i>volumes</i> in _docker-compose.dev.yml_. Otherwise the format is the same, first host and then container:
 
 ```yml
   mongo:
@@ -467,7 +467,7 @@ Let's check that the http://localhost:3000/todos returns the two todos we insert
 
 For some reason, the initialization of Mongo has caused problems for many.
 
-If the app does not work and you still end up with the following error
+If the app does not work and you still end up with the following error:
 
 ```bash
 /Users/mluukkai/dev/fs-ci-lokakuu/repo/todo-app/todo-backend/node_modules/mongodb/lib/cmap/connection.js:272
@@ -486,7 +486,7 @@ docker image rm mongo
 
 After these, try to start Mongo again.
 
-If the problem persists, let us drop the idea of a volume altogether and copy the initialization script to a custom image. Create the following <i>Dockerfile</i> to the directory <i>todo-app/todo-backend/mongo</i>
+If the problem persists, let us drop the idea of a volume altogether and copy the initialization script to a custom image. Create the following <i>Dockerfile</i> to the directory <i>todo-app/todo-backend/mongo</i>:
 
 ```Dockerfile
 FROM mongo
@@ -494,13 +494,13 @@ FROM mongo
 COPY ./mongo-init.js /docker-entrypoint-initdb.d/
 ```
 
-Build it to an image with the command
+Build it to an image with the command:
 
 ```bash
 docker build -t initialized-mongo .
 ```
 
-Change now the <i>docker-compose.dev.yml</i> to use the new image:
+Now change the <i>docker-compose.dev.yml</i> file to use the new image:
 
 ```yml
   mongo:
@@ -566,7 +566,7 @@ volumes: # highlight-line
   mongo_data: # highlight-line
 ```
 
-Now the volume is created but managed by Docker. After starting the application (_docker compose -f docker-compose.dev.yml up_) you can list the volumes with _docker volume ls_, inspect one of them with _docker volume inspect_ and even delete them with _docker volume rm_: 
+Now the volume is created and managed by Docker. After starting the application (_docker compose -f docker-compose.dev.yml up_) you can list the volumes with _docker volume ls_, inspect one of them with _docker volume inspect_ and even delete them with _docker volume rm_: 
 
 ```bash
 $ docker volume ls
@@ -660,7 +660,7 @@ $ docker container run -d -p 8080:80 nginx
 > 
 > When I'm 100% sure that everything works... no, when I'm 200% sure, then I might relax a bit and start the containers in detached mode. Until everything again falls apart and it is time to open the logs again.</i>
 
-Let's look at the app by going to http://localhost:8080. It seems that the app is showing the wrong message! Let's hop right into the container and fix this. Keep your browser open, we won't need to shut down the container for this fix. We will execute bash inside the container, the flags _-it_ will ensure that we can interact with the container:
+Let's look at the app by going to http://localhost:8080. It seems that it is showing the wrong message! Let's hop right into the container and fix this. Keep your browser open, we won't need to shut down the container for this fix. We will execute bash inside the container, the flags _-it_ will ensure that we can interact with the container:
 
 ```bash
 $ docker container ls
@@ -702,13 +702,13 @@ While the MongoDB from the previous exercise is running, access the database wit
 
 The command to open CLI when inside the container is _mongosh_
 
-The Mongo CLI will require the username and password flags to authenticate correctly. Flags _-u root -p example_ should work, the values are from the docker-compose.dev.yml.
+The Mongo CLI will require the username and password flags to authenticate correctly. Flags _-u root -p example_ should work, the values are from the _docker-compose.dev.yml_.
 
 * Step 1: Run MongoDB
-* Step 2: Use docker exec to get inside the container
-* Step 3: Open Mongo cli
+* Step 2: Use <i>docker exec</i> to get inside the container
+* Step 3: Open Mongo CLI
 
-When you have connected to the Mongo cli you can ask it to show dbs inside:
+When you have connected to the Mongo CLI you can ask it to show the DBs inside:
 
 ```bash
 > show dbs
@@ -749,7 +749,7 @@ We can now access the data in those collections:
 ]
 ```
 
-Insert one new todo with the text: "Increase the number of tools in my toolbelt" with the status done as <i>false</i>. Consult the [documentation](https://docs.mongodb.com/v4.4/reference/method/db.collection.insertOne/#mongodb-method-db.collection.insertOne) to see how the addition is done.
+Insert one new todo with the text: "Increase the number of tools in my tool belt" with the status done as <i>false</i>. Consult the [documentation](https://www.mongodb.com/docs/manual/reference/method/db.collection.insertOne/) to see how the addition is done.
 
 Ensure that you see the new todo both in the Express app and when querying from Mongo CLI.
 
@@ -763,7 +763,7 @@ Ensure that you see the new todo both in the Express app and when querying from 
 
 By default, Redis works <i>in-memory</i>, which means that it does not store data persistently. 
 
-An excellent use case for Redis is to use it as a cache. Caches are often used to store data that is otherwise slow to fetch and save the data until it's no longer valid. After the cache becomes invalid, you would then fetch the data again and store it in the cache.
+An excellent use case for Redis is to use it as a cache. Caches are often used to store data that is otherwise slow to fetch and save until it's no longer valid. After the cache becomes invalid, you would then fetch the data again and store it in the cache.
 
 Redis has nothing to do with containers. But since we are already able to add <i>any</i> 3rd party service to your applications, why not learn about a new one?
 
@@ -787,14 +787,14 @@ services:
 
 Since the Docker Hub page doesn't have all the info, we can use Google to aid us. The default port for Redis is found by doing so:
 
-![](../../images/12/redis_port_by_google.png)
+![google search result for "default port for redis" is 6379](../../images/12/redis_port_by_google.png)
 
 We won't have any idea if the configuration works unless we try it. The application will not start using Redis by itself, that shall happen in the next exercise.
 
 Once Redis is configured and started, restart the backend and give it the <i>REDIS\_URL</i>, which has the form <i>redis://host:port</i>
 
 ```bash
-$ REDIS_URL=insert-redis-url-here MONGO_URL=mongodb://the_username:the_password@localhost:3456/the_database npm run dev
+REDIS_URL=insert-redis-url-here MONGO_URL=mongodb://the_username:the_password@localhost:3456/the_database npm run dev
 ```
 
 You can now test the configuration by adding the line
@@ -803,7 +803,7 @@ You can now test the configuration by adding the line
 const redis = require('../redis')
 ```
 
-to the Express server eg. in file <i>routes/index.js</i>. If nothing happens, the configuration is done right. If not, the server crashes:
+to the Express server e.g. in the file <i>routes/index.js</i>. If nothing happens, the configuration is done right. If not, the server crashes:
 
 ```bash
 events.js:291
@@ -895,7 +895,7 @@ Redis can also be used to implement the so-called [publish-subscribe](https://en
   
 #### Exercise 12.12: Persisting data in Redis
 
-Check that the data is not persisted by default: after running
+Check that the data is not persisted by default, after running:
 
 ```bash
 docker compose -f docker-compose.dev.yml down
@@ -904,7 +904,7 @@ docker compose -f docker-compose.dev.yml up
 
 the counter value is reset to 0.
 
-Then create a volume for Redis data (by modifying <i>todo-app/todo-backend/docker-compose.dev.yml </i>) and make sure that the data survives after running
+Then create a volume for Redis data (by modifying <i>todo-app/todo-backend/docker-compose.dev.yml</i>) and make sure that the data survives after running:
 
 ```bash
 docker compose -f docker-compose.dev.yml down

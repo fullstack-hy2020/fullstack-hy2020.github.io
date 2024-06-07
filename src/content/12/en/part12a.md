@@ -5,21 +5,18 @@ letter: a
 lang: en
 ---
 
-<div class="content">
-</div>
-
 <div class="tasks">
 
 The part was updated 21th Mar 2024: Create react app was replaced with Vite in the todo-frontend.
 
-If you started the part before the update, you can see [here](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/tree/4015af9dddb61cb01f013456d8728e8f553be347/src/content/12) the old material. There are some changes in the frontend configurations.
+If you started this part before the update, you can see [here](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/tree/4015af9dddb61cb01f013456d8728e8f553be347/src/content/12) the old material. There are some changes in the frontend configurations.
 </div>
 
 <div class="content">
 
-Software development includes the whole lifecycle from envisioning the software to programming and to releasing it to the end-users and even maintaining it. This part will introduce containers, a modern tool utilized in the latter parts of the software lifecycle.
+Software development includes the whole lifecycle from envisioning the software to programming and to releasing it to the end-users, and even maintaining it. This part will introduce containers, a modern tool utilized in the latter parts of the software lifecycle.
 
-Containers encapsulate your application into a single package. This package will then include all of the dependencies with the application. As a result, each container can run isolated from the other containers.
+Containers encapsulate your application into a single package. This package will include the application and all of its dependencies. As a result, each container can run isolated from the other containers.
 
 Containers prevent the application inside from accessing files and resources of the device. Developers can give the contained applications permission to access files and specify available resources. More accurately, containers are OS-level virtualization. The easiest-to-compare technology is a virtual machine (VM). VMs are used to run multiple operating systems on a single physical machine. They have to run the whole operating system, whereas a container runs the software using the host operating system. The resulting difference between VMs and containers is that there is hardly any overhead when running containers; they only need to run a single process.
 
@@ -29,7 +26,7 @@ Cloud services like AWS, Google Cloud, and Microsoft Azure all support container
 
 So containers are used in cloud environment and even during development. What are the benefits of using containers? Here are two common scenarios:
 
-<i>Scenario 1: You are developing a new application that needs to run on the same machine as a legacy application. Both require different versions of Node installed.</i>
+<i>Scenario 1: You are developing a new application that needs to run on the same machine as a legacy application. Both require installing different versions of Node.</i>
 
 You can probably use nvm, virtual machines, or dark magic to get them running at the same time. However, containers are an excellent solution as you can run both applications in their respective containers. They are isolated from each other and do not interfere.
 
@@ -41,7 +38,7 @@ Sometimes you may hear about the <i>"Works in my container"</i> issue. The phras
 
 ### About this part
 
-In this part, the focus of our attention will not be on the JavaScript code. Instead, we are interested in the configuration of the environment in which the software is executed. As a result, the exercises may not contain any coding, the applications are available to you through GitHub and your tasks will include configuring them. The exercises are to be submitted to <i>a single GitHub repository</i> which will include all of the source code and configuration you do during this part.
+In this part, the focus of our attention will not be on the JavaScript code. Instead, we are interested in the configuration of the environment in which the software is executed. As a result, the exercises may not contain any coding, the applications are available to you through GitHub and your tasks will include configuring them. The exercises are to be submitted to <i>a single GitHub repository</i> which will include all of the source code and the configurations that you do during this part.
 
 You will need basic knowledge of Node, Express, and React. Only the core parts, 1 through 5, are required to be completed before this part.
 
@@ -58,7 +55,7 @@ If you have only ever used a graphical user interface and never touched e.g. Lin
 
 #### Exercise 12.1: Using a computer (without graphical user interface)
 
-Step 1: Read the text below the Warning header.
+Step 1: Read the text below the "Warning" header.
 
 Step 2: Download this [repository](https://github.com/fullstack-hy2020/part12-containers-applications) and make it your submission repository for this part.
 
@@ -126,7 +123,7 @@ Cooking metaphor:
 
 [Docker](https://www.docker.com/) is the most popular containerization technology and pioneered the standards most containerization technologies use today. In practice, Docker is a set of products that help us to manage images and containers. This set of products will enable us to leverage all of the benefits of containers. For example, the Docker engine will take care of turning the immutable files called images into containers.
 
-For managing the Docker containers, there is also a tool called [Docker Compose](https://docs.docker.com/compose/) that allows one to **orchestrate** (control) multiple containers at the same time. In this part we shall use Docker Compose to set up a complex local development environment. In the final version of the development environment that we set up, even installing Node to our machine is not a requirement anymore.
+For managing the Docker containers, there is also a tool called [Docker Compose](https://docs.docker.com/compose/) that allows one to **orchestrate** (control) multiple containers at the same time. In this part we shall use Docker Compose to set up a complex local development environment. In the final version of the development environment that we will set up, even installing Node in our machine will not be required anymore.
 
 There are several concepts we need to go over. But we will skip those for now and learn about Docker first! 
 
@@ -157,7 +154,7 @@ The first part of the message states that we did not have the image "hello-world
 In this case the 3 missing fields defaulted to: 
 - _index.docker.io/library/hello-world:latest_
 
-The second row shows the organisation name, "library" where it will get the image. In the Docker Hub url, the "library" is shortened to _.
+The second row shows the organisation name, "library" where it will get the image. In the Docker Hub URL, the "library" is shortened to _.
 
 The 3rd and 5th rows only show the status. But the 4th row may be interesting: each image has a unique digest based on the <i>layers</i> from which the image is built. In practice, each step or command that was used in building the image creates a unique layer. The digest is used by Docker to identify that an image is the same. This is done when you try to pull the same image again.
 
@@ -205,17 +202,17 @@ If _script_ does not work, you can just copy-paste all commands you used into a 
 
 > Use _script_ to record what you do, save the file as script-answers/exercise12_2.txt
 
-The hello-world output gave us an ambitious task to do. Do the following
+The hello-world output gave us an ambitious task to do. Do the following:
 
-Step 1. Run an Ubuntu container with the command given by hello-world
+- Step 1. Run an Ubuntu container with the command given by hello-world
 
 The step 1 will connect you straight into the container with bash. You will have access to all of the files and tools inside of the container. The following steps are run within the container:
 
-Step 2. Create directory <i>/usr/src/app</i>
+- Step 2. Create directory <i>/usr/src/app</i>
 
-Step 3. Create a file <i>/usr/src/app/index.js</i>
+- Step 3. Create a file <i>/usr/src/app/index.js</i>
 
-Step 4. Run <i>exit</i> to quit from the container
+- Step 4. Run <i>exit</i> to quit from the container
 
 Google should be able to help you with creating directories and files.
 
@@ -240,9 +237,9 @@ Options:
   ...
 ```
 
-The two options, or flags, _-it_ make sure we can interact with the container. After the options, we defined that image to run is _ubuntu_. Then we have the command _bash_ to be executed inside the container when we start it.
+The two options, or flags, _-it_ make sure we can interact with the container. After the options, we defined that the image to run is _ubuntu_. Then we have the command _bash_ to be executed inside the container when we start it.
 
-You can try other commands that the ubuntu image might be able to execute. As an example try _docker container run --rm ubuntu ls_. The _ls_ command will list all of the files in the directory and _--rm_ flag will remove the container after execution. Normally containers are not deleted automatically.
+You can try other commands that the Ubuntu image might be able to execute. As an example try _docker container run --rm ubuntu ls_. The _ls_ command will list all of the files in the directory and _--rm_ flag will remove the container after execution. Normally containers are not deleted automatically.
 
 Let's continue with our first Ubuntu container with the **index.js** file inside of it. The container has stopped running since we exited it. We can list all of the containers with _container ls -a_, the _-a_ (or --all) will list containers that have already been exited.
 
@@ -252,7 +249,7 @@ CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS                      
 b8548b9faec3   ubuntu    "bash"    3 minutes ago    Exited (0) 6 seconds ago          hopeful_clarke
 ```
 
-> <i>Editor's note: that the command _docker container ls_ has also a shorter form _docker ps_</i>, I prefer the shorter one.
+> <i>Editor's note: the command _docker container ls_ has also a shorter form _docker ps_</i>, I prefer the shorter one.
 
 We have two options when addressing a container. The identifier in the first column can be used to interact with the container almost always. Plus, most commands accept the container name as a more human-friendly method of working with them. The name of the container was automatically generated to be **"hopeful_clarke"** in my case.
 
@@ -346,7 +343,7 @@ apt install -y nodejs
 
 You will need to install the _curl_ into the container. It is installed in the same way as you did with _nano_.
 
-After the installation, ensure that you can run your code inside the container with the command
+After the installation, ensure that you can run your code inside the container with the command:
 
 ```
 root@b8548b9faec3:/# node /usr/src/app/index.js
@@ -388,7 +385,7 @@ docker run -it hello-node-world bash
 root@4d1b322e1aff:/# node /usr/src/app/index.js
 ```
 
-There are multiple ways to achieve the same conclusion. Let's go through a better solution. We will clean the slate with _container rm_ to remove the old container.
+There are multiple ways to do the same. Let's try a better solution. We will clean the slate with _container rm_ to remove the old container.
 
 ```bash
 $ docker container ls -a
