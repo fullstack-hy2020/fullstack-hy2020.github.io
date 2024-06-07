@@ -224,7 +224,8 @@ import { getNotes, createNote } from './requests'
 const App = () => {
   const queryClient = useQueryClient() // highlight-line
 
-  const newNoteMutation = useMutation(createNote, {
+  const newNoteMutation = useMutation({
+    mutationFn: createNote,
     onSuccess: () => {  // highlight-line
       queryClient.invalidateQueries({ queryKey: ['notes'] }) // highlight-line
     },
