@@ -548,7 +548,7 @@ test('reverse of saippuakauppias', () => {
 })
 ```
 
-Testi ottaa käyttöönsä avainsanan _test_ sekä kirjaston [assert](https://nodejs.org/docs/latest/api/assert.html), jonka avulla testit suorittavat testattavien funktioiden tulosten tarkitamisen.
+Testi ottaa käyttöönsä avainsanan _test_ sekä kirjaston [assert](https://nodejs.org/docs/latest/api/assert.html), jonka avulla testit suorittavat testattavien funktioiden tulosten tarkistamisen.
 
 Seuraavaksi testi ottaa käyttöön testattavan funktion sijoittaen sen muuttujaan _reverse_:
 
