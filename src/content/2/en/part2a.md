@@ -653,7 +653,7 @@ Show also the sum of the exercises of the course.
 
 ![sum of exercises added feature](../../images/teht/9e.png)
 
-<h4>2.3*: Course information step 8</h4>
+<h4>2.3: Course information step 8</h4>
 
 If you haven't done so already, calculate the sum of exercises with the array method [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce).
 
@@ -738,7 +738,7 @@ The application can, for example, look like this:
 
 ![arbitrary number of courses feature add-on](../../images/teht/10e.png)
 
-<h4>2.5: Separate module step10</h4>
+<h4>2.5: Separate module step 10</h4>
 
 Declare the <i>Course</i> component as a separate module, which is imported by the <i>App</i> component. You can include all subcomponents of the course in the same module.
 
