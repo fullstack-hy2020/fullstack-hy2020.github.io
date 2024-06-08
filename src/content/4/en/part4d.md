@@ -528,7 +528,7 @@ const middleware = require('../utils/middleware');
 
 router.post('/', middleware.userExtractor, async (request, response)) => {
   // ...
-}
+})
 ```
 
 #### 4.23*: Blog List Expansion, step 11
