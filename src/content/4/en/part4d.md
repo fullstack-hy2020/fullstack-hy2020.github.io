@@ -526,7 +526,7 @@ As can be seen, this happens by chaining multiple middlewares as the arguments o
 const middleware = require('../utils/middleware');
 // ...
 
-router.post('/', middleware.userExtractor, async (request, response) => {
+router.post('/', middleware.userExtractor, async (request, response)) => {
   // ...
 }
 ```
