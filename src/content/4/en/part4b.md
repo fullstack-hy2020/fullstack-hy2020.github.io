@@ -941,7 +941,7 @@ saved
 
 Despite our use of the async/await syntax, our solution does not work as we expected it to. The test execution begins before the database is initialized!
 
-The problem is that every iteration of the forEach loop generates an asynchronous operation, and _beforeEach_ won't wait for them to finish executing. In other words, the _await_ commands defined inside of the _forEach_ loop are not in the _beforeEach_ function, but in separate functions that _beforeEach_ will not wait for.
+The problem is that every iteration of the forEach loop generates an asynchronous operation, and the ForEach method of an array expects only synchronous operations, meaning it is designed by default not to wait for asynchronous operations, so when the interpreter gets to the async function in the forEach loop it treats it like a callback function (Think Javascript Event Loop) and continues execution.
 
 Since the execution of tests begins immediately after _beforeEach_ has finished executing, the execution of tests begins before the database state is initialized.
 
