@@ -55,7 +55,7 @@ loginRouter.post('/', async (request, response) => {
 
   const userForToken = {
     username: user.username,
-    id: user._id,
+    id: user.id,
   }
 
   const token = jwt.sign(userForToken, process.env.SECRET)
@@ -103,7 +103,7 @@ If the password is correct, a token is created with the method _jwt.sign_. The t
 ```js
 const userForToken = {
   username: user.username,
-  id: user._id,
+  id: user.id,
 }
 
 const token = jwt.sign(userForToken, process.env.SECRET)
@@ -199,7 +199,7 @@ notesRouter.post('/', async (request, response) => {
   const note = new Note({
     content: body.content,
     important: body.important === undefined ? false : body.important,
-    user: user._id
+    user: user.id
   })
 
   const savedNote = await note.save()
@@ -285,7 +285,7 @@ loginRouter.post('/', async (request, response) => {
 
   const userForToken = {
     username: user.username,
-    id: user._id,
+    id: user.id,
   }
 
   // token expires in 60*60 seconds, that is, in one hour
