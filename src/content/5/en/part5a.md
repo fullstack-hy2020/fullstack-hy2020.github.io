@@ -148,8 +148,8 @@ const App = () => {
         setErrorMessage(null)
       }, 5000)
     }
-    // highlight-end
-  }
+    
+  } // highlight-end
 
   // ...
 }
