@@ -138,7 +138,7 @@ Let's not add any code dealing with Mongo to our backend just yet. Instead, let'
 ```js
 const mongoose = require('mongoose')
 
-if (process.argv.length<3) {
+if (process.argv[2].length<3) {
   console.log('give password as argument')
   process.exit(1)
 }
