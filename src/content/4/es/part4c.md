@@ -214,7 +214,7 @@ const usersRouter = require('./controllers/users')
 app.use('/api/users', usersRouter)
 ```
 
-The contents of the file, <i>controllers/users.js</i>, that defines the router is as follows:
+El contenido del archivo, <i>controllers/users.js</i>, que define el enrutador es el siguiente:
 
 ```js
 const bcrypt = require('bcrypt')
