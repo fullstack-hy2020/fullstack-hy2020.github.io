@@ -230,7 +230,7 @@ We will answer all of the questions:
 
 ![terminal output from ESlint init](../../images/3/lint1.png)
 
-The configuration will be saved in the generated <em>eslint.config.mjs</em> file:
+The configuration will be saved in the generated _eslint.config.mjs_ file:
 
 ```js
 import globals from 'globals'
@@ -265,7 +265,6 @@ The _globals_ property specifies global variables that are predefined. The sprea
 
 Finally, the _ecmaVersion_ property is set to "latest". This sets the ECMAScript version to the latest available version, meaning ESLint will understand and properly lint the latest JavaScript syntax and features.
 
-
 We want to make use of [ESLint's recommended](https://eslint.org/docs/latest/use/configure/configuration-files#using-predefined-configurations) settings along with our own. The _@eslint/js_ package we installed earlier provides us with predefined configurations for ESLint. We'll import it and enable it in the configuration file:
 
 ```js
@@ -274,7 +273,7 @@ import js from '@eslint/js'
 // ...
 
 export default [
-  js.configs.recommended,
+  js.configs.recommended, // hightlight-line
   {
     // ...
   }

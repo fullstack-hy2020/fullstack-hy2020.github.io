@@ -8,7 +8,7 @@ lang: fi
 
 Tässä osassa fokus siirtyy backendin, eli palvelimen toiminnallisuuden toteuttamiseen. Toteutamme Node.js:n Express-kirjastoa hyödyntäen yksinkertaisen REST-apin, joka tallettaa dataa MongoDB-tietokantaan. Viemme myös sovelluksemme internetiin. 
 
-<i>Osa päivitetty 9.2.2024</i>
-- <i>Ei suuria muutoksia</i>
+<i>Osa päivitetty 20.6.2024</i>
+- <i>Eslint-konfiguraatio päivitetty</i>
 
 </div>

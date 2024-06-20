@@ -282,7 +282,8 @@ Kurssilla ei ole enää vuosittaisia versiota. Kurssi on siis käynnissä koko a
 Muutoksista huolimatta <i>kaikki jo tehdyt palautukset säilyvät voimassa</i>, eli voit jatkaa kurssia päivityksistä huolimatta normaaliin tapaan.
 
 Viimeaikaisia isompia muutoksia
-- Osa 12 10 (21.3.2024): Create React app korvattu Vitellä
+- Osa 3 (20.6.2024): ESLint-konfiguraatiot päivitetty
+- Osa 12 (21.3.2024): Create React app korvattu Vitellä
 - Osat 3-5 (helmi-maaliskuu 2024): Testaukseen käytetyt kirjastot muutettu
 - Osa 10 (26.2.2024): Kirjastoversiot päivitetty
 - Osa 11 (16.1.2024): Esimerkkiprojektin riippuvuudet päivitetty
