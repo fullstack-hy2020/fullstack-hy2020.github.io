@@ -352,7 +352,7 @@ Ei ole kuitenkaan ihan selvää, mihin kohtaan komponentin koodia komento <em>ax
 ### Effect-hookit
 
 Olemme jo käyttäneet Reactin version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) mukanaan tuomia [state hookeja](https://react.dev/learn/state-a-components-memory) tuomaan funktioina määriteltyihin React-komponentteihin tilan. Versio 16.8.0 tarjoaa kokonaan uutena ominaisuutena myös
-[effect-hookit](https://react.dev/reference/react#effect-hooks), joista dokumentaatio kertoo:
+[effect-hookit](https://react.dev/reference/react/hooks#effect-hooks), joista dokumentaatio kertoo:
 
 > <i>The Effect Hook lets you perform side effects in function components.</i>
 > <i><strong>Data fetching</strong>, setting up a subscription, and manually changing the DOM in React components are all examples of side effects. </i>
