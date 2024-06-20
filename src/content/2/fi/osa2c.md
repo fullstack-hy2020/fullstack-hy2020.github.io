@@ -168,13 +168,11 @@ Nykyään lähes kaikki JavaScript-projektit määritellään node "pakkausmanag
 
 Tässä vaiheessa meitä kiinnostaa osa <i>dependencies</i>, joka määrittelee mitä <i>riippuvuuksia</i> eli ulkoisia kirjastoja projektilla on.
 
-Voisimme määritellä Axios-kirjaston suoraan tiedostoon <i>package.json</i>, mutta on parempi asentaa se komentoriviltä:
+Voisimme määritellä Axios-kirjaston suoraan tiedostoon <i>package.json</i>, mutta on parempi asentaa se komentoriviltä. **Huomaa, että _npm_-komennot tulee antaa aina projektin juurihakemistossa** eli siinä, jossa tiedosto <i>package.json</i> on.
 
 ```bash
 npm install axios
 ```
-
-**Huomaa, että _npm_-komennot tulee antaa aina projektin juurihakemistossa** eli siinä, jossa tiedosto <i>package.json</i> on.
 
 Nyt Axios on mukana riippuvuuksien joukossa:
 
