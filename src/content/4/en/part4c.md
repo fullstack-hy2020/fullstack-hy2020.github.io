@@ -448,6 +448,7 @@ notesRouter.post('/', async (request, response) => {
   response.status(201).json(savedNote)
 })
 ```
+NOTE: From this point on posting a note will require a <i>userId</i> field in the request body since Mongoose needs it to return the corresponding user object. A 500 "Internal Server Error" will pop up whenever we try to post a new note without it, which includes tests. So we need to add a <i>userId</i> field to the <i>newNote</i> objects inside <i>note_api.test.js</i> for tests to work as expected.
 
 It's worth noting that the <i>user</i> object also changes. The <i>id</i> of the note is stored in the <i>notes</i> field of the <i>user</i> object:
 
