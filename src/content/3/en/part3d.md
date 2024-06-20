@@ -502,7 +502,7 @@ export default [
 
 **NB** when you make changes to the _eslint.config.mjs_ file, it is recommended to run the linter from the command line. This will verify that the configuration file is correctly formatted:
 
-![terminal output from npm run lint](../../images/3/55.png)
+![terminal output from npm run lint](../../images/3/lint2.png)
 
 If there is something wrong in your configuration file, the lint plugin can behave quite erratically.
 
