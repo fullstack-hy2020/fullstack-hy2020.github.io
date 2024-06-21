@@ -688,7 +688,7 @@ We could refine the test to ensure that the error message is printed exactly in 
   test('login fails with wrong password', async ({ page }) => {
   // ...
 
-  const errorDiv = await page.locator('.error') // highlight-line
+  const errorDiv = page.locator('.error') // highlight-line
   await expect(errorDiv).toContainText('wrong credentials')
 })
 ```
@@ -701,7 +701,7 @@ It is possible to test the application's CSS styles with matcher [toHaveCSS](htt
   test('login fails with wrong password', async ({ page }) => {
   // ...
 
-    const errorDiv = await page.locator('.error')
+    const errorDiv = page.locator('.error')
     await expect(errorDiv).toContainText('wrong credentials')
     await expect(errorDiv).toHaveCSS('border-style', 'solid') // highlight-line
     await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)') // highlight-line
@@ -719,7 +719,7 @@ test('login fails with wrong password', async ({ page }) =>{
   await page.getByTestId('password').fill('wrong')
   await page.getByRole('button', { name: 'login' }).click()
 
-  const errorDiv = await page.locator('.error')
+  const errorDiv = page.locator('.error')
   await expect(errorDiv).toContainText('wrong credentials')
   await expect(errorDiv).toHaveCSS('border-style', 'solid')
   await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)')
