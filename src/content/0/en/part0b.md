@@ -181,7 +181,7 @@ We can try going to the address <https://studies.cs.helsinki.fi/exampleapp/data.
 
 ![Raw JSON Data](../../images/0/10e.png)
 
-There we find the notes in [JSON](https://en.wikipedia.org/wiki/JSON) "raw data". By default, Chromium-based browsers are not too good at displaying JSON data. Plugins can be used to handle the formatting. Install, for example, [JSONVue](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) on Chrome, and reload the page. The data is now nicely formatted:
+There we find the notes in [JSON](https://en.wikipedia.org/wiki/JSON) "raw data". By default, Chromium-based browsers are not too good at displaying JSON data. Plugins can be used to handle the formatting. Install, for example, [JSONView](https://chromewebstore.google.com/detail/gmegofmjomhknnokphhckolhcffdaihd) on Chrome, and reload the page. The data is now nicely formatted:
 
 ![Formatted JSON output](../../images/0/11e.png)
 

@@ -121,7 +121,7 @@ const App = () => {
 }
 ```
 
-El estado de el componente <i>App</i> ahora contiene el booleano <i>loginVisible</i>, que define si el formulario de inicio de sesión se debe mostrar al usuario o no.
+El estado del componente <i>App</i> ahora contiene el booleano <i>loginVisible</i>, que define si el formulario de inicio de sesión se debe mostrar al usuario o no.
 
 El valor de loginVisible se alterna con dos botones. Ambos botones tienen sus controladores de eventos definidos directamente en el componente:
 

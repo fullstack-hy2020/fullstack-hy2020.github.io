@@ -581,7 +581,7 @@ The exercises are submitted **One part at a time**. When you have submitted the 
 
 Note that this part has more exercises than the ones before, so <i>do not submit</i> until you have done all the exercises from this part you want to submit.
 
-<h4>2.1: Course information step6</h4>
+<h4>2.1: Course information step 6</h4>
 
 Let's finish the code for rendering course contents from exercises 1.1 - 1.5. You can start with the code from the model answers. The model answers for part 1 can be found by going to the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen), clicking on <i>my submissions</i> at the top, and in the row corresponding to part 1 under the <i>solutions</i> column clicking on <i>show</i>. To see the solution to the <i>course info</i> exercise, click on _index.js_ under <i>kurssitiedot</i> ("kurssitiedot" means "course info").
 
@@ -647,13 +647,13 @@ The application must work <i>regardless of the number of parts a course has</i>,
 
 Ensure that the console shows no errors!
 
-<h4>2.2: Course information step7</h4>
+<h4>2.2: Course information step 7</h4>
 
 Show also the sum of the exercises of the course.
 
 ![sum of exercises added feature](../../images/teht/9e.png)
 
-<h4>2.3*: Course information step8</h4>
+<h4>2.3*: Course information step 8</h4>
 
 If you haven't done so already, calculate the sum of exercises with the array method [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce).
 
@@ -675,7 +675,7 @@ const total = parts.reduce((s, p) => {
 
 **Not working? :** Use your search engine to look up how _reduce_ is used in an **Object Array**.
 
-<h4>2.4: Course information step9</h4>
+<h4>2.4: Course information step 9</h4>
 
 Let's extend our application to allow for an <i>arbitrary number</i> of courses:
 
@@ -738,7 +738,7 @@ The application can, for example, look like this:
 
 ![arbitrary number of courses feature add-on](../../images/teht/10e.png)
 
-<h4>2.5: Separate module step10</h4>
+<h4>2.5: Separate module step 10</h4>
 
 Declare the <i>Course</i> component as a separate module, which is imported by the <i>App</i> component. You can include all subcomponents of the course in the same module.
 

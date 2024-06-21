@@ -49,7 +49,7 @@ Mennään selaimella osoitteeseen <http://localhost:3001/notes>. Kuten huomaamme
 
 ![](../../images/2/14new.png)
 
-Jos selaimesi ei osaa näyttää JSON-muotoista dataa formatoituna, asenna jokin sopiva plugin, esim. [JSONVue](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) helpottamaan elämääsi.
+Jos selaimesi ei osaa näyttää JSON-muotoista dataa formatoituna, asenna jokin sopiva plugin, esim. [JSONView](https://chromewebstore.google.com/detail/gmegofmjomhknnokphhckolhcffdaihd) helpottamaan elämääsi.
 
 Jatkossa ideana onkin se, että muistiinpanot talletetaan palvelimelle eli tässä vaiheessa JSON Serverille. React-koodi hakee muistiinpanot palvelimelta ja renderöi ne ruudulle. Kun sovellukseen lisätään uusi muistiinpano, React-koodi lähettää sen myös palvelimelle, jotta uudet muistiinpanot jäävät pysyvästi "muistiin".
 
@@ -168,13 +168,11 @@ Nykyään lähes kaikki JavaScript-projektit määritellään node "pakkausmanag
 
 Tässä vaiheessa meitä kiinnostaa osa <i>dependencies</i>, joka määrittelee mitä <i>riippuvuuksia</i> eli ulkoisia kirjastoja projektilla on.
 
-Voisimme määritellä Axios-kirjaston suoraan tiedostoon <i>package.json</i>, mutta on parempi asentaa se komentoriviltä:
+Voisimme määritellä Axios-kirjaston suoraan tiedostoon <i>package.json</i>, mutta on parempi asentaa se komentoriviltä. **Huomaa, että _npm_-komennot tulee antaa aina projektin juurihakemistossa** eli siinä, jossa tiedosto <i>package.json</i> on.
 
 ```bash
 npm install axios
 ```
-
-**Huomaa, että _npm_-komennot tulee antaa aina projektin juurihakemistossa** eli siinä, jossa tiedosto <i>package.json</i> on.
 
 Nyt Axios on mukana riippuvuuksien joukossa:
 
@@ -352,7 +350,7 @@ Ei ole kuitenkaan ihan selvää, mihin kohtaan komponentin koodia komento <em>ax
 ### Effect-hookit
 
 Olemme jo käyttäneet Reactin version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) mukanaan tuomia [state hookeja](https://react.dev/learn/state-a-components-memory) tuomaan funktioina määriteltyihin React-komponentteihin tilan. Versio 16.8.0 tarjoaa kokonaan uutena ominaisuutena myös
-[effect-hookit](https://react.dev/reference/react#effect-hooks), joista dokumentaatio kertoo:
+[effect-hookit](https://react.dev/reference/react/hooks#effect-hooks), joista dokumentaatio kertoo:
 
 > <i>The Effect Hook lets you perform side effects in function components.</i>
 > <i><strong>Data fetching</strong>, setting up a subscription, and manually changing the DOM in React components are all examples of side effects. </i>

@@ -206,7 +206,7 @@ const newNoteMutation = useMutation({ mutationFn: createNote })
 
 The parameter is the function we added to the file <i>requests.js</i>, which uses Axios to send a new note to the server.
 
-The event handler <i>addNote</i> performs the mutation by calling the mutation object's function <i>mutate</i> and passing the new note as a parameter:
+The event handler <i>addNote</i> performs the mutation by calling the mutation object's function <i>mutate</i> and passing the new note as an argument:
 
 ```js
 newNoteMutation.mutate({ content, important: true })

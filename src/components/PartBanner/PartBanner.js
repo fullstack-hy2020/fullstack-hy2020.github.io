@@ -50,7 +50,7 @@ const partNameTranslations = {
     'GraphQL',
     'TypeScript',
     'React Native',
-    'CI/CD',
+    'CI/CD (Disponible en inglés)',
     'Contenedores',
     'Utilizando bases de datos relacionales',
   ],

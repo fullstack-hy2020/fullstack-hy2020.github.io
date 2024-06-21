@@ -1128,7 +1128,7 @@ Programming is hard, that is why I will use all the possible means to make it ea
 
 ### Utilization of Large language models
 
-Large language models such as [ChatGPT](https://chat.openai.com/auth/login), [Claude](https://claude.ai/) and [GitHub Copilot](https://github.com/ features/copilot) have proven to be very useful in software development.
+Large language models such as [ChatGPT](https://chat.openai.com/auth/login), [Claude](https://claude.ai/) and [GitHub Copilot](https://github.com/features/copilot) have proven to be very useful in software development.
 
 Personally, I mainly use Copilot, which integrates seamlessly with VS Code thanks to the [plugin](https://visualstudio.microsoft.com/github-copilot/).
 
@@ -1172,7 +1172,7 @@ At this point, it is worth remembering the old wisdom of  [Brian Kerningham](htt
 
 In other words, since debugging is twice as difficult as programming, it is not worth programming such code that you can only barely understand. How can debugging be even possible in a situation where programming is outsourced to a language model and the software developer does not understand the debugged code at all?
 
-So far, the development of language models and artificial intelligence is still at the stage where they are not self-sufficient, and the most difficult problems are left for humans to solve. Because of this, even novice software developers must learn to program really well just in case. It may be that, despite the development of language models, even more in-depth knowledge is needed. Artificial intelligence does the easy things, but a human is needed to sort out the most complicated messes caused by AI. GitHub Copilot is a very well-named product, it's Copilot, a second pilot who helps the main pilot in an aircraft. The programmer is still the main pilot, the captain and bears the ultimate responsibility.
+So far, the development of language models and artificial intelligence is still at the stage where they are not self-sufficient, and the most difficult problems are left for humans to solve. Because of this, even novice software developers must learn to program really well just in case. It may be that, despite the development of language models, even more in-depth knowledge is needed. Artificial intelligence does the easy things, but a human is needed to sort out the most complicated messes caused by AI. GitHub Copilot is a very well-named product, it's Copilot, a second pilot who helps the main pilot in an aircraft. The programmer is still the main pilot, the captain, and bears the ultimate responsibility.
 
 It may be in your own interest that you turn off Copilot by default when you do this course and rely on it only in a real emergency.
 
