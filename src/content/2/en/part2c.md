@@ -17,17 +17,17 @@ Create a file named <i>db.json</i> in the root directory of the previous <i>note
 {
   "notes": [
     {
-      "id": 1,
+      "id": "1",
       "content": "HTML is easy",
       "important": true
     },
     {
-      "id": 2,
+      "id": "2",
       "content": "Browser can execute only JavaScript",
       "important": false
     },
     {
-      "id": 3,
+      "id": "3",
       "content": "GET and POST are the most important methods of HTTP protocol",
       "important": true
     }
@@ -35,7 +35,7 @@ Create a file named <i>db.json</i> in the root directory of the previous <i>note
 }
 ```
 
-You can [install](https://github.com/typicode/json-server#getting-started) a JSON server globally on your machine using the command _npm install -g json-server_. A global installation requires administrative privileges, which means that it is not possible on faculty computers or freshman laptops.
+You can [install](https://github.com/typicode/json-server#getting-started) a JSON server globally on your machine using the command _npm install -g json-server_. A global installation requires administrative privileges.
 
 After installing run the following command to run the json-server. The <i>json-server</i> starts running on port 3000 by default; we will now define an alternate port 3001, for the json-server. The --watch option automatically looks for any saved changes to db.json
   
@@ -541,22 +541,22 @@ We continue with developing the phonebook. Store the initial state of the applic
     { 
       "name": "Arto Hellas", 
       "number": "040-123456",
-      "id": 1
+      "id": "1"
     },
     { 
       "name": "Ada Lovelace", 
       "number": "39-44-5323523",
-      "id": 2
+      "id": "2"
     },
     { 
       "name": "Dan Abramov", 
       "number": "12-43-234345",
-      "id": 3
+      "id": "3"
     },
     { 
       "name": "Mary Poppendieck", 
       "number": "39-23-6423122",
-      "id": 4
+      "id": "4"
     }
   ]
 }

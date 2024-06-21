@@ -185,17 +185,17 @@ const http = require('http')
 // highlight-start
 let notes = [
   {
-    id: 1,
+    id: "1",
     content: "HTML is easy",
     important: true
   },
   {
-    id: 2,
+    id: "2",
     content: "Browser can execute only JavaScript",
     important: false
   },
   {
-    id: 3,
+    id: "3",
     content: "GET and POST are the most important methods of HTTP protocol",
     important: true
   }
@@ -484,61 +484,7 @@ const id = request.params.id
 
 Jo tutuksi tulleella taulukon _find_-metodilla haetaan taulukosta parametria vastaava muistiinpano ja palautetaan se pyynnön tekijälle.
 
-Kun sovellusta testataan menemällä selaimella osoitteeseen <http://localhost:3001/api/notes/1>, havaitaan että se ei toimi, vaan selain näyttää tyhjältä. Tämä on tietenkin softadevaajan arkipäivää, ja on ruvettava debuggaamaan.
-
-Vanha hyvä keino on alkaa lisäillä koodiin _console.log_-komentoja:
-
-```js
-app.get('/api/notes/:id', (request, response) => {
-  const id = request.params.id
-  console.log(id)
-  const note = notes.find(note => note.id === id)
-  console.log(note)
-  response.json(note)
-})
-```
-
-Kun selaimella mennään jälleen osoitteeseen <http://localhost:3001/api/notes/1>, konsoliin (eli siihen terminaaliin, johon sovellus on käynnistetty) tulostuu
-
-![Konsoliin on tulostunut 'server running in port 3000' lisäksi 1 ja undefined](../../images/3/8.png)
-
-eli halutun muistiinpanon id välittyy sovellukseen aivan oikein, mutta _find_ komento ei löydä mitään.
-
-Päätetään tulostella konsoliin myös _find_-komennon sisällä olevasta vertailijafunktiosta, mikä onnistuu helposti kun tiiviissä muodossa oleva funktio <em>note => note.id === id</em> kirjoitetaan eksplisiittisen returnin sisältävässä muodossa:
-
-```js
-app.get('/api/notes/:id', (request, response) => {
-  const id = request.params.id
-  const note = notes.find(note => {
-    console.log(note.id, typeof note.id, id, typeof id, note.id === id)
-    return note.id === id
-  })
-  console.log(note)
-  response.json(note)
-})
-```
-
-Vierailtaessa jälleen yksittäisen muistiinpanon sivulla jokaisesta vertailufunktion kutsusta tulostetaan nyt monta asiaa. Konsolin tulostus on seuraava:
-
-<pre>
-1 'number' '1' 'string' false
-2 'number' '1' 'string' false
-3 'number' '1' 'string' false
-</pre>
-
-Ongelman syy selviää. Muuttujassa _id_ on tallennettuna merkkijono '1' kun taas muistiinpanojen id:t ovat numeroita. JavaScriptissä === vertailu katsoo kaikki eri tyyppiset arvot oletusarvoisesti erisuuriksi, joten 1 ei ole '1'.
-
-Korjataan ongelma muuttamalla parametrina oleva merkkijonomuotoinen id [numeroksi](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number):
-
-```js
-app.get('/api/notes/:id', (request, response) => {
-  const id = Number(request.params.id) // highlight-line
-  const note = notes.find(note => note.id === id)
-  response.json(note)
-})
-```
-
-Nyt yksittäisen resurssin hakeminen toimii.
+Testataan kokeilemalla selaimella osoittetta <http://localhost:3001/api/notes/2>:
 
 ![Yksittäistä muistiinpanoa vastaava json renderöityy](../../images/3/9new.png)
 
@@ -554,7 +500,7 @@ Tehdään koodiin muutos:
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
-  const id = Number(request.params.id)
+  const id = request.params.id
   const note = notes.find(note => note.id === id)
   
   // highlight-start
@@ -579,7 +525,7 @@ Toteutetaan seuraavaksi resurssin poistava route. Poisto tapahtuu tekemällä HT
 
 ```js
 app.delete('/api/notes/:id', (request, response) => {
-  const id = Number(request.params.id)
+  const id = request.params.id
   notes = notes.filter(note => note.id !== id)
 
   response.status(204).end()
@@ -702,11 +648,11 @@ Palataan taas sovelluksen pariin. Kun tiedämme, että sovellus vastaanottaa tie
 ```js
 app.post('/api/notes', (request, response) => {
   const maxId = notes.length > 0
-    ? Math.max(...notes.map(n => n.id)) 
+    ? Math.max(...notes.map(n => Number(n.id))) 
     : 0
 
   const note = request.body
-  note.id = maxId + 1
+  note.id = String(maxId + 1)
 
   notes = notes.concat(note)
 
@@ -714,16 +660,16 @@ app.post('/api/notes', (request, response) => {
 })
 ```
 
-Uudelle muistiinpanolle tarvitaan uniikki id. Ensin selvitetään olemassa olevista id:istä suurin muuttujaan _maxId_. Uuden muistiinpanon id:ksi asetetaan sitten _maxId + 1_. Tämä tapa ei ole kovin hyvä, mutta emme nyt välitä siitä, sillä tulemme pian korvaamaan tavan, jolla muistiinpanot talletetaan.
+Uudelle muistiinpanolle tarvitaan uniikki id. Ensin selvitetään olemassa olevista id:istä suurin muuttujaan _maxId_. Uuden muistiinpanon id:ksi asetetaan sitten _maxId + 1_ merkkijonomuodossa. Tämä tapa ei ole kovin hyvä, mutta emme nyt välitä siitä, sillä tulemme pian korvaamaan tavan, jolla muistiinpanot talletetaan.
 
 Tämänhetkisessä versiossa on vielä se ongelma, että voimme HTTP POST ‑pyynnöllä lisätä mitä tahansa kenttiä sisältäviä olioita. Parannellaan sovellusta siten, että kenttä <i>content</i> ei saa olla tyhjä. Kentälle <i>important</i> asetetaan oletusarvo false jos sen arvoa ei ole määritelty. Kaikki muut kentät hylätään:
 
 ```js
 const generateId = () => {
   const maxId = notes.length > 0
-    ? Math.max(...notes.map(n => n.id))
+    ? Math.max(...notes.map(n => Number(n.id)))
     : 0
-  return maxId + 1
+  return String(maxId + 1)
 }
 
 app.post('/api/notes', (request, response) => {
@@ -784,19 +730,19 @@ Vielä pieni huomio ennen tehtäviä. Uuden id:n generoiva funktio näyttää se
 ```js
 const generateId = () => {
   const maxId = notes.length > 0
-    ? Math.max(...notes.map(n => n.id))
+    ? Math.max(...notes.map(n => Number(n.id)))
     : 0
-  return maxId + 1
+  return String(maxId + 1)
 }
 ```
 
 Koodi sisältää hieman erikoisen näköisen rivin:
 
 ```js
-Math.max(...notes.map(n => n.id))
+Math.max(...notes.map(n => Number(n.id)))
 ```
 
-Mitä rivillä tapahtuu? <em>notes.map(n => n.id)</em> muodostaa taulukon, joka koostuu muistiinpanojen id-kentistä. [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) palauttaa maksimin sille parametrina annetuista luvuista. <em>notes.map(n => n.id)</em> on kuitenkin <i>taulukko</i>, joten se ei kelpaa parametriksi komennolle _Math.max_. Taulukko voidaan muuttaa yksittäisiksi luvuiksi käyttäen taulukon [spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)-syntaksia, eli kolmea pistettä <em>...taulukko</em>.
+Mitä rivillä tapahtuu? <em>notes.map(n => Number(n.id))</em> muodostaa taulukon, joka koostuu muistiinpanojen id-kenttiä vastaavasta numeroarvosta. [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) palauttaa maksimin sille parametrina annetuista luvuista. <em>notes.map(n => Number(n.id)))</em> on kuitenkin <i>taulukko</i>, joten se ei kelpaa parametriksi komennolle _Math.max_. Taulukko voidaan muuttaa yksittäisiksi luvuiksi käyttäen taulukon [spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)-syntaksia, eli kolmea pistettä <em>...taulukko</em>.
 
 </div>
 

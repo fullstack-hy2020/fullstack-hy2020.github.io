@@ -484,61 +484,8 @@ const id = request.params.id
 
 The now familiar _find_ method of arrays is used to find the note with an id that matches the parameter. The note is then returned to the sender of the request.
 
-When we test our application by going to <http://localhost:3001/api/notes/1> in our browser, we notice that it does not appear to work, as the browser displays an empty page. This comes as no surprise to us as software developers, and it's time to debug.
+We can now test our application by going to <http://localhost:3001/api/notes/1> in our browser:
 
-Adding _console.log_ commands into our code is a time-proven trick:
-
-```js
-app.get('/api/notes/:id', (request, response) => {
-  const id = request.params.id
-  console.log(id)
-  const note = notes.find(note => note.id === id)
-  console.log(note)
-  response.json(note)
-})
-```
-
-When we visit <http://localhost:3001/api/notes/1> again in the browser, the console - which is the terminal (in this case) - will display the following:
-
-![terminal displaying 1 then undefined](../../images/3/8.png)
-
-The id parameter from the route is passed to our application but the _find_ method does not find a matching note.
-
-To further our investigation, we also add a console log inside the comparison function passed to the _find_ method. To do this, we have to get rid of the compact arrow function syntax <em>note => note.id === id</em>, and use the syntax with an explicit return statement:
-
-```js
-app.get('/api/notes/:id', (request, response) => {
-  const id = request.params.id
-  const note = notes.find(note => {
-    console.log(note.id, typeof note.id, id, typeof id, note.id === id)
-    return note.id === id
-  })
-  console.log(note)
-  response.json(note)
-})
-```
-
-When we visit the URL again in the browser, each call to the comparison function prints a few different things to the console. The console output is the following:
-
-<pre>
-1 'number' '1' 'string' false
-2 'number' '1' 'string' false
-3 'number' '1' 'string' false
-</pre>
-
-The cause of the bug becomes clear. The _id_ variable contains a string '1', whereas the ids of notes are integers. In JavaScript, the "triple equals" comparison === considers all values of different types to not be equal by default, meaning that 1 is not '1'.
-
-Let's fix the issue by changing the id parameter from a string into a [number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number):
-
-```js
-app.get('/api/notes/:id', (request, response) => {
-  const id = Number(request.params.id) // highlight-line
-  const note = notes.find(note => note.id === id)
-  response.json(note)
-})
-```
-
-Now fetching an individual resource works.
 
 ![api/notes/1 gives a single note as JSON](../../images/3/9new.png)
 
@@ -556,7 +503,7 @@ Let's make the following change to our code:
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
-  const id = Number(request.params.id)
+  const id = request.params.id
   const note = notes.find(note => note.id === id)
   
   // highlight-start
@@ -583,7 +530,7 @@ Next, let's implement a route for deleting resources. Deletion happens by making
 
 ```js
 app.delete('/api/notes/:id', (request, response) => {
-  const id = Number(request.params.id)
+  const id = request.params.id
   notes = notes.filter(note => note.id !== id)
 
   response.status(204).end()
@@ -727,11 +674,11 @@ Let's return to the application. Once we know that the application receives data
 ```js
 app.post('/api/notes', (request, response) => {
   const maxId = notes.length > 0
-    ? Math.max(...notes.map(n => n.id)) 
+    ? Math.max(...notes.map(n => Number(n.id))) 
     : 0
 
   const note = request.body
-  note.id = maxId + 1
+  note.id = String(maxId + 1)
 
   notes = notes.concat(note)
 
@@ -739,16 +686,16 @@ app.post('/api/notes', (request, response) => {
 })
 ```
 
-We need a unique id for the note. First, we find out the largest id number in the current list and assign it to the _maxId_ variable. The id of the new note is then defined as _maxId + 1_. This method is not recommended, but we will live with it for now as we will replace it soon enough.
+We need a unique id for the note. First, we find out the largest id number in the current list and assign it to the _maxId_ variable. The id of the new note is then defined as _maxId + 1_ as a string. This method is not recommended, but we will live with it for now as we will replace it soon enough.
 
-The current version still has the problem that the HTTP POST request can be used to add objects with arbitrary properties. Let's improve the application by defining that the <i>content</i> property may not be empty. The <i>important</i> property will be given default value false. All other properties are discarded:
+The current version still has the problem that the HTTP POST request can be used to add objects with arbitrary properties. Let's improve the application by defining that the <i>content</i> property may not be empty. The <i>important</i> property will be given a default value of false. All other properties are discarded:
 
 ```js
 const generateId = () => {
   const maxId = notes.length > 0
-    ? Math.max(...notes.map(n => n.id))
+    ? Math.max(...notes.map(n => Number(n.id)))
     : 0
-  return maxId + 1
+  return String(maxId + 1)
 }
 
 app.post('/api/notes', (request, response) => {
@@ -808,19 +755,19 @@ One more thing before we move on to the exercises. The function for generating I
 ```js
 const generateId = () => {
   const maxId = notes.length > 0
-    ? Math.max(...notes.map(n => n.id))
+    ? Math.max(...notes.map(n => Number(n.id)))
     : 0
-  return maxId + 1
+  return String(maxId + 1)
 }
 ```
 
 The function body contains a row that looks a bit intriguing:
 
 ```js
-Math.max(...notes.map(n => n.id))
+Math.max(...notes.map(n => Number(n.id)))
 ```
 
-What exactly is happening in that line of code? <em>notes.map(n => n.id)</em> creates a new array that contains all the ids of the notes. [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) returns the maximum value of the numbers that are passed to it. However, <em>notes.map(n => n.id)</em> is an <i>array</i> so it can't directly be given as a parameter to _Math.max_. The array can be transformed into individual numbers by using the "three dot" [spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) syntax <em>...</em>.
+What exactly is happening in that line of code? <em>notes.map(n => n.id)</em> creates a new array that contains all the ids of the notes in number form. [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) returns the maximum value of the numbers that are passed to it. However, <em>notes.map(n => Number(n.id))</em> is an <i>array</i> so it can't directly be given as a parameter to _Math.max_. The array can be transformed into individual numbers by using the "three dot" [spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) syntax <em>...</em>.
 
 </div>
 
@@ -843,22 +790,22 @@ Data:
 ```js
 [
     { 
-      "id": 1,
+      "id": "1",
       "name": "Arto Hellas", 
       "number": "040-123456"
     },
     { 
-      "id": 2,
+      "id": "2",
       "name": "Ada Lovelace", 
       "number": "39-44-5323523"
     },
     { 
-      "id": 3,
+      "id": "3",
       "name": "Dan Abramov", 
       "number": "12-43-234345"
     },
     { 
-      "id": 4,
+      "id": "4",
       "name": "Mary Poppendieck", 
       "number": "39-23-6423122"
     }
