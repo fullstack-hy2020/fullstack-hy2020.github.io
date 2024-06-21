@@ -633,7 +633,7 @@ Let us now define a type for notes:
 
 ```js
 interface Note {
-  id: number,
+  id: string,
   content: string
 }
 ```
@@ -657,7 +657,7 @@ Rendering the notes is now easy. Let us just add some data to the state so that 
 
 ```js
 interface Note {
-  id: number,
+  id: string,
   content: string
 }
 
@@ -756,7 +756,7 @@ The code becomes
 
 ```js
 interface Note {
-  id: number,
+  id: string,
   content: string
 }
 
@@ -769,7 +769,7 @@ const App = () => {
     event.preventDefault()
     const noteToAdd = {
       content: newNote,
-      id: notes.length + 1
+      id: String(notes.length + 1)
     }
     setNotes(notes.concat(noteToAdd));
 
@@ -886,7 +886,7 @@ Let us clean up the code a bit. For the type definitions, we create a file *type
 
 ```js
 export interface Note {
-  id: number,
+  id: string,
   content: string
 }
 
