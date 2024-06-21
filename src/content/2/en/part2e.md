@@ -429,7 +429,7 @@ So on the first render, nothing is rendered. When the notes arrive from the back
 
 The method based on conditional rendering is suitable in cases where it is impossible to define the state so that the initial rendering is possible.
 
-The other thing that we still need to have a closer look is the second parameter of the useEffect:
+The other thing that we still need to have a closer look at is the second parameter of the useEffect:
 
 ```js
   useEffect(() => {
