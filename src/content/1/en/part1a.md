@@ -377,7 +377,7 @@ I really hope your console was open. If it was not, remember what you promised:
 
 > <i>I promise to keep the console open all the time during this course, and for the rest of my life when I'm doing web development</i>
 
-Software development is hard. It gets even harder if one is not using all the possible available tools such as the web-console and debug printing with _console.log_. Professionals use both <i>all the time</i> and there is no single reason why a beginner should not adopt the use of these wonderful helper methods that will make his life so much easier.
+Software development is hard. It gets even harder if one is not using all the possible available tools such as the web-console and debug printing with _console.log_. Professionals use both <i>all the time</i> and there is no single reason why a beginner should not adopt the use of these wonderful helper methods that will make their life so much easier.
 
 ### Possible error message
 
