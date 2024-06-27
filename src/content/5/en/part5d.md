@@ -1022,7 +1022,7 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-Tests break! The reason for the problem is that the command _await page.getByText('second note')_ now returns a _span_ element containing only text, and the button is outside of it.
+Tests break! The reason for the problem is that the command _await page.getByText('first note')_ now returns a _span_ element containing only text, and the button is outside of it.
 
 One way to fix the problem is as follows:
 
