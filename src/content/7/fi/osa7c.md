@@ -505,6 +505,7 @@ Luetellaan tässä kaikesta huolimatta muitakin UI-frameworkeja:
 - <https://react-spectrum.adobe.com/react-aria/index.html>
 - <https://master.co/>
 - <https://baseweb.design/>
+- <https://ui.aceternity.com/>
 
 Jos oma suosikkisi ei ole mukana, tee pull request!
 
