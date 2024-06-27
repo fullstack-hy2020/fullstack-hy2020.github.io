@@ -34,7 +34,7 @@ If your choice is Playwright, please proceed. If you end up using Cypress, go [h
 
 ### Playwright
 
-So [Playwright](https://playwright.dev/) is a newcomer to the End to End tests, which started to explode in popularity towards the end of 2023. Playwright is roughly on a par with Cypress in terms of ease of use. The libraries are slightly different in terms of how they work.  Cypress is radically different from most libraries suitable for E2E testing, as Cypress tests are run entirely within the browser. Playwright's tests, on the other hand, are executed in the Node process, which is connected to the browser via programming interfaces.
+So [Playwright](https://playwright.dev/) is a newcomer to the End to End tests, which started to explode in popularity towards the end of 2023. Playwright is roughly on par with Cypress in terms of ease of use. The libraries are slightly different in terms of how they work.  Cypress is radically different from most libraries suitable for E2E testing, as Cypress tests are run entirely within the browser. Playwright's tests, on the other hand, are executed in the Node process, which is connected to the browser via programming interfaces.
 
 Many blogs have been written about library comparisons, e.g. [this](https://www.lambdatest.com/blog/cypress-vs-playwright/) and [this](https://www.browserstack.com/guide/playwright-vs-cypress).
 
@@ -211,7 +211,7 @@ Now let's correct the outdated year in the frontend code that caused the error.
 Before we continue, let's add a _describe_ block to the tests:
 
 ```js
-const { test, describe, expect } = require('@playwright/test')
+const { test, describe, expect } = require('@playwright/test') // highlight-line
 
 describe('Note app', () => {  // highlight-line
   test('front page can be opened', async ({ page }) => {
@@ -221,7 +221,7 @@ describe('Note app', () => {  // highlight-line
     await expect(locator).toBeVisible()
     await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible()
   })
-})
+}) // highlight-line
 ```
 
 Before we move on, let's break the tests one more time. We notice that the execution of the tests is quite fast when they pass, but much slower if the they do not pass. The reason for this is that Playwright's policy is to wait for searched elements until [they are rendered and ready for action](https://playwright.dev/docs/actionability). If the element is not found, a _TimeoutError_ is raised and the test fails. Playwright waits for elements by default for 5 or 30 seconds [depending on the functions used in testing](https://playwright.dev/docs/test-timeouts#introduction).
@@ -484,7 +484,7 @@ const { test, describe, expect, beforeEach } = require('@playwright/test')
 describe('Note app', () => {
   // ....
 
-  test('user can log in', async ({ page }) => {
+  test('user can log in with correct credentials', async ({ page }) => {
     await page.getByRole('button', { name: 'log in' }).click()
     await page.getByTestId('username').fill('mluukkai')
     await page.getByTestId('password').fill('salainen')
@@ -590,7 +590,7 @@ describe('Note app', () => {
     // ...
   })
 
-  test('user can login', () => {
+  test('user can login with correct credentials', () => {
     // ...
   })
 
@@ -686,11 +686,11 @@ We could refine the test to ensure that the error message is printed exactly in 
 
 ```js
   test('login fails with wrong password', async ({ page }) => {
-  // ...
+    // ...
 
-  const errorDiv = await page.locator('.error') // highlight-line
-  await expect(errorDiv).toContainText('wrong credentials')
-})
+    const errorDiv = await page.locator('.error') // highlight-line
+    await expect(errorDiv).toContainText('wrong credentials')
+  })
 ```
 
 So the test uses the [page.locator](https://playwright.dev/docs/api/class-page#page-locator) method to find the component containing the CSS class <i>error</i> and stores it in a variable. The correctness of the text associated with the component can be verified with the expectation [toContainText](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-contain-text). Note that the [CSS class selector](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors) starts with a dot, so the <i>error</i> class selector is <i> .error</i>.
@@ -698,13 +698,13 @@ So the test uses the [page.locator](https://playwright.dev/docs/api/class-page#p
 It is possible to test the application's CSS styles with matcher [toHaveCSS](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-have-css). We can, for example, make sure that the color of the error message is red, and that there is a border around it:
 
 ```js
-  test('login fails with wrong password', async ({ page }) => {
+test('login fails with wrong password', async ({ page }) => {
   // ...
 
-    const errorDiv = await page.locator('.error')
-    await expect(errorDiv).toContainText('wrong credentials')
-    await expect(errorDiv).toHaveCSS('border-style', 'solid') // highlight-line
-    await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)') // highlight-line
+  const errorDiv = await page.locator('.error')
+  await expect(errorDiv).toContainText('wrong credentials')
+  await expect(errorDiv).toHaveCSS('border-style', 'solid') // highlight-line
+  await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)') // highlight-line
 })
 ```
 
@@ -818,7 +818,7 @@ The test becomes simpler and clearer:
 const { loginWith } = require('./helper')
 
 describe('Note app', () => {
-  test('user can log in', async ({ page }) => {
+  test('user can log in with correct credentials', async ({ page }) => {
     await loginWith(page, 'mluukkai', 'salainen') // highlight-line
     await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
   })
