@@ -384,6 +384,96 @@ Let's expand our reducer so that it can handle the change of a note's importance
 
 Since we do not have any code which uses this functionality yet, we are expanding the reducer in the 'test-driven' way. Let's start by creating a test for handling the action <i>NEW\_NOTE</i>.
 
+> **N.B:** For testing, we can either use [Vitest](https://vitest.dev/) or [Jest](https://jestjs.io/) testing library for the projects.
+
+**_Using Vitest_**
+
+Let us install Vitest and the [jsdom](https://github.com/jsdom/jsdom) library.
+
+```
+npm install --save-dev vitest jsdom
+```
+
+Let's also install another testing library that will help us render components for testing purposes.
+
+```js
+npm install --save-dev @testing-library/react @testing-library/jest-dom
+```
+
+We add a script to the <i>package.json</i> file to run the tests:
+
+```js
+{
+  "scripts": {
+    // ...
+    "test": "vitest run"
+  }
+  // ...
+}
+```
+
+Let's create a file _testSetup.js_ in the project root with the following content
+
+```js
+import { afterEach } from 'vitest'
+import { cleanup } from '@testing-library/react'
+import '@testing-library/jest-dom/vitest'
+
+afterEach(() => {
+  cleanup()
+})
+```
+
+Expand the _vite.config.js_ file as follows
+
+```js
+export default defineConfig({
+  // ...
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: './testSetup.js', 
+  }
+})
+```
+
+Let's also install another library to resolve eslint complains
+
+```
+npm install --save-dev eslint-plugin-vitest-globals
+```
+
+and enable the plugin by editing the _.eslint.cjs_ file as follows: 
+
+```js
+module.exports = {
+  root: true,
+  env: {
+    browser: true,
+    es2020: true,
+    "vitest-globals/env": true // highlight-line
+  },
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
+    'plugin:react-hooks/recommended',
+    'plugin:vitest-globals/recommended', // highlight-line
+  ],
+  // ...
+}
+```
+
+Let us install a library [user-event](https://testing-library.com/docs/user-event/intro) that makes simulating user input a bit easier:
+
+```bash
+npm install --save-dev @testing-library/user-event
+```
+
+> *if ur using Jest instead of Vitest, follow the following steps*
+
+**_Using Jest_**
+
 We have to first configure the [Jest](https://jestjs.io/) testing library for the project. Let us install the following dependencies:
 
 ```js
@@ -430,6 +520,8 @@ module.exports = {
   // ...
 }
 ```
+
+>After you have installed and configured either **Vitest** or **Jest**, continue the course material.
 
 To make testing easier, we'll first move the reducer's code to its own module, to the file <i>src/reducers/noteReducer.js</i>. We'll also add the library [deep-freeze](https://www.npmjs.com/package/deep-freeze), which can be used to ensure that the reducer has been correctly defined as an immutable function.
 Let's install the library as a development dependency:
