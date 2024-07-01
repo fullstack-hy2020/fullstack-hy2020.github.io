@@ -123,7 +123,7 @@ mongodb+srv://fullstack:thepasswordishere@cluster0.o1opl.mongodb.net/?retryWrite
 
 Ahora estamos listos para usar la base de datos.
 
-Podríamos usar la base de datos directamente desde nuestro código JavaScript con la librería de [controladores oficial MongoDb Node.js](https://mongodb.github.io/node-mongodb-native/), pero es bastante engorroso de usar. En su lugar, usaremos la libería [Mongoose](http://mongoosejs.com/index.html) que ofrece una API de nivel superior.
+Podríamos usar la base de datos directamente desde nuestro código JavaScript con la librería de [controladores oficial MongoDb Node.js](https://mongodb.github.io/node-mongodb-native/), pero es bastante engorroso de usar. En su lugar, usaremos la librería [Mongoose](http://mongoosejs.com/index.html) que ofrece una API de nivel superior.
 
 Mongoose podría describirse como un <i>object document mapper</i> (ODM) o mapeador de objetos a documentos en castellano, guardar objetos JavaScript como documentos en Mongo es sencillo con esta libería.
 
