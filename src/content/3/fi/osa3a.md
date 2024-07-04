@@ -569,7 +569,7 @@ Klikkaamalla tekstiä <i>Send Request</i>, REST client suorittaa määritellyn H
 
 ### Datan vastaanottaminen
 
-Toteutetaan seuraavana uusien muistiinpanojen lisäys, joka siis tapahtuu tekemällä HTTP POST ‑pyyntö osoitteeseen http://localhost:3001/api/notes ja liittämällä pyynnön [bodyyn] (https://fastapi.tiangolo.com/tutorial/body/) luotavan muistiinpanon tiedot JSON-muodossa.
+Toteutetaan seuraavana uusien muistiinpanojen lisäys, joka siis tapahtuu tekemällä HTTP POST ‑pyyntö osoitteeseen http://localhost:3001/api/notes ja liittämällä pyynnön [bodyyn](https://fastapi.tiangolo.com/tutorial/body/) luotavan muistiinpanon tiedot JSON-muodossa.
 
 Jotta pääsisimme pyynnön mukana lähetettyyn dataan helposti käsiksi, tarvitsemme Expressin tarjoaman [json-parserin](https://expressjs.com/en/api.html) apua. Tämä tapahtuu lisäämällä koodiin komento _app.use(express.json())_.
 
