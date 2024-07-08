@@ -1309,7 +1309,7 @@ Tee testi, joka varmistaa, että blogin lisännyt käyttäjä voi poistaa blogin
 
 Tee testi, joka varmistaa, että vain blogin lisännyt käyttäjä näkee blogin poistonapin.
 
-#### 5.23: blogilistan end to end ‑testit, step6
+#### 5.23: blogilistan end to end ‑testit, step7
 
 Tee testi, joka varmistaa, että blogit järjestetään likejen mukaiseen järjestykseen, eniten likejä saanut blogi ensin.
 
