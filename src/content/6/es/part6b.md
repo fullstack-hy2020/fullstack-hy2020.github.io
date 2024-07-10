@@ -202,10 +202,17 @@ Al simular la creación de una nota y cambiar el estado del filtro de esta maner
 
 ![consola mostrando filtro de notas y nueva nota](../../images/6/5e.png)
 
-En este punto es bueno darse cuenta de un pequeño pero importante detalle. Si agregamos un console log <i>al comienzo de ambos reducers</i>:
+En este punto es bueno darse cuenta de un pequeño pero importante detalle. Si agregamos un console log <i>al comienzo de ambos reducers (noteReducer y filterReducer)</i>:
 
 ```js
 const filterReducer = (state = 'ALL', action) => {
+  console.log('ACTION: ', action)
+  // ...
+}
+```
+
+```js
+const noteReducer = (state = initialState, action) => {
   console.log('ACTION: ', action)
   // ...
 }
