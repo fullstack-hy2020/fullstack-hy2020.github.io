@@ -111,7 +111,7 @@ You can only take the exam after submitting enough exercises for five credits. I
 By submitting at least 127 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension.
 
 - Submit at least 127 exercises for parts 0-7.
-- [Enroll in part 6 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-1d62f0e7-565b-4660-9c5a-7e7e449e352e).
+- [Enroll in part 6 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-6436f286-a8a6-441f-a688-228bcded5d72).
 - [Request credits for part 6](/en/part0/general_info/#how-to-get-your-credits).
 
 #### Part 7 - Full Stack Web Development, extension 2 (1 cr, CSM141083)
@@ -119,7 +119,7 @@ By submitting at least 127 of the exercises for parts 0-7 while working on the c
 By submitting at least 138 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension.
 
 - Submit at least 138 exercises for parts 0-7.
-- [Enroll in part 7 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-6436f286-a8a6-441f-a688-228bcded5d72).
+- [Enroll in part 7 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-4310de44-ff25-4f16-bd0f-043a6e68e801).
 - [Request credits for part 7](/en/part0/general_info/#how-to-get-your-credits).
 
 #### Part 8 - Full Stack Web Development: GraphQL (1 cr, CSM14113)
