@@ -1012,11 +1012,9 @@ Choosing between the two presented ways of defining your event handlers is mostl
 Let's extract the button into its own component:
 
 ```js
-const Button = (props) => (
-  <button onClick={props.handleClick}>
-    {props.text}
-  </button>
-)
+const Button = (props) => {
+  return <button onClick={props.handleClick}>{props.text}</button>;
+}
 ```
 
 The component gets the event handler function from the _handleClick_ prop, and the text of the button from the _text_ prop. Lets use the new component:
