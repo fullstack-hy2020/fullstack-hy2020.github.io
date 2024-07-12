@@ -260,6 +260,7 @@ import { getNotes, createNote, updateNote } from './requests' // highlight-line
 const App = () => {
   // ...
 
+  // highlight-start
   const updateNoteMutation = useMutation({
     mutationFn: updateNote,
     onSuccess: () => {
@@ -267,7 +268,6 @@ const App = () => {
     },
   })
 
-  // highlight-start
   const toggleImportance = (note) => {
     updateNoteMutation.mutate({...note, important: !note.important })
   }
