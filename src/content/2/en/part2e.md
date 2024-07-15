@@ -577,7 +577,8 @@ If there are too many (over 10) countries that match the query, then the user is
 
 If there are ten or fewer countries, but more than one, then all countries matching the query are shown:
 
-![matching countries in a list screenshot](../../images/2/19b2.png)
+<img width="250" alt="image" src="https://github.com/user-attachments/assets/1381b791-4fb6-4b02-b141-d55340462240">
+
 
 When there is only one country matching the query, then the basic data of the country (eg. capital and area), its flag and the languages spoken are shown:
 
