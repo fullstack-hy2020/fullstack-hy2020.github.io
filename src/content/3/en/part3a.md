@@ -468,7 +468,7 @@ We can define [parameters](http://expressjs.com/en/guide/routing.html#route-para
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
-  const id = request.params.id
+  const id = Number(request.params.id)
   const note = notes.find(note => note.id === id)
   response.json(note)
 })
