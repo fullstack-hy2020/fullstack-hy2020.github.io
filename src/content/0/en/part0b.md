@@ -549,7 +549,7 @@ form.onsubmit = function(e) {
 }
 ```
 
-The command <em>document.getElementById('notes_form')</em> instructs the code to fetch the form element from the page and to register an <i>event handler</i> to handle the form's submit event. The event handler immediately calls the method <em>e.preventDefault()</em> to prevent the default handling of form's submit. The default method would send the data to the server and cause a new GET request, which we don't want to happen.
+The command <em>document.getElementById('notes_form')</em> instructs the code to fetch a reference to the HTML form element on the page that has the ID "notes_form" and to register an <i>event handler</i> to handle the form's submit event. The event handler immediately calls the method <em>e.preventDefault()</em> to prevent the default handling of form's submit. The default method would send the data to the server and cause a new GET request, which we don't want to happen.
 
 Then the event handler creates a new note, adds it to the notes list with the command <em>notes.push(note)</em>, rerenders the note list on the page and sends the new note to the server.
 
