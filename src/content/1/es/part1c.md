@@ -626,7 +626,7 @@ const App = () => {
 
 Dado que ahora tenemos un componente <i>Button</i> fácilmente reutilizable, también hemos implementado una nueva funcionalidad en nuestra aplicación agregando un botón que se puede usar para disminuir el contador.
 
-El controlador de eventos se pasa al componente <i>Button</i> a través de la propiedad _handleClick_. El nombre del prop en sí no es tan significativo, pero nuestra elección de nombre no fue completamente aleatoria.
+El controlador de eventos se pasa al componente <i>Button</i> a través de la propiedad _onClick_. El nombre del prop en sí no es tan significativo, pero nuestra elección de nombre no fue completamente aleatoria.
 
 El propio [tutorial](https://es.react.dev/learn/tutorial-tic-tac-toe) oficial de React sugiere:
 "En React, es convencional usar nombres onSomething para props que representan eventos y handleSomething para las definiciones de funciones que controlan los eventos."
