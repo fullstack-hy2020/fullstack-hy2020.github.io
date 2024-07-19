@@ -273,7 +273,7 @@ import js from '@eslint/js'
 // ...
 
 export default [
-  js.configs.recommended, // hightlight-line
+  js.configs.recommended, // highlight-line
   {
     // ...
   }
