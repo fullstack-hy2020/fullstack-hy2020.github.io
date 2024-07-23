@@ -503,7 +503,7 @@ Let's make the following change to our code:
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
-  const id = request.params.id
+  const id = Number(request.params.id)
   const note = notes.find(note => note.id === id)
   
   // highlight-start
@@ -530,7 +530,7 @@ Next, let's implement a route for deleting resources. Deletion happens by making
 
 ```js
 app.delete('/api/notes/:id', (request, response) => {
-  const id = request.params.id
+  const id = Number(request.params.id)
   notes = notes.filter(note => note.id !== id)
 
   response.status(204).end()
