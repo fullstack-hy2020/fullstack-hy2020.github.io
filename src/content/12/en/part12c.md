@@ -129,7 +129,7 @@ With multi-stage builds, a tried and true solution like [Nginx](https://en.wikip
 Let's use the previous Dockerfile but change the FROM to include the name of the stage:
 
 ```Dockerfile
-# El primer FROM ahora es una etapa llamada build-stage
+# The first FROM is now a stage called build-stage
 # highlight-start
 FROM node:20 AS build-stage 
 # highlight-end
@@ -142,13 +142,13 @@ RUN npm ci
 
 RUN npm run build
 
-# Esta es una nueva etapa, todo lo anterior a esta linea ha desaparecido, excepto por los archivos que queremos COPIAR
+# This is a new stage, everything before this is gone, except for the files that we want to COPY
 # highlight-start
 FROM nginx:1.25-alpine
 # highlight-end
 
-# COPIA el directorio dist de build-stage a /usr/share/nginx/html
-# El destino fue encontrado en la pagina de Docker hub
+# COPY the directory dist from the build-stage to /usr/share/nginx/html
+# The target location here was found from the Docker hub page
 # highlight-start
 COPY --from=build-stage /usr/src/app/dist /usr/share/nginx/html
 # highlight-end
