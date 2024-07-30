@@ -7,7 +7,7 @@ lang: en
 
 <div class="tasks">
 
-The part was updated 21th Mar 2024: Create react app was replaced with Vite in the todo-frontend.
+The part was updated 21st Mar 2024: Create react app was replaced with Vite in the todo-frontend.
 
 If you started this part before the update, you can see [here](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/tree/4015af9dddb61cb01f013456d8728e8f553be347/src/content/12) the old material. There are some changes in the frontend configurations.
 </div>
