@@ -335,6 +335,23 @@ const App = () => {
 
 So now the number of button presses is definitely based on the correct number of left button presses.
 
+We can also handle asynchronous updates for the right button:
+
+```js
+const App = () => {
+  // ...
+  const handleRightClick = () => {
+    setAll(allClicks.concat('R'));
+    const updatedRight = right + 1;
+    setRight(updatedRight);
+    setTotal(left + updatedRight);
+  };
+
+  // ...
+}
+```
+
+
 ### Conditional rendering
 
 Let's modify our application so that the rendering of the clicking history is handled by a new <i>History</i> component:
