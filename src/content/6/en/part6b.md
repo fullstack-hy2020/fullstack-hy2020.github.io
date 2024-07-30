@@ -582,7 +582,7 @@ describe('noteReducer', () => {
     const newState = noteReducer(state, action)
 
     expect(newState).toHaveLength(1)
-    expect(newState.map(s => s.content)).toContainEqual(action.payload)
+    expect(newState.map(s => s.content)).toContainEqual(action.payload) // highlight-line
   })
 
   test('returns new state with action notes/toggleImportanceOf', () => {
@@ -600,7 +600,7 @@ describe('noteReducer', () => {
   
     const action = {
       type: 'notes/toggleImportanceOf', // highlight-line
-      payload: 2
+      payload: 2 // highlight-line
     }
   
     deepFreeze(state)
