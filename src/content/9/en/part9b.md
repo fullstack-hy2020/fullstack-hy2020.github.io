@@ -7,8 +7,7 @@ lang: en
 
 <div class="content">
 
-After the brief introduction to the main principles of TypeScript, we are now ready to start our journey toward becoming FullStack TypeScript developers.
-Rather than giving you a thorough introduction to all aspects of TypeScript, we will focus in this part on the most common issues that arise when developing Express backends or React frontends with TypeScript.
+After the brief introduction to the main principles of TypeScript, we are now ready to start our journey toward becoming FullStack TypeScript developers. Rather than giving you a thorough introduction to all aspects of TypeScript, we will focus in this part on the most common issues that arise when developing an Express backend or a React frontend with TypeScript.
 In addition to language features, we will also have a strong emphasis on tooling.
 
 ### Setting things up
@@ -28,7 +27,7 @@ You can install both *ts-node* and the official *typescript* package globally by
 npm install --location=global ts-node typescript
 ```
 
-If you can't or don't want to install global packages, you can create an npm project which has the required dependencies and run your scripts in it.
+If you can't or don't want to install global packages, you can create an npm project that has the required dependencies and run your scripts in it.
 We will also take this approach.
 
 As we recall from [part 3](/en/part3), an npm project is set by running the command *npm init* in an empty directory. Then we can install the dependencies by running
@@ -248,7 +247,7 @@ try {
 
 ### Type narrowing
 
-The default type of the catch block parameter *error* is *unknown*. The [unknown](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type) is a kind of top type that was introduced in TypeScript version 3 to be the type-safe counterpart of *any*. Anything is assignable to *unknown*, but *unknown* isn’t assignable to anything but itself and *any* without a type assertion or a control flow-based narrowing. Likewise, no operations are permitted on an *unknown* without first asserting or narrowing it to a more specific type.
+The default type of the catch block parameter *error* is *unknown*. The [unknown](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type) is a kind of top type that was introduced in TypeScript version 3 to be the type-safe counterpart of *any*. Anything is assignable to *unknown*, but *unknown* isn’t assignable to anything but itself and *any* without a type assertion or a control flow-based type narrowing. Likewise, no operations are permitted on an *unknown* without first asserting or narrowing it to a more specific type.
 
 Both the possible causes of exception (wrong operator or division by zero) will throw an [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) object with an error message, that our program prints to the user.
 
@@ -294,7 +293,7 @@ So what is the problem with older setups?
 
 ### @types/{npm_package}
 
-Let's return to the basic idea of TypeScript. TypeScript expects all globally-used code to be typed, as it does for your code when your project has a reasonable configuration. The TypeScript library itself contains only typings for the code of the TypeScript package. It is possible to write your own typings for a library, but that is rarely needed - since the TypeScript community has done it for us!
+Let's return to the basic idea of TypeScript. TypeScript expects all globally-used code to be typed, as it does for your code when your project has a reasonable configuration. The TypeScript library itself contains only typings for the code of the TypeScript package. It is possible to write your own typing for a library, but that is rarely needed - since the TypeScript community has done it for us!
 
 As with npm, the TypeScript world also celebrates open-source code. The community is active and continuously reacting to updates and changes in commonly used npm packages. You can almost always find the typings for npm packages, so you don't have to create types for all of your thousands of dependencies alone.
 
@@ -310,7 +309,7 @@ Sometimes, an npm package can also include its types within the code and, in tha
 
 > **NB:** Since the typings are only used before compilation, the typings are not needed in the production build and they should *always* be in the devDependencies of the package.json.
 
-Since the global variable *process* is defined by Node itself, we get its typings from the package *@types/node*.
+Since the global variable *process* is defined by the Node itself, we get its typings from the package *@types/node*.
 
 Since version 10.0 *ts-node* has defined *@types/node* as a [peer dependency](https://docs.npmjs.com/cli/v8/configuring-npm/package-json#peerdependencies). If the version of npm is at least 7.0, the peer dependencies of a project are automatically installed by npm. If you have an older npm, the peer dependency must be installed explicitly:
 
@@ -465,7 +464,7 @@ we could use the "generics syntax" and write
 let values: Array<number>;
 ```
 
-In this course we shall mostly be following the convention enforced by the Eslint rule [array-simple](https://typescript-eslint.io/rules/array-type/#array-simple) that suggests writing the simple arrays with the [] syntax and using the the <> syntax for the more complex ones, see [here](https://typescript-eslint.io/rules/array-type/#array-simple) for examples.
+In this course we shall mostly be following the convention enforced by the Eslint rule [array-simple](https://typescript-eslint.io/rules/array-type/#array-simple) that suggests writing the simple arrays with the [] syntax and using the <> syntax for the more complex ones, see [here](https://typescript-eslint.io/rules/array-type/#array-simple) for examples.
 
 </div>
 
@@ -511,7 +510,7 @@ Create an npm script for running the program with the command *npm run calculate
 
 Create the code of this exercise in file *exerciseCalculator.ts*.
 
-Write a function *calculateExercises* that calculates the average time of *daily exercise hours* and compares it to the *target amount* of daily hours and returns an object that includes the following values:
+Write a function *calculateExercises* that calculates the average time of *daily exercise hours* compares it to the *target amount* of daily hours and returns an object that includes the following values:
 
 - the number of days
 - the number of training days
@@ -573,7 +572,7 @@ $ npm run calculateExercises 2 1 0 2 4.5 0 3 1 0 4
 
 In the example, the *first argument* is the target value.
 
-Handle exceptions and errors appropriately. The exerciseCalculator should accept inputs of varied lengths. Determine by yourself how you manage to collect all needed input.
+Handle exceptions and errors appropriately. The *exerciseCalculator* should accept inputs of varied lengths. Determine by yourself how you manage to collect all needed input.
 
 A couple of things to notice:
 
@@ -608,7 +607,7 @@ We have so far used only one tsconfig rule [noImplicitAny](https://www.typescrip
 
 As mentioned, the [tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) file contains all your core configurations on how you want TypeScript to work in your project.
 
-Let's specify the following configurations in our *tsconfig.json* file:
+Let's specify the following configuration in our *tsconfig.json* file:
 
 ```json
 {
@@ -626,7 +625,7 @@ Let's specify the following configurations in our *tsconfig.json* file:
 }
 ```
 
-Do not worry too much about the *compilerOptions*; they will be under closer inspection later on.
+Do not worry too much about the *compilerOptions*, they will be under closer inspection later on.
 
 You can find explanations for each of the configurations from the TypeScript documentation or from the really handy [tsconfig page](https://www.typescriptlang.org/tsconfig), or from the tsconfig [schema definition](http://json.schemastore.org/tsconfig), which unfortunately is formatted a little worse than the first two options.
 
@@ -673,7 +672,7 @@ app.listen(PORT, () => {
 });
 ```
 
-Everything else seems to be working just fine but, as you'd expect, the *req* and *res* parameters of *app.get* need typing. If you look carefully, VSCode is also complaining about the importing of Express. You can see a short yellow line of dots under *require*. Let's hover over the problem:
+Everything else seems to be ok but, as you'd expect, the *req* and *res* parameters of *app.get* need typing. If you look carefully, VSCode is also complaining about the importing of Express. You can see a short yellow line of dots under *require*. Let's hover over the problem:
 
 ![vscode warning to change require to import](../../images/9/6.png)
 
@@ -697,7 +696,9 @@ Let's do what the suggestion says and run:
 npm install --save-dev @types/express
 ```
 
-And no more errors! Let's take a look at what changed.
+There should not be any errors remaining. Note that you may need to reopen the file in the editor to get VS Code in sync. 
+
+Let's take a look at what changed.
 
 When we hover over the *require* statement, we can see that the compiler interprets everything express-related to be of type *any*.
 
@@ -709,8 +710,7 @@ Whereas when we use *import*, the editor knows the actual types:
 
 Which import statement to use depends on the export method used in the imported package.
 
-A good rule of thumb is to try importing a module using the *import* statement first. We will always use this method in the *frontend*.
-If *import* does not work, try a combined method: *import ... = require('...')*.
+A good rule of thumb is to try importing a module using the *import* statement first. We have already used this method in the frontend. If *import* does not work, try a combined method: *import ... = require('...')*.
 
 We strongly suggest you read more about TypeScript modules [here](https://www.typescriptlang.org/docs/handbook/modules.html).
 
@@ -862,9 +862,9 @@ To get this working, we must add an *export* to the function *calculator*:
 export const calculator = (a: number, b: number, op: Operation) : number => {
 ```
 
-When you hover over the *calculate* function, you can see the typing of the *calculator* even though the code itself does not contain any typings:
+When you hover over the *calculate* function, you can see the typing of the *calculator* even though the code itself does not contain any typing:
 
-![vscode showing calculator types when hovering function](../../images/9/12a21.png)
+![vscode showing calculator types when hovering the function](../../images/9/12a21.png)
 
 But if you hover over the values parsed from the request, an issue arises:
 
@@ -892,28 +892,33 @@ What if we would like to restrict developers from using the *any* type? Fortunat
 Let's install ESlint and its TypeScript extensions:
 
 ```shell
-npm install --save-dev eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser
+npm install --save-dev eslint @eslint/js @types/eslint__js typescript typescript-eslint
 ```
 
-We will configure ESlint to [disallow explicit any]( https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/docs/rules/no-explicit-any.md). Write the following rules to *.eslintrc.json*:
+We will configure ESlint to [disallow explicit any]( https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/docs/rules/no-explicit-any.md). Write the following rules to *eslint.config.mjs*:
 
-```json
-{
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaVersion": 11,
-    "sourceType": "module"
+```js
+import tseslint from 'typescript-eslint';
+
+export default tseslint.config({
+  files: ['**/*.ts'],
+  extends: [
+    eslint.configs.recommended,
+    ...tseslint.configs.recommendedTypeChecked,
+  ],
+  languageOptions: {
+    parserOptions: {
+      project: true,
+      tsconfigRootDir: import.meta.dirname,
+    },
   },
-  "plugins": ["@typescript-eslint"],
-  "rules": {
-    "@typescript-eslint/no-explicit-any": 2 // highlight-line
-  }
-}
+  rules: {
+    '@typescript-eslint/no-explicit-any': 'error',
+  },
+});
 ```
 
-(Newer versions of ESlint have this rule on by default, so you don't necessarily need to add it separately.)
-
-Let us also set up a *lint* npm script to inspect the files with *.ts* extension by modifying the *package.json* file:
+Let us also set up a *lint* npm script to inspect the files by modifying the *package.json* file:
 
 ```json
 {
@@ -921,7 +926,7 @@ Let us also set up a *lint* npm script to inspect the files with *.ts* extension
   "scripts": {
       "start": "ts-node index.ts",
       "dev": "ts-node-dev index.ts",
-      "lint": "eslint --ext .ts ." // highlight-line
+      "lint": "eslint ." // highlight-line
       //  ...
   },
   // ...
@@ -932,42 +937,41 @@ Now lint will complain if we try to define a variable of type *any*:
 
 ![vscode showing ESlint complaining about using the any type](../../images/9/13b.png)
 
-[@typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) has a lot of TypeScript-specific ESlint rules, but you can also use all basic ESlint rules in TypeScript projects.
-For now, we should probably go with the recommended settings, and we will modify the rules as we go along whenever we find something we want to change the behavior of.
+[@typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) has a lot of TypeScript-specific ESlint rules, but you can also use all basic ESlint rules in TypeScript projects. For now, we should probably go with the recommended settings, and we will modify the rules as we go along whenever we find something we want to change the behavior of.
 
-On top of the recommended settings, we should try to get familiar with the coding style required in this part and *set the semicolon at the end of each line of code to be required*.
+On top of the recommended settings, we should try to get familiar with the coding style required in this part and <i>set the semicolon at the end of each line of code to be required</i>.
 
-So we will use the following *.eslintrc.json*
+So we will use the following *eslint.config.mjs*
 
-```json
-{
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+```js
+import tseslint from 'typescript-eslint';
+
+export default tseslint.config({
+  files: ['**/*.ts'],
+  extends: [
+    eslint.configs.recommended,
+    ...tseslint.configs.recommendedTypeChecked,
   ],
-  "plugins": ["@typescript-eslint"],
-  "env": {
-    "node": true,
-    "es6": true
+  languageOptions: {
+    parserOptions: {
+      project: true,
+      tsconfigRootDir: import.meta.dirname,
+    },
   },
-  "rules": {
-    "@typescript-eslint/semi": ["error"],
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/explicit-module-boundary-types": "off",
-    "@typescript-eslint/restrict-template-expressions": "off",
-    "@typescript-eslint/restrict-plus-operands": "off",
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      { "argsIgnorePattern": "^_" }
+  rules: {
+    '@typescript-eslint/no-unsafe-assignment': 'error',
+    '@typescript-eslint/no-explicit-any': 'error',
+    '@typescript-eslint/semi': 'error',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/restrict-template-expressions': 'off',
+    '@typescript-eslint/restrict-plus-operands': 'off',
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      { 'argsIgnorePattern': '^_' }
     ],
-    "no-case-declarations": "off"
   },
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "project": "./tsconfig.json"
-  }
-}
+});
 ```
 
 Quite a few semicolons are missing, but those are easy to add. We also have to solve the ESlint issues concerning the *any* type:
@@ -992,7 +996,7 @@ app.post('/calculate', (req, res) => {
 
 However this still leaves one problem to deal with, the last parameter in the function call is not safe:
 
-![vscode showing unsafe argument of any type assigned to parameter of type Operation](../../images/9/51x.png)
+![vscode showing unsafe argument of any type assigned to the parameter of type Operation](../../images/9/51x.png)
 
 We can just disable another ESlint rule to get rid of that:
 
@@ -1040,7 +1044,7 @@ Using a [type assertion](https://www.typescriptlang.org/docs/handbook/2/everyday
 export type Operation = 'multiply' | 'add' | 'divide';
 ```
 
-Now we can import the type and use a *type assertion* to tell the TypeScript compiler what type a variable has:
+Now we can import the type and use the type assertion *as* to tell the TypeScript compiler what type a variable has:
 
 ```js
 import { calculator, Operation } from './calculator'; // highlight-line
@@ -1077,7 +1081,7 @@ app.post('/calculate', (req, res) => {
 });
 ```
 
-Using a type assertion (or quieting an Eslint rule) is always a bit risky thing. It leaves the TypeScript compiler off the hook, the compiler just trusts that we as developers know what we are doing. If the asserted type does *not* have the right kind of value, the result will be a runtime error, so one must be pretty careful when validating the data if a type assertion is used.
+Using a type assertion (or quieting an Eslint rule) is always a bit risky thing. It leaves the TypeScript compiler off the hook, the compiler just trusts that we as developers know what we are doing. If the asserted type <i>does not</i> have the right kind of value, the result will be a runtime error, so one must be pretty careful when validating the data if a type assertion is used.
 
 In the next chapter, we shall have a look at [type narrowing](https://www.typescriptlang.org/docs/handbook/2/narrowing.html) which will provide a much more safe way of giving a stricter type for data that is coming from an external source.
 
