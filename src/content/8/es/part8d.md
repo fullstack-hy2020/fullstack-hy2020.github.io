@@ -331,7 +331,13 @@ Implemente una vista que muestre todos los libros según el género favorito del
 En los dos ejercicios anteriores, el filtrado se podría haber hecho usando solo React.
 Para completar este ejercicio, debe volver a realizar el filtrado de los libros según un género seleccionado (que se realizó en el ejercicio 8.19) usando una consulta GraphQL al servidor. Si ya lo hizo, no tiene que hacer nada.
 
-Este y los siguientes ejercicios son bastante **desafiantes** como debería ser a esta altura del curso. Es posible que desee completar primero los más fáciles en la [siguiente parte](/es/part8/fragments_and_subscriptions).
+Este y los siguientes ejercicios son bastante **desafiantes** como debería ser a esta altura del curso. Es posible que desee completar primero los más fáciles en la 
+
+```
+El vinculo que sigue más abajo esta roto, por favor revisar...
+[siguiente parte](/es/part8/fragments_and_subscriptions)
+```
+[siguiente parte](/es/part8/fragments_and_subscriptions).
 
 #### 8.22 Caché actualizado y recomendaciones de libros
 
