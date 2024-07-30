@@ -10,37 +10,49 @@ lang: zh
 
  我们现在将开始入门的可能是本课程最重要的主题，即[React](https://reactjs.org/)-库。让我们从制作一个简单的React应用开始，同时了解React的核心概念。
 
-<!-- The easiest way to get started by far is by using a tool called [create-react-app](https://github.com/facebook/create-react-app). It is possible (but not necessary) to install <i>create-react-app</i> on your machine if the <i>npm</i> tool that was installed along with Node has a version number of at least <i>5.3</i>.-->
- 到目前为止，最简单的方法是使用一个叫做[create-react-app](https://github.com/facebook/create-react-app)的工具来开始。如果随Node一起安装的<i>npm</i>工具的版本号是<i>5.3</i>以上，那么在你的机器上安装<i>create-react-app</i>是可行的（但不是必须的）。
-
-<!-- Let's create an application called <i>part1</i> and navigate to its directory.-->
- 让我们创建一个名为<i>part1</i>的应用，并进入其目录。
+<!-- The easiest way to get started by far is by using a tool called [Vite](https://vitejs.dev/).-->
+ 到目前为止，最简单的方法是使用一个叫做[Vite]([https://github.com/facebook/create-react-app](https://vitejs.dev/))的工具来开始。
+ 
+<!-- Let's create an application called <i>part1</i>, navigate to its directory and install the libraries:-->
+ 让我们创建一个名为<i>part1</i>的应用，进入其目录并安装库。
 
 ```bash
-npx create-react-app part1
+# npm 6.x (outdated, but still used by some):
+npm create vite@latest part1 --template react
+
+# npm 7+, extra double-dash is needed:
+npm create vite@latest part1 -- --template react
+```
+
+```bash
 cd part1
+npm install
 ```
 
 <!-- The application is run as follows-->
 该应用的运行方式如下
 
 ```bash
-npm start
+npm run dev
 ```
 
-<!-- By default, the application runs in localhost port 3000 with the address <http://localhost:3000>-->
- 默认情况下，该应用在本地主机的3000端口运行，地址为<http://localhost:3000>。
+<!-- The console says that the application has started on localhost port 5173, i.e. the address <http://localhost:5173/>:-->
+ 控制台显示该应用已在本地主机的5173端口运行，地址为<http://localhost:5173/>。
 
-<!-- Your default browser should launch automatically. Open the browser console **immediately**. Also open a text editor so that you can view the code as well as the web-page at the same time on the screen:-->
-默认浏览器应该自动启动。**立即**打开浏览器的控制台。同时打开一个文本编辑器，这样你就可以在屏幕上同时查看代码和网页。
+ ![screenshot of the console running vite on localhost 5173](../../images/1/1-vite1.png)
 
-![](../../images/1/1e.png)
+<!-- Vite starts the application [by default](https://vitejs.dev/config/server-options.html#server-port) on port 5173. If it is not free, Vite uses the next free port number.-->
+Vite[默认](https://vitejs.dev/config/server-options.html#server-port)启动应用在端口5173。如果这个端口被占用，Vite使用下一个空闲端口号。
 
-<!-- The code of the application resides in the <i>src</i> folder. Let's simplify the default code such that the contents of the file <i>index.js</i> look like:-->
- 应用的代码位于<i>src</i>文件夹中。让我们简化默认代码，使文件<i>index.js</i>的内容如下所示：
+<!-- Open the browser and a text editor so that you can view the code as well as the webpage at the same time on the screen:-->
+打开浏览器和文本编辑器，这样你就能在屏幕上同时看到代码和网页。
+
+![screenshot of vite initial webpage and file structure on vs code](../../images/1/1-vite4.png)
+
+<!-- The code of the application resides in the <i>src</i> folder. Let's simplify the default code such that the contents of the file main.jsx looks like this:-->
+应用的代码位于<i>src</i>文件夹中。让我们简化默认代码，使文件<i>main.jsx</i>的内容如下所示：
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App'
@@ -48,50 +60,46 @@ import App from './App'
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-<!-- and file <i>App.js</i> looks like this-->
- 而文件<i>App.js</i>看起来是这样的：
+<!-- and file <i>App.jsx</i> looks like this-->
+ 而文件<i>App.jsx</i>看起来是这样的：
 
 ```js
-const App = () => (
-  <div>
-    <p>Hello world</p>
-  </div>
-)
+const App = () => {
+  return (
+    <div>
+      <p>Hello world</p>
+    </div>
+  )
+}
 
 export default App
 ```
 
-<!-- The files <i>App.css</i>, <i>App.test.js</i>, <i>index.css</i>, <i>logo.svg</i>, <i>setupTests.js</i> and <i>reportWebVitals.js</i> may be deleted as they are not needed in our application right now.-->
- 文件<i>App.css</i>, <i>App.test.js</i>, <i>index.css</i>, <i>logo.svg</i>, <i>setupTests.js</i> 和 <i>reportWebVitals.js</i> 可以删除，因为它们现在在我们的应用中并不需要。
+<!-- The files <i>App.css</i> and <i>index.css</i>, and the directory <i>assets</i> may be deleted as they are not needed in our application right now.-->
+文件<i>App.css</i>, <i>index.css</i> 和目录 <i>assets</i> 可以删除，因为它们现在在我们的应用中并不需要。
 
-<!-- If you end up with the following error-->
- 如果你最后出现了以下错误
+### create-react-app
 
-![](../../images/1/r18-error.png)
+<!-- Instead of Vite you can also use the older generation tool [create-react-app](https://github.com/facebookincubator/create-react-app) in the course to set up the applications. The most visible difference to Vite is the name of the application startup file, which is <i>index.js</i>.-->
+你也可以在课程中使用更老版本的工具 [create-react-app](https://github.com/facebookincubator/create-react-app) 而不用Vite去设置应用。与Vite肉眼最大区别就是启动应用的文件的名字，是 <i>index.js</i>。
 
-<!-- you for some reason are using a React version older than the current version 18.-->
-可能由于某种原因使用了比当前18版本更早的React版本。
+<!-- The way to start the application is also different in CRA, it is started with a command-->
+启动应用的方式也与CRA（create-react-app）不同，它启动命令是
 
-<!-- The fix is to change <i>index.js</i> as follows-->
-修复方法是修改<i>index.js</i>，如下所示
-
-```js
-import ReactDOM from "react-dom"
-import App from "./App"
-
-ReactDOM.render(<App />, document.getElementById("root"))
+```bash
+npm start
 ```
+<!-- in contrast to Vite's-->
+区别与Vite的
 
-<!-- You quite likely need to do the same for your other projects.-->
- 你很可能需要为你的其他项目做相同的事情。
-
-<!-- See [this](/en/part1/a_more_complex_state_debugging_react_apps/#a-note-on-react-version) for more about the version differences.-->
- 关于版本差异的更多信息，请参见[这里](/en/part1/a_more_complex_state_debugging_react_apps/#a-note-on-react-version)。
+```bash
+npm run dev 
+```
 
 ### Component
 
-<!-- The file <i>App.js</i> now defines a [React component](https://reactjs.org/docs/components-and-props.html) with the name <i>App</i>. The command on the final line of file <i>index.js</i>-->
- 文件<i>App.js</i>现在定义了一个名为<i>App</i>的[React组件](https://reactjs.org/docs/components-and-props.html)。在文件<i>index.js</i>的最后一行的命令：
+<!-- The file <i>App.jsx</i> now defines a [React component](https://react.dev/learn/your-first-component) with the name <i>App</i>. The command on the final line of file <i>main.jsx</i>-->
+ 文件<i>App.jsx</i>现在定义了一个名为<i>App</i>的[React组件](https://reactjs.org/docs/components-and-props.html)。在文件<i>main.jsx</i>的最后一行的命令：
 
 ```js
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
@@ -512,11 +520,10 @@ part2
  
  <i>我们将在本练习中开始处理的应用程序将在以下几个练习中得到进一步开发。 在本课程的这个和其他即将到来的练习集中，仅提交应用程序的最终状态就足够了。 如果你想，你也可以为本系列的每个练习创建一个提交，但这不是必要的。</i>
 
-<!-- Use create-react-app to initialize a new application. Modify <i>index.js</i> to match the following-->
- 使用create-react-app来初始化一个新的应用。修改<i>index.js</i>如下：
+<!-- Use Vite to initialize a new application. Modify <i>main.jsx</i> to match the following-->
+ 使用Vite来初始化一个新的应用。修改<i>index.js</i>如下：
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App'
@@ -524,8 +531,8 @@ import App from './App'
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-<!-- and <i>App.js</i> to match the following-->
-和<i>App.js</i>，如下所示
+<!-- and <i>App.jsx</i> to match the following-->
+和<i>App.jsx</i>，如下所示
 
 ```js
 const App = () => {
@@ -557,14 +564,14 @@ const App = () => {
 export default App
 ```
 
-<!-- and remove extra files (App.css, App.test.js, index.css, logo.svg, setupTests.js, reportWebVitals.js)).-->
- 并删除多余的文件（App.css, App.test.js, index.css, logo.svg, setupTests.js, reportWebVitals.js）。
+<!-- and remove the extra files App.css and index.css, also remove the directory assets.-->
+ 并删除多余的文件 App.css和index.css，并移除目录assets。
 
 <!-- Unfortunately, the entire application is in the same component. Refactor the code so that it consists of three new components: <i>Header</i>, <i>Content</i>, and <i>Total</i>. All data still resides in the <i>App</i> component, which passes the necessary data to each component using <i>props</i>. <i>Header</i> takes care of rendering the name of the course, <i>Content</i> renders the parts and their number of exercises and <i>Total</i> renders the total number of exercises.-->
 整个应用都在同一个组件中。重构代码，使其由三个新的组件组成。<i>Header</i>、<i>Content</i>和<i>Total</i>。所有数据仍驻留在<i>App</i>组件中，它使用<i>props</i>将必要的数据传递给每个组件。<i>Header</i>负责显示课程的名称，<i>Content</i>显示各部分及其练习的数量，<i>Total</i>显示练习的总数量。
 
-<!-- Define the new components in file <i>App.js</i>.-->
- 在文件<i>App.js</i>中定义新组件。
+<!-- Define the new components in file <i>App.jsx</i>.-->
+ 在文件<i>App.jsx</i>中定义新组件。
 
 <!-- The <i>App</i> component's body will approximately be as follows:-->
  <i>App</i>组件的主体将大致如下：
