@@ -574,7 +574,7 @@ Currently, it is not possible to add new users through the frontend's UI, so we 
 ```js
 describe('Note app', () => {
   beforeEach(async ({ page, request }) => {
-    await request.post('http:localhost:3001/api/testing/reset')
+    await request.post('http://localhost:3001/api/testing/reset')
     await request.post('http://localhost:3001/api/users', {
       data: {
         name: 'Matti Luukkainen',
