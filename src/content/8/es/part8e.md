@@ -153,7 +153,7 @@ La suscripción _personAdded_ necesita un solucionador. El solucionador _addPers
 Los cambios requeridos son los siguientes:
 
 ```js
-const { PubSub } = require('apollo-server') // highlight-line
+const { PubSub } = require('graphql-subscriptions') // highlight-line
 const pubsub = new PubSub() // highlight-line
 
   Mutation: {
