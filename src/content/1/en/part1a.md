@@ -679,7 +679,7 @@ const App = () => {
 export default App
 ```
 
-and remove the extra files App.css and index.css, also remove the directory assets.
+and remove the extra files <i>App.css</i> and <i>index.css</i>, also remove the directory <i>assets</i>.
 
 Unfortunately, the entire application is in the same component. Refactor the code so that it consists of three new components: <i>Header</i>, <i>Content</i>, and <i>Total</i>. All data still resides in the <i>App</i> component, which passes the necessary data to each component using <i>props</i>. <i>Header</i> takes care of rendering the name of the course, <i>Content</i> renders the parts and their number of exercises and <i>Total</i> renders the total number of exercises.
 
