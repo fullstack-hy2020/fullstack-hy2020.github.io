@@ -752,7 +752,7 @@ El valor devuelto por la función podría tener el siguiente formato:
 }
 ```
 
-**NB** cuando estás comparando objetos, el método [deepStrictEqual](https://nodejs.org/api/assert.html#assertdeepstrictequalactual-expected-message) es probablemente lo que debas usar, [strictEqual](https://nodejs.org/api/assert.html#assertstrictequalactual-expected-message) intenta verificar que los dos valores sean el mismo valor, y no solo que contengan las mismas propiedades. Por diferencias entre varios módulos de aserción de funciones, puedes referirte a [esta respuesta Stack Overflow](https://stackoverflow.com/a/73937068/15291501).
+**NB** cuando estás comparando objetos, el método [deepStrictEqual](https://nodejs.org/api/assert.html#assertdeepstrictequalactual-expected-message) es probablemente lo que debas usar, [strictEqual](https://nodejs.org/api/assert.html#assertstrictequalactual-expected-message) intenta verificar que los dos valores sean el mismo valor, y no solo que contengan las mismas propiedades. Para conocer las diferencias entre las distintas funciones del módulo assert, puedes consultar [esta respuesta Stack Overflow](https://stackoverflow.com/a/73937068/15291501).
 
 Escribe las pruebas para este ejercicio dentro de un nuevo bloque <i>describe</i>. Haz lo mismo con los ejercicios restantes también.
 
