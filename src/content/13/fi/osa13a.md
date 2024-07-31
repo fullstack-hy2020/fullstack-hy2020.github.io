@@ -151,7 +151,7 @@ Type "help" for help.
 postgres=#
 ```
 
-Näin määriteltynä tietokantaan talletettu data sailyy ainoastaan niin kauan kontti on olemassa. Data saadaan säilymään määrittelemällä datan talletukseen
+Näin määriteltynä tietokantaan talletettu data säilyy ainoastaan niin kauan kontti on olemassa. Data saadaan säilymään määrittelemällä datan talletukseen
 [volume](/en/part12/building_and_configuring_environments#persisting-data-with-volumes), katso lisää 
 [täältä](https://github.com/docker-library/docs/blob/master/postgres/README.md#pgdata).
 
@@ -311,7 +311,7 @@ $ cat .env
 DATABASE_URL=postgres://<username>:thepasswordishere@ec2-54-83-137-206.compute-1.amazonaws.com:5432/<databasename>
 ```
 
-Fly.io:a käyttäessä paikallinen tietokantayhteys taytyy ensin tehdä mahdolliseksi [tunneloimalla](https://fly.io/docs/reference/postgres/#connecting-to-postgres-from-outside-fly) paikallisen koneen portti 5432 Fly.io:n tietokannan porttiin komennolla
+Fly.io:a käyttäessä paikallinen tietokantayhteys täytyy ensin tehdä mahdolliseksi [tunneloimalla](https://fly.io/docs/reference/postgres/#connecting-to-postgres-from-outside-fly) paikallisen koneen portti 5432 Fly.io:n tietokannan porttiin komennolla
 
 ```bash
 flyctl proxy 5432 -a <app-name>-db
@@ -332,7 +332,7 @@ $ cat .env
 DATABASE_URL=postgres://postgres:thepasswordishere@localhost:5432/postgres
 ```
 
-Salasana on se, jonka on otettu talteen tietokantaa luodessa.
+Salasana on se, joka on otettu talteen tietokantaa luodessa.
 
 Dockeria käytettäessä connect string on:
 
