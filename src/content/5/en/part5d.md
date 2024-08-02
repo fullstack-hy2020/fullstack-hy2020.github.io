@@ -900,13 +900,13 @@ describe('Note app', () => {
     })
 
     test('a new note can be created', async ({ page }) => {
-      await createNote(page, 'a note created by playwright', true) // highlight-line
+      await createNote(page, 'a note created by playwright') // highlight-line
       await expect(page.getByText('a note created by playwright')).toBeVisible()
     })
 
     describe('and a note exists', () => {
       beforeEach(async ({ page }) => {
-        await createNote(page, 'another note by playwright', true) // highlight-line
+        await createNote(page, 'another note by playwright') // highlight-line
       })
   
       test('importance can be changed', async ({ page }) => {
