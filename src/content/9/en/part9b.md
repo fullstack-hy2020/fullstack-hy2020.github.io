@@ -898,6 +898,7 @@ npm install --save-dev eslint @eslint/js @types/eslint__js typescript typescript
 We will configure ESlint to [disallow explicit any]( https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/docs/rules/no-explicit-any.md). Write the following rules to *eslint.config.mjs*:
 
 ```js
+import eslint from "@eslint/js";
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config({
@@ -944,6 +945,7 @@ On top of the recommended settings, we should try to get familiar with the codin
 So we will use the following *eslint.config.mjs*
 
 ```js
+import eslint from "@eslint/js";
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config({
