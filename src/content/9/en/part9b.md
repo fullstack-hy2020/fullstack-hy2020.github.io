@@ -892,13 +892,15 @@ What if we would like to restrict developers from using the *any* type? Fortunat
 Let's install ESlint and its TypeScript extensions:
 
 ```shell
-npm install --save-dev eslint @eslint/js @types/eslint__js typescript typescript-eslint
+npm install --save-dev eslint @eslint/js @types/eslint__js typescript typescript-eslint @stylistic/eslint-plugin
 ```
 
 We will configure ESlint to [disallow explicit any]( https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/docs/rules/no-explicit-any.md). Write the following rules to *eslint.config.mjs*:
 
 ```js
+import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
+import stylistic from '@stylistic/eslint-plugin';
 
 export default tseslint.config({
   files: ['**/*.ts'],
@@ -906,6 +908,9 @@ export default tseslint.config({
     eslint.configs.recommended,
     ...tseslint.configs.recommendedTypeChecked,
   ],
+  plugins: {
+    '@stylistic': stylistic
+  },
   languageOptions: {
     parserOptions: {
       project: true,
@@ -944,7 +949,9 @@ On top of the recommended settings, we should try to get familiar with the codin
 So we will use the following *eslint.config.mjs*
 
 ```js
+import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
+import stylistic from '@stylistic/eslint-plugin';
 
 export default tseslint.config({
   files: ['**/*.ts'],
@@ -958,10 +965,13 @@ export default tseslint.config({
       tsconfigRootDir: import.meta.dirname,
     },
   },
+  plugins: {
+    '@stylistic': stylistic
+  },
   rules: {
+    '@stylistic/semi': "error",
     '@typescript-eslint/no-unsafe-assignment': 'error',
     '@typescript-eslint/no-explicit-any': 'error',
-    '@typescript-eslint/semi': 'error',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/restrict-template-expressions': 'off',
