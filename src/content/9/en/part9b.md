@@ -963,7 +963,7 @@ export default tseslint.config({
   rules: {
     '@typescript-eslint/no-unsafe-assignment': 'error',
     '@typescript-eslint/no-explicit-any': 'error',
-    '@typescript-eslint/semi': 'error',
+    '@/semi': 'error',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/restrict-template-expressions': 'off',
