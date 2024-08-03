@@ -162,7 +162,7 @@ Eslint complains about the keywords _test_ and _expect_ in the tests. The proble
 npm install --save-dev eslint-plugin-vitest-globals
 ```
 
-and enable the plugin by editing the _.eslint.cjs_ file as follows: 
+and enable the plugin by editing the _.eslintrc.cjs_ file as follows: 
 
 ```js
 module.exports = {
