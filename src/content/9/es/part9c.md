@@ -996,7 +996,7 @@ app.listen(PORT, () => {
 
 ### Solicitudes de revisión
 
-Hay muchas cosas que pueden malir sal cuando aceptamos datos de fuentes externas.
+Hay muchas cosas que pueden salir mal cuando aceptamos datos de fuentes externas.
 Las aplicaciones rara vez funcionan completamente por sí solas y, nos vemos obligados a vivir con el hecho de que no se puede confiar plenamente en los datos de fuentes externas a nuestro sistema.
 Cuando recibimos datos de una fuente externa, no hay forma de que ya estén tipados cuando los recibimos. Necesitamos tomar decisiones sobre cómo manejar la incertidumbre que viene con esto.
 
