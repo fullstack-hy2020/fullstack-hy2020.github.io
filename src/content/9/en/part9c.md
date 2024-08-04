@@ -95,7 +95,7 @@ Now that we have set our configuration, we can continue by installing *express* 
 
 ```shell
 npm install express
-npm install --save-dev eslint @types/express @typescript-eslint/eslint-plugin @typescript-eslint/parser
+npm install --save-dev eslint @eslint/js typescript-eslint @stylistic/eslint-plugin @types/express @types/eslint__js
 ```
 
 Now our *package.json* should look like this:
@@ -115,48 +115,50 @@ Now our *package.json* should look like this:
     "express": "^4.18.2"
   },
   "devDependencies": {
-    "@types/express": "^4.17.18",
-    "@typescript-eslint/eslint-plugin": "^6.7.3",
-    "@typescript-eslint/parser": "^6.7.3",
-    "eslint": "^8.50.0",
-    "typescript": "^5.2.2"
+    "eslint": "^9.8.0",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.0.0"
+    "@eslint/js": "^9.8.0",
+    "@stylistic/eslint-plugin": "^2.6.1",
+    "@types/express": "^4.17.21",
+    "@types/eslint__js": "^8.42.3",
   }
 }
 ```
 
-We also create a *.eslintrc* file with the following content:
+We also create a *eslint.config.mjs* file with the following content:
 
-```json
-{
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+```js
+import eslint from "@eslint/js";
+import tseslint from "typescript-eslint";
+import stylistic from "@stylistic/eslint-plugin";
+
+export default tseslint.config({
+  files: ["**/*.ts"],
+  extends: [
+    eslint.configs.recommended,
+    ...tseslint.configs.recommendedTypeChecked,
   ],
-  "plugins": ["@typescript-eslint"],
-  "env": {
-    "browser": true,
-    "es6": true,
-    "node": true
+  languageOptions: {
+    parserOptions: {
+      projectService: true,
+      tsconfigRootDir: import.meta.dirname,
+    },
   },
-  "rules": {
-    "@typescript-eslint/semi": ["error"],
+  plugins: {
+    "@stylistic": stylistic,
+  },
+  rules: {
+    "@stylistic/semi": "error",
+    "@typescript-eslint/no-unsafe-assignment": "error",
+    "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/restrict-template-expressions": "off",
     "@typescript-eslint/restrict-plus-operands": "off",
-    "@typescript-eslint/no-unsafe-member-access": "off",
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      { "argsIgnorePattern": "^_" }
-    ],
-    "no-case-declarations": "off"
+    "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
   },
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "project": "./tsconfig.json"
-  }
-}
+});
 ```
 
 Now we just need to set up our development environment, and we are ready to start writing some serious code.
@@ -175,7 +177,7 @@ We finally define a few more npm scripts, and voilà, we are ready to begin:
   "scripts": {
     "tsc": "tsc",
     "dev": "ts-node-dev index.ts", // highlight-line
-    "lint": "eslint --ext .ts ." // highlight-line
+    "lint": "eslint ." // highlight-line
   },
   // ...
 }
