@@ -233,7 +233,7 @@ axios.put(url, note).then(response => {
   // ...
 ```
 
-Directly mutating state in React is discouraged because each state variable, such as <em>note</em> in the <em>notes</em> array, holds a reference to an object or array in the component’s state. If you modify this object directly, the reference to the object remains the same, so React cannot detect that a change has occurred. And as we recall, we must [never mutate state directly](https://react.dev/learn/updating-objects-in-state#why-is-mutating-state-not-recommended-in-react) in React.
+This is not recommended because the variable <em>note</em> is a reference to an item in the <em>notes</em> array in the component's state. If you modify the <em>note</em> object directly, the reference to the object still remains the same, so React cannot detect that a change has occurred and hence might not re-render properly. And as we recall, we must [never mutate state directly](https://react.dev/learn/updating-objects-in-state#why-is-mutating-state-not-recommended-in-react) in React.
 
 It's also worth noting that the new object _changedNote_ is only a so-called [shallow copy](https://en.wikipedia.org/wiki/Object_copying#Shallow_copy), meaning that the values of the new object are the same as the values of the old object. If the values of the old object were objects themselves, then the copied values in the new object would reference the same objects that were in the old object.
 
