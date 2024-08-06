@@ -402,7 +402,7 @@ Vamos a crear un directorio *src/services* y coloquemos el archivo *diaryService
 El archivo contiene dos funciones para buscar y guardar entradas del diario:
 
 ```js
-import diaryData from '../../data/diaries.json'
+import diaryData from '../../data/entries.json'
 
 const getEntries = () => {
   return diaryData;
