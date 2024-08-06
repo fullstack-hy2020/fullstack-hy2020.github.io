@@ -443,7 +443,7 @@ La sugerencia dice que podríamos querer usar *resolveJsonModule*. Agreguémoslo
 
 Y nuestro problema está resuelto.
 
-> **NB**: Por alguna razón, VSCode tiende a quejarse de que no puede encontrar el archivo *../../data/entries.json* desde el servicio a pesar de que el archivo existe. Eso es un error en el editor y desaparece cuando se reinicia el editor.
+> **NB**: Por alguna razón, VSCode tiende a quejarse de que no puede encontrar el archivo *../../data/diaries.json* desde el servicio a pesar de que el archivo existe. Eso es un error en el editor y desaparece cuando se reinicia el editor.
 
 Anteriormente vimos cómo el compilador puede decidir el tipo de variable por el valor que se le asigna.
 De manera similar, el compilador puede interpretar grandes conjuntos de datos que constan de objetos y arrays.
