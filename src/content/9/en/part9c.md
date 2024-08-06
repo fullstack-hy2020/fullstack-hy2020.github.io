@@ -77,32 +77,41 @@ The *target* configuration tells the compiler which *ECMAScript* version to use 
 *module* tells the compiler that we want to use *CommonJS* modules in the compiled code. This means we can use the old *require* syntax instead of the *import* one, which is not supported in older versions of *Node*.
 
 *strict* is a shorthand for multiple separate options:
-*noImplicitAny, noImplicitThis, alwaysStrict, strictBindCallApply, strictNullChecks, strictFunctionTypes and strictPropertyInitialization*.
+- noImplicitAny
+- noImplicitThis
+- alwaysStrict
+- strictBindCallApply
+- strictNullChecks
+- strictFunctionTypes
+- strictPropertyInitialization
+
 They guide our coding style to use the TypeScript features more strictly.
 For us, perhaps the most important is the already-familiar [noImplicitAny](https://www.staging-typescript.org/tsconfig#noImplicitAny). It prevents implicitly setting type *any*, which can for example happen if you don't type the parameters of a function.
 Details about the rest of the configurations can be found in the [tsconfig documentation](https://www.staging-typescript.org/tsconfig#strict).
 Using *strict* is suggested by the official documentation.
 
-*noUnusedLocals* prevents having unused local variables, and *noUnusedParameters* throws an error if a function has unused parameters.
+- *noUnusedLocals* prevents having unused local variables, and *noUnusedParameters* throws an error if a function has unused parameters.
 
-*noImplicitReturns* checks all code paths in a function to ensure they return a value.
+- *noImplicitReturns* checks all code paths in a function to ensure they return a value.
 
-*noFallthroughCasesInSwitch* ensures that, in a *switch case*, each case ends either with a *return* or a *break* statement.
+- *noFallthroughCasesInSwitch* ensures that, in a *switch case*, each case ends either with a *return* or a *break* statement.
 
-*esModuleInterop* allows interoperability between CommonJS and ES Modules; see more in the [documentation](https://www.staging-typescript.org/tsconfig#esModuleInterop).
+- *esModuleInterop* allows interoperability between CommonJS and ES Modules
+
+See more in the [documentation](https://www.staging-typescript.org/tsconfig#esModuleInterop).
 
 Now that we have set our configuration, we can continue by installing *express* and, of course, also *@types/express*. Also, since this is a real project, which is intended to be grown over time, we will use ESlint from the very beginning:
 
 ```shell
 npm install express
-npm install --save-dev eslint @types/express @typescript-eslint/eslint-plugin @typescript-eslint/parser
+npm install --save-dev eslint @eslint/js typescript-eslint @stylistic/eslint-plugin @types/express @types/eslint__js
 ```
 
 Now our *package.json* should look like this:
 
 ```json
 {
-  "name": "flight-diary",
+  "name": "flights",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -111,52 +120,57 @@ Now our *package.json* should look like this:
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "express": "^4.18.2"
-  },
   "devDependencies": {
-    "@types/express": "^4.17.18",
-    "@typescript-eslint/eslint-plugin": "^6.7.3",
-    "@typescript-eslint/parser": "^6.7.3",
-    "eslint": "^8.50.0",
-    "typescript": "^5.2.2"
+    "@eslint/js": "^9.8.0",
+    "@stylistic/eslint-plugin": "^2.6.1",
+    "@types/eslint__js": "^8.42.3",
+    "@types/express": "^4.17.21",
+    "eslint": "^9.8.0",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.0.0"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
   }
 }
 ```
 
-We also create a *.eslintrc* file with the following content:
+We also create a *eslint.config.mjs* file with the following content:
 
-```json
-{
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+```js
+import eslint from '@eslint/js';
+import tseslint from 'typescript-eslint';
+import stylistic from "@stylistic/eslint-plugin";
+
+export default tseslint.config({
+  files: ['**/*.ts'],
+  extends: [
+    eslint.configs.recommended,
+    ...tseslint.configs.recommendedTypeChecked,
   ],
-  "plugins": ["@typescript-eslint"],
-  "env": {
-    "browser": true,
-    "es6": true,
-    "node": true
+  languageOptions: {
+    parserOptions: {
+      project: true,
+      tsconfigRootDir: import.meta.dirname,
+    },
   },
-  "rules": {
-    "@typescript-eslint/semi": ["error"],
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/explicit-module-boundary-types": "off",
-    "@typescript-eslint/restrict-template-expressions": "off",
-    "@typescript-eslint/restrict-plus-operands": "off",
-    "@typescript-eslint/no-unsafe-member-access": "off",
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      { "argsIgnorePattern": "^_" }
+  plugins: {
+    "@stylistic": stylistic,
+  },
+  rules: {
+    '@stylistic/semi': 'error',
+    '@typescript-eslint/no-unsafe-assignment': 'error',
+    '@typescript-eslint/no-explicit-any': 'error',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/restrict-template-expressions': 'off',
+    '@typescript-eslint/restrict-plus-operands': 'off',
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      { 'argsIgnorePattern': '^_' }
     ],
-    "no-case-declarations": "off"
   },
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "project": "./tsconfig.json"
-  }
-}
+});
 ```
 
 Now we just need to set up our development environment, and we are ready to start writing some serious code.
@@ -175,7 +189,7 @@ We finally define a few more npm scripts, and voilà, we are ready to begin:
   "scripts": {
     "tsc": "tsc",
     "dev": "ts-node-dev index.ts", // highlight-line
-    "lint": "eslint --ext .ts ." // highlight-line
+    "lint": "eslint ." // highlight-line
   },
   // ...
 }
@@ -234,7 +248,31 @@ app.listen(PORT, () => {
 });
 ```
 
-Currently, if we run ESlint it will also interpret the files in the *build* directory. We don't want that, since the code there is compiler-generated. We can prevent this by creating a  *.eslintignore* file that lists the content we want ESlint to ignore, just like we do with git and *.gitignore*.
+Currently, if we run ESlint it will also interpret the files in the *build* directory. We don't want that, since the code there is compiler-generated. We can [prevent](https://eslint.org/docs/latest/use/configure/configuration-files#excluding-files-with-ignores) this in the file *eslint.config.mjs* as follows:
+
+```js
+// ...
+export default tseslint.config({
+  files: ['**/*.ts'],
+  extends: [
+    eslint.configs.recommended,
+    ...tseslint.configs.recommendedTypeChecked,
+  ],
+  languageOptions: {
+    parserOptions: {
+      project: true,
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+  plugins: {
+    "@stylistic": stylistic,
+  },
+  ignores: ["build/*"], // highlight-line
+  rules: {
+    // ...
+  },
+});
+```
 
 Let's add an npm script for running the application in production mode:
 
@@ -244,7 +282,7 @@ Let's add an npm script for running the application in production mode:
   "scripts": {
     "tsc": "tsc",
     "dev": "ts-node-dev index.ts",
-    "lint": "eslint --ext .ts .",
+    "lint": "eslint .",
     "start": "node build/index.js" // highlight-line
   },
   // ...
@@ -309,7 +347,7 @@ Finally, we are ready to start writing some code.
 
 Let's start from the basics. Ilari wants to be able to keep track of his experiences on his flight journeys.
 
-He wants to be able to save *diary entries*, which contain:
+He wants to be able to save <i>diary entries</i>, which contain:
 
 - The date of the entry
 - Weather conditions (sunny, windy, cloudy, rainy or stormy)
@@ -390,13 +428,11 @@ app.listen(PORT, () => {
 });
 ```
 
-And now, if we make an HTTP GET request to <http://localhost:3000/api/diaries>, we should see the message: *Fetching all diaries!*
+And now, if we make an HTTP GET request to <http://localhost:3000/api/diaries>, we should see the message: <i>Fetching all diaries!</i>
 
 Next, we need to start serving the seed data (found [here](https://github.com/fullstack-hy2020/misc/blob/master/diaryentries.json)) from the app. We will fetch the data and save it to *data/entries.json*.
 
-We won't be writing the code for the actual data manipulations in the router. We will create a *service* that takes care of the data manipulation instead.
-It is quite a common practice to separate the "business logic" from the router code into modules, which are quite often called *services*.
-The name service originates from [Domain-driven design](https://en.wikipedia.org/wiki/Domain-driven_design) and was made popular by the [Spring](https://spring.io/) framework.
+We won't be writing the code for the actual data manipulations in the router. We will create a <i>service</i> that takes care of the data manipulation instead. It is quite a common practice to separate the "business logic" from the router code into modules, which are quite often called <i>services</i>. The name service originates from [Domain-driven design](https://en.wikipedia.org/wiki/Domain-driven_design) and was made popular by the [Spring](https://spring.io/) framework.
 
 Let's create a *src/services* directory and place the *diaryService.ts* file in it.
 The file contains two functions for fetching and saving diary entries:
@@ -420,7 +456,7 @@ export default {
 
 But something is not right:
 
-![vscode asking to consider using resolveJsonModule since can't find module](../../images/9/17c.png)
+![vscode asking to consider using resolveJsonModule since can't find module](../../images/9/17x.png)
 
 The hint says we might want to use *resolveJsonModule*. Let's add it to our tsconfig:
 
@@ -451,7 +487,7 @@ Due to this, the compiler warns us if we try to do something suspicious with the
 
 Even though the compiler is pretty good at making sure we don't do anything unwanted, it is safer to define the types for the data ourselves.
 
-Currently, we have a basic working TypeScript Express app, but there are barely any actual *typings* in the code. Since we know what type of data should be accepted for the *weather* and *visibility* fields, there is no reason for us not to include their types in the code.
+Currently, we have a basic working TypeScript Express app, but there are barely any actual <i>typings</i> in the code. Since we know what type of data should be accepted for the *weather* and *visibility* fields, there is no reason for us not to include their types in the code.
 
 Let's create a file for our types, *types.ts*, where we'll define all our types for this project.
 
@@ -533,7 +569,7 @@ We should never use type assertion unless there is no other way to proceed, as t
 While the compiler trusts you to know what you are doing when using *as*, by doing this, we are not using the full power of TypeScript but relying on the coder to secure the code.
 
 In our case, we could change how we export our data so we can type it within the data file.
-Since we cannot use typings in a JSON file, we should convert the JSON file to a ts file *diaries.ts* which exports the typed data like so:
+Since we cannot use typings in a JSON file, we should convert the JSON file to a ts file *entries.ts* which exports the typed data like so:
 
 ```js
 import { DiaryEntry } from "../src/types"; // highlight-line
@@ -552,7 +588,7 @@ const diaryEntries: DiaryEntry[] = [ // highlight-line
 export default diaryEntries; // highlight-line
 ```
 
-Now, when we import the array, the compiler interprets it correctly and the *weather* and *visibility* fields are understood right:
+Now, when we import the array, the compiler interprets it correctly:
 
 ```js
 import diaries from '../../data/entries'; // highlight-line
@@ -698,12 +734,12 @@ export default {
 };
 ```
 
-One thing in our application is a cause for concern. In *getNonSensitiveEntries*, we are returning the complete diary entries, and *no error is given* despite typing!
+One thing in our application is a cause for concern. In *getNonSensitiveEntries*, we are returning the complete diary entries, and <i>no error is given</i> despite typing!
 
 This happens because [TypeScript only checks](http://www.typescriptlang.org/docs/handbook/type-compatibility.html) whether we have all of the required fields or not, but excess fields are not prohibited. In our case, this means that it is *not prohibited* to return an object of type *DiaryEntry[]*, but if we were to try to access the *comment* field, it would not be possible because we would be accessing a field that TypeScript is unaware of even though it exists.
 
 Unfortunately, this can lead to unwanted behavior if you are not aware of what you are doing; the situation is valid as far as TypeScript is concerned, but you are most likely allowing a use that is not wanted.
-If we were now to return all of the diary entries from the *getNonSensitiveEntries* function to the frontend, we would be *leaking the unwanted fields to the requesting browser* - even though our types seem to imply otherwise!
+If we were now to return all of the diary entries from the *getNonSensitiveEntries* function to the frontend, we would be <i>leaking the unwanted fields to the requesting browser</i> - even though our types seem to imply otherwise!
 
 Because TypeScript doesn't modify the actual data but only its type, we need to exclude the fields ourselves:
 
@@ -1058,7 +1094,7 @@ export default toNewDiaryEntry;
 
 The function should parse each field and make sure that the return value is exactly of type *NewDiaryEntry*. This means we should check each field separately.
 
-Once again, we have a type issue: what is the  type of the parameter *object*? Since the *object* **is** the body of a request, Express has typed it as *any*. Since the idea of this function is to map fields of unknown type to fields of the correct type and check whether they are defined as expected, this might be the rare case in which we *want to allow the **any** type*.
+Once again, we have a type issue: what is the type of the parameter *object*? Since the *object* is the body of a request, Express has typed it as *any*. Since the idea of this function is to map fields of unknown type to fields of the correct type and check whether they are defined as expected, this might be the rare case in which we <i>want to allow the **any** type</i>.
 
 However, if we type the object as *any*, ESlint complains about that:
 
@@ -1085,7 +1121,7 @@ With the use of *unknown*, we also don't need to worry about the *@typescript-es
 
 > #### A sidenote from the editor
 >
-> *If you are like me and hate having a code in broken state for a long time due to incomplete typing, you could start by "faking" the function:*
+> <i>If you are like me and hate having a code in broken state for a long time due to incomplete typing, you could start by "faking" the function:</i>
 >
 >
 >```js
@@ -1103,7 +1139,7 @@ With the use of *unknown*, we also don't need to worry about the *@typescript-es
 >};
 >```
 >
-> *So before the real data and types are ready to use, I am just returning here something that has for sure the right type. The code stays in an operational state all the time and my blood pressure remains at normal levels.*
+> <i>So before the real data and types are ready to use, I am just returning here something that has for sure the right type. The code stays in an operational state all the time and my blood pressure remains at normal levels.</i>
 
 ### Type guards
 
@@ -1123,7 +1159,7 @@ const parseComment = (comment: unknown): string => {
 };
 ```
 
-The function gets a parameter of type *unknown* and returns it as type *string* if it exists and is of the right type.
+The function gets a parameter of type *unknown* and returns it as the type *string* if it exists and is of the right type.
 
 The string validation function looks like this:
 
@@ -1133,7 +1169,7 @@ const isString = (text: unknown): text is string => {
 };
 ```
 
-The function is a so-called [type guard](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates). That means it is a function that returns a boolean *and* has a *type predicate* as the return type. In our case, the type predicate is:
+The function is a so-called [type guard](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates). That means it is a function that returns a boolean *and* has a <i>type predicate</i> as the return type. In our case, the type predicate is:
 
 ```js
 text is string
@@ -1155,7 +1191,7 @@ The use of a type guard that returns a type predicate is one way to do [type nar
 
 > #### Side note: testing if something is a string
 >
-> *Why do we have two conditions in the string type guard?*
+> <i>Why do we have two conditions in the string type guard?</i>
 >
 >```js
 >const isString = (text: unknown): text is string => {
@@ -1163,7 +1199,7 @@ The use of a type guard that returns a type predicate is one way to do [type nar
 >}
 >```
 >
->*Would it not be enough to write the guard like this?*
+> <i>Would it not be enough to write the guard like this?</i>
 >
 >```js
 >const isString = (text: unknown): text is string => {
@@ -1171,7 +1207,7 @@ The use of a type guard that returns a type predicate is one way to do [type nar
 >}
 >```
 >
->*Most likely, the simpler form is good enough for all practical purposes. However, if we want to be sure, both conditions are needed. There are two different ways to create string in JavaScript, one as a primitive and the other as an object, which both work a bit differently when compared to the **typeof** and **instanceof** operators:*
+> <i>Most likely, the simpler form is good enough for all practical purposes. However, if we want to be sure, both conditions are needed. There are two different ways to create string in JavaScript, one as a primitive and the other as an object, which both work a bit differently when compared to the **typeof** and **instanceof** operators:</i>
 >
 >```js
 >const a = "I'm a string primitive";
@@ -1182,7 +1218,7 @@ The use of a type guard that returns a type predicate is one way to do [type nar
 >b instanceof String; --> returns true
 >```
 >
->*However, it is unlikely that anyone would create a string with a constructor function. Most likely the simpler version of the type guard would be just fine.*
+> <i>However, it is unlikely that anyone would create a string with a constructor function. Most likely the simpler version of the type guard would be just fine.</i>
 
 Next, let's consider the *date* field.
 Parsing and validating the date object is pretty similar to what we did with comments.

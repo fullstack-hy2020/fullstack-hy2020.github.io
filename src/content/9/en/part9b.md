@@ -501,7 +501,7 @@ console.log(calculateBmi(180, 74))
 should print the following message:
 
 ```shell
-Normal (healthy weight)
+Normal range
 ```
 
 Create an npm script for running the program with the command *npm run calculateBmi*.
@@ -531,7 +531,8 @@ For the Result object, you should create an [interface](https://www.typescriptla
 If you call the function with parameters *[3, 0, 2, 4.5, 0, 3, 1]* and *2*, it should return:
 
 ```js
-{ periodLength: 7,
+{ 
+  periodLength: 7,
   trainingDays: 5,
   success: false,
   rating: 2,
@@ -560,7 +561,8 @@ and:
 ```shell
 $ npm run calculateExercises 2 1 0 2 4.5 0 3 1 0 4
 
-{ periodLength: 9,
+{
+  periodLength: 9,
   trainingDays: 6,
   success: false,
   rating: 2,
@@ -815,7 +817,7 @@ The response is a JSON of the form:
 {
   weight: 72,
   height: 180,
-  bmi: "Normal (healthy weight)"
+  bmi: "Normal range"
 }
 ```
 
@@ -898,6 +900,7 @@ npm install --save-dev eslint @eslint/js @types/eslint__js typescript typescript
 We will configure ESlint to [disallow explicit any]( https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/docs/rules/no-explicit-any.md). Write the following rules to *eslint.config.mjs*:
 
 ```js
+import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config({
@@ -939,12 +942,18 @@ Now lint will complain if we try to define a variable of type *any*:
 
 [@typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) has a lot of TypeScript-specific ESlint rules, but you can also use all basic ESlint rules in TypeScript projects. For now, we should probably go with the recommended settings, and we will modify the rules as we go along whenever we find something we want to change the behavior of.
 
-On top of the recommended settings, we should try to get familiar with the coding style required in this part and <i>set the semicolon at the end of each line of code to be required</i>.
+On top of the recommended settings, we should try to get familiar with the coding style required in this part and <i>set the semicolon at the end of each line of code to be required</i>. For that, we should install and configure [@stylistic/eslint-plugin](https://eslint.style/packages/default):
 
-So we will use the following *eslint.config.mjs*
+```bash
+npm install --save-dev @stylistic/eslint-plugin
+```
+
+Our final *eslint.config.mjs* looks as follows:
 
 ```js
+import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
+import stylistic from "@stylistic/eslint-plugin";
 
 export default tseslint.config({
   files: ['**/*.ts'],
@@ -958,10 +967,13 @@ export default tseslint.config({
       tsconfigRootDir: import.meta.dirname,
     },
   },
+  plugins: {
+    "@stylistic": stylistic,
+  },
   rules: {
+    '@stylistic/semi': 'error',
     '@typescript-eslint/no-unsafe-assignment': 'error',
     '@typescript-eslint/no-explicit-any': 'error',
-    '@typescript-eslint/semi': 'error',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/restrict-template-expressions': 'off',
