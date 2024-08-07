@@ -355,6 +355,7 @@ const Notes = () => {
       )}
     </ul>
   )
+}
 ```
 
 We only make changes to the selector function, which used to be
