@@ -43,13 +43,13 @@ La velocidad para completar el curso es flexible.
 
 Las estadísticas del tiempo de finalización de los ejercicios se pueden encontrar en el [sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
-### Canal de Discord y Telegram para el curso
+### Canal de Discord para el curso
 
-Puedes hablar sobre el curso y temas relacionados en nuestro grupo dedicado en Discord https://study.cs.helsinki.fi/discord/join/fullstack y en Telegram: https://t.me/fullstackcourse. Discord tiene canales fullstack_general y especifico para cada parte (nombres de canal con prefijo fullstack) para discusiones relacionadas con el curso. Ten en cuenta que *el canal "chat" de Discord no es adecuado para la discusión relacionada con el curso*. ¡Únete a la conversación!
+Puedes hablar sobre el curso y temas relacionados en nuestro grupo dedicado en Discord https://study.cs.helsinki.fi/discord/join/fullstack. Discord tiene canales fullstack_general y especifico para cada parte (nombres de canal con prefijo fullstack) para discusiones relacionadas con el curso. Ten en cuenta que *el canal "chat" de Discord no es adecuado para la discusión relacionada con el curso*. ¡Únete a la conversación!
 
-### Como obtener ayuda en Discord/Telegram
+### Como obtener ayuda en Discord
 
-Cuando pides ayuda relacionada a un problema en el grupo de Discord/Telegram tu pregunta debe ser tan informativa y precisa como sea posible. Si tu pregunta se ve asi
+Cuando pides ayuda relacionada a un problema en el grupo de Discord tu pregunta debe ser tan informativa y precisa como sea posible. Si tu pregunta se ve asi
 
 > *Agregar una nueva persona no funciona, ¿podrías ayudarme con esto?*
 
@@ -348,7 +348,7 @@ Si ya has realizado el curso como MOOC o como curso universitario, ahora puedes 
 
 #### Ampliación de Full stack open
 
-¡Puedes continuar donde lo dejaste! Si deseas volver a enviar una parte completa, comunícate con el personal del curso a través de [correo electrónico](mailto:matti.luukkainen@helsinki.fi) o Telegram [@mluukkai](https://t.me/mluukkai), con tu nombre de usuario de Github y las partes que te gustaría eliminar de tus envíos.
+¡Puedes continuar donde lo dejaste! Si deseas volver a enviar una parte completa, comunícate con el personal del curso a través de [correo electrónico](mailto:matti.luukkainen@helsinki.fi), con tu nombre de usuario de Github y las partes que te gustaría eliminar de tus envíos.
 
 #### Ampliando sobre la instancia de la Universidad de Helsinki de este curso
 

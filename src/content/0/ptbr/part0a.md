@@ -43,13 +43,13 @@ A velocidade de conclusão do curso é flexível.
 
 Estatísticas de tempo de conclusão dos exercícios podem ser encontradas através do [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
-### Canal do curso no Discord e Telegram
+### Canal do curso no Discord
 
-Você pode discutir sobre o curso e tópicos relacionados em nosso grupo dedicado no Discord <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> e no Telegram: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. O Discord possui os canais "fullstack_general" e os específicos das partes (nomes de canais com prefixo "fullstack") para discussões relacionadas ao curso. Observe que o <i>chat do Discord não é adequado para discussões relacionadas ao curso</i>. Venha participar da conversa conosco!
+Você pode discutir sobre o curso e tópicos relacionados em nosso grupo dedicado no Discord <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a>. O Discord possui os canais "fullstack_general" e os específicos das partes (nomes de canais com prefixo "fullstack") para discussões relacionadas ao curso. Observe que o <i>chat do Discord não é adequado para discussões relacionadas ao curso</i>. Venha participar da conversa conosco!
 
-### Como pedir ajuda no Discord/Telegram
+### Como pedir ajuda no Discord
 
-Ao pedir ajuda no grupo do Discord/Telegram, sua pergunta deve ser a mais informativa e precisa possível. Se sua pergunta se parecer com isso:
+Ao pedir ajuda no grupo do Discord, sua pergunta deve ser a mais informativa e precisa possível. Se sua pergunta se parecer com isso:
 
 > <i>A função de adicionar uma nova pessoa não funciona. Poderia me ajudar a resolver isso?</i>
 

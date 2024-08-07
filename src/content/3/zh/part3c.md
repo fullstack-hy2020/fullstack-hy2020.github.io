@@ -1090,7 +1090,7 @@ app.put('/api/notes/:id', (request, response, next) => {
 - I progress with small steps
 - I will write lots of _console.log_ statements to make sure I understand how the code behaves and to help pinpoint problems
 - If my code does not work, I will not write more code. Instead, I start deleting the code until it works or just return to a state when everything was still working
-- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](https://fullstackopen.com/en/part0/general_info#how-to-ask-help-in-discord-telegam) how to ask for help -->
+- When I ask for help in the course Discord channel or elsewhere I formulate my questions properly, see [here](https://fullstackopen.com/en/part0/general_info#how-to-ask-help-in-discord) how to ask for help -->
 
 - 我会一直打开浏览器开发者控制台
 - 我会使用浏览器开发工具的网络标签，确保前端和后端的通信符合我的预期
@@ -1099,7 +1099,7 @@ app.put('/api/notes/:id', (request, response, next) => {
 - 我会以小步骤前进
 - 我会写很多的_console.log_语句，以确保我理解代码的行为，并帮助定位问题
 - 如果我的代码不能工作，我不会写更多的代码。相反，我开始删除代码，直到它工作，或者只是返回到一切都还在工作的状态
-- 当我在课程的Discord或Telegram频道或其他地方寻求帮助时，我会合适地提出我的问题，看[这里](https://fullstackopen.com/en/part0/general_info#how-to-ask-help-in-discord-telegam)了解如何寻求帮助。
+- 当我在课程的Discord频道或其他地方寻求帮助时，我会合适地提出我的问题，看[这里](https://fullstackopen.com/en/part0/general_info#how-to-ask-help-in-discord)了解如何寻求帮助。
 
 </div>
 

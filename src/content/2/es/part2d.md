@@ -706,7 +706,7 @@ El desarrollo Full Stack es <i>extremadamente difícil</i>, por eso usaré todos
 - Progresaré con pequeños pasos.
 - Escribiré muchos mensajes de _console.log_ para asegurarme de entender cómo se comporta el código y ayudar a identificar problemas.
 - Si mi código no funciona, no escribiré más código. En cambio, empezaré a eliminar el código hasta que funcione o simplemente volveré a un estado en el que todo seguía funcionando.
-- Cuando pida ayuda en el canal de Discord o Telegram del curso o en otro lugar, formularé mis preguntas adecuadamente, consulta [aquí](/es/part0/informacion_general#como-obtener-ayuda-en-discord-telegram) cómo pedir ayuda.
+- Cuando pida ayuda en el canal de Discorddel curso o en otro lugar, formularé mis preguntas adecuadamente, consulta [aquí](/es/part0/informacion_general#como-obtener-ayuda-en-discord) cómo pedir ayuda.
 
 </div> 
 

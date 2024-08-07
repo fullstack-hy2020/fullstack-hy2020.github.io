@@ -42,17 +42,17 @@ La vitesse de réalisation du cours est flexible.
 Les statistiques de temps d'exécution des exercices peuvent être trouvées via le [système de soumission](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 
-### Chaîne de cours dans Discord et Telegram
+### Chaîne de cours dans Discord 
 
-Vous pouvez discuter du cours et des sujets connexes dans notre groupe dédié sur <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>Discord</a> et sur <a target='_blank' href='https://t.me/fullstackcourse'>Telegram</a>. 
+Vous pouvez discuter du cours et des sujets connexes dans notre groupe dédié sur <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>Discord</a>. 
 
 Le serveur Discord possède une chaîne fullstack_general et d'autres chaînes spécifiques à chaque partie.  Prenez note que <i>la chaîne de clavardage principale n'est pas le lieu approprié pour les discussions dédiées au contenu du cours.</i>
 
 N'hésitez pas à rejoindre la conversation !
 
-### Comment recevoir de l'aide par Discord/Telegram
+### Comment recevoir de l'aide par Discord
 
-Lorsque vous demandez de l'aide pour un problème par Discord/Telegram, votre question se doit d'être aussi claire et informative que possible.  Si votre question ressemble à ceci:
+Lorsque vous demandez de l'aide pour un problème par Discord, votre question se doit d'être aussi claire et informative que possible.  Si votre question ressemble à ceci:
 
 > <i>Ajouter une nouvelle personne ne fonctionne pas, pouvez vous m'aider?</i>
 

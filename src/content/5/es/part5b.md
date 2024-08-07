@@ -505,7 +505,7 @@ El desarrollo full stack es <i>extremadamente difícil</i>, por eso utilizaré t
 - Escribiré muchos _console.log_ para asegurarme de entender cómo se comportan el código y las pruebas y para ayudar a localizar problemas
 - Si mi código no funciona, no escribiré más código. En cambio, empezare a eliminarlo hasta que funcione o simplemente regresare a un estado en el que todo funcionaba
 - Si una prueba no pasa, me asegurare de que la funcionalidad probada funciona correctamente en la aplicación
-- Cuando pida ayuda en el canal de Discord o Telegram del curso o en cualquier otro lugar, formularé mis preguntas correctamente, consulta [aquí](/es/part0/informacion_general#como-obtener-ayuda-en-discord-telegram) cómo pedir ayuda
+- Cuando pida ayuda en el canal de Discorddel curso o en cualquier otro lugar, formularé mis preguntas correctamente, consulta [aquí](/es/part0/informacion_general#como-obtener-ayuda-en-discord) cómo pedir ayuda
 
 </div>
 

@@ -37,7 +37,7 @@ Tämän kurssin eri osiin jo tehtyjen palautusten ajankäyttöstatistiikan näet
 
 ### Apua tehtävien tekoon?
 
-Kurssilla ei tällä hetkellä ole varsinaista opetusta, mutta tehtäviin voi yrittää kysyä apua kurssin keskustelukanavalla Discordissa <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> sekä Telegramissa kanavalla <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. Discordissa kurssiin liittyvää keskustelua varten on kanava fullstack_general ja osa-kohtaiset kanavat (muut fullstack-alkuiset kanavat). Huomaa, että Discordin <i>chat-kanava ei ole kurssiin liittyvää keskustelua varten</i>.
+Kurssilla ei tällä hetkellä ole varsinaista opetusta, mutta tehtäviin voi yrittää kysyä apua kurssin keskustelukanavalla Discordissa <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a>. Discordissa kurssiin liittyvää keskustelua varten on kanava fullstack_general ja osa-kohtaiset kanavat (muut fullstack-alkuiset kanavat). Huomaa, että Discordin <i>chat-kanava ei ole kurssiin liittyvää keskustelua varten</i>.
 
 Huom: kaikki epäasialliset, halventavat ja jotain ihmisryhmää syrjivät kommentit kanavalla ovat kiellettyjä, ja tällaisten kommenttien esittäjät poistetaan kanavalta.
 

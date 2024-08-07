@@ -43,13 +43,13 @@ The speed of completing the course is flexible.
 
 Exercise completion time statistics can be found via the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
-### Course channel in Discord and Telegram
+### Course channel in Discord
 
-You can discuss the course and related topics in our dedicated group on Discord <https://study.cs.helsinki.fi/discord/join/fullstack> and on Telegram: <https://t.me/fullstackcourse>. Discord has fullstack_general and part-specific (channel names with fullstack prefix) channels for course-related discussion. Note that Discord's *chat channel is not suitable for course-related discussions*. Please join the conversation!
+You can discuss the course and related topics in our dedicated group on Discord <https://study.cs.helsinki.fi/discord/join/fullstack>. Discord has fullstack_general and part-specific (channel names with fullstack prefix) channels for course-related discussion. Note that Discord's *chat channel is not suitable for course-related discussions*. Please join the conversation!
 
-### How to get help in Discord/Telegram
+### How to get help in Discord
 
-When you ask for help for a problem in the Discord/Telegram group your question should be as informative and precise as possible. If your question looks like this
+When you ask for help for a problem in the Discord group your question should be as informative and precise as possible. If your question looks like this
 
 > *Adding a new person does not work, could you help me with that?*
 

@@ -1009,7 +1009,7 @@ Le développement full stack est <i>extrêmement difficile</i>, c'est pourquoi j
 - <i>J'écrirai de nombreuses instructions console.log pour m'assurer de comprendre le comportement du code et des tests, et pour m'aider à repérer les problèmes</i>
 - Si mon code ne fonctionne pas, je n'écrirai pas davantage de code. Au lieu de cela, je commencerai par supprimer le code jusqu'à ce qu'il fonctionne ou que je revienne à un état où tout fonctionnait encore
 - <i>Si un test ne réussit pas, je m'assurerai que la fonctionnalité testée fonctionne certainement dans l'application</i>
-- Lorsque je demande de l'aide sur le Discord du cours, le canal Telegram ou ailleurs, je formulerai mes questions correctement. Consultez [ici](https://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord-telegram) comment demander de l'aide de manière appropriée
+- Lorsque je demande de l'aide sur le Discord du cours, je formulerai mes questions correctement. Consultez [ici](https://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord) comment demander de l'aide de manière appropriée
 
 </div>
 

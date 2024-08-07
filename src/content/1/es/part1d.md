@@ -1124,7 +1124,7 @@ Programar es difícil, por eso usaré todos los medios posibles para hacerlo má
 - Progreso con pequeños pasos.
 - Escribiré muchas declaraciones _console.log_ para asegurarme de que entiendo cómo se comporta el código y para ayudar a identificar problemas.
 - Si mi código no funciona, no escribiré más código. En lugar de eso, empiezo a eliminar el código hasta que funcione o simplemente vuelvo a un estado en el que todo seguía funcionando.
-- Cuando pido ayuda en el canal de Discord o Telegram del curso o en otro lugar, formulo mis preguntas correctamente, consulta [aquí](http://fullstackopen.com/en/part0/general_info#how-to-get-help-in- discord-telegram) como pedir ayuda.
+- Cuando pido ayuda en el canal de Discord del curso o en otro lugar, formulo mis preguntas correctamente, consulta [aquí](http://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord) como pedir ayuda.
 
 ### Utilización de grandes modelos de lenguaje (LLM)
 

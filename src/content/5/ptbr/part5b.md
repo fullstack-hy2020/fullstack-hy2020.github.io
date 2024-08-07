@@ -507,7 +507,7 @@ Desenvolvimento Full Stack é <i>extremamente difícil</i>, por isso usarei todo
 - Eu irei escrever vários _console.log_ para me certificar de que eu entendo como o código e os testes se comportam e para ajudar a localizar problemas
 - Se meu código não funciona, eu não escreverei mais código. Em vez disso, eu começo a apagar o código até que ele funcione ou apenas volte para um estado em que tudo ainda estava funcionando
 - Se um teste não passa, eu me certifico de que a funcionalidade testada funciona com certeza na aplicação
-- Quando eu peço ajuda no canal do Discord, Telegram do curso ou em outro lugar, eu formulo minhas perguntas corretamente, veja [aqui](/ptbr/part0/informacoes_gerais#como-pedir-ajuda-no-discord-telegram) como pedir ajuda
+- Quando eu peço ajuda no canal do Discord do curso ou em outro lugar, eu formulo minhas perguntas corretamente, veja [aqui](/ptbr/part0/informacoes_gerais#como-pedir-ajuda-no-discord) como pedir ajuda
 
 </div>
 

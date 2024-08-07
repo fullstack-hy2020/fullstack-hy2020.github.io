@@ -1004,7 +1004,7 @@ O desenvolvimento full stack é extremamente difícil, por isso usarei todos os 
 - <i>Vou escrever muitos comandos console.log para entender o comportamento do código e dos testes e auxiliar na identificação de problemas</i>
 - Se meu código não funcionar, não escreverei mais código. Em vez disso, voltarei a apagar o código até que funcione ou simplesmente retorne a um estado anterior em que tudo ainda estava funcionando.
 - <i>Se um teste falhar, eu vou me certificar de que a funcionalidade testada realmente funcione na aplicação</i>
-- Quando pedir ajuda no canal Discord ou Telegram do curso ou em outro lugar, formularei corretamente minhas perguntas. Veja [aqui](https://fullstackopen.com/ptbr/part0/informacoes_gerais#canal-do-curso-no-discord-e-telegram) como pedir ajuda.
+- Quando pedir ajuda no canal Discord do curso ou em outro lugar, formularei corretamente minhas perguntas. Veja [aqui](https://fullstackopen.com/ptbr/part0/informacoes_gerais#canal-do-curso-no-discord) como pedir ajuda.
 
 </div>
 

@@ -565,7 +565,7 @@ La programación es difícil, por eso utilizaré todos los medios posibles para 
 - Progresaré con pequeños pasos.
 - Escribiré muchas declaraciones de _console.log_ para asegurarme de entender cómo se comporta el código y para ayudar a identificar problemas.
 - Si mi código no funciona, no escribiré más código. En cambio, comenzaré a eliminar el código hasta que funcione o simplemente volveré a un estado en el que todo aún funcionaba.
-- Cuando pida ayuda en el canal de Discord o Telegram del curso, o en cualquier otro lugar, formularé mis preguntas adecuadamente; consulta [aquí](/es/part0/informacion_general#como-obtener-ayuda-en-discord-telegram) cómo pedir ayuda.
+- Cuando pida ayuda en el canal de Discord del curso, o en cualquier otro lugar, formularé mis preguntas adecuadamente; consulta [aquí](/es/part0/informacion_general#como-obtener-ayuda-en-discord) cómo pedir ayuda.
 
 </div>
 

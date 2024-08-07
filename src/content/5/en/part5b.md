@@ -505,7 +505,7 @@ Full stack development is <i>extremely hard</i>, that is why I will use all the 
 - I will write lots of _console.log_ statements to make sure I understand how the code and the tests behave and to help pinpoint problems
 - If my code does not work, I will not write more code. Instead, I'll start deleting it until it works or will just return to a state where everything was still working
 - If a test does not pass, I'll make sure that the tested functionality works properly in the application
-- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](/en/part0/general_info#how-to-get-help-in-discord-telegram) how to ask for help
+- When I ask for help in the course Discord channel or elsewhere I formulate my questions properly, see [here](/en/part0/general_info#how-to-get-help-in-discord) how to ask for help
 
 </div>
 

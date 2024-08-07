@@ -997,7 +997,7 @@ El desarrollo full stack es <i> extremadamente difícil </i>, por eso usaré tod
 - <i>Escribiré muchos console.log para asegurarme de que entiendo cómo se comporta el código y las pruebas; y para ayudarme a identificar problemas</i>
 - Si mi código no funciona, no escribiré más código. En su lugar, comenzaré a eliminar código hasta que funcione o simplemente volveré a un estado en el que todo aún funciona
 - <i>Si una prueba no pasa, me aseguraré de que la funcionalidad probada funcione correctamente en la aplicación</i>
-- Cuando pido ayuda en el canal Discord o Telegram del curso, o en otro lugar, formularé mis preguntas correctamente, ve [aquí](/es/part0/informacion_general#como-obtener-ayuda-en-discord-telegram) cómo pedir ayuda
+- Cuando pido ayuda en el canal Discorddel curso, o en otro lugar, formularé mis preguntas correctamente, ve [aquí](/es/part0/informacion_general#como-obtener-ayuda-en-discord) cómo pedir ayuda
 
 </div>
 
