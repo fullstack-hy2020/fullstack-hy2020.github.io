@@ -311,7 +311,7 @@ Käytettäessä palvelinpuolen sessioita, token ei useinkaan sisällä jwt-token
 
 Koodissa on tapahtunut paljon muutoksia ja matkan varrella on tapahtunut tyypillinen kiivaasti etenevän ohjelmistoprojektin ilmiö: suuri osa testeistä on hajonnut. Koska kurssin tämä osa on jo muutenkin täynnä uutta asiaa, jätämme testien korjailun vapaaehtoiseksi harjoitustehtäväksi.
 
-Käyttäjätunnuksia, salasanoja ja tokenautentikaatiota hyödyntäviä sovelluksia tulee aina käyttää salatun [HTTPS](https://en.wikipedia.org/wiki/HTTPS)-yhteyden yli. Voimme käyttää sovelluksissamme Noden [HTTP](https://nodejs.org/docs/latest-v8.x/api/http.html)-serverin sijaan [HTTPS](https://nodejs.org/api/https.html)-serveriä (se vaatii lisää konfiguraatiota). Toisaalta koska sovelluksemme tuotantoversio on Fly.io:ssa tai Renderissä, sovelluksemme pysyy käyttäjien kannalta suojattuna sen ansiosta, että käyttämämme pilvipalvelu reitittää kaiken liikenteen selaimen ja Herokun palvelimien välillä HTTPS:n yli.
+Käyttäjätunnuksia, salasanoja ja tokenautentikaatiota hyödyntäviä sovelluksia tulee aina käyttää salatun [HTTPS](https://en.wikipedia.org/wiki/HTTPS)-yhteyden yli. Voimme käyttää sovelluksissamme Noden [HTTP](https://nodejs.org/docs/latest-v8.x/api/http.html)-serverin sijaan [HTTPS](https://nodejs.org/api/https.html)-serveriä (se vaatii lisää konfiguraatiota). Toisaalta koska sovelluksemme tuotantoversio on Fly.io:ssa tai Renderissä, sovelluksemme pysyy käyttäjien kannalta suojattuna sen ansiosta, että käyttämämme pilvipalvelu reitittää kaiken liikenteen selaimen ja pilvipalvelun palvelimien välillä HTTPS:n yli.
 
 Toteutamme kirjautumisen frontendin puolelle kurssin [seuraavassa osassa](/osa5).
 
