@@ -20,14 +20,14 @@ lang: zh
 <!-- When an action changes the state of the store, the views are rerendered:-->
 当一个动作改变了商店的状态时，视图会被重新渲染。
 
-![](https://facebook.github.io/flux/img/overview/flux-simple-f8-diagram-1300w.png)
+![](https://facebookarchive.github.io/flux/img/overview/flux-simple-f8-diagram-1300w.png)
 
 <!-- If some action on the application, for example pushing a button, causes the need to change the state, the change is made with an action.-->
  如果应用上的某些动作，例如按下一个按钮，导致需要改变状态，则用一个动作进行改变。
 <!-- This causes rerendering the view again:-->
 这将导致再次重新渲染视图。
 
-![](https://facebook.github.io/flux/img/overview/flux-simple-f8-diagram-with-client-action-1300w.png)
+![](https://facebookarchive.github.io/flux/img/overview/flux-simple-f8-diagram-with-client-action-1300w.png)
 
 <!-- Flux offers a standard way for how and where the application's state is kept and how it is modified.-->
  Flux为应用的状态如何保存、在哪里保存以及如何修改提供了一个标准的方法。

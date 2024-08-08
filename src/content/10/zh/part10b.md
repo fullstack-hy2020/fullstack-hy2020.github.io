@@ -568,8 +568,8 @@ export default AppBar;
 <!-- Routing in a React Native application is a bit different to routing in a web application. The main difference is that we can't reference pages with URLs, which we type in to the browser's address bar, and can't navigate back and forth through user's history using the browsers [history API](https://developer.mozilla.org/en-US/docs/Web/API/History_API). However, this is just the matter of the router interface we are using.-->
  在React Native应用中的路由与Web应用中的路由有些不同。主要的区别是，我们不能用URL来引用页面，我们在浏览器的地址栏里输入URL，也不能用浏览器的[历史API](https://developer.mozilla.org/en-US/docs/Web/API/History_API)来回浏览用户的历史。然而，这只是我们所使用的路由器接口的问题。
 
-<!-- With React Native we can use the entire React router's core, including the hooks and components. The only difference to the browser environment is that we must replace the <em>BrowserRouter</em> with React Native compatible [NativeRouter](https://reactrouter.com/docs/en/v6/api#nativerouter), provided by the [react-router-native](https://www.npmjs.com/package/react-router-native) library. Let's get started by installing the <i>react-router-native</i> library:-->
- 使用React Native，我们可以使用整个React路由器的核心，包括钩子和组件。与浏览器环境的唯一区别是，我们必须用React Native兼容的[NativeRouter](https://reactrouter.com/docs/en/v6/api#nativerouter)取代<em>BrowserRouter</em>，该库由[react-router-native](https://www.npmjs.com/package/react-router-native)提供。让我们从安装<i>react-router-native</i>库开始。
+<!-- With React Native we can use the entire React router's core, including the hooks and components. The only difference to the browser environment is that we must replace the <em>BrowserRouter</em> with React Native compatible [NativeRouter](https://reactrouter.com/en/main/router-components/native-router), provided by the [react-router-native](https://www.npmjs.com/package/react-router-native) library. Let's get started by installing the <i>react-router-native</i> library:-->
+ 使用React Native，我们可以使用整个React路由器的核心，包括钩子和组件。与浏览器环境的唯一区别是，我们必须用React Native兼容的[NativeRouter](https://reactrouter.com/en/main/router-components/native-router)取代<em>BrowserRouter</em>，该库由[react-router-native](https://www.npmjs.com/package/react-router-native)提供。让我们从安装<i>react-router-native</i>库开始。
 
 ```shell
 npm install react-router-native
@@ -660,8 +660,8 @@ const SignIn = () => {
 export default SignIn;
 ```
 
-<!-- Set up a route for this <em>SignIn</em> component in the <em>Main</em> component. Also add a tab with text "Sign in" in to the app bar next to the "Repositories" tab. Users should be able to navigate between the two views by pressing the tabs (hint: you can use the React router's [Link](https://reactrouter.com/docs/en/v6/api#link-react-native) component).-->
- 在<em>Main</em>组件中为这个<em>SignIn</em>组件设置一个路由。同时在应用栏中的 "存储库 "标签旁边添加一个带有 "登录 "文字的标签。用户应该能够通过按下标签在两个视图之间导航（提示：你可以使用React路由器's [Link](https://reactrouter.com/docs/en/v6/api#link-react-native) 组件）。
+<!-- Set up a route for this <em>SignIn</em> component in the <em>Main</em> component. Also add a tab with text "Sign in" in to the app bar next to the "Repositories" tab. Users should be able to navigate between the two views by pressing the tabs (hint: you can use the React router's [Link](https://reactrouter.com/en/main/components/link-native) component).-->
+ 在<em>Main</em>组件中为这个<em>SignIn</em>组件设置一个路由。同时在应用栏中的 "存储库 "标签旁边添加一个带有 "登录 "文字的标签。用户应该能够通过按下标签在两个视图之间导航（提示：你可以使用React路由器's [Link](https://reactrouter.com/en/main/components/link-native) 组件）。
 
 #### Exercise 10.7: scrollable app bar
 

@@ -142,7 +142,7 @@ const App = () => {
 
 Reititys eli komponenttien ehdollinen, selaimen <i>URL:iin perustuva</i> renderöinti otetaan käyttöön sijoittamalla komponentteja <i>Router</i>-komponentin lapsiksi eli <i>Router</i>-tagien sisälle.
 
-Huomaa, että vaikka komponenttiin viitataan nimellä <i>Router</i>, kyseessä on [BrowserRouter](https://reactrouter.com/docs/en/v6/api#browserrouter), sillä importtaus tapahtuu siten, että importattava olio uudelleennimetään:
+Huomaa, että vaikka komponenttiin viitataan nimellä <i>Router</i>, kyseessä on [BrowserRouter](https://reactrouter.com/en/main/router-components/browser-router), sillä importtaus tapahtuu siten, että importattava olio uudelleennimetään:
 
 ```js
 import {
@@ -151,7 +151,7 @@ import {
 } from 'react-router-dom'
 ```
 
-[Manuaalin](https://reactrouter.com/docs/en/v6/api#browserrouter) mukaan
+[Manuaalin](https://reactrouter.com/en/main/router-components/browser-router) mukaan
 
 > <i>BrowserRouter</i> is a <i>Router</i> that uses the HTML5 history API (pushState, replaceState and the popstate event) to keep your UI in sync with the URL.
 
@@ -165,7 +165,7 @@ Routerin sisälle määritellään selaimen osoiteriviä muokkaavia <i>linkkejä
 
 luo sovellukseen linkin, jonka teksti on <i>notes</i> ja jonka klikkaaminen vaihtaa selaimen osoiteriville URL:ksi <i>/notes</i>.
 
-Selaimen URL:iin perustuen renderöitävät komponentit määritellään komponentin [Route](https://reactrouter.com/docs/en/v6/api#routes-and-route) avulla. Esim.
+Selaimen URL:iin perustuen renderöitävät komponentit määritellään komponentin [Route](https://reactrouter.com/en/main/route/route) avulla. Esim.
 
 ```js
 <Route path="/notes" element={<Notes />} />

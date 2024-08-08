@@ -397,7 +397,7 @@ Storageen talletetut arvot säilyvät vaikka sivu uudelleenladattaisiin. Storage
 
 Laajennetaan sovellusta siten, että se asettaa kirjautuneen käyttäjän tiedot local storageen.
 
-Koska storageen talletettavat arvot ovat [merkkijonoja](https://developer.mozilla.org/en-US/docs/Web/API/DOMString), emme voi tallettaa storageen suoraan JavaScript-oliota, vaan ne on muutettava ensin JSON-muotoon metodilla _JSON.stringify_. Vastaavasti kun JSON-muotoinen olio luetaan local storagesta, on se parsittava takaisin JavaScript-olioksi metodilla _JSON.parse_.
+Koska storageen talletettavat arvot ovat [merkkijonoja](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage#description), emme voi tallettaa storageen suoraan JavaScript-oliota, vaan ne on muutettava ensin JSON-muotoon metodilla _JSON.stringify_. Vastaavasti kun JSON-muotoinen olio luetaan local storagesta, on se parsittava takaisin JavaScript-olioksi metodilla _JSON.parse_.
 
 Kirjautumisen yhteyteen tehtävä muutos on seuraava:
 

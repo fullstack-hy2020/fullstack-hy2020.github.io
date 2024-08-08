@@ -374,7 +374,7 @@ startStandaloneServer(server, {
 })
 ```
 
-Kontekstin avulla voidaan suorittaa jotain kaikille kyselyille ja mutaatioille yhteisiä asioita, esim. pyyntöön liittyvän [käyttäjän tunnistaminen](https://blog.apollographql.com/authorization-in-graphql-452b1c402a9?_ga=2.45656161.474875091.1550613879-1581139173.1549828167).
+Kontekstin avulla voidaan suorittaa jotain kaikille kyselyille ja mutaatioille yhteisiä asioita, esim. pyyntöön liittyvän [käyttäjän tunnistaminen](https://www.apollographql.com/blog/authorization-in-graphql/).
 
 Contextin palauttama olio annetaan kaikille resolvereille <i>kolmantena parametrina</i>.
 

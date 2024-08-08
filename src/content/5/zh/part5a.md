@@ -469,8 +469,8 @@ window.localStorage.getItem('name')
 <!-- Let's extend our application so that it saves the details of a logged-in user to the local storage.-->
  让我们扩展我们的应用，使其将登录用户的详细信息保存在本地存储中。
 
-<!-- Values saved to the storage are [DOMstrings](https://developer.mozilla.org/en-US/docs/Web/API/DOMString), so we cannot save a JavaScript object as is. The object has to be parsed to JSON first, with the method _JSON.stringify_. Correspondingly, when a JSON object is read from the local storage, it has to be parsed back to JavaScript with _JSON.parse_.-->
- 保存到存储空间的值是[DOMstrings](https://developer.mozilla.org/en-US/docs/Web/API/DOMString)，所以我们不能原封不动地保存一个JavaScript对象。该对象必须首先被解析为JSON，使用_JSON.stringify_方法。相应地，当一个JSON对象从本地存储中读取时，必须用_JSON.parse_将其解析为JavaScript。
+<!-- Values saved to the storage are [DOMstrings](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage#description), so we cannot save a JavaScript object as is. The object has to be parsed to JSON first, with the method _JSON.stringify_. Correspondingly, when a JSON object is read from the local storage, it has to be parsed back to JavaScript with _JSON.parse_.-->
+ 保存到存储空间的值是[DOMstrings](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage#description)，所以我们不能原封不动地保存一个JavaScript对象。该对象必须首先被解析为JSON，使用_JSON.stringify_方法。相应地，当一个JSON对象从本地存储中读取时，必须用_JSON.parse_将其解析为JavaScript。
 
 <!-- Changes to the login method are as follows:-->
  登录方法的变化如下：
