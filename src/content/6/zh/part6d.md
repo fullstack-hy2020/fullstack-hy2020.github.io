@@ -1003,7 +1003,7 @@ export default Button
 
 <!--The most comprehensive and robust state management solution is Redux, which is a way to implement the so-called [Flux](https://facebookarchive.github.io/flux/) architecture. Redux is slightly older than the solutions presented in this section. The rigidity of Redux has been the motivation for many new state management solutions, such as React's <i>useReducer</i>. Some of the criticisms of Redux's rigidity have already become obsolete thanks to the [Redux Toolkit](https://redux-toolkit.js.org/).-->
 
-Redux 是其中最全面和强大的状态管理方案，它是实现所谓 [Flux](https://facebook.github.io/flux/) 架构的一种方式。Redux 比本章介绍的方案更有历史。Redux 过去的僵化成为了当前很多新状态管理工具的开发动力，例如 React 的 *useReducer* 。但在有了 [Redux Toolkit](https://redux-toolkit.js.org/) 后，对 Redux 僵化的批评已经消散。
+Redux 是其中最全面和强大的状态管理方案，它是实现所谓 [Flux](https://facebookarchive.github.io/flux/) 架构的一种方式。Redux 比本章介绍的方案更有历史。Redux 过去的僵化成为了当前很多新状态管理工具的开发动力，例如 React 的 *useReducer* 。但在有了 [Redux Toolkit](https://redux-toolkit.js.org/) 后，对 Redux 僵化的批评已经消散。
 
 <!--Over the years, there have also been other state management libraries developed that are similar to Redux, such as the newer entrant [Recoil](https://recoiljs.org/) and the slightly older [MobX](https://mobx.js.org/). However, according to [Npm trends](https://npmtrends.com/mobx-vs-recoil-vs-redux), Redux still clearly dominates, and in fact seems to be increasing its lead:-->
 

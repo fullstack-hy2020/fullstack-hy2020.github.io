@@ -356,7 +356,7 @@ startStandaloneServer(server, {
 })
 ```
 
-El objeto devuelto por el contexto se le da a todos los resolutores como su <i>tercer parámetro</i>. El contexto es el lugar adecuado para hacer cosas que comparten varios resolutores, como [identificación de usuario](https://blog.apollographql.com/authorization-in-graphql-452b1c402a9?_ga=2.45656161.474875091.1550613879-1581139173.1549828167).
+El objeto devuelto por el contexto se le da a todos los resolutores como su <i>tercer parámetro</i>. El contexto es el lugar adecuado para hacer cosas que comparten varios resolutores, como [identificación de usuario](https://www.apollographql.com/blog/authorization-in-graphql/).
 
 Entonces, nuestro código establece el objeto correspondiente al usuario que realizó la solicitud al campo *currentUser* del contexto. Si no hay ningún usuario conectado a la solicitud, el valor del campo no está definido.
 

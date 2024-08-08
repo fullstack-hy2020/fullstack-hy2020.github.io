@@ -345,8 +345,8 @@ const server = new ApolloServer({
 })
 ```
 
-<!-- The object returned by context is given to all resolvers as their <i>third parameter</i>. Context is the right place to do things which are shared by multiple resolvers, like [user identification](https://blog.apollographql.com/authorization-in-graphql-452b1c402a9?_ga=2.45656161.474875091.1550613879-1581139173.1549828167).-->
- 由context返回的对象作为他们的<i>第三个参数</i>被提供给所有解析器。上下文是做多个解析器共享的事情的正确位置，比如[用户标识](https://blog.apollographql.com/authorization-in-graphql-452b1c402a9?_ga=2.45656161.474875091.1550613879-1581139173.1549828167)。
+<!-- The object returned by context is given to all resolvers as their <i>third parameter</i>. Context is the right place to do things which are shared by multiple resolvers, like [user identification](https://www.apollographql.com/blog/authorization-in-graphql/).-->
+ 由context返回的对象作为他们的<i>第三个参数</i>被提供给所有解析器。上下文是做多个解析器共享的事情的正确位置，比如[用户标识](https://www.apollographql.com/blog/authorization-in-graphql/)。
 
 <!-- So our code sets the object corresponding to the user who made the request to the _currentUser_ field of the context. If there is no user connected to the request, the value of the field is undefined.-->
  所以我们的代码将与发出请求的用户相对应的对象设置到上下文的_currentUser_字段。如果没有与请求相关的用户，则该字段的值是未定义的。
