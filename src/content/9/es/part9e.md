@@ -43,7 +43,7 @@ Ademas del componente *App* y de un directorio para services, actualmente hay tr
 
 No hay nada muy sorprendente en el código. El estado y la comunicación con el backend son implementados con el hook *useState* y con Axios, similar a la aplicación de notas de la parte anterior. [Material UI](/es/part7/mas_sobre_estilos#material-ui) es utilizado para el estilo de la aplicación y la estructura de navegación esta implementada con [React Router](/es/part7/react_router), ambas nos son familiares desde la parte 7 del curso.
 
-Desde el punto de vista del tipado, hay un par de cosas interesantes. El componente *App* le pasa la función *setPatients* como prop a el componente *PatientListPage*:
+Desde el punto de vista del tipado, hay un par de cosas interesantes. El componente *App* le pasa la función *setPatients* como prop al componente *PatientListPage*:
 
 ```js
 const App = () => {
