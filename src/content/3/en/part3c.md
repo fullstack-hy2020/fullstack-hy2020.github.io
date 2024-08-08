@@ -669,7 +669,7 @@ Change the fetching of all phonebook entries so that the data is <i>fetched from
 
 Verify that the frontend works after the changes have been made.
 
-In the following exercises, write all Mongoose-specific code into its own module, just like we did in the chapter [Database configuration into its own module](/en/part3/saving_data_to_mongo_db#database-configuration-into-its-own-module).
+In the following exercises, write all Mongoose-specific code into its own module, just like we did in the chapter [Database configuration into its own module](/en/part3/saving_data_to_mongo_db#moving-db-configuration-to-its-own-module).
 
 #### 3.14: Phonebook database, step 2
 
