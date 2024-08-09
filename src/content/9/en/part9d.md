@@ -222,7 +222,7 @@ export default App;
 
 and remove the unnecessary files.
 
-The whole app is now in one component. That is not what we want, so refactor the code so that it consists of three components: *Header*,  *Content* and *Total*. All data is still kept in the *App* component, which passes all necessary data to each component as props. *Be sure to add type declarations for each component's props!*
+The whole app is now in one component. That is not what we want, so refactor the code so that it consists of three components: *Header*,  *Content* and *Total*. All data is still kept in the *App* component, which passes all necessary data to each component as props. <i>Be sure to add type declarations for each component's props!</i>
 
 The *Header* component should take care of rendering the name of the course. *Content* should render the names of the different parts and the number of exercises in each part, and *Total* should render the total sum of exercises in all parts.
 
@@ -409,15 +409,15 @@ If we try to access the objects in the array *courseParts: CoursePart[]* we noti
 
 And indeed, the TypeScript [documentation](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#working-with-union-types) says this:
 
-> *TypeScript will only allow an operation (or attribute access) if it is valid for every member of the union.*
+> <i>TypeScript will only allow an operation (or attribute access) if it is valid for every member of the union.</i>
 
 The documentation also mentions the following:
 
-> *The solution is to narrow the union with code... Narrowing occurs when TypeScript can deduce a more specific type for a value based on the structure of the code.*
+> <i>The solution is to narrow the union with code... Narrowing occurs when TypeScript can deduce a more specific type for a value based on the structure of the code.</i>
 
 So once again the [type narrowing](https://www.typescriptlang.org/docs/handbook/2/narrowing.html) is the rescue!
 
-One handy way to narrow these kinds of types in TypeScript is to use *switch case* expressions. Once TypeScript has inferred that a variable is of union type and that each type in the union contain a certain literal attribute (in our case *kind*), we can use that as a type identifier. We can then build a switch case around that attribute and TypeScript will know which attributes are available within each case block:
+One handy way to narrow these kinds of types in TypeScript is to use *switch case* expressions. Once TypeScript has inferred that a variable is of union type and that each type in the union contains a certain literal attribute (in our case *kind*), we can use that as a type identifier. We can then build a switch case around that attribute and TypeScript will know which attributes are available within each case block:
 
 ![vscode showing part. and then the attributes](../../images/9/64new.png)
 
@@ -665,7 +665,7 @@ import { useState } from "react";
 
 const App = () => {
   const [notes, setNotes] = useState<Note[]>([
-    { id: 1, content: 'testing' } // highlight-line
+    { id: '1', content: 'testing' } // highlight-line
   ]);
   const [newNote, setNewNote] = useState('');
 
@@ -847,7 +847,7 @@ We can now set the data in the state *notes* to get the code working:
 
 So just like with *useState*, we gave a type parameter to *axios.get* to instruct it on how the typing should be done. Just like *useState* also *axios.get* is a [generic function](https://www.typescriptlang.org/docs/handbook/2/generics.html#working-with-generic-type-variables). Unlike some generic functions, the type parameter of *axios.get* has a default value of *any* so, if the function is used without defining the type parameter, the type of the response data will be any.
 
-The code works, compiler and Eslint are happy and remain quiet. However, giving a type parameter to *axios.get* is a potentially dangerous thing to do. The response body can contain data in an arbitrary form, and when giving a type parameter we are essentially just telling to TypeScript compiler to trust us that the data has type *Note[]*.
+The code works, compiler and Eslint are happy and remain quiet. However, giving a type parameter to *axios.get* is a potentially dangerous thing to do. The <i>response body can contain data in an arbitrary form</i>, and when giving a type parameter we are essentially just telling to TypeScript compiler to trust us that the data has type *Note[]*.
 
 So our code is essentially as safe as it would be if a [type assertion](/en/part9/first_steps_with_type_script#type-assertion) would be used:
 
@@ -860,9 +860,9 @@ So our code is essentially as safe as it would be if a [type assertion](/en/part
   }, [])
 ```
 
-Since the TypeScript types do not even exist in runtime, our code does not give us any "safety" against situations where the request body contains data in a wrong form.
+Since the TypeScript types do not even exist in runtime, our code does not give us any safety against situations where the request body contains data in the wrong form.
 
-Giving a type parameter to *axios.get* might be ok if we are *absolutely sure* that the backend behaves correctly and returns always the data in the correct form. If we want to build a robust system we should prepare for surprises and parse the response data in the frontend, similarly to what we did [in the previous section](/en/part9/typing_an_express_app#proofing-requests) for the requests to the backend.
+Giving a type parameter to *axios.get* might be ok if we are <i>absolutely sure</i> that the backend behaves correctly and returns always the data in the correct form. If we want to build a robust system we should prepare for surprises and parse the response data in the frontend, similarly to what we did [in the previous section](/en/part9/typing_an_express_app#proofing-requests) for the requests to the backend.
 
 Let us now wrap up our app by implementing the new note addition:
 

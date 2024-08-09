@@ -10,9 +10,7 @@ lang: en
 
 ### Working with an existing codebase
 
-When diving into an existing codebase for the first time, it is good to get an overall view of the conventions and structure of the project. You can start your research by reading the *README.md* in the root of the repository. Usually, the README contains a brief description of the application and the requirements for using it, as well as how to start it for development.
-If the README is not available or someone has "saved time" and left it as a stub, you can take a peek at the *package.json*.
-It is always a good idea to start the application and click around to verify you have a functional development environment.
+When diving into an existing codebase for the first time, it is good to get an overall view of the conventions and structure of the project. You can start your research by reading the *README.md* in the root of the repository. Usually, the README contains a brief description of the application and the requirements for using it, as well as how to start it for development. If the README is not available or someone has "saved time" and left it as a stub, you can take a peek at the *package.json*. It is always a good idea to start the application and click around to verify you have a functional development environment.
 
 You can also browse the folder structure to get some insight into the application's functionality and/or the architecture used. These are not always clear, and the developers might have chosen a way to organize code that is not familiar to you. The [sample project](https://github.com/fullstack-hy2020/patientor) used in the rest of this part is organized, feature-wise. You can see what pages the application has, and some general components, e.g. modals and state. Keep in mind that the features may have different scopes. For example, modals are visible UI-level components whereas the state is comparable to business logic and keeps the data organized under the hood for the rest of the app to use.
 
@@ -32,18 +30,18 @@ If all goes well, you should see a patient listing page. It fetches a list of pa
 
 After verifying that everything works, we can start studying the code. All the interesting stuff resides in the *src* folder. For your convenience, there is already a *types.ts* file for basic types used in the app, which you will have to extend or refactor in the exercises.
 
-In principle, we could use the same types for both backend and frontend, but usually, the frontend has different data structures and use cases for the data, which causes the types to be different.
+In principle, we could use the same types for both the backend and the frontend, but usually, the frontend has different data structures and use cases for the data, which causes the types to be different.
 For example, the frontend has a state and may want to keep data in objects or maps whereas the backend uses an array. The frontend might also not need all the fields of a data object saved in the backend, and it may need to add some new fields to use for rendering.
 
 The folder structure looks as follows:
 
 ![vscode folder structure for patientor](../../images/9/34brandnew.png)
 
-Besides the component *App* and a directory for services, there are currently three main components: *AddPatientModal* and *PatientListPage* which are both defined in a directory, and a component *HealthRatingBar* defined in a file. If a component has some subcomponents not used elsewhere in the app, it might be a good idea to define the component and its subcomponents in a directory. For example now the AddPatientModal is defined in the file *components/AddPatientModal/index.tsx* and its subcomponent *AddPatientForm* in its own file under the same directory.
+Besides the component *App* and a directory for services, there are currently three main components: *AddPatientModal* and *PatientListPage* which are both defined in a directory and a component *HealthRatingBar* defined in a file. If a component has some subcomponents not used elsewhere in the app, it might be a good idea to define the component and its subcomponents in a directory. For example, now the AddPatientModal is defined in the file *components/AddPatientModal/index.tsx* and its subcomponent *AddPatientForm* in its own file under the same directory.
 
-There is nothing very surprising in the code. The state and communication with the backend are implemented with *useState* hook and Axios, similar to the notes app in the previous section. [Material UI](/en/part7/more_about_styles#material-ui) is used to style the app and the navigation structure is implemented with [React Router](/en/part7/react_router), both familiar to us from part 7 of the course.
+There is nothing too surprising in the code. The state and communication with the backend are implemented with *useState* hook and Axios, similar to the notes app in the previous section. [Material UI](/en/part7/more_about_styles#material-ui) is used to style the app and the navigation structure is implemented with [React Router](/en/part7/react_router), both familiar to us from part 7 of the course.
 
-From typing point of view, there are a couple of interesting things. Component *App* passes the function *setPatients* as a prop to the component *PatientListPage*:
+From the typing point of view, there are a couple of interesting things. Component *App* passes the function *setPatients* as a prop to the component *PatientListPage*:
 
 ```js
 const App = () => {
@@ -71,7 +69,7 @@ const App = () => {
 };
 ```
 
-To keep the TypeScript compiler happy, the props should be typed as follows:
+To keep the TypeScript compiler happy, the props are typed as follows:
 
 ```js
 interface Props {
@@ -88,9 +86,9 @@ So the function *setPatients* has type *React.Dispatch<React.SetStateAction<Pati
 
 ![vscode showing Patient array as type for setPatients](../../images/9/73new.png)
 
-The [React TypeScript cheatsheet](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/basic_type_example#basic-prop-types-examples) has a pretty nice list of typical prop types, where we can seek for help if finding the proper typing for props is not obvious.
+The [React TypeScript cheatsheet](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/basic_type_example#basic-prop-types-examples) has a pretty nice list of typical prop types, where we can seek help if finding the proper typing for props is not obvious.
 
-*PatientListPage* passes four props to the component *AddPatientModal*. Two of these props are functions. Let us have a look how these are typed:
+*PatientListPage* passes four props to the component *AddPatientModal*. Two of these props are functions. Let us have a look at how these are typed:
 
 ```js
 const PatientListPage = ({ patients, setPatients } : Props ) => {
@@ -139,7 +137,7 @@ const AddPatientModal = ({ modalOpen, onClose, onSubmit, error }: Props) => {
 }
 ```
 
-*onClose* is just a function that takes no parameters, and does not return anything, so the type is:
+*onClose* is just a function that takes no parameters and does not return anything, so the type is:
 
 ```js
 () => void
@@ -161,14 +159,14 @@ The return value of a *async* function is a [promise](https://developer.mozilla.
 
 We will soon add a new type for our app, *Entry*, which represents a lightweight patient journal entry. It consists of a journal text, i.e. a *description*, a creation date, information regarding the specialist who created it and possible diagnosis codes. Diagnosis codes map to the ICD-10 codes returned from the */api/diagnoses* endpoint. Our naive implementation will be that a patient has an array of entries.
 
-Before going into this, let us do some preparatory work.
+Before going into this, we need some preparatory work.
 
 #### 9.20: Patientor, step1
 
 Create an endpoint */api/patients/:id* to the backend that returns all of the patient information for one patient, including the array of patient entries that is still empty for all the patients. For the time being, expand the backend types as follows:
 
 ```js
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface Entry {
 }
 
@@ -302,7 +300,7 @@ interface BaseEntry {
 Now that we have the *BaseEntry* defined, we can start creating the extended entry types we will actually be using. Let's start by creating the *HealthCheckEntry* type.
 
 Entries of type *HealthCheck* contain the field *HealthCheckRating*, which is an integer from 0 to 3, zero meaning *Healthy* and three meaning *CriticalRisk*. This is a perfect case for an enum definition.
-With these specifications we could write a *HealthCheckEntry* type definition like so:
+With these specifications, we could write a *HealthCheckEntry* type definition like so:
 
 ```js
 export enum HealthCheckRating {
@@ -400,9 +398,9 @@ Your next task is to add endpoint */api/patients/:id/entries* to your backend, t
 
 Remember that we have different kinds of entries in our app, so our backend should support all those types and check that at least all required fields are given for each type.
 
-In this exercise you quite likely need to remember [this trick](/en/part9/grande_finale_patientor#omit-with-unions).
+In this exercise, you quite likely need to remember [this trick](/en/part9/grande_finale_patientor#omit-with-unions).
 
-You may assume that the diagnostic codes are sent in a correct form and use eg. the following kind of parser to extract those from the request body:
+You may assume that the diagnostic codes are sent in the correct form and use eg. the following kind of parser to extract those from the request body:
 
 ```js
 const parseDiagnosisCodes = (object: unknown): Array<Diagnosis['code']> =>  {
@@ -419,15 +417,15 @@ const parseDiagnosisCodes = (object: unknown): Array<Diagnosis['code']> =>  {
 
 Now that our backend supports adding entries, we want to add the corresponding functionality to the frontend. In this exercise, you should add a form for adding an entry to a patient. An intuitive place for accessing the form would be on a patient's page.
 
-In this exercise, it is enough to **support *one* entry type**. All the fields in the form can be just plain text inputs, so it is up to user to enter valid values.
+In this exercise, it is enough to **support *one* entry type**. All the fields in the form can be just plain text inputs, so it is up to the user to enter valid values.
 
-Upon a successful submit, the new entry should be added to the correct patient and the patient's entries on the patient page should be updated to contain the new entry.
+Upon a successful submission the new entry should be added to the correct patient and the patient's entries on the patient page should be updated to contain the new entry.
 
 Your form might look something like this:
 
 ![Patientor new healthcheck entry form](../../images/9/74new.png)
 
-If user enters invalid values to the form and backend rejects the addition, show a proper error message to user
+If a user enters invalid values to the form and backend rejects the addition, show a proper error message to the user
 
 ![browser showing healthCheckRating incorrect 15 error](../../images/9/75new.png)
 
@@ -437,7 +435,7 @@ Extend your solution so that it supports *all the entry types*
 
 #### 9.29: Patientor, step 10
 
-Improve the entry creation forms so that it makes hard to enter incorrect dates, diagnosis codes and health rating.
+Improve the entry creation forms so that it makes it hard to enter incorrect dates, diagnosis codes and health rating.
 
 Your improved form might look something like this:
 
@@ -453,7 +451,7 @@ Once you have completed the exercises and want to get the credits, let us know t
 
 ![Submissions](../../images/11/21.png)
 
-**Note** that you need a registration to the corresponding course part for getting the credits registered, see [here](/en/part0/general_info#parts-and-completion) for more information.
+**Note** that you need a registration to the corresponding course part to get the credits registered, see [here](/en/part0/general_info#parts-and-completion) for more information.
 
 You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the certificate's language.
 

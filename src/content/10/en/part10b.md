@@ -7,10 +7,6 @@ lang: en
 
 <div class="content">
 
-Note: This course material was updated in Feb 2024. Some updates are not compatible anymore with older material.
-We recommend a fresh start with this new Part 10 material. However, if you´re returning to this course after a break, and you want to continue the exercises in your older project, please use [Part 10 material before the upgrade](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/tree/e9784f36de8a0badc28fabde49e33e2959479177/src/content/10/en).
-
-
 Now that we have set up our development environment we can get into React Native basics and get started with the development of our application. In this section, we will learn how to build user interfaces with React Native's core components, how to add style properties to these core components, how to transition between views, and how to manage the form's state efficiently.
 
 ### Core components

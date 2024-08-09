@@ -5,12 +5,6 @@ letter: c
 lang: en
 ---
 
-<div class="tasks">
-
-The test library used in this part was changed on March 3, 2024 from Jest to Vitest. If you already started this part using Jest, you can see [here](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/blob/02d8be28b1c9190f48976fbbd2435b63261282df/src/content/5/en/part5c.md) the old content.
-
-</div>
-
 <div class="content">
 
 There are many different ways of testing React applications. Let's take a look at them next.

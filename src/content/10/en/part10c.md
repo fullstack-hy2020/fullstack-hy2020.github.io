@@ -7,9 +7,6 @@ lang: en
 
 <div class="content">
 
-Note: This course material was updated in Feb 2024. Some updates are not compatible anymore with older material.
-We recommend a fresh start with this new Part 10 material. However, if you´re returning to this course after a break, and you want to continue the exercises in your older project, please use [Part 10 material before the upgrade](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/tree/e9784f36de8a0badc28fabde49e33e2959479177/src/content/10/en).
-
 So far we have implemented features to our application without any actual server communication. For example, the reviewed repositories list we have implemented uses mock data and the sign in form doesn't send the user's credentials to any authentication endpoint. In this section, we will learn how to communicate with a server using HTTP requests, how to use Apollo Client in a React Native application, and how to store data in the user's device.
 
 Soon we will learn how to communicate with a server in our application. Before we get to that, we need a server to communicate with. For this purpose, we have a completed server implementation in the [rate-repository-api](https://github.com/fullstack-hy2020/rate-repository-api) repository. The rate-repository-api server fulfills all our application's API needs during this part. It uses [SQLite](https://www.sqlite.org/index.html) database which doesn't need any setup and provides an Apollo GraphQL API along with a few REST API endpoints.
