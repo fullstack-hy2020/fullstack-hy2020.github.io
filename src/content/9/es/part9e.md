@@ -323,7 +323,7 @@ Ahora solo necesitamos crear los tipos *OccupationalHealthCareEntry* y *Hospital
 ```js
 export type Entry =
   | HospitalEntry
-  | OccupationalHealthcareEntry
+  | OccupationalHealthCareEntry
   | HealthCheckEntry;
 ```
 
