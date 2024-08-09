@@ -534,7 +534,7 @@ if (currency) {
 
 joka estää valuuttakurssien hakemisen ensimmäisen renderöininin yhteydessä, eli siinä vaiheessa kuin muuttujalla _currency_ on vasta alkuarvo eli _null_.
 
-Jos käyttäjä siis kirjoittaa hakukenttään esim. <i>eur</i>, suorittaa sovellus Axiosin avulla HTTP GET ‑pyynnön osoitteeseen https://open.er-api.com/v6/latest/eur ja tallentaa vastauksen tilaaan _rates_. 
+Jos käyttäjä siis kirjoittaa hakukenttään esim. <i>eur</i>, suorittaa sovellus Axiosin avulla HTTP GET ‑pyynnön osoitteeseen https://open.er-api.com/v6/latest/eur ja tallentaa vastauksen tilaan _rates_. 
 
 Kun käyttäjä tämän jälkeen kirjoittaa hakukenttään jonkin toisen arvon, esim. <i>usd</i> suoritetaan efekti jälleen ja uuden valuutan kurssit haetaan.
 
