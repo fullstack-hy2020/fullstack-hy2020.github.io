@@ -252,10 +252,13 @@ If we take a closer look at the data, we can see that the entries are quite diff
 }
 ```
 
-Immediately, we can see that while the first few fields are the same, the first entry has a *discharge* field and the second entry has *employerName* and *sickLeave* fields.
-All the entries seem to have some fields in common, but some fields are entry-specific.
+Immediately, we can see that while the first few fields are the same, the first entry has a *discharge* field and the second entry has *employerName* and *sickLeave* fields. All the entries seem to have some fields in common, but some fields are entry-specific.
 
-When looking at the *type*, we can see that there are three kinds of entries: *OccupationalHealthcare*, *Hospital* and *HealthCheck*.
+When looking at the *type*, we can see that there are three kinds of entries:
+- *OccupationalHealthcare*
+- *Hospital*
+- *HealthCheck*
+
 This indicates we need three separate types. Since they all have some fields in common, we might just want to create a base entry interface that we can extend with the different fields in each type.
 
 When looking at the data, it seems that the fields *id*, *description*, *date* and *specialist* are something that can be found in each entry. On top of that, it seems that *diagnosisCodes* is only found in one *OccupationalHealthcare* and one *Hospital* type entry. Since it is not always used, even in those types of entries, it is safe to assume that the field is optional. We could consider adding it to the *HealthCheck* type as well since it might just not be used in these specific entries.
@@ -272,8 +275,7 @@ interface BaseEntry {
 }
 ```
 
-If we want to finetune it a bit further, since we already have a *Diagnosis* type defined in the backend, we might just want to refer to the code field of the *Diagnosis* type directly in case its type ever changes.
-We can do that like so:
+If we want to finetune it a bit further, since we already have a *Diagnosis* type defined in the backend, we might just want to refer to the *code* field of the *Diagnosis* type directly in case its type ever changes. We can do that like so:
 
 ```js
 interface BaseEntry {
@@ -417,7 +419,7 @@ const parseDiagnosisCodes = (object: unknown): Array<Diagnosis['code']> =>  {
 
 Now that our backend supports adding entries, we want to add the corresponding functionality to the frontend. In this exercise, you should add a form for adding an entry to a patient. An intuitive place for accessing the form would be on a patient's page.
 
-In this exercise, it is enough to **support *one* entry type**. All the fields in the form can be just plain text inputs, so it is up to the user to enter valid values.
+In this exercise, it is enough to **support one entry type**. All the fields in the form can be just plain text inputs, so it is up to the user to enter valid values.
 
 Upon a successful submission the new entry should be added to the correct patient and the patient's entries on the patient page should be updated to contain the new entry.
 

@@ -340,12 +340,12 @@ Despite changes *all the submitted exercises remain valid*, and the course can b
 
 Recent major changes
 
+- Part 9 (12th August, 2024): ESLint configurations updated
 - Part 3 (20th June, 2024): ESLint configurations updated
 - Part 10 (21st March, 2024): Create React app replaced with Vite
 - Parts 3-5 (February-March 2024): Libraries used for testing changed
 - Part 10 (26th February, 2024): Library versions updated
 - Part 11 (16th January 2024): Example project dependencies updated
-- Parts 1-2, 5-9 (11th September - 5th October): Create React app replaced with Vite
 
 ### Expanding on a previously completed course
 
