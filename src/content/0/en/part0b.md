@@ -440,7 +440,7 @@ The Form Data dropdown is within the new Payload tab, located to the right of th
 
 ![form data dropdown in developer tools](../../images/0/23e.png)
 
-The Form tag has attributes <i>action</i> and <i>method</i>, which define that submitting the form is done as an HTTP POST request to the address <i>new_note</i>.
+The Form tag has attributes <i>action</i> and <i>method</i>, which define that submitting the form is done as an HTTP POST request to the address <i>new\_note</i>.
 
 ![action and method highlight](../../images/0/24e.png)
 
@@ -549,7 +549,7 @@ form.onsubmit = function(e) {
 }
 ```
 
-The command <em>document.getElementById('notes_form')</em> instructs the code to fetch a reference to the HTML form element on the page that has the ID "notes_form" and to register an <i>event handler</i> to handle the form's submit event. The event handler immediately calls the method <em>e.preventDefault()</em> to prevent the default handling of form's submit. The default method would send the data to the server and cause a new GET request, which we don't want to happen.
+The command <em>document.getElementById('notes\_form')</em> instructs the code to fetch a reference to the HTML form element on the page that has the ID "notes\_form" and to register an <i>event handler</i> to handle the form's submit event. The event handler immediately calls the method <em>e.preventDefault()</em> to prevent the default handling of form's submit. The default method would send the data to the server and cause a new GET request, which we don't want to happen.
 
 Then the event handler creates a new note, adds it to the notes list with the command <em>notes.push(note)</em>, rerenders the note list on the page and sends the new note to the server.
 
