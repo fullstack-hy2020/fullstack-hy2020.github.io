@@ -524,7 +524,7 @@ list.appendChild(newElement)
 ![Detail view of the first request](../../images/0/22e.png)
 
 <!-- It is an [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request to the server address <i>new\_note</i>. The server responds with HTTP status code 302. This is a [URL redirect](https://en.wikipedia.org/wiki/URL_redirection), with which the server asks the browser to do a new HTTP GET request to the address defined in the header's <i>Location</i> - the address <i>notes</i>.-->
-这是一个[HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST)请求，指向服务器地址<i>new_note</i>。服务器回应的是HTTP状态代码302。这是一个[URL重定向](https://en.wikipedia.org/wiki/URL_redirection)，服务器要求浏览器对头信息<i>Location</i>中定义的地址--即地址<i>notes</i>做一个新的HTTP GET请求。
+这是一个[HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST)请求，指向服务器地址<i>new\_note</i>。服务器回应的是HTTP状态代码302。这是一个[URL重定向](https://en.wikipedia.org/wiki/URL_redirection)，服务器要求浏览器对头信息<i>Location</i>中定义的地址--即地址<i>notes</i>做一个新的HTTP GET请求。
 
 <!-- So, the browser reloads the Notes page. The reload causes three more HTTP requests: fetching the style sheet (main.css), the JavaScript code (main.js), and the raw data of the notes (data.json).-->
  于是，浏览器重新加载了笔记页面。重载又引起了三个HTTP请求：获取样式表（main.css）、JavaScript代码（main.js）和笔记的原始数据（data.json）。
@@ -538,7 +538,7 @@ list.appendChild(newElement)
 ![](../../images/0/23e.png)
 
 <!-- The Form tag has attributes <i>action</i> and <i>method</i>, which define that submitting the form is done as an HTTP POST request to the address <i>new_note</i>.-->
- 表单标签有属性<i>action</i>和<i>method</i>，它们定义了提交表单是以HTTP POST请求的方式完成的，地址为<i>new_note</i>。
+ 表单标签有属性<i>action</i>和<i>method</i>，它们定义了提交表单是以HTTP POST请求的方式完成的，地址为<i>new\_note</i>。
 
 ![](../../images/0/24e.png)
 
@@ -635,7 +635,7 @@ HTML代码几乎相同，但JavaScript文件不同（<i>spa.js</i>），而且�
 ![](../../images/0/26e.png)
 
 <!-- The POST request to the address <i>new\_note\_spa</i> contains the new note as JSON-data containing both the content of the note (<i>content</i>) and the timestamp (<i>date</i>):-->
- 发送到地址<i>new_note/spa</i>的POST请求包含了新笔记的JSON数据，包含了笔记的内容（<i>content</i>）和时间戳（<i>date</i>）。
+ 发送到地址<i>new\_note\_spa</i>的POST请求包含了新笔记的JSON数据，包含了笔记的内容（<i>content</i>）和时间戳（<i>date</i>）。
 
 ```js
 {
@@ -705,7 +705,7 @@ var sendToServer = function(note) {
 <!-- The application code is available at <https://github.com/mluukkai/example_app>.-->
  应用代码可在<https://github.com/mluukkai/example_app>中找到。
 <!-- It's worth remembering that the application is only meant to demonstrate the concepts of the course. The code follows a poor style of development in some measure, and should not be used as an example when creating your own applications. The same is true for the URLs used. The URL <i>new\_note\_spa</i>, which new notes are sent to, does not adhere to current best practices.-->
- 值得记住的是，这个应用只是为了演示课程的概念。代码在某种程度上遵循了不良的开发风格，在创建你自己的应用时，不应作为一个例子来使用。所用的URL也是如此。发送新笔记的URL <i>new_note\_spa</i>并不符合当前的最佳实践。
+ 值得记住的是，这个应用只是为了演示课程的概念。代码在某种程度上遵循了不良的开发风格，在创建你自己的应用时，不应作为一个例子来使用。所用的URL也是如此。发送新笔记的URL <i>new\_note\_spa</i>并不符合当前的最佳实践。
 
 ### JavaScript-libraries
 
