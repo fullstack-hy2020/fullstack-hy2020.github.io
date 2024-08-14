@@ -435,7 +435,7 @@ Network-välilehti näyttää myös lomakkeen mukana lähetetyn datan:
 
 ![](../../images/0/23e.png)
 
-Lomakkeen lähettäminen tapahtuu HTTP POST ‑pyyntönä ja osoitteeseen <i>new_note</i> form-tagiin määriteltyjen attribuuttien <i>action</i> ja <i>method</i> ansiosta:
+Lomakkeen lähettäminen tapahtuu HTTP POST ‑pyyntönä ja osoitteeseen <i>new\_note</i> form-tagiin määriteltyjen attribuuttien <i>action</i> ja <i>method</i> ansiosta:
 
 ![](../../images/0/24e.png)
 
@@ -542,7 +542,7 @@ form.onsubmit = function(e) {
 }
 ```
 
-Komennolla <em>document.getElementById('notes_form')</em> koodi hakee sivulta lomake-elementin ja rekisteröi sille <i>tapahtumankäsittelijän</i> hoitamaan tilanteen, jossa lomake "submitoidaan" eli lähetetään. Tapahtumankäsittelijä kutsuu heti metodia <em>e.preventDefault()</em>, jolla se estää lomakkeen lähetyksen oletusarvoisen toiminnan. Oletusarvoinen toiminta aiheuttaisi lomakkeen lähettämisen ja sivun uudelleen lataamisen, joita emme single page ‑sovelluksissa halua tapahtuvan.
+Komennolla <em>document.getElementById('notes\_form')</em> koodi hakee sivulta lomake-elementin ja rekisteröi sille <i>tapahtumankäsittelijän</i> hoitamaan tilanteen, jossa lomake "submitoidaan" eli lähetetään. Tapahtumankäsittelijä kutsuu heti metodia <em>e.preventDefault()</em>, jolla se estää lomakkeen lähetyksen oletusarvoisen toiminnan. Oletusarvoinen toiminta aiheuttaisi lomakkeen lähettämisen ja sivun uudelleen lataamisen, joita emme single page ‑sovelluksissa halua tapahtuvan.
 
 Tämän jälkeen koodi luo muistiinpanon, lisää sen muistiinpanojen listalle komennolla <em>notes.push(note)</em>, piirtää ruudun sisällön eli muistiinpanojen listan uudelleen ja lähettää uuden muistiinpanon palvelimelle.
 
