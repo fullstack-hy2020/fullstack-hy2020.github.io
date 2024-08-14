@@ -433,7 +433,7 @@ NB: Dans les dernières versions de Chrome, les informations sur les données de
 
 ![informations sur les données de formulaire](../../images/0/23e.png)
 
-La balise Form a les attributs <i>action</i> et <i>method</i>, qui définissent que la soumission du formulaire se fait sous la forme d'une requête HTTP POST à ​​l'adresse <i>new_note</i>.
+La balise Form a les attributs <i>action</i> et <i>method</i>, qui définissent que la soumission du formulaire se fait sous la forme d'une requête HTTP POST à ​​l'adresse <i>new\_note</i>.
 
 ![mise en évidence de l'action et la méthode du formulaire](../../images/0/24e.png)
 
