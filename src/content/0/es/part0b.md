@@ -550,7 +550,7 @@ form.onsubmit = function(e) {
 }
 ```
 
-El comando <em>document.getElementById('notes_form')</em> le indica al código que obtenga el elemento form de la página y que registre un <i>event handler</i> para manejar el evento de envío del formulario. El controlador de eventos llama inmediatamente al método <em>e.preventDefault()</em> para evitar el manejo por defecto del envío de formularios. El método por defecto enviaría los datos al servidor y causaría una nueva solicitud GET, lo cual no queremos que suceda.
+El comando <em>document.getElementById('notes\_form')</em> le indica al código que obtenga el elemento form de la página y que registre un <i>event handler</i> para manejar el evento de envío del formulario. El controlador de eventos llama inmediatamente al método <em>e.preventDefault()</em> para evitar el manejo por defecto del envío de formularios. El método por defecto enviaría los datos al servidor y causaría una nueva solicitud GET, lo cual no queremos que suceda.
 
 Luego el controlador de eventos crea una nueva nota, la agrega a la lista de notas con el comando <em>notes.push(note)</em>, vuelve a renderizar la lista de notas en la página y envía la nueva nota al servidor.
 

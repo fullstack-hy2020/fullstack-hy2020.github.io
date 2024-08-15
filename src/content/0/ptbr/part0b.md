@@ -441,7 +441,7 @@ Obs.: Na versão mais recente do Chrome, o menu drop-down (lista suspensa) "Form
 
 ![Menu drop-down do Form Data das Ferramentas do Desenvolvedor](../../images/0/23e.png)
 
-A tag Form tem os atributos <i>action</i> e <i>method</i>, que definem que o envio do formulário é feito como uma requisição HTTP POST para o endereço <i>new_note</i>.
+A tag Form tem os atributos <i>action</i> e <i>method</i>, que definem que o envio do formulário é feito como uma requisição HTTP POST para o endereço <i>new\_note</i>.
 
 ![Destaque dos atributos action e method](../../images/0/24e.png)
 
@@ -547,7 +547,7 @@ form.onsubmit = function(e) {
 }
 ```
 
-O comando <em>document.getElementById('notes_form')</em> instrui o código a buscar o elemento de formulário da página e a registrar um <i>gerenciador de evento</i> para lidar com o evento de envio do formulário. O gerenciador de evento chama imediatamente o método <em>e.preventDefault()</em> para evitar o tratamento padrão do envio do formulário. O método padrão enviaria os dados para o servidor e causaria uma nova requisição GET, o que não queremos que aconteça.
+O comando <em>document.getElementById('notes\_form')</em> instrui o código a buscar o elemento de formulário da página e a registrar um <i>gerenciador de evento</i> para lidar com o evento de envio do formulário. O gerenciador de evento chama imediatamente o método <em>e.preventDefault()</em> para evitar o tratamento padrão do envio do formulário. O método padrão enviaria os dados para o servidor e causaria uma nova requisição GET, o que não queremos que aconteça.
 
 Em seguida, o gerenciador de evento cria uma nova nota, adiciona-a à lista de notas com o comando <em>notes.push(note)</em>, redesenha a lista de notas na página e envia a nova nota ao servidor.
 
@@ -567,7 +567,7 @@ var sendToServer = function(note) {
 O código determina que os dados devem ser enviados com uma requisição HTTP POST e o tipo de dados deve ser JSON. O tipo de dados é determinado com um cabeçalho <i>Content-type</i>. Em seguida, os dados são enviados como uma string JSON.
 
 O código da aplicação está disponível em <https://github.com/mluukkai/example_app>.
-Vale ressaltar que a aplicação serve apenas para demonstrar os conceitos do curso. O código segue um estilo ruim de desenvolvimento em algumas partes e não deve ser usado como exemplo ao criar suas próprias aplicações. O mesmo se aplica às URLs usadas. A URL <i>new_note_spa</i> para a qual as novas notas são enviadas, não segue as melhores práticas usadas atualmente.
+Vale ressaltar que a aplicação serve apenas para demonstrar os conceitos do curso. O código segue um estilo ruim de desenvolvimento em algumas partes e não deve ser usado como exemplo ao criar suas próprias aplicações. O mesmo se aplica às URLs usadas. A URL <i>new\_note\_spa</i> para a qual as novas notas são enviadas, não segue as melhores práticas usadas atualmente.
 
 ### Bibliotecas JavaScript
 
