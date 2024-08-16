@@ -197,7 +197,7 @@ Klikkaamalla jonkin selaimen raporttia näemme tarkemman virheilmoituksen:
 
 ![](../../images/5/play3a.png)
 
-Isossa kuvassa on tietysti oikein hyvä asia että testaus tapahtuu kaikilla kolmella yleisesti käytetyllä selainmoottorilla, mutta tämä on hidasta, ja testejä kehittäessä kannattaa ehkä suorittaa pääosin vain yhdellä selaimella. Käytettävän selainmoottorin määrittely onnistuu komenentoriviparametrilla:
+Isossa kuvassa on tietysti oikein hyvä asia että testaus tapahtuu kaikilla kolmella yleisesti käytetyllä selainmoottorilla, mutta tämä on hidasta, ja testejä kehittäessä kannattaa ehkä suorittaa pääosin vain yhdellä selaimella. Käytettävän selainmoottorin määrittely onnistuu komentoriviparametrilla:
 
 ```js
 npm test -- --project chromium
