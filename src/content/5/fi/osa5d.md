@@ -1108,7 +1108,7 @@ describe('Note app', () => {
         await createNote(page, 'third note')
       })
   
-      test('one of those can be made nonimportant', async ({ page }) => {
+      test('one of those can be made unimportant', async ({ page }) => {
         await page.pause() // highlight-line
         const otherNoteText = await page.getByText('second note')
         const otherdNoteElement = await otherNoteText.locator('..')
