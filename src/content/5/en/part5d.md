@@ -952,7 +952,7 @@ All the commands in the tests that use the application url, e.g.
 
 ```js
 await page.goto('http://localhost:5173')
-await page.post('http://localhost:3001/api/testing/reset')
+await page.post('http://localhost:5173/api/testing/reset')
 ```
 
 can be transformed into:
