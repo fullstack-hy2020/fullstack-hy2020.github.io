@@ -510,7 +510,7 @@ Create an npm script for running the program with the command *npm run calculate
 
 Create the code of this exercise in file *exerciseCalculator.ts*.
 
-Write a function *calculateExercises* that calculates the average time of *daily exercise hours* compares it to the *target amount* of daily hours and returns an object that includes the following values:
+Write a function *calculateExercises* that calculates the average time of *daily exercise hours*, compares it to the *target amount* of daily hours and returns an object that includes the following values:
 
 - the number of days
 - the number of training days
