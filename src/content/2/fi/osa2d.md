@@ -221,7 +221,7 @@ Niin sanottua [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaS
 const changedNote = { ...note, important: !note.important }
 ```
 
-Käytännössä <em>{ ... note}</em> luo olion, jolla on kenttinään kopiot olion _note_ kenttien arvoista. Kun aaltosulkeiden sisään lisätään asioita, esim. <em>{ ...note, important: true }</em>, tulee uuden olion kenttä _important_ saamaan arvon _true_. Eli esimerkissämme <em>important</em> saa uudessa oliossa vanhan arvonsa käänteisarvon.
+Käytännössä <em>{ ... note}</em> luo olion, jolla on kenttinään kopiot olion _note_ kenttien arvoista. Kun aaltosulkeiden sisään lisätään asioita, esim. <em>{ ...note, important: true }</em>, tulee uuden olion kenttä _important_ saamaan arvon _false_. Eli esimerkissämme <em>important</em> saa uudessa oliossa vanhan arvonsa käänteisarvon.
 
 Miksi teimme muutettavasta oliosta kopion vaikka myös seuraava koodi näyttää toimivan:
 
