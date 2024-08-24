@@ -166,7 +166,7 @@ Eslint valittaa testeissä olevista avainsanoista _test_ ja _expect_. Ongelmasta
 npm install --save-dev eslint-plugin-vitest-globals
 ```
 
-ja ottamalla plugin käyttöön muokkaamalla tiedosstoa _.eslint.cjs_ seuraavasti: 
+ja ottamalla plugin käyttöön muokkaamalla tiedostoa _.eslint.cjs_ seuraavasti: 
 
 ```js
 module.exports = {
@@ -308,7 +308,7 @@ test('renders content', () => {
 })
 ```
 
-Haimme nyt halutun tekstin sisältävän elemementin sisällön tulostettavaksi:
+Haimme nyt halutun tekstin sisältävän elementin sisällön tulostettavaksi:
 
 ```js
   <li
