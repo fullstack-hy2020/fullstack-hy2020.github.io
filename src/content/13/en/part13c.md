@@ -995,8 +995,8 @@ In the context of the include, we must now use the alias name <i>marked\_notes</
 In order to test the feature, let's create some test data in the database:
 
 ```sql
-insert into user_notes (user_id, note_id) values (1, 4);
-insert into user_notes (user_id, note_id) values (1, 5);
+insert into user_notes (user_id, note_id) values (2, 1);
+insert into user_notes (user_id, note_id) values (2, 2); 
 ```
 
 The end result is functional:
