@@ -813,6 +813,42 @@ The response is what we expect it to be:
 
 ![browser api/diaries shows three json objects](../../images/9/26.png)
 
+### Typing the request and response
+
+So far we have not discussed anything about the types of the route handler parameters. 
+
+If we hover eg. the parameter _res_, we notice it has the followng type:
+
+```js
+Response<any, Record<string, any>, number>
+```
+
+It looks a bit weird. The type _Response_ is a [generic type](https://www.typescriptlang.org/docs/handbook/2/generics.html#generic-types) that has three <i>type parameters</i>. If we open the type definition (by right clicking and selecting <i>Go to Type Definition</i> in the VS code) we see the following:
+
+```js
+export interface Response<
+    ResBody = any,
+    LocalsObj extends Record<string, any> = Record<string, any>,
+    StatusCode extends number = number,
+> extends http.ServerResponse, Express.Response {
+```
+
+The first type parameter is the most interesting for us, it corresponds <i>the response body</i> and has a default value _any_. So that is why TypeScript compiler accepts any type of response and we get no help to get the response right.
+
+We could and propably should give a proper type as the type variable. In our case it is an array of diary entries:
+
+```js
+router.get('/', (_req, res: Response<DiaryEntry[]>) => { //
+  res.send(res.send(diaryService.getNonSensitiveEntries());
+});
+```
+
+If we now try to respond with wrong type of data, the code does not compile
+
+![vscode error unsafe assignment of any value](../../images/9/ts1.png)
+
+Simillarly the request parameter has the type _Request_ that is also a generic type. We shall have a closer look on it later on.
+
 </div>
 
 <div class="tasks">
@@ -1030,7 +1066,7 @@ app.listen(PORT, () => {
 
 Now the application is ready to receive HTTP POST requests for new diary entries of the correct type!
 
-### Proofing requests
+### Validating requests
 
 There are plenty of things that can go wrong when we accept data from outside sources.
 Applications rarely work completely on their own, and we are forced to live with the fact that data from sources outside of our system cannot be fully trusted.
@@ -1415,7 +1451,7 @@ If we now try to create a new diary entry with invalid or missing fields, we are
 
 ![postman showing 400 bad request with incorrect or missing visibility - awesome](../../images/9/62new.png)
 
-The source code of the application can be found on [GitHub](https://github.com/fullstack-hy2020/flight-diary).
+The source code of the application can be found on [GitHub](https://github.com/fullstack-hy2020/flight-diary/tree/part1).
 
 </div>
 
@@ -1437,5 +1473,302 @@ const id = uuid()
 Set up safe parsing, validation and type predicate to the POST */api/patients* request.
 
 Refactor the *gender* field to use an [enum type](http://www.typescriptlang.org/docs/handbook/enums.html).
+
+</div>
+
+<div class="content">
+
+### Using schema validation libraries
+
+Writing a validator to the request body can be a huge burden. Thankfully there exists several <i>schema validator libraries</i> that can help. Let us now have a look on [Zod](https://zod.dev/) that works pretty well with TypeScript.
+
+Let us get started:
+
+```bash
+npm install zod
+```
+
+Parser of the primitive valued fields such as
+
+```js
+const isString = (text: unknown): text is string => {
+  return typeof text === 'string' || text instanceof String;
+};
+
+const parseComment = (comment: unknown): string => {
+  if (!isString(comment)) {
+    throw new Error('Incorrect comment');
+  }
+
+  return comment;
+};
+```
+
+are easy to replace as follws:
+
+```js
+const parseComment = (comment: unknown): string => {
+  return z.string().parse(comment);  // highlight-line
+};
+```
+
+First the [string](https://zod.dev/?id=strings) method of Zod is used to define the required type (or <i>schema</i> in Zod terms). Adter that the value (which is of the type _unknown_) is parsed with the method [parse](https://zod.dev/?id=parse), which returns the value in the required type or throws an exception.
+
+We do not actually need the helper function _parseComment_ anymore and can use the Zod parser directly:
+
+```js
+export const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
+  if ( !object || typeof object !== 'object' ) {
+    throw new Error('Incorrect or missing data');
+  }
+
+  if ('comment' in object && 'date' in object && 'weather' in object && 'visibility' in object)  {
+    const newEntry: NewDiaryEntry = {
+      weather: parseWeather(object.weather),
+      visibility: parseVisibility(object.visibility),
+      date: parseDate(object.date),
+      comment: z.string().parse(object.comment) // highlight-line
+    };
+
+    return newEntry;
+  }
+
+  throw new Error('Incorrect data: some fields are missing');
+};
+```
+
+Zod has a bunch of string specific validations, eg. one that validates if a string is a valid [date](https://zod.dev/?id=dates), so we get also rid of the date field parser:
+
+```js
+export const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
+  if ( !object || typeof object !== 'object' ) {
+    throw new Error('Incorrect or missing data');
+  }
+
+  if ('comment' in object && 'date' in object && 'weather' in object && 'visibility' in object)  {
+    const newEntry: NewDiaryEntry = {
+      weather: parseWeather(object.weather),
+      visibility: parseVisibility(object.visibility), 
+      date: z.string().date().(object.date), // highlight-line
+      comment: z.string().optional().parse(object.comment) // highlight-line
+    };
+
+    return newEntry;
+  }
+
+  throw new Error('Incorrect data: some fields are missing');
+};
+```
+
+We have also made the field comment [optional](https://zod.dev/?id=optional) since it is defined optional in the TypeScript definition.
+
+Zed has also support for [enums](https://zod.dev/?id=native-enums) and thanks to that our code simplifies further:
+
+```js
+export const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
+  if ( !object || typeof object !== 'object' ) {
+    throw new Error('Incorrect or missing data');
+  }
+
+  if ('comment' in object && 'date' in object && 'weather' in object && 'visibility' in object)  {
+    const newEntry: NewDiaryEntry = {
+      weather: z.nativeEnum(Weather).parse(object.weather), // highlight-line
+      visibility: z.nativeEnum(Visibility).parse(object.visibility), // highlight-line
+      date: z.string().date().parse(object.date),
+      comment: z.string().optional().parse(object.comment)
+    };
+
+    return newEntry;
+  }
+
+  throw new Error('Incorrect data: some fields are missing');
+};
+```
+
+We have so far just used Zod to parse the type or schema of individual fields, but we can go one step further and define the whole <i>new diary entry</i> as a Zod [object](https://zod.dev/?id=objects) schema:
+
+
+```js
+const newEntrySchema = z.object({
+  weather: z.nativeEnum(Weather),
+  visibility: z.nativeEnum(Visibility),
+  date: z.string().date(),
+  comment: z.string().optional()
+});
+```
+
+Now it is just enough to call _parse_ of the defined schema:
+
+```js
+export const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
+  return newEntrySchema.parse(object);
+};
+```
+
+With the help from [documentation](https://zod.dev/ERROR_HANDLING) we could also improve the error handling:
+
+```js
+router.post('/', (req, res) => {
+  try {
+    const newDiaryEntry = toNewDiaryEntry(req.body);
+    const addedEntry = diaryService.addDiary(newDiaryEntry);
+    res.json(addedEntry);
+
+  } catch (error: unknown) {
+    // highlight-start
+    if (error instanceof z.ZodError) {
+      res.status(400).send({ error: error.issues });
+    } else {
+      res.status(400).send({ error: 'unknown error' });
+    }
+    // highlight-end
+  }
+});
+```
+
+The response in case of error looks pretty good:
+
+![](../../images/9/ts-zod1.png)
+
+We could develop our solution still some steps further. Our type definitions look currently this:
+
+```js
+export interface DiaryEntry {
+  id: number;
+  date: string;
+  weather: Weather;
+  visibility: Visibility;
+  comment?: string;
+}
+
+export type NewDiaryEntry = Omit<DiaryEntry, 'id'>;
+```
+
+So besides the type _NewDiaryEntry_ we have also the Zod schema _NewEntrySchema_ that defines the shape of a new entry. We can use the shema to [infer](https://zod.dev/?id=type-inference) the type:
+
+```js
+import { z } from 'zod';
+import { NewEntrySchema } from './utils'
+
+export interface DiaryEntry {
+  id: number;
+  date: string;
+  weather: Weather;
+  visibility: Visibility;
+  comment?: string;
+}
+
+// infer the type from schema
+export type NewDiaryEntry = z.infer<typeof newEntrySchema>; 
+```
+
+We could take this even a bit further and define the _DiaryEntry_ based on _NewDiaryEntry_:
+
+```js
+export type NewDiaryEntry = z.infer<typeof newEntrySchema>;
+
+export interface DiaryEntry extends NewDiaryEntry {
+  id: number;
+}
+```
+
+This would remove all the duplication in the type and schema definitions but feels a bit backward so we decide to define the type _DiaryEntry_ explicitly with TypeScript.
+
+Unfortunately the oppisite is not possible: we can not define the Zod schema based on TypeScript type definitions, and due to this, the duplication in the type and schema definitions is hard to avoid.
+
+The current state of the source code can be found in the part2 branch of [this](https://github.com/fullstack-hy2020/flight-diary/tree/part2) GitHub repository.
+
+### Parsing request body in middleware
+
+We can now get rid of this method altogether
+
+```js
+export const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
+  return newEntrySchema.parse(object);
+};
+```
+
+and just call the Zod-parser directly in the route handler:
+
+```js
+import express, { Request, Response } from 'express';
+import diaryService from '../services/diaryService';
+import { NewEntrySchema } from '../utils';
+
+router.post('/', (req, res) => { // highlight-line
+  try {
+    const newDiaryEntry = NewEntrySchema.parse(req.body); // highlight-line
+    const addedEntry = diaryService.addDiary(newDiaryEntry);
+    res.json(addedEntry);
+
+  } catch (error: unknown) {
+    if (error instanceof z.ZodError) {
+      res.status(400).send({ error: error.issues });
+    } else {
+      res.status(400).send({ error: 'unknown error' });
+    }
+  }
+});
+```
+
+Instead of calling the request body parsing method explicitly in the route handler, the validation of the input could also be done in a middleware function.
+
+We have also add the type definitions to the route handler parameters, and shall use types also in the middleware function _newDiaryParser_:
+
+```js
+const newDiaryParser = (req: Request, _res: Response, next: NextFunction) => { 
+  try {
+    NewEntrySchema.parse(req.body);
+    next();
+  } catch (error: unknown) {
+    next(error);
+  }
+};
+```
+
+The middleware just calls the shema parser to the request body. If the parsing thwrows an exception, that is passed to the error handling middleware.
+
+So after the request passes this middleware, it <i>is known that the request body is a proper new diary entry</i>. We can tell this fact to TypeScript compiler by giving a type parameter to the _Request_ type:
+
+```js
+router.post('/', newDiaryParser, (req: Request<unknown, unknown, NewDiaryEntry>, res: Response<DiaryEntry>) => { // highlight-line
+  const addedEntry = diaryService.addDiary(req.body); // highlight-line
+  res.json(addedEntry);
+});
+```
+
+Thanks to the middleware, the request body is now known to be of right type and it can be directly given as parameter to the function _diaryService.addDiary_.
+
+The syntax of the _Request<unknown, unknown, NewDiaryEntry>_ looks a bit odd. The _Request_ is a [generic type](https://www.typescriptlang.org/docs/handbook/2/generics.html#generic-types) with several type parameters. The third type parameter represents the request body, and in order to give it the value _NewDiaryEntry_ we have to give <i>some</i> value to the two first parameters. We decide to define those _undefined_ since we do not need those for now.
+
+Since the possible errors in validation are now handed in the error handling middleware, we need to define one that handles the Zod errors properly:
+
+```js
+const errorMiddleware = (error: unknown, _req: Request, res: Response, next: NextFunction) => { 
+  if (error instanceof z.ZodError) {
+    res.status(400).send({ error: error.issues });
+  } else {
+    next(error);
+  }
+};
+
+router.post('/', newDiaryParser, (req: Request<unknown, unknown, NewDiaryEntry>, res: Response<DiaryEntry>) => {
+  // ...
+});
+
+router.use(errorMiddleware);
+```
+
+The final version of the source code can be found in the part3 branch of [this](https://github.com/fullstack-hy2020/flight-diary/tree/part3) GitHub repository.
+
+</div>
+
+<div class="tasks">
+
+### Exercises 9.14
+
+#### 9.14: Patientor backend, step7
+
+Use Zod to validate the requests to the POST endpoint */api/patients*.
 
 </div>

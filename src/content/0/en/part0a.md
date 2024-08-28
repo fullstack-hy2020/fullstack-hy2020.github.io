@@ -132,9 +132,9 @@ By submitting at least 22/26 of the exercises for part 8 of the course, GraphQL,
 
 #### Part 9 - Full Stack Web Development: TypeScript (1 cr, CSM14110)
 
-By submitting at least 24/29 of the exercises for part 9 of the course, TypeScript, you can get one additional credit. It is recommended that you complete parts 0-7 before taking part 9.
+By submitting at least 24/30 of the exercises for part 9 of the course, TypeScript, you can get one additional credit. It is recommended that you complete parts 0-7 before taking part 9.
 
-- Submit at least 24/29 exercises for part 9.
+- Submit at least 24/30 exercises for part 9.
 - [Enroll in part 9 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-929a947d-6810-410d-b828-cc40f368dcc7).
 - [Request credits for part 9](/en/part0/general_info/#how-to-get-your-credits).
 
@@ -340,7 +340,7 @@ Despite changes *all the submitted exercises remain valid*, and the course can b
 
 Recent major changes
 
-- Part 9 (12th August, 2024): ESLint configurations updated
+- Part 9 (28th August, 2024): Zod library for validating request body type
 - Part 3 (20th June, 2024): ESLint configurations updated
 - Part 10 (21st March, 2024): Create React app replaced with Vite
 - Parts 3-5 (February-March 2024): Libraries used for testing changed

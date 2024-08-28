@@ -46,11 +46,8 @@ const InfoBanner = ({ visible, onHide }) => {
     <div style={style}>
       <div style={textStyle}>
         <p style={{ marginBottom: 20}}>
-          The testing libraries used in part 5 were changed 3rd March 2024. In frontend Vite replaced Jest. For End to end-tests Playwright is the new preferred library.
+          A new exercise has been added at the on of Part 9 "Typing an Express app" at 28th August 2024. Because of that numbering the of Exercises 9.14- has changed.
         </p>  
-        <p>
-          If you have started with Jest or Cypress, you may continue. The relevant material is still available, for Jest, the link is at the top of part 5c and for the Cypress, the link is at the menu at the left.
-        </p>
       </div>
       <div style={buttonDiv}>
         <button style={buttonStyle} onClick={onHide}>

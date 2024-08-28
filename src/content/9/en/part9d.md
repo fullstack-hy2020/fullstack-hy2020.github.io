@@ -159,9 +159,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 
 <div class="tasks">
 
-### Exercise 9.14
+### Exercise 9.15
 
-#### 9.14
+#### 9.15
 
 Create a new Vite app with TypeScript.
 
@@ -477,9 +477,9 @@ which tells us that we are using a variable somewhere where it should never be u
 
 <div class="tasks">
 
-### Exercise 9.15
+### Exercise 9.16
 
-#### 9.15
+#### 9.16
 
 Let us now continue extending the app created in exercise 9.14. First, add the type information and replace the variable *courseParts* with the one from the example below.
 
@@ -1000,11 +1000,11 @@ TypeScript documentation [recommends using interfaces](https://www.typescriptlan
 
 <div class="tasks">
 
-### Exercises 9.16-9.19
+### Exercises 9.17-9.20
 
 Let us now build a frontend for the Ilari's flight diaries that was developed in [the previous section](/en/part9/typing_an_express_app). The source code of the backend can be found in [this GitHub repository](https://github.com/fullstack-hy2020/flight-diary).
 
-#### Exercise 9.16
+#### Exercise 9.17
 
 Create a TypeScript React app with similar configurations as the apps of this section. Fetch the diaries from the backend and render those to screen. Do all the required typing and ensure that there are no Eslint errors.
 
@@ -1012,11 +1012,11 @@ Remember to keep the network tab open. It might give you a valuable hint...
 
 You can decide how the diary entries are rendered. If you wish, you may take inspiration from the figure below. Note that the backend API does not return the diary comments, you may modify it to return also those on a GET request.
 
-#### Exercise 9.17
+#### Exercise 9.18
 
 Make it possible to add new diary entries from the frontend. In this exercise you may skip all validations and assume that the user just enters the data in a correct form.
 
-#### Exercise 9.18
+#### Exercise 9.19
 
 Notify the user if the the creation of a diary entry fails in the backend, show also the reason for the failure.
 
@@ -1026,7 +1026,7 @@ Your solution may look like this:
 
 ![browser showing error incorrect visibility best ever](../../images/9/71new.png)
 
-#### Exercise 9.19
+#### Exercise 9.20
 
 Addition of a diary entry is now very error prone since user can type anything to the input fields. The situation must be improved.
 

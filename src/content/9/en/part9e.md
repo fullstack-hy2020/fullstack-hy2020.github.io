@@ -155,13 +155,13 @@ The return value of a *async* function is a [promise](https://developer.mozilla.
 
 <div class="tasks">
 
-### Exercises 9.20-9.21
+### Exercises 9.21-9.22
 
 We will soon add a new type for our app, *Entry*, which represents a lightweight patient journal entry. It consists of a journal text, i.e. a *description*, a creation date, information regarding the specialist who created it and possible diagnosis codes. Diagnosis codes map to the ICD-10 codes returned from the */api/diagnoses* endpoint. Our naive implementation will be that a patient has an array of entries.
 
 Before going into this, we need some preparatory work.
 
-#### 9.20: Patientor, step1
+#### 9.21: Patientor, step1
 
 Create an endpoint */api/patients/:id* to the backend that returns all of the patient information for one patient, including the array of patient entries that is still empty for all the patients. For the time being, expand the backend types as follows:
 
@@ -187,7 +187,7 @@ The response should look as follows:
 
 ![browser showing entries blank array when accessing patient](../../images/9/38a.png)
 
-#### 9.21: Patientor, step2
+#### 9.22: Patientor, step2
 
 Create a page for showing a patient's full information in the frontend.
 
@@ -348,11 +348,11 @@ type EntryWithoutId = UnionOmit<Entry, 'id'>;
 
 <div class="tasks">
 
-### Exercises 9.22-9.29
+### Exercises 9.23-9.30
 
 Now we are ready to put the finishing touches to the app!
 
-#### 9.22: Patientor, step 3
+#### 9.23: Patientor, step 3
 
 Define the types *OccupationalHealthcareEntry* and *HospitalEntry* so that those conform with the new example data. Ensure that your backend returns the entries properly when you go to an individual patient's route:
 
@@ -360,7 +360,7 @@ Define the types *OccupationalHealthcareEntry* and *HospitalEntry* so that those
 
 Use types properly in the backend! For now, there is no need to do a proper validation for all the fields of the entries in the backend, it is enough e.g. to check that the field *type* has a correct value.
 
-#### 9.23: Patientor, step 4
+#### 9.24: Patientor, step 4
 
 Extend a patient's page in the frontend to list the *date*, *description* and *diagnoseCodes* of the patient's entries.
 
@@ -370,13 +370,13 @@ Your solution could look like this:
 
 ![browser showing list of diagnosis codes for patient](../../images/9/41.png)
 
-#### 9.24: Patientor, step 5
+#### 9.25: Patientor, step 5
 
 Fetch and add diagnoses to the application state from the */api/diagnoses* endpoint. Use the new diagnosis data to show the descriptions for patient's diagnosis codes:
 
 ![browser showing list of codes and their descriptions for patient ](../../images/9/42.png)
 
-#### 9.25: Patientor, step 6
+#### 9.26: Patientor, step 6
 
 Extend the entry listing on the patient's page to include the Entry's details, with a new component that shows the rest of the information of the patient's entries, distinguishing different types from each other.
 
@@ -392,7 +392,7 @@ The resulting entries in the listing *could* look something like this:
 
 ![browser showing list of entries and their details in a nicer format](../../images/9/36x.png)
 
-#### 9.26: Patientor, step 7
+#### 9.27: Patientor, step 7
 
 We have established that patients can have different kinds of entries. We don't yet have any way of adding entries to patients in our app, so, at the moment, it is pretty useless as an electronic medical record.
 
@@ -415,7 +415,7 @@ const parseDiagnosisCodes = (object: unknown): Array<Diagnosis['code']> =>  {
 };
 ```
 
-#### 9.27: Patientor, step 8
+#### 9.28: Patientor, step 8
 
 Now that our backend supports adding entries, we want to add the corresponding functionality to the frontend. In this exercise, you should add a form for adding an entry to a patient. An intuitive place for accessing the form would be on a patient's page.
 
@@ -431,11 +431,11 @@ If a user enters invalid values to the form and backend rejects the addition, sh
 
 ![browser showing healthCheckRating incorrect 15 error](../../images/9/75new.png)
 
-#### 9.28: Patientor, step 9
+#### 9.29: Patientor, step 9
 
 Extend your solution so that it supports *all the entry types*
 
-#### 9.29: Patientor, step 10
+#### 9.30: Patientor, step 10
 
 Improve the entry creation forms so that it makes it hard to enter incorrect dates, diagnosis codes and health rating.
 

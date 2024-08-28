@@ -87,9 +87,9 @@ Suorittamalla vähintään 22/26 tehtävää kurssin kahdeksannesta, GraphQL:ä�
 
 #### Osa 9 - Full Stack ‑websovelluskehitys: TypeScript (1 op, CSM14110, englanniksi)
 
-Suorittamalla vähintään 24/29 tehtävää kurssin yhdeksännestä, TypeScriptiä käsittelevästä osasta, voit laajentaa suoritustasi yhdellä opintopisteellä. Osa kannattaa suorittaa vasta sen jälkeen, kun olet tehnyt osat 0–7.
+Suorittamalla vähintään 24/30 tehtävää kurssin yhdeksännestä, TypeScriptiä käsittelevästä osasta, voit laajentaa suoritustasi yhdellä opintopisteellä. Osa kannattaa suorittaa vasta sen jälkeen, kun olet tehnyt osat 0–7.
 
--	Tee vähintään 24/29 tehtävää osasta 9.
+-	Tee vähintään 24/30 tehtävää osasta 9.
 -	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-929a947d-6810-410d-b828-cc40f368dcc7)
 -	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
 
@@ -282,7 +282,7 @@ Kurssilla ei ole enää vuosittaisia versiota. Kurssi on siis käynnissä koko a
 Muutoksista huolimatta <i>kaikki jo tehdyt palautukset säilyvät voimassa</i>, eli voit jatkaa kurssia päivityksistä huolimatta normaaliin tapaan.
 
 Viimeaikaisia isompia muutoksia
-- Osa 9 (12.8.2024): ESLint-konfiguraatiot päivitetty
+- Osa 9 (28.8.2024): Zod-kirjasto datan validointiin
 - Osa 3 (20.6.2024): ESLint-konfiguraatiot päivitetty
 - Osa 12 (21.3.2024): Create React app korvattu Vitellä
 - Osat 3-5 (helmi-maaliskuu 2024): Testaukseen käytetyt kirjastot muutettu

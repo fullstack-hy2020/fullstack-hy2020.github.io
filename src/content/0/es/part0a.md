@@ -132,9 +132,9 @@ Al enviar al menos 22 de 26 ejercicios para la parte 8 del curso de, GraphQL, pu
 
 #### Part 9 - Desarrollo Web Full Stack: TypeScript (1 crédito, CSM14110)
 
-Al enviar al menos 24 de 29 ejercicios de la parte 9 del curso, TypeScript, puedes obtener un crédito adicional. Se recomienda que completes las partes 0-7 antes de hacer la parte 9.
+Al enviar al menos 24 de 30 ejercicios de la parte 9 del curso, TypeScript, puedes obtener un crédito adicional. Se recomienda que completes las partes 0-7 antes de hacer la parte 9.
 
-- Envía al menos 24 de 29 ejercicios para la parte 9.
+- Envía al menos 24 de 30 ejercicios para la parte 9.
 - [Inscríbete en la parte 9 a través de la Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-929a947d-6810-410d-b828-cc40f368dcc7).
 - [Solicita los créditos para la parte 9](/es/part0/informacion_general#como-obtener-tus-creditos).
 

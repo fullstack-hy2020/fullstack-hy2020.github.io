@@ -10,7 +10,7 @@ import Footer from './Footer/Footer';
 import PropTypes from 'prop-types';
 import SkipToContent from './SkipToContent/SkipToContent';
 
-const BANNER_TO_KEY = 'part_5_changes';
+const BANNER_TO_KEY = 'part_9c_changes';
 
 const Layout = props => {
   const { i18n } = useTranslation();
@@ -23,12 +23,13 @@ const Layout = props => {
   useEffect(() => {
     const key = localStorage.getItem(BANNER_TO_KEY)
     if (!key) {
-      const relevant = window.location.href.includes('osa5') || window.location.href.includes('en/part5')
+      const relevant = window.location.href.includes('en/part9')
       setVisible(relevant);
     }
   }, []);
 
   const hideNote = () => {
+    console.log('hideNote');
     localStorage.setItem(BANNER_TO_KEY, 'yes');
     setVisible(false);
   };
@@ -39,7 +40,7 @@ const Layout = props => {
 
       <Header lang={siteLanguage} />
 
-      <InfoBanner onHide={() => hideNote()} visible={false} />
+      <InfoBanner onHide={() => hideNote()} visible={visible} />
 
       <main id="main-content">{children}</main>
 
