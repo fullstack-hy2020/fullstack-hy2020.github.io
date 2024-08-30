@@ -1504,7 +1504,7 @@ const parseComment = (comment: unknown): string => {
 };
 ```
 
-are easy to replace as follws:
+are easy to replace as follows:
 
 ```js
 const parseComment = (comment: unknown): string => {
@@ -1512,7 +1512,7 @@ const parseComment = (comment: unknown): string => {
 };
 ```
 
-First the [string](https://zod.dev/?id=strings) method of Zod is used to define the required type (or <i>schema</i> in Zod terms). Adter that the value (which is of the type _unknown_) is parsed with the method [parse](https://zod.dev/?id=parse), which returns the value in the required type or throws an exception.
+First the [string](https://zod.dev/?id=strings) method of Zod is used to define the required type (or <i>schema</i> in Zod terms). After that the value (which is of the type _unknown_) is parsed with the method [parse](https://zod.dev/?id=parse), which returns the value in the required type or throws an exception.
 
 We do not actually need the helper function _parseComment_ anymore and can use the Zod parser directly:
 
@@ -1741,7 +1741,7 @@ Thanks to the middleware, the request body is now known to be of right type and 
 
 The syntax of the _Request<unknown, unknown, NewDiaryEntry>_ looks a bit odd. The _Request_ is a [generic type](https://www.typescriptlang.org/docs/handbook/2/generics.html#generic-types) with several type parameters. The third type parameter represents the request body, and in order to give it the value _NewDiaryEntry_ we have to give <i>some</i> value to the two first parameters. We decide to define those _undefined_ since we do not need those for now.
 
-Since the possible errors in validation are now handed in the error handling middleware, we need to define one that handles the Zod errors properly:
+Since the possible errors in validation are now handled in the error handling middleware, we need to define one that handles the Zod errors properly:
 
 ```js
 const errorMiddleware = (error: unknown, _req: Request, res: Response, next: NextFunction) => { 
