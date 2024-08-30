@@ -1549,7 +1549,7 @@ export const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
     const newEntry: NewDiaryEntry = {
       weather: parseWeather(object.weather),
       visibility: parseVisibility(object.visibility), 
-      date: z.string().date().(object.date), // highlight-line
+      date: z.string().date().parse(object.date), // highlight-line
       comment: z.string().optional().parse(object.comment) // highlight-line
     };
 
