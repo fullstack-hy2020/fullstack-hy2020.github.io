@@ -1512,7 +1512,7 @@ const parseComment = (comment: unknown): string => {
 };
 ```
 
-First the [string](https://zod.dev/?id=strings) method of Zod is used to define the required type (or <i>schema</i> in Zod terms). Adter that the value (which is of the type _unknown_) is parsed with the method [parse](https://zod.dev/?id=parse), which returns the value in the required type or throws an exception.
+First the [string](https://zod.dev/?id=strings) method of Zod is used to define the required type (or <i>schema</i> in Zod terms). After that the value (which is of the type _unknown_) is parsed with the method [parse](https://zod.dev/?id=parse), which returns the value in the required type or throws an exception.
 
 We do not actually need the helper function _parseComment_ anymore and can use the Zod parser directly:
 
@@ -1644,7 +1644,7 @@ export interface DiaryEntry {
 export type NewDiaryEntry = Omit<DiaryEntry, 'id'>;
 ```
 
-So besides the type _NewDiaryEntry_ we have also the Zod schema _NewEntrySchema_ that defines the shape of a new entry. We can use the shema to [infer](https://zod.dev/?id=type-inference) the type:
+So besides the type _NewDiaryEntry_ we have also the Zod schema _NewEntrySchema_ that defines the shape of a new entry. We can use the schema to [infer](https://zod.dev/?id=type-inference) the type:
 
 ```js
 import { z } from 'zod';
@@ -1674,7 +1674,7 @@ export interface DiaryEntry extends NewDiaryEntry {
 
 This would remove all the duplication in the type and schema definitions but feels a bit backward so we decide to define the type _DiaryEntry_ explicitly with TypeScript.
 
-Unfortunately the oppisite is not possible: we can not define the Zod schema based on TypeScript type definitions, and due to this, the duplication in the type and schema definitions is hard to avoid.
+Unfortunately the opposite is not possible: we can not define the Zod schema based on TypeScript type definitions, and due to this, the duplication in the type and schema definitions is hard to avoid.
 
 The current state of the source code can be found in the part2 branch of [this](https://github.com/fullstack-hy2020/flight-diary/tree/part2) GitHub repository.
 
@@ -1726,7 +1726,7 @@ const newDiaryParser = (req: Request, _res: Response, next: NextFunction) => {
 };
 ```
 
-The middleware just calls the shema parser to the request body. If the parsing thwrows an exception, that is passed to the error handling middleware.
+The middleware just calls the schema parser to the request body. If the parsing throws an exception, that is passed to the error handling middleware.
 
 So after the request passes this middleware, it <i>is known that the request body is a proper new diary entry</i>. We can tell this fact to TypeScript compiler by giving a type parameter to the _Request_ type:
 
