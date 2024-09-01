@@ -492,6 +492,7 @@ También está la cuestión de si las librerías de framework de UI deben usarse
 Aquí hay otros frameworks de UI para tu consideración. Si no ves tu framework de UI favorito en la lista, haz un pull request al material del curso para agregarlo.
 
 - <https://bulma.io/>
+- <https://tailwindui.com>
 - <https://ant.design/>
 - <https://get.foundation/>
 - <https://chakra-ui.com/>
