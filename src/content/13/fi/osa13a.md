@@ -68,7 +68,7 @@ Syy sille miksi kurssin aiemmat osat käyttivät MongoDB:tä liittyvät juuri se
 
 ### Sovelluksen tietokanta
 
-Tarvitsemme sovellustamme varten relaatiotietokannan. Vaihtoehtoja on monia, käytämme kurssilla tämän hetken suosituinta Open Source ‑ratkaisua [PostgreSQL:ää](https://www.postgresql.org/). Voit halutessasi asentaa Postgresin (kuten tietokantaa usein kutsutaan) koneellesi. Helpommalla pääset käyttämällä jotain pilvipalveluna tarjottavaa Postgresia, esim. [ElephantSQL:ää](https://www.elephantsql.com/).
+Tarvitsemme sovellustamme varten relaatiotietokannan. Vaihtoehtoja on monia, käytämme kurssilla tämän hetken suosituinta Open Source ‑ratkaisua [PostgreSQL:ää](https://www.postgresql.org/). Voit halutessasi asentaa Postgresin (kuten tietokantaa usein kutsutaan) koneellesi.
 
 Käytämme nyt hyväksemme sitä, että osista 3 ja 4 tuttuille pilvipalvelualustoille Fly.io ja Heroku on mahdollista luoda sovellukselle Postgres-tietokanta.
 
