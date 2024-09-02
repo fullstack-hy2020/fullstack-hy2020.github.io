@@ -838,9 +838,15 @@ The first type parameter is the most interesting for us, it corresponds <i>the r
 We could and propably should give a proper type as the type variable. In our case it is an array of diary entries:
 
 ```js
-router.get('/', (_req, res: Response<DiaryEntry[]>) => { //
-  res.send(res.send(diaryService.getNonSensitiveEntries());
+import { Response } from 'express'
+
+// ...
+
+router.get('/', (_req, res: Response<DiaryEntry[]>) => {
+  res.send(diaryService.getNonSensitiveEntries());
 });
+
+// ...
 ```
 
 If we now try to respond with wrong type of data, the code does not compile
