@@ -1215,7 +1215,7 @@ it('then example', function() {
 <!-- > <i>This is the single most important guide for understanding how to test with Cypress. Read it. Understand it.</i>-->
  > <i>这是了解如何使用Cypress进行测试的唯一最重要的指南。阅读它。理解它。</i>
 
-#### 5.17: bloglist end to end testing, step1
+#### 5.17: Blog List End to end testing, step1
 
 <!-- Configure Cypress to your project. Make a test for checking that the application displays the login form by default.-->
  为你的项目配置Cypress。做一个测试，检查应用是否默认显示登录表单。
@@ -1239,7 +1239,7 @@ describe('Blog app', function() {
 <!-- The <i>beforeEach</i> formatting blog must empty the database using for example the method we used in the [material](/en/part5/end_to_end_testing#controlling-the-state-of-the-database).-->
  <i>beforeEach</i> 格式化的博客必须清空数据库，例如使用我们在[材料](/en/part5/end_to_end_testing#controlling-the-state-of-the-database)中使用的方法。
 
-#### 5.18: bloglist end to end testing, step2
+#### 5.18: Blog List End to end testing, step2
 
 <!-- Make tests for logging in. Test both successful and unsuccessful login attempts.-->
  进行登录测试。测试成功和不成功的登录尝试。
@@ -1275,7 +1275,7 @@ describe('Blog app', function() {
 
 <i>Optional bonus exercise</i>: Check that the notification shown with unsuccessful login is displayed red.
 
-#### 5.19: bloglist end to end testing, step3
+#### 5.19: Blog List End to end testing, step3
 
 <!-- Make a test which checks that a logged-in user can create a new blog.-->
  做一个测试，检查一个登录的用户是否可以创建一个新的博客。
@@ -1302,19 +1302,19 @@ describe('Blog app', function() {
 <!-- The test has to ensure that a new blog is added to the list of all blogs.-->
  该测试必须确保一个新的博客被添加到所有博客的列表中。
 
-#### 5.20: bloglist end to end testing, step4
+#### 5.20: Blog List End to end testing, step4
 
 <!-- Make a test which checks that users can like a blog.-->
 做一个测试，检查用户是否可以喜欢一个博客。
 
-#### 5.21: bloglist end to end testing, step5
+#### 5.21: Blog List End to end testing, step5
 
 <!-- Make a test for ensuring that the user who created a blog can delete it.-->
  做一个测试，确保创建博客的用户可以删除它。
 
 <i>Optional bonus exercise:</i> also check that other users cannot delete the blog.
 
-#### 5.22: bloglist end to end testing, step6
+#### 5.22: Blog List End to end testing, step6
 
 <!-- Make a test which checks that the blogs are ordered according to likes with the blog with the most likes being first.-->
  做一个测试，检查博客是否按照喜欢程度排序，喜欢最多的博客排在前面。

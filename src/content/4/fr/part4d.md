@@ -359,7 +359,7 @@ Dans les exercices suivants, les bases de la gestion des utilisateurs seront imp
 
 **Encore un avertissement:** Si vous remarquez que vous mélangez les appels async/await et _then_, il est à 99 % certain que vous faites quelque chose de mal. Utilisez l'un ou l'autre, mais jamais les deux.
 
-#### 4.15 : expansion de bloglist, étape3
+#### 4.15 : expansion de Blog List étape3
 
 Mettez en oeuvre un moyen de créer de nouveaux utilisateurs en effectuant une requête HTTP POST à l'adresse <i>api/users</i>. Les utilisateurs ont un <i>nom d'utilisateur, un mot de passe et un nom</i>.
 
@@ -379,7 +379,7 @@ La liste des utilisateurs peut, par exemple, ressembler à ceci:
 
 ![api/users du navigateur affiche les données JSON de deux utilisateurs](../../images/4/22.png)
 
-#### 4.16* : expansion de bloglist, étape4
+#### 4.16* : expansion de Blog List étape4
 
 Ajoutez une fonctionnalité qui impose les restrictions suivantes pour la création de nouveaux utilisateurs : Le nom d'utilisateur et le mot de passe doivent être fournis. Le nom d'utilisateur et le mot de passe doivent avoir au moins 3 caractères de long. Le nom d'utilisateur doit être unique.
 
@@ -389,7 +389,7 @@ L'opération doit répondre avec un code de statut approprié et une sorte de me
 
 Mettez également en oeuvre des tests qui garantissent que les utilisateurs invalides ne sont pas créés et qu'une opération d'ajout d'utilisateur invalide retourne un code de statut et un message d'erreur appropriés.
 
-#### 4.17 : expansion de bloglist, étape5
+#### 4.17 : expansion de Blog List étape5
 
 Étendez les blogs pour que chaque blog contienne des informations sur le créateur du blog.
 
@@ -404,15 +404,15 @@ et que la liste de tous les utilisateurs affiche également les blogs créés pa
 
 ![api/users intègre les blogs dans les données JSON](../../images/4/24e.png)
 
-#### 4.18 : expansion de bloglist, étape6
+#### 4.18 : expansion de Blog List étape6
 
 Mettez en oeuvre l'authentification basée sur les jetons selon le chapitre [Authentification par jeton](/en/part4/token_authentication) de la partie 4.
 
-#### 4.19 : expansion de bloglist, étape7
+#### 4.19 : expansion de Blog List étape7
 
 Modifiez l'ajout de nouveaux blogs pour qu'il ne soit possible que si un jeton valide est envoyé avec la requête HTTP POST. L'utilisateur identifié par le jeton est désigné comme le créateur du blog.
 
-#### 4.20* : expansion de bloglist, étape8
+#### 4.20* : expansion de Blog List étape8
 
 [Cet exemple](/en/part4/token_authentication) de la partie 4 montre comment extraire le jeton de l'en-tête avec la fonction d'aide _getTokenFrom_ dans <i>controllers/blogs.js</i>.
 
@@ -444,7 +444,7 @@ const tokenExtractor = (request, response, next) => {
 }
 ```
 
-#### 4.21* : expansion de bloglist, étape9
+#### 4.21* : expansion de Blog List étape9
 
 Modifiez l'opération de suppression de blog de manière à ce qu'un blog puisse être supprimé uniquement par l'utilisateur qui l'a ajouté. Par conséquent, la suppression d'un blog n'est possible que si le jeton envoyé avec la requête est le même que celui du créateur du blog.
 
@@ -462,7 +462,7 @@ le champ <i>blog.user</i> ne contient pas une chaîne de caractères, mais un ob
 if ( blog.user.toString() === userid.toString() ) ...
 ```
 
-#### 4.22* : expansion de bloglist, étape10
+#### 4.22* : expansion de Blog List étape10
 
 Les opérations de création d'un nouveau blog et de suppression d'un blog doivent toutes deux déterminer l'identité de l'utilisateur qui effectue l'opération. Le middleware _tokenExtractor_ que nous avons réalisé dans l'exercice 4.20 aide, mais les gestionnaires des opérations <i>post</i> et <i>delete</i> doivent toujours déterminer qui est l'utilisateur associé à un jeton spécifique.
 
@@ -525,7 +525,7 @@ router.post('/', middleware.userExtractor, async (request, response) => {
 }
 ```
 
-#### 4.23* : expansion de bloglist, étape11
+#### 4.23* : expansion de Blog List étape11
 
 Après l'ajout de l'authentification basée sur les jetons, les tests pour l'ajout d'un nouveau blog ont échoué. Corrigez les tests. Écrivez également un nouveau test pour vous assurer que l'ajout d'un blog échoue avec le code de statut approprié <i>401 Non autorisé</i> si un jeton n'est pas fourni.
 

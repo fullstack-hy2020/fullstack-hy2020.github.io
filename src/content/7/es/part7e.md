@@ -206,7 +206,7 @@ A veces, puede haber una situación en la que la aplicación completa se coloque
 
 ### Cambios en el servidor
 
-Si hay cambios en el estado del servidor, por ejemplo, cuando otros usuarios agregan nuevos blogs al servicio de bloglist, el frontend de React que implementamos durante este curso no notará estos cambios hasta que la página se vuelva a cargar. Una situación similar surge cuando el frontend desencadena un cálculo lento en el backend. ¿Cómo reflejamos los resultados del cálculo en el frontend?
+Si hay cambios en el estado del servidor, por ejemplo, cuando otros usuarios agregan nuevos blogs al servicio de Blog List el frontend de React que implementamos durante este curso no notará estos cambios hasta que la página se vuelva a cargar. Una situación similar surge cuando el frontend desencadena un cálculo lento en el backend. ¿Cómo reflejamos los resultados del cálculo en el frontend?
 
 Una forma es ejecutar [polling](<https://es.wikipedia.org/wiki/Polling>) en el frontend, es decir, solicitudes repetidas a la API de backend, por ejemplo, utilizando el comando [setInterval](https://developer.mozilla.org/es/docs/Web/API/setInterval).
 

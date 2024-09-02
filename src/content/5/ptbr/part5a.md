@@ -559,7 +559,7 @@ Enquanto faz os exercícios, lembre-se de todos os métodos de depuração que d
 
 **Aviso:** Se você perceber que está misturando os comandos das funções _async/await_ e _then_, é 99,9% certo que está fazendo algo errado. Use apenas um ou outro, nunca os dois.
 
-#### 5.1: frontend do bloglist, passo 1
+#### 5.1: frontend do Blog List Passo 1
 
 Clone a aplicação do [GitHub](https://github.com/fullstack-hy2020/bloglist-frontend) com o comando:
 
@@ -618,7 +618,7 @@ Detalhes do usuário logado não precisam ser salvos no local storage ainda.
 }
 ```
 
-### 5.2: frontend do bloglist, passo 2
+### 5.2: frontend do Blog List Passo 2
 
 
 Torne o login 'permanente' usando o local storage. Além disso, implemente uma maneira de deslogar.
@@ -627,13 +627,13 @@ Torne o login 'permanente' usando o local storage. Além disso, implemente uma m
 
 Assegure-se de que o navegador não lembre os detalhes do usuário após o logout.
 
-#### 5.3: frontend do bloglist, passo 3
+#### 5.3: frontend do Blog List Passo 3
 
 Expanda sua aplicação para permitir que um usuário logado adicione novos blogs:
 
 ![navegador mostrando o formulário do novo blog](../../images/5/7e.png)
 
-#### 5.4: frontend do bloglist, passo 4
+#### 5.4: frontend do Blog List Passo 4
 
 Implemente notificações que informem o usuário sobre operações bem-sucedidas e mal-sucedidas no topo da página. Por exemplo, quando um novo blog é adicionado, a seguinte notificação pode ser exibida:
 

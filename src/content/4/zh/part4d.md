@@ -428,7 +428,7 @@ const errorHandler = (error, request, response, next) => {
 <!-- **One more warning:** If you notice you are mixing async/await and _then_ calls, it is 99% certain you are doing something wrong. Use either or, never both.-->
  **还有一个警告：**如果你注意到你在混合使用async/await和_then_调用，那么99%肯定是你做错了什么。使用其中之一，而不是同时使用。
 
-#### 4.15: bloglist expansion, step3
+#### 4.15: Blog List Expansion, step3
 
 <!-- Implement a way to create new users by doing a HTTP POST-request to address <i>api/users</i>. Users have <i>username, password and name</i>.-->
  实现一种创建新用户的方法，通过HTTP POST-request来解决<i>api/users</i>。用户有<i>用户名、密码和姓名</i>。
@@ -454,7 +454,7 @@ npm uninstall bcrypt
 
 ![](../../images/4/22.png)
 
-#### 4.16*: bloglist expansion, step4
+#### 4.16*: Blog List Expansion, step4
 
 <!-- Add a feature which adds the following restrictions to creating new users: Both username and password must be given. Both username and password must be at least 3 characters long. The username must be unique.-->
  添加一个功能，在创建新用户时增加以下限制。必须给出用户名和密码。用户名和密码都必须至少有3个字符长。用户名必须是唯一的。
@@ -468,7 +468,7 @@ npm uninstall bcrypt
 <!-- Also, implement tests which check that invalid users are not created and invalid add user operation returns a suitable status code and error message.-->
  同时，实施测试，检查无效的用户是否被创建，无效的添加用户操作是否返回合适的状态代码和错误信息。
 
-#### 4.17: bloglist expansion, step5
+#### 4.17: Blog List Expansion, step5
 
 <!-- Expand blogs so that each blog contains information on the creator of the blog.-->
  扩展博客，使每个博客包含博客创建者的信息。
@@ -488,17 +488,17 @@ npm uninstall bcrypt
 
 ![](../../images/4/24e.png)
 
-#### 4.18: bloglist expansion, step6
+#### 4.18: Blog List Expansion, step6
 
 <!-- Implement token-based authentication according to part 4 chapter [Token authentication](/en/part4/token_authentication).-->
  根据第四章节[令牌认证](/en/part4/token_authentication)实施基于令牌的认证。
 
-#### 4.19: bloglist expansion, step7
+#### 4.19: Blog List Expansion, step7
 
 <!-- Modify adding new blogs so that it is only possible if a valid token is sent with the HTTP POST request. The user identified by the token is designated as the creator of the blog.-->
  修改添加新的博客，以便只有在HTTP POST请求中发送了有效的令牌才有可能。由令牌识别的用户被指定为博客的创建者。
 
-#### 4.20*: bloglist expansion, step8
+#### 4.20*: Blog List Expansion, step8
 
 <!-- [This example](/en/part4/token_authentication) from part 4 shows taking the token from the header with the _getTokenFrom_ helper function.-->
  [这个例子](/en/part4/token_authentication)来自第四章节，显示了用_getTokenFrom_辅助函数从头文件中获取令牌。
@@ -534,7 +534,7 @@ const tokenExtractor = (request, response, next) => {
 }
 ```
 
-#### 4.21*: bloglist expansion, step9
+#### 4.21*: Blog List Expansion, step9
 
 <!-- Change the delete blog operation so that a blog can be deleted only by the user who added the blog. Therefore, deleting a blog is possible only if the token sent with the request is the same as that of the blog's creator.-->
  改变删除博客的操作，使一个博客只能由添加该博客的用户删除。因此，只有当与请求一起发送的令牌与博客创建者的令牌相同时，删除博客才有可能。
@@ -556,7 +556,7 @@ const blog = await Blog.findById(...)
 if ( blog.user.toString() === userid.toString() ) ...
 ```
 
-#### 4.22*:  bloglist expansion, step10
+#### 4.22*:  Blog List Expansion, step10
 
 <!-- Both the new blog creation and blog deletion need to find out the identity of the user who is doing the operation. The middleware _tokenExtractor_ that we did in exercise 4.20 helps but still both the handlers of <i>post</i> and <i>delete</i> operations need to find out who is the user holding a specific token.-->
  新博客的创建和博客的删除都需要找出进行操作的用户的身份。我们在练习4.20中所做的中间件_tokenExtractor_有帮助，但<i>post</i>和<i>delete</i>操作的处理程序仍然需要找出谁是持有特定令牌的用户。
@@ -616,7 +616,7 @@ router.post('/', userExtractor, async (request, response) => {
 }
 ```
 
-#### 4.23*:  bloglist expansion, step11
+#### 4.23*:  Blog List Expansion, step11
 
 <!-- After adding token based authentication the tests for adding a new blog broke down. Fix the tests. Also write a new test to ensure adding a blog fails with the proper status code <i>401 Unauthorized</i> if a token is not provided.-->
  在添加了基于令牌的认证后，添加一个新博客的测试出现了问题。修复测试。同时写一个新的测试，以确保在没有提供令牌的情况下，添加一个博客会以适当的状态代码<i>401 Unauthorized</i>失败。

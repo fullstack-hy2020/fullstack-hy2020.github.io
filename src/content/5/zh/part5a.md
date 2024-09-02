@@ -595,7 +595,7 @@ window.localStorage.clear()
 <!-- **Warning:** If you notice you are mixing in same function async/await and _then_ commands, it's 99.9%  certain you are doing something wrong. Use either or, never both.-->
  **警告：**如果你注意到你在同一函数中混入了async/await和_then_命令，那么99.9%的人肯定是做错了。请使用其中之一，不要同时使用。
 
-#### 5.1: bloglist frontend, step1
+#### 5.1: Blog List Frontend, step1
 
 <!-- Clone the application from [Github](https://github.com/fullstack-hy2020/bloglist-frontend) with the command:-->
  用命令从[Github](https://github.com/fullstack-hy2020/bloglist-frontend)克隆应用。
@@ -661,7 +661,7 @@ npm start
 }
 ```
 
-#### 5.2: bloglist frontend, step2
+#### 5.2: Blog List Frontend, step2
 
 <!-- Make the login 'permanent' by using the local storage. Also implement a way to log out.-->
  通过使用本地存储使登录成为"永久"。同时实现一个注销的方法。
@@ -671,14 +671,14 @@ npm start
 <!-- Ensure the browser does not remember the details of the user after logging out.-->
 确保浏览器在注销后不会记住用户的详细信息。
 
-#### 5.3: bloglist frontend, step3
+#### 5.3: Blog List Frontend, step3
 
 <!-- Expand your application to allow  a logged-in user to add new blogs:-->
 扩展你的应用，允许登录的用户添加新的博客。
 
 ![](../../images/5/7e.png)
 
-#### 5.4: bloglist frontend, step4
+#### 5.4: Blog List Frontend, step4
 
 <!-- Implement notifications which inform the user about successful and unsuccessful operations at the top of the page. For example, when a new blog is added, the following notification can be shown:-->
  实施通知，在页面顶部告知用户成功和不成功的操作。例如，当一个新博客被添加时，可以显示以下通知。

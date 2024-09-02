@@ -1100,7 +1100,7 @@ Recomendo especialmente a leitura de [Introdução ao Cypress](https://docs.cypr
 
 > <i>Este é o guia mais importante para entender como testar com o Cypress. Leia. Entenda.</i>
 
-#### 5.17: testes end-to-end do bloglist, etapa 1
+#### 5.17: testes end-to-end do Blog List etapa 1
 
 Configure o Cypress para o seu projeto. Crie um teste para verificar se a aplicação exibe o formulário de login por padrão.
 
@@ -1121,7 +1121,7 @@ describe('Blog app', function() {
 
 O bloco <i>beforeEach</i> deve esvaziar o banco de dados usando, por exemplo, o método que usamos no [material](/ptbr/part5/testes_end_to_end#controlando-o-estado-do-banco-de-dados).
 
-#### 5.18: testes end-to-end do bloglist, etapa 2
+#### 5.18: testes end-to-end do Blog List etapa 2
 
 Faça testes para fazer login. Teste tentativas de login bem-sucedidas e malsucedidas.
 Crie um novo usuário no bloco <i>beforeEach</i> para os testes.
@@ -1154,7 +1154,7 @@ describe('Aplicativo Blog', function() {
 
 Exercício bônus opcional: Verifique se a notificação exibida após uma tentativa de login malsucedida é exibida em vermelho.
 
-#### 5.19: testes end-to-end do bloglist, etapa 3
+#### 5.19: testes end-to-end do Blog List etapa 3
 
 Crie um teste que verifique se um usuário logado pode criar um novo blog.
 A estrutura do teste pode ser a seguinte:
@@ -1178,19 +1178,19 @@ describe('Blog app', function() {
 
 "O teste deve garantir que um novo blog seja adicionado à lista de todos os blogs.
 
-#### 5.20: Testes end-to-end do bloglist, passo 4
+#### 5.20: Testes end-to-end do Blog List Passo 4
 
 Crie um teste que confirme que os usuários podem curtir um blog.
 
-#### 5.21: Testes end-to-end do bloglist, passo 5
+#### 5.21: Testes end-to-end do Blog List Passo 5
 
 Crie um teste para garantir que o usuário que criou um blog possa excluí-lo.
 
-#### 5.22: Testes end-to-end do bloglist, passo 6
+#### 5.22: Testes end-to-end do Blog List Passo 6
 
 Crie um teste para garantir que outros usuários, exceto o criador, não vejam o botão de exclusão.
 
-#### 5.23: Testes end-to-end do bloglist, passo 7
+#### 5.23: Testes end-to-end do Blog List Passo 7
 
 Crie um teste que verifique se os blogs estão ordenados de acordo com as curtidas, sendo o blog com mais curtidas o primeiro.
 

@@ -534,7 +534,7 @@ Pendant que vous faites les exercices, rappelez-vous toutes les méthodes de dé
 
 **Attention:** Si vous remarquez que vous mélangez les fonctions _async/await_ et les commandes _then_, il est à 99,9 % certain que vous faites quelque chose de mal. Utilisez l'un ou l'autre, jamais les deux.
 
-#### 5.1 : bloglist frontend, étape 1
+#### 5.1 : Blog List Frontend, étape 1
 
 Clonez l'application depuis [GitHub](https://github.com/fullstack-hy2020/bloglist-frontend) avec la commande:
 
@@ -593,7 +593,7 @@ Les détails de l'utilisateur connecté n'ont pas encore à être sauvegardés d
 }
 ```
 
-#### 5.2 : bloglist frontend, étape 2
+#### 5.2 : Blog List Frontend, étape 2
 
 Rendez la connexion 'permanente' en utilisant le stockage local. Implémentez également un moyen de se déconnecter.
 
@@ -601,13 +601,13 @@ Rendez la connexion 'permanente' en utilisant le stockage local. Implémentez é
 
 Assurez-vous que le navigateur ne se souvient pas des détails de l'utilisateur après la déconnexion.
 
-#### 5.3 : bloglist frontend, étape 3
+#### 5.3 : Blog List Frontend, étape 3
 
 Étendez votre application pour permettre à un utilisateur connecté d'ajouter de nouveaux blogs :
 
 ![navigateur montrant le formulaire de nouveau blog](../../images/5/7e.png)
 
-#### 5.4 : bloglist frontend, étape 4
+#### 5.4 : Blog List Frontend, étape 4
 
 Implémentez des notifications qui informent l'utilisateur des opérations réussies et échouées en haut de la page. Par exemple, lorsqu'un nouveau blog est ajouté, la notification suivante peut être affichée:
 
