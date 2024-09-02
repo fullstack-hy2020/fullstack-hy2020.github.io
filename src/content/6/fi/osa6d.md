@@ -259,14 +259,15 @@ import { getNotes, createNote, updateNote } from './requests' // highlight-line
 const App = () => {
   // ...
 
-  const updateNoteMutation = useMutation(updateNote, {
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['notes'] })
+  const updateNoteMutation = useMutation( //highligh-line
+    {mutationFn: updateNote, // highlight-line
+    onSuccess: () => { // highligh-line
+      queryClient.invalidateQueries({ queryKey: ['notes'] }) // highlight-line
     },
   })
 
   const toggleImportance = (note) => {
-    updateNoteMutation.mutate({...note, important: !note.important })
+    updateNoteMutation.mutate({...note, important: !note.important }) // highlight-line
   }
 
   // ...
@@ -282,7 +283,8 @@ Sovelluksen tämän hetken koodi on [GitHubissa](https://github.com/fullstack-hy
 Sovellus toimii hyvin, ja koodikin on suhteellisen yksinkertaista. Erityisesti yllättää muistiinpanojen listan muutoksen toteuttamisen helppous. Esim. kun muutamme muistiinpanon tärkeyttä, riittää kyselyn <i>notes</i> invalidointi siihen, että sovelluksen data päivittyy:
 
 ```js
-  const updateNoteMutation = useMutation(updateNote, {
+  const updateNoteMutation = useMutation(
+    {mutationFn: updateNote,
     onSuccess: () => {
       queryClient.invalidateQueries('notes') // highlight-line
     },
