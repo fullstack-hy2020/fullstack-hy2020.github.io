@@ -481,7 +481,7 @@ which tells us that we are using a variable somewhere where it should never be u
 
 #### 9.16
 
-Let us now continue extending the app created in exercise 9.14. First, add the type information and replace the variable *courseParts* with the one from the example below.
+Let us now continue extending the app created in exercise 9.15. First, add the type information and replace the variable *courseParts* with the one from the example below.
 
 ```js
 interface CoursePartBase {
