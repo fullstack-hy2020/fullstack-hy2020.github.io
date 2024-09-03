@@ -3,7 +3,6 @@
 1. Fork the repository
 2. Clone your fork
 3. Verify that you are running Node version 10 ([NVM](https://github.com/nvm-sh/nvm) recommended for managing node versions)
-5. Install gatsby globally `npm install -g gatsby-cli`
 4. Install dependencies with `npm install`
 5. Start the application with `npm start`
 
