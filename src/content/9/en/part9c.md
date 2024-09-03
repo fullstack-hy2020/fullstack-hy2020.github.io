@@ -1654,7 +1654,7 @@ So besides the type _NewDiaryEntry_ we have also the Zod schema _NewEntrySchema_
 
 ```js
 import { z } from 'zod';
-import { NewEntrySchema } from './utils'
+import { newEntrySchema } from './utils'
 
 export interface DiaryEntry {
   id: number;
