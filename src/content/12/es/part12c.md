@@ -26,7 +26,7 @@ $ cd hello-front
 $ npm install
 ```
 
-El siguiente paso es convertir el código JavaScript y CSS en archivos estáticos listos para producción, Vite ya tiene a _build_ como un script npm, así que usemos eso:
+El siguiente paso es convertir el código JavaScript y CSS en archivos estáticos listos para producción, Vite ya tiene un _build_ como un script npm, así que usemos eso:
 
 ```bash
 $ npm run build
