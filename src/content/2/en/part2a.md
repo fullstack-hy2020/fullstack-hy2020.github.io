@@ -300,7 +300,7 @@ Changing the command to:
 const result = notes.map(note => note.content)
 ```
 
-results in an array containing the contents of the notes.
+will give you an array containing the contents of the notes.
 
 This is already pretty close to the React code we used:
 
