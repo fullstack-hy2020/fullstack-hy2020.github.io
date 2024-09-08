@@ -701,7 +701,7 @@ services:
       - app
 ```
 
-Solo necesitamos exponer el puerto de Nginx a la máquina host ya que el acceso al backend y frontend es funciona a través del proxy de Nginx, el cual lo envía al puerto correcto del contenedor. Debido a que Nginx, frontend y backend están definidos en la misma configuración de Docker compose, Docker los pone en la misma [Docker network](https://docs.docker.com/network/) y gracias a eso, Nginx tiene acceso directo a los puertos de los contenedores frontend y backend.
+Solo necesitamos exponer el puerto de Nginx a la máquina host ya que el acceso al backend y frontend funciona a través del proxy de Nginx, el cual lo envía al puerto correcto del contenedor. Debido a que Nginx, frontend y backend están definidos en la misma configuración de Docker compose, Docker los pone en la misma [Docker network](https://docs.docker.com/network/) y gracias a eso, Nginx tiene acceso directo a los puertos de los contenedores frontend y backend.
 
 </div>
 
