@@ -365,7 +365,7 @@ fly deploy
 
 The application works perfectly, except we haven't added the functionality for changing the importance of a note to the backend yet.
 
-<strong>NOTE:</strong> When using Fly.io, be aware that the _.dockerignore_ file in your project directory lists files not uploaded during deployment. The dist directory is included by default. To deploy this directory, remove its reference from the .dockerignore file, ensuring your app is get properly deployed.
+<strong>NOTE:</strong> When using Fly.io, be aware that the _.dockerignore_ file in your project directory lists files not uploaded during deployment. The dist directory is included by default. To deploy this directory, remove its reference from the .dockerignore file, ensuring your app is properly deployed.
 
 ![screenshot of notes application](../../images/3/30new.png)
 
