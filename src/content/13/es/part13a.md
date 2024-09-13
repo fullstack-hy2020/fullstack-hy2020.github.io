@@ -66,7 +66,7 @@ La razón por la que las secciones anteriores del curso usaron MongoDB es precis
 
 ### Base de datos de la aplicacion
 
-Para nuestra aplicación necesitamos una base de datos relacional. Hay muchas opciones, pero usaremos la solución de código abierto más popular actualmente [PostgreSQL] (https://www.postgresql.org/). Puede instalar Postgres (como suele llamarse a la base de datos) en su máquina, si así lo desea. Una opción más fácil sería usar. También puede aprovechar las lecciones del curso [parte 12](/es/part12) y usar Postgres localmente usando Docker.
+Para nuestra aplicación necesitamos una base de datos relacional. Hay muchas opciones, pero usaremos la solución de código abierto más popular actualmente [PostgreSQL](https://www.postgresql.org/). Puede instalar Postgres (como suele llamarse a la base de datos) en su máquina, si así lo desea. Una opción más fácil sería usar. También puede aprovechar las lecciones del curso [parte 12](/es/part12) y usar Postgres localmente usando Docker.
 
 Sin embargo, aprovecharemos el hecho de que es posible crear una base de datos de Postgres para la aplicación en la plataforma de servicios en la nube de Heroku, que ya conocemos de las partes 3 y 4.
 
