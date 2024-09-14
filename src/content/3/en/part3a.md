@@ -709,7 +709,7 @@ app.post('/api/notes', (request, response) => {
 
   const note = {
     content: body.content,
-    important: Boolean(body.important) || false,
+    important: Boolean(body.important),
     id: generateId(),
   }
 
@@ -737,12 +737,12 @@ If the content property has a value, the note will be based on the received data
 If the <i>important</i> property is missing, we will default the value to <i>false</i>. The default value is currently generated in a rather odd-looking way:
 
 ```js
-important: Boolean(body.important) || false,
+important: Boolean(body.important),
 ```
 
-If the data saved in the _body_ variable has the <i>important</i> property, the expression will evaluate its value and convert it to a boolean value. If the property does not exist, then the expression will evaluate to false which is defined on the right-hand side of the vertical lines.
+If the data saved in the _body_ variable has the <i>important</i> property, the expression will evaluate its value and convert it to a boolean value. If the property does not exist, then the expression will evaluate to false since <i>undefined</i> is a [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) value.
 
-> To be exact, when the <i>important</i> property is <i>false</i>, then the <em>body.important || false</em> expression will in fact return the <i>false</i> from the right-hand side...
+> To be exact, when the <i>important</i> property is <i>false</i> or <i>undefined</i>, then the <em>body.important</em> expression will in fact return <i>false</i>...
 
 You can find the code for our current application in its entirety in the <i>part3-1</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1).
 
