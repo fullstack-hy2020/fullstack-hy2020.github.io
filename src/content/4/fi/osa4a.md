@@ -574,7 +574,7 @@ Kuten odotettua, testit menevät läpi:
 
 Jest olettaa oletusarvoisesti, että testitiedoston nimessä on merkkijono <i>.test</i>. Käytetään kurssilla konventiota, jossa testitiedostojen nimen loppu on <i>.test.js</i>.
 
-Jestin antamat virheilmoitukset ovat hyviä. Rikotaan testi:
+Node:testin antamat virheilmoitukset ovat hyviä. Rikotaan testi:
 
 ```js
 test('reverse of react', () => {
