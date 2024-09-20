@@ -25,7 +25,7 @@ Seuraavassa screenshot, jossa koodi on pysäytetty kesken uuden muistiinpanon li
 
 ![Koodiin on lisätty breakpoint, johon suoritus pysähtyy. Vasemman puolen tabissa näkyvät muuttujien arvot, alhaalla Debugging console, jossa on mahdollista evaluoida koodia](../../images/3/36x.png)
 
-Koodi on pysähtynyt rivillä 63 olevan <i>breakpointin</i> kohdalle ja konsoliin on evaluoitu muuttujan <i>note</i> arvo. Vasemmalla olevassa ikkunassa on nähtävillä myös kaikki ohjelman muuttujien arvot.
+Koodi on pysähtynyt rivillä 69 olevan <i>breakpointin</i> kohdalle ja konsoliin on evaluoitu muuttujan <i>note</i> arvo. Vasemmalla olevassa ikkunassa on nähtävillä myös kaikki ohjelman muuttujien arvot.
 
 Ylhäällä olevista nuolista yms. voidaan kontrolloida debuggauksen etenemistä.
   
