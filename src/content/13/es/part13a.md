@@ -406,7 +406,7 @@ Note.init({
 
 El nombre de la columna correspondiente en la base de datos sería <i>creation_year</i>. En el código, la referencia a la columna siempre tiene el mismo formato que en el modelo, es decir, en formato "camel case".
 
-También hemos definido <i>modelName: 'note'</i>, el "nombre del modelo" predeterminado sería <i>Note</i> en mayúsculas. Sin embargo, queremos tener una inicial en minúscula, hará que algunas cosas sean un poco más convenientes en el futuro.
+También hemos definido <i>modelName: 'note'</i>, el "nombre del modelo" predeterminado sería <i>Note</i> en mayúsculas. Sin embargo, queremos tener una inicial en minúscula, esto hará que algunas cosas sean un poco más convenientes en el futuro.
 
 La operación de la base de datos es fácil de hacer usando la [interfaz de consulta](https://sequelize.org/master/manual/model-querying-basics.html) proporcionada por los modelos, el método [findAll](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findAll) funciona exactamente como su nombre indica:
 
