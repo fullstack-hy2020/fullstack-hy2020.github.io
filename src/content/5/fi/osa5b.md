@@ -156,10 +156,10 @@ Jos _loginVisible_ on <i>false</i>, ei <i>display</i> saa mitään napin näkyvy
 
 Kirjautumislomakkeen näkyvyyttä ympäröivän koodin voi ajatella olevan oma looginen kokonaisuutensa, ja se onkin hyvä eristää pois komponentista <i>App</i> omaksi komponentikseen.
 
-Tavoitteena on luoda komponentti <i>Togglable</i>, jota käytetään seuraavalla tavalla:
+Tavoitteena on luoda komponentti <i>Toggleable</i>, jota käytetään seuraavalla tavalla:
 
 ```js
-<Togglable buttonLabel='login'>
+<Toggleable buttonLabel='login'>
   <LoginForm
     username={username}
     password={password}
@@ -167,18 +167,18 @@ Tavoitteena on luoda komponentti <i>Togglable</i>, jota käytetään seuraavalla
     handlePasswordChange={({ target }) => setPassword(target.value)}
     handleSubmit={handleLogin}
   />
-</Togglable>
+</Toggleable>
 ```
 
-Komponentin käyttö poikkeaa aiemmin näkemistämme siinä, että käytössä on nyt avaava ja sulkeva tagi, joiden sisällä määritellään toinen komponentti eli <i>LoginForm</i>. Reactin terminologiassa <i>LoginForm</i> on nyt komponentin <i>Togglable</i> lapsi.
+Komponentin käyttö poikkeaa aiemmin näkemistämme siinä, että käytössä on nyt avaava ja sulkeva tagi, joiden sisällä määritellään toinen komponentti eli <i>LoginForm</i>. Reactin terminologiassa <i>LoginForm</i> on nyt komponentin <i>Toggleable</i> lapsi.
 
-<i>Togglablen</i> avaavan ja sulkevan tagin sisälle voi sijoittaa lapsiksi mitä tahansa React-elementtejä, esim.:
+<i>Toggleablen</i> avaavan ja sulkevan tagin sisälle voi sijoittaa lapsiksi mitä tahansa React-elementtejä, esim.:
 
 ```js
-<Togglable buttonLabel="paljasta">
+<Toggleable buttonLabel="paljasta">
   <p>tämä on aluksi piilossa</p>
   <p>toinen salainen rivi</p>
-</Togglable>
+</Toggleable>
 ```
 
 Komponentin koodi on tällainen:
@@ -186,7 +186,7 @@ Komponentin koodi on tällainen:
 ```js
 import { useState } from 'react'
 
-const Togglable = (props) => {
+const Toggleable = (props) => {
   const [visible, setVisible] = useState(false)
 
   const hideWhenVisible = { display: visible ? 'none' : '' }
@@ -209,7 +209,7 @@ const Togglable = (props) => {
   )
 }
 
-export default Togglable
+export default Toggleable
 ```
 
 Mielenkiintoista ja meille uutta on [props.children](https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children), jonka avulla koodi viittaa komponentin lapsiin eli avaavan ja sulkevan tagin sisällä määriteltyihin React-elementteihin.
@@ -235,7 +235,7 @@ Toisin kuin "normaalit" propsit, <i>children</i> on Reactin automaattisesti mä�
 
 on <i>props.children</i> tyhjä taulukko.
 
-Komponentti <i>Togglable</i> on uusiokäytettävä, ja voimme käyttää sitä tekemään myös uuden muistiinpanon luomisesta huolehtivan formin vastaavalla tavalla tarpeen mukaan näytettäväksi.
+Komponentti <i>Toggleable</i> on uusiokäytettävä, ja voimme käyttää sitä tekemään myös uuden muistiinpanon luomisesta huolehtivan formin vastaavalla tavalla tarpeen mukaan näytettäväksi.
 
 Eristetään ensin muistiinpanojen luominen omaksi komponentiksi
 
@@ -259,16 +259,16 @@ const NoteForm = ({ onSubmit, handleChange, value }) => {
 export default NoteForm
 ```
 
-ja määritellään lomakkeen näyttävä koodi komponentin <i>Togglable</i> sisällä
+ja määritellään lomakkeen näyttävä koodi komponentin <i>Toggleable</i> sisällä
 
 ```js
-<Togglable buttonLabel="new note">
+<Toggleable buttonLabel="new note">
   <NoteForm
     onSubmit={addNote}
     value={newNote}
     handleChange={handleNoteChange}
   />
-</Togglable>
+</Toggleable>
 ```
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-4), branchissa <i>part5-4</i>.
@@ -343,9 +343,9 @@ const App = () => {
       <h1>Notes</h1>
       // ...
 
-      <Togglable buttonLabel="new note">
+      <Toggleable buttonLabel="new note">
         <NoteForm createNote={addNote} /> // highlight-line
-      </Togglable>
+      </Toggleable>
 
       // ...
       <Footer />
@@ -360,7 +360,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://gith
 
 ### ref eli viite komponenttiin
 
-Ratkaisu on melko hyvä, mutta haluamme kuitenkin parantaa sitä. Kun uusi muistiinpano luodaan, olisi loogista jos luomislomake menisi piiloon. Nyt lomake pysyy näkyvillä. Lomakkeen piilottamiseen sisältyy kuitenkin pieni ongelma, sillä näkyvyyttä kontrolloidaan <i>Togglable</i>-komponentin tilassa olevalla muuttujalla <i>visible</i>. Eräs ratkaisu tähän olisi siirtää Togglable-komponentin tilan kontrollointi komponentin ulkopuolelle. Emme kuitenkaan nyt tee sitä, sillä haluamme että komponentti on itse vastuussa tilastaan. Meidän on siis etsittävä jokin muu ratkaisu, ja löydettävä mekanismi komponentin tilan muuttamiseen ulkopuolelta käsin.
+Ratkaisu on melko hyvä, mutta haluamme kuitenkin parantaa sitä. Kun uusi muistiinpano luodaan, olisi loogista jos luomislomake menisi piiloon. Nyt lomake pysyy näkyvillä. Lomakkeen piilottamiseen sisältyy kuitenkin pieni ongelma, sillä näkyvyyttä kontrolloidaan <i>Toggleable</i>-komponentin tilassa olevalla muuttujalla <i>visible</i>. Eräs ratkaisu tähän olisi siirtää Toggleable-komponentin tilan kontrollointi komponentin ulkopuolelle. Emme kuitenkaan nyt tee sitä, sillä haluamme että komponentti on itse vastuussa tilastaan. Meidän on siis etsittävä jokin muu ratkaisu, ja löydettävä mekanismi komponentin tilan muuttamiseen ulkopuolelta käsin.
 
 On useita erilaisia tapoja toteuttaa pääsy komponentin funktioihin sen ulkopuolelta. Käytetään nyt Reactin [ref](https://react.dev/learn/referencing-values-with-refs)-mekanismia, joka tarjoaa eräänlaisen viitteen komponenttiin.
 
@@ -375,22 +375,22 @@ const App = () => {
 
   return (
     // ...
-    <Togglable buttonLabel='new note' ref={noteFormRef}>  // highlight-line
+    <Toggleable buttonLabel='new note' ref={noteFormRef}>  // highlight-line
       <NoteForm createNote={addNote} />
-    </Togglable>
+    </Toggleable>
     // ...
   )
 }
 ```
 
-[useRef](https://react.dev/reference/react/useRef) hookilla luodaan ref <i>noteFormRef</i>, joka kiinnitetään muistiinpanojen luomislomakkeen sisältävälle <i>Togglable</i>-komponentille. Nyt siis muuttuja <i>noteFormRef</i> toimii viitteenä komponenttiin.
+[useRef](https://react.dev/reference/react/useRef) hookilla luodaan ref <i>noteFormRef</i>, joka kiinnitetään muistiinpanojen luomislomakkeen sisältävälle <i>Toggleable</i>-komponentille. Nyt siis muuttuja <i>noteFormRef</i> toimii viitteenä komponenttiin.
 
-Komponenttia <i>Togglable</i> laajennetaan seuraavasti
+Komponenttia <i>Toggleable</i> laajennetaan seuraavasti
 
 ```js
 import { useState, useImperativeHandle, forwardRef } from 'react' // highlight-line
 
-const Togglable = forwardRef((props, ref) => { // highlight-line
+const Toggleable = forwardRef((props, ref) => { // highlight-line
   const [visible, setVisible] = useState(false)
 
   const hideWhenVisible = { display: visible ? 'none' : '' }
@@ -421,7 +421,7 @@ const Togglable = forwardRef((props, ref) => { // highlight-line
   )
 })  // highlight-line
 
-export default Togglable
+export default Toggleable
 ```
 
 Komponentin luova funktio on kääritty funktiokutsun [forwardRef](https://react.dev/reference/react/forwardRef) sisälle, jolloin komponentti pääsee käsiksi sille määriteltyyn refiin.
@@ -458,7 +458,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://gith
 Kun Reactissa määritellään komponentti
 
 ```js
-const Togglable = () => {
+const Toggleable = () => {
   // ...
 }
 ```
@@ -467,17 +467,17 @@ ja otetaan se käyttöön
 
 ```js
 <div>
-  <Togglable buttonLabel="1" ref={togglable1}>
+  <Toggleable buttonLabel="1" ref={toggleable1}>
     ensimmäinen
-  </Togglable>
+  </Toggleable>
 
-  <Togglable buttonLabel="2" ref={togglable2}>
+  <Toggleable buttonLabel="2" ref={toggleable2}>
     toinen
-  </Togglable>
+  </Toggleable>
 
-  <Togglable buttonLabel="3" ref={togglable3}>
+  <Toggleable buttonLabel="3" ref={toggleable3}>
     kolmas
-  </Togglable>
+  </Toggleable>
 </div>
 ```
 
@@ -485,7 +485,7 @@ syntyy <i>kolme erillistä komponenttiolioa</i>, joilla on kaikilla oma tilansa:
 
 ![Kuva havainnollistaa, että selain renderöi kolme erillistä komponenttia, jotka voivat olla toisistaan riippumatta "togglattuina" näkyville](../../images/5/12.png)
 
-<i>ref</i>-attribuutin avulla on talletettu viite jokaiseen komponentin muuttujaan <i>togglable1</i>, <i>togglable2</i> ja <i>togglable3</i>.
+<i>ref</i>-attribuutin avulla on talletettu viite jokaiseen komponentin muuttujaan <i>toggleable1</i>, <i>toggleable2</i> ja <i>toggleable3</i>.
 
 ### Full stack ‑sovelluskehittäjän päivitetty vala
 
@@ -513,7 +513,7 @@ Full stack ‑ohjelmointi on <i>todella</i> hankalaa, ja sen takia lupaan hyödy
 
 #### 5.5 blogilistan frontend, step5
 
-Tee blogin luomiseen käytettävästä lomakkeesta ainoastaan tarvittaessa näytettävä osan 5 luvun [Kirjautumislomakkeen näyttäminen vain tarvittaessa](/osa5/props_children_ja_proptypet#kirjautumislomakkeen-nayttaminen-vain-tarvittaessa) tapaan. Voit halutessasi hyödyntää osassa 5 määriteltyä komponenttia <i>Togglable</i>.
+Tee blogin luomiseen käytettävästä lomakkeesta ainoastaan tarvittaessa näytettävä osan 5 luvun [Kirjautumislomakkeen näyttäminen vain tarvittaessa](/osa5/props_children_ja_proptypet#kirjautumislomakkeen-nayttaminen-vain-tarvittaessa) tapaan. Voit halutessasi hyödyntää osassa 5 määriteltyä komponenttia <i>Toggleable</i>.
 
 Lomake ei ole oletusarvoisesti näkyvillä:
 
@@ -567,7 +567,7 @@ const Blog = ({ blog }) => {
 )}
 ```
 
-**Huom:** Vaikka tämän tehtävän toiminnallisuus on melkein samanlainen kuin komponentin <i>Togglable</i> tarjoama toiminnallisuus, ei Togglable kuitenkaan sovi tarkoitukseen sellaisenaan. Helpoin ratkaisu lienee lisätä blogille tila, joka kontrolloi sitä missä muodossa blogi näytetään.
+**Huom:** Vaikka tämän tehtävän toiminnallisuus on melkein samanlainen kuin komponentin <i>Toggleable</i> tarjoama toiminnallisuus, ei Toggleable kuitenkaan sovi tarkoitukseen sellaisenaan. Helpoin ratkaisu lienee lisätä blogille tila, joka kontrolloi sitä missä muodossa blogi näytetään.
 
 #### 5.8: blogilistan frontend, step8
 
@@ -634,15 +634,15 @@ Näytä poistonappi ainoastaan jos kyseessä on kirjautuneen käyttäjän lisä�
 
 ### PropTypes
 
-Komponentti <i>Togglable</i> olettaa, että sille määritellään propsina <i>buttonLabel</i> napin teksti. Jos määrittely unohtuu,
+Komponentti <i>Toggleable</i> olettaa, että sille määritellään propsina <i>buttonLabel</i> napin teksti. Jos määrittely unohtuu,
 
 ```js
-<Togglable> buttonLabel unohtui... </Togglable>
+<Toggleable> buttonLabel unohtui... </Toggleable>
 ```
 
 sovellus kyllä toimii, mutta selaimeen renderöityy hämäävästi nappi, jolla ei ole mitään tekstiä.
 
-Haluaisimmekin varmistaa, että jos <i>Togglable</i>-komponenttia käytetään, on propsille "pakko" antaa arvo.
+Haluaisimmekin varmistaa, että jos <i>Toggleable</i>-komponenttia käytetään, on propsille "pakko" antaa arvo.
 
 Komponentin olettamat ja edellyttämät propsit ja niiden tyypit voidaan määritellä kirjaston [prop-types](https://github.com/facebook/prop-types) avulla. Asennetaan kirjasto:
 
@@ -655,11 +655,11 @@ npm install prop-types
 ```js
 import PropTypes from 'prop-types'
 
-const Togglable = React.forwardRef((props, ref) => {
+const Toggleable = React.forwardRef((props, ref) => {
   // ..
 }
 
-Togglable.propTypes = {
+Toggleable.propTypes = {
   buttonLabel: PropTypes.string.isRequired
 }
 ```
@@ -777,7 +777,7 @@ npm run lint
 
 tai editorin Eslint-pluginia hyväksikäyttäen.
 
-Komponentti _Togglable_ aiheuttaa ikävän näköisen varoituksen <i>Component definition is missing display name</i>: 
+Komponentti _Toggleable_ aiheuttaa ikävän näköisen varoituksen <i>Component definition is missing display name</i>: 
 
 ![VS codessa näkyy ESLint-varoitus "Component definition is missing display name"](../../images/5/25x.png)
 
@@ -791,13 +791,13 @@ Korjaus on onneksi hyvin helppo tehdä:
 import { useState, useImperativeHandle } from 'react'
 import PropTypes from 'prop-types'
 
-const Togglable = React.forwardRef((props, ref) => {
+const Toggleable = React.forwardRef((props, ref) => {
   // ...
 })
 
-Togglable.displayName = 'Togglable' // highlight-line
+Toggleable.displayName = 'Toggleable' // highlight-line
 
-export default Togglable
+export default Toggleable
 ```
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-7), branchissa <i>part5-7</i>.
