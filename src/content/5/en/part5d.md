@@ -1070,10 +1070,10 @@ describe('when logged in', () => {
 
     test('importance can be changed', async ({ page }) => {
       const otherNoteText = await page.getByText('second note') // highlight-line
-      const otherdNoteElement = await otherNoteText.locator('..')
+      const otherNoteElement = await otherNoteText.locator('..')
     
-      await otherdNoteElement.getByRole('button', { name: 'make not important' }).click()
-      await expect(otherdNoteElement.getByText('make important')).toBeVisible()
+      await otherNoteElement.getByRole('button', { name: 'make not important' }).click()
+      await expect(otherNoteElement.getByText('make important')).toBeVisible()
     })
   })
 }) 
@@ -1118,10 +1118,10 @@ describe('Note app', () => {
       test('one of those can be made nonimportant', async ({ page }) => {
         await page.pause() // highlight-line
         const otherNoteText = await page.getByText('second note')
-        const otherdNoteElement = await otherNoteText.locator('..')
+        const otherNoteElement = await otherNoteText.locator('..')
       
-        await otherdNoteElement.getByRole('button', { name: 'make not important' }).click()
-        await expect(otherdNoteElement.getByText('make important')).toBeVisible()
+        await otherNoteElement.getByRole('button', { name: 'make not important' }).click()
+        await expect(otherNoteElement.getByText('make important')).toBeVisible()
       })
     })
   })
