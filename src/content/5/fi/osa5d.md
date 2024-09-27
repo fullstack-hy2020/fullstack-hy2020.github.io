@@ -208,9 +208,9 @@ Korjataan nyt koodista virheen aiheuttanut vanhentunut vuosiluku.
 Ennen kuin jatkamme, lisätään vielä testeihin _describe_-lohko:
 
 ```js
-const { test, describe, expect } = require('@playwright/test')
+const { test, expect } = require('@playwright/test')
 
-describe('Note app', () => {
+test.describe('Note app', () => {
   test('front page can be opened', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
@@ -243,7 +243,7 @@ Laajennetaan testejä siten, että testi yrittää kirjautua sovellukseen. Olete
 Aloitetaan kirjautumislomakkeen avaamisella.
 
 ```js
-describe('Note app', () => {
+test.describe('Note app', () => {
   // ...
 
   test('login form can be opened', async ({ page }) => {
@@ -273,7 +273,7 @@ Klikkauksen jälkeen lomake tulee näkyviin
 Kun lomake on avattu, testin tulisi etsiä siitä tekstikentät ja kirjoittaa niihin käyttäjätunnus sekä salasana. Tehdään ensimmäinen yritys funktiota [page.getByRole](https://playwright.dev/docs/api/class-page#page-get-by-role) käyttäen:
 
 ```js
-describe('Note app', () => {
+test.describe('Note app', () => {
   // ...
 
   test('login form can be opened', async ({ page }) => {
@@ -296,7 +296,7 @@ Error: locator.fill: Error: strict mode violation: getByRole('textbox') resolved
 Ongelmana on nyt se, että _getByRole_ löytää kaksi tekstikenttää, ja metodin [fill](https://playwright.dev/docs/api/class-locator#locator-fill) kutsuminen ei onnistu, sillä se olettaa että löydettyjä tekstikenttiä on vain yksi. Eräs tapa kiertää ongelma on käyttää metodeja [first](https://playwright.dev/docs/api/class-locator#locator-first) ja [last](https://playwright.dev/docs/api/class-locator#locator-last):
 
 ```js
-describe('Note app', () => {
+test.describe('Note app', () => {
   // ...
 
   test('login form can be opened', async ({ page }) => {
@@ -317,7 +317,7 @@ Kirjoitettuaan tekstikenttiin, testi painaa nappia _login_ ja tarkastaa, että s
 Jos tekstikenttiä olisi enemmän kuin kaksi, ei metodien _first_ ja _last_ käyttö riittäisi. Eräs mahdollisuus olisi käyttää metodia [all](https://playwright.dev/docs/api/class-locator#locator-all), joka muuttaa löydetyt locatorit taulukoksi, jota on mahdollista indeksoida:
 
 ```js
-describe('Note app', () => {
+test.describe('Note app', () => {
   // ...
   test('login form can be opened', async ({ page }) => {
     await page.goto('http://localhost:5173')
@@ -377,7 +377,7 @@ const LoginForm = ({ ... }) => {
 Testi muuttuu muotoon
 
 ```js
-describe('Note app', () => {
+test.describe('Note app', () => {
   // ...
 
   test('login form can be opened', async ({ page }) => {
@@ -401,9 +401,9 @@ Huomaa, että testin läpimeno tässä vaiheessa edellyttää, että backendin y
 Koska molemmat testit aloittavat samalla tavalla, eli avaamalla sivun <i>http://localhost:5173</i>, kannattaa yhteinen osa eristää ennen jokaista testiä suoritettavaan <i>beforeEach</i>-lohkoon:
 
 ```js
-const { test, describe, expect, beforeEach } = require('@playwright/test')
+const { test, expect, beforeEach } = require('@playwright/test')
 
-describe('Note app', () => {
+test.describe('Note app', () => {
   // highlight-start
   beforeEach(async ({ page }) => {
     await page.goto('http://localhost:5173')
@@ -432,12 +432,12 @@ describe('Note app', () => {
 Luodaan seuraavaksi testi, joka lisää sovellukseen uuden muistiinpanon:
 
 ```js
-const { test, describe, expect, beforeEach } = require('@playwright/test')
+const { test, expect, beforeEach } = require('@playwright/test')
 
-describe('Note app', () => {
+test.describe('Note app', () => {
   // ...
 
-  describe('when logged in', () => {
+  test.describe('when logged in', () => {
     beforeEach(async ({ page }) => {
       await page.getByRole('button', { name: 'log in' }).click()
       await page.getByTestId('username').fill('mluukkai')
@@ -477,9 +477,9 @@ aiheuttaa ongelmia siinä vaiheessa kun sovellukseen luodaan sama muistiinpano u
 Testien rakenne näyttää seuraavalta:
 
 ```js
-const { test, describe, expect, beforeEach } = require('@playwright/test')
+const { test, expect, beforeEach } = require('@playwright/test')
 
-describe('Note app', () => {
+test.describe('Note app', () => {
   // ....
 
   test('user can log in', async ({ page }) => {
@@ -490,7 +490,7 @@ describe('Note app', () => {
     await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
   })
 
-  describe('when logged in', () => {
+  test.describe('when logged in', () => {
     beforeEach(async ({ page }) => {
       await page.getByRole('button', { name: 'log in' }).click()
       await page.getByTestId('username').fill('mluukkai')
@@ -565,7 +565,7 @@ Muutetaan nyt testien <i>beforeEach</i>-alustuslohkoa siten, että se nollaa pal
 Tällä hetkellä sovelluksen käyttöliittymän kautta ei ole mahdollista luoda käyttäjiä, luodaankin testien alustuksessa testikäyttäjä suoraan backendiin:
 
 ```js
-describe('Note app', () => {
+test.describe('Note app', () => {
   beforeEach(async ({ page, request }) => {
     await request.post('http:localhost:3001/api/testing/reset')
     await request.post('http://localhost:3001/api/users', {
@@ -587,7 +587,7 @@ describe('Note app', () => {
     // ...
   })
 
-  describe('when logged in', () => {
+  test.describe('when logged in', () => {
     // ...
   })
 })
@@ -604,13 +604,13 @@ Testin tekemiseen on muutamiakin erilaisia lähestymistapoja.
 Seuraavassa etsitään ensin muistiinpano ja klikataan sen nappia <i>make not important</i>. Tämän jälkeen tarkistetaan että muistiinpano sisältää napin <i>make important</i>.
 
 ```js
-describe('Note app', () => {
+test.describe('Note app', () => {
   // ...
 
-  describe('when logged in', () => {
+  test.describe('when logged in', () => {
     // ...
 
-    describe('and a note exists', () => {
+    test.describe('and a note exists', () => {
       beforeEach(async ({ page }) => {
         await page.getByRole('button', { name: 'new note' }).click()
         await page.getByRole('textbox').fill('another note by playwright')
@@ -639,7 +639,7 @@ Tehdään nyt testi joka varmistaa, että kirjautumisyritys epäonnistuu jos sal
 Testin ensimmäinen versio näyttää seuraavalta:
 
 ```js
-describe('Note app', () => {
+test.describe('Note app', () => {
   // ...
 
   test('login fails with wrong password', async ({ page }) => {
@@ -753,9 +753,9 @@ npm test -- -g "login fails with wrong password"
 Sovelluksemme testit näyttävät tällä hetkellä seuraavalta:
 
 ```js 
-const { test, describe, expect, beforeEach } = require('@playwright/test')
+const { test, expect, beforeEach } = require('@playwright/test')
 
-describe('Note app', () => {
+test.describe('Note app', () => {
   // ...
 
   test('user can login with correct credentials', async ({ page }) => {
@@ -770,7 +770,7 @@ describe('Note app', () => {
     // ...
   })
 
-  describe('when logged in', () => {
+  test.describe('when logged in', () => {
     beforeEach(async ({ page, request }) => {
       await page.getByRole('button', { name: 'log in' }).click()
       await page.getByTestId('username').fill('mluukkai')
@@ -810,13 +810,13 @@ Testi yksinkertaistuu ja selkeytyy:
 ```js
 const { loginWith } = require('./helper')
 
-describe('Note app', () => {
+test.describe('Note app', () => {
   test('user can log in', async ({ page }) => {
     await loginWith(page, 'mluukkai', 'salainen')
     await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
   })
 
-  describe('when logged in', () => {
+  test.describe('when logged in', () => {
     beforeEach(async ({ page }) => {
       await loginWith(page, 'mluukkai', 'salainen')
     })
@@ -834,10 +834,10 @@ Playwright tarjoaa myös [ratkaisun](https://playwright.dev/docs/auth) missä ki
 Vastaava toistuva koodi koskee oikeastaan myös uuden muistiinpanon luomista. Sitä varten on olemassa testi, joka luo muistiinpanon lomakkeen avulla. Myös muistiinpanon tärkeyden muuttamista testaavan testin <i>beforeEach</i>-alustuslohkossa luodaan muistiinpano lomakkeen avulla: 
 
 ```js
-describe('Note app', function() {
+test.describe('Note app', function() {
   // ...
 
-  describe('when logged in', () => {
+  test.describe('when logged in', () => {
     test('a new note can be created', async ({ page }) => {
       await page.getByRole('button', { name: 'new note' }).click()
       await page.getByRole('textbox').fill('a note created by playwright')
@@ -845,7 +845,7 @@ describe('Note app', function() {
       await expect(page.getByText('a note created by playwright')).toBeVisible()
     })
   
-    describe('and a note exists', () => {
+    test.describe('and a note exists', () => {
       beforeEach(async ({ page }) => {
         await page.getByRole('button', { name: 'new note' }).click()
         await page.getByRole('textbox').fill('another note by playwright')
@@ -884,10 +884,10 @@ export { loginWith, createNote }
 Testi yksinkertaistuu seuraavasti:
 
 ```js
-describe('Note app', () => {
+test.describe('Note app', () => {
   // ...
 
-  describe('when logged in', () => {
+  test.describe('when logged in', () => {
     beforeEach(async ({ page }) => {
       await loginWith(page, 'mluukkai', 'salainen')
     })
@@ -897,7 +897,7 @@ describe('Note app', () => {
       await expect(page.getByText('a note created by playwright')).toBeVisible()
     })
 
-    describe('and a note exists', () => {
+    test.describe('and a note exists', () => {
       beforeEach(async ({ page }) => {
         await createNote(page, 'another note by playwright', true)
       })
@@ -964,9 +964,9 @@ Tarkastellaan vielä aiemmin tekemäämme testiä, joka varmistaa että muistiin
 Muutetaan testin alustuslohkoa siten, että se luo yhden sijaan kaksi muistiinpanoa:
 
 ```js
-describe('when logged in', () => {
+test.describe('when logged in', () => {
   // ...
-  describe('and several notes exists', () => {
+  test.describe('and several notes exists', () => {
     beforeEach(async ({ page }) => {
       // highlight-start
       await createNote(page, 'first note', true)
@@ -1044,7 +1044,7 @@ test('one of those can be made nonimportant', async ({ page }) => {
 Muutetaan testiä vielä siten, että muistiinpanoja luodaankin kolme, ja tärkeyttä vaihdetaan toisena luodulta muistiinpanolta:
 
 ```js
-describe('when logged in', () => {
+test.describe('when logged in', () => {
   beforeEach(async ({ page }) => {
     await loginWith(page, 'mluukkai', 'salainen')
   })
@@ -1054,7 +1054,7 @@ describe('when logged in', () => {
     await expect(page.getByText('a note created by playwright')).toBeVisible()
   })
 
-  describe('and a note exists', () => {
+  test.describe('and a note exists', () => {
     beforeEach(async ({ page }) => {
       await createNote(page, 'first note', true)
       await createNote(page, 'second note', true)
@@ -1091,17 +1091,17 @@ Playwright-inspector näyttää testien etenemisen askel askeleelta. Yläreunan 
 Oletusarvoisesti debugatessa askelletaan testi läpi komento komennolta. Jos on kyse monimutkaisesta testistä, voi olla melko vaivalloista askeltaa testissä kiinnostavaan kohtaan asti. Liialta askellukselta voidaan välttyä lisäämällä juuri kiinnostavaa kohtaa ennen komento _await page.pause()_:
 
 ```js
-describe('Note app', () => {
+test.describe('Note app', () => {
   beforeEach(async ({ page, request }) => {
     // ...
   }
 
-  describe('when logged in', () => {
+  test.describe('when logged in', () => {
     beforeEach(async ({ page }) => {
       // ...
     })
 
-    describe('and several notes exists', () => {
+    test.describe('and several notes exists', () => {
       beforeEach(async ({ page }) => {
         await createNote(page, 'first note')
         await createNote(page, 'second note')
@@ -1224,9 +1224,9 @@ Tee testi, joka varmistaa, että sovellus näyttää oletusarvoisesti kirjautumi
 Testin rungon tulee olla seuraavanlainen
 
 ```js 
-const { test, expect, beforeEach, describe } = require('@playwright/test')
+const { test, expect, beforeEach } = require('@playwright/test')
 
-describe('Note app', () => {
+test.describe('Note app', () => {
   beforeEach(async ({ page, request }) => {
     await request.post('http:localhost:3003/api/testing/reset')
     await request.post('http://localhost:3003/api/users', {
@@ -1256,9 +1256,9 @@ Tee testit kirjautumiselle. Testaa sekä onnistunut että epäonnistunut kirjaut
 Testien runko laajenee seuraavasti
 
 ```js 
-const { test, expect, beforeEach, describe } = require('@playwright/test')
+const { test, expect, beforeEach } = require('@playwright/test')
 
-describe('Note app', () => {
+test.describe('Note app', () => {
   beforeEach(async ({ page, request }) => {
     // ...
   })
@@ -1267,7 +1267,7 @@ describe('Note app', () => {
     // ...
   })
 
-  describe('Login', () => {
+  test.describe('Login', () => {
     test('succeeds with correct credentials', async ({ page }) => {
       // ...
     })
@@ -1284,7 +1284,7 @@ describe('Note app', () => {
 Tee testi, joka varmistaa, että kirjautunut käyttäjä pystyy luomaan blogin. Testin runko voi näyttää seuraavalta
 
 ```js 
-describe('When logged in', () => {
+test.describe('When logged in', () => {
   beforeEach(async ({ page }) => {
     // ...
   })
