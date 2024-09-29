@@ -501,7 +501,7 @@ const button = screen.getByText('show...')
 await user.click(button)
 ```
 
-Käytännössä siis loimme metodin avulla <i>click</i>-tapahtuman metodin argumenttina annetulle komponentille. Voimme simuloida myös lomakkeelle kirjoittamista <i>userEventin</i>-olion avulla.
+Käytännössä siis loimme metodin avulla <i>click</i>-tapahtuman metodin argumenttina annetulle komponentille. Voimme simuloida myös lomakkeelle kirjoittamista <i>userEvent</i>-olion avulla.
 
 Tehdään testi komponentille <i>NoteForm</i>. Lomakkeen koodi näyttää seuraavalta:
 
