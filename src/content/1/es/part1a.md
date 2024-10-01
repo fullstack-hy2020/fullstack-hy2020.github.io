@@ -66,7 +66,7 @@ const App = () => {
 export default App
 ```
 
-Los archivos <i>App.css</i> y <i>index.css</i>, y el directorio <i>assets</i> pueden eliminarse ya que nos son necesarios en nuestra aplicación por ahora.
+Los archivos <i>App.css</i> e <i>index.css</i>, y el directorio <i>assets</i> pueden eliminarse ya que nos son necesarios en nuestra aplicación por ahora.
 
 ### create-react-app
 
@@ -679,7 +679,7 @@ const App = () => {
 export default App
 ```
 
-y elimina los archivos adicionales App.css, y index.css, también elimina el directorio assets.
+y elimina los archivos adicionales App.css, e index.css, también elimina el directorio assets.
 
 Desafortunadamente, toda la aplicación está en el mismo componente. Refactoriza el código para que conste de tres componentes nuevos: <i>Header</i>, <i>Content</i> y <i>Total</i>. Todos los datos aún residen en el componente <i>App</i>, que pasa los datos necesarios a cada componente mediante <i>props</i>. <i>Header</i> se encarga de mostrar el nombre del curso, <i>Content</i> muestra las partes y su número de ejercicios y <i>Total</i> muestra el número total de ejercicios.
 
