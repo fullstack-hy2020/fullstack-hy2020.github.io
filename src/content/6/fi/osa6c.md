@@ -380,6 +380,12 @@ Molemmat komponentit dispatchaisivat ainoastaan actionin välittämättä siitä
 
 Redux Thunkin ansiosta on mahdollista määritellä <i>action creatoreja</i>, jotka palauttavat objektin sijaan funktion. Tämän funktion parametreina ovat Redux-storen <em>dispatch</em>- ja <em>getState</em>-metodi. Tämän ansiosta on mahdollista toteuttaa asynkronisia action creatoreja, jotka ensin odottavat jonkin asynkronisen toimenpiteen valmistumista ja vasta sen jälkeen dispatchaavat varsinaisen actionin.
 
+Asennetaan projektiin Redux-thunk
+
+```bash
+npm install redux-thunk@2.4.2
+```
+
 Voimme nyt määritellä muistiinpanojen alkutilan palvelimelta hakevan action creatorin <em>initializeNotes</em> seuraavasti:
 
 ```js
