@@ -718,12 +718,12 @@ const CounterContext = createContext()
 
 // ...
 
-export const useCounterValue = () => {
+export const UseCounterValue = () => {
   const counterAndDispatch = useContext(CounterContext)
   return counterAndDispatch[0]
 }
 
-export const useCounterDispatch = () => {
+export const UseCounterDispatch = () => {
   const counterAndDispatch = useContext(CounterContext)
   return counterAndDispatch[1]
 }
@@ -734,10 +734,10 @@ export const useCounterDispatch = () => {
 Näiden apufunktioiden avulla kontekstia käyttävien komponenttien on mahdollista saada haltuunsa juuri tarvitsemansa osa kontekstia. Komponentti <i>Display</i> muuttuu seuraavasti:
 
 ```js
-import { useCounterValue } from '../CounterContext' // highlight-line
+import { UseCounterValue } from '../CounterContext' // highlight-line
 
 const Display = () => {
-  const counter = useCounterValue() // highlight-line
+  const counter = UseCounterValue() // highlight-line
   return <div>
     {counter}
   </div>
@@ -750,10 +750,10 @@ export default Display
 Komponentti <i>Button</i> muuttuu muotoon:
 
 ```js
-import { useCounterDispatch } from '../CounterContext' // highlight-line
+import { UseCounterDispatch } from '../CounterContext' // highlight-line
 
 const Button = ({ type, label }) => {
-  const dispatch = useCounterDispatch() // highlight-line
+  const dispatch = UseCounterDispatch() // highlight-line
   return (
     <button onClick={() => dispatch({ type })}>
       {label}
@@ -768,7 +768,7 @@ Ratkaisu on varsin tyylikäs. Koko sovelluksen tila eli laskurin arvo ja sen hal
 
 Sovelluksen lopullinen koodi on GitHubissa repositorion [https://github.com/fullstack-hy2020/hook-counter](https://github.com/fullstack-hy2020/hook-counter/tree/part6-3) branchissa <i>part6-3</i>.
 
-Teknisenä yksityiskohtana todettakoon, että apufunktiot <i>useCounterValue</i> ja <i>useCounterDispatch</i> on määritelty ns. [custom hookeina](https://react.dev/learn/reusing-logic-with-custom-hooks), sillä funktion <i>useContext</i> kutsuminen [ei ole mahdollista](https://legacy.reactjs.org/docs/hooks-rules.html) muualta kuin React-komponenteista tai custom hookeista käsin. Custom hookit taas ovat JavaScript-funktioita joiden nimen pitää alkaa merkkijonolla _use_. Palaamme custom hookeihin hieman tarkemmin kurssin [osassa 7](/osa7/custom_hookit).
+Teknisenä yksityiskohtana todettakoon, että apufunktiot <i>UseCounterValue</i> ja <i>UseCounterDispatch</i> on määritelty ns. [custom hookeina](https://react.dev/learn/reusing-logic-with-custom-hooks), sillä funktion <i>useContext</i> kutsuminen [ei ole mahdollista](https://legacy.reactjs.org/docs/hooks-rules.html) muualta kuin React-komponenteista tai custom hookeista käsin. Custom hookit taas ovat JavaScript-funktioita joiden nimen pitää alkaa merkkijonolla _use_. Palaamme custom hookeihin hieman tarkemmin kurssin [osassa 7](/osa7/custom_hookit).
 
 </div>
 
