@@ -140,7 +140,7 @@ export const getNotes = () =>
 Komponentti <i>App</i> yksinkertaistuu nyt hiukan
 
 ```js
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 import { getNotes } from './requests' // highlight-line
 
 const App = () => {
@@ -178,7 +178,7 @@ export const createNote = newNote => // highlight-line
 Komponentti <i>App</i> muuttuu seuraavasti
 
 ```js
-import { useQuery, useMutation } from 'react-query' // highlight-line
+import { useQuery, useMutation } from '@tanstack/react-query' // highlight-line
 import { getNotes, createNote } from './requests' // highlight-line
 
 const App = () => {
@@ -218,7 +218,7 @@ Jotta saamme renderöityä myös uuden muistiinpanon, meidän on kerrottava Reac
 Invalidointi on onneksi helppoa, se voidaan tehdä kytkemällä mutaatioon sopiva <i>onSuccess</i>-takaisinkutsufunktio:
 
 ```js
-import { useQuery, useMutation, useQueryClient } from 'react-query' // highlight-line
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query' // highlight-line
 import { getNotes, createNote } from './requests'
 
 const App = () => {
@@ -253,7 +253,7 @@ export const updateNote = updatedNote =>
 Myös muistiinpanon päivittäminen tapahtuu mutaation avulla. Komponentti <i>App</i> laajenee seuraavasti:
 
 ```js
-import { useQuery, useMutation, useQueryClient } from 'react-query'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { getNotes, createNote, updateNote } from './requests' // highlight-line
 
 const App = () => {
