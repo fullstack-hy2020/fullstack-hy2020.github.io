@@ -365,7 +365,7 @@ const App = (props) => {
 // highlight-start      
       <div>
         <button onClick={() => setShowAll(!showAll)}>
-          show {showAll ? 'important' : 'all' }
+          show {showAll ? 'important' : 'all'}
         </button>
       </div>
 // highlight-end            
