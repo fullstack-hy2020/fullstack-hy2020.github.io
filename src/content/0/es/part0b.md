@@ -348,7 +348,7 @@ newElement = document.createElement('li')
 newElement.textContent = 'Page manipulation from console is easy'
 ```
 
-Y agregua el nuevo elemento li a la lista:
+Y agrega el nuevo elemento li a la lista:
 
 ```js
 list.appendChild(newElement)
