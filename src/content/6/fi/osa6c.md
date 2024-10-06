@@ -511,40 +511,6 @@ const NewNote = () => {
 }
 ```
 
-Siistitään lopuksi vielä hieman <i>main.jsx</i>-tiedostoa siirtämällä Redux-storen luontiin liittyvä koodi erilliseen <i>store.js</i>-tiedostoon:
-
-```js
-import { configureStore } from '@reduxjs/toolkit'
-
-import noteReducer from './reducers/noteReducer'
-import filterReducer from './reducers/filterReducer'
-
-const store = configureStore({
-  reducer: {
-    notes: noteReducer,
-    filter: filterReducer
-  }
-})
-
-export default store
-```
-
-Muutosten jälkeen <i>main.jsx</i>-tiedosto näyttää seuraavalta:
-
-```js
-import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux' 
-import store from './store' // highlight-line
-import App from './App'
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-)
-```
-
 Sovelluksen tämänhetkinen koodi on [GitHubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5) branchissa <i>part6-5</i>.
 
 Redux Toolkit tarjoaa myös hieman kehittyneempiä työkaluja asynkronisen tilanhallinnan helpottamiseksi, esim mm. [createAsyncThunk](https://redux-toolkit.js.org/api/createAsyncThunk)-funktion ja [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) ‑API:n. Yksinkertaisissa sovelluksissa näiden tuoma hyöty lienee kuitenkin vähäinen.
