@@ -583,7 +583,7 @@ setTimeout(() => {
 Make an action creator, which enables one to provide the notification as follows:
 
 ```js
-dispatch(setNotification(`you voted '${anecdote.content}'`, 10))
+dispatch(setNotification({ message: `you voted '${anecdote.content}'`, timeout: 10 }))
 ```
 
 The first parameter is the text to be rendered and the second parameter is the time to display the notification given in seconds.
