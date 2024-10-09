@@ -515,7 +515,9 @@ const config = {
   },
   // highlight-start
   devServer: {
-    contentBase: path.resolve(__dirname, 'build'),
+    static: {
+        directory: path.resolve(__dirname, 'build'),
+    },
     compress: true,
     port: 3000,
   },
