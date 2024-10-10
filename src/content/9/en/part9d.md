@@ -19,17 +19,42 @@ That's enough reasoning for now. Let's start getting our hands dirty!
 
 ### Vite with TypeScript
 
-We can use [Vite](https://vitejs.dev/) to create a TypeScript app specifying a template *react-ts* in the initialization script. So to create a TypeScript app, run the following command:
+We can use [Vite](https://vitejs.dev/) to create a TypeScript app by specifying the template *react-ts* in the initialization script. To create a TypeScript app, run the following command:
 
 ```shell
 npm create vite@latest my-app-name -- --template react-ts
 ```
 
-After running the command, you should have a complete basic React app that uses TypeScript. You can start the app by running *npm run dev* in the application's root.
+After running the command, you'll have a basic React app with TypeScript. You can start the app by running *npm run dev* in the app's root.
 
-If you take a look at the files and folders, you'll notice that the app is not that different from one using pure JavaScript. The only differences are that the *.jsx* files are now *.tsx* files, they contain some type annotations, and the root directory contains a *tsconfig.json* file.
+If you take a look at the files and folders, you'll notice that the app is not that different from one using pure JavaScript. The only differences are that the *.jsx* files are now *.tsx* files, they contain some type annotations, and the root directory contains 3 new TypeScript's configuration files: tsconfig.app.json, tsconfig.json and tsconfig.node.json.
 
-Now, let's take a look at the *tsconfig.json* file that has been created for us:
+#### *tsconfig.app.json*
+This file is all about setting up TypeScript for your app. It tells TypeScript what version of JavaScript to use (*ES2020*), how to handle JSX (*react-jsx*), and adds some strict checks to help catch bugs early. It also ensures your app runs smoothly in modern browsers.
+
+#### *tsconfig.json*
+This one doesn't do much on its own—it just links other configuration files. It's like a master file that references both *tsconfig.app.json* (for your app) and *tsconfig.node.json* (for server-side stuff).
+
+#### *tsconfig.node.json*
+This file is for Node.js-related TypeScript settings. It targets a newer JavaScript version (*ES2022*) and ensures things like your *vite.config.ts* work properly. It has similar strict rules to keep things tidy on the server-side.
+
+These files make sure your TypeScript setup works for both the frontend and backend with Vite!
+
+The *tsconfig.app.json* and *tsconfig.node.json* files are connected through the main *tsconfig.json* file. This main file acts like a bridge, linking the app-specific and Node-specific configurations together.
+
+Here's how the *tsconfig.json* looks:
+
+```json
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
+}
+```
+
+Now, let's take a look at the *tsconfig.app.json* file that has been created for us:
 
 ```js
 {
@@ -55,7 +80,6 @@ Now, let's take a look at the *tsconfig.json* file that has been created for us:
     "noFallthroughCasesInSwitch": true
   },
   "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
 }
 ```
 
