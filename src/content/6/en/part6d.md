@@ -239,7 +239,7 @@ const App = () => {
 Now that the mutation has been successfully executed, a function call is made to
 
 ```js
-queryClient.invalidateQueries('notes')
+queryClient.invalidateQueries({ queryKey: ['notes'] })
 ```
 
 This in turn causes React Query to automatically update a query with the key <i>notes</i>, i.e. fetch the notes from the server. As a result, the application renders the up-to-date state on the server, i.e. the added note is also rendered.
