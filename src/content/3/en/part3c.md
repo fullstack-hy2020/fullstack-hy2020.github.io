@@ -403,7 +403,8 @@ Once the .env file is ready, remember to add it to your .gitignore file to preve
 ```
 Then, in your index.js file, make the necessary changes with the following line so that your code can access the URL in your .env file:
 
-```
+```js
+require('dotenv').config();
 const url = process.env.MONGODB_URI;
 
 ```
@@ -462,6 +463,7 @@ Let's create a new directory for the module called <i>models</i>, and add a file
 
 ```js
 const mongoose = require('mongoose')
+require('dotenv').config();
 
 mongoose.set('strictQuery', false)
 
