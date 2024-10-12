@@ -54,6 +54,38 @@ The installation script will ask a few questions, answer them as follows:
 
 ![answer: javascript, tests, false, true](../../images/5/play0.png)
 
+Note that when installing Playwright your operating system may not support all of the browsers Playwright offers and you may see an error message like below:
+```
+Webkit 18.0 (playwright build v2070) downloaded to /home/user/.cache/ms-playwright/webkit-2070
+Playwright Host validation warning: 
+╔══════════════════════════════════════════════════════╗
+║ Host system is missing dependencies to run browsers. ║
+║ Missing libraries:                                   ║
+║     libicudata.so.66                                 ║
+║     libicui18n.so.66                                 ║
+║     libicuuc.so.66                                   ║
+║     libjpeg.so.8                                     ║
+║     libwebp.so.6                                     ║
+║     libpcre.so.3                                     ║
+║     libffi.so.7                                      ║
+╚══════════════════════════════════════════════════════╝
+```
+If this is the case you can either specify specific browsers to test with `--project=` in your _package.json_:
+
+```js
+    "test": "playwright test --project=chromium --project=firefox",
+```
+
+or remove the entry for any problematic browsers from your _playwright.config.js_ file:
+```js
+  projects: [
+    // ...
+    //{
+    //  name: 'webkit',
+    //  use: { ...devices['Desktop Safari'] },
+    //},
+```
+
 Let's define an npm script for running tests and test reports in _package.json_:
 
 ```js
