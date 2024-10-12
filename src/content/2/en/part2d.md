@@ -204,7 +204,7 @@ const toggleImportanceOf = id => {
   const changedNote = { ...note, important: !note.important }
 
   axios.put(url, changedNote).then(response => {
-    setNotes(notes.map(n => n.id !== id ? n : response.data))
+    setNotes(notes.map(n => n.id === id ? response.data : n))
   })
 }
 ```
@@ -243,17 +243,17 @@ The callback function sets the component's <em>notes</em> state to a new array t
 
 ```js
 axios.put(url, changedNote).then(response => {
-  setNotes(notes.map(note => note.id !== id ? note : response.data))
+  setNotes(notes.map(note => note.id === id ? response.data : note))
 })
 ```
 
 This is accomplished with the <em>map</em> method:
 
 ```js
-notes.map(note => note.id !== id ? note : response.data)
+notes.map(note => note.id === id ? response.data : note)
 ```
 
-The map method creates a new array by mapping every item from the old array into an item in the new array. In our example, the new array is created conditionally so that if <em>note.id !== id</em> is true; we simply copy the item from the old array into the new array. If the condition is false, then the note object returned by the server is added to the array instead.
+The map method creates a new array by mapping every item from the old array into an item in the new array. In our example, the new array is created conditionally so that if <em>note.id === id</em> is true; the note object returned by the server is added to the array. If the condition is false, then we simply copy the item from the old array into the new array instead.
 
 This <em>map</em> trick may seem a bit strange at first, but it's worth spending some time wrapping your head around it. We will be using this method many times throughout the course.
 
@@ -320,7 +320,7 @@ const App = () => {
     noteService
       .update(id, changedNote)
       .then(response => {
-        setNotes(notes.map(note => note.id !== id ? note : response.data))
+        setNotes(notes.map(note => note.id === id ? response.data : note))
       })
     // highlight-end
   }
@@ -448,7 +448,7 @@ const App = () => {
       .update(id, changedNote)
       // highlight-start      
       .then(returnedNote => {
-        setNotes(notes.map(note => note.id !== id ? note : returnedNote))
+        setNotes(notes.map(note => note.id === id ? returnedNote : note))
       // highlight-end
       })
   }
@@ -665,7 +665,7 @@ const toggleImportanceOf = id => {
 
   noteService
     .update(id, changedNote).then(returnedNote => {
-      setNotes(notes.map(note => note.id !== id ? note : returnedNote))
+      setNotes(notes.map(note => note.id === id ? returnedNote : note))
     })
     // highlight-start
     .catch(error => {
