@@ -79,7 +79,7 @@ Now most of the features in the frontend work! The functionality for changing th
 
 You can read more about CORS from [Mozilla's page](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
 
-The setup of our app looks now as follows:
+The setup of our app now looks as follows:
 
 ![diagram of react app and browser](../../images/3/100.png)
 
