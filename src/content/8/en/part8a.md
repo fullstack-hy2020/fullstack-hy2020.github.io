@@ -15,7 +15,7 @@ The GraphQL philosophy is very different from REST. REST is <i>resource-based</i
 
 The resource-basedness of REST works well in most situations. However, it can be a bit awkward sometimes.
 
-Let's consider the following example: our bloglist application contains some kind of social media functionality, and we would like to show a list of all the blogs that were added by users who have commented on any of the blogs we follow.
+Let's consider the following example: our bloglist application contains some kind of social media functionality, and we would like to show a list of all the blogs that were added by users who have commented on any of the blogs of the users we follow.
 
 If the server implemented a REST API, we would probably have to do multiple HTTP requests from the browser before we had all the data we wanted. The requests would also return a lot of unnecessary data, and the code on the browser would probably be quite complicated.
 
