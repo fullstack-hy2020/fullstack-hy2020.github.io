@@ -1010,6 +1010,15 @@ vastauksen tulisi näyttää seuraavalta
 }
 ```
 
+Tässä on hyvä muistaa wanha hyväksi todettu tapa debugata ohjelman suoritusta. Seuraavassa koodissa on esimerkki keinosta, joka voi olla hyvä ottaa tätä tehtävää tehdessä huomioon.
+```js
+    bookCount: (root, args) => {
+      console.log(root)
+      console.log(books)
+      return //todo
+    },
+```
+
 #### 8.4: kirjailijan kirjat
 
 Laajenna kyselyä _allBooks_ siten, että sille voi antaa optionaalisen parametrin <i>author</i>, joka rajoittaa kirjalistan niihin, joiden kirjoittaja on parametrina annettu kirjailija.
