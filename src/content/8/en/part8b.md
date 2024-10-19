@@ -322,7 +322,7 @@ When the button <i>show address</i> of a person is pressed, the name of the pers
 </button>
 ```
 
-This causes the component to re-render itself. On render the query <i>FIND_PERSON</i> that fetches the detailed information of a user is executed <i>if the variable nameToSearch</i> has a value:
+This causes the component to re-render itself. On render the query <i>FIND_PERSON</i> that fetches the detailed information of a user is executed if the variable <i>nameToSearch</i> has a value:
 
 ```js
 const result = useQuery(FIND_PERSON, {
@@ -587,7 +587,7 @@ Trying to create a person with invalid data causes an error:
 
 We should handle the exception. We can register an error handler function to the mutation using the *useMutation* hook's *onError* [option](https://www.apollographql.com/docs/react/api/react/hooks/#params-2).
 
-Let's register the mutation with an error handler that uses the _setError_*
+Let's register the mutation with an error handler that uses the _setError_
 function it receives as a parameter to set an error message:
 
 ```js
@@ -784,7 +784,7 @@ The current code of the application can be found on [GitHub](https://github.com/
 
 ### Apollo Client and the applications state
 
-In our example, management of the applications state has mostly become the responsibility of Apollo Client. This is a quite typical solution for GraphQL applications.
+In our example, management of the applications state has mostly become the responsibility of Apollo Client. This is quite a typical solution for GraphQL applications.
 Our example uses the state of the React components only to manage the state of a form and to show error notifications. As a result, it could be that there are no justifiable reasons to use Redux to manage application state when using GraphQL.
 
 When necessary, Apollo enables saving the application's local state to [Apollo cache](https://www.apollographql.com/docs/react/local-state/local-state-management/).
