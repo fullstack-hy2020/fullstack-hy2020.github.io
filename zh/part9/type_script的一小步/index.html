@@ -1,0 +1,831 @@
+<!DOCTYPE html><html lang="zh"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><style data-href="/styles.388bc8e994c951314a5c.css" id="gatsby-global-css">@import url(https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,500,600);@import url(https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,500,600);code[class*=language-],pre[class*=language-]{color:#fff;background:none;text-shadow:0 -.1em .2em #000;font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;font-size:1em;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;tab-size:4;-webkit-hyphens:none;hyphens:none}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}:not(pre)>code[class*=language-],pre[class*=language-]{background:#4d4033}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto;border:.3em solid #7a6652;border-radius:.5em;box-shadow:inset 1px 1px .5em #000}:not(pre)>code[class*=language-]{padding:.15em .2em .05em;border-radius:.3em;border:.13em solid #7a6652;box-shadow:inset 1px 1px .3em -.1em #000;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#998066}.token.namespace,.token.punctuation{opacity:.7}.token.boolean,.token.constant,.token.number,.token.property,.token.symbol,.token.tag{color:#d1949e}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#bde052}.language-css .token.string,.style .token.string,.token.entity,.token.operator,.token.url,.token.variable{color:#f5b83d}.token.atrule,.token.attr-value,.token.keyword{color:#d1949e}.token.important,.token.regex{color:#e90}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}.token.deleted{color:red}.course{position:relative;width:100%}@media (min-width:992px){.course{display:flex;flex-wrap:nowrap;flex-direction:row;align-items:flex-start}}.course p{font-family:IBM Plex Sans,monospace}@media (min-width:640px){.course p{margin-left:1rem}}.course p:not(:last-of-type){margin-bottom:1rem}@media (min-width:640px){.course h1{margin-left:3rem}}.course h2,.course h3,.course h4{padding-bottom:2rem}@media (min-width:640px){.course h2,.course h3,.course h4,.course table{margin-left:1rem}}.course ul{font-family:IBM Plex Sans,monospace}@media (min-width:640px){.course ul{margin-left:2.2rem}}.course h2:not(:first-of-type){margin-top:2rem}.course pre{margin:2rem 0;background-color:var(--color-pre-background);color:#fff}.course em{font-family:Courier;font-style:normal;background-color:rgba(var(--color-main),.6);padding:1px 5px 2px}.course img{border:11px solid transparent}.course .banner,.course .container{position:static}.course .letter{width:4rem;height:4rem;border-width:5px;border-style:solid;border-radius:2.5rem;text-align:center;margin:1rem;line-height:1.3em;transform:translate(-1rem)}@media (min-width:640px){.course .letter{transform:translate(-3rem,4.5rem)}}.course .letter,.course h1{font-size:2.3rem;font-weight:700}.course-content-container{width:100%}.course-content a,.tasks a{border:0;border-bottom-width:2px;border-style:solid;padding:2px}.course-content a:hover,.tasks a:hover{color:#33332d}.course-content{width:90%;margin:0 auto;max-width:1200px}@media (min-width:992px){.course-content-inner{padding-left:30%;padding-right:5%}}.course-content-inner blockquote{padding-left:.5rem;border-left:2px solid #888}html[data-theme=dark] .tasks{background-color:var(--color-background)!important;border-left:5px solid;border-top:1px dotted;border-bottom:1px dotted}@media (min-width:992px){html[data-theme=dark] .tasks{border-left:15px solid}}.tasks a{border-color:var(--color-text)!important}.tasks a:hover{background-color:#fff!important;color:#000!important}.gatsby-highlight-code-line{background-color:hsla(0,0%,88.2%,.3);display:block;margin-right:-1em;margin-left:-1em;padding-right:1em;padding-left:1em}code[class*=language-],pre[class*=language-]{text-shadow:none}.arrow-go-up{width:36px;height:36px;position:fixed;bottom:5%;right:5%;z-index:40;cursor:pointer}html[data-theme=dark] .arrow-go-up{filter:invert(1)}@media (max-width:639px){.arrow-go-up{right:10%}}.part-main__banner{background-position:50%;background-size:50%;padding-bottom:10%;background-repeat:no-repeat}@media (max-width:639px){.part-main__banner{background-position:top;background-size:70%;padding-bottom:30%!important}}.part-intro{font-family:IBM Plex Sans,monospace!important}.part-intro li,.part-intro p{color:#33332d}.part-intro p:not(:last-of-type){padding-bottom:2em}.part-intro__banner{background-size:50%;background-repeat:no-repeat;background-position:100%}@media (max-width:639px){.part-intro__banner{background-position:top;background-size:70%}.part-intro__banner>.container{margin-top:40%}}.part-intro a{color:#33332d;border-bottom:1px solid #33332d}.part-intro a:hover{background-color:#fff}.arrow__container{position:relative}.arrow__container:not():first-child{background:none;background-color:none}@media (min-width:640px){.arrow__container:not():first-child{border-left:none}.arrow__container:not():first-child:before{content:"";background:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/PjwhLS1HZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjEuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCktLT48c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkNhcGFfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA0NzcuMTc1IDQ3Ny4xNzUiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQ3Ny4xNzUgNDc3LjE3NSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PGc+PHBhdGggZD0iTTM2MC43MzEsMjI5LjA3NWwtMjI1LjEtMjI1LjFjLTUuMy01LjMtMTMuOC01LjMtMTkuMSwwcy01LjMsMTMuOCwwLDE5LjFsMjE1LjUsMjE1LjVsLTIxNS41LDIxNS41CgkJYy01LjMsNS4zLTUuMywxMy44LDAsMTkuMWMyLjYsMi42LDYuMSw0LDkuNSw0YzMuNCwwLDYuOS0xLjMsOS41LTRsMjI1LjEtMjI1LjFDMzY1LjkzMSwyNDIuODc1LDM2NS45MzEsMjM0LjI3NSwzNjAuNzMxLDIyOS4wNzV6CgkJIi8+PC9nPjxnLz48Zy8+PGcvPjxnLz48Zy8+PGcvPjxnLz48Zy8+PGcvPjxnLz48Zy8+PGcvPjxnLz48Zy8+PGcvPjwvc3ZnPg==) no-repeat;background-size:contain;position:absolute;top:0;left:0;height:100%;width:100%}}.arrows--horizontal{display:flex;position:relative;margin:0;align-items:flex-start}.arrow__wrapper{display:flex;justify-content:flex-start;align-items:center;margin:0}.arrow__wrapper:first-of-type{border-right:none;z-index:20}.arrow__wrapper:nth-of-type(n+2){margin-left:-4rem;z-index:10}.arrow__wrapper:nth-of-type(n+2) .arrow__rectangle{border-left:none;padding-left:4rem}.arrow__wrapper:nth-of-type(3){z-index:5}.arrow__wrapper:hover .arrow__point,.arrow__wrapper:hover .arrow__rectangle,.arrow__wrapper:hover .arrow__rectangle>a{background-color:#33332d!important;color:#fff!important}.arrow__rectangle{padding:1rem;justify-content:center;align-items:center;border:2px solid #33332d;border-right:none;z-index:2;overflow:hidden;font-family:IBM Plex Sans,monospace;position:relative}.arrow__rectangle a{color:#33332d}@media (max-width:991px){.arrow__rectangle{font-size:1rem}}.arrow__rectangle .bold{font-weight:600}.arrow__rectangle--thick-border{border:3px solid #33332d;border-right:none}.arrow__point{padding:1.25rem;border:2px solid #33332d;border-bottom:none;border-left:none;transform:translate(-1.3rem) rotate(45deg);z-index:1;overflow:hidden}.arrow__point--thick-border{border:3px solid #33332d;border-bottom:none;border-left:none}.arrow__wrapper--stacked{display:flex;justify-content:flex-start;align-items:center;margin:auto auto auto 0}@media (max-width:639px){.arrow__wrapper--stacked .arrow__rectangle{border:none;background-color:transparent!important;padding:0;font-size:1rem;justify-content:unset}.arrow__wrapper--stacked .arrow__rectangle>p>span{border-bottom:1px solid #33332d;margin:auto}.arrow__wrapper--stacked .arrow__rectangle>p>span:hover{background-color:#fff!important;color:#000}.arrow__wrapper--stacked .arrow__point{display:none}}.arrow__wrapper--stacked:nth-of-type(n+2){margin-top:1rem}@media (min-width:640px){.arrow__wrapper--stacked:nth-of-type(n+2){margin-top:-2px}}.arrow__wrapper--stacked .arrow__rectangle{position:relative}@media (min-width:640px){.arrow__wrapper--stacked .arrow__rectangle{padding:1.25rem}}@media (min-width:992px){.arrow__wrapper--stacked .arrow__rectangle{padding:1rem}}.arrow__wrapper--stacked .arrow__point{padding:1.08rem;margin-left:2px}@media (min-width:640px){.arrow__wrapper--stacked .arrow__point{margin-left:unset;padding:1.25rem}}@media (min-width:640px){.arrow__wrapper--stacked:hover .arrow__point,.arrow__wrapper--stacked:hover .arrow__rectangle{background-color:#33332d!important}}@media (min-width:640px){.arrow__wrapper--stacked:hover .arrow--stacked-letter,.arrow__wrapper--stacked:hover .arrow--stacked-title{color:#fff}}.arrow--stacked-title{font-family:IBM Plex Mono,monospace;color:#33332d}@media (min-width:640px){.arrow--stacked-title{white-space:nowrap}}.arrow__container--with-link{width:100%!important}@media (max-width:639px){.breadcrumb .arrow__wrapper{display:none}}.breadcrumb .arrow__wrapper:hover .arrow__point,.breadcrumb .arrow__wrapper:hover .arrow__rectangle{background-color:#33332d!important}.breadcrumb .arrow__wrapper:hover .arrow--stacked-letter,.breadcrumb .arrow__wrapper:hover .arrow--stacked-title{color:#fff}.breadcrumb .arrow__rectangle{position:relative}@media (max-width:639px){.breadcrumb .arrow__rectangle{border:none;padding:0;font-size:.7rem;white-space:nowrap;background-color:transparent!important;color:#33332d}}@media (max-width:639px){.breadcrumb .arrow__point{display:none}}.banner{display:flex;width:100%;align-items:center;position:relative;padding:2rem 0;background-color:var(--color-main)}@media (min-width:992px){.banner{padding:3.444rem 3.444rem 4.444rem}}html{font-family:IBM Plex Mono,monospace;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block}audio:not([controls]){display:none;height:0}progress{vertical-align:baseline}[hidden],template{display:none}a{background-color:transparent;-webkit-text-decoration-skip:objects}a:active,a:hover{outline-width:0}abbr[title]{border-bottom:none;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted}b,strong{font-weight:inherit;font-weight:bolder}dfn{font-style:italic}h1{font-size:2em;margin:.67em 0}mark{background-color:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}svg:not(:root){overflow:hidden}code,kbd,pre,samp{font-family:IBM Plex Mono,monospace;font-size:1em}figure{margin:1em 40px}hr{box-sizing:content-box;height:0;overflow:visible}button,input,optgroup,select,textarea{font:inherit;margin:0}optgroup{font-weight:700}button,input{overflow:visible}button,select{text-transform:none}[type=reset],[type=submit],button,html [type=button]{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-cancel-button,[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-input-placeholder{color:inherit;opacity:.54}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}html{font:112.5%/1.45em IBM Plex Mono,monospace;box-sizing:border-box;overflow-y:scroll}*,:after,:before{box-sizing:inherit}body{color:hsla(var(--color-text-hsl),.8);font-family:IBM Plex Mono,monospace;font-weight:400;word-wrap:break-word;font-kerning:normal;-ms-font-feature-settings:"kern","liga","clig","calt";font-feature-settings:"kern","liga","clig","calt"}img{max-width:100%;padding:0;margin:0 0 1.45rem}h1{font-size:2.25rem}h1,h2{padding:0;margin:0 0 1.45rem;color:inherit;font-family:IBM Plex Mono,monospace;font-weight:700;text-rendering:optimizeLegibility;line-height:1.1}h2{font-size:1.62671rem}h3{margin:2rem 0 -.5rem;font-size:1.38316rem}h3,h4{padding:0;color:inherit;font-family:IBM Plex Mono,monospace;font-weight:700;text-rendering:optimizeLegibility;line-height:1.1}h4{margin:2rem 0 -1rem;font-size:1rem}h5{font-size:.85028rem}h5,h6{padding:0;margin:0 0 1.45rem;color:inherit;font-family:IBM Plex Mono,monospace;font-weight:700;text-rendering:optimizeLegibility;line-height:1.1}h6{font-size:.78405rem}hgroup{padding:0;margin:0 0 1.45rem}ol,ul{padding:0;margin:0 0 1.45rem 1.45rem;list-style-position:outside;list-style-image:none}dd,dl,figure,p{padding:0;margin:0 0 1.45rem}pre{margin:0 0 1.45rem;font-size:.85rem;line-height:1.42;background:hsla(var(--color-text-hsl),.04);border-radius:3px;word-wrap:normal;padding:1.45rem}table{font-size:1rem;line-height:1.45rem;border-collapse:collapse;width:100%}fieldset,table{padding:0;margin:0 0 1.45rem}blockquote{padding:0;margin:0 1.45rem 1.45rem}form,iframe,noscript{padding:0;margin:0 0 1.45rem}hr{padding:0;margin:0 0 calc(1.45rem - 1px);background:hsla(var(--color-text-hsl),.2);border:none;height:1px}address{padding:0;margin:0 0 1.45rem}b,dt,strong,th{font-weight:700}li{margin-bottom:.725rem}ol li,ul li{padding-left:0}li>ol,li>ul{margin-left:1.45rem;margin-bottom:.725rem;margin-top:.725rem}blockquote :last-child,li :last-child,p :last-child{margin-bottom:0}li>p{margin-bottom:.725rem}code,kbd,samp{font-size:.85rem;line-height:1.45rem}abbr,abbr[title],acronym{border-bottom:1px dotted hsla(var(--color-text-hsl),.5);cursor:help}abbr[title]{text-decoration:none}td,th,thead{text-align:left}td,th{border-bottom:1px solid hsla(var(--color-text-hsl),.12);font-feature-settings:"tnum";-moz-font-feature-settings:"tnum";-ms-font-feature-settings:"tnum";-webkit-font-feature-settings:"tnum";padding:.725rem .96667rem calc(.725rem - 1px)}td:first-child,th:first-child{padding-left:0}td:last-child,th:last-child{padding-right:0}code,tt{background-color:hsla(var(--color-text-hsl),.04);border-radius:3px;font-family:SFMono-Regular,Consolas,Roboto Mono,Droid Sans Mono,Liberation Mono,Menlo,Courier,monospace;padding:.2em 0}pre code{background:none;line-height:1.42}code:after,code:before,tt:after,tt:before{letter-spacing:-.2em;content:" "}pre code:after,pre code:before,pre tt:after,pre tt:before{content:""}@media only screen and (max-width:480px){html{font-size:100%}}:root,html[data-theme=light]{--color-background:#fff;--color-text:#33332d;--color-text-hsl:0,0%,0%;--color-link-decoration:#e1e1e1;--color-main:#e1e1e1;--color-pre-background:#33332d}html[data-theme=dark]{--color-background:#33332d;--color-text:#fff;--color-text-hsl:0,100%,100%;--color-link-decoration:#a0a0a0;--color-main:#212121;--color-pre-background:#212121}body,html{margin:0;padding:0;font-family:IBM Plex Mono,monospace;font-weight:400;background-color:var(--color-background);color:var(--color-text);font-size:14px;line-height:1.555rem}@media (min-width:992px){body,html{font-size:18px}}.main-wrapper{min-height:100vh;display:flex;flex-direction:column}p{margin:0;text-align:left;line-height:1.5em}a,p{color:var(--color-text)}a{text-decoration:none}.link a{border-bottom:2px solid var(--color-link-decoration)}.link a:hover{background-color:var(--color-main)}.container{position:relative;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;width:90%;max-width:1300px}@media (max-width:639px){.container{padding:0 20px}}@media (min-width:992px){.container--right{margin-right:5%;width:54%;max-width:779.9844px}}@media (min-width:992px) and (min-width:1300px){.container--right{margin-right:calc(50% - 650px)}}.hidden{display:none!important}.centered{text-align:center}@media (max-width:639px){.centered--mobile{justify-content:center;align-content:center;align-items:center}}.spacing{margin-top:2rem}@media (max-width:992px) and (min-width:640px){.spacing--tablet{margin-top:5rem!important}}@media (min-width:992px){.spacing{margin-top:5rem}}.spacing--small{margin-top:1rem}@media (min-width:992px){.spacing--small{margin-top:3.444rem}}.spacing--large{margin-top:4rem}@media (min-width:992px){.spacing--large{margin-top:10rem}}.spacing--extra-large{margin-top:4rem}@media (min-width:992px){.spacing--extra-large{margin-top:20rem}}.spacing--after{margin-bottom:2rem}@media (min-width:992px){.spacing--after{margin-bottom:5rem}}@media (max-width:639px){.spacing--after--mobile{margin-bottom:5rem}}@media (min-width:992px){.spacing--after-small{margin-bottom:2.5rem}}.spacing--after-large{margin-bottom:4rem}@media (min-width:992px){.spacing--after-large{margin-bottom:10rem}}@media (max-width:991px){.spacing--mobile{margin-top:2rem}}@media (max-width:1299px){.spacing--mobile--small{margin-top:1.5rem}}@media (max-width:1299px){.spacing--mobile--large{margin-top:3rem}}.col-1{width:100%}@media (min-width:992px){.col-1{width:10%}}.col-2{width:100%}@media (min-width:992px){.col-2{width:20%}}.col-3{width:100%}@media (min-width:992px){.col-3{width:30%}}.col-4{width:100%}@media (min-width:992px){.col-4{width:40%}}.col-5{width:100%}@media (min-width:992px){.col-5{width:50%}}.col-6{width:100%}@media (min-width:992px){.col-6{width:60%}}.col-7{width:100%}@media (min-width:992px){.col-7{width:70%}}.col-8{width:100%}@media (min-width:992px){.col-8{width:80%}}.col-9{width:100%}@media (min-width:992px){.col-9{width:90%}}.col-10{width:100%}@media (min-width:992px){.col-10{width:100%}}@media (min-width:992px){.push-right-1{margin-left:10%}.push-right-2{margin-left:20%}.push-right-3{margin-left:30%}.push-right-4{margin-left:40%}.push-right-5{margin-left:50%}.push-left-1{margin-right:10%}.push-left-2{margin-right:20%}.push-left-3{margin-right:30%}.push-left-4{margin-right:40%}.push-left-5{margin-right:50%}.push-left{margin-right:auto}.push-right{margin-left:auto}}@media (max-width:639px){.col-1--mobile{width:10%!important}.col-2--mobile{width:20%!important}.col-3--mobile{width:30%!important}.col-4--mobile{width:40%!important}.col-5--mobile{width:50%!important}.col-6--mobile{width:60%!important}.col-7--mobile{width:70%!important}.col-8--mobile{width:80%!important}.col-9--mobile{width:90%!important}.col-10--mobile{width:100%!important}.push-right-1--mobile{margin-left:10%!important}.push-right-2--mobile{margin-left:20%!important}.push-right-3--mobile{margin-left:30%!important}.push-right-4--mobile{margin-left:40%!important}.push-right-5--mobile{margin-left:50%!important}.push-left-1--mobile{margin-right:10%!important}.push-left-2--mobile{margin-right:20%!important}.push-left-3--mobile{margin-right:30%!important}.push-left-4--mobile{margin-right:40%!important}.push-left-5--mobile{margin-right:50%!important}.order-0--mobile{order:0}.order-1--mobile{order:1}.order-2--mobile{order:2}.order-3--mobile{order:3}.order-4--mobile{order:4}.order-5--mobile{order:5}.hidden--mobile{display:none}}@media (max-width:1299px){.col-1--tablet{width:10%}.col-2--tablet{width:20%}.col-3--tablet{width:30%}.col-4--tablet{width:40%}.col-5--tablet{width:50%}.col-6--tablet{width:60%}.col-7--tablet{width:70%}.col-8--tablet{width:80%}.col-9--tablet{width:90%}.col-10--tablet{width:100%}.order-0--tablet{order:0}.order-1--tablet{order:1}.order-2--tablet{order:2}.order-3--tablet{order:3}.order-4--tablet{order:4}.order-5--tablet{order:5}.order-0--mobile{order:0}.order-1--mobile{order:1}.order-2--mobile{order:2}.order-3--mobile{order:3}.order-4--mobile{order:4}.order-5--mobile{order:5}.hidden--mobile{display:none}}.centered-vertically{display:flex;flex-direction:column;justify-content:center}.nav-item-hover{text-decoration:none;color:var(--color-text);font-weight:500;padding:.2em}@media (min-width:640px){.nav-item-hover{font-weight:600}}.nav-item-hover:active,.nav-item-hover:focus,.nav-item-hover:hover{color:var(--color-background);background-color:var(--color-text)!important}.nav-item-hover:active,.nav-item-hover:focus{outline:2px solid #706be4}.nav-item-active{border-bottom:2px solid var(--color-text)}.flex-fix-aligning:after,.flex-fix-aligning:before{content:"";width:30%;order:2}.auto-bottom-margin{margin-bottom:auto}.frontpage-hero{flex-direction:column;flex-wrap:nowrap}@media (max-width:991px){.frontpage-hero__content{z-index:1;margin-bottom:3rem}}.frontpage-hero__heading{-webkit-hyphens:auto;hyphens:auto;font-size:2rem}@media (min-width:640px){.frontpage-hero__heading{font-size:2.5rem}}@media (min-width:1300px){.frontpage-hero__heading{font-size:3rem}}.frontpage-hero__cta{display:inline-block;margin-bottom:4rem}.frontpage-hero__description{max-width:626px}@media (max-width:991px){.frontpage-hero__image{position:absolute!important;right:-5%;top:-40px;opacity:.1}.frontpage-hero__image img{transform:translateX(33%)}}@media (max-width:639px){.frontpage-hero__image{right:-40px}}.heading-font{font-family:IBM Plex Sans,monospace}.about__challenge-button{box-shadow:-3px 5px var(--color-text);padding:.6rem 1rem;border:3px solid var(--color-text);font-weight:600}.about__challenge-button:hover{background-color:var(--color-text);color:var(--color-background);cursor:pointer}.about__challenge-button--turquoise{background-color:#82f7eb}html[data-theme=dark] .about__challenge-button{color:var(--color-text);box-shadow:-3px 5px var(--color-text);border:3px solid var(--color-text)}html[data-theme=dark] .about__challenge-button:hover{background-color:var(--color-text);color:var(--color-background)}html[data-theme=dark] .about__challenge-button--turquoise{color:var(--color-main);box-shadow:-3px 5px var(--color-main);border:3px solid var(--color-main)}html[data-theme=dark] .about__challenge-button--turquoise:hover{background-color:var(--color-main);color:var(--color-text)}@media (max-width:1299px){.space-between--mobile{justify-content:space-between}}.challenge__banner{display:flex;justify-content:center;margin-bottom:-70px}@media (min-width:640px){.challenge__banner{transform:translateY(-10px)}}@media (min-width:1300px){.challenge__banner{margin-bottom:-370px}}.challenge__banner .image{margin:0;width:70%;transform:translateY(-25%)}@media (min-width:640px){.challenge__banner .image{transform:translateY(-10%)}}@media (min-width:1300px){.challenge__banner .image{transform:translateY(-30%)}}.header{position:sticky;z-index:50;top:0;box-sizing:border-box;width:100%;padding-top:1.444rem;padding-bottom:1rem;transition:all .2s ease-in-out}.header--small{pointer-events:none}.header__logo{margin:0 10px;pointer-events:auto}.navigation{z-index:2;list-style:none;opacity:0;display:none;margin:0;padding:5%;flex-direction:column;justify-content:center;align-items:center;background:var(--color-main);position:fixed;top:8%;right:5%;transition:opacity .3s ease-in-out;font-weight:200}@media (min-width:1300px){.navigation{display:flex;opacity:1;padding:0;font-weight:400;position:static;background:none;overflow:hidden;flex-direction:row}}@media (max-width:1299px){.navigation__wrapper .language-switcher{margin:20px 0 0}}@media (min-width:1300px){.navigation__wrapper{flex-grow:100}}@media (max-width:1299px){.navigation__language-picker{margin-top:10px}}.navigation__icon-buttons{margin:30px 0 0}@media (min-width:1300px){.navigation__icon-buttons{width:100%;display:flex;justify-content:flex-end;margin:0 20px 0 0}}.navigation__toggle{z-index:3;position:absolute;top:0;right:0;width:50px;height:40px;cursor:pointer;border:none;background:none;outline:none;border-radius:4px}@media (min-width:1300px){.navigation__toggle{display:none}}.navigation__mobile-logo{display:none}.navigation__toggle-icon{top:8px;left:10px}.navigation__toggle-icon,.navigation__toggle-icon:after,.navigation__toggle-icon:before{position:absolute;width:30px;height:3px;transition:all .3s ease;border-radius:4px;background-color:var(--color-text)}.navigation__toggle-icon:after,.navigation__toggle-icon:before{content:"";display:block}.navigation__toggle-icon:before{top:10px}.navigation__toggle-icon:after{top:20px}@media (max-width:1299px){.is-open--navigation{overflow:hidden;height:100vh}.is-open--navigation .navigation{opacity:1;display:flex;align-items:flex-start}.is-open--navigation .navigation:before{content:"";background-color:var(--color-main);position:absolute;width:25px;height:25px;top:-3px;right:13px;transform:rotate(45deg)}.is-open--navigation .navigation__mobile-logo{display:block;width:30px;height:30px;position:absolute;top:47px;left:5%}}@media (max-width:1299px) and (min-width:1300px){.is-open--navigation .navigation__mobile-logo{display:none}}@media (max-width:1299px){.is-open--navigation .navigation__toggle-icon{transform:translate3d(0,10px,0) rotate(45deg)}.is-open--navigation .navigation__toggle-icon,.is-open--navigation .navigation__toggle-icon:after,.is-open--navigation .navigation__toggle-icon:before{background:var(--color-text)}.is-open--navigation .navigation__toggle-icon:before{transform:rotate(-45deg) translate3d(-5.71429px,-6px,0);opacity:0}.is-open--navigation .navigation__toggle-icon:after{transform:translate3d(0,-19px,0) rotate(-90deg)}}.navigation__item{margin:10px 0;white-space:nowrap}.navigation__item:first-of-type{margin:0 0 10px}.navigation__item:last-of-type{margin:10px 0 0}@media (min-width:1300px){.navigation__item{margin:0 15px;padding:0!important}.navigation__item:first-of-type{margin:0 15px 0 2rem}.navigation__item:last-of-type{margin:0 0 0 15px}}.SrOnly-module--srOnly--2Hn2L{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}.LanguagePicker-module--select--364N3{padding:3px 6px;-webkit-appearance:none;appearance:none;border:1px solid var(--color-text);border-radius:5px;color:#33332d;background-color:#fff;background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23333333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 6px center;background-size:16px 12px;width:7rem;min-width:7rem}.SvgIcon-module--svgIcon--1nGJ6{-webkit-user-select:none;user-select:none;width:1em;height:1em;display:inline-block;fill:currentColor;flex-shrink:0;font-size:1.5rem}.element--flex{display:flex;flex-wrap:wrap}.element--space-around{justify-content:space-around}.element--space-between{justify-content:space-between}.element--column{flex-direction:column}.element--centered{align-items:center;justify-content:center!important}@media (min-width:992px){.element--centered-in-desktop{align-items:center;justify-content:center!important}}@media (min-width:992px){.element--horizontal-half{width:45%}}.element--auto-margin{margin:auto}.element--auto-bottom-margin{margin-bottom:auto}.element--flex-start{align-content:flex-start}.element--no-wrap{flex-wrap:nowrap}.element--relative{position:relative!important}.edit-link>span{border-bottom-width:3px;border-bottom-style:solid;border-bottom-color:inherit}.edit-link:hover{color:#33332d}.SearchLink-module--searchLink--2IShR{margin-right:20px;border-radius:4px;padding:4px;display:inline-flex}.SearchLink-module--searchLink--2IShR:focus,.SearchLink-module--searchLink--2IShR:hover{background-color:var(--color-text);color:var(--color-background)}.ThemeSwitcher-module--themeSwitcher--1gbnJ{border-radius:4px;padding:4px;display:inline-flex;background:none;border:none;color:var(--color-text)}.ThemeSwitcher-module--themeSwitcher--1gbnJ:hover{background-color:var(--color-text)!important;color:var(--color-background)!important;cursor:pointer}.ThemeSwitcher-module--themeSwitcher--1gbnJ:focus{background-color:var(--color-text);color:var(--color-background)}.ThemeSwitcher-module--themeSwitcher--1gbnJ:focus:not(:focus-visible){color:var(--color-text);background:none}.triple-border{position:relative;padding:2px;border-radius:5px 0;transition:color .1s ease-in-out,background-color .1s ease-in-out}.triple-border:after,.triple-border:before{z-index:2;content:"";border:2px solid var(--color-text);border-radius:5px;position:absolute;width:calc(100% + 5px);height:calc(100% + 5px)}.triple-border:before{left:0;top:0}.triple-border:after{bottom:0;right:0}.triple-border__container{position:relative;overflow:hidden;border-radius:3px 0}.triple-border--large-margin{margin:13px;padding:3px}.triple-border--large-margin:after,.triple-border--large-margin:before{content:"";border-width:3px;border-radius:13px;width:calc(100% + 13px);height:calc(100% + 13px)}.triple-border--large-margin .triple-border__container{border-radius:10px 0}.triple-border__logo{padding:.2rem;font-size:1.111rem;font-weight:600}html[data-theme=dark] .triple-border:hover .triple-border__logo--small{color:#33332d!important}.triple-border__return-tasks{font-size:.9rem;padding:1rem .2rem}.accordion__container{margin-bottom:1rem}.accordion__title{padding-left:2.149rem!important;padding-right:2.149rem!important;font-size:1.111rem!important;font-weight:600}.accordion{background-color:var(--color-background);border:3px solid var(--color-text);border-radius:5px;color:var(--color-text);cursor:pointer;padding:1rem;width:100%;text-align:left;outline:none;font-size:15px;transition:max-width .4s}.accordion:focus,.accordion:hover,.active{background-color:var(--color-main)}.active:focus{border:3px solid var(--color-text)}.accordion:after{content:"+";font-size:1.5rem;float:right;margin-left:5px}.active,.active:not(:focus-visible){border-color:var(--color-background)}.active:after{content:"-";font-size:1.5rem}.panel{background-color:var(--color-background);padding:2rem 18px}.accordion--side-navigation{width:100%;margin-left:unset}.accordion--side-navigation .accordion{border:none;padding:0!important;background-color:transparent!important;color:var(--color-text)!important;border-radius:0}.accordion--side-navigation .accordion__title{font-size:16px!important;font-weight:unset;background-color:transparent}.accordion--side-navigation .accordion__title:hover{background-color:var(--color-text)!important;color:var(--color-background)!important}.accordion--side-navigation .panel{padding:1rem 0 0!important;background-color:transparent}.accordion--side-navigation .panel ul{margin-left:1rem}.accordion--side-navigation .accordion:hover,.accordion--side-navigation .active{background-color:var(--color-text);color:var(--color-background)}.accordion--side-navigation .accordion:after,.accordion--side-navigation .active:after{content:""}#footer{margin-top:auto}@media (min-width:992px){#footer{align-items:center}}#footer a:hover{background-color:transparent!important}#footer .footer__navigation{display:none}@media (max-width:1299px){#footer .footer__navigation{width:100%;display:block}#footer .footer__navigation-link-container{display:flex;flex-direction:column}}#footer .footer__navigation-link{font-size:1rem;line-height:18px;white-space:nowrap;font-family:IBM Plex Sans,monospace;margin-left:0!important;margin-right:auto}@media (max-width:639px){#footer .footer__navigation-link{line-height:8px}}#footer .footer__navigation-link:hover{color:var(--color-background)!important;background-color:var(--color-text)!important}#footer .footer__navigation-link:nth-of-type(n+2){margin-top:2.142rem}@media (min-width:1300px){#footer .footer__navigation{flex-direction:row;flex-wrap:nowrap;justify-content:flex-end}#footer .footer__navigation-link{margin-top:0!important;margin-bottom:auto}#footer .footer__navigation-link:nth-of-type(n+1){margin-right:2.877rem}#footer .footer__navigation-link:last-of-type{margin-right:0!important}}.image__content{position:absolute;top:0;left:0;height:100%;width:100%;object-fit:cover}.image--contain .image__content{object-fit:contain}.image{overflow:hidden;width:100%;position:relative}@media (min-width:992px){.image{width:40%}}.image .image__container{height:0;position:relative;width:100%;padding-bottom:89.0625%}.image--circle{border-radius:50%}.image--circle .image__content{background-color:var(--color-main)}.image--square-big{width:100%}.image--square-big .image__container{width:100%;padding-bottom:100%}.image--extra-small{width:8%}.image--extra-small .image__container{width:100%;padding-bottom:100%}@media (max-width:639px){.image--extra-small{width:calc(33.33333% - 1rem)}}.image--small{width:15%}.image--small .image__container{width:100%;padding-bottom:100%}@media (max-width:639px){.image--small{width:calc(33.33333% - 1rem)}}.image--medium{width:50%}.image--medium .image__container{width:100%;padding-bottom:71.25%}.image--large{width:100%}@media (min-width:992px){.image--large{width:60%}}.image--large .image__container{padding-bottom:59.37%;width:100%}.image--full-width{width:100%}.image--full-width .image__container{padding-bottom:59.37%;width:100%}.image--actual-size{width:100%}.image--actual-size .image__container{height:0;position:relative;width:100%;padding-bottom:60%}html[data-theme=dark] .image--backdrop .image__container{background:#fff;border-radius:10px}html[data-theme=dark] .image--invert img{filter:invert(1)}.body-text:not(:last-of-type){margin-bottom:2.5rem}.body-text__title{color:var(--color-text);font-size:1.44rem;line-height:1.25em;font-weight:700;margin:0;position:relative;top:50%;transform:translateY(-50%)}.body-text__content:not(:last-of-type){padding-bottom:2em}.bold{font-weight:700}.body-text--no-padding{padding:0!important}@media (min-width:640px){.companies__main-title .body-text__title{font-size:3rem}}.challenge-title{font-size:1.44rem}.company__logo{padding:10px}@media (min-width:992px){.company__logo{width:15%!important}}.content-liftup{position:relative;text-decoration:none}.content-liftup--small{box-sizing:border-box}.content-liftup--small>:last-child{margin-bottom:0}.content-liftup--padding{padding:10px}.content-liftup__name{margin-top:1.5rem;color:var(--color-text);font-weight:700}@media (min-width:992px){.content-liftup__name{margin-top:2rem}}.content-liftup__summary{margin-top:1rem;margin-bottom:3rem;color:var(--color-text);line-height:28px}.content-liftup__link:focus .image{opacity:.6}.content-liftup__link:focus:not(:focus-visible) .image{opacity:1}.content-liftup .content-liftup__image:after{content:"";position:absolute;top:0;left:0;height:100%;width:100%;opacity:.5;z-index:2}.form p{font-family:IBM Plex Sans,monospace;font-size:.9rem;margin-bottom:10px}.form input{padding:1rem;border:1px solid var(--color-main);outline:0}.form input:focus{border:1px solid var(--color-text)}.form .submit{border:3px solid var(--color-text);color:var(--color-text);background-color:var(--color-background);padding:.7rem 2rem}.form .submit:hover{cursor:pointer}.form .submit:hover,.skip-to-content{background-color:var(--color-text);color:var(--color-background)}.skip-to-content{position:absolute;top:-50px;left:50%;height:50px;padding:0 30px;transform:translateX(-50%);border-radius:0 0 3px 3px;transition:top .3s;display:inline-flex;justify-content:center;align-items:center;z-index:100}.skip-to-content:focus{top:0;transition:top .25s}.prev-next__container a:hover{color:#33332d;background-color:#fff}.prev-next__container a:hover b,.prev-next__container a:hover p{color:#33332d}.prev-next__container .separator{display:none}@media (max-width:639px){.prev-next__container .separator{display:block;background-color:var(--color-text);width:2px!important}}.prev-next__container .prev b,.prev-next__container .prev p{text-align:right}@media (max-width:639px){.prev-next__container .prev p:before{content:"<";margin-right:1rem}}@media (max-width:639px){.prev-next__container .next p:after{content:">";margin-left:1rem}}.scroll-navigation-container{display:none}@media (min-width:992px){.scroll-navigation-container{pointer-events:none;display:block;font-size:16px;position:sticky;width:100%;margin-right:-100%;left:0;top:-100px;padding-top:200px}}.scroll-navigation-container-inner{width:90%;margin:0 auto;max-width:1200px}.scroll-navigation{pointer-events:auto;display:flex;width:30%;max-width:30%/.9;height:100%;overflow-y:auto;max-height:calc(100vh - 100px);padding-right:1rem;z-index:30}.scroll-navigation li{list-style-type:none}.scroll-navigation li.selected a,.scroll-navigation li:hover a{background-color:var(--color-text);color:var(--color-background)!important}.scroll-navigation li:before{content:"-"}.left-navigation-link{padding-left:1.2rem;text-indent:-1.2rem;display:block}.left-navigation-link:hover{background-color:var(--color-text)!important;color:var(--color-background)!important}.level-h1{font-weight:700;padding-left:2.8rem;text-indent:-2.8rem}.level-h2{padding-left:1.6rem;text-indent:-1.6rem}.developer-story__image{margin-bottom:auto}html[data-theme=dark] .developer-story__company-logo-wrapper{margin-bottom:20px;display:inline-flex;justify-content:center;align-items:center;background:#fff;border-radius:10px;padding:15px}html[data-theme=dark] .developer-story__company-logo-wrapper img{margin:0 auto}.developer-story__name{margin-top:4rem;font-size:1.2rem}.developer-story__title{font-size:.9rem}.developer-story__read-more{margin-top:2rem;line-height:1.1rem;width:auto;background:none;color:inherit;border:none;padding:0!important;border-bottom:2px solid var(--color-link-decoration);cursor:pointer}.developer-story__read-more:hover{background-color:var(--color-main)}.some-logo__link{margin:1rem 1rem 0 0;display:inline-block}.some-logo__image{width:1.5rem;height:1.5rem;margin:0}html[data-theme=dark] .some-logo__image{filter:invert(1)}.sub-header{color:var(--color-text);font-family:IBM Plex Mono,monospace;padding-bottom:1.357rem}@media (min-width:992px){.sub-header{padding-bottom:2.333rem}}.copy-code-button,.copy-code-button:host{display:inline-flex}.copy-code-button{align-items:center;justify-content:center;width:-moz-fit-content;width:fit-content;margin:0;padding:.5rem;background:var(--color-pre-background);border:none;border-radius:.25rem;box-shadow:0 .25rem .5rem rgba(0,0,0,.25);color:#fff;cursor:pointer;font-weight:600;opacity:.2;transition:.2s ease-in-out}.copy-code-button:hover{opacity:1}.copy-code-button:active{opacity:0;color:red}pre{overflow:auto;padding:1rem;border-radius:.5rem;position:relative}pre .copy-code-button{position:absolute;top:.5rem;right:.5rem}code{white-space:pre-wrap!important}.InputField-module--inputField--3oXh5{-webkit-appearance:none;appearance:none;width:100%;border:0;font-family:inherit;padding:16px 12px;box-shadow:inset 0 -1px 0 var(--color-text);color:var(--color-text);background-color:var(--color-background);transition:all .15s ease}.InputField-module--inputField--3oXh5:hover{box-shadow:inset 0 -2px 0 var(--color-text)}.InputField-module--inputField--3oXh5:focus{outline:none;box-shadow:inset 0 -2px 0 var(--color-text)}</style><meta name="generator" content="Gatsby 2.32.13"/><link rel="sitemap" type="application/xml" href="/sitemap.xml"/><title data-react-helmet="true">Fullstack part9 | </title><meta data-react-helmet="true" name="description" content=""/><meta data-react-helmet="true" property="og:title" content="Fullstack part9 | "/><meta data-react-helmet="true" property="og:description" content=""/><meta data-react-helmet="true" name="og:image" content="/static/EYE_green_wide-0a72f74a959f54d0f3e4bb8c67f6f158.jpg"/><meta data-react-helmet="true" property="og:type" content="website"/><meta data-react-helmet="true" name="twitter:card" content="summary"/><meta data-react-helmet="true" name="twitter:creator" content="Houston Inc. Consulting oy"/><meta data-react-helmet="true" name="twitter:title" content="Fullstack part9 | "/><meta data-react-helmet="true" name="twitter:description" content=""/><meta data-react-helmet="true" name="twitter:image" content="/static/EYE_green_wide-0a72f74a959f54d0f3e4bb8c67f6f158.jpg"/><meta data-react-helmet="true" name="google-site-verification" content="ds9pQKiK3kjhRSHHbf5ccoG-oJggn7Lq4A8uHxM3Mkw"/><meta data-react-helmet="true" name="keywords" content="fullstack, Full stack -websovelluskehitys, course, helsingin yliopisto, tietojenkäsittelytieteen osasto, mooc, mooc.fi, full stack, full stack open, web-sovelluskehitys, web, houston, houston inc, websovelluskehitys, web-sovellus, React, Redux, Node.js, Node, MongoDB, GraphQL, REST, REST api, single page -sovellus, ohjelmointi, university of helsinki, department of computer science, web development, software development, web, web application, single page app, programming, "/><link rel="icon" href="/favicon-32x32.png?v=6460c405ec32c913ef778f48c5ab192e" type="image/png"/><link rel="manifest" href="/manifest.webmanifest" crossorigin="anonymous"/><meta name="theme-color" content="#e1e1e1"/><link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-48x48.png?v=6460c405ec32c913ef778f48c5ab192e"/><link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png?v=6460c405ec32c913ef778f48c5ab192e"/><link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png?v=6460c405ec32c913ef778f48c5ab192e"/><link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png?v=6460c405ec32c913ef778f48c5ab192e"/><link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png?v=6460c405ec32c913ef778f48c5ab192e"/><link rel="apple-touch-icon" sizes="256x256" href="/icons/icon-256x256.png?v=6460c405ec32c913ef778f48c5ab192e"/><link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png?v=6460c405ec32c913ef778f48c5ab192e"/><link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png?v=6460c405ec32c913ef778f48c5ab192e"/><link rel="preconnect" href="https://www.google-analytics.com"/><link rel="dns-prefetch" href="https://www.google-analytics.com"/><link rel="canonical" href="https://fullstackopen.com/zh/part9/type_script的一小步" data-baseprotocol="https:" data-basehost="fullstackopen.com"/><script>
+  (function() {
+    try {
+      const savedTheme = localStorage.getItem('selected_theme');
+
+      if (savedTheme) {
+        document.documentElement.dataset.theme = savedTheme;
+      } else if (
+        window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches
+      ) {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    } catch (e) {}
+  })();
+  </script><link as="script" rel="preload" href="/component---src-templates-content-template-js-3ca891c40689f33ff860.js"/><link as="script" rel="preload" href="/8bb9eac36a062a5713b6d250f5709a608793ccd4-c6521a3391552441c602.js"/><link as="script" rel="preload" href="/d2b1ca4b1069f7cfc0ac3ccd2306fbb8e76bcf35-b1e80b991af31a506d6d.js"/><link as="script" rel="preload" href="/2d359d657f593a857b7e0d916f29b2126c86bebb-dcc47509ede0fcbd2a57.js"/><link as="script" rel="preload" href="/881c8b7a675fce2ced9b02a4a469c0443336d5f7-8e4483d8931a6891bd9a.js"/><link as="script" rel="preload" href="/0f38e1748197b5a213e89e1df6d5db13e5e7856d-c525d6df853b8eccb391.js"/><link as="script" rel="preload" href="/commons-15e69e84caf1d6379b61.js"/><link as="script" rel="preload" href="/app-5c85c0dd7d8928d8110e.js"/><link as="script" rel="preload" href="/framework-4417e1b5ff8c945c03a5.js"/><link as="script" rel="preload" href="/styles-0ec71dd62c66cb95665c.js"/><link as="script" rel="preload" href="/webpack-runtime-34e1662e50c380423dfa.js"/><link as="fetch" rel="preload" href="/page-data/zh/part9/type_script的一小步/page-data.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/sq/d/3128451518.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/app-data.json" crossorigin="anonymous"/></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div class="main-wrapper"><a href="#course-main-content" class="skip-to-content">跳到内容</a><header class="header " style="background-color:var(--color-background)"><div class="container" style="align-items:center;justify-content:flex-start"><a class="header__logo" href="/zh/"><div class="triple-border nav-item-hover " style="padding:0.2em"><div class="triple-border__container triple-border__logo" style="background-color:transparent;z-index:10">{() =&gt; fs}</div></div></a><div class="navigation__wrapper "><button aria-label="Navigation menu" aria-expanded="false" class="navigation__toggle"><div class="navigation__toggle-icon"></div></button><nav><ul class="navigation"><li class="navigation__item "><a class="nav-item-hover" href="/zh/about">关于课程</a></li><li class="navigation__item "><a class="nav-item-hover" href="/zh/#course-contents">课程内容</a></li><li class="navigation__item "><a class="nav-item-hover" href="/zh/faq">常见问题</a></li><li class="navigation__item "><a class="nav-item-hover" href="/zh/companies">合作伙伴</a></li><li class="navigation__item "><a class="nav-item-hover" href="/zh/challenge">挑战</a></li><div class="navigation__icon-buttons"><a class="SearchLink-module--searchLink--2IShR" href="/zh/search"><span class="SrOnly-module--srOnly--2Hn2L">从教程中搜索</span><svg role="img" viewBox="0 0 24 24" class="SvgIcon-module--svgIcon--1nGJ6"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg></a><button class="ThemeSwitcher-module--themeSwitcher--1gbnJ" aria-pressed="false"><span class="SrOnly-module--srOnly--2Hn2L">切换黑暗主题</span><svg role="img" viewBox="0 0 384 512" class="SvgIcon-module--svgIcon--1nGJ6"><path d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path></svg></button></div><span class="SrOnly-module--srOnly--2Hn2L"><label for="language-select">选择语言</label></span><select id="language-select" class="navigation__language-picker LanguagePicker-module--select--364N3" style="font-size:1em"><option value="fi">Suomi</option><option value="en">English</option><option selected="" value="zh">中文</option><option value="es">Español</option><option value="fr">Français</option><option value="ptbr">Português(BR)</option></select></ul></nav></div></div></header><main id="main-content"><div class="course-container spacing--after"><div class="banner part-main__banner spacing--mobile--small" style="background-image:url(/static/ed8ae98c5d885b4d1928a681eefbe7c4/part-9.svg);background-color:#D4FCB5"><div class="container spacing--after"><div class="col-10 spacing--after"><div class="arrow__container arrows--horizontal breadcrumb"><div class="arrow__wrapper"><div class="arrow__rectangle  " style="background-color:#D4FCB5;color:#33332d"><a href="/zh/#course-contents">Fullstack</a></div><div class="arrow__point " style="background-color:#D4FCB5;color:#33332d"></div></div><div class="arrow__wrapper"><div class="arrow__rectangle  " style="background-color:#D4FCB5;color:#33332d"><a href="/zh/part9">Part 9</a></div><div class="arrow__point " style="background-color:#D4FCB5;color:#33332d"></div></div><div class="arrow__wrapper"><div class="arrow__rectangle  " style="background-color:#33332d;color:white">TypeScript的一小步</div><div class="arrow__point " style="background-color:#33332d;color:white"></div></div></div></div></div></div><div class="course " id="course-main-content"><div class="scroll-navigation-container "><div class="scroll-navigation-container-inner "><div class="scroll-navigation  element--column" tag="ul"><a class="left-navigation-link" style="border-color:#D4FCB5" href="/zh/part9/背景与介绍">a 背景与介绍</a><div class="accordion__container col-8 push-right-1 accordion--side-navigation"><button class="accordion accordion__title  " style="background-color:#D4FCB5;border-color:#D4FCB5" aria-controls="b_type_script的一小步" aria-expanded="false">b TypeScript的一小步</button></div><a class="left-navigation-link" style="border-color:#D4FCB5" href="/zh/part9/type_script版的express应用">c TypeScript版的express应用</a><a class="left-navigation-link" style="border-color:#D4FCB5" href="/zh/part9/利用_type_script编写_react应用">d 利用TypeScript编写React应用</a></div></div></div><div class="course-content-container "><div class="course-content element--auto-bottom-margin"><div class="course-content-inner "><p class="col-1 letter" style="border-color:#D4FCB5">b</p><h1 class="sub-header ">TypeScript的一小步</h1></div></div><div class="course-content "><div class="course-content-inner ">
+<!-- -->
+<p>在简单介绍了TypeScript的主要原理后，我们现在准备开始成为FullStack TypeScript开发者的旅程。</p>
+<!-- -->
+<p> 我们不会给你一个关于TypeScript所有方面的彻底介绍，而是在这一部分重点介绍用TypeScript开发Express后端或React前端时最常见的问题。</p>
+<!-- -->
+<p>除了语言特性，我们还将着重强调工具的使用。</p>
+<h3>Setting things up</h3>
+<!-- -->
+<p> 在你选择的编辑器中安装TypeScript支持。<a href="https://code.visualstudio.com/">Visual Studio Code</a>可以与TypeScript原生工作。</p>
+<!-- -->
+<p> 如前所述，TypeScript代码本身是不可执行的。它必须首先被编译成可执行的JavaScript。</p>
+<!-- -->
+<p> 当TypeScript被编译成JavaScript时，代码就会成为类型清除的对象。这意味着类型注释、接口、类型别名和其他类型系统结构被移除，结果是纯粹的可运行的JavaScript。</p>
+<!-- -->
+<p> 在生产环境中，编译的需要往往意味着你必须设置一个 &quot;构建步骤&quot;。在构建步骤中，所有的TypeScript代码都被编译成一个单独的文件夹中的JavaScript，然后生产环境从该文件夹中运行代码。在开发环境中，为了能更快地看到所产生的变化，利用实时编译和自动重载往往更方便。</p>
+<!-- -->
+<p> 让我们开始编写我们的第一个TypeScript应用。为了保持简单，让我们从使用npm包<a href="https://github.com/TypeStrong/ts-node">ts-node</a>开始。它可以立即编译并执行指定的TypeScript文件，因此不需要单独的编译步骤。</p>
+<!-- -->
+<p> 你可以通过运行<i>ts-node</i>和官方的<i>typescript</i>包全局安装。</p>
+<div class="gatsby-highlight" data-language="text"><pre><code class="language-text">npm install -g ts-node typescript</code></pre></div>
+<!-- -->
+<p> 如果你不能或不想安装全局包，你可以创建一个具有所需依赖性的npm项目并在其中运行你的脚本。</p>
+<!-- -->
+<p> 我们也将采取这种方法。</p>
+<!-- -->
+<p> 正如我们在<a href="/en/part3">第三章节</a>中所记得的，一个npm项目是通过在一个空目录中运行命令<i>npm init</i>来设置的。然后，我们可以通过运行</p>
+<div class="gatsby-highlight" data-language="text"><pre><code class="language-text">npm install --save-dev ts-node typescript</code></pre></div>
+<!-- -->
+<p> 并在package.json中设置<i>scripts</i>。</p>
+<div class="gatsby-highlight" data-language="json"><pre><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token comment">// ..</span>
+  <span class="token property">&quot;scripts&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+<span class="gatsby-highlight-code-line">    <span class="token property">&quot;ts-node&quot;</span><span class="token operator">:</span> <span class="token string">&quot;ts-node&quot;</span></span>  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token comment">// ..</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p> 你现在可以通过运行<i>npm run ts-node</i>在这个目录中使用<i>ts-node</i>。注意，如果你通过package.json使用ts-node，脚本的所有命令行参数需要以<i>--</i>为前缀。因此，如果你想用<i>ts-node</i>运行file.ts，整个命令是。</p>
+<div class="gatsby-highlight" data-language="shell"><pre><code class="language-shell"><span class="token function">npm</span> run ts-node -- file.ts</code></pre></div>
+<!-- -->
+<p> 值得一提的是，TypeScript还提供了一个在线游乐场，在那里你可以快速尝试TypeScript代码，并立即看到产生的JavaScript和可能的编译错误。你可以访问TypeScript&#x27;s official playground <a href="https://www.typescriptlang.org/play/index.html">here</a>。</p>
+<!-- -->
+<p> <strong>NB:</strong> 游戏场可能包含与你的本地环境不同的tsconfig规则（将在后面介绍），这就是为什么你可能在那里看到与你的本地环境不同的警告。Playground&#x27;s tsconfig可以通过config下拉菜单进行修改。</p>
+<h4>A note about the coding style</h4>
+<!-- -->
+<p> JavaScript本身是一种相当宽松的语言，事情往往可以用多种不同的方式完成。例如，我们有命名与匿名函数，使用const和let或var，以及使用<i>分笔记</i>。这部分课程与其他课程的不同之处在于使用分号。这不是TypeScript特有的模式，而是在创建任何类型的JavaScript项目时采取的一般编码风格决定。是否使用它们通常由程序员自己决定，但由于它被期望使一个人的编码习惯适应现有的代码库，你被期望使用分号并适应这部分练习的编码风格。与课程的其他部分相比，这一部分还有一些其他的编码风格差异，例如，在目录命名惯例方面。</p>
+<!-- -->
+<p> 让我们为项目添加一个配置文件<em>tsconfig.json</em>，内容如下。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token punctuation">{</span>
+  <span class="token string-property property">&quot;compilerOptions&quot;</span><span class="token operator">:</span><span class="token punctuation">{</span>
+    <span class="token string-property property">&quot;noImplicitAny&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p> <i>tsconfig.json</i>文件用于定义TypeScript编译器应该如何解释代码，编译器应该如何严格工作，哪些文件需要观察或忽略，以及<a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html">很多很多</a>。</p>
+<!-- -->
+<p> 现在我们将只使用编译器选项<a href="https://www.typescriptlang.org/tsconfig#noImplicitAny">noImplicitAny</a>，它不要求对所有使用的变量都有类型。</p>
+<!-- -->
+<p> 让我们从创建一个简单的乘法器开始。它看起来和JavaScript中的一模一样。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">const</span> <span class="token function-variable function">multiplicator</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> printText</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>printText<span class="token punctuation">,</span>  a <span class="token operator">*</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">multiplicator</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token string">&#x27;Multiplied numbers 2 and 4, the result is:&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<!-- -->
+<p> 正如你所看到的，这仍然是普通的基本JavaScript，没有额外的TS功能。它用<i>npm run ts-node -- multiplier.ts</i>很好地编译和运行，就像用Node一样。</p>
+<!-- -->
+<p> 但是如果我们最终向乘法器函数传递了错误的<i>类型</i>参数，会发生什么？</p>
+<!-- -->
+<p> 我们来试试吧!</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">const</span> <span class="token function-variable function">multiplicator</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> printText</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>printText<span class="token punctuation">,</span>  a <span class="token operator">*</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">multiplicator</span><span class="token punctuation">(</span><span class="token string">&#x27;how about a string?&#x27;</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token string">&#x27;Multiplied a string and 4, the result is:&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<!-- -->
+<p> 现在当我们运行这段代码时，输出是。<i>将一个字符串和4相乘，结果是。NaN</i>。</p>
+<!-- -->
+<p>如果语言本身能够防止我们陷入这样的情况，那不是很好吗？</p>
+<!-- -->
+<p>这就是我们看到TypeScript的第一个好处的地方。  让我们为参数添加类型，看看它能给我们带来什么。</p>
+<!-- -->
+<p> TypeScript原生支持多种类型，包括<i>number</i>、<i>string</i>和<i>Array</i>。请看全面的列表<a href="https://www.typescriptlang.org/docs/handbook/basic-types.html">这里</a>。更复杂的自定义类型也可以被创建。</p>
+<!-- -->
+<p> 我们函数的前两个参数是<a href="http://www.typescriptlang.org/docs/handbook/basic-types.html#number">数字</a>类型，最后一个是<a href="http://www.typescriptlang.org/docs/handbook/basic-types.html#string">字符串</a>。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">const</span> <span class="token function-variable function">multiplicator</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token literal-property property">a</span><span class="token operator">:</span> number<span class="token punctuation">,</span> <span class="token literal-property property">b</span><span class="token operator">:</span> number<span class="token punctuation">,</span> <span class="token literal-property property">printText</span><span class="token operator">:</span> string</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>printText<span class="token punctuation">,</span>  a <span class="token operator">*</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">multiplicator</span><span class="token punctuation">(</span><span class="token string">&#x27;how about a string?&#x27;</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token string">&#x27;Multiplied a string and 4, the result is:&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<!-- -->
+<p> 现在的代码不再是有效的JavaScript，而是事实上的TypeScript。当我们试图运行这段代码时，我们注意到它并没有被编译。</p>
+<picture><img style="border-color:#D4FCB5" alt="fullstack content" src="/static/362456a24c606b2a645642d550481c07/5a190/2a.png"/></picture>
+<!-- -->
+<p> TypeScript编辑器支持的最好的一点是，你甚至不一定需要运行代码就能看到问题。</p>
+<!-- -->
+<p> VSCode插件是如此高效，以至于当你试图使用一个不正确的类型时，它会立即通知你。</p>
+<picture><img style="border-color:#D4FCB5" alt="fullstack content" src="/static/7a73285e6588983383eb619b671d99f5/5a190/2.png"/></picture>
+<h3>Creating your first own types</h3>
+<!-- -->
+<p> 让我们把我们的乘法器扩展成一个稍微通用的计算器，同时支持加法和除法。这个计算器应该接受三个参数：两个数字和操作，要么是<i>multiply</i>, <i>add</i>或者<i>divide</i>，告诉它如何处理这些数字。</p>
+<!-- -->
+<p> 在JavaScript中，代码将需要额外的验证，以确保最后一个参数确实是一个字符串。TypeScript提供了一种为输入定义特定类型的方法，它确切地描述了什么类型的输入是可接受的。在此基础上，TypeScript还可以在编辑器级别显示已接受的值的信息。</p>
+<!-- -->
+<p> 我们可以使用TypeScript本地关键字<i>type</i>创建一个<i>type</i>。让我们来描述我们的类型<i>Operation</i>。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js">type Operation <span class="token operator">=</span> <span class="token string">&#x27;multiply&#x27;</span> <span class="token operator">|</span> <span class="token string">&#x27;add&#x27;</span> <span class="token operator">|</span> <span class="token string">&#x27;divide&#x27;</span><span class="token punctuation">;</span></code></pre></div>
+<!-- -->
+<p> 现在，<i>Operation</i>类型只接受三种输入；正是我们想要的三个字符串。</p>
+<!-- -->
+<p> 使用OR运算符<em>|</em>，我们可以通过创建一个<a href="https://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types">联合类型</a>来定义一个变量，接受多个值。</p>
+<!-- -->
+<p> 在这个例子中，我们使用了精确的字符串（在技术术语中，被称为<a href="http://www.typescriptlang.org/docs/handbook/advanced-types.html#string-literal-types">字符串字面类型</a>），但是通过联合，你也可以让编译器同时接受字符串和数字。<em>string | number</em>。</p>
+<!-- -->
+<p> <i>type</i>关键字为一个类型定义了一个新的名字。<a href="https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases">一个类型的别名</a>。由于定义的类型是三个可能的值的联合体，给它一个具有代表性的名字的别名是很方便的。</p>
+<!-- -->
+<p> 我们现在来看看我们的计算器。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js">type Operation <span class="token operator">=</span> <span class="token string">&#x27;multiply&#x27;</span> <span class="token operator">|</span> <span class="token string">&#x27;add&#x27;</span> <span class="token operator">|</span> <span class="token string">&#x27;divide&#x27;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">calculator</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token literal-property property">a</span><span class="token operator">:</span> number<span class="token punctuation">,</span> <span class="token literal-property property">b</span><span class="token operator">:</span> number<span class="token punctuation">,</span> <span class="token literal-property property">op</span> <span class="token operator">:</span> Operation</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>op <span class="token operator">===</span> <span class="token string">&#x27;multiply&#x27;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> a <span class="token operator">*</span> b<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>op <span class="token operator">===</span> <span class="token string">&#x27;add&#x27;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> a <span class="token operator">+</span> b<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>op <span class="token operator">===</span> <span class="token string">&#x27;divide&#x27;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>b <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token string">&#x27;can&#x27;</span>t divide by <span class="token number">0</span><span class="token operator">!</span>&#x27;<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> a <span class="token operator">/</span> b<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p> 现在，当我们把鼠标悬停在计算器函数中的<i>操作</i>类型上面时，我们可以立即看到关于如何处理它的建议。</p>
+<picture><img style="border-color:#D4FCB5" alt="fullstack content" src="/static/c9e244a81232619f2c53c09b6d4c69df/5a190/3.png"/></picture>
+<!-- -->
+<p> 如果我们试图使用一个不在<i>操作</i>类型内的值，我们会得到熟悉的红色警告信号和来自编辑器的额外信息。</p>
+<picture><img style="border-color:#D4FCB5" alt="fullstack content" src="/static/5e90d50799e39dd55ed0339e3f56255a/5a190/4x.png"/></picture>
+<!-- -->
+<p> 这已经很不错了，但我们还没有触及的一件事是输入函数的返回值。通常情况下，你想知道一个函数的返回值，如果能保证它确实返回了它所说的东西，那就更好了。让我们在计算器函数中添加一个返回值<i>number</i>。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js">type Operation <span class="token operator">=</span> <span class="token string">&#x27;multiply&#x27;</span> <span class="token operator">|</span> <span class="token string">&#x27;add&#x27;</span> <span class="token operator">|</span> <span class="token string">&#x27;divide&#x27;</span><span class="token punctuation">;</span>
+
+<span class="gatsby-highlight-code-line"><span class="token keyword">const</span> calculator <span class="token operator">=</span> <span class="token punctuation">(</span>a<span class="token operator">:</span> number<span class="token punctuation">,</span> <span class="token literal-property property">b</span><span class="token operator">:</span> number<span class="token punctuation">,</span> <span class="token literal-property property">op</span><span class="token operator">:</span> Operation<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token parameter">number</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span></span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>op <span class="token operator">===</span> <span class="token string">&#x27;multiply&#x27;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> a <span class="token operator">*</span> b<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>op <span class="token operator">===</span> <span class="token string">&#x27;add&#x27;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> a <span class="token operator">+</span> b<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>op <span class="token operator">===</span> <span class="token string">&#x27;divide&#x27;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>b <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token string">&#x27;this cannot be done&#x27;</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> a <span class="token operator">/</span> b<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p> 编译器会直接产生警告，因为在一种情况下，该函数会返回一个字符串。有几种方法可以解决这个问题。我们可以扩展返回类型以允许字符串值，像这样。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">const</span> calculator <span class="token operator">=</span> <span class="token punctuation">(</span>a<span class="token operator">:</span> number<span class="token punctuation">,</span> <span class="token literal-property property">b</span><span class="token operator">:</span> number<span class="token punctuation">,</span> <span class="token literal-property property">op</span><span class="token operator">:</span> Operation<span class="token punctuation">)</span><span class="token operator">:</span> number <span class="token operator">|</span> <span class="token parameter">string</span> <span class="token operator">=&gt;</span>  <span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p> 或者我们可以创建一个返回类型，其中包括两种可能的类型，就像我们的操作类型。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js">type Result <span class="token operator">=</span> string <span class="token operator">|</span> number<span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> calculator <span class="token operator">=</span> <span class="token punctuation">(</span>a<span class="token operator">:</span> number<span class="token punctuation">,</span> <span class="token literal-property property">b</span><span class="token operator">:</span> number<span class="token punctuation">,</span> <span class="token literal-property property">op</span><span class="token operator">:</span> Operation<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token parameter">Result</span> <span class="token operator">=&gt;</span>  <span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p> 但现在的问题是，这个函数是否真的可以返回一个字符串？</p>
+<!-- -->
+<p> 当你的代码最终会出现某样东西被0整除的情况时，可能是出了很大的问题，应该在调用函数的地方抛出一个错误并加以处理。</p>
+<!-- -->
+<p>当你决定返回你原本不期望的值时，你从TypeScript中看到的警告会阻止你做出仓促的决定，并帮助你保持你的代码按预期运行。</p>
+<!-- -->
+<p> 还有一件事要考虑，即使我们已经为我们的参数定义了类型，在运行时使用的生成的JavaScript并不包含类型检查。</p>
+<!-- -->
+<p> 因此，比如说，如果<i>operation</i>参数的值来自于一个外部接口，就不能明确保证它是允许的值之一。因此，最好还是包括错误处理，并准备好应对意外情况的发生。</p>
+<!-- -->
+<p> 在这种情况下，当有多个可能接受的值，并且所有意外的值都应该导致一个错误，<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch">switch...case</a>语句比我们代码中的if...else更适合。</p>
+<!-- -->
+<p> 我们计算器的代码实际上应该是这样的。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js">type Operation <span class="token operator">=</span> <span class="token string">&#x27;multiply&#x27;</span> <span class="token operator">|</span> <span class="token string">&#x27;add&#x27;</span> <span class="token operator">|</span> <span class="token string">&#x27;divide&#x27;</span><span class="token punctuation">;</span>
+
+<span class="gatsby-highlight-code-line">type Result <span class="token operator">=</span> number<span class="token punctuation">;</span></span>
+<span class="gatsby-highlight-code-line"><span class="token keyword">const</span> calculator <span class="token operator">=</span> <span class="token punctuation">(</span>a<span class="token operator">:</span> number<span class="token punctuation">,</span> <span class="token literal-property property">b</span><span class="token operator">:</span> number<span class="token punctuation">,</span> <span class="token literal-property property">op</span><span class="token operator">:</span> Operation<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token parameter">Result</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span></span>  <span class="token keyword">switch</span><span class="token punctuation">(</span>op<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">case</span> <span class="token string">&#x27;multiply&#x27;</span><span class="token operator">:</span>
+      <span class="token keyword">return</span> a <span class="token operator">*</span> b<span class="token punctuation">;</span>
+    <span class="token keyword">case</span> <span class="token string">&#x27;divide&#x27;</span><span class="token operator">:</span>
+<span class="gatsby-highlight-code-line">      <span class="token keyword">if</span> <span class="token punctuation">(</span>b <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">&#x27;Can&#x27;</span>t divide by <span class="token number">0</span><span class="token operator">!</span>&#x27;<span class="token punctuation">)</span><span class="token punctuation">;</span></span>      <span class="token keyword">return</span> a <span class="token operator">/</span> b<span class="token punctuation">;</span>
+    <span class="token keyword">case</span> <span class="token string">&#x27;add&#x27;</span><span class="token operator">:</span>
+      <span class="token keyword">return</span> a <span class="token operator">+</span> b<span class="token punctuation">;</span>
+    <span class="token keyword">default</span><span class="token operator">:</span>
+<span class="gatsby-highlight-code-line">      <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">&#x27;Operation is not multiply, add or divide!&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">try</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">calculator</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">5</span> <span class="token punctuation">,</span> <span class="token string">&#x27;divide&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>error<span class="token operator">:</span> unknown<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> errorMessage <span class="token operator">=</span> <span class="token string">&#x27;Something went wrong.&#x27;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>error <span class="token keyword">instanceof</span> <span class="token class-name">Error</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    errorMessage <span class="token operator">+=</span> <span class="token string">&#x27; Error: &#x27;</span> <span class="token operator">+</span> error<span class="token punctuation">.</span>message<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>errorMessage<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p> 从TypeScript 4.0开始，<i>catch</i>块允许你指定捕获子句变量的类型。在4.4之前，所有的<i>catch</i>子句变量都是<i>any</i>类型。然而，随着4.4版本的发布，默认类型为<i>unknown</i>。<a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type">未知</a>是一种顶层类型，在TypeScript第3版中被引入，成为<i>any</i>的类型安全对应物。任何东西都可以赋值给<i>unknown</i>，但是<i>unknown</i>除了它自己和<i>any</i>之外，如果没有类型断言或基于控制流的缩小，则不能赋值给任何东西。同样地，如果不首先断言或缩小到一个更具体的类型，就不允许对<i>unknown</i>进行操作。</p>
+<!-- -->
+<p> 我们写的程序还不错，但如果我们能使用命令行参数，而不是总是要改变代码来计算不同的东西，那肯定会更好。</p>
+<!-- -->
+<p> 让我们试试吧，就像在普通的Node应用中那样，通过访问<i>process.argv</i>。如果你使用的是最新的npm版本（7.0或更高版本），就不会有问题，但如果是旧的设置，就不太对劲了。</p>
+<picture><img style="border-color:#D4FCB5" alt="fullstack content" src="/static/07d7898a48d092c789aa57608097678f/5a190/5.png"/></picture>
+<!-- -->
+<p> 那么，在旧的设置中，问题出在哪里？</p>
+<h3>@types/{npm_package}</h3>
+<!-- -->
+<p> 让我们回到TypeScript的基本理念。TypeScript希望所有全局使用的代码都是类型化的，当你的项目有一个合理的配置时，它对你自己的代码也是如此。TypeScript库本身只包含TypeScript包的代码类型。你可以为一个库编写自己的类型，但这几乎是不需要的--因为TypeScript社区已经为我们做了这个工作</p>
+<!-- -->
+<p>与npm一样，TypeScript世界也在庆祝开源代码。社区很活跃，不断对常用的npm包的更新和变化做出反应。你几乎总能找到npm包的类型，所以你不必单独为你的成千上万的依赖创建类型。</p>
+<!-- -->
+<p> 通常，现有软件包的类型可以从npm内部的<i>@types</i>组织中找到，你可以通过安装一个带有@types/前缀的软件包名称的npm包将相关类型添加到你的项目中。比如说<i>npm install --save-dev @types/react @types/express @types/lodash @types/jest @types/mongoose</i>等等，等等。<i>@types/*</i>由<a href="http://definitelytyped.org/">Definitely typed</a>维护，这是一个社区项目，目的是在一个地方维护所有的类型。</p>
+<!-- -->
+<p> 有时，一个npm包也可以在代码中包含它的类型，在这种情况下，安装相应的<i>@types/*</i>就没有必要。</p>
+<!-- -->
+<blockquote>
+<p><strong>NB:</strong> 由于类型只在编译前使用，所以在生产构建中不需要类型，它们应该<i>总是</i>在package.json的devDependencies中。</p>
+</blockquote>
+<!-- -->
+<p> 由于全局变量<i>process</i>是由Node本身定义的，我们从包<i>@types/node</i>中获得其类型。</p>
+<!-- -->
+<p> 从10.0版本开始，<i>ts-node</i>已经将<i>@types/node</i>定义为一个<a href="https://docs.npmjs.com/cli/v8/configuring-npm/package-json#peerdependencies">对等依赖</a>。如果npm的版本至少是7.0，那么一个项目的对等依赖就会自动被npm安装。如果你有一个更老的npm，同行依赖必须明确安装。</p>
+<div class="gatsby-highlight" data-language="shell"><pre><code class="language-shell"><span class="token function">npm</span> <span class="token function">install</span> --save-dev @types/node</code></pre></div>
+<!-- -->
+<p> 当包@types/node被安装时，编译器不会产生警告变量<i>process</i>。请注意，不需要在代码中要求类型，安装包就足够了!</p>
+<h3>Improving the project</h3>
+<!-- -->
+<p> 接下来，让我们添加npm脚本来运行我们的两个程序<i>multiplier</i>和<i>calculator</i>。</p>
+<div class="gatsby-highlight" data-language="json"><pre><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;fs-open&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;version&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1.0.0&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;description&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;main&quot;</span><span class="token operator">:</span> <span class="token string">&quot;index.ts&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;scripts&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;ts-node&quot;</span><span class="token operator">:</span> <span class="token string">&quot;ts-node&quot;</span><span class="token punctuation">,</span>
+<span class="gatsby-highlight-code-line">    <span class="token property">&quot;multiply&quot;</span><span class="token operator">:</span> <span class="token string">&quot;ts-node multiplier.ts&quot;</span><span class="token punctuation">,</span></span><span class="gatsby-highlight-code-line">    <span class="token property">&quot;calculate&quot;</span><span class="token operator">:</span> <span class="token string">&quot;ts-node calculator.ts&quot;</span></span>  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;author&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;license&quot;</span><span class="token operator">:</span> <span class="token string">&quot;ISC&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;devDependencies&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;ts-node&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^10.5.0&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;typescript&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^4.5.5&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p> 我们可以通过以下改动让乘法器使用命令行参数工作。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">const</span> <span class="token function-variable function">multiplicator</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token literal-property property">a</span><span class="token operator">:</span> number<span class="token punctuation">,</span> <span class="token literal-property property">b</span><span class="token operator">:</span> number<span class="token punctuation">,</span> <span class="token literal-property property">printText</span><span class="token operator">:</span> string</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>printText<span class="token punctuation">,</span>  a <span class="token operator">*</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> <span class="token literal-property property">a</span><span class="token operator">:</span> number <span class="token operator">=</span> <span class="token function">Number</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span>argv<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> <span class="token literal-property property">b</span><span class="token operator">:</span> number <span class="token operator">=</span> <span class="token function">Number</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span>argv<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token function">multiplicator</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Multiplied </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>a<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> and </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>b<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">, the result is:</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<!-- -->
+<p> 而且我们可以用以下方式运行它。</p>
+<div class="gatsby-highlight" data-language="shell"><pre><code class="language-shell"><span class="token function">npm</span> run multiply <span class="token number">5</span> <span class="token number">2</span></code></pre></div>
+<!-- -->
+<p> 如果程序运行时的参数类型不对，比如说</p>
+<div class="gatsby-highlight" data-language="shell"><pre><code class="language-shell"><span class="token function">npm</span> run multiply <span class="token number">5</span> lol</code></pre></div>
+<!-- -->
+<p>它 &quot;工作 &quot;了，但给我们的答案是。</p>
+<div class="gatsby-highlight" data-language="shell"><pre><code class="language-shell">Multiplied <span class="token number">5</span> and NaN, the result is: NaN</code></pre></div>
+<!-- -->
+<p> 其原因是，<i>Number(&quot;lol&quot;)</i>返回<i>NaN</i>。</p>
+<!-- -->
+<p> 这实际上是<i>number</i>类型，所以TypeScript没有能力将我们从这种情况下拯救出来。</p>
+<!-- -->
+<p>为了防止这种行为，我们必须验证从命令行给我们的数据。</p>
+<!-- -->
+<p>乘法器的改进版如下所示：</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">interface</span> <span class="token class-name">MultiplyValues</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">value1</span><span class="token operator">:</span> number<span class="token punctuation">;</span>
+  <span class="token literal-property property">value2</span><span class="token operator">:</span> number<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> parseArguments <span class="token operator">=</span> <span class="token punctuation">(</span>args<span class="token operator">:</span> Array<span class="token operator">&lt;</span>string<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token parameter">MultiplyValues</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>args<span class="token punctuation">.</span>length <span class="token operator">&lt;</span> <span class="token number">4</span><span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">&#x27;Not enough arguments&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>args<span class="token punctuation">.</span>length <span class="token operator">&gt;</span> <span class="token number">4</span><span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">&#x27;Too many arguments&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">isNaN</span><span class="token punctuation">(</span><span class="token function">Number</span><span class="token punctuation">(</span>args<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token function">isNaN</span><span class="token punctuation">(</span><span class="token function">Number</span><span class="token punctuation">(</span>args<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+      <span class="token literal-property property">value1</span><span class="token operator">:</span> <span class="token function">Number</span><span class="token punctuation">(</span>args<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">value2</span><span class="token operator">:</span> <span class="token function">Number</span><span class="token punctuation">(</span>args<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">&#x27;Provided values were not numbers!&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">multiplicator</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token literal-property property">a</span><span class="token operator">:</span> number<span class="token punctuation">,</span> <span class="token literal-property property">b</span><span class="token operator">:</span> number<span class="token punctuation">,</span> <span class="token literal-property property">printText</span><span class="token operator">:</span> string</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>printText<span class="token punctuation">,</span>  a <span class="token operator">*</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">try</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">{</span> value1<span class="token punctuation">,</span> value2 <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">parseArguments</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span>argv<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">multiplicator</span><span class="token punctuation">(</span>value1<span class="token punctuation">,</span> value2<span class="token punctuation">,</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Multiplied </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>value1<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> and </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>value2<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">, the result is:</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>error<span class="token operator">:</span> unknown<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> errorMessage <span class="token operator">=</span> <span class="token string">&#x27;Something bad happened.&#x27;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>error <span class="token keyword">instanceof</span> <span class="token class-name">Error</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    errorMessage <span class="token operator">+=</span> <span class="token string">&#x27; Error: &#x27;</span> <span class="token operator">+</span> error<span class="token punctuation">.</span>message<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>errorMessage<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p> 当我们现在运行这个程序时。</p>
+<div class="gatsby-highlight" data-language="shell"><pre><code class="language-shell"><span class="token function">npm</span> run multiply <span class="token number">1</span> lol</code></pre></div>
+<!-- -->
+<p>我们会得到一个合适的错误信息。</p>
+<div class="gatsby-highlight" data-language="shell"><pre><code class="language-shell">Something bad happened. Error: Provided values were not numbers<span class="token operator">!</span></code></pre></div>
+<!-- -->
+<p> 函数<i>parseArguments</i>的定义有几个有趣的地方。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">const</span> parseArguments <span class="token operator">=</span> <span class="token punctuation">(</span>args<span class="token operator">:</span> Array<span class="token operator">&lt;</span>string<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token parameter">MultiplyValues</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p> 首先，参数<i>args</i>是一个字符串的<a href="http://www.typescriptlang.org/docs/handbook/basic-types.html#array">数组</a>。返回值的类型是<i>MultiplyValues</i>，其定义如下。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">interface</span> <span class="token class-name">MultiplyValues</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">value1</span><span class="token operator">:</span> number<span class="token punctuation">;</span>
+  <span class="token literal-property property">value2</span><span class="token operator">:</span> number<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p> 这个定义利用了TypeScript的<a href="http://www.typescriptlang.org/docs/handbook/interfaces.html">Interface</a>关键字，这是定义一个对象应该具有的 &quot;形状 &quot;的一种方式。</p>
+<!-- -->
+<p> 在我们的例子中，很明显，返回值应该是一个具有两个属性<i>value1</i>和<i>value2</i>的对象，它们都应该是数字类型。</p>
+</div></div>
+<div class="banner spacing tasks content-banner" style="background-color:#D4FCB5;border-color:#D4FCB5"><div class="course-content " style="border-color:#D4FCB5;background-color:transparent"><div class="course-content-inner ">
+<h3>Exercises 9.1.-9.3.</h3>
+<h4>setup</h4>
+<!-- -->
+<p> 练习9.1.-9.7.都将在同一个节点项目中进行。用<i>npm init</i>在一个空目录下创建项目，并安装ts-node和typescript包。同时在该目录下创建文件<i>tsconfig.json</i>，内容如下。</p>
+<div class="gatsby-highlight" data-language="json"><pre><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">&quot;compilerOptions&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;noImplicitAny&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p> 编译器选项<a href="https://www.typescriptlang.org/tsconfig#noImplicitAny">noImplicitAny</a>，使所有使用的变量都必须有类型，实际上目前是默认的，但我们还是要明确定义它。</p>
+<h4>9.1 Body mass index</h4>
+<!-- -->
+<p> 在文件<i>bmiCalculator.ts</i>中创建本练习的代码。</p>
+<!-- -->
+<p> 编写一个函数<i>calculateBmi</i>，根据给定的身高（厘米）和体重（公斤）计算<a href="https://en.wikipedia.org/wiki/Body_mass_index">BMI</a>，然后返回一个适合该结果的信息。</p>
+<!-- -->
+<p>在同一文件中用硬编码的参数调用该函数，并打印出结果。该代码</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">calculateBmi</span><span class="token punctuation">(</span><span class="token number">180</span><span class="token punctuation">,</span> <span class="token number">74</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p>应该打印出以下信息。</p>
+<div class="gatsby-highlight" data-language="shell"><pre><code class="language-shell">Normal <span class="token punctuation">(</span>healthy weight<span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p> 创建一个npm脚本，用命令<i>npm run calculateBmi</i>来运行程序。</p>
+<h4>9.2 Exercise calculator</h4>
+<!-- -->
+<p> 在文件<i>exerciseCalculator.ts</i>中创建这个练习的代码。</p>
+<!-- -->
+<p> 编写一个函数<i>calculateExercises</i>，计算<i>每日运动时间的平均时间</i>，并将其与每日运动时间的<i>目标量</i>进行比较，并返回一个包括以下数值的对象。</p>
+<!-- -->
+<ul>
+<li>
+<p>天数</p>
+<!-- -->
+</li>
+<li>
+<p>训练日的数量</p>
+<!-- -->
+</li>
+<li>
+<p>原始目标值</p>
+<!-- -->
+</li>
+<li>
+<p>计算出的平均时间</p>
+<!-- -->
+</li>
+<li>
+<p>描述是否达到目标的布尔值</p>
+<!-- -->
+</li>
+<li>
+<p>数字1-3之间的评分，说明时间达到的程度。你可以自己决定这个指标。</p>
+<!-- -->
+</li>
+<li>一个解释评级的文本值</li>
+</ul>
+<!-- -->
+<p> 每天的运动时间是以一个<a href="https://www.typescriptlang.org/docs/handbook/basic-types.html#array">数组</a>的形式提供给函数的，其中包含训练期间每天的运动时间。例如，一个星期中，星期一有3小时的训练，星期二没有，星期三有2小时，星期四有4.5小时，以此类推，将用以下数组表示。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">4.5</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span></code></pre></div>
+<!-- -->
+<p> 对于结果对象，你应该创建一个<a href="https://www.typescriptlang.org/docs/handbook/interfaces.html">接口</a>。</p>
+<!-- -->
+<p> 如果你用参数<i>[3, 0, 2, 4.5, 0, 3, 1]</i>和<i>2</i>调用该函数，它应该返回。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token punctuation">{</span> <span class="token literal-property property">periodLength</span><span class="token operator">:</span> <span class="token number">7</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">trainingDays</span><span class="token operator">:</span> <span class="token number">5</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">success</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">rating</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">ratingDescription</span><span class="token operator">:</span> <span class="token string">&#x27;not too bad but could be better&#x27;</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">target</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">average</span><span class="token operator">:</span> <span class="token number">1.9285714285714286</span> <span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p> 创建一个npm脚本，<i>npm run calculateExercises</i>，用硬编码的值来调用这个函数。</p>
+<h4>9.3 Command line</h4>
+<!-- -->
+<p> 修改前面的练习，以便你可以把<i>bmiCalculator</i>和<i>exerciseCalculator</i>的参数作为命令行参数。</p>
+<!-- -->
+<p> 你的程序可以工作，例如，如下所示。</p>
+<div class="gatsby-highlight" data-language="shell"><pre><code class="language-shell">$ <span class="token function">npm</span> run calculateBmi <span class="token number">180</span> <span class="token number">91</span>
+
+Overweight</code></pre></div>
+<!-- -->
+<p> 和。</p>
+<div class="gatsby-highlight" data-language="shell"><pre><code class="language-shell">$ <span class="token function">npm</span> run calculateExercises <span class="token number">2</span> <span class="token number">1</span> <span class="token number">0</span> <span class="token number">2</span> <span class="token number">4.5</span> <span class="token number">0</span> <span class="token number">3</span> <span class="token number">1</span> <span class="token number">0</span> <span class="token number">4</span>
+
+<span class="token punctuation">{</span> periodLength: <span class="token number">9</span>,
+  trainingDays: <span class="token number">6</span>,
+  success: false,
+  rating: <span class="token number">2</span>,
+  ratingDescription: <span class="token string">&#x27;not too bad but could be better&#x27;</span>,
+  target: <span class="token number">2</span>,
+  average: <span class="token number">1.7222222222222223</span> <span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p> 在这个例子中，<i>第一个参数</i>是目标值。</p>
+<!-- -->
+<p> 适当地处理异常和错误。exerciseCalculator应该接受不同长度的输入。自己决定你如何设法收集所有需要的输入。</p>
+</div></div></div>
+<div class="course-content "><div class="course-content-inner ">
+<h3>More about tsconfig</h3>
+<!-- -->
+<p> 到目前为止，我们只使用了一条tsconfig规则<a href="https://www.typescriptlang.org/tsconfig#noImplicitAny">noImplicitAny</a>。这是一个很好的开始，但现在是时候深入研究一下配置文件了。</p>
+<!-- -->
+<p> 如前所述，<a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html">tsconfig.json</a>文件包含了你希望TypeScript在你的项目中如何工作的所有核心配置。</p>
+<!-- -->
+<p> 让我们在我们的<i>tsconfig.json</i>文件中指定以下配置。</p>
+<div class="gatsby-highlight" data-language="json"><pre><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">&quot;compilerOptions&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;target&quot;</span><span class="token operator">:</span> <span class="token string">&quot;ES2020&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;strict&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;noUnusedLocals&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;noUnusedParameters&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;noImplicitReturns&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;noFallthroughCasesInSwitch&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;esModuleInterop&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;moduleResolution&quot;</span><span class="token operator">:</span> <span class="token string">&quot;node&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p> 不要太担心<i>compilerOptions</i>；它们将在以后被仔细检查。</p>
+<!-- -->
+<p> 你可以从TypeScript文档中找到每个配置的解释，或者从非常方便的<a href="https://www.staging-typescript.org/tsconfig">tsconfig页面</a>，或者从tsconfig<a href="http://json.schemastore.org/tsconfig">模式定义</a>，不幸的是它的格式比前两个选项要差一点。</p>
+<h3>Adding Express to the mix</h3>
+<!-- -->
+<p> 现在，我们处于一个相当好的位置。我们的项目已经设置好了，而且我们有两个可执行的计算器在里面。</p>
+<!-- -->
+<p>然而，由于我们的目标是学习FullStack开发，现在是时候开始处理一些HTTP请求了。</p>
+<!-- -->
+<p> 让我们从安装Express开始。</p>
+<div class="gatsby-highlight" data-language="text"><pre><code class="language-text">npm install express</code></pre></div>
+<!-- -->
+<p>然后在package.json中添加<i>start</i>脚本。</p>
+<div class="gatsby-highlight" data-language="json"><pre><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token comment">// ..</span>
+  <span class="token property">&quot;scripts&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;ts-node&quot;</span><span class="token operator">:</span> <span class="token string">&quot;ts-node&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;multiply&quot;</span><span class="token operator">:</span> <span class="token string">&quot;ts-node multiplier.ts&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;calculate&quot;</span><span class="token operator">:</span> <span class="token string">&quot;ts-node calculator.ts&quot;</span><span class="token punctuation">,</span>
+<span class="gatsby-highlight-code-line">    <span class="token property">&quot;start&quot;</span><span class="token operator">:</span> <span class="token string">&quot;ts-node index.ts&quot;</span></span>  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token comment">// ..</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p> 现在我们可以创建文件<i>index.ts</i>，并将HTTP GET <i>ping</i>端点写入其中。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">const</span> express <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&#x27;express&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> app <span class="token operator">=</span> <span class="token function">express</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">&#x27;/ping&#x27;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">&#x27;pong&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token constant">PORT</span> <span class="token operator">=</span> <span class="token number">3003</span><span class="token punctuation">;</span>
+
+app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token constant">PORT</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Server running on port </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token constant">PORT</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<!-- -->
+<p> 其他一切似乎都工作得很好，但是，正如你所期望的，<i>app.get</i>的<i>req</i>和<i>res</i>参数需要输入。如果你仔细观察，VSCode也在产生警告关于导入Express的一些问题。你可以看到在<i>require</i>下面有一条黄色的短线点。让我们把目光停留在这个问题上。</p>
+<picture><img style="border-color:#D4FCB5" alt="fullstack content" src="/static/6aaed1ead88e0c5c5cf0bb2be6ab794e/0786c/6.png"/></picture>
+<!-- -->
+<p> 投诉的内容是：<i>&quot;require&quot;的调用可能被转换为导入</i>。让我们听从建议，把导入写成下面的样子。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">import</span> express <span class="token keyword">from</span> <span class="token string">&#x27;express&#x27;</span><span class="token punctuation">;</span></code></pre></div>
+<!-- -->
+<p> <strong>nb</strong>:VSCode为你提供了一种可能性，通过点击<i>Quick Fix...</i>按钮自动修复这些问题。请留意这些助手/快速修复；听从你的编辑器通常会使你的代码更好，更容易阅读。对问题的自动修复也可以是一个主要的时间节省者。</p>
+<!-- -->
+<p> 现在我们遇到了另一个问题，编译器产生警告导入语句的问题。</p>
+<!-- -->
+<p> 再一次，当试图找出问题所在时，编辑器是我们最好的朋友。</p>
+<picture><img style="border-color:#D4FCB5" alt="fullstack content" src="/static/42c8ddc465ac50724204530330e17888/5a190/7.png"/></picture>
+<!-- -->
+<p> 我们还没有为<i>express</i>安装类型。</p>
+<!-- -->
+<p>让我们按建议做并运行。</p>
+<div class="gatsby-highlight" data-language="text"><pre><code class="language-text">npm install --save-dev @types/express</code></pre></div>
+<!-- -->
+<p> 再也没有错误了!让我们来看看有什么变化。</p>
+<!-- -->
+<p> 当我们把目光停留在<i>require</i>语句上时，我们可以看到编译器把所有与表达有关的东西都解释为<i>any</i>类型。</p>
+<picture><img style="border-color:#D4FCB5" alt="fullstack content" src="/static/1cd92a8bd9863c3ce7156427741c4e93/5a190/8a.png"/></picture>
+<!-- -->
+<p> 而当我们使用<i>import</i>时，编辑器知道实际类型。</p>
+<picture><img style="border-color:#D4FCB5" alt="fullstack content" src="/static/4a2694074c75032a45d3d8567cb56067/5a190/9x.png"/></picture>
+<!-- -->
+<p> 使用哪种导入语句取决于导入包中使用的导出方法。</p>
+<!-- -->
+<p> 一个好的经验法则是先尝试用<i>import</i>语句导入一个模块。我们总是在<i>前端</i>中使用这种方法。</p>
+<!-- -->
+<p> 如果 <i>import</i> 不起作用，请尝试使用组合方法。<i>import ... = require(&#x27;&#x27;...&#x27;)</i>。</p>
+<!-- -->
+<p> 我们强烈建议你阅读更多关于TypeScript模块的信息<a href="https://www.typescriptlang.org/docs/handbook/modules.html">这里</a>。</p>
+<!-- -->
+<p> 这段代码还有一个问题。</p>
+<picture><img style="border-color:#D4FCB5" alt="fullstack content" src="/static/b8b508be11f6f46ca98515ef7dcf11c0/5a190/9b.png"/></picture>
+<!-- -->
+<p>这是因为我们在<i>tsconfig.json</i>中禁止了未使用的参数。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token punctuation">{</span>
+  <span class="token string-property property">&quot;compilerOptions&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token string-property property">&quot;target&quot;</span><span class="token operator">:</span> <span class="token string">&quot;ES2020&quot;</span><span class="token punctuation">,</span>
+    <span class="token string-property property">&quot;strict&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token string-property property">&quot;noUnusedLocals&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+<span class="gatsby-highlight-code-line">    <span class="token string-property property">&quot;noUnusedParameters&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span></span>    <span class="token string-property property">&quot;noImplicitReturns&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token string-property property">&quot;noFallthroughCasesInSwitch&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token string-property property">&quot;esModuleInterop&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p> 如果你有库中的预定义函数，需要声明一个变量，即使它根本没有被使用，这种配置可能会产生问题，这里就是这样。</p>
+<!-- -->
+<p> 幸运的是，这个问题已经在配置层面得到了解决。</p>
+<!-- -->
+<p> 再一次将鼠标悬停在这个问题上，我们得到了一个解决方案。这一次我们可以直接点击快速修复按钮。</p>
+<picture><img style="border-color:#D4FCB5" alt="fullstack content" src="/static/1c9e9465bd26936e8e95df71cf69292f/5a190/14a.png"/></picture>
+<!-- -->
+<p> 如果绝对不可能摆脱一个未使用的变量，你可以在它前面加上一个下划线，通知编译器你已经考虑过了，你也无能为力。</p>
+<!-- -->
+<p> 我们把<i>req</i>变量重命名为<i>_req</i>。最后我们准备启动应用。它似乎工作得很好。</p>
+<picture><img style="border-color:#D4FCB5" alt="fullstack content" src="/static/0ce223dcd8032134d6854a274d4b8ef9/5a190/11a.png"/></picture>
+<!-- -->
+<p> 为了简化开发，我们应该启用<i>自动重载</i>来改善我们的工作流程。在本课程中，你已经使用了<i>nodemon</i>，但是ts-node有一个替代品，叫做<i>ts-node-dev</i>。它只适用于开发环境，在每次修改时都会进行重新编译，所以重新启动应用是不必要的。</p>
+<!-- -->
+<p> 让我们把<i>ts-note-dev</i>安装到我们的开发依赖项中。</p>
+<div class="gatsby-highlight" data-language="text"><pre><code class="language-text">npm install --save-dev ts-node-dev</code></pre></div>
+<!-- -->
+<p> 在<i>package.json</i>中添加一个脚本。</p>
+<div class="gatsby-highlight" data-language="json"><pre><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+  <span class="token property">&quot;scripts&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token comment">// ...</span>
+<span class="gatsby-highlight-code-line">      <span class="token property">&quot;dev&quot;</span><span class="token operator">:</span> <span class="token string">&quot;ts-node-dev index.ts&quot;</span><span class="token punctuation">,</span></span>  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token comment">// ...</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p> 现在，通过运行<i>npm run dev</i>，我们的项目有了一个可以工作的、自动重载的开发环境!</p>
+</div></div>
+<div class="banner spacing tasks content-banner" style="background-color:#D4FCB5;border-color:#D4FCB5"><div class="course-content " style="border-color:#D4FCB5;background-color:transparent"><div class="course-content-inner ">
+<h3>Exercises 9.4.-9.5.</h3>
+<h4>9.4 Express</h4>
+<!-- -->
+<p> 将Express添加到你的依赖项中，并创建一个HTTP GET端点 <i>hello</i>，回答&#x27;&#x27;Hello Full Stack!</p>
+<!-- -->
+<p> 网络应用应该在生产模式下用<i>npm start</i>命令启动，在开发模式下用<i>npm run dev</i>命令启动。后者也应该使用<i>ts-node-dev</i>来运行该应用。</p>
+<!-- -->
+<p> 把你现有的<i>tsconfig.json</i>文件也替换成以下内容。</p>
+<div class="gatsby-highlight" data-language="json"><pre><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">&quot;compilerOptions&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;noImplicitAny&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;noImplicitReturns&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;strictNullChecks&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;strictPropertyInitialization&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;strictBindCallApply&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;noUnusedLocals&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;noUnusedParameters&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;noImplicitThis&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;alwaysStrict&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;esModuleInterop&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;declaration&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p> 确保没有任何错误!</p>
+<h4>9.5 WebBMI</h4>
+<!-- -->
+<p> 添加一个BMI计算器的端点，可以通过对端点<i>bmi</i>进行HTTP GET请求，并用<a href="https://en.wikipedia.org/wiki/Query_string">查询字符串参数</a>指定输入。例如，要得到一个身高180，体重72的人的BMI，网址是<a href="http://localhost:3002/bmi?height=180&amp;weight=72%E3%80%82">http://localhost:3002/bmi?height=180&amp;weight=72。</a></p>
+<!-- -->
+<p> 响应是一个json格式的文件。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token punctuation">{</span>
+  <span class="token literal-property property">weight</span><span class="token operator">:</span> <span class="token number">72</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">height</span><span class="token operator">:</span> <span class="token number">180</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">bmi</span><span class="token operator">:</span> <span class="token string">&quot;Normal (healthy weight)&quot;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p> 关于如何访问查询参数的信息，请参见<a href="http://expressjs.com/en/5x/api.html#req.query">Express文档</a>。</p>
+<!-- -->
+<p> 如果请求的查询参数类型错误或丢失，将给出一个带有适当状态代码和错误信息的响应。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token punctuation">{</span>
+  <span class="token literal-property property">error</span><span class="token operator">:</span> <span class="token string">&quot;malformatted parameters&quot;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p> 不要把计算器代码复制到文件<i>index.ts</i>；相反，把它变成一个<a href="https://www.typescriptlang.org/docs/handbook/modules.html">TypeScript模块</a>，可以在<i>index.ts</i>中导入。</p>
+</div></div></div>
+<div class="course-content "><div class="course-content-inner ">
+<h3>The horrors of <i>any</i></h3>
+<!-- -->
+<p> 现在我们已经完成了第一个端点，你可能注意到我们在这些小例子中几乎没有使用任何TypeScript。当仔细检查代码时，我们可以看到有一些危险潜伏在那里。</p>
+<!-- -->
+<p> 让我们把HTTP POST端点<i>calculate</i>添加到我们的应用。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> calculator <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&#x27;./calculator&#x27;</span><span class="token punctuation">;</span>
+
+<span class="token comment">// ...</span>
+
+app<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">&#x27;/calculate&#x27;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">{</span> value1<span class="token punctuation">,</span> value2<span class="token punctuation">,</span> op <span class="token punctuation">}</span> <span class="token operator">=</span> req<span class="token punctuation">.</span>body<span class="token punctuation">;</span>
+
+  <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token function">calculator</span><span class="token punctuation">(</span>value1<span class="token punctuation">,</span> value2<span class="token punctuation">,</span> op<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<!-- -->
+<p>当你把鼠标悬停在<i>calculate</i>函数上时，你可以看到<i>calculator</i>的打字，尽管代码本身并不包含任何打字。</p>
+<picture><img style="border-color:#D4FCB5" alt="fullstack content" src="/static/9a5513026b6fe6ab06a7c2dfdbfe3fae/5a190/12a21.png"/></picture>
+<!-- -->
+<p> 但是如果你把鼠标悬停在从请求中解析出来的值上，就会出现一个问题。</p>
+<picture><img style="border-color:#D4FCB5" alt="fullstack content" src="/static/8b80147c569dfdb6e4617fcc2f09c9f1/5a190/13a21.png"/></picture>
+<!-- -->
+<p>所有的变量都有<i>any</i>类型。这并不令人惊讶，因为还没有人给他们一个类型。有几种方法可以解决这个问题，但首先，我们必须考虑为什么会接受这个问题，以及类型<i>any</i>是怎么来的。</p>
+<!-- -->
+<p> 在TypeScript中，每一个没有类型的变量，其类型不能被隐式推断出来，就变成了类型<a href="http://www.typescriptlang.org/docs/handbook/basic-types.html#any">any</a>。Any是一种 &quot;通配符 &quot;类型，字面意思是代表<i>whatever</i>类型。</p>
+<!-- -->
+<p>当人们忘记对函数进行类型化时，事情就会经常变成隐含的任何类型。</p>
+<!-- -->
+<p>我们也可以显式地给事物输入<i>any</i>。隐式和显式任意类型之间的唯一区别是代码的外观；编译器并不关心这种区别。</p>
+<!-- -->
+<p> 然而，当<i>any</i>被显式执行时，程序员看到的代码与隐式推断时不同。</p>
+<!-- -->
+<p>隐式的<i>any</i>类型通常被认为是有问题的，因为它经常是由于程序员忘记了分配类型（或者懒得分配），而且它也意味着TypeScript的全部功能没有被正确利用。</p>
+<!-- -->
+<p>这就是为什么配置规则<a href="https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny">noImplicitAny</a>存在于编译器级别，并且强烈建议在任何时候都保持它。</p>
+<!-- -->
+<p>在少数情况下，当你真的不知道一个变量的类型是什么时，你应该在代码中明确说明。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">const</span> <span class="token literal-property property">a</span> <span class="token operator">:</span> any <span class="token operator">=</span> <span class="token comment">/* no clue what the type will be! */</span><span class="token punctuation">.</span></code></pre></div>
+<!-- -->
+<p> 我们已经在我们的例子中配置了<i>noImplicitAny</i>，那么为什么编译器没有产生警告隐含的<i>any</i>类型？</p>
+<!-- -->
+<p>原因是express <a href="https://expressjs.com/en/5x/api.html#req">Request</a>对象的<i>query</i>字段是明确的类型<i>any</i>。我们用来向应用发布数据的<i>request.body</i>字段也是如此。</p>
+<!-- -->
+<p> 如果我们想阻止开发者使用<i>any</i>类型呢？幸运的是，除了<i>tsconfig.json</i>，我们还有其他方法来强制执行编码风格。我们可以做的是使用<i>eslint</i>来管理</p>
+<!-- -->
+<p>我们的代码。</p>
+<!-- -->
+<p> 让我们安装eslint和它的TypeScript扩展。</p>
+<div class="gatsby-highlight" data-language="shell"><pre><code class="language-shell"><span class="token function">npm</span> <span class="token function">install</span> --save-dev eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser</code></pre></div>
+<!-- -->
+<p> 我们将把eslint配置为<a href="https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-explicit-any.md">disallow explicit any</a>。在<i>.eslintrc</i>中写入以下规则。</p>
+<div class="gatsby-highlight" data-language="json"><pre><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">&quot;parser&quot;</span><span class="token operator">:</span> <span class="token string">&quot;@typescript-eslint/parser&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;parserOptions&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;ecmaVersion&quot;</span><span class="token operator">:</span> <span class="token number">11</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;sourceType&quot;</span><span class="token operator">:</span> <span class="token string">&quot;module&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;plugins&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;@typescript-eslint&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;rules&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+<span class="gatsby-highlight-code-line">    <span class="token property">&quot;@typescript-eslint/no-explicit-any&quot;</span><span class="token operator">:</span> <span class="token number">2</span></span>  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p> (新版本的eslint默认有这个规则，所以你不一定需要单独添加它。)</p>
+<!-- -->
+<p> 让我们也设置一个<i>lint</i> npm脚本，通过修改<i>package.json</i>文件来检查扩展名为<i>.ts</i>的文件。</p>
+<div class="gatsby-highlight" data-language="json"><pre><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+  <span class="token property">&quot;scripts&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;start&quot;</span><span class="token operator">:</span> <span class="token string">&quot;ts-node index.ts&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;dev&quot;</span><span class="token operator">:</span> <span class="token string">&quot;ts-node-dev index.ts&quot;</span><span class="token punctuation">,</span>
+<span class="gatsby-highlight-code-line">      <span class="token property">&quot;lint&quot;</span><span class="token operator">:</span> <span class="token string">&quot;eslint --ext .ts .&quot;</span></span>      <span class="token comment">//  ...</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token comment">// ...</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p> 现在如果我们试图定义一个<i>any</i>类型的变量，lint会产生警告。</p>
+<picture><img style="border-color:#D4FCB5" alt="fullstack content" src="/static/b507fd23131ab2c569e987469a3f2265/5a190/13b.png"/></picture>
+<!-- -->
+<p> <a href="https://github.com/typescript-eslint/typescript-eslint">@typescript-eslint</a>有很多TypeScript专用的eslint规则，但你也可以在TypeScript项目中使用所有基本的eslint规则。</p>
+<!-- -->
+<p> 现在，我们也许应该使用推荐的设置，当我们发现我们想改变行为的时候，我们会在进行中修改规则。</p>
+<!-- -->
+<p> 在推荐设置的基础上，我们应该尽量熟悉这部分所要求的编码风格，<i>将每行代码末尾的分号设置为必填项</i>。</p>
+<!-- -->
+<p> 所以我们将使用下面的<i>.eslintrc</i>。</p>
+<div class="gatsby-highlight" data-language="json"><pre><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">&quot;extends&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token string">&quot;eslint:recommended&quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;plugin:@typescript-eslint/recommended&quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;plugin:@typescript-eslint/recommended-requiring-type-checking&quot;</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;plugins&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;@typescript-eslint&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;env&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;node&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;es6&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;rules&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;@typescript-eslint/semi&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;error&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;@typescript-eslint/explicit-function-return-type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;off&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;@typescript-eslint/explicit-module-boundary-types&quot;</span><span class="token operator">:</span> <span class="token string">&quot;off&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;@typescript-eslint/restrict-template-expressions&quot;</span><span class="token operator">:</span> <span class="token string">&quot;off&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;@typescript-eslint/restrict-plus-operands&quot;</span><span class="token operator">:</span> <span class="token string">&quot;off&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;@typescript-eslint/no-unused-vars&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token string">&quot;error&quot;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span> <span class="token property">&quot;argsIgnorePattern&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^_&quot;</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;no-case-declarations&quot;</span><span class="token operator">:</span> <span class="token string">&quot;off&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;parser&quot;</span><span class="token operator">:</span> <span class="token string">&quot;@typescript-eslint/parser&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;parserOptions&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;project&quot;</span><span class="token operator">:</span> <span class="token string">&quot;./tsconfig.json&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p> 少了不少分号，但这些很容易添加。我们还必须解决ESlint中关于<em>any</em>类型的问题。</p>
+<picture><img style="border-color:#D4FCB5" alt="fullstack content" src="/static/9c13126ba452242ccd3ffd0896dc91ae/5a190/50x.png"/></picture>
+<!-- -->
+<p> 我们可以而且应该禁用一些ESlint规则来从请求体中获取数据。</p>
+<!-- -->
+<p> 禁用<i>@typescript-eslint/no-unsafe-assignment</i>的destructuring赋值就差不多了。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js">app<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">&#x27;/calculate&#x27;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+<span class="gatsby-highlight-code-line">  <span class="token comment">// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment</span></span>  <span class="token keyword">const</span> <span class="token punctuation">{</span> value1<span class="token punctuation">,</span> value2<span class="token punctuation">,</span> op <span class="token punctuation">}</span> <span class="token operator">=</span> req<span class="token punctuation">.</span>body<span class="token punctuation">;</span>
+
+  <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token function">calculator</span><span class="token punctuation">(</span><span class="token function">Number</span><span class="token punctuation">(</span>value1<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">Number</span><span class="token punctuation">(</span>value2<span class="token punctuation">)</span><span class="token punctuation">,</span> op<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<!-- -->
+<p> 然而这仍然有一个问题需要处理，函数调用中的最后一个参数是不安全的。</p>
+<picture><img style="border-color:#D4FCB5" alt="fullstack content" src="/static/9d5d14d86a2d319a55d71a7d65e279f3/5a190/51x.png"/></picture>
+<!-- -->
+<p> 我们可以禁用另一条ESlint规则来解决这个问题。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js">app<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">&#x27;/calculate&#x27;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment">// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment</span>
+  <span class="token keyword">const</span> <span class="token punctuation">{</span> value1<span class="token punctuation">,</span> value2<span class="token punctuation">,</span> op <span class="token punctuation">}</span> <span class="token operator">=</span> req<span class="token punctuation">.</span>body<span class="token punctuation">;</span>
+
+<span class="gatsby-highlight-code-line">  <span class="token comment">// eslint-disable-next-line @typescript-eslint/no-unsafe-argument</span></span>  <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token function">calculator</span><span class="token punctuation">(</span><span class="token function">Number</span><span class="token punctuation">(</span>value1<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">Number</span><span class="token punctuation">(</span>value2<span class="token punctuation">)</span><span class="token punctuation">,</span> op<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<!-- -->
+<p> 我们现在得到了ESlint的沉默，但我们完全受用户的摆布。我们肯定应该对帖子的数据进行一些验证，如果数据无效，就给出一个适当的错误信息。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js">app<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">&#x27;/calculate&#x27;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment">// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment</span>
+  <span class="token keyword">const</span> <span class="token punctuation">{</span> value1<span class="token punctuation">,</span> value2<span class="token punctuation">,</span> op <span class="token punctuation">}</span> <span class="token operator">=</span> req<span class="token punctuation">.</span>body<span class="token punctuation">;</span>
+
+<span class="gatsby-highlight-code-line">  <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">!</span>value1 <span class="token operator">||</span> <span class="token function">isNaN</span><span class="token punctuation">(</span><span class="token function">Number</span><span class="token punctuation">(</span>value1<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span><span class="gatsby-highlight-code-line">    <span class="token keyword">return</span> res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token literal-property property">error</span><span class="token operator">:</span> <span class="token string">&#x27;...&#x27;</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span><span class="token number">400</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><span class="gatsby-highlight-code-line">  <span class="token punctuation">}</span></span>
+  <span class="token comment">// more validations here...</span>
+
+  <span class="token comment">// eslint-disable-next-line @typescript-eslint/no-unsafe-argument</span>
+  <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token function">calculator</span><span class="token punctuation">(</span><span class="token function">Number</span><span class="token punctuation">(</span>value1<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">Number</span><span class="token punctuation">(</span>value2<span class="token punctuation">)</span><span class="token punctuation">,</span> op<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+</div></div>
+<div class="banner spacing tasks content-banner" style="background-color:#D4FCB5;border-color:#D4FCB5"><div class="course-content " style="border-color:#D4FCB5;background-color:transparent"><div class="course-content-inner ">
+<h3>Exercises 9.6.-9.7.</h3>
+<h4>9.6 Eslint</h4>
+<!-- -->
+<p> 配置你的项目以使用上述eslint设置并修复所有的警告。</p>
+<h4>9.7 WebExercises</h4>
+<!-- -->
+<p> 在你的应用中为练习计算器添加一个端点。它应该通过对端点<i>exercises</i>做HTTP POST请求，并在请求体中输入。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token punctuation">{</span>
+  <span class="token string-property property">&quot;daily_exercises&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2.5</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token string-property property">&quot;target&quot;</span><span class="token operator">:</span> <span class="token number">2.5</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p> 响应是一个如下形式的json。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token punctuation">{</span>
+    <span class="token string-property property">&quot;periodLength&quot;</span><span class="token operator">:</span> <span class="token number">7</span><span class="token punctuation">,</span>
+    <span class="token string-property property">&quot;trainingDays&quot;</span><span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
+    <span class="token string-property property">&quot;success&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    <span class="token string-property property">&quot;rating&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    <span class="token string-property property">&quot;ratingDescription&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bad&quot;</span><span class="token punctuation">,</span>
+    <span class="token string-property property">&quot;target&quot;</span><span class="token operator">:</span> <span class="token number">2.5</span><span class="token punctuation">,</span>
+    <span class="token string-property property">&quot;average&quot;</span><span class="token operator">:</span> <span class="token number">1.2142857142857142</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p> 如果请求体的形式不对，会给出一个带有适当状态码和错误信息的响应。该错误信息是</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token punctuation">{</span>
+  <span class="token literal-property property">error</span><span class="token operator">:</span> <span class="token string">&quot;parameters missing&quot;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p> 或</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token punctuation">{</span>
+  <span class="token literal-property property">error</span><span class="token operator">:</span> <span class="token string">&quot;malformatted parameters&quot;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p>取决于错误。如果输入值没有正确的类型，即它们不是数字或可转换为数字，则会发生后者。</p>
+<!-- -->
+<p> 在这个练习中，你可能会发现在处理请求体中的数据时使用<i>explicit any</i>类型是有好处的。我们的eslint配置阻止了这一点，但是你可以通过在前一行插入以下注释来为某一行取消这一规则。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token comment">// eslint-disable-next-line @typescript-eslint/no-explicit-any</span></code></pre></div>
+<!-- -->
+<p> 你也可能遇到规则<i>no-unsafe-member-access</i>和<i>no-unsafe-assignment</i>的麻烦。在这个练习中，这些规则可以被忽略。</p>
+<!-- -->
+<p> 注意，你需要有一个正确的设置，以便掌握请求体；见<a href="/en/part3/node_js_and_express#receiving-data">第三章节</a>。</p>
+</div></div></div></div></div><div class="container spacing element--flex element--centered"><a class="edit-link" target="__BLANK" href="https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/edit/source/src/content/9/zh/part9b.md"><span>对讲课材料提出建议</span></a></div><div class="container spacing spacing--after-large prev-next__container "><a class="col-4--mobile push-right-1 prev" href="/zh/part9/背景与介绍"><div class=" element--flex element--column"><p>Part<!-- --> <!-- -->9a</p><b>上一部分</b></div></a><div class="col-1--mobile separator"></div><a class="col-4--mobile push-left-1 next" href="/zh/part9/type_script版的express应用"><div class=" element--flex element--column"><p>Part<!-- --> <!-- -->9c</p><b>下一部分</b></div></a></div></div></main><footer class="container spacing--after-small spacing--mobile element--flex" id="footer"><div class="col-5 push-right-3 col-10--mobile order-2--mobile order-2--tablet footer__links element--flex element--space-between"><a href="https://www.helsinki.fi/" class="col-5 col-4--mobile spacing--mobile"><div class="image col-6 image--contain image--invert"><div class="image__container"><img style="background-color:;background-opacity:0.5" class="image__content" src="/static/uoh_centre-3689cf9983a2ebc8089c8f078a9c4769.svg" alt="Helsingin yliopiston logo"/></div></div></a><a href="https://www.houston-inc.com/" class="col-5 col-4--mobile spacing--mobile"><div class="image col-6 image--contain image--invert"><div class="image__container"><img style="background-color:;background-opacity:0.5" class="image__content" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMjQ3cHgiIGhlaWdodD0iODJweCIgdmlld0JveD0iMCAwIDI0NyA4MiIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4KICAgIDwhLS0gR2VuZXJhdG9yOiBTa2V0Y2ggNTMuMiAoNzI2NDMpIC0gaHR0cHM6Ly9za2V0Y2hhcHAuY29tIC0tPgogICAgPHRpdGxlPmxvZ28vaG91c3RvbjwvdGl0bGU+CiAgICA8ZGVzYz5DcmVhdGVkIHdpdGggU2tldGNoLjwvZGVzYz4KICAgIDxkZWZzPgogICAgICAgIDxwb2x5Z29uIGlkPSJwYXRoLTEiIHBvaW50cz0iMCAwLjAyNjcxOTI2NzMgMTM4LjIwODE2NyAwLjAyNjcxOTI2NzMgMTM4LjIwODE2NyAzNi40NjU0MzgxIDAgMzYuNDY1NDM4MSI+PC9wb2x5Z29uPgogICAgPC9kZWZzPgogICAgPGcgaWQ9ImxvZ28vaG91c3RvbiIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgaWQ9ImhvdXN0b25fc2ltcGxlLmVwcy1jb3B5LTMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDU0LjU4MTg5MywgMjMuMjYzMDQwKSI+CiAgICAgICAgICAgIDxtYXNrIGlkPSJtYXNrLTIiIGZpbGw9IndoaXRlIj4KICAgICAgICAgICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI3BhdGgtMSI+PC91c2U+CiAgICAgICAgICAgIDwvbWFzaz4KICAgICAgICAgICAgPGcgaWQ9IkNsaXAtMiI+PC9nPgogICAgICAgICAgICA8cGF0aCBkPSJNODIuODA1MTI5OCwxMy41MDY2NjAzIEw4Mi44MDUxMjk4LDI1LjUzNjU1MDkgTDg1Ljk5MzYyOSwyNS41MzY1NTA5IEw4NS45OTM2MjksMTMuNTA2NjYwMyBMOTAuNDA2NTQ5MywxMy41MDY2NjAzIEw5MC40MDY1NDkzLDEwLjQ0NTY3ODQgTDc4LjM3NTEwMzYsMTAuNDQ1Njc4NCBMNzguMzc1MTAzNiwxMy41MDY2NjAzIEw4Mi44MDUxMjk4LDEzLjUwNjY2MDMgWiBNOTYuNDkxMDQ5NSwxNy45NjM2ODg1IEM5Ni40OTEwNDk1LDIwLjU1OTU1NzIgOTguMzE3ODU1NywyMi43MDc5ODQyIDEwMC44ODYxNTcsMjIuNzA3OTg0MiBDMTAzLjQ1NDg4MiwyMi43MDc5ODQyIDEwNS4yNDcxOTQsMjAuNTk1NDY1NyAxMDUuMjQ3MTk0LDE4LjAxNzk3NTMgTDEwNS4yNDcxOTQsMTguMDAwMDIxMSBDMTA1LjI0NzE5NCwxNS40MDQyOTM3IDEwMy40MjA1MjksMTMuMjU1ODY2NyAxMDAuODUyMjI4LDEzLjI1NTg2NjcgQzk4LjI4MzUwMjMsMTMuMjU1ODY2NyA5Ni40OTEwNDk1LDE1LjM2ODM4NTMgOTYuNDkxMDQ5NSwxNy45NDU3MzQzIEw5Ni40OTEwNDk1LDE3Ljk2MzY4ODUgWiBNOTMuMTQ3MDQxMywxOC4wMTc5NzUzIEw5My4xNDcwNDEzLDE3Ljk4MjA2NjkgQzkzLjE0NzA0MTMsMTMuNjg1NDk1NiA5Ni40MDQ4MTI3LDEwLjE3NjkzMDYgMTAwLjg4NjE1NywxMC4xNzY5MzA2IEMxMDUuMzY3OTI1LDEwLjE3NjkzMDYgMTA4LjU5MTM0MywxMy42NDk3Mjg1IDEwOC41OTEzNDMsMTcuOTQ1NzM0MyBMMTA4LjU5MTM0MywxNy45NjM2ODg1IEMxMDguNTkxMzQzLDIyLjI2MDI1OTggMTA1LjMzMzU3MiwyNS43Njg4MjQ3IDEwMC44NTIyMjgsMjUuNzY4ODI0NyBDOTYuMzcwMzE4LDI1Ljc2ODgyNDcgOTMuMTQ3MDQxMywyMi4zMTQxMjI0IDkzLjE0NzA0MTMsMTguMDE3OTc1MyBMOTMuMTQ3MDQxMywxOC4wMTc5NzUzIFogTTcwLjQxMTkxMzcsMjIuNzk3MDQ4NSBDNjguNzU2ODc0MiwyMi43OTcwNDg1IDY3LjM3ODIxNjYsMjIuMDgxMjgzMSA2Ni4wNjg0MDcsMjAuOTcxNzk3NCBMNjQuMTcyMTg3MiwyMy4zMTY0NDg0IEM2NS45MTMxODA4LDI0LjkyNzk0NTQgNjguMTM2Njc2MiwyNS43MzMzNDA0IDcwLjM0MzA2NTYsMjUuNzMzMzQwNCBDNzMuNDgwMTA1NSwyNS43MzMzNDA0IDc1LjY2OTI0NzYsMjQuMDUwMTY4IDc1LjY2OTI0NzYsMjEuMDYxMDAzIEw3NS42NjkyNDc2LDIxLjAyNTA5NDUgQzc1LjcyMTEzMSwxOC4zOTM0NTg4IDc0LjA0ODU2MTUsMTcuMzAxNzg1OCA3MS4xMDExMDExLDE2LjQ5NTgyNTMgQzY4LjU4NDY4MzQsMTUuODMzOTIyNiA2Ny45NjM5MTk5LDE1LjUxMTMxMjIgNjcuOTYzOTE5OSwxNC41MDg5ODYyIEw2Ny45NjM5MTk5LDE0LjQ3MzA3NzggQzY3Ljk2MzkxOTksMTMuNzM4OTM0MSA2OC42MDIyMTM1LDEzLjE2NjY2MTEgNjkuODI1NjQ0OSwxMy4xNjY2NjExIEM3MS4wNDk2NDE4LDEzLjE2NjY2MTEgNzIuMzA3OTkyMSwxMy43MjA5Nzk5IDczLjYwMDgzNywxNC42NTIwNTQ1IEw3NS4yNTU1OTM4LDEyLjE0NTk1NjkgQzczLjc4OTk5MjUsMTAuOTEwNjUwMiA3MS45ODA3MTY0LDEwLjIzMDM2OTIgNjkuODYwNTYzNywxMC4yMzAzNjkyIEM2Ni44OTU3MTQ3LDEwLjIzMDM2OTIgNjQuNzc1NTYyLDEyLjAzODY1NTcgNjQuNzc1NTYyLDE0Ljc3NzU5MjYgTDY0Ljc3NTU2MiwxNC44MTMwNzY5IEM2NC43NzU1NjIsMTcuODAyNjY2MSA2Ni42NzEwNzQ5LDE4LjY0NDUzNSA2OS41ODQxODE5LDE5LjQzMjExNzMgQzcyLjAxNDY0NTYsMjAuMDc2NjMxMiA3Mi41MTQ2Nzc2LDIwLjUwNjI2MDEgNzIuNTE0Njc3NiwyMS4zNDc3MDQ5IEw3Mi41MTQ2Nzc2LDIxLjM4MzA0NzkgQzcyLjUxNDY3NzYsMjIuMjYwMjU5OCA3MS43MjIyODg4LDIyLjc5NzA0ODUgNzAuNDExOTEzNywyMi43OTcwNDg1IEw3MC40MTE5MTM3LDIyLjc5NzA0ODUgWiBNMzEuMzM2NDY5NywxNy45NjM2ODg1IEMzMS4zMzY0Njk3LDIwLjU1OTU1NzIgMzMuMTYzNywyMi43MDc5ODQyIDM1LjczMTg1OTksMjIuNzA3OTg0MiBDMzguMzAwMTYxMSwyMi43MDc5ODQyIDQwLjA5MjQ3MjYsMjAuNTk1NDY1NyA0MC4wOTI0NzI2LDE4LjAxNzk3NTMgTDQwLjA5MjQ3MjYsMTguMDAwMDIxMSBDNDAuMDkyNDcyNiwxNS40MDQyOTM3IDM4LjI2NTI0MjMsMTMuMjU1ODY2NyAzNS42OTY5NDEsMTMuMjU1ODY2NyBDMzMuMTI5MjA1MywxMy4yNTU4NjY3IDMxLjMzNjQ2OTcsMTUuMzY4Mzg1MyAzMS4zMzY0Njk3LDE3Ljk0NTczNDMgTDMxLjMzNjQ2OTcsMTcuOTYzNjg4NSBaIE0yOC4wMDk3MDg5LDE4LjAxNzk3NTMgTDI4LjAwOTcwODksMTcuOTgyMDY2OSBDMjguMDA5NzA4OSwxMy42ODU0OTU2IDMxLjI2NzQ4MDMsMTAuMTc2OTMwNiAzNS43NDg4MjQ1LDEwLjE3NjkzMDYgQzQwLjIzMDczNDIsMTAuMTc2OTMwNiA0My40MzYxOTgsMTMuNjQ5NzI4NSA0My40NTQwMTA5LDE3Ljk0NTczNDMgTDQzLjQ1NDAxMDksMTcuOTYzNjg4NSBDNDMuNDU0MDEwOSwyMi4yNjAyNTk4IDQwLjE5NjIzOTUsMjUuNzY4ODI0NyAzNS43MTQ4OTUzLDI1Ljc2ODgyNDcgQzMxLjIzMjU2MTUsMjUuNzY4ODI0NyAyOC4wMDk3MDg5LDIyLjMxNDEyMjQgMjguMDA5NzA4OSwxOC4wMTc5NzUzIEwyOC4wMDk3MDg5LDE4LjAxNzk3NTMgWiBNNTMuODMwNDE3MSwyNS43MzMzNDA0IEM1Ny43NDI4ODEyLDI1LjczMzM0MDQgNjAuMjA3ODM5NywyMy40OTU4NDkyIDYwLjIwNzgzOTcsMTguOTMwNjcxNSBMNjAuMjA3ODM5NywxMC40MjcxNTg3IEw1Ny4wMDE4MTAzLDEwLjQyNzE1ODcgTDU3LjAwMTgxMDMsMTkuMDczNzM5OCBDNTcuMDAxODEwMywyMS40NzI2Nzc2IDU1LjgxMjMwODEsMjIuNjkwMDMgNTMuODY0NzcwNCwyMi42OTAwMyBDNTEuOTE3Mzc0MSwyMi42OTAwMyA1MC43Mjc3MzA1LDIxLjQxODk1NjMgNTAuNzI3NzMwNSwxOC45NjY1OCBMNTAuNzI3NzMwNSwxMC40MjcxNTg3IEw0Ny41Mzg2NjU4LDEwLjQyNzE1ODcgTDQ3LjUzODY2NTgsMTkuMDM3ODMxMyBDNDcuNTM4NjY1OCwyMy40Nzc4OTUgNDkuOTE3OTUzLDI1LjczMzM0MDQgNTMuODMwNDE3MSwyNS43MzMzNDA0IEw1My44MzA0MTcxLDI1LjczMzM0MDQgWiBNMy4xNTQ1NywzMy4xOTgxOTQ4IEwxMzUuMDM2NjMyLDMzLjE5ODE5NDggTDEzNS4wMzY2MzIsMy4zMDI0NDQ4OCBMMy4xNTQ1NywzLjMwMjQ0NDg4IEwzLjE1NDU3LDMzLjE5ODE5NDggWiBNMCwzNi40NzM5MjA0IEwxMzguMjA4MTY3LDM2LjQ3MzkyMDQgTDEzOC4yMDgxNjcsMC4wMjY3MTkyNjczIEwwLDAuMDI2NzE5MjY3MyBMMCwzNi40NzM5MjA0IFogTTE0LjgyMzExNDMsMTkuNDg1NDE0NCBMMjAuNzE4NjAwNSwxOS40ODU0MTQ0IEwyMC43MTg2MDA1LDI1LjUzNjU1MDkgTDIzLjkwNzY2NTIsMjUuNTM2NTUwOSBMMjMuOTA3NjY1MiwxMC40NDU2Nzg0IEwyMC43MTg2MDA1LDEwLjQ0NTY3ODQgTDIwLjcxODYwMDUsMTYuNDA2MDU0MiBMMTQuODIzMTE0MywxNi40MDYwNTQyIEwxNC44MjMxMTQzLDEwLjQ0NTY3ODQgTDExLjYzNDc1NjUsMTAuNDQ1Njc4NCBMMTEuNjM0NzU2NSwyNS41MzY1NTA5IEwxNC44MjMxMTQzLDI1LjUzNjU1MDkgTDE0LjgyMzExNDMsMTkuNDg1NDE0NCBaIE0xMTUuODY0OTIyLDE1Ljk0MTUwNjUgTDEyMi44OTc2MDIsMjUuNTM2NTUwOSBMMTI1LjYyMDk4OCwyNS41MzY1NTA5IEwxMjUuNjIwOTg4LDEwLjQ0NTY3ODQgTDEyMi40NjY0MTgsMTAuNDQ1Njc4NCBMMTIyLjQ2NjQxOCwxOS43MzYyMDggTDExNS42NTgzNzcsMTAuNDQ1Njc4NCBMMTEyLjcxMDkxNywxMC40NDU2Nzg0IEwxMTIuNzEwOTE3LDI1LjUzNjU1MDkgTDExNS44NjQ5MjIsMjUuNTM2NTUwOSBMMTE1Ljg2NDkyMiwxNS45NDE1MDY1IEwxMTUuODY0OTIyLDE1Ljk0MTUwNjUgWiIgaWQ9IkZpbGwtMSIgZmlsbD0iIzAwMDEwNSIgbWFzaz0idXJsKCNtYXNrLTIpIj48L3BhdGg+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4=" alt="Houston inc. logo"/></div></div></a></div><div class="col-5 col-5--mobile order-1--mobile order-1--tablet footer__navigation element--flex"><div class="footer__navigation-link-container"><a class="footer__navigation-link nav-item-hover" style="margin-left:4.5rem" href="/zh/about">关于课程</a><a class="footer__navigation-link nav-item-hover" style="margin-left:4.5rem" href="/zh/#course-contents">课程内容</a><a class="footer__navigation-link nav-item-hover" style="margin-left:4.5rem" href="/zh/faq">常见问题</a><a class="footer__navigation-link nav-item-hover" style="margin-left:4.5rem" href="/zh/companies">合作伙伴</a><a class="footer__navigation-link nav-item-hover" style="margin-left:4.5rem" href="/zh/challenge">挑战</a></div></div></footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script>
+  
+  
+  if(!(parseInt(navigator.doNotTrack) === 1 || parseInt(window.doNotTrack) === 1 || parseInt(navigator.msDoNotTrack) === 1 || navigator.doNotTrack === "yes")) {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  }
+  if (typeof ga === "function") {
+    ga('create', 'UA-135975842-1', 'fullstackopen.com', {});
+      
+      
+      
+      
+      
+      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/zh/part9/type_script的一小步";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-75fb52c954f6f26af1df.js"],"app":["/app-5c85c0dd7d8928d8110e.js"],"component---src-pages-404-js":["/component---src-pages-404-js-7ade4f77e72533222078.js"],"component---src-pages-about-en-js":["/component---src-pages-about-en-js-5c8c67b1928c69e56dd7.js"],"component---src-pages-about-es-js":["/component---src-pages-about-es-js-500af61a836ee791a10d.js"],"component---src-pages-about-fr-js":["/component---src-pages-about-fr-js-8b8247d2e3d5feea7415.js"],"component---src-pages-about-js":["/component---src-pages-about-js-6d577186ead477ee518e.js"],"component---src-pages-about-ptbr-js":["/component---src-pages-about-ptbr-js-017dab37f9941fec8637.js"],"component---src-pages-about-zh-js":["/component---src-pages-about-zh-js-f86b1a63d0a6ab3d5aa4.js"],"component---src-pages-challenge-en-js":["/component---src-pages-challenge-en-js-1bdfabfe8b163877a89b.js"],"component---src-pages-challenge-es-js":["/component---src-pages-challenge-es-js-288a3f90aec5c8bfdd71.js"],"component---src-pages-challenge-fr-js":["/component---src-pages-challenge-fr-js-973d9b3634cf0f3af406.js"],"component---src-pages-challenge-js":["/component---src-pages-challenge-js-e02742fcd695771ba567.js"],"component---src-pages-challenge-ptbr-js":["/component---src-pages-challenge-ptbr-js-82448b54b3946f3b5089.js"],"component---src-pages-challenge-zh-js":["/component---src-pages-challenge-zh-js-d6d60b17aa2c5fad0230.js"],"component---src-pages-companies-en-js":["/component---src-pages-companies-en-js-9dab5850a66e9c9936e7.js"],"component---src-pages-companies-es-js":["/component---src-pages-companies-es-js-aa42ec16d87f654db6a0.js"],"component---src-pages-companies-fr-js":["/component---src-pages-companies-fr-js-90c21d3dd434eefa196a.js"],"component---src-pages-companies-js":["/component---src-pages-companies-js-a2733abcfd4c2c97eb50.js"],"component---src-pages-companies-ptbr-js":["/component---src-pages-companies-ptbr-js-2e87659be7a706cdb867.js"],"component---src-pages-companies-zh-js":["/component---src-pages-companies-zh-js-83f510e380a3bfa14b17.js"],"component---src-pages-faq-en-js":["/component---src-pages-faq-en-js-33ebb91f09d4de79df18.js"],"component---src-pages-faq-es-js":["/component---src-pages-faq-es-js-d107f02cac406c142a9c.js"],"component---src-pages-faq-fr-js":["/component---src-pages-faq-fr-js-ca4072c35ab623fbdb84.js"],"component---src-pages-faq-js":["/component---src-pages-faq-js-bdc4d72ee25c1ba5f942.js"],"component---src-pages-faq-ptbr-js":["/component---src-pages-faq-ptbr-js-9a05d3bde67f9b1fde6c.js"],"component---src-pages-faq-zh-js":["/component---src-pages-faq-zh-js-b17e364956afec627cf6.js"],"component---src-pages-index-en-js":["/component---src-pages-index-en-js-b1f5c7f49cf40919f73e.js"],"component---src-pages-index-es-js":["/component---src-pages-index-es-js-998533641dda0b9f01db.js"],"component---src-pages-index-fr-js":["/component---src-pages-index-fr-js-70567fbce802bd2d77cd.js"],"component---src-pages-index-js":["/component---src-pages-index-js-786a0ac0fad33ad19995.js"],"component---src-pages-index-ptbr-js":["/component---src-pages-index-ptbr-js-9ee2d99f2e38bfca2049.js"],"component---src-pages-index-zh-js":["/component---src-pages-index-zh-js-4ac0d92183f85660d409.js"],"component---src-pages-search-en-js":["/component---src-pages-search-en-js-a2e0aaed03e993fd7980.js"],"component---src-pages-search-es-js":["/component---src-pages-search-es-js-f7bf9943351bdcba3d98.js"],"component---src-pages-search-fr-js":["/component---src-pages-search-fr-js-fcd41442b5b1e96d3259.js"],"component---src-pages-search-js":["/component---src-pages-search-js-eeaa3ef7f71ba4d05b34.js"],"component---src-pages-search-ptbr-js":["/component---src-pages-search-ptbr-js-355088678882ac4e923d.js"],"component---src-pages-search-zh-js":["/component---src-pages-search-zh-js-0cb7467f6dc3d1eadb10.js"],"component---src-templates-content-template-js":["/component---src-templates-content-template-js-3ca891c40689f33ff860.js"],"component---src-templates-part-intro-template-js":["/component---src-templates-part-intro-template-js-29e60d2d6a6812d20cc6.js"]};/*]]>*/</script><script src="/polyfill-75fb52c954f6f26af1df.js" nomodule=""></script><script src="/webpack-runtime-34e1662e50c380423dfa.js" async=""></script><script src="/styles-0ec71dd62c66cb95665c.js" async=""></script><script src="/framework-4417e1b5ff8c945c03a5.js" async=""></script><script src="/app-5c85c0dd7d8928d8110e.js" async=""></script><script src="/commons-15e69e84caf1d6379b61.js" async=""></script><script src="/0f38e1748197b5a213e89e1df6d5db13e5e7856d-c525d6df853b8eccb391.js" async=""></script><script src="/881c8b7a675fce2ced9b02a4a469c0443336d5f7-8e4483d8931a6891bd9a.js" async=""></script><script src="/2d359d657f593a857b7e0d916f29b2126c86bebb-dcc47509ede0fcbd2a57.js" async=""></script><script src="/d2b1ca4b1069f7cfc0ac3ccd2306fbb8e76bcf35-b1e80b991af31a506d6d.js" async=""></script><script src="/8bb9eac36a062a5713b6d250f5709a608793ccd4-c6521a3391552441c602.js" async=""></script><script src="/component---src-templates-content-template-js-3ca891c40689f33ff860.js" async=""></script></body></html>

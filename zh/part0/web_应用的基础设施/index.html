@@ -1,0 +1,654 @@
+<!DOCTYPE html><html lang="zh"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><style data-href="/styles.388bc8e994c951314a5c.css" id="gatsby-global-css">@import url(https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,500,600);@import url(https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,500,600);code[class*=language-],pre[class*=language-]{color:#fff;background:none;text-shadow:0 -.1em .2em #000;font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;font-size:1em;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;tab-size:4;-webkit-hyphens:none;hyphens:none}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}:not(pre)>code[class*=language-],pre[class*=language-]{background:#4d4033}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto;border:.3em solid #7a6652;border-radius:.5em;box-shadow:inset 1px 1px .5em #000}:not(pre)>code[class*=language-]{padding:.15em .2em .05em;border-radius:.3em;border:.13em solid #7a6652;box-shadow:inset 1px 1px .3em -.1em #000;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#998066}.token.namespace,.token.punctuation{opacity:.7}.token.boolean,.token.constant,.token.number,.token.property,.token.symbol,.token.tag{color:#d1949e}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#bde052}.language-css .token.string,.style .token.string,.token.entity,.token.operator,.token.url,.token.variable{color:#f5b83d}.token.atrule,.token.attr-value,.token.keyword{color:#d1949e}.token.important,.token.regex{color:#e90}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}.token.deleted{color:red}.course{position:relative;width:100%}@media (min-width:992px){.course{display:flex;flex-wrap:nowrap;flex-direction:row;align-items:flex-start}}.course p{font-family:IBM Plex Sans,monospace}@media (min-width:640px){.course p{margin-left:1rem}}.course p:not(:last-of-type){margin-bottom:1rem}@media (min-width:640px){.course h1{margin-left:3rem}}.course h2,.course h3,.course h4{padding-bottom:2rem}@media (min-width:640px){.course h2,.course h3,.course h4,.course table{margin-left:1rem}}.course ul{font-family:IBM Plex Sans,monospace}@media (min-width:640px){.course ul{margin-left:2.2rem}}.course h2:not(:first-of-type){margin-top:2rem}.course pre{margin:2rem 0;background-color:var(--color-pre-background);color:#fff}.course em{font-family:Courier;font-style:normal;background-color:rgba(var(--color-main),.6);padding:1px 5px 2px}.course img{border:11px solid transparent}.course .banner,.course .container{position:static}.course .letter{width:4rem;height:4rem;border-width:5px;border-style:solid;border-radius:2.5rem;text-align:center;margin:1rem;line-height:1.3em;transform:translate(-1rem)}@media (min-width:640px){.course .letter{transform:translate(-3rem,4.5rem)}}.course .letter,.course h1{font-size:2.3rem;font-weight:700}.course-content-container{width:100%}.course-content a,.tasks a{border:0;border-bottom-width:2px;border-style:solid;padding:2px}.course-content a:hover,.tasks a:hover{color:#33332d}.course-content{width:90%;margin:0 auto;max-width:1200px}@media (min-width:992px){.course-content-inner{padding-left:30%;padding-right:5%}}.course-content-inner blockquote{padding-left:.5rem;border-left:2px solid #888}html[data-theme=dark] .tasks{background-color:var(--color-background)!important;border-left:5px solid;border-top:1px dotted;border-bottom:1px dotted}@media (min-width:992px){html[data-theme=dark] .tasks{border-left:15px solid}}.tasks a{border-color:var(--color-text)!important}.tasks a:hover{background-color:#fff!important;color:#000!important}.gatsby-highlight-code-line{background-color:hsla(0,0%,88.2%,.3);display:block;margin-right:-1em;margin-left:-1em;padding-right:1em;padding-left:1em}code[class*=language-],pre[class*=language-]{text-shadow:none}.arrow-go-up{width:36px;height:36px;position:fixed;bottom:5%;right:5%;z-index:40;cursor:pointer}html[data-theme=dark] .arrow-go-up{filter:invert(1)}@media (max-width:639px){.arrow-go-up{right:10%}}.part-main__banner{background-position:50%;background-size:50%;padding-bottom:10%;background-repeat:no-repeat}@media (max-width:639px){.part-main__banner{background-position:top;background-size:70%;padding-bottom:30%!important}}.part-intro{font-family:IBM Plex Sans,monospace!important}.part-intro li,.part-intro p{color:#33332d}.part-intro p:not(:last-of-type){padding-bottom:2em}.part-intro__banner{background-size:50%;background-repeat:no-repeat;background-position:100%}@media (max-width:639px){.part-intro__banner{background-position:top;background-size:70%}.part-intro__banner>.container{margin-top:40%}}.part-intro a{color:#33332d;border-bottom:1px solid #33332d}.part-intro a:hover{background-color:#fff}.arrow__container{position:relative}.arrow__container:not():first-child{background:none;background-color:none}@media (min-width:640px){.arrow__container:not():first-child{border-left:none}.arrow__container:not():first-child:before{content:"";background:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/PjwhLS1HZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjEuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCktLT48c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkNhcGFfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA0NzcuMTc1IDQ3Ny4xNzUiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQ3Ny4xNzUgNDc3LjE3NSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PGc+PHBhdGggZD0iTTM2MC43MzEsMjI5LjA3NWwtMjI1LjEtMjI1LjFjLTUuMy01LjMtMTMuOC01LjMtMTkuMSwwcy01LjMsMTMuOCwwLDE5LjFsMjE1LjUsMjE1LjVsLTIxNS41LDIxNS41CgkJYy01LjMsNS4zLTUuMywxMy44LDAsMTkuMWMyLjYsMi42LDYuMSw0LDkuNSw0YzMuNCwwLDYuOS0xLjMsOS41LTRsMjI1LjEtMjI1LjFDMzY1LjkzMSwyNDIuODc1LDM2NS45MzEsMjM0LjI3NSwzNjAuNzMxLDIyOS4wNzV6CgkJIi8+PC9nPjxnLz48Zy8+PGcvPjxnLz48Zy8+PGcvPjxnLz48Zy8+PGcvPjxnLz48Zy8+PGcvPjxnLz48Zy8+PGcvPjwvc3ZnPg==) no-repeat;background-size:contain;position:absolute;top:0;left:0;height:100%;width:100%}}.arrows--horizontal{display:flex;position:relative;margin:0;align-items:flex-start}.arrow__wrapper{display:flex;justify-content:flex-start;align-items:center;margin:0}.arrow__wrapper:first-of-type{border-right:none;z-index:20}.arrow__wrapper:nth-of-type(n+2){margin-left:-4rem;z-index:10}.arrow__wrapper:nth-of-type(n+2) .arrow__rectangle{border-left:none;padding-left:4rem}.arrow__wrapper:nth-of-type(3){z-index:5}.arrow__wrapper:hover .arrow__point,.arrow__wrapper:hover .arrow__rectangle,.arrow__wrapper:hover .arrow__rectangle>a{background-color:#33332d!important;color:#fff!important}.arrow__rectangle{padding:1rem;justify-content:center;align-items:center;border:2px solid #33332d;border-right:none;z-index:2;overflow:hidden;font-family:IBM Plex Sans,monospace;position:relative}.arrow__rectangle a{color:#33332d}@media (max-width:991px){.arrow__rectangle{font-size:1rem}}.arrow__rectangle .bold{font-weight:600}.arrow__rectangle--thick-border{border:3px solid #33332d;border-right:none}.arrow__point{padding:1.25rem;border:2px solid #33332d;border-bottom:none;border-left:none;transform:translate(-1.3rem) rotate(45deg);z-index:1;overflow:hidden}.arrow__point--thick-border{border:3px solid #33332d;border-bottom:none;border-left:none}.arrow__wrapper--stacked{display:flex;justify-content:flex-start;align-items:center;margin:auto auto auto 0}@media (max-width:639px){.arrow__wrapper--stacked .arrow__rectangle{border:none;background-color:transparent!important;padding:0;font-size:1rem;justify-content:unset}.arrow__wrapper--stacked .arrow__rectangle>p>span{border-bottom:1px solid #33332d;margin:auto}.arrow__wrapper--stacked .arrow__rectangle>p>span:hover{background-color:#fff!important;color:#000}.arrow__wrapper--stacked .arrow__point{display:none}}.arrow__wrapper--stacked:nth-of-type(n+2){margin-top:1rem}@media (min-width:640px){.arrow__wrapper--stacked:nth-of-type(n+2){margin-top:-2px}}.arrow__wrapper--stacked .arrow__rectangle{position:relative}@media (min-width:640px){.arrow__wrapper--stacked .arrow__rectangle{padding:1.25rem}}@media (min-width:992px){.arrow__wrapper--stacked .arrow__rectangle{padding:1rem}}.arrow__wrapper--stacked .arrow__point{padding:1.08rem;margin-left:2px}@media (min-width:640px){.arrow__wrapper--stacked .arrow__point{margin-left:unset;padding:1.25rem}}@media (min-width:640px){.arrow__wrapper--stacked:hover .arrow__point,.arrow__wrapper--stacked:hover .arrow__rectangle{background-color:#33332d!important}}@media (min-width:640px){.arrow__wrapper--stacked:hover .arrow--stacked-letter,.arrow__wrapper--stacked:hover .arrow--stacked-title{color:#fff}}.arrow--stacked-title{font-family:IBM Plex Mono,monospace;color:#33332d}@media (min-width:640px){.arrow--stacked-title{white-space:nowrap}}.arrow__container--with-link{width:100%!important}@media (max-width:639px){.breadcrumb .arrow__wrapper{display:none}}.breadcrumb .arrow__wrapper:hover .arrow__point,.breadcrumb .arrow__wrapper:hover .arrow__rectangle{background-color:#33332d!important}.breadcrumb .arrow__wrapper:hover .arrow--stacked-letter,.breadcrumb .arrow__wrapper:hover .arrow--stacked-title{color:#fff}.breadcrumb .arrow__rectangle{position:relative}@media (max-width:639px){.breadcrumb .arrow__rectangle{border:none;padding:0;font-size:.7rem;white-space:nowrap;background-color:transparent!important;color:#33332d}}@media (max-width:639px){.breadcrumb .arrow__point{display:none}}.banner{display:flex;width:100%;align-items:center;position:relative;padding:2rem 0;background-color:var(--color-main)}@media (min-width:992px){.banner{padding:3.444rem 3.444rem 4.444rem}}html{font-family:IBM Plex Mono,monospace;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block}audio:not([controls]){display:none;height:0}progress{vertical-align:baseline}[hidden],template{display:none}a{background-color:transparent;-webkit-text-decoration-skip:objects}a:active,a:hover{outline-width:0}abbr[title]{border-bottom:none;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted}b,strong{font-weight:inherit;font-weight:bolder}dfn{font-style:italic}h1{font-size:2em;margin:.67em 0}mark{background-color:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}svg:not(:root){overflow:hidden}code,kbd,pre,samp{font-family:IBM Plex Mono,monospace;font-size:1em}figure{margin:1em 40px}hr{box-sizing:content-box;height:0;overflow:visible}button,input,optgroup,select,textarea{font:inherit;margin:0}optgroup{font-weight:700}button,input{overflow:visible}button,select{text-transform:none}[type=reset],[type=submit],button,html [type=button]{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-cancel-button,[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-input-placeholder{color:inherit;opacity:.54}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}html{font:112.5%/1.45em IBM Plex Mono,monospace;box-sizing:border-box;overflow-y:scroll}*,:after,:before{box-sizing:inherit}body{color:hsla(var(--color-text-hsl),.8);font-family:IBM Plex Mono,monospace;font-weight:400;word-wrap:break-word;font-kerning:normal;-ms-font-feature-settings:"kern","liga","clig","calt";font-feature-settings:"kern","liga","clig","calt"}img{max-width:100%;padding:0;margin:0 0 1.45rem}h1{font-size:2.25rem}h1,h2{padding:0;margin:0 0 1.45rem;color:inherit;font-family:IBM Plex Mono,monospace;font-weight:700;text-rendering:optimizeLegibility;line-height:1.1}h2{font-size:1.62671rem}h3{margin:2rem 0 -.5rem;font-size:1.38316rem}h3,h4{padding:0;color:inherit;font-family:IBM Plex Mono,monospace;font-weight:700;text-rendering:optimizeLegibility;line-height:1.1}h4{margin:2rem 0 -1rem;font-size:1rem}h5{font-size:.85028rem}h5,h6{padding:0;margin:0 0 1.45rem;color:inherit;font-family:IBM Plex Mono,monospace;font-weight:700;text-rendering:optimizeLegibility;line-height:1.1}h6{font-size:.78405rem}hgroup{padding:0;margin:0 0 1.45rem}ol,ul{padding:0;margin:0 0 1.45rem 1.45rem;list-style-position:outside;list-style-image:none}dd,dl,figure,p{padding:0;margin:0 0 1.45rem}pre{margin:0 0 1.45rem;font-size:.85rem;line-height:1.42;background:hsla(var(--color-text-hsl),.04);border-radius:3px;word-wrap:normal;padding:1.45rem}table{font-size:1rem;line-height:1.45rem;border-collapse:collapse;width:100%}fieldset,table{padding:0;margin:0 0 1.45rem}blockquote{padding:0;margin:0 1.45rem 1.45rem}form,iframe,noscript{padding:0;margin:0 0 1.45rem}hr{padding:0;margin:0 0 calc(1.45rem - 1px);background:hsla(var(--color-text-hsl),.2);border:none;height:1px}address{padding:0;margin:0 0 1.45rem}b,dt,strong,th{font-weight:700}li{margin-bottom:.725rem}ol li,ul li{padding-left:0}li>ol,li>ul{margin-left:1.45rem;margin-bottom:.725rem;margin-top:.725rem}blockquote :last-child,li :last-child,p :last-child{margin-bottom:0}li>p{margin-bottom:.725rem}code,kbd,samp{font-size:.85rem;line-height:1.45rem}abbr,abbr[title],acronym{border-bottom:1px dotted hsla(var(--color-text-hsl),.5);cursor:help}abbr[title]{text-decoration:none}td,th,thead{text-align:left}td,th{border-bottom:1px solid hsla(var(--color-text-hsl),.12);font-feature-settings:"tnum";-moz-font-feature-settings:"tnum";-ms-font-feature-settings:"tnum";-webkit-font-feature-settings:"tnum";padding:.725rem .96667rem calc(.725rem - 1px)}td:first-child,th:first-child{padding-left:0}td:last-child,th:last-child{padding-right:0}code,tt{background-color:hsla(var(--color-text-hsl),.04);border-radius:3px;font-family:SFMono-Regular,Consolas,Roboto Mono,Droid Sans Mono,Liberation Mono,Menlo,Courier,monospace;padding:.2em 0}pre code{background:none;line-height:1.42}code:after,code:before,tt:after,tt:before{letter-spacing:-.2em;content:" "}pre code:after,pre code:before,pre tt:after,pre tt:before{content:""}@media only screen and (max-width:480px){html{font-size:100%}}:root,html[data-theme=light]{--color-background:#fff;--color-text:#33332d;--color-text-hsl:0,0%,0%;--color-link-decoration:#e1e1e1;--color-main:#e1e1e1;--color-pre-background:#33332d}html[data-theme=dark]{--color-background:#33332d;--color-text:#fff;--color-text-hsl:0,100%,100%;--color-link-decoration:#a0a0a0;--color-main:#212121;--color-pre-background:#212121}body,html{margin:0;padding:0;font-family:IBM Plex Mono,monospace;font-weight:400;background-color:var(--color-background);color:var(--color-text);font-size:14px;line-height:1.555rem}@media (min-width:992px){body,html{font-size:18px}}.main-wrapper{min-height:100vh;display:flex;flex-direction:column}p{margin:0;text-align:left;line-height:1.5em}a,p{color:var(--color-text)}a{text-decoration:none}.link a{border-bottom:2px solid var(--color-link-decoration)}.link a:hover{background-color:var(--color-main)}.container{position:relative;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;width:90%;max-width:1300px}@media (max-width:639px){.container{padding:0 20px}}@media (min-width:992px){.container--right{margin-right:5%;width:54%;max-width:779.9844px}}@media (min-width:992px) and (min-width:1300px){.container--right{margin-right:calc(50% - 650px)}}.hidden{display:none!important}.centered{text-align:center}@media (max-width:639px){.centered--mobile{justify-content:center;align-content:center;align-items:center}}.spacing{margin-top:2rem}@media (max-width:992px) and (min-width:640px){.spacing--tablet{margin-top:5rem!important}}@media (min-width:992px){.spacing{margin-top:5rem}}.spacing--small{margin-top:1rem}@media (min-width:992px){.spacing--small{margin-top:3.444rem}}.spacing--large{margin-top:4rem}@media (min-width:992px){.spacing--large{margin-top:10rem}}.spacing--extra-large{margin-top:4rem}@media (min-width:992px){.spacing--extra-large{margin-top:20rem}}.spacing--after{margin-bottom:2rem}@media (min-width:992px){.spacing--after{margin-bottom:5rem}}@media (max-width:639px){.spacing--after--mobile{margin-bottom:5rem}}@media (min-width:992px){.spacing--after-small{margin-bottom:2.5rem}}.spacing--after-large{margin-bottom:4rem}@media (min-width:992px){.spacing--after-large{margin-bottom:10rem}}@media (max-width:991px){.spacing--mobile{margin-top:2rem}}@media (max-width:1299px){.spacing--mobile--small{margin-top:1.5rem}}@media (max-width:1299px){.spacing--mobile--large{margin-top:3rem}}.col-1{width:100%}@media (min-width:992px){.col-1{width:10%}}.col-2{width:100%}@media (min-width:992px){.col-2{width:20%}}.col-3{width:100%}@media (min-width:992px){.col-3{width:30%}}.col-4{width:100%}@media (min-width:992px){.col-4{width:40%}}.col-5{width:100%}@media (min-width:992px){.col-5{width:50%}}.col-6{width:100%}@media (min-width:992px){.col-6{width:60%}}.col-7{width:100%}@media (min-width:992px){.col-7{width:70%}}.col-8{width:100%}@media (min-width:992px){.col-8{width:80%}}.col-9{width:100%}@media (min-width:992px){.col-9{width:90%}}.col-10{width:100%}@media (min-width:992px){.col-10{width:100%}}@media (min-width:992px){.push-right-1{margin-left:10%}.push-right-2{margin-left:20%}.push-right-3{margin-left:30%}.push-right-4{margin-left:40%}.push-right-5{margin-left:50%}.push-left-1{margin-right:10%}.push-left-2{margin-right:20%}.push-left-3{margin-right:30%}.push-left-4{margin-right:40%}.push-left-5{margin-right:50%}.push-left{margin-right:auto}.push-right{margin-left:auto}}@media (max-width:639px){.col-1--mobile{width:10%!important}.col-2--mobile{width:20%!important}.col-3--mobile{width:30%!important}.col-4--mobile{width:40%!important}.col-5--mobile{width:50%!important}.col-6--mobile{width:60%!important}.col-7--mobile{width:70%!important}.col-8--mobile{width:80%!important}.col-9--mobile{width:90%!important}.col-10--mobile{width:100%!important}.push-right-1--mobile{margin-left:10%!important}.push-right-2--mobile{margin-left:20%!important}.push-right-3--mobile{margin-left:30%!important}.push-right-4--mobile{margin-left:40%!important}.push-right-5--mobile{margin-left:50%!important}.push-left-1--mobile{margin-right:10%!important}.push-left-2--mobile{margin-right:20%!important}.push-left-3--mobile{margin-right:30%!important}.push-left-4--mobile{margin-right:40%!important}.push-left-5--mobile{margin-right:50%!important}.order-0--mobile{order:0}.order-1--mobile{order:1}.order-2--mobile{order:2}.order-3--mobile{order:3}.order-4--mobile{order:4}.order-5--mobile{order:5}.hidden--mobile{display:none}}@media (max-width:1299px){.col-1--tablet{width:10%}.col-2--tablet{width:20%}.col-3--tablet{width:30%}.col-4--tablet{width:40%}.col-5--tablet{width:50%}.col-6--tablet{width:60%}.col-7--tablet{width:70%}.col-8--tablet{width:80%}.col-9--tablet{width:90%}.col-10--tablet{width:100%}.order-0--tablet{order:0}.order-1--tablet{order:1}.order-2--tablet{order:2}.order-3--tablet{order:3}.order-4--tablet{order:4}.order-5--tablet{order:5}.order-0--mobile{order:0}.order-1--mobile{order:1}.order-2--mobile{order:2}.order-3--mobile{order:3}.order-4--mobile{order:4}.order-5--mobile{order:5}.hidden--mobile{display:none}}.centered-vertically{display:flex;flex-direction:column;justify-content:center}.nav-item-hover{text-decoration:none;color:var(--color-text);font-weight:500;padding:.2em}@media (min-width:640px){.nav-item-hover{font-weight:600}}.nav-item-hover:active,.nav-item-hover:focus,.nav-item-hover:hover{color:var(--color-background);background-color:var(--color-text)!important}.nav-item-hover:active,.nav-item-hover:focus{outline:2px solid #706be4}.nav-item-active{border-bottom:2px solid var(--color-text)}.flex-fix-aligning:after,.flex-fix-aligning:before{content:"";width:30%;order:2}.auto-bottom-margin{margin-bottom:auto}.frontpage-hero{flex-direction:column;flex-wrap:nowrap}@media (max-width:991px){.frontpage-hero__content{z-index:1;margin-bottom:3rem}}.frontpage-hero__heading{-webkit-hyphens:auto;hyphens:auto;font-size:2rem}@media (min-width:640px){.frontpage-hero__heading{font-size:2.5rem}}@media (min-width:1300px){.frontpage-hero__heading{font-size:3rem}}.frontpage-hero__cta{display:inline-block;margin-bottom:4rem}.frontpage-hero__description{max-width:626px}@media (max-width:991px){.frontpage-hero__image{position:absolute!important;right:-5%;top:-40px;opacity:.1}.frontpage-hero__image img{transform:translateX(33%)}}@media (max-width:639px){.frontpage-hero__image{right:-40px}}.heading-font{font-family:IBM Plex Sans,monospace}.about__challenge-button{box-shadow:-3px 5px var(--color-text);padding:.6rem 1rem;border:3px solid var(--color-text);font-weight:600}.about__challenge-button:hover{background-color:var(--color-text);color:var(--color-background);cursor:pointer}.about__challenge-button--turquoise{background-color:#82f7eb}html[data-theme=dark] .about__challenge-button{color:var(--color-text);box-shadow:-3px 5px var(--color-text);border:3px solid var(--color-text)}html[data-theme=dark] .about__challenge-button:hover{background-color:var(--color-text);color:var(--color-background)}html[data-theme=dark] .about__challenge-button--turquoise{color:var(--color-main);box-shadow:-3px 5px var(--color-main);border:3px solid var(--color-main)}html[data-theme=dark] .about__challenge-button--turquoise:hover{background-color:var(--color-main);color:var(--color-text)}@media (max-width:1299px){.space-between--mobile{justify-content:space-between}}.challenge__banner{display:flex;justify-content:center;margin-bottom:-70px}@media (min-width:640px){.challenge__banner{transform:translateY(-10px)}}@media (min-width:1300px){.challenge__banner{margin-bottom:-370px}}.challenge__banner .image{margin:0;width:70%;transform:translateY(-25%)}@media (min-width:640px){.challenge__banner .image{transform:translateY(-10%)}}@media (min-width:1300px){.challenge__banner .image{transform:translateY(-30%)}}.header{position:sticky;z-index:50;top:0;box-sizing:border-box;width:100%;padding-top:1.444rem;padding-bottom:1rem;transition:all .2s ease-in-out}.header--small{pointer-events:none}.header__logo{margin:0 10px;pointer-events:auto}.navigation{z-index:2;list-style:none;opacity:0;display:none;margin:0;padding:5%;flex-direction:column;justify-content:center;align-items:center;background:var(--color-main);position:fixed;top:8%;right:5%;transition:opacity .3s ease-in-out;font-weight:200}@media (min-width:1300px){.navigation{display:flex;opacity:1;padding:0;font-weight:400;position:static;background:none;overflow:hidden;flex-direction:row}}@media (max-width:1299px){.navigation__wrapper .language-switcher{margin:20px 0 0}}@media (min-width:1300px){.navigation__wrapper{flex-grow:100}}@media (max-width:1299px){.navigation__language-picker{margin-top:10px}}.navigation__icon-buttons{margin:30px 0 0}@media (min-width:1300px){.navigation__icon-buttons{width:100%;display:flex;justify-content:flex-end;margin:0 20px 0 0}}.navigation__toggle{z-index:3;position:absolute;top:0;right:0;width:50px;height:40px;cursor:pointer;border:none;background:none;outline:none;border-radius:4px}@media (min-width:1300px){.navigation__toggle{display:none}}.navigation__mobile-logo{display:none}.navigation__toggle-icon{top:8px;left:10px}.navigation__toggle-icon,.navigation__toggle-icon:after,.navigation__toggle-icon:before{position:absolute;width:30px;height:3px;transition:all .3s ease;border-radius:4px;background-color:var(--color-text)}.navigation__toggle-icon:after,.navigation__toggle-icon:before{content:"";display:block}.navigation__toggle-icon:before{top:10px}.navigation__toggle-icon:after{top:20px}@media (max-width:1299px){.is-open--navigation{overflow:hidden;height:100vh}.is-open--navigation .navigation{opacity:1;display:flex;align-items:flex-start}.is-open--navigation .navigation:before{content:"";background-color:var(--color-main);position:absolute;width:25px;height:25px;top:-3px;right:13px;transform:rotate(45deg)}.is-open--navigation .navigation__mobile-logo{display:block;width:30px;height:30px;position:absolute;top:47px;left:5%}}@media (max-width:1299px) and (min-width:1300px){.is-open--navigation .navigation__mobile-logo{display:none}}@media (max-width:1299px){.is-open--navigation .navigation__toggle-icon{transform:translate3d(0,10px,0) rotate(45deg)}.is-open--navigation .navigation__toggle-icon,.is-open--navigation .navigation__toggle-icon:after,.is-open--navigation .navigation__toggle-icon:before{background:var(--color-text)}.is-open--navigation .navigation__toggle-icon:before{transform:rotate(-45deg) translate3d(-5.71429px,-6px,0);opacity:0}.is-open--navigation .navigation__toggle-icon:after{transform:translate3d(0,-19px,0) rotate(-90deg)}}.navigation__item{margin:10px 0;white-space:nowrap}.navigation__item:first-of-type{margin:0 0 10px}.navigation__item:last-of-type{margin:10px 0 0}@media (min-width:1300px){.navigation__item{margin:0 15px;padding:0!important}.navigation__item:first-of-type{margin:0 15px 0 2rem}.navigation__item:last-of-type{margin:0 0 0 15px}}.SrOnly-module--srOnly--2Hn2L{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}.LanguagePicker-module--select--364N3{padding:3px 6px;-webkit-appearance:none;appearance:none;border:1px solid var(--color-text);border-radius:5px;color:#33332d;background-color:#fff;background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23333333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 6px center;background-size:16px 12px;width:7rem;min-width:7rem}.SvgIcon-module--svgIcon--1nGJ6{-webkit-user-select:none;user-select:none;width:1em;height:1em;display:inline-block;fill:currentColor;flex-shrink:0;font-size:1.5rem}.element--flex{display:flex;flex-wrap:wrap}.element--space-around{justify-content:space-around}.element--space-between{justify-content:space-between}.element--column{flex-direction:column}.element--centered{align-items:center;justify-content:center!important}@media (min-width:992px){.element--centered-in-desktop{align-items:center;justify-content:center!important}}@media (min-width:992px){.element--horizontal-half{width:45%}}.element--auto-margin{margin:auto}.element--auto-bottom-margin{margin-bottom:auto}.element--flex-start{align-content:flex-start}.element--no-wrap{flex-wrap:nowrap}.element--relative{position:relative!important}.edit-link>span{border-bottom-width:3px;border-bottom-style:solid;border-bottom-color:inherit}.edit-link:hover{color:#33332d}.SearchLink-module--searchLink--2IShR{margin-right:20px;border-radius:4px;padding:4px;display:inline-flex}.SearchLink-module--searchLink--2IShR:focus,.SearchLink-module--searchLink--2IShR:hover{background-color:var(--color-text);color:var(--color-background)}.ThemeSwitcher-module--themeSwitcher--1gbnJ{border-radius:4px;padding:4px;display:inline-flex;background:none;border:none;color:var(--color-text)}.ThemeSwitcher-module--themeSwitcher--1gbnJ:hover{background-color:var(--color-text)!important;color:var(--color-background)!important;cursor:pointer}.ThemeSwitcher-module--themeSwitcher--1gbnJ:focus{background-color:var(--color-text);color:var(--color-background)}.ThemeSwitcher-module--themeSwitcher--1gbnJ:focus:not(:focus-visible){color:var(--color-text);background:none}.triple-border{position:relative;padding:2px;border-radius:5px 0;transition:color .1s ease-in-out,background-color .1s ease-in-out}.triple-border:after,.triple-border:before{z-index:2;content:"";border:2px solid var(--color-text);border-radius:5px;position:absolute;width:calc(100% + 5px);height:calc(100% + 5px)}.triple-border:before{left:0;top:0}.triple-border:after{bottom:0;right:0}.triple-border__container{position:relative;overflow:hidden;border-radius:3px 0}.triple-border--large-margin{margin:13px;padding:3px}.triple-border--large-margin:after,.triple-border--large-margin:before{content:"";border-width:3px;border-radius:13px;width:calc(100% + 13px);height:calc(100% + 13px)}.triple-border--large-margin .triple-border__container{border-radius:10px 0}.triple-border__logo{padding:.2rem;font-size:1.111rem;font-weight:600}html[data-theme=dark] .triple-border:hover .triple-border__logo--small{color:#33332d!important}.triple-border__return-tasks{font-size:.9rem;padding:1rem .2rem}.accordion__container{margin-bottom:1rem}.accordion__title{padding-left:2.149rem!important;padding-right:2.149rem!important;font-size:1.111rem!important;font-weight:600}.accordion{background-color:var(--color-background);border:3px solid var(--color-text);border-radius:5px;color:var(--color-text);cursor:pointer;padding:1rem;width:100%;text-align:left;outline:none;font-size:15px;transition:max-width .4s}.accordion:focus,.accordion:hover,.active{background-color:var(--color-main)}.active:focus{border:3px solid var(--color-text)}.accordion:after{content:"+";font-size:1.5rem;float:right;margin-left:5px}.active,.active:not(:focus-visible){border-color:var(--color-background)}.active:after{content:"-";font-size:1.5rem}.panel{background-color:var(--color-background);padding:2rem 18px}.accordion--side-navigation{width:100%;margin-left:unset}.accordion--side-navigation .accordion{border:none;padding:0!important;background-color:transparent!important;color:var(--color-text)!important;border-radius:0}.accordion--side-navigation .accordion__title{font-size:16px!important;font-weight:unset;background-color:transparent}.accordion--side-navigation .accordion__title:hover{background-color:var(--color-text)!important;color:var(--color-background)!important}.accordion--side-navigation .panel{padding:1rem 0 0!important;background-color:transparent}.accordion--side-navigation .panel ul{margin-left:1rem}.accordion--side-navigation .accordion:hover,.accordion--side-navigation .active{background-color:var(--color-text);color:var(--color-background)}.accordion--side-navigation .accordion:after,.accordion--side-navigation .active:after{content:""}#footer{margin-top:auto}@media (min-width:992px){#footer{align-items:center}}#footer a:hover{background-color:transparent!important}#footer .footer__navigation{display:none}@media (max-width:1299px){#footer .footer__navigation{width:100%;display:block}#footer .footer__navigation-link-container{display:flex;flex-direction:column}}#footer .footer__navigation-link{font-size:1rem;line-height:18px;white-space:nowrap;font-family:IBM Plex Sans,monospace;margin-left:0!important;margin-right:auto}@media (max-width:639px){#footer .footer__navigation-link{line-height:8px}}#footer .footer__navigation-link:hover{color:var(--color-background)!important;background-color:var(--color-text)!important}#footer .footer__navigation-link:nth-of-type(n+2){margin-top:2.142rem}@media (min-width:1300px){#footer .footer__navigation{flex-direction:row;flex-wrap:nowrap;justify-content:flex-end}#footer .footer__navigation-link{margin-top:0!important;margin-bottom:auto}#footer .footer__navigation-link:nth-of-type(n+1){margin-right:2.877rem}#footer .footer__navigation-link:last-of-type{margin-right:0!important}}.image__content{position:absolute;top:0;left:0;height:100%;width:100%;object-fit:cover}.image--contain .image__content{object-fit:contain}.image{overflow:hidden;width:100%;position:relative}@media (min-width:992px){.image{width:40%}}.image .image__container{height:0;position:relative;width:100%;padding-bottom:89.0625%}.image--circle{border-radius:50%}.image--circle .image__content{background-color:var(--color-main)}.image--square-big{width:100%}.image--square-big .image__container{width:100%;padding-bottom:100%}.image--extra-small{width:8%}.image--extra-small .image__container{width:100%;padding-bottom:100%}@media (max-width:639px){.image--extra-small{width:calc(33.33333% - 1rem)}}.image--small{width:15%}.image--small .image__container{width:100%;padding-bottom:100%}@media (max-width:639px){.image--small{width:calc(33.33333% - 1rem)}}.image--medium{width:50%}.image--medium .image__container{width:100%;padding-bottom:71.25%}.image--large{width:100%}@media (min-width:992px){.image--large{width:60%}}.image--large .image__container{padding-bottom:59.37%;width:100%}.image--full-width{width:100%}.image--full-width .image__container{padding-bottom:59.37%;width:100%}.image--actual-size{width:100%}.image--actual-size .image__container{height:0;position:relative;width:100%;padding-bottom:60%}html[data-theme=dark] .image--backdrop .image__container{background:#fff;border-radius:10px}html[data-theme=dark] .image--invert img{filter:invert(1)}.body-text:not(:last-of-type){margin-bottom:2.5rem}.body-text__title{color:var(--color-text);font-size:1.44rem;line-height:1.25em;font-weight:700;margin:0;position:relative;top:50%;transform:translateY(-50%)}.body-text__content:not(:last-of-type){padding-bottom:2em}.bold{font-weight:700}.body-text--no-padding{padding:0!important}@media (min-width:640px){.companies__main-title .body-text__title{font-size:3rem}}.challenge-title{font-size:1.44rem}.company__logo{padding:10px}@media (min-width:992px){.company__logo{width:15%!important}}.content-liftup{position:relative;text-decoration:none}.content-liftup--small{box-sizing:border-box}.content-liftup--small>:last-child{margin-bottom:0}.content-liftup--padding{padding:10px}.content-liftup__name{margin-top:1.5rem;color:var(--color-text);font-weight:700}@media (min-width:992px){.content-liftup__name{margin-top:2rem}}.content-liftup__summary{margin-top:1rem;margin-bottom:3rem;color:var(--color-text);line-height:28px}.content-liftup__link:focus .image{opacity:.6}.content-liftup__link:focus:not(:focus-visible) .image{opacity:1}.content-liftup .content-liftup__image:after{content:"";position:absolute;top:0;left:0;height:100%;width:100%;opacity:.5;z-index:2}.form p{font-family:IBM Plex Sans,monospace;font-size:.9rem;margin-bottom:10px}.form input{padding:1rem;border:1px solid var(--color-main);outline:0}.form input:focus{border:1px solid var(--color-text)}.form .submit{border:3px solid var(--color-text);color:var(--color-text);background-color:var(--color-background);padding:.7rem 2rem}.form .submit:hover{cursor:pointer}.form .submit:hover,.skip-to-content{background-color:var(--color-text);color:var(--color-background)}.skip-to-content{position:absolute;top:-50px;left:50%;height:50px;padding:0 30px;transform:translateX(-50%);border-radius:0 0 3px 3px;transition:top .3s;display:inline-flex;justify-content:center;align-items:center;z-index:100}.skip-to-content:focus{top:0;transition:top .25s}.prev-next__container a:hover{color:#33332d;background-color:#fff}.prev-next__container a:hover b,.prev-next__container a:hover p{color:#33332d}.prev-next__container .separator{display:none}@media (max-width:639px){.prev-next__container .separator{display:block;background-color:var(--color-text);width:2px!important}}.prev-next__container .prev b,.prev-next__container .prev p{text-align:right}@media (max-width:639px){.prev-next__container .prev p:before{content:"<";margin-right:1rem}}@media (max-width:639px){.prev-next__container .next p:after{content:">";margin-left:1rem}}.scroll-navigation-container{display:none}@media (min-width:992px){.scroll-navigation-container{pointer-events:none;display:block;font-size:16px;position:sticky;width:100%;margin-right:-100%;left:0;top:-100px;padding-top:200px}}.scroll-navigation-container-inner{width:90%;margin:0 auto;max-width:1200px}.scroll-navigation{pointer-events:auto;display:flex;width:30%;max-width:30%/.9;height:100%;overflow-y:auto;max-height:calc(100vh - 100px);padding-right:1rem;z-index:30}.scroll-navigation li{list-style-type:none}.scroll-navigation li.selected a,.scroll-navigation li:hover a{background-color:var(--color-text);color:var(--color-background)!important}.scroll-navigation li:before{content:"-"}.left-navigation-link{padding-left:1.2rem;text-indent:-1.2rem;display:block}.left-navigation-link:hover{background-color:var(--color-text)!important;color:var(--color-background)!important}.level-h1{font-weight:700;padding-left:2.8rem;text-indent:-2.8rem}.level-h2{padding-left:1.6rem;text-indent:-1.6rem}.developer-story__image{margin-bottom:auto}html[data-theme=dark] .developer-story__company-logo-wrapper{margin-bottom:20px;display:inline-flex;justify-content:center;align-items:center;background:#fff;border-radius:10px;padding:15px}html[data-theme=dark] .developer-story__company-logo-wrapper img{margin:0 auto}.developer-story__name{margin-top:4rem;font-size:1.2rem}.developer-story__title{font-size:.9rem}.developer-story__read-more{margin-top:2rem;line-height:1.1rem;width:auto;background:none;color:inherit;border:none;padding:0!important;border-bottom:2px solid var(--color-link-decoration);cursor:pointer}.developer-story__read-more:hover{background-color:var(--color-main)}.some-logo__link{margin:1rem 1rem 0 0;display:inline-block}.some-logo__image{width:1.5rem;height:1.5rem;margin:0}html[data-theme=dark] .some-logo__image{filter:invert(1)}.sub-header{color:var(--color-text);font-family:IBM Plex Mono,monospace;padding-bottom:1.357rem}@media (min-width:992px){.sub-header{padding-bottom:2.333rem}}.copy-code-button,.copy-code-button:host{display:inline-flex}.copy-code-button{align-items:center;justify-content:center;width:-moz-fit-content;width:fit-content;margin:0;padding:.5rem;background:var(--color-pre-background);border:none;border-radius:.25rem;box-shadow:0 .25rem .5rem rgba(0,0,0,.25);color:#fff;cursor:pointer;font-weight:600;opacity:.2;transition:.2s ease-in-out}.copy-code-button:hover{opacity:1}.copy-code-button:active{opacity:0;color:red}pre{overflow:auto;padding:1rem;border-radius:.5rem;position:relative}pre .copy-code-button{position:absolute;top:.5rem;right:.5rem}code{white-space:pre-wrap!important}.InputField-module--inputField--3oXh5{-webkit-appearance:none;appearance:none;width:100%;border:0;font-family:inherit;padding:16px 12px;box-shadow:inset 0 -1px 0 var(--color-text);color:var(--color-text);background-color:var(--color-background);transition:all .15s ease}.InputField-module--inputField--3oXh5:hover{box-shadow:inset 0 -2px 0 var(--color-text)}.InputField-module--inputField--3oXh5:focus{outline:none;box-shadow:inset 0 -2px 0 var(--color-text)}</style><meta name="generator" content="Gatsby 2.32.13"/><link rel="sitemap" type="application/xml" href="/sitemap.xml"/><title data-react-helmet="true">Fullstack part0 | </title><meta data-react-helmet="true" name="description" content=""/><meta data-react-helmet="true" property="og:title" content="Fullstack part0 | "/><meta data-react-helmet="true" property="og:description" content=""/><meta data-react-helmet="true" name="og:image" content="/static/EYE_green_wide-0a72f74a959f54d0f3e4bb8c67f6f158.jpg"/><meta data-react-helmet="true" property="og:type" content="website"/><meta data-react-helmet="true" name="twitter:card" content="summary"/><meta data-react-helmet="true" name="twitter:creator" content="Houston Inc. Consulting oy"/><meta data-react-helmet="true" name="twitter:title" content="Fullstack part0 | "/><meta data-react-helmet="true" name="twitter:description" content=""/><meta data-react-helmet="true" name="twitter:image" content="/static/EYE_green_wide-0a72f74a959f54d0f3e4bb8c67f6f158.jpg"/><meta data-react-helmet="true" name="google-site-verification" content="ds9pQKiK3kjhRSHHbf5ccoG-oJggn7Lq4A8uHxM3Mkw"/><meta data-react-helmet="true" name="keywords" content="fullstack, Full stack -websovelluskehitys, course, helsingin yliopisto, tietojenkäsittelytieteen osasto, mooc, mooc.fi, full stack, full stack open, web-sovelluskehitys, web, houston, houston inc, websovelluskehitys, web-sovellus, React, Redux, Node.js, Node, MongoDB, GraphQL, REST, REST api, single page -sovellus, ohjelmointi, university of helsinki, department of computer science, web development, software development, web, web application, single page app, programming, "/><link rel="icon" href="/favicon-32x32.png?v=6460c405ec32c913ef778f48c5ab192e" type="image/png"/><link rel="manifest" href="/manifest.webmanifest" crossorigin="anonymous"/><meta name="theme-color" content="#e1e1e1"/><link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-48x48.png?v=6460c405ec32c913ef778f48c5ab192e"/><link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png?v=6460c405ec32c913ef778f48c5ab192e"/><link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png?v=6460c405ec32c913ef778f48c5ab192e"/><link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png?v=6460c405ec32c913ef778f48c5ab192e"/><link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png?v=6460c405ec32c913ef778f48c5ab192e"/><link rel="apple-touch-icon" sizes="256x256" href="/icons/icon-256x256.png?v=6460c405ec32c913ef778f48c5ab192e"/><link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png?v=6460c405ec32c913ef778f48c5ab192e"/><link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png?v=6460c405ec32c913ef778f48c5ab192e"/><link rel="preconnect" href="https://www.google-analytics.com"/><link rel="dns-prefetch" href="https://www.google-analytics.com"/><link rel="canonical" href="https://fullstackopen.com/zh/part0/web_应用的基础设施" data-baseprotocol="https:" data-basehost="fullstackopen.com"/><script>
+  (function() {
+    try {
+      const savedTheme = localStorage.getItem('selected_theme');
+
+      if (savedTheme) {
+        document.documentElement.dataset.theme = savedTheme;
+      } else if (
+        window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches
+      ) {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    } catch (e) {}
+  })();
+  </script><link as="script" rel="preload" href="/component---src-templates-content-template-js-3ca891c40689f33ff860.js"/><link as="script" rel="preload" href="/8bb9eac36a062a5713b6d250f5709a608793ccd4-c6521a3391552441c602.js"/><link as="script" rel="preload" href="/d2b1ca4b1069f7cfc0ac3ccd2306fbb8e76bcf35-b1e80b991af31a506d6d.js"/><link as="script" rel="preload" href="/2d359d657f593a857b7e0d916f29b2126c86bebb-dcc47509ede0fcbd2a57.js"/><link as="script" rel="preload" href="/881c8b7a675fce2ced9b02a4a469c0443336d5f7-8e4483d8931a6891bd9a.js"/><link as="script" rel="preload" href="/0f38e1748197b5a213e89e1df6d5db13e5e7856d-c525d6df853b8eccb391.js"/><link as="script" rel="preload" href="/commons-15e69e84caf1d6379b61.js"/><link as="script" rel="preload" href="/app-5c85c0dd7d8928d8110e.js"/><link as="script" rel="preload" href="/framework-4417e1b5ff8c945c03a5.js"/><link as="script" rel="preload" href="/styles-0ec71dd62c66cb95665c.js"/><link as="script" rel="preload" href="/webpack-runtime-34e1662e50c380423dfa.js"/><link as="fetch" rel="preload" href="/page-data/zh/part0/web_应用的基础设施/page-data.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/sq/d/3128451518.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/app-data.json" crossorigin="anonymous"/></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div class="main-wrapper"><a href="#course-main-content" class="skip-to-content">跳到内容</a><header class="header " style="background-color:var(--color-background)"><div class="container" style="align-items:center;justify-content:flex-start"><a class="header__logo" href="/zh/"><div class="triple-border nav-item-hover " style="padding:0.2em"><div class="triple-border__container triple-border__logo" style="background-color:transparent;z-index:10">{() =&gt; fs}</div></div></a><div class="navigation__wrapper "><button aria-label="Navigation menu" aria-expanded="false" class="navigation__toggle"><div class="navigation__toggle-icon"></div></button><nav><ul class="navigation"><li class="navigation__item "><a class="nav-item-hover" href="/zh/about">关于课程</a></li><li class="navigation__item "><a class="nav-item-hover" href="/zh/#course-contents">课程内容</a></li><li class="navigation__item "><a class="nav-item-hover" href="/zh/faq">常见问题</a></li><li class="navigation__item "><a class="nav-item-hover" href="/zh/companies">合作伙伴</a></li><li class="navigation__item "><a class="nav-item-hover" href="/zh/challenge">挑战</a></li><div class="navigation__icon-buttons"><a class="SearchLink-module--searchLink--2IShR" href="/zh/search"><span class="SrOnly-module--srOnly--2Hn2L">从教程中搜索</span><svg role="img" viewBox="0 0 24 24" class="SvgIcon-module--svgIcon--1nGJ6"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg></a><button class="ThemeSwitcher-module--themeSwitcher--1gbnJ" aria-pressed="false"><span class="SrOnly-module--srOnly--2Hn2L">切换黑暗主题</span><svg role="img" viewBox="0 0 384 512" class="SvgIcon-module--svgIcon--1nGJ6"><path d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path></svg></button></div><span class="SrOnly-module--srOnly--2Hn2L"><label for="language-select">选择语言</label></span><select id="language-select" class="navigation__language-picker LanguagePicker-module--select--364N3" style="font-size:1em"><option value="fi">Suomi</option><option value="en">English</option><option selected="" value="zh">中文</option><option value="es">Español</option><option value="fr">Français</option><option value="ptbr">Português(BR)</option></select></ul></nav></div></div></header><main id="main-content"><div class="course-container spacing--after"><div class="banner part-main__banner spacing--mobile--small" style="background-image:url(/static/b9999ec785b2c3bc6b8d3ef5d3537538/part-0.svg);background-color:#B2BBF0"><div class="container spacing--after"><div class="col-10 spacing--after"><div class="arrow__container arrows--horizontal breadcrumb"><div class="arrow__wrapper"><div class="arrow__rectangle  " style="background-color:#B2BBF0;color:#33332d"><a href="/zh/#course-contents">Fullstack</a></div><div class="arrow__point " style="background-color:#B2BBF0;color:#33332d"></div></div><div class="arrow__wrapper"><div class="arrow__rectangle  " style="background-color:#B2BBF0;color:#33332d"><a href="/zh/part0">Part 0</a></div><div class="arrow__point " style="background-color:#B2BBF0;color:#33332d"></div></div><div class="arrow__wrapper"><div class="arrow__rectangle  " style="background-color:#33332d;color:white">Web 应用的基础设施</div><div class="arrow__point " style="background-color:#33332d;color:white"></div></div></div></div></div></div><div class="course " id="course-main-content"><div class="scroll-navigation-container "><div class="scroll-navigation-container-inner "><div class="scroll-navigation  element--column" tag="ul"><a class="left-navigation-link" style="border-color:#B2BBF0" href="/zh/part0/基础知识">a 基础知识</a><div class="accordion__container col-8 push-right-1 accordion--side-navigation"><button class="accordion accordion__title  " style="background-color:#B2BBF0;border-color:#B2BBF0" aria-controls="b_web_应用的基础设施" aria-expanded="false">b Web 应用的基础设施</button></div></div></div></div><div class="course-content-container "><div class="course-content element--auto-bottom-margin"><div class="course-content-inner "><p class="col-1 letter" style="border-color:#B2BBF0">b</p><h1 class="sub-header ">Web 应用的基础设施</h1></div></div><div class="course-content "><div class="course-content-inner ">
+<!-- -->
+ 在我们正式开始编程之前，先简单看一个样例应用<https: studies.cs.helsinki.fi="" exampleapp="">，了解一些 Web 开发的原则。
+<!-- -->
+<p>这个应用只是为了演示课程的一些基本概念，绝不是一个现代 Web 应用应有的样子。</p>
+<!-- -->
+<p>相反，它展示了一些老旧的网络开发技术，这些技术在今天甚至可以被视作是<i>糟糕的实践</i>。</p>
+<!-- -->
+<p> 从<a href="/en/part1">第一章节</a>开始，代码将符合现代开发的最佳实践。</p>
+<!-- -->
+<p>在浏览器中打开<a href="https://studies.cs.helsinki.fi/exampleapp">示例应用</a>。有时打开需要等一会儿。</p>
+<!-- -->
+<p> <strong>Web 开发的第一原则</strong>。始终打开你的网络浏览器上的开发者控制台。在macOS上，通过<em>F12</em>或同时按下<em>option-cmd-i</em>来打开控制台。  在Windows或Linux上，通过<em>F12</em>或同时按<em>ctrl-shift-i</em>来打开控制台。控制台也可以通过<a href="https://en.wikipedia.org/wiki/Menu_key">上下文菜单</a>打开。</p>
+<!-- -->
+<p>在开发 Web 应用时，请记住<i>始终</i>保持打开开发者控制台。</p>
+<!-- -->
+<p> 开发者控制台如下图所示：</p>
+<picture><img style="border-color:#B2BBF0" alt="A screenshot of the developer tools open in a browser" src="/static/aaaefdadeccea5768728b3cdd41fd8f2/5a190/1e.png"/></picture>
+<!-- -->
+<p> 确保<i>Network（网络）</i>标签打开，并选中<i>Disable cache（禁用缓存）</i>选项，如图。<i>Preserve log（保存日志）</i>也很有用：它可以在重新加载页面时保存应用打印的日志。</p>
+<!-- -->
+<p> <strong>NB:</strong>在开发中，最重要的标签是<i>Console（控制台）</i>标签。然而，在这个介绍中，我们将大量使用<i>Network</i>标签。</p>
+<h3>HTTP GET</h3>
+<!-- -->
+<p> 服务器和 Web 浏览器使用<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP">HTTP</a>协议相互通信。<i>Network（网络）</i>标签显示了浏览器和服务器的通信方式。</p>
+<!-- -->
+<p> 当你重新加载页面时（按F5键或浏览器上的↻符号），控制台将显示有两个事件发生：</p>
+<!-- -->
+<ul>
+<li>
+<p>浏览器已经从服务器获取了<i>studies.cs.helsinki.fi/exampleapp</i>页面的内容</p>
+<!-- -->
+</li>
+<li>并已下载了图片<i>kuva.png</i>。</li>
+</ul>
+<picture><img style="border-color:#B2BBF0" alt="Screenshot of the developer console showing these two events" src="/static/af6f88822db737cac2ea80d9343756fc/5a190/2e.png"/></picture>
+<!-- -->
+<p> 在小屏幕上，你可能要放大控制台窗口才能看到这些。</p>
+<!-- -->
+<p> 点击第一个事件可以看到更多关于本次请求的细节。</p>
+<picture><img style="border-color:#B2BBF0" alt="Detail view of a single event" src="/static/ddcd5afaeabfc1b0e8a4325bfeff90ee/5a190/3e.png"/></picture>
+<!-- -->
+<p> 上半部分，<i>General中的内容</i>，显示浏览器使用<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET">GET</a>方法向地址<i><a href="https://studies.cs.helsinki.fi/exampleapp">https://studies.cs.helsinki.fi/exampleapp</a></i>发送了一个请求(地址是截图时的，现在已经略有改变)，并且请求是成功的，因为服务器的响应<a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes">状态代码</a> 为200。</p>
+<!-- -->
+<p>浏览器的请求（request）和服务器的响应（response）有几个<a href="https://en.wikipedia.org/wiki/List_of_HTTP_header_fields">头信息</a>。</p>
+<picture><img style="border-color:#B2BBF0" alt="fullstack content" src="/static/5e6569d4ad80edce4a03a25358b8f195/5a190/4e.png"/></picture>
+<!-- -->
+<p>上面的<i>响应头Response headers</i>告诉我们，例如，响应的字节大小，以及响应的确切时间。一个重要的头信息<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type">Content-Type</a>告诉我们，响应是一个<a href="https://en.wikipedia.org/wiki/UTF-8">utf-8</a>格式的文本文件，其内容已经用HTML格式化。这样，浏览器就知道这个响应是一个普通的<a href="https://en.wikipedia.org/wiki/HTML">HTML</a>页面，并将其 &quot;像一个网页一样&quot; 渲染到浏览器。</p>
+<!-- -->
+<p> <i>Response</i>标签显示了响应数据，是一个普通的HTML页面。<i>body</i>部分决定了渲染到屏幕上的页面的结构。</p>
+<picture><img style="border-color:#B2BBF0" alt="Screenshot of the response tab" src="/static/4e49815c455c943b6eb14fe8cc0cefb3/5a190/5e.png"/></picture>
+<!-- -->
+<p> 这个页面包含一个<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div">div</a>元素，它又包含一个标题，一个指向页面<i>notes</i>的链接，以及一个<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img">img</a>标签，并显示创建的笔记数量。</p>
+<!-- -->
+<p>因为有了img标签，浏览器又做了一次<i>HTTP-request</i>，从服务器上获取图片<i>kuva.png</i>。该请求的细节如下。</p>
+<picture><img style="border-color:#B2BBF0" alt="Detail view of the second event" src="/static/f053fa9082a1ad72066fa193346d0378/5a190/6e.png"/></picture>
+<!-- -->
+<p> 该请求是向地址<a href="https://studies.cs.helsinki.fi/exampleapp/kuva.png">https://studies.cs.helsinki.fi/exampleapp/kuva.png</a>发出的，方法类型是HTTP GET。响应头告诉我们，响应大小为89350字节，其<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type">内容类型</a>为<i>image/png</i>，所以它是一个png图像。浏览器利用这些信息将图像正确地渲染在屏幕上。</p>
+<!-- -->
+<p>在浏览器上打开网页<a href="https://studies.cs.helsinki.fi/exampleap">https://studies.cs.helsinki.fi/exampleap</a>，所引起的一系列事件构成了以下<a href="https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/">顺序图</a>。</p>
+<picture><img style="border-color:#B2BBF0" alt="Sequence diagram of the flow covered above" src="/static/972354fefd202e82e2c4a64d4d7c6125/5a190/7e.png"/></picture>
+<!-- -->
+<p> 首先，浏览器向服务器发送一个HTTP GET请求，以获取该网页的HTML代码。HTML中的<i>img</i>标签提示浏览器获取图片<i>kuva.png</i>。浏览器将HTML页面和图像渲染到屏幕上。</p>
+<!-- -->
+<p>尽管很难注意到，但在图像从服务器上获取之前，HTML页面就已经开始渲染了。</p>
+<h3>Traditional web applications</h3>
+<!-- -->
+<p>示例应用的主页运行模式类似<i>传统的Web应用</i>。当进入该页面时，浏览器从服务器上获取描述页面结构的HTML文档，以及文本内容。</p>
+<!-- -->
+<p>服务器以某种方式生成了这个文档。该文档可以是一个保存在服务器目录中的<i>静态</i>文本文件。服务器也可以根据应用代码，例如使用数据库中的数据，动态地形成HTML文档。</p>
+<!-- -->
+<p> 示例应用的HTML代码是动态形成的，因为它包含了关于已创建的笔记数量的信息。</p>
+<!-- -->
+<p>主页的HTML代码如下：</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">const</span> <span class="token function-variable function">getFrontPageHtml</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">noteCount</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+    &lt;!DOCTYPE html&gt;
+    &lt;html&gt;
+      &lt;head&gt;
+      &lt;/head&gt;
+      &lt;body&gt;
+        &lt;div class=&#x27;container&#x27;&gt;
+          &lt;h1&gt;Full stack example app&lt;/h1&gt;
+          &lt;p&gt;number of notes created </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>noteCount<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&lt;/p&gt;
+          &lt;a href=&#x27;/notes&#x27;&gt;notes&lt;/a&gt;
+          &lt;img src=&#x27;kuva.png&#x27; width=&#x27;200&#x27; /&gt;
+        &lt;/div&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;
+</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">&#x27;/&#x27;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> page <span class="token operator">=</span> <span class="token function">getFrontPageHtml</span><span class="token punctuation">(</span>notes<span class="token punctuation">.</span>length<span class="token punctuation">)</span>
+  res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>page<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p>你还不需要理解这些代码。</p>
+<!-- -->
+<p>HTML页面的内容已被保存为一个模板字符串，或一个能够运行的字符串，例如，在它中间包含变量。主页中动态变化的部分，即保存的笔记数量（即代码中的<em>notesCount</em>），被模板字符串中的当前笔记数量（即代码中的<em>notes.length</em>）所取代。</p>
+<!-- -->
+<p> 在代码中间编写 HTML 当然不是明智的做法，但对于老派的 PHP 程序员来说，这是一种常规操作。</p>
+<!-- -->
+<p>在传统的 web 应用中，浏览器是个“憨憨”。它只从服务器上获取HTML数据，而所有的应用逻辑都在服务器上。服务器可以用Java Spring（如赫尔辛基大学的课程<a href="https://courses.helsinki.fi/fi/tkt21007/119558639">Web-palvelinohjelmointi</a>）、Python Flask（如课程<a href="https://materiaalit.github.io/tsoha-18/">tietokantasovellus</a>）或用<a href="http://rubyonrails.org/">Ruby on Rails</a>来创建，仅举几个例子。</p>
+<!-- -->
+<p>这个例子使用了Node.js的<a href="https://expressjs.com/">Express</a>。</p>
+<!-- -->
+<p>本课程将使用Node.js和Express来创建网络服务器。</p>
+<h3>Running application logic in the browser</h3>
+<!-- -->
+<p> 保持开发者控制台打开。通过点击🚫符号清空控制台，或者在控制台中输入clear()。</p>
+<!-- -->
+<p>现在当你进入<a href="https://studies.cs.helsinki.fi/exampleapp/notes">notes</a>页面时，浏览器会做4个HTTP请求。</p>
+<picture><img style="border-color:#B2BBF0" alt="Screenshot of the developer console with the 4 requests visible" src="/static/02ed5b206f76e1f9bcf4ad3ffff8a2b4/5a190/8e.png"/></picture>
+<!-- -->
+<p>所有的请求都有<i>不同的</i>类型。第一个请求的类型是<i>document</i>。它是页面的HTML代码，看起来如下：</p>
+<picture><img style="border-color:#B2BBF0" alt="Detail view of the first request" src="/static/8856aaf0012972e3b7d5b1dfc6aaa3f6/5a190/9e.png"/></picture>
+<!-- -->
+<p>当我们比较浏览器上显示的页面和服务器返回的HTML代码时，我们注意到代码中不包含笔记的列表。</p>
+<!-- -->
+<p> HTML的<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head">head</a>部分包含一个<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script">script</a>标签，它使浏览器获取了一个名为<i>main.js</i>的JavaScript文件。</p>
+<!-- -->
+<p> 该JavaScript代码看起来如下。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">var</span> xhttp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">XMLHttpRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+xhttp<span class="token punctuation">.</span><span class="token function-variable function">onreadystatechange</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>readyState <span class="token operator">==</span> <span class="token number">4</span> <span class="token operator">&amp;&amp;</span> <span class="token keyword">this</span><span class="token punctuation">.</span>status <span class="token operator">==</span> <span class="token number">200</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> data <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>responseText<span class="token punctuation">)</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+
+    <span class="token keyword">var</span> ul <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">&#x27;ul&#x27;</span><span class="token punctuation">)</span>
+    ul<span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span><span class="token string">&#x27;class&#x27;</span><span class="token punctuation">,</span> <span class="token string">&#x27;notes&#x27;</span><span class="token punctuation">)</span>
+
+    data<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">note</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">var</span> li <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">&#x27;li&#x27;</span><span class="token punctuation">)</span>
+
+      ul<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>li<span class="token punctuation">)</span>
+      li<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>document<span class="token punctuation">.</span><span class="token function">createTextNode</span><span class="token punctuation">(</span>note<span class="token punctuation">.</span>content<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+    document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">&#x27;notes&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>ul<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+xhttp<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">&#x27;GET&#x27;</span><span class="token punctuation">,</span> <span class="token string">&#x27;/data.json&#x27;</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span>
+xhttp<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p> 代码的细节现在并不重要，穿插一些代码，是为了增加图像与文本的趣味性。我们将在<a href="/en/part1">第一章</a>中正确地开始编码。这一章节的示例代码实际上与本课程的编码技术完全不相关。</p>
+<!-- -->
+<blockquote>
+<p>有些人可能想问为什么要使用 xhttp 对象而不是使用现代的fetch方法。 这是因为我们不想引入 promise 的概念，而且代码在这一章节只是二等公民。 在第 2 章节中，我们将回过头来用更加现代的方式来向服务器发送请求。</p>
+</blockquote>
+<!-- -->
+<p> 在获取了<i>script</i>标签后，浏览器立即开始执行代码。</p>
+<!-- -->
+<p> 最后两行指示浏览器对服务器的地址<i>/data.json</i>进行HTTP GET请求。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js">xhttp<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">&#x27;GET&#x27;</span><span class="token punctuation">,</span> <span class="token string">&#x27;/data.json&#x27;</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span>
+xhttp<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p>这是“Network”选项卡上显示的最下面的请求。</p>
+<!-- -->
+<p> 我们可以尝试从浏览器直接访问地址<a href="https://studies.cs.helsinki.fi/exampleapp/data.json">https://studies.cs.helsinki.fi/exampleapp/data.json</a>。</p>
+<picture><img style="border-color:#B2BBF0" alt="fullstack content" src="/static/cb83e4c1c89fd4bc662942457f30403e/5a190/10e.png"/></picture>
+<!-- -->
+<p>在那里我们找到了<a href="https://en.wikipedia.org/wiki/JSON">JSON</a> &quot;原始数据 &quot;中的笔记。默认情况下，基于Chromium的浏览器在显示JSON数据方面不是太好。可以使用插件来处理格式化问题。例如，在Chrome上安装<a href="https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc">JSONVue</a>，然后重新加载页面。现在数据已经被很好地格式化了：</p>
+<picture><img style="border-color:#B2BBF0" alt="Formatted JSON output" src="/static/fd335c19a19f2176040834b7c5533193/5a190/11e.png"/></picture>
+<!-- -->
+<p> 因此，上面的笔记页面的JavaScript代码下载了包含笔记的JSON数据，并从笔记内容中形成了一个符号列表。</p>
+<!-- -->
+<p> 这是由以下代码完成的：</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">const</span> data <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>responseText<span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+
+<span class="token keyword">var</span> ul <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">&#x27;ul&#x27;</span><span class="token punctuation">)</span>
+ul<span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span><span class="token string">&#x27;class&#x27;</span><span class="token punctuation">,</span> <span class="token string">&#x27;notes&#x27;</span><span class="token punctuation">)</span>
+
+data<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">note</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> li <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">&#x27;li&#x27;</span><span class="token punctuation">)</span>
+
+  ul<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>li<span class="token punctuation">)</span>
+  li<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>document<span class="token punctuation">.</span><span class="token function">createTextNode</span><span class="token punctuation">(</span>note<span class="token punctuation">.</span>content<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">&#x27;notes&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>ul<span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p> 该代码首先创建了一个带有<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul">ul</a>标签的无序列表...</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">var</span> ul <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">&#x27;ul&#x27;</span><span class="token punctuation">)</span>
+ul<span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span><span class="token string">&#x27;class&#x27;</span><span class="token punctuation">,</span> <span class="token string">&#x27;notes&#x27;</span><span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p> ...然后再为每个 Note 加上一个 li-标签。仅将每个 Note 的 content 字段变成了 li-标签 的内容，而原始数据的 timestamps 时间戳在这里并没派上用场。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js">data<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">note</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> li <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">&#x27;li&#x27;</span><span class="token punctuation">)</span>
+
+  ul<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>li<span class="token punctuation">)</span>
+  li<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>document<span class="token punctuation">.</span><span class="token function">createTextNode</span><span class="token punctuation">(</span>note<span class="token punctuation">.</span>content<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p> 现在在你的开发者控制台打开<i>Console</i>标签。</p>
+<picture><img style="border-color:#B2BBF0" alt="Screenshot of the console tab on the developer console" src="/static/7b61ba46a7734400891ed78cf57011cb/5a190/12e.png"/></picture>
+<!-- -->
+<p> 通过单击行首的小三角形，可以展开控制台上的文本。</p>
+<picture><img style="border-color:#B2BBF0" alt="Screenshot of one of the previously collapsed entries expanded" src="/static/b6c827a56505ac8a9243162a448ada21/5a190/13e.png"/></picture>
+<!-- -->
+<p> 控制台上的这个输出是由代码中的<em>console.log</em>命令引起的：</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">const</span> data <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>responseText<span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p>因此，在从服务器接收到数据之后，代码将其打印到了控制台。</p>
+<!-- -->
+<p> 在整个课程中，你会经常用到  <i>Console</i> 选项卡和 <em>console.log</em> 命令。</p>
+<h3>Event handlers and Callback functions</h3>
+<!-- -->
+<p>这段代码的结构有点奇怪。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">var</span> xhttp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">XMLHttpRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+xhttp<span class="token punctuation">.</span><span class="token function-variable function">onreadystatechange</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// code that takes care of the server response</span>
+<span class="token punctuation">}</span>
+
+xhttp<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">&#x27;GET&#x27;</span><span class="token punctuation">,</span> <span class="token string">&#x27;/data.json&#x27;</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span>
+xhttp<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p>发送到服务器的请求放在了最后一行，但是处理响应的代码却在上面定义了。这是怎么回事？</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js">xhttp<span class="token punctuation">.</span><span class="token function-variable function">onreadystatechange</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></code></pre></div>
+<!-- -->
+<p> 这一行，为进行请求的<em>xhttp</em>对象定义了<i>onreadystatechange</i>事件的<i>event handler</i>。当该对象的状态发生变化时，浏览器会调用事件处理函数。该函数代码检查<a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState">readyState</a>是否等于4（描述了<i>操作已经完成</i>的情况），以及响应的HTTP状态代码是否为200。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js">xhttp<span class="token punctuation">.</span><span class="token function-variable function">onreadystatechange</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>readyState <span class="token operator">==</span> <span class="token number">4</span> <span class="token operator">&amp;&amp;</span> <span class="token keyword">this</span><span class="token punctuation">.</span>status <span class="token operator">==</span> <span class="token number">200</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// code that takes care of the server response</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p> 调用事件处理程序的机制在JavaScript中非常常见。事件处理函数被称为<a href="https://developer.mozilla.org/en-US/docs/Glossary/Callback_function">回调</a>函数。应用代码本身并不调用这些函数，但是运行时环境--即浏览器，在适当的时候，即<i>事件</i>发生时，会调用该函数。</p>
+<h3>Document Object Model or DOM</h3>
+<!-- -->
+<p>我们可以将 html 页面看作隐式树结构。</p>
+<pre>
+
+html
+  head
+    link
+    script
+  body
+    div
+      h1
+      div
+        ul
+          li
+          li
+          li
+      form
+        input
+        input
+</pre>
+<!-- -->
+<p>同样的树状结构可以在控制台的<i>Elements元素</i>选项卡上看到。</p>
+<picture><img style="border-color:#B2BBF0" alt="A screenshot of the Elements tab of the developer console" src="/static/081eb2d1f52d2536382d5d3efe0bc87f/5a190/14e.png"/></picture>
+<!-- -->
+<p> 浏览器的工作，就是基于将HTML元素描绘成一棵树。</p>
+<!-- -->
+<p>文档对象模型Document Object Model，或<a href="https://en.wikipedia.org/wiki/Document_Object_Model">DOM</a>，是一个应用编程接口(<i>API</i>)，它能够对与网页相对应的<i>元素树</i>进行程序化修改。</p>
+<!-- -->
+<p> 上一章介绍的JavaScript代码就是使用DOM-API在页面中添加了一个笔记列表。</p>
+<!-- -->
+<p> 下面的代码为变量<em>ul</em>创建了一个新节点，并为其添加了一些子节点。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">var</span> ul <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">&#x27;ul&#x27;</span><span class="token punctuation">)</span>
+
+data<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">note</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> li <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">&#x27;li&#x27;</span><span class="token punctuation">)</span>
+
+  ul<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>li<span class="token punctuation">)</span>
+  li<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>document<span class="token punctuation">.</span><span class="token function">createTextNode</span><span class="token punctuation">(</span>note<span class="token punctuation">.</span>content<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p> 最后，变量<em>ul</em>的树枝被连接到整个页面的HTML树中的适当位置。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js">document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">&#x27;notes&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>ul<span class="token punctuation">)</span></code></pre></div>
+<h3>Manipulating the document-object from console</h3>
+<!-- -->
+<p> 一个HTML文档的DOM树的最顶端节点被称为<em>document</em>对象。我们可以使用DOM-API在网页上执行各种操作。你可以通过在控制台标签中输入<em>document</em>来访问<em>document</em>对象。</p>
+<picture><img style="border-color:#B2BBF0" alt="fullstack content" src="/static/ac9364f4d597d187d271a1628a332e7d/5a190/15e.png"/></picture>
+<!-- -->
+<p> 让我们从控制台向页面添加一个新的笔记。</p>
+<!-- -->
+<p> 首先，我们要从页面上获得笔记的列表。列表在页面的第一个ul-元素中。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js">list <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementsByTagName</span><span class="token punctuation">(</span><span class="token string">&#x27;ul&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span></code></pre></div>
+<!-- -->
+<p> 然后创建一个新的li-元素，并在其中添加一些文本内容。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js">newElement <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">&#x27;li&#x27;</span><span class="token punctuation">)</span>
+newElement<span class="token punctuation">.</span>textContent <span class="token operator">=</span> <span class="token string">&#x27;Page manipulation from console is easy&#x27;</span></code></pre></div>
+<!-- -->
+<p> 然后将新的li-元素加入到列表中。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js">list<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>newElement<span class="token punctuation">)</span></code></pre></div>
+<picture><img style="border-color:#B2BBF0" alt="Screenshot of the page with the new note added to the list" src="/static/5971f5573de2bc91961f679e27430097/5a190/16e.png"/></picture>
+<!-- -->
+<p> 虽然页面在你的浏览器上更新，这些变化也不是永久性的。如果页面被重新加载，新的笔记将会消失，因为这些变化没有被推送到服务器上。浏览器获取的JavaScript代码将始终基于来自地址<a href="https://studies.cs.helsinki.fi/exampleapp/data.json">https://studies.cs.helsinki.fi/exampleapp/data.json</a>的JSON-数据，来创建笔记列表。</p>
+<h3>CSS</h3>
+<!-- -->
+<p> 笔记页面的HTML代码中的<i>head</i>元素包含一个<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link">link</a>标签，它决定了浏览器必须从地址<a href="https://studies.cs.helsinki.fi/exampleapp/main.css">main.css</a>获取一个<a href="https://developer.mozilla.org/en-US/docs/Web/CSS">CSS</a>样式表。</p>
+<!-- -->
+<p> 层叠样式表Cascading Style Sheets，或称CSS，是一种用来决定网页外观的样式表语言。</p>
+<!-- -->
+<p>获取到的CSS文件看起来如下所示：</p>
+<div class="gatsby-highlight" data-language="css"><pre><code class="language-css"><span class="token selector">.container</span> <span class="token punctuation">{</span>
+  <span class="token property">padding</span><span class="token punctuation">:</span> 10px<span class="token punctuation">;</span>
+  <span class="token property">border</span><span class="token punctuation">:</span> 1px solid<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">.notes</span> <span class="token punctuation">{</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p> 该文件定义了两个<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors">class selectors类选择器</a>。这两个选择器用于选择页面的某些部分，并对它们定义样式规则，来装饰它们。</p>
+<!-- -->
+<p> 一个类选择器的定义总是以句号开始，并包含类的名称。</p>
+<!-- -->
+<p>这些类是<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class">属性</a>，它可以被添加到HTML元素中。</p>
+<!-- -->
+<p> CSS属性可以在控制台的<i>elements</i>标签中检查。</p>
+<picture><img style="border-color:#B2BBF0" alt="Screenshot of the Elements tab on the developer console" src="/static/4504fc2e95de826dd766aca1d0940ea4/5a190/17e.png"/></picture>
+<!-- -->
+<p>最外层的<i>div</i>元素有<i>container</i>类。包含笔记列表的<i>ul</i>元素有<i>notes</i>类。</p>
+<!-- -->
+<p> 该CSS规则定义了具有<i>container</i>类的元素，将勾勒出一个一像素宽的<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border">边框</a>。它还在元素上设置了10像素的<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/padding">padding</a>。这在元素的内容和边框之间增加了一些空隙。</p>
+<!-- -->
+<p> 第二条CSS规则将笔记的文本颜色设置为蓝色。</p>
+<!-- -->
+<p> 除了类之外，HTML元素还可以有其他属性。包含笔记的<i>div</i>元素有一个<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id">id</a>属性。JavaScript代码使用这个id来寻找这个元素。</p>
+<!-- -->
+<p> 控制台的<i>Elements</i>标签可以用来改变元素的样式。</p>
+<picture><img style="border-color:#B2BBF0" alt="fullstack content" src="/static/ef664dbcddaeef64c5ff6e180e42e5ca/5a190/18e.png"/></picture>
+<!-- -->
+<p> 在控制台中所作的改变也不会是永久性的。如果你想做永久的改变，必须把它们保存到服务器上的CSS样式表中。</p>
+<h3>Loading a page containing JavaScript - review</h3>
+<!-- -->
+<p> 让我们回顾一下在浏览器上打开 <a href="https://studies.cs.helsinki.fi/exampleapp/notes">https://studies.cs.helsinki.fi/exampleapp/notes</a> ，会发生什么。</p>
+<picture><img style="border-color:#B2BBF0" alt="fullstack content" src="/static/7094858c9c7ec9149d10607e9e1d94bb/5a190/19e.png"/></picture>
+<!-- -->
+<ul>
+<li>
+<p>浏览器使用HTTP GET请求从服务器上获取定义页面内容和结构的HTML代码。</p>
+<!-- -->
+</li>
+<li>
+<p>HTML代码中的链接使浏览器也获取了CSS样式表<i>main.css</i>...</p>
+<!-- -->
+</li>
+<li>
+<p>...和一个JavaScript代码文件<i>main.js</i>。</p>
+<!-- -->
+</li>
+<li>
+<p>浏览器执行该JavaScript代码。该代码向地址<a href="https://studies.cs.helsinki.fi/exampleapp/data.json">https://studies.cs.helsinki.fi/exampleapp/data.json</a> 发出HTTP GET请求，该地址</p>
+<!-- -->
+<p>以JSON数据形式返回笔记。</p>
+<!-- -->
+</li>
+<li>当数据被获取后，浏览器执行一个<i>事件处理程序</i>，它使用DOM-API将笔记渲染到页面上。</li>
+</ul>
+<h3>Forms and HTTP POST</h3>
+<!-- -->
+<p> 接下来让我们来看看如何添加一个新的笔记。</p>
+<!-- -->
+<p> 笔记页面包含一个<a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form">form表单元素</a>。</p>
+<picture><img style="border-color:#B2BBF0" alt="fullstack content" src="/static/2dbe9f6d3c9999766d2cbad6200fea40/5a190/20e.png"/></picture>
+<!-- -->
+<p>当表单上的按钮被点击时，浏览器将把用户的输入发送到服务器上。让我们打开<i>网络</i>标签，看看提交表单是什么样子。</p>
+<picture><img style="border-color:#B2BBF0" alt="Screenshot of the Network tab where the events for submitting the form are shown" src="/static/7951d2221d80f63a78350106150d5e61/5a190/21e.png"/></picture>
+<!-- -->
+<p> 很惊奇吧，提交表单会引起至少<i>5</i>个HTTP请求。</p>
+<!-- -->
+<p>第一个是表单提交事件。 让我们放大一下:</p>
+<picture><img style="border-color:#B2BBF0" alt="Detail view of the first request" src="/static/ac09c143991ad160bdaa1c1381d93f7b/5a190/22e.png"/></picture>
+<!-- -->
+<p>这是一个<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST">HTTP POST</a>请求，指向服务器地址<i>new_note</i>。服务器回应的是HTTP状态代码302。这是一个<a href="https://en.wikipedia.org/wiki/URL_redirection">URL重定向</a>，服务器要求浏览器对头信息<i>Location</i>中定义的地址--即地址<i>notes</i>做一个新的HTTP GET请求。</p>
+<!-- -->
+<p> 于是，浏览器重新加载了笔记页面。重载又引起了三个HTTP请求：获取样式表（main.css）、JavaScript代码（main.js）和笔记的原始数据（data.json）。</p>
+<!-- -->
+<p> Network选项卡还显示了随表单提交的数据。</p>
+<!-- -->
+<p> 注意：对于新版Chrome，Form Data下拉菜单在新的标签Payload内，Payload标签位于Headers标签的右侧。</p>
+<picture><img style="border-color:#B2BBF0" alt="fullstack content" src="/static/baad2297bb966ed9387cb3a0d79fa4f8/5a190/23e.png"/></picture>
+<!-- -->
+<p> 表单标签有属性<i>action</i>和<i>method</i>，它们定义了提交表单是以HTTP POST请求的方式完成的，地址为<i>new_note</i>。</p>
+<picture><img style="border-color:#B2BBF0" alt="fullstack content" src="/static/9463d1dca4170015c47e79065ff98820/5a190/24e.png"/></picture>
+<!-- -->
+<p>服务器上负责POST请求的代码非常简单（注意：这个代码在服务器上，而不是在浏览器获取的JavaScript代码上）。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js">app<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">&#x27;/new_note&#x27;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  notes<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token literal-property property">content</span><span class="token operator">:</span> req<span class="token punctuation">.</span>body<span class="token punctuation">.</span>note<span class="token punctuation">,</span>
+    <span class="token literal-property property">date</span><span class="token operator">:</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+  <span class="token keyword">return</span> res<span class="token punctuation">.</span><span class="token function">redirect</span><span class="token punctuation">(</span><span class="token string">&#x27;/notes&#x27;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p> 数据被作为POST请求的<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST">body</a>发送。</p>
+<!-- -->
+<p> 服务器可以通过访问请求对象<em>req</em>的<em>req.body</em>字段来访问这些数据。</p>
+<!-- -->
+<p> 服务器创建一个新的Note对象，并将其添加到一个名为<em>notes</em>的数组中。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js">notes<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token literal-property property">content</span><span class="token operator">:</span> req<span class="token punctuation">.</span>body<span class="token punctuation">.</span>note<span class="token punctuation">,</span>
+  <span class="token literal-property property">date</span><span class="token operator">:</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p> 笔记对象有两个字段。<i>content</i>字段包含笔记的实际内容，和<i>date</i>字段包含笔记创建的日期和时间。</p>
+<!-- -->
+<p> 服务器不会将新的笔记保存到数据库中，所以当服务器重新启动时，新的笔记会消失。</p>
+<h3>AJAX</h3>
+<!-- -->
+<p> 应用的笔记页面遵循九十年代早期的网络开发风格，&quot;使用Ajax&quot;，它处于2000年初网络技术浪潮的顶峰上。</p>
+<!-- -->
+<p> <a href="https://en.wikipedia.org/wiki/Ajax_%EF%BC%88%E7%BC%96%E7%A8%8B%EF%BC%89">AJAX</a>(Asynchronous JavaScript and XML)是2005年2月在浏览器技术进步的背景下引入的一个术语，用来描述一种新的革命性的方法，它能够使用包含在HTML中的JavaScript来获取网页内容，而不需要重新渲染网页。</p>
+<!-- -->
+<p> 在AJAX时代之前，所有的网页都像我们在本章前面看到的<a href="/en/part0/fundamentals_of_web_apps#traditional-web-applications">传统网络应用</a>那样工作。</p>
+<!-- -->
+<p>页面上显示的所有数据都是通过服务器生成的HTML代码获取的。</p>
+<!-- -->
+<p> 笔记页面使用AJAX来获取笔记数据。提交表单仍然使用传统的提交网络表单的机制。</p>
+<!-- -->
+<p> 应用的URL反映了古老的、无忧无虑的时代。JSON数据从URL <a href="https://studies.cs.helsinki.fi/exampleapp/data.json">https://studies.cs.helsinki.fi/exampleapp/data.json</a>中获取，新的笔记被发送到URL <a href="https://studies.cs.helsinki.fi/exampleapp/new_note">https://studies.cs.helsinki.fi/exampleapp/new_note</a>中。</p>
+<!-- -->
+<p> 现在像这样的URL是不会被接受的，因为它们不遵循公认的<a href="https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services">RESTful</a>API的惯例，我们将在<a href="/en/part3">第三章</a>中进一步研究。</p>
+<!-- -->
+<p> 称为AJAX的东西现在已经非常普遍，以至于被认为是理所当然的。这个词已经被遗忘了，新生代甚至没有听说过它。</p>
+<h3>Single page app</h3>
+<!-- -->
+<p> 在我们的示例应用中，主页的工作方式与传统的网页一样。所有的逻辑都在服务器上，而浏览器只按照指示渲染HTML。</p>
+<!-- -->
+<p> 笔记页面把生成现有笔记的HTML代码的部分责任交给了浏览器。浏览器通过执行从服务器上获取的JavaScript代码来完成这项任务。这些代码从服务器上获取JSON数据，并使用<a href="/en/part0/fundamentals_of_web_apps#document-object-model-or-dom">DOM-API</a>在页面上添加显示笔记的HTML元素。</p>
+<!-- -->
+<p>近年来，出现了创建网络应用的<a href="https://en.wikipedia.org/wiki/Single-page_application">单页应用</a> (SPA)风格。SPA风格的网站并不像我们的样例应用那样从服务器上单独获取所有的页面，而是只由一个从服务器上获取的HTML页面组成，其内容由在浏览器中执行的JavaScript来操作。</p>
+<!-- -->
+<p> 我们应用的笔记页面与SPA风格的应用有一些相似之处，但还没有完全达到目的。尽管渲染笔记的逻辑是在浏览器上运行的，但该页面仍然使用传统的方式来添加新的笔记。数据通过表单提交被发送到服务器，服务器通过<i>redirect</i>指示浏览器重新加载笔记页面。</p>
+<!-- -->
+<p> 我们的例子应用的单页应用版本可以在<a href="https://studies.cs.helsinki.fi/exampleapp/spa">https://studies.cs.helsinki.fi/exampleapp/spa</a>找到。</p>
+<!-- -->
+<p> 乍看之下，这个应用与之前的应用完全一样。</p>
+<!-- -->
+<p>HTML代码几乎相同，但JavaScript文件不同（<i>spa.js</i>），而且在定义form-tag的方式上有一点变化。</p>
+<picture><img style="border-color:#B2BBF0" alt="fullstack content" src="/static/cb1893b2f18168168b3337ef994f0347/5a190/25e.png"/></picture>
+<!-- -->
+<p> 这个表单没有<i>action</i>或<i>method</i>属性来定义如何和往哪里发送输入数据。</p>
+<!-- -->
+<p> 打开<i>网络</i>-标签并清空它。当你现在创建一个新的笔记时，你会发现浏览器只向服务器发送了一个请求。</p>
+<picture><img style="border-color:#B2BBF0" alt="fullstack content" src="/static/07beb53097a520517c1c28ff17fc907a/5a190/26e.png"/></picture>
+<!-- -->
+<p> 发送到地址<i>new_note_spa</i>的POST请求包含了新笔记的JSON数据，包含了笔记的内容（<i>content</i>）和时间戳（<i>date</i>）。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token punctuation">{</span>
+  <span class="token literal-property property">content</span><span class="token operator">:</span> <span class="token string">&quot;single page app does not reload the whole page&quot;</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">date</span><span class="token operator">:</span> <span class="token string">&quot;2019-05-25T15:15:59.905Z&quot;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p> 请求的<i>Content-Type</i>头告诉服务器，包含的数据是以JSON格式表示的。</p>
+<picture><img style="border-color:#B2BBF0" alt="fullstack content" src="/static/5819436c98e4cce143fce3fe9bc534b9/5a190/27e.png"/></picture>
+<!-- -->
+<p> 如果没有这个头，服务器将不知道如何正确解析数据。</p>
+<!-- -->
+<p> 服务器以状态代码<a href="https://httpstatuses.com/201">201创建</a>进行响应。这一次服务器没有要求重定向，浏览器停留在同一个页面上，并且没有再发送HTTP请求。</p>
+<!-- -->
+<p> 应用的SPA版本没有以传统方式发送表单数据，而是使用了它从服务器上获取的JavaScript代码。</p>
+<!-- -->
+<p> 我们将研究一下这段代码，尽管现在了解它的所有细节并不重要。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">var</span> form <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">&#x27;notes_form&#x27;</span><span class="token punctuation">)</span>
+form<span class="token punctuation">.</span><span class="token function-variable function">onsubmit</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  e<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+  <span class="token keyword">var</span> note <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">content</span><span class="token operator">:</span> e<span class="token punctuation">.</span>target<span class="token punctuation">.</span>elements<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>value<span class="token punctuation">,</span>
+    <span class="token literal-property property">date</span><span class="token operator">:</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+
+  notes<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>note<span class="token punctuation">)</span>
+  e<span class="token punctuation">.</span>target<span class="token punctuation">.</span>elements<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token string">&#x27;&#x27;</span>
+  <span class="token function">redrawNotes</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token function">sendToServer</span><span class="token punctuation">(</span>note<span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p> 命令<em>document.getElementById(&#x27;notes_form&#x27;)</em>指示代码从页面上获取表单元素，并注册一个<i>事件处理程序</i>来处理表单提交事件。该事件处理程序立即调用方法<em>e.preventDefault()</em>来阻止表单提交的默认处理。默认方法会将数据发送到服务器并导致一个新的GET请求，这是我们不希望发生的。</p>
+<!-- -->
+<p> 然后事件处理函数创建了一个新的笔记，用<em>notes.push(note)</em>命令将其添加到笔记列表中，重新渲染页面上的笔记列表，并将新笔记发送到服务器。</p>
+<!-- -->
+<p> 发送笔记到服务器的代码如下。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">var</span> <span class="token function-variable function">sendToServer</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">note</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> xhttpForPost <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">XMLHttpRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token comment">// ...</span>
+
+  xhttpForPost<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">&#x27;POST&#x27;</span><span class="token punctuation">,</span> <span class="token string">&#x27;/new_note_spa&#x27;</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span>
+  xhttpForPost<span class="token punctuation">.</span><span class="token function">setRequestHeader</span><span class="token punctuation">(</span>
+    <span class="token string">&#x27;Content-type&#x27;</span><span class="token punctuation">,</span> <span class="token string">&#x27;application/json&#x27;</span>
+  <span class="token punctuation">)</span>
+  xhttpForPost<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>note<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p> 该代码确定数据将以HTTP POST请求发送，数据类型为JSON。数据类型由<i>Content-type</i>头决定。然后，数据被作为JSON-字符串发送。</p>
+<!-- -->
+<p> 应用代码可在<a href="https://github.com/mluukkai/example_app">https://github.com/mluukkai/example_app</a>中找到。</p>
+<!-- -->
+<p> 值得记住的是，这个应用只是为了演示课程的概念。代码在某种程度上遵循了不良的开发风格，在创建你自己的应用时，不应作为一个例子来使用。所用的URL也是如此。发送新笔记的URL <i>new_note_spa</i>并不符合当前的最佳实践。</p>
+<h3>JavaScript-libraries</h3>
+<!-- -->
+<p> 这个样本应用是用所谓的<a href="https://www.freecodecamp.org/news/is-vanilla-javascript-worth-learning-absolutely-c2c67140ac34/">vanilla JavaScript</a>完成的，只使用DOM-API和JavaScript来操作页面的结构。</p>
+<!-- -->
+<p> 与其只使用JavaScript和DOM-API，不如使用包含更简易工具的库，与DOM-API相比更容易操作，通常用于操作页面。这些库中一个一直很流行的是<a href="https://jquery.com/">jQuery</a>。</p>
+<!-- -->
+<p> jQuery是早在网络应用主要遵循服务器生成HTML页面的传统风格时开发的，这种风格的功能通过在浏览器端使用 JavaScript 搭配使用 jQuery 来增强。jQuery成功的原因之一是其所谓的跨浏览器兼容性。这个库无论在哪种浏览器或制造它的公司都能工作，所以不需要针对浏览器的解决方案。如今，考虑到JavaScript的发展，使用jQuery就不那么合理了，最流行的浏览器一般都能很好地支持基本功能。</p>
+<!-- -->
+<p> 单页应用的兴起带来了几种比jQuery更 &quot;现代 &quot;的网页开发方式。第一波开发者的最爱是<a href="http://backbonejs.org/">BackboneJS</a>。在2012年<a href="https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13">推出</a>之后，谷歌的<a href="https://angularjs.org/">AngularJS</a>迅速成为现代网页开发的事实标准。</p>
+<!-- -->
+<p>然而，2014年10月，在<a href="https://jaxenter.com/angular-2-0-announcement-backfires-112127.html">Angular团队宣布对第一版的支持将结束</a>，Angular 2不会向后兼容第一版后，Angular的人气骤降。Angular 2和较新的版本并没有得到太热烈的欢迎。</p>
+<!-- -->
+<p>目前最流行的实现网络应用逻辑的浏览器端的工具是Facebook&#x27;s <a href="https://reactjs.org/">React</a>库。</p>
+<!-- -->
+<p>在本课程中，我们将熟悉React和<a href="https://github.com/reactjs/redux">Redux</a>库，它们经常被一起使用。</p>
+<!-- -->
+<p> React的地位似乎很强大，但JavaScript的世界是不断变化的。例如，最近一个新来者--<a href="https://vuejs.org/">VueJS</a>--已经吸引了一些人的兴趣。</p>
+<h3>Full stack web development</h3>
+<!-- -->
+<p>课程名称，<i>全栈网络开发</i>，是什么意思？全栈是一个人人都在谈论的流行语，而没有人真正知道它的含义。或者说，至少对这个词没有一个公认的定义。</p>
+<!-- -->
+<p> 实际上，所有的网络应用都有（至少）两个 &quot;层&quot;：浏览器更接近最终用户，是最上面的一层，而服务器是下面的一层。在服务器下面通常还有一个数据库层。因此，我们可以把网络应用的<i>架构</i>看作是一种<i>堆栈</i>。</p>
+<!-- -->
+<p> 通常，我们还谈论<a href="https://en.wikipedia.org/wiki/Front_and_back_ends">前端和后端</a>。浏览器是前端，在浏览器上运行的JavaScript是前端代码。另一边，服务器则是后端。</p>
+<!-- -->
+<p>在本课程中，全栈式网络开发意味着我们关注应用的所有部分：前端、后端和数据库。有时，服务器上的软件和它的操作系统也被看作是堆栈的一部分，但我们不会去研究这些。</p>
+<!-- -->
+<p> 我们将使用<a href="https://nodejs.org/en/">Node.js</a>运行环境，用JavaScript对后端进行编码。在堆栈的多个层次上使用相同的编程语言给全栈网络开发带来了一个全新的层面。然而，全栈网络开发并不要求所有的栈都使用相同的编程语言（JavaScript）。</p>
+<!-- -->
+<p> 过去，开发人员专门从事堆栈的某一层，例如后端，是比较常见的。后端和前端的技术是完全不同的。随着全栈趋势的发展，开发人员熟练掌握应用和数据库的所有层已经成为普遍现象。通常情况下，全栈开发人员还必须有足够的配置和管理技能来操作他们的应用，例如，上云。</p>
+<h3>JavaScript fatigue</h3>
+<!-- -->
+<p>全栈 web 开发在许多方面都具有挑战性。 在许多地方会有突发情况，并且调试起来比普通桌面应用要困难得多。 JavaScript (与许多其他语言相比) 并不总是像你期望的那样工作 ，其运行时环境的异步工作方式带来了各种各样的挑战。 网络中的通信需要对 http 协议的知识储备。 还必须处理数据库、服务器管理和配置。 了解足够的 CSS 至少在一定程度上能够使应用显得好看。</p>
+<!-- -->
+<p> JavaScript的世界发展迅速，这带来了它自己的一系列挑战。工具、库和语言本身都在不断发展。有些人开始对这种不断的变化感到厌倦，并为此创造了一个术语。<em>JavaScript 疲劳</em>。可以阅读<a href="https://auth0.com/blog/how-to-manage-javascript-fatigue/">auth0上的如何管理JavaScript疲劳</a> 或<a href="https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4">Medium上的JavaScript疲劳</a>。</p>
+<!-- -->
+<p>在这个课程中，你自己也会遭受到JavaScript的疲劳。幸运的是，有一些方法可以使学习曲线变得平滑，我们可以从编码而不是配置开始。我们不能完全避免配置，但我们可以在接下来的几周里愉快地推进，同时避开最糟糕的配置地狱。</p>
+</https:></div></div>
+<div class="banner spacing tasks content-banner" style="background-color:#B2BBF0;border-color:#B2BBF0"><div class="course-content " style="border-color:#B2BBF0;background-color:transparent"><div class="course-content-inner ">
+<!-- -->
+ <h3>练习0.1.-0.6.</h3>
+<!-- -->
+<p> 练习通过GitHub提交，并在<a href="https://studies.cs.helsinki.fi/stats/courses/fullstackopen">提交系统</a>中标记练习完成。</p>
+<!-- -->
+<p>你可以将所有的练习提交到同一个仓库，或者使用多个不同的仓库。如果你将不同部分的练习提交到同一个仓库中，请将你的目录命名好。如果你使用一个私人仓库来提交练习，把<em>mluukkai</em>作为合作者加入其中。</p>
+<!-- -->
+<p>在你的提交仓库中命名目录的一个好方法如下：</p>
+<div class="gatsby-highlight" data-language="text"><pre><code class="language-text">part0
+part1
+  courseinfo
+  unicafe
+  anecdotes
+part2
+  courseinfo
+  phonebook
+  countries</code></pre></div>
+<!-- -->
+<p> 也就是，每个章节都有自己的目录，其中包含每个练习集的目录（如第一章节的unicafe练习）。</p>
+<!-- -->
+<p> 练习是<strong>一次提交一个章节的</strong>。当你提交了一个章节的练习，你就不能再提交该章节任何遗漏的练习。</p>
+<!-- -->
+<h4>0.1: HTML</h4>
+<!-- -->
+<p>通过阅读Mozilla的这个教程来复习HTML的基础知识：<a href="https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics">HTML教程</a>。</p>
+<!-- -->
+<p>这个练习不用提交GitHub，仅仅阅读教程即可。</p>
+<!-- -->
+ <h4>0.2: CSS</h4> 
+<!-- -->
+<p> 通过阅读Mozilla的这个教程来复习CSS的基础知识：<a href="https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics">CSS教程</a>。</p>
+<!-- -->
+<p>这个练习不用提交GitHub，仅仅阅读教程即可。</p>
+<!-- -->
+ <h4>0.3: HTML表单</h4> 
+<!-- -->
+<p> 通过阅读Mozilla的教程<a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form">你的第一个表单</a>来了解HTML表单的基础知识。</p>
+<p><i>This exercise is not submitted to GitHub, it&#x27;s enough to just read the tutorial</i></p>
+<p>这个练习不用提交GitHub，仅仅阅读教程即可。</p>
+<!-- -->
+<h4>0.4: 新的笔记</h4>
+<!-- -->
+<p> 在<a href="/en/part0/fundamentals_of_web_apps#loading-a-page-containing-java-script-review">加载含有JavaScript的页面-回顾</a>一章中，打开页面<a href="https://studies.cs.helsinki.fi/exampleapp/notes">https://studies.cs.helsinki.fi/exampleapp/notes</a>所引起的事件链被描绘成一个<a href="https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/">序列图</a></p>
+<!-- -->
+<p> 该图是使用<a href="https://www.websequencediagrams.com">websequencediagrams</a>服务制作的，如下。</p>
+<div class="gatsby-highlight" data-language="text"><pre><code class="language-text">browser-&gt;server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
+server--&gt;browser: HTML-code
+browser-&gt;server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+server--&gt;browser: main.css
+browser-&gt;server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
+server--&gt;browser: main.js
+
+note over browser:
+browser starts executing js-code
+that requests JSON data from server
+end note
+
+browser-&gt;server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+server--&gt;browser: [{ content: &quot;HTML is easy&quot;, date: &quot;2019-05-23&quot; }, ...]
+
+note over browser:
+browser executes the event handler
+that renders notes to display
+end note</code></pre></div>
+<!-- -->
+<p> <strong>创建一个类似的图</strong>，描述当用户把东西写进文本字段并点击<i>submit</i>按钮，在<a href="https://studies.cs.helsinki.fi/exampleapp/notes">https://studies.cs.helsinki.fi/exampleapp/notes</a>页上创建一个新笔记的情况。</p>
+<!-- -->
+<p> 如果有必要，将浏览器或服务器上的操作显示为图中的注释。</p>
+<!-- -->
+<p> 该图不一定是一个序列图。任何合理的渲染事件方式都是可以的。</p>
+<!-- -->
+<p>所有做这个的必要信息，以及接下来的两个练习，都可以从<a href="/en/part0/fundamentals_of_web_apps#forms-and-http-post">本章</a>的正文中找到。</p>
+<!-- -->
+<p> 这些练习的目的是再一次通读文本，并思考其中的内容。阅读应用的<a href="https://github.com/mluukkai/example_app">代码</a>不是必须的，但当然也可以。</p>
+<!-- -->
+ <h4>0.5: 单页应用</h4>
+<!-- -->
+<p> 创建一个图表，描述用户进入<a href="/en/part0/fundamentals_of_web_apps#single-page-app">单页应用</a>版本的笔记应用的情况，网址为<a href="https://studies.cs.helsinki.fi/exampleapp/spa">https://studies.cs.helsinki.fi/exampleapp/spa</a>。</p>
+<!-- -->
+<h4>0.6: 新的笔记</h4>
+<!-- -->
+<p> 创建一个图表，描述用户使用单页版应用创建新笔记的情况。</p>
+<!-- -->
+<p>这是最后一个练习，是时候把你的答案推送到GitHub，并在<a href="https://studies.cs.helsinki.fi/stats/courses/fullstackopen">提交系统</a>中标记练习完成。</p>
+</div></div></div></div></div><div class="container spacing element--flex element--centered"><a class="edit-link" target="__BLANK" href="https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/edit/source/src/content/0/zh/part0b.md"><span>对讲课材料提出建议</span></a></div><div class="container spacing spacing--after-large prev-next__container "><a class="col-4--mobile push-right-1 prev" href="/zh/part0/基础知识"><div class=" element--flex element--column"><p>Part<!-- --> <!-- -->0a</p><b>上一部分</b></div></a><a class="col-4--mobile push-left-1 next" href="/zh/part1"><div class=" element--flex element--column"><p>Part<!-- --> <!-- -->1</p><b>下一部分</b></div></a></div></div></main><footer class="container spacing--after-small spacing--mobile element--flex" id="footer"><div class="col-5 push-right-3 col-10--mobile order-2--mobile order-2--tablet footer__links element--flex element--space-between"><a href="https://www.helsinki.fi/" class="col-5 col-4--mobile spacing--mobile"><div class="image col-6 image--contain image--invert"><div class="image__container"><img style="background-color:;background-opacity:0.5" class="image__content" src="/static/uoh_centre-3689cf9983a2ebc8089c8f078a9c4769.svg" alt="Helsingin yliopiston logo"/></div></div></a><a href="https://www.houston-inc.com/" class="col-5 col-4--mobile spacing--mobile"><div class="image col-6 image--contain image--invert"><div class="image__container"><img style="background-color:;background-opacity:0.5" class="image__content" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMjQ3cHgiIGhlaWdodD0iODJweCIgdmlld0JveD0iMCAwIDI0NyA4MiIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4KICAgIDwhLS0gR2VuZXJhdG9yOiBTa2V0Y2ggNTMuMiAoNzI2NDMpIC0gaHR0cHM6Ly9za2V0Y2hhcHAuY29tIC0tPgogICAgPHRpdGxlPmxvZ28vaG91c3RvbjwvdGl0bGU+CiAgICA8ZGVzYz5DcmVhdGVkIHdpdGggU2tldGNoLjwvZGVzYz4KICAgIDxkZWZzPgogICAgICAgIDxwb2x5Z29uIGlkPSJwYXRoLTEiIHBvaW50cz0iMCAwLjAyNjcxOTI2NzMgMTM4LjIwODE2NyAwLjAyNjcxOTI2NzMgMTM4LjIwODE2NyAzNi40NjU0MzgxIDAgMzYuNDY1NDM4MSI+PC9wb2x5Z29uPgogICAgPC9kZWZzPgogICAgPGcgaWQ9ImxvZ28vaG91c3RvbiIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgaWQ9ImhvdXN0b25fc2ltcGxlLmVwcy1jb3B5LTMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDU0LjU4MTg5MywgMjMuMjYzMDQwKSI+CiAgICAgICAgICAgIDxtYXNrIGlkPSJtYXNrLTIiIGZpbGw9IndoaXRlIj4KICAgICAgICAgICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI3BhdGgtMSI+PC91c2U+CiAgICAgICAgICAgIDwvbWFzaz4KICAgICAgICAgICAgPGcgaWQ9IkNsaXAtMiI+PC9nPgogICAgICAgICAgICA8cGF0aCBkPSJNODIuODA1MTI5OCwxMy41MDY2NjAzIEw4Mi44MDUxMjk4LDI1LjUzNjU1MDkgTDg1Ljk5MzYyOSwyNS41MzY1NTA5IEw4NS45OTM2MjksMTMuNTA2NjYwMyBMOTAuNDA2NTQ5MywxMy41MDY2NjAzIEw5MC40MDY1NDkzLDEwLjQ0NTY3ODQgTDc4LjM3NTEwMzYsMTAuNDQ1Njc4NCBMNzguMzc1MTAzNiwxMy41MDY2NjAzIEw4Mi44MDUxMjk4LDEzLjUwNjY2MDMgWiBNOTYuNDkxMDQ5NSwxNy45NjM2ODg1IEM5Ni40OTEwNDk1LDIwLjU1OTU1NzIgOTguMzE3ODU1NywyMi43MDc5ODQyIDEwMC44ODYxNTcsMjIuNzA3OTg0MiBDMTAzLjQ1NDg4MiwyMi43MDc5ODQyIDEwNS4yNDcxOTQsMjAuNTk1NDY1NyAxMDUuMjQ3MTk0LDE4LjAxNzk3NTMgTDEwNS4yNDcxOTQsMTguMDAwMDIxMSBDMTA1LjI0NzE5NCwxNS40MDQyOTM3IDEwMy40MjA1MjksMTMuMjU1ODY2NyAxMDAuODUyMjI4LDEzLjI1NTg2NjcgQzk4LjI4MzUwMjMsMTMuMjU1ODY2NyA5Ni40OTEwNDk1LDE1LjM2ODM4NTMgOTYuNDkxMDQ5NSwxNy45NDU3MzQzIEw5Ni40OTEwNDk1LDE3Ljk2MzY4ODUgWiBNOTMuMTQ3MDQxMywxOC4wMTc5NzUzIEw5My4xNDcwNDEzLDE3Ljk4MjA2NjkgQzkzLjE0NzA0MTMsMTMuNjg1NDk1NiA5Ni40MDQ4MTI3LDEwLjE3NjkzMDYgMTAwLjg4NjE1NywxMC4xNzY5MzA2IEMxMDUuMzY3OTI1LDEwLjE3NjkzMDYgMTA4LjU5MTM0MywxMy42NDk3Mjg1IDEwOC41OTEzNDMsMTcuOTQ1NzM0MyBMMTA4LjU5MTM0MywxNy45NjM2ODg1IEMxMDguNTkxMzQzLDIyLjI2MDI1OTggMTA1LjMzMzU3MiwyNS43Njg4MjQ3IDEwMC44NTIyMjgsMjUuNzY4ODI0NyBDOTYuMzcwMzE4LDI1Ljc2ODgyNDcgOTMuMTQ3MDQxMywyMi4zMTQxMjI0IDkzLjE0NzA0MTMsMTguMDE3OTc1MyBMOTMuMTQ3MDQxMywxOC4wMTc5NzUzIFogTTcwLjQxMTkxMzcsMjIuNzk3MDQ4NSBDNjguNzU2ODc0MiwyMi43OTcwNDg1IDY3LjM3ODIxNjYsMjIuMDgxMjgzMSA2Ni4wNjg0MDcsMjAuOTcxNzk3NCBMNjQuMTcyMTg3MiwyMy4zMTY0NDg0IEM2NS45MTMxODA4LDI0LjkyNzk0NTQgNjguMTM2Njc2MiwyNS43MzMzNDA0IDcwLjM0MzA2NTYsMjUuNzMzMzQwNCBDNzMuNDgwMTA1NSwyNS43MzMzNDA0IDc1LjY2OTI0NzYsMjQuMDUwMTY4IDc1LjY2OTI0NzYsMjEuMDYxMDAzIEw3NS42NjkyNDc2LDIxLjAyNTA5NDUgQzc1LjcyMTEzMSwxOC4zOTM0NTg4IDc0LjA0ODU2MTUsMTcuMzAxNzg1OCA3MS4xMDExMDExLDE2LjQ5NTgyNTMgQzY4LjU4NDY4MzQsMTUuODMzOTIyNiA2Ny45NjM5MTk5LDE1LjUxMTMxMjIgNjcuOTYzOTE5OSwxNC41MDg5ODYyIEw2Ny45NjM5MTk5LDE0LjQ3MzA3NzggQzY3Ljk2MzkxOTksMTMuNzM4OTM0MSA2OC42MDIyMTM1LDEzLjE2NjY2MTEgNjkuODI1NjQ0OSwxMy4xNjY2NjExIEM3MS4wNDk2NDE4LDEzLjE2NjY2MTEgNzIuMzA3OTkyMSwxMy43MjA5Nzk5IDczLjYwMDgzNywxNC42NTIwNTQ1IEw3NS4yNTU1OTM4LDEyLjE0NTk1NjkgQzczLjc4OTk5MjUsMTAuOTEwNjUwMiA3MS45ODA3MTY0LDEwLjIzMDM2OTIgNjkuODYwNTYzNywxMC4yMzAzNjkyIEM2Ni44OTU3MTQ3LDEwLjIzMDM2OTIgNjQuNzc1NTYyLDEyLjAzODY1NTcgNjQuNzc1NTYyLDE0Ljc3NzU5MjYgTDY0Ljc3NTU2MiwxNC44MTMwNzY5IEM2NC43NzU1NjIsMTcuODAyNjY2MSA2Ni42NzEwNzQ5LDE4LjY0NDUzNSA2OS41ODQxODE5LDE5LjQzMjExNzMgQzcyLjAxNDY0NTYsMjAuMDc2NjMxMiA3Mi41MTQ2Nzc2LDIwLjUwNjI2MDEgNzIuNTE0Njc3NiwyMS4zNDc3MDQ5IEw3Mi41MTQ2Nzc2LDIxLjM4MzA0NzkgQzcyLjUxNDY3NzYsMjIuMjYwMjU5OCA3MS43MjIyODg4LDIyLjc5NzA0ODUgNzAuNDExOTEzNywyMi43OTcwNDg1IEw3MC40MTE5MTM3LDIyLjc5NzA0ODUgWiBNMzEuMzM2NDY5NywxNy45NjM2ODg1IEMzMS4zMzY0Njk3LDIwLjU1OTU1NzIgMzMuMTYzNywyMi43MDc5ODQyIDM1LjczMTg1OTksMjIuNzA3OTg0MiBDMzguMzAwMTYxMSwyMi43MDc5ODQyIDQwLjA5MjQ3MjYsMjAuNTk1NDY1NyA0MC4wOTI0NzI2LDE4LjAxNzk3NTMgTDQwLjA5MjQ3MjYsMTguMDAwMDIxMSBDNDAuMDkyNDcyNiwxNS40MDQyOTM3IDM4LjI2NTI0MjMsMTMuMjU1ODY2NyAzNS42OTY5NDEsMTMuMjU1ODY2NyBDMzMuMTI5MjA1MywxMy4yNTU4NjY3IDMxLjMzNjQ2OTcsMTUuMzY4Mzg1MyAzMS4zMzY0Njk3LDE3Ljk0NTczNDMgTDMxLjMzNjQ2OTcsMTcuOTYzNjg4NSBaIE0yOC4wMDk3MDg5LDE4LjAxNzk3NTMgTDI4LjAwOTcwODksMTcuOTgyMDY2OSBDMjguMDA5NzA4OSwxMy42ODU0OTU2IDMxLjI2NzQ4MDMsMTAuMTc2OTMwNiAzNS43NDg4MjQ1LDEwLjE3NjkzMDYgQzQwLjIzMDczNDIsMTAuMTc2OTMwNiA0My40MzYxOTgsMTMuNjQ5NzI4NSA0My40NTQwMTA5LDE3Ljk0NTczNDMgTDQzLjQ1NDAxMDksMTcuOTYzNjg4NSBDNDMuNDU0MDEwOSwyMi4yNjAyNTk4IDQwLjE5NjIzOTUsMjUuNzY4ODI0NyAzNS43MTQ4OTUzLDI1Ljc2ODgyNDcgQzMxLjIzMjU2MTUsMjUuNzY4ODI0NyAyOC4wMDk3MDg5LDIyLjMxNDEyMjQgMjguMDA5NzA4OSwxOC4wMTc5NzUzIEwyOC4wMDk3MDg5LDE4LjAxNzk3NTMgWiBNNTMuODMwNDE3MSwyNS43MzMzNDA0IEM1Ny43NDI4ODEyLDI1LjczMzM0MDQgNjAuMjA3ODM5NywyMy40OTU4NDkyIDYwLjIwNzgzOTcsMTguOTMwNjcxNSBMNjAuMjA3ODM5NywxMC40MjcxNTg3IEw1Ny4wMDE4MTAzLDEwLjQyNzE1ODcgTDU3LjAwMTgxMDMsMTkuMDczNzM5OCBDNTcuMDAxODEwMywyMS40NzI2Nzc2IDU1LjgxMjMwODEsMjIuNjkwMDMgNTMuODY0NzcwNCwyMi42OTAwMyBDNTEuOTE3Mzc0MSwyMi42OTAwMyA1MC43Mjc3MzA1LDIxLjQxODk1NjMgNTAuNzI3NzMwNSwxOC45NjY1OCBMNTAuNzI3NzMwNSwxMC40MjcxNTg3IEw0Ny41Mzg2NjU4LDEwLjQyNzE1ODcgTDQ3LjUzODY2NTgsMTkuMDM3ODMxMyBDNDcuNTM4NjY1OCwyMy40Nzc4OTUgNDkuOTE3OTUzLDI1LjczMzM0MDQgNTMuODMwNDE3MSwyNS43MzMzNDA0IEw1My44MzA0MTcxLDI1LjczMzM0MDQgWiBNMy4xNTQ1NywzMy4xOTgxOTQ4IEwxMzUuMDM2NjMyLDMzLjE5ODE5NDggTDEzNS4wMzY2MzIsMy4zMDI0NDQ4OCBMMy4xNTQ1NywzLjMwMjQ0NDg4IEwzLjE1NDU3LDMzLjE5ODE5NDggWiBNMCwzNi40NzM5MjA0IEwxMzguMjA4MTY3LDM2LjQ3MzkyMDQgTDEzOC4yMDgxNjcsMC4wMjY3MTkyNjczIEwwLDAuMDI2NzE5MjY3MyBMMCwzNi40NzM5MjA0IFogTTE0LjgyMzExNDMsMTkuNDg1NDE0NCBMMjAuNzE4NjAwNSwxOS40ODU0MTQ0IEwyMC43MTg2MDA1LDI1LjUzNjU1MDkgTDIzLjkwNzY2NTIsMjUuNTM2NTUwOSBMMjMuOTA3NjY1MiwxMC40NDU2Nzg0IEwyMC43MTg2MDA1LDEwLjQ0NTY3ODQgTDIwLjcxODYwMDUsMTYuNDA2MDU0MiBMMTQuODIzMTE0MywxNi40MDYwNTQyIEwxNC44MjMxMTQzLDEwLjQ0NTY3ODQgTDExLjYzNDc1NjUsMTAuNDQ1Njc4NCBMMTEuNjM0NzU2NSwyNS41MzY1NTA5IEwxNC44MjMxMTQzLDI1LjUzNjU1MDkgTDE0LjgyMzExNDMsMTkuNDg1NDE0NCBaIE0xMTUuODY0OTIyLDE1Ljk0MTUwNjUgTDEyMi44OTc2MDIsMjUuNTM2NTUwOSBMMTI1LjYyMDk4OCwyNS41MzY1NTA5IEwxMjUuNjIwOTg4LDEwLjQ0NTY3ODQgTDEyMi40NjY0MTgsMTAuNDQ1Njc4NCBMMTIyLjQ2NjQxOCwxOS43MzYyMDggTDExNS42NTgzNzcsMTAuNDQ1Njc4NCBMMTEyLjcxMDkxNywxMC40NDU2Nzg0IEwxMTIuNzEwOTE3LDI1LjUzNjU1MDkgTDExNS44NjQ5MjIsMjUuNTM2NTUwOSBMMTE1Ljg2NDkyMiwxNS45NDE1MDY1IEwxMTUuODY0OTIyLDE1Ljk0MTUwNjUgWiIgaWQ9IkZpbGwtMSIgZmlsbD0iIzAwMDEwNSIgbWFzaz0idXJsKCNtYXNrLTIpIj48L3BhdGg+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4=" alt="Houston inc. logo"/></div></div></a></div><div class="col-5 col-5--mobile order-1--mobile order-1--tablet footer__navigation element--flex"><div class="footer__navigation-link-container"><a class="footer__navigation-link nav-item-hover" style="margin-left:4.5rem" href="/zh/about">关于课程</a><a class="footer__navigation-link nav-item-hover" style="margin-left:4.5rem" href="/zh/#course-contents">课程内容</a><a class="footer__navigation-link nav-item-hover" style="margin-left:4.5rem" href="/zh/faq">常见问题</a><a class="footer__navigation-link nav-item-hover" style="margin-left:4.5rem" href="/zh/companies">合作伙伴</a><a class="footer__navigation-link nav-item-hover" style="margin-left:4.5rem" href="/zh/challenge">挑战</a></div></div></footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script>
+  
+  
+  if(!(parseInt(navigator.doNotTrack) === 1 || parseInt(window.doNotTrack) === 1 || parseInt(navigator.msDoNotTrack) === 1 || navigator.doNotTrack === "yes")) {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  }
+  if (typeof ga === "function") {
+    ga('create', 'UA-135975842-1', 'fullstackopen.com', {});
+      
+      
+      
+      
+      
+      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/zh/part0/web_应用的基础设施";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-75fb52c954f6f26af1df.js"],"app":["/app-5c85c0dd7d8928d8110e.js"],"component---src-pages-404-js":["/component---src-pages-404-js-7ade4f77e72533222078.js"],"component---src-pages-about-en-js":["/component---src-pages-about-en-js-5c8c67b1928c69e56dd7.js"],"component---src-pages-about-es-js":["/component---src-pages-about-es-js-500af61a836ee791a10d.js"],"component---src-pages-about-fr-js":["/component---src-pages-about-fr-js-8b8247d2e3d5feea7415.js"],"component---src-pages-about-js":["/component---src-pages-about-js-6d577186ead477ee518e.js"],"component---src-pages-about-ptbr-js":["/component---src-pages-about-ptbr-js-017dab37f9941fec8637.js"],"component---src-pages-about-zh-js":["/component---src-pages-about-zh-js-f86b1a63d0a6ab3d5aa4.js"],"component---src-pages-challenge-en-js":["/component---src-pages-challenge-en-js-1bdfabfe8b163877a89b.js"],"component---src-pages-challenge-es-js":["/component---src-pages-challenge-es-js-288a3f90aec5c8bfdd71.js"],"component---src-pages-challenge-fr-js":["/component---src-pages-challenge-fr-js-973d9b3634cf0f3af406.js"],"component---src-pages-challenge-js":["/component---src-pages-challenge-js-e02742fcd695771ba567.js"],"component---src-pages-challenge-ptbr-js":["/component---src-pages-challenge-ptbr-js-82448b54b3946f3b5089.js"],"component---src-pages-challenge-zh-js":["/component---src-pages-challenge-zh-js-d6d60b17aa2c5fad0230.js"],"component---src-pages-companies-en-js":["/component---src-pages-companies-en-js-9dab5850a66e9c9936e7.js"],"component---src-pages-companies-es-js":["/component---src-pages-companies-es-js-aa42ec16d87f654db6a0.js"],"component---src-pages-companies-fr-js":["/component---src-pages-companies-fr-js-90c21d3dd434eefa196a.js"],"component---src-pages-companies-js":["/component---src-pages-companies-js-a2733abcfd4c2c97eb50.js"],"component---src-pages-companies-ptbr-js":["/component---src-pages-companies-ptbr-js-2e87659be7a706cdb867.js"],"component---src-pages-companies-zh-js":["/component---src-pages-companies-zh-js-83f510e380a3bfa14b17.js"],"component---src-pages-faq-en-js":["/component---src-pages-faq-en-js-33ebb91f09d4de79df18.js"],"component---src-pages-faq-es-js":["/component---src-pages-faq-es-js-d107f02cac406c142a9c.js"],"component---src-pages-faq-fr-js":["/component---src-pages-faq-fr-js-ca4072c35ab623fbdb84.js"],"component---src-pages-faq-js":["/component---src-pages-faq-js-bdc4d72ee25c1ba5f942.js"],"component---src-pages-faq-ptbr-js":["/component---src-pages-faq-ptbr-js-9a05d3bde67f9b1fde6c.js"],"component---src-pages-faq-zh-js":["/component---src-pages-faq-zh-js-b17e364956afec627cf6.js"],"component---src-pages-index-en-js":["/component---src-pages-index-en-js-b1f5c7f49cf40919f73e.js"],"component---src-pages-index-es-js":["/component---src-pages-index-es-js-998533641dda0b9f01db.js"],"component---src-pages-index-fr-js":["/component---src-pages-index-fr-js-70567fbce802bd2d77cd.js"],"component---src-pages-index-js":["/component---src-pages-index-js-786a0ac0fad33ad19995.js"],"component---src-pages-index-ptbr-js":["/component---src-pages-index-ptbr-js-9ee2d99f2e38bfca2049.js"],"component---src-pages-index-zh-js":["/component---src-pages-index-zh-js-4ac0d92183f85660d409.js"],"component---src-pages-search-en-js":["/component---src-pages-search-en-js-a2e0aaed03e993fd7980.js"],"component---src-pages-search-es-js":["/component---src-pages-search-es-js-f7bf9943351bdcba3d98.js"],"component---src-pages-search-fr-js":["/component---src-pages-search-fr-js-fcd41442b5b1e96d3259.js"],"component---src-pages-search-js":["/component---src-pages-search-js-eeaa3ef7f71ba4d05b34.js"],"component---src-pages-search-ptbr-js":["/component---src-pages-search-ptbr-js-355088678882ac4e923d.js"],"component---src-pages-search-zh-js":["/component---src-pages-search-zh-js-0cb7467f6dc3d1eadb10.js"],"component---src-templates-content-template-js":["/component---src-templates-content-template-js-3ca891c40689f33ff860.js"],"component---src-templates-part-intro-template-js":["/component---src-templates-part-intro-template-js-29e60d2d6a6812d20cc6.js"]};/*]]>*/</script><script src="/polyfill-75fb52c954f6f26af1df.js" nomodule=""></script><script src="/webpack-runtime-34e1662e50c380423dfa.js" async=""></script><script src="/styles-0ec71dd62c66cb95665c.js" async=""></script><script src="/framework-4417e1b5ff8c945c03a5.js" async=""></script><script src="/app-5c85c0dd7d8928d8110e.js" async=""></script><script src="/commons-15e69e84caf1d6379b61.js" async=""></script><script src="/0f38e1748197b5a213e89e1df6d5db13e5e7856d-c525d6df853b8eccb391.js" async=""></script><script src="/881c8b7a675fce2ced9b02a4a469c0443336d5f7-8e4483d8931a6891bd9a.js" async=""></script><script src="/2d359d657f593a857b7e0d916f29b2126c86bebb-dcc47509ede0fcbd2a57.js" async=""></script><script src="/d2b1ca4b1069f7cfc0ac3ccd2306fbb8e76bcf35-b1e80b991af31a506d6d.js" async=""></script><script src="/8bb9eac36a062a5713b6d250f5709a608793ccd4-c6521a3391552441c602.js" async=""></script><script src="/component---src-templates-content-template-js-3ca891c40689f33ff860.js" async=""></script></body></html>
