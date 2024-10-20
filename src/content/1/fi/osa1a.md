@@ -31,6 +31,19 @@ Konsoli kertoo että sovellus on käynnistynyt localhostin porttiin 5173, eli os
 
 Vite käynnistää sovelluksen [oletusarvoisesti](https://vitejs.dev/config/server-options.html#server-port) porttiin 5173. Jos se ei ole vapaana, käyttää Vite seuraavaa vapaata porttinumeroa.
 
+Jos sinulla tulee virheilmoitus, että selain ei saa yhteyttä localhostissa olevaan sovellukseen ("sivustoon ei saada yhteyttä" ilmoittaa selain). Syynä voi olla, että Vite on kadottanut localhostin. Muuta sovelluksen juuressa olevaan vite.config.js tiedostoon seuraavat rivit. Se pakottaa sovelluksen IP osoitteeseen 127.0.0.1, joka on siis localhost ja porttiin 3000, joka on React sovelluksen oletus. 
+
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+// https://vitejs.dev/config/
+export default defineConfig({
+plugins: [react()],
+server: {
+host: "127.0.0.1",
+port: 3000
+}
+})
+
 Avataan selain sekä tekstieditori siten, että näet koodin ja web-sivun samaan aikaan ruudulla:
 
 ![](../../images/1/1-vite4.png)
