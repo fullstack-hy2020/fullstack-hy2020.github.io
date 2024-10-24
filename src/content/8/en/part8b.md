@@ -65,7 +65,7 @@ client.query({ query })
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-The beginning of the code creates a new [client](https://www.apollographql.com/docs/react/get-started/#create-a-client) object, which is then used to send a query to the server:
+The beginning of the code creates a new [client](https://www.apollographql.com/docs/react/get-started#step-3-initialize-apolloclient) object, which is then used to send a query to the server:
 
 ```js
 client.query({ query })
@@ -78,7 +78,7 @@ The server's response is printed to the console:
 
 ![devtools shows allPersons array with 3 people](../../images/8/9a.png)
 
-The application can communicate with a GraphQL server using the *client* object. The client can be made accessible for all components of the application by wrapping the <i>App</i> component with [ApolloProvider](https://www.apollographql.com/docs/react/get-started/#connect-your-client-to-react).
+The application can communicate with a GraphQL server using the *client* object. The client can be made accessible for all components of the application by wrapping the <i>App</i> component with [ApolloProvider](https://www.apollographql.com/docs/react/get-started#step-4-connect-your-client-to-react).
 
 ```js
 import ReactDOM from 'react-dom/client'
@@ -239,7 +239,7 @@ The *useQuery* hook is well-suited for situations where the query is done when t
 
 One possibility for this kind of situations is the hook function [useLazyQuery](https://www.apollographql.com/docs/react/api/react/hooks/#uselazyquery) that would make it possible to define a query which is executed <i>when</i> the user wants to see the detailed information of a person.
 
-However, in our case we can stick to *useQuery* and use the option [skip](https://www.apollographql.com/docs/react/data/queries/#skip), which makes it possible to do the query only if a set condition is true.
+However, in our case we can stick to *useQuery* and use the option [skip](https://www.apollographql.com/docs/react/data/queries#skipoptional), which makes it possible to do the query only if a set condition is true.
 
 The solution is as follows:
 
@@ -322,7 +322,7 @@ When the button <i>show address</i> of a person is pressed, the name of the pers
 </button>
 ```
 
-This causes the component to re-render itself. On render the query <i>FIND_PERSON</i> that fetches the detailed information of a user is executed <i>if the variable nameToSearch</i> has a value:
+This causes the component to re-render itself. On render the query <i>FIND_PERSON</i> that fetches the detailed information of a user is executed if the variable <i>nameToSearch</i> has a value:
 
 ```js
 const result = useQuery(FIND_PERSON, {
@@ -587,7 +587,7 @@ Trying to create a person with invalid data causes an error:
 
 We should handle the exception. We can register an error handler function to the mutation using the *useMutation* hook's *onError* [option](https://www.apollographql.com/docs/react/api/react/hooks/#params-2).
 
-Let's register the mutation with an error handler that uses the _setError_*
+Let's register the mutation with an error handler that uses the _setError_
 function it receives as a parameter to set an error message:
 
 ```js
@@ -784,7 +784,7 @@ The current code of the application can be found on [GitHub](https://github.com/
 
 ### Apollo Client and the applications state
 
-In our example, management of the applications state has mostly become the responsibility of Apollo Client. This is a quite typical solution for GraphQL applications.
+In our example, management of the applications state has mostly become the responsibility of Apollo Client. This is quite a typical solution for GraphQL applications.
 Our example uses the state of the React components only to manage the state of a form and to show error notifications. As a result, it could be that there are no justifiable reasons to use Redux to manage application state when using GraphQL.
 
 When necessary, Apollo enables saving the application's local state to [Apollo cache](https://www.apollographql.com/docs/react/local-state/local-state-management/).

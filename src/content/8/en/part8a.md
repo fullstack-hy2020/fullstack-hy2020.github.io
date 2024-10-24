@@ -15,7 +15,7 @@ The GraphQL philosophy is very different from REST. REST is <i>resource-based</i
 
 The resource-basedness of REST works well in most situations. However, it can be a bit awkward sometimes.
 
-Let's consider the following example: our bloglist application contains some kind of social media functionality, and we would like to show a list of all the blogs that were added by users who have commented on any of the blogs we follow.
+Let's consider the following example: our bloglist application contains some kind of social media functionality, and we would like to show a list of all the blogs that were added by users who have commented on any of the blogs of the users we follow.
 
 If the server implemented a REST API, we would probably have to do multiple HTTP requests from the browser before we had all the data we wanted. The requests would also return a lot of unnecessary data, and the code on the browser would probably be quite complicated.
 
@@ -394,7 +394,7 @@ Start the server by running `node index.js` in the terminal.
 
 ### Apollo Studio Explorer
 
-When Apollo server is run in development mode the page [http://localhost:4000](http://localhost:4000) has a button <i>Query your server</i> that takes us to [Apollo Studio Explorer](https://www.apollographql.com/docs/studio/explorer/explorer/).  This is very useful for a developer, and can be used to make queries to the server.
+When Apollo server is run in development mode the page [http://localhost:4000](http://localhost:4000) has a button <i>Query your server</i> that takes us to [GraphOS Studio Explorer](https://www.apollographql.com/docs/graphos/platform/explorer).  This is very useful for a developer, and can be used to make queries to the server.
 
 Let's try it out:
 

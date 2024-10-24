@@ -779,7 +779,7 @@ What exactly is happening in that line of code? <em>notes.map(n => n.id)</em> cr
 
 **NB:** Because this is not a frontend project and we are not working with React, the application <strong>is not created</strong> with create vite@latest -- --template react. You initialize this project with the <em>npm init</em> command that was demonstrated earlier in this part of the material.
 
-**NB:** Because the "node_modules" is created using "npm init", it will not be excluded when you are trying to add your code to git using "git add .", therefore please create a file called ".getignore" and write "node_modules" so that git ignores it everytime you try to add, commit or push to a remote repo. 
+**NB:** Because the "node\_modules" is created using "npm init", it will not be excluded when you are trying to add your code to git using "git add .", therefore please create a file called ".gitignore" and write "node\_modules" so that git ignores it everytime you try to add, commit or push to a remote repo. 
 
 **Strong recommendation:** When you are working on backend code, always keep an eye on what's going on in the terminal that is running your application.
 
