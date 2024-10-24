@@ -457,7 +457,7 @@ Se tentarmos fazer o mesmo com o método _cumprimentar_, deparamo-nos com um pro
 arto.cumprimentar()       // "olá, meu nome é Arto Hellas" é impresso
 
 const referenciaParaCumprimentar = arto.cumprimentar
-referenciaParCumprimentar() // "olá, meu nome é undefined" é impresso
+referenciaParaCumprimentar() // "olá, meu nome é undefined" é impresso
 ```
 
 Ao chamar o método através de uma referência, o método perde o conhecimento do que era o _this_ original. Ao contrário de outras linguagens, em JavaScript, o valor de [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) é definido com base <i>em como o método é chamado</i>. Ao chamar o método através de uma referência, o valor de _this_ se torna o chamado [objeto global](https://developer.mozilla.org/en-US/docs/Glossary/Global_object) (_global object_) e o resultado final sai geralmente diferente do que o desenvolvedor originalmente pretendeu.
