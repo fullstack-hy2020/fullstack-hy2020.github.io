@@ -9,7 +9,7 @@ lang: en
 
 We will next implement a React app that uses the GraphQL server we created.
 
-The current code of the server can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3), branch <i>part8-3</i>.
+The current server code can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3), branch <i>part8-3</i>.
 
 In theory, we could use GraphQL with HTTP POST requests. The following shows an example of this with Postman:
 
