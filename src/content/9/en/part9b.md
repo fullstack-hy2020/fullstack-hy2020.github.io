@@ -562,13 +562,13 @@ and:
 $ npm run calculateExercises 2 1 0 2 4.5 0 3 1 0 4
 
 {
-  periodLength: 9,
-  trainingDays: 6,
+  periodLength: 10,
+  trainingDays: 7,
   success: false,
   rating: 2,
   ratingDescription: 'not too bad but could be better',
   target: 2,
-  average: 1.7222222222222223
+  average: 1.75
 }
 ```
 
