@@ -490,7 +490,7 @@ Huomaa, että on mahdollista rekisteröidä middleware suoritettavaksi vain osas
 
 ```js
 // use the middleware in all routes
-app.use(userExtractor) // highlight-line
+app.use(middleware.userExtractor) // highlight-line
 
 app.use('/api/blogs', blogsRouter)  
 app.use('/api/users', usersRouter)
@@ -501,7 +501,7 @@ voidaan määritellä, että se suoritetaan ainoastaan polun <i>/api/blogs</i> r
 
 ```js
 // use the middleware only in /api/blogs routes
-app.use('/api/blogs', userExtractor, blogsRouter) // highlight-line
+app.use('/api/blogs', middleware.userExtractor, blogsRouter) // highlight-line
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 ```
