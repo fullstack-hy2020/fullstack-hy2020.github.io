@@ -686,18 +686,6 @@ import express from 'express';
 
 **NB**: VSCode offers you the possibility to fix the issues automatically by clicking the *Quick Fix...* button. Keep your eyes open for these helpers/quick fixes; listening to your editor usually makes your code better and easier to read. The automatic fixes for issues can be a major time saver as well.
 
-Now we run into another problem, the compiler complains about the import statement.
-Once again, the editor is our best friend when trying to find out what the issue is:
-
-![vscode error about not finding express](../../images/9/7.png)
-
-We haven't installed types for *express*.
-Let's do what the suggestion says and run:
-
-```bash
-npm install --save-dev @types/express
-```
-
 There should not be any errors remaining. Note that you may need to reopen the file in the editor to get VS Code in sync. 
 
 Let's take a look at what changed.
