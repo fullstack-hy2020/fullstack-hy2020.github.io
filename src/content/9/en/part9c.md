@@ -842,7 +842,7 @@ import { Response } from 'express'
 
 // ...
 
-router.get('/', (_req, res: Response<DiaryEntry[]>) => {
+router.get('/', (_req, res: Response<NonSensitiveDiaryEntry[]>) => {
   res.send(diaryService.getNonSensitiveEntries());
 });
 
@@ -1719,7 +1719,7 @@ router.post('/', (req, res) => { // highlight-line
 
 Instead of calling the request body parsing method explicitly in the route handler, the validation of the input could also be done in a middleware function.
 
-We have also add the type definitions to the route handler parameters, and shall use types also in the middleware function _newDiaryParser_:
+We have also added the type definitions to the route handler parameters, and shall use types as well in the middleware function _newDiaryParser_:
 
 ```js
 const newDiaryParser = (req: Request, _res: Response, next: NextFunction) => { 
@@ -1732,7 +1732,7 @@ const newDiaryParser = (req: Request, _res: Response, next: NextFunction) => {
 };
 ```
 
-The middleware just calls the schema parser to the request body. If the parsing throws an exception, that is passed to the error handling middleware.
+The middleware just calls the schema parser on the request body. If the parsing throws an exception, it is passed to the error handling middleware.
 
 So after the request passes this middleware, it <i>is known that the request body is a proper new diary entry</i>. We can tell this fact to TypeScript compiler by giving a type parameter to the _Request_ type:
 
