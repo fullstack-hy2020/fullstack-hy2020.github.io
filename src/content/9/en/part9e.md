@@ -402,17 +402,18 @@ Remember that we have different kinds of entries in our app, so our backend shou
 
 In this exercise, you quite likely need to remember [this trick](/en/part9/grande_finale_patientor#omit-with-unions).
 
-You may assume that the diagnostic codes are sent in the correct form and use eg. the following kind of parser to extract those from the request body:
+You may define a Zod [array](https://zod.dev/?id=arrays) schema for the diagnostic codes and use it appropriately in other Zod [objects](https://zod.dev/?id=objects) as follows:
 
 ```js
-const parseDiagnosisCodes = (object: unknown): Array<Diagnosis['code']> =>  {
-  if (!object || typeof object !== 'object' || !('diagnosisCodes' in object)) {
-    // we will just trust the data to be in correct form
-    return [] as Array<Diagnosis['code']>;
-  }
+const DiagnosisCodesSchema = z
+  .array(z.string())
+  .optional()
+  .transform((codes) => (codes ? codes : []));
 
-  return object.diagnosisCodes as Array<Diagnosis['code']>;
-};
+const BaseHealthEntrySchema = z.object({
+  ...
+  diagnosisCodes: DiagnosisCodesSchema,
+})
 ```
 
 #### 9.28: Patientor, step 8
