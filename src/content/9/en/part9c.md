@@ -1595,7 +1595,7 @@ We have so far just used Zod to parse the type or schema of individual fields, b
 
 
 ```js
-const newEntrySchema = z.object({
+const NewEntrySchema = z.object({
   weather: z.nativeEnum(Weather),
   visibility: z.nativeEnum(Visibility),
   date: z.string().date(),
@@ -1607,7 +1607,7 @@ Now it is just enough to call _parse_ of the defined schema:
 
 ```js
 export const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
-  return newEntrySchema.parse(object);
+  return NewEntrySchema.parse(object);
 };
 ```
 
@@ -1654,7 +1654,7 @@ So besides the type _NewDiaryEntry_ we have also the Zod schema _NewEntrySchema_
 
 ```js
 import { z } from 'zod';
-import { newEntrySchema } from './utils'
+import { NewEntrySchema } from './utils'
 
 export interface DiaryEntry {
   id: number;
@@ -1665,13 +1665,13 @@ export interface DiaryEntry {
 }
 
 // infer the type from schema
-export type NewDiaryEntry = z.infer<typeof newEntrySchema>; 
+export type NewDiaryEntry = z.infer<typeof NewEntrySchema>; 
 ```
 
 We could take this even a bit further and define the _DiaryEntry_ based on _NewDiaryEntry_:
 
 ```js
-export type NewDiaryEntry = z.infer<typeof newEntrySchema>;
+export type NewDiaryEntry = z.infer<typeof NewEntrySchema>;
 
 export interface DiaryEntry extends NewDiaryEntry {
   id: number;
@@ -1690,7 +1690,7 @@ We can now get rid of this method altogether
 
 ```js
 export const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
-  return newEntrySchema.parse(object);
+  return NewEntrySchema.parse(object);
 };
 ```
 
