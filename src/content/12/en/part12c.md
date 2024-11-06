@@ -287,6 +287,96 @@ With this configuration, _docker compose -f docker-compose.dev.yml up_ can run t
 
 Installing new dependencies is a headache for a development setup like this. One of the better options is to install the new dependency **inside** the container. So instead of doing e.g. _npm install axios_, you have to do it in the running container e.g. _docker exec hello-front-dev npm install axios_, or add it to the package.json and run _docker build_ again.
 
+
+### WSL Problems
+
+**NOTE:** If you are developing on a platform other than Windows, or not using WSL, you can skip this section.
+
+Developing on Docker with WSL can cause some issues of its own. For starters, Vite requires a different set of dependencies depending on your platform, and Hot Module Reloading (HMR) often doesn't function as expected. Because of this, setting up a development environment can be difficult. You may run into these issues working on the remaining exercises.
+
+You may run into the error:
+
+```sh
+"Cannot find module @rollup/rollup-linux-x64-gnu"
+```
+
+There are a few different ways to approach this problem:
+
+**Solution A: Use the WASM package for rollup and esbuild**
+
+Using the WASM [overrides](https://docs.npmjs.com/cli/v8/configuring-npm/package-json#overrides) for rollup and esbuild allows our build to be platform-independent, ensuring a higher degree of compatibility. This is likely the easiest solution, but comes with significant performance drawbacks. You can add the following to your `package.json`:
+
+```json
+{
+  "overrides": {
+    "vite": {
+      "rollup": "npm:@rollup/wasm-node",
+      "esbuild": "npm:esbuild-wasm"
+    }
+  }
+}
+```
+
+**Solution B: Use a volume for node_modules**
+
+Using a volume for node_modules allows us to install platform-specific dependencies *inside* the container. The drawback with this solution is packages have to be installed inside the container, or the image must be rebuilt to include them. You can add the following to your `docker-compose.dev.yml`:
+
+```yml
+services:
+  app:
+    volumes:
+      - .:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
+volumes:
+  node_modules:
+```
+
+**Solution C: Move development files inside WSL instance**
+
+This is likely the preferred solution, as developing on the same platform as your container will eliminate any platform-specific issues, but may require more understanding of WSL to implement. You are welcome to research this on your own.
+
+---
+
+You may also run into problems with hot reload or HMR. Because of compability issues between the linux and windows filesystems, we need to use polling to detect file changes. Here are a few solutions:
+
+**Vite Config**
+
+Add the following to your `vite.config.js`:
+
+```js
+export default defineConfig({
+  server: {
+    watch: {
+      usePolling: true,
+    },
+  },
+});
+```
+
+**Nodemon**
+
+Run nodemon with the `-L` legacy flag:
+
+```json
+{
+  "scripts": {
+    "dev": "nodemon -L src/index.js"
+  }
+}
+```
+
+**TypeScript**
+
+Run ts-node-dev with the `--poll` flag to enable legacy polling:
+
+```json
+{
+  "scripts": {
+    "dev": "ts-node-dev --poll src/index.ts"
+  }
+}
+```
+
 </div>
 <div class="tasks">
 
