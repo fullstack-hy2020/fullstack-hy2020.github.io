@@ -1008,8 +1008,8 @@ describe('when logged in', () => {
   describe('and several notes exists', () => {
     beforeEach(async ({ page }) => {
       // highlight-start
-      await createNote(page, 'first note', true)
-      await createNote(page, 'second note', true)
+      await createNote(page, 'first note')
+      await createNote(page, 'second note')
       // highlight-end
     })
 
@@ -1095,9 +1095,9 @@ describe('when logged in', () => {
 
   describe('and a note exists', () => {
     beforeEach(async ({ page }) => {
-      await createNote(page, 'first note', true)
-      await createNote(page, 'second note', true)
-      await createNote(page, 'third note', true) // highlight-line
+      await createNote(page, 'first note')
+      await createNote(page, 'second note')
+      await createNote(page, 'third note') // highlight-line
     })
 
     test('importance can be changed', async ({ page }) => {
