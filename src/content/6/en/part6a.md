@@ -99,7 +99,7 @@ The reducer is never supposed to be called directly from the application's code.
 
 ```js
 // highlight-start
-import { createStore } from 'redux'
+import { counterReducer } from 'redux'
 // highlight-end
 
 const counterReducer = (state = 0, action) => {
