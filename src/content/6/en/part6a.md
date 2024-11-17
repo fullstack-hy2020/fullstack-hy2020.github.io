@@ -315,6 +315,7 @@ const App = () => {
     </div>
   )
 }
+export default noteReducer;
 ```
 
 So far the application does not have the functionality for adding new notes, although it is possible to do so by dispatching <i>NEW\_NOTE</i> actions.
@@ -465,7 +466,7 @@ describe('noteReducer', () => {
 })
 ```
 
-The <i>deepFreeze(state)</i> command ensures that the reducer does not change the state of the store given to it as a parameter. If the reducer uses the _push_ command to manipulate the state, the test will not pass
+Run the test with <i>npm test</i>. The <i>deepFreeze(state)</i> command ensures that the reducer does not change the state of the store given to it as a parameter. If the reducer uses the _push_ command to manipulate the state, the test will not pass
 
 ![terminal showing test failure and error about not using array.push](../../images/6/2.png)
 
