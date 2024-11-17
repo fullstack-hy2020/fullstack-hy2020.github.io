@@ -273,6 +273,8 @@ We aim to modify our note application to use Redux for state management. However
 The first version of our application is the following
 
 ```js
+import { createStore } from "redux";
+
 const noteReducer = (state = [], action) => {
   if (action.type === 'NEW_NOTE') {
     state.push(action.payload)
