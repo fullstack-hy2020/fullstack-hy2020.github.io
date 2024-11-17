@@ -417,18 +417,54 @@ Let us expand <i>package.json</i> with a script for running the tests:
 }
 ```
 
-And finally, <i>.eslintrc.cjs</i> needs to be altered as follows:
+And finally, <i>eslint.config.js</i> needs to be altered as follows:
 
 ```js
-module.exports = {
-  root: true,
-  env: { 
-    browser: true,
-    es2020: true,
-    "jest/globals": true // highlight-line
+import js from '@eslint/js';
+import globals from 'globals';
+import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import jest from 'eslint-plugin-jest'; // highlight-line
+
+export default [
+  { ignores: ['dist'] },
+  {
+    files: ['**/*.{js,jsx}'],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: {
+        ...globals.browser,
+        ...globals['jest'], // highlight-line
+      },
+      parserOptions: {
+        ecmaVersion: 'latest',
+        ecmaFeatures: { jsx: true },
+        sourceType: 'module',
+      },
+    },
+    settings: { react: { version: '18.3' } },
+    plugins: {
+      react,
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
+      'jest': jest, // highlight-line
+    },
+    rules: {
+      ...js.configs.recommended.rules,
+      ...react.configs.recommended.rules,
+      ...react.configs['jsx-runtime'].rules,
+      ...reactHooks.configs.recommended.rules,
+      ...jest.configs.recommended.rules, // highlight-line
+      'react/jsx-no-target-blank': 'off',
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true },
+      ],
+    },
   },
-  // ...
-}
+];
+
 ```
 
 To make testing easier, we'll first move the reducer's code to its own module, to the file <i>src/reducers/noteReducer.js</i>. We'll also add the library [deep-freeze](https://www.npmjs.com/package/deep-freeze), which can be used to ensure that the reducer has been correctly defined as an immutable function.
