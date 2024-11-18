@@ -748,7 +748,7 @@ Your application can have a modest appearance, nothing else is needed but button
 
 ### Uncontrolled form
 
-Let's add the functionality for adding new notes and changing their importance:
+Let's add the functionality for adding new notes and changing their importance: WHERE? App.jsx? main.jsx? 
 
 ```js
 // highlight-start
