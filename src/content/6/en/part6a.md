@@ -1176,6 +1176,9 @@ The logic for changing the importance of a note is now in the component managing
 There is not much code left in <i>App</i>:
 
 ```js
+import NewNote from "./components/NewNote";
+import Notes from "./components/Notes";
+
 const App = () => {
 
   return (
@@ -1185,6 +1188,8 @@ const App = () => {
     </div>
   )
 }
+
+export default App;
 ```
 
 <i>Note</i>, responsible for rendering a single note, is very simple and is not aware that the event handler it gets as props dispatches an action. These kinds of components are called [presentational](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) in React terminology.
