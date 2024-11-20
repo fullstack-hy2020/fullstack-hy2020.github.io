@@ -11,18 +11,18 @@ We will now start getting familiar with probably the most important topic of thi
 
 The easiest way to get started by far is by using a tool called [Vite](https://vitejs.dev/).
 
-Let's create an application called <i>part1</i>, navigate to its directory and install the libraries:
+Let's create an application called <i>introdemo</i>, navigate to its directory and install the libraries:
 
 ```bash
 # npm 6.x (outdated, but still used by some):
-npm create vite@latest part1 --template react
+npm create vite@latest introdemo --template react
 
 # npm 7+, extra double-dash is needed:
-npm create vite@latest part1 -- --template react
+npm create vite@latest introdemo -- --template react
 ```
 
 ```bash
-cd part1
+cd introdemo
 npm install
 ```
 
