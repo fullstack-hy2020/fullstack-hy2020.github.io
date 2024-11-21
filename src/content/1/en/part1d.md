@@ -1230,7 +1230,6 @@ Note that your application needs to work only during a single browser session. O
 It is advisable to use the same structure that is used in the material and previous exercise. File <i>main.jsx</i> is as follows:
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App'
