@@ -133,7 +133,7 @@ Now that we are somewhat familiar with the development environment let's enhance
 npm install --save-dev eslint @babel/eslint-parser eslint-plugin-react eslint-plugin-react-native
 ```
 
-Next, let's add the ESLint configuration into a <i>.eslintrc.json</i> file in the <i>rate-repository-app</i> directory with the following content:
+Next, let's add a <i>.eslintrc.json</i> file in the <i>rate-repository-app</i> directory with the ESLint configuration into the following content:
 
 ```javascript
 {
