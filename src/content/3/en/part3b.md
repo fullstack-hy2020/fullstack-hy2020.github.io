@@ -103,7 +103,6 @@ There are also some other free hosting options that work well for this course, a
 
 Some course participants have also used the following services:
 
-- [Cyclic](https://www.cyclic.sh/)
 - [Replit](https://replit.com)
 - [CodeSandBox](https://codesandbox.io)
 
