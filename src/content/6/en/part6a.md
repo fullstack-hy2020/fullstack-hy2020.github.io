@@ -967,7 +967,7 @@ export const toggleImportanceOf = (id) => { // highlight-line
 export default noteReducer
 ```
 
-If the application has many components which need the store, the <i>App</i> component must pass <i>store</i> as props to all of those components.
+Previously, if the application had many components which needed the store, the <i>App</i> component had to pass <i>store</i> as props to all of those components (known as prop drilling). Now with the <i>store</i> Provider wrapping the <i>App</i> component, the <i>store</i> is directly accessible to all components within the <i>App</i> component without explicitly being passed as props.
 
 The module now has multiple [export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) commands.
 
