@@ -47,7 +47,7 @@ Now let's launch json-server with the command _npm run server_.
 
 ### Getting data from the backend
 
-Next, we'll create a method into the file <i>services/notes.js</i>, which uses <i>axios</i> to fetch data from the backend
+Next, inside of the <i>src</i> directory, we'll create a method into the file <i>services/notes.js</i>, which uses <i>axios</i> to fetch data from the backend
 
 ```js
 import axios from 'axios'
