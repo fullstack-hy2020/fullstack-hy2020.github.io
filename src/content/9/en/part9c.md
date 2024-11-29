@@ -1568,7 +1568,7 @@ export const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
 
 We have also made the field comment [optional](https://zod.dev/?id=optional) since it is defined optional in the TypeScript definition.
 
-Zed has also support for [enums](https://zod.dev/?id=native-enums) and thanks to that our code simplifies further:
+Zod has also support for [enums](https://zod.dev/?id=native-enums) and thanks to that our code simplifies further:
 
 ```js
 export const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
