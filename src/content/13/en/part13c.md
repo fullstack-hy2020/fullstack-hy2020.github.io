@@ -567,8 +567,8 @@ module.exports = {
     })
   },
   down: async ({ context: queryInterface }) => {
-    await queryInterface.dropTable('teams')
     await queryInterface.dropTable('memberships')
+    await queryInterface.dropTable('teams')
   },
 }
 ```
