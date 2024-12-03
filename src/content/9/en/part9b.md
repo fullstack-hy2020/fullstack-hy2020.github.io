@@ -1095,7 +1095,7 @@ app.post('/calculate', (req, res) => {
 });
 ```
 
-Using a type assertion (or quieting an Eslint rule) is always a bit risky thing. It leaves the TypeScript compiler off the hook, the compiler just trusts that we as developers know what we are doing. If the asserted type <i>does not</i> have the right kind of value, the result will be a runtime error, so one must be pretty careful when validating the data if a type assertion is used.
+Using a type assertion (or quieting an Eslint rule) is always a bit risky. It leaves the TypeScript compiler off the hook, the compiler just trusts that we as developers know what we are doing. If the asserted type <i>does not</i> have the right kind of value, the result will be a runtime error, so one must be pretty careful when validating the data if a type assertion is used.
 
 In the next chapter, we shall have a look at [type narrowing](https://www.typescriptlang.org/docs/handbook/2/narrowing.html) which will provide a much more safe way of giving a stricter type for data that is coming from an external source.
 
