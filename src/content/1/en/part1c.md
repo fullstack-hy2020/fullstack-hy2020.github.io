@@ -216,8 +216,10 @@ the component won't re-render. We can get the component to re-render by calling 
 ```js
 let counter = 1
 
+const root = ReactDOM.createRoot(document.getElementById('root'))
+
 const refresh = () => {
-  ReactDOM.createRoot(document.getElementById('root')).render(
+  root.render(
     <App counter={counter} />
   )
 }
