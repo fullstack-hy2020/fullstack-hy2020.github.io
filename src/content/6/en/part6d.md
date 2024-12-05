@@ -570,7 +570,7 @@ const App = () => {
   const [counter, counterDispatch] = useReducer(counterReducer, 0)
 
   return (
-    <CounterContext.Provider value={[counter, counterDispatch]}>  // highlight-line
+    <CounterContext.Provider value={{counter, counterDispatch}}>  // highlight-line
       <Display />
       <div>
         <Button type='INC' label='+' />
@@ -593,14 +593,14 @@ import { useContext } from 'react' // highlight-line
 import CounterContext from './CounterContext'
 
 const Display = () => {
-  const [counter] = useContext(CounterContext) // highlight-line
+  const {counter} = useContext(CounterContext) // highlight-line
   return <div>
     {counter}
   </div>
 }
 
 const Button = ({ type, label }) => {
-  const [counter, dispatch] = useContext(CounterContext) // highlight-line
+  const {counterDispatch} = useContext(CounterContext) // highlight-line
   return (
     <button onClick={() => dispatch({ type })}>
       {label}
