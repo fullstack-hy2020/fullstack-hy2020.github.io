@@ -1719,7 +1719,7 @@ router.post('/', (req, res) => { // highlight-line
 
 Instead of calling the request body parsing method explicitly in the route handler, the validation of the input could also be done in a middleware function.
 
-We have also add the type definitions to the route handler parameters, and shall use types also in the middleware function _newDiaryParser_:
+We have also added the type definitions to the route handler parameters, and shall also use types in the middleware function _newDiaryParser_:
 
 ```js
 const newDiaryParser = (req: Request, _res: Response, next: NextFunction) => { 
