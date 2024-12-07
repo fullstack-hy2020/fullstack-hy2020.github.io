@@ -821,7 +821,7 @@ When we hover over the *response.data* we see that it has the type *any*
 
 To set the data to the state with function *setNotes* we must type it properly.
 
-With a little [help from internet](https://upmostly.com/typescript/how-to-use-axios-in-your-typescript-apps), we find a clever trick:
+With a little [help from the internet](https://upmostly.com/typescript/how-to-use-axios-in-your-typescript-apps), we find a clever trick:
 
 ```js
   useEffect(() => {
@@ -845,11 +845,11 @@ We can now set the data in the state *notes* to get the code working:
   }, [])
 ```
 
-So just like with *useState*, we gave a type parameter to *axios.get* to instruct it on how the typing should be done. Just like *useState* also *axios.get* is a [generic function](https://www.typescriptlang.org/docs/handbook/2/generics.html#working-with-generic-type-variables). Unlike some generic functions, the type parameter of *axios.get* has a default value of *any* so, if the function is used without defining the type parameter, the type of the response data will be any.
+So just like with *useState*, we gave a type parameter to *axios.get* to instruct it on how the typing should be done. Just like *useState*, *axios.get* is also a [generic function](https://www.typescriptlang.org/docs/handbook/2/generics.html#working-with-generic-type-variables). Unlike some generic functions, the type parameter of *axios.get* has a default value of *any* so, if the function is used without defining the type parameter, the type of the response data will be any.
 
-The code works, compiler and Eslint are happy and remain quiet. However, giving a type parameter to *axios.get* is a potentially dangerous thing to do. The <i>response body can contain data in an arbitrary form</i>, and when giving a type parameter we are essentially just telling to TypeScript compiler to trust us that the data has type *Note[]*.
+The code works, compiler and Eslint are happy and remain quiet. However, giving a type parameter to *axios.get* is a potentially dangerous thing to do. The <i>response body can contain data in an arbitrary form</i>, and when giving a type parameter we are essentially just telling the TypeScript compiler to trust us that the data has type *Note[]*.
 
-So our code is essentially as safe as it would be if a [type assertion](/en/part9/first_steps_with_type_script#type-assertion) would be used:
+So our code is essentially as safe as it would be if a [type assertion](/en/part9/first_steps_with_type_script#type-assertion) would be used (not good):
 
 ```js
   useEffect(() => {
@@ -862,7 +862,7 @@ So our code is essentially as safe as it would be if a [type assertion](/en/part
 
 Since the TypeScript types do not even exist in runtime, our code does not give us any safety against situations where the request body contains data in the wrong form.
 
-Giving a type parameter to *axios.get* might be ok if we are <i>absolutely sure</i> that the backend behaves correctly and returns always the data in the correct form. If we want to build a robust system we should prepare for surprises and parse the response data in the frontend, similarly to what we did [in the previous section](/en/part9/typing_an_express_app#proofing-requests) for the requests to the backend.
+Giving a type parameter to *axios.get* might be ok if we are <i>absolutely sure</i> that the backend behaves correctly and always returns the data in the correct form. If we want to build a robust system we should prepare for surprises and parse the response data (similar to what we did [in the previous section](/en/part9/typing_an_express_app#proofing-requests) for the requests to the backend).
 
 Let us now wrap up our app by implementing the new note addition:
 
@@ -979,7 +979,7 @@ interface CoursePartBase {
 }
 ```
 
-We actually could have had the same effect by using a [type alias](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases)
+We actually could have achieved the same effect by using a [type alias](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases)
 
 ```js
 type DiaryEntry = {
