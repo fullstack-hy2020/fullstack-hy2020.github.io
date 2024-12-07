@@ -1494,7 +1494,7 @@ Let us get started:
 npm install zod
 ```
 
-Parser of the primitive valued fields such as
+Parsers of the primitive valued fields such as
 
 ```js
 const isString = (text: unknown): text is string => {
