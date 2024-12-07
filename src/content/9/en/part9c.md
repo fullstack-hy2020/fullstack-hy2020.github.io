@@ -1745,7 +1745,7 @@ router.post('/', newDiaryParser, (req: Request<unknown, unknown, NewDiaryEntry>,
 
 Thanks to the middleware, the request body is now known to be of right type and it can be directly given as parameter to the function _diaryService.addDiary_.
 
-The syntax of the _Request<unknown, unknown, NewDiaryEntry>_ looks a bit odd. The _Request_ is a [generic type](https://www.typescriptlang.org/docs/handbook/2/generics.html#generic-types) with several type parameters. The third type parameter represents the request body, and in order to give it the value _NewDiaryEntry_ we have to give <i>some</i> value to the two first parameters. We decide to define those _undefined_ since we do not need those for now.
+The syntax of the _Request<unknown, unknown, NewDiaryEntry>_ looks a bit odd. The _Request_ is a [generic type](https://www.typescriptlang.org/docs/handbook/2/generics.html#generic-types) with several type parameters. The third type parameter represents the request body, and in order to give it the value _NewDiaryEntry_ we have to give <i>some</i> value to the two first parameters. We decide to define those _unknown_ since we do not need those for now.
 
 Since the possible errors in validation are now handled in the error handling middleware, we need to define one that handles the Zod errors properly:
 
