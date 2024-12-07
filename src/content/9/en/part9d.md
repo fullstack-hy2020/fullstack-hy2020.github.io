@@ -616,18 +616,18 @@ The type of the returned array is the following:
 
 So the first element, assigned to *newNote* is a string and the second element that we assigned *setNewNote* has a slightly more complex type. We notice that there is a string mentioned there, so we know that it must be the type of a function that sets a valued data. See [here](https://codewithstyle.info/Using-React-useState-hook-with-TypeScript/) if you want to learn more about the types of useState function.
 
-From this all we see that TypeScript has indeed [inferred](https://www.typescriptlang.org/docs/handbook/type-inference.html#handbook-content) the type of the first useState quite right, it is creating a state with type string.
+From all this we see that TypeScript has indeed [inferred](https://www.typescriptlang.org/docs/handbook/type-inference.html#handbook-content) the type of the first useState correctly, a state with type string is created.
 
-When we look at the second useState that has the initial value *[]* the type looks quite different
+When we look at the second useState that has the initial value *[]* , the type looks quite different
 
 ```ts
 useState<never[]>(initialState: never[] | (() => never[])): 
   [never[], React.Dispatch<React.SetStateAction<never[]>>] 
 ```
 
-TypeScript can just infer that the state has type *never[]*, it is an array but it has no clue what are the elements stored to array, so we clearly need to help the compiler and provide the type explicitly.
+TypeScript can just infer that the state has type *never[]*, it is an array but it has no clue what the elements stored to the array are, so we clearly need to help the compiler and provide the type explicitly.
 
-One of the best sources for information about typing React is the [React TypeScript Cheatsheet](https://react-typescript-cheatsheet.netlify.app/). The Cheatsheet chapter about [useState](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/hooks#usestate) hook instructs to use a *type parameter* in situations where the compiler can not infer the type.
+One of the best sources for information about typing React is the [React TypeScript Cheatsheet](https://react-typescript-cheatsheet.netlify.app/). The Cheatsheet chapter about [useState](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/hooks#usestate) hook instructs us to use a *type parameter* in situations where the compiler can not infer the type.
 
 Let us now define a type for notes:
 
@@ -644,7 +644,7 @@ The solution is now simple:
 const [notes, setNotes] = useState<Note[]>([]);
 ```
 
-And indeed, the type is set quite right:
+And indeed, the type is set correctly:
 
 ```ts
 useState<Note[]>(initialState: Note[] | (() => Note[])):
