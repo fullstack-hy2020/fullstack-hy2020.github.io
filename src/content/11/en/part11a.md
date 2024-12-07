@@ -74,7 +74,7 @@ The strict definition of CI (Continuous Integration) and the way the term is use
 Strictly speaking, CI refers to <a href='https://www.atlassian.com/continuous-delivery/principles/continuous-integration-vs-delivery-vs-deployment'>merging developer changes to the main branch</a> often, Wikipedia even helpfully suggests: "several times a day". This is usually true but when we refer to CI in industry, we're quite often talking about what happens after the actual merge happens.
 
 We'd likely want to do some of these steps:
- - Lint: to keep our code clean and maintainable
+ - Lint: to keep our code clean, maintainable, and merge compatible
  - Build: put all of our code together into runnable software bundle
  - Test: to ensure we don't break existing features
  - Package: Put it all together in an easily movable batch
