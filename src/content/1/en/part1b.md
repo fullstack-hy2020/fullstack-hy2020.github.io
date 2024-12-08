@@ -216,7 +216,7 @@ const tSquared = t.map(p => p * p)
 // tSquared is now [1, 4, 9]
 ```
 
-The arrow function feature was added to JavaScript only a couple of years ago, with version [ES6](http://es6-features.org/). Before this, the only way to define functions was by using the keyword _function_.
+The arrow function feature was added to JavaScript only a couple of years ago, with version [ES6](https://rse.github.io/es6-features/). Before this, the only way to define functions was by using the keyword _function_.
 
 There are two ways to reference the function; one is giving a name in a [function declaration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function).
 
