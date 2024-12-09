@@ -725,7 +725,7 @@ test('login fails with wrong password', async ({ page }) =>{
 Playwright suorittaa oletusarvoisesti aina kaikki testit, ja testien määrän kasvaessa se alkaa olla aikaavievää. Uutta testiä kehitellessä tai rikkinäistä testiä debugatessa voidaan määritellä testi komennon <i>test</i> sijaan komennolla <i>test.only</i>, jolloin Playwright suorittaa ainoastaan sen testin: 
 
 ```js
-describre(() => {
+describe(() => {
   // this is the only test executed!
   test.only('login fails with wrong password', async ({ page }) => {  // highlight-line
     // ...
