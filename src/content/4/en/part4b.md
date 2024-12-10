@@ -1063,7 +1063,7 @@ const helper = require('./test_helper')
 
 const Note = require('../models/note')
 
-describe('when there is initially some notes saved', () => {
+describe('when there are some notes saved initially', () => {
   beforeEach(async () => {
     await Note.deleteMany({})
     await Note.insertMany(helper.initialNotes)
