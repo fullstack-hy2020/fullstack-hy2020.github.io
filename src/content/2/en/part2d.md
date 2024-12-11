@@ -656,7 +656,7 @@ axios
   })
 ```
 
-Let's use this feature and register an error handler in the <i>App</i> component:
+Let's use this feature and register an error handler in the <i>App</i> component (don't forget to remove the .catch you might have added to any services in Notes.jsx):
 
 ```js
 const toggleImportanceOf = id => {
