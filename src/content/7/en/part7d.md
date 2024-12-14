@@ -275,7 +275,7 @@ The syntax used above comes from JSX and it provides us with an alternative way 
 
 We can use [loaders](https://webpack.js.org/concepts/loaders/) to inform webpack of the files that need to be processed before they are bundled.
 
-Let's configure a loader to our application that transforms the JSX code into regular JavaScript:
+Let's configure a loader to our application at <i>webpack.config.js</i> that transforms the JSX code into regular JavaScript:
 
 ```js
 const path = require('path')
