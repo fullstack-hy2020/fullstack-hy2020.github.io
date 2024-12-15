@@ -401,9 +401,10 @@ Once the .env file is ready, remember to add it to your .gitignore file to preve
 /node_modules
 .env
 ```
-Then, in your index.js file, make the necessary changes with the following line so that your code can access the URL in your .env file:
+Then, in your index.js file, make the necessary changes with the following lines so that your code can access the URL in your .env file:
 
 ```
+require("dotenv").config();
 const url = process.env.MONGODB_URI;
 
 ```
