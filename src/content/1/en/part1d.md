@@ -1002,13 +1002,13 @@ const App = () => {
   return (
     <div>
       {value}
-      <button onClick={() => setToValue(1000)}>
+      <button onClick={() => setValue(1000)}>
         thousand
       </button>
-      <button onClick={() => setToValue(0)}>
+      <button onClick={() => setValue(0)}>
         reset
       </button>
-      <button onClick={() => setToValue(value + 1)}>
+      <button onClick={() => setValue(value + 1)}>
         increment
       </button>
     </div>
@@ -1019,7 +1019,7 @@ const App = () => {
 We can now define the event handler as a function that calls the _setToValue_ function with an appropriate parameter. The event handler for resetting the application state would be:
 
 ```js
-<button onClick={() => setToValue(0)}>reset</button>
+<button onClick={() => setValue(0)}>reset</button>
 ```
 
 Choosing between the two presented ways of defining your event handlers is mostly a matter of taste.
