@@ -1044,9 +1044,9 @@ const App = (props) => {
   return (
     <div>
       {value}
-      <Button handleClick={() => setToValue(1000)} text="thousand" /> // highlight-line
-      <Button handleClick={() => setToValue(0)} text="reset" /> // highlight-line
-      <Button handleClick={() => setToValue(value + 1)} text="increment" /> // highlight-line
+      <Button handleClick={() => setValue(1000)} text="thousand" /> // highlight-line
+      <Button handleClick={() => setValue(0)} text="reset" /> // highlight-line
+      <Button handleClick={() => setValue(value + 1)} text="increment" /> // highlight-line
     </div>
   )
 }
