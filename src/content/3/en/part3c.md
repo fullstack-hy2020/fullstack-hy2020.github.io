@@ -417,6 +417,7 @@ app.get('/api/notes', (request, response) => {
   })
 })
 ```
+// Somewhere here should be mentioned about 'require("dotenv").config()' being needed, since the next bit says you can verify it working in the browser, which I couldn't because the url was undefined.
 
 We can verify in the browser that the backend works for displaying all of the documents:
 
