@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[48],{r2np:function(n,a,e){"use strict";e.r(a);var t=e("q1tI"),p=e.n(t),r=e("UQMq");a.default=()=>p.a.createElement(r.a,{lang:"ptbr"})}}]);
+//# sourceMappingURL=component---src-pages-index-ptbr-js-9ee2d99f2e38bfca2049.js.map
