@@ -335,7 +335,7 @@ const errorHandler = (error, request, response, next) => {
 }
 ```
 
-The shorter the expiration time, the more safe the solution is. So if the token gets into the wrong hands or user access to the system needs to be revoked, the token is only usable for a limited amount of time. On the other hand, a short expiration time forces a potential pain to a user, one must login to the system more frequently.
+The shorter the expiration time, the safer the solution is. If the token falls into the wrong hands or user access to the system needs to be revoked, the token is only usable for a limited amount of time. However, a short expiration time is a potential pain point for the user, as it requires them to log in more frequently.
 
 The other solution is to save info about each token to the backend database and to check for each API request if the access rights corresponding to the tokens are still valid. With this scheme, access rights can be revoked at any time. This kind of solution is often called a <i>server-side session</i>.
 
