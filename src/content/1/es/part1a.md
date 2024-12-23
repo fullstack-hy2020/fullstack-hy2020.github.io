@@ -86,7 +86,7 @@ npm run dev
 
 ### Componente
 
-El archivo <i>App.js</i> ahora define un [componente](https://es.react.dev/learn/your-first-component) de React con el nombre <i>App</i>. El comando en la línea final del archivo <i>main.jsx</i>
+El archivo <i>App.jsx</i> ahora define un [componente](https://es.react.dev/learn/your-first-component) de React con el nombre <i>App</i>. El comando en la línea final del archivo <i>main.jsx</i>
 
 ```js
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
