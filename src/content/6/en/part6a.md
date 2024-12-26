@@ -814,10 +814,12 @@ You can read more about uncontrolled forms [here](https://goshakkk.name/controll
 The method for adding new notes is simple, it just dispatches the action for adding notes:
 
 ```js
+const inputRef = useRef()
+
 addNote = (event) => {
   event.preventDefault()
-  const content = event.target.note.value  // highlight-line
-  event.target.note.value = ''
+  const content = inputRef.current.value // highlight-line
+  inputRef.current.value = ''
   store.dispatch({
     type: 'NEW_NOTE',
     payload: {
@@ -833,7 +835,7 @@ We can get the content of the new note straight from the form field. Because the
 
 ```js
 <form onSubmit={addNote}>
-  <input name="note" /> // highlight-line
+  <input name="note" ref={inputRef} /> // highlight-line
   <button type="submit">add</button>
 </form>
 ```
