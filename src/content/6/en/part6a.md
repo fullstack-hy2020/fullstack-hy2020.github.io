@@ -835,7 +835,7 @@ We can get the content of the new note straight from the form field. Because the
 
 ```js
 <form onSubmit={addNote}>
-  <input name="note" ref={inputRef} /> // highlight-line
+  <input ref={inputRef} /> // highlight-line
   <button type="submit">add</button>
 </form>
 ```
