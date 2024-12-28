@@ -567,7 +567,7 @@ Tällä hetkellä sovelluksen käyttöliittymän kautta ei ole mahdollista luoda
 ```js
 describe('Note app', () => {
   beforeEach(async ({ page, request }) => {
-    await request.post('http:localhost:3001/api/testing/reset')
+    await request.post('http://localhost:3001/api/testing/reset')
     await request.post('http://localhost:3001/api/users', {
       data: {
         name: 'Matti Luukkainen',
@@ -911,7 +911,7 @@ describe('Note app', () => {
 })
 ```
 
-Testeissämme on vielä eräs ikävä piirre. Sovelluksen frontendin osoite <i>http:localhost:5173</i> sekä backendin osoite <i>http:localhost:3001</i> on kovakoodattuna testeihin. Näistä oikeastaan backendin osoite on turha, sillä frontendin Vite-konfiguraatioon on määritelty proxy, joka forwardoi kaikki osoitteeseen <i>http:localhost:5173/api</i> menevät frontendin tekemät pyynnöt backendiin:
+Testeissämme on vielä eräs ikävä piirre. Sovelluksen frontendin osoite <i>http://localhost:5173</i> sekä backendin osoite <i>http://localhost:3001</i> on kovakoodattuna testeihin. Näistä oikeastaan backendin osoite on turha, sillä frontendin Vite-konfiguraatioon on määritelty proxy, joka forwardoi kaikki osoitteeseen <i>http://localhost:5173/api</i> menevät frontendin tekemät pyynnöt backendiin:
 
 ```js
 export default defineConfig({
@@ -1226,9 +1226,9 @@ Testin rungon tulee olla seuraavanlainen
 ```js 
 const { test, expect, beforeEach, describe } = require('@playwright/test')
 
-describe('Note app', () => {
+describe('Blog app', () => {
   beforeEach(async ({ page, request }) => {
-    await request.post('http:localhost:3003/api/testing/reset')
+    await request.post('http://localhost:3003/api/testing/reset')
     await request.post('http://localhost:3003/api/users', {
       data: {
         name: 'Matti Luukkainen',
