@@ -394,7 +394,7 @@ To avoid authentication issues with the password variable in index.js, we need t
 ```
 MONGODB_URI="mongodb+srv://fullstack:password@db.gwcmebp.mongodb.net/?retryWrites=true&w=majority&appName=db"
 ```
-Don't forget to replace the string with your details. 
+Don't forget to replace the string with your details. You also need to add your database name in the url before ? mark
 Once the .env file is ready, remember to add it to your .gitignore file to prevent pushing the password to Git:
 
 ```
