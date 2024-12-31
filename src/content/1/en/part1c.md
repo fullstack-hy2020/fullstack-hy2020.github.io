@@ -60,11 +60,11 @@ const Hello = (props) => {
 }
 ```
 
-The logic for guessing the year of birth is separated into a function of its own that is called when the component is rendered.
+The logic for guessing the year of birth is encapsulated within a function of its own, which is invoked when the component is rendered.
 
-The person's age does not have to be passed as a parameter to the function, since it can directly access all props that are passed to the component.
+The person's age does not need to be explicitly passed as a parameter to this function because the function can directly access all the props provided to the component.
 
-If we examine our current code closely, we'll notice that the helper function is defined inside of another function that defines the behavior of our component. In Java programming, defining a function inside another one is complex and cumbersome, so not all that common. In JavaScript, however, defining functions within functions is a commonly-used technique.
+If we examine the current code, we notice that the helper function is defined within another function that determines the component's behavior. In Java programming, defining a function within another function can be complex and is uncommon. However, in JavaScript, defining functions within functions is a common and efficient practice.
 
 ### Destructuring
 
@@ -81,7 +81,8 @@ props = {
 }
 ```
 
-we can streamline our component by assigning the values of the properties directly into two variables _name_ and _age_ which we can then use in our code:
+we can simplify our code by destructuring the properties name and age into variables, making the code cleaner and easier to read.
+Here's the updated component using destructuring:
 
 ```js
 const Hello = (props) => {
@@ -174,9 +175,14 @@ we assign the values of the properties directly to variables by destructuring th
 const Hello = ({ name, age }) => {
 ```
 
+Notes:
+Using destructuring in function parameters is a best practice for React components to reduce boilerplate.
+Compact arrow functions are great for short expressions but should be avoided for more complex logic as it can harm readability.
+Always consider readability and maintainability when deciding between compactness and verbosity.
+
 ### Page re-rendering
 
-So far all of our applications have been such that their appearance remains the same after the initial rendering. What if we wanted to create a counter where the value increased as a function of time or at the click of a button?
+SUp to this point, our applications have been static — their appearance remains unchanged after the initial rendering. But what if we wanted to create a counter that increases in value, either over time or when a button is clicked?
 
 Let's start with the following. File <i>App.jsx</i> becomes:
 
@@ -184,7 +190,7 @@ Let's start with the following. File <i>App.jsx</i> becomes:
 const App = (props) => {
   const {counter} = props
   return (
-    <div>{counter}</div>
+    <div>{counter}</div>   // The App component is rendered with the counter value passed as a prop.
   )
 }
 
