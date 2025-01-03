@@ -290,6 +290,8 @@ The application works well, and the code is relatively simple. The ease of makin
     mutationFn: updateNote,
     onSuccess: () => {
       queryClient.invalidateQueries('notes') // highlight-line
+      // PLEASE VERIFY: should the above line be written as below?? because the code in the "Synchronizing data to the server using React Query" section is as below.
+      queryClient.invalidateQueries({ queryKey: ['notes'] }); // highlight-line
     },
   })
 ```
