@@ -52,6 +52,8 @@ import App from './App'
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
+> <i>By default, there will be React.StrictMode tags around the <App />. We have chosen to remove them from this tutorial.</i>
+
 and file <i>App.jsx</i> looks like this
 
 ```js
