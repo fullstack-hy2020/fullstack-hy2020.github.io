@@ -358,6 +358,8 @@ The experiment above was done in the interactive [node-repl](https://nodejs.org/
 
 ### nodemon
 
+><I>Since [Node v18.11](https://nodejs.org/en/blog/release/v18.11.0), Node has natively supported the watch flag. This means you can run node --watch index.js instead of having to use nodemon.
+
 If we make changes to the application's code we have to restart the application to see the changes. We restart the application by first shutting it down by typing _Ctrl+C_ and then restarting the application. Compared to the convenient workflow in React where the browser automatically reloaded after changes were made, this feels slightly cumbersome.
 
 The solution to this problem is [nodemon](https://github.com/remy/nodemon):
