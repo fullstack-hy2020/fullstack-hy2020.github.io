@@ -485,7 +485,7 @@ export default defineConfig({
 
 After a restart, the React development environment will work as a [proxy](https://vitejs.dev/config/server-options.html#server-proxy). If the React code does an HTTP request to a server address at <i><http://localhost:5173></i> not managed by the React application itself (i.e. when requests are not about fetching the CSS or JavaScript of the application), the request will be redirected to the server at <i><http://localhost:3001></i>.
 
-Note that with the vite-configuration shown above, only requests that are made to paths starting with <i>/api</i>-are redirected to the server.
+Note that with the vite-configuration shown above, only requests that are made to paths starting with <i>/api</i> are redirected to the server.
 
 Now the frontend is also fine, working with the server both in development and production mode.
 
