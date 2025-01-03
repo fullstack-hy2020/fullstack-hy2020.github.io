@@ -23,7 +23,7 @@ Next, we will take a closer look at two UI frameworks, Bootstrap and [MaterialUI
 
 ### React Bootstrap
 
-Let's start by taking a look at Bootstrap with the help of the [react-bootstrap](https://react-bootstrap.github.io/) package.
+Let's start by taking a look at Bootstrap with the help of the [react-bootstrap](https://react-bootstrap.github.io/) package. Continued from the notes application from Part 7a.
 
 Let's install the package with the command:
 
@@ -242,7 +242,7 @@ You can find the complete code for the application [here](https://github.com/ful
 
 ### Material UI
 
-As our second example, we will look into the [MaterialUI](https://mui.com/) React library, which implements the [Material Design](https://material.io/) visual language developed by Google.
+As our second example, we will look into the [MaterialUI](https://mui.com/) React library, which implements the [Material Design](https://material.io/) visual language developed by Google. Continued from the notes application from Part 7a.
 
 Install the library with the command
 
