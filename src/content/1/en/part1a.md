@@ -385,7 +385,7 @@ Depending on the editor you are using, you may receive the following error messa
 
 ![screenshot of vs code showing eslint error: "name is missing in props validation"](../../images/1/1-vite5.png)
 
-It's not an actual error, but a warning caused by the [ESLint](https://eslint.org/) tool. You can silence the warning [react/prop-types](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md) by adding to the file <i>.eslintrc .cjs</i> the next line
+It's not an actual error, but a warning caused by the [ESLint](https://eslint.org/) tool. You can silence the warning [react/prop-types](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md) by adding to the file <i>eslint.config.js</i> the next line
 
 ```js
 module.exports = {
