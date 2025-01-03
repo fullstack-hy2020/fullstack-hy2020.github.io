@@ -249,7 +249,7 @@ Let's implement a GraphQL server with today's leading library: [Apollo Server](h
 Create a new npm project with *npm init* and install the required dependencies.
 
 ```bash
-npm install @apollo/server graphql
+npm install @apollo/server graphql graphql-tag
 ```
 
 Also create a `index.js` file in your project's root directory.
@@ -259,6 +259,7 @@ The initial code is as follows:
 ```js
 const { ApolloServer } = require('@apollo/server')
 const { startStandaloneServer } = require('@apollo/server/standalone')
+const { gql } = require('graphql-tag')
 
 let persons = [
   {
@@ -283,7 +284,7 @@ let persons = [
   },
 ]
 
-const typeDefs = `
+const typeDefs = gql`
   type Person {
     name: String!
     phone: String
