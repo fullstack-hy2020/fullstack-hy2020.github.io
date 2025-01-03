@@ -30,13 +30,13 @@ In certain circles, it has also been popular to attempt "simulating" Java featur
 In JavaScript there are a few ways to go about defining variables:
 
 ```js
-const x = 1
-let y = 5
+const x = 1  / it called a constant variable. Its value cannot be reassigned later.
+let y = 5  / it called a normal variable. Its value can be updated.
 
 console.log(x, y)   // 1, 5 are printed
-y += 10
+y += 10             // Updates y by adding 10 to its current value (y = y + 10)
 console.log(x, y)   // 1, 15 are printed
-y = 'sometext'
+y = 'sometext'      // Updates y to a string value
 console.log(x, y)   // 1, sometext are printed
 x = 4               // causes an error
 ```
@@ -48,6 +48,7 @@ In the example above, we also see that the variable's data type can change durin
 It is also possible to define variables in JavaScript using the keyword [var](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var). var was, for a long time, the only way to define variables. const and let were only recently added in version ES6. In specific situations, var works in a different way compared to variable definitions in most languages - see [JavaScript Variables - Should You Use let, var or const? on Medium](https://medium.com/craft-academy/javascript-variables-should-you-use-let-var-or-const-394f7645c88f) or [Keyword: var vs. let on JS Tips](http://www.jstips.co/en/javascript/keyword-var-vs-let/) for more information. During this course the use of var is ill-advised and you should stick with using const and let!
 You can find more on this topic on YouTube - e.g. [var, let and const - ES6 JavaScript Features](https://youtu.be/sjyJBL5fkp8)
 
+
 ### Arrays
 
 An [array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) and a couple of examples of its use:
@@ -55,7 +56,7 @@ An [array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
 ```js
 const t = [1, -1, 3]
 
-t.push(5)
+t.push(5)  // The .push() method adds one or more elements to the end of an array and returns the new length of the array.
 
 console.log(t.length) // 4 is printed
 console.log(t[1])     // -1 is printed
@@ -124,6 +125,7 @@ console.log(rest)          // [3, 4, 5] is printed
 
 Thanks to the assignment, the variables _first_ and _second_ will receive the first two integers of the array as their values. The remaining integers are "collected" into an array of their own which is then assigned to the variable _rest_.
 
+
 ### Objects
 
 There are a few different ways of defining objects in JavaScript. One very common method is using [object literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#Object_literals), which happens by listing its properties within braces:
@@ -164,7 +166,7 @@ console.log(object1[fieldName])    // 35 is printed
 You can also add properties to an object on the fly by either using dot notation or brackets:
 
 ```js
-object1.address = 'Helsinki'
+object1.address = 'Helsinki'  // Dot Notation Use it when the property name is a valid identifier (no spaces or special characters).
 object1['secret number'] = 12341
 ```
 
@@ -179,7 +181,7 @@ Objects can also be defined using so-called constructor functions, which results
 We have already become familiar with defining arrow functions. The complete process, without cutting corners, of defining an arrow function is as follows:
 
 ```js
-const sum = (p1, p2) => {
+const sum = (p1, p2) => {    // These parameters are placeholders for values that should be provided outside the function when it is called
   console.log(p1)
   console.log(p2)
   return p1 + p2
@@ -471,7 +473,7 @@ const arto = {
   },
 }
 
-setTimeout(arto.greet, 1000)  // highlight-line
+setTimeout(arto.greet, 1000)  // means: Wait 1 second (1000 milliseconds). Then run arto.greet (which is a function).
 ```
 
 As mentioned, the value of _this_ in JavaScript is defined based on how the method is being called. When <em>setTimeout</em> is calling the method, it is the JavaScript engine that actually calls the method and, at that point, _this_ refers to the global object.
@@ -508,7 +510,7 @@ class Person {
 }
 
 const adam = new Person('Adam Ondra', 29)
-adam.greet()
+adam.greet()   // prints: hello, my name is Adam Ondra
 
 const janja = new Person('Janja Garnbret', 23)
 janja.greet()
@@ -535,5 +537,16 @@ The free and highly engaging book [Eloquent JavaScript](https://eloquentjavascri
 [Namaste 🙏 JavaScript](https://www.youtube.com/playlist?list=PLlasXeu85E9cQ32gLCvAvr9vNaUccPVNP) is another great and highly recommended free JavaScript tutorial in order to understand how JS works under the hood. Namaste JavaScript is a pure in-depth JavaScript course released for free on YouTube. It will cover the core concepts of JavaScript in detail and everything about how JS works behind the scenes inside the JavaScript engine.
 
 [egghead.io](https://egghead.io) has plenty of quality screencasts on JavaScript, React, and other interesting topics. Unfortunately, some of the material is behind a paywall.
+
+"Make sure to practice while learning" means that as you're learning new concepts, you should actively apply them by doing exercises or creating small projects to reinforce what you've just learned. It’s like learning by doing. By practicing right after learning, you make sure that the new knowledge sticks and becomes part of your skills.
+
+So, to put it into practice:
+
+After reading or learning about a concept (like functions in JavaScript), immediately try coding it yourself.
+Test the code you wrote by running it and seeing the results.
+Experiment by changing things and seeing how that affects the result.
+For example, after learning how a sum function works, practice by creating your own version, calling it with different inputs, and modifying it.
+
+That way, you don't just read or listen about concepts but actually apply them in your own projects!
 
 </div>
