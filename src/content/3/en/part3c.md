@@ -462,6 +462,7 @@ Let's create a new directory for the module called <i>models</i>, and add a file
 
 ```js
 const mongoose = require('mongoose')
+require('dotenv').config()
 
 mongoose.set('strictQuery', false)
 
