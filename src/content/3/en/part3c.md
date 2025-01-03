@@ -370,6 +370,7 @@ Now we have enough knowledge to start using Mongo in our notes application backe
 Let's get a quick start by copy-pasting the Mongoose definitions to the <i>index.js</i> file:
 
 ```js
+require('dotenv').config()
 const mongoose = require('mongoose')
 
 const password = process.argv[2]
