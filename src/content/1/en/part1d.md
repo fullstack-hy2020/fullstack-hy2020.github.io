@@ -13,6 +13,15 @@ In our previous example, the application state was simple as it was comprised of
 
 In most cases, the easiest and best way to accomplish this is by using the _useState_ function multiple times to create separate "pieces" of state.
 
+Imagine you have a magic notebook where you can write down values and change them whenever you want. `useState` gives us this magic notebook.
+The useState() method allows us to define a reactive variable that will be used to display a value in the HTML page, and since the variable is reactive, it can be modified later in the display.
+
+Modifying the value of the reactive variable in the program will automatically update its display. Note that if the variable is not reactive, changing its value will not affect the display.
+
+When a reactive variable is modified in a component, the entire component is re-rendered. The delay between modifying the reactive variable and re-rendering the component is managed by React, and although it’s very short, it’s not instantaneous.
+
+The modification of reactive variables in the display is carried out during the reconciliation process we mentioned earlier.
+
 In the following code we create two pieces of state for the application named _left_ and _right_ that both get the initial value of 0:
 
 ```js
