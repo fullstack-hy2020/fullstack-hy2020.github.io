@@ -718,10 +718,10 @@ const Display = ({ counter }) => <div>{counter}</div>
 We can simplify the Button component as well.
 
 ```js
-const Button = (props) => {
+const Button = ({ onClick, text }) => {
   return (
-    <button onClick={props.onClick}>
-      {props.text}
+    <button onClick={onClick}>
+      {text}
     </button>
   )
 }
