@@ -809,7 +809,7 @@ Implement an Authors view to show the details of all authors on a page as follow
 
 #### 8.9: Books view
 
-Implement a Books view to show on a page all other details of all books except their genres.
+Implement a Books view that shows the details of all books except their genres.
 
 ![browser showing 7 books with the button](../../images/8/17.png)
 
