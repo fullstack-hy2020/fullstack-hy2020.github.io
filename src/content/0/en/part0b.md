@@ -298,7 +298,7 @@ html
         input
 </pre>
 
-The same treelike structure can be seen on the console tab <i>Elements</i>.
+The same treelike structure can be seen on the console's <i>Elements</i> tab.
 
 ![A screenshot of the Elements tab of the developer console](../../images/0/14e.png)
 
