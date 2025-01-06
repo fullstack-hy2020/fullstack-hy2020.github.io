@@ -217,7 +217,7 @@ const tSquared = t.map(p => p * p)
 // tSquared est devenu [1, 4, 9]
 ```
 
-La fonctionnalité de fonction fléchée a été ajoutée à JavaScript il y a seulement quelques années, avec la version [ES6](http://es6-features.org/). Avant cela, la seule façon de définir des fonctions était d'utiliser le mot-clé _function_.
+La fonctionnalité de fonction fléchée a été ajoutée à JavaScript il y a seulement quelques années, avec la version [ES6](https://rse.github.io/es6-features/). Avant cela, la seule façon de définir des fonctions était d'utiliser le mot-clé _function_.
 
 Il existe deux façons de référencer la fonction ; on donne un nom dans une [déclaration de fonction](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function).
 

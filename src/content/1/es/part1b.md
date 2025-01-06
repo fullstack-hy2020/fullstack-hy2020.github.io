@@ -216,7 +216,7 @@ const tSquared = t.map(p => p * p)
 // tSquared ahora es [1, 4, 9]
 ```
 
-La característica de la función de flecha se agregó a JavaScript hace solo un par de años, con la versión [ES6](http://es6-features.org/). Antes de esto, la única forma de definir funciones era usando la palabra clave _function_.
+La característica de la función de flecha se agregó a JavaScript hace solo un par de años, con la versión [ES6](https://rse.github.io/es6-features/). Antes de esto, la única forma de definir funciones era usando la palabra clave _function_.
 
 Hay dos formas de hacer referencia a la función; uno está dando un nombre en una [declaración de función](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Statements/function).
 

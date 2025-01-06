@@ -216,7 +216,7 @@ const tAoQuadrado = t.map(p => p * p)
 // tAoQuadrado agora é [1, 4, 9]
 ```
 
-A funcionalidade da _arrow function_ foi adicionada ao JavaScript há apenas alguns anos, com a versão [ES6](http://es6-features.org/). Antes disso, a única maneira de definir funções era usando a palavra-chave _function_.
+A funcionalidade da _arrow function_ foi adicionada ao JavaScript há apenas alguns anos, com a versão [ES6](https://rse.github.io/es6-features/). Antes disso, a única maneira de definir funções era usando a palavra-chave _function_.
 
 Existem duas maneiras de se referenciar uma função; uma é atribuir um nome em uma [declaração de função](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function) (_function declaration_).
 

@@ -253,8 +253,8 @@ const tSquared = t.map(p => p * p)
 // tSquared is now [1, 4, 9]
 ```
 
-<!-- The arrow function feature was added to JavaScript only a couple of years ago, with version [ES6](http://es6-features.org/). Prior to this the only way to define functions was by using the keyword _function_.-->
- 箭头函数的功能是在几年前才加入到JavaScript中的，版本[ES6](http://es6-features.org/)。在这之前，定义函数的唯一方法是使用关键字_function_。
+<!-- The arrow function feature was added to JavaScript only a couple of years ago, with version [ES6](https://rse.github.io/es6-features/). Prior to this the only way to define functions was by using the keyword _function_.-->
+ 箭头函数的功能是在几年前才加入到JavaScript中的，版本[ES6](https://rse.github.io/es6-features/)。在这之前，定义函数的唯一方法是使用关键字_function_。
 
 <!-- There are two ways to reference the function; one is giving a name in a [function declaration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function).-->
 有两种方式来引用函数；一种是在[函数声明](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)中给出一个名称。
