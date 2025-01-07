@@ -374,6 +374,8 @@ The VS Code ESlint plugin will underline style violations with a red line:
 
 ![Screenshot of vscode ESlint plugin showing errors](../../images/3/54a.png)
 
+<i>Note: After installing the VSCode ESLint plugin, you may have to go to the <code>settings.json</code> file and ensure that the <code>eslint.validate</code> array has the value <code>"javascript"</code> inside it for it to actively start tracking your javascript files for errors</i> 
+
 This makes errors easy to spot and fix right away.
 
 ESlint has a vast array of [rules](https://eslint.org/docs/rules/) that are easy to take into use by editing the _eslint.config.mjs_ file.
