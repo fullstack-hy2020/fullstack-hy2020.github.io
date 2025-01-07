@@ -357,7 +357,7 @@ Person
   })
 ```
 
-**NB:** If you define a model with the name <i>Person</i>, mongoose will automatically name the associated collection as <i>people</i>.
+**NB:** If you define a model with the name <i>Person</i>, mongoose will automatically name the associated collection as <i>persons</i>.
 
 </div>
 
