@@ -492,7 +492,7 @@ const App = () => {
 
 The _useResource_ custom hook returns an array of two items just like the state hooks. The first item of the array contains all of the individual resources and the second item of the array is an object that can be used for manipulating the resource collection, like creating new ones.
 
-If you implement the hook correctly, it can be used for both notes and phone numbers (start the server with the _npm run server_ command at port 3005).
+If you implement the hook correctly, it can be used for both notes and persons (start the server with the _npm run server_ command at port 3005).
 
 ![browser showing notes and persons](../../images/5/21e.png)
 
