@@ -241,7 +241,7 @@ The two options, or flags, _-it_ make sure we can interact with the container. A
 
 You can try other commands that the Ubuntu image might be able to execute. As an example try _docker container run --rm ubuntu ls_. The _ls_ command will list all of the files in the directory and _--rm_ flag will remove the container after execution. Normally containers are not deleted automatically.
 
-Let's continue with our first Ubuntu container with the **index.js** file inside of it. The container has stopped running since we exited it. We can list all of the containers with _container ls -a_, the _-a_ (or --all) will list containers that have already been exited.
+Let's continue with our first Ubuntu container with the **index.js** file inside of it. The container has stopped running since we exited it. We can list all of the containers with _docker container ls -a_, the _-a_ (or --all) will list containers that have already been exited.
 
 ```bash
 $ docker container ls -a
