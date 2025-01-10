@@ -60,14 +60,6 @@ export default App
 
 Tiedostot <i>App.css</i> ja <i>index.css</i> sekä hakemiston <i>assets</i> voi poistaa, sillä emme tarvitse niitä.
 
-### create-react-app
-
-Voit halutessasi käyttää kurssilla Viten sijaan myös [create-react-app](https://github.com/facebookincubator/create-react-app)-nimistä sovellusta. Näkyvin ero Viteen on sovelluksen aloitustiedoston nimi, joka on <i>index.js</i>. Myös sovelluksen käynnistämistapa eroaa, käynnistäminen tapahtuu komennolla 
-
-```
-npm start
-```
-
 ### Komponentti
 
 Tiedosto <i>App.jsx</i> määrittelee nyt React-[komponentin](https://react.dev/learn/your-first-component) nimeltään <i>App</i>. Tiedoston <i>main.jsx</i> viimeisen rivin komento
@@ -226,7 +218,7 @@ const App = () => {
 }
 ```
 
-Käännöksen hoitaa [Babel](https://babeljs.io/repl/). Create-react-app:illa luoduissa projekteissa käännös on konfiguroitu tapahtumaan automaattisesti. Tulemme tutustumaan aiheeseen tarkemmin kurssin [osassa 7](/osa7).
+Käännöksen hoitaa [Babel](https://babeljs.io/repl/). Vitellä luoduissa projekteissa käännös on konfiguroitu tapahtumaan automaattisesti. Tulemme tutustumaan aiheeseen tarkemmin kurssin [osassa 7](/osa7).
 
 Reactia olisi mahdollista kirjoittaa myös "suoraan JavaScriptinä" käyttämättä JSX:ää, mutta tämä ei ole järkevää.
 

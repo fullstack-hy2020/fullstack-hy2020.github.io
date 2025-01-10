@@ -68,22 +68,6 @@ export default App
 
 The files <i>App.css</i> and <i>index.css</i>, and the directory <i>assets</i> may be deleted as they are not needed in our application right now.
 
-### create-react-app
-
-Instead of Vite you can also use the older generation tool [create-react-app](https://github.com/facebookincubator/create-react-app) in the course to set up the applications. The most visible difference to Vite is the name of the application startup file, which is <i>index.js</i>.
-
-The way to start the application is also different in CRA, it is started with a command
-
-```bash
-npm start
-```
-
-in contrast to Vite's
-
-```bash
-npm run dev 
-```
-
 ### Component
 
 The file <i>App.jsx</i> now defines a [React component](https://react.dev/learn/your-first-component) with the name <i>App</i>. The command on the final line of file <i>main.jsx</i>
@@ -241,7 +225,7 @@ const App = () => {
 }
 ```
 
-The compilation is handled by [Babel](https://babeljs.io/repl/). Projects created with *create-react-app* or *vite* are configured to compile automatically. We will learn more about this topic in [part 7](/en/part7) of this course.
+The compilation is handled by [Babel](https://babeljs.io/repl/). Projects created with *Vite* are configured to compile automatically. We will learn more about this topic in [part 7](/en/part7) of this course.
 
 It is also possible to write React as "pure JavaScript" without using JSX. Although, nobody with a sound mind would do so.
 
