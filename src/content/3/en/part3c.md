@@ -357,7 +357,7 @@ Person
   })
 ```
 
-**NB:** If you define a model with the name <i>Person</i>, mongoose will automatically name the associated collection as <i>people</i>.
+**NB:** If you define a model with the name <i>Person</i>, mongoose will automatically name the associated collection as <i>people</i>. If you are curious about how mongoose automatically knows the plural form of some of the words, it is because of the pluralization rules that it uses behind the scenes, which can be seen <a href="https://github.com/vkarpov15/mongoose-legacy-pluralize/blob/master/index.js">here</a>.
 
 </div>
 
