@@ -385,30 +385,42 @@ Depending on the editor you are using, you may receive the following error messa
 
 ![screenshot of vs code showing eslint error: "name is missing in props validation"](../../images/1/1-vite5.png)
 
-It's not an actual error, but a warning caused by the [ESLint](https://eslint.org/) tool. You can silence the warning [react/prop-types](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md) by adding to the file <i>.eslintrc .cjs</i> the next line
+It's not an actual error, but a warning caused by the [ESLint](https://eslint.org/) tool. You can silence the warning [react/prop-types](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md) by adding to the file <i>eslint.config.js</i> the next line
 
 ```js
-module.exports = {
-   root: true,
-   env: { browser: true, es2020: true },
-   extends: [
-     'eslint:recommended',
-     'plugin:react/recommended',
-     'plugin:react/jsx-runtime',
-     'plugin:react-hooks/recommended',
-   ],
-   ignorePatterns: ['dist', '.eslintrc.cjs'],
-   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
-   settings: { react: { version: '18.2' } },
-   plugins: ['react-refresh'],
-   rules: {
-     'react-refresh/only-export-components': [
-       'warn',
-       { allowConstantExport: true },
-     ],
-     'react/prop-types': 0 // highlight-line
-   },
-}
+export default [
+  { ignores: ['dist'] },
+  {
+    files: ['**/*.{js,jsx}'],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        ecmaFeatures: { jsx: true },
+        sourceType: 'module',
+      },
+    },
+    settings: { react: { version: '18.3' } },
+    plugins: {
+      react,
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
+    },
+    rules: {
+      ...js.configs.recommended.rules,
+      ...react.configs.recommended.rules,
+      ...react.configs['jsx-runtime'].rules,
+      ...reactHooks.configs.recommended.rules,
+      'react/jsx-no-target-blank': 'off',
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true },
+      ],
+      'react/prop-types': 0, // highlight-line
+    },
+  },
+]
 ```
 
 We will get to know ESLint in more detail [in part 3](/en/part3/validation_and_es_lint#lint).

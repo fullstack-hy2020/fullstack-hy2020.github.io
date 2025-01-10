@@ -368,30 +368,42 @@ Käyttämästäsi editorista riippuen saatat saada tässä vaiheessa seuraavan v
 
 ![](../../images/1/1-vite5.png)
 
-Kyse ei ole varsinaisesta virheestä vaan [ESLint](https://eslint.org/)-työkalun aiheuttamasta varoituksesta. Saat hiljennettyä varoituksen [react/prop-types](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md) lisäämällä tiedostoon <i>.eslintrc.cjs</i> seuraavan rivin
+Kyse ei ole varsinaisesta virheestä vaan [ESLint](https://eslint.org/)-työkalun aiheuttamasta varoituksesta. Saat hiljennettyä varoituksen [react/prop-types](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md) lisäämällä tiedostoon <i>eslint.config.js</i> seuraavan rivin
 
 ```js
-module.exports = {
-  root: true,
-  env: { browser: true, es2020: true },
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:react/jsx-runtime',
-    'plugin:react-hooks/recommended',
-  ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
-  parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
-  settings: { react: { version: '18.2' } },
-  plugins: ['react-refresh'],
-  rules: {
-    'react-refresh/only-export-components': [
-      'warn',
-      { allowConstantExport: true },
-    ],
-    'react/prop-types': 0 // highlight-line
+export default [
+  { ignores: ['dist'] },
+  {
+    files: ['**/*.{js,jsx}'],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        ecmaFeatures: { jsx: true },
+        sourceType: 'module',
+      },
+    },
+    settings: { react: { version: '18.3' } },
+    plugins: {
+      react,
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
+    },
+    rules: {
+      ...js.configs.recommended.rules,
+      ...react.configs.recommended.rules,
+      ...react.configs['jsx-runtime'].rules,
+      ...reactHooks.configs.recommended.rules,
+      'react/jsx-no-target-blank': 'off',
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true },
+      ],
+      'react/prop-types': 0, // highlight-line
+    },
   },
-}
+]
 ```
 
 Tutustumme ESLintiin tarkemmin [osassa 3](/osa3/validointi_ja_es_lint#lint).

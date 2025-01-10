@@ -404,16 +404,15 @@ export default [
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
       ...reactHooks.configs.recommended.rules,
-      'react/prop-types': ['off'], // highlight-line
       'react/jsx-no-target-blank': 'off',
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
       ],
+      'react/prop-types': 0, // highlight-line
     },
   },
 ]
-
 ```
 
 Nous en apprendrons davantage sur ESLint en détail dans [la partie 3](/osa3/validointi_ja_es_lint#lint).
