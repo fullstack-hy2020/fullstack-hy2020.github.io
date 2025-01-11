@@ -45,7 +45,7 @@ x = 4               // causes an error
 
 In the example above, we also see that the variable's data type can change during execution. At the start, _y_ stores an integer; at the end, it stores a string.
 
-It is also possible to define variables in JavaScript using the keyword [var](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var). var was, for a long time, the only way to define variables. const and let were only recently added in version ES6. In specific situations, var works in a different way compared to variable definitions in most languages - see [JavaScript Variables - Should You Use let, var or const? on Medium](https://medium.com/craft-academy/javascript-variables-should-you-use-let-var-or-const-394f7645c88f) or [Keyword: var vs. let on JS Tips](http://www.jstips.co/en/javascript/keyword-var-vs-let/) for more information. During this course the use of var is ill-advised and you should stick with using const and let!
+It is also possible to define variables in JavaScript using the keyword [var](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var). For a long time, var was the only way to define variables. The keywords const and let were introduced in 2015 with the release of ES6. In specific situations, var works in a different way compared to variable definitions in most languages - see [JavaScript Variables - Should You Use let, var or const? on Medium](https://medium.com/craft-academy/javascript-variables-should-you-use-let-var-or-const-394f7645c88f) or [Keyword: var vs. let on JS Tips](http://www.jstips.co/en/javascript/keyword-var-vs-let/) for more information. During this course the use of var is ill-advised and you should stick with using const and let!
 You can find more on this topic on YouTube - e.g. [var, let and const - ES6 JavaScript Features](https://youtu.be/sjyJBL5fkp8)
 
 ### Arrays
@@ -216,7 +216,7 @@ const tSquared = t.map(p => p * p)
 // tSquared is now [1, 4, 9]
 ```
 
-The arrow function feature was added to JavaScript only a couple of years ago, with version [ES6](https://rse.github.io/es6-features/). Before this, the only way to define functions was by using the keyword _function_.
+The arrow function feature was added to JavaScript in 2015, with version [ES6](https://rse.github.io/es6-features/). Before this, the only way to define functions was by using the keyword _function_.
 
 There are two ways to reference the function; one is giving a name in a [function declaration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function).
 

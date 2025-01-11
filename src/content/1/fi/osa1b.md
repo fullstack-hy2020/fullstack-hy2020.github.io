@@ -45,7 +45,7 @@ x = 4               // aiheuttaa virheen
 
 Muuttujan tallettaman tiedon tyyppi voi vaihtua suorituksen aikana, _y_ tallettaa aluksi luvun ja lopulta merkkijonon.
 
-JavaScriptissa on myös mahdollista määritellä muuttujia avainsanan [var](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var) avulla. Var oli pitkään ainoa tapa muuttujien määrittelyyn, const ja let tulivat kieleen mukaan vasta versiossa ES6. Var toimii tietyissä tilanteissa [eri](https://medium.com/craft-academy/javascript-variables-should-you-use-let-var-or-const-394f7645c88f) [tavalla](http://www.jstips.co/en/javascript/keyword-var-vs-let/) kuin useimpien muiden kielien muuttujien määrittely. Tällä kurssilla var:in käyttö ei ole suositeltavaa, eli käytä aina const:ia tai let:iä!
+JavaScriptissa on myös mahdollista määritellä muuttujia avainsanan [var](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var) avulla. Var oli pitkään ainoa tapa muuttujien määrittelyyn, const ja let tulivat kieleen mukaan vasta vuonna 2015 Javascriptin versiossa ES6. Var toimii tietyissä tilanteissa [eri](https://medium.com/craft-academy/javascript-variables-should-you-use-let-var-or-const-394f7645c88f) [tavalla](http://www.jstips.co/en/javascript/keyword-var-vs-let/) kuin useimpien muiden kielien muuttujien määrittely. Tällä kurssilla var:in käyttö ei ole suositeltavaa, eli käytä aina const:ia tai let:iä!
 
 Lisää aiheesta on esim. YouTubessa: [var, let and const - ES6 JavaScript Features](https://youtu.be/sjyJBL5fkp8)
 
@@ -219,7 +219,7 @@ const tSquared = t.map(p => p * p)
 // tSquared on nyt [1, 4, 9]
 ```
 
-Nuolifunktio on tullut JavaScriptiin vasta muutama vuosi sitten version [ES6](https://rse.github.io/es6-features/) myötä. Tätä ennen ainoa tapa funktioiden määrittelyyn oli avainsanan _function_ käyttö.
+Nuolifunktio on tullut JavaScriptiin vuonna 2015 version [ES6](https://rse.github.io/es6-features/) myötä. Tätä ennen ainoa tapa funktioiden määrittelyyn oli avainsanan _function_ käyttö.
 
 Määrittelytapoja on kaksi, funktiolle voidaan antaa [function declaration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function) ‑tyyppisessä määrittelyssä <i>nimi</i>, jonka avulla funktioon voidaan viitata:
 
