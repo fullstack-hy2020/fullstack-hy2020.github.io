@@ -33,11 +33,11 @@ Em JavaScript, existem algumas maneiras de definir variáveis:
 const x = 1
 let y = 5
 
-console.log(x, y)   // 1, 5 são impressos
+console.log(x, y)   // 1 5 são impressos
 y += 10
-console.log(x, y)   // 1, 15 são impressos
+console.log(x, y)   // 1 15 são impressos
 y = 'algum texto'
-console.log(x, y)   // 1, algum texto são impressos
+console.log(x, y)   // 1 algum texto são impressos
 x = 4               // causará um erro
 ```
 
