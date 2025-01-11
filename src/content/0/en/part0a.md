@@ -248,8 +248,6 @@ When pressed twice you should see the following text
 
 > *University credit registration in progress...*
 
-Note: if you have already done the course exam in Moodle contact matti.luukkainen@helsinki.fi or @mluukkai in Discord.
-
 ### How to get your credits
 
 If you want to receive University of Helsinki credits, save your <b>University of Helsinki</b> student number to [the exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)
