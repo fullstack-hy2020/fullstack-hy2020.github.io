@@ -118,7 +118,7 @@ const t = [1, 2, 3, 4, 5]
 
 const [primeiro, segundo, ...resto] = t
 
-console.log(primeiro, segundo)  // 1, 2 é impresso
+console.log(primeiro, segundo)  // 1 2 é impresso
 console.log(resto)          // [3, 4, 5] é impresso
 ```
 
