@@ -9,7 +9,7 @@ lang: es
 
 Durante el curso, tenemos el objetivo y la necesidad de aprender una cantidad suficiente de JavaScript ademas del desarrollo web.
 
-JavaScript ha avanzado rápidamente en los últimos años y en este curso usamos características de las versiones más nuevas. El nombre oficial del estándar JavaScript es [ECMAScript](https://es.wikipedia.org/wiki/ECMAScript). En este momento, la última versión es la lanzada en junio de 2023 con el nombre [ECMAScript® 2023](https://www.ecma-international.org/ecma-262/), también conocido como ES14.
+JavaScript ha avanzado rápidamente en los últimos años y en este curso usamos características de las versiones más nuevas. El nombre oficial del estándar JavaScript es [ECMAScript](https://es.wikipedia.org/wiki/ECMAScript). En este momento, la última versión es la lanzada en junio de 2024 con el nombre [ECMAScript® 2024](https://www.ecma-international.org/ecma-262/), también conocido como ES15.
 
 Los navegadores aún no son compatibles con todas las funciones más nuevas de JavaScript. Debido a este hecho, una gran cantidad de código que se ejecuta en los navegadores ha sido <i>transpilado</i> de una versión más nueva de JavaScript a una versión más antigua y compatible.
 

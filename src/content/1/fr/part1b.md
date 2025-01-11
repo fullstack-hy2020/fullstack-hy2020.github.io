@@ -9,7 +9,7 @@ lang: fr
 
 Tout au long du cours, nous avons un objectif et un besoin d'apprendre une quantité suffisante de JavaScript en plus du développement Web.
 
-JavaScript a progressé rapidement au cours des dernières années et dans ce cours, nous utilisons les fonctionnalités des versions les plus récentes. Le nom officiel de la norme JavaScript est [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). À l'heure actuelle, la dernière version est celle publiée en juin 2021 sous le nom [ECMAScript®2021](https://www.ecma-international.org/ecma-262/), également connue sous le nom d'ES12.
+JavaScript a progressé rapidement au cours des dernières années et dans ce cours, nous utilisons les fonctionnalités des versions les plus récentes. Le nom officiel de la norme JavaScript est [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). À l'heure actuelle, la dernière version est celle publiée en juin 2024 sous le nom [ECMAScript®2024](https://www.ecma-international.org/ecma-262/), également connue sous le nom d'ES15.
 
 Les navigateurs ne prennent pas encore en charge toutes les nouvelles fonctionnalités de JavaScript. De ce fait, une grande partie du code exécuté dans les navigateurs a été <i>transpilé</i> d'une version plus récente de JavaScript vers une version plus ancienne et plus compatible.
 
