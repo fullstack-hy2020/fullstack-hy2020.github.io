@@ -839,10 +839,10 @@ We could and propably should give a proper type as the type variable. In our cas
 
 ```js
 import { Response } from 'express'
-
+import { NonSensitiveDiaryEntry } from "../types";
 // ...
 
-router.get('/', (_req, res: Response<DiaryEntry[]>) => {
+router.get('/', (_req, res: Response<NonSensitiveDiaryEntry[]>) => {
   res.send(diaryService.getNonSensitiveEntries());
 });
 
