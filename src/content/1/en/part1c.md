@@ -628,10 +628,10 @@ const App = () => {
 
 Since we now have an easily reusable <i>Button</i> component, we've also implemented new functionality into our application by adding a button that can be used to decrement the counter.
 
-The event handler is passed to the <i>Button</i> component through the _onClick_ prop. The name of the prop itself is not that significant, but our naming choice wasn't completely random. 
+The event handler is passed to the <i>Button</i> component through the _onClick_ prop. When creating your own components, you can theoretically choose the prop name freely. However, our naming choice for the event handler was not entirely arbitrary.
 
 React's own official [tutorial](https://react.dev/learn/tutorial-tic-tac-toe) suggests:
-"In React, it’s conventional to use onSomething names for props which take functions which handle events and handleSomething for the actual function definitions which handle those events."
+"In React, it’s conventional to use _onSomething_ names for props which take functions which handle events and handleSomething for the actual function definitions which handle those events."
 
 ### Changes in state cause re-rendering
 
@@ -729,11 +729,6 @@ const Button = (props) => {
 
 We can use destructuring to get only the required fields from <i>props</i>, and use the more compact form of arrow functions:
 
-**NB**: While building your own components, you can name their event handler props anyway you like, for this you can refer to the react's documentation on [Naming event handler props](https://react.dev/learn/responding-to-events#naming-event-handler-props). It goes as following:
-
-> By convention, event handler props should start with `on`, followed by a capital letter.
-For example, the Button component’s `onClick` prop could have been called `onSmash`:
-
 ```js
 const Button = ({ onClick, text }) => (
   <button onClick={onClick}>
@@ -741,23 +736,5 @@ const Button = ({ onClick, text }) => (
   </button>
 )
 ```
-
-could also be called as following:
-
-```js
-const Button = ({ onSmash, text }) => (
-  <button onClick={onSmash}>
-    {text}
-  </button>
-)
-```
-
-We can simplify the Button component once more by declaring the return statement in just one line:
-
-```js
-const Button = ({ onSmash, text }) => <button onClick={onSmash}>{text}</button>
-```
-
-**NB**: However, be careful to not oversimplify your components, as this makes adding complexity a more tedious task down the road.
 
 </div>
