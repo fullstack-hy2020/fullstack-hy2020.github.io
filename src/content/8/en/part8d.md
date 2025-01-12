@@ -328,7 +328,7 @@ Implement a view which shows all the books based on the logged-in user's favouri
 In the previous two exercises, the filtering could have been done using just React.
 To complete this exercise, you should redo the filtering the books based on a selected genre (that was done in exercise 8.19) using a GraphQL query to the server. If you already did so then you do not have to do anything.
 
-This and the next exercises are quite **challenging** like it should be this late in the course. You might want to complete first the easier ones in the [next part](/en/part8/fragments_and_subscriptions).
+This and the next exercise are quite **challenging**, like they should be this late in the course. It may help you to complete the easier exercises in the [next part](/en/part8/fragments_and_subscriptions) before doing 8.21 and 8.22.
 
 #### 8.22 Up-to-date cache and book recommendations
 
