@@ -1377,9 +1377,9 @@ Expande tu aplicación para que puedas votar por la anécdota mostrada.
 Puedes crear una copia de un objeto de esta forma:
 
 ```js
-const points = { 0: 1, 1: 3, 2: 4, 3: 2 }
+const votes = { 0: 1, 1: 3, 2: 4, 3: 2 }
 
-const copy = { ...points }
+const copy = { ...votes }
 // incrementa en uno el valor de la propiedad 2
 copy[2] += 1
 ```
@@ -1387,9 +1387,9 @@ copy[2] += 1
 O una copia de un array de esta forma:
 
 ```js
-const points = [1, 4, 6, 3]
+const votes = [1, 4, 6, 3]
 
-const copy = [...points]
+const copy = [...votes]
 // incrementa en uno el valor de la posición 2
 copy[2] += 1
 ```

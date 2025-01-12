@@ -1375,9 +1375,9 @@ Laajenna sovellusta siten, että näytettävää anekdoottia on mahdollista ää
 Olio voidaan kopioida esim. seuraavasti
 
 ```js
-const points = { 0: 1, 1: 3, 2: 4, 3: 2 }
+const votes = { 0: 1, 1: 3, 2: 4, 3: 2 }
 
-const copy = { ...points }
+const copy = { ...votes }
 // kasvatetaan olion kentän 2 arvoa yhdellä
 copy[2] += 1     
 ```
@@ -1385,9 +1385,9 @@ copy[2] += 1
 ja taulukko esim. seuraavasti:
 
 ```js
-const points = [1, 4, 6, 3]
+const votes = [1, 4, 6, 3]
 
-const copy = [...points]
+const copy = [...votes]
 // kasvatetaan taulukon paikan 2 arvoa yhdellä
 copy[2] += 1     
 ```

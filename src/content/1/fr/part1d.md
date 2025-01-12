@@ -1208,9 +1208,9 @@ Développez votre application afin de pouvoir voter pour l'anecdote affichée.
 Vous pouvez créer une copie d'un objet comme ceci :
 
 ```js
-const points = { 0: 1, 1: 3, 2: 4, 3: 2 }
+const votes = { 0: 1, 1: 3, 2: 4, 3: 2 }
 
-const copy = { ...points }
+const copy = { ...votes }
 // incrémenter la valeur de la propriété 2 de un
 copy[2] += 1     
 ```
@@ -1218,9 +1218,9 @@ copy[2] += 1
 OU une copie du tableau comme cela :
 
 ```js
-const points = [1, 4, 6, 3]
+const votes = [1, 4, 6, 3]
 
-const copy = [...points]
+const copy = [...votes]
 // incrémenter la valeur en position 2 de un
 copy[2] += 1     
 ```

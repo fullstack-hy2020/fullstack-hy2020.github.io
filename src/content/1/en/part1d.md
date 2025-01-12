@@ -1393,9 +1393,9 @@ Expand your application so that you can vote for the displayed anecdote.
 You can create a copy of an object like this:
 
 ```js
-const points = { 0: 1, 1: 3, 2: 4, 3: 2 }
+const votes = { 0: 1, 1: 3, 2: 4, 3: 2 }
 
-const copy = { ...points }
+const copy = { ...votes }
 // increment the property 2 value by one
 copy[2] += 1     
 ```
@@ -1403,9 +1403,9 @@ copy[2] += 1
 OR a copy of an array like this:
 
 ```js
-const points = [1, 4, 6, 3]
+const votes = [1, 4, 6, 3]
 
-const copy = [...points]
+const copy = [...votes]
 // increment the value in position 2 by one
 copy[2] += 1     
 ```
