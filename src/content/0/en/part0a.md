@@ -320,15 +320,9 @@ There is one certificate for the base parts (0-7) of the course and after that a
 
 ### Request a transcript of studies
 
-You can request a verified transcript *after your university credits have been registered*. To request an official transcript, please contact avoin-student@helsinki.fi.
+You can request a verified transcript *after your university credits have been registered*. You can order a transcript using the student services [e-form](https://elomake.helsinki.fi/lomakkeet/132797/lomake.html?rinnakkaislomake=Rinnakkaislomake1_en%5Bk%5D). 
 
-- When requesting an official transcript, remember to mention
-    - the name of the course,
-    - your full name,
-    - your date of birth
-    - the language of the transcript.
-
-The transcript will be delivered to you electronically through email. Present this document at your institution to have the credits included in your degree. The decision to include the credits will be made by your home institution.
+An electronic transcript of studies will be delivered to you by email. Present this document at your institution to have the credits included in your degree. The decision to include the credits will be made by your home institution.
 
 ### No more yearly versions
 
