@@ -621,7 +621,7 @@ const App = () => {
 
 Koska meillä on nyt uudelleenkäytettävä komponentti <i>Button</i>, sovellukselle on lisätty uutena toiminnallisuutena nappi, jolla laskurin arvoa voi vähentää.
 
-Tapahtumankäsittelijä välitetään napeille propsin _onClick_ välityksellä. Omia komponentteja luotaessa propsin nimen voi periaatteessa valita täysin vapaasti, mutta esim. Reactin [tutoriaali](https://react.dev/learn/responding-to-events#naming-event-handler-props) suosittelee, että tapahtumankäsittelijän sisältävän propsin nimi alkaa etuliitteellä _on_ ja jatkuu isolla kirjaimella.
+Tapahtumankäsittelijä välitetään napeille propsin _onClick_ välityksellä. Omia komponentteja luotaessa propsin nimen voi periaatteessa valita täysin vapaasti, mutta esim. Reactin [tutoriaali](https://react.dev/learn/responding-to-events#naming-event-handler-props) suosittelee, että tapahtumankäsittelijän sisältävän propsin nimi alkaa etuliitteellä _on_ ja jatkuu isolla kirjaimella eli on muotoa _onSomething_.
 
 ### Tilan muutos aiheuttaa uudelleenrenderöitymisen
 

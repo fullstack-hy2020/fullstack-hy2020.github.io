@@ -428,8 +428,8 @@ const History = (props) => {
 }
 
 // highlight-start
-const Button = ({ handleClick, text }) => (
-  <button onClick={handleClick}>
+const Button = ({ onClick, text }) => (
+  <button onClick={onClick}>
     {text}
   </button>
 )
@@ -454,8 +454,8 @@ const App = () => {
     <div>
       {left}
       // highlight-start
-      <Button handleClick={handleLeftClick} text='left' />
-      <Button handleClick={handleRightClick} text='right' />
+      <Button onClick={handleLeftClick} text='left' />
+      <Button onClick={handleRightClick} text='right' />
       // highlight-end
       {right}
       <History allClicks={allClicks} />
@@ -497,8 +497,8 @@ don't write more code but rather find and fix the problem **immediately**. There
 Old-school, print-based debugging is always a good idea. If the component
 
 ```js
-const Button = ({ handleClick, text }) => (
-  <button onClick={handleClick}>
+const Button = ({ onClick, text }) => (
+  <button onClick={onClick}>
     {text}
   </button>
 )
@@ -509,9 +509,9 @@ is not working as intended, it's useful to start printing its variables out to t
 ```js
 const Button = (props) => { 
   console.log(props) // highlight-line
-  const { handleClick, text } = props
+  const { onClick, text } = props
   return (
-    <button onClick={handleClick}>
+    <button onClick={onClick}>
       {text}
     </button>
   )
@@ -1030,13 +1030,13 @@ Let's extract the button into its own component:
 
 ```js
 const Button = (props) => (
-  <button onClick={props.handleClick}>
+  <button onClick={props.onClick}>
     {props.text}
   </button>
 )
 ```
 
-The component gets the event handler function from the _handleClick_ prop, and the text of the button from the _text_ prop. Lets use the new component:
+The component gets the event handler function from the _onClick_ prop, and the text of the button from the _text_ prop. Lets use the new component:
 
 ```js
 const App = (props) => {
@@ -1044,9 +1044,9 @@ const App = (props) => {
   return (
     <div>
       {value}
-      <Button handleClick={() => setToValue(1000)} text="thousand" /> // highlight-line
-      <Button handleClick={() => setToValue(0)} text="reset" /> // highlight-line
-      <Button handleClick={() => setToValue(value + 1)} text="increment" /> // highlight-line
+      <Button onClick={() => setToValue(1000)} text="thousand" /> // highlight-line
+      <Button onClick={() => setToValue(0)} text="reset" /> // highlight-line
+      <Button onClick={() => setToValue(value + 1)} text="increment" /> // highlight-line
     </div>
   )
 }
@@ -1054,7 +1054,7 @@ const App = (props) => {
 
 Using the <i>Button</i> component is simple, although we have to make sure that we use the correct attribute names when passing props to the component.
 
-![using correct attribute names code screenshot](../../images/1/12e.png)
+![using correct attribute names code screenshot](../../images/1/12f.png)
 
 ### Do Not Define Components Within Components
 
@@ -1065,7 +1065,7 @@ We will change the application by defining a new component inside of the <i>App<
 ```js
 // This is the right place to define a component
 const Button = (props) => (
-  <button onClick={props.handleClick}>
+  <button onClick={props.onClick}>
     {props.text}
   </button>
 )
@@ -1084,9 +1084,9 @@ const App = () => {
   return (
     <div>
       <Display value={value} /> // highlight-line
-      <Button handleClick={() => setToValue(1000)} text="thousand" />
-      <Button handleClick={() => setToValue(0)} text="reset" />
-      <Button handleClick={() => setToValue(value + 1)} text="increment" />
+      <Button onClick={() => setToValue(1000)} text="thousand" />
+      <Button onClick={() => setToValue(0)} text="reset" />
+      <Button onClick={() => setToValue(value + 1)} text="increment" />
     </div>
   )
 }
@@ -1100,7 +1100,7 @@ Let's instead move the <i>Display</i> component function to its correct place, w
 const Display = props => <div>{props.value}</div>
 
 const Button = (props) => (
-  <button onClick={props.handleClick}>
+  <button onClick={props.onClick}>
     {props.text}
   </button>
 )
@@ -1116,9 +1116,9 @@ const App = () => {
   return (
     <div>
       <Display value={value} />
-      <Button handleClick={() => setToValue(1000)} text="thousand" />
-      <Button handleClick={() => setToValue(0)} text="reset" />
-      <Button handleClick={() => setToValue(value + 1)} text="increment" />
+      <Button onClick={() => setToValue(1000)} text="thousand" />
+      <Button onClick={() => setToValue(0)} text="reset" />
+      <Button onClick={() => setToValue(value + 1)} text="increment" />
     </div>
   )
 }
