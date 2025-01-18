@@ -205,7 +205,7 @@ The data is now stored in the right database. The view also offers the <i>create
 
 ### Schema
 
-After establishing the connection to the database, we define the [schema](http://mongoosejs.com/docs/guide.html) for a note and the matching [model](http://mongoosejs.com/docs/models.html):
+After establishing the connection to the database, we define the [schema](https://mongoosejs.com/docs/guide.html#schemas) for a note and the matching [model](https://mongoosejs.com/docs/models.html):
 
 ```js
 const noteSchema = new mongoose.Schema({
@@ -216,9 +216,9 @@ const noteSchema = new mongoose.Schema({
 const Note = mongoose.model('Note', noteSchema)
 ```
 
-First, we define the [schema](http://mongoosejs.com/docs/guide.html) of a note that is stored in the _noteSchema_ variable. The schema tells Mongoose how the note objects are to be stored in the database.
+First, we define the [schema](https://mongoosejs.com/docs/guide.html#schemas) of a note that is stored in the _noteSchema_ variable. The schema tells Mongoose how the note objects are to be stored in the database.
 
-In the _Note_ model definition, the first <i>"Note"</i> parameter is the singular name of the model. The name of the collection will be the lowercase plural <i>notes</i>, because the [Mongoose convention](http://mongoosejs.com/docs/models.html) is to automatically name collections as the plural (e.g. <i>notes</i>) when the schema refers to them in the singular (e.g. <i>Note</i>).
+In the _Note_ model definition, the first <i>"Note"</i> parameter is the singular name of the model. The name of the collection will be the lowercase plural <i>notes</i>, because the [Mongoose convention](https://mongoosejs.com/docs/models.html#compiling) is to automatically name collections as the plural (e.g. <i>notes</i>) when the schema refers to them in the singular (e.g. <i>Note</i>).
 
 Document databases like Mongo are <i>schemaless</i>, meaning that the database itself does not care about the structure of the data that is stored in the database. It is possible to store documents with completely different fields in the same collection.
 
@@ -226,7 +226,7 @@ The idea behind Mongoose is that the data stored in the database is given a <i>s
 
 ### Creating and saving objects
 
-Next, the application creates a new note object with the help of the <i>Note</i> [model](http://mongoosejs.com/docs/models.html):
+Next, the application creates a new note object with the help of the <i>Note</i> [model](https://mongoosejs.com/docs/models.html):
 
 ```js
 const note = new Note({
