@@ -227,7 +227,7 @@ But as a React inline-style object it would look like this:
 }
 ```
 
-Every CSS property is defined as a separate property of the JavaScript object. Numeric values for pixels can be simply defined as integers. One of the major differences compared to regular CSS, is that hyphenated (kebab case) CSS properties are written in camelCase.
+Every CSS property is defined as a separate property of the JavaScript object. Numeric values for pixels can be simply defined as integers. One of the major differences compared to regular CSS, is that hyphenated (kebab-case) CSS properties are written in camelCase.
 
 Next, we could add a "bottom block" to our application by creating a <i>Footer</i> component and defining the following inline styles for it:
 
