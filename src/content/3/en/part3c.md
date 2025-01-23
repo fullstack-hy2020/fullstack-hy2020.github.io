@@ -389,25 +389,6 @@ const noteSchema = new mongoose.Schema({
 const Note = mongoose.model('Note', noteSchema)
 ```
 
-To avoid authentication issues with the password variable in index.js, we need to create a .env file by running npm install dotenv in the command line. Then, let's create the .env file in the root of your directory. In that file, you should place your URI:
-
-```
-MONGODB_URI="mongodb+srv://fullstack:password@db.gwcmebp.mongodb.net/?retryWrites=true&w=majority&appName=db"
-```
-Don't forget to replace the string with your details. 
-Once the .env file is ready, remember to add it to your .gitignore file to prevent pushing the password to Git:
-
-```
-/node_modules
-.env
-```
-Then, in your index.js file, make the necessary changes with the following line so that your code can access the URL in your .env file:
-
-```
-const url = process.env.MONGODB_URI;
-
-```
-
 Let's change the handler for fetching all notes to the following form:
 
 ```js
