@@ -803,6 +803,15 @@ Togglable.displayName = 'Togglable' // highlight-line
 
 export default Togglable
 ```
+**NB:** Due to the use of <code>{props.children}</code>, in _Togglable.jsx_, you may also get an error stating <code>'children' is missing in props validation</code>. If that happens, simply add a proptype for children along with the other proptypes inside _Togglable.jsx_
+
+```js
+...
+Togglable.proptypes ={
+...
+children: PropTypes.node
+}
+```
 
 You can find the code for our current application in its entirety in the <i>part5-7</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-7).
 
