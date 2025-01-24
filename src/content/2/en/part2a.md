@@ -108,9 +108,7 @@ export default App
 The file <i>main.jsx</i> looks like this:
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
-
 import App from './App'
 
 const notes = [
@@ -408,7 +406,6 @@ We have been using modules the whole time. The first few lines of the file <i>ma
 
 ```js
 import ReactDOM from "react-dom/client"
-
 import App from "./App"
 ```
 
@@ -422,9 +419,7 @@ Now, we'll create a directory called <i>components</i> for our application and p
 
 ```js
 const Note = ({ note }) => {
-  return (
-    <li>{note.content}</li>
-  )
+  return <li>{note.content}</li>
 }
 
 export default Note
