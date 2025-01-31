@@ -301,12 +301,7 @@ Note: if you use Heroku, you might need an extra option in connecting the databa
 ```js
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
   // highlight-start
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false
-    }
-  },
+  dialectOptions: {},
   // highlight-end
 })
 ```
