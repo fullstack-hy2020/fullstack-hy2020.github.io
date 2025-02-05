@@ -570,8 +570,6 @@ React Developer Tools näyttää hookeilla luodut tilan osat siinä järjestykse
 
 Ylimpänä oleva <i>State</i> vastaa siis tilan <i>left</i> arvoa, seuraava tilan <i>right</i> arvoa ja alimpana on taulukko <i>allClicks</i>.
 
-Chromella tapahtuvaan JavaScriptin debuggaukseen voi tutustua myös esim. [tämän sivun videolla](https://developer.chrome.com/docs/devtools/overview/) alkaen kohdasta 16:50.
-
 ### Hookien säännöt
 
 Jotta hookeilla muodostettu sovelluksen tila toimisi oikein, on hookeja käytettävä tiettyjä [rajoituksia](https://react.dev/learn/state-a-components-memory#meet-your-first-hook) noudattaen.
