@@ -35,7 +35,9 @@ exports.createPages = ({ actions, graphql }) => {
       const { frontmatter } = node;
       const { part, lang } = frontmatter;
 
-      if (part && !frontmatter.letter) {
+      const legitPart = (part || part === '0' || part === 0) 
+
+      if (legitPart && !frontmatter.letter) {
         createPage({
           path:
             lang === 'fi'
@@ -47,7 +49,7 @@ exports.createPages = ({ actions, graphql }) => {
             lang: lang,
           },
         });
-      } else if (part && navigation[lang] && !isEmpty(navigation[lang][part]) && frontmatter.letter) {
+      } else if (legitPart && navigation[lang] && !isEmpty(navigation[lang][part]) && frontmatter.letter) {
         createPage({
           path:
             lang === 'fi'
