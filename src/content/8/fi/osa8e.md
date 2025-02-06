@@ -468,7 +468,7 @@ Tiedosto <i>index.js</i> muuttuu seuraavasti
 ```js
 // highlight-start
 const { WebSocketServer } = require('ws')
-const { useServer } = require('graphql-ws/use/ws')
+const { useServer } = require('graphql-ws/lib/use/ws')
 // highlight-end
 
 // ...
