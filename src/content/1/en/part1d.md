@@ -576,6 +576,8 @@ Dev tools show the state of hooks in the order of their definition:
 
 The first <i>State</i> contains the value of the <i>left</i> state, the next contains the value of the <i>right</i> state and the last contains the value of the <i>allClicks</i> state.
 
+You can also learn about debugging JavaScript in Chrome, for example, with the [Chrome DevTools guide video](https://developer.chrome.com/docs/devtools/javascript).
+
 ### Rules of Hooks
 
 There are a few limitations and [rules](https://react.dev/warnings/invalid-hook-call-warning#breaking-rules-of-hooks) that we have to follow to ensure that our application uses hooks-based state functions correctly.
