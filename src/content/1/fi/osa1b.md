@@ -125,7 +125,7 @@ console.log(first, second)  // tulostuu 1 2
 console.log(rest)          // tulostuu [3, 4 ,5]
 ```
 
-Yllä muuttujiin _first_ ja _second_ sijoitetaan taulukon kaksi ensimmäistä lukua. Muuttujaan _rest_ "kerätään" sijoituksesta jäljelle jääneet luvut omaksi taulukoksi.
+Yllä muuttujaan _first_ sijoitetaan taulukon ensimmäinen luku ja muuttujaan _second_ taulukon toinen luku. Muuttujaan _rest_ "kerätään" sijoituksesta jäljelle jääneet luvut omaksi taulukoksi.
 
 ### Oliot
 

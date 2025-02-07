@@ -122,7 +122,7 @@ console.log(first, second)  // 1 2 is printed
 console.log(rest)          // [3, 4, 5] is printed
 ```
 
-Thanks to the assignment, the variables _first_ and _second_ will receive the first two integers of the array as their values. The remaining integers are "collected" into an array of their own which is then assigned to the variable _rest_.
+Above, the variable _first_ is assigned the first integer of the array and the variable _second_ is assigned the second integer of the array. The variable _rest_ "collects" the remaining integers into its own array.
 
 ### Objects
 
