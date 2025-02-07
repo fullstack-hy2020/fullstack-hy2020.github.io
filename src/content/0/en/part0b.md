@@ -15,7 +15,7 @@ Code will conform to contemporary best practices from [part 1](/en/part1) onward
 
 Open the [example application](https://studies.cs.helsinki.fi/exampleapp) in your browser. Sometimes this takes a while.
 
-The course material is done with the Chrome browser.
+The course material was done with and adapted for the Chrome browser.
 
 **The 1st rule of web development**: Always keep the Developer Console open on your web browser. On macOS, open the console by pressing _fn_-_F12_ or _option-cmd-i_ simultaneously. On Windows or Linux, open the console by pressing _Fn_-_F12_ or _ctrl-shift-i_ simultaneously. The console can also be opened via the [context menu](https://en.wikipedia.org/wiki/Menu_key).
 
@@ -308,7 +308,7 @@ Document Object Model, or [DOM](https://en.wikipedia.org/wiki/Document_Object_Mo
 
 The JavaScript code introduced in the previous chapter used the DOM-API to add a list of notes to the page.
 
-The following code creates a new node to the variable <em>ul</em>, and adds some child nodes to it:
+The following code creates a new node, assigns it to the variable <em>ul</em>, and adds some child nodes to it:
 
 ```js
 var ul = document.createElement('ul')
@@ -383,7 +383,7 @@ A class selector definition always starts with a period and contains the name of
 
 Classes are [attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class), which can be added to HTML elements.
 
-CSS attributes can be examined on the <i>elements</i> tab of the console:
+CSS attributes can be examined in the <i>Elements</i> tab of the console:
 
 ![Screenshot of the Elements tab on the developer console](../../images/0/17e.png)
 
