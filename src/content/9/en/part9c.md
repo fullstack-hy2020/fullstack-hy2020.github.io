@@ -1636,7 +1636,7 @@ The response in case of error looks pretty good:
 
 ![](../../images/9/ts-zod1.png)
 
-We could develop our solution still some steps further. Our type definitions look currently this:
+We could develop our solution still some steps further. Our type definitions currently look like this:
 
 ```js
 export interface DiaryEntry {
