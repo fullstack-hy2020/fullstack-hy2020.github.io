@@ -385,7 +385,7 @@ const baseUrl = '/api/notes'
 
 Koska frontend toimii osoitteessa <i>localhost:5173</i>, menevät backendiin tehtävät pyynnöt väärään osoitteeseen <i>localhost:5173/api/notes</i>. Backend toimii kuitenkin osoitteessa <i>localhost:3001</i>.
 
-Vitellä luoduissa projekteissa ongelma on helppo ratkaista. Riittää, että frontendin repositorion tiedostoon <i>vite.config.json</i> lisätään seuraava määritelmä:
+Vitellä luoduissa projekteissa ongelma on helppo ratkaista. Riittää, että frontendin repositorion tiedostoon <i>vite.config.js</i> lisätään seuraava määritelmä:
 
 ```bash
 import { defineConfig } from 'vite'
