@@ -240,7 +240,7 @@ The dependency is also added to our <i>package.json</i> file:
 {
   // ...
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.21.2"
   }
 }
 ```
@@ -251,15 +251,15 @@ The source code for the dependency is installed in the <i>node\_modules</i> dire
 
 These are the dependencies of the Express library and the dependencies of all of its dependencies, and so forth. These are called the [transitive dependencies](https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/) of our project.
 
-Version 4.18.2 of Express was installed in our project. What does the caret in front of the version number in <i>package.json</i> mean?
+Version 4.21.2 of Express was installed in our project. What does the caret in front of the version number in <i>package.json</i> mean?
 
 ```json
-"express": "^4.18.2"
+"express": "^4.21.2"
 ```
 
 The versioning model used in npm is called [semantic versioning](https://docs.npmjs.com/about-semantic-versioning).
 
-The caret in the front of <i>^4.18.2</i> means that if and when the dependencies of a project are updated, the version of Express that is installed will be at least <i>4.18.2</i>. However, the installed version of Express can also have a larger <i>patch</i> number (the last number), or a larger <i>minor</i> number (the middle number). The major version of the library indicated by the first <i>major</i> number must be the same.
+The caret in the front of <i>^4.21.2</i> means that if and when the dependencies of a project are updated, the version of Express that is installed will be at least <i>4.21.2</i>. However, the installed version of Express can also have a larger <i>patch</i> number (the last number), or a larger <i>minor</i> number (the middle number). The major version of the library indicated by the first <i>major</i> number must be the same.
 
 We can update the dependencies of the project with the command:
 
@@ -376,7 +376,7 @@ The contents of <i>package.json</i> have also changed:
 {
   //...
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.21.2"
   },
   "devDependencies": {
     "nodemon": "^3.0.3"
