@@ -631,13 +631,13 @@ If the request fails, the event handler registered with the <em>catch</em> metho
 
 The <em>catch</em> method is often utilized by placing it deeper within the promise chain.
 
-When our application makes an HTTP request, we are in fact creating a [promise chain](https://javascript.info/promise-chaining):
+When multiple _.then_ methods are chained together, we are in fact creating a [promise chain](https://javascript.info/promise-chaining):
 
 ```js
 axios
-  .put(`${baseUrl}/${id}`, newObject)
+  .get('http://...')
   .then(response => response.data)
-  .then(changedNote => {
+  .then(data => {
     // ...
   })
 ```
@@ -646,9 +646,9 @@ The <em>catch</em> method can be used to define a handler function at the end of
 
 ```js
 axios
-  .put(`${baseUrl}/${id}`, newObject)
+  .get('http://...')
   .then(response => response.data)
-  .then(changedNote => {
+  .then(data => {
     // ...
   })
   .catch(error => {
@@ -656,7 +656,7 @@ axios
   })
 ```
 
-Let's use this feature and register an error handler in the <i>App</i> component:
+Let's take advantage of this feature. We will place our application's error handler in the <i>App</i> component:
 
 ```js
 const toggleImportanceOf = id => {
