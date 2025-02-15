@@ -46,7 +46,7 @@ If we wanted to target, let's say, each one of the notes with our styles, we cou
 const Note = ({ note, toggleImportance }) => {
   const label = note.important 
     ? 'make not important' 
-    : 'make important';
+    : 'make important'
 
   return (
     <li>
@@ -83,7 +83,7 @@ In React we have to use the [className](https://react.dev/learn#adding-styles) a
 const Note = ({ note, toggleImportance }) => {
   const label = note.important 
     ? 'make not important' 
-    : 'make important';
+    : 'make important'
 
   return (
     <li className='note'> // highlight-line
@@ -243,7 +243,7 @@ const Footer = () => {
   return (
     <div style={footerStyle}>
       <br />
-      <em>Note app, Department of Computer Science, University of Helsinki 2024</em>
+      <em>Note app, Department of Computer Science, University of Helsinki 2025</em>
     </div>
   )
 }
@@ -529,7 +529,7 @@ const App = () => {
 
 The useEffect hook now has _[currency]_ as the second parameter. The effect function is therefore executed after the first render, and <i>always</i> after the table as its second parameter _[currency]_ changes. That is, when the state _currency_ gets a new value, the content of the table changes and the effect function is executed.
 
-The effect has the following condition
+It is natural to choose _null_ as the initial value for the variable _currency_, because _currency_ represents a single item. The initial value _null_ indicates that there is nothing in the state yet, and it is also easy to check with a simple if statement whether a value has been assigned to the variable. The effect has the following condition
 
 ```js
 if (currency) { 
@@ -537,7 +537,7 @@ if (currency) {
 }
 ```
 
-which prevents requesting the exchange rates just after the first render when the variable _currency_ still has the initial value, i.e. a null value.
+which prevents requesting the exchange rates just after the first render when the variable _currency_ still has the initial value, i.e. a _null_ value.
 
 So if the user writes e.g. <i>eur</i> in the search field, the application uses Axios to perform an HTTP GET request to the address <https://open.er-api.com/v6/latest/eur> and stores the response in the _rates_ state.
 
