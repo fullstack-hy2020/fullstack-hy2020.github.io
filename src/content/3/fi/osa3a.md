@@ -93,7 +93,7 @@ echo "Error: no test specified" && exit 1
 
 ### Yksinkertainen web-palvelin
 
-Muutetaan sovellus web-palvelimeksi:
+Muutetaan sovellus web-palvelimeksi asettamalla _index.js_-tiedoston sisällöksi seuraava koodi:
 
 ```js
 const http = require('http')
