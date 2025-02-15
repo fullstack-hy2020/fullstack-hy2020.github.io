@@ -1486,7 +1486,7 @@ Refactor the *gender* field to use an [enum type](http://www.typescriptlang.org/
 
 ### Using schema validation libraries
 
-Writing a validator to the request body can be a huge burden. Thankfully there exists several <i>schema validator libraries</i> that can help. Let us now have a look on [Zod](https://zod.dev/) that works pretty well with TypeScript.
+Writing a validator to the request body can be a huge burden. Thankfully there exists several <i>schema validator libraries</i> that can help. Let us now have a look at [Zod](https://zod.dev/) that works pretty well with TypeScript.
 
 Let us get started:
 
