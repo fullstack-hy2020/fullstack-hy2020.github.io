@@ -692,7 +692,7 @@ The <em>includeReviews</em> argument has a default value of <em>false</em>, beca
 
 #### Exercise 10.26: review actions
 
-Now that user can see their reviews, let's add some actions to the reviews. Under each review on the review list, there should be two buttons. One button is for viewing the review's repository. Pressing this button should take the user to the single repository review implemented in the previous exercise. The other button is for deleting the review. Pressing this button should delete the review. Here is what the actions should roughly look like:
+Now that user can see their reviews, let's add some actions to the reviews. Under each review on the review list, there should be two buttons. One button is for viewing the review's repository. Pressing this button should take the user to the single repository view implemented in one of the earlier exercises. The other button is for deleting the review. Pressing this button should delete the review. Here is what the actions should roughly look like:
 
 ![Application preview](../../images/10/21.jpg)
 
