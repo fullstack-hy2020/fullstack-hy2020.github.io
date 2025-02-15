@@ -376,7 +376,7 @@ Tiedoston <i>package.json</i> sisältö muuttuu seuraavasti:
     "express": "^4.21.2"
   },
   "devDependencies": {
-    "nodemon": "^3.0.3"
+    "nodemon": "^3.1.9"
   }
 }
 ```

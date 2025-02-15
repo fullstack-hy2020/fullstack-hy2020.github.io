@@ -379,7 +379,7 @@ The contents of <i>package.json</i> have also changed:
     "express": "^4.21.2"
   },
   "devDependencies": {
-    "nodemon": "^3.0.3"
+    "nodemon": "^3.1.9"
   }
 }
 ```
