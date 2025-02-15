@@ -622,9 +622,9 @@ const api_key = import.meta.env.VITE_SOME_KEY
 // variable api_key now has the value set in startup
 ```
 
-Note that you will need to restart the server to apply the changes.
-
 **NB:** To prevent accidentally leaking environment variables to the client, only variables prefixed with VITE_ are exposed to Vite.
+
+Also remember that if you make changes to environment variables, you need to restart the development server for the changes to take effect.
 
 This was the last exercise of this part of the course. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
