@@ -282,8 +282,10 @@ Mozillan dokumentaatio kertoo promisesta seuraavaa:
 Promise siis edustaa asynkronista operaatiota. Promise voi olla kolmessa eri tilassa:
 
 - Aluksi promise on <i>pending</i>, eli promisea vastaava asynkroninen operaatio ei ole vielä tapahtunut.
-- Jos operaatio päättyy onnistuneesti, promise menee tilaan <i>fulfilled</i>, josta joskus käytetään myös nimitystä <i>resolved</i>.
+- Jos operaatio päättyy onnistuneesti, promise menee tilaan <i>fulfilled</i>.
 - Kolmas mahdollinen tila on <i>rejected</i>, ja se edustaa epäonnistunutta operaatiota.
+
+Promiseihin liittyy paljon yksityiskohtia, mutta näiden kolmen tilan ymmärtäminen riittää meille toistaiseksi hyvin. Voit halutessasi lukea promiseista tarkemmin [Mozillan dokumentaatiosta](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise).
 
 Esimerkkimme ensimmäinen promise on <i>fulfilled</i>, eli vastaa onnistunutta <em>axios.get('http://localhost:3001/notes')</em> pyyntöä. Promiseista toinen taas on <i>rejected</i>. Syy selviää konsolista, eli yritimme tehdä HTTP GET ‑pyyntöä osoitteeseen, jota ei ole olemassa.
 
