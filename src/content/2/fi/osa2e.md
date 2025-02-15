@@ -604,7 +604,7 @@ Lisää yksittäisen maan näkymään pääkaupungin säätiedotus. Säätiedotu
 
 Jos käytät Open weather mapia, [täällä](https://openweathermap.org/weather-conditions#Icon-list) on ohje sääikonien generointiin.
 
-**Huom:** Tarvitset melkein kaikkia säätietoja tarjoavia palveluja käyttääksesi API-avaimen. Älä talleta avainta versionhallintaan eli älä kirjoita avainta suoraan koodiin. Avaimen arvo kannattaa määritellä ns. [ympäristömuuttujana](https://vitejs.dev/guide/env-and-mode.html).
+**Huom:** Tarvitset melkein kaikkia säätietoja tarjoavia palveluja käyttääksesi API-avaimen. Älä talleta avainta versionhallintaan eli älä kirjoita avainta suoraan koodiin. Avaimen arvo kannattaa tässä tehtävässä määritellä ns. [ympäristömuuttujana](https://vitejs.dev/guide/env-and-mode.html). Todellisissa sovelluksissa avaimien lähettäminen suoraan selaimesta ei kuitenkaan ole suositeltavaa, koska tällöin kuka tahansa sovelluksen käyttäjä voi saada API-avaimen tietoonsa. Käsittelemme erillisen backendin toteuttamista kurssin seuraavassa osassa. 
 
 Oletetaan että API-avaimen arvo on <i>54l41n3n4v41m34rv0</i>. Kun ohjelma käynnistetään seuraavasti
 
