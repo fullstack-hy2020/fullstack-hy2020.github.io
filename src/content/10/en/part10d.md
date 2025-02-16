@@ -692,7 +692,7 @@ The <em>includeReviews</em> argument has a default value of <em>false</em>, beca
 
 #### Exercise 10.26: review actions
 
-Now that user can see their reviews, let's add some actions to the reviews. Under each review on the review list, there should be two buttons. One button is for viewing the review's repository. Pressing this button should take the user to the single repository review implemented in the previous exercise. The other button is for deleting the review. Pressing this button should delete the review. Here is what the actions should roughly look like:
+Now that user can see their reviews, let's add some actions to the reviews. Under each review on the review list, there should be two buttons. One button is for viewing the review's repository. Pressing this button should take the user to the single repository view implemented in one of the earlier exercises. The other button is for deleting the review. Pressing this button should delete the review. Here is what the actions should roughly look like:
 
 ![Application preview](../../images/10/21.jpg)
 
@@ -808,7 +808,7 @@ The second step is repeated until the user gets tired of scrolling or some scrol
 
 Let's have a look at how this works in practice using the Apollo Client's <em>useQuery</em> hook. Apollo Client has a great [documentation](https://www.apollographql.com/docs/react/pagination/cursor-based/) on implementing the cursor-based pagination. Let's implement infinite scrolling for the reviewed repositories list as an example.
 
-First, we need to know when the user has reached the end of the list. Luckily, the <em>FlatList</em> component has a prop [onEndReached](https://reactnative.dev/docs/flatlist#onendreached), which will call the provided function once the user has scrolled to the last item on the list. You can change how early the <em>onEndReach</em> callback is called using the [onEndReachedThreshold](https://reactnative.dev/docs/flatlist#onendreachedthreshold) prop. Alter the <em>RepositoryList</em> component's <em>FlatList</em> component so that it calls a function once the end of the list is reached:
+First, we need to know when the user has reached the end of the list. Luckily, the <em>FlatList</em> component has a prop [onEndReached](https://reactnative.dev/docs/virtualizedlist#onendreached), which will call the provided function once the user has scrolled to the last item on the list. You can change how early the <em>onEndReach</em> callback is called using the [onEndReachedThreshold](https://reactnative.dev/docs/virtualizedlist#onendreachedthreshold) prop. Alter the <em>RepositoryList</em> component's <em>FlatList</em> component so that it calls a function once the end of the list is reached:
 
 ```javascript
 export const RepositoryListContainer = ({
