@@ -104,7 +104,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://gith
 
 ### SuperTest
 
-Käytetään API:n testaamisessa apuna [SuperTest](https://github.com/visionmedia/supertest)-kirjastoa.
+Käytetään API:n testaamiseen Noden test-moduulin apuna [SuperTest](https://github.com/visionmedia/supertest)-kirjastoa.
 
 Kirjasto asennetaan kehitysaikaiseksi riippuvuudeksi komennolla
 
@@ -328,7 +328,7 @@ test('the first note is about HTTP methods', async () => {
 
 ### Testien suorittaminen yksitellen
 
-Komento _npm test_ suorittaa projektin kaikki testit. Kun olemme vasta tekemässä testejä, on useimmiten järkevämpää suorittaa kerrallaan ainoastaan yhtä tai muutamaa testiä. Tähän on tarjolla tähän muutamia vaihtoehtoja.
+Komento _npm test_ suorittaa projektin kaikki testit. Kun olemme vasta tekemässä testejä, on useimmiten järkevämpää suorittaa kerrallaan ainoastaan yhtä tai muutamaa testiä. Test-moduuli tarjoaa tähän muutamia vaihtoehtoja.
 
 Eräs näistä on komennon [only](https://nodejs.org/api/test.html#testonlyname-options-fn) käyttö. Komennon avulla voidaan merkitä vain osa testeistä suoritettavaksi:
 
