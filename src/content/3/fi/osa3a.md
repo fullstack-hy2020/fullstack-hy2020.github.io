@@ -93,7 +93,7 @@ echo "Error: no test specified" && exit 1
 
 ### Yksinkertainen web-palvelin
 
-Muutetaan sovellus web-palvelimeksi:
+Muutetaan sovellus web-palvelimeksi asettamalla _index.js_-tiedoston sisällöksi seuraava koodi:
 
 ```js
 const http = require('http')
@@ -238,7 +238,7 @@ Riippuvuus tulee nyt määritellyksi tiedostoon <i>package.json</i>:
 {
   // ...
   "dependencies": {
-   "express": "^4.18.2"
+   "express": "^4.21.2"
   }
 }
 
@@ -250,13 +250,13 @@ Riippuvuuden koodi asentuu kaikkien projektin riippuvuuksien tapaan projektin ju
 
 Kyseessä ovat Expressin riippuvuudet ja niiden riippuvuudet jne. eli projektimme [transitiiviset riippuvuudet](https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/).
 
-Projektiin asentui Expressin versio 4.18.2. </i>package.json:issa</i> versiomerkinnän edessä on väkänen, eli muoto on
+Projektiin asentui Expressin versio 4.21.2. </i>package.json:issa</i> versiomerkinnän edessä on väkänen, eli muoto on
 
 ```json
-"express": "^4.18.2"
+"express": "^4.21.2"
 ```
   
-npm:n yhteydessä käytetään ns. [semanttista versiointia](https://docs.npmjs.com/getting-started/semantic-versioning). Merkintä <i>^4.18.2</i> tarkoittaa, että jos projektin riippuvuudet päivitetään, asennetaan Expressistä versio, joka on vähintään <i>4.18.2</i>, mutta asennetuksi voi tulla versio, jonka <i>patch</i> eli viimeinen numero tai <i>minor</i> eli keskimmäinen numero voi olla suurempi. Pääversio eli <i>major</i> täytyy kuitenkin olla edelleen sama.
+npm:n yhteydessä käytetään ns. [semanttista versiointia](https://docs.npmjs.com/getting-started/semantic-versioning). Merkintä <i>^4.21.2</i> tarkoittaa, että jos projektin riippuvuudet päivitetään, asennetaan Expressistä versio, joka on vähintään <i>4.21.2</i>, mutta asennetuksi voi tulla versio, jonka <i>patch</i> eli viimeinen numero tai <i>minor</i> eli keskimmäinen numero voi olla suurempi. Pääversio eli <i>major</i> täytyy kuitenkin olla edelleen sama.
 
 Voimme päivittää projektin riippuvuudet komennolla
 
@@ -373,10 +373,10 @@ Tiedoston <i>package.json</i> sisältö muuttuu seuraavasti:
 {
   //...
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.21.2"
   },
   "devDependencies": {
-    "nodemon": "^3.0.3"
+    "nodemon": "^3.1.9"
   }
 }
 ```

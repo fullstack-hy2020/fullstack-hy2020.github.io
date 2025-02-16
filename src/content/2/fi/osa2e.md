@@ -46,7 +46,7 @@ Jos haluamme kohdistaa tyylejä esim. jokaiseen muistiinpanoon, voisimme käytt�
 const Note = ({ note, toggleImportance }) => {
   const label = note.important 
     ? 'make not important' 
-    : 'make important';
+    : 'make important'
 
   return (
     <li>
@@ -83,7 +83,7 @@ Reactissa tulee kuitenkin classin sijaan käyttää attribuuttia [className](htt
 const Note = ({ note, toggleImportance }) => {
   const label = note.important 
     ? 'make not important' 
-    : 'make important';
+    : 'make important'
 
   return (
     <li className='note'> // highlight-line
@@ -242,7 +242,7 @@ const Footer = () => {
   return (
     <div style={footerStyle}>
       <br />
-      <em>Note app, Department of Computer Science, University of Helsinki 2023</em>
+      <em>Note app, Department of Computer Science, University of Helsinki 2025</em>
     </div>
   )
 }
@@ -524,7 +524,7 @@ const App = () => {
 
 Efektifunktio siis suoritetaan ensimmäisen renderöinnin jälkeen, ja <i>aina</i> sen jälkeen kun sen toisena parametrina oleva taulukko eli esimerkin tapauksessa _[currency]_ muuttuu. Eli kun tila _currency_ saa uuden arvon, muuttuu taulukon sisältö ja efektifunktio suoritetaan.
 
-Efektiin on tehty ehto
+On luontevaa valita muuttujan _currency_ alkuarvoksi _null_, koska _currency_ kuvaa yksittäistä asiaa. Alkuarvo _null_ kertoo, että tilassa ei ole vielä mitään, ja tällöin on myös helppo tarkistaa yksinkertaisella if-lauseella, onko muuttujalle asetettu arvoa. Efektiin on tehty ehto
 
 ```js
 if (currency) { 
@@ -532,7 +532,7 @@ if (currency) {
 }
 ```
 
-joka estää valuuttakurssien hakemisen ensimmäisen renderöininin yhteydessä, eli siinä vaiheessa kuin muuttujalla _currency_ on vasta alkuarvo eli _null_.
+joka estää valuuttakurssien hakemisen ensimmäisen renderöinnin yhteydessä, eli siinä vaiheessa kun muuttujalla _currency_ on vasta alkuarvo _null_. 
 
 Jos käyttäjä siis kirjoittaa hakukenttään esim. <i>eur</i>, suorittaa sovellus Axiosin avulla HTTP GET ‑pyynnön osoitteeseen https://open.er-api.com/v6/latest/eur ja tallentaa vastauksen tilaan _rates_. 
 
@@ -604,7 +604,7 @@ Lisää yksittäisen maan näkymään pääkaupungin säätiedotus. Säätiedotu
 
 Jos käytät Open weather mapia, [täällä](https://openweathermap.org/weather-conditions#Icon-list) on ohje sääikonien generointiin.
 
-**Huom:** Tarvitset melkein kaikkia säätietoja tarjoavia palveluja käyttääksesi API-avaimen. Älä talleta avainta versionhallintaan eli älä kirjoita avainta suoraan koodiin. Avaimen arvo kannattaa määritellä ns. [ympäristömuuttujana](https://vitejs.dev/guide/env-and-mode.html).
+**Huom:** Tarvitset melkein kaikkia säätietoja tarjoavia palveluja käyttääksesi API-avaimen. Älä talleta avainta versionhallintaan eli älä kirjoita avainta suoraan koodiin. Avaimen arvo kannattaa tässä tehtävässä määritellä ns. [ympäristömuuttujana](https://vitejs.dev/guide/env-and-mode.html). Todellisissa sovelluksissa avaimien lähettäminen suoraan selaimesta ei kuitenkaan ole suositeltavaa, koska tällöin kuka tahansa sovelluksen käyttäjä voi saada API-avaimen tietoonsa. Käsittelemme erillisen backendin toteuttamista kurssin seuraavassa osassa. 
 
 Oletetaan että API-avaimen arvo on <i>54l41n3n4v41m34rv0</i>. Kun ohjelma käynnistetään seuraavasti
 
@@ -621,7 +621,9 @@ const api_key = import.meta.env.VITE_SOME_KEY
 // muuttujassa api_key on nyt käynnistyksessä annettu API-avaimen arvo
 ```
 
-Huomaa, että ympäristömuuttujan nimen täytyy alkaa merkkijonolla <i>VITE_</i>.
+Huomaa, että ympäristömuuttujan nimen täytyy alkaa merkkijonolla <i>VITE_</i>. 
+
+Muista myös, että jos teet muutoksia ympäristömuuttujiin, sinun on käynnistettävä kehityspalvelin uudelleen, jotta muutokset tulevat voimaan.
 
 Tämä oli osan viimeinen tehtävä ja on aika sekä puskea koodi GitHubiin että merkitä tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 

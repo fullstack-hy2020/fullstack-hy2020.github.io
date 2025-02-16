@@ -631,13 +631,13 @@ Jos pyyntö epäonnistuu, kutsutaan <em>catch</em>-metodin avulla rekisteröity�
 
 Metodia <em>catch</em> hyödynnetään usein siten, että se sijoitetaan syvemmälle promiseketjuun.
 
-Kun sovelluksemme tekee HTTP-operaation, syntyy oleellisesti ottaen [promiseketju](https://javascript.info/promise-chaining):
+Kun useita _.then_-metodeja ketjutetaan yhteen, syntyy oleellisesti ottaen [promiseketju](https://javascript.info/promise-chaining):
 
 ```js
 axios
-  .put(`${baseUrl}/${id}`, newObject)
+  .get('http://...')
   .then(response => response.data)
-  .then(changedNote => {
+  .then(data => {
     // ...
   })
 ```
@@ -646,9 +646,9 @@ Metodilla <em>catch</em> voidaan määritellä ketjun lopussa käsittelijäfunkt
 
 ```js
 axios
-  .put(`${baseUrl}/${id}`, newObject)
+  .get('http://...')
   .then(response => response.data)
-  .then(changedNote => {
+  .then(data => {
     // ...
   })
   .catch(error => {
@@ -656,7 +656,7 @@ axios
   })
 ```
 
-Hyödynnetään tätä ominaisuutta ja sijoitetaan virheenkäsittelijä komponenttiin <i>App</i>:
+Hyödynnetään tätä ominaisuutta. Sijoitetaan sovelluksemme virheenkäsittelijä komponenttiin <i>App</i>:
 
 ```js
 const toggleImportanceOf = id => {
