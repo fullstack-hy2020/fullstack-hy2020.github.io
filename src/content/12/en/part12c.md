@@ -192,7 +192,8 @@ You can add a new build stage for the test if you wish to do so. If you do so, r
 
 Let's move the whole todo application development to a container. There are a few reasons why you would want to do that:
 
-- To keep the environment similar between development and production to avoid bugs that appear only in the production environment
+- To keep the environment similar between development and production
+- To avoid bugs that appear only in the production environment
 - To avoid differences between developers and their personal environments that lead to difficulties in application development
 - To help new team members hop in by having them install container runtime - and requiring nothing else.
 
