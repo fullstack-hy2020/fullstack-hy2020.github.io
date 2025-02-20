@@ -153,7 +153,7 @@ Monen actionin dispatchaaminen vaikuttaa hieman epäkäytännölliseltä. Lisät
 
 const noteSlice = createSlice({
   name: 'notes',
-  initialState,
+  initialState: [],
   reducers: {
     createNote(state, action) {
       const content = action.payload
