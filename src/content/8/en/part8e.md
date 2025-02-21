@@ -533,6 +533,12 @@ const start = async () => {
 start()
 ```
 
+Note: in graphql-ws version ^6.0.0, the correct import is
+
+```js
+const { useServer } = require('graphql-ws/use/ws')
+```
+
 When queries and mutations are used, GraphQL uses the HTTP protocol in the communication. In case of subscriptions, the communication between client and server happens with [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API).
 
 The above code registers a WebSocketServer object to listen the WebSocket connections, besides the usual HTTP connections that the server listens to. The second part of the definition registers a function that closes the WebSocket connection on server shutdown.
