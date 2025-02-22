@@ -799,10 +799,6 @@ Implement a page at the address <http://localhost:3001/info> that looks roughly 
 ![Screenshot for 3.2](../../images/3/23x.png)
 
 The page has to show the time that the request was received and how many entries are in the phonebook at the time of processing the request.
-  
-There can only be one response.send() statement in an Express app route. Once you send a response to the client using response.send(), the request-response cycle is complete and no further response can be sent. 
-  
-To include a line space in the output, use `<br/>` tag, or wrap the statements in `<p>` tags.
 
 #### 3.3: Phonebook backend step 3
 
