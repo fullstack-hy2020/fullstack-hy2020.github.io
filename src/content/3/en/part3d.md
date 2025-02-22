@@ -337,6 +337,7 @@ It is recommended to create a separate _npm script_ for linting:
   // ...
   "scripts": {
     "start": "node index.js",
+    "dev": "node --watch index.js",
     // ...
     "lint": "eslint ." // highlight-line
   },
