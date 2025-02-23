@@ -120,10 +120,10 @@ Jotta sovellus saadaan konfiguroitua oikein, tulee tiedostoon konfiguraatioon te
 [build]
 
 [env]
-  PORT = "3000" # add this
+  PORT = "3001" # add this
 
 [http_service]
-  internal_port = 3000 # ensure that this is same as PORT
+  internal_port = 3001 # ensure that this is same as PORT
   force_https = true
   auto_stop_machines = true
   auto_start_machines = true
