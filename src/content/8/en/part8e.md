@@ -790,54 +790,9 @@ const App = () => {
 
 Our solution has a small problem: a person is added to the cache and also rendered twice since the component *PersonForm* is adding it to the cache as well.
 
-Let us now fix the problem by ensuring that a person is not added twice in the cache:
+To fix this, remove the updateQuery code from the `PersonForm.jsx` file:
 
 ```js
-// highlight-start
-// function that takes care of manipulating cache
-export const updateCache = (cache, query, addedPerson) => {
-  // helper that is used to eliminate saving same person twice
-  const uniqByName = (a) => {
-    let seen = new Set()
-    return a.filter((item) => {
-      let k = item.name
-      return seen.has(k) ? false : seen.add(k)
-    })
-  }
-  // highlight-end
-
-  // highlight-start
-  cache.updateQuery(query, ({ allPersons }) => {
-    return {
-      allPersons: uniqByName(allPersons.concat(addedPerson)),
-    }
-  })
-}
-// highlight-end
-
-const App = () => {
-  const result = useQuery(ALL_PERSONS)
-  const [errorMessage, setErrorMessage] = useState(null)
-  const [token, setToken] = useState(null)
-  const client = useApolloClient() 
-
-  useSubscription(PERSON_ADDED, {
-    onData: ({ data, client }) => {
-      const addedPerson = data.data.personAdded
-      notify(`${addedPerson.name} added`)
-      updateCache(client.cache, { query: ALL_PERSONS }, addedPerson) // highlight-line
-    },
-  })
-
-  // ...
-}
-```
-
-The function *updateCache* can also be used in *PersonForm* for the cache update:
-
-```js
-import { updateCache } from '../App' // highlight-line
-
 const PersonForm = ({ setError }) => { 
   // ...
 
@@ -845,14 +800,13 @@ const PersonForm = ({ setError }) => {
     onError: (error) => {
       setError(error.graphQLErrors[0].message)
     },
-    update: (cache, response) => {
-      updateCache(cache, { query: ALL_PERSONS }, response.data.addPerson)  // highlight-line
-    },
   })
    
   // ..
-} 
+}
 ```
+
+This ensures that the cache is updated only from `App.jsx` and not from `PersonForm.jsx`.
 
 The final code of the client can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-6), branch <i>part8-6</i>.
 
