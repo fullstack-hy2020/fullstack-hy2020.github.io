@@ -385,6 +385,15 @@ const App = () => {
 
 [useRef](https://react.dev/reference/react/useRef) hookilla luodaan ref <i>noteFormRef</i>, joka kiinnitetään muistiinpanojen luomislomakkeen sisältävälle <i>Togglable</i>-komponentille. Nyt siis muuttuja <i>noteFormRef</i> toimii viitteenä komponenttiin.
 
+### forwardRef ja useImperativeHandle
+
+> **Note**: React 19 alkaen ref voidaan syöttää proppina, forwardRef:ille ei ole käyttöä, ja [deprakoitu seuraavassa releasessa](https://react.dev/reference/react/forwardRef).
+> Tässä kurssissa oletetaan kuitenkin käytössä olevan React 18 tai vanhempi, joten `forwardRef` on edelleen käytössä. Alla on myös vaihtoehtoinen tapa näyttää, miten refit voisi välittää propseina.
+
+
+<details>
+<summary><strong>React 18 ja vanhemmat;</strong></summary>
+
 Komponenttia <i>Togglable</i> laajennetaan seuraavasti
 
 ```js
@@ -425,6 +434,53 @@ export default Togglable
 ```
 
 Komponentin luova funktio on kääritty funktiokutsun [forwardRef](https://react.dev/reference/react/forwardRef) sisälle, jolloin komponentti pääsee käsiksi sille määriteltyyn refiin.
+</details>
+<br/>
+<details>
+<summary><strong>React 19 ja uudemmat versiot;</strong></summary>
+
+
+Komponenttia <i>Togglable</i> laajennetaan seuraavasti
+
+```js
+import { useState, useImperativeHandle } from 'react' // highlight-line
+
+const Togglable = (props) => { // highlight-line
+  const [visible, setVisible] = useState(false)
+
+  const hideWhenVisible = { display: visible ? 'none' : '' }
+  const showWhenVisible = { display: visible ? '' : 'none' }
+
+  const toggleVisibility = () => {
+    setVisible(!visible)
+  }
+
+// highlight-start
+  useImperativeHandle(props.ref, () => {
+    return {
+      toggleVisibility
+    }
+  })
+// highlight-end
+
+  return (
+    <div>
+      <div style={hideWhenVisible}>
+        <button onClick={toggleVisibility}>{props.buttonLabel}</button>
+      </div>
+      <div style={showWhenVisible}>
+        {props.children}
+        <button onClick={toggleVisibility}>cancel</button>
+      </div>
+    </div>
+  )
+})  // highlight-line
+
+export default Togglable
+```
+
+Edellisestä versiosta poiketen komponentin luova funktiota ei tarvitse kääriä funktiokutsun [forwardRef](https://react.dev/reference/react/forwardRef) sisälle.
+</details>
 
 Komponentti tarjoaa [useImperativeHandle](https://react.dev/reference/react/useImperativeHandle)-hookin avulla sisäisesti määritellyn funktionsa <i>toggleVisibility</i> ulkopuolelta kutsuttavaksi.
 
@@ -452,6 +508,8 @@ Käyttämämme kikka komponentin tilan muuttamiseksi toimii, mutta se vaikuttaa 
 Refeille on myös [muita käyttötarkoituksia](https://react.dev/learn/manipulating-the-dom-with-refs) kuin React-komponentteihin käsiksi pääseminen.
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-6), branchissa <i>part5-6</i>.
+
+
 
 ### Huomio komponenteista
 
