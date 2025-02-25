@@ -450,7 +450,7 @@ app.listen(PORT, () => {
 })
 ```
 
-Tee sovelluksesta toimiva <i>npm</i>-projekti. Jotta sovelluskehitys olisi sujuvaa, konfiguroi sovellus suoritettavaksi <i>nodemonilla</i>. Voit luoda sovellukselle uuden tietokannan MongoDB Atlasiin tai käyttää edellisen osan sovelluksen tietokantaa.
+Tee sovelluksesta toimiva <i>npm</i>-projekti. Jotta sovelluskehitys olisi sujuvaa, konfiguroi sovellus suoritettavaksi komennolla <i>node --watch</i>. Voit luoda sovellukselle uuden tietokannan MongoDB Atlasiin tai käyttää edellisen osan sovelluksen tietokantaa.
 
 Varmista, että sovellukseen on mahdollista lisätä blogeja Postmanilla tai VS Code REST Clientilla ja että sovellus näyttää lisätyt blogit.
 
@@ -508,7 +508,7 @@ Määritellään npm-skripti <i>test</i> testien suorittamiseen:
   //...
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",
+    "dev": "node --watch index.js",
     "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
     "deploy": "fly deploy",
     "deploy:full": "npm run build:ui && npm run deploy",

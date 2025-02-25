@@ -460,7 +460,7 @@ app.listen(PORT, () => {
 })
 ```
 
-Turn the application into a functioning <i>npm</i> project. To keep your development productive, configure the application to be executed with <i>nodemon</i>. You can create a new database for your application with MongoDB Atlas, or use the same database from the previous part's exercises.
+Turn the application into a functioning <i>npm</i> project. To keep your development productive, configure the application to be executed with <i>node --watch</i>. You can create a new database for your application with MongoDB Atlas, or use the same database from the previous part's exercises.
 
 Verify that it is possible to add blogs to the list with Postman or the VS Code REST client and that the application returns the added blogs at the correct endpoint.
 
@@ -521,7 +521,7 @@ Let's define the <i>npm script _test_</i> for the test execution:
   //...
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",
+    "dev": "node --watch index.js",
     "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
     "deploy": "fly deploy",
     "deploy:full": "npm run build:ui && npm run deploy",

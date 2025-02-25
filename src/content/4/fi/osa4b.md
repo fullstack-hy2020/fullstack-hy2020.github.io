@@ -26,7 +26,7 @@ Määritellään nyt tiedostossa <i>package.json</i>, että testejä suoritettae
   // ...
   "scripts": {
     "start": "NODE_ENV=production node index.js", // highlight-line
-    "dev": "NODE_ENV=development nodemon index.js", // highlight-line
+    "dev": "NODE_ENV=development node --watch index.js", // highlight-line
     "test": "NODE_ENV=test node --test", // highlight-line
     "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
     "deploy": "fly deploy",
@@ -38,7 +38,7 @@ Määritellään nyt tiedostossa <i>package.json</i>, että testejä suoritettae
 }
 ```
 
-Samalla määriteltiin, että suoritettaessa sovellusta komennolla _npm run dev_ eli nodemonin avulla, on sovelluksen moodi <i>development</i>. Jos sovellusta suoritetaan normaalisti Nodella, on moodiksi määritelty <i>production</i>.
+Samalla määriteltiin, että suoritettaessa sovellusta komennolla _npm run dev_ sovelluksen moodi on <i>development</i>. Jos sovellusta suoritetaan komennolla _npm start_, on moodiksi määritelty <i>production</i>.
 
 Määrittelyssämme on kuitenkin pieni ongelma: se ei toimi Windowsilla. Tilanne korjautuu asentamalla kirjasto [cross-env](https://www.npmjs.com/package/cross-env) kehitysaikaiseksi riippuvuudeksi komennolla
 
@@ -53,7 +53,7 @@ ja muuttamalla <i>package.json</i> kaikilla käyttöjärjestelmillä toimivaan m
   // ...
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
-    "dev": "cross-env NODE_ENV=development nodemon index.js",
+    "dev": "cross-env NODE_ENV=development node --watch index.js",
     "test": "cross-env  NODE_ENV=test node --test",
   },
   // ...

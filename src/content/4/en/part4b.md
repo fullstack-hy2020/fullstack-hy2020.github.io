@@ -28,7 +28,7 @@ Next, let's change the scripts in our notes application <i>package.json</i> file
   // ...
   "scripts": {
     "start": "NODE_ENV=production node index.js", // highlight-line
-    "dev": "NODE_ENV=development nodemon index.js", // highlight-line
+    "dev": "NODE_ENV=development node --watch index.js", // highlight-line
     "test": "NODE_ENV=test node --test", // highlight-line
     "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
     "deploy": "fly deploy",
@@ -40,7 +40,7 @@ Next, let's change the scripts in our notes application <i>package.json</i> file
 }
 ```
 
-We specified the mode of the application to be <i>development</i> in the _npm run dev_ script that uses nodemon. We also specified that the default _npm start_ command will define the mode as <i>production</i>.
+We specified the mode of the application to be <i>development</i> in the _npm run dev_ script. We also specified that the default _npm start_ command will define the mode as <i>production</i>.
 
 There is a slight issue in the way that we have specified the mode of the application in our scripts: it will not work on Windows. We can correct this by installing the [cross-env](https://www.npmjs.com/package/cross-env) package as a development dependency with the command:
 
@@ -55,7 +55,7 @@ We can then achieve cross-platform compatibility by using the cross-env library 
   // ...
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
-    "dev": "cross-env NODE_ENV=development nodemon index.js",
+    "dev": "cross-env NODE_ENV=development node --watch index.js",
     "test": "cross-env  NODE_ENV=test node --test",
     // ...
   },
