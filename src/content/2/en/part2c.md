@@ -279,7 +279,7 @@ The documentation on Mozilla's site states the following about promises:
 
 In other words, a promise is an object that represents an asynchronous operation. A promise can have three distinct states:
 
-- The promise is <i>pending</i>: It means that the asynchronous operation corresponding to the promise has not yet finnished and the final value is not available yet.
+- The promise is <i>pending</i>: It means that the asynchronous operation corresponding to the promise has not yet finished and the final value is not available yet.
 - The promise is <i>fulfilled</i>: It means that the operation has been completed and the final value is available, which generally is a successful operation.
 - The promise is <i>rejected</i>: It means that an error prevented the final value from being determined, which generally represents a failed operation.
 
