@@ -531,6 +531,4 @@ Generate a production build of your frontend, and add it to the Internet applica
 
 Also, make sure that the frontend still works locally (in development mode when started with command _npm run dev_).
 
-If you have problems getting the app working make sure that your directory structure matches [the example app](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3).
-
 </div>
