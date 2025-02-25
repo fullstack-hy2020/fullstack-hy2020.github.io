@@ -1187,7 +1187,7 @@ When we make queries using the <i>include</i> attribute:
 ```js
 User.findOne({
   include: {
-    model: note
+    model: Note
   }
 })
 ```
@@ -1201,7 +1201,7 @@ router.get('/:id', async (req, res) => {
   const user = await User.findByPk(req.params.id, {
     attributes: { exclude: [''] } ,
     include:[{
-        model: note,
+        model: Note,
         attributes: { exclude: ['userId'] }
       },
       {
@@ -1212,7 +1212,7 @@ router.get('/:id', async (req, res) => {
           attributes: []
         },
         include: {
-          model: user,
+          model: User,
           attributes: ['name']
         }
       },
