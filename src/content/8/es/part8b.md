@@ -606,10 +606,20 @@ const PersonForm = ({ setError }) => {
     refetchQueries: [  {query: ALL_PERSONS } ],
     // highlight-start
     onError: (error) => {
-      const errors = error.graphQLErrors[0].extensions.error.errors
+      //To access the Apollo error message, for some reason this way it doesn't work, changing the code this way I was able to access the error message, and I was able to continue with the class without problems
+      // FROM THIS:
+      /* const errors = error.graphQLErrors[0].extensions.error.errors
       const messages = Object.values(errors).map(e => e.message).join('\n')
       setError(messages)
-    }
+      */
+     // TO THIS:
+      const message = error.graphQLErrors[0].message
+      if (message) {
+        setError(message)
+      } else {
+        setError('something went wrong')
+      }
+      }
     // highlight-end
   })
 
