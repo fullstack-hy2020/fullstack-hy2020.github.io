@@ -14,6 +14,83 @@ Let's keep expanding the backend. We want to implement support for allowing user
 We could proceed as before, i.e. change the model that defines the table and rely on Sequelize to synchronize the changes to the database. This is specified by these lines in the file <i>models/index.js</i>
 
 ```js
+// models/note.js
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('./database'); // Assume you have a database.js for your sequelize instance
+
+class Note extends Model {}
+Note.init({
+  title: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  content: {
+    type: DataTypes.TEXT,
+    allowNull: false
+  },
+}, { sequelize, modelName: 'note' });
+
+// models/user.js
+class User extends Model {}
+User.init({
+  username: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true
+  },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+}, { sequelize, modelName: 'user' });
+
+// Associations
+Note.belongsTo(User, { foreignKey: 'userId' });
+User.hasMany(Note, { foreignKey: 'userId' });
+
+// Sync models
+const syncDatabase = async () => {
+  try {
+    await User.sync({ alter: true });
+    await Note.sync({ alter: true });
+    console.log("Database & tables created!");
+  } catch (error) {
+    console.error("Error syncing database: ", error);
+  }
+};
+
+// Function to create dummy data
+const createSampleData = async () => {
+  try {
+    const user = await User.create({ username: 'JohnDoe', password: 'password123' });
+    await Note.create({ title: 'My First Note', content: 'This is the content of my first note.', userId: user.id });
+    console.log('Sample data created!');
+  } catch (error) {
+    console.error("Error creating sample data: ", error);
+  }
+};
+
+// Export models and functions
+module.exports = {
+  Note,
+  User,
+  syncDatabase,
+  createSampleData,
+};
+
+// In your main application file
+const { syncDatabase, createSampleData } = require('./models');
+
+const main = async () => {
+  await syncDatabase();
+  await createSampleData();
+
+  // Example query
+  const users = await User.findAll({ include: Note });
+  console.log(JSON.stringify(users, null, 2));
+};
+
+main();
 const Note = require('./note')
 const User = require('./user')
 
