@@ -315,6 +315,7 @@ const App = () => {
     </div>
   )
 }
+export default noteReducer;
 ```
 
 So far the application does not have the functionality for adding new notes, although it is possible to do so by dispatching <i>NEW\_NOTE</i> actions.
@@ -465,7 +466,7 @@ describe('noteReducer', () => {
 })
 ```
 
-The <i>deepFreeze(state)</i> command ensures that the reducer does not change the state of the store given to it as a parameter. If the reducer uses the _push_ command to manipulate the state, the test will not pass
+Run the test with <i>npm test</i>. The <i>deepFreeze(state)</i> command ensures that the reducer does not change the state of the store given to it as a parameter. If the reducer uses the _push_ command to manipulate the state, the test will not pass
 
 ![terminal showing test failure and error about not using array.push](../../images/6/2.png)
 
@@ -966,7 +967,7 @@ export const toggleImportanceOf = (id) => { // highlight-line
 export default noteReducer
 ```
 
-If the application has many components which need the store, the <i>App</i> component must pass <i>store</i> as props to all of those components.
+Previously, if the application had many components which needed the store, the <i>App</i> component had to pass <i>store</i> as props to all of those components (known as prop drilling). Now with the <i>store</i> Provider wrapping the <i>App</i> component, the <i>store</i> is directly accessible to all components within the <i>App</i> component without explicitly being passed as props.
 
 The module now has multiple [export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) commands.
 

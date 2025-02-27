@@ -1066,7 +1066,7 @@ const App = () => {
 
   return (
     <div>
-      <Display value={value} />
+      <Display value={value} /> // highlight-line
       <Button handleClick={() => setToValue(1000)} text="thousand" />
       <Button handleClick={() => setToValue(0)} text="reset" />
       <Button handleClick={() => setToValue(value + 1)} text="increment" />
@@ -1377,9 +1377,9 @@ Expande tu aplicación para que puedas votar por la anécdota mostrada.
 Puedes crear una copia de un objeto de esta forma:
 
 ```js
-const points = { 0: 1, 1: 3, 2: 4, 3: 2 }
+const votes = { 0: 1, 1: 3, 2: 4, 3: 2 }
 
-const copy = { ...points }
+const copy = { ...votes }
 // incrementa en uno el valor de la propiedad 2
 copy[2] += 1
 ```
@@ -1387,9 +1387,9 @@ copy[2] += 1
 O una copia de un array de esta forma:
 
 ```js
-const points = [1, 4, 6, 3]
+const votes = [1, 4, 6, 3]
 
-const copy = [...points]
+const copy = [...votes]
 // incrementa en uno el valor de la posición 2
 copy[2] += 1
 ```

@@ -8,4 +8,6 @@ lang: fi
 
 Tässä osassa tutustumme ensin kurssin käytänteisiin ja suorittamistapaan. Sen jälkeen käymme katsauksen websovelluskehityksen perusteisiin ja siihen, mihin suuntaan websovelluskehitys on edennyt viimeisen parin kymmenen vuoden aikana.
 
+<i>Osa päivitetty 7.1.2025</i>
+
 </div>

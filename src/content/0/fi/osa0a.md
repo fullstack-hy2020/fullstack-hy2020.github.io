@@ -19,13 +19,13 @@ Osallistuminen ei kuitenkaan edellytä kurssilla käsiteltävien tekniikoiden ta
 
 ### Kurssimateriaali
 
-Kurssimateriaali on tarkoitettu luettavaksi osa kerrallaan "alusta loppuun". Materiaalin seassa on tehtäviä, jotka ovat sijoiteltu siten, että kunkin tehtävän tekemiseen pitäisi olla riittävät tekniset valmiudet sitä edeltävässä materiaalissa. Voit siis tehdä tehtäviä sitä mukaa, kun niitä tulee materiaalissa vastaan. Voi myös olla, että koko osan tehtävät kannattaa tehdä vasta sen jälkeen, kun olet ensin lukenut osan alusta loppuun kertaalleen. Useissa osissa tehtävät ovat samaa ohjelmaa laajentavia pienistä osista koostuvia kokonaisuuksia. Muutamia tehtävien ohjelmia kehitetään eteenpäin useamman osan aikana.
+Kurssimateriaali on tarkoitettu luettavaksi osa kerrallaan "alusta loppuun". Materiaalin seassa on tehtäviä, jotka on sijoiteltu siten, että kunkin tehtävän tekemiseen pitäisi olla riittävät tekniset valmiudet sitä edeltävässä materiaalissa. Voit siis tehdä tehtäviä sitä mukaa, kun niitä tulee materiaalissa vastaan. Voi myös olla, että koko osan tehtävät kannattaa tehdä vasta sen jälkeen, kun olet ensin lukenut osan alusta loppuun kertaalleen. Useissa osissa tehtävät ovat samaa ohjelmaa laajentavia pienistä osista koostuvia kokonaisuuksia. Muutamia tehtävien ohjelmia kehitetään eteenpäin useamman osan aikana.
 
 Materiaali perustuu muutamien osasta osaan vaihtuvien esimerkkiohjelmien asteittaiseen laajentamiseen. Materiaali toiminee parhaiten, jos kirjoitat samalla koodin myös itse ja teet koodiin myös pieniä modifikaatioita. Materiaalin käyttämien ohjelmien koodin eri vaiheiden tilanteita on tallennettu GitHubiin.
 
 ### Suoritustapa
 
-Kurssi koostuu neljästätoista osasta, joista ensimmäinen on historiallisista syistä numero nolla. Osat voi tulkita löyhästi ajatellen viikoiksi. Osia kuitenkin ilmestyy nopeampaa tahtia, ja suoritusnopeuskin on melko vapaa.
+Kurssi koostuu neljästätoista osasta, joista ensimmäinen on historiallisista syistä numero nolla. Osat voi tulkita löyhästi ajatellen viikoiksi, mutta voit suorittaa kurssin itsellesi parhaiten sopivalla rytmillä.
 
 Materiaalissa osasta <i>n</i> osaan <i>n+1</i> eteneminen ei ole mielekästä ennen kuin riittävä osaaminen osan <i>n</i> asioista on saavutettu. Kurssilla sovelletaankin pedagogisin termein <i>tavoiteoppimista</i>, [engl. mastery learning](https://en.wikipedia.org/wiki/Mastery_learning) ja on tarkoitus, että etenet seuraavaan osaan vasta, kun riittävä määrä edellisen osan tehtävistä on tehty.
 
@@ -194,8 +194,6 @@ Kun nappia on painettu tarpeeksi monta kertaa, näet seuraavan tekstin:
 
 > <i>University credit registration in progress...</i>
 
-Huom: jos teit jo kokeen Moodlessa, ota yhteyttä matti.luukkainen@helsinki.fi tai @mluukkai Discordissa.
-
 ### Suoritusmerkinnän pyytäminen
 
 Jos haluat kurssilta virallisen suorituksen, tallenna <b>Helsingin yliopiston</b> opiskelijanumerosi [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen): 
@@ -266,14 +264,9 @@ Riippumatta siitä, ilmoittaudutko Avoimen yliopiston kurssille ja teetkö kurss
 
 Voit tilata virallisen opintosuoritusotteen heti, kun kurssisuorituksesi on rekisteröity (tiedot näkyvät esimerkiksi valtakunnallisessa [Oma Opintopolku](https://opintopolku.fi/oma-opintopolku/) –palvelussa). 
 
-Ohjeet opintosuoritusotteen tilaamiseen:
-- Kun opintopisteet on rekisteröity sinulle, lähetä opintosuoritteen tilauspyyntö opiskelijaneuvontaan sähköpostiosoitteeseen avoin-student@helsinki.fi.
-- Muistathan opintosuoritusotetta tilatessasi ilmoittaa
-  - kurssin nimen,
-  - syntymäaikasi sekä
-  - kielen, jolla haluat opintosuoritusotteen.
-- Sähköisesti varmennettu opintosuoritusote toimitetaan sinulle sähköpostitse.
-- Toimittamalla virallisen opintosuoritusotteen omaan korkeakouluusi, saat opintopisteet rekisteröityä sinne. Huomaa, että jokainen korkeakoulu päättää itse toisessa korkeakoulussa suoritettujen opintojen hyväksiluvusta tutkintoon.
+Tilaa suoritusote opiskelijapalveluiden [e-lomakkeen](https://elomake.helsinki.fi/lomakkeet/132797/lomake.html) kautta. Tällöin sähköinen opintosuoritusote toimitetaan sinulle sähköpostitse.
+
+Toimittamalla virallisen opintosuoritusotteen omaan korkeakouluusi, saat opintopisteet rekisteröityä sinne. Huomaa, että jokainen korkeakoulu päättää itse toisessa korkeakoulussa suoritettujen opintojen hyväksiluvusta tutkintoon.
 
 ### Ei enää vuosittaisia versioita
 
@@ -331,7 +324,7 @@ Asenna myös joku järkevä web-devausta tukeva tekstieditori. Enemmän kuin suo
 
 Älä koodaa nanolla, Notepadilla tai Geditillä. Myöskään NetBeans ei ole omimmillaan web-devauksessa, ja se on myös turhan raskas verrattuna esim. Visual Studio Codeen.
 
-Asenna koneeseesi heti myös [Node.js](https://nodejs.org/en/). Materiaali on tehty versiolla 16.13.2, älä asenna sitä vanhempaa versiota. Asennusohjeita on [Node.js:n sivuilla](https://nodejs.org/en/download/package-manager/).
+Asenna koneeseesi heti myös [Node.js](https://nodejs.org/en/). Materiaalia ollaan päivittämässä Noden versioon v22. Osat 0-2 on tehty käyttäen Noden versiota 22.3.0, osat 3, 4 ja 10 käyttäen versiota 20.11.0 ja loput osat käyttäen versiota 18.13.0. Käytä aina vähintään yhtä tuoretta Node-versiota. Asennusohjeita on [Node.js:n sivuilla](https://nodejs.org/en/download/package-manager/).
 
 Noden myötä koneelle asentuu myös [npm](https://www.npmjs.com/get-npm) (alunperin lyhennelmä <i>Node Package Manager</i> ‑nimelle), jota tulemme tarvitsemaan kurssin aikana aktiivisesti. Tuoreen Noden kera asentuu myös [npx](https://www.npmjs.com/package/npx), jota tarvitaan myös muutaman kerran.
 

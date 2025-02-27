@@ -7,50 +7,6 @@ lang: fr
 
 <div class="content">
 
-### Une note sur la version React
-
-La version 18 de React est sortie fin mars 2022. Le code du matériel devrait fonctionner tel qu'il est avec la nouvelle version de React. Cependant, certaines bibliothèques peuvent ne pas encore être compatibles avec React 18. Au moment de la rédaction (4 avril), le client Apollo utilisé dans la [partie 8](/en/part8) ne fonctionne pas encore avec la version la plus récente de React.
-
-Si vous vous retrouvez dans une situation où votre application tombe en panne en raison de problèmes de compatibilité de bibliothèque, <i>rétrogradez</i> vers l'ancien React en modifiant le fichier <i>package.json</i> comme suit :
-
-```js
-{
-  "dependencies": {
-    "react": "^17.0.2", // highlight-line
-    "react-dom": "^17.0.2", // highlight-line
-    "react-scripts": "5.0.0",
-    "web-vitals": "^2.1.4"
-  },
-  // ...
-}
-```
-
-Une fois la modification effectuée, réinstallez les dépendances en exécutant
-
-```js
-npm install
-```
-
-Notez que le fichier <i>index.js</i> doit également être légèrement modifié. Pour React 17, cela ressemble à
-
-```js
-import ReactDOM from 'react-dom'
-import App from './App'
-
-ReactDOM.render(<App />, document.getElementById('root'))
-```
-
-mais pour React 18, la forme correcte est
-
-```js
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-
-import App from './App'
-
-ReactDOM.createRoot(document.getElementById('root')).render(<App />)
-```
-
 ### État complexe
 
 Dans notre exemple précédent, l'état de l'application était simple car il était composé d'un seul entier. Et si notre application nécessite un état plus complexe ?
@@ -204,7 +160,7 @@ L'application semble fonctionner. Cependant, <i>il est interdit dans React de mu
 
 Stocker tout l'état dans un seul objet d'état est un mauvais choix pour cette application particulière ; il n'y a aucun avantage apparent et l'application qui en résulte est beaucoup plus complexe. Dans ce cas, stocker les compteurs de clics dans des éléments d'état séparés est un choix bien plus approprié.
 
-Il existe des situations où il peut être avantageux de stocker une partie de l'état de l'application dans une structure de données plus complexe. [La documentation officielle de React](https://reactjs.org/docs/hooks-faq.html#should-i-use-one-or-many-state-variables) contient des conseils utiles sur le sujet.
+Il existe des situations où il peut être avantageux de stocker une partie de l'état de l'application dans une structure de données plus complexe. [La documentation officielle de React](https://react.dev/learn/choosing-the-state-structure) contient des conseils utiles sur le sujet.
 
 ### Gestion des tableaux
 
@@ -346,7 +302,7 @@ Et dans tous les autres cas, le composant restitue l'historique des clics :
 
 Le composant <i>History</i> rend des éléments React complètement différents en fonction de l'état de l'application. C'est ce qu'on appelle le <i>rendu conditionnel</i>.
 
-React propose également de nombreuses autres façons de faire [le rendu conditionnel](https://reactjs.org/docs/conditional-rendering.html). Nous y reviendrons plus en détail dans la [partie 2](/fr/part2).
+React propose également de nombreuses autres façons de faire [le rendu conditionnel](https://react.dev/learn/conditional-rendering). Nous y reviendrons plus en détail dans la [partie 2](/fr/part2).
 
 Apportons une dernière modification à notre application en la refactorisant pour utiliser le composant _Button_ que nous avons défini précédemment :
 
@@ -406,7 +362,7 @@ const App = () => {
 
 ### Ancienne version de React
 
-Dans ce cours, nous utilisons le [state hook](https://reactjs.org/docs/hooks-state.html) pour ajouter un état à nos composants React, qui fait partie des nouvelles versions de React et est disponible à partir de la version [ 16.8.0](https://www.npmjs.com/package/react/v/16.8.0) et versions ultérieures. Avant l'ajout des hooks, il n'y avait aucun moyen d'ajouter un état aux composants fonctionnels. Les composants qui nécessitaient un état devaient être définis en tant que composants [classes](https://reactjs.org/docs/react-component.html), à l'aide de la syntaxe de classe JavaScript.
+Dans ce cours, nous utilisons le [state hook](https://react.dev/learn/state-a-components-memory) pour ajouter un état à nos composants React, qui fait partie des nouvelles versions de React et est disponible à partir de la version [ 16.8.0](https://www.npmjs.com/package/react/v/16.8.0) et versions ultérieures. Avant l'ajout des hooks, il n'y avait aucun moyen d'ajouter un état aux composants fonctionnels. Les composants qui nécessitaient un état devaient être définis en tant que composants [classes](https://react.dev/reference/react/Component), à l'aide de la syntaxe de classe JavaScript.
 
 Dans ce cours, nous avons pris la décision radicale d'utiliser exclusivement les hooks dès le premier jour, pour nous assurer que nous apprenons le style actuel et futur de React. Même si les composants fonctionnels sont l'avenir de React, il est toujours important d'apprendre la syntaxe de la classe, car il existe des milliards de lignes de code React que vous pourriez finir par maintenir un jour. Il en va de même pour la documentation et les exemples de React que vous pouvez trouver sur Internet.
 
@@ -588,10 +544,10 @@ Si nous devions définir notre event handler sous forme de chaîne :
 React nous en avertirait dans la console :
 
 ```js
-index.js:2178 Warning: Expected `onClick` listener to be a function, instead got a value of `string` type.
-    in button (at index.js:20)
-    in div (at index.js:18)
-    in App (at index.js:27)
+main.jsx:2178 Warning: Expected `onClick` listener to be a function, instead got a value of `string` type.
+    in button (at main.jsx:20)
+    in div (at main.jsx:18)
+    in App (at main.jsx:27)
 ```
 
 La tentative suivante ne fonctionnerait pas non plus :
@@ -603,7 +559,7 @@ La tentative suivante ne fonctionnerait pas non plus :
 Nous avons tenté de définir le gestionnaire d'événements sur _value + 1_ qui renvoie simplement le résultat de l'opération. React nous en avertira gentiment dans la console :
 
 ```js
-index.js:2178 Warning: Expected `onClick` listener to be a function, instead got a value of `number` type.
+main.jsx:2178 Warning: Expected `onClick` listener to be a function, instead got a value of `number` type.
 ```
 
 Cette tentative ne fonctionnerait pas non plus :
@@ -1010,7 +966,7 @@ const App = () => {
 
   return (
     <div>
-      <Display value={value} />
+      <Display value={value} /> // highlight-line
       <Button handleClick={() => setToValue(1000)} text="thousand" />
       <Button handleClick={() => setToValue(0)} text="reset" />
       <Button handleClick={() => setToValue(value + 1)} text="increment" />
@@ -1057,7 +1013,7 @@ Internet regorge de contenu lié à React. Cependant, nous utilisons le nouveau 
 
 Les liens suivants peuvent vous être utiles :
 
-- La [documentation officielle de React](https://reactjs.org/docs/hello-world.html) vaut la peine d'être consultée à un moment donné, même si la plupart d'entre elles ne deviendront pertinentes que plus tard dans le cours. De plus, tout ce qui concerne les composants basés sur des classes ne nous concerne pas ;
+- La [documentation officielle de React](https://react.dev/learn) vaut la peine d'être consultée à un moment donné, même si la plupart d'entre elles ne deviendront pertinentes que plus tard dans le cours. De plus, tout ce qui concerne les composants basés sur des classes ne nous concerne pas ;
 - Certains cours sur [Egghead.io](https://egghead.io) comme [Start learning React](https://egghead.io/courses/start-learning-react) sont de haute qualité, et récemment mis à jour [ Le guide du débutant pour réagir](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) est également relativement bon ; les deux cours introduisent des concepts qui seront également introduits plus tard dans ce cours. **NB** Le premier utilise des composants classes mais le second utilise les nouveaux composants fonctionnels.
 
 </div>
@@ -1072,11 +1028,9 @@ N'oubliez pas de soumettre **tous** les exercices d'une partie **en une seule so
 
 <i>Certains des exercices fonctionnent sur la même application. Dans ces cas, il suffit de soumettre uniquement la version finale de la demande. Si vous le souhaitez, vous pouvez effectuer un commit après chaque exercice terminé, mais ce n'est pas obligatoire.</i>
 
-**ATTENTION** create-react-app transformera automatiquement votre projet en un référentiel git à moins que vous ne créiez votre application dans un référentiel git existant. **Il est fort probable que vous ne vouliez pas que chacun de vos projets soit un référentiel distinct**, il vous suffit donc d'exécuter la commande _rm -rf .git_ à la racine de votre application.
-
 Dans certaines situations, vous devrez peut-être également exécuter la commande ci-dessous à partir de la racine du projet :
 
-``` 
+```bash
 rm -rf node_modules/ && npm i
 ```
 
@@ -1090,10 +1044,9 @@ L'application doit afficher le nombre total de commentaires recueillis pour chaq
 
 Notez que votre application ne doit fonctionner que pendant une seule session de navigateur. Une fois que vous avez actualisé la page, les commentaires recueillis sont autorisés à disparaître.
 
-Il est conseillé d'utiliser la même structure que celle utilisée dans le matériel et l'exercice précédent. Le fichier <i>index.js</i> est le suivant :
+Il est conseillé d'utiliser la même structure que celle utilisée dans le matériel et l'exercice précédent. Le fichier <i>main.jsx</i> est le suivant :
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App'
@@ -1101,7 +1054,7 @@ import App from './App'
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-Vous pouvez utiliser le code ci-dessous comme point de départ pour le fichier <i>App.js</i> :
+Vous pouvez utiliser le code ci-dessous comme point de départ pour le fichier <i>App.jsx</i> :
 
 ```js
 import { useState } from 'react'
@@ -1130,7 +1083,7 @@ Développez votre application pour qu'elle affiche plus de statistiques sur les 
 
 <h4>1.8 : unicafé, étape3</h4>
 
-Refactorisez votre application afin que l'affichage des statistiques soit extrait dans son propre composant <i>Statistiques</i>. L'état de l'application doit rester dans le composant racine <i>App</i>.
+Refactorisez votre application afin que l'affichage des statistiques soit extrait dans son propre composant <i>Statistics</i>. L'état de l'application doit rester dans le composant racine <i>App</i>.
 
 N'oubliez pas que les composants ne doivent pas être définis à l'intérieur d'autres composants :
 
@@ -1236,15 +1189,13 @@ const App = () => {
 export default App
 ```
 
-Le contenu du fichier <i>index.js</i> est le même que dans les exercices précédents.
+Le contenu du fichier <i>main.jsx</i> est le même que dans les exercices précédents.
 
 Découvrez comment générer des nombres aléatoires en JavaScript, par exemple. via le moteur de recherche ou sur [Mozilla Developer Network](https://developer.mozilla.org). N'oubliez pas que vous pouvez tester la génération de nombres aléatoires, par ex. directement dans la console de votre navigateur.
 
 Votre application terminée pourrait ressembler à ceci :
 
 ![](../../images/1/18a.png)
-
-**ATTENTION** create-react-app transformera automatiquement votre projet en un référentiel git à moins que vous ne créiez votre application dans un référentiel git existant. **Il est fort probable que vous ne vouliez pas que chacun de vos projets soit un référentiel distinct**, il vous suffit donc d'exécuter la commande _rm -rf .git_ à la racine de votre application.
 
 <h4>1.13* : anecdotes, étape2</h4>
 
@@ -1257,9 +1208,9 @@ Développez votre application afin de pouvoir voter pour l'anecdote affichée.
 Vous pouvez créer une copie d'un objet comme ceci :
 
 ```js
-const points = { 0: 1, 1: 3, 2: 4, 3: 2 }
+const votes = { 0: 1, 1: 3, 2: 4, 3: 2 }
 
-const copy = { ...points }
+const copy = { ...votes }
 // incrémenter la valeur de la propriété 2 de un
 copy[2] += 1     
 ```
@@ -1267,9 +1218,9 @@ copy[2] += 1
 OU une copie du tableau comme cela :
 
 ```js
-const points = [1, 4, 6, 3]
+const votes = [1, 4, 6, 3]
 
-const copy = [...points]
+const copy = [...votes]
 // incrémenter la valeur en position 2 de un
 copy[2] += 1     
 ```

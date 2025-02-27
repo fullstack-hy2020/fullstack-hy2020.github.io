@@ -28,7 +28,7 @@ Next, let's change the scripts in our notes application <i>package.json</i> file
   // ...
   "scripts": {
     "start": "NODE_ENV=production node index.js", // highlight-line
-    "dev": "NODE_ENV=development nodemon index.js", // highlight-line
+    "dev": "NODE_ENV=development node --watch index.js", // highlight-line
     "test": "NODE_ENV=test node --test", // highlight-line
     "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
     "deploy": "fly deploy",
@@ -40,7 +40,7 @@ Next, let's change the scripts in our notes application <i>package.json</i> file
 }
 ```
 
-We specified the mode of the application to be <i>development</i> in the _npm run dev_ script that uses nodemon. We also specified that the default _npm start_ command will define the mode as <i>production</i>.
+We specified the mode of the application to be <i>development</i> in the _npm run dev_ script. We also specified that the default _npm start_ command will define the mode as <i>production</i>.
 
 There is a slight issue in the way that we have specified the mode of the application in our scripts: it will not work on Windows. We can correct this by installing the [cross-env](https://www.npmjs.com/package/cross-env) package as a development dependency with the command:
 
@@ -55,7 +55,7 @@ We can then achieve cross-platform compatibility by using the cross-env library 
   // ...
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
-    "dev": "cross-env NODE_ENV=development nodemon index.js",
+    "dev": "cross-env NODE_ENV=development node --watch index.js",
     "test": "cross-env  NODE_ENV=test node --test",
     // ...
   },
@@ -153,7 +153,7 @@ Checking the value of the header uses a bit strange looking syntax:
 .expect('Content-Type', /application\/json/)
 ```
 
-The desired value is now defined as [regular expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) or in short regex. The regex starts and ends with a slash /, because the desired string <i>application/json</i> also contains the same slash, it is preceded by a \ so that it is not interpreted as a regex termination character.
+The desired value is now defined as [regular expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) or in short regex. The regex starts and ends with a slash /, and because the desired string <i>application/json</i> also contains the same slash, it is preceded by a \ so that it is not interpreted as a regex termination character.
 
 In principle, the test could also have been defined as a string
 
@@ -275,7 +275,7 @@ module.exports = {
 
 Testing appears to be easy and our tests are currently passing. However, our tests are bad as they are dependent on the state of the database, that now  happens to have two notes. To make them more robust, we have to reset the database and generate the needed test data in a controlled manner before we run the tests.
 
-Our tests are already using the [after](https://nodejs.org/api/test.html#afterfn-options) function of to close the connection to the database after the tests are finished executing. The library node:test offers many other functions that can be used for executing operations once before any test is run or every time before a test is run.
+Our tests are already using the [after](https://nodejs.org/api/test.html#afterfn-options) function to close the connection to the database after the tests are finished executing. The library node:test offers many other functions that can be used for executing operations once before any test is run or every time before a test is run.
 
 Let's initialize the database <i>before every test</i> with the [beforeEach](https://nodejs.org/api/test.html#beforeeachfn-options) function:
 
@@ -1063,7 +1063,7 @@ const helper = require('./test_helper')
 
 const Note = require('../models/note')
 
-describe('when there is initially some notes saved', () => {
+describe('when there are some notes saved initially', () => {
   beforeEach(async () => {
     await Note.deleteMany({})
     await Note.insertMany(helper.initialNotes)

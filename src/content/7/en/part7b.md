@@ -17,7 +17,7 @@ Within the last couple of years, many React libraries have begun to offer hook-b
 
 The [React Router's](https://reactrouter.com/en/main/start/tutorial) API we introduced in the [previous part](/en/part7/react_router) is also partially hook-based. Its hooks can be used to access URL parameters and the <i>navigation</i> object, which allows for manipulating the browser URL programmatically.
 
-As mentioned in [part 1](/en/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks), hooks are not normal functions, and when using those we have to adhere to certain [rules or limitations](https://react.dev/warnings/invalid-hook-call-warning#breaking-rules-of-hooks). Let's recap the rules of using hooks, copied verbatim from the official React documentation:
+As mentioned in [part 1](/en/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks), hooks are not normal functions, and when using these we have to adhere to certain [rules or limitations](https://react.dev/warnings/invalid-hook-call-warning#breaking-rules-of-hooks). Let's recap the rules of using hooks, copied verbatim from the official React documentation:
 
 **Don’t call Hooks inside loops, conditions, or nested functions.** Instead, always use Hooks at the top level of your React function.
 
@@ -492,7 +492,7 @@ const App = () => {
 
 The _useResource_ custom hook returns an array of two items just like the state hooks. The first item of the array contains all of the individual resources and the second item of the array is an object that can be used for manipulating the resource collection, like creating new ones.
 
-If you implement the hook correctly, it can be used for both notes and phone numbers (start the server with the _npm run server_ command at port 3005).
+If you implement the hook correctly, it can be used for both notes and persons (start the server with the _npm run server_ command at port 3005).
 
 ![browser showing notes and persons](../../images/5/21e.png)
 

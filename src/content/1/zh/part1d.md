@@ -1139,7 +1139,7 @@ const App = () => {
 
   return (
     <div>
-      <Display value={value} />
+      <Display value={value} /> // highlight-line
       <Button handleClick={() => setToValue(1000)} text="thousand" />
       <Button handleClick={() => setToValue(0)} text="reset" />
       <Button handleClick={() => setToValue(value + 1)} text="increment" />
@@ -1424,9 +1424,9 @@ export default App
  你可以像这样创建一个对象的副本。
 
 ```js
-const points = { 0: 1, 1: 3, 2: 4, 3: 2 }
+const votes = { 0: 1, 1: 3, 2: 4, 3: 2 }
 
-const copy = { ...points }
+const copy = { ...votes }
 // increment the property 2 value by one
 copy[2] += 1
 ```
@@ -1435,9 +1435,9 @@ copy[2] += 1
  或者像这样创建一个数组的副本。
 
 ```js
-const points = [1, 4, 6, 3]
+const votes = [1, 4, 6, 3]
 
-const copy = [...points]
+const copy = [...votes]
 // increment the value in position 2 by one
 copy[2] += 1
 ```

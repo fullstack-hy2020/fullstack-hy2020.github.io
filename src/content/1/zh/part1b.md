@@ -10,7 +10,7 @@ lang: zh
 在课程中，除了网络开发，我们还有一个目标和需求，就是学习足够多的JavaScript。
 
 <!-- JavaScript has advanced rapidly in the last few years and in this course we use features from the newer versions. The official name of the JavaScript standard is [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). At this moment, the latest version is the one released in June of 2021 with the name [ECMAScript®2021](https://www.ecma-international.org/ecma-262/), otherwise known as ES12.-->
-在过去的几年里，JavaScript进步很快，在这个课程中，我们使用了较新版本的功能。JavaScript标准的官方名称是[ECMAScript](https://en.wikipedia.org/wiki/ECMAScript)。目前，最新的版本是2021年6月发布的版本，名称为[ECMAScript®2021](https://www.ecma-international.org/ecma-262/)，又称ES12。
+在过去的几年里，JavaScript进步很快，在这个课程中，我们使用了较新版本的功能。JavaScript标准的官方名称是[ECMAScript](https://en.wikipedia.org/wiki/ECMAScript)。目前，最新的版本是2024年6月发布的版本，名称为[ECMAScript®2024](https://www.ecma-international.org/ecma-262/)，又称ES15。
 
 <!-- Browsers do not yet support all of JavaScript's newest features. Due to this fact, a lot of code run in browsers has been <i>transpiled</i> from a newer version of JavaScript to an older, more compatible version.-->
  浏览器还不支持JavaScript的所有最新功能。由于这个事实，很多在浏览器中运行的代码都是从较新版本的JavaScript转写成较旧的、更兼容的版本。
@@ -42,11 +42,11 @@ lang: zh
 const x = 1
 let y = 5
 
-console.log(x, y)   // 1, 5 are printed
+console.log(x, y)   // 1 5 are printed
 y += 10
-console.log(x, y)   // 1, 15 are printed
+console.log(x, y)   // 1 15 are printed
 y = 'sometext'
-console.log(x, y)   // 1, sometext are printed
+console.log(x, y)   // 1 sometext are printed
 x = 4               // causes an error
 ```
 
@@ -142,7 +142,7 @@ const t = [1, 2, 3, 4, 5]
 
 const [first, second, ...rest] = t
 
-console.log(first, second)  // 1, 2 is printed
+console.log(first, second)  // 1 2 is printed
 console.log(rest)          // [3, 4, 5] is printed
 ```
 
@@ -253,8 +253,8 @@ const tSquared = t.map(p => p * p)
 // tSquared is now [1, 4, 9]
 ```
 
-<!-- The arrow function feature was added to JavaScript only a couple of years ago, with version [ES6](http://es6-features.org/). Prior to this the only way to define functions was by using the keyword _function_.-->
- 箭头函数的功能是在几年前才加入到JavaScript中的，版本[ES6](http://es6-features.org/)。在这之前，定义函数的唯一方法是使用关键字_function_。
+<!-- The arrow function feature was added to JavaScript only a couple of years ago, with version [ES6](https://rse.github.io/es6-features/). Prior to this the only way to define functions was by using the keyword _function_.-->
+ 箭头函数的功能是在几年前才加入到JavaScript中的，版本[ES6](https://rse.github.io/es6-features/)。在这之前，定义函数的唯一方法是使用关键字_function_。
 
 <!-- There are two ways to reference the function; one is giving a name in a [function declaration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function).-->
 有两种方式来引用函数；一种是在[函数声明](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)中给出一个名称。

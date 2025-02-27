@@ -9,7 +9,7 @@ lang: fr
 
 Tout au long du cours, nous avons un objectif et un besoin d'apprendre une quantité suffisante de JavaScript en plus du développement Web.
 
-JavaScript a progressé rapidement au cours des dernières années et dans ce cours, nous utilisons les fonctionnalités des versions les plus récentes. Le nom officiel de la norme JavaScript est [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). À l'heure actuelle, la dernière version est celle publiée en juin 2021 sous le nom [ECMAScript®2021](https://www.ecma-international.org/ecma-262/), également connue sous le nom d'ES12.
+JavaScript a progressé rapidement au cours des dernières années et dans ce cours, nous utilisons les fonctionnalités des versions les plus récentes. Le nom officiel de la norme JavaScript est [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). À l'heure actuelle, la dernière version est celle publiée en juin 2024 sous le nom [ECMAScript®2024](https://www.ecma-international.org/ecma-262/), également connue sous le nom d'ES15.
 
 Les navigateurs ne prennent pas encore en charge toutes les nouvelles fonctionnalités de JavaScript. De ce fait, une grande partie du code exécuté dans les navigateurs a été <i>transpilé</i> d'une version plus récente de JavaScript vers une version plus ancienne et plus compatible.
 
@@ -34,11 +34,11 @@ En JavaScript, il existe plusieurs façons de définir des variables :
 const x = 1
 let y = 5
 
-console.log(x, y)   // 1, 5 est affiché
+console.log(x, y)   // 1 5 est affiché
 y += 10
-console.log(x, y)   // 1, 15 est affiché
+console.log(x, y)   // 1 15 est affiché
 y = 'sometext'
-console.log(x, y)   // 1, sometext est affiché
+console.log(x, y)   // 1 sometext est affiché
 x = 4               // provoque une erreur
 ```
 
@@ -119,7 +119,7 @@ const t = [1, 2, 3, 4, 5]
 
 const [first, second, ...rest] = t
 
-console.log(first, second)  // 1, 2 est affiché
+console.log(first, second)  // 1 2 est affiché
 console.log(rest)          // [3, 4, 5] est affiché
 ```
 
@@ -217,7 +217,7 @@ const tSquared = t.map(p => p * p)
 // tSquared est devenu [1, 4, 9]
 ```
 
-La fonctionnalité de fonction fléchée a été ajoutée à JavaScript il y a seulement quelques années, avec la version [ES6](http://es6-features.org/). Avant cela, la seule façon de définir des fonctions était d'utiliser le mot-clé _function_.
+La fonctionnalité de fonction fléchée a été ajoutée à JavaScript il y a seulement quelques années, avec la version [ES6](https://rse.github.io/es6-features/). Avant cela, la seule façon de définir des fonctions était d'utiliser le mot-clé _function_.
 
 Il existe deux façons de référencer la fonction ; on donne un nom dans une [déclaration de fonction](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function).
 

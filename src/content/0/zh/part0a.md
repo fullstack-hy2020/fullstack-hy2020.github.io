@@ -45,11 +45,8 @@ lang: zh
 <!-- In parts 1-4 you are expected to do <i>at least</i> all of the exercises that are not marked with an asterisk(*). Exercises marked with an asterisk count towards your final grade, but skipping them does not prevent you from doing the compulsory exercises in the next parts. Parts 5- do not have asterisk marked exercises since there is no similar dependency on previous parts.-->
 在第 1-4 章中，你应该<i>至少</i>做完所有没有标有星号（*）的练习。标有星号的练习虽然计入你的最终成绩，但跳过这些练习并不妨碍你做下一章节的必修练习。第5章节没有标有星号的练习，因为与前几章节没有类似的依赖关系。
 
-<!-- The speed of completing the course is flexible, and exercises can be submitted until 23:59 [EET](https://en.wikipedia.org/wiki/Eastern_European_Time) on 1 March 2023.-->
-完成课程的速度是灵活的，练习可以提交到2023年3月1日23:59 [东欧时间EET](https://en.wikipedia.org/wiki/Eastern_European_Time)。
-
-<!-- However, note that the deadline for taking exam for University of Helsinki credits is 10.1.2023.-->
-然而，请注意参加赫尔辛基大学学分考试的最后期限是2023年1月10日。
+<!-- The speed of completing the course is flexible.-->
+完成课程的速度是灵活的。
 
 <!-- Exercise completion time statistics can be found via the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
 练习完成时间的统计可以通过[提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)找到。

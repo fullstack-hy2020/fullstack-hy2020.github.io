@@ -616,18 +616,18 @@ The type of the returned array is the following:
 
 So the first element, assigned to *newNote* is a string and the second element that we assigned *setNewNote* has a slightly more complex type. We notice that there is a string mentioned there, so we know that it must be the type of a function that sets a valued data. See [here](https://codewithstyle.info/Using-React-useState-hook-with-TypeScript/) if you want to learn more about the types of useState function.
 
-From this all we see that TypeScript has indeed [inferred](https://www.typescriptlang.org/docs/handbook/type-inference.html#handbook-content) the type of the first useState quite right, it is creating a state with type string.
+From all this we see that TypeScript has indeed [inferred](https://www.typescriptlang.org/docs/handbook/type-inference.html#handbook-content) the type of the first useState correctly, a state with type string is created.
 
-When we look at the second useState that has the initial value *[]* the type looks quite different
+When we look at the second useState that has the initial value *[]* , the type looks quite different
 
 ```ts
 useState<never[]>(initialState: never[] | (() => never[])): 
   [never[], React.Dispatch<React.SetStateAction<never[]>>] 
 ```
 
-TypeScript can just infer that the state has type *never[]*, it is an array but it has no clue what are the elements stored to array, so we clearly need to help the compiler and provide the type explicitly.
+TypeScript can just infer that the state has type *never[]*, it is an array but it has no clue what the elements stored to the array are, so we clearly need to help the compiler and provide the type explicitly.
 
-One of the best sources for information about typing React is the [React TypeScript Cheatsheet](https://react-typescript-cheatsheet.netlify.app/). The Cheatsheet chapter about [useState](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/hooks#usestate) hook instructs to use a *type parameter* in situations where the compiler can not infer the type.
+One of the best sources for information about typing React is the [React TypeScript Cheatsheet](https://react-typescript-cheatsheet.netlify.app/). The Cheatsheet chapter about [useState](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/hooks#usestate) hook instructs us to use a *type parameter* in situations where the compiler can not infer the type.
 
 Let us now define a type for notes:
 
@@ -644,7 +644,7 @@ The solution is now simple:
 const [notes, setNotes] = useState<Note[]>([]);
 ```
 
-And indeed, the type is set quite right:
+And indeed, the type is set correctly:
 
 ```ts
 useState<Note[]>(initialState: Note[] | (() => Note[])):
@@ -713,7 +713,7 @@ const App = () => {
 }
 ```
 
-It just works, there are no complaints about types! When we hover over the *event.target.value*, we see that it is indeed a string, just what is the expected parameter of the *setNewNote*:
+It just works, there are no complaints about types! When we hover over the *event.target.value*, we see that it is indeed a string, just what is expected for the parameter of *setNewNote*:
 
 ![vscode showing variable is a string](../../images/9/67new.png)
 
@@ -749,7 +749,7 @@ It does not quite work, there is an Eslint error complaining about implicit any:
 
 ![vscode error event implicitly has any type](../../images/9/68new.png)
 
-TypeScript compiler has now no clue what is the type of the parameter, so that is why the type is the infamous implicit any that we want to [avoid](/en/part9/first_steps_with_type_script#the-horrors-of-any) at all costs. The React TypeScript cheatsheet comes again to rescue, the chapter about
+TypeScript compiler now has no clue what the type of the parameter is, this is why the type is the infamous implicit any that we want to [avoid](/en/part9/first_steps_with_type_script#the-horrors-of-any) at all costs. The React TypeScript cheatsheet comes to the rescue again, the chapter about
 [forms and events](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/forms_and_events) reveals that the right type of event handler is *React.SyntheticEvent*.
 
 The code becomes
@@ -821,7 +821,7 @@ When we hover over the *response.data* we see that it has the type *any*
 
 To set the data to the state with function *setNotes* we must type it properly.
 
-With a little [help from internet](https://upmostly.com/typescript/how-to-use-axios-in-your-typescript-apps), we find a clever trick:
+With a little [help from the internet](https://upmostly.com/typescript/how-to-use-axios-in-your-typescript-apps), we find a clever trick:
 
 ```js
   useEffect(() => {
@@ -845,11 +845,11 @@ We can now set the data in the state *notes* to get the code working:
   }, [])
 ```
 
-So just like with *useState*, we gave a type parameter to *axios.get* to instruct it on how the typing should be done. Just like *useState* also *axios.get* is a [generic function](https://www.typescriptlang.org/docs/handbook/2/generics.html#working-with-generic-type-variables). Unlike some generic functions, the type parameter of *axios.get* has a default value of *any* so, if the function is used without defining the type parameter, the type of the response data will be any.
+So just like with *useState*, we gave a type parameter to *axios.get* to instruct it on how the typing should be done. Just like *useState*, *axios.get* is also a [generic function](https://www.typescriptlang.org/docs/handbook/2/generics.html#working-with-generic-type-variables). Unlike some generic functions, the type parameter of *axios.get* has a default value of *any* so, if the function is used without defining the type parameter, the type of the response data will be any.
 
-The code works, compiler and Eslint are happy and remain quiet. However, giving a type parameter to *axios.get* is a potentially dangerous thing to do. The <i>response body can contain data in an arbitrary form</i>, and when giving a type parameter we are essentially just telling to TypeScript compiler to trust us that the data has type *Note[]*.
+The code works, compiler and Eslint are happy and remain quiet. However, giving a type parameter to *axios.get* is a potentially dangerous thing to do. The <i>response body can contain data in an arbitrary form</i>, and when giving a type parameter we are essentially just telling the TypeScript compiler to trust us that the data has type *Note[]*.
 
-So our code is essentially as safe as it would be if a [type assertion](/en/part9/first_steps_with_type_script#type-assertion) would be used:
+So our code is essentially as safe as it would be if a [type assertion](/en/part9/first_steps_with_type_script#type-assertion) would be used (not good):
 
 ```js
   useEffect(() => {
@@ -862,7 +862,7 @@ So our code is essentially as safe as it would be if a [type assertion](/en/part
 
 Since the TypeScript types do not even exist in runtime, our code does not give us any safety against situations where the request body contains data in the wrong form.
 
-Giving a type parameter to *axios.get* might be ok if we are <i>absolutely sure</i> that the backend behaves correctly and returns always the data in the correct form. If we want to build a robust system we should prepare for surprises and parse the response data in the frontend, similarly to what we did [in the previous section](/en/part9/typing_an_express_app#proofing-requests) for the requests to the backend.
+Giving a type parameter to *axios.get* might be ok if we are <i>absolutely sure</i> that the backend behaves correctly and always returns the data in the correct form. If we want to build a robust system we should prepare for surprises and parse the response data (similar to what we did [in the previous section](/en/part9/typing_an_express_app#proofing-requests) for the requests to the backend).
 
 Let us now wrap up our app by implementing the new note addition:
 
@@ -979,7 +979,7 @@ interface CoursePartBase {
 }
 ```
 
-We actually could have had the same effect by using a [type alias](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases)
+We actually could have achieved the same effect by using a [type alias](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases)
 
 ```js
 type DiaryEntry = {

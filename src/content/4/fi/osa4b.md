@@ -26,7 +26,7 @@ Määritellään nyt tiedostossa <i>package.json</i>, että testejä suoritettae
   // ...
   "scripts": {
     "start": "NODE_ENV=production node index.js", // highlight-line
-    "dev": "NODE_ENV=development nodemon index.js", // highlight-line
+    "dev": "NODE_ENV=development node --watch index.js", // highlight-line
     "test": "NODE_ENV=test node --test", // highlight-line
     "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
     "deploy": "fly deploy",
@@ -38,7 +38,7 @@ Määritellään nyt tiedostossa <i>package.json</i>, että testejä suoritettae
 }
 ```
 
-Samalla määriteltiin, että suoritettaessa sovellusta komennolla _npm run dev_ eli nodemonin avulla, on sovelluksen moodi <i>development</i>. Jos sovellusta suoritetaan normaalisti Nodella, on moodiksi määritelty <i>production</i>.
+Samalla määriteltiin, että suoritettaessa sovellusta komennolla _npm run dev_ sovelluksen moodi on <i>development</i>. Jos sovellusta suoritetaan komennolla _npm start_, on moodiksi määritelty <i>production</i>.
 
 Määrittelyssämme on kuitenkin pieni ongelma: se ei toimi Windowsilla. Tilanne korjautuu asentamalla kirjasto [cross-env](https://www.npmjs.com/package/cross-env) kehitysaikaiseksi riippuvuudeksi komennolla
 
@@ -53,7 +53,7 @@ ja muuttamalla <i>package.json</i> kaikilla käyttöjärjestelmillä toimivaan m
   // ...
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
-    "dev": "cross-env NODE_ENV=development nodemon index.js",
+    "dev": "cross-env NODE_ENV=development node --watch index.js",
     "test": "cross-env  NODE_ENV=test node --test",
   },
   // ...
@@ -104,7 +104,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://gith
 
 ### SuperTest
 
-Käytetään API:n testaamiseen Jestin apuna [SuperTest](https://github.com/visionmedia/supertest)-kirjastoa.
+Käytetään API:n testaamiseen Noden test-moduulin apuna [SuperTest](https://github.com/visionmedia/supertest)-kirjastoa.
 
 Kirjasto asennetaan kehitysaikaiseksi riippuvuudeksi komennolla
 
@@ -328,7 +328,7 @@ test('the first note is about HTTP methods', async () => {
 
 ### Testien suorittaminen yksitellen
 
-Komento _npm test_ suorittaa projektin kaikki testit. Kun olemme vasta tekemässä testejä, on useimmiten järkevämpää suorittaa kerrallaan ainoastaan yhtä tai muutamaa testiä. Jest tarjoaa tähän muutamia vaihtoehtoja.
+Komento _npm test_ suorittaa projektin kaikki testit. Kun olemme vasta tekemässä testejä, on useimmiten järkevämpää suorittaa kerrallaan ainoastaan yhtä tai muutamaa testiä. Test-moduuli tarjoaa tähän muutamia vaihtoehtoja.
 
 Eräs näistä on komennon [only](https://nodejs.org/api/test.html#testonlyname-options-fn) käyttö. Komennon avulla voidaan merkitä vain osa testeistä suoritettavaksi:
 
@@ -1178,7 +1178,7 @@ after(async () => {
 
 Testien raportointi tapahtuu <i>describe</i>-lohkojen ryhmittelyn mukaan:
 
-![Jest ryhmittelee testitulokset describe-lohkoittain](../../images/4/7new.png)
+![Tstikirjasto ryhmittelee testitulokset describe-lohkoittain](../../images/4/7new.png)
 
 Testeihin jää vielä parannettavaa, mutta on jo aika siirtyä eteenpäin.
 

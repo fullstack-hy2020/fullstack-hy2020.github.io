@@ -240,7 +240,7 @@ The dependency is also added to our <i>package.json</i> file:
 {
   // ...
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.21.2"
   }
 }
 ```
@@ -251,15 +251,15 @@ The source code for the dependency is installed in the <i>node\_modules</i> dire
 
 These are the dependencies of the Express library and the dependencies of all of its dependencies, and so forth. These are called the [transitive dependencies](https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/) of our project.
 
-Version 4.18.2 of Express was installed in our project. What does the caret in front of the version number in <i>package.json</i> mean?
+Version 4.21.2 of Express was installed in our project. What does the caret in front of the version number in <i>package.json</i> mean?
 
 ```json
-"express": "^4.18.2"
+"express": "^4.21.2"
 ```
 
 The versioning model used in npm is called [semantic versioning](https://docs.npmjs.com/about-semantic-versioning).
 
-The caret in the front of <i>^4.18.2</i> means that if and when the dependencies of a project are updated, the version of Express that is installed will be at least <i>4.18.2</i>. However, the installed version of Express can also have a larger <i>patch</i> number (the last number), or a larger <i>minor</i> number (the middle number). The major version of the library indicated by the first <i>major</i> number must be the same.
+The caret in the front of <i>^4.21.2</i> means that if and when the dependencies of a project are updated, the version of Express that is installed will be at least <i>4.21.2</i>. However, the installed version of Express can also have a larger <i>patch</i> number (the last number), or a larger <i>minor</i> number (the middle number). The major version of the library indicated by the first <i>major</i> number must be the same.
 
 We can update the dependencies of the project with the command:
 
@@ -356,71 +356,39 @@ The experiment shown below illustrates this point:
 
 The experiment above was done in the interactive [node-repl](https://nodejs.org/docs/latest-v18.x/api/repl.html). You can start the interactive node-repl by typing in _node_ in the command line. The repl is particularly useful for testing how commands work while you're writing application code. I highly recommend this!
 
-### nodemon
+### Automatic Change Tracking
 
-If we make changes to the application's code we have to restart the application to see the changes. We restart the application by first shutting it down by typing _Ctrl+C_ and then restarting the application. Compared to the convenient workflow in React where the browser automatically reloaded after changes were made, this feels slightly cumbersome.
+If we change the application's code, we first need to stop the application from the console (_ctrl_ + _c_) and then restart it for the changes to take effect. Restarting feels cumbersome compared to React's smooth workflow, where the browser automatically updates when the code changes.
 
-The solution to this problem is [nodemon](https://github.com/remy/nodemon):
-
-> <i>nodemon will watch the files in the directory in which nodemon was started, and if any files change, nodemon will automatically restart your node application.</i>
-
-Let's install nodemon by defining it as a <i>development dependency</i> with the command:
+You can make the server track our changes by starting it with the _--watch_ option:
 
 ```bash
-npm install --save-dev nodemon
+node --watch index.js
 ```
 
-The contents of <i>package.json</i> have also changed:
+Now, changes to the application's code will cause the server to restart automatically. Note that although the server restarts automatically, you still need to refresh the browser. Unlike with React, we do not have, nor could we have, a hot reload functionality that updates the browser in this scenario (where we return JSON data).
 
-```json
-{
-  //...
-  "dependencies": {
-    "express": "^4.18.2"
-  },
-  "devDependencies": {
-    "nodemon": "^3.0.3"
-  }
-}
-```
-
-If you accidentally used the wrong command and the nodemon dependency was added under "dependencies" instead of "devDependencies", then manually change the contents of <i>package.json</i> to match what is shown above.
-
-By development dependencies, we are referring to tools that are needed only during the development of the application, e.g. for testing or automatically restarting the application, like <i>nodemon</i>.
-
-These development dependencies are not needed when the application is run in production mode on the production server (e.g. Fly.io or Heroku).
-
-We can start our application with <i>nodemon</i> like this:
-
-```bash
-node_modules/.bin/nodemon index.js
-```
-
-Changes to the application code now cause the server to restart automatically. It's worth noting that even though the backend server restarts automatically, the browser still has to be manually refreshed. This is because unlike when working in React, we don't have the [hot reload](https://gaearon.github.io/react-hot-loader/getstarted/) functionality needed to automatically reload the browser.
-
-The command is long and quite unpleasant, so let's define a dedicated <i>npm script</i> for it in the <i>package.json</i> file:
+Let's define a custom <i>npm script</i> in the <i>package.json</i> file to start the development server:
 
 ```bash
 {
   // ..
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",  // highlight-line
+    "dev": "node --watch index.js", // highlight-line
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   // ..
 }
 ```
 
-In the script there is no need to specify the <i>node\_modules/.bin/nodemon</i> path to nodemon, because _npm_ automatically knows to search for the file from that directory.
-
-We can now start the server in development mode with the command:
+We can now start the server in development mode with the command
 
 ```bash
 npm run dev
 ```
 
-Unlike with the <i>start</i> and <i>test</i> scripts, we also have to add <i>run</i> to the command because it is a non-native script.
+Unlike when running the <i>start</i> or <i>test</i> scripts, the command must include <i>run</i>. 
 
 ### REST
 
@@ -615,11 +583,11 @@ Before we implement the rest of the application logic, let's verify with Postman
 
 The application prints the data that we sent in the request to the console:
 
-![terminal printing content provided in postman](../../images/3/15new.png)
+![terminal printing content provided in postman](../../images/3/15c.png)
 
-**NB** <i>Keep the terminal running the application visible at all times</i> when you are working on the backend. Thanks to Nodemon any changes we make to the code will restart the application. If you pay attention to the console, you will immediately be able to pick up on errors that occur in the application:
+**NOTE:** When programming the backend, <i>keep the console running the application visible at all times</i>. The development server will restart if changes are made to the code, so by monitoring the console, you will immediately notice if there is an error in the application's code:
 
-![nodemon error as typing requre not defined](../../images/3/16e.png)
+![console error about SyntaxError](../../images/3/16_25.png)
 
 Similarly, it is useful to check the console to make sure that the backend behaves as we expect it to in different situations, like when we send data with an HTTP POST request. Naturally, it's a good idea to add lots of <em>console.log</em> commands to the code while the application is still being developed.
 
@@ -633,7 +601,7 @@ The <i>Content-Type</i> header is set to <i>text/plain</i>:
 
 The server appears to only receive an empty object:
 
-![nodemon output showing empty curly braces](../../images/3/19.png)
+![console output showing empty curly braces](../../images/3/19_25.png)
 
 The server will not be able to parse the data correctly without the correct value in the header. It won't even try to guess the format of the data since there's a [massive amount](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types) of potential <i>Content-Types</i>.
 
@@ -709,7 +677,7 @@ app.post('/api/notes', (request, response) => {
 
   const note = {
     content: body.content,
-    important: Boolean(body.important) || false,
+    important: body.important || false,
     id: generateId(),
   }
 
@@ -737,7 +705,7 @@ If the content property has a value, the note will be based on the received data
 If the <i>important</i> property is missing, we will default the value to <i>false</i>. The default value is currently generated in a rather odd-looking way:
 
 ```js
-important: Boolean(body.important) || false,
+important: body.important || false,
 ```
 
 If the data saved in the _body_ variable has the <i>important</i> property, the expression will evaluate its value and convert it to a boolean value. If the property does not exist, then the expression will evaluate to false which is defined on the right-hand side of the vertical lines.
@@ -831,10 +799,6 @@ Implement a page at the address <http://localhost:3001/info> that looks roughly 
 ![Screenshot for 3.2](../../images/3/23x.png)
 
 The page has to show the time that the request was received and how many entries are in the phonebook at the time of processing the request.
-  
-There can only be one response.send() statement in an Express app route. Once you send a response to the client using response.send(), the request-response cycle is complete and no further response can be sent. 
-  
-To include a line space in the output, use `<br/>` tag, or wrap the statements in `<p>` tags.
 
 #### 3.3: Phonebook backend step 3
 

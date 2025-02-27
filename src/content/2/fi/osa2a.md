@@ -107,7 +107,6 @@ Tiedosto <i>main.jsx</i> on muuten samanlainen kuin se on ollut toistaiseksi kai
 
 ```js
 import ReactDOM from 'react-dom/client'
-
 import App from './App'
 
 const notes = [
@@ -399,7 +398,6 @@ Koodissamme on käytetty koko ajan moduuleja. Tiedoston <i>main.jsx</i> ensimmä
 
 ```js
 import ReactDOM from "react-dom/client"
-
 import App from "./App"
 ```
 
@@ -413,9 +411,7 @@ Tehdään nyt sovellukseen hakemisto <i>components</i> ja sinne tiedosto <i>Note
 
 ```js
 const Note = ({ note }) => {
-  return (
-    <li>{note.content}</li>
-  )
+  return <li>{note.content}</li>
 }
 
 export default Note
@@ -491,7 +487,7 @@ const App = () => {
     // ...
   }
 
-  console.log('App toimii...') // highlight-line
+  console.log('app works...') // highlight-line
 
   return (
     // ..

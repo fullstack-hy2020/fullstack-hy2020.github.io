@@ -63,7 +63,7 @@ CORS:ista voi lukea tarkemmin esim. [Mozillan sivuilta](https://developer.mozill
 
 Sovelluksen suoritusympäristö näyttää nyt seuraavalta:
 
-![Kuvassa localhost:3000 toimiva React dev server ja localhost:3001 toimiva node backend, jotka molemmat käyttävät lokaalilla levylä olevia fs-tiedostoja. Kuvassa myös selaimessa oleva react-sovellus. joka yhteydessä dev-serveriin (mistä se saa js-tiedoston) sekä node-backendiin jonka reitilt /app/notes sen saa json-muotoisen datan](../../images/3/100.png)
+![Kuvassa localhost:5173 toimiva Vite dev server ja localhost:3001 toimiva node backend, jotka molemmat käyttävät lokaalilla levylä olevia fs-tiedostoja. Kuvassa myös selaimessa oleva react-sovellus. joka yhteydessä dev-serveriin (mistä se saa js-tiedoston) sekä node-backendiin jonka reitilt /app/notes sen saa json-muotoisen datan](../../images/3/100_25.png)
 
 Selaimessa toimiva frontendin koodi siis hakee datan osoitteessa localhost:3001 olevalta Express-palvelimelta.
 
@@ -120,10 +120,10 @@ Jotta sovellus saadaan konfiguroitua oikein, tulee tiedostoon konfiguraatioon te
 [build]
 
 [env]
-  PORT = "3000" # add this
+  PORT = "3001" # add this
 
 [http_service]
-  internal_port = 3000 # ensure that this is same as PORT
+  internal_port = 3001 # ensure that this is same as PORT
   force_https = true
   auto_stop_machines = true
   auto_start_machines = true
@@ -385,7 +385,7 @@ const baseUrl = '/api/notes'
 
 Koska frontend toimii osoitteessa <i>localhost:5173</i>, menevät backendiin tehtävät pyynnöt väärään osoitteeseen <i>localhost:5173/api/notes</i>. Backend toimii kuitenkin osoitteessa <i>localhost:3001</i>.
 
-Vitellä luoduissa projekteissa ongelma on helppo ratkaista. Riittää, että frontendin repositorion tiedostoon <i>vite.config.json</i> lisätään seuraava määritelmä:
+Vitellä luoduissa projekteissa ongelma on helppo ratkaista. Riittää, että frontendin repositorion tiedostoon <i>vite.config.js</i> lisätään seuraava määritelmä:
 
 ```bash
 import { defineConfig } from 'vite'
@@ -453,7 +453,5 @@ Generoi frontendistä tuotantoversio ja lisää se Internetissä olevaan sovellu
 **HUOM:** eihän hakemisto <i>dist</i> ole gitignoroituna projektissasi jos käytät Renderiä?
 
 Huolehdi myös, että frontend toimii edelleen myös paikallisesti.
-
-Jotta kaikki toimisi, tulee repositoriosi näyttää hakemistorakenteen suhteen samalta kuin [esimerkkisovelluksen repositorion](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3).
 
 </div>

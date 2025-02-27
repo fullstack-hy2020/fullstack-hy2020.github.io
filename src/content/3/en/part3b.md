@@ -79,9 +79,9 @@ Now most of the features in the frontend work! The functionality for changing th
 
 You can read more about CORS from [Mozilla's page](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
 
-The setup of our app looks now as follows:
+The setup of our app now looks as follows:
 
-![diagram of react app and browser](../../images/3/100.png)
+![diagram of react app and browser](../../images/3/100_25.png)
 
 The react app running in the browser now fetches the data from node/express-server that runs in localhost:3001.
 
@@ -103,7 +103,6 @@ There are also some other free hosting options that work well for this course, a
 
 Some course participants have also used the following services:
 
-- [Cyclic](https://www.cyclic.sh/)
 - [Replit](https://replit.com)
 - [CodeSandBox](https://codesandbox.io)
 
@@ -152,10 +151,10 @@ Fly.io creates a file <i>fly.toml</i> in the root of your app where we can confi
 [build]
 
 [env]
-  PORT = "3000" # add this
+  PORT = "3001" # add this
 
 [http_service]
-  internal_port = 3000 # ensure that this is same as PORT
+  internal_port = 3001 # ensure that this is same as PORT
   force_https = true
   auto_stop_machines = true
   auto_start_machines = true
@@ -486,7 +485,7 @@ export default defineConfig({
 
 After a restart, the React development environment will work as a [proxy](https://vitejs.dev/config/server-options.html#server-proxy). If the React code does an HTTP request to a server address at <i><http://localhost:5173></i> not managed by the React application itself (i.e. when requests are not about fetching the CSS or JavaScript of the application), the request will be redirected to the server at <i><http://localhost:3001></i>.
 
-Note that with the vite-configuration shown above, only requests that are made to paths starting with <i>/api</i>-are redirected to the server.
+Note that with the vite-configuration shown above, only requests that are made to paths starting with <i>/api</i> are redirected to the server.
 
 Now the frontend is also fine, working with the server both in development and production mode.
 
@@ -531,7 +530,5 @@ Generate a production build of your frontend, and add it to the Internet applica
 **NB** If you use Render, make sure the directory <i>dist</i> is not ignored by git on the backend.
 
 Also, make sure that the frontend still works locally (in development mode when started with command _npm run dev_).
-
-If you have problems getting the app working make sure that your directory structure matches [the example app](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3).
 
 </div>

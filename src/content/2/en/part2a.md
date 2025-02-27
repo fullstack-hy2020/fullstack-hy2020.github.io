@@ -108,9 +108,7 @@ export default App
 The file <i>main.jsx</i> looks like this:
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
-
 import App from './App'
 
 const notes = [
@@ -408,7 +406,6 @@ We have been using modules the whole time. The first few lines of the file <i>ma
 
 ```js
 import ReactDOM from "react-dom/client"
-
 import App from "./App"
 ```
 
@@ -422,9 +419,7 @@ Now, we'll create a directory called <i>components</i> for our application and p
 
 ```js
 const Note = ({ note }) => {
-  return (
-    <li>{note.content}</li>
-  )
+  return <li>{note.content}</li>
 }
 
 export default Note
@@ -583,7 +578,7 @@ Note that this part has more exercises than the ones before, so <i>do not submit
 
 <h4>2.1: Course information step 6</h4>
 
-Let's finish the code for rendering course contents from exercises 1.1 - 1.5. You can start with the code from the model answers. The model answers for part 1 can be found by going to the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen), clicking on <i>my submissions</i> at the top, and in the row corresponding to part 1 under the <i>solutions</i> column clicking on <i>show</i>. To see the solution to the <i>course info</i> exercise, click on _index.js_ under <i>kurssitiedot</i> ("kurssitiedot" means "course info").
+Let's finish the code for rendering course contents from exercises 1.1 - 1.5. You can start with the code from the model answers. The model answers for part 1 can be found by going to the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen), clicking on <i>my submissions</i> at the top, and in the row corresponding to part 1 under the <i>solutions</i> column clicking on <i>show</i>. To see the solution to the <i>course info</i> exercise, click on _App.jsx_ under <i>courseinfo</i>.
 
 **Note that if you copy a project from one place to another, you might have to delete the <i>node\_modules</i> directory and install the dependencies again with the command _npm install_ before you can start the application.**
 

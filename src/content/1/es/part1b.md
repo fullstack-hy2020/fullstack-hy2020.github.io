@@ -9,7 +9,7 @@ lang: es
 
 Durante el curso, tenemos el objetivo y la necesidad de aprender una cantidad suficiente de JavaScript ademas del desarrollo web.
 
-JavaScript ha avanzado rápidamente en los últimos años y en este curso usamos características de las versiones más nuevas. El nombre oficial del estándar JavaScript es [ECMAScript](https://es.wikipedia.org/wiki/ECMAScript). En este momento, la última versión es la lanzada en junio de 2023 con el nombre [ECMAScript® 2023](https://www.ecma-international.org/ecma-262/), también conocido como ES14.
+JavaScript ha avanzado rápidamente en los últimos años y en este curso usamos características de las versiones más nuevas. El nombre oficial del estándar JavaScript es [ECMAScript](https://es.wikipedia.org/wiki/ECMAScript). En este momento, la última versión es la lanzada en junio de 2024 con el nombre [ECMAScript® 2024](https://www.ecma-international.org/ecma-262/), también conocido como ES15.
 
 Los navegadores aún no son compatibles con todas las funciones más nuevas de JavaScript. Debido a este hecho, una gran cantidad de código que se ejecuta en los navegadores ha sido <i>transpilado</i> de una versión más nueva de JavaScript a una versión más antigua y compatible.
 
@@ -33,11 +33,11 @@ En JavaScript, hay algunas formas de definir las variables:
 const x = 1
 let y = 5
 
-console.log(x, y)   // se imprime 1, 5
+console.log(x, y)   // se imprime 1 5
 y += 10
-console.log(x, y)   // se imprime 1, 15
+console.log(x, y)   // se imprime 1 15
 y = 'sometext'
-console.log(x, y)   // se imprime 1, sometext
+console.log(x, y)   // se imprime 1 sometext
 x = 4               // provoca un error
 ```
 
@@ -118,7 +118,7 @@ const t = [1, 2, 3, 4, 5]
 
 const [first, second, ...rest] = t
 
-console.log(first, second)  // se imprime 1, 2
+console.log(first, second)  // se imprime 1 2
 console.log(rest)          // se imprime [3, 4 ,5]
 ```
 
@@ -216,7 +216,7 @@ const tSquared = t.map(p => p * p)
 // tSquared ahora es [1, 4, 9]
 ```
 
-La característica de la función de flecha se agregó a JavaScript hace solo un par de años, con la versión [ES6](http://es6-features.org/). Antes de esto, la única forma de definir funciones era usando la palabra clave _function_.
+La característica de la función de flecha se agregó a JavaScript hace solo un par de años, con la versión [ES6](https://rse.github.io/es6-features/). Antes de esto, la única forma de definir funciones era usando la palabra clave _function_.
 
 Hay dos formas de hacer referencia a la función; uno está dando un nombre en una [declaración de función](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Statements/function).
 

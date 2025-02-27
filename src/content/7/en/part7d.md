@@ -71,7 +71,7 @@ The contents of the <i>package.json</i> file can e.g. be the following:
 {
   "name": "webpack-part7",
   "version": "0.0.1",
-  "description": "practising webpack",
+  "description": "practicing webpack",
   "scripts": {},
   "license": "MIT"
 }
@@ -652,7 +652,7 @@ Starting from version 4 of webpack, the minification plugin does not require add
 {
   "name": "webpack-part7",
   "version": "0.0.1",
-  "description": "practising webpack",
+  "description": "practicing webpack",
   "scripts": {
     "build": "webpack --mode=production", // highlight-line
     "start": "webpack serve --mode=development"

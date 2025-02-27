@@ -600,7 +600,7 @@ In the tasks of this section, we will build a blog application backend similar t
 
 #### Exercise 13.1.
 
-Create a GitHub repository for the application and create a new Fly.io or Heroku application for it, as well as a Postgres database. As mentioned [here](/en/part13/using_relational_databases_with_sequelize#application-database) you might set up your database also somewhere else, and in that case the Fly.io of Heroku app is not needed.
+Create a GitHub repository for the application and create a new Fly.io or Heroku application for it, as well as a Postgres database. As mentioned [here](/en/part13/using_relational_databases_with_sequelize#application-database) you might set up your database also somewhere else, and in that case the Fly.io or Heroku app is not needed.
 
 Make sure you are able to establish a connection to the application database.
 

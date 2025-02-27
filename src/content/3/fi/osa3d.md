@@ -325,7 +325,7 @@ Kannattaa ehkä tehdä linttaustakin varten _npm-skripti_:
   // ...
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",
+    "dev": "node --watch index.js",
     // ...
     "lint": "eslint ." // highlight-line
   },

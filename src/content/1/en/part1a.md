@@ -11,18 +11,18 @@ We will now start getting familiar with probably the most important topic of thi
 
 The easiest way to get started by far is by using a tool called [Vite](https://vitejs.dev/).
 
-Let's create an application called <i>part1</i>, navigate to its directory and install the libraries:
+Let's create an application called <i>introdemo</i>, navigate to its directory and install the libraries:
 
 ```bash
 # npm 6.x (outdated, but still used by some):
-npm create vite@latest part1 --template react
+npm create vite@latest introdemo --template react
 
 # npm 7+, extra double-dash is needed:
-npm create vite@latest part1 -- --template react
+npm create vite@latest introdemo -- --template react
 ```
 
 ```bash
-cd part1
+cd introdemo
 npm install
 ```
 
@@ -67,22 +67,6 @@ export default App
 ```
 
 The files <i>App.css</i> and <i>index.css</i>, and the directory <i>assets</i> may be deleted as they are not needed in our application right now.
-
-### create-react-app
-
-Instead of Vite you can also use the older generation tool [create-react-app](https://github.com/facebookincubator/create-react-app) in the course to set up the applications. The most visible difference to Vite is the name of the application startup file, which is <i>index.js</i>.
-
-The way to start the application is also different in CRA, it is started with a command
-
-```bash
-npm start
-```
-
-in contrast to Vite's
-
-```bash
-npm run dev 
-```
 
 ### Component
 
@@ -241,7 +225,7 @@ const App = () => {
 }
 ```
 
-The compilation is handled by [Babel](https://babeljs.io/repl/). Projects created with *create-react-app* or *vite* are configured to compile automatically. We will learn more about this topic in [part 7](/en/part7) of this course.
+The compilation is handled by [Babel](https://babeljs.io/repl/). Projects created with *Vite* are configured to compile automatically. We will learn more about this topic in [part 7](/en/part7) of this course.
 
 It is also possible to write React as "pure JavaScript" without using JSX. Although, nobody with a sound mind would do so.
 
@@ -385,30 +369,42 @@ Depending on the editor you are using, you may receive the following error messa
 
 ![screenshot of vs code showing eslint error: "name is missing in props validation"](../../images/1/1-vite5.png)
 
-It's not an actual error, but a warning caused by the [ESLint](https://eslint.org/) tool. You can silence the warning [react/prop-types](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md) by adding to the file <i>.eslintrc .cjs</i> the next line
+It's not an actual error, but a warning caused by the [ESLint](https://eslint.org/) tool. You can silence the warning [react/prop-types](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md) by adding to the file <i>eslint.config.js</i> the next line
 
 ```js
-module.exports = {
-   root: true,
-   env: { browser: true, es2020: true },
-   extends: [
-     'eslint:recommended',
-     'plugin:react/recommended',
-     'plugin:react/jsx-runtime',
-     'plugin:react-hooks/recommended',
-   ],
-   ignorePatterns: ['dist', '.eslintrc.cjs'],
-   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
-   settings: { react: { version: '18.2' } },
-   plugins: ['react-refresh'],
-   rules: {
-     'react-refresh/only-export-components': [
-       'warn',
-       { allowConstantExport: true },
-     ],
-     'react/prop-types': 0 // highlight-line
-   },
-}
+export default [
+  { ignores: ['dist'] },
+  {
+    files: ['**/*.{js,jsx}'],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        ecmaFeatures: { jsx: true },
+        sourceType: 'module',
+      },
+    },
+    settings: { react: { version: '18.3' } },
+    plugins: {
+      react,
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
+    },
+    rules: {
+      ...js.configs.recommended.rules,
+      ...react.configs.recommended.rules,
+      ...react.configs['jsx-runtime'].rules,
+      ...reactHooks.configs.recommended.rules,
+      'react/jsx-no-target-blank': 'off',
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true },
+      ],
+      'react/prop-types': 0, // highlight-line
+    },
+  },
+]
 ```
 
 We will get to know ESLint in more detail [in part 3](/en/part3/validation_and_es_lint#lint).

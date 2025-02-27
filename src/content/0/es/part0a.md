@@ -256,7 +256,7 @@ Si deseas recibir créditos de la Universidad de Helsinki, guarda tu número de 
 
 ![guardando el número de estudiante](../../images/0/28b.png)
 
-Si no eres estudiante de la Universidad de Helsinki, puedes obtener un número de estudiante registrándote en el curso a través de [Open University](/es/part0/informacion_general#el-examen-del-curso). Consulta [aquí](en/part0/general_info#where-do-i-get-my-university-of-helsinki-student-number) para obtener más información.
+Si no eres estudiante de la Universidad de Helsinki, puedes obtener un número de estudiante registrándote en el curso a través de [Open University](/es/part0/informacion_general#el-examen-del-curso). Consulta [aquí](/es/part0/informacion_general#donde-obtengo-mi-numero-de-estudiante-de-la-universidad-de-helsinki) para obtener más información.
 
 Recibirás tus créditos después de haber enviado suficientes ejercicios para aprobar, haber aprobado el examen y luego informarnos a través del sistema de envío de ejercicios que has completado el curso:
 

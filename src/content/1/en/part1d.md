@@ -428,8 +428,8 @@ const History = (props) => {
 }
 
 // highlight-start
-const Button = ({ handleClick, text }) => (
-  <button onClick={handleClick}>
+const Button = ({ onClick, text }) => (
+  <button onClick={onClick}>
     {text}
   </button>
 )
@@ -454,8 +454,8 @@ const App = () => {
     <div>
       {left}
       // highlight-start
-      <Button handleClick={handleLeftClick} text='left' />
-      <Button handleClick={handleRightClick} text='right' />
+      <Button onClick={handleLeftClick} text='left' />
+      <Button onClick={handleRightClick} text='right' />
       // highlight-end
       {right}
       <History allClicks={allClicks} />
@@ -497,8 +497,8 @@ don't write more code but rather find and fix the problem **immediately**. There
 Old-school, print-based debugging is always a good idea. If the component
 
 ```js
-const Button = ({ handleClick, text }) => (
-  <button onClick={handleClick}>
+const Button = ({ onClick, text }) => (
+  <button onClick={onClick}>
     {text}
   </button>
 )
@@ -509,9 +509,9 @@ is not working as intended, it's useful to start printing its variables out to t
 ```js
 const Button = (props) => { 
   console.log(props) // highlight-line
-  const { handleClick, text } = props
+  const { onClick, text } = props
   return (
-    <button onClick={handleClick}>
+    <button onClick={onClick}>
       {text}
     </button>
   )
@@ -575,6 +575,8 @@ Dev tools show the state of hooks in the order of their definition:
 ![state of hooks in react dev tools](../../images/1/11ea.png)
 
 The first <i>State</i> contains the value of the <i>left</i> state, the next contains the value of the <i>right</i> state and the last contains the value of the <i>allClicks</i> state.
+
+You can also learn about debugging JavaScript in Chrome, for example, with the [Chrome DevTools guide video](https://developer.chrome.com/docs/devtools/javascript).
 
 ### Rules of Hooks
 
@@ -1030,13 +1032,13 @@ Let's extract the button into its own component:
 
 ```js
 const Button = (props) => (
-  <button onClick={props.handleClick}>
+  <button onClick={props.onClick}>
     {props.text}
   </button>
 )
 ```
 
-The component gets the event handler function from the _handleClick_ prop, and the text of the button from the _text_ prop. Lets use the new component:
+The component gets the event handler function from the _onClick_ prop, and the text of the button from the _text_ prop. Lets use the new component:
 
 ```js
 const App = (props) => {
@@ -1044,9 +1046,9 @@ const App = (props) => {
   return (
     <div>
       {value}
-      <Button handleClick={() => setToValue(1000)} text="thousand" /> // highlight-line
-      <Button handleClick={() => setToValue(0)} text="reset" /> // highlight-line
-      <Button handleClick={() => setToValue(value + 1)} text="increment" /> // highlight-line
+      <Button onClick={() => setToValue(1000)} text="thousand" /> // highlight-line
+      <Button onClick={() => setToValue(0)} text="reset" /> // highlight-line
+      <Button onClick={() => setToValue(value + 1)} text="increment" /> // highlight-line
     </div>
   )
 }
@@ -1054,7 +1056,7 @@ const App = (props) => {
 
 Using the <i>Button</i> component is simple, although we have to make sure that we use the correct attribute names when passing props to the component.
 
-![using correct attribute names code screenshot](../../images/1/12e.png)
+![using correct attribute names code screenshot](../../images/1/12f.png)
 
 ### Do Not Define Components Within Components
 
@@ -1065,7 +1067,7 @@ We will change the application by defining a new component inside of the <i>App<
 ```js
 // This is the right place to define a component
 const Button = (props) => (
-  <button onClick={props.handleClick}>
+  <button onClick={props.onClick}>
     {props.text}
   </button>
 )
@@ -1083,10 +1085,10 @@ const App = () => {
 
   return (
     <div>
-      <Display value={value} />
-      <Button handleClick={() => setToValue(1000)} text="thousand" />
-      <Button handleClick={() => setToValue(0)} text="reset" />
-      <Button handleClick={() => setToValue(value + 1)} text="increment" />
+      <Display value={value} /> // highlight-line
+      <Button onClick={() => setToValue(1000)} text="thousand" />
+      <Button onClick={() => setToValue(0)} text="reset" />
+      <Button onClick={() => setToValue(value + 1)} text="increment" />
     </div>
   )
 }
@@ -1100,7 +1102,7 @@ Let's instead move the <i>Display</i> component function to its correct place, w
 const Display = props => <div>{props.value}</div>
 
 const Button = (props) => (
-  <button onClick={props.handleClick}>
+  <button onClick={props.onClick}>
     {props.text}
   </button>
 )
@@ -1116,9 +1118,9 @@ const App = () => {
   return (
     <div>
       <Display value={value} />
-      <Button handleClick={() => setToValue(1000)} text="thousand" />
-      <Button handleClick={() => setToValue(0)} text="reset" />
-      <Button handleClick={() => setToValue(value + 1)} text="increment" />
+      <Button onClick={() => setToValue(1000)} text="thousand" />
+      <Button onClick={() => setToValue(0)} text="reset" />
+      <Button onClick={() => setToValue(value + 1)} text="increment" />
     </div>
   )
 }
@@ -1140,7 +1142,7 @@ Programming is hard, that is why I will use all the possible means to make it ea
 - I will have my browser developer console open all the time
 - I progress with small steps
 - I will write lots of _console.log_ statements to make sure I understand how the code behaves and to help pinpointing problems
-- If my code does not work, I will not write more code. Instead I start deleting the code until it works or just return to a state when everything was still working
+- If my code does not work, I will not write more code. Instead I will start deleting the code until it works or just return to a state when everything was still working
 - When I ask for help in the course Discord channel or elsewhere I formulate my questions properly, see [here](http://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord) how to ask for help
 
 ### Utilization of Large language models
@@ -1230,7 +1232,6 @@ Note that your application needs to work only during a single browser session. O
 It is advisable to use the same structure that is used in the material and previous exercise. File <i>main.jsx</i> is as follows:
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App'
@@ -1394,9 +1395,9 @@ Expand your application so that you can vote for the displayed anecdote.
 You can create a copy of an object like this:
 
 ```js
-const points = { 0: 1, 1: 3, 2: 4, 3: 2 }
+const votes = { 0: 1, 1: 3, 2: 4, 3: 2 }
 
-const copy = { ...points }
+const copy = { ...votes }
 // increment the property 2 value by one
 copy[2] += 1     
 ```
@@ -1404,9 +1405,9 @@ copy[2] += 1
 OR a copy of an array like this:
 
 ```js
-const points = [1, 4, 6, 3]
+const votes = [1, 4, 6, 3]
 
-const copy = [...points]
+const copy = [...votes]
 // increment the value in position 2 by one
 copy[2] += 1     
 ```

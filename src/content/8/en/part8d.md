@@ -115,7 +115,7 @@ Use of the effect hook is necessary to avoid an endless rendering loop.
 Let's also add a button which enables a logged-in user to log out. The button's onClick handler sets the *token* state to null, removes the token from local storage and resets the cache of the Apollo client. The last step is [important](https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout), because some queries might have fetched data to cache, which only logged-in users should have access to.
 
 We can reset the cache using the [resetStore](https://www.apollographql.com/docs/react/api/core/ApolloClient/#ApolloClient.resetStore) method of an Apollo *client* object.
-The client can be accessed with the [useApolloClient](https://www.apollographql.com/docs/react/api/react-hooks/#useapolloclient) hook:
+The client can be accessed with the [useApolloClient](https://www.apollographql.com/docs/react/api/react/hooks#useapolloclient) hook:
 
 ```js
 const App = () => {
@@ -326,9 +326,9 @@ Implement a view which shows all the books based on the logged-in user's favouri
 #### 8.21 books by genre with GraphQL
 
 In the previous two exercises, the filtering could have been done using just React.
-To complete this exercise, you should redo the filtering the books based on a selected genre (that was done in exercise 8.19) using a GraphQL query to the server. If you already did so then you do not have to do anything.
+To complete this exercise, you should redo the filtering of the books based on a selected genre (that was done in exercise 8.19) using a GraphQL query to the server. If you already did so then you do not have to do anything.
 
-This and the next exercises are quite **challenging** like it should be this late in the course. You might want to complete first the easier ones in the [next part](/en/part8/fragments_and_subscriptions).
+This and the next exercise are quite **challenging**, like they should be this late in the course. It may help you to complete the easier exercises in the [next part](/en/part8/fragments_and_subscriptions) before doing 8.21 and 8.22.
 
 #### 8.22 Up-to-date cache and book recommendations
 

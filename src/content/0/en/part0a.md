@@ -248,8 +248,6 @@ When pressed twice you should see the following text
 
 > *University credit registration in progress...*
 
-Note: if you have already done the course exam in Moodle contact matti.luukkainen@helsinki.fi or @mluukkai in Discord.
-
 ### How to get your credits
 
 If you want to receive University of Helsinki credits, save your <b>University of Helsinki</b> student number to [the exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)
@@ -322,15 +320,9 @@ There is one certificate for the base parts (0-7) of the course and after that a
 
 ### Request a transcript of studies
 
-You can request a verified transcript *after your university credits have been registered*. To request an official transcript, please contact avoin-student@helsinki.fi.
+You can request a verified transcript *after your university credits have been registered*. You can order a transcript using the student services [e-form](https://elomake.helsinki.fi/lomakkeet/132797/lomake.html?rinnakkaislomake=Rinnakkaislomake1_en%5Bk%5D). 
 
-- When requesting an official transcript, remember to mention
-    - the name of the course,
-    - your full name,
-    - your date of birth
-    - the language of the transcript.
-
-The transcript will be delivered to you electronically through email. Present this document at your institution to have the credits included in your degree. The decision to include the credits will be made by your home institution.
+An electronic transcript of studies will be delivered to you by email. Present this document at your institution to have the credits included in your degree. The decision to include the credits will be made by your home institution.
 
 ### No more yearly versions
 
@@ -389,7 +381,7 @@ Install a sensible text editor that supports web development. [Visual Studio Cod
 
 Don't code with nano, Notepad or Gedit. NetBeans isn't very good for web development either. It is also rather heavy in comparison to [Visual Studio Code](https://code.visualstudio.com/).
 
-Also, install [Node.js](https://nodejs.org/en/). The material has been done with version 18.13.0, so don't install any version older than that. See [Node.js installation instructions](https://nodejs.org/en/download/package-manager/).
+Also, install [Node.js](https://nodejs.org/en/). The material is being updated to Node version v22. Parts 0-2 are made using Node version 22.3.0, parts 3, 4, and 10 using version 20.11.0, and the remaining parts using version 18.13.0. Always use at least as recent a Node version. Installation instructions can be found on the [Node.js website](https://nodejs.org/en/download/package-manager/).
 
 Node package manager [npm](https://www.npmjs.com/get-npm) will be automatically installed with Node.js. We will be actively using npm throughout the course. Node also comes with [npx](https://www.npmjs.com/package/npx), which we'll need a few times.
 

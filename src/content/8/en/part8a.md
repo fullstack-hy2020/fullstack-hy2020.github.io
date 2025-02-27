@@ -590,7 +590,7 @@ The current code of the application can be found on [Github](https://github.com/
 
 ### Mutations
 
-Let's add a functionality for adding new persons to the phonebook. In GraphQL, all operations which cause a change are done with [mutations](https://graphql.org/learn/queries/#mutations). Mutations are described in the schema as the keys of type <i>Mutation</i>.
+Let's add a functionality for adding new persons to the phonebook. In GraphQL, all operations which cause a change are done with [mutations](https://graphql.org/learn/mutations). Mutations are described in the schema as the keys of type <i>Mutation</i>.
 
 The schema for a mutation for adding a new person looks as follows:
 
