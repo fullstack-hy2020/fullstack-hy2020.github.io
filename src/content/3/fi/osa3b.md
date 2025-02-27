@@ -75,9 +75,16 @@ Sovellusten hostaamiseen, eli "internettiin laittamiseen" on olemassa lukematon 
 
 Kymmenen vuoden ajan PaaS-ratkaisujen ykkönen on ollut [Heroku](http://heroku.com). Elokuun 2022 lopussa Heroku ilmoitti että 27.11.2022 alkaen alustan maksuttomat palvelut loppuvat. Jos olet valmis maksamaan hiukan, on Heroku edelleen varteenotettava vaihtoehto.
 
-Esittelemme seuraavassa kaksi hieman uudempaa palvelua [Fly.io:n](https://fly.io/):n sekä [Renderin](https://render.com/). Molemmilla on tarjolla jonkin verran ilmaista laskenta-aikaa.
+Esittelemme seuraavassa kaksi hieman uudempaa palvelua [Fly.io:n](https://fly.io/):n sekä [Renderin](https://render.com/). Fly.io tarjoaa palveluna enemmän joustavuutta, mutta myös se on muuttunut hiljattain maksulliseksi. Renderissä on tarjolla jonkin verran ilmaista laskenta-aikaa, joten jos haluat suorittaa kurssin ilman kuluja, valitse Render. Renderin käyttöönotto saattaa myös olla jossain tapauksissa helpompaa, sillä Render ei edellytä mitään asennuksia omalle koneelle.
 
-Hienoinen ikävä puoli Fly.io:ssa on se, että <i>saatat</i> joutua kertomaan palvelulle luottokorttitietosi vaikka <i>et käytä</i> palvelun maksullista osaa. Renderin käyttöönotto saattaa olla jossain tapauksissa helpompaa, sillä Render ei edellytä mitään asennuksia omalle koneelle.
+On olemassa myös muita palveluja, jotka saattavat toimia hyvin tämän kurssin kanssa, ainakin kaikissa muissa osissa paitsi osassa 11 (CI/CD), jossa saattaa olla yksi hankala harjoitus muille alustoille.
+
+Jotkut kurssin osallistujat ovat käyttäneet seuraavia palveluita:
+
+- [Replit](https://replit.com)
+- [CodeSandBox](https://codesandbox.io)
+
+Jos tiedät helppokäyttöisiä ja ilmaisia palveluita NodeJS:n hostaamiseen, kerro siitä meille!
 
 Molempia ratkaisuja varten muutetaan tiedoston <i>index.js</i> lopussa olevaa sovelluksen käyttämän portin määrittelyä seuraavasti:
 
@@ -88,13 +95,12 @@ app.listen(PORT, () => {
 })
 ```
 
-Nyt käyttöön tulee [ympäristömuuttujassa](https://en.wikipedia.org/wiki/Environment_variable) _PORT_ määritelty portti tai 3001, jos ympäristömuuttuja _PORT_ ei ole määritelty. Sekä Fly.io että Render konfiguroivat sovelluksen portin ympäristömuuttujan avulla.
+Nyt käyttöön tulee [ympäristömuuttujassa](https://en.wikipedia.org/wiki/Environment_variable) _PORT_ määritelty portti tai 3001, jos ympäristömuuttuja _PORT_ ei ole määritelty. Sekä Fly.io:ssa että Renderissä sovelluksen portti on mahdollista konfiguroida ympäristömuuttujan avulla.
 
 #### Fly.io
+<i>Huomaa, että sinun tulee mahdollisesti syöttää Fly.io:hon maksukorttisi numero, ja palvelun käytöstä veloitetaan hinnaston mukaisesti, jos erillistä ilmaista kokeilua ei ole tarjolla.</i>
 
 Jos päätät käyttää [Fly.io](https://fly.io/):ta, aloita asentamalla Fly.io [tämän](https://fly.io/docs/hands-on/install-flyctl/) ohjeen mukaan ja luomalla itsellesi [tunnus](https://fly.io/docs/hands-on/sign-up/) palveluun.
-
-Oletusarvoisesti saat käyttöösi kaksi ilmaista virtuaalikonetta, ja pystyt käynnistämään molempiin yhden sovelluksen.
 
 Aloita [kirjautumalla](https://fly.io/docs/hands-on/sign-in/) komentoriviltä palveluun komennolla 
 
@@ -107,7 +113,7 @@ fly auth login
 Sovelluksen alustus tapahtuu seuraavasti. Mene sovelluksen juurihakemistoon ja anna komento
 
 ```bash
-fly launch
+fly launch --no-deploy
 ```
 
 Anna sovellukselle nimi, tai anna Fly.io:n generoida automaattinen nimi, valitse "region" eli alue, jonka konesalissa sovelluksesi toimii. Älä luo sovellukselle postgres- sekä Upstash Redis-tietokantaa. Lopuksi vielä kysytään "Would you like to deploy now?" eli haluatko että sovellus myös viedään tuotantoympäristöön. Valitse "Ei".
@@ -294,13 +300,17 @@ Toisin kuin sovelluskehitysympäristössä, kaikki sovelluksen tarvitsema löyty
 
 ### Koko sovellus Internetiin
 
-Kun sovelluksen "Internetiin vietävä" tuotantoversio todetaan toimivaksi paikallisesti, commitoidaan frontendin tuotantoversio backendin repositorioon ja pushataan koodi GitHubiin. Jos käytät Renderiä, saattaa automaattinen uudelleenkäynnistys toimia. Jos näin ei ole, käynnistä uusi versio itse dashboardin kautta tekemällä "manual deployment".
+Kun sovelluksen "Internetiin vietävä" tuotantoversio todetaan toimivaksi paikallisesti, voidaan koko sovellus siirtää suoritettavaksi valittuun palveluun.
 
-Fly.io:n tapauksessa sovelluksen uusi versio käynnistyy komennolla
+<strong>Fly.io:n tapauksessa</strong> sovelluksen uusi versio käynnistyy komennolla
 
 ```bash
 fly deploy
 ```
+
+<strong>HUOM:</strong> Projektin juureen luotu _.dockerignore_-tiedosto listaa ne tiedostot, joita ei oteta mukaan deploymentiin, ja dist-kansio saattaa olla siellä mukana oletuksena. Jos näin on, poista viittaus dist/ _.dockerignore_-tiedostosta, jotta sovelluksesi otetaan käyttöön oikein.
+
+<strong>Renderin tapauksessa</strong> commitoidaan frontendin tuotantoversio backendin repositorioon ja pushataan koodi GitHubiin. Automaattinen uudelleenkäynnistys saattaa toimia, mutta jos näin ei ole, käynnistä uusi versio itse dashboardin kautta tekemällä "manual deployment".
 
 Sovellus toimii moitteettomasti lukuun ottamatta vielä backendiin toteuttamatonta muistiinpanon tärkeyden muuttamista:
 
