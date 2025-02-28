@@ -97,7 +97,7 @@ Seuraavaksi tulee määritellä ne IP-osoitteet, joista tietokantaan pääsee k�
 
 ![Valitaan Network access ‑välilehdeltä 'Allow access from anywhere'](../../images/3/mongo4.png)
 
-Lopulta ollaan valmiina ottamaan tietokantayhteys. Valitaan <i>connect</i> ja sen jälkeisestä näkymästä <i>connect your application</i>:
+Lopulta ollaan valmiina ottamaan tietokantayhteys. Yhteyden muodostamiseksi tarvitsemme tietokannan yhteysosoitteen, joka löytyy esimerkiksi valitsemalla <i>connect</i> ja sen jälkeisestä näkymästä <i>connect your application</i>:
 
 ![Valitaan Databases-välilehdeltä 'Connect'](../../images/3/mongo5.png)
 

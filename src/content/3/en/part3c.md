@@ -99,15 +99,13 @@ Next, we have to define the IP addresses that are allowed access to the database
 
 Note: In case the modal menu is different for you, according to MongoDB documentation, adding 0.0.0.0 as an IP allows access from anywhere as well.
   
-Finally, we are ready to connect to our database. Start by clicking <i>connect</i>:
+Finally, we are ready to connect to our database. To do this, we need the database connection string, which can be found by first clicking <i>connect</i> and then  choosing <i>Connect to your application</i>:
 
 ![mongodb database deployment connect](../../images/3/mongo5.png)
 
-and choose: <i>Connect to your application</i>:
+The view displays the <i>MongoDB URI</i>, which is the address of the database that we will supply to the MongoDB client library we will add to our application:
 
 ![mongodb connect application](../../images/3/mongo6.png)
-
-The view displays the <i>MongoDB URI</i>, which is the address of the database that we will supply to the MongoDB client library we will add to our application.
 
 The address looks like this:
 
