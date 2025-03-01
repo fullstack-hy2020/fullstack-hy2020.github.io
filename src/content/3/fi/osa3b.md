@@ -418,13 +418,15 @@ export default defineConfig({
 
 ```
 
-Uudelleenkäynnistyksen jälkeen Reactin sovelluskehitysympäristö toimii [proxynä](https://vitejs.dev/config/server-options.html#server-proxy). Jos React-koodi tekee HTTP-pyynnön palvelimen <i>http://localhost:5173</i> johonkin osoitteeseen, joka ei ole React-sovelluksen vastuulla (eli kyse ei ole esim. sovelluksen JavaScript-koodin tai CSS:n lataamisesta), lähetetään pyyntö edelleen osoitteessa <i>http://localhost:3001</i> olevalle palvelimelle. 
+Uudelleenkäynnistyksen jälkeen Reactin sovelluskehitysympäristö toimii välityspalvelimena eli [proxynä](https://vitejs.dev/config/server-options.html#server-proxy). Jos React-koodi tekee HTTP-pyynnön <i>http://localhost:5173/api</i>-alkuiseen polkuun, lähetetään pyyntö edelleen osoitteessa <i>http://localhost:3001</i> olevalle palvelimelle. Muihin polkuihin tulevat pyynnöt kehityspalvelin käsittelee normaalisti.
 
-Huomaa, että yllä olevassa esimerkkimääritelmässä vain polulla <i>/api</i>-alkuiset pyynnöt välitetään palvelimelle.
+Nyt myös frontend on kunnossa. Se toimii sekä sovelluskehitysmoodissa että tuotannossa yhdessä palvelimen kanssa. Koska frontendin näkökulmasta kaikki pyynnöt suuntautuvat osoitteeseen http://localhost:5173 eli yhteen ja samaan originiin, ei tarvetta backendin cors-middlewarelle enää ole. Poistetaan siis viittaukset cors-kirjastoon backendin <i>index.js</i>-tiedostosta, ja poistetaan <i>cors</i> projektin riippuvuuksista:
 
-Nyt myös frontend on kunnossa. Se toimii sekä sovelluskehitysmoodissa että tuotannossa yhdessä palvelimen kanssa.
+```bash
+npm remove cors
+```
 
-Eräs negatiivinen puoli käyttämässämme lähestymistavassa on, että sovelluksen uuden version tuotantoon vieminen edellyttää erillisessä repositoriossa olevan frontendin koodin tuotantoversion generoimista. Tämä taas hankaloittaa automatisoidun [deployment pipelinen](https://martinfowler.com/bliki/DeploymentPipeline.html) toteuttamista. Deployment pipelinellä tarkoitetaan automatisoitua ja hallittua tapaa viedä koodi sovelluskehittäjän koneelta erilaisten testien ja laadunhallinnallisten vaiheiden kautta tuotantoympäristöön. Aiheeseen tutustutaan kurssin [osassa 11](https://fullstackopen.com/osa11).
+Olemme nyt vieneet koko sovelluksen onnistuneesti internetiin. Eräs negatiivinen puoli käyttämässämme lähestymistavassa on, että sovelluksen uuden version tuotantoon vieminen edellyttää erillisessä repositoriossa olevan frontendin koodin tuotantoversion generoimista. Tämä taas hankaloittaa automatisoidun [deployment pipelinen](https://martinfowler.com/bliki/DeploymentPipeline.html) toteuttamista. Deployment pipelinellä tarkoitetaan automatisoitua ja hallittua tapaa viedä koodi sovelluskehittäjän koneelta erilaisten testien ja laadunhallinnallisten vaiheiden kautta tuotantoympäristöön. Aiheeseen tutustutaan kurssin [osassa 11](https://fullstackopen.com/osa11).
 
 Tähänkin on useita erilaisia ratkaisuja (esim. sekä frontendin että backendin [sijoittaminen samaan repositorioon](https://github.com/mars/heroku-cra-node)), emme kuitenkaan nyt mene niihin. Myös frontendin koodin deployaaminen omana sovelluksenaan voi joissain tilanteissa olla järkevää.
 
