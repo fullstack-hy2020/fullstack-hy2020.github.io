@@ -77,15 +77,11 @@ Read now the chapters on [collections](https://docs.mongodb.com/manual/core/data
 
 Naturally, you can install and run MongoDB on your computer. However, the internet is also full of Mongo database services that you can use. Our preferred MongoDB provider in this course will be [MongoDB Atlas](https://www.mongodb.com/atlas/database).
 
-Once you've created and logged into your account, let us start by selecting the free option:
-
-![mongodb deploy a cloud database free shared](../../images/3/mongo1.png)
-
-Pick the cloud provider and location and create the cluster:
+Once you've created and logged into your account, let's create a new cluster using the button visible on the front page. From the view that opens, select the free plan, determine the cloud provider and data center, and create the cluster:
 
 ![mongodb picking shared, aws and region](../../images/3/mongo2.png)
 
-Let's wait for the cluster to be ready for use. This can take some minutes.
+The provider selected is <i>AWS</i> and the region is <i>Stockholm (eu-north-1)</i>. Note that if you choose something else, your database connection string will be slightly different from this example. Wait for the cluster to be ready, which will take a few minutes.
 
 **NB** do not continue before the cluster is ready.
 
@@ -98,19 +94,19 @@ Next, we have to define the IP addresses that are allowed access to the database
 ![mongodb network access/add ip access list](../../images/3/mongo4.png)
 
 Note: In case the modal menu is different for you, according to MongoDB documentation, adding 0.0.0.0 as an IP allows access from anywhere as well.
-  
-Finally, we are ready to connect to our database. To do this, we need the database connection string, which can be found by first clicking <i>connect</i> and then  choosing <i>Connect to your application</i>:
+
+Finally, we are ready to connect to our database. To do this, we need the database connection string, which can be found by selecting <i>Connect</i> and then <i>Drivers</i> from the view, under the <i>Connect to your application</i> section:
 
 ![mongodb database deployment connect](../../images/3/mongo5.png)
 
 The view displays the <i>MongoDB URI</i>, which is the address of the database that we will supply to the MongoDB client library we will add to our application:
 
-![mongodb connect application](../../images/3/mongo6.png)
+![mongodb connect application](../../images/3/mongo6new.png)
 
 The address looks like this:
 
 ```js
-mongodb+srv://fullstack:thepasswordishere@cluster0.a5qfl.mongodb.net/?retryWrites=true&w=majority
+mongodb+srv://fullstack:thepasswordishere@cluster0.a5qfl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 ```
 
 We are now ready to use the database.
@@ -138,7 +134,7 @@ if (process.argv.length<3) {
 const password = process.argv[2]
 
 const url =
-  `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/?retryWrites=true&w=majority`
+  `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
 
 mongoose.set('strictQuery',false)
 
@@ -186,7 +182,7 @@ Let's destroy the default database <i>test</i> and change the name of the databa
 
 ```js
 const url =
-  `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority`
+  `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0`
 ```
 
 Let's run our code again:
@@ -368,7 +364,7 @@ const password = process.argv[2]
 
 // DO NOT SAVE YOUR PASSWORD TO GITHUB!!
 const url =
-  `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/?retryWrites=true&w=majority`
+  `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
 
 mongoose.set('strictQuery',false)
 mongoose.connect(url)
@@ -384,7 +380,7 @@ const Note = mongoose.model('Note', noteSchema)
 To avoid authentication issues with the password variable in index.js, we need to create a .env file by running npm install dotenv in the command line. Then, let's create the .env file in the root of your directory. In that file, you should place your URI:
 
 ```
-MONGODB_URI="mongodb+srv://fullstack:password@db.gwcmebp.mongodb.net/?retryWrites=true&w=majority&appName=db"
+MONGODB_URI="mongodb+srv://fullstack:yourpassword@cluster0.a5qfl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 ```
 Don't forget to replace the string with your details. 
 Once the .env file is ready, remember to add it to your .gitignore file to prevent pushing the password to Git:
@@ -536,7 +532,7 @@ npm install dotenv
 To use the library, we create a <i>.env</i> file at the root of the project. The environment variables are defined inside of the file, and it can look like this:
 
 ```bash
-MONGODB_URI=mongodb+srv://fullstack:thepasswordishere@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority
+MONGODB_URI=mongodb+srv://fullstack:thepasswordishere@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0
 PORT=3001
 ```
 
@@ -579,7 +575,7 @@ However, a [better option](https://community.fly.io/t/clarification-on-environme
 and set the env value from the command line with the command:
 
 ```bash
-fly secrets set MONGODB_URI="mongodb+srv://fullstack:thepasswordishere@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority"
+fly secrets set MONGODB_URI="mongodb+srv://fullstack:thepasswordishere@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0"
 ```
 
 Since the PORT also is defined in our .env it is actually essential to ignore the file in Fly.io since otherwise the app starts in the wrong port.

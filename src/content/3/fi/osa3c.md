@@ -77,15 +77,11 @@ Lue nyt linkitetty [johdanto](https://github.com/fullstack-hy2020/misc/blob/mast
 
 MongoDB:n voi asentaa paikallisesti omalle koneelle. Internetistä löytyy kuitenkin myös palveluna toimivia Mongoja, joista tämän hetken paras valinta on [MongoDB Atlas](https://www.mongodb.com/atlas/database).
 
-Kun käyttäjätili on luotu ja kirjauduttu, Aloitetaan valitsemalla kokeiluihin sopiva ilmainen vaihtoehto
-
-![Valitaan 'shared', joka on ilmainen](../../images/3/mongo1.png)
-
-Valitaan sopiva pilvipalvelu ja konesali, ja luodaan klusteri:
+Kun käyttäjätili on luotu ja kirjauduttu, luodaan käyttöömme uusi klusteri etusivulla näkyvästä painikkeesta. Avautuvasta näkymästä valitaan kokeiluihin sopiva ilmainen vaihtoehto sekä pilvipalvelu ja konesali, ja luodaan klusteri:
 
 ![Valitaan esim AWS Stockholm ja klikataan Create cluster](../../images/3/mongo2.png)
 
-Odotetaan että klusteri on valmiina, mihin menee noin useita minuutteja.
+Provideriksi on valittu _AWS_ ja Regioniksi _Stockholm (eu-north-1)_. Huomaa, että jos valitset näihin jotakin muuta, tulee tietokannan yhteysosoitteesi olemaan hieman erilainen kuin tässä esimerkissä. Odotetaan että klusteri on valmiina, mihin menee joitakin minuutteja.
 
 **HUOM:** Älä jatka eteenpäin ennen kun klusteri on valmis!
 
@@ -97,7 +93,7 @@ Seuraavaksi tulee määritellä ne IP-osoitteet, joista tietokantaan pääsee k�
 
 ![Valitaan Network access ‑välilehdeltä 'Allow access from anywhere'](../../images/3/mongo4.png)
 
-Lopulta ollaan valmiina ottamaan tietokantayhteys. Yhteyden muodostamiseksi tarvitsemme tietokannan yhteysosoitteen, joka löytyy esimerkiksi valitsemalla <i>connect</i> ja sen jälkeisestä näkymästä <i>connect your application</i>:
+Lopulta ollaan valmiina ottamaan tietokantayhteys. Yhteyden muodostamiseksi tarvitaan tietokannan yhteysosoite, joka löytyy esimerkiksi valitsemalla <i>connect</i> ja sen jälkeisestä näkymästä <i>Connect your application</i>-osiosta kohta <i>Drivers</i>:
 
 ![Valitaan Databases-välilehdeltä 'Connect'](../../images/3/mongo5.png)
 
@@ -108,7 +104,7 @@ Näkymä kertoo <i>MongoDB URI:n</i> eli osoitteen, jonka avulla sovelluksemme k
 Osoite näyttää seuraavalta:
 
 ```bash
-mongodb+srv://fullstack:thepasswordishere@cluster0.a5qfl.mongodb.net/?retryWrites=true&w=majority
+mongodb+srv://fullstack:thepasswordishere@cluster0.a5qfl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 ```
 
 Olemme nyt valmiina kannan käyttöön.
@@ -136,7 +132,7 @@ if (process.argv.length<3) {
 const password = process.argv[2]
 
 const url =
-  `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/?retryWrites=true&w=majority`
+  `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
 
 mongoose.set('strictQuery', false)
 mongoose.connect(url)
@@ -179,7 +175,7 @@ Tuhotaan oletusarvoisen nimen saanut kanta <i>test</i>. Päätetään käyttää
 
 ```js
 const url =
-  `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority`
+  `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0`
 ```
 
 Suoritetaan ohjelma uudelleen:
@@ -359,7 +355,7 @@ const mongoose = require('mongoose')
 
 // ÄLÄ KOSKAAN TALLETA SALASANOJA GitHubiin!
 const url =
-  `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/?retryWrites=true&w=majority`
+  `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
 
 mongoose.set('strictQuery',false)
 mongoose.connect(url)
@@ -503,7 +499,7 @@ npm install dotenv
 Sovelluksen juurihakemistoon tehdään sitten tiedosto nimeltään <i>.env</i>, jonne tarvittavien ympäristömuuttujien arvot määritellään. Tiedosto näyttää seuraavalta:
 
 ```bash
-MONGODB_URI=mongodb+srv://fullstack:thepasswordishere@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority
+MONGODB_URI=mongodb+srv://fullstack:thepasswordishere@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0
 PORT=3001
 ```
 
@@ -548,7 +544,7 @@ Koska Fly.io ei hyödynnä gitiä, menee myös .env-tiedosto Fly.io:n palvelimel
 ja asettaa ympäristömuuttujan arvo komennolla:
 
 ```
-fly secrets set MONGODB_URI='mongodb+srv://fullstack:thepasswordishere@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority'
+fly secrets set MONGODB_URI='mongodb+srv://fullstack:thepasswordishere@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0'
 ```
 
 Koska .env-tiedosto määrittelee myös ympäristömuuttujan PORT arvon, on .env:in ignorointi oikeastaan välttämätöntä jotta sovellus ei yritä käynnistää itseään väärään portiin.
