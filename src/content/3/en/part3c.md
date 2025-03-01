@@ -126,15 +126,14 @@ Let's not add any code dealing with Mongo to our backend just yet. Instead, let'
 ```js
 const mongoose = require('mongoose')
 
-if (process.argv.length<3) {
+if (process.argv.length < 3) {
   console.log('give password as argument')
   process.exit(1)
 }
 
 const password = process.argv[2]
 
-const url =
-  `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
+const url = `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
 
 mongoose.set('strictQuery',false)
 
@@ -181,8 +180,7 @@ As the view states, the <i>document</i> matching the note has been added to the 
 Let's destroy the default database <i>test</i> and change the name of the database referenced in our connection string to <i>noteApp</i> instead, by modifying the URI:
 
 ```js
-const url =
-  `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0`
+const url = `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0`
 ```
 
 Let's run our code again:
@@ -569,7 +567,7 @@ Creating a new note is accomplished like this:
 app.post('/api/notes', (request, response) => {
   const body = request.body
 
-  if (body.content === undefined) {
+  if (!body.content) {
     return response.status(400).json({ error: 'content missing' })
   }
 

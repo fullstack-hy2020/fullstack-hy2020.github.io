@@ -124,15 +124,14 @@ Ei lisätä MongoDB:tä käsittelevää koodia heti backendin koodin sekaan, vaa
 ```js
 const mongoose = require('mongoose')
 
-if (process.argv.length<3) {
+if (process.argv.length < 3) {
   console.log('give password as argument')
   process.exit(1)
 }
 
 const password = process.argv[2]
 
-const url =
-  `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
+const url = `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
 
 mongoose.set('strictQuery', false)
 mongoose.connect(url)
@@ -174,8 +173,7 @@ Kuten näkymä kertoo, on muistiinpanoa vastaava <i>dokumentti</i> lisätty tiet
 Tuhotaan oletusarvoisen nimen saanut kanta <i>test</i>. Päätetään käyttää tietokannasta nimeä <i>noteApp</i>, joten muutetaan tietokanta-URI muotoon
 
 ```js
-const url =
-  `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0`
+const url = `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0`
 ```
 
 Suoritetaan ohjelma uudelleen:
@@ -562,7 +560,7 @@ Uuden muistiinpanon luominen tapahtuu seuraavasti:
 app.post('/api/notes', (request, response) => {
   const body = request.body
 
-  if (body.content === undefined) {
+  if (!body.content) {
     return response.status(400).json({ error: 'content missing' })
   }
 
