@@ -353,9 +353,10 @@ Aloitetaan nopean kaavan mukaan, copy-pastetaan tiedostoon <i>index.js</i> Mongo
 ```js
 const mongoose = require('mongoose')
 
+
 // ÄLÄ KOSKAAN TALLETA SALASANOJA GitHubiin!
-const url =
-  `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
+const password = process.argv[2]
+const url = `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0`
 
 mongoose.set('strictQuery',false)
 mongoose.connect(url)
@@ -378,7 +379,7 @@ app.get('/api/notes', (request, response) => {
 })
 ```
 
-Voimme todeta selaimella, että backend toimii kaikkien dokumenttien näyttämisen osalta:
+Käynnistetään nyt backend komennolla <code>node --watch index.js yourpassword</code>, jotta voimme varmistua koodin toimivuudesta. Voimme todeta selaimella, että backend toimii kaikkien dokumenttien näyttämisen osalta:
 
 ![Mongoon tallennetut muistiinpanot renderöityvät selaimeen JSON-muodossa](../../images/3/44ea.png)
 
@@ -518,9 +519,9 @@ Muutetaan nyt tiedostoa <i>index.js</i> seuraavasti:
 ```js
 require('dotenv').config() // highlight-line
 const express = require('express')
-const app = express()
-const Note = require('./models/note') // highlight-line
+const Note = require('./models/note')
 
+const app = express()
 // ..
 
 const PORT = process.env.PORT // highlight-line
@@ -531,7 +532,7 @@ app.listen(PORT, () => {
 
 On tärkeää, että <i>dotenv</i> otetaan käyttöön ennen modelin <i>note</i> importtaamista. Tällöin varmistutaan siitä, että tiedostossa <i>.env</i> olevat ympäristömuuttujat ovat alustettuja kun moduulin koodia importoidaan.
 
-### Tärkeä huomio Fly.io:n käyttäjille 
+### Tärkeä huomio ympäristömuuttujista 
 
 Koska Fly.io ei hyödynnä gitiä, menee myös .env-tiedosto Fly.io:n palvelimelle, ja ympäristömuuttujien arvo välittyy myös sinne.
 
@@ -546,8 +547,6 @@ ja asettaa ympäristömuuttujan arvo komennolla:
 ```
 fly secrets set MONGODB_URI='mongodb+srv://fullstack:thepasswordishere@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0'
 ```
-
-Koska .env-tiedosto määrittelee myös ympäristömuuttujan PORT arvon, on .env:in ignorointi oikeastaan välttämätöntä jotta sovellus ei yritä käynnistää itseään väärään portiin.
 
 Renderiä käytettäessä tietokannan osoitteen kertova ympäristömuuttuja määritellään dashboardista käsin:
 

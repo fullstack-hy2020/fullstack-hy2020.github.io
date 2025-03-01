@@ -360,11 +360,9 @@ Let's get a quick start by copy-pasting the Mongoose definitions to the <i>index
 ```js
 const mongoose = require('mongoose')
 
-const password = process.argv[2]
-
 // DO NOT SAVE YOUR PASSWORD TO GITHUB!!
-const url =
-  `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
+const password = process.argv[2]
+const url = `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0`
 
 mongoose.set('strictQuery',false)
 mongoose.connect(url)
@@ -377,25 +375,6 @@ const noteSchema = new mongoose.Schema({
 const Note = mongoose.model('Note', noteSchema)
 ```
 
-To avoid authentication issues with the password variable in index.js, we need to create a .env file by running npm install dotenv in the command line. Then, let's create the .env file in the root of your directory. In that file, you should place your URI:
-
-```
-MONGODB_URI="mongodb+srv://fullstack:yourpassword@cluster0.a5qfl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-```
-Don't forget to replace the string with your details. 
-Once the .env file is ready, remember to add it to your .gitignore file to prevent pushing the password to Git:
-
-```
-/node_modules
-.env
-```
-Then, in your index.js file, make the necessary changes with the following line so that your code can access the URL in your .env file:
-
-```
-const url = process.env.MONGODB_URI;
-
-```
-
 Let's change the handler for fetching all notes to the following form:
 
 ```js
@@ -406,17 +385,13 @@ app.get('/api/notes', (request, response) => {
 })
 ```
 
-We can verify in the browser that the backend works for displaying all of the documents:
+Let's start the backend with the command <code>node --watch index.js yourpassword</code> so we can verify in the browser that the backend correctly displays all notes saved to the database:
 
 ![api/notes in browser shows notes in JSON](../../images/3/44ea.png)
 
 The application works almost perfectly. The frontend assumes that every object has a unique id in the <i>id</i> field. We also don't want to return the mongo versioning field <i>\_\_v</i> to the frontend.
 
-One way to format the objects returned by Mongoose is to [modify](https://stackoverflow.com/questions/7034848/mongodb-output-id-instead-of-id) the _toJSON_ method of the schema, which is used on all instances of the models produced with that schema.
-  
-To modify the method we need to change the configurable options of the schema, options can be changed using the set method of the schema, see here for more info on this method: https://mongoosejs.com/docs/guide.html#options. See <https://mongoosejs.com/docs/guide.html#toJSON> and <https://mongoosejs.com/docs/api.html#document_Document-toObject> for more info on the _toJSON_ option.
-  
-see <https://mongoosejs.com/docs/api/document.html#transform> for more info on the _transform_ function.
+One way to format the objects returned by Mongoose is to [modify](https://stackoverflow.com/questions/7034848/mongodb-output-id-instead-of-id) the _toJSON_ method of the schema, which is used on all instances of the models produced with that schema. Modification can be done as follows:
 
 ```js
 noteSchema.set('toJSON', {
@@ -549,9 +524,9 @@ Let's change the <i>index.js</i> file in the following way:
 ```js
 require('dotenv').config() // highlight-line
 const express = require('express')
-const app = express()
-const Note = require('./models/note') // highlight-line
+const Note = require('./models/note')
 
+const app = express()
 // ..
 
 const PORT = process.env.PORT // highlight-line
@@ -562,7 +537,7 @@ app.listen(PORT, () => {
 
 It's important that <i>dotenv</i> gets imported before the <i>note</i> model is imported. This ensures that the environment variables from the <i>.env</i> file are available globally before the code from the other modules is imported.
 
-### Important note to Fly.io users
+### Important note about environment variables
 
 Because GitHub is not used with Fly.io, the file .env also gets to the Fly.io servers when the app is deployed. Because of this, the env variables defined in the file will be available there.
 
@@ -577,8 +552,6 @@ and set the env value from the command line with the command:
 ```bash
 fly secrets set MONGODB_URI="mongodb+srv://fullstack:thepasswordishere@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0"
 ```
-
-Since the PORT also is defined in our .env it is actually essential to ignore the file in Fly.io since otherwise the app starts in the wrong port.
 
 When using Render, the database url is given by defining the proper env in the dashboard:
 
