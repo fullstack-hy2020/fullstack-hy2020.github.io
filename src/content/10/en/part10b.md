@@ -202,7 +202,7 @@ export default RepositoryList;
 
 ### Style
 
-Now that we have a basic understanding of how core components work and we can use them to build a simple user interface it is time to add some style. In [part 2](/en/part2/adding_styles_to_react_app) we learned that in the browser environment we can define React component's style properties using CSS. We had the option to either define these styles inline using the <em>style</em> prop or in a CSS file with a suitable selector.
+Now that we have a basic understanding of how core components work and we can use them to build a simple user interface it is time to add some styles. In [part 2](/en/part2/adding_styles_to_react_app) we learned that in the browser environment we can define React component's style properties using CSS. We had the option to either define these styles inline using the <em>style</em> prop or in a CSS file with a suitable selector.
 
 There are many similarities in the way style properties are attached to React Native's core components and the way they are attached to DOM elements. In React Native most of the core components accept a prop called <em>style</em>. The <em>style</em> prop accepts an object with style properties and their values. These style properties are in most cases the same as in CSS, however, property names are in <i>camelCase</i>. This means that CSS properties such as <em>padding-top</em> and <em>font-size</em> are written as <em>paddingTop</em> and <em>fontSize</em>. Here is a simple example of how to use the <em>style</em> prop:
 
