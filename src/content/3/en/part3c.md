@@ -471,10 +471,6 @@ This way the _Note_ variable will be assigned to the same object that the module
 The way that the connection is made has changed slightly:
 
 ```js
-const url = process.env.MONGODB_URI
-
-console.log('connecting to', url)
-
 mongoose.connect(url)
   .then(result => {
     console.log('connected to MongoDB')
@@ -484,11 +480,17 @@ mongoose.connect(url)
   })
 ```
 
-It's not a good idea to hardcode the address of the database into the code, so instead the address of the database is passed to the application via the <em>MONGODB_URI</em> environment variable.
-
 The method for establishing the connection is now given functions for dealing with a successful and unsuccessful connection attempt. Both functions just log a message to the console about the success status:
 
 ![node output when wrong username/password](../../images/3/45e.png)
+
+It's also not a good idea to hardcode the address of the database into the code, so the url is obtained differently: the address of the database is passed to the application via the <em>MONGODB_URI</em> environment variable:
+
+```js
+const url = process.env.MONGODB_URI
+
+console.log('connecting to', url)
+```
 
 There are many ways to define the value of an environment variable. One way would be to define it when the application is started:
 
