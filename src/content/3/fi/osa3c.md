@@ -464,10 +464,6 @@ Näin muuttuja _Note_ saa arvokseen saman olion, jonka moduuli määrittelee.
 Yhteyden muodostustavassa on pieni muutos aiempaan:
 
 ```js
-const url = process.env.MONGODB_URI
-
-console.log('connecting to', url)
-
 mongoose.connect(url)
   .then(result => {
     console.log('connected to MongoDB')
@@ -477,11 +473,17 @@ mongoose.connect(url)
   })
 ```
 
-Tietokannan osoitetta ei kannata kirjoittaa koodiin, joten osoite annetaan sovellukselle ympäristömuuttujan <em>MONGODB_URI</em> välityksellä.
-
 Yhteyden muodostavalle metodille on nyt rekisteröity onnistuneen ja epäonnistuneen yhteydenmuodostuksen käsittelevät funktiot, jotka tulostavat konsoliin tiedon siitä, onnistuiko yhteyden muodostaminen:
 
 ![Konsoliin tulostuu virheilmoitus 'error connecting to Mongo, bad auth'](../../images/3/45e.png)
+
+Ei ole myöskään hyvä idea kovakoodata tietokannan osoitetta koodiin, joten tietokannan osoite välitetään sovellukselle <em>MONGODB_URI</em> ympäristömuuttujan kautta:
+
+```js
+const url = process.env.MONGODB_URI
+
+console.log('connecting to', url)
+```
 
 On useita tapoja määritellä ympäristömuuttujan arvo. Voimme esim. antaa sen ohjelman käynnistyksen yhteydessä seuraavasti:
 
@@ -512,7 +514,7 @@ Määrittelimme samalla aiemmin kovakoodaamamme sovelluksen käyttämän portin 
 
 dotenvissä määritellyt ympäristömuuttujat otetaan koodissa käyttöön komennolla <em>require('dotenv').config()</em> ja niihin viitataan Nodessa kuten "normaaleihin" ympäristömuuttujiin syntaksilla <em>process.env.MONGODB_URI</em>.
 
-Muutetaan nyt tiedostoa <i>index.js</i> seuraavasti:
+Ladataan ympäristömuuttujat käyttöön heti <i>index.js</i>-tiedoston alussa, jolloin ne tulevat käyttöön koko sovellukselle. Muutetaan nyt tiedostoa <i>index.js</i> seuraavasti:
 
 ```js
 require('dotenv').config() // highlight-line

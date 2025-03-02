@@ -519,7 +519,7 @@ We also added the hardcoded port of the server into the <em>PORT</em> environmen
 
 The environment variables defined in the <i>.env</i> file can be taken into use with the expression <em>require('dotenv').config()</em> and you can reference them in your code just like you would reference normal environment variables, with the <em>process.env.MONGODB_URI</em> syntax.
 
-Let's change the <i>index.js</i> file in the following way:
+Let's load the environment variables at the beginning of the index.js file so that they are available throughout the entire application. Let's change the <i>index.js</i> file in the following way:
 
 ```js
 require('dotenv').config() // highlight-line
