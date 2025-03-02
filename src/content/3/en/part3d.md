@@ -376,6 +376,8 @@ The VS Code ESlint plugin will underline style violations with a red line:
 
 This makes errors easy to spot and fix right away.
 
+**NB:** After installing the VSCode ESLint plugin, you may have to go to the <code>settings.json</code> file and ensure that the <code>eslint.validate</code> array has the value <code>"javascript"</code> inside it for it to actively start tracking your javascript files for errors.
+
 ESlint has a vast array of [rules](https://eslint.org/docs/rules/) that are easy to take into use by editing the _eslint.config.mjs_ file.
 
 Let's add the [eqeqeq](https://eslint.org/docs/rules/eqeqeq) rule that warns us if equality is checked with anything but the triple equals operator. The rule is added under the rules field in the configuration file.
