@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[53],{dQoe:function(e,a,t){"use strict";t.r(a);var r=t("q1tI"),l=t.n(r),n=t("D9jW");a.default=e=>{let{data:a}=e;return l.a.createElement(n.a,{localSearch:a.localSearchPortuguese,title:"Pesquise no material",inputPlaceholder:"Pesquisar",lang:"ptbr"})}}}]);
+//# sourceMappingURL=component---src-pages-search-ptbr-js-ac35b648256abeaf4957.js.map
