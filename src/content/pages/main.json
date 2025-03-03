@@ -4,7 +4,7 @@
     "intro": "Ota haltuusi React, Redux, Node.js, MongoDB, GraphQL ja TypeScript! Kurssilla tutustutaan JavaScriptilla tapahtuvaan moderniin websovelluskehitykseen. Pääpaino on React-kirjaston avulla toteutettavissa single page -sovelluksissa, ja niitä tukevissa Node.js:llä toteutetuissa REST-rajapinnoissa.",
     "current": [
       "Kurssilla ei ole enää vuosittaisia versiota, kurssi jatkuu katkeamattomasti ilman taukoja. Lue <a href='/osa0/yleista#ei-enaa-vuosittaisia-versioita'>täältä</a> lisää!",
-      "Kurssiin liittyvää keskustelua Discordissa, kanavalla <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a>, tule mukaan! <ul><li>Katso <a href='/en/part0/general_info#how-to-ask-help-in-discord'>täältä</a> miten kanavalla kysytyt kysymykset kannattaa muotoilla</li><li>Huom: kaikki epäasialliset, halventavat ja jotain ihmisryhmää syrjivät kommentit kanavalla ovat kiellettyjä ja tällaisten kommenttien esittäjät poistetaan kanavalta.</li></ul>",
+      "Kurssiin liittyvää keskustelua Discordissa, kanavalla <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a>, tule mukaan! <ul><li>Katso <a href='/en/part0/general_info#how-to-get-help-in-discord'>täältä</a> miten kanavalla kysytyt kysymykset kannattaa muotoilla</li><li>Huom: kaikki epäasialliset, halventavat ja jotain ihmisryhmää syrjivät kommentit kanavalla ovat kiellettyjä ja tällaisten kommenttien esittäjät poistetaan kanavalta.</li></ul>",
       "Yhteistyökumppaneina kurssilla on <a href='https://www.houston-inc.com/'>Houston Inc</a>, <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>, <a href='https://elisa.fi/'>Elisa</a>, <a href='https://www.instagram.com/unitytechnologies/?hl=en'>Unity Technologies</a>, <a href='https://careers.konecranes.com/Konecranes/'>Konecranes</a> ja <a href='https://www.smartly.io/'>Smartly.io</a>. Katso <a href='https://www.youtube.com/playlist?list=PLumQiZ25uijis31zaRL7rhzLalSwLqUtm'>täältä</a> yhteistyökumppaniemme asiantuntijoiden vierailuluentoja kurssin aihepiireistä."
     ],
     "notice": "Huom: kaikki epäasialliset, halventavat ja jotain ihmisryhmää syrjivät kommentit kanavalla ovat kiellettyjä ja tällaisten kommenttien esittäjät poistetaan kanavalta.",
@@ -23,7 +23,7 @@
     "current": [
       "<em>Questions about the course? Read carefully <a href='/en/part0/general_info'>Part 0</a>, that has an answer to most of them...</em>",
       "No more yearly versions, the course just continues without any break! See <a href='/en/part0/general_info/#no-more-yearly-versions'>here</a> for more details.",
-      "You can discuss the course and related topics in our dedicated group on Discord <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a>. Please join the conversation! <ul><li>See <a href='/en/part0/general_info#how-to-ask-help-in-discord'>here</a> how to ask questions in a proper way</li><ul>"
+      "You can discuss the course and related topics in our dedicated group on Discord <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a>. Please join the conversation! <ul><li>See <a href='/en/part0/general_info#how-to-get-help-in-discord'>here</a> how to ask questions in a proper way</li><ul>"
     ],
     "notice": "NB: Inappropriate, degrading and discriminatory comments are strictly forbidden on the channel, and anyone who sends these types of messages will be permanently removed from the discussion.",
     "licence": [
@@ -41,7 +41,7 @@
     "current": [
       "<em>¿Preguntas sobre el curso? Lee cuidadosamente la <a href='/es/part0/informacion_general'>Parte 0</a>, que contiene respuestas a la mayoría de ellas...</em>",
       "No más versiones anuales, ¡el curso simplemente continua sin interrupciones! Más detalles <a href='/en/part0/general_info/#no-more-yearly-versions'>aquí</a>",
-      "Puedes discutir el curso y temas relacionados en nuestro grupo dedicado en Discord <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a>. ¡Únete a la conversación! <ul><li>Mira <a href='/en/part0/general_info#how-to-ask-help-in-discord'>¿cómo hacer preguntas apropiadamente?</a></li><ul>"
+      "Puedes discutir el curso y temas relacionados en nuestro grupo dedicado en Discord <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a>. ¡Únete a la conversación! <ul><li>Mira <a href='/en/part0/general_info#how-to-get-help-in-discord'>¿cómo hacer preguntas apropiadamente?</a></li><ul>"
     ],
     "notice": "Nota: Los comentarios inapropiados, degradantes y discriminatorios están estrictamente prohibidos en el canal, y cualquiera que envíe este tipo de mensajes será eliminado permanentemente de la discusión.",
     "licence": [

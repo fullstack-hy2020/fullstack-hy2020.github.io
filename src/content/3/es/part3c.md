@@ -922,7 +922,7 @@ El desarrollo full stack es <i>extremadamente difícil</i>, por eso utilizaré t
 - Progresaré con pequeños pasos.
 - Escribiré muchas declaraciones de _console.log_ para asegurarme de entender cómo se comporta el código y ayudar a señalar problemas.
 - Si mi código no funciona, no escribiré más código. En su lugar, comenzaré a eliminar código hasta que funcione o simplemente regresaré a un estado en el que todo aún funcionaba.
-- Cuando pida ayuda en el canal de Discord del curso o en cualquier otro lugar, formularé mis preguntas correctamente, consulta [aquí](https://fullstackopen.com/en/part0/general_info#how-to-ask-help-in-discord) cómo pedir ayuda.
+- Cuando pida ayuda en el canal de Discord del curso o en cualquier otro lugar, formularé mis preguntas correctamente, consulta [aquí](https://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord) cómo pedir ayuda.
 
 </div>
 
