@@ -422,7 +422,7 @@ mongoose.set('strictQuery', false)
 
 const url = process.env.MONGODB_URI // highlight-line
 
-console.log('connecting to', url) // highlight-line
+console.log('connecting to', url)
 mongoose.connect(url)
   // highlight-start
   .then(result => {
@@ -449,17 +449,19 @@ noteSchema.set('toJSON', {
 module.exports = mongoose.model('Note', noteSchema) // highlight-line
 ```
 
-Noden [moduulien](https://nodejs.org/docs/latest-v8.x/api/modules.html) määrittely poikkeaa hiukan osassa 2 määrittelemistämme frontendin käyttämistä [ES6-moduuleista](/osa2/kokoelmien_renderointi_ja_moduulit#refaktorointia-moduulit).
-
-Moduulin ulos näkyvä osa määritellään asettamalla arvo muuttujalle _module.exports_. Asetamme arvoksi modelin <i>Note</i>. Muut moduulin sisällä määritellyt asiat, esim. muuttujat _mongoose_ ja _url_ eivät näy moduulin käyttäjälle.
-
-Moduulin käyttöönotto tapahtuu lisäämällä tiedostoon <i>index.js</i> seuraava rivi:
+Koodissa on jonkin verran muutoksia aiempaan. Tietokannan yhteysosoite välitetään sovellukselle nyt MONGODB_URI ympäristömuuttujan kautta, koska sen kovakoodaaminen sovellukseen ei ole järkevää:
 
 ```js
-const Note = require('./models/note')
+const url = process.env.MONGODB_URI
 ```
 
-Näin muuttuja _Note_ saa arvokseen saman olion, jonka moduuli määrittelee.
+On useita tapoja määritellä ympäristömuuttujan arvo. Voimme esim. antaa sen ohjelman käynnistyksen yhteydessä seuraavasti:
+
+```bash
+MONGODB_URI="osoite_tahan" npm run dev
+```
+
+Opettelemme pian kehittyneemmän tavan määritellä ympäristömuuttujia.
 
 Yhteyden muodostustavassa on pieni muutos aiempaan:
 
@@ -477,27 +479,27 @@ Yhteyden muodostavalle metodille on nyt rekisteröity onnistuneen ja epäonnistu
 
 ![Konsoliin tulostuu virheilmoitus 'error connecting to Mongo, bad auth'](../../images/3/45e.png)
 
-Ei ole myöskään hyvä idea kovakoodata tietokannan osoitetta koodiin, joten tietokannan osoite välitetään sovellukselle <em>MONGODB_URI</em> ympäristömuuttujan kautta:
+Noden [moduulien](https://nodejs.org/docs/latest-v8.x/api/modules.html) määrittely poikkeaa hiukan osassa 2 määrittelemistämme frontendin käyttämistä [ES6-moduuleista](/osa2/kokoelmien_renderointi_ja_moduulit#refaktorointia-moduulit).
+
+Moduulin ulos näkyvä osa määritellään asettamalla arvo muuttujalle _module.exports_. Asetamme arvoksi modelin <i>Note</i>. Muut moduulin sisällä määritellyt asiat, esim. muuttujat _mongoose_ ja _url_ eivät näy moduulin käyttäjälle.
+
+Moduulin käyttöönotto tapahtuu lisäämällä tiedostoon <i>index.js</i> seuraava rivi:
 
 ```js
-const url = process.env.MONGODB_URI
-
-console.log('connecting to', url)
+const Note = require('./models/note')
 ```
 
-On useita tapoja määritellä ympäristömuuttujan arvo. Voimme esim. antaa sen ohjelman käynnistyksen yhteydessä seuraavasti:
+Näin muuttuja _Note_ saa arvokseen saman olion, jonka moduuli määrittelee.
 
-```bash
-MONGODB_URI=osoite_tahan npm run dev
-```
+### Ympäristömuuttujien määritteleminen käyttäen dotenv-kirjastoa
 
-Eräs kehittyneempi tapa on käyttää [dotenv](https://github.com/motdotla/dotenv#readme)-kirjastoa. Asennetaan kirjasto komennolla
+Eräs kehittyneempi tapa ympäristömuuttujien määrittelemiseen on käyttää [dotenv](https://github.com/motdotla/dotenv#readme)-kirjastoa. Asennetaan kirjasto komennolla
 
 ```bash
 npm install dotenv
 ```
 
-Sovelluksen juurihakemistoon tehdään sitten tiedosto nimeltään <i>.env</i>, jonne tarvittavien ympäristömuuttujien arvot määritellään. Tiedosto näyttää seuraavalta:
+Luodaan sitten sovelluksen juurihakemistoon tiedosto nimeltään <i>.env</i>, jonne tarvittavien ympäristömuuttujien arvot määritellään. Tiedosto näyttää seuraavalta:
 
 ```bash
 MONGODB_URI=mongodb+srv://fullstack:thepasswordishere@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0
@@ -519,7 +521,7 @@ Ladataan ympäristömuuttujat käyttöön heti <i>index.js</i>-tiedoston alussa,
 ```js
 require('dotenv').config() // highlight-line
 const express = require('express')
-const Note = require('./models/note')
+const Note = require('./models/note') // highlight-line
 
 const app = express()
 // ..
@@ -532,9 +534,9 @@ app.listen(PORT, () => {
 
 On tärkeää, että <i>dotenv</i> otetaan käyttöön ennen modelin <i>note</i> importtaamista. Tällöin varmistutaan siitä, että tiedostossa <i>.env</i> olevat ympäristömuuttujat ovat alustettuja kun moduulin koodia importoidaan.
 
-### Tärkeä huomio ympäristömuuttujista 
+#### Tärkeä huomio ympäristömuuttujien määrittelemisestä Fly.io:ssa ja Renderissä
 
-Koska Fly.io ei hyödynnä gitiä, menee myös .env-tiedosto Fly.io:n palvelimelle, ja ympäristömuuttujien arvo välittyy myös sinne.
+**Fly.io:n käyttäjät:** Koska Fly.io ei hyödynnä gitiä, menee myös .env-tiedosto Fly.io:n palvelimelle, ja ympäristömuuttujien arvo välittyy myös sinne.
 
 [Tietoturvallisempi vaihtoehto](https://community.fly.io/t/clarification-on-environment-variables/6309) on kuitenkin estää tiedoston .env siirtyminen Fly.io:n tekemällä hakemiston juureen tiedosto _.dockerignore_, jolla on sisältö
 
@@ -548,7 +550,7 @@ ja asettaa ympäristömuuttujan arvo komennolla:
 fly secrets set MONGODB_URI='mongodb+srv://fullstack:thepasswordishere@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0'
 ```
 
-Renderiä käytettäessä tietokannan osoitteen kertova ympäristömuuttuja määritellään dashboardista käsin:
+**Renderin käyttäjät:** Renderiä käytettäessä tietokannan osoitteen kertova ympäristömuuttuja määritellään dashboardista käsin:
 
 ![](../../images/3/render-env.png)
 

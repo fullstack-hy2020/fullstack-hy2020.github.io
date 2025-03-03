@@ -428,8 +428,7 @@ mongoose.set('strictQuery', false)
 
 const url = process.env.MONGODB_URI // highlight-line
 
-console.log('connecting to', url) // highlight-line
-
+console.log('connecting to', url)
 mongoose.connect(url)
 // highlight-start
   .then(result => {
@@ -456,17 +455,19 @@ noteSchema.set('toJSON', {
 module.exports = mongoose.model('Note', noteSchema) // highlight-line
 ```
 
-Defining Node [modules](https://nodejs.org/docs/latest-v18.x/api/modules.html) differs slightly from the way of defining [ES6 modules](/en/part2/rendering_a_collection_modules#refactoring-modules) in part 2.
-
-The public interface of the module is defined by setting a value to the _module.exports_ variable. We will set the value to be the <i>Note</i> model. The other things defined inside of the module, like the variables _mongoose_ and _url_ will not be accessible or visible to users of the module.
-
-Importing the module happens by adding the following line to <i>index.js</i>:
+There are some changes in the code compared to before. The database connection URL is now passed to the application via the MONGODB_URI environment variable, as hardcoding it into the application is not a good idea:
 
 ```js
-const Note = require('./models/note')
+const url = process.env.MONGODB_URI
 ```
 
-This way the _Note_ variable will be assigned to the same object that the module defines.
+There are many ways to define the value of an environment variable. For example, we can define it when starting the application as follows:
+
+```bash
+MONGODB_URI="your_connection_string_here" npm run dev
+```
+
+We will soon learn a more sophisticated way to define environment variables.
 
 The way that the connection is made has changed slightly:
 
@@ -484,21 +485,22 @@ The method for establishing the connection is now given functions for dealing wi
 
 ![node output when wrong username/password](../../images/3/45e.png)
 
-It's also not a good idea to hardcode the address of the database into the code, so the url is obtained differently: the address of the database is passed to the application via the <em>MONGODB_URI</em> environment variable:
+
+Defining Node [modules](https://nodejs.org/docs/latest-v18.x/api/modules.html) differs slightly from the way of defining [ES6 modules](/en/part2/rendering_a_collection_modules#refactoring-modules) in part 2.
+
+The public interface of the module is defined by setting a value to the _module.exports_ variable. We will set the value to be the <i>Note</i> model. The other things defined inside of the module, like the variables _mongoose_ and _url_ will not be accessible or visible to users of the module.
+
+Importing the module happens by adding the following line to <i>index.js</i>:
 
 ```js
-const url = process.env.MONGODB_URI
-
-console.log('connecting to', url)
+const Note = require('./models/note')
 ```
 
-There are many ways to define the value of an environment variable. One way would be to define it when the application is started:
+This way the _Note_ variable will be assigned to the same object that the module defines.
 
-```bash
-MONGODB_URI=address_here npm run dev
-```
+### Defining environment variables using the dotenv library
 
-A more sophisticated way is to use the [dotenv](https://github.com/motdotla/dotenv#readme) library. You can install the library with the command:
+A more sophisticated way to define environment variables is to use the [dotenv](https://github.com/motdotla/dotenv#readme) library. You can install the library with the command:
 
 ```bash
 npm install dotenv
@@ -524,7 +526,7 @@ Let's load the environment variables at the beginning of the index.js file so th
 ```js
 require('dotenv').config() // highlight-line
 const express = require('express')
-const Note = require('./models/note')
+const Note = require('./models/note') // highlight-line
 
 const app = express()
 // ..
@@ -537,9 +539,9 @@ app.listen(PORT, () => {
 
 It's important that <i>dotenv</i> gets imported before the <i>note</i> model is imported. This ensures that the environment variables from the <i>.env</i> file are available globally before the code from the other modules is imported.
 
-### Important note about environment variables
+#### Important note about defining environment variables in Fly.io and Render
 
-Because GitHub is not used with Fly.io, the file .env also gets to the Fly.io servers when the app is deployed. Because of this, the env variables defined in the file will be available there.
+**Fly.io users:** Because GitHub is not used with Fly.io, the file .env also gets to the Fly.io servers when the app is deployed. Because of this, the env variables defined in the file will be available there.
 
 However, a [better option](https://community.fly.io/t/clarification-on-environment-variables/6309) is to prevent .env from being copied to Fly.io by creating in the project root the file _.dockerignore_, with the following contents
 
@@ -553,7 +555,7 @@ and set the env value from the command line with the command:
 fly secrets set MONGODB_URI="mongodb+srv://fullstack:thepasswordishere@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0"
 ```
 
-When using Render, the database url is given by defining the proper env in the dashboard:
+**Render users:** When using Render, the database url is given by defining the proper env in the dashboard:
 
 ![browser showing render environment variables](../../images/3/render-env.png)
 
