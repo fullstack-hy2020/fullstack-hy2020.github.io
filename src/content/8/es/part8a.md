@@ -247,7 +247,7 @@ Implementemos un servidor GraphQL con la biblioteca líder en la actualidad [Apo
 Cree un nuevo proyecto npm con _npm init_ e instale las dependencias necesarias.
 
 ```bash
-npm install apollo-server graphql
+npm install @apollo/server graphql
 ```
 
 También cree un archivo `index.js` en el directorio raíz de su proyecto.
@@ -281,7 +281,7 @@ let persons = [
   },
 ]
 
-const typeDefs = gql`
+const typeDefs = `#graphql
   type Person {
     name: String!
     phone: String
