@@ -790,7 +790,7 @@ Koska middlewaret suoritetaan siinä järjestyksessä, missä ne on otettu käyt
 Oikeaoppinen järjestys on tämä:
 
 ```js
-app.use(express.static('build'))
+app.use(express.static('dist'))
 app.use(express.json())
 app.use(requestLogger)
 
@@ -830,9 +830,7 @@ app.use(express.json())
 
 ei HTTP-pyynnön mukana oleva data olisi loggerin eikä POST-pyynnön käsittelyn aikana käytettävissä, vaan kentässä _request.body_ olisi tyhjä olio.
 
-Tärkeää on myös ottaa käyttöön olemattomien osoitteiden käsittely viimeisenä.
-
-Myös seuraava järjestys aiheuttaisi ongelman:
+Tärkeää on myös ottaa olemattomat osoitteet käsittelevä middleware käyttöön vasta kaikkien endpointtien määrittelyn jälkeen, juuri ennen virheenkäsittelijää. Seuraava järjestys aiheuttaisi ongelman:
 
 ```js
 const unknownEndpoint = (request, response) => {

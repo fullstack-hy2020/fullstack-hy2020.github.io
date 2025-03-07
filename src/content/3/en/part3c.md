@@ -822,9 +822,7 @@ app.use(express.json())
 
 Then the JSON data sent with the HTTP requests would not be available for the logger middleware or the POST route handler, since the _request.body_ would be _undefined_ at that point.
 
-It's also important that the middleware for handling unsupported routes is next to the last middleware that is loaded into Express, just before the error handler.
-
-For example, the following loading order would cause an issue:
+It's also important that the middleware for handling unsupported routes is loaded only after all the endpoints have been defined, just before the error handler. For example, the following loading order would cause an issue:
 
 ```js
 const unknownEndpoint = (request, response) => {
