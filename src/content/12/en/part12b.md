@@ -560,7 +560,7 @@ services:
       MONGO_INITDB_DATABASE: the_database
     volumes:
       - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
-      - mongo_data:/data/db
+      - mongo_data:/data/db # highlight-line
 
 volumes: # highlight-line
   mongo_data: # highlight-line
