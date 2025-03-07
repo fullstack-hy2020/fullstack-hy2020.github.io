@@ -871,9 +871,11 @@ app.put('/api/notes/:id', (request, response, next) => {
 
   Note.findByIdAndUpdate(request.params.id, note, { new: true })
     .then(updatedNote => {
-      if(!updatedNote)
-        return res.status(400).json({ error: 'Note not found' })
-      response.json(updatedNote)
+      if (updatedNote) {
+        response.json(updatedNote)
+      } else {
+        response.status(404).end()
+      }
     })
     .catch(error => next(error))
 })
