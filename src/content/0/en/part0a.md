@@ -111,7 +111,7 @@ You can only take the exam after submitting enough exercises for five credits. I
 By submitting at least 127 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension.
 
 - Submit at least 127 exercises for parts 0-7.
-- [Enroll in part 6 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-6436f286-a8a6-441f-a688-228bcded5d72).
+- [Enroll in part 6 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-abc0a702-3d35-496f-87b9-5c7845a9367b).
 - [Request credits for part 6](/en/part0/general_info/#how-to-get-your-credits).
 
 #### Part 7 - Full Stack Web Development, extension 2 (1 cr, CSM141083)
@@ -119,7 +119,7 @@ By submitting at least 127 of the exercises for parts 0-7 while working on the c
 By submitting at least 138 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension.
 
 - Submit at least 138 exercises for parts 0-7.
-- [Enroll in part 7 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-4310de44-ff25-4f16-bd0f-043a6e68e801).
+- [Enroll in part 7 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-3149cc5e-8d83-4471-8eba-870093a2f01f).
 - [Request credits for part 7](/en/part0/general_info/#how-to-get-your-credits).
 
 #### Part 8 - Full Stack Web Development: GraphQL (1 cr, CSM14113)
@@ -127,7 +127,7 @@ By submitting at least 138 of the exercises for parts 0-7 while working on the c
 By submitting at least 22/26 of the exercises for part 8 of the course, GraphQL, you can get one additional credit. Part 8 can be done any time after part 5 because its contents are independent of parts 6 and 7.
 
 - Submit at least 22/26 exercises for part 8.
-- [Enroll in part 8 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-7d0d6bd9-c940-4743-b69c-3f8577194b72).
+- [Enroll in part 8 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-4b912f04-d928-4a2d-aed7-8d8b2cefd397).
 - [Request credits for part 8](/en/part0/general_info/#how-to-get-your-credits).
 
 #### Part 9 - Full Stack Web Development: TypeScript (1 cr, CSM14110)
@@ -135,7 +135,7 @@ By submitting at least 22/26 of the exercises for part 8 of the course, GraphQL,
 By submitting at least 24/30 of the exercises for part 9 of the course, TypeScript, you can get one additional credit. It is recommended that you complete parts 0-7 before taking part 9.
 
 - Submit at least 24/30 exercises for part 9.
-- [Enroll in part 9 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-929a947d-6810-410d-b828-cc40f368dcc7).
+- [Enroll in part 9 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-8d68ba22-4d46-479c-8990-32ddc83f5a5f).
 - [Request credits for part 9](/en/part0/general_info/#how-to-get-your-credits).
 
 #### Part 10 - Full Stack Web Development: React Native (2 cr, CSM14111)
@@ -143,7 +143,7 @@ By submitting at least 24/30 of the exercises for part 9 of the course, TypeScri
 By submitting 25 exercises for part 10 of the course on React Native, you can earn two additional credits. More information about this part's prerequisites, exercise submission, and credits can be found in [part 10](/en/part10/introduction_to_react_native).
 
 - Submit at least 25 exercises for part 10.
-- [Enroll in part 10 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-a4b9100c-6c5b-4847-8ea7-b056be9cfba3).
+- [Enroll in part 10 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-e859336d-9d63-47ac-9906-a7da74cae32d).
 - [Request credits for part 10](/en/part0/general_info/#how-to-get-your-credits).
 
 #### Part 11 - Full Stack Web Development: Continuous Integration / Continuous Delivery (1 cr, CSM14112)
@@ -151,7 +151,7 @@ By submitting 25 exercises for part 10 of the course on React Native, you can ea
 By submitting all exercises for part 11 of the course on Continuous Integration / Continuous Delivery, you can earn one additional credit. More information about this part's prerequisites and exercise submission can be found in [part 11](/en/part11).
 
 - Submit all exercises for part 11.
-- [Enroll in part 11 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-4e4ca82e-21e1-4b06-aa01-b08f314b7974).
+- [Enroll in part 11 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-33f0ce21-ff95-42e1-9581-2c75ea3dd2a5).
 - [Request credits for part 11](/en/part0/general_info/#how-to-get-your-credits).
 
 #### Part 12 - Full Stack Web Development: Containers (1 cr, CSM141084)
@@ -159,7 +159,7 @@ By submitting all exercises for part 11 of the course on Continuous Integration 
 By submitting all exercises for part 12 of the course on Container technology, you can earn one additional credit. More information about this part's prerequisites and exercise submission can be found in [part 12](/en/part12).
 
 - Submit all exercises for part 12.
-- [Enroll in part 12 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-b8fada92-c284-4c33-822a-92ee9eb08632).
+- [Enroll in part 12 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-fd32902f-3941-4963-b73b-8408cff02ae2).
 - [Request credits for part 12](/en/part0/general_info/#how-to-get-your-credits).
 
 #### Part 13 - Full Stack Web Development: Relational databases (1 cr, CSM14114)
@@ -167,7 +167,7 @@ By submitting all exercises for part 12 of the course on Container technology, y
 By submitting all exercises for part 13 of the course on Relational databases, you can earn one additional credit. More information about this part's prerequisites and exercise submission can be found in [part 13](/en/part13).
 
 - Submit all exercises for part 13.
-- [Enroll in part 13 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-024c8a43-2d9a-411a-a543-ca3dadcdcab6).
+- [Enroll in part 13 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-be8081bc-e7c1-4d82-9d7c-f1fbc3a519bc).
 - [Request credits for part 13](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
 ### Studying the course in a nutshell
