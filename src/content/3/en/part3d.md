@@ -251,20 +251,11 @@ We will answer all of the questions:
 
 ![terminal output from ESlint init](../../images/3/lint1.png)
 
-The configuration will be saved in the generated _eslint.config.mjs_ file:
+The configuration will be saved in the generated _eslint.config.mjs_ file.
 
-```js
-import globals from "globals";
+### Formatting the Configuration File
 
-
-/** @type {import('eslint').Linter.Config[]} */
-export default [
-  {files: ["**/*.js"], languageOptions: {sourceType: "commonjs"}},
-  {languageOptions: { globals: globals.browser }},
-];
-```
-
-We will reformat the configuration file from its current form to the following:
+Let's reformat the configuration file _eslint.config.mjs_ from its current form to the following:
 
 ```js
 import globals from 'globals'
@@ -337,6 +328,10 @@ export default [
 
 The [plugins](https://eslint.org/docs/latest/use/configure/plugins) property provides a way to extend ESLint's functionality by adding custom rules, configurations, and other capabilities that are not available in the core ESLint library. We've installed and enabled the _@stylistic/eslint-plugin-js_, which adds JavaScript stylistic rules for ESLint. In addition, rules for indentation, line breaks, quotes, and semicolons have been added. These four rules are all defined in the [Eslint styles plugin](https://eslint.style/packages/js).
 
+**Note for Windows users:** The linebreak style is set to _unix_ in the style rules. It is recommended to use Unix-style linebreaks (_\n_) regardless of your operating system, as they are compatible with most modern operating systems and facilitate collaboration when multiple people are working on the same files. If you are using Windows-style linebreaks, ESLint will produce the following errors: <i>Expected linebreaks to be 'LF' but found 'CRLF'</i>. In this case, configure Visual Studio Code to use Unix-style linebreaks by following [this guide](https://stackoverflow.com/questions/48692741/how-can-i-make-all-line-endings-eols-in-all-files-in-visual-studio-code-unix).
+
+### Running the Linter
+
 Inspecting and validating a file like _index.js_ can be done with the following command:
 
 ```bash
@@ -384,8 +379,6 @@ Lint has quite a lot to say about our code:
 
 ![terminal output of ESlint errors](../../images/3/53ea.png)
 
-Let's not fix these issues just yet.
-
 A better alternative to executing the linter from the command line is to configure an _eslint-plugin_ to the editor, that runs the linter continuously. By using the plugin you will see errors in your code immediately. You can find more information about the Visual Studio ESLint plugin [here](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
 
 The VS Code ESlint plugin will underline style violations with a red line:
@@ -393,6 +386,8 @@ The VS Code ESlint plugin will underline style violations with a red line:
 ![Screenshot of vscode ESlint plugin showing errors](../../images/3/54a.png)
 
 This makes errors easy to spot and fix right away.
+
+### Adding More Style Rules
 
 ESlint has a vast array of [rules](https://eslint.org/docs/rules/) that are easy to take into use by editing the _eslint.config.mjs_ file.
 

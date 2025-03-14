@@ -239,20 +239,11 @@ Vastaillaan kysymyksiin:
 
 ![Vastataan kysymyksiin koodin luonteen mukaan, erityisesti että kyse ei ole TypeSriptistä, käytetään ' merkkijonoissa, ei käytetä ; rivien lopussa](../../images/3/lint1.png)
 
-Konfiguraatiot tallentuvat tiedostoon _eslint.config.mjs_:
+Konfiguraatiot tallentuvat tiedostoon _eslint.config.mjs_.
 
-```js
-import globals from "globals";
+### Konfiguraatiotiedoston muotoilu
 
-
-/** @type {import('eslint').Linter.Config[]} */
-export default [
-  {files: ["**/*.js"], languageOptions: {sourceType: "commonjs"}},
-  {languageOptions: { globals: globals.browser }},
-];
-```
-
-Muutetaan tiedoston sisältö seuraavaan muotoon:
+Muutetaan tiedoston _eslint.config.mjs_ sisältö seuraavaan muotoon:
 
 ```js
 import globals from 'globals'
@@ -322,10 +313,13 @@ export default [
 ]
 ```
 
-[Pluginit](https://eslint.org/docs/latest/use/configure/plugins) tarjoavat tavan laajentaa ESLintin toiminnallisuutta lisäämällä määrittelyjä jotka eivät ole mukana ESLint-ydinkirjastossa. Otimme nyt käyttöön pluginin  [@stylistic/eslint-plugin-js](https://eslint.style/packages/js), joka tuo käyttöömme joukon JavaScriptin tyylisääntöjä joista otimme käyttöön sisennystä, rivinvaihtoa, lainausmerkkejä ja puolipisteitä koskevat säännöt.
+[Pluginit](https://eslint.org/docs/latest/use/configure/plugins) tarjoavat tavan laajentaa ESLintin toiminnallisuutta lisäämällä määrittelyjä jotka eivät ole mukana ESLint-ydinkirjastossa. Otimme nyt käyttöön pluginin  [@stylistic/eslint-plugin-js](https://eslint.style/packages/js), joka tuo käyttöömme joukon JavaScriptin tyylisääntöjä, joista otimme käyttöön sisennystä, rivinvaihtoa, lainausmerkkejä ja puolipisteitä koskevat säännöt.
 
+**Huomautus Windows-käyttäjille:** Rivinvaihtojen tyypiksi on tyylisäännössä määritelty _unix_. On suositeltavaa käyttää Unix-tyyppisiä rivinvaihtoja (_\n_) riippumatta käyttämästäsi käyttöjärjestelmästä, sillä ne ovat yhteensopivia useimpien modernien käyttöjärjestelmien kanssa ja helpottavat työskentelyä, jos useat eri henkilöt työstävät samoja tiedostoja. Jos käytössäsi on Windows-tyyppiset rivinvaihdot, ESLint antaa seuraavia virheitä: <i>Expected linebreaks to be 'LF' but found 'CRLF'</i>. Konfiguroi tällöin Visual Studio Code käyttämään Unix-tyyppisiä rivinvaihtoja esimerkiksi [tämän ohjeen](https://stackoverflow.com/questions/48692741/how-can-i-make-all-line-endings-eols-in-all-files-in-visual-studio-code-unix) mukaan.
 
-Esim tiedoston _index.js_ tarkastus tapahtuu komennolla:
+### Lintterin ajaminen
+
+Tiedoston _index.js_ tarkastus tapahtuu komennolla:
 
 ```bash
 npx eslint index.js
@@ -372,8 +366,6 @@ Kun nyt suoritamme linttauksen, löytyy koodistamme jonkin verran huomautettavaa
 
 ![Lint kertoo kolmesta virheestä, kaikki muuttujia joille ei ole käyttöä](../../images/3/53ea.png)
 
-Ei kuitenkaan korjata ongelmia vielä.
-
 Parempi vaihtoehto linttauksen suorittamiselle komentoriviltä on konfiguroida editorille <i>eslint-plugin</i>, joka suorittaa linttausta koko ajan. Näin pääset korjaamaan pienet virheet välittömästi. Tietoja esim. Visual Studion ESLint-pluginista on [täällä](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
 
 VS Coden ESLint-plugin alleviivaa tyylisääntöjä rikkovat kohdat punaisella:
@@ -383,6 +375,8 @@ VS Coden ESLint-plugin alleviivaa tyylisääntöjä rikkovat kohdat punaisella:
 Näin ongelmat on helppo korjata koodiin heti.
   
 Komento _npm run lint -- --fix_ voi olla avuksi, jos koodissa on esim. useampia syntaksivirheitä.
+
+### Lisää tyylisääntöjä
 
 ESLintille on määritelty suuri määrä [sääntöjä](https://eslint.org/docs/rules/), joita on helppo ottaa käyttöön muokkaamalla tiedostoa _eslint.config.mjs_.
 
