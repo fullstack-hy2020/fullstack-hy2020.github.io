@@ -230,8 +230,7 @@ The contents of the package.json file will change as follows:
   "dependencies": {
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "mongoose": "^8.11.0",
-    "morgan": "^1.10.0"
+    "mongoose": "^8.11.0"
   },
   "devDependencies": { // highlight-line
     "@eslint/js": "^9.22.0", // highlight-line
