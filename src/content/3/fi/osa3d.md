@@ -13,7 +13,7 @@ Sovelluksen tietokantaan tallettamalle datan muodolle on usein tarve asettaa joi
 app.post('/api/notes', (request, response) => {
   const body = request.body
   // highlight-start
-  if (body.content === undefined) {
+  if (!body.content) {
     return response.status(400).json({ error: 'content missing' })
   }
   // highlight-end
@@ -202,11 +202,33 @@ Staattisesti tyypitetyissä, käännettävissä kielissä (esim. Javassa) ohjelm
 
 JavaScript-maailmassa tämän hetken johtava työkalu staattiseen analyysiin eli "linttaukseen" on [ESLint](https://eslint.org/).
 
-Asennetaan ESLint backendiin kehitysaikaiseksi riippuvuudeksi:
+Lisätään ESLint backendin <i>kehitysaikaiseksi riippuvuudeksi</i> (development dependency). Kehitysaikaisilla riippuvuuksilla tarkoitetaan työkaluja, joita tarvitaan ainoastaan sovellusta kehittäessä. Esimerkiksi testaukseen liittyvät työkalut ovat tällaisia. Kun sovellusta suoritetaan tuotantomoodissa, ei kehitysaikaisia riippuvuuksia tarvita.
+
+Asennetaan ESLint backendiin kehitysaikaiseksi riippuvuudeksi komennolla:
 
 ```bash
 npm install eslint @eslint/js --save-dev
 ```
+
+Tiedoston package.json sisältö muuttuu seuraavasti:
+
+```js
+{
+  //...
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.11.0",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": { // highlight-line
+    "@eslint/js": "^9.22.0", // highlight-line
+    "eslint": "^9.22.0" // highlight-line
+  }
+}
+```
+
+Komento lisäsi siis tiedostoon <i>devDependencies</i>-osion ja sinne paketit <i>eslint</i> ja <i>@eslint/js</i> sekä asensi tarvittavat kirjastot <i>node_modules</i>-hakemistoon.
 
 Tämän jälkeen voidaan muodostaa alustava ESLint-konfiguraatio:
 

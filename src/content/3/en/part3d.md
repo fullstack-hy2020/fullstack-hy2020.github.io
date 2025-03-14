@@ -13,7 +13,7 @@ There are usually constraints that we want to apply to the data that is stored i
 app.post('/api/notes', (request, response) => {
   const body = request.body
   // highlight-start
-  if (body.content === undefined) {
+  if (!body.content) {
     return response.status(400).json({ error: 'content missing' })
   }
   // highlight-end
@@ -214,11 +214,33 @@ In compiled statically typed languages like Java, IDEs like NetBeans can point o
 
 In the JavaScript universe, the current leading tool for static analysis (aka "linting") is [ESlint](https://eslint.org/).
 
-Let's install ESlint as a development dependency to the notes backend project with the command:
+Let's add ESLint as a <i>development dependency</i> for the backend. Development dependencies are tools that are only needed during the development of the application. For example, tools related to testing are such dependencies. When the application is run in production mode, development dependencies are not needed.
+
+Install ESLint as a development dependency for the backend with the command:
 
 ```bash
 npm install eslint @eslint/js --save-dev
 ```
+
+The contents of the package.json file will change as follows:
+
+```js
+{
+  //...
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.11.0",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": { // highlight-line
+    "@eslint/js": "^9.22.0", // highlight-line
+    "eslint": "^9.22.0" // highlight-line
+  }
+}
+```
+
+The command added a <i>devDependencies</i> section to the file and included the packages <i>eslint</i> and <i>@eslint/js</i>, and installed the required libraries into the <i>node_modules</i> directory.
 
 After this we can initialize a default ESlint configuration with the command:
 
