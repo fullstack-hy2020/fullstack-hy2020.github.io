@@ -254,27 +254,28 @@ We will answer all of the questions:
 The configuration will be saved in the generated _eslint.config.mjs_ file:
 
 ```js
-import globals from 'globals'
+import globals from "globals";
 
+
+/** @type {import('eslint').Linter.Config[]} */
 export default [
-  { files: ["**/*.js"], languageOptions: {sourceType: "commonjs"} },
-  { languageOptions: { globals: globals.browser } },
-]
+  {files: ["**/*.js"], languageOptions: {sourceType: "commonjs"}},
+  {languageOptions: { globals: globals.browser }},
+];
 ```
 
 We will reformat the configuration file from its current form to the following:
 
 ```js
-// ...
+import globals from 'globals'
+
 export default [
   {
-    files: ["**/*.js"],
+    files: ['**/*.js'],
     languageOptions: {
-      sourceType: "commonjs",
-      globals: {
-        ...globals.node,
-      },
-      ecmaVersion: "latest",
+      sourceType: 'commonjs',
+      globals: { ...globals.node },
+      ecmaVersion: 'latest',
     },
   },
 ]
@@ -289,15 +290,15 @@ Finally, the _ecmaVersion_ property is set to "latest". This sets the ECMAScript
 We want to make use of [ESLint's recommended](https://eslint.org/docs/latest/use/configure/configuration-files#using-predefined-configurations) settings along with our own. The _@eslint/js_ package we installed earlier provides us with predefined configurations for ESLint. We'll import it and enable it in the configuration file:
 
 ```js
-// ...
-import js from '@eslint/js'
+import globals from 'globals'
+import js from '@eslint/js' // highlight-line
 // ...
 
 export default [
   js.configs.recommended, // highlight-line
   {
     // ...
-  }
+  },
 ]
 ```
 
@@ -312,33 +313,24 @@ npm install --save-dev @stylistic/eslint-plugin-js
 Import and enable the plugin, and add these four code style rules:
 
 ```js
-// ...
-import stylisticJs from '@stylistic/eslint-plugin-js'
+import globals from 'globals'
+import js from '@eslint/js'
+import stylisticJs from '@stylistic/eslint-plugin-js' // highlight-line
 
 export default [
   {
     // ...
-    plugins: {
-      '@stylistic/js': stylisticJs
+    // highlight-start
+    plugins: { 
+      '@stylistic/js': stylisticJs,
     },
-    rules: {
-      '@stylistic/js/indent': [
-        'error',
-        2
-      ],
-      '@stylistic/js/linebreak-style': [
-        'error',
-        'unix'
-      ],
-      '@stylistic/js/quotes': [
-        'error',
-        'single'
-      ],
-      '@stylistic/js/semi': [
-        'error',
-        'never'
-      ],
-    },
+    rules: { 
+      '@stylistic/js/indent': ['error', 2],
+      '@stylistic/js/linebreak-style': ['error', 'unix'],
+      '@stylistic/js/quotes': ['error', 'single'],
+      '@stylistic/js/semi': ['error', 'never'],
+    }, 
+    // highlight-end
   },
 ]
 ```
@@ -359,8 +351,8 @@ It is recommended to create a separate _npm script_ for linting:
   "scripts": {
     "start": "node index.js",
     "dev": "node --watch index.js",
-    // ...
     "lint": "eslint ." // highlight-line
+    // ...
   },
   // ...
 }
@@ -373,11 +365,16 @@ Files in the <em>dist</em> directory also get checked when the command is run. W
 ```js
 // ...
 export default [
-  // ...
-  { 
-    ignores: ["dist/**"],
+  js.configs.recommended,
+  {
+    files: ['**/*.js'],
+    // ...
   },
-  //...
+  // highlight-start
+  { 
+    ignores: ['dist/**'], 
+  },
+  // highlight-end
 ]
 ```
 
@@ -406,8 +403,9 @@ export default [
   // ...
   rules: {
     // ...
-   'eqeqeq': 'error',
+   eqeqeq: 'error', // highlight-line
   },
+  // ...
 ]
 ```
 
@@ -420,14 +418,12 @@ export default [
   // ...
   rules: {
     // ...
-    'eqeqeq': 'error',
+    eqeqeq: 'error',
+    // highlight-start
     'no-trailing-spaces': 'error',
-    'object-curly-spacing': [
-      'error', 'always'
-    ],
-    'arrow-spacing': [
-      'error', { 'before': true, 'after': true },
-    ],
+    'object-curly-spacing': ['error', 'always'],
+    'arrow-spacing': ['error', { before: true, after: true }],
+    // highlight-end
   },
 ]
 ```
@@ -443,7 +439,7 @@ export default [
 ]
 ```
 
-This includes a rule that warns about <em>console.log</em> commands. Disabling a rule can be accomplished by defining its "value" as 0 or "off" in the configuration file. Let's do this for the _no-console_ rule in the meantime.
+This includes a rule that warns about <em>console.log</em> commands which we don't want to use. Disabling a rule can be accomplished by defining its "value" as 0 or _off_ in the configuration file. Let's do this for the _no-console_ rule in the meantime.
 
 ```js
 [
@@ -451,15 +447,11 @@ This includes a rule that warns about <em>console.log</em> commands. Disabling a
     // ...
     rules: {
       // ...
-      'eqeqeq': 'error',
+      eqeqeq: 'error',
       'no-trailing-spaces': 'error',
-      'object-curly-spacing': [
-        'error', 'always'
-      ],
-      'arrow-spacing': [
-        'error', { 'before': true, 'after': true },
-      ],
-      'no-console': 'off',
+      'object-curly-spacing': ['error', 'always'],
+      'arrow-spacing': ['error', { before: true, after: true }],
+      'no-console': 'off', // highlight-line
     },
   },
 ]
@@ -468,54 +460,36 @@ This includes a rule that warns about <em>console.log</em> commands. Disabling a
 Disabling the no-console rule will allow us to use console.log statements without ESLint flagging them as issues. This can be particularly useful during development when you need to debug your code. Here's the complete configuration file with all the changes we have made so far:
 
 ```js
-import globals from "globals";
-import stylisticJs from '@stylistic/eslint-plugin-js'
+import globals from 'globals'
 import js from '@eslint/js'
+import stylisticJs from '@stylistic/eslint-plugin-js'
 
 export default [
   js.configs.recommended,
   {
-    files: ["**/*.js"],
+    files: ['**/*.js'],
     languageOptions: {
-      sourceType: "commonjs",
-      globals: {
-        ...globals.node,
-      },
-      ecmaVersion: "latest",
+      sourceType: 'commonjs',
+      globals: { ...globals.node },
+      ecmaVersion: 'latest',
     },
     plugins: {
-      '@stylistic/js': stylisticJs
+      '@stylistic/js': stylisticJs,
     },
     rules: {
-      '@stylistic/js/indent': [
-        'error',
-        2
-      ],
-      '@stylistic/js/linebreak-style': [
-        'error',
-        'unix'
-      ],
-      '@stylistic/js/quotes': [
-        'error',
-        'single'
-      ],
-      '@stylistic/js/semi': [
-        'error',
-        'never'
-      ],
-      'eqeqeq': 'error',
+      '@stylistic/js/indent': ['error', 2],
+      '@stylistic/js/linebreak-style': ['error', 'unix'],
+      '@stylistic/js/quotes': ['error', 'single'],
+      '@stylistic/js/semi': ['error', 'never'],
+      eqeqeq: 'error',
       'no-trailing-spaces': 'error',
-      'object-curly-spacing': [
-        'error', 'always'
-      ],
-      'arrow-spacing': [
-        'error', { 'before': true, 'after': true },
-      ],
+      'object-curly-spacing': ['error', 'always'],
+      'arrow-spacing': ['error', { before: true, after: true }],
       'no-console': 'off',
     },
   },
-  { 
-    ignores: ["dist/**", "build/**"],
+  {
+    ignores: ['dist/**'],
   },
 ]
 ```

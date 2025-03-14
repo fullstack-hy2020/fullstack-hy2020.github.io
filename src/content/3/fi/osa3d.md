@@ -242,27 +242,28 @@ Vastaillaan kysymyksiin:
 Konfiguraatiot tallentuvat tiedostoon _eslint.config.mjs_:
 
 ```js
+import globals from "globals";
+
+
+/** @type {import('eslint').Linter.Config[]} */
+export default [
+  {files: ["**/*.js"], languageOptions: {sourceType: "commonjs"}},
+  {languageOptions: { globals: globals.browser }},
+];
+```
+
+Muutetaan tiedoston sisältö seuraavaan muotoon:
+
+```js
 import globals from 'globals'
 
 export default [
-  { files: ["**/*.js"], languageOptions: {sourceType: "commonjs"} },
-  { languageOptions: { globals: globals.browser } },
-]
-```
-
-Formatoidaan tiedostoa hieman:
-
-```js
-// ...
-export default [
   {
-    files: ["**/*.js"],
+    files: ['**/*.js'],
     languageOptions: {
-      sourceType: "commonjs",
-      globals: {
-        ...globals.node,
-      },
-      ecmaVersion: "latest",
+      sourceType: 'commonjs',
+      globals: { ...globals.node },
+      ecmaVersion: 'latest',
     },
   },
 ]
@@ -275,15 +276,15 @@ Lopuksi _ecmaVersion_-ominaisuuden arvoksi asetetaan viimeisin JavaScriptin vers
 Haluamme käyttää [ESLintin suosittelemia](https://eslint.org/docs/latest/use/configure/configuration-files#using-predefined-configurations) asetuksia omien asetustemme ohella. Asentamamme _@eslint/js_ tarjoaa meille ennalta määritetyt asetukset ESLintille. Otetaan nämä käyttöön:
 
 ```js
-// ...
-import js from '@eslint/js'
+import globals from 'globals'
+import js from '@eslint/js' // highlight-line
 // ...
 
 export default [
-  js.configs.recommended,
+  js.configs.recommended, // highlight-line
   {
     // ...
-  }
+  },
 ]
 ```
 
@@ -299,33 +300,24 @@ npm install --save-dev @stylistic/eslint-plugin-js
 Otetaan plugin käyttöön ja määritellään projektiin neljä sääntöä:
 
 ```js
-// ...
-import stylisticJs from '@stylistic/eslint-plugin-js'
+import globals from 'globals'
+import js from '@eslint/js'
+import stylisticJs from '@stylistic/eslint-plugin-js' // highlight-line
 
 export default [
   {
     // ...
-    plugins: {
-      '@stylistic/js': stylisticJs
+    // highlight-start
+    plugins: { 
+      '@stylistic/js': stylisticJs,
     },
-    rules: {
-      '@stylistic/js/indent': [
-        'error',
-        2
-      ],
-      '@stylistic/js/linebreak-style': [
-        'error',
-        'unix'
-      ],
-      '@stylistic/js/quotes': [
-        'error',
-        'single'
-      ],
-      '@stylistic/js/semi': [
-        'error',
-        'never'
-      ],
-    },
+    rules: { 
+      '@stylistic/js/indent': ['error', 2],
+      '@stylistic/js/linebreak-style': ['error', 'unix'],
+      '@stylistic/js/quotes': ['error', 'single'],
+      '@stylistic/js/semi': ['error', 'never'],
+    }, 
+    // highlight-end
   },
 ]
 ```
@@ -347,8 +339,8 @@ Kannattaa ehkä tehdä linttaustakin varten _npm-skripti_:
   "scripts": {
     "start": "node index.js",
     "dev": "node --watch index.js",
-    // ...
     "lint": "eslint ." // highlight-line
+    // ...
   },
   // ...
 }
@@ -362,11 +354,16 @@ Myös hakemistossa <em>dist</em> oleva frontendin tuotantoversio tulee näin tar
 ```js
 // ...
 export default [
-  // ...
-  { 
-    ignores: ["dist/**"],
+  js.configs.recommended,
+  {
+    files: ['**/*.js'],
+    // ...
   },
-  //...
+  // highlight-start
+  { 
+    ignores: ['dist/**'], 
+  },
+  // highlight-end
 ]
 ```
 
@@ -396,8 +393,9 @@ export default [
   // ...
   rules: {
     // ...
-   'eqeqeq': 'error',
+   eqeqeq: 'error', // highlight-line
   },
+  // ...
 ]
 ```
 
@@ -411,14 +409,12 @@ export default [
   // ...
   rules: {
     // ...
-    'eqeqeq': 'error',
+    eqeqeq: 'error',
+    // highlight-start
     'no-trailing-spaces': 'error',
-    'object-curly-spacing': [
-      'error', 'always'
-    ],
-    'arrow-spacing': [
-      'error', { 'before': true, 'after': true },
-    ],
+    'object-curly-spacing': ['error', 'always'],
+    'arrow-spacing': ['error', { before: true, after: true }],
+    // highlight-end
   },
 ]
 ```
@@ -434,9 +430,7 @@ export default [
 ]
 ```
 
-Mukana on myös _console.log_-komennoista varoittava sääntö.
-  
-Yksittäinen sääntö on helppo kytkeä [pois päältä](https://eslint.org/docs/user-guide/configuring/rules#configuring-rules) määrittelemällä sen "arvoksi" konfiguraatiossa 0. Tehdään toistaiseksi näin säännölle <i>no-console</i>:
+Näissä mukana on myös _console.log_-komennoista varoittava sääntö, jota emme halua käyttää. Yksittäinen sääntö on helppo kytkeä [pois päältä](https://eslint.org/docs/user-guide/configuring/rules#configuring-rules) määrittelemällä sen "arvoksi" konfiguraatiossa 0 tai _off_. Tehdään toistaiseksi näin säännölle <i>no-console</i>:
 
 ```js
 [
@@ -444,15 +438,11 @@ Yksittäinen sääntö on helppo kytkeä [pois päältä](https://eslint.org/doc
     // ...
     rules: {
       // ...
-      'eqeqeq': 'error',
+      eqeqeq: 'error',
       'no-trailing-spaces': 'error',
-      'object-curly-spacing': [
-        'error', 'always'
-      ],
-      'arrow-spacing': [
-        'error', { 'before': true, 'after': true },
-      ],
-      'no-console': 'off',
+      'object-curly-spacing': ['error', 'always'],
+      'arrow-spacing': ['error', { before: true, after: true }],
+      'no-console': 'off', // highlight-line
     },
   },
 ]
@@ -461,54 +451,36 @@ Yksittäinen sääntö on helppo kytkeä [pois päältä](https://eslint.org/doc
 Kokonaisuudessaan konfiguraatiotiedosto näyttää seuraavalta:
 
 ```js
-import globals from "globals";
-import stylisticJs from '@stylistic/eslint-plugin-js'
+import globals from 'globals'
 import js from '@eslint/js'
+import stylisticJs from '@stylistic/eslint-plugin-js'
 
 export default [
   js.configs.recommended,
   {
-    files: ["**/*.js"],
+    files: ['**/*.js'],
     languageOptions: {
-      sourceType: "commonjs",
-      globals: {
-        ...globals.node,
-      },
-      ecmaVersion: "latest",
+      sourceType: 'commonjs',
+      globals: { ...globals.node },
+      ecmaVersion: 'latest',
     },
     plugins: {
-      '@stylistic/js': stylisticJs
+      '@stylistic/js': stylisticJs,
     },
     rules: {
-      '@stylistic/js/indent': [
-        'error',
-        2
-      ],
-      '@stylistic/js/linebreak-style': [
-        'error',
-        'unix'
-      ],
-      '@stylistic/js/quotes': [
-        'error',
-        'single'
-      ],
-      '@stylistic/js/semi': [
-        'error',
-        'never'
-      ],
-      'eqeqeq': 'error',
+      '@stylistic/js/indent': ['error', 2],
+      '@stylistic/js/linebreak-style': ['error', 'unix'],
+      '@stylistic/js/quotes': ['error', 'single'],
+      '@stylistic/js/semi': ['error', 'never'],
+      eqeqeq: 'error',
       'no-trailing-spaces': 'error',
-      'object-curly-spacing': [
-        'error', 'always'
-      ],
-      'arrow-spacing': [
-        'error', { 'before': true, 'after': true },
-      ],
+      'object-curly-spacing': ['error', 'always'],
+      'arrow-spacing': ['error', { before: true, after: true }],
       'no-console': 'off',
     },
   },
-  { 
-    ignores: ["dist/**", "build/**"],
+  {
+    ignores: ['dist/**'],
   },
 ]
 ```
