@@ -200,7 +200,7 @@ import App from './App'
 
 let counter = 1
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById('root')).render(
   <App counter={counter} />
 )
 ```
@@ -216,7 +216,7 @@ the component won't re-render. We can get the component to re-render by calling 
 ```js
 let counter = 1
 
-const root = ReactDOM.createRoot(document.getElementById('root'))
+const root = createRoot(document.getElementById('root'))
 
 const refresh = () => {
   root.render(
@@ -259,7 +259,7 @@ import ReactDOM from 'react-dom/client'
 
 import App from './App'
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+createRoot(document.getElementById('root')).render(<App />)
 ```
 
 and <i>App.jsx</i> changes to the following:
