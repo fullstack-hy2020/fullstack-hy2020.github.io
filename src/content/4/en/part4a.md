@@ -144,16 +144,20 @@ notesRouter.delete('/:id', (request, response, next) => {
 })
 
 notesRouter.put('/:id', (request, response, next) => {
-  const body = request.body
+  const { content, important } = request.body
 
-  const note = {
-    content: body.content,
-    important: body.important,
-  }
+  Note.findById(request.params.id)
+    .then(note => {
+      if (!note) {
+        return response.status(404).end()
+      }
 
-  Note.findByIdAndUpdate(request.params.id, note, { new: true })
-    .then(updatedNote => {
-      response.json(updatedNote)
+      note.content = content
+      note.important = important
+
+      return note.save().then((updatedNote) => {
+        response.json(updatedNote)
+      })
     })
     .catch(error => next(error))
 })

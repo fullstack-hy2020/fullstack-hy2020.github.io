@@ -618,6 +618,24 @@ Once we introduce a database into the mix, it is useful to inspect the state per
 
 You can find the code for our current application in its entirety in the <i>part3-4</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4).
 
+### A true full stack developer's oath
+
+It is again time for the exercises. The complexity of our app has now taken another step since besides frontend and backend we also have a database. 
+There are indeed really many potential sources of error.
+
+So we should once more extend our oath:
+
+Full stack development is <i> extremely hard</i>, that is why I will use all the possible means to make it easier
+
+- I will have my browser developer console open all the time
+- I will use the network tab of the browser dev tools to ensure that frontend and backend are communicating as I expect
+- I will constantly keep an eye on the state of the server to make sure that the data sent there by the frontend is saved there as I expect
+- <i>I will keep an eye on the database: does the backend save data there in the right format</i>
+- I progress with small steps
+- I will write lots of _console.log_ statements to make sure I understand how the code behaves and to help pinpoint problems
+- If my code does not work, I will not write more code. Instead, I start deleting the code until it works or just return to a state when everything was still working
+- When I ask for help in the course Discord channel or elsewhere I formulate my questions properly, see [here](https://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord) how to ask for help
+
 </div>
 
 <div class="tasks">
@@ -858,56 +876,56 @@ app.delete('/api/notes/:id', (request, response, next) => {
 In both of the "successful" cases of deleting a resource, the backend responds with the status code <i>204 no content</i>. The two different cases are deleting a note that exists, and deleting a note that does not exist in the database. The _result_ callback parameter could be used for checking if a resource was actually deleted, and we could use that information for returning different status codes for the two cases if we deem it necessary. Any exception that occurs is passed onto the error handler.
 
 
-The toggling of the importance of a note can be easily accomplished with the [findByIdAndUpdate](https://mongoosejs.com/docs/api/model.html#model_Model-findByIdAndUpdate) method.
+Let's implement the functionality to update a single note, allowing the importance of the note to be changed. The note updating is done as follows:
 
 ```js
 app.put('/api/notes/:id', (request, response, next) => {
-  const body = request.body
+  const { content, important } = request.body
 
-  const note = {
-    content: body.content,
-    important: body.important,
-  }
-
-  Note.findByIdAndUpdate(request.params.id, note, { new: true })
-    .then(updatedNote => {
-      if (updatedNote) {
-        response.json(updatedNote)
-      } else {
-        response.status(404).end()
+  Note.findById(request.params.id)
+    .then(note => {
+      if (!note) {
+        return response.status(404).end()
       }
+
+      note.content = content
+      note.important = important
+
+      return note.save().then((updatedNote) => {
+        response.json(updatedNote)
+      })
     })
     .catch(error => next(error))
 })
 ```
 
-In the code above, we also allow the content of the note to be edited.
+The note to be updated is first fetched from the database using the _findById_ method. If no object is found in the database with the given id, the value of the variable _note_ is _null_, and the query responds with the status code <i>404 Not Found</i>.
 
-Notice that the <em>findByIdAndUpdate</em> method receives a regular JavaScript object as its argument, and not a new note object created with the <em>Note</em> constructor function.
+If an object with the given id is found, its _content_ and _important_ fields are updated with the data provided in the request, and the modified note is saved to the database using the _save()_ method. The HTTP request responds by sending the updated note in the response.
 
-There is one important detail regarding the use of the <em>findByIdAndUpdate</em> method. By default, the <em>updatedNote</em> parameter of the event handler receives the original document [without the modifications](https://mongoosejs.com/docs/api/model.html#model_Model-findByIdAndUpdate). We added the optional <code>{ new: true }</code> parameter, which will cause our event handler to be called with the new modified document instead of the original.
+One notable point is that the code now has nested promises, meaning that within the outer _.then_ method, another [promise chain](https://javascript.info/promise-chaining) is defined:
+
+```js
+    .then(note => {
+      if (!note) {
+        return response.status(404).end()
+      }
+
+      note.content = content
+      note.important = important
+
+      // highlight-start
+      return note.save().then((updatedNote) => {
+        response.json(updatedNote)
+      })
+      // highlight-end
+```
+
+Usually, this is not recommended because it can make the code difficult to read. In this case, however, the solution works because it ensures that the _.then_ block following the _save()_ method is only executed if a note with the given id is found in the database and the _save()_ method is called. In the fourth part of the course, we will explore the async/await syntax, which offers an easier and clearer way to handle such situations.
 
 After testing the backend directly with Postman or the VS Code REST client, we can verify that it seems to work. The frontend also appears to work with the backend using the database.
 
 You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5).
-
-### A true full stack developer's oath
-
-It is again time for the exercises. The complexity of our app has now taken another step since besides frontend and backend we also have a database. 
-There are indeed really many potential sources of error.
-
-So we should once more extend our oath:
-
-Full stack development is <i> extremely hard</i>, that is why I will use all the possible means to make it easier
-
-- I will have my browser developer console open all the time
-- I will use the network tab of the browser dev tools to ensure that frontend and backend are communicating as I expect
-- I will constantly keep an eye on the state of the server to make sure that the data sent there by the frontend is saved there as I expect
-- <i>I will keep an eye on the database: does the backend save data there in the right format</i>
-- I progress with small steps
-- I will write lots of _console.log_ statements to make sure I understand how the code behaves and to help pinpoint problems
-- If my code does not work, I will not write more code. Instead, I start deleting the code until it works or just return to a state when everything was still working
-- When I ask for help in the course Discord channel or elsewhere I formulate my questions properly, see [here](https://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord) how to ask for help
 
 </div>
 

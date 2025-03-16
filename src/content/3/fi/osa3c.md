@@ -865,34 +865,52 @@ app.delete('/api/notes/:id', (request, response, next) => {
 
 Vastauksena on molemmissa "onnistuneissa" tapauksissa statuskoodi <i>204 No Content</i> eli jos olio poistettiin tai olioa ei ollut mutta <i>id</i> oli periaatteessa oikea. Takaisinkutsun parametrin _result_ perusteella olisi mahdollisuus haarautua ja palauttaa tilanteissa eri statuskoodi, jos sille on tarvetta. Mahdollinen poikkeus siirretään jälleen virheenkäsittelijälle.
 
-Muistiinpanon tärkeyden muuttamisen mahdollistava olemassa olevan muistiinpanon päivitys onnistuu helposti metodilla [findByIdAndUpdate](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate):
+Toteutetaan vielä yksittäisen muistiinpanon muokkaustoiminto, jotta muistiinpanon tärkeyden muuttaminen mahdollistuu. Muistiinpanon muokkaus tapahtuu seuraavasti:
 
 ```js
 app.put('/api/notes/:id', (request, response, next) => {
-  const body = request.body
+  const { content, important } = request.body
 
-  const note = {
-    content: body.content,
-    important: body.important,
-  }
-
-  Note.findByIdAndUpdate(request.params.id, note, { new: true })
-    .then(updatedNote => {
-      if (updatedNote) {
-        response.json(updatedNote)
-      } else {
-        response.status(404).end()
+  Note.findById(request.params.id)
+    .then(note => {
+      if (!note) {
+        return response.status(404).end()
       }
+
+      note.content = content
+      note.important = important
+
+      return note.save().then((updatedNote) => {
+        response.json(updatedNote)
+      })
     })
     .catch(error => next(error))
 })
 ```
 
-Operaatio mahdollistaa myös muistiinpanon sisällön editoinnin.
+Muokattava muistiinpano haetaan ensin tietokannasta metodilla _findById_. Jos kannasta ei löydy oliota annetulla id:llä, muuttujan _note_ arvo on _null_, ja kyselyyn vastataan statuskoodilla <i>404 Not Found</i>.
 
-Huomaa, että metodin <em>findByIdAndUpdate</em> parametrina tulee antaa normaali JavaScript-olio eikä uuden olion luomisessa käytettävä <em>Note</em>-konstruktorifunktiolla luotu olio.
+Jos annettua id:tä vastaava olio löytyy, päivitetään sen _content_- ja _important_-kentät pyynnön mukana tulleella datalla ja tallennetaan muokattu muistiinpano tietokantaan metodilla _save()_. HTTP-pyyntöön vastataan lähettämällä vastauksen mukana päivitetty muistiinpano.
 
-Huomioi operaatioon <em>findByIdAndUpdate</em> liittyen, että oletusarvoisesti tapahtumankäsittelijä saa parametrikseen <em>updatedNote</em> päivitetyn olion [ennen muutosta](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate) olleen tilan. Lisäsimme operaatioon parametrin <code>{ new: true }</code>, jotta saamme muuttuneen olion palautetuksi kutsujalle.
+Eräs huomionarvoinen seikka on se, että koodissa on nyt ns. sisäkkäiset promiset, eli ulomman _.then_-metodin sisällä on määritelty toinen [promise-ketju](https://javascript.info/promise-chaining):
+
+```js
+    .then(note => {
+      if (!note) {
+        return response.status(404).end()
+      }
+
+      note.content = content
+      note.important = important
+
+      // highlight-start
+      return note.save().then((updatedNote) => {
+        response.json(updatedNote)
+      })
+      // highlight-end
+```
+
+Yleensä tällaista ei suositella, koska se voi tehdä koodista vaikealukuista. Tässä tapauksessa ratkaisu kuitenkin toimii, sillä näin voimme varmistua siitä, että _.save()_-metodin jälkeiseen _.then_-lohkoon mennään vain, jos id:tä vastaava muistiinpano on löytynyt kannasta ja _save()_-metodia on kutsuttu. Tutustumme kurssin neljännessä osassa async/await-syntaksiin, joka tarjoaa helpomman ja selkeämmän kirjoitustavan tämänkaltaisiin tilanteisiin.
 
 Backend vaikuttaa toimivan Postmanista ja VS Coden REST Clientistä tehtyjen kokeilujen perusteella. Myös frontend toimii moitteettomasti tietokantaa käyttävän backendin kanssa.
 

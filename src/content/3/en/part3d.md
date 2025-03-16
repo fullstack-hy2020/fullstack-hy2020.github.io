@@ -84,27 +84,6 @@ When validating an object fails, we return the following default error message f
 
 ![postman showing error message](../../images/3/50.png)
 
-We notice that the backend has now a problem: validations are not done when editing a note.
-The [documentation](https://mongoosejs.com/docs/validation.html#update-validators) addresses the issue by explaining that validations are not run by default when <i>findOneAndUpdate</i> and related methods are executed.
-
-The fix is easy. Let us also reformulate the route code a bit:
-
-```js
-app.put('/api/notes/:id', (request, response, next) => {
-  const { content, important } = request.body // highlight-line
-
-  Note.findByIdAndUpdate(
-    request.params.id, 
-    { content, important }, // highlight-line
-    { new: true, runValidators: true, context: 'query' } // highlight-line
-  ) 
-    .then(updatedNote => {
-      response.json(updatedNote)
-    })
-    .catch(error => next(error))
-})
-```
-
 ### Deploying the database backend to production
 
 The application should work almost as-is in Fly.io/Render. We do not have to generate a new production build of the frontend since changes thus far were only on our backend.
