@@ -324,7 +324,7 @@ Asenna myös joku järkevä web-devausta tukeva tekstieditori. Enemmän kuin suo
 
 Älä koodaa nanolla, Notepadilla tai Geditillä. Myöskään NetBeans ei ole omimmillaan web-devauksessa, ja se on myös turhan raskas verrattuna esim. Visual Studio Codeen.
 
-Asenna koneeseesi heti myös [Node.js](https://nodejs.org/en/). Materiaalia ollaan päivittämässä Noden versioon v22. Osat 0-2 on tehty käyttäen Noden versiota 22.3.0, osat 3, 4 ja 10 käyttäen versiota 20.11.0 ja loput osat käyttäen versiota 18.13.0. Käytä aina vähintään yhtä tuoretta Node-versiota. Asennusohjeita on [Node.js:n sivuilla](https://nodejs.org/en/download/package-manager/).
+Asenna koneeseesi heti myös [Node.js](https://nodejs.org/en/). Materiaalia ollaan päivittämässä Noden versioon v22. Osat 0-3 on tehty käyttäen Noden versiota 22.3.0, osat 4 ja 10 käyttäen versiota 20.11.0 ja loput osat käyttäen versiota 18.13.0. Käytä aina vähintään yhtä tuoretta Node-versiota. Asennusohjeita on [Node.js:n sivuilla](https://nodejs.org/en/download/package-manager/).
 
 Noden myötä koneelle asentuu myös [npm](https://www.npmjs.com/get-npm) (alunperin lyhennelmä <i>Node Package Manager</i> ‑nimelle), jota tulemme tarvitsemaan kurssin aikana aktiivisesti. Tuoreen Noden kera asentuu myös [npx](https://www.npmjs.com/package/npx), jota tarvitaan myös muutaman kerran.
 

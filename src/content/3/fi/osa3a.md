@@ -11,7 +11,7 @@ Siirrämme tässä osassa fokuksen backendiin eli palvelimella olevaan toiminnal
 
 Backendin toteutusympäristönä käytämme [Node.js](https://nodejs.org/en/):ää, joka on melkein missä vaan, erityisesti palvelimilla ja omalla koneellasikin toimiva Googlen [V8](https://developers.google.com/v8/)-JavaScript-moottoriin perustuva JavaScriptin suoritusympäristö.
 
-Kurssimateriaalia tehtäessä on ollut käytössä Node.js:n versio <i>v20.11.0</i>. Suosittelen, että omasi on vähintään yhtä tuore (ks. komentoriviltä _node -v_).
+Kurssimateriaalia tehtäessä on ollut käytössä Node.js:n versio <i>v22.3.0</i>. Suosittelen, että omasi on vähintään yhtä tuore (ks. komentoriviltä _node -v_).
 
 Kuten [osassa 1](/osa1/java_scriptia) todettiin, selaimet eivät vielä osaa kaikkia uusimpia JavaScriptin ominaisuuksia, ja siksi selainpuolen koodi täytyy kääntää eli <i>transpiloida</i> esim [Babel](https://babeljs.io/):illa. Backendissa tilanne on kuitenkin toinen, koska uusin Node hallitsee riittävissä määrin myös JavaScriptin uusia versioita, joten suoritamme Nodella kirjoittamaamme koodia suoraan ilman transpilointivaihetta.
 
