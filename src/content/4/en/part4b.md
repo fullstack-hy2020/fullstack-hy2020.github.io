@@ -208,6 +208,10 @@ Let's add two notes to the test database using the _mongo.js_ program (here we m
 Let's write a few more tests:
 
 ```js
+const assert = require('node:assert')
+
+// ...
+
 test('there are two notes', async () => {
   const response = await api.get('/api/notes')
 
