@@ -169,7 +169,7 @@ The ids of the notes are stored within the user document as an array of Mongo id
 }
 ```
 
-The type of the field is <i>ObjectId</i> that references <i>note</i>-style documents. Mongo does not inherently know that this is a field that references notes, the syntax is purely related to and defined by Mongoose.
+The type of the field is <i>ObjectId</i> that references <i>note</i>-style documents. Mongo does not inherently know that this is a field that references notes, the syntax is purely related to and defined by Mongoose. The <i>ref</i> field suggests the name of the model that will be referred to. 
 
 Let's expand the schema of the note defined in the <i>models/note.js</i> file so that the note contains information about the user who created it:
 
@@ -491,7 +491,7 @@ usersRouter.get('/', async (request, response) => {
 })
 ```
 
-The [populate](http://mongoosejs.com/docs/populate.html) method is chained after the <i>find</i> method making the initial query. The argument given to the populate method defines that the <i>ids</i> referencing <i>note</i> objects in the <i>notes</i> field of the <i>user</i> document will be replaced by the referenced <i>note</i> documents.
+The [populate](http://mongoosejs.com/docs/populate.html) method is chained after the <i>find</i> method making the initial query. The argument given to the populate method defines that the <i>ids</i> referencing <i>note</i> objects in the <i>notes</i> field of the <i>user</i> document will be replaced by the referenced <i>note</i> documents. Mongoose first queries the <i>users</i> collection for the list of users, and then queries the collection corresponding to the model object specified by the <i>ref</i> property in the users schema for data with the given object id.
 
 The result is almost exactly what we wanted:
 
