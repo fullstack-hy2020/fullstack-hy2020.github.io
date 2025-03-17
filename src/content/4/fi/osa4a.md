@@ -18,20 +18,20 @@ Ennen osan ensimmäistä isoa teemaa eli testaamista muutetaan sovelluksen raken
 Seuraavassa läpikäytävien muutosten jälkeen sovelluksemme hakemistorakenne näyttää seuraavalta:
 
 ```bash
-├── index.js
-├── app.js
-├── dist
-│   ├── ...
 ├── controllers
-│   └── notes.js
+│   └── notes.js
+├── dist
+│   └── ...
 ├── models
-│   └── note.js
+│   └── note.js
+├── utils
+│   ├── config.js
+│   ├── logger.js
+│   └── middleware.js  
+├── app.js
+├── index.js
 ├── package-lock.json
 ├── package.json
-├── utils
-│   ├── logger.js
-│   ├── config.js
-│   └── middleware.js  
 ```
 
 Olemme toistaiseksi tulostelleet koodista erilaista loggaustietoa komennoilla <i>console.log</i> ja <i>console.error</i>, mutta tämä ei ole kovin järkevä käytäntö. Eristetään kaikki konsoliin tulostelu omaan moduliinsa <i>utils/logger.js</i>:
@@ -45,30 +45,12 @@ const error = (...params) => {
   console.error(...params)
 }
 
-module.exports = {
-  info, error
-}
+module.exports = { info, error }
 ```
 
 Loggeri tarjoaa kaksi funktiota: normaaleihin logiviesteihin tarkoitetun funktion _info_ sekä virhetilanteisiin tarkoitetun funktion _error_.
 
 Loggauksen eristäminen omaan moduuliinsa on monellakin tapaa järkevää. Jos esim. päätämme ruveta kirjoittamaan logeja tiedostoon tai keräämään niitä johonkin ulkoiseen palveluun kuten [Graylog](https://www.graylog.org/) tai [Papertrail](https://papertrailapp.com), on muutos helppo tehdä yhteen paikkaan.
-
-Sovelluksen käynnistystiedosto <i>index.js</i> pelkistyy seuraavasti:
-
-```js
-const app = require('./app') // varsinainen Express-sovellus
-const config = require('./utils/config')
-const logger = require('./utils/logger')
-
-app.listen(config.PORT, () => {
-  logger.info(`Server running on port ${config.PORT}`)
-})
-```
-
-<i>index.js</i> ainoastaan importtaa tiedostossa <i>app.js</i> olevan varsinaisen sovelluksen ja käynnistää sen. Käynnistymisestä kertova konsolitulostus tehdään logger-moduulin funktion _info_ avulla.
-
-Nyt Express-sovellus sekä sen käynnistymisestä ja verkkoasetuksista huolehtiva koodi on eriytetty toisistaan [parhaita](https://dev.to/nermineslimane/always-separate-app-and-server-files--1nc7) käytänteitä noudattaen. Eräs tämän tavan eduista on se, että sovelluksen toimintaa voi nyt testata API-tasolle tehtävien HTTP-kutsujen tasolla kuitenkaan tekemättä kutsuja varsinaisesti HTTP:llä verkon yli. Tämä tekee testien suorittamisesta nopeampaa.
 
 Ympäristömuuttujien käsittely on eriytetty moduulin <i>utils/config.js</i> vastuulle:
 
@@ -78,10 +60,7 @@ require('dotenv').config()
 let PORT = process.env.PORT
 let MONGODB_URI = process.env.MONGODB_URI
 
-module.exports = {
-  MONGODB_URI,
-  PORT
-}
+module.exports = { MONGODB_URI, PORT }
 ```
 
 Sovelluksen muut osat pääsevät ympäristömuuttujiin käsiksi importtaamalla konfiguraatiomoduulin:
@@ -204,23 +183,22 @@ app.use('/api/notes', notesRouter)
 
 Näin määrittelemäämme routeria käytetään <i>jos</i> polun alkuosa on <i>/api/notes</i>. notesRouter-olion sisällä täytyy tämän takia käyttää ainoastaan polun loppuosia eli tyhjää polkua <i>/</i> tai pelkkää parametria <i>/:id</i>.
 
-Sovelluksen määrittelevä <i>app.js</i> näyttää muutosten jälkeen seuraavalta:
+Repositorion juureen on luotu sovelluksen määrittelevä tiedosto <i>app.js</i>:
 
 ```js
-const config = require('./utils/config')
 const express = require('express')
-const app = express()
-const cors = require('cors')
+const mongoose = require('mongoose')
+const config = require('./utils/config')
+const logger = require('./utils/logger')
 const notesRouter = require('./controllers/notes')
 const middleware = require('./utils/middleware')
-const logger = require('./utils/logger')
-const mongoose = require('mongoose')
 
-mongoose.set('strictQuery', false)
+const app = express()
 
 logger.info('connecting to', config.MONGODB_URI)
 
-mongoose.connect(config.MONGODB_URI)
+mongoose
+  .connect(config.MONGODB_URI)
   .then(() => {
     logger.info('connected to MongoDB')
   })
@@ -228,7 +206,6 @@ mongoose.connect(config.MONGODB_URI)
     logger.error('error connection to MongoDB:', error.message)
   })
 
-app.use(cors())
 app.use(express.static('dist'))
 app.use(express.json())
 app.use(middleware.requestLogger)
@@ -304,23 +281,39 @@ noteSchema.set('toJSON', {
 module.exports = mongoose.model('Note', noteSchema)
 ```
 
+Sovelluksen käynnistystiedosto <i>index.js</i> pelkistyy seuraavasti:
+
+```js
+const app = require('./app') // varsinainen Express-sovellus
+const config = require('./utils/config')
+const logger = require('./utils/logger')
+
+app.listen(config.PORT, () => {
+  logger.info(`Server running on port ${config.PORT}`)
+})
+```
+
+<i>index.js</i> ainoastaan importtaa tiedostossa <i>app.js</i> olevan varsinaisen sovelluksen ja käynnistää sen. Käynnistymisestä kertova konsolitulostus tehdään logger-moduulin funktion _info_ avulla.
+
+Nyt Express-sovellus sekä sen käynnistymisestä ja verkkoasetuksista huolehtiva koodi on eriytetty toisistaan [parhaita](https://dev.to/nermineslimane/always-separate-app-and-server-files--1nc7) käytänteitä noudattaen. Eräs tämän tavan eduista on se, että sovelluksen toimintaa voi nyt testata API-tasolle tehtävien HTTP-kutsujen tasolla kuitenkaan tekemättä kutsuja varsinaisesti HTTP:llä verkon yli. Tämä tekee testien suorittamisesta nopeampaa.
+
 Sovelluksen hakemistorakenne näyttää siis refaktoroinnin jälkeen seuraavalta:
 
 ```bash
-├── index.js
-├── app.js
-├── dist
-│   ├── ...
 ├── controllers
-│   └── notes.js
+│   └── notes.js
+├── dist
+│   └── ...
 ├── models
-│   └── note.js
-├── package-lock.json
-├── package.json
+│   └── note.js
 ├── utils
 │   ├── config.js
-│   └── logger.js  
+│   ├── logger.js
 │   └── middleware.js  
+├── app.js
+├── index.js
+├── package-lock.json
+├── package.json
 ```
 
 Jos sovellus on pieni, ei rakenteella ole kovin suurta merkitystä. Sovelluksen kasvaessa sille kannattaa muodostaa jonkinlainen rakenne eli arkkitehtuuri ja jakaa erilaiset vastuut omiin moduuleihinsa. Tämä helpottaa huomattavasti ohjelman jatkokehitystä.
@@ -344,11 +337,8 @@ const error = (...params) => {
   console.error(...params)
 }
 
-// highlight-start
-module.exports = {
-  info, error
-}
-// highlight-end
+module.exports = { info, error } // highlight-line
+
 ```
 
 Tiedosto eksporttaa olion, joka sisältää kenttinään kaksi funktiota. Funktioihin päästään käsiksi kahdella vaihtoehtoisella tavalla. Voidaan joko ottaa käyttöön koko eksportoitava olio, jolloin funktioihin viitataan olion kautta:

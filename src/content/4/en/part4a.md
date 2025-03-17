@@ -18,20 +18,20 @@ Before we move into the topic of testing, we will modify the structure of our pr
 Once we make the changes to the directory structure of our project, we will end up with the following structure:
 
 ```bash
-├── index.js
-├── app.js
-├── dist
-│   └── ...
 ├── controllers
 │   └── notes.js
+├── dist
+│   └── ...
 ├── models
 │   └── note.js
-├── package-lock.json
-├── package.json
 ├── utils
 │   ├── config.js
 │   ├── logger.js
 │   └── middleware.js  
+├── app.js
+├── index.js
+├── package-lock.json
+├── package.json
 ```
 
 So far we have been using <i>console.log</i> and <i>console.error</i> to print different information from the code.
@@ -47,9 +47,7 @@ const error = (...params) => {
   console.error(...params)
 }
 
-module.exports = {
-  info, error
-}
+module.exports = { info, error }
 ```
 
 The logger has two functions, __info__ for printing normal log messages, and __error__ for all error messages. 
@@ -64,10 +62,7 @@ require('dotenv').config()
 const PORT = process.env.PORT
 const MONGODB_URI = process.env.MONGODB_URI
 
-module.exports = {
-  MONGODB_URI,
-  PORT
-}
+module.exports = { MONGODB_URI, PORT }
 ```
 
 The other parts of the application can access the environment variables by importing the configuration module:
@@ -77,22 +72,6 @@ const config = require('./utils/config')
 
 logger.info(`Server running on port ${config.PORT}`)
 ```
-
-The contents of the <i>index.js</i> file used for starting the application gets simplified as follows:
-
-```js
-const app = require('./app') // the actual Express application
-const config = require('./utils/config')
-const logger = require('./utils/logger')
-
-app.listen(config.PORT, () => {
-  logger.info(`Server running on port ${config.PORT}`)
-})
-```
-
-The <i>index.js</i> file only imports the actual application from the <i>app.js</i> file and then starts the application. The function _info_ of the logger-module is used for the console printout telling that the application is running.
-
-Now the Express app and the code taking care of the web server are separated from each other following the [best](https://dev.to/nermineslimane/always-separate-app-and-server-files--1nc7) practices. One of the advantages of this method is that the application can now be tested at the level of HTTP API calls without actually making calls via HTTP over the network, this makes the execution of tests faster.
 
 The route handlers have also been moved into a dedicated module. The event handlers of routes are commonly referred to as <i>controllers</i>, and for this reason we have created a new <i>controllers</i> directory. All of the routes related to notes are now in the <i>notes.js</i> module under the <i>controllers</i> directory.
 
@@ -208,31 +187,29 @@ app.use('/api/notes', notesRouter)
 
 The router we defined earlier is used <i>if</i> the URL of the request starts with <i>/api/notes</i>. For this reason, the notesRouter object must only define the relative parts of the routes, i.e. the empty path <i>/</i> or just the parameter <i>/:id</i>.
 
-After making these changes, our <i>app.js</i> file looks like this:
+A file defining the application, <i>app.js</i>, has been created in the root of the repository:
 
 ```js
-const config = require('./utils/config')
 const express = require('express')
-const app = express()
-const cors = require('cors')
+const mongoose = require('mongoose')
+const config = require('./utils/config')
+const logger = require('./utils/logger')
 const notesRouter = require('./controllers/notes')
 const middleware = require('./utils/middleware')
-const logger = require('./utils/logger')
-const mongoose = require('mongoose')
 
-mongoose.set('strictQuery', false)
+const app = express()
 
 logger.info('connecting to', config.MONGODB_URI)
 
-mongoose.connect(config.MONGODB_URI)
+mongoose
+  .connect(config.MONGODB_URI)
   .then(() => {
     logger.info('connected to MongoDB')
   })
   .catch((error) => {
-    logger.error('error connecting to MongoDB:', error.message)
+    logger.error('error connection to MongoDB:', error.message)
   })
 
-app.use(cors())
 app.use(express.static('dist'))
 app.use(express.json())
 app.use(middleware.requestLogger)
@@ -308,23 +285,39 @@ noteSchema.set('toJSON', {
 module.exports = mongoose.model('Note', noteSchema)
 ```
 
+The contents of the <i>index.js</i> file used for starting the application gets simplified as follows:
+
+```js
+const app = require('./app') // the actual Express application
+const config = require('./utils/config')
+const logger = require('./utils/logger')
+
+app.listen(config.PORT, () => {
+  logger.info(`Server running on port ${config.PORT}`)
+})
+```
+
+The <i>index.js</i> file only imports the actual application from the <i>app.js</i> file and then starts the application. The function _info_ of the logger-module is used for the console printout telling that the application is running.
+
+Now the Express app and the code taking care of the web server are separated from each other following the [best](https://dev.to/nermineslimane/always-separate-app-and-server-files--1nc7) practices. One of the advantages of this method is that the application can now be tested at the level of HTTP API calls without actually making calls via HTTP over the network, this makes the execution of tests faster.
+
 To recap, the directory structure looks like this after the changes have been made:
 
 ```bash
-├── index.js
-├── app.js
-├── dist
-│   └── ...
 ├── controllers
 │   └── notes.js
+├── dist
+│   └── ...
 ├── models
 │   └── note.js
-├── package-lock.json
-├── package.json
 ├── utils
 │   ├── config.js
 │   ├── logger.js
 │   └── middleware.js  
+├── app.js
+├── index.js
+├── package-lock.json
+├── package.json
 ```
 
 For smaller applications, the structure does not matter that much. Once the application starts to grow in size, you are going to have to establish some kind of structure and separate the different responsibilities of the application into separate modules. This will make developing the application much easier.
@@ -348,11 +341,7 @@ const error = (...params) => {
   console.error(...params)
 }
 
-// highlight-start
-module.exports = {
-  info, error
-}
-// highlight-end
+module.exports = { info, error } // highlight-line
 ```
 
 The file exports <i>an object</i> that has two fields, both of which are functions. The functions can be used in two different ways. The first option is to require the whole object and refer to functions through the object using the dot notation:
