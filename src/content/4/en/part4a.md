@@ -11,7 +11,7 @@ Let's continue our work on the backend of the notes application we started in [p
 
 ### Project structure
 
-**Note**: this course material was written with version v20.11.0 of Node.js. Please make sure that your version of Node is at least as new as the version used in the material (you can check the version by running _node -v_ in the command line).
+**Note**: this course material was written with version v22.3.0 of Node.js. Please make sure that your version of Node is at least as new as the version used in the material (you can check the version by running _node -v_ in the command line).
 
 Before we move into the topic of testing, we will modify the structure of our project to adhere to Node.js best practices.
 
@@ -400,7 +400,7 @@ The nature of VS Code bleeding into how you write your code is probably not idea
 
 ### Exercises 4.1.-4.2.
 
-**Note**: this course material was written with version v20.11.0 of Node.js. Please make sure that your version of Node is at least as new as the version used in the material (you can check the version by running _node -v_ in the command line).
+**Note**: this course material was written with version v22.3.0 of Node.js. Please make sure that your version of Node is at least as new as the version used in the material (you can check the version by running _node -v_ in the command line).
 
 In the exercises for this part, we will be building a <i>blog list application</i>, that allows users to save information about interesting blogs they have stumbled across on the internet. For each listed blog we will save the author, title, URL, and amount of upvotes from users of the application.
 
@@ -410,15 +410,15 @@ Let's imagine a situation, where you receive an email that contains the followin
 
 ```js
 const express = require('express')
-const app = express()
-const cors = require('cors')
 const mongoose = require('mongoose')
 
-const blogSchema = new mongoose.Schema({
+const app = express()
+
+const blogSchema = mongoose.Schema({
   title: String,
   author: String,
   url: String,
-  likes: Number
+  likes: Number,
 })
 
 const Blog = mongoose.model('Blog', blogSchema)
@@ -426,25 +426,20 @@ const Blog = mongoose.model('Blog', blogSchema)
 const mongoUrl = 'mongodb://localhost/bloglist'
 mongoose.connect(mongoUrl)
 
-app.use(cors())
 app.use(express.json())
 
 app.get('/api/blogs', (request, response) => {
-  Blog
-    .find({})
-    .then(blogs => {
-      response.json(blogs)
-    })
+  Blog.find({}).then((blogs) => {
+    response.json(blogs)
+  })
 })
 
 app.post('/api/blogs', (request, response) => {
   const blog = new Blog(request.body)
 
-  blog
-    .save()
-    .then(result => {
-      response.status(201).json(result)
-    })
+  blog.save().then((result) => {
+    response.status(201).json(result)
+  })
 })
 
 const PORT = 3003

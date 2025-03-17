@@ -11,7 +11,7 @@ Jatketaan [osassa 3](/osa3) tehdyn muistiinpanosovelluksen backendin kehittämis
 
 ### Sovelluksen rakenne
 
-**HUOM**: Kurssimateriaalia tehtäessä on ollut käytössä Node.js:n versio <i>v20.11.0</i>. Suosittelen, että omasi on vähintään yhtä tuore (ks. komentoriviltä _node -v_).
+**HUOM**: Kurssimateriaalia tehtäessä on ollut käytössä Node.js:n versio <i>v22.3.0</i>. Suosittelen, että omasi on vähintään yhtä tuore (ks. komentoriviltä _node -v_).
 
 Ennen osan ensimmäistä isoa teemaa eli testaamista muutetaan sovelluksen rakennetta noudattamaan paremmin Noden yleisiä konventioita.
 
@@ -391,7 +391,7 @@ Eli eksportoitava asia (tässä tilanteessa router-olio) sijoitetaan muuttujaan 
 
 ### Tehtävät 4.1.-4.2.
 
-**HUOM**: Kurssimateriaalia tehtäessä on ollut käytössä Node.js:n versio <i>v20.11.0</i>. Suosittelen, että omasi on vähintään yhtä tuore (ks. komentoriviltä _node -v_).
+**HUOM**: Kurssimateriaalia tehtäessä on ollut käytössä Node.js:n versio <i>v22.3.0</i>. Suosittelen, että omasi on vähintään yhtä tuore (ks. komentoriviltä _node -v_).
 
 Rakennamme tämän osan tehtävissä <i>blogilistasovellusta</i>, jonka avulla käyttäjien on mahdollista tallettaa tietoja Internetistä löytämistään mielenkiintoisista blogeista. Kustakin blogista talletetaan sen kirjoittaja (author), aihe (title), url sekä blogilistasovelluksen käyttäjien antamien äänien määrä.
 
@@ -401,15 +401,15 @@ Kuvitellaan tilanne, jossa saat sähköpostitse seuraavan, yhteen tiedostoon koo
 
 ```js
 const express = require('express')
-const app = express()
-const cors = require('cors')
 const mongoose = require('mongoose')
+
+const app = express()
 
 const blogSchema = mongoose.Schema({
   title: String,
   author: String,
   url: String,
-  likes: Number
+  likes: Number,
 })
 
 const Blog = mongoose.model('Blog', blogSchema)
@@ -417,31 +417,27 @@ const Blog = mongoose.model('Blog', blogSchema)
 const mongoUrl = 'mongodb://localhost/bloglist'
 mongoose.connect(mongoUrl)
 
-app.use(cors())
 app.use(express.json())
 
 app.get('/api/blogs', (request, response) => {
-  Blog
-    .find({})
-    .then(blogs => {
-      response.json(blogs)
-    })
+  Blog.find({}).then((blogs) => {
+    response.json(blogs)
+  })
 })
 
 app.post('/api/blogs', (request, response) => {
   const blog = new Blog(request.body)
 
-  blog
-    .save()
-    .then(result => {
-      response.status(201).json(result)
-    })
+  blog.save().then((result) => {
+    response.status(201).json(result)
+  })
 })
 
 const PORT = 3003
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
+
 ```
 
 Tee sovelluksesta toimiva <i>npm</i>-projekti. Jotta sovelluskehitys olisi sujuvaa, konfiguroi sovellus suoritettavaksi komennolla <i>node --watch</i>. Voit luoda sovellukselle uuden tietokannan MongoDB Atlasiin tai käyttää edellisen osan sovelluksen tietokantaa.
