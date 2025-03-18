@@ -715,9 +715,7 @@ Mitä rivillä tapahtuu? <em>notes.map(n => Number(n.id))</em> muodostaa tauluko
 
 ### Tehtävät 3.1.-3.6.
 
-**HUOM:** tämän osan tehtäväsarja kannattaa tehdä omaan Git-repositorioon ja suoraan repositorion juureen! Jos et tee näin, joudut ongelmiin tehtävässä 3.10
-
-**HUOM2:** Koska nyt ei ole kyse frontendista ja Reactista, sovellusta <strong>ei luoda</strong> Vitellä vaan komennolla <em>npm init</em>, kuten ylempänä tämän osan materiaalissa.
+**HUOM:** Koska nyt ei ole kyse frontendista ja Reactista, sovellusta <strong>ei luoda</strong> Vitellä vaan komennolla <em>npm init</em>, kuten ylempänä tämän osan materiaalissa.
 
 
 **Vahva suositus:** kun teet backendin koodia, pidä koko ajan silmällä, mitä palvelimen koodia suorittavassa konsolissa tapahtuu.

@@ -261,7 +261,7 @@ The minified code is not very readable. The beginning of the code looks like thi
 
 ### Serving static files from the backend
 
-One option for deploying the frontend is to copy the production build (the <i>dist</i> directory) to the root of the backend repository and configure the backend to show the frontend's <i>main page</i> (the file <i>dist/index.html</i>) as its main page.
+One option for deploying the frontend is to copy the production build (the <i>dist</i> directory) to the root of the backend directory and configure the backend to show the frontend's <i>main page</i> (the file <i>dist/index.html</i>) as its main page.
 
 We begin by copying the production build of the frontend to the root of the backend. With a Mac or Linux computer, the copying can be done from the frontend directory with the command
 
@@ -301,7 +301,7 @@ const getAll = () => {
 // ...
 ```
 
-After the change, we have to create a new production build of the frontend and copy it to the root of the backend repository.
+After the change, we have to create a new production build of the frontend and copy it to the root of the backend directory.
 
 The application can now be used from the <i>backend</i> address <http://localhost:3001>:
 
@@ -354,7 +354,7 @@ fly deploy
 <strong>NOTE:</strong> The _.dockerignore_ file in your project directory lists files not uploaded during deployment. The dist directory may be included by default. If that's the case, remove its reference from the .dockerignore file, ensuring your app is properly deployed.
 
 
-<strong>In the case of Render</strong>, commit the production build of the frontend to the backend repository, and push the code to GitHub again. Make sure the directory <i>dist</i> is not ignored by git on the backend. A push to GitHub <i>might</i> be enough. If the automatic deployment does not work, select the "manual deploy" from the Render dashboard.
+<strong>In the case of Render</strong>, commit the changes, and push the code to GitHub again. Make sure the directory <i>dist</i> is not ignored by git on the backend. A push to GitHub <i>might</i> be enough. If the automatic deployment does not work, select the "manual deploy" from the Render dashboard.
 
 The application works perfectly, except we haven't added the functionality for changing the importance of a note to the backend yet.
 
@@ -392,6 +392,14 @@ The scripts look like this:
   }
 }
 ```
+
+The script _npm run build:ui_ builds the frontend and copies the production version under the backend repository. The script _npm run deploy_ releases the current backend to Fly.io.
+
+_npm run deploy:full_ combines these two scripts, i.e., _npm run build:ui_ and _npm run deploy_.
+
+There is also a script _npm run logs:prod_ to show the Fly.io logs.
+
+Note that the directory paths in the script <i>build:ui</i> depend on the location of the frontend and backend directories in the file system.
   
 ##### Note for Windows users
 
@@ -402,14 +410,6 @@ Note that the standard shell commands in `build:ui` do not natively work in Wind
 ```
   
 If the script does not work on Windows, confirm that you are using Powershell and not Command Prompt. If you have installed Git Bash or another Linux-like terminal, you may be able to run Linux-like commands on Windows as well.
-
-The script _npm run build:ui_ builds the frontend and copies the production version under the backend repository. The script _npm run deploy_ releases the current backend to Fly.io.
-
-_npm run deploy:full_ combines these two scripts, i.e., _npm run build:ui_ and _npm run deploy_.
-
-There is also a script _npm run logs:prod_ to show the Fly.io logs.
-
-Note that the directory paths in the script <i>build:ui</i> depend on the location of repositories in the file system.
 
 #### Render
 
@@ -429,7 +429,7 @@ In case of Render, the scripts look like the following
 
 The script _npm run build:ui_ builds the frontend and copies the production version under the backend repository. _npm run deploy:full_ contains also the necessary <i>git</i> commands to update the backend repository.
 
-Note that the directory paths in the script <i>build:ui</i> depend on the location of repositories in the file system.
+Note that the directory paths in the script <i>build:ui</i> depend on the location of the frontend and backend directories in the file system.
 
 >**NB**  On Windows, npm scripts are executed in cmd.exe as the default shell which does not support bash commands. For the above bash commands to work, you can change the default shell to Bash (in the default Git for Windows installation) as follows:
 
@@ -453,7 +453,7 @@ const baseUrl = '/api/notes'
 
 Because in development mode the frontend is at the address <i>localhost:5173</i>, the requests to the backend go to the wrong address <i>localhost:5173/api/notes</i>. The backend is at <i>localhost:3001</i>.
 
-If the project was created with Vite, this problem is easy to solve. It is enough to add the following declaration to the <i>vite.config.js</i> file of the frontend repository.
+If the project was created with Vite, this problem is easy to solve. It is enough to add the following declaration to the <i>vite.config.js</i> file of the frontend directory.
 
 ```bash
 import { defineConfig } from 'vite'
@@ -484,9 +484,7 @@ Now the frontend is also working correctly. It functions both in development mod
 npm remove cors
 ```
 
-We have now successfully deployed the entire application to the internet. A negative aspect of our approach is how complicated it is to deploy the frontend. Deploying a new version requires generating a new production build of the frontend and copying it to the backend repository. This makes creating an automated [deployment pipeline](https://martinfowler.com/bliki/DeploymentPipeline.html) more difficult. Deployment pipeline means an automated and controlled way to move the code from the computer of the developer through different tests and quality checks to the production environment. Building a deployment pipeline is the topic of [part 11](/en/part11) of this course. There are multiple ways to achieve this, for example, placing both backend and frontend code in the same repository but we will not go into those now.
-
-In some situations, it may be sensible to deploy the frontend code as its own application.
+We have now successfully deployed the entire application to the internet. There are many other ways to implement deployments. For example, deploying the frontend code as its own application may be sensible in some situations, as it can facilitate the implementation of an automated [deployment pipeline](https://martinfowler.com/bliki/DeploymentPipeline.html). A deployment pipeline refers to an automated and controlled way to move code from the developer's machine through various tests and quality control stages to the production environment. This topic is covered in [part 11](/en/part11) of the course.
 
 The current backend code can be found on [Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3), in the branch <i>part3-3</i>. The changes in frontend code are in <i>part3-1</i> branch of the [frontend repository](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part3-1).
 

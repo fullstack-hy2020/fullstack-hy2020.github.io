@@ -220,7 +220,7 @@ Minifioitu koodi ei ole miellyttävää luettavaa. Koodin alku näyttää seuraa
 
 ### Staattisten tiedostojen tarjoaminen backendistä
 
-Eräs mahdollisuus frontendin tuotantoon viemiseen on kopioida tuotantokoodi eli hakemisto <i>dist</i> backendin repositorion juureen ja määritellä backend näyttämään pääsivunaan frontendin <i>pääsivu</i> eli tiedosto <i>dist/index.html</i>.
+Eräs mahdollisuus frontendin tuotantoon viemiseen on kopioida tuotantokoodi eli hakemisto <i>dist</i> backendin hakemiston juureen ja määritellä backend näyttämään pääsivunaan frontendin <i>pääsivu</i> eli tiedosto <i>dist/index.html</i>.
 
 Aloitetaan kopioimalla frontendin tuotantokoodi backendin alle, projektin juureen. Omalla koneellani kopiointi tapahtuu frontendin hakemistosta käsin komennolla
 
@@ -258,7 +258,7 @@ const getAll = () => {
 // ...
 ```
 
-Muutoksen jälkeen frontendistä on luotava uusi production build ja kopioitava se backendin repositorion juureen.
+Muutoksen jälkeen frontendistä on luotava uusi production build ja kopioitava se backendin projektin juureen.
 
 Sovellusta voidaan käyttää nyt <i>backendin</i> osoitteesta <http://localhost:3001>:
 
@@ -310,11 +310,11 @@ fly deploy
 
 <strong>HUOM:</strong> Projektin juureen luotu _.dockerignore_-tiedosto listaa ne tiedostot, joita ei oteta mukaan deploymentiin, ja dist-kansio saattaa olla siellä mukana oletuksena. Jos näin on, poista viittaus dist/ _.dockerignore_-tiedostosta, jotta sovelluksesi otetaan käyttöön oikein.
 
-<strong>Renderin tapauksessa</strong> commitoidaan frontendin tuotantoversio backendin repositorioon ja pushataan koodi GitHubiin. Automaattinen uudelleenkäynnistys saattaa toimia, mutta jos näin ei ole, käynnistä uusi versio itse dashboardin kautta tekemällä "manual deployment".
+<strong>Renderin tapauksessa</strong> commitoidaan tehdyt muutokset ja pushataan koodi GitHubiin. Automaattinen uudelleenkäynnistys saattaa toimia, mutta jos näin ei ole, käynnistä uusi versio itse dashboardin kautta tekemällä "manual deployment".
 
 Sovellus toimii moitteettomasti lukuun ottamatta vielä backendiin toteuttamatonta muistiinpanon tärkeyden muuttamista:
 
-![Selain renderöi sovelluksen frontendin (joka näyttää palvelimella olevan datan) mentäessä sovelluksen heroku-urlin juureen](../../images/3/30new.png)
+![Selain renderöi sovelluksen frontendin (joka näyttää palvelimella olevan datan) mentäessä sovelluksen urlin juureen](../../images/3/30new.png)
 
 Sovelluksemme tallettama tieto ei ole ikuisesti pysyvää, sillä sovellus tallettaa muistiinpanot muuttujaan. Jos sovellus kaatuu tai se uudelleenkäynnistetään, kaikki tiedot katoavat.
 
@@ -345,6 +345,12 @@ Fly.io:n tapauksessa skriptit näyttävät seuraavalta:
   }
 }
 ```
+
+Skripteistä _npm run build:ui_ kääntää ui:n tuotantoversioksi ja kopioi sen. _npm run deploy_ julkaisee Fly.io:n.
+
+_npm run deploy:full_ yhdistää molemmat edellä mainitut komennot. Lisätään lisäksi oma skripti _npm run logs:prod_ lokien lukemiseen, jolloin käytännössä kaikki toimii npm-skriptein.
+
+Huomaa, että skriptissä <i>build:ui</i> olevat polut riippuvat frontendin ja backendin hakemistojen sijainnista.
   
 ##### Huomautus Windows-käyttäjille
 Huomaa, että näistä _build:ui_:n käyttämät shell-komennot eivät toimi natiivisti Windowsilla, jonka powershell käyttää eri komentoja. Tällöin skripti olisi
@@ -354,12 +360,6 @@ Huomaa, että näistä _build:ui_:n käyttämät shell-komennot eivät toimi nat
   
 Mikäli skripti ei toimi Windowsilla, tarkista, että terminaalisi sovelluskehitysympäristössäsi on Powershell eikä esimerkiksi Command Prompt. Jos olet asentanut Git Bash ‑terminaalin, tai muun Linuxia matkivan terminaalin tai ympäristön, saatat pystyä ajamaan Linuxin kaltaisia komentoja myös Windowsilla.
 
-
-Skripteistä _npm run build:ui_ kääntää ui:n tuotantoversioksi ja kopioi sen. _npm run deploy_ julkaisee Fly.io:n.
-
-_npm run deploy:full_ yhdistää molemmat edellä mainitut komennot. Lisätään lisäksi oma skripti _npm run logs:prod_ lokien lukemiseen, jolloin käytännössä kaikki toimii npm-skriptein.
-
-Huomaa, että skriptissä <i>build:ui</i> olevat polut riippuvat repositorioiden sijainnista.
 
 #### Render
 
@@ -379,7 +379,7 @@ Skripteistä _npm run build:ui_ kääntää ui:n tuotantoversioksi ja kopioi sen
 
 _npm run deploy:full_ sisältää edellisen lisäksi vaadittavat <i>git</i>-komennot versionhallinnan päivittämistä varten.
 
-Huomaa, että skriptissä <i>build:ui</i> olevat polut riippuvat repositorioiden sijainnista.
+Huomaa, että skriptissä <i>build:ui</i> olevat polut riippuvat frontendin ja backendin hakemistojen sijainnista.
 
 ### Proxy
 
@@ -395,7 +395,7 @@ const baseUrl = '/api/notes'
 
 Koska frontend toimii osoitteessa <i>localhost:5173</i>, menevät backendiin tehtävät pyynnöt väärään osoitteeseen <i>localhost:5173/api/notes</i>. Backend toimii kuitenkin osoitteessa <i>localhost:3001</i>.
 
-Vitellä luoduissa projekteissa ongelma on helppo ratkaista. Riittää, että frontendin repositorion tiedostoon <i>vite.config.js</i> lisätään seuraava määritelmä:
+Vitellä luoduissa projekteissa ongelma on helppo ratkaista. Riittää, että frontendin tiedostoon <i>vite.config.js</i> lisätään seuraava määritelmä:
 
 ```bash
 import { defineConfig } from 'vite'
@@ -426,9 +426,7 @@ Nyt myös frontend on kunnossa. Se toimii sekä sovelluskehitysmoodissa että tu
 npm remove cors
 ```
 
-Olemme nyt vieneet koko sovelluksen onnistuneesti internetiin. Eräs negatiivinen puoli käyttämässämme lähestymistavassa on, että sovelluksen uuden version tuotantoon vieminen edellyttää erillisessä repositoriossa olevan frontendin koodin tuotantoversion generoimista. Tämä taas hankaloittaa automatisoidun [deployment pipelinen](https://martinfowler.com/bliki/DeploymentPipeline.html) toteuttamista. Deployment pipelinellä tarkoitetaan automatisoitua ja hallittua tapaa viedä koodi sovelluskehittäjän koneelta erilaisten testien ja laadunhallinnallisten vaiheiden kautta tuotantoympäristöön. Aiheeseen tutustutaan kurssin [osassa 11](https://fullstackopen.com/osa11).
-
-Tähänkin on useita erilaisia ratkaisuja (esim. sekä frontendin että backendin [sijoittaminen samaan repositorioon](https://github.com/mars/heroku-cra-node)), emme kuitenkaan nyt mene niihin. Myös frontendin koodin deployaaminen omana sovelluksenaan voi joissain tilanteissa olla järkevää.
+Olemme nyt vieneet koko sovelluksen onnistuneesti internetiin. Deploymenttien toteuttamiseen on olemassa monenlaisia muitakin tapoja. Esimerkiksi frontendin koodin deployaaminen omana sovelluksenaan voi joissain tilanteissa olla järkevää, sillä se voi helpottaa automatisoidun [deployment pipelinen](https://martinfowler.com/bliki/DeploymentPipeline.html) toteuttamista. Deployment pipelinellä tarkoitetaan automatisoitua ja hallittua tapaa viedä koodi sovelluskehittäjän koneelta erilaisten testien ja laadunhallinnallisten vaiheiden kautta tuotantoympäristöön. Aiheeseen tutustutaan kurssin [osassa 11](https://fullstackopen.com/osa11).
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3), branchissa <i>part3-3</i>.
 

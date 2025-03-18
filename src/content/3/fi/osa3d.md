@@ -164,7 +164,7 @@ Jos HTTP POST ‑pyyntö yrittää lisätä virheellistä numeroa, tulee vastata
 
 #### 3.21 tietokantaa käyttävä versio Internetiin
 
-Generoi päivitetystä sovelluksesta "full stack" ‑versio, eli tee frontendista uusi production build ja kopioi se backendin repositorioon. Varmista, että kaikki toimii paikallisesti käyttämällä koko sovellusta backendin osoitteesta <http://localhost:3001>.
+Generoi päivitetystä sovelluksesta "full stack" ‑versio, eli tee frontendista uusi production build ja kopioi se backendin juureen. Varmista, että kaikki toimii paikallisesti käyttämällä koko sovellusta backendin osoitteesta <http://localhost:3001>.
 
 Pushaa uusi versio Fly.io:n tai Renderiin ja varmista, että kaikki toimii myös siellä.
 
