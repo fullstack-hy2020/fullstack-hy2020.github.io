@@ -740,7 +740,7 @@ const Button = ({ onClick, text }) => (
 Or, similar to the Display example, you can further optimize the Button component to a single line by removing the parentheses and formatting it as follows:
 
 ```js
-const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>;
+const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
 ```
 
 This approach works because the component contains only a single return statement, making it possible to use the concise arrow function syntax.
