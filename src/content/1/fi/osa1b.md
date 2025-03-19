@@ -522,7 +522,7 @@ Syntaksin osalta luokat ja niistä luodut oliot muistuttavat erittäin paljon es
 
 Luokkasyntaksin tuominen JavaScriptiin on osin kiistelty lisäys, kts. esim. [Not Awesome: ES6 Classes](https://github.com/petsel/not-awesome-es6-classes) tai [Is “Class” In ES6 The New “Bad” Part?](https://medium.com/@rajaraodv/is-class-in-es6-the-new-bad-part-6c4e6fe1ee65).
 
-ES6:n luokkasyntaksia käytetään paljon "vanhassa" Reactissa ja Node.js:ssä ja siksi sen tunteminen on tälläkin kurssilla paikallaan. Koska käytämme kurssilla Reactiin vuonna 2019 lisättyä [hook](https://react.dev/reference/react)-ominaisuutta, meidän ei ole tarvetta käyttää kurssilla ollenkaan JavaScriptin luokkasyntaksia.
+ES6:n luokkasyntaksia käytetään paljon "vanhassa" Reactissa ja Node.js:ssä ja siksi sen tunteminen on tälläkin kurssilla paikallaan. Koska käytämme kurssilla Reactiin vuonna 2019 lisättyä [hook](https://react.dev/reference/react/hooks)-ominaisuutta, meidän ei ole tarvetta käyttää kurssilla ollenkaan JavaScriptin luokkasyntaksia.
 
 ### JavaScript-materiaalia
 

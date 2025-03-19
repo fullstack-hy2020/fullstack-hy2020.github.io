@@ -9,7 +9,7 @@ lang: fr
 
 ### Hooks
 
-React offre 15 [hooks intégrés](https://react.dev/reference/react) différents, parmi lesquels les plus populaires sont les hooks [useState](https://react.dev/reference/react/useState) et [useEffect](https://react.dev/reference/react/useEffect) que nous avons déjà beaucoup utilisés.
+React offre 15 [hooks intégrés](https://react.dev/reference/react/hooks) différents, parmi lesquels les plus populaires sont les hooks [useState](https://react.dev/reference/react/useState) et [useEffect](https://react.dev/reference/react/useEffect) que nous avons déjà beaucoup utilisés.
 
 Dans la [partie 5](/fr/part5/props_children_et_proptypes#references-aux-composants-avec-ref), nous avons utilisé le hook [useImperativeHandle]((https://react.dev/reference/react/useImperativeHandle)) qui permet aux composants de fournir leurs fonctions à d'autres composants. Dans la [partie 6](/en/part6/react_query_use_reducer_and_the_context), nous avons utilisé [useReducer](https://react.dev/reference/react/useReducer) et [useContext](https://react.dev/reference/react/useContext) pour implémenter une gestion d'état à la manière de Redux.
 
