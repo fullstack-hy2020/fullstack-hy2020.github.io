@@ -46,7 +46,7 @@ const InfoBanner = ({ visible, onHide }) => {
     <div style={style}>
       <div style={textStyle}>
         <p style={{ marginBottom: 20}}>
-          A new exercise has been added at the on of Part 9 "Typing an Express app" at 28th August 2024. Because of that numbering the of Exercises 9.14- has changed.
+          A new exercise has been added at the end of Part 9 "Typing an Express app" at 28th August 2024. Because of that numbering of the Exercises 9.14- has changed.
         </p>  
       </div>
       <div style={buttonDiv}>
