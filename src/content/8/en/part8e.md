@@ -464,7 +464,7 @@ The file <i>index.js</i> is changed to:
 ```js
 // highlight-start
 const { WebSocketServer } = require('ws')
-const { useServer } = require('graphql-ws/lib/use/ws')
+const { useServer } = require('graphql-ws/use/ws')
 // highlight-end
 
 // ...
@@ -589,7 +589,7 @@ const resolvers = {
   // highlight-start
   Subscription: {
     personAdded: {
-      subscribe: () => pubsub.asyncIterator('PERSON_ADDED')
+      subscribe: () => pubsub.asyncIterableIterator('PERSON_ADDED')
     },
   },
   // highlight-end
