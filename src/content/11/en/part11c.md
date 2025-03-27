@@ -84,7 +84,7 @@ Before going to the automated deployment, we shall ensure in this exercise that 
 So, create a new app in Fly.io. After that generate a Fly.io API token with the command
 
 ```bash
-flyctl auth token
+fly tokens create
 ```
 
 You'll need the token soon for your deployment workflow so save it somewhere (but do not commit that to GitHub)!
