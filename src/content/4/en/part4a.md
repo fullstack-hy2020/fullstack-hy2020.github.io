@@ -504,20 +504,17 @@ Nowadays, Node also has a built-in test library [node:test](https://nodejs.org/d
 
 Let's define the <i>npm script _test_</i> for the test execution:
 
-```bash
+```js
 {
-  //...
+  // ...
   "scripts": {
     "start": "node index.js",
     "dev": "node --watch index.js",
-    "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
-    "deploy": "fly deploy",
-    "deploy:full": "npm run build:ui && npm run deploy",
-    "logs:prod": "fly logs",
     "lint": "eslint .",
+    // ...
     "test": "node --test" // highlight-line
   },
-  //...
+  // ...
 }
 ```
 

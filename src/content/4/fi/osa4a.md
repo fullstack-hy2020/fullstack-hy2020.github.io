@@ -493,20 +493,17 @@ Nykyään myös Nodessa on sisäänrakennettu testikirjasto [node:test](https://
 
 Määritellään npm-skripti <i>test</i> testien suorittamiseen: 
 
-```bash
+```js
 {
-  //...
+  // ...
   "scripts": {
     "start": "node index.js",
     "dev": "node --watch index.js",
-    "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
-    "deploy": "fly deploy",
-    "deploy:full": "npm run build:ui && npm run deploy",
-    "logs:prod": "fly logs",
     "lint": "eslint .",
+    // ...
     "test": "node --test" // highlight-line
   },
-  //...
+  // ...
 }
 ```
 
