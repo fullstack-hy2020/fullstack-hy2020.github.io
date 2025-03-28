@@ -586,12 +586,11 @@ Running this test results in the following error message:
 
 ![terminal output shows failure from npm test](../../images/4/2new.png)
 
-Let's put the tests for the _average_ function, into a new file called <i>tests/average.test.js</i>.
+Let's add a few tests for the average function as well. Let's create a new file <i>tests/average.test.js</i> and add the following content to it:
 
 ```js
 const { test, describe } = require('node:test')
-
-// ...
+const assert = require('node:assert')
 
 const average = require('../utils/for_testing').average
 

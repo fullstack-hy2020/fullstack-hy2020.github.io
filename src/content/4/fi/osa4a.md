@@ -484,7 +484,7 @@ module.exports = {
 }
 ```
 
-> Metodi _average_ käyttää taulukoiden metodia [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce). Jos metodi ei ole vieläkään tuttu, on korkea aika katsoa YouTubesta [Functional JavaScript](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84) ‑sarjasta ainakin kolme ensimmäistä videoa.
+> Funktio _average_ käyttää taulukoiden metodia [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce). Jos metodi ei ole vieläkään tuttu, on korkea aika katsoa YouTubesta [Functional JavaScript](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84) ‑sarjasta ainakin kolme ensimmäistä videoa.
 
 JavaScriptiin on tarjolla runsaasti erilaisia testikirjastoja eli <i>test runnereita</i>.
 Testikirjastojen vanha kuningas on [Mocha](https://mochajs.org/), jolta kruunun muutamia vuosia sitten peri [Jest](https://jestjs.io/). Uusi tulokas kirjastojen joukossa on uuden generaation testikirjastoksi itseään mainostava [Vitest](https://vitest.dev/).
@@ -575,12 +575,11 @@ Seurauksena on seuraava virheilmoitus:
 
 ![Konsolin tuloste kertoo että testin odottama merkkijono poikkesi tuloksena olevasta merkkijonosta](../../images/4/2new.png)
 
-Lisätään tiedostoon <i>tests/average.test.js</i> muutama testi metodille _average_:
+Lisätään muutama testi myös funktiolle _average_. Luodaan uusi tiedosto <i>tests/average.test.js</i> ja lisätään sille seuraava sisältö:
 
 ```js
 const { test, describe } = require('node:test')
-
-// ...
+const assert = require('node:assert')
 
 const average = require('../utils/for_testing').average
 
@@ -599,11 +598,11 @@ describe('average', () => {
 })
 ```
 
-Testi paljastaa, että metodi toimii väärin tyhjällä taulukolla (sillä nollalla jaon tulos on JavaScriptissä <i>NaN</i>):
+Testi paljastaa, että funktio toimii väärin tyhjällä taulukolla (sillä nollalla jaon tulos on JavaScriptissä <i>NaN</i>):
 
 ![Konsolin tuloste kertoo että odotetun arvon 0 sijaan tuloksena on NaN](../../images/4/3new.png)
 
-Metodi on helppo korjata:
+Funktio on helppo korjata:
 
 ```js
 const average = array => {
@@ -632,7 +631,7 @@ Describejen avulla yksittäisessä tiedostossa olevat testit voidaan jaotella lo
 
 Kuten myöhemmin tulemme näkemään, <i>describe</i>-lohkot ovat tarpeellisia, jos haluamme osalle yksittäisen testitiedoston testitapauksista joitain yhteisiä alustus- tai lopetustoimenpiteitä.
 
-Toisena huomiona se, että kirjoitimme testit aavistuksen tiiviimmässä muodossa, ottamatta testattavan metodin tulosta erikseen apumuuttujaan:
+Toisena huomiona se, että kirjoitimme testit aavistuksen tiiviimmässä muodossa, ottamatta testattavan funktion tulosta erikseen apumuuttujaan:
 
 ```js
 test('of empty array is zero', () => {
