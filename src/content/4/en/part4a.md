@@ -570,7 +570,7 @@ As expected, all of the tests pass:
 
 ![terminal output from npm test with all tests passing](../../images/4/1new.png)
 
-The library node:test expects by default that the names of test files contain <i>.test</i>. In this course, we will follow the convention of naming our tests files with the extension <i>.test.js</i>.
+In the course, we follow the convention where test file names end with <i>.test.js</i>, as the <i>node:test</i> testing library automatically executes test files named this way.
 
 Let's break the test:
 

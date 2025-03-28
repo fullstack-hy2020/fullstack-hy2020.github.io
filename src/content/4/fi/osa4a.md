@@ -557,9 +557,9 @@ Ensin suoritetaan testattava koodi eli generoidaan merkkijonon <i>react</i> pali
 
 Kuten odotettua, testit menevät läpi:
 
-![Jest kertoo että 3 testiä kolmesta meni läpi](../../images/4/1new.png)
+![Konsolin tuloste kertoo että 3 testiä kolmesta meni läpi](../../images/4/1new.png)
 
-Jest olettaa oletusarvoisesti, että testitiedoston nimessä on merkkijono <i>.test</i>. Käytetään kurssilla konventiota, jossa testitiedostojen nimen loppu on <i>.test.js</i>.
+Käytetään kurssilla konventiota, jossa testitiedostojen nimen loppu on <i>.test.js</i>, sillä testikirjasto <i>node:test</i> suorittaa näin nimetyt testitiedostot automaattisesti.
 
 Node:testin antamat virheilmoitukset ovat hyviä. Rikotaan testi:
 
@@ -573,7 +573,7 @@ test('reverse of react', () => {
 
 Seurauksena on seuraava virheilmoitus:
 
-![Jest kertoo että testin odottama merkkijono poikkesi tuloksena olevasta merkkijonosta](../../images/4/2new.png)
+![Konsolin tuloste kertoo että testin odottama merkkijono poikkesi tuloksena olevasta merkkijonosta](../../images/4/2new.png)
 
 Lisätään tiedostoon <i>tests/average.test.js</i> muutama testi metodille _average_:
 
@@ -601,7 +601,7 @@ describe('average', () => {
 
 Testi paljastaa, että metodi toimii väärin tyhjällä taulukolla (sillä nollalla jaon tulos on JavaScriptissä <i>NaN</i>):
 
-![Jest kertoo että odoteutun arvon 0 sijaan tuloksena on NaN](../../images/4/3new.png)
+![Konsolin tuloste kertoo että odotetun arvon 0 sijaan tuloksena on NaN](../../images/4/3new.png)
 
 Metodi on helppo korjata:
 
