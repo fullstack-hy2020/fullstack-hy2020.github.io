@@ -724,6 +724,8 @@ Paluuarvo voi olla esim. seuraavassa muodossa:
 }
 ```
 
+**HUOM.** Kun vertailet olioita, haluat luultavimmin käyttää [deepStrictEqual](https://nodejs.org/api/assert.html#assertdeepstrictequalactual-expected-message)-metodia, sillä se tarkistaa, että olioilla on samat attribuutit. Assert-moduulin eri metodeista voit lukea lisää esimerkiksi [tästä Stack Overflow -vastauksesta](https://stackoverflow.com/a/73937068/15291501).
+
 Tee myös tämän ja seuraavien kohtien testit kukin oman <i>describe</i>-lohkonsa sisälle.
 
 #### 4.6*: apufunktioita ja yksikkötestejä, step4
