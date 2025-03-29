@@ -715,11 +715,9 @@ const Button = (props) => {
 Destrukturoidaan <i>props</i>:ista tarpeelliset kentät ja käytetään nuolifunktioiden tiiviimpää muotoa:
 
 ```js
-const Button = ({ onClick, text }) => (
-  <button onClick={onClick}>
-    {text}
-  </button>
-)
+const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
 ```
+
+Koska komponentti sisältää vain _return_-lauseen, on tiiviin nuolifunktiosyntaksin käyttö mahdollista.
 
 </div>

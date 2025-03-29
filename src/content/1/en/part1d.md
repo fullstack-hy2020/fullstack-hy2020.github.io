@@ -427,13 +427,7 @@ const History = (props) => {
   )
 }
 
-// highlight-start
-const Button = ({ onClick, text }) => (
-  <button onClick={onClick}>
-    {text}
-  </button>
-)
-// highlight-end
+const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button> // highlight-line
 
 const App = () => {
   const [left, setLeft] = useState(0)
@@ -497,11 +491,7 @@ don't write more code but rather find and fix the problem **immediately**. There
 Old-school, print-based debugging is always a good idea. If the component
 
 ```js
-const Button = ({ onClick, text }) => (
-  <button onClick={onClick}>
-    {text}
-  </button>
-)
+const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
 ```
 
 is not working as intended, it's useful to start printing its variables out to the console. In order to do this effectively, we must transform our function into the less compact form and receive the entire props object without destructuring it immediately:

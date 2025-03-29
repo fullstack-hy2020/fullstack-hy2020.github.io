@@ -421,13 +421,7 @@ const History = (props) => {
   )
 }
 
-// highlight-start
-const Button = ({ onClick, text }) => (
-  <button onClick={onClick}>
-    {text}
-  </button>
-)
-// highlight-end
+const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button> // highlight-line
 
 const App = () => {
   const [left, setLeft] = useState(0)
@@ -491,11 +485,7 @@ Jos ja kun koodi ei käänny eli selaimessa alkaa näkyä punaista
 Vanha kunnon printtaukseen perustuva debuggaus on monesti toimiva tapa. Eli jos esim. komponentissa
 
 ```js
-const Button = ({ onClick, text }) => (
-  <button onClick={onClick}>
-    {text}
-  </button>
-)
+const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
 ```
 
 olisi ongelma, kannattaa komponentista alkaa printtailla konsoliin. Pystyäksemme printtaamaan tulee funktio muuttaa pitempään muotoon ja propsit kannattaa kenties vastaanottaa ilman destrukturointia:

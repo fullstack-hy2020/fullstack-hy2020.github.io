@@ -730,16 +730,6 @@ const Button = (props) => {
 We can use destructuring to get only the required fields from <i>props</i>, and use the more compact form of arrow functions:
 
 ```js
-const Button = ({ onClick, text }) => (
-  <button onClick={onClick}>
-    {text}
-  </button>
-)
-```
-
-Or, similar to the Display example, you can further optimize the Button component to a single line by removing the parentheses and formatting it as follows:
-
-```js
 const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
 ```
 
