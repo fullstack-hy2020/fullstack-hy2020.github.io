@@ -156,7 +156,7 @@ The problem here, however, is that when using a string, the value of the header 
 
 The test contains some details that we will explore [a bit later on](/en/part4/testing_the_backend#async-await). The arrow function that defines the test is preceded by the <i>async</i> keyword and the method call for the <i>api</i> object is preceded by the <i>await</i> keyword. We will write a few tests and then take a closer look at this async/await magic. Do not concern yourself with them for now, just be assured that the example tests work correctly. The async/await syntax is related to the fact that making a request to the API is an <i>asynchronous</i> operation. The async/await syntax can be used for writing asynchronous code with the appearance of synchronous code.
 
-Once all the tests (there is currently only one) have finished running we have to close the database connection used by Mongoose. This can be easily achieved with the [after](https://nodejs.org/api/test.html#afterfn-options) method:
+Once all the tests (there is currently only one) have finished running we have to close the database connection used by Mongoose. Without this, the test program will not terminate. This can be easily achieved with the [after](https://nodejs.org/api/test.html#afterfn-options) method:
 
 ```js
 after(async () => {
@@ -192,7 +192,7 @@ The documentation for supertest says the following:
 
 > <i>if the server is not already listening for connections then it is bound to an ephemeral port for you so there is no need to keep track of ports.</i>
 
-In other words, supertest takes care that the application being tested is started at the port that it uses internally.
+In other words, supertest takes care that the application being tested is started at the port that it uses internally. This is one of the reasons why we are going with supertest instead of something like axios, as we do not need to run another instance of the server separately before beginning to test. The other reason is that supertest provides functions like <code>expect()</code>, which makes testing easier.
 
 Let's add two notes to the test database using the _mongo.js_ program (here we must remember to switch to the correct database url).
 
