@@ -63,11 +63,6 @@ We can then achieve cross-platform compatibility by using the cross-env library 
 }
 ```
 
-**NB**: If you are deploying this application to Fly.io/Render, keep in mind that if cross-env is saved as a development dependency, it would cause an application error on your web server. To fix this, change cross-env to a production dependency by running this in the command line:
-
-```bash
-npm install cross-env
-```
 
 Now we can modify the way that our application runs in different modes. As an example of this, we could define the application to use a separate test database when it is running tests.
 
