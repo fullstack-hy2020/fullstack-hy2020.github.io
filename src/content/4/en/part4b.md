@@ -199,6 +199,9 @@ Let's add two notes to the test database using the _mongo.js_ program (here we m
 Let's write a few more tests:
 
 ```js
+const assert = require('node:assert')
+// ...
+
 test('there are two notes', async () => {
   const response = await api.get('/api/notes')
 
@@ -211,6 +214,8 @@ test('the first note is about HTTP methods', async () => {
   const contents = response.body.map(e => e.content)
   assert.strictEqual(contents.includes('HTML is easy'), true)
 })
+
+// ...
 ```
 
 Both tests store the response of the request to the _response_ variable, and unlike the previous test that used the methods provided by _supertest_ for verifying the status code and headers, this time we are inspecting the response data stored in <i>response.body</i> property. Our tests verify the format and content of the response data with the method [strictEqual](https://nodejs.org/docs/latest/api/assert.html#assertstrictequalactual-expected-message) of the assert-library.

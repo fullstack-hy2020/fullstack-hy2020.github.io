@@ -196,6 +196,9 @@ Lisätään tiedoston _mongo.js_ ohjelmaa käyttämällä testitietokantaan kaks
 Tehdään pari testiä lisää:
 
 ```js
+const assert = require('node:assert')
+// ...
+
 test('there are two notes', async () => {
   const response = await api.get('/api/notes')
 
@@ -208,6 +211,8 @@ test('the first note is about HTTP methods', async () => {
   const contents = response.body.map(e => e.content)
   assert.strictEqual(contents.includes('HTML is easy'), true)
 })
+
+// ...
 ```
 
 Molemmat testit sijoittavat pyynnön vastauksen muuttujaan _response_. Toisin kuin edellisessä testissä (joka käytti SuperTestin mekanismeja statuskoodin ja vastauksen headereiden oikeellisuuden varmistamiseen), tällä kertaa tutkitaan vastauksessa olevan datan eli <i>response.body</i>:n oikeellisuutta _assert_-kirjaston [strictEqual](https://nodejs.org/docs/latest/api/assert.html#assertstrictequalactual-expected-message) metodilla.
