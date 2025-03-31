@@ -40,10 +40,10 @@ Määritellään nyt tiedostossa <i>package.json</i>, että testejä suoritettae
 
 Samalla määriteltiin, että suoritettaessa sovellusta komennolla _npm run dev_ sovelluksen moodi on <i>development</i>. Jos sovellusta suoritetaan komennolla _npm start_, on moodiksi määritelty <i>production</i>.
 
-Määrittelyssämme on kuitenkin pieni ongelma: se ei toimi Windowsilla. Tilanne korjautuu asentamalla kirjasto [cross-env](https://www.npmjs.com/package/cross-env) kehitysaikaiseksi riippuvuudeksi komennolla
+Määrittelyssämme on kuitenkin pieni ongelma: se ei toimi Windowsilla. Tilanne korjautuu asentamalla kirjasto [cross-env](https://www.npmjs.com/package/cross-env) komennolla
 
 ```bash
-npm install --save-dev cross-env
+npm install cross-env
 ```
 
 ja muuttamalla <i>package.json</i> kaikilla käyttöjärjestelmillä toimivaan muotoon:
