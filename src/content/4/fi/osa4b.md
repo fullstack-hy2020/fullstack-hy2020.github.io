@@ -153,7 +153,7 @@ Tässä ongelmana on kuitenkin se, että käytettäessä merkkijonoa, tulee head
 
 Testissä on muutama detalji joihin tutustumme vasta [hieman myöhemmin](/osa4/backendin_testaaminen#async-await) tässä osassa. Testikoodin määrittelevä nuolifunktio alkaa sanalla <i>async</i>, ja <i>api</i>-oliolle tehtyä metodikutsua edeltää sana <i>await</i>. Teemme ensin muutamia testejä ja tutustumme sen jälkeen async/await-magiaan. Tällä hetkellä niistä ei tarvitse välittää, sillä kaikki toimii kunhan kirjoitat testimetodit esimerkin mukaan. Async/await-syntaksin käyttö liittyy siihen, että palvelimelle tehtävät pyynnöt ovat <i>asynkronisia</i> operaatioita. Async/await-syntaksia käyttämällä saamme pyynnön näyttämään koodin tasolla synkronisesti toimivalta.
 
-Kaikkien testien (joita siis tällä kertaa on vain yksi) päätteeksi on vielä lopputoimenpiteenä katkaistava Mongoosen käyttämä tietokantayhteys. Tämä onnistuu helposti metodissa [after](https://nodejs.org/api/test.html#afterfn-options):
+Kaikkien testien (joita siis tällä kertaa on vain yksi) päätteeksi on vielä lopputoimenpiteenä katkaistava Mongoosen käyttämä tietokantayhteys, sillä muuten ohjelman suoritus ei pääty. Tämä onnistuu helposti metodissa [after](https://nodejs.org/api/test.html#afterfn-options):
 
 ```js
 after(async () => {
@@ -189,7 +189,7 @@ SuperTestin dokumentaatio toteaa seuraavaa:
 
 > <i>if the server is not already listening for connections then it is bound to an ephemeral port for you so there is no need to keep track of ports.</i>
 
-SuperTest siis huolehtii testattavan sovelluksen käynnistämisestä sisäisesti käyttämäänsä porttiin.
+SuperTest siis huolehtii testattavan sovelluksen käynnistämisestä sisäisesti käyttämäänsä porttiin. Tämä on yksi syy siihen, miksi käytämme SuperTestiä emmekä esimerkiksi axiosia, sillä meidän ei tarvitse erikseen käynnistää palvelinta ennen testauksen aloittamista. SuperTest tarjoaa myös funktioita, kuten _expect_, jotka tekevät testauksesta helpompaa.
 
 Lisätään tiedoston _mongo.js_ ohjelmaa käyttämällä testitietokantaan kaksi muistiinpanoa (tässä kohtaa on muistettava vaihtaa käyttöön oikea tietokantaurl).
 
