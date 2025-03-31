@@ -325,6 +325,7 @@ It is recommended to create a separate _npm script_ for linting:
   "scripts": {
     "start": "node index.js",
     "dev": "node --watch index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ." // highlight-line
     // ...
   },

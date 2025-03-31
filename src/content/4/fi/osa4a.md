@@ -499,9 +499,8 @@ Määritellään npm-skripti <i>test</i> testien suorittamiseen:
   "scripts": {
     "start": "node index.js",
     "dev": "node --watch index.js",
-    "lint": "eslint .",
-    // ...
-    "test": "node --test" // highlight-line
+    "test": "node --test", // highlight-line
+    "lint": "eslint ."
   },
   // ...
 }

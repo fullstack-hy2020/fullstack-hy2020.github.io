@@ -30,12 +30,8 @@ Next, let's change the scripts in our notes application <i>package.json</i> file
     "start": "NODE_ENV=production node index.js", // highlight-line
     "dev": "NODE_ENV=development node --watch index.js", // highlight-line
     "test": "NODE_ENV=test node --test", // highlight-line
-    "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
-    "deploy": "fly deploy",
-    "deploy:full": "npm run build:ui && npm run deploy",
-    "logs:prod": "fly logs",
-    "lint": "eslint .",
-  },
+    "lint": "eslint ."
+  }
   // ...
 }
 ```
@@ -54,10 +50,10 @@ We can then achieve cross-platform compatibility by using the cross-env library 
 {
   // ...
   "scripts": {
-    "start": "cross-env NODE_ENV=production node index.js",
-    "dev": "cross-env NODE_ENV=development node --watch index.js",
-    "test": "cross-env  NODE_ENV=test node --test",
-    // ...
+    "start": "cross-env NODE_ENV=production node index.js", // highlight-line
+    "dev": "cross-env NODE_ENV=development node --watch index.js", // highlight-line
+    "test": "cross-env  NODE_ENV=test node --test", // highlight-line
+    "lint": "eslint ."
   },
   // ...
 }

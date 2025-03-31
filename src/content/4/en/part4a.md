@@ -510,9 +510,8 @@ Let's define the <i>npm script _test_</i> for the test execution:
   "scripts": {
     "start": "node index.js",
     "dev": "node --watch index.js",
-    "lint": "eslint .",
-    // ...
-    "test": "node --test" // highlight-line
+    "test": "node --test", // highlight-line
+    "lint": "eslint ."
   },
   // ...
 }

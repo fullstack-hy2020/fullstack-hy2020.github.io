@@ -313,6 +313,7 @@ Kannattaa ehkä tehdä linttaustakin varten _npm-skripti_:
   "scripts": {
     "start": "node index.js",
     "dev": "node --watch index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ." // highlight-line
     // ...
   },
