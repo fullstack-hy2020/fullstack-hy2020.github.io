@@ -227,7 +227,6 @@ test('the first note is about HTTP methods', async () => {
   const response = await api.get('/api/notes')
 
   const contents = response.body.map(e => e.content)
-  // is the argument truthy
   assert(contents.includes('HTML is easy'))
 })
 ```
@@ -312,21 +311,19 @@ beforeEach(async () => {
 
 The database is cleared out at the beginning, and after that, we save the two notes stored in the _initialNotes_ array to the database. By doing this, we ensure that the database is in the same state before every test is run.
 
-Let's also make the following changes to the last two tests:
+Let's modify the test that checks the number of notes as follows:
 
 ```js
+// ...
+
 test('there are two notes', async () => {
   const response = await api.get('/api/notes')
 
-  assert.strictEqual(response.body.length, initialNotes.length)
+  assert.strictEqual(response.body.length, initialNotes.length) // highlight-line
 })
 
-test('the first note is about HTTP methods', async () => {
-  const response = await api.get('/api/notes')
+// ...
 
-  const contents = response.body.map(e => e.content)
-  assert(contents.includes('HTML is easy'))
-})
 ```
 
 ### Running tests one by one

@@ -224,7 +224,6 @@ test('the first note is about HTTP methods', async () => {
   const response = await api.get('/api/notes')
 
   const contents = response.body.map(e => e.content)
-  // is the parameter truthy
   assert(contents.includes('HTML is easy'))
 })
 ```
@@ -310,21 +309,18 @@ beforeEach(async () => {
 
 Tietokanta siis tyhjennetään aluksi, ja sen jälkeen kantaan lisätään kaksi taulukkoon _initialNotes_ talletettua muistiinpanoa. Näin testien suoritus aloitetaan aina hallitusti samasta tilasta.
 
-Muutetaan kahta jälkimmäistä testiä vielä seuraavasti:
+Muutetaan muistiinpanojen lukumäärää testaavaa testiä vielä seuraavasti:
 
 ```js
+// ...
+
 test('there are two notes', async () => {
   const response = await api.get('/api/notes')
 
-  assert.strictEqual(response.body.length, initialNotes.length)
+  assert.strictEqual(response.body.length, initialNotes.length) // highlight-line
 })
 
-test('the first note is about HTTP methods', async () => {
-  const response = await api.get('/api/notes')
-
-  const contents = response.body.map(e => e.content)
-  assert(contents.includes('HTML is easy'))
-})
+// ...
 
 ```
 
