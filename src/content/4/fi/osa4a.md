@@ -712,17 +712,7 @@ Törmäät testien tekemisen yhteydessä varmasti erinäisiin ongelmiin. Pidä m
 
 #### 4.5*: apufunktioita ja yksikkötestejä, step3
 
-Määrittele funktio _favoriteBlog_, joka saa parametrikseen taulukollisen blogeja. Funktio selvittää millä blogilla on eniten tykkäyksiä. Jos suosikkeja on monta, riittää että funktio palauttaa niistä jonkun.
-
-Paluuarvo voi olla esim. seuraavassa muodossa:
-
-```js
-{
-  title: "Canonical string reduction",
-  author: "Edsger W. Dijkstra",
-  likes: 12
-}
-```
+Määrittele funktio _favoriteBlog_, joka saa parametrikseen taulukollisen blogeja. Funktio palauttaa blogin, jolla on eniten tykkäyksiä. Jos suosikkeja on monta, riittää että funktio palauttaa niistä jonkun.
 
 **HUOM.** Kun vertailet olioita, haluat luultavimmin käyttää [deepStrictEqual](https://nodejs.org/api/assert.html#assertdeepstrictequalactual-expected-message)-metodia, sillä se tarkistaa, että olioilla on samat attribuutit. Assert-moduulin eri metodeista voit lukea lisää esimerkiksi [tästä Stack Overflow -vastauksesta](https://stackoverflow.com/a/73937068/15291501).
 
