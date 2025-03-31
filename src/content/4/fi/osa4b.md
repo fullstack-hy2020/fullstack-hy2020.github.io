@@ -264,7 +264,7 @@ module.exports = {
 
 ### Tietokannan alustaminen ennen testejä
 
-Testaus vaikuttaa helpolta ja testit menevät läpi. Testimme ovat kuitenkin huonoja, sillä niiden läpimeno riippuu tietokannan tilasta, jossa nyt sattuu olemaan kaksi muistiinpanoa. Jotta saisimme robustimmat testit, tulee tietokannan tila nollata testien alussa ja sen jälkeen laittaa kantaan hallitusti testien tarvitsema data.
+Testeissämme on tällä hetkellä ongelmana, että niiden läpimeno riippuu tietokannan tilasta. Testit menevät siis läpi, jos testitietokannassa sattuu olemaan kaksi muistiinpanoa, joista toisen sisältö on <i>'HTML is easy'</i>. Jotta saisimme robustimmat testit, tulee tietokannan tila nollata testien alussa ja sen jälkeen laittaa kantaan hallitusti testien tarvitsema data.
 
 Testimme käyttää jo nyt funktiota [after](https://nodejs.org/api/test.html#afterfn-options) sulkemaan tietokannan testien suoritusten jälkeen. Kirjasto Node:test tarjoaa joukon muitakin metodeja joiden avulla voidaan suorittaa operaatioita ennen yhdenkään testin suorittamista tai ennen jokaisen testin suoritusta.
 

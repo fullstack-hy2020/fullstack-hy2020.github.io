@@ -268,7 +268,7 @@ module.exports = {
 
 ### Initializing the database before tests
 
-Testing appears to be easy and our tests are currently passing. However, our tests are bad as they are dependent on the state of the database, that now  happens to have two notes. To make them more robust, we have to reset the database and generate the needed test data in a controlled manner before we run the tests.
+Currently, our tests have an issue where their success depends on the state of the database. The tests pass if the test database happens to contain two notes, one of which has the content <i>'HTML is easy'</i>. To make them more robust, we have to reset the database and generate the needed test data in a controlled manner before we run the tests.
 
 Our tests are already using the [after](https://nodejs.org/api/test.html#afterfn-options) function to close the connection to the database after the tests are finished executing. The library node:test offers many other functions that can be used for executing operations once before any test is run or every time before a test is run.
 
