@@ -219,7 +219,7 @@ jobs:
       // steps here
 ```
 
-As was mentioned [earlier](/en/part11/getting_started_with_git_hub_actions#getting-started-with-workflows) jobs of a workflow are executed in parallel but since we want the linting, testing and deployment to be done first, we set a dependency that the <i>tag\_release</i> waits the another job to execute first since we do not want to tag the release unless it passes tests and is deployed.
+As mentioned [earlier](/en/part11/getting_started_with_git_hub_actions#getting-started-with-workflows), jobs of a workflow are executed in parallel. However since we want the linting, testing and deployment to be done first, we set a dependency that the <i>tag\_release</i> waits for since we do not want to tag the release unless it passes tests and is deployed.
 
 If you're uncertain of the configuration, you can set  <code>DRY_RUN</code> to <code>true</code>, which will make the action output the next version number without creating or tagging the release!
 
