@@ -235,7 +235,7 @@ If needed, you can navigate to the view of a single tag that shows eg. what is t
 
 #### 11.16 Skipping a commit for tagging and deployment
 
-In general, the more often you deploy the main branch to production, the better. However, there might be some valid reasons sometimes to skip a particular commit or a merged pull request to become tagged and released to production.
+In general, the more often you deploy the main branch to production, the better. However, there might sometimes be a valid reason to skip a particular commit or a merged pull request to become tagged and released to production.
 
 Modify your setup so that if a commit message in a pull request contains _#skip_, the merge will not be deployed to production and it is not tagged with a version number.
 
