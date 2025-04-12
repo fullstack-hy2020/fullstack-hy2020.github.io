@@ -723,7 +723,6 @@ Next, let's write tests for fetching and removing an individual note:
 ```js
 test('a specific note can be viewed', async () => {
   const notesAtStart = await helper.notesInDb()
-
   const noteToView = notesAtStart[0]
 
 // highlight-start
@@ -748,7 +747,7 @@ test('a note can be deleted', async () => {
 
   const notesAtEnd = await helper.notesInDb()
 
-  const contents = notesAtEnd.map(r => r.content)
+  const contents = notesAtEnd.map(n => n.content)
   assert(!contents.includes(noteToDelete.content))
 
   assert.strictEqual(notesAtEnd.length, helper.initialNotes.length - 1)
