@@ -964,7 +964,7 @@ beforeEach(async () => {
 
 JavaScriptin asynkroninen suoritusmalli aiheuttaakin siis helposti yllätyksiä, ja myös async/await-syntaksin kanssa pitää olla koko ajan tarkkana. Vaikka async/await peittää monia promisejen käsittelyyn liittyviä seikkoja, promisejen toiminta on syytä tuntea mahdollisimman hyvin!
 
-Kaikkein helpoimmalla tilanteesta selvitään hyödyntämällä Mongoosen valmista metodia _insertMany_:
+On kuitenkin olemassa vieläkin yksinkertaisempi tapa _beforeEach_-funktion toteuttamiseksi. Kaikkein helpoimmalla tilanteesta selvitään hyödyntämällä Mongoosen valmista metodia _insertMany_:
 
 ```js
 beforeEach(async () => {

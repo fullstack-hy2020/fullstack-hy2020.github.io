@@ -972,6 +972,15 @@ beforeEach(async () => {
 
 The asynchronous nature of JavaScript can lead to surprising behavior, and for this reason, it is important to pay careful attention when using the async/await syntax. Even though the syntax makes it easier to deal with promises, it is still necessary to understand how promises work!
 
+However, there is an even simpler way to implement the _beforeEach_ function. The easiest way to handle the situation is by utilizing Mongoose's built-in method _insertMany_:
+
+```js
+beforeEach(async () => {
+  await Note.deleteMany({})
+  await Note.insertMany(helper.initialNotes) // highlight-line
+})
+```
+
 The code for our application can be found on [GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5), branch <i>part4-5</i>.
 
 ### A true full stack developer's oath
