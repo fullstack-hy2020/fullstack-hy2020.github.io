@@ -852,6 +852,15 @@ Kirjaston ansiosta kutsua _next(exception)_ ei siis enää tarvita. Kirjasto hoi
 Muut routet yksinkertaistuvat seuraavasti:
 
 ```js
+notesRouter.get('/:id', async (request, response) => {
+  const note = await Note.findById(request.params.id)
+  if (note) {
+    response.json(note)
+  } else {
+    response.status(404).end()
+  }
+})
+
 notesRouter.post('/', async (request, response) => {
   const body = request.body
 
@@ -862,15 +871,6 @@ notesRouter.post('/', async (request, response) => {
 
   const savedNote = await note.save()
   response.status(201).json(savedNote)
-})
-
-notesRouter.get('/:id', async (request, response) => {
-  const note = await Note.findById(request.params.id)
-  if (note) {
-    response.json(note)
-  } else {
-    response.status(404).end()
-  }
 })
 ```
 
