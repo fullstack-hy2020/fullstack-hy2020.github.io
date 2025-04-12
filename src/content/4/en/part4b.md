@@ -707,7 +707,7 @@ notesRouter.post('/', async (request, response, next) => {
   try {
     const savedNote = await note.save()
     response.status(201).json(savedNote)
-  } catch(exception) {
+  } catch (exception) {
     next(exception)
   }
   // highlight-end
@@ -776,7 +776,7 @@ notesRouter.get('/:id', async (request, response, next) => {
     } else {
       response.status(404).end()
     }
-  } catch(exception) {
+  } catch (exception) {
     next(exception)
   }
 })
@@ -803,7 +803,7 @@ All of the route handlers follow the same structure
 ```js
 try {
   // do the async operations here
-} catch(exception) {
+} catch (exception) {
   next(exception)
 }
 ```
