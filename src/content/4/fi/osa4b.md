@@ -814,19 +814,15 @@ npm install express-async-errors
 Kirjaston käyttö on <i>todella</i> helppoa. Kirjaston koodi otetaan käyttöön tiedostossa <i>app.js</i>:
 
 ```js
-const config = require('./utils/config')
-const express = require('express')
 require('express-async-errors') // highlight-line
-const app = express()
-const cors = require('cors')
+const express = require('express')
+const mongoose = require('mongoose')
+const config = require('./utils/config')
+const logger = require('./utils/logger')
 const notesRouter = require('./controllers/notes')
 const middleware = require('./utils/middleware')
-const logger = require('./utils/logger')
-const mongoose = require('mongoose')
 
 // ...
-
-module.exports = app
 ```
 
 Kirjaston koodiin sisällyttämän "magian" ansiosta pääsemme kokonaan eroon try-catch-lauseista. Muistiinpanon poistamisesta huolehtiva route

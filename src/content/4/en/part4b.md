@@ -821,19 +821,15 @@ Using the library is <i>very</i> easy.
 You introduce the library in <i>app.js</i>, _before_ you import your routes:
 
 ```js
-const config = require('./utils/config')
-const express = require('express')
 require('express-async-errors') // highlight-line
-const app = express()
-const cors = require('cors')
+const express = require('express')
+const mongoose = require('mongoose')
+const config = require('./utils/config')
+const logger = require('./utils/logger')
 const notesRouter = require('./controllers/notes')
 const middleware = require('./utils/middleware')
-const logger = require('./utils/logger')
-const mongoose = require('mongoose')
 
 // ...
-
-module.exports = app
 ```
 
 The 'magic' of the library allows us to eliminate the try-catch blocks completely.
