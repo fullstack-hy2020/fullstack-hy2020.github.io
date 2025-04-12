@@ -745,7 +745,7 @@ const delete = (id) => {
 
 <h4>2.15*: The Phonebook step 10</h4>
 
-<i>Why is there a star in the exercise? See [here](/en/part0/general_info#taking-the-course) for the explanation.</i>
+<i>Why is there an asterisk in the exercise? See [here](/en/part0/general_info#taking-the-course) for the explanation.</i>
 
 Change the functionality so that if a number is added to an already existing user, the new number will replace the old number. It's recommended to use the HTTP PUT method for updating the phone number.
 
