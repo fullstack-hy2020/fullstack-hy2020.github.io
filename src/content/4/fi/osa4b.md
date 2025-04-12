@@ -199,13 +199,13 @@ Tehdään pari testiä lisää:
 const assert = require('node:assert')
 // ...
 
-test('there are two notes', async () => {
+test('all notes are returned', async () => {
   const response = await api.get('/api/notes')
 
   assert.strictEqual(response.body.length, 2)
 })
 
-test('the first note is about HTTP methods', async () => {
+test('a specific note is within the returned notes', async () => {
   const response = await api.get('/api/notes')
 
   const contents = response.body.map(e => e.content)
@@ -220,7 +220,7 @@ Molemmat testit sijoittavat pyynnön vastauksen muuttujaan _response_. Toisin ku
 Jälkimmäistä testiä on vielä mahdollista yksinkertaistaa hiukan tekemällä vertailu suoraan [assert](https://nodejs.org/docs/latest/api/assert.html#assertokvalue-message):illa:
 
 ```js
-test('the first note is about HTTP methods', async () => {
+test('a specific note is within the returned notes', async () => {
   const response = await api.get('/api/notes')
 
   const contents = response.body.map(e => e.content)
@@ -273,12 +273,14 @@ Päätetään alustaa tietokanta ennen <i>jokaisen testin suoritusta</i>, eli fu
 
 ```js
 
-// highlight-start
-const { test, after, beforeEach } = require('node:test')
-const Note = require('../models/note')
-// highlight-end
+const assert = require('node:assert')
+const { test, after, beforeEach } = require('node:test') // highlight-line
+const mongoose = require('mongoose')
+const supertest = require('supertest')
+const app = require('../app')
+const Note = require('../models/note') // highlight-line
 
-// ...
+const api = supertest(app)
 
 // highlight-start
 const initialNotes = [
@@ -304,6 +306,7 @@ beforeEach(async () => {
   await noteObject.save()
 })
 // highlight-end
+
 // ...
 ```
 
@@ -314,7 +317,7 @@ Muutetaan muistiinpanojen lukumäärää testaavaa testiä vielä seuraavasti:
 ```js
 // ...
 
-test('there are two notes', async () => {
+test('all notes are returned', async () => {
   const response = await api.get('/api/notes')
 
   assert.strictEqual(response.body.length, initialNotes.length) // highlight-line
@@ -338,7 +341,7 @@ test.only('notes are returned as json', async () => {
     .expect('Content-Type', /application\/json/)
 })
 
-test.only('there are two notes', async () => {
+test.only('all notes are returned', async () => {
   const response = await api.get('/api/notes')
 
   assert.strictEqual(response.body.length, 2)
@@ -364,7 +367,7 @@ npm test -- tests/note_api.test.js
 Parametrin [--tests-by-name-pattern](https://nodejs.org/api/test.html#filtering-tests-by-name) avulla voidaan suorittaa testejä nimen perusteella:
 
 ```js
-npm test -- --test-name-pattern="the first note is about HTTP methods"
+npm test -- --test-name-pattern="a specific note is within the returned notes"
 ```
 
 Parametri voi viitata testin tai describe-lohkon nimeen. Parametrina voidaan antaa myös nimen osa. Seuraava komento suorittaisi kaikki testit, joiden nimessä on sana <i>notes</i>:
@@ -578,14 +581,15 @@ Moduuli määrittelee funktion _notesInDb_, jonka avulla voidaan tarkastaa sovel
 Testit muuttuvat muotoon
 
 ```js
-const { test, after, beforeEach } = require('node:test')
 const assert = require('node:assert')
+const { test, after, beforeEach } = require('node:test')
 const mongoose = require('mongoose')
 const supertest = require('supertest')
 const app = require('../app')
-const api = supertest(app)
 const helper = require('./test_helper') // highlight-line
 const Note = require('../models/note')
+
+const api = supertest(app)
 
 beforeEach(async () => {
   await Note.deleteMany({})
@@ -604,16 +608,16 @@ test('notes are returned as json', async () => {
     .expect('Content-Type', /application\/json/)
 })
 
-test('there are two notes', async () => {
-  const response = await api.get('/api/notes')
+test('all notes are returned', async () => {
+  const notes = await helper.notesInDb() // highlight-line
 
-  assert.strictEqual(response.body.length, 2)
+  assert.strictEqual(notes.length, helper.initialNotes.length) // highlight-line
 })
 
-test('the first note is about HTTP methods', async () => {
-  const response = await api.get('/api/notes')
+test('a specific note is within the returned notes', async () => {
+  const notes = await helper.notesInDb() // highlight-line
 
-  const contents = response.body.map(e => e.content)
+  const contents = notes.map(n => n.content)
   assert(contents.includes('HTML is easy'))
 })
 
@@ -629,12 +633,10 @@ test('a valid note can be added ', async () => {
     .expect(201)
     .expect('Content-Type', /application\/json/)
 
-  const response = await api.get('/api/notes')
+  const notesAtEnd = await helper.notesInDb() // highlight-line
+  assert.strictEqual(notesAtEnd.length, helper.initialNotes.length + 1) // highlight-line
 
-  const contents = response.body.map(r => r.content)
-
-  assert.strictEqual(response.body.length, helper.initialNotes.length + 1) // highlight-line
-
+  const contents = notesAtEnd.map(n => n.content) // highlight-line
   assert(contents.includes('async/await simplifies making async calls'))
 })
 
@@ -648,9 +650,9 @@ test('note without content is not added', async () => {
     .send(newNote)
     .expect(400)
 
-  const response = await api.get('/api/notes')
+  const notesAtEnd = await helper.notesInDb() // highlight-line
 
-  assert.strictEqual(response.body.length, helper.initialNotes.length) // highlight-line
+  assert.strictEqual(notesAtEnd.length, helper.initialNotes.length) // highlight-line
 })
 
 after(async () => {
@@ -756,7 +758,7 @@ Ensimmäisessä testissä on eräs huomionarvoinen seikka. Sen sijaan, että ver
 assert.deepStrictEqual(resultNote.body, noteToView)
 ```
 
-Syynä tälle on se, että _strictEqual_ käyttää metodia [Object.is](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) samuuden vertailuun, eli se vertaa ovatko kyseessä samat olioit. Meidän tapauksessamme taas riittää tarkistaa että olioiden sisältö, eli niiden kenttien arvot olisivat samat. Tähän tarkoitukseen sopii _deepStrictEqual_.
+Syynä tälle on se, että _strictEqual_ käyttää metodia [Object.is](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) samuuden vertailuun, eli se vertaa ovatko kyseessä samat oliot. Meidän tapauksessamme taas on tarkoitus tarkistaa, että olioiden sisältö eli niiden kenttien arvot olisivat samat. Tähän tarkoitukseen sopii _deepStrictEqual_.
 
 Testit menevät läpi, joten voimme turvallisesti refaktoroida testatut routet käyttämään async/awaitia:
 
@@ -773,7 +775,9 @@ notesRouter.get('/:id', async (request, response, next) => {
     next(exception)
   }
 })
+```
 
+```js
 notesRouter.delete('/:id', async (request, response, next) => {
   try {
     await Note.findByIdAndDelete(request.params.id)
@@ -1079,7 +1083,7 @@ describe('when there is initially some notes saved', () => {
     const response = await api.get('/api/notes')
 
     const contents = response.body.map(r => r.content)
-    assert(contents.includes('Browser can execute only JavaScript'))
+    assert(contents.includes('HTML is easy'))
   })
 
   describe('viewing a specific note', () => {

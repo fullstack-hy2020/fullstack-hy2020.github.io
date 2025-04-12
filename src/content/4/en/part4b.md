@@ -202,13 +202,13 @@ Let's write a few more tests:
 const assert = require('node:assert')
 // ...
 
-test('there are two notes', async () => {
+test('all notes are returned', async () => {
   const response = await api.get('/api/notes')
 
   assert.strictEqual(response.body.length, 2)
 })
 
-test('the first note is about HTTP methods', async () => {
+test('a specific note is within the returned notes', async () => {
   const response = await api.get('/api/notes')
 
   const contents = response.body.map(e => e.content)
@@ -223,7 +223,7 @@ Both tests store the response of the request to the _response_ variable, and unl
 We could simplify the second test a bit, and use the [assert](https://nodejs.org/docs/latest/api/assert.html#assertokvalue-message) itself to verify that the note is among the returned ones:
 
 ```js
-test('the first note is about HTTP methods', async () => {
+test('a specific note is within the returned notes', async () => {
   const response = await api.get('/api/notes')
 
   const contents = response.body.map(e => e.content)
@@ -275,10 +275,15 @@ Our tests are already using the [after](https://nodejs.org/api/test.html#afterfn
 Let's initialize the database <i>before every test</i> with the [beforeEach](https://nodejs.org/api/test.html#beforeeachfn-options) function:
 
 ```js
-// highlight-start
-const { test, after, beforeEach } = require('node:test')
-const Note = require('../models/note')
-// highlight-end
+
+const assert = require('node:assert')
+const { test, after, beforeEach } = require('node:test') // highlight-line
+const mongoose = require('mongoose')
+const supertest = require('supertest')
+const app = require('../app')
+const Note = require('../models/note') // highlight-line
+
+const api = supertest(app)
 
 // highlight-start
 const initialNotes = [
@@ -293,8 +298,6 @@ const initialNotes = [
 ]
 // highlight-end
 
-// ...
-
 // highlight-start
 beforeEach(async () => {
   await Note.deleteMany({})
@@ -306,6 +309,7 @@ beforeEach(async () => {
   await noteObject.save()
 })
 // highlight-end
+
 // ...
 ```
 
@@ -316,7 +320,7 @@ Let's modify the test that checks the number of notes as follows:
 ```js
 // ...
 
-test('there are two notes', async () => {
+test('all notes are returned', async () => {
   const response = await api.get('/api/notes')
 
   assert.strictEqual(response.body.length, initialNotes.length) // highlight-line
@@ -340,7 +344,7 @@ test.only('notes are returned as json', async () => {
     .expect('Content-Type', /application\/json/)
 })
 
-test.only('there are two notes', async () => {
+test.only('all notes are returned', async () => {
   const response = await api.get('/api/notes')
 
   assert.strictEqual(response.body.length, 2)
@@ -368,7 +372,7 @@ npm test -- tests/note_api.test.js
 The [--tests-by-name-pattern](https://nodejs.org/api/test.html#filtering-tests-by-name) option can be used for running tests with a specific name:
 
 ```js
-npm test -- --test-name-pattern="the first note is about HTTP methods"
+npm test -- --test-name-pattern="a specific note is within the returned notes"
 ```
 
 The provided argument can refer to the name of the test or the describe block. It can also contain just a part of the name. The following command will run all of the tests that contain <i>notes</i> in their name:
@@ -582,15 +586,15 @@ The module defines the _notesInDb_ function that can be used for checking the no
 Our tests can now use the helper module and be changed like this:
 
 ```js
-const { test, after, beforeEach } = require('node:test')
 const assert = require('node:assert')
-const supertest = require('supertest')
+const { test, after, beforeEach } = require('node:test')
 const mongoose = require('mongoose')
-const helper = require('./test_helper') // highlight-line
+const supertest = require('supertest')
 const app = require('../app')
-const api = supertest(app)
-
+const helper = require('./test_helper') // highlight-line
 const Note = require('../models/note')
+
+const api = supertest(app)
 
 beforeEach(async () => {
   await Note.deleteMany({})
@@ -610,17 +614,16 @@ test('notes are returned as json', async () => {
 })
 
 test('all notes are returned', async () => {
-  const response = await api.get('/api/notes')
+  const notes = await helper.notesInDb() // highlight-line
 
-   assert.strictEqual(response.body.length, helper.initialNotes.length) // highlight-line
+  assert.strictEqual(notes.length, helper.initialNotes.length) // highlight-line
 })
 
 test('a specific note is within the returned notes', async () => {
-  const response = await api.get('/api/notes')
+  const notes = await helper.notesInDb() // highlight-line
 
-  const contents = response.body.map(r => r.content)
-
-  assert(contents.includes('Browser can execute only JavaScript'))
+  const contents = notes.map(n => n.content)
+  assert(contents.includes('HTML is easy'))
 })
 
 test('a valid note can be added ', async () => {
@@ -760,7 +763,7 @@ There is one point worth noting in the first test. Instead of the previously use
 assert.deepStrictEqual(resultNote.body, noteToView)
 ```
 
-The reason for this is that _strictEqual_ uses the method [Object.is](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) to compare similarity, i.e. it compares whether the objects are the same. In our case, it is enough to check that the contents of the objects, i.e. the values of their fields, are the same. For this purpose _deepStrictEqual_ is suitable.
+The reason for this is that _strictEqual_ uses the method [Object.is](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) to compare similarity, i.e. it compares whether the objects are the same. In our case, we want to check that the contents of the objects, i.e. the values of their fields, are the same. For this purpose _deepStrictEqual_ is suitable.
 
 The tests pass and we can safely refactor the tested routes to use async/await:
 
@@ -777,12 +780,14 @@ notesRouter.get('/:id', async (request, response, next) => {
     next(exception)
   }
 })
+```
 
+```js
 notesRouter.delete('/:id', async (request, response, next) => {
   try {
     await Note.findByIdAndDelete(request.params.id)
     response.status(204).end()
-  } catch(exception) {
+  } catch (exception) {
     next(exception)
   }
 })
@@ -1079,7 +1084,7 @@ describe('when there are some notes saved initially', () => {
     const response = await api.get('/api/notes')
 
     const contents = response.body.map(r => r.content)
-    assert(contents.includes('Browser can execute only JavaScript'))
+    assert(contents.includes('HTML is easy'))
   })
 
   describe('viewing a specific note', () => {
