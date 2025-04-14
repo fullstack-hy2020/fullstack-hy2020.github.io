@@ -571,9 +571,7 @@ const Blog = ({ blog }) => {
 
 #### 5.8: blogilistan frontend, step8
 
-Toteuta like-painikkeen toiminnallisuus. Like lisätään backendiin blogin yksilöivään urliin tapahtuvalla _PUT_-pyynnöllä.
-
-Koska backendin operaatio korvaa aina koko blogin, joudut lähettämään operaation mukana blogin kaikki kentät. Eli jos seuraavaa blogia liketetään,
+Toteuta like-painikkeen toiminnallisuus. Like lisätään backendiin blogin yksilöivään urliin tapahtuvalla _PUT_-pyynnöllä. Jos seuraavaa blogia liketetään,
 
 ```js
 {
@@ -594,11 +592,7 @@ tulee palvelimelle tehdä PUT-pyyntö osoitteeseen <i>/api/blogs/5a43fde2cbd20b1
 
 ```js
 {
-  user: "5a43e6b6c37f3d065eaaa581",
   likes: 1,
-  author: "Joel Spolsky",
-  title: "The Joel Test: 12 Steps to Better Code",
-  url: "https://www.joelonsoftware.com/2000/08/09/the-joel-test-12-steps-to-better-code/"
 }
 ```
 
