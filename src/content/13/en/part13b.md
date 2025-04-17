@@ -459,11 +459,11 @@ So this is how we [define](https://sequelize.org/master/manual/assocs.html#one-t
 ```js
 postgres=# \d users
                                      Table "public.users"
-  Column | Type | Collation | Nullable | Default
+  Column  |          Type          | Collation | Nullable |          Default
 ----------+------------------------+-----------+----------+-----------------------------------
- id | integer | not null | nextval('users_id_seq'::regclass)
- username | character varying(255) | | not null |
- name | character varying(255) | | not null |
+ id       | integer                |           | not null | nextval('users_id_seq'::regclass)
+ username | character varying(255) |           | not null |
+ name     | character varying(255) |           | not null |
 Indexes:
     "users_pkey" PRIMARY KEY, btree (id)
 Referenced by:
@@ -471,13 +471,13 @@ Referenced by:
 
 postgres=# \d notes
                                       Table "public.notes"
-  Column | Type | Collation | Nullable | Default
+  Column   |           Type           | Collation | Nullable |       Default
 -----------+--------------------------+-----------+----------+-----------------------------------
- id | integer | not null | nextval('notes_id_seq'::regclass)
- content | text | | not null |
- important | boolean | | | |
- date | timestamp with time zone | | | |
- user_id | integer | | | |
+ id        | integer                  |           | not null | nextval('notes_id_seq'::regclass)
+ content   | text                     |           | not null |
+ important | boolean                  |           |          |
+ date      | timestamp with time zone |           |          | 
+ user_id   | integer                  |           |          | 
 Indexes:
     "notes_pkey" PRIMARY KEY, btree (id)
 Foreign-key constraints:
