@@ -348,7 +348,7 @@ response.end(JSON.stringify(notes))
 
 With Express, this is no longer required, because this transformation happens automatically.
 
-It's worth noting that [JSON](https://en.wikipedia.org/wiki/JSON) is a string and not a JavaScript object like the value assigned to _notes_.
+It's worth noting that [JSON](https://en.wikipedia.org/wiki/JSON) is a data format. However, it's often represented as a string and is not the same as a JavaScript object, like the value assigned to _notes_.
 
 The experiment shown below illustrates this point:
 
