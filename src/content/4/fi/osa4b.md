@@ -1044,16 +1044,15 @@ Testit ovat tällä hetkellä osittain epätäydelliset, sillä esim. reittejä 
 Jossain määrin parannellut testit ovat seuraavassa:
 
 ```js
-const { test, after, beforeEach, describe } = require('node:test')
 const assert = require('node:assert')
+const { test, after, beforeEach, describe } = require('node:test')
 const mongoose = require('mongoose')
 const supertest = require('supertest')
 const app = require('../app')
-const api = supertest(app)
-
 const helper = require('./test_helper')
-
 const Note = require('../models/note')
+
+const api = supertest(app)
 
 describe('when there is initially some notes saved', () => {
   beforeEach(async () => {
@@ -1069,23 +1068,21 @@ describe('when there is initially some notes saved', () => {
   })
 
   test('all notes are returned', async () => {
-    const response = await api.get('/api/notes')
+    const notes = await helper.notesInDb()
 
-    assert.strictEqual(response.body.length, helper.initialNotes.length)
+    assert.strictEqual(notes.length, helper.initialNotes.length)
   })
 
   test('a specific note is within the returned notes', async () => {
-    const response = await api.get('/api/notes')
+    const notes = await helper.notesInDb()
 
-    const contents = response.body.map(r => r.content)
+    const contents = notes.map(n => n.content)
     assert(contents.includes('HTML is easy'))
   })
 
   describe('viewing a specific note', () => {
-
     test('succeeds with a valid id', async () => {
       const notesAtStart = await helper.notesInDb()
-
       const noteToView = notesAtStart[0]
 
       const resultNote = await api
@@ -1099,17 +1096,13 @@ describe('when there is initially some notes saved', () => {
     test('fails with statuscode 404 if note does not exist', async () => {
       const validNonexistingId = await helper.nonExistingId()
 
-      await api
-        .get(`/api/notes/${validNonexistingId}`)
-        .expect(404)
+      await api.get(`/api/notes/${validNonexistingId}`).expect(404)
     })
 
     test('fails with statuscode 400 id is invalid', async () => {
       const invalidId = '5a3d5da59070081a82a3445'
 
-      await api
-        .get(`/api/notes/${invalidId}`)
-        .expect(400)
+      await api.get(`/api/notes/${invalidId}`).expect(400)
     })
   })
 
@@ -1134,14 +1127,9 @@ describe('when there is initially some notes saved', () => {
     })
 
     test('fails with status code 400 if data invalid', async () => {
-      const newNote = {
-        important: true
-      }
+      const newNote = { important: true }
 
-      await api
-        .post('/api/notes')
-        .send(newNote)
-        .expect(400)
+      await api.post('/api/notes').send(newNote).expect(400)
 
       const notesAtEnd = await helper.notesInDb()
 
@@ -1154,16 +1142,14 @@ describe('when there is initially some notes saved', () => {
       const notesAtStart = await helper.notesInDb()
       const noteToDelete = notesAtStart[0]
 
-      await api
-        .delete(`/api/notes/${noteToDelete.id}`)
-        .expect(204)
+      await api.delete(`/api/notes/${noteToDelete.id}`).expect(204)
 
       const notesAtEnd = await helper.notesInDb()
 
-      assert.strictEqual(notesAtEnd.length, helper.initialNotes.length - 1)
-
-      const contents = notesAtEnd.map(r => r.content)
+      const contents = notesAtEnd.map(n => n.content)
       assert(!contents.includes(noteToDelete.content))
+
+      assert.strictEqual(notesAtEnd.length, helper.initialNotes.length - 1)
     })
   })
 })
