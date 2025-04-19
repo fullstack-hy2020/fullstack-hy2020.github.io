@@ -7,13 +7,13 @@ lang: fi
 
 <div class="content">
 
-[Cypress](https://www.cypress.io/) on siis ollut edellisten vuosien ajan suosituin E2E-testauskirjasto, jonka rinnalle Playwright on kovaa vauhtia nousemassa. Tällä kurssilla on jo vuosia käytetty Cypresiä. Nyt mukana on uutena myös Playwright. Saat itse valita suoritatko kurssin E2E-testausta käsittelevän osan Cypressillä vai Playrwightillä. Molempien kirjastojen toimintaperiaatteet ovat hyvin samankaltaisia, joten kovin suurta merkitystä valinnallasi ei ole. Playwright on kuitenkin nyt kurssin ensisijaisesti suosittelema E2E-kirjasto.
+[Cypress](https://www.cypress.io/) on siis ollut edellisten vuosien ajan suosituin E2E-testauskirjasto, jonka rinnalle Playwright on kovaa vauhtia nousemassa. Tällä kurssilla on jo vuosia käytetty Cypressiä. Nyt mukana on uutena myös Playwright. Saat itse valita suoritatko kurssin E2E-testausta käsittelevän osan Cypressillä vai Playwrightillä. Molempien kirjastojen toimintaperiaatteet ovat hyvin samankaltaisia, joten kovin suurta merkitystä valinnallasi ei ole. Playwright on kuitenkin nyt kurssin ensisijaisesti suosittelema E2E-kirjasto.
 
 Jos valintasi on Cypress, jatka eteenpäin. Jos päädyt käyttämään Playwrightia, mene [tänne](/osa5/end_to_end_testaus_playwright).
 
 ### Cypress
 
-Toisin kuin React-frontille tehdyt yksikkötestit tai backendin testit, nyt tehtävien End to End -testien ei tarvitse sijaita samassa npm-projektissa missä koodi on. Tehdään E2E-testeille kokonaan oma projekti komennolla _npm init_.
+Toisin kuin React-frontendille tehdyt yksikkötestit tai backendin testit, nyt tehtävien End to End -testien ei tarvitse sijaita samassa npm-projektissa missä koodi on. Tehdään E2E-testeille kokonaan oma projekti komennolla _npm init_.
 
 Asennetaan sitten Cypress suorittamalla uuden projektin kehitysaikaiseksi riippuvuudeksi
 
@@ -115,9 +115,9 @@ describe('Note app', () => { // highlight-line
 })
 ```
 
-Mochan dokumentaatio kuitenkin [suosittelee](https://mochajs.org/#arrow-functions) että nuolifunktioita ei käytetä, ne saattavat aiheuttaa ongelmia joissain tilanteissa.
+Mochan dokumentaatio kuitenkin [suosittelee](https://mochajs.org/#arrow-functions), että nuolifunktioita ei käytetä, sillä ne saattavat aiheuttaa ongelmia joissain tilanteissa.
 
-HUOM: tässä materiaalissa suoritetaan Cypress-testejä pääasiassa graafisen test runnerin kautta. Testit on luonnollisesti mahdollista suorittaa myös [komentoriviltä](https://docs.cypress.io/guides/guides/command-line.html), komennolla <em>cypress run</em>, joka kannattaa halutessa lisätä npm-skriptiksi.
+HUOM: tässä materiaalissa suoritetaan Cypress-testejä pääasiassa graafisen test runnerin kautta. Testit on luonnollisesti mahdollista suorittaa myös [komentoriviltä](https://docs.cypress.io/guides/guides/command-line.html) komennolla <em>cypress run</em>, joka kannattaa halutessa lisätä npm-skriptiksi.
 
 Jos komento <i>cy.contains</i> ei löydä sivulta etsimäänsä tekstiä, testi ei mene läpi. Eli jos laajennamme testiä seuraavasti
 
@@ -233,7 +233,7 @@ it('user can login', function () {
 })  
 ```
 
-Testi toimii mutta on kuitenkin sikäli ongelmallinen, että jos sovellukseen tulee jossain vaiheessa lisää input-kenttiä, testi saattaa hajota, sillä se luottaa tarvitsemiensa kenttien olevan sivulla ensimmäisenä ja viimeisenä.
+Testi toimii, mutta on kuitenkin sikäli ongelmallinen, että jos sovellukseen tulee jossain vaiheessa lisää input-kenttiä, testi saattaa hajota, sillä se luottaa tarvitsemiensa kenttien olevan sivulla ensimmäisenä ja viimeisenä.
 
 Parempi ratkaisu on määritellä kentille yksilöivät <i>id</i>-attribuutit ja hakea kentät testeissä niiden perusteella. Eli laajennetaan kirjautumislomaketta seuraavasti
 
@@ -373,7 +373,7 @@ Cypress suorittaa testit siinä järjestyksessä, missä ne ovat testikoodissa. 
 
 Jos testatessa on tarvetta muokata palvelimen tietokantaa, muuttuu tilanne heti haastavammaksi. Ideaalitilanteessa testauksen tulee aina lähteä liikkeelle palvelimen tietokannan suhteen samasta alkutilanteesta, jotta testeistä saadaan luotettavia ja helposti toistettavia.
 
-Kuten yksikkö- integraatiotesteissä, on myös E2E-testeissä paras ratkaisu nollata tietokanta ja mahdollisesti alustaa se sopivasti aina ennen testien suorittamista. E2E-testauksessa lisähaasteen tuo se, että testeistä ei ole mahdollista päästä suoraan käsiksi tietokantaan.
+Kuten yksikkö- ja integraatiotesteissä, on myös E2E-testeissä paras ratkaisu nollata tietokanta ja mahdollisesti alustaa se sopivasti aina ennen testien suorittamista. E2E-testauksessa lisähaasteen tuo se, että testeistä ei ole mahdollista päästä suoraan käsiksi tietokantaan.
 
 Ratkaistaan ongelma luomalla backendiin testejä varten API-endpoint, jonka avulla testit voivat tarvittaessa nollata kannan. Tehdään testejä varten oma <i>router</i>
 
@@ -420,7 +420,7 @@ Backendin testejä varten muokattu koodi on kokonaisuudessaan [GitHubissa](https
 
 Muutetaan nyt testien <i>beforeEach</i>-alustuslohkoa siten, että se nollaa palvelimen tietokannan aina ennen testien suorittamista.
 
-Tällä hetkellä sovelluksen käyttöliittymän kautta ei ole mahdollista luoda käyttäjiä, luodaankin testien alustuksessa testikäyttäjä suoraan backendiin.
+Tällä hetkellä sovelluksen käyttöliittymän kautta ei ole mahdollista luoda käyttäjiä, joten testien alustuksessa luodaan testikäyttäjä suoraan backendiin.
 
 ```js
 describe('Note app', function() {
@@ -834,7 +834,7 @@ voidaan muuttaa muotoon
 cy.visit('')
 ```
 
-Testeihin jää edelleen backendin kovakoodattu osoite <i>http://localhost:3001</i>. Muut testien käyttämät osoitteet Cypressin [dokumentaatio](https://docs.cypress.io/guides/guides/environment-variables) kehoittaa määrittelemään ympäristömuutujina.
+Testeihin jää edelleen backendin kovakoodattu osoite <i>http://localhost:3001</i>. Muut testien käyttämät osoitteet Cypressin [dokumentaatio](https://docs.cypress.io/guides/guides/environment-variables) kehoittaa määrittelemään ympäristömuuttujina.
 
 Laajennetaan konfiguraatiotiedostoa <i>cypress.config.js</i> seuraavasti:
 
@@ -920,7 +920,7 @@ cy.contains('second note')
 cy.contains('make important').click()
 ```
 
-tulos olisi ollut aivan erilainen, toinen rivi painaisi väärän muistiinpanon nappia: 
+tulos olisi ollut aivan erilainen. Toinen rivi painaisi tässä tapauksessa väärän muistiinpanon nappia: 
 
 ![Renderöityy virhe AssertionError: Timed out retrying after 4000ms: Expected to find content 'make not important'.](../../images/5/36new.png)
 
@@ -960,7 +960,7 @@ Ensimmäisellä rivillä etsitään komennon [parent](https://docs.cypress.io/ap
 
 Huomaa, että napin etsimiseen käytetään komentoa [find](https://docs.cypress.io/api/commands/find.html#Syntax). Komento [cy.get](https://docs.cypress.io/api/commands/get.html) ei sovellu tähän tilanteeseen, sillä se etsii elementtejä aina <i>koko</i> sivulta ja palauttaisi nyt kaikki sovelluksen viisi nappia.
 
-Testissä on ikävästi copypastea, rivien alku eli napin etsivä koodi on sama. 
+Testissä on ikävästi copypastea, sillä rivien alku eli napin etsivä koodi on sama. 
 Tälläisissä tilanteissa on mahdollista hyödyntää komentoa [as](https://docs.cypress.io/api/commands/as.html): 
 
 ```js
@@ -1020,7 +1020,7 @@ Nyt siis voimme suorittaa Cypress-testit komentoriviltä komennolla <i>npm run t
 
 ![Komennon suoritus tulostaa konsoliin tekstuaalisen raportin joka kertoo 5 läpimenneestä testistä.](../../images/5/39new.png)
 
-Huomaa, että testien suorituksesta tallentuu video hakemistoon <i>cypress/videos/</i>, hakemisto lienee syytä gitignoroida. Videoiden teko on myös mahdollista ottaa [pois päältä](https://docs.cypress.io/guides/guides/screenshots-and-videos#Videos).
+Huomaa, että testien suorituksesta tallentuu video hakemistoon <i>cypress/videos/</i>. Tämä hakemisto lienee syytä gitignoroida. Videoiden teko on myös mahdollista ottaa [pois päältä](https://docs.cypress.io/guides/guides/screenshots-and-videos#Videos).
 
 Testien koodin lopullinen versio on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/notes-e2e-cypress/).
 
@@ -1032,7 +1032,7 @@ Frontendin lopullinen koodi on kokonaisuudessaan [GitHubissa](https://github.com
 
 ### Tehtävät 5.17.-5.23.
 
-Tehdään osan lopuksi muutamia E2E-testejä blogisovellukseen. Yllä olevan materiaalin pitäisi riittää ainakin suurimmaksi osaksi tehtävien tekemiseen. Cypressin [dokumentaatiota](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell) kannattaa ehdottomasti myös lueskella, kyseessä on ehkä paras dokumentaatio, mitä olen koskaan open source ‑projektissa nähnyt.
+Tehdään osan lopuksi muutamia E2E-testejä blogisovellukseen. Yllä olevan materiaalin pitäisi riittää ainakin suurimmaksi osaksi tehtävien tekemiseen. Cypressin [dokumentaatiota](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell) kannattaa ehdottomasti myös lueskella. Kyseessä on ehkä paras dokumentaatio, mitä olen koskaan open source ‑projektissa nähnyt.
 
 Erityisesti kannattaa lukea luku [Introduction to Cypress](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Cypress-Can-Be-Simple-Sometimes), joka toteaa
 
@@ -1061,7 +1061,7 @@ Testin <i>beforeEach</i>-alustuslohkon tulee nollata tietokannan tilanne esim. [
 
 #### 5.18: blogilistan end to end ‑testit, step2
 
-Tee testit kirjautumiselle, testaa sekä onnistunut että epäonnistunut kirjautuminen. Luo testejä varten käyttäjä <i>beforeEach</i>-lohkossa. 
+Tee testit kirjautumiselle ja testaa sekä onnistunut että epäonnistunut kirjautuminen. Luo testejä varten käyttäjä <i>beforeEach</i>-lohkossa. 
 
 Testien runko laajenee seuraavasti
 
@@ -1122,7 +1122,7 @@ Tee testi, joka varmistaa, että blogin lisännyt käyttäjä voi poistaa blogin
 
 #### 5.22: blogilistan end to end ‑testit, step6
 
-Tee testi, joka varmista, että vain blogin lisännyt käyttäjä näkee blogin poistonapin.
+Tee testi, joka varmistaa, että vain blogin lisännyt käyttäjä näkee blogin poistonapin.
 
 #### 5.23: blogilistan end to end ‑testit, step6
 
@@ -1135,7 +1135,7 @@ cy.get('.blog').eq(0).should('contain', 'The title with the most likes')
 cy.get('.blog').eq(1).should('contain', 'The title with the second most likes')
 ``` 
   
-Saatat törmätä tässä tehtävässä ongelmaan jos klikkaat monta kertaa peräkkäin <i>like</i>-nappia. Saattaa olla, että näin tehdessä liketykset tehdään samalle oliolle, eli Cypress ei "ehdi" välissä päivittää sovelluksen tilaa. Eräs tapa korjata ongelma on odottaa jokaisen klikkauksen jälkeen että likejen lukumäärä päivittyy ja tehdä uusi liketys vasta tämän jälkeen.
+Saatat törmätä tässä tehtävässä ongelmaan jos klikkaat monta kertaa peräkkäin <i>like</i>-nappia. Saattaa olla, että näin tehdessä liketykset tehdään samalle oliolle, eli Cypress ei "ehdi" välissä päivittää sovelluksen tilaa. Eräs tapa korjata ongelma on odottaa jokaisen klikkauksen jälkeen likejen lukumäärä päivittymistä ja tehdä uusi liketys vasta tämän jälkeen.
 
 Tämä oli osan viimeinen tehtävä ja on aika pushata koodi GitHubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
