@@ -808,7 +808,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://gith
 
 ### Tehtävä 5.12.
 
-#### 5.12: blogilistan frontend, step11
+#### 5.12: blogilistan frontend, step12
 
 Määrittele joillekin sovelluksesi komponenteille PropTypet, ja ota projektiin käyttöön ESLint. Määrittele haluamasi kaltainen konfiguraatio. Korjaa kaikki lint-virheet.
 
