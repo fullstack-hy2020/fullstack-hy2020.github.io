@@ -207,11 +207,16 @@ Creating new users happens in compliance with the RESTful conventions discussed 
 Let's define a separate <i>router</i> for dealing with users in a new <i>controllers/users.js</i> file. Let's take the router into use in our application in the <i>app.js</i> file, so that it handles requests made to the <i>/api/users</i> url:
 
 ```js
-const usersRouter = require('./controllers/users')
+// ...
+const notesRouter = require('./controllers/notes')
+const usersRouter = require('./controllers/users') // highlight-line
 
 // ...
 
-app.use('/api/users', usersRouter)
+app.use('/api/notes', notesRouter)
+app.use('/api/users', usersRouter) // highlight-line
+
+// ...
 ```
 
 The contents of the file, <i>controllers/users.js</i>, that defines the router is as follows:

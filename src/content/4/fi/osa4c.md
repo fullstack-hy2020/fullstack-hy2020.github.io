@@ -208,14 +208,19 @@ Käyttäjien luominen tapahtuu osassa 3 läpikäytyjä [RESTful](/osa3/node_js_j
 Määritellään käyttäjienhallintaa varten oma <i>router</i> tiedostoon <i>controllers/users.js</i>, ja liitetään se <i>app.js</i>-tiedostossa huolehtimaan polulle <i>/api/users/</i> tulevista pyynnöistä:
 
 ```js
-const usersRouter = require('./controllers/users')
+// ...
+const notesRouter = require('./controllers/notes')
+const usersRouter = require('./controllers/users') // highlight-line
 
 // ...
 
-app.use('/api/users', usersRouter)
+app.use('/api/notes', notesRouter)
+app.use('/api/users', usersRouter) // highlight-line
+
+// ...
 ```
 
-Routerin alustava sisältö on seuraava:
+Routerin alustava sisältö tiedostossa <i>controllers/users.js</i> on seuraava:
 
 ```js
 const bcrypt = require('bcrypt')
