@@ -698,19 +698,19 @@ Le code de l'état actuel de notre application se trouve sur la branche <i>part2
 
 <div class="tasks">
 
-<h3>Exercices 2.15.-2.18.</h3>
+<h3>Exercices 2.12.-2.15.</h3>
 
-<h4>2.15: phonebook, étape7</h4>
+<h4>2.12: phonebook, étape7</h4>
 
 Revenons à notre application de répertoire.
 
 Actuellement, les numéros ajoutés au répertoire ne sont pas enregistrés sur un serveur principal. Corrigez cette situation.
 
-<h4>2.16: phonebook, étape8</h4>
+<h4>2.13: phonebook, étape8</h4>
 
 Extrayez le code qui gère la communication avec le backend dans son propre module en suivant l'exemple présenté précédemment dans cette partie du support de cours.
 
-<h4>2.17: phonebook étape9</h4>
+<h4>2.14: phonebook étape9</h4>
 
 Permettre aux utilisateurs de supprimer des entrées du répertoire. La suppression peut être effectuée via un bouton dédié pour chaque personne dans la liste du répertoire. Vous pouvez confirmer l'action de l'utilisateur en utilisant la méthode [window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm) :
 
@@ -729,7 +729,7 @@ const delete = (id) => {
 }
 ```
 
-<h4>2.18*: phonebook, étape10</h4>
+<h4>2.15*: phonebook, étape10</h4>
 
 Modifiez le code de sorte que si un numéro est ajouté à un utilisateur déjà existant, le nouveau numéro remplacera l'ancien numéro. Il est recommandé d'utiliser la méthode HTTP PUT pour mettre à jour le numéro de téléphone.
 
