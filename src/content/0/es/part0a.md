@@ -9,7 +9,7 @@ lang: es
 
 Este curso es una introducción al desarrollo web moderno con JavaScript. El enfoque principal está en las aplicaciones de una sola página implementadas con React y su soporte con servicios web RESTful y GraphQL implementados con Node.js. El curso también tiene partes sobre TypeScript, React Native e Integración continua.
 
-Otros temas incluyen depuración de aplicaciones, tecnología de contenedores, configuración, administración de entornos de ejecución y bases de datos.
+Otros temas incluyen depuración de aplicaciones, tecnologías de contenedores, configuración, administración de entornos de ejecución y bases de datos.
 
 El curso es totalmente libre de cargo. Puedes obtener un certificado e incluso los créditos ECTS (Sistema Europeo de Transferencia y Acumulación de Créditos) de la Universidad de Helsinki gratuitamente.
 
@@ -19,7 +19,7 @@ Se espera que los participantes tengan buenas habilidades de programación, cono
 
 No se requieren conocimientos previos de JavaScript u otros temas del curso.
 
-¿Cuanta experiencia en programación es necesaria? Es difícil de decir, pero deberías ser bastante fluido en *tu* lenguaje. Este nivel de fluidez usualmente necesita de al menos 100-200 horas de practica para desarrollarlo.
+¿Cuánta experiencia en programación es necesaria? Es difícil de decir, pero deberías ser bastante fluido en *tu* lenguaje. Este nivel de fluidez usualmente necesita de al menos 100-200 horas de práctica para desarrollarlo.
 
 ### Material del curso
 
@@ -45,11 +45,11 @@ Las estadísticas del tiempo de finalización de los ejercicios se pueden encont
 
 ### Canal de Discord para el curso
 
-Puedes hablar sobre el curso y temas relacionados en nuestro grupo dedicado en Discord https://study.cs.helsinki.fi/discord/join/fullstack. Discord tiene canales fullstack_general y especifico para cada parte (nombres de canal con prefijo fullstack) para discusiones relacionadas con el curso. Ten en cuenta que *el canal "chat" de Discord no es adecuado para la discusión relacionada con el curso*. ¡Únete a la conversación!
+Puedes hablar sobre el curso y temas relacionados en nuestro grupo dedicado en Discord https://study.cs.helsinki.fi/discord/join/fullstack. Discord tiene canales fullstack_general y especificos para cada parte (nombres de canal con prefijo fullstack) para discusiones relacionadas con el curso. Ten en cuenta que *el canal "chat" de Discord no es adecuado para la discusión relacionada con el curso*. ¡Únete a la conversación!
 
 ### Como obtener ayuda en Discord
 
-Cuando pides ayuda relacionada a un problema en el grupo de Discord tu pregunta debe ser tan informativa y precisa como sea posible. Si tu pregunta se ve asi
+Cuando pidas ayuda relacionada a un problema en el grupo de Discord tu pregunta debe ser tan informativa y precisa como sea posible. Si tu pregunta se ve asi
 
 > *Agregar una nueva persona no funciona, ¿podrías ayudarme con esto?*
 
@@ -114,7 +114,7 @@ Al enviar al menos 127 ejercicios de las partes 0 a 7 mientras trabajas en el cu
 - [Inscríbete en la parte 6 a través de la Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-1d62f0e7-565b-4660-9c5a-7e7e449e352e).
 - [Solicita los créditos para la parte 6](/es/part0/informacion_general#como-obtener-tus-creditos).
 
-#### Part 7 - Desarrollo Web Full Stack, extension 2 (1 crédito, CSM141083)
+#### Parte 7 - Desarrollo Web Full Stack, extension 2 (1 crédito, CSM141083)
 
 Al enviar al menos 138 ejercicios para las partes 0-7 mientras trabajas en el curso base, puedes recibir un crédito adicional a través de esta extensión.
 
@@ -122,9 +122,9 @@ Al enviar al menos 138 ejercicios para las partes 0-7 mientras trabajas en el cu
 - [Inscríbete en la parte 7 a través de la Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-abc0a702-3d35-496f-87b9-5c7845a9367b).
 - [Solicita los créditos para la parte 7](/es/part0/informacion_general#como-obtener-tus-creditos).
 
-#### Part 8 - Desarrollo Web Full Stack: GraphQL (1 crédito, CSM14113)
+#### Parte 8 - Desarrollo Web Full Stack: GraphQL (1 crédito, CSM14113)
 
-Al enviar al menos 22 de 26 ejercicios para la parte 8 del curso de, GraphQL, puedes obtener un crédito adicional. La parte 8 puede realizarse en cualquier momento después de la parte 5, porque su contenido es independiente de las partes 6 y 7.
+Al enviar al menos 22 de 26 ejercicios para la parte 8 del curso de GraphQL, puedes obtener un crédito adicional. La parte 8 puede realizarse en cualquier momento después de la parte 5, porque su contenido es independiente de las partes 6 y 7.
 
 - Envía al menos 22 de 26 ejercicios para la parte 8.
 - [Inscríbete en la parte 8 a través de la Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-4b912f04-d928-4a2d-aed7-8d8b2cefd397).
@@ -138,7 +138,7 @@ Al enviar al menos 24 de 30 ejercicios de la parte 9 del curso, TypeScript, pued
 - [Inscríbete en la parte 9 a través de la Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-8d68ba22-4d46-479c-8990-32ddc83f5a5f).
 - [Solicita los créditos para la parte 9](/es/part0/informacion_general#como-obtener-tus-creditos).
 
-#### Part 10 - Desarrollo Web Full Stack: React Native (2 crédito, CSM14111)
+#### Parte 10 - Desarrollo Web Full Stack: React Native (2 crédito, CSM14111)
 
 Al enviar 25 ejercicios para la parte 10 del curso, React Native, puedes obtener dos créditos adicionales. Puedes encontrar más información sobre los requisitos previos de esta parte, el envío de ejercicios y los créditos en la [parte 10](/es/part10/introduccion_a_react_native).
 
@@ -146,7 +146,7 @@ Al enviar 25 ejercicios para la parte 10 del curso, React Native, puedes obtener
 - [Inscríbete en la parte 10 a través de la Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-e859336d-9d63-47ac-9906-a7da74cae32d).
 - [Solicita los créditos para la parte 10](/es/part0/informacion_general#como-obtener-tus-creditos).
 
-#### Part 11 - Desarrollo Web Full Stack: Integración Continua / Entrega Continua (1 crédito, CSM14112)
+#### Parte 11 - Desarrollo Web Full Stack: Integración Continua / Entrega Continua (1 crédito, CSM14112)
 
 Al enviar todos los ejercicios para la parte 11 del curso, CI/CD (Integración Continua/Entrega Continua), puedes obtener un crédito adicional. Más información sobre los requisitos previos de esta parte y el envío de ejercicios en la [parte 11](/en/part11).
 
@@ -154,7 +154,7 @@ Al enviar todos los ejercicios para la parte 11 del curso, CI/CD (Integración C
 - [Inscríbete en la parte 11 a través de la Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-33f0ce21-ff95-42e1-9581-2c75ea3dd2a5).
 - [Solicita los créditos para la parte 11](/es/part0/informacion_general#como-obtener-tus-creditos).
 
-#### Part 12 - Desarrollo Web Full Stack: Contenedores (1 crédito, CSM141084)
+#### Parte 12 - Desarrollo Web Full Stack: Contenedores (1 crédito, CSM141084)
 
 Al enviar todos los ejercicios para la parte 12 del curso, tecnología de contenedores, puedes obtener un crédito adicional. Más información sobre los requisitos previos de esta parte y el envío de ejercicios en la [parte 12](/es/part12).
 
@@ -162,7 +162,7 @@ Al enviar todos los ejercicios para la parte 12 del curso, tecnología de conten
 - [Inscríbete en la parte 12 a través de la Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-fd32902f-3941-4963-b73b-8408cff02ae2).
 - [Solicita los créditos para la parte 12](/es/part0/informacion_general#como-obtener-tus-creditos).
 
-#### Part 13 - Desarrollo Web Full Stack: Bases de datos relacionales (1 crédito, CSM14114)
+#### Parte 13 - Desarrollo Web Full Stack: Bases de datos relacionales (1 crédito, CSM14114)
 
 Al enviar todos los ejercicios para la parte 13 del curso, bases de datos relacionales, puedes obtener un crédito adicional. Más información sobre los requisitos previos de esta parte y el envío de ejercicios en la [parte 13](/es/part13).
 
@@ -186,7 +186,7 @@ Ten en cuenta que si completas el "curso base" con 6 o 7 créditos, necesitas in
 
 Cómo estudiar el curso: instrucciones resumidas para otras partes del curso
 
-- Realiza los ejercicios. Los ejercicios se envían a través de GitHub y se califican en el sistema de envío de ejercicios. Ten en cuenta que las partes 8-13 tienen una instancia separada en el sistema de envío de ejercicios.
+- Realiza los ejercicios. Los ejercicios se envían a través de GitHub y se califican en el sistema de envío de ejercicios. Ten en cuenta que las es 8-13 tienen una instancia separada en el sistema de envío de ejercicios.
     - El [certificado del curso](/es/part0/informacion_general#certificado-del-curso) estará disponible en el sistema de envío de ejercicios.
 - Si deseas obtener créditos de la Universidad de Helsinki
     - Inscríbete en el curso. Puedes inscribirte en cada parte a través del enlace en el material del curso ([Partes y finalización](/es/part0/informacion_general#partes-y-finalizacion)). Inscríbete en cada parte por separado.
@@ -282,7 +282,7 @@ Cuando se complete el registro, aparecerá el siguiente texto en el sistema de e
 
 ### ¿Dónde obtengo mi número de estudiante de la Universidad de Helsinki?
 
-Cuando y si te inscribes en un curso por primera vez a través de Open University, se generará automáticamente un número de estudiante de la Universidad de Helsinki. ***Asegúrate de haberte inscrito en el curso antes de intentar averiguar cuál es tu número de estudiante.***
+Cuando te inscribas en un curso por primera vez a través de Open University, se generará automáticamente un número de estudiante de la Universidad de Helsinki. ***Asegúrate de haberte inscrito en el curso antes de intentar averiguar cuál es tu número de estudiante.***
 
 Ten en cuenta también que **no necesitas inscribirte** en la Open University para obtener el certificado del curso.
 
@@ -334,7 +334,7 @@ La transcripción te será entregada electrónicamente por correo electrónico. 
 
 ### No hay más versiones anuales
 
-No hay más "versiones anuales" del curso, el curso está abierto todo el tiempo. Cada parte se actualiza una o dos veces al año. Las actualizaciones son en su mayoría menores: se actualizan las versiones de las librerías y se mejora la claridad del texto. Sin embargo, también puede haber algunos cambios más significativos.
+No hay más "versiones anuales" del curso, el curso está disponible todo el tiempo. Cada parte se actualiza una o dos veces al año. Las actualizaciones son en su mayoría menores: se actualizan las versiones de las librerías y se mejora la claridad del texto. Sin embargo, también puede haber algunos cambios más significativos.
 
 A pesar de los cambios *todos los ejercicios enviados siguen siendo válidos*, y puedes continuar el curso sin preocuparte por las actualizaciones. Además, la política para obtener certificados, créditos universitarios, etc., seguirá siendo la misma, sin importar lo que suceda.
 
