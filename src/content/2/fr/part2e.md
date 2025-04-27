@@ -562,6 +562,76 @@ Cependant, il existe des situations où cette technique ne fonctionnerait pas. P
 
 </div>
 
+<div class="tasks">
 
+<h3>Exercices 2.18.-2.20.</h3>
+
+<h4>2.18* countries, étape1</h4>
+
+L'API [https://restcountries.com](https://restcountries.com) fournit des données pour différents pays dans un format lisible par machine, appelé API REST.
+
+Créer une application, dans laquelle on peut consulter les données de différents pays. L'application devrait probablement obtenir les données du end point [all](https://restcountries.com/v3.1/all).
+
+L'interface utilisateur est très simple. Le pays à afficher est trouvé en tapant une requête de recherche dans le champ de recherche.
+
+S'il y a trop de pays (plus de 10) qui correspondent à la requête, l'utilisateur est invité à préciser sa requête :
+
+![](../../images/2/19b1.png)
+
+S'il y a dix pays ou moins, mais plus d'un, tous les pays correspondant à la requête sont affichés :
+
+![](../../images/2/19b2.png)
+
+Lorsqu'il n'y a qu'un seul pays correspondant à la requête, les données de base du pays (par exemple, sa capitale et sa superficie), son drapeau et les langues qui y sont parlées sont affichés :
+
+![](../../images/2/19c3.png)
+
+**NB** : Il suffit que votre application fonctionne pour la plupart des pays. Certains pays, comme le <i>Soudan</i>, peuvent être difficiles à soutenir, car le nom du pays fait partie du nom d'un autre pays, le <i>Soudan du Sud</i>. Vous n'avez pas à vous soucier de ces cas extrêmes.
+
+<h4>2.19*: countries, étape2</h4>
+
+**Il y a encore beaucoup à faire dans cette partie, alors ne restez pas bloqué sur cet exercice !**
+
+Améliorez l'application de l'exercice précédent, de sorte que lorsque les noms de plusieurs pays sont affichés sur la page, il y a un bouton à côté du nom du pays, qui, lorsqu'il est pressé, affiche la vue pour ce pays :
+
+![](../../images/2/19b4.png)
+
+Dans cet exercice, il suffit également que votre application fonctionne pour la plupart des pays. Les pays dont le nom apparaît dans le nom d'un autre pays, comme le <i>Soudan</i>, peuvent être ignorés.
+
+<h4>2.20*: countries, étape3</h4>
+
+Ajoutez à la vue montrant les données d'un seul pays, le bulletin météo de la capitale de ce pays. Il existe des dizaines de fournisseurs de données météorologiques. Une API suggérée est [https://openweathermap.org](https://openweathermap.org). Notez que cela peut prendre quelques minutes avant qu'une clé API générée soit valide.
+
+![](../../images/2/19x.png)
+
+Si vous utilisez Open weather map, trouvez [ici](https://openweathermap.org/weather-conditions#Icon-list) une description de comment obtenir des icônes météo.
+
+**NB :** Dans certains navigateurs (tels que Firefox), l'API choisie peut envoyer une réponse d'erreur, ce qui indique que le cryptage HTTPS n'est pas pris en charge, bien que l'URL de la requête commence par _http://_. Ce problème peut être résolu en effectuant l'exercice à l'aide de Chrome.
+
+**NB :** Vous avez besoin d'une clé API pour utiliser presque tous les services météorologiques. N'enregistrez pas la clé API dans le contrôle de code source ! Ni coder en dur la clé API dans votre code source. Utilisez plutôt une [variable d'environnement](https://vitejs.dev/guide/env-and-mode.html) pour enregistrer la clé.
+Dans les applications réelles, il est considéré comme peu sûr d’envoyer ces clés directement depuis le navigateur, car toute personne pouvant ouvrir la console développeur pourrait intercepter vos clés ! Nous verrons comment implémenter un backend séparé dans la prochaine partie du cours.
+
+En supposant que la clé API est <i>4l41n3n4v41m34rv0</i>, lorsque l'application est démarrée comme suit :
+
+```bash
+export VITE_SOME_KEY=54l41n3n4v41m34rv0 && npm run dev   # Linux/macOS Bash
+($env:VITE_SOME_KEY="54l41n3n4v41m34rv0") -and (npm run dev)   # Windows PowerShell
+set "VITE_SOME_KEY=54l41n3n4v41m34rv0" && npm run dev   # Windows cmd.exe
+```
+
+vous pouvez accéder à la valeur de la clé via l’objet import.meta.env :
+
+```js
+const api_key = import.meta.env.VITE_SOME_KEY
+// la variable api_key a maintenant la valeur définie au démarrage
+```
+
+**NB :**  Pour éviter de divulguer accidentellement des variables d’environnement au client, seules celles préfixées par VITE_ sont exposées à Vite.
+
+N’oubliez pas que si vous modifiez des variables d’environnement, vous devez redémarrer le serveur de développement pour que les changements soient pris en compte.
+
+C'était le dernier exercice de cette partie du cours. Il est temps de transmettre votre code à GitHub et de marquer tous vos exercices terminés dans le [système de soumission d'exercices](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+
+</div>
 
 
