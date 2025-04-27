@@ -431,6 +431,8 @@ The code for creating a new note has to be updated so that the note is assigned 
 Let's expand our current implementation in <i>controllers/notes.js</i> so that the information about the user who created a note is sent in the <i>userId</i> field of the request body:
 
 ```js
+const notesRouter = require('express').Router()
+const Note = require('../models/note')
 const User = require('../models/user') //highlight-line
 
 //...
@@ -442,16 +444,18 @@ notesRouter.post('/', async (request, response) => {
 
   const note = new Note({
     content: body.content,
-    important: body.important === undefined ? false : body.important,
-    user: user.id //highlight-line
+    important: body.important || false,
+    user: user._id //highlight-line
   })
 
   const savedNote = await note.save()
   user.notes = user.notes.concat(savedNote._id) //highlight-line
   await user.save()  //highlight-line
-  
+
   response.status(201).json(savedNote)
 })
+
+// ...
 ```
 
 It's worth noting that the <i>user</i> object also changes. The <i>id</i> of the note is stored in the <i>notes</i> field of the <i>user</i> object:

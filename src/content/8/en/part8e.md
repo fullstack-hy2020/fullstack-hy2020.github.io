@@ -538,7 +538,7 @@ When queries and mutations are used, GraphQL uses the HTTP protocol in the commu
 The above code registers a WebSocketServer object to listen to WebSocket connections, besides the usual HTTP connections that the server listens to. The second part of the definition registers a function that closes the WebSocket connection on server shutdown.
 If you're interested in more details about configurations, Apollo's [documentation](https://www.apollographql.com/docs/apollo-server/data/subscriptions) explains in relative detail what each line of code does.
 
-WebSockets are a perfect match for communication in the case of GraphQL subscriptions since when WebSockets are used, also the server can initiate the communication.
+WebSockets are a perfect match for communication in the case of GraphQL subscriptions, since when WebSockets are used, the server can also initiate communication.
 
 The subscription *personAdded* needs a resolver. The *addPerson* resolver also has to be modified so that it sends a notification to subscribers.
 

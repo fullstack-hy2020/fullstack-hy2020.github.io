@@ -422,7 +422,9 @@ Muistiinpanot luovaa koodia on nyt mukautettava siten, että uusi muistiinpano t
 Laajennetaan ensin olemassaolevaa toteutusta siten, että tieto muistiinpanon luovan käyttäjän id:stä lähetetään pyynnön rungossa kentän <i>userId</i> arvona:
 
 ```js
-const User = require('../models/user')
+const notesRouter = require('express').Router()
+const Note = require('../models/note')
+const User = require('../models/user') //highlight-line
 
 //...
 
@@ -433,7 +435,7 @@ notesRouter.post('/', async (request, response) => {
 
   const note = new Note({
     content: body.content,
-    important: body.important === undefined ? false : body.important,
+    important: body.important || false,
     user: user._id //highlight-line
   })
 
@@ -441,8 +443,10 @@ notesRouter.post('/', async (request, response) => {
   user.notes = user.notes.concat(savedNote._id) //highlight-line
   await user.save()  //highlight-line
 
-  response.json(savedNote)
+  response.status(201).json(savedNote)
 })
+
+// ...
 ```
 
 Huomionarvoista on nyt se, että myös <i>user</i>-olio muuttuu. Sen kenttään <i>notes</i> talletetaan luodun muistiinpanon <i>id</i>:
