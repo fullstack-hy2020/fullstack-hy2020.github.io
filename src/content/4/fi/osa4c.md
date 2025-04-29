@@ -169,7 +169,7 @@ Muistiinpanojen id:t on talletettu käyttäjien sisälle taulukkona Mongo-id:it�
 }
 ```
 
-Kentän tyyppi on <i>ObjectId</i>, joka viittaa <i>note</i>-tyyppisiin dokumentteihin. Mongo ei itsessään tiedä mitään siitä, että kyse on kentästä, joka viittaa nimenomaan muistiinpanoihin, vaan kyseessä on puhtaasti Mongoosen syntaksi.
+Kentän tyyppi on <i>ObjectId</i>, eli se viittaa johonkin toiseen dokumenttiin. Kenttä <i>ref</i> määrittää sen modelin nimen, johon viitataan. Mongo ei itsessään tiedä mitään siitä, että kyse on kentästä, joka viittaa nimenomaan muistiinpanoihin, vaan kyseessä on puhtaasti Mongoosen syntaksi.
 
 Laajennetaan tiedostossa <i>model/note.js</i> olevaa muistiinpanon skeemaa siten, että myös muistiinpanossa on tieto sen luoneesta käyttäjästä:
 
@@ -492,6 +492,8 @@ usersRouter.get('/', async (request, response) => {
 ```
 
 Funktion [populate](http://mongoosejs.com/docs/populate.html) kutsu siis ketjutetaan kyselyä vastaavan metodikutsun (tässä tapauksessa <i>find</i>) perään. Populaten parametri määrittelee, että <i>user</i>-dokumenttien <i>notes</i>-kentässä olevat <i>note</i>-olioihin viittaavat <i>id</i>:t korvataan niitä vastaavilla dokumenteilla.
+
+Mongoose tekee ensin kyselyn <i>users</i>-kokoelmaan käyttäjien hakemiseksi ja sen jälkeen kyselyn <i>notes</i>-kokoelmaan muistiinpanojen hakemiseksi. Mongoose osaa tehdä jälkimmäisen kyselyn oikeaan kokoelmaan, koska määrittelimme aiemmin <i>user</i>-skeemassa <i>notes</i>-kentälle <i>ref</i>-attribuutin, joka kertoo Mongooselle, mihin kokelmaan <i>notes</i>-kentässä viitataan.
 
 Lopputulos on jo melkein haluamamme kaltainen:
 

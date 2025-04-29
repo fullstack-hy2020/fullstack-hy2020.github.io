@@ -169,7 +169,7 @@ The ids of the notes are stored within the user document as an array of Mongo id
 }
 ```
 
-The type of the field is <i>ObjectId</i> that references <i>note</i>-style documents. Mongo does not inherently know that this is a field that references notes, the syntax is purely related to and defined by Mongoose. The <i>ref</i> field suggests the name of the model that will be referred to. 
+The field type is <i>ObjectId</i>, meaning it refers to another document. The <i>ref</i> field specifies the name of the model being referenced. Mongo does not inherently know that this is a field that references notes, the syntax is purely related to and defined by Mongoose.
 
 Let's expand the schema of the note defined in the <i>models/note.js</i> file so that the note contains information about the user who created it:
 
