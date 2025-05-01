@@ -925,7 +925,7 @@ saved
 
 Yllättäen ratkaisu ei async/awaitista huolimatta toimi niin kuin oletamme, vaan testin suoritus aloitetaan ennen kuin tietokannan tila on saatu alustettua!
 
-Ongelma on siinä, että jokainen forEach-loopin läpikäynti generoi oman asynkronisen operaation ja _beforeEach_ ei odota näiden suoritusta. Eli forEach:in sisällä olevat _await_-komennot eivät ole funktiossa _beforeEach_ vaan erillisissä funktioissa, joiden päättymistä _beforeEach_ ei odota.
+Ongelma on siinä, että jokainen _forEach_-loopin läpikäynti generoi oman asynkronisen operaation, eikä _beforeEach_-funktio odota näiden suoritusta. Eli forEach:in sisällä olevat _await_-komennot eivät ole funktiossa _beforeEach_ vaan erillisissä funktioissa, joiden päättymistä _beforeEach_ ei odota. Lisäksi [_forEach_-metodi odottaa saavansa parametrikseen synkronisen funktion](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach#description), joten async/await-rakenne ei toimi sen sisällä muutenkaan oikein.
 
 Koska testien suoritus alkaa heti _beforeEach_ metodin suorituksen jälkeen, testien suoritus ehditään aloittamaan ennen kuin tietokanta on alustettu toivottuun alkutilaan.
 

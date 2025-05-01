@@ -934,7 +934,7 @@ saved
 
 Despite our use of the async/await syntax, our solution does not work as we expected it to. The test execution begins before the database is initialized!
 
-The problem is that every iteration of the forEach loop generates an asynchronous operation, and _beforeEach_ won't wait for them to finish executing. In other words, the _await_ commands defined inside of the _forEach_ loop are not in the _beforeEach_ function, but in separate functions that _beforeEach_ will not wait for.
+The problem is that each iteration of the _forEach_ loop generates its own asynchronous operation, and the _beforeEach_ function does not wait for their completion. In other words, the await commands inside the _forEach_ loop are not part of the _beforeEach_ function but are instead in separate functions, which _beforeEach_ does not wait for. Additionally, [the _forEach_ method expects a synchronous function as its parameter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach#description), so the _async/await_ structure does not work correctly within it.
 
 Since the execution of tests begins immediately after _beforeEach_ has finished executing, the execution of tests begins before the database state is initialized.
 
