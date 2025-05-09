@@ -196,9 +196,13 @@ notesRouter.post('/', async (request, response) => {
   const user = await User.findById(decodedToken.id)
 //highlight-end
 
+  if (!user) {
+    return response.status(400).json({ error: 'UserId missing or not valid' })
+  }
+
   const note = new Note({
     content: body.content,
-    important: body.important === undefined ? false : body.important,
+    important: body.important || false,
     user: user._id
   })
 
@@ -206,7 +210,7 @@ notesRouter.post('/', async (request, response) => {
   user.notes = user.notes.concat(savedNote._id)
   await user.save()
 
-  response.json(savedNote)
+  response.status(201).json(savedNote)
 })
 ```
 
