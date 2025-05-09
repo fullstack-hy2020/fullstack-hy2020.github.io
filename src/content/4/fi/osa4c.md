@@ -431,7 +431,13 @@ const User = require('../models/user') //highlight-line
 notesRouter.post('/', async (request, response) => {
   const body = request.body
 
-  const user = await User.findById(body.userId) //highlight-line
+  const user = await User.findById(body.userId)// highlight-line
+
+  // highlight-start
+  if (!user) {
+    return response.status(400).json({ error: 'userId missing or not valid' })
+  }
+  // highlight-end
 
   const note = new Note({
     content: body.content,
@@ -448,6 +454,8 @@ notesRouter.post('/', async (request, response) => {
 
 // ...
 ```
+
+Tietokannasta etsitään ensin käyttäjä pyynnön mukana lähetetyn <i>userId</i>:n avulla. Jos käyttäjää ei löydy, vastataan statuskoodilla 400 (<i>Bad Request</i>) ja virheviestillä <i>"userId missing or not valid"</i>. 
 
 Huomionarvoista on nyt se, että myös <i>user</i>-olio muuttuu. Sen kenttään <i>notes</i> talletetaan luodun muistiinpanon <i>id</i>:
 
@@ -473,6 +481,8 @@ Huomaamme siis, että käyttäjällä on kaksi muistiinpanoa.
 Muistiinpanon luoneen käyttäjän id tulee näkyviin muistiinpanon yhteyteen:
 
 ![Selain renderöi osoitteessa localhost:3001/api/notes taulukollisen JSON:eja joilla kentät content, important, id ja user, jonka arvo käyttäjäid](../../images/4/12e.png)
+
+Tekemiemme muutosten myötä testit eivät mene enää läpi, mutta jätämme testien korjaamisen nyt vapaaehtoiseksi harjoitustehtäväksi. Tekemiämme muutoksia ei ole myöskään huomioitu frontendissä, joten muistiinpanojen luomistoiminto ei enää toimi. Korjaamme frontendin kurssin osassa 5.
 
 ### populate
 

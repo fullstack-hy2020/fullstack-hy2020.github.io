@@ -440,7 +440,13 @@ const User = require('../models/user') //highlight-line
 notesRouter.post('/', async (request, response) => {
   const body = request.body
 
-  const user = await User.findById(body.userId) //highlight-line
+  const user = await User.findById(body.userId)// highlight-line
+
+  // highlight-start
+  if (!user) {
+    return response.status(400).json({ error: 'userId missing or not valid' })
+  }
+  // highlight-end
 
   const note = new Note({
     content: body.content,
@@ -457,6 +463,8 @@ notesRouter.post('/', async (request, response) => {
 
 // ...
 ```
+
+The database is first queried for a user using the <i>userId</i> provided in the request. If the user is not found, the response is sent with a status code of 400 (<i>Bad Request</i>) and an error message: <i>"userId missing or not valid"</i>.
 
 It's worth noting that the <i>user</i> object also changes. The <i>id</i> of the note is stored in the <i>notes</i> field of the <i>user</i> object:
 
@@ -482,6 +490,8 @@ We can see that the user has two notes.
 Likewise, the ids of the users who created the notes can be seen when we visit the route for fetching all notes:
 
 ![api/notes shows ids of users in JSON](../../images/4/12e.png)
+
+Due to the changes we made, the tests no longer pass, but we leave fixing the tests as an optional exercise. The changes we made have also not been accounted for in the frontend, so the note creation functionality no longer works. We will fix the frontend in part 5 of the course.
 
 ### Populate
 
@@ -558,7 +568,5 @@ const noteSchema = new mongoose.Schema({
 ```
 
 You can find the code for our current application in its entirety in the <i>part4-8</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-8).
-
-NOTE: At this stage, firstly, some tests will fail. We will leave fixing the tests to a non-compulsory exercise. Secondly, in the deployed notes app, the creating a note feature will stop working as user is not yet linked to the frontend.
 
 </div>
