@@ -345,7 +345,7 @@ response.end(JSON.stringify(notes))
 
 Expressiä käytettäessä tämä ei ole tarpeen, sillä muunnos tapahtuu automaattisesti.
 
-Kannattaa huomata, että [JSON](https://en.wikipedia.org/wiki/JSON) on merkkijono, eikä JavaScript-olio kuten muuttuja _notes_.
+Kannattaa huomata, että [JSON](https://en.wikipedia.org/wiki/JSON) on tiedostomuoto, jota kuvataan usein merkkijonona. Se ei ole JavaScript-olio kuten muuttuja _notes_.
 
 Seuraava interaktiivisessa [node-repl](https://nodejs.org/docs/latest-v8.x/api/repl.html):issä suoritettu kokeilu havainnollistaa asiaa:
 
