@@ -207,13 +207,12 @@ React also makes it possible to write styles directly in the code as so-called [
 
 The idea behind defining inline styles is extremely simple. Any React component or element can be provided with a set of CSS properties as a JavaScript object through the [style](https://react.dev/reference/react-dom/components/common#applying-css-styles) attribute.
 
-CSS rules are defined slightly differently in JavaScript than in normal CSS files. Let's say that we wanted to give some element the color green and italic font that's 16 pixels in size. In CSS, it would look like this:
+CSS rules are defined slightly differently in JavaScript than in normal CSS files. Let's say that we wanted to give some element the color green and italic font. In CSS, it would look like this:
 
 ```css
 {
   color: green;
   font-style: italic;
-  font-size: 16px;
 }
 ```
 
@@ -222,32 +221,40 @@ But as a React inline-style object it would look like this:
 ```js
 {
   color: 'green',
-  fontStyle: 'italic',
-  fontSize: 16
+  fontStyle: 'italic'
 }
 ```
 
 Every CSS property is defined as a separate property of the JavaScript object. Numeric values for pixels can be simply defined as integers. One of the major differences compared to regular CSS, is that hyphenated (kebab case) CSS properties are written in camelCase.
 
-Next, we could add a "bottom block" to our application by creating a <i>Footer</i> component and defining the following inline styles for it:
+Let's add a footer component, <i>Footer</i>, to our application and define inline styles for it. The component is defined in the file _components/Footer.jsx_ and used in the file _App.jsx_ as follows:
 
 ```js
-// highlight-start
 const Footer = () => {
   const footerStyle = {
     color: 'green',
-    fontStyle: 'italic',
-    fontSize: 16
+    fontStyle: 'italic'
   }
 
   return (
     <div style={footerStyle}>
       <br />
-      <em>Note app, Department of Computer Science, University of Helsinki 2025</em>
+      <p>
+        Note app, Department of Computer Science, University of Helsinki 2025
+      </p>
     </div>
   )
 }
-// highlight-end
+
+export default Footer
+```
+
+```js
+import { useState, useEffect } from 'react'
+import Footer from './components/Footer' // highlight-line
+import Note from './components/Note'
+import Notification from './components/Notification'
+import noteService from './services/notes'
 
 const App = () => {
   // ...

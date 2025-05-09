@@ -207,13 +207,12 @@ React mahdollistaa tyylien kirjoittamisen myös suoraan komponenttien koodin jou
 
 Periaate inline-tyylien määrittelyssä on erittäin yksinkertainen. Mihin tahansa React-komponenttiin tai elementtiin voi liittää attribuutin [style](https://react.dev/reference/react-dom/components/common#applying-css-styles), jolle annetaan arvoksi JavaScript-oliona määritelty joukko CSS-sääntöjä.
 
-CSS-säännöt määritellään JavaScriptin avulla hieman eri tavalla kuin normaaleissa CSS-tiedostoissa. Jos haluamme asettaa jollekin elementille esimerkiksi vihreän, kursivoidun ja 16 pikselin korkuisen fontin, määrittely ilmaistaan CSS-syntaksilla seuraavasti:
+CSS-säännöt määritellään JavaScriptin avulla hieman eri tavalla kuin normaaleissa CSS-tiedostoissa. Jos haluamme asettaa jollekin elementille esimerkiksi vihreän ja kursivoidun fontin, määrittely ilmaistaan CSS-syntaksilla seuraavasti:
 
 ```css
 {
   color: green;
   font-style: italic;
-  font-size: 16px;
 }
 ```
 
@@ -222,30 +221,40 @@ Vastaava tyyli kirjoitetaan Reactin inline-tyylin määrittelevänä oliona seur
 ```js
 {
   color: 'green',
-  fontStyle: 'italic',
-  fontSize: 16
+  fontStyle: 'italic'
 }
 ```
 
 Jokainen CSS-sääntö on olion kenttä, joten ne erotetaan JavaScript-syntaksin mukaan pilkuilla. Pikseleinä ilmaistut numeroarvot voidaan määritellä kokonaislukuina. Merkittävin ero normaaliin CSS:ään on väliviivan sisältämien CSS-ominaisuuksien kirjoittaminen camelCase-muodossa.
 
-Voimme nyt lisätä sovellukseemme alapalkin muodostavan komponentin <i>Footer</i> ja määritellä sille inline-tyylit seuraavasti:
+Lisätään sovellukseemme alapalkin muodostava komponentti <i>Footer</i> ja määritellään sille inline-tyylit. Määritellään komponentti tiedostossa _components/Footer.jsx_ otetaan se käyttöön tiedostossa _App.jsx_ seuraavasti:
 
 ```js
 const Footer = () => {
   const footerStyle = {
     color: 'green',
-    fontStyle: 'italic',
-    fontSize: 16
+    fontStyle: 'italic'
   }
 
   return (
     <div style={footerStyle}>
       <br />
-      <em>Note app, Department of Computer Science, University of Helsinki 2025</em>
+      <p>
+        Note app, Department of Computer Science, University of Helsinki 2025
+      </p>
     </div>
   )
 }
+
+export default Footer
+```
+
+```js
+import { useState, useEffect } from 'react'
+import Footer from './components/Footer' // highlight-line
+import Note from './components/Note'
+import Notification from './components/Notification'
+import noteService from './services/notes'
 
 const App = () => {
   // ...
