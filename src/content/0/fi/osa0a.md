@@ -308,7 +308,7 @@ Harjoitustyöstä on lisää tietoa [täällä](https://github.com/fullstack-hy2
 
 ### Haastattelulupaus
 
-Kurssin yhteistyökumppaneista[Houston Inc](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) ja [Smartly.io](https://www.smartly.io/) ovat antaneet <i>haastattelulupauksen</i> kaikille kurssin sekä projektin täydessä laajuudessa (14+10 op) suorittaneille.
+Kurssin yhteistyökumppaneista [Houston Inc](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) ja [Smartly.io](https://www.smartly.io/) ovat antaneet <i>haastattelulupauksen</i> kaikille kurssin sekä projektin täydessä laajuudessa (14+10 op) suorittaneille.
 
 Haastattelulupaus tarkoittaa, että opiskelija voi halutessaan ilmoittautua työhaastatteluun haastattelulupauksen antaneelle yritykselle. 
 
