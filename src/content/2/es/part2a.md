@@ -583,7 +583,7 @@ Ten en cuenta que esta parte tiene más ejercicios que las anteriores, así que 
 
 <h4>2.1: Información del curso paso 6</h4>
 
-Terminemos el código para renderizar el contenido del curso de los ejercicios 1.1 - 1.5. Puedes comenzar con el código de las respuestas modelo. Las respuestas modelo para la parte 1 se pueden encontrar yendo al [sistema de envío](https://studies.cs.helsinki.fi/stats/courses/fullstackopen), haciendo clic en <i>my submissions</i> en la parte superior, y en la fila correspondiente a la parte 1, bajo la columna <i>solutions</i>, haciendo clic en <i>show</i>. Para ver la solución al ejercicio de <i>información del curso</i>, haz clic en _index.js_ bajo <i>kurssitiedot</i> ("kurssitiedot" significa "información del curso").
+Terminemos el código para renderizar el contenido del curso de los ejercicios 1.1 - 1.5. Puedes comenzar con el código de las respuestas modelo. Las respuestas modelo para la parte 1 se pueden encontrar yendo al [sistema de envío](https://studies.cs.helsinki.fi/stats/courses/fullstackopen), haciendo clic en <i>my submissions</i> en la parte superior, y en la fila correspondiente a la parte 1, bajo la columna <i>solutions</i>, haciendo clic en <i>show</i>. Para ver la solución al ejercicio de <i>courseinfo</i>, haz clic dentro de la carpeta src en _App.jsx_ para visualizar el código.
 
 **Ten en cuenta que si copias un proyecto de un lugar a otro, es posible que debas eliminar el directorio <i>node\_modules</i> e instalar las dependencias nuevamente con el comando _npm install_ antes de poder iniciar la aplicación.**
 
