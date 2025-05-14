@@ -80,7 +80,7 @@ Una mejor pregunta sería
 
 ### Partes y finalización
 
-Los estudios de Full Stack consisten en el curso base y multiples extensiones. Puedes completar los estudios en un rango de 5 a 14 créditos.
+Los estudios de Full Stack consisten en el curso base y múltiples extensiones. Puedes completar los estudios en un rango de 5 a 14 créditos.
 
 #### Partes 0-5 (curso base) - Desarrollo Web Full Stack (5 cr, CSM141081)
 
@@ -186,7 +186,7 @@ Ten en cuenta que si completas el "curso base" con 6 o 7 créditos, necesitas in
 
 Cómo estudiar el curso: instrucciones resumidas para otras partes del curso
 
-- Realiza los ejercicios. Los ejercicios se envían a través de GitHub y se califican en el sistema de envío de ejercicios. Ten en cuenta que las es 8-13 tienen una instancia separada en el sistema de envío de ejercicios.
+- Realiza los ejercicios. Los ejercicios se envían a través de GitHub y se califican en el sistema de envío de ejercicios. Ten en cuenta que las partes 8-13 tienen una instancia separada en el sistema de envío de ejercicios.
     - El [certificado del curso](/es/part0/informacion_general#certificado-del-curso) estará disponible en el sistema de envío de ejercicios.
 - Si deseas obtener créditos de la Universidad de Helsinki
     - Inscríbete en el curso. Puedes inscribirte en cada parte a través del enlace en el material del curso ([Partes y finalización](/es/part0/informacion_general#partes-y-finalizacion)). Inscríbete en cada parte por separado.
@@ -348,7 +348,7 @@ Si ya has realizado el curso como MOOC o como curso universitario, ahora puedes 
 
 #### Ampliación de Full stack open
 
-¡Puedes continuar donde lo dejaste! Si deseas volver a enviar una parte completa, comunícate con el personal del curso a través de [correo electrónico](mailto:matti.luukkainen@helsinki.fi), con tu nombre de usuario de Github y las partes que te gustaría eliminar de tus envíos.
+¡Puedes continuar donde lo dejaste! Si deseas volver a enviar una parte completa, comunícate con el personal del curso a través de [correo electrónico](mailto:matti.luukkainen@helsinki.fi), con tu nombre de usuario de GitHub y las partes que te gustaría eliminar de tus envíos.
 
 #### Ampliando sobre la instancia de la Universidad de Helsinki de este curso
 
@@ -382,7 +382,7 @@ Los ejercicios del curso se envían a GitHub, por lo que Git debe estar instalad
 
 Instala un editor de texto adecuado que admita desarrollo web. [Visual Studio Code](https://code.visualstudio.com/) es muy recomendable.
 
-No codifique con nano, Notepad o Gedit. NetBeans tampoco es muy bueno para el desarrollo web. También es bastante pesado en comparación con [Visual Studio Code](https://code.visualstudio.com/).
+No codifiques con nano, Notepad o Gedit. NetBeans tampoco es muy bueno para el desarrollo web. También es bastante pesado en comparación con [Visual Studio Code](https://code.visualstudio.com/).
 
 También instala [Node.js](https://nodejs.org/en/). El material se ha realizado con la versión 18.13.0, así que no instales nada más antiguo que eso. Las instrucciones de instalación están [aquí](https://nodejs.org/en/download/package-manager/).
 
