@@ -129,7 +129,7 @@ Ahora, cuando vayas a la página [notes](https://studies.cs.helsinki.fi/examplea
 
 Todas las solicitudes tienen tipos <i>diferentes</i>. El tipo de la primera solicitud es <i>document</i>. Es el código HTML de la página y tiene el siguiente aspecto:
 
-![Vista detallada de la primera solcitud](../../images/0/9e.png)
+![Vista detallada de la primera solicitud](../../images/0/9e.png)
 
 Cuando comparamos la página que se muestra en el navegador y el código HTML devuelto por el servidor, notamos que el código no contiene la lista de notas.
 La sección [head](https://developer.mozilla.org/es/docs/Web/HTML/Element/head) del HTML contiene una etiqueta [script](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script), que hace que el navegador obtenga un archivo JavaScript llamado <i>main.js</i>.
@@ -354,7 +354,7 @@ Y agrega el nuevo elemento li a la lista:
 list.appendChild(newElement)
 ```
 
-![Captura de pantalla de la pagina con la nueva nota agregada a la lista](../../images/0/16e.png)
+![Captura de pantalla de la página con la nueva nota agregada a la lista](../../images/0/16e.png)
 
 Aunque la página se actualiza en tu navegador, los cambios no son permanentes. Si se vuelve a cargar la página, la nueva nota desaparecerá porque los cambios no se enviaron al servidor. El código JavaScript que obtiene el navegador siempre creará la lista de notas basada en datos JSON de la dirección <https://studies.cs.helsinki.fi/exampleapp/data.json>.
 
@@ -408,7 +408,7 @@ Revisemos lo que sucede cuando la página <https://studies.cs.helsinki.fi/exampl
 ![Diagrama de secuencia de la interacción entre el navegador y el servidor](../../images/0/19e.png)
 
 - El navegador obtiene el código HTML que define el contenido y la estructura de la página del servidor mediante una solicitud HTTP GET.
-- Los enlaces en el código HTML hacen que el navegador también busque la hoja de estilos CSS <i>main.cs</i>...
+- Los enlaces en el código HTML hacen que el navegador también busque la hoja de estilos CSS <i>main.css</i>...
 - ...y un archivo de código JavaScript <i>main.js</i>
 - El navegador ejecuta el código JavaScript. El código realiza una solicitud HTTP GET a la dirección https://studies.cs.helsinki.fi/exampleapp/data.json, que devuelve las notas como datos JSON.
 - Cuando se han obtenido los datos, el navegador ejecuta un <i>controlador de eventos</i>, que muestra las notas en la página utilizando DOM-API.
@@ -444,7 +444,7 @@ La etiqueta Form tiene atributos <i>action</i> y <i>method</i>, que definen que 
 
 ![Highlight de action y method](../../images/0/24e.png)
 
-El código en el servidor responsable de la solicitud POST es bastante simple (Nota: este código está en el servidor, y no en el código JavaScript obtenido por el browser):
+El código en el servidor responsable de la solicitud POST es bastante simple (Nota: este código está en el servidor, y no en el código JavaScript obtenido por el navegador):
 
 ```js
 app.post('/new_note', (req, res) => {
@@ -616,7 +616,7 @@ Tú mismo sufrirás fatiga de JavaScript durante este curso. Afortunadamente par
 <div class="tasks">
   <h3>Ejercicios 0.1.-0.6.</h3>
 
-Los ejercicios se envían a través de GitHub y marcando los ejercicios como realizados en el [sistema de envío ejercicios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Los ejercicios se envían a través de GitHub y marcando los ejercicios como realizados en el [sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 Puedes enviar todos los ejercicios al mismo repositorio o utilizar varios repositorios diferentes. Si envías ejercicios de diferentes partes al mismo repositorio, nombra bien sus directorios. Si utilizas un repositorio privado para enviar los ejercicios, agrega a _mluukkai_ como colaborador.
 
@@ -660,7 +660,7 @@ Aprende sobre los conceptos básicos de los formularios HTML leyendo el tutorial
 
 En el capítulo [Cargando una página que contiene JavaScript - revisión](/es/part0/fundamentos_de_las_aplicaciones_web#cargando-una-pagina-que-contiene-java-script-revisada) la cadena de eventos causada al abrir la página <https://studies.cs.helsinki.fi/exampleapp/notes> se representa como un [diagrama de secuencia](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/)
 
-El diagrama se hizo como un archivo Markdown de Github usando la sintaxis [Mermaid](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams), de la siguiente manera:
+El diagrama se hizo como un archivo Markdown de GitHub usando la sintaxis [Mermaid](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams), de la siguiente manera:
 
 ```text
 sequenceDiagram
@@ -707,7 +707,7 @@ Puedes crear los diagramas con cualquier programa, pero quizás la mejor y más 
 
 Crea un diagrama que describa la situación en la que el usuario accede a la versión de [aplicación de una sola página](/es/part0/fundamentos_de_las_aplicaciones_web#aplicacion-de-una-sola-pagina) de la aplicación de notas en <https://studies.cs.helsinki.fi/exampleapp/spa>.
 
-<h4>0.6: Nueva nota en diagrama de aplicación de una sola pagina</h4>
+<h4>0.6: Nueva nota en diagrama de aplicación de una sola página</h4>
 
 Crea un diagrama que represente la situación en la que el usuario crea una nueva nota utilizando la versión de una sola página de la aplicación.
 
