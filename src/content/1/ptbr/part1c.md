@@ -665,9 +665,9 @@ const App = () => {
   return (
     <div>
       <Exibir contador={contador} />
-      <Botao handleClique={aumentarEmUm} texto="mais+" />
-      <Botao handleClique={zerarContador} texto="zerar" />
-      <Botao handleClique={diminuirEmUm} texto="menos-" />
+      <Botao onClick={aumentarEmUm} texto="mais+" />
+      <Botao onClick={zerarContador} texto="zerar" />
+      <Botao onClick={diminuirEmUm} texto="menos-" />
     </div>
   )
 } 
