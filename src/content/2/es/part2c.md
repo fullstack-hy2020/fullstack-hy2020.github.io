@@ -226,12 +226,6 @@ y haciendo una pequeña adición a la parte <i>scripts</i> del archivo <i>packag
 }
 ```
 
-Ahora podemos convenientemente, sin definiciones de parámetros, iniciar json-server desde el directorio raíz del proyecto con el comando:
-
-```js
-npm run server
-```
-
 Nos familiarizaremos con la herramienta _npm_ en la [tercera parte del curso](/es/part3).
 
 **NB** El servidor json iniciado previamente debe terminarse antes de iniciar uno nuevo, de lo contrario habrá problemas:
@@ -255,11 +249,65 @@ npm install json-server --save-dev
 
 Hay una pequeña diferencia en los parámetros. <i>axios</i> se instala como una dependencia de entorno de ejecución de la aplicación, porque la ejecución del programa requiere la existencia de la librería. Por otro lado, <i>json-server</i> se instaló como una dependencia de desarrollo (_-- save-dev_), ya que el programa en sí no lo requiere. Se utiliza como ayuda durante el desarrollo de software. Habrá más sobre diferentes dependencias en la próxima parte del curso.
 
+## 💡 Mejora opcional: usar `concurrently` para iniciar Vite y JSON Server con un solo comando
+
+En este proyecto hemos estado ejecutando el frontend (React + Vite) y el backend simulado (JSON Server) en procesos separados. Por ejemplo, primero lanzamos el frontend con:
+
+```bash
+npm run dev
+```
+
+Y luego, en otra terminal distinta, lanzamos el backend con:
+
+```bash
+npm run server
+```
+
+Esto funciona bien, pero en entornos reales puede resultar más cómodo y profesional lanzar ambos servicios con un solo comando. Para ello, podemos utilizar una herramienta llamada [`concurrently`](https://www.npmjs.com/package/concurrently), que permite ejecutar múltiples scripts en paralelo desde el archivo `package.json`.
+
+### Paso a paso
+
+1. Instala `concurrently` como dependencia de desarrollo:
+
+```bash
+npm install --save-dev concurrently
+```
+
+2. Modifica tu archivo `package.json` para que incluya un nuevo script llamado `dev:full` que ejecute tanto Vite como JSON Server al mismo tiempo. Tu sección `"scripts"` quedaría así:
+
+```json
+"scripts": {
+  "dev": "vite",
+  "build": "vite build",
+  "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+  "preview": "vite preview",
+  "server": "json-server -p 3001 --watch db.json",
+  "dev:full": "concurrently \"npm run dev\" \"npm run server\""  // highlight-line
+}
+```
+
+3. A partir de ahora, puedes levantar el frontend y el backend simultáneamente con este simple comando:
+
+```bash
+npm run dev:full
+```
+
+Esto abrirá tu aplicación React (por ejemplo, en `http://localhost:5173`) y también arrancará JSON Server en `http://localhost:3001`, sirviendo los datos desde el archivo `db.json`.
+
+### ¿Por qué usar `concurrently`?
+
+- Evita tener que abrir múltiples terminales
+- Reduce el riesgo de olvidarte de iniciar uno de los servicios
+- Mejora la productividad y refleja prácticas más cercanas a entornos reales
+- Permite escalar fácilmente a otros procesos (como servidores de sockets, pruebas automáticas, etc.)
+
+> ℹ️ **Nota:** Esta mejora es opcional. El enfoque original de lanzar los procesos por separado es didáctico y permite entender mejor cada herramienta. No obstante, si prefieres un flujo de trabajo más fluido, `concurrently` es una excelente opción.
+
 ### Axios y promesas
 
 Ahora estamos listos para usar axios. En el futuro, se asume que json-server se está ejecutando en el puerto 3001.
 
-NB: Para ejecutar json-server y su aplicación react simultáneamente, es posible que debas usar dos ventanas de terminal. Uno para mantener json-server en ejecución y el otro para ejecutar react-app.
+NB: Para ejecutar json-server y tu aplicación React simultáneamente, normalmente necesitas abrir dos ventanas de terminal: una para mantener json-server en ejecución y otra para iniciar la aplicación React. No obstante, si has seguido los pasos de la mejora opcional usando concurrently, puedes ejecutarlos ambos con un solo comando (npm run dev:full), lo que simplifica el flujo de trabajo.
 
 La librería se puede poner en uso de la misma manera que otras librerías, por ejemplo, React, es decir, utilizando una instrucción <em>import</em> adecuada.
 
