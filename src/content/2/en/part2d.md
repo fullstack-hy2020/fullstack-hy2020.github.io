@@ -204,7 +204,7 @@ const toggleImportanceOf = id => {
   const changedNote = { ...note, important: !note.important }
 
   axios.put(url, changedNote).then(response => {
-    setNotes(notes.map(n => n.id === id ? response.data : n))
+    setNotes(notes.map(note => note.id === id ? response.data : note))
   })
 }
 ```
