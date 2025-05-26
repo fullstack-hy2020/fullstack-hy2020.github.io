@@ -259,9 +259,9 @@ import { getNotes, createNote, updateNote } from './requests' // highlight-line
 const App = () => {
   // ...
 
-  const updateNoteMutation = useMutation( //highligh-line
+  const updateNoteMutation = useMutation( // highlight-line
     {mutationFn: updateNote, // highlight-line
-    onSuccess: () => { // highligh-line
+    onSuccess: () => { // highlight-line
       queryClient.invalidateQueries({ queryKey: ['notes'] }) // highlight-line
     },
   })
