@@ -186,6 +186,27 @@ module.exports = {
   // ...
 }
   ```
+Huom. Jos Eslint>=9.00, eslintin konfiguraatiotiedosto on _eslint.config.js_ ja ko ongemasta päästään siinä tapauksessa eroon seuraavin lisäyksin:
+
+```js
+import js from "@eslint/js";
+import globals from "globals";
+import pluginReact from "eslint-plugin-react";
+import { defineConfig } from "eslint/config";
+import vitest from '@vitest/eslint-plugin' // highlight-line
+
+
+
+export default defineConfig([
+  { files: ["**/*.{js,mjs,cjs,jsx}"], plugins: { js }, extends: ["js/recommended"] },
+  { files: ["**/*.{js,mjs,cjs,jsx}"], languageOptions:
+  {
+    globals: {...globals.browser, ...globals.node,...vitest.environments.env.globals } , // highlight-line
+  }
+  }
+  pluginReact.configs.flat.recommended,
+]);
+  ```
 
 ### Testien sijainti
 
