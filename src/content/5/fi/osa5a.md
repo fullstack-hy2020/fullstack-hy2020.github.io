@@ -154,7 +154,7 @@ Kirjautumisen onnistuessa nollataan kirjautumislomakkeen kentät <i>ja</i> talle
 
 Jos kirjautuminen epäonnistuu, eli funktion _loginService.login_ suoritus aiheuttaa poikkeuksen, ilmoitetaan siitä käyttäjälle.
 
-Onnistunut kirjautuminen ei nyt näy sovelluksen käyttäjälle mitenkään. Muokataan sovellusta vielä siten, että kirjautumislomake näkyy vain <i>jos käyttäjä ei ole kirjautuneena</i> eli _user === null_ ja uuden muistiinpanon luomislomake vain <i>jos käyttäjä on kirjautuneena</i>, eli <i>user</i> sisältää kirjautuneen käyttäjän tiedot.
+Onnistunut kirjautuminen ei nyt näy sovelluksen käyttäjälle mitenkään. Muokataan sovellusta vielä siten, että kirjautumislomake näkyy vain <i>jos käyttäjä ei ole kirjautuneena</i> eli _user === null_. Uuden muistiinpanon luomislomake puolestaan näytetään vain <i>jos käyttäjä on kirjautuneena</i>, eli sovelluksen tila <i>user</i> sisältää kirjautuneen käyttäjän tiedot.
 
 Määritellään ensin komponenttiin <i>App</i> apufunktiot lomakkeiden generointia varten:
 
