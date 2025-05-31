@@ -467,56 +467,52 @@ kayttaja -> kayttaja:
 
 Sekä uuden blogin luonnin että blogin poistamisen yhteydessä on selvitettävä operaation tekevän käyttäjän identiteetti. Tätä auttaa jo tehtävässä 4.20 tehty middleware _tokenExtractor_. Tästä huolimatta <i>post</i>- ja <i>delete</i>-käsittelijöissä tulee vielä selvittää tokenia vastaava käyttäjä.
 
-Tee nyt uusi middleware _userExtractor_, joka selvittää pyyntöön liittyvän käyttäjän ja sijoittaa sen request-olioon. Eli kun rekisteröit middlewaren ennen routeja tiedostossa <i>app.js</i>
-
-```js
-app.use(middleware.userExtractor)
-```
-
-pääsevät routet käyttäjään käsiksi suoraan viittaamalla _request.user_:
+Tee nyt uusi middleware _userExtractor_, joka selvittää pyyntöön liittyvän käyttäjän ja sijoittaa sen request-olioon. Middlewaren rekisteröinnin jälkeen _post-_ ja _delete-_-käsittelijöiden tulee päästä käyttäjään käsiksi suoraan viittaamalla _request.user_:
 
 
 ```js
-blogsRouter.post('/', async (request, response) => {
+blogsRouter.post('/', userExtractor, async (request, response) => {
   // get user from request object
   const user = request.user
   // ..
 })
 
-blogsRouter.delete('/:id', async (request, response) => {
+blogsRouter.delete('/:id', userExtractor, async (request, response) => {
   // get user from request object
   const user = request.user
   // ..
 })
 ```
 
-Huomaa, että on mahdollista rekisteröidä middleware suoritettavaksi vain osassa tapauksista. Eli sen sijaan, että _userExtractor_-middlewarea käytettäisiin aina
+Huomaa, että tässä middleware _userExtractor_ on rekisteröity yksittäisten routejen yhteyteen eli se suoritetaan vain osassa tapauksista. Eli sen sijaan, että _userExtractor_-middlewarea käytettäisiin aina
 
 ```js
 // use the middleware in all routes
-app.use(userExtractor) // highlight-line
+app.use(middleware.userExtractor) // highlight-line
 
 app.use('/api/blogs', blogsRouter)  
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 ```
 
-voidaan määritellä, että se suoritetaan ainoastaan polun <i>/api/blogs</i> routeissa: 
+voitaisiin määritellä, että se suoritetaan ainoastaan polun <i>/api/blogs</i> routeissa: 
 
 ```js
 // use the middleware only in /api/blogs routes
-app.use('/api/blogs', userExtractor, blogsRouter) // highlight-line
+app.use('/api/blogs', middleware.userExtractor, blogsRouter) // highlight-line
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 ```
 
-Tämä siis tapahtuu ketjuttamalla useampi middleware funktion <i>use</i> parametriksi. Middlewareja voitaisiin samaan tapaan rekisteröidä myös ainoastaan yksittäisten routejen yhteyteen:
+Tämä siis tapahtuu ketjuttamalla useampi middleware funktion <i>use</i> parametriksi. Middlewareja voidaan samaan tapaan rekisteröidä myös ainoastaan yksittäisten routejen yhteyteen:
 
 ```js
-router.post('/', userExtractor, async (request, response) => {
+router.post('/', userExtractor, async (request, response) => { // highlight-line
   // ...
 }
 ```
+
+Huolehdi, että kaikkien blogien hakeminen GET-pyynnöllä onnistuu edelleen ilman tokenia.
 
 #### 4.23*: blogilistan laajennus, step11
 

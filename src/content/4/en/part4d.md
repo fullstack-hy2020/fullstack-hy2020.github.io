@@ -474,34 +474,25 @@ if ( blog.user.toString() === userid.toString() ) ...
 
 Both the new blog creation and blog deletion need to find out the identity of the user who is doing the operation. The middleware _tokenExtractor_ that we did in exercise 4.20 helps but still both the handlers of <i>post</i> and <i>delete</i> operations need to find out who the user holding a specific token is.
 
-Now create a new middleware _userExtractor_, that finds out the user and sets it to the request object. When you register the middleware in <i>app.js</i>
+Now create a new middleware called userExtractor that identifies the user related to the request and attaches it to the request object. After registering the middleware, the post and delete handlers should be able to access the user directly by referencing request.user:
 
 ```js
-app.use(middleware.userExtractor)
-```
-
-the user will be set in the field _request.user_:
-
-```js
-blogsRouter.post('/', async (request, response) => {
+blogsRouter.post('/', userExtractor, async (request, response) => {
   // get user from request object
   const user = request.user
   // ..
 })
 
-blogsRouter.delete('/:id', async (request, response) => {
+blogsRouter.delete('/:id', userExtractor, async (request, response) => {
   // get user from request object
   const user = request.user
   // ..
 })
 ```
 
-Note that it is possible to register a middleware only for a specific set of routes. So instead of using _userExtractor_ with all the routes,
+Note that in this case, the userExtractor middleware has been registered with individual routes, so it is only executed in certain cases. So instead of using _userExtractor_ with all the routes,
 
 ```js
-const middleware = require('../utils/middleware');
-// ...
-
 // use the middleware in all routes
 app.use(middleware.userExtractor) // highlight-line
 
@@ -513,25 +504,21 @@ app.use('/api/login', loginRouter)
 we could register it to be only executed with path <i>/api/blogs</i> routes:
 
 ```js
-const middleware = require('../utils/middleware');
-// ...
-
 // use the middleware only in /api/blogs routes
 app.use('/api/blogs', middleware.userExtractor, blogsRouter) // highlight-line
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 ```
 
-As can be seen, this happens by chaining multiple middlewares as the arguments of the function <i>use</i>. It would also be possible to register a middleware only for a specific operation:
+This is done by chaining multiple middleware functions as parameters to the <i>use</i> function. In the same way, middleware can also be registered only for individual routes:
 
 ```js
-const middleware = require('../utils/middleware');
-// ...
-
-router.post('/', middleware.userExtractor, async (request, response) => {
+router.post('/', userExtractor, async (request, response) => {
   // ...
 })
 ```
+
+Make sure that fetching all blogs with a GET request still works without a token.
 
 #### 4.23*: Blog List Expansion, step 11
 
