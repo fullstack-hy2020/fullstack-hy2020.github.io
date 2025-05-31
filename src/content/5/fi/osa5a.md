@@ -49,28 +49,26 @@ const App = () => {
   return (
     <div>
       <h1>Notes</h1>
-
       <Notification message={errorMessage} />
       
       // highlight-start
       <h2>Login</h2>
-
       <form onSubmit={handleLogin}>
         <div>
-          username
-            <input
+          <label htmlFor="username">username</label>
+          <input
             type="text"
+            id="username"
             value={username}
-            name="Username"
             onChange={({ target }) => setUsername(target.value)}
           />
         </div>
         <div>
-          password
-            <input
+          <label htmlFor="password">password</label>
+          <input
             type="password"
+            id="password"
             value={password}
-            name="Password"
             onChange={({ target }) => setPassword(target.value)}
           />
         </div>
@@ -125,19 +123,18 @@ const App = () => {
   const [user, setUser] = useState(null)
 // highlight-end
 
-  const handleLogin = async (event) => {
+  // ...
+
+  const handleLogin = async event => {
     event.preventDefault()
     
     // highlight-start
     try {
-      const user = await loginService.login({
-        username, password,
-      })
-
+      const user = await loginService.login({ username, password })
       setUser(user)
       setUsername('')
       setPassword('')
-    } catch (exception) {
+    } catch {
       setErrorMessage('wrong credentials')
       setTimeout(() => {
         setErrorMessage(null)
@@ -165,35 +162,32 @@ const App = () => {
   const loginForm = () => (
     <form onSubmit={handleLogin}>
       <div>
-        username
-          <input
+        <label htmlFor="username">username</label>
+        <input
           type="text"
+          id="username"
           value={username}
-          name="Username"
           onChange={({ target }) => setUsername(target.value)}
         />
       </div>
       <div>
-        password
-          <input
+        <label htmlFor="password">password</label>
+        <input
           type="password"
+          id="password"
           value={password}
-          name="Password"
           onChange={({ target }) => setPassword(target.value)}
         />
       </div>
       <button type="submit">login</button>
-    </form>      
+    </form>
   )
 
   const noteForm = () => (
     <form onSubmit={addNote}>
-      <input
-        value={newNote}
-        onChange={handleNoteChange}
-      />
+      <input value={newNote} onChange={handleNoteChange} />
       <button type="submit">save</button>
-    </form>  
+    </form>
   )
 
   return (
@@ -219,7 +213,6 @@ const App = () => {
   return (
     <div>
       <h1>Notes</h1>
-
       <Notification message={errorMessage} />
 
       {!user && loginForm()} // highlight-line
@@ -231,13 +224,13 @@ const App = () => {
         </button>
       </div>
       <ul>
-        {notesToShow.map((note, i) => 
+        {notesToShow.map(note => (
           <Note
-            key={i}
-            note={note} 
+            key={note.id}
+            note={note}
             toggleImportance={() => toggleImportanceOf(note.id)}
           />
-        )}
+        ))}
       </ul>
 
       <Footer />
@@ -260,22 +253,21 @@ Tehdään vielä sellainen muutos, että jos käyttäjä on kirjautunut, render�
 return (
   <div>
     <h1>Notes</h1>
-
     <Notification message={errorMessage} />
 
-    {!user && loginForm()} 
-    {user && <div>
-       <p>{user.name} logged in</p>
-         {noteForm()}
+    {!user && loginForm()}
+    // highlight-start
+    {user && (
+      <div>
+        <p>{user.name} logged in</p>
+        {noteForm()}
       </div>
-    } 
+    )}
+    // highlight-end
 
-    <h2>Notes</h2>
-
+    <div>
+      <button onClick={() => setShowAll(!showAll)}>
     // ...
-
-  </div>
-)
 ```
 
 Ratkaisu näyttää hieman rumalta, mutta jätämme sen koodiin toistaiseksi. 
@@ -331,7 +323,7 @@ const getAll = () => {
 const create = async newObject => {
   // highlight-start
   const config = {
-    headers: { Authorization: token },
+    headers: { Authorization: token }
   }
 // highlight-end
 
@@ -340,7 +332,7 @@ const create = async newObject => {
 }
 
 const update = (id, newObject) => {
-  const request = axios.put(`${ baseUrl } /${id}`, newObject)
+  const request = axios.put(`${ baseUrl }/${id}`, newObject)
   return request.then(response => response.data)
 }
 
@@ -354,16 +346,14 @@ Kirjautumisesta huolehtivaa tapahtumankäsittelijää pitää vielä viilata sen
 ```js
 const handleLogin = async (event) => {
   event.preventDefault()
-  try {
-    const user = await loginService.login({
-      username, password,
-    })
 
+  try {
+    const user = await loginService.login({ username, password })
     noteService.setToken(user.token) // highlight-line
     setUser(user)
     setUsername('')
     setPassword('')
-  } catch (exception) {
+  } catch {
     // ...
   }
 }
@@ -405,9 +395,7 @@ Kirjautumisen yhteyteen tehtävä muutos on seuraava:
   const handleLogin = async (event) => {
     event.preventDefault()
     try {
-      const user = await loginService.login({
-        username, password,
-      })
+      const user = await loginService.login({ username, password })
 
       // highlight-start
       window.localStorage.setItem(
@@ -436,21 +424,20 @@ Effect hookeja voi olla useita, joten tehdään oma hoitamaan kirjautuneen käyt
 
 ```js
 const App = () => {
-  const [notes, setNotes] = useState([]) 
+  const [notes, setNotes] = useState([])
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
   const [errorMessage, setErrorMessage] = useState(null)
-  const [username, setUsername] = useState('') 
-  const [password, setPassword] = useState('') 
-  const [user, setUser] = useState(null) 
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
-    noteService
-      .getAll().then(initialNotes => {
-        setNotes(initialNotes)
-      })
+    noteService.getAll().then(initialNotes => {
+      setNotes(initialNotes)
+    })
   }, [])
-
+  
   // highlight-start
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')

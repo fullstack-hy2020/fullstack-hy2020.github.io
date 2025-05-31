@@ -51,26 +51,26 @@ const App = () => {
   return (
     <div>
       <h1>Notes</h1>
-
       <Notification message={errorMessage} />
-
+      
       // highlight-start
+      <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <div>
-          username
-            <input
+          <label htmlFor="username">username</label>
+          <input
             type="text"
+            id="username"
             value={username}
-            name="Username"
             onChange={({ target }) => setUsername(target.value)}
           />
         </div>
         <div>
-          password
-            <input
+          <label htmlFor="password">password</label>
+          <input
             type="password"
+            id="password"
             value={password}
-            name="Password"
             onChange={({ target }) => setPassword(target.value)}
           />
         </div>
@@ -129,27 +129,26 @@ const App = () => {
 // highlight-start
   const [user, setUser] = useState(null)
 // highlight-end
-  
-  // highlight-start
-  const handleLogin = async (event) => {
+
+  // ...
+
+  const handleLogin = async event => {
     event.preventDefault()
     
+    // highlight-start
     try {
-      const user = await loginService.login({
-        username, password,
-      })
-
+      const user = await loginService.login({ username, password })
       setUser(user)
       setUsername('')
       setPassword('')
-    } catch (exception) {
-      setErrorMessage('Wrong credentials')
+    } catch {
+      setErrorMessage('wrong credentials')
       setTimeout(() => {
         setErrorMessage(null)
       }, 5000)
     }
-    
-  } // highlight-end
+    // highlight-end
+  }
 
   // ...
 }
@@ -170,35 +169,32 @@ const App = () => {
   const loginForm = () => (
     <form onSubmit={handleLogin}>
       <div>
-        username
-          <input
+        <label htmlFor="username">username</label>
+        <input
           type="text"
+          id="username"
           value={username}
-          name="Username"
           onChange={({ target }) => setUsername(target.value)}
         />
       </div>
       <div>
-        password
-          <input
+        <label htmlFor="password">password</label>
+        <input
           type="password"
+          id="password"
           value={password}
-          name="Password"
           onChange={({ target }) => setPassword(target.value)}
         />
       </div>
       <button type="submit">login</button>
-    </form>      
+    </form>
   )
 
   const noteForm = () => (
     <form onSubmit={addNote}>
-      <input
-        value={newNote}
-        onChange={handleNoteChange}
-      />
+      <input value={newNote} onChange={handleNoteChange} />
       <button type="submit">save</button>
-    </form>  
+    </form>
   )
 
   return (
@@ -224,11 +220,10 @@ const App = () => {
   return (
     <div>
       <h1>Notes</h1>
-
       <Notification message={errorMessage} />
 
-      {user === null && loginForm()} // highlight-line
-      {user !== null && noteForm()} // highlight-line
+      {!user && loginForm()} // highlight-line
+      {user && noteForm()} // highlight-line
 
       <div>
         <button onClick={() => setShowAll(!showAll)}>
@@ -236,13 +231,13 @@ const App = () => {
         </button>
       </div>
       <ul>
-        {notesToShow.map((note, i) => 
+        {notesToShow.map(note => (
           <Note
-            key={i}
-            note={note} 
+            key={note.id}
+            note={note}
             toggleImportance={() => toggleImportanceOf(note.id)}
           />
-        )}
+        ))}
       </ul>
 
       <Footer />
@@ -254,36 +249,10 @@ const App = () => {
 A slightly odd looking, but commonly used [React trick](https://react.dev/learn/conditional-rendering#logical-and-operator-) is used to render the forms conditionally:
 
 ```js
-{
-  user === null && loginForm()
-}
+{!user && loginForm()}
 ```
 
 If the first statement evaluates to false or is [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy), the second statement (generating the form) is not executed at all.
-
-We can make this even more straightforward by using the [conditional operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator):
-
-```js
-return (
-  <div>
-    <h1>Notes</h1>
-
-    <Notification message={errorMessage}/>
-
-    {user === null ?
-      loginForm() :
-      noteForm()
-    }
-
-    <h2>Notes</h2>
-
-    // ...
-
-  </div>
-)
-```
-
-If _user === null_ is [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy), _loginForm()_ is executed. If not, _noteForm()_ is.
 
 Let's do one more modification. If the user is logged in, their name is shown on the screen:
 
@@ -291,23 +260,21 @@ Let's do one more modification. If the user is logged in, their name is shown on
 return (
   <div>
     <h1>Notes</h1>
-
     <Notification message={errorMessage} />
 
-    {user === null ?
-      loginForm() :
+    {!user && loginForm()}
+    // highlight-start
+    {user && (
       <div>
-        <p>{user.name} logged-in</p>
+        <p>{user.name} logged in</p>
         {noteForm()}
       </div>
-    }
+    )}
+    // highlight-end
 
-    <h2>Notes</h2>
-
+    <div>
+      <button onClick={() => setShowAll(!showAll)}>
     // ...
-
-  </div>
-)
 ```
 
 The solution isn't perfect, but we'll leave it like this for now.
@@ -358,10 +325,10 @@ const getAll = () => {
   return request.then(response => response.data)
 }
 
-// highlight-start
 const create = async newObject => {
+  // highlight-start
   const config = {
-    headers: { Authorization: token },
+    headers: { Authorization: token }
   }
 // highlight-end
 
@@ -384,16 +351,14 @@ The event handler responsible for login must be changed to call the method <code
 ```js
 const handleLogin = async (event) => {
   event.preventDefault()
-  try {
-    const user = await loginService.login({
-      username, password,
-    })
 
+  try {
+    const user = await loginService.login({ username, password })
     noteService.setToken(user.token) // highlight-line
     setUser(user)
     setUsername('')
     setPassword('')
-  } catch (exception) {
+  } catch {
     // ...
   }
 }
@@ -435,9 +400,7 @@ Changes to the login method are as follows:
   const handleLogin = async (event) => {
     event.preventDefault()
     try {
-      const user = await loginService.login({
-        username, password,
-      })
+      const user = await loginService.login({ username, password })
 
       // highlight-start
       window.localStorage.setItem(
@@ -468,21 +431,20 @@ We can have multiple effect hooks, so let's create a second one to handle the fi
 
 ```js
 const App = () => {
-  const [notes, setNotes] = useState([]) 
+  const [notes, setNotes] = useState([])
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
   const [errorMessage, setErrorMessage] = useState(null)
-  const [username, setUsername] = useState('') 
-  const [password, setPassword] = useState('') 
-  const [user, setUser] = useState(null) 
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
-    noteService
-      .getAll().then(initialNotes => {
-        setNotes(initialNotes)
-      })
+    noteService.getAll().then(initialNotes => {
+      setNotes(initialNotes)
+    })
   }, [])
-
+  
   // highlight-start
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
