@@ -13,6 +13,8 @@ Frontend näyttää tällä hetkellä olemassaolevat muistiinpanot ja antaa muut
 
 Toteutetaan nyt osa käyttäjienhallinnan edellyttämästä toiminnallisuudesta frontendiin. Aloitetaan käyttäjän kirjautumisesta. Oletetaan vielä tässä osassa, että käyttäjät luodaan suoraan backendiin.
 
+### Kirjautumislomakkeen lisääminen
+
 Sovelluksen yläosaan on nyt lisätty kirjautumislomake:
 
 ![Sovellus koostuu syötekentät username ja password koostuvasta kirjautumislomakkeesta, muistiinpanojen listasta, sekä lomakkeesta joka mahdollistaa uuden muistiinpanon luomisen (ainoastaan yksi syötekenttä muistiinpanon sisällölle). Jokaisen listalla olevan muistiinpanon kohdalla on nappi, jonka avulla muistiinpano voidaan merkata tärkeäksi/epätärkeäksi](../../images/5/1new.png)
@@ -94,6 +96,8 @@ Kirjautumislomakkeen käsittely noudattaa samaa periaatetta kuin [osassa 2](/osa
 
 Kirjautumislomakkeen lähettämisestä vastaava metodi _handleLogin_ ei tee vielä mitään.
 
+### Logiikan lisääminen kirjautumislomakkeelle
+
 Kirjautuminen tapahtuu tekemällä HTTP POST ‑pyyntö palvelimen osoitteeseen <i>api/login</i>. Eristetään pyynnön tekevä koodi omaan moduuliinsa, tiedostoon <i>services/login.js</i>.
 
 Käytetään HTTP-pyynnön tekemiseen nyt promisejen sijaan <i>async/await</i>-syntaksia:
@@ -150,6 +154,8 @@ const App = () => {
 Kirjautumisen onnistuessa nollataan kirjautumislomakkeen kentät <i>ja</i> talletetaan palvelimen vastaus (joka sisältää <i>tokenin</i> sekä kirjautuneen käyttäjän tiedot) sovelluksen tilaan <i>user</i>.
 
 Jos kirjautuminen epäonnistuu, eli funktion _loginService.login_ suoritus aiheuttaa poikkeuksen, ilmoitetaan siitä käyttäjälle.
+
+### Kirjautumislomakkeen ehdollinen renderöinti
 
 Onnistunut kirjautuminen ei nyt näy sovelluksen käyttäjälle mitenkään. Muokataan sovellusta vielä siten, että kirjautumislomake näkyy vain <i>jos käyttäjä ei ole kirjautuneena</i> eli _user === null_. Uuden muistiinpanon luomislomake puolestaan näytetään vain <i>jos käyttäjä on kirjautuneena</i>, eli sovelluksen tila <i>user</i> sisältää kirjautuneen käyttäjän tiedot.
 
@@ -277,6 +283,43 @@ Sovelluksemme pääkomponentti <i>App</i> on tällä hetkellä jo aivan liian la
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-2), branchissa <i>part5-2</i>. 
 
+### Huomio label-elementin käytöstä
+
+Käytimme kirjautumislomakkeen syötekenttien yhteydessä [label](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/label)-elementtiä. Käyttäjänimen vastaanottava <i>input</i>-kenttä on sijoitettu sitä kuvaavan <i>label</i>-elementin sisään:
+
+```js
+<div>
+  <label>
+    username
+    <input
+      type="text"
+      value={username}
+      onChange={({ target }) => setUsername(target.value)}
+    />
+  </label>
+</div>
+// ...
+```
+
+Miksi toteutimme lomakkeen näin? Visuaalisesti samaan lopputulokseen näyttäisi pääsevän myös yksinkertaisemmalla koodilla ilman erillistä <i>label</i>-elementtiä:
+
+```js
+<div>
+  username
+  <input
+    type="text"
+    value={username}
+    onChange={({ target }) => setUsername(target.value)}
+  />
+</div>
+// ...
+```
+
+<i>Label</i>-elementtiä käytetään lomakkeissa kuvaamaan ja nimeämään syötekenttiä. Se määrittelee syötekentälle kuvauksen, jonka avulla käyttäjä voi päätellä, mitä tietoa kuhunkin kenttään tulee syöttää. Kuvaus sidotaan kuhunkin syötekenttään ohjelmallisesti, mikä parantaa lomakkeen saavutettavuutta. 
+
+Näin ruudunlukijaohjelmat osaavat lukea kentän nimen käyttäjälle, kun syötekenttä valitaan, ja <i>labelin</i> tekstiä klikattaessa kohdistus siirtyy automaattisesti oikeaan syötekenttään. <i>Label</i>-elementin käyttö syötekenttien yhteydessä on aina suositeltavaa, vaikka visuaalisesti samaan lopputulokseen olisi mahdollista päästä myös ilman sitä. 
+
+On olemassa [joitakin eri tapoja](https://react.dev/reference/react-dom/components/input#providing-a-label-for-an-input) sitoa tietty <i>label</i> viittaamaan <i>input</i>-elementtiin. Helpoiten se onnistuu sijoittamalla <i>input</i>-elementti sitä vastaavan <i>label</i>-elementin sisään, kuten tässä materiaalissa on tehty. Tällöin kyseinen <i>label</i> kohdistuu automaattisesti oikeaan syötekenttään, eikä muita määrittelyjä tarvita.
 
 ### Muistiinpanojen luominen
 

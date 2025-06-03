@@ -13,7 +13,7 @@ At the moment the frontend shows existing notes and lets users change the state 
 
 We'll now implement a part of the required user management functionality in the frontend. Let's begin with the user login. Throughout this part, we will assume that new users will not be added from the frontend.
 
-### Handling login
+### Adding a Login Form
 
 A login form has now been added to the top of the page:
 
@@ -101,6 +101,8 @@ The login form is handled the same way we handled forms in
 
 The method _handleLogin_, which is responsible for handling the data in the form, is yet to be implemented.
 
+### Adding Logic to the Login Form
+
 Logging in is done by sending an HTTP POST request to the server address <i>api/login</i>. Let's separate the code responsible for this request into its own module, to file <i>services/login.js</i>.
 
 We'll use <i>async/await</i> syntax instead of promises for the HTTP request:
@@ -157,6 +159,8 @@ const App = () => {
 If the login is successful, the form fields are emptied <i>and</i> the server response (including a <i>token</i> and the user details) is saved to the <i>user</i> field of the application's state.
 
 If the login fails or running the function _loginService.login_ results in an error, the user is notified.
+
+### Conditional Rendering of the Login Form
 
 The user is not notified about a successful login in any way. Let's modify the application to show the login form only <i>if the user is not logged-in</i>, so when _user === null_. The form for adding new notes is shown only if the <i>user is logged-in</i>, so when <i>user</i> state contains the user's details.
 
@@ -282,6 +286,44 @@ The solution isn't perfect, but we'll leave it like this for now.
 Our main component <i>App</i> is at the moment way too large. The changes we did now are a clear sign that the forms should be refactored into their own components. However, we will leave that for an optional exercise.
 
 The current application code can be found on [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-2), in the branch <i>part5-2</i>.
+
+### Note on Using the Label Element
+
+We used the [label](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/label) element for the <i>input</i> fields in the login form. The <i>input</i> field for the username is placed inside the corresponding <i>label</i> element:
+
+```js
+<div>
+  <label>
+    username
+    <input
+      type="text"
+      value={username}
+      onChange={({ target }) => setUsername(target.value)}
+    />
+  </label>
+</div>
+// ...
+```
+
+Why did we implement the form this way? Visually, the same result could be achieved with simpler code, without a separate <i>label</i> element:
+
+```js
+<div>
+  username
+  <input
+    type="text"
+    value={username}
+    onChange={({ target }) => setUsername(target.value)}
+  />
+</div>
+// ...
+```
+
+The <i>label</i> element is used in forms to describe and name <i>input</i> fields. It provides a description for the input field, helping the user understand what information should be entered into each field. This description is programmatically linked to the corresponding input field, improving the form's accessibility. 
+
+This way, screen readers can read the field's name to the user when the input field is selected, and clicking on the label's text automatically focuses on the correct input field. Using the <i>label</i> element with <i>input</i> fields is always recommended, even if the same visual result could be achieved without it.
+
+There are [several ways](https://react.dev/reference/react-dom/components/input#providing-a-label-for-an-input) to link a specific <i>label</i> to an <i>input</i> element. The easiest method is to place the <i>input</i> element inside the corresponding <i>label</i> element, as demonstrated in this material. This automatically associates the <i>label</i> with the correct input field, requiring no additional configuration.
 
 ### Creating new notes
 
