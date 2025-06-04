@@ -521,7 +521,7 @@ It expands when button <i>create new blog</i> is clicked
 
 ![browser showing form with create new](../../images/5/13be.png)
 
-The form hides again after a new blog is created.
+The form hides again after a new blog is created or the <i>cancel</i> button is pressed.
 
 #### 5.6 Blog List Frontend, step 6
 
