@@ -57,22 +57,24 @@ const App = () => {
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <div>
-          <label htmlFor="username">username</label>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={({ target }) => setUsername(target.value)}
-          />
+          <label>
+            username
+            <input
+              type="text"
+              value={username}
+              onChange={({ target }) => setUsername(target.value)}
+            />
+          </label>
         </div>
         <div>
-          <label htmlFor="password">password</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={({ target }) => setPassword(target.value)}
-          />
+          <label>
+            password
+            <input
+              type="password"
+              value={password}
+              onChange={({ target }) => setPassword(target.value)}
+            />
+          </label>
         </div>
         <button type="submit">login</button>
       </form>
@@ -129,7 +131,7 @@ const App = () => {
 
   // ...
 
-  const handleLogin = async event => {
+  const handleLogin = async event => { // highlight-line
     event.preventDefault()
     
     // highlight-start
@@ -168,22 +170,24 @@ const App = () => {
   const loginForm = () => (
     <form onSubmit={handleLogin}>
       <div>
-        <label htmlFor="username">username</label>
-        <input
-          type="text"
-          id="username"
-          value={username}
-          onChange={({ target }) => setUsername(target.value)}
-        />
+        <label>
+          username
+          <input
+            type="text"
+            value={username}
+            onChange={({ target }) => setUsername(target.value)}
+          />
+        </label>
       </div>
       <div>
-        <label htmlFor="password">password</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={({ target }) => setPassword(target.value)}
-        />
+        <label>
+          password
+          <input
+            type="password"
+            value={password}
+            onChange={({ target }) => setPassword(target.value)}
+          />
+        </label>
       </div>
       <button type="submit">login</button>
     </form>
