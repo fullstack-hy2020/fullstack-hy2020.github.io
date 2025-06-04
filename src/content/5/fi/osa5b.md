@@ -7,6 +7,8 @@ lang: fi
 
 <div class="content">
 
+### Kirjautumislomakkeen näyttäminen vain tarvittaessa
+
 Muutetaan sovellusta siten, että kirjautumislomaketta ei oletusarvoisesti näytetä:
 
 ![Oletusarvoisesti sovellus näytää ainoastaan muistiinpanojen listan sekä napin "log in"](../../images/5/10e.png)
@@ -388,9 +390,9 @@ const App = () => {
 Komponenttia <i>Togglable</i> laajennetaan seuraavasti
 
 ```js
-import { useState, useImperativeHandle, forwardRef } from 'react' // highlight-line
+import { useState, useImperativeHandle } from 'react' // highlight-line
 
-const Togglable = forwardRef((props, ref) => { // highlight-line
+const Togglable = (props) => { // highlight-line
   const [visible, setVisible] = useState(false)
 
   const hideWhenVisible = { display: visible ? 'none' : '' }
@@ -401,10 +403,8 @@ const Togglable = forwardRef((props, ref) => { // highlight-line
   }
 
 // highlight-start
-  useImperativeHandle(ref, () => {
-    return {
-      toggleVisibility
-    }
+  useImperativeHandle(props.ref, () => {
+    return { toggleVisibility }
   })
 // highlight-end
 
@@ -419,12 +419,10 @@ const Togglable = forwardRef((props, ref) => { // highlight-line
       </div>
     </div>
   )
-})  // highlight-line
+}
 
 export default Togglable
 ```
-
-Komponentin luova funktio on kääritty funktiokutsun [forwardRef](https://react.dev/reference/react/forwardRef) sisälle, jolloin komponentti pääsee käsiksi sille määriteltyyn refiin.
 
 Komponentti tarjoaa [useImperativeHandle](https://react.dev/reference/react/useImperativeHandle)-hookin avulla sisäisesti määritellyn funktionsa <i>toggleVisibility</i> ulkopuolelta kutsuttavaksi.
 
