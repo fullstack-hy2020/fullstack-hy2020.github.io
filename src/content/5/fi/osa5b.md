@@ -521,7 +521,7 @@ Klikkaamalla nappia <i>create new blog</i> lomake aukeaa:
 
 ![kun nappia painetaan, avautuu uuden blogin luomisen mahdollistava komponentti joka sisältää napin cancel, jota painamalla lomakkeen voi piilottaa](../../images/5/13be.png)
 
-Lomakkeen tulee sulkeutua kun uusi blogi luodaan.
+Lomakkeen tulee sulkeutua, kun <i>cancel</i>-painiketta painetaan tai kun uusi blogi luodaan.
 
 #### 5.6 blogilistan frontend, step6
 
