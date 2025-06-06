@@ -569,7 +569,7 @@ var sendToServer = function(note) {
 The code determines that the data is to be sent with an HTTP POST request and the data type is to be JSON. The data type is determined with a <i>Content-type</i> header. Then the data is sent as JSON string.
 
 The application code is available at <https://github.com/mluukkai/example_app>.
-It's worth remembering that the application is only meant to demonstrate the concepts of the course. The code follows a poor style of development in some measures, and should not be used as an example when creating your applications. The same is true for the URLs used. The URL <i>new\_note\_spa</i> that new notes are sent to, does not adhere to current best practices.
+It's worth remembering that the application is only meant to demonstrate the concepts of the course. The code follows a poor style of development in some measures, and should not be used as an example when creating your applications. The same is true for the URLs used. The URL <i>new\_note\_spa</i>, where new notes are sent to, does not adhere to current best practices.
 
 ### JavaScript-libraries
 
