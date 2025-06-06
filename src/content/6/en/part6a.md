@@ -418,7 +418,7 @@ Let us expand <i>package.json</i> with a script for running the tests:
 }
 ```
 
-And finally, <i>.eslintrc.cjs</i> needs to be altered as follows:
+And finally, we'd like to make the functions from 'jest' available globally. If your directory contains <i>.eslintrc.cjs</i>. it needs to be altered as follows:
 
 ```js
 module.exports = {
@@ -430,6 +430,23 @@ module.exports = {
   },
   // ...
 }
+```
+
+If you're using a newer version of <i>Vite</i>, modify <i>eslint.config.js</i> as follows:
+
+```js
+export default [
+  // ...
+  {
+    files: ['**/*.{js,jsx}'],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: [...globals.browser, ...globals.jest], // highlight-line
+      // ...
+    },
+    // ...
+  },
+]
 ```
 
 To make testing easier, we'll first move the reducer's code to its own module, to the file <i>src/reducers/noteReducer.js</i>. We'll also add the library [deep-freeze](https://www.npmjs.com/package/deep-freeze), which can be used to ensure that the reducer has been correctly defined as an immutable function.
