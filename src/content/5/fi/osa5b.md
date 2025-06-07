@@ -630,72 +630,6 @@ Näytä poistonappi ainoastaan jos kyseessä on kirjautuneen käyttäjän lisä�
 
 <div class="content">
 
-### PropTypes
-
-Komponentti <i>Togglable</i> olettaa, että sille määritellään propsina <i>buttonLabel</i> napin teksti. Jos määrittely unohtuu,
-
-```js
-<Togglable> buttonLabel unohtui... </Togglable>
-```
-
-sovellus kyllä toimii, mutta selaimeen renderöityy hämäävästi nappi, jolla ei ole mitään tekstiä.
-
-Haluaisimmekin varmistaa, että jos <i>Togglable</i>-komponenttia käytetään, on propsille "pakko" antaa arvo.
-
-Komponentin olettamat ja edellyttämät propsit ja niiden tyypit voidaan määritellä kirjaston [prop-types](https://github.com/facebook/prop-types) avulla. Asennetaan kirjasto:
-
-```bash
-npm install prop-types
-```
-
-<i>buttonLabel</i> voidaan määritellä <i>pakolliseksi</i> string-tyyppiseksi propsiksi seuraavasti:
-
-```js
-import PropTypes from 'prop-types'
-
-const Togglable = React.forwardRef((props, ref) => {
-  // ..
-}
-
-Togglable.propTypes = {
-  buttonLabel: PropTypes.string.isRequired
-}
-```
-
-Jos propsia ei määritellä, seurauksena on konsoliin tulostuva virheilmoitus:
-
-![](../../images/5/15.png)
-
-Koodi kuitenkin toimii edelleen, eli mikään ei pakota määrittelemään propseja PropTypes-määrittelyistä huolimatta. On kuitenkin erittäin epäammattimaista jättää konsoliin <i>mitään</i> punaisia tulosteita.
-
-Määritellään Proptypet myös <i>LoginForm</i>-komponentille:
-
-```js
-import PropTypes from 'prop-types'
-
-const LoginForm = ({
-   handleSubmit,
-   handleUsernameChange,
-   handlePasswordChange,
-   username,
-   password
-  }) => {
-    // ...
-  }
-
-LoginForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-  handleUsernameChange: PropTypes.func.isRequired,
-  handlePasswordChange: PropTypes.func.isRequired,
-  username: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired
-}
-```
-
-Jos propsin tyyppi on väärä, eli jos esimerkiksi yritetään määritellä propsiksi <i>handleSubmit</i> merkkijono, seurauksena on varoitus:
-
-![](../../images/5/16.png)
-
 ### ESLint
 
 Konfiguroimme osassa 3 koodin tyylistä huolehtivan [ESLintin](/osa3/validointi_ja_es_lint) backendiin. Otetaan nyt ESLint käyttöön myös frontendissa.
@@ -808,7 +742,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://gith
 
 #### 5.12: blogilistan frontend, step12
 
-Määrittele joillekin sovelluksesi komponenteille PropTypet, ja ota projektiin käyttöön ESLint. Määrittele haluamasi kaltainen konfiguraatio. Korjaa kaikki lint-virheet.
+Ota projektiin käyttöön ESLint. Määrittele haluamasi kaltainen konfiguraatio. Korjaa kaikki lint-virheet.
 
 Vite on asentanut projektille ESLintin valmiiksi, joten ei tarvita muuta kun sopiva konfiguraatio tiedostoon <i>.eslintrc.cjs</i>.
 

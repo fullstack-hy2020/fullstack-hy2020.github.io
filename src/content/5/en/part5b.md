@@ -632,72 +632,6 @@ Show the button for deleting a blog post only if the blog post was added by the 
 
 <div class="content">
 
-### PropTypes
-
-The <i>Togglable</i> component assumes that it is given the text for the button via the <i>buttonLabel</i> prop. If we forget to define it to the component:
-
-```js
-<Togglable> buttonLabel forgotten... </Togglable>
-```
-
-The application works, but the browser renders a button that has no label text.
-
-We would like to enforce that when the <i>Togglable</i> component is used, the button label text prop must be given a value.
-
-The expected and required props of a component can be defined with the [prop-types](https://github.com/facebook/prop-types) package. Let's install the package:
-
-```shell
-npm install prop-types
-```
-
-We can define the <i>buttonLabel</i> prop as a mandatory or <i>required</i> string-type prop as shown below:
-
-```js
-import PropTypes from 'prop-types'
-
-const Togglable = React.forwardRef((props, ref) => {
-  // ..
-})
-
-Togglable.propTypes = {
-  buttonLabel: PropTypes.string.isRequired
-}
-```
-
-The console will display the following error message if the prop is left undefined:
-
-![console error stating buttonLabel is undefined](../../images/5/15.png)
-
-The application still works and nothing forces us to define props despite the PropTypes definitions. Mind you, it is extremely unprofessional to leave <i>any</i> red output in the browser console.
-
-Let's also define PropTypes to the <i>LoginForm</i> component:
-
-```js
-import PropTypes from 'prop-types'
-
-const LoginForm = ({
-   handleSubmit,
-   handleUsernameChange,
-   handlePasswordChange,
-   username,
-   password
-  }) => {
-    // ...
-  }
-
-LoginForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-  handleUsernameChange: PropTypes.func.isRequired,
-  handlePasswordChange: PropTypes.func.isRequired,
-  username: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired
-}
-```
-
-If the type of a passed prop is wrong, e.g. if we try to define the <i>handleSubmit</i> prop as a string, then this will result in the following warning:
-
-![console error saying handleSubmit expected a function](../../images/5/16.png)
-
 ### ESlint
 
 In part 3 we configured the [ESlint](/en/part3/validation_and_es_lint#lint) code style tool to the backend. Let's take ESlint to use in the frontend as well.
@@ -810,7 +744,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 #### 5.12: Blog List Frontend, step 12
 
-Define PropTypes for one of the components of your application, and add ESlint to the project. Define the configuration according to your liking. Fix all of the linter errors.
+Add ESlint to the project. Define the configuration according to your liking. Fix all of the linter errors.
 
 Vite has installed ESlint to the project by default, so all that's left for you to do is define your desired configuration in the <i>.eslintrc.cjs</i> file.
 
