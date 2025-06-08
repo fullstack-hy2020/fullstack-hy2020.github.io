@@ -306,7 +306,7 @@ Soluciona el problema según el ejemplo mostrado en [promesas y errores](/es/par
 
 ### Algunas observaciones importantes
 
-Al final de esta parte, hay algunos ejercicios más desafiantes. En este momento, puedes saltarte los ejercicios si son demasiado difíciles; volveremos a los mismos temas más adelante. De todas formas, vale la pena lee el material.
+Al final de esta parte, hay algunos ejercicios más desafiantes. En este momento, puedes saltarte los ejercicios si son demasiado difíciles; volveremos a los mismos temas más adelante. De todas formas, vale la pena leer el material.
 
 Hemos hecho algo en nuestra aplicación que enmascara una fuente muy típica de errores.
 
