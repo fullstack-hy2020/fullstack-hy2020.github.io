@@ -599,7 +599,7 @@ That's it! The last <em>Route</em> inside the <em>Routes</em> is for catching pa
 We will soon implement a form, that a user can use to <i>sign in</i> to our application. Before that, we must implement a view that can be accessed from the app bar. Create a file <i>SignIn.jsx</i> in the <i>components</i> directory with the following content:
 
 ```javascript
-import Text from './Text';
+import { Text } from 'react-native';
 
 const SignIn = () => {
   return <Text>The sign-in view</Text>;
