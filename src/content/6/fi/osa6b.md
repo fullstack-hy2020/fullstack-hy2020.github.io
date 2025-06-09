@@ -689,6 +689,40 @@ Konsolin avulla on myös mahdollista dispatchata actioneja storeen:
 
 ![Mahdollisuus actionien dispatchaamiseen avautuu alalaidan valinnoista](../../images/6/44new.png)
 
+Siistitään lopuksi vielä hieman <i>main.jsx</i>-tiedostoa siirtämällä Redux-storen luontiin liittyvä koodi erilliseen <i>store.js</i>-tiedostoon:
+
+```js
+import { configureStore } from '@reduxjs/toolkit'
+
+import noteReducer from './reducers/noteReducer'
+import filterReducer from './reducers/filterReducer'
+
+const store = configureStore({
+  reducer: {
+    notes: noteReducer,
+    filter: filterReducer
+  }
+})
+
+export default store
+```
+
+Muutosten jälkeen <i>main.jsx</i>-tiedosto näyttää seuraavalta:
+
+```js
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux' 
+import store from './store' // highlight-line
+import App from './App'
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+)
+```
+
 Sovelluksen tämänhetkinen koodi on [GitHubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3) branchissa </i>part6-3</i>.
 
 </div>
