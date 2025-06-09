@@ -123,14 +123,14 @@ on:
 
 jobs:
   hello_world_job:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Say hello
         run: |
           echo "Hello World!"
 ```
 
-There is one job named <i>hello\_world\_job</i>, it will be run in a virtual environment with Ubuntu 20.04. The job has just one step named "Say hello", which will run the <code>echo "Hello World!"</code> command in the shell.
+There is one job named <i>hello\_world\_job</i>, it will be run in a virtual environment with Ubuntu 24.04. The job has just one step named "Say hello", which will run the <code>echo "Hello World!"</code> command in the shell.
 
 So you may ask, when does GitHub trigger a workflow to be started? There are plenty of [options](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows) to choose from, but generally speaking, you can configure a workflow to start once:
 
@@ -200,7 +200,7 @@ Before we can run a command to lint the code, we have to perform a couple of act
 
 #### Setting up the environment
 
-Setting up the environment is an important task while configuring a pipeline. We're going to use an <code>ubuntu-20.04</code> virtual environment because this is the version of Ubuntu we're going to be running in production. 
+Setting up the environment is an important task while configuring a pipeline. We're going to use an <code>ubuntu-24.04</code> virtual environment because this is the version of Ubuntu we're going to be running in production. 
 
 It is important to replicate the same environment in CI as in production as closely as possible, to avoid situations where the same code works differently in CI and production, which would effectively defeat the purpose of using CI.
 
@@ -218,7 +218,7 @@ on:
 
 jobs:
   simple_deployment_pipeline: # highlight-line
-    runs-on: ubuntu-20.04 # highlight-line
+    runs-on: ubuntu-24.04 # highlight-line
     steps: # highlight-line
       - uses: actions/checkout@v4 # highlight-line
 ```
@@ -234,7 +234,7 @@ Secondly, as the application is written in JavaScript, Node.js must be set up to
 
 jobs:
   simple_deployment_pipeline:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4 # highlight-line
@@ -250,7 +250,7 @@ Lastly, the dependencies of the application must be installed. Just like on your
 ```yml
 jobs:
   simple_deployment_pipeline:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -269,7 +269,7 @@ After the environment has been set up we can run all the scripts from <code>pack
 ```yml
 jobs:
   simple_deployment_pipeline:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
