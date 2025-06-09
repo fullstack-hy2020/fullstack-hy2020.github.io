@@ -187,6 +187,8 @@ const App = () => {
     </div>
   )
 }
+
+export default App
 ```
 
 Any JavaScript code within the curly braces is evaluated and the result of this evaluation is embedded into the defined place in the HTML produced by the component.
