@@ -27,7 +27,7 @@ h1 {
 
 Las reglas CSS se componen de <i>selectores</i> y <i>declaraciones</i>. El selector define a qué elementos se debe aplicar la regla. El selector de arriba es <i>h1</i>, que coincidirá con todas las etiquetas de encabezado <i>h1</i> en nuestra aplicación.
 
-La declaración establece la propiedad _color_ con en el valor <i>green</i>.
+La declaración establece el valor <i>green</i> para la propiedad _color_.
 
 Una regla CSS puede contener un número arbitrario de propiedades. Modifiquemos la regla anterior para convertir el texto en cursiva, definiendo el estilo de fuente como <i>italic</i>:
 
@@ -306,7 +306,7 @@ Soluciona el problema según el ejemplo mostrado en [promesas y errores](/es/par
 
 ### Algunas observaciones importantes
 
-Al final de esta parte, hay algunos ejercicios más desafiantes. En este momento, puedes saltarte los ejercicios si son demasiado difíciles; volveremos a los mismos temas más adelante. De todas formas, vale la pena lee el material.
+Al final de esta parte, hay algunos ejercicios más desafiantes. En este momento, puedes saltarte los ejercicios si son demasiado difíciles; volveremos a los mismos temas más adelante. De todas formas, vale la pena leer el material.
 
 Hemos hecho algo en nuestra aplicación que enmascara una fuente muy típica de errores.
 
