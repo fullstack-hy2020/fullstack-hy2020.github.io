@@ -187,7 +187,7 @@ Reactissa on (ainakin) [kaksi erilaista](https://medium.com/@JeffLombardJr/organ
 
 Toinen tapa olisi sijoittaa testit "normaaliin" tapaan omaan erilliseen hakemistoon. Valitaanpa kumpi tapa tahansa, on varmaa että se on jonkun mielestä täysin väärä.
 
-Itse en pidä siitä, että testit ja normaali koodi ovat samassa hakemistossa. Noudatamme kuitenkin nyt tätä tapaa, sillä se on oletusarvo Create React App:lla konfiguroiduissa sovelluksissa.
+Itse en pidä siitä, että testit ja normaali koodi ovat samassa hakemistossa. Noudatamme kuitenkin nyt tätä tapaa, sillä se on yleisin käytäntö pienissä projekteissa.
 
 ### Sisällön etsiminen testattavasta komponentista
 
