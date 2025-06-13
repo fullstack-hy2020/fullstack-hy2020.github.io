@@ -387,7 +387,7 @@ Esimerkissämme mock-funktio sopi tarkoitukseen erinomaisesti, sillä sen avulla
 Tehdään komponentille <i>Togglable</i> muutama testi. Lisätään komponentin lapset renderöivään div-elementtiin CSS-luokka <i>togglableContent</i>:
 
 ```js
-const Togglable = forwardRef((props, ref) => {
+const Togglable = props => {
   // ...
 
   return (
@@ -403,7 +403,7 @@ const Togglable = forwardRef((props, ref) => {
       </div>
     </div>
   )
-})
+}
 ```
 
 Testit ovat seuraavassa:

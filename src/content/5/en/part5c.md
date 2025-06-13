@@ -384,7 +384,7 @@ In our example, the mock function is a perfect choice since it can be easily use
 Let's write a few tests for the <i>Togglable</i> component. Let's add the <i>togglableContent</i> CSS classname to the div that returns the child components.
 
 ```js
-const Togglable = forwardRef((props, ref) => {
+const Togglable = props => {
   // ...
 
   return (
@@ -400,7 +400,7 @@ const Togglable = forwardRef((props, ref) => {
       </div>
     </div>
   )
-})
+}
 ```
 
 The tests are shown below:
