@@ -150,32 +150,27 @@ $ npm test
  PASS  Waiting for file changes...
 ```
 
-Eslint complains about the keywords _test_ and _expect_ in the tests. The problem can be solved by installing [eslint-plugin-vitest-globals](https://www.npmjs.com/package/eslint-plugin-vitest-globals):
-
-```
-npm install --save-dev eslint-plugin-vitest-globals
-```
-
-and enable the plugin by editing the _.eslintrc.cjs_ file as follows: 
+Eslint complains about the keywords _test_ and _expect_ in the tests. The problem can be solved by adding the following configuration to the <i>eslint.config.js</i> file:
 
 ```js
-module.exports = {
-  root: true,
-  env: {
-    browser: true,
-    es2020: true,
-    "vitest-globals/env": true // highlight-line
-  },
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:react/jsx-runtime',
-    'plugin:react-hooks/recommended',
-    'plugin:vitest-globals/recommended', // highlight-line
-  ],
+// ...
+
+export default [
   // ...
-}
+  // highlight-start
+  {
+    files: ['**/*.test.{js,jsx}'],
+    languageOptions: {
+      globals: {
+        ...globals.vitest
+      }
+    }
+  }
+  // highlight-end
+]
 ```
+
+This is how ESLint is informed that Vitest keywords are globally available in test files.
 
 ### Test file location
 
