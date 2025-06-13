@@ -694,17 +694,6 @@ HUOM: Jos käytät Visual Studio Codea yhdessä ESLint-laajennuksen kanssa, saat
 
 Katso lisätietoja [täältä](https://github.com/microsoft/vscode-eslint/issues/880#issuecomment-578052807).
 
-Tehdään projektin juureen tiedosto [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) ja sille seuraava sisältö:
-
-```bash
-node_modules
-dist
-eslint.config.js
-vite.config.js
-```
-
-Näin ainoastaan sovelluksessa oleva itse kirjoitettu koodi huomioidaan linttauksessa. 
-
 Tuttuun tapaan voit suorittaa linttauksen joko komentoriviltä komennolla 
 
 ```bash 

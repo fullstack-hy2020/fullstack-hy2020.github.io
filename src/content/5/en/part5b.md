@@ -695,17 +695,6 @@ NOTE: If you are using Visual Studio Code together with ESLint plugin, you might
 
 See [here](https://github.com/microsoft/vscode-eslint/issues/880#issuecomment-578052807) for more information.
 
-Let's create [.eslintignore](https://eslint.org/docs/latest/use/configure/ignore#the-eslintignore-file) file with the following contents to the repository root
-
-```bash
-node_modules
-dist
-eslint.config.js
-vite.config.js
-```
-
-Now the directories <em>dist</em> and <em>node_modules</em> will be skipped when linting.
-
 As usual, you can perform the linting either from the command line with the command
 
 ```bash
