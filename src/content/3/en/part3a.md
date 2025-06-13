@@ -851,7 +851,7 @@ All HTTP requests except POST should be <i>idempotent</i>:
 
 > <i>Methods can also have the property of "idempotence" in that (aside from error or expiration issues) the side-effects of N > 0 identical requests is the same as for a single request. The methods GET, HEAD, PUT and DELETE share this property</i>
 
-This means that if a request does not generate side effects, then the result should be the same regardless of how many times the request is sent.
+This means that if a request does generate side effects, then the result should be the same regardless of how many times the request is sent.
 
 If we make an HTTP PUT request to the URL <i>/api/notes/10</i> and with the request we send the data <em>{ content: "no side effects!", important: true }</em>, the result is the same regardless of how many times the request is sent.
 
