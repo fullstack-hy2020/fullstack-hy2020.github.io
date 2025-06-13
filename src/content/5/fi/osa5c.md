@@ -801,6 +801,14 @@ HTML-muotoinen raportti generoituu hakemistoon <i>coverage</i>. HTML-muotoinen r
 
 ![Selaimeen renderöityy näkymä tiedostoista jossa värein merkattu ne rivit joita testit eivät kattaneet](../../images/5/19newer.png)
 
+Lisätään vielä hakemisto <i>coverage/</i> tiedostoon <i>.gitignore</i>, jotta hakemiston sisältö jää versionhallinnan ulkopuolelle:
+
+```js
+//...
+
+coverage/
+```
+
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-8), branchissa <i>part5-8</i>.
 
 </div>

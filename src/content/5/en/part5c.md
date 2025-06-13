@@ -803,6 +803,14 @@ The report will tell us the lines of untested code in each component:
 
 ![HTML report of the test coverage](../../images/5/19newer.png)
 
+Let's add the directory <i>coverage/</i> to the <i>.gitignore</i> file to exclude its contents from version control:
+
+```js
+//...
+
+coverage/
+```
+
 You can find the code for our current application in its entirety in the <i>part5-8</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-8).
 
 </div>
