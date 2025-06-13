@@ -490,7 +490,7 @@ const button = screen.getByText('show...')
 await user.click(button)
 ```
 
-Käytännössä siis loimme metodin avulla <i>click</i>-tapahtuman metodin argumenttina annetulle komponentille. Voimme simuloida myös lomakkeelle kirjoittamista <i>userEventin</i>-olion avulla.
+Käytännössä siis loimme metodin avulla <i>click</i>-tapahtuman metodin argumenttina annetulle komponentille. Voimme simuloida myös lomakkeelle kirjoittamista <i>userEvent</i>-olion avulla.
 
 Tehdään testi komponentille <i>NoteForm</i>. Lomakkeen koodi näyttää seuraavalta:
 
@@ -500,28 +500,24 @@ import { useState } from 'react'
 const NoteForm = ({ createNote }) => {
   const [newNote, setNewNote] = useState('')
 
-  const handleChange = (event) => {
-    setNewNote(event.target.value)
-  }
-
-  const addNote = (event) => {
+  const addNote = event => {
     event.preventDefault()
     createNote({
       content: newNote,
-      important: true,
+      important: true
     })
 
     setNewNote('')
   }
 
   return (
-    <div className="formDiv">
+    <div>
       <h2>Create a new note</h2>
 
       <form onSubmit={addNote}>
         <input
           value={newNote}
-          onChange={handleChange}
+          onChange={event => setNewNote(event.target.value)}
         />
         <button type="submit">save</button>
       </form>
@@ -600,7 +596,7 @@ const NoteForm = ({ createNote }) => {
       <form onSubmit={addNote}>
         <input
           value={newNote}
-          onChange={handleChange}
+          onChange={event => setNewNote(event.target.value)}
         />
         // highlight-start
         <input
@@ -648,7 +644,7 @@ const NoteForm = ({ createNote }) => {
       <form onSubmit={addNote}>
         <input
           value={newNote}
-          onChange={handleChange}
+          onChange={event => setNewNote(event.target.value)}
           placeholder='write note content here' // highlight-line 
         />
         <input
@@ -696,7 +692,7 @@ const NoteForm = ({ createNote }) => {
       <form onSubmit={addNote}>
         <input
           value={newNote}
-          onChange={handleChange}
+          onChange={event => setNewNote(event.target.value)}
           id='note-input' // highlight-line 
         />
         <input
