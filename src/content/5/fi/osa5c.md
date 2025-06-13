@@ -237,7 +237,7 @@ Muitakin tapoja on, esim. [getByTestId](https://testing-library.com/docs/queries
 
 Testejä tehdessä törmäämme tyypillisesti moniin ongelmiin. 
 
-Olion _screen_ -olion metodilla [debug](https://testing-library.com/docs/queries/about/#screendebug) voimme tulostaa komponentin tuottaman HTML:n konsoliin. Eli kun muutamme testiä seuraavasti:
+Olion _screen_ metodilla [debug](https://testing-library.com/docs/queries/about/#screendebug) voimme tulostaa komponentin tuottaman HTML:n konsoliin. Eli kun muutamme testiä seuraavasti:
 
 ```js
 import { render, screen } from '@testing-library/react'
