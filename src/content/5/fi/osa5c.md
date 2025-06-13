@@ -5,12 +5,6 @@ letter: c
 lang: fi
 ---
 
-<div class="tasks">
-
-Tässä osassa käytetty testikirjasto muutettiin 3.3.2024 Jestistä Vitestiin. Jos ehdit jo aloittaa Jestiä käyttäen, näet [täältä](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/blob/02d8be28b1c9190f48976fbbd2435b63261282df/src/content/5/fi/osa5c.md) osan vanhan sisällön.
-
-</div>
-
 <div class="content">
 
 Reactilla tehtyjen frontendien testaamiseen on monia tapoja. Aloitetaan niihin tutustuminen nyt.
