@@ -154,32 +154,27 @@ $ npm test
 
 Kuten olettaa saattaa, testi menee läpi.
 
-Eslint valittaa testeissä olevista avainsanoista _test_ ja _expect_. Ongelmasta päästään eroon asentamalla [eslint-plugin-vitest-globals](https://www.npmjs.com/package/eslint-plugin-vitest-globals):
-
-```
-npm install --save-dev eslint-plugin-vitest-globals
-```
-
-ja ottamalla plugin käyttöön muokkaamalla tiedostoa _.eslint.cjs_ seuraavasti: 
+Eslint valittaa testeissä olevista avainsanoista _test_ ja _expect_. Ongelmasta päästään eroon lisäämällä tiedostoon <i>eslint.config.js</i> seuraava määrittely:
 
 ```js
-module.exports = {
-  root: true,
-  env: {
-    browser: true,
-    es2020: true,
-    "vitest-globals/env": true // highlight-line
-  },
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:react/jsx-runtime',
-    'plugin:react-hooks/recommended',
-    'plugin:vitest-globals/recommended', // highlight-line
-  ],
+// ...
+
+export default [
   // ...
-}
-  ```
+  // highlight-start
+  {
+    files: ['**/*.test.{js,jsx}'],
+    languageOptions: {
+      globals: {
+        ...globals.vitest
+      }
+    }
+  }
+  // highlight-end
+]
+```
+
+Näin ESLintille kerrotaan, että Vitestin avainsanat ovat testitiedostoissa globaalisti saatavilla. 
 
 ### Testien sijainti
 
