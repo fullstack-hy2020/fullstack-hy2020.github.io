@@ -176,15 +176,12 @@ Let's make an npm script for the <i>backend</i>, which will enable it to be star
 {
   // ...
   "scripts": {
-    "start": "NODE_ENV=production node index.js",
-    "dev": "NODE_ENV=development nodemon index.js",
-    "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
-    "deploy": "fly deploy",
-    "deploy:full": "npm run build:ui && npm run deploy",
-    "logs:prod": "fly logs",
+    "start": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=development node --watch index.js",
+    "test": "cross-env NODE_ENV=test node --test",
     "lint": "eslint .",
-    "test": "NODE_ENV=test node --test",
-    "start:test": "NODE_ENV=test node index.js" // highlight-line
+    // ...
+    "start:test": "cross-env NODE_ENV=test node --watch index.js" // highlight-line
   },
   // ...
 }
@@ -200,7 +197,7 @@ test('front page can be opened', async ({ page }) => {
 
   const locator = await page.getByText('Notes')
   await expect(locator).toBeVisible()
-  await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2023')).toBeVisible()
+  await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible()
 })
 ```
 
@@ -210,21 +207,7 @@ The method [toBeVisible](https://playwright.dev/docs/api/class-locatorassertions
 
 The second check is done without using the auxiliary variable.
 
-We notice that the year has changed. Let's change the test as follows:
-
-```js
-const { test, expect } = require('@playwright/test')
-
-test('front page can be opened', async ({ page }) => {
-  await page.goto('http://localhost:5173')
-
-  const locator = await page.getByText('Notes')
-  await expect(locator).toBeVisible()
-  await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible() // highlight-line
-})
-```
-
-As expected, the test fails. Playwright opens the test report in the browser and it becomes clear that Playwright has actually performed the tests with three different browsers: Chrome, Firefox and Webkit, i.e. the browser engine used by Safari:
+The test fails because an old year ended up in the test. Playwright opens the test report in the browser and it becomes clear that Playwright has actually performed the tests with three different browsers: Chrome, Firefox and Webkit, i.e. the browser engine used by Safari:
 
 ![test report showing the test failing in three different browsers](../../images/5/play2.png)
 
@@ -238,9 +221,7 @@ In the big picture, it is of course a very good thing that the testing takes pla
 npm test -- --project chromium
 ```
 
-Now let's correct the outdated year in the frontend code that caused the error.
-
-Before we continue, let's add a _describe_ block to the tests:
+Now let's fix the test with the correct year and let's add a _describe_ block to the tests:
 
 ```js
 const { test, describe, expect } = require('@playwright/test')
@@ -251,7 +232,7 @@ describe('Note app', () => {  // highlight-line
 
     const locator = await page.getByText('Notes')
     await expect(locator).toBeVisible()
-    await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible()
+    await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2025')).toBeVisible()
   })
 })
 ```
@@ -262,14 +243,15 @@ When developing tests, it may be wiser to reduce the waiting time to a few secon
 
 ```js
 module.exports = defineConfig({
-  timeout: 3000,
+  // ...
+  timeout: 3000, // highlight-line
   fullyParallel: false, // highlight-line
   workers: 1, // highlight-line
   // ...
 })
 ```
 
-We also made two other changes to the file, and specified that all tests [be executed one at a time](https://playwright.dev/docs/test-parallel). With the default configuration, the execution happens in parallel, and since our tests use a database, parallel execution causes problems.
+We also made two other changes to the file, specifying that all tests [be executed one at a time](https://playwright.dev/docs/test-parallel). With the default configuration, the execution happens in parallel, and since our tests use a database, parallel execution causes problems.
 
 ### Writing on the form
 
@@ -284,7 +266,7 @@ describe('Note app', () => {
   test('login form can be opened', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
-    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('button', { name: 'login' }).click()
   })
 })
 ```
@@ -314,7 +296,7 @@ describe('Note app', () => {
   test('login form can be opened', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
-    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('button', { name: 'login' }).click()
     await page.getByRole('textbox').fill('mluukkai')  // highlight-line
   })
 })
@@ -337,7 +319,7 @@ describe('Note app', () => {
   test('login form can be opened', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
-    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('button', { name: 'login' }).click()
     // highlight-start
     await page.getByRole('textbox').first().fill('mluukkai')
     await page.getByRole('textbox').last().fill('salainen')
@@ -359,7 +341,7 @@ describe('Note app', () => {
   test('login form can be opened', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
-    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('button', { name: 'login' }).click()
     // highlight-start
     const textboxes = await page.getByRole('textbox').all()
 
@@ -421,7 +403,7 @@ describe('Note app', () => {
   test('login form can be opened', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
-    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('button', { name: 'login' }).click()
     await page.getByTestId('username').fill('mluukkai') // highlight-line
     await page.getByTestId('password').fill('salainen')  // highlight-line
   
@@ -453,7 +435,7 @@ describe('Note app', () => {
   })
 
   test('login form can be opened', async ({ page }) => {
-    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('button', { name: 'login' }).click()
     await page.getByTestId('username').fill('mluukkai')
     await page.getByTestId('password').fill('salainen')
     await page.getByRole('button', { name: 'login' }).click()
@@ -474,7 +456,7 @@ describe('Note app', () => {
 
   describe('when logged in', () => {
     beforeEach(async ({ page }) => {
-      await page.getByRole('button', { name: 'log in' }).click()
+      await page.getByRole('button', { name: 'login' }).click()
       await page.getByTestId('username').fill('mluukkai')
       await page.getByTestId('password').fill('salainen')
       await page.getByRole('button', { name: 'login' }).click()
@@ -517,7 +499,7 @@ describe('Note app', () => {
   // ....
 
   test('user can log in', async ({ page }) => {
-    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('button', { name: 'login' }).click()
     await page.getByTestId('username').fill('mluukkai')
     await page.getByTestId('password').fill('salainen')
     await page.getByRole('button', { name: 'login' }).click()
@@ -526,7 +508,7 @@ describe('Note app', () => {
 
   describe('when logged in', () => {
     beforeEach(async ({ page }) => {
-      await page.getByRole('button', { name: 'log in' }).click()
+      await page.getByRole('button', { name: 'login' }).click()
       await page.getByTestId('username').fill('mluukkai')
       await page.getByTestId('password').fill('salainen')
       await page.getByRole('button', { name: 'login' }).click()
@@ -684,7 +666,7 @@ describe('Note app', () => {
   // ...
 
   test('login fails with wrong password', async ({ page }) => {
-    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('button', { name: 'login' }).click()
     await page.getByTestId('username').fill('mluukkai')
     await page.getByTestId('password').fill('wrong')
     await page.getByRole('button', { name: 'login' }).click()
@@ -746,7 +728,7 @@ Let's finalize the test so that it also ensures that the application **does not 
 
 ```js
 test('login fails with wrong password', async ({ page }) =>{
-  await page.getByRole('button', { name: 'log in' }).click()
+  await page.getByRole('button', { name: 'login' }).click()
   await page.getByTestId('username').fill('mluukkai')
   await page.getByTestId('password').fill('wrong')
   await page.getByRole('button', { name: 'login' }).click()
@@ -799,7 +781,7 @@ describe('Note app', () => {
   // ...
 
   test('user can login with correct credentials', async ({ page }) => {
-    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('button', { name: 'login' }).click()
     await page.getByTestId('username').fill('mluukkai')
     await page.getByTestId('password').fill('salainen')
     await page.getByRole('button', { name: 'login' }).click()
@@ -812,7 +794,7 @@ describe('Note app', () => {
 
   describe('when logged in', () => {
     beforeEach(async ({ page, request }) => {
-      await page.getByRole('button', { name: 'log in' }).click()
+      await page.getByRole('button', { name: 'login' }).click()
       await page.getByTestId('username').fill('mluukkai')
       await page.getByTestId('password').fill('salainen')
       await page.getByRole('button', { name: 'login' }).click()
@@ -835,7 +817,7 @@ It is also worth striving for having non-repetitive code in tests. Let's isolate
 
 ```js 
 const loginWith = async (page, username, password)  => {
-  await page.getByRole('button', { name: 'log in' }).click()
+  await page.getByRole('button', { name: 'login' }).click()
   await page.getByTestId('username').fill(username)
   await page.getByTestId('password').fill(password)
   await page.getByRole('button', { name: 'login' }).click()
@@ -903,7 +885,7 @@ Creation of a note is also isolated as its helper function. The file _tests/help
 
 ```js
 const loginWith = async (page, username, password)  => {
-  await page.getByRole('button', { name: 'log in' }).click()
+  await page.getByRole('button', { name: 'login' }).click()
   await page.getByTestId('username').fill(username)
   await page.getByTestId('password').fill(password)
   await page.getByRole('button', { name: 'login' }).click()
