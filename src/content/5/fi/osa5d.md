@@ -139,15 +139,12 @@ Tehdään <i>backendille</i> npm-skripti, jonka avulla se saadaan käynnistetty�
 {
   // ...
   "scripts": {
-    "start": "NODE_ENV=production node index.js",
-    "dev": "NODE_ENV=development nodemon index.js",
-    "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
-    "deploy": "fly deploy",
-    "deploy:full": "npm run build:ui && npm run deploy",
-    "logs:prod": "fly logs",
+    "start": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=development node --watch index.js",
+    "test": "cross-env NODE_ENV=test node --test",
     "lint": "eslint .",
-    "test": "NODE_ENV=test node --test",
-    "start:test": "NODE_ENV=test node index.js" // highlight-line
+    // ...
+    "start:test": "cross-env NODE_ENV=test node --watch index.js" // highlight-line
   },
   // ...
 }
@@ -163,7 +160,7 @@ test('front page can be opened', async ({ page }) => {
 
   const locator = await page.getByText('Notes')
   await expect(locator).toBeVisible()
-  await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2023')).toBeVisible()
+  await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible()
 })
 ```
 
@@ -174,21 +171,7 @@ Metodilla [toBeVisible](https://playwright.dev/docs/api/class-locatorassertions#
 
 Toinen tarkistus tehdään ilman apumuuttujan käyttöä.
 
-Huomaamme, että vuosi on vaihtunut. Muutetaankin testiä seuraavasti:
-
-```js
-const { test, expect } = require('@playwright/test')
-
-test('front page can be opened', async ({ page }) => {
-  await page.goto('http://localhost:5173')
-
-  const locator = await page.getByText('Notes')
-  await expect(locator).toBeVisible()
-  await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible() // highlight-line
-})
-```
-
-Kuten arvata saattaa, testi ei mene läpi. Playwright avaa testiraportin selaimeen ja siitä käy selväksi, että Playwright on itseasiassa suorittanut testit kolmella eri selaimella Chromella, yhden Firefoxilla sekä Webkitillä eli esim. Safarin käyttämällä selainmoottorilla:
+Testi ei mene läpi, sillä testiin päätynyt vanha vuosiluku. Playwright avaa testiraportin selaimeen ja siitä käy selväksi, että Playwright on itseasiassa suorittanut testit kolmella eri selaimella Chromella, yhden Firefoxilla sekä Webkitillä eli esim. Safarin käyttämällä selainmoottorilla:
 
 ![](../../images/5/play2.png)
 
@@ -202,9 +185,7 @@ Isossa kuvassa on tietysti oikein hyvä asia että testaus tapahtuu kaikilla kol
 npm test -- --project chromium
 ```
 
-Korjataan nyt koodista virheen aiheuttanut vanhentunut vuosiluku.
-
-Ennen kuin jatkamme, lisätään vielä testeihin _describe_-lohko:
+Korjataan nyt testiin oikea vuosiluku ja lisätään testeihin _describe_-lohko:
 
 ```js
 const { test, describe, expect } = require('@playwright/test')
@@ -215,7 +196,7 @@ describe('Note app', () => {
 
     const locator = await page.getByText('Notes')
     await expect(locator).toBeVisible()
-    await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible()
+    await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2025')).toBeVisible()
   })
 })
 ```
@@ -226,14 +207,15 @@ Testejä kehitettäessä voi olla viisaampaa pienentää odotettavaa aikaa muuta
 
 ```js
 module.exports = defineConfig({
-  timeout: 3000,
+  // ...
+  timeout: 3000, // highlight-line
   fullyParallel: false, // highlight-line
   workers: 1, // highlight-line
   // ...
 })
 ```
 
-Teimme tiedostoon kaksi muutakin muutosta, ja määrittelimme että kaikki testit [suoritetaan yksi kerrallaan](https://playwright.dev/docs/test-parallel). Oletusarvoisella konfiguraatiolla suoritus tapahtuu rinnakkain, ja koska testimme käyttävät yhteistä tietokantaa, rinnakkainen suoritus aiheuttaa ongelmia.
+Teimme tiedostoon kaksi muutakin muutosta, joilla määrittelimme, että kaikki testit [suoritetaan yksi kerrallaan](https://playwright.dev/docs/test-parallel). Oletusarvoisella konfiguraatiolla suoritus tapahtuu rinnakkain, ja koska testimme käyttävät yhteistä tietokantaa, rinnakkainen suoritus aiheuttaa ongelmia.
 
 ### Lomakkeelle kirjoittaminen
 
@@ -248,7 +230,7 @@ describe('Note app', () => {
   test('login form can be opened', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
-    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('button', { name: 'login' }).click()
   })
 })
 ```
@@ -278,7 +260,7 @@ describe('Note app', () => {
   test('login form can be opened', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
-    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('button', { name: 'login' }).click()
     await page.getByRole('textbox').fill('mluukkai')
   })
 })
@@ -301,7 +283,7 @@ describe('Note app', () => {
   test('login form can be opened', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
-    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('button', { name: 'login' }).click()
     await page.getByRole('textbox').first().fill('mluukkai')
     await page.getByRole('textbox').last().fill('salainen')
     await page.getByRole('button', { name: 'login' }).click()
@@ -321,7 +303,7 @@ describe('Note app', () => {
   test('login form can be opened', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
-    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('button', { name: 'login' }).click()
     const textboxes = await page.getByRole('textbox').all()
 
     await textboxes[0].fill('mluukkai')
@@ -382,7 +364,7 @@ describe('Note app', () => {
   test('login form can be opened', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
-    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('button', { name: 'login' }).click()
     await page.getByTestId('username').fill('mluukkai') // highlight-line
     await page.getByTestId('password').fill('salainen')  // highlight-line
   
@@ -416,7 +398,7 @@ describe('Note app', () => {
   })
 
   test('login form can be opened', async ({ page }) => {
-    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('button', { name: 'login' }).click()
     await page.getByTestId('username').fill('mluukkai')
     await page.getByTestId('password').fill('salainen')
     await page.getByRole('button', { name: 'login' }).click()
@@ -438,7 +420,7 @@ describe('Note app', () => {
 
   describe('when logged in', () => {
     beforeEach(async ({ page }) => {
-      await page.getByRole('button', { name: 'log in' }).click()
+      await page.getByRole('button', { name: 'login' }).click()
       await page.getByTestId('username').fill('mluukkai')
       await page.getByTestId('password').fill('salainen')
       await page.getByRole('button', { name: 'login' }).click()
@@ -482,7 +464,7 @@ describe('Note app', () => {
   // ....
 
   test('user can log in', async ({ page }) => {
-    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('button', { name: 'login' }).click()
     await page.getByTestId('username').fill('mluukkai')
     await page.getByTestId('password').fill('salainen')
     await page.getByRole('button', { name: 'login' }).click()
@@ -491,7 +473,7 @@ describe('Note app', () => {
 
   describe('when logged in', () => {
     beforeEach(async ({ page }) => {
-      await page.getByRole('button', { name: 'log in' }).click()
+      await page.getByRole('button', { name: 'login' }).click()
       await page.getByTestId('username').fill('mluukkai')
       await page.getByTestId('password').fill('salainen')
       await page.getByRole('button', { name: 'login' }).click()
@@ -642,7 +624,7 @@ describe('Note app', () => {
   // ...
 
   test('login fails with wrong password', async ({ page }) => {
-    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('button', { name: 'login' }).click()
     await page.getByTestId('username').fill('mluukkai')
     await page.getByTestId('password').fill('wrong')
     await page.getByRole('button', { name: 'login' }).click()
@@ -705,7 +687,7 @@ Viimeistellään testi vielä siten, että se varmistaa myös, että sovellus **
 
 ```js
 test('login fails with wrong password', async ({ page }) =>{
-  await page.getByRole('button', { name: 'log in' }).click()
+  await page.getByRole('button', { name: 'login' }).click()
   await page.getByTestId('username').fill('mluukkai')
   await page.getByTestId('password').fill('wrong')
   await page.getByRole('button', { name: 'login' }).click()
@@ -758,7 +740,7 @@ describe('Note app', () => {
   // ...
 
   test('user can login with correct credentials', async ({ page }) => {
-    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('button', { name: 'login' }).click()
     await page.getByTestId('username').fill('mluukkai')
     await page.getByTestId('password').fill('salainen')
     await page.getByRole('button', { name: 'login' }).click()
@@ -771,7 +753,7 @@ describe('Note app', () => {
 
   describe('when logged in', () => {
     beforeEach(async ({ page, request }) => {
-      await page.getByRole('button', { name: 'log in' }).click()
+      await page.getByRole('button', { name: 'login' }).click()
       await page.getByTestId('username').fill('mluukkai')
       await page.getByTestId('password').fill('salainen')
       await page.getByRole('button', { name: 'login' }).click()
@@ -795,7 +777,7 @@ Myös testeissä kannattaa pyrkiä toisteettomaan koodiin. Eristetään kirjautu
 
 ```js 
 const loginWith = async (page, username, password)  => {
-  await page.getByRole('button', { name: 'log in' }).click()
+  await page.getByRole('button', { name: 'login' }).click()
   await page.getByTestId('username').fill(username)
   await page.getByTestId('password').fill(password)
   await page.getByRole('button', { name: 'login' }).click()
@@ -863,7 +845,7 @@ Eristetään myös muistiinpanon lisääminen omaksi apufunktioksi. Tiedosto _te
 
 ```js
 const loginWith = async (page, username, password)  => {
-  await page.getByRole('button', { name: 'log in' }).click()
+  await page.getByRole('button', { name: 'login' }).click()
   await page.getByTestId('username').fill(username)
   await page.getByTestId('password').fill(password)
   await page.getByRole('button', { name: 'login' }).click()
