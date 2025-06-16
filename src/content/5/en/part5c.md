@@ -204,6 +204,77 @@ test('renders content', () => {
 
 Test fails if _getByText_ does not find the element it is looking for.
 
+The _getByText_ command, by default, searches for an element that contains only the **text provided as a parameter** and nothing else. Let us assume that a component would render text to an HTML element as follows:
+
+```js
+const Note = ({ note, toggleImportance }) => {
+  const label = note.important
+    ? 'make not important' : 'make important'
+
+  return (
+    <li className='note'>
+      Your awesome note: {note.content} // highlight-line
+      <button onClick={toggleImportance}>{label}</button>
+    </li>
+  )
+}
+
+export default Note
+```
+
+The _getByText_ method that the test uses does <i>not</i> find the element:
+
+```js
+test('renders content', () => {
+  const note = {
+    content: 'Does not work anymore :(',
+    important: true
+  }
+
+  render(<Note note={note} />)
+
+  const element = screen.getByText('Does not work anymore :(')
+
+  expect(element).toBeDefined()
+})
+```
+
+If we want to look for an element that <i>contains</i> the text, we could use an extra option:
+
+```js
+const element = screen.getByText(
+  'Does not work anymore :(', { exact: false }
+)
+```
+
+or we could use the _findByText_ method:
+
+```js
+const element = await screen.findByText('Does not work anymore :(')
+```
+
+It is important to notice that, unlike the other _ByText_ methods, _findByText_ returns a promise!
+
+There are situations where yet another form of the _queryByText_ method is useful. The method returns the element but <i>it does not cause an exception</i> if it is not found.
+
+We could eg. use the method to ensure that something <i>is not rendered</i> to the component:
+
+```js
+test('does not render this', () => {
+  const note = {
+    content: 'This is a reminder',
+    important: true
+  }
+
+  render(<Note note={note} />)
+
+  const element = screen.queryByText('do not want this thing to be rendered')
+  expect(element).toBeNull()
+})
+```
+
+Other methods also exist, such as [getByTestId](https://testing-library.com/docs/queries/bytestid/), which searches for elements based on id fields specifically created for testing purposes.
+
 We could also use [CSS-selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors) to find rendered elements by using the method [querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) of the object [container](https://testing-library.com/docs/react-testing-library/api/#container-1) that is one of the fields returned by the render:
 
 ```js
@@ -227,7 +298,7 @@ test('renders content', () => {
 })
 ```
 
-**NB:** A more consistent way of selecting elements is using a [data attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*) that is specifically defined for testing purposes. Using _react-testing-library_, we can leverage the [getByTestId](https://testing-library.com/docs/queries/bytestid/) method to select elements with a specified _data-testid_ attribute.
+It is, however, recommended to search for elements primarily using methods other than the <i>container</i> object and CSS selectors. CSS attributes can often be changed without affecting the application's functionality, and users are not aware of them. It is better to search for elements based on properties visible to the user, for example, by using the _getByText_ method. This way, the tests better simulate the actual nature of the component and how a user would find the element on the screen.
 
 ### Debugging tests
 
@@ -381,29 +452,7 @@ In our example, the mock function is a perfect choice since it can be easily use
 
 ### Tests for the <i>Togglable</i> component
 
-Let's write a few tests for the <i>Togglable</i> component. Let's add the <i>togglableContent</i> CSS classname to the div that returns the child components.
-
-```js
-const Togglable = props => {
-  // ...
-
-  return (
-    <div>
-      <div style={hideWhenVisible}>
-        <button onClick={toggleVisibility}>
-          {props.buttonLabel}
-        </button>
-      </div>
-      <div style={showWhenVisible} className="togglableContent"> // highlight-line
-        {props.children}
-        <button onClick={toggleVisibility}>cancel</button>
-      </div>
-    </div>
-  )
-}
-```
-
-The tests are shown below:
+Let's write a few tests for the <i>Togglable</i> component. The tests are shown below:
 
 ```js
 import { render, screen } from '@testing-library/react'
@@ -411,25 +460,21 @@ import userEvent from '@testing-library/user-event'
 import Togglable from './Togglable'
 
 describe('<Togglable />', () => {
-  let container
-
   beforeEach(() => {
-    container = render(
+    render(
       <Togglable buttonLabel="show...">
-        <div className="testDiv" >
-          togglable content
-        </div>
+        <div>togglable content</div>
       </Togglable>
-    ).container
+    )
   })
 
-  test('renders its children', async () => {
-    await screen.findAllByText('togglable content')
+  test('renders its children', () => {
+    screen.getByText('togglable content')
   })
 
   test('at start the children are not displayed', () => {
-    const div = container.querySelector('.togglableContent')
-    expect(div).toHaveStyle('display: none')
+    const element = screen.getByText('togglable content')
+    expect(element).not.toBeVisible()
   })
 
   test('after clicking the button, children are displayed', async () => {
@@ -437,23 +482,22 @@ describe('<Togglable />', () => {
     const button = screen.getByText('show...')
     await user.click(button)
 
-    const div = container.querySelector('.togglableContent')
-    expect(div).not.toHaveStyle('display: none')
+    const element = screen.getByText('togglable content')
+    expect(element).toBeVisible()
   })
-})
 ```
 
-The _beforeEach_ function gets called before each test, which then renders the <i>Togglable</i> component and saves the field _container_ of the returned value.
+The _beforeEach_ function gets called before each test, which then renders the <i>Togglable</i> component.
 
 The first test verifies that the <i>Togglable</i> component renders its child component
 
 ```js
-<div className="testDiv">
+<div>
   togglable content
 </div>
 ```
 
-The remaining tests use the [toHaveStyle](https://www.npmjs.com/package/@testing-library/jest-dom#tohavestyle) method to verify that the child component of the <i>Togglable</i> component is not visible initially, by checking that the style of the <i>div</i> element contains _{ display: 'none' }_. Another test verifies that when the button is pressed the component is visible, meaning that the style for hiding it <i>is no longer</i> assigned to the component.
+The remaining tests use the _toBeVisible_ method to verify that the child component of the <i>Togglable</i> component is not visible initially, i.e. that the style of the <i>div</i> element contains _{ display: 'none' }_. Another test verifies that when the button is pressed the component is visible, meaning that the style for hiding it <i>is no longer</i> assigned to the component.
 
 Let's also add a test that can be used to verify that the visible content can be hidden by clicking the second button of the component:
 
@@ -470,8 +514,8 @@ describe('<Togglable />', () => {
     const closeButton = screen.getByText('cancel')
     await user.click(closeButton)
 
-    const div = container.querySelector('.togglableContent')
-    expect(div).toHaveStyle('display: none')
+    const element = screen.getByText('togglable content')
+    expect(element).not.toBeVisible()
   })
 })
 ```
@@ -711,7 +755,7 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
 })
 ```
 
-The most flexible way of finding elements in tests is the method <i>querySelector</i> of the _container_ object, which is returned by _render_, as was mentioned [earlier in this part](/en/part5/testing_react_apps#searching-for-content-in-a-component). Any CSS selector can be used with this method for searching elements in tests.
+Sometimes, finding the correct element using the methods described above can be challenging. In such cases, an alternative is the method <i>querySelector</i> of the _container_ object, which is returned by _render_, as was mentioned [earlier in this part](/en/part5/testing_react_apps#searching-for-content-in-a-component). Any CSS selector can be used with this method for searching elements in tests.
 
 Consider eg. that we would define a unique _id_ to the input field:
 
@@ -749,75 +793,6 @@ const input = container.querySelector('#note-input')
 ```
 
 However, we shall stick to the approach of using _getByPlaceholderText_ in the test.
-
-Let us look at a couple of details before moving on. Let us assume that a component would render text to an HTML element as follows:
-
-```js
-const Note = ({ note, toggleImportance }) => {
-  const label = note.important
-    ? 'make not important' : 'make important'
-
-  return (
-    <li className='note'>
-      Your awesome note: {note.content} // highlight-line
-      <button onClick={toggleImportance}>{label}</button>
-    </li>
-  )
-}
-
-export default Note
-```
-
-the _getByText_ method that the test uses does <i>not</i> find the element
-
-```js
-test('renders content', () => {
-  const note = {
-    content: 'Does not work anymore :(',
-    important: true
-  }
-
-  render(<Note note={note} />)
-
-  const element = screen.getByText('Does not work anymore :(')
-
-  expect(element).toBeDefined()
-})
-```
-
-The _getByText_ method looks for an element that has the **same text** that it has as a parameter, and nothing more. If we want to look for an element that <i>contains</i> the text, we could use an extra option:
-
-```js
-const element = screen.getByText(
-  'Does not work anymore :(', { exact: false }
-)
-```
-
-or we could use the _findByText_ method:
-
-```js
-const element = await screen.findByText('Does not work anymore :(')
-```
-
-It is important to notice that, unlike the other _ByText_ methods, _findByText_ returns a promise!
-
-There are situations where yet another form of the _queryByText_ method is useful. The method returns the element but <i>it does not cause an exception</i> if it is not found.
-
-We could eg. use the method to ensure that something <i>is not rendered</i> to the component:
-
-```js
-test('does not render this', () => {
-  const note = {
-    content: 'This is a reminder',
-    important: true
-  }
-
-  render(<Note note={note} />)
-
-  const element = screen.queryByText('do not want this thing to be rendered')
-  expect(element).toBeNull()
-})
-```
 
 ### Test coverage
 

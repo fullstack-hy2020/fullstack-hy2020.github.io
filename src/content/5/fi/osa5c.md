@@ -186,7 +186,7 @@ Itse en pidä siitä, että testit ja normaali koodi ovat samassa hakemistossa. 
 
 ### Sisällön etsiminen testattavasta komponentista
 
-React Testing Library ‑kirjasto tarjoaa runsaasti tapoja testattavan komponentin sisällön tutkimiseen. Itse asiassa testimme viimeisellä rivillä oleva expect on turha
+React Testing Library ‑kirjasto tarjoaa runsaasti tapoja testattavan komponentin sisällön tutkimiseen. Tutustuimme jo aiemmin komentoon _getByText_. Itse asiassa testimme viimeisellä rivillä oleva expect on turha
 
 ```js
 import { render, screen } from '@testing-library/react'
@@ -207,6 +207,77 @@ test('renders content', () => {
 ```
 
 Testi ei mene läpi, jos _getByText_ ei löydä halutun tekstin sisältävää elementtiä.
+
+Komento _getByText_ etsii oletusarvoisesti elementtiä, joka sisältää ainoastaan <i> parametrina annetun tekstin</i> eikä mitään muuta. Oletetaan että komponentti renderöisi samaan HTML-elementtiin tekstiä seuraavasti:
+
+```js
+const Note = ({ note, toggleImportance }) => {
+  const label = note.important
+    ? 'make not important' : 'make important'
+
+  return (
+    <li className='note'>
+      Your awesome note: {note.content} // highlight-line
+      <button onClick={toggleImportance}>{label}</button>
+    </li>
+  )
+}
+
+export default Note
+```
+
+Nyt testissä käyttämämme _getByText_ ei löydä elementtiä:
+
+```js 
+test('renders content', () => {
+  const note = {
+    content: 'Does not work anymore :(',
+    important: true
+  }
+
+  render(<Note note={note} />)
+
+  const element = screen.getByText('Does not work anymore :(')
+
+  expect(element).toBeDefined()
+})
+```
+
+Jos halutaan etsiä komponenttia joka <i>sisältää</i> tekstin, voidaan joko lisätä komennolle ekstraoptio:
+
+```js 
+const element = screen.getByText(
+  'Does not work anymore :(', { exact: false }
+)
+```
+
+tai käyttää komentoa _findByText_:
+
+```js 
+const element = await screen.findByText('Does not work anymore :(')
+```
+
+On tärkeä huomata, että toisin kuin muut _ByText_-komennoista, _findByText_ palauttaa promisen!
+
+On myös jotain tilanteita, missä komennon muoto _queryByText_ on käyttökelpoinen. Komento palauttaa elementin mutta <i>ei aiheuta poikkeusta</i> jos etsittävää elementtiä ei löydy. 
+
+Komentoa voidaan hyödyntää esim. varmistamaan, että jokin asia <i>ei renderöidy</i>:
+
+```js 
+test('does not render this', () => {
+  const note = {
+    content: 'This is a reminder',
+    important: true
+  }
+
+  render(<Note note={note} />)
+
+  const element = screen.queryByText('do not want this thing to be rendered')
+  expect(element).toBeNull()
+})
+```
+
+Muitakin tapoja on, esim. [getByTestId](https://testing-library.com/docs/queries/bytestid/), joka etsii elementtejä erikseen testejä varten luotujen id-kenttien perusteella.
 
 Jos haluamme etsiä testattavia komponentteja [CSS-selektorien](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors) avulla, se onnistuu renderin palauttaman [container](https://testing-library.com/docs/react-testing-library/api/#container)-olion metodilla [querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector):
  
@@ -231,7 +302,7 @@ test('renders content', () => {
 })
 ```
 
-Muitakin tapoja on, esim. [getByTestId](https://testing-library.com/docs/queries/bytestid/), joka etsii elementtejä erikseen testejä varten luotujen id-kenttien perusteella.
+On kuitenkin suositeltavaa etsiä elementtejä lähtökohtaisesti muilla tavoin kuin _container_-oliota ja CSS-selektoreja käyttäen. CSS-määreitä voidaan usein muuttaa vaikuttamatta sovelluksen toiminnallisuuteen, eikä käyttäjä ole niistä tietoinen. On parempi etsiä elementtejä käyttäjälle havaittavien ominaisuuksien perusteella, esimerkiksi _getByText_-metodia käyttäen. Tällä tavoin testit simuloivat paremmin komponentin todellista olemusta ja sitä, miten käyttäjä löytäisi elementin ruudulta.
 
 ### Testien debuggaaminen
 
@@ -384,47 +455,20 @@ Esimerkissämme mock-funktio sopi tarkoitukseen erinomaisesti, sillä sen avulla
 
 ### Komponentin Togglable testit
 
-Tehdään komponentille <i>Togglable</i> muutama testi. Lisätään komponentin lapset renderöivään div-elementtiin CSS-luokka <i>togglableContent</i>:
+Tehdään komponentille <i>Togglable</i> muutama testi. Testit ovat seuraavassa:
 
 ```js
-const Togglable = props => {
-  // ...
-
-  return (
-    <div>
-      <div style={hideWhenVisible}>
-        <button onClick={toggleVisibility}>
-          {props.buttonLabel}
-        </button>
-      </div>
-      <div style={showWhenVisible} className="togglableContent"> // highlight-line
-        {props.children}
-        <button onClick={toggleVisibility}>cancel</button>
-      </div>
-    </div>
-  )
-}
-```
-
-Testit ovat seuraavassa:
-
-```js
-
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Togglable from './Togglable'
 
 describe('<Togglable />', () => {
-  let container
-
   beforeEach(() => {
-    container = render(
+    render(
       <Togglable buttonLabel="show...">
-        <div className="testDiv" >
-          togglable content
-        </div>
+        <div>togglable content</div>
       </Togglable>
-    ).container
+    )
   })
 
   test('renders its children', () => {
@@ -432,8 +476,8 @@ describe('<Togglable />', () => {
   })
 
   test('at start the children are not displayed', () => {
-    const div = container.querySelector('.togglableContent')
-    expect(div).toHaveStyle('display: none')
+    const element = screen.getByText('togglable content')
+    expect(element).not.toBeVisible()
   })
 
   test('after clicking the button, children are displayed', async () => {
@@ -441,23 +485,22 @@ describe('<Togglable />', () => {
     const button = screen.getByText('show...')
     await user.click(button)
 
-    const div = container.querySelector('.togglableContent')
-    expect(div).not.toHaveStyle('display: none')
+    const element = screen.getByText('togglable content')
+    expect(element).toBeVisible()
   })
-})
 ```
 
-Ennen jokaista testiä suoritettava _beforeEach_ renderöi <i>Togglable</i>-komponentin ja tallettaa paluuarvon kentän _container_ samannimiseen muuttujaan.
+Ennen jokaista testiä suoritettava _beforeEach_ renderöi <i>Togglable</i>-komponentin.
 
 Ensimmäinen testi tarkastaa, että <i>Togglable</i> renderöi sen lapsikomponentin
 
 ```js
-<div className="testDiv">
+<div>
   togglable content
 </div>
 ```
 
-Loput testit varmistavat metodia [toHaveStyle](https://www.npmjs.com/package/@testing-library/jest-dom#tohavestyle) käyttäen, että Togglablen sisältämä lapsikomponentti on alussa näkymättömissä, eli että sen sisältävään <i>div</i>-elementtiin liittyy tyyli _{ display: 'none' }_, ja että nappia painettaessa komponentti näkyy, eli näkymättömäksi tekevää tyyliä <i>ei</i> enää ole. 
+Loput testit varmistavat metodia _toBeVisible_ käyttäen, että Togglablen sisältämä lapsikomponentti on alussa näkymättömissä, eli että sen sisältävään <i>div</i>-elementtiin liittyy tyyli _{ display: 'none' }_, ja että nappia painettaessa komponentti näkyy käyttäjälle, eli näkymättömäksi tekevää tyyliä <i>ei</i> enää ole. 
 
 Lisätään vielä mukaan testi, joka varmistaa että auki togglattu sisältö saadaan piilotettua painamalla komponentin nappia <i>cancel</i>:
 
@@ -475,8 +518,8 @@ describe('<Togglable />', () => {
     const closeButton = screen.getByText('cancel')
     await user.click(closeButton)
 
-    const div = container.querySelector('.togglableContent')
-    expect(div).toHaveStyle('display: none')
+    const element = screen.getByText('togglable content')
+    expect(element).not.toBeVisible()
   })
 })
 ```
@@ -710,7 +753,7 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
 })
 ```
 
-Kaikkein joustavimman tavan tarjoaa aiemmin [tässä luvussa](/osa5/react_sovellusten_testaaminen#sisallon-etsiminen-testattavasta-komponentista) esitellyn _render_-metodin palauttaman olion _content_-kentän metodi <i>querySelector</i>, joka mahdollistaa komponenttien etsimisen mielivaltaisten CSS-selektorien avulla. 
+Joskus oikean elementin löytäminen voi olla vaikeaa edellä kuvattuja metodeja käyttäen. Tällöin vaihtoehtona on aiemmin [tässä luvussa](/osa5/react_sovellusten_testaaminen#sisallon-etsiminen-testattavasta-komponentista) esitellyn _render_-metodin palauttaman olion _container_-kentän metodi <i>querySelector</i>, joka mahdollistaa komponenttien etsimisen mielivaltaisten CSS-selektorien avulla.
 
 Jos esim. määrittelisimme syötekentälle yksilöivän attribuutin _id_:
 
@@ -748,75 +791,6 @@ const input = container.querySelector('#note-input')
 ```
 
 Jätämme koodiin placeholderiin perustuvan ratkaisun.
-  
-Vielä muutama tärkeä huomio. Oletetaan että komponentti renderöisi samaan HTML-elementtiin tekstiä seuraavasti:
-
-```js
-const Note = ({ note, toggleImportance }) => {
-  const label = note.important
-    ? 'make not important' : 'make important'
-
-  return (
-    <li className='note'>
-      Your awesome note: {note.content} // highlight-line
-      <button onClick={toggleImportance}>{label}</button>
-    </li>
-  )
-}
-
-export default Note
-```
-
-Nyt testissä käyttämämme _getByText_ ei löydä elementtiä:
-
-```js 
-test('renders content', () => {
-  const note = {
-    content: 'Does not work anymore :(',
-    important: true
-  }
-
-  render(<Note note={note} />)
-
-  const element = screen.getByText('Does not work anymore :(')
-
-  expect(element).toBeDefined()
-})
-```
-
-Komento _getByText_ nimittäin etsii elementtiä missä on <i>ainoastaan parametrina teksti</i> eikä mitään muuta. Jos halutaan etsiä komponenttia joka <i>sisältää</i> tekstin, voidaan joko lisätä komennolle ekstraoptio:
-
-```js 
-const element = screen.getByText(
-  'Does not work anymore :(', { exact: false }
-)
-```
-
-tai käyttää komentoa _findByText_:
-
-```js 
-const element = await screen.findByText('Does not work anymore :(')
-```
-
-On tärkeä huomata, että toisin kuin muut _ByText_-komennoista, _findByText_ palauttaa promisen!
-
-On myös jotain tilanteita, missä komennon muoto _queryByText_ on käyttökelpoinen. Komento palauttaa elementin mutta <i>ei aiheuta poikkeusta</i> jos etsittävää elementtiä ei löydy. 
-
-Komentoa voidaan hyödyntää esim. varmistamaan, että jokin asia <i>ei renderöidy</i>:
-
-```js 
-test('does not render this', () => {
-  const note = {
-    content: 'This is a reminder',
-    important: true
-  }
-
-  render(<Note note={note} />)
-
-  const element = screen.queryByText('do not want this thing to be rendered')
-  expect(element).toBeNull()
-})
-```
 
 ### Testauskattavuus
 
