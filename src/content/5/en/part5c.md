@@ -632,6 +632,39 @@ await user.type(inputs[0], 'testing a form...')
 
 Method <i>getAllByRole</i> now returns an array and the right input field is the first element of the array. However, this approach is a bit suspicious since it relies on the order of the input fields.
 
+If an <i>label</i> were defined for the input field, the input field could be located using it with the getByLabelText method. For example, if we added a label to the input field:
+
+```js
+  // ...
+  <label> // highlight-line
+    content // highlight-line
+    <input
+      value={newNote}
+      onChange={event => setNewNote(event.target.value)}
+    />
+  </label> // highlight-line
+  // ...
+```
+
+The test could locate the input field as follows:
+
+```js
+test('<NoteForm /> updates parent state and calls onSubmit', () => {
+  const createNote = vi.fn()
+
+  render(<NoteForm createNote={createNote} />) 
+
+  const input = screen.getByLabelText('content') // highlight-line
+  const sendButton = screen.getByText('save')
+
+  userEvent.type(input, 'testing a form...' )
+  userEvent.click(sendButton)
+
+  expect(createNote.mock.calls).toHaveLength(1)
+  expect(createNote.mock.calls[0][0].content).toBe('testing a form...' )
+})
+```
+
 Quite often input fields have a <i>placeholder</i> text that hints user what kind of input is expected. Let us add a placeholder to our form:
 
 ```js
