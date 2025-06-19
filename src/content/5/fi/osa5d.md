@@ -319,43 +319,39 @@ describe('Note app', () => {
 
 Sekä tämä että edellinen versio testistä toimivat. Molemmat ovat kuitenkin sikäli ongelmallisia, että jos kirjaantumislomaketta muutetaan, testit saattavat hajota, sillä ne luottavat tarvitsemiensa kenttien olevan sivulla tietyssä järjestyksessä.
 
-Parempi ratkaisu on määritellä kentille yksilöivät, testausta varten generoidut id-attribuutit ja hakea kentät testeissä niiden perusteella hyväksikäytten metodia [getByTestId](https://playwright.dev/docs/api/class-page#page-get-by-test-id).
+Jos elementtiä on vaikea löytää testeissä, sille voi määritellä erillisen <i>test-id</i>-attribuutin ja etsiä elementin testeissä sen avulla käyttäen metodia [getByTestId](https://playwright.dev/docs/api/class-page#page-get-by-test-id).
 
-Laajennetaan kirjautumislomaketta seuraavasti
+Käytetään nyt kuitenkin hyödyksi kirjautumislomakkeen olemassa olevia elementtejä. Kirjautumislomakkeen syötekentille on määritelty yksilölliset <i>labelit</i>: 
 
 ```js
-const LoginForm = ({ ... }) => {
-  return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          username
-          <input
-            data-testid='username'  // highlight-line
-            value={username}
-            onChange={handleUsernameChange}
-          />
-        </div>
-        <div>
-          password
-          <input
-            data-testid='password' // highlight-line
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-        </div>
-        <button type="submit">
-          login
-        </button>
-      </form>
-    </div>
-  )
-}
+// ...
+<form onSubmit={handleSubmit}>
+  <div>
+    <label> // highlight-line
+      username // highlight-line
+      <input
+        type="text"
+        value={username}
+        onChange={handleUsernameChange}
+      />
+    </label> // highlight-line
+  </div>
+  <div>
+    <label> // highlight-line
+      password // highlight-line
+      <input
+        type="password"
+        value={password}
+        onChange={handlePasswordChange}
+      />
+    </label> // highlight-line
+  </div>
+  <button type="submit">login</button>
+</form>
+// ...
 ```
 
-Testi muuttuu muotoon
+Syötekentät voi ja kannattaa etsiä testeissä <i>labelien</i> avulla käyttäen metodia [getByLabel](https://playwright.dev/docs/api/class-page#page-get-by-label):
 
 ```js
 describe('Note app', () => {
@@ -365,8 +361,8 @@ describe('Note app', () => {
     await page.goto('http://localhost:5173')
 
     await page.getByRole('button', { name: 'login' }).click()
-    await page.getByTestId('username').fill('mluukkai') // highlight-line
-    await page.getByTestId('password').fill('salainen')  // highlight-line
+    await page.getByLabel('username').fill('mluukkai') // highlight-line
+    await page.getByLabel('password').fill('salainen')  // highlight-line
   
     await page.getByRole('button', { name: 'login' }).click() 
   
@@ -374,6 +370,8 @@ describe('Note app', () => {
   })
 })
 ```
+
+Elementtien etsimisessä on järkevää pyrkiä hyödyntämään käyttöliittymän käyttäjälle näkyvää sisältöä, koska näin simuloidaan parhaiten sitä, miten käyttäjä oikeasti löytää halutun syötekentän navigoidessaan sovelluksessa.
 
 Huomaa, että testin läpimeno tässä vaiheessa edellyttää, että backendin ympäristön <i>test</i> tietokannassa on käyttäjä, jonka username on <i>mluukkai</i> ja salasana <i>salainen</i>. Luo käyttäjä tarvittaessa!
 
@@ -399,8 +397,8 @@ describe('Note app', () => {
 
   test('login form can be opened', async ({ page }) => {
     await page.getByRole('button', { name: 'login' }).click()
-    await page.getByTestId('username').fill('mluukkai')
-    await page.getByTestId('password').fill('salainen')
+    await page.getByLabel('username').fill('mluukkai')
+    await page.getByLabel('password').fill('salainen')
     await page.getByRole('button', { name: 'login' }).click()
     await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
   })
@@ -421,8 +419,8 @@ describe('Note app', () => {
   describe('when logged in', () => {
     beforeEach(async ({ page }) => {
       await page.getByRole('button', { name: 'login' }).click()
-      await page.getByTestId('username').fill('mluukkai')
-      await page.getByTestId('password').fill('salainen')
+      await page.getByLabel('username').fill('mluukkai')
+      await page.getByLabel('password').fill('salainen')
       await page.getByRole('button', { name: 'login' }).click()
     })
 
@@ -465,8 +463,8 @@ describe('Note app', () => {
 
   test('user can log in', async ({ page }) => {
     await page.getByRole('button', { name: 'login' }).click()
-    await page.getByTestId('username').fill('mluukkai')
-    await page.getByTestId('password').fill('salainen')
+    await page.getByLabel('username').fill('mluukkai')
+    await page.getByLabel('password').fill('salainen')
     await page.getByRole('button', { name: 'login' }).click()
     await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
   })
@@ -474,8 +472,8 @@ describe('Note app', () => {
   describe('when logged in', () => {
     beforeEach(async ({ page }) => {
       await page.getByRole('button', { name: 'login' }).click()
-      await page.getByTestId('username').fill('mluukkai')
-      await page.getByTestId('password').fill('salainen')
+      await page.getByLabel('username').fill('mluukkai')
+      await page.getByLabel('password').fill('salainen')
       await page.getByRole('button', { name: 'login' }).click()
     })
 
@@ -625,8 +623,8 @@ describe('Note app', () => {
 
   test('login fails with wrong password', async ({ page }) => {
     await page.getByRole('button', { name: 'login' }).click()
-    await page.getByTestId('username').fill('mluukkai')
-    await page.getByTestId('password').fill('wrong')
+    await page.getByLabel('username').fill('mluukkai')
+    await page.getByLabel('password').fill('wrong')
     await page.getByRole('button', { name: 'login' }).click()
 
     await expect(page.getByText('wrong credentials')).toBeVisible()
@@ -688,8 +686,8 @@ Viimeistellään testi vielä siten, että se varmistaa myös, että sovellus **
 ```js
 test('login fails with wrong password', async ({ page }) =>{
   await page.getByRole('button', { name: 'login' }).click()
-  await page.getByTestId('username').fill('mluukkai')
-  await page.getByTestId('password').fill('wrong')
+  await page.getByLabel('username').fill('mluukkai')
+  await page.getByLabel('password').fill('wrong')
   await page.getByRole('button', { name: 'login' }).click()
 
   const errorDiv = await page.locator('.error')
@@ -741,8 +739,8 @@ describe('Note app', () => {
 
   test('user can login with correct credentials', async ({ page }) => {
     await page.getByRole('button', { name: 'login' }).click()
-    await page.getByTestId('username').fill('mluukkai')
-    await page.getByTestId('password').fill('salainen')
+    await page.getByLabel('username').fill('mluukkai')
+    await page.getByLabel('password').fill('salainen')
     await page.getByRole('button', { name: 'login' }).click()
     await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
   })
@@ -754,8 +752,8 @@ describe('Note app', () => {
   describe('when logged in', () => {
     beforeEach(async ({ page, request }) => {
       await page.getByRole('button', { name: 'login' }).click()
-      await page.getByTestId('username').fill('mluukkai')
-      await page.getByTestId('password').fill('salainen')
+      await page.getByLabel('username').fill('mluukkai')
+      await page.getByLabel('password').fill('salainen')
       await page.getByRole('button', { name: 'login' }).click()
     })
 
@@ -778,8 +776,8 @@ Myös testeissä kannattaa pyrkiä toisteettomaan koodiin. Eristetään kirjautu
 ```js 
 const loginWith = async (page, username, password)  => {
   await page.getByRole('button', { name: 'login' }).click()
-  await page.getByTestId('username').fill(username)
-  await page.getByTestId('password').fill(password)
+  await page.getByLabel('username').fill(username)
+  await page.getByLabel('password').fill(password)
   await page.getByRole('button', { name: 'login' }).click()
 }
 
@@ -846,8 +844,8 @@ Eristetään myös muistiinpanon lisääminen omaksi apufunktioksi. Tiedosto _te
 ```js
 const loginWith = async (page, username, password)  => {
   await page.getByRole('button', { name: 'login' }).click()
-  await page.getByTestId('username').fill(username)
-  await page.getByTestId('password').fill(password)
+  await page.getByLabel('username').fill(username)
+  await page.getByLabel('password').fill(password)
   await page.getByRole('button', { name: 'login' }).click()
 }
 
