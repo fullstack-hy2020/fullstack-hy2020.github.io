@@ -263,7 +263,7 @@ Let's start by opening the login form.
 describe('Note app', () => {
   // ...
 
-  test('login form can be opened', async ({ page }) => {
+  test('user can log in', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
     await page.getByRole('button', { name: 'login' }).click()
@@ -293,7 +293,7 @@ When the form is opened, the test should look for the text fields and enter the 
 describe('Note app', () => {
   // ...
 
-  test('login form can be opened', async ({ page }) => {
+  test('user can log in', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
     await page.getByRole('button', { name: 'login' }).click()
@@ -316,7 +316,7 @@ The problem now is that _getByRole_ finds two text fields, and calling the [fill
 describe('Note app', () => {
   // ...
 
-  test('login form can be opened', async ({ page }) => {
+  test('user can log in', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
     await page.getByRole('button', { name: 'login' }).click()
@@ -338,7 +338,7 @@ If there were more than two text fields, using the methods _first_ and _last_ wo
 ```js
 describe('Note app', () => {
   // ...
-  test('login form can be opened', async ({ page }) => {
+  test('user can log in', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
     await page.getByRole('button', { name: 'login' }).click()
@@ -396,7 +396,7 @@ Input fields can and should be located in tests using <i>labels</i> with the [ge
 describe('Note app', () => {
   // ...
 
-  test('login form can be opened', async ({ page }) => {
+  test('user can log in', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
     await page.getByRole('button', { name: 'login' }).click()
@@ -434,7 +434,7 @@ describe('Note app', () => {
     await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible()
   })
 
-  test('login form can be opened', async ({ page }) => {
+  test('user can log in', async ({ page }) => {
     await page.getByRole('button', { name: 'login' }).click()
     await page.getByLabel('username').fill('mluukkai')
     await page.getByLabel('password').fill('salainen')

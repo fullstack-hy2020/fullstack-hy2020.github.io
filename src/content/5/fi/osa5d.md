@@ -227,7 +227,7 @@ Aloitetaan kirjautumislomakkeen avaamisella.
 describe('Note app', () => {
   // ...
 
-  test('login form can be opened', async ({ page }) => {
+  test('user can log in', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
     await page.getByRole('button', { name: 'login' }).click()
@@ -257,7 +257,7 @@ Kun lomake on avattu, testin tulisi etsiä siitä tekstikentät ja kirjoittaa ni
 describe('Note app', () => {
   // ...
 
-  test('login form can be opened', async ({ page }) => {
+  test('user can log in', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
     await page.getByRole('button', { name: 'login' }).click()
@@ -280,7 +280,7 @@ Ongelmana on nyt se, että _getByRole_ löytää kaksi tekstikenttää, ja metod
 describe('Note app', () => {
   // ...
 
-  test('login form can be opened', async ({ page }) => {
+  test('user can log in', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
     await page.getByRole('button', { name: 'login' }).click()
@@ -300,7 +300,7 @@ Jos tekstikenttiä olisi enemmän kuin kaksi, ei metodien _first_ ja _last_ käy
 ```js
 describe('Note app', () => {
   // ...
-  test('login form can be opened', async ({ page }) => {
+  test('user can log in', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
     await page.getByRole('button', { name: 'login' }).click()
@@ -357,7 +357,7 @@ Syötekentät voi ja kannattaa etsiä testeissä <i>labelien</i> avulla käyttä
 describe('Note app', () => {
   // ...
 
-  test('login form can be opened', async ({ page }) => {
+  test('user can log in', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
     await page.getByRole('button', { name: 'login' }).click()
@@ -395,7 +395,7 @@ describe('Note app', () => {
     await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible()
   })
 
-  test('login form can be opened', async ({ page }) => {
+  test('user can log in', async ({ page }) => {
     await page.getByRole('button', { name: 'login' }).click()
     await page.getByLabel('username').fill('mluukkai')
     await page.getByLabel('password').fill('salainen')
