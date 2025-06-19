@@ -206,7 +206,7 @@ Ennen kuin mennään eteenpäin, rikotaan testit vielä kertaalleen. Huomaamme, 
 Testejä kehitettäessä voi olla viisaampaa pienentää odotettavaa aikaa muutamaan sekuntiin. [Dokumentaation](https://playwright.dev/docs/test-timeouts) mukaan tämä onnistuu muuttamalla tiedostoa _playwright.config.js_ seuraavasti:
 
 ```js
-module.exports = defineConfig({
+export default defineConfig({
   // ...
   timeout: 3000, // highlight-line
   fullyParallel: false, // highlight-line
@@ -784,25 +784,31 @@ const loginWith = async (page, username, password)  => {
 export { loginWith }
 ```
 
-Testi yksinkertaistuu ja selkeytyy:
+Testit yksinkertaistuvat ja selkeytyvät:
 
 ```js
-const { loginWith } = require('./helper')
+const { test, describe, expect, beforeEach } = require('@playwright/test')
+const { loginWith } = require('./helper') // highlight-line
 
 describe('Note app', () => {
+  // ...
+
   test('user can log in', async ({ page }) => {
-    await loginWith(page, 'mluukkai', 'salainen')
+    await loginWith(page, 'mluukkai', 'salainen') // highlight-line
     await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
+  })
+
+  test('login fails with wrong password', async ({ page }) => {
+    await loginWith(page, 'mluukkai', 'wrong') // highlight-line
+
+    const errorDiv = page.locator('.error')
+    // ...
   })
 
   describe('when logged in', () => {
     beforeEach(async ({ page }) => {
-      await loginWith(page, 'mluukkai', 'salainen')
+      await loginWith(page, 'mluukkai', 'salainen') // highlight-line
     })
-
-  test('a new note can be created', () => {
-    // ...
-  })
 
   // ...
 })
@@ -857,7 +863,7 @@ const createNote = async (page, content) => {
 }
 // highlight-end
 
-export { loginWith, createNote }
+export { loginWith, createNote } // highlight-line
 ```
 
 Testi yksinkertaistuu seuraavasti:
@@ -911,13 +917,14 @@ Voimme siis korvata testeissä kaikki osoitteet _http://localhost:3001/api/..._ 
 Voimme nyt määrittellä sovellukselle _baseUrl_:in testien konfiguraatiotiedostoon <i>playwright.config.js</i>: 
 
 ```js
-module.exports = defineConfig({
+export default defineConfig({
   // ...
   use: {
     baseURL: 'http://localhost:5173',
+    // ...
   },
   // ...
-}
+})
 ```
 
 Kaikki testeissä olevat sovelluksen urlia käyttävät komennot esim.
@@ -927,7 +934,7 @@ await page.goto('http://localhost:5173')
 await page.post('http://localhost:5173/api/tests/reset')
 ```
 
-voidaan muuttaa muotoon
+voidaan nyt muuttaa muotoon
 
 ```js
 await page.goto('/')

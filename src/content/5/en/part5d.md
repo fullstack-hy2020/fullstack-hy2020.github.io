@@ -242,7 +242,7 @@ Before we move on, let's break the tests one more time. We notice that the execu
 When developing tests, it may be wiser to reduce the waiting time to a few seconds. According to the [documentation](https://playwright.dev/docs/test-timeouts), this can be done by changing the file _playwright.config.js_ as follows:
 
 ```js
-module.exports = defineConfig({
+export default defineConfig({
   // ...
   timeout: 3000, // highlight-line
   fullyParallel: false, // highlight-line
@@ -826,25 +826,31 @@ const loginWith = async (page, username, password)  => {
 export { loginWith }
 ```
 
-The test becomes simpler and clearer:
+The tests becomes simpler and clearer:
 
 ```js
-const { loginWith } = require('./helper')
+const { test, describe, expect, beforeEach } = require('@playwright/test')
+const { loginWith } = require('./helper') // highlight-line
 
 describe('Note app', () => {
+  // ...
+
   test('user can log in', async ({ page }) => {
     await loginWith(page, 'mluukkai', 'salainen') // highlight-line
     await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
+  })
+
+  test('login fails with wrong password', async ({ page }) => {
+    await loginWith(page, 'mluukkai', 'wrong') // highlight-line
+
+    const errorDiv = page.locator('.error')
+    // ...
   })
 
   describe('when logged in', () => {
     beforeEach(async ({ page }) => {
       await loginWith(page, 'mluukkai', 'salainen') // highlight-line
     })
-
-  test('a new note can be created', () => {
-    // ...
-  })
 
   // ...
 })
@@ -899,7 +905,7 @@ const createNote = async (page, content) => {
 }
 // highlight-end
 
-export { loginWith, createNote }
+export { loginWith, createNote } // highlight-line
 ```
 
 The tests are simplified as follows:
@@ -953,13 +959,14 @@ So we can replace all the addresses in the tests from _http://localhost:3001/api
 We can now define the _baseUrl_ for the application in the tests configuration file <i>playwright.config.js</i>:
 
 ```js
-module.exports = defineConfig({
+export default defineConfig({
   // ...
   use: {
     baseURL: 'http://localhost:5173',
+    // ...
   },
   // ...
-}
+})
 ```
 
 All the commands in the tests that use the application url, e.g.
@@ -969,7 +976,7 @@ await page.goto('http://localhost:5173')
 await page.post('http://localhost:5173/api/testing/reset')
 ```
 
-can be transformed into:
+can now be transformed into:
 
 ```js
 await page.goto('/')
