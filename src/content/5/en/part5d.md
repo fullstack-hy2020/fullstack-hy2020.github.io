@@ -195,7 +195,7 @@ const { test, expect } = require('@playwright/test')
 test('front page can be opened', async ({ page }) => {
   await page.goto('http://localhost:5173')
 
-  const locator = await page.getByText('Notes')
+  const locator = page.getByText('Notes')
   await expect(locator).toBeVisible()
   await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible()
 })
@@ -230,7 +230,7 @@ describe('Note app', () => {  // highlight-line
   test('front page can be opened', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
-    const locator = await page.getByText('Notes')
+    const locator = page.getByText('Notes')
     await expect(locator).toBeVisible()
     await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2025')).toBeVisible()
   })
@@ -429,7 +429,7 @@ describe('Note app', () => {
   // highlight-end
 
   test('front page can be opened', async ({ page }) => {
-    const locator = await page.getByText('Notes')
+    const locator = page.getByText('Notes')
     await expect(locator).toBeVisible()
     await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible()
   })
@@ -996,7 +996,7 @@ describe('when logged in', () => {
     })
 
     test('one of those can be made nonimportant', async ({ page }) => {
-      const otherNoteElement = await page.getByText('first note')
+      const otherNoteElement = page.getByText('first note')
 
       await otherNoteElement
         .getByRole('button', { name: 'make not important' }).click()
@@ -1012,7 +1012,7 @@ The test could also have been written without the auxiliary variable:
 
 ```js
 test('one of those can be made nonimportant', async ({ page }) => {
-  await page.getByText('first note')
+  page.getByText('first note')
     .getByRole('button', { name: 'make not important' }).click()
 
   await expect(page.getByText('first note').getByText('make important'))
@@ -1036,13 +1036,13 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-Tests break! The reason for the problem is that the command _await page.getByText('first note')_ now returns a _span_ element containing only text, and the button is outside of it.
+Tests break! The reason for the problem is that the command _page.getByText('first note')_ now returns a _span_ element containing only text, and the button is outside of it.
 
 One way to fix the problem is as follows:
 
 ```js
 test('one of those can be made nonimportant', async ({ page }) => {
-  const otherNoteText = await page.getByText('first note') // highlight-line
+  const otherNoteText = page.getByText('first note') // highlight-line
   const otherNoteElement = await otherNoteText.locator('..') // highlight-line
 
   await otherNoteElement.getByRole('button', { name: 'make not important' }).click()
@@ -1056,7 +1056,7 @@ Of course, the test can also be written using only one auxiliary variable:
 
 ```js
 test('one of those can be made nonimportant', async ({ page }) => {
-  const secondNoteElement = await page.getByText('second note').locator('..')
+  const secondNoteElement = page.getByText('second note').locator('..')
   await secondNoteElement.getByRole('button', { name: 'make not important' }).click()
   await expect(secondNoteElement.getByText('make important')).toBeVisible()
 })
@@ -1083,7 +1083,7 @@ describe('when logged in', () => {
     })
 
     test('importance can be changed', async ({ page }) => {
-      const otherNoteText = await page.getByText('second note') // highlight-line
+      const otherNoteText = page.getByText('second note') // highlight-line
       const otherNoteElement = await otherNoteText.locator('..')
     
       await otherNoteElement.getByRole('button', { name: 'make not important' }).click()
@@ -1131,7 +1131,7 @@ describe('Note app', () => {
   
       test('one of those can be made nonimportant', async ({ page }) => {
         await page.pause() // highlight-line
-        const otherNoteText = await page.getByText('second note')
+        const otherNoteText = page.getByText('second note')
         const otherNoteElement = await otherNoteText.locator('..')
       
         await otherNoteElement.getByRole('button', { name: 'make not important' }).click()
