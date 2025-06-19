@@ -158,7 +158,7 @@ const { test, expect } = require('@playwright/test')
 test('front page can be opened', async ({ page }) => {
   await page.goto('http://localhost:5173')
 
-  const locator = await page.getByText('Notes')
+  const locator = page.getByText('Notes')
   await expect(locator).toBeVisible()
   await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible()
 })
@@ -194,7 +194,7 @@ describe('Note app', () => {
   test('front page can be opened', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
-    const locator = await page.getByText('Notes')
+    const locator = page.getByText('Notes')
     await expect(locator).toBeVisible()
     await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2025')).toBeVisible()
   })
@@ -390,7 +390,7 @@ describe('Note app', () => {
   // highlight-end
 
   test('front page can be opened', async ({ page }) => {
-    const locator = await page.getByText('Notes')
+    const locator = page.getByText('Notes')
     await expect(locator).toBeVisible()
     await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible()
   })
@@ -659,7 +659,7 @@ Voisimmekin tarkentaa testiä varmistamaan, että virheilmoitus tulostuu nimenom
   test('login fails with wrong password', async ({ page }) => {
   // ...
 
-  const errorDiv = await page.locator('.error')
+  const errorDiv = page.locator('.error')
   await expect(errorDiv).toContainText('wrong credentials')
 })
 ```
@@ -672,7 +672,7 @@ Ekspekaatiolla [toHaveCSS](https://playwright.dev/docs/api/class-locatorassertio
   test('login fails with wrong password', async ({ page }) => {
   // ...
 
-    const errorDiv = await page.locator('.error')
+    const errorDiv = page.locator('.error')
     await expect(errorDiv).toContainText('wrong credentials')
     await expect(errorDiv).toHaveCSS('border-style', 'solid')
     await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)')
@@ -690,7 +690,7 @@ test('login fails with wrong password', async ({ page }) =>{
   await page.getByLabel('password').fill('wrong')
   await page.getByRole('button', { name: 'login' }).click()
 
-  const errorDiv = await page.locator('.error')
+  const errorDiv = page.locator('.error')
   await expect(errorDiv).toContainText('wrong credentials')
   await expect(errorDiv).toHaveCSS('border-style', 'solid')
   await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)')
@@ -954,7 +954,7 @@ describe('when logged in', () => {
     })
 
     test('one of those can be made nonimportant', async ({ page }) => {
-      const otherNoteElement = await page.getByText('first note')
+      const otherNoteElement = page.getByText('first note')
 
       await otherNoteElement
         .getByRole('button', { name: 'make not important' }).click()
@@ -970,7 +970,7 @@ Testi olisi voitu kirjoittaa myös ilman apumuuttujaa:
 
 ```js
 test('one of those can be made nonimportant', async ({ page }) => {
-  await page.getByText('first note')
+  page.getByText('first note')
     .getByRole('button', { name: 'make not important' }).click()
 
   await expect(page.getByText('first note').getByText('make important'))
@@ -994,13 +994,13 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-Testit hajoavat! Syynä ongelmalle on se, komento _await page.getByText('second note')_ palauttaakin nyt ainoastaan tekstin sisältävän _span_-elementin, ja nappi on sen ulkopuolella.
+Testit hajoavat! Syynä ongelmalle on se, komento _page.getByText('second note')_ palauttaakin nyt ainoastaan tekstin sisältävän _span_-elementin, ja nappi on sen ulkopuolella.
 
 Eräs tapa korjata ongelma on seuraavassa:
 
 ```js
 test('one of those can be made nonimportant', async ({ page }) => {
-  const otherNoteText = await page.getByText('first note') // highlight-line
+  const otherNoteText = page.getByText('first note') // highlight-line
   const otherdNoteElement = await otherNoteText.locator('..') // highlight-line
 
   await otherdNoteElement.getByRole('button', { name: 'make not important' }).click()
@@ -1014,7 +1014,7 @@ Testi voidaan toki kirjoittaa myös ainoastaan yhtä apumuuttujaa käyttäen:
 
 ```js
 test('one of those can be made nonimportant', async ({ page }) => {
-  const secondNoteElement = await page.getByText('second note').locator('..')
+  const secondNoteElement = page.getByText('second note').locator('..')
   await secondNoteElement.getByRole('button', { name: 'make not important' }).click()
   await expect(secondNoteElement.getByText('make important')).toBeVisible()
 })
@@ -1041,7 +1041,7 @@ describe('when logged in', () => {
     })
 
     test('importance can be changed', async ({ page }) => {
-      const otherNoteText = await page.getByText('second note') // highlight-line
+      const otherNoteText = page.getByText('second note') // highlight-line
       const otherdNoteElement = await otherNoteText.locator('..')
     
       await otherdNoteElement.getByRole('button', { name: 'make not important' }).click()
@@ -1089,7 +1089,7 @@ describe('Note app', () => {
   
       test('one of those can be made unimportant', async ({ page }) => {
         await page.pause() // highlight-line
-        const otherNoteText = await page.getByText('second note')
+        const otherNoteText = page.getByText('second note')
         const otherdNoteElement = await otherNoteText.locator('..')
       
         await otherdNoteElement.getByRole('button', { name: 'make not important' }).click()
