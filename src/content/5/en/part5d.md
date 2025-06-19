@@ -480,7 +480,7 @@ The test trusts that when creating a new note, there is only one input field on 
 page.getByRole('textbox')
 ```
 
-If there were more fields, the test would break. Because of this, it would be better to add a test-id to the form input and search for it in the test based on this id.
+If there were more fields, the test would break. Because of this, it could be better to add a <i>test-id</i> to the form input and search for it in the test based on this id.
 
 **Note:** the test will only pass the first time. The reason for this is that its expectation
 

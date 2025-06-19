@@ -443,7 +443,7 @@ Testi luottaa siihen, että uutta muistiinpanoa luotaessa sivulla on ainoastaan 
 page.getByRole('textbox')
 ```
 
-Jos kenttiä olisi useampia, testi hajoaisi. Tämän takia olisi jälleen parempi lisätä lomakkeen kentälle testi-id ja hakea kenttä testissä id:n perusteella.
+Jos kenttiä olisi useampia, testi hajoaisi. Tämän takia voisi olla parempi lisätä lomakkeen kentälle <i>test-id</i> ja hakea kenttä testissä id:n perusteella.
 
 **Huom:** testi ei mene läpi kuin ensimmäisellä kerralla suoritettaessa. Syynä tälle on se, että ekspektaatio
 
