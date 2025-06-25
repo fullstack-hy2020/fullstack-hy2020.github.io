@@ -1555,7 +1555,7 @@ export const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
     const newEntry: NewDiaryEntry = {
       weather: parseWeather(object.weather),
       visibility: parseVisibility(object.visibility), 
-      date: z.string().date().parse(object.date), // highlight-line
+      date: z.iso.date().parse(object.date), // highlight-line
       comment: z.string().optional().parse(object.comment) // highlight-line
     };
 
@@ -1578,9 +1578,9 @@ export const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
 
   if ('comment' in object && 'date' in object && 'weather' in object && 'visibility' in object)  {
     const newEntry: NewDiaryEntry = {
-      weather: z.nativeEnum(Weather).parse(object.weather), // highlight-line
-      visibility: z.nativeEnum(Visibility).parse(object.visibility), // highlight-line
-      date: z.string().date().parse(object.date),
+      weather: z.enum(Weather).parse(object.weather), // highlight-line
+      visibility: z.enum(Visibility).parse(object.visibility), // highlight-line
+      date: z.iso.date().parse(object.date),
       comment: z.string().optional().parse(object.comment)
     };
 
@@ -1596,9 +1596,9 @@ We have so far just used Zod to parse the type or schema of individual fields, b
 
 ```js
 const newEntrySchema = z.object({
-  weather: z.nativeEnum(Weather),
-  visibility: z.nativeEnum(Visibility),
-  date: z.string().date(),
+  weather: z.enum(Weather),
+  visibility: z.enum(Visibility),
+  date: z.iso.date(),
   comment: z.string().optional()
 });
 ```
