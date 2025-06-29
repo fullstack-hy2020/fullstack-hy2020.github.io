@@ -257,7 +257,7 @@ Le gestionnaire d'événements réinitialise également la valeur de l'élément
 setNewNote('')
 ```
 
-Vous pouvez trouver le code de notre application actuelle dans son intégralité sur la branche <i>part2-2</i> de [ce référentiel GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/partie2-2).
+Vous pouvez trouver le code de notre application actuelle dans son intégralité sur la branche <i>part2-2</i> de [ce référentiel GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-2).
 
 ### Filtrage des éléments affichés
 
@@ -391,7 +391,7 @@ Le texte du bouton dépend de la valeur de l'état <em>showAll</em> :
 show {showAll ? 'important' : 'all'}
 ```
 
-Vous pouvez trouver le code de l'application actuelle dans son intégralité sur la branche <i>part2-3</i> de [ce référentiel GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/partie2-3).
+Vous pouvez trouver le code de l'application actuelle dans son intégralité sur la branche <i>part2-3</i> de [ce référentiel GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-3).
 </div>
 
 <div class="tasks">
