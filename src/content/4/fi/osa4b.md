@@ -873,6 +873,7 @@ notesRouter.post('/', async (request, response) => {
   response.status(201).json(savedNote)
 })
 ```
+päivittämällä Express versioon 5 virheiden käsittely helpottuu ja koodia voi selkeyttää huomattavasti: try-catch-blokin voi jättää pois ja samoin next argumentin routereista. Lähde: https://dev.to/mahmud007/goodbye-asynchandler-native-async-support-in-express-5-2o9p
 
 ### Testin beforeEach-metodin optimointi
 
