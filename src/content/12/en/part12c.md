@@ -486,7 +486,7 @@ services:
   app:
     # ...
   nginx:
-    image: nginx:1.20.1
+    image: nginx:1.25-alpine
     volumes:
       - ./nginx.dev.conf:/etc/nginx/nginx.conf:ro
     ports:
