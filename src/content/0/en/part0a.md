@@ -186,7 +186,7 @@ Please note that if you do the "base course" with 6 or 7 credits, you need separ
 
 How to study the course – instructions in a nutshell: other course parts
 
-- Do the exercises. The exercises are submitted through GitHub and marking them is done on the submission system. Note that parts 8-13 have a separate instance in the submission system
+- Do the exercises. The exercises are submitted through GitHub and marking them as done on the submission system. Note that parts 8-13 have a separate instance in the submission system
     - [The course certificate](/en/part0/general_info#course-certificate) will be available in the submission system
 - If you want to get University of Helsinki credits
     - Enroll in the course. You can enroll in each part through the link in the course material ([Parts and completion](/en/part0/general_info#parts-and-completion)). Enroll in each part separately.
