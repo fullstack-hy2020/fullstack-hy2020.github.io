@@ -281,6 +281,8 @@ jobs:
         run: npm run eslint # highlight-line
 ```
 
+ubunutu-20.04 is no longer supported on workflow. 22.04 works.
+
 Note that the _name_ of a step is optional, if you define a step as follows
 
 ```yml
