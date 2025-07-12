@@ -817,6 +817,8 @@ Let's install the library
 npm install express-async-errors
 ```
 
+**⚠️ Warning (Express 5 users):** Installing `express-async-errors` will fail due to its peer-dependency on Express 4.
+
 Using the library is <i>very</i> easy.
 You introduce the library in <i>app.js</i>, _before_ you import your routes:
 
