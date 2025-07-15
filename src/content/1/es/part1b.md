@@ -457,7 +457,7 @@ const referenceToGreet = arto.greet
 referenceToGreet() // se imprime "hello, my name is undefined"
 ```
 
-Al llamar al método a través de una referencia, el método pierde el conocimiento de cuál era el _this_ original. A diferencia de otros lenguajes, en JavaScript el valor de [this](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Operators/this) se define en función de <i>cómo el método se llama</i>. Cuando se llama al método a través de una referencia, el valor de _this_ se convierte en el llamado [objeto global](https://developer.mozilla.org/en-US/docs/Glossary/Global_object) y el resultado final a menudo no es lo que el desarrollador de software había previsto originalmente.
+Al llamar al método a través de una referencia, el método pierde el conocimiento de cuál era el _this_ original. A diferencia de otros lenguajes, en JavaScript el valor de [this](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Operators/this) se define en función de <i>cómo se llama al método</i>. Cuando se llama al método a través de una referencia, el valor de _this_ se convierte en el llamado [objeto global](https://developer.mozilla.org/en-US/docs/Glossary/Global_object) y el resultado final a menudo no es lo que el desarrollador de software había previsto originalmente.
 
 Perder la pista de _this_ al escribir código JavaScript genera algunos problemas potenciales. A menudo surgen situaciones en las que React o Node (o más específicamente el motor JavaScript del navegador web) necesita llamar a algún método en un objeto que el desarrollador ha definido. Sin embargo, en este curso evitamos estos problemas mediante el uso de JavaScript "this-less". 
 
