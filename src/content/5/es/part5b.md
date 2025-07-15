@@ -426,6 +426,42 @@ export default Togglable
 
 La función que crea el componente está envuelta dentro de una llamada a la función [forwardRef](https://es.react.dev/reference/react/forwardRef). De esta manera el componente puede acceder a la referencia que le fue asignada.
 
+Nota: Desde react 19 forwardRef() deja de ser necesario (pasando a estar obsoleto) ya que podemos acceder a la [referencia como una prop](https://es.react.dev/blog/2024/12/05/react-19#ref-as-a-prop) en cuyo caso el componente Togglable podría quedar de esta otra manera:
+
+```js
+import { useImperativeHandle, useState } from "react"
+const Togglable = (props) => {
+    const {ref, buttonLabel, children } = props
+    const [visible, setVisible] = useState(false)
+
+    const hideWhenVisible = {display: visible ? 'none' : ''}
+    const showWhenVisible = {display: visible ? '' : 'none'}
+    
+    const toggleVisibility = () => {
+        setVisible(!visible)
+    }
+
+    useImperativeHandle(ref, () => {
+        return {
+        toggleVisibility
+        }
+    })
+
+    return(
+        <div>
+            <div style={hideWhenVisible}>
+                <button onClick={toggleVisibility}>{buttonLabel}</button>
+            </div>
+            <div style={showWhenVisible}>
+                {children}
+                <button onClick={toggleVisibility}>cancel</button>
+            </div>
+        </div>
+    )
+}
+export default Togglable
+```
+
 El componente usa el hook [useImperativeHandle](https://es.react.dev/reference/react/useImperativeHandle) para que su función <i>toggleVisibility</i> esté disponible fuera del componente.
 
 Ahora podemos ocultar el formulario llamando a <i>noteFormRef.current.toggleVisibility()</i> después de que se haya creado una nueva nota:
