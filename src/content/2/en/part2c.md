@@ -346,6 +346,58 @@ This method could be acceptable in some circumstances, but it's somewhat problem
 
 What's not immediately obvious, however, is where the command <em>axios.get</em> should be placed within the component.
 
+### Codespaces Specific Notes for json-server setup:</span>
+
+If you are using GitHub Codespaces and encounter issues starting json-server or accessing it from your frontend, consider the following:
+
+1- Error: Cannot find module 'json-server':
+
+Check server.js vs server.cjs: If your package.json has "type": "module", Node.js expects ES Modules by default. If you use require('json-server') in a server script (e.g., server.js), you might need to rename it to server.cjs to explicitly tell Node.js to use CommonJS for that file.
+
+Persistent npm install issues: If json-server isn't found in node_modules even after npm install, try a deep cleanup:
+```Bash
+rm -rf node_modules
+rm package-lock.json
+npm cache clean --force
+npm install
+```
+If the issue persists, create a new, clean project folder, copy all your project files (except node_modules and package-lock.json) into it, and run npm install there. This often resolves environment-specific installation quirks.
+
+2- CORS Errors or 302 Redirects (github.dev/pf-signin):
+
+- Port Visibility in Codespaces: GitHub Codespaces often sets ports to "Private" by default. For your frontend to access json-server (even via a proxy), the backend port (e.g., 3001) needs to be accessible. Go to the "PORTS" tab in your Codespaces environment (usually at the bottom of VS Code), find port 3001, and change its Visibility to "Public".
+
+- Vite Proxy Configuration: To avoid CORS issues during development, it's best practice to proxy API requests through Vite's development server.
+
+  - Modify vite.config.js:
+    ```js
+    // vite.config.js
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    port: 5173, // Your frontend port
+    proxy: {
+      '/notes': { // Or '/api' if your backend uses that prefix
+        target: 'https://<your-codespace-name>-3001.app.github.dev', // Replace with your actual json-server URL
+        changeOrigin: true,
+        // If your backend uses a prefix like /api, you might need:
+        // rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
+  },
+})
+    ```
+  Important: Replace <your-codespace-name> with the actual unique part of your Codespaces URL (e.g., cuddly-meme-456pqv4vgrvc7prw).
+  
+- Update Axios requests: Change your Axios calls in App.jsx (and main.jsx if applicable) to use the relative path
+  ```js
+  // In src/main.jsx
+    axios.get('/notes') // Instead of 'http://localhost:3001/notes' or the full Codespaces URL
+
+
 ### Effect-hooks
 
 We have already used [state hooks](https://react.dev/learn/state-a-components-memory) that were introduced along with React version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0), which provide state to React components defined as functions - the so-called <i>functional components</i>. Version 16.8.0 also introduces [effect hooks](https://react.dev/reference/react/hooks#effect-hooks) as a new feature. As per the official docs:
