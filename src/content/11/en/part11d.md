@@ -209,12 +209,12 @@ on:
 
 jobs:
   simple_deployment_pipeline:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       // steps here
   tag_release:
     needs: [simple_deployment_pipeline]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       // steps here
 ```
@@ -255,7 +255,7 @@ on:
 
 jobs:
   a_test_job:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: github context
