@@ -809,30 +809,9 @@ try {
 
 One starts to wonder if it would be possible to refactor the code to eliminate the <i>catch</i> from the methods?
 
-The [express-async-errors](https://github.com/davidbanham/express-async-errors) library has a solution for this.
+Luckily, the generous people behind the Express library merged functionality from the [express-async-errors](https://github.com/davidbanham/express-async-errors) library! This means we no longer have to install ``express-async-errors`` as a separate dependency, and we can safely refactor our code.
 
-Let's install the library
-
-```bash
-npm install express-async-errors
-```
-
-Using the library is <i>very</i> easy.
-You introduce the library in <i>app.js</i>, _before_ you import your routes:
-
-```js
-require('express-async-errors') // highlight-line
-const express = require('express')
-const mongoose = require('mongoose')
-const config = require('./utils/config')
-const logger = require('./utils/logger')
-const middleware = require('./utils/middleware')
-const notesRouter = require('./controllers/notes')
-
-// ...
-```
-
-The 'magic' of the library allows us to eliminate the try-catch blocks completely.
+The 'magic' of the feature is that it allows us to eliminate the try-catch blocks completely.
 For example the route for deleting a note
 
 ```js
@@ -855,8 +834,8 @@ notesRouter.delete('/:id', async (request, response) => {
 })
 ```
 
-Because of the library, we do not need the _next(exception)_ call anymore.
-The library handles everything under the hood. If an exception occurs in an <i>async</i> route, the execution is automatically passed to the error-handling middleware.
+We do not need the _next(exception)_ call anymore.
+Express handles everything under the hood. If an exception occurs in an <i>async</i> route, the execution is automatically passed to the error-handling middleware.
 
 The other routes become:
 
