@@ -22,7 +22,7 @@ jobs:
           npm run build
       - name: git status
         run: |
-          git status          
+          git status
       - name: working dir
         run: |
           cd public 
@@ -32,4 +32,3 @@ jobs:
         uses: enriikke/gatsby-gh-pages-action@v2
         with:
           access-token: ${{ secrets.SEKRED2 }}
- 

@@ -23,7 +23,7 @@ export function createCopyButton() {
     }
 
     //Adding a copy button to each pre block.
-    blocks.forEach(block => {
+    blocks.forEach((block) => {
       let button = document.createElement('button');
       //Adding the CSS class for the copy button style.
       button.classList.add('copy-code-button');

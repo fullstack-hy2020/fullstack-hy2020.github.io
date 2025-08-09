@@ -4,7 +4,9 @@
   position: relative;
   padding: 2px;
   border-radius: 5px 0;
-  transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out;
+  transition:
+    color 0.1s ease-in-out,
+    background-color 0.1s ease-in-out;
 
   &::before,
   &::after {

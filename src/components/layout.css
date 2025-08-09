@@ -183,7 +183,9 @@ textarea {
   font: inherit;
 }
 html {
-  font: 112.5%/1.45em 'IBM Plex Mono', monospace;
+  font:
+    112.5%/1.45em 'IBM Plex Mono',
+    monospace;
   box-sizing: border-box;
   overflow-y: scroll;
 }
@@ -588,7 +590,8 @@ tt,
 code {
   background-color: hsla(var(--color-text-hsl), 0.04);
   border-radius: 3px;
-  font-family: 'SFMono-Regular', Consolas, 'Roboto Mono', 'Droid Sans Mono',
+  font-family:
+    'SFMono-Regular', Consolas, 'Roboto Mono', 'Droid Sans Mono',
     'Liberation Mono', Menlo, Courier, monospace;
   padding: 0;
   padding-top: 0.2em;

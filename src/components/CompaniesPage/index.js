@@ -48,7 +48,7 @@ const CompaniesPage = ({ lang, title, seoDescription }) => {
           }}
         />
 
-        {langStories.map(story => (
+        {langStories.map((story) => (
           <DeveloperStory key={story.name} {...story} lang={lang} />
         ))}
 

@@ -1,6 +1,6 @@
 import { TRANSLATION_LANGUAGES } from '../config';
 
-const getLanguageFromPath = path => {
+const getLanguageFromPath = (path) => {
   if (!path) {
     return 'fi';
   }
