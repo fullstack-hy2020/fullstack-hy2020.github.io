@@ -1,4 +1,4 @@
-/ex---
+---
 mainImage: ../../../images/part-8.svg
 part: 8
 letter: e
