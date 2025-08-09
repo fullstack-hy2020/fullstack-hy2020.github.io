@@ -1172,7 +1172,7 @@ Eli koska ongelmien selvittely on kaksi kertaa vaikeampaa kuin ohjelmointi, ei k
 
 Toistaiseksi kielimallien ja tekoälyn kehitys on vielä siinä vaiheessa, että ne eivät ole itseriittoisia, ja vaikeimmat ongelmat jäävät ihmisten selvitettäväksi. Tämän takia aloittelevienkin ohjelmistokehittäjien on kaiken varalta opeteltava ohjelmoimaan todella hyvin. Voi olla, että kielimallien kehityksestä huolimatta tarvitaankin entistä syvällisempää osaamista. Tekoäly tekee ne helpot asiat, mutta ihmistä tarvitaan kaikkein kiperimpien tekoälyn aiheuttamien sotkujen selvittelyyn. GitHub Copilot onkin varsin hyvin nimetty tuote, kyseessä on Copilot eli lentoperämies/nainen. Ohjelmoija on edelleen kapteeni ja kantaa lopullisen vastuun.
 
-Voikin olla oman etusi mukaista, että kytket oletusarvoisesti Copilotin pois päältä kun teet tätä kurssia ja turvadut siihen ainoastaan todellisella hädän hetkellä.
+Voikin olla oman etusi mukaista, että kytket oletusarvoisesti Copilotin pois päältä kun teet tätä kurssia ja turvaudut siihen ainoastaan todellisella hädän hetkellä.
 
 </div>
 
