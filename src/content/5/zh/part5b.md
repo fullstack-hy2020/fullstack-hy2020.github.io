@@ -869,7 +869,7 @@ module.exports = {
 ```
 
 <!-- NOTE: If you are using Visual Studio Code together with ESLint plugin, you might need to add additional workspace setting for it to work. If you are seeing ```Failed to load plugin react: Cannot find module 'eslint-plugin-react'``` additional configuration is needed. Adding the line ```"eslint.workingDirectories": [{ "mode": "auto" }]``` to settings.json in the workspace seems to work. See [here](https://github.com/microsoft/vscode-eslint/issues/880#issuecomment-578052807) for more information.-->
- 注意：如果你将Visual Studio Code与ESLint插件一起使用，你可能需要添加额外的工作区设置，以便它能够工作。如果你看到````加载插件reaction失败。无法找到模块"eslint-plugin-react"````需要额外的配置。添加一行 ```"eslint.workingDirectories":[{ "mode": "auto" }]````到工作区的settings.json中，似乎可以工作。更多信息见[这里](https://github.com/microsoft/vscode-eslint/issues/880#issuecomment-578052807)。
+ 注意：如果你将Visual Studio Code与ESLint插件一起使用，你可能需要添加额外的工作区设置，以便它能够工作。如果你看到 ```加载插件reaction失败。无法找到模块"eslint-plugin-react"``` 需要额外的配置。添加一行 ```"eslint.workingDirectories":[{ "mode": "auto" }]``` 到工作区的settings.json中，似乎可以工作。更多信息见[这里](https://github.com/microsoft/vscode-eslint/issues/880#issuecomment-578052807)。
 
 <!-- Let's create [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) file with the following contents to the repository root-->
  让我们创建[.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories)文件，在版本库根目录中加入以下内容
