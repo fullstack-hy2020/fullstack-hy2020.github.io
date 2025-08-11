@@ -7,7 +7,7 @@ lang: fi
 
 <div class="content">
 
-Olemme noudattaneet sovelluksen tilan hallinnassa Reactin suosittelemaa käytäntöä määritellä useiden komponenttien tarvitsema tila ja sitä käsittelevät funktiot sovelluksen komponenttirakenteen [ylimmissä](https://reactjs.org/docs/lifting-state-up.html) kompontenteissa. Usein suurin osa tilaa ja sitä funktiot on määritelty sovelluksen juurikomponentissa. Tilaa ja sitä käsitteleviä funktioita on välitetty propsien avulla niitä tarvitseville komponenteille. Tämä toimii johonkin pisteeseen saakka, mutta sovelluksen kasvaessa tilan hallinta muuttuu haasteelliseksi.
+Olemme noudattaneet sovelluksen tilan hallinnassa Reactin suosittelemaa käytäntöä määritellä useiden komponenttien tarvitsema tila ja sitä käsittelevät funktiot sovelluksen komponenttirakenteen [ylimmissä](https://reactjs.org/docs/lifting-state-up.html) kompontenteissa. Usein suurin osa tilaa ja sitä käsittelevistä funktioista on määritelty suoraan sovelluksen juurikomponentissa ja välitetty propsien avulla niitä tarvitseville komponenteille. Tämä toimii johonkin pisteeseen saakka, mutta sovelluksen kasvaessa tilan hallinta muuttuu haasteelliseksi.
 
 ### Flux-arkkitehtuuri
 
