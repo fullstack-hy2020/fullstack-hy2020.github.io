@@ -61,7 +61,7 @@ afterEach(() => {
 ```
 
 <!-- Now, after each test, the function _cleanup_ is performed that resets the jsdom that is simulating the browser. -->
-现在，在每个测试之后，将执行_reset_函数，该函数重置了模拟浏览器的jsdom。
+现在，在每个测试之后，将执行_cleanup_函数，该函数重置了模拟浏览器的jsdom。
 
 <!-- Expand the _vite.config.js_ file as follows -->
 将_vite.config.js_文件扩展如下：
