@@ -264,7 +264,7 @@ test('renders content', () => {
 ```
 
 <!-- **NB:** A more consistent way of selecting elements is using a [data attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*) that is specifically defined for testing purposes. Using _react-testing-library_, we can leverage the [getByTestId](https://testing-library.com/docs/queries/bytestid/) method to select elements with a specified _data-testid_ attribute. -->
-**注意：**选择元素的更一致方法是使用 [数据属性](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Global_attributes/data-*），该属性专门为测试目的而定义。使用 _react-testing-library_，我们可以利用 [getByTestId](https://testing-library.com/docs/queries/bytestid/) 方法来选择具有指定 _data-testid_ 属性的元素。
+**注意：**选择元素的更一致方法是使用 [数据属性](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Global_attributes/data-*)，该属性专门为测试目的而定义。使用 _react-testing-library_，我们可以利用 [getByTestId](https://testing-library.com/docs/queries/bytestid/) 方法来选择具有指定 _data-testid_ 属性的元素。
 
 ### Debugging tests
 
