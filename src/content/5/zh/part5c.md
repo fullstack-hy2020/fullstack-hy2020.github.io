@@ -650,7 +650,7 @@ test('<NoteForm /> updates parent state and calls onSubmit', async() => {
 })
 ```
 
-In the middle of running the tests, the following is printed
+<!-- In the middle of running the tests, the following is printed -->
 在运行测试的过程中，打印以下内容
 
 ```
