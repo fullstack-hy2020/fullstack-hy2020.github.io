@@ -20,7 +20,7 @@ lang: zh
 让我们首先安装Vitest和模拟Web浏览器的[jsdom](https://github.com/jsdom/jsdom)库：
 
 ```
-npm install --save-vitest vitest jsdom
+npm install --save-dev vitest jsdom
 ```
 
 除了Vitest之外，我们还需要另一个测试库，用于帮助我们渲染组件进行测试。目前最好的选择是[react-testing-library](https://github.com/testing-library/react-testing-library)，它在最近的时间内迅速增长了人气。还值得使用[jest-dom](https://github.com/testing-library/jest-dom)库扩展测试的表达能力。
