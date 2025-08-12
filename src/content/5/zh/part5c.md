@@ -911,8 +911,8 @@ HTML 报告将生成到<i>coverage</i>目录。
 
 #### 5.13: Blog List Tests, step 1
 
-Make a test, which checks that the component displaying a blog renders the blog's title and author, but does not render its URL or number of likes by default.
-<!-- 进行一项测试，检查显示博客的组件是否渲染了博客的标题和作者，但默认情况下不渲染其 URL 或点赞数。 -->
+<!-- Make a test, which checks that the component displaying a blog renders the blog's title and author, but does not render its URL or number of likes by default. -->
+进行一项测试，检查显示博客的组件是否渲染了博客的标题和作者，但默认情况下不渲染其 URL 或点赞数。
 
 <!-- Add CSS classes to the component to help the testing as necessary. -->
 根据需要向组件添加 CSS 类以帮助测试。
