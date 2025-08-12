@@ -103,8 +103,8 @@ const Note = ({ note, toggleImportance }) => {
 
 ### Rendering the component for tests
 
-<!-- We will write our test in the <i>src/components/Note.test.js</i> file, which is in the same directory as the component itself. -->
-我们将在与组件本身位于同一目录的 _src/components/Note.test.js_ 文件中编写测试。
+<!-- We will write our test in the <i>src/components/Note.test.jsx</i> file, which is in the same directory as the component itself. -->
+我们将在与组件本身位于同一目录的 _src/components/Note.test.jsx_ 文件中编写测试。
 
 <!-- The first test verifies that the component renders the contents of the note: -->
 第一个测试验证组件是否呈现了注释的内容：
