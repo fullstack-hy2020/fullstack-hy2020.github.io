@@ -957,7 +957,7 @@ Vitest 提供了一种与“传统”测试完全不同的替代方案，称为[
 <!-- The fundamental principle is to compare the HTML code defined by the component after it has changed to the HTML code that existed before it was changed. -->
 基本原则是将组件更改后定义的 HTML 代码与更改前存在的 HTML 代码进行比较。
 
-<!-- If the snapshot notices some change in the HTML defined by the component, then either it is new functionality or a "bug" caused by accident. Snapshot tests notify the developer if the HTML code of the component changes. The developer has to tell Jest if the change was desired or undesired. If the change to the HTML code is unexpected, it strongly implies a bug, and the developer can become aware of these potential issues easily thanks to snapshot testing. -->
-如果快照注意到组件定义的 HTML 中发生了一些变化，那么它要么是新功能，要么是意外造成的“错误”。快照测试会通知开发人员组件的 HTML 代码是否发生变化。开发人员必须告诉 Jest 更改是需要的还是不需要的。如果对 HTML 代码的更改是意外的，那么它强烈暗示存在错误，并且开发人员可以轻松地通过快照测试了解这些潜在问题。
+<!-- If the snapshot notices some change in the HTML defined by the component, then either it is new functionality or a "bug" caused by accident. Snapshot tests notify the developer if the HTML code of the component changes. The developer has to tell Vitest if the change was desired or undesired. If the change to the HTML code is unexpected, it strongly implies a bug, and the developer can become aware of these potential issues easily thanks to snapshot testing. -->
+如果快照注意到组件定义的 HTML 中发生了一些变化，那么它要么是新功能，要么是意外造成的“错误”。快照测试会通知开发人员组件的 HTML 代码是否发生变化。开发人员必须告诉 Vitest 更改是需要的还是不需要的。如果对 HTML 代码的更改是意外的，那么它强烈暗示存在错误，并且开发人员可以轻松地通过快照测试了解这些潜在问题。
 
 </div>
