@@ -208,7 +208,7 @@ The contents of the package.json file will change as follows:
   //...
   "dependencies": {
     "dotenv": "^16.4.7",
-    "express": "^4.21.2",
+    "express": "^5.1.0",
     "mongoose": "^8.11.0"
   },
   "devDependencies": { // highlight-line

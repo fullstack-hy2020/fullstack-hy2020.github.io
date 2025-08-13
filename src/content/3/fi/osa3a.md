@@ -238,7 +238,7 @@ Riippuvuus tulee nyt määritellyksi tiedostoon <i>package.json</i>:
 {
   // ...
   "dependencies": {
-   "express": "^4.21.2"
+   "express": "^5.1.0"
   }
 }
 
@@ -250,13 +250,13 @@ Riippuvuuden koodi asentuu kaikkien projektin riippuvuuksien tapaan projektin ju
 
 Kyseessä ovat Expressin riippuvuudet ja niiden riippuvuudet jne. eli projektimme [transitiiviset riippuvuudet](https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/).
 
-Projektiin asentui Expressin versio 4.21.2. </i>package.json:issa</i> versiomerkinnän edessä on väkänen, eli muoto on
+Projektiin asentui Expressin versio 5.1.0. </i>package.json:issa</i> versiomerkinnän edessä on väkänen, eli muoto on
 
 ```json
-"express": "^4.21.2"
+"express": "^5.1.0"
 ```
   
-npm:n yhteydessä käytetään ns. [semanttista versiointia](https://docs.npmjs.com/getting-started/semantic-versioning). Merkintä <i>^4.21.2</i> tarkoittaa, että jos projektin riippuvuudet päivitetään, asennetaan Expressistä versio, joka on vähintään <i>4.21.2</i>, mutta asennetuksi voi tulla versio, jonka <i>patch</i> eli viimeinen numero tai <i>minor</i> eli keskimmäinen numero voi olla suurempi. Pääversio eli <i>major</i> täytyy kuitenkin olla edelleen sama.
+npm:n yhteydessä käytetään ns. [semanttista versiointia](https://docs.npmjs.com/getting-started/semantic-versioning). Merkintä <i>^5.1.0</i> tarkoittaa, että jos projektin riippuvuudet päivitetään, asennetaan Expressistä versio, joka on vähintään <i>5.1.0</i>, mutta asennetuksi voi tulla versio, jonka <i>patch</i> eli viimeinen numero tai <i>minor</i> eli keskimmäinen numero voi olla suurempi. Pääversio eli <i>major</i> täytyy kuitenkin olla edelleen sama.
 
 Voimme päivittää projektin riippuvuudet komennolla
 
@@ -270,7 +270,7 @@ Jos aloitamme projektin koodaamisen toisella koneella, saamme haettua ajantasais
 npm install
 ```
 
-Jos riippuvuuden <i>major</i>-versionumero ei muutu, uudempien versioiden pitäisi olla [taaksepäin yhteensopivia](https://en.wikipedia.org/wiki/Backward_compatibility), eli jos ohjelmamme käyttäisi tulevaisuudessa esim. Expressin versiota 4.99.175, tässä osassa tehtävän koodin pitäisi edelleen toimia ilman muutoksia. Sen sijaan tulevaisuudessa joskus julkaistava Express 5.0.0 [voi sisältää](https://expressjs.com/en/guide/migrating-5.html) sellaisia muutoksia, että koodimme ei enää toimisi.
+Jos riippuvuuden <i>major</i>-versionumero ei muutu, uudempien versioiden pitäisi olla [taaksepäin yhteensopivia](https://en.wikipedia.org/wiki/Backward_compatibility), eli jos ohjelmamme käyttäisi tulevaisuudessa esim. Expressin versiota 5.99.175, tässä osassa tehtävän koodin pitäisi edelleen toimia ilman muutoksia. Sen sijaan tulevaisuudessa joskus julkaistava Express 6.0.0 voi sisältää sellaisia muutoksia, että koodimme ei enää toimisi.
 
 ### Web ja Express
 

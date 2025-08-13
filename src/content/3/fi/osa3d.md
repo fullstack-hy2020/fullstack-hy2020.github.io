@@ -197,7 +197,7 @@ Tiedoston package.json sisältö muuttuu seuraavasti:
   //...
   "dependencies": {
     "dotenv": "^16.4.7",
-    "express": "^4.21.2",
+    "express": "^5.1.0",
     "mongoose": "^8.11.0"
   },
   "devDependencies": { // highlight-line
