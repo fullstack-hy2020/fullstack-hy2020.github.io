@@ -24,7 +24,7 @@ class ScrollNavigation extends Component {
   componentDidMount = () => {
     const headingList = Array.from(document.querySelectorAll('h3'));
 
-    const headings = headingList.map(i => {
+    const headings = headingList.map((i) => {
       i.id = kebabCase(i.innerText);
       i.classList.add('offset');
 
@@ -67,16 +67,10 @@ class ScrollNavigation extends Component {
     }, 50);
   };
 
-  loopThroughPartsNode = partsNode => {
+  loopThroughPartsNode = (partsNode) => {
     const { headings } = this.state;
-    const {
-      part,
-      letter,
-      currentPath,
-      currentPartTitle,
-      colorCode,
-      lang,
-    } = this.props;
+    const { part, letter, currentPath, currentPartTitle, colorCode, lang } =
+      this.props;
     let arr = [];
 
     for (let key in partsNode) {
@@ -106,7 +100,7 @@ class ScrollNavigation extends Component {
             key={key}
             title={`${letter} ${partsNode[key]}`}
             selectedItem={this.state.selectedItem}
-            list={headings.map(i => {
+            list={headings.map((i) => {
               return {
                 id: i.id,
                 href: `${currentPath}#${i.id}`,

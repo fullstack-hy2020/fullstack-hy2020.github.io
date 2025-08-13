@@ -25,8 +25,6 @@ import snakeCase from 'lodash/fp/snakeCase';
 import getPartTranslationPath from '../utils/getPartTranslationPath';
 import { createCopyButton } from './copy-code-button/create-copy-buttons';
 
-
-
 export default class ContentTemplate extends Component {
   constructor(props) {
     super(props);
@@ -44,11 +42,11 @@ export default class ContentTemplate extends Component {
     );
     const h1 = document.querySelector('h1');
     const h3 = document.querySelectorAll('h3');
-    const h3Arr = Array.from(h3).map(t => t.innerText);
+    const h3Arr = Array.from(h3).map((t) => t.innerText);
 
     const { frontmatter } = this.props.data.markdownRemark;
 
-    links.map(i => {
+    links.map((i) => {
       i.style = `border-color: ${colors[partColors[frontmatter.part]]}`;
       !i.classList.contains('language-switcher__language') &&
         (i.target = '_blank');
@@ -98,7 +96,7 @@ export default class ContentTemplate extends Component {
     const colorCode = colors[partColors[part]];
 
     const parserOptions = {
-      replace: props => {
+      replace: (props) => {
         const { type, name, attribs, children } = props;
         if (type === 'tag' && name === 'picture') {
           const alt = children[0].attribs.alt
@@ -263,7 +261,7 @@ export default class ContentTemplate extends Component {
 }
 
 export const contentPageQuery = graphql`
-  query($part: Int!, $letter: String!, $lang: String!) {
+  query ($part: Int!, $letter: String!, $lang: String!) {
     markdownRemark(
       frontmatter: {
         part: { eq: $part }

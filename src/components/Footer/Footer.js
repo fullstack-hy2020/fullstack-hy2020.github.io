@@ -39,7 +39,7 @@ const Footer = () => {
         flex
         spaceBetween
       >
-        {images.map(image => (
+        {images.map((image) => (
           <a
             key={image.alt}
             href={image.href}
@@ -61,7 +61,7 @@ const Footer = () => {
         className="col-5 col-5--mobile order-1--mobile order-1--tablet footer__navigation"
       >
         <div className="footer__navigation-link-container">
-          {navigation.map(item => (
+          {navigation.map((item) => (
             <Link
               key={item.path}
               to={item.path}

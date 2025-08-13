@@ -34,7 +34,7 @@ const FaqPage = ({ lang, title, seoDescription }) => {
           headingLevel="h1"
           text={t('faqPage:faqTitle')}
         />
-        {langContent.map(item => {
+        {langContent.map((item) => {
           return (
             <Accordion
               track

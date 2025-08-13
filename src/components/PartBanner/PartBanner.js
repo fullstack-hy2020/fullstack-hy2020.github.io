@@ -123,7 +123,7 @@ export const PartBanner = ({ lang }) => {
       id="course-contents"
     >
       <div className="container spacing flex-fix-aligning col-7--mobile">
-        {parts.map(part => {
+        {parts.map((part) => {
           const partNames =
             partNameTranslations[lang] || partNameTranslations.en;
 
@@ -139,7 +139,9 @@ export const PartBanner = ({ lang }) => {
                 src: require(`../../images/thumbnails/part-${part}.svg`),
                 alt: partNames[part],
               }}
-              hoverImageSrc={require(`../../images/thumbnails/part-${part}_ovr.svg`)}
+              hoverImageSrc={require(
+                `../../images/thumbnails/part-${part}_ovr.svg`
+              )}
               name={`${partName[lang]} ${part}`}
               summary={summary}
               path={getPartTranslationPath(lang, part)}

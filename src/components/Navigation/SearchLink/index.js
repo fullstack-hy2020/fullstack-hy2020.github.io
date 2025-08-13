@@ -6,7 +6,7 @@ import SearchIcon from '../../SearchIcon';
 import SrOnly from '../../SrOnly';
 import styles from './SearchLink.module.scss';
 
-const getLinkTo = lang => {
+const getLinkTo = (lang) => {
   return lang === 'fi' ? '/search' : `/${lang}/search`;
 };
 

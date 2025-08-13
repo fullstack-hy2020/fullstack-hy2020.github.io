@@ -8,7 +8,8 @@ import { TripleBorder } from '../TripleBorder/TripleBorder';
 import colors from '../../colors';
 
 const setSrcToChildrenImage = (event, src) => {
-  event.currentTarget.firstElementChild.firstElementChild.firstElementChild.src = src;
+  event.currentTarget.firstElementChild.firstElementChild.firstElementChild.src =
+    src;
 
   return;
 };
@@ -36,10 +37,10 @@ export const ContentLiftup = ({
         <Link
           className="content-liftup__link"
           to={path}
-          onMouseOver={e => {
+          onMouseOver={(e) => {
             setSrcToChildrenImage(e, hoverImageSrc ? hoverImageSrc : image.src);
           }}
-          onMouseOut={e => {
+          onMouseOut={(e) => {
             setSrcToChildrenImage(e, image.src);
           }}
         >

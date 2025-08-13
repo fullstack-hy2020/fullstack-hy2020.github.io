@@ -26,7 +26,7 @@ exports.createPages = ({ actions, graphql }) => {
         }
       }
     }
-  `).then(result => {
+  `).then((result) => {
     if (result.errors) {
       return Promise.reject(result.errors);
     }
@@ -35,7 +35,7 @@ exports.createPages = ({ actions, graphql }) => {
       const { frontmatter } = node;
       const { part, lang } = frontmatter;
 
-      const legitPart = (part || part === '0' || part === 0) 
+      const legitPart = part || part === '0' || part === 0;
 
       if (legitPart && !frontmatter.letter) {
         createPage({
@@ -49,7 +49,12 @@ exports.createPages = ({ actions, graphql }) => {
             lang: lang,
           },
         });
-      } else if (legitPart && navigation[lang] && !isEmpty(navigation[lang][part]) && frontmatter.letter) {
+      } else if (
+        legitPart &&
+        navigation[lang] &&
+        !isEmpty(navigation[lang][part]) &&
+        frontmatter.letter
+      ) {
         createPage({
           path:
             lang === 'fi'
