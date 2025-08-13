@@ -20,7 +20,7 @@ lang: zh
 让我们首先安装Vitest和模拟Web浏览器的[jsdom](https://github.com/jsdom/jsdom)库：
 
 ```
-npm install --save-vitest vitest jsdom
+npm install --save-dev vitest jsdom
 ```
 
 除了Vitest之外，我们还需要另一个测试库，用于帮助我们渲染组件进行测试。目前最好的选择是[react-testing-library](https://github.com/testing-library/react-testing-library)，它在最近的时间内迅速增长了人气。还值得使用[jest-dom](https://github.com/testing-library/jest-dom)库扩展测试的表达能力。
@@ -61,7 +61,7 @@ afterEach(() => {
 ```
 
 <!-- Now, after each test, the function _cleanup_ is performed that resets the jsdom that is simulating the browser. -->
-现在，在每个测试之后，将执行_reset_函数，该函数重置了模拟浏览器的jsdom。
+现在，在每个测试之后，将执行_cleanup_函数，该函数重置了模拟浏览器的jsdom。
 
 <!-- Expand the _vite.config.js_ file as follows -->
 将_vite.config.js_文件扩展如下：
@@ -103,8 +103,8 @@ const Note = ({ note, toggleImportance }) => {
 
 ### Rendering the component for tests
 
-<!-- We will write our test in the <i>src/components/Note.test.js</i> file, which is in the same directory as the component itself. -->
-我们将在与组件本身位于同一目录的 _src/components/Note.test.js_ 文件中编写测试。
+<!-- We will write our test in the <i>src/components/Note.test.jsx</i> file, which is in the same directory as the component itself. -->
+我们将在与组件本身位于同一目录的 _src/components/Note.test.jsx_ 文件中编写测试。
 
 <!-- The first test verifies that the component renders the contents of the note: -->
 第一个测试验证组件是否呈现了注释的内容：
@@ -264,7 +264,7 @@ test('renders content', () => {
 ```
 
 <!-- **NB:** A more consistent way of selecting elements is using a [data attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*) that is specifically defined for testing purposes. Using _react-testing-library_, we can leverage the [getByTestId](https://testing-library.com/docs/queries/bytestid/) method to select elements with a specified _data-testid_ attribute. -->
-**注意：**选择元素的更一致方法是使用 [数据属性](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Global_attributes/data-*），该属性专门为测试目的而定义。使用 _react-testing-library_，我们可以利用 [getByTestId](https://testing-library.com/docs/queries/bytestid/) 方法来选择具有指定 _data-testid_ 属性的元素。
+**注意：**选择元素的更一致方法是使用 [数据属性](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Global_attributes/data-*)，该属性专门为测试目的而定义。使用 _react-testing-library_，我们可以利用 [getByTestId](https://testing-library.com/docs/queries/bytestid/) 方法来选择具有指定 _data-testid_ 属性的元素。
 
 ### Debugging tests
 
@@ -650,7 +650,7 @@ test('<NoteForm /> updates parent state and calls onSubmit', async() => {
 })
 ```
 
-In the middle of running the tests, the following is printed
+<!-- In the middle of running the tests, the following is printed -->
 在运行测试的过程中，打印以下内容
 
 ```
@@ -911,8 +911,8 @@ HTML 报告将生成到<i>coverage</i>目录。
 
 #### 5.13: Blog List Tests, step 1
 
-Make a test, which checks that the component displaying a blog renders the blog's title and author, but does not render its URL or number of likes by default.
-<!-- 进行一项测试，检查显示博客的组件是否渲染了博客的标题和作者，但默认情况下不渲染其 URL 或点赞数。 -->
+<!-- Make a test, which checks that the component displaying a blog renders the blog's title and author, but does not render its URL or number of likes by default. -->
+进行一项测试，检查显示博客的组件是否渲染了博客的标题和作者，但默认情况下不渲染其 URL 或点赞数。
 
 <!-- Add CSS classes to the component to help the testing as necessary. -->
 根据需要向组件添加 CSS 类以帮助测试。
@@ -957,7 +957,7 @@ Vitest 提供了一种与“传统”测试完全不同的替代方案，称为[
 <!-- The fundamental principle is to compare the HTML code defined by the component after it has changed to the HTML code that existed before it was changed. -->
 基本原则是将组件更改后定义的 HTML 代码与更改前存在的 HTML 代码进行比较。
 
-<!-- If the snapshot notices some change in the HTML defined by the component, then either it is new functionality or a "bug" caused by accident. Snapshot tests notify the developer if the HTML code of the component changes. The developer has to tell Jest if the change was desired or undesired. If the change to the HTML code is unexpected, it strongly implies a bug, and the developer can become aware of these potential issues easily thanks to snapshot testing. -->
-如果快照注意到组件定义的 HTML 中发生了一些变化，那么它要么是新功能，要么是意外造成的“错误”。快照测试会通知开发人员组件的 HTML 代码是否发生变化。开发人员必须告诉 Jest 更改是需要的还是不需要的。如果对 HTML 代码的更改是意外的，那么它强烈暗示存在错误，并且开发人员可以轻松地通过快照测试了解这些潜在问题。
+<!-- If the snapshot notices some change in the HTML defined by the component, then either it is new functionality or a "bug" caused by accident. Snapshot tests notify the developer if the HTML code of the component changes. The developer has to tell Vitest if the change was desired or undesired. If the change to the HTML code is unexpected, it strongly implies a bug, and the developer can become aware of these potential issues easily thanks to snapshot testing. -->
+如果快照注意到组件定义的 HTML 中发生了一些变化，那么它要么是新功能，要么是意外造成的“错误”。快照测试会通知开发人员组件的 HTML 代码是否发生变化。开发人员必须告诉 Vitest 更改是需要的还是不需要的。如果对 HTML 代码的更改是意外的，那么它强烈暗示存在错误，并且开发人员可以轻松地通过快照测试了解这些潜在问题。
 
 </div>
