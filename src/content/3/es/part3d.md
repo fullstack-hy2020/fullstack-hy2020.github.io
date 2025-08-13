@@ -228,75 +228,46 @@ npx eslint --init
 
 Responderemos todas las preguntas:
 
-![salida del terminal de ESlint init](../../images/3/52new.png)
+![salida del terminal de ESlint init](../../images/3/52q.png)
 
-La configuración se guardará en el archivo _.eslintrc.js_. Cambiaremos _browser_ a _node_ en la configuración de _env_:
+La configuración se guardará en el archivo _eslint.config.mjs_. Cambiaremos _browser_ a _node_ en la configuración de _files_:
 
 ```js
-module.exports = {
-    "env": {
-        "commonjs": true,
-        "es2021": true,
-        "node": true // highlight-line
-    },
-    "overrides": [
-        {
-            "env": {
-                "node": true
-            },
-            "files": [
-                ".eslintrc.{js,cjs}"
-            ],
-            "parserOptions": {
-                "sourceType": "script"
-            }
-        }
-    ],
-    "parserOptions": {
-        "ecmaVersion": "latest"
-    },
-    "rules": {
-    }
-}
+import globals from "globals";
+import { defineConfig } from "eslint/config";
+
+export default defineConfig([
+  { 
+    files: ["**/*.{js,mjs,cjs}"], languageOptions: { globals: globals.node } // highlight-line
+  } 
+]);
+
 ```
 
 Cambiemos un poco la configuración. Instala un [plugin](https://eslint.style/packages/js) que define un conjunto de reglas relacionadas al estilo:
 
 ```
-npm install --save-dev @stylistic/eslint-plugin-js
+npm install --save-dev @stylistic/eslint-plugin
 ```
 
-Habilita el plugin y agrega una definición de "extends" y cuatro reglas de estilo:
+Habilita el plugin y agrega una definición de "extends":
 
 ```js
-module.exports = {
-    // ...
-    'plugins': [
-        '@stylistic/js'
-    ],
-    'extends': 'eslint:recommended',
-    'rules': {
-        '@stylistic/js/indent': [
-            'error',
-            2
-        ],
-        '@stylistic/js/linebreak-style': [
-            'error',
-            'unix'
-        ],
-        '@stylistic/js/quotes': [
-            'error',
-            'single'
-        ],
-        '@stylistic/js/semi': [
-            'error',
-            'never'
-        ],
-    }
-}
+import js from '@eslint/js' // highlight-line
+import globals from "globals";
+import stylistic from '@stylistic/eslint-plugin' // highlight-line
+import { defineConfig } from "eslint/config";
+
+export default defineConfig([
+  { 
+    files: ["**/*.{js,mjs,cjs}"], languageOptions: { globals: globals.node },
+    plugins: { js, stylistic }, // highlight-line
+    extends: ["js/recommended"] // highlight-line
+  }
+]);
 ```
 
-Extends _eslint:recommended_ añade un [conjunto](https://eslint.org/docs/latest/rules/) de reglas recomendadas al proyecto. Además, se han añadido reglas para la indentación, saltos de línea, guiones y puntos y comas. Estas cuatro reglas están todas definidas en el [plugin de estilos de Eslint](https://eslint.style/packages/js).
+Extends _["js/recommended"]_ añade un [conjunto](https://eslint.org/docs/latest/use/core-concepts#rule-suggestions) de reglas recomendadas al proyecto. Además, se han añadido reglas para la indentación, saltos de línea, guiones y puntos y comas.
 
 Inspeccionar y validar un archivo como _index.js_ se puede hacer con el siguiente comando:
 
@@ -321,10 +292,23 @@ Es recomendable crear un _script npm_ separado para linting:
 
 Ahora, el comando _npm run lint_ comprobará todos los archivos del proyecto.
 
-Además, los archivos del directorio <em>dist</em> se comprueban cuando se ejecuta el comando. No queremos que esto suceda, y podemos lograrlo creando un archivo [.eslintignore](https://eslint.org/docs/latest/use/configure/ignore#the-eslintignore-file) en la raíz del proyecto con el siguiente contenido:
+Además, los archivos del directorio <em>dist</em> se comprueban cuando se ejecuta el comando. No queremos que esto suceda, y podemos lograrlo creando agregando [globalIgnores](https://eslint.org/docs/latest/use/configure/ignore) en el archivo _eslint.config.mjs_:
 
-```bash
-dist
+```js
+import js from '@eslint/js'
+import globals from 'globals'
+import stylistic from '@stylistic/eslint-plugin'
+import { defineConfig, globalIgnores } from 'eslint/config' // highlight-line
+
+export default defineConfig([
+  { 
+    files: ["**/*.{js,mjs,cjs}"], languageOptions: { globals: globals.node },
+    plugins: { js, stylistic },
+    extends: ['js/recommended']
+  },
+  globalIgnores(['./dist/']) // highlight-line
+])
+
 ```
 
 Esto hace que el directorio <em>dist</em> no sea comprobado por ESlint.
@@ -368,12 +352,10 @@ Evitemos los [espacios finales innecesarios](https://eslint.org/docs/rules/no-tr
     // ...
     'eqeqeq': 'error',
     'no-trailing-spaces': 'error',
-    'object-curly-spacing': [
-        'error', 'always'
-    ],
+    'object-curly-spacing': ['error', 'always'],
     'arrow-spacing': [
         'error', { 'before': true, 'after': true }
-    ]
+    ],
   },
 }
 ```
@@ -381,7 +363,7 @@ Evitemos los [espacios finales innecesarios](https://eslint.org/docs/rules/no-tr
 Nuestra configuración predeterminada utiliza un montón de reglas predeterminadas de <i>eslint:recommended</i>:
 
 ```bash
-'extends': 'eslint:recommended',
+extends: 'js/recommended',
 ```
 
 Esto incluye una regla que advierte sobre los comandos _console.log_. La [desactivación](https://eslint.org/docs/latest/use/configure/rules) de una regla se puede lograr definiendo su "valor" como 0 en el archivo de configuración. Mientras tanto, hagamos esto para la regla <i>no-console</i>.
@@ -393,9 +375,7 @@ Esto incluye una regla que advierte sobre los comandos _console.log_. La [desact
     // ...
     'eqeqeq': 'error',
     'no-trailing-spaces': 'error',
-    'object-curly-spacing': [
-        'error', 'always'
-    ],
+    'object-curly-spacing': ['error', 'always'],
     'arrow-spacing': [
         'error', { 'before': true, 'after': true }
     ],
@@ -404,7 +384,7 @@ Esto incluye una regla que advierte sobre los comandos _console.log_. La [desact
 }
 ```
 
-**NB** cuando realizas cambios en el archivo <i>.eslintrc.js</i>, se recomienda ejecutar el linter desde la línea de comandos. Esto verificará que el archivo de configuración esté formateado correctamente:
+**NB** cuando realizas cambios en el archivo <i>eslint.config.mjs</i>, se recomienda ejecutar el linter desde la línea de comandos. Esto verificará que el archivo de configuración esté formateado correctamente:
 
 ![salida de terminal del comando npm run lint](../../images/3/55.png)
 
