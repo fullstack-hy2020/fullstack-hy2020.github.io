@@ -275,6 +275,7 @@ Kurssilla ei ole enää vuosittaisia versiota. Kurssi on siis käynnissä koko a
 Muutoksista huolimatta <i>kaikki jo tehdyt palautukset säilyvät voimassa</i>, eli voit jatkaa kurssia päivityksistä huolimatta normaaliin tapaan.
 
 Viimeaikaisia isompia muutoksia
+- Osa 4 (13.8.2025): Express päivitetty versioon 5 ja kirjasto express-async-errors poistettu osasta 4b
 - Osa 9 (28.8.2024): Zod-kirjasto datan validointiin
 - Osa 3 (20.6.2024): ESLint-konfiguraatiot päivitetty
 - Osa 12 (21.3.2024): Create React app korvattu Vitellä

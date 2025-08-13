@@ -332,6 +332,7 @@ Despite changes *all the submitted exercises remain valid*, and the course can b
 
 Recent major changes
 
+- Part 4 (13th August, 2025): Express updated to version 5 and the express-async-errors library removed from part 4b
 - Part 9 (28th August, 2024): Zod library for validating request body type
 - Part 3 (20th June, 2024): ESLint configurations updated
 - Part 10 (21st March, 2024): Create React app replaced with Vite

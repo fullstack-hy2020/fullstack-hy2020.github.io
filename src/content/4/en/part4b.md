@@ -330,6 +330,8 @@ test('all notes are returned', async () => {
 
 ```
 
+You can find the code for our current application in its entirety in the <i>part4-3</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-3).
+
 ### Running tests one by one
 
 The _npm test_ command executes all of the tests for the application. When we are writing tests, it is usually wise to only execute one or two tests. 
@@ -459,9 +461,19 @@ The code declares that the function assigned to _main_ is asynchronous. After th
 
 ### async/await in the backend
 
-Let's start to change the backend to async and await. As all of the asynchronous operations are currently done inside of a function, it is enough to change the route handler functions into async functions.
+Let's start to change the backend to async and await. Let's start with the route responsible for fetching all notes.
 
-The route for fetching all notes gets changed to the following:
+As all of the asynchronous operations are currently done inside of a function, it is enough to change the route handler functions into async functions. The route for fetching all notes 
+
+```js
+notesRouter.get('/', (request, response) => {
+  Note.find({}).then((notes) => {
+    response.json(notes)
+  })
+})
+```
+
+gets changed to the following:
 
 ```js
 notesRouter.get('/', async (request, response) => { 
@@ -472,9 +484,7 @@ notesRouter.get('/', async (request, response) => {
 
 We can verify that our refactoring was successful by testing the endpoint through the browser and by running the tests that we wrote earlier.
 
-You can find the code for our current application in its entirety in the <i>part4-3</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-3).
-
-### More tests and refactoring the backend
+### Refactoring the route responsible for adding a note
 
 When code gets refactored, there is always the risk of [regression](https://en.wikipedia.org/wiki/Regression_testing), meaning that existing functionality may break. Let's refactor the remaining operations by first writing a test for each route of the API.
 
@@ -667,10 +677,10 @@ after(async () => {
 
 The code using promises works and the tests pass. We are ready to refactor our code to use the async/await syntax.
 
-We make the following changes to the code that takes care of adding a new note (notice that the route handler definition is preceded by the _async_ keyword):
+The route responsible for adding a new note
 
 ```js
-notesRouter.post('/', async (request, response, next) => {
+notesRouter.post('/', (request, response, next) => {
   const body = request.body
 
   const note = new Note({
@@ -678,47 +688,57 @@ notesRouter.post('/', async (request, response, next) => {
     important: body.important || false,
   })
 
-  const savedNote = await note.save()
-  response.status(201).json(savedNote)
+  note
+    .save()
+    .then((savedNote) => {
+      response.status(201).json(savedNote)
+    })
+    .catch((error) => next(error))
 })
 ```
 
-There's a slight problem with our code: we don't handle error situations. How should we deal with them?
-
-### Error handling and async/await
-
-If there's an exception while handling the POST request we end up in a familiar situation:
-
-![terminal showing unhandled promise rejection warning](../../images/4/6.png)
-
-In other words, we end up with an unhandled promise rejection, and the request never receives a response.
-
-With async/await the recommended way of dealing with exceptions is the old and familiar _try/catch_ mechanism:
+changes as follows:
 
 ```js
-notesRouter.post('/', async (request, response, next) => {
+notesRouter.post('/', async (request, response) => { // highlight-line
   const body = request.body
 
   const note = new Note({
     content: body.content,
     important: body.important || false,
   })
+
   // highlight-start
-  try {
-    const savedNote = await note.save()
-    response.status(201).json(savedNote)
-  } catch (exception) {
-    next(exception)
-  }
+  const savedNote = await note.save()
+  response.status(201).json(savedNote)
   // highlight-end
 })
 ```
 
-The catch block simply calls the _next_ function, which passes the request handling to the error handling middleware.
+You need to add the _async_ keyword at the beginning of the handler to enable the use of _async/await_ syntax. The code becomes much simpler.
 
-After making the change, all of our tests will pass once again.
+Notably, possible errors no longer need to be forwarded separately for handling. In code using promises, a possible error was passed to the error-handling middleware like this:
 
-Next, let's write tests for fetching and removing an individual note:
+```js
+  note
+    .save()
+    .then((savedNote) => {
+      response.json(savedNote)
+    })
+    .catch((error) => next(error)) // highlight-line
+```
+
+When using _async/await_ syntax, Express will [automatically call](https://expressjs.com/en/guide/error-handling.html) the error-handling middleware if an await statement throws an error or the awaited promise is rejected. This makes the final code even cleaner.
+
+**Note:** This feature is available starting from Express version 5. If you installed Express as a dependency before March 31, 2025, you might still be using version 4. You can check your project's Express version in the _package.json_ file. If you have an older version, update to version 5 with the following command:
+
+ ```bash
+ npm install express@5 
+ ```
+
+### Refactoring the route responsible for fetching a single note
+
+Next, let's write a test for viewing the details of a single note. The code highlights the actual API operation being performed:
 
 ```js
 test('a specific note can be viewed', async () => {
@@ -734,29 +754,11 @@ test('a specific note can be viewed', async () => {
 
   assert.deepStrictEqual(resultNote.body, noteToView)
 })
-
-test('a note can be deleted', async () => {
-  const notesAtStart = await helper.notesInDb()
-  const noteToDelete = notesAtStart[0]
-
-// highlight-start
-  await api
-    .delete(`/api/notes/${noteToDelete.id}`)
-    .expect(204)
-// highlight-end
-
-  const notesAtEnd = await helper.notesInDb()
-
-  const contents = notesAtEnd.map(n => n.content)
-  assert(!contents.includes(noteToDelete.content))
-
-  assert.strictEqual(notesAtEnd.length, helper.initialNotes.length - 1)
-})
 ```
 
-Both tests share a similar structure. In the initialization phase, they fetch a note from the database. After this, the tests call the actual operation being tested, which is highlighted in the code block. Lastly, the tests verify that the outcome of the operation is as expected.
+First, the test fetches a single note from the database. Then, it checks that the specific note can be retrieved through the API. Finally, it verifies that the content of the fetched note is as expected.
 
-There is one point worth noting in the first test. Instead of the previously used method [strictEqual](https://nodejs.org/api/assert.html#assertstrictequalactual-expected-message), the method [deepStrictEqual](https://nodejs.org/api/assert.html#assertdeepstrictequalactual-expected-message) is used:
+There is one point worth noting in the test. Instead of the previously used method [strictEqual](https://nodejs.org/api/assert.html#assertstrictequalactual-expected-message), the method [deepStrictEqual](https://nodejs.org/api/assert.html#assertdeepstrictequalactual-expected-message) is used:
 
 ```js
 assert.deepStrictEqual(resultNote.body, noteToView)
@@ -764,101 +766,7 @@ assert.deepStrictEqual(resultNote.body, noteToView)
 
 The reason for this is that _strictEqual_ uses the method [Object.is](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) to compare similarity, i.e. it compares whether the objects are the same. In our case, we want to check that the contents of the objects, i.e. the values of their fields, are the same. For this purpose _deepStrictEqual_ is suitable.
 
-The tests pass and we can safely refactor the tested routes to use async/await:
-
-```js
-notesRouter.get('/:id', async (request, response, next) => {
-  try {
-    const note = await Note.findById(request.params.id)
-    if (note) {
-      response.json(note)
-    } else {
-      response.status(404).end()
-    }
-  } catch (exception) {
-    next(exception)
-  }
-})
-```
-
-```js
-notesRouter.delete('/:id', async (request, response, next) => {
-  try {
-    await Note.findByIdAndDelete(request.params.id)
-    response.status(204).end()
-  } catch (exception) {
-    next(exception)
-  }
-})
-```
-
-You can find the code for our current application in its entirety in the <i>part4-4</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-4).
-
-### Eliminating the try-catch
-
-Async/await unclutters the code a bit, but the 'price' is the <i>try/catch</i> structure required for catching exceptions.
-All of the route handlers follow the same structure
-
-```js
-try {
-  // do the async operations here
-} catch (exception) {
-  next(exception)
-}
-```
-
-One starts to wonder if it would be possible to refactor the code to eliminate the <i>catch</i> from the methods?
-
-The [express-async-errors](https://github.com/davidbanham/express-async-errors) library has a solution for this.
-
-Let's install the library
-
-```bash
-npm install express-async-errors
-```
-
-Using the library is <i>very</i> easy.
-You introduce the library in <i>app.js</i>, _before_ you import your routes:
-
-```js
-require('express-async-errors') // highlight-line
-const express = require('express')
-const mongoose = require('mongoose')
-const config = require('./utils/config')
-const logger = require('./utils/logger')
-const middleware = require('./utils/middleware')
-const notesRouter = require('./controllers/notes')
-
-// ...
-```
-
-The 'magic' of the library allows us to eliminate the try-catch blocks completely.
-For example the route for deleting a note
-
-```js
-notesRouter.delete('/:id', async (request, response, next) => {
-  try {
-    await Note.findByIdAndDelete(request.params.id)
-    response.status(204).end()
-  } catch (exception) {
-    next(exception)
-  }
-})
-```
-
-becomes
-
-```js
-notesRouter.delete('/:id', async (request, response) => {
-  await Note.findByIdAndDelete(request.params.id)
-  response.status(204).end()
-})
-```
-
-Because of the library, we do not need the _next(exception)_ call anymore.
-The library handles everything under the hood. If an exception occurs in an <i>async</i> route, the execution is automatically passed to the error-handling middleware.
-
-The other routes become:
+The tests pass and we can safely refactor the tested route to use async/await:
 
 ```js
 notesRouter.get('/:id', async (request, response) => {
@@ -869,19 +777,42 @@ notesRouter.get('/:id', async (request, response) => {
     response.status(404).end()
   }
 })
+```
 
-notesRouter.post('/', async (request, response) => {
-  const body = request.body
+### Refactoring the route responsible for deleting a note
 
-  const note = new Note({
-    content: body.content,
-    important: body.important || false,
-  })
+Let's also add a test for the route that handles deleting a note:
 
-  const savedNote = await note.save()
-  response.status(201).json(savedNote)
+```js
+test('a note can be deleted', async () => {
+  const notesAtStart = await helper.notesInDb()
+  const noteToDelete = notesAtStart[0]
+
+  await api
+    .delete(`/api/notes/${noteToDelete.id}`)
+    .expect(204)
+
+  const notesAtEnd = await helper.notesInDb()
+
+  const contents = notesAtEnd.map(n => n.content)
+  assert(!contents.includes(noteToDelete.content))
+
+  assert.strictEqual(notesAtEnd.length, helper.initialNotes.length - 1)
 })
 ```
+
+The test is structured similarly to the one that checks viewing a single note. First, a single note is fetched from the database, then its deletion via the API is tested. Finally, it is verified that the note no longer exists in the database and that the total number of notes has decreased by one.
+
+The tests still pass, so we can safely proceed with refactoring the route:
+
+```js
+notesRouter.delete('/:id', async (request, response) => {
+  await Note.findByIdAndDelete(request.params.id)
+  response.status(204).end()
+})
+```
+
+You can find the code for our current application in its entirety in the <i>part4-4</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-4).
 
 ### Optimizing the beforeEach function
 
