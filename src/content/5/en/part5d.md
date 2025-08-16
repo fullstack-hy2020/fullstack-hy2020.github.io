@@ -84,6 +84,8 @@ or remove the entry for any problematic browsers from your _playwright.config.js
     //  name: 'webkit',
     //  use: { ...devices['Desktop Safari'] },
     //},
+    // ...
+  ]
 ```
 
 Let's define an npm script for running tests and test reports in _package.json_:
@@ -538,7 +540,7 @@ describe('Note app', () => {
       await page.getByRole('button', { name: 'save' }).click()
       await expect(page.getByText('a note created by playwright')).toBeVisible()
     })
-  })  
+  })
 })
 ```
 
@@ -693,7 +695,7 @@ describe('Note app', () => {
   })
 
   // ...
-)}
+})
 ```
 
 The test verifies with the method [page.getByText](https://playwright.dev/docs/api/class-page#page-get-by-text) that the application prints an error message.
@@ -718,11 +720,11 @@ We could refine the test to ensure that the error message is printed exactly in 
 
 ```js
   test('login fails with wrong password', async ({ page }) => {
-  // ...
+    // ...
 
-  const errorDiv = page.locator('.error') // highlight-line
-  await expect(errorDiv).toContainText('wrong credentials')
-})
+    const errorDiv = page.locator('.error') // highlight-line
+    await expect(errorDiv).toContainText('wrong credentials')
+  })
 ```
 
 So the test uses the [page.locator](https://playwright.dev/docs/api/class-page#page-locator) method to find the component containing the CSS class <i>error</i> and stores it in a variable. The correctness of the text associated with the component can be verified with the expectation [toContainText](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-contain-text). Note that the [CSS class selector](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors) starts with a dot, so the <i>error</i> class selector is <i> .error</i>.
@@ -731,13 +733,13 @@ It is possible to test the application's CSS styles with matcher [toHaveCSS](htt
 
 ```js
   test('login fails with wrong password', async ({ page }) => {
-  // ...
+    // ...
 
     const errorDiv = page.locator('.error')
     await expect(errorDiv).toContainText('wrong credentials')
     await expect(errorDiv).toHaveCSS('border-style', 'solid') // highlight-line
     await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)') // highlight-line
-})
+  })
 ```
 
 Colors must be defined to Playwright as [rgb](https://rgbcolorcode.com/color/red) codes.
@@ -774,7 +776,7 @@ describe(() => {
   // this test is skipped...
   test('user can login with correct credentials', async ({ page }) => {
     // ...
-  }
+  })
 
   // ...
 })
@@ -860,11 +862,12 @@ describe('Note app', () => {
       await loginWith(page, 'mluukkai', 'salainen') // highlight-line
     })
 
-  test('a new note can be created', () => {
+    test('a new note can be created', () => {
+      // ...
+    })
+
     // ...
   })
-
-  // ...
 })
 ```
 
@@ -977,7 +980,7 @@ module.exports = defineConfig({
     baseURL: 'http://localhost:5173',
   },
   // ...
-}
+})
 ```
 
 All the commands in the tests that use the application url, e.g.
@@ -1133,7 +1136,7 @@ By default, debug steps through the test command by command. If it is a complex 
 describe('Note app', () => {
   beforeEach(async ({ page, request }) => {
     // ...
-  }
+  })
 
   describe('when logged in', () => {
     beforeEach(async ({ page }) => {

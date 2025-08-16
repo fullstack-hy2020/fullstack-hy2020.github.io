@@ -190,7 +190,8 @@ module.exports = {
       a: '完成前端的登录功能',
       b: 'props.children 与 proptypes',
       c: '测试React 应用',
-      d: '端到端测试',
+      d: '端到端测试：Playwright',
+      e: '端到端测试：Cypress',
     },
     6: {
       a: 'Flux架构与Redux',
