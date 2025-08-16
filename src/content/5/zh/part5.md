@@ -14,6 +14,6 @@ lang: zh
 - <i>Brought alongside Cypress as an alternative for Playwright End to end testing</i> -->
 <i>2024年3月3日部分更新</i>
 - <i>Jest被Vitests取代</i>
-- <i>与Cypress一起，作为Playwright端到端测试的替代方案</i>
+- <i>将Cypress与Playwright并列，作为一个端到端测试的替代方案</i>
 
 </div>
