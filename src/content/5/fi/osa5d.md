@@ -102,10 +102,11 @@ Testit voidaan myös suorittaa graafisen UI:n kautta komennolla
 npm run test -- --ui
 ```
 
-Esimerkkitestit näyttävät seuraavanlaisilta:
+Esimerkkitestit tiedostossa _tests/example.spec.js_ näyttävät seuraavanlaisilta:
 
 ```js
-const { test, expect } = require('@playwright/test');
+// @ts-check
+import { test, expect } from '@playwright/test';
 
 test('has title', async ({ page }) => {
   await page.goto('https://playwright.dev/'); // highlight-line

@@ -139,10 +139,11 @@ Tests can also be run via the graphical UI with the command:
 npm run test -- --ui
 ```
 
-Sample tests look like this:
+Sample tests in the file tests/example.spec.js look like this:
 
 ```js
-const { test, expect } = require('@playwright/test');
+// @ts-check
+import { test, expect } from '@playwright/test';
 
 test('has title', async ({ page }) => {
   await page.goto('https://playwright.dev/'); // highlight-line
