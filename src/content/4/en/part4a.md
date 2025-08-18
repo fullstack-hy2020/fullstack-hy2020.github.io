@@ -563,7 +563,7 @@ Individual test cases are defined with the _test_ function. The first argument o
 }
 ```
 
-First, we execute the code to be tested, meaning that we generate a reverse for the string <i>react</i>. Next, we verify the results with the the method [strictEqual](https://nodejs.org/docs/latest/api/assert.html#assertstrictequalactual-expected-message) of the [assert](https://nodejs.org/docs/latest/api/assert.html) library.
+First, we execute the code to be tested, meaning that we generate a reverse for the string <i>react</i>. Next, we verify the results with the method [strictEqual](https://nodejs.org/docs/latest/api/assert.html#assertstrictequalactual-expected-message) of the [assert](https://nodejs.org/docs/latest/api/assert.html) library.
 
 As expected, all of the tests pass:
 
