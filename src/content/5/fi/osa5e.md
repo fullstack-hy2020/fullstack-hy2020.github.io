@@ -144,41 +144,6 @@ havaitsee Cypress ongelman
 
 Poistetaan virheeseen johtanut testi koodista.
 
-Testeissä käytetty muuttuja _cy_ aiheuttaa ikävän ESlint-virheen
-
-![VS code paljastaa ESlint-virheen 'cy' is not defined](../../images/5/58new.png)
-
-Siitä päästään eroon asentamalla [eslint-plugin-cypress](https://github.com/cypress-io/eslint-plugin-cypress) kehitysaikaiseksi riippuvuudeksi
-
-```js
-npm install eslint-plugin-cypress --save-dev
-```
-
-ja laajentamalla tiedostossa <i>.eslintrc.cjs</i> olevaa konfiguraatiota seuraavasti: 
-
-```js
-module.exports = {
-  "env": {
-    browser: true,
-    es2020: true,
-    "jest/globals": true,
-    "cypress/globals": true // highlight-line
-  },
-  "extends": [ 
-    // ...
-  ],
-  "parserOptions": {
-    // ...
-  },
-  "plugins": [
-      "react", "jest", "cypress" // highlight-line
-  ],
-  "rules": {
-    // ...
-  }
-}
-```
-
 ### Lomakkeelle kirjoittaminen
 
 Laajennetaan testejä siten, että testi yrittää kirjautua sovellukseen. Oletetaan että backendin tietokantaan on tallennettu käyttäjä, jonka käyttäjätunnus on <i>mluukkai</i> ja salasana <i>salainen</i>. 

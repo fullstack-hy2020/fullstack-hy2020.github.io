@@ -149,41 +149,6 @@ the test fails
 
 Let's remove the failing code from the test.
 
-The variable _cy_ our tests use gives us a nasty Eslint error
-
-![vscode screenshot showing cy is not defined](../../images/5/58new.png)
-
-We can get rid of it by installing [eslint-plugin-cypress](https://github.com/cypress-io/eslint-plugin-cypress) as a development dependency
-
-```js
-npm install eslint-plugin-cypress --save-dev
-```
-
-and changing the configuration in <i>.eslintrc.cjs</i> like so:
-
-```js
-module.exports = {
-  "env": {
-    browser: true,
-    es2020: true,
-    "jest/globals": true,
-    "cypress/globals": true // highlight-line
-  },
-  "extends": [ 
-    // ...
-  ],
-  "parserOptions": {
-    // ...
-  },
-  "plugins": [
-      "react", "jest", "cypress" // highlight-line
-  ],
-  "rules": {
-    // ...
-  }
-}
-```
-
 ### Writing to a form
 
 Let's extend our tests so that our new test tries to log in to our application.
