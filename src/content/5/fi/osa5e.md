@@ -41,15 +41,12 @@ Tehdään <i>backendille</i> npm-skripti, jonka avulla se saadaan käynnistetty�
 {
   // ...
   "scripts": {
-    "start": "NODE_ENV=production node index.js",
-    "dev": "NODE_ENV=development nodemon index.js",
-    "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
-    "deploy": "fly deploy",
-    "deploy:full": "npm run build:ui && npm run deploy",
-    "logs:prod": "fly logs",
+    "start": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=development node --watch index.js",
+    "test": "cross-env NODE_ENV=test node --test",
     "lint": "eslint .",
-    "test": "jest --verbose --runInBand",
-    "start:test": "NODE_ENV=test node index.js" // highlight-line
+    // ...
+    "start:test": "cross-env NODE_ENV=test node --watch index.js" // highlight-line
   },
   // ...
 }
@@ -79,14 +76,14 @@ Voisimme tehdä testejä Cypressin kautta, mutta käytetään kuitenkin VS Codea
 
 Suljetaan Cypressin testin editointinäkymä.
 
-Muutetaan testin sisätö seuraavanlaiseksi
+Muutetaan testin sisältö seuraavanlaiseksi
 
 ```js
-describe('Note ', function() {
+describe('Note app', function() {
   it('front page can be opened', function() {
     cy.visit('http://localhost:5173')
     cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
+    cy.contains('Note app, Department of Computer Science, University of Helsinki 2025')
   })
 })
 ```
@@ -99,7 +96,7 @@ Testin suoritus näyttää, miten sovellus käyttäytyy testin edetessä:
 
 ![Selain renderöi näkymän, jossa vasemmalla testit ja niiden askeleet ja oikealla testin alla oleva sovellus.](../../images/5/56new.png)
 
-Testi näyttää rakenteeltaan melko tutulta. <i>describe</i>-lohkoja käytetään samaan tapaan kuin Jestissä ryhmittelemään yksittäisiä testitapauksia, jotka on määritelty <i>it</i>-metodin avulla. Nämä osat Cypress on lainannut sisäisesti käyttämältään [Mocha](https://mochajs.org/)-testikirjastolta.  
+Testi näyttää rakenteeltaan melko tutulta. <i>describe</i>-lohkoja käytetään samaan tapaan kuin Vitestissä ryhmittelemään yksittäisiä testitapauksia, jotka on määritelty <i>it</i>-metodin avulla. Nämä osat Cypress on lainannut sisäisesti käyttämältään [Mocha](https://mochajs.org/)-testikirjastolta.  
 
 [cy.visit](https://docs.cypress.io/api/commands/visit.html) ja [cy.contains](https://docs.cypress.io/api/commands/contains.html) taas ovat Cypressin komentoja, joiden merkitys on aika ilmeinen. [cy.visit](https://docs.cypress.io/api/commands/visit.html) avaa testin käyttämään selaimeen parametrina määritellyn osoitteen ja [cy.contains](https://docs.cypress.io/api/commands/contains.html) etsii sivun sisältä parametrina annetun tekstin. 
 
@@ -110,7 +107,7 @@ describe('Note app', () => { // highlight-line
   it('front page can be opened', () => { // highlight-line
     cy.visit('http://localhost:5173')
     cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
+    cy.contains('Note app, Department of Computer Science, University of Helsinki 2025')
   })
 })
 ```
@@ -126,7 +123,7 @@ describe('Note app', function() {
   it('front page can be opened',  function() {
     cy.visit('http://localhost:5173')
     cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
+    cy.contains('Note app, Department of Computer Science, University of Helsinki 2025')
   })
 
 // highlight-start
@@ -156,7 +153,7 @@ describe('Note app',  function() {
 
   it('login form can be opened', function() {
     cy.visit('http://localhost:5173')
-    cy.contains('log in').click()
+    cy.contains('login').click()
   })
 })
 ```
@@ -175,11 +172,11 @@ describe('Note app', function() {
 
   it('front page can be opened', function() {
     cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
+    cy.contains('Note app, Department of Computer Science, University of Helsinki 2025')
   })
 
   it('login form can be opened', function() {
-    cy.contains('log in').click()
+    cy.contains('login').click()
   })
 })
 ```
@@ -192,7 +189,7 @@ Voimme hakea lomakkeen ensimmäisen ja viimeisen input-kentän ja kirjoittaa nii
 
 ```js
 it('user can login', function () {
-  cy.contains('log in').click()
+  cy.contains('login').click()
   cy.get('input:first').type('mluukkai')
   cy.get('input:last').type('salainen')
 })  
@@ -241,8 +238,8 @@ Testi muuttuu muotoon
 ```js
 describe('Note app',  function() {
   // ..
-  it('user can log in', function() {
-    cy.contains('log in').click()
+  it('user can login', function() {
+    cy.contains('login').click()
     cy.get('#username').type('mluukkai')  // highlight-line    
     cy.get('#password').type('salainen')  // highlight-line
     cy.get('#login-button').click()  // highlight-line
@@ -268,7 +265,7 @@ describe('Note app', function() {
   // highlight-start
   describe('when logged in', function() {
     beforeEach(function() {
-      cy.contains('log in').click()
+      cy.contains('login').click()
       cy.get('#username').type('mluukkai')
       cy.get('#password').type('salainen')
       cy.get('#login-button').click()
@@ -308,8 +305,8 @@ Testien rakenne näyttää seuraavalta:
 describe('Note app', function() {
   // ...
 
-  it('user can log in', function() {
-    cy.contains('log in').click()
+  it('user can login', function() {
+    cy.contains('login').click()
     cy.get('#username').type('mluukkai')
     cy.get('#password').type('salainen')
     cy.get('#login-button').click()
@@ -319,7 +316,7 @@ describe('Note app', function() {
 
   describe('when logged in', function() {
     beforeEach(function() {
-      cy.contains('log in').click()
+      cy.contains('login').click()
       cy.get('#username').type('mluukkai')
       cy.get('#password').type('salainen')
       cy.get('#login-button').click()
@@ -332,7 +329,7 @@ describe('Note app', function() {
 })
 ```
 
-Cypress suorittaa testit siinä järjestyksessä, missä ne ovat testikoodissa. Eli ensin suoritetaan testi <i>user can log in</i>, missä käyttäjä kirjautuu sovellukseen, ja tämän jälkeen suoritetaan testi <i>a new note can be created</i>, jonka <i>beforeEach</i>-lohkossa myös suoritetaan kirjautuminen. Miksi näin tehdään, eikö käyttäjä jo ole kirjaantuneena aiemman testin ansiosta? Ei, sillä <i>jokaisen</i> testin suoritus alkaa selaimen kannalta "nollatilanteesta", kaikki edellisten testien selaimen tilaan tekemät muutokset nollaantuvat.
+Cypress suorittaa testit siinä järjestyksessä, missä ne ovat testikoodissa. Eli ensin suoritetaan testi <i>user can login</i>, missä käyttäjä kirjautuu sovellukseen, ja tämän jälkeen suoritetaan testi <i>a new note can be created</i>, jonka <i>beforeEach</i>-lohkossa myös suoritetaan kirjautuminen. Miksi näin tehdään, eikö käyttäjä jo ole kirjaantuneena aiemman testin ansiosta? Ei, sillä <i>jokaisen</i> testin suoritus alkaa selaimen kannalta "nollatilanteesta", kaikki edellisten testien selaimen tilaan tekemät muutokset nollaantuvat.
 
 ### Tietokannan tilan kontrollointi
 
@@ -485,7 +482,7 @@ describe('Note app', function() {
   // ...
 
   it.only('login fails with wrong password', function() {
-    cy.contains('log in').click()
+    cy.contains('login').click()
     cy.get('#username').type('mluukkai')
     cy.get('#password').type('wrong')
     cy.get('#login-button').click()
@@ -572,7 +569,7 @@ Viimeistellään testi vielä siten, että se varmistaa myös, että sovellus ei
 
 ```js
 it('login fails with wrong password', function() {
-  cy.contains('log in').click()
+  cy.contains('login').click()
   cy.get('#username').type('mluukkai')
   cy.get('#password').type('wrong')
   cy.get('#login-button').click()
@@ -601,7 +598,7 @@ Sovelluksemme testit näyttävät tällä hetkellä seuraavalta:
 ```js 
 describe('Note app', function() {
   it('user can login', function() {
-    cy.contains('log in').click()
+    cy.contains('login').click()
     cy.get('#username').type('mluukkai')
     cy.get('#password').type('salainen')
     cy.get('#login-button').click()
@@ -615,7 +612,7 @@ describe('Note app', function() {
 
   describe('when logged in', function() {
     beforeEach(function() {
-      cy.contains('log in').click()
+      cy.contains('login').click()
       cy.get('#username').type('mluukkai')
       cy.get('#password').type('salainen')
       cy.get('#login-button').click()
@@ -823,7 +820,7 @@ module.exports = defineConfig({
 Korvataan testeistä kaikki backendin osoitteet seuraavaan tapaan
 
 ```js
-describe('Note ', function() {
+describe('Note app', function() {
   beforeEach(function() {
     cy.visit('')
     cy.request('POST', `${Cypress.env('BACKEND')}/testing/reset`) // highlight-line
@@ -945,7 +942,7 @@ Vielä osan lopuksi muutamia huomioita Cypressin toimintaperiaatteesta sekä tes
 Cypressissä testien kirjoitusasu antaa vaikutelman, että testit ovat normaalia JavaScript-koodia, ja että voisimme esim. yrittää seuraavaa:
 
 ```js
-const button = cy.contains('log in')
+const button = cy.contains('login')
 button.click()
 debugger
 cy.contains('logout').click()
@@ -1064,7 +1061,7 @@ describe('Blog app', function() {
 
   describe('When logged in', function() {
     beforeEach(function() {
-      // log in user here
+      // login user here
     })
 
     it('A blog can be created', function() {

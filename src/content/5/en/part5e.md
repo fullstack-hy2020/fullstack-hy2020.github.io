@@ -47,15 +47,12 @@ Let's add an npm script to <i>the backend</i> which starts it in test mode, or s
 {
   // ...
   "scripts": {
-    "start": "NODE_ENV=production node index.js",
-    "dev": "NODE_ENV=development nodemon index.js",
-    "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
-    "deploy": "fly deploy",
-    "deploy:full": "npm run build:ui && npm run deploy",
-    "logs:prod": "fly logs",
+    "start": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=development node --watch index.js",
+    "test": "cross-env NODE_ENV=test node --test",
     "lint": "eslint .",
-    "test": "jest --verbose --runInBand",
-    "start:test": "NODE_ENV=test node index.js" // highlight-line
+    // ...
+    "start:test": "cross-env NODE_ENV=test node --watch index.js" // highlight-line
   },
   // ...
 }
@@ -94,7 +91,7 @@ describe('Note app', function() {
   it('front page can be opened', function() {
     cy.visit('http://localhost:5173')
     cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
+    cy.contains('Note app, Department of Computer Science, University of Helsinki 2025')
   })
 })
 ```
@@ -105,7 +102,7 @@ Running the test shows how the application behaves as the test is run:
 
 ![cypress showing automation of note test](../../images/5/56new.png)
 
-The structure of the test should look familiar. They use <i>describe</i> blocks to group different test cases, just like Jest. The test cases have been defined with the <i>it</i> method. Cypress borrowed these parts from the [Mocha](https://mochajs.org/) testing library that it uses under the hood.
+The structure of the test should look familiar. They use <i>describe</i> blocks to group different test cases, just like Vitest. The test cases have been defined with the <i>it</i> method. Cypress borrowed these parts from the [Mocha](https://mochajs.org/) testing library that it uses under the hood.
 
 [cy.visit](https://docs.cypress.io/api/commands/visit.html) and [cy.contains](https://docs.cypress.io/api/commands/contains.html) are Cypress commands, and their purpose is quite obvious.
 [cy.visit](https://docs.cypress.io/api/commands/visit.html) opens the web address given to it as a parameter in the browser used by the test. [cy.contains](https://docs.cypress.io/api/commands/contains.html) searches for the string it received as a parameter in the page.
@@ -117,7 +114,7 @@ describe('Note app', () => { // highlight-line
   it('front page can be opened', () => { // highlight-line
     cy.visit('http://localhost:5173')
     cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
+    cy.contains('Note app, Department of Computer Science, University of Helsinki 2025')
   })
 })
 ```
@@ -131,7 +128,7 @@ describe('Note app', function() {
   it('front page can be opened',  function() {
     cy.visit('http://localhost:5173')
     cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
+    cy.contains('Note app, Department of Computer Science, University of Helsinki 2025')
   })
 
 // highlight-start
@@ -151,7 +148,7 @@ Let's remove the failing code from the test.
 
 ### Writing to a form
 
-Let's extend our tests so that our new test tries to log in to our application.
+Let's extend our tests so that our new test tries to login to our application.
 We assume our backend contains a user with the username <i>mluukkai</i> and password <i>salainen</i>.
 
 The test begins by opening the login form.
@@ -162,7 +159,7 @@ describe('Note app',  function() {
 
   it('login form can be opened', function() {
     cy.visit('http://localhost:5173')
-    cy.contains('log in').click()
+    cy.contains('login').click()
   })
 })
 ```
@@ -181,11 +178,11 @@ describe('Note app', function() {
 
   it('front page can be opened', function() {
     cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
+    cy.contains('Note app, Department of Computer Science, University of Helsinki 2025')
   })
 
   it('login form can be opened', function() {
-    cy.contains('log in').click()
+    cy.contains('login').click()
   })
 })
 ```
@@ -198,7 +195,7 @@ We can access the first and the last input field on the page, and write to them 
 
 ```js
 it('user can login', function () {
-  cy.contains('log in').click()
+  cy.contains('login').click()
   cy.get('input:first').type('mluukkai')
   cy.get('input:last').type('salainen')
 })  
@@ -248,8 +245,8 @@ The test becomes:
 ```js
 describe('Note app',  function() {
   // ..
-  it('user can log in', function() {
-    cy.contains('log in').click()
+  it('user can login', function() {
+    cy.contains('login').click()
     cy.get('#username').type('mluukkai')  // highlight-line    
     cy.get('#password').type('salainen')  // highlight-line
     cy.get('#login-button').click()  // highlight-line
@@ -275,7 +272,7 @@ describe('Note app', function() {
   // highlight-start
   describe('when logged in', function() {
     beforeEach(function() {
-      cy.contains('log in').click()
+      cy.contains('login').click()
       cy.get('input:first').type('mluukkai')
       cy.get('input:last').type('salainen')
       cy.get('#login-button').click()
@@ -316,8 +313,8 @@ The structure of the tests looks like so:
 describe('Note app', function() {
   // ...
 
-  it('user can log in', function() {
-    cy.contains('log in').click()
+  it('user can login', function() {
+    cy.contains('login').click()
     cy.get('#username').type('mluukkai')
     cy.get('#password').type('salainen')
     cy.get('#login-button').click()
@@ -327,7 +324,7 @@ describe('Note app', function() {
 
   describe('when logged in', function() {
     beforeEach(function() {
-      cy.contains('log in').click()
+      cy.contains('login').click()
       cy.get('input:first').type('mluukkai')
       cy.get('input:last').type('salainen')
       cy.get('#login-button').click()
@@ -340,7 +337,7 @@ describe('Note app', function() {
 })
 ```
 
-Cypress runs the tests in the order they are in the code. So first it runs <i>user can log in</i>, where the user logs in. Then cypress will run <i>a new note can be created</i> for which a <i>beforeEach</i> block logs in as well.
+Cypress runs the tests in the order they are in the code. So first it runs <i>user can login</i>, where the user logs in. Then cypress will run <i>a new note can be created</i> for which a <i>beforeEach</i> block logs in as well.
 Why do this? Isn't the user logged in after the first test?
 No, because <i>each</i> test starts from zero as far as the browser is concerned.
 All changes to the browser's state are reversed after each test.
@@ -506,7 +503,7 @@ describe('Note app', function() {
   // ...
 
   it.only('login fails with wrong password', function() {
-    cy.contains('log in').click()
+    cy.contains('login').click()
     cy.get('#username').type('mluukkai')
     cy.get('#password').type('wrong')
     cy.get('#login-button').click()
@@ -594,7 +591,7 @@ Let's finish the test so that it also checks that the application does not rende
 
 ```js
 it('login fails with wrong password', function() {
-  cy.contains('log in').click()
+  cy.contains('login').click()
   cy.get('#username').type('mluukkai')
   cy.get('#password').type('wrong')
   cy.get('#login-button').click()
@@ -631,7 +628,7 @@ Currently, we have the following tests:
 ```js
 describe('Note app', function() {
   it('user can login', function() {
-    cy.contains('log in').click()
+    cy.contains('login').click()
     cy.get('#username').type('mluukkai')
     cy.get('#password').type('salainen')
     cy.get('#login-button').click()
@@ -645,7 +642,7 @@ describe('Note app', function() {
 
   describe('when logged in', function() {
     beforeEach(function() {
-      cy.contains('log in').click()
+      cy.contains('login').click()
       cy.get('input:first').type('mluukkai')
       cy.get('input:last').type('salainen')
       cy.get('#login-button').click()
@@ -664,7 +661,7 @@ First, we test logging in. Then, in their own describe block, we have a bunch of
 As we said above, each test starts from zero! Tests do not start from the state where the previous tests ended.
 
 The Cypress documentation gives us the following advice: [Fully test the login flow – but only once](https://docs.cypress.io/guides/end-to-end-testing/testing-your-app#Fully-test-the-login-flow----but-only-once).
-So instead of logging in a user using the form in the <i>beforeEach</i> block, we are going to bypass the UI and do a HTTP request to the backend to log in. The reason for this is that logging in with a HTTP request is much faster than filling out a form.
+So instead of logging in a user using the form in the <i>beforeEach</i> block, we are going to bypass the UI and do a HTTP request to the backend to login. The reason for this is that logging in with a HTTP request is much faster than filling out a form.
 
 Our situation is a bit more complicated than in the example in the Cypress documentation because when a user logs in, our application saves their details to the localStorage.
 However, Cypress can handle that as well.
@@ -857,7 +854,7 @@ module.exports = defineConfig({
 Let's replace all the backend addresses from the tests in the following way
 
 ```js
-describe('Note ', function() {
+describe('Note app', function() {
   beforeEach(function() {
 
     cy.request('POST', `${Cypress.env('BACKEND')}/testing/reset`) // highlight-line
@@ -983,7 +980,7 @@ Finally, some notes on how Cypress works and debugging your tests.
 Because of the form of the Cypress tests, it gives the impression that they are normal JavaScript code, and we could for example try this:
 
 ```js
-const button = cy.contains('log in')
+const button = cy.contains('login')
 button.click()
 debugger
 cy.contains('logout').click()
