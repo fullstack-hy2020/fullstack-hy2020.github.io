@@ -748,7 +748,7 @@ If there are many top bloggers, then it is enough to return any one of them.
 
 #### 4.7*: Helper Functions and Unit Tests, step 5
 
-Define a function called _mostLikes_ that receives an array of blogs as its parameter. The function returns the author, whose blog posts have the largest amount of likes. The return value also contains the total number of likes that the author has received:
+Define a function called _mostLikes_ that receives an array of blogs as its parameter. The function returns the author whose blog posts have the largest amount of likes. The return value also contains the total number of likes that the author has received:
 
 ```js
 {
