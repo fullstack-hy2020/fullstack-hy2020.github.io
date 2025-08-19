@@ -984,14 +984,14 @@ All the commands in the tests that use the application url, e.g.
 
 ```js
 await page.goto('http://localhost:5173')
-await page.post('http://localhost:5173/api/tests/reset')
+await page.post('http://localhost:5173/api/testing/reset')
 ```
 
 can be transformed into:
 
 ```js
 await page.goto('/')
-await page.post('/api/tests/reset')
+await page.post('/api/testing/reset')
 ```
 
 The current code for the tests is on [GitHub](https://github.com/fullstack-hy2020/notes-e2e/tree/part5-2), branch <i>part5-2</i>.
