@@ -867,9 +867,12 @@ const createNote = async (page, content) => {
 export { loginWith, createNote } // highlight-line
 ```
 
-Testi yksinkertaistuu seuraavasti:
+Testit yksinkertaistuvat seuraavasti:
 
 ```js
+const { test, describe, expect, beforeEach } = require('@playwright/test')
+const { createNote, loginWith } = require('./helper') // highlight-line
+
 describe('Note app', () => {
   // ...
 
@@ -879,13 +882,13 @@ describe('Note app', () => {
     })
 
     test('a new note can be created', async ({ page }) => {
-      await createNote(page, 'a note created by playwright')
+      await createNote(page, 'a note created by playwright') // highlight-line
       await expect(page.getByText('a note created by playwright')).toBeVisible()
     })
 
     describe('and a note exists', () => {
       beforeEach(async ({ page }) => {
-        await createNote(page, 'another note by playwright')
+        await createNote(page, 'another note by playwright') // highlight-line
       })
   
       test('importance can be changed', async ({ page }) => {
@@ -953,7 +956,7 @@ Muutetaan testin alustuslohkoa siten, että se luo yhden sijaan kaksi muistiinpa
 ```js
 describe('when logged in', () => {
   // ...
-  describe('and several notes exists', () => {
+  describe('and several notes exists', () => { // highlight-line
     beforeEach(async ({ page }) => {
       // highlight-start
       await createNote(page, 'first note', true)
@@ -1009,10 +1012,10 @@ Eräs tapa korjata ongelma on seuraavassa:
 ```js
 test('one of those can be made nonimportant', async ({ page }) => {
   const otherNoteText = page.getByText('first note') // highlight-line
-  const otherdNoteElement = await otherNoteText.locator('..') // highlight-line
+  const otherNoteElement = otherNoteText.locator('..') // highlight-line
 
-  await otherdNoteElement.getByRole('button', { name: 'make not important' }).click()
-  await expect(otherdNoteElement.getByText('make important')).toBeVisible()
+  await otherNoteElement.getByRole('button', { name: 'make not important' }).click()
+  await expect(otherNoteElement.getByText('make important')).toBeVisible()
 })
 ```
 
@@ -1041,19 +1044,19 @@ describe('when logged in', () => {
     await expect(page.getByText('a note created by playwright')).toBeVisible()
   })
 
-  describe('and a note exists', () => {
+  describe('and several notes exists', () => {
     beforeEach(async ({ page }) => {
       await createNote(page, 'first note', true)
       await createNote(page, 'second note', true)
       await createNote(page, 'third note', true) // highlight-line
     })
 
-    test('importance can be changed', async ({ page }) => {
+    test('one of those can be made nonimportant', async ({ page }) => {
       const otherNoteText = page.getByText('second note') // highlight-line
-      const otherdNoteElement = await otherNoteText.locator('..')
+      const otherNoteElement = otherNoteText.locator('..')
     
-      await otherdNoteElement.getByRole('button', { name: 'make not important' }).click()
-      await expect(otherdNoteElement.getByText('make important')).toBeVisible()
+      await otherNoteElement.getByRole('button', { name: 'make not important' }).click()
+      await expect(otherNoteElement.getByText('make important')).toBeVisible()
     })
   })
 }) 
@@ -1068,7 +1071,7 @@ Jos/kun testit eivät mene läpi ja herää epäilys, että vika on koodin sijaa
 Seuraava komento suorittaa ongelmallisen testin debug-moodissa:
 
 ```
-npm test -- -g'importance can be changed' --debug
+npm test -- -g'one of those can be made nonimportant' --debug
 ```
 
 Playwright-inspector näyttää testien etenemisen askel askeleelta. Yläreunan nuoli-piste-painike vie testejä yhden askeleen eteenpäin. Lokaattorien löytämät elementit sekä selaimen kanssa käyty interaktio visualisoituvat selaimeen:
@@ -1098,10 +1101,10 @@ describe('Note app', () => {
       test('one of those can be made unimportant', async ({ page }) => {
         await page.pause() // highlight-line
         const otherNoteText = page.getByText('second note')
-        const otherdNoteElement = await otherNoteText.locator('..')
+        const otherNoteElement = otherNoteText.locator('..')
       
-        await otherdNoteElement.getByRole('button', { name: 'make not important' }).click()
-        await expect(otherdNoteElement.getByText('make important')).toBeVisible()
+        await otherNoteElement.getByRole('button', { name: 'make not important' }).click()
+        await expect(otherNoteElement.getByText('make important')).toBeVisible()
       })
     })
   })

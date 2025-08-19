@@ -912,6 +912,9 @@ export { loginWith, createNote } // highlight-line
 The tests are simplified as follows:
 
 ```js
+const { test, describe, expect, beforeEach } = require('@playwright/test')
+const { createNote, loginWith } = require('./helper') // highlight-line
+
 describe('Note app', () => {
   // ...
 
@@ -995,7 +998,7 @@ Let's change the initialization block of the test so that it creates two notes i
 ```js
 describe('when logged in', () => {
   // ...
-  describe('and several notes exists', () => {
+  describe('and several notes exists', () => { // highlight-line
     beforeEach(async ({ page }) => {
       // highlight-start
       await createNote(page, 'first note')
@@ -1051,7 +1054,7 @@ One way to fix the problem is as follows:
 ```js
 test('one of those can be made nonimportant', async ({ page }) => {
   const otherNoteText = page.getByText('first note') // highlight-line
-  const otherNoteElement = await otherNoteText.locator('..') // highlight-line
+  const otherNoteElement = otherNoteText.locator('..') // highlight-line
 
   await otherNoteElement.getByRole('button', { name: 'make not important' }).click()
   await expect(otherNoteElement.getByText('make important')).toBeVisible()
@@ -1083,16 +1086,16 @@ describe('when logged in', () => {
     await expect(page.getByText('a note created by playwright')).toBeVisible()
   })
 
-  describe('and a note exists', () => {
+  describe('and several notes exists', () => {
     beforeEach(async ({ page }) => {
       await createNote(page, 'first note')
       await createNote(page, 'second note')
       await createNote(page, 'third note') // highlight-line
     })
 
-    test('importance can be changed', async ({ page }) => {
+    test('one of those can be made nonimportant', async ({ page }) => {
       const otherNoteText = page.getByText('second note') // highlight-line
-      const otherNoteElement = await otherNoteText.locator('..')
+      const otherNoteElement = otherNoteText.locator('..')
     
       await otherNoteElement.getByRole('button', { name: 'make not important' }).click()
       await expect(otherNoteElement.getByText('make important')).toBeVisible()
@@ -1110,7 +1113,7 @@ If, and when the tests don't pass and you suspect that the fault is in the tests
 The following command runs the problematic test in debug mode:
 
 ```
-npm test -- -g'importance can be changed' --debug
+npm test -- -g'one of those can be made nonimportant' --debug
 ```
 
 Playwright-inspector shows the progress of the tests step by step. The arrow-dot button at the top takes the tests one step further. The elements found by the locators and the interaction with the browser are visualized in the browser:
@@ -1140,7 +1143,7 @@ describe('Note app', () => {
       test('one of those can be made nonimportant', async ({ page }) => {
         await page.pause() // highlight-line
         const otherNoteText = page.getByText('second note')
-        const otherNoteElement = await otherNoteText.locator('..')
+        const otherNoteElement = otherNoteText.locator('..')
       
         await otherNoteElement.getByRole('button', { name: 'make not important' }).click()
         await expect(otherNoteElement.getByText('make important')).toBeVisible()
