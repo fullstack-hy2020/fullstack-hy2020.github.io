@@ -729,7 +729,7 @@ export default App
 <!-- The component structure of the application can be, for example, the following:-->
 例如，应用的组件结构可以是这样的。
 
-<pre>
+```
 App
   Course
     Header
@@ -737,7 +737,7 @@ App
       Part
       Part
       ...
-</pre>
+```
 
 <!-- Hence, the <i>Course</i> component contains the components defined in the previous part, which are responsible for rendering the course name and its parts.-->
  因此，<i>Course</i>组件包含前一部分定义的组件，负责渲染课程名称及其部分。

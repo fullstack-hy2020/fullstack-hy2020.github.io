@@ -280,7 +280,7 @@ O mecanismo de chamada de gerenciadores de eventos é muito comum em JavaScript.
 
 Podemos pensar em páginas HTML como estruturas implícitas de uma árvore.
 
-<pre>
+```
 html
   head
     link
@@ -296,7 +296,7 @@ html
       form
         input
         input
-</pre>
+```
 
 A mesma estrutura de árvore pode ser vista na guia <i>Elementos</i> do console.
 

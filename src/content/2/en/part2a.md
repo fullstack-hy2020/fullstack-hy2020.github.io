@@ -620,7 +620,7 @@ Define a component responsible for formatting a single course called <i>Course</
 
 The component structure of the application can be, for example, the following:
 
-<pre>
+```
 App
   Course
     Header
@@ -628,7 +628,7 @@ App
       Part
       Part
       ...
-</pre>
+```
 
 Hence, the <i>Course</i> component contains the components defined in the previous part, which are responsible for rendering the course name and its parts.
 

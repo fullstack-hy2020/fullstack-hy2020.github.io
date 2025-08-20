@@ -17,14 +17,14 @@ Olemme toteuttaneet sovelluksia jakamalla koodin moduuleihin, joita on <i>import
 
 Selainta varten moduuleissa oleva koodi <i>bundlataan</i>, eli siitä muodostetaan yksittäinen, kaiken koodin sisältävä tiedosto. Kun veimme Reactilla toteutetun frontendin tuotantoon osan 3 luvussa [Frontendin tuotantoversio](/osa3/sovellus_internetiin#frontendin-tuotantoversio), suoritimme bundlauksen komennolla _npm run build_. Konepellin alla kyseinen npm-skripti suorittaa bundlauksen, ja tuloksena on joukko hakemistoon <i>dist</i> sijoitettavia tiedostoja:
 
-<pre>
+```
 ├── assets
 │   ├── index-d526a0c5.css
 │   ├── index-e92ae01e.js
 │   └── react-35ef61ed.svg
 ├── index.html
 └── vite.svg
-</pre>
+```
 
 Hakemiston dist juuressa oleva sovelluksen "päätiedosto" <i>index.html</i> lataa <i>script</i>-tagin avulla bundlatun JavaScript-tiedoston:
 
@@ -58,13 +58,13 @@ Tehdään nyt React-projektille sopiva webpack-konfiguraatio kokonaan käsin.
 
 Luodaan projektia varten hakemisto ja sen sisälle hakemistot (<i>build</i> ja <i>src</i>) sekä seuraavat tiedostot:
 
-<pre>
+```
 ├── build
 ├── package.json
 ├── src
 │   └── index.js
 └── webpack.config.js
-</pre>
+```
 
 Tiedoston <i>package.json</i> sisältö voi olla esim. seuraava:
 
@@ -584,10 +584,10 @@ Sovellus ei enää toimi, ja konsoli kertoo virheestä:
 
 Tiedämme tietenkin nyt, että virhe on metodissa onClick, mutta jos olisi kyse suuremmasta sovelluksesta, on virheilmoitus sikäli hyvin ikävä, että sen ilmoittama paikka
 
-<pre>
+```
 App.js:27 Uncaught TypeError: Cannot read property 'concat' of undefined
     at handleClick (App.js:27)
-</pre>
+```
 
 ei vastaa alkuperäisen koodin virheen sijaintia. Jos klikkaamme virheilmoitusta, huomaamme, että näytettävä koodi on jotain ihan muuta kuin kirjoittamamme koodi:
 

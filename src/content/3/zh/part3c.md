@@ -397,12 +397,12 @@ node mongo.js yourpassword
 <!-- Then the program should display all of the entries in the phonebook: -->
 那么程序应该显示电话簿中的所有条目：
 
-<pre>
+```
 phonebook:
 Anna 040-1234556
 Arto Vihavainen 045-1232456
 Ada Lovelace 040-1231236
-</pre>
+```
 
 <!-- You can get the command-line parameters from the [process.argv](https://nodejs.org/docs/latest-v18.x/api/process.html#process_process_argv) variable. -->
 你可以从[process.argv](https://nodejs.org/docs/latest-v18.x/api/process.html#process_process_argv)变量获取命令行参数。
@@ -829,7 +829,7 @@ app.get('/api/notes/:id', (request, response) => {
 <!-- If we make the following request, we will get the error message shown below: -->
 如果我们发出以下请求，我们将得到下面的错误消息：
 
-<pre>
+```
 Method: GET
 Path:   /api/notes/someInvalidId
 Body:   {}
@@ -838,7 +838,7 @@ Body:   {}
     at CastError (/Users/mluukkai/opetus/_fullstack/osa3-muisiinpanot/node_modules/mongoose/lib/error/cast.js:27:11)
     at ObjectId.cast (/Users/mluukkai/opetus/_fullstack/osa3-muisiinpanot/node_modules/mongoose/lib/schema/objectid.js:158:13)
     ...
-</pre>
+```
 
 <!-- Given a malformed id as an argument, the <em>findById</em> method will throw an error causing the returned promise to be rejected. This will cause the callback function defined in the <em>catch</em> block to be called. -->
 给出一个格式错误的id作为参数，<em>findById</em>方法将抛出错误，导致返回的promise被拒绝。这将导致在<em>catch</em>块中定义的回调函数被调用。

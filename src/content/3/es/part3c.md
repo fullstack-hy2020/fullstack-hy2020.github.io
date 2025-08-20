@@ -323,12 +323,12 @@ node mongo.js yourpassword
 
 Entonces el programa debería mostrar todas las entradas en la agenda:
 
-<pre>
+```
 phonebook:
 Anna 040-1234556
 Arto Vihavainen 045-1232456
 Ada Lovelace 040-1231236
-</pre>
+```
 
 Puedes obtener los parámetros de la línea de comandos de la variable [process.argv](https://nodejs.org/docs/latest-v18.x/api/process.html#process_process_argv).
 
@@ -695,7 +695,7 @@ Además de la nota que no existe, hay una situación de error más que debe mane
 
 Si realizamos la siguiente solicitud, obtendremos el mensaje de error que se muestra a continuación:
 
-<pre>
+```
 Method: GET
 Path:   /api/notes/someInvalidId
 Body:   {}
@@ -704,7 +704,7 @@ Body:   {}
     at CastError (/Users/mluukkai/opetus/_fullstack/osa3-muisiinpanot/node_modules/mongoose/lib/error/cast.js:27:11)
     at ObjectId.cast (/Users/mluukkai/opetus/_fullstack/osa3-muisiinpanot/node_modules/mongoose/lib/schema/objectid.js:158:13)
     ...
-</pre>
+```
 
 Dado un ID mal formado como argumento, el método <em>findById</em> arrojará un error que provocará el rechazo de la promesa retornada. Esto hará que se llame a la función callback definida en el bloque <em>catch</em>.
 

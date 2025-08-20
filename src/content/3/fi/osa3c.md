@@ -302,12 +302,12 @@ node mongo.js yourpassword
 
 tulostaa ohjelma tietokannassa olevat numerotiedot:
 
-<pre>
+```
 phonebook:
 Anna 040-1234556
 Arto Vihavainen 045-1232456
 Ada Lovelace 040-1231236
-</pre>
+```
 
 Saat selville ohjelman komentoriviparametrit muuttujasta [process.argv](https://nodejs.org/docs/latest-v8.x/api/process.html#process_process_argv).
 
@@ -685,7 +685,7 @@ Olemattoman muistiinpanon lisäksi koodista löytyy myös toinen virhetilanne, j
 
 Jos teemme näin, tulostuu konsoliin:
 
-<pre>
+```
 Method: GET
 Path:   /api/notes/5a3b7c3c31d61cb9f8a0343
 Body:   {}
@@ -694,7 +694,7 @@ Body:   {}
     at CastError (/Users/mluukkai/opetus/_fullstack/osa3-muisiinpanot/node_modules/mongoose/lib/error/cast.js:27:11)
     at ObjectId.cast (/Users/mluukkai/opetus/_fullstack/osa3-muisiinpanot/node_modules/mongoose/lib/schema/objectid.js:158:13)
     ...
-</pre>
+```
 
 Kun <em>findById</em>-metodi saa argumentikseen väärässä muodossa olevan id:n, se heittää virheen. Tästä seuraa se, että metodin palauttama promise päätyy rejected-tilaan, jonka seurauksena <em>catch</em>-lohkossa määriteltyä funktiota kutsutaan. 
 

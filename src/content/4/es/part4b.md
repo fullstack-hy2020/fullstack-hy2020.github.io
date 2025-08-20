@@ -931,13 +931,13 @@ Guardamos las notas almacenadas dentro del array en la base de datos dentro de u
 
 La consola muestra el siguiente resultado:
 
-<pre>
+```
 cleared
 done
 entered test
 saved
 saved
-</pre>
+```
 
 A pesar de nuestra uso de la sintaxis async/await, nuestra solución no funciona como esperábamos. ¡La ejecución de la prueba comienza antes de que se inicialice la base de datos!
 

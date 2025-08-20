@@ -280,7 +280,7 @@ El mecanismo de invocación de controladores de eventos es muy común en JavaScr
 
 Podemos pensar en las páginas HTML como estructuras de árbol implícitas.
 
-<pre>
+```
 html
   head
     link
@@ -296,7 +296,7 @@ html
       form
         input
         input
-</pre>
+```
 
 La misma estructura arbórea se puede ver en la pestaña de la consola <i>Elements (Elementos)</i>.
 

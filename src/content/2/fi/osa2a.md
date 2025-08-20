@@ -612,7 +612,7 @@ Määrittele sovellukseen yksittäisen kurssin muotoilusta huolehtiva komponentt
 
 Sovelluksen komponenttirakenne voi olla esim. seuraava:
 
-<pre>
+```
 App
   Course
     Header
@@ -620,7 +620,7 @@ App
       Part
       Part
       ...
-</pre>
+```
 
 Eli komponentti <i>Course</i> sisältää edellisessä osassa määritellyt komponentit, joiden vastuulle tulee kurssin nimen ja osien renderöinti.
 

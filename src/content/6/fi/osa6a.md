@@ -125,11 +125,11 @@ console.log(store.getState())
 
 tulostaisi konsoliin
 
-<pre>
+```
 0
 3
 -1
-</pre>
+```
 
 sillä ensin storen tila on 0. Kolmen <i>INCREMENT</i>-actionin jälkeen tila on 3, ja lopulta actionien <i>ZERO</i> ja <i>DECREMENT</i> jälkeen -1.
 
@@ -163,13 +163,13 @@ store.dispatch({ type: 'DECREMENT' })
 
 tulostaisi
 
-<pre>
+```
 1
 2
 3
 0
 -1
-</pre>
+```
 
 
 Laskurisovelluksemme koodi on seuraavassa. Kaikki koodi on kirjoitettu samaan tiedostoon, joten <i>store</i> on suoraan React-koodin käytettävissä. Tutustumme React/Redux-koodin parempiin strukturointitapoihin myöhemmin.

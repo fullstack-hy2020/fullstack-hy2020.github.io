@@ -700,11 +700,11 @@ app.get('/api/notes/:id', (request, response) => {
 <!-- When we visit the URL again in the browser, each call to the comparison function prints a few different things to the console. The console output is the following:-->
  当我们在浏览器中再次访问这个 URL 时，每次调用比较函数都会向控制台打印一些不同的东西。控制台的输出如下。
 
-<pre>
+```
 1 'number' '1' 'string' false
 2 'number' '1' 'string' false
 3 'number' '1' 'string' false
-</pre>
+```
 
 
 <!-- The cause of the bug becomes clear. The _id_ variable contains a string '1', whereas the ids of notes are integers. In JavaScript, the "triple equals" comparison === considers all values of different types to not be equal by default, meaning that 1 is not '1'.-->

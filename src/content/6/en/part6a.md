@@ -135,11 +135,11 @@ console.log(store.getState())
 
 would print the following to the console
 
-<pre>
+```
 0
 3
 -1
-</pre>
+```
 
 because at first, the state of the store is 0. After three <i>INCREMENT</i> actions the state is 3. In the end, after the <i>ZERO</i> and <i>DECREMENT</i> actions, the state is -1.
 
@@ -173,13 +173,13 @@ store.dispatch({ type: 'DECREMENT' })
 
 would cause the following to be printed
 
-<pre>
+```
 1
 2
 3
 0
 -1
-</pre>
+```
 
 The code of our counter application is the following. All of the code has been written in the same file (_main.jsx_), so <i>store</i> is directly available for the React code. We will get to know better ways to structure React/Redux code later.
 

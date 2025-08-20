@@ -520,11 +520,11 @@ app.get('/api/notes/:id', (request, response) => {
 
 Quando visitamos a URL novamente no navegador, cada chamada à função de comparação imprime algumas coisas diferentes no console. A saída do console é a seguinte:
 
-<pre>
+```
 1 'number' '1' 'string' false
 2 'number' '1' 'string' false
 3 'number' '1' 'string' false
-</pre>
+```
 
 A causa do bug fica clara. A variável _id_ contém uma string '1', enquanto os ids das notas são números inteiros. Em JavaScript, o comparador de igualdade estrita <em>===</em> considera que todos os valores de tipos diferentes não são iguais por padrão, o que significa que 1 não é igual a '1'. 
 

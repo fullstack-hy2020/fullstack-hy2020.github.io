@@ -404,12 +404,12 @@ También hemos agregado algunas impresiones útiles, que aclaran la progresión 
 
 Esto se imprime en la consola
 
-<pre>
+```
 render 0 notes
 effect
 promise fulfilled
 render 3 notes
-</pre>
+```
 
 Primero se ejecuta el cuerpo de la función que define el componente y el componente se renderiza por primera vez. En este punto, se imprime <i>render 0 notes</i>, lo que significa que los datos aún no se han obtenido del servidor.
 
