@@ -159,12 +159,12 @@ describe('Note app',  function() {
 
   it('login form can be opened', function() {
     cy.visit('http://localhost:5173')
-    cy.contains('login').click()
+    cy.contains('button', 'login').click()
   })
 })
 ```
 
-The test first searches for the login button by its text and clicks the button with the command [cy.click](https://docs.cypress.io/api/commands/click.html#Syntax).
+The test first searches for a _button_ element with the desired text and clicks the button with the command [cy.click](https://docs.cypress.io/api/commands/click.html#Syntax).
 
 Both of our tests begin the same way, by opening the page <i><http://localhost:5173></i>, so we should extract the shared code into a <i>beforeEach</i> block run before each test:
 
@@ -182,7 +182,7 @@ describe('Note app', function() {
   })
 
   it('login form can be opened', function() {
-    cy.contains('login').click()
+    cy.contains('button', 'login').click()
   })
 })
 ```
@@ -195,7 +195,7 @@ We can access the first and the last input field on the page, and write to them 
 
 ```js
 it('user can login', function () {
-  cy.contains('login').click()
+  cy.contains('button', 'login').click()
   cy.get('input:first').type('mluukkai')
   cy.get('input:last').type('salainen')
 })  
@@ -203,8 +203,55 @@ it('user can login', function () {
 
 The test works. The problem is if we later add more input fields, the test will break because it expects the fields it needs to be the first and the last on the page.
 
-It would be better to give our inputs unique <i>IDs</i> and use those to find them.
-We change our login form like so:
+Let's take advantage of the existing elements of the login form. The input fields of the login form have been assigned unique <i>labels</i>:
+
+```js
+// ...
+<form onSubmit={handleSubmit}>
+  <div>
+    <label> // highlight-line
+      username // highlight-line
+      <input
+        type="text"
+        value={username}
+        onChange={handleUsernameChange}
+      />
+    </label> // highlight-line
+  </div>
+  <div>
+    <label> // highlight-line
+      password // highlight-line
+      <input
+        type="password"
+        value={password}
+        onChange={handlePasswordChange}
+      />
+    </label> // highlight-line
+  </div>
+  <button type="submit">login</button>
+</form>
+// ...
+```
+
+Input fields can and should be located in tests using <i>labels</i>:
+
+```js
+describe('Note app', function () {
+  // ...
+
+  it('user can login', function () {
+    cy.contains('button', 'login').click()
+    cy.contains('label', 'username').type('mluukkai') // highlight-line
+    cy.contains('label', 'password').type('salainen') // highlight-line
+  })
+})
+```
+
+When locating elements, it makes sense to aim to utilize the content visible to the user in the interface, as this best simulates how a user would actually find the desired input field while navigating the application.
+
+When the username and password have been entered into the form, the next step is to press the <i>login</i> button. However, this causes a bit of a headache, since there are actually two <i>login</i> buttons on the page. The <i>Togglable</i> component we are using also contains a button with the same name, which is hidden by giving it the visibility attribute style="display: none" when the login form is visible.
+
+To ensure that the test clicks the correct button, we assign a unique <i>id</i> attribute to the login form’s <i>login</i> button:
 
 ```js
 const LoginForm = ({ ... }) => {
@@ -212,23 +259,8 @@ const LoginForm = ({ ... }) => {
     <div>
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        <div>
-          username
-          <input
-            id='username'  // highlight-line
-            value={username}
-            onChange={handleUsernameChange}
-          />
-        </div>
-        <div>
-          password
-          <input
-            id='password' // highlight-line
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-        </div>
+        // 
+
         <button id="login-button" type="submit"> // highlight-line
           login
         </button>
@@ -238,18 +270,16 @@ const LoginForm = ({ ... }) => {
 }
 ```
 
-We also added an ID to our submit button so we can access it in our tests.
-
 The test becomes:
 
 ```js
 describe('Note app',  function() {
   // ..
-  it('user can login', function() {
-    cy.contains('login').click()
-    cy.get('#username').type('mluukkai')  // highlight-line    
-    cy.get('#password').type('salainen')  // highlight-line
-    cy.get('#login-button').click()  // highlight-line
+  it('user can login', function () {
+    cy.contains('button', 'login').click()
+    cy.contains('label', 'username').type('mluukkai')
+    cy.contains('label', 'password').type('salainen')
+    cy.get('#login-button').click() // highlight-line
 
     cy.contains('Matti Luukkainen logged in') // highlight-line
   })
@@ -258,7 +288,7 @@ describe('Note app',  function() {
 
 The last row ensures that the login was successful.
 
-Note that the CSS's [ID selector](https://developer.mozilla.org/en-US/docs/Web/CSS/ID_selectors) is #, so if we want to search for an element with the ID <i>username</i> the CSS selector is <i>#username</i>.
+Note that the CSS's [ID selector](https://developer.mozilla.org/en-US/docs/Web/CSS/ID_selectors) is #, so if we want to search for an element with the ID <i>login-button</i> the CSS selector is <i>#login-button</i>.
 
 Please note that passing the test at this stage requires that there is a user in the test database of the backend test environment, whose username is <i>mluukkai</i> and the password is <i>salainen</i>. Create a user if needed!
 
@@ -272,7 +302,7 @@ describe('Note app', function() {
   // highlight-start
   describe('when logged in', function() {
     beforeEach(function() {
-      cy.contains('login').click()
+      cy.contains('button', 'login').click()
       cy.get('input:first').type('mluukkai')
       cy.get('input:last').type('salainen')
       cy.get('#login-button').click()
@@ -314,7 +344,7 @@ describe('Note app', function() {
   // ...
 
   it('user can login', function() {
-    cy.contains('login').click()
+    cy.contains('button', 'login').click()
     cy.get('#username').type('mluukkai')
     cy.get('#password').type('salainen')
     cy.get('#login-button').click()
@@ -324,7 +354,7 @@ describe('Note app', function() {
 
   describe('when logged in', function() {
     beforeEach(function() {
-      cy.contains('login').click()
+      cy.contains('button', 'login').click()
       cy.get('input:first').type('mluukkai')
       cy.get('input:last').type('salainen')
       cy.get('#login-button').click()
@@ -503,7 +533,7 @@ describe('Note app', function() {
   // ...
 
   it.only('login fails with wrong password', function() {
-    cy.contains('login').click()
+    cy.contains('button', 'login').click()
     cy.get('#username').type('mluukkai')
     cy.get('#password').type('wrong')
     cy.get('#login-button').click()
@@ -591,7 +621,7 @@ Let's finish the test so that it also checks that the application does not rende
 
 ```js
 it('login fails with wrong password', function() {
-  cy.contains('login').click()
+  cy.contains('button', 'login').click()
   cy.get('#username').type('mluukkai')
   cy.get('#password').type('wrong')
   cy.get('#login-button').click()
@@ -628,7 +658,7 @@ Currently, we have the following tests:
 ```js
 describe('Note app', function() {
   it('user can login', function() {
-    cy.contains('login').click()
+    cy.contains('button', 'login').click()
     cy.get('#username').type('mluukkai')
     cy.get('#password').type('salainen')
     cy.get('#login-button').click()
@@ -642,7 +672,7 @@ describe('Note app', function() {
 
   describe('when logged in', function() {
     beforeEach(function() {
-      cy.contains('login').click()
+      cy.contains('button', 'login').click()
       cy.get('input:first').type('mluukkai')
       cy.get('input:last').type('salainen')
       cy.get('#login-button').click()
@@ -980,7 +1010,7 @@ Finally, some notes on how Cypress works and debugging your tests.
 Because of the form of the Cypress tests, it gives the impression that they are normal JavaScript code, and we could for example try this:
 
 ```js
-const button = cy.contains('login')
+const button = cy.contains('button', 'login')
 button.click()
 debugger
 cy.contains('logout').click()

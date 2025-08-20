@@ -153,12 +153,12 @@ describe('Note app',  function() {
 
   it('login form can be opened', function() {
     cy.visit('http://localhost:5173')
-    cy.contains('login').click()
+    cy.contains('button', 'login').click()
   })
 })
 ```
 
-Testi hakee ensin napin sen tekstin perusteella ja klikkaa nappia komennolla [cy.click](https://docs.cypress.io/api/commands/click.html#Syntax).
+Testi etsii ensin _button_-tyyppisen elementin, jossa on haluttu teksti, ja klikkaa nappia komennolla [cy.click](https://docs.cypress.io/api/commands/click.html#Syntax).
 
 Koska molemmat testit aloittavat samalla tavalla, eli avaamalla sivun <i>http://localhost:5173</i>, kannattaa yhteinen osa eristää ennen jokaista testiä suoritettavaan <i>beforeEach</i>-lohkoon:
 
@@ -176,7 +176,7 @@ describe('Note app', function() {
   })
 
   it('login form can be opened', function() {
-    cy.contains('login').click()
+    cy.contains('button', 'login').click()
   })
 })
 ```
@@ -189,7 +189,7 @@ Voimme hakea lomakkeen ensimmäisen ja viimeisen input-kentän ja kirjoittaa nii
 
 ```js
 it('user can login', function () {
-  cy.contains('login').click()
+  cy.contains('button', 'login').click()
   cy.get('input:first').type('mluukkai')
   cy.get('input:last').type('salainen')
 })  
@@ -197,7 +197,55 @@ it('user can login', function () {
 
 Testi toimii, mutta on kuitenkin sikäli ongelmallinen, että jos sovellukseen tulee jossain vaiheessa lisää input-kenttiä, testi saattaa hajota, sillä se luottaa tarvitsemiensa kenttien olevan sivulla ensimmäisenä ja viimeisenä.
 
-Parempi ratkaisu on määritellä kentille yksilöivät <i>id</i>-attribuutit ja hakea kentät testeissä niiden perusteella. Eli laajennetaan kirjautumislomaketta seuraavasti
+Käytetään nyt hyödyksi kirjautumislomakkeen olemassa olevia elementtejä. Kirjautumislomakkeen syötekentille on määritelty yksilölliset <i>labelit</i>: 
+
+```js
+// ...
+<form onSubmit={handleSubmit}>
+  <div>
+    <label> // highlight-line
+      username // highlight-line
+      <input
+        type="text"
+        value={username}
+        onChange={handleUsernameChange}
+      />
+    </label> // highlight-line
+  </div>
+  <div>
+    <label> // highlight-line
+      password // highlight-line
+      <input
+        type="password"
+        value={password}
+        onChange={handlePasswordChange}
+      />
+    </label> // highlight-line
+  </div>
+  <button type="submit">login</button>
+</form>
+// ...
+```
+
+Syötekentät voi ja kannattaa etsiä testeissä <i>labelien</i> avulla::
+
+```js
+describe('Note app', function () {
+  // ...
+
+  it('user can login', function () {
+    cy.contains('button', 'login').click()
+    cy.contains('label', 'username').type('mluukkai') // highlight-line
+    cy.contains('label', 'password').type('salainen') // highlight-line
+  })
+})
+```
+
+Elementtien etsimisessä on järkevää pyrkiä hyödyntämään käyttöliittymän käyttäjälle näkyvää sisältöä, koska näin simuloidaan parhaiten sitä, miten käyttäjä oikeasti löytää halutun syötekentän navigoidessaan sovelluksessa.
+
+Kun käyttäjätunnus ja salasana on syötetty lomakkeelle, tulisi seuraavaksi painaa <i>login</i>-painiketta. Se aiheuttaa kuitenkin hieman päänvaivaa, sillä sivulla on nyt oikeastaan kaksi <i>login</i>-nimistä painiketta. Käyttämämme <i>Togglable</i>-komponentti nimittäin sisältää samannimisen painikkeen, joka on piilotettu antamalla sille näkyvyysmääre _style="display: none"_, kun kirjautumislomake on näkyvillä. 
+
+Jotta saamme testissä painettua varmasti oikeaa painiketta, määritellään kirjautumislomakkeen <i>login</i>-painikkeelle yksilöllinen <i>id</i>-attribuutti: 
 
 ```js
 const LoginForm = ({ ... }) => {
@@ -205,23 +253,8 @@ const LoginForm = ({ ... }) => {
     <div>
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        <div>
-          username
-          <input
-            id='username'  // highlight-line
-            value={username}
-            onChange={handleUsernameChange}
-          />
-        </div>
-        <div>
-          password
-          <input
-            id='password' // highlight-line
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-        </div>
+        // 
+
         <button id="login-button" type="submit"> // highlight-line
           login
         </button>
@@ -231,18 +264,16 @@ const LoginForm = ({ ... }) => {
 }
 ```
 
-Myös lomakkeen napille on lisätty id, jonka perusteella se voidaan hakea testissä.
-
 Testi muuttuu muotoon
 
 ```js
 describe('Note app',  function() {
   // ..
-  it('user can login', function() {
-    cy.contains('login').click()
-    cy.get('#username').type('mluukkai')  // highlight-line    
-    cy.get('#password').type('salainen')  // highlight-line
-    cy.get('#login-button').click()  // highlight-line
+  it('user can login', function () {
+    cy.contains('button', 'login').click()
+    cy.contains('label', 'username').type('mluukkai')
+    cy.contains('label', 'password').type('salainen')
+    cy.get('#login-button').click() // highlight-line
 
     cy.contains('Matti Luukkainen logged in') // highlight-line
   })
@@ -251,7 +282,7 @@ describe('Note app',  function() {
 
 Viimeinen rivi varmistaa, että kirjautuminen on onnistunut. 
 
-Huomaa, että CSS:n [id-selektori](https://developer.mozilla.org/en-US/docs/Web/CSS/ID_selectors) on risuaita, eli jos koodista etsitään elementtiä, jolla on id <i>username</i> on sitä vastaava CSS-selektori <i>#username</i>.
+Huomaa, että CSS:n [id-selektori](https://developer.mozilla.org/en-US/docs/Web/CSS/ID_selectors) on risuaita, eli jos koodista etsitään elementtiä, jolla on id <i>login-button</i> on sitä vastaava CSS-selektori <i>#login-button</i>.
 
 Huomaa, että testin läpimeno tässä vaiheessa edellyttää, että backendin ympäristön <i>test</i> tietokannassa on käyttäjä, jonka username on <i>mluukkai</i> ja salasana <i>salainen</i>. Luo käyttäjä tarvittaessa!
 
@@ -265,7 +296,7 @@ describe('Note app', function() {
   // highlight-start
   describe('when logged in', function() {
     beforeEach(function() {
-      cy.contains('login').click()
+      cy.contains('button', 'login').click()
       cy.get('#username').type('mluukkai')
       cy.get('#password').type('salainen')
       cy.get('#login-button').click()
@@ -306,7 +337,7 @@ describe('Note app', function() {
   // ...
 
   it('user can login', function() {
-    cy.contains('login').click()
+    cy.contains('button', 'login').click()
     cy.get('#username').type('mluukkai')
     cy.get('#password').type('salainen')
     cy.get('#login-button').click()
@@ -316,7 +347,7 @@ describe('Note app', function() {
 
   describe('when logged in', function() {
     beforeEach(function() {
-      cy.contains('login').click()
+      cy.contains('button', 'login').click()
       cy.get('#username').type('mluukkai')
       cy.get('#password').type('salainen')
       cy.get('#login-button').click()
@@ -482,7 +513,7 @@ describe('Note app', function() {
   // ...
 
   it.only('login fails with wrong password', function() {
-    cy.contains('login').click()
+    cy.contains('button', 'login').click()
     cy.get('#username').type('mluukkai')
     cy.get('#password').type('wrong')
     cy.get('#login-button').click()
@@ -569,7 +600,7 @@ Viimeistellään testi vielä siten, että se varmistaa myös, että sovellus ei
 
 ```js
 it('login fails with wrong password', function() {
-  cy.contains('login').click()
+  cy.contains('button', 'login').click()
   cy.get('#username').type('mluukkai')
   cy.get('#password').type('wrong')
   cy.get('#login-button').click()
@@ -598,7 +629,7 @@ Sovelluksemme testit näyttävät tällä hetkellä seuraavalta:
 ```js 
 describe('Note app', function() {
   it('user can login', function() {
-    cy.contains('login').click()
+    cy.contains('button', 'login').click()
     cy.get('#username').type('mluukkai')
     cy.get('#password').type('salainen')
     cy.get('#login-button').click()
@@ -612,7 +643,7 @@ describe('Note app', function() {
 
   describe('when logged in', function() {
     beforeEach(function() {
-      cy.contains('login').click()
+      cy.contains('button', 'login').click()
       cy.get('#username').type('mluukkai')
       cy.get('#password').type('salainen')
       cy.get('#login-button').click()
@@ -942,7 +973,7 @@ Vielä osan lopuksi muutamia huomioita Cypressin toimintaperiaatteesta sekä tes
 Cypressissä testien kirjoitusasu antaa vaikutelman, että testit ovat normaalia JavaScript-koodia, ja että voisimme esim. yrittää seuraavaa:
 
 ```js
-const button = cy.contains('login')
+const button = cy.contains('button', 'login')
 button.click()
 debugger
 cy.contains('logout').click()
