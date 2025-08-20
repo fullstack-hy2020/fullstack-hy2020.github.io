@@ -151,7 +151,7 @@ Aloitetaan kirjautumislomakkeen avaamisella.
 describe('Note app',  function() {
   // ...
 
-  it('login form can be opened', function() {
+  it('user can login', function() {
     cy.visit('http://localhost:5173')
     cy.contains('button', 'login').click()
   })
@@ -175,7 +175,7 @@ describe('Note app', function() {
     cy.contains('Note app, Department of Computer Science, University of Helsinki 2025')
   })
 
-  it('login form can be opened', function() {
+  it('user can login', function() {
     cy.contains('button', 'login').click()
   })
 })
@@ -467,7 +467,7 @@ const NoteForm = ({ createNote }) => {
 } 
 ```
 
-On useita eri tapoja testata asia. Seuraavassa etsitään ensin muistiinpano ja klikataan sen nappia <i>make important</i>. Tämän jälkeen tarkistetaan että muistiinpano sisältää napin <i>make not important</i>.
+On useita eri tapoja testata asia. Seuraavassa etsitään ensin muistiinpano ja klikataan sen nappia <i>make not important</i>. Tämän jälkeen tarkistetaan että muistiinpano sisältää napin <i>make important</i>.
 
 ```js
 describe('Note app', function() {
@@ -483,20 +483,22 @@ describe('Note app', function() {
         cy.contains('save').click()
       })
 
-      it('it can be made important', function () {
+      it('it can be made not important', function () {
         cy.contains('another note cypress')
-          .contains('make not important')
+          .parent()
+          .contains('button', 'make not important')
           .click()
 
         cy.contains('another note cypress')
-          .contains('make important')
+          .parent()
+          .contains('button', 'make important')
       })
     })
   })
 })
 ```
 
-Ensimmäinen komento etsii ensin komponentin, missä on teksti <i>another note cypress</i> ja sen sisältä painikkeen <i>make not important</i> ja klikkaa sitä. 
+Ensimmäinen komento tekee monta eri asiaa. Ensin etsitään elementti, missä on teksti <i>another note cypress</i>. Sen jälkeen metodilla _parent()_ haetaan elementin vanhempi, ja sen sisältä etsitään painike <i>make not important</i> ja klikataan sitä. 
 
 Toinen komento varmistaa, että saman napin teksti on vaihtunut muotoon <i>make important</i>.
 
@@ -728,6 +730,10 @@ describe('Note app', function() {
   // ...
 
   describe('when logged in', function() {
+    beforeEach(function () {
+      cy.login({ username: 'mluukkai', password: 'salainen' })
+    })
+
     it('a new note can be created', function() {
       cy.contains('new note').click()
       cy.get('input').type('a note created by cypress')
@@ -738,9 +744,11 @@ describe('Note app', function() {
 
     describe('and a note exists', function () {
       beforeEach(function () {
+        // highlight-start
         cy.contains('new note').click()
         cy.get('input').type('another note cypress')
         cy.contains('save').click()
+        // highlight-end
       })
 
       it('it can be made important', function () {
@@ -777,9 +785,7 @@ describe('Note app', function() {
   // ...
 
   describe('when logged in', function() {
-    it('a new note can be created', function() {
-      // ...
-    })
+    // ...
 
     describe('and a note exists', function () {
       beforeEach(function () {
@@ -799,7 +805,23 @@ describe('Note app', function() {
 })
 ```
 
-Testeissämme on vielä eräs ikävä piirre. Sovelluksen osoite <i>http:localhost:5173</i> on kovakoodattuna moneen kohtaan.
+Testeissämme on vielä eräs ikävä piirre. Sovelluksen frontendin osoite <i>http://localhost:5173</i> sekä backendin osoite <i>http://localhost:3001</i> on kovakoodattuna testeihin. Näistä oikeastaan backendin osoite on turha, sillä frontendin Vite-konfiguraatioon on määritelty proxy, joka forwardoi kaikki osoitteeseen <i>http://localhost:5173/api</i> menevät frontendin tekemät pyynnöt backendiin:
+
+```js
+export default defineConfig({
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+      },
+    }
+  },
+  // ...
+})
+```
+
+Voimme siis korvata testeissä kaikki osoitteet _http://localhost:3001/api/..._ osoitteella _http://localhost:5173/api/..._
 
 Määritellään sovellukselle <i>baseUrl</i> Cypressin valmiiksi generoimaan [konfiguraatiotiedostoon](https://docs.cypress.io/guides/references/configuration) <i>cypress.config.js</i>:
 
@@ -815,55 +837,16 @@ module.exports = defineConfig({
 })
 ```
 
-Kaikki testeissä olevat sovelluksen osoitetta käyttävät komennot
+Kaikki testeissä ja <i>command.js</i>-tiedostossa olevat sovelluksen osoitetta käyttävät komennot
 
 ```js
 cy.visit('http://localhost:5173')
 ```
 
-voidaan muuttaa muotoon
+voidaan nyt muuttaa muotoon
 
 ```js
 cy.visit('')
-```
-
-Testeihin jää edelleen backendin kovakoodattu osoite <i>http://localhost:3001</i>. Muut testien käyttämät osoitteet Cypressin [dokumentaatio](https://docs.cypress.io/guides/guides/environment-variables) kehoittaa määrittelemään ympäristömuuttujina.
-
-Laajennetaan konfiguraatiotiedostoa <i>cypress.config.js</i> seuraavasti:
-
-```js
-const { defineConfig } = require("cypress")
-
-module.exports = defineConfig({
-  e2e: {
-    setupNodeEvents(on, config) {
-    },
-    baseUrl: 'http://localhost:5173',
-  },
-  // highlight-start
-  env: {
-    BACKEND: 'http://localhost:3001/api'
-  }
-  // highlight-end
-})
-```
-
-Korvataan testeistä kaikki backendin osoitteet seuraavaan tapaan
-
-```js
-describe('Note app', function() {
-  beforeEach(function() {
-    cy.visit('')
-    cy.request('POST', `${Cypress.env('BACKEND')}/testing/reset`) // highlight-line
-    const user = {
-      name: 'Matti Luukkainen',
-      username: 'mluukkai',
-      password: 'salainen'
-    }
-    cy.request('POST', `${Cypress.env('BACKEND')}/users`, user) // highlight-line
-  })
-  // ...
-})
 ```
 
 ### Muistiinpanon tärkeyden muutos

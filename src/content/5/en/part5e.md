@@ -157,7 +157,7 @@ The test begins by opening the login form.
 describe('Note app',  function() {
   // ...
 
-  it('login form can be opened', function() {
+  it('user can login', function() {
     cy.visit('http://localhost:5173')
     cy.contains('button', 'login').click()
   })
@@ -181,7 +181,7 @@ describe('Note app', function() {
     cy.contains('Note app, Department of Computer Science, University of Helsinki 2025')
   })
 
-  it('login form can be opened', function() {
+  it('user can login', function() {
     cy.contains('button', 'login').click()
   })
 })
@@ -503,18 +503,20 @@ describe('Note app', function() {
 
       it('it can be made not important', function () {
         cy.contains('another note cypress')
-          .contains('make not important')
+          .parent()
+          .contains('button', 'make not important')
           .click()
 
         cy.contains('another note cypress')
-          .contains('make important')
+          .parent()
+          .contains('button', 'make important')
       })
     })
   })
 })
 ```
 
-The first command searches for a component containing the text <i>another note cypress</i>, and then for a <i>make not important</i> button within it. It then clicks the button.
+The first command does several things. First, it searches for an element containing the text <i>another note cypress</i>. Then, using the _parent()_ method, it finds the parent element, and from within that, it searches for the <i>make not important</i> button and clicks it.
 
 The second command checks that the text on the button has changed to <i>make important</i>.
 
@@ -763,6 +765,10 @@ describe('Note app', function() {
   // ...
 
   describe('when logged in', function() {
+    beforeEach(function () {
+      cy.login({ username: 'mluukkai', password: 'salainen' })
+    })
+
     it('a new note can be created', function() {
       cy.contains('new note').click()
       cy.get('input').type('a note created by cypress')
@@ -773,9 +779,11 @@ describe('Note app', function() {
 
     describe('and a note exists', function () {
       beforeEach(function () {
+        // highlight-start
         cy.contains('new note').click()
         cy.get('input').type('another note cypress')
         cy.contains('save').click()
+        // highlight-end
       })
 
       it('it can be made important', function () {
@@ -812,9 +820,7 @@ describe('Note app', function() {
   // ...
 
   describe('when logged in', function() {
-    it('a new note can be created', function() {
-      // ...
-    })
+    // ...
 
     describe('and a note exists', function () {
       beforeEach(function () {
@@ -834,7 +840,23 @@ describe('Note app', function() {
 })
 ```
 
-There is one more annoying feature in our tests. The application address <i>http:localhost:5173</i> is hardcoded in many places.
+There is one more annoying feature in our tests. The frontend address <i>http://localhost:5173</i> and the backend address <i>http://localhost:3001</i> are hardcoded for tests. Of these, the address of the backend is actually useless, because a proxy has been defined in the Vite configuration of the frontend, which forwards all requests made by the frontend to the address <i>http:localhost:5173/api</i> to the backend:
+
+```js
+export default defineConfig({
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+      },
+    }
+  },
+  // ...
+})
+```
+
+So we can replace all the addresses in the tests from _http://localhost:3001/api/..._ to _http://localhost:5173/api/..._
 
 Let's define the <i>baseUrl</i> for the application in the Cypress pre-generated [configuration file](https://docs.cypress.io/guides/references/configuration) <i>cypress.config.js</i>:
 
@@ -850,54 +872,16 @@ module.exports = defineConfig({
 })
 ```
 
-All the commands in the tests use the address of the application
+All commands in the tests and in the <i>command.js</i> file that use the application's address
 
 ```js
-cy.visit('http://localhost:5173' )
+cy.visit('http://localhost:5173')
 ```
 
 can be transformed into
 
 ```js
 cy.visit('')
-```
-
-The backend's hardcoded address <i>http://localhost:3001</i> is still in the tests. Cypress [documentation](https://docs.cypress.io/guides/guides/environment-variables) recommends defining other addresses used by the tests as environment variables.
-
-Let's expand the configuration file <i>cypress.config.js</i> as follows:
-
-```js
-const { defineConfig } = require("cypress")
-
-module.exports = defineConfig({
-  e2e: {
-    setupNodeEvents(on, config) {
-    },
-    baseUrl: 'http://localhost:5173',
-    env: {
-      BACKEND: 'http://localhost:3001/api' // highlight-line
-    }
-  },
-})
-```
-
-Let's replace all the backend addresses from the tests in the following way
-
-```js
-describe('Note app', function() {
-  beforeEach(function() {
-
-    cy.request('POST', `${Cypress.env('BACKEND')}/testing/reset`) // highlight-line
-    const user = {
-      name: 'Matti Luukkainen',
-      username: 'mluukkai',
-      password: 'secret'
-    }
-    cy.request('POST', `${Cypress.env('BACKEND')}/users`, user) // highlight-line
-    cy.visit('')
-  })
-  // ...
-})
 ```
 
 ### Changing the importance of a note
