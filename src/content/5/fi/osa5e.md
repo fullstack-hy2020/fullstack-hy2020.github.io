@@ -297,8 +297,8 @@ describe('Note app', function() {
   describe('when logged in', function() {
     beforeEach(function() {
       cy.contains('button', 'login').click()
-      cy.get('#username').type('mluukkai')
-      cy.get('#password').type('salainen')
+      cy.contains('label', 'username').type('mluukkai')
+      cy.contains('label', 'password').type('salainen')
       cy.get('#login-button').click()
     })
     // highlight-end
@@ -328,7 +328,7 @@ Jos kenttiä olisi useampia, testi hajoaisi
 
 ![Aiheutuu virhe cy.type() cam only be called on a single element. Your subject contained 2 elements.](../../images/5/31x.png)
 
-Tämän takia olisi jälleen parempi lisätä lomakkeen kentälle <i>id</i> ja hakea kenttä testissä id:n perusteella.
+Tämän takia olisi jälleen parempi lisätä lomakkeen kentälle <i>id</i> ja hakea kenttä testissä id:n perusteella. Pitäydytään nyt kuitenkin yksinkertaisimmassa ratkaisussa.
 
 Testien rakenne näyttää seuraavalta:
 
@@ -338,8 +338,8 @@ describe('Note app', function() {
 
   it('user can login', function() {
     cy.contains('button', 'login').click()
-    cy.get('#username').type('mluukkai')
-    cy.get('#password').type('salainen')
+    cy.contains('label', 'username').type('mluukkai')
+    cy.contains('label', 'password').type('salainen')
     cy.get('#login-button').click()
 
     cy.contains('Matti Luukkainen logged in')
@@ -348,8 +348,8 @@ describe('Note app', function() {
   describe('when logged in', function() {
     beforeEach(function() {
       cy.contains('button', 'login').click()
-      cy.get('#username').type('mluukkai')
-      cy.get('#password').type('salainen')
+      cy.contains('label', 'username').type('mluukkai')
+      cy.contains('label', 'password').type('salainen')
       cy.get('#login-button').click()
     })
 
@@ -514,8 +514,8 @@ describe('Note app', function() {
 
   it.only('login fails with wrong password', function() {
     cy.contains('button', 'login').click()
-    cy.get('#username').type('mluukkai')
-    cy.get('#password').type('wrong')
+    cy.contains('label', 'username').type('mluukkai')
+    cy.contains('label', 'password').type('wrong')
     cy.get('#login-button').click()
 
     cy.contains('wrong credentials')
@@ -601,8 +601,8 @@ Viimeistellään testi vielä siten, että se varmistaa myös, että sovellus ei
 ```js
 it('login fails with wrong password', function() {
   cy.contains('button', 'login').click()
-  cy.get('#username').type('mluukkai')
-  cy.get('#password').type('wrong')
+  cy.contains('label', 'username').type('mluukkai')
+  cy.contains('label', 'password').type('wrong')
   cy.get('#login-button').click()
 
   cy.get('.error')
@@ -630,8 +630,8 @@ Sovelluksemme testit näyttävät tällä hetkellä seuraavalta:
 describe('Note app', function() {
   it('user can login', function() {
     cy.contains('button', 'login').click()
-    cy.get('#username').type('mluukkai')
-    cy.get('#password').type('salainen')
+    cy.contains('label', 'username').type('mluukkai')
+    cy.contains('label', 'password').type('salainen')
     cy.get('#login-button').click()
 
     cy.contains('Matti Luukkainen logged in')
@@ -644,8 +644,8 @@ describe('Note app', function() {
   describe('when logged in', function() {
     beforeEach(function() {
       cy.contains('button', 'login').click()
-      cy.get('#username').type('mluukkai')
-      cy.get('#password').type('salainen')
+      cy.contains('label', 'username').type('mluukkai')
+      cy.contains('label', 'password').type('salainen')
       cy.get('#login-button').click()
     })
 

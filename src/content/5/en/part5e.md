@@ -303,8 +303,8 @@ describe('Note app', function() {
   describe('when logged in', function() {
     beforeEach(function() {
       cy.contains('button', 'login').click()
-      cy.get('input:first').type('mluukkai')
-      cy.get('input:last').type('salainen')
+      cy.contains('label', 'username').type('mluukkai')
+      cy.contains('label', 'password').type('salainen')
       cy.get('#login-button').click()
     })
     // highlight-end
@@ -335,7 +335,7 @@ If the page contained more inputs, the test would break
 
 ![cypress error - cy.type can only be called on a single element](../../images/5/31x.png)
 
-Due to this problem, it would again be better to give the input an <i>ID</i> and search for the element by its ID.
+Due to this problem, it would again be better to give the input an <i>ID</i> and search for the element by its ID. Let's stick with the simplest solution for now.
 
 The structure of the tests looks like so:
 
@@ -345,8 +345,8 @@ describe('Note app', function() {
 
   it('user can login', function() {
     cy.contains('button', 'login').click()
-    cy.get('#username').type('mluukkai')
-    cy.get('#password').type('salainen')
+    cy.contains('label', 'username').type('mluukkai')
+    cy.contains('label', 'password').type('salainen')
     cy.get('#login-button').click()
 
     cy.contains('Matti Luukkainen logged in')
@@ -355,8 +355,8 @@ describe('Note app', function() {
   describe('when logged in', function() {
     beforeEach(function() {
       cy.contains('button', 'login').click()
-      cy.get('input:first').type('mluukkai')
-      cy.get('input:last').type('salainen')
+      cy.contains('label', 'username').type('mluukkai')
+      cy.contains('label', 'password').type('salainen')
       cy.get('#login-button').click()
     })
 
@@ -534,8 +534,8 @@ describe('Note app', function() {
 
   it.only('login fails with wrong password', function() {
     cy.contains('button', 'login').click()
-    cy.get('#username').type('mluukkai')
-    cy.get('#password').type('wrong')
+    cy.contains('label', 'username').type('mluukkai')
+    cy.contains('label', 'password').type('wrong')
     cy.get('#login-button').click()
 
     cy.contains('wrong credentials')
@@ -622,8 +622,8 @@ Let's finish the test so that it also checks that the application does not rende
 ```js
 it('login fails with wrong password', function() {
   cy.contains('button', 'login').click()
-  cy.get('#username').type('mluukkai')
-  cy.get('#password').type('wrong')
+  cy.contains('label', 'username').type('mluukkai')
+  cy.contains('label', 'password').type('wrong')
   cy.get('#login-button').click()
 
   cy.get('.error')
@@ -659,8 +659,8 @@ Currently, we have the following tests:
 describe('Note app', function() {
   it('user can login', function() {
     cy.contains('button', 'login').click()
-    cy.get('#username').type('mluukkai')
-    cy.get('#password').type('salainen')
+    cy.contains('label', 'username').type('mluukkai')
+    cy.contains('label', 'password').type('salainen')
     cy.get('#login-button').click()
 
     cy.contains('Matti Luukkainen logged in')
@@ -673,8 +673,8 @@ describe('Note app', function() {
   describe('when logged in', function() {
     beforeEach(function() {
       cy.contains('button', 'login').click()
-      cy.get('input:first').type('mluukkai')
-      cy.get('input:last').type('salainen')
+      cy.contains('label', 'username').type('mluukkai')
+      cy.contains('label', 'password').type('salainen')
       cy.get('#login-button').click()
     })
 
