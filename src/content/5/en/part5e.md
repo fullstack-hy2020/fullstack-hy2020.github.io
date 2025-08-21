@@ -503,12 +503,10 @@ describe('Note app', function() {
 
       it('it can be made not important', function () {
         cy.contains('another note cypress')
-          .parent()
           .contains('button', 'make not important')
           .click()
 
         cy.contains('another note cypress')
-          .parent()
           .contains('button', 'make important')
       })
     })
@@ -516,7 +514,7 @@ describe('Note app', function() {
 })
 ```
 
-The first command does several things. First, it searches for an element containing the text <i>another note cypress</i>. Then, using the _parent()_ method, it finds the parent element, and from within that, it searches for the <i>make not important</i> button and clicks it.
+The first command does several things. First, it searches for an element containing the text <i>another note cypress</i>. Then, within the found element, it searches for the <i>make not important</i> button and clicks it.
 
 The second command checks that the text on the button has changed to <i>make important</i>.
 
@@ -887,27 +885,34 @@ cy.visit('')
 ### Changing the importance of a note
 
 Lastly, let's take a look at the test we did for changing the importance of a note.
-First, we'll change the beforeEach block so that it creates three notes instead of one:
+First, we'll change the beforeEach block so that it creates three notes instead of one. The tests change as follows:
 
 ```js
-describe('when logged in', function() {
-  describe('and several notes exist', function () {
+describe('when logged in', function () {
+  beforeEach(function () {
+    cy.login({ username: 'mluukkai', password: 'salainen' })
+  })
+
+  it('a new note can be created', function () {
+    cy.contains('new note').click()
+    cy.get('input').type('a note created by cypress')
+    cy.contains('save').click()
+    cy.contains('a note created by cypress')
+  })
+  describe('and several notes exist', function () { // highlight-line
     beforeEach(function () {
-      // highlight-start
-      cy.login({ username: 'mluukkai', password: 'salainen' })
-      cy.createNote({ content: 'first note', important: false })
-      cy.createNote({ content: 'second note', important: false })
-      cy.createNote({ content: 'third note', important: false })
-      // highlight-end
+      cy.createNote({ content: 'first note', important: true }) // highlight-line
+      cy.createNote({ content: 'second note', important: true }) // highlight-line
+      cy.createNote({ content: 'third note', important: true }) // highlight-line
     })
 
-    it('one of those can be made important', function () {
-      cy.contains('second note')
-        .contains('make important')
+    it('one of those can be made non important', function () { // highlight-line
+      cy.contains('second note') // highlight-line
+        .contains('button', 'make not important')
         .click()
 
-      cy.contains('second note')
-        .contains('make not important')
+      cy.contains('second note') // highlight-line
+        .contains('button', 'make important')
     })
   })
 })
@@ -915,13 +920,13 @@ describe('when logged in', function() {
 
 How does the [cy.contains](https://docs.cypress.io/api/commands/contains.html) command actually work?
 
-When we click the _cy.contains('second note')_ command in Cypress [Test Runner](https://docs.cypress.io/guides/core-concepts/cypress-app#Test-Runner), we see that the command searches for the element containing the text <i>second note</i>:
+When we click the _-contains 'second note'_ command in Cypress [Test Runner](https://docs.cypress.io/guides/core-concepts/cypress-app#Test-Runner), we see that the command searches for the element containing the text <i>second note</i>:
 
-![cypress test runner clicking second note](../../images/5/34new.png)
+![cypress test runner clicking second note](../../images/5/34eb.png)
 
-By clicking the next line _.contains('make important')_ we see that the test uses the 'make important' button corresponding to the <i>second note</i>:
+By clicking the next line _-contains 'button, make not important'_ we see that the test uses the <i>make not important</i> button corresponding to the <i>second note</i>:
 
-![cypress test runner clicking make important](../../images/5/35new.png)
+![cypress test runner clicking make important](../../images/5/35a.png)
 
 When chained, the second <i>contains</i> command <i>continues</i> the search from within the component found by the first command.
 
@@ -929,12 +934,12 @@ If we had not chained the commands, and instead write:
 
 ```js
 cy.contains('second note')
-cy.contains('make important').click()
+cy.contains('button', 'make not important').click()
 ```
 
 the result would have been entirely different. The second line of the test would click the button of a wrong note:
 
-![cypress showing error and incorrectly trying to click first button](../../images/5/36new.png)
+![cypress showing error and incorrectly trying to click first button](../../images/5/36.png)
 
 When coding tests, you should check in the test runner that the tests use the right components!
 
@@ -956,15 +961,17 @@ const Note = ({ note, toggleImportance }) => {
 
 Our tests break! As the test runner reveals, _cy.contains('second note')_ now returns the component containing the text, and the button is not in it.
 
-![cypress showing test is broken trying to click make important](../../images/5/37new.png)
+![cypress showing test is broken trying to click make important](../../images/5/37.png)
 
 One way to fix this is the following:
 
 ```js
-it('one of those can be made important', function () {
+it('one of those can be made non important', function () {
   cy.contains('second note').parent().find('button').click()
-  cy.contains('second note').parent().find('button')
-    .should('contain', 'make not important')
+  cy.contains('second note')
+    .parent()
+    .find('button')
+    .should('contain', 'make important')
 })
 ```
 
@@ -978,14 +985,14 @@ Unfortunately, we have some copy-paste in the tests now, because the code for se
 In these kinds of situations, it is possible to use the [as](https://docs.cypress.io/api/commands/as.html) command:
 
 ```js
-it('one of those can be made important', function () {
+it('one of those can be made non important', function () {
   cy.contains('second note').parent().find('button').as('theButton')
   cy.get('@theButton').click()
-  cy.get('@theButton').should('contain', 'make not important')
+  cy.get('@theButton').should('contain', 'make important')
 })
 ```
 
-Now the first line finds the right button and uses <i>as</i> to save it as <i>theButton</i>. The following lines can use the named element with <i>cy.get('@theButton')</i>.
+Now the first line finds the right button and uses <i>as</i> to save it as <i>theButton</i>. The following lines can use the named element with _cy.get('@theButton')_.
 
 ### Running and debugging the tests
 
@@ -1022,7 +1029,7 @@ Stopping the test execution with the debugger is [possible](https://docs.cypress
 The developer console is all sorts of useful when debugging your tests.
 You can see the HTTP requests done by the tests on the Network tab, and the console tab will show you information about your tests:
 
-![developer console while running cypress](../../images/5/38new.png)
+![developer console while running cypress](../../images/5/38.png)
 
 So far we have run our Cypress tests using the graphical test runner. It is also possible to run them [from the command line](https://docs.cypress.io/guides/guides/command-line.html). We just have to add an npm script for it:
 
@@ -1035,9 +1042,9 @@ So far we have run our Cypress tests using the graphical test runner. It is also
 
 Now we can run our tests from the command line with the command <i>npm run test:e2e</i>
 
-![terminal output of running npm e2e tests showing passed](../../images/5/39new.png)
+![terminal output of running npm e2e tests showing passed](../../images/5/39.png)
 
-Note that videos of the test execution will be saved to <i>cypress/videos/</i>, so you should probably git ignore this directory. It is also possible to [turn off](https://docs.cypress.io/guides/guides/screenshots-and-videos#Videos) the making of videos.
+It is also possible to record a video of the test execution in Cypress. Recording a video can be especially useful, for example, when debugging or in a CI/CD pipeline, as the video allows you to easily review what happened in the browser before an error occurred. The feature is disabled by default; instructions for enabling it can be found in the Cypress [documentation](https://docs.cypress.io/guides/guides/screenshots-and-videos#Videos).
 
 Tests are found in [GitHub](https://github.com/fullstack-hy2020/notes-e2e-cypress/).
 

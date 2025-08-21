@@ -485,12 +485,10 @@ describe('Note app', function() {
 
       it('it can be made not important', function () {
         cy.contains('another note cypress')
-          .parent()
           .contains('button', 'make not important')
           .click()
 
         cy.contains('another note cypress')
-          .parent()
           .contains('button', 'make important')
       })
     })
@@ -498,7 +496,7 @@ describe('Note app', function() {
 })
 ```
 
-Ensimmäinen komento tekee monta eri asiaa. Ensin etsitään elementti, missä on teksti <i>another note cypress</i>. Sen jälkeen metodilla _parent()_ haetaan elementin vanhempi, ja sen sisältä etsitään painike <i>make not important</i> ja klikataan sitä. 
+Ensimmäinen komento tekee monta eri asiaa. Ensin etsitään elementti, missä on teksti <i>another note cypress</i>. Sitten löydetyn elementin sisältä etsitään painike <i>make not important</i> ja klikataan sitä. 
 
 Toinen komento varmistaa, että saman napin teksti on vaihtunut muotoon <i>make important</i>.
 
@@ -851,26 +849,34 @@ cy.visit('')
 
 ### Muistiinpanon tärkeyden muutos
 
-Tarkastellaan vielä aiemmin tekemäämme testiä, joka varmistaa että muistiinpanon tärkeyttä on mahdollista muuttaa. Muutetaan testin alustuslohkoa siten, että se luo yhden sijaan kolme muistiinpanoa:
+Tarkastellaan vielä aiemmin tekemäämme testiä, joka varmistaa että muistiinpanon tärkeyttä on mahdollista muuttaa. Muutetaan testin alustuslohkoa siten, että se luo yhden sijaan kolme muistiinpanoa. Testit muuttuvat seuraavasti:
 
 ```js
-describe('when logged in', function() {
-  describe('and several notes exist', function () {
+describe('when logged in', function () {
+  beforeEach(function () {
+    cy.login({ username: 'mluukkai', password: 'salainen' })
+  })
+
+  it('a new note can be created', function () {
+    cy.contains('new note').click()
+    cy.get('input').type('a note created by cypress')
+    cy.contains('save').click()
+    cy.contains('a note created by cypress')
+  })
+  describe('and several notes exist', function () { // highlight-line
     beforeEach(function () {
-      // highlight-start
-      cy.createNote({ content: 'first note', important: false })
-      cy.createNote({ content: 'second note', important: false })
-      cy.createNote({ content: 'third note', important: false })
-      // highlight-end
+      cy.createNote({ content: 'first note', important: true }) // highlight-line
+      cy.createNote({ content: 'second note', important: true }) // highlight-line
+      cy.createNote({ content: 'third note', important: true }) // highlight-line
     })
 
-    it('one of those can be made important', function () {
-      cy.contains('second note')
-        .contains('make important')
+    it('one of those can be made non important', function () { // highlight-line
+      cy.contains('second note') // highlight-line
+        .contains('button', 'make not important')
         .click()
 
-      cy.contains('second note')
-        .contains('make not important')
+      cy.contains('second note') // highlight-line
+        .contains('button', 'make important')
     })
   })
 })
@@ -878,14 +884,14 @@ describe('when logged in', function() {
 
 Miten komento [cy.contains](https://docs.cypress.io/api/commands/contains.html) tarkalleen ottaen toimii?
 
-Kun klikkaamme komentoa _cy.contains('second note')_ Cypressin [test runnerista](https://docs.cypress.io/guides/core-concepts/test-runner.html) nähdään, että komento löytää elementin, jonka sisällä on teksti <i>second note</i>:
+Kun klikkaamme komentoa _-contains 'second note'_, Cypressin [test runnerista](https://docs.cypress.io/guides/core-concepts/test-runner.html) nähdään, että komento löytää elementin, jonka sisällä on teksti <i>second note</i>:
 
-![Klikatessa vasemmalla olevasta testisteppien listasta komentoa, renderöityy oikealle sovelluksen sen hetkinen tila, missä löydetty elementti on merkattuna korostettuna.](../../images/5/34new.png)
+![Klikatessa vasemmalla olevasta testisteppien listasta komentoa, renderöityy oikealle sovelluksen sen hetkinen tila, missä löydetty elementti on merkattuna korostettuna.](../../images/5/34eb.png)
 
-Klikkaamalla seuraavaa riviä _.contains('make important')_, nähdään että löydetään nimenomaan 
+Klikkaamalla seuraavaa riviä _-contains 'button, make not important'_, nähdään että löydetään nimenomaan 
 <i>second note</i>:a vastaava tärkeyden muutoksen tekevä nappi:
 
-![Klikatessa vasemmalla olevasta testisteppien listasta komentoa, korostuu oikealle valintaa vastaava nappi](../../images/5/35new.png)
+![Klikatessa vasemmalla olevasta testisteppien listasta komentoa, korostuu oikealle valintaa vastaava nappi](../../images/5/35a.png)
 
 Peräkkäin ketjutettuna toisena oleva <i>contains</i>-komento siis <i>jatkaa</i> hakua ensimmäisen komennon löytämän komponentin sisältä.
 
@@ -893,12 +899,12 @@ Jos emme ketjuttaisi komentoja, eli olisimme kirjoittaneet
 
 ```js
 cy.contains('second note')
-cy.contains('make important').click()
+cy.contains('button', 'make not important').click()
 ```
 
 tulos olisi ollut aivan erilainen. Toinen rivi painaisi tässä tapauksessa väärän muistiinpanon nappia: 
 
-![Renderöityy virhe AssertionError: Timed out retrying after 4000ms: Expected to find content 'make not important'.](../../images/5/36new.png)
+![Renderöityy virhe AssertionError: Timed out retrying after 4000ms: Expected to find content 'make not important'.](../../images/5/36.png)
 
 Testejä tehdessä kannattaa siis ehdottomasti varmistaa test runnerista, että testit etsivät niitä elementtejä, joita niiden on tarkoitus tutkia!
 
@@ -920,19 +926,21 @@ const Note = ({ note, toggleImportance }) => {
 
 Testit hajoavat! Kuten test runner paljastaa, komento _cy.contains('second note')_ palauttaakin nyt ainoastaan tekstin sisältävän komponentin, ja nappi on sen ulkopuolella:
 
-![Oikealle puolelle havainnollistuu, että fokus osuu napin sijaan pelkkään tekstiin](../../images/5/37new.png)
+![Oikealle puolelle havainnollistuu, että fokus osuu napin sijaan pelkkään tekstiin](../../images/5/37.png)
 
 Eräs tapa korjata ongelma on seuraavassa:
 
 ```js
-it('other of those can be made important', function () {
+it('one of those can be made non important', function () {
   cy.contains('second note').parent().find('button').click()
-  cy.contains('second note').parent().find('button')
-    .should('contain', 'make not important')
+  cy.contains('second note')
+    .parent()
+    .find('button')
+    .should('contain', 'make important')
 })
 ```
 
-Ensimmäisellä rivillä etsitään komennon [parent](https://docs.cypress.io/api/commands/parent.htm) tekstin <i>second note</i> sisältävän elementin vanhemman alla oleva nappi ja painetaan sitä. Toinen rivi varmistaa, että napin teksti muuttuu.
+Ensimmäisellä rivillä etsitään komennon [parent](https://docs.cypress.io/api/commands/parent.htm) avulla tekstin <i>second note</i> sisältävän elementin vanhemman alla oleva nappi ja painetaan sitä. Toinen rivi varmistaa, että napin teksti muuttuu.
 
 Huomaa, että napin etsimiseen käytetään komentoa [find](https://docs.cypress.io/api/commands/find.html#Syntax). Komento [cy.get](https://docs.cypress.io/api/commands/get.html) ei sovellu tähän tilanteeseen, sillä se etsii elementtejä aina <i>koko</i> sivulta ja palauttaisi nyt kaikki sovelluksen viisi nappia.
 
@@ -940,14 +948,14 @@ Testissä on ikävästi copypastea, sillä rivien alku eli napin etsivä koodi o
 Tälläisissä tilanteissa on mahdollista hyödyntää komentoa [as](https://docs.cypress.io/api/commands/as.html): 
 
 ```js
-it('other of those can be made important', function () {
+it('one of those can be made non important', function () {
   cy.contains('second note').parent().find('button').as('theButton')
   cy.get('@theButton').click()
-  cy.get('@theButton').should('contain', 'make not important')
+  cy.get('@theButton').should('contain', 'make important')
 })
 ```
 
-Nyt ensimmäinen rivi etsii oikean napin, ja tallentaa sen komennon <i>as</i> avulla nimellä <i>theButton</i>. Seuraavat rivit pääsevät nimettyyn elementtiin käsiksi komennolla <i>cy.get('@theButton')</i>.
+Nyt ensimmäinen rivi etsii oikean napin, ja tallentaa sen komennon <i>as</i> avulla nimellä <i>theButton</i>. Seuraavat rivit pääsevät nimettyyn elementtiin käsiksi komennolla _cy.get('@theButton')_.
 
 ### Testien suoritus ja debuggaaminen
 
@@ -981,7 +989,7 @@ Myös testien suorituksen pysäyttäminen debuggeriin on [mahdollista](https://d
 
 Developer-konsoli on monin tavoin hyödyllinen testejä debugatessa. Network-tabilla näkyvät testattavan sovelluksen tekemät HTTP-pyynnöt, ja console-välilehti kertoo testin komentoihin liittyviä tietoja:
 
-![Console-välilehti havainnollistaa testien löytämiä elementtejä.](../../images/5/38new.png)
+![Console-välilehti havainnollistaa testien löytämiä elementtejä.](../../images/5/38.png)
 
 Olemme toistaiseksi suorittaneet Cypress-testejä ainoastaan graafisen test runnerin kautta. Testit on luonnollisesti mahdollista suorittaa myös [komentoriviltä](https://docs.cypress.io/guides/guides/command-line.html). Lisätään vielä projektiin npm-skripti tätä tarkoitusta varten
 
@@ -994,9 +1002,9 @@ Olemme toistaiseksi suorittaneet Cypress-testejä ainoastaan graafisen test runn
 
 Nyt siis voimme suorittaa Cypress-testit komentoriviltä komennolla <i>npm run test:e2e</i>
 
-![Komennon suoritus tulostaa konsoliin tekstuaalisen raportin joka kertoo 5 läpimenneestä testistä.](../../images/5/39new.png)
+![Komennon suoritus tulostaa konsoliin tekstuaalisen raportin joka kertoo 5 läpimenneestä testistä.](../../images/5/39.png)
 
-Huomaa, että testien suorituksesta tallentuu video hakemistoon <i>cypress/videos/</i>. Tämä hakemisto lienee syytä gitignoroida. Videoiden teko on myös mahdollista ottaa [pois päältä](https://docs.cypress.io/guides/guides/screenshots-and-videos#Videos).
+Cypressissä on mahdollista tallentaa myös video testien suorituksesta. Videon tallentaminen voi olla erityisen hyödyllistä esimerkiksi debugatessa tai CI/CD-putkessa, sillä videosta voi jälkeenpäin tarkastaa helposti, mitä selaimessa tapahtui ennen virhettä. Ominaisuus on oletuksena pois päältä, ohjeet sen käyttöönottoon löytyvät Cypressin [dokumentaatiosta](https://docs.cypress.io/guides/guides/screenshots-and-videos#Videos).
 
 Testien koodin lopullinen versio on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/notes-e2e-cypress/).
 
