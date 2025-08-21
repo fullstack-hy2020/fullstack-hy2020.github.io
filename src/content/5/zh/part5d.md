@@ -164,11 +164,12 @@ npm run test:report
 npm run test -- --ui
 ```
 
-<!-- Sample tests look like this: -->
-示例测试看起来是这样的：
+<!-- Sample tests in the file tests/example.spec.js look like this: -->
+tests/example.spec.js 中的示例测试看起来是这样的：
 
 ```js
-const { test, expect } = require('@playwright/test');
+// @ts-check
+import { test, expect } from '@playwright/test';
 
 test('has title', async ({ page }) => {
   await page.goto('https://playwright.dev/'); // highlight-line
@@ -206,15 +207,12 @@ Playwright 测试假设在执行测试时系统正在运行。与后端集成测
 {
   // ...
   "scripts": {
-    "start": "NODE_ENV=production node index.js",
-    "dev": "NODE_ENV=development nodemon index.js",
-    "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
-    "deploy": "fly deploy",
-    "deploy:full": "npm run build:ui && npm run deploy",
-    "logs:prod": "fly logs",
+    "start": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=development node --watch index.js",
+    "test": "cross-env NODE_ENV=test node --test",
     "lint": "eslint .",
-    "test": "NODE_ENV=test node --test",
-    "start:test": "NODE_ENV=test node index.js" // highlight-line
+    // ...
+    "start:test": "cross-env NODE_ENV=test node --watch index.js" // highlight-line
   },
   // ...
 }
@@ -229,9 +227,9 @@ const { test, expect } = require('@playwright/test')
 test('front page can be opened', async ({ page }) => {
   await page.goto('http://localhost:5173')
 
-  const locator = await page.getByText('Notes')
+  const locator = page.getByText('Notes')
   await expect(locator).toBeVisible()
-  await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2023')).toBeVisible()
+  await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible()
 })
 ```
 
@@ -244,23 +242,8 @@ test('front page can be opened', async ({ page }) => {
 <!-- The second check is done without using the auxiliary variable. -->
 第二次检查没有使用辅助变量。
 
-<!-- We notice that the year has changed. Let's change the test as follows: -->
-我们注意到年份已经变了。让我们按如下方式修改测试：
-
-```js
-const { test, expect } = require('@playwright/test')
-
-test('front page can be opened', async ({ page }) => {
-  await page.goto('http://localhost:5173')
-
-  const locator = await page.getByText('Notes')
-  await expect(locator).toBeVisible()
-  await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible() // highlight-line
-})
-```
-
-<!-- As expected, the test fails. Playwright opens the test report in the browser and it becomes clear that Playwright has actually performed the tests with three different browsers: Chrome, Firefox and Webkit, i.e. the browser engine used by Safari: -->
-正如预期，测试失败了。Playwright 在浏览器中打开了测试报告，很明显 Playwright 实际上是用三种不同的浏览器进行了测试：Chrome、Firefox 和 Webkit，即 Safari 使用的浏览器引擎：
+<!-- The test fails because an old year ended up in the test. Playwright opens the test report in the browser and it becomes clear that Playwright has actually performed the tests with three different browsers: Chrome, Firefox and Webkit, i.e. the browser engine used by Safari: -->
+测试失败了，因为测试中混入了一个旧年份。Playwright 在浏览器中打开了测试报告，很明显 Playwright 实际上是用三种不同的浏览器进行了测试：Chrome、Firefox 和 Webkit，即 Safari 使用的浏览器引擎：
 
 ![test report showing the test failing in three different browsers](../../images/5/play2.png)
 
@@ -276,11 +259,8 @@ test('front page can be opened', async ({ page }) => {
 npm test -- --project chromium
 ```
 
-<!-- Now let's correct the outdated year in the frontend code that caused the error. -->
-现在让我们更正在前端代码中导致错误的旧年份。
-
-<!-- Before we continue, let's add a _describe_ block to the tests: -->
-在进行下一步之前，让我们在测试中添加一个 _describe_ 块：
+<!-- Now let's fix the test with the correct year and let's add a _describe_ block to the tests: -->
+现在让我们修正测试中的年份，并在测试中添加一个 _describe_ 块：
 
 ```js
 const { test, describe, expect } = require('@playwright/test')
@@ -289,9 +269,9 @@ describe('Note app', () => {  // highlight-line
   test('front page can be opened', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
-    const locator = await page.getByText('Notes')
+    const locator = page.getByText('Notes')
     await expect(locator).toBeVisible()
-    await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible()
+    await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2025')).toBeVisible()
   })
 })
 ```
@@ -303,15 +283,16 @@ describe('Note app', () => {  // highlight-line
 在开发测试时，将等待时间减少到几秒钟可能更明智。根据[文档](https://playwright.dev/docs/test-timeouts)，这可以通过按以下方式修改 _playwright.config.js_ 文件来实现：
 
 ```js
-module.exports = defineConfig({
-  timeout: 3000,
+export default defineConfig({
+  // ...
+  timeout: 3000, // highlight-line
   fullyParallel: false, // highlight-line
   workers: 1, // highlight-line
   // ...
 })
 ```
 
-<!-- We also made two other changes to the file, and specified that all tests [be executed one at a time](https://playwright.dev/docs/test-parallel). With the default configuration, the execution happens in parallel, and since our tests use a database, parallel execution causes problems. -->
+<!-- We also made two other changes to the file, specifying that all tests [be executed one at a time](https://playwright.dev/docs/test-parallel). With the default configuration, the execution happens in parallel, and since our tests use a database, parallel execution causes problems. -->
 我们还对文件进行了另外两项更改，并指定所有测试应[逐个执行](https://playwright.dev/docs/test-parallel)。在默认配置下，执行是并行进行的，而由于我们的测试使用数据库，并行执行会导致问题。
 
 ### Writing on the form
@@ -326,10 +307,10 @@ module.exports = defineConfig({
 describe('Note app', () => {
   // ...
 
-  test('login form can be opened', async ({ page }) => {
+  test('user can log in', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
-    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('button', { name: 'login' }).click()
   })
 })
 ```
@@ -361,10 +342,10 @@ npm test -- --ui
 describe('Note app', () => {
   // ...
 
-  test('login form can be opened', async ({ page }) => {
+  test('user can log in', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
-    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('button', { name: 'login' }).click()
     await page.getByRole('textbox').fill('mluukkai')  // highlight-line
   })
 })
@@ -386,15 +367,15 @@ Error: locator.fill: Error: strict mode violation: getByRole('textbox') resolved
 describe('Note app', () => {
   // ...
 
-  test('login form can be opened', async ({ page }) => {
+  test('user can log in', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
-    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('button', { name: 'login' }).click()
     // highlight-start
     await page.getByRole('textbox').first().fill('mluukkai')
     await page.getByRole('textbox').last().fill('salainen')
     await page.getByRole('button', { name: 'login' }).click()
-
+  
     await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
     // highlight-end
   })
@@ -410,10 +391,10 @@ describe('Note app', () => {
 ```js
 describe('Note app', () => {
   // ...
-  test('login form can be opened', async ({ page }) => {
+  test('user can log in', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
-    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('button', { name: 'login' }).click()
     // highlight-start
     const textboxes = await page.getByRole('textbox').all()
 
@@ -422,76 +403,77 @@ describe('Note app', () => {
     // highlight-end
 
     await page.getByRole('button', { name: 'login' }).click()
-
+  
     await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
-  })
+  })  
 })
 ```
 
 <!-- Both this and the previous version of the test work. However, both are problematic to the extent that if the registration form is changed, the tests may break, as they rely on the fields to be on the page in a certain order. -->
 这个和上一个版本的测试工作都可以运行。然而，它们都存在问题，因为如果注册表单被更改，测试可能会失效，因为它们依赖于表单字段在页面上按特定顺序排列。
 
-<!-- A better solution is to define unique test id attributes for the fields, to search for them in the tests using the method [getByTestId](https://playwright.dev/docs/api/class-page#page-get-by-test-id). -->
-一个更好的解决方案是为这些字段定义唯一的测试 id 属性，在测试中使用 [getByTestId](https://playwright.dev/docs/api/class-page#page-get-by-test-id) 方法来搜索它们。
+<!-- If an element is difficult to locate in tests, you can assign it a separate <i>test-id</i> attribute and find the element in tests using the [getByTestId](https://playwright.dev/docs/api/class-page#page-get-by-test-id) method. -->
+如果元素在测试中难以定位，你可以为其分配一个单独的 <i>test-id</i> 属性，并使用 [getByTestId](https://playwright.dev/docs/api/class-page#page-get-by-test-id) 方法在测试中查找该元素。
 
-<!-- Let's expand the login form as follows -->
-让我们按如下方式扩展登录表单
+<!-- Let's now take advantage of the existing elements of the login form. The input fields of the login form have been assigned unique <i>labels</i>: -->
+现在让我们利用登录表单的现有元素。登录表单的输入字段已被分配了唯一的 <i>labels</i>：
 
 ```js
-const LoginForm = ({ ... }) => {
-  return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          username
-          <input
-            data-testid='username'  // highlight-line
-            value={username}
-            onChange={handleUsernameChange}
-          />
-        </div>
-        <div>
-          password
-          <input
-            data-testid='password' // highlight-line
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-        </div>
-        <button type="submit">
-          login
-        </button>
-      </form>
-    </div>
-  )
-}
+// ...
+<form onSubmit={handleSubmit}>
+  <div>
+    <label> // highlight-line
+      username // highlight-line
+      <input
+        type="text"
+        value={username}
+        onChange={handleUsernameChange}
+      />
+    </label> // highlight-line
+  </div>
+  <div>
+    <label> // highlight-line
+      password // highlight-line
+      <input
+        type="password"
+        value={password}
+        onChange={handlePasswordChange}
+      />
+    </label> // highlight-line
+  </div>
+  <button type="submit">login</button>
+</form>
+// ...
 ```
 
-<!-- Test changes as follows: -->
-按如下方式测试更改：
+<!-- Input fields can and should be located in tests using <i>labels</i> with the [getByLabel](https://playwright.dev/docs/api/class-page#page-get-by-label) method: -->
+输入字段可以并且应该使用 [getByLabel](https://playwright.dev/docs/api/class-page#page-get-by-label) 方法通过 <i>labels</i> 在测试中定位：
 
 ```js
 describe('Note app', () => {
   // ...
 
-  test('login form can be opened', async ({ page }) => {
+  test('user can log in', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
-    await page.getByRole('button', { name: 'log in' }).click()
-    await page.getByTestId('username').fill('mluukkai') // highlight-line
-    await page.getByTestId('password').fill('salainen')  // highlight-line
-
     await page.getByRole('button', { name: 'login' }).click()
-
+    await page.getByLabel('username').fill('mluukkai') // highlight-line
+    await page.getByLabel('password').fill('salainen')  // highlight-line
+  
+    await page.getByRole('button', { name: 'login' }).click() 
+  
     await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
   })
 })
 ```
 
+<!-- When locating elements, it makes sense to aim to utilize the content visible to the user in the interface, as this best simulates how a user would actually find the desired input field while navigating the application. -->
+在定位元素时，最好利用界面中用户可见的内容，因为这样可以最好地模拟用户在导航应用时实际找到所需输入字段的方式。
+
 <!-- Note that passing the test at this stage requires that there is a user in the <i>test</i> database of the backend with username <i>mluukkai</i> and password <i>salainen</i>. Create a user if needed! -->
 请注意，在此阶段通过测试需要后端<i>测试</i>数据库中存在一个用户，用户名为 <i>mluukkai</i>，密码为 <i>salainen</i>。如有需要，请创建用户！
+
+### Test Initialization
 
 <!-- Since both tests start in the same way, i.e. by opening the page <i>http://localhost:5173</i>, it is recommended to isolate the common part in the <i>beforeEach</i> block that is executed before each test: -->
 由于两个测试都从打开页面 <i>http://localhost:5173</i> 开始，建议在 beforeEach 块中隔离每个测试执行之前的公共部分：
@@ -507,15 +489,15 @@ describe('Note app', () => {
   // highlight-end
 
   test('front page can be opened', async ({ page }) => {
-    const locator = await page.getByText('Notes')
+    const locator = page.getByText('Notes')
     await expect(locator).toBeVisible()
-    await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible()
+    await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2025')).toBeVisible()
   })
 
-  test('login form can be opened', async ({ page }) => {
-    await page.getByRole('button', { name: 'log in' }).click()
-    await page.getByTestId('username').fill('mluukkai')
-    await page.getByTestId('password').fill('salainen')
+  test('user can log in', async ({ page }) => {
+    await page.getByRole('button', { name: 'login' }).click()
+    await page.getByLabel('username').fill('mluukkai')
+    await page.getByLabel('password').fill('salainen')
     await page.getByRole('button', { name: 'login' }).click()
     await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
   })
@@ -535,9 +517,9 @@ describe('Note app', () => {
 
   describe('when logged in', () => {
     beforeEach(async ({ page }) => {
-      await page.getByRole('button', { name: 'log in' }).click()
-      await page.getByTestId('username').fill('mluukkai')
-      await page.getByTestId('password').fill('salainen')
+      await page.getByRole('button', { name: 'login' }).click()
+      await page.getByLabel('username').fill('mluukkai')
+      await page.getByLabel('password').fill('salainen')
       await page.getByRole('button', { name: 'login' }).click()
     })
 
@@ -547,7 +529,7 @@ describe('Note app', () => {
       await page.getByRole('button', { name: 'save' }).click()
       await expect(page.getByText('a note created by playwright')).toBeVisible()
     })
-  })
+  })  
 })
 ```
 
@@ -561,8 +543,8 @@ describe('Note app', () => {
 page.getByRole('textbox')
 ```
 
-<!-- If there were more fields, the test would break. Because of this, it would be better to add a test-id to the form input and search for it in the test based on this id. -->
-如果有更多字段，测试就会失败。由于这个原因，最好给表单输入添加一个 test-id，并基于这个 id 在测试中查找它。
+<!-- If there were more fields, the test would break. Because of this, it could be better to add a <i>test-id</i> to the form input and search for it in the test based on this id. -->
+如果有更多字段，测试就会失败。由于这个原因，最好给表单输入添加一个 <i>test-id</i>，并基于这个 id 在测试中查找它。
 
 <!-- **Note:** the test will only pass the first time. The reason for this is that its expectation -->
 **注意：**测试只会在第一次通过。其原因是它的期望
@@ -584,18 +566,18 @@ describe('Note app', () => {
   // ....
 
   test('user can log in', async ({ page }) => {
-    await page.getByRole('button', { name: 'log in' }).click()
-    await page.getByTestId('username').fill('mluukkai')
-    await page.getByTestId('password').fill('salainen')
+    await page.getByRole('button', { name: 'login' }).click()
+    await page.getByLabel('username').fill('mluukkai')
+    await page.getByLabel('password').fill('salainen')
     await page.getByRole('button', { name: 'login' }).click()
     await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
   })
 
   describe('when logged in', () => {
     beforeEach(async ({ page }) => {
-      await page.getByRole('button', { name: 'log in' }).click()
-      await page.getByTestId('username').fill('mluukkai')
-      await page.getByTestId('password').fill('salainen')
+      await page.getByRole('button', { name: 'login' }).click()
+      await page.getByLabel('username').fill('mluukkai')
+      await page.getByLabel('password').fill('salainen')
       await page.getByRole('button', { name: 'login' }).click()
     })
 
@@ -768,9 +750,9 @@ describe('Note app', () => {
   // ...
 
   test('login fails with wrong password', async ({ page }) => {
-    await page.getByRole('button', { name: 'log in' }).click()
-    await page.getByTestId('username').fill('mluukkai')
-    await page.getByTestId('password').fill('wrong')
+    await page.getByRole('button', { name: 'login' }).click()
+    await page.getByLabel('username').fill('mluukkai')
+    await page.getByLabel('password').fill('wrong')
     await page.getByRole('button', { name: 'login' }).click()
 
     await expect(page.getByText('wrong credentials')).toBeVisible()
@@ -804,12 +786,12 @@ const Notification = ({ message }) => {
 我们可以优化测试，以确保错误消息正好打印在正确位置，即 CSS 类为 <i>error</i> 的元素中：
 
 ```js
-  test('login fails with wrong password', async ({ page }) => {
-    // ...
+test('login fails with wrong password', async ({ page }) => {
+  // ...
 
-    const errorDiv = page.locator('.error') // highlight-line
-    await expect(errorDiv).toContainText('wrong credentials')
-  })
+  const errorDiv = page.locator('.error') // highlight-line
+  await expect(errorDiv).toContainText('wrong credentials')
+})
 ```
 
 <!-- So the test uses the [page.locator](https://playwright.dev/docs/api/class-page#page-locator) method to find the component containing the CSS class <i>error</i> and stores it in a variable. The correctness of the text associated with the component can be verified with the expectation [toContainText](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-contain-text). Note that the [CSS class selector](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors) starts with a dot, so the <i>error</i> class selector is <i>.error</i>. -->
@@ -819,14 +801,14 @@ const Notification = ({ message }) => {
 可以使用 [toHaveCSS](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-have-css) 匹配器来测试应用程序的 CSS 样式。例如，我们可以确保错误消息的颜色是红色，并且它周围有边框：
 
 ```js
-  test('login fails with wrong password', async ({ page }) => {
-    // ...
+test('login fails with wrong password', async ({ page }) => {
+  // ...
 
-    const errorDiv = page.locator('.error')
-    await expect(errorDiv).toContainText('wrong credentials')
-    await expect(errorDiv).toHaveCSS('border-style', 'solid') // highlight-line
-    await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)') // highlight-line
-  })
+  const errorDiv = page.locator('.error')
+  await expect(errorDiv).toContainText('wrong credentials')
+  await expect(errorDiv).toHaveCSS('border-style', 'solid') // highlight-line
+  await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)') // highlight-line
+})
 ```
 
 <!-- Colors must be defined to Playwright as [rgb](https://rgbcolorcode.com/color/red) codes. -->
@@ -837,9 +819,9 @@ const Notification = ({ message }) => {
 
 ```js
 test('login fails with wrong password', async ({ page }) =>{
-  await page.getByRole('button', { name: 'log in' }).click()
-  await page.getByTestId('username').fill('mluukkai')
-  await page.getByTestId('password').fill('wrong')
+  await page.getByRole('button', { name: 'login' }).click()
+  await page.getByLabel('username').fill('mluukkai')
+  await page.getByLabel('password').fill('wrong')
   await page.getByRole('button', { name: 'login' }).click()
 
   const errorDiv = page.locator('.error')
@@ -894,9 +876,9 @@ describe('Note app', () => {
   // ...
 
   test('user can login with correct credentials', async ({ page }) => {
-    await page.getByRole('button', { name: 'log in' }).click()
-    await page.getByTestId('username').fill('mluukkai')
-    await page.getByTestId('password').fill('salainen')
+    await page.getByRole('button', { name: 'login' }).click()
+    await page.getByLabel('username').fill('mluukkai')
+    await page.getByLabel('password').fill('salainen')
     await page.getByRole('button', { name: 'login' }).click()
     await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
   })
@@ -907,9 +889,9 @@ describe('Note app', () => {
 
   describe('when logged in', () => {
     beforeEach(async ({ page, request }) => {
-      await page.getByRole('button', { name: 'log in' }).click()
-      await page.getByTestId('username').fill('mluukkai')
-      await page.getByTestId('password').fill('salainen')
+      await page.getByRole('button', { name: 'login' }).click()
+      await page.getByLabel('username').fill('mluukkai')
+      await page.getByLabel('password').fill('salainen')
       await page.getByRole('button', { name: 'login' }).click()
     })
 
@@ -933,34 +915,40 @@ describe('Note app', () => {
 
 ```js
 const loginWith = async (page, username, password)  => {
-  await page.getByRole('button', { name: 'log in' }).click()
-  await page.getByTestId('username').fill(username)
-  await page.getByTestId('password').fill(password)
+  await page.getByRole('button', { name: 'login' }).click()
+  await page.getByLabel('username').fill(username)
+  await page.getByLabel('password').fill(password)
   await page.getByRole('button', { name: 'login' }).click()
 }
 
 export { loginWith }
 ```
 
-<!-- The test becomes simpler and clearer: -->
+<!-- The tests becomes simpler and clearer: -->
 测试将变得更简单和清晰：
 
 ```js
-const { loginWith } = require('./helper')
+const { test, describe, expect, beforeEach } = require('@playwright/test')
+const { loginWith } = require('./helper') // highlight-line
 
 describe('Note app', () => {
+  // ...
+
   test('user can log in', async ({ page }) => {
     await loginWith(page, 'mluukkai', 'salainen') // highlight-line
     await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
   })
 
+  test('login fails with wrong password', async ({ page }) => {
+    await loginWith(page, 'mluukkai', 'wrong') // highlight-line
+
+    const errorDiv = page.locator('.error')
+    // ...
+  })
+
   describe('when logged in', () => {
     beforeEach(async ({ page }) => {
       await loginWith(page, 'mluukkai', 'salainen') // highlight-line
-    })
-
-    test('a new note can be created', () => {
-      // ...
     })
 
     // ...
@@ -1006,9 +994,9 @@ describe('Note app', function() {
 
 ```js
 const loginWith = async (page, username, password)  => {
-  await page.getByRole('button', { name: 'log in' }).click()
-  await page.getByTestId('username').fill(username)
-  await page.getByTestId('password').fill(password)
+  await page.getByRole('button', { name: 'login' }).click()
+  await page.getByLabel('username').fill(username)
+  await page.getByLabel('password').fill(password)
   await page.getByRole('button', { name: 'login' }).click()
 }
 
@@ -1020,13 +1008,16 @@ const createNote = async (page, content) => {
 }
 // highlight-end
 
-export { loginWith, createNote }
+export { loginWith, createNote } // highlight-line
 ```
 
 <!-- The tests are simplified as follows: -->
 测试被简化如下：
 
 ```js
+const { test, describe, expect, beforeEach } = require('@playwright/test')
+const { createNote, loginWith } = require('./helper') // highlight-line
+
 describe('Note app', () => {
   // ...
 
@@ -1078,10 +1069,11 @@ We can now define the _baseUrl_ for the application in the tests configuration f
 现在我们可以在测试配置文件 <i>playwright.config.js</i> 中定义应用程序的 _baseUrl_：
 
 ```js
-module.exports = defineConfig({
+export default defineConfig({
   // ...
   use: {
     baseURL: 'http://localhost:5173',
+    // ...
   },
   // ...
 })
@@ -1092,15 +1084,15 @@ module.exports = defineConfig({
 
 ```js
 await page.goto('http://localhost:5173')
-await page.post('http://localhost:5173/api/tests/reset')
+await page.post('http://localhost:5173/api/testing/reset')
 ```
 
-<!-- can be transformed into: -->
-都可以转换为：
+<!-- can now be transformed into: -->
+现在都可以转换为：
 
 ```js
 await page.goto('/')
-await page.post('/api/tests/reset')
+await page.post('/api/testing/reset')
 ```
 
 <!-- The current code for the tests is on [GitHub](https://github.com/fullstack-hy2020/notes-e2e/tree/part5-2), branch <i>part5-2</i>. -->
@@ -1117,7 +1109,7 @@ await page.post('/api/tests/reset')
 ```js
 describe('when logged in', () => {
   // ...
-  describe('and several notes exists', () => {
+  describe('and several notes exists', () => { // highlight-line
     beforeEach(async ({ page }) => {
       // highlight-start
       await createNote(page, 'first note')
@@ -1126,7 +1118,7 @@ describe('when logged in', () => {
     })
 
     test('one of those can be made nonimportant', async ({ page }) => {
-      const otherNoteElement = await page.getByText('first note')
+      const otherNoteElement = page.getByText('first note')
 
       await otherNoteElement
         .getByRole('button', { name: 'make not important' }).click()
@@ -1144,7 +1136,7 @@ describe('when logged in', () => {
 
 ```js
 test('one of those can be made nonimportant', async ({ page }) => {
-  await page.getByText('first note')
+  page.getByText('first note')
     .getByRole('button', { name: 'make not important' }).click()
 
   await expect(page.getByText('first note').getByText('make important'))
@@ -1169,16 +1161,16 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-<!-- Tests break! The reason for the problem is that the command _await page.getByText('first note')_ now returns a _span_ element containing only text, and the button is outside of it. -->
-测试会失败！问题的原因是命令 _await page.getByText('first note')_ 现在返回的是一个仅包含文本的 _span_ 元素，而按钮位于其外部。
+<!-- Tests break! The reason for the problem is that the command _page.getByText('first note')_ now returns a _span_ element containing only text, and the button is outside of it. -->
+测试会失败！问题的原因是命令 _page.getByText('first note')_ 现在返回的是一个仅包含文本的 _span_ 元素，而按钮位于其外部。
 
 <!-- One way to fix the problem is as follows: -->
 解决这个问题的方法如下：
 
 ```js
 test('one of those can be made nonimportant', async ({ page }) => {
-  const otherNoteText = await page.getByText('first note') // highlight-line
-  const otherNoteElement = await otherNoteText.locator('..') // highlight-line
+  const otherNoteText = page.getByText('first note') // highlight-line
+  const otherNoteElement = otherNoteText.locator('..') // highlight-line
 
   await otherNoteElement.getByRole('button', { name: 'make not important' }).click()
   await expect(otherNoteElement.getByText('make important')).toBeVisible()
@@ -1193,7 +1185,7 @@ test('one of those can be made nonimportant', async ({ page }) => {
 
 ```js
 test('one of those can be made nonimportant', async ({ page }) => {
-  const secondNoteElement = await page.getByText('second note').locator('..')
+  const secondNoteElement = page.getByText('second note').locator('..')
   await secondNoteElement.getByRole('button', { name: 'make not important' }).click()
   await expect(secondNoteElement.getByText('make important')).toBeVisible()
 })
@@ -1213,22 +1205,22 @@ describe('when logged in', () => {
     await expect(page.getByText('a note created by playwright')).toBeVisible()
   })
 
-  describe('and a note exists', () => {
+  describe('and several notes exists', () => {
     beforeEach(async ({ page }) => {
       await createNote(page, 'first note')
       await createNote(page, 'second note')
       await createNote(page, 'third note') // highlight-line
     })
 
-    test('importance can be changed', async ({ page }) => {
-      const otherNoteText = await page.getByText('second note') // highlight-line
-      const otherNoteElement = await otherNoteText.locator('..')
-
+    test('one of those can be made nonimportant', async ({ page }) => {
+      const otherNoteText = page.getByText('second note') // highlight-line
+      const otherNoteElement = otherNoteText.locator('..')
+    
       await otherNoteElement.getByRole('button', { name: 'make not important' }).click()
       await expect(otherNoteElement.getByText('make important')).toBeVisible()
     })
   })
-})
+}) 
 ```
 
 <!-- For some reason the test starts working unreliably, sometimes it passes and sometimes it doesn't. It's time to roll up your sleeves and learn how to debug tests. -->
@@ -1243,7 +1235,7 @@ describe('when logged in', () => {
 以下命令以调试模式运行有问题的测试：
 
 ```
-npm test -- -g'importance can be changed' --debug
+npm test -- -g'one of those can be made nonimportant' --debug
 ```
 
 <!-- Playwright-inspector shows the progress of the tests step by step. The arrow-dot button at the top takes the tests one step further. The elements found by the locators and the interaction with the browser are visualized in the browser: -->
@@ -1271,12 +1263,12 @@ describe('Note app', () => {
         await createNote(page, 'second note')
         await createNote(page, 'third note')
       })
-
+  
       test('one of those can be made nonimportant', async ({ page }) => {
         await page.pause() // highlight-line
-        const otherNoteText = await page.getByText('second note')
-        const otherNoteElement = await otherNoteText.locator('..')
-
+        const otherNoteText = page.getByText('second note')
+        const otherNoteElement = otherNoteText.locator('..')
+      
         await otherNoteElement.getByRole('button', { name: 'make not important' }).click()
         await expect(otherNoteElement.getByText('make important')).toBeVisible()
       })
