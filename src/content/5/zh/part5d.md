@@ -28,8 +28,8 @@ E2E 测试还可能[不稳定](https://hackernoon.com/flaky-tests-a-war-that-nev
 <!-- Perhaps the two easiest libraries for End to End testing at the moment are [Cypress](https://www.cypress.io/) and [Playwright](https://playwright.dev/). -->
 目前，最容易用于 E2E 测试的两个库或许就是 [Cypress](https://www.cypress.io/) 和 [Playwright](https://playwright.dev/)。
 
-<!-- From the statistics on [npmtrends.com](https://npmtrends.com/cypress-vs-playwright) we see that Cypress, which dominated the market for the last five years, is still clearly the number one, but Playwright is on a rapid rise: -->
-从 [npmtrends.com](https://npmtrends.com/cypress-vs-playwright) 的统计数据来看，过去五年一直主导市场的 Cypress 仍然明显是第一，但 Playwright 正在迅速崛起：
+<!-- From the statistics on [npmtrends.com](https://npmtrends.com/cypress-vs-playwright) we can see that Playwright surpassed Cypress in download numbers during 2024, and its popularity continues to grow: -->
+从 [npmtrends.com](https://npmtrends.com/cypress-vs-playwright) 的统计数据来看，Playwright 在 2024 年的下载量已经超过了 Cypress，并且其受欢迎的程度仍在持续增长：
 
 ![cypress vs playwright in npm trends](../../images/5/cvsp.png)
 
@@ -197,10 +197,10 @@ test('get started link', async ({ page }) => {
 现在让我们移除示例测试，开始测试我们自己的应用程序。
 
 <!-- Playwright tests assume that the system under test is running when the tests are executed. Unlike, for example, backend integration tests, Playwright tests <i>do not start</i> the system under test during testing. -->
-Playwright 测试假设在执行测试时系统正在运行。与后端集成测试等例子不同，Playwright 测试在测试过程中<i>不会启动<i>被测试的系统。
+Playwright 测试假设在执行测试时系统正在运行。与后端集成测试等例子不同，Playwright 测试在测试过程中<i>不会启动</i>被测试的系统。
 
 <!-- Let's make an npm script for the <i>backend</i>, which will enable it to be started in testing mode, i.e. so that <i>NODE\_ENV</i> gets the value <i>test</i>. -->
-让我们为<i>后端</i>创建一个 npm 脚本，这将使其能够在测试模式下启动，即使 <i>NODE\_ENV</i> 的值为 <i>test<i>。
+让我们为<i>后端</i>创建一个 npm 脚本，这将使其能够在测试模式下启动，即使 <i>NODE\_ENV</i> 的值为 <i>test</i>。
 
 ```js
 {
