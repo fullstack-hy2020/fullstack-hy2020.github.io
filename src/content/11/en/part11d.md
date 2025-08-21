@@ -292,6 +292,8 @@ env:
 jobs:
   job1:
     # rest of the job
+    outputs:
+      condition: ${{ env.CONDITION }}
     steps:
       - if: ${{ env.CONDITION == 'true' }}
         run: echo 'this step is executed'
@@ -300,8 +302,9 @@ jobs:
         run: echo 'this step will not be executed'
 
   job2:
-    # this job will be dependent on the above env.CONDITION, note the `github.` prefix which seem to be required while referencing the variable on the job level, but not the step level
-    if: ${{ github.env.CONDITION == 'true' }}
+    # as env variables are not available at job level, we can use the output of job1 instead
+    needs: [job1]
+    if: ${{ needs.job1.outputs.condition == 'true' }}
     # rest of the job
 ```
 
