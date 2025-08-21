@@ -202,6 +202,8 @@ fly deploy
 
 #### Render
 
+<i>Note that you may need to give your credit card number to Render!</i>
+
 The following assumes that the [sign in](https://dashboard.render.com/) has been made with a GitHub account.
 
 After signing in, let us create a new "web service":
