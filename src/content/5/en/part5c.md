@@ -133,21 +133,18 @@ Run the test with command _npm test_:
 $ npm test
 
 > notes-frontend@0.0.0 test
-> vitest
+> vitest run
 
 
- DEV  v1.3.1 /Users/mluukkai/opetus/2024-fs/part3/notes-frontend
+ RUN  v3.2.3 /home/vejolkko/repot/fullstack-examples/notes-frontend
 
- ✓ src/components/Note.test.jsx (1)
-   ✓ renders content
+ ✓ src/components/Note.test.jsx (1 test) 19ms
+   ✓ renders content 18ms
 
  Test Files  1 passed (1)
       Tests  1 passed (1)
-   Start at  17:05:37
-   Duration  812ms (transform 31ms, setup 220ms, collect 11ms, tests 14ms, environment 395ms, prepare 70ms)
-
-
- PASS  Waiting for file changes...
+   Start at  14:31:54
+   Duration  874ms (transform 51ms, setup 169ms, collect 19ms, tests 19ms, environment 454ms, prepare 87ms)
 ```
 
 Eslint complains about the keywords _test_ and _expect_ in the tests. The problem can be solved by adding the following configuration to the <i>eslint.config.js</i> file:
