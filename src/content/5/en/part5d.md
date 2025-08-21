@@ -84,6 +84,8 @@ or remove the entry for any problematic browsers from your _playwright.config.js
     //  name: 'webkit',
     //  use: { ...devices['Desktop Safari'] },
     //},
+    // ...
+  ]
 ```
 
 Let's define an npm script for running tests and test reports in _package.json_:
@@ -521,7 +523,7 @@ describe('Note app', () => {
       await page.getByRole('button', { name: 'save' }).click()
       await expect(page.getByText('a note created by playwright')).toBeVisible()
     })
-  })  
+  })
 })
 ```
 
@@ -676,7 +678,7 @@ describe('Note app', () => {
   })
 
   // ...
-)}
+})
 ```
 
 The test verifies with the method [page.getByText](https://playwright.dev/docs/api/class-page#page-get-by-text) that the application prints an error message.
@@ -700,7 +702,7 @@ const Notification = ({ message }) => {
 We could refine the test to ensure that the error message is printed exactly in the right place, i.e. in the element containing the CSS class <i>error</i>:
 
 ```js
-  test('login fails with wrong password', async ({ page }) => {
+test('login fails with wrong password', async ({ page }) => {
   // ...
 
   const errorDiv = page.locator('.error') // highlight-line
@@ -713,13 +715,13 @@ So the test uses the [page.locator](https://playwright.dev/docs/api/class-page#p
 It is possible to test the application's CSS styles with matcher [toHaveCSS](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-have-css). We can, for example, make sure that the color of the error message is red, and that there is a border around it:
 
 ```js
-  test('login fails with wrong password', async ({ page }) => {
+test('login fails with wrong password', async ({ page }) => {
   // ...
 
-    const errorDiv = page.locator('.error')
-    await expect(errorDiv).toContainText('wrong credentials')
-    await expect(errorDiv).toHaveCSS('border-style', 'solid') // highlight-line
-    await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)') // highlight-line
+  const errorDiv = page.locator('.error')
+  await expect(errorDiv).toContainText('wrong credentials')
+  await expect(errorDiv).toHaveCSS('border-style', 'solid') // highlight-line
+  await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)') // highlight-line
 })
 ```
 
@@ -757,7 +759,7 @@ describe(() => {
   // this test is skipped...
   test('user can login with correct credentials', async ({ page }) => {
     // ...
-  }
+  })
 
   // ...
 })
@@ -853,7 +855,8 @@ describe('Note app', () => {
       await loginWith(page, 'mluukkai', 'salainen') // highlight-line
     })
 
-  // ...
+    // ...
+  })
 })
 ```
 
@@ -1126,7 +1129,7 @@ By default, debug steps through the test command by command. If it is a complex 
 describe('Note app', () => {
   beforeEach(async ({ page, request }) => {
     // ...
-  }
+  })
 
   describe('when logged in', () => {
     beforeEach(async ({ page }) => {
