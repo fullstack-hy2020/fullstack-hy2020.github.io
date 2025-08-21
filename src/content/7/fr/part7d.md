@@ -17,14 +17,14 @@ Nous avons implémenté nos applications en divisant notre code en modules sépa
 
 Pour cette raison, le code qui est divisé en modules doit être <i>empaqueté</i> pour les navigateurs, ce qui signifie que tous les fichiers de code source sont transformés en un seul fichier qui contient tout le code de l'application. Lorsque nous avons déployé notre frontend React en production dans la [partie 3](/fr/part3/deployer_votre_application_sur_internet), nous avons effectué l'empaquetage de notre application avec la commande npm run build. Sous le capot, le script npm empaquette la source, et cela produit la collection suivante de fichiers dans le répertoire <i>dist</i>:
 
-<pre>
+```
 ├── assets
 │   ├── index-d526a0c5.css
 │   ├── index-e92ae01e.js
 │   └── react-35ef61ed.svg
 ├── index.html
 └── vite.svg
-</pre>
+```
 
 Le fichier <i>index.html</i> situé à la racine du répertoire <i>dist</i> est le "fichier principal" de l'application qui charge le fichier JavaScript empaqueté avec une balise <i>script</i>:
 
@@ -58,13 +58,13 @@ Ensuite, nous allons créer une configuration Webpack adaptée pour une applicat
 
 Créons un nouveau répertoire pour le projet avec les sous-répertoires (<i>build</i> et <i>src</i>) et fichiers suivants:
 
-<pre>
+```
 ├── build
 ├── package.json
 ├── src
 │   └── index.js
 └── webpack.config.js
-</pre>
+```
 
 Le contenu du fichier <i>package.json</i> peut par exemple être le suivant:
 
@@ -586,10 +586,10 @@ L'application ne fonctionne plus et la console affichera l'erreur suivante :
 
 Nous savons que l'erreur se trouve dans la méthode onClick, mais si l'application était plus grande, le message d'erreur serait assez difficile à localiser:
 
-<pre>
+```
 App.js:27 Uncaught TypeError: Cannot read property 'concat' of undefined
     at handleClick (App.js:27)
-</pre>
+```
 
 L'emplacement de l'erreur indiqué dans le message ne correspond pas à l'emplacement réel de l'erreur dans notre code source. Si nous cliquons sur le message d'erreur, nous remarquons que le code source affiché ne ressemble pas à notre code d'application:
 

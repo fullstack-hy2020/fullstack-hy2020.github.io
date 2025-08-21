@@ -209,9 +209,9 @@ Identifying the scheme tells the server how the attached credentials should be i
 <!-- In practice, this means that if the token is, for example, the string <i>eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW</i>, the Authorization header will have the value: -->
 实际上，这意味着如果token是例如字符串 <i>eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW</i> ，那么Authorization头将具有以下值：
 
-<pre>
+```
 Bearer eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW
-</pre>
+```
 
 <!-- Creating new notes will change like so (<i>controllers/notes.js</i>): -->
 创建新的笔记将如此改变（<i>controllers/notes.js</i>）：

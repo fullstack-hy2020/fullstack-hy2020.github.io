@@ -13,7 +13,7 @@ At the moment the frontend shows existing notes and lets users change the state 
 
 We'll now implement a part of the required user management functionality in the frontend. Let's begin with the user login. Throughout this part, we will assume that new users will not be added from the frontend.
 
-### Handling login
+### Adding a Login Form
 
 A login form has now been added to the top of the page:
 
@@ -51,28 +51,30 @@ const App = () => {
   return (
     <div>
       <h1>Notes</h1>
-
       <Notification message={errorMessage} />
-
+      
       // highlight-start
+      <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <div>
-          username
+          <label>
+            username
             <input
-            type="text"
-            value={username}
-            name="Username"
-            onChange={({ target }) => setUsername(target.value)}
-          />
+              type="text"
+              value={username}
+              onChange={({ target }) => setUsername(target.value)}
+            />
+          </label>
         </div>
         <div>
-          password
+          <label>
+            password
             <input
-            type="password"
-            value={password}
-            name="Password"
-            onChange={({ target }) => setPassword(target.value)}
-          />
+              type="password"
+              value={password}
+              onChange={({ target }) => setPassword(target.value)}
+            />
+          </label>
         </div>
         <button type="submit">login</button>
       </form>
@@ -100,6 +102,8 @@ The login form is handled the same way we handled forms in
 ```
 
 The method _handleLogin_, which is responsible for handling the data in the form, is yet to be implemented.
+
+### Adding Logic to the Login Form
 
 Logging in is done by sending an HTTP POST request to the server address <i>api/login</i>. Let's separate the code responsible for this request into its own module, to file <i>services/login.js</i>.
 
@@ -129,27 +133,26 @@ const App = () => {
 // highlight-start
   const [user, setUser] = useState(null)
 // highlight-end
-  
-  // highlight-start
-  const handleLogin = async (event) => {
+
+  // ...
+
+  const handleLogin = async event => { // highlight-line
     event.preventDefault()
     
+    // highlight-start
     try {
-      const user = await loginService.login({
-        username, password,
-      })
-
+      const user = await loginService.login({ username, password })
       setUser(user)
       setUsername('')
       setPassword('')
-    } catch (exception) {
-      setErrorMessage('Wrong credentials')
+    } catch {
+      setErrorMessage('wrong credentials')
       setTimeout(() => {
         setErrorMessage(null)
       }, 5000)
     }
-    
-  } // highlight-end
+    // highlight-end
+  }
 
   // ...
 }
@@ -158,6 +161,8 @@ const App = () => {
 If the login is successful, the form fields are emptied <i>and</i> the server response (including a <i>token</i> and the user details) is saved to the <i>user</i> field of the application's state.
 
 If the login fails or running the function _loginService.login_ results in an error, the user is notified.
+
+### Conditional Rendering of the Login Form
 
 The user is not notified about a successful login in any way. Let's modify the application to show the login form only <i>if the user is not logged-in</i>, so when _user === null_. The form for adding new notes is shown only if the <i>user is logged-in</i>, so when <i>user</i> state contains the user's details.
 
@@ -170,35 +175,34 @@ const App = () => {
   const loginForm = () => (
     <form onSubmit={handleLogin}>
       <div>
-        username
+        <label>
+          username
           <input
-          type="text"
-          value={username}
-          name="Username"
-          onChange={({ target }) => setUsername(target.value)}
-        />
+            type="text"
+            value={username}
+            onChange={({ target }) => setUsername(target.value)}
+          />
+        </label>
       </div>
       <div>
-        password
+        <label>
+          password
           <input
-          type="password"
-          value={password}
-          name="Password"
-          onChange={({ target }) => setPassword(target.value)}
-        />
+            type="password"
+            value={password}
+            onChange={({ target }) => setPassword(target.value)}
+          />
+        </label>
       </div>
       <button type="submit">login</button>
-    </form>      
+    </form>
   )
 
   const noteForm = () => (
     <form onSubmit={addNote}>
-      <input
-        value={newNote}
-        onChange={handleNoteChange}
-      />
+      <input value={newNote} onChange={handleNoteChange} />
       <button type="submit">save</button>
-    </form>  
+    </form>
   )
 
   return (
@@ -224,11 +228,10 @@ const App = () => {
   return (
     <div>
       <h1>Notes</h1>
-
       <Notification message={errorMessage} />
 
-      {user === null && loginForm()} // highlight-line
-      {user !== null && noteForm()} // highlight-line
+      {!user && loginForm()} // highlight-line
+      {user && noteForm()} // highlight-line
 
       <div>
         <button onClick={() => setShowAll(!showAll)}>
@@ -236,13 +239,13 @@ const App = () => {
         </button>
       </div>
       <ul>
-        {notesToShow.map((note, i) => 
+        {notesToShow.map(note => (
           <Note
-            key={i}
-            note={note} 
+            key={note.id}
+            note={note}
             toggleImportance={() => toggleImportanceOf(note.id)}
           />
-        )}
+        ))}
       </ul>
 
       <Footer />
@@ -254,36 +257,10 @@ const App = () => {
 A slightly odd looking, but commonly used [React trick](https://react.dev/learn/conditional-rendering#logical-and-operator-) is used to render the forms conditionally:
 
 ```js
-{
-  user === null && loginForm()
-}
+{!user && loginForm()}
 ```
 
 If the first statement evaluates to false or is [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy), the second statement (generating the form) is not executed at all.
-
-We can make this even more straightforward by using the [conditional operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator):
-
-```js
-return (
-  <div>
-    <h1>Notes</h1>
-
-    <Notification message={errorMessage}/>
-
-    {user === null ?
-      loginForm() :
-      noteForm()
-    }
-
-    <h2>Notes</h2>
-
-    // ...
-
-  </div>
-)
-```
-
-If _user === null_ is [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy), _loginForm()_ is executed. If not, _noteForm()_ is.
 
 Let's do one more modification. If the user is logged in, their name is shown on the screen:
 
@@ -291,23 +268,21 @@ Let's do one more modification. If the user is logged in, their name is shown on
 return (
   <div>
     <h1>Notes</h1>
-
     <Notification message={errorMessage} />
 
-    {user === null ?
-      loginForm() :
+    {!user && loginForm()}
+    // highlight-start
+    {user && (
       <div>
-        <p>{user.name} logged-in</p>
+        <p>{user.name} logged in</p>
         {noteForm()}
       </div>
-    }
+    )}
+    // highlight-end
 
-    <h2>Notes</h2>
-
+    <div>
+      <button onClick={() => setShowAll(!showAll)}>
     // ...
-
-  </div>
-)
 ```
 
 The solution isn't perfect, but we'll leave it like this for now.
@@ -315,6 +290,44 @@ The solution isn't perfect, but we'll leave it like this for now.
 Our main component <i>App</i> is at the moment way too large. The changes we did now are a clear sign that the forms should be refactored into their own components. However, we will leave that for an optional exercise.
 
 The current application code can be found on [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-2), in the branch <i>part5-2</i>.
+
+### Note on Using the Label Element
+
+We used the [label](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/label) element for the <i>input</i> fields in the login form. The <i>input</i> field for the username is placed inside the corresponding <i>label</i> element:
+
+```js
+<div>
+  <label>
+    username
+    <input
+      type="text"
+      value={username}
+      onChange={({ target }) => setUsername(target.value)}
+    />
+  </label>
+</div>
+// ...
+```
+
+Why did we implement the form this way? Visually, the same result could be achieved with simpler code, without a separate <i>label</i> element:
+
+```js
+<div>
+  username
+  <input
+    type="text"
+    value={username}
+    onChange={({ target }) => setUsername(target.value)}
+  />
+</div>
+// ...
+```
+
+The <i>label</i> element is used in forms to describe and name <i>input</i> fields. It provides a description for the input field, helping the user understand what information should be entered into each field. This description is programmatically linked to the corresponding input field, improving the form's accessibility. 
+
+This way, screen readers can read the field's name to the user when the input field is selected, and clicking on the label's text automatically focuses on the correct input field. Using the <i>label</i> element with <i>input</i> fields is always recommended, even if the same visual result could be achieved without it.
+
+There are [several ways](https://react.dev/reference/react-dom/components/input#providing-a-label-for-an-input) to link a specific <i>label</i> to an <i>input</i> element. The easiest method is to place the <i>input</i> element inside the corresponding <i>label</i> element, as demonstrated in this material. This automatically associates the <i>label</i> with the correct input field, requiring no additional configuration.
 
 ### Creating new notes
 
@@ -358,10 +371,10 @@ const getAll = () => {
   return request.then(response => response.data)
 }
 
-// highlight-start
 const create = async newObject => {
+  // highlight-start
   const config = {
-    headers: { Authorization: token },
+    headers: { Authorization: token }
   }
 // highlight-end
 
@@ -384,16 +397,14 @@ The event handler responsible for login must be changed to call the method <code
 ```js
 const handleLogin = async (event) => {
   event.preventDefault()
-  try {
-    const user = await loginService.login({
-      username, password,
-    })
 
+  try {
+    const user = await loginService.login({ username, password })
     noteService.setToken(user.token) // highlight-line
     setUser(user)
     setUsername('')
     setPassword('')
-  } catch (exception) {
+  } catch {
     // ...
   }
 }
@@ -435,9 +446,7 @@ Changes to the login method are as follows:
   const handleLogin = async (event) => {
     event.preventDefault()
     try {
-      const user = await loginService.login({
-        username, password,
-      })
+      const user = await loginService.login({ username, password })
 
       // highlight-start
       window.localStorage.setItem(
@@ -468,21 +477,20 @@ We can have multiple effect hooks, so let's create a second one to handle the fi
 
 ```js
 const App = () => {
-  const [notes, setNotes] = useState([]) 
+  const [notes, setNotes] = useState([])
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
   const [errorMessage, setErrorMessage] = useState(null)
-  const [username, setUsername] = useState('') 
-  const [password, setPassword] = useState('') 
-  const [user, setUser] = useState(null) 
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
-    noteService
-      .getAll().then(initialNotes => {
-        setNotes(initialNotes)
-      })
+    noteService.getAll().then(initialNotes => {
+      setNotes(initialNotes)
+    })
   }, [])
-
+  
   // highlight-start
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')

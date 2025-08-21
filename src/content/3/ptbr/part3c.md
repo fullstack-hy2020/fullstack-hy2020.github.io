@@ -317,12 +317,12 @@ node mongo.js suasenha
 
 o programa deverá exibir todas as entradas da lista telefônica:
 
-<pre>
+```
 phonebook:
 Anna 040-1234556
 Arto Vihavainen 045-1232456
 Ada Lovelace 040-1231236
-</pre>
+```
 
 É possível obter os parâmetros da linha de comando através da variável [process.argv](https://nodejs.org/docs/latest-v8.x/api/process.html#process_process_argv).
 
@@ -686,7 +686,7 @@ Além da nota inexistente, há mais uma situação de erro que precisa ser lidad
 
 Se fizermos a seguinte requisição, obteremos a mensagem de erro mostrada abaixo:
 
-<pre>
+```
 Method: GET
 Path:   /api/notes/someInvalidId
 Body:   {}
@@ -695,7 +695,7 @@ Body:   {}
     at CastError (/Users/mluukkai/opetus/_fullstack/osa3-muisiinpanot/node_modules/mongoose/lib/error/cast.js:27:11)
     at ObjectId.cast (/Users/mluukkai/opetus/_fullstack/osa3-muisiinpanot/node_modules/mongoose/lib/schema/objectid.js:158:13)
     ...
-</pre>
+```
 
 Dado um ID mal formatado como argumento, o método <em>findById</em> lançará um erro, fazendo com que a promessa retornada seja rejeitada. Isso fará com que a função callback definida no bloco <em>catch</em> seja chamada.
 

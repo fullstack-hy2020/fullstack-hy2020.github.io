@@ -400,12 +400,12 @@ Koodiin on myös lisätty muutamia aputulostuksia, jotka auttavat hahmottamaan m
 
 Konsoliin tulostuu:
 
-<pre>
+```
 render 0 notes
 effect
 promise fulfilled
 render 3 notes
-</pre>
+```
 
 Ensin siis suoritetaan komponentin määrittelevän funktion runko ja renderöidään komponentti ensimmäistä kertaa. Tässä vaiheessa tulostuu <i>render 0 notes</i> eli dataa ei ole vielä haettu palvelimelta.
 

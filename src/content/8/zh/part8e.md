@@ -937,14 +937,14 @@ friendOf: async (root) => {
 <!-- and considering we have 5 persons saved, and we query _allPersons_ without _phone_ as argument, we see an absurd amount of queries like below.-->
 并且考虑到我们有5个人被保存，并且我们查询_allPersons_，没有_phone_作为参数，我们看到一个荒谬的查询量，如下。
 
-<pre>
+```
 Person.find
 User.find
 User.find
 User.find
 User.find
 User.find
-</pre>
+```
 
 <!-- So even though we primarily do one query for all persons, every person causes one more query in their resolver.-->
  所以尽管我们主要对所有的人做一个查询，但每个人都会在他们的解析器中引起一个更多的查询。

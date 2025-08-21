@@ -165,9 +165,9 @@ Le schéma <i>Bearer</i> convient à nos besoins.
 
 En pratique, cela signifie que si le jeton est, par exemple, la chaîne <i>eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW</i>, l'en-tête Authorization aura la valeur :
 
-<pre>
+```
 Bearer eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW
-</pre>
+```
 La création de nouvelles notes changera ainsi (<i>controllers/notes.js</i>):
 
 ```js

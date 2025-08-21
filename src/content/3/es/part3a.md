@@ -520,11 +520,11 @@ app.get('/api/notes/:id', (request, response) => {
 
 Cuando volvemos a visitar la URL en el navegador, cada llamada a la función de comparación imprime algunas cosas diferentes en la consola. La salida de la consola es la siguiente:
 
-<pre>
+```
 1 'number' '1' 'string' false
 2 'number' '1' 'string' false
 3 'number' '1' 'string' false
-</pre>
+```
 
 La causa del error se aclara. La variable _id_ contiene una cadena '1', mientras que los ids de las notas son números enteros. En JavaScript, la comparación "triple iguales" === considera que todos los valores de diferentes tipos no son iguales por defecto, lo que significa que 1 no es '1'.
 

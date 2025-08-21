@@ -324,12 +324,12 @@ node mongo.js yourpassword
 
  Alors le programme devrait afficher toutes les entrées du répertoire téléphonique :
 
-<pre>
+```
 phonebook:
 Anna 040-1234556
 Arto Vihavainen 045-1232456
 Ada Lovelace 040-1231236
-</pre>
+```
 
 Vous pouvez obtenir les paramètres de la ligne de commande à partir de la variable [process.argv](https://nodejs.org/docs/latest-v8.x/api/process.html#process_process_argv).
 
@@ -679,7 +679,7 @@ En plus de la note inexistante, il y a une autre situation d'erreur qui doit êt
 
 Si nous effectuons la requête suivante, nous obtiendrons le message d'erreur indiqué ci-dessous :
 
-<pre>
+```
 Method: GET
 Path:   /api/notes/someInvalidId
 Body:   {}
@@ -688,7 +688,7 @@ Body:   {}
     at CastError (/Users/mluukkai/opetus/_fullstack/osa3-muisiinpanot/node_modules/mongoose/lib/error/cast.js:27:11)
     at ObjectId.cast (/Users/mluukkai/opetus/_fullstack/osa3-muisiinpanot/node_modules/mongoose/lib/schema/objectid.js:158:13)
     ...
-</pre>
+```
 
 Étant donné un id malformé comme argument, la méthode <em>findById</em> lancera une erreur provoquant le rejet de la promesse retournée. Cela provoquera l'appel de la fonction callback définie dans le bloc <em>catch</em>. 
 

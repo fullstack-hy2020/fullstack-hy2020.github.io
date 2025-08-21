@@ -309,12 +309,12 @@ node mongo.js yourpassword
 
 Then the program should display all of the entries in the phonebook:
 
-<pre>
+```
 phonebook:
 Anna 040-1234556
 Arto Vihavainen 045-1232456
 Ada Lovelace 040-1231236
-</pre>
+```
 
 You can get the command-line parameters from the [process.argv](https://nodejs.org/docs/latest-v18.x/api/process.html#process_process_argv) variable.
 
@@ -695,7 +695,7 @@ On top of the non-existing note, there's one more error situation that needs to 
 
 If we make the following request, we will get the error message shown below:
 
-<pre>
+```
 Method: GET
 Path:   /api/notes/someInvalidId
 Body:   {}
@@ -704,7 +704,7 @@ Body:   {}
     at CastError (/Users/mluukkai/opetus/_fullstack/osa3-muisiinpanot/node_modules/mongoose/lib/error/cast.js:27:11)
     at ObjectId.cast (/Users/mluukkai/opetus/_fullstack/osa3-muisiinpanot/node_modules/mongoose/lib/schema/objectid.js:158:13)
     ...
-</pre>
+```
 
 Given a malformed id as an argument, the <em>findById</em> method will throw an error causing the returned promise to be rejected. This will cause the callback function defined in the <em>catch</em> block to be called.
 

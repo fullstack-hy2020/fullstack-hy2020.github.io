@@ -337,7 +337,7 @@ xhttp.onreadystatechange = function() {
 <!-- We can think of HTML-pages as implicit tree structures.-->
 我们可以将 html 页面看作隐式树结构。
 
-<pre>
+```
 html
   head
     link
@@ -353,7 +353,7 @@ html
       form
         input
         input
-</pre>
+```
 <!-- The same treelike structure can be seen on the console tab <i>Elements</i>.-->
 同样的树状结构可以在控制台的<i>Elements元素</i>选项卡上看到。
 

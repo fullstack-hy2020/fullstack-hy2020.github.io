@@ -280,7 +280,7 @@ The mechanism of invoking event handlers is very common in JavaScript. Event han
 
 We can think of HTML pages as implicit tree structures.
 
-<pre>
+```
 html
   head
     link
@@ -296,7 +296,7 @@ html
       form
         input
         input
-</pre>
+```
 
 The same treelike structure can be seen on the console's <i>Elements</i> tab.
 

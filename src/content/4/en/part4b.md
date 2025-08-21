@@ -855,13 +855,13 @@ We save the notes stored in the array into the database inside of a _forEach_ lo
 
 The console displays the following output:
 
-<pre>
+```
 cleared
 done
 entered test
 saved
 saved
-</pre>
+```
 
 Despite our use of the async/await syntax, our solution does not work as we expected it to. The test execution begins before the database is initialized!
 

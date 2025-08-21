@@ -623,7 +623,7 @@ Définissez un composant responsable de la mise en forme d'un seul cours appelé
 
 La structure des composants de l'application peut être, par exemple, la suivante :
 
-<pre>
+```
 App
   Course
     Header
@@ -631,7 +631,7 @@ App
       Part
       Part
       ...
-</pre>
+```
 
 Par conséquent, le composant <i>Course</i> contient les composants définis dans la partie précédente, qui sont responsables du rendu du nom du cours et de ses parties.
 

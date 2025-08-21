@@ -851,13 +851,13 @@ Talletamme siis taulukossa olevat muistiinpanot tietokantaan _forEach_-loopissa.
 
 Konsoliin tulostuu:
 
-<pre>
+```
 cleared
 done
 entered test
 saved
 saved
-</pre>
+```
 
 Yllättäen ratkaisu ei async/awaitista huolimatta toimi niin kuin oletamme, vaan testin suoritus aloitetaan ennen kuin tietokannan tila on saatu alustettua!
 

@@ -165,9 +165,9 @@ El esquema <i>Bearer</i> se adapta a nuestras necesidades.
 
 En la práctica, esto significa que si el token es, por ejemplo, la cadena <i>eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW</i>, el encabezado de autorización tendrá el valor:
 
-<pre>
+```
 Bearer eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW
-</pre>
+```
 
 Creación de nuevas notas cambiará de este modo (<i>controllers/notes.js</i>):
 

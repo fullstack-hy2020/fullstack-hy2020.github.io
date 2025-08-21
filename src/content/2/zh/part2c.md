@@ -494,12 +494,12 @@ const App = () => { // highlight-line
 <!-- This is printed to the console:-->
 这将被打印到控制台。
 
-<pre>
+```
 render 0 notes
 effect
 promise fulfilled
 render 3 notes
-</pre>
+```
 
 <!-- First, the body of the function defining the component is executed and the component is rendered for the first time. At this point <i>render 0 notes</i> is printed, meaning data hasn't been fetched from the server yet.-->
  首先，定义该组件的函数主体被执行，该组件被首次渲染。在这一点上，<i>render 0 notes</i>被打印出来，意味着数据还没有从服务器上获取。

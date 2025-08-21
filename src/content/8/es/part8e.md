@@ -478,14 +478,14 @@ query {
 
 Sin embargo, hay un problema con nuestra solución, hace una cantidad irrazonable de consultas a la base de datos. Si registramos todas las consultas en la base de datos y tenemos 5 personas guardadas, vemos lo siguiente:
 
-<pre>
+```
 Person.find
 User.find
 User.find
 User.find
 User.find
 User.find
-</pre>
+```
 
 Así que aunque principalmente hacen una consulta para todas las personas, cada persona genera una consulta más en su resolución.
 

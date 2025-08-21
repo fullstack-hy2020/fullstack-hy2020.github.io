@@ -165,9 +165,9 @@ The <i>Bearer</i> scheme is suitable for our needs.
 
 In practice, this means that if the token is, for example, the string <i>eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW</i>, the Authorization header will have the value:
 
-<pre>
+```
 Bearer eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW
-</pre>
+```
 
 Creating new notes will change like so (<i>controllers/notes.js</i>):
 

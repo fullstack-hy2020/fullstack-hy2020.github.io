@@ -275,7 +275,7 @@ Ce mécanisme consistant à appeler des gestionnaires d'événements est très c
 
 Nous pouvons considérer les pages HTML comme des arborescences implicites.
 
-<pre>
+```
 html
   head
     link
@@ -291,7 +291,7 @@ html
       form
         input
         input
-</pre>
+```
 
 La même structure arborescente peut être vue sur l'onglet <i>Éléments</i> de la console.
 

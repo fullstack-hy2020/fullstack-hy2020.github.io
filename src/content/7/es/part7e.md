@@ -272,9 +272,9 @@ let query = "SELECT * FROM Users WHERE name = '" + userName + "';"
 
 Ahora supongamos que un usuario malintencionado <i>Arto Hellas</i> definiría su nombre como
 
-<pre>
+```
 Arto Hell-as'; DROP TABLE Users; --
-</pre>
+```
 
 para que el nombre contenga una comilla simple <code>'</code>, que es el carácter inicial y final de un string SQL. Como resultado de esto, se ejecutarían dos operaciones SQL, la segunda de las cuales destruiría la tabla <i>Users</i> de la base de datos.
 

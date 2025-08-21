@@ -1050,13 +1050,13 @@ test('notes are returned as json', async () => {
 <!-- The console displays the following output:-->
  控制台显示以下输出。
 
-<pre>
+```
 cleared
 done
 entered test
 saved
 saved
-</pre>
+```
 
 <!-- Despite our use of the async/await syntax, our solution does not work like we expected it to. The test execution begins before the database is initialized!-->
  尽管我们使用了async/await语法，我们的解决方案并没有像我们预期的那样工作。测试执行在数据库初始化之前就开始了!

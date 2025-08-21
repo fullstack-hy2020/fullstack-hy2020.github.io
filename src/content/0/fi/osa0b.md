@@ -278,7 +278,7 @@ Tapahtumankäsittelijöihin liittyvä mekanismi koodin suorittamiseen on JavaScr
 
 Voimme ajatella, että HTML-sivut muodostavat implisiittisen puurakenteen
 
-<pre>
+```
 html
   head
     link
@@ -294,7 +294,7 @@ html
       form
         input
         input
-</pre>
+```
 
 Sama puumaisuus on nähtävissä konsolin välilehdellä </i>Elements</i>:
 

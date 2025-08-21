@@ -981,14 +981,14 @@ friendOf: async (root) => {
 
 and considering we have 5 persons saved, and we query *allPersons* without *phone* as argument, we see an absurd amount of queries like below.
 
-<pre>
+```
 Person.find
 User.find
 User.find
 User.find
 User.find
 User.find
-</pre>
+```
 
 So even though we primarily do one query for all persons, every person causes one more query in their resolver.
 

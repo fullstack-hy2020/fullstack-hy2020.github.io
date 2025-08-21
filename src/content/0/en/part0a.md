@@ -332,6 +332,7 @@ Despite changes *all the submitted exercises remain valid*, and the course can b
 
 Recent major changes
 
+- Part 5 (21st August, 2025): React updated to version 19. PropTypes and forwardRef are no longer used. ESLint configurations updated
 - Part 4 (13th August, 2025): Express updated to version 5 and the express-async-errors library removed from part 4b
 - Part 9 (28th August, 2024): Zod library for validating request body type
 - Part 3 (20th June, 2024): ESLint configurations updated
@@ -382,7 +383,7 @@ Install a sensible text editor that supports web development. [Visual Studio Cod
 
 Don't code with nano, Notepad or Gedit. NetBeans isn't very good for web development either. It is also rather heavy in comparison to [Visual Studio Code](https://code.visualstudio.com/).
 
-Also, install [Node.js](https://nodejs.org/en/). The material is being updated to Node version v22. Parts 0-4 are made using Node version 22.3.0, part 10 using version 20.11.0, and the remaining parts using version 18.13.0. Always use at least as recent a Node version. Installation instructions can be found on the [Node.js website](https://nodejs.org/en/download/package-manager/).
+Also, install [Node.js](https://nodejs.org/en/). The material is being updated to Node version v22. Parts 0-5 are made using Node version 22.3.0, part 10 using version 20.11.0, and the remaining parts using version 18.13.0. Always use at least as recent a Node version. Installation instructions can be found on the [Node.js website](https://nodejs.org/en/download/package-manager/).
 
 Node package manager [npm](https://www.npmjs.com/get-npm) will be automatically installed with Node.js. We will be actively using npm throughout the course. Node also comes with [npx](https://www.npmjs.com/package/npx), which we'll need a few times.
 
