@@ -632,7 +632,7 @@ describe('Note app', () => {
   })
 
   // ...
-)}
+})
 ```
 
 Testi siis varmistaa metodin [page.getByText](https://playwright.dev/docs/api/class-page#page-get-by-text) avulla, että sovellus tulostaa virheilmoituksen.
@@ -657,7 +657,7 @@ Voisimmekin tarkentaa testiä varmistamaan, että virheilmoitus tulostuu nimenom
 
 
 ```js
-  test('login fails with wrong password', async ({ page }) => {
+test('login fails with wrong password', async ({ page }) => {
   // ...
 
   const errorDiv = page.locator('.error')
@@ -670,13 +670,13 @@ Testi siis etsii metodilla [page.locator](https://playwright.dev/docs/api/class-
 Ekspekaatiolla [toHaveCSS](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-have-css) on mahdollista testata sovelluksen CSS-tyylejä. Voimme esim. varmistaa, että virheilmoituksen väri on punainen, ja että sen ympärillä on border:
 
 ```js
-  test('login fails with wrong password', async ({ page }) => {
+test('login fails with wrong password', async ({ page }) => {
   // ...
 
-    const errorDiv = page.locator('.error')
-    await expect(errorDiv).toContainText('wrong credentials')
-    await expect(errorDiv).toHaveCSS('border-style', 'solid')
-    await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)')
+  const errorDiv = page.locator('.error')
+  await expect(errorDiv).toContainText('wrong credentials')
+  await expect(errorDiv).toHaveCSS('border-style', 'solid')
+  await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)')
 })
 ```
 
@@ -714,7 +714,7 @@ describe(() => {
   // this test is skipped...
   test('user can login with correct credentials', async ({ page }) => {
     // ...
-  }
+  })
 
   // ...
 })
@@ -811,7 +811,8 @@ describe('Note app', () => {
       await loginWith(page, 'mluukkai', 'salainen') // highlight-line
     })
 
-  // ...
+    // ...
+  })
 })
 ```
 
