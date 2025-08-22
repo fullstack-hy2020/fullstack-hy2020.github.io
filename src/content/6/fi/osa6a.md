@@ -31,7 +31,7 @@ Tutustutaan Reduxiin tekemällä jälleen kerran laskurin toteuttava sovellus:
 
 ![Renderöity kokonaisluku sekä kolme nappia: plus, minus ja zero](../../images/6/1.png)
 
-Tehdään uusi Create React App ‑sovellus ja asennetaan siihen <i>Redux</i>:
+Tehdään uusi Vite‑sovellus ja asennetaan siihen <i>Redux</i>:
 
 ```bash
 npm install redux
@@ -53,7 +53,7 @@ Jos actioneihin liittyy dataa, määritellään niille tarpeen vaatiessa muitaki
 
 Actionien vaikutus sovelluksen tilaan määritellään [reducerin](https://redux.js.org/basics/reducers) avulla. Käytännössä reducer on funktio, joka saa parametrikseen staten nykyisen tilan sekä actionin ja <i>palauttaa</i> staten uuden tilan.
 
-Määritellään nyt sovelluksellemme reducer:
+Määritellään nyt sovelluksellemme reducer tiedostoon <i>main.jsx</i>. Tiedosto näyttää aluksi seuraavalta:
 
 ```js
 const counterReducer = (state, action) => {
@@ -84,7 +84,7 @@ const counterReducer = (state = 0, action) => {
     case 'ZERO':
       return 0
     default: // jos ei mikään ylläolevista tullaan tänne
-    return state
+      return state
   }
 }
 ```

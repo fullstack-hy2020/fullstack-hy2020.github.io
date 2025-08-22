@@ -56,7 +56,7 @@ If there is data involved with the action, other fields can be declared as neede
 
 The impact of the action to the state of the application is defined using a [reducer](https://redux.js.org/tutorials/essentials/part-1-overview-concepts#reducers). In practice, a reducer is a function that is given the current state and an action as parameters. It <i>returns</i> a new state.
 
-Let's now define a reducer for our application at App.jsx:
+Let's now define a reducer for our application at <i>main.jsx</i>. The file initially looks like this:
 
 ```js
 const counterReducer = (state, action) => {
