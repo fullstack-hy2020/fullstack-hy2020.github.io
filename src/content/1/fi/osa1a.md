@@ -356,7 +356,7 @@ Ohjemistokehitys on haastavaa, ja erityisen haastavaksi se muuttuu, jos jokainen
 
 ### Mahdollinen virheilmoitus
 
-Käyttämästäsi editorista riippuen saatat saada tässä vaiheessa seuraavan virheilmoituksen:
+Jos projektiisi on asennettuna Reactin versio 18 tai aiempi, saatat saada tässä vaiheessa seuraavan virheilmoituksen:
 
 ![](../../images/1/1-vite5.png)
 

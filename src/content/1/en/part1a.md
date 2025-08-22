@@ -365,7 +365,7 @@ Software development is hard. It gets even harder if one is not using all the po
 
 ### Possible error message
 
-Depending on the editor you are using, you may receive the following error message at this point:
+If your project has React version 18 or earlier installed, you may receive the following error message at this point:
 
 ![screenshot of vs code showing eslint error: "name is missing in props validation"](../../images/1/1-vite5.png)
 
