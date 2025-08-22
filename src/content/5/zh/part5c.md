@@ -154,64 +154,54 @@ render(<Note note={note} />)
 $ npm test
 
 > notes-frontend@0.0.0 test
-> vitest
+> vitest run
 
 
- DEV  v1.3.1 /Users/mluukkai/opetus/2024-fs/part3/notes-frontend
+ RUN  v3.2.3 /home/vejolkko/repot/fullstack-examples/notes-frontend
 
- ✓ src/components/Note.test.jsx (1)
-   ✓ renders content
+ ✓ src/components/Note.test.jsx (1 test) 19ms
+   ✓ renders content 18ms
 
  Test Files  1 passed (1)
       Tests  1 passed (1)
-   Start at  17:05:37
-   Duration  812ms (transform 31ms, setup 220ms, collect 11ms, tests 14ms, environment 395ms, prepare 70ms)
-
-
- PASS  Waiting for file changes...
+   Start at  14:31:54
+   Duration  874ms (transform 51ms, setup 169ms, collect 19ms, tests 19ms, environment 454ms, prepare 87ms)
 ```
 
-<!-- Eslint complains about the keywords _test_ and _expect_ in the tests. The problem can be solved by installing [eslint-plugin-vitest-globals](https://www.npmjs.com/package/eslint-plugin-vitest-globals): -->
-Eslint在测试中抱怨关键字_test_和_expect_。可以通过安装_eslint-plugin-vitest-globals_来解决这个问题：
-
-```
-npm install --save-dev eslint-plugin-vitest-globals
-```
-
-<!-- and enable the plugin by editing the _.eslint.cjs_ file as follows:  -->
-然后通过编辑_.eslint.cjs_文件来启用插件，如下所示：
+<!-- Eslint complains about the keywords _test_ and _expect_ in the tests. The problem can be solved by adding the following configuration to the <i>eslint.config.js</i> file: -->
+Eslint在测试中抱怨关键字 _test_ 和 _expect_。这个问题可以通过在 <i>eslint.config.js</i> 中添加如下配置来解决：
 
 ```js
-module.exports = {
-  root: true,
-  env: {
-    browser: true,
-    es2020: true,
-    "vitest-globals/env": true // highlight-line
-  },
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:react/jsx-runtime',
-    'plugin:react-hooks/recommended',
-    'plugin:vitest-globals/recommended', // highlight-line
-  ],
+// ...
+
+export default [
   // ...
-}
+  // highlight-start
+  {
+    files: ['**/*.test.{js,jsx}'],
+    languageOptions: {
+      globals: {
+        ...globals.vitest
+      }
+    }
+  }
+  // highlight-end
+]
 ```
+
+<!-- This is how ESLint is informed that Vitest keywords are globally available in test files. -->
+这让 ESLint 知道在测试文件中 Vitest 关键字是全局可用的。
 
 ### Test file location
 
-<!-- In React there are (at least) [two different conventions](https://medium.com/@JeffLombardJr/organizing-tests-in-jest-17fc431ff850) for the test file's location. We created our test files according to the current standard by placing them in the same directory as the component being tested.
-
-The other convention is to store the test files "normally" in a separate _test_ directory. Whichever convention we choose, it is almost guaranteed to be wrong according to someone's opinion.
-
-I do not like this way of storing tests and application code in the same directory. The reason we choose to follow this convention is that it is configured by default in applications created by Vite or create-react-app. -->
+<!-- In React there are (at least) [two different conventions](https://medium.com/@JeffLombardJr/organizing-tests-in-jest-17fc431ff850) for the test file's location. We created our test files according to the current standard by placing them in the same directory as the component being tested. -->
 在 React 中，测试文件的位置至少有 [两种不同的约定](https://medium.com/@JeffLombardJr/organizing-tests-in-jest-17fc431ff850)。我们按照当前标准创建了我们的测试文件，将它们放在与被测组件相同的目录中。
 
+<!-- The other convention is to store the test files "normally" in a separate _test_ directory. Whichever convention we choose, it is almost guaranteed to be wrong according to someone's opinion. -->
 另一个约定是将测试文件“正常”存储在单独的 _test_ 目录中。无论我们选择哪种约定，几乎可以肯定会有人认为是错误的。
 
-我不喜欢将测试和应用程序代码存储在同一目录中的这种方式。我们选择遵循此约定的原因是它在由 Vite 或 create-react-app 创建的应用程序中默认配置。
+<!-- I do not like this way of storing tests and application code in the same directory. However, we will follow this approach for now, as it is the most common practice in small projects. -->
+我不喜欢将测试和应用程序代码存储在同一目录中的这种方式。然而，我们现在遵循此约定，因为它是小项目的最佳实践。
 
 ### Searching for content in a component
 
@@ -238,6 +228,86 @@ test('renders content', () => {
 
 <!-- Test fails if _getByText_ does not find the element it is looking for. -->
 如果 _getByText_ 没有找到它正在查找的元素，测试将失败。
+
+<!-- The _getByText_ command, by default, searches for an element that contains only the **text provided as a parameter** and nothing else. Let us assume that a component would render text to an HTML element as follows: -->
+_getByText_ 命令默认情况下，会搜索只含**作为参数提供的文本**且不包含其他内容的元素。让我们假设一个组件会以如下方式将文本渲染到 HTML 元素中：
+
+```js
+const Note = ({ note, toggleImportance }) => {
+  const label = note.important
+    ? 'make not important' : 'make important'
+
+  return (
+    <li className='note'>
+      Your awesome note: {note.content} // highlight-line
+      <button onClick={toggleImportance}>{label}</button>
+    </li>
+  )
+}
+
+export default Note
+```
+
+<!-- The _getByText_ method that the test uses does <i>not</i> find the element: -->
+测试使用的 _getByText_ 方法 <i>无法</i> 找到该元素：
+
+```js
+test('renders content', () => {
+  const note = {
+    content: 'Does not work anymore :(',
+    important: true
+  }
+
+  render(<Note note={note} />)
+
+  const element = screen.getByText('Does not work anymore :(')
+
+  expect(element).toBeDefined()
+})
+```
+
+<!-- If we want to look for an element that <i>contains</i> the text, we could use an extra option: -->
+如果我们想查找<i>包含</i>特定文本的元素，可以使用一个额外的选项：
+
+```js
+const element = screen.getByText(
+  'Does not work anymore :(', { exact: false }
+)
+```
+
+<!-- or we could use the _findByText_ method: -->
+或者我们可以使用 _findByText_ 方法：
+
+```js
+const element = await screen.findByText('Does not work anymore :(')
+```
+
+<!-- It is important to notice that, unlike the other _ByText_ methods, _findByText_ returns a promise! -->
+需要注意的是，与其它 _ByText_ 方法不同，_findByText_ 返回的是一个 promise！
+
+
+<!-- There are situations where yet another form of the _queryByText_ method is useful. The method returns the element but <i>it does not cause an exception</i> if it is not found. -->
+在某些情况下，查询方法 _queryByText_ 的另一种形式非常有用。该方法会返回元素，但如果未找到，则<i>不会引发异常</i>。
+
+<!-- We could eg. use the method to ensure that something <i>is not rendered</i> to the component: -->
+我们例如可以使用该方法来确保某些内容<i>没有被渲染</i>到组件中：
+
+```js
+test('does not render this', () => {
+  const note = {
+    content: 'This is a reminder',
+    important: true
+  }
+
+  render(<Note note={note} />)
+
+  const element = screen.queryByText('do not want this thing to be rendered')
+  expect(element).toBeNull()
+})
+```
+
+<!-- Other methods also exist, such as [getByTestId](https://testing-library.com/docs/queries/bytestid/), which searches for elements based on id fields specifically created for testing purposes. -->
+还存在其他方法，例如 [getByTestId](https://testing-library.com/docs/queries/bytestid/)，它根据专门为测试目的创建的 id 字段来搜索元素。
 
 <!-- We could also use [CSS-selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors) to find rendered elements by using the method [querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) of the object [container](https://testing-library.com/docs/react-testing-library/api/#container-1) that is one of the fields returned by the render: -->
 们还可以使用 [CSS 选择器](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Selectors) 通过使用 [querySelector](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/querySelector) 方法来查找呈现的元素对象 [container](https://testing-library.com/docs/react-testing-library/api/#container-1)，这是 render 返回的字段之一：
@@ -434,58 +504,30 @@ expect(mockHandler.mock.calls).toHaveLength(1)
 
 ### Tests for the <i>Togglable</i> component
 
-<!-- Let's write a few tests for the <i>Togglable</i> component. Let's add the <i>togglableContent</i> CSS classname to the div that returns the child components. -->
-让我们为<i>Togglable</i>组件编写一些测试。让我们将<i>togglableContent</i> CSS 类名添加到返回子组件的 div。
+<!-- Let's write a few tests for the <i>Togglable</i> component. The tests are shown below: -->
+让我们为 <i>Togglable</i> 组件编写一些测试。测试如下：
 
 ```js
-const Togglable = forwardRef((props, ref) => {
-  // ...
-
-  return (
-    <div>
-      <div style={hideWhenVisible}>
-        <button onClick={toggleVisibility}>
-          {props.buttonLabel}
-        </button>
-      </div>
-      <div style={showWhenVisible} className="togglableContent"> // highlight-line
-        {props.children}
-        <button onClick={toggleVisibility}>cancel</button>
-      </div>
-    </div>
-  )
-})
-```
-
-<!-- The tests are shown below: -->
-测试如下所示：
-
-```js
-
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Togglable from './Togglable'
 
 describe('<Togglable />', () => {
-  let container
-
   beforeEach(() => {
-    container = render(
+    render(
       <Togglable buttonLabel="show...">
-        <div className="testDiv" >
-          togglable content
-        </div>
+        <div>togglable content</div>
       </Togglable>
-    ).container
+    )
   })
 
-  test('renders its children', async () => {
-    await screen.findAllByText('togglable content')
+  test('renders its children', () => {
+    screen.getByText('togglable content')
   })
 
   test('at start the children are not displayed', () => {
-    const div = container.querySelector('.togglableContent')
-    expect(div).toHaveStyle('display: none')
+    const element = screen.getByText('togglable content')
+    expect(element).not.toBeVisible()
   })
 
   test('after clicking the button, children are displayed', async () => {
@@ -493,26 +535,26 @@ describe('<Togglable />', () => {
     const button = screen.getByText('show...')
     await user.click(button)
 
-    const div = container.querySelector('.togglableContent')
-    expect(div).not.toHaveStyle('display: none')
+    const element = screen.getByText('togglable content')
+    expect(element).toBeVisible()
   })
 })
 ```
 
-<!-- The _beforeEach_ function gets called before each test, which then renders the <i>Togglable</i> component and saves the field _container_ of the returned value. -->
-_beforeEach_ 函数在每个测试之前调用，然后渲染<i>Togglable</i>组件并保存返回值的 _container_ 字段。
+<!-- The _beforeEach_ function gets called before each test, which then renders the <i>Togglable</i> component. -->
+_beforeEach_ 函数在每个测试之前调用，然后渲染<i>Togglable</i>组件。
 
 <!-- The first test verifies that the <i>Togglable</i> component renders its child component -->
 第一个测试验证<i>Togglable</i>组件是否渲染其子组件
 
 ```js
-<div className="testDiv">
+<div>
   togglable content
 </div>
 ```
 
-<!-- The remaining tests use the [toHaveStyle](https://www.npmjs.com/package/@testing-library/jest-dom#tohavestyle) method to verify that the child component of the <i>Togglable</i> component is not visible initially, by checking that the style of the <i>div</i> element contains _{ display: 'none' }_. Another test verifies that when the button is pressed the component is visible, meaning that the style for hiding it <i>is no longer</i> assigned to the component. -->
-其余的测试使用 [toHaveStyle](https://www.npmjs.com/package/@testing-library/jest-dom#tohavestyle) 方法来验证<i>Togglable</i>组件的子组件最初不可见，方法是检查<i>div</i>元素的样式是否包含 _{ display: 'none' }_。另一个测试验证当按下按钮时组件可见，这意味着隐藏它的样式<i>不再</i>分配给组件。
+<!-- The remaining tests use the _toBeVisible_ method to verify that the child component of the <i>Togglable</i> component is not visible initially, i.e. that the style of the <i>div</i> element contains _{ display: 'none' }_. Another test verifies that when the button is pressed the component is visible, meaning that the style for hiding it <i>is no longer</i> assigned to the component. -->
+其余的测试使用 _toBeVisible_ 方法来验证 <i>Togglable</i> 组件的子组件最初是不可见的，即 <i>div</i> 元素的样式中包含 _{ display: 'none' }_。另一个测试验证当按下按钮时组件变为可见，这意味着隐藏它的样式 <i>不再</i> 分配给组件。
 
 <!-- Let's also add a test that can be used to verify that the visible content can be hidden by clicking the second button of the component: -->
 我们还可以添加一个测试，该测试可用于验证可以通过单击组件的第二个按钮来隐藏可见的内容：
@@ -530,8 +572,8 @@ describe('<Togglable />', () => {
     const closeButton = screen.getByText('cancel')
     await user.click(closeButton)
 
-    const div = container.querySelector('.togglableContent')
-    expect(div).toHaveStyle('display: none')
+    const element = screen.getByText('togglable content')
+    expect(element).not.toBeVisible()
   })
 })
 ```
@@ -559,28 +601,24 @@ import { useState } from 'react'
 const NoteForm = ({ createNote }) => {
   const [newNote, setNewNote] = useState('')
 
-  const handleChange = (event) => {
-    setNewNote(event.target.value)
-  }
-
-  const addNote = (event) => {
+  const addNote = event => {
     event.preventDefault()
     createNote({
       content: newNote,
-      important: true,
+      important: true
     })
 
     setNewNote('')
   }
 
   return (
-    <div className="formDiv">
+    <div>
       <h2>Create a new note</h2>
 
       <form onSubmit={addNote}>
         <input
           value={newNote}
-          onChange={handleChange}
+          onChange={event => setNewNote(event.target.value)}
         />
         <button type="submit">save</button>
       </form>
@@ -667,13 +705,13 @@ const NoteForm = ({ createNote }) => {
   // ...
 
   return (
-    <div className="formDiv">
+    <div>
       <h2>Create a new note</h2>
 
       <form onSubmit={addNote}>
         <input
           value={newNote}
-          onChange={handleChange}
+          onChange={event => setNewNote(event.target.value)}
         />
         // highlight-start
         <input
@@ -712,6 +750,41 @@ await user.type(inputs[0], 'testing a form...')
 <!-- Method <i>getAllByRole</i> now returns an array and the right input field is the first element of the array. However, this approach is a bit suspicious since it relies on the order of the input fields. -->
 方法<i>getAllByRole</i>现在返回一个数组，正确的输入字段是数组的第一个元素。然而，这种方法有点可疑，因为它依赖于输入字段的顺序。
 
+<!-- If an <i>label</i> were defined for the input field, the input field could be located using it with the getByLabelText method. For example, if we added a label to the input field: -->
+如果为输入字段定义了 <i>label</i>，可以使用 getByLabelText 方法通过它定位输入字段。例如，如果我们给输入字段添加了一个 label：
+
+```js
+  // ...
+  <label> // highlight-line
+    content // highlight-line
+    <input
+      value={newNote}
+      onChange={event => setNewNote(event.target.value)}
+    />
+  </label> // highlight-line
+  // ...
+```
+
+<!-- The test could locate the input field as follows: -->
+测试可以按以下方式定位输入字段：
+
+```js
+test('<NoteForm /> updates parent state and calls onSubmit', () => {
+  const createNote = vi.fn()
+
+  render(<NoteForm createNote={createNote} />) 
+
+  const input = screen.getByLabelText('content') // highlight-line
+  const sendButton = screen.getByText('save')
+
+  userEvent.type(input, 'testing a form...' )
+  userEvent.click(sendButton)
+
+  expect(createNote.mock.calls).toHaveLength(1)
+  expect(createNote.mock.calls[0][0].content).toBe('testing a form...' )
+})
+```
+
 <!-- Quite often input fields have a <i>placeholder</i> text that hints user what kind of input is expected. Let us add a placeholder to our form: -->
 通常输入字段有一个<i>占位符</i>文本，提示用户期望哪种类型的输入。让我们在表单中添加一个占位符：
 
@@ -720,13 +793,13 @@ const NoteForm = ({ createNote }) => {
   // ...
 
   return (
-    <div className="formDiv">
+    <div>
       <h2>Create a new note</h2>
 
       <form onSubmit={addNote}>
         <input
           value={newNote}
-          onChange={handleChange}
+          onChange={event => setNewNote(event.target.value)}
           placeholder='write note content here' // highlight-line 
         />
         <input
@@ -760,8 +833,8 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
 })
 ```
 
-<!-- The most flexible way of finding elements in tests is the method <i>querySelector</i> of the _container_ object, which is returned by _render_, as was mentioned [earlier in this part](/en/part5/testing_react_apps#searching-for-content-in-a-component). Any CSS selector can be used with this method for searching elements in tests. -->
-在测试中查找元素的最灵活的方法是<i>querySelector</i>方法，它是 _container_ 对象的方法，由 _render_ 返回，如 [本部分前面](/en/part5/testing_react_apps#searching-for-content-in-a-component) 所述。任何 CSS 选择器都可以与此方法一起用于搜索测试中的元素。
+Sometimes, finding the correct element using the methods described above can be challenging. In such cases, an alternative is the method <i>querySelector</i> of the _container_ object, which is returned by _render_, as was mentioned [earlier in this part](/en/part5/testing_react_apps#searching-for-content-in-a-component). Any CSS selector can be used with this method for searching elements in tests.
+有时候，使用上述方法找到正确的元素可能会很困难。在这种情况下，一个替代方法是使用 _render_ 返回的 _container_ 对象上的 <i>querySelector</i> 方法，正如[本部分前面](/en/part5/testing_react_apps#searching-for-content-in-a-component)提到的。任何 CSS 选择器都可以与这个方法一起在测试中搜索元素。
 
 <!-- Consider eg. that we would define a unique _id_ to the input field: -->
 例如，考虑我们为输入字段定义一个唯一的 _id_：
@@ -771,13 +844,13 @@ const NoteForm = ({ createNote }) => {
   // ...
 
   return (
-    <div className="formDiv">
+    <div>
       <h2>Create a new note</h2>
 
       <form onSubmit={addNote}>
         <input
           value={newNote}
-          onChange={handleChange}
+          onChange={event => setNewNote(event.target.value)}
           id='note-input' // highlight-line 
         />
         <input
@@ -803,82 +876,6 @@ const input = container.querySelector('#note-input')
 <!-- However, we shall stick to the approach of using _getByPlaceholderText_ in the test. -->
 但是，我们将坚持在测试中使用 _getByPlaceholderText_ 的方法。
 
-<!-- Let us look at a couple of details before moving on. Let us assume that a component would render text to an HTML element as follows: -->
-在继续之前，让我们看一些细节。让我们假设一个组件会将文本渲染到 HTML 元素，如下所示：
-
-```js
-const Note = ({ note, toggleImportance }) => {
-  const label = note.important
-    ? 'make not important' : 'make important'
-
-  return (
-    <li className='note'>
-      Your awesome note: {note.content} // highlight-line
-      <button onClick={toggleImportance}>{label}</button>
-    </li>
-  )
-}
-
-export default Note
-```
-
-<!-- the _getByText_ method that the test uses does <i>not</i> find the element -->
-测试使用的 _getByText_ 方法<i>找不到</i>元素
-
-```js
-test('renders content', () => {
-  const note = {
-    content: 'Does not work anymore :(',
-    important: true
-  }
-
-  render(<Note note={note} />)
-
-  const element = screen.getByText('Does not work anymore :(')
-
-  expect(element).toBeDefined()
-})
-```
-
-<!-- The _getByText_ method looks for an element that has the **same text** that it has as a parameter, and nothing more. If we want to look for an element that <i>contains</i> the text, we could use an extra option: -->
-_getByText_ 方法查找具有**相同文本**的元素作为其参数，仅此而已。如果我们想查找<i>包含</i>文本的元素，我们可以使用额外的选项：
-
-```js
-const element = screen.getByText(
-  'Does not work anymore :(', { exact: false }
-)
-```
-
-<!-- or we could use the _findByText_ method: -->
-或者我们可以使用 _findByText_ 方法：
-
-```js
-const element = await screen.findByText('Does not work anymore :(')
-```
-
-<!-- It is important to notice that, unlike the other _ByText_ methods, _findByText_ returns a promise! -->
-重要的是要注意，与其他 _ByText_ 方法不同，_findByText_ 返回一个 Promise！
-
-<!-- There are situations where yet another form of the _queryByText_ method is useful. The method returns the element but <i>it does not cause an exception</i> if it is not found. -->
-在某些情况下，_queryByText_ 方法的另一种形式很有用。该方法返回元素，但<i>如果没有找到它，则不会引发异常</i>。
-
-<!-- We could eg. use the method to ensure that something <i>is not rendered</i> to the component: -->
-例如，我们可以使用该方法来确保<i>没有</i>向组件呈现某些内容：
-
-```js
-test('does not render this', () => {
-  const note = {
-    content: 'This is a reminder',
-    important: true
-  }
-
-  render(<Note note={note} />)
-
-  const element = screen.queryByText('do not want this thing to be rendered')
-  expect(element).toBeNull()
-})
-```
-
 ### Test coverage
 
 <!-- We can easily find out the [coverage](https://vitest.dev/guide/coverage.html#coverage) of our tests by running them with the command. -->
@@ -899,6 +896,15 @@ HTML 报告将生成到<i>coverage</i>目录。
 该报告将告诉我们每个组件中未测试代码的行：
 
 ![HTML report of the test coverage](../../images/5/19newer.png)
+
+<!-- Let's add the directory <i>coverage/</i> to the <i>.gitignore</i> file to exclude its contents from version control: -->
+让我们把 <i>coverage/</i> 添加到 <i>.gitignore</i> 文件中，以将其内容排除在版本控制之外：
+
+```js
+//...
+
+coverage/
+```
 
 <!-- You can find the code for our current application in its entirety in the <i>part5-8</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-8). -->
 你可以在 [这个 GitHub 仓库](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-8) 的<i>part5-8</i>分支中找到我们当前应用程序的完整代码。
