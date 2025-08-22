@@ -161,7 +161,7 @@ Erittäin tärkeä komento on myös _fly logs_ jonka avulla voit seurata tuotant
 
 #### Render
 
-Ohje olettaa, että Renderiin on [kirjauduttu](https://dashboard.render.com/) GitHub-tunnuksen avulla.
+Huomaa, että saatat joutua syöttämään pankkikorttisi tiedot palveluun, vaikka käyttäisit vain ilmaisia ominaisuuksia. Ohje olettaa, että Renderiin on [kirjauduttu](https://dashboard.render.com/) GitHub-tunnuksen avulla.
 
 Kirjautumisen jälkeen luodaan uusi "web service":
 
