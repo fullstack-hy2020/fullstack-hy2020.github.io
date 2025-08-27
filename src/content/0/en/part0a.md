@@ -15,7 +15,7 @@ The course is totally free of charge. You can get a certificate and even the Uni
 
 ### Prerequisites
 
-Participants are expected to have good programming skills, basic knowledge of web programming and databases, and know the basics of the Git version control system. You are also expected to have perseverance and a capacity for solving problems and seeking information independently.
+Participants are expected to have good programming skills, basic knowledge of web programming and databases, and know the basics of the Git version control system. You are also expected to have perseverance and a capacity for solving problems and seeking information independently
 
 Previous knowledge of JavaScript or other course topics is not required.
 
