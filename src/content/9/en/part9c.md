@@ -104,7 +104,7 @@ Now that we have set our configuration, we can continue by installing *express* 
 
 ```shell
 npm install express
-npm install --save-dev eslint @eslint/js typescript-eslint @stylistic/eslint-plugin @types/express @types/eslint__js
+npm install --save-dev eslint @eslint/js typescript-eslint @stylistic/eslint-plugin @types/express
 ```
 
 Now our *package.json* should look like this:
@@ -123,7 +123,6 @@ Now our *package.json* should look like this:
   "devDependencies": {
     "@eslint/js": "^9.8.0",
     "@stylistic/eslint-plugin": "^2.6.1",
-    "@types/eslint__js": "^8.42.3",
     "@types/express": "^4.17.21",
     "eslint": "^9.8.0",
     "typescript": "^5.5.4",
