@@ -513,40 +513,6 @@ const NewNote = () => {
 }
 ```
 
-Finally, let's clean up the <i>main.jsx</i> file a bit by moving the code related to the creation of the Redux store into its own, <i>store.js</i> file:
-
-```js
-import { configureStore } from '@reduxjs/toolkit'
-
-import noteReducer from './reducers/noteReducer'
-import filterReducer from './reducers/filterReducer'
-
-const store = configureStore({
-  reducer: {
-    notes: noteReducer,
-    filter: filterReducer
-  }
-})
-
-export default store
-```
-
-After the changes, the content of the <i>main.jsx</i> is the following:
-
-```js
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { Provider } from 'react-redux' 
-import store from './store' // highlight-line
-import App from './App'
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
-    <App />
-  </Provider>
-)
-```
-
 The current state of the code for the application can be found on [GitHub](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5) in the branch <i>part6-5</i>.
 
 Redux Toolkit offers a multitude of tools to simplify asynchronous state management. Suitable tools for this use case are for example the [createAsyncThunk](https://redux-toolkit.js.org/api/createAsyncThunk) function and the [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) API.
