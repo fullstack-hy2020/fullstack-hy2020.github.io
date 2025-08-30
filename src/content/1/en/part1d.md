@@ -790,7 +790,7 @@ The event handler is now set to a function call:
 <button onClick={hello()}>button</button>
 ```
 
-Earlier on we stated that an event handler may not be a call to a function and that it has to be a function or a reference to a function. Why then does a function call work in this case?
+Earlier, we stated that an event handler may not be a function call; rather, it has to either be a function definition or a reference to one. Why then does a function call work in this case?
 
 When the component is rendered, the following function gets executed:
 
