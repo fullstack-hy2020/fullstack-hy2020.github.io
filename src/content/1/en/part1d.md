@@ -1139,7 +1139,8 @@ Programming is hard, that is why I will use all the possible means to make it ea
 
 Large language models such as [ChatGPT](https://chat.openai.com/auth/login), [Claude](https://claude.ai/) and [GitHub Copilot](https://github.com/features/copilot) have proven to be very useful in software development.
 
-Personally, I mainly use Copilot, which integrates seamlessly with VS Code thanks to the [plugin](https://visualstudio.microsoft.com/github-copilot/).
+Personally, I mainly use GitHub Copilot, which is now [natively integrated into Visual Studio Code](https://code.visualstudio.com/docs/copilot/overview)
+As a reminder, if you're a university student, you can access Copilot pro for free through the [GitHub Student Developer Pack](https://education.github.com/pack).
 
 Copilot is useful in a wide variety of scenarios. Copilot can be asked to generate code for an open file by describing the desired functionality in text:
 
