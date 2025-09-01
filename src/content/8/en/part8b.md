@@ -84,9 +84,10 @@ The application can communicate with a GraphQL server using the *client* object.
 import ReactDOM from 'react-dom/client'
 import App from './App'
 
+import { ApolloProvider } from '@apollo/client/react' // highlight-line
+
 import {
   ApolloClient,
-  ApolloProvider, // highlight-line
   InMemoryCache,
 } from '@apollo/client'
 
