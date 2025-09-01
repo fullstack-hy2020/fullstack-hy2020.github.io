@@ -113,7 +113,8 @@ Currently, the use of the hook function [useQuery](https://www.apollographql.com
 The query is made by the <i>App</i> component, the code of which is as follows:
 
 ```js
-import { gql, useQuery } from '@apollo/client'
+import { gql} from '@apollo/client'
+import { useQuery } from '@apollo/client/react' // highlight-line
 
 const ALL_PERSONS = gql`
 query {
@@ -246,7 +247,8 @@ The solution is as follows:
 
 ```js
 import { useState } from 'react'
-import { gql, useQuery } from '@apollo/client'
+import { gql } from '@apollo/client'
+import { useQuery } from '@apollo/client/react'
 
 const FIND_PERSON = gql`
   query findPersonByName($nameToSearch: String!) {
