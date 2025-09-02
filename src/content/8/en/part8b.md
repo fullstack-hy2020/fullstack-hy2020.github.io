@@ -89,6 +89,7 @@ import App from './App'
 import {
   ApolloClient,
   ApolloProvider, // highlight-line
+  HttpLink,
   InMemoryCache,
 } from '@apollo/client'
 
