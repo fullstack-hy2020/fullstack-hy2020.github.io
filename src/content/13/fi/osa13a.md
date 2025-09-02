@@ -531,7 +531,7 @@ const note = Note.build(req.body)
 await note.save()
 ```
 
-Metodin <i>build</i> kutsuminen ei tallenna vielä olioata tietokantaan, joten olio on vielä mahdollista muokata ennen varsinaista talletustapahtumaa:
+Metodin <i>build</i> kutsuminen ei tallenna vielä oliota tietokantaan, joten olio on vielä mahdollista muokata ennen varsinaista talletustapahtumaa:
 
 ```js
 const note = Note.build(req.body)
