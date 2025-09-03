@@ -82,7 +82,7 @@ Passing event handlers to the child components of the <i>App</i> component has r
 
 ### Rendering Collections
 
-We will now do the 'frontend', or the browser-side application logic, in React for an application that's similar to the example application from [part 0](/en/part0)
+Now, we will build the frontend, or the user interface (the part users see in their browser), using React, similar to the example application from [part 0](/en/part0).
 
 Let's start with the following (the file <i>App.jsx</i>):
 
