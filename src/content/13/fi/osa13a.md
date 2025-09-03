@@ -524,7 +524,7 @@ app.post('/api/notes', async (req, res) => {
 
 Uuden muistiinpanon luominen siis tapahtuu kutsumalla modelin <i>Note</i> metodia [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) ja antamalla sille parametriksi sarakkeiden arvot määrittelevän olion.
 
-Metodin <i>create</i> sijaan tietokantaan tallentaminen [olisi mahdollista tehdä](https://sequelize.org/master/manual/model-instances.html#creating-an-instance) käyttäen ensin metodia [build](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-build) luomaan halutusta datasta Model-olio, ja kutsumalla sille metodia [save](https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-save):
+Metodin <i>create</i> sijaan tietokantaan tallentaminen [olisi mahdollista tehdä](https://sequelize.org/master/manual/model-instances.html#creating-an-instance) käyttäen ensin metodia [build](https://sequelize.org/api/v6/class/src/model.js~model#static-method-build) luomaan halutusta datasta Model-olio, ja kutsumalla sille metodia [save](https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-save):
 
 ```js
 const note = Note.build(req.body)
