@@ -486,7 +486,7 @@ services:
   app:
     # ...
   nginx:
-    image: nginx:1.20.1
+    image: nginx:1.25-alpine
     volumes:
       - ./nginx.dev.conf:/etc/nginx/nginx.conf:ro
     ports:
@@ -500,9 +500,9 @@ with that added, we can run _docker compose -f docker-compose.dev.yml up_ and se
 
 ```bash
 $ docker container ls
-CONTAINER ID   IMAGE            COMMAND  PORTS                   NAMES
-a02ae58f3e8d   nginx:1.20.1     ...      0.0.0.0:8080->80/tcp    reverse-proxy
-5ee0284566b4   hello-front-dev  ...      0.0.0.0:5173->5173/tcp  hello-front-dev
+CONTAINER ID   IMAGE              COMMAND  PORTS                   NAMES
+a02ae58f3e8d   nginx:1.25-alpine  ...      0.0.0.0:8080->80/tcp    reverse-proxy
+5ee0284566b4   hello-front-dev    ...      0.0.0.0:5173->5173/tcp  hello-front-dev
 ```
 
 Connecting to http://localhost:8080 will lead to a familiar-looking page with 502 status. 
