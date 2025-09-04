@@ -512,9 +512,9 @@ This is because directing requests to http://localhost:5173 leads to nowhere as 
 Let's test this by going inside the Nginx container and using curl to send a request to the application itself. In our usage curl is similar to wget, but won't need any flags.
 
 ```bash
-$ docker exec -it reverse-proxy bash  
+$ docker exec -it reverse-proxy sh
 
-root@374f9e62bfa8:\# curl http://localhost:80
+/ # curl http://localhost:80
   <html>
   <head><title>502 Bad Gateway</title></head>
   ...
@@ -551,7 +551,7 @@ services:
   app:
     # ...
   nginx:
-    image: nginx:1.20.1
+    image: nginx:1.25-alpine
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
@@ -691,7 +691,7 @@ services:
       # no ports here!
 
   nginx:
-    image: nginx:1.20.1
+    image: nginx:1.25-alpine
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
