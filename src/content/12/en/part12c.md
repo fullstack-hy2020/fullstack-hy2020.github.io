@@ -525,7 +525,7 @@ To help us, Docker Compose has set up a network when we ran _docker compose up_.
 Since we are inside the container, we can also test the DNS! Let's curl the service name (app) in port 5173
 
 ```html
-root@374f9e62bfa8:\# curl http://app:5173
+/ # curl http://app:5173
 <!doctype html>
 <html lang="en">
   <head>
