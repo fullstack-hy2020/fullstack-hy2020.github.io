@@ -1,9 +1,0 @@
-@import '../common.scss';
-
-.company__logo {
-  padding: 10px;
-
-  @include from($desktop) {
-    width: 15% !important;
-  }
-}
