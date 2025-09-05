@@ -55,7 +55,7 @@ Interesting lines in the code have been highlighted:
 
 ```js
 import { useState, useEffect } from 'react'
-import { useMutation } from '@apollo/client/react';
+import { useMutation } from '@apollo/client/react'
 import { LOGIN } from '../queries'
 
 const LoginForm = ({ setError, setToken }) => {
@@ -165,7 +165,7 @@ After the backend changes, creating new persons requires that a valid user token
 
 ```js
 import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client'  // highlight-line
-import { ApolloProvider } from '@apollo/client/react';
+import { ApolloProvider } from '@apollo/client/react'
 import { setContext } from '@apollo/client/link/context' // highlight-line
 
 // highlight-start

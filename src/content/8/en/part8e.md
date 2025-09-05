@@ -649,7 +649,7 @@ import {
   ApolloClient, InMemoryCache, createHttpLink,
   split  // highlight-line
 } from '@apollo/client'
-import { ApolloProvider } from '@apollo/client/react';
+import { ApolloProvider } from '@apollo/client/react'
 import { setContext } from '@apollo/client/link/context'
 
 // highlight-start
