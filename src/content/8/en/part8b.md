@@ -23,7 +23,7 @@ At the moment, there are two good options: [Relay](https://facebook.github.io/re
 
 ### Apollo client
 
-Let us create a new React app, and can continue installing dependencies required by [Apollo client](https://www.apollographql.com/docs/react/get-started/).
+Let's create a new React app and install the necessary dependencies for [Apollo client](https://www.apollographql.com/docs/react/get-started/).
 
 ```bash
 npm install @apollo/client graphql
