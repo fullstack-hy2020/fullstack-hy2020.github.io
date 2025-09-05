@@ -231,7 +231,7 @@ We define parameterized URLs in the routing of the <i>App</i> component as follo
 </Router>
 ```
 
-We define the route rendering a specific note "express style" by marking the parameter with a colon - <i>:id</i>
+We define the route rendering a specific note in an "express style" way, by marking the parameter with a colon - <i>:id</i>
 
 ```js
 <Route path="/notes/:id" element={<Note notes={notes} />} />
