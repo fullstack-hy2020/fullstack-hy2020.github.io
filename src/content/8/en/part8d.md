@@ -55,7 +55,7 @@ Interesting lines in the code have been highlighted:
 
 ```js
 import { useState, useEffect } from 'react'
-import { useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client/react';
 import { LOGIN } from '../queries'
 
 const LoginForm = ({ setError, setToken }) => {
@@ -164,7 +164,8 @@ const App = () => {
 After the backend changes, creating new persons requires that a valid user token is sent with the request. In order to send the token, we have to change the way we define the *ApolloClient* object in <i>main.jsx</i> a little.
 
 ```js
-import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client'  // highlight-line
+import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client'  // highlight-line
+import { ApolloProvider } from '@apollo/client/react';
 import { setContext } from '@apollo/client/link/context' // highlight-line
 
 // highlight-start

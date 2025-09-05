@@ -35,10 +35,10 @@ We'll start with the following code for our application:
 import ReactDOM from 'react-dom/client'
 import App from './App'
 
-import { ApolloClient, InMemoryCache, gql } from '@apollo/client'
+import { ApolloClient, HttpLink, InMemoryCache, gql } from '@apollo/client';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000',
+  link: new HttpLink({ uri: 'http://localhost:4000' }),
   cache: new InMemoryCache(),
 })
 
@@ -84,14 +84,11 @@ The application can communicate with a GraphQL server using the *client* object.
 import ReactDOM from 'react-dom/client'
 import App from './App'
 
-import {
-  ApolloClient,
-  ApolloProvider, // highlight-line
-  InMemoryCache,
-} from '@apollo/client'
+import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client/react'; // highlight-line
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000',
+  link: new HttpLink({ uri: 'http://localhost:4000' }),
   cache: new InMemoryCache(),
 })
 
@@ -112,7 +109,8 @@ Currently, the use of the hook function [useQuery](https://www.apollographql.com
 The query is made by the <i>App</i> component, the code of which is as follows:
 
 ```js
-import { gql, useQuery } from '@apollo/client'
+import { gql } from '@apollo/client';
+import { useQuery } from '@apollo/client/react';
 
 const ALL_PERSONS = gql`
 query {
@@ -245,7 +243,8 @@ The solution is as follows:
 
 ```js
 import { useState } from 'react'
-import { gql, useQuery } from '@apollo/client'
+import { gql } from '@apollo/client';
+import { useQuery } from '@apollo/client/react';
 
 const FIND_PERSON = gql`
   query findPersonByName($nameToSearch: String!) {
@@ -401,7 +400,8 @@ Let's create a new component for adding a new person to the directory:
 
 ```js
 import { useState } from 'react'
-import { gql, useMutation } from '@apollo/client'
+import { gql } from '@apollo/client';
+import { useMutation } from '@apollo/client/react';
 
 const CREATE_PERSON = gql`
   // ...
@@ -686,7 +686,7 @@ Interesting lines on the code have been highlighted.
 
 ```js
 import { useState } from 'react'
-import { useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client/react';
 
 import { EDIT_NUMBER } from '../queries'
 

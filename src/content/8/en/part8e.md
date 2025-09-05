@@ -646,9 +646,10 @@ The configuration in <i>main.jsx</i> has to be modified like so:
 
 ```js
 import { 
-  ApolloClient, InMemoryCache, ApolloProvider, createHttpLink,
+  ApolloClient, InMemoryCache, createHttpLink,
   split  // highlight-line
 } from '@apollo/client'
+import { ApolloProvider } from '@apollo/client/react';
 import { setContext } from '@apollo/client/link/context'
 
 // highlight-start
@@ -739,7 +740,7 @@ and do the subscription in the App component:
 
 ```js
 
-import { useQuery, useMutation, useSubscription } from '@apollo/client' // highlight-line
+import { useQuery, useMutation, useSubscription } from '@apollo/client/react' // highlight-line
 
 
 const App = () => {
