@@ -655,9 +655,10 @@ Jotta saamme tilaukset käyttöön React-sovelluksessa, tarvitaan jonkin verran 
 
 ```js
 import { 
-  ApolloClient, InMemoryCache, ApolloProvider, createHttpLink, 
+  ApolloClient, InMemoryCache, createHttpLink,
   split  // highlight-line
 } from '@apollo/client'
+import { ApolloProvider } from '@apollo/client/react'
 import { setContext } from 'apollo-link-context'
 
 // highlight-start
@@ -745,7 +746,7 @@ export const PERSON_ADDED = gql`
 ja tehdään tilaus komponentissa App:
 
 ```js
-import { useQuery, useApolloClient, useSubscription } from '@apollo/client'
+import { useQuery, useApolloClient, useSubscription } from '@apollo/client/react'
 import { PERSON_ADDED } from './queries.js'
 
 const App = () => {

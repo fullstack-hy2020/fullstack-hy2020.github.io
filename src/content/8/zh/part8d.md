@@ -60,7 +60,7 @@ export const LOGIN = gql`
 
 ```js
 import { useState, useEffect } from 'react'
-import { useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client/react'
 import { LOGIN } from '../queries'
 
 const LoginForm = ({ setError, setToken }) => {

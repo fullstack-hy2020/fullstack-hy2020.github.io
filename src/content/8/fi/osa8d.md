@@ -54,7 +54,7 @@ Kirjautumisesta huolehtiva komponentti _LoginForm_ toimii melko samalla tavalla 
 
 ```js
 import { useState, useEffect } from 'react'
-import { useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client/react'
 import { LOGIN } from '../queries'
 
 const LoginForm = ({ setError, setToken }) => {
@@ -164,7 +164,8 @@ Backendin muutosten jälkeen uusien henkilöiden lisäys puhelinluetteloon vaati
 Tämä edellyttää pientä muutosta tiedostossa <i>main.jsx</i> olevaan ApolloClient-olion konfiguraatioon
 
 ```js
-import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client'  // highlight-line
+import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client'  // highlight-line
+import { ApolloProvider } from '@apollo/client/react'
 import { setContext } from '@apollo/client/link/context' // highlight-line
 
 // highlight-start

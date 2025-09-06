@@ -88,8 +88,9 @@ import ReactDOM from 'react-dom'
 import App from './App'
 
 import { 
-  ApolloClient, ApolloProvider, HttpLink, InMemoryCache // highlight-line
+  ApolloClient, HttpLink, InMemoryCache // highlight-line
 } from '@apollo/client' 
+import { ApolloProvider } from '@apollo/client/react' // highlight-line
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
@@ -119,7 +120,8 @@ La consulta la realiza el componente <i>App</i>, cuyo código es el siguiente:
 
 ```js
 import React from 'react'
-import { gql, useQuery } from '@apollo/client';
+import { gql } from '@apollo/client'
+import { useQuery } from '@apollo/client/react'
 
 const ALL_PERSONS = gql`
 query {
@@ -410,7 +412,8 @@ Creemos un nuevo componente para agregar una nueva persona al directorio:
 
 ```js
 import React, { useState } from 'react'
-import { gql, useMutation } from '@apollo/client'
+import { gql } from '@apollo/client'
+import { useMutation } from '@apollo/client/react'
 
 const CREATE_PERSON = gql`
   // ...
@@ -555,7 +558,7 @@ Por el momento, en nuestro código, las consultas y el componente están definid
 Separemos las definiciones de consulta en su propio archivo <i>queries.js</i>:
 
 ```js
-import { gql  } from '@apollo/client'
+import { gql } from '@apollo/client'
 
 export const ALL_PERSONS = gql`
   query {
@@ -697,7 +700,7 @@ Se han resaltado líneas interesantes en el código.
 
 ```js
 import React, { useState } from 'react'
-import { useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client/react'
 
 import { EDIT_NUMBER } from '../queries'
 
