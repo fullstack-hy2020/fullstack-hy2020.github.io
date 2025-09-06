@@ -228,9 +228,10 @@ La configuración en <i>index.js</i> tiene que ser modificada así:
 
 ```js
 import { 
-  ApolloClient, ApolloProvider, HttpLink, InMemoryCache, 
+  ApolloClient, HttpLink, InMemoryCache, 
   split  // highlight-line
 } from '@apollo/client'
+import { ApolloProvider } from '@apollo/client/react'
 import { setContext } from 'apollo-link-context'
 
 // highlight-start
@@ -323,7 +324,7 @@ export const PERSON_ADDED = gql`
 
 import {
   useQuery, useMutation, useSubscription, useApolloClient // highlight-line
-} from '@apollo/client'
+} from '@apollo/client/react'
 
 const App = () => {
   // ...
