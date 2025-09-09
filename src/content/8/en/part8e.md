@@ -351,7 +351,7 @@ Unfortunately, startStandaloneServer does not allow adding subscriptions to the 
 Let us install Express
 
 ```bash
-npm install express cors
+npm install express cors @as-integrations/express5
 ```
 
 and the file <i>index.js</i> changes to:
@@ -359,7 +359,7 @@ and the file <i>index.js</i> changes to:
 ```js
 const { ApolloServer } = require('@apollo/server')
 // highlight-start
-const { expressMiddleware } = require('@apollo/server/express4')
+const { expressMiddleware } = require('@as-integrations/express5')
 const { ApolloServerPluginDrainHttpServer } = require('@apollo/server/plugin/drainHttpServer')
 const { makeExecutableSchema } = require('@graphql-tools/schema')
 const express = require('express')
