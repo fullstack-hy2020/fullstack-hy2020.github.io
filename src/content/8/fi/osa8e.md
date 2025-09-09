@@ -350,7 +350,7 @@ startStandaloneServer ei kuitenkaan mahdollista subscriptioiden lisäämistä so
 Asennetaan Express:
 
 ```
-npm install express cors
+npm install express cors @as-integrations/express5
 ```
 
 ja muutetaan tiedosto <i>index.js</i> seuraavaan muotoon:
@@ -358,7 +358,7 @@ ja muutetaan tiedosto <i>index.js</i> seuraavaan muotoon:
 ```js
 const { ApolloServer } = require('@apollo/server')
 // highlight-start
-const { expressMiddleware } = require('@apollo/server/express4')
+const { expressMiddleware } = require('@as-integrations/express5')
 const { ApolloServerPluginDrainHttpServer } = require('@apollo/server/plugin/drainHttpServer')
 const { makeExecutableSchema } = require('@graphql-tools/schema')
 const express = require('express')
