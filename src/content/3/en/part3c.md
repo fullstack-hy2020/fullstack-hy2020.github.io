@@ -923,6 +923,23 @@ One notable point is that the code now has nested promises, meaning that within 
 
 Usually, this is not recommended because it can make the code difficult to read. In this case, however, the solution works because it ensures that the _.then_ block following the _save()_ method is only executed if a note with the given id is found in the database and the _save()_ method is called. In the fourth part of the course, we will explore the async/await syntax, which offers an easier and clearer way to handle such situations.
 
+Alternative option utilizing mogooose _.findbyIdAndUpate_ method:
+
+```js
+app.put('/api/notes/:id', (request, response, next) => {
+  const id = request.params.id
+  const values = request.body
+  const opts = { returnDocument: 'after' } //returns the object after update (default: 'before')
+
+  Contact.findByIdAndUpdate(id, values, opts)
+    .then(updatedPerson => {
+      console.log(updatedNote)
+      response.json(updatedNote)
+    })
+    .catch(error => next(error))
+})
+```
+
 After testing the backend directly with Postman or the VS Code REST client, we can verify that it seems to work. The frontend also appears to work with the backend using the database.
 
 You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5).
