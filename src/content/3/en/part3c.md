@@ -923,7 +923,7 @@ One notable point is that the code now has nested promises, meaning that within 
 
 Usually, this is not recommended because it can make the code difficult to read. In this case, however, the solution works because it ensures that the _.then_ block following the _save()_ method is only executed if a note with the given id is found in the database and the _save()_ method is called. In the fourth part of the course, we will explore the async/await syntax, which offers an easier and clearer way to handle such situations.
 
-Alternative option utilizing mogooose _.findbyIdAndUpate_ method:
+Alternative option utilizing mogooose _.findByIdAndUpate_ method:
 
 ```js
 app.put('/api/notes/:id', (request, response, next) => {
@@ -931,7 +931,7 @@ app.put('/api/notes/:id', (request, response, next) => {
   const values = request.body
   const opts = { returnDocument: 'after' } //returns the object after update (default: 'before')
 
-  Contact.findByIdAndUpdate(id, values, opts)
+  Note.findByIdAndUpdate(id, values, opts)
     .then(updatedPerson => {
       console.log(updatedNote)
       response.json(updatedNote)
