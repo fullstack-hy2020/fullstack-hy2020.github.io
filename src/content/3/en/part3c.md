@@ -932,7 +932,7 @@ app.put('/api/notes/:id', (request, response, next) => {
   const opts = { returnDocument: 'after' } //returns the object after update (default: 'before')
 
   Note.findByIdAndUpdate(id, values, opts)
-    .then(updatedPerson => {
+    .then(updatedNote => {
       console.log(updatedNote)
       response.json(updatedNote)
     })
