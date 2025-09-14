@@ -1128,7 +1128,7 @@ Ohjelmointi on hankalaa, ja sen takia lupaan hyödyntää kaikkia ohjelmointia h
 
 Suuret kielimallit, kuten [ChatGPT](https://chat.openai.com/auth/login), [Claude](https://claude.ai/) ja [GitHub Copilot](https://github.com/features/copilot) ovat osoittautuneet erittäin hyödyllisiksi ohjelmistokehityksessä.
 
-Itse käytän pääasiassa Copilottia, joka integroituu saumattomasti VS Codeen [pluginin](https://visualstudio.microsoft.com/github-copilot/) ansiosta.
+Itse käytän pääasiassa Copilottia, joka on nykyään [natiivisti integroitu VS Codeen](https://code.visualstudio.com/docs/copilot/overview). Lisäksi yliopisto-opiskelijat saavat Copilot Pro -version käyttöönsä ilmaiseksi [GitHub Student Developer Packin](https://education.github.com/pack) kautta.
 
 Copilot on hyödyllinen monenlaisissa skenaarioissa. Copilotia voi pyytää generoimaan koodia avoinna olevaan tiedostoon kuvailemalla halutun toiminnallisuuden teksinä:
 
