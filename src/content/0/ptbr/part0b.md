@@ -439,7 +439,7 @@ A guia de Rede também mostra os dados enviados com o formulário:
 
 Obs.: Na versão mais recente do Chrome, o menu drop-down (lista suspensa) "Form Data" está dentro da nova guia "Payload", localizada à direita da guia "Cabeçalhos".
 
-![Menu drop-down do Form Data das Ferramentas do Desenvolvedor](../../images/0/23e.png)
+![Menu drop-down do Form Data das Ferramentas do Desenvolvedor](../../images/0/23g.png)
 
 A tag Form tem os atributos <i>action</i> e <i>method</i>, que definem que o envio do formulário é feito como uma requisição HTTP POST para o endereço <i>new\_note</i>.
 

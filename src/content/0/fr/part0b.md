@@ -431,7 +431,7 @@ L'onglet réseau affiche également les données soumises avec le formulaire :
 
 NB: Dans les dernières versions de Chrome, les informations sur les données de formulaire se trouvent dans le nouvel onglet "Charge utile" (ou "Payload"), situé à droite de l'onglet En-têtes
 
-![informations sur les données de formulaire](../../images/0/23e.png)
+![informations sur les données de formulaire](../../images/0/23g.png)
 
 La balise Form a les attributs <i>action</i> et <i>method</i>, qui définissent que la soumission du formulaire se fait sous la forme d'une requête HTTP POST à ​​l'adresse <i>new\_note</i>.
 

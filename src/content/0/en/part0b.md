@@ -434,11 +434,9 @@ It is an [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/P
 
 So, the browser reloads the Notes page. The reload causes three more HTTP requests: fetching the style sheet (main.css), the JavaScript code (main.js), and the raw data of the notes (data.json).
 
-The network tab also shows the data submitted with the form:
+The Network tab also shows the data submitted with the form. You can view the data by first selecting the request name and then checking the Payload tab:
 
-The Form Data dropdown is within the new Payload tab, located to the right of the Headers tab.
-
-![form data dropdown in developer tools](../../images/0/23e.png)
+![form data dropdown in developer tools](../../images/0/23g.png)
 
 The Form tag has attributes <i>action</i> and <i>method</i>, which define that submitting the form is done as an HTTP POST request to the address <i>new\_note</i>.
 

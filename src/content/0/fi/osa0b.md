@@ -431,9 +431,9 @@ Kyseessä on siis [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/
 
 Selain siis lataa uudelleen muistiinpanojen sivun. Sivunlataus saa aikaan myös kolme muuta HTTP-pyyntöä: tyylitiedoston (<i>main.css</i>), JavaScript-koodin (<i>main.js</i>) ja muistiinpanojen raakadatan (<i>data.json</i>) lataamisen.
 
-Network-välilehti näyttää myös lomakkeen mukana lähetetyn datan:
+Network-välilehdeltä on mahdollista tarkastella pyynnön mukana lähetettyä dataa. Datan saa näkyviin valitsemalla ensin pyynnön nimen ja tarkastelemalla sitten Payload-välilehteä:
 
-![](../../images/0/23e.png)
+![Pyynnön Payloadin tarkasteleminen Network-välilehdeltä](../../images/0/23g.png)
 
 Lomakkeen lähettäminen tapahtuu HTTP POST ‑pyyntönä ja osoitteeseen <i>new\_note</i> form-tagiin määriteltyjen attribuuttien <i>action</i> ja <i>method</i> ansiosta:
 
