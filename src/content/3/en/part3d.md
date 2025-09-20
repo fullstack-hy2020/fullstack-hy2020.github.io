@@ -175,9 +175,7 @@ Generate a new "full stack" version of the application by creating a new product
 
 Push the latest version to Fly.io/Render and verify that everything works there as well.
 
-**NOTE**: you should deploy the BACKEND to the cloud service. If you are using Fly.io the commands should be run in the root directory of the backend (that is, in the same directory where the backend package.json is).
-
-You shall NOT be deploying the frontend directly at any stage of this part. It is just backend that is deployed throughout the whole part, nothing else.
+**NOTE:** You shall NOT be deploying the frontend directly at any stage of this part. Only the backend repository is deployed throughout the whole part. The frontend production build is added to the backend repository, and the backend serves it as described in the section [Serving static files from the backend](/en/part3/deploying_app_to_internet#serving-static-files-from-the-backend).
 
 </div>
 

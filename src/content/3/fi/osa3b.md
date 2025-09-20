@@ -426,7 +426,7 @@ Nyt myös frontend on kunnossa. Se toimii sekä sovelluskehitysmoodissa että tu
 npm remove cors
 ```
 
-Olemme nyt vieneet koko sovelluksen onnistuneesti internetiin. Deploymenttien toteuttamiseen on olemassa monenlaisia muitakin tapoja. Esimerkiksi frontendin koodin deployaaminen omana sovelluksenaan voi joissain tilanteissa olla järkevää, sillä se voi helpottaa automatisoidun [deployment pipelinen](https://martinfowler.com/bliki/DeploymentPipeline.html) toteuttamista. Deployment pipelinellä tarkoitetaan automatisoitua ja hallittua tapaa viedä koodi sovelluskehittäjän koneelta erilaisten testien ja laadunhallinnallisten vaiheiden kautta tuotantoympäristöön. Aiheeseen tutustutaan kurssin [osassa 11](https://fullstackopen.com/osa11).
+Olemme nyt vieneet koko sovelluksen onnistuneesti internetiin. Deploymenttien toteuttamiseen on olemassa monenlaisia muitakin tapoja. Esimerkiksi frontendin koodin deployaaminen omana sovelluksenaan voi joissain tilanteissa olla järkevää, sillä se voi helpottaa automatisoidun [deployment pipelinen](https://martinfowler.com/bliki/DeploymentPipeline.html) toteuttamista. Deployment pipelinellä tarkoitetaan automatisoitua ja hallittua tapaa viedä koodi sovelluskehittäjän koneelta erilaisten testien ja laadunhallinnallisten vaiheiden kautta tuotantoympäristöön. Aiheeseen tutustutaan kurssin [osassa 11](/osa11).
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3), branchissa <i>part3-3</i>.
 
@@ -448,11 +448,11 @@ Joudut todennäköisesti tekemään frontendiin erinäisiä pieniä muutoksia ai
 
 #### 3.10 puhelinluettelon backend step10
 
-Vie sovelluksen backend Internetiin, esim. Fly.io:n tai Renderiin. 
-
-Testaa selaimen ja Postmanin tai VS Coden REST-clientin avulla, että Internetissä oleva backend toimii.
+Vie sovelluksen backend Internetiin, esim. Fly.io:n tai Renderiin. Jos käytät Fly.io:ta, komennot tulee suorittaa backendin juurihakemistossa (eli samassa kansiossa, jossa backendin <i>package.json</i>-tiedosto sijaitsee).
 
 **PRO TIP:** kun deployaat sovelluksen Fly.io:n tai Renderiin, kannattaa ainakin alkuvaiheissa pitää **KOKO AJAN** näkyvillä sovelluksen loki.
+
+Testaa selaimen ja Postmanin tai VS Coden REST-clientin avulla, että Internetissä oleva backend toimii.
 
 Tee repositorion juureen tiedosto README.md ja lisää siihen linkki Internetissä olevaan sovellukseesi.
 
@@ -460,8 +460,10 @@ Tee repositorion juureen tiedosto README.md ja lisää siihen linkki Internetiss
 
 Generoi frontendistä tuotantoversio ja lisää se Internetissä olevaan sovellukseesi tässä osassa esiteltyä menetelmää noudattaen.
 
-**HUOM:** eihän hakemisto <i>dist</i> ole gitignoroituna projektissasi jos käytät Renderiä?
-
 Huolehdi myös, että frontend toimii edelleen myös paikallisesti.
+
+Jos käytät Renderiä, varmista, että hakemisto <i>dist</i> ole gitignoroituna projektissasi.
+
+**HUOM:** Frontendiä ei julkaista suoraan missään vaiheessa tämän osan aikana. Vain backend-repositorio viedään Internetiin. Frontendin tuotantoversio lisätään backend-repositorioon, ja backend näyttää sen pääsivunaan kuten kohdassa [Staattisten tiedostojen tarjoaminen backendistä](/osa3/sovellus_internetiin#staattisten-tiedostojen-tarjoaminen-backendista) on kuvattu.
 
 </div>

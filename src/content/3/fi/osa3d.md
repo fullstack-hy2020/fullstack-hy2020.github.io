@@ -168,6 +168,8 @@ Generoi päivitetystä sovelluksesta "full stack" ‑versio, eli tee frontendist
 
 Pushaa uusi versio Fly.io:n tai Renderiin ja varmista, että kaikki toimii myös siellä.
 
+**HUOM:** Frontendiä ei julkaista suoraan missään vaiheessa tämän osan aikana. Vain backend-repositorio viedään Internetiin. Frontendin tuotantoversio lisätään backend-repositorioon, ja backend näyttää sen pääsivunaan kuten kohdassa [Staattisten tiedostojen tarjoaminen backendistä](/osa3/sovellus_internetiin#staattisten-tiedostojen-tarjoaminen-backendista) on kuvattu.
+
 </div>
 
 <div class="content">

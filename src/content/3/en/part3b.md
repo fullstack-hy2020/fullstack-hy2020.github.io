@@ -506,24 +506,22 @@ You will probably have to do some small changes to the frontend, at least to the
 
 #### 3.10 Phonebook backend step 10
 
-Deploy the backend to the internet, for example to Fly.io or Render.
-
-Test the deployed backend with a browser and Postman or VS Code REST client to ensure it works.
+Deploy the backend to the internet, for example to Fly.io or Render. If you are using Fly.io the commands should be run in the root directory of the backend (that is, in the same directory where the backend package.json is).
 
 **PRO TIP:** When you deploy your application to Internet, it is worth it to at least in the beginning keep an eye on the logs of the application **AT ALL TIMES**.
 
+Test the deployed backend with a browser and Postman or VS Code REST client to ensure it works.
+
 Create a README.md at the root of your repository, and add a link to your online application to it.
-
-**NOTE**: as it was said, you should deploy the BACKEND to the cloud service. If you are using Fly.io the commands should be run in the root directory of the backend (that is, in the same directory where the backend package.json is). In case of using Render, the backend must be in the root of your repository.
-
-You shall NOT be deploying the frontend directly at any stage of this part. It is just backend repository that is deployed throughout the whole part, nothing else.
 
 #### 3.11 Full Stack Phonebook
 
 Generate a production build of your frontend, and add it to the Internet application using the method introduced in this part.
 
-**NB** If you use Render, make sure the directory <i>dist</i> is not ignored by git on the backend.
-
 Also, make sure that the frontend still works locally (in development mode when started with command _npm run dev_).
+
+If you use Render, make sure the directory <i>dist</i> is not ignored by git on the backend.
+
+**NOTE:** You shall NOT be deploying the frontend directly at any stage of this part. Only the backend repository is deployed throughout the whole part. The frontend production build is added to the backend repository, and the backend serves it as described in the section [Serving static files from the backend](/en/part3/deploying_app_to_internet#serving-static-files-from-the-backend).
 
 </div>
