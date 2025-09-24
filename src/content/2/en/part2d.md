@@ -30,7 +30,7 @@ json-server requires all data to be sent in JSON format. What this means in prac
 Let's make the following changes to the event handler responsible for creating a new note:
 
 ```js
-addNote = event => {
+const addNote = event => {
   event.preventDefault()
   const noteObject = {
     content: newNote,
@@ -76,7 +76,7 @@ Also the tab <i>response</i> is useful, it shows what was the data the server re
 The new note is not rendered to the screen yet. This is because we did not update the state of the <i>App</i> component when we created it. Let's fix this:
 
 ```js
-addNote = event => {
+const addNote = event => {
   event.preventDefault()
   const noteObject = {
     content: newNote,
