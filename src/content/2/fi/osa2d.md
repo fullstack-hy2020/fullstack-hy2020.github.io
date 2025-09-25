@@ -74,7 +74,7 @@ Välilehti <i>response</i> on myös hyödyllinen, se kertoo mitä palvelin palau
 Uusi muistiinpano ei vielä renderöidy ruudulle, sillä emme aseta komponentille <i>App</i> uutta tilaa muistiinpanon luomisen yhteydessä. Viimeistellään sovellus vielä tältä osin:
 
 ```js
-addNote = event => {
+const addNote = event => {
   event.preventDefault()
   const noteObject = {
     content: newNote,
