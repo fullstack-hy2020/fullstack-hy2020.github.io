@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[41],{zIjM:function(e,t,n){"use strict";n.r(t);var s=n("q1tI"),a=n.n(s),i=n("S6uJ");t.default=()=>a.a.createElement(i.a,{lang:"fi",title:"FAQ | Full Stack open",seoDescription:"Usein kysytyt kysymykset"})}}]);
+//# sourceMappingURL=component---src-pages-faq-js-bdc4d72ee25c1ba5f942.js.map
