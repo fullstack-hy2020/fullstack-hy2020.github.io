@@ -631,7 +631,7 @@ Since we now have an easily reusable <i>Button</i> component, we've also impleme
 The event handler is passed to the <i>Button</i> component through the _onClick_ prop. When creating your own components, you can theoretically choose the prop name freely. However, our naming choice for the event handler was not entirely arbitrary.
 
 React's own official [tutorial](https://react.dev/learn/tutorial-tic-tac-toe) suggests:
-"In React, it’s conventional to use _onSomething_ names for props which take functions which handle events and handleSomething for the actual function definitions which handle those events."
+"In React, it’s conventional to use _onSomething_ names for props which take functions which handle events and _handleSomething_ for the actual function definitions which handle those events."
 
 ### Changes in state cause re-rendering
 
