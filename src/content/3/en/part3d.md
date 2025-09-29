@@ -177,6 +177,13 @@ Push the latest version to Fly.io/Render and verify that everything works there 
 
 **NOTE:** You shall NOT be deploying the frontend directly at any stage of this part. Only the backend repository is deployed throughout the whole part. The frontend production build is added to the backend repository, and the backend serves it as described in the section [Serving static files from the backend](/en/part3/deploying_app_to_internet#serving-static-files-from-the-backend).
 
+**NOTE:** As of 2025, you may encounter errors when attempting to connect to Atlas MongoDB if you're deploying to Fly.io. The following fix was provided by CandidFlakes in the course discord:
+```
+mongoose.connect(url, {
+  family: 4, // Force IPv4
+});
+```
+
 </div>
 
 <div class="content">
