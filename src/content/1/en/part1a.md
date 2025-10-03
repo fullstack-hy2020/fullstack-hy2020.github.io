@@ -11,22 +11,26 @@ We will now start getting familiar with probably the most important topic of thi
 
 The easiest way to get started by far is by using a tool called [Vite](https://vitejs.dev/).
 
-Let's create an application called <i>introdemo</i>, navigate to its directory and install the libraries:
+Let's create a new application using the <i>create-vite</i> tool:
 
 ```bash
-# npm 6.x (outdated, but still used by some):
-npm create vite@latest introdemo --template react
-
-# npm 7+, extra double-dash is needed:
-npm create vite@latest introdemo -- --template react
+npm create vite@latest
 ```
 
+Let's answer the questions presented by the tool as follows:
+
+![create-vite tool selection view, where the project is named part1, the framework is React, the variant is JavaScript, and all other questions are answered with No](../../images/1/1-create-vite.png)
+
+We have now created an application named <i>part1</i>. The tool could have also installed the required dependencies and started the application automatically if we had answered "Yes" to the question "Install with npm and start now?" However, we will perform these steps manually so we can see how they are done.
+
+Next, let's move into the application's directory and install the required libraries:
+
 ```bash
-cd introdemo
+cd part1
 npm install
 ```
 
-The application is started as follows
+The application is started as follows:
 
 ```bash
 npm run dev
@@ -87,7 +91,7 @@ By default, the file <i>index.html</i> doesn't contain any HTML markup that is v
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>introdemo</title>
+    <title>part1</title>
   </head>
   <body>
     <div id="root"></div>
