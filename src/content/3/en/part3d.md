@@ -275,7 +275,7 @@ We've added the _js.configs.recommended_ to the top of the configuration array, 
 Let's continue building the configuration file. Install a [plugin](https://eslint.style/packages/js) that defines a set of code style-related rules:
 
 ```bash
-npm install --save-dev @stylistic/eslint-plugin-js
+npm install --save-dev @stylistic/eslint-plugin
 ```
 
 Import and enable the plugin, and add these four code style rules:
@@ -283,7 +283,7 @@ Import and enable the plugin, and add these four code style rules:
 ```js
 import globals from 'globals'
 import js from '@eslint/js'
-import stylisticJs from '@stylistic/eslint-plugin-js' // highlight-line
+import stylisticJs from '@stylistic/eslint-plugin' // highlight-line
 
 export default [
   {
@@ -303,7 +303,7 @@ export default [
 ]
 ```
 
-The [plugins](https://eslint.org/docs/latest/use/configure/plugins) property provides a way to extend ESLint's functionality by adding custom rules, configurations, and other capabilities that are not available in the core ESLint library. We've installed and enabled the _@stylistic/eslint-plugin-js_, which adds JavaScript stylistic rules for ESLint. In addition, rules for indentation, line breaks, quotes, and semicolons have been added. These four rules are all defined in the [Eslint styles plugin](https://eslint.style/packages/js).
+The [plugins](https://eslint.org/docs/latest/use/configure/plugins) property provides a way to extend ESLint's functionality by adding custom rules, configurations, and other capabilities that are not available in the core ESLint library. We've installed and enabled the _@stylistic/eslint-plugin_, which adds JavaScript stylistic rules for ESLint. In addition, rules for indentation, line breaks, quotes, and semicolons have been added. These four rules are all defined in the [Eslint styles plugin](https://eslint.style/packages/js).
 
 **Note for Windows users:** The linebreak style is set to _unix_ in the style rules. It is recommended to use Unix-style linebreaks (_\n_) regardless of your operating system, as they are compatible with most modern operating systems and facilitate collaboration when multiple people are working on the same files. If you are using Windows-style linebreaks, ESLint will produce the following errors: <i>Expected linebreaks to be 'LF' but found 'CRLF'</i>. In this case, configure Visual Studio Code to use Unix-style linebreaks by following [this guide](https://stackoverflow.com/questions/48692741/how-can-i-make-all-line-endings-eols-in-all-files-in-visual-studio-code-unix).
 
@@ -435,7 +435,7 @@ Disabling the no-console rule will allow us to use console.log statements withou
 ```js
 import globals from 'globals'
 import js from '@eslint/js'
-import stylisticJs from '@stylistic/eslint-plugin-js'
+import stylisticJs from '@stylistic/eslint-plugin'
 
 export default [
   js.configs.recommended,
