@@ -88,10 +88,13 @@ import {
   ApolloClient,
   ApolloProvider, // highlight-line
   InMemoryCache,
-} from '@apollo/client'
+HttpLink
+} from '@apollo/client' // 
+
+import { ApolloProvider } from '@apollo/client/react' //importing ApolloProvider, as done above, from '@apollo/client' is throwing an error
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000',
+  link: new HttpLink({uri: 'http://localhost:4000'}), //We have to use link else it doesn't work
   cache: new InMemoryCache(),
 })
 
@@ -112,7 +115,8 @@ Currently, the use of the hook function [useQuery](https://www.apollographql.com
 The query is made by the <i>App</i> component, the code of which is as follows:
 
 ```js
-import { gql, useQuery } from '@apollo/client'
+import { gql } from '@apollo/client'
+import { useQuery } from '@apollo/client/react' // cannot import useQuery from '@apollo/client' anymore, throws an error
 
 const ALL_PERSONS = gql`
 query {
