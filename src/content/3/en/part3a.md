@@ -525,7 +525,7 @@ Using Postman is quite easy in this situation. It's enough to define the URL and
 
 The backend server appears to respond correctly. By making an HTTP GET request to <http://localhost:3001/api/notes> we see that the note with the id 2 is no longer in the list, which indicates that the deletion was successful.
 
-Because the notes in the application are only saved to memory, the list of notes will return to its original state when we restart the application.
+Currently, the notes in the application are hard-coded and not yet saved in a database, so the list of notes will reset to its original state when we restart the application.
 
 ### The Visual Studio Code REST client
 
