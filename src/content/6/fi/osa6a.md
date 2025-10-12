@@ -749,11 +749,11 @@ describe('unicafe reducer', () => {
 
 **Toteuta reducer ja tee sille testit.**
 
-Varmista testeissä <i>deep-freeze</i>-kirjaston avulla, että kyseessä on <i>puhdas funktio</i>. Huomaa, että valmiin ensimmäisen testin on syytä mennä läpi koska Redux olettaa, että reducer palauttaa järkevän alkutilan kun sitä kutsutaan siten että ensimmäinen parametri eli aiempaa tilaa edustava <i>state</i> on <i>undefined</i>.
+Valmiina olevan ensimmäisen testin pitäisi mennä suoraan läpi ilman muutoksia. Redux olettaa, että reducer palauttaa järkevän alkutilan kun sitä kutsutaan siten että ensimmäinen parametri eli aiempaa tilaa edustava <i>state</i> on <i>undefined</i>.
 
 Aloita laajentamalla reduceria siten, että molemmat testeistä menevät läpi. Lisää tämän jälkeen loput testit reducerin eri actioneille ja toteuta niitä vastaava toiminnallisuus reduceriin.
 
-Reducerin toteutuksessa kannattaa ottaa mallia yllä olevasta [Redux-muistiinpanot](/osa6/flux_arkkitehtuuri_ja_redux#puhtaat-funktiot-immutable)-esimerkistä.
+Varmista testeissä <i>deep-freeze</i>-kirjaston avulla, että kyseessä on <i>puhdas funktio</i>. Reducerin toteutuksessa kannattaa ottaa mallia yllä olevasta [Redux-muistiinpanot](/osa6/flux_arkkitehtuuri_ja_redux#puhtaat-funktiot-immutable)-esimerkistä.
 
 #### 6.2: Unicafe revisited, step2
 

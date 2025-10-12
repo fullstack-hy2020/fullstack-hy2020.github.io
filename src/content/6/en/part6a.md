@@ -756,12 +756,11 @@ describe('unicafe reducer', () => {
 
 **Implement the reducer and its tests.**
 
-In the tests, make sure that the reducer is an <i>immutable function</i> with the <i>deep-freeze</i> library.
-Ensure that the provided first test passes, because Redux expects that the reducer returns the original state when it is called with a first parameter - which represents the previous <i>state</i> - with the value <i>undefined</i>.
+The provided first test should pass without any changes. Redux expects that the reducer returns the original state when it is called with a first parameter - which represents the previous <i>state</i> - with the value <i>undefined</i>.
 
 Start by expanding the reducer so that both tests pass. After that, add the remaining tests for the different actions of the reducer and implement the corresponding functionality in the reducer.
 
-A good model for the reducer is the [redux-notes](/en/part6/flux_architecture_and_redux#pure-functions-immutable) example above.
+In the tests, make sure that the reducer is an <i>immutable function</i> with the <i>deep-freeze</i> library. A good model for the reducer is the [redux-notes](/en/part6/flux_architecture_and_redux#pure-functions-immutable) example above.
 
 #### 6.2: Unicafe Revisited, step2
 
