@@ -52,19 +52,19 @@ The <i>notes</i> collection contains three notes that all have a <i>user</i> fie
     content: 'HTML is easy',
     important: false,
     _id: 221212,
-    user: 123456,
+    userId: 123456,
   },
   {
     content: 'The most important operations of HTTP protocol are GET and POST',
     important: true,
     _id: 221255,
-    user: 123456,
+    userId: 123456,
   },
   {
     content: 'A proper dinosaur codes with Java',
     important: false,
     _id: 221244,
-    user: 141414,
+    userId: 141414,
   },
 ]
 ```
@@ -182,7 +182,7 @@ const noteSchema = new mongoose.Schema({
   },
   important: Boolean,
   // highlight-start
-  user: {
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   }
@@ -451,7 +451,7 @@ notesRouter.post('/', async (request, response) => {
   const note = new Note({
     content: body.content,
     important: body.important || false,
-    user: user._id //highlight-line
+    userId: user._id //highlight-line
   })
 
   const savedNote = await note.save()
@@ -560,7 +560,7 @@ const noteSchema = new mongoose.Schema({
     minlength: 5
   },
   important: Boolean,
-  user: {
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   }
