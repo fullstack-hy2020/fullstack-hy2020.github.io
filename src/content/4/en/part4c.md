@@ -52,19 +52,19 @@ The <i>notes</i> collection contains three notes that all have a <i>user</i> fie
     content: 'HTML is easy',
     important: false,
     _id: 221212,
-    userId: 123456,
+    user: 123456,
   },
   {
     content: 'The most important operations of HTTP protocol are GET and POST',
     important: true,
     _id: 221255,
-    userId: 123456,
+    user: 123456,
   },
   {
     content: 'A proper dinosaur codes with Java',
     important: false,
     _id: 221244,
-    userId: 141414,
+    user: 141414,
   },
 ]
 ```
@@ -182,7 +182,7 @@ const noteSchema = new mongoose.Schema({
   },
   important: Boolean,
   // highlight-start
-  userId: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   }
@@ -428,7 +428,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 The code for creating a new note has to be updated so that the note is assigned to the user who created it.
 
-Let's expand our current implementation in <i>controllers/notes.js</i> so that the information about the user who created a note is sent in the <i>userId</i> field of the request body:
+Let's expand our current implementation in <i>controllers/notes.js</i> so that the information about the user who created a note is sent in the <i>user</i> field of the request body:
 
 ```js
 const notesRouter = require('express').Router()
@@ -440,18 +440,18 @@ const User = require('../models/user') //highlight-line
 notesRouter.post('/', async (request, response) => {
   const body = request.body
 
-  const user = await User.findById(body.userId)// highlight-line
+  const user = await User.findById(body.user)// highlight-line
 
   // highlight-start
   if (!user) {
-    return response.status(400).json({ error: 'userId missing or not valid' })
+    return response.status(400).json({ error: 'user missing or not valid' })
   }
   // highlight-end
 
   const note = new Note({
     content: body.content,
     important: body.important || false,
-    userId: user._id //highlight-line
+    user: user._id //highlight-line
   })
 
   const savedNote = await note.save()
@@ -464,12 +464,12 @@ notesRouter.post('/', async (request, response) => {
 // ...
 ```
 
-The database is first queried for a user using the <i>userId</i> provided in the request. If the user is not found, the response is sent with a status code of 400 (<i>Bad Request</i>) and an error message: <i>"userId missing or not valid"</i>.
+The database is first queried for a user using the <i>user</i> provided in the request. If the user is not found, the response is sent with a status code of 400 (<i>Bad Request</i>) and an error message: <i>"user missing or not valid"</i>.
 
 It's worth noting that the <i>user</i> object also changes. The <i>id</i> of the note is stored in the <i>notes</i> field of the <i>user</i> object:
 
 ```js
-const user = await User.findById(body.userId)
+const user = await User.findById(body.user)
 
 // ...
 
@@ -560,7 +560,7 @@ const noteSchema = new mongoose.Schema({
     minlength: 5
   },
   important: Boolean,
-  userId: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   }
