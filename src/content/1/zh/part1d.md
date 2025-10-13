@@ -1396,7 +1396,7 @@ rm -rf node_modules/ && npm i
 > <i>Objects are not valid as a React child</i>
 
 <!-- keep in mind the things told [here](/en/part1/introduction_to_react#do-not-render-objects). -->
-记住[这里](/zh/part1/introduction_to_react#do-not-render-objects)讲过的内容。
+记住[这里](/zh/part1/react简介#不要渲染对象)讲过的内容。
 
 <!-- <h4> 1.6: unicafe step 1</h4> -->
 <h4> 1.6：unicafe 第1步</h4>

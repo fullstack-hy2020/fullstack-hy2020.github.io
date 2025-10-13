@@ -162,10 +162,10 @@ module.exports = {
       b: 'Web 应用的基础设施',
     },
     1: {
-      a: 'React 简介',
+      a: 'React简介',
       b: 'JavaScript',
       c: '组件状态，事件处理',
-      d: '深入React 应用调试',
+      d: '复杂状态，调试React应用',
     },
     2: {
       a: '从渲染集合到模块学习',

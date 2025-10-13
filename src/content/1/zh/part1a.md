@@ -476,7 +476,7 @@ export default [
 ```
 
 <!-- We will get to know ESLint in more detail [in part 3](/en/part3/validation_and_es_lint#lint). -->
-我们将在[第3章节](/zh/part3/validation_and_es_lint#lint)详细介绍到ESLint。
+我们将在[第3章节](/zh/part3/es_lint与代码检查#lint)详细介绍ESLint。
 
 <!-- ### Some notes -->
 ### 一些注意事项
@@ -706,7 +706,7 @@ const App = () => {
 练习是**一次上交一个章节**的。当你上交了课程中某一章节的练习，你就不能再上交同一章节的未完成的练习。
 
 <!-- Note that in this part, there are [more exercises](/en/part1/a_more_complex_state_debugging_react_apps#exercises-1-6-1-14) besides those found below. <i>Do not submit your work</i> until you have completed all of the exercises you want to submit for the part. -->
-请注意，在这一章节，除了下面的练习，还有[更多的练习](/zh/part1/深入_react_应用调试#练习-1-6-1-14)。在你完成该章节的所有练习之前，<i>请不要上交你的作品</i>。
+请注意，在这一章节，除了下面的练习，还有[更多的练习](/zh/part1/复杂状态，调试_react应用#练习-1-6-1-14)。在你完成该章节的所有练习之前，<i>请不要上交你的作品</i>。
 
 <!-- You may submit all the exercises of this course into the same repository, or use multiple repositories. If you submit exercises of different parts into the same repository, please use a sensible naming scheme for the directories.-->
 你可以将本课程的所有练习上交到同一个仓库，也可以使用多个仓库。如果你将不同章节的练习上交到同一个仓库，请使用合理的目录命名方案。

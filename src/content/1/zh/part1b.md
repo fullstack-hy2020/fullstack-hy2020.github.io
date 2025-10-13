@@ -313,7 +313,7 @@ const Header = (props) => {
 > <i>Objects are not valid as a React child</i>
 
 <!-- keep in mind the things told [here](/en/part1/introduction_to_react#do-not-render-objects). -->
-记住[这里](/zh/part1/introduction_to_react#do-not-render-objects)提到的内容。
+记住[这里](/zh/part1/react简介#不要渲染对象)提到的内容。
 
   <!-- <h4>1.3: Course Information step 3</h4> -->
   <h4>1.3：课程信息 第3步</h4>
