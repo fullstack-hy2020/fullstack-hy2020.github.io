@@ -215,7 +215,7 @@ ja tehdään tiedoston <i>package.json</i> osaan <i>scripts</i> pieni lisäys
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "server": "json-server -p 3001 db.json" // highlight-line
+    "server": "npx json-server -p 3001 --watch db.json" // highlight-line
   },
 }
 ```
