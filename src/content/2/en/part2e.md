@@ -124,6 +124,7 @@ const Notification = ({ message }) => {
     </div>
   )
 }
+export default Notification
 ```
 
 If the value of the <em>message</em> prop is <em>null</em>, then nothing is rendered to the screen, and in other cases, the message gets rendered inside of a div element.
@@ -131,6 +132,11 @@ If the value of the <em>message</em> prop is <em>null</em>, then nothing is rend
 Let's add a new piece of state called <i>errorMessage</i> to the <i>App</i> component. Let's initialize it with some error message so that we can immediately test our component:
 
 ```js
+import { useState, useEffect } from 'react'
+import Note from './components/Note'
+import noteService from './services/notes'
+import Notification from './components/Notification' // highlight-line
+
 const App = () => {
   const [notes, setNotes] = useState([]) 
   const [newNote, setNewNote] = useState('')
