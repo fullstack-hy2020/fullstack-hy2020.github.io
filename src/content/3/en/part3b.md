@@ -101,6 +101,7 @@ Some course participants have also used the following services:
 
 - [Replit](https://replit.com)
 - [CodeSandBox](https://codesandbox.io)
+- [Netlify](https://www.netlify.com/)
 
 If you know easy-to-use and free services for hosting NodeJS, please let us know!
 
