@@ -803,7 +803,7 @@ const Display = (props) => {
 <!-- The component only uses the _counter_ field of its <i>props</i>.-->
 该组件只使用其<i>props</i>的_counter_字段。
 <!-- This means we can simplify the component by using [destructuring](/en/part1/component_state_event_handlers#destructuring), like so:-->
-这意味着我们可以通过使用[解构](/zh/part1/component_state_event_handlers#destructuring)来简化组件，像这样：
+这意味着我们可以通过使用[解构](/zh/part1/组件状态，事件处理#解构)来简化组件，像这样：
 
 ```js
 const Display = ({ counter }) => {

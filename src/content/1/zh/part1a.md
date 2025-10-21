@@ -476,7 +476,7 @@ export default [
 ```
 
 <!-- We will get to know ESLint in more detail [in part 3](/en/part3/validation_and_es_lint#lint). -->
-我们将在[第3章节](/zh/part3/validation_and_es_lint#lint)详细介绍到ESLint。
+我们将在[第3章节](/zh/part3/es_lint与代码检查#lint)详细介绍ESLint。
 
 <!-- ### Some notes -->
 ### 一些注意事项
@@ -697,16 +697,16 @@ const App = () => {
 
 <div class="tasks">
 <!--   <h3>Exercises 1.1.-1.2.</h3>-->
-  <h3>练习1.1.-1.2.</h3>
+  <h3>练习1.1.~1.2.</h3>
 
 <!-- The exercises are submitted via GitHub, and by marking the exercises as done in the "my submissions" tab of the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
-练习通过GitHub上交，并在[上交应用](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)的“我的上交”标签页中标记所有已完成的练习。
+练习通过GitHub上交，并在[上交应用](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)的“my submissions”标签页中标记所有已完成的练习。
 
 <!-- The exercises are submitted **one part at a time**. When you have submitted the exercises for a part of the course you can no longer submit undone exercises for the same part.-->
 练习是**一次上交一个章节**的。当你上交了课程中某一章节的练习，你就不能再上交同一章节的未完成的练习。
 
 <!-- Note that in this part, there are [more exercises](/en/part1/a_more_complex_state_debugging_react_apps#exercises-1-6-1-14) besides those found below. <i>Do not submit your work</i> until you have completed all of the exercises you want to submit for the part. -->
-请注意，在这一章节，除了下面的练习，还有[更多的练习](/zh/part1/深入_react_应用调试#练习-1-6-1-14)。在你完成该章节的所有练习之前，<i>请不要上交你的作品</i>。
+请注意，在这一章节，除了下面的练习，还有[更多的练习](/zh/part1/复杂状态，调试_react应用#练习-1-6-1-14)。在你完成该章节的所有练习之前，<i>请不要上交你的作品</i>。
 
 <!-- You may submit all the exercises of this course into the same repository, or use multiple repositories. If you submit exercises of different parts into the same repository, please use a sensible naming scheme for the directories.-->
 你可以将本课程的所有练习上交到同一个仓库，也可以使用多个仓库。如果你将不同章节的练习上交到同一个仓库，请使用合理的目录命名方案。
@@ -732,16 +732,16 @@ part2
 课程的每一章节都有一个目录，每个目录下面还有一系列练习的目录，如第1章节的“unicafe”。
 
 <!-- Most of the exercises of the course build a larger application, eg. courseinfo, unicafe and anecdotes in this part, bit by bit. It is enough to submit the completed application. You can make a commit after each exercise, but that is not compulsory. For example the course info app is built in exercises 1.1.-1.5. It is just the end result after 1.5 that you need to submit! -->
-课程中的大多数联系都会一点一点地构成更大的应用，比如这一章节的courseinfo、unicafe和anecdotes。只要上交最终完成的应用就可以了。你可以每完成一个练习就在git中做一次提交，但这不是必须的。比如练习1.1.-1.5会构建一个课程信息的应用，只需要上交完成1.5后的成果就可以了！
+课程中的大多数联系都会一点一点地构成更大的应用，比如这一章节的courseinfo、unicafe和anecdotes。只要上交最终完成的应用就可以了。你可以每完成一道练习就在git中做一次提交，但这不是必须的。比如练习1.1.~1.5会构建一个课程信息的应用，只需要上交完成1.5后的成果就可以了！
 
 <!-- For each web application for a series of exercises, it is recommended to submit all files relating to that application, except for the directory <i>node\_modules</i>.-->
-对于每个Web应用的系列练习，建议上交所有与该应用有关的文件，除了目录<i>node\_modules</i>。
+对于每道Web应用的系列练习，建议上交所有与该应用有关的文件，除了目录<i>node\_modules</i>。
 
   <!-- <h4>1.1: Course Information, step 1</h4> -->
   <h4>1.1：课程信息，第1步</h4>
 
 <!-- <i>The application that we will start working on in this exercise will be further developed in a few of the following exercises. In this and other upcoming exercise sets in this course, it is enough to only submit the final state of the application. If desired, you may also create a commit for each exercise of the series, but this is entirely optional.</i> -->
-<i>我们将在本练习中开始处理的应用程序将在以下几个练习中得到进一步开发。在本课程的这个和接下来的练习集中，只要上交应用程序的最终状态就足够了。如果你想，你也可以为系列的每个练习创建一个git提交，但这不是必要的。</i>
+<i>我们在这道练习中将要开始处理的应用程序将在以下几道练习中得到进一步开发。在本课程的这个和接下来的练习集中，只要上交应用程序的最终状态就足够了。如果你想，你也可以为系列的每道练习创建一个git提交，但这不是必要的。</i>
 
 <!-- Use Vite to initialize a new application. Modify <i>main.jsx</i> to match the following-->
 使用Vite来初始化一个新的应用。修改<i>main.jsx</i>为
