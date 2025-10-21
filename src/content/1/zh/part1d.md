@@ -1372,16 +1372,16 @@ Copilot以及其他大语言模型提供的提示的有用程度各不相同。�
 <div class="tasks">
 
 <!-- <h3>Exercises  1.6.-1.14.</h3> -->
-<h3>练习1.6.-1.14.</h3>
+<h3>练习1.6.~1.14.</h3>
 
 <!-- Submit your solutions to the exercises by first pushing your code to GitHub and then marking the completed exercises into the "my submissions" tab of the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
-要上交练习的解答，先将你的代码推送到GitHub，然后在[上交应用](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)的“我的上交”标签页将练习标记为已完成。
+要上交练习的解答，先将你的代码推送到GitHub，然后在[上交应用](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)的“my submissions”标签页将练习标记为已完成。
 
 <!-- Remember, submit **all** the exercises of one part **in a single submission**. Once you have submitted your solutions for one part, **you cannot submit more exercises to that part any more**.-->
 记住，**一次性上交**一个章节的**所有**练习。一旦你上交了一个章节的解答，**你就不能再上交该章节的练习了**。
 
 <!-- <i>Some of the exercises work on the same application. In these cases, it is sufficient to submit just the final version of the application. If you wish, you can make a commit after every finished exercise, but it is not mandatory.</i> -->
-<i>有些练习开发的是同一个应用。对于这些练习，只要上交应用的最终版本就够了。你也可以每完成一个练习就在git中提交一次，但并不强制。</i>
+<i>有些练习开发的是同一个应用。对于这些练习，只要上交应用的最终版本就够了。你也可以每完成一道练习就在git中提交一次，但并不强制。</i>
 
 <!-- In some situations you may also have to run the command below from the root of the project:-->
 在某些情况下，你可能还得从项目的根目录运行以下命令：
@@ -1642,6 +1642,6 @@ copy[2] += 1
 如果多个名言警句并列第一，只显示其中一个就足够了。
 
 <!-- This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the "my submissions" tab of the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
-这是本章节课程的最后一个练习，是时候将你的代码推送到GitHub，然后在[上交应用](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)的“我的上交”标签页中标记所有完成的练习了。
+这是本章节课程的最后一道练习，是时候将你的代码推送到GitHub，然后在[上交应用](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)的“my submissions”标签页中标记所有完成的练习了。
 
 </div>

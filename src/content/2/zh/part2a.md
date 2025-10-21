@@ -689,7 +689,7 @@ const Course = (props) => { // highlight-line
 <h4>2.1：课程信息 第6步</h4>
 
 <!-- Let's finish the code for rendering course contents from exercises 1.1 - 1.5. You can start with the code from the model answers. The model answers for part 1 can be found by going to the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen), clicking on <i>my submissions</i> at the top, and in the row corresponding to part 1 under the <i>solutions</i> column clicking on <i>show</i>. To see the solution to the <i>course info</i> exercise, click on _App.jsx_ under <i>courseinfo</i>. -->
-让我们完成练习1.1~1.5中渲染课程内容的代码。你可以从标准答案的代码开始。第1章节的标准答案可以在[上交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)中找到，点击顶部的<i>我的上交</i>，在<i>解决方案</i>栏下对应第1章节的行中点击<i>显示</i>。要看<i>课程信息</i>练习的解决方案，请点击<i>courseinfo</i>下的_App.jsx_。
+让我们完成练习1.1~1.5中渲染课程内容的代码。你可以从标准答案的代码开始。第1章节的标准答案可以在[上交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)中找到，点击顶部的<i>my submissions</i>，在<i>solutions</i>栏下对应第1章节的行中点击<i>show</i>。要看<i>课程信息</i>练习的解决方案，请点击<i>courseinfo</i>下的_App.jsx_。
 
 <!-- **Note that if you copy a project from one place to another, you might have to delete the <i>node\_modules</i> directory and install the dependencies again with the command _npm install_ before you can start the application.**-->
 **注意，如果你把一个项目从一个地方复制到另一个地方，你可能要删除<i>node\_modules</i>目录，并在启动应用之前用_npm install_命令重新安装依赖。**

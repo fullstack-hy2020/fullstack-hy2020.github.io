@@ -8,7 +8,7 @@ lang: zh
 <div class="content">
 
 <!-- The appearance of our current Notes application is quite modest. In [exercise 0.2](/en/part0/fundamentals_of_web_apps#exercises-0-1-0-6), the assignment was to go through Mozilla's [CSS tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics). -->
-我们目前的笔记应用的外观是相当简陋的。在[练习0.2](/en/part0/fundamentals_of_web_apps#exercises-0-1-0-6)中，作业是阅读Mozilla的[CSS教程](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics)。
+我们目前的笔记应用的外观是相当简陋的。在[练习0.2](/zh/part0/web_应用的基础设施#练习-0-1-0-6)中，作业是阅读Mozilla的[CSS教程](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics)。
 
 <!-- Let's take a look at how we can add styles to a React application. There are several different ways of doing this and we will take a look at the other methods later on. First, we will add CSS to our application the old-school way; in a single file without using a [CSS preprocessor](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor) (although this is not entirely true as we will learn later on). -->
 让我们看一下如何在React应用中添加样式。有几种不同的方法，我们将在后面看一下其他的方法。首先，我们将以传统的方式向我们的应用添加CSS；把CSS写入单个文件中，不使用[CSS预处理器](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor)（尽管我们将在后面学习到，实际上我们并非完全没有使用）。

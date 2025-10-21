@@ -72,7 +72,7 @@ const addNote = event => {
 新创建的笔记资源被存储在_response_对象的<i>data</i>属性值中。
 
 <!-- Quite often it is useful to inspect HTTP requests in the <i>Network</i> tab of Chrome developer tools, which was used heavily at the beginning of [part 0](/en/part0/fundamentals_of_web_apps#http-get). -->
-在Chrome开发工具中的<i>Network</i>标签页中检查HTTP请求经常会很有用，[第0章节](/en/part0/fundamentals_of_web_apps#http-get)的开头就大量使用了这个标签页。
+在Chrome开发工具中的<i>Network</i>标签页中检查HTTP请求经常会很有用，[第0章节](/zh/part0/web_应用的基础设施#http-get)的开头就大量使用了这个标签页。
 
 <!-- We can use the inspector to check that the headers sent in the POST request are what we expected them to be: -->
 我们可以使用检查器来检查POST请求中发送的标头是否是我们所期望的：
@@ -870,7 +870,7 @@ const delete = (id) => {
 <h4>2.15*：电话簿 第10步</h4>
 
 <!-- <i>Why is there an asterisk in the exercise? See [here](/en/part0/general_info#taking-the-course) for the explanation.</i> -->
-<i>为什么这道练习有个星号？[这里](/en/part0/general_info#taking-the-course)有解释。</i>
+<i>为什么这道练习有个星号？[这里](/zh/part0/基础知识#taking-the-course)有解释。</i>
 
 <!-- Change the functionality so that if a number is added to an already existing user, the new number will replace the old number. It's recommended to use the HTTP PUT method for updating the phone number.-->
 改变功能，如果向一个已经存在的用户添加号码，新的号码将替换旧的号码。建议使用HTTP PUT方法来更新电话号码。
