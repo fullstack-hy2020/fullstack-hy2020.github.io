@@ -107,8 +107,8 @@ Visual Studio Code里可以很方便地创建“Snippets”（代码片段），
 <!-- Now, we will build the frontend, or the user interface (the part users see in their browser), using React, similar to the example application from [part 0](/en/part0). -->
 现在我们将用React做一个类似[第0章节](/zh/part0)中示例程序的前端，或者叫用户界面（用户在浏览器中所看到的部分）。
 
-<!-- Let's start with the following (the file <i>App.js</i>):-->
-让我们从下面开始（文件<i>App.js</i>）：
+<!-- Let's start with the following (the file <i>App.jsx</i>): -->
+让我们从下面开始（文件<i>App.jsx</i>）：
 
 ```js
 const App = (props) => {
@@ -130,7 +130,7 @@ export default App
 ```
 
 <!-- The file <i>main.jsx</i> looks like this: -->
-文件<i>main.js</i>如下所示：
+文件<i>main.jsx</i>如下所示：
 
 ```js
 import ReactDOM from 'react-dom/client'

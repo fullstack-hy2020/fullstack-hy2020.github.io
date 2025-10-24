@@ -58,7 +58,7 @@ Vite[默认](https://vitejs.dev/config/server-options.html#server-port)在端口
 ![](../../images/1/1-vite4.png)
 
 <!-- The code of the application resides in the <i>src</i> folder. Let's simplify the default code such that the contents of the file main.jsx looks like this:-->
-应用的代码位于<i>src</i>文件夹中。让我们简化默认代码，使文件<i>main.jsx</i>的内容如下所示：
+应用的代码位于<i>src</i>文件夹中。让我们简化默认代码，使文件main.jsx的内容如下所示：
 
 ```js
 import ReactDOM from 'react-dom/client'
@@ -294,7 +294,7 @@ JSX是“类[XML](https://developer.mozilla.org/en-US/docs/Web/XML/XML_introduct
 ### 多个组件
 
 <!-- Let's modify the file <i>App.jsx</i> as follows: -->
-让我们修改<i>App.js</i>文件如下：
+让我们修改<i>App.jsx</i>文件如下：
 
 ```js
 // highlight-start
@@ -787,8 +787,8 @@ const App = () => {
 export default App
 ```
 
-<!-- and remove the extra files App.css and index.css, also remove the directory assets.-->
-然后删除多余的文件App.css和index.css，以及目录assets。
+<!-- and remove the extra files <i>App.css</i> and <i>index.css</i>, also remove the directory <i>assets</i>. -->
+然后删除多余的文件<i>App.css</i>和<i>index.css</i>，以及目录<i>assets</i>。
 
 <!-- Unfortunately, the entire application is in the same component. Refactor the code so that it consists of three new components: <i>Header</i>, <i>Content</i>, and <i>Total</i>. All data still resides in the <i>App</i> component, which passes the necessary data to each component using <i>props</i>. <i>Header</i> takes care of rendering the name of the course, <i>Content</i> renders the parts and their number of exercises and <i>Total</i> renders the total number of exercises.-->
 整个应用都在同一个组件中。重构代码，使其由三个新组件组成：<i>Header</i>、<i>Content</i>和<i>Total</i>。所有数据仍驻留在<i>App</i>组件中，使用<i>props</i>将必要的数据传递给每个组件。<i>Header</i>负责显示课程的名称，<i>Content</i>显示各部分及其练习的数量，<i>Total</i>显示练习的总数量。
