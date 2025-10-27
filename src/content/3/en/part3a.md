@@ -41,7 +41,7 @@ The file defines, for instance, that the entry point of the application is the <
 
 Let's make a small change to the <i>scripts</i> object by adding a new script command.
 
-```bash
+```json
 {
   // ...
   "scripts": {
@@ -72,7 +72,7 @@ npm start
 
 The <i>start</i> npm script works because we defined it in the <i>package.json</i> file:
 
-```bash
+```json
 {
   // ...
   "scripts": {
@@ -370,7 +370,7 @@ Now, changes to the application's code will cause the server to restart automati
 
 Let's define a custom <i>npm script</i> in the <i>package.json</i> file to start the development server:
 
-```bash
+```json
 {
   // ..
   "scripts": {
@@ -735,7 +735,7 @@ The function body contains a row that looks a bit intriguing:
 Math.max(...notes.map(n => Number(n.id)))
 ```
 
-What exactly is happening in that line of code? <em>notes.map(n => n.id)</em> creates a new array that contains all the ids of the notes in number form. [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) returns the maximum value of the numbers that are passed to it. However, <em>notes.map(n => Number(n.id))</em> is an <i>array</i> so it can't directly be given as a parameter to _Math.max_. The array can be transformed into individual numbers by using the "three dot" [spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) syntax <em>...</em>.
+What exactly is happening in that line of code? <em>notes.map(n => Number(n.id))</em> creates a new array that contains all the ids of the notes in number form. [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) returns the maximum value of the numbers that are passed to it. However, <em>notes.map(n => Number(n.id))</em> is an <i>array</i> so it can't directly be given as a parameter to _Math.max_. The array can be transformed into individual numbers by using the "three dot" [spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) syntax <em>...</em>.
 
 </div>
 
