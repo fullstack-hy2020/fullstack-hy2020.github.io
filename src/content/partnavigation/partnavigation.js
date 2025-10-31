@@ -176,9 +176,9 @@ module.exports = {
     },
     3: {
       a: 'Node.js 与 Express',
-      b: '把应用部署到网上',
-      c: '将数据存入MongoDB',
-      d: 'ESLint与代码检查',
+      b: '把应用部署到互联网上',
+      c: '将数据存入 MongoDB',
+      d: '验证与 ESLint',
     },
     4: {
       a: '从后端结构到测试入门',
