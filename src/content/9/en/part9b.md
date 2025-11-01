@@ -225,7 +225,7 @@ const calculator = (a: number, b: number, op: Operation) : number => {  // highl
     case 'multiply':
       return a * b;
     case 'divide':
-      if (b === 0) throw new Error('Can\'t divide by 0!');  // highlight-line
+      if (b === 0) throw new Error('Can't divide by 0!');  // highlight-line
       return a / b;
     case 'add':
       return a + b;
