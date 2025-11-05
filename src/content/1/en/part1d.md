@@ -315,7 +315,7 @@ Even though a new value was set for _left_ by calling _setLeft(left + 1)_, the o
 setTotal(left + right) 
 ```
 
-The reason for this is that a state update in React happens [asynchronously](https://react.dev/learn/queueing-a-series-of-state-updates), i.e. not immediately but "at some point" before the component is rendered again.
+The reason for this is that a state update in React happens [asynchronously](https://react.dev/learn/queueing-a-series-of-state-updates), i.e. not immediately but "at some point" after the current component function is finished, before the component is rendered again.
 
 We can fix the app as follows:
 
