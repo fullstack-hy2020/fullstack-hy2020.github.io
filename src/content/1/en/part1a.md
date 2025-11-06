@@ -688,17 +688,43 @@ Define the new components in the file <i>App.jsx</i>.
 The <i>App</i> component's body will approximately be as follows:
 
 ```js
+const Header = ({ course }) => <h1>{course}</h1>
+
+const Content = ({ part1, exercises1, part2, exercises2, part3, exercises3 }) => (
+  <div>
+    <p>{part1} {exercises1}</p>
+    <p>{part2} {exercises2}</p>
+    <p>{part3} {exercises3}</p>
+  </div>
+)
+
+const Total = ({ exercises1, exercises2, exercises3 }) => (
+  <p>Number of exercises {exercises1 + exercises2 + exercises3}</p>
+)
+
 const App = () => {
-  // const-definitions
+  const course = 'Half Stack application development'
+  const part1 = 'Fundamentals of React'
+  const exercises1 = 10
+  const part2 = 'Using props to pass data'
+  const exercises2 = 7
+  const part3 = 'State of a component'
+  const exercises3 = 14
 
   return (
     <div>
       <Header course={course} />
-      <Content ... />
-      <Total ... />
+      <Content
+        part1={part1} exercises1={exercises1}
+        part2={part2} exercises2={exercises2}
+        part3={part3} exercises3={exercises3}
+      />
+      <Total exercises1={exercises1} exercises2={exercises2} exercises3={exercises3} />
     </div>
   )
 }
+
+export default App
 ```
 
 **WARNING** Don't try to program all the components concurrently, because that will almost certainly break down the whole app. Proceed in small steps, first make e.g. the component <i>Header</i> and only when it works for sure, you could proceed to the next component.
@@ -714,12 +740,35 @@ that is, according to Martin, careful progress with small steps is even the only
 Refactor the <i>Content</i> component so that it does not render any names of parts or their number of exercises by itself. Instead, it only renders three <i>Part</i> components of which each renders the name and number of exercises of one part.
 
 ```js
-const Content = ... {
+const Part = ({ name, exercises }) => (
+  <p>{name} {exercises}</p>
+)
+
+const Content = ({ parts }) => (
+  <div>
+    <Part name={parts[0].name} exercises={parts[0].exercises} />
+    <Part name={parts[1].name} exercises={parts[1].exercises} />
+    <Part name={parts[2].name} exercises={parts[2].exercises} />
+  </div>
+)
+
+const App = () => {
+  const course = 'Half Stack application development'
+  const parts = [
+    { name: 'Fundamentals of React', exercises: 10 },
+    { name: 'Using props to pass data', exercises: 7 },
+    { name: 'State of a component', exercises: 14 }
+  ]
+
   return (
     <div>
-      <Part .../>
-      <Part .../>
-      <Part .../>
+      <Header course={course} />
+      <Content parts={parts} />
+      <Total
+        exercises1={parts[0].exercises}
+        exercises2={parts[1].exercises}
+        exercises3={parts[2].exercises}
+      />
     </div>
   )
 }
