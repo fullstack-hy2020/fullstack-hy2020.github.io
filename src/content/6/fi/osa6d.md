@@ -380,8 +380,8 @@ const App = () => {
     mutationFn: createNote,
     // highlight-start
     onSuccess: (newNote) => {
-      const notes = queryClient.getQueryData('notes')
-      queryClient.setQueryData('notes', notes.concat(newNote))
+      const notes = queryClient.getQueryData(['notes'])
+      queryClient.setQueryData(['notes'], notes.concat(newNote))
     // highlight-end
     }
   })
