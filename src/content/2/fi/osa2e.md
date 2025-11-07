@@ -108,7 +108,7 @@ Jos nyt lisäät sovellukseen muita li-elementtejä, ne eivät saa muistiinpanoi
 
 ### Parempi virheilmoitus
 
-Aiemmin toteutimme olemassa olemattoman muistiinpanon tärkeyden muutokseen liittyvän virheilmoituksen <em>alert</em>-metodilla. Toteutetaan se nyt Reactilla omana komponenttinaan.
+Aiemmin toteutimme olemassa olemattoman muistiinpanon tärkeyden muutokseen liittyvän virheilmoituksen <em>alert</em>-metodilla. Toteutetaan se nyt Reactilla omana komponenttinaan tiedostossa <i>src/components/Notification.jsx</i>.
 
 Komponentti on yksinkertainen:
 
@@ -124,6 +124,8 @@ const Notification = ({ message }) => {
     </div>
   )
 }
+
+export default Notification
 ```
 
 Jos propsin <em>message</em> arvo on <em>null</em>, ei renderöidä mitään. Muussa tapauksessa renderöidään viesti div-elementtiin. Elementille on liitetty tyylien lisäämistä varten luokka <i>error</i>.
@@ -131,6 +133,11 @@ Jos propsin <em>message</em> arvo on <em>null</em>, ei renderöidä mitään. Mu
 Lisätään komponentin <i>App</i> tilaan kenttä <i>errorMessage</i> virheviestiä varten. Laitetaan kentälle heti jotain sisältöä, jotta pääsemme testaamaan komponenttia:
 
 ```js
+import { useState, useEffect } from 'react'
+import Note from './components/Note'
+import noteService from './services/notes'
+import Notification from './components/Notification' // highlight-line
+
 const App = () => {
   const [notes, setNotes] = useState([]) 
   const [newNote, setNewNote] = useState('')

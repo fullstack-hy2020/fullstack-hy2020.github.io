@@ -108,7 +108,7 @@ If you now add other <i>li</i> elements to the application, they will not be aff
 
 ### Improved error message
 
-We previously implemented the error message that was displayed when the user tried to toggle the importance of a deleted note with the <em>alert</em> method. Let's implement the error message as its own React component.
+We previously implemented the error message that was displayed when the user tried to toggle the importance of a deleted note with the <em>alert</em> method. Let's implement the error message as its own React component in the file <i>src/components/Notification.jsx</i>.
 
 The component is quite simple:
 
@@ -119,11 +119,12 @@ const Notification = ({ message }) => {
   }
 
   return (
-    <div className='error'>
+    <div className="error">
       {message}
     </div>
   )
 }
+
 export default Notification
 ```
 
