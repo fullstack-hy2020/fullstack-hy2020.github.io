@@ -482,6 +482,7 @@ describe('<Togglable />', () => {
     const element = screen.getByText('togglable content')
     expect(element).toBeVisible()
   })
+})
 ```
 
 The _beforeEach_ function gets called before each test, which then renders the <i>Togglable</i> component.
