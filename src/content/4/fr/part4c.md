@@ -243,7 +243,7 @@ module.exports = usersRouter
 
 Le mot de passe envoyé dans la requête n'est <i>pas</i> stocké dans la base de données. Nous stockons le <i>hash</i> du mot de passe qui est généré avec la fonction _bcrypt.hash_.
 
-Les principes fondamentaux de [stockage des mots de passe](https://codahale.com/how-to-safely-store-a-password/) sont hors du champ d'application de ce matériel de cours. Nous n'aborderons pas ce que signifie le nombre magique 10 assigné à la variable [saltRounds](https://github.com/kelektiv/node.bcrypt.js/#a-note-on-rounds), mais vous pouvez en lire plus à ce sujet dans le matériel lié.
+Les principes fondamentaux de [stockage des mots de passe](https://bytebytego.com/guides/how-to-store-passwords-in-the-database/) sont hors du champ d'application de ce matériel de cours. Nous n'aborderons pas ce que signifie le nombre magique 10 assigné à la variable [saltRounds](https://github.com/kelektiv/node.bcrypt.js/#a-note-on-rounds), mais vous pouvez en lire plus à ce sujet dans le matériel lié.
 
 Notre code actuel ne contient aucune gestion des erreurs ou validation des entrées pour vérifier que le nom d'utilisateur et le mot de passe sont dans le format souhaité.
 

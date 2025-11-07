@@ -243,7 +243,7 @@ module.exports = usersRouter
 
 La contraseña enviada en la solicitud <i>no</i> se almacena en la base de datos. Almacenamos el <i>hash</i> de la contraseña que se genera con la función _bcrypt.hash_.
 
-Los fundamentos de [almacenar contraseñas](https://codahale.com/how-to-safely-store-a-password/) están fuera del alcance de este material del curso. No discutiremos qué significa el número mágico 10 asignado a la variable [saltRounds](https://github.com/kelektiv/node.bcrypt.js/#a-note-on-rounds), pero puedes leer más sobre ello en el material vinculado.
+Los fundamentos de [almacenar contraseñas](https://bytebytego.com/guides/how-to-store-passwords-in-the-database/) están fuera del alcance de este material del curso. No discutiremos qué significa el número mágico 10 asignado a la variable [saltRounds](https://github.com/kelektiv/node.bcrypt.js/#a-note-on-rounds), pero puedes leer más sobre ello en el material vinculado.
 
 Nuestro código actual no contiene ningún manejo de errores o validación de input para verificar que el nombre de usuario y la contraseña están en el formato deseado.
 

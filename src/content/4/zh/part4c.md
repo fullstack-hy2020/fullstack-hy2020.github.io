@@ -288,8 +288,8 @@ module.exports = usersRouter
 <!-- The password sent in the request is <i>not</i> stored in the database. We store the <i>hash</i> of the password that is generated with the _bcrypt.hash_ function.-->
  请求中发送的密码<i>不</i>存储在数据库中。我们存储的是用_bcrypt.hash_函数生成的密码的<i>hash</i>。
 
-<!-- The fundamentals of [storing passwords](https://codahale.com/how-to-safely-store-a-password/) are outside the scope of this course material. We will not discuss what the magic number 10 assigned to the [saltRounds](https://github.com/kelektiv/node.bcrypt.js/#a-note-on-rounds) variable means, but you can read more about it in the linked material.-->
- [存储密码](https://codahale.com/how-to-safely-store-a-password/)的基本原理不在本课程材料的范围之内。我们不会讨论分配给[saltRounds](https://github.com/kelektiv/node.bcrypt.js/#a-note-on-rounds)变量的神奇数字10是什么意思，但你可以在链接材料中读到更多关于它的信息。
+<!-- The fundamentals of [storing passwords](https://bytebytego.com/guides/how-to-store-passwords-in-the-database/) are outside the scope of this course material. We will not discuss what the magic number 10 assigned to the [saltRounds](https://github.com/kelektiv/node.bcrypt.js/#a-note-on-rounds) variable means, but you can read more about it in the linked material.-->
+ [存储密码](https://bytebytego.com/guides/how-to-store-passwords-in-the-database/)的基本原理不在本课程材料的范围之内。我们不会讨论分配给[saltRounds](https://github.com/kelektiv/node.bcrypt.js/#a-note-on-rounds)变量的神奇数字10是什么意思，但你可以在链接材料中读到更多关于它的信息。
 
 <!-- Our current code does not contain any error handling or input validation for verifying that the username and password are in the desired format.-->
  我们目前的代码不包含任何错误处理或输入验证，以验证用户名和密码是否符合所需的格式。
