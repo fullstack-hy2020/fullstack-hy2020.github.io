@@ -636,173 +636,76 @@ Muestra el botón para eliminar una publicación de blog solo si la publicación
 
 <div class="content">
 
-### PropTypes
-
-El componente <i>Togglable</i> asume que se le da el texto para el botón a través del prop <i>buttonLabel</i>. Si nos olvidamos de definir este prop al componente:
-
-```js
-<Togglable> buttonLabel forgotten... </Togglable>
-```
-
-La aplicación funciona, pero el navegador muestra un botón sin texto.
-
-Nos gustaría hacer cumplir que cuando se usa el componente <i>Togglable</i>, se debe dar un valor al prop de texto del botón.
-
-Los props esperados y requeridos de un componente se pueden definir con el paquete [prop-types](https://github.com/facebook/prop-types). Instalemos el paquete:
-
-```shell
-npm install prop-types
-```
-
-Podemos definir el prop <i>buttonLabel</i> como un prop obligatorio o <i>required</i> de tipo string como se muestra a continuación:
-
-```js
-import PropTypes from 'prop-types'
-
-const Togglable = React.forwardRef((props, ref) => {
-  // ..
-})
-
-Togglable.propTypes = {
-  buttonLabel: PropTypes.string.isRequired
-}
-```
-
-La consola mostrará el siguiente mensaje de error si el prop se deja sin definir:
-
-![error en la consola, buttonLabel es undefined](../../images/5/15.png)
-
-La aplicación todavía funciona y nada nos obliga a definir props a pesar de las definiciones de PropTypes. Eso sí, es extremadamente poco profesional dejar <i>cualquier</i> output de color rojo en la consola del navegador.
-
-También definamos PropTypes para el componente <i>LoginForm</i>:
-
-```js
-import PropTypes from 'prop-types'
-
-const LoginForm = ({
-   handleSubmit,
-   handleUsernameChange,
-   handlePasswordChange,
-   username,
-   password
-  }) => {
-    // ...
-  }
-
-LoginForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-  handleUsernameChange: PropTypes.func.isRequired,
-  handlePasswordChange: PropTypes.func.isRequired,
-  username: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired
-}
-```
-
-Si el tipo de un prop pasado es incorrecto, por ejemplo, si intentamos definir el prop <i>handleSubmit</i> como un string, esto resultará en la siguiente advertencia:
-
-![error de consola, handleSubmit espera una función](../../images/5/16.png)
-
 ### ESlint
 
-En la parte 3 configuramos la herramienta de estilo de código para el backend [ESlint](/es/part3/validacion_y_es_lint#lint). Utilicemos ESlint también en el frontend.
+En la parte 3 configuramos la herramienta de estilo de código [ESlint](/es/part3/validacion_y_es_lint#lint) para el backend. Utilicemos ESlint también en el frontend.
 
-Vite ha instalado ESlint en el proyecto de forma predeterminada, por lo que todo lo que nos queda por hacer es definir nuestra configuración deseada en el archivo <i>.eslintrc.cjs</i>.
+Vite ha instalado ESlint en el proyecto de forma predeterminada, por lo que todo lo que nos queda por hacer es definir nuestra configuración deseada en el archivo <i>eslint.config.js</i>.
 
-Creemos un archivo <i>.eslintrc.js</i>  con el siguiente contenido:
+Creemos un archivo <i>eslint.config.js</i> con el siguiente contenido:
 
 ```js
-module.exports = {
-  root: true,
-  env: {
-    browser: true,
-    es2020: true,
-  },
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:react/jsx-runtime',
-    'plugin:react-hooks/recommended',
-  ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
-  parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
-  settings: { react: { version: '18.2' } },
-  plugins: ['react-refresh'],
-  rules: {
-    "indent": [
-        "error",
-        2  
-    ],
-    "linebreak-style": [
-        "error",
-        "unix"
-    ],
-    "quotes": [
-        "error",
-        "single"
-    ],
-    "semi": [
-        "error",
-        "never"
-    ],
-    "eqeqeq": "error",
-    "no-trailing-spaces": "error",
-    "object-curly-spacing": [
-        "error", "always"
-    ],
-    "arrow-spacing": [
-        "error", { "before": true, "after": true }
-    ],
-    "no-console": 0,
-    "react/react-in-jsx-scope": "off",
-    "react/prop-types": 0,
-    "no-unused-vars": 0    
-  },
-}
+import js from '@eslint/js'
+import globals from 'globals'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+
+export default [
+  { ignores: ['dist'] },
+  {
+    files: ['**/*.{js,jsx}'],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        ecmaFeatures: { jsx: true },
+        sourceType: 'module'
+      }
+    },
+    plugins: {
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh
+    },
+    rules: {
+      ...js.configs.recommended.rules,
+      ...reactHooks.configs.recommended.rules,
+      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true }
+      // highlight-start
+      ],
+      indent: ['error', 2],
+      'linebreak-style': ['error', 'unix'],
+      quotes: ['error', 'single'],
+      semi: ['error', 'never'],
+      eqeqeq: 'error',
+      'no-trailing-spaces': 'error',
+      'object-curly-spacing': ['error', 'always'],
+      'arrow-spacing': ['error', { before: true, after: true }],
+      'no-console': 'off'
+      //highlight-end
+    }
+  }
+]
 ```
 
-NOTA: Si estás utilizando Visual Studio Code junto con el plugin ESLint, es posible que debas agregar una configuración de espacio de trabajo adicional para que funcione. Si ves ```Failed to load plugin react: Cannot find module 'eslint-plugin-react'```, necesitas una configuración adicional. Agregar la línea ```"eslint.workingDirectories": [{ "mode": "auto" }]``` a settings.json en el espacio de trabajo parece funcionar. Mira [esto](https://github.com/microsoft/vscode-eslint/issues/880#issuecomment-578052807) para obtener más información.
+NOTA: Si estás utilizando Visual Studio Code junto con el plugin ESLint, es posible que debas agregar una configuración de espacio de trabajo adicional para que funcione. Si ves <i>Failed to load plugin react: Cannot find module 'eslint-plugin-react'</i>, necesitas una configuración adicional. Agregar la siguiente línea a settings.json puede ayudar: 
 
-Vamos a crear un archivo [.eslintignore](https://eslint.org/docs/latest/use/configure/ignore#the-eslintignore-file) con el siguiente contenido en la raíz del repositorio
-
-```bash
-node_modules
-dist
-.eslintrc.cjs
-vite.config.js
+```js
+"eslint.workingDirectories": [{ "mode": "auto" }]
 ```
 
-Ahora los directorios <em>dist</em> y <em>node_modules</em> se omitirán al realizar el linting.
+Consulta [esto](https://github.com/microsoft/vscode-eslint/issues/880#issuecomment-578052807) para obtener más información.
 
-Como de costumbre, puedes realizar el linting desde la línea de comandos con el siguiente comando:
+Como de costumbre, puedes realizar el linting desde la línea de comandos con el siguiente comando
 
 ```bash
 npm run lint
 ```
 
 o usando el plugin de Eslint del editor.
-
-El componente _Togglable_ está causando una advertencia desagradable <i>Component definition is missing display name</i>:
-
-![vscode mostrando error en la definición del componente](../../images/5/25x.png)
-
-Las react-devtools también muestran que el componente no tiene un nombre:
-
-![react devtools mostrando forwardRef como anónimo](../../images/5/26ea.png)
-
-Afortunadamente, esto es fácil de solucionar.
-
-```js
-import { useState, useImperativeHandle } from 'react'
-import PropTypes from 'prop-types'
-
-const Togglable = React.forwardRef((props, ref) => {
-  // ...
-})
-
-Togglable.displayName = 'Togglable' // highlight-line
-
-export default Togglable
-```
 
 Puedes encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part5-7</i> de [este repositorio de GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-7).
 
@@ -814,8 +717,8 @@ Puedes encontrar el código para nuestra aplicación actual en su totalidad en l
 
 #### 5.12: Frontend de la Lista de Blogs, paso 12
 
-Define PropTypes para uno de los componentes de tu aplicación y agrega ESlint al proyecto. Define la configuración según tu preferencia. Corrige todos los errores del linter.
+Agrega ESlint al proyecto. Define la configuración según tu preferencia. Corrige todos los errores del linter.
 
-Vite ha instalado ESlint en el proyecto por defecto, así que todo lo que queda por hacer es definir tu configuración deseada en el archivo <i>.eslintrc.cjs</i>.
+Vite ha instalado ESlint en el proyecto por defecto, así que todo lo que queda por hacer es definir tu configuración deseada en el archivo <i>eslint.config.js</i>.
 
 </div>
