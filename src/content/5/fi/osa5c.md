@@ -485,6 +485,7 @@ describe('<Togglable />', () => {
     const element = screen.getByText('togglable content')
     expect(element).toBeVisible()
   })
+})
 ```
 
 Ennen jokaista testiä suoritettava _beforeEach_ renderöi <i>Togglable</i>-komponentin.
