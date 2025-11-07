@@ -1413,7 +1413,7 @@ rm -rf node_modules/ && npm i
 注意你的应用只需要在一个浏览器会话中运行。一旦你刷新页面，所收集的反馈消失也不要紧。
 
 <!-- It is advisable to use the same structure that is used in the material and previous exercise. File <i>main.jsx</i> is as follows: -->
-建议使用和教材与之前练习中相同的结构。文件<i>main.js</i>如下：
+建议使用和教材与之前练习中相同的结构。文件<i>main.jsx</i>如下：
 
 ```js
 import ReactDOM from 'react-dom/client'
@@ -1584,10 +1584,10 @@ export default App
 ```
 
 <!-- Content of the file <i>main.jsx</i> is the same as in previous exercises. -->
-文件<i>main.js</i>的内容与之前的练习相同。
+文件<i>main.jsx</i>的内容与之前的练习相同。
 
 <!-- Find out how to generate random numbers in JavaScript, eg. via search engine or on [Mozilla Developer Network](https://developer.mozilla.org). Remember that you can test generating random numbers e.g. straight in the console of your browser.-->
-找出如何在JavaScript中生成随机数，例如通过搜索引擎或去[Mozilla Developer Network](https://developer.mozilla.org)。记住，你可以直接在浏览器的控制台测试生成随机数等。
+查找如何在JavaScript中生成随机数，例如通过搜索引擎或去[Mozilla Developer Network](https://developer.mozilla.org)。记住，你可以直接在浏览器的控制台测试生成随机数等。
 
 <!-- Your finished application could look something like this:-->
 你完成的应用可能如下所示：

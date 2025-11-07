@@ -199,8 +199,8 @@ const Hello = ({ name, age }) => {
 <!-- Up to this point, our applications have been static — their appearance remains unchanged after the initial rendering. But what if we wanted to create a counter that increases in value, either over time or when a button is clicked? -->
 到目前为止，我们所有的应用都是静态的——在最初的渲染之后，其外观保持不变。如果我们想创建一个计数器，其值随着时间的推移或点击按钮而增加呢？
 
-<!-- Let's start with the following. File <i>App.js</i> becomes:-->
-让我们从将文件<i>App.js</i>变成下面的样子开始：
+<!-- Let's start with the following. File <i>App.jsx</i> becomes: -->
+让我们从将文件<i>App.jsx</i>变成下面的样子开始：
 
 ```js
 const App = (props) => {
@@ -213,8 +213,8 @@ const App = (props) => {
 export default App
 ```
 
-<!-- And file <i>index.js</i> becomes:-->
-将文件<i>index.js</i>改成：
+<!-- And file <i>main.jsx</i> becomes: -->
+将文件<i>main.jsx</i>改成：
 
 ```js
 import ReactDOM from 'react-dom/client'
@@ -285,7 +285,7 @@ setInterval(() => {
 接下来，让我们借助React的[状态hook](https://react.dev/learn/state-a-components-memory)来给我们的应用的<i>App</i>组件添加状态。
 
 <!-- We will change the application as follows. <i>main.jsx</i> goes back to: -->
-我们将改变应用的内容如下。<i>main.js</i>回到：
+我们将改变应用的内容如下。<i>main.jsx</i>回到：
 
 ```js
 import ReactDOM from 'react-dom/client'
@@ -295,8 +295,8 @@ import App from './App'
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-<!-- and <i>App.js</i> changes to the following:-->
-而<i>App.js</i>则改为：
+<!-- and <i>App.jsx</i> changes to the following: -->
+而<i>App.jsx</i>则改为：
 
 ```js
 import { useState } from 'react' // highlight-line

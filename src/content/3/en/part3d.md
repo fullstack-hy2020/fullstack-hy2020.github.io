@@ -249,7 +249,7 @@ export default [
 ]
 ```
 
-So far, our ESLint configuration file defines the _files_ option with _["**/*.js"]_, which tells ESLint to look at all JavaScript files in our project folder. The _languageOptions_ property specifies options related to language features that ESLint should expect, in which we defined the _sourceType_ option as "commonjs". This indicates that the JavaScript code in our project uses the CommonJS module system, allowing ESLint to parse the code accordingly.  
+So far, our ESLint configuration file defines the _files_ option with _["\*\*/\*.js"]_, which tells ESLint to look at all JavaScript files in our project folder. The _languageOptions_ property specifies options related to language features that ESLint should expect, in which we defined the _sourceType_ option as "commonjs". This indicates that the JavaScript code in our project uses the CommonJS module system, allowing ESLint to parse the code accordingly.  
 
 The _globals_ property specifies global variables that are predefined. The spread operator applied here tells ESLint to include all global variables defined in the _globals.node_ settings such as the _process_. In the case of browser code we would define here _globals.browser_ to allow browser specific global variables like _window_, and _document_.
 
