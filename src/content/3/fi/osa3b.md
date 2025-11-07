@@ -397,7 +397,7 @@ Koska frontend toimii osoitteessa <i>localhost:5173</i>, menevät backendiin teh
 
 Vitellä luoduissa projekteissa ongelma on helppo ratkaista. Riittää, että frontendin tiedostoon <i>vite.config.js</i> lisätään seuraava määritelmä:
 
-```bash
+```js
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 

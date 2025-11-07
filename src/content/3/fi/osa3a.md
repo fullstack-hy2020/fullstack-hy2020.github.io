@@ -41,7 +41,7 @@ Tiedosto määrittelee mm., että ohjelmamme käynnistyspiste on tiedosto <i>ind
 
 Tehdään kenttään <i>scripts</i> pieni lisäys:
 
-```bash
+```json
 {
   // ...
   "scripts": {
@@ -72,7 +72,7 @@ npm start
 
 npm-skripti <i>start</i> toimii koska määrittelimme sen tiedostoon <i>package.json</i>:
 
-```bash
+```json
 {
   // ...
   "scripts": {
@@ -367,7 +367,7 @@ Sovelluksen koodin muutokset aiheuttavat nyt automaattisen palvelimen uudelleenk
 
 Määritellään kehityspalvelimen käynnistämistä varten oma <i>npm-skripti</i> tiedostoon <i>package.json</i>:
 
-```bash
+```json
 {
   // ..
   "scripts": {
@@ -707,7 +707,7 @@ Koodi sisältää hieman erikoisen näköisen rivin:
 Math.max(...notes.map(n => Number(n.id)))
 ```
 
-Mitä rivillä tapahtuu? <em>notes.map(n => Number(n.id))</em> muodostaa taulukon, joka koostuu muistiinpanojen id-kenttiä vastaavasta numeroarvosta. [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) palauttaa maksimin sille parametrina annetuista luvuista. <em>notes.map(n => Number(n.id)))</em> on kuitenkin <i>taulukko</i>, joten se ei kelpaa parametriksi komennolle _Math.max_. Taulukko voidaan muuttaa yksittäisiksi luvuiksi käyttäen taulukon [spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)-syntaksia, eli kolmea pistettä <em>...taulukko</em>.
+Mitä rivillä tapahtuu? <em>notes.map(n => Number(n.id))</em> muodostaa taulukon, joka koostuu muistiinpanojen id-kenttiä vastaavasta numeroarvosta. [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) palauttaa maksimin sille parametrina annetuista luvuista. <em>notes.map(n => Number(n.id))</em> on kuitenkin <i>taulukko</i>, joten se ei kelpaa parametriksi komennolle _Math.max_. Taulukko voidaan muuttaa yksittäisiksi luvuiksi käyttäen taulukon [spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)-syntaksia, eli kolmea pistettä <em>...taulukko</em>.
 
 </div>
 
