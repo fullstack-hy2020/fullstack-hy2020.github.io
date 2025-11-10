@@ -944,7 +944,7 @@ Varmista, että frontend toimii muutosten jälkeen.
 
 #### 3.18*: puhelinluettelo ja tietokanta, step6
 
-Päivitä myös polkujen <i>api/persons/:id</i> ja <i>info</i> käsittely ja varmista niiden toimivuus suoraan selaimella, Postmanilla tai VS Coden REST Clientillä.
+Päivitä myös HTTP GET <i>api/persons/:id</i> ja <i>info</i> -polkujen käsittely ja varmista niiden toimivuus suoraan selaimella, Postmanilla tai VS Coden REST Clientillä.
 
 Selaimella tarkastellen yksittäisen numerotiedon tulisi näyttää seuraavalta:
 
