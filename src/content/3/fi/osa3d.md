@@ -264,10 +264,10 @@ export default [
 Rivi _js.configs.recommended_ kannattaa laittaa konfiguraation alkuun ennen mahdollisia itse tehtäviä lisäkonfiguraatioita.
 
 
-Asennetaan seuraavaksi liitännäinen [@stylistic/eslint-plugin-js](https://eslint.style/packages/js) jonka avulla saamme käyttöömme joukon valmiiksi määriteltyjä ESlint-säntöjä:
+Asennetaan seuraavaksi liitännäinen [@stylistic/eslint-plugin](https://eslint.style/packages/js) jonka avulla saamme käyttöömme joukon valmiiksi määriteltyjä ESlint-säntöjä:
 
 ```bash
-npm install --save-dev @stylistic/eslint-plugin-js
+npm install --save-dev @stylistic/eslint-plugin
 ```
 
 Otetaan plugin käyttöön ja määritellään projektiin neljä sääntöä:
@@ -275,7 +275,7 @@ Otetaan plugin käyttöön ja määritellään projektiin neljä sääntöä:
 ```js
 import globals from 'globals'
 import js from '@eslint/js'
-import stylisticJs from '@stylistic/eslint-plugin-js' // highlight-line
+import stylisticJs from '@stylistic/eslint-plugin' // highlight-line
 
 export default [
   {
@@ -295,7 +295,7 @@ export default [
 ]
 ```
 
-[Pluginit](https://eslint.org/docs/latest/use/configure/plugins) tarjoavat tavan laajentaa ESLintin toiminnallisuutta lisäämällä määrittelyjä jotka eivät ole mukana ESLint-ydinkirjastossa. Otimme nyt käyttöön pluginin  [@stylistic/eslint-plugin-js](https://eslint.style/packages/js), joka tuo käyttöömme joukon JavaScriptin tyylisääntöjä, joista otimme käyttöön sisennystä, rivinvaihtoa, lainausmerkkejä ja puolipisteitä koskevat säännöt.
+[Pluginit](https://eslint.org/docs/latest/use/configure/plugins) tarjoavat tavan laajentaa ESLintin toiminnallisuutta lisäämällä määrittelyjä jotka eivät ole mukana ESLint-ydinkirjastossa. Otimme nyt käyttöön pluginin  [@stylistic/eslint-plugin](https://eslint.style/packages/js), joka tuo käyttöömme joukon JavaScriptin tyylisääntöjä, joista otimme käyttöön sisennystä, rivinvaihtoa, lainausmerkkejä ja puolipisteitä koskevat säännöt.
 
 **Huomautus Windows-käyttäjille:** Rivinvaihtojen tyypiksi on tyylisäännössä määritelty _unix_. On suositeltavaa käyttää Unix-tyyppisiä rivinvaihtoja (_\n_) riippumatta käyttämästäsi käyttöjärjestelmästä, sillä ne ovat yhteensopivia useimpien modernien käyttöjärjestelmien kanssa ja helpottavat työskentelyä, jos useat eri henkilöt työstävät samoja tiedostoja. Jos käytössäsi on Windows-tyyppiset rivinvaihdot, ESLint antaa seuraavia virheitä: <i>Expected linebreaks to be 'LF' but found 'CRLF'</i>. Konfiguroi tällöin Visual Studio Code käyttämään Unix-tyyppisiä rivinvaihtoja esimerkiksi [tämän ohjeen](https://stackoverflow.com/questions/48692741/how-can-i-make-all-line-endings-eols-in-all-files-in-visual-studio-code-unix) mukaan.
 
@@ -430,7 +430,7 @@ Kokonaisuudessaan konfiguraatiotiedosto näyttää seuraavalta:
 ```js
 import globals from 'globals'
 import js from '@eslint/js'
-import stylisticJs from '@stylistic/eslint-plugin-js'
+import stylisticJs from '@stylistic/eslint-plugin'
 
 export default [
   js.configs.recommended,
