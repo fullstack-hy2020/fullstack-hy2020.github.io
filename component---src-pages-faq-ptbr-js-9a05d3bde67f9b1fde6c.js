@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[42],{"3B3b":function(e,t,n){"use strict";n.r(t);var a=n("q1tI"),r=n.n(a),s=n("S6uJ");t.default=()=>r.a.createElement(s.a,{lang:"ptbr",title:"FAQ | Full Stack Aberto",seoDescription:"Perguntas Frequentes"})}}]);
+//# sourceMappingURL=component---src-pages-faq-ptbr-js-9a05d3bde67f9b1fde6c.js.map
