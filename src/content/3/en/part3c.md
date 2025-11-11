@@ -137,7 +137,7 @@ const url = `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/?ret
 
 mongoose.set('strictQuery',false)
 
-mongoose.connect(url)
+mongoose.connect(url, { family: 4 })
 
 const noteSchema = new mongoose.Schema({
   content: String,
@@ -159,7 +159,15 @@ note.save().then(result => {
 
 **NB:** Depending on which region you selected when building your cluster, the <i>MongoDB URI</i> may be different from the example provided above. You should verify and use the correct URI that was generated from MongoDB Atlas.
 
-The code also assumes that it will be passed the password from the credentials we created in MongoDB Atlas, as a command line parameter. We can access the command line parameter like this:
+The connection to the database is established with the command:
+
+```js
+mongoose.connect(url, { family: 4 })
+```
+
+The method takes the database URL as the first argument and an object that defines the required settings as the second argument. MongoDB Atlas supports only IPv4 addresses, so with the object _{ family: 4 }_ we specify that the connection should always use IPv4.
+
+The practice application assumes that it will be passed the password from the credentials we created in MongoDB Atlas, as a command line parameter. We can access the command line parameter like this:
 
 ```js
 const password = process.argv[2]
@@ -363,7 +371,7 @@ const password = process.argv[2]
 const url = `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0`
 
 mongoose.set('strictQuery',false)
-mongoose.connect(url)
+mongoose.connect(url, { family: 4 })
 
 const noteSchema = new mongoose.Schema({
   content: String,
@@ -429,7 +437,7 @@ mongoose.set('strictQuery', false)
 const url = process.env.MONGODB_URI // highlight-line
 
 console.log('connecting to', url)
-mongoose.connect(url)
+mongoose.connect(url, { family: 4 })
 // highlight-start
   .then(result => {
     console.log('connected to MongoDB')
@@ -472,7 +480,7 @@ We will soon learn a more sophisticated way to define environment variables.
 The way that the connection is made has changed slightly:
 
 ```js
-mongoose.connect(url)
+mongoose.connect(url, { family: 4 })
   .then(result => {
     console.log('connected to MongoDB')
   })

@@ -134,7 +134,7 @@ const password = process.argv[2]
 const url = `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
 
 mongoose.set('strictQuery', false)
-mongoose.connect(url)
+mongoose.connect(url, { family: 4 })
 
 const noteSchema = new mongoose.Schema({
   content: String,
@@ -154,7 +154,15 @@ note.save().then(result => {
 })
 ```
 
-Koodi siis olettaa, että sille annetaan parametrina MongoDB Atlasissa luodulle käyttäjälle määritelty salasana. Komentoriviparametriin se pääsee käsiksi seuraavasti:
+Tietokantaan muodostetaan yhteys komennolla:
+
+```js
+mongoose.connect(url, { family: 4 })
+```
+
+Metodille annetaan ensimmäisenä argumenttina tietokannan URL-osoite ja toisena argumenttina olio, joka määrittelee tarvittavat asetukset. MongoDB Atlas tukee vain IPv4-osoitteita, joten määrittelemme oliolla _{ family: 4 }_, että yhteyteen käytetään aina IPv4-osoitetta.
+
+Kokeilusovellus olettaa, että sille annetaan parametrina MongoDB Atlasissa luodulle käyttäjälle määritelty salasana. Komentoriviparametriin se pääsee käsiksi seuraavasti:
 
 ```js
 const password = process.argv[2]
@@ -357,7 +365,7 @@ const password = process.argv[2]
 const url = `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0`
 
 mongoose.set('strictQuery',false)
-mongoose.connect(url)
+mongoose.connect(url, { family: 4 })
 
 const noteSchema = new mongoose.Schema({
   content: String,
@@ -423,7 +431,7 @@ mongoose.set('strictQuery', false)
 const url = process.env.MONGODB_URI // highlight-line
 
 console.log('connecting to', url)
-mongoose.connect(url)
+mongoose.connect(url, { family: 4 })
   // highlight-start
   .then(result => {
     console.log('connected to MongoDB')
@@ -466,7 +474,7 @@ Opettelemme pian kehittyneemmän tavan määritellä ympäristömuuttujia.
 Yhteyden muodostustavassa on pieni muutos aiempaan:
 
 ```js
-mongoose.connect(url)
+mongoose.connect(url, { family: 4 })
   .then(result => {
     console.log('connected to MongoDB')
   })
