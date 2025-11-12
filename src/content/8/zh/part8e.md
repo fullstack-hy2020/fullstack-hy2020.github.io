@@ -580,10 +580,11 @@ const pubsub = new PubSub() // highlight-line
  <i>index.js</i>中的配置必须这样修改。
 
 ```js
-import {
-  ApolloClient, ApolloProvider, HttpLink, InMemoryCache,
+import { 
+  ApolloClient, InMemoryCache, createHttpLink,
   split  // highlight-line
 } from '@apollo/client'
+import { ApolloProvider } from '@apollo/client/react'
 import { setContext } from 'apollo-link-context'
 
 // highlight-start
@@ -682,7 +683,7 @@ export const PERSON_ADDED = gql`
 
 import {
   useQuery, useMutation, useSubscription, useApolloClient // highlight-line
-} from '@apollo/client'
+} from '@apollo/client/react'
 
 const App = () => {
   // ...

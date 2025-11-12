@@ -118,9 +118,8 @@ client.query({ query })
 import ReactDOM from 'react-dom'
 import App from './App'
 
-import {
-  ApolloClient, ApolloProvider, HttpLink, InMemoryCache // highlight-line
-} from '@apollo/client'
+import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
+import { ApolloProvider } from '@apollo/client/react' // highlight-line
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
@@ -151,7 +150,8 @@ ReactDOM.render(
 查询是由<i>App</i>组件进行的，其代码如下。
 
 ```js
-import { gql, useQuery } from '@apollo/client'
+import { gql } from '@apollo/client'
+import { useQuery } from '@apollo/client/react'
 
 const ALL_PERSONS = gql`
 query {
@@ -302,7 +302,8 @@ query findPersonByName($nameToSearch: String!) {
 
 ```js
 import { useState } from 'react'
-import { gql, useQuery } from '@apollo/client'
+import { gql } from '@apollo/client'
+import { useQuery } from '@apollo/client/react'
 
 const FIND_PERSON = gql`
   query findPersonByName($nameToSearch: String!) {
@@ -474,7 +475,8 @@ mutation createPerson($name: String!, $street: String!, $city: String!, $phone: 
 
 ```js
 import { useState } from 'react'
-import { gql, useMutation } from '@apollo/client'
+import { gql } from '@apollo/client'
+import { useMutation } from '@apollo/client/react'
 
 const CREATE_PERSON = gql`
   // ...
@@ -790,7 +792,7 @@ export const EDIT_NUMBER = gql`
 
 ```js
 import { useState } from 'react'
-import { useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client/react'
 
 import { EDIT_NUMBER } from '../queries'
 

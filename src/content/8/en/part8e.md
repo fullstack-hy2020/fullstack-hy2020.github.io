@@ -351,7 +351,7 @@ Unfortunately, startStandaloneServer does not allow adding subscriptions to the 
 Let us install Express
 
 ```bash
-npm install express cors
+npm install express cors @as-integrations/express5
 ```
 
 and the file <i>index.js</i> changes to:
@@ -359,7 +359,7 @@ and the file <i>index.js</i> changes to:
 ```js
 const { ApolloServer } = require('@apollo/server')
 // highlight-start
-const { expressMiddleware } = require('@apollo/server/express4')
+const { expressMiddleware } = require('@as-integrations/express5')
 const { ApolloServerPluginDrainHttpServer } = require('@apollo/server/plugin/drainHttpServer')
 const { makeExecutableSchema } = require('@graphql-tools/schema')
 const express = require('express')
@@ -464,7 +464,7 @@ The file <i>index.js</i> is changed to:
 ```js
 // highlight-start
 const { WebSocketServer } = require('ws')
-const { useServer } = require('graphql-ws/lib/use/ws')
+const { useServer } = require('graphql-ws/use/ws')
 // highlight-end
 
 // ...
@@ -646,9 +646,10 @@ The configuration in <i>main.jsx</i> has to be modified like so:
 
 ```js
 import { 
-  ApolloClient, InMemoryCache, ApolloProvider, createHttpLink,
+  ApolloClient, InMemoryCache, createHttpLink,
   split  // highlight-line
 } from '@apollo/client'
+import { ApolloProvider } from '@apollo/client/react'
 import { setContext } from '@apollo/client/link/context'
 
 // highlight-start
@@ -739,7 +740,7 @@ and do the subscription in the App component:
 
 ```js
 
-import { useQuery, useMutation, useSubscription } from '@apollo/client' // highlight-line
+import { useQuery, useMutation, useSubscription } from '@apollo/client/react' // highlight-line
 
 
 const App = () => {
