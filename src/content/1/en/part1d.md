@@ -1125,15 +1125,15 @@ You may find the following links useful:
 - The [official React documentation](https://react.dev/learn) is worth checking out at some point, although most of it will become relevant only later on in the course. Also, everything related to class-based components is irrelevant to us;
 - Some courses on [Egghead.io](https://egghead.io) like [Start learning React](https://egghead.io/courses/start-learning-react) are of high quality, and the recently updated [Beginner's Guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) is also relatively good; both courses introduce concepts that will also be introduced later on in this course. **NB** The first one uses class components but the latter uses the new functional ones.
 
-### Web programmers oath
+### Web Programmer's Oath
 
-Programming is hard, that is why I will use all the possible means to make it easier
+Programming is hard. That is why, as a developer, I will use all possible means to make it easier.
 
-- I will have my browser developer console open all the time
-- I progress with small steps
-- I will write lots of _console.log_ statements to make sure I understand how the code behaves and to help pinpointing problems
-- If my code does not work, I will not write more code. Instead I will start deleting the code until it works or just return to a state when everything was still working
-- When I ask for help in the course Discord channel or elsewhere I formulate my questions properly, see [here](http://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord) how to ask for help
+- I will have my browser's developer console open at all times.
+- I will progress in small steps, making sure that my code is working at each step.
+- I will write many _console.log_ statements to make sure I understand how the code behaves and to help pinpointing problems.
+- If my code does not work, I will not write more code. Instead, I will either start deleting the code until it works or return to a state where my program was working.
+- When I ask for help in the course Discord channel or elsewhere, I will formulate my questions properly. See [this section](http://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord) to learn how to ask for help.
 
 ### Utilization of Large language models
 
