@@ -1127,7 +1127,7 @@ You may find the following links useful:
 
 ### Web Programmer's Oath
 
-Programming is hard. That is why, as a developer, I will use all the possible means to make it easier.
+Programming is hard. That is why, as a developer, I will use all possible means to make it easier.
 
 - I will have my browser's developer console open at all times.
 - I will progress in small steps, making sure that my code is working at each step.
