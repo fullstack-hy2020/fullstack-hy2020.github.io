@@ -47,6 +47,7 @@ Teimme [osassa 1](/osa1/komponentin_tila_ja_tapahtumankasittely#tapahtumankasitt
 
 ```js  
 import { useState } from 'react'
+
 const App = () => {
   const [counter, setCounter] = useState(0)
 
@@ -65,6 +66,8 @@ const App = () => {
     </div>
   )
 }
+
+export default App
 ```
 
 Eriytetään laskurilogiikka custom-hookiksi. Hookin koodi on seuraava:
