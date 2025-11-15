@@ -35,11 +35,13 @@ We'll start with the following code for our application:
 import ReactDOM from 'react-dom/client'
 import App from './App'
 
-import { ApolloClient, InMemoryCache, gql } from '@apollo/client'
+import { ApolloClient, InMemoryCache, HttpLink, gql } from '@apollo/client'
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000',
   cache: new InMemoryCache(),
+  link: new HttpLink({
+    uri: 'http://localhost:4000',
+  }),
 })
 
 const query = gql`
@@ -87,12 +89,15 @@ import App from './App'
 import {
   ApolloClient,
   ApolloProvider, // highlight-line
+  HttpLink,
   InMemoryCache,
 } from '@apollo/client'
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000',
   cache: new InMemoryCache(),
+  link: new HttpLink({
+    uri: 'http://localhost:4000',
+  }),
 })
 
 ReactDOM.createRoot(document.getElementById('root')).render(
