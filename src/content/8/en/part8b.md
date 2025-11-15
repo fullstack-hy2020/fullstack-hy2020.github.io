@@ -86,9 +86,9 @@ import App from './App'
 
 import {
   ApolloClient,
-  ApolloProvider, // highlight-line
   InMemoryCache,
 } from '@apollo/client'
+import { ApolloProvider } from "@apollo/client/react"; // highlight-line
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000',
@@ -112,7 +112,8 @@ Currently, the use of the hook function [useQuery](https://www.apollographql.com
 The query is made by the <i>App</i> component, the code of which is as follows:
 
 ```js
-import { gql, useQuery } from '@apollo/client'
+import { gql } from '@apollo/client'
+import { useQuery } from "@apollo/client/react";
 
 const ALL_PERSONS = gql`
 query {
