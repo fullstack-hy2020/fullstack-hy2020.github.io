@@ -113,7 +113,7 @@ If the request is successful, the data contained in the response is converted to
 const data = await response.json()
 ```
 
-_fetch_ does not automatically convert any data included in the response to JSON format; the conversion must be done manually. It is also important to note that _response.json()_ is an asynchronous method, so the <i>await</i> keyword.
+_fetch_ does not automatically convert any data included in the response to JSON format; the conversion must be done manually. It is also important to note that _response.json()_ is an asynchronous method, so the <i>await</i> keyword is required.
 
 Let's further simplify the code by directly returning the data returned by the _response.json()_ method:
 
