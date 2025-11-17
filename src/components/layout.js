@@ -3,6 +3,7 @@ import './index.scss';
 
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import i18n from 'i18next'
 
 import Header from './Header/Header';
 import InfoBanner from './InfoBanner';
@@ -27,6 +28,12 @@ const Layout = (props) => {
       setVisible(relevant);
     }
   }, []);
+
+  useEffect(() => {
+    if (i18n.dir() === 'rtl') {
+      document.body.className = 'rtl'
+    }
+  }, [siteLanguage])
 
   const hideNote = () => {
     console.log('hideNote');

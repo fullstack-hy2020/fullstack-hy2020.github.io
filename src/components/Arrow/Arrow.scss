@@ -76,7 +76,7 @@
   border-right: none;
   z-index: 2;
   overflow: hidden;
-  font-family: $font-heading;
+  font-family: var(--font-heading);
   position: relative;
 
   a {
@@ -190,7 +190,7 @@
 }
 
 .arrow--stacked-title {
-  font-family: $font-body;
+  font-family: var(--font-body);
   color: $black;
 
   @include from($tablet) {

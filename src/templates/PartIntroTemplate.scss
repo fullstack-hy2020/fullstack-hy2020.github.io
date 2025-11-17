@@ -1,7 +1,7 @@
 @import '../components/common.scss';
 
 .part-intro {
-  font-family: $font-heading !important;
+  font-family: var(--font-heading) !important;
 
   p {
     color: $black;

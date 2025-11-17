@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap');
+@import './_fonts.scss';
 
 $white: #ffffff;
 $gray: #a0a0a0;
@@ -20,6 +21,7 @@ $light-violet: #b2bbf0;
 //Font families
 $font-body: 'IBM Plex Mono', monospace;
 $font-heading: 'IBM Plex Sans', monospace;
+$font-arabic: 'IBM Plex Sans', 'Noto Naskh Arabic';
 
 //Font weights
 $font-weight-regular: 400;
@@ -50,6 +52,12 @@ $xlarge: 1700px;
 
 @mixin to($max-width) {
   @media all and (max-width: $max-width - 1px) {
+    @content;
+  }
+}
+
+@mixin rtl {
+  :global(body.rtl) & {
     @content;
   }
 }

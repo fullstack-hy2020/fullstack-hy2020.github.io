@@ -12,7 +12,7 @@
   }
 
   p {
-    font-family: $font-heading;
+    font-family: var(--font-heading);
 
     @include from($tablet) {
       margin-left: 1rem;
@@ -45,7 +45,7 @@
   }
 
   ul {
-    font-family: $font-heading;
+    font-family: var(--font-heading);
 
     @include from($tablet) {
       margin-left: 2.2rem;
