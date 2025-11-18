@@ -270,16 +270,20 @@ Nota adicional: <i>createStore</i> se define como "obsoleto", lo que generalment
 
 Nuestro objetivo es modificar nuestra aplicación de notas para utilizar Redux para la gestión del estado. Sin embargo, primero cubramos algunos conceptos clave a través de una aplicación de notas simplificada.
 
-La primera versión de nuestra aplicación es la siguiente
+La primera versión de nuestra aplicación, escrita en el archivo <i>main.jsx</i>, se ve de la siguiente manera:
 
 ```js
-const noteReducer = (state = [], action) => {
-  if (action.type === 'NEW_NOTE') {
-    state.push(action.payload)
-    return state
-  }
+import ReactDOM from 'react-dom/client'
+import { createStore } from 'redux'
 
-  return state
+const noteReducer = (state = [], action) => {
+  switch (action.type) {
+    case 'NEW_NOTE':
+      state.push(action.payload)
+      return state
+    default:
+      return state
+  }
 }
 
 const store = createStore(noteReducer)
@@ -303,18 +307,27 @@ store.dispatch({
 })
 
 const App = () => {
-  return(
+  return (
     <div>
       <ul>
-        {store.getState().map(note=>
+        {store.getState().map(note => (
           <li key={note.id}>
             {note.content} <strong>{note.important ? 'important' : ''}</strong>
           </li>
-        )}
-        </ul>
+        ))}
+      </ul>
     </div>
   )
 }
+
+const root = ReactDOM.createRoot(document.getElementById('root'))
+
+const renderApp = () => {
+  root.render(<App />)
+}
+
+renderApp()
+store.subscribe(renderApp)
 ```
 
 Hasta el momento la aplicación no tiene la funcionalidad para agregar nuevas notas, aunque es posible hacerlo enviando acciones <i>NEW\_NOTE</i>.
@@ -340,12 +353,13 @@ La versión inicial del reducer es muy sencilla:
 
 ```js
 const noteReducer = (state = [], action) => {
-  if (action.type === 'NEW_NOTE') {
-    state.push(action.payload)
-    return state
+  switch (action.type) {
+    case 'NEW_NOTE':
+      state.push(action.payload)
+      return state
+    default:
+      return state
   }
-
-  return state
 }
 ```
 
@@ -359,13 +373,12 @@ Agregamos una nueva nota al estado con el método _state.push(action.payload)_ q
  
 ```js
 const noteReducer = (state = [], action) => {
-  if (action.type === 'NEW_NOTE') {
-    // highlight-start
-    return state.concat(action.payload)
-    // highlight-end
+  switch (action.type) {
+    case 'NEW_NOTE':
+      return state.concat(action.payload) // highlight-line
+    default:
+      return state
   }
-
-  return state
 }
 ```
 
@@ -382,23 +395,14 @@ Ampliemos nuestro reducer para que pueda manejar el cambio de importancia de una
 }
 ```
 
-Dado que todavía no tenemos ningún código que utilice esta funcionalidad, estamos expandiendo el reducer en la forma 'test driven' (guiada por pruebas). Comencemos creando una prueba para manejar la acción <i>NEW\_NOTE</i>.
+Dado que todavía no tenemos ningún código que utilice esta funcionalidad, estamos expandiendo el reducer en la forma 'test driven' (guiada por pruebas). 
 
-Tenemos que configurar primero la biblioteca de pruebas [Jest](https://jestjs.io/) para el proyecto. Vamos a instalar las siguientes dependencias:
+### Configurando el entorno de pruebas
+
+Tenemos que configurar primero la biblioteca de pruebas [Vitest](https://vitest.dev/) para el proyecto. Vamos a instalarla como una dependencia de desarrollo para la aplicación:
 
 ```js
-npm install --save-dev jest @babel/preset-env @babel/preset-react eslint-plugin-jest
-```
-
-A continuación crearemos el archivo <i>.babelrc</i>, con el siguiente contenido:
-
-```json
-{
-  "presets": [
-    "@babel/preset-env",
-    ["@babel/preset-react", { "runtime": "automatic" }]
-  ]
-}
+npm install --save-dev vitest
 ```
 
 Expandamos <i>package.json</i> con un script para ejecutar las pruebas:
@@ -409,40 +413,58 @@ Expandamos <i>package.json</i> con un script para ejecutar las pruebas:
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint .",
     "preview": "vite preview",
-    "test": "jest" // highlight-line
+    "test": "vitest" // highlight-line
   },
   // ...
 }
 ```
 
-Y finalmente, <i>.eslint.cjs</i> necesita ser modificado de la siguiente manera:
+Para hacer las pruebas más fáciles, primero trasladaremos el código del reducer a su propio módulo, al archivo <i>src/reducers/noteReducer.js</i>:
 
 ```js
-module.exports = {
-  root: true,
-  env: { 
-    browser: true,
-    es2020: true,
-    "jest/globals": true // highlight-line
-  },
-  // ...
+const noteReducer = (state = [], action) => {
+  switch (action.type) {
+    case 'NEW_NOTE':
+      return state.concat(action.payload)
+    default:
+      return state
+  }
 }
+
+export default noteReducer
 ```
 
-Para hacer las pruebas más fáciles, primero trasladaremos el código del reducer a su propio módulo, al archivo <i>src/reducers/noteReducer.js</i>. También agregaremos la librería [deep-freeze](https://www.npmjs.com/package/deep-freeze), que se puede usar para garantizar que el reducer se haya definido correctamente como una función inmutable.
+El archivo <i>main.jsx</i> cambia de la siguiente manera:
+
+```js
+import ReactDOM from 'react-dom/client'
+import { createStore } from 'redux'
+import noteReducer from './reducers/noteReducer' // highlight-line
+
+const store = createStore(noteReducer)
+
+// ...
+```
+
+También agregaremos la librería [deep-freeze](https://www.npmjs.com/package/deep-freeze), que se puede usar para garantizar que el reducer se haya definido correctamente como una función inmutable.
 Instalemos la librería como una dependencia de desarrollo:
 
 ```js
 npm install --save-dev deep-freeze
 ```
 
-La prueba, que definimos en el archivo <i>src/reducers/noteReducer.test.js</i>, tiene el siguiente contenido:
+Ahora estamos listos para escribir pruebas.
+
+### Pruebas para noteReducer
+
+Comencemos creando una prueba para manejar la acción <i>NEW\_NOTE</i>. La prueba, que definimos en el archivo <i>src/reducers/noteReducer.test.js</i>, tiene el siguiente contenido:
 
 ```js
-import noteReducer from './noteReducer'
 import deepFreeze from 'deep-freeze'
+import { describe, expect, test } from 'vitest'
+import noteReducer from './noteReducer'
 
 describe('noteReducer', () => {
   test('returns new state with action NEW_NOTE', () => {
@@ -464,6 +486,8 @@ describe('noteReducer', () => {
   })
 })
 ```
+
+Ejecuta la prueba con <i>npm test</i>. La prueba asegura que el nuevo estado devuelto por el reducer es un array que contiene un solo elemento, que es el mismo objeto que el que está en el campo <i>payload</i> de la acción.
 
 El comando <i>deepFreeze(state)</i> asegura que el reducer no cambie el estado del store que se le dio como parámetro. Si el reducer usa el comando _push_ para manipular el estado, la prueba no pasará
 
@@ -688,6 +712,7 @@ y una base para sus pruebas
 
 ```js
 import deepFreeze from 'deep-freeze'
+import { describe, expect, test } from 'vitest'
 import counterReducer from './reducer'
 
 describe('unicafe reducer', () => {
@@ -1104,20 +1129,20 @@ La versión actual de la aplicación se puede encontrar en [GitHub](https://gith
 
 ### Más componentes
 
-Separemos la creación de una nueva nota en su propio componente.
+Separemos el formulario responsable de crear una nueva nota en su propio componente en el archivo <i>src/components/NoteForm.jsx</i>:
 
 ```js
-import { useDispatch } from 'react-redux' // highlight-line
-import { createNote } from '../reducers/noteReducer' // highlight-line
+import { useDispatch } from 'react-redux'
+import { createNote } from '../reducers/noteReducer'
 
-const NewNote = () => {
-  const dispatch = useDispatch() // highlight-line
+const NoteForm = () => {
+  const dispatch = useDispatch()
 
   const addNote = (event) => {
     event.preventDefault()
     const content = event.target.note.value
     event.target.note.value = ''
-    dispatch(createNote(content)) // highlight-line
+    dispatch(createNote(content))
   }
 
   return (
@@ -1128,12 +1153,12 @@ const NewNote = () => {
   )
 }
 
-export default NewNote
+export default NoteForm
 ```
 
 A diferencia del código de React que hicimos sin Redux, el controlador de eventos para cambiar el estado de la aplicación (que ahora vive en Redux) se ha movido de <i>App</i> a un componente hijo. La lógica para cambiar el estado en Redux todavía está claramente separada de toda la parte de React de la aplicación.
 
-También separaremos la lista de notas y mostraremos una sola nota en sus propios componentes (que se colocarán en el archivo <i>Notes.jsx</i>):
+También separaremos la lista de notas y mostraremos una sola nota en sus propios componentes. Coloquemos ambos en el archivo <i>src/components/Notes.jsx</i>:
 
 ```js
 import { useDispatch, useSelector } from 'react-redux' // highlight-line
@@ -1172,18 +1197,22 @@ export default Notes
 
 La lógica para cambiar la importancia de una nota ahora está en el componente que administra la lista de notas.
 
-No queda mucho código en <i>App</i>:
+Solo queda una pequeña cantidad de código en el archivo <i>App.jsx</i>:
 
 ```js
-const App = () => {
+import NoteForm from './components/NoteForm'
+import Notes from './components/Notes'
 
+const App = () => {
   return (
     <div>
-      <NewNote />
+      <NoteForm />
       <Notes />
     </div>
   )
 }
+
+export default App
 ```
 
 <i>Note</i>, responsable de representar una sola nota, es muy simple y no es consciente de que el controlador de eventos que obtiene como props despacha una acción. Este tipo de componentes se denominan [presentacionales](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) en la terminología de React.

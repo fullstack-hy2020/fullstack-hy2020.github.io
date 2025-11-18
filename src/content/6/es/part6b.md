@@ -37,12 +37,12 @@ export default noteReducer
 
 Implementemos el filtrado de las notas que se muestran al usuario. La interfaz de usuario para los filtros se implementará con [botones de radio](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio):
 
-![botones de radio con opciones important/not y listado](../../images/6/01e.png)
+![botones de radio con opciones important/not y listado](../../images/6/01f.png)
 
 Comencemos con una implementación muy simple y directa:
 
 ```js
-import NewNote from './components/NewNote'
+import NoteForm from './components/NoteForm'
 import Notes from './components/Notes'
 
 const App = () => {
@@ -54,7 +54,7 @@ const App = () => {
 
   return (
     <div>
-      <NewNote />
+      <NoteForm />
         //highlight-start
       <div>
         all          <input type="radio" name="filter"
@@ -314,14 +314,14 @@ export default VisibilityFilter
 Con el nuevo componente, <i>App</i> se puede simplificar de la siguiente manera:
 
 ```js
+import NoteForm from './components/NoteForm'
 import Notes from './components/Notes'
-import NewNote from './components/NewNote'
 import VisibilityFilter from './components/VisibilityFilter'
 
 const App = () => {
   return (
     <div>
-      <NewNote />
+      <NoteForm />
       <VisibilityFilter />
       <Notes />
     </div>
@@ -426,7 +426,7 @@ export default Filter
 
 <div class="content">
 
-### Redux Toolkit
+### Redux Toolkit y refactorizando la configuración del Store
 
 Como hemos visto hasta ahora, la implementación de la gestión del estado y la configuración de Redux requiere bastante esfuerzo. Esto se manifiesta, por ejemplo, en el código relacionado con el reducer y el action creator, que tiene un código un tanto repetitivo. [Redux Toolkit](https://redux-toolkit.js.org/) es una librería que resuelve estos problemas comunes relacionados con Redux. La librería, por ejemplo, simplifica enormemente la configuración del store de Redux y ofrece una gran variedad de herramientas para facilitar la gestión del estado.
 
@@ -466,6 +466,41 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 ```
 
 Ya nos deshicimos de algunas líneas de código, ya no necesitamos la función <em>combineReducers</em> para crear el reducer del store. Pronto veremos que la función <em>configureStore</em> tiene muchos beneficios adicionales, como la integración sin esfuerzo de herramientas de desarrollo y muchas librerías de uso común sin necesidad de configuración adicional.
+
+Limpiemos aún más el archivo <i>main.jsx</i> moviendo el código relacionado con la creación del store de Redux a su propio archivo. Creemos un nuevo archivo <i>src/store.js</i>:
+```js
+import { configureStore } from '@reduxjs/toolkit'
+
+import noteReducer from './reducers/noteReducer'
+import filterReducer from './reducers/filterReducer'
+
+const store = configureStore({
+  reducer: {
+    notes: noteReducer,
+    filter: filterReducer
+  }
+})
+
+export default store
+```
+
+Después de los cambios, el contenido del archivo <i>main.jsx</i> es el siguiente:
+
+```js
+import ReactDOM from 'react-dom/client'
+import { Provider } from 'react-redux'
+
+import App from './App'
+import store from './store'
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+)
+```
+
+### Redux Toolkit y refactorizando los reducers
 
 Pasemos a refactorizar los reducers, lo que trae consigo los beneficios de Redux Toolkit. Con Redux Toolkit, podemos crear fácilmente reducers y action creators relacionados utilizando la función [createSlice](https://redux-toolkit.js.org/api/createSlice). Podemos usar la función <em>createSlice</em> para refactorizar el reducer y los action creators en el archivo <i>reducers/noteReducer.js</i> de la siguiente manera:
 
@@ -518,6 +553,11 @@ const noteSlice = createSlice({
     }
   },
 })
+// highlight-end
+
+// highlight-start
+export const { createNote, toggleImportanceOf } = noteSlice.actions
+export default noteSlice.reducer
 // highlight-end
 ```
 
@@ -573,58 +613,62 @@ import noteReducer, { createNote, toggleImportanceOf } from './reducers/noteRedu
 
 Necesitamos modificar los nombres de los tipos de las acciones en las pruebas debido a las convenciones de ReduxToolkit:
 
-```js
-import noteReducer from './noteReducer'
+```js 
 import deepFreeze from 'deep-freeze'
+import { describe, expect, test } from 'vitest'
+import noteReducer from './noteReducer'
 
 describe('noteReducer', () => {
-  test('returns new state with action notes/createNote', () => {
+  test('returns new state with action notes/createNote', () => { // highlight-line
     const state = []
     const action = {
       type: 'notes/createNote', // highlight-line
-      payload: 'the app state is in redux store', // highlight-line
+      payload: 'the app state is in redux store' // highlight-line
     }
 
     deepFreeze(state)
     const newState = noteReducer(state, action)
 
     expect(newState).toHaveLength(1)
-    expect(newState.map(s => s.content)).toContainEqual(action.payload)
+    expect(newState.map(note => note.content)).toContainEqual(action.payload) // highlight-line
   })
+})
 
-  test('returns new state with action notes/toggleImportanceOf', () => {
-    const state = [
-      {
-        content: 'the app state is in redux store',
-        important: true,
-        id: 1
-      },
-      {
-        content: 'state changes are made with actions',
-        important: false,
-        id: 2
-      }]
-  
-    const action = {
-      type: 'notes/toggleImportanceOf', // highlight-line
-      payload: 2
-    }
-  
-    deepFreeze(state)
-    const newState = noteReducer(state, action)
-  
-    expect(newState).toHaveLength(2)
-  
-    expect(newState).toContainEqual(state[0])
-  
-    expect(newState).toContainEqual({
-      content: 'state changes are made with actions',
+test('returns new state with action notes/toggleImportanceOf', () => { // highlight-line
+  const state = [
+    {
+      content: 'the app state is in redux store',
       important: true,
+      id: 1
+    },
+    {
+      content: 'state changes are made with actions',
+      important: false,
       id: 2
-    })
+    }
+  ]
+
+  const action = {
+    type: 'notes/toggleImportanceOf', // highlight-line
+    payload: 2 // highlight-line
+  }
+
+  deepFreeze(state)
+  const newState = noteReducer(state, action)
+
+  expect(newState).toHaveLength(2)
+
+  expect(newState).toContainEqual(state[0])
+
+  expect(newState).toContainEqual({
+    content: 'state changes are made with actions',
+    important: true,
+    id: 2
   })
 })
 ```
+
+Puedes encontrar el código de nuestra aplicación actual en su totalidad en la rama <i>part6-3</i> de [este repositorio de GitHub](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3).
 
 ### Redux Toolkit y console.log
 
@@ -745,8 +789,10 @@ const Notification = () => {
   const style = {
     border: 'solid',
     padding: 10,
-    borderWidth: 1
+    borderWidth: 1,
+    marginBottom: 10
   }
+
   return (
     <div style={style}>
       render here notification...
