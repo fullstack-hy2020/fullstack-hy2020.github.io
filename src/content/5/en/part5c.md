@@ -699,8 +699,9 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
   const input = screen.getByLabelText('content') // highlight-line
   const sendButton = screen.getByText('save')
 
-  userEvent.type(input, 'testing a form...' )
-  userEvent.click(sendButton)
+  const user = userEvent.setup()
+  await user.type(input, 'testing a form...' )
+  await user.click(sendButton)
 
   expect(createNote.mock.calls).toHaveLength(1)
   expect(createNote.mock.calls[0][0].content).toBe('testing a form...' )
@@ -745,8 +746,9 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
   const input = screen.getByPlaceholderText('write note content here') // highlight-line 
   const sendButton = screen.getByText('save')
 
-  userEvent.type(input, 'testing a form...')
-  userEvent.click(sendButton)
+  const user = userEvent.setup()
+  await user.type(input, 'testing a form...')
+  await user.click(sendButton)
 
   expect(createNote.mock.calls).toHaveLength(1)
   expect(createNote.mock.calls[0][0].content).toBe('testing a form...')
