@@ -453,7 +453,7 @@ Now let's make a new version of the anecdote application that uses the React Que
 
 Use the Fetch API to make requests.
 
-NOTE: Part 6 was updated on 12th of Octorber 2025 to use the Fetch API, which is introduced in part 6c. If you started working through this part before that date, you may still use Axios in the exercises if you prefer.
+NOTE: Part 6 was updated on 12th of October 2025 to use the Fetch API, which is introduced in part 6c. If you started working through this part before that date, you may still use Axios in the exercises if you prefer.
 
 #### Exercise 6.20
 
