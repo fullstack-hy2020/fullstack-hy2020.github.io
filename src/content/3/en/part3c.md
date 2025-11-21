@@ -931,6 +931,8 @@ One notable point is that the code now has nested promises, meaning that within 
 
 Usually, this is not recommended because it can make the code difficult to read. In this case, however, the solution works because it ensures that the _.then_ block following the _save()_ method is only executed if a note with the given id is found in the database and the _save()_ method is called. In the fourth part of the course, we will explore the async/await syntax, which offers an easier and clearer way to handle such situations.
 
+Mongoose also provides the method [findByIdAndUpdate](https://mongoosejs.com/docs/api/model.html#Model.findByIdAndUpdate()), which can be used to find a document by its <i>id</i> and update it with a single method call. However, this approach does not fully suit our needs, because later in this part we define certain requirements for the data stored in the database, and <i>findByIdAndUpdate</i> does not fully support Mongoose's validations. Mongoose's [documentation](https://mongoosejs.com/docs/documents.html#updating-using-queries) also notes that the <i>save()</i> method is generally the correct choice for updating a document, as it provides full validation.
+
 After testing the backend directly with Postman or the VS Code REST client, we can verify that it seems to work. The frontend also appears to work with the backend using the database.
 
 You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5).

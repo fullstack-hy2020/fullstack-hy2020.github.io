@@ -920,6 +920,8 @@ Eräs huomionarvoinen seikka on se, että koodissa on nyt ns. sisäkkäiset prom
 
 Yleensä tällaista ei suositella, koska se voi tehdä koodista vaikealukuista. Tässä tapauksessa ratkaisu kuitenkin toimii, sillä näin voimme varmistua siitä, että _.save()_-metodin jälkeiseen _.then_-lohkoon mennään vain, jos id:tä vastaava muistiinpano on löytynyt kannasta ja _save()_-metodia on kutsuttu. Tutustumme kurssin neljännessä osassa async/await-syntaksiin, joka tarjoaa helpomman ja selkeämmän kirjoitustavan tämänkaltaisiin tilanteisiin.
 
+Mongoose tarjoaa myös metodin [findByIdAndUpdate](https://mongoosejs.com/docs/api/model.html#Model.findByIdAndUpdate()), jonka avulla voi hakea dokumentin <i>id</i>:n perusteella ja päivittää sen yksittäisellä metodikutsulla. Tämä tapa ei kuitenkaan sovellu täysin tarpeisiimme, sillä määrittelemme myöhemmin tässä osassa tietokantaan talletettavalle datalle tiettyjä vaatimuksia, eikä <i>findByIdAndUpdate</i> tue näitä Mongoosen validaatioita täysin. Mongoosen [dokumentaatio](https://mongoosejs.com/docs/documents.html#updating-using-queries) toteaakin, että <i>save()</i>-metodi on lähtökohtaisesti oikea valinta dokumentin päivittämiseen, sillä se tarjoaa täyden validaation.
+
 Backend vaikuttaa toimivan Postmanista ja VS Coden REST Clientistä tehtyjen kokeilujen perusteella. Myös frontend toimii moitteettomasti tietokantaa käyttävän backendin kanssa.
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5), branchissa <i>part3-5</i>.
