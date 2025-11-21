@@ -691,7 +691,8 @@ If an <i>label</i> were defined for the input field, the input field could be lo
 The test could locate the input field as follows:
 
 ```js
-test('<NoteForm /> updates parent state and calls onSubmit', () => {
+test('<NoteForm /> updates parent state and calls onSubmit', async () => {
+  const user = userEvent.setup()
   const createNote = vi.fn()
 
   render(<NoteForm createNote={createNote} />) 
@@ -699,11 +700,11 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
   const input = screen.getByLabelText('content') // highlight-line
   const sendButton = screen.getByText('save')
 
-  userEvent.type(input, 'testing a form...' )
-  userEvent.click(sendButton)
+  await user.type(input, 'testing a form...')
+  await user.click(sendButton)
 
   expect(createNote.mock.calls).toHaveLength(1)
-  expect(createNote.mock.calls[0][0].content).toBe('testing a form...' )
+  expect(createNote.mock.calls[0][0].content).toBe('testing a form...')
 })
 ```
 
@@ -737,7 +738,8 @@ const NoteForm = ({ createNote }) => {
 Now finding the right input field is easy with the method [getByPlaceholderText](https://testing-library.com/docs/queries/byplaceholdertext):
 
 ```js
-test('<NoteForm /> updates parent state and calls onSubmit', () => {
+test('<NoteForm /> updates parent state and calls onSubmit', async () => {
+  const user = userEvent.setup()
   const createNote = vi.fn()
 
   render(<NoteForm createNote={createNote} />) 
@@ -745,8 +747,8 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
   const input = screen.getByPlaceholderText('write note content here') // highlight-line 
   const sendButton = screen.getByText('save')
 
-  userEvent.type(input, 'testing a form...')
-  userEvent.click(sendButton)
+  await user.type(input, 'testing a form...')
+  await user.click(sendButton)
 
   expect(createNote.mock.calls).toHaveLength(1)
   expect(createNote.mock.calls[0][0].content).toBe('testing a form...')
