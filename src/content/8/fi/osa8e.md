@@ -588,7 +588,7 @@ const resolvers = {
   // highlight-start
   Subscription: {
     personAdded: {
-      subscribe: () => pubsub.asyncIterator('PERSON_ADDED')
+      subscribe: () => pubsub.asyncIterableIterator('PERSON_ADDED')
     },
   },
   // highlight-end
@@ -608,7 +608,7 @@ Koodia on vähän mutta konepellin alla tapahtuu paljon. Tilauksen _personAdded_
 ```js
 Subscription: {
   personAdded: {
-    subscribe: () => pubsub.asyncIterator('PERSON_ADDED')
+    subscribe: () => pubsub.asyncIterableIterator('PERSON_ADDED')
   },
 },
 ```
