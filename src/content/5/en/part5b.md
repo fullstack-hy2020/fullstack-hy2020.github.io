@@ -388,9 +388,9 @@ The [useRef](https://react.dev/reference/react/useRef) hook is used to create a 
 We also make the following changes to the <i>Togglable</i> component:
 
 ```js
-import { useState, forwardRef, useImperativeHandle } from 'react' // highlight-line
+import { useState, useImperativeHandle } from 'react' // highlight-line
 
-const Togglable = forwardRef((props, refs) => { // highlight-line
+const Togglable = (props) => { // highlight-line
   const [visible, setVisible] = useState(false)
 
   const hideWhenVisible = { display: visible ? 'none' : '' }
@@ -401,10 +401,8 @@ const Togglable = forwardRef((props, refs) => { // highlight-line
   }
 
 // highlight-start
-  useImperativeHandle(refs, () => {
-    return {
-      toggleVisibility
-    }
+  useImperativeHandle(props.ref, () => {
+    return { toggleVisibility }
   })
 // highlight-end
 
@@ -419,12 +417,10 @@ const Togglable = forwardRef((props, refs) => { // highlight-line
       </div>
     </div>
   )
-})  // highlight-line
+}
 
 export default Togglable
 ```
-
-The function that creates the component is wrapped inside of a [forwardRef](https://react.dev/reference/react/forwardRef) function call. This way the component can access the ref that is assigned to it.
 
 The component uses the [useImperativeHandle](https://react.dev/reference/react/useImperativeHandle) hook to make its <i>toggleVisibility</i> function available outside of the component.
 
@@ -525,7 +521,7 @@ It expands when button <i>create new blog</i> is clicked
 
 ![browser showing form with create new](../../images/5/13be.png)
 
-The form hides again after a new blog is created.
+The form hides again after a new blog is created or the <i>cancel</i> button is pressed.
 
 #### 5.6 Blog List Frontend, step 6
 
@@ -636,142 +632,68 @@ Show the button for deleting a blog post only if the blog post was added by the 
 
 <div class="content">
 
-### PropTypes
-
-The <i>Togglable</i> component assumes that it is given the text for the button via the <i>buttonLabel</i> prop. If we forget to define it to the component:
-
-```js
-<Togglable> buttonLabel forgotten... </Togglable>
-```
-
-The application works, but the browser renders a button that has no label text.
-
-We would like to enforce that when the <i>Togglable</i> component is used, the button label text prop must be given a value.
-
-The expected and required props of a component can be defined with the [prop-types](https://github.com/facebook/prop-types) package. Let's install the package:
-
-```shell
-npm install prop-types
-```
-
-We can define the <i>buttonLabel</i> prop as a mandatory or <i>required</i> string-type prop as shown below:
-
-```js
-import PropTypes from 'prop-types'
-
-const Togglable = React.forwardRef((props, ref) => {
-  // ..
-})
-
-Togglable.propTypes = {
-  buttonLabel: PropTypes.string.isRequired
-}
-```
-
-The console will display the following error message if the prop is left undefined:
-
-![console error stating buttonLabel is undefined](../../images/5/15.png)
-
-The application still works and nothing forces us to define props despite the PropTypes definitions. Mind you, it is extremely unprofessional to leave <i>any</i> red output in the browser console.
-
-Let's also define PropTypes to the <i>LoginForm</i> component:
-
-```js
-import PropTypes from 'prop-types'
-
-const LoginForm = ({
-   handleSubmit,
-   handleUsernameChange,
-   handlePasswordChange,
-   username,
-   password
-  }) => {
-    // ...
-  }
-
-LoginForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-  handleUsernameChange: PropTypes.func.isRequired,
-  handlePasswordChange: PropTypes.func.isRequired,
-  username: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired
-}
-```
-
-If the type of a passed prop is wrong, e.g. if we try to define the <i>handleSubmit</i> prop as a string, then this will result in the following warning:
-
-![console error saying handleSubmit expected a function](../../images/5/16.png)
-
 ### ESlint
 
 In part 3 we configured the [ESlint](/en/part3/validation_and_es_lint#lint) code style tool to the backend. Let's take ESlint to use in the frontend as well.
 
-Vite has installed ESlint to the project by default, so all that's left for us to do is define our desired configuration in the <i>.eslintrc.cjs</i> file.
+Vite has installed ESlint to the project by default, so all that's left for us to do is define our desired configuration in the <i>eslint.config.js</i> file.
 
-Let's create a <i>.eslintrc.cjs</i> file with the following contents:
+Let's create a <i>eslint.config.js</i> file with the following contents:
 
 ```js
-module.exports = {
-  root: true,
-  env: {
-    browser: true,
-    es2020: true,
-  },
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:react/jsx-runtime',
-    'plugin:react-hooks/recommended',
-  ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
-  parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
-  settings: { react: { version: '18.2' } },
-  plugins: ['react-refresh'],
-  rules: {
-    "indent": [
-        "error",
-        2  
-    ],
-    "linebreak-style": [
-        "error",
-        "unix"
-    ],
-    "quotes": [
-        "error",
-        "single"
-    ],
-    "semi": [
-        "error",
-        "never"
-    ],
-    "eqeqeq": "error",
-    "no-trailing-spaces": "error",
-    "object-curly-spacing": [
-        "error", "always"
-    ],
-    "arrow-spacing": [
-        "error", { "before": true, "after": true }
-    ],
-    "no-console": 0,
-    "react/react-in-jsx-scope": "off",
-    "react/prop-types": 0,
-    "no-unused-vars": 0    
-  },
-}
+import js from '@eslint/js'
+import globals from 'globals'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+
+export default [
+  { ignores: ['dist'] },
+  {
+    files: ['**/*.{js,jsx}'],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        ecmaFeatures: { jsx: true },
+        sourceType: 'module'
+      }
+    },
+    plugins: {
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh
+    },
+    rules: {
+      ...js.configs.recommended.rules,
+      ...reactHooks.configs.recommended.rules,
+      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true }
+      // highlight-start
+      ],
+      indent: ['error', 2],
+      'linebreak-style': ['error', 'unix'],
+      quotes: ['error', 'single'],
+      semi: ['error', 'never'],
+      eqeqeq: 'error',
+      'no-trailing-spaces': 'error',
+      'object-curly-spacing': ['error', 'always'],
+      'arrow-spacing': ['error', { before: true, after: true }],
+      'no-console': 'off'
+      //highlight-end
+    }
+  }
+]
 ```
 
-NOTE: If you are using Visual Studio Code together with ESLint plugin, you might need to add a workspace setting for it to work. If you are seeing ```Failed to load plugin react: Cannot find module 'eslint-plugin-react'``` additional configuration is needed. Adding the line ```"eslint.workingDirectories": [{ "mode": "auto" }]``` to settings.json in the workspace seems to work. See [here](https://github.com/microsoft/vscode-eslint/issues/880#issuecomment-578052807) for more information.
+NOTE: If you are using Visual Studio Code together with ESLint plugin, you might need to add a workspace setting for it to work. If you are seeing <i>Failed to load plugin react: Cannot find module 'eslint-plugin-react'</i> additional configuration is needed. Adding the following line to settings.json may help: 
 
-Let's create [.eslintignore](https://eslint.org/docs/latest/use/configure/ignore#the-eslintignore-file) file with the following contents to the repository root
-
-```bash
-node_modules
-dist
-.eslintrc.cjs
-vite.config.js
+```js
+"eslint.workingDirectories": [{ "mode": "auto" }]
 ```
 
-Now the directories <em>dist</em> and <em>node_modules</em> will be skipped when linting.
+See [here](https://github.com/microsoft/vscode-eslint/issues/880#issuecomment-578052807) for more information.
 
 As usual, you can perform the linting either from the command line with the command
 
@@ -780,29 +702,6 @@ npm run lint
 ```
 
 or using the editor's Eslint plugin.
-
-Component _Togglable_ causes a nasty-looking warning <i>Component definition is missing display name</i>:
-
-![vscode showing component definition error](../../images/5/25x.png)
-
-The react-devtools also reveals that the component does not have a name:
-
-![react devtools showing forwardRef as anonymous](../../images/5/26ea.png)
-
-Fortunately, this is easy to fix
-
-```js
-import { useState, useImperativeHandle } from 'react'
-import PropTypes from 'prop-types'
-
-const Togglable = React.forwardRef((props, ref) => {
-  // ...
-})
-
-Togglable.displayName = 'Togglable' // highlight-line
-
-export default Togglable
-```
 
 You can find the code for our current application in its entirety in the <i>part5-7</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-7).
 
@@ -814,8 +713,8 @@ You can find the code for our current application in its entirety in the <i>part
 
 #### 5.12: Blog List Frontend, step 12
 
-Define PropTypes for one of the components of your application, and add ESlint to the project. Define the configuration according to your liking. Fix all of the linter errors.
+Add ESlint to the project. Define the configuration according to your liking. Fix all of the linter errors.
 
-Vite has installed ESlint to the project by default, so all that's left for you to do is define your desired configuration in the <i>.eslintrc.cjs</i> file.
+Vite has installed ESlint to the project by default, so all that's left for you to do is define your desired configuration in the <i>eslint.config.js</i> file.
 
 </div>

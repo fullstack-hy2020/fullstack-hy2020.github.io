@@ -12,7 +12,7 @@ import SkipToContent from './SkipToContent/SkipToContent';
 
 const BANNER_TO_KEY = 'part_9c_changes';
 
-const Layout = props => {
+const Layout = (props) => {
   const { i18n } = useTranslation();
 
   const { children, hideFooter, isCoursePage } = props;
@@ -21,9 +21,9 @@ const Layout = props => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const key = localStorage.getItem(BANNER_TO_KEY)
+    const key = localStorage.getItem(BANNER_TO_KEY);
     if (!key) {
-      const relevant = window.location.href.includes('en/part9')
+      const relevant = window.location.href.includes('en/part9');
       setVisible(relevant);
     }
   }, []);

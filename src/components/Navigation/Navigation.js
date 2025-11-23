@@ -36,7 +36,7 @@ export const getNavigation = (language, t) => {
   ];
 };
 
-const searchIsEnabledForLang = lang => {
+const searchIsEnabledForLang = (lang) => {
   return ['fi', 'en', 'es', 'zh', 'ptbr'].includes(lang);
 };
 
@@ -47,7 +47,7 @@ const handleHamburgerClick = () => {
   document.body.classList.toggle('is-open--navigation');
 };
 
-const Navigation = props => {
+const Navigation = (props) => {
   const { t, i18n } = useTranslation();
   const [navigationOpen, setNavigationOpen] = useState(false);
 
@@ -56,7 +56,7 @@ const Navigation = props => {
   const navigation = getNavigation(lang, t);
   const showSearchLink = searchIsEnabledForLang(lang);
 
-  const onLanguageChange = newLang => {
+  const onLanguageChange = (newLang) => {
     navigate(getTranslationPath('/', newLang));
   };
 
@@ -66,7 +66,7 @@ const Navigation = props => {
         aria-label="Navigation menu"
         aria-expanded={navigationOpen}
         onClick={() => {
-          setNavigationOpen(prevOpen => !prevOpen);
+          setNavigationOpen((prevOpen) => !prevOpen);
           handleHamburgerClick();
         }}
         className="navigation__toggle"
@@ -75,7 +75,7 @@ const Navigation = props => {
       </button>
       <nav>
         <ul className="navigation">
-          {navigation.map(i => (
+          {navigation.map((i) => (
             <NavigationItem key={i.path} {...i} onClick={handleCloseMenu} />
           ))}
 

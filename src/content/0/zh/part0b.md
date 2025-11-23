@@ -89,7 +89,7 @@ lang: zh
  该请求是向地址<https://studies.cs.helsinki.fi/exampleapp/kuva.png>发出的，方法类型是HTTP GET。响应头告诉我们，响应大小为89350字节，其[内容类型](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type)为<i>image/png</i>，所以它是一个png图像。浏览器利用这些信息将图像正确地渲染在屏幕上。
 
 <!-- The chain of events caused by opening the page https://studies.cs.helsinki.fi/exampleapp on a browser form the following [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/):-->
-在浏览器上打开网页<https://studies.cs.helsinki.fi/exampleap>，所引起的一系列事件构成了以下[顺序图](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/)。
+在浏览器上打开网页<https://studies.cs.helsinki.fi/exampleap>，所引起的一系列事件构成了以下[时序图](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/)。
 
 ![Sequence diagram of the flow covered above](../../images/0/7e.png)
 
@@ -337,7 +337,7 @@ xhttp.onreadystatechange = function() {
 <!-- We can think of HTML-pages as implicit tree structures.-->
 我们可以将 html 页面看作隐式树结构。
 
-<pre>
+```
 html
   head
     link
@@ -353,7 +353,7 @@ html
       form
         input
         input
-</pre>
+```
 <!-- The same treelike structure can be seen on the console tab <i>Elements</i>.-->
 同样的树状结构可以在控制台的<i>Elements元素</i>选项卡上看到。
 
@@ -457,7 +457,7 @@ list.appendChild(newElement)
 这些类是[属性](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class)，它可以被添加到HTML元素中。
 
 <!-- CSS attributes can be examined on the <i>elements</i> tab of the console:-->
- CSS属性可以在控制台的<i>elements</i>标签中检查。
+ CSS属性可以在控制台的<i>Elements</i>标签中检查。
 
 ![Screenshot of the Elements tab on the developer console](../../images/0/17e.png)
 
@@ -465,7 +465,7 @@ list.appendChild(newElement)
 最外层的<i>div</i>元素有<i>container</i>类。包含笔记列表的<i>ul</i>元素有<i>notes</i>类。
 
 <!-- The CSS rule defines that elements with the <i>container</i> class will be outlined with a one pixel wide [border](https://developer.mozilla.org/en-US/docs/Web/CSS/border). It also sets 10 pixel [padding](https://developer.mozilla.org/en-US/docs/Web/CSS/padding) on the element. This adds some empty space between the element's content and the border.-->
- 该CSS规则定义了具有<i>container</i>类的元素，将勾勒出一个一像素宽的[边框](https://developer.mozilla.org/en-US/docs/Web/CSS/border)。它还在元素上设置了10像素的[padding](https://developer.mozilla.org/en-US/docs/Web/CSS/padding)。这在元素的内容和边框之间增加了一些空隙。
+ 该CSS规则定义了带有<i>container</i>类的元素，将勾勒出一个1像素宽的[边框](https://developer.mozilla.org/en-US/docs/Web/CSS/border)。它还在元素上设置了10像素的[padding](https://developer.mozilla.org/en-US/docs/Web/CSS/padding)，这在元素的内容和边框之间增加了一些空隙。
 
 <!-- The second CSS rule sets the text color of the notes as blue.-->
  第二条CSS规则将笔记的文本颜色设置为蓝色。
@@ -535,7 +535,7 @@ list.appendChild(newElement)
 <!-- NB: On newer Chrome, the Form Data dropdown is within the new Payload tab, located to the right of the Headers tab.-->
  注意：对于新版Chrome，Form Data下拉菜单在新的标签Payload内，Payload标签位于Headers标签的右侧。
  
-![](../../images/0/23e.png)
+![](../../images/0/23g.png)
 
 <!-- The Form tag has attributes <i>action</i> and <i>method</i>, which define that submitting the form is done as an HTTP POST request to the address <i>new_note</i>.-->
  表单标签有属性<i>action</i>和<i>method</i>，它们定义了提交表单是以HTTP POST请求的方式完成的，地址为<i>new\_note</i>。
@@ -653,7 +653,7 @@ HTML代码几乎相同，但JavaScript文件不同（<i>spa.js</i>），而且�
  如果没有这个头，服务器将不知道如何正确解析数据。
 
 <!-- The server responds with status code [201 created](https://httpstatuses.com/201). This time the server does not ask for a redirect, the browser stays on the same page, and it sends no further HTTP requests.-->
- 服务器以状态代码[201创建](https://httpstatuses.com/201)进行响应。这一次服务器没有要求重定向，浏览器停留在同一个页面上，并且没有再发送HTTP请求。
+ 服务器以状态代码[201 Created](https://httpstatuses.com/201)进行响应。这一次服务器没有要求重定向，浏览器停留在同一个页面上，并且没有再发送HTTP请求。
 
 <!-- The SPA version of the app does not send the form data in the traditional way, but instead uses the JavaScript code it fetched from the server.-->
  应用的SPA版本没有以传统方式发送表单数据，而是使用了它从服务器上获取的JavaScript代码。
@@ -710,7 +710,7 @@ var sendToServer = function(note) {
 ### JavaScript-libraries
 
 <!-- The sample app is done with so called [vanilla JavaScript](https://www.freecodecamp.org/news/is-vanilla-javascript-worth-learning-absolutely-c2c67140ac34/), using only the DOM-API and JavaScript to manipulate the structure of the pages.-->
- 这个样本应用是用所谓的[vanilla JavaScript](https://www.freecodecamp.org/news/is-vanilla-javascript-worth-learning-absolutely-c2c67140ac34/)完成的，只使用DOM-API和JavaScript来操作页面的结构。
+ 这个示例应用是用所谓的[vanilla JavaScript](https://www.freecodecamp.org/news/is-vanilla-javascript-worth-learning-absolutely-c2c67140ac34/)完成的，只使用DOM-API和JavaScript来操作页面的结构。
 
 <!-- Instead of using JavaScript and the DOM-API only, different libraries containing tools that are easier to work with compared to the DOM-API are often used to manipulate pages. One of these libraries is the ever-so-popular [jQuery](https://jquery.com/).-->
  与其只使用JavaScript和DOM-API，不如使用包含更简易工具的库，与DOM-API相比更容易操作，通常用于操作页面。这些库中一个一直很流行的是[jQuery](https://jquery.com/)。
@@ -719,10 +719,10 @@ var sendToServer = function(note) {
  jQuery是早在网络应用主要遵循服务器生成HTML页面的传统风格时开发的，这种风格的功能通过在浏览器端使用 JavaScript 搭配使用 jQuery 来增强。jQuery成功的原因之一是其所谓的跨浏览器兼容性。这个库无论在哪种浏览器或制造它的公司都能工作，所以不需要针对浏览器的解决方案。如今，考虑到JavaScript的发展，使用jQuery就不那么合理了，最流行的浏览器一般都能很好地支持基本功能。
 
 <!-- The rise of the single page app brought several more "modern" ways of web development than jQuery. The favorite of the first wave of developers was [BackboneJS](http://backbonejs.org/). After its [launch](https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13) in 2012, Google's [AngularJS](https://angularjs.org/) quickly became almost the de facto standard of modern web development.-->
- 单页应用的兴起带来了几种比jQuery更 "现代 "的网页开发方式。第一波开发者的最爱是[BackboneJS](http://backbonejs.org/)。在2012年[推出](https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13)之后，谷歌的[AngularJS](https://angularjs.org/)迅速成为现代网页开发的事实标准。
+ 单页应用的兴起带来了几种比jQuery更 "现代 "的网页开发方式。第一波开发者的最爱是[BackboneJS](http://backbonejs.org/)。之后，2012年谷歌[推出](https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13)的[AngularJS](https://angularjs.org/)，迅速成为现代网页开发的事实标准。
 
 <!-- However, the popularity of Angular plummeted in October 2014 after the [Angular team announced that support for version 1 will end](https://jaxenter.com/angular-2-0-announcement-backfires-112127.html), and Angular 2 will not be backwards compatible with the first version. Angular 2 and the newer versions have not gotten too warm of a welcome.-->
-然而，2014年10月，在[Angular团队宣布对第一版的支持将结束](https://jaxenter.com/angular-2-0-announcement-backfires-112127.html)，Angular 2不会向后兼容第一版后，Angular的人气骤降。Angular 2和较新的版本并没有得到太热烈的欢迎。
+然而，2014年10月，在[Angular团队宣布对第一版的支持将结束](https://jaxenter.com/angular-2-0-announcement-backfires-112127.html)且Angular 2将不会向后兼容第一版后，Angular的人气骤降。Angular 2和较新的版本并没有得到太热烈的欢迎。
 
 <!-- Currently the most popular tool for implementing the browser-side logic of web-applications is Facebook's [React](https://reactjs.org/) library.-->
 目前最流行的实现网络应用逻辑的浏览器端的工具是Facebook's [React](https://reactjs.org/)库。
@@ -735,30 +735,30 @@ var sendToServer = function(note) {
 ### Full stack web development
 
 <!-- What does the name of the course, <i>Full stack web development</i>, mean? Full stack is a buzzword that everyone talks about, while no one really knows what it means. Or at least, there is no agreed-upon definition for the term.-->
-课程名称，<i>全栈网络开发</i>，是什么意思？全栈是一个人人都在谈论的流行语，而没有人真正知道它的含义。或者说，至少对这个词没有一个公认的定义。
+课程名称里的<i>全栈网络开发</i>是什么意思？全栈是一个人人都在谈论的流行语，而没有人真正知道它的含义。或者说，至少对这个词没有一个公认的定义。
 
 <!-- Practically all web applications have (at least) two "layers": the browser, being closer to the end-user, is the top layer, and the server the bottom one. There is often also a database layer below the server. We can therefore think of the <i>architecture</i> of a web application as a kind of <i>stack</i> of layers.-->
- 实际上，所有的网络应用都有（至少）两个 "层"：浏览器更接近最终用户，是最上面的一层，而服务器是下面的一层。在服务器下面通常还有一个数据库层。因此，我们可以把网络应用的<i>架构</i>看作是一种<i>堆栈</i>。
+ 实际上，所有的网络应用都有（至少）两个 "层"：浏览器更接近最终用户，是最上面的一层，而服务器是下面的一层。在服务器下面通常还有一个数据库层。因此，我们可以把网络应用的<i>架构</i>看作是一种层的<i>堆栈</i>。
 
 <!-- Often, we also talk about the [frontend and the backend](https://en.wikipedia.org/wiki/Front_and_back_ends). The browser is the frontend, and JavaScript that runs on the browser is frontend code. The server on the other hand is the backend.-->
  通常，我们还谈论[前端和后端](https://en.wikipedia.org/wiki/Front_and_back_ends)。浏览器是前端，在浏览器上运行的JavaScript是前端代码。另一边，服务器则是后端。
 
 <!-- In the context of this course, full stack web development means that we focus on all parts of the application: the frontend, the backend, and the database. Sometimes the software on the server and its operating system are seen as parts of the stack, but we won't go into those.-->
-在本课程中，全栈式网络开发意味着我们关注应用的所有部分：前端、后端和数据库。有时，服务器上的软件和它的操作系统也被看作是堆栈的一部分，但我们不会去研究这些。
+在本课程中，全栈网络开发意味着我们关注应用的所有部分：前端、后端和数据库。有时，服务器上的软件和它的操作系统也被看作是堆栈的一部分，但我们不会去研究这些。
 
 <!-- We will code the backend with JavaScript, using the [Node.js](https://nodejs.org/en/) runtime environment. Using the same programming language on multiple layers of the stack gives full stack web development a whole new dimension. However, it's not a requirement of full stack web development to use the same programming language (JavaScript) for all layers of the stack.-->
- 我们将使用[Node.js](https://nodejs.org/en/)运行环境，用JavaScript对后端进行编码。在堆栈的多个层次上使用相同的编程语言给全栈网络开发带来了一个全新的层面。然而，全栈网络开发并不要求所有的栈都使用相同的编程语言（JavaScript）。
+ 我们将使用[Node.js](https://nodejs.org/en/)运行环境，用JavaScript做后端编码。在堆栈的多个层上使用相同的编程语言给全栈网络开发带来了一个全新的维度。然而，全栈网络开发并不要求所有的栈都使用相同的编程语言（JavaScript）。
 
 <!-- It used to be more common for developers to specialize in one layer of the stack, for example the backend. Technologies on the backend and the frontend were quite different. With the Full stack trend, it has become common for developers to be proficient on all layers of the application and the database. Oftentimes, full stack developers must also have enough configuration and administration skills to operate their application, for example, in the cloud.-->
- 过去，开发人员专门从事堆栈的某一层，例如后端，是比较常见的。后端和前端的技术是完全不同的。随着全栈趋势的发展，开发人员熟练掌握应用和数据库的所有层已经成为普遍现象。通常情况下，全栈开发人员还必须有足够的配置和管理技能来操作他们的应用，例如，上云。
+ 过去，开发人员专门从事堆栈的某一层，例如后端，是比较常见的。后端和前端的技术是完全不同的。随着全栈趋势的发展，开发人员熟练掌握应用和数据库的所有层已经成为普遍现象。通常情况下，全栈开发人员还必须有足够的配置和管理技能来操作他们的应用，例如上云。
 
 ### JavaScript fatigue
 
 <!-- Full stack web development is challenging in many ways. Things are happening in many places at once, and debugging is quite a bit harder than with regular desktop applications. JavaScript does not always work as you'd expect it to (compared to many other languages), and the asynchronous way its runtime environments work causes all sorts of challenges. Communicating on the web requires knowledge of the HTTP protocol. One must also handle databases and server administration and configuration. It would also be good to know enough CSS to make applications at least somewhat presentable.-->
-全栈 web 开发在许多方面都具有挑战性。 在许多地方会有突发情况，并且调试起来比普通桌面应用要困难得多。 JavaScript (与许多其他语言相比) 并不总是像你期望的那样工作 ，其运行时环境的异步工作方式带来了各种各样的挑战。 网络中的通信需要对 http 协议的知识储备。 还必须处理数据库、服务器管理和配置。 了解足够的 CSS 至少在一定程度上能够使应用显得好看。
+全栈网络开发在许多方面都具有挑战性。在许多地方会有突发情况，并且调试起来比普通桌面应用要困难得多。JavaScript (与许多其他语言相比) 并不总是像你期望的那样工作，其运行时环境的异步工作方式带来了各种各样的挑战。网络中的通信要求对 HTTP 协议的知识储备。另外，还必须处理数据库、服务器管理和配置。了解足够的 CSS 至少在一定程度上能够使应用显得好看。
 
 <!-- The world of JavaScript develops fast, which brings its own set of challenges. Tools, libraries and the language itself are under constant development. Some are starting to get tired of the constant change, and have coined a term for it: <em>JavaScript fatigue</em>. See [How to Manage JavaScript Fatigue on auth0](https://auth0.com/blog/how-to-manage-javascript-fatigue/) or [JavaScript fatigue on Medium](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4).-->
- JavaScript的世界发展迅速，这带来了它自己的一系列挑战。工具、库和语言本身都在不断发展。有些人开始对这种不断的变化感到厌倦，并为此创造了一个术语。<em>JavaScript 疲劳</em>。可以阅读[auth0上的如何管理JavaScript疲劳](https://auth0.com/blog/how-to-manage-javascript-fatigue/) 或[Medium上的JavaScript疲劳](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4)。
+ JavaScript的世界发展迅速，这给它自身带来了一系列的挑战。工具、库和语言本身都在不断发展。有些人开始对这种不断的变化感到厌倦，并为此创造了一个术语：<em>JavaScript疲劳</em>。可以阅读[auth0上的如何管理JavaScript疲劳](https://auth0.com/blog/how-to-manage-javascript-fatigue/) 或[Medium上的JavaScript疲劳](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4)。
 
 <!-- You will suffer from JavaScript fatigue yourself during this course. Fortunately for us, there are a few ways to smooth the learning curve, and we can start with coding instead of configuration. We can't avoid configuration completely, but we can merrily push ahead in the next few weeks while avoiding the worst of configuration hells.-->
 在这个课程中，你自己也会遭受到JavaScript的疲劳。幸运的是，有一些方法可以使学习曲线变得平滑，我们可以从编码而不是配置开始。我们不能完全避免配置，但我们可以在接下来的几周里愉快地推进，同时避开最糟糕的配置地狱。
@@ -823,21 +823,19 @@ part2
 <!-- Learn about the basics of HTML forms by reading Mozilla's tutorial [Your first form](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form).-->
  通过阅读Mozilla的教程[你的第一个表单](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form)来了解HTML表单的基础知识。
 
-<i>This exercise is not submitted to GitHub, it's enough to just read the tutorial</i>
+<!-- This exercise is not submitted to GitHub, it's enough to just read the tutorial -->
 
 这个练习不用提交GitHub，仅仅阅读教程即可。
-
-
 
 <!--   <h4>0.4: New note</h4>-->
 
 <h4>0.4: 新的笔记</h4>
 
 <!-- In chapter [Loading a page containing JavaScript - review](/en/part0/fundamentals_of_web_apps#loading-a-page-containing-java-script-review) the chain of events caused by opening the page <https://studies.cs.helsinki.fi/exampleapp/notes> is depicted as a [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/)-->
- 在[加载含有JavaScript的页面-回顾](/en/part0/fundamentals_of_web_apps#loading-a-page-containing-java-script-review)一章中，打开页面<https://studies.cs.helsinki.fi/exampleapp/notes>所引起的事件链被描绘成一个[序列图](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/)
+ 在[加载含有JavaScript的页面-回顾](/en/part0/fundamentals_of_web_apps#loading-a-page-containing-java-script-review)一章中，打开页面<https://studies.cs.helsinki.fi/exampleapp/notes>所引起的事件链被描绘成一个[时序图](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/)。
 
 <!-- The diagram was made using [websequencediagrams](https://www.websequencediagrams.com) service as follows:-->
- 该图是使用[websequencediagrams](https://www.websequencediagrams.com)服务制作的，如下。
+ 该图是使用[websequencediagrams](https://www.websequencediagrams.com)服务制作的，如下：
 
 ```
 browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
@@ -862,16 +860,16 @@ end note
 ```
 
 <!-- **Create a similar diagram** depicting the situation where the user creates a new note on page <https://studies.cs.helsinki.fi/exampleapp/notes> when writing something into the text field and clicking the <i>submit</i> button.-->
- **创建一个类似的图**，描述当用户把东西写进文本字段并点击<i>submit</i>按钮，在<https://studies.cs.helsinki.fi/exampleapp/notes>页上创建一个新笔记的情况。
+ **创建一个类似的图**，描述当用户通过文本框输入一些内容并点击<i>submit</i>按钮后在<https://studies.cs.helsinki.fi/exampleapp/notes>页面上创建一个新笔记的情况。
 
 <!-- If necessary, show operations on the browser or on the server as comments on the diagram.-->
  如果有必要，将浏览器或服务器上的操作显示为图中的注释。
 
 <!-- The diagram does not have to be a sequence diagram. Any sensible way of presenting the events is fine.-->
- 该图不一定是一个序列图。任何合理的渲染事件方式都是可以的。
+ 该图不一定是一个时序图，任何合理的呈现事件的方式都是可以的。
 
 <!-- All necessary information for doing this, and the next two exercises, can be found from the text of [this part](/en/part0/fundamentals_of_web_apps#forms-and-http-post).-->
-所有做这个的必要信息，以及接下来的两个练习，都可以从[本章](/en/part0/fundamentals_of_web_apps#forms-and-http-post)的正文中找到。
+做这个练习以及接下来的另外两个练习所必要的信息都可以从[本章](/en/part0/fundamentals_of_web_apps#forms-and-http-post)的正文中找到。
 <!-- The idea of these exercises is to read the text through once more, and to think through what is going on there. Reading the application [code](https://github.com/mluukkai/example_app) is not necessary, but it is of course possible.-->
  这些练习的目的是再一次通读文本，并思考其中的内容。阅读应用的[代码](https://github.com/mluukkai/example_app)不是必须的，但当然也可以。
 

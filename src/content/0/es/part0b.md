@@ -280,7 +280,7 @@ El mecanismo de invocación de controladores de eventos es muy común en JavaScr
 
 Podemos pensar en las páginas HTML como estructuras de árbol implícitas.
 
-<pre>
+```
 html
   head
     link
@@ -296,7 +296,7 @@ html
       form
         input
         input
-</pre>
+```
 
 La misma estructura arbórea se puede ver en la pestaña de la consola <i>Elements (Elementos)</i>.
 
@@ -438,7 +438,7 @@ La pestaña network también muestra los datos enviados con el formulario:
 
 Nota: En las versiones más recientes de Chrome, el menú desplegable Form Data se encuentra dentro de la nueva pestaña Payload, ubicada a la derecha de la pestaña Headers
 
-![Dropdown de datos del formulario](../../images/0/23e.png)
+![Dropdown de datos del formulario](../../images/0/23g.png)
 
 La etiqueta Form tiene atributos <i>action</i> y <i>method</i>, que definen que el envío del formulario se realiza como una solicitud HTTP POST a la dirección <i>new\_note</i>.
 

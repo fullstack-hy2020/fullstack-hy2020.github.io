@@ -685,8 +685,8 @@ Note.belongsTo(User)
 <!-- Sequelize will automatically create an attribute called <i>userId</i> on the <i>Note</i> model to which, when referenced gives access to the database column <i>user_id</i>.-->
  Sequelize将自动在<i>Note</i>模型上创建一个名为<i>userId</i>的属性，当被引用时，可以访问数据库的<i>user_id</i>列。
 
-<!-- Keep in mind, that we could also create a note as follows using the [build](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-build) method:-->
- 请记住，我们也可以使用[build](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-build)方法创建一个笔记，如下所示。
+<!-- Keep in mind, that we could also create a note as follows using the [build](https://sequelize.org/api/v6/class/src/model.js~model#static-method-build) method:-->
+ 请记住，我们也可以使用[build](https://sequelize.org/api/v6/class/src/model.js~model#static-method-build)方法创建一个笔记，如下所示。
 
 ```js
 const user = await User.findByPk(req.decodedToken.id)

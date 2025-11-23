@@ -34,12 +34,12 @@ class Form extends Component {
     };
   }
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
     this.sendMessage();
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({ ...this.state, [e.target.name]: e.target.value });
   };
 

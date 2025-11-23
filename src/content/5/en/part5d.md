@@ -24,7 +24,7 @@ Some tests might pass one time and fail another, even if the code does not chang
 
 Perhaps the two easiest libraries for End to End testing at the moment are [Cypress](https://www.cypress.io/) and [Playwright](https://playwright.dev/).
 
-From the statistics on [npmtrends.com](https://npmtrends.com/cypress-vs-playwright) we see that Cypress, which dominated the market for the last five years, is still clearly the number one, but Playwright is on a rapid rise:
+From the statistics on [npmtrends.com](https://npmtrends.com/cypress-vs-playwright) we can see that Playwright surpassed Cypress in download numbers during 2024, and its popularity continues to grow:
 
 ![cypress vs playwright in npm trends](../../images/5/cvsp.png)
 
@@ -84,6 +84,8 @@ or remove the entry for any problematic browsers from your _playwright.config.js
     //  name: 'webkit',
     //  use: { ...devices['Desktop Safari'] },
     //},
+    // ...
+  ]
 ```
 
 Let's define an npm script for running tests and test reports in _package.json_:
@@ -139,10 +141,11 @@ Tests can also be run via the graphical UI with the command:
 npm run test -- --ui
 ```
 
-Sample tests look like this:
+Sample tests in the file tests/example.spec.js look like this:
 
 ```js
-const { test, expect } = require('@playwright/test');
+// @ts-check
+import { test, expect } from '@playwright/test';
 
 test('has title', async ({ page }) => {
   await page.goto('https://playwright.dev/'); // highlight-line
@@ -176,15 +179,12 @@ Let's make an npm script for the <i>backend</i>, which will enable it to be star
 {
   // ...
   "scripts": {
-    "start": "NODE_ENV=production node index.js",
-    "dev": "NODE_ENV=development nodemon index.js",
-    "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
-    "deploy": "fly deploy",
-    "deploy:full": "npm run build:ui && npm run deploy",
-    "logs:prod": "fly logs",
+    "start": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=development node --watch index.js",
+    "test": "cross-env NODE_ENV=test node --test",
     "lint": "eslint .",
-    "test": "NODE_ENV=test node --test",
-    "start:test": "NODE_ENV=test node index.js" // highlight-line
+    // ...
+    "start:test": "cross-env NODE_ENV=test node --watch index.js" // highlight-line
   },
   // ...
 }
@@ -198,9 +198,9 @@ const { test, expect } = require('@playwright/test')
 test('front page can be opened', async ({ page }) => {
   await page.goto('http://localhost:5173')
 
-  const locator = await page.getByText('Notes')
+  const locator = page.getByText('Notes')
   await expect(locator).toBeVisible()
-  await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2023')).toBeVisible()
+  await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible()
 })
 ```
 
@@ -210,21 +210,7 @@ The method [toBeVisible](https://playwright.dev/docs/api/class-locatorassertions
 
 The second check is done without using the auxiliary variable.
 
-We notice that the year has changed. Let's change the test as follows:
-
-```js
-const { test, expect } = require('@playwright/test')
-
-test('front page can be opened', async ({ page }) => {
-  await page.goto('http://localhost:5173')
-
-  const locator = await page.getByText('Notes')
-  await expect(locator).toBeVisible()
-  await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible() // highlight-line
-})
-```
-
-As expected, the test fails. Playwright opens the test report in the browser and it becomes clear that Playwright has actually performed the tests with three different browsers: Chrome, Firefox and Webkit, i.e. the browser engine used by Safari:
+The test fails because an old year ended up in the test. Playwright opens the test report in the browser and it becomes clear that Playwright has actually performed the tests with three different browsers: Chrome, Firefox and Webkit, i.e. the browser engine used by Safari:
 
 ![test report showing the test failing in three different browsers](../../images/5/play2.png)
 
@@ -238,9 +224,7 @@ In the big picture, it is of course a very good thing that the testing takes pla
 npm test -- --project chromium
 ```
 
-Now let's correct the outdated year in the frontend code that caused the error.
-
-Before we continue, let's add a _describe_ block to the tests:
+Now let's fix the test with the correct year and let's add a _describe_ block to the tests:
 
 ```js
 const { test, describe, expect } = require('@playwright/test')
@@ -249,9 +233,9 @@ describe('Note app', () => {  // highlight-line
   test('front page can be opened', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
-    const locator = await page.getByText('Notes')
+    const locator = page.getByText('Notes')
     await expect(locator).toBeVisible()
-    await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible()
+    await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2025')).toBeVisible()
   })
 })
 ```
@@ -261,15 +245,16 @@ Before we move on, let's break the tests one more time. We notice that the execu
 When developing tests, it may be wiser to reduce the waiting time to a few seconds. According to the [documentation](https://playwright.dev/docs/test-timeouts), this can be done by changing the file _playwright.config.js_ as follows:
 
 ```js
-module.exports = defineConfig({
-  timeout: 3000,
+export default defineConfig({
+  // ...
+  timeout: 3000, // highlight-line
   fullyParallel: false, // highlight-line
   workers: 1, // highlight-line
   // ...
 })
 ```
 
-We also made two other changes to the file, and specified that all tests [be executed one at a time](https://playwright.dev/docs/test-parallel). With the default configuration, the execution happens in parallel, and since our tests use a database, parallel execution causes problems.
+We also made two other changes to the file, specifying that all tests [be executed one at a time](https://playwright.dev/docs/test-parallel). With the default configuration, the execution happens in parallel, and since our tests use a database, parallel execution causes problems.
 
 ### Writing on the form
 
@@ -281,10 +266,10 @@ Let's start by opening the login form.
 describe('Note app', () => {
   // ...
 
-  test('login form can be opened', async ({ page }) => {
+  test('user can log in', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
-    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('button', { name: 'login' }).click()
   })
 })
 ```
@@ -311,10 +296,10 @@ When the form is opened, the test should look for the text fields and enter the 
 describe('Note app', () => {
   // ...
 
-  test('login form can be opened', async ({ page }) => {
+  test('user can log in', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
-    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('button', { name: 'login' }).click()
     await page.getByRole('textbox').fill('mluukkai')  // highlight-line
   })
 })
@@ -334,10 +319,10 @@ The problem now is that _getByRole_ finds two text fields, and calling the [fill
 describe('Note app', () => {
   // ...
 
-  test('login form can be opened', async ({ page }) => {
+  test('user can log in', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
-    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('button', { name: 'login' }).click()
     // highlight-start
     await page.getByRole('textbox').first().fill('mluukkai')
     await page.getByRole('textbox').last().fill('salainen')
@@ -356,10 +341,10 @@ If there were more than two text fields, using the methods _first_ and _last_ wo
 ```js
 describe('Note app', () => {
   // ...
-  test('login form can be opened', async ({ page }) => {
+  test('user can log in', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
-    await page.getByRole('button', { name: 'log in' }).click()
+    await page.getByRole('button', { name: 'login' }).click()
     // highlight-start
     const textboxes = await page.getByRole('textbox').all()
 
@@ -376,54 +361,50 @@ describe('Note app', () => {
 
 Both this and the previous version of the test work. However, both are problematic to the extent that if the registration form is changed, the tests may break, as they rely on the fields to be on the page in a certain order.
 
-A better solution is to define unique test id attributes for the fields, to search for them in the tests using the method [getByTestId](https://playwright.dev/docs/api/class-page#page-get-by-test-id ).
+If an element is difficult to locate in tests, you can assign it a separate <i>test-id</i> attribute and find the element in tests using the [getByTestId](https://playwright.dev/docs/api/class-page#page-get-by-test-id) method.
 
-Let's expand the login form as follows
+Let's now take advantage of the existing elements of the login form. The input fields of the login form have been assigned unique <i>labels</i>:
 
 ```js
-const LoginForm = ({ ... }) => {
-  return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          username
-          <input
-            data-testid='username'  // highlight-line
-            value={username}
-            onChange={handleUsernameChange}
-          />
-        </div>
-        <div>
-          password
-          <input
-            data-testid='password' // highlight-line
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-        </div>
-        <button type="submit">
-          login
-        </button>
-      </form>
-    </div>
-  )
-}
+// ...
+<form onSubmit={handleSubmit}>
+  <div>
+    <label> // highlight-line
+      username // highlight-line
+      <input
+        type="text"
+        value={username}
+        onChange={handleUsernameChange}
+      />
+    </label> // highlight-line
+  </div>
+  <div>
+    <label> // highlight-line
+      password // highlight-line
+      <input
+        type="password"
+        value={password}
+        onChange={handlePasswordChange}
+      />
+    </label> // highlight-line
+  </div>
+  <button type="submit">login</button>
+</form>
+// ...
 ```
 
-Test changes as follows:
+Input fields can and should be located in tests using <i>labels</i> with the [getByLabel](https://playwright.dev/docs/api/class-page#page-get-by-label) method:
 
 ```js
 describe('Note app', () => {
   // ...
 
-  test('login form can be opened', async ({ page }) => {
+  test('user can log in', async ({ page }) => {
     await page.goto('http://localhost:5173')
 
-    await page.getByRole('button', { name: 'log in' }).click()
-    await page.getByTestId('username').fill('mluukkai') // highlight-line
-    await page.getByTestId('password').fill('salainen')  // highlight-line
+    await page.getByRole('button', { name: 'login' }).click()
+    await page.getByLabel('username').fill('mluukkai') // highlight-line
+    await page.getByLabel('password').fill('salainen')  // highlight-line
   
     await page.getByRole('button', { name: 'login' }).click() 
   
@@ -432,7 +413,11 @@ describe('Note app', () => {
 })
 ```
 
+When locating elements, it makes sense to aim to utilize the content visible to the user in the interface, as this best simulates how a user would actually find the desired input field while navigating the application.
+
 Note that passing the test at this stage requires that there is a user in the <i>test</i> database of the backend with username <i>mluukkai</i> and password <i>salainen</i>. Create a user if needed!
+
+### Test Initialization
 
 Since both tests start in the same way, i.e. by opening the page <i>http://localhost:5173</i>, it is recommended to isolate the common part in the <i>beforeEach</i> block that is executed before each test:
 
@@ -447,15 +432,15 @@ describe('Note app', () => {
   // highlight-end
 
   test('front page can be opened', async ({ page }) => {
-    const locator = await page.getByText('Notes')
+    const locator = page.getByText('Notes')
     await expect(locator).toBeVisible()
-    await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible()
+    await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2025')).toBeVisible()
   })
 
-  test('login form can be opened', async ({ page }) => {
-    await page.getByRole('button', { name: 'log in' }).click()
-    await page.getByTestId('username').fill('mluukkai')
-    await page.getByTestId('password').fill('salainen')
+  test('user can log in', async ({ page }) => {
+    await page.getByRole('button', { name: 'login' }).click()
+    await page.getByLabel('username').fill('mluukkai')
+    await page.getByLabel('password').fill('salainen')
     await page.getByRole('button', { name: 'login' }).click()
     await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
   })
@@ -474,9 +459,9 @@ describe('Note app', () => {
 
   describe('when logged in', () => {
     beforeEach(async ({ page }) => {
-      await page.getByRole('button', { name: 'log in' }).click()
-      await page.getByTestId('username').fill('mluukkai')
-      await page.getByTestId('password').fill('salainen')
+      await page.getByRole('button', { name: 'login' }).click()
+      await page.getByLabel('username').fill('mluukkai')
+      await page.getByLabel('password').fill('salainen')
       await page.getByRole('button', { name: 'login' }).click()
     })
 
@@ -498,7 +483,7 @@ The test trusts that when creating a new note, there is only one input field on 
 page.getByRole('textbox')
 ```
 
-If there were more fields, the test would break. Because of this, it would be better to add a test-id to the form input and search for it in the test based on this id.
+If there were more fields, the test would break. Because of this, it could be better to add a <i>test-id</i> to the form input and search for it in the test based on this id.
 
 **Note:** the test will only pass the first time. The reason for this is that its expectation
 
@@ -517,18 +502,18 @@ describe('Note app', () => {
   // ....
 
   test('user can log in', async ({ page }) => {
-    await page.getByRole('button', { name: 'log in' }).click()
-    await page.getByTestId('username').fill('mluukkai')
-    await page.getByTestId('password').fill('salainen')
+    await page.getByRole('button', { name: 'login' }).click()
+    await page.getByLabel('username').fill('mluukkai')
+    await page.getByLabel('password').fill('salainen')
     await page.getByRole('button', { name: 'login' }).click()
     await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
   })
 
   describe('when logged in', () => {
     beforeEach(async ({ page }) => {
-      await page.getByRole('button', { name: 'log in' }).click()
-      await page.getByTestId('username').fill('mluukkai')
-      await page.getByTestId('password').fill('salainen')
+      await page.getByRole('button', { name: 'login' }).click()
+      await page.getByLabel('username').fill('mluukkai')
+      await page.getByLabel('password').fill('salainen')
       await page.getByRole('button', { name: 'login' }).click()
     })
 
@@ -538,7 +523,7 @@ describe('Note app', () => {
       await page.getByRole('button', { name: 'save' }).click()
       await expect(page.getByText('a note created by playwright')).toBeVisible()
     })
-  })  
+  })
 })
 ```
 
@@ -684,16 +669,16 @@ describe('Note app', () => {
   // ...
 
   test('login fails with wrong password', async ({ page }) => {
-    await page.getByRole('button', { name: 'log in' }).click()
-    await page.getByTestId('username').fill('mluukkai')
-    await page.getByTestId('password').fill('wrong')
+    await page.getByRole('button', { name: 'login' }).click()
+    await page.getByLabel('username').fill('mluukkai')
+    await page.getByLabel('password').fill('wrong')
     await page.getByRole('button', { name: 'login' }).click()
 
     await expect(page.getByText('wrong credentials')).toBeVisible()
   })
 
   // ...
-)}
+})
 ```
 
 The test verifies with the method [page.getByText](https://playwright.dev/docs/api/class-page#page-get-by-text) that the application prints an error message.
@@ -717,7 +702,7 @@ const Notification = ({ message }) => {
 We could refine the test to ensure that the error message is printed exactly in the right place, i.e. in the element containing the CSS class <i>error</i>:
 
 ```js
-  test('login fails with wrong password', async ({ page }) => {
+test('login fails with wrong password', async ({ page }) => {
   // ...
 
   const errorDiv = page.locator('.error') // highlight-line
@@ -730,13 +715,13 @@ So the test uses the [page.locator](https://playwright.dev/docs/api/class-page#p
 It is possible to test the application's CSS styles with matcher [toHaveCSS](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-have-css). We can, for example, make sure that the color of the error message is red, and that there is a border around it:
 
 ```js
-  test('login fails with wrong password', async ({ page }) => {
+test('login fails with wrong password', async ({ page }) => {
   // ...
 
-    const errorDiv = page.locator('.error')
-    await expect(errorDiv).toContainText('wrong credentials')
-    await expect(errorDiv).toHaveCSS('border-style', 'solid') // highlight-line
-    await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)') // highlight-line
+  const errorDiv = page.locator('.error')
+  await expect(errorDiv).toContainText('wrong credentials')
+  await expect(errorDiv).toHaveCSS('border-style', 'solid') // highlight-line
+  await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)') // highlight-line
 })
 ```
 
@@ -746,9 +731,9 @@ Let's finalize the test so that it also ensures that the application **does not 
 
 ```js
 test('login fails with wrong password', async ({ page }) =>{
-  await page.getByRole('button', { name: 'log in' }).click()
-  await page.getByTestId('username').fill('mluukkai')
-  await page.getByTestId('password').fill('wrong')
+  await page.getByRole('button', { name: 'login' }).click()
+  await page.getByLabel('username').fill('mluukkai')
+  await page.getByLabel('password').fill('wrong')
   await page.getByRole('button', { name: 'login' }).click()
 
   const errorDiv = page.locator('.error')
@@ -774,7 +759,7 @@ describe(() => {
   // this test is skipped...
   test('user can login with correct credentials', async ({ page }) => {
     // ...
-  }
+  })
 
   // ...
 })
@@ -799,9 +784,9 @@ describe('Note app', () => {
   // ...
 
   test('user can login with correct credentials', async ({ page }) => {
-    await page.getByRole('button', { name: 'log in' }).click()
-    await page.getByTestId('username').fill('mluukkai')
-    await page.getByTestId('password').fill('salainen')
+    await page.getByRole('button', { name: 'login' }).click()
+    await page.getByLabel('username').fill('mluukkai')
+    await page.getByLabel('password').fill('salainen')
     await page.getByRole('button', { name: 'login' }).click()
     await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
   })
@@ -812,9 +797,9 @@ describe('Note app', () => {
 
   describe('when logged in', () => {
     beforeEach(async ({ page, request }) => {
-      await page.getByRole('button', { name: 'log in' }).click()
-      await page.getByTestId('username').fill('mluukkai')
-      await page.getByTestId('password').fill('salainen')
+      await page.getByRole('button', { name: 'login' }).click()
+      await page.getByLabel('username').fill('mluukkai')
+      await page.getByLabel('password').fill('salainen')
       await page.getByRole('button', { name: 'login' }).click()
     })
 
@@ -835,24 +820,34 @@ It is also worth striving for having non-repetitive code in tests. Let's isolate
 
 ```js 
 const loginWith = async (page, username, password)  => {
-  await page.getByRole('button', { name: 'log in' }).click()
-  await page.getByTestId('username').fill(username)
-  await page.getByTestId('password').fill(password)
+  await page.getByRole('button', { name: 'login' }).click()
+  await page.getByLabel('username').fill(username)
+  await page.getByLabel('password').fill(password)
   await page.getByRole('button', { name: 'login' }).click()
 }
 
 export { loginWith }
 ```
 
-The test becomes simpler and clearer:
+The tests becomes simpler and clearer:
 
 ```js
-const { loginWith } = require('./helper')
+const { test, describe, expect, beforeEach } = require('@playwright/test')
+const { loginWith } = require('./helper') // highlight-line
 
 describe('Note app', () => {
+  // ...
+
   test('user can log in', async ({ page }) => {
     await loginWith(page, 'mluukkai', 'salainen') // highlight-line
     await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
+  })
+
+  test('login fails with wrong password', async ({ page }) => {
+    await loginWith(page, 'mluukkai', 'wrong') // highlight-line
+
+    const errorDiv = page.locator('.error')
+    // ...
   })
 
   describe('when logged in', () => {
@@ -860,11 +855,8 @@ describe('Note app', () => {
       await loginWith(page, 'mluukkai', 'salainen') // highlight-line
     })
 
-  test('a new note can be created', () => {
     // ...
   })
-
-  // ...
 })
 ```
 
@@ -903,9 +895,9 @@ Creation of a note is also isolated as its helper function. The file _tests/help
 
 ```js
 const loginWith = async (page, username, password)  => {
-  await page.getByRole('button', { name: 'log in' }).click()
-  await page.getByTestId('username').fill(username)
-  await page.getByTestId('password').fill(password)
+  await page.getByRole('button', { name: 'login' }).click()
+  await page.getByLabel('username').fill(username)
+  await page.getByLabel('password').fill(password)
   await page.getByRole('button', { name: 'login' }).click()
 }
 
@@ -917,12 +909,15 @@ const createNote = async (page, content) => {
 }
 // highlight-end
 
-export { loginWith, createNote }
+export { loginWith, createNote } // highlight-line
 ```
 
 The tests are simplified as follows:
 
 ```js
+const { test, describe, expect, beforeEach } = require('@playwright/test')
+const { createNote, loginWith } = require('./helper') // highlight-line
+
 describe('Note app', () => {
   // ...
 
@@ -971,27 +966,28 @@ So we can replace all the addresses in the tests from _http://localhost:3001/api
 We can now define the _baseUrl_ for the application in the tests configuration file <i>playwright.config.js</i>:
 
 ```js
-module.exports = defineConfig({
+export default defineConfig({
   // ...
   use: {
     baseURL: 'http://localhost:5173',
+    // ...
   },
   // ...
-}
+})
 ```
 
 All the commands in the tests that use the application url, e.g.
 
 ```js
 await page.goto('http://localhost:5173')
-await page.post('http://localhost:5173/api/tests/reset')
+await request.post('http://localhost:5173/api/testing/reset')
 ```
 
-can be transformed into:
+can now be transformed into:
 
 ```js
 await page.goto('/')
-await page.post('/api/tests/reset')
+await request.post('/api/testing/reset')
 ```
 
 The current code for the tests is on [GitHub](https://github.com/fullstack-hy2020/notes-e2e/tree/part5-2), branch <i>part5-2</i>.
@@ -1005,7 +1001,7 @@ Let's change the initialization block of the test so that it creates two notes i
 ```js
 describe('when logged in', () => {
   // ...
-  describe('and several notes exists', () => {
+  describe('and several notes exists', () => { // highlight-line
     beforeEach(async ({ page }) => {
       // highlight-start
       await createNote(page, 'first note')
@@ -1014,7 +1010,7 @@ describe('when logged in', () => {
     })
 
     test('one of those can be made nonimportant', async ({ page }) => {
-      const otherNoteElement = await page.getByText('first note')
+      const otherNoteElement = page.getByText('first note')
 
       await otherNoteElement
         .getByRole('button', { name: 'make not important' }).click()
@@ -1030,7 +1026,7 @@ The test could also have been written without the auxiliary variable:
 
 ```js
 test('one of those can be made nonimportant', async ({ page }) => {
-  await page.getByText('first note')
+  page.getByText('first note')
     .getByRole('button', { name: 'make not important' }).click()
 
   await expect(page.getByText('first note').getByText('make important'))
@@ -1054,14 +1050,14 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-Tests break! The reason for the problem is that the command _await page.getByText('first note')_ now returns a _span_ element containing only text, and the button is outside of it.
+Tests break! The reason for the problem is that the command _page.getByText('first note')_ now returns a _span_ element containing only text, and the button is outside of it.
 
 One way to fix the problem is as follows:
 
 ```js
 test('one of those can be made nonimportant', async ({ page }) => {
-  const otherNoteText = await page.getByText('first note') // highlight-line
-  const otherNoteElement = await otherNoteText.locator('..') // highlight-line
+  const otherNoteText = page.getByText('first note') // highlight-line
+  const otherNoteElement = otherNoteText.locator('..') // highlight-line
 
   await otherNoteElement.getByRole('button', { name: 'make not important' }).click()
   await expect(otherNoteElement.getByText('make important')).toBeVisible()
@@ -1074,7 +1070,7 @@ Of course, the test can also be written using only one auxiliary variable:
 
 ```js
 test('one of those can be made nonimportant', async ({ page }) => {
-  const secondNoteElement = await page.getByText('second note').locator('..')
+  const secondNoteElement = page.getByText('second note').locator('..')
   await secondNoteElement.getByRole('button', { name: 'make not important' }).click()
   await expect(secondNoteElement.getByText('make important')).toBeVisible()
 })
@@ -1093,16 +1089,16 @@ describe('when logged in', () => {
     await expect(page.getByText('a note created by playwright')).toBeVisible()
   })
 
-  describe('and a note exists', () => {
+  describe('and several notes exists', () => {
     beforeEach(async ({ page }) => {
       await createNote(page, 'first note')
       await createNote(page, 'second note')
       await createNote(page, 'third note') // highlight-line
     })
 
-    test('importance can be changed', async ({ page }) => {
-      const otherNoteText = await page.getByText('second note') // highlight-line
-      const otherNoteElement = await otherNoteText.locator('..')
+    test('one of those can be made nonimportant', async ({ page }) => {
+      const otherNoteText = page.getByText('second note') // highlight-line
+      const otherNoteElement = otherNoteText.locator('..')
     
       await otherNoteElement.getByRole('button', { name: 'make not important' }).click()
       await expect(otherNoteElement.getByText('make important')).toBeVisible()
@@ -1120,7 +1116,7 @@ If, and when the tests don't pass and you suspect that the fault is in the tests
 The following command runs the problematic test in debug mode:
 
 ```
-npm test -- -g'importance can be changed' --debug
+npm test -- -g'one of those can be made nonimportant' --debug
 ```
 
 Playwright-inspector shows the progress of the tests step by step. The arrow-dot button at the top takes the tests one step further. The elements found by the locators and the interaction with the browser are visualized in the browser:
@@ -1133,7 +1129,7 @@ By default, debug steps through the test command by command. If it is a complex 
 describe('Note app', () => {
   beforeEach(async ({ page, request }) => {
     // ...
-  }
+  })
 
   describe('when logged in', () => {
     beforeEach(async ({ page }) => {
@@ -1149,8 +1145,8 @@ describe('Note app', () => {
   
       test('one of those can be made nonimportant', async ({ page }) => {
         await page.pause() // highlight-line
-        const otherNoteText = await page.getByText('second note')
-        const otherNoteElement = await otherNoteText.locator('..')
+        const otherNoteText = page.getByText('second note')
+        const otherNoteElement = otherNoteText.locator('..')
       
         await otherNoteElement.getByRole('button', { name: 'make not important' }).click()
         await expect(otherNoteElement.getByText('make important')).toBeVisible()

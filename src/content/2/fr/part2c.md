@@ -405,12 +405,12 @@ Nous avons également ajouté quelques impressions utiles, qui clarifient la pro
 
 Ceci est affiché sur la console :
 
-<pre>
+```
 render 0 notes
 effect
 promise fulfilled
 render 3 notes
-</pre>
+```
 
 Tout d'abord, le corps de la fonction définissant le composant est exécuté et le composant est rendu pour la première fois. À ce stade, <i>render 0 notes</i> est imprimé, ce qui signifie que les données n'ont pas encore été extraites du serveur.
 

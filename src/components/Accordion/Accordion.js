@@ -72,7 +72,7 @@ class Accordion extends Component {
             )}
             {list && (
               <ul>
-                {list.map(l => (
+                {list.map((l) => (
                   <li
                     key={l.text}
                     className={selectedItem === l.id ? 'selected' : undefined}

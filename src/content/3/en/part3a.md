@@ -41,7 +41,7 @@ The file defines, for instance, that the entry point of the application is the <
 
 Let's make a small change to the <i>scripts</i> object by adding a new script command.
 
-```bash
+```json
 {
   // ...
   "scripts": {
@@ -72,7 +72,7 @@ npm start
 
 The <i>start</i> npm script works because we defined it in the <i>package.json</i> file:
 
-```bash
+```json
 {
   // ...
   "scripts": {
@@ -240,7 +240,7 @@ The dependency is also added to our <i>package.json</i> file:
 {
   // ...
   "dependencies": {
-    "express": "^4.21.2"
+    "express": "^5.1.0"
   }
 }
 ```
@@ -251,15 +251,15 @@ The source code for the dependency is installed in the <i>node\_modules</i> dire
 
 These are the dependencies of the Express library and the dependencies of all of its dependencies, and so forth. These are called the [transitive dependencies](https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/) of our project.
 
-Version 4.21.2 of Express was installed in our project. What does the caret in front of the version number in <i>package.json</i> mean?
+Version 5.1.0 of Express was installed in our project. What does the caret in front of the version number in <i>package.json</i> mean?
 
 ```json
-"express": "^4.21.2"
+"express": "^5.1.0"
 ```
 
 The versioning model used in npm is called [semantic versioning](https://docs.npmjs.com/about-semantic-versioning).
 
-The caret in the front of <i>^4.21.2</i> means that if and when the dependencies of a project are updated, the version of Express that is installed will be at least <i>4.21.2</i>. However, the installed version of Express can also have a larger <i>patch</i> number (the last number), or a larger <i>minor</i> number (the middle number). The major version of the library indicated by the first <i>major</i> number must be the same.
+The caret in the front of <i>^5.1.0</i> means that if and when the dependencies of a project are updated, the version of Express that is installed will be at least <i>5.1.0</i>. However, the installed version of Express can also have a larger <i>patch</i> number (the last number), or a larger <i>minor</i> number (the middle number). The major version of the library indicated by the first <i>major</i> number must be the same.
 
 We can update the dependencies of the project with the command:
 
@@ -273,7 +273,7 @@ Likewise, if we start working on the project on another computer, we can install
 npm install
 ```
 
-If the <i>major</i> number of a dependency does not change, then the newer versions should be [backwards compatible](https://en.wikipedia.org/wiki/Backward_compatibility). This means that if our application happened to use version 4.99.175 of Express in the future, then all the code implemented in this part would still have to work without making changes to the code. In contrast, the future 5.0.0 version of Express [may contain](https://expressjs.com/en/guide/migrating-5.html) changes that would cause our application to no longer work.
+If the <i>major</i> number of a dependency does not change, then the newer versions should be [backwards compatible](https://en.wikipedia.org/wiki/Backward_compatibility). This means that if our application happened to use version 5.99.175 of Express in the future, then all the code implemented in this part would still have to work without making changes to the code. In contrast, the future 6.0.0 version of Express may contain changes that would cause our application to no longer work.
 
 ### Web and Express
 
@@ -370,7 +370,7 @@ Now, changes to the application's code will cause the server to restart automati
 
 Let's define a custom <i>npm script</i> in the <i>package.json</i> file to start the development server:
 
-```bash
+```json
 {
   // ..
   "scripts": {
@@ -525,7 +525,7 @@ Using Postman is quite easy in this situation. It's enough to define the URL and
 
 The backend server appears to respond correctly. By making an HTTP GET request to <http://localhost:3001/api/notes> we see that the note with the id 2 is no longer in the list, which indicates that the deletion was successful.
 
-Because the notes in the application are only saved to memory, the list of notes will return to its original state when we restart the application.
+Currently, the notes in the application are hard-coded and not yet saved in a database, so the list of notes will reset to its original state when we restart the application.
 
 ### The Visual Studio Code REST client
 
@@ -735,7 +735,7 @@ The function body contains a row that looks a bit intriguing:
 Math.max(...notes.map(n => Number(n.id)))
 ```
 
-What exactly is happening in that line of code? <em>notes.map(n => n.id)</em> creates a new array that contains all the ids of the notes in number form. [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) returns the maximum value of the numbers that are passed to it. However, <em>notes.map(n => Number(n.id))</em> is an <i>array</i> so it can't directly be given as a parameter to _Math.max_. The array can be transformed into individual numbers by using the "three dot" [spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) syntax <em>...</em>.
+What exactly is happening in that line of code? <em>notes.map(n => Number(n.id))</em> creates a new array that contains all the ids of the notes in number form. [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) returns the maximum value of the numbers that are passed to it. However, <em>notes.map(n => Number(n.id))</em> is an <i>array</i> so it can't directly be given as a parameter to _Math.max_. The array can be transformed into individual numbers by using the "three dot" [spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) syntax <em>...</em>.
 
 </div>
 

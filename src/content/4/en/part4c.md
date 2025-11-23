@@ -248,7 +248,7 @@ module.exports = usersRouter
 
 The password sent in the request is <i>not</i> stored in the database. We store the <i>hash</i> of the password that is generated with the _bcrypt.hash_ function.
 
-The fundamentals of [storing passwords](https://codahale.com/how-to-safely-store-a-password/) are outside the scope of this course material. We will not discuss what the magic number 10 assigned to the [saltRounds](https://github.com/kelektiv/node.bcrypt.js/#a-note-on-rounds) variable means, but you can read more about it in the linked material.
+The fundamentals of [storing passwords](https://bytebytego.com/guides/how-to-store-passwords-in-the-database/) are outside the scope of this course material. We will not discuss what the magic number 10 assigned to the [saltRounds](https://github.com/kelektiv/node.bcrypt.js/#a-note-on-rounds) variable means, but you can read more about it in the linked material.
 
 Our current code does not contain any error handling or input validation for verifying that the username and password are in the desired format.
 

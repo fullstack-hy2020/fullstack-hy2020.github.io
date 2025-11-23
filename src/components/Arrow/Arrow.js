@@ -79,7 +79,7 @@ const Arrow = ({
           className="arrow__container arrow__container--with-link"
           style={{ display: 'flex', flexDirection: 'column' }}
         >
-          {content.map(arrow => {
+          {content.map((arrow) => {
             const arrowStyle = {
               backgroundColor: arrow.backgroundColor
                 ? arrow.backgroundColor

@@ -47,15 +47,12 @@ Let's add an npm script to <i>the backend</i> which starts it in test mode, or s
 {
   // ...
   "scripts": {
-    "start": "NODE_ENV=production node index.js",
-    "dev": "NODE_ENV=development nodemon index.js",
-    "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
-    "deploy": "fly deploy",
-    "deploy:full": "npm run build:ui && npm run deploy",
-    "logs:prod": "fly logs",
+    "start": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=development node --watch index.js",
+    "test": "cross-env NODE_ENV=test node --test",
     "lint": "eslint .",
-    "test": "jest --verbose --runInBand",
-    "start:test": "NODE_ENV=test node index.js" // highlight-line
+    // ...
+    "start:test": "cross-env NODE_ENV=test node --watch index.js" // highlight-line
   },
   // ...
 }
@@ -94,7 +91,7 @@ describe('Note app', function() {
   it('front page can be opened', function() {
     cy.visit('http://localhost:5173')
     cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
+    cy.contains('Note app, Department of Computer Science, University of Helsinki 2025')
   })
 })
 ```
@@ -105,7 +102,7 @@ Running the test shows how the application behaves as the test is run:
 
 ![cypress showing automation of note test](../../images/5/56new.png)
 
-The structure of the test should look familiar. They use <i>describe</i> blocks to group different test cases, just like Jest. The test cases have been defined with the <i>it</i> method. Cypress borrowed these parts from the [Mocha](https://mochajs.org/) testing library that it uses under the hood.
+The structure of the test should look familiar. They use <i>describe</i> blocks to group different test cases, just like Vitest. The test cases have been defined with the <i>it</i> method. Cypress borrowed these parts from the [Mocha](https://mochajs.org/) testing library that it uses under the hood.
 
 [cy.visit](https://docs.cypress.io/api/commands/visit.html) and [cy.contains](https://docs.cypress.io/api/commands/contains.html) are Cypress commands, and their purpose is quite obvious.
 [cy.visit](https://docs.cypress.io/api/commands/visit.html) opens the web address given to it as a parameter in the browser used by the test. [cy.contains](https://docs.cypress.io/api/commands/contains.html) searches for the string it received as a parameter in the page.
@@ -117,7 +114,7 @@ describe('Note app', () => { // highlight-line
   it('front page can be opened', () => { // highlight-line
     cy.visit('http://localhost:5173')
     cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
+    cy.contains('Note app, Department of Computer Science, University of Helsinki 2025')
   })
 })
 ```
@@ -131,7 +128,7 @@ describe('Note app', function() {
   it('front page can be opened',  function() {
     cy.visit('http://localhost:5173')
     cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
+    cy.contains('Note app, Department of Computer Science, University of Helsinki 2025')
   })
 
 // highlight-start
@@ -149,44 +146,9 @@ the test fails
 
 Let's remove the failing code from the test.
 
-The variable _cy_ our tests use gives us a nasty Eslint error
-
-![vscode screenshot showing cy is not defined](../../images/5/58new.png)
-
-We can get rid of it by installing [eslint-plugin-cypress](https://github.com/cypress-io/eslint-plugin-cypress) as a development dependency
-
-```js
-npm install eslint-plugin-cypress --save-dev
-```
-
-and changing the configuration in <i>.eslintrc.cjs</i> like so:
-
-```js
-module.exports = {
-  "env": {
-    browser: true,
-    es2020: true,
-    "jest/globals": true,
-    "cypress/globals": true // highlight-line
-  },
-  "extends": [ 
-    // ...
-  ],
-  "parserOptions": {
-    // ...
-  },
-  "plugins": [
-      "react", "jest", "cypress" // highlight-line
-  ],
-  "rules": {
-    // ...
-  }
-}
-```
-
 ### Writing to a form
 
-Let's extend our tests so that our new test tries to log in to our application.
+Let's extend our tests so that our new test tries to login to our application.
 We assume our backend contains a user with the username <i>mluukkai</i> and password <i>salainen</i>.
 
 The test begins by opening the login form.
@@ -195,14 +157,14 @@ The test begins by opening the login form.
 describe('Note app',  function() {
   // ...
 
-  it('login form can be opened', function() {
+  it('user can login', function() {
     cy.visit('http://localhost:5173')
-    cy.contains('log in').click()
+    cy.contains('button', 'login').click()
   })
 })
 ```
 
-The test first searches for the login button by its text and clicks the button with the command [cy.click](https://docs.cypress.io/api/commands/click.html#Syntax).
+The test first searches for a _button_ element with the desired text and clicks the button with the command [cy.click](https://docs.cypress.io/api/commands/click.html#Syntax).
 
 Both of our tests begin the same way, by opening the page <i><http://localhost:5173></i>, so we should extract the shared code into a <i>beforeEach</i> block run before each test:
 
@@ -216,11 +178,11 @@ describe('Note app', function() {
 
   it('front page can be opened', function() {
     cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2023')
+    cy.contains('Note app, Department of Computer Science, University of Helsinki 2025')
   })
 
-  it('login form can be opened', function() {
-    cy.contains('log in').click()
+  it('user can login', function() {
+    cy.contains('button', 'login').click()
   })
 })
 ```
@@ -233,7 +195,7 @@ We can access the first and the last input field on the page, and write to them 
 
 ```js
 it('user can login', function () {
-  cy.contains('log in').click()
+  cy.contains('button', 'login').click()
   cy.get('input:first').type('mluukkai')
   cy.get('input:last').type('salainen')
 })  
@@ -241,8 +203,55 @@ it('user can login', function () {
 
 The test works. The problem is if we later add more input fields, the test will break because it expects the fields it needs to be the first and the last on the page.
 
-It would be better to give our inputs unique <i>IDs</i> and use those to find them.
-We change our login form like so:
+Let's take advantage of the existing elements of the login form. The input fields of the login form have been assigned unique <i>labels</i>:
+
+```js
+// ...
+<form onSubmit={handleSubmit}>
+  <div>
+    <label> // highlight-line
+      username // highlight-line
+      <input
+        type="text"
+        value={username}
+        onChange={handleUsernameChange}
+      />
+    </label> // highlight-line
+  </div>
+  <div>
+    <label> // highlight-line
+      password // highlight-line
+      <input
+        type="password"
+        value={password}
+        onChange={handlePasswordChange}
+      />
+    </label> // highlight-line
+  </div>
+  <button type="submit">login</button>
+</form>
+// ...
+```
+
+Input fields can and should be located in tests using <i>labels</i>:
+
+```js
+describe('Note app', function () {
+  // ...
+
+  it('user can login', function () {
+    cy.contains('button', 'login').click()
+    cy.contains('label', 'username').type('mluukkai') // highlight-line
+    cy.contains('label', 'password').type('salainen') // highlight-line
+  })
+})
+```
+
+When locating elements, it makes sense to aim to utilize the content visible to the user in the interface, as this best simulates how a user would actually find the desired input field while navigating the application.
+
+When the username and password have been entered into the form, the next step is to press the <i>login</i> button. However, this causes a bit of a headache, since there are actually two <i>login</i> buttons on the page. The <i>Togglable</i> component we are using also contains a button with the same name, which is hidden by giving it the visibility attribute style="display: none" when the login form is visible.
+
+To ensure that the test clicks the correct button, we assign a unique <i>id</i> attribute to the login form’s <i>login</i> button:
 
 ```js
 const LoginForm = ({ ... }) => {
@@ -250,23 +259,8 @@ const LoginForm = ({ ... }) => {
     <div>
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        <div>
-          username
-          <input
-            id='username'  // highlight-line
-            value={username}
-            onChange={handleUsernameChange}
-          />
-        </div>
-        <div>
-          password
-          <input
-            id='password' // highlight-line
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-        </div>
+        // 
+
         <button id="login-button" type="submit"> // highlight-line
           login
         </button>
@@ -276,18 +270,16 @@ const LoginForm = ({ ... }) => {
 }
 ```
 
-We also added an ID to our submit button so we can access it in our tests.
-
 The test becomes:
 
 ```js
 describe('Note app',  function() {
   // ..
-  it('user can log in', function() {
-    cy.contains('log in').click()
-    cy.get('#username').type('mluukkai')  // highlight-line    
-    cy.get('#password').type('salainen')  // highlight-line
-    cy.get('#login-button').click()  // highlight-line
+  it('user can login', function () {
+    cy.contains('button', 'login').click()
+    cy.contains('label', 'username').type('mluukkai')
+    cy.contains('label', 'password').type('salainen')
+    cy.get('#login-button').click() // highlight-line
 
     cy.contains('Matti Luukkainen logged in') // highlight-line
   })
@@ -296,7 +288,7 @@ describe('Note app',  function() {
 
 The last row ensures that the login was successful.
 
-Note that the CSS's [ID selector](https://developer.mozilla.org/en-US/docs/Web/CSS/ID_selectors) is #, so if we want to search for an element with the ID <i>username</i> the CSS selector is <i>#username</i>.
+Note that the CSS's [ID selector](https://developer.mozilla.org/en-US/docs/Web/CSS/ID_selectors) is #, so if we want to search for an element with the ID <i>login-button</i> the CSS selector is <i>#login-button</i>.
 
 Please note that passing the test at this stage requires that there is a user in the test database of the backend test environment, whose username is <i>mluukkai</i> and the password is <i>salainen</i>. Create a user if needed!
 
@@ -310,9 +302,9 @@ describe('Note app', function() {
   // highlight-start
   describe('when logged in', function() {
     beforeEach(function() {
-      cy.contains('log in').click()
-      cy.get('input:first').type('mluukkai')
-      cy.get('input:last').type('salainen')
+      cy.contains('button', 'login').click()
+      cy.contains('label', 'username').type('mluukkai')
+      cy.contains('label', 'password').type('salainen')
       cy.get('#login-button').click()
     })
     // highlight-end
@@ -343,7 +335,7 @@ If the page contained more inputs, the test would break
 
 ![cypress error - cy.type can only be called on a single element](../../images/5/31x.png)
 
-Due to this problem, it would again be better to give the input an <i>ID</i> and search for the element by its ID.
+Due to this problem, it would again be better to give the input an <i>ID</i> and search for the element by its ID. Let's stick with the simplest solution for now.
 
 The structure of the tests looks like so:
 
@@ -351,10 +343,10 @@ The structure of the tests looks like so:
 describe('Note app', function() {
   // ...
 
-  it('user can log in', function() {
-    cy.contains('log in').click()
-    cy.get('#username').type('mluukkai')
-    cy.get('#password').type('salainen')
+  it('user can login', function() {
+    cy.contains('button', 'login').click()
+    cy.contains('label', 'username').type('mluukkai')
+    cy.contains('label', 'password').type('salainen')
     cy.get('#login-button').click()
 
     cy.contains('Matti Luukkainen logged in')
@@ -362,9 +354,9 @@ describe('Note app', function() {
 
   describe('when logged in', function() {
     beforeEach(function() {
-      cy.contains('log in').click()
-      cy.get('input:first').type('mluukkai')
-      cy.get('input:last').type('salainen')
+      cy.contains('button', 'login').click()
+      cy.contains('label', 'username').type('mluukkai')
+      cy.contains('label', 'password').type('salainen')
       cy.get('#login-button').click()
     })
 
@@ -375,7 +367,7 @@ describe('Note app', function() {
 })
 ```
 
-Cypress runs the tests in the order they are in the code. So first it runs <i>user can log in</i>, where the user logs in. Then cypress will run <i>a new note can be created</i> for which a <i>beforeEach</i> block logs in as well.
+Cypress runs the tests in the order they are in the code. So first it runs <i>user can login</i>, where the user logs in. Then cypress will run <i>a new note can be created</i> for which a <i>beforeEach</i> block logs in as well.
 Why do this? Isn't the user logged in after the first test?
 No, because <i>each</i> test starts from zero as far as the browser is concerned.
 All changes to the browser's state are reversed after each test.
@@ -511,18 +503,18 @@ describe('Note app', function() {
 
       it('it can be made not important', function () {
         cy.contains('another note cypress')
-          .contains('make not important')
+          .contains('button', 'make not important')
           .click()
 
         cy.contains('another note cypress')
-          .contains('make important')
+          .contains('button', 'make important')
       })
     })
   })
 })
 ```
 
-The first command searches for a component containing the text <i>another note cypress</i>, and then for a <i>make not important</i> button within it. It then clicks the button.
+The first command does several things. First, it searches for an element containing the text <i>another note cypress</i>. Then, within the found element, it searches for the <i>make not important</i> button and clicks it.
 
 The second command checks that the text on the button has changed to <i>make important</i>.
 
@@ -541,9 +533,9 @@ describe('Note app', function() {
   // ...
 
   it.only('login fails with wrong password', function() {
-    cy.contains('log in').click()
-    cy.get('#username').type('mluukkai')
-    cy.get('#password').type('wrong')
+    cy.contains('button', 'login').click()
+    cy.contains('label', 'username').type('mluukkai')
+    cy.contains('label', 'password').type('wrong')
     cy.get('#login-button').click()
 
     cy.contains('wrong credentials')
@@ -629,9 +621,9 @@ Let's finish the test so that it also checks that the application does not rende
 
 ```js
 it('login fails with wrong password', function() {
-  cy.contains('log in').click()
-  cy.get('#username').type('mluukkai')
-  cy.get('#password').type('wrong')
+  cy.contains('button', 'login').click()
+  cy.contains('label', 'username').type('mluukkai')
+  cy.contains('label', 'password').type('wrong')
   cy.get('#login-button').click()
 
   cy.get('.error')
@@ -666,9 +658,9 @@ Currently, we have the following tests:
 ```js
 describe('Note app', function() {
   it('user can login', function() {
-    cy.contains('log in').click()
-    cy.get('#username').type('mluukkai')
-    cy.get('#password').type('salainen')
+    cy.contains('button', 'login').click()
+    cy.contains('label', 'username').type('mluukkai')
+    cy.contains('label', 'password').type('salainen')
     cy.get('#login-button').click()
 
     cy.contains('Matti Luukkainen logged in')
@@ -680,9 +672,9 @@ describe('Note app', function() {
 
   describe('when logged in', function() {
     beforeEach(function() {
-      cy.contains('log in').click()
-      cy.get('input:first').type('mluukkai')
-      cy.get('input:last').type('salainen')
+      cy.contains('button', 'login').click()
+      cy.contains('label', 'username').type('mluukkai')
+      cy.contains('label', 'password').type('salainen')
       cy.get('#login-button').click()
     })
 
@@ -699,7 +691,7 @@ First, we test logging in. Then, in their own describe block, we have a bunch of
 As we said above, each test starts from zero! Tests do not start from the state where the previous tests ended.
 
 The Cypress documentation gives us the following advice: [Fully test the login flow – but only once](https://docs.cypress.io/guides/end-to-end-testing/testing-your-app#Fully-test-the-login-flow----but-only-once).
-So instead of logging in a user using the form in the <i>beforeEach</i> block, we are going to bypass the UI and do a HTTP request to the backend to log in. The reason for this is that logging in with a HTTP request is much faster than filling out a form.
+So instead of logging in a user using the form in the <i>beforeEach</i> block, we are going to bypass the UI and do a HTTP request to the backend to login. The reason for this is that logging in with a HTTP request is much faster than filling out a form.
 
 Our situation is a bit more complicated than in the example in the Cypress documentation because when a user logs in, our application saves their details to the localStorage.
 However, Cypress can handle that as well.
@@ -771,6 +763,10 @@ describe('Note app', function() {
   // ...
 
   describe('when logged in', function() {
+    beforeEach(function () {
+      cy.login({ username: 'mluukkai', password: 'salainen' })
+    })
+
     it('a new note can be created', function() {
       cy.contains('new note').click()
       cy.get('input').type('a note created by cypress')
@@ -781,9 +777,11 @@ describe('Note app', function() {
 
     describe('and a note exists', function () {
       beforeEach(function () {
+        // highlight-start
         cy.contains('new note').click()
         cy.get('input').type('another note cypress')
         cy.contains('save').click()
+        // highlight-end
       })
 
       it('it can be made important', function () {
@@ -820,9 +818,7 @@ describe('Note app', function() {
   // ...
 
   describe('when logged in', function() {
-    it('a new note can be created', function() {
-      // ...
-    })
+    // ...
 
     describe('and a note exists', function () {
       beforeEach(function () {
@@ -842,7 +838,23 @@ describe('Note app', function() {
 })
 ```
 
-There is one more annoying feature in our tests. The application address <i>http:localhost:5173</i> is hardcoded in many places.
+There is one more annoying feature in our tests. The frontend address <i>http://localhost:5173</i> and the backend address <i>http://localhost:3001</i> are hardcoded for tests. Of these, the address of the backend is actually useless, because a proxy has been defined in the Vite configuration of the frontend, which forwards all requests made by the frontend to the address <i>http:localhost:5173/api</i> to the backend:
+
+```js
+export default defineConfig({
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+      },
+    }
+  },
+  // ...
+})
+```
+
+So we can replace all the addresses in the tests from _http://localhost:3001/api/..._ to _http://localhost:5173/api/..._
 
 Let's define the <i>baseUrl</i> for the application in the Cypress pre-generated [configuration file](https://docs.cypress.io/guides/references/configuration) <i>cypress.config.js</i>:
 
@@ -858,10 +870,10 @@ module.exports = defineConfig({
 })
 ```
 
-All the commands in the tests use the address of the application
+All commands in the tests and in the <i>command.js</i> file that use the application's address
 
 ```js
-cy.visit('http://localhost:5173' )
+cy.visit('http://localhost:5173')
 ```
 
 can be transformed into
@@ -870,68 +882,37 @@ can be transformed into
 cy.visit('')
 ```
 
-The backend's hardcoded address <i>http://localhost:3001</i> is still in the tests. Cypress [documentation](https://docs.cypress.io/guides/guides/environment-variables) recommends defining other addresses used by the tests as environment variables.
-
-Let's expand the configuration file <i>cypress.config.js</i> as follows:
-
-```js
-const { defineConfig } = require("cypress")
-
-module.exports = defineConfig({
-  e2e: {
-    setupNodeEvents(on, config) {
-    },
-    baseUrl: 'http://localhost:5173',
-    env: {
-      BACKEND: 'http://localhost:3001/api' // highlight-line
-    }
-  },
-})
-```
-
-Let's replace all the backend addresses from the tests in the following way
-
-```js
-describe('Note ', function() {
-  beforeEach(function() {
-
-    cy.request('POST', `${Cypress.env('BACKEND')}/testing/reset`) // highlight-line
-    const user = {
-      name: 'Matti Luukkainen',
-      username: 'mluukkai',
-      password: 'secret'
-    }
-    cy.request('POST', `${Cypress.env('BACKEND')}/users`, user) // highlight-line
-    cy.visit('')
-  })
-  // ...
-})
-```
-
 ### Changing the importance of a note
 
 Lastly, let's take a look at the test we did for changing the importance of a note.
-First, we'll change the beforeEach block so that it creates three notes instead of one:
+First, we'll change the beforeEach block so that it creates three notes instead of one. The tests change as follows:
 
 ```js
-describe('when logged in', function() {
-  describe('and several notes exist', function () {
+describe('when logged in', function () {
+  beforeEach(function () {
+    cy.login({ username: 'mluukkai', password: 'salainen' })
+  })
+
+  it('a new note can be created', function () {
+    cy.contains('new note').click()
+    cy.get('input').type('a note created by cypress')
+    cy.contains('save').click()
+    cy.contains('a note created by cypress')
+  })
+  describe('and several notes exist', function () { // highlight-line
     beforeEach(function () {
-      // highlight-start
-      cy.login({ username: 'mluukkai', password: 'salainen' })
-      cy.createNote({ content: 'first note', important: false })
-      cy.createNote({ content: 'second note', important: false })
-      cy.createNote({ content: 'third note', important: false })
-      // highlight-end
+      cy.createNote({ content: 'first note', important: true }) // highlight-line
+      cy.createNote({ content: 'second note', important: true }) // highlight-line
+      cy.createNote({ content: 'third note', important: true }) // highlight-line
     })
 
-    it('one of those can be made important', function () {
-      cy.contains('second note')
-        .contains('make important')
+    it('one of those can be made non important', function () { // highlight-line
+      cy.contains('second note') // highlight-line
+        .contains('button', 'make not important')
         .click()
 
-      cy.contains('second note')
-        .contains('make not important')
+      cy.contains('second note') // highlight-line
+        .contains('button', 'make important')
     })
   })
 })
@@ -939,13 +920,13 @@ describe('when logged in', function() {
 
 How does the [cy.contains](https://docs.cypress.io/api/commands/contains.html) command actually work?
 
-When we click the _cy.contains('second note')_ command in Cypress [Test Runner](https://docs.cypress.io/guides/core-concepts/cypress-app#Test-Runner), we see that the command searches for the element containing the text <i>second note</i>:
+When we click the _-contains 'second note'_ command in Cypress [Test Runner](https://docs.cypress.io/guides/core-concepts/cypress-app#Test-Runner), we see that the command searches for the element containing the text <i>second note</i>:
 
-![cypress test runner clicking second note](../../images/5/34new.png)
+![cypress test runner clicking second note](../../images/5/34eb.png)
 
-By clicking the next line _.contains('make important')_ we see that the test uses the 'make important' button corresponding to the <i>second note</i>:
+By clicking the next line _-contains 'button, make not important'_ we see that the test uses the <i>make not important</i> button corresponding to the <i>second note</i>:
 
-![cypress test runner clicking make important](../../images/5/35new.png)
+![cypress test runner clicking make important](../../images/5/35a.png)
 
 When chained, the second <i>contains</i> command <i>continues</i> the search from within the component found by the first command.
 
@@ -953,12 +934,12 @@ If we had not chained the commands, and instead write:
 
 ```js
 cy.contains('second note')
-cy.contains('make important').click()
+cy.contains('button', 'make not important').click()
 ```
 
 the result would have been entirely different. The second line of the test would click the button of a wrong note:
 
-![cypress showing error and incorrectly trying to click first button](../../images/5/36new.png)
+![cypress showing error and incorrectly trying to click first button](../../images/5/36.png)
 
 When coding tests, you should check in the test runner that the tests use the right components!
 
@@ -980,15 +961,17 @@ const Note = ({ note, toggleImportance }) => {
 
 Our tests break! As the test runner reveals, _cy.contains('second note')_ now returns the component containing the text, and the button is not in it.
 
-![cypress showing test is broken trying to click make important](../../images/5/37new.png)
+![cypress showing test is broken trying to click make important](../../images/5/37.png)
 
 One way to fix this is the following:
 
 ```js
-it('one of those can be made important', function () {
+it('one of those can be made non important', function () {
   cy.contains('second note').parent().find('button').click()
-  cy.contains('second note').parent().find('button')
-    .should('contain', 'make not important')
+  cy.contains('second note')
+    .parent()
+    .find('button')
+    .should('contain', 'make important')
 })
 ```
 
@@ -1002,14 +985,14 @@ Unfortunately, we have some copy-paste in the tests now, because the code for se
 In these kinds of situations, it is possible to use the [as](https://docs.cypress.io/api/commands/as.html) command:
 
 ```js
-it('one of those can be made important', function () {
+it('one of those can be made non important', function () {
   cy.contains('second note').parent().find('button').as('theButton')
   cy.get('@theButton').click()
-  cy.get('@theButton').should('contain', 'make not important')
+  cy.get('@theButton').should('contain', 'make important')
 })
 ```
 
-Now the first line finds the right button and uses <i>as</i> to save it as <i>theButton</i>. The following lines can use the named element with <i>cy.get('@theButton')</i>.
+Now the first line finds the right button and uses <i>as</i> to save it as <i>theButton</i>. The following lines can use the named element with _cy.get('@theButton')_.
 
 ### Running and debugging the tests
 
@@ -1018,7 +1001,7 @@ Finally, some notes on how Cypress works and debugging your tests.
 Because of the form of the Cypress tests, it gives the impression that they are normal JavaScript code, and we could for example try this:
 
 ```js
-const button = cy.contains('log in')
+const button = cy.contains('button', 'login')
 button.click()
 debugger
 cy.contains('logout').click()
@@ -1046,7 +1029,7 @@ Stopping the test execution with the debugger is [possible](https://docs.cypress
 The developer console is all sorts of useful when debugging your tests.
 You can see the HTTP requests done by the tests on the Network tab, and the console tab will show you information about your tests:
 
-![developer console while running cypress](../../images/5/38new.png)
+![developer console while running cypress](../../images/5/38.png)
 
 So far we have run our Cypress tests using the graphical test runner. It is also possible to run them [from the command line](https://docs.cypress.io/guides/guides/command-line.html). We just have to add an npm script for it:
 
@@ -1059,9 +1042,9 @@ So far we have run our Cypress tests using the graphical test runner. It is also
 
 Now we can run our tests from the command line with the command <i>npm run test:e2e</i>
 
-![terminal output of running npm e2e tests showing passed](../../images/5/39new.png)
+![terminal output of running npm e2e tests showing passed](../../images/5/39.png)
 
-Note that videos of the test execution will be saved to <i>cypress/videos/</i>, so you should probably git ignore this directory. It is also possible to [turn off](https://docs.cypress.io/guides/guides/screenshots-and-videos#Videos) the making of videos.
+It is also possible to record a video of the test execution in Cypress. Recording a video can be especially useful, for example, when debugging or in a CI/CD pipeline, as the video allows you to easily review what happened in the browser before an error occurred. The feature is disabled by default; instructions for enabling it can be found in the Cypress [documentation](https://docs.cypress.io/guides/guides/screenshots-and-videos#Videos).
 
 Tests are found in [GitHub](https://github.com/fullstack-hy2020/notes-e2e-cypress/).
 

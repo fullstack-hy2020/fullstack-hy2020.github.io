@@ -272,9 +272,9 @@ let query = "SELECT * FROM Users WHERE name = '" + userName + "';"
 
 Maintenant, supposons qu'un utilisateur malveillant, <i>Arto Hellas</i>, définisse son nom comme
 
-<pre>
+```
 Arto Hell-as'; DROP TABLE Users; --
-</pre>
+```
 
 Les injections SQL sont évitées en utilisant des [requêtes paramétrées](https://security.stackexchange.com/questions/230211/why-are-stored-procedures-and-prepared-statements-the-preferred-modern-methods-f). Avec elles, les entrées des utilisateurs ne sont pas mélangées avec la requête SQL, mais la base de données elle-même insère les valeurs d'entrée à des emplacements réservés dans la requête (généralement <code>?</code>).
 

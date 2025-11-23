@@ -30,7 +30,7 @@ json-server requires all data to be sent in JSON format. What this means in prac
 Let's make the following changes to the event handler responsible for creating a new note:
 
 ```js
-addNote = event => {
+const addNote = event => {
   event.preventDefault()
   const noteObject = {
     content: newNote,
@@ -76,7 +76,7 @@ Also the tab <i>response</i> is useful, it shows what was the data the server re
 The new note is not rendered to the screen yet. This is because we did not update the state of the <i>App</i> component when we created it. Let's fix this:
 
 ```js
-addNote = event => {
+const addNote = event => {
   event.preventDefault()
   const noteObject = {
     content: newNote,
@@ -608,7 +608,7 @@ When we try to change the importance of the hardcoded note, we see the following
 
 The application should be able to handle these types of error situations gracefully. Users won't be able to tell that an error has occurred unless they happen to have their console open. The only way the error can be seen in the application is that clicking the button does not affect the note's importance.
 
-We had [previously](/en/part2/getting_data_from_server#axios-and-promises) mentioned that a promise can be in one of three different states. When an HTTP request fails, the associated promise is <i>rejected</i>. Our current code does not handle this rejection in any way.
+We had [previously](/en/part2/getting_data_from_server#axios-and-promises) mentioned that a promise can be in one of three different states. When an axios HTTP request fails, the associated promise is <i>rejected</i>. Our current code does not handle this rejection in any way.
 
 The rejection of a promise is [handled](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) by providing the <em>then</em> method with a second callback function, which is called in the situation where the promise is rejected.
 

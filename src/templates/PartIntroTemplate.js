@@ -84,7 +84,7 @@ export default function PartIntroTemplate({ data }) {
               <Arrow
                 wrapperClassName="spacing--mobile--large"
                 stack
-                content={titles.map(n => {
+                content={titles.map((n) => {
                   return {
                     backgroundColor: colors['white'],
                     letter: n,
@@ -108,7 +108,7 @@ export default function PartIntroTemplate({ data }) {
 }
 
 export const partInfoQuery = graphql`
-  query($part: Int!, $lang: String!) {
+  query ($part: Int!, $lang: String!) {
     markdownRemark(
       frontmatter: {
         part: { eq: $part }

@@ -74,7 +74,7 @@ Välilehti <i>response</i> on myös hyödyllinen, se kertoo mitä palvelin palau
 Uusi muistiinpano ei vielä renderöidy ruudulle, sillä emme aseta komponentille <i>App</i> uutta tilaa muistiinpanon luomisen yhteydessä. Viimeistellään sovellus vielä tältä osin:
 
 ```js
-addNote = event => {
+const addNote = event => {
   event.preventDefault()
   const noteObject = {
     content: newNote,
@@ -608,7 +608,7 @@ Kun valemuistiinpanon tärkeyttä yritetään muuttaa, konsoliin tulee virheilmo
 
 Sovelluksen tulisi pystyä käsittelemään tilanne hallitusti. Jos konsoli ei ole auki, ei käyttäjä huomaa mitään muuta kuin sen, että muistiinpanon tärkeys ei vaihdu napin painelusta huolimatta.
 
-Jo [aiemmin](/osa2/palvelimella_olevan_datan_hakeminen#axios-ja-promiset) mainittiin, että promisella voi olla kolme tilaa. Kun HTTP-pyyntö epäonnistuu, menee pyyntöä vastaava promise tilaan <i>rejected</i>. Emme tällä hetkellä käsittele koodissamme promisen epäonnistumista mitenkään.
+Jo [aiemmin](/osa2/palvelimella_olevan_datan_hakeminen#axios-ja-promiset) mainittiin, että promisella voi olla kolme tilaa. Kun axioksella tehty HTTP-pyyntö epäonnistuu, menee pyyntöä vastaava promise tilaan <i>rejected</i>. Emme tällä hetkellä käsittele koodissamme promisen epäonnistumista mitenkään.
 
 Promisen epäonnistuminen [käsitellään](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) antamalla <em>then</em>-metodille parametriksi myös toinen takaisinkutsufunktio, jota kutsutaan promisen epäonnistuessa.
 

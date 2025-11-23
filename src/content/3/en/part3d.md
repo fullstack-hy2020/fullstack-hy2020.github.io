@@ -175,9 +175,7 @@ Generate a new "full stack" version of the application by creating a new product
 
 Push the latest version to Fly.io/Render and verify that everything works there as well.
 
-**NOTE**: you should deploy the BACKEND to the cloud service. If you are using Fly.io the commands should be run in the root directory of the backend (that is, in the same directory where the backend package.json is).
-
-You shall NOT be deploying the frontend directly at any stage of this part. It is just backend that is deployed throughout the whole part, nothing else.
+**NOTE:** You shall NOT be deploying the frontend directly at any stage of this part. Only the backend repository is deployed throughout the whole part. The frontend production build is added to the backend repository, and the backend serves it as described in the section [Serving static files from the backend](/en/part3/deploying_app_to_internet#serving-static-files-from-the-backend).
 
 </div>
 
@@ -208,7 +206,7 @@ The contents of the package.json file will change as follows:
   //...
   "dependencies": {
     "dotenv": "^16.4.7",
-    "express": "^4.21.2",
+    "express": "^5.1.0",
     "mongoose": "^8.11.0"
   },
   "devDependencies": { // highlight-line
@@ -251,7 +249,7 @@ export default [
 ]
 ```
 
-So far, our ESLint configuration file defines the _files_ option with _["**/*.js"]_, which tells ESLint to look at all JavaScript files in our project folder. The _languageOptions_ property specifies options related to language features that ESLint should expect, in which we defined the _sourceType_ option as "commonjs". This indicates that the JavaScript code in our project uses the CommonJS module system, allowing ESLint to parse the code accordingly.  
+So far, our ESLint configuration file defines the _files_ option with _["\*\*/\*.js"]_, which tells ESLint to look at all JavaScript files in our project folder. The _languageOptions_ property specifies options related to language features that ESLint should expect, in which we defined the _sourceType_ option as "commonjs". This indicates that the JavaScript code in our project uses the CommonJS module system, allowing ESLint to parse the code accordingly.  
 
 The _globals_ property specifies global variables that are predefined. The spread operator applied here tells ESLint to include all global variables defined in the _globals.node_ settings such as the _process_. In the case of browser code we would define here _globals.browser_ to allow browser specific global variables like _window_, and _document_.
 
@@ -277,7 +275,7 @@ We've added the _js.configs.recommended_ to the top of the configuration array, 
 Let's continue building the configuration file. Install a [plugin](https://eslint.style/packages/js) that defines a set of code style-related rules:
 
 ```bash
-npm install --save-dev @stylistic/eslint-plugin-js
+npm install --save-dev @stylistic/eslint-plugin
 ```
 
 Import and enable the plugin, and add these four code style rules:
@@ -285,7 +283,7 @@ Import and enable the plugin, and add these four code style rules:
 ```js
 import globals from 'globals'
 import js from '@eslint/js'
-import stylisticJs from '@stylistic/eslint-plugin-js' // highlight-line
+import stylisticJs from '@stylistic/eslint-plugin' // highlight-line
 
 export default [
   {
@@ -305,7 +303,7 @@ export default [
 ]
 ```
 
-The [plugins](https://eslint.org/docs/latest/use/configure/plugins) property provides a way to extend ESLint's functionality by adding custom rules, configurations, and other capabilities that are not available in the core ESLint library. We've installed and enabled the _@stylistic/eslint-plugin-js_, which adds JavaScript stylistic rules for ESLint. In addition, rules for indentation, line breaks, quotes, and semicolons have been added. These four rules are all defined in the [Eslint styles plugin](https://eslint.style/packages/js).
+The [plugins](https://eslint.org/docs/latest/use/configure/plugins) property provides a way to extend ESLint's functionality by adding custom rules, configurations, and other capabilities that are not available in the core ESLint library. We've installed and enabled the _@stylistic/eslint-plugin_, which adds JavaScript stylistic rules for ESLint. In addition, rules for indentation, line breaks, quotes, and semicolons have been added. These four rules are all defined in the [Eslint styles plugin](https://eslint.style/packages/js).
 
 **Note for Windows users:** The linebreak style is set to _unix_ in the style rules. It is recommended to use Unix-style linebreaks (_\n_) regardless of your operating system, as they are compatible with most modern operating systems and facilitate collaboration when multiple people are working on the same files. If you are using Windows-style linebreaks, ESLint will produce the following errors: <i>Expected linebreaks to be 'LF' but found 'CRLF'</i>. In this case, configure Visual Studio Code to use Unix-style linebreaks by following [this guide](https://stackoverflow.com/questions/48692741/how-can-i-make-all-line-endings-eols-in-all-files-in-visual-studio-code-unix).
 
@@ -437,7 +435,7 @@ Disabling the no-console rule will allow us to use console.log statements withou
 ```js
 import globals from 'globals'
 import js from '@eslint/js'
-import stylisticJs from '@stylistic/eslint-plugin-js'
+import stylisticJs from '@stylistic/eslint-plugin'
 
 export default [
   js.configs.recommended,

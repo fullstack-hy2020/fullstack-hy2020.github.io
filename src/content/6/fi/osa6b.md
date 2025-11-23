@@ -12,6 +12,7 @@ Jatketaan muistiinpanosovelluksen yksinkertaistetun [Redux-version](/osa6/flux_a
 Sovelluskehitystä helpottaaksemme laajennetaan reduceria siten, että storelle määritellään alkutila, jossa on pari muistiinpanoa:
 
 ```js
+// highlight-start
 const initialState = [
   {
     content: 'reducer defines how redux store works',
@@ -24,12 +25,14 @@ const initialState = [
     id: 2,
   },
 ]
+//highlight-end
 
-const noteReducer = (state = initialState, action) => {
+const noteReducer = (state = initialState, action) => { // highlight-line
   // ...
 }
 
 // ...
+
 export default noteReducer
 ```
 
@@ -37,12 +40,12 @@ export default noteReducer
 
 Toteutetaan sovellukseen näytettävien muistiinpanojen filtteröinti, jonka avulla näytettäviä muistiinpanoja voidaan rajata. Filtterin toteutus tapahtuu [radiopainikkeiden](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio) avulla:
 
-![Sivun alussa lomake muistiinpanon lisäämiseen (syötekenttä ja nappi add). Tämän jälkeen radiopainikevalinta mitkä muistiinpanot näytetään, vaihtoehdot all, important ja noimportant. Näiden alle renderöidän kaikki muistiinpanot ja niiden yhteyteen teksti important jos muistiinpano merkattu tärkeäksi. ](../../images/6/01e.png)
+![Sivun alussa lomake muistiinpanon lisäämiseen (syötekenttä ja nappi add). Tämän jälkeen radiopainikevalinta mitkä muistiinpanot näytetään, vaihtoehdot all, important ja noimportant. Näiden alle renderöidän kaikki muistiinpanot ja niiden yhteyteen teksti important jos muistiinpano merkattu tärkeäksi. ](../../images/6/01f.png)
 
 Aloitetaan todella suoraviivaisella toteutuksella:
 
 ```js
-import NewNote from './components/NewNote'
+import NoteForm from './components/NoteForm'
 import Notes from './components/Notes'
 
 const App = () => {
@@ -54,15 +57,27 @@ const App = () => {
 
   return (
     <div>
-      <NewNote />
-        //highlight-start
+      <NoteForm />
+      //highlight-start
       <div>
-        all          <input type="radio" name="filter"
-          onChange={() => filterSelected('ALL')} />
-        important    <input type="radio" name="filter"
-          onChange={() => filterSelected('IMPORTANT')} />
-        nonimportant <input type="radio" name="filter"
-          onChange={() => filterSelected('NONIMPORTANT')} />
+        <input
+          type="radio"
+          name="filter"
+          onChange={() => filterSelected('ALL')}
+        />
+        all
+        <input
+          type="radio"
+          name="filter"
+          onChange={() => filterSelected('IMPORTANT')}
+        />
+        important
+        <input
+          type="radio"
+          name="filter"
+          onChange={() => filterSelected('NONIMPORTANT')}
+        />
+        nonimportant
       </div>
       //highlight-end
       <Notes />
@@ -91,7 +106,7 @@ Tällä hetkellähän tilassa on ainoastaan muistiinpanot sisältävä taulukko.
 
 ### Yhdistetyt reducerit
 
-Voisimme periaatteessa muokata jo olemassaolevaa reduceria ottamaan huomioon muuttuneen tilanteen. Parempi ratkaisu on kuitenkin määritellä tässä tilanteessa uusi, filtterin arvosta huolehtiva reduceri:
+Voisimme periaatteessa muokata jo olemassaolevaa reduceria ottamaan huomioon muuttuneen tilanteen. Parempi ratkaisu on kuitenkin määritellä tässä tilanteessa uusi, filtterin arvosta huolehtiva reduceri. Määritellään samalla myös sopiva _action creator_ ‑funktio. Sijoitetaan koodi moduuliin <i>src/reducers/filterReducer.js</i>:
 
 ```js
 const filterReducer = (state = 'ALL', action) => {
@@ -102,6 +117,15 @@ const filterReducer = (state = 'ALL', action) => {
       return state
   }
 }
+
+export const filterChange = filter => {
+  return {
+    type: 'SET_FILTER',
+    payload: filter
+  }
+}
+
+export default filterReducer
 ```
 
 Filtterin arvon asettavat actionit ovat siis muotoa:
@@ -113,54 +137,27 @@ Filtterin arvon asettavat actionit ovat siis muotoa:
 }
 ```
 
-Määritellään samalla myös sopiva _action creator_ ‑funktio. Sijoitetaan koodi moduuliin <i>src/reducers/filterReducer.js</i>:
-
-```js
-const filterReducer = (state = 'ALL', action) => {
-  // ...
-}
-
-export const filterChange = filter => {
-  return {
-    type: 'SET_FILTER',
-    payload: filter,
-  }
-}
-
-export default filterReducer
-```
-
 Saamme nyt muodostettua varsinaisen reducerin yhdistämällä kaksi olemassaolevaa reduceria funktion [combineReducers](https://redux.js.org/api/combinereducers) avulla.
 
-Määritellään yhdistetty reducer tiedostossa <i>main.jsx</i>:
+Määritellään yhdistetty reducer tiedostossa <i>main.jsx</i>. Tiedoston päivitetty sisältö on seuraavanlainen:
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { createStore, combineReducers } from 'redux' // highlight-line
-import { Provider } from 'react-redux' 
+import { Provider } from 'react-redux'
+import { createStore, combineReducers } from 'redux'
+
 import App from './App'
-
+import filterReducer from './reducers/filterReducer'
 import noteReducer from './reducers/noteReducer'
-import filterReducer from './reducers/filterReducer' // highlight-line
 
- // highlight-start
 const reducer = combineReducers({
   notes: noteReducer,
   filter: filterReducer
 })
- // highlight-end
 
 const store = createStore(reducer)
 
 console.log(store.getState())
-
-/*
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
-    <App />
-  </Provider>
-)*/
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
@@ -171,7 +168,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 Koska sovelluksemme hajoaa tässä vaiheessa täysin, komponentin <i>App</i> sijasta renderöidään tyhjä <i>div</i>-elementti.
 
-Konsoliin tulostuu storen tila:
+_console.log_-komennon ansiosta konsoliin tulostuu storen tila:
 
 ![Konsolista selviää että store on olio jolla kentät filter (teksti, arvona "ALL") ja notes (taulukollinen muistiinpanoja).](../../images/6/4e.png)
 
@@ -188,31 +185,47 @@ const reducer = combineReducers({
 
 Näin tehdyn reducerin määrittelemän storen tila on olio, jossa on kaksi kenttää: <i>notes</i> ja <i>filter</i>. Tilan kentän <i>notes</i> arvon määrittelee <i>noteReducer</i>, jonka ei tarvitse välittää mitään tilan muista kentistä. Vastaavasti <i>filter</i> kentän käsittely tapahtuu <i>filterReducer</i>:in avulla.
 
-Ennen muun koodin muutoksia kokeillaan vielä konsolista, miten actionit muuttavat yhdistetyn reducerin muodostamaa staten tilaa. Lisätään seuraavat tiedostoon <i>main.jsx</i>:
+Ennen muun koodin muutoksia kokeillaan vielä konsolista, miten actionit muuttavat yhdistetyn reducerin muodostamaa staten tilaa. Lisätään seuraavat rivit väliaikaisesti tiedostoon <i>main.jsx</i>:
 
 ```js
+// ...
+
+const store = createStore(reducer)
+
+console.log(store.getState())
+
+// highlight-start
 import { createNote } from './reducers/noteReducer'
 import { filterChange } from './reducers/filterReducer'
-//...
+// highlight-end
+
+// highlight-start
 store.subscribe(() => console.log(store.getState()))
 store.dispatch(filterChange('IMPORTANT'))
 store.dispatch(createNote('combineReducers forms one reducer from many simple reducers'))
+// highlight-end
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <Provider store={store}>
+    <div />
+  </Provider>
+)
 ```
 
 Kun simuloimme näin filtterin tilan muutosta ja muistiinpanon luomista, konsoliin tulostuu storen tila jokaisen muutoksen jälkeen:
 
 ![Storen filter-arvoksi muuttuu ensin IMPORTANT, tämän jäleen storen notesiin tulee uusi muistiinpano](../../images/6/5e.png)
 
-Jo tässä vaiheessa kannattaa laittaa mieleen eräs tärkeä detalji. Lisätään <i>molempien reducerien alkuun</i> konsoliin tulostus:
+Jo tässä vaiheessa kannattaa laittaa mieleen eräs tärkeä detalji. Jos <i>molempien reducerien alkuun</i> lisätään konsoliin tulostus
 
 ```js
 const filterReducer = (state = 'ALL', action) => {
-  console.log('ACTION: ', action)
+  console.log('ACTION: ', action) // highlight-line
   // ...
 }
 ```
 
-Nyt konsolin perusteella näyttää siltä, että jokainen action kahdentuu:
+niin nyt konsolin perusteella näyttää siltä, että jokainen action kahdentuu:
 
 ![Konsolin tulostus paljastaa että sekä noteReducer että filterReducer käsittelevät jokaisen actionin](../../images/6/6.png)
 
@@ -220,14 +233,30 @@ Onko koodissa bugi? Ei. Yhdistetty reducer toimii siten, että jokainen <i>actio
 
 ### Filtteröinnin viimeistely
 
-Viimeistellään nyt sovellus käyttämään yhdistettyä reduceria, eli palautetaan tiedostossa <i>main.jsx</i> suoritettava renderöinti seuravaan muotoon:
+Viimeistellään nyt sovellus käyttämään yhdistettyä reduceria. Poistetaan tiedostosta <i>main.jsx</i> ylimääräiset kokeilut ja palautetaan _App_ renderöitäväksi komponentiksi. Tiedoston päivitetty sisältö on seuraava:
 
 ```js
+import ReactDOM from 'react-dom/client'
+import { Provider } from 'react-redux'
+import { createStore, combineReducers } from 'redux'
+
+import App from './App'
+import filterReducer from './reducers/filterReducer'
+import noteReducer from './reducers/noteReducer'
+
+const reducer = combineReducers({
+  notes: noteReducer,
+  filter: filterReducer
+})
+
+const store = createStore(reducer)
+
+console.log(store.getState())
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <App />
-  </Provider>,
-  
+  </Provider>
 )
 ```
 
@@ -270,35 +299,35 @@ Nyt siis palautetaan tilasta ainoastaan sen kenttä <i>notes</i>:
 const notes = useSelector(state => state.notes)
 ```
 
-Eriytetään näkyvyyden säätelyfiltteri omaksi, tiedostoon <i>src/components/VisibilityFilter.js</i> sijoitettavaksi komponentiksi:
+Eriytetään näkyvyyden säätelyfiltteri omaksi, tiedostoon <i>src/components/VisibilityFilter.jsx</i> sijoitettavaksi komponentiksi:
 
 ```js
-import { filterChange } from '../reducers/filterReducer'
 import { useDispatch } from 'react-redux'
+import { filterChange } from '../reducers/filterReducer'
 
-const VisibilityFilter = (props) => {
+const VisibilityFilter = () => {
   const dispatch = useDispatch()
 
   return (
     <div>
-      all    
-      <input 
-        type="radio" 
-        name="filter" 
+      <input
+        type="radio"
+        name="filter"
         onChange={() => dispatch(filterChange('ALL'))}
       />
-      important   
+      all
       <input
         type="radio"
         name="filter"
         onChange={() => dispatch(filterChange('IMPORTANT'))}
       />
-      nonimportant 
+      important
       <input
         type="radio"
         name="filter"
         onChange={() => dispatch(filterChange('NONIMPORTANT'))}
       />
+      nonimportant
     </div>
   )
 }
@@ -311,14 +340,14 @@ Toteutus on suoraviivainen - radiopainikkeen klikkaaminen muuttaa storen kentän
 Komponentti <i>App</i> yksinkertaisuu nyt seuraavasti:
 
 ```js
+import NoteForm from './components/NoteForm'
 import Notes from './components/Notes'
-import NewNote from './components/NewNote'
 import VisibilityFilter from './components/VisibilityFilter'
 
 const App = () => {
   return (
     <div>
-      <NewNote />
+      <NoteForm />
       <VisibilityFilter />
       <Notes />
     </div>
@@ -335,10 +364,10 @@ const Notes = () => {
   const dispatch = useDispatch()
   // highlight-start
   const notes = useSelector(state => {
-    if ( state.filter === 'ALL' ) {
+    if (state.filter === 'ALL') {
       return state.notes
     }
-    return state.filter  === 'IMPORTANT' 
+    return state.filter === 'IMPORTANT'
       ? state.notes.filter(note => note.important)
       : state.notes.filter(note => !note.important)
   })
@@ -346,17 +375,16 @@ const Notes = () => {
 
   return (
     <ul>
-      {notes.map(note =>
+      {notes.map(note => (
         <Note
           key={note.id}
           note={note}
-          handleClick={() => 
-            dispatch(toggleImportanceOf(note.id))
-          }
+          handleClick={() => dispatch(toggleImportanceOf(note.id))}
         />
-      )}
+      ))}
     </ul>
   )
+}
 ```
 
 Muutos kohdistuu siis ainoastaan selektorifunktioon, joka oli aiemmin muotoa
@@ -390,7 +418,7 @@ Redux-sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https:
 
 Jatketaan tehtävässä 6.3 aloitetun Reduxia käyttävän anekdoottisovelluksen parissa.
 
-#### 6.9 paremmat anekdootit, step7
+#### 6.9 anekdootit, step7
 
 Toteuta sovellukseen näytettävien anekdoottien filtteröiminen:
 
@@ -423,7 +451,7 @@ export default Filter
 
 <div class="content">
 
-### Redux Toolkit
+### Redux Toolkit ja storen konfiguraation refaktorointi
 
 Kuten olemme jo tähän asti huomanneet, Reduxin konfigurointi ja tilanhallinnan toteutus vaativat melko paljon vaivannäköä. Tämä ilmenee esimerkiksi reducereiden ja action creatorien koodista, jossa on jonkin verran toisteisuutta. [Redux Toolkit](https://redux-toolkit.js.org/) on kirjasto, joka soveltuu näiden yleisten Reduxin käyttöön liittyvien ongelmien ratkaisemiseen. Kirjaston käyttö mm. yksinkertaistaa huomattavasti Redux-storen luontia ja tarjoaa suuren määrän tilanhallintaa helpottavia työkaluja.
 
@@ -436,14 +464,13 @@ npm install @reduxjs/toolkit
 Avataan sen jälkeen <i>main.jsx</i>-tiedosto, jossa nykyinen Redux-store luodaan. Käytetään storen luonnissa Reduxin <em>createStore</em>-funktion sijaan Redux Toolkitin [configureStore](https://redux-toolkit.js.org/api/configureStore)-funktiota:
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit' // highlight-line
-import App from './App'
 
-import noteReducer from './reducers/noteReducer'
+import App from './App'
 import filterReducer from './reducers/filterReducer'
+import noteReducer from './reducers/noteReducer'
 
  // highlight-start
 const store = configureStore({
@@ -459,12 +486,47 @@ console.log(store.getState())
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <App />
-  </Provider>,
-  document.getElementById('root')
+  </Provider>
 )
 ```
 
 Pääsimme eroon jo muutamasta koodirivistä, kun reducerin muodostamiseen ei enää tarvita <em>combineReducers</em>-funktiota. Tulemme pian näkemään, että <em>configureStore</em>-funktion käytöstä on myös monia muita hyötyjä, kuten kehitystyökalujen ja usein käytettyjen kirjastojen vaivaton käyttöönotto ilman erillistä konfiguraatiota.
+
+Siistitään vielä <i>main.jsx</i>-tiedostoa siirtämällä Redux-storen luontiin liittyvä koodi erilliseen tiedostoon. Luodaan uusi tiedosto <i>src/store.js</i>:
+
+```js
+import { configureStore } from '@reduxjs/toolkit'
+
+import noteReducer from './reducers/noteReducer'
+import filterReducer from './reducers/filterReducer'
+
+const store = configureStore({
+  reducer: {
+    notes: noteReducer,
+    filter: filterReducer
+  }
+})
+
+export default store
+```
+
+Muutosten jälkeen <i>main.jsx</i>-tiedosto näyttää seuraavalta:
+
+```js
+import ReactDOM from 'react-dom/client'
+import { Provider } from 'react-redux'
+
+import App from './App'
+import store from './store'
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+)
+```
+
+### Redux Toolkit ja reducereiden refaktorointi
 
 Siirrytään seuraavaksi reducereiden refaktorointiin, jossa Redux Toolkitin edut tulevat parhaiten esiin. Redux Toolkitin avulla reducerin ja siihen liittyvät action creatorit voi luoda kätevästi [createSlice](https://redux-toolkit.js.org/api/createSlice)-funktion avulla. Voimme refaktoroida <i>reducers/noteReducer.js</i>-tiedostossa olevan reducerin ja action creatorit <em>createSlice</em>-funktion avulla seuraavasti:
 
@@ -518,6 +580,11 @@ const noteSlice = createSlice({
   },
 })
 // highlight-end
+
+// highlight-start
+export const { createNote, toggleImportanceOf } = noteSlice.actions
+export default noteSlice.reducer
+// highlight-end
 ```
 
 <em>createSlice</em>-funktion <em>name</em>-parametri määrittelee etuliitteen, jota käytetään actioneiden type-arvoissa. Esimerkiksi myöhemmin määritelty <em>createNote</em>-action saa type-arvon <em>notes/createNote</em>. Parametrin arvona on hyvä käyttää muiden reducereiden kesken uniikkia nimeä, jotta sovelluksen actioneiden type-arvoissa ei tapahtuisi odottamattomia yhteentörmäyksiä. Parametri <em>initialState</em> määrittelee reducerin alustavan tilan. Parametri <em>reducers</em> määrittelee itse reducerin objektina, jonka funktiot käsittelevät tietyn actionin aiheuttamat tilamuutokset. Huomaa, että funktioissa <em>action.payload</em> sisältää action creatorin kutsussa annetun parametrin:
@@ -555,11 +622,12 @@ Huomaa, että tilaa voi muuttaa myös "mutatoimatta" kuten esimerkiksi <em>toggl
 Funktio <em>createSlice</em> palauttaa objektin, joka sisältää sekä reducerin että <em>reducers</em>-parametrin actioneiden mukaiset action creatorit. Reducer on palautetussa objektissa <em>noteSlice.reducer</em>-kentässä kun taas action creatorit ovat <em>noteSlice.actions</em>-kentässä. Voimme muodostaa tiedoston exportit kätevästi:
 
 ```js
-const noteSlice = createSlice(/* ... */)
+const noteSlice = createSlice({
+  // ...
+})
 
 // highlight-start
 export const { createNote, toggleImportanceOf } = noteSlice.actions
-
 export default noteSlice.reducer
 // highlight-end
 ```
@@ -570,66 +638,70 @@ Importit toimivat muissa tiedostoissa tavalliseen tapaan:
 import noteReducer, { createNote, toggleImportanceOf } from './reducers/noteReducer'
 ```
 
-Joudumme hieman muuttamaan testiämme Redux Toolkitin nimeämiskäytäntöjen takia:
+Joudumme hieman muuttamaan testejämme Redux Toolkitin nimeämiskäytäntöjen takia:
 
 ```js 
-import noteReducer from './noteReducer'
 import deepFreeze from 'deep-freeze'
+import { describe, expect, test } from 'vitest'
+import noteReducer from './noteReducer'
 
 describe('noteReducer', () => {
-  test('returns new state with action notes/createNote', () => {
+  test('returns new state with action notes/createNote', () => { // highlight-line
     const state = []
     const action = {
       type: 'notes/createNote', // highlight-line
-      payload: 'the app state is in redux store', // highlight-line
+      payload: 'the app state is in redux store' // highlight-line
     }
 
     deepFreeze(state)
     const newState = noteReducer(state, action)
 
     expect(newState).toHaveLength(1)
-    expect(newState.map(s => s.content)).toContainEqual(action.payload) // highlight-line
+    expect(newState.map(note => note.content)).toContainEqual(action.payload) // highlight-line
   })
+})
 
-  test('returns new state with action notes/toggleImportanceOf', () => {
-    const state = [
-      {
-        content: 'the app state is in redux store',
-        important: true,
-        id: 1
-      },
-      {
-        content: 'state changes are made with actions',
-        important: false,
-        id: 2
-      }]
-  
-    const action = {
-      type: 'notes/toggleImportanceOf', // highlight-line
-      payload: 2
-    }
-  
-    deepFreeze(state)
-    const newState = noteReducer(state, action)
-  
-    expect(newState).toHaveLength(2)
-  
-    expect(newState).toContainEqual(state[0])
-  
-    expect(newState).toContainEqual({
-      content: 'state changes are made with actions',
+test('returns new state with action notes/toggleImportanceOf', () => { // highlight-line
+  const state = [
+    {
+      content: 'the app state is in redux store',
       important: true,
+      id: 1
+    },
+    {
+      content: 'state changes are made with actions',
+      important: false,
       id: 2
-    })
+    }
+  ]
+
+  const action = {
+    type: 'notes/toggleImportanceOf', // highlight-line
+    payload: 2 // highlight-line
+  }
+
+  deepFreeze(state)
+  const newState = noteReducer(state, action)
+
+  expect(newState).toHaveLength(2)
+
+  expect(newState).toContainEqual(state[0])
+
+  expect(newState).toContainEqual({
+    content: 'state changes are made with actions',
+    important: true,
+    id: 2
   })
 })
 ```
+
+Sovelluksen tämänhetkinen koodi on [GitHubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3) branchissa </i>part6-3</i>.
 
 ### Redux Toolkit ja console.log
 
 Kuten olemme oppineet, on _console.log_ äärimmäisen voimakas työkalu, se pelastaa meidät yleensä aina pulasta.
 
-Yritetään tulostaa Redux storen tilan konsoliin kesken funktiolla _createSlice_ luodun reducerin: 
+Yritetään kokeeksi tulostaa <i>Redux</i>-storen tila konsoliin kesken funktiolla _createSlice_ luodun reducerin: 
 
 ```js
 const noteSlice = createSlice({
@@ -657,19 +729,25 @@ const noteSlice = createSlice({
 })
 ```
 
-Konsoliin tulostuu seuraava
+Kun nyt muistiinpanon tärkeyttä muuttaa klikkaamalla sen nimeä, konsoliin tulostuu seuraava
 
 ![](../../images/6/40new.png)
 
 Tulostus on mielenkiintoinen mutta ei kovin hyödyllinen. Kyse tässä jo edellä mainitusta Redux toolkitin käyttämästä Immer-kirjastosta, mitä käytetään nyt sisäisesti storen tilan tallentamiseen. 
 
-Tilan saa tulostettua ihmisluettavassa muodossa, esim. muuttamalla se merkkijonoksi ja takaisin JavaScript-olioksi seuraavasti: 
+Tilan voi muuntaa ihmisluettavaan muotoon käyttämällä immer-kirjaston [current](https://redux-toolkit.js.org/api/other-exports#current)-funktiota. Funktion voi importata käyttöön komennolla:
 
 ```js
-console.log(JSON.parse(JSON.stringify(state))) // highlight-line
+import { current } from '@reduxjs/toolkit'
 ```
 
-Konsolitulostus on nyt ihmisluettava
+ja tämän jälkeen tilan voi tulostaa konsoliin komennolla:
+
+```js
+console.log(current(state))
+```
+
+Konsolitulostus on nyt ihmisluettava:
 
 ![](../../images/6/41new.png)
 
@@ -688,8 +766,6 @@ Kunkin actionin storen tilaan aiheuttamaa muutosta on helppo tarkastella:
 Konsolin avulla on myös mahdollista dispatchata actioneja storeen:
 
 ![Mahdollisuus actionien dispatchaamiseen avautuu alalaidan valinnoista](../../images/6/44new.png)
-
-Sovelluksen tämänhetkinen koodi on [GitHubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3) branchissa </i>part6-3</i>.
 
 </div>
 
@@ -718,8 +794,10 @@ const Notification = () => {
   const style = {
     border: 'solid',
     padding: 10,
-    borderWidth: 1
+    borderWidth: 1,
+    marginBottom: 10
   }
+
   return (
     <div style={style}>
       render here notification...
@@ -730,35 +808,15 @@ const Notification = () => {
 export default Notification
 ```
 
-Laajenna komponenttia siten, että se renderöi Redux-storeen talletetun viestin, eli renderöitävä komponentti muuttuu muotoon:
-
-```js
-import { useSelector } from 'react-redux' // highlight-line
-
-const Notification = () => {
-  const notification = useSelector(/* something here */) // highlight-line
-  const style = {
-    border: 'solid',
-    padding: 10,
-    borderWidth: 1
-  }
-  return (
-    <div style={style}>
-      {notification} // highlight-line
-    </div>
-  )
-}
-```
-
-Joudut siis muuttamaan ja laajentamaan sovelluksen olemassaolevaa reduceria. Tee toiminnallisuutta varten oma reduceri. Hyödynnä jälleen Redux Toolkitin <em>createSlice</em>-funktiota. Siirry käyttämään sovelluksessa yhdistettyä reduceria tämän osan materiaalin tapaan.
+Laajenna komponenttia siten, että se renderöi Redux-storeen talletetun viestin. Tee toiminnallisuutta varten oma reduceri ja hyödynnä jälleen Redux Toolkitin <em>createSlice</em>-funktiota.
 
 Tässä vaiheessa sovelluksen ei vielä tarvitse osata käyttää <i>Notification</i>-komponenttia järkevällä tavalla, vaan riittää että sovellus toimii ja näyttää <i>notificationReducerin</i> alkuarvoksi asettaman viestin.
 
-#### 6.13 paremmat anekdootit, step11
+#### 6.13 anekdootit, step11
 
 Laajenna sovellusta siten, että se näyttää <i>Notification</i>-komponentin avulla viiden sekunnin ajan, kun sovelluksessa äänestetään tai luodaan uusia anekdootteja:
 
-![Äänestyksen yhteydessä näytetään notifikaatio: you voted 'if it hurts, do it more often'](../../images/6/8ea.png)
+![Äänestyksen yhteydessä näytetään notifikaatio: you voted 'if it hurts, do it more often'](../../images/6/8eb.png)
 
 Notifikaation asettamista ja poistamista varten kannattaa toteuttaa [action creatorit](https://redux-toolkit.js.org/api/createSlice#reducers).
 

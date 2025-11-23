@@ -275,6 +275,9 @@ Kurssilla ei ole enää vuosittaisia versiota. Kurssi on siis käynnissä koko a
 Muutoksista huolimatta <i>kaikki jo tehdyt palautukset säilyvät voimassa</i>, eli voit jatkaa kurssia päivityksistä huolimatta normaaliin tapaan.
 
 Viimeaikaisia isompia muutoksia
+- Osa 6 (12.10.2025): Jest korvattu Vitestillä. Axios korvattu Fetch API:lla.
+- Osa 5 (21.8.2025): React päivitetty versioon 19. Proptypes ja forwardRef poistuneet käytöstä. Eslint-konfiguraatiot päivitetty
+- Osa 4 (13.8.2025): Express päivitetty versioon 5 ja kirjasto express-async-errors poistettu osasta 4b
 - Osa 9 (28.8.2024): Zod-kirjasto datan validointiin
 - Osa 3 (20.6.2024): ESLint-konfiguraatiot päivitetty
 - Osa 12 (21.3.2024): Create React app korvattu Vitellä
@@ -324,7 +327,7 @@ Asenna myös joku järkevä web-devausta tukeva tekstieditori. Enemmän kuin suo
 
 Älä koodaa nanolla, Notepadilla tai Geditillä. Myöskään NetBeans ei ole omimmillaan web-devauksessa, ja se on myös turhan raskas verrattuna esim. Visual Studio Codeen.
 
-Asenna koneeseesi heti myös [Node.js](https://nodejs.org/en/). Materiaalia ollaan päivittämässä Noden versioon v22. Osat 0-4 on tehty käyttäen Noden versiota 22.3.0, osa 10 käyttäen versiota 20.11.0 ja loput osat käyttäen versiota 18.13.0. Käytä aina vähintään yhtä tuoretta Node-versiota. Asennusohjeita on [Node.js:n sivuilla](https://nodejs.org/en/download/package-manager/).
+Asenna koneeseesi heti myös [Node.js](https://nodejs.org/en/). Materiaalia ollaan päivittämässä Noden versioon v22. Osat 0-6 on tehty käyttäen Noden versiota 22, osa 10 käyttäen versiota 20.11.0 ja loput osat käyttäen versiota 18.13.0. Käytä aina vähintään yhtä tuoretta Node-versiota. Asennusohjeita on [Node.js:n sivuilla](https://nodejs.org/en/download/package-manager/).
 
 Noden myötä koneelle asentuu myös [npm](https://www.npmjs.com/get-npm) (alunperin lyhennelmä <i>Node Package Manager</i> ‑nimelle), jota tulemme tarvitsemaan kurssin aikana aktiivisesti. Tuoreen Noden kera asentuu myös [npx](https://www.npmjs.com/package/npx), jota tarvitaan myös muutaman kerran.
 

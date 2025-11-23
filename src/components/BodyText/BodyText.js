@@ -45,7 +45,7 @@ export const BodyText = ({
         <p className={`body-text__content ${classes.join(' ')}`}>{text}</p>
       ) : (
         text &&
-        text.map(p => (
+        text.map((p) => (
           <div key={p} className={`body-text__content ${classes.join(' ')}`}>
             {Parser(p)}
           </div>

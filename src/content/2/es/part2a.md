@@ -625,7 +625,7 @@ Define un componente responsable de formatear un solo curso llamado <i>Course</i
 
 La estructura de componentes de la aplicación puede ser, por ejemplo, la siguiente:
 
-<pre>
+```
 App
   Course
     Header
@@ -633,7 +633,7 @@ App
       Part
       Part
       ...
-</pre>
+```
 
 Por lo tanto, el componente <i>Course</i> contiene los componentes definidos en la parte anterior, que son responsables de renderizar el nombre del curso y sus partes.
 

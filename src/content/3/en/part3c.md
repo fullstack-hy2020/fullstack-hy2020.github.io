@@ -137,7 +137,7 @@ const url = `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/?ret
 
 mongoose.set('strictQuery',false)
 
-mongoose.connect(url)
+mongoose.connect(url, { family: 4 })
 
 const noteSchema = new mongoose.Schema({
   content: String,
@@ -159,7 +159,15 @@ note.save().then(result => {
 
 **NB:** Depending on which region you selected when building your cluster, the <i>MongoDB URI</i> may be different from the example provided above. You should verify and use the correct URI that was generated from MongoDB Atlas.
 
-The code also assumes that it will be passed the password from the credentials we created in MongoDB Atlas, as a command line parameter. We can access the command line parameter like this:
+The connection to the database is established with the command:
+
+```js
+mongoose.connect(url, { family: 4 })
+```
+
+The method takes the database URL as the first argument and an object that defines the required settings as the second argument. MongoDB Atlas supports only IPv4 addresses, so with the object _{ family: 4 }_ we specify that the connection should always use IPv4.
+
+The practice application assumes that it will be passed the password from the credentials we created in MongoDB Atlas, as a command line parameter. We can access the command line parameter like this:
 
 ```js
 const password = process.argv[2]
@@ -309,12 +317,12 @@ node mongo.js yourpassword
 
 Then the program should display all of the entries in the phonebook:
 
-<pre>
+```
 phonebook:
 Anna 040-1234556
 Arto Vihavainen 045-1232456
 Ada Lovelace 040-1231236
-</pre>
+```
 
 You can get the command-line parameters from the [process.argv](https://nodejs.org/docs/latest-v18.x/api/process.html#process_process_argv) variable.
 
@@ -363,7 +371,7 @@ const password = process.argv[2]
 const url = `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0`
 
 mongoose.set('strictQuery',false)
-mongoose.connect(url)
+mongoose.connect(url, { family: 4 })
 
 const noteSchema = new mongoose.Schema({
   content: String,
@@ -429,7 +437,7 @@ mongoose.set('strictQuery', false)
 const url = process.env.MONGODB_URI // highlight-line
 
 console.log('connecting to', url)
-mongoose.connect(url)
+mongoose.connect(url, { family: 4 })
 // highlight-start
   .then(result => {
     console.log('connected to MongoDB')
@@ -472,7 +480,7 @@ We will soon learn a more sophisticated way to define environment variables.
 The way that the connection is made has changed slightly:
 
 ```js
-mongoose.connect(url)
+mongoose.connect(url, { family: 4 })
   .then(result => {
     console.log('connected to MongoDB')
   })
@@ -695,7 +703,7 @@ On top of the non-existing note, there's one more error situation that needs to 
 
 If we make the following request, we will get the error message shown below:
 
-<pre>
+```
 Method: GET
 Path:   /api/notes/someInvalidId
 Body:   {}
@@ -704,7 +712,7 @@ Body:   {}
     at CastError (/Users/mluukkai/opetus/_fullstack/osa3-muisiinpanot/node_modules/mongoose/lib/error/cast.js:27:11)
     at ObjectId.cast (/Users/mluukkai/opetus/_fullstack/osa3-muisiinpanot/node_modules/mongoose/lib/schema/objectid.js:158:13)
     ...
-</pre>
+```
 
 Given a malformed id as an argument, the <em>findById</em> method will throw an error causing the returned promise to be rejected. This will cause the callback function defined in the <em>catch</em> block to be called.
 
@@ -923,6 +931,8 @@ One notable point is that the code now has nested promises, meaning that within 
 
 Usually, this is not recommended because it can make the code difficult to read. In this case, however, the solution works because it ensures that the _.then_ block following the _save()_ method is only executed if a note with the given id is found in the database and the _save()_ method is called. In the fourth part of the course, we will explore the async/await syntax, which offers an easier and clearer way to handle such situations.
 
+Mongoose also provides the method [findByIdAndUpdate](https://mongoosejs.com/docs/api/model.html#Model.findByIdAndUpdate()), which can be used to find a document by its <i>id</i> and update it with a single method call. However, this approach does not fully suit our needs, because later in this part we define certain requirements for the data stored in the database, and <i>findByIdAndUpdate</i> does not fully support Mongoose's validations. Mongoose's [documentation](https://mongoosejs.com/docs/documents.html#updating-using-queries) also notes that the <i>save()</i> method is generally the correct choice for updating a document, as it provides full validation.
+
 After testing the backend directly with Postman or the VS Code REST client, we can verify that it seems to work. The frontend also appears to work with the backend using the database.
 
 You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5).
@@ -953,7 +963,7 @@ Verify that the frontend works after making your changes.
 
 #### 3.18*: Phonebook database step 6
 
-Also update the handling of the <i>api/persons/:id</i> and <i>info</i> routes to use the database, and verify that they work directly with the browser, Postman, or VS Code REST client.
+Also update the handling of the HTTP GET <i>api/persons/:id</i> and <i>info</i> routes to use the database, and verify that they work directly with the browser, Postman, or VS Code REST client.
 
 Inspecting an individual phonebook entry from the browser should look like this:
 

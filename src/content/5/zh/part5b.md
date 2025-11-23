@@ -457,9 +457,9 @@ const App = () => {
  我们还对<i>Togglable</i>组件做了如下修改。
 
 ```js
-import { useState, forwardRef, useImperativeHandle } from 'react' // highlight-line
+import { useState, useImperativeHandle } from 'react' // highlight-line
 
-const Togglable = forwardRef((props, ref) => { // highlight-line
+const Togglable = (props) => { // highlight-line
   const [visible, setVisible] = useState(false)
 
   const hideWhenVisible = { display: visible ? 'none' : '' }
@@ -470,10 +470,8 @@ const Togglable = forwardRef((props, ref) => { // highlight-line
   }
 
 // highlight-start
-  useImperativeHandle(ref, () => {
-    return {
-      toggleVisibility
-    }
+  useImperativeHandle(props.ref, () => {
+    return { toggleVisibility }
   })
 // highlight-end
 
@@ -488,14 +486,10 @@ const Togglable = forwardRef((props, ref) => { // highlight-line
       </div>
     </div>
   )
-})  // highlight-line
+}
 
 export default Togglable
 ```
-
-
-<!-- The function that creates the component is wrapped inside of a [forwardRef](https://reactjs.org/docs/react-api.html#reactforwardref) function call. This way the component can access the ref that is assigned to it.-->
- 创建该组件的函数被包裹在一个[forwardRef](https://reactjs.org/docs/react-api.html#reactforwardref)函数调用中。这样，组件就可以访问分配给它的Ref。
 
 <!-- The component uses the [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) hook to make its <i>toggleVisibility</i> function available outside of the component.-->
  该组件使用[useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle)钩子来使它的<i>toggleVisibility</i>函数在组件之外可用。
@@ -592,8 +586,8 @@ const Togglable = () => ...
 
 ![](../../images/5/13be.png)
 
-<!-- The form closes when a new blog is created.-->
-当一个新的博客被创建时，该表单就会关闭。
+<!-- The form hides again after a new blog is created or the <i>cancel</i> button is pressed.-->
+当一个新的博客被创建或点击取消按钮后时，该表单就会关闭。
 
 #### 5.6 Blog list frontend, step6
 
@@ -725,209 +719,84 @@ const Blog = ({ blog }) => {
 
 <div class="content">
 
-### PropTypes
-
-<!-- The <i>Togglable</i> component assumes that it is given the text for the button via the <i>buttonLabel</i> prop. If we forget to define it to the component:-->
- <i>Togglable</i>组件假定它通过<i>buttonLabel</i>prop得到了按钮的文本。如果我们忘记向组件定义它。
-
-```js
-<Togglable> buttonLabel forgotten... </Togglable>
-```
-
-<!-- The application works, but the browser renders a button that has no label text.-->
- 应用可以工作，但浏览器显示的按钮没有标签文本。
-
-<!-- We would like to enforce that when the <i>Togglable</i> component is used, the button label text prop must be given a value.-->
- 我们希望强制规定，当使用<i>Togglable</i>组件时，必须给按钮标签文本prop一个值。
-
-<!-- The expected and required props of a component can be defined with the [prop-types](https://github.com/facebook/prop-types) package. Let's install the package:-->
- 组件的预期和要求的prop可以用[prop-types](https://github.com/facebook/prop-types)包来定义。让我们安装这个包。
-
-```shell
-npm install prop-types
-```
-
-<!-- We can define the <i>buttonLabel</i> prop as a mandatory or <i>required</i> string-type prop as shown below:-->
- 我们可以把<i>buttonLabel</i>prop定义为强制或<i>required</i>字符串型prop，如下所示。
-
-```js
-import PropTypes from 'prop-types'
-
-const Togglable = React.forwardRef((props, ref) => {
-  // ..
-})
-
-Togglable.propTypes = {
-  buttonLabel: PropTypes.string.isRequired
-}
-```
-
-<!-- The console will display the following error message if the prop is left undefined:-->
- 如果该prop未被定义，控制台将显示以下错误信息。
-
-![](../../images/5/15.png)
-
-
-<!-- The application still works and nothing forces us to define props despite the PropTypes definitions. Mind you, it is extremely unprofessional to leave <i>any</i> red output to the browser console.-->
- 尽管有PropTypes的定义，应用仍然可以工作，没有任何东西强迫我们定义prop。请注意，给浏览器控制台留下<i>任何</i>红色输出是非常不专业的。
-
-<!-- Let's also define PropTypes to the <i>LoginForm</i> component:-->
- 我们也给<i>LoginForm</i>组件定义PropTypes。
-
-```js
-import PropTypes from 'prop-types'
-
-const LoginForm = ({
-   handleSubmit,
-   handleUsernameChange,
-   handlePasswordChange,
-   username,
-   password
-  }) => {
-    // ...
-  }
-
-LoginForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-  handleUsernameChange: PropTypes.func.isRequired,
-  handlePasswordChange: PropTypes.func.isRequired,
-  username: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired
-}
-```
-
-<!-- If the type of a passed prop is wrong, e.g. if we try to define the <i>handleSubmit</i> prop as a string, then this will result in the following warning:-->
- 如果传递的prop的类型是错误的，例如，如果我们试图将<i>handleSubmit</i>prop定义为字符串，那么这将导致以下警告。
-
-![](../../images/5/16.png)
-
 ### ESlint
 
 <!-- In part 3 we configured the [ESlint](/en/part3/validation_and_es_lint#lint) code style tool to the backend. Let's take ESlint to use in the frontend as well.-->
  在第三章节，我们将[ESlint](/zh/part3/es_lint与代码检查#lint)代码风格工具配置到后端。让我们把ESlint也用在前端。
 
-<!-- Vite has installed ESlint to the project by default, so all that's left for us to do is define our desired configuration in the <i>.eslintrc.cjs</i> file. -->
-Vite 默认将 ESlint 安装到项目中，所以我们剩下要做的就是在 .eslintrc.cjs 文件中定义我们想要的配置。
+<!-- Vite has installed ESlint to the project by default, so all that's left for us to do is define our desired configuration in the <i>eslint.config.js</i> file. -->
+Vite 默认将 ESlint 安装到项目中，所以我们剩下要做的就是在 <i>eslint.config.js</i> 文件中定义我们想要的配置。
 
-<!-- Let's create a <i>.eslintrc.cjs</i> file with the following contents: -->
-让我们创建一个包含以下内容的 .eslintrc.cjs 文件：
-```bash
-npm install --save-dev eslint-plugin-jest
-```
-
-<!-- Let's create a <i>.eslintrc.js</i> file with the following contents:-->
- 让我们创建一个<i>.eslintrc.js</i>文件，内容如下。
+<!-- Let's create a <i>eslint.config.js</i> file with the following contents: -->
+让我们创建一个包含以下内容的 <i>eslint.config.js</i> 文件：
 
 ```js
-module.exports = {
-  root: true,
-  env: {
-    browser: true,
-    es2020: true,
-  },
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:react/jsx-runtime',
-    'plugin:react-hooks/recommended',
-  ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
-  parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
-  settings: { react: { version: '18.2' } },
-  plugins: ['react-refresh'],
-  rules: {
-    "indent": [
-        "error",
-        2  
-    ],
-    "linebreak-style": [
-        "error",
-        "unix"
-    ],
-    "quotes": [
-        "error",
-        "single"
-    ],
-    "semi": [
-        "error",
-        "never"
-    ],
-    "eqeqeq": "error",
-    "no-trailing-spaces": "error",
-    "object-curly-spacing": [
-        "error", "always"
-    ],
-    "arrow-spacing": [
-        "error", { "before": true, "after": true }
-    ],
-    "no-console": 0,
-    "react/react-in-jsx-scope": "off",
-    "react/prop-types": 0,
-    "no-unused-vars": 0    
-  },
-}
-```
+import js from '@eslint/js'
+import globals from 'globals'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
 
-<!-- NOTE: If you are using Visual Studio Code together with ESLint plugin, you might need to add additional workspace setting for it to work. If you are seeing ```Failed to load plugin react: Cannot find module 'eslint-plugin-react'``` additional configuration is needed. Adding the line ```"eslint.workingDirectories": [{ "mode": "auto" }]``` to settings.json in the workspace seems to work. See [here](https://github.com/microsoft/vscode-eslint/issues/880#issuecomment-578052807) for more information.-->
- 注意：如果你将Visual Studio Code与ESLint插件一起使用，你可能需要添加额外的工作区设置，以便它能够工作。如果你看到````加载插件reaction失败。无法找到模块"eslint-plugin-react"````需要额外的配置。添加一行 ```"eslint.workingDirectories":[{ "mode": "auto" }]````到工作区的settings.json中，似乎可以工作。更多信息见[这里](https://github.com/microsoft/vscode-eslint/issues/880#issuecomment-578052807)。
-
-<!-- Let's create [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) file with the following contents to the repository root-->
- 让我们创建[.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories)文件，在版本库根目录中加入以下内容
-
-```bash
-node_modules
-dist
-.eslintrc.cjs
-vite.config.js
-```
-
-<!-- Now the directories <em>build</em> and <em>node_modules</em> will be skipped when linting.-->
- 现在目录<em>build</em>和<em>node_modules</em>将在检查时被跳过。
-
-<!-- Let us also create a npm script to run the lint:-->
- 让我们也创建一个npm脚本来运行lint。
-
-```js
-{
-  // ...
+export default [
+  { ignores: ['dist'] },
   {
-    "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "server": "json-server -p3001 db.json",
-    "eslint": "eslint ." // highlight-line
-  },
-  // ...
-}
+    files: ['**/*.{js,jsx}'],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        ecmaFeatures: { jsx: true },
+        sourceType: 'module'
+      }
+    },
+    plugins: {
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh
+    },
+    rules: {
+      ...js.configs.recommended.rules,
+      ...reactHooks.configs.recommended.rules,
+      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true }
+      // highlight-start
+      ],
+      indent: ['error', 2],
+      'linebreak-style': ['error', 'unix'],
+      quotes: ['error', 'single'],
+      semi: ['error', 'never'],
+      eqeqeq: 'error',
+      'no-trailing-spaces': 'error',
+      'object-curly-spacing': ['error', 'always'],
+      'arrow-spacing': ['error', { before: true, after: true }],
+      'no-console': 'off'
+      //highlight-end
+    }
+  }
+]
 ```
 
-<!-- Component _Togglable_ causes a nasty looking warning <i>Component definition is missing display name</i>:-->
- 组件_Togglable_导致一个看起来很讨厌的警告 <i> 组件定义缺少显示名称</i>。
-
-![](../../images/5/25x.png)
-
-<!-- The react-devtools also reveals that the component does not have name:-->
- react-devtools也显示出该组件没有名字。
-
-![](../../images/5/26ea.png)
-
-<!-- Fortunately this is easy to fix-->
- 幸运的是，这很容易解决
+<!-- NOTE: If you are using Visual Studio Code together with ESLint plugin, you might need to add a workspace setting for it to work. If you are seeing <i>Failed to load plugin react: Cannot find module 'eslint-plugin-react'</i> additional configuration is needed. Adding the following line to settings.json may help: -->
+注意：如果你在 Visual Studio Code 里使用 ESLint 插件，你可能需要修改一些工作区设置。如果你看到 <i>Failed to load plugin react: Cannot find module 'eslint-plugin-react'</i>，那么你需要添加额外的配置。把下一行到添加到 setting.json 中可能会有帮助：
 
 ```js
-import { useState, useImperativeHandle } from 'react'
-import PropTypes from 'prop-types'
-
-const Togglable = React.forwardRef((props, ref) => {
-  // ...
-})
-
-Togglable.displayName = 'Togglable' // highlight-line
-
-export default Togglable
+"eslint.workingDirectories": [{ "mode": "auto" }]
 ```
+
+<!-- See [here](https://github.com/microsoft/vscode-eslint/issues/880#issuecomment-578052807) for more information. -->
+更多信息见[这里](https://github.com/microsoft/vscode-eslint/issues/880#issuecomment-578052807)。
+
+<!-- As usual, you can perform the linting either from the command line with the command -->
+通常来说，为了运行 lint，你既可以使用命令行的命令
+
+```bash
+npm run lint
+```
+
+<!-- or using the editor's Eslint plugin. -->
+
+也可以使用编辑器的 ESlint 插件。
 
 <!-- You can find the code for our current application in its entirety in the <i>part5-7</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-7).-->
  你可以在[这个github仓库](https://github.com/fullstack-hy2020/part2-notes/tree/part5-7)的<i>part5-7</i>分支中找到我们当前应用的全部代码。
@@ -940,10 +809,10 @@ export default Togglable
 
 #### 5.12: Blog List Frontend, step 12
 
-<!-- Define PropTypes for one of the components of your application, and add ESlint to the project. Define the configuration according to your liking. Fix all of the linter errors. -->
-为你的应用程序的一个组件定义 PropTypes，并将 ESlint 添加到项目中。根据你的喜好定义配置。修复所有的 linter 错误。
+<!-- Add ESlint to the project. Define the configuration according to your liking. Fix all of the linter errors. -->
+将 ESlint 添加到项目中。根据你的喜好定义配置。然后修复所有的 linter 错误。
 
-<!-- Vite has installed ESlint to the project by default, so all that's left for you to do is define your desired configuration in the <i>.eslintrc.cjs</i> file. -->
-Vite 已经默认在项目中安装了 ESlint，所以你需要做的就是在 <i>.eslintrc.cjs</i> 文件中定义你想要的配置。
+<!-- Vite has installed ESlint to the project by default, so all that's left for you to do is define your desired configuration in the <i>eslint.config.js</i> file. -->
+Vite 已经默认在项目中安装了 ESlint，所以你需要做的就是在 <i>eslint.config.js</i> 文件中定义你想要的配置。
 
 </div>

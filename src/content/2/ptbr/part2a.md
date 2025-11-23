@@ -631,7 +631,7 @@ Crie um componente chamado <i>Course</i> que será responsável por formatar/exi
 
 A estrutura do componente da aplicação pode ser a seguinte, por exemplo:
 
-<pre>
+```
 App
   Course
     Header
@@ -639,7 +639,7 @@ App
       Part
       Part
       ...
-</pre>
+```
 
 Desta forma, o componente <i>Course</i> conterá os componentes definidos na parte anterior, responsáveis por renderizar o nome do curso e suas partes.
 

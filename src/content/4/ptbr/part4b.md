@@ -938,13 +938,13 @@ Nós salvamos no banco dedados as notas armazenadas no array por meio de um <i>l
 
 O console mostra a seguinte saída:
 
-<pre>
+```
 cleared
 done
 entered test
 saved
 saved
-</pre>
+```
 
 Apesar de usarmos a sintaxe async/await, nossa solução não funciona como esperávamos. A execução do teste começa antes que o banco de dados seja inicializado!
 

@@ -324,7 +324,7 @@ Vaikka tilalle _left_ asetettiin uusi arvo kutsumalla _setLeft(left + 1)_ on til
 setTotal(left + right) 
 ```
 
-Syynä ilmiöön on se, että tilan päivitys tapahtuu Reactissa [asynkronisesti](https://react.dev/learn/queueing-a-series-of-state-updates#react-batches-state-updates), eli "jossain vaiheessa" ennen kuin komponentti renderöidään uudelleen, ei kuitenkaan välittömästi.
+Syynä ilmiöön on se, että tilan päivitys tapahtuu Reactissa [asynkronisesti](https://react.dev/learn/queueing-a-series-of-state-updates#react-batches-state-updates), eli ei välittömästi vaan "jossain vaiheessa" sen jälkeen, kun tapahtumakäsittelijä on suoritettu mutta ennen kuin komponentti renderöidään uudelleen.
 
 Saamme korjattua sovelluksen seuraavasti:
 
@@ -1128,7 +1128,7 @@ Ohjelmointi on hankalaa, ja sen takia lupaan hyödyntää kaikkia ohjelmointia h
 
 Suuret kielimallit, kuten [ChatGPT](https://chat.openai.com/auth/login), [Claude](https://claude.ai/) ja [GitHub Copilot](https://github.com/features/copilot) ovat osoittautuneet erittäin hyödyllisiksi ohjelmistokehityksessä.
 
-Itse käytän pääasiassa Copilottia, joka integroituu saumattomasti VS Codeen [pluginin](https://visualstudio.microsoft.com/github-copilot/) ansiosta.
+Itse käytän pääasiassa Copilottia, joka on nykyään [natiivisti integroitu VS Codeen](https://code.visualstudio.com/docs/copilot/overview). Lisäksi yliopisto-opiskelijat saavat Copilot Pro -version käyttöönsä ilmaiseksi [GitHub Student Developer Packin](https://education.github.com/pack) kautta.
 
 Copilot on hyödyllinen monenlaisissa skenaarioissa. Copilotia voi pyytää generoimaan koodia avoinna olevaan tiedostoon kuvailemalla halutun toiminnallisuuden teksinä:
 
@@ -1172,7 +1172,7 @@ Eli koska ongelmien selvittely on kaksi kertaa vaikeampaa kuin ohjelmointi, ei k
 
 Toistaiseksi kielimallien ja tekoälyn kehitys on vielä siinä vaiheessa, että ne eivät ole itseriittoisia, ja vaikeimmat ongelmat jäävät ihmisten selvitettäväksi. Tämän takia aloittelevienkin ohjelmistokehittäjien on kaiken varalta opeteltava ohjelmoimaan todella hyvin. Voi olla, että kielimallien kehityksestä huolimatta tarvitaankin entistä syvällisempää osaamista. Tekoäly tekee ne helpot asiat, mutta ihmistä tarvitaan kaikkein kiperimpien tekoälyn aiheuttamien sotkujen selvittelyyn. GitHub Copilot onkin varsin hyvin nimetty tuote, kyseessä on Copilot eli lentoperämies/nainen. Ohjelmoija on edelleen kapteeni ja kantaa lopullisen vastuun.
 
-Voikin olla oman etusi mukaista, että kytket oletusarvoisesti Copilotin pois päältä kun teet tätä kurssia ja turvadut siihen ainoastaan todellisella hädän hetkellä.
+Voikin olla oman etusi mukaista, että kytket oletusarvoisesti Copilotin pois päältä kun teet tätä kurssia ja turvaudut siihen ainoastaan todellisella hädän hetkellä.
 
 </div>
 

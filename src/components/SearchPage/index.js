@@ -22,12 +22,12 @@ const SearchPage = ({
   const [debouncedQuery] = useDebounce(query, 500);
   const { t } = useTranslation();
 
-  const handleInpuptChange = event => {
+  const handleInpuptChange = (event) => {
     setQuery(event.target.value);
   };
 
   const results = useFlexSearch(debouncedQuery, index, store);
-  const filteredResults = results.filter(res => res.letter !== null);
+  const filteredResults = results.filter((res) => res.letter !== null);
   const showResults = Boolean(query);
 
   return (

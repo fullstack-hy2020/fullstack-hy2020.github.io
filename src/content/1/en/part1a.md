@@ -11,22 +11,26 @@ We will now start getting familiar with probably the most important topic of thi
 
 The easiest way to get started by far is by using a tool called [Vite](https://vitejs.dev/).
 
-Let's create an application called <i>introdemo</i>, navigate to its directory and install the libraries:
+Let's create a new application using the <i>create-vite</i> tool:
 
 ```bash
-# npm 6.x (outdated, but still used by some):
-npm create vite@latest introdemo --template react
-
-# npm 7+, extra double-dash is needed:
-npm create vite@latest introdemo -- --template react
+npm create vite@latest
 ```
 
+Let's answer the questions presented by the tool as follows:
+
+![create-vite tool selection view, where the project is named part1, the framework is React, the variant is JavaScript, and all other questions are answered with No](../../images/1/1-create-vite.png)
+
+We have now created an application named <i>part1</i>. The tool could have also installed the required dependencies and started the application automatically if we had answered "Yes" to the question "Install with npm and start now?" However, we will perform these steps manually so we can see how they are done.
+
+Next, let's move into the application's directory and install the required libraries:
+
 ```bash
-cd introdemo
+cd part1
 npm install
 ```
 
-The application is started as follows
+The application is started as follows:
 
 ```bash
 npm run dev
@@ -87,7 +91,7 @@ By default, the file <i>index.html</i> doesn't contain any HTML markup that is v
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <title>part1</title>
   </head>
   <body>
     <div id="root"></div>
@@ -287,7 +291,7 @@ const App = () => {
 
 **NB**: <em>export</em> at the bottom is left out in these <i>examples</i>, now and in the future. It is still needed for the code to work
 
-Writing components with React is easy, and by combining components, even a more complex application can be kept fairly maintainable. Indeed, a core philosophy of React is composing applications from many specialized reusable components.
+Writing components with React is easy, and by combining components, an even more complex application can be kept fairly maintainable. Indeed, a core philosophy of React is composing applications from many specialized reusable components.
 
 Another strong convention is the idea of a <i>root component</i> called <i>App</i> at the top of the component tree of the application. Nevertheless, as we will learn in [part 6](/en/part6), there are situations where the component <i>App</i> is not exactly the root, but is wrapped within an appropriate utility component.
 
@@ -365,7 +369,7 @@ Software development is hard. It gets even harder if one is not using all the po
 
 ### Possible error message
 
-Depending on the editor you are using, you may receive the following error message at this point:
+If your project has React version 18 or earlier installed, you may receive the following error message at this point:
 
 ![screenshot of vs code showing eslint error: "name is missing in props validation"](../../images/1/1-vite5.png)
 

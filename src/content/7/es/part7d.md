@@ -16,14 +16,14 @@ Hemos implementado nuestras aplicaciones dividiendo nuestro código en módulos 
 
 Por esta razón, el código que se divide en módulos debe estar <i>empaquetado</i> (bundled) para los navegadores, lo que significa que todos los archivos de código fuente se transforman en un solo archivo que contiene todo el código de la aplicación. Cuando desplegamos nuestro frontend de React en producción en la [parte 3](/es/part3/despliegue_de_la_aplicacion_a_internet), realizamos el bundling de nuestra aplicación con el comando _npm run build_. Debajo del capó, el script npm crea el bundle del código fuente, lo cual produce la siguiente colección de archivos en el directorio <i>dist</i>:
 
-<pre>
+```
 ├── assets
 │   ├── index-d526a0c5.css
 │   ├── index-e92ae01e.js
 │   └── react-35ef61ed.svg
 ├── index.html
 └── vite.svg
-</pre>
+```
 
 El archivo <i>index.html</i> ubicado en la raíz del directorio <i>dist</i> es el "archivo principal" de la aplicación, el cual carga el archivo JavaScript empaquetado con la etiqueta <i>script</i>:
 
@@ -57,13 +57,13 @@ A continuación, crearemos una configuración de webpack a mano, que sea adecuad
 
 Creemos un nuevo directorio para el proyecto con los siguientes subdirectorios (<i>build</i> y <i>src</i>) y archivos:
 
-<pre>
+```
 ├── build
 ├── package.json
 ├── src
 │   └── index.js
 └── webpack.config.js
-</pre>
+```
 
 El contenido del archivo <i>package.json</i> puede ser, por ejemplo, el siguiente:
 
@@ -587,10 +587,10 @@ La aplicación ya no funciona y la consola mostrará el siguiente error:
 
 Sabemos que el error está en el método onClick, pero si la aplicación fuera más grande, el mensaje de error sería bastante difícil de localizar:
 
-<pre>
+```
 App.js:27 Uncaught TypeError: Cannot read property 'concat' of undefined
     at handleClick (App.js:27)
-</pre>
+```
 
 La ubicación del error indicada en el mensaje no coincide con la ubicación real del error en nuestro código fuente. Si hacemos clic en el mensaje de error, notamos que el código fuente mostrado no se parece al código de nuestra aplicación:
 

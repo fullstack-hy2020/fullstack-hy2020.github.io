@@ -31,10 +31,12 @@ Aloitetaan seuraavalla ohjelmarungolla.
 import ReactDOM from 'react-dom/client'
 import App from './App'
 
-import { ApolloClient, InMemoryCache, gql } from '@apollo/client'
+import { ApolloClient, HttpLink, InMemoryCache, gql } from '@apollo/client'
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000',
+  link: new HttpLink({
+    uri: 'http://localhost:4000' 
+  }),
   cache: new InMemoryCache(),
 })
 
@@ -80,14 +82,13 @@ Sovellus pystyy siis kommunikoimaan GraphQL-palvelimen kanssa olion _client_ vä
 import ReactDOM from 'react-dom/client'
 import App from './App'
 
-import {
-  ApolloClient,
-  ApolloProvider, // highlight-line
-  InMemoryCache,
-} from '@apollo/client'
+import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
+import { ApolloProvider } from '@apollo/client/react' // highlight-line
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000',
+  link: new HttpLink({
+    uri: 'http://localhost:4000' 
+  }),
   cache: new InMemoryCache(),
 })
 
@@ -107,7 +108,8 @@ Apollo Client tarjoaa muutaman vaihtoehtoisen tavan [kyselyjen](https://www.apol
 Kyselyn tekevän komponentin <i>App</i> koodi näyttää seuraavalta:
 
 ```js
-import { gql, useQuery } from '@apollo/client'
+import { gql } from '@apollo/client'
+import { useQuery } from '@apollo/client/react'
 
 const ALL_PERSONS = gql`
   query {
@@ -237,7 +239,8 @@ Ratkaisu on seuraavassa:
 
 ```js
 import { useState } from 'react'
-import { gql, useQuery } from '@apollo/client'
+import { gql } from '@apollo/client'
+import { useQuery } from '@apollo/client/react'
 
 const FIND_PERSON = gql`
   query findPersonByName($nameToSearch: String!) {
@@ -392,7 +395,8 @@ Tehdään sovellukseen uusi komponentti uuden henkilön lisämiseen:
 
 ```js
 import { useState } from 'react'
-import { gql, useMutation } from '@apollo/client'
+import { gql } from '@apollo/client'
+import { useMutation } from '@apollo/client/react'
 
 const CREATE_PERSON = gql`
   // ...
@@ -664,7 +668,7 @@ Muutoksen suorittava komponentti <i>PhoneForm</i> on suoraviivainen, se kysyy lo
 
 ```js
 import { useState } from 'react'
-import { useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client/react'
 
 import { EDIT_NUMBER } from '../queries'
 

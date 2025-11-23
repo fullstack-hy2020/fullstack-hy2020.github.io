@@ -315,7 +315,7 @@ Even though a new value was set for _left_ by calling _setLeft(left + 1)_, the o
 setTotal(left + right) 
 ```
 
-The reason for this is that a state update in React happens [asynchronously](https://react.dev/learn/queueing-a-series-of-state-updates), i.e. not immediately but "at some point" before the component is rendered again.
+The reason for this is that a state update in React happens [asynchronously](https://react.dev/learn/queueing-a-series-of-state-updates), i.e. not immediately but "at some point" after the current component function is finished, before the component is rendered again.
 
 We can fix the app as follows:
 
@@ -725,7 +725,7 @@ const App = () => {
 }
 ```
 
-The _handleClick_ variable is now assigned to a reference to the function. The reference is passed to the button as the <i>onClick</i> attribute:
+The _handleClick_ variable, which references the function definition, is passed to the button as the <i>onClick</i> attribute:
 
 ```js
 <button onClick={handleClick}>button</button>
@@ -790,7 +790,7 @@ The event handler is now set to a function call:
 <button onClick={hello()}>button</button>
 ```
 
-Earlier on we stated that an event handler may not be a call to a function and that it has to be a function or a reference to a function. Why then does a function call work in this case?
+Earlier, we stated that an event handler may not be a function call; rather, it has to either be a function definition or a reference to one. Why then does a function call work in this case?
 
 When the component is rendered, the following function gets executed:
 
@@ -1084,7 +1084,7 @@ const App = () => {
 }
 ```
 
-The application still appears to work, but **don't implement components like this!** Never define components inside of other components. The method provides no benefits and leads to many unpleasant problems. The biggest problems are because React treats a component defined inside of another component as a new component in every render. This makes it impossible for React to optimize the component.
+The application still appears to work, but **do not implement components like this!** Never define components inside of other components. The method provides no benefits and only leads to problems. One such problem is that React will treat a component defined inside of another component as a "new component" in every render. This makes it impossible for React to optimize the component.
 
 Let's instead move the <i>Display</i> component function to its correct place, which is outside of the <i>App</i> component function:
 
@@ -1125,21 +1125,22 @@ You may find the following links useful:
 - The [official React documentation](https://react.dev/learn) is worth checking out at some point, although most of it will become relevant only later on in the course. Also, everything related to class-based components is irrelevant to us;
 - Some courses on [Egghead.io](https://egghead.io) like [Start learning React](https://egghead.io/courses/start-learning-react) are of high quality, and the recently updated [Beginner's Guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) is also relatively good; both courses introduce concepts that will also be introduced later on in this course. **NB** The first one uses class components but the latter uses the new functional ones.
 
-### Web programmers oath
+### Web Programmer's Oath
 
-Programming is hard, that is why I will use all the possible means to make it easier
+Programming is hard. That is why, as a developer, I will use all possible means to make it easier.
 
-- I will have my browser developer console open all the time
-- I progress with small steps
-- I will write lots of _console.log_ statements to make sure I understand how the code behaves and to help pinpointing problems
-- If my code does not work, I will not write more code. Instead I will start deleting the code until it works or just return to a state when everything was still working
-- When I ask for help in the course Discord channel or elsewhere I formulate my questions properly, see [here](http://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord) how to ask for help
+- I will have my browser's developer console open at all times.
+- I will progress in small steps, making sure that my code is working at each step.
+- I will write many _console.log_ statements to make sure I understand how the code behaves and to help pinpointing problems.
+- If my code does not work, I will not write more code. Instead, I will either start deleting the code until it works or return to a state where my program was working.
+- When I ask for help in the course Discord channel or elsewhere, I will formulate my questions properly. See [this section](http://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord) to learn how to ask for help.
 
 ### Utilization of Large language models
 
 Large language models such as [ChatGPT](https://chat.openai.com/auth/login), [Claude](https://claude.ai/) and [GitHub Copilot](https://github.com/features/copilot) have proven to be very useful in software development.
 
-Personally, I mainly use Copilot, which integrates seamlessly with VS Code thanks to the [plugin](https://visualstudio.microsoft.com/github-copilot/).
+Personally, I mainly use GitHub Copilot, which is now [natively integrated into Visual Studio Code](https://code.visualstudio.com/docs/copilot/overview)
+As a reminder, if you're a university student, you can access Copilot pro for free through the [GitHub Student Developer Pack](https://education.github.com/pack).
 
 Copilot is useful in a wide variety of scenarios. Copilot can be asked to generate code for an open file by describing the desired functionality in text:
 

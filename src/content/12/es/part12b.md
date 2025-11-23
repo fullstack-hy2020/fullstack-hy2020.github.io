@@ -236,7 +236,7 @@ CMD npm start
 #highlight-end
 ```
 
-> <i>Si te preguntas qué hace la variable de entorno DEBUG, lee [aquí](http://expressjs.com/en/guide/debugging.html#debugging-express).</i>
+> <i>Si te preguntas qué hace la variable de entorno DEBUG, lee [Debugging Express](https://expressjs.com/en/guide/debugging.html).</i>
 
 #### Mejores prácticas de Dockerfile
 
@@ -247,7 +247,7 @@ Hay 2 reglas generales que debes seguir al crear imágenes:
 
 Las imágenes más pequeñas son más seguras al tener menos área de superficie de ataque, y también se mueven más rápido en las pipelines de despliegue.
 
-Snyk tiene una excelente lista de las 10 mejores prácticas para la creación de contenedores de node/express. Léelas [aquí](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker/).
+Snyk tiene una excelente lista de las [10 mejores prácticas para la creación de contenedores de node/express](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker/).
 
 Un gran descuido que debemos resolver es ejecutar la aplicación como root en lugar de usar un usuario con menos privilegios. Hagamos un ultimo arreglo al Dockerfile:
 
