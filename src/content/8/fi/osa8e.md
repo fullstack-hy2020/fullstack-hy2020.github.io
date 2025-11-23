@@ -350,7 +350,7 @@ startStandaloneServer ei kuitenkaan mahdollista subscriptioiden lisäämistä so
 Asennetaan Express:
 
 ```
-npm install express cors
+npm install express cors @as-integrations/express5
 ```
 
 ja muutetaan tiedosto <i>index.js</i> seuraavaan muotoon:
@@ -358,7 +358,7 @@ ja muutetaan tiedosto <i>index.js</i> seuraavaan muotoon:
 ```js
 const { ApolloServer } = require('@apollo/server')
 // highlight-start
-const { expressMiddleware } = require('@apollo/server/express4')
+const { expressMiddleware } = require('@as-integrations/express5')
 const { ApolloServerPluginDrainHttpServer } = require('@apollo/server/plugin/drainHttpServer')
 const { makeExecutableSchema } = require('@graphql-tools/schema')
 const express = require('express')
@@ -468,7 +468,7 @@ Tiedosto <i>index.js</i> muuttuu seuraavasti
 ```js
 // highlight-start
 const { WebSocketServer } = require('ws')
-const { useServer } = require('graphql-ws/lib/use/ws')
+const { useServer } = require('graphql-ws/use/ws')
 // highlight-end
 
 // ...
@@ -655,9 +655,10 @@ Jotta saamme tilaukset käyttöön React-sovelluksessa, tarvitaan jonkin verran 
 
 ```js
 import { 
-  ApolloClient, InMemoryCache, ApolloProvider, createHttpLink, 
+  ApolloClient, InMemoryCache, createHttpLink,
   split  // highlight-line
 } from '@apollo/client'
+import { ApolloProvider } from '@apollo/client/react'
 import { setContext } from 'apollo-link-context'
 
 // highlight-start
@@ -745,7 +746,7 @@ export const PERSON_ADDED = gql`
 ja tehdään tilaus komponentissa App:
 
 ```js
-import { useQuery, useApolloClient, useSubscription } from '@apollo/client'
+import { useQuery, useApolloClient, useSubscription } from '@apollo/client/react'
 import { PERSON_ADDED } from './queries.js'
 
 const App = () => {
