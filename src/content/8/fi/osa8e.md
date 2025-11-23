@@ -347,7 +347,7 @@ startStandaloneServer(server, {
 
 startStandaloneServer ei kuitenkaan mahdollista subscriptioiden lisäämistä sovellukseen, joten siirrytään järeämmän [expressMiddleware](https://www.apollographql.com/docs/apollo-server/api/express-middleware/) funktion käyttöön. Kuten funktion nimi jo vihjaa, kyseessä on Expressin middleware, eli sovellukseen on konfiguroitava myös Express jonka middlewarena GraphQL-server tulee toimimaan.
 
-Asennetaan Express:
+Asennetaan Express ja Apollo Serverin integraatiopaketti:
 
 ```
 npm install express cors @as-integrations/express5
