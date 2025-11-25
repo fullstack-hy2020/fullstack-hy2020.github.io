@@ -112,7 +112,7 @@ Parannellaan seuraavaksi näkymän <i>Login</i> kirjautumislomaketta Bootstrapin
 React-Bootstrap tarjoaa valmiit [komponentit](https://react-bootstrap.github.io/docs/forms/overview/) myös lomakkeiden muodostamiseen (dokumentaatio tosin ei ole paras mahdollinen):
 
 ```js
-let Login = (props) => {
+const Login = (props) => {
   // ...
   return (
     <div>

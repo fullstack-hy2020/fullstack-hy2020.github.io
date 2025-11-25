@@ -112,7 +112,7 @@ Let's improve the form in the <i>Login</i> view with the help of Bootstrap [form
 React Bootstrap provides built-in [components](https://react-bootstrap.github.io/docs/forms/overview/) for creating forms (although the documentation for them is slightly lacking):
 
 ```js
-let Login = (props) => {
+const Login = (props) => {
   // ...
   return (
     <div>
