@@ -248,7 +248,7 @@ export default createApolloClient;
 
 ```javascript
 import { NativeRouter } from 'react-router-native';
-import { ApolloProvider } from '@apollo/client'; // highlight-line
+import { ApolloProvider } from '@apollo/client/react'; // highlight-line
 
 import Main from './src/components/Main';
 import createApolloClient from './src/utils/apolloClient'; // highlight-line
@@ -296,7 +296,7 @@ export const GET_REPOSITORIES = gql`
  我们可以导入这些变量，并像这样用<em>useQuery</em>挂钩来使用它们。
 
 ```javascript
-import { useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client/react';
 
 import { GET_REPOSITORIES } from '../graphql/queries';
 
@@ -381,7 +381,7 @@ useQuery(MY_QUERY, {
 
 ```javascript
 import { NativeRouter } from 'react-router-native';
-import { ApolloProvider } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client/react';
 import Constants from 'expo-constants'; // highlight-line
 
 import Main from './src/components/Main';
@@ -700,7 +700,7 @@ export default AuthStorage;
 
 ```javascript
 import { NativeRouter } from 'react-router-native';
-import { ApolloProvider } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client/react';
 
 import Main from './src/components/Main';
 import createApolloClient from './src/utils/apolloClient';
@@ -786,7 +786,7 @@ export default AuthStorageContext;
 
 ```javascript
 import { NativeRouter } from 'react-router-native';
-import { ApolloProvider } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client/react';
 
 import Main from './src/components/Main';
 import createApolloClient from './src/utils/apolloClient';
