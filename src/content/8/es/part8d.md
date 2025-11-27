@@ -117,8 +117,8 @@ El uso del hook de efectos es necesario para evitar un bucle de renderizado sin 
 
 Agreguemos también un botón que permite a un usuario que ha iniciado sesión cerrar la sesión. El controlador onClick del botón establece el estado _token_ en nulo, elimina el token del almacenamiento local y restablece la caché del cliente Apollo. El último paso es [importante](https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout), porque algunas consultas pueden haber obtenido datos en la caché, que solo los usuarios que iniciaron sesión deben tener acceso.
 
-Podemos restablecer la caché usando el método [resetStore](https://www.apollographql.com/docs/react/api/core/ApolloClient/#ApolloClient.resetStore) de un objeto _client_ de Apollo.
-Se puede acceder al cliente con el hook [useApolloClient](https://www.apollographql.com/docs/react/api/react-hooks/#useapolloclient):
+Podemos restablecer la caché usando el método [resetStore](https://www.apollographql.com/docs/react/api/core/ApolloClient#resetstore) de un objeto _client_ de Apollo.
+Se puede acceder al cliente con el hook [useApolloClient](https://www.apollographql.com/docs/react/api/react/useApolloClient):
 
 ```js
 const App = () => {
@@ -277,7 +277,7 @@ Usando la función [updateQuery](https://www.apollographql.com/docs/react/cachin
 
 En algunas situaciones, la única forma sensata de mantener el caché actualizado es usando la devolución de llamada _update_.
 
-Cuando sea necesario, es posible deshabilitar el caché para toda la aplicación o [consultas únicas](https://www.apollographql.com/docs/react/api/react/hooks/#options) configurando el campo que administra el uso del caché , [fetchPolicy](https://www.apollographql.com/docs/react/data/queries/#configuring-fetch-logic) como <em>sin caché</em>.
+Cuando sea necesario, es posible deshabilitar el caché para toda la aplicación o [consultas únicas](https://www.apollographql.com/docs/react/api/react/hooks/#options) configurando el campo que administra el uso del caché , [fetchPolicy](https://www.apollographql.com/docs/react/data/queries#setting-a-fetch-policy) como <em>sin caché</em>.
 
 Sea diligente con el caché. Los datos antiguos en la caché pueden causar errores difíciles de encontrar. Como sabemos, mantener el caché actualizado es un gran desafío. Según un proverbio codificador:
 

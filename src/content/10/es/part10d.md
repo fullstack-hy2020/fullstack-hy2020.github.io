@@ -504,7 +504,7 @@ Puede crear una revisión mediante la mutación <em>createReview</em>. Verifique
 
 Después de una mutación de <em>createReview</em> exitosa, redirija al usuario a la vista del repositorio que implementó en el ejercicio anterior. Esto se puede hacer con el método <em>history.push</em> después de haber obtenido el objeto de historial usando el hook [useHistory](https://reacttraining.com/react-router/native/api/Hooks/usehistory). La revisión creada tiene un campo <em>repositoryId</em> que puede usar para construir la ruta de la dirección.
 
-Para evitar la obtención de datos almacenados en caché con la consulta de <em>repository</em> en la vista de repositorio único, use la [política de recuperación](https://www.apollographql.com/docs/react/data/queries/#configuring-fetch-logic) _caché-and-network_ en la consulta. Se puede usar con el hook <em>useQuery</em> como este:
+Para evitar la obtención de datos almacenados en caché con la consulta de <em>repository</em> en la vista de repositorio único, use la [política de recuperación](https://www.apollographql.com/docs/react/data/queries#setting-a-fetch-policy) _caché-and-network_ en la consulta. Se puede usar con el hook <em>useQuery</em> como este:
 
 ```javascript
 useQuery(GET_REPOSITORY, {
