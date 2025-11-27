@@ -11,7 +11,7 @@ Siirrämme tässä osassa fokuksen backendiin eli palvelimella olevaan toiminnal
 
 Backendin toteutusympäristönä käytämme [Node.js](https://nodejs.org/en/):ää, joka on melkein missä vaan, erityisesti palvelimilla ja omalla koneellasikin toimiva Googlen [V8](https://developers.google.com/v8/)-JavaScript-moottoriin perustuva JavaScriptin suoritusympäristö.
 
-Kurssimateriaalia tehtäessä on ollut käytössä Node.js:n versio <i>v20.11.0</i>. Suosittelen, että omasi on vähintään yhtä tuore (ks. komentoriviltä _node -v_).
+Kurssimateriaalia tehtäessä on ollut käytössä Node.js:n versio <i>v22.3.0</i>. Suosittelen, että omasi on vähintään yhtä tuore (ks. komentoriviltä _node -v_).
 
 Kuten [osassa 1](/osa1/java_scriptia) todettiin, selaimet eivät vielä osaa kaikkia uusimpia JavaScriptin ominaisuuksia, ja siksi selainpuolen koodi täytyy kääntää eli <i>transpiloida</i> esim [Babel](https://babeljs.io/):illa. Backendissa tilanne on kuitenkin toinen, koska uusin Node hallitsee riittävissä määrin myös JavaScriptin uusia versioita, joten suoritamme Nodella kirjoittamaamme koodia suoraan ilman transpilointivaihetta.
 
@@ -41,7 +41,7 @@ Tiedosto määrittelee mm., että ohjelmamme käynnistyspiste on tiedosto <i>ind
 
 Tehdään kenttään <i>scripts</i> pieni lisäys:
 
-```bash
+```json
 {
   // ...
   "scripts": {
@@ -72,7 +72,7 @@ npm start
 
 npm-skripti <i>start</i> toimii koska määrittelimme sen tiedostoon <i>package.json</i>:
 
-```bash
+```json
 {
   // ...
   "scripts": {
@@ -93,7 +93,7 @@ echo "Error: no test specified" && exit 1
 
 ### Yksinkertainen web-palvelin
 
-Muutetaan sovellus web-palvelimeksi:
+Muutetaan sovellus web-palvelimeksi asettamalla _index.js_-tiedoston sisällöksi seuraava koodi:
 
 ```js
 const http = require('http')
@@ -238,7 +238,7 @@ Riippuvuus tulee nyt määritellyksi tiedostoon <i>package.json</i>:
 {
   // ...
   "dependencies": {
-   "express": "^4.18.2"
+   "express": "^5.1.0"
   }
 }
 
@@ -250,13 +250,13 @@ Riippuvuuden koodi asentuu kaikkien projektin riippuvuuksien tapaan projektin ju
 
 Kyseessä ovat Expressin riippuvuudet ja niiden riippuvuudet jne. eli projektimme [transitiiviset riippuvuudet](https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/).
 
-Projektiin asentui Expressin versio 4.18.2. </i>package.json:issa</i> versiomerkinnän edessä on väkänen, eli muoto on
+Projektiin asentui Expressin versio 5.1.0. </i>package.json:issa</i> versiomerkinnän edessä on väkänen, eli muoto on
 
 ```json
-"express": "^4.18.2"
+"express": "^5.1.0"
 ```
   
-npm:n yhteydessä käytetään ns. [semanttista versiointia](https://docs.npmjs.com/getting-started/semantic-versioning). Merkintä <i>^4.18.2</i> tarkoittaa, että jos projektin riippuvuudet päivitetään, asennetaan Expressistä versio, joka on vähintään <i>4.18.2</i>, mutta asennetuksi voi tulla versio, jonka <i>patch</i> eli viimeinen numero tai <i>minor</i> eli keskimmäinen numero voi olla suurempi. Pääversio eli <i>major</i> täytyy kuitenkin olla edelleen sama.
+npm:n yhteydessä käytetään ns. [semanttista versiointia](https://docs.npmjs.com/getting-started/semantic-versioning). Merkintä <i>^5.1.0</i> tarkoittaa, että jos projektin riippuvuudet päivitetään, asennetaan Expressistä versio, joka on vähintään <i>5.1.0</i>, mutta asennetuksi voi tulla versio, jonka <i>patch</i> eli viimeinen numero tai <i>minor</i> eli keskimmäinen numero voi olla suurempi. Pääversio eli <i>major</i> täytyy kuitenkin olla edelleen sama.
 
 Voimme päivittää projektin riippuvuudet komennolla
 
@@ -270,7 +270,7 @@ Jos aloitamme projektin koodaamisen toisella koneella, saamme haettua ajantasais
 npm install
 ```
 
-Jos riippuvuuden <i>major</i>-versionumero ei muutu, uudempien versioiden pitäisi olla [taaksepäin yhteensopivia](https://en.wikipedia.org/wiki/Backward_compatibility), eli jos ohjelmamme käyttäisi tulevaisuudessa esim. Expressin versiota 4.99.175, tässä osassa tehtävän koodin pitäisi edelleen toimia ilman muutoksia. Sen sijaan tulevaisuudessa joskus julkaistava Express 5.0.0 [voi sisältää](https://expressjs.com/en/guide/migrating-5.html) sellaisia muutoksia, että koodimme ei enää toimisi.
+Jos riippuvuuden <i>major</i>-versionumero ei muutu, uudempien versioiden pitäisi olla [taaksepäin yhteensopivia](https://en.wikipedia.org/wiki/Backward_compatibility), eli jos ohjelmamme käyttäisi tulevaisuudessa esim. Expressin versiota 5.99.175, tässä osassa tehtävän koodin pitäisi edelleen toimia ilman muutoksia. Sen sijaan tulevaisuudessa joskus julkaistava Express 6.0.0 voi sisältää sellaisia muutoksia, että koodimme ei enää toimisi.
 
 ### Web ja Express
 
@@ -345,7 +345,7 @@ response.end(JSON.stringify(notes))
 
 Expressiä käytettäessä tämä ei ole tarpeen, sillä muunnos tapahtuu automaattisesti.
 
-Kannattaa huomata, että [JSON](https://en.wikipedia.org/wiki/JSON) on merkkijono, eikä JavaScript-olio kuten muuttuja _notes_.
+Kannattaa huomata, että [JSON](https://en.wikipedia.org/wiki/JSON) on tiedostomuoto, jota kuvataan usein merkkijonona. Se ei ole JavaScript-olio kuten muuttuja _notes_.
 
 Seuraava interaktiivisessa [node-repl](https://nodejs.org/docs/latest-v8.x/api/repl.html):issä suoritettu kokeilu havainnollistaa asiaa:
 
@@ -353,66 +353,31 @@ Seuraava interaktiivisessa [node-repl](https://nodejs.org/docs/latest-v8.x/api/r
 
 Saat käynnistettyä interaktiivisen node-repl:in kirjoittamalla komentoriville _node_. Komentojen toimivuutta on koodatessa kätevä kokeilla konsolissa, suosittelen!
 
-### nodemon
+### Muutoksien automaattinen seuraaminen
 
 Jos muutamme sovelluksen koodia, joudumme ensin sulkemaan sovelluksen konsolista (_ctrl_ + _c_) ja sitten käynnistämään sovelluksen uudelleen, jotta muutokset tulevat voimaan. Uudelleenkäynnistely tuntuu kömpelöltä verrattuna Reactin mukavaan workflow'hun, jossa selain päivittyi automaattisesti koodin muuttuessa.
 
-Ongelmaan on ratkaisu nimeltä [nodemon](https://github.com/remy/nodemon):
-
-> <i>nodemon will watch the files in the directory in which nodemon was started, and if any files change, nodemon will automatically restart your node application.</i>
-
-Asennetaan nodemon määrittelemällä se <i>kehitysaikaiseksi riippuvuudeksi</i> (development dependency) komennolla:
+Palvelimen saa seuraamaan tekemiämme muutoksia, kun sen käynnistää käyttäen _--watch_-optiota:
 
 ```bash
-npm install --save-dev nodemon
+node --watch index.js
 ```
-
-Tiedoston <i>package.json</i> sisältö muuttuu seuraavasti:
-
-```json
-{
-  //...
-  "dependencies": {
-    "express": "^4.18.2"
-  },
-  "devDependencies": {
-    "nodemon": "^3.0.3"
-  }
-}
-```
-
-Jos nodemon-riippuvuus kuitenkin meni sovelluksessasi normaaliin "dependencies"-ryhmään, päivitä <i>package.json</i> manuaalisesti vastaamaan yllä näkyvää (kuitenkin versiot säilyttäen).
-
-Kehitysaikaisilla riippuvuuksilla tarkoitetaan työkaluja, joita tarvitaan ainoastaan sovellusta kehitettäessä esim. testaukseen tai sovelluksen automaattiseen uudelleenkäynnistykseen kuten <i>nodemon</i>.
-
-Kun sovellusta suoritetaan tuotantomoodissa eli samoin kuin sitä tullaan suorittamaan tuotantopalvelimella (esim. Fly.io:ssa, johon tulemme kohta siirtämään sovelluksemme), ei kehitysaikaisia riippuvuuksia tarvita.
-
-Voimme käynnistää ohjelman <i>nodemonilla</i> seuraavasti:
-
-```bash
-node_modules/.bin/nodemon index.js
-```
-
-Huom: komennon tämä muoto ei välttämättä toimi Windowsilla. Se ei kuitenkaan haittaa sillä 5 sentin päästä kerrotaan komennosta parempi muoto.
 
 Sovelluksen koodin muutokset aiheuttavat nyt automaattisen palvelimen uudelleenkäynnistymisen. Kannattaa huomata, että vaikka palvelin uudelleenkäynnistyy automaattisesti, selain täytyy kuitenkin refreshata, sillä toisin kuin Reactin yhteydessä, meillä ei nyt ole eikä tässä skenaariossa (jossa palautamme JSON-muotoista dataa) edes voisikaan olla selainta päivittävää [hot reload](https://gaearon.github.io/react-hot-loader/getstarted/) ‑toiminnallisuutta.
 
+Määritellään kehityspalvelimen käynnistämistä varten oma <i>npm-skripti</i> tiedostoon <i>package.json</i>:
 
-Komento on ikävä, joten määritellään sitä varten <i>npm-skripti</i> tiedostoon <i>package.json</i>:
-
-```bash
+```json
 {
   // ..
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js", // highlight-line
+    "dev": "node --watch index.js", // highlight-line
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   // ..
 }
 ```
-
-Skriptissä ei ole tarvetta käyttää nodemonin polusta sen täydellistä muotoa <i>node\_modules/.bin/nodemon</i> sillä _npm_ osaa etsiä automaattisesti suoritettavaa tiedostoa kyseisestä hakemistosta.
 
 Voimme nyt käynnistää palvelimen sovelluskehitysmoodissa komennolla
 
@@ -605,11 +570,11 @@ Ennen toimintalogiikan viimeistelyä varmistetaan ensin Postmanilla, että lähe
 
 Sovellus tulostaa lähetetyn vastaanottamansa datan terminaaliin:
 
-![Konsoliin tulostuu palvelimen vastaanottama json-objekti](../../images/3/15new.png)
+![Konsoliin tulostuu palvelimen vastaanottama json-objekti](../../images/3/15c.png)
 
-**HUOM:** Kun ohjelmoit backendia, <i>pidä sovellusta suorittava konsoli koko ajan näkyvillä</i>. Nodemonin ansiosta sovellus käynnistyy uudelleen jos koodiin tehdään muutoksia. Jos seuraat konsolia, huomaat välittömästi jos sovelluksen koodiin tulee virhe:
+**HUOM:** Kun ohjelmoit backendia, <i>pidä sovellusta suorittava konsoli koko ajan näkyvillä</i>. Kehityspalvelin käynnistyy uudelleen, jos koodiin tehdään muutoksia, joten jos seuraat konsolia, huomaat välittömästi jos sovelluksen koodiin tulee virhe:
 
-![konsoliin tulostuu epävalidista javascriptistä johtuva parse error ‑virheilmoitus](../../images/3/16e.png)
+![konsoliin tulostuu epävalidista javascriptistä johtuva parse error ‑virheilmoitus](../../images/3/16_25.png)
 
 Konsolista kannattaa seurata myös, reagoiko backend odotetulla tavalla esim. kun sovellukselle lähetetään dataa metodilla HTTP POST. Backendiin kannattaa luonnollisesti lisäillä runsaat määrät <em>console.log</em>-komentoja kun sovellus on kehitysvaiheessa. 
 
@@ -623,7 +588,7 @@ Headerin <i>Content-Type</i> arvoksi asettuu <i>text/plain</i>:
 
 Palvelin näyttää vastaanottavan ainoastaan tyhjän olion:
 
-![Konsoliin tulostuu tyhjä json](../../images/3/19.png)
+![Konsoliin tulostuu tyhjä json](../../images/3/19_25.png)
 
 Ilman oikeaa headerin arvoa palvelin ei osaa parsia dataa oikeaan muotoon. Se ei edes yritä arvailla missä muodossa data on, sillä potentiaalisia datan siirtomuotoja eli <i>Content-Typejä</i> on olemassa [suuri määrä](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types).
 
@@ -742,7 +707,7 @@ Koodi sisältää hieman erikoisen näköisen rivin:
 Math.max(...notes.map(n => Number(n.id)))
 ```
 
-Mitä rivillä tapahtuu? <em>notes.map(n => Number(n.id))</em> muodostaa taulukon, joka koostuu muistiinpanojen id-kenttiä vastaavasta numeroarvosta. [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) palauttaa maksimin sille parametrina annetuista luvuista. <em>notes.map(n => Number(n.id)))</em> on kuitenkin <i>taulukko</i>, joten se ei kelpaa parametriksi komennolle _Math.max_. Taulukko voidaan muuttaa yksittäisiksi luvuiksi käyttäen taulukon [spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)-syntaksia, eli kolmea pistettä <em>...taulukko</em>.
+Mitä rivillä tapahtuu? <em>notes.map(n => Number(n.id))</em> muodostaa taulukon, joka koostuu muistiinpanojen id-kenttiä vastaavasta numeroarvosta. [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) palauttaa maksimin sille parametrina annetuista luvuista. <em>notes.map(n => Number(n.id))</em> on kuitenkin <i>taulukko</i>, joten se ei kelpaa parametriksi komennolle _Math.max_. Taulukko voidaan muuttaa yksittäisiksi luvuiksi käyttäen taulukon [spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)-syntaksia, eli kolmea pistettä <em>...taulukko</em>.
 
 </div>
 
@@ -750,9 +715,7 @@ Mitä rivillä tapahtuu? <em>notes.map(n => Number(n.id))</em> muodostaa tauluko
 
 ### Tehtävät 3.1.-3.6.
 
-**HUOM:** tämän osan tehtäväsarja kannattaa tehdä omaan Git-repositorioon ja suoraan repositorion juureen! Jos et tee näin, joudut ongelmiin tehtävässä 3.10
-
-**HUOM2:** Koska nyt ei ole kyse frontendista ja Reactista, sovellusta <strong>ei luoda</strong> Vitellä vaan komennolla <em>npm init</em>, kuten ylempänä tämän osan materiaalissa.
+**HUOM:** Koska nyt ei ole kyse frontendista ja Reactista, sovellusta <strong>ei luoda</strong> Vitellä vaan komennolla <em>npm init</em>, kuten ylempänä tämän osan materiaalissa.
 
 
 **Vahva suositus:** kun teet backendin koodia, pidä koko ajan silmällä, mitä palvelimen koodia suorittavassa konsolissa tapahtuu.

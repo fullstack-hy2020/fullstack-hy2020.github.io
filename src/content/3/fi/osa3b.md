@@ -63,7 +63,7 @@ CORS:ista voi lukea tarkemmin esim. [Mozillan sivuilta](https://developer.mozill
 
 Sovelluksen suoritusympäristö näyttää nyt seuraavalta:
 
-![Kuvassa localhost:3000 toimiva React dev server ja localhost:3001 toimiva node backend, jotka molemmat käyttävät lokaalilla levylä olevia fs-tiedostoja. Kuvassa myös selaimessa oleva react-sovellus. joka yhteydessä dev-serveriin (mistä se saa js-tiedoston) sekä node-backendiin jonka reitilt /app/notes sen saa json-muotoisen datan](../../images/3/100.png)
+![Kuvassa localhost:5173 toimiva Vite dev server ja localhost:3001 toimiva node backend, jotka molemmat käyttävät lokaalilla levylä olevia fs-tiedostoja. Kuvassa myös selaimessa oleva react-sovellus. joka yhteydessä dev-serveriin (mistä se saa js-tiedoston) sekä node-backendiin jonka reitilt /app/notes sen saa json-muotoisen datan](../../images/3/100_25.png)
 
 Selaimessa toimiva frontendin koodi siis hakee datan osoitteessa localhost:3001 olevalta Express-palvelimelta.
 
@@ -75,9 +75,16 @@ Sovellusten hostaamiseen, eli "internettiin laittamiseen" on olemassa lukematon 
 
 Kymmenen vuoden ajan PaaS-ratkaisujen ykkönen on ollut [Heroku](http://heroku.com). Elokuun 2022 lopussa Heroku ilmoitti että 27.11.2022 alkaen alustan maksuttomat palvelut loppuvat. Jos olet valmis maksamaan hiukan, on Heroku edelleen varteenotettava vaihtoehto.
 
-Esittelemme seuraavassa kaksi hieman uudempaa palvelua [Fly.io:n](https://fly.io/):n sekä [Renderin](https://render.com/). Molemmilla on tarjolla jonkin verran ilmaista laskenta-aikaa.
+Esittelemme seuraavassa kaksi hieman uudempaa palvelua [Fly.io:n](https://fly.io/):n sekä [Renderin](https://render.com/). Fly.io tarjoaa palveluna enemmän joustavuutta, mutta myös se on muuttunut hiljattain maksulliseksi. Renderissä on tarjolla jonkin verran ilmaista laskenta-aikaa, joten jos haluat suorittaa kurssin ilman kuluja, valitse Render. Renderin käyttöönotto saattaa myös olla jossain tapauksissa helpompaa, sillä Render ei edellytä mitään asennuksia omalle koneelle.
 
-Hienoinen ikävä puoli Fly.io:ssa on se, että <i>saatat</i> joutua kertomaan palvelulle luottokorttitietosi vaikka <i>et käytä</i> palvelun maksullista osaa. Renderin käyttöönotto saattaa olla jossain tapauksissa helpompaa, sillä Render ei edellytä mitään asennuksia omalle koneelle.
+On olemassa myös muita palveluja, jotka saattavat toimia hyvin tämän kurssin kanssa, ainakin kaikissa muissa osissa paitsi osassa 11 (CI/CD), jossa saattaa olla yksi hankala harjoitus muille alustoille.
+
+Jotkut kurssin osallistujat ovat käyttäneet seuraavia palveluita:
+
+- [Replit](https://replit.com)
+- [CodeSandBox](https://codesandbox.io)
+
+Jos tiedät helppokäyttöisiä ja ilmaisia palveluita NodeJS:n hostaamiseen, kerro siitä meille!
 
 Molempia ratkaisuja varten muutetaan tiedoston <i>index.js</i> lopussa olevaa sovelluksen käyttämän portin määrittelyä seuraavasti:
 
@@ -88,13 +95,12 @@ app.listen(PORT, () => {
 })
 ```
 
-Nyt käyttöön tulee [ympäristömuuttujassa](https://en.wikipedia.org/wiki/Environment_variable) _PORT_ määritelty portti tai 3001, jos ympäristömuuttuja _PORT_ ei ole määritelty. Sekä Fly.io että Render konfiguroivat sovelluksen portin ympäristömuuttujan avulla.
+Nyt käyttöön tulee [ympäristömuuttujassa](https://en.wikipedia.org/wiki/Environment_variable) _PORT_ määritelty portti tai 3001, jos ympäristömuuttuja _PORT_ ei ole määritelty. Sekä Fly.io:ssa että Renderissä sovelluksen portti on mahdollista konfiguroida ympäristömuuttujan avulla.
 
 #### Fly.io
+<i>Huomaa, että sinun tulee mahdollisesti syöttää Fly.io:hon maksukorttisi numero, ja palvelun käytöstä veloitetaan hinnaston mukaisesti, jos erillistä ilmaista kokeilua ei ole tarjolla.</i>
 
 Jos päätät käyttää [Fly.io](https://fly.io/):ta, aloita asentamalla Fly.io [tämän](https://fly.io/docs/hands-on/install-flyctl/) ohjeen mukaan ja luomalla itsellesi [tunnus](https://fly.io/docs/hands-on/sign-up/) palveluun.
-
-Oletusarvoisesti saat käyttöösi kaksi ilmaista virtuaalikonetta, ja pystyt käynnistämään molempiin yhden sovelluksen.
 
 Aloita [kirjautumalla](https://fly.io/docs/hands-on/sign-in/) komentoriviltä palveluun komennolla 
 
@@ -107,7 +113,7 @@ fly auth login
 Sovelluksen alustus tapahtuu seuraavasti. Mene sovelluksen juurihakemistoon ja anna komento
 
 ```bash
-fly launch
+fly launch --no-deploy
 ```
 
 Anna sovellukselle nimi, tai anna Fly.io:n generoida automaattinen nimi, valitse "region" eli alue, jonka konesalissa sovelluksesi toimii. Älä luo sovellukselle postgres- sekä Upstash Redis-tietokantaa. Lopuksi vielä kysytään "Would you like to deploy now?" eli haluatko että sovellus myös viedään tuotantoympäristöön. Valitse "Ei".
@@ -120,10 +126,10 @@ Jotta sovellus saadaan konfiguroitua oikein, tulee tiedostoon konfiguraatioon te
 [build]
 
 [env]
-  PORT = "3000" # add this
+  PORT = "3001" # add this
 
 [http_service]
-  internal_port = 3000 # ensure that this is same as PORT
+  internal_port = 3001 # ensure that this is same as PORT
   force_https = true
   auto_stop_machines = true
   auto_start_machines = true
@@ -155,7 +161,7 @@ Erittäin tärkeä komento on myös _fly logs_ jonka avulla voit seurata tuotant
 
 #### Render
 
-Ohje olettaa, että Renderiin on [kirjauduttu](https://dashboard.render.com/) GitHub-tunnuksen avulla.
+Huomaa, että saatat joutua syöttämään pankkikorttisi tiedot palveluun, vaikka käyttäisit vain ilmaisia ominaisuuksia. Ohje olettaa, että Renderiin on [kirjauduttu](https://dashboard.render.com/) GitHub-tunnuksen avulla.
 
 Kirjautumisen jälkeen luodaan uusi "web service":
 
@@ -214,7 +220,7 @@ Minifioitu koodi ei ole miellyttävää luettavaa. Koodin alku näyttää seuraa
 
 ### Staattisten tiedostojen tarjoaminen backendistä
 
-Eräs mahdollisuus frontendin tuotantoon viemiseen on kopioida tuotantokoodi eli hakemisto <i>dist</i> backendin repositorion juureen ja määritellä backend näyttämään pääsivunaan frontendin <i>pääsivu</i> eli tiedosto <i>dist/index.html</i>.
+Eräs mahdollisuus frontendin tuotantoon viemiseen on kopioida tuotantokoodi eli hakemisto <i>dist</i> backendin hakemiston juureen ja määritellä backend näyttämään pääsivunaan frontendin <i>pääsivu</i> eli tiedosto <i>dist/index.html</i>.
 
 Aloitetaan kopioimalla frontendin tuotantokoodi backendin alle, projektin juureen. Omalla koneellani kopiointi tapahtuu frontendin hakemistosta käsin komennolla
 
@@ -252,7 +258,7 @@ const getAll = () => {
 // ...
 ```
 
-Muutoksen jälkeen frontendistä on luotava uusi production build ja kopioitava se backendin repositorion juureen.
+Muutoksen jälkeen frontendistä on luotava uusi production build ja kopioitava se backendin projektin juureen.
 
 Sovellusta voidaan käyttää nyt <i>backendin</i> osoitteesta <http://localhost:3001>:
 
@@ -294,17 +300,21 @@ Toisin kuin sovelluskehitysympäristössä, kaikki sovelluksen tarvitsema löyty
 
 ### Koko sovellus Internetiin
 
-Kun sovelluksen "Internetiin vietävä" tuotantoversio todetaan toimivaksi paikallisesti, commitoidaan frontendin tuotantoversio backendin repositorioon ja pushataan koodi GitHubiin. Jos käytät Renderiä, saattaa automaattinen uudelleenkäynnistys toimia. Jos näin ei ole, käynnistä uusi versio itse dashboardin kautta tekemällä "manual deployment".
+Kun sovelluksen "Internetiin vietävä" tuotantoversio todetaan toimivaksi paikallisesti, voidaan koko sovellus siirtää suoritettavaksi valittuun palveluun.
 
-Fly.io:n tapauksessa sovelluksen uusi versio käynnistyy komennolla
+<strong>Fly.io:n tapauksessa</strong> sovelluksen uusi versio käynnistyy komennolla
 
 ```bash
 fly deploy
 ```
 
+<strong>HUOM:</strong> Projektin juureen luotu _.dockerignore_-tiedosto listaa ne tiedostot, joita ei oteta mukaan deploymentiin, ja dist-kansio saattaa olla siellä mukana oletuksena. Jos näin on, poista viittaus dist/ _.dockerignore_-tiedostosta, jotta sovelluksesi otetaan käyttöön oikein.
+
+<strong>Renderin tapauksessa</strong> commitoidaan tehdyt muutokset ja pushataan koodi GitHubiin. Automaattinen uudelleenkäynnistys saattaa toimia, mutta jos näin ei ole, käynnistä uusi versio itse dashboardin kautta tekemällä "manual deployment".
+
 Sovellus toimii moitteettomasti lukuun ottamatta vielä backendiin toteuttamatonta muistiinpanon tärkeyden muuttamista:
 
-![Selain renderöi sovelluksen frontendin (joka näyttää palvelimella olevan datan) mentäessä sovelluksen heroku-urlin juureen](../../images/3/30new.png)
+![Selain renderöi sovelluksen frontendin (joka näyttää palvelimella olevan datan) mentäessä sovelluksen urlin juureen](../../images/3/30new.png)
 
 Sovelluksemme tallettama tieto ei ole ikuisesti pysyvää, sillä sovellus tallettaa muistiinpanot muuttujaan. Jos sovellus kaatuu tai se uudelleenkäynnistetään, kaikki tiedot katoavat.
 
@@ -335,6 +345,12 @@ Fly.io:n tapauksessa skriptit näyttävät seuraavalta:
   }
 }
 ```
+
+Skripteistä _npm run build:ui_ kääntää ui:n tuotantoversioksi ja kopioi sen. _npm run deploy_ julkaisee Fly.io:n.
+
+_npm run deploy:full_ yhdistää molemmat edellä mainitut komennot. Lisätään lisäksi oma skripti _npm run logs:prod_ lokien lukemiseen, jolloin käytännössä kaikki toimii npm-skriptein.
+
+Huomaa, että skriptissä <i>build:ui</i> olevat polut riippuvat frontendin ja backendin hakemistojen sijainnista.
   
 ##### Huomautus Windows-käyttäjille
 Huomaa, että näistä _build:ui_:n käyttämät shell-komennot eivät toimi natiivisti Windowsilla, jonka powershell käyttää eri komentoja. Tällöin skripti olisi
@@ -344,12 +360,6 @@ Huomaa, että näistä _build:ui_:n käyttämät shell-komennot eivät toimi nat
   
 Mikäli skripti ei toimi Windowsilla, tarkista, että terminaalisi sovelluskehitysympäristössäsi on Powershell eikä esimerkiksi Command Prompt. Jos olet asentanut Git Bash ‑terminaalin, tai muun Linuxia matkivan terminaalin tai ympäristön, saatat pystyä ajamaan Linuxin kaltaisia komentoja myös Windowsilla.
 
-
-Skripteistä _npm run build:ui_ kääntää ui:n tuotantoversioksi ja kopioi sen. _npm run deploy_ julkaisee Fly.io:n.
-
-_npm run deploy:full_ yhdistää molemmat edellä mainitut komennot. Lisätään lisäksi oma skripti _npm run logs:prod_ lokien lukemiseen, jolloin käytännössä kaikki toimii npm-skriptein.
-
-Huomaa, että skriptissä <i>build:ui</i> olevat polut riippuvat repositorioiden sijainnista.
 
 #### Render
 
@@ -369,7 +379,7 @@ Skripteistä _npm run build:ui_ kääntää ui:n tuotantoversioksi ja kopioi sen
 
 _npm run deploy:full_ sisältää edellisen lisäksi vaadittavat <i>git</i>-komennot versionhallinnan päivittämistä varten.
 
-Huomaa, että skriptissä <i>build:ui</i> olevat polut riippuvat repositorioiden sijainnista.
+Huomaa, että skriptissä <i>build:ui</i> olevat polut riippuvat frontendin ja backendin hakemistojen sijainnista.
 
 ### Proxy
 
@@ -385,9 +395,9 @@ const baseUrl = '/api/notes'
 
 Koska frontend toimii osoitteessa <i>localhost:5173</i>, menevät backendiin tehtävät pyynnöt väärään osoitteeseen <i>localhost:5173/api/notes</i>. Backend toimii kuitenkin osoitteessa <i>localhost:3001</i>.
 
-Vitellä luoduissa projekteissa ongelma on helppo ratkaista. Riittää, että frontendin repositorion tiedostoon <i>vite.config.json</i> lisätään seuraava määritelmä:
+Vitellä luoduissa projekteissa ongelma on helppo ratkaista. Riittää, että frontendin tiedostoon <i>vite.config.js</i> lisätään seuraava määritelmä:
 
-```bash
+```js
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
@@ -408,15 +418,15 @@ export default defineConfig({
 
 ```
 
-Uudelleenkäynnistyksen jälkeen Reactin sovelluskehitysympäristö toimii [proxynä](https://vitejs.dev/config/server-options.html#server-proxy). Jos React-koodi tekee HTTP-pyynnön palvelimen <i>http://localhost:5173</i> johonkin osoitteeseen, joka ei ole React-sovelluksen vastuulla (eli kyse ei ole esim. sovelluksen JavaScript-koodin tai CSS:n lataamisesta), lähetetään pyyntö edelleen osoitteessa <i>http://localhost:3001</i> olevalle palvelimelle. 
+Uudelleenkäynnistyksen jälkeen Reactin sovelluskehitysympäristö toimii välityspalvelimena eli [proxynä](https://vitejs.dev/config/server-options.html#server-proxy). Jos React-koodi tekee HTTP-pyynnön <i>http://localhost:5173/api</i>-alkuiseen polkuun, lähetetään pyyntö edelleen osoitteessa <i>http://localhost:3001</i> olevalle palvelimelle. Muihin polkuihin tulevat pyynnöt kehityspalvelin käsittelee normaalisti.
 
-Huomaa, että yllä olevassa esimerkkimääritelmässä vain polulla <i>/api</i>-alkuiset pyynnöt välitetään palvelimelle.
+Nyt myös frontend on kunnossa. Se toimii sekä sovelluskehitysmoodissa että tuotannossa yhdessä palvelimen kanssa. Koska frontendin näkökulmasta kaikki pyynnöt suuntautuvat osoitteeseen http://localhost:5173 eli yhteen ja samaan originiin, ei tarvetta backendin cors-middlewarelle enää ole. Poistetaan siis viittaukset cors-kirjastoon backendin <i>index.js</i>-tiedostosta, ja poistetaan <i>cors</i> projektin riippuvuuksista:
 
-Nyt myös frontend on kunnossa. Se toimii sekä sovelluskehitysmoodissa että tuotannossa yhdessä palvelimen kanssa.
+```bash
+npm remove cors
+```
 
-Eräs negatiivinen puoli käyttämässämme lähestymistavassa on, että sovelluksen uuden version tuotantoon vieminen edellyttää erillisessä repositoriossa olevan frontendin koodin tuotantoversion generoimista. Tämä taas hankaloittaa automatisoidun [deployment pipelinen](https://martinfowler.com/bliki/DeploymentPipeline.html) toteuttamista. Deployment pipelinellä tarkoitetaan automatisoitua ja hallittua tapaa viedä koodi sovelluskehittäjän koneelta erilaisten testien ja laadunhallinnallisten vaiheiden kautta tuotantoympäristöön. Aiheeseen tutustutaan kurssin [osassa 11](https://fullstackopen.com/osa11).
-
-Tähänkin on useita erilaisia ratkaisuja (esim. sekä frontendin että backendin [sijoittaminen samaan repositorioon](https://github.com/mars/heroku-cra-node)), emme kuitenkaan nyt mene niihin. Myös frontendin koodin deployaaminen omana sovelluksenaan voi joissain tilanteissa olla järkevää.
+Olemme nyt vieneet koko sovelluksen onnistuneesti internetiin. Deploymenttien toteuttamiseen on olemassa monenlaisia muitakin tapoja. Esimerkiksi frontendin koodin deployaaminen omana sovelluksenaan voi joissain tilanteissa olla järkevää, sillä se voi helpottaa automatisoidun [deployment pipelinen](https://martinfowler.com/bliki/DeploymentPipeline.html) toteuttamista. Deployment pipelinellä tarkoitetaan automatisoitua ja hallittua tapaa viedä koodi sovelluskehittäjän koneelta erilaisten testien ja laadunhallinnallisten vaiheiden kautta tuotantoympäristöön. Aiheeseen tutustutaan kurssin [osassa 11](/osa11).
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3), branchissa <i>part3-3</i>.
 
@@ -438,11 +448,11 @@ Joudut todennäköisesti tekemään frontendiin erinäisiä pieniä muutoksia ai
 
 #### 3.10 puhelinluettelon backend step10
 
-Vie sovelluksen backend Internetiin, esim. Fly.io:n tai Renderiin. 
-
-Testaa selaimen ja Postmanin tai VS Coden REST-clientin avulla, että Internetissä oleva backend toimii.
+Vie sovelluksen backend Internetiin, esim. Fly.io:n tai Renderiin. Jos käytät Fly.io:ta, komennot tulee suorittaa backendin juurihakemistossa (eli samassa kansiossa, jossa backendin <i>package.json</i>-tiedosto sijaitsee).
 
 **PRO TIP:** kun deployaat sovelluksen Fly.io:n tai Renderiin, kannattaa ainakin alkuvaiheissa pitää **KOKO AJAN** näkyvillä sovelluksen loki.
+
+Testaa selaimen ja Postmanin tai VS Coden REST-clientin avulla, että Internetissä oleva backend toimii.
 
 Tee repositorion juureen tiedosto README.md ja lisää siihen linkki Internetissä olevaan sovellukseesi.
 
@@ -450,10 +460,10 @@ Tee repositorion juureen tiedosto README.md ja lisää siihen linkki Internetiss
 
 Generoi frontendistä tuotantoversio ja lisää se Internetissä olevaan sovellukseesi tässä osassa esiteltyä menetelmää noudattaen.
 
-**HUOM:** eihän hakemisto <i>dist</i> ole gitignoroituna projektissasi jos käytät Renderiä?
-
 Huolehdi myös, että frontend toimii edelleen myös paikallisesti.
 
-Jotta kaikki toimisi, tulee repositoriosi näyttää hakemistorakenteen suhteen samalta kuin [esimerkkisovelluksen repositorion](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3).
+Jos käytät Renderiä, varmista, että hakemisto <i>dist</i> ole gitignoroituna projektissasi.
+
+**HUOM:** Frontendiä ei julkaista suoraan missään vaiheessa tämän osan aikana. Vain backend-repositorio viedään Internetiin. Frontendin tuotantoversio lisätään backend-repositorioon, ja backend näyttää sen pääsivunaan kuten kohdassa [Staattisten tiedostojen tarjoaminen backendistä](/osa3/sovellus_internetiin#staattisten-tiedostojen-tarjoaminen-backendista) on kuvattu.
 
 </div>

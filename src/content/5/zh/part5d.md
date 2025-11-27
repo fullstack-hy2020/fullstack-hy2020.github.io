@@ -7,507 +7,621 @@ lang: zh
 
 <div class="content">
 
-<!-- So far we have tested the backend as a whole on an API level using integration tests, and tested some frontend components using unit tests.-->
- 到目前为止，我们已经使用集成测试在API层面上测试了整个后端，并使用单元测试测试了一些前端组件。
+<!-- So far we have tested the backend as a whole on an API level using integration tests and tested some frontend components using unit tests. -->
+到目前为止，我们已经使用集成测试在 API 层面上测试了整个后端，并使用单元测试测试了一些前端组件。
 
-<!-- Next we will look into one way to test the [system as a whole](https://en.wikipedia.org/wiki/System_testing) using <i>End to End</i> (E2E) tests.-->
-接下来我们将研究一种方法，使用<i>端到端</i>（E2E）测试[系统整体](https://en.wikipedia.org/wiki/System_testing)。
+<!-- Next, we will look into one way to test the [system as a whole](https://en.wikipedia.org/wiki/System_testing) using <i>End to End</i> (E2E) tests. -->
+接下来我们将探讨一种使用<i>端到端</i>（E2E）测试来测试[系统整体](https://en.wikipedia.org/wiki/System_testing)的方法。
 
-<!-- We can do E2E testing of a web application using a browser and a testing library. There are multiple libraries available, for example [Selenium](http://www.seleniumhq.org/) which can be used with almost any browser.-->
- 我们可以使用浏览器和测试库对网络应用进行E2E测试。有多种库可用，例如[Selenium](http://www.seleniumhq.org/)，几乎可以与任何浏览器一起使用。
-<!-- Another browser option are so called [headless browsers](https://en.wikipedia.org/wiki/Headless_browser), which are browsers with no graphical user interface.-->
- 另一个浏览器选项是所谓的[无头浏览器](https://en.wikipedia.org/wiki/Headless_browser)，它是没有图形用户界面的浏览器。
-<!-- For example Chrome can be used in Headless-mode.-->
- 例如，Chrome可以在无头模式下使用。
+<!-- We can do E2E testing of a web application using a browser and a testing library. There are multiple libraries available. One example is [Selenium](http://www.seleniumhq.org/), which can be used with almost any browser.Another browser option is so-called [headless browsers](https://en.wikipedia.org/wiki/Headless_browser), which are browsers with no graphical user interface.For example, Chrome can be used in headless mode. -->
+我们可以使用浏览器和测试库对 Web 应用进行 E2E 测试。有多种测试库可用，一个例子是 [Selenium](http://www.seleniumhq.org/)，它几乎可以与任何浏览器一起使用。另一个浏览器选项是所谓的[无头浏览器](https://en.wikipedia.org/wiki/Headless_browser)，这是一种没有图形用户界面的浏览器。例如，Chrome 可以在无头模式下使用。
 
-<!-- E2E tests are potentially the most useful category of tests, because they test the system through the same interface as real users use.-->
- E2E测试有可能是最有用的测试类别，因为它们通过与真实用户使用的相同界面来测试系统。
+<!-- E2E tests are potentially the most useful category of tests because they test the system through the same interface as real users use. -->
+E2E 测试可能是最有用的测试类别，因为它们通过与真实用户使用相同的界面来测试系统。
 
-<!-- They do have some drawbacks too. Configuring E2E tests is more challenging than unit or integration tests. They also tend to be quite slow, and with a large system their execution time can be minutes, even hours. This is bad for development, because during coding it is beneficial to be able to run tests as often as possible in case of code [regressions](https://en.wikipedia.org/wiki/Regression_testing).-->
-它们也有一些缺点。配置E2E测试比单元或集成测试更具挑战性。他们也倾向于相当慢，对于一个大系统，他们的执行时间可能是几分钟，甚至几小时。这对开发是不利的，因为在编码过程中，如果出现代码[回归](https://en.wikipedia.org/wiki/Regression_testing)，能够尽可能频繁地运行测试是有益的。
+<!-- They do have some drawbacks too. Configuring E2E tests is more challenging than unit or integration tests. They also tend to be quite slow, and with a large system, their execution time can be minutes or even hours. This is bad for development because during coding it is beneficial to be able to run tests as often as possible in case of code [regressions](https://en.wikipedia.org/wiki/Regression_testing). -->
+它们也有一些缺点。配置 E2E 测试比单元或集成测试更具挑战性。并且它们往往较慢，对于大型系统，执行时间可能是几分钟甚至几小时。这对开发是不利的，因为在编码的过程中，能够尽可能频繁地运行测试是有益的，这可以防范代码[回归](https://en.wikipedia.org/wiki/Regression_testing)。
 
-<!-- E2E tests can also be [flaky](https://hackernoon.com/flaky-tests-a-war-that-never-ends-9aa32fdef359).-->
- E2E测试也可能是[不稳定](https://hackernoon.com/flaky-tests-a-war-that-never-ends-9aa32fdef359)。
-<!-- Some tests might pass one time and fail another, even if the code does not change at all.-->
- 有些测试可能一次通过，另一次失败，即使代码根本没有变化。
+<!-- E2E tests can also be [flaky](https://hackernoon.com/flaky-tests-a-war-that-never-ends-9aa32fdef359).Some tests might pass one time and fail another, even if the code does not change at all. -->
+E2E 测试还可能[不稳定](https://hackernoon.com/flaky-tests-a-war-that-never-ends-9aa32fdef359)。有些测试可能前一次通过了，但后一次失败了，即使代码根本没有改变。
 
-### Cypress
+<!-- Perhaps the two easiest libraries for End to End testing at the moment are [Cypress](https://www.cypress.io/) and [Playwright](https://playwright.dev/). -->
+目前，最容易用于 E2E 测试的两个库或许就是 [Cypress](https://www.cypress.io/) 和 [Playwright](https://playwright.dev/)。
 
-<!-- E2E library [Cypress](https://www.cypress.io/) has become popular within the last year. Cypress is exceptionally easy to use, and when compared to Selenium, for example, it requires a lot less hassle and headache.-->
- E2E库[Cypress](https://www.cypress.io/)在去年开始流行。Cypress特别容易使用，与Selenium等相比，它需要的麻烦和头绪要少得多。
-<!-- Its operating principle is radically different than most E2E testing libraries, because Cypress tests are run completely within the browser.-->
-它的操作原理与大多数E2E测试库完全不同，因为Cypress测试完全在浏览器中运行。
-<!-- Other libraries run the tests in a Node-process, which is connected to the browser through an API.-->
- 其他库在一个Node进程中运行测试，该进程通过API与浏览器相连。
+<!-- From the statistics on [npmtrends.com](https://npmtrends.com/cypress-vs-playwright) we can see that Playwright surpassed Cypress in download numbers during 2024, and its popularity continues to grow: -->
+从 [npmtrends.com](https://npmtrends.com/cypress-vs-playwright) 的统计数据来看，Playwright 在 2024 年的下载量已经超过了 Cypress，并且其受欢迎的程度仍在持续增长：
 
-<!-- Let's  make some end to end tests for our note application.-->
- 让我们为我们的笔记应用做一些端到端的测试。
+![cypress vs playwright in npm trends](../../images/5/cvsp.png)
 
-<!-- We begin by installing Cypress to <i>the frontend</i> as development dependency-->
- 我们首先将Cypress安装到<i>前端</i>作为开发依赖项
+<!-- This course has been using Cypress for years. Now Playwright is a new addition. You can choose whether to complete the E2E testing part of the course with Cypress or Playwright. The operating principles of both libraries are very similar, so your choice is not very important. However, Playwright is now the preferred E2E library for the course. -->
+这门课程多年来一直使用 Cypress。现在 Playwright 成为了一个新的选项。你可以选择用 Cypress 或 Playwright 完成 E2E 测试部分。这两个库的运行原理非常相似，所以你的选择并不重要。然而，Playwright 目前是课程首选的 E2E 测试库。
+
+<!-- If your choice is Playwright, please proceed. If you end up using Cypress, go [here](/en/part5/end_to_end_testing_cypress). -->
+如果你的选择是 Playwright，请继续。如果你最终使用 Cypress，请点[这里](/en/part5/end_to_end_testing_cypress)。
+
+### Playwright
+
+<!-- So [Playwright](https://playwright.dev/) is a newcomer to the End to End tests, which started to explode in popularity towards the end of 2023. Playwright is roughly on a par with Cypress in terms of ease of use. The libraries are slightly different in terms of how they work.  Cypress is radically different from most libraries suitable for E2E testing, as Cypress tests are run entirely within the browser. Playwright's tests, on the other hand, are executed in the Node process, which is connected to the browser via programming interfaces. -->
+[Playwright](https://playwright.dev/) 是 E2E 测试领域的新来者，它在 2023 年底开始迅速流行起来。Playwright 在易用性方面与 Cypress 大致相当。这两个库在工作方式上略有不同。Cypress 与大多数适合 E2E 测试的库相比，有着根本性的不同，因为 Cypress 测试完全在浏览器中运行。而 Playwright 的测试则是在 Node 进程中执行，该进程通过编程接口与浏览器连接。
+
+<!-- Many blogs have been written about library comparisons, e.g. [this](https://www.lambdatest.com/blog/cypress-vs-playwright/) and [this](https://www.browserstack.com/guide/playwright-vs-cypress). -->
+许多博客都写过关于库的比较，比如[这篇](https://www.lambdatest.com/blog/cypress-vs-playwright/)和[这篇](https://www.browserstack.com/guide/playwright-vs-cypress)。
+
+<!-- It is difficult to say which library is better. One advantage of Playwright is its browser support; Playwright supports Chrome, Firefox and Webkit-based browsers like Safari. Currently, Cypress includes support for all these browsers, although Webkit support is experimental and does not support all of Cypress features. At the time of writing (1.3.2024), my personal preference leans slightly towards Playwright. -->
+很难说哪个库更好。Playwright 的一个优势是它的浏览器支持；Playwright 支持 Chrome、Firefox 以及基于 Webkit 的浏览器如 Safari。目前，Cypress 也支持所有这些浏览器，尽管 Webkit 的支持是实验性的，并且不支持 Cypress 的所有功能。在撰写本文时（2024年3月1日），我个人偏好稍微倾向于 Playwright。
+
+<!-- Now let's explore Playwright. -->
+现在让我们来探索 Playwright。
+
+### Initializing tests
+
+<!-- Unlike the backend tests or unit tests done on the React front-end, End to End tests do not need to be located in the same npm project where the code is. Let's make a completely separate project for the E2E tests with the _npm init_ command. Then install Playwright by running in the new project directory the command: -->
+与后端测试和在 React 前端进行的单元测试不同，端到端测试不需要位于代码所在的同一 npm 项目中。让我们使用 _npm init_ 命令为端到端测试创建一个完全独立的项目。然后在新的项目目录中运行以下命令来安装 Playwright：
 
 ```js
-npm install --save-dev cypress
+npm init playwright@latest
 ```
 
-<!-- and by adding an npm-script to run it:-->
- 并添加一个npm-script来运行它。
+<!-- The installation script will ask a few questions, answer them as follows: -->
+安装脚本会询问几个问题，按如下方式回答：
+
+![answer: javascript, tests, false, true](../../images/5/play0.png)
+
+<!-- Note that when installing Playwright your operating system may not support all of the browsers Playwright offers and you may see an error message like below: -->
+请注意，在安装 Playwright 时，您的操作系统可能不支持 Playwright 提供的所有浏览器，您可能会看到如下错误消息：
+```
+Webkit 18.0 (playwright build v2070) downloaded to /home/user/.cache/ms-playwright/webkit-2070
+Playwright Host validation warning:
+╔══════════════════════════════════════════════════════╗
+║ Host system is missing dependencies to run browsers. ║
+║ Missing libraries:                                   ║
+║     libicudata.so.66                                 ║
+║     libicui18n.so.66                                 ║
+║     libicuuc.so.66                                   ║
+║     libjpeg.so.8                                     ║
+║     libwebp.so.6                                     ║
+║     libpcre.so.3                                     ║
+║     libffi.so.7                                      ║
+╚══════════════════════════════════════════════════════╝
+```
+<!-- If this is the case you can either specify specific browsers to test with `--project=` in your _package.json_: -->
+如果是这种情况，你可以在你的 _package.json_ 中使用 `--project=` 指定要测试的特定浏览器：
+
+```js
+    "test": "playwright test --project=chromium --project=firefox",
+```
+
+<!-- or remove the entry for any problematic browsers from your _playwright.config.js_ file: -->
+或者从你的 _playwright.config.js_ 文件中删除任何有问题的浏览器的条目：
+
+```js
+  projects: [
+    // ...
+    //{
+    //  name: 'webkit',
+    //  use: { ...devices['Desktop Safari'] },
+    //},
+    // ...
+  ]
+```
+
+<!-- Let's define an npm script for running tests and test reports in _package.json_: -->
+让我们在 _package.json_ 中定义一个 npm 脚本用于运行测试和测试报告：
 
 ```js
 {
   // ...
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "server": "json-server -p3001 db.json",
-    "cypress:open": "cypress open"  // highlight-line
+    "test": "playwright test",
+    "test:report": "playwright show-report"
   },
   // ...
 }
 ```
 
-<!-- Unlike the frontend's unit tests, Cypress tests can be in the frontend or the backend repository, or even in their own separate repository.-->
- 与前端的单元测试不同，Cypress的测试可以在前端或后端仓库中，甚至可以在它们自己的独立仓库中。
+<!-- During installation, the following is printed to the console: -->
+在安装过程中，以下内容将打印到控制台：
 
-<!-- The tests require the tested system to be running. Unlike our backend integration tests, Cypress tests <i>do not start</i> the system when they are run.-->
- 测试需要被测系统正在运行。与我们的后端集成测试不同，Cypress测试在运行时<i>不会启动</i>系统。
+```
+And check out the following files:
+  - ./tests/example.spec.js - Example end-to-end test
+  - ./tests-examples/demo-todo-app.spec.js - Demo Todo App end-to-end tests
+  - ./playwright.config.js - Playwright Test configuration
+```
 
-<!-- Let's add an npm-script to <i>the backend</i> which starts it in test mode, or so that <i>NODE\_ENV</i> is <i>test</i>.-->
- 让我们给<i>后端</i>添加一个npm-script，在测试模式下启动它，或者让<i>NODE\_ENV</i>成为<i>测试</i>。
+<!-- that is, the location of a few example tests for the project that the installation has created. -->
+也就是说，这是安装创建的项目中几个示例测试的位置。
+
+<!-- Let's run the tests: -->
+让我们运行测试：
+
+```bash
+$ npm test
+
+> notes-e2e@1.0.0 test
+> playwright test
+
+
+Running 6 tests using 5 workers
+  6 passed (3.9s)
+
+To open last HTML report run:
+
+  npx playwright show-report
+```
+
+<!-- The tests pass. A more detailed test report can be opened either with the command suggested by the output, or with the npm script we just defined: -->
+测试通过。更详细的测试报告可以通过输出的建议命令或我们刚刚定义的 npm 脚本打开：
+
+```
+npm run test:report
+```
+
+<!-- Tests can also be run via the graphical UI with the command: -->
+测试也可以使用以下命令通过图形界面运行：
+
+```
+npm run test -- --ui
+```
+
+<!-- Sample tests in the file tests/example.spec.js look like this: -->
+tests/example.spec.js 中的示例测试看起来是这样的：
+
+```js
+// @ts-check
+import { test, expect } from '@playwright/test';
+
+test('has title', async ({ page }) => {
+  await page.goto('https://playwright.dev/'); // highlight-line
+
+  // Expect a title "to contain" a substring.
+  await expect(page).toHaveTitle(/Playwright/);
+});
+
+test('get started link', async ({ page }) => {
+  await page.goto('https://playwright.dev/');
+
+  // Click the get started link.
+  await page.getByRole('link', { name: 'Get started' }).click();
+
+  // Expects page to have a heading with the name of Installation.
+  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+});
+```
+
+<!-- The first line of the test functions says that the tests are testing the page at https://playwright.dev/. -->
+测试函数的第一行说明这些测试正在测试 https://playwright.dev/ 页面。
+
+### Testing our own code
+
+<!-- Now let's remove the sample tests and start testing our own application. -->
+现在让我们移除示例测试，开始测试我们自己的应用程序。
+
+<!-- Playwright tests assume that the system under test is running when the tests are executed. Unlike, for example, backend integration tests, Playwright tests <i>do not start</i> the system under test during testing. -->
+Playwright 测试假设在执行测试时系统正在运行。与后端集成测试等例子不同，Playwright 测试在测试过程中<i>不会启动</i>被测试的系统。
+
+<!-- Let's make an npm script for the <i>backend</i>, which will enable it to be started in testing mode, i.e. so that <i>NODE\_ENV</i> gets the value <i>test</i>. -->
+让我们为<i>后端</i>创建一个 npm 脚本，这将使其能够在测试模式下启动，即使 <i>NODE\_ENV</i> 的值为 <i>test</i>。
 
 ```js
 {
   // ...
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
-    "dev": "cross-env NODE_ENV=development nodemon index.js",
-    "build:ui": "rm -rf build && cd ../../../2/luento/notes && npm run build && cp -r build ../../../3/luento/notes-backend",
-    "deploy": "git push heroku master",
-    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",
-    "logs:prod": "heroku logs --tail",
+    "dev": "cross-env NODE_ENV=development node --watch index.js",
+    "test": "cross-env NODE_ENV=test node --test",
     "lint": "eslint .",
-    "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
-    "start:test": "cross-env NODE_ENV=test node index.js" // highlight-line
+    // ...
+    "start:test": "cross-env NODE_ENV=test node --watch index.js" // highlight-line
   },
   // ...
 }
 ```
 
-<!-- NB! In order to get Cypress working with WSL2 one might need to do some additional configuring first. These two [links](https://docs.cypress.io/guides/getting-started/installing-cypress#Windows-Subsystem-for-Linux) are great places to [start](https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress).-->
- NB!为了让Cypress与WSL2一起工作，可能需要先做一些额外的配置。这两个[链接](https://docs.cypress.io/guides/getting-started/installing-cypress#Windows-Subsystem-for-Linux)是[开始](https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress)的好地方。
-
-<!-- NB! For macbooks with m1 CPU instead of intel ones, cypress wouldn't work since it doesn't support m1 yet. To fix that, installing Rosetta 2 then configuring your terminal is a must. For step by step instructions follow [here](https://www.cypress.io/blog/2021/01/20/running-cypress-on-the-apple-m1-silicon-arm-architecture-using-rosetta-2/).-->
- NB!对于使用m1 CPU而不是intel CPU的macbook，cypress不能工作，因为它还不支持m1。要解决这个问题，安装Rosetta 2然后配置你的终端是必须的。关于一步一步的说明，请按照[这里](https://www.cypress.io/blog/2021/01/20/running-cypress-on-the-apple-m1-silicon-arm-architecture-using-rosetta-2/)。
-
-<!-- When both backend and frontend are running, we can start Cypress with the command-->
- 当后端和前端都在运行时，我们可以用以下命令启动Cypress
+<!-- Let's start the frontend and backend, and create the first test file for the application <code>tests/note\_app.spec.js</code>: -->
+让我们启动前端和后端，并为应用程序创建第一个测试文件 <code>tests/note\_app.spec.js</code> ：
 
 ```js
-npm run cypress:open
+const { test, expect } = require('@playwright/test')
+
+test('front page can be opened', async ({ page }) => {
+  await page.goto('http://localhost:5173')
+
+  const locator = page.getByText('Notes')
+  await expect(locator).toBeVisible()
+  await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2024')).toBeVisible()
+})
 ```
 
-<!-- When we first run Cypress, it creates a <i>cypress</i> directory. It contains an <i>integration</i> subdirectory, where we will place our tests. Cypress creates a bunch of example tests for us in two subdirectories: the <i>integration/1-getting-started</i> and the <i>integration/2-advanced-examples</i> directory. We can delete both directories and make our own test in file <i>note\_app.spec.js</i>:-->
- 当我们第一次运行Cypress时，它会创建一个<i>cypress</i>目录。它包含一个<i>integration</i>子目录，我们将在那里放置我们的测试。Cypress在两个子目录中为我们创建了一堆测试示例：<i>integration/1-getting-started</i>和<i>integration/2-advanced-examples</i>目录。我们可以删除这两个目录，在文件<i>note_app.spec.js</i>中做我们自己的测试。
+<!-- First, the test opens the application with the method [page.goto](https://playwright.dev/docs/writing-tests#navigation). After this, it uses the [page.getByText](https://playwright.dev/docs/api/class-page#page-get-by-text) to get a [locator](https://playwright.dev/docs/locators) that corresponds to the element where the text <i>Notes</i> is found. -->
+首先，测试使用 [page.goto](https://playwright.dev/docs/writing-tests#navigation) 方法打开应用程序。之后，它使用 [page.getByText](https://playwright.dev/docs/api/class-page#page-get-by-text) 方法获取与包含文本 <i>Notes</i> 的元素对应的[定位器](https://playwright.dev/docs/locators)。
+
+<!-- The method [toBeVisible](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-be-visible) ensures that the element corresponding to the locator is visible at the page. -->
+[toBeVisible](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-be-visible) 方法确保与定位器对应的元素在页面上可见。
+
+<!-- The second check is done without using the auxiliary variable. -->
+第二次检查没有使用辅助变量。
+
+<!-- The test fails because an old year ended up in the test. Playwright opens the test report in the browser and it becomes clear that Playwright has actually performed the tests with three different browsers: Chrome, Firefox and Webkit, i.e. the browser engine used by Safari: -->
+测试失败了，因为测试中混入了一个旧年份。Playwright 在浏览器中打开了测试报告，很明显 Playwright 实际上是用三种不同的浏览器进行了测试：Chrome、Firefox 和 Webkit，即 Safari 使用的浏览器引擎：
+
+![test report showing the test failing in three different browsers](../../images/5/play2.png)
+
+<!-- By clicking on the report of one of the browsers, we can see a more detailed error message: -->
+通过点击其中一个浏览器的报告，我们可以看到一个更详细的错误信息：
+
+![test error message](../../images/5/play3a.png)
+
+<!-- In the big picture, it is of course a very good thing that the testing takes place with all three commonly used browser engines, but this is slow, and when developing the tests it is probably best to carry them out mainly with only one browser. You can define the browser engine to be used with the command line parameter: -->
+从宏观角度来看，测试使用所有三种常用浏览器引擎当然是非常好的，但这会很慢，在开发测试时，最好主要只用一种浏览器进行。您可以通过命令行参数定义要使用的浏览器引擎：
 
 ```js
-describe('Note app', function() {
-  it('front page can be opened', function() {
-    cy.visit('http://localhost:3000')
-    cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2022')
+npm test -- --project chromium
+```
+
+<!-- Now let's fix the test with the correct year and let's add a _describe_ block to the tests: -->
+现在让我们修正测试中的年份，并在测试中添加一个 _describe_ 块：
+
+```js
+const { test, describe, expect } = require('@playwright/test')
+
+describe('Note app', () => {  // highlight-line
+  test('front page can be opened', async ({ page }) => {
+    await page.goto('http://localhost:5173')
+
+    const locator = page.getByText('Notes')
+    await expect(locator).toBeVisible()
+    await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2025')).toBeVisible()
   })
 })
 ```
 
-<!-- We start the test from the opened window:-->
- 我们从打开的窗口开始进行测试。
+<!-- Before we move on, let's break the tests one more time. We notice that the execution of the tests is quite fast when they pass, but much slower if the they do not pass. The reason for this is that Playwright's policy is to wait for searched elements until [they are rendered and ready for action](https://playwright.dev/docs/actionability). If the element is not found, a _TimeoutError_ is raised and the test fails. Playwright waits for elements by default for 5 or 30 seconds [depending on the functions used in testing](https://playwright.dev/docs/test-timeouts#introduction). -->
+在继续之前，让我们再分析一次测试。我们注意到，当测试通过时，执行速度相当快，但如果测试未通过，执行速度会慢很多。这是因为 Playwright 的策略是等待搜索的元素直到[它们渲染并准备好执行](https://playwright.dev/docs/actionability)。如果找不到元素，会抛出 _TimeoutError_ 并导致测试失败。Playwright 默认等待元素的时间[取决于测试中使用的函数](https://playwright.dev/docs/test-timeouts#introduction)，通常是 5 秒或 30 秒。
 
-![](../../images/5/40x.png)
-
-<!-- **NOTE**: you might need to restart Cypress after deleting the example tests.-->
- **注意**：删除示例测试后，你可能需要重新启动Cypress。
-
-<!-- Running the test opens your browser and shows how the application behaves as the test is run:-->
- 运行测试会打开你的浏览器，并显示应用在运行测试时的表现。
-
-![](../../images/5/32x.png)
-
-<!-- The structure of the test should look familiar. They use <i>describe</i> blocks to group different test cases like Jest does. The test cases have been defined with the <i>it</i> method.-->
- 测试的结构应该看起来很熟悉。他们使用<i>describe</i>块来分组不同的测试用例，像Jest那样。测试用例已经用<i>it</i>方法进行了定义。
-<!-- Cypress borrowed these parts from the [Mocha](https://mochajs.org/) testing library it uses under the hood.-->
- Cypress从它在引擎盖下使用的[Mocha](https://mochajs.org/)测试库中借用了这些部分。
-
-<!-- [cy.visit](https://docs.cypress.io/api/commands/visit.html) and [cy.contains](https://docs.cypress.io/api/commands/contains.html) are Cypress commands, and their purpose is quite obvious.-->
- [cy.visit](https://docs.cypress.io/api/commands/visit.html)和[cy.contains](https://docs.cypress.io/api/commands/contains.html)是Cypress的命令，它们的目的非常明显。
-<!-- [cy.visit](https://docs.cypress.io/api/commands/visit.html) opens the web address given to it as a parameter in the browser used by the test. [cy.contains](https://docs.cypress.io/api/commands/contains.html) searches for the string it received as a parameter from the page.-->
- [cy.visit](https://docs.cypress.io/api/commands/visit.html)在测试所使用的浏览器中打开作为参数给它的网页地址。[cy.contains](https://docs.cypress.io/api/commands/contains.html)搜索它从网页上收到的作为参数的字符串。
-
-<!-- We could have declared the test using an arrow function-->
- 我们可以用一个箭头函数来声明这个测试
+<!-- When developing tests, it may be wiser to reduce the waiting time to a few seconds. According to the [documentation](https://playwright.dev/docs/test-timeouts), this can be done by changing the file _playwright.config.js_ as follows: -->
+在开发测试时，将等待时间减少到几秒钟可能更明智。根据[文档](https://playwright.dev/docs/test-timeouts)，这可以通过按以下方式修改 _playwright.config.js_ 文件来实现：
 
 ```js
-describe('Note app', () => { // highlight-line
-  it('front page can be opened', () => { // highlight-line
-    cy.visit('http://localhost:3000')
-    cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2022')
-  })
+export default defineConfig({
+  // ...
+  timeout: 3000, // highlight-line
+  fullyParallel: false, // highlight-line
+  workers: 1, // highlight-line
+  // ...
 })
 ```
 
-<!-- However, Mocha [recommends](https://mochajs.org/#arrow-functions) that arrow functions are not used, because they might cause some issues in certain situations.-->
- 然而，Mocha[建议](https://mochajs.org/#arrow-functions)不要使用箭头函数，因为它们在某些情况下可能导致一些问题。
+<!-- We also made two other changes to the file, specifying that all tests [be executed one at a time](https://playwright.dev/docs/test-parallel). With the default configuration, the execution happens in parallel, and since our tests use a database, parallel execution causes problems. -->
+我们还对文件进行了另外两项更改，并指定所有测试应[逐个执行](https://playwright.dev/docs/test-parallel)。在默认配置下，执行是并行进行的，而由于我们的测试使用数据库，并行执行会导致问题。
 
-<!-- If <i>cy.contains</i> does not find the text it is searching for, the test does not pass.  So if we extend our test like so-->
- 如果<i>cy.contains</i>没有找到它要搜索的文本，测试就不会通过。  因此，如果我们像这样扩展我们的测试
+### Writing on the form
 
-```js
-describe('Note app', function() {
-  it('front page can be opened',  function() {
-    cy.visit('http://localhost:3000')
-    cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2022')
-  })
+<!-- Let's write a new test that tries to log into the application. Let's assume that a user is stored in the database, with username <i>mluukkai</i> and password <i>salainen</i>. -->
+让我们编写一个新的测试，尝试登录应用程序。假设数据库中存储了一个用户，用户名为 <i>mluukkai</i>，密码为 <i>salainen</i>。
 
-// highlight-start
-  it('front page contains random text', function() {
-    cy.visit('http://localhost:3000')
-    cy.contains('wtf is this app?')
-  })
-// highlight-end
-})
-```
-
-<!-- the test fails-->
- 测试失败
-
-![](../../images/5/33x.png)
-
-<!-- Let's remove the failing code from the test.-->
- 让我们从测试中删除失败的代码。
-
-### Writing to a form
-
-<!-- Let's extend our tests so that the test tries to log in to our application.-->
- 让我们扩展我们的测试，使测试尝试登录到我们的应用。
-<!-- We assume our backend contains a user with the username <i>mluukkai</i> and password <i>salainen</i>.-->
- 我们假设我们的后端包含一个用户名<i>mluukkai</i>和密码<i>salainen</i>的用户。
-
-<!-- The test begins by opening the login form.-->
-测试从打开登录表单开始。
+<!-- Let's start by opening the login form. -->
+让我们从打开登录表单开始。
 
 ```js
-describe('Note app',  function() {
+describe('Note app', () => {
   // ...
 
-  it('login form can be opened', function() {
-    cy.visit('http://localhost:3000')
-    cy.contains('login').click()
+  test('user can log in', async ({ page }) => {
+    await page.goto('http://localhost:5173')
+
+    await page.getByRole('button', { name: 'login' }).click()
   })
 })
 ```
 
-<!-- The test first searches for the login button by its text, and clicks the button with the command [cy.click](https://docs.cypress.io/api/commands/click.html#Syntax).-->
- 测试首先通过文本搜索登录按钮，并通过命令[cy.click](https://docs.cypress.io/api/commands/click.html#Syntax)点击按钮。
+<!-- The test first uses the method [page.getByRole](https://playwright.dev/docs/api/class-page#page-get-by-role) to retrieve the button based on its text. The method returns the [Locator](https://playwright.dev/docs/api/class-locator) corresponding to the Button element. Pressing the button is performed using the Locator method [click](https://playwright.dev/docs/api/class-locator#locator-click). -->
+测试首先使用方法 [page.getByRole](https://playwright.dev/docs/api/class-page#page-get-by-role) 根据其文本获取按钮。该方法返回与 Button 元素对应的 [定位器](https://playwright.dev/docs/api/class-locator)。然后通过定位器的方法 [click](https://playwright.dev/docs/api/class-locator#locator-click) 进行按钮点击。
 
-<!-- Both of our tests begin the same way, by opening the page <i>http://localhost:3000</i>, so we should-->
- 我们的两个测试都是以同样的方式开始的，打开<i>http://localhost:3000</i>页面，所以我们应该
-<!-- separate the shared part into a <i>beforeEach</i> block run before each test:-->
-将共享部分分离成一个<i>beforeEach</i>块，在每个测试前运行。
+<!-- When developing tests, you could use Playwright's [UI mode](https://playwright.dev/docs/test-ui-mode), i.e. the user interface version. Let's start the tests in UI mode as follows: -->
+在开发测试时，你可以使用 Playwright 的 [UI 模式](https://playwright.dev/docs/test-ui-mode)，即用户界面版本。让我们按照以下方式以 UI 模式开始测试：
 
-```js
-describe('Note app', function() {
-  // highlight-start
-  beforeEach(function() {
-    cy.visit('http://localhost:3000')
-  })
-  // highlight-end
-
-  it('front page can be opened', function() {
-    cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2022')
-  })
-
-  it('login form can be opened', function() {
-    cy.contains('login').click()
-  })
-})
+```
+npm test -- --ui
 ```
 
-<!-- The login field contains two <i>input</i> fields, which the test should write into.-->
- 登录字段包含两个<i>输入</i>字段，测试应该把它们写进。
+<!-- We now see that the test finds the button -->
+我们现在看到测试找到了按钮
 
-<!-- The [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax) command allows for searching elements by CSS selectors.-->
- [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax)命令允许通过CSS选择器搜索元素。
+![playwright UI rendering the notes app while testing it](../../images/5/play4.png)
 
-<!-- We can access the first and the last input field on the page, and write to them with the command [cy.type](https://docs.cypress.io/api/commands/type.html#Syntax) like so:-->
- 我们可以访问页面上的第一个和最后一个输入字段，并通过[cy.type](https://docs.cypress.io/api/commands/type.html#Syntax)命令写入它们，就像这样。
+<!-- After clicking, the form will appear -->
+点击后，表单将出现
 
-```js
-it('user can login', function () {
-  cy.contains('login').click()
-  cy.get('input:first').type('mluukkai')
-  cy.get('input:last').type('salainen')
-})
-```
+![playwright UI rendering the login form of the notes app](../../images/5/play5.png)
 
-<!-- The test works. The problem is if we later add more input fields, the test will break because it expects the fields it needs to be the first and the last on the page.-->
- 这个测试是有效的。问题是，如果我们以后添加更多的输入字段，测试就会中断，因为它期望它需要的字段是页面上的第一个和最后一个。
-
-<!-- It would be better to give our inputs unique <i>ids</i> and use those to find them.-->
- 最好是给我们的输入以唯一的<i>ids</i>，并使用这些来找到它们。
-<!-- We change our login form like so:-->
-我们像这样改变我们的登录表格。
+<!-- When the form is opened, the test should look for the text fields and enter the username and password in them. Let's make the first attempt using the method [page.getByRole](https://playwright.dev/docs/api/class-page#page-get-by-role): -->
+当表单打开时，测试应查找文本字段，并在其中输入用户名和密码。让我们首先尝试使用方法 [page.getByRole](https://playwright.dev/docs/api/class-page#page-get-by-role)。
 
 ```js
-const LoginForm = ({ ... }) => {
-  return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          username
-          <input
-            id='username'  // highlight-line
-            value={username}
-            onChange={handleUsernameChange}
-          />
-        </div>
-        <div>
-          password
-          <input
-            id='password' // highlight-line
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-        </div>
-        <button id="login-button" type="submit"> // highlight-line
-          login
-        </button>
-      </form>
-    </div>
-  )
-}
-```
+describe('Note app', () => {
+  // ...
 
-<!-- We also added an id to our submit button so we can access it in our tests.-->
- 我们还为我们的提交按钮添加了一个ID，这样我们就可以在测试中访问它。
+  test('user can log in', async ({ page }) => {
+    await page.goto('http://localhost:5173')
 
-<!-- The test becomes:-->
- 测试变成了。
-
-```js
-describe('Note app',  function() {
-  // ..
-  it('user can log in', function() {
-    cy.contains('login').click()
-    cy.get('#username').type('mluukkai')  // highlight-line
-    cy.get('#password').type('salainen')  // highlight-line
-    cy.get('#login-button').click()  // highlight-line
-
-    cy.contains('Matti Luukkainen logged in') // highlight-line
+    await page.getByRole('button', { name: 'login' }).click()
+    await page.getByRole('textbox').fill('mluukkai')  // highlight-line
   })
 })
 ```
 
-<!-- The last row ensures that the login was successful.-->
- 最后一行确保登录成功。
+<!-- This results to an error: -->
+这导致了一个错误：
 
-<!-- Note that the CSS [id-selector](https://developer.mozilla.org/en-US/docs/Web/CSS/ID_selectors) is #, so if we want to search for an element with the id <i>username</i> the CSS selector is <i>#username</i>.-->
- 注意CSS的[id-selector](https://developer.mozilla.org/en-US/docs/Web/CSS/ID_selectors)是#，所以如果我们想搜索一个id为<i>username</i>的元素，CSS选择器是<i>#username</i>。
-
-### Some things to note
-
-<!-- The test first clicks the button opening the login form like so-->
- 测试首先点击按钮，打开登录表单，就像这样
-
-```js
-cy.contains('login').click()
+```bash
+Error: locator.fill: Error: strict mode violation: getByRole('textbox') resolved to 2 elements:
+  1) <input value=""/> aka locator('div').filter({ hasText: /^username$/ }).getByRole('textbox')
+  2) <input value="" type="password"/> aka locator('input[type="password"]')
 ```
 
-<!-- When the form has been filled, the form is submitted by clicking the submit button-->
-当表格填写完毕后，点击提交按钮，表格被提交。
+<!-- The problem now is that _getByRole_ finds two text fields, and calling the [fill](https://playwright.dev/docs/api/class-locator#locator-fill) method fails, because it assumes that there is only one text field found. One way around the problem is to use the methods [first](https://playwright.dev/docs/api/class-locator#locator-first) and [last](https://playwright.dev/docs/api/class-locator#locator-last): -->
+现在的问题是，_getByRole_ 找到了两个文本字段，调用 [fill](https://playwright.dev/docs/api/class-locator#locator-fill) 方法会失败，因为它假设只找到了一个文本字段。解决这个问题的一种方案是用 [first](https://playwright.dev/docs/api/class-locator#locator-first) 和 [last](https://playwright.dev/docs/api/class-locator#locator-last) 这两个方法：
 
 ```js
-cy.get('#login-button').click()
+describe('Note app', () => {
+  // ...
+
+  test('user can log in', async ({ page }) => {
+    await page.goto('http://localhost:5173')
+
+    await page.getByRole('button', { name: 'login' }).click()
+    // highlight-start
+    await page.getByRole('textbox').first().fill('mluukkai')
+    await page.getByRole('textbox').last().fill('salainen')
+    await page.getByRole('button', { name: 'login' }).click()
+  
+    await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
+    // highlight-end
+  })
+})
 ```
 
-<!-- Both buttons have the text <i>login</i>, but they are two separate buttons.-->
-两个按钮都有文本<i>login</i>，但它们是两个独立的按钮。
-<!-- Actually both buttons are in the application's DOM the whole time, but only one is visible at a time because of the <i>display:none</i> styling on one of them.-->
-实际上两个按钮一直都在应用的DOM中，但由于其中一个按钮的<i>display:none</i>样式，每次只有一个是可见的。
+<!-- After writing in the text fields, the test presses the _login_ button and checks that the application renders the logged-in user's information on the screen. -->
+在文本字段中输入后，测试会点击 _login_ 按钮，并检查应用程序是否在屏幕上渲染了已登录用户的信息。
 
-<!-- If we search for a button by its text, [cy.contains](https://docs.cypress.io/api/commands/contains.html#Syntax) will return the first of them, or the one opening the login form.-->
- 如果我们通过文本搜索一个按钮，[cy.contains](https://docs.cypress.io/api/commands/contains.html#Syntax)将返回其中的第一个，或打开登录表单的那个。
-<!-- This will happen even if the button is not visible.-->
-即使该按钮不可见，也会发生这种情况。
-<!-- To avoid name conflicts, we gave the submit button the id <i>login-button</i> we can use to access it.-->
-为了避免名称冲突，我们给了提交按钮一个id <i>login-button</i>，我们可以用它来访问。
-
-<!-- Now we notice that the variable _cy_ our tests use gives us a nasty Eslint error-->
- 现在我们注意到，我们测试使用的变量_cy_给了我们一个讨厌的Eslint错误
-
-![](../../images/5/30ea.png)
-
-<!-- We can get rid of it by installing [eslint-plugin-cypress](https://github.com/cypress-io/eslint-plugin-cypress) as a development dependency-->
-我们可以通过安装[eslint-plugin-cypress](https://github.com/cypress-io/eslint-plugin-cypress)作为开发依赖来摆脱它。
+<!-- If there were more than two text fields, using the methods _first_ and _last_ would not be enough. One possibility would be to use the [all](https://playwright.dev/docs/api/class-locator#locator-all) method, which turns the found locators into an array that can be indexed: -->
+如果有超过两个文本字段，使用 _first_ 和 _last_ 方法就不够了。一种可能是使用 [all](https://playwright.dev/docs/api/class-locator#locator-all) 方法，它将找到的定位器转换成一个可以索引的数组：
 
 ```js
-npm install eslint-plugin-cypress --save-dev
-```
+describe('Note app', () => {
+  // ...
+  test('user can log in', async ({ page }) => {
+    await page.goto('http://localhost:5173')
 
-<!-- and changing the configuration in <i>.eslintrc.js</i> like so:-->
- 然后改变<i>.eslintrc.js</i>中的配置，像这样。
+    await page.getByRole('button', { name: 'login' }).click()
+    // highlight-start
+    const textboxes = await page.getByRole('textbox').all()
 
-```js
-module.exports = {
-    "env": {
-        "browser": true,
-        "es6": true,
-        "jest/globals": true,
-        "cypress/globals": true // highlight-line
-    },
-    "extends": [
-      // ...
-    ],
-    "parserOptions": {
-      // ...
-    },
-    "plugins": [
-        "react", "jest", "cypress" // highlight-line
-    ],
-    "rules": {
-      // ...
-    }
-}
-```
-
-### Testing new note form
-
-<!-- Let's next add tests which test the "new note" functionality:-->
- 接下来我们添加测试 "新笔记 "功能的测试。
-
-```js
-describe('Note app', function() {
-  // ..
-  // highlight-start
-  describe('when logged in', function() {
-    beforeEach(function() {
-      cy.contains('login').click()
-      cy.get('input:first').type('mluukkai')
-      cy.get('input:last').type('salainen')
-      cy.get('#login-button').click()
-    })
+    await textboxes[0].fill('mluukkai')
+    await textboxes[1].fill('salainen')
     // highlight-end
 
-    // highlight-start
-    it('a new note can be created', function() {
-      cy.contains('new note').click()
-      cy.get('input').type('a note created by cypress')
-      cy.contains('save').click()
-
-      cy.contains('a note created by cypress')
-    })
-  })
-  // highlight-end
+    await page.getByRole('button', { name: 'login' }).click()
+  
+    await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
+  })  
 })
 ```
 
-<!-- The test has been defined in its own <i>describe</i> block.-->
- 这个测试已经被定义在它自己的<i>describe</i>块中。
-<!-- Only logged-in users can create new notes, so we added logging in to the application to a <i>beforeEach</i> block.-->
- 只有登录的用户才能创建新的笔记，所以我们在<i>beforeEach</i>块中加入了登录应用。
+<!-- Both this and the previous version of the test work. However, both are problematic to the extent that if the registration form is changed, the tests may break, as they rely on the fields to be on the page in a certain order. -->
+这个和上一个版本的测试工作都可以运行。然而，它们都存在问题，因为如果注册表单被更改，测试可能会失效，因为它们依赖于表单字段在页面上按特定顺序排列。
 
-<!-- The test trusts that when creating a new note the page contains only one input, so it searches for it like so:-->
- 测试相信当创建一个新的笔记时，页面只包含一个输入，所以它像这样搜索它。
+<!-- If an element is difficult to locate in tests, you can assign it a separate <i>test-id</i> attribute and find the element in tests using the [getByTestId](https://playwright.dev/docs/api/class-page#page-get-by-test-id) method. -->
+如果元素在测试中难以定位，你可以为其分配一个单独的 <i>test-id</i> 属性，并使用 [getByTestId](https://playwright.dev/docs/api/class-page#page-get-by-test-id) 方法在测试中查找该元素。
+
+<!-- Let's now take advantage of the existing elements of the login form. The input fields of the login form have been assigned unique <i>labels</i>: -->
+现在让我们利用登录表单的现有元素。登录表单的输入字段已被分配了唯一的 <i>labels</i>：
 
 ```js
-cy.get('input')
+// ...
+<form onSubmit={handleSubmit}>
+  <div>
+    <label> // highlight-line
+      username // highlight-line
+      <input
+        type="text"
+        value={username}
+        onChange={handleUsernameChange}
+      />
+    </label> // highlight-line
+  </div>
+  <div>
+    <label> // highlight-line
+      password // highlight-line
+      <input
+        type="password"
+        value={password}
+        onChange={handlePasswordChange}
+      />
+    </label> // highlight-line
+  </div>
+  <button type="submit">login</button>
+</form>
+// ...
 ```
 
-<!-- If the page contained more inputs, the test would break-->
- 如果该页面包含更多的输入，测试就会中断。
-
-![](../../images/5/31x.png)
-
-<!-- Due to this it would again be better to give the input an <i>id</i> and search for the element by its id.-->
-由于这个原因，最好还是给输入一个<i>id</i>，并通过它的id搜索元素。
-
-<!-- The structure of the tests looks like so:-->
- 测试的结构看起来是这样的。
+<!-- Input fields can and should be located in tests using <i>labels</i> with the [getByLabel](https://playwright.dev/docs/api/class-page#page-get-by-label) method: -->
+输入字段可以并且应该使用 [getByLabel](https://playwright.dev/docs/api/class-page#page-get-by-label) 方法通过 <i>labels</i> 在测试中定位：
 
 ```js
-describe('Note app', function() {
+describe('Note app', () => {
   // ...
 
-  it('user can log in', function() {
-    cy.contains('login').click()
-    cy.get('#username').type('mluukkai')
-    cy.get('#password').type('salainen')
-    cy.get('#login-button').click()
+  test('user can log in', async ({ page }) => {
+    await page.goto('http://localhost:5173')
 
-    cy.contains('Matti Luukkainen logged in')
+    await page.getByRole('button', { name: 'login' }).click()
+    await page.getByLabel('username').fill('mluukkai') // highlight-line
+    await page.getByLabel('password').fill('salainen')  // highlight-line
+  
+    await page.getByRole('button', { name: 'login' }).click() 
+  
+    await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
+  })
+})
+```
+
+<!-- When locating elements, it makes sense to aim to utilize the content visible to the user in the interface, as this best simulates how a user would actually find the desired input field while navigating the application. -->
+在定位元素时，最好利用界面中用户可见的内容，因为这样可以最好地模拟用户在导航应用时实际找到所需输入字段的方式。
+
+<!-- Note that passing the test at this stage requires that there is a user in the <i>test</i> database of the backend with username <i>mluukkai</i> and password <i>salainen</i>. Create a user if needed! -->
+请注意，在此阶段通过测试需要后端<i>测试</i>数据库中存在一个用户，用户名为 <i>mluukkai</i>，密码为 <i>salainen</i>。如有需要，请创建用户！
+
+### Test Initialization
+
+<!-- Since both tests start in the same way, i.e. by opening the page <i>http://localhost:5173</i>, it is recommended to isolate the common part in the <i>beforeEach</i> block that is executed before each test: -->
+由于两个测试都从打开页面 <i>http://localhost:5173</i> 开始，建议在 beforeEach 块中隔离每个测试执行之前的公共部分：
+
+```js
+const { test, describe, expect, beforeEach } = require('@playwright/test')
+
+describe('Note app', () => {
+  // highlight-start
+  beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5173')
+  })
+  // highlight-end
+
+  test('front page can be opened', async ({ page }) => {
+    const locator = page.getByText('Notes')
+    await expect(locator).toBeVisible()
+    await expect(page.getByText('Note app, Department of Computer Science, University of Helsinki 2025')).toBeVisible()
   })
 
-  describe('when logged in', function() {
-    beforeEach(function() {
-      cy.contains('login').click()
-      cy.get('input:first').type('mluukkai')
-      cy.get('input:last').type('salainen')
-      cy.get('#login-button').click()
+  test('user can log in', async ({ page }) => {
+    await page.getByRole('button', { name: 'login' }).click()
+    await page.getByLabel('username').fill('mluukkai')
+    await page.getByLabel('password').fill('salainen')
+    await page.getByRole('button', { name: 'login' }).click()
+    await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
+  })
+})
+```
+
+### Testing note creation
+
+<!-- Next, let's create a test that adds a new note to the application: -->
+接下来，让我们创建一个测试，该测试向应用程序添加一个新的笔记：
+
+```js
+const { test, describe, expect, beforeEach } = require('@playwright/test')
+
+describe('Note app', () => {
+  // ...
+
+  describe('when logged in', () => {
+    beforeEach(async ({ page }) => {
+      await page.getByRole('button', { name: 'login' }).click()
+      await page.getByLabel('username').fill('mluukkai')
+      await page.getByLabel('password').fill('salainen')
+      await page.getByRole('button', { name: 'login' }).click()
     })
 
-    it('a new note can be created', function() {
-      // ...
+    test('a new note can be created', async ({ page }) => {
+      await page.getByRole('button', { name: 'new note' }).click()
+      await page.getByRole('textbox').fill('a note created by playwright')
+      await page.getByRole('button', { name: 'save' }).click()
+      await expect(page.getByText('a note created by playwright')).toBeVisible()
+    })
+  })  
+})
+```
+
+<!-- The test is defined in its own _describe_ block. Creating a note requires that the user is logged in, which is handled in the _beforeEach_ block. -->
+测试定义在其自己的 _describe_ 块中。创建笔记需要用户登录，这由 _beforeEach_ 块处理。
+
+<!-- The test trusts that when creating a new note, there is only one input field on the page, so it searches for it as follows: -->
+该测试相信在创建新笔记时页面上只有一个输入字段，因此它按以下方式搜索：
+
+```js
+page.getByRole('textbox')
+```
+
+<!-- If there were more fields, the test would break. Because of this, it could be better to add a <i>test-id</i> to the form input and search for it in the test based on this id. -->
+如果有更多字段，测试就会失败。由于这个原因，最好给表单输入添加一个 <i>test-id</i>，并基于这个 id 在测试中查找它。
+
+<!-- **Note:** the test will only pass the first time. The reason for this is that its expectation -->
+**注意：**测试只会在第一次通过。其原因是它的期望
+
+```js
+await expect(page.getByText('a note created by playwright')).toBeVisible()
+```
+
+<!-- causes problems when the same note is created in the application more than once. The problem will be solved in the next chapter. -->
+当同一个笔记在应用程序中创建多次时会导致问题。这个问题将在下一章解决。
+
+<!-- The structure of the tests looks like this: -->
+测试的结构看起来是这样的：
+
+```js
+const { test, describe, expect, beforeEach } = require('@playwright/test')
+
+describe('Note app', () => {
+  // ....
+
+  test('user can log in', async ({ page }) => {
+    await page.getByRole('button', { name: 'login' }).click()
+    await page.getByLabel('username').fill('mluukkai')
+    await page.getByLabel('password').fill('salainen')
+    await page.getByRole('button', { name: 'login' }).click()
+    await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
+  })
+
+  describe('when logged in', () => {
+    beforeEach(async ({ page }) => {
+      await page.getByRole('button', { name: 'login' }).click()
+      await page.getByLabel('username').fill('mluukkai')
+      await page.getByLabel('password').fill('salainen')
+      await page.getByRole('button', { name: 'login' }).click()
+    })
+
+    test('a new note can be created', async ({ page }) => {
+      await page.getByRole('button', { name: 'new note' }).click()
+      await page.getByRole('textbox').fill('a note created by playwright')
+      await page.getByRole('button', { name: 'save' }).click()
+      await expect(page.getByText('a note created by playwright')).toBeVisible()
     })
   })
 })
 ```
 
-<!-- Cypress runs the tests in the order they are in the code. So first it runs <i>user can log in</i>, where the user logs in. Then cypress will run <i>a new note can be created</i> for which a <i>beforeEach</i> block logs in as well.-->
- Cypress按照代码中的顺序运行测试。因此，首先它运行<i>user can log in</i>，其中用户登录。然后，Cypress将运行<i>一个新的笔记可以被创建</i>，为此，一个<i>beforeEach</i>块也会登录。
-<!-- Why do this? Isn't the user logged in after the first test?-->
- 为什么这样做？用户在第一次测试后不是已经登录了吗？
-<!-- No, because <i>each</i> test starts from zero as far as the browser is concerned.-->
-不是，因为就浏览器而言，<i>每个</i>测试都是从零开始的。
-<!-- All changes to the browser's state are reversed after each test.-->
-每次测试后，对浏览器状态的所有改变都是相反的。
+<!-- Since we have prevented the tests from running in parallel, Playwright runs the tests in the order they appear in the test code. That is, first the test <i>user can log in</i>, where the user logs into the application, is performed. After this the test <i>a new note can be created</i> gets executed, which also does a log in, in the <i>beforeEach</i> block. Why is this done, isn't the user already logged in thanks to the previous test? No, because the execution of <i>each</i> test starts from the browser's "zero state", all changes made to the browser's state by the previous tests are reset. -->
+由于我们已禁止测试并行运行，Playwright 会按照测试代码中出现的顺序执行测试。也就是说，首先执行<i>用户登录</i>的测试，用户登录应用程序的操作会先完成。接着执行<i>创建新笔记</i>的测试，该测试也会在 <i>beforeEach</i> 块中执行登录操作。为什么还要这么做呢？用户不是已经在之前的测试中登录了吗？不，因为<i>每个</i>测试的执行都是从浏览器的“零状态”开始的，之前测试对浏览器状态所做的所有更改都会被重置。
 
 ### Controlling the state of the database
 
-<!-- If the tests need to be able to modify the server's database, the situation immediately becomes more complicated. Ideally, the server's database should be the same each time we run the tests, so our tests can be reliably and easily repeatable.-->
- 如果测试需要能够修改服务器的数据库，情况会立即变得更加复杂。理想情况下，每次我们运行测试时，服务器的数据库应该是相同的，所以我们的测试可以可靠地、容易地重复。
+<!-- If the tests need to be able to modify the server's database, the situation immediately becomes more complicated. Ideally, the server's database should be the same each time we run the tests, so our tests can be reliably and easily repeatable. -->
+如果测试需要能够修改服务器的数据库，情况将立即变得复杂起来。理想情况下，服务器的数据库在每次运行测试时都应该是相同的，这样我们的测试才能可靠且容易地重复。
 
-<!-- As with unit and integration tests, with E2E tests it is the best to empty the database and possibly format it before the tests are run. The challenge with E2E tests is that they do not have access to the database.-->
- 与单元和集成测试一样，对于E2E测试，最好是在测试运行前清空数据库，并可能将其格式化。E2E测试的挑战是他们不能访问数据库。
+<!-- As with unit and integration tests, with E2E tests it is best to empty the database and possibly format it before the tests are run. The challenge with E2E tests is that they do not have access to the database. -->
+与单元测试和集成测试一样，对于 E2E 测试，在运行测试之前最好清空数据库，并可能要对其进行格式化。E2E 测试的挑战在于它们无法访问数据库。
 
-<!-- The solution is to create API endpoints to the backend for the test.-->
-解决方法是为测试的后端创建API端点。
-<!-- We can empty the database using these endpoints.-->
- 我们可以使用这些端点清空数据库。
-<!-- Let's create a new <i>router</i> for the tests-->
- 让我们为测试创建一个新的<i>路由器</i>。
+<!-- The solution is to create API endpoints for the backend tests.We can empty the database using these endpoints.Let's create a new router for the tests inside the <i>controllers</i> folder, in the <i>testing.js</i> file -->
+解决方案是为后端测试创建 API 端点。我们可以使用这些端点来清空数据库。让我们在 <i>controllers</i> 文件夹中的 <i>testing.js</i> 文件里创建一个新的路由用于测试
 
 ```js
-const testingRouter = require('express').Router()
+const router = require('express').Router()
 const Note = require('../models/note')
 const User = require('../models/user')
 
-testingRouter.post('/reset', async (request, response) => {
+router.post('/reset', async (request, response) => {
   await Note.deleteMany({})
   await User.deleteMany({})
 
   response.status(204).end()
 })
 
-module.exports = testingRouter
+module.exports = router
 ```
 
-<!-- and add it to the backend only <i>if the application is run on test-mode</i>:-->
-并将其添加到后端 <i>如果应用在测试模式下运行</i>。
+<!-- and add it to the backend only <i>if the application is run in test-mode</i>: -->
+并且仅在<i>应用程序以测试模式运行</i>时才将其添加到后端：
 
 ```js
 // ...
@@ -529,154 +643,130 @@ app.use(middleware.errorHandler)
 module.exports = app
 ```
 
-<!-- After the changes, an HTTP POST request to the <i>/api/testing/reset</i> endpoint empties the database. Make sure your backend is running in test mode by starting it with this command (previously configured in the package.json file):-->
- 更改后，对<i>/api/testing/reset</i>端点的HTTP POST请求会清空数据库。确保你的后端在测试模式下运行，用这个命令启动它（之前在package.json文件中配置）。
+<!-- After the changes, an HTTP POST request to the <i>/api/testing/reset</i> endpoint empties the database. Make sure your backend is running in test mode by starting it with this command (previously configured in the package.json file): -->
+修改后，对 <i>/api/testing/reset</i> 端点的 HTTP POST 请求会清空数据库。通过使用此命令启动后端以确保其在测试模式下运行（该命令之前已在 package.json 文件中配置）：
+
 ```js
   npm run start:test
 ```
 
-<!-- The modified backend code can be found from [GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1) branch <i>part5-1</i>.-->
- 修改后的后端代码可以在[GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1)分支<i>part5-1</i>找到。
+<!-- The modified backend code can be found on the [GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1) branch <i>part5-1</i>. -->
+修改后的后端代码可以在 [GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1) 的 <i>part5-1</i> 分支上找到。
 
-<!-- Next we will change the <i>beforeEach</i> block so that it empties the server's database before tests are run.-->
- 接下来我们将修改<i>beforeEach</i>块，以便在运行测试之前清空服务器的数据库。
+<!-- Next, we will change the _beforeEach_ block so that it empties the server's database before tests are run. -->
+接下来，我们将修改 _beforeEach_ 块，使其在运行测试前清空服务器的数据库。
 
-<!-- Currently it is not possible to add new users through the frontend's UI, so we add a new user to the backend from the beforeEach block.-->
- 目前不可能通过前端的用户界面添加新用户，所以我们从beforeEach块向后端添加一个新用户。
+<!-- Currently, it is not possible to add new users through the frontend's UI, so we add a new user to the backend from the beforeEach block. -->
+目前无法通过前端 UI 添加新用户，因此我们用 beforeEach 块从后端添加一个新用户。
 
 ```js
-describe('Note app', function() {
-   beforeEach(function() {
+describe('Note app', () => {
+  beforeEach(async ({ page, request }) => {
+    await request.post('http://localhost:3001/api/testing/reset')
+    await request.post('http://localhost:3001/api/users', {
+      data: {
+        name: 'Matti Luukkainen',
+        username: 'mluukkai',
+        password: 'salainen'
+      }
+    })
+
+    await page.goto('http://localhost:5173')
+  })
+
+  test('front page can be opened',  () => {
+    // ...
+  })
+
+  test('user can login', () => {
+    // ...
+  })
+
+  describe('when logged in', () => {
+    // ...
+  })
+})
+```
+
+<!-- During initialization, the test makes HTTP requests to the backend with the method [post](https://playwright.dev/docs/api/class-apirequestcontext#api-request-context-post) of the parameter _request_. -->
+在初始化的过程中，测试使用参数 _request_ 的方法 [post](https://playwright.dev/docs/api/class-apirequestcontext#api-request-context-post) 向后端发送 HTTP 请求。
+
+<!-- Unlike before, now the testing of the backend always starts from the same state, i.e. there is one user and no notes in the database. -->
+与之前不同，现在后端测试总是从相同的状态开始，即数据库中有一个用户且没有笔记。
+
+<!-- Let's make a test that checks that the importance of the notes can be changed. -->
+让我们做一个测试，检查笔记的重要性是否可以更改。
+
+<!-- There are a few different approaches to taking the test. -->
+进行这个测试有几种不同的方法。
+
+<!-- In the following, we first look for a note and click on its button that has text <i>make not important</i>. After this, we check that the note contains the button with <i>make important</i>. -->
+在下文中，我们首先查找一个笔记并点击其带有文本 <i>make not important</i> 的按钮。之后，我们检查该笔记是否包含带有 <i>make important</i> 的按钮。
+
+```js
+describe('Note app', () => {
+  // ...
+
+  describe('when logged in', () => {
+    // ...
+
     // highlight-start
-    cy.request('POST', 'http://localhost:3001/api/testing/reset')
-    const user = {
-      name: 'Matti Luukkainen',
-      username: 'mluukkai',
-      password: 'salainen'
-    }
-    cy.request('POST', 'http://localhost:3001/api/users/', user)
+    describe('and a note exists', () => {
+      beforeEach(async ({ page }) => {
+        await page.getByRole('button', { name: 'new note' }).click()
+        await page.getByRole('textbox').fill('another note by playwright')
+        await page.getByRole('button', { name: 'save' }).click()
+      })
+
+      test('importance can be changed', async ({ page }) => {
+        await page.getByRole('button', { name: 'make not important' }).click()
+        await expect(page.getByText('make important')).toBeVisible()
+      })
     // highlight-end
-    cy.visit('http://localhost:3000')
-  })
-
-  it('front page can be opened', function() {
-    // ...
-  })
-
-  it('user can login', function() {
-    // ...
-  })
-
-  describe('when logged in', function() {
-    // ...
-  })
-})
-```
-
-<!-- During the formatting the test does HTTP requests to the backend with [cy.request](https://docs.cypress.io/api/commands/request.html).-->
-在格式化过程中，测试用[cy.request](https://docs.cypress.io/api/commands/request.html)向后端做HTTP请求。
-
-<!-- Unlike earlier, now the testing starts with the backend in the same state every time. The backend will contain one user and no notes.-->
- 与先前不同，现在测试开始时，后端每次都处于相同的状态。后端将包含一个用户，没有注释。
-
-<!-- Let's add one more test for checking that we can change the importance of notes.-->
- 让我们再增加一个测试，检查我们是否可以改变笔记的重要性。
-<!-- First we change the frontend so that a new note is unimportant by default, or the <i>important</i> field is <i>false</i>:-->
- 首先我们改变前端，使新的笔记默认为不重要，或者<i>重要</i>字段为<i>false</i>。
-
-```js
-const NoteForm = ({ createNote }) => {
-  // ...
-
-  const addNote = (event) => {
-    event.preventDefault()
-    createNote({
-      content: newNote,
-      important: false // highlight-line
-    })
-
-    setNewNote('')
-  }
-  // ...
-}
-```
-
-<!-- There are multiple ways to test this. In the following example we first search for a note and click its <i>make important</i> button. Then we check that the note now contains a <i>make not important</i> button.-->
- 有多种方法来测试。在下面的例子中，我们首先搜索一个笔记，并点击其<i>重要</i>按钮。然后我们检查该笔记现在是否包含一个<i>使之不重要</i>按钮。
-
-```js
-describe('Note app', function() {
-  // ...
-
-  describe('when logged in', function() {
-    // ...
-
-    describe('and a note exists', function () {
-      beforeEach(function () {
-        cy.contains('new note').click()
-        cy.get('input').type('another note cypress')
-        cy.contains('save').click()
-      })
-
-      it('it can be made important', function () {
-        cy.contains('another note cypress')
-          .contains('make important')
-          .click()
-
-        cy.contains('another note cypress')
-          .contains('make not important')
-      })
     })
   })
 })
 ```
 
-<!-- The first command searches for a component containing the text <i>another note cypress</i>, and then for a <i>make important</i> button within it. It then clicks the button.-->
- 第一条命令搜索一个包含<i>另一个笔记cypress</i>文本的组件，然后搜索其中的<i>make important</i>按钮。然后它就点击这个按钮。
+<!-- The first command first searches for the component where there is the text <i>another note by playwright</i> and inside it the button <i>make not important</i> and clicks on it. -->
+第一个命令首先搜索包含文本 <i>another note by playwright</i> 的组件，并在其中找到按钮 <i>make not important</i> 并点击它。
 
-<!-- The second command checks that the text on the button has changed to <i>make not important</i>.-->
- 第二个命令检查按钮上的文字是否已经变成了<i>使之不重要</i>。
+<!-- The second command ensures that the text of the same button has changed to <i>make important</i>. -->
+第二个命令确保该按钮的文本已更改为 <i>make important</i>。
 
-<!-- The tests and the current frontend code can be found from [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-9) branch <i>part5-9</i>.-->
- 测试和当前的前端代码可以从[GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-9)分支<i>part5-9</i>找到。
+<!-- The current code for the tests is on [GitHub](https://github.com/fullstack-hy2020/notes-e2e/tree/part5-1), in branch <i>part5-1</i>. -->
+测试代码当前位于 [GitHub](https://github.com/fullstack-hy2020/notes-e2e/tree/part5-1) 的分支 <i>part5-1</i> 上。
 
-### Failed login test
+### Test for failed login
 
-<!-- Let's make a test to ensure that a login attempt fails if the password is wrong.-->
- 让我们做一个测试，确保在密码错误的情况下，登录尝试失败。
+<!-- Now let's do a test that ensures that the login attempt fails if the password is wrong. -->
+现在我们来做一个测试，确保如果密码错误，登录尝试会失败。
 
-<!-- Cypress will run all tests each time by default, and as the number of tests increases it starts to become quite time-consuming.-->
- Cypress默认每次都会运行所有测试，随着测试数量的增加，它开始变得相当耗时。
-<!-- When developing a new test or when debugging a broken test, we can define the test with <i>it.only</i> instead of <i>it</i>, so that Cypress will only run the required test.-->
- 当开发一个新的测试或调试一个损坏的测试时，我们可以用<i>it.only</i>代替<i>it</i>来定义测试，这样Cypress将只运行所需的测试。
-<!-- When the test is working, we can remove <i>.only</i>.-->
- 当测试正常时，我们可以删除<i>.only</i>。
-
-<!-- First  version of our tests is as follows:-->
-我们测试的第一个版本如下。
+<!-- The first version of the test looks like this: -->
+测试的第一个版本看起来是这样的：
 
 ```js
-describe('Note app', function() {
+describe('Note app', () => {
   // ...
 
-  it.only('login fails with wrong password', function() {
-    cy.contains('login').click()
-    cy.get('#username').type('mluukkai')
-    cy.get('#password').type('wrong')
-    cy.get('#login-button').click()
+  test('login fails with wrong password', async ({ page }) => {
+    await page.getByRole('button', { name: 'login' }).click()
+    await page.getByLabel('username').fill('mluukkai')
+    await page.getByLabel('password').fill('wrong')
+    await page.getByRole('button', { name: 'login' }).click()
 
-    cy.contains('wrong credentials')
+    await expect(page.getByText('wrong credentials')).toBeVisible()
   })
 
   // ...
-)}
+})
 ```
 
-<!-- The test uses [cy.contains](https://docs.cypress.io/api/commands/contains.html#Syntax) to ensure that the application prints an error message.-->
- 测试使用[cy.contains](https://docs.cypress.io/api/commands/contains.html#Syntax)来确保应用打印出错误信息。
+<!-- The test verifies with the method [page.getByText](https://playwright.dev/docs/api/class-page#page-get-by-text) that the application prints an error message. -->
+该测试通过方法 [page.getByText](https://playwright.dev/docs/api/class-page#page-get-by-text) 验证应用程序是否打印错误消息。
 
-<!-- The application renders the error message to a component with the CSS class <i>error</i>:-->
- 应用将错误信息渲染到一个具有CSS类<i>error</i>的组件。
+<!-- The application renders the error message to an element containing the CSS class <i>error</i>: -->
+应用程序将错误消息渲染到 CSS 类为 <i>error</i> 的元素中：
 
 ```js
 const Notification = ({ message }) => {
@@ -692,251 +782,206 @@ const Notification = ({ message }) => {
 }
 ```
 
-<!-- We could make the test ensure that the error message is rendered to the correct component, that is, the component with the CSS class <i>error</i>:-->
- 我们可以让测试确保错误信息被渲染到正确的组件，也就是具有CSS类<i>error</i>的组件。
-
+<!-- We could refine the test to ensure that the error message is printed exactly in the right place, i.e. in the element containing the CSS class <i>error</i>: -->
+我们可以优化测试，以确保错误消息正好打印在正确位置，即 CSS 类为 <i>error</i> 的元素中：
 
 ```js
-it('login fails with wrong password', function() {
+test('login fails with wrong password', async ({ page }) => {
   // ...
 
-  cy.get('.error').contains('wrong credentials') // highlight-line
+  const errorDiv = page.locator('.error') // highlight-line
+  await expect(errorDiv).toContainText('wrong credentials')
 })
 ```
 
-<!-- First we use [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax) to search for a component with the CSS class <i>error</i>. Then we check that the error message can be found from this component.-->
- 首先我们使用[cy.get](https://docs.cypress.io/api/commands/get.html#Syntax)来搜索一个具有CSS类<i>error</i>的组件。然后我们检查是否可以从这个组件中找到错误信息。
-<!-- Note that the [CSS class selector](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors) starts with a full stop, so the selector for the class <i>error</i> is <i>.error</i>.-->
- 注意[CSS类选择器](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors)以句号开头，所以<i>error</i>类的选择器是<i>.error</i>。
+<!-- So the test uses the [page.locator](https://playwright.dev/docs/api/class-page#page-locator) method to find the component containing the CSS class <i>error</i> and stores it in a variable. The correctness of the text associated with the component can be verified with the expectation [toContainText](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-contain-text). Note that the [CSS class selector](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors) starts with a dot, so the <i>error</i> class selector is <i>.error</i>. -->
+因此，测试使用 [page.locator](https://playwright.dev/docs/api/class-page#page-locator) 方法查找 CSS 类为 <i>error</i> 的组件，并将其存储在变量中。可以通过期望 [toContainText](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-contain-text) 来验证与组件关联的文本的正确性。请注意，[CSS 类选择器](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors)以点开头，因此 <i>error</i> 的类选择器是 <i>.error</i>。
 
-<!-- We could do the same using the [should](https://docs.cypress.io/api/commands/should.html) syntax:-->
- 我们可以用[should](https://docs.cypress.io/api/commands/should.html)的语法做同样的事情。
+<!-- It is possible to test the application's CSS styles with matcher [toHaveCSS](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-have-css). We can, for example, make sure that the color of the error message is red, and that there is a border around it: -->
+可以使用 [toHaveCSS](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-have-css) 匹配器来测试应用程序的 CSS 样式。例如，我们可以确保错误消息的颜色是红色，并且它周围有边框：
 
 ```js
-it('login fails with wrong password', function() {
+test('login fails with wrong password', async ({ page }) => {
   // ...
 
-  cy.get('.error').should('contain', 'wrong credentials') // highlight-line
+  const errorDiv = page.locator('.error')
+  await expect(errorDiv).toContainText('wrong credentials')
+  await expect(errorDiv).toHaveCSS('border-style', 'solid') // highlight-line
+  await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)') // highlight-line
 })
 ```
 
-<!-- Using should is a bit trickier than using <i>contains</i>, but it allows for more diverse tests than <i>contains</i> which works based on text content only.-->
- 使用should比使用<i>contains</i>要麻烦一些，但它允许比<i>contains</i>更多样化的测试，后者只基于文本内容工作。
+<!-- Colors must be defined to Playwright as [rgb](https://rgbcolorcode.com/color/red) codes. -->
+给 Playwright 的颜色必须定义为 [rgb](https://rgbcolorcode.com/color/red) 代码。
 
-<!-- A list of the most common assertions which can be used with should can be found [here](https://docs.cypress.io/guides/references/assertions.html#Common-Assertions).-->
- 可以和should一起使用的最常见的断言列表可以在[这里](https://docs.cypress.io/guides/references/assertions.html#Common-Assertions)找到。
-
-<!-- We can, for example, make sure that the error message is red and it has a border:-->
- 例如，我们可以确保错误信息是红色的，并且有一个边框。
+<!-- Let's finalize the test so that it also ensures that the application **does not render** the text describing a successful login <i>'Matti Luukkainen logged in'</i>: -->
+让我们完成测试，以便它也能确保应用程序**不会渲染**描述成功登录的文本 <i>Matti Luukkainen logged in</i>：
 
 ```js
-it('login fails with wrong password', function() {
-  // ...
+test('login fails with wrong password', async ({ page }) =>{
+  await page.getByRole('button', { name: 'login' }).click()
+  await page.getByLabel('username').fill('mluukkai')
+  await page.getByLabel('password').fill('wrong')
+  await page.getByRole('button', { name: 'login' }).click()
 
-  cy.get('.error').should('contain', 'wrong credentials')
-  cy.get('.error').should('have.css', 'color', 'rgb(255, 0, 0)')
-  cy.get('.error').should('have.css', 'border-style', 'solid')
+  const errorDiv = page.locator('.error')
+  await expect(errorDiv).toContainText('wrong credentials')
+  await expect(errorDiv).toHaveCSS('border-style', 'solid')
+  await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)')
+
+  await expect(page.getByText('Matti Luukkainen logged in')).not.toBeVisible() // highlight-line
 })
 ```
 
-<!-- Cypress requires the colors to be given as [rgb](https://rgbcolorcode.com/color/red).-->
- Cypress要求颜色以[rgb](https://rgbcolorcode.com/color/red)形式给出。
+### Running tests one by one
 
-<!-- Because all tests are for the same component we accessed using [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax), we can chain them using [and](https://docs.cypress.io/api/commands/and.html).-->
- 因为所有的测试都是针对我们使用[cy.get](https://docs.cypress.io/api/commands/get.html#Syntax)访问的同一个组件，我们可以使用[and](https://docs.cypress.io/api/commands/and.html)将它们连锁起来。
-
-```js
-it('login fails with wrong password', function() {
-  // ...
-
-  cy.get('.error')
-    .should('contain', 'wrong credentials')
-    .and('have.css', 'color', 'rgb(255, 0, 0)')
-    .and('have.css', 'border-style', 'solid')
-})
-```
-
-<!-- Let's finish the test so that it also checks that the application does not render the success message <i>'Matti Luukkainen logged in'</i>:-->
- 让我们完成这个测试，以便它也能检查应用是否渲染成功信息 <i>"Matti Luukkainen logged in"</i>。
+<!-- By default, Playwright always runs all tests, and as the number of tests increases, it becomes time-consuming. When developing a new test or debugging a broken one, the test can be defined instead than with the command <i>test</i>, with the command <i>test.only</i>, in which case Playwright will run only that test: -->
+默认情况下，Playwright 总是运行所有测试，并且随着测试数量的增加，运行时间会变得很长。在开发新测试或调试有问题的测试时，可以用 <i>test.only</i> 而不是 <i>test</i> 来定义测试，这样 Playwright 将只运行该测试：
 
 ```js
-it('login fails with wrong password', function() {
-  cy.contains('login').click()
-  cy.get('#username').type('mluukkai')
-  cy.get('#password').type('wrong')
-  cy.get('#login-button').click()
-
-  cy.get('.error')
-    .should('contain', 'wrong credentials')
-    .and('have.css', 'color', 'rgb(255, 0, 0)')
-    .and('have.css', 'border-style', 'solid')
-
-  cy.get('html').should('not.contain', 'Matti Luukkainen logged in') // highlight-line
-})
-```
-
-<i>Should</i> should always be chained with <i>get</i> (or another chainable command).
-<!-- We used <i>cy.get('html')</i> to access the whole visible content of the application.-->
- 我们使用<i>cy.get("html")</i>来访问应用的整个可见内容。
-
-<!-- **NOTE:** Some CSS properties [behave differently on Firefox](https://github.com/cypress-io/cypress/issues/9349). If you run the tests with Firefox:-->
- **注意：**一些CSS属性[在Firefox上的表现不同](https://github.com/cypress-io/cypress/issues/9349)。如果你用Firefox运行测试。
-
-<!--   ![running](https://user-images.githubusercontent.com/4255997/119015927-0bdff800-b9a2-11eb-9234-bb46d72c0368.png)-->
- ![running](https://user-images.githubusercontent.com/4255997/119015927-0bdff800-b9a2-11eb-9234-bb46d72c0368.png)
-
-<!--   then tests that involve, for example, `border-style`, `border-radius` and `padding`, will pass in Chrome or Electron, but fail in Firefox:-->
- 那么涉及到 "border-style"、"border-radius "和 "padding "的测试，在Chrome或Electron上会通过，但在Firefox上会失败。
-
-<!--   ![borderstyle](https://user-images.githubusercontent.com/4255997/119016340-7b55e780-b9a2-11eb-82e0-bab0418244c0.png)-->
- ![borderstyle](https://user-images.githubusercontent.com/4255997/119016340-7b55e780-b9a2-11eb-82e0-bab0418244c0.png)
-
-### Bypassing the UI
-
-<!-- Currently we have the following tests:-->
- 目前我们有以下的测试。
-
-```js
-describe('Note app', function() {
-  it('user can login', function() {
-    cy.contains('login').click()
-    cy.get('#username').type('mluukkai')
-    cy.get('#password').type('salainen')
-    cy.get('#login-button').click()
-
-    cy.contains('Matti Luukkainen logged in')
-  })
-
-  it('login fails with wrong password', function() {
+describe(() => {
+  // this is the only test executed!
+  test.only('login fails with wrong password', async ({ page }) => {  // highlight-line
     // ...
   })
 
-  describe('when logged in', function() {
-    beforeEach(function() {
-      cy.contains('login').click()
-      cy.get('input:first').type('mluukkai')
-      cy.get('input:last').type('salainen')
-      cy.get('#login-button').click()
+  // this test is skipped...
+  test('user can login with correct credentials', async ({ page }) => {
+    // ...
+  })
+
+  // ...
+})
+```
+
+<!-- When the test is ready, <i>only</i> can and **should** be deleted. -->
+当该测试一切妥当后，<i>only</i> 可以并且**应该**被删除。
+
+<!-- Another option to run a single test is to use a command line parameter: -->
+运行单个测试的另一个选项是使用命令行参数：
+
+```
+npm test -- -g "login fails with wrong password"
+```
+
+### Helper functions for tests
+
+<!-- Our application tests currently look like this: -->
+我们的应用测试现在看起来是这样的：
+
+```js
+const { test, describe, expect, beforeEach } = require('@playwright/test')
+
+describe('Note app', () => {
+  // ...
+
+  test('user can login with correct credentials', async ({ page }) => {
+    await page.getByRole('button', { name: 'login' }).click()
+    await page.getByLabel('username').fill('mluukkai')
+    await page.getByLabel('password').fill('salainen')
+    await page.getByRole('button', { name: 'login' }).click()
+    await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
+  })
+
+  test('login fails with wrong password', async ({ page }) =>{
+    // ...
+  })
+
+  describe('when logged in', () => {
+    beforeEach(async ({ page, request }) => {
+      await page.getByRole('button', { name: 'login' }).click()
+      await page.getByLabel('username').fill('mluukkai')
+      await page.getByLabel('password').fill('salainen')
+      await page.getByRole('button', { name: 'login' }).click()
     })
 
-    it('a new note can be created', function() {
+    test('a new note can be created', async ({ page }) => {
       // ...
     })
 
+    // ...
   })
 })
 ```
 
-<!-- First we test logging in. Then, in their own describe block, we have a bunch of tests which expect the user to be logged in. User is logged in in the <i>beforeEach</i> block.-->
- 首先我们测试登录。然后，在他们自己的描述块中，我们有一系列的测试，期望用户能够登录。用户在<i>beforeEach</i>块中被登录。
+<!-- First, the login function is tested. After this, another _describe_ block contains a set of tests that assume that the user is logged in, the login is handled inside the initializing _beforeEach_ block. -->
+首先测试登录功能。之后，另一个 _describe_ 块包含一组假设用户已登录的测试，登录在用于初始化的 _beforeEach_ 块中完成。
 
-<!-- As we said above, each test starts from zero! Tests do not start from the state where the previous tests ended.-->
- 正如我们上面所说的，每个测试都是从零开始的!测试不会从之前测试结束的状态开始。
+<!-- As already stated earlier, each test is executed starting from the initial state (where the database is cleared and one user is created there), so even though the test is defined after another test in the code, it does not start from the same state where the tests in the code executed earlier have left! -->
+如前所述，每个测试都从初始状态开始执行（此时数据库被清空并创建一个用户），因此即使代码中定义的测试出现在另一个测试之后，它也不会从之前测试留下的状态开始！
 
-<!-- The Cypress documentation gives us the following advice: [Fully test the login flow – but only once!](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Logging-in).-->
- Cypress文档给了我们以下建议。[完全测试登录流程--但只测试一次！](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Logging-in)。
-<!-- So instead of logging in a user using the form in the <i>beforeEach</i> block, Cypress recommends that we [bypass the UI](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Bypassing-your-UI) and do an HTTP request to the backend to log in. The reason for this is that logging in with an HTTP request is much faster than filling a form.-->
- 因此，Cypress建议我们不要在<i>beforeEach</i>块中使用表单来登录用户，而是[绕过UI](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Bypassing-your-UI)，向后端发出HTTP请求来登录。这样做的原因是，用HTTP请求登录要比填表快得多。
-
-<!-- Our situation is a bit more complicated than in the example in the Cypress documentation, because when a user logs in, our application saves their details to the localStorage.-->
- 我们的情况比Cypress文档中的例子要复杂一些，因为当用户登录时，我们的应用会将他们的详细信息保存到localStorage中。
-<!-- However Cypress can handle that as well.-->
- 然而，Cypress也可以处理这个问题。
-<!-- The code is the following-->
-代码如下
+<!-- It is also worth striving for having non-repetitive code in tests. Let's isolate the code that handles the login as a helper function, which is placed e.g. in the file _tests/helper.js_: -->
+测试中还应尽量避免重复代码。让我们将处理登录的代码作为辅助函数隔离出来，例如放到文件 _tests/helper.js_ 中：
 
 ```js
-describe('when logged in', function() {
-  beforeEach(function() {
-    // highlight-start
-    cy.request('POST', 'http://localhost:3001/api/login', {
-      username: 'mluukkai', password: 'salainen'
-    }).then(response => {
-      localStorage.setItem('loggedNoteappUser', JSON.stringify(response.body))
-      cy.visit('http://localhost:3000')
+const loginWith = async (page, username, password)  => {
+  await page.getByRole('button', { name: 'login' }).click()
+  await page.getByLabel('username').fill(username)
+  await page.getByLabel('password').fill(password)
+  await page.getByRole('button', { name: 'login' }).click()
+}
+
+export { loginWith }
+```
+
+<!-- The tests becomes simpler and clearer: -->
+测试将变得更简单和清晰：
+
+```js
+const { test, describe, expect, beforeEach } = require('@playwright/test')
+const { loginWith } = require('./helper') // highlight-line
+
+describe('Note app', () => {
+  // ...
+
+  test('user can log in', async ({ page }) => {
+    await loginWith(page, 'mluukkai', 'salainen') // highlight-line
+    await expect(page.getByText('Matti Luukkainen logged in')).toBeVisible()
+  })
+
+  test('login fails with wrong password', async ({ page }) => {
+    await loginWith(page, 'mluukkai', 'wrong') // highlight-line
+
+    const errorDiv = page.locator('.error')
+    // ...
+  })
+
+  describe('when logged in', () => {
+    beforeEach(async ({ page }) => {
+      await loginWith(page, 'mluukkai', 'salainen') // highlight-line
     })
-    // highlight-end
-  })
 
-  it('a new note can be created', function() {
     // ...
   })
-
-  // ...
 })
 ```
 
-<!-- We can access the response to a [cy.request](https://docs.cypress.io/api/commands/request.html) with the _then_ method.  Under the hood <i>cy.request</i>, like all Cypress commands, are [promises](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Commands-Are-Promises).-->
- 我们可以用_then_方法访问[cy.request](https://docs.cypress.io/api/commands/request.html)的响应。  在引擎盖下<i>cy.request</i>，像所有的Cypress命令一样，是[promises](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Commands-Are-Promises)。
-<!-- The callback function saves the details of a logged-in user to localStorage, and reloads the page.-->
-回调函数将登录用户的详细信息保存到localStorage，并重新加载页面。
-<!-- Now there is no difference to a user logging in with the login form.-->
-现在与用户用登录表格登录没有区别。
+<!-- Playwright also offers a [solution](https://playwright.dev/docs/auth) where the login is performed once before the tests, and each test starts from a state where the application is already logged in. In order for us to take advantage of this method, the initialization of the application's test data should be done a bit differently than now. In the current solution, the database is reset before each test, and because of this, logging in just once before the tests is impossible. In order for us to use the pre-test login provided by Playwright, the user should be initialized only once before the tests. We stick to our current solution for the sake of simplicity. -->
+Playwright 还提供了一个[解决方案](https://playwright.dev/docs/auth)，即在测试前执行一次登录，然后每个测试都从应用程序已经登录的状态开始。为了让我们能够使用这种方法，应用程序的测试数据初始化应该与现在稍有不同。在当前的解决方案中，每次测试前都会重置数据库，因此测试前只登录一次的是不可能的。为了使用 Playwright 提供的测试前登录，用户应该在测试前只初始化一次。我们为了简化起见，坚持当前的解决方案。
 
-<!-- If and when we write new tests to our application, we have to use the login code in multiple places.-->
- 如果我们给我们的应用写新的测试，我们必须在多个地方使用登录代码。
-<!-- We should make it a [custom command](https://docs.cypress.io/api/cypress-api/custom-commands.html).-->
-我们应该把它变成一个[自定义命令](https://docs.cypress.io/api/cypress-api/custom-commands.html)。
-
-<!-- Custom commands are declared in <i>cypress/support/commands.js</i>.-->
-自定义命令在<i>cypress/support/commands.js</i>中声明。
-<!-- The code for logging in is as follows:-->
- 登录的代码如下。
-
-```js
-Cypress.Commands.add('login', ({ username, password }) => {
-  cy.request('POST', 'http://localhost:3001/api/login', {
-    username, password
-  }).then(({ body }) => {
-    localStorage.setItem('loggedNoteappUser', JSON.stringify(body))
-    cy.visit('http://localhost:3000')
-  })
-})
-```
-
-<!-- Using our custom command is easy, and our test becomes cleaner:-->
- 使用我们的自定义命令很容易，我们的测试也变得更干净。
-
-```js
-describe('when logged in', function() {
-  beforeEach(function() {
-    // highlight-start
-    cy.login({ username: 'mluukkai', password: 'salainen' })
-    // highlight-end
-  })
-
-  it('a new note can be created', function() {
-    // ...
-  })
-
-  // ...
-})
-```
-
-<!-- The same applies to creating a new note now that we think about it. We have a test which makes a new note using the form. We also make a new note in the <i>beforeEach</i> block of the test testing changing the importance of a note:-->
- 现在我们想想，这同样适用于创建一个新的笔记。我们有一个测试，使用表单制作一个新的笔记。我们也在测试改变笔记的重要性的<i>beforeEach</i>块中制作一个新的笔记。
+<!-- The corresponding repeating code actually also applies to creating a new note. For that, there is a test that creates a note using a form. Also in the _beforeEach_ initialization block of the test that tests changing the importance of the note, a note is created using the form: -->
+相应的重复代码实际上也适用于创建新笔记。为此，有一个测试使用表单创建笔记。而在更改笔记重要性的测试的 _beforeEach_ 初始化块中，也使用表单创建笔记：
 
 ```js
 describe('Note app', function() {
   // ...
 
-  describe('when logged in', function() {
-    it('a new note can be created', function() {
-      cy.contains('new note').click()
-      cy.get('input').type('a note created by cypress')
-      cy.contains('save').click()
-
-      cy.contains('a note created by cypress')
+  describe('when logged in', () => {
+    test('a new note can be created', async ({ page }) => {
+      await page.getByRole('button', { name: 'new note' }).click()
+      await page.getByRole('textbox').fill('a note created by playwright')
+      await page.getByRole('button', { name: 'save' }).click()
+      await expect(page.getByText('a note created by playwright')).toBeVisible()
     })
 
-    describe('and a note exists', function () {
-      beforeEach(function () {
-        cy.contains('new note').click()
-        cy.get('input').type('another note cypress')
-        cy.contains('save').click()
+    describe('and a note exists', () => {
+      beforeEach(async ({ page }) => {
+        await page.getByRole('button', { name: 'new note' }).click()
+        await page.getByRole('textbox').fill('another note by playwright')
+        await page.getByRole('button', { name: 'save' }).click()
       })
 
-      it('it can be made important', function () {
+      test('it can be made important', async ({ page }) => {
         // ...
       })
     })
@@ -944,126 +989,163 @@ describe('Note app', function() {
 })
 ```
 
-<!-- Let's make a new custom command for making a new note. The command will make a new note with an HTTP POST request:-->
- 让我们制作一个新的自定义命令来制作一个新的注释。该命令将通过HTTP POST请求制作一个新的笔记。
+<!-- Creation of a note is also isolated as its helper function. The file _tests/helper.js_ expands as follows: -->
+创建笔记的功能也被隔离到它的辅助函数中。文件 _tests/helper.js_ 扩展如下：
 
 ```js
-Cypress.Commands.add('createNote', ({ content, important }) => {
-  cy.request({
-    url: 'http://localhost:3001/api/notes',
-    method: 'POST',
-    body: { content, important },
-    headers: {
-      'Authorization': `bearer ${JSON.parse(localStorage.getItem('loggedNoteappUser')).token}`
+const loginWith = async (page, username, password)  => {
+  await page.getByRole('button', { name: 'login' }).click()
+  await page.getByLabel('username').fill(username)
+  await page.getByLabel('password').fill(password)
+  await page.getByRole('button', { name: 'login' }).click()
+}
+
+// highlight-start
+const createNote = async (page, content) => {
+  await page.getByRole('button', { name: 'new note' }).click()
+  await page.getByRole('textbox').fill(content)
+  await page.getByRole('button', { name: 'save' }).click()
+}
+// highlight-end
+
+export { loginWith, createNote } // highlight-line
+```
+
+<!-- The tests are simplified as follows: -->
+测试被简化如下：
+
+```js
+const { test, describe, expect, beforeEach } = require('@playwright/test')
+const { createNote, loginWith } = require('./helper') // highlight-line
+
+describe('Note app', () => {
+  // ...
+
+  describe('when logged in', () => {
+    beforeEach(async ({ page }) => {
+      await loginWith(page, 'mluukkai', 'salainen')
+    })
+
+    test('a new note can be created', async ({ page }) => {
+      await createNote(page, 'a note created by playwright') // highlight-line
+      await expect(page.getByText('a note created by playwright')).toBeVisible()
+    })
+
+    describe('and a note exists', () => {
+      beforeEach(async ({ page }) => {
+        await createNote(page, 'another note by playwright') // highlight-line
+      })
+
+      test('importance can be changed', async ({ page }) => {
+        await page.getByRole('button', { name: 'make not important' }).click()
+        await expect(page.getByText('make important')).toBeVisible()
+      })
+    })
+  })
+})
+```
+
+<!-- There is one more annoying feature in our tests. The frontend address <i>http:localhost:5173</i> and the backend address <i>http:localhost:3001</i> are hardcoded for tests. Of these, the address of the backend is actually useless, because a proxy has been defined in the Vite configuration of the frontend, which forwards all requests made by the frontend to the address <i>http:localhost:5173/api</i> to the backend: -->
+我们的测试中还有一个烦人的特性。前端地址 <i>http://localhost:5173</i> 和后端地址 <i>http://localhost:3001</i> 都是硬编码在测试中的。其中，后端的地址实际上是无用的，因为在前端的 Vite 配置中定义了一个代理，该代理会将前端发送到地址 <i>http://localhost:5173/api</i> 的所有请求转发到后端地址：
+
+```js
+export default defineConfig({
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+      },
     }
-  })
-
-  cy.visit('http://localhost:3000')
-})
-```
-
-<!-- The command expects the user to be logged in and the user's details to be saved to localStorage.-->
- 该命令希望用户已经登录，并且用户的详细信息被保存到localStorage。
-
-<!-- Now the formatting block becomes:-->
-现在格式化块变成。
-
-```js
-describe('Note app', function() {
+  },
   // ...
-
-  describe('when logged in', function() {
-    it('a new note can be created', function() {
-      // ...
-    })
-
-    describe('and a note exists', function () {
-      beforeEach(function () {
-        // highlight-start
-        cy.createNote({
-          content: 'another note cypress',
-          important: false
-        })
-        // highlight-end
-      })
-
-      it('it can be made important', function () {
-        // ...
-      })
-    })
-  })
 })
 ```
 
-<!-- The tests and the frontend code can be found from [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-10) branch <i>part5-10</i>.-->
- 测试和前端代码可以从[GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-10)分支<i>part5-10</i>找到。
+<!-- So we can replace all the addresses in the tests from _http://localhost:3001/api/..._ to _http://localhost:5173/api/..._ -->
+因此，我们可以把测试中的所有 _http://localhost:3001/api/..._ 替换为 _http://localhost:5173/api/..._
 
-### Changing the importance of a note
-
-<!-- Lastly let's take a look at the test we did for changing the importance of a note.-->
- 最后让我们来看看我们为改变笔记的重要性所做的测试。
-<!-- First we'll change the formatting block so that it creates three notes instead of one:-->
- 首先，我们要改变格式化块，使其创建三个注释而不是一个。
+We can now define the _baseUrl_ for the application in the tests configuration file <i>playwright.config.js</i>:
+现在我们可以在测试配置文件 <i>playwright.config.js</i> 中定义应用程序的 _baseUrl_：
 
 ```js
-describe('when logged in', function() {
-  describe('and several notes exist', function () {
-    beforeEach(function () {
+export default defineConfig({
+  // ...
+  use: {
+    baseURL: 'http://localhost:5173',
+    // ...
+  },
+  // ...
+})
+```
+
+<!-- All the commands in the tests that use the application url, e.g. -->
+所有在测试中使用应用程序 url 的命令，例如
+
+```js
+await page.goto('http://localhost:5173')
+await page.post('http://localhost:5173/api/testing/reset')
+```
+
+<!-- can now be transformed into: -->
+现在都可以转换为：
+
+```js
+await page.goto('/')
+await page.post('/api/testing/reset')
+```
+
+<!-- The current code for the tests is on [GitHub](https://github.com/fullstack-hy2020/notes-e2e/tree/part5-2), branch <i>part5-2</i>. -->
+测试的当前代码在 [GitHub](https://github.com/fullstack-hy2020/notes-e2e/tree/part5-2) 上，分支为 <i>part5-2</i>。
+
+### Note importance change revisited
+
+<!-- Let's take a look at the test we did earlier, which verifies that it is possible to change the importance of a note. -->
+让我们看看之前做的测试，它验证了可以更改笔记的重要性。
+
+<!-- Let's change the initialization block of the test so that it creates two notes instead of one: -->
+让我们更改测试的初始化块，使其创建两个笔记而不是一个：
+
+```js
+describe('when logged in', () => {
+  // ...
+  describe('and several notes exists', () => { // highlight-line
+    beforeEach(async ({ page }) => {
       // highlight-start
-      cy.createNote({ content: 'first note', important: false })
-      cy.createNote({ content: 'second note', important: false })
-      cy.createNote({ content: 'third note', important: false })
+      await createNote(page, 'first note')
+      await createNote(page, 'second note')
       // highlight-end
     })
 
-    it('one of those can be made important', function () {
-      cy.contains('second note')
-        .contains('make important')
-        .click()
+    test('one of those can be made nonimportant', async ({ page }) => {
+      const otherNoteElement = page.getByText('first note')
 
-      cy.contains('second note')
-        .contains('make not important')
+      await otherNoteElement
+        .getByRole('button', { name: 'make not important' }).click()
+      await expect(otherNoteElement.getByText('make important')).toBeVisible()
     })
   })
 })
 ```
 
-<!-- How does the [cy.contains](https://docs.cypress.io/api/commands/contains.html) command actually work?-->
- [cy.contains](https://docs.cypress.io/api/commands/contains.html)命令实际上是如何工作的?
+<!-- The test first searches for the element corresponding to the first created note using the method _page.getByText_ and stores it in a variable. After this, a button with the text _make not important_ is searched inside the element and the button is pressed. Finally, the test verifies that the button's text has changed to _make important_. -->
+测试首先使用 _page.getByText_ 方法搜索与第一个创建的笔记对应的元素，并将其存储在一个变量中。之后，在元素内部搜索带有文本 _make not important_ 的按钮并点击该按钮。最后，测试验证按钮的文本是否已更改为 _make important_。
 
-<!-- When we click the _cy.contains('second note')_ command in Cypress [Test Runner](https://docs.cypress.io/guides/core-concepts/test-runner.html), we see that the command searches for the element containing the text <i>second note</i>:-->
-当我们在Cypress [Test Runner](https://docs.cypress.io/guides/core-concepts/test-runner.html)中点击_cy.contains("second note")_命令时，我们看到该命令在搜索包含文本<i>second note</i>的元素。
-
-![](../../images/5/34x.png)
-
-<!-- By clicking the next line _.contains('make important')_ we see that the test uses-->
- 通过点击下一行_.contains("make important")_我们看到该测试使用了
-<!-- the 'make important' button corresponding to <i>second note</i>:-->
-对应于<i>第二个笔记</i>的"使重要"按钮。
-
-![](../../images/5/35x.png)
-
-<!-- When chained, the second <i>contains</i> command <i>continues</i> the search from within the component found by the first command.-->
-当连锁时，第二个<i>contains</i>命令<i>继续</i>从第一个命令找到的组件中进行搜索。
-
-<!-- If we had not chained the commands, and instead wrote:-->
- 如果我们没有将这些命令连接起来，而是写成:
+<!-- The test could also have been written without the auxiliary variable: -->
+测试也可以不使用辅助变量来编写：
 
 ```js
-cy.contains('second note')
-cy.contains('make important').click()
+test('one of those can be made nonimportant', async ({ page }) => {
+  page.getByText('first note')
+    .getByRole('button', { name: 'make not important' }).click()
+
+  await expect(page.getByText('first note').getByText('make important'))
+    .toBeVisible()
+})
 ```
 
-<!-- the result would have been totally different. The second line of the test would click the button of a wrong note:-->
-结果就会完全不同。测试的第二行会点击一个错误的笔记的按钮。
-
-![](../../images/5/36x.png)
-
-<!-- When coding tests, you should check in the test runner that the tests use the right components!-->
- 在编写测试代码时，你应该在测试运行器中检查测试是否使用了正确的组件!
-
-<!-- Let's change the _Note_ component so that the text of the note is rendered to a <i>span</i>.-->
- 让我们改变_Note_组件，使笔记的文本被渲染成<i>span</i>。
+<!-- Let's change the _Note_ component so that the note text is rendered inside a _span_ element -->
+让我们修改 _Note_ 组件，使笔记的文本渲染在 _span_ 元素内部
 
 ```js
 const Note = ({ note, toggleImportance }) => {
@@ -1079,258 +1161,350 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-<!-- Our tests break! As the test runner reveals,  _cy.contains('second note')_ now returns the component containing the text, and the button is not in it.-->
- 我们的测试失败了!正如测试运行器所显示的，_cy.contains("second note")_现在返回包含文本的组件，而按钮不在其中。
+<!-- Tests break! The reason for the problem is that the command _page.getByText('first note')_ now returns a _span_ element containing only text, and the button is outside of it. -->
+测试会失败！问题的原因是命令 _page.getByText('first note')_ 现在返回的是一个仅包含文本的 _span_ 元素，而按钮位于其外部。
 
-![](../../images/5/37x.png)
-
-<!-- One way to fix this is the following:-->
- 解决这个问题的一个方法是如下。
+<!-- One way to fix the problem is as follows: -->
+解决这个问题的方法如下：
 
 ```js
-it('one of those can be made important', function () {
-  cy.contains('second note').parent().find('button').click()
-  cy.contains('second note').parent().find('button')
-    .should('contain', 'make not important')
+test('one of those can be made nonimportant', async ({ page }) => {
+  const otherNoteText = page.getByText('first note') // highlight-line
+  const otherNoteElement = otherNoteText.locator('..') // highlight-line
+
+  await otherNoteElement.getByRole('button', { name: 'make not important' }).click()
+  await expect(otherNoteElement.getByText('make important')).toBeVisible()
 })
 ```
 
-<!-- In the first line, we use the [parent](https://docs.cypress.io/api/commands/parent.html) command to access the parent element of the element containing <i>second note</i> and find the button from within it.-->
- 在第一行中，我们使用[parent](https://docs.cypress.io/api/commands/parent.html)命令来访问包含<i>second note</i>的元素的父元素，并从其中找到按钮。
-<!-- Then we click the button, and check that the text on it changes.-->
- 然后我们点击按钮，并检查上面的文字是否改变。
+<!-- The first line now looks for the _span_ element containing the text associated with the first created note. In the second line, the function _locator_ is used and _.._ is given as an argument, which retrieves the element's parent element. The locator function is very flexible, and we take advantage of the fact that accepts [as argument](https://playwright.dev/docs/locators#locate-by-css-or-xpath) not only CSS selectors but also [XPath](https://developer.mozilla.org/en-US/docs/Web/XPath) selector. It would be possible to express the same with CSS, but in this case XPath provides the simplest way to find the parent of an element. -->
+现在第一行代码查找包含第一个创建的笔记的文本的 _span_ 元素。在第二行中，使用函数 _locator_，并将 _.._ 作为参数传入，这会获取元素的父元素。locator 函数非常灵活，我们利用了它不仅接受 CSS 选择器，还接受 [XPath](https://developer.mozilla.org/en-US/docs/Web/XPath) 选择器[作为参数](https://playwright.dev/docs/locators#locate-by-css-or-xpath)的特性。用 CSS 可以表达相同的功能，但在此情况下，XPath 提供了一种最简单的方式来查找元素的父元素。
 
-<!-- Note that we use the command [find](https://docs.cypress.io/api/commands/find.html#Syntax) to search for the button. We cannot use [cy.get](https://docs.cypress.io/api/commands/get.html) here, because it always searches from the <i>whole</i> page and would return all 5 buttons on the page.-->
- 注意，我们使用命令[find](https://docs.cypress.io/api/commands/find.html#Syntax)来搜索按钮。我们不能在这里使用[cy.get](https://docs.cypress.io/api/commands/get.html)，因为它总是从<i>整个</i>页面搜索，并且会返回页面上的所有5个按钮。
-
-
-<!-- Unfortunately, we have some copy-paste in the tests now, because the code for searching for the right button is always the same.-->
- 不幸的是，我们现在有一些复制粘贴的测试，因为搜索右边按钮的代码总是相同的。
-
-<!-- In these kinds of situations, it is possible to use the [as](https://docs.cypress.io/api/commands/as.html) command:-->
-在这种情况下，可以使用[as](https://docs.cypress.io/api/commands/as.html)命令。
+<!-- Of course, the test can also be written using only one auxiliary variable: -->
+当然，这个测试也可以只用一个辅助变量来编写：
 
 ```js
-it('one of those can be made important', function () {
-  cy.contains('second note').parent().find('button').as('theButton')
-  cy.get('@theButton').click()
-  cy.get('@theButton').should('contain', 'make not important')
+test('one of those can be made nonimportant', async ({ page }) => {
+  const secondNoteElement = page.getByText('second note').locator('..')
+  await secondNoteElement.getByRole('button', { name: 'make not important' }).click()
+  await expect(secondNoteElement.getByText('make important')).toBeVisible()
 })
 ```
 
-<!-- Now the first line finds the right button, and uses <i>as</i> to save it as <i>theButton</i>. The following lines can use the named element with <i>cy.get('@theButton')</i>.-->
- 现在第一行找到了右边的按钮，并使用<i>as</i>将其保存为<i>theButton</i>。下面几行可以用<i>cy.get("@theButton")</i>来使用这个命名的元素。
-
-### Running and debugging the tests
-
-<!-- Finally, some notes on how Cypress works and debugging your tests.-->
- 最后，关于Cypress如何工作和调试你的测试的一些说明。
-
-<!-- The form of the Cypress tests gives the impression that the tests are normal JavaScript code, and we could for example try this:-->
- Cypress测试的形式给人的印象是测试是正常的JavaScript代码，例如我们可以这样尝试。
+<!-- Let's change the test so that three notes are created, the importance is changed in the second created note: -->
+让我们修改测试，以便创建三个笔记，并更改第二个创建的笔记的重要性：
 
 ```js
-const button = cy.contains('login')
-button.click()
-debugger()
-cy.contains('logout').click()
+describe('when logged in', () => {
+  beforeEach(async ({ page }) => {
+    await loginWith(page, 'mluukkai', 'salainen')
+  })
+
+  test('a new note can be created', async ({ page }) => {
+    await createNote(page, 'a note created by playwright', true)
+    await expect(page.getByText('a note created by playwright')).toBeVisible()
+  })
+
+  describe('and several notes exists', () => {
+    beforeEach(async ({ page }) => {
+      await createNote(page, 'first note')
+      await createNote(page, 'second note')
+      await createNote(page, 'third note') // highlight-line
+    })
+
+    test('one of those can be made nonimportant', async ({ page }) => {
+      const otherNoteText = page.getByText('second note') // highlight-line
+      const otherNoteElement = otherNoteText.locator('..')
+    
+      await otherNoteElement.getByRole('button', { name: 'make not important' }).click()
+      await expect(otherNoteElement.getByText('make important')).toBeVisible()
+    })
+  })
+}) 
 ```
 
-<!-- This won't work however. When Cypress runs a test, it adds each _cy_ command to an execution queue.-->
- 但这并不可行。当Cypress运行一个测试时，它将每个_cy_命令添加到一个执行队列中。
-<!-- When the code of the test method has been executed, Cypress will execute each command in the queue one by one.-->
- 当测试方法的代码被执行后，Cypress将逐一执行队列中的每个命令。
+<!-- For some reason the test starts working unreliably, sometimes it passes and sometimes it doesn't. It's time to roll up your sleeves and learn how to debug tests. -->
+不知为何，测试开始变得不可靠，有时通过，有时不通过。是时候撸起袖子，学习如何调试测试了。
 
-<!-- Cypress commands always return _undefined_, so _button.click()_ in the above code would cause an error. An attempt to start the debugger would not stop the code between executing the commands, but before any commands have been executed.-->
-Cypress命令总是返回_undefined_，所以上述代码中的_button.click()_会导致一个错误。试图启动调试器不会在执行命令之间停止代码，而是在任何命令被执行之前。
+### Test development and debugging
 
-<!-- Cypress commands are <i>like promises</i>, so if we want to access their return values, we have to do it using the [then](https://docs.cypress.io/api/commands/then.html) command.-->
-Cypress命令<i>类似于 promise </i>，所以如果我们想访问它们的返回值，我们必须使用[then](https://docs.cypress.io/api/commands/then.html)命令来完成。
-<!-- For example, the following test would print the number of buttons in the application, and click the first button:-->
- 例如，下面的测试将打印应用中的按钮数量，并点击第一个按钮。
+<!-- If, and when the tests don't pass and you suspect that the fault is in the tests instead of in the code, you should run the tests in [debug](https://playwright.dev/docs/debug#run-in-debug-mode-1) mode. -->
+如果测试未通过，并且你怀疑问题出在测试而非代码上，你应该以[调试](https://playwright.dev/docs/debug#run-in-debug-mode-1)模式运行测试。
+
+<!-- The following command runs the problematic test in debug mode: -->
+以下命令以调试模式运行有问题的测试：
+
+```
+npm test -- -g'one of those can be made nonimportant' --debug
+```
+
+<!-- Playwright-inspector shows the progress of the tests step by step. The arrow-dot button at the top takes the tests one step further. The elements found by the locators and the interaction with the browser are visualized in the browser: -->
+Playwright-inspector 会逐步显示测试进度。点击顶部的箭头-点按钮可让测试进入下一步。通过定位器找到的元素以及与浏览器的交互都在浏览器中可视化显示：
+
+![playwright inspector highlighting element found by the selected locator in the application](../../images/5/play6a.png)
+
+<!-- By default, debug steps through the test command by command. If it is a complex test, it can be quite a burden to step through the test to the point of interest. This can be avoided by using the command _await page.pause()_: -->
+默认情况下，调试会逐条地执行测试命令。如果测试比较复杂，逐条调试到感兴趣的部分可能会非常费劲。可以通过使用命令 _await page.pause()_ 来避免这种情况：
 
 ```js
-it('then example', function() {
-  cy.get('button').then( buttons => {
-    console.log('number of buttons', buttons.length)
-    cy.wrap(buttons[0]).click()
+describe('Note app', () => {
+  beforeEach(async ({ page, request }) => {
+    // ...
+  })
+
+  describe('when logged in', () => {
+    beforeEach(async ({ page }) => {
+      // ...
+    })
+
+    describe('and several notes exists', () => {
+      beforeEach(async ({ page }) => {
+        await createNote(page, 'first note')
+        await createNote(page, 'second note')
+        await createNote(page, 'third note')
+      })
+  
+      test('one of those can be made nonimportant', async ({ page }) => {
+        await page.pause() // highlight-line
+        const otherNoteText = page.getByText('second note')
+        const otherNoteElement = otherNoteText.locator('..')
+      
+        await otherNoteElement.getByRole('button', { name: 'make not important' }).click()
+        await expect(otherNoteElement.getByText('make important')).toBeVisible()
+      })
+    })
   })
 })
 ```
 
-<!-- Stopping the test execution with the debugger is [possible](https://docs.cypress.io/api/commands/debug.html). The debugger starts only if Cypress test runner's developer console is open.-->
-用调试器停止测试的执行是[可能的](https://docs.cypress.io/api/commands/debug.html)。只有当Cypress test runner's developer console打开时，调试器才会启动。
+<!-- Now in the test you can go to _page.pause()_ in one step, by pressing the green arrow symbol in the inspector. -->
+现在，你可以通过按下检查器中的绿色箭头符号，一步跳转到 _page.pause()_。
 
-<!-- The developer console is all sorts of useful when debugging your tests.-->
-当调试你的测试时，开发者控制台是各种有用的。
-<!-- You can see the HTTP requests done by the tests on the Network tab, and the console tab will show you information about your tests:-->
-你可以在网络标签上看到测试所做的HTTP请求，控制台标签将显示你的测试信息。
+<!-- When we now run the test and jump to the _page.pause()_ command, we find an interesting fact: -->
+当我们运行测试并跳转到 _page.pause()_ 命令时，我们发现了一个有趣的事实：
 
-![](../../images/5/38ea.png)
+![playwright inspector showing the state of the application at page.pause](../../images/5/play6b.png)
 
-<!-- So far we have run our Cypress tests using the graphical test runner.-->
- 到目前为止，我们使用图形化的测试运行器运行我们的Cypress测试。
-<!-- It is also possible to run them [from the command line](https://docs.cypress.io/guides/guides/command-line.html). We just have to add an npm script for it:-->
-也可以[从命令行](https://docs.cypress.io/guides/guides/command-line.html)运行它们。我们只需要为它添加一个npm脚本。
+<!-- It seems that the browser <i>does not render</i> all the notes created in the block _beforeEach_. What is the problem? -->
+浏览器似乎<i>没有渲染</i>在 _beforeEach_ 块中创建的所有笔记。问题出在哪里？
+
+<!-- The reason for the problem is that when the test creates one note, it starts creating the next one even before the server has responded, and the added note is rendered on the screen. This in turn can cause some notes to be lost (in the picture, this happened to the second note created), since the browser is re-rendered when the server responds, based on the state of the notes at the start of that insert operation. -->
+问题的原因是，当测试创建一个笔记时，它会在服务器响应之前就开始创建下一个笔记，而新添加的笔记被渲染在屏幕上。这反过来可能导致一些笔记丢失（在图片中，这发生在创建第二个笔记时），因为当服务器响应时，浏览器会根据插入操作开始时的笔记状态重新渲染。
+
+<!-- The problem can be solved by "slowing down" the insert operations by using the [waitFor](https://playwright.dev/docs/api/class-locator#locator-wait-for) command after the insert to wait for the inserted note to render: -->
+这个问题可以通过“减慢”插入操作来解决，在插入操作后使用 [waitFor](https://playwright.dev/docs/api/class-locator#locator-wait-for) 以等待插入的笔记被渲染：
 
 ```js
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "server": "json-server -p3001 --watch db.json",
-    "cypress:open": "cypress open",
-    "test:e2e": "cypress run" // highlight-line
-  },
+const createNote = async (page, content) => {
+  await page.getByRole('button', { name: 'new note' }).click()
+  await page.getByRole('textbox').fill(content)
+  await page.getByRole('button', { name: 'save' }).click()
+  await page.getByText(content).waitFor() // highlight-line
+}
 ```
 
-<!-- Now we can run our tests from the command line with the command <i>npm run test:e2e</i>-->
- 现在我们可以用命令<i>npm run test:e2e</i>从命令行运行我们的测试。
+<!-- Instead of, or alongside debugging mode, running tests in UI mode can be useful. As already mentioned, tests are started in UI mode as follows: -->
+在 UI 模式下运行测试可能很有用，它可以替代或者配合调试模式。如前所述，测试用以下命令在 UI 模式下启动：
 
-![](../../images/5/39x.png)
+```
+npm run test -- --ui
+```
 
-<!-- Note that videos of the test execution will be saved to <i>cypress/videos/</i>, so you should probably git ignore this directory.-->
- 注意，测试执行的视频将被保存到<i>cypress/videos/</i>，所以你可能应该git忽略这个目录。
+<!-- Almost the same as UI mode is use of the Playwright's [Trace Viewer](https://playwright.dev/docs/trace-viewer-intro). The idea is that a "visual trace" of the tests is saved, which can be viewed if necessary after the tests have been completed. A trace is saved by running the tests as follows: -->
+使用 Playwright 的[跟踪查看器](https://playwright.dev/docs/trace-viewer-intro)几乎与 UI 模式相同。其想法是保存测试的“视觉跟踪”，在测试完成后如有必要可以查看。通过以下方式运行测试可以保存跟踪：
 
-<!-- The frontend and the test code can be found from [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-11) branch <i>part5-11</i>.-->
- 前端和测试代码可以从[GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-11)分支<i>part5-11</i>找到。
+```
+npm run test -- --trace on
+```
+
+<!-- If necessary, Trace can be viewed with the command -->
+如果需要，可以使用这个命令查看跟踪
+
+```
+npx playwright show-report
+```
+
+<!-- or with the npm script we defined _npm run test:report_ -->
+或者使用我们定义的 npm 脚本 _npm run test:report_
+
+<!-- Trace looks practically the same as running tests in UI mode. -->
+跟踪看起来几乎和 UI 模式下运行测试一样。
+
+<!-- UI mode and Trace Viewer also offer the possibility of assisted search for locators. This is done by pressing the double circle on the left side of the lower bar, and then by clicking on the desired user interface element. Playwright displays the element locator: -->
+UI 模式和跟踪查看器还提供了定位器的辅助搜索功能。这是通过点击下栏左侧的双圆圈，然后点击所需的用户界面元素来完成的。Playwright 显示元素定位器：
+
+![playwright's trace viewer with red arrows pointing at the locator assisted search location and to the element selected with it showing a suggested locator for the element](../../images/5/play8.png)
+
+<!-- Playwright suggests the following as the locator for the third note -->
+Playwright 建议以下作为第三个笔记的定位器
+
+```js
+page.locator('li').filter({ hasText: 'third note' }).getByRole('button')
+```
+
+<!-- The method [page.locator](https://playwright.dev/docs/api/class-page#page-locator) is called with the argument _li_, i.e. we search for all li elements on the page, of which there are three in total. After this, using the [locator.filter](https://playwright.dev/docs/api/class-locator#locator-filter) method, we narrow down to the li element that contains the text <i>third note</i> and the button element inside it is taken using the [locator.getByRole](https://playwright.dev/docs/api/class-locator#locator-get-by-role) method. -->
+方法 [page.locator](https://playwright.dev/docs/api/class-page#page-locator) 被调用，参数为 _li_，即我们在页面上搜索所有 li 元素，总共有三个。之后，使用 [locator.filter](https://playwright.dev/docs/api/class-locator#locator-filter) 方法，我们缩小范围到包含文本 <i>third note</i> 的 li 元素，并使用 [locator.getByRole](https://playwright.dev/docs/api/class-locator#locator-get-by-role) 方法获取其内部的按钮元素。
+
+<!-- The locator generated by Playwright is somewhat different from the locator used by our tests, which was -->
+Playwright 生成的定位器与我们的测试中使用的定位器略有不同，后者是
+
+```js
+page.getByText('first note').locator('..').getByRole('button', { name: 'make not important' })
+```
+
+<!-- Which of the locators is better is probably a matter of taste. -->
+哪个定位器更好可能是一个主观的问题。
+
+<!-- Playwright also includes a [test generator](https://playwright.dev/docs/codegen-intro) that makes it possible to "record" a test through the user interface. The test generator is started with the command: -->
+Playwright 还包含一个[测试生成器](https://playwright.dev/docs/codegen-intro)，可以通过用户界面“录制”测试。测试生成器使用以下命令启动：
+
+```
+npx playwright codegen http://localhost:5173/
+```
+
+<!-- When the _Record_ mode is on, the test generator "records" the user's interaction in the Playwright inspector, from where it is possible to copy the locators and actions to the tests: -->
+当 _Record_ 模式开启时，测试生成器会在 Playwright 检查器中“录制”用户的交互，可以把这些定位器和操作复制到测试中：
+
+![playwright's record mode enabled with its output in the inspector after user interaction](../../images/5/play9.png)
+
+<!-- Instead of the command line, Playwright can also be used via the [VS Code](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright) plugin. The plugin offers many convenient features, e.g. use of breakpoints when debugging tests. -->
+除了命令行，Playwright 还可以通过 [VS Code](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright) 插件使用。该插件提供许多便捷功能，例如在调试测试时使用断点。
+
+<!-- To avoid problem situations and increase understanding, it is definitely worth browsing Playwright's high-quality [documentation](https://playwright.dev/docs/intro). The most important sections are listed below: -->
+为了避免问题并增加理解，浏览 Playwright 的高质量[文档](https://playwright.dev/docs/intro)绝对值得。最重要的部分列在下表：
+
+<!-- - the section about [locators](https://playwright.dev/docs/locators) gives good hints for finding elements in test -->
+- [定位器](https://playwright.dev/docs/locators)部分为在测试中查找元素提供了良好的提示
+<!-- - section [actions](https://playwright.dev/docs/input) tells how it is possible to simulate the interaction with the browser in tests -->
+- [操作]((https://playwright.dev/docs/input))部分说明了如何在测试中模拟与浏览器的交互
+<!-- - the section about [assertions](https://playwright.dev/docs/test-assertions) demonstrates the different expectations Playwright offers for testing -->
+- [断言](https://playwright.dev/docs/test-assertions)部分展示了 Playwright 为测试提供的不同预期
+
+<!-- In-depth details can be found in the [API](https://playwright.dev/docs/api/class-playwright) description, particularly useful are the class [Page](https://playwright.dev/docs/api/class-page) corresponding to the browser window of the application under test, and the class [Locator](https://playwright.dev/docs/api/class-locator) corresponding to the elements searched for in the tests. -->
+详细内容可以在 [API](https://playwright.dev/docs/api/class-playwright) 描述中找到，特别有用的是测试里对应于应用程序浏览器窗口的 [Page](https://playwright.dev/docs/api/class-page) 类，以及在测试中用于搜索元素的 [Locator](https://playwright.dev/docs/api/class-locator) 类。
+
+<!-- The final version of the tests is in full on [GitHub](https://github.com/fullstack-hy2020/notes-e2e/tree/part5-3), in branch <i>part5-3</i>. -->
+测试的最终版本完整地托管在 [GitHub](https://github.com/fullstack-hy2020/notes-e2e/tree/part5-3) 上，分支为 <i>part5-3</i>。
+
+<!-- The final version of the frontend code is in its entirety on [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-9), in branch <i>part5-9</i>. -->
+前端代码的最终版本完整地托管在 [GitHub](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-9) 上，分支为 <i>part5-9</i>。
 
 </div>
 
 <div class="tasks">
 
-### Exercises 5.17.-5.22.
+### Exercises 5.17.-5.23.
 
-<!-- In the last exercises of this part we will do some E2E tests for our blog application.-->
- 在这部分的最后一个练习中，我们将为我们的博客应用做一些E2E测试。
-<!-- The material of this part should be enough to complete the exercises.-->
- 这一部分的材料应该足以完成练习。
-<!-- You should absolutely also check out the Cypress [documentation](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell). It is probably the best documentation I have ever seen for an open source project.-->
- 你绝对应该看看Cypress的[文档](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell)。这可能是我见过的最好的开源项目的文档。
+<!-- In the last exercises of this part, let's do some E2E tests for the blog application. The material above should be enough to do most of the exercises. However, you should definitely read Playwright's [documentation](https://playwright.dev/docs/intro) and [API description](https://playwright.dev/docs/api/class-playwright), at least the sections mentioned at the end of the previous chapter. -->
+在本部分的最后几个练习中，让我们为博客应用做一些 E2E 测试。上述材料应该足以完成大部分练习。然而，你绝对应该阅读 Playwright 的[文档](https://playwright.dev/docs/intro)和 [API 描述](https://playwright.dev/docs/api/class-playwright)，至少要阅读上一章末尾提到的部分。
 
-<!-- I especially recommend reading [Introduction to Cypress](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Cypress-Can-Be-Simple-Sometimes), which states-->
- 我特别推荐阅读[Cypress简介](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Cypress-Can-Be-Simple-Sometimes)，其中指出
+#### 5.17: Blog List End To End Testing, step 1
 
-<!-- > <i>This is the single most important guide for understanding how to test with Cypress. Read it. Understand it.</i>-->
- > <i>这是了解如何使用Cypress进行测试的唯一最重要的指南。阅读它。理解它。</i>
+<!-- Create a new npm project for tests and configure Playwright there. -->
+为测试创建一个新的 npm 项目，并在其中配置 Playwright。
 
-#### 5.17: Blog List End to end testing, step1
+<!-- Make a test to ensure that the application displays the login form by default. -->
+编写一个测试，确保应用程序默认显示登录表单。
 
-<!-- Configure Cypress to your project. Make a test for checking that the application displays the login form by default.-->
- 为你的项目配置Cypress。做一个测试，检查应用是否默认显示登录表单。
-
-<!-- The structure of the test must be as follows:-->
- 该测试的结构必须如下。
+<!-- The body of the test should be as follows: -->
+测试的主体应如下：
 
 ```js
-describe('Blog app', function() {
-  beforeEach(function() {
-    cy.request('POST', 'http://localhost:3003/api/testing/reset')
-    cy.visit('http://localhost:3000')
+const { test, expect, beforeEach, describe } = require('@playwright/test')
+
+describe('Blog app', () => {
+  beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5173')
   })
 
-  it('Login form is shown', function() {
+  test('Login form is shown', async ({ page }) => {
+    // ...
+  })
+})
+
+```
+
+#### 5.18: Blog List End To End Testing, step 2
+
+<!-- Do the tests for login. Test both successful and failed login. For tests, create a user in the _beforeEach_ block. -->
+进行登录测试。成功和失败的登录都要测试。为了测试，需要在 _beforeEach_ 块中创建一个用户。
+
+<!-- The body of the tests expands as follows -->
+测试的主体扩展如下
+
+```js
+const { test, expect, beforeEach, describe } = require('@playwright/test')
+
+describe('Blog app', () => {
+  beforeEach(async ({ page, request }) => {
+    // empty the db here
+    // create a user for the backend here
+    // ...
+  })
+
+  test('Login form is shown', async ({ page }) => {
+    // ...
+  })
+
+  describe('Login', () => {
+    test('succeeds with correct credentials', async ({ page }) => {
+      // ...
+    })
+
+    test('fails with wrong credentials', async ({ page }) => {
+      // ...
+    })
+  })
+})
+```
+
+<!-- The _beforeEach_ block must empty the database using, for example, the reset method we used in the [material](/en/part5/end_to_end_testing_playwright#controlling-the-state-of-the-database). -->
+_beforeEach_ 块必须清空数据库，例如使用我们在[材料](/en/part5/end_to_end_testing_playwright#controlling-the-state-of-the-database)中使用的 reset 方法。
+
+#### 5.19: Blog List End To End Testing, step 3
+
+<!-- Create a test that verifies that a logged in user can create a blog. The body of the test may look like the following -->
+编写一个测试，验证登录用户可以创建博客。测试的主体可能如下所示
+
+```js
+describe('When logged in', () => {
+  beforeEach(async ({ page }) => {
+    // ...
+  })
+
+  test('a new blog can be created', async ({ page }) => {
     // ...
   })
 })
 ```
 
-<!-- The <i>beforeEach</i> formatting blog must empty the database using for example the method we used in the [material](/en/part5/end_to_end_testing#controlling-the-state-of-the-database).-->
- <i>beforeEach</i> 格式化的博客必须清空数据库，例如使用我们在[材料](/en/part5/end_to_end_testing#controlling-the-state-of-the-database)中使用的方法。
+<!-- The test should ensure that the created blog is visible in the list of blogs. -->
+该测试应确保创建的博客在博客列表中可见。
 
-#### 5.18: Blog List End to end testing, step2
+#### 5.20: Blog List End To End Testing, step 4
 
-<!-- Make tests for logging in. Test both successful and unsuccessful login attempts.-->
- 进行登录测试。测试成功和不成功的登录尝试。
-<!-- Make a new user in the <i>beforeEach</i> block for the tests.-->
- 在测试的<i>beforeEach</i>块中制作一个新用户。
+<!-- Do a test that makes sure the blog can be liked. -->
+编写一个测试，确保博客可以被点赞。
 
-<!-- The test structure extends like so:-->
-测试结构是这样扩展的。
+#### 5.21: Blog List End To End Testing, step 5
 
-```js
-describe('Blog app', function() {
-  beforeEach(function() {
-    cy.request('POST', 'http://localhost:3003/api/testing/reset')
-    // create here a user to backend
-    cy.visit('http://localhost:3000')
-  })
+<!-- Make a test that ensures that the user who added the blog can delete the blog. If you use the _window.confirm_ dialog in the delete operation, you may have to Google how to use the dialog in the Playwright tests. -->
+编写一个测试，确保添加博客的用户可以删除博客。如果你在删除操作中使用 _window.confirm_ 对话框，你可能需要去 Google 搜索如何在 Playwright 测试中使用该对话框。
 
-  it('Login form is shown', function() {
-    // ...
-  })
+#### 5.22: Blog List End To End Testing, step 6
 
-  describe('Login',function() {
-    it('succeeds with correct credentials', function() {
-      // ...
-    })
+<!-- Make a test that ensures that only the user who added the blog sees the blog's delete button. -->
+编写一个测试，确保只有添加博客的用户能看见博客的删除按钮。
 
-    it('fails with wrong credentials', function() {
-      // ...
-    })
-  })
-})
-```
+#### 5.23: Blog List End To End Testing, step 7
 
-<i>Optional bonus exercise</i>: Check that the notification shown with unsuccessful login is displayed red.
+<!-- Do a test that ensures that the blogs are arranged in the order according to the likes, the blog with the most likes first. -->
+编写一个测试，确保博客按照点赞数排序，点赞数最多的博客排在最前面。
 
-#### 5.19: Blog List End to end testing, step3
+<!-- <i>This task is significantly more challenging than the previous ones.</i> -->
+<i>这项任务比之前的要困难得多。</i>
 
-<!-- Make a test which checks that a logged-in user can create a new blog.-->
- 做一个测试，检查一个登录的用户是否可以创建一个新的博客。
-<!-- The structure of the test could be as follows:-->
-测试的结构可以是这样的。
-
-```js
-describe('Blog app', function() {
-  // ...
-
-  describe('When logged in', function() {
-    beforeEach(function() {
-      // log in user here
-    })
-
-    it('A blog can be created', function() {
-      // ...
-    })
-  })
-
-})
-```
-
-<!-- The test has to ensure that a new blog is added to the list of all blogs.-->
- 该测试必须确保一个新的博客被添加到所有博客的列表中。
-
-#### 5.20: Blog List End to end testing, step4
-
-<!-- Make a test which checks that users can like a blog.-->
-做一个测试，检查用户是否可以喜欢一个博客。
-
-#### 5.21: Blog List End to end testing, step5
-
-<!-- Make a test for ensuring that the user who created a blog can delete it.-->
- 做一个测试，确保创建博客的用户可以删除它。
-
-<i>Optional bonus exercise:</i> also check that other users cannot delete the blog.
-
-#### 5.22: Blog List End to end testing, step6
-
-<!-- Make a test which checks that the blogs are ordered according to likes with the blog with the most likes being first.-->
- 做一个测试，检查博客是否按照喜欢程度排序，喜欢最多的博客排在前面。
-
-<!-- This exercise is quite a bit trickier than the previous ones. One solution is to add a certain class for the element which wraps the blog's content and use the [eq](https://docs.cypress.io/api/commands/eq#Syntax) method to get the blog element in a specific index:-->
- 这个练习比之前的练习要棘手一些。一个解决方案是为包裹博客内容的元素添加一个特定的类，并使用[eq](https://docs.cypress.io/api/commands/eq#Syntax)方法来获取特定索引中的博客元素。
-
-```js
-cy.get('.blog').eq(0).should('contain', 'The title with the most likes')
-cy.get('.blog').eq(1).should('contain', 'The title with the second most likes')
-```
-
-<!-- Note that you might end up having problems if you click a like button many times in row. It might be that cypress does the clicking so fast that it does not have time to update the app state in between the clicks. One remedy for this is to wait for the number of likes to update in between all clicks.-->
- 注意，如果你连续多次点击一个喜欢的按钮，你可能最终会遇到问题。这可能是因为Cypress的点击速度太快了，以至于它没有时间在点击之间更新应用的状态。对此的一个补救措施是，在所有点击之间等待喜欢的数量更新。
-
-<!-- This was the last exercise of this part, and it's time to push your code to github and mark the exercises you completed in the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
- 这是本章节的最后一个练习，是时候将你的代码推送到github，并在[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)中标记你完成的练习。
+<!-- This was the last task of the section and it's time to push the code to GitHub and mark the completed tasks in the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
+这是该部分的最后一个任务，现在可以将代码推送到 GitHub，并在[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)中标记已完成的任务。
 
 </div>

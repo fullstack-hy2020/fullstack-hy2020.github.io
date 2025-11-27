@@ -21,7 +21,7 @@ lang: zh
 <!-- For this reason, code that is divided into modules must be <i>bundled</i> for browsers, meaning that all of the source code files are transformed into a single file that contains all of the application code. When we deployed our React frontend to production in [part 3](/en/part3/deploying_app_to_internet), we performed the bundling of our application with the _npm run build_ command. Under the hood, the npm script bundles the source code using webpack, which produces the following collection of files in the <i>build</i> directory:-->
 由于这个原因，分为模块的代码必须为浏览器进行<i>捆绑</i>，也就是说，所有的源代码文件都被转化为一个包含所有应用代码的文件。当我们在[第三章节](/en/part3/deploying_app_to_internet)中把我们的React前端部署到生产中时，我们用_npm run build_命令进行了应用的捆绑。在引擎盖下，npm脚本使用webpack捆绑源代码，在<i>build</i>目录下产生以下文件集合。
 
-<pre>
+```
 .
 ├── asset-manifest.json
 ├── favicon.ico
@@ -38,7 +38,7 @@ lang: zh
         ├── main.88d3369d.js
         ├── main.88d3369d.js.LICENSE.txt
         └── main.88d3369d.js.map
-</pre>
+```
 
 
 <!-- The <i>index.html</i> file located at the root of the build directory is the "main file" of the application which loads the bundled JavaScript file with a <i>script</i> tag:-->
@@ -76,13 +76,13 @@ lang: zh
 <!-- Let's create a new directory for the project with the following subdirectories (<i>build</i> and <i>src</i>) and files:-->
  让我们为项目创建一个新的目录，其中有以下子目录（<i>build</i>和<i>src</i>）和文件。
 
-<pre>
+```
 ├── build
 ├── package.json
 ├── src
 │   └── index.js
 └── webpack.config.js
-</pre>
+```
 
 
 <!-- The contents of the <i>package.json</i> file can e.g. be the following:-->
@@ -644,10 +644,10 @@ const App = () => {
 <!-- We know that the error is in the onClick method, but if the application was any larger the error message would be quite difficult to track down:-->
  我们知道错误在onClick方法中，但如果应用再大一点，错误信息就很难追踪了。
 
-<pre>
+```
 App.js:27 Uncaught TypeError: Cannot read property 'concat' of undefined
     at handleClick (App.js:27)
-</pre>
+```
 
 <!-- The location of the error indicated in the message does not match the actual location of the error in our source code. If we click the error message, we notice that the displayed source code does not resemble our application code:-->
  消息中指出的错误位置与我们源代码中的实际位置不一致。如果我们点击错误信息，我们注意到显示的源代码与我们的应用代码不一样。

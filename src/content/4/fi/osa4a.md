@@ -11,27 +11,27 @@ Jatketaan [osassa 3](/osa3) tehdyn muistiinpanosovelluksen backendin kehittämis
 
 ### Sovelluksen rakenne
 
-**HUOM**: Kurssimateriaalia tehtäessä on ollut käytössä Node.js:n versio <i>v20.11.0</i>. Suosittelen, että omasi on vähintään yhtä tuore (ks. komentoriviltä _node -v_).
+**HUOM**: Kurssimateriaalia tehtäessä on ollut käytössä Node.js:n versio <i>v22.3.0</i>. Suosittelen, että omasi on vähintään yhtä tuore (ks. komentoriviltä _node -v_).
 
 Ennen osan ensimmäistä isoa teemaa eli testaamista muutetaan sovelluksen rakennetta noudattamaan paremmin Noden yleisiä konventioita.
 
 Seuraavassa läpikäytävien muutosten jälkeen sovelluksemme hakemistorakenne näyttää seuraavalta:
 
 ```bash
-├── index.js
-├── app.js
-├── dist
-│   ├── ...
 ├── controllers
-│   └── notes.js
+│   └── notes.js
+├── dist
+│   └── ...
 ├── models
-│   └── note.js
+│   └── note.js
+├── utils
+│   ├── config.js
+│   ├── logger.js
+│   └── middleware.js  
+├── app.js
+├── index.js
 ├── package-lock.json
 ├── package.json
-├── utils
-│   ├── logger.js
-│   ├── config.js
-│   └── middleware.js  
 ```
 
 Olemme toistaiseksi tulostelleet koodista erilaista loggaustietoa komennoilla <i>console.log</i> ja <i>console.error</i>, mutta tämä ei ole kovin järkevä käytäntö. Eristetään kaikki konsoliin tulostelu omaan moduliinsa <i>utils/logger.js</i>:
@@ -45,43 +45,22 @@ const error = (...params) => {
   console.error(...params)
 }
 
-module.exports = {
-  info, error
-}
+module.exports = { info, error }
 ```
 
 Loggeri tarjoaa kaksi funktiota: normaaleihin logiviesteihin tarkoitetun funktion _info_ sekä virhetilanteisiin tarkoitetun funktion _error_.
 
 Loggauksen eristäminen omaan moduuliinsa on monellakin tapaa järkevää. Jos esim. päätämme ruveta kirjoittamaan logeja tiedostoon tai keräämään niitä johonkin ulkoiseen palveluun kuten [Graylog](https://www.graylog.org/) tai [Papertrail](https://papertrailapp.com), on muutos helppo tehdä yhteen paikkaan.
 
-Sovelluksen käynnistystiedosto <i>index.js</i> pelkistyy seuraavasti:
-
-```js
-const app = require('./app') // varsinainen Express-sovellus
-const config = require('./utils/config')
-const logger = require('./utils/logger')
-
-app.listen(config.PORT, () => {
-  logger.info(`Server running on port ${config.PORT}`)
-})
-```
-
-<i>index.js</i> ainoastaan importtaa tiedostossa <i>app.js</i> olevan varsinaisen sovelluksen ja käynnistää sen. Käynnistymisestä kertova konsolitulostus tehdään logger-moduulin funktion _info_ avulla.
-
-Nyt Express-sovellus sekä sen käynnistymisestä ja verkkoasetuksista huolehtiva koodi on eriytetty toisistaan [parhaita](https://dev.to/nermineslimane/always-separate-app-and-server-files--1nc7) käytänteitä noudattaen. Eräs tämän tavan eduista on se, että sovelluksen toimintaa voi nyt testata API-tasolle tehtävien HTTP-kutsujen tasolla kuitenkaan tekemättä kutsuja varsinaisesti HTTP:llä verkon yli. Tämä tekee testien suorittamisesta nopeampaa.
-
 Ympäristömuuttujien käsittely on eriytetty moduulin <i>utils/config.js</i> vastuulle:
 
 ```js
 require('dotenv').config()
 
-let PORT = process.env.PORT
-let MONGODB_URI = process.env.MONGODB_URI
+const PORT = process.env.PORT
+const MONGODB_URI = process.env.MONGODB_URI
 
-module.exports = {
-  MONGODB_URI,
-  PORT
-}
+module.exports = { MONGODB_URI, PORT }
 ```
 
 Sovelluksen muut osat pääsevät ympäristömuuttujiin käsiksi importtaamalla konfiguraatiomoduulin:
@@ -140,16 +119,20 @@ notesRouter.delete('/:id', (request, response, next) => {
 })
 
 notesRouter.put('/:id', (request, response, next) => {
-  const body = request.body
+  const { content, important } = request.body
 
-  const note = {
-    content: body.content,
-    important: body.important,
-  }
+  Note.findById(request.params.id)
+    .then(note => {
+      if (!note) {
+        return response.status(404).end()
+      }
 
-  Note.findByIdAndUpdate(request.params.id, note, { new: true })
-    .then(updatedNote => {
-      response.json(updatedNote)
+      note.content = content
+      note.important = important
+
+      return note.save().then((updatedNote) => {
+        response.json(updatedNote)
+      })
     })
     .catch(error => next(error))
 })
@@ -200,23 +183,22 @@ app.use('/api/notes', notesRouter)
 
 Näin määrittelemäämme routeria käytetään <i>jos</i> polun alkuosa on <i>/api/notes</i>. notesRouter-olion sisällä täytyy tämän takia käyttää ainoastaan polun loppuosia eli tyhjää polkua <i>/</i> tai pelkkää parametria <i>/:id</i>.
 
-Sovelluksen määrittelevä <i>app.js</i> näyttää muutosten jälkeen seuraavalta:
+Repositorion juureen on luotu sovelluksen määrittelevä tiedosto <i>app.js</i>:
 
 ```js
-const config = require('./utils/config')
 const express = require('express')
-const app = express()
-const cors = require('cors')
-const notesRouter = require('./controllers/notes')
-const middleware = require('./utils/middleware')
-const logger = require('./utils/logger')
 const mongoose = require('mongoose')
+const config = require('./utils/config')
+const logger = require('./utils/logger')
+const middleware = require('./utils/middleware')
+const notesRouter = require('./controllers/notes')
 
-mongoose.set('strictQuery', false)
+const app = express()
 
 logger.info('connecting to', config.MONGODB_URI)
 
-mongoose.connect(config.MONGODB_URI)
+mongoose
+  .connect(config.MONGODB_URI, { family: 4 })
   .then(() => {
     logger.info('connected to MongoDB')
   })
@@ -224,7 +206,6 @@ mongoose.connect(config.MONGODB_URI)
     logger.error('error connection to MongoDB:', error.message)
   })
 
-app.use(cors())
 app.use(express.static('dist'))
 app.use(express.json())
 app.use(middleware.requestLogger)
@@ -300,23 +281,39 @@ noteSchema.set('toJSON', {
 module.exports = mongoose.model('Note', noteSchema)
 ```
 
+Sovelluksen käynnistystiedosto <i>index.js</i> pelkistyy seuraavasti:
+
+```js
+const app = require('./app') // varsinainen Express-sovellus
+const config = require('./utils/config')
+const logger = require('./utils/logger')
+
+app.listen(config.PORT, () => {
+  logger.info(`Server running on port ${config.PORT}`)
+})
+```
+
+<i>index.js</i> ainoastaan importtaa tiedostossa <i>app.js</i> olevan varsinaisen sovelluksen ja käynnistää sen. Käynnistymisestä kertova konsolitulostus tehdään logger-moduulin funktion _info_ avulla.
+
+Nyt Express-sovellus sekä sen käynnistymisestä ja verkkoasetuksista huolehtiva koodi on eriytetty toisistaan [parhaita](https://dev.to/nermineslimane/always-separate-app-and-server-files--1nc7) käytänteitä noudattaen. Eräs tämän tavan eduista on se, että sovelluksen toimintaa voi nyt testata API-tasolle tehtävien HTTP-kutsujen tasolla kuitenkaan tekemättä kutsuja varsinaisesti HTTP:llä verkon yli. Tämä tekee testien suorittamisesta nopeampaa.
+
 Sovelluksen hakemistorakenne näyttää siis refaktoroinnin jälkeen seuraavalta:
 
 ```bash
-├── index.js
-├── app.js
-├── dist
-│   ├── ...
 ├── controllers
-│   └── notes.js
+│   └── notes.js
+├── dist
+│   └── ...
 ├── models
-│   └── note.js
-├── package-lock.json
-├── package.json
+│   └── note.js
 ├── utils
 │   ├── config.js
-│   └── logger.js  
+│   ├── logger.js
 │   └── middleware.js  
+├── app.js
+├── index.js
+├── package-lock.json
+├── package.json
 ```
 
 Jos sovellus on pieni, ei rakenteella ole kovin suurta merkitystä. Sovelluksen kasvaessa sille kannattaa muodostaa jonkinlainen rakenne eli arkkitehtuuri ja jakaa erilaiset vastuut omiin moduuleihinsa. Tämä helpottaa huomattavasti ohjelman jatkokehitystä.
@@ -340,11 +337,8 @@ const error = (...params) => {
   console.error(...params)
 }
 
-// highlight-start
-module.exports = {
-  info, error
-}
-// highlight-end
+module.exports = { info, error } // highlight-line
+
 ```
 
 Tiedosto eksporttaa olion, joka sisältää kenttinään kaksi funktiota. Funktioihin päästään käsiksi kahdella vaihtoehtoisella tavalla. Voidaan joko ottaa käyttöön koko eksportoitava olio, jolloin funktioihin viitataan olion kautta:
@@ -397,7 +391,7 @@ Eli eksportoitava asia (tässä tilanteessa router-olio) sijoitetaan muuttujaan 
 
 ### Tehtävät 4.1.-4.2.
 
-**HUOM**: Kurssimateriaalia tehtäessä on ollut käytössä Node.js:n versio <i>v20.11.0</i>. Suosittelen, että omasi on vähintään yhtä tuore (ks. komentoriviltä _node -v_).
+**HUOM**: Kurssimateriaalia tehtäessä on ollut käytössä Node.js:n versio <i>v22.3.0</i>. Suosittelen, että omasi on vähintään yhtä tuore (ks. komentoriviltä _node -v_).
 
 Rakennamme tämän osan tehtävissä <i>blogilistasovellusta</i>, jonka avulla käyttäjien on mahdollista tallettaa tietoja Internetistä löytämistään mielenkiintoisista blogeista. Kustakin blogista talletetaan sen kirjoittaja (author), aihe (title), url sekä blogilistasovelluksen käyttäjien antamien äänien määrä.
 
@@ -407,50 +401,46 @@ Kuvitellaan tilanne, jossa saat sähköpostitse seuraavan, yhteen tiedostoon koo
 
 ```js
 const express = require('express')
-const app = express()
-const cors = require('cors')
 const mongoose = require('mongoose')
+
+const app = express()
 
 const blogSchema = mongoose.Schema({
   title: String,
   author: String,
   url: String,
-  likes: Number
+  likes: Number,
 })
 
 const Blog = mongoose.model('Blog', blogSchema)
 
 const mongoUrl = 'mongodb://localhost/bloglist'
-mongoose.connect(mongoUrl)
+mongoose.connect(mongoUrl, { family: 4 })
 
-app.use(cors())
 app.use(express.json())
 
 app.get('/api/blogs', (request, response) => {
-  Blog
-    .find({})
-    .then(blogs => {
-      response.json(blogs)
-    })
+  Blog.find({}).then((blogs) => {
+    response.json(blogs)
+  })
 })
 
 app.post('/api/blogs', (request, response) => {
   const blog = new Blog(request.body)
 
-  blog
-    .save()
-    .then(result => {
-      response.status(201).json(result)
-    })
+  blog.save().then((result) => {
+    response.status(201).json(result)
+  })
 })
 
 const PORT = 3003
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
+
 ```
 
-Tee sovelluksesta toimiva <i>npm</i>-projekti. Jotta sovelluskehitys olisi sujuvaa, konfiguroi sovellus suoritettavaksi <i>nodemonilla</i>. Voit luoda sovellukselle uuden tietokannan MongoDB Atlasiin tai käyttää edellisen osan sovelluksen tietokantaa.
+Tee sovelluksesta toimiva <i>npm</i>-projekti. Jotta sovelluskehitys olisi sujuvaa, konfiguroi sovellus suoritettavaksi komennolla <i>node --watch</i>. Voit luoda sovellukselle uuden tietokannan MongoDB Atlasiin tai käyttää edellisen osan sovelluksen tietokantaa.
 
 Varmista, että sovellukseen on mahdollista lisätä blogeja Postmanilla tai VS Code REST Clientilla ja että sovellus näyttää lisätyt blogit.
 
@@ -494,7 +484,7 @@ module.exports = {
 }
 ```
 
-> Metodi _average_ käyttää taulukoiden metodia [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce). Jos metodi ei ole vieläkään tuttu, on korkea aika katsoa YouTubesta [Functional JavaScript](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84) ‑sarjasta ainakin kolme ensimmäistä videoa.
+> Funktio _average_ käyttää taulukoiden metodia [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce). Jos metodi ei ole vieläkään tuttu, on korkea aika katsoa YouTubesta [Functional JavaScript](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84) ‑sarjasta ainakin kolme ensimmäistä videoa.
 
 JavaScriptiin on tarjolla runsaasti erilaisia testikirjastoja eli <i>test runnereita</i>.
 Testikirjastojen vanha kuningas on [Mocha](https://mochajs.org/), jolta kruunun muutamia vuosia sitten peri [Jest](https://jestjs.io/). Uusi tulokas kirjastojen joukossa on uuden generaation testikirjastoksi itseään mainostava [Vitest](https://vitest.dev/).
@@ -503,20 +493,16 @@ Nykyään myös Nodessa on sisäänrakennettu testikirjasto [node:test](https://
 
 Määritellään npm-skripti <i>test</i> testien suorittamiseen: 
 
-```bash
+```js
 {
-  //...
+  // ...
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",
-    "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
-    "deploy": "fly deploy",
-    "deploy:full": "npm run build:ui && npm run deploy",
-    "logs:prod": "fly logs",
-    "lint": "eslint .",
-    "test": "node --test" // highlight-line
+    "dev": "node --watch index.js",
+    "test": "node --test", // highlight-line
+    "lint": "eslint ."
   },
-  //...
+  // ...
 }
 ```
 
@@ -570,9 +556,9 @@ Ensin suoritetaan testattava koodi eli generoidaan merkkijonon <i>react</i> pali
 
 Kuten odotettua, testit menevät läpi:
 
-![Jest kertoo että 3 testiä kolmesta meni läpi](../../images/4/1new.png)
+![Konsolin tuloste kertoo että 3 testiä kolmesta meni läpi](../../images/4/1new.png)
 
-Jest olettaa oletusarvoisesti, että testitiedoston nimessä on merkkijono <i>.test</i>. Käytetään kurssilla konventiota, jossa testitiedostojen nimen loppu on <i>.test.js</i>.
+Käytetään kurssilla konventiota, jossa testitiedostojen nimen loppu on <i>.test.js</i>, sillä testikirjasto <i>node:test</i> suorittaa näin nimetyt testitiedostot automaattisesti.
 
 Node:testin antamat virheilmoitukset ovat hyviä. Rikotaan testi:
 
@@ -586,14 +572,13 @@ test('reverse of react', () => {
 
 Seurauksena on seuraava virheilmoitus:
 
-![Jest kertoo että testin odottama merkkijono poikkesi tuloksena olevasta merkkijonosta](../../images/4/2new.png)
+![Konsolin tuloste kertoo että testin odottama merkkijono poikkesi tuloksena olevasta merkkijonosta](../../images/4/2new.png)
 
-Lisätään tiedostoon <i>tests/average.test.js</i> muutama testi metodille _average_:
+Lisätään muutama testi myös funktiolle _average_. Luodaan uusi tiedosto <i>tests/average.test.js</i> ja lisätään sille seuraava sisältö:
 
 ```js
 const { test, describe } = require('node:test')
-
-// ...
+const assert = require('node:assert')
 
 const average = require('../utils/for_testing').average
 
@@ -612,11 +597,11 @@ describe('average', () => {
 })
 ```
 
-Testi paljastaa, että metodi toimii väärin tyhjällä taulukolla (sillä nollalla jaon tulos on JavaScriptissä <i>NaN</i>):
+Testi paljastaa, että funktio toimii väärin tyhjällä taulukolla (sillä nollalla jaon tulos on JavaScriptissä <i>NaN</i>):
 
-![Jest kertoo että odoteutun arvon 0 sijaan tuloksena on NaN](../../images/4/3new.png)
+![Konsolin tuloste kertoo että odotetun arvon 0 sijaan tuloksena on NaN](../../images/4/3new.png)
 
-Metodi on helppo korjata:
+Funktio on helppo korjata:
 
 ```js
 const average = array => {
@@ -645,7 +630,7 @@ Describejen avulla yksittäisessä tiedostossa olevat testit voidaan jaotella lo
 
 Kuten myöhemmin tulemme näkemään, <i>describe</i>-lohkot ovat tarpeellisia, jos haluamme osalle yksittäisen testitiedoston testitapauksista joitain yhteisiä alustus- tai lopetustoimenpiteitä.
 
-Toisena huomiona se, että kirjoitimme testit aavistuksen tiiviimmässä muodossa, ottamatta testattavan metodin tulosta erikseen apumuuttujaan:
+Toisena huomiona se, että kirjoitimme testit aavistuksen tiiviimmässä muodossa, ottamatta testattavan funktion tulosta erikseen apumuuttujaan:
 
 ```js
 test('of empty array is zero', () => {
@@ -726,17 +711,9 @@ Törmäät testien tekemisen yhteydessä varmasti erinäisiin ongelmiin. Pidä m
 
 #### 4.5*: apufunktioita ja yksikkötestejä, step3
 
-Määrittele funktio _favoriteBlog_, joka saa parametrikseen taulukollisen blogeja. Funktio selvittää millä blogilla on eniten tykkäyksiä. Jos suosikkeja on monta, riittää että funktio palauttaa niistä jonkun.
+Määrittele funktio _favoriteBlog_, joka saa parametrikseen taulukollisen blogeja. Funktio palauttaa blogin, jolla on eniten tykkäyksiä. Jos suosikkeja on monta, riittää että funktio palauttaa niistä jonkun.
 
-Paluuarvo voi olla esim. seuraavassa muodossa:
-
-```js
-{
-  title: "Canonical string reduction",
-  author: "Edsger W. Dijkstra",
-  likes: 12
-}
-```
+**HUOM.** Kun vertailet olioita, haluat luultavimmin käyttää [deepStrictEqual](https://nodejs.org/api/assert.html#assertdeepstrictequalactual-expected-message)-metodia, sillä se tarkistaa, että olioilla on samat attribuutit. Assert-moduulin eri metodeista voit lukea lisää esimerkiksi [tästä Stack Overflow -vastauksesta](https://stackoverflow.com/a/73937068/15291501).
 
 Tee myös tämän ja seuraavien kohtien testit kukin oman <i>describe</i>-lohkonsa sisälle.
 

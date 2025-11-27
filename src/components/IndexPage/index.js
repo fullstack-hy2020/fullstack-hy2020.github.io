@@ -220,7 +220,7 @@ const IndexPage = ({ lang, title = 'Full stack open' }) => {
                 text={contacts}
               />
 
-              {['github', 'twitter', 'facebook', 'youtube'].map(icon => (
+              {['github', 'x', 'facebook', 'youtube'].map((icon) => (
                 <Some key={icon} iconName={icon} />
               ))}
             </div>

@@ -35,12 +35,10 @@ Tehdään projektin juurihakemistoon tiedosto <i>db.json</i>:
 }
 ```
 
-JSON Server on mahdollista [asentaa](https://github.com/typicode/json-server#install) koneelle ns. globaalisti komennolla _npm install -g json-server_. Globaali asennus edellyttää kuitenkin pääkäyttäjän oikeuksia.
-
-Globaali asennus ei ole kuitenkaan tarpeen, sillä voimme käynnistää JSON Serverin myös _npx_-komennon avulla:
+JSON Serverin voi käynnistää ilman erillistä asennusta suorittamalla seuraavan _npx_-komennon sovelluksen juurihakemistossa:
 
 ```bash
-npx json-server --port=3001 --watch db.json
+npx json-server --port 3001 db.json
 ```
 
 Oletusarvoisesti JSON Server käynnistyy porttiin 3000. Käytämme nyt kuitenkin porttia 3001.
@@ -139,29 +137,31 @@ Nykyään lähes kaikki JavaScript-projektit määritellään node "pakkausmanag
 
 ```json
 {
-  "name": "notes-frontend",
+  "name": "part2-notes-frontend",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@types/react": "^18.2.15",
-    "@types/react-dom": "^18.2.7",
-    "@vitejs/plugin-react": "^4.0.3",
-    "eslint": "^8.45.0",
-    "eslint-plugin-react": "^7.32.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.3",
-    "vite": "^4.4.5"
+    "@eslint/js": "^9.17.0",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.17.0",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "globals": "^15.14.0",
+    "vite": "^6.0.5"
   }
 }
 ```
@@ -178,20 +178,20 @@ Nyt Axios on mukana riippuvuuksien joukossa:
 
 ```json
 {
-  "name": "notes-frontend",
+  "name": "part2-notes-frontend",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
-    "axios": "^1.4.0", // highlight-line
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "axios": "^1.7.9", // highlight-line
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   // ...
 }
@@ -213,9 +213,9 @@ ja tehdään tiedoston <i>package.json</i> osaan <i>scripts</i> pieni lisäys
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint .",
     "preview": "vite preview",
-    "server": "json-server -p3001 --watch db.json" // highlight-line
+    "server": "json-server -p 3001 db.json" // highlight-line
   },
 }
 ```
@@ -255,7 +255,7 @@ Axios on nyt valmis käyttöömme. Jatkossa oletetaan, että JSON Server on käy
 npm run dev
 ```
 
-Kirjaston voi ottaa käyttöön samaan tapaan kuin esim. React otetaan käyttöön eli sopivalla <em>import</em>-lauseella.
+Kirjaston voi ottaa käyttöön samaan tapaan kuin muutkin kirjastot eli sopivalla <em>import</em>-lauseella.
 
 Lisätään seuraava tiedostoon <i>main.jsx</i>:
 
@@ -282,8 +282,10 @@ Mozillan dokumentaatio kertoo promisesta seuraavaa:
 Promise siis edustaa asynkronista operaatiota. Promise voi olla kolmessa eri tilassa:
 
 - Aluksi promise on <i>pending</i>, eli promisea vastaava asynkroninen operaatio ei ole vielä tapahtunut.
-- Jos operaatio päättyy onnistuneesti, promise menee tilaan <i>fulfilled</i>, josta joskus käytetään myös nimitystä <i>resolved</i>.
+- Jos operaatio päättyy onnistuneesti, promise menee tilaan <i>fulfilled</i>.
 - Kolmas mahdollinen tila on <i>rejected</i>, ja se edustaa epäonnistunutta operaatiota.
+
+Promiseihin liittyy paljon yksityiskohtia, mutta näiden kolmen tilan ymmärtäminen riittää meille toistaiseksi hyvin. Voit halutessasi lukea promiseista tarkemmin [Mozillan dokumentaatiosta](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise).
 
 Esimerkkimme ensimmäinen promise on <i>fulfilled</i>, eli vastaa onnistunutta <em>axios.get('http://localhost:3001/notes')</em> pyyntöä. Promiseista toinen taas on <i>rejected</i>. Syy selviää konsolista, eli yritimme tehdä HTTP GET ‑pyyntöä osoitteeseen, jota ei ole olemassa.
 
@@ -398,12 +400,12 @@ Koodiin on myös lisätty muutamia aputulostuksia, jotka auttavat hahmottamaan m
 
 Konsoliin tulostuu:
 
-<pre>
+```
 render 0 notes
 effect
 promise fulfilled
 render 3 notes
-</pre>
+```
 
 Ensin siis suoritetaan komponentin määrittelevän funktion runko ja renderöidään komponentti ensimmäistä kertaa. Tässä vaiheessa tulostuu <i>render 0 notes</i> eli dataa ei ole vielä haettu palvelimelta.
 

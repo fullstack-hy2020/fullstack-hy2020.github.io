@@ -8,7 +8,9 @@ lang: fi
 
 Jatkamme tämän osan backendin parissa. Osan ensimmäinen iso teema on backendin yksikkö- ja integraatiotestaus. Testauksen jälkeen toteutetaan backendin logiikka käyttäjienhallintaan ja kirjautumiseen.
 
-<i>Osa päivitetty 13.2.2024</i>
-- <i>Jest korvattu Noden testrunnerilla</i>
+<i>Osa päivitetty 13.8.2025</i>
+- <i>Node päivitetty versioon v22.3.0</i>
+- <i>Express päivitetty versioon 5 ja kirjasto express-async-errors poistettu osasta 4b</i>
+- <i>Pieniä korjauksia ja parannuksia</i>
 
 </div>

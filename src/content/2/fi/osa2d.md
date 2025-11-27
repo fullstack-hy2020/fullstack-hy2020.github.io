@@ -74,7 +74,7 @@ Välilehti <i>response</i> on myös hyödyllinen, se kertoo mitä palvelin palau
 Uusi muistiinpano ei vielä renderöidy ruudulle, sillä emme aseta komponentille <i>App</i> uutta tilaa muistiinpanon luomisen yhteydessä. Viimeistellään sovellus vielä tältä osin:
 
 ```js
-addNote = event => {
+const addNote = event => {
   event.preventDefault()
   const noteObject = {
     content: newNote,
@@ -608,7 +608,7 @@ Kun valemuistiinpanon tärkeyttä yritetään muuttaa, konsoliin tulee virheilmo
 
 Sovelluksen tulisi pystyä käsittelemään tilanne hallitusti. Jos konsoli ei ole auki, ei käyttäjä huomaa mitään muuta kuin sen, että muistiinpanon tärkeys ei vaihdu napin painelusta huolimatta.
 
-Jo [aiemmin](/osa2/palvelimella_olevan_datan_hakeminen#axios-ja-promiset) mainittiin, että promisella voi olla kolme tilaa. Kun HTTP-pyyntö epäonnistuu, menee pyyntöä vastaava promise tilaan <i>rejected</i>. Emme tällä hetkellä käsittele koodissamme promisen epäonnistumista mitenkään.
+Jo [aiemmin](/osa2/palvelimella_olevan_datan_hakeminen#axios-ja-promiset) mainittiin, että promisella voi olla kolme tilaa. Kun axioksella tehty HTTP-pyyntö epäonnistuu, menee pyyntöä vastaava promise tilaan <i>rejected</i>. Emme tällä hetkellä käsittele koodissamme promisen epäonnistumista mitenkään.
 
 Promisen epäonnistuminen [käsitellään](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) antamalla <em>then</em>-metodille parametriksi myös toinen takaisinkutsufunktio, jota kutsutaan promisen epäonnistuessa.
 
@@ -631,13 +631,13 @@ Jos pyyntö epäonnistuu, kutsutaan <em>catch</em>-metodin avulla rekisteröity�
 
 Metodia <em>catch</em> hyödynnetään usein siten, että se sijoitetaan syvemmälle promiseketjuun.
 
-Kun sovelluksemme tekee HTTP-operaation, syntyy oleellisesti ottaen [promiseketju](https://javascript.info/promise-chaining):
+Kun useita _.then_-metodeja ketjutetaan yhteen, syntyy oleellisesti ottaen [promiseketju](https://javascript.info/promise-chaining):
 
 ```js
 axios
-  .put(`${baseUrl}/${id}`, newObject)
+  .get('http://...')
   .then(response => response.data)
-  .then(changedNote => {
+  .then(data => {
     // ...
   })
 ```
@@ -646,9 +646,9 @@ Metodilla <em>catch</em> voidaan määritellä ketjun lopussa käsittelijäfunkt
 
 ```js
 axios
-  .put(`${baseUrl}/${id}`, newObject)
+  .get('http://...')
   .then(response => response.data)
-  .then(changedNote => {
+  .then(data => {
     // ...
   })
   .catch(error => {
@@ -656,7 +656,7 @@ axios
   })
 ```
 
-Hyödynnetään tätä ominaisuutta ja sijoitetaan virheenkäsittelijä komponenttiin <i>App</i>:
+Hyödynnetään tätä ominaisuutta. Sijoitetaan sovelluksemme virheenkäsittelijä komponenttiin <i>App</i>:
 
 ```js
 const toggleImportanceOf = id => {
@@ -704,7 +704,7 @@ Full stack ‑ohjelmointi on <i>todella</i> hankalaa, ja sen takia lupaan hyödy
 - etenen pienin askelin
 - käytän koodissa runsaasti _console.log_-komentoja varmistamaan sen, että varmasti ymmärrän jokaisen kirjoittamani koodirivin, sekä etsiessäni koodista mahdollisia bugin aiheuttajia
 - jos koodini ei toimi, en kirjoita enää yhtään lisää koodia, vaan alan poistamaan toiminnan rikkoneita rivejä tai palaan suosiolla tilanteeseen, missä koodi vielä toimi
-- kun kysyn apua kurssin Discord-kanavalla, tai muualla internetissä, muotoilen kysymyksen järkevästi, esim. [täällä](/en/part0/general_info#how-to-ask-help-in-discord) esiteltyyn tapaan
+- kun kysyn apua kurssin Discord-kanavalla, tai muualla internetissä, muotoilen kysymyksen järkevästi, esim. [täällä](/en/part0/general_info#how-to-get-help-in-discord) esiteltyyn tapaan
 
 
 </div>

@@ -324,7 +324,7 @@ Vaikka tilalle _left_ asetettiin uusi arvo kutsumalla _setLeft(left + 1)_ on til
 setTotal(left + right) 
 ```
 
-Syynä ilmiöön on se, että tilan päivitys tapahtuu Reactissa [asynkronisesti](https://react.dev/learn/queueing-a-series-of-state-updates#react-batches-state-updates), eli "jossain vaiheessa" ennen kuin komponentti renderöidään uudelleen, ei kuitenkaan välittömästi.
+Syynä ilmiöön on se, että tilan päivitys tapahtuu Reactissa [asynkronisesti](https://react.dev/learn/queueing-a-series-of-state-updates#react-batches-state-updates), eli ei välittömästi vaan "jossain vaiheessa" sen jälkeen, kun tapahtumakäsittelijä on suoritettu mutta ennen kuin komponentti renderöidään uudelleen.
 
 Saamme korjattua sovelluksen seuraavasti:
 
@@ -421,13 +421,7 @@ const History = (props) => {
   )
 }
 
-// highlight-start
-const Button = ({ handleClick, text }) => (
-  <button onClick={handleClick}>
-    {text}
-  </button>
-)
-// highlight-end
+const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button> // highlight-line
 
 const App = () => {
   const [left, setLeft] = useState(0)
@@ -446,15 +440,13 @@ const App = () => {
 
   return (
     <div>
-      <div>
-        {left}
-        // highlight-start
-        <Button handleClick={handleLeftClick} text='left' />
-        <Button handleClick={handleRightClick} text='right' />
-        // highlight-end
-        {right}
-        <History allClicks={allClicks} />
-      </div>
+      {left}
+      // highlight-start
+      <Button onClick={handleLeftClick} text='left' />
+      <Button onClick={handleRightClick} text='right' />
+      // highlight-end
+      {right}
+      <History allClicks={allClicks} />
     </div>
   )
 }
@@ -493,11 +485,7 @@ Jos ja kun koodi ei käänny eli selaimessa alkaa näkyä punaista
 Vanha kunnon printtaukseen perustuva debuggaus on monesti toimiva tapa. Eli jos esim. komponentissa
 
 ```js
-const Button = ({ handleClick, text }) => (
-  <button onClick={handleClick}>
-    {text}
-  </button>
-)
+const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
 ```
 
 olisi ongelma, kannattaa komponentista alkaa printtailla konsoliin. Pystyäksemme printtaamaan tulee funktio muuttaa pitempään muotoon ja propsit kannattaa kenties vastaanottaa ilman destrukturointia:
@@ -505,9 +493,9 @@ olisi ongelma, kannattaa komponentista alkaa printtailla konsoliin. Pystyäksemm
 ```js
 const Button = (props) => { 
   console.log(props) // highlight-line
-  const { handleClick, text } = props
+  const { onClick, text } = props
   return (
-    <button onClick={handleClick}>
+    <button onClick={onClick}>
       {text}
     </button>
   )
@@ -572,7 +560,7 @@ React Developer Tools näyttää hookeilla luodut tilan osat siinä järjestykse
 
 Ylimpänä oleva <i>State</i> vastaa siis tilan <i>left</i> arvoa, seuraava tilan <i>right</i> arvoa ja alimpana on taulukko <i>allClicks</i>.
 
-Chromella tapahtuvaan JavaScriptin debuggaukseen voi tutustua myös esim. [tämän sivun videolla](https://developer.chrome.com/docs/devtools/overview/) alkaen kohdasta 16:50.
+Chromella tapahtuvaan JavaScriptin debuggaukseen voi tutustua myös esim. [Chromen DevTools-ohjeen videolla](https://developer.chrome.com/docs/devtools/javascript).
 
 ### Hookien säännöt
 
@@ -1022,13 +1010,13 @@ Eriytetään vielä painike omaksi komponentikseen:
 
 ```js
 const Button = (props) => (
-  <button onClick={props.handleClick}>
+  <button onClick={props.onClick}>
     {props.text}
   </button>
 )
 ```
 
-Komponentti saa siis propsina _handleClick_ tapahtumankäsittelijän ja propsina _text_ merkkijonon, jonka se renderöi painikkeen tekstiksi. Komponenttia käytetään seuraavasti:
+Komponentti saa siis propsina _onClick_ tapahtumankäsittelijän ja propsina _text_ merkkijonon, jonka se renderöi painikkeen tekstiksi. Komponenttia käytetään seuraavasti:
 
 ```js
 const App = (props) => {
@@ -1036,9 +1024,9 @@ const App = (props) => {
   return (
     <div>
       {value}
-      <Button handleClick={() => setToValue(1000)} text="thousand" /> // highlight-line
-      <Button handleClick={() => setToValue(0)} text="reset" /> // highlight-line
-      <Button handleClick={() => setToValue(value + 1)} text="increment" /> // highlight-line
+      <Button onClick={() => setToValue(1000)} text="thousand" /> // highlight-line
+      <Button onClick={() => setToValue(0)} text="reset" /> // highlight-line
+      <Button onClick={() => setToValue(value + 1)} text="increment" /> // highlight-line
     </div>
   )
 }
@@ -1046,7 +1034,7 @@ const App = (props) => {
 
 Komponentin <i>Button</i> käyttö on helppoa, mutta on toki pidettävä huolta siitä, että komponentille annettavat propsit on nimetty niin kuin komponentti olettaa:
 
-![](../../images/1/12e.png)
+![](../../images/1/12f.png)
 
 ### Älä määrittele komponenttia komponentin sisällä
 
@@ -1057,7 +1045,7 @@ Määritellään uusi komponentti <i>App</i>-komponentin sisällä:
 ```js
 // tämä on oikea paikka määritellä komponentti!
 const Button = (props) => (
-  <button onClick={props.handleClick}>
+  <button onClick={props.onClick}>
     {props.text}
   </button>
 )
@@ -1075,10 +1063,10 @@ const App = (props) => {
 
   return (
     <div>
-      <Display value={value} />
-      <Button handleClick={() => setToValue(1000)} text="thousand" />
-      <Button handleClick={() => setToValue(0)} text="reset" />
-      <Button handleClick={() => setToValue(value + 1)} text="increment" />
+      <Display value={value} /> // highlight-line
+      <Button onClick={() => setToValue(1000)} text="thousand" />
+      <Button onClick={() => setToValue(0)} text="reset" />
+      <Button onClick={() => setToValue(value + 1)} text="increment" />
     </div>
   )
 }
@@ -1092,7 +1080,7 @@ Siirretäänkin komponentin <i>Display</i> määrittely oikeaan paikkaan eli kom
 const Display = props => <div>{props.value}</div>
 
 const Button = (props) => (
-  <button onClick={props.handleClick}>
+  <button onClick={props.onClick}>
     {props.text}
   </button>
 )
@@ -1108,9 +1096,9 @@ const App = () => {
   return (
     <div>
       <Display value={value} />
-      <Button handleClick={() => setToValue(1000)} text="thousand" />
-      <Button handleClick={() => setToValue(0)} text="reset" />
-      <Button handleClick={() => setToValue(value + 1)} text="increment" />
+      <Button onClick={() => setToValue(1000)} text="thousand" />
+      <Button onClick={() => setToValue(0)} text="reset" />
+      <Button onClick={() => setToValue(value + 1)} text="increment" />
     </div>
   )
 }
@@ -1140,7 +1128,7 @@ Ohjelmointi on hankalaa, ja sen takia lupaan hyödyntää kaikkia ohjelmointia h
 
 Suuret kielimallit, kuten [ChatGPT](https://chat.openai.com/auth/login), [Claude](https://claude.ai/) ja [GitHub Copilot](https://github.com/features/copilot) ovat osoittautuneet erittäin hyödyllisiksi ohjelmistokehityksessä.
 
-Itse käytän pääasiassa Copilottia, joka integroituu saumattomasti VS Codeen [pluginin](https://visualstudio.microsoft.com/github-copilot/) ansiosta.
+Itse käytän pääasiassa Copilottia, joka on nykyään [natiivisti integroitu VS Codeen](https://code.visualstudio.com/docs/copilot/overview). Lisäksi yliopisto-opiskelijat saavat Copilot Pro -version käyttöönsä ilmaiseksi [GitHub Student Developer Packin](https://education.github.com/pack) kautta.
 
 Copilot on hyödyllinen monenlaisissa skenaarioissa. Copilotia voi pyytää generoimaan koodia avoinna olevaan tiedostoon kuvailemalla halutun toiminnallisuuden teksinä:
 
@@ -1184,7 +1172,7 @@ Eli koska ongelmien selvittely on kaksi kertaa vaikeampaa kuin ohjelmointi, ei k
 
 Toistaiseksi kielimallien ja tekoälyn kehitys on vielä siinä vaiheessa, että ne eivät ole itseriittoisia, ja vaikeimmat ongelmat jäävät ihmisten selvitettäväksi. Tämän takia aloittelevienkin ohjelmistokehittäjien on kaiken varalta opeteltava ohjelmoimaan todella hyvin. Voi olla, että kielimallien kehityksestä huolimatta tarvitaankin entistä syvällisempää osaamista. Tekoäly tekee ne helpot asiat, mutta ihmistä tarvitaan kaikkein kiperimpien tekoälyn aiheuttamien sotkujen selvittelyyn. GitHub Copilot onkin varsin hyvin nimetty tuote, kyseessä on Copilot eli lentoperämies/nainen. Ohjelmoija on edelleen kapteeni ja kantaa lopullisen vastuun.
 
-Voikin olla oman etusi mukaista, että kytket oletusarvoisesti Copilotin pois päältä kun teet tätä kurssia ja turvadut siihen ainoastaan todellisella hädän hetkellä.
+Voikin olla oman etusi mukaista, että kytket oletusarvoisesti Copilotin pois päältä kun teet tätä kurssia ja turvaudut siihen ainoastaan todellisella hädän hetkellä.
 
 </div>
 
@@ -1375,9 +1363,9 @@ Laajenna sovellusta siten, että näytettävää anekdoottia on mahdollista ää
 Olio voidaan kopioida esim. seuraavasti
 
 ```js
-const points = { 0: 1, 1: 3, 2: 4, 3: 2 }
+const votes = { 0: 1, 1: 3, 2: 4, 3: 2 }
 
-const copy = { ...points }
+const copy = { ...votes }
 // kasvatetaan olion kentän 2 arvoa yhdellä
 copy[2] += 1     
 ```
@@ -1385,9 +1373,9 @@ copy[2] += 1
 ja taulukko esim. seuraavasti:
 
 ```js
-const points = [1, 4, 6, 3]
+const votes = [1, 4, 6, 3]
 
-const copy = [...points]
+const copy = [...votes]
 // kasvatetaan taulukon paikan 2 arvoa yhdellä
 copy[2] += 1     
 ```

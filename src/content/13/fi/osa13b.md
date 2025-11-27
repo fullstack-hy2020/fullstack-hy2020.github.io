@@ -642,7 +642,7 @@ Note.belongsTo(User)
 
 luo Sequelize automaattisesti modeliin <i>Note</i> attribuutin <i>userId</i>, johon viittaamalla päästään käsiksi tietokannan sarakkeeseen <i>user_id</i>.
 
-Huomaa, että voisimme luoda muistiinpanon myös seuraavasti metodin [build](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-build) avulla:
+Huomaa, että voisimme luoda muistiinpanon myös seuraavasti metodin [build](https://sequelize.org/api/v6/class/src/model.js~model#static-method-build) avulla:
 
 ```js
 const user = await User.findByPk(req.decodedToken.id)

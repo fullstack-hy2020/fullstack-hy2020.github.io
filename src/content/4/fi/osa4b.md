@@ -26,24 +26,20 @@ Määritellään nyt tiedostossa <i>package.json</i>, että testejä suoritettae
   // ...
   "scripts": {
     "start": "NODE_ENV=production node index.js", // highlight-line
-    "dev": "NODE_ENV=development nodemon index.js", // highlight-line
+    "dev": "NODE_ENV=development node --watch index.js", // highlight-line
     "test": "NODE_ENV=test node --test", // highlight-line
-    "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
-    "deploy": "fly deploy",
-    "deploy:full": "npm run build:ui && npm run deploy",
-    "logs:prod": "fly logs",
-    "lint": "eslint .",
-  },
+    "lint": "eslint ."
+  }
   // ...
 }
 ```
 
-Samalla määriteltiin, että suoritettaessa sovellusta komennolla _npm run dev_ eli nodemonin avulla, on sovelluksen moodi <i>development</i>. Jos sovellusta suoritetaan normaalisti Nodella, on moodiksi määritelty <i>production</i>.
+Samalla määriteltiin, että suoritettaessa sovellusta komennolla _npm run dev_ sovelluksen moodi on <i>development</i>. Jos sovellusta suoritetaan komennolla _npm start_, on moodiksi määritelty <i>production</i>.
 
-Määrittelyssämme on kuitenkin pieni ongelma: se ei toimi Windowsilla. Tilanne korjautuu asentamalla kirjasto [cross-env](https://www.npmjs.com/package/cross-env) kehitysaikaiseksi riippuvuudeksi komennolla
+Määrittelyssämme on kuitenkin pieni ongelma: se ei toimi Windowsilla. Tilanne korjautuu asentamalla kirjasto [cross-env](https://www.npmjs.com/package/cross-env) projektin riippuvuudeksi komennolla
 
 ```bash
-npm install --save-dev cross-env
+npm install cross-env
 ```
 
 ja muuttamalla <i>package.json</i> kaikilla käyttöjärjestelmillä toimivaan muotoon:
@@ -52,9 +48,10 @@ ja muuttamalla <i>package.json</i> kaikilla käyttöjärjestelmillä toimivaan m
 {
   // ...
   "scripts": {
-    "start": "cross-env NODE_ENV=production node index.js",
-    "dev": "cross-env NODE_ENV=development nodemon index.js",
-    "test": "cross-env  NODE_ENV=test node --test",
+    "start": "cross-env NODE_ENV=production node index.js", // highlight-line
+    "dev": "cross-env NODE_ENV=development node --watch index.js", // highlight-line
+    "test": "cross-env  NODE_ENV=test node --test", // highlight-line
+    "lint": "eslint ."
   },
   // ...
 }
@@ -88,11 +85,11 @@ module.exports = {
 Tiedostossa <i>.env</i> on nyt määritelty <i>erikseen</i> sekä sovelluskehitysympäristön että testausympäristön tietokannan osoite:
 
 ```bash
-MONGODB_URI=mongodb+srv://fullstack:thepasswordishere@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority
+MONGODB_URI=mongodb+srv://fullstack:thepasswordishere@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0
 PORT=3001
 
 // highlight-start
-TEST_MONGODB_URI=mongodb+srv://fullstack:thepasswordishere@cluster0.o1opl.mongodb.net/testNoteApp?retryWrites=true&w=majority
+TEST_MONGODB_URI=mongodb+srv://fullstack:thepasswordishere@cluster0.a5qfl.mongodb.net/testNoteApp?retryWrites=true&w=majority&appName=Cluster0
 // highlight-end
 ```
 
@@ -104,7 +101,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://gith
 
 ### SuperTest
 
-Käytetään API:n testaamiseen Jestin apuna [SuperTest](https://github.com/visionmedia/supertest)-kirjastoa.
+Käytetään API:n testaamiseen Noden test-moduulin apuna [SuperTest](https://github.com/visionmedia/supertest)-kirjastoa.
 
 Kirjasto asennetaan kehitysaikaiseksi riippuvuudeksi komennolla
 
@@ -156,7 +153,7 @@ Tässä ongelmana on kuitenkin se, että käytettäessä merkkijonoa, tulee head
 
 Testissä on muutama detalji joihin tutustumme vasta [hieman myöhemmin](/osa4/backendin_testaaminen#async-await) tässä osassa. Testikoodin määrittelevä nuolifunktio alkaa sanalla <i>async</i>, ja <i>api</i>-oliolle tehtyä metodikutsua edeltää sana <i>await</i>. Teemme ensin muutamia testejä ja tutustumme sen jälkeen async/await-magiaan. Tällä hetkellä niistä ei tarvitse välittää, sillä kaikki toimii kunhan kirjoitat testimetodit esimerkin mukaan. Async/await-syntaksin käyttö liittyy siihen, että palvelimelle tehtävät pyynnöt ovat <i>asynkronisia</i> operaatioita. Async/await-syntaksia käyttämällä saamme pyynnön näyttämään koodin tasolla synkronisesti toimivalta.
 
-Kaikkien testien (joita siis tällä kertaa on vain yksi) päätteeksi on vielä lopputoimenpiteenä katkaistava Mongoosen käyttämä tietokantayhteys. Tämä onnistuu helposti metodissa [after](https://nodejs.org/api/test.html#afterfn-options):
+Kaikkien testien (joita siis tällä kertaa on vain yksi) päätteeksi on vielä lopputoimenpiteenä katkaistava Mongoosen käyttämä tietokantayhteys, sillä muuten ohjelman suoritus ei pääty. Tämä onnistuu helposti metodissa [after](https://nodejs.org/api/test.html#afterfn-options):
 
 ```js
 after(async () => {
@@ -192,25 +189,30 @@ SuperTestin dokumentaatio toteaa seuraavaa:
 
 > <i>if the server is not already listening for connections then it is bound to an ephemeral port for you so there is no need to keep track of ports.</i>
 
-SuperTest siis huolehtii testattavan sovelluksen käynnistämisestä sisäisesti käyttämäänsä porttiin.
+SuperTest siis huolehtii testattavan sovelluksen käynnistämisestä sisäisesti käyttämäänsä porttiin. Tämä on yksi syy siihen, miksi käytämme SuperTestiä emmekä esimerkiksi axiosia, sillä meidän ei tarvitse erikseen käynnistää palvelinta ennen testauksen aloittamista. SuperTest tarjoaa myös funktioita, kuten _expect_, jotka tekevät testauksesta helpompaa.
 
 Lisätään tiedoston _mongo.js_ ohjelmaa käyttämällä testitietokantaan kaksi muistiinpanoa (tässä kohtaa on muistettava vaihtaa käyttöön oikea tietokantaurl).
 
 Tehdään pari testiä lisää:
 
 ```js
-test('there are two notes', async () => {
+const assert = require('node:assert')
+// ...
+
+test('all notes are returned', async () => {
   const response = await api.get('/api/notes')
 
   assert.strictEqual(response.body.length, 2)
 })
 
-test('the first note is about HTTP methods', async () => {
+test('a specific note is within the returned notes', async () => {
   const response = await api.get('/api/notes')
 
   const contents = response.body.map(e => e.content)
   assert.strictEqual(contents.includes('HTML is easy'), true)
 })
+
+// ...
 ```
 
 Molemmat testit sijoittavat pyynnön vastauksen muuttujaan _response_. Toisin kuin edellisessä testissä (joka käytti SuperTestin mekanismeja statuskoodin ja vastauksen headereiden oikeellisuuden varmistamiseen), tällä kertaa tutkitaan vastauksessa olevan datan eli <i>response.body</i>:n oikeellisuutta _assert_-kirjaston [strictEqual](https://nodejs.org/docs/latest/api/assert.html#assertstrictequalactual-expected-message) metodilla.
@@ -218,11 +220,10 @@ Molemmat testit sijoittavat pyynnön vastauksen muuttujaan _response_. Toisin ku
 Jälkimmäistä testiä on vielä mahdollista yksinkertaistaa hiukan tekemällä vertailu suoraan [assert](https://nodejs.org/docs/latest/api/assert.html#assertokvalue-message):illa:
 
 ```js
-test('the first note is about HTTP methods', async () => {
+test('a specific note is within the returned notes', async () => {
   const response = await api.get('/api/notes')
 
   const contents = response.body.map(e => e.content)
-  // is the parameter truthy
   assert(contents.includes('HTML is easy'))
 })
 ```
@@ -264,7 +265,7 @@ module.exports = {
 
 ### Tietokannan alustaminen ennen testejä
 
-Testaus vaikuttaa helpolta ja testit menevät läpi. Testimme ovat kuitenkin huonoja, sillä niiden läpimeno riippuu tietokannan tilasta, jossa nyt sattuu olemaan kaksi muistiinpanoa. Jotta saisimme robustimmat testit, tulee tietokannan tila nollata testien alussa ja sen jälkeen laittaa kantaan hallitusti testien tarvitsema data.
+Testeissämme on tällä hetkellä ongelmana, että niiden läpimeno riippuu tietokannan tilasta. Testit menevät siis läpi, jos testitietokannassa sattuu olemaan kaksi muistiinpanoa, joista toisen sisältö on <i>'HTML is easy'</i>. Jotta saisimme robustimmat testit, tulee tietokannan tila nollata testien alussa ja sen jälkeen laittaa kantaan hallitusti testien tarvitsema data.
 
 Testimme käyttää jo nyt funktiota [after](https://nodejs.org/api/test.html#afterfn-options) sulkemaan tietokannan testien suoritusten jälkeen. Kirjasto Node:test tarjoaa joukon muitakin metodeja joiden avulla voidaan suorittaa operaatioita ennen yhdenkään testin suorittamista tai ennen jokaisen testin suoritusta.
 
@@ -272,12 +273,14 @@ Päätetään alustaa tietokanta ennen <i>jokaisen testin suoritusta</i>, eli fu
 
 ```js
 
-// highlight-start
-const { test, after, beforeEach } = require('node:test')
-const Note = require('../models/note')
-// highlight-end
+const assert = require('node:assert')
+const { test, after, beforeEach } = require('node:test') // highlight-line
+const mongoose = require('mongoose')
+const supertest = require('supertest')
+const app = require('../app')
+const Note = require('../models/note') // highlight-line
 
-// ...
+const api = supertest(app)
 
 // highlight-start
 const initialNotes = [
@@ -303,32 +306,32 @@ beforeEach(async () => {
   await noteObject.save()
 })
 // highlight-end
+
 // ...
 ```
 
 Tietokanta siis tyhjennetään aluksi, ja sen jälkeen kantaan lisätään kaksi taulukkoon _initialNotes_ talletettua muistiinpanoa. Näin testien suoritus aloitetaan aina hallitusti samasta tilasta.
 
-Muutetaan kahta jälkimmäistä testiä vielä seuraavasti:
+Muutetaan muistiinpanojen lukumäärää testaavaa testiä vielä seuraavasti:
 
 ```js
-test('there are two notes', async () => {
+// ...
+
+test('all notes are returned', async () => {
   const response = await api.get('/api/notes')
 
-  assert.strictEqual(response.body.length, initialNotes.length)
+  assert.strictEqual(response.body.length, initialNotes.length) // highlight-line
 })
 
-test('the first note is about HTTP methods', async () => {
-  const response = await api.get('/api/notes')
-
-  const contents = response.body.map(e => e.content)
-  assert(contents.includes('HTML is easy'))
-})
+// ...
 
 ```
 
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-3), branchissa <i>part4-3</i>.
+
 ### Testien suorittaminen yksitellen
 
-Komento _npm test_ suorittaa projektin kaikki testit. Kun olemme vasta tekemässä testejä, on useimmiten järkevämpää suorittaa kerrallaan ainoastaan yhtä tai muutamaa testiä. Jest tarjoaa tähän muutamia vaihtoehtoja.
+Komento _npm test_ suorittaa projektin kaikki testit. Kun olemme vasta tekemässä testejä, on useimmiten järkevämpää suorittaa kerrallaan ainoastaan yhtä tai muutamaa testiä. Test-moduuli tarjoaa tähän muutamia vaihtoehtoja.
 
 Eräs näistä on komennon [only](https://nodejs.org/api/test.html#testonlyname-options-fn) käyttö. Komennon avulla voidaan merkitä vain osa testeistä suoritettavaksi:
 
@@ -340,7 +343,7 @@ test.only('notes are returned as json', async () => {
     .expect('Content-Type', /application\/json/)
 })
 
-test.only('there are two notes', async () => {
+test.only('all notes are returned', async () => {
   const response = await api.get('/api/notes')
 
   assert.strictEqual(response.body.length, 2)
@@ -366,7 +369,7 @@ npm test -- tests/note_api.test.js
 Parametrin [--tests-by-name-pattern](https://nodejs.org/api/test.html#filtering-tests-by-name) avulla voidaan suorittaa testejä nimen perusteella:
 
 ```js
-npm test -- --test-name-pattern="the first note is about HTTP methods"
+npm test -- --test-name-pattern="a specific note is within the returned notes"
 ```
 
 Parametri voi viitata testin tai describe-lohkon nimeen. Parametrina voidaan antaa myös nimen osa. Seuraava komento suorittaisi kaikki testit, joiden nimessä on sana <i>notes</i>:
@@ -453,9 +456,19 @@ Koodi määrittelee ensin asynkronisen funktion, joka sijoitetaan muuttujaan _ma
 
 ### async/await backendissä
 
-Muutetaan seuraavaksi backend käyttämään asyncia ja awaitia. Koska kaikki asynkroniset operaatiot tehdään joka tapauksessa funktioiden sisällä, awaitin käyttämiseen riittää, että muutamme routejen käsittelijät async-funktioiksi.
+Muutetaan seuraavaksi backend käyttämään asyncia ja awaitia. Aloitetaan kaikkien muistiinpanojen hakemisesta vastaavasta routesta. 
 
-Kaikkien muistiinpanojen hakemisesta vastaava route muuttuu seuraavasti:
+Koska kaikki asynkroniset operaatiot tehdään joka tapauksessa funktioiden sisällä, awaitin käyttämiseen riittää, että muutamme routejen käsittelijät async-funktioiksi. Alkuperäinen route
+
+```js
+notesRouter.get('/', (request, response) => {
+  Note.find({}).then((notes) => {
+    response.json(notes)
+  })
+})
+```
+
+muuttuu seuraavasti:
 
 ```js
 notesRouter.get('/', async (request, response) => { 
@@ -466,9 +479,7 @@ notesRouter.get('/', async (request, response) => {
 
 Voimme varmistaa refaktoroinnin onnistumisen selaimella sekä suorittamalla juuri määrittelemämme testit.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-3), branchissa <i>part4-3</i>.
-
-### Lisää testejä ja backendin refaktorointia
+### Muistiinpanon lisäämisestä vastaavan routen refaktorointi
 
 Koodia refaktoroidessa vaanii aina [regression](https://en.wikipedia.org/wiki/Regression_testing) vaara. On olemassa riski, että jo toimineet ominaisuudet hajoavat. Tehdäänkin muiden operaatioiden refaktorointi siten, että ennen koodin muutosta tehdään jokaiselle API:n routelle sen toiminnallisuuden varmistavat testit.
 
@@ -580,14 +591,15 @@ Moduuli määrittelee funktion _notesInDb_, jonka avulla voidaan tarkastaa sovel
 Testit muuttuvat muotoon
 
 ```js
-const { test, after, beforeEach } = require('node:test')
 const assert = require('node:assert')
+const { test, after, beforeEach } = require('node:test')
 const mongoose = require('mongoose')
 const supertest = require('supertest')
 const app = require('../app')
-const api = supertest(app)
 const helper = require('./test_helper') // highlight-line
 const Note = require('../models/note')
+
+const api = supertest(app)
 
 beforeEach(async () => {
   await Note.deleteMany({})
@@ -606,13 +618,13 @@ test('notes are returned as json', async () => {
     .expect('Content-Type', /application\/json/)
 })
 
-test('there are two notes', async () => {
+test('all notes are returned', async () => {
   const response = await api.get('/api/notes')
 
-  assert.strictEqual(response.body.length, 2)
+  assert.strictEqual(response.body.length, helper.initialNotes.length) // highlight-line
 })
 
-test('the first note is about HTTP methods', async () => {
+test('a specific note is within the returned notes', async () => {
   const response = await api.get('/api/notes')
 
   const contents = response.body.map(e => e.content)
@@ -631,12 +643,10 @@ test('a valid note can be added ', async () => {
     .expect(201)
     .expect('Content-Type', /application\/json/)
 
-  const response = await api.get('/api/notes')
+  const notesAtEnd = await helper.notesInDb() // highlight-line
+  assert.strictEqual(notesAtEnd.length, helper.initialNotes.length + 1) // highlight-line
 
-  const contents = response.body.map(r => r.content)
-
-  assert.strictEqual(response.body.length, helper.initialNotes.length + 1) // highlight-line
-
+  const contents = notesAtEnd.map(n => n.content) // highlight-line
   assert(contents.includes('async/await simplifies making async calls'))
 })
 
@@ -650,9 +660,9 @@ test('note without content is not added', async () => {
     .send(newNote)
     .expect(400)
 
-  const response = await api.get('/api/notes')
+  const notesAtEnd = await helper.notesInDb() // highlight-line
 
-  assert.strictEqual(response.body.length, helper.initialNotes.length) // highlight-line
+  assert.strictEqual(notesAtEnd.length, helper.initialNotes.length) // highlight-line
 })
 
 after(async () => {
@@ -662,10 +672,10 @@ after(async () => {
 
 Promiseja käyttävä koodi toimii nyt ja testitkin menevät läpi. Olemme valmiit muuttamaan koodin käyttämään async/await-syntaksia.
 
-Uuden muistiinpanon lisäämisestä huolehtiva koodi muuttuu seuraavasti (huomaa, että käsittelijän alkuun on laitettava määre _async_):
+Uuden muistiinpanon lisäämisestä huolehtiva route
 
 ```js
-notesRouter.post('/', async (request, response, next) => {
+notesRouter.post('/', (request, response, next) => {
   const body = request.body
 
   const note = new Note({
@@ -673,52 +683,62 @@ notesRouter.post('/', async (request, response, next) => {
     important: body.important || false,
   })
 
-  const savedNote = await note.save()
-  response.status(201).json(savedNote)
+  note
+    .save()
+    .then((savedNote) => {
+      response.status(201).json(savedNote)
+    })
+    .catch((error) => next(error))
 })
 ```
 
-Koodiin jää kuitenkin pieni ongelma: virhetilanteita ei nyt käsitellä ollenkaan. Miten niiden suhteen tulisi toimia?
-
-### Virheiden käsittely ja async/await
-
-Jos sovellus POST-pyyntöä käsitellessään aiheuttaa jonkinlaisen ajonaikaisen virheen, syntyy jälleen tuttu tilanne:
-
-![Konsolissa näkyy virheilmoitus ValidationError joka johtuu siitä että content puuttuu vastaanotetusta datasta](../../images/4/6.png)
-
-Kyseessä on siis käsittelemätön promisen rejektoituminen. Pyyntöön ei vastata tilanteessa mitenkään.
-
-Async/awaitia käyttäessä kannattaa käyttää vanhaa kunnon _try/catch_-mekanismia virheiden käsittelyyn:
+muuttuu seuraavasti:
 
 ```js
-notesRouter.post('/', async (request, response, next) => {
+notesRouter.post('/', async (request, response) => { // highlight-line
   const body = request.body
 
   const note = new Note({
     content: body.content,
     important: body.important || false,
   })
+
   // highlight-start
-  try {
-    const savedNote = await note.save()
-    response.status(201).json(savedNote)
-  } catch(exception) {
-    next(exception)
-  }
+  const savedNote = await note.save()
+  response.status(201).json(savedNote)
   // highlight-end
 })
 ```
 
-Catch-lohkossa siis ainoastaan kutsutaan funktiota _next_, joka siirtää poikkeuksen käsittelyn virheidenkäsittelymiddlewarelle.
+Käsittelijän alkuun on laitettava määre _async_, jotta _async/await_-syntaksia on mahdollista käyttää. Koodi yksinkertaistuu huomattavasti.
 
-Muutoksen jälkeen testit menevät läpi.
+Huomionarvioista tässä on se, että mahdollisia virheitä ei nyt erikseen tarvitse siirtää eteenpäin käsiteltäväksi. Promiseja käyttävässä koodissa mahdollinen virhe siirrettiin virheenkäsittelijämiddlevaren käsiteltäväksi näin:
 
-Tehdään sitten testit yksittäisen muistiinpanon tietojen katsomiselle ja muistiinpanon poistolle. Koodissa on korostettu varsinainen API:in suoritettava operaatio:
+```js
+  note
+    .save()
+    .then((savedNote) => {
+      response.json(savedNote)
+    })
+    .catch((error) => next(error)) // highlight-line
+```
+
+
+ _Async/await_-syntaksia käytettäessä Express [kutsuu automaattisesti](https://expressjs.com/en/guide/error-handling.html) virheenkäsittelijämiddlewarea, jos _await_-komento päätyy virheeseen tai sen odottama promise päätyy _rejected_-tilaan. Näin lopullisesta koodista tulee entistä siistimpää.
+
+ **HUOM.** Tämä ominaisuus on käytössä Expressin versiosta 5 alkaen. Jos olet asentanut Expressin projektisi riippuvuudeksi ennen 31.3.2025, sinulla saattaa vielä olla käytössä Expressin versio 4. Voit tarkistaa projektissasi käytössä olevan Expressin version _package.json_-tiedostosta. Jos käytössäsi on vanha versio, päivitä se nyt versioon 5 komennolla
+
+ ```bash
+ npm install express@5 
+ ```
+
+### Yksittäisen muistiinpanon hakemisesta vastaavan routen refaktorointi
+
+Tehdään sitten testi yksittäisen muistiinpanon tietojen katsomiselle. Koodissa on korostettu varsinainen API:in suoritettava operaatio:
 
 ```js
 test('a specific note can be viewed', async () => {
   const notesAtStart = await helper.notesInDb()
-
   const noteToView = notesAtStart[0]
 
 // highlight-start
@@ -730,143 +750,21 @@ test('a specific note can be viewed', async () => {
 
   assert.deepStrictEqual(resultNote.body, noteToView)
 })
-
-test('a note can be deleted', async () => {
-  const notesAtStart = await helper.notesInDb()
-  const noteToDelete = notesAtStart[0]
-
-// highlight-start
-  await api
-    .delete(`/api/notes/${noteToDelete.id}`)
-    .expect(204)
-// highlight-end
-
-  const notesAtEnd = await helper.notesInDb()
-
-  const contents = notesAtEnd.map(r => r.content)
-  assert(!contents.includes(noteToDelete.content))
-
-  assert.strictEqual(notesAtEnd.length, helper.initialNotes.length - 1)
-})
 ```
 
-Molemmat testit ovat rakenteeltaan samankaltaisia. Alustusvaiheessa ne hakevat kannasta yksittäisen muistiinpanon. Tämän jälkeen on itse testattava operaatio, joka on koodissa korostettuna. Lopussa tarkastetaan, että operaation tulos on haluttu.
+Ensin testi hakee kannasta yksittäisen muistiinpanon. Tämän jälkeen testataan, että kyseinen muistiinpano on mahdollista hakea API:n kautta. Lopussa tarkastetaan, että haetun muistiinpanon sisältö on odotetunlainen.
 
-Ensimmäisessä testissä on eräs huomionarvoinen seikka. Sen sijaan, että vertailu tehtäisiin aiemmin käytetyn metodin [strictEqual](https://nodejs.org/api/assert.html#assertstrictequalactual-expected-message), käytössä on metodi [deepStrictEqual](https://nodejs.org/api/assert.html#assertdeepstrictequalactual-expected-message):
+Testissä on eräs huomionarvoinen seikka. Sen sijaan, että vertailu tehtäisiin aiemmin käytetyn metodin [strictEqual](https://nodejs.org/api/assert.html#assertstrictequalactual-expected-message), käytössä on metodi [deepStrictEqual](https://nodejs.org/api/assert.html#assertdeepstrictequalactual-expected-message):
 
 ```js
 assert.deepStrictEqual(resultNote.body, noteToView)
 ```
 
-Syynä tälle on se, että _strictEqual_ käyttää metodia [Object.is](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) samuuden vertailuun, eli se vertaa ovatko kyseessä samat olioit. Meidän tapauksessamme taas riittää tarkistaa että olioiden sisältö, eli niiden kenttien arvot olisivat samat. Tähän tarkoitukseen sopii _deepStrictEqual_.
+Syynä tälle on se, että _strictEqual_ käyttää metodia [Object.is](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) samuuden vertailuun, eli se vertaa ovatko kyseessä samat oliot. Meidän tapauksessamme taas on tarkoitus tarkistaa, että olioiden sisältö eli niiden kenttien arvot olisivat samat. Tähän tarkoitukseen sopii _deepStrictEqual_.
 
-Testit menevät läpi, joten voimme turvallisesti refaktoroida testatut routet käyttämään async/awaitia:
-
-```js
-notesRouter.get('/:id', async (request, response, next) => {
-  try {
-    const note = await Note.findById(request.params.id)
-    if (note) {
-      response.json(note)
-    } else {
-      response.status(404).end()
-    }
-  } catch(exception) {
-    next(exception)
-  }
-})
-
-notesRouter.delete('/:id', async (request, response, next) => {
-  try {
-    await Note.findByIdAndDelete(request.params.id)
-    response.status(204).end()
-  } catch (exception) {
-    next(exception)
-  }
-})
-```
-
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-4), haarassa <i>part4-4</i>. 
-
-### Try-catchin eliminointi
-
-Async/await selkeyttää koodia jossain määrin, mutta sen "hinta" on poikkeusten käsittelyn edellyttämä <i>try/catch</i>-rakenne. Kaikki routejen käsittelijät noudattavat samaa kaavaa:
+Testit menevät läpi, joten voimme turvallisesti refaktoroida testatun routen käyttämään async/awaitia:
 
 ```js
-try {
-  // do the async operations here
-} catch(exception) {
-  next(exception)
-}
-```
-
-Mieleen herää kysymys, olisiko koodia mahdollista refaktoroida siten, että <i>catch</i> saataisiin refaktoroitua ulos metodeista? 
-
-Kirjasto [express-async-errors](https://github.com/davidbanham/express-async-errors) tuo tilanteeseen helpotuksen.
-
-Asennetaan kirjasto:
-
-```bash
-npm install express-async-errors
-```
-
-Kirjaston käyttö on <i>todella</i> helppoa. Kirjaston koodi otetaan käyttöön tiedostossa <i>app.js</i>:
-
-```js
-const config = require('./utils/config')
-const express = require('express')
-require('express-async-errors') // highlight-line
-const app = express()
-const cors = require('cors')
-const notesRouter = require('./controllers/notes')
-const middleware = require('./utils/middleware')
-const logger = require('./utils/logger')
-const mongoose = require('mongoose')
-
-// ...
-
-module.exports = app
-```
-
-Kirjaston koodiin sisällyttämän "magian" ansiosta pääsemme kokonaan eroon try-catch-lauseista. Muistiinpanon poistamisesta huolehtiva route
-
-```js
-notesRouter.delete('/:id', async (request, response, next) => {
-  try {
-    await Note.findByIdAndDelete(request.params.id)
-    response.status(204).end()
-  } catch (exception) {
-    next(exception)
-  }
-})
-```
-
-muuttuu muotoon
-
-```js
-notesRouter.delete('/:id', async (request, response) => {
-  await Note.findByIdAndDelete(request.params.id)
-  response.status(204).end()
-})
-```
-
-Kirjaston ansiosta kutsua _next(exception)_ ei siis enää tarvita. Kirjasto hoitaa asian konepellin alla, eli jos <i>async</i>-funktiona määritellyn routen sisällä syntyy poikkeus, siirtyy suoritus automaattisesti virheenkäsittelijämiddlewareen.
-
-Muut routet yksinkertaistuvat seuraavasti:
-
-```js
-notesRouter.post('/', async (request, response) => {
-  const body = request.body
-
-  const note = new Note({
-    content: body.content,
-    important: body.important || false,
-  })
-
-  const savedNote = await note.save()
-  response.status(201).json(savedNote)
-})
-
 notesRouter.get('/:id', async (request, response) => {
   const note = await Note.findById(request.params.id)
   if (note) {
@@ -876,6 +774,41 @@ notesRouter.get('/:id', async (request, response) => {
   }
 })
 ```
+
+### Muistiinpanon poistamisesta vastaavan routen refaktorointi
+
+Lisätään vielä testi muistiinpanon poistamisesta vastaavalle routelle:
+
+```js
+test('a note can be deleted', async () => {
+  const notesAtStart = await helper.notesInDb()
+  const noteToDelete = notesAtStart[0]
+
+  await api
+    .delete(`/api/notes/${noteToDelete.id}`)
+    .expect(204)
+
+  const notesAtEnd = await helper.notesInDb()
+
+  const contents = notesAtEnd.map(n => n.content)
+  assert(!contents.includes(noteToDelete.content))
+
+  assert.strictEqual(notesAtEnd.length, helper.initialNotes.length - 1)
+})
+```
+
+Testi on rakenteeltaan samanlainen kuin yksittäisen muistiinpanon hakemista testaava testi, eli ensin kannasta haetaan yksittäinen muistiinpano, jonka jälkeen testataan sen poistamista API:n kautta. Lopuksi tarkistetaan, että kannassa ei ole enää kyseistä muistiinpanoa ja että muistiinpanojen määrä on vähentynyt yhdellä.
+
+Testit menevät edelleen läpi, joten voimme turvallisesti suorittaa routen refaktoroinnin:
+
+```js
+notesRouter.delete('/:id', async (request, response) => {
+  await Note.findByIdAndDelete(request.params.id)
+  response.status(204).end()
+})
+```
+
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-4), haarassa <i>part4-4</i>. 
 
 ### Testin beforeEach-metodin optimointi
 
@@ -918,17 +851,17 @@ Talletamme siis taulukossa olevat muistiinpanot tietokantaan _forEach_-loopissa.
 
 Konsoliin tulostuu:
 
-<pre>
+```
 cleared
 done
 entered test
 saved
 saved
-</pre>
+```
 
 Yllättäen ratkaisu ei async/awaitista huolimatta toimi niin kuin oletamme, vaan testin suoritus aloitetaan ennen kuin tietokannan tila on saatu alustettua!
 
-Ongelma on siinä, että jokainen forEach-loopin läpikäynti generoi oman asynkronisen operaation ja _beforeEach_ ei odota näiden suoritusta. Eli forEach:in sisällä olevat _await_-komennot eivät ole funktiossa _beforeEach_ vaan erillisissä funktioissa, joiden päättymistä _beforeEach_ ei odota.
+Ongelma on siinä, että jokainen _forEach_-loopin läpikäynti generoi oman asynkronisen operaation, eikä _beforeEach_-funktio odota näiden suoritusta. Eli forEach:in sisällä olevat _await_-komennot eivät ole funktiossa _beforeEach_ vaan erillisissä funktioissa, joiden päättymistä _beforeEach_ ei odota. Lisäksi [_forEach_-metodi odottaa saavansa parametrikseen synkronisen funktion](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach#description), joten async/await-rakenne ei toimi sen sisällä muutenkaan oikein.
 
 Koska testien suoritus alkaa heti _beforeEach_ metodin suorituksen jälkeen, testien suoritus ehditään aloittamaan ennen kuin tietokanta on alustettu toivottuun alkutilaan.
 
@@ -967,7 +900,7 @@ beforeEach(async () => {
 
 JavaScriptin asynkroninen suoritusmalli aiheuttaakin siis helposti yllätyksiä, ja myös async/await-syntaksin kanssa pitää olla koko ajan tarkkana. Vaikka async/await peittää monia promisejen käsittelyyn liittyviä seikkoja, promisejen toiminta on syytä tuntea mahdollisimman hyvin!
 
-Kaikkein helpoimmalla tilanteesta selvitään hyödyntämällä Mongoosen valmista metodia _insertMany_:
+On kuitenkin olemassa vieläkin yksinkertaisempi tapa _beforeEach_-funktion toteuttamiseksi. Kaikkein helpoimmalla tilanteesta selvitään hyödyntämällä Mongoosen valmista metodia _insertMany_:
 
 ```js
 beforeEach(async () => {
@@ -992,7 +925,7 @@ Full stack ‑ohjelmointi on <i>todella</i> hankalaa, ja sen takia lupaan hyödy
 - <i>käytän koodissa ja testeissä runsaasti _console.log_-komentoja varmistamaan sen, että varmasti ymmärrän jokaisen kirjoittamani rivin, sekä etsiessäni koodista tai testeistä mahdollisia ongelman aiheuttajia</i>
 - jos koodini ei toimi, en kirjoita enää yhtään lisää koodia, vaan alan poistamaan toiminnan rikkoneita rivejä tai palaan suosiolla tilanteeseen, missä koodi vielä toimi
 - <i>jos testit eivät mene läpi, varmistan että testien testaama toiminnallisuus varmasti toimii sovelluksessa</i>
-- kun kysyn apua kurssin Discord-kanavalla, tai muualla internetissä, muotoilen kysymyksen järkevästi, esim. [täällä](/en/part0/general_info#how-to-ask-help-in-discord) esiteltyyn tapaan
+- kun kysyn apua kurssin Discord-kanavalla, tai muualla internetissä, muotoilen kysymyksen järkevästi, esim. [täällä](/en/part0/general_info#how-to-get-help-in-discord) esiteltyyn tapaan
 
 </div>
 
@@ -1047,16 +980,15 @@ Testit ovat tällä hetkellä osittain epätäydelliset, sillä esim. reittejä 
 Jossain määrin parannellut testit ovat seuraavassa:
 
 ```js
-const { test, after, beforeEach, describe } = require('node:test')
 const assert = require('node:assert')
+const { test, after, beforeEach, describe } = require('node:test')
 const mongoose = require('mongoose')
 const supertest = require('supertest')
 const app = require('../app')
-const api = supertest(app)
-
 const helper = require('./test_helper')
-
 const Note = require('../models/note')
+
+const api = supertest(app)
 
 describe('when there is initially some notes saved', () => {
   beforeEach(async () => {
@@ -1080,15 +1012,13 @@ describe('when there is initially some notes saved', () => {
   test('a specific note is within the returned notes', async () => {
     const response = await api.get('/api/notes')
 
-    const contents = response.body.map(r => r.content)
-    assert(contents.includes('Browser can execute only JavaScript'))
+    const contents = response.body.map(e => e.content)
+    assert(contents.includes('HTML is easy'))
   })
 
   describe('viewing a specific note', () => {
-
     test('succeeds with a valid id', async () => {
       const notesAtStart = await helper.notesInDb()
-
       const noteToView = notesAtStart[0]
 
       const resultNote = await api
@@ -1102,17 +1032,13 @@ describe('when there is initially some notes saved', () => {
     test('fails with statuscode 404 if note does not exist', async () => {
       const validNonexistingId = await helper.nonExistingId()
 
-      await api
-        .get(`/api/notes/${validNonexistingId}`)
-        .expect(404)
+      await api.get(`/api/notes/${validNonexistingId}`).expect(404)
     })
 
     test('fails with statuscode 400 id is invalid', async () => {
       const invalidId = '5a3d5da59070081a82a3445'
 
-      await api
-        .get(`/api/notes/${invalidId}`)
-        .expect(400)
+      await api.get(`/api/notes/${invalidId}`).expect(400)
     })
   })
 
@@ -1137,14 +1063,9 @@ describe('when there is initially some notes saved', () => {
     })
 
     test('fails with status code 400 if data invalid', async () => {
-      const newNote = {
-        important: true
-      }
+      const newNote = { important: true }
 
-      await api
-        .post('/api/notes')
-        .send(newNote)
-        .expect(400)
+      await api.post('/api/notes').send(newNote).expect(400)
 
       const notesAtEnd = await helper.notesInDb()
 
@@ -1157,16 +1078,14 @@ describe('when there is initially some notes saved', () => {
       const notesAtStart = await helper.notesInDb()
       const noteToDelete = notesAtStart[0]
 
-      await api
-        .delete(`/api/notes/${noteToDelete.id}`)
-        .expect(204)
+      await api.delete(`/api/notes/${noteToDelete.id}`).expect(204)
 
       const notesAtEnd = await helper.notesInDb()
 
-      assert.strictEqual(notesAtEnd.length, helper.initialNotes.length - 1)
-
-      const contents = notesAtEnd.map(r => r.content)
+      const contents = notesAtEnd.map(n => n.content)
       assert(!contents.includes(noteToDelete.content))
+
+      assert.strictEqual(notesAtEnd.length, helper.initialNotes.length - 1)
     })
   })
 })
@@ -1178,7 +1097,7 @@ after(async () => {
 
 Testien raportointi tapahtuu <i>describe</i>-lohkojen ryhmittelyn mukaan:
 
-![Jest ryhmittelee testitulokset describe-lohkoittain](../../images/4/7new.png)
+![Tstikirjasto ryhmittelee testitulokset describe-lohkoittain](../../images/4/7new.png)
 
 Testeihin jää vielä parannettavaa, mutta on jo aika siirtyä eteenpäin.
 

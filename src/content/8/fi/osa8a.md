@@ -236,7 +236,7 @@ Kuten huomaamme, GraphQL-kyselyn ja siihen vastauksena tulevan JSON:in muodoilla
 
 GraphQL:n skeema kuvaa ainoastaan palvelimen ja sitä käyttävien clientien välillä liikkuvan tiedon muodon. Tieto voi olla organisoituna ja talletettuna palvelimeen ihan missä muodossa tahansa.
 
-Nimestään huolimatta GraphQL:llä ei itse asiassa ole mitään tekemistä tietokantojen kanssa, se ei ota mitään kantaa siihen miten data on tallennettu. GraphQL-periaattella toimivan API:n käyttämä data voi siis olla talletettu relaatiotietokantaan, dokumenttitietokantaan tai muille palvelimille, joita GraphQL-palvelin käyttää vaikkapa REST:in välityksellä.
+Nimestään huolimatta GraphQL:llä ei itse asiassa ole mitään tekemistä tietokantojen kanssa, se ei ota mitään kantaa siihen miten data on tallennettu. GraphQL-periaatteella toimivan API:n käyttämä data voi siis olla talletettu relaatiotietokantaan, dokumenttitietokantaan tai muille palvelimille, joita GraphQL-palvelin käyttää vaikkapa REST:in välityksellä.
 
 ### Apollo Server
 
@@ -248,7 +248,7 @@ Luodaan uusi npm-projekti komennolla _npm init_ ja asennetaan tarvittavat riippu
 npm install @apollo/server graphql
 ```
 
-Alustava toteutus on seuraavassa
+Alustava toteutus kirjoitettuna tiedostoon <i>index.js</i> on seuraavassa
 
 ```js
 const { ApolloServer } = require('@apollo/server')
@@ -386,13 +386,58 @@ resolveri on funktio, joka palauttaa <i>kaikki</i> taulukon _persons_ oliot
 
 ### Apollo Studio Explorer
 
-Kun Apollo-serveriä suoritetaan sovelluskehitysmoodissa, ja mennään sivulle  [http://localhost:4000](http://localhost:4000) päästään nappia <i>Query your server</i> painamalla  sovelluskehittäjälle erittäin hyödyllisen [Apollo Studio Explorer](https://www.apollographql.com/docs/studio/explorer/explorer/)-näkymän, joka avulla on mahdollista tehdä kyselyjä palvelimelle.
+Lisätään tiedostoon <i>package.json</i> skriptit sovelluksen suoritusta varten:
+
+```json
+{
+  //...
+  "scripts": {
+    "start": "node index.js", // highlight-line
+    "dev": "node --watch index.js", // highlight-line
+    // ...
+  }
+}
+```
+
+Kun Apollo-serveriä suoritetaan sovelluskehitysmoodissa ja mennään sivulle  [http://localhost:4000](http://localhost:4000), päästään sovelluskehittäjälle erittäin hyödylliseen [Apollo Studio Explorer](https://www.apollographql.com/docs/studio/explorer/explorer/)-näkymään, jonka avulla on mahdollista tehdä kyselyjä palvelimelle.
 
 Kokeillaan 
 
 ![](../../images/8/1x.png)
 
 Vasemmassa laidassa Explorer näyttää mukavasti myös automaattisesti skeeman perusteella muodosteutun API-dokumentaation.
+
+### Skeeman syntaksikorostus VS Codessa
+
+Skeema on määritelty koodissamme template literal -syntaksin avulla: 
+
+```js
+const typeDefs = `
+  type Person {
+    name: String!
+    phone: String
+    street: String!
+    city: String! 
+    id: ID!
+  }
+
+  type Query {
+    personCount: Int!
+    allPersons: [Person!]!
+    findPerson(name: String!): Person
+  }
+`
+```
+
+Skeema sisältää rakenteellista tietoa, mutta koodieditorissa koko sisältö näkyy samanvärisenä, eivätkä esimerkiksi automaattiset muotoilutyökalut kuten Prettier osaa muotoilla sen sisältöä. Saamme VS Codeen GraphQL-skeeman syntaksikorostuksen ja esimerkiksi automaattisen täydennyksen käyttöön asentamalla [GraphQL: Language Feature Support](https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql) -lisäosan.
+
+Lisäosalle pitää vielä jotenkin ilmaista, että _typeDefs_ sisältää GraphQL:ää. Tähän on useita tapoja. Tehdään se nyt lisäämällä template literal -merkkijonon eteen tyypin määrittävä kommentti _/* GraphQL */_:
+
+
+
+![VS Code käyttää syntaksikorostusta GraphQL-skeemaan, kun template literal -merkkijonon eteen on lisätty kommentti /* GraphQL */](../../images/8/1z.png)
+
+Nyt syntaksikorostus toimii. Kommentti auttaa asentamaamme lisäosaa tunnistamaan merkkijonon GraphQL:ksi ja tarjoamaan älykkäitä ominaisuuksia editorissa, mutta ei vaikuta itse sovelluksen suoritukseen. Myös Prettier osaa nyt muotoilla skeemaa.
 
 ### Resolverin parametrit
 
@@ -500,6 +545,31 @@ type Query {
 
 eli henkilöllä on nyt kenttä, jonka tyyppi on <i>Address</i>, joka koostuu kadusta ja kaupungista. 
 
+Koska taulukkoon talletetuilla olioilla ei ole kenttää <i>address</i>, oletusarvoinen resolveri ei enää riitä. Lisätään resolveri tyypin <i>Person</i> kentälle <i>address</i>:
+
+```js
+const resolvers = {
+  Query: {
+    personCount: () => persons.length,
+    allPersons: () => persons,
+    findPerson: (root, args) =>
+      persons.find(p => p.name === args.name)
+  },
+  // highlight-start
+  Person: {
+    address: (root) => {
+      return { 
+        street: root.street,
+        city: root.city
+      }
+    }
+  }
+  // highlight-end
+}
+```
+
+Eli aina palautettaessa <i>Person</i>-oliota, palautetaan niiden kentät <i>name</i>, <i>phone</i> sekä <i>id</i> käyttäen oletusarvoista resolveria, kenttä <i>address</i> muodostetaan itse määritellyn resolverin avulla. Resolverifunktion parametrina _root_ on käsittelyssä oleva henkilö-olio, eli osoitteen katu ja kaupunki saadaan sen kentistä.
+
 Osoitetta tarvitsevat kyselyt muuttuvat muotoon
 
 ```js
@@ -549,31 +619,6 @@ Nyt siis palvelimen tallettamat henkilö-oliot eivät ole muodoltaan täysin sam
 
 Toisin kuin tyypille <i>Person</i> ei tyypille <i>Address</i> ole määritelty <i>id</i>-kenttää, sillä osoitteita ei ole talletettu palvelimella omaan tietorakenteeseensa.
 
-Koska taulukkoon talletetuilla olioilla ei ole kenttää <i>address</i> oletusarvoinen resolveri ei enää riitä. Lisätään resolveri tyypin <i>Person</i> kentälle <i>address</i>:
-
-```js
-const resolvers = {
-  Query: {
-    personCount: () => persons.length,
-    allPersons: () => persons,
-    findPerson: (root, args) =>
-      persons.find(p => p.name === args.name)
-  },
-  // highlight-start
-  Person: {
-    address: (root) => {
-      return { 
-        street: root.street,
-        city: root.city
-      }
-    }
-  }
-  // highlight-end
-}
-```
-
-Eli aina palautettaessa <i>Person</i>-oliota, palautetaan niiden kentät <i>name</i>, <i>phone</i> sekä <i>id</i> käyttäen oletusarvoista resolveria, kenttä <i>address</i> muodostetaan itse määritellyn resolverin avulla. Resolverifunktion parametrina _root_ on käsittelyssä oleva henkilö-olio, eli osoitteen katu ja kaupunki saadaan sen kentistä.
-
 Muutetaan kentän _address_ resolveria vielä siten, että se destrukturoi tarvitsemansa kentät saamastaan parametrista:
 
 ```js
@@ -618,12 +663,18 @@ Mutaatio siis saa parametreina käyttäjän tiedot. Parametreista <i>phone</i> o
 Myös mutaatioita varten on määriteltävä resolveri:
 
 ```js
-const { v1: uuid } = require('uuid')
+const { v1: uuid } = require('uuid') // highlight-line
 
 // ...
 
 const resolvers = {
-  // ...
+  Query: {
+    // ...
+  },
+  Person: {
+    // ...
+  },
+  // highlight-start
   Mutation: {
     addPerson: (root, args) => {
       const person = { ...args, id: uuid() }
@@ -631,7 +682,10 @@ const resolvers = {
       return person
     }
   }
+  // highlight-end
 }
+
+// ...
 ```
 
 Mutaatio siis lisää parametreina _args_ saamansa olion taulukkoon _persons_ ja palauttaa lisätyn olion. 
@@ -650,7 +704,7 @@ mutation {
   ) {
     name
     phone
-    address{
+    address {
       city
       street
     }

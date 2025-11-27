@@ -13,7 +13,7 @@ Tämän ja seuraavan luvun tehtävien lisäksi seitsemäs osa sisältää kertaa
 
 ### Hookit
 
-React tarjoaa yhteensä 15 erilaista [valmista hookia](https://react.dev/reference/react), joista ylivoimaisesti eniten käytetyt ovat meillekin jo tutut [useState](https://react.dev/reference/react/useState) ja [useEffect](https://react.dev/reference/react/useEffect).
+React tarjoaa yhteensä 15 erilaista [valmista hookia](https://react.dev/reference/react/hooks), joista ylivoimaisesti eniten käytetyt ovat meillekin jo tutut [useState](https://react.dev/reference/react/useState) ja [useEffect](https://react.dev/reference/react/useEffect).
 
 Käytimme [osassa 5](/osa5/props_children_ja_proptypet#ref-eli-viite-komponenttiin) hookia [useImperativeHandle](https://react.dev/reference/react/useImperativeHandle), jonka avulla komponentin sisäinen funktio pystyttiin tarjoamaan näkyville komponentin ulkopuolelle. [Osassa 6](/osa6/react_query_use_reducer_ja_context) taas olivat käytössä [useReducer](https://react.dev/reference/react/useReducer) ja [useContext](https://react.dev/reference/react/useContext) kun toteutimme Reduxia muistuttavan tilanhallintaratkaisun.
 

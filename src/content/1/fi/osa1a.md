@@ -11,10 +11,21 @@ Alamme nyt tutustua kurssin ehkä tärkeimpään teemaan, [React](https://react.
 
 Helpoin tapa päästä alkuun on [Vite](https://vitejs.dev/)-nimisen työkalun käyttö.
 
-Luodaan sovellus nimeltään <i>part1</i>, mennään sovelluksen sisältämään hakemistoon ja asennetaan sovelluksen käyttämät kirjastot:
+Luodaan uusi sovellus <i>create-vite</i>-työkalun avulla:
 
 ```bash
-npm create vite@latest part1 -- --template react
+npm create vite@latest
+```
+
+Vastaillaan työkalun esittämiin kysymyksiin seuraavasti:
+
+![create-vite-työkalun valintanäkymä, jossa valitaan projektin nimeksi part1, frameworkiksi React, variantiksi JavaScript ja muihin kysymyksiin vastataan kieltävästi](../../images/1/1-create-vite.png)
+
+Loimme siis <i>part1</i>-nimisen sovelluksen. Työkalu olisi voinut myös asentaa tarvittavat riippuvuudet ja käynnistää sen jälkeen sovelluksen automaattisesti, jos olisimme vastanneet myöntävästi kysymykseen "Install with npm and start now?" Teemme vaiheet nyt kuitenkin manuaalisesti, jotta pääsemme näkemään, miten ne tehdään.
+
+Siirrytään sovelluksen sisältämään hakemistoon ja asennetaan sovelluksen käyttämät kirjastot:
+
+```bash
 cd part1
 npm install
 ```
@@ -60,14 +71,6 @@ export default App
 
 Tiedostot <i>App.css</i> ja <i>index.css</i> sekä hakemiston <i>assets</i> voi poistaa, sillä emme tarvitse niitä.
 
-### create-react-app
-
-Voit halutessasi käyttää kurssilla Viten sijaan myös [create-react-app](https://github.com/facebookincubator/create-react-app)-nimistä sovellusta. Näkyvin ero Viteen on sovelluksen aloitustiedoston nimi, joka on <i>index.js</i>. Myös sovelluksen käynnistämistapa eroaa, käynnistäminen tapahtuu komennolla 
-
-```
-npm start
-```
-
 ### Komponentti
 
 Tiedosto <i>App.jsx</i> määrittelee nyt React-[komponentin](https://react.dev/learn/your-first-component) nimeltään <i>App</i>. Tiedoston <i>main.jsx</i> viimeisen rivin komento
@@ -87,7 +90,7 @@ Tiedosto <i>index.html</i> on headerin määrittelyjä lukuun ottamatta oleellis
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <title>part1</title>
   </head>
   <body>
     <div id="root"></div>
@@ -226,7 +229,7 @@ const App = () => {
 }
 ```
 
-Käännöksen hoitaa [Babel](https://babeljs.io/repl/). Create-react-app:illa luoduissa projekteissa käännös on konfiguroitu tapahtumaan automaattisesti. Tulemme tutustumaan aiheeseen tarkemmin kurssin [osassa 7](/osa7).
+Käännöksen hoitaa [Babel](https://babeljs.io/repl/). Vitellä luoduissa projekteissa käännös on konfiguroitu tapahtumaan automaattisesti. Tulemme tutustumaan aiheeseen tarkemmin kurssin [osassa 7](/osa7).
 
 Reactia olisi mahdollista kirjoittaa myös "suoraan JavaScriptinä" käyttämättä JSX:ää, mutta tämä ei ole järkevää.
 
@@ -364,34 +367,46 @@ Ohjemistokehitys on haastavaa, ja erityisen haastavaksi se muuttuu, jos jokainen
 
 ### Mahdollinen virheilmoitus
 
-Käyttämästäsi editorista riippuen saatat saada tässä vaiheessa seuraavan virheilmoituksen:
+Jos projektiisi on asennettuna Reactin versio 18 tai aiempi, saatat saada tässä vaiheessa seuraavan virheilmoituksen:
 
 ![](../../images/1/1-vite5.png)
 
-Kyse ei ole varsinaisesta virheestä vaan [ESLint](https://eslint.org/)-työkalun aiheuttamasta varoituksesta. Saat hiljennettyä varoituksen [react/prop-types](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md) lisäämällä tiedostoon <i>.eslintrc.cjs</i> seuraavan rivin
+Kyse ei ole varsinaisesta virheestä vaan [ESLint](https://eslint.org/)-työkalun aiheuttamasta varoituksesta. Saat hiljennettyä varoituksen [react/prop-types](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md) lisäämällä tiedostoon <i>eslint.config.js</i> seuraavan rivin
 
 ```js
-module.exports = {
-  root: true,
-  env: { browser: true, es2020: true },
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:react/jsx-runtime',
-    'plugin:react-hooks/recommended',
-  ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
-  parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
-  settings: { react: { version: '18.2' } },
-  plugins: ['react-refresh'],
-  rules: {
-    'react-refresh/only-export-components': [
-      'warn',
-      { allowConstantExport: true },
-    ],
-    'react/prop-types': 0 // highlight-line
+export default [
+  { ignores: ['dist'] },
+  {
+    files: ['**/*.{js,jsx}'],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        ecmaFeatures: { jsx: true },
+        sourceType: 'module',
+      },
+    },
+    settings: { react: { version: '18.3' } },
+    plugins: {
+      react,
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
+    },
+    rules: {
+      ...js.configs.recommended.rules,
+      ...react.configs.recommended.rules,
+      ...react.configs['jsx-runtime'].rules,
+      ...reactHooks.configs.recommended.rules,
+      'react/jsx-no-target-blank': 'off',
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true },
+      ],
+      'react/prop-types': 0, // highlight-line
+    },
   },
-}
+]
 ```
 
 Tutustumme ESLintiin tarkemmin [osassa 3](/osa3/validointi_ja_es_lint#lint).

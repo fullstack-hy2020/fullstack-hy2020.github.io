@@ -73,7 +73,7 @@ mongoose.connect(MONGODB_URI)
     console.log('error connection to MongoDB:', error.message)
   })
 
-const typeDefs = gql`
+const typeDefs = `
   ...
 `
 

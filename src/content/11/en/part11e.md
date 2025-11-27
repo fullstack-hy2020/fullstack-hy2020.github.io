@@ -39,7 +39,7 @@ Register now to Discord if you have not already done that. You will also need a 
 
 #### 11.18 Build success/failure notification action
 
-You can find quite a few third-party actions from [GitHub Action Marketplace](https://github.com/marketplace?type=actions) by using the search phrase [discord](https://github.com/marketplace?type=actions&query=discord). Pick one for this exercise. My choice was [discord-webhook-notify](https://github.com/marketplace/actions/discord-webhook-notify) since it has quite many stars and decent documentation.
+You can find quite a few third-party actions from [GitHub Action Marketplace](https://github.com/marketplace?type=actions) by using the search phrase [discord](https://github.com/marketplace?type=actions&query=discord). Pick one for this exercise. My choice was [discord-webhook-notify](https://github.com/marketplace/actions/discord-webhook-notify) since it has quite a few stars and decent documentation.
 
 Setup the action so that it gives two types of notifications:
 - A success indication if a new version gets deployed

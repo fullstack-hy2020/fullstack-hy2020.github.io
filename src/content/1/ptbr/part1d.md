@@ -1052,7 +1052,7 @@ const App = () => {
 
   return (
     <div>
-      <Exibir valor={valor} />
+      <Exibir valor={valor} /> // highlight-line
       <Botao handleClique={() => setNoValor(1000)} texto="mil" />
       <Botao handleClique={() => setNoValor(0)} texto="zerar" />
       <Botao handleClique={() => setNoValor(valor + 1)} texto="incrementar" />

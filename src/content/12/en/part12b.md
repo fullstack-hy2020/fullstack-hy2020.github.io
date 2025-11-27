@@ -293,7 +293,7 @@ Tip: Run the application outside of a container to examine it before starting to
 
 ### Using Docker compose
 
-In the previous section, we created an Express server, knowing that it will run in port 3123, and used the commands _docker build -t express-server . && docker run -p 3123:3000 express-server_ to ran it. This already looks like something you would need to put into a script to remember. Fortunately, Docker offers us a better solution.
+In the previous section, we created an Express server, knowing that it will run in port 3123, and used the commands _docker build -t express-server . && docker run -p 3123:3000 express-server_ to run it. This already looks like something you would need to put into a script to remember. Fortunately, Docker offers us a better solution.
 
 [Docker compose](https://docs.docker.com/compose/) is another fantastic tool, which can help us to manage containers. Let's start using compose as we learn more about containers as it will help us save some time with the configuration.
 
@@ -560,7 +560,7 @@ services:
       MONGO_INITDB_DATABASE: the_database
     volumes:
       - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
-      - mongo_data:/data/db
+      - mongo_data:/data/db # highlight-line
 
 volumes: # highlight-line
   mongo_data: # highlight-line

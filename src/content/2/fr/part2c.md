@@ -143,41 +143,31 @@ De nos jours, pratiquement tous les projets JavaScript sont définis à l'aide d
 
 ```json
 {
-  "name": "notes",
-  "version": "0.1.0",
+  "name": "part2-notes-frontend",
   "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.16.1",
-    "@testing-library/react": "^12.1.2",
-    "@testing-library/user-event": "^13.5.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "5.0.0",
-    "web-vitals": "^2.1.3"
-  },
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.17.0",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "globals": "^15.14.0",
+    "vite": "^6.0.5"
   }
 }
 ```
@@ -197,18 +187,20 @@ Axios est désormais inclus parmi les autres dépendances :
 
 ```json
 {
-  "name": "notes",
-  "version": "0.1.0",
+  "name": "part2-notes-frontend",
   "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.1",
-    "@testing-library/react": "^12.1.2",
-    "@testing-library/user-event": "^13.5.0",
-    "axios": "^0.24.0", // highlight-line
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "5.0.0",
-    "web-vitals": "^2.1.3"
+    "axios": "^1.7.9", // highlight-line
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   // ...
 }
@@ -228,11 +220,11 @@ et faire un petit ajout à la partie <i>scripts</i> du fichier <i>package.json</
 {
   // ... 
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "server": "json-server -p3001 --watch db.json" // highlight-line
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "server": "json-server -p 3001 db.json" // highlight-line
   },
 }
 ```
@@ -413,12 +405,12 @@ Nous avons également ajouté quelques impressions utiles, qui clarifient la pro
 
 Ceci est affiché sur la console :
 
-<pre>
+```
 render 0 notes
 effect
 promise fulfilled
 render 3 notes
-</pre>
+```
 
 Tout d'abord, le corps de la fonction définissant le composant est exécuté et le composant est rendu pour la première fois. À ce stade, <i>render 0 notes</i> est imprimé, ce qui signifie que les données n'ont pas encore été extraites du serveur.
 
@@ -540,7 +532,7 @@ L'application React s'exécutant dans le navigateur récupère les données au f
 
 <div class="tasks">
 
-<h3>Exercices 2.11.-2.14.</h3>
+<h3>Exercices 2.11.</h3>
 
 <h4>2.11: phonebook, étape6</h4>
 
@@ -590,77 +582,3 @@ Error: listen EADDRINUSE 0.0.0.0:3001
 cela signifie que le port 3001 est déjà utilisé par une autre application, par ex. en cours d'utilisation par un json-server déjà en cours d'exécution. Fermez l'autre application ou modifiez le port au cas où cela ne fonctionnerait pas.
 
 Modifiez l'application de sorte que l'état initial des données soit extrait du serveur à l'aide de la bibliothèque <i>axios</i>. Terminez la récupération avec un [Hook d'effet](https://reactjs.org/docs/hooks-effect.html).
-
-<h4>2.12* countries, étape1</h4>
-
-L'API [https://restcountries.com](https://restcountries.com) fournit des données pour différents pays dans un format lisible par machine, appelé API REST.
-
-Créer une application, dans laquelle on peut consulter les données de différents pays. L'application devrait probablement obtenir les données du end point [all](https://restcountries.com/v3.1/all).
-
-L'interface utilisateur est très simple. Le pays à afficher est trouvé en tapant une requête de recherche dans le champ de recherche.
-
-S'il y a trop de pays (plus de 10) qui correspondent à la requête, l'utilisateur est invité à préciser sa requête :
-
-![](../../images/2/19b1.png)
-
-S'il y a dix pays ou moins, mais plus d'un, tous les pays correspondant à la requête sont affichés :
-
-![](../../images/2/19b2.png)
-
-Lorsqu'il n'y a qu'un seul pays correspondant à la requête, les données de base du pays (par exemple, sa capitale et sa superficie), son drapeau et les langues qui y sont parlées sont affichés :
-
-![](../../images/2/19c3.png)
-
-**NB** : Il suffit que votre application fonctionne pour la plupart des pays. Certains pays, comme le <i>Soudan</i>, peuvent être difficiles à soutenir, car le nom du pays fait partie du nom d'un autre pays, le <i>Soudan du Sud</i>. Vous n'avez pas à vous soucier de ces cas extrêmes.
-
-**ATTENTION** create-react-app transformera automatiquement votre projet en un référentiel git à moins que vous ne créiez votre application dans un référentiel git existant. **Il est fort probable que vous ne vouliez pas que chacun de vos projets soit un référentiel distinct**, il vous suffit donc d'exécuter la commande _rm -rf .git_ à la racine de votre application.
-
-<h4>2.13*: countries, étape2</h4>
-
-**Il y a encore beaucoup à faire dans cette partie, alors ne restez pas bloqué sur cet exercice !**
-
-Améliorez l'application de l'exercice précédent, de sorte que lorsque les noms de plusieurs pays sont affichés sur la page, il y a un bouton à côté du nom du pays, qui, lorsqu'il est pressé, affiche la vue pour ce pays :
-
-![](../../images/2/19b4.png)
-
-Dans cet exercice, il suffit également que votre application fonctionne pour la plupart des pays. Les pays dont le nom apparaît dans le nom d'un autre pays, comme le <i>Soudan</i>, peuvent être ignorés.
-
-<h4>2.14*: countries, étape3</h4>
-
-**Il y a encore beaucoup à faire dans cette partie, alors ne restez pas bloqué sur cet exercice !**
-
-Ajoutez à la vue montrant les données d'un seul pays, le bulletin météo de la capitale de ce pays. Il existe des dizaines de fournisseurs de données météorologiques. Une API suggérée est [https://openweathermap.org](https://openweathermap.org). Notez que cela peut prendre quelques minutes avant qu'une clé API générée soit valide.
-
-![](../../images/2/19x.png)
-
-Si vous utilisez Open weather map, trouvez [ici](https://openweathermap.org/weather-conditions#Icon-list) une description de comment obtenir des icônes météo.
-
-**NB :** Dans certains navigateurs (tels que Firefox), l'API choisie peut envoyer une réponse d'erreur, ce qui indique que le cryptage HTTPS n'est pas pris en charge, bien que l'URL de la requête commence par _http://_. Ce problème peut être résolu en effectuant l'exercice à l'aide de Chrome.
-
-**NB :** Vous avez besoin d'une clé API pour utiliser presque tous les services météorologiques. N'enregistrez pas la clé API dans le contrôle de code source ! Ni coder en dur la clé API dans votre code source. Utilisez plutôt une [variable d'environnement](https://create-react-app.dev/docs/adding-custom-environment-variables/) pour enregistrer la clé.
-
-En supposant que la clé API est <i>t0p53cr3t4p1k3yv4lu3</i>, lorsque l'application est démarrée comme suit :
-
-```bash
-export REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 && npm start // For Linux/macOS Bash
-($env:REACT_APP_API_KEY="t0p53cr3t4p1k3yv4lu3") -and (npm start) // For Windows PowerShell
-set "REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3" && npm start // For Windows cmd.exe
-```
-
-vous pouvez accéder à la valeur de la clé depuis l'objet _process.env_ :
-
-```js
-const api_key = process.env.REACT_APP_API_KEY
-// la variable api_key a maintenant la valeur définie au démarrage
-```
-
-Notez que si vous avez créé l'application à l'aide de `npx create-react-app ...` et que vous souhaitez utiliser un nom différent pour votre variable d'environnement, le nom de la variable d'environnement doit toujours commencer par `REACT_APP_`. Vous pouvez également utiliser un fichier `.env` plutôt que de le définir sur la ligne de commande à chaque fois en créant un fichier intitulé '.env' à la racine du projet et en ajoutant ce qui suit.
-
-```
-# .env
-
-REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3
-```
-
-Notez que vous devrez redémarrer le serveur pour appliquer les modifications.
-</div>

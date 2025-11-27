@@ -351,7 +351,7 @@ Unfortunately, startStandaloneServer does not allow adding subscriptions to the 
 Let us install Express
 
 ```bash
-npm install express cors
+npm install express cors @as-integrations/express5
 ```
 
 and the file <i>index.js</i> changes to:
@@ -359,7 +359,7 @@ and the file <i>index.js</i> changes to:
 ```js
 const { ApolloServer } = require('@apollo/server')
 // highlight-start
-const { expressMiddleware } = require('@apollo/server/express4')
+const { expressMiddleware } = require('@as-integrations/express5')
 const { ApolloServerPluginDrainHttpServer } = require('@apollo/server/plugin/drainHttpServer')
 const { makeExecutableSchema } = require('@graphql-tools/schema')
 const express = require('express')
@@ -464,7 +464,7 @@ The file <i>index.js</i> is changed to:
 ```js
 // highlight-start
 const { WebSocketServer } = require('ws')
-const { useServer } = require('graphql-ws/lib/use/ws')
+const { useServer } = require('graphql-ws/use/ws')
 // highlight-end
 
 // ...
@@ -535,10 +535,10 @@ start()
 
 When queries and mutations are used, GraphQL uses the HTTP protocol in the communication. In case of subscriptions, the communication between client and server happens with [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API).
 
-The above code registers a WebSocketServer object to listen the WebSocket connections, besides the usual HTTP connections that the server listens to. The second part of the definition registers a function that closes the WebSocket connection on server shutdown.
+The above code registers a WebSocketServer object to listen to WebSocket connections, besides the usual HTTP connections that the server listens to. The second part of the definition registers a function that closes the WebSocket connection on server shutdown.
 If you're interested in more details about configurations, Apollo's [documentation](https://www.apollographql.com/docs/apollo-server/data/subscriptions) explains in relative detail what each line of code does.
 
-WebSockets are a perfect match for communication in the case of GraphQL subscriptions since when WebSockets are used, also the server can initiate the communication.
+WebSockets are a perfect match for communication in the case of GraphQL subscriptions, since when WebSockets are used, the server can also initiate communication.
 
 The subscription *personAdded* needs a resolver. The *addPerson* resolver also has to be modified so that it sends a notification to subscribers.
 
@@ -589,7 +589,7 @@ const resolvers = {
   // highlight-start
   Subscription: {
     personAdded: {
-      subscribe: () => pubsub.asyncIterator('PERSON_ADDED')
+      subscribe: () => pubsub.asyncIterableIterator('PERSON_ADDED')
     },
   },
   // highlight-end
@@ -610,7 +610,7 @@ There are only a few lines of code added, but quite a lot is happening under the
 ```js
 Subscription: {
   personAdded: {
-    subscribe: () => pubsub.asyncIterator('PERSON_ADDED')
+    subscribe: () => pubsub.asyncIterableIterator('PERSON_ADDED')
   },
 },
 ```
@@ -646,9 +646,10 @@ The configuration in <i>main.jsx</i> has to be modified like so:
 
 ```js
 import { 
-  ApolloClient, InMemoryCache, ApolloProvider, createHttpLink,
+  ApolloClient, InMemoryCache, createHttpLink,
   split  // highlight-line
 } from '@apollo/client'
+import { ApolloProvider } from '@apollo/client/react'
 import { setContext } from '@apollo/client/link/context'
 
 // highlight-start
@@ -739,7 +740,7 @@ and do the subscription in the App component:
 
 ```js
 
-import { useQuery, useMutation, useSubscription } from '@apollo/client' // highlight-line
+import { useQuery, useMutation, useSubscription } from '@apollo/client/react' // highlight-line
 
 
 const App = () => {
@@ -981,14 +982,14 @@ friendOf: async (root) => {
 
 and considering we have 5 persons saved, and we query *allPersons* without *phone* as argument, we see an absurd amount of queries like below.
 
-<pre>
+```
 Person.find
 User.find
 User.find
 User.find
 User.find
 User.find
-</pre>
+```
 
 So even though we primarily do one query for all persons, every person causes one more query in their resolver.
 

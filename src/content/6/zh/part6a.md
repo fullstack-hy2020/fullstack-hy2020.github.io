@@ -155,11 +155,11 @@ console.log(store.getState())
 <!-- would print the following to the console-->
 会在控制台中打印以下内容
 
-<pre>
+```
 0
 3
 -1
-</pre>
+```
 
 <!-- because at first the state of the store is 0. After three <i>INCREMENT</i>-actions the state is 3. In the end, after <i>ZERO</i> and <i>DECREMENT</i> actions, the state is -1.-->
 因为一开始商店的状态是0，经过三个<i>INCREMENT</i>动作后，状态是3。 最后，经过<i>ZERO</i>和<i>DECREMENT</i>动作，状态是-1。
@@ -198,13 +198,13 @@ store.dispatch({ type: 'DECREMENT' })
 <!-- would cause the following to be printed-->
 将导致以下内容被打印出来
 
-<pre>
+```
 1
 2
 3
 0
 -1
-</pre>
+```
 
 <!-- The code of our counter application is the following. All of the code has been written in the same file, so <i>store</i> is straight available for the React-code. We will get to know better ways to structure React/Redux-code later.-->
  我们的计数器应用的代码如下。所有的代码都写在同一个文件中，所以<i>store</i>对React代码来说是直接可用的。我们以后会了解到更好的结构React/Redux代码的方法。

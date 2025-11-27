@@ -580,7 +580,7 @@ Tehdään seuraavaksi napeille tarkoitettu komponentti <i>Button</i>. Napille on
 ```js
 const Button = (props) => {
   return (
-    <button onClick={props.handleClick}>
+    <button onClick={props.onClick}>
       {props.text}
     </button>
   )
@@ -602,15 +602,15 @@ const App = () => {
       <Display counter={counter}/>
       // highlight-start
       <Button
-        handleClick={increaseByOne}
+        onClick={increaseByOne}
         text='plus'
       />
       <Button
-        handleClick={setToZero}
+        onClick={setToZero}
         text='zero'
       />     
       <Button
-        handleClick={decreaseByOne}
+        onClick={decreaseByOne}
         text='minus'
       />           
       // highlight-end
@@ -621,7 +621,7 @@ const App = () => {
 
 Koska meillä on nyt uudelleenkäytettävä komponentti <i>Button</i>, sovellukselle on lisätty uutena toiminnallisuutena nappi, jolla laskurin arvoa voi vähentää.
 
-Tapahtumankäsittelijä välitetään napeille propsin _handleClick_ välityksellä. Propsin nimellä ei ole sinänsä merkitystä, mutta valinta ei ollut sattumanvarainen, sillä esim. Reactin [tutoriaali](https://react.dev/learn/tutorial-tic-tac-toe) suosittelee tätä konventiota.
+Tapahtumankäsittelijä välitetään napeille propsin _onClick_ välityksellä. Omia komponentteja luotaessa propsin nimen voi periaatteessa valita täysin vapaasti, mutta esim. Reactin [tutoriaali](https://react.dev/learn/responding-to-events#naming-event-handler-props) suosittelee, että tapahtumankäsittelijän sisältävän propsin nimi alkaa etuliitteellä _on_ ja jatkuu isolla kirjaimella eli on muotoa _onSomething_.
 
 ### Tilan muutos aiheuttaa uudelleenrenderöitymisen
 
@@ -658,9 +658,9 @@ const App = () => {
   return (
     <div>
       <Display counter={counter} />
-      <Button handleClick={increaseByOne} text="plus" />
-      <Button handleClick={setToZero} text="zero" />
-      <Button handleClick={decreaseByOne} text="minus" />
+      <Button onClick={increaseByOne} text="plus" />
+      <Button onClick={setToZero} text="zero" />
+      <Button onClick={decreaseByOne} text="minus" />
     </div>
   )
 } 
@@ -705,7 +705,7 @@ Vastaava suoraviivaistus voidaan tehdä myös nappikomponentille:
 ```js
 const Button = (props) => {
   return (
-    <button onClick={props.handleClick}>
+    <button onClick={props.onClick}>
       {props.text}
     </button>
   )
@@ -715,11 +715,9 @@ const Button = (props) => {
 Destrukturoidaan <i>props</i>:ista tarpeelliset kentät ja käytetään nuolifunktioiden tiiviimpää muotoa:
 
 ```js
-const Button = ({ handleClick, text }) => (
-  <button onClick={handleClick}>
-    {text}
-  </button>
-)
+const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
 ```
+
+Koska komponentti sisältää vain _return_-lauseen, on tiiviin nuolifunktiosyntaksin käyttö mahdollista.
 
 </div>

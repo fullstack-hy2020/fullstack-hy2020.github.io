@@ -5,12 +5,6 @@ letter: c
 lang: fi
 ---
 
-<div class="tasks">
-
-Tässä osassa käytetty testikirjasto muutettiin 3.3.2024 Jestistä Vitestiin. Jos ehdit jo aloittaa Jestiä käyttäen, näet [täältä](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/blob/02d8be28b1c9190f48976fbbd2435b63261282df/src/content/5/fi/osa5c.md) osan vanhan sisällön.
-
-</div>
-
 <div class="content">
 
 Reactilla tehtyjen frontendien testaamiseen on monia tapoja. Aloitetaan niihin tutustuminen nyt.
@@ -141,51 +135,43 @@ Suoritetaan testi:
 $ npm test
 
 > notes-frontend@0.0.0 test
-> vitest
+> vitest run
 
 
- DEV  v1.3.1 /Users/mluukkai/opetus/2024-fs/part3/notes-frontend
+ RUN  v3.2.3 /home/vejolkko/repot/fullstack-examples/notes-frontend
 
- ✓ src/components/Note.test.jsx (1)
-   ✓ renders content
+ ✓ src/components/Note.test.jsx (1 test) 19ms
+   ✓ renders content 18ms
 
  Test Files  1 passed (1)
       Tests  1 passed (1)
-   Start at  17:05:37
-   Duration  812ms (transform 31ms, setup 220ms, collect 11ms, tests 14ms, environment 395ms, prepare 70ms)
-
-
- PASS  Waiting for file changes...
+   Start at  14:31:54
+   Duration  874ms (transform 51ms, setup 169ms, collect 19ms, tests 19ms, environment 454ms, prepare 87ms)
 ```
 
 Kuten olettaa saattaa, testi menee läpi.
 
-Eslint valittaa testeissä olevista avainsanoista _test_ ja _expect_. Ongelmasta päästään eroon asentamalla [eslint-plugin-vitest-globals](https://www.npmjs.com/package/eslint-plugin-vitest-globals):
-
-```
-npm install --save-dev eslint-plugin-vitest-globals
-```
-
-ja ottamalla plugin käyttöön muokkaamalla tiedostoa _.eslint.cjs_ seuraavasti: 
+Eslint valittaa testeissä olevista avainsanoista _test_ ja _expect_. Ongelmasta päästään eroon lisäämällä tiedostoon <i>eslint.config.js</i> seuraava määrittely:
 
 ```js
-module.exports = {
-  root: true,
-  env: {
-    browser: true,
-    es2020: true,
-    "vitest-globals/env": true // highlight-line
-  },
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:react/jsx-runtime',
-    'plugin:react-hooks/recommended',
-    'plugin:vitest-globals/recommended', // highlight-line
-  ],
+// ...
+
+export default [
   // ...
-}
-  ```
+  // highlight-start
+  {
+    files: ['**/*.test.{js,jsx}'],
+    languageOptions: {
+      globals: {
+        ...globals.vitest
+      }
+    }
+  }
+  // highlight-end
+]
+```
+
+Näin ESLintille kerrotaan, että Vitestin avainsanat ovat testitiedostoissa globaalisti saatavilla. 
 
 ### Testien sijainti
 
@@ -193,11 +179,11 @@ Reactissa on (ainakin) [kaksi erilaista](https://medium.com/@JeffLombardJr/organ
 
 Toinen tapa olisi sijoittaa testit "normaaliin" tapaan omaan erilliseen hakemistoon. Valitaanpa kumpi tapa tahansa, on varmaa että se on jonkun mielestä täysin väärä.
 
-Itse en pidä siitä, että testit ja normaali koodi ovat samassa hakemistossa. Noudatamme kuitenkin nyt tätä tapaa, sillä se on oletusarvo Create React App:lla konfiguroiduissa sovelluksissa.
+Itse en pidä siitä, että testit ja normaali koodi ovat samassa hakemistossa. Noudatamme kuitenkin nyt tätä tapaa, sillä se on yleisin käytäntö pienissä projekteissa.
 
 ### Sisällön etsiminen testattavasta komponentista
 
-React Testing Library ‑kirjasto tarjoaa runsaasti tapoja testattavan komponentin sisällön tutkimiseen. Itse asiassa testimme viimeisellä rivillä oleva expect on turha
+React Testing Library ‑kirjasto tarjoaa runsaasti tapoja testattavan komponentin sisällön tutkimiseen. Tutustuimme jo aiemmin komentoon _getByText_. Itse asiassa testimme viimeisellä rivillä oleva expect on turha
 
 ```js
 import { render, screen } from '@testing-library/react'
@@ -218,6 +204,77 @@ test('renders content', () => {
 ```
 
 Testi ei mene läpi, jos _getByText_ ei löydä halutun tekstin sisältävää elementtiä.
+
+Komento _getByText_ etsii oletusarvoisesti elementtiä, joka sisältää ainoastaan <i> parametrina annetun tekstin</i> eikä mitään muuta. Oletetaan että komponentti renderöisi samaan HTML-elementtiin tekstiä seuraavasti:
+
+```js
+const Note = ({ note, toggleImportance }) => {
+  const label = note.important
+    ? 'make not important' : 'make important'
+
+  return (
+    <li className='note'>
+      Your awesome note: {note.content} // highlight-line
+      <button onClick={toggleImportance}>{label}</button>
+    </li>
+  )
+}
+
+export default Note
+```
+
+Nyt testissä käyttämämme _getByText_ ei löydä elementtiä:
+
+```js 
+test('renders content', () => {
+  const note = {
+    content: 'Does not work anymore :(',
+    important: true
+  }
+
+  render(<Note note={note} />)
+
+  const element = screen.getByText('Does not work anymore :(')
+
+  expect(element).toBeDefined()
+})
+```
+
+Jos halutaan etsiä komponenttia joka <i>sisältää</i> tekstin, voidaan joko lisätä komennolle ekstraoptio:
+
+```js 
+const element = screen.getByText(
+  'Does not work anymore :(', { exact: false }
+)
+```
+
+tai käyttää komentoa _findByText_:
+
+```js 
+const element = await screen.findByText('Does not work anymore :(')
+```
+
+On tärkeä huomata, että toisin kuin muut _ByText_-komennoista, _findByText_ palauttaa promisen!
+
+On myös jotain tilanteita, missä komennon muoto _queryByText_ on käyttökelpoinen. Komento palauttaa elementin mutta <i>ei aiheuta poikkeusta</i> jos etsittävää elementtiä ei löydy. 
+
+Komentoa voidaan hyödyntää esim. varmistamaan, että jokin asia <i>ei renderöidy</i>:
+
+```js 
+test('does not render this', () => {
+  const note = {
+    content: 'This is a reminder',
+    important: true
+  }
+
+  render(<Note note={note} />)
+
+  const element = screen.queryByText('do not want this thing to be rendered')
+  expect(element).toBeNull()
+})
+```
+
+Muitakin tapoja on, esim. [getByTestId](https://testing-library.com/docs/queries/bytestid/), joka etsii elementtejä erikseen testejä varten luotujen id-kenttien perusteella.
 
 Jos haluamme etsiä testattavia komponentteja [CSS-selektorien](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors) avulla, se onnistuu renderin palauttaman [container](https://testing-library.com/docs/react-testing-library/api/#container)-olion metodilla [querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector):
  
@@ -242,13 +299,13 @@ test('renders content', () => {
 })
 ```
 
-Muitakin tapoja on, esim. [getByTestId](https://testing-library.com/docs/queries/bytestid/), joka etsii elementtejä erikseen testejä varten luotujen id-kenttien perusteella.
+On kuitenkin suositeltavaa etsiä elementtejä lähtökohtaisesti muilla tavoin kuin _container_-oliota ja CSS-selektoreja käyttäen. CSS-määreitä voidaan usein muuttaa vaikuttamatta sovelluksen toiminnallisuuteen, eikä käyttäjä ole niistä tietoinen. On parempi etsiä elementtejä käyttäjälle havaittavien ominaisuuksien perusteella, esimerkiksi _getByText_-metodia käyttäen. Tällä tavoin testit simuloivat paremmin komponentin todellista olemusta ja sitä, miten käyttäjä löytäisi elementin ruudulta.
 
 ### Testien debuggaaminen
 
 Testejä tehdessä törmäämme tyypillisesti moniin ongelmiin. 
 
-Olion _screen_ -olion metodilla [debug](https://testing-library.com/docs/queries/about/#screendebug) voimme tulostaa komponentin tuottaman HTML:n konsoliin. Eli kun muutamme testiä seuraavasti:
+Olion _screen_ metodilla [debug](https://testing-library.com/docs/queries/about/#screendebug) voimme tulostaa komponentin tuottaman HTML:n konsoliin. Eli kun muutamme testiä seuraavasti:
 
 ```js
 import { render, screen } from '@testing-library/react'
@@ -395,47 +452,20 @@ Esimerkissämme mock-funktio sopi tarkoitukseen erinomaisesti, sillä sen avulla
 
 ### Komponentin Togglable testit
 
-Tehdään komponentille <i>Togglable</i> muutama testi. Lisätään komponentin lapset renderöivään div-elementtiin CSS-luokka <i>togglableContent</i>:
+Tehdään komponentille <i>Togglable</i> muutama testi. Testit ovat seuraavassa:
 
 ```js
-const Togglable = forwardRef((props, ref) => {
-  // ...
-
-  return (
-    <div>
-      <div style={hideWhenVisible}>
-        <button onClick={toggleVisibility}>
-          {props.buttonLabel}
-        </button>
-      </div>
-      <div style={showWhenVisible} className="togglableContent"> // highlight-line
-        {props.children}
-        <button onClick={toggleVisibility}>cancel</button>
-      </div>
-    </div>
-  )
-})
-```
-
-Testit ovat seuraavassa:
-
-```js
-
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Togglable from './Togglable'
 
 describe('<Togglable />', () => {
-  let container
-
   beforeEach(() => {
-    container = render(
+    render(
       <Togglable buttonLabel="show...">
-        <div className="testDiv" >
-          togglable content
-        </div>
+        <div>togglable content</div>
       </Togglable>
-    ).container
+    )
   })
 
   test('renders its children', () => {
@@ -443,8 +473,8 @@ describe('<Togglable />', () => {
   })
 
   test('at start the children are not displayed', () => {
-    const div = container.querySelector('.togglableContent')
-    expect(div).toHaveStyle('display: none')
+    const element = screen.getByText('togglable content')
+    expect(element).not.toBeVisible()
   })
 
   test('after clicking the button, children are displayed', async () => {
@@ -452,23 +482,23 @@ describe('<Togglable />', () => {
     const button = screen.getByText('show...')
     await user.click(button)
 
-    const div = container.querySelector('.togglableContent')
-    expect(div).not.toHaveStyle('display: none')
+    const element = screen.getByText('togglable content')
+    expect(element).toBeVisible()
   })
 })
 ```
 
-Ennen jokaista testiä suoritettava _beforeEach_ renderöi <i>Togglable</i>-komponentin ja tallettaa paluuarvon kentän _container_ samannimiseen muuttujaan.
+Ennen jokaista testiä suoritettava _beforeEach_ renderöi <i>Togglable</i>-komponentin.
 
 Ensimmäinen testi tarkastaa, että <i>Togglable</i> renderöi sen lapsikomponentin
 
 ```js
-<div className="testDiv">
+<div>
   togglable content
 </div>
 ```
 
-Loput testit varmistavat metodia [toHaveStyle](https://www.npmjs.com/package/@testing-library/jest-dom#tohavestyle) käyttäen, että Togglablen sisältämä lapsikomponentti on alussa näkymättömissä, eli että sen sisältävään <i>div</i>-elementtiin liittyy tyyli _{ display: 'none' }_, ja että nappia painettaessa komponentti näkyy, eli näkymättömäksi tekevää tyyliä <i>ei</i> enää ole. 
+Loput testit varmistavat metodia _toBeVisible_ käyttäen, että Togglablen sisältämä lapsikomponentti on alussa näkymättömissä, eli että sen sisältävään <i>div</i>-elementtiin liittyy tyyli _{ display: 'none' }_, ja että nappia painettaessa komponentti näkyy käyttäjälle, eli näkymättömäksi tekevää tyyliä <i>ei</i> enää ole. 
 
 Lisätään vielä mukaan testi, joka varmistaa että auki togglattu sisältö saadaan piilotettua painamalla komponentin nappia <i>cancel</i>:
 
@@ -486,8 +516,8 @@ describe('<Togglable />', () => {
     const closeButton = screen.getByText('cancel')
     await user.click(closeButton)
 
-    const div = container.querySelector('.togglableContent')
-    expect(div).toHaveStyle('display: none')
+    const element = screen.getByText('togglable content')
+    expect(element).not.toBeVisible()
   })
 })
 ```
@@ -501,7 +531,7 @@ const button = screen.getByText('show...')
 await user.click(button)
 ```
 
-Käytännössä siis loimme metodin avulla <i>click</i>-tapahtuman metodin argumenttina annetulle komponentille. Voimme simuloida myös lomakkeelle kirjoittamista <i>userEventin</i>-olion avulla.
+Käytännössä siis loimme metodin avulla <i>click</i>-tapahtuman metodin argumenttina annetulle komponentille. Voimme simuloida myös lomakkeelle kirjoittamista <i>userEvent</i>-olion avulla.
 
 Tehdään testi komponentille <i>NoteForm</i>. Lomakkeen koodi näyttää seuraavalta:
 
@@ -511,28 +541,24 @@ import { useState } from 'react'
 const NoteForm = ({ createNote }) => {
   const [newNote, setNewNote] = useState('')
 
-  const handleChange = (event) => {
-    setNewNote(event.target.value)
-  }
-
-  const addNote = (event) => {
+  const addNote = event => {
     event.preventDefault()
     createNote({
       content: newNote,
-      important: true,
+      important: true
     })
 
     setNewNote('')
   }
 
   return (
-    <div className="formDiv">
+    <div>
       <h2>Create a new note</h2>
 
       <form onSubmit={addNote}>
         <input
           value={newNote}
-          onChange={handleChange}
+          onChange={event => setNewNote(event.target.value)}
         />
         <button type="submit">save</button>
       </form>
@@ -611,7 +637,7 @@ const NoteForm = ({ createNote }) => {
       <form onSubmit={addNote}>
         <input
           value={newNote}
-          onChange={handleChange}
+          onChange={event => setNewNote(event.target.value)}
         />
         // highlight-start
         <input
@@ -646,6 +672,40 @@ await user.type(inputs[0], 'testing a form...')
 
 Metodi <i>getAllByRole</i>  palauttaa taulukon, ja oikea tekstikenttä on taulukossa ensimmäisenä. Testi on kuitenkin hieman epäilyttävä, sillä se luottaa tekstikenttien järjestykseen.
 
+Jos syötekentälle olisi määritelty <i>label</i>, voisi kyseisen syötekentän etsiä sen avulla käyttäen metodia _getByLabelText_. Jos siis lisäisimme syötekentälle labelin:
+
+```js
+  // ...
+  <label> // highlight-line
+    content // highlight-line
+    <input
+      value={newNote}
+      onChange={event => setNewNote(event.target.value)}
+    />
+  </label> // highlight-line
+  // ...
+```
+
+Testi löytäisi syötekentän seuraavasti:
+
+```js
+test('<NoteForm /> updates parent state and calls onSubmit', async () => {
+  const user = userEvent.setup()
+  const createNote = vi.fn()
+
+  render(<NoteForm createNote={createNote} />) 
+
+  const input = screen.getByLabelText('content') // highlight-line
+  const sendButton = screen.getByText('save')
+
+  await user.type(input, 'testing a form...')
+  await user.click(sendButton)
+
+  expect(createNote.mock.calls).toHaveLength(1)
+  expect(createNote.mock.calls[0][0].content).toBe('testing a form...')
+})
+```
+
 Syötekentille määritellään usein placeholder-teksti, joka ohjaa käyttäjää kirjoittamaan syötekenttään oikean arvon. Lisätään placeholder lomakkeellemme:
 
 ```js
@@ -659,7 +719,7 @@ const NoteForm = ({ createNote }) => {
       <form onSubmit={addNote}>
         <input
           value={newNote}
-          onChange={handleChange}
+          onChange={event => setNewNote(event.target.value)}
           placeholder='write note content here' // highlight-line 
         />
         <input
@@ -676,7 +736,8 @@ const NoteForm = ({ createNote }) => {
 Nyt oikean syötekentän etsiminen onnistuu metodin [getByPlaceholderText](https://testing-library.com/docs/queries/byplaceholdertext) avulla:
 
 ```js
-test('<NoteForm /> updates parent state and calls onSubmit', () => {
+test('<NoteForm /> updates parent state and calls onSubmit', async () => {
+  const user = userEvent.setup()
   const createNote = vi.fn()
 
   render(<NoteForm createNote={createNote} />) 
@@ -684,15 +745,15 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
   const input = screen.getByPlaceholderText('write note content here') // highlight-line 
   const sendButton = screen.getByText('save')
 
-  userEvent.type(input, 'testing a form...' )
-  userEvent.click(sendButton)
+  await user.type(input, 'testing a form...')
+  await user.click(sendButton)
 
   expect(createNote.mock.calls).toHaveLength(1)
-  expect(createNote.mock.calls[0][0].content).toBe('testing a form...' )
+  expect(createNote.mock.calls[0][0].content).toBe('testing a form...')
 })
 ```
 
-Kaikkein joustavimman tavan tarjoaa aiemmin [tässä luvussa](/osa5/react_sovellusten_testaaminen#sisallon-etsiminen-testattavasta-komponentista) esitellyn _render_-metodin palauttaman olion _content_-kentän metodi <i>querySelector</i>, joka mahdollistaa komponenttien etsimisen mielivaltaisten CSS-selektorien avulla. 
+Joskus oikean elementin löytäminen voi olla vaikeaa edellä kuvattuja metodeja käyttäen. Tällöin vaihtoehtona on aiemmin [tässä luvussa](/osa5/react_sovellusten_testaaminen#sisallon-etsiminen-testattavasta-komponentista) esitellyn _render_-metodin palauttaman olion _container_-kentän metodi <i>querySelector</i>, joka mahdollistaa komponenttien etsimisen mielivaltaisten CSS-selektorien avulla.
 
 Jos esim. määrittelisimme syötekentälle yksilöivän attribuutin _id_:
 
@@ -707,7 +768,7 @@ const NoteForm = ({ createNote }) => {
       <form onSubmit={addNote}>
         <input
           value={newNote}
-          onChange={handleChange}
+          onChange={event => setNewNote(event.target.value)}
           id='note-input' // highlight-line 
         />
         <input
@@ -730,75 +791,6 @@ const input = container.querySelector('#note-input')
 ```
 
 Jätämme koodiin placeholderiin perustuvan ratkaisun.
-  
-Vielä muutama tärkeä huomio. Oletetaan että komponentti renderöisi samaan HTML-elementtiin tekstiä seuraavasti:
-
-```js
-const Note = ({ note, toggleImportance }) => {
-  const label = note.important
-    ? 'make not important' : 'make important'
-
-  return (
-    <li className='note'>
-      Your awesome note: {note.content} // highlight-line
-      <button onClick={toggleImportance}>{label}</button>
-    </li>
-  )
-}
-
-export default Note
-```
-
-Nyt testissä käyttämämme _getByText_ ei löydä elementtiä:
-
-```js 
-test('renders content', () => {
-  const note = {
-    content: 'Does not work anymore :(',
-    important: true
-  }
-
-  render(<Note note={note} />)
-
-  const element = screen.getByText('Does not work anymore :(')
-
-  expect(element).toBeDefined()
-})
-```
-
-Komento _getByText_ nimittäin etsii elementtiä missä on <i>ainoastaan parametrina teksti</i> eikä mitään muuta. Jos halutaan etsiä komponenttia joka <i>sisältää</i> tekstin, voidaan joko lisätä komennolle ekstraoptio:
-
-```js 
-const element = screen.getByText(
-  'Does not work anymore :(', { exact: false }
-)
-```
-
-tai käyttää komentoa _findByText_:
-
-```js 
-const element = await screen.findByText('Does not work anymore :(')
-```
-
-On tärkeä huomata, että toisin kuin muut _ByText_-komennoista, _findByText_ palauttaa promisen!
-
-On myös jotain tilanteita, missä komennon muoto _queryByText_ on käyttökelpoinen. Komento palauttaa elementin mutta <i>ei aiheuta poikkeusta</i> jos etsittävää elementtiä ei löydy. 
-
-Komentoa voidaan hyödyntää esim. varmistamaan, että jokin asia <i>ei renderöidy</i>:
-
-```js 
-test('does not render this', () => {
-  const note = {
-    content: 'This is a reminder',
-    important: true
-  }
-
-  render(<Note note={note} />)
-
-  const element = screen.queryByText('do not want this thing to be rendered')
-  expect(element).toBeNull()
-})
-```
 
 ### Testauskattavuus
 
@@ -815,6 +807,14 @@ Kun suoritat ensimmäistä kertaa komennon, kysyy Vitest haluatko asentaa tarvit
 HTML-muotoinen raportti generoituu hakemistoon <i>coverage</i>. HTML-muotoinen raportti kertoo mm. yksittäisten komponentin testaamattomat koodirivit:
 
 ![Selaimeen renderöityy näkymä tiedostoista jossa värein merkattu ne rivit joita testit eivät kattaneet](../../images/5/19newer.png)
+
+Lisätään vielä hakemisto <i>coverage/</i> tiedostoon <i>.gitignore</i>, jotta hakemiston sisältö jää versionhallinnan ulkopuolelle:
+
+```js
+//...
+
+coverage/
+```
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-8), branchissa <i>part5-8</i>.
 

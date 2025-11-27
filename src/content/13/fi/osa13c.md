@@ -639,7 +639,7 @@ module.exports = Membership
 
 Olemme siis antaneet liitostaululle kuvaavan nimen, <i>membership</i>. Liitostauluille ei aina löydy yhtä osuvaa nimeä, tällöin liitostaulun nimi voidaan muodostaa yhdistelmänä liitettävien taulujen nimistä esim. <i>user\_teams</i> voisi sopia tilanteeseemme.
 
-Tiedostoon <i>models/index.js</i> tulee pieni lisäys, joka liittää metodin [belongsToMany](https://sequelize.org/master/manual/assocs.html#implementation-3) avulla tiimit ja käyttäjät toisiinsa myös koodin tasolla.
+Tiedostoon <i>models/index.js</i> tulee pieni lisäys, joka liittää metodin [belongsToMany](https://sequelize.org/docs/v6/core-concepts/assocs/#implementation-2) avulla tiimit ja käyttäjät toisiinsa myös koodin tasolla.
 
 ```js
 const Note = require('./note')
@@ -1151,7 +1151,7 @@ Tieto voi olla esim. seuraavassa muodossa:
 }
 ```
 
-Huom: tapoja toteuttaa tämä toiminnallisuus on useita. [Tästä](https://sequelize.org/master/manual/advanced-many-to-many.html#the-best-of-both-worlds--the-super-many-to-many-relationship) lienee apua.
+Huom: tapoja toteuttaa tämä toiminnallisuus on useita. [Tästä](https://sequelize.org/docs/v6/advanced-association-concepts/advanced-many-to-many/#the-best-of-both-worlds-the-super-many-to-many-relationship) lienee apua.
 
 #### Tehtävä 13.22.
 
@@ -1463,7 +1463,7 @@ Emmekö voisi optimoida koodia siten, että esim. model exporttaisi jaetut osat 
 
 Ongelman muodostaa kuitenkin se, että modelin määritelmä voi muuttua ajan myötä, esimerkiksi kenttä <i>name</i> voi muuttaa nimeä tai sen datatyyppi voi vaihtua. Migraatiot tulee pystyä suorittamaan milloin tahansa onnistuneesti alusta loppuun, ja jos migraatiot luottavat että modelilla on tietty sisältö, ei asia enää välttämättä pidä paikkaansa kuukauden tai vuoden kuluttua. Siispä migraatioiden koodin on syytä olla "copy pastesta" huolimatta täysin erillään modelien koodista.
 
-Eräs ratkaisu asiaan olisi Sequelizen [komentorivityökalun](https://sequelize.org/master/manual/migrations.html#creating-the-first-model--and-migration-) käyttö, joka luo sekä modelit että migratiotiedostot komentorivillä annettujen komentojen perusteella. Esim. seuraava komento loisi modelin <i>User</i>, jolla on attribuutteina <i>name</i>, <i>username</i> ja <i>admin</i> sekä tietokantataulun luomisen hoitavan migraation:
+Eräs ratkaisu asiaan olisi Sequelizen [komentorivityökalun](https://sequelize.org/docs/v6/other-topics/migrations/#creating-the-first-model-and-migration) käyttö, joka luo sekä modelit että migratiotiedostot komentorivillä annettujen komentojen perusteella. Esim. seuraava komento loisi modelin <i>User</i>, jolla on attribuutteina <i>name</i>, <i>username</i> ja <i>admin</i> sekä tietokantataulun luomisen hoitavan migraation:
 
 ```bash
 npx sequelize-cli model:generate --name User --attributes name:string,username:string,admin:boolean

@@ -839,10 +839,10 @@ We could and propably should give a proper type as the type variable. In our cas
 
 ```js
 import { Response } from 'express'
-
+import { NonSensitiveDiaryEntry } from "../types";
 // ...
 
-router.get('/', (_req, res: Response<DiaryEntry[]>) => {
+router.get('/', (_req, res: Response<NonSensitiveDiaryEntry[]>) => {
   res.send(diaryService.getNonSensitiveEntries());
 });
 
@@ -1439,7 +1439,7 @@ const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
 
 If the guard does not evaluate to true, an exception is thrown.
 
-The use of the operator *in* actually now guarantees that the fields indeed exist in the object. Because of that, the existence check in parsers is no more needed:
+The use of the operator *in* actually now guarantees that the fields indeed exist in the object. Because of that, the existence checks in the parsers are no longer needed:
 
 ```js
 const parseVisibility = (visibility: unknown): Visibility => {
@@ -1486,7 +1486,7 @@ Refactor the *gender* field to use an [enum type](http://www.typescriptlang.org/
 
 ### Using schema validation libraries
 
-Writing a validator to the request body can be a huge burden. Thankfully there exists several <i>schema validator libraries</i> that can help. Let us now have a look on [Zod](https://zod.dev/) that works pretty well with TypeScript.
+Writing a validator to the request body can be a huge burden. Thankfully there exists several <i>schema validator libraries</i> that can help. Let us now have a look at [Zod](https://zod.dev/) that works pretty well with TypeScript.
 
 Let us get started:
 
@@ -1494,7 +1494,7 @@ Let us get started:
 npm install zod
 ```
 
-Parser of the primitive valued fields such as
+Parsers of the primitive valued fields such as
 
 ```js
 const isString = (text: unknown): text is string => {
@@ -1568,7 +1568,7 @@ export const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
 
 We have also made the field comment [optional](https://zod.dev/?id=optional) since it is defined optional in the TypeScript definition.
 
-Zed has also support for [enums](https://zod.dev/?id=native-enums) and thanks to that our code simplifies further:
+Zod has also support for [enums](https://zod.dev/?id=native-enums) and thanks to that our code simplifies further:
 
 ```js
 export const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
@@ -1636,7 +1636,7 @@ The response in case of error looks pretty good:
 
 ![](../../images/9/ts-zod1.png)
 
-We could develop our solution still some steps further. Our type definitions look currently this:
+We could develop our solution still some steps further. Our type definitions currently look like this:
 
 ```js
 export interface DiaryEntry {
@@ -1719,7 +1719,7 @@ router.post('/', (req, res) => { // highlight-line
 
 Instead of calling the request body parsing method explicitly in the route handler, the validation of the input could also be done in a middleware function.
 
-We have also add the type definitions to the route handler parameters, and shall use types also in the middleware function _newDiaryParser_:
+We have also added the type definitions to the route handler parameters, and shall also use types in the middleware function _newDiaryParser_:
 
 ```js
 const newDiaryParser = (req: Request, _res: Response, next: NextFunction) => { 
@@ -1745,7 +1745,7 @@ router.post('/', newDiaryParser, (req: Request<unknown, unknown, NewDiaryEntry>,
 
 Thanks to the middleware, the request body is now known to be of right type and it can be directly given as parameter to the function _diaryService.addDiary_.
 
-The syntax of the _Request<unknown, unknown, NewDiaryEntry>_ looks a bit odd. The _Request_ is a [generic type](https://www.typescriptlang.org/docs/handbook/2/generics.html#generic-types) with several type parameters. The third type parameter represents the request body, and in order to give it the value _NewDiaryEntry_ we have to give <i>some</i> value to the two first parameters. We decide to define those _undefined_ since we do not need those for now.
+The syntax of the _Request<unknown, unknown, NewDiaryEntry>_ looks a bit odd. The _Request_ is a [generic type](https://www.typescriptlang.org/docs/handbook/2/generics.html#generic-types) with several type parameters. The third type parameter represents the request body, and in order to give it the value _NewDiaryEntry_ we have to give <i>some</i> value to the two first parameters. We decide to define those _unknown_ since we do not need those for now.
 
 Since the possible errors in validation are now handled in the error handling middleware, we need to define one that handles the Zod errors properly:
 

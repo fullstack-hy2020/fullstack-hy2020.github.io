@@ -43,7 +43,6 @@ Ouvrez le navigateur et un éditeur de texte pour pouvoir afficher le code ainsi
 Le code de l'application se trouve dans le dossier <i>src</i>. Simplifions le code par défaut de telle sorte que le contenu du fichier <i>main.jsx</i> ressemble à ceci :
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App'
@@ -51,7 +50,7 @@ import App from './App'
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-et le fichier <i>App.js</i> ressemble à ceci
+et le fichier <i>App.jsx</i> ressemble à ceci
 
 ```js
 const App = () => (
@@ -78,11 +77,11 @@ contrairement à Vite qui utilise
 ```bash
 npm run dev
 ```
-Le cours est actuellement (11 août 2023) en cours de mise à jour pour utiliser Vite. Certaines marques peuvent toujours utiliser la base d'application créée avec create-react-app.
+Le cours est actuellement (15 novembre 2024) en cours de mise à jour pour utiliser Vite. Certaines marques peuvent toujours utiliser la base d'application créée avec create-react-app.
 
 ### Composant
 
-Le fichier <i>App.js</i> définit maintenant un [composant React](https://reactjs.org/docs/components-and-props.html) avec le nom <i>App</i>. La commande sur la dernière ligne du fichier <i>index.js</i>
+Le fichier <i>App.jsx</i> définit maintenant un [composant React](https://react.dev/learn/your-first-component) avec le nom <i>App</i>. La commande sur la dernière ligne du fichier <i>main.jsx</i>
 
 ```js
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
@@ -138,7 +137,7 @@ La fonction est alors affectée à une variable constante <i>App</i> :
 const App = ...
 ```
 
-Il existe plusieurs façons de définir des fonctions en JavaScript. Ici, nous utiliserons les [fonctions fléchées](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions), qui sont décrites dans une version plus récente de JavaScript connue sous le nom de [ECMAScript 6 ](http://es6-features.org/#Constants), également appelé ES6.
+Il existe plusieurs façons de définir des fonctions en JavaScript. Ici, nous utiliserons les [fonctions fléchées](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions), qui sont décrites dans une version plus récente de JavaScript connue sous le nom de [ECMAScript 6 ](https://262.ecma-international.org/6.0/#sec-built-in-function), également appelé ES6.
 
 Parce que la fonction se compose d'une seule expression, nous avons utilisé un raccourci, qui représente ce morceau de code :
 
@@ -213,7 +212,7 @@ Vous souvenez-vous de votre promesse de garder la console ouverte ? Qu'y a-t-il 
 
 ### JSX
 
-Il semble que les composants React renvoient le balisage HTML. Cependant, ce n'est pas le cas. La disposition des composants React est principalement écrite à l'aide de [JSX](https://reactjs.org/docs/introducing-jsx.html). Bien que JSX ressemble à du HTML, nous avons en fait affaire à un moyen d'écrire du JavaScript. Sous le capot, le JSX renvoyé par les composants React est compilé en JavaScript.
+Il semble que les composants React renvoient le balisage HTML. Cependant, ce n'est pas le cas. La disposition des composants React est principalement écrite à l'aide de [JSX](https://react.dev/learn/writing-markup-with-jsx). Bien que JSX ressemble à du HTML, nous avons en fait affaire à un moyen d'écrire du JavaScript. Sous le capot, le JSX renvoyé par les composants React est compilé en JavaScript.
 
 Après compilation, notre application ressemble à ceci :
 
@@ -303,7 +302,7 @@ Une autre forte convention est l'idée d'un composant racine appelé <i>App</i> 
 
 ### props : transmission de données aux composants
 
-Il est possible de transmettre des données aux composants à l'aide de ce qu'on appelle [props](https://reactjs.org/docs/components-and-props.html).
+Il est possible de transmettre des données aux composants à l'aide de ce qu'on appelle [props](https://react.dev/learn/passing-props-to-a-component).
 
 Modifions le composant <i>Hello</i> comme suit
 
@@ -378,30 +377,42 @@ Selon l'éditeur que vous utilisez, vous pouvez recevoir le message d'erreur sui
 
 ![Capture d'écran de l'erreur eslint](../../images/1/1-vite5.png)
 
-Il ne s'agit pas réellement d'une erreur, mais d'un avertissement généré par l'outil [ESLint](https://eslint.org/). Vous pouvez supprimer l'avertissement [react/prop-types](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md) en ajoutant à votre fichier <i>.eslintrc .cjs</i> la ligne suivante :
+Il ne s'agit pas réellement d'une erreur, mais d'un avertissement généré par l'outil [ESLint](https://eslint.org/). Vous pouvez supprimer l'avertissement [react/prop-types](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md) en ajoutant à votre fichier <i>eslint.config.js</i> la ligne suivante :
 
 ```js
-module.exports = {
-   root: true,
-   env: { browser: true, es2020: true },
-   extends: [
-     'eslint:recommended',
-     'plugin:react/recommended',
-     'plugin:react/jsx-runtime',
-     'plugin:react-hooks/recommended',
-   ],
-   ignorePatterns: ['dist', '.eslintrc.cjs'],
-   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
-   settings: { react: { version: '18.2' } },
-   plugins: ['react-refresh'],
-   rules: {
-     'react-refresh/only-export-components': [
-       'warn',
-       { allowConstantExport: true },
-     ],
-     'react/prop-types': 0 // highlight-line
-   },
-}
+export default [
+  { ignores: ['dist'] },
+  {
+    files: ['**/*.{js,jsx}'],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        ecmaFeatures: { jsx: true },
+        sourceType: 'module',
+      },
+    },
+    settings: { react: { version: '18.3' } },
+    plugins: {
+      react,
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
+    },
+    rules: {
+      ...js.configs.recommended.rules,
+      ...react.configs.recommended.rules,
+      ...react.configs['jsx-runtime'].rules,
+      ...reactHooks.configs.recommended.rules,
+      'react/jsx-no-target-blank': 'off',
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true },
+      ],
+      'react/prop-types': 0, // highlight-line
+    },
+  },
+]
 ```
 
 Nous en apprendrons davantage sur ESLint en détail dans [la partie 3](/osa3/validointi_ja_es_lint#lint).
@@ -475,7 +486,7 @@ const App = () => {
 
 Cependant, lors de la définition du composant racine de l'application, ce n'est pas une chose particulièrement judicieuse à faire, et cela rend le code un peu moche.
 
-Parce que l'élément racine est stipulé, nous avons des éléments div "supplémentaires" dans l'arbre DOM. Cela peut être évité en utilisant des [fragments](https://reactjs.org/docs/fragments.html#short-syntax), c'est-à-dire en enveloppant les éléments à renvoyer par le composant avec un élément vide :
+Parce que l'élément racine est stipulé, nous avons des éléments div "supplémentaires" dans l'arbre DOM. Cela peut être évité en utilisant des [fragments](https://react.dev/reference/react/Fragment), c'est-à-dire en enveloppant les éléments à renvoyer par le composant avec un élément vide :
 
 ```js
 const App = () => {
@@ -624,15 +635,14 @@ Pour chaque application web d'une série d'exercices, il est recommandé de soum
 Les exercices sont soumis **une partie à la fois**. Lorsque vous avez soumis les exercices d'une partie du cours, vous ne pouvez plus soumettre d'exercices non terminés pour la même partie.
 
 Notez que dans cette partie, il y a plus d'exercices que ceux trouvés ci-dessous. <i>Ne soumettez pas votre travail</i> tant que vous n'avez pas terminé tous les exercices que vous souhaitez soumettre pour la partie correspondante.
-  
- <h4>1.1 : courseinfo, étape 1</h4>
+
+<h4>1.1 : courseinfo, étape 1</h4>
 
 <i>L'application sur laquelle nous allons commencer à travailler dans cet exercice sera développée plus en détail dans quelques-uns des exercices suivants. Dans cette série d'exercices et d'autres à venir dans ce cours, il suffit de soumettre uniquement l'état final de l'application. Si vous le souhaitez, vous pouvez également créer un commit pour chaque exercice de la série, mais cela est facultatif.</i>
 
-Utilisez create-react-app pour initialiser une nouvelle application. Modifiez <i>index.js</i> pour qu'il corresponde à ce qui suit
+Utilisez Vite pour initialiser une nouvelle application. Modifiez <i>main.jsx</i> pour qu'il corresponde à ce qui suit
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App'
@@ -640,7 +650,7 @@ import App from './App'
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-et <i>App.js</i> pour correspondre à l'élément suivant
+et <i>App.jsx</i> pour correspondre à l'élément suivant
 
 ```js
 const App = () => {
@@ -672,11 +682,11 @@ const App = () => {
 export default App
 ```
 
-et supprimer les fichiers supplémentaires (App.css, App.test.js, index.css, logo.svg, setupTests.js, reportWebVitals.js).
+et supprimer les fichiers supplémentaires App.css et index.css, ainsi que le répertoire assets.
 
 Malheureusement, toute l'application se trouve dans le même composant. Refactorisez le code afin qu'il se compose de trois nouveaux composants : <i>Header</i>, <i>Content</i> et <i>Total</i>. Toutes les données résident toujours dans le composant <i>App</i>, qui transmet les données nécessaires à chaque composant à l'aide des <i>props</i>. <i>Header</i> se charge de restituer le nom du cours, <i>Content</i> restitue les parties et leur nombre d'exercices et <i>Total</i> restitue le nombre total d'exercices.
 
-Définissez les nouveaux composants dans le fichier <i>App.js</i>.
+Définissez les nouveaux composants dans le fichier <i>App.jsx</i>.
 
 Le corps du composant <i>App</i> sera approximativement comme suit :
 
@@ -694,7 +704,13 @@ const App = () => {
 }
 ```
 
-**ATTENTION** create-react-app transforme automatiquement le projet en référentiel git, sauf si l'application est créée dans un référentiel déjà existant. Très probablement, vous **ne voulez pas** que le projet devienne un référentiel, alors exécutez la commande _rm -rf .git_ à la racine du projet.
+**ATTENTION** N'essayez pas de programmer tous les composants simultanément, car cela risque presque certainement de faire échouer l'ensemble de l'application. Procédez par petites étapes : commencez par créer par exemple le composant <i>Header</i> et ce n'est que lorsque vous êtes sûr qu'il fonctionne que vous pouvez passer au composant suivant.
+
+Une progression prudente et progressive peut sembler lente, mais c'est en réalité <i>de loin la façon la plus rapide</i> de progresser. Le célèbre développeur Robert "Uncle Bob" Martin a déclaré :
+
+> <i>"The only way to go fast, is to go well"</i>
+
+c'est-à-dire que selon Martin, une progression minutieuse par petites étapes est même la seule façon d'être rapide.
 
 <h4>1.2 : courseinfo, étape 2</h4>
 

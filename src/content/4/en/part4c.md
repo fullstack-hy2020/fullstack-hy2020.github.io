@@ -169,7 +169,7 @@ The ids of the notes are stored within the user document as an array of Mongo id
 }
 ```
 
-The type of the field is <i>ObjectId</i> that references <i>note</i>-style documents. Mongo does not inherently know that this is a field that references notes, the syntax is purely related to and defined by Mongoose.
+The field type is <i>ObjectId</i>, meaning it refers to another document. The <i>ref</i> field specifies the name of the model being referenced. Mongo does not inherently know that this is a field that references notes, the syntax is purely related to and defined by Mongoose.
 
 Let's expand the schema of the note defined in the <i>models/note.js</i> file so that the note contains information about the user who created it:
 
@@ -207,11 +207,16 @@ Creating new users happens in compliance with the RESTful conventions discussed 
 Let's define a separate <i>router</i> for dealing with users in a new <i>controllers/users.js</i> file. Let's take the router into use in our application in the <i>app.js</i> file, so that it handles requests made to the <i>/api/users</i> url:
 
 ```js
-const usersRouter = require('./controllers/users')
+// ...
+const notesRouter = require('./controllers/notes')
+const usersRouter = require('./controllers/users') // highlight-line
 
 // ...
 
-app.use('/api/users', usersRouter)
+app.use('/api/notes', notesRouter)
+app.use('/api/users', usersRouter) // highlight-line
+
+// ...
 ```
 
 The contents of the file, <i>controllers/users.js</i>, that defines the router is as follows:
@@ -243,7 +248,7 @@ module.exports = usersRouter
 
 The password sent in the request is <i>not</i> stored in the database. We store the <i>hash</i> of the password that is generated with the _bcrypt.hash_ function.
 
-The fundamentals of [storing passwords](https://codahale.com/how-to-safely-store-a-password/) are outside the scope of this course material. We will not discuss what the magic number 10 assigned to the [saltRounds](https://github.com/kelektiv/node.bcrypt.js/#a-note-on-rounds) variable means, but you can read more about it in the linked material.
+The fundamentals of [storing passwords](https://bytebytego.com/guides/how-to-store-passwords-in-the-database/) are outside the scope of this course material. We will not discuss what the magic number 10 assigned to the [saltRounds](https://github.com/kelektiv/node.bcrypt.js/#a-note-on-rounds) variable means, but you can read more about it in the linked material.
 
 Our current code does not contain any error handling or input validation for verifying that the username and password are in the desired format.
 
@@ -426,6 +431,8 @@ The code for creating a new note has to be updated so that the note is assigned 
 Let's expand our current implementation in <i>controllers/notes.js</i> so that the information about the user who created a note is sent in the <i>userId</i> field of the request body:
 
 ```js
+const notesRouter = require('express').Router()
+const Note = require('../models/note')
 const User = require('../models/user') //highlight-line
 
 //...
@@ -433,21 +440,31 @@ const User = require('../models/user') //highlight-line
 notesRouter.post('/', async (request, response) => {
   const body = request.body
 
-  const user = await User.findById(body.userId) //highlight-line
+  const user = await User.findById(body.userId)// highlight-line
+
+  // highlight-start
+  if (!user) {
+    return response.status(400).json({ error: 'userId missing or not valid' })
+  }
+  // highlight-end
 
   const note = new Note({
     content: body.content,
-    important: body.important === undefined ? false : body.important,
-    user: user.id //highlight-line
+    important: body.important || false,
+    user: user._id //highlight-line
   })
 
   const savedNote = await note.save()
   user.notes = user.notes.concat(savedNote._id) //highlight-line
   await user.save()  //highlight-line
-  
+
   response.status(201).json(savedNote)
 })
+
+// ...
 ```
+
+The database is first queried for a user using the <i>userId</i> provided in the request. If the user is not found, the response is sent with a status code of 400 (<i>Bad Request</i>) and an error message: <i>"userId missing or not valid"</i>.
 
 It's worth noting that the <i>user</i> object also changes. The <i>id</i> of the note is stored in the <i>notes</i> field of the <i>user</i> object:
 
@@ -474,6 +491,8 @@ Likewise, the ids of the users who created the notes can be seen when we visit t
 
 ![api/notes shows ids of users in JSON](../../images/4/12e.png)
 
+Due to the changes we made, the tests no longer pass, but we leave fixing the tests as an optional exercise. The changes we made have also not been accounted for in the frontend, so the note creation functionality no longer works. We will fix the frontend in part 5 of the course.
+
 ### Populate
 
 We would like our API to work in such a way, that when an HTTP GET request is made to the <i>/api/users</i> route, the user objects would also contain the contents of the user's notes and not just their id. In a relational database, this functionality would be implemented with a <i>join query</i>.
@@ -491,7 +510,7 @@ usersRouter.get('/', async (request, response) => {
 })
 ```
 
-The [populate](http://mongoosejs.com/docs/populate.html) method is chained after the <i>find</i> method making the initial query. The argument given to the populate method defines that the <i>ids</i> referencing <i>note</i> objects in the <i>notes</i> field of the <i>user</i> document will be replaced by the referenced <i>note</i> documents.
+The [populate](http://mongoosejs.com/docs/populate.html) method is chained after the <i>find</i> method making the initial query. The argument given to the populate method defines that the <i>ids</i> referencing <i>note</i> objects in the <i>notes</i> field of the <i>user</i> document will be replaced by the referenced <i>note</i> documents. Mongoose first queries the <i>users</i> collection for the list of users, and then queries the collection corresponding to the model object specified by the <i>ref</i> property in the users schema for data with the given object id.
 
 The result is almost exactly what we wanted:
 
@@ -549,7 +568,5 @@ const noteSchema = new mongoose.Schema({
 ```
 
 You can find the code for our current application in its entirety in the <i>part4-8</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-8).
-
-NOTE: At this stage, firstly, some tests will fail. We will leave fixing the tests to a non-compulsory exercise. Secondly, in the deployed notes app, the creating a note feature will stop working as user is not yet linked to the frontend.
 
 </div>

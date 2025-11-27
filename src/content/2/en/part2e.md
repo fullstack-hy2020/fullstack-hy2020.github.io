@@ -46,7 +46,7 @@ If we wanted to target, let's say, each one of the notes with our styles, we cou
 const Note = ({ note, toggleImportance }) => {
   const label = note.important 
     ? 'make not important' 
-    : 'make important';
+    : 'make important'
 
   return (
     <li>
@@ -83,7 +83,7 @@ In React we have to use the [className](https://react.dev/learn#adding-styles) a
 const Note = ({ note, toggleImportance }) => {
   const label = note.important 
     ? 'make not important' 
-    : 'make important';
+    : 'make important'
 
   return (
     <li className='note'> // highlight-line
@@ -108,7 +108,7 @@ If you now add other <i>li</i> elements to the application, they will not be aff
 
 ### Improved error message
 
-We previously implemented the error message that was displayed when the user tried to toggle the importance of a deleted note with the <em>alert</em> method. Let's implement the error message as its own React component.
+We previously implemented the error message that was displayed when the user tried to toggle the importance of a deleted note with the <em>alert</em> method. Let's implement the error message as its own React component in the file <i>src/components/Notification.jsx</i>.
 
 The component is quite simple:
 
@@ -119,11 +119,13 @@ const Notification = ({ message }) => {
   }
 
   return (
-    <div className='error'>
+    <div className="error">
       {message}
     </div>
   )
 }
+
+export default Notification
 ```
 
 If the value of the <em>message</em> prop is <em>null</em>, then nothing is rendered to the screen, and in other cases, the message gets rendered inside of a div element.
@@ -131,6 +133,11 @@ If the value of the <em>message</em> prop is <em>null</em>, then nothing is rend
 Let's add a new piece of state called <i>errorMessage</i> to the <i>App</i> component. Let's initialize it with some error message so that we can immediately test our component:
 
 ```js
+import { useState, useEffect } from 'react'
+import Note from './components/Note'
+import noteService from './services/notes'
+import Notification from './components/Notification' // highlight-line
+
 const App = () => {
   const [notes, setNotes] = useState([]) 
   const [newNote, setNewNote] = useState('')
@@ -207,13 +214,12 @@ React also makes it possible to write styles directly in the code as so-called [
 
 The idea behind defining inline styles is extremely simple. Any React component or element can be provided with a set of CSS properties as a JavaScript object through the [style](https://react.dev/reference/react-dom/components/common#applying-css-styles) attribute.
 
-CSS rules are defined slightly differently in JavaScript than in normal CSS files. Let's say that we wanted to give some element the color green and italic font that's 16 pixels in size. In CSS, it would look like this:
+CSS rules are defined slightly differently in JavaScript than in normal CSS files. Let's say that we wanted to give some element the color green and italic font. In CSS, it would look like this:
 
 ```css
 {
   color: green;
   font-style: italic;
-  font-size: 16px;
 }
 ```
 
@@ -222,32 +228,40 @@ But as a React inline-style object it would look like this:
 ```js
 {
   color: 'green',
-  fontStyle: 'italic',
-  fontSize: 16
+  fontStyle: 'italic'
 }
 ```
 
 Every CSS property is defined as a separate property of the JavaScript object. Numeric values for pixels can be simply defined as integers. One of the major differences compared to regular CSS, is that hyphenated (kebab case) CSS properties are written in camelCase.
 
-Next, we could add a "bottom block" to our application by creating a <i>Footer</i> component and defining the following inline styles for it:
+Let's add a footer component, <i>Footer</i>, to our application and define inline styles for it. The component is defined in the file _components/Footer.jsx_ and used in the file _App.jsx_ as follows:
 
 ```js
-// highlight-start
 const Footer = () => {
   const footerStyle = {
     color: 'green',
-    fontStyle: 'italic',
-    fontSize: 16
+    fontStyle: 'italic'
   }
 
   return (
     <div style={footerStyle}>
       <br />
-      <em>Note app, Department of Computer Science, University of Helsinki 2024</em>
+      <p>
+        Note app, Department of Computer Science, University of Helsinki 2025
+      </p>
     </div>
   )
 }
-// highlight-end
+
+export default Footer
+```
+
+```js
+import { useState, useEffect } from 'react'
+import Footer from './components/Footer' // highlight-line
+import Note from './components/Note'
+import Notification from './components/Notification'
+import noteService from './services/notes'
 
 const App = () => {
   // ...
@@ -322,7 +336,7 @@ const App = () => {
 
 This is a pretty natural initial value since the notes are a set, that is, there are many notes that the state will store.
 
-If the state would be only saving "one thing", a more proper initial value would be _null_ denoting that there is <i>nothing</i> in the state at the start. Let us try what happens if we use this initial value:
+If the state were only saving "one thing", a more appropriate initial value would be _null_ denoting that there is <i>nothing</i> in the state at the start. Let's see what happens if we use this initial value:
 
 ```js
 const App = () => {
@@ -529,7 +543,7 @@ const App = () => {
 
 The useEffect hook now has _[currency]_ as the second parameter. The effect function is therefore executed after the first render, and <i>always</i> after the table as its second parameter _[currency]_ changes. That is, when the state _currency_ gets a new value, the content of the table changes and the effect function is executed.
 
-The effect has the following condition
+It is natural to choose _null_ as the initial value for the variable _currency_, because _currency_ represents a single item. The initial value _null_ indicates that there is nothing in the state yet, and it is also easy to check with a simple if statement whether a value has been assigned to the variable. The effect has the following condition
 
 ```js
 if (currency) { 
@@ -537,7 +551,7 @@ if (currency) {
 }
 ```
 
-which prevents requesting the exchange rates just after the first render when the variable _currency_ still has the initial value, i.e. a null value.
+which prevents requesting the exchange rates just after the first render when the variable _currency_ still has the initial value, i.e. a _null_ value.
 
 So if the user writes e.g. <i>eur</i> in the search field, the application uses Axios to perform an HTTP GET request to the address <https://open.er-api.com/v6/latest/eur> and stores the response in the _rates_ state.
 
@@ -605,7 +619,7 @@ If you use Open weather map, [here](https://openweathermap.org/weather-condition
 
 **NB:** In some browsers (such as Firefox) the chosen API might send an error response, which indicates that HTTPS encryption is not supported, although the request URL starts with _http://_. This issue can be fixed by completing the exercise using Chrome.
 
-**NB:** You need an api-key to use almost every weather service. Do not save the api-key to source control! Nor hardcode the api-key to your source code. Instead use an [environment variable](https://vitejs.dev/guide/env-and-mode.html) to save the key.
+**NB:** You need an api-key to use almost every weather service. Do not save the api-key to source control! Nor hardcode the api-key to your source code. Instead use an [environment variable](https://vitejs.dev/guide/env-and-mode.html) to save the key in this exercise. In real-life applications, it's considered insecure sending these keys directly from the browser, as anyone who can open the dev console would be able to intercept your keys! We will focus on implementing a separate backend in the next part of the course.
 
 Assuming the api-key is <i>54l41n3n4v41m34rv0</i>, when the application is started like so:
 
@@ -622,7 +636,9 @@ const api_key = import.meta.env.VITE_SOME_KEY
 // variable api_key now has the value set in startup
 ```
 
-Note that you will need to restart the server to apply the changes.
+**NB:** To prevent accidentally leaking environment variables to the client, only variables prefixed with VITE_ are exposed to Vite.
+
+Also remember that if you make changes to environment variables, you need to restart the development server for the changes to take effect.
 
 This was the last exercise of this part of the course. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 

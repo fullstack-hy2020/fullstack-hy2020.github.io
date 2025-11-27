@@ -133,9 +133,9 @@ Meidän käyttöömme sopii <i>Bearer</i>-skeema.
 
 Käytännössä tämä tarkoittaa, että jos token on esimerkiksi merkkijono <i>eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW</i>, laitetaan pyynnöissä headerin Authorization arvoksi merkkijono
 
-<pre>
+```
 Bearer eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW
-</pre>
+```
 
 Muistiinpanojen luominen muuttuu seuraavasti:
 
@@ -164,9 +164,13 @@ notesRouter.post('/', async (request, response) => {
   const user = await User.findById(decodedToken.id)
 //highlight-end
 
+  if (!user) {
+    return response.status(400).json({ error: 'UserId missing or not valid' })
+  }
+
   const note = new Note({
     content: body.content,
-    important: body.important === undefined ? false : body.important,
+    important: body.important || false,
     user: user._id
   })
 
@@ -174,7 +178,7 @@ notesRouter.post('/', async (request, response) => {
   user.notes = user.notes.concat(savedNote._id)
   await user.save()
 
-  response.json(savedNote)
+  response.status(201).json(savedNote)
 })
 ```
 
@@ -197,7 +201,7 @@ const errorHandler = (error, request, response, next) => {
   } else if (error.name === 'MongoServerError' && error.message.includes('E11000 duplicate key error')) {
     return response.status(400).json({ error: 'expected `username` to be unique' })
   } else if (error.name ===  'JsonWebTokenError') { // highlight-line
-    return response.status(400).json({ error: 'token missing or invalid' }) // highlight-line
+    return response.status(401).json({ error: 'token missing or invalid' }) // highlight-line
   }
 
   next(error)
@@ -351,7 +355,7 @@ Laajenna käyttäjätunnusten luomista siten, että käyttäjätunnuksen sekä s
 
 Luomisoperaation tulee palauttaa sopiva statuskoodi ja jonkinlainen virheilmoitus, jos yritetään luoda epävalidi käyttäjä.
 
-**HUOM** älä testaa salasanaan liittyviä ehtoja Mongoosen validointien avulla, se ei ole hyvä idea, sillä backendin vastaanottama salasana ja kantaan tallennettu salasanan tiiviste eivät ole sama asia. Salasanan oikeellisuus kannattaa testata kontrollerissa samoin kun teimme [osassa 3](/osa3/validointi_ja_es_lint) ennen validointien käyttöönottoa.
+**HUOM** älä testaa salasanan oikeellisuutta Mongoosen validointien avulla, se ei ole hyvä idea, sillä backendin vastaanottama salasana ja kantaan tallennettu salasanan tiiviste eivät ole sama asia. Salasanan oikeellisuus kannattaa testata kontrollerissa samoin kun teimme [osassa 3](/osa3/validointi_ja_es_lint) ennen validointien käyttöönottoa.
 
 **Tee myös testit**, jotka varmistavat, että virheellisiä käyttäjiä ei luoda, ja että virheellisen käyttäjän luomisoperaatioon vastaus on järkevä statuskoodin ja virheilmoituksen osalta.
 
@@ -463,56 +467,52 @@ kayttaja -> kayttaja:
 
 Sekä uuden blogin luonnin että blogin poistamisen yhteydessä on selvitettävä operaation tekevän käyttäjän identiteetti. Tätä auttaa jo tehtävässä 4.20 tehty middleware _tokenExtractor_. Tästä huolimatta <i>post</i>- ja <i>delete</i>-käsittelijöissä tulee vielä selvittää tokenia vastaava käyttäjä.
 
-Tee nyt uusi middleware _userExtractor_, joka selvittää pyyntöön liittyvän käyttäjän ja sijoittaa sen request-olioon. Eli kun rekisteröit middlewaren ennen routeja tiedostossa <i>app.js</i>
-
-```js
-app.use(middleware.userExtractor)
-```
-
-pääsevät routet käyttäjään käsiksi suoraan viittaamalla _request.user_:
+Tee nyt uusi middleware _userExtractor_, joka selvittää pyyntöön liittyvän käyttäjän ja sijoittaa sen request-olioon. Middlewaren rekisteröinnin jälkeen _post-_ ja _delete-_-käsittelijöiden tulee päästä käyttäjään käsiksi suoraan viittaamalla _request.user_:
 
 
 ```js
-blogsRouter.post('/', async (request, response) => {
+blogsRouter.post('/', userExtractor, async (request, response) => {
   // get user from request object
   const user = request.user
   // ..
 })
 
-blogsRouter.delete('/:id', async (request, response) => {
+blogsRouter.delete('/:id', userExtractor, async (request, response) => {
   // get user from request object
   const user = request.user
   // ..
 })
 ```
 
-Huomaa, että on mahdollista rekisteröidä middleware suoritettavaksi vain osassa tapauksista. Eli sen sijaan, että _userExtractor_-middlewarea käytettäisiin aina
+Huomaa, että tässä middleware _userExtractor_ on rekisteröity yksittäisten routejen yhteyteen eli se suoritetaan vain osassa tapauksista. Eli sen sijaan, että _userExtractor_-middlewarea käytettäisiin aina
 
 ```js
 // use the middleware in all routes
-app.use(userExtractor) // highlight-line
+app.use(middleware.userExtractor) // highlight-line
 
 app.use('/api/blogs', blogsRouter)  
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 ```
 
-voidaan määritellä, että se suoritetaan ainoastaan polun <i>/api/blogs</i> routeissa: 
+voitaisiin määritellä, että se suoritetaan ainoastaan polun <i>/api/blogs</i> routeissa: 
 
 ```js
 // use the middleware only in /api/blogs routes
-app.use('/api/blogs', userExtractor, blogsRouter) // highlight-line
+app.use('/api/blogs', middleware.userExtractor, blogsRouter) // highlight-line
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 ```
 
-Tämä siis tapahtuu ketjuttamalla useampi middleware funktion <i>use</i> parametriksi. Middlewareja voitaisiin samaan tapaan rekisteröidä myös ainoastaan yksittäisten routejen yhteyteen:
+Tämä siis tapahtuu ketjuttamalla useampi middleware funktion <i>use</i> parametriksi. Middlewareja voidaan samaan tapaan rekisteröidä myös ainoastaan yksittäisten routejen yhteyteen:
 
 ```js
-router.post('/', userExtractor, async (request, response) => {
+router.post('/', userExtractor, async (request, response) => { // highlight-line
   // ...
 }
 ```
+
+Huolehdi, että kaikkien blogien hakeminen GET-pyynnöllä onnistuu edelleen ilman tokenia.
 
 #### 4.23*: blogilistan laajennus, step11
 

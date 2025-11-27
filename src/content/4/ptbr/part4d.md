@@ -138,9 +138,9 @@ O esquema <i>Bearer</i> é adequado às nossas necessidades.
 
 Na prática, significa que se o token é a string  <i>eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW</i>, por exemplo, o header de autorização (Authorization) terá o seguinte valor:
 
-<pre>
+```
 Bearer eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW
-</pre>
+```
 
 O código para criação de novas notas deve ser alterado assim:
 

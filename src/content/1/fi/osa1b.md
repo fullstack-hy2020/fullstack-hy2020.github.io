@@ -9,11 +9,11 @@ lang: fi
 
 Kurssin aikana on web-sovelluskehityksen rinnalla tavoite ja tarve oppia riittävässä määrin JavaScriptia.
 
-JavaScript on kehittynyt viime vuosina nopeaan tahtiin, ja käytämme kurssilla kielen uusimpien versioiden piirteitä. JavaScript-standardin virallinen nimi on [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). Tämän hetken tuorein versio on kesäkuussa 2023 julkaistu [ES14](https://www.ecma-international.org/ecma-262/), toiselta nimeltään ECMAScript 2023 .
+JavaScript on kehittynyt viime vuosina nopeaan tahtiin, ja käytämme kurssilla kielen uusimpien versioiden piirteitä. JavaScript-standardin virallinen nimi on [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). Tämän hetken tuorein versio on kesäkuussa 2024 julkaistu [ES15](https://www.ecma-international.org/ecma-262/), toiselta nimeltään ECMAScript 2024 .
 
 Selaimet eivät vielä osaa kaikkia JavaScriptin uusimpien versioiden ominaisuuksia. Tämän takia selaimessa suoritetaan useimmiten koodia, joka on käännetty (englanniksi <i>transpiled</i>) uudemmasta JavaScriptin versiosta johonkin vanhempaan, laajemmin tuettuun versioon.
 
-Tällä hetkellä johtava tapa tehdä transpilointi on [Babel](https://babeljs.io/). Create-react-app:in avulla luoduissa React-sovelluksissa on valmiiksi konfiguroitu automaattinen transpilaus. Katsomme kurssin [osassa 7](/osa7) tarkemmin miten transpiloinnin konfigurointi tapahtuu.
+Tällä hetkellä johtava tapa tehdä transpilointi on [Babel](https://babeljs.io/). Viten avulla luoduissa React-sovelluksissa on valmiiksi konfiguroitu automaattinen transpilaus. Katsomme kurssin [osassa 7](/osa7) tarkemmin miten transpiloinnin konfigurointi tapahtuu.
 
 [Node.js](https://nodejs.org/en/) on melkein missä vaan (mm. palvelimilla) toimiva, Googlen [Chrome V8](https://developers.google.com/v8/)-JavaScript-moottoriin perustuva JavaScript-suoritusympäristö. Harjoitellaan hieman JavaScriptia Nodella.  Noden tuoreet versiot osaavat suoraan JavaScriptin kohtuullisen uusia versioita, joten koodin transpilaus ei ole tarpeen.
 
@@ -33,11 +33,11 @@ JavaScriptissä on muutama tapa määritellä muuttujia:
 const x = 1
 let y = 5
 
-console.log(x, y)   // tulostuu 1, 5
+console.log(x, y)   // tulostuu 1 5
 y += 10
-console.log(x, y)   // tulostuu 1, 15
+console.log(x, y)   // tulostuu 1 15
 y = 'teksti'
-console.log(x, y)   // tulostuu 1, teksti
+console.log(x, y)   // tulostuu 1 teksti
 x = 4               // aiheuttaa virheen
 ```
 
@@ -45,7 +45,7 @@ x = 4               // aiheuttaa virheen
 
 Muuttujan tallettaman tiedon tyyppi voi vaihtua suorituksen aikana, _y_ tallettaa aluksi luvun ja lopulta merkkijonon.
 
-JavaScriptissa on myös mahdollista määritellä muuttujia avainsanan [var](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var) avulla. Var oli pitkään ainoa tapa muuttujien määrittelyyn, const ja let tulivat kieleen mukaan vasta versiossa ES6. Var toimii tietyissä tilanteissa [eri](https://medium.com/craft-academy/javascript-variables-should-you-use-let-var-or-const-394f7645c88f) [tavalla](http://www.jstips.co/en/javascript/keyword-var-vs-let/) kuin useimpien muiden kielien muuttujien määrittely. Tällä kurssilla var:in käyttö ei ole suositeltavaa, eli käytä aina const:ia tai let:iä!
+JavaScriptissa on myös mahdollista määritellä muuttujia avainsanan [var](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var) avulla. Var oli pitkään ainoa tapa muuttujien määrittelyyn, const ja let tulivat kieleen mukaan vasta vuonna 2015 Javascriptin versiossa ES6. Var toimii tietyissä tilanteissa [eri](https://medium.com/craft-academy/javascript-variables-should-you-use-let-var-or-const-394f7645c88f) [tavalla](http://www.jstips.co/en/javascript/keyword-var-vs-let/) kuin useimpien muiden kielien muuttujien määrittely. Tällä kurssilla var:in käyttö ei ole suositeltavaa, eli käytä aina const:ia tai let:iä!
 
 Lisää aiheesta on esim. YouTubessa: [var, let and const - ES6 JavaScript Features](https://youtu.be/sjyJBL5fkp8)
 
@@ -121,11 +121,11 @@ const t = [1, 2, 3, 4, 5]
 
 const [first, second, ...rest] = t
 
-console.log(first, second)  // tulostuu 1, 2
+console.log(first, second)  // tulostuu 1 2
 console.log(rest)          // tulostuu [3, 4 ,5]
 ```
 
-Yllä muuttujiin _first_ ja _second_ sijoitetaan taulukon kaksi ensimmäistä lukua. Muuttujaan _rest_ "kerätään" sijoituksesta jäljelle jääneet luvut omaksi taulukoksi.
+Yllä muuttujaan _first_ sijoitetaan taulukon ensimmäinen luku ja muuttujaan _second_ taulukon toinen luku. Muuttujaan _rest_ "kerätään" sijoituksesta jäljelle jääneet luvut omaksi taulukoksi.
 
 ### Oliot
 
@@ -219,7 +219,7 @@ const tSquared = t.map(p => p * p)
 // tSquared on nyt [1, 4, 9]
 ```
 
-Nuolifunktio on tullut JavaScriptiin vasta muutama vuosi sitten version [ES6](http://es6-features.org/) myötä. Tätä ennen ainoa tapa funktioiden määrittelyyn oli avainsanan _function_ käyttö.
+Nuolifunktio on tullut JavaScriptiin vuonna 2015 version [ES6](https://rse.github.io/es6-features/) myötä. Tätä ennen ainoa tapa funktioiden määrittelyyn oli avainsanan _function_ käyttö.
 
 Määrittelytapoja on kaksi, funktiolle voidaan antaa [function declaration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function) ‑tyyppisessä määrittelyssä <i>nimi</i>, jonka avulla funktioon voidaan viitata:
 
@@ -522,7 +522,7 @@ Syntaksin osalta luokat ja niistä luodut oliot muistuttavat erittäin paljon es
 
 Luokkasyntaksin tuominen JavaScriptiin on osin kiistelty lisäys, kts. esim. [Not Awesome: ES6 Classes](https://github.com/petsel/not-awesome-es6-classes) tai [Is “Class” In ES6 The New “Bad” Part?](https://medium.com/@rajaraodv/is-class-in-es6-the-new-bad-part-6c4e6fe1ee65).
 
-ES6:n luokkasyntaksia käytetään paljon "vanhassa" Reactissa ja Node.js:ssä ja siksi sen tunteminen on tälläkin kurssilla paikallaan. Koska käytämme kurssilla Reactiin vuonna 2019 lisättyä [hook](https://react.dev/reference/react)-ominaisuutta, meidän ei ole tarvetta käyttää kurssilla ollenkaan JavaScriptin luokkasyntaksia.
+ES6:n luokkasyntaksia käytetään paljon "vanhassa" Reactissa ja Node.js:ssä ja siksi sen tunteminen on tälläkin kurssilla paikallaan. Koska käytämme kurssilla Reactiin vuonna 2019 lisättyä [hook](https://react.dev/reference/react/hooks)-ominaisuutta, meidän ei ole tarvetta käyttää kurssilla ollenkaan JavaScriptin luokkasyntaksia.
 
 ### JavaScript-materiaalia
 

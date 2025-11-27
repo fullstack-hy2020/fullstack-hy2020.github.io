@@ -38,7 +38,7 @@ const App = () => {
 
 ### Fonctions d'assistance aux composants
 
-Développons notre composant <i>Bonjour</i> afin qu'il devine l'année de naissance de la personne accueillie :
+Développons notre composant <i>Hello</i> afin qu'il devine l'année de naissance de la personne accueillie :
 
 ```js
 const Hello = (props) => {
@@ -178,7 +178,7 @@ const Hello = ({ name, age }) => {...}
 
 Jusqu'à présent, toutes nos applications ont été telles que leur apparence reste la même après le rendu initial. Et si on voulait créer un compteur dont la valeur augmente en fonction du temps ou au clic d'un bouton ?
 
-Commençons par ce qui suit. Le fichier <i>App.js</i> devient :
+Commençons par ce qui suit. Le fichier <i>App.jsx</i> devient :
 
 ```js
 const App = (props) => {
@@ -191,10 +191,9 @@ const App = (props) => {
 export default App
 ```
 
-Et le fichier <in>main.js</it> devient :
+Et le fichier <in>main.jsx</it> devient :
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App'
@@ -212,7 +211,7 @@ Le composant App reçoit la valeur du compteur via la propriété _counter_. Ce 
 counter += 1
 ```
 
-le composant ne sera pas rendu à nouveau. Nous pouvons obtenir un nouveau rendu du en appelant la méthode _render_ une deuxième fois, par ex. de la manière suivante :
+le composant ne sera pas rendu à nouveau. Nous pouvons obtenir un nouveau rendu en appelant la méthode _render_ une deuxième fois, par ex. de la manière suivante :
 
 ```js
 let counter = 1
@@ -249,12 +248,11 @@ Faire des appels répétés de la méthode _render_ n'est pas la méthode recomm
 
 Jusqu'à présent, tous nos composants étaient simples dans le sens où ils ne contenaient aucun état susceptible de changer au cours du cycle de vie du composant.
 
-Ensuite, ajoutons un état au composant <i>App</i> de notre application à l'aide du [state hook](https://reactjs.org/docs/hooks-state.html) de React.
+Ensuite, ajoutons un état au composant <i>App</i> de notre application à l'aide du [state hook](https://react.dev/learn/state-a-components-memory) de React.
 
-Nous allons modifier l'application comme suit. <i>main.js</i> revient à
+Nous allons modifier l'application comme suit. <i>main.jsx</i> revient à
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App'
@@ -262,7 +260,7 @@ import App from './App'
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-et <i>App.js</i> change comme suit :
+et <i>App.jsx</i> change comme suit :
 
 ```js
 import { useState } from 'react' // highlight-line
@@ -377,7 +375,7 @@ Modifions l'application pour que l'augmentation du compteur se produise lorsqu'u
 
 Les éléments bouton prennent en charge les [mouse events](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent), dont [click](https://developer.mozilla.org/en-US/docs/Web/Events/click), l'événement le plus courant. L'événement clic sur un bouton peut également être déclenché avec le clavier ou un écran tactile malgré le nom <i>mouse event</i>.
 
-Dans React, [l'application d'un event handler](https://reactjs.org/docs/handling-events.html) à l'événement <i>click</i> se passe comme ceci :
+Dans React, [l'application d'un event handler](https://react.dev/learn/responding-to-events) à l'événement <i>click</i> se passe comme ceci :
 
 ```js
 const App = () => {
@@ -542,7 +540,7 @@ Il est recommandé d'écrire des composants React petits et réutilisables dans 
 
 Commençons par implémenter un composant <i>Display</i> chargé d'afficher la valeur du compteur.
 
-Une bonne pratique dans React consiste à [remonter l'état](https://reactjs.org/docs/lifting-state-up.html) dans la hiérarchie des composants. La documentation dit:
+Une bonne pratique dans React consiste à [remonter l'état](https://react.dev/learn/sharing-state-between-components) dans la hiérarchie des composants. La documentation dit:
 
 > <i>Souvent, plusieurs composants doivent refléter les mêmes données changeantes. Nous vous recommandons de remonter l'état partagé jusqu'à leur ancêtre commun le plus proche.</i>
 
@@ -629,7 +627,7 @@ const App = () => {
 
 Étant donné que nous avons maintenant un composant <i>Button</i> facilement réutilisable, nous avons également implémenté une nouvelle fonctionnalité dans notre application en ajoutant un bouton qui peut être utilisé pour décrémenter le compteur.
 
-Le gestionnaire d'événements est passé au composant <i>Button</i> via la prop _handleClick_. Le nom de la prop en lui-même n'est pas très significatif, mais notre choix de nom n'était pas complètement aléatoire.
+Le gestionnaire d'événements est passé au composant <i>Button</i> via la prop _onClick_. Le nom de la prop en lui-même n'est pas très significatif, mais notre choix de nom n'était pas complètement aléatoire.
 
 Le [tutoriel](https://react.dev/learn/tutorial-tic-tac-toe) officiel de React suggère : "En React, il est conventionnel d'utiliser des noms de type onSomething pour les props qui représentent des événements et handleSomething pour les définitions de fonctions qui gèrent ces événements."
 
@@ -637,7 +635,7 @@ Le [tutoriel](https://react.dev/learn/tutorial-tic-tac-toe) officiel de React su
 
 Revenons une fois de plus sur les grands principes de fonctionnement d'une application.
 
-Lorsque l'application démarre, le code dans _App_ est exécuté. Ce code utilise un hook [useState](https://reactjs.org/docs/hooks-reference.html#usestate) pour créer l'état de l'application, en définissant une valeur initiale de la variable _counter_.
+Lorsque l'application démarre, le code dans _App_ est exécuté. Ce code utilise un hook [useState](https://react.dev/reference/react/useState) pour créer l'état de l'application, en définissant une valeur initiale de la variable _counter_.
 Ce composant contient le composant _Display_ - qui affiche la valeur du compteur, 0 - et trois composants _Button_. Les boutons ont tous des gestionnaires d'événements, qui sont utilisés pour changer l'état du compteur.
 
 Lorsque l'un des boutons est cliqué, le gestionnaire d'événements est exécuté. Le gestionnaire d'événements modifie l'état du composant _App_ avec la fonction _setCounter_.
@@ -693,7 +691,7 @@ Nous pouvons utiliser la destructuration pour obtenir uniquement les champs requ
 
 **NB** : Lors de la création de vos propres composants, vous pouvez nommer les props des gestionnaires d'événements comme bon vous semble, pour cela, vous pouvez vous référer à la documentation de React sur [Naming event handler props](https://react.dev/learn/responding-to-events#naming-event-handler-props). Cela se présente comme suit :
 
-> Par convention, les props des gestionnaires d'événements doivent commencer par `on`, suivi d'une lettre majuscule.
+> Par convention, nommez les props des gestionnaires d'événements en commençant par `on` suivi d'une majuscule.
 Par exemple, la prop `onClick` du composant Button aurait pu s'appeler `onSmash` :
 
 ```js
@@ -711,6 +709,7 @@ const Button = ({ onSmash, text }) => (
   <button onClick={onSmash}>
     {text}
   </button>
+)
 ```
 
 Nous pouvons simplifier une fois de plus le composant Button en déclarant l'instruction de retour en une seule ligne :

@@ -55,7 +55,7 @@ Interesting lines in the code have been highlighted:
 
 ```js
 import { useState, useEffect } from 'react'
-import { useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client/react'
 import { LOGIN } from '../queries'
 
 const LoginForm = ({ setError, setToken }) => {
@@ -164,7 +164,8 @@ const App = () => {
 After the backend changes, creating new persons requires that a valid user token is sent with the request. In order to send the token, we have to change the way we define the *ApolloClient* object in <i>main.jsx</i> a little.
 
 ```js
-import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client'  // highlight-line
+import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client'  // highlight-line
+import { ApolloProvider } from '@apollo/client/react'
 import { setContext } from '@apollo/client/link/context' // highlight-line
 
 // highlight-start
@@ -326,9 +327,9 @@ Implement a view which shows all the books based on the logged-in user's favouri
 #### 8.21 books by genre with GraphQL
 
 In the previous two exercises, the filtering could have been done using just React.
-To complete this exercise, you should redo the filtering the books based on a selected genre (that was done in exercise 8.19) using a GraphQL query to the server. If you already did so then you do not have to do anything.
+To complete this exercise, you should redo the filtering of the books based on a selected genre (that was done in exercise 8.19) using a GraphQL query to the server. If you already did so then you do not have to do anything.
 
-This and the next exercises are quite **challenging** like it should be this late in the course. You might want to complete first the easier ones in the [next part](/en/part8/fragments_and_subscriptions).
+This and the next exercise are quite **challenging**, like they should be this late in the course. It may help you to complete the easier exercises in the [next part](/en/part8/fragments_and_subscriptions) before doing 8.21 and 8.22.
 
 #### 8.22 Up-to-date cache and book recommendations
 

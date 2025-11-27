@@ -9,7 +9,7 @@ import { TripleBorder } from '../TripleBorder/TripleBorder';
 
 import './DeveloperStory.scss';
 
-export const DeveloperStory = props => {
+export const DeveloperStory = (props) => {
   const { image, companyLogo, text, name, title } = props;
   const [readMore, setReadMore] = useState(false);
   const { t } = useTranslation();

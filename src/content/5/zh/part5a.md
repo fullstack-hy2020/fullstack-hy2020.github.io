@@ -17,7 +17,8 @@ lang: zh
 <!-- We'll now implement a part of the required user management functionality in the frontend. Let's begin with user login. Throughout this part we will assume that new users will not be added from the frontend.-->
  我们现在要在前端实现一部分所需的用户管理功能。让我们从用户登录开始。在这一部分中，我们将假设新用户不会从前端添加。
 
-### Handling login
+### Adding a Login Form
+
 <!-- A login form has now been added to the top of the page. The form for adding new notes has also been moved to the bottom of the list of notes.-->
  现在，一个登录表格已经被添加到页面的顶部。添加新笔记的表格也被移到了笔记列表的底部。
 
@@ -29,13 +30,13 @@ lang: zh
 
 ```js
 const App = () => {
-  const [notes, setNotes] = useState([])
+  const [notes, setNotes] = useState([]) 
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
   const [errorMessage, setErrorMessage] = useState(null)
   // highlight-start
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const [username, setUsername] = useState('') 
+  const [password, setPassword] = useState('') 
 // highlight-end
 
   useEffect(() => {
@@ -57,28 +58,30 @@ const App = () => {
   return (
     <div>
       <h1>Notes</h1>
-
       <Notification message={errorMessage} />
-
+      
       // highlight-start
+      <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <div>
-          username
+          <label>
+            username
             <input
-            type="text"
-            value={username}
-            name="Username"
-            onChange={({ target }) => setUsername(target.value)}
-          />
+              type="text"
+              value={username}
+              onChange={({ target }) => setUsername(target.value)}
+            />
+          </label>
         </div>
         <div>
-          password
+          <label>
+            password
             <input
-            type="password"
-            value={password}
-            name="Password"
-            onChange={({ target }) => setPassword(target.value)}
-          />
+              type="password"
+              value={password}
+              onChange={({ target }) => setPassword(target.value)}
+            />
+          </label>
         </div>
         <button type="submit">login</button>
       </form>
@@ -112,6 +115,8 @@ export default App
 <!-- The method _handleLogin_, which is  responsible for handling the data in the form, is yet to be implemented.-->
  负责处理表单中数据的_handleLogin_方法还没有被实现。
 
+ ### Adding Logic to the Login Form
+
 <!-- Logging in is done by sending an HTTP POST request to server address <i>api/login</i>. Let's separate the code responsible for this request to its own module, to file <i>services/login.js</i>.-->
  登录是通过向服务器地址<i>api/login</i>发送一个HTTP POST请求来完成。让我们把负责这个请求的代码分离到自己的模块中，放到<i>services/login.js</i>文件中。
 
@@ -130,34 +135,32 @@ const login = async credentials => {
 export default { login }
 ```
 
-<!-- The method for handling the login can be implemented as follows:-->
-处理登录的方法可以按如下方式实现：
+The method for handling the login can be implemented as follows:
 
 ```js
 import loginService from './services/login' // highlight-line
 
 const App = () => {
   // ...
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const [username, setUsername] = useState('') 
+  const [password, setPassword] = useState('') 
 // highlight-start
   const [user, setUser] = useState(null)
 // highlight-end
 
-  // highlight-start
-  const handleLogin = async (event) => {
+  // ...
+
+  const handleLogin = async event => { // highlight-line
     event.preventDefault()
-
+    
+    // highlight-start
     try {
-      const user = await loginService.login({
-        username, password,
-      })
-
+      const user = await loginService.login({ username, password })
       setUser(user)
       setUsername('')
       setPassword('')
-    } catch (exception) {
-      setErrorMessage('Wrong credentials')
+    } catch {
+      setErrorMessage('wrong credentials')
       setTimeout(() => {
         setErrorMessage(null)
       }, 5000)
@@ -175,6 +178,8 @@ const App = () => {
 <!-- If the login fails, or running the function _loginService.login_ results in an error, the user is notified.-->
 如果登录失败，或运行_loginService.login_函数导致错误，用户将被通知。
 
+### Conditional Rendering of the Login Form
+
 <!-- The user is not notified about a successful login in any way. Let's modify the application to show the login form only <i>if the user is not logged-in</i> so when _user === null_. The form for adding new notes is shown only if the <i>user is logged-in</i>, so <i>user</i> contains the user details.-->
  用户不会以任何方式得到关于成功登录的通知。让我们修改应用，只有在<i>用户没有登录的情况下才显示登录表单</i>，所以当_user == null_。只有当<i>用户登录</i>时，才会显示添加新笔记的表单，所以<i>用户</i>包含用户的详细信息。
 
@@ -188,22 +193,24 @@ const App = () => {
   const loginForm = () => (
     <form onSubmit={handleLogin}>
       <div>
-        username
+        <label>
+          username
           <input
-          type="text"
-          value={username}
-          name="Username"
-          onChange={({ target }) => setUsername(target.value)}
-        />
+            type="text"
+            value={username}
+            onChange={({ target }) => setUsername(target.value)}
+          />
+        </label>
       </div>
       <div>
-        password
+        <label>
+          password
           <input
-          type="password"
-          value={password}
-          name="Password"
-          onChange={({ target }) => setPassword(target.value)}
-        />
+            type="password"
+            value={password}
+            onChange={({ target }) => setPassword(target.value)}
+          />
+        </label>
       </div>
       <button type="submit">login</button>
     </form>
@@ -211,10 +218,7 @@ const App = () => {
 
   const noteForm = () => (
     <form onSubmit={addNote}>
-      <input
-        value={newNote}
-        onChange={handleNoteChange}
-      />
+      <input value={newNote} onChange={handleNoteChange} />
       <button type="submit">save</button>
     </form>
   )
@@ -244,11 +248,10 @@ const App = () => {
   return (
     <div>
       <h1>Notes</h1>
-
       <Notification message={errorMessage} />
 
-      {user === null && loginForm()} // highlight-line
-      {user !== null && noteForm()} // highlight-line
+      {!user && loginForm()} // highlight-line
+      {user && noteForm()} // highlight-line
 
       <div>
         <button onClick={() => setShowAll(!showAll)}>
@@ -256,13 +259,13 @@ const App = () => {
         </button>
       </div>
       <ul>
-        {notesToShow.map((note, i) =>
+        {notesToShow.map(note => (
           <Note
-            key={i}
+            key={note.id}
             note={note}
             toggleImportance={() => toggleImportanceOf(note.id)}
           />
-        )}
+        ))}
       </ul>
 
       <Footer />
@@ -275,39 +278,11 @@ const App = () => {
  一个看起来有点奇怪，但常用的[React技巧](https://reactjs.org/docs/conditional-rendering.html#inline-if-with-logical--operator)被用来有条件地渲染表单。
 
 ```js
-{
-  user === null && loginForm()
-}
+{!user && loginForm()}
 ```
 
 <!-- If the first statement evaluates to false, or is [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy), the second statement (generating the form) is not executed at all.-->
  如果第一条语句计算为false，或者是[falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy)，第二条语句(生成表单)根本就不会被执行。
-
-<!-- We can make this even more straightforward by using the [conditional operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator):-->
-我们可以通过使用[条件运算符](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator)使之更加简单明了：
-
-```js
-return (
-  <div>
-    <h1>Notes</h1>
-
-    <Notification message={errorMessage}/>
-
-    {user === null ?
-      loginForm() :
-      noteForm()
-    }
-
-    <h2>Notes</h2>
-
-    // ...
-
-  </div>
-)
-```
-
-<!-- If _user === null_ is [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy), _loginForm()_ is executed. If not, _noteForm()_ is.-->
- 如果_user === null_是[truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy)，_loginForm()_被执行。如果不是，则_noteForm()_被执行。
 
 <!-- Let's do one more modification. If the user is logged-in, their name is shown on the screen:-->
  我们再做一个修改。如果用户已经登录，他们的名字就会显示在屏幕上。
@@ -316,22 +291,21 @@ return (
 return (
   <div>
     <h1>Notes</h1>
-
     <Notification message={errorMessage} />
 
-    {user === null ?
-      loginForm() :
+    {!user && loginForm()}
+    // highlight-start
+    {user && (
       <div>
-        <p>{user.name} logged-in</p>
+        <p>{user.name} logged in</p>
         {noteForm()}
       </div>
-    }
+    )}
+    // highlight-end
 
-    <h2>Notes</h2>
-
+    <div>
+      <button onClick={() => setShowAll(!showAll)}>
     // ...
-
-  </div>
 )
 ```
 
@@ -343,6 +317,49 @@ return (
 
 <!-- Current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-2), branch <i>part5-2</i>.-->
  目前的应用代码可以在[Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-2)上找到，分支<i>part5-2</i>。
+
+### Note on Using the Label Element
+
+<!-- We used the [label](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/label) element for the <i>input</i> fields in the login form. The <i>input</i> field for the username is placed inside the corresponding <i>label</i> element: -->
+我们在登录表单的 <i>input</i> 字段中使用了 [label](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/label) 元素。用户名的 <i>input</i> 字段放置在相应的 <i>label</i> 元素内部：
+
+```js
+<div>
+  <label>
+    username
+    <input
+      type="text"
+      value={username}
+      onChange={({ target }) => setUsername(target.value)}
+    />
+  </label>
+</div>
+// ...
+```
+
+<!-- Why did we implement the form this way? Visually, the same result could be achieved with simpler code, without a separate <i>label</i> element: -->
+我们为什么要以这种方式实现表单？从外观上看，使用更简单的代码，不使用单独的 <i>label</i> 元素也可以达到相同的效果：
+
+```js
+<div>
+  username
+  <input
+    type="text"
+    value={username}
+    onChange={({ target }) => setUsername(target.value)}
+  />
+</div>
+// ...
+```
+
+<!-- The <i>label</i> element is used in forms to describe and name <i>input</i> fields. It provides a description for the input field, helping the user understand what information should be entered into each field. This description is programmatically linked to the corresponding input field, improving the form's accessibility.  -->
+<i>label</i> 元素用于表单中，用于描述和命名 <i>input</i> 字段。它为输入字段提供描述，帮助用户理解应向每个字段输入什么信息。这种描述与相应的输入字段程可编程地关联，提高了表单的可访问性。
+
+<!-- This way, screen readers can read the field's name to the user when the input field is selected, and clicking on the label's text automatically focuses on the correct input field. Using the <i>label</i> element with <i>input</i> fields is always recommended, even if the same visual result could be achieved without it. -->
+这样，当输入字段被选中时，屏幕阅读器可以读出字段名称给用户听，点击标签的文本会自动聚焦到正确的输入字段。建议始终使用 <i>label</i> 元素与 <i>input</i> 字段配合使用，即使不使用它也能达到相同的外观效果。
+
+<!-- There are [several ways](https://react.dev/reference/react-dom/components/input#providing-a-label-for-an-input) to link a specific <i>label</i> to an <i>input</i> element. The easiest method is to place the <i>input</i> element inside the corresponding <i>label</i> element, as demonstrated in this material. This automatically associates the <i>label</i> with the correct input field, requiring no additional configuration. -->
+有[几种方法](https://react.dev/reference/react-dom/components/input#providing-a-label-for-an-input)可以将特定 <i>label</i> 与 <i>input</i> 元素关联起来。最简单的方法是将 <i>input</i> 元素放置在相应的 <i>label</i> 元素内部，正如本材料所示。这会自动将 <i>label</i> 与正确的输入字段关联起来，无需额外配置。
 
 ### Creating new notes
 
@@ -380,7 +397,7 @@ let token = null // highlight-line
 
 // highlight-start
 const setToken = newToken => {
-  token = `bearer ${newToken}`
+  token = `Bearer ${newToken}`
 }
 // highlight-end
 
@@ -392,7 +409,7 @@ const getAll = () => {
 const create = async newObject => {
   // highlight-start
   const config = {
-    headers: { Authorization: token },
+    headers: { Authorization: token }
   }
 // highlight-end
 
@@ -417,16 +434,14 @@ export default { getAll, create, update, setToken } // highlight-line
 ```js
 const handleLogin = async (event) => {
   event.preventDefault()
-  try {
-    const user = await loginService.login({
-      username, password,
-    })
 
+  try {
+    const user = await loginService.login({ username, password })
     noteService.setToken(user.token) // highlight-line
     setUser(user)
     setUsername('')
     setPassword('')
-  } catch (exception) {
+  } catch {
     // ...
   }
 }
@@ -479,14 +494,12 @@ window.localStorage.getItem('name')
   const handleLogin = async (event) => {
     event.preventDefault()
     try {
-      const user = await loginService.login({
-        username, password,
-      })
+      const user = await loginService.login({ username, password })
 
       // highlight-start
       window.localStorage.setItem(
         'loggedNoteappUser', JSON.stringify(user)
-      )
+      ) 
       // highlight-end
       noteService.setToken(user.token)
       setUser(user)
@@ -526,12 +539,11 @@ const App = () => {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-    noteService
-      .getAll().then(initialNotes => {
-        setNotes(initialNotes)
-      })
+    noteService.getAll().then(initialNotes => {
+      setNotes(initialNotes)
+    })
   }, [])
-
+  
   // highlight-start
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')

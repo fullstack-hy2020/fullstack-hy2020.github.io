@@ -9,7 +9,7 @@ lang: ptbr
 
 Teremos, durante o curso, o objetivo e a necessidade de aprender certa quantidade de JavaScript, além de desenvolvimento web.
 
-JavaScript evoluiu rapidamente nos últimos anos e, neste curso, usamos as funcionalidades das versões mais recentes. O nome oficial do padrão de JavaScript é [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). Atualmente, a versão mais recente é a lançada em junho de 2022 com o nome de [ECMAScript®2022](https://www.ecma-international.org/ecma-262/), também conhecido como ES13.
+JavaScript evoluiu rapidamente nos últimos anos e, neste curso, usamos as funcionalidades das versões mais recentes. O nome oficial do padrão de JavaScript é [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). Atualmente, a versão mais recente é a lançada em junho de 2024 com o nome de [ECMAScript®2024](https://www.ecma-international.org/ecma-262/), também conhecido como ES15.
 
 Os navegadores ainda não suportam todas as funcionalidades mais recentes de JavaScript e devido a esse fato, muito código executado em navegadores é <i>transpilado</i> de uma versão mais recente de JavaScript para uma versão mais antiga e compatível.
 
@@ -33,11 +33,11 @@ Em JavaScript, existem algumas maneiras de definir variáveis:
 const x = 1
 let y = 5
 
-console.log(x, y)   // 1, 5 são impressos
+console.log(x, y)   // 1 5 são impressos
 y += 10
-console.log(x, y)   // 1, 15 são impressos
+console.log(x, y)   // 1 15 são impressos
 y = 'algum texto'
-console.log(x, y)   // 1, algum texto são impressos
+console.log(x, y)   // 1 algum texto são impressos
 x = 4               // causará um erro
 ```
 
@@ -118,7 +118,7 @@ const t = [1, 2, 3, 4, 5]
 
 const [primeiro, segundo, ...resto] = t
 
-console.log(primeiro, segundo)  // 1, 2 é impresso
+console.log(primeiro, segundo)  // 1 2 é impresso
 console.log(resto)          // [3, 4, 5] é impresso
 ```
 
@@ -216,7 +216,7 @@ const tAoQuadrado = t.map(p => p * p)
 // tAoQuadrado agora é [1, 4, 9]
 ```
 
-A funcionalidade da _arrow function_ foi adicionada ao JavaScript há apenas alguns anos, com a versão [ES6](http://es6-features.org/). Antes disso, a única maneira de definir funções era usando a palavra-chave _function_.
+A funcionalidade da _arrow function_ foi adicionada ao JavaScript há apenas alguns anos, com a versão [ES6](https://rse.github.io/es6-features/). Antes disso, a única maneira de definir funções era usando a palavra-chave _function_.
 
 Existem duas maneiras de se referenciar uma função; uma é atribuir um nome em uma [declaração de função](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function) (_function declaration_).
 
@@ -457,7 +457,7 @@ Se tentarmos fazer o mesmo com o método _cumprimentar_, deparamo-nos com um pro
 arto.cumprimentar()       // "olá, meu nome é Arto Hellas" é impresso
 
 const referenciaParaCumprimentar = arto.cumprimentar
-referenciaParCumprimentar() // "olá, meu nome é undefined" é impresso
+referenciaParaCumprimentar() // "olá, meu nome é undefined" é impresso
 ```
 
 Ao chamar o método através de uma referência, o método perde o conhecimento do que era o _this_ original. Ao contrário de outras linguagens, em JavaScript, o valor de [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) é definido com base <i>em como o método é chamado</i>. Ao chamar o método através de uma referência, o valor de _this_ se torna o chamado [objeto global](https://developer.mozilla.org/en-US/docs/Glossary/Global_object) (_global object_) e o resultado final sai geralmente diferente do que o desenvolvedor originalmente pretendeu.

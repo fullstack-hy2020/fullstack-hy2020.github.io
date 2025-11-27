@@ -13,7 +13,7 @@ const LanguagePicker = ({
 }) => {
   const { t } = useTranslation();
 
-  const selectOnChange = e => {
+  const selectOnChange = (e) => {
     onChange(e.target.value, e);
   };
 

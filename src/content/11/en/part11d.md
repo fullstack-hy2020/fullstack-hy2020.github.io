@@ -209,17 +209,17 @@ on:
 
 jobs:
   simple_deployment_pipeline:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       // steps here
   tag_release:
     needs: [simple_deployment_pipeline]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       // steps here
 ```
 
-As was mentioned [earlier](/en/part11/getting_started_with_git_hub_actions#getting-started-with-workflows) jobs of a workflow are executed in parallel but since we want the linting, testing and deployment to be done first, we set a dependency that the <i>tag\_release</i> waits the another job to execute first since we do not want to tag the release unless it passes tests and is deployed.
+As mentioned [earlier](/en/part11/getting_started_with_git_hub_actions#getting-started-with-workflows), jobs of a workflow are executed in parallel. However since we want the linting, testing and deployment to be done first, we set a dependency that the <i>tag\_release</i> waits for since we do not want to tag the release unless it passes tests and is deployed.
 
 If you're uncertain of the configuration, you can set  <code>DRY_RUN</code> to <code>true</code>, which will make the action output the next version number without creating or tagging the release!
 
@@ -235,7 +235,7 @@ If needed, you can navigate to the view of a single tag that shows eg. what is t
 
 #### 11.16 Skipping a commit for tagging and deployment
 
-In general, the more often you deploy the main branch to production, the better. However, there might be some valid reasons sometimes to skip a particular commit or a merged pull request to become tagged and released to production.
+In general, the more often you deploy the main branch to production, the better. However, there might sometimes be a valid reason to skip/prevent a particular commit or a merged pull request from being tagged and released to production.
 
 Modify your setup so that if a commit message in a pull request contains _#skip_, the merge will not be deployed to production and it is not tagged with a version number.
 
@@ -255,7 +255,7 @@ on:
 
 jobs:
   a_test_job:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: github context
@@ -280,7 +280,7 @@ You most likely need functions [contains](https://docs.github.com/en/actions/lea
 
 Developing workflows is not easy, and quite often the only option is trial and error. It might actually be advisable to have a separate repository for getting the configuration right, and when it is done, to copy the right configurations to the actual repository.
 
-It would also make sense to re-use longer conditions by moving them to commonly accessible variables and referring these variables on job/step levels:
+It would also make sense to re-use longer conditions by moving them to commonly accessible variables and referring these variables on the step level:
 
 ```yaml
 name: some workflow name
@@ -292,6 +292,10 @@ env:
 jobs:
   job1:
     # rest of the job
+    outputs:
+      # here we produce a record of the outcome of a key step in the job.
+      # the below will be 'true'
+      job2_can_run: ${{ steps.final.outcome == 'success' }}
     steps:
       - if: ${{ env.CONDITION == 'true' }}
         run: echo 'this step is executed'
@@ -299,10 +303,20 @@ jobs:
       - if: ${{ env.CONDITION == 'false' }}
         run: echo 'this step will not be executed'
 
+      - if: ${{ env.CONDITION == 'true' }}
+        # this is important, the id `final` is referenced in job1's `outputs`.
+        id: final
+        run: echo
+
   job2:
-    # this job will be dependent on the above env.CONDITION, note the `github.` prefix which seem to be required while referencing the variable on the job level, but not the step level
-    if: ${{ github.env.CONDITION == 'true' }}
-    # rest of the job
+    needs:
+      - job1
+    # this job will be dependent on the above job1's final step, which in turn depends on the CONDITION defined at the beginning of the file.
+    # note that the `env`-variable cannot be directly accessed on the job level, so we need to use something else,
+    # such as the outputs from another job.
+    if: ${{ needs.job1.outputs.job2_can_run == 'true' }}
+    steps:
+      # rest of the job
 ```
 
 It would also be possible to install a tool such as [act](https://github.com/nektos/act) that makes it possible to run your workflows locally. Unless you end up using more involved use cases like creating your [own custom actions](https://docs.github.com/en/free-pro-team@latest/actions/creating-actions), going through the burden of setting up a tool such as act is most likely not worth the trouble. 

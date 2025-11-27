@@ -315,7 +315,7 @@ Even though a new value was set for _left_ by calling _setLeft(left + 1)_, the o
 setTotal(left + right) 
 ```
 
-The reason for this is that a state update in React happens [asynchronously](https://react.dev/learn/queueing-a-series-of-state-updates), i.e. not immediately but "at some point" before the component is rendered again.
+The reason for this is that a state update in React happens [asynchronously](https://react.dev/learn/queueing-a-series-of-state-updates), i.e. not immediately but "at some point" after the current component function is finished, before the component is rendered again.
 
 We can fix the app as follows:
 
@@ -427,13 +427,7 @@ const History = (props) => {
   )
 }
 
-// highlight-start
-const Button = ({ handleClick, text }) => (
-  <button onClick={handleClick}>
-    {text}
-  </button>
-)
-// highlight-end
+const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button> // highlight-line
 
 const App = () => {
   const [left, setLeft] = useState(0)
@@ -454,8 +448,8 @@ const App = () => {
     <div>
       {left}
       // highlight-start
-      <Button handleClick={handleLeftClick} text='left' />
-      <Button handleClick={handleRightClick} text='right' />
+      <Button onClick={handleLeftClick} text='left' />
+      <Button onClick={handleRightClick} text='right' />
       // highlight-end
       {right}
       <History allClicks={allClicks} />
@@ -497,11 +491,7 @@ don't write more code but rather find and fix the problem **immediately**. There
 Old-school, print-based debugging is always a good idea. If the component
 
 ```js
-const Button = ({ handleClick, text }) => (
-  <button onClick={handleClick}>
-    {text}
-  </button>
-)
+const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
 ```
 
 is not working as intended, it's useful to start printing its variables out to the console. In order to do this effectively, we must transform our function into the less compact form and receive the entire props object without destructuring it immediately:
@@ -509,9 +499,9 @@ is not working as intended, it's useful to start printing its variables out to t
 ```js
 const Button = (props) => { 
   console.log(props) // highlight-line
-  const { handleClick, text } = props
+  const { onClick, text } = props
   return (
-    <button onClick={handleClick}>
+    <button onClick={onClick}>
       {text}
     </button>
   )
@@ -575,6 +565,8 @@ Dev tools show the state of hooks in the order of their definition:
 ![state of hooks in react dev tools](../../images/1/11ea.png)
 
 The first <i>State</i> contains the value of the <i>left</i> state, the next contains the value of the <i>right</i> state and the last contains the value of the <i>allClicks</i> state.
+
+You can also learn about debugging JavaScript in Chrome, for example, with the [Chrome DevTools guide video](https://developer.chrome.com/docs/devtools/javascript).
 
 ### Rules of Hooks
 
@@ -733,7 +725,7 @@ const App = () => {
 }
 ```
 
-The _handleClick_ variable is now assigned to a reference to the function. The reference is passed to the button as the <i>onClick</i> attribute:
+The _handleClick_ variable, which references the function definition, is passed to the button as the <i>onClick</i> attribute:
 
 ```js
 <button onClick={handleClick}>button</button>
@@ -798,7 +790,7 @@ The event handler is now set to a function call:
 <button onClick={hello()}>button</button>
 ```
 
-Earlier on we stated that an event handler may not be a call to a function and that it has to be a function or a reference to a function. Why then does a function call work in this case?
+Earlier, we stated that an event handler may not be a function call; rather, it has to either be a function definition or a reference to one. Why then does a function call work in this case?
 
 When the component is rendered, the following function gets executed:
 
@@ -1030,13 +1022,13 @@ Let's extract the button into its own component:
 
 ```js
 const Button = (props) => (
-  <button onClick={props.handleClick}>
+  <button onClick={props.onClick}>
     {props.text}
   </button>
 )
 ```
 
-The component gets the event handler function from the _handleClick_ prop, and the text of the button from the _text_ prop. Lets use the new component:
+The component gets the event handler function from the _onClick_ prop, and the text of the button from the _text_ prop. Lets use the new component:
 
 ```js
 const App = (props) => {
@@ -1044,9 +1036,9 @@ const App = (props) => {
   return (
     <div>
       {value}
-      <Button handleClick={() => setToValue(1000)} text="thousand" /> // highlight-line
-      <Button handleClick={() => setToValue(0)} text="reset" /> // highlight-line
-      <Button handleClick={() => setToValue(value + 1)} text="increment" /> // highlight-line
+      <Button onClick={() => setToValue(1000)} text="thousand" /> // highlight-line
+      <Button onClick={() => setToValue(0)} text="reset" /> // highlight-line
+      <Button onClick={() => setToValue(value + 1)} text="increment" /> // highlight-line
     </div>
   )
 }
@@ -1054,7 +1046,7 @@ const App = (props) => {
 
 Using the <i>Button</i> component is simple, although we have to make sure that we use the correct attribute names when passing props to the component.
 
-![using correct attribute names code screenshot](../../images/1/12e.png)
+![using correct attribute names code screenshot](../../images/1/12f.png)
 
 ### Do Not Define Components Within Components
 
@@ -1065,7 +1057,7 @@ We will change the application by defining a new component inside of the <i>App<
 ```js
 // This is the right place to define a component
 const Button = (props) => (
-  <button onClick={props.handleClick}>
+  <button onClick={props.onClick}>
     {props.text}
   </button>
 )
@@ -1083,16 +1075,16 @@ const App = () => {
 
   return (
     <div>
-      <Display value={value} />
-      <Button handleClick={() => setToValue(1000)} text="thousand" />
-      <Button handleClick={() => setToValue(0)} text="reset" />
-      <Button handleClick={() => setToValue(value + 1)} text="increment" />
+      <Display value={value} /> // highlight-line
+      <Button onClick={() => setToValue(1000)} text="thousand" />
+      <Button onClick={() => setToValue(0)} text="reset" />
+      <Button onClick={() => setToValue(value + 1)} text="increment" />
     </div>
   )
 }
 ```
 
-The application still appears to work, but **don't implement components like this!** Never define components inside of other components. The method provides no benefits and leads to many unpleasant problems. The biggest problems are because React treats a component defined inside of another component as a new component in every render. This makes it impossible for React to optimize the component.
+The application still appears to work, but **do not implement components like this!** Never define components inside of other components. The method provides no benefits and only leads to problems. One such problem is that React will treat a component defined inside of another component as a "new component" in every render. This makes it impossible for React to optimize the component.
 
 Let's instead move the <i>Display</i> component function to its correct place, which is outside of the <i>App</i> component function:
 
@@ -1100,7 +1092,7 @@ Let's instead move the <i>Display</i> component function to its correct place, w
 const Display = props => <div>{props.value}</div>
 
 const Button = (props) => (
-  <button onClick={props.handleClick}>
+  <button onClick={props.onClick}>
     {props.text}
   </button>
 )
@@ -1116,9 +1108,9 @@ const App = () => {
   return (
     <div>
       <Display value={value} />
-      <Button handleClick={() => setToValue(1000)} text="thousand" />
-      <Button handleClick={() => setToValue(0)} text="reset" />
-      <Button handleClick={() => setToValue(value + 1)} text="increment" />
+      <Button onClick={() => setToValue(1000)} text="thousand" />
+      <Button onClick={() => setToValue(0)} text="reset" />
+      <Button onClick={() => setToValue(value + 1)} text="increment" />
     </div>
   )
 }
@@ -1133,23 +1125,24 @@ You may find the following links useful:
 - The [official React documentation](https://react.dev/learn) is worth checking out at some point, although most of it will become relevant only later on in the course. Also, everything related to class-based components is irrelevant to us;
 - Some courses on [Egghead.io](https://egghead.io) like [Start learning React](https://egghead.io/courses/start-learning-react) are of high quality, and the recently updated [Beginner's Guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) is also relatively good; both courses introduce concepts that will also be introduced later on in this course. **NB** The first one uses class components but the latter uses the new functional ones.
 
-### Web programmers oath
+### Web Programmer's Oath
 
-Programming is hard, that is why I will use all the possible means to make it easier
+Programming is hard. That is why, as a developer, I will use all possible means to make it easier.
 
-- I will have my browser developer console open all the time
-- I progress with small steps
-- I will write lots of _console.log_ statements to make sure I understand how the code behaves and to help pinpointing problems
-- If my code does not work, I will not write more code. Instead I start deleting the code until it works or just return to a state when everything was still working
-- When I ask for help in the course Discord channel or elsewhere I formulate my questions properly, see [here](http://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord) how to ask for help
+- I will have my browser's developer console open at all times.
+- I will progress in small steps, making sure that my code is working at each step.
+- I will write many _console.log_ statements to make sure I understand how the code behaves and to help pinpointing problems.
+- If my code does not work, I will not write more code. Instead, I will either start deleting the code until it works or return to a state where my program was working.
+- When I ask for help in the course Discord channel or elsewhere, I will formulate my questions properly. See [this section](http://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord) to learn how to ask for help.
 
 ### Utilization of Large language models
 
 Large language models such as [ChatGPT](https://chat.openai.com/auth/login), [Claude](https://claude.ai/) and [GitHub Copilot](https://github.com/features/copilot) have proven to be very useful in software development.
 
-Personally, I mainly use Copilot, which integrates seamlessly with VS Code thanks to the [plugin](https://visualstudio.microsoft.com/github-copilot/).
+Personally, I mainly use GitHub Copilot, which is now [natively integrated into Visual Studio Code](https://code.visualstudio.com/docs/copilot/overview)
+As a reminder, if you're a university student, you can access Copilot Pro for free through the [GitHub Student Developer Pack](https://education.github.com/pack).
 
-Copilot is useful in a wide variety of scenarios. Copilot can be asked to generate code for an open file by describing the desired functionality in text:
+Copilot is useful in a wide variety of scenarios. For example, Copilot can be asked to generate code for an open file by describing the desired functionality in text:
 
 ![copilot input on vscode](../../images/1/gpt1.png)
 
@@ -1163,35 +1156,35 @@ An event handler may also be generated. By writing the first line of the functio
 
 ![copilot´s code suggestion](../../images/1/gpt3.png)
 
-In Copilot's chat window, it is possible to ask for an explanation of the function of the painted code area:
+In Copilot's chat window, it is possible to ask for an explanation of the function of the selected code area:
 
 ![copilot explaining how the selected code works in the chat window](../../images/1/gpt4.png)
 
-Copilot is also useful in error situations, by copying the error message into Copilot's chat, you will get an explanation of the problem and a suggested fix:
+Copilot is also useful for debugging. If you copy an error message into Copilot's chat, you will get an explanation of the problem and a suggested fix:
 
 ![copilot explaining the error and suggesting a fix](../../images/1/gpt5.png)
 
-Copilot's chat also enables the creation of larger set of functionality
+Copilot's chat also enables the creation of larger set of functionality. For example, the image below shows Copilot creating a login component using the _useState_ hook.
 
 ![copilot creating a login component on request](../../images/1/gpt6.png)
 
-The degree of usefulness of the hints provided by Copilot and other language models varies. Perhaps the biggest problem with language models is [hallucination](https://en.wikipedia.org/wiki/Hallucination_(artificial_intelligence)), they sometimes generate completely convincing-looking answers, which, however, are completely wrong. When programming, of course, the hallucinated code is often caught quickly if the code does not work. More problematic situations are those where the code generated by the language model seems to work, but it contains more difficult to detect bugs or e.g. security vulnerabilities.
+The usefulness of Copilot and other language models in programming varies. The biggest problem with language models is [hallucination](https://en.wikipedia.org/wiki/Hallucination_(artificial_intelligence)). Large language models sometimes generate answers that may seem correct, but are completely wrong. In programming, errors in hallucinated code are often caught quickly when the code fails to run. However, some code generated by a language model may work at first but still have hidden issues, such as logic errors or security vulnerabilities.
 
-Another problem in applying language models to software development is that it is difficult for language models to "understand" larger projects, and e.g. to generate functionality that would require changes to several files. Language models are also currently unable to generalize code, i.e. if the code has, for example, existing functions or components that the language model could use with minor changes for the requested functionality, the language model will not bend to this. The result of this can be that the code base deteriorates, as the language models generate a lot of repetition in the code, see more e.g. [here](https://visualstudiomagazine.com/articles/2024/01/25/copilot-research.aspx).
+Another problem in applying language models to software development is that it is difficult for language models to "understand" larger projects. One major limitation of language models is that they are unable to implement changes across several files. Language models are also currently unable to generalize code. For example, if the programmer requests for new functionality that can be implemented with existing functions or components (even with minor adjustments), the language model may fail to use them. This deteriorates the code base quality because the language models generate duplicate functions and components. For more information about this, read [this article](https://visualstudiomagazine.com/articles/2024/01/25/copilot-research.aspx).
 
-When using language models, the responsibility always stays with the programmer.
+If you choose to use language models when programming, remember that its output is your responsibility.
 
-The rapid development of language models puts the student of programming in a challenging position: is it worth and is it even necessary to learn programming in a detailed level, when you can get almost everything ready-made from language models?
+The rapid development of language models puts programming students in a challenging position. Is it worth, or even necessary, to learn programming to a detailed level when you can get almost everything ready-made from language models?
 
 At this point, it is worth remembering the old wisdom of  [Brian Kerningham](https://en.wikipedia.org/wiki/Brian_Kernighan), co-author of *The C Programming Language*:
 
 ![Everyone knows that debugging is twice as hard as writing a program in the first place. So if you're as clever as you can be when you write it, how will you ever debug it? ― Brian Kernighan](../../images/1/kerningham.png)
 
-In other words, since debugging is twice as difficult as programming, it is not worth programming such code that you can only barely understand. How can debugging be even possible in a situation where programming is outsourced to a language model and the software developer does not understand the debugged code at all?
+In other words, since debugging is twice as difficult as programming, it is not worth creating code that you barely understand. How can debugging even be possible when the software developer does not understand the debugged code because they outsourced programming to a language model?
 
-So far, the development of language models and artificial intelligence is still at the stage where they are not self-sufficient, and the most difficult problems are left for humans to solve. Because of this, even novice software developers must learn to program really well just in case. It may be that, despite the development of language models, even more in-depth knowledge is needed. Artificial intelligence does the easy things, but a human is needed to sort out the most complicated messes caused by AI. GitHub Copilot is a very well-named product, it's Copilot, a second pilot who helps the main pilot in an aircraft. The programmer is still the main pilot, the captain, and bears the ultimate responsibility.
+So far, the development of language models and artificial intelligence is still at the stage where they are not self-sufficient, and the most difficult problems are left for humans to solve. Because of this, even novice software developers must learn to program really well just in case. It may be that, despite the development of language models, even more in-depth knowledge is needed. Artificial intelligence does the easy things, but a human is needed to sort out the most complicated messes caused by AI. GitHub Copilot is a very well-named product because it's a Copilot; a second pilot who helps the main pilot in an aircraft. The programmer is still the main pilot, the captain, and the one who ultimately bears the responsibility.
 
-It may be in your own interest that you turn off Copilot by default when you do this course and rely on it only in a real emergency.
+Throughout this course, it may be in your own interest that you turn off Copilot by default and only rely on it in a real emergency.
 
 </div>
 
@@ -1230,7 +1223,6 @@ Note that your application needs to work only during a single browser session. O
 It is advisable to use the same structure that is used in the material and previous exercise. File <i>main.jsx</i> is as follows:
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App'
@@ -1261,7 +1253,7 @@ export default App
 
 <h4>1.7: unicafe step 2</h4>
 
-Expand your application so that it shows more statistics about the gathered feedback: the total number of collected feedback, the average score (good: 1, neutral: 0, bad: -1) and the percentage of positive feedback.
+Expand your application so that it shows more statistics about the gathered feedback: the total number of collected feedback, the average score (the feedback values are: good 1, neutral 0, bad -1) and the percentage of positive feedback.
 
 ![average and percentage positive screenshot feedback](../../images/1/14e.png)
 
@@ -1394,9 +1386,9 @@ Expand your application so that you can vote for the displayed anecdote.
 You can create a copy of an object like this:
 
 ```js
-const points = { 0: 1, 1: 3, 2: 4, 3: 2 }
+const votes = { 0: 1, 1: 3, 2: 4, 3: 2 }
 
-const copy = { ...points }
+const copy = { ...votes }
 // increment the property 2 value by one
 copy[2] += 1     
 ```
@@ -1404,9 +1396,9 @@ copy[2] += 1
 OR a copy of an array like this:
 
 ```js
-const points = [1, 4, 6, 3]
+const votes = [1, 4, 6, 3]
 
-const copy = [...points]
+const copy = [...votes]
 // increment the value in position 2 by one
 copy[2] += 1     
 ```

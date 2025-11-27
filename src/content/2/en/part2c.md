@@ -35,21 +35,13 @@ Create a file named <i>db.json</i> in the root directory of the previous <i>note
 }
 ```
 
-You can [install](https://github.com/typicode/json-server#getting-started) a JSON server globally on your machine using the command _npm install -g json-server_. A global installation requires administrative privileges.
-
-After installing run the following command to run the json-server. The <i>json-server</i> starts running on port 3000 by default; we will now define an alternate port 3001, for the json-server. The --watch option automatically looks for any saved changes to db.json
-  
-```js
-json-server --port 3001 --watch db.json
-```
-
-However, a global installation is not necessary. From the root directory of your app, we can run the <i>json-server</i> using the command _npx_:
+You can start the JSON Server without a separate installation by running the following _npx_ command in the root directory of the application:
 
 ```js
-npx json-server --port 3001 --watch db.json
+npx json-server --port 3001 db.json
 ```
 
-Let's navigate to the address <http://localhost:3001/notes> in the browser. We can see that <i>json-server</i> serves the notes we previously wrote to the file in JSON format:
+The JSON Server starts running on port 3000 by default, but we will now define an alternate port 3001. Let's navigate to the address <http://localhost:3001/notes> in the browser. We can see that JSON Server serves the notes we previously wrote to the file in JSON format:
 
 ![notes on json format in the browser at localhost:3001/notes](../../images/2/14new.png)
 
@@ -137,35 +129,37 @@ Let's get back to the topic of fetching data from the server.
 
 We could use the previously mentioned promise-based function [fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch) to pull the data from the server. Fetch is a great tool. It is standardized and supported by all modern browsers (excluding IE).
 
-That being said, we will be using the [axios](https://github.com/axios/axios) library instead for communication between the browser and server. It functions like fetch but is somewhat more pleasant to use. Another good reason to use axios is our getting familiar with adding external libraries, so-called <i>npm packages</i>, to React projects.
+That being said, we will be using the [axios](https://github.com/axios/axios) library instead for communication between the browser and server. It functions like fetch but is somewhat more pleasant to use. Another good reason to use Axios is that it helps us get familiar with adding external libraries, or <i>npm packages</i>, to React projects.
 
 Nowadays, practically all JavaScript projects are defined using the node package manager, aka [npm](https://docs.npmjs.com/about-npm). The projects created using Vite also follow the npm format. A clear indicator that a project uses npm is the <i>package.json</i> file located at the root of the project:
 
 ```json
 {
-  "name": "notes-frontend",
+  "name": "part2-notes-frontend",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@types/react": "^18.2.15",
-    "@types/react-dom": "^18.2.7",
-    "@vitejs/plugin-react": "^4.0.3",
-    "eslint": "^8.45.0",
-    "eslint-plugin-react": "^7.32.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.3",
-    "vite": "^4.4.5"
+    "@eslint/js": "^9.17.0",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.17.0",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "globals": "^15.14.0",
+    "vite": "^6.0.5"
   }
 }
 ```
@@ -184,20 +178,20 @@ Axios is now included among the other dependencies:
 
 ```json
 {
-  "name": "notes-frontend",
+  "name": "part2-notes-frontend",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
-    "axios": "^1.4.0", // highlight-line
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "axios": "^1.7.9", // highlight-line
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   // ...
 }
@@ -219,9 +213,9 @@ and making a small addition to the <i>scripts</i> part of the <i>package.json</i
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint .",
     "preview": "vite preview",
-    "server": "json-server -p3001 --watch db.json" // highlight-line
+    "server": "json-server -p 3001 db.json" // highlight-line
   },
 }
 ```
@@ -259,7 +253,7 @@ Now we are ready to use Axios. Going forward, json-server is assumed to be runni
 
 NB: To run json-server and your react app simultaneously, you may need to use two terminal windows. One to keep json-server running and the other to run our React application.
 
-The library can be brought into use the same way other libraries, e.g. React, are, i.e., by using an appropriate <em>import</em> statement.
+The library can be brought into use the same way other libraries, i.e., by using an appropriate <em>import</em> statement.
 
 Add the following to the file <i>main.jsx</i>:
 
@@ -285,9 +279,11 @@ The documentation on Mozilla's site states the following about promises:
 
 In other words, a promise is an object that represents an asynchronous operation. A promise can have three distinct states:
 
-- The promise is <i>pending</i>: It means that the final value (one of the following two) is not available yet.
-- The promise is <i>fulfilled</i>: It means that the operation has been completed and the final value is available, which generally is a successful operation. This state is sometimes also called <i>resolved</i>.
+- The promise is <i>pending</i>: It means that the asynchronous operation corresponding to the promise has not yet finished and the final value is not available yet.
+- The promise is <i>fulfilled</i>: It means that the operation has been completed and the final value is available, which generally is a successful operation.
 - The promise is <i>rejected</i>: It means that an error prevented the final value from being determined, which generally represents a failed operation.
+
+There are many details related to promises, but understanding these three states is sufficient for us for now. If you want, you can read more about promises in [Mozilla's documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise).
 
 The first promise in our example is <i>fulfilled</i>, representing a successful _axios.get('http://localhost:3001/notes')_ request. The second one, however, is <i>rejected</i>, and the console tells us the reason. It looks like we were trying to make an HTTP GET request to a non-existent address.
 
@@ -402,12 +398,12 @@ We have also added a few helpful prints, which clarify the progression of the ex
 
 This is printed to the console:
 
-<pre>
+```
 render 0 notes
 effect
 promise fulfilled
 render 3 notes
-</pre>
+```
 
 First, the body of the function defining the component is executed and the component is rendered for the first time. At this point <i>render 0 notes</i> is printed, meaning data hasn't been fetched from the server yet.
 
@@ -495,7 +491,7 @@ useEffect(() => {
 }, [])
 ```
 
-A reference to an event handler function is assigned to the variable <em>eventHandler</em>. The promise returned by the <em>get</em> method of Axios is stored in the variable <em>promise</em>. The registration of the callback happens by giving the <em>eventHandler</em> variable, referring to the event-handler function, as a parameter to the <em>then</em> method of the promise. It isn't usually necessary to assign functions and promises to variables, and a more compact way of representing things, as seen below, is sufficient.
+A reference to an event handler function is assigned to the variable <em>eventHandler</em>. The promise returned by the <em>get</em> method of Axios is stored in the variable <em>promise</em>. The registration of the callback happens by giving the <em>eventHandler</em> variable, referring to the event-handler function, as an argument to the <em>then</em> method of the promise. It isn't usually necessary to assign functions and promises to variables, and a more compact way of representing things, as seen below, is sufficient.
 
 ```js
 useEffect(() => {

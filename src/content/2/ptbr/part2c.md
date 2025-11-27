@@ -400,12 +400,12 @@ Também adicionamos algumas impressões úteis no console, que esclarecem a prog
 
 Isto é impresso no console:
 
-<pre>
+```
 render (renderiza) 0 notes (notas)
 effect (efeito)
 promise fulfilled (promessa resolvida)
 render (renderiza) 3 notes (notas)
-</pre>
+```
 
 Assim, o corpo da função que define o componente é executado e o componente é renderizado pela primeira vez. Neste ponto, <i>render (renderiza) 0 notes (notas)</i> é impresso, o que significa que os dados ainda não foram buscados no servidor.
 

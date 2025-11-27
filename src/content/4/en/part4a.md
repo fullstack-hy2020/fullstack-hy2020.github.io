@@ -11,27 +11,27 @@ Let's continue our work on the backend of the notes application we started in [p
 
 ### Project structure
 
-**Note**: this course material was written with version v20.11.0 of Node.js. Please make sure that your version of Node is at least as new as the version used in the material (you can check the version by running _node -v_ in the command line).
+**Note**: this course material was written with version v22.3.0 of Node.js. Please make sure that your version of Node is at least as new as the version used in the material (you can check the version by running _node -v_ in the command line).
 
 Before we move into the topic of testing, we will modify the structure of our project to adhere to Node.js best practices.
 
 Once we make the changes to the directory structure of our project, we will end up with the following structure:
 
 ```bash
-├── index.js
-├── app.js
-├── dist
-│   └── ...
 ├── controllers
 │   └── notes.js
+├── dist
+│   └── ...
 ├── models
 │   └── note.js
-├── package-lock.json
-├── package.json
 ├── utils
 │   ├── config.js
 │   ├── logger.js
 │   └── middleware.js  
+├── app.js
+├── index.js
+├── package-lock.json
+├── package.json
 ```
 
 So far we have been using <i>console.log</i> and <i>console.error</i> to print different information from the code.
@@ -47,9 +47,7 @@ const error = (...params) => {
   console.error(...params)
 }
 
-module.exports = {
-  info, error
-}
+module.exports = { info, error }
 ```
 
 The logger has two functions, __info__ for printing normal log messages, and __error__ for all error messages. 
@@ -64,10 +62,7 @@ require('dotenv').config()
 const PORT = process.env.PORT
 const MONGODB_URI = process.env.MONGODB_URI
 
-module.exports = {
-  MONGODB_URI,
-  PORT
-}
+module.exports = { MONGODB_URI, PORT }
 ```
 
 The other parts of the application can access the environment variables by importing the configuration module:
@@ -77,22 +72,6 @@ const config = require('./utils/config')
 
 logger.info(`Server running on port ${config.PORT}`)
 ```
-
-The contents of the <i>index.js</i> file used for starting the application gets simplified as follows:
-
-```js
-const app = require('./app') // the actual Express application
-const config = require('./utils/config')
-const logger = require('./utils/logger')
-
-app.listen(config.PORT, () => {
-  logger.info(`Server running on port ${config.PORT}`)
-})
-```
-
-The <i>index.js</i> file only imports the actual application from the <i>app.js</i> file and then starts the application. The function _info_ of the logger-module is used for the console printout telling that the application is running.
-
-Now the Express app and the code taking care of the web server are separated from each other following the [best](https://dev.to/nermineslimane/always-separate-app-and-server-files--1nc7) practices. One of the advantages of this method is that the application can now be tested at the level of HTTP API calls without actually making calls via HTTP over the network, this makes the execution of tests faster.
 
 The route handlers have also been moved into a dedicated module. The event handlers of routes are commonly referred to as <i>controllers</i>, and for this reason we have created a new <i>controllers</i> directory. All of the routes related to notes are now in the <i>notes.js</i> module under the <i>controllers</i> directory.
 
@@ -144,16 +123,20 @@ notesRouter.delete('/:id', (request, response, next) => {
 })
 
 notesRouter.put('/:id', (request, response, next) => {
-  const body = request.body
+  const { content, important } = request.body
 
-  const note = {
-    content: body.content,
-    important: body.important,
-  }
+  Note.findById(request.params.id)
+    .then(note => {
+      if (!note) {
+        return response.status(404).end()
+      }
 
-  Note.findByIdAndUpdate(request.params.id, note, { new: true })
-    .then(updatedNote => {
-      response.json(updatedNote)
+      note.content = content
+      note.important = important
+
+      return note.save().then((updatedNote) => {
+        response.json(updatedNote)
+      })
     })
     .catch(error => next(error))
 })
@@ -204,31 +187,29 @@ app.use('/api/notes', notesRouter)
 
 The router we defined earlier is used <i>if</i> the URL of the request starts with <i>/api/notes</i>. For this reason, the notesRouter object must only define the relative parts of the routes, i.e. the empty path <i>/</i> or just the parameter <i>/:id</i>.
 
-After making these changes, our <i>app.js</i> file looks like this:
+A file defining the application, <i>app.js</i>, has been created in the root of the repository:
 
 ```js
-const config = require('./utils/config')
 const express = require('express')
-const app = express()
-const cors = require('cors')
-const notesRouter = require('./controllers/notes')
-const middleware = require('./utils/middleware')
-const logger = require('./utils/logger')
 const mongoose = require('mongoose')
+const config = require('./utils/config')
+const logger = require('./utils/logger')
+const middleware = require('./utils/middleware')
+const notesRouter = require('./controllers/notes')
 
-mongoose.set('strictQuery', false)
+const app = express()
 
 logger.info('connecting to', config.MONGODB_URI)
 
-mongoose.connect(config.MONGODB_URI)
+mongoose
+  .connect(config.MONGODB_URI, { family: 4 })
   .then(() => {
     logger.info('connected to MongoDB')
   })
   .catch((error) => {
-    logger.error('error connecting to MongoDB:', error.message)
+    logger.error('error connection to MongoDB:', error.message)
   })
 
-app.use(cors())
 app.use(express.static('dist'))
 app.use(express.json())
 app.use(middleware.requestLogger)
@@ -304,23 +285,39 @@ noteSchema.set('toJSON', {
 module.exports = mongoose.model('Note', noteSchema)
 ```
 
+The contents of the <i>index.js</i> file used for starting the application gets simplified as follows:
+
+```js
+const app = require('./app') // the actual Express application
+const config = require('./utils/config')
+const logger = require('./utils/logger')
+
+app.listen(config.PORT, () => {
+  logger.info(`Server running on port ${config.PORT}`)
+})
+```
+
+The <i>index.js</i> file only imports the actual application from the <i>app.js</i> file and then starts the application. The function _info_ of the logger-module is used for the console printout telling that the application is running.
+
+Now the Express app and the code taking care of the web server are separated from each other following the [best](https://dev.to/nermineslimane/always-separate-app-and-server-files--1nc7) practices. One of the advantages of this method is that the application can now be tested at the level of HTTP API calls without actually making calls via HTTP over the network, this makes the execution of tests faster.
+
 To recap, the directory structure looks like this after the changes have been made:
 
 ```bash
-├── index.js
-├── app.js
-├── dist
-│   └── ...
 ├── controllers
 │   └── notes.js
+├── dist
+│   └── ...
 ├── models
 │   └── note.js
-├── package-lock.json
-├── package.json
 ├── utils
 │   ├── config.js
 │   ├── logger.js
 │   └── middleware.js  
+├── app.js
+├── index.js
+├── package-lock.json
+├── package.json
 ```
 
 For smaller applications, the structure does not matter that much. Once the application starts to grow in size, you are going to have to establish some kind of structure and separate the different responsibilities of the application into separate modules. This will make developing the application much easier.
@@ -344,11 +341,7 @@ const error = (...params) => {
   console.error(...params)
 }
 
-// highlight-start
-module.exports = {
-  info, error
-}
-// highlight-end
+module.exports = { info, error } // highlight-line
 ```
 
 The file exports <i>an object</i> that has two fields, both of which are functions. The functions can be used in two different ways. The first option is to require the whole object and refer to functions through the object using the dot notation:
@@ -407,7 +400,7 @@ The nature of VS Code bleeding into how you write your code is probably not idea
 
 ### Exercises 4.1.-4.2.
 
-**Note**: this course material was written with version v20.11.0 of Node.js. Please make sure that your version of Node is at least as new as the version used in the material (you can check the version by running _node -v_ in the command line).
+**Note**: this course material was written with version v22.3.0 of Node.js. Please make sure that your version of Node is at least as new as the version used in the material (you can check the version by running _node -v_ in the command line).
 
 In the exercises for this part, we will be building a <i>blog list application</i>, that allows users to save information about interesting blogs they have stumbled across on the internet. For each listed blog we will save the author, title, URL, and amount of upvotes from users of the application.
 
@@ -417,41 +410,36 @@ Let's imagine a situation, where you receive an email that contains the followin
 
 ```js
 const express = require('express')
-const app = express()
-const cors = require('cors')
 const mongoose = require('mongoose')
 
-const blogSchema = new mongoose.Schema({
+const app = express()
+
+const blogSchema = mongoose.Schema({
   title: String,
   author: String,
   url: String,
-  likes: Number
+  likes: Number,
 })
 
 const Blog = mongoose.model('Blog', blogSchema)
 
 const mongoUrl = 'mongodb://localhost/bloglist'
-mongoose.connect(mongoUrl)
+mongoose.connect(mongoUrl, { family: 4 })
 
-app.use(cors())
 app.use(express.json())
 
 app.get('/api/blogs', (request, response) => {
-  Blog
-    .find({})
-    .then(blogs => {
-      response.json(blogs)
-    })
+  Blog.find({}).then((blogs) => {
+    response.json(blogs)
+  })
 })
 
 app.post('/api/blogs', (request, response) => {
   const blog = new Blog(request.body)
 
-  blog
-    .save()
-    .then(result => {
-      response.status(201).json(result)
-    })
+  blog.save().then((result) => {
+    response.status(201).json(result)
+  })
 })
 
 const PORT = 3003
@@ -460,7 +448,7 @@ app.listen(PORT, () => {
 })
 ```
 
-Turn the application into a functioning <i>npm</i> project. To keep your development productive, configure the application to be executed with <i>nodemon</i>. You can create a new database for your application with MongoDB Atlas, or use the same database from the previous part's exercises.
+Turn the application into a functioning <i>npm</i> project. To keep your development productive, configure the application to be executed with <i>node --watch</i>. You can create a new database for your application with MongoDB Atlas, or use the same database from the previous part's exercises.
 
 Verify that it is possible to add blogs to the list with Postman or the VS Code REST client and that the application returns the added blogs at the correct endpoint.
 
@@ -516,20 +504,16 @@ Nowadays, Node also has a built-in test library [node:test](https://nodejs.org/d
 
 Let's define the <i>npm script _test_</i> for the test execution:
 
-```bash
+```js
 {
-  //...
+  // ...
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",
-    "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
-    "deploy": "fly deploy",
-    "deploy:full": "npm run build:ui && npm run deploy",
-    "logs:prod": "fly logs",
-    "lint": "eslint .",
-    "test": "node --test" // highlight-line
+    "dev": "node --watch index.js",
+    "test": "node --test", // highlight-line
+    "lint": "eslint ."
   },
-  //...
+  // ...
 }
 ```
 
@@ -579,13 +563,13 @@ Individual test cases are defined with the _test_ function. The first argument o
 }
 ```
 
-First, we execute the code to be tested, meaning that we generate a reverse for the string <i>react</i>. Next, we verify the results with the the method [strictEqual](https://nodejs.org/docs/latest/api/assert.html#assertstrictequalactual-expected-message) of the [assert](https://nodejs.org/docs/latest/api/assert.html) library.
+First, we execute the code to be tested, meaning that we generate a reverse for the string <i>react</i>. Next, we verify the results with the method [strictEqual](https://nodejs.org/docs/latest/api/assert.html#assertstrictequalactual-expected-message) of the [assert](https://nodejs.org/docs/latest/api/assert.html) library.
 
 As expected, all of the tests pass:
 
 ![terminal output from npm test with all tests passing](../../images/4/1new.png)
 
-The library node:test expects by default that the names of test files contain <i>.test</i>. In this course, we will follow the convention of naming our tests files with the extension <i>.test.js</i>.
+In the course, we follow the convention where test file names end with <i>.test.js</i>, as the <i>node:test</i> testing library automatically executes test files named this way.
 
 Let's break the test:
 
@@ -601,12 +585,11 @@ Running this test results in the following error message:
 
 ![terminal output shows failure from npm test](../../images/4/2new.png)
 
-Let's put the tests for the _average_ function, into a new file called <i>tests/average.test.js</i>.
+Let's add a few tests for the average function as well. Let's create a new file <i>tests/average.test.js</i> and add the following content to it:
 
 ```js
 const { test, describe } = require('node:test')
-
-// ...
+const assert = require('node:assert')
 
 const average = require('../utils/for_testing').average
 
@@ -740,19 +723,9 @@ You are bound to run into problems while writing tests. Remember the things that
 
 #### 4.5*: Helper Functions and Unit Tests, step 3
 
-Define a new _favoriteBlog_ function that receives a list of blogs as a parameter. The function finds out which blog has the most likes. If there are many top favorites, it is enough to return one of them.
+Define a new _favoriteBlog_ function that receives a list of blogs as a parameter. The function returns the blog with the most likes. If there are multiple favorites, it is sufficient for the function to return any one of them.
 
-The value returned by the function could be in the following format:
-
-```js
-{
-  title: "Canonical string reduction",
-  author: "Edsger W. Dijkstra",
-  likes: 12
-}
-```
-
-**NB** when you are comparing objects, the [deepStrictEqual](https://nodejs.org/api/assert.html#assertdeepstrictequalactual-expected-message) method is probably what you want to use, since the [strictEqual](https://nodejs.org/api/assert.html#assertstrictequalactual-expected-message) tries to verify that the two values are the same value, and not just that they contain the same properties. For differences between various assert module functions, you can refer to [this Stack Overflow answer](https://stackoverflow.com/a/73937068/15291501).
+**NB** when you are comparing objects, the [deepStrictEqual](https://nodejs.org/api/assert.html#assertdeepstrictequalactual-expected-message) method is probably what you want to use, as it ensures that the objects have the same attributes. For differences between various assert module functions, you can refer to [this Stack Overflow answer](https://stackoverflow.com/a/73937068/15291501).
 
 Write the tests for this exercise inside of a new <i>describe</i> block. Do the same for the remaining exercises as well.
 
@@ -775,7 +748,7 @@ If there are many top bloggers, then it is enough to return any one of them.
 
 #### 4.7*: Helper Functions and Unit Tests, step 5
 
-Define a function called _mostLikes_ that receives an array of blogs as its parameter. The function returns the author, whose blog posts have the largest amount of likes. The return value also contains the total number of likes that the author has received:
+Define a function called _mostLikes_ that receives an array of blogs as its parameter. The function returns the author whose blog posts have the largest amount of likes. The return value also contains the total number of likes that the author has received:
 
 ```js
 {

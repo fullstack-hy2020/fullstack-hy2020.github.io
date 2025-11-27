@@ -30,7 +30,7 @@ json-server requires all data to be sent in JSON format. What this means in prac
 Let's make the following changes to the event handler responsible for creating a new note:
 
 ```js
-addNote = event => {
+const addNote = event => {
   event.preventDefault()
   const noteObject = {
     content: newNote,
@@ -76,7 +76,7 @@ Also the tab <i>response</i> is useful, it shows what was the data the server re
 The new note is not rendered to the screen yet. This is because we did not update the state of the <i>App</i> component when we created it. Let's fix this:
 
 ```js
-addNote = event => {
+const addNote = event => {
   event.preventDefault()
   const noteObject = {
     content: newNote,
@@ -204,7 +204,7 @@ const toggleImportanceOf = id => {
   const changedNote = { ...note, important: !note.important }
 
   axios.put(url, changedNote).then(response => {
-    setNotes(notes.map(n => n.id === id ? response.data : n))
+    setNotes(notes.map(note => note.id === id ? response.data : note))
   })
 }
 ```
@@ -608,7 +608,7 @@ When we try to change the importance of the hardcoded note, we see the following
 
 The application should be able to handle these types of error situations gracefully. Users won't be able to tell that an error has occurred unless they happen to have their console open. The only way the error can be seen in the application is that clicking the button does not affect the note's importance.
 
-We had [previously](/en/part2/getting_data_from_server#axios-and-promises) mentioned that a promise can be in one of three different states. When an HTTP request fails, the associated promise is <i>rejected</i>. Our current code does not handle this rejection in any way.
+We had [previously](/en/part2/getting_data_from_server#axios-and-promises) mentioned that a promise can be in one of three different states. When an axios HTTP request fails, the associated promise is <i>rejected</i>. Our current code does not handle this rejection in any way.
 
 The rejection of a promise is [handled](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) by providing the <em>then</em> method with a second callback function, which is called in the situation where the promise is rejected.
 
@@ -631,13 +631,13 @@ If the request fails, the event handler registered with the <em>catch</em> metho
 
 The <em>catch</em> method is often utilized by placing it deeper within the promise chain.
 
-When our application makes an HTTP request, we are in fact creating a [promise chain](https://javascript.info/promise-chaining):
+When multiple _.then_ methods are chained together, we are in fact creating a [promise chain](https://javascript.info/promise-chaining):
 
 ```js
 axios
-  .put(`${baseUrl}/${id}`, newObject)
+  .get('http://...')
   .then(response => response.data)
-  .then(changedNote => {
+  .then(data => {
     // ...
   })
 ```
@@ -646,9 +646,9 @@ The <em>catch</em> method can be used to define a handler function at the end of
 
 ```js
 axios
-  .put(`${baseUrl}/${id}`, newObject)
+  .get('http://...')
   .then(response => response.data)
-  .then(changedNote => {
+  .then(data => {
     // ...
   })
   .catch(error => {
@@ -656,7 +656,7 @@ axios
   })
 ```
 
-Let's use this feature and register an error handler in the <i>App</i> component:
+Let's take advantage of this feature. We will place our application's error handler in the <i>App</i> component:
 
 ```js
 const toggleImportanceOf = id => {
@@ -745,7 +745,7 @@ const delete = (id) => {
 
 <h4>2.15*: The Phonebook step 10</h4>
 
-<i>Why is there a star in the exercise? See [here](/en/part0/general_info#taking-the-course) for the explanation.</i>
+<i>Why is there an asterisk in the exercise? See [here](/en/part0/general_info#taking-the-course) for the explanation.</i>
 
 Change the functionality so that if a number is added to an already existing user, the new number will replace the old number. It's recommended to use the HTTP PUT method for updating the phone number.
 

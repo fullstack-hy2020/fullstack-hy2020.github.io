@@ -13,6 +13,8 @@ Frontend näyttää tällä hetkellä olemassaolevat muistiinpanot ja antaa muut
 
 Toteutetaan nyt osa käyttäjienhallinnan edellyttämästä toiminnallisuudesta frontendiin. Aloitetaan käyttäjän kirjautumisesta. Oletetaan vielä tässä osassa, että käyttäjät luodaan suoraan backendiin.
 
+### Kirjautumislomakkeen lisääminen
+
 Sovelluksen yläosaan on nyt lisätty kirjautumislomake:
 
 ![Sovellus koostuu syötekentät username ja password koostuvasta kirjautumislomakkeesta, muistiinpanojen listasta, sekä lomakkeesta joka mahdollistaa uuden muistiinpanon luomisen (ainoastaan yksi syötekenttä muistiinpanon sisällölle). Jokaisen listalla olevan muistiinpanon kohdalla on nappi, jonka avulla muistiinpano voidaan merkata tärkeäksi/epätärkeäksi](../../images/5/1new.png)
@@ -49,30 +51,30 @@ const App = () => {
   return (
     <div>
       <h1>Notes</h1>
-
       <Notification message={errorMessage} />
       
       // highlight-start
       <h2>Login</h2>
-
       <form onSubmit={handleLogin}>
         <div>
-          username
+          <label>
+            username
             <input
-            type="text"
-            value={username}
-            name="Username"
-            onChange={({ target }) => setUsername(target.value)}
-          />
+              type="text"
+              value={username}
+              onChange={({ target }) => setUsername(target.value)}
+            />
+          </label>
         </div>
         <div>
-          password
+          <label>
+            password
             <input
-            type="password"
-            value={password}
-            name="Password"
-            onChange={({ target }) => setPassword(target.value)}
-          />
+              type="password"
+              value={password}
+              onChange={({ target }) => setPassword(target.value)}
+            />
+          </label>
         </div>
         <button type="submit">login</button>
       </form>
@@ -95,6 +97,8 @@ Kirjautumislomakkeen käsittely noudattaa samaa periaatetta kuin [osassa 2](/osa
 ```
 
 Kirjautumislomakkeen lähettämisestä vastaava metodi _handleLogin_ ei tee vielä mitään.
+
+### Logiikan lisääminen kirjautumislomakkeelle
 
 Kirjautuminen tapahtuu tekemällä HTTP POST ‑pyyntö palvelimen osoitteeseen <i>api/login</i>. Eristetään pyynnön tekevä koodi omaan moduuliinsa, tiedostoon <i>services/login.js</i>.
 
@@ -125,19 +129,18 @@ const App = () => {
   const [user, setUser] = useState(null)
 // highlight-end
 
-  const handleLogin = async (event) => {
+  // ...
+
+  const handleLogin = async event => { // highlight-line
     event.preventDefault()
     
     // highlight-start
     try {
-      const user = await loginService.login({
-        username, password,
-      })
-
+      const user = await loginService.login({ username, password })
       setUser(user)
       setUsername('')
       setPassword('')
-    } catch (exception) {
+    } catch {
       setErrorMessage('wrong credentials')
       setTimeout(() => {
         setErrorMessage(null)
@@ -154,7 +157,9 @@ Kirjautumisen onnistuessa nollataan kirjautumislomakkeen kentät <i>ja</i> talle
 
 Jos kirjautuminen epäonnistuu, eli funktion _loginService.login_ suoritus aiheuttaa poikkeuksen, ilmoitetaan siitä käyttäjälle.
 
-Onnistunut kirjautuminen ei nyt näy sovelluksen käyttäjälle mitenkään. Muokataan sovellusta vielä siten, että kirjautumislomake näkyy vain <i>jos käyttäjä ei ole kirjautuneena</i> eli _user === null_ ja uuden muistiinpanon luomislomake vain <i>jos käyttäjä on kirjautuneena</i>, eli <i>user</i> sisältää kirjautuneen käyttäjän tiedot.
+### Kirjautumislomakkeen ehdollinen renderöinti
+
+Onnistunut kirjautuminen ei nyt näy sovelluksen käyttäjälle mitenkään. Muokataan sovellusta vielä siten, että kirjautumislomake näkyy vain <i>jos käyttäjä ei ole kirjautuneena</i> eli _user === null_. Uuden muistiinpanon luomislomake puolestaan näytetään vain <i>jos käyttäjä on kirjautuneena</i>, eli sovelluksen tila <i>user</i> sisältää kirjautuneen käyttäjän tiedot.
 
 Määritellään ensin komponenttiin <i>App</i> apufunktiot lomakkeiden generointia varten:
 
@@ -165,35 +170,34 @@ const App = () => {
   const loginForm = () => (
     <form onSubmit={handleLogin}>
       <div>
-        username
+        <label>
+          username
           <input
-          type="text"
-          value={username}
-          name="Username"
-          onChange={({ target }) => setUsername(target.value)}
-        />
+            type="text"
+            value={username}
+            onChange={({ target }) => setUsername(target.value)}
+          />
+        </label>
       </div>
       <div>
-        password
+        <label>
+          password
           <input
-          type="password"
-          value={password}
-          name="Password"
-          onChange={({ target }) => setPassword(target.value)}
-        />
+            type="password"
+            value={password}
+            onChange={({ target }) => setPassword(target.value)}
+          />
+        </label>
       </div>
       <button type="submit">login</button>
-    </form>      
+    </form>
   )
 
   const noteForm = () => (
     <form onSubmit={addNote}>
-      <input
-        value={newNote}
-        onChange={handleNoteChange}
-      />
+      <input value={newNote} onChange={handleNoteChange} />
       <button type="submit">save</button>
-    </form>  
+    </form>
   )
 
   return (
@@ -219,7 +223,6 @@ const App = () => {
   return (
     <div>
       <h1>Notes</h1>
-
       <Notification message={errorMessage} />
 
       {!user && loginForm()} // highlight-line
@@ -231,13 +234,13 @@ const App = () => {
         </button>
       </div>
       <ul>
-        {notesToShow.map((note, i) => 
+        {notesToShow.map(note => (
           <Note
-            key={i}
-            note={note} 
+            key={note.id}
+            note={note}
             toggleImportance={() => toggleImportanceOf(note.id)}
           />
-        )}
+        ))}
       </ul>
 
       <Footer />
@@ -260,22 +263,21 @@ Tehdään vielä sellainen muutos, että jos käyttäjä on kirjautunut, render�
 return (
   <div>
     <h1>Notes</h1>
-
     <Notification message={errorMessage} />
 
-    {!user && loginForm()} 
-    {user && <div>
-       <p>{user.name} logged in</p>
-         {noteForm()}
+    {!user && loginForm()}
+    // highlight-start
+    {user && (
+      <div>
+        <p>{user.name} logged in</p>
+        {noteForm()}
       </div>
-    } 
+    )}
+    // highlight-end
 
-    <h2>Notes</h2>
-
+    <div>
+      <button onClick={() => setShowAll(!showAll)}>
     // ...
-
-  </div>
-)
 ```
 
 Ratkaisu näyttää hieman rumalta, mutta jätämme sen koodiin toistaiseksi. 
@@ -285,6 +287,43 @@ Sovelluksemme pääkomponentti <i>App</i> on tällä hetkellä jo aivan liian la
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes-frontend/tree/part5-2), branchissa <i>part5-2</i>. 
 
+### Huomio label-elementin käytöstä
+
+Käytimme kirjautumislomakkeen syötekenttien yhteydessä [label](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/label)-elementtiä. Käyttäjänimen vastaanottava <i>input</i>-kenttä on sijoitettu sitä kuvaavan <i>label</i>-elementin sisään:
+
+```js
+<div>
+  <label>
+    username
+    <input
+      type="text"
+      value={username}
+      onChange={({ target }) => setUsername(target.value)}
+    />
+  </label>
+</div>
+// ...
+```
+
+Miksi toteutimme lomakkeen näin? Visuaalisesti samaan lopputulokseen näyttäisi pääsevän myös yksinkertaisemmalla koodilla ilman erillistä <i>label</i>-elementtiä:
+
+```js
+<div>
+  username
+  <input
+    type="text"
+    value={username}
+    onChange={({ target }) => setUsername(target.value)}
+  />
+</div>
+// ...
+```
+
+<i>Label</i>-elementtiä käytetään lomakkeissa kuvaamaan ja nimeämään syötekenttiä. Se määrittelee syötekentälle kuvauksen, jonka avulla käyttäjä voi päätellä, mitä tietoa kuhunkin kenttään tulee syöttää. Kuvaus sidotaan kuhunkin syötekenttään ohjelmallisesti, mikä parantaa lomakkeen saavutettavuutta. 
+
+Näin ruudunlukijaohjelmat osaavat lukea kentän nimen käyttäjälle, kun syötekenttä valitaan, ja <i>labelin</i> tekstiä klikattaessa kohdistus siirtyy automaattisesti oikeaan syötekenttään. <i>Label</i>-elementin käyttö syötekenttien yhteydessä on aina suositeltavaa, vaikka visuaalisesti samaan lopputulokseen olisi mahdollista päästä myös ilman sitä. 
+
+On olemassa [joitakin eri tapoja](https://react.dev/reference/react-dom/components/input#providing-a-label-for-an-input) sitoa tietty <i>label</i> viittaamaan <i>input</i>-elementtiin. Helpoiten se onnistuu sijoittamalla <i>input</i>-elementti sitä vastaavan <i>label</i>-elementin sisään, kuten tässä materiaalissa on tehty. Tällöin kyseinen <i>label</i> kohdistuu automaattisesti oikeaan syötekenttään, eikä muita määrittelyjä tarvita.
 
 ### Muistiinpanojen luominen
 
@@ -331,7 +370,7 @@ const getAll = () => {
 const create = async newObject => {
   // highlight-start
   const config = {
-    headers: { Authorization: token },
+    headers: { Authorization: token }
   }
 // highlight-end
 
@@ -340,7 +379,7 @@ const create = async newObject => {
 }
 
 const update = (id, newObject) => {
-  const request = axios.put(`${ baseUrl } /${id}`, newObject)
+  const request = axios.put(`${ baseUrl }/${id}`, newObject)
   return request.then(response => response.data)
 }
 
@@ -354,16 +393,14 @@ Kirjautumisesta huolehtivaa tapahtumankäsittelijää pitää vielä viilata sen
 ```js
 const handleLogin = async (event) => {
   event.preventDefault()
-  try {
-    const user = await loginService.login({
-      username, password,
-    })
 
+  try {
+    const user = await loginService.login({ username, password })
     noteService.setToken(user.token) // highlight-line
     setUser(user)
     setUsername('')
     setPassword('')
-  } catch (exception) {
+  } catch {
     // ...
   }
 }
@@ -405,9 +442,7 @@ Kirjautumisen yhteyteen tehtävä muutos on seuraava:
   const handleLogin = async (event) => {
     event.preventDefault()
     try {
-      const user = await loginService.login({
-        username, password,
-      })
+      const user = await loginService.login({ username, password })
 
       // highlight-start
       window.localStorage.setItem(
@@ -436,21 +471,20 @@ Effect hookeja voi olla useita, joten tehdään oma hoitamaan kirjautuneen käyt
 
 ```js
 const App = () => {
-  const [notes, setNotes] = useState([]) 
+  const [notes, setNotes] = useState([])
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
   const [errorMessage, setErrorMessage] = useState(null)
-  const [username, setUsername] = useState('') 
-  const [password, setPassword] = useState('') 
-  const [user, setUser] = useState(null) 
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
-    noteService
-      .getAll().then(initialNotes => {
-        setNotes(initialNotes)
-      })
+    noteService.getAll().then(initialNotes => {
+      setNotes(initialNotes)
+    })
   }, [])
-
+  
   // highlight-start
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')

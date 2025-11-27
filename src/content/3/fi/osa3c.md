@@ -77,15 +77,11 @@ Lue nyt linkitetty [johdanto](https://github.com/fullstack-hy2020/misc/blob/mast
 
 MongoDB:n voi asentaa paikallisesti omalle koneelle. Internetistä löytyy kuitenkin myös palveluna toimivia Mongoja, joista tämän hetken paras valinta on [MongoDB Atlas](https://www.mongodb.com/atlas/database).
 
-Kun käyttäjätili on luotu ja kirjauduttu, Aloitetaan valitsemalla kokeiluihin sopiva ilmainen vaihtoehto
-
-![Valitaan 'shared', joka on ilmainen](../../images/3/mongo1.png)
-
-Valitaan sopiva pilvipalvelu ja konesali, ja luodaan klusteri:
+Kun käyttäjätili on luotu ja kirjauduttu, luodaan käyttöömme uusi klusteri etusivulla näkyvästä painikkeesta. Avautuvasta näkymästä valitaan kokeiluihin sopiva ilmainen vaihtoehto sekä pilvipalvelu ja konesali, ja luodaan klusteri:
 
 ![Valitaan esim AWS Stockholm ja klikataan Create cluster](../../images/3/mongo2.png)
 
-Odotetaan että klusteri on valmiina, mihin menee noin useita minuutteja.
+Provideriksi on valittu _AWS_ ja Regioniksi _Stockholm (eu-north-1)_. Huomaa, että jos valitset näihin jotakin muuta, tulee tietokannan yhteysosoitteesi olemaan hieman erilainen kuin tässä esimerkissä. Odotetaan että klusteri on valmiina, mihin menee joitakin minuutteja.
 
 **HUOM:** Älä jatka eteenpäin ennen kun klusteri on valmis!
 
@@ -97,7 +93,7 @@ Seuraavaksi tulee määritellä ne IP-osoitteet, joista tietokantaan pääsee k�
 
 ![Valitaan Network access ‑välilehdeltä 'Allow access from anywhere'](../../images/3/mongo4.png)
 
-Lopulta ollaan valmiina ottamaan tietokantayhteys. Valitaan <i>connect</i> ja sen jälkeisestä näkymästä <i>connect your application</i>:
+Lopulta ollaan valmiina ottamaan tietokantayhteys. Yhteyden muodostamiseksi tarvitaan tietokannan yhteysosoite, joka löytyy esimerkiksi valitsemalla <i>connect</i> ja sen jälkeisestä näkymästä <i>Connect your application</i>-osiosta kohta <i>Drivers</i>:
 
 ![Valitaan Databases-välilehdeltä 'Connect'](../../images/3/mongo5.png)
 
@@ -108,7 +104,7 @@ Näkymä kertoo <i>MongoDB URI:n</i> eli osoitteen, jonka avulla sovelluksemme k
 Osoite näyttää seuraavalta:
 
 ```bash
-mongodb+srv://fullstack:thepasswordishere@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority
+mongodb+srv://fullstack:thepasswordishere@cluster0.a5qfl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 ```
 
 Olemme nyt valmiina kannan käyttöön.
@@ -128,18 +124,17 @@ Ei lisätä MongoDB:tä käsittelevää koodia heti backendin koodin sekaan, vaa
 ```js
 const mongoose = require('mongoose')
 
-if (process.argv.length<3) {
+if (process.argv.length < 3) {
   console.log('give password as argument')
   process.exit(1)
 }
 
 const password = process.argv[2]
 
-const url =
-  `mongodb+srv://fullstack:${password}@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority`
+const url = `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
 
 mongoose.set('strictQuery', false)
-mongoose.connect(url)
+mongoose.connect(url, { family: 4 })
 
 const noteSchema = new mongoose.Schema({
   content: String,
@@ -159,7 +154,15 @@ note.save().then(result => {
 })
 ```
 
-Koodi siis olettaa, että sille annetaan parametrina MongoDB Atlasissa luodulle käyttäjälle määritelty salasana. Komentoriviparametriin se pääsee käsiksi seuraavasti:
+Tietokantaan muodostetaan yhteys komennolla:
+
+```js
+mongoose.connect(url, { family: 4 })
+```
+
+Metodille annetaan ensimmäisenä argumenttina tietokannan URL-osoite ja toisena argumenttina olio, joka määrittelee tarvittavat asetukset. MongoDB Atlas tukee vain IPv4-osoitteita, joten määrittelemme oliolla _{ family: 4 }_, että yhteyteen käytetään aina IPv4-osoitetta.
+
+Kokeilusovellus olettaa, että sille annetaan parametrina MongoDB Atlasissa luodulle käyttäjälle määritelty salasana. Komentoriviparametriin se pääsee käsiksi seuraavasti:
 
 ```js
 const password = process.argv[2]
@@ -178,8 +181,7 @@ Kuten näkymä kertoo, on muistiinpanoa vastaava <i>dokumentti</i> lisätty tiet
 Tuhotaan oletusarvoisen nimen saanut kanta <i>test</i>. Päätetään käyttää tietokannasta nimeä <i>noteApp</i>, joten muutetaan tietokanta-URI muotoon
 
 ```js
-const url =
-  `mongodb+srv://fullstack:${password}@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority`
+const url = `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0`
 ```
 
 Suoritetaan ohjelma uudelleen:
@@ -308,12 +310,12 @@ node mongo.js yourpassword
 
 tulostaa ohjelma tietokannassa olevat numerotiedot:
 
-<pre>
+```
 phonebook:
 Anna 040-1234556
 Arto Vihavainen 045-1232456
 Ada Lovelace 040-1231236
-</pre>
+```
 
 Saat selville ohjelman komentoriviparametrit muuttujasta [process.argv](https://nodejs.org/docs/latest-v8.x/api/process.html#process_process_argv).
 
@@ -357,12 +359,13 @@ Aloitetaan nopean kaavan mukaan, copy-pastetaan tiedostoon <i>index.js</i> Mongo
 ```js
 const mongoose = require('mongoose')
 
+
 // ÄLÄ KOSKAAN TALLETA SALASANOJA GitHubiin!
-const url =
-  `mongodb+srv://fullstack:${password}@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority`
+const password = process.argv[2]
+const url = `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0`
 
 mongoose.set('strictQuery',false)
-mongoose.connect(url)
+mongoose.connect(url, { family: 4 })
 
 const noteSchema = new mongoose.Schema({
   content: String,
@@ -382,7 +385,7 @@ app.get('/api/notes', (request, response) => {
 })
 ```
 
-Voimme todeta selaimella, että backend toimii kaikkien dokumenttien näyttämisen osalta:
+Käynnistetään nyt backend komennolla <code>node --watch index.js yourpassword</code>, jotta voimme varmistua koodin toimivuudesta. Voimme todeta selaimella, että backend toimii kaikkien dokumenttien näyttämisen osalta:
 
 ![Mongoon tallennetut muistiinpanot renderöityvät selaimeen JSON-muodossa](../../images/3/44ea.png)
 
@@ -427,8 +430,8 @@ mongoose.set('strictQuery', false)
 
 const url = process.env.MONGODB_URI // highlight-line
 
-console.log('connecting to', url) // highlight-line
-mongoose.connect(url)
+console.log('connecting to', url)
+mongoose.connect(url, { family: 4 })
   // highlight-start
   .then(result => {
     console.log('connected to MongoDB')
@@ -454,6 +457,36 @@ noteSchema.set('toJSON', {
 module.exports = mongoose.model('Note', noteSchema) // highlight-line
 ```
 
+Koodissa on jonkin verran muutoksia aiempaan. Tietokannan yhteysosoite välitetään sovellukselle nyt MONGODB_URI ympäristömuuttujan kautta, koska sen kovakoodaaminen sovellukseen ei ole järkevää:
+
+```js
+const url = process.env.MONGODB_URI
+```
+
+On useita tapoja määritellä ympäristömuuttujan arvo. Voimme esim. antaa sen ohjelman käynnistyksen yhteydessä seuraavasti:
+
+```bash
+MONGODB_URI="osoite_tahan" npm run dev
+```
+
+Opettelemme pian kehittyneemmän tavan määritellä ympäristömuuttujia.
+
+Yhteyden muodostustavassa on pieni muutos aiempaan:
+
+```js
+mongoose.connect(url, { family: 4 })
+  .then(result => {
+    console.log('connected to MongoDB')
+  })
+  .catch((error) => {
+    console.log('error connecting to MongoDB:', error.message)
+  })
+```
+
+Yhteyden muodostavalle metodille on nyt rekisteröity onnistuneen ja epäonnistuneen yhteydenmuodostuksen käsittelevät funktiot, jotka tulostavat konsoliin tiedon siitä, onnistuiko yhteyden muodostaminen:
+
+![Konsoliin tulostuu virheilmoitus 'error connecting to Mongo, bad auth'](../../images/3/45e.png)
+
 Noden [moduulien](https://nodejs.org/docs/latest-v8.x/api/modules.html) määrittely poikkeaa hiukan osassa 2 määrittelemistämme frontendin käyttämistä [ES6-moduuleista](/osa2/kokoelmien_renderointi_ja_moduulit#refaktorointia-moduulit).
 
 Moduulin ulos näkyvä osa määritellään asettamalla arvo muuttujalle _module.exports_. Asetamme arvoksi modelin <i>Note</i>. Muut moduulin sisällä määritellyt asiat, esim. muuttujat _mongoose_ ja _url_ eivät näy moduulin käyttäjälle.
@@ -466,44 +499,18 @@ const Note = require('./models/note')
 
 Näin muuttuja _Note_ saa arvokseen saman olion, jonka moduuli määrittelee.
 
-Yhteyden muodostustavassa on pieni muutos aiempaan:
+### Ympäristömuuttujien määritteleminen käyttäen dotenv-kirjastoa
 
-```js
-const url = process.env.MONGODB_URI
-
-console.log('connecting to', url)
-
-mongoose.connect(url)
-  .then(result => {
-    console.log('connected to MongoDB')
-  })
-  .catch((error) => {
-    console.log('error connecting to MongoDB:', error.message)
-  })
-```
-
-Tietokannan osoitetta ei kannata kirjoittaa koodiin, joten osoite annetaan sovellukselle ympäristömuuttujan <em>MONGODB_URI</em> välityksellä.
-
-Yhteyden muodostavalle metodille on nyt rekisteröity onnistuneen ja epäonnistuneen yhteydenmuodostuksen käsittelevät funktiot, jotka tulostavat konsoliin tiedon siitä, onnistuiko yhteyden muodostaminen:
-
-![Konsoliin tulostuu virheilmoitus 'error connecting to Mongo, bad auth'](../../images/3/45e.png)
-
-On useita tapoja määritellä ympäristömuuttujan arvo. Voimme esim. antaa sen ohjelman käynnistyksen yhteydessä seuraavasti:
-
-```bash
-MONGODB_URI=osoite_tahan npm run dev
-```
-
-Eräs kehittyneempi tapa on käyttää [dotenv](https://github.com/motdotla/dotenv#readme)-kirjastoa. Asennetaan kirjasto komennolla
+Eräs kehittyneempi tapa ympäristömuuttujien määrittelemiseen on käyttää [dotenv](https://github.com/motdotla/dotenv#readme)-kirjastoa. Asennetaan kirjasto komennolla
 
 ```bash
 npm install dotenv
 ```
 
-Sovelluksen juurihakemistoon tehdään sitten tiedosto nimeltään <i>.env</i>, jonne tarvittavien ympäristömuuttujien arvot määritellään. Tiedosto näyttää seuraavalta:
+Luodaan sitten sovelluksen juurihakemistoon tiedosto nimeltään <i>.env</i>, jonne tarvittavien ympäristömuuttujien arvot määritellään. Tiedosto näyttää seuraavalta:
 
 ```bash
-MONGODB_URI=mongodb+srv://fullstack:thepasswordishere@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority
+MONGODB_URI=mongodb+srv://fullstack:thepasswordishere@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0
 PORT=3001
 ```
 
@@ -517,14 +524,14 @@ Määrittelimme samalla aiemmin kovakoodaamamme sovelluksen käyttämän portin 
 
 dotenvissä määritellyt ympäristömuuttujat otetaan koodissa käyttöön komennolla <em>require('dotenv').config()</em> ja niihin viitataan Nodessa kuten "normaaleihin" ympäristömuuttujiin syntaksilla <em>process.env.MONGODB_URI</em>.
 
-Muutetaan nyt tiedostoa <i>index.js</i> seuraavasti:
+Ladataan ympäristömuuttujat käyttöön heti <i>index.js</i>-tiedoston alussa, jolloin ne tulevat käyttöön koko sovellukselle. Muutetaan nyt tiedostoa <i>index.js</i> seuraavasti:
 
 ```js
 require('dotenv').config() // highlight-line
 const express = require('express')
-const app = express()
 const Note = require('./models/note') // highlight-line
 
+const app = express()
 // ..
 
 const PORT = process.env.PORT // highlight-line
@@ -535,9 +542,9 @@ app.listen(PORT, () => {
 
 On tärkeää, että <i>dotenv</i> otetaan käyttöön ennen modelin <i>note</i> importtaamista. Tällöin varmistutaan siitä, että tiedostossa <i>.env</i> olevat ympäristömuuttujat ovat alustettuja kun moduulin koodia importoidaan.
 
-### Tärkeä huomio Fly.io:n käyttäjille 
+#### Tärkeä huomio ympäristömuuttujien määrittelemisestä Fly.io:ssa ja Renderissä
 
-Koska Fly.io ei hyödynnä gitiä, menee myös .env-tiedosto Fly.io:n palvelimelle, ja ympäristömuuttujien arvo välittyy myös sinne.
+**Fly.io:n käyttäjät:** Koska Fly.io ei hyödynnä gitiä, menee myös .env-tiedosto Fly.io:n palvelimelle, ja ympäristömuuttujien arvo välittyy myös sinne.
 
 [Tietoturvallisempi vaihtoehto](https://community.fly.io/t/clarification-on-environment-variables/6309) on kuitenkin estää tiedoston .env siirtyminen Fly.io:n tekemällä hakemiston juureen tiedosto _.dockerignore_, jolla on sisältö
 
@@ -548,12 +555,10 @@ Koska Fly.io ei hyödynnä gitiä, menee myös .env-tiedosto Fly.io:n palvelimel
 ja asettaa ympäristömuuttujan arvo komennolla:
 
 ```
-fly secrets set MONGODB_URI='mongodb+srv://fullstack:thepasswordishere@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
+fly secrets set MONGODB_URI='mongodb+srv://fullstack:thepasswordishere@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0'
 ```
 
-Koska .env-tiedosto määrittelee myös ympäristömuuttujan PORT arvon, on .env:in ignorointi oikeastaan välttämätöntä jotta sovellus ei yritä käynnistää itseään väärään portiin.
-
-Renderiä käytettäessä tietokannan osoitteen kertova ympäristömuuttuja määritellään dashboardista käsin:
+**Renderin käyttäjät:** Renderiä käytettäessä tietokannan osoitteen kertova ympäristömuuttuja määritellään dashboardista käsin:
 
 ![](../../images/3/render-env.png)
 
@@ -567,7 +572,7 @@ Uuden muistiinpanon luominen tapahtuu seuraavasti:
 app.post('/api/notes', (request, response) => {
   const body = request.body
 
-  if (body.content === undefined) {
+  if (!body.content) {
     return response.status(400).json({ error: 'content missing' })
   }
 
@@ -627,7 +632,7 @@ Full stack ‑ohjelmointi on <i>todella</i> hankalaa, ja sen takia lupaan hyödy
 - etenen pienin askelin
 - käytän koodissa runsaasti _console.log_-komentoja varmistamaan sen, että varmasti ymmärrän jokaisen kirjoittamani koodirivin, sekä etsiessäni koodista mahdollisia bugin aiheuttajia
 - jos koodini ei toimi, en kirjoita enää yhtään lisää koodia, vaan alan poistamaan toiminnan rikkoneita rivejä tai palaan suosiolla tilanteeseen, missä koodi vielä toimi
-- kun kysyn apua kurssin Discord-kanavalla, tai muualla internetissä, muotoilen kysymyksen järkevästi, esim. [täällä](/en/part0/general_info#how-to-ask-help-in-discord) esiteltyyn tapaan
+- kun kysyn apua kurssin Discord-kanavalla, tai muualla internetissä, muotoilen kysymyksen järkevästi, esim. [täällä](/en/part0/general_info#how-to-get-help-in-discord) esiteltyyn tapaan
 
 </div>
 
@@ -688,7 +693,7 @@ Olemattoman muistiinpanon lisäksi koodista löytyy myös toinen virhetilanne, j
 
 Jos teemme näin, tulostuu konsoliin:
 
-<pre>
+```
 Method: GET
 Path:   /api/notes/5a3b7c3c31d61cb9f8a0343
 Body:   {}
@@ -697,7 +702,7 @@ Body:   {}
     at CastError (/Users/mluukkai/opetus/_fullstack/osa3-muisiinpanot/node_modules/mongoose/lib/error/cast.js:27:11)
     at ObjectId.cast (/Users/mluukkai/opetus/_fullstack/osa3-muisiinpanot/node_modules/mongoose/lib/schema/objectid.js:158:13)
     ...
-</pre>
+```
 
 Kun <em>findById</em>-metodi saa argumentikseen väärässä muodossa olevan id:n, se heittää virheen. Tästä seuraa se, että metodin palauttama promise päätyy rejected-tilaan, jonka seurauksena <em>catch</em>-lohkossa määriteltyä funktiota kutsutaan. 
 
@@ -793,7 +798,7 @@ Koska middlewaret suoritetaan siinä järjestyksessä, missä ne on otettu käyt
 Oikeaoppinen järjestys on tämä:
 
 ```js
-app.use(express.static('build'))
+app.use(express.static('dist'))
 app.use(express.json())
 app.use(requestLogger)
 
@@ -833,9 +838,7 @@ app.use(express.json())
 
 ei HTTP-pyynnön mukana oleva data olisi loggerin eikä POST-pyynnön käsittelyn aikana käytettävissä, vaan kentässä _request.body_ olisi tyhjä olio.
 
-Tärkeää on myös ottaa käyttöön olemattomien osoitteiden käsittely viimeisenä.
-
-Myös seuraava järjestys aiheuttaisi ongelman:
+Tärkeää on myös ottaa olemattomat osoitteet käsittelevä middleware käyttöön vasta kaikkien endpointtien määrittelyn jälkeen, juuri ennen virheenkäsittelijää. Seuraava järjestys aiheuttaisi ongelman:
 
 ```js
 const unknownEndpoint = (request, response) => {
@@ -870,30 +873,54 @@ app.delete('/api/notes/:id', (request, response, next) => {
 
 Vastauksena on molemmissa "onnistuneissa" tapauksissa statuskoodi <i>204 No Content</i> eli jos olio poistettiin tai olioa ei ollut mutta <i>id</i> oli periaatteessa oikea. Takaisinkutsun parametrin _result_ perusteella olisi mahdollisuus haarautua ja palauttaa tilanteissa eri statuskoodi, jos sille on tarvetta. Mahdollinen poikkeus siirretään jälleen virheenkäsittelijälle.
 
-Muistiinpanon tärkeyden muuttamisen mahdollistava olemassa olevan muistiinpanon päivitys onnistuu helposti metodilla [findByIdAndUpdate](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate):
+Toteutetaan vielä yksittäisen muistiinpanon muokkaustoiminto, jotta muistiinpanon tärkeyden muuttaminen mahdollistuu. Muistiinpanon muokkaus tapahtuu seuraavasti:
 
 ```js
 app.put('/api/notes/:id', (request, response, next) => {
-  const body = request.body
+  const { content, important } = request.body
 
-  const note = {
-    content: body.content,
-    important: body.important,
-  }
+  Note.findById(request.params.id)
+    .then(note => {
+      if (!note) {
+        return response.status(404).end()
+      }
 
-  Note.findByIdAndUpdate(request.params.id, note, { new: true })
-    .then(updatedNote => {
-      response.json(updatedNote)
+      note.content = content
+      note.important = important
+
+      return note.save().then((updatedNote) => {
+        response.json(updatedNote)
+      })
     })
     .catch(error => next(error))
 })
 ```
 
-Operaatio mahdollistaa myös muistiinpanon sisällön editoinnin.
+Muokattava muistiinpano haetaan ensin tietokannasta metodilla _findById_. Jos kannasta ei löydy oliota annetulla id:llä, muuttujan _note_ arvo on _null_, ja kyselyyn vastataan statuskoodilla <i>404 Not Found</i>.
 
-Huomaa, että metodin <em>findByIdAndUpdate</em> parametrina tulee antaa normaali JavaScript-olio eikä uuden olion luomisessa käytettävä <em>Note</em>-konstruktorifunktiolla luotu olio.
+Jos annettua id:tä vastaava olio löytyy, päivitetään sen _content_- ja _important_-kentät pyynnön mukana tulleella datalla ja tallennetaan muokattu muistiinpano tietokantaan metodilla _save()_. HTTP-pyyntöön vastataan lähettämällä vastauksen mukana päivitetty muistiinpano.
 
-Huomioi operaatioon <em>findByIdAndUpdate</em> liittyen, että oletusarvoisesti tapahtumankäsittelijä saa parametrikseen <em>updatedNote</em> päivitetyn olion [ennen muutosta](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate) olleen tilan. Lisäsimme operaatioon parametrin <code>{ new: true }</code>, jotta saamme muuttuneen olion palautetuksi kutsujalle.
+Eräs huomionarvoinen seikka on se, että koodissa on nyt ns. sisäkkäiset promiset, eli ulomman _.then_-metodin sisällä on määritelty toinen [promise-ketju](https://javascript.info/promise-chaining):
+
+```js
+    .then(note => {
+      if (!note) {
+        return response.status(404).end()
+      }
+
+      note.content = content
+      note.important = important
+
+      // highlight-start
+      return note.save().then((updatedNote) => {
+        response.json(updatedNote)
+      })
+      // highlight-end
+```
+
+Yleensä tällaista ei suositella, koska se voi tehdä koodista vaikealukuista. Tässä tapauksessa ratkaisu kuitenkin toimii, sillä näin voimme varmistua siitä, että _.save()_-metodin jälkeiseen _.then_-lohkoon mennään vain, jos id:tä vastaava muistiinpano on löytynyt kannasta ja _save()_-metodia on kutsuttu. Tutustumme kurssin neljännessä osassa async/await-syntaksiin, joka tarjoaa helpomman ja selkeämmän kirjoitustavan tämänkaltaisiin tilanteisiin.
+
+Mongoose tarjoaa myös metodin [findByIdAndUpdate](https://mongoosejs.com/docs/api/model.html#Model.findByIdAndUpdate()), jonka avulla voi hakea dokumentin <i>id</i>:n perusteella ja päivittää sen yksittäisellä metodikutsulla. Tämä tapa ei kuitenkaan sovellu täysin tarpeisiimme, sillä määrittelemme myöhemmin tässä osassa tietokantaan talletettavalle datalle tiettyjä vaatimuksia, eikä <i>findByIdAndUpdate</i> tue näitä Mongoosen validaatioita täysin. Mongoosen [dokumentaatio](https://mongoosejs.com/docs/documents.html#updating-using-queries) toteaakin, että <i>save()</i>-metodi on lähtökohtaisesti oikea valinta dokumentin päivittämiseen, sillä se tarjoaa täyden validaation.
 
 Backend vaikuttaa toimivan Postmanista ja VS Coden REST Clientistä tehtyjen kokeilujen perusteella. Myös frontend toimii moitteettomasti tietokantaa käyttävän backendin kanssa.
 
@@ -927,7 +954,7 @@ Varmista, että frontend toimii muutosten jälkeen.
 
 #### 3.18*: puhelinluettelo ja tietokanta, step6
 
-Päivitä myös polkujen <i>api/persons/:id</i> ja <i>info</i> käsittely ja varmista niiden toimivuus suoraan selaimella, Postmanilla tai VS Coden REST Clientillä.
+Päivitä myös HTTP GET <i>api/persons/:id</i> ja <i>info</i> -polkujen käsittely ja varmista niiden toimivuus suoraan selaimella, Postmanilla tai VS Coden REST Clientillä.
 
 Selaimella tarkastellen yksittäisen numerotiedon tulisi näyttää seuraavalta:
 

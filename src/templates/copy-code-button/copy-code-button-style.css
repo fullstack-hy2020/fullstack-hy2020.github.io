@@ -24,7 +24,7 @@
   opacity: 1;
 }
 
-.copy-code-button:active{
+.copy-code-button:active {
   opacity: 0;
   color: red;
 }
@@ -42,7 +42,6 @@ pre .copy-code-button {
   right: 0.5rem;
 }
 
-
 code {
-    white-space : pre-wrap !important;
-  }
+  white-space: pre-wrap !important;
+}

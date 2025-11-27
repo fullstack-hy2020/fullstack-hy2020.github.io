@@ -11,22 +11,26 @@ We will now start getting familiar with probably the most important topic of thi
 
 The easiest way to get started by far is by using a tool called [Vite](https://vitejs.dev/).
 
-Let's create an application called <i>part1</i>, navigate to its directory and install the libraries:
+Let's create a new application using the <i>create-vite</i> tool:
 
 ```bash
-# npm 6.x (outdated, but still used by some):
-npm create vite@latest part1 --template react
-
-# npm 7+, extra double-dash is needed:
-npm create vite@latest part1 -- --template react
+npm create vite@latest
 ```
+
+Let's answer the questions presented by the tool as follows:
+
+![create-vite tool selection view, where the project is named part1, the framework is React, the variant is JavaScript, and all other questions are answered with No](../../images/1/1-create-vite.png)
+
+We have now created an application named <i>part1</i>. The tool could have also installed the required dependencies and started the application automatically if we had answered "Yes" to the question "Install with npm and start now?" However, we will perform these steps manually so we can see how they are done.
+
+Next, let's move into the application's directory and install the required libraries:
 
 ```bash
 cd part1
 npm install
 ```
 
-The application is started as follows
+The application is started as follows:
 
 ```bash
 npm run dev
@@ -68,22 +72,6 @@ export default App
 
 The files <i>App.css</i> and <i>index.css</i>, and the directory <i>assets</i> may be deleted as they are not needed in our application right now.
 
-### create-react-app
-
-Instead of Vite you can also use the older generation tool [create-react-app](https://github.com/facebookincubator/create-react-app) in the course to set up the applications. The most visible difference to Vite is the name of the application startup file, which is <i>index.js</i>.
-
-The way to start the application is also different in CRA, it is started with a command
-
-```bash
-npm start
-```
-
-in contrast to Vite's
-
-```bash
-npm run dev 
-```
-
 ### Component
 
 The file <i>App.jsx</i> now defines a [React component](https://react.dev/learn/your-first-component) with the name <i>App</i>. The command on the final line of file <i>main.jsx</i>
@@ -103,7 +91,7 @@ By default, the file <i>index.html</i> doesn't contain any HTML markup that is v
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <title>part1</title>
   </head>
   <body>
     <div id="root"></div>
@@ -241,7 +229,7 @@ const App = () => {
 }
 ```
 
-The compilation is handled by [Babel](https://babeljs.io/repl/). Projects created with *create-react-app* or *vite* are configured to compile automatically. We will learn more about this topic in [part 7](/en/part7) of this course.
+The compilation is handled by [Babel](https://babeljs.io/repl/). Projects created with *Vite* are configured to compile automatically. We will learn more about this topic in [part 7](/en/part7) of this course.
 
 It is also possible to write React as "pure JavaScript" without using JSX. Although, nobody with a sound mind would do so.
 
@@ -303,7 +291,7 @@ const App = () => {
 
 **NB**: <em>export</em> at the bottom is left out in these <i>examples</i>, now and in the future. It is still needed for the code to work
 
-Writing components with React is easy, and by combining components, even a more complex application can be kept fairly maintainable. Indeed, a core philosophy of React is composing applications from many specialized reusable components.
+Writing components with React is easy, and by combining components, an even more complex application can be kept fairly maintainable. Indeed, a core philosophy of React is composing applications from many specialized reusable components.
 
 Another strong convention is the idea of a <i>root component</i> called <i>App</i> at the top of the component tree of the application. Nevertheless, as we will learn in [part 6](/en/part6), there are situations where the component <i>App</i> is not exactly the root, but is wrapped within an appropriate utility component.
 
@@ -381,34 +369,46 @@ Software development is hard. It gets even harder if one is not using all the po
 
 ### Possible error message
 
-Depending on the editor you are using, you may receive the following error message at this point:
+If your project has React version 18 or earlier installed, you may receive the following error message at this point:
 
 ![screenshot of vs code showing eslint error: "name is missing in props validation"](../../images/1/1-vite5.png)
 
-It's not an actual error, but a warning caused by the [ESLint](https://eslint.org/) tool. You can silence the warning [react/prop-types](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md) by adding to the file <i>.eslintrc .cjs</i> the next line
+It's not an actual error, but a warning caused by the [ESLint](https://eslint.org/) tool. You can silence the warning [react/prop-types](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md) by adding to the file <i>eslint.config.js</i> the next line
 
 ```js
-module.exports = {
-   root: true,
-   env: { browser: true, es2020: true },
-   extends: [
-     'eslint:recommended',
-     'plugin:react/recommended',
-     'plugin:react/jsx-runtime',
-     'plugin:react-hooks/recommended',
-   ],
-   ignorePatterns: ['dist', '.eslintrc.cjs'],
-   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
-   settings: { react: { version: '18.2' } },
-   plugins: ['react-refresh'],
-   rules: {
-     'react-refresh/only-export-components': [
-       'warn',
-       { allowConstantExport: true },
-     ],
-     'react/prop-types': 0 // highlight-line
-   },
-}
+export default [
+  { ignores: ['dist'] },
+  {
+    files: ['**/*.{js,jsx}'],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        ecmaFeatures: { jsx: true },
+        sourceType: 'module',
+      },
+    },
+    settings: { react: { version: '18.3' } },
+    plugins: {
+      react,
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
+    },
+    rules: {
+      ...js.configs.recommended.rules,
+      ...react.configs.recommended.rules,
+      ...react.configs['jsx-runtime'].rules,
+      ...reactHooks.configs.recommended.rules,
+      'react/jsx-no-target-blank': 'off',
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true },
+      ],
+      'react/prop-types': 0, // highlight-line
+    },
+  },
+]
 ```
 
 We will get to know ESLint in more detail [in part 3](/en/part3/validation_and_es_lint#lint).

@@ -317,9 +317,9 @@ let query = "SELECT * FROM Users WHERE name = '" + userName + "';"
 <!-- Now let's assume that a malicious user <i>Arto Hellas</i> would define their name as-->
  现在我们假设一个恶意的用户<i>Arto Hellas</i>将他们的名字定义为
 
-<pre>
+```
 Arto Hell-as'; DROP TABLE Users; --
-</pre>
+```
 
 <!-- so that the name would contain a single quote <code>'</code>, which is the beginning- and end-character of a SQL-string. As a result of this, two SQL operations would be executed, the second of which would  destroy the database table <i>Users</i>:-->
  这样名字就包含一个单引号<code>''</code>，这是一个SQL字符串的开始和结束字符。这样做的结果是，两个SQL操作将被执行，其中第二个操作将破坏数据库表<i>Users</i>。

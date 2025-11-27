@@ -15,7 +15,7 @@ Code will conform to contemporary best practices from [part 1](/en/part1) onward
 
 Open the [example application](https://studies.cs.helsinki.fi/exampleapp) in your browser. Sometimes this takes a while.
 
-The course material is done with the Chrome browser.
+The course material was done with and adapted for the Chrome browser.
 
 **The 1st rule of web development**: Always keep the Developer Console open on your web browser. On macOS, open the console by pressing _fn_-_F12_ or _option-cmd-i_ simultaneously. On Windows or Linux, open the console by pressing _Fn_-_F12_ or _ctrl-shift-i_ simultaneously. The console can also be opened via the [context menu](https://en.wikipedia.org/wiki/Menu_key).
 
@@ -274,13 +274,13 @@ xhttp.onreadystatechange = function() {
 }
 ```
 
-The mechanism of invoking event handlers is very common in JavaScript. Event handler functions are called [callback](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function) functions. The application code does not invoke the functions itself, but the runtime environment - the browser, invokes the function at an appropriate time when the <i>event</i> has occurred.
+The mechanism of invoking event handlers is very common in JavaScript. Event handler functions are called [callback](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function) functions. The application code does not invoke the functions itself, but the runtime environment - the browser - invokes the function at an appropriate time when the <i>event</i> has occurred.
 
 ### Document Object Model or DOM
 
 We can think of HTML pages as implicit tree structures.
 
-<pre>
+```
 html
   head
     link
@@ -296,9 +296,9 @@ html
       form
         input
         input
-</pre>
+```
 
-The same treelike structure can be seen on the console tab <i>Elements</i>.
+The same treelike structure can be seen on the console's <i>Elements</i> tab.
 
 ![A screenshot of the Elements tab of the developer console](../../images/0/14e.png)
 
@@ -308,7 +308,7 @@ Document Object Model, or [DOM](https://en.wikipedia.org/wiki/Document_Object_Mo
 
 The JavaScript code introduced in the previous chapter used the DOM-API to add a list of notes to the page.
 
-The following code creates a new node to the variable <em>ul</em>, and adds some child nodes to it:
+The following code creates a new node, assigns it to the variable <em>ul</em>, and adds some child nodes to it:
 
 ```js
 var ul = document.createElement('ul')
@@ -383,7 +383,7 @@ A class selector definition always starts with a period and contains the name of
 
 Classes are [attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class), which can be added to HTML elements.
 
-CSS attributes can be examined on the <i>elements</i> tab of the console:
+CSS attributes can be examined in the <i>Elements</i> tab of the console:
 
 ![Screenshot of the Elements tab on the developer console](../../images/0/17e.png)
 
@@ -434,11 +434,9 @@ It is an [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/P
 
 So, the browser reloads the Notes page. The reload causes three more HTTP requests: fetching the style sheet (main.css), the JavaScript code (main.js), and the raw data of the notes (data.json).
 
-The network tab also shows the data submitted with the form:
+The Network tab also shows the data submitted with the form. You can view the data by first selecting the request name and then checking the Payload tab:
 
-The Form Data dropdown is within the new Payload tab, located to the right of the Headers tab.
-
-![form data dropdown in developer tools](../../images/0/23e.png)
+![form data dropdown in developer tools](../../images/0/23g.png)
 
 The Form tag has attributes <i>action</i> and <i>method</i>, which define that submitting the form is done as an HTTP POST request to the address <i>new\_note</i>.
 

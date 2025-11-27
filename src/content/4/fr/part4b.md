@@ -943,13 +943,13 @@ Nous enregistrons les notes stockées dans le tableau dans la base de données �
 
 La console affiche la sortie suivante:
 
-<pre>
+```
 cleared
 done
 entered test
 saved
 saved
-</pre>
+```
 
 Malgré l'utilisation de la syntaxe async/await, notre solution ne fonctionne pas comme nous l'espérions. L'exécution des tests commence avant que la base de données ne soit initialisée!
 

@@ -165,9 +165,9 @@ The <i>Bearer</i> scheme is suitable for our needs.
 
 In practice, this means that if the token is, for example, the string <i>eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW</i>, the Authorization header will have the value:
 
-<pre>
+```
 Bearer eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW
-</pre>
+```
 
 Creating new notes will change like so (<i>controllers/notes.js</i>):
 
@@ -196,9 +196,13 @@ notesRouter.post('/', async (request, response) => {
   const user = await User.findById(decodedToken.id)
 //highlight-end
 
+  if (!user) {
+    return response.status(400).json({ error: 'UserId missing or not valid' })
+  }
+
   const note = new Note({
     content: body.content,
-    important: body.important === undefined ? false : body.important,
+    important: body.important || false,
     user: user._id
   })
 
@@ -206,7 +210,7 @@ notesRouter.post('/', async (request, response) => {
   user.notes = user.notes.concat(savedNote._id)
   await user.save()
 
-  response.json(savedNote)
+  response.status(201).json(savedNote)
 })
 ```
 
@@ -335,7 +339,7 @@ const errorHandler = (error, request, response, next) => {
 }
 ```
 
-The shorter the expiration time, the more safe the solution is. So if the token gets into the wrong hands or user access to the system needs to be revoked, the token is only usable for a limited amount of time. On the other hand, a short expiration time forces a potential pain to a user, one must login to the system more frequently.
+The shorter the expiration time, the safer the solution is. If the token falls into the wrong hands or user access to the system needs to be revoked, the token is only usable for a limited amount of time. However, a short expiration time is a potential pain point for the user, as it requires them to log in more frequently.
 
 The other solution is to save info about each token to the backend database and to check for each API request if the access rights corresponding to the tokens are still valid. With this scheme, access rights can be revoked at any time. This kind of solution is often called a <i>server-side session</i>.
 
@@ -350,8 +354,6 @@ There have been many changes to the code which have caused a typical problem for
 Usernames, passwords and applications using token authentication must always be used over [HTTPS](https://en.wikipedia.org/wiki/HTTPS). We could use a Node [HTTPS](https://nodejs.org/docs/latest-v18.x/api/https.html) server in our application instead of the [HTTP](https://nodejs.org/docs/latest-v18.x/api/http.html) server (it requires more configuration). On the other hand, the production version of our application is in Fly.io, so our application stays secure: Fly.io routes all traffic between a browser and the Fly.io server over HTTPS.
 
 We will implement login to the frontend in the [next part](/en/part5).
-
-**NOTE:** At this stage, in the deployed notes app, it is expected that the creating a note feature will stop working as the backend login feature is not yet linked to the frontend.
 
 </div>
 
@@ -472,34 +474,25 @@ if ( blog.user.toString() === userid.toString() ) ...
 
 Both the new blog creation and blog deletion need to find out the identity of the user who is doing the operation. The middleware _tokenExtractor_ that we did in exercise 4.20 helps but still both the handlers of <i>post</i> and <i>delete</i> operations need to find out who the user holding a specific token is.
 
-Now create a new middleware _userExtractor_, that finds out the user and sets it to the request object. When you register the middleware in <i>app.js</i>
+Now create a new middleware called userExtractor that identifies the user related to the request and attaches it to the request object. After registering the middleware, the post and delete handlers should be able to access the user directly by referencing request.user:
 
 ```js
-app.use(middleware.userExtractor)
-```
-
-the user will be set in the field _request.user_:
-
-```js
-blogsRouter.post('/', async (request, response) => {
+blogsRouter.post('/', userExtractor, async (request, response) => {
   // get user from request object
   const user = request.user
   // ..
 })
 
-blogsRouter.delete('/:id', async (request, response) => {
+blogsRouter.delete('/:id', userExtractor, async (request, response) => {
   // get user from request object
   const user = request.user
   // ..
 })
 ```
 
-Note that it is possible to register a middleware only for a specific set of routes. So instead of using _userExtractor_ with all the routes,
+Note that in this case, the userExtractor middleware has been registered with individual routes, so it is only executed in certain cases. So instead of using _userExtractor_ with all the routes,
 
 ```js
-const middleware = require('../utils/middleware');
-// ...
-
 // use the middleware in all routes
 app.use(middleware.userExtractor) // highlight-line
 
@@ -511,25 +504,21 @@ app.use('/api/login', loginRouter)
 we could register it to be only executed with path <i>/api/blogs</i> routes:
 
 ```js
-const middleware = require('../utils/middleware');
-// ...
-
 // use the middleware only in /api/blogs routes
 app.use('/api/blogs', middleware.userExtractor, blogsRouter) // highlight-line
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 ```
 
-As can be seen, this happens by chaining multiple middlewares as the arguments of the function <i>use</i>. It would also be possible to register a middleware only for a specific operation:
+This is done by chaining multiple middleware functions as parameters to the <i>use</i> function. In the same way, middleware can also be registered only for individual routes:
 
 ```js
-const middleware = require('../utils/middleware');
-// ...
-
-router.post('/', middleware.userExtractor, async (request, response) => {
+router.post('/', userExtractor, async (request, response) => {
   // ...
 })
 ```
+
+Make sure that fetching all blogs with a GET request still works without a token.
 
 #### 4.23*: Blog List Expansion, step 11
 

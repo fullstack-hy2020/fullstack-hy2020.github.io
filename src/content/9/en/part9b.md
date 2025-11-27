@@ -835,6 +835,8 @@ Do not copy the calculator code to file *index.ts*; instead, make it a [TypeScri
 
 For *calculateBmi* to work correctly from both the command line and the endpoint, consider adding a check *require.main === module* to the file <i>bmiCalculator.ts</i>. It tests whether the module is main, i.e. it is run directly from the command line (in our case, *npm run calculateBmi*), or it is used by other modules that import functions from it (e.g. <i>index.ts</i>). Parsing command-line arguments makes sense only if the module is main. Without this condition, you might see argument validation errors when starting the application via *npm start* or *npm run dev*.
 
+See the Node [documentation](https://nodejs.org/api/modules.html#accessing-the-main-module) for more.
+
 </div>
 
 <div class="content">
@@ -1095,7 +1097,7 @@ app.post('/calculate', (req, res) => {
 });
 ```
 
-Using a type assertion (or quieting an Eslint rule) is always a bit risky thing. It leaves the TypeScript compiler off the hook, the compiler just trusts that we as developers know what we are doing. If the asserted type <i>does not</i> have the right kind of value, the result will be a runtime error, so one must be pretty careful when validating the data if a type assertion is used.
+Using a type assertion (or quieting an Eslint rule) is always a bit risky. It leaves the TypeScript compiler off the hook, the compiler just trusts that we as developers know what we are doing. If the asserted type <i>does not</i> have the right kind of value, the result will be a runtime error, so one must be pretty careful when validating the data if a type assertion is used.
 
 In the next chapter, we shall have a look at [type narrowing](https://www.typescriptlang.org/docs/handbook/2/narrowing.html) which will provide a much more safe way of giving a stricter type for data that is coming from an external source.
 

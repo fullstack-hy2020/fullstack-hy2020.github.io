@@ -272,9 +272,9 @@ let query = "SELECT * FROM Users WHERE name = '" + userName + "';"
 
 Now let's assume that a malicious user <i>Arto Hellas</i> would define their name as
 
-<pre>
+```
 Arto Hell-as'; DROP TABLE Users; --
-</pre>
+```
 
 so that the name would contain a single quote <code>'</code>, which is the beginning and end character of a SQL string. As a result of this, two SQL operations would be executed, the second of which would destroy the database table <i>Users</i>:
 

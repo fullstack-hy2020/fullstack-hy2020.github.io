@@ -169,7 +169,7 @@ Muistiinpanojen id:t on talletettu käyttäjien sisälle taulukkona Mongo-id:it�
 }
 ```
 
-Kentän tyyppi on <i>ObjectId</i>, joka viittaa <i>note</i>-tyyppisiin dokumentteihin. Mongo ei itsessään tiedä mitään siitä, että kyse on kentästä, joka viittaa nimenomaan muistiinpanoihin, vaan kyseessä on puhtaasti Mongoosen syntaksi.
+Kentän tyyppi on <i>ObjectId</i>, eli se viittaa johonkin toiseen dokumenttiin. Kenttä <i>ref</i> määrittää sen modelin nimen, johon viitataan. Mongo ei itsessään tiedä mitään siitä, että kyse on kentästä, joka viittaa nimenomaan muistiinpanoihin, vaan kyseessä on puhtaasti Mongoosen syntaksi.
 
 Laajennetaan tiedostossa <i>model/note.js</i> olevaa muistiinpanon skeemaa siten, että myös muistiinpanossa on tieto sen luoneesta käyttäjästä:
 
@@ -208,14 +208,19 @@ Käyttäjien luominen tapahtuu osassa 3 läpikäytyjä [RESTful](/osa3/node_js_j
 Määritellään käyttäjienhallintaa varten oma <i>router</i> tiedostoon <i>controllers/users.js</i>, ja liitetään se <i>app.js</i>-tiedostossa huolehtimaan polulle <i>/api/users/</i> tulevista pyynnöistä:
 
 ```js
-const usersRouter = require('./controllers/users')
+// ...
+const notesRouter = require('./controllers/notes')
+const usersRouter = require('./controllers/users') // highlight-line
 
 // ...
 
-app.use('/api/users', usersRouter)
+app.use('/api/notes', notesRouter)
+app.use('/api/users', usersRouter) // highlight-line
+
+// ...
 ```
 
-Routerin alustava sisältö on seuraava:
+Routerin alustava sisältö tiedostossa <i>controllers/users.js</i> on seuraava:
 
 ```js
 const bcrypt = require('bcrypt')
@@ -244,7 +249,7 @@ module.exports = usersRouter
 
 Tietokantaan siis <i>ei</i> talleteta pyynnön mukana tulevaa salasanaa, vaan funktion _bcrypt.hash_ avulla laskettu <i>hash</i>.
 
-Materiaalin tilamäärä ei valitettavasti riitä käsittelemään sen tarkemmin salasanojen [tallennuksen perusteita](https://codahale.com/how-to-safely-store-a-password/), esim. mitä maaginen luku 10 muuttujan [saltRounds](https://github.com/kelektiv/node.bcrypt.js/#a-note-on-rounds) arvona tarkoittaa. Lue linkkien takaa lisää.
+Materiaalin tilamäärä ei valitettavasti riitä käsittelemään sen tarkemmin salasanojen [tallennuksen perusteita](https://bytebytego.com/guides/how-to-store-passwords-in-the-database/), esim. mitä maaginen luku 10 muuttujan [saltRounds](https://github.com/kelektiv/node.bcrypt.js/#a-note-on-rounds) arvona tarkoittaa. Lue linkkien takaa lisää.
 
 Koodissa ei tällä hetkellä ole mitään virheidenkäsittelyä eikä validointeja eli esim. käyttäjätunnuksen ja salasanan muodon tarkastuksia.
 
@@ -417,18 +422,26 @@ Muistiinpanot luovaa koodia on nyt mukautettava siten, että uusi muistiinpano t
 Laajennetaan ensin olemassaolevaa toteutusta siten, että tieto muistiinpanon luovan käyttäjän id:stä lähetetään pyynnön rungossa kentän <i>userId</i> arvona:
 
 ```js
-const User = require('../models/user')
+const notesRouter = require('express').Router()
+const Note = require('../models/note')
+const User = require('../models/user') //highlight-line
 
 //...
 
 notesRouter.post('/', async (request, response) => {
   const body = request.body
 
-  const user = await User.findById(body.userId) //highlight-line
+  const user = await User.findById(body.userId)// highlight-line
+
+  // highlight-start
+  if (!user) {
+    return response.status(400).json({ error: 'userId missing or not valid' })
+  }
+  // highlight-end
 
   const note = new Note({
     content: body.content,
-    important: body.important === undefined ? false : body.important,
+    important: body.important || false,
     user: user._id //highlight-line
   })
 
@@ -436,9 +449,13 @@ notesRouter.post('/', async (request, response) => {
   user.notes = user.notes.concat(savedNote._id) //highlight-line
   await user.save()  //highlight-line
 
-  response.json(savedNote)
+  response.status(201).json(savedNote)
 })
+
+// ...
 ```
+
+Tietokannasta etsitään ensin käyttäjä pyynnön mukana lähetetyn <i>userId</i>:n avulla. Jos käyttäjää ei löydy, vastataan statuskoodilla 400 (<i>Bad Request</i>) ja virheviestillä <i>"userId missing or not valid"</i>. 
 
 Huomionarvoista on nyt se, että myös <i>user</i>-olio muuttuu. Sen kenttään <i>notes</i> talletetaan luodun muistiinpanon <i>id</i>:
 
@@ -465,6 +482,8 @@ Muistiinpanon luoneen käyttäjän id tulee näkyviin muistiinpanon yhteyteen:
 
 ![Selain renderöi osoitteessa localhost:3001/api/notes taulukollisen JSON:eja joilla kentät content, important, id ja user, jonka arvo käyttäjäid](../../images/4/12e.png)
 
+Tekemiemme muutosten myötä testit eivät mene enää läpi, mutta jätämme testien korjaamisen nyt vapaaehtoiseksi harjoitustehtäväksi. Tekemiämme muutoksia ei ole myöskään huomioitu frontendissä, joten muistiinpanojen luomistoiminto ei enää toimi. Korjaamme frontendin kurssin osassa 5.
+
 ### populate
 
 Haluaisimme API:n toimivan siten, että haettaessa esim. käyttäjien tiedot polulle <i>/api/users</i> tehtävällä HTTP GET ‑pyynnöllä tulisi käyttäjien tekemien muistiinpanojen id:iden lisäksi näyttää niiden sisältö. Relaatiotietokannoilla toiminnallisuus toteutettaisiin <i>liitoskyselyn</i> avulla.
@@ -483,6 +502,8 @@ usersRouter.get('/', async (request, response) => {
 ```
 
 Funktion [populate](http://mongoosejs.com/docs/populate.html) kutsu siis ketjutetaan kyselyä vastaavan metodikutsun (tässä tapauksessa <i>find</i>) perään. Populaten parametri määrittelee, että <i>user</i>-dokumenttien <i>notes</i>-kentässä olevat <i>note</i>-olioihin viittaavat <i>id</i>:t korvataan niitä vastaavilla dokumenteilla.
+
+Mongoose tekee ensin kyselyn <i>users</i>-kokoelmaan käyttäjien hakemiseksi ja sen jälkeen kyselyn <i>notes</i>-kokoelmaan muistiinpanojen hakemiseksi. Mongoose osaa tehdä jälkimmäisen kyselyn oikeaan kokoelmaan, koska määrittelimme aiemmin <i>user</i>-skeemassa <i>notes</i>-kentälle <i>ref</i>-attribuutin, joka kertoo Mongooselle, mihin kokelmaan <i>notes</i>-kentässä viitataan.
 
 Lopputulos on jo melkein haluamamme kaltainen:
 

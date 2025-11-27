@@ -170,7 +170,7 @@ on:
 
 jobs:
   hello_world_job:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Say hello
         run: |
@@ -266,8 +266,8 @@ jobs:
 
 #### Setting up the environment
 
-<!-- Setting up the environment is an important task while configuring a pipeline. We're going to use an <code>ubuntu-20.04</code> virtual environment because this is the version of Ubuntu we're going to be running in production.-->
- 设置环境是配置管道时的一项重要任务。我们将使用一个<code>ubuntu-20.04</code>虚拟环境，因为这是我们将在生产中运行的Ubuntu版本。
+<!-- Setting up the environment is an important task while configuring a pipeline. We're going to use an <code>ubuntu-latest</code> virtual environment because this is the version of Ubuntu we're going to be running in production.-->
+ 设置环境是配置管道时的一项重要任务。我们将使用一个<code>ubuntu-latest</code>虚拟环境，因为这是我们将在生产中运行的Ubuntu版本。
 
 <!-- It is important to replicate the same environment in CI as in production as closely as possible, to avoid situations where the same code works differently in CI and production, which would effectively defeat the purpose of using CI.-->
  在CI中尽可能地复制与生产中相同的环境是很重要的，以避免相同的代码在CI和生产中工作不同的情况，这将有效地挫败使用CI的目的。
@@ -288,7 +288,7 @@ on:
 
 jobs:
   simple_deployment_pipeline: // highlight-line
-    runs-on: ubuntu-20.04 // highlight-line
+    runs-on: ubuntu-latest // highlight-line
     steps: // highlight-line
       - uses: actions/checkout@v4  // highlight-line
 ```
@@ -307,7 +307,7 @@ jobs:
 
 jobs:
   simple_deployment_pipeline:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4 // highlight-line
@@ -325,7 +325,7 @@ jobs:
 ```js
 jobs:
   simple_deployment_pipeline:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v2
@@ -346,7 +346,7 @@ jobs:
 ```js
 jobs:
   simple_deployment_pipeline:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v2
