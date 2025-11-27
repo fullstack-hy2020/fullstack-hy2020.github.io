@@ -29,28 +29,29 @@ Let's create a new React app and install the necessary dependencies for [Apollo 
 npm install @apollo/client graphql
 ```
 
-We'll start with the following code for our application:
+Replace the default contents of the file <i>main.jsx</i> with the following program skeleton:
 
 ```js
-import ReactDOM from 'react-dom/client'
-import App from './App'
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import App from './App.jsx'
 
-import { ApolloClient, HttpLink, InMemoryCache, gql } from '@apollo/client'
+import { ApolloClient, gql, HttpLink, InMemoryCache } from '@apollo/client'
 
 const client = new ApolloClient({
   link: new HttpLink({
-    uri: 'http://localhost:4000' 
+    uri: 'http://localhost:4000',
   }),
   cache: new InMemoryCache(),
 })
 
 const query = gql`
   query {
-    allPersons  {
-      name,
-      phone,
+    allPersons {
+      name
+      phone
       address {
-        street,
+        street
         city
       }
       id
@@ -58,48 +59,78 @@ const query = gql`
   }
 `
 
-client.query({ query })
-  .then((response) => {
-    console.log(response.data)
-  })
+client.query({ query }).then((response) => {
+  console.log(response.data)
+})
 
-
-ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
 ```
 
 The beginning of the code creates a new [client](https://www.apollographql.com/docs/react/get-started#step-3-initialize-apolloclient) object, which is then used to send a query to the server:
 
 ```js
-client.query({ query })
-  .then((response) => {
-    console.log(response.data)
-  })
+client.query({ query }).then((response) => {
+  console.log(response.data)
+})
 ```
 
 The server's response is printed to the console:
 
 ![devtools shows allPersons array with 3 people](../../images/8/9a.png)
 
+A _gql_ tag is added before the template literal that forms the query, imported from the @apollo/client package:
+
+```js
+import { ApolloClient, gql, HttpLink, InMemoryCache } from '@apollo/client' // highlight-line
+
+// ...
+
+const query = gql // highlight-line `
+  query {
+    allPersons {
+      name
+      phone
+      address {
+        street
+        city
+      }
+      id
+    }
+  }
+`
+```
+
+Thanks to the tag, VS Code’s GraphQL extension and other tooling recognize the definition as GraphQL, enabling features like syntax highlighting in the editor. On the server side, we achieved the same by adding a type-indicating comment before the template literal, because the @apollo/server library used on the server does not include a corresponding _gql_ tag.
+
 The application can communicate with a GraphQL server using the *client* object. The client can be made accessible for all components of the application by wrapping the <i>App</i> component with [ApolloProvider](https://www.apollographql.com/docs/react/get-started#step-4-connect-your-client-to-react).
 
 ```js
-import ReactDOM from 'react-dom/client'
-import App from './App'
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import App from './App.jsx'
 
-import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
+import { ApolloClient, gql, HttpLink, InMemoryCache } from '@apollo/client'
 import { ApolloProvider } from '@apollo/client/react' // highlight-line
 
 const client = new ApolloClient({
   link: new HttpLink({
-    uri: 'http://localhost:4000' 
+    uri: 'http://localhost:4000',
   }),
   cache: new InMemoryCache(),
 })
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <ApolloProvider client={client}> // highlight-line
-    <App />
-  </ApolloProvider> // highlight-line
+// ...
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <ApolloProvider client={client}> // highlight-line
+      <App />
+    </ApolloProvider> // highlight-line
+  </StrictMode>,
 )
 ```
 
@@ -117,13 +148,13 @@ import { gql } from '@apollo/client'
 import { useQuery } from '@apollo/client/react'
 
 const ALL_PERSONS = gql`
-query {
-  allPersons {
-    name
-    phone
-    id
+  query {
+    allPersons {
+      name
+      phone
+      id
+    }
   }
-}
 `
 
 const App = () => {
@@ -162,7 +193,7 @@ When a response is received, the result of the <i>allPersons</i> query can be fo
 </div>
 ```
 
-Let's separate displaying the list of persons into its own component:
+Separate the display of persons into its own component in the file <i>src/components/Persons.jsx</i>:
 
 ```js
 const Persons = ({ persons }) => {
@@ -177,22 +208,29 @@ const Persons = ({ persons }) => {
     </div>
   )
 }
+
+export default Persons
 ```
 
 The *App* component still makes the query, and passes the result to the new component to be rendered:
 
 ```js
+import { gql } from '@apollo/client'
+import { useQuery } from '@apollo/client/react'
+import Persons from './components/Persons' // highlight-line
+
+// ...
+
 const App = () => {
   const result = useQuery(ALL_PERSONS)
 
-  if (result.loading)  {
+  if (result.loading) {
     return <div>loading...</div>
   }
 
-  return (
-    <Persons persons={result.data.allPersons}/>
-  )
+  return <Persons persons={result.data.allPersons} /> // highlight-line
 }
+
 ```
 
 ### Named queries and variables
@@ -243,7 +281,7 @@ One possibility for this kind of situations is the hook function [useLazyQuery](
 
 However, in our case we can stick to *useQuery* and use the option [skip](https://www.apollographql.com/docs/react/data/queries#skipoptional), which makes it possible to do the query only if a set condition is true.
 
-The solution is as follows:
+After the changes, the file <i>Persons.jsx</i> looks as follows:
 
 ```js
 import { useState } from 'react'
@@ -302,7 +340,7 @@ const Persons = ({ persons }) => {
       <h2>Persons</h2>
       {persons.map((p) => (
         <div key={p.name}>
-          {p.name} {p.phone} 
+          {p.name} {p.phone}
           <button onClick={() => setNameToSearch(p.name)}> // highlight-line
             show address // highlight-line
           </button> // highlight-line
@@ -379,28 +417,28 @@ Let's implement functionality for adding new persons.
 
 ```js
 const CREATE_PERSON = gql`
-mutation createPerson($name: String!, $street: String!, $city: String!, $phone: String) {
-  addPerson(
-    name: $name,
-    street: $street,
-    city: $city,
-    phone: $phone
+  mutation createPerson(
+    $name: String!
+    $street: String!
+    $city: String!
+    $phone: String
   ) {
-    name
-    phone
-    id
-    address {
-      street
-      city
+    addPerson(name: $name, street: $street, city: $city, phone: $phone) {
+      name
+      phone
+      id
+      address {
+        street
+        city
+      }
     }
   }
-}
 `
 ```
 
 The hook function [useMutation](https://www.apollographql.com/docs/react/api/react/hooks/#usemutation) provides the functionality for making mutations.
 
-Let's create a new component for adding a new person to the directory:
+Create a new component <i>PersonForm</i> for adding a new person to the application. The contents of the file <i>src/components/PersonForm.jsx</i> are as follows:
 
 ```js
 import { useState } from 'react'
@@ -408,7 +446,22 @@ import { gql } from '@apollo/client'
 import { useMutation } from '@apollo/client/react'
 
 const CREATE_PERSON = gql`
-  // ...
+  mutation createPerson(
+    $name: String!
+    $street: String!
+    $city: String!
+    $phone: String
+  ) {
+    addPerson(name: $name, street: $street, city: $city, phone: $phone) {
+      name
+      phone
+      id
+      address {
+        street
+        city
+      }
+    }
+  }
 `
 
 const PersonForm = () => {
@@ -417,13 +470,13 @@ const PersonForm = () => {
   const [street, setStreet] = useState('')
   const [city, setCity] = useState('')
 
-  const [ createPerson ] = useMutation(CREATE_PERSON) // highlight-line
+  const [createPerson] = useMutation(CREATE_PERSON) // highlight-line
 
   const submit = (event) => {
     event.preventDefault()
 
     // highlight-start
-    createPerson({  variables: { name, phone, street, city } })
+    createPerson({ variables: { name, phone, street, city } })
     // highlight-end
 
     setName('')
@@ -470,13 +523,42 @@ We can define mutation functions using the *useMutation* hook.
 The hook returns an <i>array</i>, the first element of which contains the function to cause the mutation.
 
 ```js
-const [ createPerson ] = useMutation(CREATE_PERSON)
+const [createPerson] = useMutation(CREATE_PERSON)
 ```
 
 The query variables receive values when the query is made:
 
 ```js
-createPerson({  variables: { name, phone, street, city } })
+createPerson({ variables: { name, phone, street, city } })
+```
+Enable the <i>PersonForm</i> component in the file <i>App.jsx</i>:
+
+```js
+import { gql } from '@apollo/client'
+import { useQuery } from '@apollo/client/react'
+import PersonForm from './components/PersonForm' // highlight-line
+import Persons from './components/Persons'
+
+// ...
+
+const App = () => {
+  const result = useQuery(ALL_PERSONS)
+
+  if (result.loading) {
+    return <div>loading...</div>
+  }
+
+  // highlight-start
+  return (
+    <div>
+      <Persons persons={result.data.allPersons} />
+      <PersonForm /> 
+    </div>
+  )
+  // highlight-end
+}
+
+export default App
 ```
 
 New persons are added just fine, but the screen is not updated. This is because Apollo Client cannot automatically update the cache of an application, so it still contains the state from before the mutation.
@@ -511,27 +593,38 @@ export default App
 
 The solution is simple, and every time a user adds a new person, it appears immediately on the screens of all users.
 
-The bad side of the solution is all the pointless web traffic.
+The downside of polling is, of course, the unnecessary network traffic it causes. In addition, the page may start to flicker, since the component is re-rendered with each query update and _result.loading_ is true for a brief moment—so a <i>loading...</i> text flashes on the screen for an instant.
 
 Another easy way to keep the cache in sync is to use the *useMutation* hook's [refetchQueries](https://www.apollographql.com/docs/react/data/refetching/) parameter to define that the query fetching all persons is done again whenever a new person is created.
 
 ```js
-const ALL_PERSONS = gql`
-  query  {
-    allPersons  {
-      name
-      phone
-      id
-    }
-  }
-`
+// ...
 
-const PersonForm = (props) => {
-  // ...
+const ALL_PERSONS = gql // highlight-line `
+  query { // highlight-line
+    allPersons { // highlight-line
+      name // highlight-line
+      phone // highlight-line
+      id // highlight-line
+    } // highlight-line
+  } // highlight-line
+` // highlight-line
 
-  const [ createPerson ] = useMutation(CREATE_PERSON, {
-    refetchQueries: [ { query: ALL_PERSONS } ] // highlight-line
+
+const PersonForm = () => {
+  const [name, setName] = useState('')
+  const [phone, setPhone] = useState('')
+  const [street, setStreet] = useState('')
+  const [city, setCity] = useState('')
+
+  // highlight-start
+  const [createPerson] = useMutation(CREATE_PERSON, {
+    refetchQueries: [{ query: ALL_PERSONS }],
   })
+  // highlight-end
+
+  // ...
+}
 ```
 
 The pros and cons of this solution are almost opposite of the previous one. There is no extra web traffic because queries are not done just in case.  However, if one user now updates the state of the server, the changes do not show to other users immediately.
@@ -539,33 +632,63 @@ The pros and cons of this solution are almost opposite of the previous one. Ther
 If you want to do multiple queries, you can pass multiple objects inside refetchQueries. This will allow you to update different parts of your app at the same time. Here is an example:
 
 ```js
-    const [ createPerson ] = useMutation(CREATE_PERSON, {
-    refetchQueries: [ { query: ALL_PERSONS }, { query: OTHER_QUERY }, { query: ... } ] // pass as many queries as you need
-  })
+const [createPerson] = useMutation(CREATE_PERSON, {
+  refetchQueries: [
+    { query: ALL_PERSONS },
+    { query: OTHER_QUERY },
+    { query: ANOTHER_QUERY },
+  ], // pass as many queries as you need
+})
 ```
 
 There are other ways to update the cache. More about those later in this part.
 
 At the moment, queries and components are defined in the same place in our code.
-Let's separate the query definitions into their own file <i>queries.js</i>:
+Let's separate the query definitions into their own file <i>src/queries.js</i>:
 
-```js
+```js 
 import { gql } from '@apollo/client'
 
 export const ALL_PERSONS = gql`
   query {
-    // ...
+    allPersons {
+      name
+      phone
+      id
+    }
   }
 `
+
 export const FIND_PERSON = gql`
   query findPersonByName($nameToSearch: String!) {
-    // ...
+    findPerson(name: $nameToSearch) {
+      name
+      phone
+      id
+      address {
+        street
+        city
+      }
+    }
   }
 `
 
 export const CREATE_PERSON = gql`
-  mutation createPerson($name: String!, $street: String!, $city: String!, $phone: String) {
-    // ...
+  mutation createPerson(
+    $name: String!
+    $street: String!
+    $city: String!
+    $phone: String
+  ) {
+    addPerson(name: $name, street: $street, city: $city, phone: $phone) {
+      name
+      phone
+      id
+      address {
+        street
+        city
+      }
+    }
   }
 `
 ```
@@ -585,36 +708,52 @@ The current code of the application can be found on [GitHub](https://github.com/
 
 ### Handling mutation errors
 
-Trying to create a person with invalid data causes an error:
+If we try to create an invalid person, for example by using a name that already exists in the application, nothing happens. The person is not added to the application, but we also do not receive any error message.
 
-![devtools showing error: name must be unique](../../images/8/14x.png)
+Earlier, we defined a check on the server that prevents adding another person with the same name and throws an error in such a situation. However, the error is not yet handled in the frontend. Using the _onError_ [option](https://www.apollographql.com/docs/react/api/react/hooks/#params-2) of the _useMutation_ hook, it is possible to register an error handler function for mutations.
 
-We should handle the exception. We can register an error handler function to the mutation using the *useMutation* hook's *onError* [option](https://www.apollographql.com/docs/react/api/react/hooks/#params-2).
+Let’s register an error handler for the mutation. The <i>PersonForm</i> component receives a _setError_ function as a prop, which is used to set a message indicating the error:
 
-Let's register the mutation with an error handler that uses the _setError_
-function it receives as a parameter to set an error message:
 
 ```js
-const PersonForm = ({ setError }) => {
+const PersonForm = ({ setError }) => { // highlight-line
   // ... 
 
   const [ createPerson ] = useMutation(CREATE_PERSON, {
     refetchQueries: [  {query: ALL_PERSONS } ],
-    // highlight-start
-    onError: (error) => {
-      const messages = error.message
-      setError(messages)
-    }
-    // highlight-end
+    onError: (error) => setError(error.message), // highlight-line
   })
 
   // ...
 }
 ```
 
-We can then render the error message on the screen as necessary:
+Create a separate component for the notification in the file <i>scr/components/Notify.jsx</i>:
 
 ```js
+const Notify = ({ errorMessage }) => {
+  if (!errorMessage) {
+    return null
+  }
+  return (
+    <div style={{ color: 'red' }}>
+      {errorMessage}
+    </div>
+  )
+}
+
+export default Notify
+```
+
+The component receives a possible error message as a prop. If an error message is set, it is rendered on the screen.
+
+Render the <i>Notify</i> component that displays the error message in the file <i>App.jsx</i>:
+
+```js
+import Notify from './components/Notify' // highlight-line
+
+// ... 
+
 const App = () => {
   const [errorMessage, setErrorMessage] = useState(null) // highlight-line
 
@@ -641,20 +780,6 @@ const App = () => {
     </div>
   )
 }
-
-// highlight-start
-const Notify = ({errorMessage}) => {
-  if ( !errorMessage ) {
-    return null
-  }
-
-  return (
-    <div style={{color: 'red'}}>
-    {errorMessage}
-    </div>
-  )
-}
-// highlight-end
 ```
 
 Now the user is informed about an error with a simple notification.
@@ -667,7 +792,7 @@ The current code of the application can be found on [GitHub](https://github.com/
 
 Let's add the possibility to change the phone numbers of persons to our application. The solution is almost identical to the one we used for adding new persons.
 
-Again, the mutation requires parameters.
+The mutation again requires the use of variables. Add the following query to the file <i>queries.js</i>:
 
 ```js
 export const EDIT_NUMBER = gql`
@@ -685,13 +810,11 @@ export const EDIT_NUMBER = gql`
 `
 ```
 
-The <i>PhoneForm</i> component responsible for the change is straightforward. The form has fields for the person's name and new phone number, and calls the *changeNumber* function. The function is done using the *useMutation* hook.
-Interesting lines on the code have been highlighted.
+Create a new component <i>PhoneForm</i> in the file <i>src/components/PhoneForm.jsx</i> for updating a phone number. The component adds a form to the application where you can enter a new phone number for a selected person. The interesting parts of the code are highlighted:
 
 ```js
 import { useState } from 'react'
 import { useMutation } from '@apollo/client/react'
-
 import { EDIT_NUMBER } from '../queries'
 
 const PhoneForm = () => {
@@ -739,6 +862,27 @@ const PhoneForm = () => {
 export default PhoneForm
 ```
 
+The <i>PhoneForm</i> component is straightforward: it asks for the person's name and a new phone number via a form. When the form is submitted, it calls the _changeNumber_ function that handles the update, created with the _useMutation_ hook.
+
+Enable the new component in the file <i>App.jsx</i>:
+
+```js
+import PhoneForm from './components/PhoneForm' // highlight-line
+
+const App = () => {
+  // ...
+
+  return (
+    <div>
+      <Notify errorMessage={errorMessage} />
+      <Persons persons={result.data.allPersons} />
+      <PersonForm setError={notify} />
+      <PhoneForm setError={notify} /> // highlight-line
+    </div>
+  )
+}
+```
+
 It looks bleak, but it works:
 
 ![browser showing main page with name and phone having information in the input](../../images/8/22a.png)
@@ -757,14 +901,23 @@ For GraphQL, this is not an error, so registering an *onError* error handler is 
 We can use the *result* field returned by the *useMutation* hook as its second parameter to generate an error message.
 
 ```js
-const PhoneForm = ({ setError }) => {
+import { useEffect, useState } from 'react' // highlight-line
+import { useMutation } from '@apollo/client/react'
+import { EDIT_NUMBER } from '../queries'
+
+const PhoneForm = ({ setError }) => { // highlight-line
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
 
   const [ changeNumber, result ] = useMutation(EDIT_NUMBER) // highlight-line
 
   const submit = (event) => {
-    // ...
+    event.preventDefault()
+
+    changeNumber({ variables: { name, phone } })
+
+    setName('')
+    setPhone('')
   }
 
   // highlight-start
@@ -773,7 +926,7 @@ const PhoneForm = ({ setError }) => {
       setError('person not found')
     }
 
-  }, [result.data])
+  }, [result.data, setError])
   // highlight-end
 
   // ...
@@ -827,7 +980,9 @@ Make sure that the Authors and Books views are kept up to date after a new book 
 
 In case of problems when making queries or mutations, check from the developer console what the server response is:
 
-![browser unhandled rejection and dev tools network and preview highlighted showing error message](../../images/8/42ea.png)
+![browser unhandled rejection and dev tools network and preview highlighted showing error message](../../images/8/42x.png)
+
+The Chrome extension [Apollo Client Devtools](https://chrome.google.com/webstore/detail/apollo-client-developer-t/jdkknkkbebbapilgoeccciglkfbmbnfm/related) can be very helpful in diagnosing the situation.
 
 #### 8.11: Authors birth year
 
@@ -839,10 +994,10 @@ Make sure that the Authors view is kept up to date after setting a birth year.
 
 #### 8.12: Authors birth year advanced
 
-Change the birth year form so that a birth year can be set only for an existing author. Use [select tag](https://react.dev/reference/react-dom/components/select), [react select](https://github.com/JedWatson/react-select), or some other mechanism.
+Make the birth year form such that the birth year can be set via a dropdown only for an existing author. You can use, for example, the [select element](https://react.dev/reference/react-dom/components/select) or a separate library like [react-select](https://github.com/JedWatson/react-select).
 
-A solution using the react select library looks as follows:
+The solution looks as follows using a <i>select</i> element:
 
-![browser showing set birthyear option for existing name](../../images/8/21.png)
+![browser showing set birthyear option for existing name](../../images/8/21a.png)
 
 </div>

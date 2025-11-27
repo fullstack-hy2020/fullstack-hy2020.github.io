@@ -1003,8 +1003,8 @@ useEffect(() => {
 
 #### 8.12: Authors birth year advanced
 
-<!-- Change the birth year form so that a birth year can be set only for an existing author. Use [select tag](https://reactjs.org/docs/forms.html#the-select-tag), [react select](https://github.com/JedWatson/react-select), or some other mechanism.-->
- 改变出生年月表，使出生年月只能为现有作者设置。使用[选择标签](https://reactjs.org/docs/forms.html#the-select-tag)、[反应选择](https://github.com/JedWatson/react-select)，或其他机制。
+<!-- Change the birth year form so that a birth year can be set only for an existing author. Use [select tag](https://react.dev/reference/react-dom/components/select), [react select](https://github.com/JedWatson/react-select), or some other mechanism.-->
+ 改变出生年月表，使出生年月只能为现有作者设置。使用[选择标签](https://react.dev/reference/react-dom/components/select)、[反应选择](https://github.com/JedWatson/react-select)，或其他机制。
 
 
 <!-- A solution using the react select library looks as follows:-->

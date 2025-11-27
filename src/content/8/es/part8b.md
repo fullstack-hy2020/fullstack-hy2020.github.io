@@ -882,7 +882,7 @@ Asegúrese de que la vista Autores se mantenga actualizada después de establece
 
 #### 8.12: Año de nacimiento del autor avanzado
 
-Cambie el formulario del año de nacimiento para que solo se pueda establecer un año de nacimiento para un autor existente. Utilice la biblioteca [select-tag](https://reactjs.org/docs/forms.html#the-select-tag), [react-select](https://github.com/JedWatson/react-select) o algún otro mecanismo.
+Cambie el formulario del año de nacimiento para que solo se pueda establecer un año de nacimiento para un autor existente. Utilice la biblioteca [select-tag](https://react.dev/reference/react-dom/components/select), [react-select](https://github.com/JedWatson/react-select) o algún otro mecanismo.
 
 Una solución con la librería react-select tiene el siguiente aspecto:
 
