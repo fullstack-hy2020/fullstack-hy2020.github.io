@@ -217,7 +217,7 @@ The URL used to connect to the Apollo Server is otherwise the same as the one yo
 
 ```javascript
 import { NativeRouter } from 'react-router-native';
-import { ApolloProvider } from '@apollo/client'; // highlight-line
+import { ApolloProvider } from '@apollo/client/react'; // highlight-line
 
 import Main from './src/components/Main';
 import createApolloClient from './src/utils/apolloClient'; // highlight-line
@@ -262,7 +262,7 @@ export const GET_REPOSITORIES = gql`
 We can import these variables and use them with the <em>useQuery</em> hook like this:
 
 ```javascript
-import { useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client/react';
 
 import { GET_REPOSITORIES } from '../graphql/queries';
 
@@ -336,7 +336,7 @@ The configuration can be accessed by importing the <em>Constants</em> constant f
 
 ```javascript
 import { NativeRouter } from 'react-router-native';
-import { ApolloProvider } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client/react';
 import Constants from 'expo-constants'; // highlight-line
 
 import Main from './src/components/Main';
@@ -635,7 +635,7 @@ Now that we have implemented storage for storing the user's access token, it is 
 
 ```javascript
 import { NativeRouter } from 'react-router-native';
-import { ApolloProvider } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client/react';
 
 import Main from './src/components/Main';
 import createApolloClient from './src/utils/apolloClient';
@@ -718,7 +718,7 @@ Now we can use the <em>AuthStorageContext.Provider</em> to provide the storage i
 
 ```javascript
 import { NativeRouter } from 'react-router-native';
-import { ApolloProvider } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client/react';
 
 import Main from './src/components/Main';
 import createApolloClient from './src/utils/apolloClient';
