@@ -126,7 +126,7 @@ import { Table } from 'react-bootstrap'
  React Bootstrap为创建表单提供了内置的[组件](https://react-bootstrap.github.io/docs/forms/overview/)(尽管它们的文档略显不足)。
 
 ```js
-let Login = (props) => {
+const Login = (props) => {
   // ...
   return (
     <div>
