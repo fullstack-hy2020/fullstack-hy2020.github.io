@@ -166,10 +166,10 @@ After the backend changes, creating new persons requires that a valid user token
 ```js
 import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client'  // highlight-line
 import { ApolloProvider } from '@apollo/client/react'
-import { setContext } from '@apollo/client/link/context' // highlight-line
+import { SetContextLink } from '@apollo/client/link/context' // highlight-line
 
 // highlight-start
-const authLink = setContext((_, { headers }) => {
+const authLink  = new SetContextLink(({ headers }) => {
   const token = localStorage.getItem('phonenumbers-user-token')
   return {
     headers: {
