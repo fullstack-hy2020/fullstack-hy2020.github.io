@@ -2,6 +2,10 @@
 
 .arrow__container {
   position: relative;
+  // &, * {
+  //   direction: ltr !important;
+  //   text-align: left !important;
+  // }
 
   &:not():first-child {
     background: none;
@@ -72,8 +76,9 @@
   padding: 1rem;
   justify-content: center;
   align-items: center;
-  border: 2px solid $black;
-  border-right: none;
+  border-style: solid;
+  border-color: $black;
+  border-width: 2px 0 2px 2px;
   z-index: 2;
   overflow: hidden;
   font-family: var(--font-heading);
@@ -99,9 +104,9 @@
 
 .arrow__point {
   padding: 1.25rem;
-  border: 2px solid $black;
-  border-left: none;
-  border-bottom: none;
+  border-style: solid;
+  border-color: $black;
+  border-width: 2px 2px 0 0;
   transform: translate(-1.3rem, 0rem) rotate(45deg);
   z-index: 1;
   overflow: hidden;
@@ -118,6 +123,19 @@
   justify-content: flex-start;
   align-items: center;
   margin: auto auto auto 0;
+
+  @include rtl {
+    margin: auto 0 auto auto;
+
+    .arrow__rectangle {
+      border-width: 2px 2px 2px 0;
+    }
+
+    .arrow__point {
+      border-width: 0 0 2px 2px;
+      transform: translate(1.3rem, 0rem) rotate(45deg);
+    }
+  }
 
   @include to($tablet) {
     .arrow__rectangle {
@@ -147,7 +165,7 @@
     margin-top: 1rem;
 
     @include from($tablet) {
-      margin-top: -2px;
+      margin-top: -2px !important;
     }
   }
 
@@ -203,6 +221,11 @@
 }
 
 .breadcrumb {
+  &, * {
+    direction: ltr !important;
+    text-align: left !important;
+  }
+
   .arrow__wrapper {
     @include to($tablet) {
       display: none;
