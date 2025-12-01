@@ -20,6 +20,10 @@
     background-repeat: no-repeat;
     background-position: center right;
 
+    @include rtl {
+      background-position: center left;
+    }
+
     @include to($tablet) {
       background-position: top center;
 
