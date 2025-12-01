@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Naskh+Arabic:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap');
 
 $white: #ffffff;
 $gray: #a0a0a0;
@@ -22,7 +22,7 @@ $light-violet: #b2bbf0;
 //Font families
 $font-body: 'IBM Plex Mono', monospace;
 $font-heading: 'IBM Plex Sans', monospace;
-$font-arabic: 'IBM Plex Sans', 'Noto Naskh Arabic';
+$font-arabic: 'IBM Plex Sans', 'IBM Plex Sans Arabic', sans-serif;
 
 //Font weights
 $font-weight-regular: 400;

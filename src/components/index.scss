@@ -37,6 +37,8 @@ body.rtl {
   --font-body: #{$font-arabic};
   --font-heading: #{$font-arabic};
 
+  -webkit-font-smoothing: antialiased;
+
   * {
     @include direction(rtl);
   }
@@ -101,6 +103,10 @@ p {
   text-align: left;
   line-height: 1.5em;
   color: var(--color-text);
+
+  @include rtl {
+    line-height: 1.75em;
+  }
 }
 
 a {
@@ -440,7 +446,7 @@ a {
     cursor: pointer;
   }
 
-  &--turquoise {
+  &--turFise {
     background-color: $turquoise;
   }
 
@@ -499,4 +505,11 @@ a {
       transform: translateY(-30%);
     }
   }
+}
+
+
+.embed-ltr {
+  unicode-bidi: isolate;
+  direction: ltr !important;
+  text-align: left !important;
 }
