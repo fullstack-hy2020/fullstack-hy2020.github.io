@@ -16,6 +16,11 @@
 
     @include from($tablet) {
       margin-left: 1rem;
+
+      @include rtl {
+        margin-right: 1rem;
+        margin-left: initial;
+      }
     }
   }
 
@@ -26,6 +31,11 @@
   h1 {
     @include from($tablet) {
       margin-left: 3rem;
+
+      @include rtl {
+        margin-right: 3rem;
+        margin-left: 0;
+      }
     }
   }
 
@@ -34,6 +44,11 @@
   h4 {
     @include from($tablet) {
       margin-left: 1rem;
+      
+      @include rtl {
+        margin-right: 1rem;
+        margin-left: initial;
+      }
     }
     padding-bottom: 2rem;
   }
@@ -49,6 +64,11 @@
 
     @include from($tablet) {
       margin-left: 2.2rem;
+
+      @include rtl {
+        margin-right: 2.2rem;
+        margin-left: initial;
+      }
     }
   }
 
@@ -60,6 +80,8 @@
     margin: 2rem 0;
     background-color: var(--color-pre-background);
     color: $white;
+    direction: ltr;
+    text-align: left;
   }
 
   em {
@@ -67,6 +89,13 @@
     font-style: normal;
     background-color: rgba(var(--color-main), 0.6);
     padding: 1px 5px 2px;
+
+    @include rtl {
+      // font styles
+      font-family: Courier, 'IBM Plex Sans Arabic', sans-serif;
+      font-weight: 300;
+      font-style: italic;
+    }
   }
 
   img {
@@ -93,6 +122,15 @@
 
     @include from($tablet) {
       transform: translate(-3rem, 4.5rem);
+    }
+
+    @include rtl {
+      transform: translate(1rem, 0);
+      line-height: initial;
+
+      @include from($tablet) {
+        transform: translate(3rem, 4.5rem);
+      }
     }
   }
 
@@ -131,11 +169,41 @@
   @include from($desktop) {
     padding-left: 30%;
     padding-right: 5%;
+
+    @include rtl {
+      padding-left: 5%;
+      padding-right: 30%;
+    }
   }
 
+  @mixin blockquote-dir($dir) {
+    @if $dir == ltr {
+      padding-left: 0.5rem;
+      border-left: 2px solid #888;
+      padding-right: initial;
+      border-right: initial;
+    } @else if $dir == rtl {
+      padding-right: 0.5rem;
+      border-right: 2px solid #888;
+      padding-left: initial;
+      border-left: initial;
+    }
+  }
   blockquote {
-    padding-left: 0.5rem;
-    border-left: 2px #888 solid;
+    @include blockquote-dir(ltr);
+
+    @include rtl {
+      @include blockquote-dir(rtl);
+
+      &[dir="ltr"] {
+        @include blockquote-dir(ltr);
+        
+        &, * {
+          direction: ltr;
+          text-align: left;
+        }
+      }
+    }
   }
 }
 
@@ -193,6 +261,16 @@ pre[class*='language-'] {
 
   @include to($tablet) {
     right: 10%;
+
+    @include rtl {
+      left: 10%;
+      right: initial;
+    }
+  }
+
+  @include rtl {
+    left: 5%;
+    right: initial;
   }
 }
 
