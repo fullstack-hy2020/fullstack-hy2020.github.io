@@ -374,6 +374,7 @@ const App = () => {
   const noteFormRef = useRef() // highlight-line
 
   const noteForm = () => (
+// (Using 'ref' throws an error. According to this, https://react.dev/warnings/special-props, 'ref' and 'key' "are two special props which are used by React, and are thus not forwarded to the component". It should be renamed to something else.)
     <Togglable buttonLabel='new note' ref={noteFormRef}>  // highlight-line
       <NoteForm createNote={addNote} />
     </Togglable>
@@ -401,6 +402,7 @@ const Togglable = (props) => { // highlight-line
   }
 
 // highlight-start
+// It should be renamed here too
   useImperativeHandle(props.ref, () => {
     return { toggleVisibility }
   })
