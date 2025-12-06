@@ -622,7 +622,8 @@ Let's specify the following configuration in our *tsconfig.json* file:
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true, // highlight-line
     "esModuleInterop": true,
-    "moduleResolution": "node"
+    "module": "node16",
+    "moduleResolution": "node16"
   }
 }
 ```
@@ -733,6 +734,7 @@ This is because we banned unused parameters in our *tsconfig.json*:
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
     "esModuleInterop": true,
+    "module": "node16",
     "moduleResolution": "node16"
   }
 }
