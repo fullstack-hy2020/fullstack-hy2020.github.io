@@ -22,7 +22,7 @@ Remember that reading code is a skill in itself, so don't worry if you don't und
 
 ### Patientor frontend
 
-It's time to get our hands dirty finalizing the frontend for the backend we built in [exercises 9.8.-9.13](/en/part9/typing_an_express_app). We will actually also need some new features to the backend for finishing the app.
+It's time to get our hands dirty finalizing the frontend for the backend we built in [exercises 9.8.-9.13](/en/part9/typing_an_express_app). We will actually also need to add some new features to the backend for finishing the app.
 
 Before diving into the code, let us start both the frontend and the backend.
 
