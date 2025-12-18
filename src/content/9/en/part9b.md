@@ -750,7 +750,7 @@ Let's rename the *req* variable to *_req*. Finally, we are ready to start the ap
 
 ![browser result showing pong on /ping](../../images/9/11a.png)
 
-To simplify the development, we should enable *auto-reloading* to improve our workflow. In this course, you have already used *nodemon*, but ts-node has an alternative called *ts-node-dev*. It is meant to be used only with a development environment that takes care of recompilation on every change, so restarting the application won't be necessary.
+To simplify the development, we should enable *auto-reloading* to improve our workflow. In this course, we have started backends by running *node --watch server.js*, but ts-node does not support the *--watch* argument. Instead, we will use an alternative called *ts-node-dev*. It is meant to be used only with a development environment that takes care of recompilation on every change, so restarting the application won't be necessary.
 
 Let's install *ts-node-dev* to our development dependencies:
 
