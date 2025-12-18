@@ -7,19 +7,206 @@ lang: fi
 
 <div class="content">
 
-Laajennetaan sovellusta käyttäjänhallinnalla. Siirrytään kuitenkin ensin käyttämään tietokantaa datan tallettamiseen.
+Tässä luvussa siirrytään käyttämään tietokantaa datan tallentamiseen ja laajennetaan sovellusta käyttäjänhallinnalla. Refaktoroidaan kuitenkin ensin backendin koodia. Phonebook-backendin tämänhetkinen koodi löytyy [GitHubista](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3), branchista <i>part8-3</i>.
+
+### Backendin refaktorointi
+
+Olemme toistaiseksi kirjoittaneet kaiken koodin <i>index.js</i>-tiedostoon. Sovelluksen laajentuessa se ei ole enää järkevää, sillä tiedoston pituuden kasvaessa sen luettavuus ja hahmotettavuus kärsii. On myös hyvän ohjelmointitavan mukaista erottaa sovelluksen eri vastuualueet omiin moduuleihinsa. 
+
+Refaktoroidaan nyt backendin koodi jakamalla se useisiin tiedostoihin.
+
+Aloitetaan eriyttämällä sovelluksen GraphQL-skeema tiedostoon <i>schema.js</i>:
+
+```js
+const typeDefs = /* GraphQL */ `
+  type Address {
+    street: String!
+    city: String!
+  }
+
+  type Person {
+    name: String!
+    phone: String
+    address: Address!
+    id: ID!
+  }
+
+  enum YesNo {
+    YES
+    NO
+  }
+
+  type Query {
+    personCount: Int!
+    allPersons(phone: YesNo): [Person!]!
+    findPerson(name: String!): Person
+  }
+
+  type Mutation {
+    addPerson(
+      name: String!
+      phone: String
+      street: String!
+      city: String!
+    ): Person
+    editNumber(name: String!, phone: String!): Person
+  }
+`
+
+module.exports = typeDefs
+```
+
+Siirretään sitten resolvereista vastaava koodi omaan moduuliinsa <i>resolvers.js</i>:
+
+```js
+const { GraphQLError } = require('graphql')
+const { v1: uuid } = require('uuid')
+
+let persons = [
+  {
+    name: 'Arto Hellas',
+    phone: '040-123543',
+    street: 'Tapiolankatu 5 A',
+    city: 'Espoo',
+    id: '3d594650-3436-11e9-bc57-8b80ba54c431',
+  },
+  {
+    name: 'Matti Luukkainen',
+    phone: '040-432342',
+    street: 'Malminkaari 10 A',
+    city: 'Helsinki',
+    id: '3d599470-3436-11e9-bc57-8b80ba54c431',
+  },
+  {
+    name: 'Venla Ruuska',
+    street: 'Nallemäentie 22 C',
+    city: 'Helsinki',
+    id: '3d599471-3436-11e9-bc57-8b80ba54c431',
+  },
+]
+
+const resolvers = {
+  Query: {
+    personCount: () => persons.length,
+    allPersons: (root, args) => {
+      if (!args.phone) {
+        return persons
+      }
+      const byPhone = (person) =>
+        args.phone === 'YES' ? person.phone : !person.phone
+      return persons.filter(byPhone)
+    },
+    findPerson: (root, args) => persons.find((p) => p.name === args.name),
+  },
+  Person: {
+    address: ({ street, city }) => {
+      return {
+        street,
+        city,
+      }
+    },
+  },
+  Mutation: {
+    addPerson: (root, args) => {
+      if (persons.find((p) => p.name === args.name)) {
+        throw new GraphQLError('Name must be unique', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name,
+          },
+        })
+      }
+
+      const person = { ...args, id: uuid() }
+      persons = persons.concat(person)
+      return person
+    },
+    editNumber: (root, args) => {
+      const person = persons.find((p) => p.name === args.name)
+      if (!person) {
+        return null
+      }
+
+      const updatedPerson = { ...person, phone: args.phone }
+      persons = persons.map((p) => (p.name === args.name ? updatedPerson : p))
+      return updatedPerson
+    },
+  },
+}
+
+module.exports = resolvers
+```
+
+Yksinkertaisuuden vuoksi henkilöiden tiedoista vastaava taulukko <i>persons</i> on nyt sijoitettu resolvereiden kanssa samaan tiedostoon. Taulukko poistuu pian, kun siirrymme käyttämään tietojen tallennukseen tietokantaa.
+
+Siirretään lopuksi myös Apollo-palvelimen käynnistämisestä vastaava koodi omaan tiedostoonsa <i>server.js</i>:
+
+```js
+const { ApolloServer } = require('@apollo/server')
+const { startStandaloneServer } = require('@apollo/server/standalone')
+
+const resolvers = require('./resolvers')
+const typeDefs = require('./schema')
+
+const startServer = (port) => {
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+  })
+
+  startStandaloneServer(server, {
+    listen: { port },
+  }).then(({ url }) => {
+    console.log(`Server ready at ${url}`)
+  })
+}
+
+module.exports = startServer
+```
+
+Apollo-palvelimen käynnistys hoidetaan nyt itse määritellyn <i>startServer</i>-funktion sisällä. Näin voimme exportata funktion ja käynnistää palvelimen moduulin ulkopuolelta <i>index.js</i>-tiedostosta käsin. Funktiolle annetaan parametriksi portti, johon Apollo Server käynnistyy kuuntelemaan.
+
+Asennetaan projektiin <i>dotenv</i>-kirjasto, jotta voimme määritellä ympäristömuuttujia <i>.env</i>-tiedostossa:
+
+```bash
+npm install dotenv
+```
+
+Tiedostoon <i>index.js</i> jää vain vähän koodia. Sen sisältö refaktoroinnin jälkeen on seuraava:
+
+```js
+require('dotenv').config()
+
+const startServer = require('./server')
+
+const PORT = process.env.PORT || 4000
+
+startServer(PORT)
+
+```
+
+Ympäristömuuttujat luetaan ensin <i>.env</i>-tiedostosta käyttäen <i>dotenv</i>-kirjastoa. Käytettävä portti luetaan nyt ympäristömuuttujasta, jos sellainen on asetettu. Jos <i>PORT</i>-ympäristömuuttujaa ei löydy, käytetään oletusporttia 4000, josta myös frontend olettaa tällä hetkellä löytävänsä palvelimen. Lopuksi Apollo Server käynnistetään kutsumalla funktiota _startServer_. 
+
+Toistaiseksi <i>index.js</i>-tiedoston sisältö on tynkä, mutta sovelluksen laajentuessa se saa enemmän sisältöä. Esimerkiksi kun pian siirrymme käyttämään tietojen tallentamiseen tietokantaa, tulee tietokantayhteys muodostaa ennen palvelimen käynnistämistä. 
+
+Sovelluksen vastuut on nyt eroteltu selkeästi toisitaan:
+
+- <i>index.js</i> toimii pääohjelmana, jonka vastuulla on nyt ainoastaan sovelluksen käynnistyslogiikka. Se huolehtii, että sovelluksen eri osat käynnistetään oikeassa järjestyksessä. 
+- GraphQL-skeema määritellään moduulissa <i>schema.js</i>. Se kuvailee APIn rakenteen eli esimerkiksi sen, mitä kyselyitä ja mutaatioita APIn kautta on mahdollista tehdä ja minkälaisia kenttiä eri olioilla on.
+- Varsinainen sovelluslogiikka määritellään moduulissa <i>resolvers.js</i>. Sen vastuulla on esimerkiksi määritellä, mitä sovelluksessa todella tapahtuu eri kyselyiden kohdalla, mistä data haetaan ja miten sitä käsitellään.
+- Apollo Serverin konfiguroinnista ja käynnistyksestä vastaava koodi määritellään erillisessä moduulissa <i>server.js</i>.
 
 ### Mongoose ja Apollo
 
-Otetaan käyttöön Mongoose ja asennetaan samalla dotenv:
+Siirrytään nyt käyttämään sovelluksessamme MongoDB-tietokantaa. Tehdään tietokannan käyttöönotto osien [3](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan) ja [4](/osa4/sovelluksen_rakenne_ja_testauksen_alkeet) tapaa imitoiden.
+
+Otetaan käyttöön Mongoose:
 
 ```bash
-npm install mongoose dotenv
+npm install mongoose
 ```
 
-Tehdään osien [3](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan) ja [4](/osa4/sovelluksen_rakenne_ja_testauksen_alkeet) tapaa imitoiden.
-
-Henkilön skeema on määritelty seuraavasti:
+Määritellään henkilön skeema tiedostossa <i>models/person.js</i> seuraavasti:
 
 ```js
 const mongoose = require('mongoose')
@@ -51,32 +238,61 @@ module.exports = mongoose.model('Person', schema)
 
 Mukana on myös muutama validointi. Arvon olemassaolon takaava _required: true_ on sikäli turha, koska GraphQL:n käyttö takaa sen, että kentät ovat olemassa. Validointi on kuitenkin hyvä pitää myös tietokannan puolella.
 
-Saamme sovelluksen jo suurilta osin toimimaan seuraavilla muutoksilla:
+Luodaan tietokantayhteyden muodostavalle koodille oma moduuli <i>db.js</i>:
 
 ```js
-// ...
-
 const mongoose = require('mongoose')
-mongoose.set('strictQuery', false)
-const Person = require('./models/person')
 
+mongoose.set('strictQuery', false)
+
+const connectToDatabase = async (uri) => {
+  console.log('connecting to database URI:', uri)
+
+  try {
+    await mongoose.connect(uri)
+    console.log('connected to MongoDB')
+  } catch (error) {
+    console.log('error connection to MongoDB:', error.message)
+    process.exit(1)
+  }
+}
+
+module.exports = connectToDatabase
+```
+
+Moduuli luo funktion _connectToDatabase_, joka saa parametrina tietokanta-URI:n ja hoitaa tietokantaan yhdistämisen.
+
+Otetaan moduuli käyttöön tiedostossa <i>index.js</i>:
+
+```js
 require('dotenv').config()
 
-const MONGODB_URI = process.env.MONGODB_URI
+const connectToDatabase = require('./db') // highlight-line
+const startServer = require('./server')
 
-console.log('connecting to', MONGODB_URI)
+const MONGODB_URI = process.env.MONGODB_URI // highlight-line
+const PORT = process.env.PORT || 4000
 
-mongoose.connect(MONGODB_URI)
-  .then(() => {
-    console.log('connected to MongoDB')
-  })
-  .catch((error) => {
-    console.log('error connection to MongoDB:', error.message)
-  })
+const main = async () => { // highlight-line
+  await connectToDatabase(MONGODB_URI) // highlight-line
+  startServer(PORT)
+}
 
-const typeDefs = `
-  ...
-`
+main()
+```
+
+Koska <i>async/await</i>-syntaksi on käytettävissä ainoastaan funktioiden sisällä, määrittelemme nyt yksinkertaisen <i>main</i>-funktion, joka hoitaa sovelluksen käynnistämisen. Näin voimme kutsua tietokantayhteyden luovaa funktiota käyttäen <i>await</i>-koodisanaa.
+
+Muuttujan *MONGODB_URI* arvo saadaan ympäristömuuttujasta, eli sille tulee lisätä sopiva arvo <i>.env</i>-tiedostoon [osan 3](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan#ymparistomuuttujien-maaritteleminen-kayttaen-dotenv-kirjastoa) tapaan. Sovellus kutsuu ensin tietokantayhteyden luovaa funktiota, ja kun tietokantayhteys on luotu onnistuneesti, se käynnistää GraphQL-palvelimen.
+
+
+
+
+Sovelluslogiikasta vastaavan tiedoston <i>resolvers.js</i> sisältö muuttuu lähes täysin. Saamme sovelluksen jo suurilta osin toimimaan seuraavilla muutoksilla:
+
+```js
+const { GraphQLError } = require('graphql')
+const Person = require('./models/person')
 
 const resolvers = {
   Query: {
@@ -88,10 +304,10 @@ const resolvers = {
     findPerson: async (root, args) => Person.findOne({ name: args.name }),
   },
   Person: {
-    address: (root) => {
+    address: ({ street, city }) => {
       return {
-        street: root.street,
-        city: root.city,
+        street,
+        city,
       }
     },
   },
@@ -102,11 +318,18 @@ const resolvers = {
     },
     editNumber: async (root, args) => {
       const person = await Person.findOne({ name: args.name })
+
+      if (!person) {
+        return null
+      }
+
       person.phone = args.phone
       return person.save()
     },
   },
 }
+
+module.exports = resolvers
 ```
 
 Muutokset ovat melko suoraviivaisia. Huomio kiinnittyy pariin seikkaan. Kuten muistamme, Mongossa olioiden identifioiva kenttä on nimeltään <i>_id</i> ja jouduimme aiemmin muuttamaan itse kentän nimen alaviivattomaan muotoon <i>id</i>. GraphQL osaa tehdä tämän muutoksen automaattisesti.
@@ -159,7 +382,7 @@ Person.find({ phone: { $exists: false }})
 
 ### Validoinnit
 
-GraphQL:n lisäksi syötteet validoidaan nyt Mongoose-skeemassa määriteltyjä validointeja käyttäen. Skeemassa olevien validointivirheiden varalta _save_-metodeille täytyy lisätä virheen käsittelevä _try/catch_-lohko. Heitetään catchiin jouduttaessa vastaukseksi   [virhekoodilla](https://www.apollographql.com/docs/apollo-server/data/errors/#built-in-error-codes) *BAD\_USER\_INPUT* varustetu poikkeus [GraphQLError](https://www.apollographql.com/docs/apollo-server/data/errors/#custom-errors):
+GraphQL:n lisäksi syötteet validoidaan nyt Mongoose-skeemassa määriteltyjä validointeja käyttäen. Skeemassa olevien validointivirheiden varalta _save_-metodeille täytyy lisätä virheen käsittelevä _try/catch_-lohko. Heitetään catchiin jouduttaessa vastaukseksi   [virhekoodilla](https://www.apollographql.com/docs/apollo-server/data/errors/#built-in-error-codes) *BAD\_USER\_INPUT* varustettu poikkeus [GraphQLError](https://www.apollographql.com/docs/apollo-server/data/errors/#custom-errors):
 
 ```js
 Mutation: {
@@ -178,12 +401,17 @@ Mutation: {
           }
         })
       }
-// highlight-end
-
+ 
       return person
+// highlight-end
   },
     editNumber: async (root, args) => {
       const person = await Person.findOne({ name: args.name })
+
+      if (!person) {
+        return null
+      }
+
       person.phone = args.phone
 
 // highlight-start
@@ -198,9 +426,9 @@ Mutation: {
           }
         })
       }
-// highlight-end
-
+ 
       return person
+// highlight-end
     }
 }
 ```
@@ -213,7 +441,7 @@ Backendin koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-h
 
 Lisätään järjestelmään käyttäjänhallinta. Oletetaan nyt yksinkertaisuuden takia, että kaikkien käyttäjien salasana on sama järjestelmään kovakoodattu merkkijono. [Osan 4](/osa4/kayttajien_hallinta) periaatteilla on toki suoraviivaista tallettaa käyttäjille yksilöllinen salasana, mutta koska fokuksemme on GraphQL:ssä, jätämme salasanaan liittyvät rönsyt tällä kertaa pois.
 
-Käyttäjän skeema seuraavassa:
+Luodaan käyttäjän skeema tiedostoon <i>models/user.js</i>:
 
 ```js
 const mongoose = require('mongoose')
@@ -239,7 +467,7 @@ Käyttäjään siis liittyy kentän _friends_ kautta joukko luettelossa olevia h
 
 Kirjautuminen ja käyttäjän tunnistautuminen hoidetaan samoin kuten teimme [osassa 4](/osa4/token_perustainen_kirjautuminen) REST:in yhteydessä, eli käyttämällä tokeneita.
 
-Laajennetaan skeemaa seuraavasti:
+Laajennetaan GraphQL-skeemaa seuraavasti:
 
 ```js
 type User {
@@ -259,13 +487,8 @@ type Query {
 
 type Mutation {
   // ...
-  createUser(
-    username: String!
-  ): User
-  login(
-    username: String!
-    password: String!
-  ): Token
+  createUser(username: String!): User
+  login(username: String!, password: String!): Token
 }
 ```
 
@@ -277,10 +500,11 @@ Asennetaan jsonwebtoken-kirjasto:
 npm install jsonwebtoken
 ```
 
-Mutaatioiden resolverit seuraavassa:
+Uusien mutaatioiden resolverit ovat seuraavassa:
 
 ```js
 const jwt = require('jsonwebtoken')
+const User = require('./models/user')
 
 Mutation: {
   // ..
@@ -351,27 +575,46 @@ Aivan kuten REST:in tapauksessa myös nyt ideana on, että kirjautunut käyttäj
 
 ![](../../images/8/24x.png)
 
-Muutetaan backendin käynnistämistä siten, että annetaan käynnistyksestä huolehtivalle funktiolle [startStandaloneServer](https://www.apollographql.com/docs/apollo-server/api/standalone/) toinen parametri [context](https://www.apollographql.com/docs/apollo-server/data/context/):
+Muutetaan backendin käynnistämistä siten, että määritellään käynnistyksestä huolehtivan funktion [startStandaloneServer](https://www.apollographql.com/docs/apollo-server/api/standalone/) toisena parametrina saamaan olioon [context](https://www.apollographql.com/docs/apollo-server/data/context/)-kenttä:
 
 ```js
-startStandaloneServer(server, {
-  listen: { port: 4000 },
-  // highlight-start
-  context: async ({ req, res }) => {
-    const auth = req ? req.headers.authorization : null
-    if (auth && auth.startsWith('Bearer ')) {
-      const decodedToken = jwt.verify(
-        auth.substring(7), process.env.JWT_SECRET
-      )
-      const currentUser = await User
-        .findById(decodedToken.id).populate('friends')
-      return { currentUser }
-    }
-  },
-  // highlight-end
-}).then(({ url }) => {
-  console.log(`Server ready at ${url}`)
-})
+const { ApolloServer } = require('@apollo/server')
+const { startStandaloneServer } = require('@apollo/server/standalone')
+const jwt = require('jsonwebtoken') // highlight-line
+
+const resolvers = require('./resolvers')
+const typeDefs = require('./schema')
+const User = require('./models/user') // highlight-line
+
+const startServer = (port) => {
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+  })
+
+  startStandaloneServer(server, {
+    listen: { port },
+    // highlight-start
+    context: async ({ req, res }) => {
+      const auth = req ? req.headers.authorization : null
+      if (auth && auth.startsWith('Bearer ')) {
+        const decodedToken = jwt.verify(
+          auth.substring(7),
+          process.env.JWT_SECRET,
+        )
+        const currentUser = await User.findById(decodedToken.id).populate(
+          'friends',
+        )
+        return { currentUser }
+      }
+    },
+    // highlight-end
+  }).then(({ url }) => {
+    console.log(`Server ready at ${url}`)
+  })
+}
+
+module.exports = startServer
 ```
 
 Kontekstin avulla voidaan suorittaa jotain kaikille kyselyille ja mutaatioille yhteisiä asioita, esim. pyyntöön liittyvän [käyttäjän tunnistaminen](https://www.apollographql.com/blog/authorization-in-graphql/).
@@ -424,7 +667,7 @@ Mutation: {
       currentUser.friends = currentUser.friends.concat(person) // highlight-line
       await currentUser.save() // highlight-line
     } catch (error) {
-      throw new GraphQLError('Saving user failed', {
+      throw new GraphQLError('Saving user failed', { // highlight-line
         extensions: {
           code: 'BAD_USER_INPUT',
           invalidArgs: args.name,
@@ -441,14 +684,12 @@ Mutation: {
 
 Jos kirjautunutta käyttäjää ei löydy kontekstista, heitetään poikkeus _GraphQLError_ asianomaisella virheilmoituksella varustettuna. Henkilön talletus hoidetaan nyt _async/await_-syntaksilla, koska joudumme onnistuneen talletuksen yhteydessä tallettamaan uuden henkilön käyttäjän tuttavalistalle.
 
-Lisätään sovellukseen vielä mahdollisuus liittää jokin henkilö omalle tuttavalistalle. Mutaatio seuraavassa:
+Lisätään sovellukseen vielä mahdollisuus liittää jokin henkilö omalle tuttavalistalle. Mutaation skeema on seuraava:
 
 ```js
 type Mutation {
   // ...
-  addAsFriend(
-    name: String!
-  ): User
+  addAsFriend(name: String!): User // highlight-line
 }
 ```
 
@@ -458,15 +699,17 @@ Mutaation toteuttava resolveri:
   addAsFriend: async (root, args, { currentUser }) => {
     if (!currentUser) {
       throw new GraphQLError('wrong credentials', {
-        extensions: { code: 'BAD_USER_INPUT' }
-      }) 
+        extensions: { code: 'BAD_USER_INPUT' },
+      })
     }
 
-    const nonFriendAlready = (person) => 
-      !currentUser.friends.map(f => f._id.toString()).includes(person._id.toString())
+    const nonFriendAlready = (person) =>
+      !currentUser.friends
+        .map((f) => f._id.toString())
+        .includes(person._id.toString())
 
     const person = await Person.findOne({ name: args.name })
-    if ( nonFriendAlready(person) ) {
+    if (nonFriendAlready(person)) {
       currentUser.friends = currentUser.friends.concat(person)
     }
 
@@ -515,7 +758,9 @@ Tämän luvun tehtävät todennäköisesti hajottavat frontendin koodin. Tässä
 
 #### 8.13: Tietokanta, osa 1
 
-Muuta kirjastosovellusta siten, että se tallettaa tiedot tietokantaan. Kirjojen ja kirjailijoiden <i>Mongoose-skeema</i> löytyy valmiiksi [täältä](https://github.com/fullstack-hy2020/misc/blob/master/library-schema.md).
+Refaktoroi kirjastosovelluksen koodi useampaan tiedostoon tämän luvun alun tapaan. Etene pienin askelin ja pidä sovellus toimivana koko ajan. Voit tarkistaa esimerkiksi frontendiä käyttäen, että kaikki toiminnot toimivat myös refaktoroinnin jälkeen.
+
+Muuta sitten sovellusta siten, että se tallettaa tiedot tietokantaan. Kirjojen ja kirjailijoiden <i>Mongoose-skeema</i> löytyy valmiiksi [täältä](https://github.com/fullstack-hy2020/misc/blob/master/library-schema.md).
 
 Muutetaan myös graphql-skeemaa hiukan kirjan osalta
 
