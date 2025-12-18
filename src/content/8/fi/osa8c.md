@@ -558,7 +558,7 @@ type Mutation {
 
 Täydennä sovellusta siten, että kaikki kyselyt (kyselyn _allBooks_ parametrin _author_ toimintaansaattaminen on vapaaehtoinen lisätehtävä!) sekä mutaatiot toimivat.
 
-Kirjojen haun parametrin <i>genre</i> suhteen tilanne on hieman haastavampi. Ratkaisu on yksinkertainen, mutta sen löytäminen voi tuottaa päänvaivaa. Saatat hyötyä [tästä](https://www.mongodb.com/docs/manual/tutorial/query-array-of-documents/). 
+Kirjojen haun parametrin <i>genre</i> suhteen tilanne on hieman haastavampi. Ratkaisu on yksinkertainen, mutta sen löytäminen voi tuottaa päänvaivaa. Saatat hyötyä [tästä](https://www.mongodb.com/docs/manual/tutorial/query-arrays/). 
 
 #### 8.15 Tietokanta, osa 3
 
