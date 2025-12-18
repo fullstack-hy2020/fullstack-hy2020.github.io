@@ -42,6 +42,7 @@ We implemented a counter application in [part 1](/en/part1/component_state_event
 
 ```js  
 import { useState } from 'react'
+
 const App = () => {
   const [counter, setCounter] = useState(0)
 
@@ -60,6 +61,8 @@ const App = () => {
     </div>
   )
 }
+
+export default App
 ```
 
 Let's extract the counter logic into a custom hook. The code for the hook is as follows:
