@@ -486,7 +486,7 @@ services:
   app:
     # ...
   nginx:
-    image: nginx:1.20.1
+    image: nginx:1.25-alpine
     volumes:
       - ./nginx.dev.conf:/etc/nginx/nginx.conf:ro
     ports:
@@ -500,9 +500,9 @@ with that added, we can run _docker compose -f docker-compose.dev.yml up_ and se
 
 ```bash
 $ docker container ls
-CONTAINER ID   IMAGE            COMMAND  PORTS                   NAMES
-a02ae58f3e8d   nginx:1.20.1     ...      0.0.0.0:8080->80/tcp    reverse-proxy
-5ee0284566b4   hello-front-dev  ...      0.0.0.0:5173->5173/tcp  hello-front-dev
+CONTAINER ID   IMAGE              COMMAND  PORTS                   NAMES
+a02ae58f3e8d   nginx:1.25-alpine  ...      0.0.0.0:8080->80/tcp    reverse-proxy
+5ee0284566b4   hello-front-dev    ...      0.0.0.0:5173->5173/tcp  hello-front-dev
 ```
 
 Connecting to http://localhost:8080 will lead to a familiar-looking page with 502 status. 
@@ -512,9 +512,9 @@ This is because directing requests to http://localhost:5173 leads to nowhere as 
 Let's test this by going inside the Nginx container and using curl to send a request to the application itself. In our usage curl is similar to wget, but won't need any flags.
 
 ```bash
-$ docker exec -it reverse-proxy bash  
+$ docker exec -it reverse-proxy sh
 
-root@374f9e62bfa8:\# curl http://localhost:80
+/ # curl http://localhost:80
   <html>
   <head><title>502 Bad Gateway</title></head>
   ...
@@ -525,7 +525,7 @@ To help us, Docker Compose has set up a network when we ran _docker compose up_.
 Since we are inside the container, we can also test the DNS! Let's curl the service name (app) in port 5173
 
 ```html
-root@374f9e62bfa8:\# curl http://app:5173
+/ # curl http://app:5173
 <!doctype html>
 <html lang="en">
   <head>
@@ -551,7 +551,7 @@ services:
   app:
     # ...
   nginx:
-    image: nginx:1.20.1
+    image: nginx:1.25-alpine
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
@@ -691,7 +691,7 @@ services:
       # no ports here!
 
   nginx:
-    image: nginx:1.20.1
+    image: nginx:1.25-alpine
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
