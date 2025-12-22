@@ -794,8 +794,8 @@ test('a note can be deleted', async () => {
 
   const notesAtEnd = await helper.notesInDb()
 
-  const contents = notesAtEnd.map(n => n.content)
-  assert(!contents.includes(noteToDelete.content))
+  const ids = notesAtEnd.map(n => n.id)
+  assert(!ids.includes(noteToDelete.id))
 
   assert.strictEqual(notesAtEnd.length, helper.initialNotes.length - 1)
 })
