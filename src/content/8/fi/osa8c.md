@@ -109,7 +109,7 @@ const resolvers = {
   Mutation: {
     addPerson: (root, args) => {
       if (persons.find((p) => p.name === args.name)) {
-        throw new GraphQLError('Name must be unique', {
+        throw new GraphQLError(`Name must be unique: ${args.name}`, {
           extensions: {
             code: 'BAD_USER_INPUT',
             invalidArgs: args.name,
@@ -313,6 +313,17 @@ const resolvers = {
   },
   Mutation: {
     addPerson: async (root, args) => {
+      const nameExists = await Person.exists({ name: args.name })
+
+      if (nameExists) {
+        throw new GraphQLError(`Name must be unique: ${args.name}`, {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name,
+          },
+        })
+      }
+
       const person = new Person({ ...args })
       return person.save()
     },
@@ -387,13 +398,24 @@ GraphQL:n lisäksi syötteet validoidaan nyt Mongoose-skeemassa määriteltyjä 
 ```js
 Mutation: {
   addPerson: async (root, args) => {
+      const nameExists = await Person.exists({ name: args.name })
+
+      if (nameExists) {
+        throw new GraphQLError(`Name must be unique: ${args.name}`, {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name,
+          },
+        })
+      }
+
       const person = new Person({ ...args })
 
 // highlight-start
       try {
         await person.save()
       } catch (error) {
-        throw new GraphQLError('Saving person failed', {
+        throw new GraphQLError(`Saving person failed: ${error.message}`, {
           extensions: {
             code: 'BAD_USER_INPUT',
             invalidArgs: args.name,
@@ -418,7 +440,7 @@ Mutation: {
       try {
         await person.save()
       } catch (error) {
-        throw new GraphQLError('Saving number failed', {
+        throw new GraphQLError(`Saving number failed: ${error.message}`, {
           extensions: {
             code: 'BAD_USER_INPUT',
             invalidArgs: args.name,
@@ -513,7 +535,7 @@ Mutation: {
 
     return user.save()
       .catch(error => {
-        throw new GraphQLError('Creating the user failed', {
+        throw new GraphQLError(`Creating the user failed: ${error.message}`, {
           extensions: {
             code: 'BAD_USER_INPUT',
             invalidArgs: args.username,
@@ -648,26 +670,38 @@ Mutaatio _addPerson_ muuttuu seuraavasti:
 
 ```js
 Mutation: {
-  addPerson: async (root, args, context) => { // highlight-line
-    const person = new Person({ ...args })
-    const currentUser = context.currentUser // highlight-line
-
-    // highlight-start
+  // highlight-start
+  addPerson: async (root, args, context) => {
+    const currentUser = context.currentUser
+ 
     if (!currentUser) {
       throw new GraphQLError('not authenticated', {
         extensions: {
-          code: 'BAD_USER_INPUT',
+          code: 'UNAUTHENTICATED',
         }
       })
     }
     // highlight-end
+
+    const nameExists = await Person.exists({ name: args.name })
+
+    if (nameExists) {
+      throw new GraphQLError(`Name must be unique: ${args.name}`, {
+        extensions: {
+          code: 'BAD_USER_INPUT',
+          invalidArgs: args.name,
+        },
+      })
+    }
+
+    const person = new Person({ ...args })
 
     try {
       await person.save()
       currentUser.friends = currentUser.friends.concat(person) // highlight-line
       await currentUser.save() // highlight-line
     } catch (error) {
-      throw new GraphQLError('Saving user failed', { // highlight-line
+      throw new GraphQLError(`Saving person failed: ${error.message}`, {
         extensions: {
           code: 'BAD_USER_INPUT',
           invalidArgs: args.name,
@@ -698,8 +732,8 @@ Mutaation toteuttava resolveri:
 ```js
   addAsFriend: async (root, args, { currentUser }) => {
     if (!currentUser) {
-      throw new GraphQLError('wrong credentials', {
-        extensions: { code: 'BAD_USER_INPUT' },
+      throw new GraphQLError('not authenticated', {
+        extensions: { code: 'UNAUTHENTICATED' },
       })
     }
 
