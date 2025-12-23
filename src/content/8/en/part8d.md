@@ -11,34 +11,7 @@ The frontend of our application shows the phone directory just fine with the upd
 
 ### User login
 
-Let's add the variable *token* to the application's state. When a user is logged in, it will contain a user token. If *token* is undefined, we render the <i>LoginForm</i> component responsible for user login. The component receives an error handler and the *setToken* function as parameters:
-
-```js
-const App = () => {
-  const [token, setToken] = useState(null) // highlight-line
-
-  // ...
-
-  if (!token) {
-    return (
-      <div>
-        <Notify errorMessage={errorMessage} />
-        <h2>Login</h2>
-        <LoginForm
-          setToken={setToken}
-          setError={notify}
-        />
-      </div>
-    )
-  }
-
-  return (
-    // ...
-  )
-}
-```
-
-Next, we define a mutation for logging in:
+Let’s first define the mutation for logging in in the file <i>src/queries.js</i>:
 
 ```js
 export const LOGIN = gql`
@@ -50,35 +23,36 @@ export const LOGIN = gql`
 `
 ```
 
-The *LoginForm* component works pretty much just like all the other components doing mutations that we have previously created.
-Interesting lines in the code have been highlighted:
+Let’s define the _LoginForm_ component responsible for logging in in the file <i>src/components/LoginForm.jsx</i>. It works in much the same way as the earlier components that handle mutations. The interesting lines are highlighted in the code:
 
 ```js
 import { useState } from 'react'
 import { useMutation } from '@apollo/client/react'
 import { LOGIN } from '../queries'
 
-const LoginForm = ({ setError, setToken }) => {
+const LoginForm = ({ setError, setToken }) => { // highlight-line
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  const [ login ] = useMutation(LOGIN, { // highlight-line
+  // highlight-start
+  const [ login ] = useMutation(LOGIN, {
+    onCompleted: (data) => {
+      const token = data.login.value
+      setToken(token)
+      localStorage.setItem('phonebook-user-token', token)
+    },
     onError: (error) => {
-      setError(error.graphQLErrors[0].message)
+      setError(error.message)
     }
   })
+  // highlight-end
 
-  const submit = async (event) => {
+  // highlight-start
+  const submit = (event) => {
     event.preventDefault()
-    //highlight-start
-    const result = await login({ variables: { username, password } })
-    if (result.data) {
-      const token = result.data.login.value
-      setToken(token)
-      localStorage.setItem('phonenumbers-user-token', token)
-    }
-    //highlight-end
+    login({ variables: { username, password } })
   }
+  // highlight-end
 
   return (
     <div>
@@ -105,45 +79,91 @@ const LoginForm = ({ setError, setToken }) => {
 export default LoginForm
 ```
 
-Let's also add a button which enables a logged-in user to log out. The button's onClick handler sets the *token* state to null, removes the token from local storage and resets the cache of the Apollo client. The last step is [important](https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout), because some queries might have fetched data to cache, which only logged-in users should have access to.
+The component receives the functions _setError_ and _setToken_ as props, which can be used to change the application state. Defining state management is left to the _App_ component.
 
-We can reset the cache using the [resetStore](https://www.apollographql.com/docs/react/api/core/ApolloClient#resetstore) method of an Apollo *client* object.
-The client can be accessed with the [useApolloClient](https://www.apollographql.com/docs/react/api/react/useApolloClient) hook:
+For the _useMutation_ function that performs the login, an _onCompleted_ callback function is defined. It is called when the mutation has been successfully executed. In the callback, the token value is read from the response data and then stored in the application state and in the browser’s localStorage.
+
+Let’s now use the <i>LoginForm</i> component in the <i>App.jsx</i> file. We add a _token_ variable to the application state to store the token once the user has logged in. If _token_ is not defined, we render only the login form:
 
 ```js
+import LoginForm from './components/LoginForm' // highlight-line
+// ...
+
+const App = () => {
+  const [token, setToken] = useState(localStorage.getItem('phonebook-user-token')) // highlight-line
+  const [errorMessage, setErrorMessage] = useState(null)
+  const result = useQuery(ALL_PERSONS)
+
+  if (result.loading) {
+    return <div>loading...</div>
+  }
+
+  const notify = (message) => {
+    setErrorMessage(message)
+    setTimeout(() => {
+      setErrorMessage(null)
+    }, 10000)
+  }
+
+  // highlight-start
+  if (!token) {
+    return (
+      <div>
+        <Notify errorMessage={errorMessage} />
+        <h2>Login</h2>
+        <LoginForm
+          setToken={setToken}
+          setError={notify}
+        />
+      </div>
+    )
+  }
+  // highlight-end
+
+  return (
+    // ...
+  )
+}
+```
+
+The token is now initialized from a token value that may be found in localStorage:
+
+```js
+const [token, setToken] = useState(localStorage.getItem('phonebook-user-token'))
+```
+
+This way, the token is also restored when the page is reloaded, and the user stays logged in. If localStorage does not contain a value for the key <i>phonebook-user-token</i>, the token value will be _null_.
+
+We also add a button that allows a logged-in user to log out. In the button’s click handler, we set _token_ to _null_, remove the token from localStorage, and reset the Apollo Client cache:
+
+```js
+import { useApolloClient, useQuery } from '@apollo/client/react' // highlight-line
+//...
+
 const App = () => {
   const [token, setToken] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
   const result = useQuery(ALL_PERSONS)
   const client = useApolloClient() // highlight-line
-
+  
   if (result.loading)  {
     return <div>loading...</div>
   }
 
   // highlight-start
-  const logout = () => {
+  const onLogout = () => {
     setToken(null)
     localStorage.clear()
     client.resetStore()
   }
   // highlight-end
 
-  // highlight-start
-  if (!token) {
-    return (
-      <>
-        <Notify errorMessage={errorMessage} />
-        <LoginForm setToken={setToken} setError={notify} />
-      </>
-    )
-  }
-  // highlight-end
+  // ...
 
   return (
     <>
       <Notify errorMessage={errorMessage} />
-      <button onClick={logout}>logout</button> // highlight-line
+      <button onClick={onLogout}>logout</button> // highlight-line
       <Persons persons={result.data.allPersons} />
       <PersonForm setError={notify} />
       <PhoneForm setError={notify} />
@@ -151,19 +171,24 @@ const App = () => {
   )
 }
 ```
+Resetting the cache is done using the Apollo _client_ object’s [resetStore](https://www.apollographql.com/docs/react/api/core/ApolloClient#resetstore) method, and the client itself can be accessed with the [useApolloClient](https://www.apollographql.com/docs/react/api/react/useApolloClient) hook. Clearing the cache is [important](https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout), because some queries may have fetched data into the cache that only an authenticated user is allowed to access.
 
 ### Adding a token to a header
 
-After the backend changes, creating new persons requires that a valid user token is sent with the request. In order to send the token, we have to change the way we define the *ApolloClient* object in <i>main.jsx</i> a little.
+After the backend changes, creating new persons requires that a valid user token is sent with the request. This requires changes to the Apollo Client configuration in the <i>main.jsx</i> file:
 
 ```js
-import { ApolloClient, InMemoryCache, HttpLink, } from '@apollo/client'  // highlight-line
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import App from './App.jsx'
+
+import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
 import { ApolloProvider } from '@apollo/client/react'
-import { SetContextLink } from '@apollo/client/link/context'
+import { SetContextLink } from '@apollo/client/link/context' // highlight-line
 
 // highlight-start
-const authLink = new SetContextLink((preContext) => {
-  const token = localStorage.getItem('phonenumbers-user-token')
+const authLink  = new SetContextLink(({ headers }) => {
+  const token = localStorage.getItem('phonebook-user-token')
   return {
     headers: {
       ...preContext.headers,
@@ -173,15 +198,29 @@ const authLink = new SetContextLink((preContext) => {
 })
 // highlight-end
 
-const httpLink = new HttpLink({ uri: 'http://localhost:4000' })
+// highlight-start
+const httpLink = new HttpLink({
+  uri: 'http://localhost:4000',
+})
+// highlight-end
 
+// highlight-start
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link: authLink.concat(httpLink) // highlight-line
+  link: authLink.concat(httpLink)
 })
+// highlight-end
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+  </StrictMode>,
+)
 ```
 
-The field *uri* that was previously used when creating the *client* object has been replaced by the field *link*, which defines in a more complicated case how Apollo is connected to the server. The server url is now wrapped using the function [createHttpLink](https://www.apollographql.com/docs/link/links/http.htm) into a suitable httpLink object. The link is modified by the [context](https://www.apollographql.com/docs/react/api/link/apollo-link-context/#overview) defined by the authLink object so that a possible token in localStorage is [set to header](https://www.apollographql.com/docs/react/networking/authentication/#header) <i>authorization</i> for each request to the server.
+As before, the server URL is wrapped using the [HttpLink](https://www.apollographql.com/docs/react/api/link/apollo-link-http) constructor to create a suitable _httpLink_ object. This time, however, it is modified using the [context](https://www.apollographql.com/docs/react/api/link/apollo-link-context/#overview) defined by the _authLink_ object so that, for each request, the <i>authorization</i> header is [set](https://www.apollographql.com/docs/react/networking/authentication/#header) to the token that may be stored in localStorage.
 
 Creating new persons and changing numbers works again. There is however one remaining problem. If we try to add a person without a phone number, it is not possible.
 
@@ -189,21 +228,29 @@ Creating new persons and changing numbers works again. There is however one rema
 
 Validation fails, because frontend sends an empty string as the value of *phone*.
 
-Let's change the function creating new persons so that it sets *phone* to *undefined* if user has not given a value.
+Let's change the function creating new persons so that it sets *phone* to *undefined* if user has not given a value:
 
 ```js
 const PersonForm = ({ setError }) => {
   // ...
   const submit = async (event) => {
     event.preventDefault()
-    createPerson({
-      variables: { 
-        name, street, city,  // highlight-line
-        phone: phone.length > 0 ? phone : undefined  // highlight-line
-      }
-    })
 
-  // ...
+    // highlight-start
+    createPerson({
+      variables: {
+        name,
+        street,
+        city,
+        phone: phone.length > 0 ? phone : undefined,
+      },
+    })
+    // highlight-end
+
+    setName('')
+    setPhone('')
+    setStreet('')
+    setCity('')
   }
 
   // ...
@@ -215,17 +262,17 @@ const PersonForm = ({ setError }) => {
 We have to [update](/en/part8/react_and_graph_ql#updating-the-cache) the cache of the Apollo client on creating new persons. We can update it using the mutation's *refetchQueries* option to define that the
 <em>ALL\_PERSONS</em> query is done again.
 
-```js
+```js 
 const PersonForm = ({ setError }) => {
   // ...
 
-  const [ createPerson ] = useMutation(CREATE_PERSON, {
-    refetchQueries: [  {query: ALL_PERSONS} ], // highlight-line
-    onError: (error) => {
-      const messages = error.graphQLErrors.map(e => e.message).join('\n')
-      setError(messages)
-    }
+  const [createPerson] = useMutation(CREATE_PERSON, {
+    refetchQueries: [{ query: ALL_PERSONS }], // highlight-line
+    onError: (error) => setError(error.message),
   })
+
+// ...
+}
 ```
 
 This approach is pretty good, the drawback being that the query is always rerun with any updates.
@@ -236,11 +283,9 @@ It is possible to optimize the solution by handling updating the cache ourselves
 const PersonForm = ({ setError }) => {
   // ...
 
-  const [ createPerson ] = useMutation(CREATE_PERSON, {
-    onError: (error) => {
-      const messages = error.graphQLErrors.map(e => e.message).join('\n')
-      setError(messages)
-    },
+  const [createPerson] = useMutation(CREATE_PERSON, {
+    refetchQueries: [{ query: ALL_PERSONS }],
+    onError: (error) => setError(error.message),
     // highlight-start
     update: (cache, response) => {
       cache.updateQuery({ query: ALL_PERSONS }, ({ allPersons }) => {

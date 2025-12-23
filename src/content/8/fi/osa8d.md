@@ -11,34 +11,7 @@ Sovelluksen frontend toimii puhelinluettelon näyttämisen osalta päivitetyn pa
 
 ### Käyttäjän kirjautuminen
 
-Lisätään sovelluksen tilaan muuttuja _token_, joka tallettaa tokenin siinä vaiheessa kun käyttäjä on kirjautunut. Jos _token_ ei ole määritelty, näytetään kirjautumisesta huolehtiva komponentti <i>LoginForm</i>, joka saa parametriksi virheenkäsittelijän sekä funktion _setToken_:
-
-```js
-const App = () => {
-  const [token, setToken] = useState(null) // highlight-line
-
-  // ...
-
-  if (!token) {
-    return (
-      <div>
-        <Notify errorMessage={errorMessage} />
-        <h2>Login</h2>
-        <LoginForm
-          setToken={setToken}
-          setError={notify}
-        />
-      </div>
-    )
-  }
-
-  return (
-    // ...
-  )
-}
-```
-
-Määritellään kirjautumisen suorittava mutaatio
+Määritellään ensin kirjautumisen suorittava mutaatio tiedostossa <i>src/queries.js</i>:
 
 ```js
 export const LOGIN = gql`
@@ -50,38 +23,36 @@ export const LOGIN = gql`
 `
 ```
 
-Kirjautumisesta huolehtiva komponentti _LoginForm_ toimii melko samalla tavalla kuin aiemmat mutaatioista huolehtivat komponentit. Mielenkiintoiset rivit on korostettu koodissa:
+Määritellään kirjautumisesta huolehtiva komponentti _LoginForm_ tiedostossa <i>src/components/LoginForm.jsx</i>. Se toimii melko samalla tavalla kuin aiemmat mutaatioista huolehtivat komponentit. Mielenkiintoiset rivit on korostettu koodissa:
 
 ```js
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useMutation } from '@apollo/client/react'
 import { LOGIN } from '../queries'
 
-const LoginForm = ({ setError, setToken }) => {
+const LoginForm = ({ setError, setToken }) => { // highlight-line
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  const [ login, result ] = useMutation(LOGIN, { // highlight-line
+  // highlight-start
+  const [ login ] = useMutation(LOGIN, {
+    onCompleted: (data) => {
+      const token = data.login.value
+      setToken(token)
+      localStorage.setItem('phonebook-user-token', token)
+    },
     onError: (error) => {
-      setError(error.graphQLErrors[0].message)
+      setError(error.message)
     }
   })
+  // highlight-end
 
-// highlight-start
-  useEffect(() => {
-    if ( result.data ) {
-      const token = result.data.login.value
-      setToken(token)
-      localStorage.setItem('phonenumbers-user-token', token)
-    }
-  }, [result.data])
-// highlight-end
-
-  const submit = async (event) => {
+  // highlight-start
+  const submit = (event) => {
     event.preventDefault()
-
     login({ variables: { username, password } })
   }
+  // highlight-end
 
   return (
     <div>
@@ -108,14 +79,67 @@ const LoginForm = ({ setError, setToken }) => {
 export default LoginForm
 ```
 
-Käytössä on efektihookki, jonka avulla asetetaan tokenin arvo komponentin _App_ tilaan sekä local storageen siinä vaiheessa kun palvelin on vastannut mutaatioon. Efektihookki on tarpeen, jotta sovellus ei joutuisi ikuiseen renderöintilooppiin.
+Komponentti saa propsina funktiot _setError_ ja _setToken_, joilla voidaan muuttaa ohjelman tilaa. Tilanhallinnan määrittely on jätetty komponentin _App_ vastuulle.
 
-Lisätään sovellukselle myös nappi, jonka avulla kirjautunut käyttäjä voi kirjautua ulos. Napin klikkauskäsittelijässä asetetaan  _token_ tilaan null, poistetaan token local storagesta ja resetoidaan Apollo clientin välimuisti. Tämä on [tärkeää](https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout), sillä joissain kyselyissä välimuistiin on saatettu hakea dataa, johon vain kirjaantuneella käyttäjällä on oikeus päästä käsiksi.
+Kirjautumisen toteuttavalle _useMutation_-funktiolle on määritelty takaisinkutsufunktio _onCompleted_, jota kutsutaan, kun mutaatio on suoritettu onnistuneesti. Takaisinkutsufunktiossa tokenin arvo haetaan vastauksen datasta, ja tallennetaan sen jälkeen ohjelman tilaan ja selaimen localStorageen.
 
-Välimuistin nollaaminen tapahtuu Apollon _client_-objektin metodilla [resetStore](https://www.apollographql.com/docs/react/api/core/ApolloClient#resetstore), clientiin taas päästään käsiksi hookilla
-[useApolloClient](https://www.apollographql.com/docs/react/api/react/useApolloClient):
+Otetaan uusi <i>LoginForm</i>-komponentti käyttöön tiedostossa <i>App.jsx</i>. Lisätään sovelluksen tilaan muuttuja _token_, joka tallettaa tokenin siinä vaiheessa kun käyttäjä on kirjautunut. Jos _token_ ei ole määritelty, näytetään ainoastaan kirjautumislomake:
 
 ```js
+import LoginForm from './components/LoginForm' // highlight-line
+// ...
+
+const App = () => {
+  const [token, setToken] = useState(localStorage.getItem('phonebook-user-token')) // highlight-line
+  const [errorMessage, setErrorMessage] = useState(null)
+  const result = useQuery(ALL_PERSONS)
+
+  if (result.loading) {
+    return <div>loading...</div>
+  }
+
+  const notify = (message) => {
+    setErrorMessage(message)
+    setTimeout(() => {
+      setErrorMessage(null)
+    }, 10000)
+  }
+
+  // highlight-start
+  if (!token) {
+    return (
+      <div>
+        <Notify errorMessage={errorMessage} />
+        <h2>Login</h2>
+        <LoginForm
+          setToken={setToken}
+          setError={notify}
+        />
+      </div>
+    )
+  }
+  // highlight-end
+
+  return (
+    // ...
+  )
+}
+```
+
+Token alustetaan nyt localStoragesta mahdollisesti löytyvällä tokenin arvolla:
+
+```js
+const [token, setToken] = useState(localStorage.getItem('phonebook-user-token'))
+```
+
+Näin token haetaan sovellukseen myös sivun uudelleenlatauksen yhteydessä, ja käyttäjä pysyy kirjautuneena. Jos localStoragesta ei löydy arvoa avaimelle <i>phonebook-user-token</i>, tokenin arvoksi tulee _null_.
+
+Lisätään sovellukselle myös nappi, jonka avulla kirjautunut käyttäjä voi kirjautua ulos. Napin klikkauskäsittelijässä asetetaan  _token_ tilaan _null_, poistetaan token local storagesta ja resetoidaan Apollo clientin välimuisti:
+
+```js
+import { useApolloClient, useQuery } from '@apollo/client/react' // highlight-line
+//...
+
 const App = () => {
   const [token, setToken] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
@@ -127,28 +151,19 @@ const App = () => {
   }
 
   // highlight-start
-  const logout = () => {
+  const onLogout = () => {
     setToken(null)
     localStorage.clear()
     client.resetStore()
   }
   // highlight-end
 
-  // highlight-start
-  if (!token) {
-    return (
-      <>
-        <Notify errorMessage={errorMessage} />
-        <LoginForm setToken={setToken} setError={notify} />
-      </>
-    )
-  }
-  // highlight-end
+  // ...
 
   return (
     <>
       <Notify errorMessage={errorMessage} />
-      <button onClick={logout}>logout</button> // highlight-line
+      <button onClick={onLogout}>logout</button> // highlight-line
       <Persons persons={result.data.allPersons} />
       <PersonForm setError={notify} />
       <PhoneForm setError={notify} />
@@ -157,20 +172,25 @@ const App = () => {
 }
 ```
 
+Välimuistin nollaaminen tapahtuu Apollon _client_-objektin metodilla [resetStore](https://www.apollographql.com/docs/react/api/core/ApolloClient#resetstore), clientiin taas päästään käsiksi hookilla [useApolloClient](https://www.apollographql.com/docs/react/api/react/useApolloClient). Välimuistin tyhjentäminen on [tärkeää](https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout), sillä joissain kyselyissä välimuistiin on saatettu hakea dataa, johon vain kirjaantuneella käyttäjällä on oikeus päästä käsiksi.
+
+
 ### Tokenin lisääminen headeriin
 
-Backendin muutosten jälkeen uusien henkilöiden lisäys puhelinluetteloon vaatii sen, että käyttäjän token lähetetään pyynnön mukana. 
-
-Tämä edellyttää pientä muutosta tiedostossa <i>main.jsx</i> olevaan ApolloClient-olion konfiguraatioon
+Backendin muutosten jälkeen uusien henkilöiden lisäys puhelinluetteloon vaatii sen, että käyttäjän token lähetetään pyynnön mukana. Tämä edellyttää muutoksia tiedostossa <i>main.jsx</i> olevaan ApolloClient-olion konfiguraatioon:
 
 ```js
-import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client'  // highlight-line
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import App from './App.jsx'
+
+import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
 import { ApolloProvider } from '@apollo/client/react'
-import { setContext } from '@apollo/client/link/context' // highlight-line
+import { SetContextLink } from '@apollo/client/link/context' // highlight-line
 
 // highlight-start
-const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('phonenumbers-user-token')
+const authLink  = new SetContextLink(({ headers }) => {
+  const token = localStorage.getItem('phonebook-user-token')
   return {
     headers: {
       ...headers,
@@ -180,17 +200,29 @@ const authLink = setContext((_, { headers }) => {
 })
 // highlight-end
 
-const httpLink = createHttpLink({
+// highlight-start
+const httpLink = new HttpLink({
   uri: 'http://localhost:4000',
 })
+// highlight-end
 
+// highlight-start
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link: authLink.concat(httpLink) // highlight-line
+  link: authLink.concat(httpLink)
 })
+// highlight-end
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+  </StrictMode>,
+)
 ```
 
-_client_-olion muodostamisen yhteydessä ollut kenttä _uri_ on korvattu kentällä _link_, joka määrittelee hieman monimutkaisimmissa tapauksissa, miten Apollo on yhteydessä palvelimeen. Palvelimen url on nyt kääritty funktion [createHttpLink](https://www.apollographql.com/docs/link/links/http.htm) avulla sopivaksi httpLink-olioksi jota muokataan authLink-olion määrittelemän [kontekstin](https://www.apollographql.com/docs/react/api/link/apollo-link-context/#overview) avulla siten, että pyyntöjen mukaan [asetetaan headerille](https://www.apollographql.com/docs/react/networking/authentication/#header) <i>authorization</i> arvoksi localStoragessa mahdollisesti oleva token.
+Palvelimen URL kääritään [HttpLink](https://www.apollographql.com/docs/react/api/link/apollo-link-http)-konstruktorin avulla sopivaksi _httpLink_-olioksi kuten aiemminkin. Nyt sitä muokataan kuitenkin _authLink_-olion määrittelemän [kontekstin](https://www.apollographql.com/docs/react/api/link/apollo-link-context/#overview) avulla siten, että pyyntöjen mukaan [asetetaan headerille](https://www.apollographql.com/docs/react/networking/authentication/#header) <i>authorization</i> arvoksi localStoragessa mahdollisesti oleva token.
 
 Uusien henkilöiden lisäys ja numeroiden muuttaminen toimii taas. Sovellukseen jää kuitenkin yksi ongelma. Jos yritämme lisätä puhelinnumerotonta henkilöä, se ei onnistu.
 
@@ -205,14 +237,22 @@ const PersonForm = ({ setError }) => {
   // ...
   const submit = async (event) => {
     event.preventDefault()
-    createPerson({
-      variables: { 
-        name, street, city,  // highlight-line
-        phone: phone.length > 0 ? phone : undefined  // highlight-line
-      }
-    })
 
-  // ...
+    // highlight-start
+    createPerson({
+      variables: {
+        name,
+        street,
+        city,
+        phone: phone.length > 0 ? phone : undefined,
+      },
+    })
+    // highlight-end
+
+    setName('')
+    setPhone('')
+    setStreet('')
+    setCity('')
   }
 
   // ...
@@ -228,13 +268,13 @@ Uusien henkilöiden lisäyksen yhteydessä on siis
 const PersonForm = ({ setError }) => {
   // ...
 
-  const [ createPerson ] = useMutation(CREATE_PERSON, {
-    refetchQueries: [  {query: ALL_PERSONS} ], // highlight-line
-    onError: (error) => {
-      const messages = error.graphQLErrors.map(e => e.message).join('\n')
-      setError(messages)
-    }
+  const [createPerson] = useMutation(CREATE_PERSON, {
+    refetchQueries: [{ query: ALL_PERSONS }], // highlight-line
+    onError: (error) => setError(error.message),
   })
+
+// ...
+}
 ```
 
 Lähestymistapa on kohtuullisen toimiva, ikävänä puolena on toki se, että päivityksen yhteydessä suoritetaan aina myös kysely. 
@@ -242,15 +282,13 @@ Lähestymistapa on kohtuullisen toimiva, ikävänä puolena on toki se, että p�
 Ratkaisua on mahdollista optimoida hoitamalla välimuistin päivitys itse. Tämä tapahtuu määrittelemällä mutaatiolle sopiva [update](https://www.apollographql.com/docs/react/data/mutations/#the-update-function)-callback, jonka Apollo suorittaa mutaation päätteeksi: 
 
 
-```js 
+```js
 const PersonForm = ({ setError }) => {
   // ...
 
-  const [ createPerson ] = useMutation(CREATE_PERSON, {
-    onError: (error) => {
-      const messages = error.graphQLErrors.map(e => e.message).join('\n')
-      setError(messages)
-    },
+  const [createPerson] = useMutation(CREATE_PERSON, {
+    refetchQueries: [{ query: ALL_PERSONS }],
+    onError: (error) => setError(error.message),
     // highlight-start
     update: (cache, response) => {
       cache.updateQuery({ query: ALL_PERSONS }, ({ allPersons }) => {
@@ -325,7 +363,7 @@ Tee sovellukseen näkymä, joka näyttää kirjautuneelle käyttäjälle käytt�
 
 #### 8.21 Genren kirjat GraphQL:llä
 
-Tehtävässä 8.19 toteutetun tietyn genren kirjoihin rajoittamisen voi tehdä kokonaan React-sovelluksen puolella. Jos toteutit rajauksen frontendin koodissa, muuta toteutustasi siten, että haet näytettävät kirjat GraphQL-kyselyillä. Jos teit jo rajauksen GraphQL:llä, ei sinun tarvitse tehdä mitään.
+Tehtävässä 8.19 toteutetun tietyn genren kirjoihin rajoittaminen oli mahdollista tehdä kokonaan React-sovelluksen puolella. Jos toteutit rajauksen frontendin koodissa, muuta toteutustasi siten, että haet näytettävät kirjat GraphQL-kyselyillä. Jos teit jo rajauksen GraphQL:llä, ei sinun tarvitse tehdä mitään.
 
 Tämä **tehtävä on haastava** ja niin kurssin tässä vaiheessa jo kuuluukin olla.
 
