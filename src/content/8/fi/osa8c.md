@@ -515,7 +515,7 @@ Tämän luvun tehtävät todennäköisesti hajottavat frontendin koodin. Tässä
 
 #### 8.13: Tietokanta, osa 1
 
-Muuta kirjastosovellusta siten, että se tallettaa tiedot tietokantaan. Kirjojen ja kirjailijoiden <i>Mongoose-skeema</i> löytyy valmiiksi [täältä](https://github.com/fullstack-hy/misc/blob/master/library-schema.md).
+Muuta kirjastosovellusta siten, että se tallettaa tiedot tietokantaan. Kirjojen ja kirjailijoiden <i>Mongoose-skeema</i> löytyy valmiiksi [täältä](https://github.com/fullstack-hy2020/misc/blob/master/library-schema.md).
 
 Muutetaan myös graphql-skeemaa hiukan kirjan osalta
 

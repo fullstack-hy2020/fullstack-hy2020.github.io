@@ -508,7 +508,7 @@ The following exercises are quite likely to break your frontend. Do not worry ab
 
 #### 8.13: Database, part 1
 
-Change the library application so that it saves the data to a database. You can find the <i>mongoose schema</i> for books and authors from [here](https://github.com/fullstack-hy/misc/blob/main/library-schema.md).
+Change the library application so that it saves the data to a database. You can find the <i>mongoose schema</i> for books and authors from [here](https://github.com/fullstack-hy2020/misc/blob/master/library-schema.md).
 
 Let's change the book graphql schema a little
 

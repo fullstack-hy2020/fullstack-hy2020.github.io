@@ -481,8 +481,8 @@ query {
  下面的练习很可能会破坏你的前端。先不要担心，前端将在下一章进行修复和扩展。
 #### 8.13: Database, part 1
 
-<!-- Change the library application so that it saves the data to a database. You can find the <i>mongoose schema</i> for books and authors from [here](https://github.com/fullstack-hy/misc/blob/main/library-schema.md).-->
- 改变库中的应用，使其将数据保存到数据库中。你可以从[这里](https://github.com/fullstack-hy/misc/blob/main/library-schema.md)找到书籍和作者的<i>mongoose模式</i>。
+<!-- Change the library application so that it saves the data to a database. You can find the <i>mongoose schema</i> for books and authors from [here](https://github.com/fullstack-hy2020/misc/blob/master/library-schema.md).-->
+ 改变库中的应用，使其将数据保存到数据库中。你可以从[这里](https://github.com/fullstack-hy2020/misc/blob/master/library-schema.md)找到书籍和作者的<i>mongoose模式</i>。
 
 <!-- Let's change the book graphql schema a little-->
  让我们稍微改变一下图书graphql模式
