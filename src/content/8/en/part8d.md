@@ -157,25 +157,23 @@ const App = () => {
 After the backend changes, creating new persons requires that a valid user token is sent with the request. In order to send the token, we have to change the way we define the *ApolloClient* object in <i>main.jsx</i> a little.
 
 ```js
-import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client'  // highlight-line
+import { ApolloClient, InMemoryCache, HttpLink, } from '@apollo/client'  // highlight-line
 import { ApolloProvider } from '@apollo/client/react'
-import { SetContextLink } from '@apollo/client/link/context' // highlight-line
+import { SetContextLink } from '@apollo/client/link/context'
 
 // highlight-start
-const authLink  = new SetContextLink(({ headers }) => {
+const authLink = new SetContextLink((preContext) => {
   const token = localStorage.getItem('phonenumbers-user-token')
   return {
     headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : null,
-    }
+      ...preContext.headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
   }
 })
 // highlight-end
 
-const httpLink = createHttpLink({
-  uri: 'http://localhost:4000',
-})
+const httpLink = new HttpLink({ uri: 'http://localhost:4000' })
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
