@@ -20,9 +20,9 @@ Cuando TypeScript se compila en JavaScript, el código queda sujeto a borrado de
 
 En un entorno de producción, la necesidad de compilación a menudo significa que debes configurar un "paso de compilación". Durante el paso de compilación, todo el código TypeScript se compila en JavaScript en una carpeta separada, y el entorno de producción luego ejecuta el código desde esa carpeta. En un entorno de desarrollo, a menudo es más útil hacer uso de la compilación en tiempo real y la recarga automática para poder ver los cambios resultantes más rápido.
 
-Comencemos a escribir nuestra primera aplicación TypeScript. Para simplificar las cosas, comencemos usando el paquete [ts-node](https://github.com/TypeStrong/ts-node) de npm . El cual compila y ejecuta el archivo TypeScript especificado inmediatamente, por lo que no es necesario un paso de compilación por separado.
+Comencemos a escribir nuestra primera aplicación TypeScript. Para simplificar las cosas, comencemos usando el paquete [ts-node](https://github.com/TypeStrong/ts-node) de npm. El cual compila y ejecuta el archivo TypeScript especificado inmediatamente, por lo que no es necesario un paso de compilación por separado.
 
-Puedes instalar tanto *ts-node* como el paquete oficial *typescript* a nivel global ejecutando
+Puedes instalar tanto *ts-node* como el paquete oficial *typescript* a nivel global ejecutando:
 
 ```bash
 npm install --location=global ts-node typescript
@@ -31,7 +31,7 @@ npm install --location=global ts-node typescript
 Si no puedes o no quieres instalar paquetes globales, puedes crear un proyecto npm que tenga las dependencias necesarias y ejecutar sus scripts en él.
 También tomaremos este enfoque.
 
-Como recordamos de la [parte 3](/es/part3), un proyecto npm se configura ejecutando el comando *npm init* en un directorio vacío. Entonces podemos instalar las dependencias ejecutando
+Como recordamos de la [parte 3](/es/part3), un proyecto npm se configura ejecutando el comando *npm init* en un directorio vacío. Entonces podemos instalar las dependencias ejecutando:
 
 ```bash
 npm install --save-dev ts-node typescript
@@ -49,7 +49,7 @@ y configurando *scripts* dentro de package.json:
 }
 ```
 
-Ahora, dentro de este directorio, puedes usar *ts-node* ejecutando * npm run ts-node*. Ten en cuenta que si estás utilizando ts-node a través de package.json, todos los argumentos de la línea de comandos para el script deben tener el prefijo  *--*. Entonces, si deseas ejecutar file.ts con *ts-node* y opciones *-s* y *--someoption*, el comando completo es: -->
+Ahora, dentro de este directorio, puedes usar *ts-node* ejecutando *npm run ts-node*. Ten en cuenta que si estás utilizando *ts-node* a través de package.json, todos los argumentos de la línea de comandos para el script deben tener el prefijo *--*. Entonces, si deseas ejecutar file.ts con *ts-node* y opciones *-s* y *--someoption*, el comando completo es:
 
 ```shell
 npm run ts-node file.ts -- -s --someoption
@@ -57,7 +57,7 @@ npm run ts-node file.ts -- -s --someoption
 
 Vale la pena mencionar que TypeScript también proporciona un área de juegos en línea, donde puedes probar rápidamente el código TypeScript y ver instantáneamente el JavaScript resultante y los posibles errores de compilación. Puedes acceder al área de juegos oficial de TypeScript [aquí](https://www.typescriptlang.org/play/index.html).
 
-**NB:** El área de juegos puede contener diferentes reglas en tsconfig (que se presentarán más adelante) que en tu entorno local, por lo que es posible que veas advertencias diferentes en comparación con tu entorno local. El tsconfig de la zona de juegos se puede modificar a través del menú de configuración desplegable.
+**NB:** El área de juegos puede contener diferentes reglas en *tsconfig* (que se presentarán más adelante) que en tu entorno local, por lo que es posible que veas advertencias diferentes en comparación con tu entorno local. El *tsconfig* de la zona de juegos se puede modificar a través del menú de configuración desplegable.
 
 #### Una nota sobre el estilo de código
 
@@ -475,7 +475,7 @@ En este curso, normalmente, seguiremos la convención impuesta por la regla de E
 
 #### setup
 
-Los ejercicios 9.1.-9.7. se realizarán todos en el mismo proyecto de node. Crea el proyecto en un directorio vacío con *npm init* e instale los paquetes ts-node y typescript. Cree también el archivo *tsconfig.json* en el directorio con el siguiente contenido:
+Los ejercicios 9.1.-9.7. se realizarán todos en el mismo proyecto de node. Crea el proyecto en un directorio vacío con *npm init* e instale los paquetes *ts-node* y typescript. Cree también el archivo *tsconfig.json* en el directorio con el siguiente contenido:
 
 ```json
 {
@@ -604,7 +604,7 @@ En realidad esto no es del todo cierto. Esta regla solamente aplica a archivos q
 
 ### Más acerca de tsconfig
 
-Hasta ahora solo hemos utilizado una regla en tsconfig, [noImplicitAny](https://www.typescriptlang.org/tsconfig#noImplicitAny). Es un buen lugar para comenzar, pero ahora es el momento de profundizar un poco más en el archivo de configuración.
+Hasta ahora solo hemos utilizado una regla en *tsconfig*, [noImplicitAny](https://www.typescriptlang.org/tsconfig#noImplicitAny). Es un buen lugar para comenzar, pero ahora es el momento de profundizar un poco más en el archivo de configuración.
 
 Como ya mencionamos, el archivo [tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) contiene todas tus configuraciones principales sobre cómo deseas que TypeScript funcione en tu proyecto.
 
@@ -628,7 +628,7 @@ Especifiquemos las siguientes configuraciones en nuestro archivo *tsconfig.json*
 
 No te preocupes demasiado por las *compilerOptions*, haremos una inspección minuciosa más adelante.
 
-Puedes encontrar explicaciones para cada una de las configuraciones en la documentación de TypeScript, o en la muy util [página de tsconfig](https://www.typescriptlang.org/tsconfig), o en la [definición del esquema](http://json.schemastore.org/tsconfig) de tsconfig , que desafortunadamente tiene un formato un poco peor que las dos primeras opciones.
+Puedes encontrar explicaciones para cada una de las configuraciones en la documentación de TypeScript, o en la muy util [página de tsconfig](https://www.typescriptlang.org/tsconfig), o en la [definición del esquema de tsconfig](https://json.schemastore.org/tsconfig), que desafortunadamente tiene un formato un poco peor que las dos primeras opciones.
 
 ### Añadiendo express a la mezcla
 
@@ -748,7 +748,7 @@ Cambiemos el nombre de la variable *req* a *_req*. Finalmente estamos listos par
 
 ![navegador mostrando resultado pong en /ping](../../images/9/11a.png)
 
-Para simplificar el desarrollo, deberíamos habilitar la *recarga automática* para mejorar nuestro flujo de trabajo. En este curso ya has utilizado *nodemon*, pero ts-node tiene una alternativa llamada *ts-node-dev*. Está hecho para ser utilizado solo en un entorno de desarrollo y se encarga de la re-compilación en cada cambio, por lo que no será necesario reiniciar la aplicación.
+Para simplificar el desarrollo, deberíamos habilitar la *recarga automática* para mejorar nuestro flujo de trabajo. En este curso ya has utilizado *nodemon*, pero *ts-node* tiene una alternativa llamada *ts-node-dev*. Está hecho para ser utilizado solo en un entorno de desarrollo y se encarga de la re-compilación en cada cambio, por lo que no será necesario reiniciar la aplicación.
 
 Instalemos *ts-node-dev* en nuestras dependencias de desarrollo:
 

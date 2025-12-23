@@ -315,7 +315,7 @@ Even though a new value was set for _left_ by calling _setLeft(left + 1)_, the o
 setTotal(left + right) 
 ```
 
-The reason for this is that a state update in React happens [asynchronously](https://react.dev/learn/queueing-a-series-of-state-updates), i.e. not immediately but "at some point" before the component is rendered again.
+The reason for this is that a state update in React happens [asynchronously](https://react.dev/learn/queueing-a-series-of-state-updates), i.e. not immediately but "at some point" after the current component function is finished, before the component is rendered again.
 
 We can fix the app as follows:
 
@@ -1084,7 +1084,7 @@ const App = () => {
 }
 ```
 
-The application still appears to work, but **don't implement components like this!** Never define components inside of other components. The method provides no benefits and leads to many unpleasant problems. The biggest problems are because React treats a component defined inside of another component as a new component in every render. This makes it impossible for React to optimize the component.
+The application still appears to work, but **do not implement components like this!** Never define components inside of other components. The method provides no benefits and only leads to problems. One such problem is that React will treat a component defined inside of another component as a "new component" in every render. This makes it impossible for React to optimize the component.
 
 Let's instead move the <i>Display</i> component function to its correct place, which is outside of the <i>App</i> component function:
 
@@ -1125,24 +1125,24 @@ You may find the following links useful:
 - The [official React documentation](https://react.dev/learn) is worth checking out at some point, although most of it will become relevant only later on in the course. Also, everything related to class-based components is irrelevant to us;
 - Some courses on [Egghead.io](https://egghead.io) like [Start learning React](https://egghead.io/courses/start-learning-react) are of high quality, and the recently updated [Beginner's Guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) is also relatively good; both courses introduce concepts that will also be introduced later on in this course. **NB** The first one uses class components but the latter uses the new functional ones.
 
-### Web programmers oath
+### Web Programmer's Oath
 
-Programming is hard, that is why I will use all the possible means to make it easier
+Programming is hard. That is why, as a developer, I will use all possible means to make it easier.
 
-- I will have my browser developer console open all the time
-- I progress with small steps
-- I will write lots of _console.log_ statements to make sure I understand how the code behaves and to help pinpointing problems
-- If my code does not work, I will not write more code. Instead I will start deleting the code until it works or just return to a state when everything was still working
-- When I ask for help in the course Discord channel or elsewhere I formulate my questions properly, see [here](http://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord) how to ask for help
+- I will have my browser's developer console open at all times.
+- I will progress in small steps, making sure that my code is working at each step.
+- I will write many _console.log_ statements to make sure I understand how the code behaves and to help pinpointing problems.
+- If my code does not work, I will not write more code. Instead, I will either start deleting the code until it works or return to a state where my program was working.
+- When I ask for help in the course Discord channel or elsewhere, I will formulate my questions properly. See [this section](http://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord) to learn how to ask for help.
 
 ### Utilization of Large language models
 
 Large language models such as [ChatGPT](https://chat.openai.com/auth/login), [Claude](https://claude.ai/) and [GitHub Copilot](https://github.com/features/copilot) have proven to be very useful in software development.
 
 Personally, I mainly use GitHub Copilot, which is now [natively integrated into Visual Studio Code](https://code.visualstudio.com/docs/copilot/overview)
-As a reminder, if you're a university student, you can access Copilot pro for free through the [GitHub Student Developer Pack](https://education.github.com/pack).
+As a reminder, if you're a university student, you can access Copilot Pro for free through the [GitHub Student Developer Pack](https://education.github.com/pack).
 
-Copilot is useful in a wide variety of scenarios. Copilot can be asked to generate code for an open file by describing the desired functionality in text:
+Copilot is useful in a wide variety of scenarios. For example, Copilot can be asked to generate code for an open file by describing the desired functionality in text:
 
 ![copilot input on vscode](../../images/1/gpt1.png)
 
@@ -1156,35 +1156,35 @@ An event handler may also be generated. By writing the first line of the functio
 
 ![copilot´s code suggestion](../../images/1/gpt3.png)
 
-In Copilot's chat window, it is possible to ask for an explanation of the function of the painted code area:
+In Copilot's chat window, it is possible to ask for an explanation of the function of the selected code area:
 
 ![copilot explaining how the selected code works in the chat window](../../images/1/gpt4.png)
 
-Copilot is also useful in error situations, by copying the error message into Copilot's chat, you will get an explanation of the problem and a suggested fix:
+Copilot is also useful for debugging. If you copy an error message into Copilot's chat, you will get an explanation of the problem and a suggested fix:
 
 ![copilot explaining the error and suggesting a fix](../../images/1/gpt5.png)
 
-Copilot's chat also enables the creation of larger set of functionality
+Copilot's chat also enables the creation of larger set of functionality. For example, the image below shows Copilot creating a login component using the _useState_ hook.
 
 ![copilot creating a login component on request](../../images/1/gpt6.png)
 
-The degree of usefulness of the hints provided by Copilot and other language models varies. Perhaps the biggest problem with language models is [hallucination](https://en.wikipedia.org/wiki/Hallucination_(artificial_intelligence)), they sometimes generate completely convincing-looking answers, which, however, are completely wrong. When programming, of course, the hallucinated code is often caught quickly if the code does not work. More problematic situations are those where the code generated by the language model seems to work, but it contains more difficult to detect bugs or e.g. security vulnerabilities.
+The usefulness of Copilot and other language models in programming varies. The biggest problem with language models is [hallucination](https://en.wikipedia.org/wiki/Hallucination_(artificial_intelligence)). Large language models sometimes generate answers that may seem correct, but are completely wrong. In programming, errors in hallucinated code are often caught quickly when the code fails to run. However, some code generated by a language model may work at first but still have hidden issues, such as logic errors or security vulnerabilities.
 
-Another problem in applying language models to software development is that it is difficult for language models to "understand" larger projects, and e.g. to generate functionality that would require changes to several files. Language models are also currently unable to generalize code, i.e. if the code has, for example, existing functions or components that the language model could use with minor changes for the requested functionality, the language model will not bend to this. The result of this can be that the code base deteriorates, as the language models generate a lot of repetition in the code, see more e.g. [here](https://visualstudiomagazine.com/articles/2024/01/25/copilot-research.aspx).
+Another problem in applying language models to software development is that it is difficult for language models to "understand" larger projects. One major limitation of language models is that they are unable to implement changes across several files. Language models are also currently unable to generalize code. For example, if the programmer requests for new functionality that can be implemented with existing functions or components (even with minor adjustments), the language model may fail to use them. This deteriorates the code base quality because the language models generate duplicate functions and components. For more information about this, read [this article](https://visualstudiomagazine.com/articles/2024/01/25/copilot-research.aspx).
 
-When using language models, the responsibility always stays with the programmer.
+If you choose to use language models when programming, remember that its output is your responsibility.
 
-The rapid development of language models puts the student of programming in a challenging position: is it worth and is it even necessary to learn programming in a detailed level, when you can get almost everything ready-made from language models?
+The rapid development of language models puts programming students in a challenging position. Is it worth, or even necessary, to learn programming to a detailed level when you can get almost everything ready-made from language models?
 
 At this point, it is worth remembering the old wisdom of  [Brian Kerningham](https://en.wikipedia.org/wiki/Brian_Kernighan), co-author of *The C Programming Language*:
 
 ![Everyone knows that debugging is twice as hard as writing a program in the first place. So if you're as clever as you can be when you write it, how will you ever debug it? ― Brian Kernighan](../../images/1/kerningham.png)
 
-In other words, since debugging is twice as difficult as programming, it is not worth programming such code that you can only barely understand. How can debugging be even possible in a situation where programming is outsourced to a language model and the software developer does not understand the debugged code at all?
+In other words, since debugging is twice as difficult as programming, it is not worth creating code that you barely understand. How can debugging even be possible when the software developer does not understand the debugged code because they outsourced programming to a language model?
 
-So far, the development of language models and artificial intelligence is still at the stage where they are not self-sufficient, and the most difficult problems are left for humans to solve. Because of this, even novice software developers must learn to program really well just in case. It may be that, despite the development of language models, even more in-depth knowledge is needed. Artificial intelligence does the easy things, but a human is needed to sort out the most complicated messes caused by AI. GitHub Copilot is a very well-named product, it's Copilot, a second pilot who helps the main pilot in an aircraft. The programmer is still the main pilot, the captain, and bears the ultimate responsibility.
+So far, the development of language models and artificial intelligence is still at the stage where they are not self-sufficient, and the most difficult problems are left for humans to solve. Because of this, even novice software developers must learn to program really well just in case. It may be that, despite the development of language models, even more in-depth knowledge is needed. Artificial intelligence does the easy things, but a human is needed to sort out the most complicated messes caused by AI. GitHub Copilot is a very well-named product because it's a Copilot; a second pilot who helps the main pilot in an aircraft. The programmer is still the main pilot, the captain, and the one who ultimately bears the responsibility.
 
-It may be in your own interest that you turn off Copilot by default when you do this course and rely on it only in a real emergency.
+Throughout this course, it may be in your own interest that you turn off Copilot by default and only rely on it in a real emergency.
 
 </div>
 
@@ -1306,9 +1306,9 @@ const Statistics = (props) => {
   /// ...
   return(
     <div>
-      <StatisticLine text="good" value ={...} />
-      <StatisticLine text="neutral" value ={...} />
-      <StatisticLine text="bad" value ={...} />
+      <StatisticLine text="good" value={...} />
+      <StatisticLine text="neutral" value={...} />
+      <StatisticLine text="bad" value={...} />
       // ...
     </div>
   )

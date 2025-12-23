@@ -351,7 +351,7 @@ Unfortunately, startStandaloneServer does not allow adding subscriptions to the 
 Let us install Express
 
 ```bash
-npm install express cors
+npm install express cors @as-integrations/express5
 ```
 
 and the file <i>index.js</i> changes to:
@@ -359,7 +359,7 @@ and the file <i>index.js</i> changes to:
 ```js
 const { ApolloServer } = require('@apollo/server')
 // highlight-start
-const { expressMiddleware } = require('@apollo/server/express4')
+const { expressMiddleware } = require('@as-integrations/express5')
 const { ApolloServerPluginDrainHttpServer } = require('@apollo/server/plugin/drainHttpServer')
 const { makeExecutableSchema } = require('@graphql-tools/schema')
 const express = require('express')
@@ -464,7 +464,7 @@ The file <i>index.js</i> is changed to:
 ```js
 // highlight-start
 const { WebSocketServer } = require('ws')
-const { useServer } = require('graphql-ws/lib/use/ws')
+const { useServer } = require('graphql-ws/use/ws')
 // highlight-end
 
 // ...
@@ -589,7 +589,7 @@ const resolvers = {
   // highlight-start
   Subscription: {
     personAdded: {
-      subscribe: () => pubsub.asyncIterator('PERSON_ADDED')
+      subscribe: () => pubsub.asyncIterableIterator('PERSON_ADDED')
     },
   },
   // highlight-end
@@ -610,7 +610,7 @@ There are only a few lines of code added, but quite a lot is happening under the
 ```js
 Subscription: {
   personAdded: {
-    subscribe: () => pubsub.asyncIterator('PERSON_ADDED')
+    subscribe: () => pubsub.asyncIterableIterator('PERSON_ADDED')
   },
 },
 ```
@@ -637,7 +637,7 @@ If the subscription does not work, check that you have the correct connection se
 
 The backend code can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-7), branch <i>part8-7</i>.
 
-Implementing subscriptions involves a lot of configurations. You will be able to cope with the few exercises of this course without worrying much about the details. If you are planning to use subscriptions in an production use application, you should definitely read Apollo's [documentation on subscriptions](https://www.apollographql.com/docs/apollo-server/data/subscriptions) carefully.
+Implementing subscriptions involves a lot of configurations. You will be able to cope with the few exercises of this course without worrying much about the details. If you are planning to use subscriptions in a production application, you should definitely read Apollo's [documentation on subscriptions](https://www.apollographql.com/docs/apollo-server/data/subscriptions) carefully.
 
 ### Subscriptions on the client
 
@@ -646,9 +646,10 @@ The configuration in <i>main.jsx</i> has to be modified like so:
 
 ```js
 import { 
-  ApolloClient, InMemoryCache, ApolloProvider, createHttpLink,
+  ApolloClient, InMemoryCache, createHttpLink,
   split  // highlight-line
 } from '@apollo/client'
+import { ApolloProvider } from '@apollo/client/react'
 import { setContext } from '@apollo/client/link/context'
 
 // highlight-start
@@ -739,7 +740,7 @@ and do the subscription in the App component:
 
 ```js
 
-import { useQuery, useMutation, useSubscription } from '@apollo/client' // highlight-line
+import { useQuery, useMutation, useSubscription } from '@apollo/client/react' // highlight-line
 
 
 const App = () => {

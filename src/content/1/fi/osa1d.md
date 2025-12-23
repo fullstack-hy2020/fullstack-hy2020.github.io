@@ -324,7 +324,7 @@ Vaikka tilalle _left_ asetettiin uusi arvo kutsumalla _setLeft(left + 1)_ on til
 setTotal(left + right) 
 ```
 
-Syynä ilmiöön on se, että tilan päivitys tapahtuu Reactissa [asynkronisesti](https://react.dev/learn/queueing-a-series-of-state-updates#react-batches-state-updates), eli "jossain vaiheessa" ennen kuin komponentti renderöidään uudelleen, ei kuitenkaan välittömästi.
+Syynä ilmiöön on se, että tilan päivitys tapahtuu Reactissa [asynkronisesti](https://react.dev/learn/queueing-a-series-of-state-updates#react-batches-state-updates), eli ei välittömästi vaan "jossain vaiheessa" sen jälkeen, kun tapahtumakäsittelijä on suoritettu mutta ennen kuin komponentti renderöidään uudelleen.
 
 Saamme korjattua sovelluksen seuraavasti:
 
@@ -1286,9 +1286,9 @@ const Statistics = (props) => {
   /// ...
   return(
     <div>
-      <StatisticLine text="good" value ={...} />
-      <StatisticLine text="neutral" value ={...} />
-      <StatisticLine text="bad" value ={...} />
+      <StatisticLine text="good" value={...} />
+      <StatisticLine text="neutral" value={...} />
+      <StatisticLine text="bad" value={...} />
       // ...
     </div>
   )

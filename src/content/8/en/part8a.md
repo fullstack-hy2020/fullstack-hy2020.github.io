@@ -389,18 +389,61 @@ has a resolver which returns <i>all</i> objects from the *persons* array.
 ```js
 () => persons
 ```
-  
-Start the server by running `node index.js` in the terminal.
 
 ### Apollo Studio Explorer
 
-When Apollo server is run in development mode the page [http://localhost:4000](http://localhost:4000) has a button <i>Query your server</i> that takes us to [GraphOS Studio Explorer](https://www.apollographql.com/docs/graphos/platform/explorer).  This is very useful for a developer, and can be used to make queries to the server.
+Let's add the following scripts to <i>package.json</i> to run the application:
+
+```json
+{
+  //...
+  "scripts": {
+    "start": "node index.js", // highlight-line
+    "dev": "node --watch index.js", // highlight-line
+    // ...
+  }
+}
+```
+
+When Apollo server is run in development mode the page [http://localhost:4000](http://localhost:4000) takes us to [GraphOS Studio Explorer](https://www.apollographql.com/docs/graphos/platform/explorer).  This is very useful for a developer, and can be used to make queries to the server.
 
 Let's try it out:
 
 ![apollo studio Example Query with response allPersons](../../images/8/1x.png)
 
 At the left side Explorer shows the API-documentation that it has automatically generated based on the schema.
+
+### Schema syntax highlighting in VS Code
+
+The schema in our code is defined using template literal syntax:
+
+```js
+const typeDefs = `
+  type Person {
+    name: String!
+    phone: String
+    street: String!
+    city: String! 
+    id: ID!
+  }
+
+  type Query {
+    personCount: Int!
+    allPersons: [Person!]!
+    findPerson(name: String!): Person
+  }
+`
+```
+
+The schema contains structural information, but in the code editor the whole content appears in the same color and automatic formatting tools like Prettier cannot format its contents. We can enable GraphQL schema syntax highlighting and, for example, autocompletion in VS Code by installing the [GraphQL: Language Feature Support](https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql) extension.
+
+We need to somehow indicate to the extension that _typeDefs_ contains GraphQL. There are several ways to do this. We'll do it now by adding the type-indicating comment _/* GraphQL */_ before the template literal string:
+
+
+
+![VS Code uses syntax highlighting for the GraphQL schema when the comment /* GraphQL */ is added before the template literal string](../../images/8/1z.png)
+
+Now the syntax highlighting works. The comment helps the installed extension recognize the string as GraphQL and provide intelligent editor features, but it does not affect the application's runtime. Prettier can now also format the schema.
 
 ### Parameters of a resolver
 
@@ -511,6 +554,32 @@ type Query {
 
 so a person now has a field with the type <i>Address</i>, which contains the street and the city.
 
+Because the objects saved in the array do not have an <i>address</i> field, the default resolver is not sufficient.
+Let's add a resolver for the <i>address</i> field  of <i>Person</i> type:
+
+```js
+const resolvers = {
+  Query: {
+    personCount: () => persons.length,
+    allPersons: () => persons,
+    findPerson: (root, args) =>
+      persons.find(p => p.name === args.name)
+  },
+  // highlight-start
+  Person: {
+    address: (root) => {
+      return { 
+        street: root.street,
+        city: root.city
+      }
+    }
+  }
+  // highlight-end
+}
+```
+
+So every time a <i>Person</i> object is returned, the fields <i>name</i>, <i>phone</i> and <i>id</i> are returned using their default resolvers, but the field <i>address</i> is formed by using a self-defined resolver. The parameter *root* of the resolver function is the person-object, so the street and the city of the address can be taken from its fields.
+
 The queries requiring the address change into
 
 ```js
@@ -560,31 +629,25 @@ The person-objects saved in the server are not exactly the same as the GraphQL t
 
 Contrary to the <i>Person</i> type, the <i>Address</i> type does not have an <i>id</i> field, because they are not saved into their own separate data structure in the server.
 
-Because the objects saved in the array do not have an <i>address</i> field, the default resolver is not sufficient.
-Let's add a resolver for the <i>address</i> field  of <i>Person</i> type :
+Let's modify the resolver for the _address_ field so that it destructures the needed fields from the parameter it receives:
 
 ```js
 const resolvers = {
   Query: {
     personCount: () => persons.length,
     allPersons: () => persons,
-    findPerson: (root, args) =>
-      persons.find(p => p.name === args.name)
+    findPerson: (root, args) => persons.find((p) => p.name === args.name),
   },
-  // highlight-start
   Person: {
-    address: (root) => {
-      return { 
-        street: root.street,
-        city: root.city
+    address: ({ street, city }) => { // highlight-line
+      return {
+        street, // highlight-line
+        city, // highlight-line
       }
-    }
-  }
-  // highlight-end
+    },
+  },
 }
 ```
-
-So every time a <i>Person</i> object is returned, the fields <i>name</i>, <i>phone</i> and <i>id</i> are returned using their default resolvers, but the field <i>address</i> is formed by using a self-defined resolver. The parameter *root* of the resolver function is the person-object, so the street and the city of the address can be taken from its fields.
 
 The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-1), branch <i>part8-1</i>.
 
@@ -610,12 +673,18 @@ The Mutation is given the details of the person as parameters. The parameter <i>
 Mutations also require a resolver:
 
 ```js
-const { v1: uuid } = require('uuid')
+const { v1: uuid } = require('uuid') // highlight-line
 
 // ...
 
 const resolvers = {
-  // ...
+  Query: {
+    // ...
+  },
+  Person: {
+    // ...
+  },
+  // highlight-start
   Mutation: {
     addPerson: (root, args) => {
       const person = { ...args, id: uuid() }
@@ -623,7 +692,10 @@ const resolvers = {
       return person
     }
   }
+  // highlight-end
 }
+
+// ...
 ```
 
 The mutation adds the object given to it as a parameter *args* to the array *persons*, and returns the object it added to the array.
@@ -642,7 +714,7 @@ mutation {
   ) {
     name
     phone
-    address{
+    address {
       city
       street
     }

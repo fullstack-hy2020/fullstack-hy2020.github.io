@@ -280,7 +280,7 @@ You most likely need functions [contains](https://docs.github.com/en/actions/lea
 
 Developing workflows is not easy, and quite often the only option is trial and error. It might actually be advisable to have a separate repository for getting the configuration right, and when it is done, to copy the right configurations to the actual repository.
 
-It would also make sense to re-use longer conditions by moving them to commonly accessible variables and referring these variables on job/step levels:
+It would also make sense to re-use longer conditions by moving them to commonly accessible variables and referring these variables on the step level:
 
 ```yaml
 name: some workflow name
@@ -292,6 +292,10 @@ env:
 jobs:
   job1:
     # rest of the job
+    outputs:
+      # here we produce a record of the outcome of a key step in the job.
+      # the below will be 'true'
+      job2_can_run: ${{ steps.final.outcome == 'success' }}
     steps:
       - if: ${{ env.CONDITION == 'true' }}
         run: echo 'this step is executed'
@@ -299,10 +303,20 @@ jobs:
       - if: ${{ env.CONDITION == 'false' }}
         run: echo 'this step will not be executed'
 
+      - if: ${{ env.CONDITION == 'true' }}
+        # this is important, the id `final` is referenced in job1's `outputs`.
+        id: final
+        run: echo
+
   job2:
-    # this job will be dependent on the above env.CONDITION, note the `github.` prefix which seem to be required while referencing the variable on the job level, but not the step level
-    if: ${{ github.env.CONDITION == 'true' }}
-    # rest of the job
+    needs:
+      - job1
+    # this job will be dependent on the above job1's final step, which in turn depends on the CONDITION defined at the beginning of the file.
+    # note that the `env`-variable cannot be directly accessed on the job level, so we need to use something else,
+    # such as the outputs from another job.
+    if: ${{ needs.job1.outputs.job2_can_run == 'true' }}
+    steps:
+      # rest of the job
 ```
 
 It would also be possible to install a tool such as [act](https://github.com/nektos/act) that makes it possible to run your workflows locally. Unless you end up using more involved use cases like creating your [own custom actions](https://docs.github.com/en/free-pro-team@latest/actions/creating-actions), going through the burden of setting up a tool such as act is most likely not worth the trouble. 

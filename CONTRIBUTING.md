@@ -6,17 +6,16 @@ We really appreciate that you are considering contributing! There are many ways 
 
 1. Fork the repository
 2. Clone your fork
-3. Verify that you are running Node version 10 ([NVM](https://github.com/nvm-sh/nvm) recommended for managing node versions)
+3. Verify that you are running Node version 10 ([NVM](https://github.com/nvm-sh/nvm) recommended for managing node versions, with it you can run `nvm use` to activate correct node version)
 4. Install dependencies with `npm install`
 5. Start the application with `npm start`
 6. Application will be available at <http://localhost:8000>
 
 # Setting up the PR
 
-1. Prettify your code with `npm run format`
-2. Create a new branch for your changes
-3. Create the PR from that branch to the source branch
-4. If your pull request is for a specific part of the course material, please add a corresponding label to your pull request (eg. "Part 3")
+1. Create a new branch for your changes
+2. Create the PR from that branch to the source branch
+3. If your pull request is for a specific part of the course material, please add the part number to the beginning of the title (eg. "**Part 3a:** Fix broken link")
 
 # Contributing with translations
 

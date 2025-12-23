@@ -520,7 +520,7 @@ type Mutation {
 
 Complete el programa para que funcionen todas las consultas (excepto *allBooks* con el parámetro *author*) y mutaciones.
 
-Con respecto al parámetro <i>genre</i> de la consulta de todos los libros, la situación es un poco más desafiante. La solución es simple, pero encontrarla puede ser un dolor de cabeza. Puede beneficiarse de [esto](https://www.mongodb.com/docs/manual/tutorial/query-array-of-documents/).
+Con respecto al parámetro <i>genre</i> de la consulta de todos los libros, la situación es un poco más desafiante. La solución es simple, pero encontrarla puede ser un dolor de cabeza. Puede beneficiarse de [esto](https://www.mongodb.com/docs/manual/tutorial/query-arrays/).
 
 #### 8.15 Base de datos, parte 3
 

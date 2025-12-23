@@ -332,6 +332,7 @@ Despite changes *all the submitted exercises remain valid*, and the course can b
 
 Recent major changes
 
+- Part 6 (12th October 2025): Jest replaced with Vitest. Axios replaced with Fetch API
 - Part 5 (21st August, 2025): React updated to version 19. PropTypes and forwardRef are no longer used. ESLint configurations updated
 - Part 4 (13th August, 2025): Express updated to version 5 and the express-async-errors library removed from part 4b
 - Part 9 (28th August, 2024): Zod library for validating request body type

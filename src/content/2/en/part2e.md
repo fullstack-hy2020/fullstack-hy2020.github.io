@@ -108,7 +108,7 @@ If you now add other <i>li</i> elements to the application, they will not be aff
 
 ### Improved error message
 
-We previously implemented the error message that was displayed when the user tried to toggle the importance of a deleted note with the <em>alert</em> method. Let's implement the error message as its own React component.
+We previously implemented the error message that was displayed when the user tried to toggle the importance of a deleted note with the <em>alert</em> method. Let's implement the error message as its own React component in the file <i>src/components/Notification.jsx</i>.
 
 The component is quite simple:
 
@@ -119,11 +119,13 @@ const Notification = ({ message }) => {
   }
 
   return (
-    <div className='error'>
+    <div className="error">
       {message}
     </div>
   )
 }
+
+export default Notification
 ```
 
 If the value of the <em>message</em> prop is <em>null</em>, then nothing is rendered to the screen, and in other cases, the message gets rendered inside of a div element.
@@ -131,6 +133,11 @@ If the value of the <em>message</em> prop is <em>null</em>, then nothing is rend
 Let's add a new piece of state called <i>errorMessage</i> to the <i>App</i> component. Let's initialize it with some error message so that we can immediately test our component:
 
 ```js
+import { useState, useEffect } from 'react'
+import Note from './components/Note'
+import noteService from './services/notes'
+import Notification from './components/Notification' // highlight-line
+
 const App = () => {
   const [notes, setNotes] = useState([]) 
   const [newNote, setNewNote] = useState('')

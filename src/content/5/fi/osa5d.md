@@ -936,14 +936,14 @@ Kaikki testeissä olevat sovelluksen urlia käyttävät komennot esim.
 
 ```js
 await page.goto('http://localhost:5173')
-await page.post('http://localhost:5173/api/tests/reset')
+await request.post('http://localhost:5173/api/tests/reset')
 ```
 
 voidaan nyt muuttaa muotoon
 
 ```js
 await page.goto('/')
-await page.post('/api/tests/reset')
+await request.post('/api/tests/reset')
 ```
 
 Testien tämänhetkinen koodi on [GitHubissa](https://github.com/fullstack-hy2020/notes-e2e/tree/part5-2), branchissa <i>part5-2</i>.

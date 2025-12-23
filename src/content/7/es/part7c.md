@@ -112,7 +112,7 @@ Mejoremos el formulario en la vista de inicio de sesión con la ayuda de [forms]
 React Bootstrap proporciona [componentes](https://react-bootstrap.github.io/docs/forms/overview/) integrados para crear formularios (aunque su documentación no es muy buena):
 
 ```js
-let Login = (props) => {
+const Login = (props) => {
   // ...
   return (
     <div>

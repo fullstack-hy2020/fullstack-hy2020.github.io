@@ -134,7 +134,7 @@ const password = process.argv[2]
 const url = `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
 
 mongoose.set('strictQuery', false)
-mongoose.connect(url)
+mongoose.connect(url, { family: 4 })
 
 const noteSchema = new mongoose.Schema({
   content: String,
@@ -154,7 +154,15 @@ note.save().then(result => {
 })
 ```
 
-Koodi siis olettaa, että sille annetaan parametrina MongoDB Atlasissa luodulle käyttäjälle määritelty salasana. Komentoriviparametriin se pääsee käsiksi seuraavasti:
+Tietokantaan muodostetaan yhteys komennolla:
+
+```js
+mongoose.connect(url, { family: 4 })
+```
+
+Metodille annetaan ensimmäisenä argumenttina tietokannan URL-osoite ja toisena argumenttina olio, joka määrittelee tarvittavat asetukset. MongoDB Atlas tukee vain IPv4-osoitteita, joten määrittelemme oliolla _{ family: 4 }_, että yhteyteen käytetään aina IPv4-osoitetta.
+
+Kokeilusovellus olettaa, että sille annetaan parametrina MongoDB Atlasissa luodulle käyttäjälle määritelty salasana. Komentoriviparametriin se pääsee käsiksi seuraavasti:
 
 ```js
 const password = process.argv[2]
@@ -357,7 +365,7 @@ const password = process.argv[2]
 const url = `mongodb+srv://fullstack:${password}@cluster0.a5qfl.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0`
 
 mongoose.set('strictQuery',false)
-mongoose.connect(url)
+mongoose.connect(url, { family: 4 })
 
 const noteSchema = new mongoose.Schema({
   content: String,
@@ -423,7 +431,7 @@ mongoose.set('strictQuery', false)
 const url = process.env.MONGODB_URI // highlight-line
 
 console.log('connecting to', url)
-mongoose.connect(url)
+mongoose.connect(url, { family: 4 })
   // highlight-start
   .then(result => {
     console.log('connected to MongoDB')
@@ -466,7 +474,7 @@ Opettelemme pian kehittyneemmän tavan määritellä ympäristömuuttujia.
 Yhteyden muodostustavassa on pieni muutos aiempaan:
 
 ```js
-mongoose.connect(url)
+mongoose.connect(url, { family: 4 })
   .then(result => {
     console.log('connected to MongoDB')
   })
@@ -912,6 +920,8 @@ Eräs huomionarvoinen seikka on se, että koodissa on nyt ns. sisäkkäiset prom
 
 Yleensä tällaista ei suositella, koska se voi tehdä koodista vaikealukuista. Tässä tapauksessa ratkaisu kuitenkin toimii, sillä näin voimme varmistua siitä, että _.save()_-metodin jälkeiseen _.then_-lohkoon mennään vain, jos id:tä vastaava muistiinpano on löytynyt kannasta ja _save()_-metodia on kutsuttu. Tutustumme kurssin neljännessä osassa async/await-syntaksiin, joka tarjoaa helpomman ja selkeämmän kirjoitustavan tämänkaltaisiin tilanteisiin.
 
+Mongoose tarjoaa myös metodin [findByIdAndUpdate](https://mongoosejs.com/docs/api/model.html#Model.findByIdAndUpdate()), jonka avulla voi hakea dokumentin <i>id</i>:n perusteella ja päivittää sen yksittäisellä metodikutsulla. Tämä tapa ei kuitenkaan sovellu täysin tarpeisiimme, sillä määrittelemme myöhemmin tässä osassa tietokantaan talletettavalle datalle tiettyjä vaatimuksia, eikä <i>findByIdAndUpdate</i> tue näitä Mongoosen validaatioita täysin. Mongoosen [dokumentaatio](https://mongoosejs.com/docs/documents.html#updating-using-queries) toteaakin, että <i>save()</i>-metodi on lähtökohtaisesti oikea valinta dokumentin päivittämiseen, sillä se tarjoaa täyden validaation.
+
 Backend vaikuttaa toimivan Postmanista ja VS Coden REST Clientistä tehtyjen kokeilujen perusteella. Myös frontend toimii moitteettomasti tietokantaa käyttävän backendin kanssa.
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5), branchissa <i>part3-5</i>.
@@ -944,7 +954,7 @@ Varmista, että frontend toimii muutosten jälkeen.
 
 #### 3.18*: puhelinluettelo ja tietokanta, step6
 
-Päivitä myös polkujen <i>api/persons/:id</i> ja <i>info</i> käsittely ja varmista niiden toimivuus suoraan selaimella, Postmanilla tai VS Coden REST Clientillä.
+Päivitä myös HTTP GET <i>api/persons/:id</i> ja <i>info</i> -polkujen käsittely ja varmista niiden toimivuus suoraan selaimella, Postmanilla tai VS Coden REST Clientillä.
 
 Selaimella tarkastellen yksittäisen numerotiedon tulisi näyttää seuraavalta:
 

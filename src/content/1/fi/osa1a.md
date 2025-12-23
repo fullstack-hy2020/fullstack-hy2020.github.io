@@ -11,10 +11,21 @@ Alamme nyt tutustua kurssin ehkä tärkeimpään teemaan, [React](https://react.
 
 Helpoin tapa päästä alkuun on [Vite](https://vitejs.dev/)-nimisen työkalun käyttö.
 
-Luodaan sovellus nimeltään <i>part1</i>, mennään sovelluksen sisältämään hakemistoon ja asennetaan sovelluksen käyttämät kirjastot:
+Luodaan uusi sovellus <i>create-vite</i>-työkalun avulla:
 
 ```bash
-npm create vite@latest part1 -- --template react
+npm create vite@latest
+```
+
+Vastaillaan työkalun esittämiin kysymyksiin seuraavasti:
+
+![create-vite-työkalun valintanäkymä, jossa valitaan projektin nimeksi part1, frameworkiksi React, variantiksi JavaScript ja muihin kysymyksiin vastataan kieltävästi](../../images/1/1-create-vite.png)
+
+Loimme siis <i>part1</i>-nimisen sovelluksen. Työkalu olisi voinut myös asentaa tarvittavat riippuvuudet ja käynnistää sen jälkeen sovelluksen automaattisesti, jos olisimme vastanneet myöntävästi kysymykseen "Install with npm and start now?" Teemme vaiheet nyt kuitenkin manuaalisesti, jotta pääsemme näkemään, miten ne tehdään.
+
+Siirrytään sovelluksen sisältämään hakemistoon ja asennetaan sovelluksen käyttämät kirjastot:
+
+```bash
 cd part1
 npm install
 ```
@@ -79,7 +90,7 @@ Tiedosto <i>index.html</i> on headerin määrittelyjä lukuun ottamatta oleellis
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <title>part1</title>
   </head>
   <body>
     <div id="root"></div>

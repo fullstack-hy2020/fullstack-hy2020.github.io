@@ -54,34 +54,30 @@ The *LoginForm* component works pretty much just like all the other components d
 Interesting lines in the code have been highlighted:
 
 ```js
-import { useState, useEffect } from 'react'
-import { useMutation } from '@apollo/client'
+import { useState } from 'react'
+import { useMutation } from '@apollo/client/react'
 import { LOGIN } from '../queries'
 
 const LoginForm = ({ setError, setToken }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  const [ login, result ] = useMutation(LOGIN, { // highlight-line
+  const [ login ] = useMutation(LOGIN, { // highlight-line
     onError: (error) => {
       setError(error.graphQLErrors[0].message)
     }
   })
 
-// highlight-start
-  useEffect(() => {
-    if ( result.data ) {
+  const submit = async (event) => {
+    event.preventDefault()
+    //highlight-start
+    const result = await login({ variables: { username, password } })
+    if (result.data) {
       const token = result.data.login.value
       setToken(token)
       localStorage.setItem('phonenumbers-user-token', token)
     }
-  }, [result.data])
-// highlight-end
-
-  const submit = async (event) => {
-    event.preventDefault()
-
-    login({ variables: { username, password } })
+    //highlight-end
   }
 
   return (
@@ -109,13 +105,10 @@ const LoginForm = ({ setError, setToken }) => {
 export default LoginForm
 ```
 
-We are using an effect hook to save the token's value to the state of the *App* component and the local storage after the server has responded to the mutation.
-Use of the effect hook is necessary to avoid an endless rendering loop.
-
 Let's also add a button which enables a logged-in user to log out. The button's onClick handler sets the *token* state to null, removes the token from local storage and resets the cache of the Apollo client. The last step is [important](https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout), because some queries might have fetched data to cache, which only logged-in users should have access to.
 
-We can reset the cache using the [resetStore](https://www.apollographql.com/docs/react/api/core/ApolloClient/#ApolloClient.resetStore) method of an Apollo *client* object.
-The client can be accessed with the [useApolloClient](https://www.apollographql.com/docs/react/api/react/hooks#useapolloclient) hook:
+We can reset the cache using the [resetStore](https://www.apollographql.com/docs/react/api/core/ApolloClient#resetstore) method of an Apollo *client* object.
+The client can be accessed with the [useApolloClient](https://www.apollographql.com/docs/react/api/react/useApolloClient) hook:
 
 ```js
 const App = () => {
@@ -270,7 +263,7 @@ query ALLPERSONS in the cache by adding the new person to the cached data.
 
 In some situations, the only sensible way to keep the cache up to date is using the *update* callback.
 
-When necessary, it is possible to disable cache for the whole application or [single queries](https://www.apollographql.com/docs/react/api/react/hooks/#options) by setting the field managing the use of cache, [fetchPolicy](https://www.apollographql.com/docs/react/data/queries/#configuring-fetch-logic) as <em>no-cache</em>.
+When necessary, it is possible to disable cache for the whole application or [single queries](https://www.apollographql.com/docs/react/api/react/hooks/#options) by setting the field managing the use of cache, [fetchPolicy](https://www.apollographql.com/docs/react/data/queries#setting-a-fetch-policy) as <em>no-cache</em>.
 
 Be diligent with the cache. Old data in the cache can cause hard-to-find bugs. As we know, keeping the cache up to date is very challenging. According to a coder proverb:
 

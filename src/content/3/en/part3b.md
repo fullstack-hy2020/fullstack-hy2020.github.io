@@ -457,7 +457,7 @@ Because in development mode the frontend is at the address <i>localhost:5173</i>
 
 If the project was created with Vite, this problem is easy to solve. It is enough to add the following declaration to the <i>vite.config.js</i> file of the frontend directory.
 
-```bash
+```js
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 

@@ -243,7 +243,7 @@ module.exports = usersRouter
 
 A senha enviada na solicitação <i>não</i> é armazenada no banco de dados. Armazenamos o <i>hash</i> da senha que é gerada com a função _bcrypt.hash_.
 
-Os fundamentos do [armazenamento de senhas](https://codahale.com/how-to-safely-store-a-password/) estão fora do escopo deste material do curso. Não discutiremos o que significa o número mágico 10 atribuído à variável [saltRounds](https://github.com/kelektiv/node.bcrypt.js/#a-note-on-rounds), mas você pode ler mais sobre isso no material vinculado.
+Os fundamentos do [armazenamento de senhas](https://bytebytego.com/guides/how-to-store-passwords-in-the-database/) estão fora do escopo deste material do curso. Não discutiremos o que significa o número mágico 10 atribuído à variável [saltRounds](https://github.com/kelektiv/node.bcrypt.js/#a-note-on-rounds), mas você pode ler mais sobre isso no material vinculado.
 
 Nosso código atual não contém nenhum tratamento de erro ou validação de entrada para verificar se o nome de usuário e a senha estão no formato desejado.
 

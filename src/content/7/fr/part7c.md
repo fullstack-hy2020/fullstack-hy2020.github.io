@@ -112,7 +112,7 @@ Améliorons le formulaire dans la vue <i>Login</i> avec l'aide des [formulaires]
 React Bootstrap fournit des [composants](https://react-bootstrap.github.io/docs/forms/overview/) intégrés pour créer des formulaires (bien que la documentation à leur sujet soit légèrement insuffisante):
 
 ```js
-let Login = (props) => {
+const Login = (props) => {
   // ...
   return (
     <div>

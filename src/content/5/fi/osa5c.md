@@ -485,6 +485,7 @@ describe('<Togglable />', () => {
     const element = screen.getByText('togglable content')
     expect(element).toBeVisible()
   })
+})
 ```
 
 Ennen jokaista testiä suoritettava _beforeEach_ renderöi <i>Togglable</i>-komponentin.
@@ -688,7 +689,8 @@ Jos syötekentälle olisi määritelty <i>label</i>, voisi kyseisen syötekentä
 Testi löytäisi syötekentän seuraavasti:
 
 ```js
-test('<NoteForm /> updates parent state and calls onSubmit', () => {
+test('<NoteForm /> updates parent state and calls onSubmit', async () => {
+  const user = userEvent.setup()
   const createNote = vi.fn()
 
   render(<NoteForm createNote={createNote} />) 
@@ -696,11 +698,11 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
   const input = screen.getByLabelText('content') // highlight-line
   const sendButton = screen.getByText('save')
 
-  userEvent.type(input, 'testing a form...' )
-  userEvent.click(sendButton)
+  await user.type(input, 'testing a form...')
+  await user.click(sendButton)
 
   expect(createNote.mock.calls).toHaveLength(1)
-  expect(createNote.mock.calls[0][0].content).toBe('testing a form...' )
+  expect(createNote.mock.calls[0][0].content).toBe('testing a form...')
 })
 ```
 
@@ -734,7 +736,8 @@ const NoteForm = ({ createNote }) => {
 Nyt oikean syötekentän etsiminen onnistuu metodin [getByPlaceholderText](https://testing-library.com/docs/queries/byplaceholdertext) avulla:
 
 ```js
-test('<NoteForm /> updates parent state and calls onSubmit', () => {
+test('<NoteForm /> updates parent state and calls onSubmit', async () => {
+  const user = userEvent.setup()
   const createNote = vi.fn()
 
   render(<NoteForm createNote={createNote} />) 
@@ -742,11 +745,11 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
   const input = screen.getByPlaceholderText('write note content here') // highlight-line 
   const sendButton = screen.getByText('save')
 
-  userEvent.type(input, 'testing a form...' )
-  userEvent.click(sendButton)
+  await user.type(input, 'testing a form...')
+  await user.click(sendButton)
 
   expect(createNote.mock.calls).toHaveLength(1)
-  expect(createNote.mock.calls[0][0].content).toBe('testing a form...' )
+  expect(createNote.mock.calls[0][0].content).toBe('testing a form...')
 })
 ```
 
