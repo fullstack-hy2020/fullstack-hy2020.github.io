@@ -880,44 +880,28 @@ Sovelluksessa on  vielä pieni ongelma. Jos yritämme vaihtaa olemattomaan nimee
 
 ![](../../images/8/23ea.png)
 
-Koska kyseessä ei ole GraphQL:n kannalta virhetilanne, ei _onError_-virheenkäsittelijän rekisteröimisestä olisi tässä tilanteessa hyötyä.
-
-Voimme generoida virheilmoituksen _useMutation_-hookin toisena parametrina palauttaman mutaation tuloksen kertovan olion _result_ avulla.
+Koska kyseessä ei ole GraphQL:n kannalta virhetilanne, ei _onError_-virheenkäsittelijän rekisteröimisestä olisi tässä tilanteessa hyötyä. Voimme kuitenkin lisätä _useMutation_-hookille _onCompleted_-takaisinkutsufunktion, jossa mahdollinen virheilmoitus voidaan generoida:
 
 ```js
-import { useEffect, useState } from 'react' // highlight-line
-import { useMutation } from '@apollo/client/react'
-import { EDIT_NUMBER } from '../queries'
-
 const PhoneForm = ({ setError }) => { // highlight-line
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
 
-  const [ changeNumber, result ] = useMutation(EDIT_NUMBER) // highlight-line
-
-  const submit = (event) => {
-    event.preventDefault()
-
-    changeNumber({ variables: { name, phone } })
-
-    setName('')
-    setPhone('')
-  }
-
   // highlight-start
-  useEffect(() => {
-    if (result.data && result.data.editNumber === null) {
-      setError('person not found')
+  const [changeNumber] = useMutation(EDIT_NUMBER, {
+    onCompleted: (data) => {
+      if (!data.editNumber) {
+        setError('person not found')
+      }
     }
-
-  }, [result.data, setError])
+  })
   // highlight-end
 
   // ...
 }
 ```
 
-Jos henkilöä ei löytynyt, eli kyselyn tulos _result.data.editNumber_ on _null_, asettaa komponentti propseina saamansa callback-funktion avulla sopivan virheilmoituksen. Virheilmoituksen asettamista kontrolloidaan useEffect-hookin avulla, ja hook suoritetaan aina kun mutaation tulos _result.data_ muuttuu.
+Takaisinkutsufunktio _onCompleted_ suoritetaan aina, kun mutaatio on onnistuneesti suoritettu. Jos henkilöä ei löytynyt, eli kyselyn tulos _data.editNumber_ on _null_, asettaa komponentti propseina saamansa callback-funktion _setError_ avulla sopivan virheilmoituksen. 
 
 Sovelluksen tämänhetkinen koodi on [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4), branchissa <i>part8-4</i>.
 

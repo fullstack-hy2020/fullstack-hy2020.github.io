@@ -896,46 +896,28 @@ the mutation response is <i>null</i>:
 
 ![dev tools showing network with localhost and response with editNumber being null](../../images/8/23ea.png)
 
-For GraphQL, this is not an error, so registering an *onError* error handler is not useful.
-
-We can use the *result* field returned by the *useMutation* hook as its second parameter to generate an error message.
+Since this isn’t considered an error state from GraphQL’s point of view, registering an _onError_ error handler wouldn’t be useful in this situation. However, we can add an _onCompleted_ callback to the _useMutation_ hook, where we can generate a potential error message:
 
 ```js
-import { useEffect, useState } from 'react' // highlight-line
-import { useMutation } from '@apollo/client/react'
-import { EDIT_NUMBER } from '../queries'
-
 const PhoneForm = ({ setError }) => { // highlight-line
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
 
-  const [ changeNumber, result ] = useMutation(EDIT_NUMBER) // highlight-line
-
-  const submit = (event) => {
-    event.preventDefault()
-
-    changeNumber({ variables: { name, phone } })
-
-    setName('')
-    setPhone('')
-  }
-
   // highlight-start
-  useEffect(() => {
-    if (result.data && result.data.editNumber === null) {
-      setError('person not found')
+  const [changeNumber] = useMutation(EDIT_NUMBER, {
+    onCompleted: (data) => {
+      if (!data.editNumber) {
+        setError('person not found')
+      }
     }
-
-  }, [result.data, setError])
+  })
   // highlight-end
 
   // ...
 }
 ```
 
-If a person cannot be found, or the *result.data.editNumber* is *null*, the component uses the callback function it received as props to set a suitable error message.
-We want to set the error message only when the result of the mutation
-*result.data* changes, so we use the useEffect hook to control setting the error message.
+The _onCompleted_ callback function is always executed when the mutation has been successfully completed. If the person wasn’t found—that is, if the query result _data.editNumber_ is _null_—the component uses the _setError_ callback function it received via props to set an appropriate error message.
 
 The current code of the application can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4) branch <i>part8-4</i>.
 
