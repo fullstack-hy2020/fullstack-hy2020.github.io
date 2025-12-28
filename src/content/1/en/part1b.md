@@ -126,7 +126,7 @@ Above, the variable _first_ is assigned the first integer of the array and the v
 
 ### Objects
 
-There are a few different ways of defining objects in JavaScript. One very common method is using [object literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#Object_literals), which happens by listing its properties within braces:
+There are a few different ways of defining objects in JavaScript. One very common method is using [object literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#object_literals), which happens by listing its properties within braces:
 
 ```js
 const object1 = {
