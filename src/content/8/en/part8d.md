@@ -222,7 +222,11 @@ createRoot(document.getElementById('root')).render(
 
 As before, the server URL is wrapped using the [HttpLink](https://www.apollographql.com/docs/react/api/link/apollo-link-http) constructor to create a suitable _httpLink_ object. This time, however, it is modified using the [context](https://www.apollographql.com/docs/react/api/link/apollo-link-context/#overview) defined by the _authLink_ object so that, for each request, the <i>authorization</i> header is [set](https://www.apollographql.com/docs/react/networking/authentication/#header) to the token that may be stored in localStorage.
 
-Creating new persons and changing numbers works again. There is however one remaining problem. If we try to add a person without a phone number, it is not possible.
+Creating new persons and changing numbers works again. 
+
+### Fixing validations
+
+In the application, it should be possible to add a person without a phone number. However, if we now try to add a person without a phone number, it doesn’t work:
 
 ![browser showing person validation failed](../../images/8/25e.png)
 
@@ -256,6 +260,43 @@ const PersonForm = ({ setError }) => {
   // ...
 }
 ```
+
+From the perspective of the backend and the database, the <i>phone</i> attribute now has no value if the user leaves the field empty. Adding a person without a phone number works again.
+
+There is also an issue with the functionality for changing a phone number. The database validations require that the phone number must be at least 5 characters long, but if we try to update an existing person’s phone number to one that is too short, nothing seems to happen. The person’s phone number is not updated, but on the other hand no error message is shown either.
+
+From the console’s <i>Network</i> tab we can see that the request is answered with an error message:
+
+![The console’s Network tab shows the error message returned in the response](../../images/8/43.png)
+
+Let’s modify the application so that validation errors are also shown when changing a phone number:
+
+```js
+const PhoneForm = ({ setError }) => {
+  // ...
+
+  const submit = async (event) => {
+    event.preventDefault()
+
+    // highlight-start
+    try {
+      await changeNumber({ variables: { name, phone } })
+    } catch (error) {
+      setError(error.message)
+    }
+    // highlight-end
+
+    setName('')
+    setPhone('')
+  }
+
+  // ...
+}
+```
+
+The request that updates the number, _changeNumber_, is now executed inside a <i>try</i> block. If the database validations fail, execution ends up in the <i>catch</i> block, where an appropriate error message is set in the application using the _setError_ function:
+
+![The application shows an error message if the phone number is shorter than 5 characters](../../images/8/44.png)
 
 ### Updating cache, revisited
 

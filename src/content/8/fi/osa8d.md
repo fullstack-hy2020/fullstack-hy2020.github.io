@@ -224,7 +224,11 @@ createRoot(document.getElementById('root')).render(
 
 Palvelimen URL kääritään [HttpLink](https://www.apollographql.com/docs/react/api/link/apollo-link-http)-konstruktorin avulla sopivaksi _httpLink_-olioksi kuten aiemminkin. Nyt sitä muokataan kuitenkin _authLink_-olion määrittelemän [kontekstin](https://www.apollographql.com/docs/react/api/link/apollo-link-context/#overview) avulla siten, että pyyntöjen mukaan [asetetaan headerille](https://www.apollographql.com/docs/react/networking/authentication/#header) <i>authorization</i> arvoksi localStoragessa mahdollisesti oleva token.
 
-Uusien henkilöiden lisäys ja numeroiden muuttaminen toimii taas. Sovellukseen jää kuitenkin yksi ongelma. Jos yritämme lisätä puhelinnumerotonta henkilöä, se ei onnistu.
+Uusien henkilöiden lisäys ja numeroiden muuttaminen toimii taas. 
+
+### Validaatioiden korjaaminen
+
+Sovelluksessa pitäisi pystyä lisäämään henkilö, jolla ei ole puhelinnumeroa. Nyt kuitenkin jos yritämme lisätä puhelinnumerotonta henkilöä, se ei onnistu:
 
 ![](../../images/8/25e.png)
 
@@ -258,6 +262,45 @@ const PersonForm = ({ setError }) => {
   // ...
 }
 ```
+
+Nyt backendin ja tietokannan näkökulmasta <i>phone</i>-attribuutilla ei ole arvoa, jos käyttäjä jättää kentän tyhjäksi. Henkilön lisääminen ilman puhelinnumeroa onnistuu jälleen.
+
+Myös numeron muuttamistoiminnallisuudessa on eräs ongelma. Tietokannan validaatiot vaativat, että puhelinnumeron tulee olla vähintään 5 merkkiä pitkä, mutta jos yritämme päivittää olemassa olevan henkilön puhelinnumeroksi liian lyhyen numeron, mitään ei näytä tapahtuvan. Henkilön puhelinnumero ei päivity, mutta toisaalta myöskään mitään virheilmoitusta ei näytetä. 
+
+Konsolin <i>Network</i>-välilehdeltä näemme, että pyyntöön vastataan virheilmoituksella:
+
+![Konsolin Networks-välilehti näyttää pyynnön vastauksen mukana tulleen virheilmoituksen](../../images/8/43.png)
+
+Muokataan sovellusta siten, että validaatiovirheistä näytetään virheilmoitus myös puhelinnumeroa muutettaessa:
+
+```js
+const PhoneForm = ({ setError }) => {
+  // ...
+
+  const submit = async (event) => {
+    event.preventDefault()
+
+    // highlight-start
+    try {
+      await changeNumber({ variables: { name, phone } })
+    } catch (error) {
+      setError(error.message)
+    }
+    // highlight-end
+
+    setName('')
+    setPhone('')
+  }
+
+  // ...
+}
+```
+
+Numeron päivittävä pyyntö _changeNumber_ tehdään nyt <i>try</i>-lohkon sisällä. Jos tietokannan validaatiot eivät mene läpi, päädytään <i>catch</i>-lohkoon, jossa asetetaan sovellukseen asianmukainen virheilmoitus käyttäen _setError_-funktiota:
+
+![Sovellus näyttää virheilmoituksen, jos puhelinnumeron pituus on pienempi kuin 5](../../images/8/44.png)
+
+
 
 ### Välimuistin päivitys revisited
 
