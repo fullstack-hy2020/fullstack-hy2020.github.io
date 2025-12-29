@@ -646,11 +646,11 @@ The configuration in <i>main.jsx</i> has to be modified like so:
 
 ```js
 import { 
-  ApolloClient, InMemoryCache, createHttpLink,
-  split  // highlight-line
+  ApolloClient, InMemoryCache, HttpLink,
+  ApolloLink  // highlight-line
 } from '@apollo/client'
 import { ApolloProvider } from '@apollo/client/react'
-import { setContext } from '@apollo/client/link/context'
+import { SetContextLink } from '@apollo/client/link/context'
 
 // highlight-start
 import { getMainDefinition } from '@apollo/client/utilities'
@@ -658,7 +658,7 @@ import { GraphQLWsLink } from '@apollo/client/link/subscriptions'
 import { createClient } from 'graphql-ws'
 // highlight-end
 
-const authLink = setContext((_, { headers }) => {
+const authLink = new SetContextLink((_, { headers }) => {
   const token = localStorage.getItem('phonenumbers-user-token')
   return {
     headers: {
@@ -668,7 +668,7 @@ const authLink = setContext((_, { headers }) => {
   }
 })
 
-const httpLink = createHttpLink({ uri: 'http://localhost:4000' })
+const httpLink = new HttpLink({ uri: 'http://localhost:4000' })
 
 // highlight-start
 const wsLink = new GraphQLWsLink(
@@ -677,7 +677,7 @@ const wsLink = new GraphQLWsLink(
 // highlight-end
 
 // highlight-start
-const splitLink = split(
+const splitLink = ApolloLink.split(
   ({ query }) => {
     const definition = getMainDefinition(query)
     return (
@@ -711,7 +711,7 @@ npm install graphql-ws
 The new configuration is due to the fact that the application must have an HTTP connection as well as a WebSocket connection to the GraphQL server.
 
 ```js
-const httpLink = createHttpLink({ uri: 'http://localhost:4000' })
+const httpLink = new HttpLink({ uri: 'http://localhost:4000' })
 
 const wsLink = new GraphQLWsLink(
   createClient({
