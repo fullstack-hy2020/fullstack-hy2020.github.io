@@ -274,7 +274,7 @@ Lorsque le code est exécuté, le programme imprime toutes les notes stockées d
 
 Les objets sont récupérés dans la base de données avec la méthode [find](https://mongoosejs.com/docs/api/model.html#model_Model-find) du modèle _Note_. Le paramètre de la méthode est un objet exprimant les conditions de recherche. Comme le paramètre est un objet vide<code>{}</code>, nous obtenons toutes les notes stockées dans la collection _notes_.
 
-Les conditions de recherche sont conformes à la requête de recherche Mongo [syntaxe](https://docs.mongodb.com/manual/reference/operator/).
+Les conditions de recherche sont conformes à la requête de recherche Mongo [syntaxe](https://www.mongodb.com/docs/manual/tutorial/query-documents/).
 
 Nous pourrions restreindre notre recherche pour n'inclure que les notes importantes comme ceci :
 
