@@ -267,7 +267,7 @@ When the code is executed, the program prints all the notes stored in the databa
 
 The objects are retrieved from the database with the [find](https://mongoosejs.com/docs/api/model.html#model_Model-find) method of the _Note_ model. The parameter of the method is an object expressing search conditions. Since the parameter is an empty object<code>{}</code>, we get all of the notes stored in the _notes_ collection.
 
-The search conditions adhere to the Mongo search query [syntax](https://docs.mongodb.com/manual/reference/operator/).
+The search conditions adhere to the Mongo search query [syntax](https://www.mongodb.com/docs/manual/tutorial/query-documents/).
 
 We could restrict our search to only include important notes like this:
 
