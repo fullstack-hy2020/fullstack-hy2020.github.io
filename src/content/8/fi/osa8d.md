@@ -200,11 +200,7 @@ const authLink  = new SetContextLink(({ headers }) => {
 })
 // highlight-end
 
-// highlight-start
-const httpLink = new HttpLink({
-  uri: 'http://localhost:4000',
-})
-// highlight-end
+const httpLink = new HttpLink({ uri: 'http://localhost:4000' }) // highlight-line
 
 // highlight-start
 const client = new ApolloClient({
@@ -312,8 +308,8 @@ const PersonForm = ({ setError }) => {
   // ...
 
   const [createPerson] = useMutation(CREATE_PERSON, {
-    refetchQueries: [{ query: ALL_PERSONS }], // highlight-line
     onError: (error) => setError(error.message),
+    refetchQueries: [{ query: ALL_PERSONS }], // highlight-line
   })
 
 // ...
@@ -322,7 +318,7 @@ const PersonForm = ({ setError }) => {
 
 Lähestymistapa on kohtuullisen toimiva, ikävänä puolena on toki se, että päivityksen yhteydessä suoritetaan aina myös kysely. 
 
-Ratkaisua on mahdollista optimoida hoitamalla välimuistin päivitys itse. Tämä tapahtuu määrittelemällä mutaatiolle sopiva [update](https://www.apollographql.com/docs/react/data/mutations/#the-update-function)-callback, jonka Apollo suorittaa mutaation päätteeksi: 
+Ratkaisua on mahdollista optimoida hoitamalla välimuistin päivitys itse. Tämä tapahtuu määrittelemällä mutaatiolle _refetchQueries_-attribuutin sijaan sopiva [update](https://www.apollographql.com/docs/react/data/mutations/#the-update-function)-callback, jonka Apollo suorittaa mutaation päätteeksi: 
 
 
 ```js
@@ -330,7 +326,6 @@ const PersonForm = ({ setError }) => {
   // ...
 
   const [createPerson] = useMutation(CREATE_PERSON, {
-    refetchQueries: [{ query: ALL_PERSONS }],
     onError: (error) => setError(error.message),
     // highlight-start
     update: (cache, response) => {

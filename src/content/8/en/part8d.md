@@ -191,18 +191,14 @@ const authLink  = new SetContextLink(({ headers }) => {
   const token = localStorage.getItem('phonebook-user-token')
   return {
     headers: {
-      ...preContext.headers,
-      authorization: token ? `Bearer ${token}` : '',
-    },
+      ...headers,
+      authorization: token ? `Bearer ${token}` : null,
+    }
   }
 })
 // highlight-end
 
-// highlight-start
-const httpLink = new HttpLink({
-  uri: 'http://localhost:4000',
-})
-// highlight-end
+const httpLink = new HttpLink({ uri: 'http://localhost:4000' }) // highlight-line
 
 // highlight-start
 const client = new ApolloClient({
@@ -308,8 +304,8 @@ const PersonForm = ({ setError }) => {
   // ...
 
   const [createPerson] = useMutation(CREATE_PERSON, {
-    refetchQueries: [{ query: ALL_PERSONS }], // highlight-line
     onError: (error) => setError(error.message),
+    refetchQueries: [{ query: ALL_PERSONS }], // highlight-line
   })
 
 // ...
@@ -318,14 +314,13 @@ const PersonForm = ({ setError }) => {
 
 This approach is pretty good, the drawback being that the query is always rerun with any updates.
 
-It is possible to optimize the solution by handling updating the cache ourselves. This is done by defining a suitable [update](https://www.apollographql.com/docs/react/data/mutations/#the-update-function) callback for the mutation, which Apollo runs after the mutation:
+It is possible to optimize the solution by updating the cache manually. This is done by defining an appropriate [update](https://www.apollographql.com/docs/react/data/mutations/#the-update-function) callback for the mutation instead of using the _refetchQueries_ attribute. Apollo executes this callback after the mutation completes:
 
 ```js
 const PersonForm = ({ setError }) => {
   // ...
 
   const [createPerson] = useMutation(CREATE_PERSON, {
-    refetchQueries: [{ query: ALL_PERSONS }],
     onError: (error) => setError(error.message),
     // highlight-start
     update: (cache, response) => {
