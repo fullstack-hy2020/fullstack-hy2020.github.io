@@ -242,8 +242,6 @@ Let’s create a separate module <i>db.js</i> for the code that establishes the 
 ```js
 const mongoose = require('mongoose')
 
-mongoose.set('strictQuery', false)
-
 const connectToDatabase = async (uri) => {
   console.log('connecting to database URI:', uri)
 

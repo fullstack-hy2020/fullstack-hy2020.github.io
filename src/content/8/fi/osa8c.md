@@ -243,8 +243,6 @@ Luodaan tietokantayhteyden muodostavalle koodille oma moduuli <i>db.js</i>:
 ```js
 const mongoose = require('mongoose')
 
-mongoose.set('strictQuery', false)
-
 const connectToDatabase = async (uri) => {
   console.log('connecting to database URI:', uri)
 
