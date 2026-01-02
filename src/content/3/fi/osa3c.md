@@ -260,7 +260,7 @@ Kun koodi suoritetaan, kantaan talletetut muistiinpanot tulostuvat:
 
 Oliot haetaan kannasta _Note_-modelin metodilla [find](https://mongoosejs.com/docs/api.html#model_Model.find). Metodin parametrina on hakuehto. Koska hakuehtona on tyhjä olio <code>{}</code>, saimme kannasta kaikki _notes_-kokoelmaan talletetut oliot.
 
-Hakuehdot noudattavat MongoDB:n [syntaksia](https://docs.mongodb.com/manual/reference/operator/).
+Hakuehdot noudattavat MongoDB:n [syntaksia](https://www.mongodb.com/docs/manual/tutorial/query-documents/).
 
 Voisimme hakea esim. ainoastaan tärkeät muistiinpanot seuraavasti:
 
