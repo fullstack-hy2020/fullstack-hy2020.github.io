@@ -273,7 +273,7 @@ Cuando se ejecuta el código, el programa imprime todas las notas almacenadas en
 
 Los objetos se recuperan de la base de datos con el método [find](https://mongoosejs.com/docs/api.html#model_Model.find) del modelo _Note_. El parámetro del método es un objeto que expresa condiciones de búsqueda. Dado que el parámetro es un objeto vacío <code>{}</code>, obtenemos todas las notas almacenadas en la colección _notes_.
 
-Las condiciones de búsqueda se adhieren a la [sintaxis](https://docs.mongodb.com/manual/reference/operator/) de consulta de búsqueda de Mongo.
+Las condiciones de búsqueda se adhieren a la [sintaxis](https://www.mongodb.com/docs/manual/tutorial/query-documents/) de consulta de búsqueda de Mongo.
 
 Podríamos restringir nuestra búsqueda para incluir solo notas importantes de la siguiente manera:
 
