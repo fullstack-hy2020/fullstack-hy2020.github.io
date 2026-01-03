@@ -741,6 +741,16 @@ Mutaation toteuttava resolveri:
         .includes(person._id.toString())
 
     const person = await Person.findOne({ name: args.name })
+
+    if (!person) {
+      throw new GraphQLError("The name didn't found", {
+        extensions: {
+          code: 'BAD_USER_INPUT',
+          invalidArgs: args.name,
+        },
+      })
+    }
+
     if (nonFriendAlready(person)) {
       currentUser.friends = currentUser.friends.concat(person)
     }
