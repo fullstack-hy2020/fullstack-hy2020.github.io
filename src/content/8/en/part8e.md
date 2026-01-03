@@ -157,7 +157,7 @@ const startServer = (port) => {
 
   startStandaloneServer(server, {
     listen: { port },
-    context: async ({ req, res }) => {
+    context: async ({ req }) => {
       // ...
     },
   }).then(({ url }) => {
@@ -194,6 +194,15 @@ const resolvers = require('./resolvers')
 const typeDefs = require('./schema')
 const User = require('./models/user')
 
+const getUserFromAuthHeader = async (auth) => {
+  if (!auth || !auth.startsWith('Bearer ')) {
+    return null
+  }
+
+  const decodedToken = jwt.verify(auth.substring(7), process.env.JWT_SECRET)
+  return User.findById(decodedToken.id).populate('friends')
+}
+
 // highlight-start
 const startServer = async (port) => {
   const app = express()
@@ -212,17 +221,9 @@ const startServer = async (port) => {
     express.json(),
     expressMiddleware(server, {
       context: async ({ req }) => {
-        const auth = req ? req.headers.authorization : null
-        if (auth && auth.startsWith('Bearer ')) {
-          const decodedToken = jwt.verify(
-            auth.substring(7),
-            process.env.JWT_SECRET,
-          )
-          const currentUser = await User.findById(decodedToken.id).populate(
-            'friends',
-          )
-          return { currentUser }
-        }
+        const auth = req.headers.authorization
+        const currentUser = await getUserFromAuthHeader(auth)
+        return { currentUser }
       },
     }),
   )

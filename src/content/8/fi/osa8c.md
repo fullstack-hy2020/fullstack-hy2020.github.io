@@ -591,11 +591,13 @@ mutation {
 }
 ```
 
-Aivan kuten REST:in tapauksessa myös nyt ideana on, että kirjautunut käyttäjä liittää kirjautumisen yhteydessä saamansa tokenin kaikkiin pyyntöihinsä. REST:in tapaan token liitetään GraphQL-pyyntöihin headerin <i>Authorization</i> avulla. Apollo Explorerissa headerin liittäminen pyyntöön tapahtuu seuraavasti
+Aivan kuten REST:in tapauksessa myös nyt ideana on, että kirjautunut käyttäjä liittää kirjautumisen yhteydessä saamansa tokenin kaikkiin pyyntöihinsä. REST:in tapaan token liitetään GraphQL-pyyntöihin headerin <i>Authorization</i> avulla. Apollo Explorerissa headerin liittäminen pyyntöön tapahtuu seuraavasti:
 
 ![](../../images/8/24x.png)
 
-Muutetaan backendin käynnistämistä siten, että määritellään käynnistyksestä huolehtivan funktion [startStandaloneServer](https://www.apollographql.com/docs/apollo-server/api/standalone/) toisena parametrina saamaan olioon [context](https://www.apollographql.com/docs/apollo-server/data/context/)-kenttä:
+Backendissä pyynnön mukana saapuva token on kätevintä välittää resolvereille hyödyntäen Apollo Serverin [kontekstia](https://www.apollographql.com/docs/apollo-server/data/context/). Kontekstin avulla voidaan suorittaa jotain kaikille kyselyille ja mutaatioille yhteisiä asioita, esim. pyyntöön liittyvän [käyttäjän tunnistaminen](https://www.apollographql.com/blog/authorization-in-graphql/).
+
+Muutetaan backendin käynnistämistä siten, että määritellään käynnistyksestä huolehtivan funktion [startStandaloneServer](https://www.apollographql.com/docs/apollo-server/api/standalone/) toisena parametrina saamaan olioon [context](https://www.apollographql.com/docs/apollo-server/data/context/)-kenttä ja luodaan apufunktio _getUserFromAuthHeader_ tokenin kelvollisuuden tarkistamiseksi ja käyttäjän etsimiseksi tietokannasta:
 
 ```js
 const { ApolloServer } = require('@apollo/server')
@@ -606,6 +608,17 @@ const resolvers = require('./resolvers')
 const typeDefs = require('./schema')
 const User = require('./models/user') // highlight-line
 
+// highlight-start
+const getUserFromAuthHeader = async (auth) => {
+  if (!auth || !auth.startsWith('Bearer ')) {
+    return null
+  }
+ 
+  const decodedToken = jwt.verify(auth.substring(7), process.env.JWT_SECRET)
+  return User.findById(decodedToken.id).populate('friends')
+}
+// highlight-end
+
 const startServer = (port) => {
   const server = new ApolloServer({
     typeDefs,
@@ -615,18 +628,10 @@ const startServer = (port) => {
   startStandaloneServer(server, {
     listen: { port },
     // highlight-start
-    context: async ({ req, res }) => {
-      const auth = req ? req.headers.authorization : null
-      if (auth && auth.startsWith('Bearer ')) {
-        const decodedToken = jwt.verify(
-          auth.substring(7),
-          process.env.JWT_SECRET,
-        )
-        const currentUser = await User.findById(decodedToken.id).populate(
-          'friends',
-        )
-        return { currentUser }
-      }
+    context: async ({ req }) => {
+      const auth = req.headers.authorization
+      const currentUser = await getUserFromAuthHeader(auth)
+      return { currentUser }
     },
     // highlight-end
   }).then(({ url }) => {
@@ -637,13 +642,19 @@ const startServer = (port) => {
 module.exports = startServer
 ```
 
-Kontekstin avulla voidaan suorittaa jotain kaikille kyselyille ja mutaatioille yhteisiä asioita, esim. pyyntöön liittyvän [käyttäjän tunnistaminen](https://www.apollographql.com/blog/authorization-in-graphql/).
+Määrittelemämme koodi siis eristää ensin pyynnöstä <i>Authorization</i>-headerin sisältämän tokenin. Apufunktio _getUserFromAuthHeader_ dekoodaa tokenin ja etsii tietokannasta sitä vastaavan käyttäjän. Jos token ei ole kelvollinen tai käyttäjää ei löydy, on funktio palauttaa _null_-arvon. 
 
-Contextin palauttama olio annetaan kaikille resolvereille <i>kolmantena parametrina</i>.
+Lopuksi  kontekstin kenttään _currentUser_ asetetaan pyynnön tehnyttä käyttäjää vastaava olio tai _null_, jos käyttäjää ei löytynyt:
 
-Määrittelemämme koodi siis asettaa kontekstin kenttään _currentUser_ pyynnön tehnyttä käyttäjää vastaavan olion. Jos pyyntöön ei liity käyttäjää, on kentän arvo määrittelemätön.
+```js
+    context: async ({ req }) => {
+      const auth = req.headers.authorization
+      const currentUser = await getUserFromAuthHeader(auth)
+      return { currentUser } // highlight-line
+    },
+```
 
-Kyselyn _me_ resolveri on erittäin yksinkertainen, se ainoastaan palauttaa kirjautuneen käyttäjän, jonka se saa resolverin kolmantena olevan parametrin _context_ kentästä _currentUser_. Kannattaa huomata, että jos käyttäjä ei ole kirjautunut, ts. pyynnön headerina ei tule validia tokenia, vastaa kysely <i>null</i>:
+Kontekstin arvo välitetään resolvereille <i>kolmantena parametrina</i>. Kyselyn _me_ resolveri on erittäin yksinkertainen, se ainoastaan palauttaa kirjautuneen käyttäjän, jonka se saa resolverin parametrin _context_ kentästä _currentUser_:
 
 ```js
 Query: {
@@ -654,7 +665,7 @@ Query: {
 },
 ```
 
-Jos headerissa on oikea arvo, palauttaa kysely headerin yksilöimän käyttäjän tiedot
+Jos headerissa on validi token, palauttaa kysely headerin yksilöimän käyttäjän tiedot
 
 ![](../../images/8/50new.png)
 

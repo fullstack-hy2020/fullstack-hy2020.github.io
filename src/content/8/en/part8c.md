@@ -596,7 +596,9 @@ In the Apollo Explorer, the header is added to a query like so:
 
 ![apollo explorer highlighting headers with authorization and bearer token](../../images/8/24x.png)
 
-Let’s change the way the backend is started so that, in the options object passed as the second parameter to the function [startStandaloneServer](https://www.apollographql.com/docs/apollo-server/api/standalone/), we define a [context](https://www.apollographql.com/docs/apollo-server/data/context/) field:
+On the backend, the most convenient way to pass the token that arrives with the request to the resolvers is to use Apollo Server’s [context](https://www.apollographql.com/docs/apollo-server/data/context/). With the context, we can perform things that are common to all queries and mutations, for example [identifying the user](https://www.apollographql.com/blog/authorization-in-graphql/) associated with the request.
+
+Let’s change the backend startup so that the object passed as the second parameter to the [startStandaloneServer](https://www.apollographql.com/docs/apollo-server/api/standalone/) function includes a [context](https://www.apollographql.com/docs/apollo-server/data/context/) field, and let’s create a helper function _getUserFromAuthHeader_ to verify the validity of the token and to find the user from the database:
 
 ```js
 const { ApolloServer } = require('@apollo/server')
@@ -607,6 +609,17 @@ const resolvers = require('./resolvers')
 const typeDefs = require('./schema')
 const User = require('./models/user') // highlight-line
 
+// highlight-start
+const getUserFromAuthHeader = async (auth) => {
+  if (!auth || !auth.startsWith('Bearer ')) {
+    return null
+  }
+ 
+  const decodedToken = jwt.verify(auth.substring(7), process.env.JWT_SECRET)
+  return User.findById(decodedToken.id).populate('friends')
+}
+// highlight-end
+
 const startServer = (port) => {
   const server = new ApolloServer({
     typeDefs,
@@ -616,18 +629,10 @@ const startServer = (port) => {
   startStandaloneServer(server, {
     listen: { port },
     // highlight-start
-    context: async ({ req, res }) => {
-      const auth = req ? req.headers.authorization : null
-      if (auth && auth.startsWith('Bearer ')) {
-        const decodedToken = jwt.verify(
-          auth.substring(7),
-          process.env.JWT_SECRET,
-        )
-        const currentUser = await User.findById(decodedToken.id).populate(
-          'friends',
-        )
-        return { currentUser }
-      }
+    context: async ({ req }) => {
+      const auth = req.headers.authorization
+      const currentUser = await getUserFromAuthHeader(auth)
+      return { currentUser }
     },
     // highlight-end
   }).then(({ url }) => {
@@ -638,11 +643,19 @@ const startServer = (port) => {
 module.exports = startServer
 ```
 
-The object returned by context is given to all resolvers as their <i>third parameter</i>. Context is the right place to do things which are shared by multiple resolvers, like [user identification](https://www.apollographql.com/blog/authorization-in-graphql/).
+So the code we defined first extracts the token contained in the request’s _Authorization_ header. The helper function _getUserFromAuthHeader_ decodes the token and looks up the corresponding user from the database. If the token is not valid or the user cannot be found, the function returns _null_.
 
-So our code sets the object corresponding to the user who made the request to the *currentUser* field of the context. If there is no user connected to the request, the value of the field is undefined.
+Finally, the context field _currentUser_ is set to the user object corresponding to the requester, or to _null_ if no user was found:
 
-The resolver of the *me* query is very simple: it just returns the logged-in user it receives in the *currentUser* field of the third parameter of the resolver, *context*. It's worth noting that if there is no logged-in user, i.e. there is no valid token in the header attached to the request, the query returns <i>null</i>:
+```js
+context: async ({ req }) => {
+  const auth = req.headers.authorization
+  const currentUser = await getUserFromAuthHeader(auth)
+  return { currentUser } // highlight-line
+},
+```
+
+The context value is passed to resolvers as the _third parameter_. The resolver for the _me_ query is very simple: it only returns the currently logged-in user, which it gets from the resolver parameter _context_, from the field _currentUser_:
 
 ```js
 Query: {
@@ -653,7 +666,7 @@ Query: {
 },
 ```
 
-If the header has the correct value, the query returns the user information identified by the header
+If the header contains a valid token, the query returns the details of the user identified by the token.
 
 ![apollo studio showing query response object](../../images/8/50new.png)
 
