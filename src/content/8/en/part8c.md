@@ -459,6 +459,14 @@ And the mutation's resolver:
     }
 
     const person = await Person.findOne({ name: args.name })
+    if (!person) {
+        throw new GraphQLError("The name is not in the database", {
+          extensions: {
+            code: "BAD_USER_INPUT",
+            invalidArgs: args.name,
+          },
+        });
+      }
     if ( !isFriend(person) ) {
       currentUser.friends = currentUser.friends.concat(person)
     }
