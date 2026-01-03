@@ -17,7 +17,7 @@ En las secciones anteriores del curso, hemos utilizado la base de datos MongoDB.
 
 En la aplicación de ejemplo de las partes 3 y 4, la base de datos almacena notas y usuarios.
 
-Una colección de <i>notas</i> que almacena notas tiene el siguiente aspecto:
+Una colección de *notas* que almacena notas tiene el siguiente aspecto:
 
 ```js
 [
@@ -38,7 +38,7 @@ Una colección de <i>notas</i> que almacena notas tiene el siguiente aspecto:
 ]
 ```
 
-Los usuarios guardados en la colección <i>users</i> tienen el siguiente aspecto:
+Los usuarios guardados en la colección *users* tienen el siguiente aspecto:
 
 ```js
 [
@@ -66,13 +66,13 @@ La razón por la que las secciones anteriores del curso usaron MongoDB es precis
 
 ### Base de datos de la aplicacion
 
-Para nuestra aplicación necesitamos una base de datos relacional. Hay muchas opciones, pero usaremos la solución de código abierto más popular actualmente [PostgreSQL](https://www.postgresql.org/). Puede instalar Postgres (como suele llamarse a la base de datos) en su máquina, si así lo desea. Una opción más fácil sería usar. También puede aprovechar las lecciones del curso [parte 12](/es/part12) y usar Postgres localmente usando Docker.
+Para nuestra aplicación necesitamos una base de datos relacional. Hay muchas opciones, pero usaremos la solución de código abierto más popular actualmente [PostgreSQL](https://www.postgresql.org/). Puede instalar Postgres (como suele llamarse a la base de datos) en su máquina, si así lo desea. También puede aprovechar las lecciones del curso [parte 12](/es/part12) y usar Postgres localmente usando Docker.
 
 Sin embargo, aprovecharemos el hecho de que es posible crear una base de datos de Postgres para la aplicación en la plataforma de servicios en la nube de Heroku, que ya conocemos de las partes 3 y 4.
 
 En el material teórico de esta sección, crearemos una versión habilitada para Postgres desde el backend de la aplicación de almacenamiento de notas, que se creó en las secciones 3 y 4.
 
-Ahora vamos a crear un directorio adecuado dentro de la aplicación Heroku, agregarle una base de datos y usar el comando _heroku config_ para obtener la <i>cadena de conexión</i>, que se requiere para conectarse a la base de datos:
+Ahora vamos a crear un directorio adecuado dentro de la aplicación Heroku, agregarle una base de datos y usar el comando *heroku config* para obtener la <i>cadena de conexión</i>, que se requiere para conectarse a la base de datos:
 
 ```bash
 heroku create
@@ -117,7 +117,7 @@ CREATE TABLE notes (
 );
 ```
 
-Algunos puntos: la columna <i>id</i> se define como una <i>clave principal</i>, lo que significa que el valor de la columna id debe ser único para cada fila de la tabla y el valor no debe estar vacío. El tipo de esta columna se define como [SERIAL](https://www.postgresql.org/docs/9.1/datatype-numeric.html#DATATYPE-SERIAL), que no es el tipo real sino una abreviatura de una columna de enteros al que Postgres asigna automáticamente un valor único y creciente al crear filas. La columna denominada <i>contenido</i> con tipo texto se define de tal manera que se le debe asignar un valor.
+Algunos puntos: la columna *id* se define como una <i>clave principal</i>, lo que significa que el valor de la columna id debe ser único para cada fila de la tabla y el valor no debe estar vacío. El tipo de esta columna se define como [SERIAL](https://www.postgresql.org/docs/9.1/datatype-numeric.html#DATATYPE-SERIAL), que no es el tipo real sino una abreviatura de una columna de enteros al que Postgres asigna automáticamente un valor único y creciente al crear filas. La columna denominada *contenido* con tipo texto se define de tal manera que se le debe asignar un valor.
 
 Veamos la situación desde la consola. Primero, el comando _\d_, que nos dice qué tablas hay en la base de datos:
 
@@ -131,9 +131,9 @@ postgres=# \d
 (2 rows)
 ```
 
-Además de la tabla <i>notes</i>, Postgres creó una subtabla llamada <i>notes\_id\_seq</i>, que realiza un seguimiento de qué valor se asigna a la <i>id</i> columna al crear la siguiente nota.
+Además de la tabla *notes*, Postgres creó una subtabla llamada *notes\_id\_seq*, que realiza un seguimiento de qué valor se asigna a la *id* columna al crear la siguiente nota.
 
-Con el comando _\d notas_, podemos ver como se define la tabla <i>notas</i>:
+Con el comando _\d notas_, podemos ver como se define la tabla *notas*:
 
 ```sql
 postgres=# \d notes;
@@ -148,7 +148,7 @@ Indexes:
     "notes_pkey" PRIMARY KEY, btree (id)
 ```
 
-Por lo tanto, la columna <i>id</i> tiene un valor predeterminado, que se obtiene llamando a la función interna de Postgres <i>nextval</i>.
+Por lo tanto, la columna *id* tiene un valor predeterminado, que se obtiene llamando a la función interna de Postgres *nextval*.
 
 Agreguemos algo de contenido a la tabla:
 
@@ -196,15 +196,15 @@ A continuación, es hora de pasar a acceder a la base de datos desde la aplicaci
 
 ### Aplicación en Node, usando una base de datos relacional
 
-Iniciemos la aplicación como de costumbre con <i>npm init</i> e instalemos <i>nodemon</i> como una dependencia de desarrollo y también las siguientes dependencias de tiempo de ejecución:
+Iniciemos la aplicación como de costumbre con *npm init* e instalemos *nodemon* como una dependencia de desarrollo y también las siguientes dependencias de tiempo de ejecución:
 
 ```bash
 npm install express dotenv pg sequelize
 ```
 
-De estos, el último [sequelize](https://sequelize.org/master/) es la biblioteca a través de la cual usamos Postgres. Sequelize es una biblioteca llamada [Mapeo relacional de objetos] (https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping) (ORM) que le permite almacenar objetos de JavaScript en una base de datos relacional sin usar el Lenguaje SQL en sí mismo, similar a Mongoose que usamos con MongoDB.
+De estos, el último [sequelize](https://sequelize.org/master/) es la biblioteca a través de la cual usamos Postgres. Sequelize es una biblioteca llamada [Mapeo relacional de objetos](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping) (ORM) que le permite almacenar objetos de JavaScript en una base de datos relacional sin usar el Lenguaje SQL en sí mismo, similar a Mongoose que usamos con MongoDB.
 
-Probemos que podemos conectarnos con éxito. Cree el archivo <i>index.js</i> y agregue el siguiente contenido:
+Probemos que podemos conectarnos con éxito. Cree el archivo *index.js* y agregue el siguiente contenido:
 
 ```js
 require('dotenv').config()
@@ -232,7 +232,7 @@ const main = async () => {
 main()
 ```
 
-La <i>cadena de conexión</i> de la base de datos, que es revelada por el comando _heroku config_ debe almacenarse en un archivo <i>.env</i>, el contenido debe ser algo como lo siguiente:
+La <i>cadena de conexión</i> de la base de datos, que es revelada por el comando *heroku config* debe almacenarse en un archivo *.env*, el contenido debe ser algo como lo siguiente:
 
 ```bash
 $ cat .env
@@ -298,7 +298,7 @@ Executing (default): SELECT * FROM notes
 ]
 ```
 
-Aun cuando Sequelize es una biblioteca ORM, puede existir casos aislados en los que exista la necesidad de escribir SQL, para ello solo usamos [SQL directo] (https://sequelize.org/master/manual/raw-queries.html) con el método de sequelize [query] (https://sequelize.org/api/v6/class/src/sequelize.js~sequelize#instance-method-query).
+Aun cuando Sequelize es una biblioteca ORM, pueden existir casos aislados en los que exista la necesidad de escribir SQL, para ello solo usamos [SQL directo](https://sequelize.org/master/manual/raw-queries.html) con el método de sequelize [query](https://sequelize.org/api/v6/class/src/sequelize.js~sequelize#instance-method-query).
 
 Como todo parece estar funcionando, cambiemos la aplicación a una aplicación web.
 
@@ -334,7 +334,7 @@ La aplicación parece estar funcionando. Sin embargo, ahora cambiemos a usar Seq
 
 ### El Modelo
 
-Al usar Sequelize, cada tabla en la base de datos está representada por un [modelo] (https://sequelize.org/master/manual/model-basics.html), que es efectivamente su propia clase de JavaScript. Ahora definamos el modelo <i>Nota</i> correspondiente a la tabla <i>notas</i> para la aplicación cambiando el código al siguiente formato:
+Al usar Sequelize, cada tabla en la base de datos está representada por un [modelo](https://sequelize.org/master/manual/model-basics.html), que es efectivamente su propia clase de JavaScript. Ahora definamos el modelo *Nota* correspondiente a la tabla *notas* para la aplicación cambiando el código al siguiente formato:
 
 ```js
 require('dotenv').config()
@@ -389,11 +389,11 @@ app.listen(PORT, () => {
 })
 ```
 
-Algunos comentarios sobre el código: No hay nada sorprendente en la definición del modelo <i>Nota</i>, cada columna tiene un tipo definido, así como otras propiedades si es necesario, como si es la clave principal de la tabla. El segundo parámetro en la definición del modelo contiene el atributo <i>sequelize</i> así como otra información de configuración. También definimos que la tabla no tiene que usar las columnas de marcas de tiempo (created\_at and updated\_at).
+Algunos comentarios sobre el código: No hay nada sorprendente en la definición del modelo *Nota*, cada columna tiene un tipo definido, así como otras propiedades si es necesario, como si es la clave principal de la tabla. El segundo parámetro en la definición del modelo contiene el atributo *sequelize* así como otra información de configuración. También definimos que la tabla no tiene que usar las columnas de marcas de tiempo (created\_at and updated\_at).
 
-También definimos <i>underscored: true</i>, lo que significa que los nombres de las tablas se derivan de los nombres de los modelos como versiones en plural [snake case](https://en.wikipedia.org/wiki/Snake_case). Prácticamente esto significa que, si el nombre del modelo, como en nuestro caso, es "Nota", entonces el nombre de la tabla correspondiente es su versión plural escrita con una letra inicial minúscula, es decir, <i>notas</i>. Si, por el contrario, el nombre del modelo fuera "dos partes", p. <i>StudyGroup</i>, entonces el nombre de la tabla sería <i>study_groups</i>. Sequelize infiere automáticamente los nombres de las tablas, pero también permite definirlos explícitamente.
+También definimos *underscored: true*, lo que significa que los nombres de las tablas se derivan de los nombres de los modelos como versiones en plural [snake case](https://en.wikipedia.org/wiki/Snake_case). Prácticamente esto significa que, si el nombre del modelo, como en nuestro caso, es "Nota", entonces el nombre de la tabla correspondiente es su versión plural escrita con una letra inicial minúscula, es decir, *notas*. Si, por el contrario, el nombre del modelo fuera "dos partes", p. *StudyGroup*, entonces el nombre de la tabla sería *study_groups*. Sequelize infiere automáticamente los nombres de las tablas, pero también permite definirlos explícitamente.
 
-La misma política de nomenclatura se aplica a las columnas. Si hubiésemos definido que una nota está asociada a <i>creationYear</i>, es decir, información sobre el año en que fue creada, la definiríamos en el modelo de la siguiente manera:
+La misma política de nomenclatura se aplica a las columnas. Si hubiésemos definido que una nota está asociada a *creationYear*, es decir, información sobre el año en que fue creada, la definiríamos en el modelo de la siguiente manera:
 
 ```js
 Note.init({
@@ -404,9 +404,9 @@ Note.init({
 })
 ```
 
-El nombre de la columna correspondiente en la base de datos sería <i>creation_year</i>. En el código, la referencia a la columna siempre tiene el mismo formato que en el modelo, es decir, en formato "camel case".
+El nombre de la columna correspondiente en la base de datos sería *creation_year*. En el código, la referencia a la columna siempre tiene el mismo formato que en el modelo, es decir, el formato "camel case".
 
-También hemos definido <i>modelName: 'note'</i>, el "nombre del modelo" predeterminado sería <i>Note</i> en mayúsculas. Sin embargo, queremos tener una inicial en minúscula, esto hará que algunas cosas sean un poco más convenientes en el futuro.
+También hemos definido *modelName: 'note'*, el "nombre del modelo" predeterminado sería *Note* en mayúsculas. Sin embargo, queremos tener una inicial en minúscula, esto hará que algunas cosas sean un poco más convenientes en el futuro.
 
 La operación de la base de datos es fácil de hacer usando la [interfaz de consulta](https://sequelize.org/master/manual/model-querying-basics.html) proporcionada por los modelos, el método [findAll](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findAll) funciona exactamente como su nombre indica:
 
@@ -417,7 +417,7 @@ app.get('/api/notes', async (req, res) => {
 })
 ```
 
-La consola le dice que la llamada al método <i>Note.findAll()</i> genera la siguiente consulta:
+La consola le dice que la llamada al método *Note.findAll()* genera la siguiente consulta:
 
 ```js
 Executing (default): SELECT "id", "content", "important", "date" FROM "notes" AS "note";
@@ -437,16 +437,16 @@ app.post('/api/notes', async (req, res) => {
 })
 ```
 
-La creación de una nueva nota se realiza llamando al método [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) del modelo <i>Note</i> y pasando como parámetro un objeto que define los valores de las columnas.
+La creación de una nueva nota se realiza llamando al método [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) del modelo *Note* y pasando como parámetro un objeto que define los valores de las columnas.
 
-En lugar del método <i>create</i>, [también es posible](https://sequelize.org/master/manual/model-instances.html#creating-an-instance) guardar en una base de datos usando primero el método [build](https://sequelize.org/api/v6/class/src/model.js~model#static-method-build) para crear un objeto modelo a partir de los datos deseados y luego llamar al método [save](https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-save) en él:
+En lugar del método *create*, [también es posible](https://sequelize.org/master/manual/model-instances.html#creating-an-instance) guardar en una base de datos usando primero el método [build](https://sequelize.org/api/v6/class/src/model.js~model#static-method-build) para crear un objeto modelo a partir de los datos deseados y luego llamar al método [save](https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-save) en él:
 
 ```js
 const note = Note.build(req.body)
 await note.save()
 ```
 
-Llamar al método <i>build</i> aún no guarda el objeto en la base de datos, por lo que aún es posible editar el objeto antes del evento de guardado real:
+Llamar al método *build* aún no guarda el objeto en la base de datos, por lo que aún es posible editar el objeto antes del evento de guardado real:
 
 ```js
 const note = Note.build(req.body)
@@ -456,7 +456,7 @@ await note.save()
 
 Para el caso de uso del código de ejemplo, el método [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) es más adecuado, así que sigamos con eso.
 
-Si el objeto que se está creando no es válido, aparece un mensaje de error como resultado. Por ejemplo, al intentar crear una nota sin contenido, la operación falla y la consola revela que el motivo es <i>SequelizeValidationError: notNull Violation Note.content can be null</i>:
+Si el objeto que se está creando no es válido, aparece un mensaje de error como resultado. Por ejemplo, al intentar crear una nota sin contenido, la operación falla y la consola revela que el motivo es *SequelizeValidationError: notNull Violation: Note.content cannot be null*:
 
 ```
 (node:39109) UnhandledPromiseRejectionWarning: SequelizeValidationError: notNull Violation: Note.content cannot be null
@@ -491,7 +491,7 @@ Cree un repositorio de GitHub para la aplicación y cree una nueva aplicación d
 
 #### Ejercicio 13.2.
 
-En la línea de comandos, cree una tabla <i>blogs</i> para la aplicación con las siguientes columnas:
+En la línea de comandos, cree una tabla *blogs* para la aplicación con las siguientes columnas:
 - id (identificador único e incremental)
 - author (cadena de texto)
 - url (cadena de texto que no puede estar vacía)
@@ -500,7 +500,7 @@ En la línea de comandos, cree una tabla <i>blogs</i> para la aplicación con la
 
 Agregue al menos dos blogs a la base de datos.
 
-Guarde los comandos SQL que usó en la raíz del repositorio de la aplicación en el archivo llamado <i>commands.sql</i>
+Guarde los comandos SQL que usó en la raíz del repositorio de la aplicación en el archivo llamado *commands.sql*
 
 #### Ejercicio 13.3.
 
@@ -519,7 +519,7 @@ Laurenz Albe: 'Gaps in sequences in PostgreSQL', 0 likes
 
 ### Crear tablas automáticamente
 
-Nuestra aplicación ahora tiene un lado desagradable, asume que existe una base de datos con exactamente el esquema correcto, es decir, que la tabla <i>notes</i> ha sido creada con el comando <i>create table</i> apropiado.
+Nuestra aplicación ahora tiene un lado desagradable, asume que existe una base de datos con exactamente el esquema correcto, es decir, que la tabla *notes* ha sido creada con el comando *create table* apropiado.
 
 Dado que el código del programa se almacena en GitHub, tendría sentido almacenar también los comandos que crean la base de datos en el contexto del código del programa, de modo que el esquema de la base de datos sea definitivamente el mismo que espera el código del programa. Sequelize en realidad puede generar un esquema automáticamente a partir de la definición del modelo utilizando el método [sync](https://sequelize.org/master/manual/model-basics.html#model-synchronization).
 
@@ -538,7 +538,7 @@ Did not find any relations.
 
 La aplicación ya no funciona.
 
-Agreguemos el siguiente comando a la aplicación inmediatamente después de definir el modelo <i>Note</i>:
+Agreguemos el siguiente comando a la aplicación inmediatamente después de definir el modelo *Note*:
 
 ```js
 Note.sync()
@@ -550,7 +550,7 @@ Cuando se inicia la aplicación, se imprime lo siguiente en la consola:
 Executing (default): CREATE TABLE IF NOT EXISTS "notes" ("id" SERIAL , "content" TEXT NOT NULL, "important" BOOLEAN, "date" TIMESTAMP WITH TIME ZONE, PRIMARY KEY ("id"));
 ```
 
-Es decir, cuando se inicia la aplicación, se ejecuta el comando <i>CREATE TABLE IF NOT EXISTS "notes"...</i> que crea la tabla <i>notes</i> si aún no existe.
+Es decir, cuando se inicia la aplicación, se ejecuta el comando *CREATE TABLE IF NOT EXISTS "notes"...* que crea la tabla *notes* si aún no existe.
 
 ### Otras operaciones
 
@@ -575,9 +575,9 @@ La recuperación de una sola nota genera el siguiente comando SQL:
 Executing (default): SELECT "id", "content", "important", "date" FROM "notes" AS "note" WHERE "note". "id" = '1';
 ```
 
-Si no se encuentra ninguna nota, la operación devuelve <i>null</i> y, en este caso, se proporciona el código de estado correspondiente.
+Si no se encuentra ninguna nota, la operación devuelve *null* y, en este caso, se proporciona el código de estado correspondiente.
 
-La modificación de la nota se realiza de la siguiente manera. Solo se admite la modificación del campo <i>important</i>, ya que el frontend de la aplicación no necesita nada más:
+La modificación de la nota se realiza de la siguiente manera. Solo se admite la modificación del campo *important*, ya que el frontend de la aplicación no necesita nada más:
 
 ```js
 app.put('/api/notes/:id', async (req, res) => {
@@ -592,13 +592,13 @@ app.put('/api/notes/:id', async (req, res) => {
 })
 ```
 
-El objeto correspondiente a la fila de la base de datos se recupera de la base de datos utilizando el método <i>findByPk</i>, el objeto se modifica y el resultado se guarda llamando al método <i>save</i> del objeto correspondiente.
+El objeto correspondiente a la fila de la base de datos se recupera de la base de datos utilizando el método *findByPk*, el objeto se modifica y el resultado se guarda llamando al método *save* del objeto correspondiente.
 
-El código actual de la aplicación se encuentra en su totalidad en [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-1), rama <i>part13-1</i>.
+El código actual de la aplicación se encuentra en su totalidad en [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-1), rama *part13-1*.
 
 ### Imprimiendo los objetos devueltos por Sequelize a la consola
 
-La herramienta más importante del programador de JavaScript es <i>console.log</i>, cuyo uso agresivo controla incluso los peores errores. Agreguemos la impresión de consola a la ruta de una sola nota:
+La herramienta más importante del programador de JavaScript es *console.log*, cuyo uso agresivo controla incluso los peores errores. Agreguemos la impresión de consola a la ruta de una sola nota:
 
 ```js
 app.get('/api/notes/:id', async (req, res) => {
@@ -663,13 +663,13 @@ Ahora el resultado es exactamente lo que queremos:
   date: 2021-10-09T13:52:58.693Z }
 ```
 
-En el caso de una colección de objetos, el método toJSON no funciona directamente, el método debe llamarse por separado para cada objeto de la colección:
+En el caso de una colección de objetos, el método *toJSON* no funciona directamente, el método debe llamarse por separado para cada objeto de la colección:
 
 ```js
 router.get('/', async (req, res) => {
   const notes = await Note.findAll()
 
-  console.log(notes.map(n=>n.toJSON())) // highlight-line
+  console.log(notes.map(n => n.toJSON())) // highlight-line
 
   res.json(notes)
 })
