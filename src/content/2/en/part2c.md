@@ -102,20 +102,30 @@ When an asynchronous operation is completed, or, more specifically, at some poin
 
 Currently, JavaScript engines are <i>single-threaded</i>, which means that they cannot execute code in parallel. As a result, it is a requirement in practice to use a non-blocking model for executing IO operations. Otherwise, the browser would "freeze" during, for instance, the fetching of data from a server.
 
-Another consequence of this single-threaded nature of JavaScript engines is that if some code execution takes up a lot of time, the browser will get stuck for the duration of the execution. If we added the following code at the top of our application:
+One consequence of JavaScript engines being single-threaded is that if code execution takes a long time, the browser becomes unresponsive for the duration of the execution. If the following code is added to the beginning of the <i>App</i> component:
 
 ```js
-setTimeout(() => {
-  console.log('loop..')
-  let i = 0
-  while (i < 50000000000) {
-    i++
-  }
-  console.log('end')
-}, 5000)
+const App = (props) => {
+  const [notes, setNotes] = useState(props.notes)
+  const [newNote, setNewNote] = useState('')
+  const [showAll, setShowAll] = useState(true)
+
+  // highlight-start
+  setTimeout(() => {
+    console.log('loop..')
+    let i = 0
+    while (i < 99999999999) {
+      i++
+    }
+    console.log('end')
+  }, 5000)
+  // highlight-end
+
+  // ...
+}
 ```
 
-everything would work normally for 5 seconds. However, when the function defined as the parameter for <em>setTimeout</em> is run, the browser will be stuck for the duration of the execution of the long loop. Even the browser tab cannot be closed during the execution of the loop, at least not in Chrome.
+everything works normally for five seconds. When the function defined as the parameter of <em>setTimeout</em> is executed, the browser page becomes unresponsive for the duration of the long loop. The page freezes completely, meaning you cannot click its buttons or use any other functionality.
 
 For the browser to remain <i>responsive</i>, i.e., to be able to continuously react to user operations with sufficient speed, the code logic needs to be such that no single computation can take too long.
 

@@ -104,22 +104,32 @@ Siinä vaiheessa kun operaatio valmistuu tai tarkemmin sanoen jonain valmistumis
 
 Nykyisellään JavaScript-enginet ovat <i>yksisäikeisiä</i> eli ne eivät voi suorittaa rinnakkaista koodia. Tämän takia on käytännössä pakko käyttää ei-blokkaavaa mallia IO-operaatioiden suorittamiseen, sillä muuten selain 'jäätyisi' esim. silloin kun palvelimelta haetaan dataa.
 
-JavaScript-engineiden yksisäikeisyydellä on myös sellainen seuraus, että jos koodin suoritus kestää pitkään, selain menee jumiin suorituksen ajaksi. Jos lisätään sovelluksen alkuun seuraava koodi:
+JavaScript-engineiden yksisäikeisyydellä on myös sellainen seuraus, että jos koodin suoritus kestää pitkään, selain menee jumiin suorituksen ajaksi. Jos komponentin <i>App</i> alkuun lisätään seuraava koodi:
 
 ```js
-setTimeout(() => {
-  console.log('loop..')
-  let i = 0
-  while (i < 99999999999) {
-    i++
-  }
-  console.log('end')
-}, 5000)
+const App = (props) => {
+  const [notes, setNotes] = useState(props.notes)
+  const [newNote, setNewNote] = useState('')
+  const [showAll, setShowAll] = useState(true)
+
+  // highlight-start
+  setTimeout(() => {
+    console.log('loop..')
+    let i = 0
+    while (i < 99999999999) {
+      i++
+    }
+    console.log('end')
+  }, 5000)
+  // highlight-end
+
+  // ...
+}
 ```
 
-Kaikki toimii viiden sekunnin ajan normaalisti. Kun <em>setTimeout</em>:in parametrina määritelty funktio suoritetaan, menee selaimen sivu jumiin pitkän loopin suorituksen ajaksi. Ainakaan Chromessa selaimen tabia ei pysty edes sulkemaan loopin suorituksen aikana.
+kaikki toimii viiden sekunnin ajan normaalisti. Kun <em>setTimeout</em>:in parametrina määritelty funktio suoritetaan, menee selaimen sivu jumiin pitkän loopin suorituksen ajaksi. Sivu jäätyy täysin, eli sen painikkeita ei pysty painamaan eikä muutakaan toiminnallisuutta käyttämään.
 
-Eli jotta selain säilyy <i>responsiivisena</i> eli että se reagoi koko ajan riittävän nopeasti käyttäjän haluamiin toimenpiteisiin, koodin logiikan tulee olla sellainen, että yksittäinen laskenta ei kestä liian kauan.
+Jotta selain säilyy <i>responsiivisena</i> eli että se reagoi koko ajan riittävän nopeasti käyttäjän haluamiin toimenpiteisiin, koodin logiikan tulee olla sellainen, että yksittäinen laskenta ei kestä liian kauan.
 
 Aiheesta löytyy paljon lisämateriaalia Internetistä. Philip Robertsin esitelmä [What the heck is the event loop anyway?](https://www.youtube.com/watch?v=8aGhZQkoFbQ) on varsin havainnollinen esitys.
 
