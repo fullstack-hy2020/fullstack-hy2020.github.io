@@ -887,49 +887,27 @@ In both of the "successful" cases of deleting a resource, the backend responds w
 Let's implement the functionality to update a single note, allowing the importance of the note to be changed. The note updating is done as follows:
 
 ```js
-app.put('/api/notes/:id', (request, response, next) => {
-  const { content, important } = request.body
+app.put("/api/notes/:id", (request, response, next) => {
+  const {content, important} = request.body
 
-  Note.findById(request.params.id)
-    .then(note => {
-      if (!note) {
-        return response.status(404).end()
-      }
-
-      note.content = content
-      note.important = important
-
-      return note.save().then((updatedNote) => {
-        response.json(updatedNote)
-      })
-    })
-    .catch(error => next(error))
+  Person.findByIdAndUpdate(
+    request.params.id, 
+    {note: content, important: important}, 
+    {new: true}
+  ).then(updatedNote => {
+    if(!updatedNote){
+      return response.status(404).end()
+    }
+    return response.json(updatedNote);
+  }).catch(error => next(error))
 })
 ```
 
-The note to be updated is first fetched from the database using the _findById_ method. If no object is found in the database with the given id, the value of the variable _note_ is _null_, and the query responds with the status code <i>404 Not Found</i>.
+The note to be updated is modified directly in the database using the findByIdAndUpdate method. If no object is found in the database with the given id, the value of the variable updatedNote is null, and the query responds with the status code <i>404 Not Found</i>.
 
-If an object with the given id is found, its _content_ and _important_ fields are updated with the data provided in the request, and the modified note is saved to the database using the _save()_ method. The HTTP request responds by sending the updated note in the response.
+If an object with the given id is found, its content and important fields are updated with the data provided in the request, and the database returns the updated note. The HTTP request responds by sending this updated note in the response.
 
-One notable point is that the code now has nested promises, meaning that within the outer _.then_ method, another [promise chain](https://javascript.info/promise-chaining) is defined:
-
-```js
-    .then(note => {
-      if (!note) {
-        return response.status(404).end()
-      }
-
-      note.content = content
-      note.important = important
-
-      // highlight-start
-      return note.save().then((updatedNote) => {
-        response.json(updatedNote)
-      })
-      // highlight-end
-```
-
-Usually, this is not recommended because it can make the code difficult to read. In this case, however, the solution works because it ensures that the _.then_ block following the _save()_ method is only executed if a note with the given id is found in the database and the _save()_ method is called. In the fourth part of the course, we will explore the async/await syntax, which offers an easier and clearer way to handle such situations.
+In the options given to findByIdAndUpdate, the value of the <i>new</i> field is set to <i>true</i>. This tells Mongoose to return the updated document instead of the original version from before the update.
 
 After testing the backend directly with Postman or the VS Code REST client, we can verify that it seems to work. The frontend also appears to work with the backend using the database.
 
