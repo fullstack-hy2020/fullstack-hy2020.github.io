@@ -828,7 +828,7 @@ const errorHandler = (error, request, response, next) => {
   // ...
 }
 
-// handler of requests with result to errors
+// handler of requests that result in errors
 app.use(errorHandler)
 ```
 
