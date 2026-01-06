@@ -43,27 +43,27 @@ You can download the certificate for completing this part by clicking one of the
 
 ### Initializing the application
 
-To get started with our application we need to set up our development environment. We have learned from previous parts that there are useful tools for setting up React applications quickly such as Create React App. Luckily React Native has these kinds of tools as well.
+To get started with our application we need to set up our development environment. We have learned from previous parts that there are useful tools for setting up React applications quickly such as Vite. Luckily React Native has these kinds of tools as well.
 
-For the development of our application, we will be using [Expo](https://docs.expo.io/versions/latest/). Expo is a platform that eases the setup, development, building, and deployment of React Native applications. Let's get started with Expo by initializing our project with <i>create-expo-app</i>:
+For the development of our application, we will be using [Expo](https://docs.expo.dev/versions/latest/). Expo is a platform that eases the setup, development, building, and deployment of React Native applications. Let's get started with Expo by initializing our project with <i>create-expo-app</i>:
 
 ```shell
-npx create-expo-app rate-repository-app --template expo-template-blank@sdk-50
+npx create-expo-app rate-repository-app --template blank@sdk-54
 ```
   
-Note, that the <em>@sdk-50</em> sets the project's <i>Expo SDK version to 50</i>, which supports <i>React Native version 0.73</i>. Using other Expo SDK versions might cause you trouble while following this material. Also, Expo has a [few limitations](https://docs.expo.dev/faq/#limitations) when compared to plain React Native CLI. However, these limitations do not affect the application implemented in the material.
+Note, that the <em>@sdk-54</em> sets the project's <i>Expo SDK version to 54</i>, which supports <i>React Native version 0.81</i>. Using other Expo SDK versions might cause you trouble while following this material. Also, Expo has a [few limitations](https://docs.expo.dev/faq/#limitations) when compared to plain React Native CLI. However, these limitations do not affect the application implemented in the material.
 
 Next, let's navigate to the created <i>rate-repository-app</i> directory with the terminal and install a few dependencies we'll be needing soon:
 
 ```shell
-npx expo install react-native-web@~0.19.6 react-dom@18.2.0 @expo/metro-runtime@~3.1.1
+npx expo install react-native-web react-dom @expo/metro-runtime
 ```
 
 Now that our application has been initialized, open the created <i>rate-repository-app</i> directory with an editor such as [Visual Studio Code](https://code.visualstudio.com/). The structure should be more or less the following:
 
 ![Project structure](../../images/10/1.png)
 
-We might spot some familiar files and directories such as <i>package.json</i> and <i>node_modules</i>. On top of those, the most relevant files are the <i>app.json</i> file which contains Expo-related configuration and <i>App.js</i> which is the root component of our application. <i>Do not</i> rename or move the <i>App.js</i> file because by default Expo imports it to [register the root component](https://docs.expo.io/versions/latest/sdk/register-root-component/).
+We might spot some familiar files and directories such as <i>package.json</i> and <i>node_modules</i>. On top of those, the most relevant files are the <i>app.json</i> file which contains Expo-related configuration and <i>App.js</i> which is the root component of our application. <i>Do not</i> rename or move the <i>App.js</i> file because by default Expo imports it to [register the root component](https://docs.expo.dev/versions/latest/sdk/expo/#registerrootcomponentcomponent).
 
 Let's look at the <i>scripts</i> section of the <i>package.json</i> file which has the following scripts:
 
@@ -82,30 +82,44 @@ Let's look at the <i>scripts</i> section of the <i>package.json</i> file which h
 
 Let us now run the script *npm start*
 
-![metro bundler console output](../../images/10/25new.png)
+![metro bundler console output](../../images/10/25a.png)
 
 > <i>If the script fails with error</i>
-> <i>the problem is most likely your Node version. In case of problems, switch to version *20*. </i>
+> <i>the problem is most likely your Node version. In case of problems, switch to version *22*. </i>
 
-The script starts the [Metro bundler](https://facebook.github.io/metro/) which is a JavaScript bundler for React Native.  In addition to the Metro bundler, the Expo command-line interface should be open in the terminal window. The command-line interface has a useful set of commands for viewing the application logs and starting the application in an emulator or in Expo's mobile application. We will get to emulators and Expo's mobile application soon, but first, let's open our application.
+The command starts the Expo development server ([Expo CLI](https://docs.expo.dev/more/expo-cli/)). The server uses [Metro bundler](https://metrobundler.dev/), which bundles JavaScript and serves it to the app. The command-line interface has a useful set of commands for viewing the application logs and starting the application in an emulator or on a physical device (e.g. with Expo Go). We will get to emulators and Expo Go soon, but first, let's open our application in the browser.
   
-Expo command-line interface suggests a few ways to open our application. Let's press the "w" key in the terminal window to open the application in a browser. We should soon see the text defined in the <i>App.js</i> file in a browser window. Open the <i>App.js</i> file with an editor and make a small change to the text in the <em>Text</em> component. After saving the file you should be able to see that the changes you have made in the code are visible in the browser window after refresh the web page.
+Expo command-line interface suggests a few ways to open our application. Let's press the "w" key in the terminal window to open the application in a browser. We should soon see the text defined in the <i>App.js</i> file in a browser window. Open the <i>App.js</i> file with an editor and make a small change to the text in the <em>Text</em> component. After saving the file, the changes should usually appear automatically thanks to Fast Refresh.
 
-### Setting up the development environment
+### Setting up the virtual devices
 
 We have had the first glance of our application using the Expo's browser view. Although the browser view is quite usable, it is still a quite poor simulation of the native environment. Let's have a look at the alternatives we have regarding the development environment.
 
 Android and iOS devices such as tablets and phones can be emulated in computers using specific <i>emulators</i>. This is very useful for developing native applications. macOS users can use both Android and iOS emulators with their computers. Users of other operating systems such as Linux or Windows have to settle for Android emulators. Next, depending on your operating system follow one of these instructions on setting up an emulator:
 
-- [Set up the Android emulator with Android Studio](https://docs.expo.dev/workflow/android-studio-emulator/) (any operating system)
+- [Set up the Android emulator with Android Studio](https://docs.expo.dev/workflow/android-studio-emulator/#set-up-android-studio) (any operating system)
+  - You typically don't need to install Watchman separately. For the JDK, Android Studio includes a bundled JDK, so you usually don't need to install one separately either.
 - [Set up the iOS simulator with Xcode](https://docs.expo.dev/workflow/ios-simulator/) (macOS operating system)
 
-After you have set up the emulator and it is running, start the Expo development tools as we did before, by running <em>npm start</em>. Depending on the emulator you are running either press the corresponding key for the "open Android" or "open iOS simulator". After pressing the key, Expo should connect to the emulator and you should eventually see the application in your emulator. Be patient, this might take a while.
+When you have finished setting up the emulator, start it so that you can see the virtual device on your screen. Then start the Expo CLI as we did before, by running <em>npm start</em>. Depending on the emulator you are running either press the corresponding key for the "open Android" or "open iOS simulator". After pressing the key, Expo should connect to the emulator and you should eventually see the application in your emulator. Be patient, this might take a while.
 
-In addition to emulators, there is one extremely useful way to develop React Native applications with Expo, the Expo mobile app. With the Expo mobile app, you can preview your application using your actual mobile device, which provides a bit more concrete development experience compared to emulators. To get started, install the Expo mobile app by following the instructions in the [Expo's documentation](https://docs.expo.io/get-started/installation/#2-expo-go-app-for-ios-and). Note that the Expo mobile app can only open your application if your mobile device is connected to <i>the same local network</i> (e.g. connected to the same Wi-Fi network) as the computer you are using for development.
+### Using your own phone with Expo Go
 
-When the Expo mobile app has finished installing, open it up. Next, if the Expo development tools are not already running, start them by running <em>npm start</em>. You should be able to see a QR code at the beginning of the command output. Open the app by scanning the QR code, in Android with Expo app or in iOS with the Camera app.
-The Expo mobile app should start building the JavaScript bundle and after it is finished you should be able to see your application. Now, every time you want to reopen your application in the Expo mobile app, you should be able to access the application without scanning the QR code by pressing it in the <i>Recently opened</i> list in the <i>Projects</i> view.
+In addition to emulators, there is one extremely useful way to develop React Native applications with Expo: the Expo Go app. With Expo Go, you can preview your application using your actual mobile device, which provides a bit more concrete development experience compared to emulators. For the easiest setup, keep your mobile device on the same local network (e.g. the same Wi-Fi) as your development machine.
+
+To get started, install [Expo Go](https://expo.dev/go). To keep everything running as smoothly as possible, choose the same SDK version that was installed for Expo in your development environment — in this case, SDK 54. When Expo Go has finished installing, open it up. 
+
+Next, if the Expo development tools are not already running, start them by running <em>npm start</em>. You should be able to see a QR code at the beginning of the command output. Open the app by scanning the QR code in Expo Go. Expo Go should start building the JavaScript bundle and after it is finished you should be able to see your application. Now, every time you want to reopen your application in Expo Go, you should be able to access the application without scanning the QR code by pressing it in the <i>Recently opened</i> list in the <i>Projects</i> view.
+
+If your phone can’t connect to the development server, you can try starting Expo CLI with command: 
+
+```shell
+npx expo start --tunnel
+```
+
+
+
+In this mode, your devices don’t need to be on the same local network—the traffic is routed over the internet instead. This can help work around various firewall and network configuration issues. However, Expo Go may run more slowly because the code and bundles are now fetched through the tunnel.
 
 </div>
 
@@ -117,7 +131,7 @@ The Expo mobile app should start building the JavaScript bundle and after it is 
 
 Initialize your application with Expo command-line interface and set up the development environment either using an emulator or Expo's mobile app. It is recommended to try both and find out which development environment is the most suitable for you. The name of the application is not that relevant. You can, for example, go with <i>rate-repository-app</i>.
 
-To submit this exercise and all future exercises you need to [create a new GitHub repository](https://github.com/new). The name of the repository can be for example the name of the application you initialized with <em>expo init</em>. If you decide to create a private repository, add GitHub user [mluukkai](https://github.com/mluukkai) as a [repository collaborator](https://docs.github.com/en/github/setting-up-and-managing-your-github-user-account/inviting-collaborators-to-a-personal-repository). The collaborator status is only used for verifying your submissions.
+To submit this exercise and all future exercises you need to [create a new GitHub repository](https://github.com/new). The name of the repository can be for example the name of the application you initialized with <em>create-expo-app</em>. If you decide to create a private repository, add GitHub user [mluukkai](https://github.com/mluukkai) as a [repository collaborator](https://docs.github.com/en/github/setting-up-and-managing-your-github-user-account/inviting-collaborators-to-a-personal-repository). The collaborator status is only used for verifying your submissions.
 
 Now that the repository is created, run <em>git init</em> within your application's root directory to make sure that the directory is initialized as a Git repository. Next, to add the created repository as the remote run <em>git remote add origin git@github.com:<YOUR_GITHUB_USERNAME>/<NAME_OF_YOUR_REPOSITORY>.git</em> (remember to replace the placeholder values in the command). Finally, just commit and push your changes into the repository and you are all done.
 
@@ -127,55 +141,52 @@ Now that the repository is created, run <em>git init</em> within your applicatio
 
 ### ESLint
 
-Now that we are somewhat familiar with the development environment let's enhance our development experience even further by configuring a linter. We will be using [ESLint](https://eslint.org/) which is already familiar to us from the previous parts. Let's get started by installing the dependencies:
+Now that we are somewhat familiar with the development environment let's enhance our development experience even further by configuring a linter. We will be using [ESLint](https://eslint.org/) which is already familiar to us from the previous parts. Let's set up ESLint with the command:
 
 ```shell
-npm install --save-dev eslint @babel/eslint-parser eslint-plugin-react eslint-plugin-react-native
+npx expo lint
 ```
 
-Next, let's add a <i>.eslintrc.json</i> file in the <i>rate-repository-app</i> directory with the ESLint configuration into the following content:
+The command will install the necessary dependencies and create an <i>eslint.config.js</i> file in the project root. It also adds automatically _lint_ script to the <i>package.json</i> file:
 
-```javascript
-{
-  "plugins": ["react", "react-native"],
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
-  },
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
-  "parser": "@babel/eslint-parser",
-  "env": {
-    "react-native/react-native": true
-  },
-  "rules": {
-    "react/prop-types": "off",
-    "react/react-in-jsx-scope": "off"
-  }
-}
-```
-
-And finally, let's add a <em>lint</em> script to the <i>package.json</i> file to check the linting rules in specific files:
-
-```javascript
-{
-  // ...
+```json
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "lint": "eslint ./src/**/*.{js,jsx} App.js --no-error-on-unmatched-pattern" // highlight-line
+    "lint": "expo lint" // highlight-line
   },
-  // ...
-}
+```
+The <i>eslint.config.js</i> looks like follows:
+
+```js
+// https://docs.expo.dev/guides/using-eslint/
+const { defineConfig } = require('eslint/config');
+const expoConfig = require("eslint-config-expo/flat");
+
+module.exports = defineConfig([
+  expoConfig,
+  {
+    ignores: ["dist/*"],
+  }
+]);
 ```
 
-Now we can check that the linting rules are obeyed in JavaScript files in the <i>src</i> directory and in the <i>App.js</i> file by running <em>npm run lint</em>. We will be adding our future code to the <i>src</i> directory but because we haven't added any files there yet, we need the <eM>no-error-on-unmatched-pattern</em> flag. Also if possible integrate ESLint with your editor. If you are using Visual Studio Code you can do that by, going to the extensions section and checking that the ESLint extension is installed and enabled:
+The file is short, but it includes the most important ESLint rules for a React Native project. <i>eslint-config-expo/flat</i> is an all-in-one preset that automatically provides ESLint's base rules, React rules, React Native Rules and Expo-specific best practices.
+
+
+After the initial setup, you can lint your code by running:
+
+```shell
+npm run lint
+```
+
+You can also integrate ESLint with your editor. In Visual Studio Code, you can do that by going to the extensions section and checking that the ESLint extension is installed and enabled:
 
 ![Visual Studio Code ESLint extensions](../../images/10/3.png)
 
-The provided ESLint configuration contains only the basis for the configuration. Feel free to improve the configuration and add new plugins if you feel like it.
+The provided ESLint configuration is only a starting point. Feel free to edit it and add your own rules if you feel like it.
 
 </div>
 
@@ -194,19 +205,25 @@ This was the last exercise in this section. It's time to push your code to GitHu
 
 ### Debugging
   
-When our application doesn't work as intended, we should immediately start <i>debugging</i> it. In practice, this means that we'll need to reproduce the erroneous behavior and monitor the code execution to find out which part of the code behaves incorrectly. During the course, we have already done a bunch of debugging by logging messages, inspecting network traffic, and using specific development tools, such as <i>React Development Tools</i>. In general, debugging isn't that different in React Native, we'll just need the right tools for the job.
+When our application doesn't work as intended, we should immediately start <i>debugging</i> it. In practice, this means that we'll need to reproduce the erroneous behavior and monitor the code execution to find out which part of the code behaves incorrectly. During the course, we have already done a bunch of debugging by logging messages, inspecting network traffic, and using specific development tools, such as <i>React Developer Tools</i>. In general, debugging isn't that different in React Native, we'll just need the right tools for the job.
 
-The good old console.log messages appear in the Expo development tools command line:
+The good old console.log messages appear in the Expo CLI command line:
 
-![GraphQL structure](../../images/10/27new.png)
+![Console log messages appear in Expo CLI command line](../../images/10/27new.png)
 
-That might actually be enough in most cases, but sometimes we need more. React Native provides an in-app developer menu which offers several debugging options. Read more about [debugging react native applications](https://reactnative.dev/docs/debugging).
+That might actually be enough in most cases, but sometimes we need more. 
 
-To inspect the React element tree, props, and state you can install React DevTools. 
+React Native provides an [**in-app developer menu**](https://docs.expo.dev/debugging/tools/#developer-menu) which offers several debugging options and lets you do things like reload the app. You can toggle the <i>Element Inspector</i>, which shows an overlay for inspecting UI elements and their layout. Another useful option is the <i>Performance Monitor</i>, an in-app overlay that shows basic performance metrics such as FPS and JS/UI thread activity.
 
-```shell
-npx react-devtools
-```
-Read here about [React DevTools](https://reactnative.dev/docs/react-devtools). For more useful React Native application debugging tools, also head out to the Expo's [debugging documentation](https://docs.expo.io/workflow/debugging).
+[**React Native DevTools**](https://reactnative.dev/docs/react-native-devtools) is a powerful tool for debugging your app. It offers a similar set of debugging features as the Chrome's DevTools, and it also includes the same features as <i>React DevTools</i>, which we have previously used as a Chrome browser extension.
+
+When the app is running in an emulator or on your phone via Expo Go, you can open React Native DevTools from Expo CLI by pressing _j_. DevTools will open in a browser window:
+
+![React Native DevTools view](../../images/10/28.png) 
+
+You can use the DevTools to inspect the component's state and props as well as <i>change</i> them. Try finding the <em>Text</em> component rendered by the <em>App</em> component using the DevTools. You can either use the search or go through the component tree. Once you have found the <em>Text</em> component in the tree, click it, and change the value of the <em>children</em> prop. The change should be automatically visible in the application's preview.
+
+
+You can read more about the different React Native debugging options in Expo’s [debugging documentation](https://docs.expo.dev/debugging/tools/).
 
 </div>
