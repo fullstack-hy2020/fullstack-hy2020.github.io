@@ -363,7 +363,9 @@ info('message')
 error('error message')
 ```
 
-The second way of exporting may be preferable if only a small portion of the exported functions are used in a file.  E.g. in file <i>controller/notes.js</i> exporting happens as follows:
+The second way of exporting may be preferable if only a small portion of the exported functions are used in a file. 
+
+However, in some cases, only one "thing" is exported. For example, <i>controller/notes.js</i> exports one "thing" like so:
 
 ```js
 const notesRouter = require('express').Router()
@@ -374,7 +376,7 @@ const Note = require('../models/note')
 module.exports = notesRouter // highlight-line
 ```
 
-In this case, there is just one "thing" exported, so the only way to use it is the following:
+Because only one "thing" exported, it can only be imported and used as one object:
 
 ```js
 const notesRouter = require('./controllers/notes')
@@ -384,7 +386,7 @@ const notesRouter = require('./controllers/notes')
 app.use('/api/notes', notesRouter)
 ```
 
-Now the exported "thing" (in this case a router object) is assigned to a variable and used as such.
+Now, the exported "thing" (in this case, a router object) is assigned to a variable _notesRouter_ and is used as a single object.
 
 #### Finding the usages of your exports with VS Code
 
