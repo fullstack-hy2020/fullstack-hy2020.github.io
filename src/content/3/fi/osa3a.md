@@ -717,6 +717,7 @@ Mitä rivillä tapahtuu? <em>notes.map(n => Number(n.id))</em> muodostaa tauluko
 
 **HUOM:** Koska nyt ei ole kyse frontendista ja Reactista, sovellusta <strong>ei luoda</strong> Vitellä vaan komennolla <em>npm init</em>, kuten ylempänä tämän osan materiaalissa.
 
+Älä lisää *node_modules*-kansiota verionhallintaan. Komento _npm init_ ei luo automaattisesti <i>.gitignore</i>-tiedostoa, joten luo sellainen projektin juureen ja lisää sinne rivi *node_modules*. Näin git ei enää huomioi kyseistä kansiota versionhallinnassa. 
 
 **Vahva suositus:** kun teet backendin koodia, pidä koko ajan silmällä, mitä palvelimen koodia suorittavassa konsolissa tapahtuu.
 

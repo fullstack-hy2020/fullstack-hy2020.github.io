@@ -743,9 +743,9 @@ What exactly is happening in that line of code? <em>notes.map(n => Number(n.id))
 
 ### Exercises 3.1.-3.6.
 
-**NB:** Because this is not a frontend project and we are not working with React, the application <strong>is not created</strong> with create vite@latest -- --template react. You initialize this project with the <em>npm init</em> command that was demonstrated earlier in this part of the material.
+**NB:** Since this is not about the frontend and React, the application is <strong>not created</strong> with Vite, but with the <em>npm init</em> command, as described earlier in this part of the material.
 
-**NB:** Because the "node\_modules" is created using "npm install express", it will not be excluded when you are trying to add your code to git using "git add .", therefore please create a file called ".gitignore" and write "node\_modules" so that git ignores it everytime you try to add, commit or push to a remote repo. 
+Do not add the *node_modules* directory to version control. The _npm init_ command does not automatically create a <i>.gitignore</i> file, so create one in the root of your project and add the line *node_modules* to it. This way Git will no longer track that directory in version control.
 
 **Strong recommendation:** When you are working on backend code, always keep an eye on what's going on in the terminal that is running your application.
 
