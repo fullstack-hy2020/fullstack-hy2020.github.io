@@ -1,0 +1,806 @@
+<!DOCTYPE html><html lang="zh"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><style data-href="/styles.de4b6e7bac0f9fd6979f.css" id="gatsby-global-css">@import url(https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,500,600);@import url(https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,500,600);@import url(https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap);code[class*=language-],pre[class*=language-]{color:#fff;background:none;text-shadow:0 -.1em .2em #000;font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;font-size:1em;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;tab-size:4;-webkit-hyphens:none;hyphens:none}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}:not(pre)>code[class*=language-],pre[class*=language-]{background:#4d4033}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto;border:.3em solid #7a6652;border-radius:.5em;box-shadow:inset 1px 1px .5em #000}:not(pre)>code[class*=language-]{padding:.15em .2em .05em;border-radius:.3em;border:.13em solid #7a6652;box-shadow:inset 1px 1px .3em -.1em #000;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#998066}.token.namespace,.token.punctuation{opacity:.7}.token.boolean,.token.constant,.token.number,.token.property,.token.symbol,.token.tag{color:#d1949e}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#bde052}.language-css .token.string,.style .token.string,.token.entity,.token.operator,.token.url,.token.variable{color:#f5b83d}.token.atrule,.token.attr-value,.token.keyword{color:#d1949e}.token.important,.token.regex{color:#e90}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}.token.deleted{color:red}.course{position:relative;width:100%}@media (min-width:992px){.course{display:flex;flex-wrap:nowrap;flex-direction:row;align-items:flex-start}}.course p{font-family:IBM Plex Sans,monospace}@media (min-width:640px){.course p{margin-left:1rem}}.course p:not(:last-of-type){margin-bottom:1rem}@media (min-width:640px){.course h1{margin-left:3rem}}.course h2,.course h3,.course h4{padding-bottom:2rem}@media (min-width:640px){.course h2,.course h3,.course h4,.course table{margin-left:1rem}}.course ul{font-family:IBM Plex Sans,monospace}@media (min-width:640px){.course ul{margin-left:2.2rem}}.course h2:not(:first-of-type){margin-top:2rem}.course pre{margin:2rem 0;background-color:var(--color-pre-background);color:#fff}.course em{font-family:Courier;font-style:normal;background-color:rgba(var(--color-main),.6);padding:1px 5px 2px}.course img{border:11px solid transparent}.course .banner,.course .container{position:static}.course .letter{width:4rem;height:4rem;border-width:5px;border-style:solid;border-radius:2.5rem;text-align:center;margin:1rem;line-height:1.3em;transform:translate(-1rem)}@media (min-width:640px){.course .letter{transform:translate(-3rem,4.5rem)}}.course .letter,.course h1{font-size:2.3rem;font-weight:700}.course-content-container{width:100%}.course-content a,.tasks a{border:0;border-bottom-width:2px;border-style:solid;padding:2px}.course-content a:hover,.tasks a:hover{color:#33332d}.course-content{width:90%;margin:0 auto;max-width:1200px}@media (min-width:992px){.course-content-inner{padding-left:30%;padding-right:5%}}.course-content-inner blockquote{padding-left:.5rem;border-left:2px solid #888}html[data-theme=dark] .tasks{background-color:var(--color-background)!important;border-left:5px solid;border-top:1px dotted;border-bottom:1px dotted}@media (min-width:992px){html[data-theme=dark] .tasks{border-left:15px solid}}.tasks a{border-color:var(--color-text)!important}.tasks a:hover{background-color:#fff!important;color:#000!important}.gatsby-highlight-code-line{background-color:hsla(0,0%,88.2%,.3);display:block;margin-right:-1em;margin-left:-1em;padding-right:1em;padding-left:1em}code[class*=language-],pre[class*=language-]{text-shadow:none}.arrow-go-up{width:36px;height:36px;position:fixed;bottom:5%;right:5%;z-index:40;cursor:pointer}html[data-theme=dark] .arrow-go-up{filter:invert(1)}@media (max-width:639px){.arrow-go-up{right:10%}}.part-main__banner{background-position:50%;background-size:50%;padding-bottom:10%;background-repeat:no-repeat}@media (max-width:639px){.part-main__banner{background-position:top;background-size:70%;padding-bottom:30%!important}}.part-intro{font-family:IBM Plex Sans,monospace!important}.part-intro li,.part-intro p{color:#33332d}.part-intro p:not(:last-of-type){padding-bottom:2em}.part-intro__banner{background-size:50%;background-repeat:no-repeat;background-position:100%}@media (max-width:639px){.part-intro__banner{background-position:top;background-size:70%}.part-intro__banner>.container{margin-top:40%}}.part-intro a{color:#33332d;border-bottom:1px solid #33332d}.part-intro a:hover{background-color:#fff}.arrow__container{position:relative}.arrow__container:not():first-child{background:none;background-color:none}@media (min-width:640px){.arrow__container:not():first-child{border-left:none}.arrow__container:not():first-child:before{content:"";background:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/PjwhLS1HZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjEuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCktLT48c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkNhcGFfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA0NzcuMTc1IDQ3Ny4xNzUiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQ3Ny4xNzUgNDc3LjE3NSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PGc+PHBhdGggZD0iTTM2MC43MzEsMjI5LjA3NWwtMjI1LjEtMjI1LjFjLTUuMy01LjMtMTMuOC01LjMtMTkuMSwwcy01LjMsMTMuOCwwLDE5LjFsMjE1LjUsMjE1LjVsLTIxNS41LDIxNS41CgkJYy01LjMsNS4zLTUuMywxMy44LDAsMTkuMWMyLjYsMi42LDYuMSw0LDkuNSw0YzMuNCwwLDYuOS0xLjMsOS41LTRsMjI1LjEtMjI1LjFDMzY1LjkzMSwyNDIuODc1LDM2NS45MzEsMjM0LjI3NSwzNjAuNzMxLDIyOS4wNzV6CgkJIi8+PC9nPjxnLz48Zy8+PGcvPjxnLz48Zy8+PGcvPjxnLz48Zy8+PGcvPjxnLz48Zy8+PGcvPjxnLz48Zy8+PGcvPjwvc3ZnPg==) no-repeat;background-size:contain;position:absolute;top:0;left:0;height:100%;width:100%}}.arrows--horizontal{display:flex;position:relative;margin:0;align-items:flex-start}.arrow__wrapper{display:flex;justify-content:flex-start;align-items:center;margin:0}.arrow__wrapper:first-of-type{border-right:none;z-index:20}.arrow__wrapper:nth-of-type(n+2){margin-left:-4rem;z-index:10}.arrow__wrapper:nth-of-type(n+2) .arrow__rectangle{border-left:none;padding-left:4rem}.arrow__wrapper:nth-of-type(3){z-index:5}.arrow__wrapper:hover .arrow__point,.arrow__wrapper:hover .arrow__rectangle,.arrow__wrapper:hover .arrow__rectangle>a{background-color:#33332d!important;color:#fff!important}.arrow__rectangle{padding:1rem;justify-content:center;align-items:center;border:2px solid #33332d;border-right:none;z-index:2;overflow:hidden;font-family:IBM Plex Sans,monospace;position:relative}.arrow__rectangle a{color:#33332d}@media (max-width:991px){.arrow__rectangle{font-size:1rem}}.arrow__rectangle .bold{font-weight:600}.arrow__rectangle--thick-border{border:3px solid #33332d;border-right:none}.arrow__point{padding:1.25rem;border:2px solid #33332d;border-bottom:none;border-left:none;transform:translate(-1.3rem) rotate(45deg);z-index:1;overflow:hidden}.arrow__point--thick-border{border:3px solid #33332d;border-bottom:none;border-left:none}.arrow__wrapper--stacked{display:flex;justify-content:flex-start;align-items:center;margin:auto auto auto 0}@media (max-width:639px){.arrow__wrapper--stacked .arrow__rectangle{border:none;background-color:transparent!important;padding:0;font-size:1rem;justify-content:unset}.arrow__wrapper--stacked .arrow__rectangle>p>span{border-bottom:1px solid #33332d;margin:auto}.arrow__wrapper--stacked .arrow__rectangle>p>span:hover{background-color:#fff!important;color:#000}.arrow__wrapper--stacked .arrow__point{display:none}}.arrow__wrapper--stacked:nth-of-type(n+2){margin-top:1rem}@media (min-width:640px){.arrow__wrapper--stacked:nth-of-type(n+2){margin-top:-2px}}.arrow__wrapper--stacked .arrow__rectangle{position:relative}@media (min-width:640px){.arrow__wrapper--stacked .arrow__rectangle{padding:1.25rem}}@media (min-width:992px){.arrow__wrapper--stacked .arrow__rectangle{padding:1rem}}.arrow__wrapper--stacked .arrow__point{padding:1.08rem;margin-left:2px}@media (min-width:640px){.arrow__wrapper--stacked .arrow__point{margin-left:unset;padding:1.25rem}}@media (min-width:640px){.arrow__wrapper--stacked:hover .arrow__point,.arrow__wrapper--stacked:hover .arrow__rectangle{background-color:#33332d!important}}@media (min-width:640px){.arrow__wrapper--stacked:hover .arrow--stacked-letter,.arrow__wrapper--stacked:hover .arrow--stacked-title{color:#fff}}.arrow--stacked-title{font-family:IBM Plex Mono,monospace;color:#33332d}@media (min-width:640px){.arrow--stacked-title{white-space:nowrap}}.arrow__container--with-link{width:100%!important}@media (max-width:639px){.breadcrumb .arrow__wrapper{display:none}}.breadcrumb .arrow__wrapper:hover .arrow__point,.breadcrumb .arrow__wrapper:hover .arrow__rectangle{background-color:#33332d!important}.breadcrumb .arrow__wrapper:hover .arrow--stacked-letter,.breadcrumb .arrow__wrapper:hover .arrow--stacked-title{color:#fff}.breadcrumb .arrow__rectangle{position:relative}@media (max-width:639px){.breadcrumb .arrow__rectangle{border:none;padding:0;font-size:.7rem;white-space:nowrap;background-color:transparent!important;color:#33332d}}@media (max-width:639px){.breadcrumb .arrow__point{display:none}}.banner{display:flex;width:100%;align-items:center;position:relative;padding:2rem 0;background-color:var(--color-main)}@media (min-width:992px){.banner{padding:3.444rem 3.444rem 4.444rem}}html{font-family:IBM Plex Mono,monospace;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block}audio:not([controls]){display:none;height:0}progress{vertical-align:baseline}[hidden],template{display:none}a{background-color:transparent;-webkit-text-decoration-skip:objects}a:active,a:hover{outline-width:0}abbr[title]{border-bottom:none;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted}b,strong{font-weight:inherit;font-weight:bolder}dfn{font-style:italic}h1{font-size:2em;margin:.67em 0}mark{background-color:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}svg:not(:root){overflow:hidden}code,kbd,pre,samp{font-family:IBM Plex Mono,monospace;font-size:1em}figure{margin:1em 40px}hr{box-sizing:content-box;height:0;overflow:visible}button,input,optgroup,select,textarea{font:inherit;margin:0}optgroup{font-weight:700}button,input{overflow:visible}button,select{text-transform:none}[type=reset],[type=submit],button,html [type=button]{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-cancel-button,[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-input-placeholder{color:inherit;opacity:.54}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}html{font:112.5%/1.45em IBM Plex Mono,monospace;box-sizing:border-box;overflow-y:scroll}*,:after,:before{box-sizing:inherit}body{color:hsla(var(--color-text-hsl),.8);font-family:IBM Plex Mono,monospace;font-weight:400;word-wrap:break-word;font-kerning:normal;-ms-font-feature-settings:"kern","liga","clig","calt";font-feature-settings:"kern","liga","clig","calt"}img{max-width:100%;padding:0;margin:0 0 1.45rem}h1{font-size:2.25rem}h1,h2{padding:0;margin:0 0 1.45rem;color:inherit;font-family:IBM Plex Mono,monospace;font-weight:700;text-rendering:optimizeLegibility;line-height:1.1}h2{font-size:1.62671rem}h3{margin:2rem 0 -.5rem;font-size:1.38316rem}h3,h4{padding:0;color:inherit;font-family:IBM Plex Mono,monospace;font-weight:700;text-rendering:optimizeLegibility;line-height:1.1}h4{margin:2rem 0 -1rem;font-size:1rem}h5{font-size:.85028rem}h5,h6{padding:0;margin:0 0 1.45rem;color:inherit;font-family:IBM Plex Mono,monospace;font-weight:700;text-rendering:optimizeLegibility;line-height:1.1}h6{font-size:.78405rem}hgroup{padding:0;margin:0 0 1.45rem}ol,ul{padding:0;margin:0 0 1.45rem 1.45rem;list-style-position:outside;list-style-image:none}dd,dl,figure,p{padding:0;margin:0 0 1.45rem}pre{margin:0 0 1.45rem;font-size:.85rem;line-height:1.42;background:hsla(var(--color-text-hsl),.04);border-radius:3px;word-wrap:normal;padding:1.45rem}table{font-size:1rem;line-height:1.45rem;border-collapse:collapse;width:100%}fieldset,table{padding:0;margin:0 0 1.45rem}blockquote{padding:0;margin:0 1.45rem 1.45rem}form,iframe,noscript{padding:0;margin:0 0 1.45rem}hr{padding:0;margin:0 0 calc(1.45rem - 1px);background:hsla(var(--color-text-hsl),.2);border:none;height:1px}address{padding:0;margin:0 0 1.45rem}b,dt,strong,th{font-weight:700}li{margin-bottom:.725rem}ol li,ul li{padding-left:0}li>ol,li>ul{margin-left:1.45rem;margin-bottom:.725rem;margin-top:.725rem}blockquote :last-child,li :last-child,p :last-child{margin-bottom:0}li>p{margin-bottom:.725rem}code,kbd,samp{font-size:.85rem;line-height:1.45rem}abbr,abbr[title],acronym{border-bottom:1px dotted hsla(var(--color-text-hsl),.5);cursor:help}abbr[title]{text-decoration:none}td,th,thead{text-align:left}td,th{border-bottom:1px solid hsla(var(--color-text-hsl),.12);font-feature-settings:"tnum";-moz-font-feature-settings:"tnum";-ms-font-feature-settings:"tnum";-webkit-font-feature-settings:"tnum";padding:.725rem .96667rem calc(.725rem - 1px)}td:first-child,th:first-child{padding-left:0}td:last-child,th:last-child{padding-right:0}code,tt{background-color:hsla(var(--color-text-hsl),.04);border-radius:3px;font-family:SFMono-Regular,Consolas,Roboto Mono,Droid Sans Mono,Liberation Mono,Menlo,Courier,monospace;padding:.2em 0}pre code{background:none;line-height:1.42}code:after,code:before,tt:after,tt:before{letter-spacing:-.2em;content:" "}pre code:after,pre code:before,pre tt:after,pre tt:before{content:""}@media only screen and (max-width:480px){html{font-size:100%}}:root,html[data-theme=light]{--color-background:#fff;--color-text:#33332d;--color-text-hsl:0,0%,0%;--color-link-decoration:#e1e1e1;--color-main:#e1e1e1;--color-pre-background:#33332d}html[data-theme=dark]{--color-background:#33332d;--color-text:#fff;--color-text-hsl:0,100%,100%;--color-link-decoration:#a0a0a0;--color-main:#212121;--color-pre-background:#212121}body,html{margin:0;padding:0;font-family:IBM Plex Mono,monospace;font-weight:400;background-color:var(--color-background);color:var(--color-text);font-size:14px;line-height:1.555rem}@media (min-width:992px){body,html{font-size:18px}}.main-wrapper{min-height:100vh;display:flex;flex-direction:column}p{margin:0;text-align:left;line-height:1.5em}a,p{color:var(--color-text)}a{text-decoration:none}.link a{border-bottom:2px solid var(--color-link-decoration)}.link a:hover{background-color:var(--color-main)}.container{position:relative;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;width:90%;max-width:1300px}@media (max-width:639px){.container{padding:0 20px}}@media (min-width:992px){.container--right{margin-right:5%;width:54%;max-width:779.9844px}}@media (min-width:992px) and (min-width:1300px){.container--right{margin-right:calc(50% - 650px)}}.hidden{display:none!important}.centered{text-align:center}@media (max-width:639px){.centered--mobile{justify-content:center;align-content:center;align-items:center}}.spacing{margin-top:2rem}@media (max-width:992px) and (min-width:640px){.spacing--tablet{margin-top:5rem!important}}@media (min-width:992px){.spacing{margin-top:5rem}}.spacing--small{margin-top:1rem}@media (min-width:992px){.spacing--small{margin-top:3.444rem}}.spacing--large{margin-top:4rem}@media (min-width:992px){.spacing--large{margin-top:10rem}}.spacing--extra-large{margin-top:4rem}@media (min-width:992px){.spacing--extra-large{margin-top:20rem}}.spacing--after{margin-bottom:2rem}@media (min-width:992px){.spacing--after{margin-bottom:5rem}}@media (max-width:639px){.spacing--after--mobile{margin-bottom:5rem}}@media (min-width:992px){.spacing--after-small{margin-bottom:2.5rem}}.spacing--after-large{margin-bottom:4rem}@media (min-width:992px){.spacing--after-large{margin-bottom:10rem}}@media (max-width:991px){.spacing--mobile{margin-top:2rem}}@media (max-width:1299px){.spacing--mobile--small{margin-top:1.5rem}}@media (max-width:1299px){.spacing--mobile--large{margin-top:3rem}}.col-1{width:100%}@media (min-width:992px){.col-1{width:10%}}.col-2{width:100%}@media (min-width:992px){.col-2{width:20%}}.col-3{width:100%}@media (min-width:992px){.col-3{width:30%}}.col-4{width:100%}@media (min-width:992px){.col-4{width:40%}}.col-5{width:100%}@media (min-width:992px){.col-5{width:50%}}.col-6{width:100%}@media (min-width:992px){.col-6{width:60%}}.col-7{width:100%}@media (min-width:992px){.col-7{width:70%}}.col-8{width:100%}@media (min-width:992px){.col-8{width:80%}}.col-9{width:100%}@media (min-width:992px){.col-9{width:90%}}.col-10{width:100%}@media (min-width:992px){.col-10{width:100%}}@media (min-width:992px){.push-right-1{margin-left:10%}.push-right-2{margin-left:20%}.push-right-3{margin-left:30%}.push-right-4{margin-left:40%}.push-right-5{margin-left:50%}.push-left-1{margin-right:10%}.push-left-2{margin-right:20%}.push-left-3{margin-right:30%}.push-left-4{margin-right:40%}.push-left-5{margin-right:50%}.push-left{margin-right:auto}.push-right{margin-left:auto}}@media (max-width:639px){.col-1--mobile{width:10%!important}.col-2--mobile{width:20%!important}.col-3--mobile{width:30%!important}.col-4--mobile{width:40%!important}.col-5--mobile{width:50%!important}.col-6--mobile{width:60%!important}.col-7--mobile{width:70%!important}.col-8--mobile{width:80%!important}.col-9--mobile{width:90%!important}.col-10--mobile{width:100%!important}.push-right-1--mobile{margin-left:10%!important}.push-right-2--mobile{margin-left:20%!important}.push-right-3--mobile{margin-left:30%!important}.push-right-4--mobile{margin-left:40%!important}.push-right-5--mobile{margin-left:50%!important}.push-left-1--mobile{margin-right:10%!important}.push-left-2--mobile{margin-right:20%!important}.push-left-3--mobile{margin-right:30%!important}.push-left-4--mobile{margin-right:40%!important}.push-left-5--mobile{margin-right:50%!important}.order-0--mobile{order:0}.order-1--mobile{order:1}.order-2--mobile{order:2}.order-3--mobile{order:3}.order-4--mobile{order:4}.order-5--mobile{order:5}.hidden--mobile{display:none}}@media (max-width:1299px){.col-1--tablet{width:10%}.col-2--tablet{width:20%}.col-3--tablet{width:30%}.col-4--tablet{width:40%}.col-5--tablet{width:50%}.col-6--tablet{width:60%}.col-7--tablet{width:70%}.col-8--tablet{width:80%}.col-9--tablet{width:90%}.col-10--tablet{width:100%}.order-0--tablet{order:0}.order-1--tablet{order:1}.order-2--tablet{order:2}.order-3--tablet{order:3}.order-4--tablet{order:4}.order-5--tablet{order:5}.order-0--mobile{order:0}.order-1--mobile{order:1}.order-2--mobile{order:2}.order-3--mobile{order:3}.order-4--mobile{order:4}.order-5--mobile{order:5}.hidden--mobile{display:none}}.centered-vertically{display:flex;flex-direction:column;justify-content:center}.nav-item-hover{text-decoration:none;color:var(--color-text);font-weight:500;padding:.2em}@media (min-width:640px){.nav-item-hover{font-weight:600}}.nav-item-hover:active,.nav-item-hover:focus,.nav-item-hover:hover{color:var(--color-background);background-color:var(--color-text)!important}.nav-item-hover:active,.nav-item-hover:focus{outline:2px solid #706be4}.nav-item-active{border-bottom:2px solid var(--color-text)}.flex-fix-aligning:after,.flex-fix-aligning:before{content:"";width:30%;order:2}.auto-bottom-margin{margin-bottom:auto}.frontpage-hero{flex-direction:column;flex-wrap:nowrap}@media (max-width:991px){.frontpage-hero__content{z-index:1;margin-bottom:3rem}}.frontpage-hero__heading{-webkit-hyphens:auto;hyphens:auto;font-size:2rem}@media (min-width:640px){.frontpage-hero__heading{font-size:2.5rem}}@media (min-width:1300px){.frontpage-hero__heading{font-size:3rem}}.frontpage-hero__cta{display:inline-block;margin-bottom:4rem}.frontpage-hero__description{max-width:626px}@media (max-width:991px){.frontpage-hero__image{position:absolute!important;right:-5%;top:-40px;opacity:.1}.frontpage-hero__image img{transform:translateX(33%)}}@media (max-width:639px){.frontpage-hero__image{right:-40px}}.heading-font{font-family:IBM Plex Sans,monospace}.about__challenge-button{box-shadow:-3px 5px var(--color-text);padding:.6rem 1rem;border:3px solid var(--color-text);font-weight:600}.about__challenge-button:hover{background-color:var(--color-text);color:var(--color-background);cursor:pointer}.about__challenge-button--turquoise{background-color:#82f7eb}html[data-theme=dark] .about__challenge-button{color:var(--color-text);box-shadow:-3px 5px var(--color-text);border:3px solid var(--color-text)}html[data-theme=dark] .about__challenge-button:hover{background-color:var(--color-text);color:var(--color-background)}html[data-theme=dark] .about__challenge-button--turquoise{color:var(--color-main);box-shadow:-3px 5px var(--color-main);border:3px solid var(--color-main)}html[data-theme=dark] .about__challenge-button--turquoise:hover{background-color:var(--color-main);color:var(--color-text)}@media (max-width:1299px){.space-between--mobile{justify-content:space-between}}.challenge__banner{display:flex;justify-content:center;margin-bottom:-70px}@media (min-width:640px){.challenge__banner{transform:translateY(-10px)}}@media (min-width:1300px){.challenge__banner{margin-bottom:-370px}}.challenge__banner .image{margin:0;width:70%;transform:translateY(-25%)}@media (min-width:640px){.challenge__banner .image{transform:translateY(-10%)}}@media (min-width:1300px){.challenge__banner .image{transform:translateY(-30%)}}.header{position:sticky;z-index:50;top:0;box-sizing:border-box;width:100%;padding-top:1.444rem;padding-bottom:1rem;transition:all .2s ease-in-out}.header--small{pointer-events:none}.header__logo{margin:0 10px;pointer-events:auto}.navigation{z-index:2;list-style:none;opacity:0;display:none;margin:0;padding:5%;flex-direction:column;justify-content:center;align-items:center;background:var(--color-main);position:fixed;top:8%;right:5%;transition:opacity .3s ease-in-out;font-weight:200}@media (min-width:1300px){.navigation{display:flex;opacity:1;padding:0;font-weight:400;position:static;background:none;overflow:hidden;flex-direction:row}}@media (max-width:1299px){.navigation__wrapper .language-switcher{margin:20px 0 0}}@media (min-width:1300px){.navigation__wrapper{flex-grow:100}}@media (max-width:1299px){.navigation__language-picker{margin-top:10px}}.navigation__icon-buttons{margin:30px 0 0}@media (min-width:1300px){.navigation__icon-buttons{width:100%;display:flex;justify-content:flex-end;margin:0 20px 0 0}}.navigation__toggle{z-index:3;position:absolute;top:0;right:0;width:50px;height:40px;cursor:pointer;border:none;background:none;outline:none;border-radius:4px}@media (min-width:1300px){.navigation__toggle{display:none}}.navigation__mobile-logo{display:none}.navigation__toggle-icon{top:8px;left:10px}.navigation__toggle-icon,.navigation__toggle-icon:after,.navigation__toggle-icon:before{position:absolute;width:30px;height:3px;transition:all .3s ease;border-radius:4px;background-color:var(--color-text)}.navigation__toggle-icon:after,.navigation__toggle-icon:before{content:"";display:block}.navigation__toggle-icon:before{top:10px}.navigation__toggle-icon:after{top:20px}@media (max-width:1299px){.is-open--navigation{overflow:hidden;height:100vh}.is-open--navigation .navigation{opacity:1;display:flex;align-items:flex-start}.is-open--navigation .navigation:before{content:"";background-color:var(--color-main);position:absolute;width:25px;height:25px;top:-3px;right:13px;transform:rotate(45deg)}.is-open--navigation .navigation__mobile-logo{display:block;width:30px;height:30px;position:absolute;top:47px;left:5%}}@media (max-width:1299px) and (min-width:1300px){.is-open--navigation .navigation__mobile-logo{display:none}}@media (max-width:1299px){.is-open--navigation .navigation__toggle-icon{transform:translate3d(0,10px,0) rotate(45deg)}.is-open--navigation .navigation__toggle-icon,.is-open--navigation .navigation__toggle-icon:after,.is-open--navigation .navigation__toggle-icon:before{background:var(--color-text)}.is-open--navigation .navigation__toggle-icon:before{transform:rotate(-45deg) translate3d(-5.71429px,-6px,0);opacity:0}.is-open--navigation .navigation__toggle-icon:after{transform:translate3d(0,-19px,0) rotate(-90deg)}}.navigation__item{margin:10px 0;white-space:nowrap}.navigation__item:first-of-type{margin:0 0 10px}.navigation__item:last-of-type{margin:10px 0 0}@media (min-width:1300px){.navigation__item{margin:0 15px;padding:0!important}.navigation__item:first-of-type{margin:0 15px 0 2rem}.navigation__item:last-of-type{margin:0 0 0 15px}}.SrOnly-module--srOnly--2Hn2L{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}.LanguagePicker-module--select--364N3{padding:3px 6px;appearance:none;border:1px solid var(--color-text);border-radius:5px;color:#33332d;background-color:#fff;background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23333333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 6px center;background-size:16px 12px;width:7rem;min-width:7rem}.SvgIcon-module--svgIcon--1nGJ6{-webkit-user-select:none;user-select:none;width:1em;height:1em;display:inline-block;fill:currentColor;flex-shrink:0;font-size:1.5rem}.element--flex{display:flex;flex-wrap:wrap}.element--space-around{justify-content:space-around}.element--space-between{justify-content:space-between}.element--column{flex-direction:column}.element--centered{align-items:center;justify-content:center!important}@media (min-width:992px){.element--centered-in-desktop{align-items:center;justify-content:center!important}}@media (min-width:992px){.element--horizontal-half{width:45%}}.element--auto-margin{margin:auto}.element--auto-bottom-margin{margin-bottom:auto}.element--flex-start{align-content:flex-start}.element--no-wrap{flex-wrap:nowrap}.element--relative{position:relative!important}.edit-link>span{border-bottom-width:3px;border-bottom-style:solid;border-bottom-color:inherit}.edit-link:hover{color:#33332d}.SearchLink-module--searchLink--2IShR{margin-right:20px;border-radius:4px;padding:4px;display:inline-flex}.SearchLink-module--searchLink--2IShR:focus,.SearchLink-module--searchLink--2IShR:hover{background-color:var(--color-text);color:var(--color-background)}.ThemeSwitcher-module--themeSwitcher--1gbnJ{border-radius:4px;padding:4px;display:inline-flex;background:none;border:none;color:var(--color-text)}.ThemeSwitcher-module--themeSwitcher--1gbnJ:hover{background-color:var(--color-text)!important;color:var(--color-background)!important;cursor:pointer}.ThemeSwitcher-module--themeSwitcher--1gbnJ:focus{background-color:var(--color-text);color:var(--color-background)}.ThemeSwitcher-module--themeSwitcher--1gbnJ:focus:not(:focus-visible){color:var(--color-text);background:none}.triple-border{position:relative;padding:2px;border-radius:5px 0;transition:color .1s ease-in-out,background-color .1s ease-in-out}.triple-border:after,.triple-border:before{z-index:2;content:"";border:2px solid var(--color-text);border-radius:5px;position:absolute;width:calc(100% + 5px);height:calc(100% + 5px)}.triple-border:before{left:0;top:0}.triple-border:after{bottom:0;right:0}.triple-border__container{position:relative;overflow:hidden;border-radius:3px 0}.triple-border--large-margin{margin:13px;padding:3px}.triple-border--large-margin:after,.triple-border--large-margin:before{content:"";border-width:3px;border-radius:13px;width:calc(100% + 13px);height:calc(100% + 13px)}.triple-border--large-margin .triple-border__container{border-radius:10px 0}.triple-border__logo{padding:.2rem;font-size:1.111rem;font-weight:600}html[data-theme=dark] .triple-border:hover .triple-border__logo--small{color:#33332d!important}.triple-border__return-tasks{font-size:.9rem;padding:1rem .2rem}.accordion__container{margin-bottom:1rem}.accordion__title{padding-left:2.149rem!important;padding-right:2.149rem!important;font-size:1.111rem!important;font-weight:600}.accordion{background-color:var(--color-background);border:3px solid var(--color-text);border-radius:5px;color:var(--color-text);cursor:pointer;padding:1rem;width:100%;text-align:left;outline:none;font-size:15px;transition:max-width .4s}.accordion:focus,.accordion:hover,.active{background-color:var(--color-main)}.active:focus{border:3px solid var(--color-text)}.accordion:after{content:"+";font-size:1.5rem;float:right;margin-left:5px}.active,.active:not(:focus-visible){border-color:var(--color-background)}.active:after{content:"-";font-size:1.5rem}.panel{background-color:var(--color-background);padding:2rem 18px}.accordion--side-navigation{width:100%;margin-left:unset}.accordion--side-navigation .accordion{border:none;padding:0!important;background-color:transparent!important;color:var(--color-text)!important;border-radius:0}.accordion--side-navigation .accordion__title{font-size:16px!important;font-weight:unset;background-color:transparent}.accordion--side-navigation .accordion__title:hover{background-color:var(--color-text)!important;color:var(--color-background)!important}.accordion--side-navigation .panel{padding:1rem 0 0!important;background-color:transparent}.accordion--side-navigation .panel ul{margin-left:1rem}.accordion--side-navigation .accordion:hover,.accordion--side-navigation .active{background-color:var(--color-text);color:var(--color-background)}.accordion--side-navigation .accordion:after,.accordion--side-navigation .active:after{content:""}#footer{margin-top:auto}@media (min-width:992px){#footer{align-items:center}}#footer a:hover{background-color:transparent!important}#footer .footer__navigation{display:none}@media (max-width:1299px){#footer .footer__navigation{width:100%;display:block}#footer .footer__navigation-link-container{display:flex;flex-direction:column}}#footer .footer__navigation-link{font-size:1rem;line-height:18px;white-space:nowrap;font-family:IBM Plex Sans,monospace;margin-left:0!important;margin-right:auto}@media (max-width:639px){#footer .footer__navigation-link{line-height:8px}}#footer .footer__navigation-link:hover{color:var(--color-background)!important;background-color:var(--color-text)!important}#footer .footer__navigation-link:nth-of-type(n+2){margin-top:2.142rem}@media (min-width:1300px){#footer .footer__navigation{flex-direction:row;flex-wrap:nowrap;justify-content:flex-end}#footer .footer__navigation-link{margin-top:0!important;margin-bottom:auto}#footer .footer__navigation-link:nth-of-type(n+1){margin-right:2.877rem}#footer .footer__navigation-link:last-of-type{margin-right:0!important}}.image__content{position:absolute;top:0;left:0;height:100%;width:100%;object-fit:cover}.image--contain .image__content{object-fit:contain}.image{overflow:hidden;width:100%;position:relative}@media (min-width:992px){.image{width:40%}}.image .image__container{height:0;position:relative;width:100%;padding-bottom:89.0625%}.image--circle{border-radius:50%}.image--circle .image__content{background-color:var(--color-main)}.image--square-big{width:100%}.image--square-big .image__container{width:100%;padding-bottom:100%}.image--extra-small{width:8%}.image--extra-small .image__container{width:100%;padding-bottom:100%}@media (max-width:639px){.image--extra-small{width:calc(33.33333% - 1rem)}}.image--small{width:15%}.image--small .image__container{width:100%;padding-bottom:100%}@media (max-width:639px){.image--small{width:calc(33.33333% - 1rem)}}.image--medium{width:50%}.image--medium .image__container{width:100%;padding-bottom:71.25%}.image--large{width:100%}@media (min-width:992px){.image--large{width:60%}}.image--large .image__container{padding-bottom:59.37%;width:100%}.image--full-width{width:100%}.image--full-width .image__container{padding-bottom:59.37%;width:100%}.image--actual-size{width:100%}.image--actual-size .image__container{height:0;position:relative;width:100%;padding-bottom:60%}html[data-theme=dark] .image--backdrop .image__container{background:#fff;border-radius:10px}html[data-theme=dark] .image--invert img{filter:invert(1)}.body-text:not(:last-of-type){margin-bottom:2.5rem}.body-text__title{color:var(--color-text);font-size:1.44rem;line-height:1.25em;font-weight:700;margin:0;position:relative;top:50%;transform:translateY(-50%)}.body-text__content:not(:last-of-type){padding-bottom:2em}.bold{font-weight:700}.body-text--no-padding{padding:0!important}@media (min-width:640px){.companies__main-title .body-text__title{font-size:3rem}}.challenge-title{font-size:1.44rem}.company__logo{padding:10px}@media (min-width:992px){.company__logo{width:15%!important}}.content-liftup{position:relative;text-decoration:none}.content-liftup--small{box-sizing:border-box}.content-liftup--small>:last-child{margin-bottom:0}.content-liftup--padding{padding:10px}.content-liftup__name{margin-top:1.5rem;color:var(--color-text);font-weight:700}@media (min-width:992px){.content-liftup__name{margin-top:2rem}}.content-liftup__summary{margin-top:1rem;margin-bottom:3rem;color:var(--color-text);line-height:28px}.content-liftup__link:focus .image{opacity:.6}.content-liftup__link:focus:not(:focus-visible) .image{opacity:1}.content-liftup .content-liftup__image:after{content:"";position:absolute;top:0;left:0;height:100%;width:100%;opacity:.5;z-index:2}.form p{font-family:IBM Plex Sans,monospace;font-size:.9rem;margin-bottom:10px}.form input{padding:1rem;border:1px solid var(--color-main);outline:0}.form input:focus{border:1px solid var(--color-text)}.form .submit{border:3px solid var(--color-text);color:var(--color-text);background-color:var(--color-background);padding:.7rem 2rem}.form .submit:hover{cursor:pointer}.form .submit:hover,.skip-to-content{background-color:var(--color-text);color:var(--color-background)}.skip-to-content{position:absolute;top:-50px;left:50%;height:50px;padding:0 30px;transform:translateX(-50%);border-radius:0 0 3px 3px;transition:top .3s;display:inline-flex;justify-content:center;align-items:center;z-index:100}.skip-to-content:focus{top:0;transition:top .25s}.prev-next__container a:hover{color:#33332d;background-color:#fff}.prev-next__container a:hover b,.prev-next__container a:hover p{color:#33332d}.prev-next__container .separator{display:none}@media (max-width:639px){.prev-next__container .separator{display:block;background-color:var(--color-text);width:2px!important}}.prev-next__container .prev b,.prev-next__container .prev p{text-align:right}@media (max-width:639px){.prev-next__container .prev p:before{content:"<";margin-right:1rem}}@media (max-width:639px){.prev-next__container .next p:after{content:">";margin-left:1rem}}.scroll-navigation-container{display:none}@media (min-width:992px){.scroll-navigation-container{pointer-events:none;display:block;font-size:16px;position:sticky;width:100%;margin-right:-100%;left:0;top:-100px;padding-top:200px}}.scroll-navigation-container-inner{width:90%;margin:0 auto;max-width:1200px}.scroll-navigation{pointer-events:auto;display:flex;width:30%;max-width:30%/.9;height:100%;overflow-y:auto;max-height:calc(100vh - 100px);padding-right:1rem;z-index:30}.scroll-navigation li{list-style-type:none}.scroll-navigation li.selected a,.scroll-navigation li:hover a{background-color:var(--color-text);color:var(--color-background)!important}.scroll-navigation li:before{content:"-"}.left-navigation-link{padding-left:1.2rem;text-indent:-1.2rem;display:block}.left-navigation-link:hover{background-color:var(--color-text)!important;color:var(--color-background)!important}.level-h1{font-weight:700;padding-left:2.8rem;text-indent:-2.8rem}.level-h2{padding-left:1.6rem;text-indent:-1.6rem}.developer-story__image{margin-bottom:auto}html[data-theme=dark] .developer-story__company-logo-wrapper{margin-bottom:20px;display:inline-flex;justify-content:center;align-items:center;background:#fff;border-radius:10px;padding:15px}html[data-theme=dark] .developer-story__company-logo-wrapper img{margin:0 auto}.developer-story__name{margin-top:4rem;font-size:1.2rem}.developer-story__title{font-size:.9rem}.developer-story__read-more{margin-top:2rem;line-height:1.1rem;width:auto;background:none;color:inherit;border:none;padding:0!important;border-bottom:2px solid var(--color-link-decoration);cursor:pointer}.developer-story__read-more:hover{background-color:var(--color-main)}.some-logo__link{margin:1rem 1rem 0 0;display:inline-block}.some-logo__image{width:1.5rem;height:1.5rem;margin:0}html[data-theme=dark] .some-logo__image{filter:invert(1)}.sub-header{color:var(--color-text);font-family:IBM Plex Mono,monospace;padding-bottom:1.357rem}@media (min-width:992px){.sub-header{padding-bottom:2.333rem}}.copy-code-button,.copy-code-button:host{display:inline-flex}.copy-code-button{align-items:center;justify-content:center;width:-moz-fit-content;width:fit-content;margin:0;padding:.5rem;background:var(--color-pre-background);border:none;border-radius:.25rem;box-shadow:0 .25rem .5rem rgba(0,0,0,.25);color:#fff;cursor:pointer;font-weight:600;opacity:.2;transition:.2s ease-in-out}.copy-code-button:hover{opacity:1}.copy-code-button:active{opacity:0;color:red}pre{overflow:auto;padding:1rem;border-radius:.5rem;position:relative}pre .copy-code-button{position:absolute;top:.5rem;right:.5rem}code{white-space:pre-wrap!important}.InputField-module--inputField--3oXh5{appearance:none;width:100%;border:0;font-family:inherit;padding:16px 12px;box-shadow:inset 0 -1px 0 var(--color-text);color:var(--color-text);background-color:var(--color-background);transition:all .15s ease}.InputField-module--inputField--3oXh5:hover{box-shadow:inset 0 -2px 0 var(--color-text)}.InputField-module--inputField--3oXh5:focus{outline:none;box-shadow:inset 0 -2px 0 var(--color-text)}</style><meta name="generator" content="Gatsby 2.32.13"/><link rel="sitemap" type="application/xml" href="/sitemap.xml"/><title data-react-helmet="true">Fullstack part3 | </title><meta data-react-helmet="true" name="description" content=""/><meta data-react-helmet="true" property="og:title" content="Fullstack part3 | "/><meta data-react-helmet="true" property="og:description" content=""/><meta data-react-helmet="true" name="og:image" content="/static/EYE_green_wide-0a72f74a959f54d0f3e4bb8c67f6f158.jpg"/><meta data-react-helmet="true" property="og:type" content="website"/><meta data-react-helmet="true" name="twitter:card" content="summary"/><meta data-react-helmet="true" name="twitter:creator" content="Houston Inc. Consulting oy"/><meta data-react-helmet="true" name="twitter:title" content="Fullstack part3 | "/><meta data-react-helmet="true" name="twitter:description" content=""/><meta data-react-helmet="true" name="twitter:image" content="/static/EYE_green_wide-0a72f74a959f54d0f3e4bb8c67f6f158.jpg"/><meta data-react-helmet="true" name="google-site-verification" content="ds9pQKiK3kjhRSHHbf5ccoG-oJggn7Lq4A8uHxM3Mkw"/><meta data-react-helmet="true" name="keywords" content="fullstack, Full stack -websovelluskehitys, course, helsingin yliopisto, tietojenkäsittelytieteen osasto, mooc, mooc.fi, full stack, full stack open, web-sovelluskehitys, web, houston, houston inc, websovelluskehitys, web-sovellus, React, Redux, Node.js, Node, MongoDB, GraphQL, REST, REST api, single page -sovellus, ohjelmointi, university of helsinki, department of computer science, web development, software development, web, web application, single page app, programming, "/><link rel="icon" href="/favicon-32x32.png?v=6460c405ec32c913ef778f48c5ab192e" type="image/png"/><link rel="manifest" href="/manifest.webmanifest" crossorigin="anonymous"/><meta name="theme-color" content="#e1e1e1"/><link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-48x48.png?v=6460c405ec32c913ef778f48c5ab192e"/><link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png?v=6460c405ec32c913ef778f48c5ab192e"/><link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png?v=6460c405ec32c913ef778f48c5ab192e"/><link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png?v=6460c405ec32c913ef778f48c5ab192e"/><link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png?v=6460c405ec32c913ef778f48c5ab192e"/><link rel="apple-touch-icon" sizes="256x256" href="/icons/icon-256x256.png?v=6460c405ec32c913ef778f48c5ab192e"/><link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png?v=6460c405ec32c913ef778f48c5ab192e"/><link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png?v=6460c405ec32c913ef778f48c5ab192e"/><link rel="preconnect" href="https://www.google-analytics.com"/><link rel="dns-prefetch" href="https://www.google-analytics.com"/><link rel="canonical" href="https://fullstackopen.com/zh/part3/node_js_与_express" data-baseprotocol="https:" data-basehost="fullstackopen.com"/><script>
+  (function() {
+    try {
+      const savedTheme = localStorage.getItem('selected_theme');
+
+      if (savedTheme) {
+        document.documentElement.dataset.theme = savedTheme;
+      } else if (
+        window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches
+      ) {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    } catch (e) {}
+  })();
+  </script><link as="script" rel="preload" href="/component---src-templates-content-template-js-bb58d7a436b6b271b7c8.js"/><link as="script" rel="preload" href="/d2b1ca4b1069f7cfc0ac3ccd2306fbb8e76bcf35-b1e80b991af31a506d6d.js"/><link as="script" rel="preload" href="/2d359d657f593a857b7e0d916f29b2126c86bebb-dcc47509ede0fcbd2a57.js"/><link as="script" rel="preload" href="/881c8b7a675fce2ced9b02a4a469c0443336d5f7-8e4483d8931a6891bd9a.js"/><link as="script" rel="preload" href="/0f38e1748197b5a213e89e1df6d5db13e5e7856d-0d0bac90b1f1083a53b7.js"/><link as="script" rel="preload" href="/commons-b72a010d93304da48478.js"/><link as="script" rel="preload" href="/app-5654e2c0e2e011166650.js"/><link as="script" rel="preload" href="/framework-815fd14513c40a98f576.js"/><link as="script" rel="preload" href="/styles-0ec71dd62c66cb95665c.js"/><link as="script" rel="preload" href="/webpack-runtime-4afee23e377879f90d1c.js"/><link as="fetch" rel="preload" href="/page-data/zh/part3/node_js_与_express/page-data.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/sq/d/3128451518.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/app-data.json" crossorigin="anonymous"/></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div class="main-wrapper"><a href="#course-main-content" class="skip-to-content">跳到内容</a><header class="header " style="background-color:var(--color-background)"><div class="container" style="align-items:center;justify-content:flex-start"><a class="header__logo" href="/zh/"><div class="triple-border nav-item-hover " style="padding:0.2em"><div class="triple-border__container triple-border__logo" style="background-color:transparent;z-index:10">{() =&gt; fs}</div></div></a><div class="navigation__wrapper "><button aria-label="Navigation menu" aria-expanded="false" class="navigation__toggle"><div class="navigation__toggle-icon"></div></button><nav><ul class="navigation"><li class="navigation__item "><a class="nav-item-hover" href="/zh/about">关于课程</a></li><li class="navigation__item "><a class="nav-item-hover" href="/zh/#course-contents">课程内容</a></li><li class="navigation__item "><a class="nav-item-hover" href="/zh/faq">常见问题</a></li><li class="navigation__item "><a class="nav-item-hover" href="/zh/companies">合作伙伴</a></li><li class="navigation__item "><a class="nav-item-hover" href="/zh/challenge">挑战</a></li><div class="navigation__icon-buttons"><a class="SearchLink-module--searchLink--2IShR" href="/zh/search"><span class="SrOnly-module--srOnly--2Hn2L">从教程中搜索</span><svg role="img" viewBox="0 0 24 24" class="SvgIcon-module--svgIcon--1nGJ6"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg></a><button class="ThemeSwitcher-module--themeSwitcher--1gbnJ" aria-pressed="false"><span class="SrOnly-module--srOnly--2Hn2L">切换黑暗主题</span><svg role="img" viewBox="0 0 384 512" class="SvgIcon-module--svgIcon--1nGJ6"><path d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path></svg></button></div><span class="SrOnly-module--srOnly--2Hn2L"><label for="language-select">选择语言</label></span><select id="language-select" class="navigation__language-picker LanguagePicker-module--select--364N3" style="font-size:1em"><option value="fi">Suomi</option><option value="en">English</option><option selected="" value="zh">中文</option><option value="es">Español</option><option value="fr">Français</option><option value="ptbr">Português(BR)</option></select></ul></nav></div></div></header><main id="main-content"><div class="course-container spacing--after"><div class="banner part-main__banner spacing--mobile--small" style="background-image:url(/static/8ac7bc0fb2b7018a7853b00c454b2103/part-3.svg);background-color:#EEAC5D"><div class="container spacing--after"><div class="col-10 spacing--after"><div class="arrow__container arrows--horizontal breadcrumb"><div class="arrow__wrapper"><div class="arrow__rectangle  " style="background-color:#EEAC5D;color:#33332d"><a href="/zh/#course-contents">Fullstack</a></div><div class="arrow__point " style="background-color:#EEAC5D;color:#33332d"></div></div><div class="arrow__wrapper"><div class="arrow__rectangle  " style="background-color:#EEAC5D;color:#33332d"><a href="/zh/part3">Part 3</a></div><div class="arrow__point " style="background-color:#EEAC5D;color:#33332d"></div></div><div class="arrow__wrapper"><div class="arrow__rectangle  " style="background-color:#33332d;color:white">Node.js 与 Express</div><div class="arrow__point " style="background-color:#33332d;color:white"></div></div></div></div></div></div><div class="course " id="course-main-content"><div class="scroll-navigation-container "><div class="scroll-navigation-container-inner "><div class="scroll-navigation  element--column" tag="ul"><div class="accordion__container col-8 push-right-1 accordion--side-navigation"><button class="accordion accordion__title  " style="background-color:#EEAC5D;border-color:#EEAC5D" aria-controls="a_node_js_与_express" aria-expanded="false">a Node.js 与 Express</button></div><a class="left-navigation-link" style="border-color:#EEAC5D" href="/zh/part3/把应用部署到互联网上">b 把应用部署到互联网上</a><a class="left-navigation-link" style="border-color:#EEAC5D" href="/zh/part3/将数据存入_mongo_db">c 将数据存入 MongoDB</a><a class="left-navigation-link" style="border-color:#EEAC5D" href="/zh/part3/验证与_es_lint">d 验证与 ESLint</a></div></div></div><div class="course-content-container "><div class="course-content element--auto-bottom-margin"><div class="course-content-inner "><p class="col-1 letter" style="border-color:#EEAC5D">a</p><h1 class="sub-header ">Node.js 与 Express</h1></div></div><div class="course-content "><div class="course-content-inner ">
+<!-- -->
+<p>在这一部分中，我们将重点转向后端，也就是在全栈中的服务端实现功能。</p>
+<!-- -->
+<p>我们将在 <a href="https://nodejs.org/en/">NodeJS</a> 的基础上建立后端，NodeJS 是一个基于谷歌的 <a href="https://developers.google.com/v8/">Chrome V8</a> JavaScript 引擎的 JavaScript 运行时。</p>
+<!-- -->
+<p>本教材是用 Node.js 的 <i>v22.3.0</i> 版本编写的。请确保你的 Node 版本至少和教材中使用的版本一样新（你可以通过在命令行中运行 <em>node -v</em> 来检查版本）。</p>
+<!-- -->
+<p>正如<a href="/zh/part1/java_script">第 1 章节</a>中提到的，浏览器还不支持 JavaScript 的最新功能，因此浏览器中运行的代码必须用例如 <a href="https://babeljs.io/">babel</a> 进行<i>转译</i>。运行在后端的 JavaScript 的情况则不同。最新版本的 Node 支持绝大部分 JavaScript 的最新特性，所以我们无需转译代码即可使用最新的特性。</p>
+<!-- -->
+<p>我们的目标是实现一个能与<a href="/zh/part2/">第 2 章节</a>中的笔记应用一起运行的后端。然而，让我们从最基础的实现一个经典的“hello world”应用开始。</p>
+<!-- -->
+<p><strong>注意</strong>本章节的应用和练习并不都是 React 应用，因此我们不会用 <i>create vite@latest -- --template react</i> 工具来初始化这些应用的项目。</p>
+<!-- -->
+<p>我们在第 2 章节已经提到了 <a href="/zh/part2/%E8%8E%B7%E5%8F%96%E6%9C%8D%E5%8A%A1%E7%AB%AF%E7%9A%84%E6%95%B0%E6%8D%AE#npm">npm</a>，它是一个用于管理 JavaScript 包的工具。事实上，npm 就是从 Node 生态发源的。</p>
+<!-- -->
+<p>让我们进入一个合适的目录，用 <em>npm init</em> 命令为应用创建一个模板。回答完 npm 提出的问题后（译注：全部使用默认答案，也就是全部按回车），就会在项目的根目录自动生成一个包含项目信息的 <i>package.json</i> 文件。</p>
+<div class="gatsby-highlight" data-language="json"><pre><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;backend&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;version&quot;</span><span class="token operator">:</span> <span class="token string">&quot;0.0.1&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;description&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;main&quot;</span><span class="token operator">:</span> <span class="token string">&quot;index.js&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;scripts&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;test&quot;</span><span class="token operator">:</span> <span class="token string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;author&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Matti Luukkainen&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;license&quot;</span><span class="token operator">:</span> <span class="token string">&quot;MIT&quot;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p>这个文件定义了，例如，应用的入口点是 <i>index.js</i> 文件。</p>
+<!-- -->
+<p>让我们对 <i>scripts</i> 对象小小地改动一下，添加一条脚本命令。</p>
+<div class="gatsby-highlight" data-language="json"><pre><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+  <span class="token property">&quot;scripts&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+<span class="gatsby-highlight-code-line">    <span class="token property">&quot;start&quot;</span><span class="token operator">:</span> <span class="token string">&quot;node index.js&quot;</span><span class="token punctuation">,</span></span>    <span class="token property">&quot;test&quot;</span><span class="token operator">:</span> <span class="token string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token comment">// ...</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p>接下来，让我们创建应用的第一个版本，在项目的根目录下添加一个 <i>index.js</i> 文件，代码如下：</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&#x27;hello world&#x27;</span><span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p>我们可以直接用 Node 从命令行中运行该程序：</p>
+<div class="gatsby-highlight" data-language="bash"><pre><code class="language-bash"><span class="token function">node</span> index.js</code></pre></div>
+<!-- -->
+<p>我们也可以用 <a href="https://docs.npmjs.com/misc/scripts">npm 脚本</a>来运行它：</p>
+<div class="gatsby-highlight" data-language="bash"><pre><code class="language-bash"><span class="token function">npm</span> start</code></pre></div>
+<!-- -->
+<p>因为我们在 <i>package.json</i> 文件中定义了 <i>start</i> npm 脚本，所以刚才可以运行：</p>
+<div class="gatsby-highlight" data-language="json"><pre><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+  <span class="token property">&quot;scripts&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;start&quot;</span><span class="token operator">:</span> <span class="token string">&quot;node index.js&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;test&quot;</span><span class="token operator">:</span> <span class="token string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token comment">// ...</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p>尽管可以通过从命令行调用 <em>node index.js</em> 来启动项目，但对于 npm 项目，更习惯用 npm 脚本来执行这些任务。</p>
+<!-- -->
+<p>默认情况下，<i>package.json</i> 文件还定义了另一个常用的 npm 脚本，叫做 <i>npm test</i>。由于我们的项目还没有测试库，<em>npm test</em> 命令只是简单地执行以下命令：</p>
+<div class="gatsby-highlight" data-language="bash"><pre><code class="language-bash"><span class="token builtin class-name">echo</span> <span class="token string">&quot;Error: no test specified&quot;</span> <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">exit</span> <span class="token number">1</span></code></pre></div>
+<!-- -->
+<h3>简单的 web 服务端</h3>
+<!-- -->
+<p>让我们将应用变成一个网络服务端，将 <em>index.js</em> 文件改成：</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">const</span> http <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&#x27;http&#x27;</span><span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> app <span class="token operator">=</span> http<span class="token punctuation">.</span><span class="token function">createServer</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">request<span class="token punctuation">,</span> response</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  response<span class="token punctuation">.</span><span class="token function">writeHead</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> <span class="token string-property property">&#x27;Content-Type&#x27;</span><span class="token operator">:</span> <span class="token string">&#x27;text/plain&#x27;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  response<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token string">&#x27;Hello World&#x27;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> <span class="token constant">PORT</span> <span class="token operator">=</span> <span class="token number">3001</span>
+app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token constant">PORT</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Server running on port </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token constant">PORT</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p>一旦应用运行，控制台将打印下列信息：</p>
+<div class="gatsby-highlight" data-language="bash"><pre><code class="language-bash">Server running on port <span class="token number">3001</span></code></pre></div>
+<!-- -->
+<p>我们可以通过在浏览器中访问地址 <a href="http://localhost:3001">http://localhost:3001</a> 打开我们的简陋应用。</p>
+<picture><img style="border-color:#EEAC5D" alt="fullstack content" src="/static/8836d8c6a93e804f6cbc73ff4d89913b/5a190/1.png"/></picture>
+<!-- -->
+<p>无论 URL 后面是什么，服务端的表现都是一样的。地址 <a href="http://localhost:3001/foo/bar">http://localhost:3001/foo/bar</a> 也将显示相同的内容。</p>
+<!-- -->
+<p><strong>注</strong> 如果 3001 端口已经被其他应用使用，那么启动服务端会显示以下错误信息：</p>
+<div class="gatsby-highlight" data-language="bash"><pre><code class="language-bash">➜  hello <span class="token function">npm</span> start
+
+<span class="token operator">&gt;</span> hello@1.0.0 start /Users/mluukkai/opetus/_2019fullstack-code/part3/hello
+<span class="token operator">&gt;</span> <span class="token function">node</span> index.js
+
+Server running on port <span class="token number">3001</span>
+events.js:167
+      throw er<span class="token punctuation">;</span> // Unhandled <span class="token string">&#x27;error&#x27;</span> event
+      ^
+
+Error: listen EADDRINUSE :::3001
+    at Server.setupListenHandle <span class="token punctuation">[</span>as _listen2<span class="token punctuation">]</span> <span class="token punctuation">(</span>net.js:1330:14<span class="token punctuation">)</span>
+    at listenInCluster <span class="token punctuation">(</span>net.js:1378:12<span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p>你有两个选择。要么关闭使用 3001 端口的应用（教材上一章节的 JSON Server 当时就运行在 3001 端口），要么让这个应用使用不同的端口。</p>
+<!-- -->
+<p>让我们仔细看看这段代码的第一行：</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">const</span> http <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&#x27;http&#x27;</span><span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p>在第一行中，应用导入了 Node 内置的 <a href="https://nodejs.org/docs/latest-v18.x/api/http.html">web server</a> 模块。这实际上就是我们在浏览器端代码中已经在做的事情，只是语法略有不同：</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">import</span> http <span class="token keyword">from</span> <span class="token string">&#x27;http&#x27;</span></code></pre></div>
+<!-- -->
+<p>现在，浏览器中运行的代码都使用 ES6 模块。模块用 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export">export</a> 来定义，用 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import">import</a> 来导入到当前文件。</p>
+<!-- -->
+<p>Node.js 使用的是 <a href="https://en.wikipedia.org/wiki/CommonJS">CommonJS</a> 模块。其原因是，Node 生态早在 JavaScript 在语言规范中支持模块之前就有对模块的需求了。现在，Node 也支持使用 ES6 模块，但支持还不是很完善，所以我们将继续使用 CommonJS 模块。</p>
+<!-- -->
+<p>CommonJS 模块的功能与 ES6 模块几乎完全一样，至少在本课程我们需要用到的地方都一样。</p>
+<!-- -->
+<p>代码的下一部分如下所示：</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">const</span> app <span class="token operator">=</span> http<span class="token punctuation">.</span><span class="token function">createServer</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">request<span class="token punctuation">,</span> response</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  response<span class="token punctuation">.</span><span class="token function">writeHead</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> <span class="token string-property property">&#x27;Content-Type&#x27;</span><span class="token operator">:</span> <span class="token string">&#x27;text/plain&#x27;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  response<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token string">&#x27;Hello World&#x27;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p>代码使用 <a href="https://nodejs.org/docs/latest-v18.x/api/http.html">http</a> 模块的 <em>createServer</em> 方法来创建一个网络服务端。服务端注册了一个<i>事件处理函数</i>，<i>每当</i>有 HTTP 请求发送到服务端地址 <a href="http://localhost:3001">http://localhost:3001</a> 时，就会调用该函数。</p>
+<!-- -->
+<p>请求会以状态码 200 响应，响应的 <i>Content-Type</i> 标头设为 <i>text/plain</i>，要返回的网站内容设为 <i>Hello World</i>。</p>
+<!-- -->
+<p>最后几行将 http 服务端赋值给 <em>app</em> 变量，再绑定到 3001 端口，以监听发送到 3001 端口的 HTTP 请求。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">const</span> <span class="token constant">PORT</span> <span class="token operator">=</span> <span class="token number">3001</span>
+app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token constant">PORT</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Server running on port </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token constant">PORT</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p>本课程中后端服务端的主要目的是向前端提供 JSON 格式的原始数据。因此，让我们立即改变服务端，让它以 JSON 格式返回一个硬编码的笔记列表。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">const</span> http <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&#x27;http&#x27;</span><span class="token punctuation">)</span>
+
+<span class="gatsby-highlight-code-line"><span class="token keyword">let</span> notes <span class="token operator">=</span> <span class="token punctuation">[</span></span><span class="gatsby-highlight-code-line">  <span class="token punctuation">{</span></span><span class="gatsby-highlight-code-line">    <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span></span><span class="gatsby-highlight-code-line">    <span class="token literal-property property">content</span><span class="token operator">:</span> <span class="token string">&quot;HTML is easy&quot;</span><span class="token punctuation">,</span></span><span class="gatsby-highlight-code-line">    <span class="token literal-property property">important</span><span class="token operator">:</span> <span class="token boolean">true</span></span><span class="gatsby-highlight-code-line">  <span class="token punctuation">}</span><span class="token punctuation">,</span></span><span class="gatsby-highlight-code-line">  <span class="token punctuation">{</span></span><span class="gatsby-highlight-code-line">    <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token string">&quot;2&quot;</span><span class="token punctuation">,</span></span><span class="gatsby-highlight-code-line">    <span class="token literal-property property">content</span><span class="token operator">:</span> <span class="token string">&quot;Browser can execute only JavaScript&quot;</span><span class="token punctuation">,</span></span><span class="gatsby-highlight-code-line">    <span class="token literal-property property">important</span><span class="token operator">:</span> <span class="token boolean">false</span></span><span class="gatsby-highlight-code-line">  <span class="token punctuation">}</span><span class="token punctuation">,</span></span><span class="gatsby-highlight-code-line">  <span class="token punctuation">{</span></span><span class="gatsby-highlight-code-line">    <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token string">&quot;3&quot;</span><span class="token punctuation">,</span></span><span class="gatsby-highlight-code-line">    <span class="token literal-property property">content</span><span class="token operator">:</span> <span class="token string">&quot;GET and POST are the most important methods of HTTP protocol&quot;</span><span class="token punctuation">,</span></span><span class="gatsby-highlight-code-line">    <span class="token literal-property property">important</span><span class="token operator">:</span> <span class="token boolean">true</span></span><span class="gatsby-highlight-code-line">  <span class="token punctuation">}</span></span><span class="gatsby-highlight-code-line"><span class="token punctuation">]</span></span><span class="gatsby-highlight-code-line"></span><span class="gatsby-highlight-code-line"><span class="token keyword">const</span> app <span class="token operator">=</span> http<span class="token punctuation">.</span><span class="token function">createServer</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">request<span class="token punctuation">,</span> response</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span></span><span class="gatsby-highlight-code-line">  response<span class="token punctuation">.</span><span class="token function">writeHead</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> <span class="token string-property property">&#x27;Content-Type&#x27;</span><span class="token operator">:</span> <span class="token string">&#x27;application/json&#x27;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span></span><span class="gatsby-highlight-code-line">  response<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>notes<span class="token punctuation">)</span><span class="token punctuation">)</span></span><span class="gatsby-highlight-code-line"><span class="token punctuation">}</span><span class="token punctuation">)</span></span>
+<span class="token keyword">const</span> <span class="token constant">PORT</span> <span class="token operator">=</span> <span class="token number">3001</span>
+app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token constant">PORT</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Server running on port </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token constant">PORT</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p>让我们重启服务端（你可以在控制台中按 <em>Ctrl+C</em> 来关闭服务端），然后刷新浏览器。</p>
+<!-- -->
+<p><i>Content-Type</i> 标头中的 <i>application/json</i> 值告诉接收者数据是 JSON 格式的。<em>notes</em> 数组通过 <em>JSON.stringify(notes)</em> 方法转换为 JSON 格式的字符串。这一步是必要的，因为 response.end() 方法只接受一个字符串或缓冲区来作为响应体。</p>
+<!-- -->
+<p>当我们打开浏览器时，显示的格式与<a href="/zh/part2/%E8%8E%B7%E5%8F%96%E6%9C%8D%E5%8A%A1%E7%AB%AF%E7%9A%84%E6%95%B0%E6%8D%AE">第 2 章节</a>中我们使用 <a href="https://github.com/typicode/json-server">json-server</a> 来提供的笔记列表完全一样：</p>
+<picture><img style="border-color:#EEAC5D" alt="fullstack content" src="/static/dc892ed79d9b69f0d72dbd5302cc38fc/5a190/2new.png"/></picture>
+<h3>Express</h3>
+<!-- -->
+<p>直接用 Node 内置的 <a href="https://nodejs.org/docs/latest-v8.x/api/http.html">http</a> web server 实现服务端代码是可行的。然而，这很麻烦，特别是一旦应用的规模扩大的话，就更麻烦了。</p>
+<!-- -->
+<p>已经有许多简化 Node 的服务端开发的库，这些库提供一个更好用的接口来与内置的 http 模块一起工作。这些库的目的是为我们建立后端服务端通常需要的通用情况提供更好的抽象概念。目前为止，用于这一目的的最流行的库是 <a href="http://expressjs.com">Express</a>。</p>
+<!-- -->
+<p>让我们用下列命令将 Express 定义为项目的依赖项，然后来使用它：</p>
+<div class="gatsby-highlight" data-language="bash"><pre><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> express</code></pre></div>
+<!-- -->
+<p>这个依赖项也加进了 <i>package.json</i> 文件中：</p>
+<div class="gatsby-highlight" data-language="json"><pre><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+  <span class="token property">&quot;dependencies&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;express&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^5.1.0&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p>依赖项的源码被安装到项目根目录下的 <i>node_modules</i> 目录中。除了 Express 之外，你还可以在该目录中找到大量其他的依赖项：</p>
+<picture><img style="border-color:#EEAC5D" alt="fullstack content" src="/static/da4cca859c66e0bf7d064455a105ad49/5a190/4.png"/></picture>
+<!-- -->
+<p>这些实际上是 Express 库的依赖项，以及它所有依赖项的依赖项，等等。这些统称为我们项目的<a href="https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/">传递性依赖项</a>。</p>
+<!-- -->
+<p>项目中安装了 5.1.0 版本的 Express。在 <i>package.json</i> 中版本号前面的脱字号 <em>^</em> 是什么意思？</p>
+<div class="gatsby-highlight" data-language="json"><pre><code class="language-json"><span class="token property">&quot;express&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^5.1.0&quot;</span></code></pre></div>
+<!-- -->
+<p>npm 中使用的版本模式称为<a href="https://docs.npmjs.com/getting-started/semantic-versioning">语义化版本</a>。</p>
+<!-- -->
+<p><i>^5.1.0</i> 前面的脱字符 <em>^</em> 意味着将来如果项目的依赖项更新了，安装的 Express 版本最低是 <i>5.1.0</i>。然而，安装的 Express 版本也可以有更大的<i>修订</i>号（最后一个数字），或者更大的<i>次版本</i>号（中间的数字）。第一个<i>主版本</i>数字表示的库的主版本必须是相同的。</p>
+<!-- -->
+<p>我们可以用下列命令更新项目的依赖项：</p>
+<div class="gatsby-highlight" data-language="bash"><pre><code class="language-bash"><span class="token function">npm</span> update</code></pre></div>
+<!-- -->
+<p>同样地，如果我们在另一台电脑上开始这个项目，我们可以在项目的根目录下用以下命令安装 <i>package.json</i> 中定义的项目所有最新的依赖项。</p>
+<div class="gatsby-highlight" data-language="bash"><pre><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span></code></pre></div>
+<!-- -->
+<p>如果依赖项的<i>主版本</i>号没有改变，那么新版本应该是<a href="https://en.wikipedia.org/wiki/Backward_compatibility">向后兼容</a>的。这意味着，如果我们的应用将来使用了 5.99.175 版本的 Express，那么本章节中实现的所有代码仍然能正确运行，无需修改。相反，未来 6.0.0 版本的 Express 可能包含会导致我们的应用无法正确运行的更改。</p>
+<!-- -->
+<h3>Web 和 Express</h3>
+<!-- -->
+<p>让我们回到我们的应用，并做如下修改：</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">const</span> express <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&#x27;express&#x27;</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> app <span class="token operator">=</span> <span class="token function">express</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">let</span> notes <span class="token operator">=</span> <span class="token punctuation">[</span>
+  <span class="token operator">...</span>
+<span class="token punctuation">]</span>
+
+app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">&#x27;/&#x27;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">request<span class="token punctuation">,</span> response</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  response<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">&#x27;&lt;h1&gt;Hello World!&lt;/h1&gt;&#x27;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">&#x27;/api/notes&#x27;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">request<span class="token punctuation">,</span> response</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  response<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span>notes<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> <span class="token constant">PORT</span> <span class="token operator">=</span> <span class="token number">3001</span>
+app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token constant">PORT</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Server running on port </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token constant">PORT</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p>为了使用新版本的应用，首先必须重启应用。</p>
+<!-- -->
+<p>应用并没有发生很大的变化。在代码的开头，我们导入了 <em>express</em>，这次 <em>express</em> 是一个<i>函数</i>，用来创建 Express 应用并将其存储在 <em>app</em> 变量中。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">const</span> express <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&#x27;express&#x27;</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> app <span class="token operator">=</span> <span class="token function">express</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p>接下来，我们为应用定义了两个<i>路由</i>。第一个路由定义了处理向应用的 <i>/</i> 根发送的 HTTP GET 请求的事件处理函数。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js">app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">&#x27;/&#x27;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">request<span class="token punctuation">,</span> response</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  response<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">&#x27;&lt;h1&gt;Hello World!&lt;/h1&gt;&#x27;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p>该事件处理函数接受两个参数。第一个 <a href="http://expressjs.com/en/4x/api.html#req">request</a> 参数包含 HTTP 请求的所有信息，第二个 <a href="http://expressjs.com/en/4x/api.html#res">response</a> 参数用于定义如何对请求进行响应。</p>
+<!-- -->
+<p>在我们的代码中，请求是通过使用 <em>response</em> 对象的 <a href="http://expressjs.com/en/4x/api.html#res.send">send</a> 方法响应的。调用该方法会使服务端响应 HTTP 请求，发送一个响应，内容包含传递给 <em>send</em> 方法的 <code>&lt;h1&gt;Hello World!&lt;/h1&gt;</code> 字符串。由于参数是一个字符串，Express 自动将 <i>Content-Type</i> 标头的值设为 <i>text/html</i>。响应的状态码默认为 200。</p>
+<!-- -->
+<p>我们可以在开发者工具中的<i>网络</i>标签页中验证：</p>
+<picture><img style="border-color:#EEAC5D" alt="fullstack content" src="/static/db016b053153eda01c97cbc69270f934/5a190/5.png"/></picture>
+<!-- -->
+<p>第二个路由定义了处理向应用的 <i>notes</i> 路径发送的 HTTP GET 请求的事件处理函数。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js">app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">&#x27;/api/notes&#x27;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">request<span class="token punctuation">,</span> response</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  response<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span>notes<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p>请求是用 <em>response</em> 对象的 <a href="http://expressjs.com/en/4x/api.html#res.json">json</a> 方法响应的。调用该方法将以 JSON 格式的字符串发送传给它的 <strong>notes</strong> 数组。Express 自动将 <i>Content-Type</i> 标头设为合适值 <i>application/json</i>。</p>
+<picture><img style="border-color:#EEAC5D" alt="fullstack content" src="/static/e4e09b83830b038866d3604ba7f554c7/5a190/6new.png"/></picture>
+<!-- -->
+<p>接下来，让我们快速浏览一下以 JSON 格式发送的数据。</p>
+<!-- -->
+<p>在先前只使用 Node 的版本中，我们必须用 <em>JSON.stringify</em> 方法将数据转换成 JSON 格式的字符串：</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js">response<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>notes<span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p>有了 Express，就不再需要这么做了，这一转换会自动进行。</p>
+<!-- -->
+<p>值得注意的是，<a href="https://en.wikipedia.org/wiki/JSON">JSON</a> 是一种数据格式。然而，它常以字符串形式表示，并且不等同于 JavaScript 对象，比如赋给 <em>notes</em> 的值。</p>
+<!-- -->
+<p>下面的实验说明了这一点：</p>
+<picture><img style="border-color:#EEAC5D" alt="fullstack content" src="/static/ab5b5f7c5d8e4b01881bbd927f04ed43/5a190/5.png"/></picture>
+<!-- -->
+<p>上面的实验是在交互式 <a href="https://nodejs.org/docs/latest-v8.x/api/repl.html">node-repl</a> 中完成的。你可以通过在命令行中输入 <em>node</em> 来启动交互式 node-repl。在你写应用代码的时候，这个交互窗口对测试命令是如何运行的特别有用。我强烈推荐这一工具！</p>
+<!-- -->
+<h3>自动跟踪更改</h3>
+<!-- -->
+<p>如果我们更改了应用的代码，我们首先需要在终端中停止应用（<em>ctrl</em> + <em>c</em>），然后再重启应用来使更改生效。相比 React 代码更改后，浏览器自动重新加载的丝滑的工作流，重启总感觉很麻烦。</p>
+<!-- -->
+<p>你可以通过用 <em>--watch</em> 选项启动应用来让服务端跟踪更改：</p>
+<div class="gatsby-highlight" data-language="bash"><pre><code class="language-bash"><span class="token function">node</span> <span class="token parameter variable">--watch</span> index.js</code></pre></div>
+<!-- -->
+<p>现在，修改应用代码会自动重启服务端。注意即使服务端能自动重启，你仍然需要刷新浏览器。不同于 React，我们在这种情况（返回的是 JSON 数据）下没有，也无法有自动更新浏览器的热重载功能。</p>
+<!-- -->
+<p>让我们在 <i>package.json</i> 文件中自定义一个 <i>npm 脚本</i>来启动开发服务端。</p>
+<div class="gatsby-highlight" data-language="json"><pre><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token comment">// ..</span>
+  <span class="token property">&quot;scripts&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;start&quot;</span><span class="token operator">:</span> <span class="token string">&quot;node index.js&quot;</span><span class="token punctuation">,</span>
+<span class="gatsby-highlight-code-line">    <span class="token property">&quot;dev&quot;</span><span class="token operator">:</span> <span class="token string">&quot;node --watch index.js&quot;</span><span class="token punctuation">,</span></span>    <span class="token property">&quot;test&quot;</span><span class="token operator">:</span> <span class="token string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token comment">// ..</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p>我们现在可以用以下命令在开发模式下启动服务端</p>
+<div class="gatsby-highlight" data-language="bash"><pre><code class="language-bash"><span class="token function">npm</span> run dev</code></pre></div>
+<!-- -->
+<p>不同于运行 <i>start</i> 和 <i>test</i> 脚本，在运行 <i>dev</i> 脚本时，必须在命令中加入 <i>run</i>。</p>
+<h3>REST</h3>
+<!-- -->
+<p>让我们扩展我们的应用，使其提供与 <a href="https://github.com/typicode/json-server#routes">json-server</a> 一样的 RESTful HTTP API。</p>
+<!-- -->
+<p>表现层状态转换（Representational State Transfer），又称 REST，是 Roy Fielding 于 2000 年在<a href="https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm">论文</a>中提出的。REST 是一种旨在建立可扩展的 web 应用的架构风格。</p>
+<!-- -->
+<p>我们不会深入研究 Fielding 对 REST 的定义，也不会花时间琢磨什么是 RESTful，什么不是。我们会把眼光放得<a href="https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services">狭隘</a>点，只关注 web 应用中通常是如何理解 RESTful API 的。REST 的原始定义甚至不限于网络应用。</p>
+<!-- -->
+<p>我们在<a href="/zh/part2/%E4%BF%AE%E6%94%B9%E6%9C%8D%E5%8A%A1%E7%AB%AF%E7%9A%84%E6%95%B0%E6%8D%AE#rest">前一章节</a>中提到，单个事物，比如我们应用中的笔记，在 RESTful 思想中称为<i>资源</i>。每个资源都有与之相关的 URL，即资源的唯一地址。</p>
+<!-- -->
+<p>创建资源唯一地址的一个惯例是将资源类型的名称和资源的唯一标识符结合起来。</p>
+<!-- -->
+<p>假设我们服务的根 URL 是 <i>www.example.com/api</i>。</p>
+<!-- -->
+<p>如果我们定义笔记的资源类型为 <i>notes</i>，那么标识符为 10 的笔记资源就有唯一地址 <i>www.example.com/api/notes/10</i>。</p>
+<!-- -->
+<p>所有笔记资源的整个集合的 URL 是 <i>www.example.com/api/notes</i>。</p>
+<!-- -->
+<p>我们可以对资源执行不同的操作。要执行的操作是通过 HTTP <i>动词</i>定义的：</p>
+<!-- -->
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>动词</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>notes/10</td>
+<td>GET</td>
+<td>获取单个资源</td>
+</tr>
+<tr>
+<td>notes</td>
+<td>POST</td>
+<td>根据请求数据新建一个资源</td>
+</tr>
+<tr>
+<td>notes/10</td>
+<td>DELETE</td>
+<td>删除指定标识符的资源</td>
+</tr>
+<tr>
+<td>notes/10</td>
+<td>PUT</td>
+<td>将指定标识符的资源整个替换为请求的数据</td>
+</tr>
+<tr>
+<td>notes/10</td>
+<td>PATCH</td>
+<td>将指定标识符的资源部分替换为请求的数据</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<!-- -->
+<p>这就是我们设法粗略定义的 REST 所指的 <a href="https://en.wikipedia.org/wiki/Representational_state_transfer#Architectural_constraints">统一接口</a>，也就是一种一致的定义接口的方式，从而使不同系统之间可以合作。</p>
+<!-- -->
+<p>这种解释 REST 的方式属于 Richardson 成熟度模型中 <a href="https://martinfowler.com/articles/richardsonMaturityModel.html">RESTful 成熟度的第二级</a>。根据 Roy Fielding 提供的定义，我们定义的还不是 <a href="http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven">REST API</a>。事实上，世界上绝大部分所谓的“REST” API 都不符合 Fielding 在其论文中列出的原始标准。</p>
+<!-- -->
+<p>在某些地方（例如 <a href="http://shop.oreilly.com/product/9780596529260.do">Richardson 的 Ruby: RESTful Web Services</a>），你会看到我们直接<a href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete">增删改查</a>的 API 模型被称为是<a href="https://en.wikipedia.org/wiki/Resource-oriented_architecture">面向资源架构</a>的示例，而非 REST 的。我们不要卡在咬文嚼字上，而是回到我们的应用。</p>
+<!-- -->
+<h3>获取单个资源</h3>
+<!-- -->
+<p>让我们扩展我们的应用，使其提供一个 REST 接口来操作单个笔记。首先，让我们创建一个用来获取单个资源的<a href="http://expressjs.com/en/guide/routing.html">路由</a>。</p>
+<!-- -->
+<p>我们将为单个笔记使用的唯一地址的形式是 <i>notes/10</i>，其中末尾的数字指笔记的唯一 id。</p>
+<!-- -->
+<p>在 Express 中，可以用冒号语法来为路由定义<a href="http://expressjs.com/en/guide/routing.html#route-parameters">参数</a>：</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js">app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">&#x27;/api/notes/:id&#x27;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">request<span class="token punctuation">,</span> response</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> id <span class="token operator">=</span> request<span class="token punctuation">.</span>params<span class="token punctuation">.</span>id
+  <span class="token keyword">const</span> note <span class="token operator">=</span> notes<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token parameter">note</span> <span class="token operator">=&gt;</span> note<span class="token punctuation">.</span>id <span class="token operator">===</span> id<span class="token punctuation">)</span>
+  response<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span>note<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p>现在 <code>app.get(&#x27;/api/notes/:id&#x27;, ...)</code> 将处理所有形式为 <i>/api/notes/SOMETHING</i> 的 HTTP GET 请求，其中 <i>SOMETHING</i> 是一个任意的字符串。</p>
+<!-- -->
+<p>请求的路由中的 <i>id</i> 参数可以通过 <a href="http://expressjs.com/en/api.html#req">request</a> 对象访问：</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">const</span> id <span class="token operator">=</span> request<span class="token punctuation">.</span>params<span class="token punctuation">.</span>id</code></pre></div>
+<!-- -->
+<p>我们用现在已经熟悉了的数组的 <em>find</em> 方法来寻找 id 与参数匹配的笔记。然后，该笔记被返回给请求的发送方。</p>
+<!-- -->
+<p>现在我们可以在浏览器访问 <a href="http://localhost:3001/api/notes/1">http://localhost:3001/api/notes/1</a> 来测试应用了：</p>
+<picture><img style="border-color:#EEAC5D" alt="fullstack content" src="/static/608ee7cf946904db047028c7a99503e6/5a190/9new.png"/></picture>
+<!-- -->
+<p>然而，我们的应用还有一个问题。</p>
+<!-- -->
+<p>如果我们搜索一个 id 不存在的笔记，服务端的响应是：</p>
+<picture><img style="border-color:#EEAC5D" alt="fullstack content" src="/static/71dba69685a59c3d5249303257863366/5a190/10ea.png"/></picture>
+<!-- -->
+<p>返回的 HTTP 状态码是 200，意味着响应成功。由于 <i>content-length</i> 标头的值为 0，所以该响应没有发回数据，这一点也可以从浏览器中验证。</p>
+<!-- -->
+<p>出现这种行为的原因是，如果没有找到匹配的笔记，会将 <em>note</em> 变量设为 <em>undefined</em>。服务端需要以更好的方式来处理这种情况。如果没有找到笔记，服务端应该响应状态码 <a href="https://www.rfc-editor.org/rfc/rfc9110.html#name-404-not-found">404 not found</a>，而非 200。</p>
+<!-- -->
+<p>让我们对代码做如下修改：</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js">app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">&#x27;/api/notes/:id&#x27;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">request<span class="token punctuation">,</span> response</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> id <span class="token operator">=</span> request<span class="token punctuation">.</span>params<span class="token punctuation">.</span>id
+  <span class="token keyword">const</span> note <span class="token operator">=</span> notes<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token parameter">note</span> <span class="token operator">=&gt;</span> note<span class="token punctuation">.</span>id <span class="token operator">===</span> id<span class="token punctuation">)</span>
+
+<span class="gatsby-highlight-code-line">  <span class="token keyword">if</span> <span class="token punctuation">(</span>note<span class="token punctuation">)</span> <span class="token punctuation">{</span></span><span class="gatsby-highlight-code-line">    response<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span>note<span class="token punctuation">)</span></span><span class="gatsby-highlight-code-line">  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span></span><span class="gatsby-highlight-code-line">    response<span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span><span class="token number">404</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span><span class="gatsby-highlight-code-line">  <span class="token punctuation">}</span></span><span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p>由于响应中没有数据，我们使用 <a href="http://expressjs.com/en/4x/api.html#res.status">status</a> 方法来设置状态，并使用 <a href="http://expressjs.com/en/4x/api.html#res.end">end</a> 方法来响应请求，而不发送任何数据。</p>
+<!-- -->
+<p>if 条件利用了这样一个事实——所有 JavaScript 对象都是<a href="https://developer.mozilla.org/en-US/docs/Glossary/Truthy">真值</a>，也就是在比较操作中会被计算为 true。然而，<em>undefined</em> 是<a href="https://developer.mozilla.org/en-US/docs/Glossary/Falsy">假值</a>，也就是会被计算为 false。</p>
+<!-- -->
+<p>现在我们的应用能在没有找到笔记的情况下正确运行并发送错误状态码。然而，应用并没有返回任何显示给用户的内容，正如 web 应用在我们访问不存在的页面时通常做的那样。因为 REST API 是用于编程的接口，我们不需要在浏览器中显示任何内容，只需要错误状态码就够了。</p>
+<!-- -->
+<p>不过，我们可以通过<a href="https://stackoverflow.com/questions/14154337/how-to-send-a-custom-http-status-message-in-node-express/36507614#36507614">重载默认的 NOT FOUND 信息</a>来提示关于发送 404 错误的原因。</p>
+<!-- -->
+<h3>删除资源</h3>
+<!-- -->
+<p>接下来，让我们实现一个用于删除资源的路由。删除是通过向资源的 URL 发送 HTTP DELETE 请求进行的：</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js">app<span class="token punctuation">.</span><span class="token function">delete</span><span class="token punctuation">(</span><span class="token string">&#x27;/api/notes/:id&#x27;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">request<span class="token punctuation">,</span> response</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> id <span class="token operator">=</span> request<span class="token punctuation">.</span>params<span class="token punctuation">.</span>id
+  notes <span class="token operator">=</span> notes<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token parameter">note</span> <span class="token operator">=&gt;</span> note<span class="token punctuation">.</span>id <span class="token operator">!==</span> id<span class="token punctuation">)</span>
+
+  response<span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span><span class="token number">204</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p>如果删除资源成功，也就是笔记之前存在并且已删除，我们就以状态码 <a href="https://www.rfc-editor.org/rfc/rfc9110.html#name-204-no-content">204 no content</a> 响应请求，并且在响应中不返回数据。</p>
+<!-- -->
+<p>对于资源不存在的情况下应该向 DELETE 请求返回什么状态码，目前还没有达成共识。仅有的两种选择是 204 和 404。为简单起见，我们的应用在这两种情况下都响应 204。</p>
+<h3>Postman</h3>
+<!-- -->
+<p>那么我们如何测试删除操作呢？HTTP GET 请求可以简单从浏览器发送。我们可以写一些 JavaScript 来测试删除操作，但写测试代码并不在每种情况下都是最佳解决方案。</p>
+<!-- -->
+<p>有许多方便测试后端的工具。其中之一是命令行程序 <a href="https://curl.haxx.se">curl</a>。但我们不用 curl，而是来看一下用 <a href="https://www.postman.com">Postman</a> 来测试应用。</p>
+<!-- -->
+<p>让我们<a href="https://www.postman.com/downloads/">从这里</a>安装 Postman 桌面客户端并尝试一下：</p>
+<picture><img style="border-color:#EEAC5D" alt="fullstack content" src="/static/8ef43031f7f537bbf81f707122f282b3/5a190/11x.png"/></picture>
+<!-- -->
+<p>注：Postman 在 VS Code 中也可用，通过左侧的“扩展”选项卡 -&gt; 搜索 Postman -&gt; 第一个结果（已验证的发布者） -&gt; 下载</p>
+<!-- -->
+<p>然后你就可以在活动栏的“扩展”选项卡下面看到添加了一个额外的图标。一旦登录，你就可以照着下面的步骤做了</p>
+<!-- -->
+<p>在这种情况下使用 Postman 非常简单。只要定义网址，然后选择正确的请求类型（DELETE）就可以了。</p>
+<!-- -->
+<p>后端服务端正确显示了响应。通过向 <a href="http://localhost:3001/api/notes">http://localhost:3001/api/notes</a> 发送 HTTP GET 请求，我们看到 id 为 2 的笔记已经不在列表中了，也就表明删除成功了。</p>
+<!-- -->
+<p>因为现在应用中的笔记是硬编码的，还没有存进数据库中，所以当重启应用时，笔记的列表将重置回原来的状态。</p>
+<!-- -->
+<h3>Visual Studio Code REST Client</h3>
+<!-- -->
+<p>如果你使用 Visual Studio Code，你可以使用 VS Code <a href="https://marketplace.visualstudio.com/items?itemName=humao.rest-client">REST Client</a> 插件来代替 Postman。</p>
+<!-- -->
+<p>一旦插件安装好后，用起来就非常简单。在应用的根目录新建一个名为 <i>requests</i> 的目录。将所有 REST 客户端请求作为以 <i>.rest</i> 扩展名结尾的文件保存进该目录中。</p>
+<!-- -->
+<p>让我们新建一个 <i>get_all_notes.rest</i> 文件并定义获取所有笔记的请求。</p>
+<picture><img style="border-color:#EEAC5D" alt="fullstack content" src="/static/9effbecbcd6ce412abb0f5d7a7abe26c/5a190/12ea.png"/></picture>
+<!-- -->
+<p>通过点击 <i>Send Request</i> 文本，REST 客户端将执行 HTTP 请求，然后在编辑器中打开服务端的响应。</p>
+<picture><img style="border-color:#EEAC5D" alt="fullstack content" src="/static/3d54e20f85c802a27f8872fe69ff54e5/5a190/13ea.png"/></picture>
+<!-- -->
+<h3>WebStorm HTTP Client</h3>
+<!-- -->
+<p>如果你使用的是 <em>IntelliJ WebStorm</em>，你可以用其内置的 HTTP Client 进行类似的步骤。新建一个扩展名为 <code class="language-text">.rest</code> 的文件，编辑器将显示创建和运行请求的选项。你可以按<a href="https://www.jetbrains.com/help/webstorm/http-client-in-product-code-editor.html">本指南</a>了解更多信息。</p>
+<!-- -->
+<h3>获取数据</h3>
+<!-- -->
+<p>接下来，让我们实现向服务端添加新笔记的功能。添加笔记是通过向地址 <a href="http://localhost:3001/api/notes">http://localhost:3001/api/notes</a> 发送 HTTP POST 请求，并在请求<a href="https://www.rfc-editor.org/rfc/rfc9112#name-message-body">体</a>中以 JSON 格式发送新笔记的所有信息来完成的。 </p>
+<!-- -->
+<p>为了方便地访问数据，我们需要借助 Express <a href="https://expressjs.com/en/api.html">json-parser</a>，可以通过命令 <em>app.use(express.json())</em> 来使用它。</p>
+<!-- -->
+<p>让我们启用 json-parser 并实现处理 HTTP POST 请求的处理函数的初始版本。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">const</span> express <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&#x27;express&#x27;</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> app <span class="token operator">=</span> <span class="token function">express</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="gatsby-highlight-code-line">app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>express<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></span>
+<span class="token comment">//...</span>
+
+<span class="gatsby-highlight-code-line">app<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">&#x27;/api/notes&#x27;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">request<span class="token punctuation">,</span> response</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span></span><span class="gatsby-highlight-code-line">  <span class="token keyword">const</span> note <span class="token operator">=</span> request<span class="token punctuation">.</span>body</span><span class="gatsby-highlight-code-line">  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>note<span class="token punctuation">)</span></span><span class="gatsby-highlight-code-line"></span><span class="gatsby-highlight-code-line">  response<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span>note<span class="token punctuation">)</span></span><span class="gatsby-highlight-code-line"><span class="token punctuation">}</span><span class="token punctuation">)</span></span></code></pre></div>
+<!-- -->
+<p>事件处理函数可以从 <em>request</em> 对象的 <i>body</i> 属性中获取数据。</p>
+<!-- -->
+<p>如果没有启用 json-parser，<i>body</i> 属性将是 undefined。json-parser 会获取请求的 JSON 数据，将其转化为 JavaScript 对象，然后在调用路由处理程序之前将该对象附加到 <em>request</em> 对象的 <i>body</i> 属性上。</p>
+<!-- -->
+<p>目前而言，应用只是将收到的数据打印到控制台并在响应中发回，并没有对数据做任何处理。</p>
+<!-- -->
+<p>在我们实现应用的其余逻辑之前，让我们用 Postman 验证服务端是否确实收到了数据。在 Postman 中，除了定义 URL 和请求类型外，我们还必须定义 <i>body</i> 中发送的数据：</p>
+<picture><img style="border-color:#EEAC5D" alt="fullstack content" src="/static/6163d953fe51415f5c5d82c801adf219/5a190/14new.png"/></picture>
+<!-- -->
+<p>应用将我们在请求中发送的数据打印到控制台：</p>
+<picture><img style="border-color:#EEAC5D" alt="fullstack content" src="/static/48432ffdbffeb4940bf8ac6d4aa484bb/2e195/15c.png"/></picture>
+<!-- -->
+<p><strong>注：</strong>在后端编程时，<i>始终保持应用运行的终端可见</i>。任何对代码的更改都会重启开发服务端，所以通过关注控制台，你可以立即注意到应用的代码是否出现了错误。</p>
+<picture><img style="border-color:#EEAC5D" alt="fullstack content" src="/static/a2d51f48f471d3768fec23f4bd908b81/5a190/16_25.png"/></picture>
+<!-- -->
+<p>类似的，检查控制台也很有用，可以确保后端在不同的情况下，比如当我们用 HTTP POST 请求发送数据时，都像我们期望的那样运行。当然，在开发应用时，在代码中添加大量的 <em>console.log</em> 命令也是可取的。</p>
+<!-- -->
+<p>可能造成问题的原因有请求中 <i>Content-Type</i> 标头的值不正确。如果在 Postman 上没有正确定义请求体的类型，这种情况就会发生：</p>
+<picture><img style="border-color:#EEAC5D" alt="fullstack content" src="/static/b5a0cb0c86873d3779ab8950cde4fbe9/5a190/17new.png"/></picture>
+<!-- -->
+<p><i>Content-Type</i> 标头的值会设为 <i>text/plain</i>：</p>
+<picture><img style="border-color:#EEAC5D" alt="fullstack content" src="/static/c46ba517cdf244b7584d13385a73db10/5a190/18new.png"/></picture>
+<!-- -->
+<p>服务端显示只收到一个空对象：</p>
+<picture><img style="border-color:#EEAC5D" alt="fullstack content" src="/static/bdf0083323d03195df5f5dff3c89d933/5a190/19_25.png"/></picture>
+<!-- -->
+<p>如果标头中没有正确的值，服务端就不能正确解析数据。服务端甚至不会尝试去猜数据的格式，因为 <i>Content-Types</i> 可能的值<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types">太多</a>了。</p>
+<!-- -->
+<p>如果你用的是 VS Code，但是<i>还没有安装上一章的 REST Client 的话</i>，那么你应该<i>现在</i>安装。可以这么使用 REST Client 发送 POST 请求：</p>
+<picture><img style="border-color:#EEAC5D" alt="fullstack content" src="/static/f2b5195bb25610d68352f0753dc6a47a/5a190/20new.png"/></picture>
+<!-- -->
+<p>我们为请求新建了一个 <i>create_note.rest</i> 文件。请求的格式按<a href="https://github.com/Huachao/vscode-restclient/blob/master/README.md#usage">文档中的说明</a>。</p>
+<!-- -->
+<p>REST Client 相较于 Postman 的一个优点是，可以轻松在项目库的根目录获得请求，而且请求可以分发给开发团队的每个人。你还可以在一个文件中用 <code class="language-text">###</code> 分隔符添加多个请求：</p>
+<div class="gatsby-highlight" data-language="text"><pre><code class="language-text">GET http://localhost:3001/api/notes/
+
+###
+POST http://localhost:3001/api/notes/ HTTP/1.1
+content-type: application/json
+
+{
+    &quot;name&quot;: &quot;sample&quot;,
+    &quot;time&quot;: &quot;Wed, 21 Oct 2015 18:27:50 GMT&quot;
+}</code></pre></div>
+<!-- -->
+<p>Postman 也允许用户保存请求，但情况可能变得相当混乱，特别是当你在同时处理多个不相关的项目时。</p>
+<blockquote>
+<!-- -->
+<p><strong>重要的附注</strong></p>
+<!-- -->
+<p>有时当你在调试时，你可能想找出 HTTP 请求中设了哪些标头。一种方法是通过 <em>request</em> 对象的 <a href="http://expressjs.com/en/4x/api.html#req.get">get</a> 方法获取单个标头的值。<em>request</em> 对象还有 <i>headers</i> 属性，包含某个请求的所有标头。</p>
+<!-- -->
+<p>在 VS REST Client 中，如果你不小心在第一行和指定 HTTP 标头的行之间添加了一个空行，就会出现问题。在这种情况下，REST Client 会将其解释为所有的标头都是空的，这会导致后端服务端不知道收到的数据是 JSON 格式的。</p>
+<!-- -->
+<p>如果你在代码中的某处用 <em>console.log(request.headers)</em> 命令打印请求的所有标头，你就能发现 <i>Content-Type</i> 标头丢失。</p>
+</blockquote>
+<!-- -->
+<p>让我们回到应用。一旦我们知道应用正确接收了数据，就可以完成处理请求的代码了：</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js">app<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">&#x27;/api/notes&#x27;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">request<span class="token punctuation">,</span> response</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> maxId <span class="token operator">=</span> notes<span class="token punctuation">.</span>length <span class="token operator">&gt;</span> <span class="token number">0</span>
+    <span class="token operator">?</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span><span class="token operator">...</span>notes<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">n</span> <span class="token operator">=&gt;</span> <span class="token function">Number</span><span class="token punctuation">(</span>n<span class="token punctuation">.</span>id<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 
+    <span class="token operator">:</span> <span class="token number">0</span>
+
+  <span class="token keyword">const</span> note <span class="token operator">=</span> request<span class="token punctuation">.</span>body
+  note<span class="token punctuation">.</span>id <span class="token operator">=</span> <span class="token function">String</span><span class="token punctuation">(</span>maxId <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>
+
+  notes <span class="token operator">=</span> notes<span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span>note<span class="token punctuation">)</span>
+
+  response<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span>note<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p>我们需要给这个笔记一个唯一的 id。首先，我们找出当前列表中最大的 id 号赋值给 <em>maxId</em> 变量。然后将新笔记的 id 定义为 <em>maxId + 1</em> 的字符串形式。这种方法并不推荐，但我们现在先这么用着，我们很快就会换另一种方法。</p>
+<!-- -->
+<p>目前的版本仍有问题，HTTP POST 请求可以用来添加具有任意属性的对象。让我们改进应用，定义 <i>content</i> 属性不得为空。<i>important</i> 属性默认赋 false 值。其他所有属性都丢弃：</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">const</span> <span class="token function-variable function">generateId</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> maxId <span class="token operator">=</span> notes<span class="token punctuation">.</span>length <span class="token operator">&gt;</span> <span class="token number">0</span>
+    <span class="token operator">?</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span><span class="token operator">...</span>notes<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">n</span> <span class="token operator">=&gt;</span> <span class="token function">Number</span><span class="token punctuation">(</span>n<span class="token punctuation">.</span>id<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token operator">:</span> <span class="token number">0</span>
+  <span class="token keyword">return</span> <span class="token function">String</span><span class="token punctuation">(</span>maxId <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+app<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">&#x27;/api/notes&#x27;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">request<span class="token punctuation">,</span> response</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> body <span class="token operator">=</span> request<span class="token punctuation">.</span>body
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>body<span class="token punctuation">.</span>content<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> response<span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span><span class="token number">400</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      <span class="token literal-property property">error</span><span class="token operator">:</span> <span class="token string">&#x27;content missing&#x27;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">const</span> note <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">content</span><span class="token operator">:</span> body<span class="token punctuation">.</span>content<span class="token punctuation">,</span>
+    <span class="token literal-property property">important</span><span class="token operator">:</span> body<span class="token punctuation">.</span>important <span class="token operator">||</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token function">generateId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+
+  notes <span class="token operator">=</span> notes<span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span>note<span class="token punctuation">)</span>
+
+  response<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span>note<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p>为笔记生成新 id 号的逻辑已经提取到专门的 <em>generateId</em> 函数中。</p>
+<!-- -->
+<p>如果收到的数据缺失 <i>content</i> 属性的值，服务端将以状态码 <a href="https://www.rfc-editor.org/rfc/rfc9110.html#name-400-bad-request">400 bad request</a> 响应请求：</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>body<span class="token punctuation">.</span>content<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> response<span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span><span class="token number">400</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token literal-property property">error</span><span class="token operator">:</span> <span class="token string">&#x27;content missing&#x27;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p>注意，调用 return 至关重要，否则代码会执行到最后，错误格式的笔记会被保存到应用中。</p>
+<!-- -->
+<p>如果 content 属性有值，将基于收到的数据新建笔记。</p>
+<!-- -->
+<p>如果 <i>important</i> 属性丢失，我们将默认其值为 <i>false</i>。默认值目前是以一种看起来相当奇怪的方式生成的：</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token literal-property property">important</span><span class="token operator">:</span> body<span class="token punctuation">.</span>important <span class="token operator">||</span> <span class="token boolean">false</span><span class="token punctuation">,</span></code></pre></div>
+<!-- -->
+<p>如果 <em>body</em> 变量保存的数据有 <i>important</i> 属性，表达式将计算其值并转换为布尔值。如果 <i>important</i> 属性不存在，那么表达式将计算为竖线<em>||</em>右侧定义的  false。</p>
+<!-- -->
+<blockquote>
+<p>准确地说，当 <i>important</i> 属性为 <i>false</i> 时，<em>body.important || false</em> 表达式实际上返回的是右边的 <i>false</i>……</p>
+</blockquote>
+<!-- -->
+<p>你可以在<a href="https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1">这个 GitHub 仓库</a>的 <i>part3-1</i> 分支中找到我们当前应用的全部代码。</p>
+<picture><img style="border-color:#EEAC5D" alt="fullstack content" src="/static/9b6ccc6beb80d632e0c9c12d2436c9b4/5a190/21.png"/></picture>
+<!-- -->
+<p>如果你克隆了这个项目，在用 <em>npm start</em> 或 <em>npm run dev</em> 启动应用之前，运行 <em>npm install</em> 命令。</p>
+<!-- -->
+<p>在我们开始练习之前还有一件事。生成 id 的函数目前看起来是这样的：</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">const</span> <span class="token function-variable function">generateId</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> maxId <span class="token operator">=</span> notes<span class="token punctuation">.</span>length <span class="token operator">&gt;</span> <span class="token number">0</span>
+    <span class="token operator">?</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span><span class="token operator">...</span>notes<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">n</span> <span class="token operator">=&gt;</span> <span class="token function">Number</span><span class="token punctuation">(</span>n<span class="token punctuation">.</span>id<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token operator">:</span> <span class="token number">0</span>
+  <span class="token keyword">return</span> <span class="token function">String</span><span class="token punctuation">(</span>maxId <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p>函数体包含了一行看起来有点耐人寻味的内容：</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js">Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span><span class="token operator">...</span>notes<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">n</span> <span class="token operator">=&gt;</span> <span class="token function">Number</span><span class="token punctuation">(</span>n<span class="token punctuation">.</span>id<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p>这行代码中到底发生了什么？<em>notes.map(n =&gt; Number(n.id))</em> 新建了一个包含所有笔记 id 的数字形式的数组。<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max">Math.max</a> 返回传递给它所有数字的最大值。然而，<em>notes.map(n =&gt; Number(n.id))</em> 是一个<i>数组</i>，所以它不能直接作为一个参数给 <em>Math.max</em>。数组可以通过使用“三点”<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax">展开</a>语法 <em>...</em> 转换为各个数字。</p>
+</div></div>
+<div class="banner spacing tasks content-banner" style="background-color:#EEAC5D;border-color:#EEAC5D"><div class="course-content " style="border-color:#EEAC5D;background-color:transparent"><div class="course-content-inner ">
+<!-- -->
+<h3>练习 3.1.~3.6.</h3>
+<!-- -->
+<p><strong>注：</strong>因为这不是一个前端项目，我们也没有用 React，所以应用<strong>不是</strong>用 create vite@latest -- --template react <strong>创建</strong>的。用教材本章节前面演示过的 <em>npm init</em> 命令来初始化这个项目。</p>
+<!-- -->
+<p><strong>注意：</strong>因为“node_modules”是用“npm init”创建的，所以在你用“git add .”打算让 git 开始跟踪代码时，也会包含这个目录。因此，请创建一个名为“.gitignore”的文件并写入“node_modules”，以便 git 在你每次尝试添加、提交或推送到远程仓库时都忽略这个目录。</p>
+<!-- -->
+<p><strong>强烈建议：</strong>当你在处理后端代码时，始终关注应用运行的终端中发生了什么。</p>
+<!-- -->
+<h4>3.1：电话簿后端 第 1 步</h4>
+<!-- -->
+<p>实现一个从地址 <a href="http://localhost:3001/api/persons">http://localhost:3001/api/persons</a> 返回一个电话簿记录的硬编码列表的 Node 应用。</p>
+<!-- -->
+<p>数据：</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token punctuation">[</span>
+    <span class="token punctuation">{</span> 
+      <span class="token string-property property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span>
+      <span class="token string-property property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Arto Hellas&quot;</span><span class="token punctuation">,</span> 
+      <span class="token string-property property">&quot;number&quot;</span><span class="token operator">:</span> <span class="token string">&quot;040-123456&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span> 
+      <span class="token string-property property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2&quot;</span><span class="token punctuation">,</span>
+      <span class="token string-property property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Ada Lovelace&quot;</span><span class="token punctuation">,</span> 
+      <span class="token string-property property">&quot;number&quot;</span><span class="token operator">:</span> <span class="token string">&quot;39-44-5323523&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span> 
+      <span class="token string-property property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;3&quot;</span><span class="token punctuation">,</span>
+      <span class="token string-property property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Dan Abramov&quot;</span><span class="token punctuation">,</span> 
+      <span class="token string-property property">&quot;number&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12-43-234345&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span> 
+      <span class="token string-property property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;4&quot;</span><span class="token punctuation">,</span>
+      <span class="token string-property property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Mary Poppendieck&quot;</span><span class="token punctuation">,</span> 
+      <span class="token string-property property">&quot;number&quot;</span><span class="token operator">:</span> <span class="token string">&quot;39-23-6423122&quot;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">]</span></code></pre></div>
+<!-- -->
+<p>GET 请求后浏览器中的输出：</p>
+<picture><img style="border-color:#EEAC5D" alt="fullstack content" src="/static/b9a0a7eece81829541c485fdd078f25a/5a190/22e.png"/></picture>
+<!-- -->
+<p>注意路由 <i>api/persons</i> 中的正斜杠不是特殊字符，它和字符串中的其他字符一样。</p>
+<!-- -->
+<p>应用必须用 <em>npm start</em> 命令启动。</p>
+<!-- -->
+<p>应用还必须提供一个 <em>npm run dev</em> 命令来运行应用，并在源代码文件发生更改并保存时重启服务端。</p>
+<!-- -->
+<h4>3.2：电话簿 第 2 步</h4>
+<!-- -->
+<p>在地址 <a href="http://localhost:3001/info">http://localhost:3001/info</a> 上实现一个类似这样的页面：</p>
+<picture><img style="border-color:#EEAC5D" alt="fullstack content" src="/static/26383e4e706a7f89c140690121be2ea1/5a190/23x.png"/></picture>
+<!-- -->
+<p>该页面必须显示收到请求的时间，以及处理请求时，电话簿中有多少记录。</p>
+<!-- -->
+<h4>3.3：电话簿 第 3 步</h4>
+<!-- -->
+<p>实现显示单个电话簿记录的信息的功能。获取 id 为 5 的人的数据的 URL 应该是 <a href="http://localhost:3001/api/persons/5">http://localhost:3001/api/persons/5</a></p>
+<!-- -->
+<p>如果没有找到给定 id 的记录，服务端必须响应合适的状态码。</p>
+<!-- -->
+<h4>3.4：电话簿后端 第 4 步</h4>
+<!-- -->
+<p>实现可以通过向电话簿记录的唯一 URL 发送 HTTP DELETE 请求来删除单个电话簿条目的功能。</p>
+<!-- -->
+<p>用 Postman 或 Visual Studio Code REST Client 测试你的功能是否正确。</p>
+<!-- -->
+<h4>3.5：电话簿后端 第 5 步</h4>
+<!-- -->
+<p>扩展后端，使得可以通过向地址 <a href="http://localhost:3001/api/persons">http://localhost:3001/api/persons</a> 发送 HTTP POST 请求添加电话簿记录。</p>
+<!-- -->
+<p>用 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random">Math.random</a> 函数为添加的电话簿记录生成一个新 id。让随机值的范围足够大，这样创建重复 id 的可能性就足够小。</p>
+<!-- -->
+<h4>3.6: 电话簿后端 第 6 步</h4>
+<!-- -->
+<p>实现新建记录的错误处理。如果出现下列情况，则请求失败：</p>
+<!-- -->
+<ul>
+<li>
+<p>名字或号码缺失</p>
+<!-- -->
+</li>
+<li>名字已经存在于电话簿中</li>
+</ul>
+<!-- -->
+<p>对于这样的请求，用适当的状态码响应，同时发回解释错误原因的信息，例如：</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token punctuation">{</span> <span class="token literal-property property">error</span><span class="token operator">:</span> <span class="token string">&#x27;name must be unique&#x27;</span> <span class="token punctuation">}</span></code></pre></div>
+</div></div></div>
+<div class="course-content "><div class="course-content-inner ">
+<!-- -->
+<h3>关于 HTTP 请求类型</h3>
+<!-- -->
+<p><a href="https://www.rfc-editor.org/rfc/rfc9110.html#name-common-method-properties">HTTP 标准</a>提到了关于请求类型的两个属性：<strong>安全性</strong>和<strong>幂等性</strong>。</p>
+<!-- -->
+<p>HTTP GET 请求应该是<i>安全的</i>：</p>
+<!-- -->
+<blockquote>
+<p><i>特别是已经约定俗成的，GET 和 HEAD 方法<strong>不应</strong>具有除获取数据以外的任何意义。GET 和 HEAD 方法应被认为是“安全的”。</i></p>
+</blockquote>
+<!-- -->
+<p>安全性意味着执行这类请求不能在服务端引起任何<i>副作用</i>。这里的副作用是指数据库的状态不能因请求而改变，而且响应必须只返回服务端上已有的数据。</p>
+<!-- -->
+<p>还没有办法能保证 GET 请求是<i>安全的</i>，这只是 HTTP 标准定义的一个建议。通过在 API 中遵守 RESTful 原则，就总能以<i>安全</i>的方式使用 GET 请求。</p>
+<!-- -->
+<p>HTTP 标准定义的请求类型中，应该是安全的还有 <a href="https://www.rfc-editor.org/rfc/rfc9110.html#name-head">HEAD</a>。实际上，HEAD 的效果应该与 GET 完全一样，但不返回除状态码和响应标头外的任何信息。当你发送 HEAD 请求时，不会有响应体返回。</p>
+<!-- -->
+<p>除了 POST，所有 HTTP 请求都应该是<i>幂等的</i>。</p>
+<!-- -->
+<blockquote>
+<p><i> 方法也可以具有“幂等性”，即（除了错误或过期的问题） N &gt; 0 个相同的请求的副作用与单个请求的副作用相同。GET、HEAD、PUT 和 DELETE 方法都有这一属性</i></p>
+</blockquote>
+<!-- -->
+<p>这意味着如果一个请求确实会产生副作用，那么无论发送多少次该请求，结果都应该是一样的。</p>
+<!-- -->
+<p>如果我们向 URL <i>/api/notes/10</i> 发送 HTTP PUT 请求，并随请求发送数据 <em>{ content:&quot;no side effects!&quot;, important: true }</em>，那么无论发送多少次请求，结果都应该是一样的。</p>
+<!-- -->
+<p>和 GET 请求的<i>安全性</i>一样，<i>幂等性</i>也只是 HTTP 标准中的一个建议，并不是简单根据请求类型就能保证的。然而，当我们的 API 遵守 RESTful 原则时，就能以幂等的方式使用 GET、HEAD、PUT 和 DELETE 请求。</p>
+<!-- -->
+<p>POST 是唯一的既不<i>安全</i>也不<i>幂等</i>的 HTTP 请求类型。如果我们向 <i>/api/notes</i> 发送 5 个 HTTP POST 请求，每个请求的请求体都是 <em>{content:&quot;many same&quot;, important: true}</em>，那么服务端会产生 5 个相同内容的笔记。</p>
+<!-- -->
+<h3>中间件</h3>
+<!-- -->
+<p>之前使用的 Express <a href="https://expressjs.com/en/api.html">json-parser</a> 是一个<a href="http://expressjs.com/en/guide/using-middleware.html">中间件</a>。</p>
+<!-- -->
+<p>中间件是可以用来处理 <em>request</em> 和 <em>response</em> 对象的函数。</p>
+<!-- -->
+<p>我们之前使用的 json-parser 从请求中获取存储在 <em>request</em> 对象中的原始数据，将其解析为一个 JavaScript 对象，并将其赋值给 <em>request</em> 对象作为其新属性 <i>body</i>。</p>
+<!-- -->
+<p>实际上，你可以同时使用多个中间件。当你有多个中间件时，它们会按照应用代码中的顺序一个一个地执行。</p>
+<!-- -->
+<p>让我们来实现我们自己的中间件，来打印出发送到服务端的每个请求的信息。</p>
+<!-- -->
+<p>中间件是一个接收三个参数的函数：</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">const</span> <span class="token function-variable function">requestLogger</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">request<span class="token punctuation">,</span> response<span class="token punctuation">,</span> next</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&#x27;Method:&#x27;</span><span class="token punctuation">,</span> request<span class="token punctuation">.</span>method<span class="token punctuation">)</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&#x27;Path:  &#x27;</span><span class="token punctuation">,</span> request<span class="token punctuation">.</span>path<span class="token punctuation">)</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&#x27;Body:  &#x27;</span><span class="token punctuation">,</span> request<span class="token punctuation">.</span>body<span class="token punctuation">)</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&#x27;---&#x27;</span><span class="token punctuation">)</span>
+  <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre></div>
+<!-- -->
+<p>函数体在最后调用了作为参数传递的 <em>next</em> 函数。<em>next</em> 函数将控制权交给下一个中间件。</p>
+<!-- -->
+<p>中间件是这样用的：</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js">app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>requestLogger<span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p>记住，中间件函数是按照 JavaScript 引擎遇到它们的顺序调用的。注意 <em>json-parser</em> 要放在 <em>requestLogger</em> 之前，否则在执行 <em>requestLogger</em> 的时候，<i>request.body</i> 还没有初始化！</p>
+<!-- -->
+<p>如果我们想让路由事件处理函数执行中间件函数，那么就必须在路由之前使用这些中间件函数。有时，我们想在路由之后才使用中间件函数。我们只在没有路由处理函数处理 HTTP 请求时才会调用路由之后的中间件函数。</p>
+<!-- -->
+<p>让我们在路由之后添加以下中间件，用于捕捉向不存在的路由发出的请求。对于这些请求，中间件将返回一个 JSON 格式的错误信息。</p>
+<div class="gatsby-highlight" data-language="js"><pre><code class="language-js"><span class="token keyword">const</span> <span class="token function-variable function">unknownEndpoint</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">request<span class="token punctuation">,</span> response</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  response<span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span><span class="token number">404</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token literal-property property">error</span><span class="token operator">:</span> <span class="token string">&#x27;unknown endpoint&#x27;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>unknownEndpoint<span class="token punctuation">)</span></code></pre></div>
+<!-- -->
+<p>你可以在<a href="https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2">这个 GitHub 仓库</a>的 <i>part3-2</i> 分支中找到我们当前应用的全部代码。</p>
+</div></div>
+<div class="banner spacing tasks content-banner" style="background-color:#EEAC5D;border-color:#EEAC5D"><div class="course-content " style="border-color:#EEAC5D;background-color:transparent"><div class="course-content-inner ">
+<!-- -->
+<h3>练习 3.7.~3.8.</h3>
+<!-- -->
+<h4>3.7：电话簿后端 第 7 步</h4>
+<!-- -->
+<p>将 <a href="https://github.com/expressjs/morgan">morgan</a> 中间件添加到你的应用中来记录日志。将 morgan 配置成按 <i>tiny</i> 配置项将信息记录到你的控制台。</p>
+<!-- -->
+<p>morgan 的文档并非最好，你可能需要花一些时间来弄清楚如何正确配置它。然而，世界上的大多数文档都是这个样子，所以无论如何，学会理解和解释难解的文档都是件好事。</p>
+<!-- -->
+<p>安装 morgan 的方式和其他所有库一样，都是用 <em>npm install</em> 命令。使用 morgan 的方式和其他所有中间件一样，都是用 <em>app.use</em> 命令。</p>
+<!-- -->
+<h4>3.8*：电话簿后端 第 8 步</h4>
+<!-- -->
+<p>配置 morgan，使它也显示 HTTP POST 请求中发送的数据：</p>
+<picture><img style="border-color:#EEAC5D" alt="fullstack content" src="/static/4ed4b48465d48df517158501c0be187e/5a190/24.png"/></picture>
+<!-- -->
+<p>注意记录数据是危险的，即使是记录到控制台中也如此，因为数据中可能包含敏感数据，从而可能违反当地的隐私法规（如欧盟的 GDPR）或商业标准。在这道练习中，你不必担心隐私问题，但在工作中，尽量不要记录任何敏感数据。</p>
+<!-- -->
+<p>这个练习可能相当有挑战性，尽管答案不需要大量的代码。</p>
+<!-- -->
+<p>这道练习可以用几种不同的方式完成。一种解法是利用这两项技巧：</p>
+<!-- -->
+<ul>
+<li>
+<p><a href="https://github.com/expressjs/morgan#creating-new-tokens">新建词法单元</a></p>
+<!-- -->
+</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify">JSON.stringify</a></li>
+</ul>
+</div></div></div></div></div><div class="container spacing element--flex element--centered"><a class="edit-link" target="__BLANK" href="https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/edit/source/src/content/3/zh/part3a.md"><span>对讲课材料提出建议</span></a></div><div class="container spacing spacing--after-large prev-next__container "><a class="col-4--mobile push-right-1 prev" href="/zh/part2"><div class=" element--flex element--column"><p>Part<!-- --> <!-- -->2</p><b>上一部分</b></div></a><div class="col-1--mobile separator"></div><a class="col-4--mobile push-left-1 next" href="/zh/part3/把应用部署到互联网上"><div class=" element--flex element--column"><p>Part<!-- --> <!-- -->3b</p><b>下一部分</b></div></a></div></div></main><footer class="container spacing--after-small spacing--mobile element--flex" id="footer"><div class="col-5 push-right-3 col-10--mobile order-2--mobile order-2--tablet footer__links element--flex element--space-between"><a href="https://www.helsinki.fi/" class="col-5 col-4--mobile spacing--mobile"><div class="image col-6 image--contain image--invert"><div class="image__container"><img style="background-color:;background-opacity:0.5" class="image__content" src="/static/uoh_centre-3689cf9983a2ebc8089c8f078a9c4769.svg" alt="Helsingin yliopiston logo"/></div></div></a><a href="https://www.houston-inc.com/" class="col-5 col-4--mobile spacing--mobile"><div class="image col-6 image--contain image--invert"><div class="image__container"><img style="background-color:;background-opacity:0.5" class="image__content" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMjQ3cHgiIGhlaWdodD0iODJweCIgdmlld0JveD0iMCAwIDI0NyA4MiIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4KICAgIDwhLS0gR2VuZXJhdG9yOiBTa2V0Y2ggNTMuMiAoNzI2NDMpIC0gaHR0cHM6Ly9za2V0Y2hhcHAuY29tIC0tPgogICAgPHRpdGxlPmxvZ28vaG91c3RvbjwvdGl0bGU+CiAgICA8ZGVzYz5DcmVhdGVkIHdpdGggU2tldGNoLjwvZGVzYz4KICAgIDxkZWZzPgogICAgICAgIDxwb2x5Z29uIGlkPSJwYXRoLTEiIHBvaW50cz0iMCAwLjAyNjcxOTI2NzMgMTM4LjIwODE2NyAwLjAyNjcxOTI2NzMgMTM4LjIwODE2NyAzNi40NjU0MzgxIDAgMzYuNDY1NDM4MSI+PC9wb2x5Z29uPgogICAgPC9kZWZzPgogICAgPGcgaWQ9ImxvZ28vaG91c3RvbiIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgaWQ9ImhvdXN0b25fc2ltcGxlLmVwcy1jb3B5LTMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDU0LjU4MTg5MywgMjMuMjYzMDQwKSI+CiAgICAgICAgICAgIDxtYXNrIGlkPSJtYXNrLTIiIGZpbGw9IndoaXRlIj4KICAgICAgICAgICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI3BhdGgtMSI+PC91c2U+CiAgICAgICAgICAgIDwvbWFzaz4KICAgICAgICAgICAgPGcgaWQ9IkNsaXAtMiI+PC9nPgogICAgICAgICAgICA8cGF0aCBkPSJNODIuODA1MTI5OCwxMy41MDY2NjAzIEw4Mi44MDUxMjk4LDI1LjUzNjU1MDkgTDg1Ljk5MzYyOSwyNS41MzY1NTA5IEw4NS45OTM2MjksMTMuNTA2NjYwMyBMOTAuNDA2NTQ5MywxMy41MDY2NjAzIEw5MC40MDY1NDkzLDEwLjQ0NTY3ODQgTDc4LjM3NTEwMzYsMTAuNDQ1Njc4NCBMNzguMzc1MTAzNiwxMy41MDY2NjAzIEw4Mi44MDUxMjk4LDEzLjUwNjY2MDMgWiBNOTYuNDkxMDQ5NSwxNy45NjM2ODg1IEM5Ni40OTEwNDk1LDIwLjU1OTU1NzIgOTguMzE3ODU1NywyMi43MDc5ODQyIDEwMC44ODYxNTcsMjIuNzA3OTg0MiBDMTAzLjQ1NDg4MiwyMi43MDc5ODQyIDEwNS4yNDcxOTQsMjAuNTk1NDY1NyAxMDUuMjQ3MTk0LDE4LjAxNzk3NTMgTDEwNS4yNDcxOTQsMTguMDAwMDIxMSBDMTA1LjI0NzE5NCwxNS40MDQyOTM3IDEwMy40MjA1MjksMTMuMjU1ODY2NyAxMDAuODUyMjI4LDEzLjI1NTg2NjcgQzk4LjI4MzUwMjMsMTMuMjU1ODY2NyA5Ni40OTEwNDk1LDE1LjM2ODM4NTMgOTYuNDkxMDQ5NSwxNy45NDU3MzQzIEw5Ni40OTEwNDk1LDE3Ljk2MzY4ODUgWiBNOTMuMTQ3MDQxMywxOC4wMTc5NzUzIEw5My4xNDcwNDEzLDE3Ljk4MjA2NjkgQzkzLjE0NzA0MTMsMTMuNjg1NDk1NiA5Ni40MDQ4MTI3LDEwLjE3NjkzMDYgMTAwLjg4NjE1NywxMC4xNzY5MzA2IEMxMDUuMzY3OTI1LDEwLjE3NjkzMDYgMTA4LjU5MTM0MywxMy42NDk3Mjg1IDEwOC41OTEzNDMsMTcuOTQ1NzM0MyBMMTA4LjU5MTM0MywxNy45NjM2ODg1IEMxMDguNTkxMzQzLDIyLjI2MDI1OTggMTA1LjMzMzU3MiwyNS43Njg4MjQ3IDEwMC44NTIyMjgsMjUuNzY4ODI0NyBDOTYuMzcwMzE4LDI1Ljc2ODgyNDcgOTMuMTQ3MDQxMywyMi4zMTQxMjI0IDkzLjE0NzA0MTMsMTguMDE3OTc1MyBMOTMuMTQ3MDQxMywxOC4wMTc5NzUzIFogTTcwLjQxMTkxMzcsMjIuNzk3MDQ4NSBDNjguNzU2ODc0MiwyMi43OTcwNDg1IDY3LjM3ODIxNjYsMjIuMDgxMjgzMSA2Ni4wNjg0MDcsMjAuOTcxNzk3NCBMNjQuMTcyMTg3MiwyMy4zMTY0NDg0IEM2NS45MTMxODA4LDI0LjkyNzk0NTQgNjguMTM2Njc2MiwyNS43MzMzNDA0IDcwLjM0MzA2NTYsMjUuNzMzMzQwNCBDNzMuNDgwMTA1NSwyNS43MzMzNDA0IDc1LjY2OTI0NzYsMjQuMDUwMTY4IDc1LjY2OTI0NzYsMjEuMDYxMDAzIEw3NS42NjkyNDc2LDIxLjAyNTA5NDUgQzc1LjcyMTEzMSwxOC4zOTM0NTg4IDc0LjA0ODU2MTUsMTcuMzAxNzg1OCA3MS4xMDExMDExLDE2LjQ5NTgyNTMgQzY4LjU4NDY4MzQsMTUuODMzOTIyNiA2Ny45NjM5MTk5LDE1LjUxMTMxMjIgNjcuOTYzOTE5OSwxNC41MDg5ODYyIEw2Ny45NjM5MTk5LDE0LjQ3MzA3NzggQzY3Ljk2MzkxOTksMTMuNzM4OTM0MSA2OC42MDIyMTM1LDEzLjE2NjY2MTEgNjkuODI1NjQ0OSwxMy4xNjY2NjExIEM3MS4wNDk2NDE4LDEzLjE2NjY2MTEgNzIuMzA3OTkyMSwxMy43MjA5Nzk5IDczLjYwMDgzNywxNC42NTIwNTQ1IEw3NS4yNTU1OTM4LDEyLjE0NTk1NjkgQzczLjc4OTk5MjUsMTAuOTEwNjUwMiA3MS45ODA3MTY0LDEwLjIzMDM2OTIgNjkuODYwNTYzNywxMC4yMzAzNjkyIEM2Ni44OTU3MTQ3LDEwLjIzMDM2OTIgNjQuNzc1NTYyLDEyLjAzODY1NTcgNjQuNzc1NTYyLDE0Ljc3NzU5MjYgTDY0Ljc3NTU2MiwxNC44MTMwNzY5IEM2NC43NzU1NjIsMTcuODAyNjY2MSA2Ni42NzEwNzQ5LDE4LjY0NDUzNSA2OS41ODQxODE5LDE5LjQzMjExNzMgQzcyLjAxNDY0NTYsMjAuMDc2NjMxMiA3Mi41MTQ2Nzc2LDIwLjUwNjI2MDEgNzIuNTE0Njc3NiwyMS4zNDc3MDQ5IEw3Mi41MTQ2Nzc2LDIxLjM4MzA0NzkgQzcyLjUxNDY3NzYsMjIuMjYwMjU5OCA3MS43MjIyODg4LDIyLjc5NzA0ODUgNzAuNDExOTEzNywyMi43OTcwNDg1IEw3MC40MTE5MTM3LDIyLjc5NzA0ODUgWiBNMzEuMzM2NDY5NywxNy45NjM2ODg1IEMzMS4zMzY0Njk3LDIwLjU1OTU1NzIgMzMuMTYzNywyMi43MDc5ODQyIDM1LjczMTg1OTksMjIuNzA3OTg0MiBDMzguMzAwMTYxMSwyMi43MDc5ODQyIDQwLjA5MjQ3MjYsMjAuNTk1NDY1NyA0MC4wOTI0NzI2LDE4LjAxNzk3NTMgTDQwLjA5MjQ3MjYsMTguMDAwMDIxMSBDNDAuMDkyNDcyNiwxNS40MDQyOTM3IDM4LjI2NTI0MjMsMTMuMjU1ODY2NyAzNS42OTY5NDEsMTMuMjU1ODY2NyBDMzMuMTI5MjA1MywxMy4yNTU4NjY3IDMxLjMzNjQ2OTcsMTUuMzY4Mzg1MyAzMS4zMzY0Njk3LDE3Ljk0NTczNDMgTDMxLjMzNjQ2OTcsMTcuOTYzNjg4NSBaIE0yOC4wMDk3MDg5LDE4LjAxNzk3NTMgTDI4LjAwOTcwODksMTcuOTgyMDY2OSBDMjguMDA5NzA4OSwxMy42ODU0OTU2IDMxLjI2NzQ4MDMsMTAuMTc2OTMwNiAzNS43NDg4MjQ1LDEwLjE3NjkzMDYgQzQwLjIzMDczNDIsMTAuMTc2OTMwNiA0My40MzYxOTgsMTMuNjQ5NzI4NSA0My40NTQwMTA5LDE3Ljk0NTczNDMgTDQzLjQ1NDAxMDksMTcuOTYzNjg4NSBDNDMuNDU0MDEwOSwyMi4yNjAyNTk4IDQwLjE5NjIzOTUsMjUuNzY4ODI0NyAzNS43MTQ4OTUzLDI1Ljc2ODgyNDcgQzMxLjIzMjU2MTUsMjUuNzY4ODI0NyAyOC4wMDk3MDg5LDIyLjMxNDEyMjQgMjguMDA5NzA4OSwxOC4wMTc5NzUzIEwyOC4wMDk3MDg5LDE4LjAxNzk3NTMgWiBNNTMuODMwNDE3MSwyNS43MzMzNDA0IEM1Ny43NDI4ODEyLDI1LjczMzM0MDQgNjAuMjA3ODM5NywyMy40OTU4NDkyIDYwLjIwNzgzOTcsMTguOTMwNjcxNSBMNjAuMjA3ODM5NywxMC40MjcxNTg3IEw1Ny4wMDE4MTAzLDEwLjQyNzE1ODcgTDU3LjAwMTgxMDMsMTkuMDczNzM5OCBDNTcuMDAxODEwMywyMS40NzI2Nzc2IDU1LjgxMjMwODEsMjIuNjkwMDMgNTMuODY0NzcwNCwyMi42OTAwMyBDNTEuOTE3Mzc0MSwyMi42OTAwMyA1MC43Mjc3MzA1LDIxLjQxODk1NjMgNTAuNzI3NzMwNSwxOC45NjY1OCBMNTAuNzI3NzMwNSwxMC40MjcxNTg3IEw0Ny41Mzg2NjU4LDEwLjQyNzE1ODcgTDQ3LjUzODY2NTgsMTkuMDM3ODMxMyBDNDcuNTM4NjY1OCwyMy40Nzc4OTUgNDkuOTE3OTUzLDI1LjczMzM0MDQgNTMuODMwNDE3MSwyNS43MzMzNDA0IEw1My44MzA0MTcxLDI1LjczMzM0MDQgWiBNMy4xNTQ1NywzMy4xOTgxOTQ4IEwxMzUuMDM2NjMyLDMzLjE5ODE5NDggTDEzNS4wMzY2MzIsMy4zMDI0NDQ4OCBMMy4xNTQ1NywzLjMwMjQ0NDg4IEwzLjE1NDU3LDMzLjE5ODE5NDggWiBNMCwzNi40NzM5MjA0IEwxMzguMjA4MTY3LDM2LjQ3MzkyMDQgTDEzOC4yMDgxNjcsMC4wMjY3MTkyNjczIEwwLDAuMDI2NzE5MjY3MyBMMCwzNi40NzM5MjA0IFogTTE0LjgyMzExNDMsMTkuNDg1NDE0NCBMMjAuNzE4NjAwNSwxOS40ODU0MTQ0IEwyMC43MTg2MDA1LDI1LjUzNjU1MDkgTDIzLjkwNzY2NTIsMjUuNTM2NTUwOSBMMjMuOTA3NjY1MiwxMC40NDU2Nzg0IEwyMC43MTg2MDA1LDEwLjQ0NTY3ODQgTDIwLjcxODYwMDUsMTYuNDA2MDU0MiBMMTQuODIzMTE0MywxNi40MDYwNTQyIEwxNC44MjMxMTQzLDEwLjQ0NTY3ODQgTDExLjYzNDc1NjUsMTAuNDQ1Njc4NCBMMTEuNjM0NzU2NSwyNS41MzY1NTA5IEwxNC44MjMxMTQzLDI1LjUzNjU1MDkgTDE0LjgyMzExNDMsMTkuNDg1NDE0NCBaIE0xMTUuODY0OTIyLDE1Ljk0MTUwNjUgTDEyMi44OTc2MDIsMjUuNTM2NTUwOSBMMTI1LjYyMDk4OCwyNS41MzY1NTA5IEwxMjUuNjIwOTg4LDEwLjQ0NTY3ODQgTDEyMi40NjY0MTgsMTAuNDQ1Njc4NCBMMTIyLjQ2NjQxOCwxOS43MzYyMDggTDExNS42NTgzNzcsMTAuNDQ1Njc4NCBMMTEyLjcxMDkxNywxMC40NDU2Nzg0IEwxMTIuNzEwOTE3LDI1LjUzNjU1MDkgTDExNS44NjQ5MjIsMjUuNTM2NTUwOSBMMTE1Ljg2NDkyMiwxNS45NDE1MDY1IEwxMTUuODY0OTIyLDE1Ljk0MTUwNjUgWiIgaWQ9IkZpbGwtMSIgZmlsbD0iIzAwMDEwNSIgbWFzaz0idXJsKCNtYXNrLTIpIj48L3BhdGg+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4=" alt="Houston inc. logo"/></div></div></a></div><div class="col-5 col-5--mobile order-1--mobile order-1--tablet footer__navigation element--flex"><div class="footer__navigation-link-container"><a class="footer__navigation-link nav-item-hover" style="margin-left:4.5rem" href="/zh/about">关于课程</a><a class="footer__navigation-link nav-item-hover" style="margin-left:4.5rem" href="/zh/#course-contents">课程内容</a><a class="footer__navigation-link nav-item-hover" style="margin-left:4.5rem" href="/zh/faq">常见问题</a><a class="footer__navigation-link nav-item-hover" style="margin-left:4.5rem" href="/zh/companies">合作伙伴</a><a class="footer__navigation-link nav-item-hover" style="margin-left:4.5rem" href="/zh/challenge">挑战</a></div></div></footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script>
+  
+  
+  if(!(parseInt(navigator.doNotTrack) === 1 || parseInt(window.doNotTrack) === 1 || parseInt(navigator.msDoNotTrack) === 1 || navigator.doNotTrack === "yes")) {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  }
+  if (typeof ga === "function") {
+    ga('create', 'UA-135975842-1', 'fullstackopen.com', {});
+      
+      
+      
+      
+      
+      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/zh/part3/node_js_与_express";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-0adca4044b603e2980b3.js"],"app":["/app-5654e2c0e2e011166650.js"],"component---src-pages-404-js":["/component---src-pages-404-js-acdd2b854082872b85c1.js"],"component---src-pages-about-en-js":["/component---src-pages-about-en-js-e80fa4494e29208860dd.js"],"component---src-pages-about-es-js":["/component---src-pages-about-es-js-548a77edcf8860282da6.js"],"component---src-pages-about-fr-js":["/component---src-pages-about-fr-js-72c926817ac1bbd6b5e2.js"],"component---src-pages-about-js":["/component---src-pages-about-js-0c8c560113e9f53676ee.js"],"component---src-pages-about-ptbr-js":["/component---src-pages-about-ptbr-js-8bb7e7849fe86c34e4d6.js"],"component---src-pages-about-zh-js":["/component---src-pages-about-zh-js-1334e4eb2f567514b5e3.js"],"component---src-pages-challenge-en-js":["/component---src-pages-challenge-en-js-ad7b255152708856487e.js"],"component---src-pages-challenge-es-js":["/component---src-pages-challenge-es-js-b68956ee9b1d1fb7bcac.js"],"component---src-pages-challenge-fr-js":["/component---src-pages-challenge-fr-js-3e9ec90b7b1a680f460b.js"],"component---src-pages-challenge-js":["/component---src-pages-challenge-js-e7cb68010c620894f849.js"],"component---src-pages-challenge-ptbr-js":["/component---src-pages-challenge-ptbr-js-a5ab6d0707cea131ffb0.js"],"component---src-pages-challenge-zh-js":["/component---src-pages-challenge-zh-js-e36530e030cd5e551030.js"],"component---src-pages-companies-en-js":["/component---src-pages-companies-en-js-e390bd808fac3241e036.js"],"component---src-pages-companies-es-js":["/component---src-pages-companies-es-js-66f38f9f0c8e8b6c2c34.js"],"component---src-pages-companies-fr-js":["/component---src-pages-companies-fr-js-54001d9847e4ec6876c5.js"],"component---src-pages-companies-js":["/component---src-pages-companies-js-75fe6b5724c853dec1c6.js"],"component---src-pages-companies-ptbr-js":["/component---src-pages-companies-ptbr-js-0661801dad3e230d7e66.js"],"component---src-pages-companies-zh-js":["/component---src-pages-companies-zh-js-cb01411b8692f7b35cb7.js"],"component---src-pages-faq-en-js":["/component---src-pages-faq-en-js-d63a052c1a15b51b4e2d.js"],"component---src-pages-faq-es-js":["/component---src-pages-faq-es-js-bcff3542c712c88a6928.js"],"component---src-pages-faq-fr-js":["/component---src-pages-faq-fr-js-77fb34ae356ae091ab33.js"],"component---src-pages-faq-js":["/component---src-pages-faq-js-8393fda79721be032c12.js"],"component---src-pages-faq-ptbr-js":["/component---src-pages-faq-ptbr-js-544e30e1aa867562567d.js"],"component---src-pages-faq-zh-js":["/component---src-pages-faq-zh-js-9951a982a0a5980c61ee.js"],"component---src-pages-index-en-js":["/component---src-pages-index-en-js-159370e2dd6eb4dabcfa.js"],"component---src-pages-index-es-js":["/component---src-pages-index-es-js-d2edafadf60484808376.js"],"component---src-pages-index-fr-js":["/component---src-pages-index-fr-js-a0f9f784e32aefce7714.js"],"component---src-pages-index-js":["/component---src-pages-index-js-9b793b779ca2435dbaf9.js"],"component---src-pages-index-ptbr-js":["/component---src-pages-index-ptbr-js-c154627ba772165f5631.js"],"component---src-pages-index-zh-js":["/component---src-pages-index-zh-js-dca3a5c2195dbf67bb99.js"],"component---src-pages-search-en-js":["/component---src-pages-search-en-js-57acbe55825fbc71de61.js"],"component---src-pages-search-es-js":["/component---src-pages-search-es-js-e7d8bd2a6a201883295c.js"],"component---src-pages-search-fr-js":["/component---src-pages-search-fr-js-08502eec0ecae0702b24.js"],"component---src-pages-search-js":["/component---src-pages-search-js-6a7301a08fa1e893839d.js"],"component---src-pages-search-ptbr-js":["/component---src-pages-search-ptbr-js-ac35b648256abeaf4957.js"],"component---src-pages-search-zh-js":["/component---src-pages-search-zh-js-949409b392ed3c148fee.js"],"component---src-templates-content-template-js":["/component---src-templates-content-template-js-bb58d7a436b6b271b7c8.js"],"component---src-templates-part-intro-template-js":["/component---src-templates-part-intro-template-js-bd217283886de6d8a06c.js"]};/*]]>*/</script><script src="/polyfill-0adca4044b603e2980b3.js" nomodule=""></script><script src="/webpack-runtime-4afee23e377879f90d1c.js" async=""></script><script src="/styles-0ec71dd62c66cb95665c.js" async=""></script><script src="/framework-815fd14513c40a98f576.js" async=""></script><script src="/app-5654e2c0e2e011166650.js" async=""></script><script src="/commons-b72a010d93304da48478.js" async=""></script><script src="/0f38e1748197b5a213e89e1df6d5db13e5e7856d-0d0bac90b1f1083a53b7.js" async=""></script><script src="/881c8b7a675fce2ced9b02a4a469c0443336d5f7-8e4483d8931a6891bd9a.js" async=""></script><script src="/2d359d657f593a857b7e0d916f29b2126c86bebb-dcc47509ede0fcbd2a57.js" async=""></script><script src="/d2b1ca4b1069f7cfc0ac3ccd2306fbb8e76bcf35-b1e80b991af31a506d6d.js" async=""></script><script src="/component---src-templates-content-template-js-bb58d7a436b6b271b7c8.js" async=""></script></body></html>
