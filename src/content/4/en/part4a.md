@@ -376,7 +376,7 @@ const Note = require('../models/note')
 module.exports = notesRouter // highlight-line
 ```
 
-Because only one "thing" exported, it can only be imported and used as one object:
+Because only one "thing" is exported, it can only be imported and used as one object:
 
 ```js
 const notesRouter = require('./controllers/notes')
