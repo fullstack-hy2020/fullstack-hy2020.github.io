@@ -343,7 +343,7 @@ Agreguemos la regla [eqeqeq](https://eslint.org/docs/rules/eqeqeq) que nos alert
 
 Ya que estamos en eso, hagamos algunos otros cambios en las reglas.
 
-Evitemos los [espacios finales innecesarios](https://eslint.org/docs/rules/no-trailing-spaces) al final de las líneas, exijamos que [siempre haya un espacio antes y después de las llaves](https://eslint.org/docs/rules/object-curly-spacing), y exijamos también un uso consistente de espacios en blanco en los parámetros de función de las funciones de flecha.
+Evitemos los [espacios finales innecesarios](https://eslint.style/rules/no-trailing-spaces) al final de las líneas, exijamos que [siempre haya un espacio antes y después de las llaves](https://eslint.style/rules/object-curly-spacing), y exijamos también un uso consistente de espacios en blanco en los parámetros de función de las funciones de flecha.
 
 ```js
 {

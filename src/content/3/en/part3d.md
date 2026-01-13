@@ -384,7 +384,7 @@ export default [
 
 While we're at it, let's make a few other changes to the rules.
 
-Let's prevent unnecessary [trailing spaces](https://eslint.org/docs/rules/no-trailing-spaces) at the ends of lines, require that [there is always a space before and after curly braces](https://eslint.org/docs/rules/object-curly-spacing), and also demand a consistent use of whitespaces in the function parameters of arrow functions.
+Let's prevent unnecessary [trailing spaces](https://eslint.style/rules/no-trailing-spaces) at the ends of lines, require that [there is always a space before and after curly braces](https://eslint.style/rules/object-curly-spacing), and also demand a consistent use of whitespaces in the function parameters of arrow functions.
 
 ```js
 export default [

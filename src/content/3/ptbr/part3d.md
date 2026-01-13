@@ -330,7 +330,7 @@ Vamos adicionar a regra [eqeqeq](https://eslint.org/docs/rules/eqeqeq) que nos a
 
 Já que estamos configurando essa parte, vamos fazer algumas outras mudanças nas regras.
 
-Vamos evitar [espaços à direita (ou no final da cadeia)](https://eslint.org/docs/rules/no-trailing-spaces) (trailing spaces) ao final das linhas, exigir que [sempre haja um espaço antes e depois das chaves](https://eslint.org/docs/rules/object-curly-spacing) e também exigir um uso consistente de espaços em branco nos parâmetros de funções de seta.
+Vamos evitar [espaços à direita (ou no final da cadeia)](https://eslint.style/rules/no-trailing-spaces) (trailing spaces) ao final das linhas, exigir que [sempre haja um espaço antes e depois das chaves](https://eslint.style/rules/object-curly-spacing) e também exigir um uso consistente de espaços em branco nos parâmetros de funções de seta.
 
 ```js
 {

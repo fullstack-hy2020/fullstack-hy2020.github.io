@@ -459,8 +459,8 @@ export default [
 <!-- While we're at it, let's make a few other changes to the rules. -->
 让我们顺便对规则进行一些其他更改。
 
-<!-- Let's prevent unnecessary [trailing spaces](https://eslint.org/docs/rules/no-trailing-spaces) at the ends of lines, require that [there is always a space before and after curly braces](https://eslint.org/docs/rules/object-curly-spacing), and also demand a consistent use of whitespaces in the function parameters of arrow functions. -->
-让我们阻止行尾的不必要的[尾随空格](https://eslint.org/docs/rules/no-trailing-spaces)，要求[大括号前后始终有一个空格](https://eslint.org/docs/rules/object-curly-spacing)，并且也要求箭头函数的函数参数中一致使用空格。
+<!-- Let's prevent unnecessary [trailing spaces](https://eslint.style/rules/no-trailing-spaces) at the ends of lines, require that [there is always a space before and after curly braces](https://eslint.style/rules/object-curly-spacing), and also demand a consistent use of whitespaces in the function parameters of arrow functions. -->
+让我们阻止行尾的不必要的[尾随空格](https://eslint.style/rules/no-trailing-spaces)，要求[大括号前后始终有一个空格](https://eslint.style/rules/object-curly-spacing)，并且也要求箭头函数的函数参数中一致使用空格。
 
 ```js
 export default [

@@ -332,7 +332,7 @@ Ajoutons la règle [eqeqeq](https://eslint.org/docs/rules/eqeqeq) qui nous avert
 
 Pendant que nous y sommes, apportons quelques autres modifications aux règles.
 
-Empêchons les [espaces de fin](https://eslint.org/docs/rules/no-trailing-spaces) inutiles en fin de ligne, exigeons qu'[il y ait toujours un espace avant et après les accolades](https://eslint.org/docs/rules/object-curly-spacing), et exigeons également une utilisation cohérente des espaces dans les paramètres des fonctions flèches.
+Empêchons les [espaces de fin](https://eslint.style/rules/no-trailing-spaces) inutiles en fin de ligne, exigeons qu'[il y ait toujours un espace avant et après les accolades](https://eslint.style/rules/object-curly-spacing), et exigeons également une utilisation cohérente des espaces dans les paramètres des fonctions flèches.
 
 ```js
 {
