@@ -719,7 +719,7 @@ Other components can now access the context using the [useContext](https://react
 
 ```js
 import { useContext } from 'react' // highlight-line
-import CounterContext from './CounterContext' // highlight-line
+import CounterContext from '../CounterContext' // highlight-line
 
 const Display = () => {  // highlight-line
   const { counter } = useContext(CounterContext) // highlight-line
@@ -734,7 +734,7 @@ Similarly, the <i>Button</i> component becomes:
 
 ```js
 import { useContext } from 'react' // highlight-line
-import CounterContext from './CounterContext' // highlight-line
+import CounterContext from '../CounterContext' // highlight-line
 
 const Button = ({ type, label }) => {  // highlight-line
   const { counterDispatch } = useContext(CounterContext) // highlight-line
