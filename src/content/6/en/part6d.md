@@ -379,8 +379,9 @@ const App = () => {
     mutationFn: createNote,
     // highlight-start
     onSuccess: (newNote) => {
-      const notes = queryClient.getQueryData(['notes'])
-      queryClient.setQueryData(['notes'], notes.concat(newNote))
+      queryClient.setQueryData(['notes'], (oldNotes) =>
+        oldNotes.concat(newNote)
+      )
     // highlight-end
     }
   })
@@ -389,7 +390,7 @@ const App = () => {
 }
 ```
 
-That is, in the <i>onSuccess</i> callback, the <i>queryClient</i> object first reads the existing <i>notes</i> state of the query and updates it by adding a new note, which is obtained as a parameter of the callback function. The value of the parameter is the value returned by the function <i>createNote</i>, defined in the file <i>requests.js</i> as follows:
+That is, in the <i>onSuccess</i> callback, the <i>queryClient</i> object updates the existing <i>notes</i> state of the query by using the previous state and adding the new note to it. The previous state of the query is provided as a parameter to the updater function, and the new note is obtained as a parameter of the callback function. The value of the parameter is the value returned by the function <i>createNote</i>, defined in the file <i>requests.js</i> as follows:
 
 ```js
 export const createNote = async (newNote) => {
