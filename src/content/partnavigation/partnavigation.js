@@ -99,7 +99,7 @@ module.exports = {
     },
     5: {
       a: 'Login in frontend',
-      b: 'props.children and proptypes',
+      b: 'props.children and component refs',
       c: 'Testing React apps',
       d: 'End to end testing: Playwright',
       e: 'End to end testing: Cypress',
