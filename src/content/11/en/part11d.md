@@ -329,7 +329,7 @@ It would also be possible to install a tool such as [act](https://github.com/nek
 
 When using a third-party action such that <i>github-tag-action</i> it might be a good idea to specify the used version with hash instead of using a version number. The reason for this is that the version number, that is implemented with a Git tag can in principle be <i>moved</i>. So today's version 1.61.0 might be a different code that is at next week the version 1.61.0! 
 
-However, the code in a commit with a particular hash does not change in any circumstances, so if we want to be 100% sure about the code we use, it is safest to use the hash. 
+However, the code in a commit with a particular hash does not change in any circumstances, so if we want to be 100% sure about the code we use, it is safest to use the hash. GUID is a random value that in not guaranteed unique. GUID would have a risk of reuse with the other identity values, in some scenario collision has proven to happen that isn't the case of version numbers of one software. [Stack overflow](https://stackoverflow.com/questions/39771/is-a-guid-unique-100-of-the-time) has more conversation about the possibility of duplicate value in practical manner.
 
 Version [1.61.0](https://github.com/anothrNick/github-tag-action/releases/tag/1.61.0) of the action corresponds to a commit with hash <code>8c8163ef62cf9c4677c8e800f36270af27930f42</code>, so we might want to change our configuration as follows:
 
