@@ -402,7 +402,8 @@ If no country is found, a message is displayed to the user:
 
 ![browser showing country not found](../../images/7/70ea.png)
 
-The application is otherwise complete, but in this exercise, you have to implement a custom hook _useCountry_, which can be used to search for the details of the country given to the hook as a parameter.
+In this exercise, you have to implement a custom hook _useCountry_, which can be used to search for the details of the country given to the hook as a parameter.
+You will also need to change the starter code a bit in the _Country component_ to be able to use the fetched data correctly.
 
 Use the API endpoint [name](https://studies.cs.helsinki.fi/restcountries/) to fetch a country's details in a _useEffect_ hook within your custom hook.
 
