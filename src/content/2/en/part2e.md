@@ -541,7 +541,7 @@ const App = () => {
 }
 ```
 
-The useEffect hook now has _[currency]_ as the second parameter. The effect function is therefore executed after the first render, and <i>always</i> after the table as its second parameter _[currency]_ changes. That is, when the state _currency_ gets a new value, the content of the table changes and the effect function is executed.
+The useEffect hook now has _[currency]_ as the second parameter. The effect function is therefore executed after the first render, and <i>always</i> after the dependency array as its second parameter _[currency]_ changes. That is, when the state _currency_ gets a new value, the content of the dependency array changes and the effect function is executed.
 
 It is natural to choose _null_ as the initial value for the variable _currency_, because _currency_ represents a single item. The initial value _null_ indicates that there is nothing in the state yet, and it is also easy to check with a simple if statement whether a value has been assigned to the variable. The effect has the following condition
 
