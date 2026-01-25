@@ -708,9 +708,9 @@ If the <i>important</i> property is missing, we will default the value to <i>fal
 important: body.important || false,
 ```
 
-If the data saved in the _body_ variable has the <i>important</i> property, the expression will evaluate its value and convert it to a boolean value. If the property does not exist, then the expression will evaluate to false which is defined on the right-hand side of the vertical lines.
+If the data saved in the _body_ variable has the <i>important</i> property and its value is [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy), the expression will evaluate to that value. If the property does not exist, its value will be <i>undefined</i>, which is [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy), and the expression will therefore evaluate to false, which is defined on the right-hand side of the vertical lines.
 
-> To be exact, when the <i>important</i> property is <i>false</i>, then the <em>body.important || false</em> expression will in fact return the <i>false</i> from the right-hand side...
+> To be exact, when the <i>important</i> property is <i>false</i>, then the <em>body.important || false</em> expression will in fact return the <i>false</i> from the right-hand side. If the property has any truthy value, that value itself will be returned.
 
 You can find the code for our current application in its entirety in the <i>part3-1</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1).
 
