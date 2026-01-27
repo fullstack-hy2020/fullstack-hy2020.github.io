@@ -185,10 +185,15 @@ We can add any React elements we want between the opening and closing tags of <i
 
 The code for the <i>Togglable</i> component is shown below:
 
-```js
-import { useState } from 'react'
+Motivation: Currently, the material explains how to use useImperativeHandle but misses the crucial step of wrapping 
+the component in forwardRef. In modern React, failing to do so results in a TypeError: Cannot read properties of undefined (reading 'toggleVisibility').
 
-const Togglable = (props) => {
+Changes: Added a code example about forwardRef to ensure students don't encounter this crash when following the tutorial.
+
+```js
+import { useState, useImperativeHandle, forwardRef } from 'react'
+
+const Togglable = forwardRef((props, ref) => {
   const [visible, setVisible] = useState(false)
 
   const hideWhenVisible = { display: visible ? 'none' : '' }
@@ -197,6 +202,12 @@ const Togglable = (props) => {
   const toggleVisibility = () => {
     setVisible(!visible)
   }
+
+  useImperativeHandle(ref, () => {
+    return {
+      toggleVisibility
+    }
+  })
 
   return (
     <div>
@@ -209,7 +220,7 @@ const Togglable = (props) => {
       </div>
     </div>
   )
-}
+})
 
 export default Togglable
 ```
