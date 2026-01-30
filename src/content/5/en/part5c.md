@@ -674,7 +674,7 @@ await user.type(inputs[0], 'testing a form...')
 
 Method <i>getAllByRole</i> now returns an array and the right input field is the first element of the array. However, this approach is a bit suspicious since it relies on the order of the input fields.
 
-If an <i>label</i> were defined for the input field, the input field could be located using it with the getByLabelText method. For example, if we added a label to the input field:
+If a <i>label</i> were defined for the input field, the input field could be located using it with the getByLabelText method. For example, if we added a label to the input field:
 
 ```js
   // ...
