@@ -7,6 +7,24 @@ lang: fi
 
 <div class="content">
 
+Tämä osa on tehty käyttäen React 19 -versiota, ja jotkin tämän luvun esittelemistä Reactin ominaisuuksista eivät toimi Reactin vanhemmilla versioilla. Kurssin aiemmat osat on kirjoitettu käyttäen Reactin versiota 18, joten varmista, että projektiisi on nyt asennettuna Reactin versio 19. 
+
+Voit tarkistaa <i>package.json</i>-tiedostosta, että käytössä on versio 19 kirjastoista <i>react</i> ja <i>react-dom</i>:
+
+```json
+{
+  // ...
+  "dependencies": {
+    "axios": "^1.9.0",
+    "react": "^19.1.0", // highlight-line
+    "react-dom": "^19.1.0" // highlight-line
+  },
+  // ...
+}
+```
+
+Suorita lisäksi komento _npm install_, jolloin <i>package.json</i>-tiedoston mukaiset versiot asennetaan riippuvuuksiksi. Tämä on välttämätöntä esimerkiksi, jos olet kloonannut esimerkkirepositorion kurssin aiemmassa vaiheessa, jolloin käytössä on ollut vielä Reactin vanhempi versio.
+
 ### Kirjautumislomakkeen näyttäminen vain tarvittaessa
 
 Muutetaan sovellusta siten, että kirjautumislomaketta ei oletusarvoisesti näytetä:

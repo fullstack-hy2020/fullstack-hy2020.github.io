@@ -7,6 +7,24 @@ lang: en
 
 <div class="content">
 
+This section has been written using React 19, and some of the React features introduced in this chapter do not work with older versions of React. The earlier parts of the course were written using React version 18, so make sure that your project now has React version 19 installed.
+
+You can check the <i>package.json</i> file to verify that version 19 of the <i>react</i> and <i>react-dom</i> libraries are in use:
+
+```json
+{
+  // ...
+  "dependencies": {
+    "axios": "^1.9.0",
+    "react": "^19.1.0", // highlight-line
+    "react-dom": "^19.1.0" // highlight-line
+  },
+  // ...
+}
+```
+
+Also run the command _npm install_, which installs the dependencies according to the <i>package.json</i> file. This is necessary if, for example, you cloned the example repository at an earlier stage of the course, when an older version of React was still in use.
+
 ### Displaying the login form only when appropriate
 
 Let's modify the application so that the login form is not displayed by default:

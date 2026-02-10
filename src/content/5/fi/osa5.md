@@ -10,6 +10,7 @@ Tässä osassa palataan frontendin pariin, ensin tarkastellaan erilaisia tarjoll
 
 <i>Osa päivitetty 21.8.2025</i>
 
+- <i>Node päivitetty versioon v22.3.0</i>
 - <i>React-versio päivitetty v18 -> v19. Proptypes ja forwardRef poistuneet käytöstä</i>
 - <i>Kirjautumislomakkeen kentille on lisätty label-elementti ja käytetty sitä myöhemmin testeissä kenttien identifiointiin</i>
 - <i>.eslintrc.cjs korvattu eslint.config.js-tiedostolla</i>

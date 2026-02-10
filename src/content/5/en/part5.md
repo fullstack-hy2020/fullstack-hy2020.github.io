@@ -10,6 +10,7 @@ In this part we return to the frontend, first looking at different possibilities
 
 <i>Section updated 21st August 2025</i>
 
+- <i>Node updated to version v22.3.0</i>
 - <i>React version updated from v18 to v19. PropTypes and forwardRef has deprecated</i>
 - <i>A label element has been added to the login form fields and used later in tests to identify the fields</i>
 - <i>.eslintrc.cjs replaced with eslint.config.js file</i>
