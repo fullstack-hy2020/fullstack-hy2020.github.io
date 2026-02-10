@@ -25,7 +25,7 @@ The <em>HelloWorld</em> component returns a single <i>div</i> element which is c
 React.createElement('div', null, 'Hello world!');
 ```
 
-This line of code creates a <i>div</i> element without any props and with a single child element which is a string <i>"Hello world"</i>. When we render this component into a root DOM element using the <em>ReactDOM.render</em> method the <i>div</i> element will be rendered as the corresponding DOM element.
+This line of code creates a <i>div</i> element without any props and with a single child element which is a string <i>"Hello world"</i>. When we render this component into a root DOM element using the <em>render</em> method the <i>div</i> element will be rendered as the corresponding DOM element.
 
 As we can see, React is not bound to a certain environment, such as the browser environment. Instead, there are libraries such as ReactDOM that can render <i>a set of predefined components</i>, such as DOM elements, in a specific environment. In React Native these predefined components are called <i>core components</i>.
 
@@ -64,7 +64,24 @@ const PressableText = props => {
 };
 ```
 
-Now that we have a basic understanding of the core components, let's start to give our project some structure. Create a <i>src</i> directory in the root directory of your project and in the <i>src</i> directory create a <i>components</i> directory. In the <i>components</i> directory create a file <i>Main.jsx</i> with the following content:
+### Installing dependencies in Expo project
+
+In the earlier parts of the course, we have mainly installed libraries as project dependencies using the _npm install_ command. However, when installing Expo and React Native libraries, it is recommended to use the _npx expo install_ command instead. This allows the Expo CLI to choose a version of the library that matches the project and its SDK version.
+
+We will soon need the <i>expo-constants</i> library, which provides the application with environment information such as the correct status bar height. Install the library with the command:
+
+```shell
+npx expo install expo-constants
+```
+
+If you’re not sure whether a library contains Expo or React Native specific native code, you can always install it using _npx expo install_ command. If Expo doesn’t recognize the package, it will fall back to installing it using the normal _npm install_ command.
+
+
+### Structuring our project
+
+Now that we have a basic understanding of the core components, let's start to give our project some structure. Create a <i>src</i> directory in the root directory of your project and in the <i>src</i> directory create a <i>components</i> directory.
+
+In the <i>components</i> directory create a file <i>Main.jsx</i> with the following content:
 
 ```javascript
 import Constants from 'expo-constants';
@@ -73,8 +90,7 @@ import { Text, StyleSheet, View } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     marginTop: Constants.statusBarHeight,
-    flexGrow: 1,
-    flexShrink: 1,
+    flex: 1,
   },
 });
 
@@ -103,9 +119,10 @@ export default App;
 
 ### Manually reloading the application
 
-As we have seen, Expo will automatically reload the application when we make changes to the code. However, there might be times when automatic reload isn't working and the application has to be reloaded manually. This can be achieved through the in-app developer menu.
+As we have seen, Expo will automatically reload the application when we make changes to the code. However, there might be times when automatic reload isn't working and the application has to be reloaded manually. In Expo CLI, you can press _r_ to reload; this usually triggers a reload.
 
-You can access the developer menu by shaking your device or by selecting "Shake Gesture" inside the Hardware menu in the iOS Simulator. You can also use the <em>⌘D</em> keyboard shortcut when your app is running in the iOS Simulator, or <em>⌘M</em> when running in an Android emulator on Mac OS and <em>Ctrl+M</em> on Windows and Linux.
+
+This can also be achieved through the in-app developer menu. You can access the developer menu by shaking your device or by selecting "Shake Gesture" inside the Hardware menu in the iOS Simulator. You can also use the <em>⌘D</em> keyboard shortcut when your app is running in the iOS Simulator, or <em>⌘M</em> when running in an Android emulator on Mac OS and <em>Ctrl+M</em> on Windows and Linux.
 
 Once the developer menu is open, simply press "Reload" to reload the application. After the application has been reloaded, automatic reloads should work without the need for a manual reload.
 
@@ -117,7 +134,7 @@ Once the developer menu is open, simply press "Reload" to reload the application
 
 #### Exercise 10.3: the reviewed repositories list
 
-In this exercise, we will implement the first version of the reviewed repositories list. The list should contain the repository's full name, description, language, number of forks, number of stars, rating average and number of reviews. Luckily React Native provides a handy component for displaying a list of data, which is the [FlatList](https://reactnative.dev/docs/flatlist) component.
+In this exercise, we will implement the first version of the reviewed repositories list. The list should contain the repository's full name, description, language, number of stars, number of forks, number of reviews, and rating average. Luckily React Native provides a handy component for displaying a list of data, which is the [FlatList](https://reactnative.dev/docs/flatlist) component.
 
 Implement components <em>RepositoryList</em> and <em>RepositoryItem</em> in the <i>components</i> directory's files <i>RepositoryList.jsx</i> and <i>RepositoryItem.jsx</i>. The <em>RepositoryList</em> component should render the <em>FlatList</em> component and <em>RepositoryItem</em> a single item on the list (hint: use the <em>FlatList</em> component's [renderItem](https://reactnative.dev/docs/flatlist#required-renderitem) prop). Use this as the basis for the <i>RepositoryList.jsx</i> file:
 
@@ -256,7 +273,7 @@ We create two named style objects, <em>styles.container</em> and <em>styles.text
 In addition to an object, the <em>style</em> prop also accepts an array of objects. In the case of an array, the objects are merged from left to right so that latter-style properties take precedence. This works recursively, so we can have for example an array containing an array of styles and so forth. If an array contains values that evaluate to false, such as <em>null</em> or <em>undefined</em>, these values are ignored. This makes it easy to define <i>conditional styles</i> for example, based on the value of a prop. Here is an example of conditional styles:
 
 ```javascript
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   text: {
@@ -296,7 +313,33 @@ const Main = () => {
 };
 ```
 
-In the example, we use the <em>&&</em> operator with the expression <em>condition && exprIfTrue</em>. This expression yields <em>exprIfTrue</em> if the <em>condition</em> evaluates to true, otherwise it will yield <em>condition</em>, which in that case is a value that evaluates to false. This is an extremely widely used and handy shorthand. Another option would be to use the [conditional operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) like this:
+Props are now defined without an explicit value:
+
+```js
+<FancyText isBlue>Blue text</FancyText>
+```
+
+In JSX, providing a prop without a value is special syntax that means the same as ={true}. The following lines are therefore equivalent:
+
+```js
+<FancyText isBlue>Blue text</FancyText>
+<FancyText isBlue={true}>Blue text</FancyText>
+```
+
+In the example, we use the <em>&&</em> operator with the expression <em>condition && exprIfTrue</em>:
+
+
+```js
+  const textStyles = [
+    styles.text,
+    isBlue && styles.blueText, // highlight-line
+    isBig && styles.bigText,
+  ];
+```
+
+ For example, in the highlighted line, the expression yields <em>styles.blueText</em> if the condition _isBlue_ evaluates to true, otherwise it will yield <em>condition</em>, which in that case is a value that evaluates to false. This is an extremely widely used and handy shorthand.
+ 
+ Another option would be to use the [conditional operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) like this:
 
 ```js
 condition ? exprIfTrue : exprIfFalse
@@ -515,6 +558,37 @@ In the image, the <em>Main</em> component's background color is set to <em>#e1e4
 
 <div class="content">
 
+### Status bar style
+
+We chose a dark background color for the <i>AppBar</i> component. The problem now is that the status bar icons—such as the clock and battery status—don’t stand out very well:
+
+![Status bar with dark style](../../images/10/29.png)
+
+We already installed the <i>expo-status-bar</i> library when configuring Expo earlier. The problem is easy to fix by adding the _StatusBar_ component to the <i>App.js</i> file:
+
+```js
+import { StatusBar } from 'expo-status-bar'; // highlight-line
+
+import Main from './src/components/Main';
+
+const App = () => {
+  // highlight-start
+  return (
+    <>
+      <StatusBar style="light" />
+      <Main />
+    </>
+  );
+  // highlight-end
+};
+
+export default App;
+```
+
+The _StatusBar_ component tells the operating system how to render the status bar. By setting its style to <i>light</i>, the status bar icons become easier to see against a dark background:
+
+![Status bar with light style](../../images/10/30.png)
+
 ### Routing
 
 When we start to expand our application we will need a way to transition between different views such as the repositories view and the sign-in view. In [part 7](/en/part7/react_router) we got familiar with [React router](https://reactrouter.com/) library and learned how to use it to implement routing in a web application.
@@ -537,14 +611,14 @@ import Main from './src/components/Main';
 
 const App = () => {
   return (
-    // highlight-start
     <>
+      <StatusBar style="auto" />
+      // highlight-start
       <NativeRouter>
         <Main />
       </NativeRouter>
-      <StatusBar style="auto" />
+      // highlight-end
     </>
-    // highlight-end
   );
 };
 
@@ -564,8 +638,7 @@ import theme from '../theme';
 const styles = StyleSheet.create({
   container: {
     backgroundColor: theme.colors.mainBackground,
-    flexGrow: 1,
-    flexShrink: 1,
+    flex: 1,
   },
 });
 
@@ -642,8 +715,13 @@ The main concepts of Formik are the <i>context</i> and the <i>field</i>. However
 
 There are some restrictions concerning the use of UseFormik(). Read this to become familiar with [useFormik()](https://formik.org/docs/api/useFormik)
 
+Let's first install Formik:
 
-Let's see how this works by creating a form for calculating the [body mass index](https://en.wikipedia.org/wiki/Body_mass_index):
+```shell
+npm install formik
+```
+
+Let's see how the state management with Formik works by creating a form for calculating the [body mass index](https://en.wikipedia.org/wiki/Body_mass_index):
 
 ```javascript
 import { Text, TextInput, Pressable, View } from 'react-native';
@@ -700,10 +778,9 @@ export default BodyMassIndexCalculator;
 
 ```
 
-This example is not part of our application, so you don't need to add this code to the application. You can however try it out for example in [Expo Snack](https://snack.expo.io/). Expo Snack is an online editor for React Native, similar to [JSFiddle](https://jsfiddle.net/) and [CodePen](https://codepen.io/). It is a useful platform for quickly trying out code. You can share Expo Snacks with others using a link or embedding them as a <i>Snack Player</i> on a website. You might have bumped into Snack Players for example in this material and React Native documentation.
+This example is not part of our application, so you don't need to add this code to the application. You can however try it out for example in [Expo Snack](https://snack.expo.io/). Expo Snack is an online editor for React Native, similar to [JSFiddle](https://jsfiddle.net/) and [CodePen](https://codepen.io/). It is a useful platform for quickly trying out code. Note that you also need to add Formik as a dependency in Expo Snack. You can do this by adding the dependency directly to the <i>package.json</i> file, for example the line: _"formik": "^2.4.9"_.
 
-
-
+You can share Expo Snacks with others using a link or embedding them as a <i>Snack Player</i> on a website. You might have bumped into Snack Players for example in this material and React Native documentation.
 
 
 </div>
@@ -721,13 +798,6 @@ const onSubmit = (values) => {
   console.log(values);
 };
 ```
-
-The first step is to install Formik:
-
-```shell
-npm install formik
-```
-
 
 You can use the [secureTextEntry](https://reactnative.dev/docs/textinput#securetextentry) prop in the <em>TextInput</em> component to obscure the password input.
 
@@ -787,20 +857,24 @@ const BodyMassIndexForm = ({ onSubmit }) => {
         placeholder="Weight (kg)"
         value={formik.values.mass}
         onChangeText={formik.handleChange('mass')}
-        onBlur={formik.handleBlur('mass')}
+        onBlur={formik.handleBlur('mass')} // highlight-line
       />
+      // highlight-start
       {formik.touched.mass && formik.errors.mass && (
         <Text style={{ color: 'red' }}>{formik.errors.mass}</Text>
       )}
+      // highlight-end
       <TextInput
         placeholder="Height (m)"
         value={formik.values.height}
         onChangeText={formik.handleChange('height')}
-        onBlur={formik.handleBlur('height')}
+        onBlur={formik.handleBlur('height')} // highlight-line
       />
+      // highlight-start
       {formik.touched.height && formik.errors.height && (
         <Text style={{ color: 'red' }}>{formik.errors.height}</Text>
       )}
+      // highlight-end
       <Pressable onPress={formik.handleSubmit}>
         <Text>Calculate</Text>
       </Pressable>
@@ -810,19 +884,18 @@ const BodyMassIndexForm = ({ onSubmit }) => {
 
 const BodyMassIndexCalculator = () => {
   // ...
-
-
+}
 ```
 
 Be aware that you need to include these Text components within the View returned by the form to display the validation errors:
 
-```
+```js
  {formik.touched.mass && formik.errors.mass && (
   <Text style={{ color: 'red' }}>{formik.errors.mass}</Text>
  )}
 ```
 
-```
+```js
  {formik.touched.height && formik.errors.height && (
   <Text style={{ color: 'red' }}>{formik.errors.height}</Text>
  )}
@@ -863,7 +936,6 @@ A big benefit of React Native is that we don't need to worry about whether the a
 We can access the user's platform through the <em>Platform.OS</em> constant:
 
 ```javascript
-import { React } from 'react';
 import { Platform, Text, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
