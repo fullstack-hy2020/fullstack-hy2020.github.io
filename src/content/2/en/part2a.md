@@ -413,16 +413,16 @@ import App from "./App"
 
 Let's move our <i>Note</i> component into its own module.
 
-In smaller applications, components are usually placed in a directory called <i>components</i> within the <i>src</i> directory. The convention is to name the file after the component.
+In smaller applications, components are usually placed in a directory called <i>components</i> within the <i>src</i> directory. The convention is to name the file after the component. A possible directory structure for a project containing multiple components could be as follows:
 
 ```shell
 src/
-├── main.jsx          # Entry point
-├── App.jsx           # Main App component  
-└── components/       # All reusable components
-    ├── Note.jsx      # Named after the component
-    ├── Header.jsx
-    └── Footer.jsx
+├── main.jsx
+├── App.jsx
+└── components/           # Folder for reusable components
+    ├── Footer.jsx        # File named after the component
+    ├── Note.jsx
+    └── Notification.jsx
 ```
 
 Now, we'll create a directory called <i>components</i> for our application and place a file named <i>Note.jsx</i> inside. The contents of the file are as follows:

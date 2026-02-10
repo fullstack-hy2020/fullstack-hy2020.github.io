@@ -405,7 +405,17 @@ import App from "./App"
 
 Siirretään nyt <i>Note</i>-komponentti omaan moduuliinsa.
 
-Pienissä sovelluksissa komponentit sijoitetaan yleensä <i>src</i>-hakemiston alle sijoitettavaan hakemistoon <i>components</i>. Konventiona on nimetä tiedosto komponentin mukaan. 
+Pienissä sovelluksissa komponentit sijoitetaan yleensä <i>src</i>-hakemiston alle sijoitettavaan hakemistoon <i>components</i>. Konventiona on nimetä tiedosto komponentin mukaan. Useita komponentteja sisältävän projektin hakemistorakenne voisi olla siis esimerkiksi seuraava:
+
+```shell
+src/
+├── main.jsx
+├── App.jsx
+└── components/           # Kansio uudelleenkäytettäville komponenteille
+    ├── Footer.jsx        # Tiedosto nimetty komponentin mukaan
+    ├── Note.jsx
+    └── Notification.jsx
+```
 
 Tehdään nyt sovellukseen hakemisto <i>components</i> ja sinne tiedosto <i>Note.jsx</i>, jonka sisältö on seuraava:
 
