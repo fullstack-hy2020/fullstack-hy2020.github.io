@@ -107,7 +107,7 @@ When you have finished setting up the emulator, start it so that you can see the
 
 In addition to emulators, there is one extremely useful way to develop React Native applications with Expo: the Expo Go app. With Expo Go, you can preview your application using your actual mobile device, which provides a bit more concrete development experience compared to emulators. For the easiest setup, keep your mobile device on the same local network (e.g. the same Wi-Fi) as your development machine.
 
-To get started, install [Expo Go](https://expo.dev/go). To keep everything running as smoothly as possible, choose the same SDK version that was installed for Expo in your development environment — in this case, SDK 54. When Expo Go has finished installing, open it up. 
+To get started, install [Expo Go](https://expo.dev/go). To keep everything running as smoothly as possible, choose the same SDK version that was installed for Expo in your development environment — in this case, SDK 54. It’s recommended to disable automatic updates for the app in the app store, as the app version must match the SDK version in use, and updates may break compatibility.
 
 Next, if the Expo development tools are not already running, start them by running <em>npm start</em>. You should be able to see a QR code at the beginning of the command output. Open the app by scanning the QR code in Expo Go. Expo Go should start building the JavaScript bundle and after it is finished you should be able to see your application. Now, every time you want to reopen your application in Expo Go, you should be able to access the application without scanning the QR code by pressing it in the <i>Recently opened</i> list in the <i>Projects</i> view.
 
