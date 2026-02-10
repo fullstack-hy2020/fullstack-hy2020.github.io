@@ -1611,7 +1611,7 @@ export const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
 };
 ```
 
-With the help from [documentation](https://zod.dev/ERROR_HANDLING) we could also improve the error handling:
+With the help from [documentation](https://zod.dev/basics?id=handling-errors) we could also improve the error handling:
 
 ```js
 router.post('/', (req, res) => {
