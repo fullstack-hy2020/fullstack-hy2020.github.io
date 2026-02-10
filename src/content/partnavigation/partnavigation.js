@@ -31,7 +31,7 @@ module.exports = {
     },
     5: {
       a: 'Kirjautuminen frontendissä',
-      b: 'props.children ja proptypet',
+      b: 'props.children ja komponentin ref',
       c: 'React-sovellusten testaaminen',
       d: 'End to end -testaus: Playwright',
       e: 'End to end -testaus: Cypress',
@@ -188,7 +188,7 @@ module.exports = {
     },
     5: {
       a: '完成前端的登录功能',
-      b: 'props.children 与 proptypes',
+      b: 'props.children 与 component refs',
       c: '测试React 应用',
       d: '端到端测试：Playwright',
       e: '端到端测试：Cypress',
@@ -276,7 +276,7 @@ module.exports = {
     },
     5: {
       a: 'Iniciar sesión en la interfaz',
-      b: 'props.children y proptypes',
+      b: 'props.children y la ref del componente',
       c: 'Probando aplicaciones React',
       d: 'Pruebas de extremo a extremo: Playwright',
       e: 'Pruebas de extremo a extremo: Cypress',
