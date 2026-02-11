@@ -133,7 +133,7 @@ Now that we are somewhat familiar with the development environment let's enhance
 npm install --save-dev eslint @babel/eslint-parser eslint-plugin-react eslint-plugin-react-native
 ```
 
-Next, let's add a <i>.eslintrc.json</i> file in the <i>rate-repository-app</i> directory with the ESLint configuration into the following content:
+Next, let's add a <i>eslint.config.mjs</i> file in the <i>rate-repository-app</i> directory with the ESLint configuration into the following content:
 
 ```javascript
 {
@@ -169,6 +169,14 @@ And finally, let's add a <em>lint</em> script to the <i>package.json</i> file to
   },
   // ...
 }
+```
+
+> [! NOTE]
+> in the event that  <em>npm run lint</em> produces this error message <em>ESLint couldn't find an eslint.config.(js|mjs|cjs) file. </em>
+
+Run this migration 
+```shell 
+npx @eslint/migrate-config .eslintrc.json
 ```
 
 Now we can check that the linting rules are obeyed in JavaScript files in the <i>src</i> directory and in the <i>App.js</i> file by running <em>npm run lint</em>. We will be adding our future code to the <i>src</i> directory but because we haven't added any files there yet, we need the <eM>no-error-on-unmatched-pattern</em> flag. Also if possible integrate ESLint with your editor. If you are using Visual Studio Code you can do that by, going to the extensions section and checking that the ESLint extension is installed and enabled:
