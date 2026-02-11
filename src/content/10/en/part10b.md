@@ -803,7 +803,7 @@ You can use the [secureTextEntry](https://reactnative.dev/docs/textinput#securet
 
 The sign-in form should look something like this:
 
-![Application preview](../../images/10/19.jpg)
+![Application preview](../../images/10/19a.jpg)
 
 </div>
 
@@ -921,7 +921,7 @@ On top of the red error message, give an invalid field a visual indication of an
 
 Here's what the sign-in form should roughly look like with an invalid field:
 
-![Application preview](../../images/10/8.jpg)
+![Application preview](../../images/10/8a.jpg)
 
 The red color used in this implementation is <em>#d73a4a</em>.
 
