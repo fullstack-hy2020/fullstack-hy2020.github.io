@@ -377,6 +377,8 @@ The reason for this is, that *Number('lol')* returns *NaN*, which is actually of
 
 To prevent this kind of behavior, we have to validate the data given to us from the command line.
 
+(Note that command line arguments start from process.argv[2], as index 0 is the Node binary path and index 1 is the script path.)
+
 The improved version of the multiplicator looks like this:
 
 ```js
