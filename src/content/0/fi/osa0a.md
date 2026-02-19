@@ -119,11 +119,7 @@ Lisätietoja osan esitietovaatimuksista ja tehtävien palauttamisesta löydät [
 
 #### Osa 13 - Full Stack  ‑websovelluskehitys: relaatiotietokannat (1 op, CSM14114)
 
-Suorittamalla kaikki kurssin kolmannentoista, relaatiotietokantojen käyttöä käsittelevän osan tehtävät, voit laajentaa suoritustasi yhdellä opintopisteellä.
-Lisätietoja osan esitietovaatimuksista ja tehtävien palauttamisesta löydät [osasta 13](/osa13).
--	Tee kaikki tehtävät osasta 13.
--	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-be8081bc-e7c1-4d82-9d7c-f1fbc3a519bc)
--	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
+Materiaali siirretty osoitteeseen <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-relational-databases">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-relational-databases</a>.
 
 ### Suoritusohjeet pähkinänkuoressa
 
@@ -137,7 +133,7 @@ Kurssin suoritusohjeet pähkinänkuoressa (5 op ydinkurssi CSM141081)
 
 Kurssin suoritusohjeet pähkinänkuoressa (Osat 6–13) 
 
-- Tee tehtävät. Palauta vastauksesi palautussovelluksen kautta. Huomaa, että osat 8–13 palautetaan palautussovelluksessa erillisiin kurssi-instansseihin.
+- Tee tehtävät. Palauta vastauksesi palautussovelluksen kautta. Huomaa, että osat 8–12 palautetaan palautussovelluksessa erillisiin kurssi-instansseihin. Lue osan 13 käytänteistä osan <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-relational-databases">materiaalista</a>.
 - Ilmoittaudu kurssille. Pääset ilmoittautumaan kurssimateriaalista (ks. [Osat ja suorittaminen](/osa0/yleista#osat-ja-suorittaminen)) löytyvän ilmoittautumislinkin kautta.  Ilmoittaudu erikseen kuhunkin osaan. 
 - Pyydä suoritusmerkintää palautussovelluksessa. Lue lisää [täältä](/osa0/yleista#suoritusmerkinnan-pyytaminen)
 

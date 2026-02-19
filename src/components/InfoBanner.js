@@ -45,11 +45,17 @@ const InfoBanner = ({ visible, onHide }) => {
   return (
     <div style={style}>
       <div style={textStyle}>
-        <p style={{ marginBottom: 20 }}>
-          A new exercise has been added at the end of Part 9 "Typing an Express
-          app" at 28th August 2024. Because of that numbering of the Exercises
-          9.14- has changed.
-        </p>
+        <div style={{ marginBottom: 20 }}>
+          <div style={{ marginBottom: 10 }}>
+            Material of Part 13 has been moved to <a style={linkStyle} href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-relational-databases">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-relational-databases</a>
+          </div>
+          <div style={{ marginBottom: 10 }}>
+            The content and exercises are still same, there is a change how exercises are submitted.
+          </div>
+          <div>
+            The old content is still found <a style={linkStyle} href="https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/tree/7599b17c02b056fcad4f12d8708f0e07980b7564/src/content/13">here</a>. 
+          </div>
+        </div>
       </div>
       <div style={buttonDiv}>
         <button style={buttonStyle} onClick={onHide}>

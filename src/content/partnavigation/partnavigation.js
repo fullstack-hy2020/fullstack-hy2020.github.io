@@ -61,11 +61,7 @@ module.exports = {
     10: {},
     11: {},
     12: {},
-    13: {
-      a: 'Relaatiotietokannan käyttö Sequelize-kirjastolla',
-      b: 'Liitostaulut ja -kyselyt',
-      c: 'Migraatiot, monen suhde moneen -yhteydet',
-    },
+    13: {},
   },
   en: {
     0: {
@@ -150,11 +146,7 @@ module.exports = {
       b: 'Building and configuring environments',
       c: 'Basics of Orchestration',
     },
-    13: {
-      a: 'Using relational databases with Sequelize',
-      b: 'Join tables and queries',
-      c: 'Migrations, many-to-many relationships',
-    },
+    13: {},
   },
   zh: {
     0: {

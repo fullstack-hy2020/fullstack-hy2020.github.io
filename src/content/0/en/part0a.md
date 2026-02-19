@@ -164,11 +164,7 @@ By submitting all exercises for part 12 of the course on Container technology, y
 
 #### Part 13 - Full Stack Web Development: Relational databases (1 cr, CSM14114)
 
-By submitting all exercises for part 13 of the course on Relational databases, you can earn one additional credit. More information about this part's prerequisites and exercise submission can be found in [part 13](/en/part13).
-
-- Submit all exercises for part 13.
-- [Enroll in part 13 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-be8081bc-e7c1-4d82-9d7c-f1fbc3a519bc).
-- [Request credits for part 13](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
+Material of part 13 has been moved to <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-relational-databases">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-relational-databases</a>. All practicalities are explained there.
 
 ### Studying the course in a nutshell
 
@@ -186,7 +182,7 @@ Please note that if you do the "base course" with 6 or 7 credits, you need separ
 
 How to study the course – instructions in a nutshell: other course parts
 
-- Do the exercises. The exercises are submitted through GitHub and marking them as done on the submission system. Note that parts 8-13 have a separate instance in the submission system
+- Do the exercises. The exercises are submitted through GitHub and marking them as done on the submission system. Note that parts 8-12 have a separate instance in the submission system, part 13 has a different system of exercise submissions
     - [The course certificate](/en/part0/general_info#course-certificate) will be available in the submission system
 - If you want to get University of Helsinki credits
     - Enroll in the course. You can enroll in each part through the link in the course material ([Parts and completion](/en/part0/general_info#parts-and-completion)). Enroll in each part separately.
