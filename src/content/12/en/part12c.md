@@ -7,14 +7,14 @@ lang: en
 
 <div class="tasks">
 
-The part was updated 21th Mar 2024: Create react app was replaced with Vite in the todo-frontend.
+The part was updated on 21st March 2024: Create react app was replaced with Vite in the todo-frontend.
 
-If you started the part before the update, you can see [here](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/tree/4015af9dddb61cb01f013456d8728e8f553be347/src/content/12) the old material. There are some changes in the frontend configurations.
+If you started the part before the updates, you can see [here](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/tree/4015af9dddb61cb01f013456d8728e8f553be347/src/content/12) the old material. There are some changes in the frontend configurations.
 </div>
 
 <div class="content">
 
-We have now a basic understanding of Docker and can use it to easily set up eg. a database for our app. Let us now move our focus to the frontend. 
+We now have a basic understanding of Docker and can use it to easily set up eg. a database for our app. Let us now move our focus to the frontend. 
 
 ### React in container
 
@@ -52,7 +52,7 @@ RUN npm ci
 RUN npm run build
 ```
 
-That looks about right. Let's build it and see if we are on the right track. Our goal is to have the build succeed without errors. Then we will use bash to check inside of the container to see if the files are there.
+That looks about right. Let's build it and see if we are on the right track. Our goal is to have an error-free build. Then we will use bash to take a look at the files inside the container.
 
 ```bash
 $ docker build . -t hello-front
@@ -122,9 +122,9 @@ When we now build the image with _docker build . -t hello-front_ and run it with
 
 While serve is a <i>valid</i> option, we can do better. A good goal is to create Docker images so that they do not contain anything irrelevant. With a minimal number of dependencies, images are less likely to break or become vulnerable over time.
 
-[Multi-stage builds](https://docs.docker.com/build/building/multi-stage/) are designed to split the build process into many separate stages, where it is possible to limit what parts of the image files are moved between the stages. That opens possibilities for limiting the size of the image since not all the by-products of the build are necessary for the resulting image. Smaller images are faster to upload and download and they help reduce the number of vulnerabilities that your software may have.
+[Multi-stage builds](https://docs.docker.com/build/building/multi-stage/) are designed to split the build process into many separate stages, where it is possible to limit what parts of the image files are moved between the stages. That opens possibilities for limiting the size of the image since not all the by-products of the build are necessary for the resulting image. Smaller images are faster to upload and download, and they help reduce the number of vulnerabilities that your software may have.
 
-With multi-stage builds, a tried and true solution like [Nginx](https://en.wikipedia.org/wiki/Nginx) can be used to serve static files without a lot of headaches. The Docker Hub [page for Nginx](https://hub.docker.com/_/nginx) tells us the required info to open the ports and "Hosting some simple static content".
+With multi-stage builds, a tried and true solution like [Nginx](https://en.wikipedia.org/wiki/Nginx) can be used to serve static files without headache. The Docker Hub [page for Nginx](https://hub.docker.com/_/nginx) tells us the required info to open the ports and "Hosting some simple static content".
 
 Let's use the previous Dockerfile but change the FROM to include the name of the stage:
 
@@ -172,7 +172,7 @@ Finally, we get to the todo-frontend. View the todo-app/todo-frontend and read t
 
 Start by running the frontend outside the container and ensure that it works with the backend.
 
-Containerize the application by creating <i>todo-app/todo-frontend/Dockerfile</i> and use the [ENV](https://docs.docker.com/engine/reference/builder/#env) instruction to pass *VITE\_BACKEND\_URL* to the application and run it with the backend. The backend should still be running outside a container. 
+Containerize the application by creating <i>todo-app/todo-frontend/Dockerfile</i> and use the [ENV](https://docs.docker.com/engine/reference/builder/#env) instruction to pass *VITE\_BACKEND\_URL* to the application and run it with the backend. The backend should still be running outside the container. 
 
 **Note** that you need to set *VITE\_BACKEND\_URL* before building the frontend, otherwise, it does not get defined in the code!
 
@@ -221,7 +221,7 @@ RUN npm install
 CMD ["npm", "run", "dev", "--", "--host"]
 ```
 
-> Note the extra parameters _-- --host_ in the _CMD_. Those are needed to expose the development server to be visible outside the Docker network. By default the development server is exposed only to localhost, and despite we access the frontend still using the localhost address, it is in reality attached to the Docker network.
+> Note the extra parameters _-- --host_ in the _CMD_. Those are needed to expose the development server to be visible outside the Docker network. By default the development server is exposed only to localhost, and even though we access the frontend using the localhost address, it is in reality attached to the Docker network.
  
 During build the flag _-f_ will be used to tell which file to use, it would otherwise default to Dockerfile, so the following command will build the image:
 
@@ -229,7 +229,7 @@ During build the flag _-f_ will be used to tell which file to use, it would othe
 docker build -f ./dev.Dockerfile -t hello-front-dev .
 ```
 
-Vite will be served in port 5173, so you can test that it works by running a container with that port published.
+Vite will be served on port 5173, so you can test that it works by running a container with that port published.
 
 The second task, accessing the files with VSCode, is not yet taken care of. There are at least two ways of doing this: 
 
@@ -256,7 +256,7 @@ Error: Cannot find module @rollup/rollup-linux-arm64-gnu
 
 The problem is the library [rollup](https://www.npmjs.com/package/rollup) that has its own version for all operating systems and processor architectures. Due to the volume mapping, the container is now using the *node_modules* from the host machine directory where the _@rollup/rollup-darwin-arm64_ (the version suitable Mac M1/M2) is installed, so the right version of the library for the container _@rollup/rollup-linux-arm64-gnu_ is not found.
 
-There are several ways to fix the problem. Let's use the perhaps simplest one. Start the container with bash as the command, and run the _npm install_ inside the container:
+There are several ways to fix the problem. Let's use the one which is perhaps the simplest one. Start the container with bash as the command, and run the _npm install_ inside the container:
 
 ```bash
 $ docker run -it -v "$(pwd):/usr/src/app/" front-dev bash
@@ -370,7 +370,7 @@ services:
     container_name: hello-front-dev
 ```
 
-The port used is the port from which the application is available in that container, also specified in the <i>docker-compose.dev.yml</i>. The port does not need to be published for other services in the same network to be able to connect to it. The "ports" in the docker-compose file are only for external access.
+The port used is the port on which the application is available in that container, also specified in the <i>docker-compose.dev.yml</i>. The port does not need to be published for other services in the same network to be able to connect to it. The "ports" in the docker-compose file are only for external access.
 
 Let's change the port configuration in the <i>docker-compose.dev.yml</i> to emphasize this:
 
@@ -390,13 +390,13 @@ services:
     image: busybox
 ```
 
-With _docker compose up_ the application is available in <http://localhost:3210> at the <i>host machine</i>, but the command 
+With _docker compose up_ the application is available at <http://localhost:3210> on the <i>host machine</i>, but the command 
 
 ```bash
 docker compose  -f docker-compose.dev.yml run debug-helper wget -O - http://app:5173
 ```
 
-works still since the port is still 5173 within the docker network.
+still works since the port 5173 is within the docker network.
 
 The below image illustrates what happens. The command _docker compose run_ asks debug-helper to send the request within the network. While the browser in the host machine sends the request from outside of the network.
 
@@ -486,7 +486,7 @@ services:
   app:
     # ...
   nginx:
-    image: nginx:1.20.1
+    image: nginx:1.25-alpine
     volumes:
       - ./nginx.dev.conf:/etc/nginx/nginx.conf:ro
     ports:
