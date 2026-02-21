@@ -354,6 +354,13 @@ writing to stdout
       ...
 ```
 
+> If you have a problem connecting (`wget: server returned error: HTTP/1.1 403 Forbidden`), you will need to allow "app" in `defineConfig` in `vite.config.js`:
+> ```js
+>   server: {
+>     allowedHosts: ['app'],
+>   }
+> ```
+
 The URL is the interesting part here. We simply said to connect to port 5173 of the service <i>app</i>. <i>app</i> is the name of the service specified in the <i>docker-compose.dev.yml</i> file:
 
 ```yml
