@@ -508,7 +508,7 @@ a {
 }
 
 
-.embed-ltr {
+.embed-ltr, span[dir="ltr"] {
   unicode-bidi: isolate;
   direction: ltr !important;
   text-align: left !important;
