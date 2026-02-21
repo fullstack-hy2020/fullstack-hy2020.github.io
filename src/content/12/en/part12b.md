@@ -857,7 +857,7 @@ If the application does not behave as expected, direct access to the database ma
 - Find the key you used with _[KEYS *](https://redis.io/commands/keys)_ 
 - Check the value of the key with the command [GET](https://redis.io/commands/get)
 - Set the value of the counter to 9001, find the right command from [here](https://redis.io/commands/) 
-- Make sure that the new value works by refreshing the page http://localhost:3000/statistics
+- Make sure that the new value works by refreshing the page http://localhost:3000/todos/statistics
 - Create a new todo with Postman and ensure from redis-cli that the counter has increased accordingly
 - Delete the key from the cli and ensure that the counter works when new todos are added
 
