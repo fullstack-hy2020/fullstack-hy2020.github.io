@@ -401,7 +401,6 @@ Once the end-to-end test works in your machine, include it in the GitHub Action 
 - name: e2e tests
   uses: cypress-io/github-action@v5
   with:
-    command: npm run test:e2e
     start: npm run start-prod
     wait-on: http://localhost:5000
 ```
