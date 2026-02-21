@@ -1,6 +1,7 @@
 import { Link } from 'gatsby';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import i18n from 'i18next';
 
 import './Footer.scss';
 
@@ -27,6 +28,8 @@ const Footer = () => {
   const { t, i18n } = useTranslation();
   const navigation = getNavigation(i18n.language, t);
 
+  const isRtl = i18n.dir()  === 'rtl';
+
   return (
     <Element
       Tag="footer"
@@ -35,7 +38,7 @@ const Footer = () => {
       flex
     >
       <Element
-        className="col-5 push-right-3 col-10--mobile order-2--mobile order-2--tablet footer__links"
+        className={`col-5 ${isRtl ? 'push-left-3' : 'push-right-3'} col-10--mobile order-2--mobile order-2--tablet footer__links`}
         flex
         spaceBetween
       >
