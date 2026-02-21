@@ -27,9 +27,9 @@ npm create vite@latest my-app-name -- --template react-ts
 
 After running the command, you should have a complete basic React app that uses TypeScript. You can start the app by running *npm run dev* in the application's root.
 
-If you take a look at the files and folders, you'll notice that the app is not that different from one using pure JavaScript. The only differences are that the *.jsx* files are now *.tsx* files, they contain some type annotations, and the root directory contains a *tsconfig.json* file.
+If you take a look at the files and folders, you'll notice that the app is not that different from one using pure JavaScript. The only differences are that the *.jsx* files are now *.tsx* files, they contain some type annotations, and the root directory contains a *tsconfig.app.json* file.
 
-Now, let's take a look at the *tsconfig.json* file that has been created for us:
+Now, let's take a look at the *tsconfig.app.json* file that has been created for us:
 
 ```js
 {
