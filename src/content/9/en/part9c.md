@@ -1513,6 +1513,8 @@ const parseComment = (comment: unknown): string => {
 are easy to replace as follows:
 
 ```js
+import { z } from 'zod';
+
 const parseComment = (comment: unknown): string => {
   return z.string().parse(comment);  // highlight-line
 };
