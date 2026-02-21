@@ -15,6 +15,8 @@ Many of the exercises in this part of the course material will require the refac
 
 One good piece of advice for both refactoring and writing new code is to take <i>baby steps</i>. Losing your sanity is almost guaranteed if you leave the application in a completely broken state for long periods while refactoring.
 
+If you are using [react-router-dom](https://reactrouter.com/en/main) package and using [BrowserRouter](https://reactrouter.com/en/main/router-components/browser-router) for react routing, you should keep in mind that it is client side router means its paths and defined directories only work if the browser has already loaded the application and react router library. When you make request to the server with those directories path, it wont work because server doesn't recognize it. Request to the server happens if you are loading the  site for the first time or you just refreshed the browser. So workaround for it to work would a not production recommended wayy, be the [HashRouter](https://reactrouter.com/en/main/router-components/hash-router) from 'react-router-dom' which distinguishes the clint directory path to server path with '#' and it makes requests accordingly.
+
 </div>
 
 <div class="tasks">
