@@ -344,7 +344,7 @@ const App = () => {
 }
 ```
 
-So again, a mutation was created that invalidated the query <i>notes</i> so that the updated note is rendered correctly. Using mutations is easy, the method <i>mutate</i> receives a note as a parameter, the importance of which is been changed to the negation of the old value.
+So again, the mutation we created invalidates the notes query so that the updated note is rendered correctly. Using mutations is easy, the method <i>mutate</i> receives a note as a parameter, the importance of which has been changed to the negation of the old value.
 
 The current code for the application is on [GitHub](https://github.com/fullstack-hy2020/query-notes/tree/part6-2) in the branch <i>part6-2</i>.
 
