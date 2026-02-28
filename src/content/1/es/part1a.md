@@ -66,7 +66,7 @@ const App = () => {
 export default App
 ```
 
-Los archivos <i>App.css</i> e <i>index.css</i>, y el directorio <i>assets</i> pueden eliminarse ya que nos son necesarios en nuestra aplicación por ahora.
+Los archivos <i>App.css</i> e <i>index.css</i>, y el directorio <i>assets</i> pueden eliminarse ya que no son necesarios en nuestra aplicación por ahora.
 
 ### create-react-app
 
