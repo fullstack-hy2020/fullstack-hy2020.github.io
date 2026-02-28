@@ -1,4 +1,4 @@
-export const TRANSLATION_LANGUAGES = ['fi', 'en', 'zh', 'es', 'fr', 'ptbr'];
+export const TRANSLATION_LANGUAGES = ['fi', 'en', 'zh', 'es', 'fr', 'ptbr', 'ar'];
 
 export const TRANSLATION_LANGUAGE_OPTIONS = [
   { value: 'fi', label: 'Suomi' },
@@ -7,4 +7,5 @@ export const TRANSLATION_LANGUAGE_OPTIONS = [
   { value: 'es', label: 'Español' },
   { value: 'fr', label: 'Français' },
   { value: 'ptbr', label: 'Português(BR)' },
+  { value: 'ar', label: 'العربية'}
 ];

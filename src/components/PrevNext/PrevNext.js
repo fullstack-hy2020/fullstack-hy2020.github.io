@@ -8,6 +8,7 @@ import React from 'react';
 import navigation from '../../content/partnavigation/partnavigation';
 import snakeCase from 'lodash/fp/snakeCase';
 import { useTranslation } from 'react-i18next';
+import i18n from 'i18next'
 
 const prevChar = (c) => String.fromCharCode(c.charCodeAt(0) - 1);
 const nextChar = (c) => String.fromCharCode(c.charCodeAt(0) + 1);
@@ -30,13 +31,15 @@ const langUrl = (lang) => (lang === 'fi' ? '/osa' : `/${lang}/part`);
 const PrevNext = ({ part, letter, lang }) => {
   const { t } = useTranslation();
 
+  const isRtl = i18n.dir() === 'rtl'
+
   const getPrev = () => {
     if (!letter && hasPart(part - 1, lang)) {
       return (
         <>
           <Link
             to={`${langUrl(lang)}${part - 1}`}
-            className="col-4--mobile push-right-1 prev"
+            className={`col-4--mobile ${isRtl ? 'push-left-1' : 'push-right-1'} prev`}
           >
             <Element flex dirColumn>
               <p>
@@ -60,7 +63,7 @@ const PrevNext = ({ part, letter, lang }) => {
               to={`${langUrl(lang)}${part}/${snakeCase(
                 navigation[lang][part][prevChar(letter)]
               )}`}
-              className="col-4--mobile push-right-1 prev"
+              className={`col-4--mobile ${isRtl ? 'push-left-1' : 'push-right-1'} prev`}
             >
               <Element flex dirColumn>
                 <p>
@@ -81,7 +84,7 @@ const PrevNext = ({ part, letter, lang }) => {
           <>
             <Link
               to={`${langUrl(lang)}${part - 1}`}
-              className="col-4--mobile push-right-1 prev"
+              className={`col-4--mobile ${isRtl ? 'push-left-1' : 'push-right-1'} prev`}
             >
               <Element flex dirColumn>
                 <p>
@@ -98,10 +101,10 @@ const PrevNext = ({ part, letter, lang }) => {
           </>
         );
       } else {
-        return <Element className="push-right-1" />;
+        return <Element className={isRtl ? 'push-left-1' : 'push-right-1'}/>;
       }
     } else {
-      return <Element className="push-right-1" />;
+      return <Element className={isRtl ? 'push-left-1' : 'push-right-1'} />;
     }
   };
 
@@ -113,7 +116,7 @@ const PrevNext = ({ part, letter, lang }) => {
       return (
         <Link
           to={`${langUrl(lang)}${part + 1}`}
-          className="col-4--mobile push-left-1 next"
+          className={`col-4--mobile ${isRtl ? 'push-right-1' : 'push-left-1'} next`}
         >
           <Element flex dirColumn>
             <p>
@@ -131,7 +134,7 @@ const PrevNext = ({ part, letter, lang }) => {
             to={`${langUrl(lang)}${part}/${snakeCase(
               navigation[lang][part][nextChar(letter)]
             )}`}
-            className="col-4--mobile push-left-1 next"
+            className={`col-4--mobile ${isRtl ? 'push-right-1' : 'push-left-1'} next`}
           >
             <Element flex dirColumn>
               <p>
@@ -146,7 +149,7 @@ const PrevNext = ({ part, letter, lang }) => {
         return (
           <Link
             to={`${langUrl(lang)}${part + 1}`}
-            className="col-4--mobile push-left-1 next"
+            className={`col-4--mobile ${isRtl ? 'push-right-1' : 'push-left-1'} next`}
           >
             <Element flex dirColumn>
               <p>
@@ -158,10 +161,10 @@ const PrevNext = ({ part, letter, lang }) => {
           </Link>
         );
       } else {
-        return <Element className="push-left-1" />;
+        return <Element className={isRtl ? 'push-right-1' : 'push-left-1'}/>;
       }
     } else {
-      return <Element className="push-left-1" />;
+      return <Element className={isRtl ? 'push-right-1' : 'push-left-1'} />;
     }
   };
 

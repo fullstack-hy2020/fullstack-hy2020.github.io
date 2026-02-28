@@ -28,6 +28,11 @@
     flex-direction: row;
   }
 
+  @include rtl {
+    left: 5%;
+    right: inherit;
+  }
+
   &__wrapper {
     @include to($large) {
       .language-switcher {
@@ -73,6 +78,11 @@
 
   @include from($large) {
     display: none;
+  }
+
+  @include rtl {
+    left: 0;
+    right: inherit;
   }
 }
 
@@ -166,6 +176,7 @@
 }
 
 .navigation__item {
+  font-family: var(--font-body);
   margin: 10px 0;
   white-space: nowrap;
 

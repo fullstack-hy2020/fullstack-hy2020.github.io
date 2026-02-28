@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,500,600');
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,500,600');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400..700&display=swap');
 @import './common.scss';
 
 :root,
@@ -21,11 +22,65 @@ html[data-theme='dark'] {
   --color-pre-background: #{$main--dark};
 }
 
+@mixin direction($dir) {
+  @if $dir == rtl {
+    direction: rtl;
+    text-align: right;
+  } @else {
+    direction: ltr;
+    text-align: left;
+  }
+  
+}
+
+body.rtl {
+  --font-body: #{$font-arabic};
+  --font-heading: #{$font-arabic};
+
+  -webkit-font-smoothing: antialiased;
+
+  * {
+    @include direction(rtl);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: $font-arabic;
+  }
+
+  .navigation {
+    &::before {
+      left: 13px;
+      right: auto;
+    }
+
+    @include from($large) {
+      .navigation__item:first-of-type {
+        margin: 0 2rem 0 15px;
+      }
+      .navigation__icon-buttons {
+        margin: 0 0 0 20px;
+      }
+    }
+  }
+
+  .triple-border__logo {
+    @include direction(ltr);
+    font-family: $font-body;
+  }
+
+  .some-logo__link {
+    margin: 1rem 0 0 1rem;
+  }
+}
+
 html,
 body {
+  --font-body: #{$font-body};
+  --font-heading: #{$font-heading};
+
   margin: 0;
   padding: 0;
-  font-family: $font-body;
+  font-family: var(--font-body);
   font-weight: $font-weight-regular;
   background-color: var(--color-background);
   color: var(--color-text);
@@ -48,6 +103,10 @@ p {
   text-align: left;
   line-height: 1.5em;
   color: var(--color-text);
+
+  @include rtl {
+    line-height: 1.75em;
+  }
 }
 
 a {
@@ -96,7 +155,7 @@ a {
 }
 
 .centered {
-  text-align: center;
+  text-align: center !important;
 }
 
 .centered--mobile {
@@ -372,7 +431,7 @@ a {
 }
 
 .heading-font {
-  font-family: $font-heading;
+  font-family: var(--font-heading);
 }
 
 .about__challenge-button {
@@ -387,7 +446,7 @@ a {
     cursor: pointer;
   }
 
-  &--turquoise {
+  &--turFise {
     background-color: $turquoise;
   }
 
@@ -446,4 +505,11 @@ a {
       transform: translateY(-30%);
     }
   }
+}
+
+
+.embed-ltr, span[dir="ltr"] {
+  unicode-bidi: isolate;
+  direction: ltr !important;
+  text-align: left !important;
 }
