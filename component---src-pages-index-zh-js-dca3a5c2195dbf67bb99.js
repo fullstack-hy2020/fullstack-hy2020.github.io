@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[48],{NIjN:function(e,n,t){"use strict";t.r(n);var a=t("q1tI"),w=t.n(a),c=t("UQMq");n.default=()=>w.a.createElement(c.a,{lang:"zh",title:"全栈公开课"})}}]);
+//# sourceMappingURL=component---src-pages-index-zh-js-dca3a5c2195dbf67bb99.js.map
