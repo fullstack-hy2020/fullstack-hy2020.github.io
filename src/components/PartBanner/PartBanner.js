@@ -102,6 +102,22 @@ const partNameTranslations = {
     'Containers',
     'Utilizando bancos de dados relacionais',
   ],
+  ar: [
+    'أساسيات تطوير الويب',
+    'مقدمة على React',
+    'التواصل مع الخادوم',
+    'برمجة الخادوم باستخدام Node.js وExpress.js',
+    'اختبار خوادم Express.js، إدارة المستخدم',
+    'اختبار برامج React',
+    'إدارة الحالة المتقدم',
+    'React router، خطاطيف مخصصة، تنسيق البرنامج باستخدام CSS وwebpack',
+    'GraphQL',
+    'TypeScript',
+    'React Native',
+    'CI/CD',
+    'الحاويات',
+    'استخدام قواعد البيانات الارتباطية',
+  ],
 };
 
 const partName = {
@@ -111,6 +127,7 @@ const partName = {
   fr: 'Partie',
   ptbr: 'Parte',
   zh: '部分',
+  ar: 'الجزء'
 };
 
 export const PartBanner = ({ lang }) => {

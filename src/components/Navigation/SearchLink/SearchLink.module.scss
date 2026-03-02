@@ -11,4 +11,10 @@
     background-color: var(--color-text);
     color: var(--color-background);
   }
+
+  @include rtl {
+    // ...
+    margin-left: 20px;
+    margin-right: initial;
+  }
 }
