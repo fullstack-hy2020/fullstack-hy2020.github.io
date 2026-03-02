@@ -447,7 +447,7 @@ As always, test your queries in the Apollo Sandbox first before using them in yo
 
 To learn how to open a URL in a browser, read the Expo's [Linking API documentation](https://docs.expo.dev/versions/latest/sdk/linking/). You will need this feature while implementing the button for opening the repository in GitHub. Hint: [Linking.openURL](https://docs.expo.dev/versions/latest/sdk/linking/#linkingopenurlurl) method will come in handy.
 
-The view should have its own route. It would be a good idea to define the repository's id in the route's path as a path parameter, which you can access by using the [useParams](https://reactrouter.com/6.14.2/hooks/use-params) hook. The user should be able to access the view by pressing a repository in the reviewed repositories list. You can achieve this by for example wrapping the <em>RepositoryItem</em> with a [Pressable](https://reactnative.dev/docs/pressable) component in the <em>RepositoryList</em> component and using <em>navigate</em> function to change the route in an <em>onPress</em> event handler. You can access the <em>navigate</em> function with the [useNavigate](https://api.reactrouter.com/v7/functions/react_router.useNavigate.html) hook.
+The view should have its own route. It would be a good idea to define the repository's id in the route's path as a path parameter, which you can access by using the [useParams](https://reactrouter.com/6.14.2/hooks/use-params) hook. The user should be able to access the view by pressing a repository in the reviewed repositories list. You can achieve this by for example wrapping the <em>RepositoryItem</em> with a [Pressable](https://reactnative.dev/docs/pressable) component in the <em>RepositoryList</em> component and using <em>navigate</em> function to change the route in an <em>onPress</em> event handler. You can access the <em>navigate</em> function with the [useNavigate](https://reactrouter.com/api/hooks/useNavigate) hook.
 
 The final version of the single repository view should look something like this:
 
@@ -537,7 +537,7 @@ Explore Yup's [documentation](https://github.com/jquense/yup#yup) to find suitab
 
 You can create a review using the <em>createReview</em> mutation. Check this mutation's arguments in the Apollo Sandbox. You can use the [useMutation](https://www.apollographql.com/docs/react/api/react/hooks/#usemutation) hook to send a mutation to the Apollo Server.
 
-After a successful <em>createReview</em> mutation, redirect the user to the repository's view you implemented in the previous exercise. This can be done with the <em>navigate</em> function after you have obtained it using the [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate) hook. The created review has a <em>repositoryId</em> field which you can use to construct the route's path.
+After a successful <em>createReview</em> mutation, redirect the user to the repository's view you implemented in the previous exercise. This can be done with the <em>navigate</em> function after you have obtained it using the [useNavigate](https://reactrouter.com/api/components/Navigate) hook. The created review has a <em>repositoryId</em> field which you can use to construct the route's path.
 
 To prevent getting cached data with the <em>repository</em> query in the single repository view, use the *cache-and-network* [fetch policy](https://www.apollographql.com/docs/react/data/queries/#setting-a-fetch-policy) in the query. It can be used with the <em>useQuery</em> hook like this:
 

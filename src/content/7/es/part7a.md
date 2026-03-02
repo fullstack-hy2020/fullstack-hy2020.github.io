@@ -258,7 +258,7 @@ const Note = ({ notes }) => {
 }
 ```
 
-El componente _Note_ recibe todas las notas como props <i>notes</i>, y se puede acceder al parámetro URL (el id de la nota que se mostrará) con la función [useParams](https://reactrouter.com/en/main/hooks/use-params) de React Router.
+El componente _Note_ recibe todas las notas como props <i>notes</i>, y se puede acceder al parámetro URL (el id de la nota que se mostrará) con la función [useParams](https://reactrouter.com/api/hooks/useParams) de React Router.
 
 ### useNavigate
 
@@ -322,11 +322,11 @@ const Login = (props) => {
 }
 ```
 
-Lo interesante de este componente es el uso de la función [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate) de react-router. Con esta función, se puede modificar la URL del navegador programáticamente.
+Lo interesante de este componente es el uso de la función [useNavigate](https://reactrouter.com/api/components/Navigate) de react-router. Con esta función, se puede modificar la URL del navegador programáticamente.
 
 Con el inicio de sesión, llamamos a _navigate('/')_, que cambia la URL del navegador a _/_ y la aplicación muestra el componente correspondiente, <i>Home</i>.
 
-Tanto [useParams](https://reactrouter.com/en/main/hooks/use-params) como [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate) son hooks, al igual que useState y useEffect que ya hemos usado muchas veces. Como recordarás de la parte 1, existen algunas [reglas](/es/part1/un_estado_mas_complejo_depurando_aplicaciones_react#reglas-de-los-hooks) para usar hooks.
+Tanto [useParams](https://reactrouter.com/api/hooks/useParams) como [useNavigate](https://reactrouter.com/api/components/Navigate) son hooks, al igual que useState y useEffect que ya hemos usado muchas veces. Como recordarás de la parte 1, existen algunas [reglas](/es/part1/un_estado_mas_complejo_depurando_aplicaciones_react#reglas-de-los-hooks) para usar hooks.
 
 ### Redirigir
 
@@ -336,7 +336,7 @@ Hay otro detalle interesante en la ruta de <i>Users</i>:
 <Route path="/users" element={user ? <Users /> : <Navigate replace to="/login" />} />
 ```
 
-Si un usuario no ha iniciado sesión, el componente <i>Users</i> no se renderiza. En su lugar, el usuario es <i>redirigido</i> mediante el componente [Navigate](https://reactrouter.com/en/main/components/navigate) a la vista de inicio de sesión.
+Si un usuario no ha iniciado sesión, el componente <i>Users</i> no se renderiza. En su lugar, el usuario es <i>redirigido</i> mediante el componente [Navigate](https://reactrouter.com/api/components/Navigate) a la vista de inicio de sesión.
 
 ```js
 <Navigate replace to="/login" />

@@ -255,7 +255,7 @@ const Note = ({ notes }) => {
 }
 ```
 
-Komponentti _Note_ saa parametrikseen kaikki muistiinpanot propsina <i>notes</i> ja se pääsee URL:n yksilöivään osaan eli näytettävän muistiinpanon <i>id</i>:hen käsiksi React Routerin funktion [useParams](https://reactrouter.com/en/main/hooks/use-params) avulla. 
+Komponentti _Note_ saa parametrikseen kaikki muistiinpanot propsina <i>notes</i> ja se pääsee URL:n yksilöivään osaan eli näytettävän muistiinpanon <i>id</i>:hen käsiksi React Routerin funktion [useParams](https://reactrouter.com/api/hooks/useParams) avulla. 
 
 ### useNavigate
 
@@ -319,11 +319,11 @@ const Login = (props) => {
 }
 ```
 
-Mielenkiintoista komponentissa on React Routerin funktion [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate) käyttö. Funktion avulla on mahdollista selaimen osoiterivin muokkaaminen ohjelmallisesti.
+Mielenkiintoista komponentissa on React Routerin funktion [useNavigate](https://reactrouter.com/api/components/Navigate) käyttö. Funktion avulla on mahdollista selaimen osoiterivin muokkaaminen ohjelmallisesti.
 
 Kirjautumisen yhteydessä suoritettava komento _navigate('/')_ saa aikaan sen, että selaimen osoiteriville tulee osoitteeksi _/_ ja sovellus renderöi osoitetta vastaavan komponentin <i>Home</i>.
 
-Käyttämämme React Router ‑kirjaston funktiot [useParams](https://reactrouter.com/en/main/hooks/use-params) ja [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate) ovat molemmat hook-funktiota samaan tapaan kuin esim. moneen kertaan käyttämämme useState ja useEffect. Kuten muistamme osasta 1, hook-funktioiden käyttöön liittyy tiettyjä [sääntöjä](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot).
+Käyttämämme React Router ‑kirjaston funktiot [useParams](https://reactrouter.com/api/hooks/useParams) ja [useNavigate](https://reactrouter.com/api/components/Navigate) ovat molemmat hook-funktiota samaan tapaan kuin esim. moneen kertaan käyttämämme useState ja useEffect. Kuten muistamme osasta 1, hook-funktioiden käyttöön liittyy tiettyjä [sääntöjä](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot).
 
 ### Uudelleenohjaus
 
@@ -333,7 +333,7 @@ Näkymän <i>Users</i> routeen liittyy vielä eräs mielenkiintoinen detalji:
 <Route path="/users" element={user ? <Users /> : <Navigate replace to="/login" />} />
 ```
 
-Jos käyttäjä ei ole kirjautuneena, ei renderöidäkään näkymää <i>Users</i> vaan sen sijaan <i>uudelleenohjataan</i> käyttäjä komponentin [Navigate](https://reactrouter.com/en/main/components/navigate) avulla kirjautumisnäkymään:
+Jos käyttäjä ei ole kirjautuneena, ei renderöidäkään näkymää <i>Users</i> vaan sen sijaan <i>uudelleenohjataan</i> käyttäjä komponentin [Navigate](https://reactrouter.com/api/components/Navigate) avulla kirjautumisnäkymään:
 
 ```js
 <Navigate replace to="/login" />

@@ -258,7 +258,7 @@ const Note = ({ notes }) => {
 }
 ```
 
-The _Note_ component receives all of the notes as props <i>notes</i>, and it can access the URL parameter (the id of the note to be displayed) with the [useParams](https://reactrouter.com/en/main/hooks/use-params) function of the React Router.
+The _Note_ component receives all of the notes as props <i>notes</i>, and it can access the URL parameter (the id of the note to be displayed) with the [useParams](https://reactrouter.com/api/hooks/useParams) function of the React Router.
 
 ### useNavigate
 
@@ -322,11 +322,11 @@ const Login = (props) => {
 }
 ```
 
-What is interesting about this component is the use of the [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate) function of the React Router. With this function, the browser's URL can be changed programmatically.
+What is interesting about this component is the use of the [useNavigate](https://reactrouter.com/api/components/Navigate) function of the React Router. With this function, the browser's URL can be changed programmatically.
 
 With user login, we call _navigate('/')_ which causes the browser's URL to change to _/_ and the application renders the corresponding component <i>Home</i>.
 
-Both [useParams](https://reactrouter.com/en/main/hooks/use-params) and [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate) are hook functions, just like useState and useEffect which we have used many times now.  As you remember from part 1, there are some [rules](/en/part1/a_more_complex_state_debugging_react_apps/#rules-of-hooks) to using hook functions.
+Both [useParams](https://reactrouter.com/api/hooks/useParams) and [useNavigate](https://reactrouter.com/api/components/Navigate) are hook functions, just like useState and useEffect which we have used many times now.  As you remember from part 1, there are some [rules](/en/part1/a_more_complex_state_debugging_react_apps/#rules-of-hooks) to using hook functions.
 
 ### Redirect
 
@@ -336,7 +336,7 @@ There is one more interesting detail about the <i>Users</i> route:
 <Route path="/users" element={user ? <Users /> : <Navigate replace to="/login" />} />
 ```
 
-If a user isn't logged in, the <i>Users</i> component is not rendered. Instead, the user is <i>redirected</i> using the component [Navigate](https://reactrouter.com/en/main/components/navigate) to the login view:
+If a user isn't logged in, the <i>Users</i> component is not rendered. Instead, the user is <i>redirected</i> using the component [Navigate](https://reactrouter.com/api/components/Navigate) to the login view:
 
 ```js
 <Navigate replace to="/login" />
