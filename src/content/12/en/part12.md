@@ -6,6 +6,6 @@ lang: en
 
 <div class="intro">
 
-Osan materiaali siirtynyt osoitteeseen <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-containers">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-containers</a>
+Material of this part has been moved to <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-containers">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-containers</a>
 
 </div>
