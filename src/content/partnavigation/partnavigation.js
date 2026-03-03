@@ -141,11 +141,7 @@ module.exports = {
       d: 'Keeping green',
       e: 'Expanding Further',
     },
-    12: {
-      a: 'Introduction to Containers',
-      b: 'Building and configuring environments',
-      c: 'Basics of Orchestration',
-    },
+    12: {},
     13: {},
   },
   zh: {
