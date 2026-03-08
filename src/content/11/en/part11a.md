@@ -186,7 +186,7 @@ Cloud-based options are also usually billed by build time which is something to 
 
 #### Why pick one over the other
 
-In general, if you have a small to medium software project that doesn't have any special requirements (e.g. a need for a graphics card to run tests), a cloud-based solution is probably best. The configuration is simple and you don't need to go to the hassle or expense of setting up your own system. For smaller projects especially, this should be cheaper.
+In general, if you have a small to medium software project that doesn't have any special requirements (e.g. a need for a graphics card to run tests), a cloud-based solution is probably best. The configuration is simple and you don't need to go through the hassle or expense of setting up your own system. For smaller projects especially, this should be cheaper.
 
 For larger projects where more resources are needed or in larger companies where there are multiple teams and projects to take advantage of it, a self-hosted CI setup is probably the way to go.
 
