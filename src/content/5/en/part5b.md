@@ -529,7 +529,7 @@ Full stack development is <i>extremely hard</i>, that is why I will use all the 
 
 #### 5.5 Blog List Frontend, step 5
 
-Change the form for creating blog posts so that it is only displayed when appropriate. Use functionality similar to what was shown [earlier in this part of the course material](/en/part5/props_children_and_proptypes#displaying-the-login-form-only-when-appropriate). If you wish to do so, you can use the <i>Togglable</i> component defined in part 5.
+Change the form for creating blog posts so that it is only displayed when appropriate. Use functionality similar to what was shown [earlier in this part of the course material](/en/part5/props_children_and_component_refs#displaying-the-login-form-only-when-appropriate). If you wish to do so, you can use the <i>Togglable</i> component defined in part 5.
 
 By default the form is not visible
 
@@ -545,7 +545,7 @@ The form hides again after a new blog is created or the <i>cancel</i> button is 
 
 Separate the form for creating a new blog into its own component (if you have not already done so), and move all the states required for creating a new blog to this component.
 
-The component must work like the <i>NoteForm</i> component from the [material](/en/part5/props_children_and_proptypes#state-of-the-forms) of this part.
+The component must work like the <i>NoteForm</i> component from the [material](/en/part5/props_children_and_component_refs#state-of-the-forms) of this part.
 
 #### 5.7 Blog List Frontend, step 7
 
