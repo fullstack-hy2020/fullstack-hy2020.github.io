@@ -1050,8 +1050,8 @@ export type PublicPatient = Omit<Patient, 'ssn' | 'entries' >  // highlight-line
 <!-- Example uses [Material UI Icons](https://mui.com/components/material-icons/) to represent genders.-->
  示例使用[Material UI Icons](https://mui.com/components/material-icons/)来表示性别。
 
-<!-- **Note** that in order to access the id in the url, you need to give [useParams](https://reactrouter.com/en/main/hooks/use-params) a proper type argument:-->
- **注意**，为了访问url中的id，你需要给[useParams](https://reactrouter.com/en/main/hooks/use-params)一个合适的类型参数。
+<!-- **Note** that in order to access the id in the url, you need to give [useParams](https://reactrouter.com/api/hooks/useParams) a proper type argument:-->
+ **注意**，为了访问url中的id，你需要给[useParams](https://reactrouter.com/api/hooks/useParams)一个合适的类型参数。
 
 ```js
 const { id } = useParams<{ id: string }>();

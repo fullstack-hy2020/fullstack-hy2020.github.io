@@ -258,7 +258,7 @@ const Note = ({ notes }) => {
 }
 ```
 
-Le composant _Note_ reçoit toutes les notes en tant que props <i>notes</i>, et il peut accéder au paramètre de l'URL (l'id de la note à afficher) avec la fonction [useParams](https://reactrouter.com/en/main/hooks/use-params) de React Router.
+Le composant _Note_ reçoit toutes les notes en tant que props <i>notes</i>, et il peut accéder au paramètre de l'URL (l'id de la note à afficher) avec la fonction [useParams](https://reactrouter.com/api/hooks/useParams) de React Router.
 
 ### useNavigate
 
@@ -322,11 +322,11 @@ const Login = (props) => {
 }
 ```
 
-Ce qui est intéressant à propos de ce composant est l'utilisation de la fonction [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate) de React Router. Avec cette fonction, l'URL du navigateur peut être modifiée de manière programmatique.
+Ce qui est intéressant à propos de ce composant est l'utilisation de la fonction [useNavigate](https://reactrouter.com/api/components/Navigate) de React Router. Avec cette fonction, l'URL du navigateur peut être modifiée de manière programmatique.
 
 Lors de la connexion de l'utilisateur, nous appelons _navigate('/')_ ce qui provoque le changement de l'URL du navigateur en _/_ et l'application rend le composant correspondant <i>Home</i>.
 
-Les fonctions [useParams](https://reactrouter.com/en/main/hooks/use-params) et [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate) sont des fonctions de hook, tout comme useState et useEffect que nous avons maintenant utilisées de nombreuses fois. Comme vous vous en souvenez de la partie 1, il existe certaines [règles](/fr/part1/plongez_dans_le_debogage_dapplications_react#regles-des-hooks) à respecter lors de l'utilisation des fonctions de hook. Create-react-app a été configuré pour vous avertir si vous enfreignez ces règles, par exemple, en appelant une fonction de hook depuis une instruction conditionnelle.
+Les fonctions [useParams](https://reactrouter.com/api/hooks/useParams) et [useNavigate](https://reactrouter.com/api/components/Navigate) sont des fonctions de hook, tout comme useState et useEffect que nous avons maintenant utilisées de nombreuses fois. Comme vous vous en souvenez de la partie 1, il existe certaines [règles](/fr/part1/plongez_dans_le_debogage_dapplications_react#regles-des-hooks) à respecter lors de l'utilisation des fonctions de hook. Create-react-app a été configuré pour vous avertir si vous enfreignez ces règles, par exemple, en appelant une fonction de hook depuis une instruction conditionnelle.
 
 ### redirect
 
@@ -336,7 +336,7 @@ Il y a un autre détail intéressant concernant la route <i>Users</i>:
 <Route path="/users" element={user ? <Users /> : <Navigate replace to="/login" />} />
 ```
 
-Si un utilisateur n'est pas connecté, le composant <i>Users</i> n'est pas rendu. À la place, l'utilisateur est <i>redirigé</i> en utilisant le composant [Navigate](https://reactrouter.com/en/main/components/navigate) vers la vue de connexion:
+Si un utilisateur n'est pas connecté, le composant <i>Users</i> n'est pas rendu. À la place, l'utilisateur est <i>redirigé</i> en utilisant le composant [Navigate](https://reactrouter.com/api/components/Navigate) vers la vue de connexion:
 
 ```js
 <Navigate replace to="/login" />
