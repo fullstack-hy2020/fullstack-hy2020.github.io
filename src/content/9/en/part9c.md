@@ -863,15 +863,7 @@ Simillarly the request parameter has the type _Request_ that is also a generic t
 
 Similarly to Ilari's flight service, we do not use a real database in our app but instead use hardcoded data that is in the files [diagnoses.ts](https://github.com/fullstack-hy2020/misc/blob/master/diagnoses.ts) and [patients.ts](https://github.com/fullstack-hy2020/misc/blob/master/patients.ts). Get the files and store those in a directory called *data* in your project. All data modification can be done in runtime memory, so during this part, it is *not necessary to write to a file*.
 
-#### 9.10: Patientor backend, step3
-
-Create a type *Diagnosis* and use it to create endpoint */api/diagnoses* for fetching all diagnoses with HTTP GET.
-
-Structure your code properly by using meaningfully-named directories and files.
-
-**Note** that *diagnoses* may or may not contain the field *latin*. You might want to use [optional properties](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#optional-properties) in the type definition.
-
-#### 9.11: Patientor backend, step4
+#### 9.11: Patientor backend, step3
 
 Create data type *Patient* and set up the GET endpoint */api/patients* which returns all the patients to the frontend, excluding field *ssn*. Use a [utility type](https://www.typescriptlang.org/docs/handbook/utility-types.html) to make sure you are selecting and returning only the wanted fields.
 
@@ -888,6 +880,14 @@ After creating the endpoint, ensure that the *frontend* shows the list of patien
 </div>
 
 <div class="content">
+
+#### 9.10: Patientor backend, step4
+
+Create a type *Diagnosis* and use it to create endpoint */api/diagnoses* for fetching all diagnoses with HTTP GET.
+
+Structure your code properly by using meaningfully-named directories and files.
+
+**Note** that *diagnoses* may or may not contain the field *latin*. You might want to use [optional properties](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#optional-properties) in the type definition.
 
 ### Preventing an accidental undefined result
 
