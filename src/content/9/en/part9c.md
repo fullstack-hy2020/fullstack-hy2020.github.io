@@ -817,7 +817,7 @@ The response is what we expect it to be:
 
 So far we have not discussed anything about the types of the route handler parameters. 
 
-If we hover eg. the parameter _res_, we notice it has the followng type:
+If we hover, for example, over the parameter res, we notice it has the following type:
 
 ```js
 Response<any, Record<string, any>, number>
@@ -835,7 +835,7 @@ export interface Response<
 
 The first type parameter is the most interesting for us, it corresponds <i>the response body</i> and has a default value _any_. So that is why TypeScript compiler accepts any type of response and we get no help to get the response right.
 
-We could and propably should give a proper type as the type variable. In our case it is an array of diary entries:
+We could and probably should give a proper type as the type variable. In our case it is an array of diary entries:
 
 ```js
 import { Response } from 'express'
