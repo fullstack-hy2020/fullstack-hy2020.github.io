@@ -906,25 +906,25 @@ npm install --save-dev eslint @eslint/js @types/eslint__js typescript typescript
 We will configure ESlint to [disallow explicit any](https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/docs/rules/no-explicit-any.mdx). Write the following rules to *eslint.config.mjs*:
 
 ```js
-import eslint from '@eslint/js';
-import tseslint from 'typescript-eslint';
+import eslint from "@eslint/js";
+import tseslint from "typescript-eslint";
 
-export default tseslint.config({
-  files: ['**/*.ts'],
-  extends: [
-    eslint.configs.recommended,
-    ...tseslint.configs.recommendedTypeChecked,
-  ],
-  languageOptions: {
-    parserOptions: {
-      project: true,
-      tsconfigRootDir: import.meta.dirname,
+export default [
+  eslint.configs.recommended,
+  ...tseslint.configs.recommendedTypeChecked,
+  {
+    files: ["**/*.ts"],
+    languageOptions: {
+      parserOptions: {
+        project: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+    rules: {
+      "@typescript-eslint/no-explicit-any": "error",
     },
   },
-  rules: {
-    '@typescript-eslint/no-explicit-any': 'error',
-  },
-});
+];
 ```
 
 Let us also set up a *lint* npm script to inspect the files by modifying the *package.json* file:
@@ -957,39 +957,39 @@ npm install --save-dev @stylistic/eslint-plugin
 Our final *eslint.config.mjs* looks as follows:
 
 ```js
-import eslint from '@eslint/js';
-import tseslint from 'typescript-eslint';
+import eslint from "@eslint/js";
+import tseslint from "typescript-eslint";
 import stylistic from "@stylistic/eslint-plugin";
 
-export default tseslint.config({
-  files: ['**/*.ts'],
-  extends: [
-    eslint.configs.recommended,
-    ...tseslint.configs.recommendedTypeChecked,
-  ],
-  languageOptions: {
-    parserOptions: {
-      project: true,
-      tsconfigRootDir: import.meta.dirname,
+export default [
+  eslint.configs.recommended,
+  ...tseslint.configs.recommendedTypeChecked,
+  {
+    files: ["**/*.ts"],
+    languageOptions: {
+      parserOptions: {
+        project: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
     },
-  },
-  plugins: {
-    "@stylistic": stylistic,
-  },
-  rules: {
-    '@stylistic/semi': 'error',
-    '@typescript-eslint/no-unsafe-assignment': 'error',
-    '@typescript-eslint/no-explicit-any': 'error',
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/restrict-template-expressions': 'off',
-    '@typescript-eslint/restrict-plus-operands': 'off',
-    '@typescript-eslint/no-unused-vars': [
-      'error',
-      { 'argsIgnorePattern': '^_' }
-    ],
-  },
-});
+    plugins: {
+      "@stylistic": stylistic,
+    },
+    rules: {
+      "@stylistic/semi": "error",
+      "@typescript-eslint/no-unsafe-assignment": "error",
+      "@typescript-eslint/no-explicit-any": "error",
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+      "@typescript-eslint/restrict-template-expressions": "off",
+      "@typescript-eslint/restrict-plus-operands": "off",
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        { argsIgnorePattern: "^_" },
+      ],
+    },
+  }
+];
 ```
 
 Quite a few semicolons are missing, but those are easy to add. We also have to solve the ESlint issues concerning the *any* type:
