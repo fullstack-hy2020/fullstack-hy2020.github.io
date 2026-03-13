@@ -371,7 +371,7 @@ The following command only runs the tests found in the <i>tests/note_api.test.js
 npm test -- tests/note_api.test.js
 ```
 
-The [--tests-by-name-pattern](https://nodejs.org/api/test.html#filtering-tests-by-name) option can be used for running tests with a specific name:
+The [--test-name-pattern](https://nodejs.org/api/test.html#filtering-tests-by-name) option can be used for running tests with a specific name:
 
 ```js
 npm test -- --test-name-pattern="a specific note is within the returned notes"
