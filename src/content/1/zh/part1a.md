@@ -732,7 +732,7 @@ part2
 课程的每一章节都有一个目录，每个目录下面还有一系列练习的目录，如第1章节的“unicafe”。
 
 <!-- Most of the exercises of the course build a larger application, eg. courseinfo, unicafe and anecdotes in this part, bit by bit. It is enough to submit the completed application. You can make a commit after each exercise, but that is not compulsory. For example the course info app is built in exercises 1.1.-1.5. It is just the end result after 1.5 that you need to submit! -->
-课程中的大多数联系都会一点一点地构成更大的应用，比如这一章节的courseinfo、unicafe和anecdotes。只要上交最终完成的应用就可以了。你可以每完成一道练习就在git中做一次提交，但这不是必须的。比如练习1.1.~1.5会构建一个课程信息的应用，只需要上交完成1.5后的成果就可以了！
+课程中的大多数练习都会一点一点地构成更大的应用，比如这一章节的courseinfo、unicafe和anecdotes。只要上交最终完成的应用就可以了。你可以每完成一道练习就在git中做一次提交，但这不是必须的。比如练习1.1.~1.5会构建一个课程信息的应用，只需要上交完成1.5后的成果就可以了！
 
 <!-- For each web application for a series of exercises, it is recommended to submit all files relating to that application, except for the directory <i>node\_modules</i>.-->
 对于每道Web应用的系列练习，建议上交所有与该应用有关的文件，除了目录<i>node\_modules</i>。
