@@ -148,19 +148,11 @@ By submitting 25 exercises for part 10 of the course on React Native, you can ea
 
 #### Part 11 - Full Stack Web Development: Continuous Integration / Continuous Delivery (1 cr, CSM14112)
 
-By submitting all exercises for part 11 of the course on Continuous Integration / Continuous Delivery, you can earn one additional credit. More information about this part's prerequisites and exercise submission can be found in [part 11](/en/part11).
-
-- Submit all exercises for part 11.
-- [Enroll in part 11 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-33f0ce21-ff95-42e1-9581-2c75ea3dd2a5).
-- [Request credits for part 11](/en/part0/general_info/#how-to-get-your-credits).
+Material of part 11 has been moved to <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-continuous-integration">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-continuous-integration</a>. All practicalities are explained there.
 
 #### Part 12 - Full Stack Web Development: Containers (1 cr, CSM141084)
 
-By submitting all exercises for part 12 of the course on Container technology, you can earn one additional credit. More information about this part's prerequisites and exercise submission can be found in [part 12](/en/part12).
-
-- Submit all exercises for part 12.
-- [Enroll in part 12 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-fd32902f-3941-4963-b73b-8408cff02ae2).
-- [Request credits for part 12](/en/part0/general_info/#how-to-get-your-credits).
+Material of part 12 has been moved to <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-containers">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-containers</a>. All practicalities are explained there.
 
 #### Part 13 - Full Stack Web Development: Relational databases (1 cr, CSM14114)
 
@@ -168,7 +160,7 @@ Material of part 13 has been moved to <a href="https://courses.mooc.fi/org/uh-cs
 
 ### Studying the course in a nutshell
 
-How to study the course – instructions in a nutshell: 5 cr core course CSM141081
+#### How to study the course – instructions in a nutshell: 5 cr core course CSM141081
 
 - Do the exercises. The exercises are submitted through GitHub and marking them as done on the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
     - [The course certificate](/en/part0/general_info#course-certificate) will be available in the submission system.
@@ -180,13 +172,22 @@ How to study the course – instructions in a nutshell: 5 cr core course CSM1410
 
 Please note that if you do the "base course" with 6 or 7 credits, you need separate registrations for the extra credits, see [Parts and completion](/en/part0/general_info#parts-and-completion) for more.
 
-How to study the course – instructions in a nutshell: other course parts
+#### How to study the course – instructions in a nutshell: parts 8-10
 
-- Do the exercises. The exercises are submitted through GitHub and marking them as done on the submission system. Note that parts 8-12 have a separate instance in the submission system, part 13 has a different system of exercise submissions
+- Do the exercises. The exercises are submitted through GitHub and marking them as done on the submission system. Note that parts 8-10 have a separate instance in the submission system
     - [The course certificate](/en/part0/general_info#course-certificate) will be available in the submission system
 - If you want to get University of Helsinki credits
     - Enroll in the course. You can enroll in each part through the link in the course material ([Parts and completion](/en/part0/general_info#parts-and-completion)). Enroll in each part separately.
 - Mark the part completed in the submission system. Read more [here](/en/part0/general_info#how-to-get-your-credits)
+
+#### How to study the course – instructions in a nutshell: parts 11-13
+
+All practicalities are explained in the new course pages
+
+- <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-continuous-integration">part 11</a>
+- <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-containers">part 12</a>
+- <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-relational-databases">part 13</a>
+
 
 ### Submitting exercises
 
@@ -322,22 +323,18 @@ An electronic transcript of studies will be delivered to you by email. Present t
 
 ### No more yearly versions
 
-There are no more "yearly versions" of the course, the course is open all the time. Each part is updated once or twice per year. Updates are mostly minor: library versions are updated and text clarity is improved. However, there might also be some bigger changes.
+There are no "yearly versions" of the course, the course is open all the time. Each part is updated once or twice per year. Updates are mostly minor: library versions are updated and text clarity is improved. However, there might also be some bigger changes.
 
 Despite changes *all the submitted exercises remain valid*, and the course can be continued without being bothered about updates. Also, the policy for getting certificates, university credits etc. shall remain the same no matter what happens.
 
 Recent major changes
 
+- Parts 11-13 (March 2026): content updated and material moved to new platform
 - Part 8: (3th January 2026) Apollo Server updated to v5. Apollo Client updated to v4. Refactoring backend code moved to part8c. Lot's of other small improvements.
 - Part 6 (12th October 2025): Jest replaced with Vitest. Axios replaced with Fetch API
 - Part 5 (21st August, 2025): React updated to version 19. PropTypes and forwardRef are no longer used. ESLint configurations updated
 - Part 4 (13th August, 2025): Express updated to version 5 and the express-async-errors library removed from part 4b
-- Part 9 (28th August, 2024): Zod library for validating request body type
-- Part 3 (20th June, 2024): ESLint configurations updated
-- Part 10 (21st March, 2024): Create React app replaced with Vite
-- Parts 3-5 (February-March 2024): Libraries used for testing changed
-- Part 10 (26th February, 2024): Library versions updated
-- Part 11 (16th January 2024): Example project dependencies updated
+
 
 ### Expanding on a previously completed course
 

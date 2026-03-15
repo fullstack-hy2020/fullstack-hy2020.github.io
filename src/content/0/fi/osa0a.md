@@ -103,19 +103,11 @@ Suorittamalla 25 tehtävää kurssin kymmenennestä, React Nativea käsittelevä
 
 #### Osa 11 - Full Stack ‑websovelluskehitys: jatkuva integraatio (1 op, CSM14112, englanniksi)
 
-Suorittamalla kaikki kurssin yhdennentoista, jatkuvaa integraatiota käsittelevän osan tehtävät, voit laajentaa suoritustasi yhdellä opintopisteellä.
-Lisätietoja osan esitietovaatimuksista ja tehtävien palauttamisesta löydät [osasta 11](/en/part11).
--	Tee kaikki tehtävät osasta 11.
--	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-33f0ce21-ff95-42e1-9581-2c75ea3dd2a5)
--	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
+Materiaali siirretty osoitteeseen  <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-continuous-integration">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-continuous-integration</a>. 
 
 #### Osa 12 - Full Stack  ‑websovelluskehitys: konttiteknologia (1 op, CSM141084, englanniksi)
 
-Suorittamalla kaikki kurssin kahdennentoista, konttiteknologiaa käsittelevän osan tehtävät, voit laajentaa suoritustasi yhdellä opintopisteellä.
-Lisätietoja osan esitietovaatimuksista ja tehtävien palauttamisesta löydät [osasta 12](/en/part12).
--	Tee kaikki tehtävät osasta 12.
--	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-fd32902f-3941-4963-b73b-8408cff02ae2)
--	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
+Materiaali siirretty osoitteeseen <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-containers">https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-containers</a>. 
 
 #### Osa 13 - Full Stack  ‑websovelluskehitys: relaatiotietokannat (1 op, CSM14114)
 
@@ -123,7 +115,7 @@ Materiaali siirretty osoitteeseen <a href="https://courses.mooc.fi/org/uh-cs/cou
 
 ### Suoritusohjeet pähkinänkuoressa
 
-Kurssin suoritusohjeet pähkinänkuoressa (5 op ydinkurssi CSM141081) 
+#### Kurssin suoritusohjeet pähkinänkuoressa (5 op ydinkurssi CSM141081) 
 
 - Tee tehtävät. Palauta vastauksesi [palautussovelluksen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) kautta.
 - Ilmoittaudu kurssille. Pääset ilmoittautumaan palautussovelluksesta löytyvän [linkin](/osa0/yleista#kurssikoe) kautta sen jälkeen kun olet palauttanut riittävän määrän tehtäviä. 
@@ -131,11 +123,20 @@ Kurssin suoritusohjeet pähkinänkuoressa (5 op ydinkurssi CSM141081)
 - Tee kurssikoe palautusjärjestelmässä, lue lisää [täältä](/osa0/yleista#kurssikoe).
 - Pyydä suoritusmerkintää palautussovelluksessa. Lue lisää [täältä](/osa0/yleista#suoritusmerkinnan-pyytaminen)
 
-Kurssin suoritusohjeet pähkinänkuoressa (Osat 6–13) 
+#### Kurssin suoritusohjeet pähkinänkuoressa (Osat 6–10) 
 
-- Tee tehtävät. Palauta vastauksesi palautussovelluksen kautta. Huomaa, että osat 8–12 palautetaan palautussovelluksessa erillisiin kurssi-instansseihin. Lue osan 13 käytänteistä osan <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-relational-databases">materiaalista</a>.
+- Tee tehtävät. Palauta vastauksesi palautussovelluksen kautta. Huomaa, että osat 8–11 palautetaan palautussovelluksessa erillisiin kurssi-instansseihin. 
+
 - Ilmoittaudu kurssille. Pääset ilmoittautumaan kurssimateriaalista (ks. [Osat ja suorittaminen](/osa0/yleista#osat-ja-suorittaminen)) löytyvän ilmoittautumislinkin kautta.  Ilmoittaudu erikseen kuhunkin osaan. 
 - Pyydä suoritusmerkintää palautussovelluksessa. Lue lisää [täältä](/osa0/yleista#suoritusmerkinnan-pyytaminen)
+
+#### Kurssin suoritusohjeet pähkinänkuoressa (Osat 11-13) 
+
+Käytännöt selviävät osien materiaalista:
+
+- <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-continuous-integration">osa 11</a>
+- <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-containers">osa 12</a>
+- <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-relational-databases">osa 13</a>
 
 ### Tehtävien palauttaminen
 
@@ -266,21 +267,16 @@ Toimittamalla virallisen opintosuoritusotteen omaan korkeakouluusi, saat opintop
 
 ### Ei enää vuosittaisia versioita
 
-Kurssilla ei ole enää vuosittaisia versiota. Kurssi on siis käynnissä koko ajan. Jokaista kurssin osaa päivitetään vähintään kerran vuodessa. Päivitykset ovat useimmiten pieniä, kirjastoversiot nostetaan ajan tasalle ja tekstiä parannellaan. Myös isompia päivityksiä tapahtuu välillä.
+Kurssilla ei ole vuosittaisia versiota. Kurssi on siis käynnissä koko ajan. Jokaista kurssin osaa päivitetään vähintään kerran vuodessa. Päivitykset ovat useimmiten pieniä, kirjastoversiot nostetaan ajan tasalle ja tekstiä parannellaan. Myös isompia päivityksiä tapahtuu välillä.
 
 Muutoksista huolimatta <i>kaikki jo tehdyt palautukset säilyvät voimassa</i>, eli voit jatkaa kurssia päivityksistä huolimatta normaaliin tapaan.
 
 Viimeaikaisia isompia muutoksia
+- Osat 11-13 (maaliskuu 2026): sisältö päivitetty ja materiaali siirretty uuteen osoitteeseen
 - Osa 8: (3.1.2026) Apollo Server päivitetty versioon v5. Apollo Client päivitetty versioon v4. Backend-koodin refaktorointi siirretty osaan 8c. Lukuisia muita pieniä parannuksia.
 - Osa 6 (12.10.2025): Jest korvattu Vitestillä. Axios korvattu Fetch API:lla.
 - Osa 5 (21.8.2025): React päivitetty versioon 19. Proptypes ja forwardRef poistuneet käytöstä. Eslint-konfiguraatiot päivitetty
 - Osa 4 (13.8.2025): Express päivitetty versioon 5 ja kirjasto express-async-errors poistettu osasta 4b
-- Osa 9 (28.8.2024): Zod-kirjasto datan validointiin
-- Osa 3 (20.6.2024): ESLint-konfiguraatiot päivitetty
-- Osa 12 (21.3.2024): Create React app korvattu Vitellä
-- Osat 3-5 (helmi-maaliskuu 2024): Testaukseen käytetyt kirjastot muutettu
-- Osa 10 (26.2.2024): Kirjastoversiot päivitetty
-- Osa 11 (16.1.2024): Esimerkkiprojektin riippuvuudet päivitetty
 
 ### Aiemmin suoritetun kurssin täydentäminen
 
