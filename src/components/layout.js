@@ -7,12 +7,14 @@ import { useTranslation } from 'react-i18next';
 import Header from './Header/Header';
 import InfoBanner from './InfoBanner';
 import InfoBanner2 from './InfoBanner2';
+import InfoBanner3 from './InfoBanner3';
 import Footer from './Footer/Footer';
 import PropTypes from 'prop-types';
 import SkipToContent from './SkipToContent/SkipToContent';
 
 const BANNER_TO_KEY = 'part_13_changes';
 const BANNER2_TO_KEY = 'part_12_changes';
+const BANNER3_TO_KEY = 'part_11_changes';
 
 const Layout = (props) => {
   const { i18n } = useTranslation();
@@ -22,6 +24,7 @@ const Layout = (props) => {
 
   const [visible, setVisible] = useState(false);
   const [visible2, setVisible2] = useState(false);
+  const [visible3, setVisible3] = useState(false);
 
   useEffect(() => {
     const key = localStorage.getItem(BANNER_TO_KEY);
@@ -39,6 +42,14 @@ const Layout = (props) => {
     }
   }, []);
 
+  useEffect(() => {
+    const key = localStorage.getItem(BANNER3_TO_KEY);
+    if (!key) {
+      const relevant = window.location.href.includes('en/part11') || window.location.href.includes('osa11');
+      setVisible3(relevant);
+    }
+  }, []);
+
   const hideNote = () => {
     console.log('hideNote');
     localStorage.setItem(BANNER_TO_KEY, 'yes');
@@ -51,6 +62,12 @@ const Layout = (props) => {
     setVisible2(false);
   };
 
+  const hideNote3 = () => {
+    console.log('hideNote');
+    localStorage.setItem(BANNER3_TO_KEY, 'yes');
+    setVisible3(false);
+  };
+
   return (
     <div className="main-wrapper">
       <SkipToContent isCoursePage={isCoursePage} />
@@ -60,6 +77,8 @@ const Layout = (props) => {
       <InfoBanner onHide={() => hideNote()} visible={visible} />
 
       <InfoBanner2 onHide={() => hideNote2()} visible={visible2} />
+
+      <InfoBanner3 onHide={() => hideNote3()} visible={visible3} />
 
       <main id="main-content">{children}</main>
 
