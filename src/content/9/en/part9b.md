@@ -900,7 +900,7 @@ What if we would like to restrict developers from using the *any* type? Fortunat
 Let's install ESlint and its TypeScript extensions:
 
 ```shell
-npm install --save-dev eslint @eslint/js @types/eslint__js typescript typescript-eslint
+npm install --save-dev eslint @eslint/js typescript typescript-eslint
 ```
 
 We will configure ESlint to [disallow explicit any](https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/docs/rules/no-explicit-any.mdx). Write the following rules to *eslint.config.mjs*:
