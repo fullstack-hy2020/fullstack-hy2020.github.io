@@ -130,7 +130,7 @@ joka sijoitetaan vakioarvoiseen muuttujaan <i>App</i>
 const App = ...
 ```
 
-JavaScriptissa on muutama tapa määritellä funktioita. Käytämme nyt JavaScriptin hieman uudemman version [ECMAScript 6:n](http://es6-features.org/#Constants) eli ES6:n [nuolifunktiota](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) (arrow functions).
+JavaScriptissa on muutama tapa määritellä funktioita. Käytämme nyt JavaScriptin hieman uudemman version [ECMAScript 6:n](https://ecma-international.org/publications-and-standards/standards/ecma-262/) eli ES6:n [nuolifunktiota](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) (arrow functions).
 
 Koska funktio koostuu vain yhdestä lausekkeesta, käytössämme on lyhennysmerkintä, joka vastaa seuraavaa koodia:
 
