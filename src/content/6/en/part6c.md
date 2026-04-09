@@ -957,7 +957,7 @@ export default useCounter
 Using the context is now one step simpler:
 
 ```js
-import { useCounter } from '../hooks/useCounter'
+import useCounter from '../hooks/useCounter'
 
 const Display = () => {
   const { counter } = useCounter()
