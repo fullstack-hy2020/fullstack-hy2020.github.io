@@ -49,7 +49,7 @@ You can simulate a rendering error by temporarily throwing an exception inside o
 
 ```js
 const BlogList = ({ blogs }) => {
-  throw new Error('simulated error') /*/ highlight line
+  throw new Error('simulated error') // highlight line
   return (
     // ...
   )
