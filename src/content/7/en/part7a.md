@@ -697,7 +697,7 @@ If we were to do this, we would lose much of the benefit provided by the <i>useF
 
 #### 7.4: useAnecdotes, step1
 
-The project has a JSON server already configured. YOu can start it with:
+The project has a JSON server already configured. You can start it with:
 
 ```bash
 npm run server
