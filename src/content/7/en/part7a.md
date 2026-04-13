@@ -594,12 +594,17 @@ Let's once again return to working with anecdotes. Use the app found in the repo
 
 If you clone the project into an existing git repository, remember to delete the git configuration of the cloned application:
 
+```bash
 cd routed-anecdotes   // go first to directory of the cloned repository
 rm -rf .git
+```
+
 The application starts the usual way, but first, you need to install its dependencies:
 
+```bash
 npm install
 npm run dev
+```
 
 #### 7.1: useField hook
 
