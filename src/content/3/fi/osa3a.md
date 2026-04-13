@@ -13,7 +13,7 @@ Backendin toteutusympäristönä käytämme [Node.js](https://nodejs.org/en/):ä
 
 Kurssimateriaalia tehtäessä on ollut käytössä Node.js:n versio <i>v22.3.0</i>. Suosittelen, että omasi on vähintään yhtä tuore (ks. komentoriviltä _node -v_).
 
-Kuten [osassa 1](/osa1/java_scriptia) todettiin, selaimet eivät vielä osaa kaikkia uusimpia JavaScriptin ominaisuuksia, ja siksi selainpuolen koodi täytyy kääntää eli <i>transpiloida</i> esim [Babel](https://babeljs.io/):illa. Backendissa tilanne on kuitenkin toinen, koska uusin Node hallitsee riittävissä määrin myös JavaScriptin uusia versioita, joten suoritamme Nodella kirjoittamaamme koodia suoraan ilman transpilointivaihetta.
+Kuten [osassa 1](/osa1/java_scriptia) todettiin, selaimet eivät vielä osaa kaikkia uusimpia JavaScriptin ominaisuuksia, ja siksi selainpuolen koodi täytyy kääntää eli <i>transpiloida</i> esim. [Babel](https://babeljs.io/):illa. Backendissa tilanne on kuitenkin toinen, koska uusin Node hallitsee riittävissä määrin myös JavaScriptin uusia versioita, joten suoritamme Nodella kirjoittamaamme koodia suoraan ilman transpilointivaihetta.
 
 Tavoitteenamme on tehdä [osan 2](/osa2) muistiinpanosovellukseen sopiva backend. Aloitetaan kuitenkin ensin perusteiden läpikäyminen toteuttamalla perinteinen "hello world" ‑sovellus.
 
@@ -717,7 +717,7 @@ Mitä rivillä tapahtuu? <em>notes.map(n => Number(n.id))</em> muodostaa tauluko
 
 **HUOM:** Koska nyt ei ole kyse frontendista ja Reactista, sovellusta <strong>ei luoda</strong> Vitellä vaan komennolla <em>npm init</em>, kuten ylempänä tämän osan materiaalissa.
 
-Älä lisää *node_modules*-kansiota verionhallintaan. Komento _npm init_ ei luo automaattisesti <i>.gitignore</i>-tiedostoa, joten luo sellainen projektin juureen ja lisää sinne rivi *node_modules*. Näin git ei enää huomioi kyseistä kansiota versionhallinnassa. 
+Älä lisää *node_modules*-kansiota versionhallintaan. Komento _npm init_ ei luo automaattisesti <i>.gitignore</i>-tiedostoa, joten luo sellainen projektin juureen ja lisää sinne rivi *node_modules*. Näin git ei enää huomioi kyseistä kansiota versionhallinnassa. 
 
 **Vahva suositus:** kun teet backendin koodia, pidä koko ajan silmällä, mitä palvelimen koodia suorittavassa konsolissa tapahtuu.
 
