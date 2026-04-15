@@ -584,6 +584,6 @@ Error: listen EADDRINUSE 0.0.0.0:3001
 
 it means that port 3001 is already in use by another application, e.g. in use by an already running json-server. Close the other application, or change the port in case that doesn't work.
 
-Modify the application such that the initial state of the data is fetched from the server using the <i>axios</i>-library. Complete the fetching with an [Effect hook](https://react.dev/reference/react/useEffect).
+Modify the application such that the initial state of the data is fetched from the server using the <i>axios</i>-library. Complete the fetching with an [Effect hook](https://react.dev/reference/react/useEffect). Don't worry if the new entries are not added to the server; we'll get to that in the next part. 
 
 </div>
