@@ -1069,6 +1069,80 @@ Because styled-components processes the style definitions, it is possible to use
 
 [React Navigation](https://reactnavigation.org/) is a routing library for React Native. It shares some similarities with the React Router library we have been using during this and earlier parts. However, unlike React Router, React Navigation offers more native features such as native gestures and animations to transition between views.
 
+### Sharing the application with a QR code
+
+So far, we have only developed the application locally on our own machine and tested it on our own phone or emulator. But what if we wanted to let other people test the application as well, so that someone else could try it on their own phone?
+
+Expo provides a ready-made solution for this. [Expo Application Services](https://expo.dev/services) (EAS) is Expo's cloud service that provides tools for building, updating, and distributing applications. [EAS Update](https://docs.expo.dev/eas-update/introduction/) is a free service that allows you to publish your application to Expo's servers. A unique QR code is generated for each published version, and with it anyone can open the application with their Expo Go app.
+
+Let's now deploy the final version of the application to Expo's servers. You will need an Expo account to use the service. If you do not have one, create an account at https://expo.dev/signup.
+
+Log in to your Expo account from the command line:
+
+```bash
+npx eas-cli@latest login
+```
+
+Next, configure the repository as an EAS project:
+
+```bash
+npx eas-cli@latest update:configure
+```
+
+The <code>update:configure</code> command connects the project to Expo's EAS service and adds the required configuration to the <i>app.json</i> file.
+
+The initial setup is now complete. However, one detail still needs attention. In order to work, the application needs the [Rate Repository API](https://github.com/fullstack-hy2020/rate-repository-api), which acts as the application's backend and database. Because it is a completely separate application from the React Native frontend, it would normally need to be deployed somewhere separately.
+
+For the final exercises of this part, the course provides a pre-deployed Rate Repository API at https://rate-repository-api.ext.ocp-prod-0.k8s.it.helsinki.fi. This is the same Rate Repository API that we have used locally in previous exercises. The API functionality is the same as before, and the database has been seeded with a few users and repositories according to the instructions in the Rate Repository API [README](https://github.com/fullstack-hy2020/rate-repository-api?tab=readme-ov-file#-getting-started).
+
+The API is now running in production mode, meaning that the environment variable NODE_ENV is set to production. This has some practical consequences. For example, Apollo Sandbox does not automatically know the API schema. The database used by the Rate Repository API is also reset regularly without prior warning, so during local development you should still use a locally running Rate Repository API.
+
+Create an environment variable named <code>EXPO\_PUBLIC\_APOLLO\_URI</code> for the EAS project and set its value to the URL of the pre-deployed Rate Repository API with the following command:
+
+```bash
+npx eas-cli@latest env:create --name EXPO_PUBLIC_APOLLO_URI --value https://rate-repository-api.ext.ocp-prod-0.k8s.it.helsinki.fi/ --environment preview --visibility plaintext
+```
+- The environment variable is created in an environment named <code>preview</code>, which is intended specifically for this kind of application testing.
+- The visibility of the environment variable is set to <code>plaintext</code>, because the value is not particularly secret.
+
+We are now ready to deploy the application to Expo's servers. The deployment is done with the following command:
+
+```bash
+npx eas-cli@latest update --branch main --environment preview --message "The first deploy"
+```
+
+- EAS Update makes it possible to group updates into different branches. In our case, the <code>--branch</code> option specifies that the update is published to a branch named <code>main</code>.
+- Thanks to the <code>--environment</code> option, our application gets access to the <code>preview</code> environment and the <code>EXPO\_PUBLIC\_APOLLO\_URI</code> environment variable that we defined earlier.
+- The <code>--message</code> option sets an arbitrary message for the update so that it can be distinguished from other updates.
+
+When the update has been published, the command line will finally print a link to the EAS Dashboard page for the deployment. The dashboard includes a <i>Preview</i> button that shows a QR code leading to the application. When the QR code is scanned with the Expo Go app, the application should open on the phone and work with the external Rate Repository API. In other words, the repository list should load, it should be possible to create new users in the application and sign in with existing credentials, and so on.
+
+If you want to make changes to the application, it is enough to run the latest <code>npx eas-cli@latest update</code> command again to publish a new update. Note that each published update gets its own unique QR code.
+
+Using EAS Update makes it easier to demonstrate the progress of application development to others, because there is no need to share source code, build installation packages, or publish anything to an app store. The deployment process stays simple while still allowing the application to be tested on real devices.
+
+
+</div>
+
+
+<div class="tasks">
+
+### Exercise 10.28
+
+#### Exercise 10.28:
+
+Publish the final version of your application via EAS Update by following the instructions in the course material.
+
+Then add a <i>README.md</i> file to the root of the repository and include a screenshot of the QR code in it. Make sure that the application opened through the QR code actually works, because the course instructor will inspect your application using the QR code before awarding credit.
+
+Your <i>README.md</i> file can start, for example, like this:
+
+![README.md example](../../images/10/31.png)
+
+</div>
+
+<div>
+
 ### Closing words
 
 That's it, our application is ready. Good job! We have learned many new concepts during our journey such as setting up our React Native application using Expo, using React Native's core components and adding style to them, communicating with the server, and testing React Native applications. The final piece of the puzzle would be to deploy the application to the Apple App Store and Google Play Store.
