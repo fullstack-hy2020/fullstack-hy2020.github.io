@@ -392,7 +392,7 @@ const App = () => {
 }
 ```
 
-Eli <i>onSuccess</i>-takaisinkutsussa ensin luetaan <i>queryClient</i>-olion avulla olemassaoleva kyselyn <i>notes</i> tila ja päivitetään sitä lisäämällä mukaan uusi muistiinpano, joka saadaan takaisunkutsufunktion parametrina. Parametrin arvo on funktion <i>createNote</i> palauttama arvo, jonka määriteltiin tiedostossa <i>requests.js</i> seuraavasti:
+Eli <i>onSuccess</i>-takaisinkutsussa ensin luetaan <i>queryClient</i>-olion avulla olemassaoleva kyselyn <i>notes</i> tila ja päivitetään sitä lisäämällä mukaan uusi muistiinpano, joka saadaan takaisinkutsufunktion parametrina. Parametrin arvo on funktion <i>createNote</i> palauttama arvo, jonka määriteltiin tiedostossa <i>requests.js</i> seuraavasti:
 
 ```js
 export const createNote = async (newNote) => {
@@ -648,7 +648,7 @@ Sovellus kasvaa:
 
 ![](../../images/6/t6.png)
 
-Komponentin <i>App</i> rooli muuttuu, se sälyttää edelleen sovelluksen tilan, mutta ei enää itse renderöi suoraan laskurin tilaa käyttäviä komponentteja:
+Komponentin <i>App</i> rooli muuttuu, se säilyttää edelleen sovelluksen tilan, mutta ei enää itse renderöi suoraan laskurin tilaa käyttäviä komponentteja:
 
 ```js
 const App = () => {
@@ -919,7 +919,7 @@ const Controls = () => {
 }
 ```
 
-Parantamisen varaa on vielä erään asian suhteen. Jos tarkastelemme lasskurikontekstin käyttöönottoa, huomaamme, että sama toimistuu molemmissa sitä käyttävissä komponenteissa:
+Parantamisen varaa on vielä erään asian suhteen. Jos tarkastelemme laskurikontekstin käyttöönottoa, huomaamme, että sama toimistuu molemmissa sitä käyttävissä komponenteissa:
 
 ```js
 import { useContext } from 'react'
