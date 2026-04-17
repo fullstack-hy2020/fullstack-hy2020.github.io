@@ -938,7 +938,7 @@ Through these exercises, we'll implement a frontend for the GraphQL library.
 
 Take [this project](https://github.com/fullstack-hy2020/library-frontend) as a start for your application.
 
-**Note** if you want, you can also use [React router](/en/part7/react_router) to implement the application's navigation!
+**Note** if you want, you can also use [React router](https://fullstackopen.com/en/part5/react_router_ui_frameworks#react-router) to implement the application's navigation!
 
 #### 8.8: Authors view
 
