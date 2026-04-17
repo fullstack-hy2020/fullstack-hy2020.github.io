@@ -82,7 +82,7 @@ Let us now create a simple React app with the following directory structure:
 ├── dist
 │   └── index.html
 ├── src
-│   ├── index.jsx
+│   ├── main.jsx
 │   └── App.jsx
 └── package.json
 ```
