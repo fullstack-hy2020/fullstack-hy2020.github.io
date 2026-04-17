@@ -45,7 +45,7 @@ query FetchBlogsQuery {
 }
 ```
 
-The content of the `FetchBlogsQuery` can be roughly interpreted as: find a user named `"mluukkai"` and for each of his `followedUsers`, find all their `blogs`, and for each blog, all its `comments`, and for each `user` who wrote each comment, find their `blogs`, and return the `title` of each of them.
+The content of the <code>FetchBlogsQuery</code> can be roughly interpreted as: find a user named <code>"mluukkai"</code> and for each of his <code>followedUsers</code>, find all their <code>blogs</code>, and for each blog, all its <code>comments</code>, and for each <code>user</code> who wrote each comment, find their <code>blogs</code>, and return the <code>title</code> of each of them.
 
 The server's response would be about the following JSON object:
 
@@ -252,7 +252,7 @@ Create a new npm project with <code>npm init</code> and install the required dep
 npm install @apollo/server graphql
 ```
 
-Also create a `index.js` file in your project's root directory.
+Also create a <code>index.js</code> file in your project's root directory.
 
 The initial code is as follows:
 
