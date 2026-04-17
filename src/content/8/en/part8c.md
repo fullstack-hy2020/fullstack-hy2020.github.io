@@ -264,14 +264,14 @@ Let’s use the module in the file <i>index.js</i>:
 ```js
 require('dotenv').config()
 
-const connectToDatabase = require('./db') // highlight-line
+const connectToDatabase = require('./db') // HIGHLIGHT LINE
 const startServer = require('./server')
 
-const MONGODB_URI = process.env.MONGODB_URI // highlight-line
+const MONGODB_URI = process.env.MONGODB_URI // HIGHLIGHT LINE
 const PORT = process.env.PORT || 4000
 
-const main = async () => { // highlight-line
-  await connectToDatabase(MONGODB_URI) // highlight-line
+const main = async () => { // HIGHLIGHT LINE
+  await connectToDatabase(MONGODB_URI) // HIGHLIGHT LINE
   startServer(PORT)
 }
 
@@ -408,7 +408,7 @@ Mutation: {
 
       const person = new Person({ ...args })
 
-// highlight-start
+// BEGIN HIGHLIGHT
       try {
         await person.save()
       } catch (error) {
@@ -422,7 +422,7 @@ Mutation: {
       }
  
       return person
-// highlight-end
+// END HIGHLIGHT
   },
     editNumber: async (root, args) => {
       const person = await Person.findOne({ name: args.name })
@@ -433,7 +433,7 @@ Mutation: {
 
       person.phone = args.phone
 
-// highlight-start
+// BEGIN HIGHLIGHT
       try {
         await person.save()
       } catch (error) {
@@ -447,7 +447,7 @@ Mutation: {
       }
  
       return person
-// highlight-end
+// END HIGHLIGHT
     }
 }
 ```
@@ -603,13 +603,13 @@ Let’s change the backend startup so that the object passed as the second param
 ```js
 const { ApolloServer } = require('@apollo/server')
 const { startStandaloneServer } = require('@apollo/server/standalone')
-const jwt = require('jsonwebtoken') // highlight-line
+const jwt = require('jsonwebtoken') // HIGHLIGHT LINE
 
 const resolvers = require('./resolvers')
 const typeDefs = require('./schema')
-const User = require('./models/user') // highlight-line
+const User = require('./models/user') // HIGHLIGHT LINE
 
-// highlight-start
+// BEGIN HIGHLIGHT
 const getUserFromAuthHeader = async (auth) => {
   if (!auth || !auth.startsWith('Bearer ')) {
     return null
@@ -618,7 +618,7 @@ const getUserFromAuthHeader = async (auth) => {
   const decodedToken = jwt.verify(auth.substring(7), process.env.JWT_SECRET)
   return User.findById(decodedToken.id).populate('friends')
 }
-// highlight-end
+// END HIGHLIGHT
 
 const startServer = (port) => {
   const server = new ApolloServer({
@@ -628,13 +628,13 @@ const startServer = (port) => {
 
   startStandaloneServer(server, {
     listen: { port },
-    // highlight-start
+    // BEGIN HIGHLIGHT
     context: async ({ req }) => {
       const auth = req.headers.authorization
       const currentUser = await getUserFromAuthHeader(auth)
       return { currentUser }
     },
-    // highlight-end
+    // END HIGHLIGHT
   }).then(({ url }) => {
     console.log(`Server ready at ${url}`)
   })
@@ -651,7 +651,7 @@ Finally, the context field <code>currentUser</code> is set to the user object co
 context: async ({ req }) => {
   const auth = req.headers.authorization
   const currentUser = await getUserFromAuthHeader(auth)
-  return { currentUser } // highlight-line
+  return { currentUser } // HIGHLIGHT LINE
 },
 ```
 
@@ -680,7 +680,7 @@ Let's first remove all persons not in anyone's friends list from the database.
 
 ```js
 Mutation: {
-  // highlight-start
+  // BEGIN HIGHLIGHT
   addPerson: async (root, args, context) => {
     const currentUser = context.currentUser
  
@@ -691,7 +691,7 @@ Mutation: {
         }
       })
     }
-    // highlight-end
+    // END HIGHLIGHT
 
     const nameExists = await Person.exists({ name: args.name })
 
@@ -708,8 +708,8 @@ Mutation: {
 
     try {
       await person.save()
-      currentUser.friends = currentUser.friends.concat(person) // highlight-line
-      await currentUser.save() // highlight-line
+      currentUser.friends = currentUser.friends.concat(person) // HIGHLIGHT LINE
+      await currentUser.save() // HIGHLIGHT LINE
     } catch (error) {
       throw new GraphQLError(`Saving person failed: ${error.message}`, {
         extensions: {
@@ -733,7 +733,7 @@ Let’s also add the ability to add a person to your own friends list. The mutat
 ```js
 type Mutation {
   // ...
-  addAsFriend(name: String!): User // highlight-line
+  addAsFriend(name: String!): User // HIGHLIGHT LINE
 }
 ```
 
@@ -822,7 +822,7 @@ Let's change the book graphql schema a little
 type Book {
   title: String!
   published: Int!
-  author: Author! // highlight-line
+  author: Author! // HIGHLIGHT LINE
   genres: [String!]!
   id: ID!
 }
@@ -845,7 +845,7 @@ The following things do <i>not</i> have to work just yet:
 type Mutation {
   addBook(
     title: String!
-    author: String! // highlight-line
+    author: String! // HIGHLIGHT LINE
     published: Int!
     genres: [String!]!
   ): Book!

@@ -398,8 +398,8 @@ Let's add the following scripts to <i>package.json</i> to run the application:
 {
   //...
   "scripts": {
-    "start": "node index.js", // highlight-line
-    "dev": "node --watch index.js", // highlight-line
+    "start": "node index.js", // HIGHLIGHT LINE
+    "dev": "node --watch index.js", // HIGHLIGHT LINE
     // ...
   }
 }
@@ -500,7 +500,7 @@ const resolvers = {
     allPersons: () => persons,
     findPerson: (root, args) => persons.find(p => p.name === args.name)
   },
-  // highlight-start
+  // BEGIN HIGHLIGHT
   Person: {
     name: (root) => root.name,
     phone: (root) => root.phone,
@@ -508,7 +508,7 @@ const resolvers = {
     city: (root) => root.city,
     id: (root) => root.id
   }
-  // highlight-end
+  // END HIGHLIGHT
 }
 ```
 
@@ -531,17 +531,17 @@ Person: {
 Let's modify the schema a bit
 
 ```js
-  // highlight-start
+  // BEGIN HIGHLIGHT
 type Address {
   street: String!
   city: String! 
 }
-  // highlight-end
+  // END HIGHLIGHT
 
 type Person {
   name: String!
   phone: String
-  address: Address!   // highlight-line
+  address: Address!   // HIGHLIGHT LINE
   id: ID!
 }
 
@@ -565,7 +565,7 @@ const resolvers = {
     findPerson: (root, args) =>
       persons.find(p => p.name === args.name)
   },
-  // highlight-start
+  // BEGIN HIGHLIGHT
   Person: {
     address: (root) => {
       return { 
@@ -574,7 +574,7 @@ const resolvers = {
       }
     }
   }
-  // highlight-end
+  // END HIGHLIGHT
 }
 ```
 
@@ -639,10 +639,10 @@ const resolvers = {
     findPerson: (root, args) => persons.find((p) => p.name === args.name),
   },
   Person: {
-    address: ({ street, city }) => { // highlight-line
+    address: ({ street, city }) => { // HIGHLIGHT LINE
       return {
-        street, // highlight-line
-        city, // highlight-line
+        street, // HIGHLIGHT LINE
+        city, // HIGHLIGHT LINE
       }
     },
   },
@@ -673,7 +673,7 @@ The Mutation is given the details of the person as parameters. The parameter <i>
 Mutations also require a resolver:
 
 ```js
-const { v1: uuid } = require('uuid') // highlight-line
+const { v1: uuid } = require('uuid') // HIGHLIGHT LINE
 
 // ...
 
@@ -684,7 +684,7 @@ const resolvers = {
   Person: {
     // ...
   },
-  // highlight-start
+  // BEGIN HIGHLIGHT
   Mutation: {
     addPerson: (root, args) => {
       const person = { ...args, id: uuid() }
@@ -692,7 +692,7 @@ const resolvers = {
       return person
     }
   }
-  // highlight-end
+  // END HIGHLIGHT
 }
 
 // ...
@@ -769,7 +769,7 @@ However, GraphQL cannot handle everything automatically. For example, stricter r
 Let's prevent adding the same name to the phonebook multiple times:
 
 ```js
-const { GraphQLError } = require('graphql') // highlight-line
+const { GraphQLError } = require('graphql') // HIGHLIGHT LINE
 
 // ...
 
@@ -777,7 +777,7 @@ const resolvers = {
   // ..
   Mutation: {
     addPerson: (root, args) => {
-      // highlight-start
+      // BEGIN HIGHLIGHT
       if (persons.find(p => p.name === args.name)) {
         throw new GraphQLError(`Name must be unique: ${args.name}`, {
           extensions: {
@@ -786,7 +786,7 @@ const resolvers = {
           }
         })
       }
-      // highlight-end
+      // END HIGHLIGHT
 
       const person = { ...args, id: uuid() }
       persons = persons.concat(person)
@@ -828,16 +828,16 @@ query {
 The schema changes like so:
 
 ```js
-// highlight-start
+// BEGIN HIGHLIGHT
 enum YesNo {
   YES
   NO
 }
-// highlight-end
+// END HIGHLIGHT
 
 type Query {
   personCount: Int!
-  allPersons(phone: YesNo): [Person!]! // highlight-line
+  allPersons(phone: YesNo): [Person!]! // HIGHLIGHT LINE
   findPerson(name: String!): Person
 }
 ```
@@ -849,7 +849,7 @@ The resolver changes like so:
 ```js
 Query: {
   personCount: () => persons.length,
-  // highlight-start
+  // BEGIN HIGHLIGHT
   allPersons: (root, args) => {
     if (!args.phone) {
       return persons
@@ -860,7 +860,7 @@ Query: {
 
     return persons.filter(byPhone)
   },
-  // highlight-end
+  // END HIGHLIGHT
   findPerson: (root, args) =>
     persons.find(p => p.name === args.name)
 },
@@ -878,12 +878,12 @@ type Mutation {
     street: String!
     city: String!
   ): Person
-  // highlight-start
+  // BEGIN HIGHLIGHT
   editNumber(
     name: String!
     phone: String!
   ): Person
-  // highlight-end
+  // END HIGHLIGHT
 }
 ```
 

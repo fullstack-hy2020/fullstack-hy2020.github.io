@@ -85,11 +85,11 @@ The server's response is printed to the console:
 A <code>gql</code> tag is added before the template literal that forms the query, imported from the @apollo/client package:
 
 ```js
-import { ApolloClient, gql, HttpLink, InMemoryCache } from '@apollo/client' // highlight-line
+import { ApolloClient, gql, HttpLink, InMemoryCache } from '@apollo/client' // HIGHLIGHT LINE
 
 // ...
 
-const query = gql // highlight-line `
+const query = gql // HIGHLIGHT LINE `
   query {
     allPersons {
       name
@@ -114,7 +114,7 @@ import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 
 import { ApolloClient, gql, HttpLink, InMemoryCache } from '@apollo/client'
-import { ApolloProvider } from '@apollo/client/react' // highlight-line
+import { ApolloProvider } from '@apollo/client/react' // HIGHLIGHT LINE
 
 const client = new ApolloClient({
   link: new HttpLink({
@@ -127,9 +127,9 @@ const client = new ApolloClient({
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ApolloProvider client={client}> // highlight-line
+    <ApolloProvider client={client}> // HIGHLIGHT LINE
       <App />
-    </ApolloProvider> // highlight-line
+    </ApolloProvider> // HIGHLIGHT LINE
   </StrictMode>,
 )
 ```
@@ -217,7 +217,7 @@ The <code>App</code> component still makes the query, and passes the result to t
 ```js
 import { gql } from '@apollo/client'
 import { useQuery } from '@apollo/client/react'
-import Persons from './components/Persons' // highlight-line
+import Persons from './components/Persons' // HIGHLIGHT LINE
 
 // ...
 
@@ -228,7 +228,7 @@ const App = () => {
     return <div>loading...</div>
   }
 
-  return <Persons persons={result.data.allPersons} /> // highlight-line
+  return <Persons persons={result.data.allPersons} /> // HIGHLIGHT LINE
 }
 
 ```
@@ -316,15 +316,15 @@ const Person = ({ person, onClose }) => {
 }
 
 const Persons = ({ persons }) => {
-  // highlight-start
+  // BEGIN HIGHLIGHT
   const [nameToSearch, setNameToSearch] = useState(null)
   const result = useQuery(FIND_PERSON, {
     variables: { nameToSearch },
     skip: !nameToSearch,
   })
-  // highlight-end
+  // END HIGHLIGHT
 
-  // highlight-start
+  // BEGIN HIGHLIGHT
   if (nameToSearch && result.data) {
     return (
       <Person
@@ -333,7 +333,7 @@ const Persons = ({ persons }) => {
       />
     )
   }
-  // highlight-end
+  // END HIGHLIGHT
 
   return (
     <div>
@@ -341,9 +341,9 @@ const Persons = ({ persons }) => {
       {persons.map((p) => (
         <div key={p.id}>
           {p.name} {p.phone}
-          <button onClick={() => setNameToSearch(p.name)}> // highlight-line
-            show address // highlight-line
-          </button> // highlight-line
+          <button onClick={() => setNameToSearch(p.name)}> // HIGHLIGHT LINE
+            show address // HIGHLIGHT LINE
+          </button> // HIGHLIGHT LINE
         </div>
       ))}
     </div>
@@ -368,7 +368,7 @@ This causes the component to re-render itself. On render the query <i>FIND_PERSO
 ```js
 const result = useQuery(FIND_PERSON, {
   variables: { nameToSearch },
-  skip: !nameToSearch, // highlight-line
+  skip: !nameToSearch, // HIGHLIGHT LINE
 })
 ```
 
@@ -470,14 +470,14 @@ const PersonForm = () => {
   const [street, setStreet] = useState('')
   const [city, setCity] = useState('')
 
-  const [createPerson] = useMutation(CREATE_PERSON) // highlight-line
+  const [createPerson] = useMutation(CREATE_PERSON) // HIGHLIGHT LINE
 
   const submit = (event) => {
     event.preventDefault()
 
-    // highlight-start
+    // BEGIN HIGHLIGHT
     createPerson({ variables: { name, phone, street, city } })
-    // highlight-end
+    // END HIGHLIGHT
 
     setName('')
     setPhone('')
@@ -536,7 +536,7 @@ Enable the <i>PersonForm</i> component in the file <i>App.jsx</i>:
 ```js
 import { gql } from '@apollo/client'
 import { useQuery } from '@apollo/client/react'
-import PersonForm from './components/PersonForm' // highlight-line
+import PersonForm from './components/PersonForm' // HIGHLIGHT LINE
 import Persons from './components/Persons'
 
 // ...
@@ -548,14 +548,14 @@ const App = () => {
     return <div>loading...</div>
   }
 
-  // highlight-start
+  // BEGIN HIGHLIGHT
   return (
     <div>
       <Persons persons={result.data.allPersons} />
       <PersonForm /> 
     </div>
   )
-  // highlight-end
+  // END HIGHLIGHT
 }
 
 export default App
@@ -573,7 +573,7 @@ The change is small. Let's set the query to poll every two seconds:
 ```js
 const App = () => {
   const result = useQuery(ALL_PERSONS, {
-    pollInterval: 2000 // highlight-line
+    pollInterval: 2000 // HIGHLIGHT LINE
   })
 
   if (result.loading)  {
@@ -600,15 +600,15 @@ Another easy way to keep the cache in sync is to use the <code>useMutation</code
 ```js
 // ...
 
-const ALL_PERSONS = gql // highlight-line `
-  query { // highlight-line
-    allPersons { // highlight-line
-      name // highlight-line
-      phone // highlight-line
-      id // highlight-line
-    } // highlight-line
-  } // highlight-line
-` // highlight-line
+const ALL_PERSONS = gql // HIGHLIGHT LINE `
+  query { // HIGHLIGHT LINE
+    allPersons { // HIGHLIGHT LINE
+      name // HIGHLIGHT LINE
+      phone // HIGHLIGHT LINE
+      id // HIGHLIGHT LINE
+    } // HIGHLIGHT LINE
+  } // HIGHLIGHT LINE
+` // HIGHLIGHT LINE
 
 
 const PersonForm = () => {
@@ -617,11 +617,11 @@ const PersonForm = () => {
   const [street, setStreet] = useState('')
   const [city, setCity] = useState('')
 
-  // highlight-start
+  // BEGIN HIGHLIGHT
   const [createPerson] = useMutation(CREATE_PERSON, {
     refetchQueries: [{ query: ALL_PERSONS }],
   })
-  // highlight-end
+  // END HIGHLIGHT
 
   // ...
 }
@@ -716,12 +716,12 @@ Let’s register an error handler for the mutation. The <i>PersonForm</i> compon
 
 
 ```js
-const PersonForm = ({ setError }) => { // highlight-line
+const PersonForm = ({ setError }) => { // HIGHLIGHT LINE
   // ... 
 
   const [ createPerson ] = useMutation(CREATE_PERSON, {
     refetchQueries: [  {query: ALL_PERSONS } ],
-    onError: (error) => setError(error.message), // highlight-line
+    onError: (error) => setError(error.message), // HIGHLIGHT LINE
   })
 
   // ...
@@ -750,12 +750,12 @@ The component receives a possible error message as a prop. If an error message i
 Render the <i>Notify</i> component that displays the error message in the file <i>App.jsx</i>:
 
 ```js
-import Notify from './components/Notify' // highlight-line
+import Notify from './components/Notify' // HIGHLIGHT LINE
 
 // ... 
 
 const App = () => {
-  const [errorMessage, setErrorMessage] = useState(null) // highlight-line
+  const [errorMessage, setErrorMessage] = useState(null) // HIGHLIGHT LINE
 
   const result = useQuery(ALL_PERSONS)
 
@@ -763,20 +763,20 @@ const App = () => {
     return <div>loading...</div>
   }
 
-// highlight-start
+// BEGIN HIGHLIGHT
   const notify = (message) => {
     setErrorMessage(message)
     setTimeout(() => {
       setErrorMessage(null)
     }, 10000)
   }
-  // highlight-end
+  // END HIGHLIGHT
 
   return (
     <div>
-      <Notify errorMessage={errorMessage} />  // highlight-line
+      <Notify errorMessage={errorMessage} />  // HIGHLIGHT LINE
       <Persons persons = {result.data.allPersons} />
-      <PersonForm setError={notify} />  // highlight-line
+      <PersonForm setError={notify} />  // HIGHLIGHT LINE
     </div>
   )
 }
@@ -821,16 +821,16 @@ const PhoneForm = () => {
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
 
-// highlight-start
+// BEGIN HIGHLIGHT
   const [ changeNumber ] = useMutation(EDIT_NUMBER)
-// highlight-end
+// END HIGHLIGHT
 
   const submit = (event) => {
     event.preventDefault()
 
-// highlight-start
+// BEGIN HIGHLIGHT
     changeNumber({ variables: { name, phone } })
-    // highlight-end
+    // END HIGHLIGHT
 
     setName('')
     setPhone('')
@@ -867,7 +867,7 @@ The <i>PhoneForm</i> component is straightforward: it asks for the person's name
 Enable the new component in the file <i>App.jsx</i>:
 
 ```js
-import PhoneForm from './components/PhoneForm' // highlight-line
+import PhoneForm from './components/PhoneForm' // HIGHLIGHT LINE
 
 const App = () => {
   // ...
@@ -877,7 +877,7 @@ const App = () => {
       <Notify errorMessage={errorMessage} />
       <Persons persons={result.data.allPersons} />
       <PersonForm setError={notify} />
-      <PhoneForm setError={notify} /> // highlight-line
+      <PhoneForm setError={notify} /> // HIGHLIGHT LINE
     </div>
   )
 }
@@ -899,11 +899,11 @@ the mutation response is <i>null</i>:
 Since this isn’t considered an error state from GraphQL’s point of view, registering an <code>onError</code> error handler wouldn’t be useful in this situation. However, we can add an <code>onCompleted</code> callback to the <code>useMutation</code> hook, where we can generate a potential error message:
 
 ```js
-const PhoneForm = ({ setError }) => { // highlight-line
+const PhoneForm = ({ setError }) => { // HIGHLIGHT LINE
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
 
-  // highlight-start
+  // BEGIN HIGHLIGHT
   const [changeNumber] = useMutation(EDIT_NUMBER, {
     onCompleted: (data) => {
       if (!data.editNumber) {
@@ -911,7 +911,7 @@ const PhoneForm = ({ setError }) => { // highlight-line
       }
     }
   })
-  // highlight-end
+  // END HIGHLIGHT
 
   // ...
 }

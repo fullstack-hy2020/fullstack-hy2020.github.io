@@ -30,11 +30,11 @@ import { useState } from 'react'
 import { useMutation } from '@apollo/client/react'
 import { LOGIN } from '../queries'
 
-const LoginForm = ({ setError, setToken }) => { // highlight-line
+const LoginForm = ({ setError, setToken }) => { // HIGHLIGHT LINE
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  // highlight-start
+  // BEGIN HIGHLIGHT
   const [ login ] = useMutation(LOGIN, {
     onCompleted: (data) => {
       const token = data.login.value
@@ -45,14 +45,14 @@ const LoginForm = ({ setError, setToken }) => { // highlight-line
       setError(error.message)
     }
   })
-  // highlight-end
+  // END HIGHLIGHT
 
-  // highlight-start
+  // BEGIN HIGHLIGHT
   const submit = (event) => {
     event.preventDefault()
     login({ variables: { username, password } })
   }
-  // highlight-end
+  // END HIGHLIGHT
 
   return (
     <div>
@@ -86,11 +86,11 @@ For the <code>useMutation</code> function that performs the login, an <code>onCo
 Let’s now use the <i>LoginForm</i> component in the <i>App.jsx</i> file. We add a <code>token</code> variable to the application state to store the token once the user has logged in. If <code>token</code> is not defined, we render only the login form:
 
 ```js
-import LoginForm from './components/LoginForm' // highlight-line
+import LoginForm from './components/LoginForm' // HIGHLIGHT LINE
 // ...
 
 const App = () => {
-  const [token, setToken] = useState(localStorage.getItem('phonebook-user-token')) // highlight-line
+  const [token, setToken] = useState(localStorage.getItem('phonebook-user-token')) // HIGHLIGHT LINE
   const [errorMessage, setErrorMessage] = useState(null)
   const result = useQuery(ALL_PERSONS)
 
@@ -105,7 +105,7 @@ const App = () => {
     }, 10000)
   }
 
-  // highlight-start
+  // BEGIN HIGHLIGHT
   if (!token) {
     return (
       <div>
@@ -118,7 +118,7 @@ const App = () => {
       </div>
     )
   }
-  // highlight-end
+  // END HIGHLIGHT
 
   return (
     // ...
@@ -137,33 +137,33 @@ This way, the token is also restored when the page is reloaded, and the user sta
 We also add a button that allows a logged-in user to log out. In the button’s click handler, we set <code>token</code> to <code>null</code>, remove the token from localStorage, and reset the Apollo Client cache:
 
 ```js
-import { useApolloClient, useQuery } from '@apollo/client/react' // highlight-line
+import { useApolloClient, useQuery } from '@apollo/client/react' // HIGHLIGHT LINE
 //...
 
 const App = () => {
   const [token, setToken] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
   const result = useQuery(ALL_PERSONS)
-  const client = useApolloClient() // highlight-line
+  const client = useApolloClient() // HIGHLIGHT LINE
   
   if (result.loading)  {
     return <div>loading...</div>
   }
 
-  // highlight-start
+  // BEGIN HIGHLIGHT
   const onLogout = () => {
     setToken(null)
     localStorage.clear()
     client.resetStore()
   }
-  // highlight-end
+  // END HIGHLIGHT
 
   // ...
 
   return (
     <>
       <Notify errorMessage={errorMessage} />
-      <button onClick={onLogout}>logout</button> // highlight-line
+      <button onClick={onLogout}>logout</button> // HIGHLIGHT LINE
       <Persons persons={result.data.allPersons} />
       <PersonForm setError={notify} />
       <PhoneForm setError={notify} />
@@ -184,9 +184,9 @@ import App from './App.jsx'
 
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
 import { ApolloProvider } from '@apollo/client/react'
-import { SetContextLink } from '@apollo/client/link/context' // highlight-line
+import { SetContextLink } from '@apollo/client/link/context' // HIGHLIGHT LINE
 
-// highlight-start
+// BEGIN HIGHLIGHT
 const authLink  = new SetContextLink(({ headers }) => {
   const token = localStorage.getItem('phonebook-user-token')
   return {
@@ -196,16 +196,16 @@ const authLink  = new SetContextLink(({ headers }) => {
     }
   }
 })
-// highlight-end
+// END HIGHLIGHT
 
-const httpLink = new HttpLink({ uri: 'http://localhost:4000' }) // highlight-line
+const httpLink = new HttpLink({ uri: 'http://localhost:4000' }) // HIGHLIGHT LINE
 
-// highlight-start
+// BEGIN HIGHLIGHT
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: authLink.concat(httpLink)
 })
-// highlight-end
+// END HIGHLIGHT
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -236,7 +236,7 @@ const PersonForm = ({ setError }) => {
   const submit = async (event) => {
     event.preventDefault()
 
-    // highlight-start
+    // BEGIN HIGHLIGHT
     createPerson({
       variables: {
         name,
@@ -245,7 +245,7 @@ const PersonForm = ({ setError }) => {
         phone: phone.length > 0 ? phone : undefined,
       },
     })
-    // highlight-end
+    // END HIGHLIGHT
 
     setName('')
     setPhone('')
@@ -274,13 +274,13 @@ const PhoneForm = ({ setError }) => {
   const submit = async (event) => {
     event.preventDefault()
 
-    // highlight-start
+    // BEGIN HIGHLIGHT
     try {
       await changeNumber({ variables: { name, phone } })
     } catch (error) {
       setError(error.message)
     }
-    // highlight-end
+    // END HIGHLIGHT
 
     setName('')
     setPhone('')
@@ -305,7 +305,7 @@ const PersonForm = ({ setError }) => {
 
   const [createPerson] = useMutation(CREATE_PERSON, {
     onError: (error) => setError(error.message),
-    refetchQueries: [{ query: ALL_PERSONS }], // highlight-line
+    refetchQueries: [{ query: ALL_PERSONS }], // HIGHLIGHT LINE
   })
 
 // ...
@@ -322,7 +322,7 @@ const PersonForm = ({ setError }) => {
 
   const [createPerson] = useMutation(CREATE_PERSON, {
     onError: (error) => setError(error.message),
-    // highlight-start
+    // BEGIN HIGHLIGHT
     update: (cache, response) => {
       cache.updateQuery({ query: ALL_PERSONS }, ({ allPersons }) => {
         return {
@@ -330,7 +330,7 @@ const PersonForm = ({ setError }) => {
         }
       })
     },
-    // highlight-end
+    // END HIGHLIGHT
   })
  
   // ..

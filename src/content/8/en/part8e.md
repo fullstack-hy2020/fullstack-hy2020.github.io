@@ -60,13 +60,13 @@ With the fragment, we can do the queries in a compact form:
 ```js
 query {
   allPersons {
-    ...PersonDetails // highlight-line
+    ...PersonDetails // HIGHLIGHT LINE
   }
 }
 
 query {
   findPerson(name: "Pekka Mikkola") {
-    ...PersonDetails // highlight-line
+    ...PersonDetails // HIGHLIGHT LINE
   }
 }
 ```
@@ -178,7 +178,7 @@ and change the <i>server.js</i> file to the following form:
 
 ```js
 const { ApolloServer } = require('@apollo/server')
-// highlight-start
+// BEGIN HIGHLIGHT
 const {
   ApolloServerPluginDrainHttpServer,
 } = require('@apollo/server/plugin/drainHttpServer')
@@ -187,7 +187,7 @@ const cors = require('cors')
 const express = require('express')
 const { makeExecutableSchema } = require('@graphql-tools/schema')
 const http = require('http')
-// highlight-end
+// END HIGHLIGHT
 const jwt = require('jsonwebtoken')
 
 const resolvers = require('./resolvers')
@@ -203,7 +203,7 @@ const getUserFromAuthHeader = async (auth) => {
   return User.findById(decodedToken.id).populate('friends')
 }
 
-// highlight-start
+// BEGIN HIGHLIGHT
 const startServer = async (port) => {
   const app = express()
   const httpServer = http.createServer(app)
@@ -232,7 +232,7 @@ const startServer = async (port) => {
     console.log(`Server is now running on http://localhost:${port}`),
   )
 }
-// highlight-end
+// END HIGHLIGHT
 
 module.exports = startServer
 ```
@@ -250,7 +250,7 @@ Following the recommendations in the documentation, [ApolloServerPluginDrainHttp
 ```js
   const server = new ApolloServer({
     schema: makeExecutableSchema({ typeDefs, resolvers }),
-    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })], // highlight-line
+    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })], // HIGHLIGHT LINE
   })
 ```
 
@@ -281,10 +281,10 @@ npm install graphql-ws ws @graphql-tools/schema
 The file <i>server.js</i> is changed to:
 
 ```js
-// highlight-start
+// BEGIN HIGHLIGHT
 const { WebSocketServer } = require('ws')
 const { useServer } = require('graphql-ws/use/ws')
-// highlight-end
+// END HIGHLIGHT
 
 // ...
 
@@ -292,7 +292,7 @@ const startServer = async (port) => {
   const app = express()
   const httpServer = http.createServer(app)
 
-  // highlight-start
+  // BEGIN HIGHLIGHT
   const wsServer = new WebSocketServer({
     server: httpServer,
     path: '/',
@@ -300,10 +300,10 @@ const startServer = async (port) => {
  
   const schema = makeExecutableSchema({ typeDefs, resolvers })
   const serverCleanup = useServer({ schema }, wsServer)
-  // highlight-end
+  // END HIGHLIGHT
 
   const server = new ApolloServer({
-    // highlight-start
+    // BEGIN HIGHLIGHT
     schema, 
     plugins: [
       ApolloServerPluginDrainHttpServer({ httpServer }),
@@ -317,7 +317,7 @@ const startServer = async (port) => {
         },
       },
     ],
-    // highlight-end
+    // END HIGHLIGHT
   })
 
   await server.start()
@@ -344,13 +344,13 @@ The changes to the <i>resolvers.js</i> file are as follows:
 
 ```js
 const { GraphQLError } = require('graphql')
-const { PubSub } = require('graphql-subscriptions') // highlight-line
+const { PubSub } = require('graphql-subscriptions') // HIGHLIGHT LINE
 const jwt = require('jsonwebtoken')
 
 const Person = require('./models/person')
 const User = require('./models/user')
 
-const pubsub = new PubSub() // highlight-line
+const pubsub = new PubSub() // HIGHLIGHT LINE
 
 const resolvers = {
   // ...
@@ -394,19 +394,19 @@ const resolvers = {
       }
 
 
-      pubsub.publish('PERSON_ADDED', { personAdded: person })  // highlight-line
+      pubsub.publish('PERSON_ADDED', { personAdded: person })  // HIGHLIGHT LINE
 
       return person
     },
     // ...
   },
-  // highlight-start
+  // BEGIN HIGHLIGHT
   Subscription: {
     personAdded: {
       subscribe: () => pubsub.asyncIterableIterator('PERSON_ADDED')
     },
   },
-  // highlight-end
+  // END HIGHLIGHT
 }
 ```
 
@@ -474,17 +474,17 @@ import App from './App.jsx'
 
 import {
   ApolloClient,
-  ApolloLink, // highlight-line
+  ApolloLink, // HIGHLIGHT LINE
   HttpLink,
   InMemoryCache,
 } from '@apollo/client'
 import { ApolloProvider } from '@apollo/client/react'
 import { SetContextLink } from '@apollo/client/link/context'
-// highlight-start
+// BEGIN HIGHLIGHT
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions'
 import { getMainDefinition } from '@apollo/client/utilities'
 import { createClient } from 'graphql-ws'
-// highlight-end
+// END HIGHLIGHT
 
 const authLink = new SetContextLink(({ headers }) => {
   const token = localStorage.getItem('phonebook-user-token')
@@ -498,15 +498,15 @@ const authLink = new SetContextLink(({ headers }) => {
 
 const httpLink = new HttpLink({ uri: 'http://localhost:4000' })
 
-// highlight-start
+// BEGIN HIGHLIGHT
 const wsLink = new GraphQLWsLink(
   createClient({
     url: 'ws://localhost:4000',
   }),
 )
-// highlight-end
+// END HIGHLIGHT
 
-// highlight-start
+// BEGIN HIGHLIGHT
 const splitLink = ApolloLink.split(
   ({ query }) => {
     const definition = getMainDefinition(query)
@@ -518,11 +518,11 @@ const splitLink = ApolloLink.split(
   wsLink,
   authLink.concat(httpLink),
 )
-// highlight-end
+// END HIGHLIGHT
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link: splitLink, // highlight-line
+  link: splitLink, // HIGHLIGHT LINE
 })
 
 createRoot(document.getElementById('root')).render(
@@ -566,7 +566,7 @@ Subscriptions are created using the [useSubscription](https://www.apollographql.
 import {
   useApolloClient,
   useQuery,
-  useSubscription, // highlight-line
+  useSubscription, // HIGHLIGHT LINE
 } from '@apollo/client/react'
 import { useState } from 'react'
 import LoginForm from './components/LoginForm'
@@ -574,7 +574,7 @@ import Notify from './components/Notify'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 import PhoneForm from './components/PhoneForm'
-import { ALL_PERSONS, PERSON_ADDED } from './queries' // highlight-line
+import { ALL_PERSONS, PERSON_ADDED } from './queries' // HIGHLIGHT LINE
 
 const App = () => {
   const [token, setToken] = useState(
@@ -584,13 +584,13 @@ const App = () => {
   const result = useQuery(ALL_PERSONS)
   const client = useApolloClient()
 
-  // highlight-start
+  // BEGIN HIGHLIGHT
   useSubscription(PERSON_ADDED, {
     onData: ({ data }) => {
       console.log(data)
     },
   })
-  // highlight-end
+  // END HIGHLIGHT
 
   if (result.loading) {
     return <div>loading...</div>
@@ -614,8 +614,8 @@ const App = () => {
 
   useSubscription(PERSON_ADDED, {
     onData: ({ data }) => {
-      const addedPerson = data.data.personAdded // highlight-line
-      notify(`${addedPerson.name} added`) // highlight-line
+      const addedPerson = data.data.personAdded // HIGHLIGHT LINE
+      notify(`${addedPerson.name} added`) // HIGHLIGHT LINE
     }
   })
 
@@ -676,7 +676,7 @@ If the person is already in the cache, we return the cache contents as-is and do
 Let’s modify the <code>useSubscription</code> hook in the <code>App</code> component so that it updates the cache using the <code>addPersonToCache</code> helper function we created:
 
 ```js
-import { addPersonToCache } from './utils/apolloCache' // highlight-line
+import { addPersonToCache } from './utils/apolloCache' // HIGHLIGHT LINE
 
 const App = () => {
   const [token, setToken] = useState(
@@ -690,7 +690,7 @@ const App = () => {
     onData: ({ data }) => {
       const addedPerson = data.data.personAdded
       notify(`${addedPerson.name} added`)
-      addPersonToCache(client.cache, addedPerson) // highlight-line
+      addPersonToCache(client.cache, addedPerson) // HIGHLIGHT LINE
     },
   })
 
@@ -701,7 +701,7 @@ const App = () => {
 and we will also use the function when updating the cache in connection with adding a new person:
 
 ```js
-import { addPersonToCache } from '../utils/apolloCache' // highlight-line
+import { addPersonToCache } from '../utils/apolloCache' // HIGHLIGHT LINE
 
 const PersonForm = ({ setError }) => {
   const [name, setName] = useState('')
@@ -712,10 +712,10 @@ const PersonForm = ({ setError }) => {
   const [createPerson] = useMutation(CREATE_PERSON, {
     onError: (error) => setError(error.message),
     update: (cache, response) => {
-      // highlight-start
+      // BEGIN HIGHLIGHT
       const addedPerson = response.data.addPerson
       addPersonToCache(cache, addedPerson)
-      // highlight-end
+      // END HIGHLIGHT
     },
   })
 
@@ -737,7 +737,7 @@ type Person {
   name: String!
   phone: String
   address: Address!
-  friendOf: [User!]! // highlight-line
+  friendOf: [User!]! // HIGHLIGHT LINE
   id: ID!
 }
 ```
@@ -764,11 +764,11 @@ Person: {
       city,
     }
   },
-  // highlight-start
+  // BEGIN HIGHLIGHT
   friendOf: async (root) => {
     return []
   }
-  // highlight-end
+  // END HIGHLIGHT
 },
 ```
 
@@ -808,7 +808,7 @@ However, the application now has one problem: an unreasonably large number of da
 
 ```js
 allPersons: async (root, args) => {
-  console.log('Person.find') // highlight-line
+  console.log('Person.find') // HIGHLIGHT LINE
   if (!args.phone) {
     return Person.find({})
   }
@@ -819,7 +819,7 @@ allPersons: async (root, args) => {
 
 ```js
 friendOf: async (root) => {
-  console.log('User.find') // highlight-line
+  console.log('User.find') // HIGHLIGHT LINE
   const friends = await User.find({
     friends: {
       $in: [root._id],
@@ -869,14 +869,14 @@ const schema = new mongoose.Schema({
     required: true,
     minlength: 3
   },
-  // highlight-start
+  // BEGIN HIGHLIGHT
   friendOf: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
     }
   ], 
-  // highlight-end
+  // END HIGHLIGHT
 })
 ```
 
@@ -887,11 +887,11 @@ Query: {
   allPersons: (root, args) => {    
     console.log('Person.find')
     if (!args.phone) {
-      return Person.find({}).populate('friendOf') // highlight-line
+      return Person.find({}).populate('friendOf') // HIGHLIGHT LINE
     }
 
     return Person.find({ phone: { $exists: args.phone === 'YES' } })
-      .populate('friendOf') // highlight-line
+      .populate('friendOf') // HIGHLIGHT LINE
   },
   // ...
 }
