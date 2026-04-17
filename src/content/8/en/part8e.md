@@ -125,7 +125,7 @@ export const FIND_PERSON = gql`
 `
 ```
 
-So the template literal in the *PERSON_DETAILS* variable is now inserted as part of the *FIND_PERSON* template literal. In practice, the end result is exactly the same as in the earlier example, where the fragment was defined directly alongside the query.
+So the template literal in the <code>PERSON_DETAILS</code> variable is now inserted as part of the <code>FIND_PERSON</code> template literal. In practice, the end result is exactly the same as in the earlier example, where the fragment was defined directly alongside the query.
 
 ### Subscriptions
   
@@ -237,9 +237,9 @@ const startServer = async (port) => {
 module.exports = startServer
 ```
 
-The GraphQL server in the *server* variable is now connected to listen to the root of the server, i.e. to the */* route, using the *expressMiddleware* object. Information about the logged-in user is set in the context using the function we defined earlier. Since it is an Express server, the middlewares express-json and cors are also needed so that the data included in the requests is correctly parsed and so that CORS problems do not appear.
+The GraphQL server in the <code>server</code> variable is now connected to listen to the root of the server, i.e. to the <code>/</code> route, using the <code>expressMiddleware</code> object. Information about the logged-in user is set in the context using the function we defined earlier. Since it is an Express server, the middlewares express-json and cors are also needed so that the data included in the requests is correctly parsed and so that CORS problems do not appear.
 
-The GraphQL server must be started before the Express application can begin listening on the specified port, so the _startServer_ function has been made an <i>async function</i> in order to be able to wait for the GraphQL server to start:
+The GraphQL server must be started before the Express application can begin listening on the specified port, so the <code>startServer</code> function has been made an <i>async function</i> in order to be able to wait for the GraphQL server to start:
 
 ```js
 await server.start()
@@ -332,7 +332,7 @@ The configuration above creates, alongside the HTTP request listener, a service 
 
 Unlike with HTTP, when using WebSockets the server can also take the initiative in sending data. Therefore, WebSockets are well suited for GraphQL subscriptions, where the server must be able to notify all clients that have made a particular subscription when the corresponding event (e.g. creating a person) occurs.
 
-The subscription *personAdded* needs a resolver. The *addPerson* resolver also has to be modified so that it sends a notification to subscribers.
+The subscription <code>personAdded</code> needs a resolver. The <code>addPerson</code> resolver also has to be modified so that it sends a notification to subscribers.
 
 Let’s first install a library that provides [publish–subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) functionality:
 
@@ -412,7 +412,7 @@ const resolvers = {
 
 With subscriptions, communication follows the publish–subscribe pattern using the [PubSub](https://www.apollographql.com/docs/apollo-server/data/subscriptions#the-pubsub-class) object.
 
-There are only a few lines of code added, but quite a lot is happening under the hood. The resolver of the *personAdded* subscription registers and saves info about all the clients that do the subscription. The clients are saved to an
+There are only a few lines of code added, but quite a lot is happening under the hood. The resolver of the <code>personAdded</code> subscription registers and saves info about all the clients that do the subscription. The clients are saved to an
 ["iterator object"](https://www.apollographql.com/docs/apollo-server/data/subscriptions/#listening-for-events) called <i>PERSON\_ADDED</i>  thanks to the following code:
 
 ```js
@@ -425,7 +425,7 @@ Subscription: {
 
 The iterator name is an arbitrary string, but to follow the convention, it is the subscription name written in capital letters.
 
-Adding a new person <i>publishes</i> a notification about the operation to all subscribers with PubSub's method *publish*:
+Adding a new person <i>publishes</i> a notification about the operation to all subscribers with PubSub's method <code>publish</code>:
 
 ```js
 pubsub.publish('PERSON_ADDED', { personAdded: person }) 
@@ -604,7 +604,7 @@ When a new person is now added to the phonebook, no matter where it's done, the 
 
 ![dev tools showing data personAdded Object with Mainroad](../../images/8/32e.png)
 
-When a new person is added to the list, the server sends the details to the client, and the callback function defined as the value of the <i>useSubscription</i> hook’s _onData_ attribute is called, with the person added on the server passed to it as a parameter.
+When a new person is added to the list, the server sends the details to the client, and the callback function defined as the value of the <i>useSubscription</i> hook’s <code>onData</code> attribute is called, with the person added on the server passed to it as a parameter.
 
 We can show the user a notification when a new person is added as follows:
 
@@ -625,9 +625,9 @@ const App = () => {
 
 Now, for example, a person added via Apollo Studio Explorer is rendered immediately in the application view.  
 
-However, there is a small problem with the solution. When a new person is added through the application’s form, the added person ends up in the cache twice, because both the _useSubscription_ hook and the _PersonForm_ component add the new person to the cache. As a result, the added person is rendered on the screen twice.
+However, there is a small problem with the solution. When a new person is added through the application’s form, the added person ends up in the cache twice, because both the <code>useSubscription</code> hook and the <code>PersonForm</code> component add the new person to the cache. As a result, the added person is rendered on the screen twice.
 
-One possible solution would be to update the cache only in the <i>useSubscription</i> hook. However, this is not recommended. As a good practice, the user should see the changes they make in the application immediately. The cache update performed by the subscription may happen with a delay and cannot be fully relied upon. Therefore, we will stick with a solution where the cache is updated both in the _useSubscription_ hook and in the _PersonForm_ component.
+One possible solution would be to update the cache only in the <i>useSubscription</i> hook. However, this is not recommended. As a good practice, the user should see the changes they make in the application immediately. The cache update performed by the subscription may happen with a delay and cannot be fully relied upon. Therefore, we will stick with a solution where the cache is updated both in the <code>useSubscription</code> hook and in the <code>PersonForm</code> component.
 
 Let’s solve the problem by ensuring that a person is added to the cache only if they haven’t already been added there. At the same time, we’ll extract the cache update operation into its own helper function in the <i>utils/apolloCache.js</i> file:
 
@@ -651,7 +651,7 @@ export const addPersonToCache = (cache, personToAdd) => {
 }
 ```
 
-The helper function _addPersonToCache_ updates the cache using the familiar _cache.updateQuery_ method. In the cache update logic, we first check whether the person has already been added to the cache. We look for the person to be added among the people currently in the cache using JavaScript array’s _some_ method:
+The helper function <code>addPersonToCache</code> updates the cache using the familiar <code>cache.updateQuery</code> method. In the cache update logic, we first check whether the person has already been added to the cache. We look for the person to be added among the people currently in the cache using JavaScript array’s <code>some</code> method:
 
 ```js
   const personExists = allPersons.some(
@@ -659,9 +659,9 @@ The helper function _addPersonToCache_ updates the cache using the familiar _cac
   )
 ```
 
-_some_ is a method that searches a collection for an element that matches the given condition. It returns a boolean indicating whether a matching element was found. In our case, the method returns _True_ if the cache already contains a person with that <i>id</i>, and otherwise it returns _False_.
+<code>some</code> is a method that searches a collection for an element that matches the given condition. It returns a boolean indicating whether a matching element was found. In our case, the method returns <code>True</code> if the cache already contains a person with that <i>id</i>, and otherwise it returns <code>False</code>.
 
-If the person is already in the cache, we return the cache contents as-is and do not add the person again. Otherwise, we return the cache contents with the new person appended using the _concat_ method:
+If the person is already in the cache, we return the cache contents as-is and do not add the person again. Otherwise, we return the cache contents with the new person appended using the <code>concat</code> method:
 
 ```js
   if (personExists) {
@@ -673,7 +673,7 @@ If the person is already in the cache, we return the cache contents as-is and do
   }
 ```
 
-Let’s modify the _useSubscription_ hook in the _App_ component so that it updates the cache using the _addPersonToCache_ helper function we created:
+Let’s modify the <code>useSubscription</code> hook in the <code>App</code> component so that it updates the cache using the <code>addPersonToCache</code> helper function we created:
 
 ```js
 import { addPersonToCache } from './utils/apolloCache' // highlight-line
@@ -730,7 +730,7 @@ The final code of the client can be found on [GitHub](https://github.com/fullsta
 ### n+1 problem
 
 
-Let's add some things to the backend. Let's modify the schema so that a <i>Person</i> type has a *friendOf* field, which tells whose friends list the person is on.
+Let's add some things to the backend. Let's modify the schema so that a <i>Person</i> type has a <code>friendOf</code> field, which tells whose friends list the person is on.
 
 ```js
 type Person {
@@ -754,7 +754,7 @@ query {
 }
 ```
 
-Because *friendOf* is not a field of <i>Person</i> objects on the database, we have to create a resolver for it, which can solve this issue. Let's first create a resolver that returns an empty list:
+Because <code>friendOf</code> is not a field of <i>Person</i> objects on the database, we have to create a resolver for it, which can solve this issue. Let's first create a resolver that returns an empty list:
 
 ```js
 Person: {
@@ -772,7 +772,7 @@ Person: {
 },
 ```
 
-The parameter *root* is the person object for which a friends list is being created, so we search from all *User* objects the ones which have root._id in their friends list:
+The parameter <code>root</code> is the person object for which a friends list is being created, so we search from all <code>User</code> objects the ones which have root._id in their friends list:
 
 ```js
   Person: {
@@ -830,7 +830,7 @@ friendOf: async (root) => {
 }
 ```
 
-We notice that if there are five people in the database, the previously mentioned _allPersons_ query causes the following database queries:
+We notice that if there are five people in the database, the previously mentioned <code>allPersons</code> query causes the following database queries:
 ```
 Person.find
 User.find
@@ -846,7 +846,7 @@ This is a manifestation of the famous [n+1 problem](https://www.google.com/searc
 
 The right solution for the n+1 problem depends on the situation. Often, it requires using some kind of a join query instead of multiple separate queries.
 
-In our situation, the easiest solution would be to save whose friends list they are on each *Person* object:
+In our situation, the easiest solution would be to save whose friends list they are on each <code>Person</code> object:
 
 ```js
 const schema = new mongoose.Schema({
@@ -880,7 +880,7 @@ const schema = new mongoose.Schema({
 })
 ```
 
-Then we could do a "join query", or populate the *friendOf* fields of persons when we fetch the *Person* objects:
+Then we could do a "join query", or populate the <code>friendOf</code> fields of persons when we fetch the <code>Person</code> objects:
 
 ```js
 Query: {
@@ -897,7 +897,7 @@ Query: {
 }
 ```
 
-After the change, we would not need a separate resolver for the *friendOf* field.
+After the change, we would not need a separate resolver for the <code>friendOf</code> field.
 
 The allPersons query <i>does not cause</i> an n+1 problem, if we only  fetch the name and the phone number:
 
@@ -910,7 +910,7 @@ query {
 }
 ```
 
-If we modify *allPersons* to do a join query because it sometimes causes an n+1 problem, it becomes heavier when we don't need the information on related persons. By using the [fourth parameter](https://www.apollographql.com/docs/apollo-server/data/resolvers/#resolver-arguments) of resolver functions, we could optimize the query even further. The fourth parameter can be used to inspect the query itself, so we could do the join query only in cases with a predicted threat of n+1 problems. However, we should not jump into this level of optimization before we are sure it's worth it.
+If we modify <code>allPersons</code> to do a join query because it sometimes causes an n+1 problem, it becomes heavier when we don't need the information on related persons. By using the [fourth parameter](https://www.apollographql.com/docs/apollo-server/data/resolvers/#resolver-arguments) of resolver functions, we could optimize the query even further. The fourth parameter can be used to inspect the query itself, so we could do the join query only in cases with a predicted threat of n+1 problems. However, we should not jump into this level of optimization before we are sure it's worth it.
 
 [In the words of Donald Knuth](https://en.wikiquote.org/wiki/Donald_Knuth):
 
@@ -931,11 +931,11 @@ GraphQL is already quite an old technology: it has been in internal use at Faceb
 
 #### 8.23: Subscriptions - server
 
-Do a backend implementation for subscription *bookAdded*, which returns the details of all new books to its subscribers.
+Do a backend implementation for subscription <code>bookAdded</code>, which returns the details of all new books to its subscribers.
 
 #### 8.24: Subscriptions - client, part 1
 
-Start using subscriptions in the client, and subscribe to *bookAdded*. When new books are added, notify the user. Any method works. For example, you can use the [window.alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) function.
+Start using subscriptions in the client, and subscribe to <code>bookAdded</code>. When new books are added, notify the user. Any method works. For example, you can use the [window.alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) function.
 
 #### 8.25: Subscriptions - client, part 2
 

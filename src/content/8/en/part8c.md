@@ -235,7 +235,7 @@ const schema = new mongoose.Schema({
 module.exports = mongoose.model('Person', schema)
 ```
 
-We also included a few validations. *required: true*, which makes sure that a value exists, is actually redundant: we already ensure that the fields exist with GraphQL. However, it is good to also keep validation in the database.
+We also included a few validations. <code>required: true</code>, which makes sure that a value exists, is actually redundant: we already ensure that the fields exist with GraphQL. However, it is good to also keep validation in the database.
 
 Let’s create a separate module <i>db.js</i> for the code that establishes the database connection:
 
@@ -257,7 +257,7 @@ const connectToDatabase = async (uri) => {
 module.exports = connectToDatabase
 ```
 
-The module defines the function _connectToDatabase_, which receives the database URI as a parameter and takes care of connecting to the database.
+The module defines the function <code>connectToDatabase</code>, which receives the database URI as a parameter and takes care of connecting to the database.
 
 Let’s use the module in the file <i>index.js</i>:
 
@@ -280,7 +280,7 @@ main()
 
 Because the <i>async/await</i> syntax can only be used inside functions, we now define a simple <i>main</i> function that handles starting the application. This allows us to call the function that creates the database connection using the <i>await</i> keyword.
 
-The value of *MONGODB_URI* is obtained from an environment variable, so you need to add an appropriate value for it to the <i>.env</i> file in the same way as in [part 3](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan#ymparistomuuttujien-maaritteleminen-kayttaen-dotenv-kirjastoa). The application first calls the function that creates the database connection, and once the database connection has been successfully established, it starts the GraphQL server.
+The value of <code>MONGODB_URI</code> is obtained from an environment variable, so you need to add an appropriate value for it to the <i>.env</i> file in the same way as in [part 3](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan#ymparistomuuttujien-maaritteleminen-kayttaen-dotenv-kirjastoa). The application first calls the function that creates the database connection, and once the database connection has been successfully established, it starts the GraphQL server.
 
 
 
@@ -361,7 +361,7 @@ allPersons: async (root, args) => {
 }
 ```
 
-Let's complete the *allPersons* resolver so it takes the optional parameter *phone* into account:
+Let's complete the <code>allPersons</code> resolver so it takes the optional parameter <code>phone</code> into account:
 
 ```js
 Query: {
@@ -376,13 +376,13 @@ Query: {
 },
 ```
 
-So if the query has not been given a parameter *phone*, all persons are returned. If the parameter has the value <i>YES</i>, the result of the query
+So if the query has not been given a parameter <code>phone</code>, all persons are returned. If the parameter has the value <i>YES</i>, the result of the query
 
 ```js
 Person.find({ phone: { $exists: true }})
 ```
 
-is returned, so the objects in which the field *phone* has a value. If the parameter has the value <i>NO</i>, the query returns the objects in which the *phone* field has no value:
+is returned, so the objects in which the field <code>phone</code> has a value. If the parameter has the value <i>NO</i>, the query returns the objects in which the <code>phone</code> field has no value:
 
 ```js
 Person.find({ phone: { $exists: false }})
@@ -390,7 +390,7 @@ Person.find({ phone: { $exists: false }})
 
 ### Validation
 
-As well as in GraphQL, the input is now validated using the validations defined in the mongoose schema. For handling possible validation errors in the schema, we must add an error-handling *try/catch* block to the *save* method. When we end up in the catch, we throw an exception [GraphQLError](https://www.apollographql.com/docs/apollo-server/data/errors/#custom-errors) with error code :
+As well as in GraphQL, the input is now validated using the validations defined in the mongoose schema. For handling possible validation errors in the schema, we must add an error-handling <code>try/catch</code> block to the <code>save</code> method. When we end up in the catch, we throw an exception [GraphQLError](https://www.apollographql.com/docs/apollo-server/data/errors/#custom-errors) with error code :
 
 ```js
 Mutation: {
@@ -482,7 +482,7 @@ const schema = new mongoose.Schema({
 module.exports = mongoose.model('User', schema)
 ```
 
-Every user is connected to a bunch of other persons in the system through the *friends* field. The idea is that when a user, e.g. <i>mluukkai</i>, adds a person, e.g. <i>Arto Hellas</i>, to the list, the person is added to their *friends* list. This way, logged-in users can have their own personalized view in the application.
+Every user is connected to a bunch of other persons in the system through the <code>friends</code> field. The idea is that when a user, e.g. <i>mluukkai</i>, adds a person, e.g. <i>Arto Hellas</i>, to the list, the person is added to their <code>friends</code> list. This way, logged-in users can have their own personalized view in the application.
 
 Logging in and identifying the user are handled the same way we used in [part 4](/en/part4/token_authentication) when we used REST, by using tokens.
 
@@ -511,7 +511,7 @@ type Mutation {
 }
 ```
 
-The query *me* returns the currently logged-in user. New users are created with the *createUser* mutation, and logging in happens with the *login* mutation.
+The query <code>me</code> returns the currently logged-in user. New users are created with the <code>createUser</code> mutation, and logging in happens with the <code>login</code> mutation.
 
 Let’s install the jsonwebtoken library:
 
@@ -562,7 +562,7 @@ Mutation: {
 },
 ```
 
-The new user mutation is straightforward. The login mutation checks if the username/password pair is valid. And if it is indeed valid, it returns a jwt token familiar from [part 4](/en/part4/token_authentication). Note that the *JWT\_SECRET* must be defined in the  <i>.env</i> file.
+The new user mutation is straightforward. The login mutation checks if the username/password pair is valid. And if it is indeed valid, it returns a jwt token familiar from [part 4](/en/part4/token_authentication). Note that the <code>JWT_SECRET</code> must be defined in the  <i>.env</i> file.
 
 User creation is done now as follows:
 
@@ -598,7 +598,7 @@ In the Apollo Explorer, the header is added to a query like so:
 
 On the backend, the most convenient way to pass the token that arrives with the request to the resolvers is to use Apollo Server’s [context](https://www.apollographql.com/docs/apollo-server/data/context/). With the context, we can perform things that are common to all queries and mutations, for example [identifying the user](https://www.apollographql.com/blog/authorization-in-graphql/) associated with the request.
 
-Let’s change the backend startup so that the object passed as the second parameter to the [startStandaloneServer](https://www.apollographql.com/docs/apollo-server/api/standalone/) function includes a [context](https://www.apollographql.com/docs/apollo-server/data/context/) field, and let’s create a helper function _getUserFromAuthHeader_ to verify the validity of the token and to find the user from the database:
+Let’s change the backend startup so that the object passed as the second parameter to the [startStandaloneServer](https://www.apollographql.com/docs/apollo-server/api/standalone/) function includes a [context](https://www.apollographql.com/docs/apollo-server/data/context/) field, and let’s create a helper function <code>getUserFromAuthHeader</code> to verify the validity of the token and to find the user from the database:
 
 ```js
 const { ApolloServer } = require('@apollo/server')
@@ -643,9 +643,9 @@ const startServer = (port) => {
 module.exports = startServer
 ```
 
-So the code we defined first extracts the token contained in the request’s _Authorization_ header. The helper function _getUserFromAuthHeader_ decodes the token and looks up the corresponding user from the database. If the token is not valid or the user cannot be found, the function returns _null_.
+So the code we defined first extracts the token contained in the request’s <code>Authorization</code> header. The helper function <code>getUserFromAuthHeader</code> decodes the token and looks up the corresponding user from the database. If the token is not valid or the user cannot be found, the function returns <code>null</code>.
 
-Finally, the context field _currentUser_ is set to the user object corresponding to the requester, or to _null_ if no user was found:
+Finally, the context field <code>currentUser</code> is set to the user object corresponding to the requester, or to <code>null</code> if no user was found:
 
 ```js
 context: async ({ req }) => {
@@ -655,7 +655,7 @@ context: async ({ req }) => {
 },
 ```
 
-The context value is passed to resolvers as the _third parameter_. The resolver for the _me_ query is very simple: it only returns the currently logged-in user, which it gets from the resolver parameter _context_, from the field _currentUser_:
+The context value is passed to resolvers as the <code>third parameter</code>. The resolver for the <code>me</code> query is very simple: it only returns the currently logged-in user, which it gets from the resolver parameter <code>context</code>, from the field <code>currentUser</code>:
 
 ```js
 Query: {
@@ -676,7 +676,7 @@ Let's complete the application's backend so that adding and editing persons requ
 
 Let's first remove all persons not in anyone's friends list from the database.
 
-*addPerson* mutation changes like so:
+<code>addPerson</code> mutation changes like so:
 
 ```js
 Mutation: {
@@ -726,7 +726,7 @@ Mutation: {
 }
 ```
 
-If a logged-in user cannot be found from the context, an *GraphQLError* with a proper message is thrown. Creating new persons is now done with *async/await* syntax, because if the operation is successful, the created person is added to the friends list of the user.
+If a logged-in user cannot be found from the context, an <code>GraphQLError</code> with a proper message is thrown. Creating new persons is now done with <code>async/await</code> syntax, because if the operation is successful, the created person is added to the friends list of the user.
 
 Let’s also add the ability to add a person to your own friends list. The mutation schema is as follows:
 
@@ -773,7 +773,7 @@ And the mutation's resolver:
   },
 ```
 
-Note how the resolver <i>destructures</i> the logged-in user from the context. So instead of saving *currentUser* to a separate variable in a function
+Note how the resolver <i>destructures</i> the logged-in user from the context. So instead of saving <code>currentUser</code> to a separate variable in a function
 
 ```js
 addAsFriend: async (root, args, context) => {
@@ -834,10 +834,10 @@ You can assume that the user will not try to add faulty books or authors, so you
 
 The following things do <i>not</i> have to work just yet:
 
-- *allBooks* query with parameters
-- *bookCount* field of an author object
-- *author* field of a book
-- *editAuthor* mutation
+- <code>allBooks</code> query with parameters
+- <code>bookCount</code> field of an author object
+- <code>author</code> field of a book
+- <code>editAuthor</code> mutation
 
 **Note**: despite the fact that author is now an <i>object </i>  within a book, the schema for adding a book can remain same, only the <i>name</i> of the author is given as a parameter
 
@@ -855,7 +855,7 @@ type Mutation {
 
 #### 8.14: Database, part 2
 
-Complete the program so that all queries (to get *allBooks* working with the parameter *author* and *bookCount* field of an author object is not required) and mutations work.
+Complete the program so that all queries (to get <code>allBooks</code> working with the parameter <code>author</code> and <code>bookCount</code> field of an author object is not required) and mutations work.
 
 Regarding the <i>genre</i> parameter of the all books query, the situation is a bit more challenging. The solution is simple, but finding it can be a headache. You might benefit from [this](https://www.mongodb.com/docs/manual/tutorial/query-arrays/).
 
@@ -896,10 +896,10 @@ type Mutation {
 }
 ```
 
-Create resolvers for query *me* and the new mutations *createUser* and
-*login*. Like in the course material, you can assume all users have the same hardcoded password.
+Create resolvers for query <code>me</code> and the new mutations <code>createUser</code> and
+<code>login</code>. Like in the course material, you can assume all users have the same hardcoded password.
 
-Make the mutations *addBook* and *editAuthor* possible only if the request includes a valid token.
+Make the mutations <code>addBook</code> and <code>editAuthor</code> possible only if the request includes a valid token.
 
 (Don't worry about fixing the frontend for the moment.)
 

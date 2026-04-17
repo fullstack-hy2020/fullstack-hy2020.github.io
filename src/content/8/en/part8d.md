@@ -23,7 +23,7 @@ export const LOGIN = gql`
 `
 ```
 
-Let’s define the _LoginForm_ component responsible for logging in in the file <i>src/components/LoginForm.jsx</i>. It works in much the same way as the earlier components that handle mutations. The interesting lines are highlighted in the code:
+Let’s define the <code>LoginForm</code> component responsible for logging in in the file <i>src/components/LoginForm.jsx</i>. It works in much the same way as the earlier components that handle mutations. The interesting lines are highlighted in the code:
 
 ```js
 import { useState } from 'react'
@@ -79,11 +79,11 @@ const LoginForm = ({ setError, setToken }) => { // highlight-line
 export default LoginForm
 ```
 
-The component receives the functions _setError_ and _setToken_ as props, which can be used to change the application state. Defining state management is left to the _App_ component.
+The component receives the functions <code>setError</code> and <code>setToken</code> as props, which can be used to change the application state. Defining state management is left to the <code>App</code> component.
 
-For the _useMutation_ function that performs the login, an _onCompleted_ callback function is defined. It is called when the mutation has been successfully executed. In the callback, the token value is read from the response data and then stored in the application state and in the browser’s localStorage.
+For the <code>useMutation</code> function that performs the login, an <code>onCompleted</code> callback function is defined. It is called when the mutation has been successfully executed. In the callback, the token value is read from the response data and then stored in the application state and in the browser’s localStorage.
 
-Let’s now use the <i>LoginForm</i> component in the <i>App.jsx</i> file. We add a _token_ variable to the application state to store the token once the user has logged in. If _token_ is not defined, we render only the login form:
+Let’s now use the <i>LoginForm</i> component in the <i>App.jsx</i> file. We add a <code>token</code> variable to the application state to store the token once the user has logged in. If <code>token</code> is not defined, we render only the login form:
 
 ```js
 import LoginForm from './components/LoginForm' // highlight-line
@@ -132,9 +132,9 @@ The token is now initialized from a token value that may be found in localStorag
 const [token, setToken] = useState(localStorage.getItem('phonebook-user-token'))
 ```
 
-This way, the token is also restored when the page is reloaded, and the user stays logged in. If localStorage does not contain a value for the key <i>phonebook-user-token</i>, the token value will be _null_.
+This way, the token is also restored when the page is reloaded, and the user stays logged in. If localStorage does not contain a value for the key <i>phonebook-user-token</i>, the token value will be <code>null</code>.
 
-We also add a button that allows a logged-in user to log out. In the button’s click handler, we set _token_ to _null_, remove the token from localStorage, and reset the Apollo Client cache:
+We also add a button that allows a logged-in user to log out. In the button’s click handler, we set <code>token</code> to <code>null</code>, remove the token from localStorage, and reset the Apollo Client cache:
 
 ```js
 import { useApolloClient, useQuery } from '@apollo/client/react' // highlight-line
@@ -171,7 +171,7 @@ const App = () => {
   )
 }
 ```
-Resetting the cache is done using the Apollo _client_ object’s [resetStore](https://www.apollographql.com/docs/react/api/core/ApolloClient#resetstore) method, and the client itself can be accessed with the [useApolloClient](https://www.apollographql.com/docs/react/api/react/useApolloClient) hook. Clearing the cache is [important](https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout), because some queries may have fetched data into the cache that only an authenticated user is allowed to access.
+Resetting the cache is done using the Apollo <code>client</code> object’s [resetStore](https://www.apollographql.com/docs/react/api/core/ApolloClient#resetstore) method, and the client itself can be accessed with the [useApolloClient](https://www.apollographql.com/docs/react/api/react/useApolloClient) hook. Clearing the cache is [important](https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout), because some queries may have fetched data into the cache that only an authenticated user is allowed to access.
 
 ### Adding a token to a header
 
@@ -216,7 +216,7 @@ createRoot(document.getElementById('root')).render(
 )
 ```
 
-As before, the server URL is wrapped using the [HttpLink](https://www.apollographql.com/docs/react/api/link/apollo-link-http) constructor to create a suitable _httpLink_ object. This time, however, it is modified using the [context](https://www.apollographql.com/docs/react/api/link/apollo-link-context/#overview) defined by the _authLink_ object so that, for each request, the <i>authorization</i> header is [set](https://www.apollographql.com/docs/react/networking/authentication/#header) to the token that may be stored in localStorage.
+As before, the server URL is wrapped using the [HttpLink](https://www.apollographql.com/docs/react/api/link/apollo-link-http) constructor to create a suitable <code>httpLink</code> object. This time, however, it is modified using the [context](https://www.apollographql.com/docs/react/api/link/apollo-link-context/#overview) defined by the <code>authLink</code> object so that, for each request, the <i>authorization</i> header is [set](https://www.apollographql.com/docs/react/networking/authentication/#header) to the token that may be stored in localStorage.
 
 Creating new persons and changing numbers works again. 
 
@@ -226,9 +226,9 @@ In the application, it should be possible to add a person without a phone number
 
 ![browser showing person validation failed](../../images/8/25e.png)
 
-Validation fails, because frontend sends an empty string as the value of *phone*.
+Validation fails, because frontend sends an empty string as the value of <code>phone</code>.
 
-Let's change the function creating new persons so that it sets *phone* to *undefined* if user has not given a value:
+Let's change the function creating new persons so that it sets <code>phone</code> to <code>undefined</code> if user has not given a value:
 
 ```js
 const PersonForm = ({ setError }) => {
@@ -290,13 +290,13 @@ const PhoneForm = ({ setError }) => {
 }
 ```
 
-The request that updates the number, _changeNumber_, is now executed inside a <i>try</i> block. If the database validations fail, execution ends up in the <i>catch</i> block, where an appropriate error message is set in the application using the _setError_ function:
+The request that updates the number, <code>changeNumber</code>, is now executed inside a <i>try</i> block. If the database validations fail, execution ends up in the <i>catch</i> block, where an appropriate error message is set in the application using the <code>setError</code> function:
 
 ![The application shows an error message if the phone number is shorter than 5 characters](../../images/8/44.png)
 
 ### Updating cache, revisited
 
-We have to [update](/en/part8/react_and_graph_ql#updating-the-cache) the cache of the Apollo client on creating new persons. We can update it using the mutation's *refetchQueries* option to define that the
+We have to [update](/en/part8/react_and_graph_ql#updating-the-cache) the cache of the Apollo client on creating new persons. We can update it using the mutation's <code>refetchQueries</code> option to define that the
 <em>ALL\_PERSONS</em> query is done again.
 
 ```js 
@@ -314,7 +314,7 @@ const PersonForm = ({ setError }) => {
 
 This approach is pretty good, the drawback being that the query is always rerun with any updates.
 
-It is possible to optimize the solution by updating the cache manually. This is done by defining an appropriate [update](https://www.apollographql.com/docs/react/data/mutations/#the-update-function) callback for the mutation instead of using the _refetchQueries_ attribute. Apollo executes this callback after the mutation completes:
+It is possible to optimize the solution by updating the cache manually. This is done by defining an appropriate [update](https://www.apollographql.com/docs/react/data/mutations/#the-update-function) callback for the mutation instead of using the <code>refetchQueries</code> attribute. Apollo executes this callback after the mutation completes:
 
 ```js
 const PersonForm = ({ setError }) => {
@@ -342,7 +342,7 @@ The callback function is given a reference to the cache and the data returned by
 Using the function [updateQuery](https://www.apollographql.com/docs/react/caching/cache-interaction/#using-updatequery-and-updatefragment) the code updates the
 query ALLPERSONS in the cache by adding the new person to the cached data.
 
-In some situations, the only sensible way to keep the cache up to date is using the *update* callback.
+In some situations, the only sensible way to keep the cache up to date is using the <code>update</code> callback.
 
 When necessary, it is possible to disable cache for the whole application or [single queries](https://www.apollographql.com/docs/react/api/react/hooks/#options) by setting the field managing the use of cache, [fetchPolicy](https://www.apollographql.com/docs/react/data/queries#setting-a-fetch-policy) as <em>no-cache</em>.
 

@@ -82,7 +82,7 @@ The server's response is printed to the console:
 
 ![devtools shows allPersons array with 3 people](../../images/8/9a.png)
 
-A _gql_ tag is added before the template literal that forms the query, imported from the @apollo/client package:
+A <code>gql</code> tag is added before the template literal that forms the query, imported from the @apollo/client package:
 
 ```js
 import { ApolloClient, gql, HttpLink, InMemoryCache } from '@apollo/client' // highlight-line
@@ -104,9 +104,9 @@ const query = gql // highlight-line `
 `
 ```
 
-Thanks to the tag, VS Code’s GraphQL extension and other tooling recognize the definition as GraphQL, enabling features like syntax highlighting in the editor. On the server side, we achieved the same by adding a type-indicating comment before the template literal, because the @apollo/server library used on the server does not include a corresponding _gql_ tag.
+Thanks to the tag, VS Code’s GraphQL extension and other tooling recognize the definition as GraphQL, enabling features like syntax highlighting in the editor. On the server side, we achieved the same by adding a type-indicating comment before the template literal, because the @apollo/server library used on the server does not include a corresponding <code>gql</code> tag.
 
-The application can communicate with a GraphQL server using the *client* object. The client can be made accessible for all components of the application by wrapping the <i>App</i> component with [ApolloProvider](https://www.apollographql.com/docs/react/get-started#step-4-connect-your-client-to-react).
+The application can communicate with a GraphQL server using the <code>client</code> object. The client can be made accessible for all components of the application by wrapping the <i>App</i> component with [ApolloProvider](https://www.apollographql.com/docs/react/get-started#step-4-connect-your-client-to-react).
 
 ```js
 import { StrictMode } from 'react'
@@ -174,7 +174,7 @@ const App = () => {
 export default App
 ```
 
-When called, *useQuery* makes the query it receives as a parameter.
+When called, <code>useQuery</code> makes the query it receives as a parameter.
 It returns an object with multiple [fields](https://www.apollographql.com/docs/react/api/react/hooks/#result).
 The field <i>loading</i> is true if the query has not received a response yet.
 Then the following code gets rendered:
@@ -212,7 +212,7 @@ const Persons = ({ persons }) => {
 export default Persons
 ```
 
-The *App* component still makes the query, and passes the result to the new component to be rendered:
+The <code>App</code> component still makes the query, and passes the result to the new component to be rendered:
 
 ```js
 import { gql } from '@apollo/client'
@@ -275,11 +275,11 @@ It is also possible to do queries with parameters with the Apollo Explorer. The 
 
 ![apollostudio findPersonByName highlighting nameToSearch Arto Hellas](../../images/8/10x.png)
 
-The *useQuery* hook is well-suited for situations where the query is done when the component is rendered.  However, we now want to make the query only when a user wants to see the details of a specific person, so the query is done only [as required](https://www.apollographql.com/docs/react/data/queries/#executing-queries-manually).
+The <code>useQuery</code> hook is well-suited for situations where the query is done when the component is rendered.  However, we now want to make the query only when a user wants to see the details of a specific person, so the query is done only [as required](https://www.apollographql.com/docs/react/data/queries/#executing-queries-manually).
 
 One possibility for this kind of situations is the hook function [useLazyQuery](https://www.apollographql.com/docs/react/api/react/useLazyQuery) that would make it possible to define a query which is executed <i>when</i> the user wants to see the detailed information of a person.
 
-However, in our case we can stick to *useQuery* and use the option [skip](https://www.apollographql.com/docs/react/data/queries#skipoptional), which makes it possible to do the query only if a set condition is true.
+However, in our case we can stick to <code>useQuery</code> and use the option [skip](https://www.apollographql.com/docs/react/data/queries#skipoptional), which makes it possible to do the query only if a set condition is true.
 
 After the changes, the file <i>Persons.jsx</i> looks as follows:
 
@@ -391,7 +391,7 @@ A single-person view looks like this:
 
 ![browser showing single-person](../../images/8/11.png)
 
-When a user wants to return to the person list, the *nameToSearch* state is set to *null*.
+When a user wants to return to the person list, the <code>nameToSearch</code> state is set to <code>null</code>.
 
 The current code of the application can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-1) branch <i>part8-1</i>.
 
@@ -519,7 +519,7 @@ export default PersonForm
 ```
 
 The code of the form is straightforward and the interesting lines have been highlighted.
-We can define mutation functions using the *useMutation* hook.
+We can define mutation functions using the <code>useMutation</code> hook.
 The hook returns an <i>array</i>, the first element of which contains the function to cause the mutation.
 
 ```js
@@ -593,9 +593,9 @@ export default App
 
 The solution is simple, and every time a user adds a new person, it appears immediately on the screens of all users.
 
-The downside of polling is, of course, the unnecessary network traffic it causes. In addition, the page may start to flicker, since the component is re-rendered with each query update and _result.loading_ is true for a brief moment—so a <i>loading...</i> text flashes on the screen for an instant.
+The downside of polling is, of course, the unnecessary network traffic it causes. In addition, the page may start to flicker, since the component is re-rendered with each query update and <code>result.loading</code> is true for a brief moment—so a <i>loading...</i> text flashes on the screen for an instant.
 
-Another easy way to keep the cache in sync is to use the *useMutation* hook's [refetchQueries](https://www.apollographql.com/docs/react/data/refetching/) parameter to define that the query fetching all persons is done again whenever a new person is created.
+Another easy way to keep the cache in sync is to use the <code>useMutation</code> hook's [refetchQueries](https://www.apollographql.com/docs/react/data/refetching/) parameter to define that the query fetching all persons is done again whenever a new person is created.
 
 ```js
 // ...
@@ -710,9 +710,9 @@ The current code of the application can be found on [GitHub](https://github.com/
 
 If we try to create an invalid person, for example by using a name that already exists in the application, nothing happens. The person is not added to the application, but we also do not receive any error message.
 
-Earlier, we defined a check on the server that prevents adding another person with the same name and throws an error in such a situation. However, the error is not yet handled in the frontend. Using the _onError_ [option](https://www.apollographql.com/docs/react/api/react/hooks/#params-2) of the _useMutation_ hook, it is possible to register an error handler function for mutations.
+Earlier, we defined a check on the server that prevents adding another person with the same name and throws an error in such a situation. However, the error is not yet handled in the frontend. Using the <code>onError</code> [option](https://www.apollographql.com/docs/react/api/react/hooks/#params-2) of the <code>useMutation</code> hook, it is possible to register an error handler function for mutations.
 
-Let’s register an error handler for the mutation. The <i>PersonForm</i> component receives a _setError_ function as a prop, which is used to set a message indicating the error:
+Let’s register an error handler for the mutation. The <i>PersonForm</i> component receives a <code>setError</code> function as a prop, which is used to set a message indicating the error:
 
 
 ```js
@@ -862,7 +862,7 @@ const PhoneForm = () => {
 export default PhoneForm
 ```
 
-The <i>PhoneForm</i> component is straightforward: it asks for the person's name and a new phone number via a form. When the form is submitted, it calls the _changeNumber_ function that handles the update, created with the _useMutation_ hook.
+The <i>PhoneForm</i> component is straightforward: it asks for the person's name and a new phone number via a form. When the form is submitted, it calls the <code>changeNumber</code> function that handles the update, created with the <code>useMutation</code> hook.
 
 Enable the new component in the file <i>App.jsx</i>:
 
@@ -896,7 +896,7 @@ the mutation response is <i>null</i>:
 
 ![dev tools showing network with localhost and response with editNumber being null](../../images/8/23ea.png)
 
-Since this isn’t considered an error state from GraphQL’s point of view, registering an _onError_ error handler wouldn’t be useful in this situation. However, we can add an _onCompleted_ callback to the _useMutation_ hook, where we can generate a potential error message:
+Since this isn’t considered an error state from GraphQL’s point of view, registering an <code>onError</code> error handler wouldn’t be useful in this situation. However, we can add an <code>onCompleted</code> callback to the <code>useMutation</code> hook, where we can generate a potential error message:
 
 ```js
 const PhoneForm = ({ setError }) => { // highlight-line
@@ -917,7 +917,7 @@ const PhoneForm = ({ setError }) => { // highlight-line
 }
 ```
 
-The _onCompleted_ callback function is always executed when the mutation has been successfully completed. If the person wasn’t found—that is, if the query result _data.editNumber_ is _null_—the component uses the _setError_ callback function it received via props to set an appropriate error message.
+The <code>onCompleted</code> callback function is always executed when the mutation has been successfully completed. If the person wasn’t found—that is, if the query result <code>data.editNumber</code> is <code>null</code>—the component uses the <code>setError</code> callback function it received via props to set an appropriate error message.
 
 The current code of the application can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4) branch <i>part8-4</i>.
 

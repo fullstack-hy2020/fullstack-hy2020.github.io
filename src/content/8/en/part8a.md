@@ -113,13 +113,13 @@ All of the String fields, except <i>phone</i>, must be given a value. This is ma
 
 The second type is a [Query](https://graphql.org/learn/schema/#the-query-and-mutation-types). Practically every GraphQL schema describes a Query, which tells what kind of queries can be made to the API.
 
-The phonebook describes three different queries. *personCount* returns an integer, *allPersons* returns a list of <i>Person</i> objects and <i>findPerson</i> is given a string parameter and it returns a <i>Person</i> object.
+The phonebook describes three different queries. <code>personCount</code> returns an integer, <code>allPersons</code> returns a list of <i>Person</i> objects and <i>findPerson</i> is given a string parameter and it returns a <i>Person</i> object.
 
-Again, exclamation marks are used to mark which return values and parameters are <i>Non-Null</i>. *personCount* will, for sure, return an integer. The query *findPerson* must be given a string as a parameter. The query returns a <i>Person</i>-object or <i>null</i>. *allPersons* returns a list of <i>Person</i> objects, and the list does not contain any <i>null</i> values.
+Again, exclamation marks are used to mark which return values and parameters are <i>Non-Null</i>. <code>personCount</code> will, for sure, return an integer. The query <code>findPerson</code> must be given a string as a parameter. The query returns a <i>Person</i>-object or <i>null</i>. <code>allPersons</code> returns a list of <i>Person</i> objects, and the list does not contain any <i>null</i> values.
 
 So the schema describes what queries the client can send to the server, what kind of parameters the queries can have, and what kind of data the queries return.
 
-The simplest of the queries, *personCount*, looks as follows:
+The simplest of the queries, <code>personCount</code>, looks as follows:
 
 ```js
 query {
@@ -137,7 +137,7 @@ Assuming our application has saved the information of three people, the response
 }
 ```
 
-The query fetching the information of all of the people, *allPersons*, is a bit more complicated. Because the query returns a list of <i>Person</i> objects, the query must describe
+The query fetching the information of all of the people, <code>allPersons</code>, is a bit more complicated. Because the query returns a list of <i>Person</i> objects, the query must describe
 <i>which [fields](https://graphql.org/learn/queries/#fields)</i> of the objects the query returns:
 
 ```js
@@ -246,7 +246,7 @@ The data a GraphQL API uses can be saved into a relational database, document da
 
 Let's implement a GraphQL server with today's leading library: [Apollo Server](https://www.apollographql.com/docs/apollo-server/).
 
-Create a new npm project with *npm init* and install the required dependencies.
+Create a new npm project with <code>npm init</code> and install the required dependencies.
 
 ```bash
 npm install @apollo/server graphql
@@ -329,7 +329,7 @@ const server = new ApolloServer({
 })
 ```
 
-The first parameter, *typeDefs*, contains the GraphQL schema.
+The first parameter, <code>typeDefs</code>, contains the GraphQL schema.
 
 The second parameter is an object, which contains the [resolvers](https://www.apollographql.com/docs/apollo-server/data/resolvers/) of the server. These are the code, which defines <i>how</i> GraphQL queries are responded to.
 
@@ -372,7 +372,7 @@ Has the resolver
 () => persons.length
 ```
 
-So the response to the query is the length of the array *persons*.
+So the response to the query is the length of the array <code>persons</code>.
 
 The query which fetches all persons
 
@@ -384,7 +384,7 @@ query {
 }
 ```
 
-has a resolver which returns <i>all</i> objects from the *persons* array.
+has a resolver which returns <i>all</i> objects from the <code>persons</code> array.
 
 ```js
 () => persons
@@ -437,7 +437,7 @@ const typeDefs = `
 
 The schema contains structural information, but in the code editor the whole content appears in the same color and automatic formatting tools like Prettier cannot format its contents. We can enable GraphQL schema syntax highlighting and, for example, autocompletion in VS Code by installing the [GraphQL: Language Feature Support](https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql) extension.
 
-We need to somehow indicate to the extension that _typeDefs_ contains GraphQL. There are several ways to do this. We'll do it now by adding the type-indicating comment _/* GraphQL */_ before the template literal string:
+We need to somehow indicate to the extension that <code>typeDefs</code> contains GraphQL. There are several ways to do this. We'll do it now by adding the type-indicating comment <code>/* GraphQL */</code> before the template literal string:
 
 
 
@@ -465,9 +465,9 @@ has a resolver which differs from the previous ones because it is given <i>two p
 (root, args) => persons.find(p => p.name === args.name)
 ```
 
-The second parameter, *args*, contains the parameters of the query.
-The resolver then returns from the array *persons* the person whose name is the same as the value of <i>args.name</i>.
-The resolver does not need the first parameter *root*.
+The second parameter, <code>args</code>, contains the parameters of the query.
+The resolver then returns from the array <code>persons</code> the person whose name is the same as the value of <i>args.name</i>.
+The resolver does not need the first parameter <code>root</code>.
 
 In fact, all resolver functions are given [four parameters](https://www.graphql-tools.com/docs/resolvers#resolver-function-signature). With JavaScript, the parameters don't have to be defined if they are not needed. We will be using the first and the third parameter of a resolver later in this part.
 
@@ -512,7 +512,7 @@ const resolvers = {
 }
 ```
 
-The default resolver returns the value of the corresponding field of the object. The object itself can be accessed through the first parameter of the resolver, *root*.
+The default resolver returns the value of the corresponding field of the object. The object itself can be accessed through the first parameter of the resolver, <code>root</code>.
 
 If the functionality of the default resolver is enough, you don't need to define your own. It is also possible to define resolvers for only some fields of a type, and let the default resolvers handle the rest.
 
@@ -578,7 +578,7 @@ const resolvers = {
 }
 ```
 
-So every time a <i>Person</i> object is returned, the fields <i>name</i>, <i>phone</i> and <i>id</i> are returned using their default resolvers, but the field <i>address</i> is formed by using a self-defined resolver. The parameter *root* of the resolver function is the person-object, so the street and the city of the address can be taken from its fields.
+So every time a <i>Person</i> object is returned, the fields <i>name</i>, <i>phone</i> and <i>id</i> are returned using their default resolvers, but the field <i>address</i> is formed by using a self-defined resolver. The parameter <code>root</code> of the resolver function is the person-object, so the street and the city of the address can be taken from its fields.
 
 The queries requiring the address change into
 
@@ -629,7 +629,7 @@ The person-objects saved in the server are not exactly the same as the GraphQL t
 
 Contrary to the <i>Person</i> type, the <i>Address</i> type does not have an <i>id</i> field, because they are not saved into their own separate data structure in the server.
 
-Let's modify the resolver for the _address_ field so that it destructures the needed fields from the parameter it receives:
+Let's modify the resolver for the <code>address</code> field so that it destructures the needed fields from the parameter it receives:
 
 ```js
 const resolvers = {
@@ -698,7 +698,7 @@ const resolvers = {
 // ...
 ```
 
-The mutation adds the object given to it as a parameter *args* to the array *persons*, and returns the object it added to the array.
+The mutation adds the object given to it as a parameter <code>args</code> to the array <code>persons</code>, and returns the object it added to the array.
 
 The <i>id</i> field is given a unique value using the [uuid](https://github.com/kelektiv/node-uuid#readme) library.
 
@@ -723,7 +723,7 @@ mutation {
 }
 ```
 
-Note that the person is saved to the *persons* array as
+Note that the person is saved to the <code>persons</code> array as
 
 ```js
 {
@@ -796,7 +796,7 @@ const resolvers = {
 }
 ```
 
-So if the name to be added already exists in the phonebook, throw *GraphQLError* error.
+So if the name to be added already exists in the phonebook, throw <code>GraphQLError</code> error.
 
 ![apollo showing error BAD_USER_INPUT](../../images/8/6new.png)
 
@@ -842,7 +842,7 @@ type Query {
 }
 ```
 
-The type <i>YesNo</i> is a GraphQL [enum](https://graphql.org/learn/schema/#enumeration-types), or an enumerable, with two possible values: <i>YES</i> or <i>NO</i>. In the query *allPersons*, the parameter *phone*  has the type <i>YesNo</i>, but is nullable.
+The type <i>YesNo</i> is a GraphQL [enum](https://graphql.org/learn/schema/#enumeration-types), or an enumerable, with two possible values: <i>YES</i> or <i>NO</i>. In the query <code>allPersons</code>, the parameter <code>phone</code>  has the type <i>YesNo</i>, but is nullable.
 
 The resolver changes like so:
 
@@ -987,11 +987,11 @@ In some cases, it might be beneficial to name the queries. This is the case espe
 ### Exercises 8.1.-8.7
 
 Through the exercises, we will implement a GraphQL backend for a small library.
-Start with [this file](https://github.com/fullstack-hy2020/misc/blob/master/library-backend.js). Remember to *npm init* and to install dependencies!
+Start with [this file](https://github.com/fullstack-hy2020/misc/blob/master/library-backend.js). Remember to <code>npm init</code> and to install dependencies!
 
 #### 8.1: The number of books and authors
 
-Implement queries *bookCount* and *authorCount* which return the number of books and the number of authors.
+Implement queries <code>bookCount</code> and <code>authorCount</code> which return the number of books and the number of authors.
 
 The query
 
@@ -1015,7 +1015,7 @@ should return
 
 #### 8.2: All books
 
-Implement query *allBooks*, which returns the details of all books.
+Implement query <code>allBooks</code>, which returns the details of all books.
 
 In the end, the user should be able to do the following query:
 
@@ -1032,7 +1032,7 @@ query {
 
 #### 8.3: All authors
 
-Implement query *allAuthors*, which returns the details of all authors. The response should include a field *bookCount* containing the number of books the author has written.
+Implement query <code>allAuthors</code>, which returns the details of all authors. The response should include a field <code>bookCount</code> containing the number of books the author has written.
 
 For example the query
 
@@ -1078,7 +1078,7 @@ should return
 
 #### 8.4: Books of an author
 
-Modify the *allBooks* query so that a user can give an optional parameter <i>author</i>. The response should include only books written by that author.
+Modify the <code>allBooks</code> query so that a user can give an optional parameter <i>author</i>. The response should include only books written by that author.
 
 For example query
 
@@ -1109,7 +1109,7 @@ should return
 
 #### 8.5: Books by genre
 
-Modify the query *allBooks* so that a user can give an optional parameter <i>genre</i>. The response should include only books of that genre.
+Modify the query <code>allBooks</code> so that a user can give an optional parameter <i>genre</i>. The response should include only books of that genre.
 
 For example query
 
@@ -1162,7 +1162,7 @@ query {
 
 #### 8.6: Adding a book
 
-Implement mutation *addBook*, which can be used like this:
+Implement mutation <code>addBook</code>, which can be used like this:
 
 ```js
 mutation {
@@ -1225,7 +1225,7 @@ returns
 
 #### 8.7: Updating the birth year of an author
 
-Implement mutation *editAuthor*, which can be used to set a birth year for an author. The mutation is used like so:
+Implement mutation <code>editAuthor</code>, which can be used to set a birth year for an author. The mutation is used like so:
 
 ```js
 mutation {
