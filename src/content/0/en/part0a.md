@@ -327,7 +327,7 @@ Despite changes *all the submitted exercises remain valid*, and the course can b
 
 Recent major changes
 
-- Part 7 (5th April): Webpack replaced with esbuild, rror boundaries and keeping the frontend and backend in a single repository covered
+- Part 7 (5th April): Webpack replaced with esbuild, error boundaries and keeping the frontend and backend in a single repository covered
 - Part 6 (5th April): Redux replaced with Zustand
 - Part 5 (31st March 2026): React Router and style libraries have been moved from Part 7 to this part
 - Parts 9, 11-13 (March 2026): content updated and material moved to new platform
