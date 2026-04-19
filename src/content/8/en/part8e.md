@@ -125,7 +125,7 @@ export const FIND_PERSON = gql`
 `
 ```
 
-So the template literal in the <code>PERSON_DETAILS</code> variable is now inserted as part of the <code>FIND_PERSON</code> template literal. In practice, the end result is exactly the same as in the earlier example, where the fragment was defined directly alongside the query.
+So the template literal in the <code>PERSON\_DETAILS</code> variable is now inserted as part of the <code>FIND\_PERSON</code> template literal. In practice, the end result is exactly the same as in the earlier example, where the fragment was defined directly alongside the query.
 
 ### Subscriptions
   

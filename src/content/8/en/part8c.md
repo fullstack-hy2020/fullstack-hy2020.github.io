@@ -280,7 +280,7 @@ main()
 
 Because the <i>async/await</i> syntax can only be used inside functions, we now define a simple <i>main</i> function that handles starting the application. This allows us to call the function that creates the database connection using the <i>await</i> keyword.
 
-The value of <code>MONGODB_URI</code> is obtained from an environment variable, so you need to add an appropriate value for it to the <i>.env</i> file in the same way as in [part 3](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan#ymparistomuuttujien-maaritteleminen-kayttaen-dotenv-kirjastoa). The application first calls the function that creates the database connection, and once the database connection has been successfully established, it starts the GraphQL server.
+The value of <code>MONGODB\_URI</code> is obtained from an environment variable, so you need to add an appropriate value for it to the <i>.env</i> file in the same way as in [part 3](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan#ymparistomuuttujien-maaritteleminen-kayttaen-dotenv-kirjastoa). The application first calls the function that creates the database connection, and once the database connection has been successfully established, it starts the GraphQL server.
 
 
 
@@ -562,7 +562,7 @@ Mutation: {
 },
 ```
 
-The new user mutation is straightforward. The login mutation checks if the username/password pair is valid. And if it is indeed valid, it returns a jwt token familiar from [part 4](/en/part4/token_authentication). Note that the <code>JWT_SECRET</code> must be defined in the  <i>.env</i> file.
+The new user mutation is straightforward. The login mutation checks if the username/password pair is valid. And if it is indeed valid, it returns a jwt token familiar from [part 4](/en/part4/token_authentication). Note that the <code>JWT\_SECRET</code> must be defined in the  <i>.env</i> file.
 
 User creation is done now as follows:
 

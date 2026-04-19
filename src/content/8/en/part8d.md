@@ -297,7 +297,7 @@ The request that updates the number, <code>changeNumber</code>, is now executed 
 ### Updating cache, revisited
 
 We have to [update](/en/part8/react_and_graph_ql#updating-the-cache) the cache of the Apollo client on creating new persons. We can update it using the mutation's <code>refetchQueries</code> option to define that the
-<em>ALL\_PERSONS</em> query is done again.
+<code>ALL\_PERSONS</code> query is done again.
 
 ```js 
 const PersonForm = ({ setError }) => {
@@ -344,7 +344,7 @@ query ALLPERSONS in the cache by adding the new person to the cached data.
 
 In some situations, the only sensible way to keep the cache up to date is using the <code>update</code> callback.
 
-When necessary, it is possible to disable cache for the whole application or [single queries](https://www.apollographql.com/docs/react/api/react/hooks/#options) by setting the field managing the use of cache, [fetchPolicy](https://www.apollographql.com/docs/react/data/queries#setting-a-fetch-policy) as <em>no-cache</em>.
+When necessary, it is possible to disable cache for the whole application or [single queries](https://www.apollographql.com/docs/react/api/react/hooks/#options) by setting the field managing the use of cache, [fetchPolicy](https://www.apollographql.com/docs/react/data/queries#setting-a-fetch-policy) as <code>no-cache</code>.
 
 Be diligent with the cache. Old data in the cache can cause hard-to-find bugs. As we know, keeping the cache up to date is very challenging. According to a coder proverb:
 
